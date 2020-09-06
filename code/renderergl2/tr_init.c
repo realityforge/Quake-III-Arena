@@ -955,7 +955,11 @@ const void *RB_TakeVideoFrameCmd( const void *data )
 */
 void GL_SetDefaultState( void )
 {
+#ifdef __ANDROID__
+	glClearDepthf( 1.0f );
+#else
 	qglClearDepth( 1.0f );
+#endif
 
 	qglCullFace(GL_FRONT);
 
@@ -987,7 +991,9 @@ void GL_SetDefaultState( void )
 	glState.currentVao = NULL;
 	glState.vertexAttribsEnabled = 0;
 
+#ifndef __ANDROID__
 	qglPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
+#endif
 	qglDepthMask( GL_TRUE );
 	qglDisable( GL_DEPTH_TEST );
 	qglEnable( GL_SCISSOR_TEST );
@@ -1345,7 +1351,7 @@ void R_Register( void )
 	r_norefresh = ri.Cvar_Get ("r_norefresh", "0", CVAR_CHEAT);
 	r_drawentities = ri.Cvar_Get ("r_drawentities", "1", CVAR_CHEAT );
 	r_ignore = ri.Cvar_Get( "r_ignore", "1", CVAR_CHEAT );
-	r_nocull = ri.Cvar_Get ("r_nocull", "0", CVAR_CHEAT);
+	r_nocull = ri.Cvar_Get ("r_nocull", "1", CVAR_CHEAT);
 	r_novis = ri.Cvar_Get ("r_novis", "0", CVAR_CHEAT);
 	r_showcluster = ri.Cvar_Get ("r_showcluster", "0", CVAR_CHEAT);
 	r_speeds = ri.Cvar_Get ("r_speeds", "0", CVAR_CHEAT);
@@ -1536,7 +1542,13 @@ void RE_Shutdown( qboolean destroyWindow ) {
 		R_IssuePendingRenderCommands();
 		R_ShutDownQueries();
 		if (glRefConfig.framebufferObject)
+		{
+			if (tr.vrParms.renderBufferOriginal != 0)
+			{
+				tr.renderFbo->frameBuffer = tr.vrParms.renderBufferOriginal;
+			}
 			FBO_Shutdown();
+		}
 		R_DeleteTextures();
 		R_ShutdownVaos();
 		GLSL_ShutdownGPUShaders();
@@ -1616,6 +1628,10 @@ refexport_t *GetRefAPI ( int apiVersion, refimport_t *rimp ) {
 
 	re.BeginFrame = RE_BeginFrame;
 	re.EndFrame = RE_EndFrame;
+
+#if __ANDROID__
+	re.SetVRHeadsetParms = RE_SetVRHeadsetParms;
+#endif
 
 	re.MarkFragments = R_MarkFragments;
 	re.LerpTag = R_LerpTag;

@@ -1089,6 +1089,7 @@ extern	vmCvar_t		cg_runroll;
 extern	vmCvar_t		cg_bobup;
 extern	vmCvar_t		cg_bobpitch;
 extern	vmCvar_t		cg_bobroll;
+extern	vmCvar_t		cg_weaponbob;
 extern	vmCvar_t		cg_swingSpeed;
 extern	vmCvar_t		cg_shadows;
 extern	vmCvar_t		cg_gibs;

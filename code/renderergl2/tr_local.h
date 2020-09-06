@@ -839,6 +839,17 @@ typedef struct {
 	stereoFrame_t	stereoFrame;
 } viewParms_t;
 
+typedef struct {
+	qboolean	valid;
+	float		projectionL[16];
+	float		projectionR[16];
+	float		viewL[16];
+	float		viewR[16];
+	int			renderBufferL;
+	int			renderBufferR;
+
+	int			renderBufferOriginal;
+} vrParms_t;
 
 /*
 ==============================================================================
@@ -1599,6 +1610,7 @@ typedef struct {
 	// -----------------------------------------
 
 	viewParms_t				viewParms;
+	vrParms_t				vrParms;
 
 	float					identityLight;		// 1.0 / ( 1 << overbrightBits )
 	int						identityLightByte;	// identityLight * 255
@@ -1906,7 +1918,7 @@ void	GL_CheckErrs( char *file, int line );
 #define GL_CheckErrors(...) GL_CheckErrs(__FILE__, __LINE__)
 void	GL_State( unsigned long stateVector );
 void    GL_SetProjectionMatrix(mat4_t matrix);
-void    GL_SetModelviewMatrix(mat4_t matrix);
+void    GL_SetModelviewMatrix(mat4_t matrix, qboolean applyStereoView);
 void	GL_Cull( int cullType );
 
 #define GLS_SRCBLEND_ZERO						0x00000001
@@ -2433,6 +2445,12 @@ typedef struct {
 	int commandId;
 } exportCubemapsCommand_t;
 
+typedef struct {
+	int commandId;
+	int eye;
+	stereoFrame_t stereoFrame;
+} switchEyeCommand_t;
+
 typedef enum {
 	RC_END_OF_LIST,
 	RC_SET_COLOR,
@@ -2446,7 +2464,8 @@ typedef enum {
 	RC_CLEARDEPTH,
 	RC_CAPSHADOWMAP,
 	RC_POSTPROCESS,
-	RC_EXPORT_CUBEMAPS
+	RC_EXPORT_CUBEMAPS,
+	RC_SWITCH_EYE
 } renderCommand_t;
 
 
@@ -2488,6 +2507,9 @@ void RE_StretchPic ( float x, float y, float w, float h,
 					  float s1, float t1, float s2, float t2, qhandle_t hShader );
 void RE_BeginFrame( stereoFrame_t stereoFrame );
 void RE_EndFrame( int *frontEndMsec, int *backEndMsec );
+#if __ANDROID__
+void RE_SetVRHeadsetParms( const ovrTracking2* ovrTracking, int renderBufferL, int renderBufferR );
+#endif
 void RE_SaveJPG(char * filename, int quality, int image_width, int image_height,
                 unsigned char *image_buffer, int padding);
 size_t RE_SaveJPGToBuffer(byte *buffer, size_t bufSize, int quality,

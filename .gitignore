@@ -1,8 +1,9 @@
 build
-Makefile.local
 *.swp
 *tags
 *~
+*.ccls-cache/
+compile_commands.json
 
 # OS X
 ####################
@@ -39,3 +40,17 @@ profile
 *.sdf
 *.opensdf
 *.suo
+
+# Android
+####################
+.gradle/
+.cxx/
+.settings/
+assets/
+jniLibs/
+Debug/
+Release/
+*.iml
+.classpath
+.project
+local.properties

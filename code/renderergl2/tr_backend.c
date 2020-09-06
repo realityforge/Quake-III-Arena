@@ -274,9 +274,21 @@ void GL_SetProjectionMatrix(mat4_t matrix)
 }
 
 
-void GL_SetModelviewMatrix(mat4_t matrix)
+void GL_SetModelviewMatrix(mat4_t matrix, qboolean applyStereoView)
 {
-	Mat4Copy(matrix, glState.modelview);
+	if (applyStereoView)
+	{
+		if (tr.refdef.stereoFrame == STEREO_LEFT) {
+			Mat4Multiply(tr.vrParms.viewL, matrix, glState.modelview);
+		} else if (tr.refdef.stereoFrame == STEREO_RIGHT) {
+			Mat4Multiply(tr.vrParms.viewR, matrix, glState.modelview);
+		} else {
+			Mat4Copy(matrix, glState.modelview);
+		}
+	} else {
+		Mat4Copy(matrix, glState.modelview);
+	}
+
 	Mat4Multiply(glState.projection, glState.modelview, glState.modelviewProjection);	
 }
 
@@ -412,7 +424,7 @@ void RB_BeginDrawingView (void) {
 		plane2[2] = DotProduct (backEnd.viewParms.or.axis[2], plane);
 		plane2[3] = DotProduct (plane, backEnd.viewParms.or.origin) - plane[3];
 #endif
-		GL_SetModelviewMatrix( s_flipMatrix );
+		GL_SetModelviewMatrix( s_flipMatrix, qtrue );
 	}
 }
 
@@ -531,7 +543,7 @@ void RB_RenderDrawSurfList( drawSurf_t *drawSurfs, int numDrawSurfs ) {
 				R_TransformDlights( backEnd.refdef.num_dlights, backEnd.refdef.dlights, &backEnd.or );
 			}
 
-			GL_SetModelviewMatrix( backEnd.or.modelMatrix );
+			GL_SetModelviewMatrix( backEnd.or.modelMatrix, qtrue );
 
 			//
 			// change depthrange. Also change projection matrix so first person weapon does not look like coming
@@ -561,8 +573,13 @@ void RB_RenderDrawSurfList( drawSurf_t *drawSurfs, int numDrawSurfs ) {
 						}
 					}
 
+#ifdef __ANDROID__
+					if(!oldDepthRange)
+						glDepthRangef(0.0f, 0.3f);
+#else
 					if(!oldDepthRange)
 						qglDepthRange (0, 0.3);
+#endif
 				}
 				else
 				{
@@ -571,7 +588,11 @@ void RB_RenderDrawSurfList( drawSurf_t *drawSurfs, int numDrawSurfs ) {
 						GL_SetProjectionMatrix( backEnd.viewParms.projectionMatrix );
 					}
 
+#ifdef __ANDROID__
+					glDepthRangef(0.0f, 1.0f);
+#else
 					qglDepthRange (0, 1);
+#endif
 				}
 
 				oldDepthRange = depthRange;
@@ -597,9 +618,13 @@ void RB_RenderDrawSurfList( drawSurf_t *drawSurfs, int numDrawSurfs ) {
 
 	// go back to the world modelview matrix
 
-	GL_SetModelviewMatrix( backEnd.viewParms.world.modelMatrix );
+	GL_SetModelviewMatrix( backEnd.viewParms.world.modelMatrix, qtrue );
 
+#ifdef __ANDROID__
+	glDepthRangef(0, 1);
+#else
 	qglDepthRange (0, 1);
+#endif
 }
 
 
@@ -645,7 +670,7 @@ void	RB_SetGL2D (void) {
 	Mat4Ortho(0, width, height, 0, 0, 1, matrix);
 	GL_SetProjectionMatrix(matrix);
 	Mat4Identity(matrix);
-	GL_SetModelviewMatrix(matrix);
+	GL_SetModelviewMatrix(matrix, false);
 
 	GL_State( GLS_DEPTHTEST_DISABLE |
 			  GLS_SRCBLEND_SRC_ALPHA |
@@ -1176,7 +1201,6 @@ const void	*RB_DrawSurfs( const void *data ) {
 	return (const void *)(cmd + 1);
 }
 
-
 /*
 =============
 RB_DrawBuffer
@@ -1195,7 +1219,11 @@ const void	*RB_DrawBuffer( const void *data ) {
 	if (glRefConfig.framebufferObject)
 		FBO_Bind(NULL);
 
+#ifdef __ANDROID__
+	qglDrawBuffersEXT( 1, (const GLenum*)&cmd->buffer );
+#else
 	qglDrawBuffer( cmd->buffer );
+#endif
 
 	// clear screen for debugging
 	if ( r_clear->integer ) {
@@ -1460,7 +1488,7 @@ const void *RB_PostProcess(const void *data)
 	if(tess.numIndexes)
 		RB_EndSurface();
 
-	if (!glRefConfig.framebufferObject || !r_postProcess->integer)
+	if (__ANDROID__ || !glRefConfig.framebufferObject || !r_postProcess->integer)
 	{
 		// do nothing
 		return (const void *)(cmd + 1);
@@ -1728,6 +1756,28 @@ const void *RB_ExportCubemaps(const void *data)
 	return (const void *)(cmd + 1);
 }
 
+/*
+====================
+RB_SwitchEye
+====================
+*/
+const void* RB_SwitchEye( const void* data ) {
+	const switchEyeCommand_t *cmd = data;
+
+	tr.renderFbo->frameBuffer = cmd->eye;
+
+	// Not calling FBO_Bind explicitly, since we just update the frameBuffer
+	// within the struct.
+	if (tr.renderFbo == glState.currentFBO)
+	{
+		GL_BindFramebuffer(GL_FRAMEBUFFER, tr.renderFbo->frameBuffer);
+		glState.currentFBO = tr.renderFbo;
+	}
+
+	tr.refdef.stereoFrame = cmd->stereoFrame;
+
+	return (const void*)(cmd + 1);
+}
 
 /*
 ====================
@@ -1778,6 +1828,9 @@ void RB_ExecuteRenderCommands( const void *data ) {
 			break;
 		case RC_EXPORT_CUBEMAPS:
 			data = RB_ExportCubemaps(data);
+			break;
+		case RC_SWITCH_EYE:
+			data = RB_SwitchEye(data);
 			break;
 		case RC_END_OF_LIST:
 		default:

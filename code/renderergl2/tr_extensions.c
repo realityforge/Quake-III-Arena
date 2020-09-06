@@ -58,7 +58,11 @@ void GLimp_InitExtraExtensions(void)
 	QGL_ARB_occlusion_query_PROCS;
 
 	// OpenGL 3.0 - GL_ARB_framebuffer_object
+#ifdef __ANDROID__
+	extension = "GL_OES_framebuffer_object";
+#else
 	extension = "GL_ARB_framebuffer_object";
+#endif
 	glRefConfig.framebufferObject = qfalse;
 	glRefConfig.framebufferBlit = qfalse;
 	glRefConfig.framebufferMultisample = qfalse;
@@ -81,7 +85,11 @@ void GLimp_InitExtraExtensions(void)
 	}
 
 	// OpenGL 3.0 - GL_ARB_vertex_array_object
+#ifdef __ANDROID__
+	extension = "GL_OES_vertex_array_object";
+#else
 	extension = "GL_ARB_vertex_array_object";
+#endif
 	glRefConfig.vertexArrayObject = qfalse;
 	if (q_gl_version_at_least_3_0 || SDL_GL_ExtensionSupported(extension))
 	{
@@ -105,7 +113,11 @@ void GLimp_InitExtraExtensions(void)
 	}
 
 	// OpenGL 3.0 - GL_ARB_texture_float
+#ifdef __ANDROID
+	extension = "GL_OES_texture_float";
+#else
 	extension = "GL_ARB_texture_float";
+#endif
 	glRefConfig.textureFloat = qfalse;
 	if (q_gl_version_at_least_3_0 || SDL_GL_ExtensionSupported(extension))
 	{

@@ -96,6 +96,7 @@ vmCvar_t	cg_runroll;
 vmCvar_t	cg_bobup;
 vmCvar_t	cg_bobpitch;
 vmCvar_t	cg_bobroll;
+vmCvar_t	cg_weaponbob;
 vmCvar_t	cg_swingSpeed;
 vmCvar_t	cg_shadows;
 vmCvar_t	cg_gibs;
@@ -246,6 +247,7 @@ static cvarTable_t cvarTable[] = {
 	{ &cg_bobup , "cg_bobup", "0.005", CVAR_CHEAT },
 	{ &cg_bobpitch, "cg_bobpitch", "0.002", CVAR_ARCHIVE },
 	{ &cg_bobroll, "cg_bobroll", "0.002", CVAR_ARCHIVE },
+	{ &cg_weaponbob, "cg_weaponbob", "1", CVAR_ARCHIVE },
 	{ &cg_swingSpeed, "cg_swingSpeed", "0.3", CVAR_CHEAT },
 	{ &cg_animSpeed, "cg_animspeed", "1", CVAR_CHEAT },
 	{ &cg_debugAnim, "cg_debuganim", "0", CVAR_CHEAT },

@@ -804,7 +804,7 @@ void RB_DrawSun( float scale, shader_t *shader ) {
 
 		Mat4Translation( backEnd.viewParms.or.origin, translation );
 		Mat4Multiply( backEnd.viewParms.world.modelMatrix, translation, modelview );
-		GL_SetModelviewMatrix( modelview );
+		GL_SetModelviewMatrix( modelview, qtrue );
 	}
 
 	dist = 	backEnd.viewParms.zFar / 1.75;		// div sqrt(3)
@@ -855,11 +855,19 @@ void RB_StageIteratorSky( void ) {
 	// r_showsky will let all the sky blocks be drawn in
 	// front of everything to allow developers to see how
 	// much sky is getting sucked in
+#ifdef __ANDROID__
+	if ( r_showsky->integer ) {
+		glDepthRangef( 0.0, 0.0 );
+	} else {
+		glDepthRangef( 1.0, 1.0 );
+	}
+#else
 	if ( r_showsky->integer ) {
 		qglDepthRange( 0.0, 0.0 );
 	} else {
 		qglDepthRange( 1.0, 1.0 );
 	}
+#endif
 
 	// draw the outer skybox
 	if ( tess.shader->sky.outerbox[0] && tess.shader->sky.outerbox[0] != tr.defaultImage ) {
@@ -876,13 +884,13 @@ void RB_StageIteratorSky( void ) {
 			Mat4Copy( glState.modelview, oldmodelview );
 			Mat4Translation( backEnd.viewParms.or.origin, trans );
 			Mat4Multiply( glState.modelview, trans, product );
-			GL_SetModelviewMatrix( product );
+			GL_SetModelviewMatrix( product, qtrue );
 
 		}
 
 		DrawSkyBox( tess.shader );
 
-		GL_SetModelviewMatrix( oldmodelview );
+		GL_SetModelviewMatrix( oldmodelview, qtrue );
 	}
 
 	// generate the vertexes for all the clouds, which will be drawn
@@ -893,9 +901,12 @@ void RB_StageIteratorSky( void ) {
 
 	// draw the inner skybox
 
-
+#ifdef __ANDROID__
+	glDepthRangef( 0.0, 1.0 );
+#else
 	// back to normal depth range
 	qglDepthRange( 0.0, 1.0 );
+#endif
 
 	// note that sky was drawn so we will draw a sun later
 	backEnd.skyRenderedThisView = qtrue;

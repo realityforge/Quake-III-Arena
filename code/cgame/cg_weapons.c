@@ -921,9 +921,12 @@ static void CG_CalculateWeaponPosition( vec3_t origin, vec3_t angles ) {
 	}
 
 	// gun angles from bobbing
-	angles[ROLL] += scale * cg.bobfracsin * 0.005;
-	angles[YAW] += scale * cg.bobfracsin * 0.01;
-	angles[PITCH] += cg.xyspeed * cg.bobfracsin * 0.005;
+	if (cg_weaponbob.value != 0)
+	{
+		angles[ROLL] += scale * cg.bobfracsin * 0.005;
+		angles[YAW] += scale * cg.bobfracsin * 0.01;
+		angles[PITCH] += cg.xyspeed * cg.bobfracsin * 0.005;
+	}
 
 	// drop the weapon when landing
 	delta = cg.time - cg.landTime;

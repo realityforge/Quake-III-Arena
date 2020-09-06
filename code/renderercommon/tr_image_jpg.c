@@ -24,6 +24,18 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "tr_common.h"
 
+static void* stb_malloc_impl(size_t size) { return ri.Malloc(size); }
+static void* stb_realloc_impl(void* p, size_t newsize) { free(p); return ri.Malloc(newsize); }
+static void stb_free_impl(void* p) { ri.Free(p); }
+
+
+#define STB_IMAGE_IMPLEMENTATION
+#define STBI_NO_STDIO
+#define STBI_MALLOC(sz)           stb_malloc_impl(sz)
+#define STBI_REALLOC(p,newsz)     stb_realloc_impl(p, newsz)
+#define STBI_FREE(p)              stb_free_impl(p)
+#include "stb_image.h"
+
 /*
  * Include file for users of JPEG library.
  * You will need to have included system headers that define at least
@@ -80,6 +92,46 @@ static void R_JPGOutputMessage(j_common_ptr cinfo)
 
 void R_LoadJPG(const char *filename, unsigned char **pic, int *width, int *height)
 {
+	int len;
+	int channels;
+	union {
+		byte *b;
+		void *v;
+	} fbuffer;
+
+	len = ri.FS_ReadFile ( ( char * ) filename, &fbuffer.v);
+	if (!fbuffer.b || len < 0) {
+		return;
+	}
+	channels = 3;
+
+	unsigned char* loaded_data = stbi_load_from_memory(fbuffer.b, len, width, height, &channels, 0);
+
+	ri.FS_FreeFile (fbuffer.v);
+
+	if (loaded_data)
+	{
+		const size_t img_size = *width * *height;
+		*pic = ri.Malloc(img_size * 4);
+		size_t src_index = 0;
+		size_t tgt_index = 0;
+		for (size_t i = 0; i < img_size; ++i)
+		{
+			(*pic)[tgt_index++] = loaded_data[src_index++];
+			(*pic)[tgt_index++] = loaded_data[src_index++];
+			(*pic)[tgt_index++] = loaded_data[src_index++];
+			(*pic)[tgt_index++] = 255;
+		}
+
+		ri.Free(loaded_data);
+	}
+	else
+	{
+		*pic = NULL;
+	}
+
+	// NOTE (SB): Need to figure out what is wrong with the JPEG implementation on Android.
+#if 0
   /* This struct contains the JPEG decompression parameters and pointers to
    * working space (which is allocated as needed by the JPEG library).
    */
@@ -264,6 +316,7 @@ void R_LoadJPG(const char *filename, unsigned char **pic, int *width, int *heigh
    */
 
   /* And we're done! */
+#endif
 }
 
 

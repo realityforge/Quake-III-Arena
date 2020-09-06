@@ -1,3 +1,5 @@
+precision mediump sampler2D;
+
 uniform sampler2D u_DiffuseMap;
 
 #if defined(USE_LIGHTMAP)

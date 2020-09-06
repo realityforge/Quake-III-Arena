@@ -24,6 +24,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "tr_types.h"
 
+#if __ANDROID__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wstrict-prototypes"
+#include <VrApi.h>
+#pragma clang diagnostic pop
+#endif
+
 #define	REF_API_VERSION		8
 
 //
@@ -82,6 +89,9 @@ typedef struct {
 	// if the pointers are not NULL, timing info will be returned
 	void	(*EndFrame)( int *frontEndMsec, int *backEndMsec );
 
+#if __ANDROID__
+	void	(*SetVRHeadsetParms)( const ovrTracking2* ovrTracking, int renderBufferL, int renderBufferR );
+#endif
 
 	int		(*MarkFragments)( int numPoints, const vec3_t *points, const vec3_t projection,
 				   int maxPoints, vec3_t pointBuffer, int maxFragments, markFragment_t *fragmentBuffer );

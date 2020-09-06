@@ -575,6 +575,10 @@ it will attempt to load as a system dll
 */
 vm_t *VM_Create( const char *module, intptr_t (*systemCalls)(intptr_t *), 
 				vmInterpret_t interpret ) {
+#if __ANDROID__
+	interpret = VMI_NATIVE;
+#endif
+
 	vm_t		*vm;
 	vmHeader_t	*header;
 	int			i, remaining, retval;

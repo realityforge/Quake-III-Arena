@@ -1473,6 +1473,10 @@ int FS_FindVM(void **startSearch, char *found, int foundlen, const char *name, i
 
 			if(enableDll)
 			{
+#ifdef __ANDROID__
+				Com_sprintf(found, foundlen, "lib%s", dllName);
+				return VMI_NATIVE;
+#else
 				netpath = FS_BuildOSPath(dir->path, dir->gamedir, dllName);
 
 				if(FS_FileInPathExists(netpath))
@@ -1482,6 +1486,7 @@ int FS_FindVM(void **startSearch, char *found, int foundlen, const char *name, i
 
 					return VMI_NATIVE;
 				}
+#endif
 			}
 
 			if(FS_FOpenFileReadDir(qvmName, search, NULL, qfalse, qfalse) > 0)

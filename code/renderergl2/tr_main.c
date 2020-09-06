@@ -755,21 +755,6 @@ void R_SetupProjection(viewParms_t *dest, float zProj, float zFar, qboolean comp
 	float	xmin, xmax, ymin, ymax;
 	float	width, height, stereoSep = r_stereoSeparation->value;
 
-	/*
-	 * offset the view origin of the viewer for stereo rendering 
-	 * by setting the projection matrix appropriately.
-	 */
-
-	if(stereoSep != 0)
-	{
-		if(dest->stereoFrame == STEREO_LEFT)
-			stereoSep = zProj / stereoSep;
-		else if(dest->stereoFrame == STEREO_RIGHT)
-			stereoSep = zProj / -stereoSep;
-		else
-			stereoSep = 0;
-	}
-
 	ymax = zProj * tan(dest->fovY * M_PI / 360.0f);
 	ymin = -ymax;
 
@@ -778,21 +763,44 @@ void R_SetupProjection(viewParms_t *dest, float zProj, float zFar, qboolean comp
 
 	width = xmax - xmin;
 	height = ymax - ymin;
-	
-	dest->projectionMatrix[0] = 2 * zProj / width;
-	dest->projectionMatrix[4] = 0;
-	dest->projectionMatrix[8] = (xmax + xmin + 2 * stereoSep) / width;
-	dest->projectionMatrix[12] = 2 * zProj * stereoSep / width;
 
-	dest->projectionMatrix[1] = 0;
-	dest->projectionMatrix[5] = 2 * zProj / height;
-	dest->projectionMatrix[9] = ( ymax + ymin ) / height;	// normally 0
-	dest->projectionMatrix[13] = 0;
+	if (tr.vrParms.valid) {
+		if (dest->stereoFrame == STEREO_LEFT) {
+			memcpy(&dest->projectionMatrix, &tr.vrParms.projectionL, sizeof(dest->projectionMatrix));
+		}
+		else {
+			memcpy(&dest->projectionMatrix, &tr.vrParms.projectionR, sizeof(dest->projectionMatrix));
+		}
+	} else {
+		/*
+		 * offset the view origin of the viewer for stereo rendering 
+		 * by setting the projection matrix appropriately.
+		 */
+		if(stereoSep != 0)
+		{
+			if(dest->stereoFrame == STEREO_LEFT)
+				stereoSep = zProj / stereoSep;
+			else if(dest->stereoFrame == STEREO_RIGHT)
+				stereoSep = zProj / -stereoSep;
+			else
+				stereoSep = 0;
+		}
 
-	dest->projectionMatrix[3] = 0;
-	dest->projectionMatrix[7] = 0;
-	dest->projectionMatrix[11] = -1;
-	dest->projectionMatrix[15] = 0;
+		dest->projectionMatrix[0] = 2 * zProj / width;
+		dest->projectionMatrix[4] = 0;
+		dest->projectionMatrix[8] = (xmax + xmin + 2 * stereoSep) / width;
+		dest->projectionMatrix[12] = 2 * zProj * stereoSep / width;
+
+		dest->projectionMatrix[1] = 0;
+		dest->projectionMatrix[5] = 2 * zProj / height;
+		dest->projectionMatrix[9] = ( ymax + ymin ) / height;	// normally 0
+		dest->projectionMatrix[13] = 0;
+
+		dest->projectionMatrix[3] = 0;
+		dest->projectionMatrix[7] = 0;
+		dest->projectionMatrix[11] = -1;
+		dest->projectionMatrix[15] = 0;
+	}
 	
 	// Now that we have all the data for the projection matrix we can also setup the view frustum.
 	if(computeFrustum)
@@ -815,10 +823,12 @@ void R_SetupProjectionZ(viewParms_t *dest)
 
 	depth	= zFar - zNear;
 
-	dest->projectionMatrix[2] = 0;
-	dest->projectionMatrix[6] = 0;
-	dest->projectionMatrix[10] = -( zFar + zNear ) / depth;
-	dest->projectionMatrix[14] = -2 * zFar * zNear / depth;
+	if (!tr.vrParms.valid) {
+		dest->projectionMatrix[2] = 0;
+		dest->projectionMatrix[6] = 0;
+		dest->projectionMatrix[10] = -( zFar + zNear ) / depth;
+		dest->projectionMatrix[14] = -2 * zFar * zNear / depth;
+	}
 
 	if (dest->isPortal)
 	{

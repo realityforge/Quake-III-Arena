@@ -1624,6 +1624,9 @@ static qboolean RawImage_ScaleToPower2( byte **data, int *inout_width, int *inou
 
 static qboolean RawImage_HasAlpha(const byte *scan, int numPixels)
 {
+#if __ANDROID__
+	return qtrue; // Using RGB as internalFormat is not supported if data format is RGBA.
+#else
 	int i;
 
 	if (!scan)
@@ -1638,6 +1641,7 @@ static qboolean RawImage_HasAlpha(const byte *scan, int numPixels)
 	}
 
 	return qfalse;
+#endif
 }
 
 static GLenum RawImage_GetFormat(const byte *data, int numPixels, GLenum picFormat, qboolean lightMap, imgType_t type, imgFlags_t flags)
@@ -1942,6 +1946,21 @@ static GLenum PixelDataFormatFromInternalFormat(GLenum internalFormat)
 	}
 }
 
+static GLenum PixelTypeFromInternalFormat(GLenum internalFormat)
+{
+	switch (internalFormat)
+	{
+		case GL_DEPTH_COMPONENT:
+			return GL_UNSIGNED_SHORT;
+		case GL_DEPTH_COMPONENT24:
+			return GL_UNSIGNED_INT;
+		case GL_DEPTH_COMPONENT32F:
+			return GL_FLOAT;
+		default:
+			return GL_UNSIGNED_BYTE;
+	}
+}
+
 static void RawImage_UploadTexture(GLuint texture, byte *data, int x, int y, int width, int height, GLenum target, GLenum picFormat, int numMips, GLenum internalFormat, imgType_t type, imgFlags_t flags, qboolean subtexture )
 {
 	GLenum dataFormat, dataType;
@@ -2106,7 +2125,7 @@ image_t *R_CreateImage2( const char *name, byte *pic, int width, int height, GLe
 	qboolean    picmip = !!(flags & IMGFLAG_PICMIP);
 	qboolean    lastMip;
 	GLenum textureTarget = cubemap ? GL_TEXTURE_CUBE_MAP : GL_TEXTURE_2D;
-	GLenum dataFormat;
+	GLenum dataFormat, pixelType;
 
 	if (strlen(name) >= MAX_QPATH ) {
 		ri.Error (ERR_DROP, "R_CreateImage: \"%s\" is too long", name);
@@ -2163,6 +2182,7 @@ image_t *R_CreateImage2( const char *name, byte *pic, int width, int height, GLe
 
 	// Allocate texture storage so we don't have to worry about it later.
 	dataFormat = PixelDataFormatFromInternalFormat(internalFormat);
+	pixelType = PixelTypeFromInternalFormat(internalFormat);
 	mipWidth = width;
 	mipHeight = height;
 	miplevel = 0;
@@ -2178,7 +2198,7 @@ image_t *R_CreateImage2( const char *name, byte *pic, int width, int height, GLe
 		}
 		else
 		{
-			qglTextureImage2DEXT(image->texnum, GL_TEXTURE_2D, miplevel, internalFormat, mipWidth, mipHeight, 0, dataFormat, GL_UNSIGNED_BYTE, NULL);
+			qglTextureImage2DEXT(image->texnum, GL_TEXTURE_2D, miplevel, internalFormat, mipWidth, mipHeight, 0, dataFormat, pixelType, NULL);
 		}
 
 		mipWidth  = MAX(1, mipWidth >> 1);
@@ -2213,7 +2233,9 @@ image_t *R_CreateImage2( const char *name, byte *pic, int width, int height, GLe
 		case GL_DEPTH_COMPONENT32_ARB:
 			// Fix for sampling depth buffer on old nVidia cards.
 			// from http://www.idevgames.com/forums/thread-4141-post-34844.html#pid34844
+#ifndef __ANDROID__
 			qglTextureParameterfEXT(image->texnum, textureTarget, GL_DEPTH_TEXTURE_MODE, GL_LUMINANCE);
+#endif
 			qglTextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 			qglTextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			break;

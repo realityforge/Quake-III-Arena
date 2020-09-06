@@ -111,6 +111,10 @@ ifndef CLIENTBIN
 CLIENTBIN=ioquake3
 endif
 
+ifndef LIBPREFIX
+LIBPREFIX=
+endif
+
 ifndef SERVERBIN
 SERVERBIN=ioq3ded
 endif
@@ -250,6 +254,7 @@ RGL1DIR=$(MOUNT_DIR)/renderergl1
 RGL2DIR=$(MOUNT_DIR)/renderergl2
 CMDIR=$(MOUNT_DIR)/qcommon
 SDLDIR=$(MOUNT_DIR)/sdl
+VRDIR=$(MOUNT_DIR)/vr
 ASMDIR=$(MOUNT_DIR)/asm
 SYSDIR=$(MOUNT_DIR)/sys
 GDIR=$(MOUNT_DIR)/game
@@ -276,6 +281,7 @@ LOKISETUPDIR=misc/setup
 NSISDIR=misc/nsis
 SDLHDIR=$(MOUNT_DIR)/SDL2
 LIBSDIR=$(MOUNT_DIR)/libs
+VRAPIDIR=$(MOUNT_DIR)/VrApi
 
 bin_path=$(shell which $(1) 2> /dev/null)
 
@@ -421,6 +427,51 @@ ifneq (,$(findstring "$(PLATFORM)", "linux" "gnu_kfreebsd" "kfreebsd-gnu" "gnu")
   endif
   endif
 else # ifeq Linux
+
+#############################################################################
+# SETUP AND BUILD -- Android
+#############################################################################
+
+ifeq ($(PLATFORM),android)
+  ANDROID_NDK = ~/Android/Sdk/ndk/21.1.6352462
+  ARCH = aarch64
+  CC = $(ANDROID_NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android26-clang
+  RANLIB = $(ANDROID_NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android-ranlib
+  TOOLS_CFLAGS += -DARCH_STRING=\"$(COMPILE_ARCH)\"
+  BASE_CFLAGS = -Wall -fno-strict-aliasing -Wimplicit -Wstrict-prototypes -pipe \
+    -fno-builtin-cos -fno-builtin-sin -fPIC -DARCH_STRING=\\\"$(ARCH)\\\"
+  CLIENT_CFLAGS += $(SDL_CFLAGS) -DSDL_DISABLE_IMMINTRIN_H -fno-builtin-cos -fno-builtin-sin
+
+  OPTIMIZEVM = -O3 -funroll-loops -fomit-frame-pointer
+  OPTIMIZE = $(OPTIMIZEVM) -ffast-math
+
+  HAVE_VM_COMPILED = false
+
+  LIBPREFIX = lib
+  CLIENTBIN = $(LIBPREFIX)ioquake3
+  FULLBINEXT = .so
+  SHLIBEXT = so
+  SHLIBCFLAGS =
+  SHLIBLDFLAGS = -shared -lm $(LDFLAGS)
+
+  THREAD_LIBS =
+  LIBS = -ldl -lm -Wl,--no-undefined -shared
+
+  CLIENT_LIBS = -lGLESv3
+  RENDERER_LIBS = -lGLESv3 -lEGL
+  
+  # SDL
+  BASE_CFLAGS += -I$(SDLHDIR)/include
+  CLIENT_LIBS += $(LIBSDIR)/android/arm64-v8a/libSDL2.so
+  RENDERER_LIBS += $(LIBSDIR)/android/arm64-v8a/libSDL2.so
+  CLIENT_EXTRA_FILES += $(LIBSDIR)/android/arm64-v8a/libSDL2.so
+
+  # VrApi
+  BASE_CFLAGS += -I$(VRAPIDIR)/Include
+  CLIENT_LIBS += $(VRAPIDIR)/Libs/Android/arm64-v8a/Release/libvrapi.so
+  RENDERER_LIBS += $(VRAPIDIR)/Libs/Android/arm64-v8a/Release/libvrapi.so
+  CLIENT_EXTRA_FILES += $(VRAPIDIR)/Libs/Android/arm64-v8a/Release/libvrapi.so
+else # ifeq Android
 
 #############################################################################
 # SETUP AND BUILD -- MAC OS X
@@ -954,6 +1005,7 @@ else # ifeq sunos
   SHLIBLDFLAGS=-shared
 
 endif #Linux
+endif #Android
 endif #darwin
 endif #MINGW
 endif #FreeBSD
@@ -991,9 +1043,9 @@ endif
 
 ifneq ($(BUILD_CLIENT),0)
   ifneq ($(USE_RENDERER_DLOPEN),0)
-    TARGETS += $(B)/$(CLIENTBIN)$(FULLBINEXT) $(B)/renderer_opengl1_$(SHLIBNAME)
+    TARGETS += $(B)/$(CLIENTBIN)$(FULLBINEXT) $(B)/$(LIBPREFIX)renderer_opengl1_$(SHLIBNAME)
     ifneq ($(BUILD_RENDERER_OPENGL2),0)
-      TARGETS += $(B)/renderer_opengl2_$(SHLIBNAME)
+      TARGETS += $(B)/$(LIBPREFIX)renderer_opengl2_$(SHLIBNAME)
     endif
   else
     TARGETS += $(B)/$(CLIENTBIN)$(FULLBINEXT)
@@ -1223,7 +1275,7 @@ define DO_REF_STR
 $(echo_cmd) "REF_STR $<"
 $(Q)rm -f $@
 $(Q)echo "const char *fallbackShader_$(notdir $(basename $<)) =" >> $@
-$(Q)cat $< | sed -e 's/^\(.*\)$$/\"\1\"/' >> $@
+$(Q)cat $< | sed -e 's/^/\"/;s/$$/\\n\"/' | tr -d '\r' >> $@
 $(Q)echo ";" >> $@
 endef
 
@@ -1759,6 +1811,10 @@ Q3OBJ = \
   $(B)/client/sdl_input.o \
   $(B)/client/sdl_snd.o \
   \
+  $(B)/client/vr_base.o \
+  $(B)/client/vr_input.o \
+  $(B)/client/vr_renderer.o \
+  \
   $(B)/client/con_log.o \
   $(B)/client/sys_autoupdater.o \
   $(B)/client/sys_main.o
@@ -2191,12 +2247,12 @@ $(B)/$(CLIENTBIN)$(FULLBINEXT): $(Q3OBJ) $(LIBSDLMAIN)
 		-o $@ $(Q3OBJ) \
 		$(LIBSDLMAIN) $(CLIENT_LIBS) $(LIBS)
 
-$(B)/renderer_opengl1_$(SHLIBNAME): $(Q3ROBJ) $(JPGOBJ)
+$(B)/$(LIBPREFIX)renderer_opengl1_$(SHLIBNAME): $(Q3ROBJ) $(JPGOBJ)
 	$(echo_cmd) "LD $@"
 	$(Q)$(CC) $(CFLAGS) $(SHLIBLDFLAGS) -o $@ $(Q3ROBJ) $(JPGOBJ) \
 		$(THREAD_LIBS) $(LIBSDLMAIN) $(RENDERER_LIBS) $(LIBS)
 
-$(B)/renderer_opengl2_$(SHLIBNAME): $(Q3R2OBJ) $(Q3R2STRINGOBJ) $(JPGOBJ)
+$(B)/$(LIBPREFIX)renderer_opengl2_$(SHLIBNAME): $(Q3R2OBJ) $(Q3R2STRINGOBJ) $(JPGOBJ)
 	$(echo_cmd) "LD $@"
 	$(Q)$(CC) $(CFLAGS) $(SHLIBLDFLAGS) -o $@ $(Q3R2OBJ) $(Q3R2STRINGOBJ) $(JPGOBJ) \
 		$(THREAD_LIBS) $(LIBSDLMAIN) $(RENDERER_LIBS) $(LIBS)
@@ -2697,6 +2753,9 @@ $(B)/client/%.o: $(ZDIR)/%.c
 $(B)/client/%.o: $(SDLDIR)/%.c
 	$(DO_CC)
 
+$(B)/client/%.o: $(VRDIR)/%.c
+	$(DO_CC)
+
 $(B)/client/%.o: $(SYSDIR)/%.c
 	$(DO_CC)
 
@@ -2882,9 +2941,9 @@ endif
 ifneq ($(BUILD_CLIENT),0)
 	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(CLIENTBIN)$(FULLBINEXT) $(COPYBINDIR)/$(CLIENTBIN)$(FULLBINEXT)
   ifneq ($(USE_RENDERER_DLOPEN),0)
-	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/renderer_opengl1_$(SHLIBNAME) $(COPYBINDIR)/renderer_opengl1_$(SHLIBNAME)
+	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(LIBPREFIX)renderer_opengl1_$(SHLIBNAME) $(COPYBINDIR)/$(LIBPREFIX)renderer_opengl1_$(SHLIBNAME)
     ifneq ($(BUILD_RENDERER_OPENGL2),0)
-	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/renderer_opengl2_$(SHLIBNAME) $(COPYBINDIR)/renderer_opengl2_$(SHLIBNAME)
+	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(LIBPREFIX)renderer_opengl2_$(SHLIBNAME) $(COPYBINDIR)/$(LIBPREFIX)renderer_opengl2_$(SHLIBNAME)
     endif
   else
     ifneq ($(BUILD_RENDERER_OPENGL2),0)

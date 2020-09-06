@@ -501,6 +501,8 @@ char *CON_Input( void )
 CON_Print
 ==================
 */
+void (*GLogcatFn) ( const char *msg );
+
 void CON_Print( const char *msg )
 {
 	if (!msg[0])
@@ -512,6 +514,12 @@ void CON_Print( const char *msg )
 		Sys_AnsiColorPrint( msg );
 	else
 		fputs( msg, stderr );
+
+#if __ANDROID__
+	if (GLogcatFn) {
+		(*GLogcatFn)(msg);
+	}
+#endif
 
 	if (!ttycon_on) {
 		// CON_Hide didn't do anything.
@@ -535,3 +543,15 @@ void CON_Print( const char *msg )
 		ttycon_show_overdue++;
 	}
 }
+
+#if __ANDROID__
+/*
+==================
+CON_LogcatFn
+==================
+*/
+void CON_LogcatFn( void (*LogcatFn)( const char* message ) )
+{
+	GLogcatFn = LogcatFn;
+}
+#endif

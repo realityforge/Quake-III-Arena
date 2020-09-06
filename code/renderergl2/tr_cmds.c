@@ -411,15 +411,32 @@ void RE_BeginFrame( stereoFrame_t stereoFrame ) {
 	}
 
 	if (glConfig.stereoEnabled) {
-		if( !(cmd = R_GetCommandBuffer(sizeof(*cmd))) )
-			return;
-			
-		cmd->commandId = RC_DRAW_BUFFER;
-		
+		if (tr.renderFbo && tr.vrParms.renderBufferOriginal == 0) {
+			tr.vrParms.renderBufferOriginal = tr.renderFbo->frameBuffer;
+		}
+
 		if ( stereoFrame == STEREO_LEFT ) {
-			cmd->buffer = (int)GL_BACK_LEFT;
+			if (tr.vrParms.valid == qtrue) {
+				if (tr.renderFbo) {
+					switchEyeCommand_t* sec;
+					if (!(sec = R_GetCommandBuffer(sizeof(*sec))))
+						return;
+					sec->commandId = RC_SWITCH_EYE;
+					sec->eye = tr.vrParms.renderBufferL;
+					sec->stereoFrame = stereoFrame;
+				}
+			}
 		} else if ( stereoFrame == STEREO_RIGHT ) {
-			cmd->buffer = (int)GL_BACK_RIGHT;
+			if (tr.vrParms.valid == qtrue) {
+				if (tr.renderFbo) {
+					switchEyeCommand_t* sec;
+					if (!(sec = R_GetCommandBuffer(sizeof(*sec))))
+						return;
+					sec->commandId = RC_SWITCH_EYE;
+					sec->eye = tr.vrParms.renderBufferR;
+					sec->stereoFrame = stereoFrame;
+				}
+			}
 		} else {
 			ri.Error( ERR_FATAL, "RE_BeginFrame: Stereo is enabled, but stereoFrame was %i", stereoFrame );
 		}
@@ -555,6 +572,41 @@ void RE_EndFrame( int *frontEndMsec, int *backEndMsec ) {
 	}
 	backEnd.pc.msec = 0;
 }
+
+#if __ANDROID__
+void R_Mat4Transpose( const float in[4][4], float* out ) {
+	int i, j;
+	for (i = 0; i < 4; ++i) {
+		for (j = 0; j < 4; ++j) {
+			out[i * 4 + j] = in[j][i];
+		}
+	}
+}
+
+void RE_SetVRHeadsetParms( const ovrTracking2* tracking, int renderBufferL, int renderBufferR ) {
+	if (tracking) {
+		R_Mat4Transpose(tracking->Eye[0].ProjectionMatrix.M, tr.vrParms.projectionL);
+		R_Mat4Transpose(tracking->Eye[1].ProjectionMatrix.M, tr.vrParms.projectionR);
+		R_Mat4Transpose(tracking->Eye[0].ViewMatrix.M, tr.vrParms.viewL);
+		R_Mat4Transpose(tracking->Eye[1].ViewMatrix.M, tr.vrParms.viewR);
+
+		const float worldToMeter = 25.0f; // https://quakewiki.org/wiki/unit, assume 25 units is 1 meter.
+		tr.vrParms.viewL[12] *= worldToMeter;
+		tr.vrParms.viewL[13] *= worldToMeter;
+		tr.vrParms.viewL[14] *= worldToMeter;
+		tr.vrParms.viewR[12] *= worldToMeter;
+		tr.vrParms.viewR[13] *= worldToMeter;
+		tr.vrParms.viewR[14] *= worldToMeter;
+
+		tr.vrParms.renderBufferL = renderBufferL;
+		tr.vrParms.renderBufferR = renderBufferR;
+
+		tr.vrParms.valid = qtrue;
+	} else {
+		tr.vrParms.valid = qfalse;
+	}
+}
+#endif
 
 /*
 =============

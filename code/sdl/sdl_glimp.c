@@ -112,6 +112,7 @@ GLimp_LogComment
 */
 void GLimp_LogComment( char *comment )
 {
+	// CON_Print(comment);
 }
 
 /*
@@ -307,7 +308,9 @@ static qboolean GLimp_GetProcAddresses( qboolean fixedFunction ) {
 			QGL_1_5_PROCS;
 			QGL_2_0_PROCS;
 			// error so this doesn't segfault due to NULL desktop GL functions being used
+#ifndef __ANDROID__
 			Com_Error( ERR_FATAL, "Unsupported OpenGL Version: %s", version );
+#endif
 		} else {
 			Com_Error( ERR_FATAL, "Unsupported OpenGL Version (%s), OpenGL 2.0 is required", version );
 		}
@@ -431,7 +434,7 @@ static int GLimp_SetMode(int mode, qboolean fullscreen, qboolean noborder, qbool
 		// use desktop video resolution
 		if( desktopMode.h > 0 )
 		{
-			glConfig.vidWidth = desktopMode.w;
+			glConfig.vidWidth = r_stereoEnabled->integer ? desktopMode.w * 0.5f : desktopMode.w;
 			glConfig.vidHeight = desktopMode.h;
 		}
 		else

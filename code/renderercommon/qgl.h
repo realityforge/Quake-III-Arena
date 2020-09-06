@@ -28,8 +28,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #ifdef USE_LOCAL_HEADERS
 #	include "SDL_opengl.h"
+#	include "SDL_opengles2.h"
 #else
 #	include <SDL_opengl.h>
+#	include <SDL_opengles2.h>
 #endif
 
 extern void (APIENTRYP qglActiveTextureARB) (GLenum texture);
@@ -80,7 +82,6 @@ extern void (APIENTRYP qglUnlockArraysEXT) (void);
 	GLE(void, TexParameterf, GLenum target, GLenum pname, GLfloat param) \
 	GLE(void, TexParameteri, GLenum target, GLenum pname, GLint param) \
 	GLE(void, TexSubImage2D, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels) \
-	GLE(void, Translatef, GLfloat x, GLfloat y, GLfloat z) \
 	GLE(void, Viewport, GLint x, GLint y, GLsizei width, GLsizei height) \
 
 // OpenGL 1.0/1.1 and OpenGL ES 1.x but not OpenGL 3.2 core profile
@@ -167,6 +168,7 @@ extern void (APIENTRYP qglUnlockArraysEXT) (void);
 	GLE(void, DeleteProgram, GLuint program) \
 	GLE(void, DeleteShader, GLuint shader) \
 	GLE(void, DetachShader, GLuint program, GLuint shader) \
+	GLE(void, DrawBuffersEXT, GLsizei n, const GLenum *bufs) \
 	GLE(void, DisableVertexAttribArray, GLuint index) \
 	GLE(void, EnableVertexAttribArray, GLuint index) \
 	GLE(void, GetActiveUniform, GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name) \

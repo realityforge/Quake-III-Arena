@@ -707,7 +707,9 @@ void RB_DrawSun( float scale, shader_t *shader ) {
 	}
 
 	qglLoadMatrixf( backEnd.viewParms.world.modelMatrix );
+#ifndef __ANDROID__
 	qglTranslatef (backEnd.viewParms.or.origin[0], backEnd.viewParms.or.origin[1], backEnd.viewParms.or.origin[2]);
+#endif
 
 	dist = 	backEnd.viewParms.zFar / 1.75;		// div sqrt(3)
 	size = dist * scale;
@@ -770,7 +772,9 @@ void RB_StageIteratorSky( void ) {
 		qglPushMatrix ();
 		GL_State( 0 );
 		GL_Cull( CT_FRONT_SIDED );
+#ifndef __ANDROID__
 		qglTranslatef (backEnd.viewParms.or.origin[0], backEnd.viewParms.or.origin[1], backEnd.viewParms.or.origin[2]);
+#endif
 
 		DrawSkyBox( tess.shader );
 
