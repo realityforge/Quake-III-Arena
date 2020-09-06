@@ -1,5 +1,22 @@
-![Build](https://github.com/ioquake/ioq3/workflows/Build/badge.svg)
+# Quake 3 Port to Oculus Quest
+This project is a port of the ioq3 engine to the Oculus Quest. This is simply a hobby project of mine, don't get any expectations of me having a high velocity on this. Feel free to contribute however.
 
+I'm not providing binaries, due to the early state of the project. If you want to build this yourself, follow the instuctions below. You can already walk and look around in DM6 for example.
+
+NOTE: Hand tracking is enabled, but this has been done because I got too annoyed with grabbing my controllers every time when booting the title. Use controllers to actually walk around.
+
+## Building
+
+### Prerequisites
+1. Linux. I've only been building on this platform for now, so my scripts work on it.
+4. Install your copy of Quake III Arena from Steam.
+2. Android Studio with NDK version 21.1.6352462.
+3. Copy the Oculus VR SDK from https://developer.oculus.com/downloads/package/oculus-mobile-sdk/ and extract the VrApi folder to ./code/VrApi/
+
+### Building and running the build
+1. Run ./android/run.sh
+
+# Original ioq3 README:
                    ,---------------------------------------.
                    |   _                     _       ____  |
                    |  (_)___  __ _ _  _ __ _| |_____|__ /  |
