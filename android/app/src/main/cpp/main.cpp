@@ -30,7 +30,7 @@ static jobject g_ActivityObject = NULL;
 
 extern "C"
 {
-	JNIEXPORT void JNICALL Java_com_spark_ioq3quest_MainActivity_nativeCreate(JNIEnv* env, jclass cls, jobject thisObject)
+	JNIEXPORT void JNICALL Java_com_sparkie_ioq3quest_MainActivity_nativeCreate(JNIEnv* env, jclass cls, jobject thisObject)
 	{
 		g_ActivityObject = env->NewGlobalRef(thisObject);
 	}

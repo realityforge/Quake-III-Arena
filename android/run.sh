@@ -19,7 +19,7 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 
-PACKAGE_NAME=com.spark.ioq3quest
+PACKAGE_NAME=com.sparkie.ioq3quest
 ANDROID_STORAGE_LOCATION=/sdcard/Android/data/$PACKAGE_NAME/files/
 APK_LOCATION=./app/build/outputs/apk/debug/app-debug.apk
 

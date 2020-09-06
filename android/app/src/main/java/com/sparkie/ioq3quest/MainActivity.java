@@ -1,4 +1,4 @@
-package com.spark.ioq3quest;
+package com.sparkie.ioq3quest;
 
 import android.os.Bundle;
 import org.libsdl.app.SDLActivity;
