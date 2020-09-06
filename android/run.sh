@@ -4,7 +4,7 @@ cd ..
 
 TARGET=debug
 
-make -j24 $TARGET
+make -j $(getconf _NPROCESSORS_ONLN) $TARGET
 if [ $? -ne 0 ]; then
 	echo "Failed to build ioq3"
 	exit 1
