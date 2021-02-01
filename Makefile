@@ -433,12 +433,11 @@ else # ifeq Linux
 #############################################################################
 
 ifeq ($(PLATFORM),android)
-  ANDROID_NDK = ~/Android/Sdk/ndk/21.1.6352462
   ARCH = aarch64
-  CC = $(ANDROID_NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android26-clang
-  RANLIB = $(ANDROID_NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android-ranlib
+  CC = $(ANDROID_CC)
+  RANLIB = $(ANDROID_RANLIB)
   TOOLS_CFLAGS += -DARCH_STRING=\"$(COMPILE_ARCH)\"
-  BASE_CFLAGS = -Wall -fno-strict-aliasing -Wimplicit -Wstrict-prototypes -pipe \
+  BASE_CFLAGS = $(ANDROID_CFLAGS) -Wall -fno-strict-aliasing -Wimplicit -Wstrict-prototypes -pipe \
     -fno-builtin-cos -fno-builtin-sin -fPIC -DARCH_STRING=\\\"$(ARCH)\\\"
   CLIENT_CFLAGS += $(SDL_CFLAGS) -DSDL_DISABLE_IMMINTRIN_H -fno-builtin-cos -fno-builtin-sin
 
@@ -1275,7 +1274,7 @@ define DO_REF_STR
 $(echo_cmd) "REF_STR $<"
 $(Q)rm -f $@
 $(Q)echo "const char *fallbackShader_$(notdir $(basename $<)) =" >> $@
-$(Q)cat $< | sed -e 's/^/\"/;s/$$/\\n\"/' | tr -d '\r' >> $@
+$(Q)cat $< | sed -e 's/^\(.*\)$$/\"\1\"/' >> $@
 $(Q)echo ";" >> $@
 endef
 
