@@ -8,13 +8,21 @@ NOTE: Hand tracking is enabled, but this has been done because I got too annoyed
 ## Building
 
 ### Prerequisites
-1. Linux. I've only been building on this platform for now, so my scripts work on it.
-4. Install your copy of Quake III Arena from Steam.
+1. Install your copy of Quake III Arena from Steam.
 2. Android Studio with NDK version 21.1.6352462.
 3. Copy the Oculus VR SDK from https://developer.oculus.com/downloads/package/oculus-mobile-sdk/ and extract the VrApi folder to ./code/VrApi/
 
 ### Building and running the build
-1. Run ./android/run.sh
+The scripts assume that you installed everything in the default locations. In case you want to deviate from that, the paths are in ./android/run.(sh|bat) and in Makefile.local.
+
+#### Linux
+1. Open Makefile.local and uncomment the Linux section.
+2. Run ./android/run.sh
+
+#### Windows
+1. Open Makefile.local and uncomment the Windows section.
+2. Replace \<username\> with your windows username folder as it appears in C:\Users.
+3. Open git bash and run ./android/run.bat.
 
 # Original ioq3 README:
                    ,---------------------------------------.
