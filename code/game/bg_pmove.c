@@ -35,12 +35,12 @@ float	pm_stopspeed = 100.0f;
 float	pm_duckScale = 0.25f;
 float	pm_swimScale = 0.50f;
 
-float	pm_accelerate = 10.0f;
+float	pm_accelerate = 1000.0f;
 float	pm_airaccelerate = 1.0f;
 float	pm_wateraccelerate = 4.0f;
 float	pm_flyaccelerate = 8.0f;
 
-float	pm_friction = 6.0f;
+float	pm_friction = 10.0f;
 float	pm_waterfriction = 1.0f;
 float	pm_flightfriction = 3.0f;
 float	pm_spectatorfriction = 5.0f;
@@ -1807,7 +1807,8 @@ void PM_UpdateViewAngles( playerState_t *ps, const usercmd_t *cmd ) {
 
 	// circularly clamp the angles with deltas
 	for (i=0 ; i<3 ; i++) {
-		temp = cmd->angles[i] + ps->delta_angles[i];
+		//temp = cmd->angles[i] + ps->delta_angles[i];
+		temp = cmd->angles[i] + (i == YAW ? ps->delta_angles[i] : 0);
 		if ( i == PITCH ) {
 			// don't let the player look up or down more than 90 degrees
 			if ( temp > 16000 ) {

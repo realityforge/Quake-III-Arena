@@ -90,6 +90,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define DEFAULT_REDTEAM_NAME		"Stroggs"
 #define DEFAULT_BLUETEAM_NAME		"Pagans"
+//VR HUD
+#define HUD_FLAGS_FULLSCREEN			1
 
 typedef enum {
 	FOOTSTEP_NORMAL,

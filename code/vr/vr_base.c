@@ -1,11 +1,14 @@
 #include "vr_base.h"
-#include "VrApi_Types.h"
+#include "../VrApi/Include/VrApi_Types.h"
+#include "../qcommon/q_shared.h"
+#include "../qcommon/qcommon.h"
+#include "../client/client.h"
 
-#if __ANDROID__
+//#if __ANDROID__
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wstrict-prototypes"
-#include <VrApi_Helpers.h>
+#include "../VrApi/Include/VrApi_Helpers.h"
 #pragma clang diagnostic pop
 
 #include <EGL/egl.h>
@@ -24,6 +27,8 @@ engine_t* VR_Init( ovrJava java )
 	initParams = vrapi_DefaultInitParms(&java);
 	initResult = vrapi_Initialize(&initParams);
 	assert(initResult == VRAPI_INITIALIZE_SUCCESS);
+	
+	vr_engine.java = java;
 
 	return &vr_engine;
 }
@@ -45,7 +50,7 @@ void VR_EnterVR( engine_t* engine, ovrJava java ) {
 		engine->ovr = vrapi_EnterVrMode(&modeParams);
 		engine->frameIndex = 0;
 
-		vrapi_SetTrackingSpace(engine->ovr, VRAPI_TRACKING_SPACE_LOCAL);
+		vrapi_SetTrackingSpace(engine->ovr, VRAPI_TRACKING_SPACE_LOCAL_FLOOR);
 	}
 }
 
@@ -59,4 +64,11 @@ void VR_LeaveVR( engine_t* engine ) {
 engine_t* VR_GetEngine( void ) {
 	return &vr_engine;
 }
-#endif
+
+bool VR_useScreenLayer( void )
+{
+	return (bool)(clc.state != CA_ACTIVE ||
+			( Key_GetCatcher( ) & KEYCATCH_UI ) ||
+            ( Key_GetCatcher( ) & KEYCATCH_CONSOLE ));
+}
+//#endif

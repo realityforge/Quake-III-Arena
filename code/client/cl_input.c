@@ -23,8 +23,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "client.h"
 
+#include "../vr/vr_input.h"
+#include "../vr/vr_clientinfo.h"
+
 unsigned	frame_msec;
 int			old_com_frameTime;
+
+extern vr_clientinfo_t vr;
 
 /*
 ===============================================================================
@@ -290,7 +295,7 @@ Moves the local angle positions
 ================
 */
 void CL_AdjustAngles( void ) {
-	float	speed;
+/*	float	speed;
 	
 	if ( in_speed.active ) {
 		speed = 0.001 * cls.frametime * cl_anglespeedkey->value;
@@ -305,6 +310,17 @@ void CL_AdjustAngles( void ) {
 
 	cl.viewangles[PITCH] -= speed*cl_pitchspeed->value * CL_KeyState (&in_lookup);
 	cl.viewangles[PITCH] += speed*cl_pitchspeed->value * CL_KeyState (&in_lookdown);
+ */
+	cl.viewangles[YAW] -= vr.hmdorientation_delta[YAW];
+
+    //Make angles good
+    while (cl.viewangles[YAW] > 180.0f)
+        cl.viewangles[YAW] -= 360.0f;
+    while (cl.viewangles[YAW] < -180.0f)
+        cl.viewangles[YAW] += 360.0f;
+
+	cl.viewangles[PITCH] = vr.hmdorientation[PITCH];
+	cl.viewangles[ROLL] = vr.hmdorientation[ROLL];
 }
 
 /*
@@ -352,6 +368,17 @@ void CL_KeyMove( usercmd_t *cmd ) {
 	cmd->forwardmove = ClampChar( forward );
 	cmd->rightmove = ClampChar( side );
 	cmd->upmove = ClampChar( up );
+}
+
+void CL_SnapTurn( int dxYaw )
+{
+    cl.viewangles[YAW] -= dxYaw;
+
+    //Make angles good
+    while (cl.viewangles[YAW] > 180.0f)
+        cl.viewangles[YAW] -= 360.0f;
+    while (cl.viewangles[YAW] < -180.0f)
+        cl.viewangles[YAW] += 360.0f;
 }
 
 /*
@@ -554,6 +581,7 @@ void CL_CmdButtons( usercmd_t *cmd ) {
 CL_FinishMove
 ==============
 */
+void rotateAboutOrigin(float x, float y, float rotation, vec2_t out);
 void CL_FinishMove( usercmd_t *cmd ) {
 	int		i;
 
@@ -564,8 +592,26 @@ void CL_FinishMove( usercmd_t *cmd ) {
 	// can be determined without allowing cheating
 	cmd->serverTime = cl.serverTime;
 
-	for (i=0 ; i<3 ; i++) {
-		cmd->angles[i] = ANGLE2SHORT(cl.viewangles[i]);
+	//If we are running with a remote non-vr server, then the best we can do is pass the angles from the weapon
+	//and adjust the move values accordingly, to "fake" a 3DoF weapon but keeping the movement correct
+	if ( !com_sv_running || !com_sv_running->integer )
+	{
+		vec3_t angles;
+		VectorCopy(vr.weaponangles, angles);
+		angles[YAW] += cl.viewangles[YAW];
+		for (i = 0; i < 3; i++) {
+			cmd->angles[i] = ANGLE2SHORT(angles[i]);
+		}
+
+		vec3_t out;
+		rotateAboutOrigin(cmd->rightmove, cmd->forwardmove, cl.viewangles[YAW], out);
+		cmd->rightmove = out[0];
+		cmd->forwardmove = out[1];
+	}
+	else {
+		for (i = 0; i < 3; i++) {
+			cmd->angles[i] = ANGLE2SHORT(cl.viewangles[i]);
+		}
 	}
 }
 
@@ -602,9 +648,9 @@ usercmd_t CL_CreateCmd( void ) {
 		cl.viewangles[PITCH] = oldAngles[PITCH] + 90;
 	} else if ( oldAngles[PITCH] - cl.viewangles[PITCH] > 90 ) {
 		cl.viewangles[PITCH] = oldAngles[PITCH] - 90;
-	} 
+	}
 
-	// store out the final values
+    // store out the final values
 	CL_FinishMove( &cmd );
 
 	// draw debug graphs of turning for mouse testing
@@ -1000,6 +1046,8 @@ void CL_InitInput( void ) {
 
 	cl_nodelta = Cvar_Get ("cl_nodelta", "0", 0);
 	cl_debugMove = Cvar_Get ("cl_debugMove", "0", 0);
+
+	IN_VRInit();
 }
 
 /*

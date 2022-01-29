@@ -24,12 +24,14 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "client.h"
 
 #include "../botlib/botlib.h"
+#include "../vr/vr_clientinfo.h"
 
 #ifdef USE_MUMBLE
 #include "libmumblelink.h"
 #endif
 
 extern	botlib_export_t	*botlib_export;
+extern vr_clientinfo_t vr;
 
 extern qboolean loadCamera(const char *name);
 extern void startCamera(int time);
@@ -53,6 +55,16 @@ void CL_GetGlconfig( glconfig_t *glconfig ) {
 	*glconfig = cls.glconfig;
 }
 
+/*
+=====================
+CL_CGameRendering
+=====================
+*/
+void CL_CGameSetVRClientInfo() {
+	long val = (long)(&vr);
+	int *ptr = (int*)(&val);	 //HACK!!
+	VM_Call( cgvm, CG_SET_VR_CLIENT_INFO, ptr[0], ptr[1] );
+}
 
 /*
 ====================

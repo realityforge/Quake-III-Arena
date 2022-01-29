@@ -23,6 +23,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // cg_drawtools.c -- helper functions called by cg_draw, cg_scoreboard, cg_info, etc
 #include "cg_local.h"
 
+int hudflags = 0;
+stereoFrame_t hudStereoView = STEREO_CENTER;
+
 /*
 ================
 CG_AdjustFrom640
@@ -31,17 +34,33 @@ Adjusted for resolution and screen aspect ratio
 ================
 */
 void CG_AdjustFrom640( float *x, float *y, float *w, float *h ) {
-#if 0
-	// adjust for wide screens
-	if ( cgs.glconfig.vidWidth * 480 > cgs.glconfig.vidHeight * 640 ) {
-		*x += 0.5 * ( cgs.glconfig.vidWidth - ( cgs.glconfig.vidHeight * 640 / 480 ) );
+
+	if (hudflags & HUD_FLAGS_FULLSCREEN)
+	{
+		// scale for screen sizes
+		*x *= cgs.screenXScale;
+		*y *= cgs.screenYScale;
+		*w *= cgs.screenXScale;
+		*h *= cgs.screenYScale;
 	}
-#endif
-	// scale for screen sizes
-	*x *= cgs.screenXScale;
-	*y *= cgs.screenYScale;
-	*w *= cgs.screenXScale;
-	*h *= cgs.screenYScale;
+	else // scale to clearly visible portion of VR screen
+	{
+		float screenXScale = cgs.screenXScale / 2.75f;
+		float screenYScale = cgs.screenYScale / 2.75f;
+
+		int xoffset = -64;
+		if (hudStereoView == STEREO_LEFT) {
+			xoffset *= -1;
+		}
+
+		*x *= screenXScale;
+		*y *= screenYScale;
+		*w *= screenXScale;
+		*h *= screenYScale;
+
+		*x += (cg.refdef.width - (640 * screenXScale)) / 2.0f + xoffset;
+		*y += (cg.refdef.height - (480 * screenYScale)) / 2.0f;
+	}
 }
 
 /*

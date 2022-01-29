@@ -425,6 +425,8 @@ typedef enum {
 	// The game can issue trap_argc() / trap_argv() commands to get the command
 	// and parameters.  Return qfalse if the game doesn't recognize it as a command.
 
-	BOTAI_START_FRAME				// ( int time );
+	BOTAI_START_FRAME,				// ( int time );
+
+	GAME_SET_VR_CLIENT_INFO
 } gameExport_t;
 

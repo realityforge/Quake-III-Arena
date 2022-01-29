@@ -34,6 +34,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../renderercommon/tr_common.h"
 #include "../sys/sys_local.h"
 #include "sdl_icon.h"
+#include "../vr/vr_renderer.h"
 
 typedef enum
 {
@@ -429,8 +430,11 @@ static int GLimp_SetMode(int mode, qboolean fullscreen, qboolean noborder, qbool
 
 	ri.Printf (PRINT_ALL, "...setting mode %d:", mode );
 
+	VR_GetRsolution(0, &glConfig.vidWidth, &glConfig.vidHeight);
+	/*
 	if (mode == -2)
 	{
+		
 		// use desktop video resolution
 		if( desktopMode.h > 0 )
 		{
@@ -444,6 +448,7 @@ static int GLimp_SetMode(int mode, qboolean fullscreen, qboolean noborder, qbool
 			ri.Printf( PRINT_ALL,
 					"Cannot determine display resolution, assuming 640x480\n" );
 		}
+		
 
 		glConfig.windowAspect = (float)glConfig.vidWidth / (float)glConfig.vidHeight;
 	}
@@ -452,6 +457,7 @@ static int GLimp_SetMode(int mode, qboolean fullscreen, qboolean noborder, qbool
 		ri.Printf( PRINT_ALL, " invalid mode\n" );
 		return RSERR_INVALID_MODE;
 	}
+	*/
 	ri.Printf( PRINT_ALL, " %d %d\n", glConfig.vidWidth, glConfig.vidHeight);
 
 	// Center window

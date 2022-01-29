@@ -13,6 +13,7 @@ extern "C" {
 	#include <qcommon/qcommon.h>
 	#include <vr/vr_base.h>
 	#include <vr/vr_renderer.h>
+	#include <unistd.h>
 
 	#include <SDL.h>
 
@@ -60,68 +61,56 @@ static ovrJava engine_get_ovrJava() {
 }
 
 int main(int argc, char* argv[]) {
+	ovrJava java = engine_get_ovrJava();
+	engine_t* engine = nullptr;
+	engine = VR_Init(java);
+
+	//First set up resolution cached values
+	int width, height;
+	VR_GetRsolution( engine,  &width, &height );
+	
 	CON_LogcatFn(&ioq3_logfn);
 
 	std::string defaultArgs("+set fs_basepath ");
 	defaultArgs += SDL_AndroidGetExternalStoragePath();
-	defaultArgs += " +set fs_game baseq3 +map q3dm6";
+	defaultArgs += " +set fs_game baseq3";
 
 	char* args = new char[defaultArgs.length() + 1];
 	args[defaultArgs.length()] = '\0';
 	memcpy(args, defaultArgs.c_str(), defaultArgs.length());
 	Com_Init(args);
 
-	ovrJava java = engine_get_ovrJava();
+	VR_InitRenderer(engine);
 
-	constexpr auto vrEnabled = true;
-	engine_t* engine = nullptr;
+	VR_EnterVR(engine, java);
 
-	if (vrEnabled)
-	{
-		engine = VR_Init(java);
-		VR_InitRenderer(engine);
-
-		VR_EnterVR(engine, java);
-	}
+	//sleep(20);
 
 	while (1) {
 		SDL_Event event;
 		while (SDL_PollEvent(&event)) {
 			LOGI("Received SDL Event: %d", event.type);
-			if (vrEnabled)
+			switch (event.type)
 			{
-				switch (event.type)
-				{
-					case SDL_WINDOWEVENT_FOCUS_GAINED:
-						VR_EnterVR(engine, engine_get_ovrJava());
-						break;
+				case SDL_WINDOWEVENT_FOCUS_GAINED:
+					VR_EnterVR(engine, engine_get_ovrJava());
+					break;
 
-					case SDL_WINDOWEVENT_FOCUS_LOST:
-						VR_LeaveVR(engine);
-						break;
-				}
+				case SDL_WINDOWEVENT_FOCUS_LOST:
+					VR_LeaveVR(engine);
+					break;
 			}
 		}
-		if (vrEnabled)
-		{
-			VR_DrawFrame(engine);
-		}
-		else
-		{
-			Com_Frame();
-		}
-	}
-	if (vrEnabled)
-	{
-		VR_LeaveVR(engine);
-		VR_DestroyRenderer(engine);
+
+		VR_DrawFrame(engine);
 	}
 
+	VR_LeaveVR(engine);
+	VR_DestroyRenderer(engine);
+
 	Com_Shutdown();
-	if (vrEnabled)
-	{
-		VR_Destroy(engine);
-	}
+	VR_Destroy(engine);
+
 	delete [] args;
 	return 0;
 }

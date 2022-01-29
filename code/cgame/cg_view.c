@@ -333,8 +333,8 @@ static void CG_OffsetFirstPersonView( void ) {
 
 	// if dead, fix the angle and don't add any kick
 	if ( cg.snap->ps.stats[STAT_HEALTH] <= 0 ) {
-		angles[ROLL] = 40;
-		angles[PITCH] = -15;
+		//angles[ROLL] = 40;
+		//angles[PITCH] = -15;
 		angles[YAW] = cg.snap->ps.stats[STAT_DEAD_YAW];
 		origin[2] += cg.predictedPlayerState.viewheight;
 		return;

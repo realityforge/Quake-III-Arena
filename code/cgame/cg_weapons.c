@@ -22,6 +22,232 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
 // cg_weapons.c -- events and effects dealing with weapons
 #include "cg_local.h"
+#include "../vr/vr_clientinfo.h"
+
+extern vr_clientinfo_t *cgVR;
+
+
+#define M_PI2		(float)6.28318530717958647692
+
+/*
+=================
+SinCos
+=================
+*/
+void SinCos( float radians, float *sine, float *cosine )
+{
+#if _MSC_VER == 1200
+    _asm
+	{
+		fld	dword ptr [radians]
+		fsincos
+
+		mov edx, dword ptr [cosine]
+		mov eax, dword ptr [sine]
+
+		fstp dword ptr [edx]
+		fstp dword ptr [eax]
+	}
+#else
+    // I think, better use math.h function, instead of ^
+#if defined (__linux__) && !defined (__ANDROID__)
+    sincosf(radians, sine, cosine);
+#else
+    *sine = sinf(radians);
+    *cosine = cosf(radians);
+#endif
+#endif
+}
+
+void Matrix4x4_Concat (matrix4x4 out, const matrix4x4 in1, const matrix4x4 in2)
+{
+    out[0][0] = in1[0][0] * in2[0][0] + in1[0][1] * in2[1][0] + in1[0][2] * in2[2][0] + in1[0][3] * in2[3][0];
+    out[0][1] = in1[0][0] * in2[0][1] + in1[0][1] * in2[1][1] + in1[0][2] * in2[2][1] + in1[0][3] * in2[3][1];
+    out[0][2] = in1[0][0] * in2[0][2] + in1[0][1] * in2[1][2] + in1[0][2] * in2[2][2] + in1[0][3] * in2[3][2];
+    out[0][3] = in1[0][0] * in2[0][3] + in1[0][1] * in2[1][3] + in1[0][2] * in2[2][3] + in1[0][3] * in2[3][3];
+    out[1][0] = in1[1][0] * in2[0][0] + in1[1][1] * in2[1][0] + in1[1][2] * in2[2][0] + in1[1][3] * in2[3][0];
+    out[1][1] = in1[1][0] * in2[0][1] + in1[1][1] * in2[1][1] + in1[1][2] * in2[2][1] + in1[1][3] * in2[3][1];
+    out[1][2] = in1[1][0] * in2[0][2] + in1[1][1] * in2[1][2] + in1[1][2] * in2[2][2] + in1[1][3] * in2[3][2];
+    out[1][3] = in1[1][0] * in2[0][3] + in1[1][1] * in2[1][3] + in1[1][2] * in2[2][3] + in1[1][3] * in2[3][3];
+    out[2][0] = in1[2][0] * in2[0][0] + in1[2][1] * in2[1][0] + in1[2][2] * in2[2][0] + in1[2][3] * in2[3][0];
+    out[2][1] = in1[2][0] * in2[0][1] + in1[2][1] * in2[1][1] + in1[2][2] * in2[2][1] + in1[2][3] * in2[3][1];
+    out[2][2] = in1[2][0] * in2[0][2] + in1[2][1] * in2[1][2] + in1[2][2] * in2[2][2] + in1[2][3] * in2[3][2];
+    out[2][3] = in1[2][0] * in2[0][3] + in1[2][1] * in2[1][3] + in1[2][2] * in2[2][3] + in1[2][3] * in2[3][3];
+    out[3][0] = in1[3][0] * in2[0][0] + in1[3][1] * in2[1][0] + in1[3][2] * in2[2][0] + in1[3][3] * in2[3][0];
+    out[3][1] = in1[3][0] * in2[0][1] + in1[3][1] * in2[1][1] + in1[3][2] * in2[2][1] + in1[3][3] * in2[3][1];
+    out[3][2] = in1[3][0] * in2[0][2] + in1[3][1] * in2[1][2] + in1[3][2] * in2[2][2] + in1[3][3] * in2[3][2];
+    out[3][3] = in1[3][0] * in2[0][3] + in1[3][1] * in2[1][3] + in1[3][2] * in2[2][3] + in1[3][3] * in2[3][3];
+}
+
+void Matrix4x4_CreateFromEntity( matrix4x4 out, const vec3_t angles, const vec3_t origin, float scale )
+{
+    float	angle, sr, sp, sy, cr, cp, cy;
+
+    if( angles[ROLL] )
+    {
+#ifdef XASH_VECTORIZE_SINCOS
+        SinCosFastVector3( DEG2RAD(angles[YAW]), DEG2RAD(angles[PITCH]), DEG2RAD(angles[ROLL]),
+			&sy, &sp, &sr,
+			&cy, &cp, &cr);
+#else
+        angle = angles[YAW] * (M_PI2 / 360.0f);
+        SinCos( angle, &sy, &cy );
+        angle = angles[PITCH] * (M_PI2 / 360.0f);
+        SinCos( angle, &sp, &cp );
+        angle = angles[ROLL] * (M_PI2 / 360.0f);
+        SinCos( angle, &sr, &cr );
+#endif
+
+        out[0][0] = (cp*cy) * scale;
+        out[0][1] = (sr*sp*cy+cr*-sy) * scale;
+        out[0][2] = (cr*sp*cy+-sr*-sy) * scale;
+        out[0][3] = origin[0];
+        out[1][0] = (cp*sy) * scale;
+        out[1][1] = (sr*sp*sy+cr*cy) * scale;
+        out[1][2] = (cr*sp*sy+-sr*cy) * scale;
+        out[1][3] = origin[1];
+        out[2][0] = (-sp) * scale;
+        out[2][1] = (sr*cp) * scale;
+        out[2][2] = (cr*cp) * scale;
+        out[2][3] = origin[2];
+        out[3][0] = 0.0f;
+        out[3][1] = 0.0f;
+        out[3][2] = 0.0f;
+        out[3][3] = 1.0f;
+    }
+    else if( angles[PITCH] )
+    {
+#ifdef XASH_VECTORIZE_SINCOS
+        SinCosFastVector2( DEG2RAD(angles[YAW]), DEG2RAD(angles[PITCH]),
+						  &sy, &sp,
+						  &cy, &cp);
+#else
+        angle = angles[YAW] * (M_PI2 / 360.0f);
+        SinCos( angle, &sy, &cy );
+        angle = angles[PITCH] * (M_PI2 / 360.0f);
+        SinCos( angle, &sp, &cp );
+#endif
+
+        out[0][0] = (cp*cy) * scale;
+        out[0][1] = (-sy) * scale;
+        out[0][2] = (sp*cy) * scale;
+        out[0][3] = origin[0];
+        out[1][0] = (cp*sy) * scale;
+        out[1][1] = (cy) * scale;
+        out[1][2] = (sp*sy) * scale;
+        out[1][3] = origin[1];
+        out[2][0] = (-sp) * scale;
+        out[2][1] = 0.0f;
+        out[2][2] = (cp) * scale;
+        out[2][3] = origin[2];
+        out[3][0] = 0.0f;
+        out[3][1] = 0.0f;
+        out[3][2] = 0.0f;
+        out[3][3] = 1.0f;
+    }
+    else if( angles[YAW] )
+    {
+        angle = angles[YAW] * (M_PI2 / 360.0f);
+        SinCos( angle, &sy, &cy );
+
+        out[0][0] = (cy) * scale;
+        out[0][1] = (-sy) * scale;
+        out[0][2] = 0.0f;
+        out[0][3] = origin[0];
+        out[1][0] = (sy) * scale;
+        out[1][1] = (cy) * scale;
+        out[1][2] = 0.0f;
+        out[1][3] = origin[1];
+        out[2][0] = 0.0f;
+        out[2][1] = 0.0f;
+        out[2][2] = scale;
+        out[2][3] = origin[2];
+        out[3][0] = 0.0f;
+        out[3][1] = 0.0f;
+        out[3][2] = 0.0f;
+        out[3][3] = 1.0f;
+    }
+    else
+    {
+        out[0][0] = scale;
+        out[0][1] = 0.0f;
+        out[0][2] = 0.0f;
+        out[0][3] = origin[0];
+        out[1][0] = 0.0f;
+        out[1][1] = scale;
+        out[1][2] = 0.0f;
+        out[1][3] = origin[1];
+        out[2][0] = 0.0f;
+        out[2][1] = 0.0f;
+        out[2][2] = scale;
+        out[2][3] = origin[2];
+        out[3][0] = 0.0f;
+        out[3][1] = 0.0f;
+        out[3][2] = 0.0f;
+        out[3][3] = 1.0f;
+    }
+}
+
+void Matrix4x4_ConvertToEntity( vec4_t *in, vec3_t angles, vec3_t origin )
+{
+    float xyDist = sqrt( in[0][0] * in[0][0] + in[1][0] * in[1][0] );
+
+    // enough here to get angles?
+    if( xyDist > 0.001f )
+    {
+        angles[0] = RAD2DEG( atan2( -in[2][0], xyDist ));
+        angles[1] = RAD2DEG( atan2( in[1][0], in[0][0] ));
+        angles[2] = RAD2DEG( atan2( in[2][1], in[2][2] ));
+    }
+    else	// forward is mostly Z, gimbal lock
+    {
+        angles[0] = RAD2DEG( atan2( -in[2][0], xyDist ));
+        angles[1] = RAD2DEG( atan2( -in[0][1], in[1][1] ));
+        angles[2] = 0.0f;
+    }
+
+    origin[0] = in[0][3];
+    origin[1] = in[1][3];
+    origin[2] = in[2][3];
+}
+
+void rotateAboutOrigin(float x, float y, float rotation, vec2_t out)
+{
+	out[0] = cosf(DEG2RAD(-rotation)) * x  +  sinf(DEG2RAD(-rotation)) * y;
+	out[1] = cosf(DEG2RAD(-rotation)) * y  -  sinf(DEG2RAD(-rotation)) * x;
+}
+
+void convertFromVR(vec3_t in, vec3_t offset, vec3_t out)
+{
+	vec3_t vrSpace;
+	VectorSet(vrSpace, in[2], in[0], in[1] );
+
+	vec2_t r;
+	rotateAboutOrigin(vrSpace[0], vrSpace[1], cg.refdefViewAngles[YAW] - cgVR->hmdorientation[YAW], r);
+	vrSpace[0] = -r[0];
+	vrSpace[1] = -r[1];
+
+	vec3_t temp;
+	VectorScale(vrSpace, WORLD_SCALE, temp);
+
+	if (offset) {
+		VectorAdd(temp, offset, out);
+	} else {
+		VectorCopy(temp, out);
+	}
+}
+
+void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles )
+{
+	convertFromVR(cgVR->calculated_weaponoffset, cg.refdef.vieworg, origin);
+
+    origin[2] -= PLAYER_HEIGHT;
+    origin[2] += cgVR->hmdposition[1] * WORLD_SCALE;
+
+	VectorCopy(cgVR->weaponangles, angles);
+
+	angles[YAW] += (cg.refdefViewAngles[YAW] - cgVR->hmdorientation[YAW]);
+}
 
 /*
 ==========================
@@ -206,6 +432,49 @@ static void CG_NailgunEjectBrass( centity_t *cent ) {
 }
 #endif
 
+
+/*
+==========================
+CG_RailTrail2
+==========================
+*/
+void CG_RailTrail2( clientInfo_t *ci, vec3_t start, vec3_t end ) {
+    localEntity_t   *le;
+    refEntity_t     *re;
+
+    le = CG_AllocLocalEntity();
+    re = &le->refEntity;
+
+    le->leType = LE_FADE_RGB;
+    le->startTime = cg.time;
+    le->endTime = cg.time + 25;
+    le->lifeRate = 1.0 / ( le->endTime - le->startTime );
+
+    re->shaderTime = cg.time / 1000.0f;
+    re->reType = RT_RAIL_CORE;
+    re->customShader = cgs.media.railCoreShader;
+
+    VectorCopy( start, re->origin );
+    VectorCopy( end, re->oldorigin );
+
+//	// still allow different colors so we can tell AI shots from player shots, etc.
+    le->color[3] = 1.0f;
+    if ( ci ) {
+        if (ci->health == 1)
+        {
+            le->color[3] = (ci->handicap / 255.0f);
+        }
+        le->color[0] = ci->color1[0] * 0.75;
+        le->color[1] = ci->color1[1] * 0.75;
+        le->color[2] = ci->color1[2] * 0.75;
+    } else {
+        le->color[0] = 1;
+        le->color[1] = 0;
+        le->color[2] = 0;
+    }
+
+    AxisClear( re->axis );
+}
 
 /*
 ==========================
@@ -1398,11 +1667,12 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 	}
 
 	// drop gun lower at higher fov
-	if ( cg_fov.integer > 90 ) {
+/*	if ( cg_fov.integer > 90 ) {
 		fovOffset = -0.2 * ( cg_fov.integer - 90 );
 	} else {
 		fovOffset = 0;
 	}
+*/
 
 	cent = &cg.predictedPlayerEntity;	// &cg_entities[cg.snap->ps.clientNum];
 	CG_RegisterWeapon( ps->weapon );
@@ -1411,11 +1681,61 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 	memset (&hand, 0, sizeof(hand));
 
 	// set up gun position
-	CG_CalculateWeaponPosition( hand.origin, angles );
+	CG_CalculateVRWeaponPosition( hand.origin, angles );
 
+	//Scale / Move gun etc
+	float scale = 1.0f;
+	{
+		char cvar_name[64];
+		Com_sprintf(cvar_name, sizeof(cvar_name), "vr_weapon_adjustment_%i", ps->weapon);
+
+		char weapon_adjustment[256];
+		trap_Cvar_VariableStringBuffer(cvar_name, weapon_adjustment, 256);
+
+		if (strlen(weapon_adjustment) > 0) {
+			vec3_t offset;
+			vec3_t adjust;
+			vec3_t temp_offset;
+			VectorClear(temp_offset);
+			VectorClear(adjust);
+
+			sscanf(weapon_adjustment, "%f,%f,%f,%f,%f,%f,%f", &scale,
+				   &(temp_offset[0]), &(temp_offset[1]), &(temp_offset[2]),
+				   &(adjust[PITCH]), &(adjust[YAW]), &(adjust[ROLL]));
+			VectorScale(temp_offset, scale, offset);
+
+			if (!cgVR->right_handed)
+			{
+				//yaw needs to go in the other direction as left handed model is reversed
+				adjust[YAW] *= -1.0f;
+			}
+
+			//Adjust angles for weapon models that aren't aligned very well
+			matrix4x4 m1, m2, m3;
+			vec3_t zero;
+			VectorClear(zero);
+			Matrix4x4_CreateFromEntity(m1, angles, zero, 1.0);
+			Matrix4x4_CreateFromEntity(m2, adjust, zero, 1.0);
+			Matrix4x4_Concat(m3, m1, m2);
+			Matrix4x4_ConvertToEntity(m3, angles, zero);
+
+			//Now move weapon closer to proper origin
+			vec3_t forward, right, up;
+			AngleVectors( angles, forward, right, up );
+			VectorMA( hand.origin, offset[2], forward, hand.origin );
+			VectorMA( hand.origin, offset[1], up, hand.origin );
+			if (cgVR->right_handed) {
+				VectorMA(hand.origin, offset[0], right, hand.origin);
+			} else {
+				VectorMA(hand.origin, -offset[0], right, hand.origin);
+			}
+		}
+	}
+
+    //Move gun a bit
 	VectorMA( hand.origin, cg_gun_x.value, cg.refdef.viewaxis[0], hand.origin );
 	VectorMA( hand.origin, cg_gun_y.value, cg.refdef.viewaxis[1], hand.origin );
-	VectorMA( hand.origin, (cg_gun_z.value+fovOffset), cg.refdef.viewaxis[2], hand.origin );
+	VectorMA( hand.origin, cg_gun_z.value, cg.refdef.viewaxis[2], hand.origin );
 
 	AnglesToAxis( angles, hand.axis );
 
@@ -1435,8 +1755,39 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 	hand.hModel = weapon->handsModel;
 	hand.renderfx = RF_DEPTHHACK | RF_FIRST_PERSON | RF_MINLIGHT;
 
+	//scale the whole model
+	for ( int i = 0; i < 3; i++ ) {
+		VectorScale( hand.axis[i], cgVR->right_handed || i != 1 ? scale : -scale, hand.axis[i] );
+	}
+
+
 	// add everything onto the hand
 	CG_AddPlayerWeapon( &hand, ps, &cg.predictedPlayerEntity, ps->persistant[PERS_TEAM] );
+
+	//Weapon offset debugging
+	if (qfalse)
+	{
+		vec3_t _origin;
+		vec3_t endForward, endRight, endUp;
+		vec3_t _angles;
+		clientInfo_t ci;
+		CG_CalculateVRWeaponPosition( _origin, _angles );
+
+		vec3_t forward, right, up;
+		AngleVectors(_angles, forward, right, up);
+
+		VectorMA(_origin, 60, forward, endForward);
+		VectorSet(ci.color1, 1, 0, 0); // Forward is red
+		CG_RailTrail2(&ci, _origin, endForward);
+
+		VectorMA(_origin, 30, right, endRight);
+		VectorSet(ci.color1, 0, 1, 0); // right is green
+		CG_RailTrail2(&ci, _origin, endRight);
+
+		VectorMA(_origin, 30, up, endUp);
+		VectorSet(ci.color1, 0, 0, 1); // up is blue
+		CG_RailTrail2(&ci, _origin, endUp);
+	}
 }
 
 /*

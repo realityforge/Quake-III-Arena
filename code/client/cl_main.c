@@ -3544,7 +3544,7 @@ void CL_Init( void ) {
 	cl_packetdup = Cvar_Get ("cl_packetdup", "1", CVAR_ARCHIVE );
 
 	cl_run = Cvar_Get ("cl_run", "1", CVAR_ARCHIVE);
-	cl_sensitivity = Cvar_Get ("sensitivity", "5", CVAR_ARCHIVE);
+	cl_sensitivity = Cvar_Get ("sensitivity", "8", CVAR_ARCHIVE);
 	cl_mouseAccel = Cvar_Get ("cl_mouseAccel", "0", CVAR_ARCHIVE);
 	cl_freelook = Cvar_Get( "cl_freelook", "1", CVAR_ARCHIVE );
 
@@ -3590,8 +3590,8 @@ void CL_Init( void ) {
 
 	j_pitch =        Cvar_Get ("j_pitch",        "0.022", CVAR_ARCHIVE);
 	j_yaw =          Cvar_Get ("j_yaw",          "-0.022", CVAR_ARCHIVE);
-	j_forward =      Cvar_Get ("j_forward",      "-0.25", CVAR_ARCHIVE);
-	j_side =         Cvar_Get ("j_side",         "0.25", CVAR_ARCHIVE);
+	j_forward =      Cvar_Get ("j_forward",      "1.0", CVAR_ARCHIVE);
+	j_side =         Cvar_Get ("j_side",         "1.0", CVAR_ARCHIVE);
 	j_up =           Cvar_Get ("j_up",           "0", CVAR_ARCHIVE);
 
 	j_pitch_axis =   Cvar_Get ("j_pitch_axis",   "3", CVAR_ARCHIVE);
@@ -3618,7 +3618,7 @@ void CL_Init( void ) {
 	cl_consoleKeys = Cvar_Get( "cl_consoleKeys", "~ ` 0x7e 0x60", CVAR_ARCHIVE);
 
 	// userinfo
-	Cvar_Get ("name", "UnnamedPlayer", CVAR_USERINFO | CVAR_ARCHIVE );
+	Cvar_Get ("name", "VR_Player", CVAR_USERINFO | CVAR_ARCHIVE );
 	cl_rate = Cvar_Get ("rate", "25000", CVAR_USERINFO | CVAR_ARCHIVE );
 	Cvar_Get ("snaps", "20", CVAR_USERINFO | CVAR_ARCHIVE );
 	Cvar_Get ("model", "sarge", CVAR_USERINFO | CVAR_ARCHIVE );

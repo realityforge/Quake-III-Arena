@@ -23,11 +23,15 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // cg_main.c -- initialization and primary entry point for cgame
 #include "cg_local.h"
 
+#include "../vr/vr_clientinfo.h"
+
 #ifdef MISSIONPACK
 #include "../ui/ui_shared.h"
 // display context for new ui stuff
 displayContextDef_t cgDC;
 #endif
+
+vr_clientinfo_t *cgVR;
 
 int forceModelModificationCount = -1;
 
@@ -74,6 +78,11 @@ Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, i
 	case CG_EVENT_HANDLING:
 		CG_EventHandling(arg0);
 		return 0;
+	case CG_SET_VR_CLIENT_INFO: {
+		int ptr[2] = {arg0, arg1};
+		cgVR = (vr_clientinfo_t *) (*(long*)(ptr));
+		return 0;
+	}
 	default:
 		CG_Error( "vmMain: unknown command %i", command );
 		break;

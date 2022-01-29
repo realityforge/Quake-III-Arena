@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
 
 #include "g_local.h"
+#include "../vr/vr_clientinfo.h"
 
 level_locals_t	level;
 
@@ -37,6 +38,8 @@ typedef struct {
 
 gentity_t		g_entities[MAX_GENTITIES];
 gclient_t		g_clients[MAX_CLIENTS];
+
+vr_clientinfo_t* gVR;
 
 vmCvar_t	g_gametype;
 vmCvar_t	g_dmflags;
@@ -231,6 +234,11 @@ Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, i
 		return ConsoleCommand();
 	case BOTAI_START_FRAME:
 		return BotAIStartFrame( arg0 );
+	case GAME_SET_VR_CLIENT_INFO: {
+        int ptr[2] = {arg0, arg1};
+        gVR = (vr_clientinfo_t *) (*(long*)(ptr));
+        return 0;
+    }
 	}
 
 	return -1;

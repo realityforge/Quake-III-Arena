@@ -573,7 +573,7 @@ void RE_EndFrame( int *frontEndMsec, int *backEndMsec ) {
 	backEnd.pc.msec = 0;
 }
 
-#if __ANDROID__
+//#if __ANDROID__
 void R_Mat4Transpose( const float in[4][4], float* out ) {
 	int i, j;
 	for (i = 0; i < 4; ++i) {
@@ -583,20 +583,25 @@ void R_Mat4Transpose( const float in[4][4], float* out ) {
 	}
 }
 
+
 void RE_SetVRHeadsetParms( const ovrTracking2* tracking, int renderBufferL, int renderBufferR ) {
 	if (tracking) {
 		R_Mat4Transpose(tracking->Eye[0].ProjectionMatrix.M, tr.vrParms.projectionL);
 		R_Mat4Transpose(tracking->Eye[1].ProjectionMatrix.M, tr.vrParms.projectionR);
+
+		/*
 		R_Mat4Transpose(tracking->Eye[0].ViewMatrix.M, tr.vrParms.viewL);
 		R_Mat4Transpose(tracking->Eye[1].ViewMatrix.M, tr.vrParms.viewR);
 
-		const float worldToMeter = 25.0f; // https://quakewiki.org/wiki/unit, assume 25 units is 1 meter.
+		const float worldToMeter = 37.0f; // https://quakewiki.org/wiki/unit, assume 25 units is 1 meter.
 		tr.vrParms.viewL[12] *= worldToMeter;
 		tr.vrParms.viewL[13] *= worldToMeter;
 		tr.vrParms.viewL[14] *= worldToMeter;
 		tr.vrParms.viewR[12] *= worldToMeter;
 		tr.vrParms.viewR[13] *= worldToMeter;
 		tr.vrParms.viewR[14] *= worldToMeter;
+
+		*/
 
 		tr.vrParms.renderBufferL = renderBufferL;
 		tr.vrParms.renderBufferR = renderBufferR;
@@ -606,7 +611,7 @@ void RE_SetVRHeadsetParms( const ovrTracking2* tracking, int renderBufferL, int 
 		tr.vrParms.valid = qfalse;
 	}
 }
-#endif
+//#endif
 
 /*
 =============

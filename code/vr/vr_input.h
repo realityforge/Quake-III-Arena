@@ -4,6 +4,7 @@
 #if __ANDROID__
 
 void IN_VRInputFrame( void );
+ void IN_VRInit( void );
 
 #endif
 

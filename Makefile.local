@@ -2,10 +2,10 @@ PLATFORM=android
 ANDROID_SDK_VERSION=android26
 ANDROID_NDK_VERSION=21.1.6352462
 ## Uncomment for Windows host platform
-# ANDROID_NDK=C:/Users/<user>/AppData/Local/Android/Sdk/ndk/$(ANDROID_NDK_VERSION)
-# ANDROID_CC=$(ANDROID_NDK)/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe
-# ANDROID_CFLAGS=--target=aarch64-linux-$(ANDROID_SDK_VERSION)
-# ANDROID_RANLIB=$(ANDROID_NDK)/toolchains/llvm/prebuilt/windows-x86_64/bin/aarch64-linux-android-ranlib.exe
+ANDROID_NDK=C:/Users/simon/AppData/Local/Android/Sdk/ndk/$(ANDROID_NDK_VERSION)
+ANDROID_CC=$(ANDROID_NDK)/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe
+ANDROID_CFLAGS=--target=aarch64-linux-$(ANDROID_SDK_VERSION)
+ANDROID_RANLIB=$(ANDROID_NDK)/toolchains/llvm/prebuilt/windows-x86_64/bin/aarch64-linux-android-ranlib.exe
 ## Uncomment for Linux host platform
 # ANDROID_NDK=~/Android/Sdk/ndk/$(ANDROID_NDK_VERSION)
 # ANDROID_CC=$(ANDROID_NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-$(ANDROID_SDK_VERSION)-clang

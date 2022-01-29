@@ -24,6 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // active (after loading) gameplay
 
 #include "cg_local.h"
+#include "../vr/vr_clientinfo.h"
 
 #ifdef MISSIONPACK
 #include "../ui/ui_shared.h"
@@ -37,6 +38,9 @@ int drawTeamOverlayModificationCount = -1;
 
 int sortedTeamPlayers[TEAM_MAXOVERLAY];
 int	numSortedTeamPlayers;
+
+extern vr_clientinfo_t* cgVR;
+extern stereoFrame_t hudStereoView;
 
 char systemChat[256];
 char teamChat1[256];
@@ -278,6 +282,7 @@ void CG_Draw3DModel( float x, float y, float w, float h, qhandle_t model, qhandl
 
 	memset( &ent, 0, sizeof( ent ) );
 	AnglesToAxis( angles, ent.axis );
+
 	VectorCopy( origin, ent.origin );
 	ent.hModel = model;
 	ent.customSkin = skin;
@@ -1923,6 +1928,7 @@ static void CG_DrawCrosshair(void)
 CG_DrawCrosshair3D
 =================
 */
+void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles );
 static void CG_DrawCrosshair3D(void)
 {
 	float		w;
@@ -1976,10 +1982,19 @@ static void CG_DrawCrosshair3D(void)
 	xmax = zProj * tan(cg.refdef.fov_x * M_PI / 360.0f);
 	
 	// let the trace run through until a change in stereo separation of the crosshair becomes less than one pixel.
+	vec3_t viewaxis[3];
+	vec3_t weaponangles;
+	vec3_t origin;
+    CG_CalculateVRWeaponPosition(origin, weaponangles);
+	AnglesToAxis(weaponangles, viewaxis);
 	maxdist = cgs.glconfig.vidWidth * stereoSep * zProj / (2 * xmax);
+	VectorMA(origin, maxdist, viewaxis[0], endpos);
+	CG_Trace(&trace, origin, NULL, NULL, endpos, 0, MASK_SHOT);
+
+/*    maxdist = cgs.glconfig.vidWidth * stereoSep * zProj / (2 * xmax);
 	VectorMA(cg.refdef.vieworg, maxdist, cg.refdef.viewaxis[0], endpos);
 	CG_Trace(&trace, cg.refdef.vieworg, NULL, NULL, endpos, 0, MASK_SHOT);
-	
+*/
 	memset(&ent, 0, sizeof(ent));
 	ent.reType = RT_SPRITE;
 	ent.renderfx = RF_DEPTHHACK | RF_CROSSHAIR;
@@ -2647,11 +2662,28 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 	if(stereoView != STEREO_CENTER)
 		CG_DrawCrosshair3D();
 
+	// offset vieworg appropriately if we're doing stereo separation
+	vec3_t baseOrg;
+	VectorCopy( cg.refdef.vieworg, baseOrg );
+
+	float ipd = 0.065f;
+	float separation = stereoView == STEREO_LEFT ?
+				 WORLD_SCALE * (-ipd / 2) : //left
+					   WORLD_SCALE * (ipd / 2); // right
+
+	cg.refdef.vieworg[2] -= PLAYER_HEIGHT;
+	cg.refdef.vieworg[2] += cgVR->hmdposition[1] * WORLD_SCALE;
+
+	VectorMA( cg.refdef.vieworg, -separation, cg.refdef.viewaxis[1], cg.refdef.vieworg );
+
 	// draw 3D view
 	trap_R_RenderScene( &cg.refdef );
 
+	VectorCopy( baseOrg, cg.refdef.vieworg );
+
 	// draw status bar and other floating elements
- 	CG_Draw2D(stereoView);
+	hudStereoView = stereoView;
+ 	CG_Draw2D(hudStereoView);
 }
 
 

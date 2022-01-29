@@ -25,11 +25,42 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "g_local.h"
 
+#include "../vr/vr_clientinfo.h"
+
 static	float	s_quadFactor;
 static	vec3_t	forward, right, up;
 static	vec3_t	muzzle;
 
+extern vr_clientinfo_t* gVR;
+
 #define NUM_NAILSHOTS 15
+
+
+void rotateAboutOrigin(float x, float y, float rotation, vec2_t out)
+{
+	out[0] = cosf(DEG2RAD(-rotation)) * x  +  sinf(DEG2RAD(-rotation)) * y;
+	out[1] = cosf(DEG2RAD(-rotation)) * y  -  sinf(DEG2RAD(-rotation)) * x;
+}
+
+void convertFromVR(gentity_t *ent, vec3_t in, vec3_t offset, vec3_t out)
+{
+	vec3_t vrSpace;
+	VectorSet(vrSpace, in[2], in[0], in[1] );
+
+	vec2_t r;
+	rotateAboutOrigin(vrSpace[0], vrSpace[1], ent->client->ps.viewangles[YAW] - gVR->hmdorientation[YAW], r);
+	vrSpace[0] = -r[0];
+	vrSpace[1] = -r[1];
+
+	vec3_t temp;
+	VectorScale(vrSpace, WORLD_SCALE, temp);
+
+	if (offset) {
+		VectorAdd(temp, offset, out);
+	} else {
+		VectorCopy(temp, out);
+	}
+}
 
 /*
 ================
@@ -770,9 +801,19 @@ set muzzle location relative to pivoting eye
 ===============
 */
 void CalcMuzzlePoint ( gentity_t *ent, vec3_t forward, vec3_t right, vec3_t up, vec3_t muzzlePoint ) {
-	VectorCopy( ent->s.pos.trBase, muzzlePoint );
-	muzzlePoint[2] += ent->client->ps.viewheight;
-	VectorMA( muzzlePoint, 14, forward, muzzlePoint );
+	if ( ( ent->r.svFlags & SVF_BOT ) )
+	{
+		VectorCopy( ent->s.pos.trBase, muzzlePoint );
+		muzzlePoint[2] += ent->client->ps.viewheight;
+		VectorMA( muzzlePoint, 14, forward, muzzlePoint );
+	}
+	else if (gVR != NULL)
+	{
+		convertFromVR(ent, gVR->calculated_weaponoffset, ent->r.currentOrigin, muzzlePoint);
+		muzzlePoint[2] -= ent->client->ps.viewheight;
+		muzzlePoint[2] += gVR->hmdposition[1] * WORLD_SCALE;
+	}
+
 	// snap to integer coordinates for more efficient network bandwidth usage
 	SnapVector( muzzlePoint );
 }
@@ -785,11 +826,7 @@ set muzzle location relative to pivoting eye
 ===============
 */
 void CalcMuzzlePointOrigin ( gentity_t *ent, vec3_t origin, vec3_t forward, vec3_t right, vec3_t up, vec3_t muzzlePoint ) {
-	VectorCopy( ent->s.pos.trBase, muzzlePoint );
-	muzzlePoint[2] += ent->client->ps.viewheight;
-	VectorMA( muzzlePoint, 14, forward, muzzlePoint );
-	// snap to integer coordinates for more efficient network bandwidth usage
-	SnapVector( muzzlePoint );
+	CalcMuzzlePoint(ent, forward, right, up, muzzlePoint);
 }
 
 
@@ -824,8 +861,19 @@ void FireWeapon( gentity_t *ent ) {
 #endif
 	}
 
+	vec3_t viewang;
+	if ( !( ent->r.svFlags & SVF_BOT ) && gVR != NULL)
+	{
+		VectorCopy(gVR->weaponangles, viewang);
+		viewang[YAW] += ent->client->ps.viewangles[YAW] - gVR->hmdorientation[YAW];
+	}
+	else
+	{
+		VectorCopy( ent->client->ps.viewangles, viewang );
+	}
+
 	// set aiming directions
-	AngleVectors (ent->client->ps.viewangles, forward, right, up);
+	AngleVectors (viewang, forward, right, up);
 
 	CalcMuzzlePointOrigin ( ent, ent->client->oldOrigin, forward, right, up, muzzle );
 
