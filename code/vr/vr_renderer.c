@@ -21,6 +21,8 @@
 #include <GLES3/gl32.h>
 #endif
 
+#define SUPER_SAMPLE  1.2f
+
 void APIENTRY VR_GLDebugLog(GLenum source, GLenum type, GLuint id,
 	GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
 {
@@ -38,8 +40,8 @@ void VR_GetRsolution(engine_t* engine, int *pWidth, int *pHeight)
 	
 	if (engine)
 	{
-		*pWidth = width = vrapi_GetSystemPropertyInt(&engine->java, VRAPI_SYS_PROP_SUGGESTED_EYE_TEXTURE_WIDTH);
-		*pHeight = height = vrapi_GetSystemPropertyInt(&engine->java, VRAPI_SYS_PROP_SUGGESTED_EYE_TEXTURE_HEIGHT);
+		*pWidth = width = vrapi_GetSystemPropertyInt(&engine->java, VRAPI_SYS_PROP_SUGGESTED_EYE_TEXTURE_WIDTH) * SUPER_SAMPLE;
+		*pHeight = height = vrapi_GetSystemPropertyInt(&engine->java, VRAPI_SYS_PROP_SUGGESTED_EYE_TEXTURE_HEIGHT) * SUPER_SAMPLE;
 	}
 	else
 	{
@@ -193,8 +195,6 @@ ovrLayerCylinder2 BuildCylinderLayer(engine_t* engine, const int textureWidth, c
 }
 
 void VR_DrawFrame( engine_t* engine ) {
-	double predictedDisplayTime;
-	ovrTracking2 tracking;
 
 	if (!engine->ovr)
 	{
@@ -202,8 +202,8 @@ void VR_DrawFrame( engine_t* engine ) {
 	}
 
 	++engine->frameIndex;
-	predictedDisplayTime = vrapi_GetPredictedDisplayTime(engine->ovr, engine->frameIndex);
-	tracking = vrapi_GetPredictedTracking2(engine->ovr, predictedDisplayTime);
+	engine->predictedDisplayTime = vrapi_GetPredictedDisplayTime(engine->ovr, engine->frameIndex);
+	engine->tracking = vrapi_GetPredictedTracking2(engine->ovr, engine->predictedDisplayTime);
 
 	if (VR_useScreenLayer())
 	{
@@ -215,7 +215,7 @@ void VR_DrawFrame( engine_t* engine ) {
 		
 		// Add a simple cylindrical layer
 		cylinderLayer.Cylinder =
-				BuildCylinderLayer(engine, eyeW, eyeW, &tracking, 0 );
+				BuildCylinderLayer(engine, eyeW, eyeW, &engine->tracking, 0 );
 
 		const ovrLayerHeader2* layers[] = {
 			&cylinderLayer.Header
@@ -226,12 +226,12 @@ void VR_DrawFrame( engine_t* engine ) {
 		frameDesc.Flags = 0;
 		frameDesc.SwapInterval = 1;
 		frameDesc.FrameIndex = engine->frameIndex;
-		frameDesc.DisplayTime = predictedDisplayTime;
+		frameDesc.DisplayTime = engine->predictedDisplayTime;
 		frameDesc.LayerCount = 1;
 		frameDesc.Layers = layers;
 
 		const framebuffer_t* framebuffers = engine->framebuffers;
-		re.SetVRHeadsetParms(&tracking,
+		re.SetVRHeadsetParms(&engine->tracking,
 			framebuffers[0].framebuffers[framebuffers[0].swapchainIndex],
 			framebuffers[1].framebuffers[framebuffers[1].swapchainIndex]);
 		Com_Frame();
@@ -247,16 +247,16 @@ void VR_DrawFrame( engine_t* engine ) {
 	else
 	{
 		ovrLayerProjection2 layer = vrapi_DefaultLayerProjection2();
-		layer.HeadPose = tracking.HeadPose;
+		layer.HeadPose = engine->tracking.HeadPose;
 				
 		for (int eye = 0; eye < VRAPI_FRAME_LAYER_EYE_MAX; ++eye) {
 			layer.Textures[eye].ColorSwapChain = engine->framebuffers[eye].colorTexture;
 			layer.Textures[eye].SwapChainIndex = engine->framebuffers[eye].swapchainIndex;
-			layer.Textures[eye].TexCoordsFromTanAngles = ovrMatrix4f_TanAngleMatrixFromProjection(&tracking.Eye[eye].ProjectionMatrix);
+			layer.Textures[eye].TexCoordsFromTanAngles = ovrMatrix4f_TanAngleMatrixFromProjection(&engine->tracking.Eye[eye].ProjectionMatrix);
 		}
 
 		const framebuffer_t* framebuffers = engine->framebuffers;
-		re.SetVRHeadsetParms(&tracking,
+		re.SetVRHeadsetParms(&engine->tracking,
 			framebuffers[0].framebuffers[framebuffers[0].swapchainIndex],
 			framebuffers[1].framebuffers[framebuffers[1].swapchainIndex]);
 		Com_Frame();
@@ -274,7 +274,7 @@ void VR_DrawFrame( engine_t* engine ) {
 		frameDesc.Flags = 0;
 		frameDesc.SwapInterval = 1;
 		frameDesc.FrameIndex = engine->frameIndex;
-		frameDesc.DisplayTime = predictedDisplayTime;
+		frameDesc.DisplayTime = engine->predictedDisplayTime;
 		frameDesc.LayerCount = 1;
 		frameDesc.Layers = layers;
 

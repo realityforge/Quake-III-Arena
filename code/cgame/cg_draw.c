@@ -199,6 +199,8 @@ void CG_Text_Paint(float x, float y, float scale, vec4_t color, const char *text
 
 #endif
 
+float trap_Cvar_VariableValue( const char *var_name );
+
 /*
 ==============
 CG_DrawField
@@ -2666,13 +2668,15 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 	vec3_t baseOrg;
 	VectorCopy( cg.refdef.vieworg, baseOrg );
 
+	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
+
 	float ipd = 0.065f;
 	float separation = stereoView == STEREO_LEFT ?
-				 WORLD_SCALE * (-ipd / 2) : //left
-					   WORLD_SCALE * (ipd / 2); // right
+					   worldscale * (-ipd / 2) : //left
+					   worldscale * (ipd / 2); // right
 
 	cg.refdef.vieworg[2] -= PLAYER_HEIGHT;
-	cg.refdef.vieworg[2] += cgVR->hmdposition[1] * WORLD_SCALE;
+	cg.refdef.vieworg[2] += cgVR->hmdposition[1] * worldscale;
 
 	VectorMA( cg.refdef.vieworg, -separation, cg.refdef.viewaxis[1], cg.refdef.vieworg );
 

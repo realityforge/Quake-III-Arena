@@ -27,6 +27,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../sys/sys_local.h"
 #include "../sys/sys_loadlib.h"
 
+#include "../vr/vr_base.h"
+
 #ifdef USE_MUMBLE
 #include "libmumblelink.h"
 #endif
@@ -1433,7 +1435,7 @@ void CL_Disconnect( qboolean showMainMenu ) {
 	}
 
 	SCR_StopCinematic ();
-	S_ClearSoundBuffer();
+	S_ClearSoundBuffer( );
 
 	// send a disconnect message to the server
 	// send it a few times in case one is dropped
@@ -3508,6 +3510,8 @@ void CL_Init( void ) {
 	cls.realtime = 0;
 
 	CL_InitInput ();
+
+	VR_InitCvars();
 
 	//
 	// register our variables

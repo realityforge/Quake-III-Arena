@@ -10,6 +10,7 @@
 #include "../VrApi/Include/VrApi_Helpers.h"
 #include "vr_clientinfo.h"
 
+#include <unistd.h>
 
 #ifdef USE_LOCAL_HEADERS
 #	include "SDL.h"
@@ -61,6 +62,8 @@ float degrees(float rad) {
 #ifndef EPSILON
 #define EPSILON 0.001f
 #endif
+
+cvar_t  *vr_extralatencymode = NULL;
 
 void rotateAboutOrigin(float x, float y, float rotation, vec2_t out)
 {
@@ -184,10 +187,11 @@ void IN_VRInit( void )
 {
 	vr_righthanded = Cvar_Get ("vr_righthanded", "1", CVAR_ARCHIVE);
 	vr_snapturn = Cvar_Get ("vr_snapturn", "1", CVAR_ARCHIVE);
+    vr_extralatencymode = Cvar_Get ("vr_extralatencymode", "1", CVAR_ARCHIVE);
 
-	Cvar_Get ("vr_weapon_adjustment_1", "0.8,0,0,0,0,0,0", CVAR_ARCHIVE);
-	Cvar_Get ("vr_weapon_adjustment_2", "0.8,0,0,0,0,0,0", CVAR_ARCHIVE);
-	Cvar_Get ("vr_weapon_adjustment_3", "0.8,0,0,0,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_1", "1.0,0,0,0,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_2", "1.0,0,0,0,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_3", "1.0,0,0,0,0,0,0", CVAR_ARCHIVE);
 }
 
 static void IN_VRController( qboolean isRightController, ovrTracking remoteTracking )
@@ -369,14 +373,21 @@ void IN_VRInputFrame( void )
 		return;
 	}
 
-	double predictedDisplayTime = vrapi_GetPredictedDisplayTime(ovr, VR_GetEngine()->frameIndex);
+    ovrResult result;
+	if (vr_extralatencymode != NULL &&
+            vr_extralatencymode->integer) {
+        result = vrapi_SetExtraLatencyMode(VR_GetEngine()->ovr, VRAPI_EXTRA_LATENCY_MODE_ON);
+        assert(result == VRAPI_INITIALIZE_SUCCESS);
+    }
+
+    result = vrapi_SetClockLevels(VR_GetEngine()->ovr, 4, 4);
+    assert(result == VRAPI_INITIALIZE_SUCCESS);
 
 	{
 		// We extract Yaw, Pitch, Roll instead of directly using the orientation
 		// to allow "additional" yaw manipulation with mouse/controller.
-		ovrTracking2 tracking = vrapi_GetPredictedTracking2(VR_GetEngine()->ovr, predictedDisplayTime);
-		const ovrQuatf quatHmd = tracking.HeadPose.Pose.Orientation;
-		const ovrVector3f positionHmd = tracking.HeadPose.Pose.Position;
+		const ovrQuatf quatHmd =  VR_GetEngine()->tracking.HeadPose.Pose.Orientation;
+		const ovrVector3f positionHmd = VR_GetEngine()->tracking.HeadPose.Pose.Position;
 		vec3_t rotation = {0, 0, 0};
 		QuatToYawPitchRoll(quatHmd, rotation, vr.hmdorientation);
 		VectorSet(vr.hmdposition, positionHmd.x, positionHmd.y, positionHmd.z);
@@ -423,7 +434,7 @@ void IN_VRInputFrame( void )
 		}
 
 		ovrTracking remoteTracking;
-		stateResult = vrapi_GetInputTrackingState(ovr, capsHeader.DeviceID, predictedDisplayTime,
+		stateResult = vrapi_GetInputTrackingState(ovr, capsHeader.DeviceID, VR_GetEngine()->predictedDisplayTime,
 											 &remoteTracking);
 		if (stateResult < 0) {
 			continue;

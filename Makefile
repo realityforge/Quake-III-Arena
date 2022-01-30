@@ -254,6 +254,7 @@ RGL1DIR=$(MOUNT_DIR)/renderergl1
 RGL2DIR=$(MOUNT_DIR)/renderergl2
 CMDIR=$(MOUNT_DIR)/qcommon
 SDLDIR=$(MOUNT_DIR)/sdl
+ANDROIDDIR=$(MOUNT_DIR)/android
 VRDIR=$(MOUNT_DIR)/vr
 ASMDIR=$(MOUNT_DIR)/asm
 SYSDIR=$(MOUNT_DIR)/sys
@@ -456,7 +457,7 @@ ifeq ($(PLATFORM),android)
   THREAD_LIBS =
   LIBS = -ldl -lm -Wl,--no-undefined -shared
 
-  CLIENT_LIBS = -lGLESv3
+  CLIENT_LIBS = -lGLESv3 -lOpenSLES
   RENDERER_LIBS = -lGLESv3 -lEGL
   
   # SDL
@@ -1478,6 +1479,7 @@ makedirs:
 	@$(MKDIR) $(B)/renderergl2
 	@$(MKDIR) $(B)/renderergl2/glsl
 	@$(MKDIR) $(B)/ded
+	@$(MKDIR) $(B)/$(BASEGAME)/android
 	@$(MKDIR) $(B)/$(BASEGAME)/cgame
 	@$(MKDIR) $(B)/$(BASEGAME)/game
 	@$(MKDIR) $(B)/$(BASEGAME)/ui
@@ -1808,7 +1810,7 @@ Q3OBJ = \
   $(B)/client/l_struct.o \
   \
   $(B)/client/sdl_input.o \
-  $(B)/client/sdl_snd.o \
+  $(B)/client/android_snd.o \
   \
   $(B)/client/vr_base.o \
   $(B)/client/vr_input.o \
@@ -2750,6 +2752,9 @@ $(B)/client/%.o: $(ZDIR)/%.c
 	$(DO_CC)
 
 $(B)/client/%.o: $(SDLDIR)/%.c
+	$(DO_CC)
+
+$(B)/client/%.o: $(ANDROIDDIR)/%.c
 	$(DO_CC)
 
 $(B)/client/%.o: $(VRDIR)/%.c

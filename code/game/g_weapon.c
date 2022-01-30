@@ -52,8 +52,9 @@ void convertFromVR(gentity_t *ent, vec3_t in, vec3_t offset, vec3_t out)
 	vrSpace[0] = -r[0];
 	vrSpace[1] = -r[1];
 
+	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
 	vec3_t temp;
-	VectorScale(vrSpace, WORLD_SCALE, temp);
+	VectorScale(vrSpace, worldscale, temp);
 
 	if (offset) {
 		VectorAdd(temp, offset, out);
@@ -809,9 +810,10 @@ void CalcMuzzlePoint ( gentity_t *ent, vec3_t forward, vec3_t right, vec3_t up, 
 	}
 	else if (gVR != NULL)
 	{
+		float worldscale = trap_Cvar_VariableValue("vr_worldscale");
 		convertFromVR(ent, gVR->calculated_weaponoffset, ent->r.currentOrigin, muzzlePoint);
 		muzzlePoint[2] -= ent->client->ps.viewheight;
-		muzzlePoint[2] += gVR->hmdposition[1] * WORLD_SCALE;
+		muzzlePoint[2] += gVR->hmdposition[1] * worldscale;
 	}
 
 	// snap to integer coordinates for more efficient network bandwidth usage

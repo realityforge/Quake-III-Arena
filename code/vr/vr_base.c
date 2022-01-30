@@ -17,6 +17,8 @@
 
 static engine_t vr_engine;
 
+cvar_t *vr_worldscale = NULL;
+
 engine_t* VR_Init( ovrJava java )
 {
 	ovrInitParms initParams;
@@ -31,6 +33,11 @@ engine_t* VR_Init( ovrJava java )
 	vr_engine.java = java;
 
 	return &vr_engine;
+}
+
+void VR_InitCvars( void )
+{
+	vr_worldscale = Cvar_Get ("vr_worldscale", "32.0", CVAR_ARCHIVE);
 }
 
 void VR_Destroy( engine_t* engine )

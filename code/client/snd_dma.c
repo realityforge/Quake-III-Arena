@@ -1255,6 +1255,8 @@ void S_GetSoundtime(void)
 		return;
 	}
 
+	dma.fullsamples = dma.samples / dma.channels;
+
 	// it is possible to miscount buffers if it has wrapped twice between
 	// calls to S_Update.  Oh well.
 	samplepos = SNDDMA_GetDMAPos();
@@ -1337,8 +1339,6 @@ void S_Update_(void) {
 	// never mix more than the complete buffer
 	if (endtime - s_soundtime > dma.fullsamples)
 		endtime = s_soundtime + dma.fullsamples;
-
-
 
 	SNDDMA_BeginPainting ();
 

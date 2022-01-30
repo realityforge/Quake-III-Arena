@@ -217,6 +217,13 @@ void rotateAboutOrigin(float x, float y, float rotation, vec2_t out)
 	out[1] = cosf(DEG2RAD(-rotation)) * y  -  sinf(DEG2RAD(-rotation)) * x;
 }
 
+
+float trap_Cvar_VariableValue( const char *var_name ) {
+	char buf[128];
+	trap_Cvar_VariableStringBuffer(var_name, buf, sizeof(buf));
+	return atof(buf);
+}
+
 void convertFromVR(vec3_t in, vec3_t offset, vec3_t out)
 {
 	vec3_t vrSpace;
@@ -227,8 +234,9 @@ void convertFromVR(vec3_t in, vec3_t offset, vec3_t out)
 	vrSpace[0] = -r[0];
 	vrSpace[1] = -r[1];
 
+	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
 	vec3_t temp;
-	VectorScale(vrSpace, WORLD_SCALE, temp);
+	VectorScale(vrSpace, worldscale, temp);
 
 	if (offset) {
 		VectorAdd(temp, offset, out);
@@ -241,8 +249,9 @@ void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles )
 {
 	convertFromVR(cgVR->calculated_weaponoffset, cg.refdef.vieworg, origin);
 
+	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
     origin[2] -= PLAYER_HEIGHT;
-    origin[2] += cgVR->hmdposition[1] * WORLD_SCALE;
+    origin[2] += cgVR->hmdposition[1] * worldscale;
 
 	VectorCopy(cgVR->weaponangles, angles);
 
@@ -1252,7 +1261,11 @@ static void CG_LightningBolt( centity_t *cent, vec3_t origin ) {
 	// CPMA  "true" lightning
 	if ((cent->currentState.number == cg.predictedPlayerState.clientNum) && (cg_trueLightning.value != 0)) {
 		vec3_t angle;
-		int i;
+		vec3_t dummy;
+
+		CG_CalculateVRWeaponPosition(dummy, angle);
+
+/*		int i;
 
 		for (i = 0; i < 3; i++) {
 			float a = cent->lerpAngles[i] - cg.refdefViewAngles[i];
@@ -1271,7 +1284,7 @@ static void CG_LightningBolt( centity_t *cent, vec3_t origin ) {
 				angle[i] -= 360;
 			}
 		}
-
+*/
 		AngleVectors(angle, forward, NULL, NULL );
 		VectorCopy(cent->lerpOrigin, muzzlePoint );
 //		VectorCopy(cg.refdef.vieworg, muzzlePoint );
