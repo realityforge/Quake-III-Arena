@@ -270,6 +270,7 @@ CG_Draw3DModel
 
 ================
 */
+extern int hudflags;
 void CG_Draw3DModel( float x, float y, float w, float h, qhandle_t model, qhandle_t skin, vec3_t origin, vec3_t angles ) {
 	refdef_t		refdef;
 	refEntity_t		ent;
@@ -278,7 +279,9 @@ void CG_Draw3DModel( float x, float y, float w, float h, qhandle_t model, qhandl
 		return;
 	}
 
+	hudflags = HUD_FLAGS_DRAWMODEL;
 	CG_AdjustFrom640( &x, &y, &w, &h );
+	hudflags = 0;
 
 	memset( &refdef, 0, sizeof( refdef ) );
 
@@ -2678,7 +2681,9 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 	cg.refdef.vieworg[2] -= PLAYER_HEIGHT;
 	cg.refdef.vieworg[2] += cgVR->hmdposition[1] * worldscale;
 
-	VectorMA( cg.refdef.vieworg, -separation, cg.refdef.viewaxis[1], cg.refdef.vieworg );
+	if (!cgVR->fullscreen) {
+		VectorMA(cg.refdef.vieworg, -separation, cg.refdef.viewaxis[1], cg.refdef.vieworg);
+	}
 
 	// draw 3D view
 	trap_R_RenderScene( &cg.refdef );

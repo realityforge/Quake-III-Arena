@@ -188,10 +188,6 @@ void IN_VRInit( void )
 	vr_righthanded = Cvar_Get ("vr_righthanded", "1", CVAR_ARCHIVE);
 	vr_snapturn = Cvar_Get ("vr_snapturn", "1", CVAR_ARCHIVE);
     vr_extralatencymode = Cvar_Get ("vr_extralatencymode", "1", CVAR_ARCHIVE);
-
-	Cvar_Get ("vr_weapon_adjustment_1", "1.0,0,0,0,0,0,0", CVAR_ARCHIVE);
-	Cvar_Get ("vr_weapon_adjustment_2", "1.0,0,0,0,0,0,0", CVAR_ARCHIVE);
-	Cvar_Get ("vr_weapon_adjustment_3", "1.0,0,0,0,0,0,0", CVAR_ARCHIVE);
 }
 
 static void IN_VRController( qboolean isRightController, ovrTracking remoteTracking )
@@ -240,11 +236,11 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
     lastframetime = newframetime;
 
     vec2_t positional;
-    float factor = (refresh / 72.0F) * 12.0f; // adjust positional factor based on refresh rate
+    float factor = (refresh / 72.0F) * 10.0f; // adjust positional factor based on refresh rate
     rotateAboutOrigin(-vr.hmdposition_delta[0] * factor * multiplier,
                       vr.hmdposition_delta[2] * factor * multiplier, - vr.hmdorientation[YAW], positional);
 
-	if (VR_useScreenLayer())
+	if (vr.fullscreen)
 	{
 		const float x = joystickX * 4.0;
 		const float y = joystickY * -4.0;
@@ -345,15 +341,16 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
 		Com_QueueEvent(in_vrEventTime, SE_KEY, K_ENTER, qfalse, 0, NULL);
 	}
 
-	if ((buttons & ovrButton_X) && !(controller->buttons & ovrButton_B)) {
+	if ((buttons & ovrButton_X) && !(controller->buttons & ovrButton_X)) {
+		//sendButtonActionSimple("give all");
 		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_X, qtrue, 0, NULL);
-	} else if (!(buttons & ovrButton_B) && (controller->buttons & ovrButton_B)) {
+	} else if (!(buttons & ovrButton_X) && (controller->buttons & ovrButton_X)) {
 		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_X, qfalse, 0, NULL);
 	}
 
-	if ((buttons & ovrButton_Y) && !(controller->buttons & ovrButton_B)) {
+	if ((buttons & ovrButton_Y) && !(controller->buttons & ovrButton_Y)) {
 		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_Y, qtrue, 0, NULL);
-	} else if (!(buttons & ovrButton_B) && (controller->buttons & ovrButton_B)) {
+	} else if (!(buttons & ovrButton_Y) && (controller->buttons & ovrButton_Y)) {
 		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_Y, qfalse, 0, NULL);
 	}
 
@@ -382,6 +379,8 @@ void IN_VRInputFrame( void )
 
     result = vrapi_SetClockLevels(VR_GetEngine()->ovr, 4, 4);
     assert(result == VRAPI_INITIALIZE_SUCCESS);
+
+	vr.fullscreen = VR_useScreenLayer();
 
 	{
 		// We extract Yaw, Pitch, Roll instead of directly using the orientation

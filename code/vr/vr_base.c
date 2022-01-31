@@ -38,6 +38,17 @@ engine_t* VR_Init( ovrJava java )
 void VR_InitCvars( void )
 {
 	vr_worldscale = Cvar_Get ("vr_worldscale", "32.0", CVAR_ARCHIVE);
+
+	// Values are:  scale,right,up,forward,pitch,yaw,roll
+	Cvar_Get ("vr_weapon_adjustment_1", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_2", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_3", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_4", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_5", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_6", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_7", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_8", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_9", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
 }
 
 void VR_Destroy( engine_t* engine )

@@ -4,16 +4,11 @@
 #include "vr_base.h"
 
 #define NUM_WEAPON_SAMPLES      10
-#define WEAPON_RECOIL           15.0f;
 
 typedef struct {
     qboolean weapon_stabilised;
     qboolean right_handed;
-    qboolean player_moving;
-    qboolean visible_hud;
-    qboolean dualwield;
-    int weaponid;
-    int lastweaponid;
+    qboolean fullscreen;
 
     vec3_t hmdposition;
     vec3_t hmdposition_last; // Don't use this, it is just for calculating delta!
