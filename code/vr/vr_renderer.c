@@ -4,6 +4,7 @@
 #include "../qcommon/q_shared.h"
 #include "../qcommon/qcommon.h"
 #include "../client/client.h"
+#include "../VrApi/Include/VrApi_Types.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wstrict-prototypes"
@@ -33,15 +34,15 @@ void APIENTRY VR_GLDebugLog(GLenum source, GLenum type, GLuint id,
 	}
 }
 
-void VR_GetRsolution(engine_t* engine, int *pWidth, int *pHeight)
+void VR_GetResolution(engine_t* engine, int *pWidth, int *pHeight)
 {
 	static int width = 0;
 	static int height = 0;
 	
 	if (engine)
 	{
-		*pWidth = width = vrapi_GetSystemPropertyInt(&engine->java, VRAPI_SYS_PROP_SUGGESTED_EYE_TEXTURE_WIDTH) * SUPER_SAMPLE;
-		*pHeight = height = vrapi_GetSystemPropertyInt(&engine->java, VRAPI_SYS_PROP_SUGGESTED_EYE_TEXTURE_HEIGHT) * SUPER_SAMPLE;
+		*pHeight = height = *pWidth = width = vrapi_GetSystemPropertyInt(&engine->java, VRAPI_SYS_PROP_SUGGESTED_EYE_TEXTURE_WIDTH) * SUPER_SAMPLE;
+		//*pHeight = height = vrapi_GetSystemPropertyInt(&engine->java, VRAPI_SYS_PROP_SUGGESTED_EYE_TEXTURE_HEIGHT) * SUPER_SAMPLE;
 	}
 	else
 	{
@@ -58,7 +59,7 @@ void VR_InitRenderer( engine_t* engine ) {
 #endif
 
 	int eyeW, eyeH;
-	VR_GetRsolution(engine, &eyeW, &eyeH);
+    VR_GetResolution(engine, &eyeW, &eyeH);
 	
 	for (int eye = 0; eye < VRAPI_FRAME_LAYER_EYE_MAX; ++eye) {
 		framebuffer_t* framebuffer = &engine->framebuffers[eye];
@@ -205,13 +206,20 @@ void VR_DrawFrame( engine_t* engine ) {
 	engine->predictedDisplayTime = vrapi_GetPredictedDisplayTime(engine->ovr, engine->frameIndex);
 	engine->tracking = vrapi_GetPredictedTracking2(engine->ovr, engine->predictedDisplayTime);
 
+	//Now using a symmetrical render target, based on the horizontal FOV
+	float fov = vrapi_GetSystemPropertyInt( engine->ovr, VRAPI_SYS_PROP_SUGGESTED_EYE_FOV_DEGREES_Y);
+
+	// Setup the projection matrix.
+	const ovrMatrix4f projectionMatrix = ovrMatrix4f_CreateProjectionFov(
+			fov, fov, 0.0f, 0.0f, 1.0f, 0.0f );
+
 	if (VR_useScreenLayer())
 	{
 		static ovrLayer_Union2 cylinderLayer;
 		memset( &cylinderLayer, 0, sizeof( ovrLayer_Union2 ) );
 
 		int eyeW, eyeH;
-		VR_GetRsolution(engine, &eyeW, &eyeH);
+        VR_GetResolution(engine, &eyeW, &eyeH);
 		
 		// Add a simple cylindrical layer
 		cylinderLayer.Cylinder =
@@ -231,7 +239,7 @@ void VR_DrawFrame( engine_t* engine ) {
 		frameDesc.Layers = layers;
 
 		const framebuffer_t* framebuffers = engine->framebuffers;
-		re.SetVRHeadsetParms(&engine->tracking,
+		re.SetVRHeadsetParms(&projectionMatrix,
 			framebuffers[0].framebuffers[framebuffers[0].swapchainIndex],
 			framebuffers[1].framebuffers[framebuffers[1].swapchainIndex]);
 		Com_Frame();
@@ -252,11 +260,12 @@ void VR_DrawFrame( engine_t* engine ) {
 		for (int eye = 0; eye < VRAPI_FRAME_LAYER_EYE_MAX; ++eye) {
 			layer.Textures[eye].ColorSwapChain = engine->framebuffers[eye].colorTexture;
 			layer.Textures[eye].SwapChainIndex = engine->framebuffers[eye].swapchainIndex;
-			layer.Textures[eye].TexCoordsFromTanAngles = ovrMatrix4f_TanAngleMatrixFromProjection(&engine->tracking.Eye[eye].ProjectionMatrix);
+			layer.Textures[eye].TexCoordsFromTanAngles = ovrMatrix4f_TanAngleMatrixFromProjection(&projectionMatrix);
 		}
 
+
 		const framebuffer_t* framebuffers = engine->framebuffers;
-		re.SetVRHeadsetParms(&engine->tracking,
+		re.SetVRHeadsetParms(&projectionMatrix,
 			framebuffers[0].framebuffers[framebuffers[0].swapchainIndex],
 			framebuffers[1].framebuffers[framebuffers[1].swapchainIndex]);
 		Com_Frame();

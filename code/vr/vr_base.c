@@ -9,6 +9,8 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wstrict-prototypes"
 #include "../VrApi/Include/VrApi_Helpers.h"
+#include "../VrApi/Include/VrApi.h"
+
 #pragma clang diagnostic pop
 
 #include <EGL/egl.h>
@@ -40,15 +42,17 @@ void VR_InitCvars( void )
 	vr_worldscale = Cvar_Get ("vr_worldscale", "32.0", CVAR_ARCHIVE);
 
 	// Values are:  scale,right,up,forward,pitch,yaw,roll
-	Cvar_Get ("vr_weapon_adjustment_1", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
-	Cvar_Get ("vr_weapon_adjustment_2", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
-	Cvar_Get ("vr_weapon_adjustment_3", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
-	Cvar_Get ("vr_weapon_adjustment_4", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
-	Cvar_Get ("vr_weapon_adjustment_5", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
-	Cvar_Get ("vr_weapon_adjustment_6", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
-	Cvar_Get ("vr_weapon_adjustment_7", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
-	Cvar_Get ("vr_weapon_adjustment_8", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
-	Cvar_Get ("vr_weapon_adjustment_9", "0.75,0,0,0,0,0,0", CVAR_ARCHIVE);
+	// VALUES PROVIDED BY SkillFur - Thank-you!
+	Cvar_Get ("vr_weapon_adjustment_1", "1,-4.0,7,-10,-20,-15,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_2", "0.8,-3.0,5.5,0,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_3", "0.7,-2.5,5.5,0,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_4", "0.75,-4.0,6.5,-4,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_5", "0.8,-3.8,6,7.5,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_6", "0.8,-3.3,6,7,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_7", "0.8,-3.3,6,0,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_8", "0.8,-3.5,6,1.5,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_9", "0.8,-5.5,6,0,0,0,0", CVAR_ARCHIVE);
+
 }
 
 void VR_Destroy( engine_t* engine )
@@ -85,8 +89,8 @@ engine_t* VR_GetEngine( void ) {
 
 bool VR_useScreenLayer( void )
 {
+	int keyCatcher = Key_GetCatcher( );
 	return (bool)(clc.state != CA_ACTIVE ||
-			( Key_GetCatcher( ) & KEYCATCH_UI ) ||
-            ( Key_GetCatcher( ) & KEYCATCH_CONSOLE ));
+			( keyCatcher & (KEYCATCH_UI | KEYCATCH_CONSOLE) ));
 }
 //#endif

@@ -430,7 +430,7 @@ static int GLimp_SetMode(int mode, qboolean fullscreen, qboolean noborder, qbool
 
 	ri.Printf (PRINT_ALL, "...setting mode %d:", mode );
 
-	VR_GetRsolution(0, &glConfig.vidWidth, &glConfig.vidHeight);
+	VR_GetResolution(0, &glConfig.vidWidth, &glConfig.vidHeight);
 	/*
 	if (mode == -2)
 	{

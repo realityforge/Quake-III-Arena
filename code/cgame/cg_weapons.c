@@ -1268,7 +1268,7 @@ static void CG_LightningBolt( centity_t *cent, vec3_t origin ) {
 /*		int i;
 
 		for (i = 0; i < 3; i++) {
-			float a = cent->lerpAngles[i] - cg.refdefViewAngles[i];
+			float a = cent->lerpAngles[i] - angle[i];
 			if (a > 180) {
 				a -= 360;
 			}
@@ -1276,7 +1276,7 @@ static void CG_LightningBolt( centity_t *cent, vec3_t origin ) {
 				a += 360;
 			}
 
-			angle[i] = cg.refdefViewAngles[i] + a * (1.0 - cg_trueLightning.value);
+			angle[i] = angle[i] + a * (1.0 - cg_trueLightning.value);
 			if (angle[i] < 0) {
 				angle[i] += 360;
 			}
@@ -1289,17 +1289,24 @@ static void CG_LightningBolt( centity_t *cent, vec3_t origin ) {
 		VectorCopy(cent->lerpOrigin, muzzlePoint );
 //		VectorCopy(cg.refdef.vieworg, muzzlePoint );
 	} else {
+		vec3_t angle;
+		vec3_t dummy;
+
+		CG_CalculateVRWeaponPosition(dummy, angle);
+
 		// !CPMA
-		AngleVectors( cent->lerpAngles, forward, NULL, NULL );
+		AngleVectors( angle, forward, NULL, NULL );
 		VectorCopy(cent->lerpOrigin, muzzlePoint );
 	}
 
-	anim = cent->currentState.legsAnim & ~ANIM_TOGGLEBIT;
-	if ( anim == LEGS_WALKCR || anim == LEGS_IDLECR ) {
-		muzzlePoint[2] += CROUCH_VIEWHEIGHT;
-	} else {
-		muzzlePoint[2] += DEFAULT_VIEWHEIGHT;
-	}
+	if (cent->currentState.number != cg.predictedPlayerState.clientNum) {
+        anim = cent->currentState.legsAnim & ~ANIM_TOGGLEBIT;
+        if (anim == LEGS_WALKCR || anim == LEGS_IDLECR) {
+            muzzlePoint[2] += CROUCH_VIEWHEIGHT;
+        } else {
+            muzzlePoint[2] += DEFAULT_VIEWHEIGHT;
+        }
+    }
 
 	VectorMA( muzzlePoint, 14, forward, muzzlePoint );
 

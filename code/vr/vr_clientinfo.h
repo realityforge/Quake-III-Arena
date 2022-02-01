@@ -8,7 +8,7 @@
 typedef struct {
     qboolean weapon_stabilised;
     qboolean right_handed;
-    qboolean fullscreen;
+    qboolean virtual_screen;
 
     vec3_t hmdposition;
     vec3_t hmdposition_last; // Don't use this, it is just for calculating delta!

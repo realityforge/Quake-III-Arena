@@ -986,10 +986,14 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 		
 		if(es->clientNum == cg.snap->ps.clientNum && !cg.renderingThirdPerson)
 		{
+			vec3_t angles;
+			CG_CalculateVRWeaponPosition(es->origin2, angles);
+			/*
 			if(cg_drawGun.integer == 2)
 				VectorMA(es->origin2, 8, cg.refdef.viewaxis[1], es->origin2);
 			else if(cg_drawGun.integer == 3)
 				VectorMA(es->origin2, 4, cg.refdef.viewaxis[1], es->origin2);
+			 */
 		}
 
 		CG_RailTrail(ci, es->origin2, es->pos.trBase);

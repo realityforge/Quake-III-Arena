@@ -240,7 +240,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
     rotateAboutOrigin(-vr.hmdposition_delta[0] * factor * multiplier,
                       vr.hmdposition_delta[2] * factor * multiplier, - vr.hmdorientation[YAW], positional);
 
-	if (vr.fullscreen)
+	if (vr.virtual_screen)
 	{
 		const float x = joystickX * 4.0;
 		const float y = joystickY * -4.0;
@@ -380,7 +380,7 @@ void IN_VRInputFrame( void )
     result = vrapi_SetClockLevels(VR_GetEngine()->ovr, 4, 4);
     assert(result == VRAPI_INITIALIZE_SUCCESS);
 
-	vr.fullscreen = VR_useScreenLayer();
+	vr.virtual_screen = VR_useScreenLayer();
 
 	{
 		// We extract Yaw, Pitch, Roll instead of directly using the orientation

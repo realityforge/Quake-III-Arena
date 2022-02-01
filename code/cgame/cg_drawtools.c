@@ -28,6 +28,16 @@ int hudflags = 0;
 stereoFrame_t hudStereoView = STEREO_CENTER;
 extern vr_clientinfo_t* cgVR;
 
+void CG_SetHUDFlags(int flags)
+{
+	hudflags |= flags;
+}
+
+void CG_RemoveHUDFlags(int flags)
+{
+	hudflags &= ~flags;
+}
+
 /*
 ================
 CG_AdjustFrom640
@@ -38,7 +48,7 @@ Adjusted for resolution and screen aspect ratio
 void CG_AdjustFrom640( float *x, float *y, float *w, float *h ) {
 
 	if (hudflags & HUD_FLAGS_FULLSCREEN ||
-			cgVR->fullscreen)
+			cgVR->virtual_screen)
 	{
 		// scale for screen sizes
 		*x *= cgs.screenXScale;
@@ -49,9 +59,9 @@ void CG_AdjustFrom640( float *x, float *y, float *w, float *h ) {
 	else // scale to clearly visible portion of VR screen
 	{
 		float screenXScale = cgs.screenXScale / 2.75f;
-		float screenYScale = cgs.screenYScale / 2.75f;
+		float screenYScale = cgs.screenYScale / 2.25f;
 
-		int xoffset = -80;
+		int xoffset = (hudflags & HUD_FLAGS_SCOREBOARD) ? -24 : -60;
 		if (hudStereoView == STEREO_LEFT) {
 			xoffset *= -1;
 		}

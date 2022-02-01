@@ -276,7 +276,8 @@ void GL_SetProjectionMatrix(mat4_t matrix)
 
 void GL_SetModelviewMatrix(mat4_t matrix, qboolean applyStereoView)
 {
-	if (qfalse) //applyStereoView)
+	/*
+	if (applyStereoView)
 	{
 		if (tr.refdef.stereoFrame == STEREO_LEFT) {
 			Mat4Multiply(tr.vrParms.viewL, matrix, glState.modelview);
@@ -285,7 +286,9 @@ void GL_SetModelviewMatrix(mat4_t matrix, qboolean applyStereoView)
 		} else {
 			Mat4Copy(matrix, glState.modelview);
 		}
-	} else {
+	} else
+	*/
+	{
 		Mat4Copy(matrix, glState.modelview);
 	}
 

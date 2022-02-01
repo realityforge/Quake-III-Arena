@@ -841,13 +841,9 @@ typedef struct {
 
 typedef struct {
 	qboolean	valid;
-	float		projectionL[16];
-	float		projectionR[16];
-	float		viewL[16];
-	float		viewR[16];
+	float		projection[16];
 	int			renderBufferL;
 	int			renderBufferR;
-
 	int			renderBufferOriginal;
 } vrParms_t;
 
@@ -2508,7 +2504,7 @@ void RE_StretchPic ( float x, float y, float w, float h,
 void RE_BeginFrame( stereoFrame_t stereoFrame );
 void RE_EndFrame( int *frontEndMsec, int *backEndMsec );
 #if __ANDROID__
-void RE_SetVRHeadsetParms( const ovrTracking2* ovrTracking, int renderBufferL, int renderBufferR );
+void RE_SetVRHeadsetParms( const ovrMatrix4f *projectionMatrix, int renderBufferL, int renderBufferR );
 #endif
 void RE_SaveJPG(char * filename, int quality, int image_width, int image_height,
                 unsigned char *image_buffer, int padding);

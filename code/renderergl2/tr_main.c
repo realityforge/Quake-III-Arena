@@ -72,7 +72,7 @@ qboolean R_CompareVert(srfVert_t * v1, srfVert_t * v2, qboolean checkST)
 =============
 R_CalcTexDirs
 
-Lengyel, Eric. “Computing Tangent Space Basis Vectors for an Arbitrary Mesh”. Terathon Software 3D Graphics Library, 2001. http://www.terathon.com/code/tangent.html
+Lengyel, Eric. ï¿½Computing Tangent Space Basis Vectors for an Arbitrary Meshï¿½. Terathon Software 3D Graphics Library, 2001. http://www.terathon.com/code/tangent.html
 =============
 */
 void R_CalcTexDirs(vec3_t sdir, vec3_t tdir, const vec3_t v1, const vec3_t v2,
@@ -104,7 +104,7 @@ void R_CalcTexDirs(vec3_t sdir, vec3_t tdir, const vec3_t v1, const vec3_t v2,
 =============
 R_CalcTangentSpace
 
-Lengyel, Eric. “Computing Tangent Space Basis Vectors for an Arbitrary Mesh”. Terathon Software 3D Graphics Library, 2001. http://www.terathon.com/code/tangent.html
+Lengyel, Eric. ï¿½Computing Tangent Space Basis Vectors for an Arbitrary Meshï¿½. Terathon Software 3D Graphics Library, 2001. http://www.terathon.com/code/tangent.html
 =============
 */
 vec_t R_CalcTangentSpace(vec3_t tangent, vec3_t bitangent, const vec3_t normal, const vec3_t sdir, const vec3_t tdir)
@@ -765,12 +765,15 @@ void R_SetupProjection(viewParms_t *dest, float zProj, float zFar, qboolean comp
 	height = ymax - ymin;
 
 	if (tr.vrParms.valid) {
+		memcpy(&dest->projectionMatrix, &tr.vrParms.projection, sizeof(dest->projectionMatrix));
+		/*
 		if (dest->stereoFrame == STEREO_LEFT) {
 			memcpy(&dest->projectionMatrix, &tr.vrParms.projectionL, sizeof(dest->projectionMatrix));
 		}
 		else {
 			memcpy(&dest->projectionMatrix, &tr.vrParms.projectionR, sizeof(dest->projectionMatrix));
 		}
+		 */
 	} else {
 		/*
 		 * offset the view origin of the viewer for stereo rendering 

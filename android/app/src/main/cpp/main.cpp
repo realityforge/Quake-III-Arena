@@ -65,14 +65,17 @@ int main(int argc, char* argv[]) {
 	engine_t* engine = nullptr;
 	engine = VR_Init(java);
 
+	//sleep(30);
+
 	//First set up resolution cached values
 	int width, height;
-	VR_GetRsolution( engine,  &width, &height );
+	VR_GetResolution( engine,  &width, &height );
 	
 	CON_LogcatFn(&ioq3_logfn);
 
 	std::string defaultArgs("+set fs_basepath ");
 	defaultArgs += SDL_AndroidGetExternalStoragePath();
+//	defaultArgs += " +set fs_game baseq3 +map q3dm6";
 	defaultArgs += " +set fs_game baseq3";
 
 	char* args = new char[defaultArgs.length() + 1];
@@ -83,8 +86,6 @@ int main(int argc, char* argv[]) {
 	VR_InitRenderer(engine);
 
 	VR_EnterVR(engine, java);
-
-	//sleep(20);
 
 	while (1) {
 		SDL_Event event;

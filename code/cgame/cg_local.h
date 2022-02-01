@@ -93,6 +93,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //VR HUD
 #define HUD_FLAGS_FULLSCREEN			1
 #define HUD_FLAGS_DRAWMODEL				2
+#define HUD_FLAGS_SCOREBOARD			4
 
 typedef enum {
 	FOOTSTEP_NORMAL,
@@ -1239,6 +1240,8 @@ void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demo
 //
 // cg_drawtools.c
 //
+void CG_SetHUDFlags(int flags);
+void CG_RemoveHUDFlags(int flags);
 void CG_AdjustFrom640( float *x, float *y, float *w, float *h );
 void CG_FillRect( float x, float y, float width, float height, const float *color );
 void CG_DrawPic( float x, float y, float width, float height, qhandle_t hShader );
@@ -1359,6 +1362,8 @@ void CG_PositionRotatedEntityOnTag( refEntity_t *entity, const refEntity_t *pare
 void CG_NextWeapon_f( void );
 void CG_PrevWeapon_f( void );
 void CG_Weapon_f( void );
+
+void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles );
 
 void CG_RegisterWeapon( int weaponNum );
 void CG_RegisterItemVisuals( int itemNum );
