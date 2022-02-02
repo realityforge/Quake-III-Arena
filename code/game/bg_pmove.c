@@ -1801,9 +1801,11 @@ void PM_UpdateViewAngles( playerState_t *ps, const usercmd_t *cmd ) {
 		return;		// no view changes at all
 	}
 
+	/* We want to allow user to look around if they are dead
 	if ( ps->pm_type != PM_SPECTATOR && ps->stats[STAT_HEALTH] <= 0 ) {
 		return;		// no view changes at all
 	}
+	*/
 
 	// circularly clamp the angles with deltas
 	for (i=0 ; i<3 ; i++) {

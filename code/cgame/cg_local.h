@@ -93,7 +93,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //VR HUD
 #define HUD_FLAGS_FULLSCREEN			1
 #define HUD_FLAGS_DRAWMODEL				2
-#define HUD_FLAGS_SCOREBOARD			4
 
 typedef enum {
 	FOOTSTEP_NORMAL,

@@ -238,11 +238,11 @@ static void CG_OffsetThirdPersonView( void ) {
 
 	VectorCopy( cg.refdefViewAngles, focusAngles );
 
-	// if dead, look at killer
-	if ( cg.predictedPlayerState.stats[STAT_HEALTH] <= 0 ) {
-		focusAngles[YAW] = cg.predictedPlayerState.stats[STAT_DEAD_YAW];
-		cg.refdefViewAngles[YAW] = cg.predictedPlayerState.stats[STAT_DEAD_YAW];
-	}
+    if ( cg.snap->ps.stats[STAT_HEALTH] <= 0 ) {
+        //Be 50 times taller
+        cg.refdef.vieworg[2] += 50 * cg.predictedPlayerState.viewheight;
+        return;
+    }
 
 	if ( focusAngles[PITCH] > 45 ) {
 		focusAngles[PITCH] = 45;		// don't go too far overhead
@@ -323,7 +323,7 @@ static void CG_OffsetFirstPersonView( void ) {
 	float			f;
 	vec3_t			predictedVelocity;
 	int				timeDelta;
-	
+
 	if ( cg.snap->ps.pm_type == PM_INTERMISSION ) {
 		return;
 	}
@@ -331,12 +331,9 @@ static void CG_OffsetFirstPersonView( void ) {
 	origin = cg.refdef.vieworg;
 	angles = cg.refdefViewAngles;
 
-	// if dead, fix the angle and don't add any kick
 	if ( cg.snap->ps.stats[STAT_HEALTH] <= 0 ) {
-		//angles[ROLL] = 40;
-		//angles[PITCH] = -15;
-		angles[YAW] = cg.snap->ps.stats[STAT_DEAD_YAW];
-		origin[2] += cg.predictedPlayerState.viewheight;
+        //Be 50 times taller
+        origin[2] += 50 * cg.predictedPlayerState.viewheight;
 		return;
 	}
 

@@ -1,4 +1,6 @@
 #include "vr_base.h"
+#include "../VrApi/Include/VrApi.h"
+#include "../VrApi/Include/VrApi_Helpers.h"
 #include "../VrApi/Include/VrApi_Types.h"
 #include "../qcommon/q_shared.h"
 #include "../qcommon/qcommon.h"
@@ -8,9 +10,6 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wstrict-prototypes"
-#include "../VrApi/Include/VrApi_Helpers.h"
-#include "../VrApi/Include/VrApi.h"
-
 #pragma clang diagnostic pop
 
 #include <EGL/egl.h>
@@ -90,7 +89,8 @@ engine_t* VR_GetEngine( void ) {
 bool VR_useScreenLayer( void )
 {
 	int keyCatcher = Key_GetCatcher( );
-	return (bool)(clc.state != CA_ACTIVE ||
+	return (bool)( clc.state != CA_ACTIVE ||
+			//( cl.snap.ps.stats[STAT_HEALTH] <= 0 ) ||
 			( keyCatcher & (KEYCATCH_UI | KEYCATCH_CONSOLE) ));
 }
 //#endif

@@ -6,6 +6,9 @@
 #include "../client/client.h"
 #include "../VrApi/Include/VrApi_Types.h"
 
+#include "vr_clientinfo.h"
+//#include "../SDL2/include/SDL_opengles2_gl2.h"
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wstrict-prototypes"
 #include <VrApi.h>
@@ -23,6 +26,8 @@
 #endif
 
 #define SUPER_SAMPLE  1.2f
+
+extern vr_clientinfo_t vr;
 
 void APIENTRY VR_GLDebugLog(GLenum source, GLenum type, GLuint id,
 	GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
@@ -156,8 +161,8 @@ ovrLayerCylinder2 BuildCylinderLayer(engine_t* engine, const int textureWidth, c
 
 	const float density = 4500.0f;
 	const float rotateYaw = 0.0f;
-	const float radius = 4.0f;
-	const float distance = -6.0f;
+	const float radius = 12.0f;
+	const float distance = -16.0f;
 
 	const ovrVector3f translation = { 0.0f, 1.0f, distance };
 
@@ -195,6 +200,23 @@ ovrLayerCylinder2 BuildCylinderLayer(engine_t* engine, const int textureWidth, c
 	return layer;
 }
 
+void VR_ClearFrameBuffer( GLuint frameBuffer, int width, int height)
+{
+    glBindFramebuffer( GL_DRAW_FRAMEBUFFER, frameBuffer );
+
+    glEnable( GL_SCISSOR_TEST );
+    glViewport( 0, 0, width, height );
+
+    glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
+    glScissor( 0, 0, width, height );
+    glClear( GL_COLOR_BUFFER_BIT );
+
+    glScissor( 0, 0, 0, 0 );
+    glDisable( GL_SCISSOR_TEST );
+
+    glBindFramebuffer( GL_DRAW_FRAMEBUFFER, 0 );
+}
+
 void VR_DrawFrame( engine_t* engine ) {
 
 	if (!engine->ovr)
@@ -213,17 +235,19 @@ void VR_DrawFrame( engine_t* engine ) {
 	const ovrMatrix4f projectionMatrix = ovrMatrix4f_CreateProjectionFov(
 			fov, fov, 0.0f, 0.0f, 1.0f, 0.0f );
 
-	if (VR_useScreenLayer())
+	static int playerYaw = 0;
+
+    int eyeW, eyeH;
+    VR_GetResolution(engine, &eyeW, &eyeH);
+
+    if (VR_useScreenLayer())
 	{
 		static ovrLayer_Union2 cylinderLayer;
 		memset( &cylinderLayer, 0, sizeof( ovrLayer_Union2 ) );
 
-		int eyeW, eyeH;
-        VR_GetResolution(engine, &eyeW, &eyeH);
-		
 		// Add a simple cylindrical layer
 		cylinderLayer.Cylinder =
-				BuildCylinderLayer(engine, eyeW, eyeW, &engine->tracking, 0 );
+				BuildCylinderLayer(engine, eyeW, eyeW, &engine->tracking, radians(playerYaw) );
 
 		const ovrLayerHeader2* layers[] = {
 			&cylinderLayer.Header
@@ -239,9 +263,11 @@ void VR_DrawFrame( engine_t* engine ) {
 		frameDesc.Layers = layers;
 
 		const framebuffer_t* framebuffers = engine->framebuffers;
+
 		re.SetVRHeadsetParms(&projectionMatrix,
 			framebuffers[0].framebuffers[framebuffers[0].swapchainIndex],
 			framebuffers[1].framebuffers[framebuffers[1].swapchainIndex]);
+
 		Com_Frame();
 
 		for (int eye = 0; eye < VRAPI_FRAME_LAYER_EYE_MAX; ++eye) {
@@ -254,6 +280,8 @@ void VR_DrawFrame( engine_t* engine ) {
 	}
 	else
 	{
+		playerYaw = vr.hmdorientation[YAW];
+
 		ovrLayerProjection2 layer = vrapi_DefaultLayerProjection2();
 		layer.HeadPose = engine->tracking.HeadPose;
 				
@@ -265,9 +293,14 @@ void VR_DrawFrame( engine_t* engine ) {
 
 
 		const framebuffer_t* framebuffers = engine->framebuffers;
+
+        VR_ClearFrameBuffer(framebuffers[0].framebuffers[framebuffers[0].swapchainIndex], eyeW, eyeH);
+        VR_ClearFrameBuffer(framebuffers[1].framebuffers[framebuffers[1].swapchainIndex], eyeW, eyeH);
+
 		re.SetVRHeadsetParms(&projectionMatrix,
 			framebuffers[0].framebuffers[framebuffers[0].swapchainIndex],
 			framebuffers[1].framebuffers[framebuffers[1].swapchainIndex]);
+
 		Com_Frame();
 
 		for (int eye = 0; eye < VRAPI_FRAME_LAYER_EYE_MAX; ++eye) {

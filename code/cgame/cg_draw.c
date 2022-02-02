@@ -1933,7 +1933,6 @@ static void CG_DrawCrosshair(void)
 CG_DrawCrosshair3D
 =================
 */
-void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles );
 static void CG_DrawCrosshair3D(void)
 {
 	float		w;
@@ -2673,6 +2672,11 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 
 	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
 
+	if ( cg.snap->ps.stats[STAT_HEALTH] <= 0 )
+    {
+	    worldscale *= 50;
+    }
+
 	float ipd = 0.065f;
 	float separation = stereoView == STEREO_LEFT ?
 					   worldscale * (-ipd / 2) : //left
@@ -2680,10 +2684,7 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 
 	cg.refdef.vieworg[2] -= PLAYER_HEIGHT;
 	cg.refdef.vieworg[2] += cgVR->hmdposition[1] * worldscale;
-
-	if (!cgVR->virtual_screen) {
-		VectorMA(cg.refdef.vieworg, -separation, cg.refdef.viewaxis[1], cg.refdef.vieworg);
-	}
+	VectorMA(cg.refdef.vieworg, -separation, cg.refdef.viewaxis[1], cg.refdef.vieworg);
 
 	// draw 3D view
 	trap_R_RenderScene( &cg.refdef );

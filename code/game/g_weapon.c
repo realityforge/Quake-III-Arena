@@ -106,7 +106,10 @@ qboolean CheckGauntletAttack( gentity_t *ent ) {
 	int			damage;
 
 	// set aiming directions
-	AngleVectors (ent->client->ps.viewangles, forward, right, up);
+	vec3_t angles;
+	VectorCopy(gVR->weaponangles, angles);
+	angles[YAW] += (ent->client->ps.viewangles[YAW] - gVR->hmdorientation[YAW]);
+	AngleVectors (angles, forward, right, up);
 
 	CalcMuzzlePoint ( ent, forward, right, up, muzzle );
 

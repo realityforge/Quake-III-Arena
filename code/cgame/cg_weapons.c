@@ -1261,41 +1261,11 @@ static void CG_LightningBolt( centity_t *cent, vec3_t origin ) {
 	// CPMA  "true" lightning
 	if ((cent->currentState.number == cg.predictedPlayerState.clientNum) && (cg_trueLightning.value != 0)) {
 		vec3_t angle;
-		vec3_t dummy;
-
-		CG_CalculateVRWeaponPosition(dummy, angle);
-
-/*		int i;
-
-		for (i = 0; i < 3; i++) {
-			float a = cent->lerpAngles[i] - angle[i];
-			if (a > 180) {
-				a -= 360;
-			}
-			if (a < -180) {
-				a += 360;
-			}
-
-			angle[i] = angle[i] + a * (1.0 - cg_trueLightning.value);
-			if (angle[i] < 0) {
-				angle[i] += 360;
-			}
-			if (angle[i] > 360) {
-				angle[i] -= 360;
-			}
-		}
-*/
+		CG_CalculateVRWeaponPosition(muzzlePoint, angle);
 		AngleVectors(angle, forward, NULL, NULL );
-		VectorCopy(cent->lerpOrigin, muzzlePoint );
-//		VectorCopy(cg.refdef.vieworg, muzzlePoint );
 	} else {
-		vec3_t angle;
-		vec3_t dummy;
-
-		CG_CalculateVRWeaponPosition(dummy, angle);
-
 		// !CPMA
-		AngleVectors( angle, forward, NULL, NULL );
+		AngleVectors( cent->lerpAngles, forward, NULL, NULL );
 		VectorCopy(cent->lerpOrigin, muzzlePoint );
 	}
 

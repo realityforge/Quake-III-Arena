@@ -242,8 +242,8 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 
 	if (vr.virtual_screen)
 	{
-		const float x = joystickX * 4.0;
-		const float y = joystickY * -4.0;
+		const float x = joystickX * 5.0;
+		const float y = joystickY * -5.0;
 
 		Com_QueueEvent(in_vrEventTime, SE_MOUSE, x, y, 0, NULL);
 	} else

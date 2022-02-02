@@ -16,6 +16,8 @@ void VR_LeaveVR( engine_t* engine );
 engine_t* VR_GetEngine( void );
 bool VR_useScreenLayer( void );
 
+float radians(float deg);
+
 #endif
 
 #endif

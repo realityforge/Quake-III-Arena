@@ -238,7 +238,7 @@ static cvarTable_t cvarTable[] = {
 	{ &cg_drawCrosshair, "cg_drawCrosshair", "4", CVAR_ARCHIVE },
 	{ &cg_drawCrosshairNames, "cg_drawCrosshairNames", "0", CVAR_ARCHIVE },
 	{ &cg_drawRewards, "cg_drawRewards", "0", CVAR_ARCHIVE },
-	{ &cg_crosshairSize, "cg_crosshairSize", "24", CVAR_ARCHIVE },
+	{ &cg_crosshairSize, "cg_crosshairSize", "16", CVAR_ARCHIVE },
 	{ &cg_crosshairHealth, "cg_crosshairHealth", "1", CVAR_ARCHIVE },
 	{ &cg_crosshairX, "cg_crosshairX", "0", CVAR_ARCHIVE },
 	{ &cg_crosshairY, "cg_crosshairY", "0", CVAR_ARCHIVE },
@@ -251,8 +251,8 @@ static cvarTable_t cvarTable[] = {
 	{ &cg_gun_y, "cg_gunY", "0", CVAR_CHEAT },
 	{ &cg_gun_z, "cg_gunZ", "0", CVAR_CHEAT },
 	{ &cg_centertime, "cg_centertime", "3", CVAR_CHEAT },
-	{ &cg_runpitch, "cg_runpitch", "0.002", CVAR_ARCHIVE},
-	{ &cg_runroll, "cg_runroll", "0.005", CVAR_ARCHIVE },
+	{ &cg_runpitch, "cg_runpitch", "0.0", CVAR_ARCHIVE},
+	{ &cg_runroll, "cg_runroll", "0.0", CVAR_ARCHIVE },
 	{ &cg_bobup , "cg_bobup", "0.0", CVAR_CHEAT },
 	{ &cg_bobpitch, "cg_bobpitch", "0.0", CVAR_ARCHIVE },
 	{ &cg_bobroll, "cg_bobroll", "0.0", CVAR_ARCHIVE },
@@ -328,7 +328,7 @@ static cvarTable_t cvarTable[] = {
 	{ &cg_noTaunt, "cg_noTaunt", "0", CVAR_ARCHIVE},
 #endif
 	{ &cg_noProjectileTrail, "cg_noProjectileTrail", "0", CVAR_ARCHIVE},
-	{ &cg_oldRail, "cg_oldRail", "0", CVAR_ARCHIVE},
+	{ &cg_oldRail, "cg_oldRail", "1", CVAR_ARCHIVE},
 	{ &cg_oldRocket, "cg_oldRocket", "0", CVAR_ARCHIVE},
 	{ &cg_oldPlasma, "cg_oldPlasma", "1", CVAR_ARCHIVE},
 	{ &cg_trueLightning, "cg_trueLightning", "0.2", CVAR_ARCHIVE}

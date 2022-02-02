@@ -239,8 +239,6 @@ static int CG_TeamScoreboard( int y, team_t team, float fade, int maxClients, in
 	color[0] = color[1] = color[2] = 1.0;
 	color[3] = fade;
 
-	CG_SetHUDFlags(HUD_FLAGS_SCOREBOARD);
-
 	count = 0;
 	for ( i = 0 ; i < cg.numScores && count < maxClients ; i++ ) {
 		score = &cg.scores[i];
@@ -254,8 +252,6 @@ static int CG_TeamScoreboard( int y, team_t team, float fade, int maxClients, in
 
 		count++;
 	}
-
-	CG_RemoveHUDFlags(HUD_FLAGS_SCOREBOARD);
 
 	return count;
 }
@@ -307,8 +303,6 @@ qboolean CG_DrawOldScoreboard( void ) {
 		}
 		fade = *fadeColor;
 	}
-
-    CG_SetHUDFlags(HUD_FLAGS_SCOREBOARD);
 
     // fragged by ... line
 	if ( cg.killerName[0] ) {
@@ -423,8 +417,6 @@ qboolean CG_DrawOldScoreboard( void ) {
 		CG_LoadDeferredPlayers();
 	}
 
-	CG_RemoveHUDFlags(HUD_FLAGS_SCOREBOARD);
-
 	return qtrue;
 }
 
@@ -463,8 +455,6 @@ void CG_DrawTourneyScoreboard( void ) {
 	clientInfo_t	*ci;
 	int				y;
 	int				i;
-
-	CG_SetHUDFlags(HUD_FLAGS_SCOREBOARD);
 
 	// request more scores regularly
 	if ( cg.scoresRequestTime + 2000 < cg.time ) {
@@ -537,7 +527,5 @@ void CG_DrawTourneyScoreboard( void ) {
 			y += 64;
 		}
 	}
-
-	CG_RemoveHUDFlags(HUD_FLAGS_SCOREBOARD);
 }
 
