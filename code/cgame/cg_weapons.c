@@ -224,7 +224,7 @@ float trap_Cvar_VariableValue( const char *var_name ) {
 	return atof(buf);
 }
 
-void convertFromVR(vec3_t in, vec3_t offset, vec3_t out)
+void CG_ConvertFromVR(vec3_t in, vec3_t offset, vec3_t out)
 {
 	vec3_t vrSpace;
 	VectorSet(vrSpace, in[2], in[0], in[1] );
@@ -247,7 +247,7 @@ void convertFromVR(vec3_t in, vec3_t offset, vec3_t out)
 
 void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles )
 {
-	convertFromVR(cgVR->calculated_weaponoffset, cg.refdef.vieworg, origin);
+	CG_ConvertFromVR(cgVR->calculated_weaponoffset, cg.refdef.vieworg, origin);
 
 	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
     origin[2] -= PLAYER_HEIGHT;

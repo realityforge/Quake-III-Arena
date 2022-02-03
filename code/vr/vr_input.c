@@ -175,13 +175,17 @@ void QuatToYawPitchRoll(ovrQuatf q, vec3_t rotation, vec3_t out) {
     GetAnglesFromVectors(forwardNormal, rightNormal, upNormal, out);
 }
 
-void sendButtonActionSimple(const char* action)
+static void sendButtonActionSimple(const char* action)
 {
     char command[256];
     snprintf( command, sizeof( command ), "%s\n", action );
     Cbuf_AddText( command );
 }
 
+static float length(float x, float y)
+{
+    return sqrtf(powf(x, 2.0f) + powf(y, 2.0f));
+}
 
 void IN_VRInit( void )
 {
@@ -202,7 +206,6 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
 		VectorSubtract(vr.weaponangles_last, vr.weaponangles, vr.weaponangles_delta);
 		VectorCopy(vr.weaponangles, vr.weaponangles_last);
 
-
 		//Record recent weapon position for trajectory based stuff
 		for (int i = (NUM_WEAPON_SAMPLES-1); i != 0; --i)
 		{
@@ -220,8 +223,29 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
 
 		//Just copy to calculated offset, used to use this in case we wanted to apply any modifiers, but don't any more
 		VectorCopy(vr.current_weaponoffset, vr.calculated_weaponoffset);
+	} else {
+        vec3_t rotation = {0};
+        rotation[PITCH] =-20.0f;
+        QuatToYawPitchRoll(remoteTracking.HeadPose.Pose.Orientation, rotation, vr.offhandangles);
 
+        ///location relative to view
+        vr.offhandoffset[0] = remoteTracking.HeadPose.Pose.Position.x - vr.hmdposition[0];
+        vr.offhandoffset[1] = remoteTracking.HeadPose.Pose.Position.y - vr.hmdposition[1];
+        vr.offhandoffset[2] = remoteTracking.HeadPose.Pose.Position.z - vr.hmdposition[2];
 	}
+
+    if (vr.weapon_stabilised)
+    {
+        float x = vr.offhandoffset[0] - vr.calculated_weaponoffset[0];
+        float y = vr.offhandoffset[1] - vr.calculated_weaponoffset[1];
+        float z = vr.offhandoffset[2] - vr.calculated_weaponoffset[2];
+        float zxDist = length(x, z);
+
+        if (zxDist != 0.0f && z != 0.0f) {
+            VectorSet(vr.weaponangles, -degrees(atanf(y / zxDist)),
+                      -degrees(atan2f(x, -z)), vr.weaponangles[ROLL] / 2.0f); //Dampen roll on stabilised weapon
+        }
+    }
 }
 
 static void IN_VRJoystick( qboolean isRightController, float joystickX, float joystickY )
@@ -320,12 +344,20 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
 {
 	vrController_t* controller = isRightController == qtrue ? &rightController : &leftController;
 
-	if (isRightController == qfalse)
-	{
-		if ((buttons & ovrButton_Enter) && !(controller->buttons & ovrButton_Enter)) {
-			Com_QueueEvent(in_vrEventTime, SE_KEY, K_ESCAPE, qtrue, 0, NULL);
-		} else if (!(buttons & ovrButton_Enter) && (controller->buttons & ovrButton_Enter)) {
-			Com_QueueEvent(in_vrEventTime, SE_KEY, K_ESCAPE, qfalse, 0, NULL);
+	if (isRightController == qfalse) {
+        if ((buttons & ovrButton_Enter) && !(controller->buttons & ovrButton_Enter)) {
+            Com_QueueEvent(in_vrEventTime, SE_KEY, K_ESCAPE, qtrue, 0, NULL);
+        } else if (!(buttons & ovrButton_Enter) && (controller->buttons & ovrButton_Enter)) {
+            Com_QueueEvent(in_vrEventTime, SE_KEY, K_ESCAPE, qfalse, 0, NULL);
+        }
+    }
+
+	if (isRightController != (vr_righthanded->integer != 0))
+    {
+		if ((buttons & ovrButton_GripTrigger) && !(controller->buttons & ovrButton_GripTrigger)) {
+            vr.weapon_stabilised = qtrue;
+		} else if (!(buttons & ovrButton_GripTrigger) && (controller->buttons & ovrButton_GripTrigger)) {
+			vr.weapon_stabilised = qfalse;
 		}
 	}
 	
@@ -453,13 +485,13 @@ void IN_VRInputFrame( void )
 			continue;
 		}
 
+        if (controller->buttons ^ state.Buttons) {
+            IN_VRButtonsChanged(isRight, state.Buttons);
+        }
+
 		IN_VRController(isRight, remoteTracking);
 		IN_VRJoystick(isRight, state.Joystick.x, state.Joystick.y);
 		IN_VRTriggers(isRight, state.IndexTrigger);
-
-		if (controller->buttons ^ state.Buttons) {
-			IN_VRButtonsChanged(isRight, state.Buttons);
-		}
 	}
 
 	in_vrEventTime = Sys_Milliseconds( );

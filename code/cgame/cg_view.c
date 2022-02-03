@@ -23,7 +23,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // cg_view.c -- setup all the parameters (position, angle, etc)
 // for a 3D rendering
 #include "cg_local.h"
+#include "../vr/vr_clientinfo.h"
 
+extern vr_clientinfo_t* cgVR;
 
 /*
 =============================================================================
@@ -218,6 +220,25 @@ static void CG_CalcVrect (void) {
 
 /*
 ===============
+CG_OffsetDeathView
+
+===============
+*/
+static void CG_OffsetDeathView( void ) {
+
+    vec3_t position_delta;
+    VectorNegate(cgVR->hmdposition_delta, position_delta);
+    CG_ConvertFromVR(position_delta, NULL, position_delta);
+    position_delta[2] = 0;
+    VectorScale(position_delta, (DEATH_WORLDSCALE_MULTIPLIER / 2), position_delta);
+
+    VectorAdd(cg.v_death_origin, position_delta, cg.v_death_origin);
+    VectorCopy(cg.v_death_origin, cg.refdef.vieworg);
+    cg.refdef.vieworg[2] += DEATH_WORLDSCALE_MULTIPLIER * cg.predictedPlayerState.viewheight;
+}
+
+/*
+===============
 CG_OffsetThirdPersonView
 
 ===============
@@ -234,15 +255,11 @@ static void CG_OffsetThirdPersonView( void ) {
 	float		focusDist;
 	float		forwardScale, sideScale;
 
+	VectorCopy(cg.refdef.vieworg, cg.v_death_origin);
+
 	cg.refdef.vieworg[2] += cg.predictedPlayerState.viewheight;
 
 	VectorCopy( cg.refdefViewAngles, focusAngles );
-
-    if ( cg.snap->ps.stats[STAT_HEALTH] <= 0 ) {
-        //Be 50 times taller
-        cg.refdef.vieworg[2] += 50 * cg.predictedPlayerState.viewheight;
-        return;
-    }
 
 	if ( focusAngles[PITCH] > 45 ) {
 		focusAngles[PITCH] = 45;		// don't go too far overhead
@@ -331,11 +348,7 @@ static void CG_OffsetFirstPersonView( void ) {
 	origin = cg.refdef.vieworg;
 	angles = cg.refdefViewAngles;
 
-	if ( cg.snap->ps.stats[STAT_HEALTH] <= 0 ) {
-        //Be 50 times taller
-        origin[2] += 50 * cg.predictedPlayerState.viewheight;
-		return;
-	}
+	VectorCopy(cg.refdef.vieworg, cg.v_death_origin);
 
 	// add angles based on damage kick
 	if ( cg.damageTime ) {
@@ -671,7 +684,10 @@ static int CG_CalcViewValues( void ) {
 		}
 	}
 
-	if ( cg.renderingThirdPerson ) {
+	if (cg.snap->ps.stats[STAT_HEALTH] <= 0) {
+	    //If dead, view the map from above
+        CG_OffsetDeathView();
+    } else if ( cg.renderingThirdPerson ) {
 		// back away from character
 		CG_OffsetThirdPersonView();
 	} else {
@@ -799,7 +815,7 @@ void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demo
 
 	// decide on third person view
 	cg.renderingThirdPerson = cg.snap->ps.persistant[PERS_TEAM] != TEAM_SPECTATOR
-							&& (cg_thirdPerson.integer || (cg.snap->ps.stats[STAT_HEALTH] <= 0));
+							&& cg_thirdPerson.integer;
 
 	// build cg.refdef
 	inwater = CG_CalcViewValues();

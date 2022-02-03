@@ -1769,6 +1769,10 @@ const void* RB_SwitchEye( const void* data ) {
 
 	tr.renderFbo->frameBuffer = cmd->eye;
 
+	// finish any 2D drawing if needed
+	if(tess.numIndexes)
+		RB_EndSurface();
+
 	// Not calling FBO_Bind explicitly, since we just update the frameBuffer
 	// within the struct.
 	if (tr.renderFbo == glState.currentFBO)

@@ -61,7 +61,7 @@ void CG_AdjustFrom640( float *x, float *y, float *w, float *h ) {
 		float screenXScale = cgs.screenXScale / 2.75f;
 		float screenYScale = cgs.screenYScale / 2.25f;
 
-		int xoffset = -60;
+		int xoffset = -120;
 		if (hudStereoView == STEREO_LEFT) {
 			xoffset *= -1;
 		}

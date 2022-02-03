@@ -76,6 +76,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define	NUM_CROSSHAIRS		10
 
+//multiplying size you go to when dead looking down on the match
+#define DEATH_WORLDSCALE_MULTIPLIER	40
+
+#define PLAYER_HEIGHT           48
+
 #define TEAM_OVERLAY_MAXNAME_WIDTH	12
 #define TEAM_OVERLAY_MAXLOCATION_WIDTH	16
 
@@ -627,6 +632,7 @@ typedef struct {
 	float		v_dmg_time;
 	float		v_dmg_pitch;
 	float		v_dmg_roll;
+	vec3_t 		v_death_origin;
 
 	// temp working variables for player view
 	float		bobfracsin;
@@ -1362,7 +1368,9 @@ void CG_NextWeapon_f( void );
 void CG_PrevWeapon_f( void );
 void CG_Weapon_f( void );
 
+void rotateAboutOrigin(float x, float y, float rotation, vec2_t out);
 void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles );
+void CG_ConvertFromVR(vec3_t in, vec3_t offset, vec3_t out);
 
 void CG_RegisterWeapon( int weaponNum );
 void CG_RegisterItemVisuals( int itemNum );
@@ -1501,6 +1509,7 @@ void		trap_Cvar_Register( vmCvar_t *vmCvar, const char *varName, const char *def
 void		trap_Cvar_Update( vmCvar_t *vmCvar );
 void		trap_Cvar_Set( const char *var_name, const char *value );
 void		trap_Cvar_VariableStringBuffer( const char *var_name, char *buffer, int bufsize );
+float 		trap_Cvar_VariableValue( const char *var_name );
 
 // ServerCommand and ConsoleCommand parameter access
 int			trap_Argc( void );

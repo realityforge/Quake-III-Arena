@@ -2670,12 +2670,8 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 	vec3_t baseOrg;
 	VectorCopy( cg.refdef.vieworg, baseOrg );
 
-	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
-
-	if ( cg.snap->ps.stats[STAT_HEALTH] <= 0 )
-    {
-	    worldscale *= 50;
-    }
+	float worldscale = trap_Cvar_VariableValue("vr_worldscale") *
+			(( cg.snap->ps.stats[STAT_HEALTH] <= 0 ) ? DEATH_WORLDSCALE_MULTIPLIER : 1.0f);
 
 	float ipd = 0.065f;
 	float separation = stereoView == STEREO_LEFT ?

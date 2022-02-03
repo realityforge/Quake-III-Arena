@@ -7,6 +7,7 @@
 #include "../VrApi/Include/VrApi_Types.h"
 
 #include "vr_clientinfo.h"
+#include "vr_types.h"
 //#include "../SDL2/include/SDL_opengles2_gl2.h"
 
 #pragma clang diagnostic push
@@ -46,8 +47,8 @@ void VR_GetResolution(engine_t* engine, int *pWidth, int *pHeight)
 	
 	if (engine)
 	{
-		*pHeight = height = *pWidth = width = vrapi_GetSystemPropertyInt(&engine->java, VRAPI_SYS_PROP_SUGGESTED_EYE_TEXTURE_WIDTH) * SUPER_SAMPLE;
-		//*pHeight = height = vrapi_GetSystemPropertyInt(&engine->java, VRAPI_SYS_PROP_SUGGESTED_EYE_TEXTURE_HEIGHT) * SUPER_SAMPLE;
+		*pWidth = width = vrapi_GetSystemPropertyInt(&engine->java, VRAPI_SYS_PROP_SUGGESTED_EYE_TEXTURE_WIDTH) * SUPER_SAMPLE;
+		*pHeight = height = vrapi_GetSystemPropertyInt(&engine->java, VRAPI_SYS_PROP_SUGGESTED_EYE_TEXTURE_HEIGHT) * SUPER_SAMPLE;
 	}
 	else
 	{
@@ -228,13 +229,6 @@ void VR_DrawFrame( engine_t* engine ) {
 	engine->predictedDisplayTime = vrapi_GetPredictedDisplayTime(engine->ovr, engine->frameIndex);
 	engine->tracking = vrapi_GetPredictedTracking2(engine->ovr, engine->predictedDisplayTime);
 
-	//Now using a symmetrical render target, based on the horizontal FOV
-	float fov = vrapi_GetSystemPropertyInt( engine->ovr, VRAPI_SYS_PROP_SUGGESTED_EYE_FOV_DEGREES_Y);
-
-	// Setup the projection matrix.
-	const ovrMatrix4f projectionMatrix = ovrMatrix4f_CreateProjectionFov(
-			fov, fov, 0.0f, 0.0f, 1.0f, 0.0f );
-
 	static int playerYaw = 0;
 
     int eyeW, eyeH;
@@ -247,7 +241,7 @@ void VR_DrawFrame( engine_t* engine ) {
 
 		// Add a simple cylindrical layer
 		cylinderLayer.Cylinder =
-				BuildCylinderLayer(engine, eyeW, eyeW, &engine->tracking, radians(playerYaw) );
+				BuildCylinderLayer(engine, eyeW, eyeW * 0.75f, &engine->tracking, radians(playerYaw) );
 
 		const ovrLayerHeader2* layers[] = {
 			&cylinderLayer.Header
@@ -264,7 +258,14 @@ void VR_DrawFrame( engine_t* engine ) {
 
 		const framebuffer_t* framebuffers = engine->framebuffers;
 
-		re.SetVRHeadsetParms(&projectionMatrix,
+        //Now using a symmetrical render target, based on the horizontal FOV
+        float fov = vrapi_GetSystemPropertyInt( engine->ovr, VRAPI_SYS_PROP_SUGGESTED_EYE_FOV_DEGREES_Y);
+
+        // Setup the projection matrix.
+        const ovrMatrix4f projectionMatrix = ovrMatrix4f_CreateProjectionFov(
+                fov, fov, 0.0f, 0.0f, 1.0f, 0.0f );
+
+        re.SetVRHeadsetParms(&projectionMatrix, &projectionMatrix,
 			framebuffers[0].framebuffers[framebuffers[0].swapchainIndex],
 			framebuffers[1].framebuffers[framebuffers[1].swapchainIndex]);
 
@@ -288,7 +289,7 @@ void VR_DrawFrame( engine_t* engine ) {
 		for (int eye = 0; eye < VRAPI_FRAME_LAYER_EYE_MAX; ++eye) {
 			layer.Textures[eye].ColorSwapChain = engine->framebuffers[eye].colorTexture;
 			layer.Textures[eye].SwapChainIndex = engine->framebuffers[eye].swapchainIndex;
-			layer.Textures[eye].TexCoordsFromTanAngles = ovrMatrix4f_TanAngleMatrixFromProjection(&projectionMatrix);
+			layer.Textures[eye].TexCoordsFromTanAngles = ovrMatrix4f_TanAngleMatrixFromProjection(&engine->tracking.Eye[eye].ProjectionMatrix);
 		}
 
 
@@ -297,7 +298,7 @@ void VR_DrawFrame( engine_t* engine ) {
         VR_ClearFrameBuffer(framebuffers[0].framebuffers[framebuffers[0].swapchainIndex], eyeW, eyeH);
         VR_ClearFrameBuffer(framebuffers[1].framebuffers[framebuffers[1].swapchainIndex], eyeW, eyeH);
 
-		re.SetVRHeadsetParms(&projectionMatrix,
+		re.SetVRHeadsetParms(&engine->tracking.Eye[0].ProjectionMatrix, &engine->tracking.Eye[1].ProjectionMatrix,
 			framebuffers[0].framebuffers[framebuffers[0].swapchainIndex],
 			framebuffers[1].framebuffers[framebuffers[1].swapchainIndex]);
 
