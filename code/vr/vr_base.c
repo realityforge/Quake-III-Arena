@@ -48,7 +48,7 @@ void VR_InitCvars( void )
 	Cvar_Get ("vr_weapon_adjustment_4", "0.75,-4.0,6.5,-4,0,0,0", CVAR_ARCHIVE);
 	Cvar_Get ("vr_weapon_adjustment_5", "0.8,-3.8,6,7.5,0,0,0", CVAR_ARCHIVE);
 	Cvar_Get ("vr_weapon_adjustment_6", "0.8,-3.3,6,7,0,0,0", CVAR_ARCHIVE);
-	Cvar_Get ("vr_weapon_adjustment_7", "0.8,-3.3,6,0,0,0,0", CVAR_ARCHIVE);
+	Cvar_Get ("vr_weapon_adjustment_7", "0.8,-3.0,6,0,0,0,0", CVAR_ARCHIVE);
 	Cvar_Get ("vr_weapon_adjustment_8", "0.8,-3.5,6,1.5,0,0,0", CVAR_ARCHIVE);
 	Cvar_Get ("vr_weapon_adjustment_9", "0.8,-5.5,6,0,0,0,0", CVAR_ARCHIVE);
 
@@ -72,6 +72,8 @@ void VR_EnterVR( engine_t* engine, ovrJava java ) {
 		engine->frameIndex = 0;
 
 		vrapi_SetTrackingSpace(engine->ovr, VRAPI_TRACKING_SPACE_LOCAL_FLOOR);
+
+        vrapi_SetClockLevels(engine->ovr, 4, 4);
 	}
 }
 
@@ -88,9 +90,14 @@ engine_t* VR_GetEngine( void ) {
 
 bool VR_useScreenLayer( void )
 {
-	int keyCatcher = Key_GetCatcher( );
+	//intermission is never full screen
+/*    if ( cl.snap.ps.pm_type == PM_INTERMISSION )
+    {
+        return qfalse;
+    }
+*/
+    int keyCatcher = Key_GetCatcher( );
 	return (bool)( clc.state != CA_ACTIVE ||
-			//( cl.snap.ps.stats[STAT_HEALTH] <= 0 ) ||
 			( keyCatcher & (KEYCATCH_UI | KEYCATCH_CONSOLE) ));
 }
 //#endif

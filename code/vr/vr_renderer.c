@@ -259,11 +259,11 @@ void VR_DrawFrame( engine_t* engine ) {
 		const framebuffer_t* framebuffers = engine->framebuffers;
 
         //Now using a symmetrical render target, based on the horizontal FOV
-        float fov = vrapi_GetSystemPropertyInt( engine->ovr, VRAPI_SYS_PROP_SUGGESTED_EYE_FOV_DEGREES_Y);
+        //float fov = vrapi_GetSystemPropertyInt( engine->ovr, VRAPI_SYS_PROP_SUGGESTED_EYE_FOV_DEGREES_Y);
 
         // Setup the projection matrix.
         const ovrMatrix4f projectionMatrix = ovrMatrix4f_CreateProjectionFov(
-                fov, fov, 0.0f, 0.0f, 1.0f, 0.0f );
+                90, 90, 0.0f, 0.0f, 1.0f, 0.0f );
 
         re.SetVRHeadsetParms(&projectionMatrix, &projectionMatrix,
 			framebuffers[0].framebuffers[framebuffers[0].swapchainIndex],

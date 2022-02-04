@@ -341,9 +341,9 @@ static void CG_OffsetFirstPersonView( void ) {
 	vec3_t			predictedVelocity;
 	int				timeDelta;
 
-//	if ( cg.snap->ps.pm_type == PM_INTERMISSION ) {
-//		return;
-//	}
+	if ( cg.snap->ps.pm_type == PM_INTERMISSION ) {
+		return;
+	}
 
 	origin = cg.refdef.vieworg;
 	angles = cg.refdefViewAngles;
@@ -646,15 +646,19 @@ static int CG_CalcViewValues( void ) {
 			cg.cameraMode = qfalse;
 		}
 	}
-
+*/
 	// intermission view
+	static float hmdYaw = 0;
 	if ( ps->pm_type == PM_INTERMISSION ) {
 		VectorCopy( ps->origin, cg.refdef.vieworg );
-		VectorCopy( ps->viewangles, cg.refdefViewAngles );
-		AnglesToAxis( cg.refdefViewAngles, cg.refdef.viewaxis );
+        VectorCopy(cgVR->hmdorientation, cg.refdefViewAngles);
+        cg.refdefViewAngles[YAW] += (ps->viewangles[YAW] - hmdYaw);
+        AnglesToAxis( cg.refdefViewAngles, cg.refdef.viewaxis );
 		return CG_CalcFov();
 	}
-*/
+
+    hmdYaw = cgVR->hmdorientation[YAW];
+
 	cg.bobcycle = ( ps->bobCycle & 128 ) >> 7;
 	cg.bobfracsin = fabs( sin( ( ps->bobCycle & 127 ) / 127.0 * M_PI ) );
 	cg.xyspeed = sqrt( ps->velocity[0] * ps->velocity[0] +

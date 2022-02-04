@@ -47,8 +47,7 @@ Adjusted for resolution and screen aspect ratio
 */
 void CG_AdjustFrom640( float *x, float *y, float *w, float *h ) {
 
-	if (hudflags & HUD_FLAGS_FULLSCREEN ||
-			cgVR->virtual_screen)
+	if (cgVR->virtual_screen)
 	{
 		// scale for screen sizes
 		*x *= cgs.screenXScale;
@@ -70,10 +69,10 @@ void CG_AdjustFrom640( float *x, float *y, float *w, float *h ) {
 		*y *= screenYScale;
 		if (hudflags & HUD_FLAGS_DRAWMODEL)
 		{
-			*w *= cgs.screenXScale;
-			*x -= (*w / 4);
-			*h *= cgs.screenYScale;
-            *y -= (*h / 4);
+			*w *= (cgs.screenXScale * 2.0f);
+			*x -= (*w / 3);
+			*h *= (cgs.screenYScale * 2.0f);
+            *y -= (*h / 3);
 		}
 		else
 		{

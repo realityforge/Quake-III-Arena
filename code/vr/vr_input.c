@@ -38,6 +38,7 @@ static qboolean controllerInit = qfalse;
 static vrController_t leftController;
 static vrController_t rightController;
 static int in_vrEventTime = 0;
+static double lastframetime = 0;
 
 static float pressedThreshold = 0.75f;
 static float releasedThreshold = 0.5f;
@@ -252,18 +253,6 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 {
 	vrController_t* controller = isRightController == qtrue ? &rightController : &leftController;
 
-    //Positional movement speed correction for when we are not hitting target framerate
-    static double lastframetime = 0;
-    int refresh = vrapi_GetSystemPropertyInt(&(VR_GetEngine()->java), VRAPI_SYS_PROP_DISPLAY_REFRESH_RATE);
-    double newframetime = Sys_Milliseconds();
-    float multiplier = (float)((1000.0 / refresh) / (newframetime - lastframetime));
-    lastframetime = newframetime;
-
-    vec2_t positional;
-    float factor = (refresh / 72.0F) * 10.0f; // adjust positional factor based on refresh rate
-    rotateAboutOrigin(-vr.hmdposition_delta[0] * factor * multiplier,
-                      vr.hmdposition_delta[2] * factor * multiplier, - vr.hmdorientation[YAW], positional);
-
 	if (vr.virtual_screen)
 	{
 		const float x = joystickX * 5.0;
@@ -273,6 +262,15 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 	} else
 	{
 		if (isRightController == qfalse) {
+			//Positional movement speed correction for when we are not hitting target framerate
+			int refresh = vrapi_GetSystemPropertyInt(&(VR_GetEngine()->java), VRAPI_SYS_PROP_DISPLAY_REFRESH_RATE);
+			float multiplier = (float)((1000.0 / refresh) / (in_vrEventTime - lastframetime));
+
+			vec2_t positional;
+			float factor = (refresh / 72.0F) * 10.0f; // adjust positional factor based on refresh rate
+			rotateAboutOrigin(-vr.hmdposition_delta[0] * factor * multiplier,
+							  vr.hmdposition_delta[2] * factor * multiplier, - vr.hmdorientation[YAW], positional);
+
             //sideways
             Com_QueueEvent(in_vrEventTime, SE_JOYSTICK_AXIS, 0, joystickX * 127.0f + positional[0] * 127.0f, 0, NULL);
 
@@ -374,7 +372,9 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
 	}
 
 	if ((buttons & ovrButton_X) && !(controller->buttons & ovrButton_X)) {
-		//sendButtonActionSimple("give all");
+#ifdef DEBUG
+		sendButtonActionSimple("fraglimit 1");
+#endif
 		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_X, qtrue, 0, NULL);
 	} else if (!(buttons & ovrButton_X) && (controller->buttons & ovrButton_X)) {
 		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_X, qfalse, 0, NULL);
@@ -494,6 +494,7 @@ void IN_VRInputFrame( void )
 		IN_VRTriggers(isRight, state.IndexTrigger);
 	}
 
+	lastframetime = in_vrEventTime;
 	in_vrEventTime = Sys_Milliseconds( );
 }
 

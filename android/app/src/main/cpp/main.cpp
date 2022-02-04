@@ -31,7 +31,7 @@ static jobject g_ActivityObject = NULL;
 
 extern "C"
 {
-	JNIEXPORT void JNICALL Java_com_sparkie_ioq3quest_MainActivity_nativeCreate(JNIEnv* env, jclass cls, jobject thisObject)
+	JNIEXPORT void JNICALL Java_com_drbeef_ioq3quest_MainActivity_nativeCreate(JNIEnv* env, jclass cls, jobject thisObject)
 	{
 		g_ActivityObject = env->NewGlobalRef(thisObject);
 	}
@@ -73,15 +73,9 @@ int main(int argc, char* argv[]) {
 	
 	CON_LogcatFn(&ioq3_logfn);
 
-	std::string defaultArgs("+set fs_basepath ");
-	defaultArgs += SDL_AndroidGetExternalStoragePath();
-//	defaultArgs += " +set fs_game baseq3 +map q3dm6";
-	defaultArgs += " +set fs_game baseq3";
+    char *args = (char*)getenv("commandline");
 
-	char* args = new char[defaultArgs.length() + 1];
-	args[defaultArgs.length()] = '\0';
-	memcpy(args, defaultArgs.c_str(), defaultArgs.length());
-	Com_Init(args);
+    Com_Init(args);
 
 	VR_InitRenderer(engine);
 
@@ -112,6 +106,5 @@ int main(int argc, char* argv[]) {
 	Com_Shutdown();
 	VR_Destroy(engine);
 
-	delete [] args;
 	return 0;
 }
