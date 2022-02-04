@@ -211,7 +211,8 @@ static void CG_Obituary( entityState_t *ent ) {
 	}
 
 	// check for kill messages from the current clientNum
-	if ( attacker == cg.snap->ps.clientNum ) {
+	if ( attacker == cg.snap->ps.clientNum &&
+			cg_fragMessage.integer) {
 		char	*s;
 
 		if ( cgs.gametype < GT_TEAM ) {

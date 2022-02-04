@@ -117,6 +117,7 @@ vmCvar_t	cg_drawIcons;
 vmCvar_t	cg_drawAmmoWarning;
 vmCvar_t	cg_drawCrosshair;
 vmCvar_t	cg_drawCrosshairNames;
+vmCvar_t	cg_fragMessage;
 vmCvar_t	cg_drawRewards;
 vmCvar_t	cg_crosshairSize;
 vmCvar_t	cg_crosshairX;
@@ -237,7 +238,8 @@ static cvarTable_t cvarTable[] = {
 	{ &cg_drawAttacker, "cg_drawAttacker", "0", CVAR_ARCHIVE  },
 	{ &cg_drawCrosshair, "cg_drawCrosshair", "4", CVAR_ARCHIVE },
 	{ &cg_drawCrosshairNames, "cg_drawCrosshairNames", "0", CVAR_ARCHIVE },
-	{ &cg_drawRewards, "cg_drawRewards", "0", CVAR_ARCHIVE },
+	{ &cg_fragMessage, "cg_fragMessage", "1", CVAR_ARCHIVE },
+	{ &cg_drawRewards, "cg_drawRewards", "1", CVAR_ARCHIVE },
 	{ &cg_crosshairSize, "cg_crosshairSize", "16", CVAR_ARCHIVE },
 	{ &cg_crosshairHealth, "cg_crosshairHealth", "1", CVAR_ARCHIVE },
 	{ &cg_crosshairX, "cg_crosshairX", "0", CVAR_ARCHIVE },
