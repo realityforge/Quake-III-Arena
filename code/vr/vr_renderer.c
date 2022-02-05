@@ -208,7 +208,7 @@ void VR_ClearFrameBuffer( GLuint frameBuffer, int width, int height)
     glEnable( GL_SCISSOR_TEST );
     glViewport( 0, 0, width, height );
 
-    glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
+    glClearColor( 0.2f, 0.0f, 0.05f, 1.0f );
     glScissor( 0, 0, width, height );
     glClear( GL_COLOR_BUFFER_BIT );
 
@@ -228,6 +228,11 @@ void VR_DrawFrame( engine_t* engine ) {
 	++engine->frameIndex;
 	engine->predictedDisplayTime = vrapi_GetPredictedDisplayTime(engine->ovr, engine->frameIndex);
 	engine->tracking = vrapi_GetPredictedTracking2(engine->ovr, engine->predictedDisplayTime);
+
+	float fov_y = vrapi_GetSystemPropertyInt( engine->ovr, VRAPI_SYS_PROP_SUGGESTED_EYE_FOV_DEGREES_Y);
+	float fov_x = vrapi_GetSystemPropertyInt( engine->ovr, VRAPI_SYS_PROP_SUGGESTED_EYE_FOV_DEGREES_X);
+	const ovrMatrix4f projectionMatrix = ovrMatrix4f_CreateProjectionFov(
+			fov_x, fov_y, 0.0f, 0.0f, 1.0f, 0.0f );
 
 	static int playerYaw = 0;
 
@@ -258,14 +263,7 @@ void VR_DrawFrame( engine_t* engine ) {
 
 		const framebuffer_t* framebuffers = engine->framebuffers;
 
-        //Now using a symmetrical render target, based on the horizontal FOV
-        //float fov = vrapi_GetSystemPropertyInt( engine->ovr, VRAPI_SYS_PROP_SUGGESTED_EYE_FOV_DEGREES_Y);
-
-        // Setup the projection matrix.
-        const ovrMatrix4f projectionMatrix = ovrMatrix4f_CreateProjectionFov(
-                90, 90, 0.0f, 0.0f, 1.0f, 0.0f );
-
-        re.SetVRHeadsetParms(&projectionMatrix, &projectionMatrix,
+        re.SetVRHeadsetParms(&projectionMatrix,
 			framebuffers[0].framebuffers[framebuffers[0].swapchainIndex],
 			framebuffers[1].framebuffers[framebuffers[1].swapchainIndex]);
 
@@ -289,7 +287,7 @@ void VR_DrawFrame( engine_t* engine ) {
 		for (int eye = 0; eye < VRAPI_FRAME_LAYER_EYE_MAX; ++eye) {
 			layer.Textures[eye].ColorSwapChain = engine->framebuffers[eye].colorTexture;
 			layer.Textures[eye].SwapChainIndex = engine->framebuffers[eye].swapchainIndex;
-			layer.Textures[eye].TexCoordsFromTanAngles = ovrMatrix4f_TanAngleMatrixFromProjection(&engine->tracking.Eye[eye].ProjectionMatrix);
+			layer.Textures[eye].TexCoordsFromTanAngles = ovrMatrix4f_TanAngleMatrixFromProjection(&projectionMatrix);
 		}
 
 
@@ -298,7 +296,7 @@ void VR_DrawFrame( engine_t* engine ) {
         VR_ClearFrameBuffer(framebuffers[0].framebuffers[framebuffers[0].swapchainIndex], eyeW, eyeH);
         VR_ClearFrameBuffer(framebuffers[1].framebuffers[framebuffers[1].swapchainIndex], eyeW, eyeH);
 
-		re.SetVRHeadsetParms(&engine->tracking.Eye[0].ProjectionMatrix, &engine->tracking.Eye[1].ProjectionMatrix,
+		re.SetVRHeadsetParms(&projectionMatrix,
 			framebuffers[0].framebuffers[framebuffers[0].swapchainIndex],
 			framebuffers[1].framebuffers[framebuffers[1].swapchainIndex]);
 

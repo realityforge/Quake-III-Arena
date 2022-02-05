@@ -199,8 +199,6 @@ void CG_Text_Paint(float x, float y, float scale, vec4_t color, const char *text
 
 #endif
 
-float trap_Cvar_VariableValue( const char *var_name );
-
 /*
 ==============
 CG_DrawField

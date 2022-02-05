@@ -699,6 +699,10 @@ static int CG_CalcViewValues( void ) {
 		CG_OffsetFirstPersonView();
 	}
 
+	//HACK!! - should change this to a renderer function call
+	//Indicate to renderer whether we are in deathcam mode, We don't want sky in death cam mode
+	trap_Cvar_Set( "r_deathCam", (cg.snap->ps.stats[STAT_HEALTH] <= 0) ? "1" : "0" );
+
 	// position eye relative to origin
 	AnglesToAxis( cg.refdefViewAngles, cg.refdef.viewaxis );
 

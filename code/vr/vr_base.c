@@ -19,6 +19,7 @@
 static engine_t vr_engine;
 
 cvar_t *vr_worldscale = NULL;
+cvar_t *vr_hudDepth = NULL;
 
 engine_t* VR_Init( ovrJava java )
 {
@@ -39,6 +40,7 @@ engine_t* VR_Init( ovrJava java )
 void VR_InitCvars( void )
 {
 	vr_worldscale = Cvar_Get ("vr_worldscale", "32.0", CVAR_ARCHIVE);
+	vr_hudDepth = Cvar_Get ("vr_hudDepth", "3", CVAR_ARCHIVE);
 
 	// Values are:  scale,right,up,forward,pitch,yaw,roll
 	// VALUES PROVIDED BY SkillFur - Thank-you!

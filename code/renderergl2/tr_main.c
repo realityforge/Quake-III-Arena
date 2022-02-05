@@ -765,11 +765,12 @@ void R_SetupProjection(viewParms_t *dest, float zProj, float zFar, qboolean comp
 	height = ymax - ymin;
 
 	if (tr.vrParms.valid) {
-		if (dest->stereoFrame == STEREO_LEFT) {
+/*		if (dest->stereoFrame == STEREO_LEFT) {
 			memcpy(&dest->projectionMatrix, &tr.vrParms.projectionL, sizeof(dest->projectionMatrix));
 		}
-		else {
-			memcpy(&dest->projectionMatrix, &tr.vrParms.projectionR, sizeof(dest->projectionMatrix));
+		else */
+		{
+			memcpy(&dest->projectionMatrix, &tr.vrParms.projection, sizeof(dest->projectionMatrix));
 		}
 	} else {
 		/*
