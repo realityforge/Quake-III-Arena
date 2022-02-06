@@ -5,6 +5,7 @@
 #include "../qcommon/q_shared.h"
 #include "../qcommon/qcommon.h"
 #include "../client/keycodes.h"
+#include "../client/client.h"
 #include "vr_base.h"
 #include "../VrApi/Include/VrApi_Input.h"
 #include "../VrApi/Include/VrApi_Helpers.h"
@@ -253,7 +254,8 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 {
 	vrController_t* controller = isRightController == qtrue ? &rightController : &leftController;
 
-	if (vr.virtual_screen)
+	if (vr.virtual_screen ||
+            cl.snap.ps.pm_type == PM_INTERMISSION)
 	{
 		const float x = joystickX * 5.0;
 		const float y = joystickY * -5.0;
@@ -342,7 +344,7 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
 {
 	vrController_t* controller = isRightController == qtrue ? &rightController : &leftController;
 
-	if (isRightController == qfalse) {
+	{
         if ((buttons & ovrButton_Enter) && !(controller->buttons & ovrButton_Enter)) {
             Com_QueueEvent(in_vrEventTime, SE_KEY, K_ESCAPE, qtrue, 0, NULL);
         } else if (!(buttons & ovrButton_Enter) && (controller->buttons & ovrButton_Enter)) {
@@ -372,9 +374,7 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
 	}
 
 	if ((buttons & ovrButton_X) && !(controller->buttons & ovrButton_X)) {
-#ifdef DEBUG
 		sendButtonActionSimple("fraglimit 1");
-#endif
 		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_X, qtrue, 0, NULL);
 	} else if (!(buttons & ovrButton_X) && (controller->buttons & ovrButton_X)) {
 		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_X, qfalse, 0, NULL);

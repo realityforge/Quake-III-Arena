@@ -1948,6 +1948,11 @@ static void CG_DrawCrosshair3D(void)
 		return;
 	}
 
+	if (cg.snap->ps.pm_type == PM_INTERMISSION)
+	{
+		return;
+	}
+
 	if ( cg.snap->ps.persistant[PERS_TEAM] == TEAM_SPECTATOR) {
 		return;
 	}

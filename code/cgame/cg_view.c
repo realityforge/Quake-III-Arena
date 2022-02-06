@@ -651,6 +651,17 @@ static int CG_CalcViewValues( void ) {
 	static float hmdYaw = 0;
 	if ( ps->pm_type == PM_INTERMISSION ) {
 		VectorCopy( ps->origin, cg.refdef.vieworg );
+
+		static vec3_t	mins = { -1, -1, -1 };
+		static vec3_t	maxs = { 1, 1, 1 };
+		trace_t		trace;
+		vec3_t forward;
+		vec3_t end;
+		AngleVectors(ps->viewangles, forward, NULL, NULL);
+		VectorMA(ps->origin, -80, forward, end);
+		CG_Trace( &trace, ps->origin, mins, maxs, end, cg.predictedPlayerState.clientNum, MASK_SOLID );
+        VectorCopy(trace.endpos, cg.refdef.vieworg);
+
         VectorCopy(cgVR->hmdorientation, cg.refdefViewAngles);
         cg.refdefViewAngles[YAW] += (ps->viewangles[YAW] - hmdYaw);
         AnglesToAxis( cg.refdefViewAngles, cg.refdef.viewaxis );

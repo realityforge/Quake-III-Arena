@@ -22,6 +22,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // cl_scrn.c -- master for refresh, status bar, console, chat, notify, etc
 
 #include "client.h"
+#include "../vr/vr_clientinfo.h"
+
+extern vr_clientinfo_t vr;
 
 qboolean	scr_initialized;		// ready to draw
 
@@ -70,17 +73,38 @@ void SCR_AdjustFrom640( float *x, float *y, float *w, float *h ) {
 	// scale for screen sizes
 	xscale = cls.glconfig.vidWidth / 640.0;
 	yscale = cls.glconfig.vidHeight / 480.0;
-	if ( x ) {
-		*x *= xscale;
-	}
-	if ( y ) {
-		*y *= yscale;
-	}
-	if ( w ) {
-		*w *= xscale;
-	}
-	if ( h ) {
-		*h *= yscale;
+
+	if (vr.virtual_screen) {
+		if (x) {
+			*x *= xscale;
+		}
+		if (y) {
+			*y *= yscale;
+		}
+		if (w) {
+			*w *= xscale;
+		}
+		if (h) {
+			*h *= yscale;
+		}
+	} else {
+		float screenXScale = xscale / 2.75f;
+		float screenYScale = yscale / 2.25f;
+
+		if (x) {
+			*x *= screenXScale;
+            *x += (cls.glconfig.vidWidth - (640 * screenXScale)) / 2.0f;
+		}
+		if (y) {
+			*y *= screenYScale;
+            *y += (cls.glconfig.vidHeight - (480 * screenYScale)) / 2.0f;
+		}
+		if (w) {
+			*w *= screenXScale;
+		}
+		if (h) {
+			*h *= screenYScale;
+		}
 	}
 }
 

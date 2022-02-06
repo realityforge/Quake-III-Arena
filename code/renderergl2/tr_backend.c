@@ -739,7 +739,7 @@ void RE_StretchRaw (int x, int y, int w, int h, int cols, int rows, const byte *
 	// FIXME: HUGE hack
 	if (glRefConfig.framebufferObject)
 	{
-		FBO_Bind(backEnd.framePostProcessed ? NULL : tr.renderFbo);
+		FBO_Bind(tr.renderFbo);
 	}
 
 	RB_SetGL2D();

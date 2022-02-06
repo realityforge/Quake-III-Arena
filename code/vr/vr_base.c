@@ -93,13 +93,13 @@ engine_t* VR_GetEngine( void ) {
 bool VR_useScreenLayer( void )
 {
 	//intermission is never full screen
-/*    if ( cl.snap.ps.pm_type == PM_INTERMISSION )
+    if ( cl.snap.ps.pm_type == PM_INTERMISSION )
     {
         return qfalse;
     }
-*/
+
     int keyCatcher = Key_GetCatcher( );
-	return (bool)( clc.state != CA_ACTIVE ||
+	return (bool)( clc.state == CA_CINEMATIC ||
 			( keyCatcher & (KEYCATCH_UI | KEYCATCH_CONSOLE) ));
 }
 //#endif

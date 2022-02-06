@@ -23,8 +23,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "client.h"
 
 #include "../botlib/botlib.h"
+#include "../vr/vr_clientinfo.h"
 
 extern	botlib_export_t	*botlib_export;
+extern vr_clientinfo_t vr;
 
 vm_t *uivm;
 
@@ -1139,6 +1141,12 @@ void CL_InitUI( void ) {
 	else {
 		// init for this gamestate
 		VM_Call( uivm, UI_INIT, (clc.state >= CA_AUTHORIZING && clc.state < CA_ACTIVE) );
+	}
+
+	{
+		long val = (long)(&vr);
+		int *ptr = (int*)(&val);	 //HACK!!
+		VM_Call( uivm, UI_SET_VR_CLIENT_INFO, ptr[0], ptr[1] );
 	}
 }
 
