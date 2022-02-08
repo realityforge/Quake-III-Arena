@@ -633,20 +633,12 @@ static int CG_CalcViewValues( void ) {
 	CG_CalcVrect();
 
 	ps = &cg.predictedPlayerState;
-/*
-	if (cg.cameraMode) {
-		vec3_t origin, angles;
-		if (trap_getCameraInfo(cg.time, &origin, &angles)) {
-			VectorCopy(origin, cg.refdef.vieworg);
-			angles[ROLL] = 0;
-			VectorCopy(angles, cg.refdefViewAngles);
-			AnglesToAxis( cg.refdefViewAngles, cg.refdef.viewaxis );
-			return CG_CalcFov();
-		} else {
-			cg.cameraMode = qfalse;
-		}
-	}
-*/
+
+	//HACK!! - should change this to a renderer function call
+	//Indicate to renderer whether we are in deathcam mode, We don't want sky in death cam mode
+	trap_Cvar_Set( "r_deathCam", ((ps->stats[STAT_HEALTH] <= 0) &&
+		( ps->pm_type != PM_INTERMISSION )) ? "1" : "0" );
+
 	// intermission view
 	static float hmdYaw = 0;
 	if ( ps->pm_type == PM_INTERMISSION ) {
@@ -665,6 +657,7 @@ static int CG_CalcViewValues( void ) {
         VectorCopy(cgVR->hmdorientation, cg.refdefViewAngles);
         cg.refdefViewAngles[YAW] += (ps->viewangles[YAW] - hmdYaw);
         AnglesToAxis( cg.refdefViewAngles, cg.refdef.viewaxis );
+
 		return CG_CalcFov();
 	}
 
@@ -710,12 +703,19 @@ static int CG_CalcViewValues( void ) {
 		CG_OffsetFirstPersonView();
 	}
 
-	//HACK!! - should change this to a renderer function call
-	//Indicate to renderer whether we are in deathcam mode, We don't want sky in death cam mode
-	trap_Cvar_Set( "r_deathCam", (cg.snap->ps.stats[STAT_HEALTH] <= 0) ? "1" : "0" );
-
 	// position eye relative to origin
-	AnglesToAxis( cg.refdefViewAngles, cg.refdef.viewaxis );
+	float sv_running = trap_Cvar_VariableValue("sv_running");
+    if (sv_running == 0.0f )
+    {
+    	//We are connected to a multiplayer server, so make the appropriate adjustment to the view
+    	//angles as we send orientation to the server that includes the weapon angles
+		vec3_t angles;
+		VectorCopy(cgVR->hmdorientation, angles);
+        angles[YAW] = (cg.refdefViewAngles[YAW] + cgVR->hmdorientation[YAW]) - cgVR->weaponangles[YAW];
+		AnglesToAxis( angles, cg.refdef.viewaxis );
+    } else {
+		AnglesToAxis( cg.refdefViewAngles, cg.refdef.viewaxis );
+    }
 
 	if ( cg.hyperspace ) {
 		cg.refdef.rdflags |= RDF_NOWORLDMODEL | RDF_HYPERSPACE;

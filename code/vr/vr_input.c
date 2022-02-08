@@ -192,7 +192,7 @@ static float length(float x, float y)
 void IN_VRInit( void )
 {
 	vr_righthanded = Cvar_Get ("vr_righthanded", "1", CVAR_ARCHIVE);
-	vr_snapturn = Cvar_Get ("vr_snapturn", "1", CVAR_ARCHIVE);
+	vr_snapturn = Cvar_Get ("vr_snapturn", "45", CVAR_ARCHIVE);
     vr_extralatencymode = Cvar_Get ("vr_extralatencymode", "1", CVAR_ARCHIVE);
 }
 
@@ -273,20 +273,37 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 			rotateAboutOrigin(-vr.hmdposition_delta[0] * factor * multiplier,
 							  vr.hmdposition_delta[2] * factor * multiplier, - vr.hmdorientation[YAW], positional);
 
+			vec2_t joystick;
+            if ( !com_sv_running || !com_sv_running->integer )
+            {
+                //multiplayer server
+                rotateAboutOrigin(joystickX, joystickY, vr.hmdorientation[YAW], joystick);
+            } else
+            {
+                joystick[0] = joystickX;
+                joystick[1] = joystickY;
+            }
+
             //sideways
-            Com_QueueEvent(in_vrEventTime, SE_JOYSTICK_AXIS, 0, joystickX * 127.0f + positional[0] * 127.0f, 0, NULL);
+            Com_QueueEvent(in_vrEventTime, SE_JOYSTICK_AXIS, 0, joystick[0] * 127.0f + positional[0] * 127.0f, 0, NULL);
 
             //forward/back
-            Com_QueueEvent(in_vrEventTime, SE_JOYSTICK_AXIS, 1, joystickY * 127.0f + positional[1] * 127.0f, 0, NULL);
+            Com_QueueEvent(in_vrEventTime, SE_JOYSTICK_AXIS, 1, joystick[1] * 127.0f + positional[1] * 127.0f, 0, NULL);
         }
         else //right controller
         {
             //yaw
-            if (vr_snapturn->integer)
+            if (vr_snapturn->integer > 0)
 			{
+            	int snap = 45;
+            	if (vr_snapturn->integer > 1)
+				{
+            		snap = vr_snapturn->integer;
+				}
+
 				if (!(controller->axisButtons & VR_TOUCH_AXIS_RIGHT) && joystickX > pressedThreshold) {
 					controller->axisButtons |= VR_TOUCH_AXIS_RIGHT;
-					CL_SnapTurn(45);
+					CL_SnapTurn(snap);
 				} else if ((controller->axisButtons & VR_TOUCH_AXIS_RIGHT) &&
 						joystickX < releasedThreshold) {
 					controller->axisButtons &= ~VR_TOUCH_AXIS_RIGHT;
@@ -294,7 +311,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 
 				if (!(controller->axisButtons & VR_TOUCH_AXIS_LEFT) && joystickX < -pressedThreshold) {
 					controller->axisButtons |= VR_TOUCH_AXIS_LEFT;
-					CL_SnapTurn(-45);
+					CL_SnapTurn(-snap);
 				} else if ((controller->axisButtons & VR_TOUCH_AXIS_LEFT) &&
 						   joystickX > -releasedThreshold) {
 					controller->axisButtons &= ~VR_TOUCH_AXIS_LEFT;
@@ -374,7 +391,7 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
 	}
 
 	if ((buttons & ovrButton_X) && !(controller->buttons & ovrButton_X)) {
-		sendButtonActionSimple("fraglimit 1");
+		//sendButtonActionSimple("fraglimit 1");
 		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_X, qtrue, 0, NULL);
 	} else if (!(buttons & ovrButton_X) && (controller->buttons & ovrButton_X)) {
 		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_X, qfalse, 0, NULL);

@@ -248,6 +248,8 @@ static	char		fs_gamedir[MAX_OSPATH];	// this will be a single file name with no 
 static	cvar_t		*fs_debug;
 static	cvar_t		*fs_homepath;
 
+static	cvar_t		*fs_forceNativeVM;
+
 #ifdef __APPLE__
 // Also search the .app bundle for .pk3 files
 static  cvar_t          *fs_apppath;
@@ -1332,6 +1334,7 @@ long FS_FOpenFileReadDir(const char *filename, searchpath_t *search, fileHandle_
 			   !FS_IsExt(filename, ".menu", len) &&		// menu files
 			   !FS_IsExt(filename, ".game", len) &&		// menu files
 			   !FS_IsExt(filename, ".dat", len) &&		// for journal files
+			   !FS_IsExt(filename, ".glsl", len) &&		// external glsl files
 			   !FS_IsDemoExt(filename, len))			// demos
 			{
 				*file = 0;
@@ -1451,7 +1454,7 @@ int FS_FindVM(void **startSearch, char *found, int foundlen, const char *name, i
 	char dllName[MAX_OSPATH], qvmName[MAX_OSPATH];
 	char *netpath;
 
-	if(!fs_searchpaths)
+    if(!fs_searchpaths)
 		Com_Error(ERR_FATAL, "Filesystem call made without initialization");
 
 	if(enableDll)
@@ -1467,7 +1470,7 @@ int FS_FindVM(void **startSearch, char *found, int foundlen, const char *name, i
 
 	while(search)
 	{
-		if(search->dir && !fs_numServerPaks)
+		if(search->dir && (!fs_numServerPaks || fs_forceNativeVM->integer != 0))
 		{
 			dir = search->dir;
 
@@ -1495,7 +1498,8 @@ int FS_FindVM(void **startSearch, char *found, int foundlen, const char *name, i
 				return VMI_COMPILED;
 			}
 		}
-		else if(search->pack)
+		else if(search->pack &&
+		    fs_forceNativeVM->integer == 0)
 		{
 			pack = search->pack;
 
@@ -3986,7 +3990,10 @@ void FS_InitFilesystem( void ) {
 	Com_StartupVariable("fs_homepath");
 	Com_StartupVariable("fs_game");
 
-	if(!FS_FilenameCompare(Cvar_VariableString("fs_game"), com_basegame->string))
+    fs_forceNativeVM = Cvar_Get( "fs_forceNativeVM", "1", CVAR_ARCHIVE );
+
+
+    if(!FS_FilenameCompare(Cvar_VariableString("fs_game"), com_basegame->string))
 		Cvar_Set("fs_game", "");
 
 	// try to start up normally

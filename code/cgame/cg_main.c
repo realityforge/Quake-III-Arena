@@ -50,8 +50,11 @@ This must be the very first function compiled into the .q3vm file
 Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11  ) {
 
 	switch ( command ) {
-	case CG_INIT:
-		CG_Init( arg0, arg1, arg2 );
+	case CG_INIT: {
+            int ptr[2] = {arg3, arg4};
+            cgVR = (vr_clientinfo_t *) (*(long *) (ptr));
+            CG_Init(arg0, arg1, arg2);
+        }
 		return 0;
 	case CG_SHUTDOWN:
 		CG_Shutdown();
@@ -78,11 +81,6 @@ Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, i
 	case CG_EVENT_HANDLING:
 		CG_EventHandling(arg0);
 		return 0;
-	case CG_SET_VR_CLIENT_INFO: {
-		int ptr[2] = {arg0, arg1};
-		cgVR = (vr_clientinfo_t *) (*(long*)(ptr));
-		return 0;
-	}
 	default:
 		CG_Error( "vmMain: unknown command %i", command );
 		break;

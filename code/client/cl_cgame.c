@@ -56,17 +56,6 @@ void CL_GetGlconfig( glconfig_t *glconfig ) {
 }
 
 /*
-=====================
-CL_CGameRendering
-=====================
-*/
-void CL_CGameSetVRClientInfo() {
-	long val = (long)(&vr);
-	int *ptr = (int*)(&val);	 //HACK!!
-	VM_Call( cgvm, CG_SET_VR_CLIENT_INFO, ptr[0], ptr[1] );
-}
-
-/*
 ====================
 CL_GetUserCmd
 ====================
@@ -751,10 +740,14 @@ void CL_InitCGame( void ) {
 	}
 	clc.state = CA_LOADING;
 
+	//Pass the vr client info in on the init
+	long val = (long)(&vr);
+	int *ptr = (int*)(&val);	 //HACK!!
+
 	// init for this gamestate
 	// use the lastExecutedServerCommand instead of the serverCommandSequence
 	// otherwise server commands sent just before a gamestate are dropped
-	VM_Call( cgvm, CG_INIT, clc.serverMessageSequence, clc.lastExecutedServerCommand, clc.clientNum );
+	VM_Call( cgvm, CG_INIT, clc.serverMessageSequence, clc.lastExecutedServerCommand, clc.clientNum, ptr[0], ptr[1] );
 
 	// reset any CVAR_CHEAT cvars registered by cgame
 	if ( !clc.demoplaying && !cl_connectedToCheatServer )

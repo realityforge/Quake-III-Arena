@@ -24,8 +24,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "server.h"
 
 #include "../botlib/botlib.h"
+#include "../vr/vr_clientinfo.h"
 
 botlib_export_t	*botlib_export;
+extern vr_clientinfo_t vr;
 
 // these functions must be used instead of pointer arithmetic, because
 // the game allocates gentities with private information after the server shared part
@@ -885,10 +887,14 @@ static void SV_InitGameVM( qboolean restart ) {
 	for ( i = 0 ; i < sv_maxclients->integer ; i++ ) {
 		svs.clients[i].gentity = NULL;
 	}
-	
+
+	//Ensure the game library has our VR client info
+	long val = (long)(&vr);
+	int *ptr = (int*)(&val);	 //HACK!!
+
 	// use the current msec count for a random seed
 	// init for this gamestate
-	VM_Call (gvm, GAME_INIT, sv.time, Com_Milliseconds(), restart);
+	VM_Call (gvm, GAME_INIT, sv.time, Com_Milliseconds(), restart, ptr[0], ptr[1]);
 }
 
 

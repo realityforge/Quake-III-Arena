@@ -230,7 +230,16 @@ void CG_ConvertFromVR(vec3_t in, vec3_t offset, vec3_t out)
 	VectorSet(vrSpace, in[2], in[0], in[1] );
 
 	vec2_t r;
-	rotateAboutOrigin(vrSpace[0], vrSpace[1], cg.refdefViewAngles[YAW] - cgVR->hmdorientation[YAW], r);
+	float sv_running = trap_Cvar_VariableValue("sv_running");
+	if (sv_running == 0.0f )
+	{
+		//We are connected to a multiplayer server, so make the appropriate adjustment to the view
+		//angles as we send orientation to the server that includes the weapon angles
+		rotateAboutOrigin(vrSpace[0], vrSpace[1], cg.refdefViewAngles[YAW] - cgVR->weaponangles[YAW], r);
+	} else {
+		rotateAboutOrigin(vrSpace[0], vrSpace[1], cg.refdefViewAngles[YAW] - cgVR->hmdorientation[YAW], r);
+	}
+
 	vrSpace[0] = -r[0];
 	vrSpace[1] = -r[1];
 
@@ -255,7 +264,16 @@ void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles )
 
 	VectorCopy(cgVR->weaponangles, angles);
 
-	angles[YAW] += (cg.refdefViewAngles[YAW] - cgVR->hmdorientation[YAW]);
+	float sv_running = trap_Cvar_VariableValue("sv_running");
+	if (sv_running == 0.0f )
+	{
+		//take player state angles provided by server
+		angles[YAW] = cg.snap->ps.viewangles[YAW];
+		angles[PITCH] = cg.snap->ps.viewangles[PITCH];
+	} else
+ 	{
+		angles[YAW] += (cg.refdefViewAngles[YAW] - cgVR->hmdorientation[YAW]);
+	}
 }
 
 /*

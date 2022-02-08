@@ -598,13 +598,13 @@ void CL_FinishMove( usercmd_t *cmd ) {
 	{
 		vec3_t angles;
 		VectorCopy(vr.weaponangles, angles);
-		angles[YAW] += cl.viewangles[YAW];
+		angles[YAW] += (cl.viewangles[YAW] - vr.hmdorientation[YAW]);
 		for (i = 0; i < 3; i++) {
 			cmd->angles[i] = ANGLE2SHORT(angles[i]);
 		}
 
 		vec3_t out;
-		rotateAboutOrigin(cmd->rightmove, cmd->forwardmove, cl.viewangles[YAW], out);
+		rotateAboutOrigin(cmd->rightmove, cmd->forwardmove, -vr.weaponangles[YAW], out);
 		cmd->rightmove = out[0];
 		cmd->forwardmove = out[1];
 	}

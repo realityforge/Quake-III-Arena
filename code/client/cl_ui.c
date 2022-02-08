@@ -1123,12 +1123,15 @@ void CL_InitUI( void ) {
 		Com_Error( ERR_FATAL, "VM_Create on UI failed" );
 	}
 
+	long val = (long)(&vr);
+	int *ptr = (int*)(&val);	 //HACK!!
+
 	// sanity check
 	v = VM_Call( uivm, UI_GETAPIVERSION );
 	if (v == UI_OLD_API_VERSION) {
 //		Com_Printf(S_COLOR_YELLOW "WARNING: loading old Quake III Arena User Interface version %d\n", v );
 		// init for this gamestate
-		VM_Call( uivm, UI_INIT, (clc.state >= CA_AUTHORIZING && clc.state < CA_ACTIVE));
+		VM_Call( uivm, UI_INIT, (clc.state >= CA_AUTHORIZING && clc.state < CA_ACTIVE), ptr[0], ptr[1]);
 	}
 	else if (v != UI_API_VERSION) {
 		// Free uivm now, so UI_SHUTDOWN doesn't get called later.
@@ -1140,13 +1143,7 @@ void CL_InitUI( void ) {
 	}
 	else {
 		// init for this gamestate
-		VM_Call( uivm, UI_INIT, (clc.state >= CA_AUTHORIZING && clc.state < CA_ACTIVE) );
-	}
-
-	{
-		long val = (long)(&vr);
-		int *ptr = (int*)(&val);	 //HACK!!
-		VM_Call( uivm, UI_SET_VR_CLIENT_INFO, ptr[0], ptr[1] );
+		VM_Call( uivm, UI_INIT, (clc.state >= CA_AUTHORIZING && clc.state < CA_ACTIVE), ptr[0], ptr[1] );
 	}
 }
 

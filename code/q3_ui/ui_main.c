@@ -47,8 +47,12 @@ Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, i
 	case UI_GETAPIVERSION:
 		return UI_API_VERSION;
 
-	case UI_INIT:
-		UI_Init();
+	case UI_INIT: {
+			int ptr[2] = {arg1, arg2};
+			uiVR = (vr_clientinfo_t *) (*(long *) (ptr));
+
+			UI_Init();
+		}
 		return 0;
 
 	case UI_SHUTDOWN:
@@ -82,13 +86,6 @@ Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, i
 		return 0;
 	case UI_HASUNIQUECDKEY:				// mod authors need to observe this
 		return qtrue;  // change this to qfalse for mods!
-
-	case UI_SET_VR_CLIENT_INFO:{
-		int ptr[2] = {arg0, arg1};
-		uiVR = (vr_clientinfo_t *) (*(long*)(ptr));
-		return 0;
-	}
-
 	}
 
 	return -1;

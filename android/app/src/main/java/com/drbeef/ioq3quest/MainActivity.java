@@ -12,14 +12,18 @@ import androidx.core.content.ContextCompat;
 
 import org.libsdl.app.SDLActivity;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import static android.system.Os.setenv;
 
@@ -35,12 +39,14 @@ public class MainActivity extends SDLActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Log.i(TAG,"onCreate called");
-		checkPermissionsAndInitialize();
+		try {
+			checkPermissionsAndInitialize();
+		} catch (Exception e) {}
 		super.onCreate(savedInstanceState);
 	}
 
 	/** Initializes the Activity only if the permission has been granted. */
-	private void checkPermissionsAndInitialize() {
+	private void checkPermissionsAndInitialize() throws IOException {
 		// Boilerplate for checking runtime permissions in Android.
 		if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 				!= PackageManager.PERMISSION_GRANTED){
@@ -65,19 +71,49 @@ public class MainActivity extends SDLActivity
 		}
 	}
 
-	public void create() {
-		Log.d(TAG, "making dirs");
-		//Make the directories
-		new File("/sdcard/ioquake3Quest/").mkdirs();
+	public static void unzip(File zipFile, File targetDirectory) throws IOException {
+		ZipInputStream zis = new ZipInputStream(
+				new BufferedInputStream(new FileInputStream(zipFile)));
+		try {
+			ZipEntry ze;
+			int count;
+			byte[] buffer = new byte[8192];
+			while ((ze = zis.getNextEntry()) != null) {
+				File file = new File(targetDirectory, ze.getName());
+				File dir = ze.isDirectory() ? file : file.getParentFile();
+				if (!dir.isDirectory() && !dir.mkdirs())
+					throw new FileNotFoundException("Failed to ensure directory: " +
+							dir.getAbsolutePath());
+				if (ze.isDirectory())
+					continue;
+				FileOutputStream fout = new FileOutputStream(file);
+				try {
+					while ((count = zis.read(buffer)) != -1)
+						fout.write(buffer, 0, count);
+				} finally {
+					fout.close();
+				}
+			}
+		} finally {
+			zis.close();
+		}
+	}
 
-		Log.d(TAG, "copying commandline.txt");
+	public void create() throws IOException {
+		//Make the directories
+		new File("/sdcard/ioquake3Quest/baseq3").mkdirs();
+
 		//Copy the command line params file
 		copy_asset("/sdcard/ioquake3Quest", "commandline.txt", false);
+
+		//glsl
+		copy_asset("/sdcard/ioquake3Quest", "glsl.zip", true);
+		new File("/sdcard/ioquake3Quest/baseq3/glsl").mkdirs();
+		unzip(new File("/sdcard/ioquake3Quest/glsl.zip"), new File("/sdcard/ioquake3Quest/baseq3/glsl"));
 
 		//Read these from a file and pass through
 		commandLineParams = new String();
 
-		Log.d(TAG, "reading commandline.txt");
 		//See if user is trying to use command line params
 		if (new File("/sdcard/ioquake3Quest/commandline.txt").exists())
 		{

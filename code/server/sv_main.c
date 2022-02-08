@@ -21,7 +21,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "server.h"
-#include "../vr/vr_clientinfo.h"
 
 #ifdef USE_VOIP
 cvar_t *sv_voip;
@@ -31,7 +30,6 @@ cvar_t *sv_voipProtocol;
 serverStatic_t	svs;				// persistant server info
 server_t		sv;					// local server
 vm_t			*gvm = NULL;				// game virtual machine
-extern vr_clientinfo_t vr;
 
 cvar_t	*sv_fps = NULL;			// time rate for running non-clients
 cvar_t	*sv_timeout;			// seconds without any message
@@ -1130,10 +1128,6 @@ void SV_Frame( int msec ) {
 		startTime = 0;	// quite a compiler warning
 	}
 
-	//Ensure the game library has our VR client info
-    long val = (long)(&vr);
-    int *ptr = (int*)(&val);	 //HACK!!
-    VM_Call( gvm, GAME_SET_VR_CLIENT_INFO, ptr[0], ptr[1] );
 
 	// update ping based on the all received frames
 	SV_CalcPings();
