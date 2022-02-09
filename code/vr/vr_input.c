@@ -65,7 +65,8 @@ float degrees(float rad) {
 #define EPSILON 0.001f
 #endif
 
-cvar_t  *vr_extralatencymode = NULL;
+cvar_t *vr_extralatencymode = NULL;
+cvar_t *vr_directionMode = NULL;
 
 void rotateAboutOrigin(float x, float y, float rotation, vec2_t out)
 {
@@ -194,6 +195,7 @@ void IN_VRInit( void )
 	vr_righthanded = Cvar_Get ("vr_righthanded", "1", CVAR_ARCHIVE);
 	vr_snapturn = Cvar_Get ("vr_snapturn", "45", CVAR_ARCHIVE);
     vr_extralatencymode = Cvar_Get ("vr_extralatencymode", "1", CVAR_ARCHIVE);
+	vr_directionMode = Cvar_Get ("vr_directionMode", "0", CVAR_ARCHIVE); // 0 = HMD, 1 = Off-hand
 }
 
 static void IN_VRController( qboolean isRightController, ovrTracking remoteTracking )
@@ -208,29 +210,24 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
 		VectorSubtract(vr.weaponangles_last, vr.weaponangles, vr.weaponangles_delta);
 		VectorCopy(vr.weaponangles, vr.weaponangles_last);
 
-		//Record recent weapon position for trajectory based stuff
-		for (int i = (NUM_WEAPON_SAMPLES-1); i != 0; --i)
-		{
-			VectorCopy(vr.weaponoffset_history[i-1], vr.weaponoffset_history[i]);
-			vr.weaponoffset_history_timestamp[i] = vr.weaponoffset_history_timestamp[i-1];
-		}
-		VectorCopy(vr.current_weaponoffset, vr.weaponoffset_history[0]);
-		vr.weaponoffset_history_timestamp[0] = vr.current_weaponoffset_timestamp;
-
 		///Weapon location relative to view
-		vr.current_weaponoffset[0] = remoteTracking.HeadPose.Pose.Position.x - vr.hmdposition[0];
-		vr.current_weaponoffset[1] = remoteTracking.HeadPose.Pose.Position.y - vr.hmdposition[1];
-		vr.current_weaponoffset[2] = remoteTracking.HeadPose.Pose.Position.z - vr.hmdposition[2];
-		vr.current_weaponoffset_timestamp = Sys_Milliseconds( );
+		vr.weaponposition[0] = remoteTracking.HeadPose.Pose.Position.x;
+		vr.weaponposition[1] = remoteTracking.HeadPose.Pose.Position.y;
+		vr.weaponposition[2] = remoteTracking.HeadPose.Pose.Position.z;
 
-		//Just copy to calculated offset, used to use this in case we wanted to apply any modifiers, but don't any more
-		VectorCopy(vr.current_weaponoffset, vr.calculated_weaponoffset);
+		vr.weaponoffset[0] = remoteTracking.HeadPose.Pose.Position.x - vr.hmdposition[0];
+		vr.weaponoffset[1] = remoteTracking.HeadPose.Pose.Position.y - vr.hmdposition[1];
+		vr.weaponoffset[2] = remoteTracking.HeadPose.Pose.Position.z - vr.hmdposition[2];
 	} else {
         vec3_t rotation = {0};
         rotation[PITCH] =-20.0f;
         QuatToYawPitchRoll(remoteTracking.HeadPose.Pose.Orientation, rotation, vr.offhandangles);
 
         ///location relative to view
+        vr.offhandposition[0] = remoteTracking.HeadPose.Pose.Position.x;
+        vr.offhandposition[1] = remoteTracking.HeadPose.Pose.Position.y;
+        vr.offhandposition[2] = remoteTracking.HeadPose.Pose.Position.z;
+
         vr.offhandoffset[0] = remoteTracking.HeadPose.Pose.Position.x - vr.hmdposition[0];
         vr.offhandoffset[1] = remoteTracking.HeadPose.Pose.Position.y - vr.hmdposition[1];
         vr.offhandoffset[2] = remoteTracking.HeadPose.Pose.Position.z - vr.hmdposition[2];
@@ -238,9 +235,9 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
 
     if (vr.weapon_stabilised)
     {
-        float x = vr.offhandoffset[0] - vr.calculated_weaponoffset[0];
-        float y = vr.offhandoffset[1] - vr.calculated_weaponoffset[1];
-        float z = vr.offhandoffset[2] - vr.calculated_weaponoffset[2];
+        float x = vr.offhandoffset[0] - vr.weaponoffset[0];
+        float y = vr.offhandoffset[1] - vr.weaponoffset[1];
+        float z = vr.offhandoffset[2] - vr.weaponoffset[2];
         float zxDist = length(x, z);
 
         if (zxDist != 0.0f && z != 0.0f) {
@@ -264,24 +261,39 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 	} else
 	{
 		if (isRightController == qfalse) {
-			//Positional movement speed correction for when we are not hitting target framerate
-			int refresh = vrapi_GetSystemPropertyInt(&(VR_GetEngine()->java), VRAPI_SYS_PROP_DISPLAY_REFRESH_RATE);
-			float multiplier = (float)((1000.0 / refresh) / (in_vrEventTime - lastframetime));
-
-			vec2_t positional;
-			float factor = (refresh / 72.0F) * 10.0f; // adjust positional factor based on refresh rate
-			rotateAboutOrigin(-vr.hmdposition_delta[0] * factor * multiplier,
-							  vr.hmdposition_delta[2] * factor * multiplier, - vr.hmdorientation[YAW], positional);
+			vec3_t positional;
+			VectorClear(positional);
 
 			vec2_t joystick;
             if ( !com_sv_running || !com_sv_running->integer )
             {
                 //multiplayer server
-                rotateAboutOrigin(joystickX, joystickY, vr.hmdorientation[YAW], joystick);
-            } else
+                if (!vr_directionMode->integer) {
+					//HMD Based
+					rotateAboutOrigin(joystickX, joystickY, vr.hmdorientation[YAW], joystick);
+				} else {
+                	//Off-hand based
+					rotateAboutOrigin(joystickX, joystickY, vr.offhandangles[YAW], joystick);
+				}
+            }
+            else
             {
-                joystick[0] = joystickX;
-                joystick[1] = joystickY;
+				//Positional movement speed correction for when we are not hitting target framerate
+				int refresh = vrapi_GetSystemPropertyInt(&(VR_GetEngine()->java), VRAPI_SYS_PROP_DISPLAY_REFRESH_RATE);
+				float multiplier = (float)((1000.0 / refresh) / (in_vrEventTime - lastframetime));
+
+				float factor = (refresh / 72.0F) * 10.0f; // adjust positional factor based on refresh rate
+				rotateAboutOrigin(-vr.hmdposition_delta[0] * factor * multiplier,
+								  vr.hmdposition_delta[2] * factor * multiplier, -vr.hmdorientation[YAW], positional);
+
+				if (!vr_directionMode->integer) {
+					//HMD Based
+					joystick[0] = joystickX;
+					joystick[1] = joystickY;
+				} else {
+					//Off-hand based
+					rotateAboutOrigin(joystickX, joystickY, vr.offhandangles[YAW] - vr.hmdorientation[YAW], joystick);
+				}
             }
 
             //sideways

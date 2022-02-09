@@ -39,7 +39,7 @@ int drawTeamOverlayModificationCount = -1;
 int sortedTeamPlayers[TEAM_MAXOVERLAY];
 int	numSortedTeamPlayers;
 
-extern vr_clientinfo_t* cgVR;
+extern vr_clientinfo_t* vr;
 extern stereoFrame_t hudStereoView;
 
 char systemChat[256];
@@ -2684,7 +2684,18 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 					   worldscale * (ipd / 2); // right
 
 	cg.refdef.vieworg[2] -= PLAYER_HEIGHT;
-	cg.refdef.vieworg[2] += cgVR->hmdposition[1] * worldscale;
+	cg.refdef.vieworg[2] += vr->hmdposition[1] * worldscale;
+
+	//If connected to external server, allow some amount of faked positional tracking
+	float sv_running = trap_Cvar_VariableValue("sv_running");
+	if ( sv_running == 0.0f  && ( cg.snap->ps.stats[STAT_HEALTH] > 0 )) {
+		vec3_t pos;
+		VectorClear(pos);
+		rotateAboutOrigin(vr->hmdposition[2], vr->hmdposition[0], cg.refdefViewAngles[YAW] - vr->weaponangles[YAW], pos);
+		VectorScale(pos, worldscale, pos);
+		VectorSubtract(cg.refdef.vieworg, pos, cg.refdef.vieworg);
+	}
+
 	VectorMA(cg.refdef.vieworg, -separation, cg.refdef.viewaxis[1], cg.refdef.vieworg);
 
 	// draw 3D view

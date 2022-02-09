@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "cg_local.h"
 #include "../vr/vr_clientinfo.h"
 
-extern vr_clientinfo_t* cgVR;
+extern vr_clientinfo_t* vr;
 
 /*
 =============================================================================
@@ -227,7 +227,7 @@ CG_OffsetDeathView
 static void CG_OffsetDeathView( void ) {
 
     vec3_t position_delta;
-    VectorNegate(cgVR->hmdposition_delta, position_delta);
+    VectorNegate(vr->hmdposition_delta, position_delta);
     CG_ConvertFromVR(position_delta, NULL, position_delta);
     position_delta[2] = 0;
     VectorScale(position_delta, (DEATH_WORLDSCALE_MULTIPLIER / 2), position_delta);
@@ -636,7 +636,7 @@ static int CG_CalcViewValues( void ) {
 
 	//HACK!! - should change this to a renderer function call
 	//Indicate to renderer whether we are in deathcam mode, We don't want sky in death cam mode
-	trap_Cvar_Set( "r_deathCam", ((ps->stats[STAT_HEALTH] <= 0) &&
+	trap_Cvar_Set( "vr_deathCam", ((ps->stats[STAT_HEALTH] <= 0) &&
 		( ps->pm_type != PM_INTERMISSION )) ? "1" : "0" );
 
 	// intermission view
@@ -654,14 +654,14 @@ static int CG_CalcViewValues( void ) {
 		CG_Trace( &trace, ps->origin, mins, maxs, end, cg.predictedPlayerState.clientNum, MASK_SOLID );
         VectorCopy(trace.endpos, cg.refdef.vieworg);
 
-        VectorCopy(cgVR->hmdorientation, cg.refdefViewAngles);
+        VectorCopy(vr->hmdorientation, cg.refdefViewAngles);
         cg.refdefViewAngles[YAW] += (ps->viewangles[YAW] - hmdYaw);
         AnglesToAxis( cg.refdefViewAngles, cg.refdef.viewaxis );
 
 		return CG_CalcFov();
 	}
 
-    hmdYaw = cgVR->hmdorientation[YAW];
+    hmdYaw = vr->hmdorientation[YAW];
 
 	cg.bobcycle = ( ps->bobCycle & 128 ) >> 7;
 	cg.bobfracsin = fabs( sin( ( ps->bobCycle & 127 ) / 127.0 * M_PI ) );
@@ -710,8 +710,8 @@ static int CG_CalcViewValues( void ) {
     	//We are connected to a multiplayer server, so make the appropriate adjustment to the view
     	//angles as we send orientation to the server that includes the weapon angles
 		vec3_t angles;
-		VectorCopy(cgVR->hmdorientation, angles);
-        angles[YAW] = (cg.refdefViewAngles[YAW] + cgVR->hmdorientation[YAW]) - cgVR->weaponangles[YAW];
+		VectorCopy(vr->hmdorientation, angles);
+        angles[YAW] = (cg.refdefViewAngles[YAW] + vr->hmdorientation[YAW]) - vr->weaponangles[YAW];
 		AnglesToAxis( angles, cg.refdef.viewaxis );
     } else {
 		AnglesToAxis( cg.refdefViewAngles, cg.refdef.viewaxis );

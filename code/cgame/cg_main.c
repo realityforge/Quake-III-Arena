@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 displayContextDef_t cgDC;
 #endif
 
-vr_clientinfo_t *cgVR;
+vr_clientinfo_t *vr;
 
 int forceModelModificationCount = -1;
 
@@ -52,7 +52,7 @@ Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, i
 	switch ( command ) {
 	case CG_INIT: {
             int ptr[2] = {arg3, arg4};
-            cgVR = (vr_clientinfo_t *) (*(long *) (ptr));
+            vr = (vr_clientinfo_t *) (*(long *) (ptr));
             CG_Init(arg0, arg1, arg2);
         }
 		return 0;

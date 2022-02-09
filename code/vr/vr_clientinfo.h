@@ -10,6 +10,9 @@ typedef struct {
     qboolean right_handed;
     qboolean virtual_screen;
 
+    qboolean localServer;
+    int clientNum;
+
     vec3_t hmdposition;
     vec3_t hmdposition_last; // Don't use this, it is just for calculating delta!
     vec3_t hmdposition_delta;
@@ -22,14 +25,12 @@ typedef struct {
     vec3_t weaponangles_last; // Don't use this, it is just for calculating delta!
     vec3_t weaponangles_delta;
 
-    vec3_t current_weaponoffset;
-    vec3_t calculated_weaponoffset;
-    float current_weaponoffset_timestamp;
-    vec3_t weaponoffset_history[NUM_WEAPON_SAMPLES];
-    float weaponoffset_history_timestamp[NUM_WEAPON_SAMPLES];
+    vec3_t weaponoffset;
+    vec3_t weaponposition;
 
     vec3_t offhandangles;
     vec3_t offhandoffset;
+    vec3_t offhandposition;
 
     //////////////////////////////////////
     //    Test stuff for weapon alignment

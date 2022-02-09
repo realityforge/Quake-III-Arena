@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 int hudflags = 0;
 stereoFrame_t hudStereoView = STEREO_CENTER;
-extern vr_clientinfo_t* cgVR;
+extern vr_clientinfo_t* vr;
 
 void CG_SetHUDFlags(int flags)
 {
@@ -47,7 +47,7 @@ Adjusted for resolution and screen aspect ratio
 */
 void CG_AdjustFrom640( float *x, float *y, float *w, float *h ) {
 
-	if (cgVR->virtual_screen)
+	if (vr->virtual_screen)
 	{
 		// scale for screen sizes
 		*x *= cgs.screenXScale;

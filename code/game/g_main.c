@@ -39,7 +39,7 @@ typedef struct {
 gentity_t		g_entities[MAX_GENTITIES];
 gclient_t		g_clients[MAX_CLIENTS];
 
-vr_clientinfo_t* gVR;
+vr_clientinfo_t* vr;
 
 vmCvar_t	g_gametype;
 vmCvar_t	g_dmflags;
@@ -206,7 +206,7 @@ Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, i
 	switch ( command ) {
 	case GAME_INIT: {
 			int ptr[2] = {arg3, arg4};
-			gVR = (vr_clientinfo_t *) (*(long *) (ptr));
+			vr = (vr_clientinfo_t *) (*(long *) (ptr));
 			G_InitGame(arg0, arg1, arg2);
 		}
 		return 0;

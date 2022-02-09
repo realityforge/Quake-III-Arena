@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "cg_local.h"
 #include "../vr/vr_clientinfo.h"
 
-extern vr_clientinfo_t *cgVR;
+extern vr_clientinfo_t *vr;
 
 
 #define M_PI2		(float)6.28318530717958647692
@@ -235,9 +235,9 @@ void CG_ConvertFromVR(vec3_t in, vec3_t offset, vec3_t out)
 	{
 		//We are connected to a multiplayer server, so make the appropriate adjustment to the view
 		//angles as we send orientation to the server that includes the weapon angles
-		rotateAboutOrigin(vrSpace[0], vrSpace[1], cg.refdefViewAngles[YAW] - cgVR->weaponangles[YAW], r);
+		rotateAboutOrigin(vrSpace[0], vrSpace[1], cg.refdefViewAngles[YAW] - vr->weaponangles[YAW], r);
 	} else {
-		rotateAboutOrigin(vrSpace[0], vrSpace[1], cg.refdefViewAngles[YAW] - cgVR->hmdorientation[YAW], r);
+		rotateAboutOrigin(vrSpace[0], vrSpace[1], cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW], r);
 	}
 
 	vrSpace[0] = -r[0];
@@ -256,23 +256,34 @@ void CG_ConvertFromVR(vec3_t in, vec3_t offset, vec3_t out)
 
 void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles )
 {
-	CG_ConvertFromVR(cgVR->calculated_weaponoffset, cg.refdef.vieworg, origin);
+	qboolean localServer = trap_Cvar_VariableValue("sv_running") != 0;
+
+	if (!localServer)
+	{
+		vec3_t offset;
+		VectorCopy(vr->weaponposition, offset);
+		offset[1] = vr->weaponoffset[1]; // up/down is index 1 in this case
+		CG_ConvertFromVR(offset, cg.refdef.vieworg, origin);
+	}
+	else
+	{
+		CG_ConvertFromVR(vr->weaponoffset, cg.refdef.vieworg, origin);
+	}
 
 	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
     origin[2] -= PLAYER_HEIGHT;
-    origin[2] += cgVR->hmdposition[1] * worldscale;
+    origin[2] += vr->hmdposition[1] * worldscale;
 
-	VectorCopy(cgVR->weaponangles, angles);
+	VectorCopy(vr->weaponangles, angles);
 
-	float sv_running = trap_Cvar_VariableValue("sv_running");
-	if (sv_running == 0.0f )
+	if ( !localServer )
 	{
 		//take player state angles provided by server
-		angles[YAW] = cg.snap->ps.viewangles[YAW];
-		angles[PITCH] = cg.snap->ps.viewangles[PITCH];
+		angles[YAW] = cg.predictedPlayerState.viewangles[YAW]; //cg.snap->ps.viewangles[YAW];
+		angles[PITCH] = cg.predictedPlayerState.viewangles[PITCH]; //cg.snap->ps.viewangles[PITCH];
 	} else
  	{
-		angles[YAW] += (cg.refdefViewAngles[YAW] - cgVR->hmdorientation[YAW]);
+		angles[YAW] += (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]);
 	}
 }
 
@@ -1712,7 +1723,7 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 				   &(adjust[PITCH]), &(adjust[YAW]), &(adjust[ROLL]));
 			VectorScale(temp_offset, scale, offset);
 
-			if (!cgVR->right_handed)
+			if (!vr->right_handed)
 			{
 				//yaw needs to go in the other direction as left handed model is reversed
 				adjust[YAW] *= -1.0f;
@@ -1732,7 +1743,7 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 			AngleVectors( angles, forward, right, up );
 			VectorMA( hand.origin, offset[2], forward, hand.origin );
 			VectorMA( hand.origin, offset[1], up, hand.origin );
-			if (cgVR->right_handed) {
+			if (vr->right_handed) {
 				VectorMA(hand.origin, offset[0], right, hand.origin);
 			} else {
 				VectorMA(hand.origin, -offset[0], right, hand.origin);
@@ -1765,7 +1776,7 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 
 	//scale the whole model
 	for ( int i = 0; i < 3; i++ ) {
-		VectorScale( hand.axis[i], cgVR->right_handed || i != 1 ? scale : -scale, hand.axis[i] );
+		VectorScale( hand.axis[i], vr->right_handed || i != 1 ? scale : -scale, hand.axis[i] );
 	}
 
 

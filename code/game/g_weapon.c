@@ -31,7 +31,7 @@ static	float	s_quadFactor;
 static	vec3_t	forward, right, up;
 static	vec3_t	muzzle;
 
-extern vr_clientinfo_t* gVR;
+extern vr_clientinfo_t* vr;
 
 #define NUM_NAILSHOTS 15
 
@@ -48,7 +48,7 @@ void convertFromVR(gentity_t *ent, vec3_t in, vec3_t offset, vec3_t out)
 	VectorSet(vrSpace, in[2], in[0], in[1] );
 
 	vec2_t r;
-	rotateAboutOrigin(vrSpace[0], vrSpace[1], ent->client->ps.viewangles[YAW] - gVR->hmdorientation[YAW], r);
+	rotateAboutOrigin(vrSpace[0], vrSpace[1], ent->client->ps.viewangles[YAW] - vr->hmdorientation[YAW], r);
 	vrSpace[0] = -r[0];
 	vrSpace[1] = -r[1];
 
@@ -107,8 +107,8 @@ qboolean CheckGauntletAttack( gentity_t *ent ) {
 
 	// set aiming directions
 	vec3_t angles;
-	VectorCopy(gVR->weaponangles, angles);
-	angles[YAW] += (ent->client->ps.viewangles[YAW] - gVR->hmdorientation[YAW]);
+	VectorCopy(vr->weaponangles, angles);
+	angles[YAW] += (ent->client->ps.viewangles[YAW] - vr->hmdorientation[YAW]);
 	AngleVectors (angles, forward, right, up);
 
 	CalcMuzzlePoint ( ent, forward, right, up, muzzle );
@@ -811,12 +811,12 @@ void CalcMuzzlePoint ( gentity_t *ent, vec3_t forward, vec3_t right, vec3_t up, 
 		muzzlePoint[2] += ent->client->ps.viewheight;
 		VectorMA( muzzlePoint, 14, forward, muzzlePoint );
 	}
-	else if (gVR != NULL)
+	else if (vr != NULL)
 	{
 		float worldscale = trap_Cvar_VariableValue("vr_worldscale");
-		convertFromVR(ent, gVR->calculated_weaponoffset, ent->r.currentOrigin, muzzlePoint);
+		convertFromVR(ent, vr->weaponoffset, ent->r.currentOrigin, muzzlePoint);
 		muzzlePoint[2] -= ent->client->ps.viewheight;
-		muzzlePoint[2] += gVR->hmdposition[1] * worldscale;
+		muzzlePoint[2] += vr->hmdposition[1] * worldscale;
 	}
 
 	// snap to integer coordinates for more efficient network bandwidth usage
@@ -867,10 +867,10 @@ void FireWeapon( gentity_t *ent ) {
 	}
 
 	vec3_t viewang;
-	if ( !( ent->r.svFlags & SVF_BOT ) && gVR != NULL)
+	if ( !( ent->r.svFlags & SVF_BOT ) && vr != NULL)
 	{
-		VectorCopy(gVR->weaponangles, viewang);
-		viewang[YAW] += ent->client->ps.viewangles[YAW] - gVR->hmdorientation[YAW];
+		VectorCopy(vr->weaponangles, viewang);
+		viewang[YAW] += ent->client->ps.viewangles[YAW] - vr->hmdorientation[YAW];
 	}
 	else
 	{

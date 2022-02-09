@@ -208,7 +208,17 @@ void VR_ClearFrameBuffer( GLuint frameBuffer, int width, int height)
     glEnable( GL_SCISSOR_TEST );
     glViewport( 0, 0, width, height );
 
-    glClearColor( 0.2f, 0.0f, 0.05f, 1.0f );
+	if (Cvar_VariableIntegerValue("vr_deathCam"))
+	{
+		//Blood red.. ish
+		glClearColor( 0.12f, 0.0f, 0.05f, 1.0f );
+	}
+	else
+	{
+		//Black
+		glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
+	}
+
     glScissor( 0, 0, width, height );
     glClear( GL_COLOR_BUFFER_BIT );
 

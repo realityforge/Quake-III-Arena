@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../qcommon/q_shared.h"
 #include "bg_public.h"
 #include "bg_local.h"
+#include "../vr/vr_clientinfo.h"
 
 pmove_t		*pm;
 pml_t		pml;
@@ -47,6 +48,7 @@ float	pm_spectatorfriction = 5.0f;
 
 int		c_pmove = 0;
 
+extern vr_clientinfo_t *vr;
 
 /*
 ===============
@@ -1810,8 +1812,18 @@ void PM_UpdateViewAngles( playerState_t *ps, const usercmd_t *cmd ) {
 
 	// circularly clamp the angles with deltas
 	for (i=0 ; i<3 ; i++) {
-		//temp = cmd->angles[i] + ps->delta_angles[i];
-		temp = cmd->angles[i] + (i == YAW ? ps->delta_angles[i] : 0);
+		if (vr != NULL && vr->clientNum == ps->clientNum && vr->localServer)
+		{
+			//Client is the VR player on the "local" server
+			temp = cmd->angles[i] + (i == YAW ? ps->delta_angles[i] : 0);
+		}
+		else
+		{
+			//Client is either a BOT or a remote/connected player, or
+			//the vr player playing on a remote server (since this is shared code by game and cgame)
+			temp = cmd->angles[i] + ps->delta_angles[i];
+		}
+
 		if ( i == PITCH ) {
 			// don't let the player look up or down more than 90 degrees
 			if ( temp > 16000 ) {

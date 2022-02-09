@@ -596,8 +596,12 @@ void CL_FinishMove( usercmd_t *cmd ) {
 	//and adjust the move values accordingly, to "fake" a 3DoF weapon but keeping the movement correct
 	if ( !com_sv_running || !com_sv_running->integer )
 	{
+		vr.localServer = qfalse;
+		vr.clientNum = -1;
+
 		vec3_t angles;
 		VectorCopy(vr.weaponangles, angles);
+		angles[ROLL] = 0; // suppress roll
 		angles[YAW] += (cl.viewangles[YAW] - vr.hmdorientation[YAW]);
 		for (i = 0; i < 3; i++) {
 			cmd->angles[i] = ANGLE2SHORT(angles[i]);
@@ -609,6 +613,12 @@ void CL_FinishMove( usercmd_t *cmd ) {
 		cmd->forwardmove = out[1];
 	}
 	else {
+		vr.localServer = qtrue;
+
+		//Record client number - local server uses this to know we can use absolute angles
+		//rather than deltas
+		vr.clientNum = cl.snap.ps.clientNum;
+
 		for (i = 0; i < 3; i++) {
 			cmd->angles[i] = ANGLE2SHORT(cl.viewangles[i]);
 		}
