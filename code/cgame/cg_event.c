@@ -988,7 +988,7 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 		if(es->clientNum == cg.snap->ps.clientNum && !cg.renderingThirdPerson)
 		{
 			vec3_t angles;
-			CG_CalculateVRWeaponPosition(es->origin2, angles);
+			CG_CalculateVRWeaponPosition(es->origin2, angles, qfalse);
 			/*
 			if(cg_drawGun.integer == 2)
 				VectorMA(es->origin2, 8, cg.refdef.viewaxis[1], es->origin2);

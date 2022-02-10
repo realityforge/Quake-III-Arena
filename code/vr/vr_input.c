@@ -67,6 +67,7 @@ float degrees(float rad) {
 
 cvar_t *vr_extralatencymode = NULL;
 cvar_t *vr_directionMode = NULL;
+cvar_t *vr_mp6DoF = NULL;
 
 void rotateAboutOrigin(float x, float y, float rotation, vec2_t out)
 {
@@ -196,6 +197,9 @@ void IN_VRInit( void )
 	vr_snapturn = Cvar_Get ("vr_snapturn", "45", CVAR_ARCHIVE);
     vr_extralatencymode = Cvar_Get ("vr_extralatencymode", "1", CVAR_ARCHIVE);
 	vr_directionMode = Cvar_Get ("vr_directionMode", "0", CVAR_ARCHIVE); // 0 = HMD, 1 = Off-hand
+	vr_mp6DoF = Cvar_Get ("vr_mp6DoF", "1", CVAR_ARCHIVE); // if 0 then multiplayer will use only 3DoF for headset
+
+	memset(&vr, 0, sizeof(vr));
 }
 
 static void IN_VRController( qboolean isRightController, ovrTracking remoteTracking )
@@ -397,10 +401,35 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
 	}
 
 	if ((buttons & ovrButton_B) && !(controller->buttons & ovrButton_B)) {
-		Com_QueueEvent(in_vrEventTime, SE_KEY, K_ENTER, qtrue, 0, NULL);
+		if ( !com_sv_running || !com_sv_running->integer )
+		{
+			vr.realign_weapon = qtrue;
+		} else {
+			Com_QueueEvent(in_vrEventTime, SE_KEY, 'c', qtrue, 0, NULL);
+		}
 	} else if (!(buttons & ovrButton_B) && (controller->buttons & ovrButton_B)) {
-		Com_QueueEvent(in_vrEventTime, SE_KEY, K_ENTER, qfalse, 0, NULL);
+		if ( !com_sv_running || !com_sv_running->integer )
+		{
+		} else {
+			Com_QueueEvent(in_vrEventTime, SE_KEY, 'c', qfalse, 0, NULL);
+		}
 	}
+
+    if (isRightController == (vr_righthanded->integer != 0)) {
+        //thumbstick is "use item"
+        if ((buttons & ovrButton_RThumb) && !(controller->buttons & ovrButton_RThumb)) {
+            Com_QueueEvent(in_vrEventTime, SE_KEY, K_ENTER, qtrue, 0, NULL);
+        } else if (!(buttons & ovrButton_RThumb) && (controller->buttons & ovrButton_RThumb)) {
+            Com_QueueEvent(in_vrEventTime, SE_KEY, K_ENTER, qfalse, 0, NULL);
+        }
+    } else {
+        //thumbstick is "use item"
+        if ((buttons & ovrButton_LThumb) && !(controller->buttons & ovrButton_LThumb)) {
+            Com_QueueEvent(in_vrEventTime, SE_KEY, K_ENTER, qtrue, 0, NULL);
+        } else if (!(buttons & ovrButton_LThumb) && (controller->buttons & ovrButton_LThumb)) {
+            Com_QueueEvent(in_vrEventTime, SE_KEY, K_ENTER, qfalse, 0, NULL);
+        }
+    }
 
 	if ((buttons & ovrButton_X) && !(controller->buttons & ovrButton_X)) {
 		//sendButtonActionSimple("fraglimit 1");

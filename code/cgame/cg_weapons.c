@@ -230,8 +230,7 @@ void CG_ConvertFromVR(vec3_t in, vec3_t offset, vec3_t out)
 	VectorSet(vrSpace, in[2], in[0], in[1] );
 
 	vec2_t r;
-	float sv_running = trap_Cvar_VariableValue("sv_running");
-	if (sv_running == 0.0f )
+	if (!cgs.localServer)
 	{
 		//We are connected to a multiplayer server, so make the appropriate adjustment to the view
 		//angles as we send orientation to the server that includes the weapon angles
@@ -254,29 +253,50 @@ void CG_ConvertFromVR(vec3_t in, vec3_t offset, vec3_t out)
 	}
 }
 
-void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles )
+void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles, qboolean crosshair )
 {
-	qboolean localServer = trap_Cvar_VariableValue("sv_running") != 0;
+	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
 
-	if (!localServer)
+	if (!cgs.localServer)
 	{
-		vec3_t offset;
-		VectorCopy(vr->weaponposition, offset);
-		offset[1] = vr->weaponoffset[1]; // up/down is index 1 in this case
-		CG_ConvertFromVR(offset, cg.refdef.vieworg, origin);
+		if (trap_Cvar_VariableValue("vr_mp6DoF") == 1.0f &&
+			!crosshair)
+		{
+			//Use absolute position for the faked 6DoF for multiplayer
+			vec3_t offset;
+			VectorCopy(vr->weaponposition, offset);
+			offset[1] = vr->weaponoffset[1]; // up/down is index 1 in this case
+			CG_ConvertFromVR(offset, cg.refdef.vieworg, origin);
+			origin[2] -= PLAYER_HEIGHT;
+			origin[2] += vr->hmdposition[1] * worldscale;
+		}
+		else
+		{
+			vec3_t weaponoffset;
+			VectorSet(weaponoffset, 0.0f, 0.0f, 0.0f);
+
+			//Fixed point
+			if (!crosshair) {
+				vec2_t temp;
+				rotateAboutOrigin(0.25f, -0.25f, -vr->hmdorientation[YAW], temp);
+				VectorSet(weaponoffset, temp[0], -0.3f, temp[1]);
+			}
+
+			CG_ConvertFromVR(weaponoffset, cg.refdef.vieworg, origin);
+		}
 	}
 	else
 	{
+		//Local server - true 6DoF offset from HMD
 		CG_ConvertFromVR(vr->weaponoffset, cg.refdef.vieworg, origin);
+		origin[2] -= PLAYER_HEIGHT;
+		origin[2] += vr->hmdposition[1] * worldscale;
 	}
 
-	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
-    origin[2] -= PLAYER_HEIGHT;
-    origin[2] += vr->hmdposition[1] * worldscale;
 
 	VectorCopy(vr->weaponangles, angles);
 
-	if ( !localServer )
+	if ( !cgs.localServer )
 	{
 		//take player state angles provided by server
 		angles[YAW] = cg.predictedPlayerState.viewangles[YAW]; //cg.snap->ps.viewangles[YAW];
@@ -1290,7 +1310,7 @@ static void CG_LightningBolt( centity_t *cent, vec3_t origin ) {
 	// CPMA  "true" lightning
 	if ((cent->currentState.number == cg.predictedPlayerState.clientNum) && (cg_trueLightning.value != 0)) {
 		vec3_t angle;
-		CG_CalculateVRWeaponPosition(muzzlePoint, angle);
+		CG_CalculateVRWeaponPosition(muzzlePoint, angle, qfalse);
 		AngleVectors(angle, forward, NULL, NULL );
 	} else {
 		// !CPMA
@@ -1648,7 +1668,7 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 	refEntity_t	hand;
 	centity_t	*cent;
 	clientInfo_t	*ci;
-	float		fovOffset;
+	//float		fovOffset;
 	vec3_t		angles;
 	weaponInfo_t	*weapon;
 
@@ -1700,7 +1720,7 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 	memset (&hand, 0, sizeof(hand));
 
 	// set up gun position
-	CG_CalculateVRWeaponPosition( hand.origin, angles );
+	CG_CalculateVRWeaponPosition( hand.origin, angles, qfalse );
 
 	//Scale / Move gun etc
 	float scale = 1.0f;
@@ -1790,7 +1810,7 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 		vec3_t endForward, endRight, endUp;
 		vec3_t _angles;
 		clientInfo_t ci;
-		CG_CalculateVRWeaponPosition( _origin, _angles );
+		CG_CalculateVRWeaponPosition( _origin, _angles, qfalse );
 
 		vec3_t forward, right, up;
 		AngleVectors(_angles, forward, right, up);

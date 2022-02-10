@@ -1992,7 +1992,7 @@ static void CG_DrawCrosshair3D(void)
 	vec3_t viewaxis[3];
 	vec3_t weaponangles;
 	vec3_t origin;
-    CG_CalculateVRWeaponPosition(origin, weaponangles);
+    CG_CalculateVRWeaponPosition(origin, weaponangles, qtrue);
 	AnglesToAxis(weaponangles, viewaxis);
 	maxdist = cgs.glconfig.vidWidth * stereoSep * zProj / (2 * xmax);
 	VectorMA(origin, maxdist, viewaxis[0], endpos);
@@ -2679,21 +2679,26 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 
 
 	float ipd = trap_Cvar_VariableValue("r_stereoSeparation") / 1000.0f;
-	float separation = stereoView == STEREO_LEFT ?
-					   worldscale * (-ipd / 2) : //left
-					   worldscale * (ipd / 2); // right
+	float separation = worldscale * (ipd / 2) * (stereoView == STEREO_LEFT ? -1.0f : 1.0f);
 
-	cg.refdef.vieworg[2] -= PLAYER_HEIGHT;
-	cg.refdef.vieworg[2] += vr->hmdposition[1] * worldscale;
-
-	//If connected to external server, allow some amount of faked positional tracking
-	float sv_running = trap_Cvar_VariableValue("sv_running");
-	if ( sv_running == 0.0f  && ( cg.snap->ps.stats[STAT_HEALTH] > 0 )) {
-		vec3_t pos;
-		VectorClear(pos);
-		rotateAboutOrigin(vr->hmdposition[2], vr->hmdposition[0], cg.refdefViewAngles[YAW] - vr->weaponangles[YAW], pos);
-		VectorScale(pos, worldscale, pos);
-		VectorSubtract(cg.refdef.vieworg, pos, cg.refdef.vieworg);
+	if (cgs.localServer) {
+		cg.refdef.vieworg[2] -= PLAYER_HEIGHT;
+		cg.refdef.vieworg[2] += vr->hmdposition[1] * worldscale;
+	}
+	else if (trap_Cvar_VariableValue("vr_mp6DoF") == 1.0f)
+	{
+		//If connected to external server, allow some amount of faked positional tracking
+		cg.refdef.vieworg[2] -= PLAYER_HEIGHT;
+		cg.refdef.vieworg[2] += vr->hmdposition[1] * worldscale;
+		if (cg.snap->ps.stats[STAT_HEALTH] > 0)
+		{
+			vec3_t pos;
+			VectorClear(pos);
+			rotateAboutOrigin(vr->hmdposition[2], vr->hmdposition[0],
+							  cg.refdefViewAngles[YAW] - vr->weaponangles[YAW], pos);
+			VectorScale(pos, worldscale, pos);
+			VectorSubtract(cg.refdef.vieworg, pos, cg.refdef.vieworg);
+		}
 	}
 
 	VectorMA(cg.refdef.vieworg, -separation, cg.refdef.viewaxis[1], cg.refdef.vieworg);

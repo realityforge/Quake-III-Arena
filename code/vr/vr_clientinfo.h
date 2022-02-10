@@ -9,8 +9,11 @@ typedef struct {
     qboolean weapon_stabilised;
     qboolean right_handed;
     qboolean virtual_screen;
+    qboolean local_server; // used in bg_pmove.c
 
-    qboolean localServer;
+    qboolean realign_weapon; // used to realign the weapon in a multiplayer game
+    int realign_weapon_pitch; // used to realign the weapon pitch in a multiplayer game
+
     int clientNum;
 
     vec3_t hmdposition;

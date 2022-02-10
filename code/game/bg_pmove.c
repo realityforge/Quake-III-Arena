@@ -1812,7 +1812,7 @@ void PM_UpdateViewAngles( playerState_t *ps, const usercmd_t *cmd ) {
 
 	// circularly clamp the angles with deltas
 	for (i=0 ; i<3 ; i++) {
-		if (vr != NULL && vr->clientNum == ps->clientNum && vr->localServer)
+		if (vr != NULL && vr->clientNum == ps->clientNum && vr->local_server)
 		{
 			//Client is the VR player on the "local" server
 			temp = cmd->angles[i] + (i == YAW ? ps->delta_angles[i] : 0);

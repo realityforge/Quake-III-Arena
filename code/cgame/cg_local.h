@@ -1369,7 +1369,7 @@ void CG_PrevWeapon_f( void );
 void CG_Weapon_f( void );
 
 void rotateAboutOrigin(float x, float y, float rotation, vec2_t out);
-void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles );
+void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles, qboolean crosshair );
 void CG_ConvertFromVR(vec3_t in, vec3_t offset, vec3_t out);
 
 void CG_RegisterWeapon( int weaponNum );

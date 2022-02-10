@@ -704,8 +704,7 @@ static int CG_CalcViewValues( void ) {
 	}
 
 	// position eye relative to origin
-	float sv_running = trap_Cvar_VariableValue("sv_running");
-    if (sv_running == 0.0f )
+	if (!cgs.localServer)
     {
     	//We are connected to a multiplayer server, so make the appropriate adjustment to the view
     	//angles as we send orientation to the server that includes the weapon angles
