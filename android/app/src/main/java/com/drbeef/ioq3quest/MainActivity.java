@@ -1,11 +1,13 @@
 package com.drbeef.ioq3quest;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -43,6 +45,9 @@ public class MainActivity extends SDLActivity
 			checkPermissionsAndInitialize();
 		} catch (Exception e) {}
 		super.onCreate(savedInstanceState);
+
+		//InputMethodManager imm = (InputMethodManager)   getSystemService(Context.INPUT_METHOD_SERVICE);
+		//imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 	}
 
 	/** Initializes the Activity only if the permission has been granted. */
@@ -105,11 +110,16 @@ public class MainActivity extends SDLActivity
 
 		//Copy the command line params file
 		copy_asset("/sdcard/ioquake3Quest", "commandline.txt", false);
+		copy_asset("/sdcard/ioquake3Quest/baseq3", "autoexec.cfg", false);
+
+		//copy demo
+		copy_asset("/sdcard/ioquake3Quest/baseq3", "pak0.pk3", false);
 
 		//glsl
 		copy_asset("/sdcard/ioquake3Quest", "glsl.zip", true);
 		new File("/sdcard/ioquake3Quest/baseq3/glsl").mkdirs();
 		unzip(new File("/sdcard/ioquake3Quest/glsl.zip"), new File("/sdcard/ioquake3Quest/baseq3/glsl"));
+		new File("/sdcard/ioquake3Quest/glsl.zip").delete();
 
 		//Read these from a file and pass through
 		commandLineParams = new String();

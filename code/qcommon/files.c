@@ -3482,13 +3482,12 @@ static void FS_CheckPak0( void )
 		curpack = path->pack;
 		pakBasename = curpack->pakBasename;
 
-		if(!Q_stricmpn( curpack->pakGamename, "demoq3", MAX_OSPATH )
-				&& !Q_stricmpn( pakBasename, "pak0", MAX_OSPATH ))
+		if(!Q_stricmpn( pakBasename, "pak0", MAX_OSPATH ) &&
+                curpack->checksum == DEMO_PAK0_CHECKSUM) // is this the demo?
 		{
-			if(curpack->checksum == DEMO_PAK0_CHECKSUM)
+				Cvar_Set("demoversion", "1.0");
 				founddemo = qtrue;
 		}
-
 		else if(!Q_stricmpn( curpack->pakGamename, BASEGAME, MAX_OSPATH )
 				&& strlen(pakBasename) == 4 && !Q_stricmpn( pakBasename, "pak", 3 )
 				&& pakBasename[3] >= '0' && pakBasename[3] <= '0' + NUM_ID_PAKS - 1)
@@ -3603,7 +3602,7 @@ static void FS_CheckPak0( void )
 	}
 
 
-	if(!com_standalone->integer && (foundPak & 0x1ff) != 0x1ff)
+	if(!com_standalone->integer && (foundPak & 0x1ff) != 0x1ff && !founddemo)
 	{
 		char errorText[MAX_STRING_CHARS] = "";
 
