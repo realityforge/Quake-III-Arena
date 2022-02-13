@@ -107,10 +107,12 @@ public class MainActivity extends SDLActivity
 	public void create() throws IOException {
 		//Make the directories
 		new File("/sdcard/ioquake3Quest/baseq3").mkdirs();
+		new File("/sdcard/ioquake3Quest/missionpack").mkdirs();
 
 		//Copy the command line params file
 		copy_asset("/sdcard/ioquake3Quest", "commandline.txt", false);
 		copy_asset("/sdcard/ioquake3Quest/baseq3", "autoexec.cfg", false);
+		copy_asset("/sdcard/ioquake3Quest/missionpack", "autoexec.cfg", false);
 
 		//copy demo
 		copy_asset("/sdcard/ioquake3Quest/baseq3", "pak0.pk3", false);
@@ -119,7 +121,14 @@ public class MainActivity extends SDLActivity
 		copy_asset("/sdcard/ioquake3Quest", "glsl.zip", true);
 		new File("/sdcard/ioquake3Quest/baseq3/glsl").mkdirs();
 		unzip(new File("/sdcard/ioquake3Quest/glsl.zip"), new File("/sdcard/ioquake3Quest/baseq3/glsl"));
+		new File("/sdcard/ioquake3Quest/missionpack/glsl").mkdirs();
+		unzip(new File("/sdcard/ioquake3Quest/glsl.zip"), new File("/sdcard/ioquake3Quest/missionpack/glsl"));
+
+		copy_asset("/sdcard/ioquake3Quest", "ui.zip", true);
+		unzip(new File("/sdcard/ioquake3Quest/ui.zip"), new File("/sdcard/ioquake3Quest/missionpack"));
+
 		new File("/sdcard/ioquake3Quest/glsl.zip").delete();
+		new File("/sdcard/ioquake3Quest/ui.zip").delete();
 
 		//Read these from a file and pass through
 		commandLineParams = new String();

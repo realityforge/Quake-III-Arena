@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 uiStatic_t		uis;
 qboolean		m_entersound;		// after a frame, so caching won't disrupt the sound
 
-extern vr_clientinfo_t *uiVR;
+extern vr_clientinfo_t *vr;
 
 void QDECL Com_Error( int level, const char *error, ... ) {
 	va_list		argptr;
@@ -57,7 +57,7 @@ void QDECL Com_Printf( const char *msg, ... ) {
 
 float UI_GetXScale()
 {
-	if (uiVR == NULL || uiVR->virtual_screen) {
+	if (vr == NULL || vr->virtual_screen) {
 		return uis.xscale;
 	} else {
 		return uis.xscale / 2.75f;
@@ -66,7 +66,7 @@ float UI_GetXScale()
 
 float UI_GetYScale()
 {
-	if (uiVR == NULL || uiVR->virtual_screen) {
+	if (vr == NULL || vr->virtual_screen) {
 		return uis.yscale;
 	} else {
 		return uis.yscale / 3.25f;
@@ -75,7 +75,7 @@ float UI_GetYScale()
 
 float UI_GetXOffset()
 {
-    if (uiVR == NULL || uiVR->virtual_screen) {
+    if (vr == NULL || vr->virtual_screen) {
         return 0;
     } else {
         return (uis.glconfig.vidWidth - (640 * UI_GetXScale())) / 2.0f;
@@ -84,7 +84,7 @@ float UI_GetXOffset()
 
 float UI_GetYOffset()
 {
-    if (uiVR == NULL || uiVR->virtual_screen) {
+    if (vr == NULL || vr->virtual_screen) {
         return 0;
     } else {
         return (uis.glconfig.vidHeight - (480 * UI_GetYScale())) / 2.0f;

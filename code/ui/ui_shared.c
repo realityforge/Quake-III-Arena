@@ -30,7 +30,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define SCROLL_TIME_ADJUSTOFFSET	40
 #define SCROLL_TIME_FLOOR					20
 
-extern vr_clientinfo_t *uiVR;
+extern vr_clientinfo_t *vr;
 
 typedef struct scrollInfo_s {
 	int nextScrollTime;
@@ -3645,7 +3645,7 @@ qboolean Item_Bind_HandleKey(itemDef_t *item, int key, qboolean down) {
 
 void AdjustFrom640(float *x, float *y, float *w, float *h) {
 
-	if (uiVR == NULL || uiVR->virtual_screen) {
+	if (vr == NULL || vr->virtual_screen) {
 		// expect valid pointers
 		*x *= DC->xscale;
 		*y *= DC->yscale;

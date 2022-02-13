@@ -32,6 +32,9 @@ USER INTERFACE MAIN
 //#define PRE_RELEASE_TADEMO
 
 #include "ui_local.h"
+#include "../vr/vr_clientinfo.h"
+
+vr_clientinfo_t *vr = NULL;
 
 uiInfo_t uiInfo;
 
@@ -159,8 +162,11 @@ Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, i
 	  case UI_GETAPIVERSION:
 		  return UI_API_VERSION;
 
-	  case UI_INIT:
-		  _UI_Init(arg0);
+	  case UI_INIT: {
+			  int ptr[2] = {arg1, arg2};
+			  vr = (vr_clientinfo_t *) (*(long *) (ptr));
+			  _UI_Init(arg0);
+		  }
 		  return 0;
 
 	  case UI_SHUTDOWN:

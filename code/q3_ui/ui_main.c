@@ -32,7 +32,7 @@ USER INTERFACE MAIN
 #include "ui_local.h"
 #include "../vr/vr_clientinfo.h"
 
-vr_clientinfo_t *uiVR = NULL;
+vr_clientinfo_t *vr = NULL;
 
 /*
 ================
@@ -49,7 +49,7 @@ Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, i
 
 	case UI_INIT: {
 			int ptr[2] = {arg1, arg2};
-			uiVR = (vr_clientinfo_t *) (*(long *) (ptr));
+			vr = (vr_clientinfo_t *) (*(long *) (ptr));
 
 			UI_Init();
 		}

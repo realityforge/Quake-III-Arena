@@ -249,6 +249,7 @@ static	cvar_t		*fs_debug;
 static	cvar_t		*fs_homepath;
 
 static	cvar_t		*fs_forceNativeVM;
+static	cvar_t		*fs_nativeVMBase;
 
 #ifdef __APPLE__
 // Also search the .app bundle for .pk3 files
@@ -1457,8 +1458,24 @@ int FS_FindVM(void **startSearch, char *found, int foundlen, const char *name, i
     if(!fs_searchpaths)
 		Com_Error(ERR_FATAL, "Filesystem call made without initialization");
 
-	if(enableDll)
-		Com_sprintf(dllName, sizeof(dllName), "%s" ARCH_STRING DLL_EXT, name);
+	if(enableDll) {
+		//If the game dir is not mission pack, then use the cvar to tell us which
+		//base game libraries to load
+		char nativeVMBase[256];
+		if (strcmp(fs_gamedir, "missionpack") != 0)
+		{
+			Com_sprintf(nativeVMBase, sizeof(nativeVMBase), "%s", fs_nativeVMBase->string);
+		}
+		else
+		{
+			Com_sprintf(nativeVMBase, sizeof(nativeVMBase), "missionpack");
+		}
+
+		Com_sprintf(dllName, sizeof(dllName), "%s"
+			ARCH_STRING
+			"_%s"
+			DLL_EXT, name, nativeVMBase);
+	}
 
 	Com_sprintf(qvmName, sizeof(qvmName), "vm/%s.qvm", name);
 
@@ -3639,7 +3656,7 @@ static void FS_CheckPak0( void )
 					"from your legitimate Quake 3 Team Arena CDROM. ", PATH_SEP);
 		}
 
-		if((foundTA & 0x0e) != 0x0e)
+/*		if((foundTA & 0x0e) != 0x0e)
 		{
 			Q_strcat(errorText, sizeof(errorText),
 					"Team Arena Point Release files are missing. Please "
@@ -3647,6 +3664,7 @@ static void FS_CheckPak0( void )
 		}
 
 		Com_Error(ERR_FATAL, "%s", errorText);
+		*/
 	}
 }
 #endif
@@ -3990,6 +4008,7 @@ void FS_InitFilesystem( void ) {
 	Com_StartupVariable("fs_game");
 
     fs_forceNativeVM = Cvar_Get( "fs_forceNativeVM", "1", CVAR_ARCHIVE );
+	fs_nativeVMBase = Cvar_Get( "fs_nativeVMBase", "baseq3", CVAR_ARCHIVE );
 
 
     if(!FS_FilenameCompare(Cvar_VariableString("fs_game"), com_basegame->string))

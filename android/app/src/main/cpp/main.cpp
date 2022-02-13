@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
 	engine_t* engine = nullptr;
 	engine = VR_Init(java);
 
-	//sleep(40);
+	//sleep(30);
 
 	//First set up resolution cached values
 	int width, height;
