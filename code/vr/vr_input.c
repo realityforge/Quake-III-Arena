@@ -362,13 +362,24 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 static void IN_VRTriggers( qboolean isRightController, float index ) {
 	vrController_t* controller = isRightController == qtrue ? &rightController : &leftController;
 
-	if (isRightController == qtrue) {
+	if (isRightController == (vr_righthanded->integer != 0)) {
 		if (!(controller->axisButtons & VR_TOUCH_AXIS_TRIGGER_INDEX) && index > pressedThreshold) {
 			controller->axisButtons |= VR_TOUCH_AXIS_TRIGGER_INDEX;
 			Com_QueueEvent(in_vrEventTime, SE_KEY, K_MOUSE1, qtrue, 0, NULL);
 		} else if ((controller->axisButtons & VR_TOUCH_AXIS_TRIGGER_INDEX) && index < releasedThreshold) {
 			controller->axisButtons &= ~VR_TOUCH_AXIS_TRIGGER_INDEX;
 			Com_QueueEvent(in_vrEventTime, SE_KEY, K_MOUSE1, qfalse, 0, NULL);
+		}
+	}
+
+	//off hand trigger Jump as well
+	if (isRightController != (vr_righthanded->integer != 0)) {
+		if (!(controller->axisButtons & VR_TOUCH_AXIS_TRIGGER_INDEX) && index > pressedThreshold) {
+			controller->axisButtons |= VR_TOUCH_AXIS_TRIGGER_INDEX;
+			Com_QueueEvent(in_vrEventTime, SE_KEY, K_SPACE, qtrue, 0, NULL);
+		} else if ((controller->axisButtons & VR_TOUCH_AXIS_TRIGGER_INDEX) && index < releasedThreshold) {
+			controller->axisButtons &= ~VR_TOUCH_AXIS_TRIGGER_INDEX;
+			Com_QueueEvent(in_vrEventTime, SE_KEY, K_SPACE, qfalse, 0, NULL);
 		}
 	}
 }
@@ -393,7 +404,8 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
 			vr.weapon_stabilised = qfalse;
 		}
 	}
-	
+
+	//Jump
 	if ((buttons & ovrButton_A) && !(controller->buttons & ovrButton_A)) {
 		Com_QueueEvent(in_vrEventTime, SE_KEY, K_SPACE, qtrue, 0, NULL);
 	} else if (!(buttons & ovrButton_A) && (controller->buttons & ovrButton_A)) {
@@ -415,19 +427,38 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
 		}
 	}
 
-    if (isRightController == (vr_righthanded->integer != 0)) {
-        //thumbstick is "use item"
-        if ((buttons & ovrButton_RThumb) && !(controller->buttons & ovrButton_RThumb)) {
-            Com_QueueEvent(in_vrEventTime, SE_KEY, K_ENTER, qtrue, 0, NULL);
-        } else if (!(buttons & ovrButton_RThumb) && (controller->buttons & ovrButton_RThumb)) {
-            Com_QueueEvent(in_vrEventTime, SE_KEY, K_ENTER, qfalse, 0, NULL);
+    if (isRightController) {
+        if (vr_righthanded->integer) {
+            //Right thumbstick is "use item"
+            if ((buttons & ovrButton_RThumb) && !(controller->buttons & ovrButton_RThumb)) {
+                Com_QueueEvent(in_vrEventTime, SE_KEY, K_ENTER, qtrue, 0, NULL);
+            } else if (!(buttons & ovrButton_RThumb) && (controller->buttons & ovrButton_RThumb)) {
+                Com_QueueEvent(in_vrEventTime, SE_KEY, K_ENTER, qfalse, 0, NULL);
+            }
+        }
+        else {
+            //right thumbstick is scoreboard
+            if ((buttons & ovrButton_RThumb) && !(controller->buttons & ovrButton_RThumb)) {
+                sendButtonActionSimple("+scores");
+            } else if (!(buttons & ovrButton_RThumb) && (controller->buttons & ovrButton_RThumb)) {
+                sendButtonActionSimple("-scores");
+            }
         }
     } else {
-        //thumbstick is "use item"
-        if ((buttons & ovrButton_LThumb) && !(controller->buttons & ovrButton_LThumb)) {
-            Com_QueueEvent(in_vrEventTime, SE_KEY, K_ENTER, qtrue, 0, NULL);
-        } else if (!(buttons & ovrButton_LThumb) && (controller->buttons & ovrButton_LThumb)) {
-            Com_QueueEvent(in_vrEventTime, SE_KEY, K_ENTER, qfalse, 0, NULL);
+        if (vr_righthanded->integer) {
+            //left thumbstick is scoreboard
+            if ((buttons & ovrButton_LThumb) && !(controller->buttons & ovrButton_LThumb)) {
+                sendButtonActionSimple("+scores");
+            } else if (!(buttons & ovrButton_LThumb) && (controller->buttons & ovrButton_LThumb)) {
+                sendButtonActionSimple("-scores");
+            }
+        } else {
+            //left thumbstick is "use item"
+            if ((buttons & ovrButton_LThumb) && !(controller->buttons & ovrButton_LThumb)) {
+                Com_QueueEvent(in_vrEventTime, SE_KEY, K_ENTER, qtrue, 0, NULL);
+            } else if (!(buttons & ovrButton_LThumb) && (controller->buttons & ovrButton_LThumb)) {
+                Com_QueueEvent(in_vrEventTime, SE_KEY, K_ENTER, qfalse, 0, NULL);
+            }
         }
     }
 
