@@ -413,18 +413,9 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
 	}
 
 	if ((buttons & ovrButton_B) && !(controller->buttons & ovrButton_B)) {
-		if ( !com_sv_running || !com_sv_running->integer )
-		{
-			vr.realign_weapon = qtrue;
-		} else {
-			Com_QueueEvent(in_vrEventTime, SE_KEY, 'c', qtrue, 0, NULL);
-		}
+		Com_QueueEvent(in_vrEventTime, SE_KEY, 'c', qtrue, 0, NULL);
 	} else if (!(buttons & ovrButton_B) && (controller->buttons & ovrButton_B)) {
-		if ( !com_sv_running || !com_sv_running->integer )
-		{
-		} else {
-			Com_QueueEvent(in_vrEventTime, SE_KEY, 'c', qfalse, 0, NULL);
-		}
+        Com_QueueEvent(in_vrEventTime, SE_KEY, 'c', qfalse, 0, NULL);
 	}
 
     if (isRightController) {
@@ -462,17 +453,21 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
         }
     }
 
+    //Taunt / Gesture
 	if ((buttons & ovrButton_X) && !(controller->buttons & ovrButton_X)) {
-		//sendButtonActionSimple("fraglimit 1");
-		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_X, qtrue, 0, NULL);
+		sendButtonActionSimple("+button3");
+		//Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_X, qtrue, 0, NULL);
 	} else if (!(buttons & ovrButton_X) && (controller->buttons & ovrButton_X)) {
-		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_X, qfalse, 0, NULL);
+        sendButtonActionSimple("-button3");
+		//Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_X, qfalse, 0, NULL);
 	}
 
 	if ((buttons & ovrButton_Y) && !(controller->buttons & ovrButton_Y)) {
-		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_Y, qtrue, 0, NULL);
+	    int thirdPerson = Cvar_VariableIntegerValue("cg_thirdPerson");
+	    Cvar_SetValue("cg_thirdPerson", 1-thirdPerson);
+		//Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_Y, qtrue, 0, NULL);
 	} else if (!(buttons & ovrButton_Y) && (controller->buttons & ovrButton_Y)) {
-		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_Y, qfalse, 0, NULL);
+		//Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_Y, qfalse, 0, NULL);
 	}
 
 	controller->buttons = buttons;

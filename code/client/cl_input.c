@@ -604,6 +604,7 @@ void CL_FinishMove( usercmd_t *cmd ) {
 
 		if (vr.realign_weapon)
 		{
+			VectorCopy(vr.hmdposition, vr.hmdorigin);
 			vr.realign_weapon_pitch -= (cl.snap.ps.viewangles[PITCH]-vr.weaponangles[PITCH]) ;
 			vr.realign_weapon = qfalse;
 		}

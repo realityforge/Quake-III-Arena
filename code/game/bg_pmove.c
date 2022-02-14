@@ -1345,18 +1345,19 @@ static void PM_Footsteps( void ) {
 	}
 
 	// if not trying to move
-	if ( !pm->cmd.forwardmove && !pm->cmd.rightmove ) {
-		if (  pm->xyspeed < 5 ) {
-			pm->ps->bobCycle = 0;	// start at beginning of cycle again
-			if ( pm->ps->pm_flags & PMF_DUCKED ) {
-				PM_ContinueLegsAnim( LEGS_IDLECR );
-			} else {
-				PM_ContinueLegsAnim( LEGS_IDLE );
-			}
+	if (( !pm->cmd.forwardmove && !pm->cmd.rightmove ) ||
+		(  pm->xyspeed < 10 ))
+	{
+		pm->ps->bobCycle = 0;	// start at beginning of cycle again
+		if ( pm->ps->pm_flags & PMF_DUCKED ) {
+			PM_ContinueLegsAnim( LEGS_IDLECR );
+		} else {
+			PM_ContinueLegsAnim( LEGS_IDLE );
 		}
+
 		return;
 	}
-	
+
 
 	footstep = qfalse;
 

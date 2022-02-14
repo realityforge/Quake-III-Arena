@@ -17,6 +17,7 @@ typedef struct {
     int clientNum;
 
     vec3_t hmdposition;
+    vec3_t hmdorigin; //used to recenter the mp fake 6DoF playspace
     vec3_t hmdposition_last; // Don't use this, it is just for calculating delta!
     vec3_t hmdposition_delta;
 

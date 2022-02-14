@@ -263,8 +263,9 @@ void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles, qboolean crossh
 			!crosshair)
 		{
 			//Use absolute position for the faked 6DoF for multiplayer
-			vec3_t offset;
-			VectorCopy(vr->weaponposition, offset);
+			vec3_t offset, weaponposition;
+			VectorSubtract(vr->weaponposition, vr->hmdorigin, weaponposition);
+			VectorCopy(weaponposition, offset);
 			offset[1] = vr->weaponoffset[1]; // up/down is index 1 in this case
 			CG_ConvertFromVR(offset, cg.refdef.vieworg, origin);
 			origin[2] -= PLAYER_HEIGHT;

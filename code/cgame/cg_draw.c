@@ -2692,9 +2692,10 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 		cg.refdef.vieworg[2] += vr->hmdposition[1] * worldscale;
 		if (cg.snap->ps.stats[STAT_HEALTH] > 0)
 		{
-			vec3_t pos;
+			vec3_t pos, hmdposition;
 			VectorClear(pos);
-			rotateAboutOrigin(vr->hmdposition[2], vr->hmdposition[0],
+			VectorSubtract(vr->hmdposition, vr->hmdorigin, hmdposition);
+			rotateAboutOrigin(hmdposition[2], hmdposition[0],
 							  cg.refdefViewAngles[YAW] - vr->weaponangles[YAW], pos);
 			VectorScale(pos, worldscale, pos);
 			VectorSubtract(cg.refdef.vieworg, pos, cg.refdef.vieworg);

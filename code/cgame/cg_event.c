@@ -23,6 +23,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // cg_event.c -- handle entity events at snapshot or playerstate transitions
 
 #include "cg_local.h"
+#include "../vr/vr_clientinfo.h"
+
+
+extern vr_clientinfo_t* vr;
 
 // for the voice chats
 #ifdef MISSIONPACK
@@ -887,6 +891,7 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 		DEBUGNAME("EV_PLAYER_TELEPORT_IN");
 		trap_S_StartSound (NULL, es->number, CHAN_AUTO, cgs.media.teleInSound );
 		CG_SpawnEffect( position);
+		vr->realign_weapon = qtrue; // auto trigger weapon re-align
 		break;
 
 	case EV_PLAYER_TELEPORT_OUT:
