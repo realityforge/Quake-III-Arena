@@ -1300,7 +1300,8 @@ static void CG_LightningBolt( centity_t *cent, vec3_t origin ) {
 	memset( &beam, 0, sizeof( beam ) );
 
 	// CPMA  "true" lightning
-	if ((cent->currentState.number == cg.predictedPlayerState.clientNum) && (cg_trueLightning.value != 0)) {
+	if (cent->currentState.number == cg.predictedPlayerState.clientNum)// && (cg_trueLightning.value != 0))
+	{
 		vec3_t angle;
 		CG_CalculateVRWeaponPosition(muzzlePoint, angle, qfalse);
 		AngleVectors(angle, forward, NULL, NULL );
