@@ -244,7 +244,7 @@ void VR_DrawFrame( engine_t* engine ) {
 	const ovrMatrix4f projectionMatrix = ovrMatrix4f_CreateProjectionFov(
 			fov_x, fov_y, 0.0f, 0.0f, 1.0f, 0.0f );
 
-	static int playerYaw = 0;
+	static float playerYaw = 0;
 
     int eyeW, eyeH;
     VR_GetResolution(engine, &eyeW, &eyeH);

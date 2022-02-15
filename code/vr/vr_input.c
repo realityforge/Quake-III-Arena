@@ -48,10 +48,6 @@ extern cvar_t *cl_sensitivity;
 extern cvar_t *m_pitch;
 extern cvar_t *m_yaw;
 
-cvar_t	*vr_righthanded;
-cvar_t	*vr_snapturn;
-
-
 float radians(float deg) {
     return (deg * M_PI) / 180.0;
 }
@@ -65,9 +61,13 @@ float degrees(float rad) {
 #define EPSILON 0.001f
 #endif
 
-cvar_t *vr_extralatencymode = NULL;
-cvar_t *vr_directionMode = NULL;
-cvar_t *vr_mp6DoF = NULL;
+extern cvar_t *vr_righthanded;
+extern cvar_t *vr_snapturn;
+extern cvar_t *vr_extralatencymode;
+extern cvar_t *vr_directionMode;
+extern cvar_t *vr_weaponPitch;
+extern cvar_t *vr_heightAdjust;
+extern cvar_t *vr_twoHandedWeapons;
 
 void rotateAboutOrigin(float x, float y, float rotation, vec2_t out)
 {
@@ -193,12 +193,6 @@ static float length(float x, float y)
 
 void IN_VRInit( void )
 {
-	vr_righthanded = Cvar_Get ("vr_righthanded", "1", CVAR_ARCHIVE);
-	vr_snapturn = Cvar_Get ("vr_snapturn", "45", CVAR_ARCHIVE);
-    vr_extralatencymode = Cvar_Get ("vr_extralatencymode", "1", CVAR_ARCHIVE);
-	vr_directionMode = Cvar_Get ("vr_directionMode", "0", CVAR_ARCHIVE); // 0 = HMD, 1 = Off-hand
-	vr_mp6DoF = Cvar_Get ("vr_mp6DoF", "1", CVAR_ARCHIVE); // if 0 then multiplayer will use only 3DoF for headset
-
 	memset(&vr, 0, sizeof(vr));
 }
 
@@ -208,7 +202,7 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
 	{
 		//Set gun angles - We need to calculate all those we might need (including adjustments) for the client to then take its pick
 		vec3_t rotation = {0};
-		rotation[PITCH] =-20.0f;
+		rotation[PITCH] = vr_weaponPitch->value;
 		QuatToYawPitchRoll(remoteTracking.HeadPose.Pose.Orientation, rotation, vr.weaponangles);
 
 		VectorSubtract(vr.weaponangles_last, vr.weaponangles, vr.weaponangles_delta);
@@ -216,28 +210,28 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
 
 		///Weapon location relative to view
 		vr.weaponposition[0] = remoteTracking.HeadPose.Pose.Position.x;
-		vr.weaponposition[1] = remoteTracking.HeadPose.Pose.Position.y;
+		vr.weaponposition[1] = remoteTracking.HeadPose.Pose.Position.y + vr_heightAdjust->value;
 		vr.weaponposition[2] = remoteTracking.HeadPose.Pose.Position.z;
 
-		vr.weaponoffset[0] = remoteTracking.HeadPose.Pose.Position.x - vr.hmdposition[0];
-		vr.weaponoffset[1] = remoteTracking.HeadPose.Pose.Position.y - vr.hmdposition[1];
-		vr.weaponoffset[2] = remoteTracking.HeadPose.Pose.Position.z - vr.hmdposition[2];
+		vr.weaponoffset[0] = vr.weaponposition[0] - vr.hmdposition[0];
+		vr.weaponoffset[1] = vr.weaponposition[1] - vr.hmdposition[1];
+		vr.weaponoffset[2] = vr.weaponposition[2] - vr.hmdposition[2];
 	} else {
         vec3_t rotation = {0};
-        rotation[PITCH] =-20.0f;
+        rotation[PITCH] = vr_weaponPitch->value;
         QuatToYawPitchRoll(remoteTracking.HeadPose.Pose.Orientation, rotation, vr.offhandangles);
 
         ///location relative to view
         vr.offhandposition[0] = remoteTracking.HeadPose.Pose.Position.x;
-        vr.offhandposition[1] = remoteTracking.HeadPose.Pose.Position.y;
+        vr.offhandposition[1] = remoteTracking.HeadPose.Pose.Position.y + vr_heightAdjust->value;
         vr.offhandposition[2] = remoteTracking.HeadPose.Pose.Position.z;
 
-        vr.offhandoffset[0] = remoteTracking.HeadPose.Pose.Position.x - vr.hmdposition[0];
-        vr.offhandoffset[1] = remoteTracking.HeadPose.Pose.Position.y - vr.hmdposition[1];
-        vr.offhandoffset[2] = remoteTracking.HeadPose.Pose.Position.z - vr.hmdposition[2];
+        vr.offhandoffset[0] = vr.offhandposition[0] - vr.hmdposition[0];
+        vr.offhandoffset[1] = vr.offhandposition[1] - vr.hmdposition[1];
+        vr.offhandoffset[2] = vr.offhandposition[2] - vr.hmdposition[2];
 	}
 
-    if (vr.weapon_stabilised)
+    if (vr_twoHandedWeapons->integer && vr.weapon_stabilised)
     {
         float x = vr.offhandoffset[0] - vr.weaponoffset[0];
         float y = vr.offhandoffset[1] - vr.weaponoffset[1];
@@ -462,12 +456,11 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
 		//Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_X, qfalse, 0, NULL);
 	}
 
+	// Y button - unassigned right now
 	if ((buttons & ovrButton_Y) && !(controller->buttons & ovrButton_Y)) {
-	    int thirdPerson = Cvar_VariableIntegerValue("cg_thirdPerson");
-	    Cvar_SetValue("cg_thirdPerson", 1-thirdPerson);
-		//Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_Y, qtrue, 0, NULL);
+		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_Y, qtrue, 0, NULL);
 	} else if (!(buttons & ovrButton_Y) && (controller->buttons & ovrButton_Y)) {
-		//Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_Y, qfalse, 0, NULL);
+		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_Y, qfalse, 0, NULL);
 	}
 
 	controller->buttons = buttons;
@@ -505,7 +498,7 @@ void IN_VRInputFrame( void )
 		const ovrVector3f positionHmd = VR_GetEngine()->tracking.HeadPose.Pose.Position;
 		vec3_t rotation = {0, 0, 0};
 		QuatToYawPitchRoll(quatHmd, rotation, vr.hmdorientation);
-		VectorSet(vr.hmdposition, positionHmd.x, positionHmd.y, positionHmd.z);
+		VectorSet(vr.hmdposition, positionHmd.x, positionHmd.y + vr_heightAdjust->value, positionHmd.z);
 
 		//Position
 		VectorSubtract(vr.hmdposition_last, vr.hmdposition, vr.hmdposition_delta);

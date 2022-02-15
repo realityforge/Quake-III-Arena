@@ -2685,20 +2685,28 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 		cg.refdef.vieworg[2] -= PLAYER_HEIGHT;
 		cg.refdef.vieworg[2] += vr->hmdposition[1] * worldscale;
 	}
-	else if (trap_Cvar_VariableValue("vr_mp6DoF") == 1.0f)
+	else
 	{
 		//If connected to external server, allow some amount of faked positional tracking
 		cg.refdef.vieworg[2] -= PLAYER_HEIGHT;
 		cg.refdef.vieworg[2] += vr->hmdposition[1] * worldscale;
 		if (cg.snap->ps.stats[STAT_HEALTH] > 0)
 		{
-			vec3_t pos, hmdposition;
+			vec3_t pos, hmdposition, vieworg;
 			VectorClear(pos);
 			VectorSubtract(vr->hmdposition, vr->hmdorigin, hmdposition);
 			rotateAboutOrigin(hmdposition[2], hmdposition[0],
 							  cg.refdefViewAngles[YAW] - vr->weaponangles[YAW], pos);
 			VectorScale(pos, worldscale, pos);
-			VectorSubtract(cg.refdef.vieworg, pos, cg.refdef.vieworg);
+			VectorSubtract(cg.refdef.vieworg, pos, vieworg);
+
+			//Prevent player clipping through solid objects
+			trace_t trace;
+			vec3_t			mins = {-8, -8, -8};
+			vec3_t			maxs = {8, 8, 8};
+			CG_Trace(&trace, cg.refdef.vieworg, mins, maxs, vieworg, cg.snap->ps.clientNum, CONTENTS_SOLID|CONTENTS_BODY);
+
+			VectorCopy(trace.endpos, cg.refdef.vieworg);
 		}
 	}
 
