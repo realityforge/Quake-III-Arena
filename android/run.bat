@@ -2,10 +2,10 @@
 
 setlocal
 
-set BUILD_TYPE=debug
+set BUILD_TYPE=release
 set KEYSTORE=
 set KEYSTORE_PASS=
-set VERSION=0.6.0
+set VERSION=0.12.0
 
 set ANDROID_SDK_ROOT=%AppData%\..\Local\Android\Sdk
 set adb="%ANDROID_SDK_ROOT%\platform-tools\adb.exe"
@@ -16,6 +16,7 @@ set JAVA_HOME=C:\Program Files\Android\Android Studio\jre\jre
 if "%1"=="clean" (
 	rm -rf .\build
 	rm -rf .\android\build
+	rm -rf .\android\app\src\main\jniLibs\arm64-v8a
 )
 
 if %BUILD_TYPE%==release (
@@ -60,6 +61,10 @@ if %BUILD_TYPE%==debug (
 	copy .\app\build\outputs\apk\%BUILD_TYPE%\app-%BUILD_TYPE%.apk %APK_LOCATION%
 )
 
+if "%1"=="nodeploy" (
+	goto :END
+)
+
 %adb% install -r %APK_LOCATION%
 if %ERRORLEVEL% NEQ 0 (
 	%adb% uninstall %PACKAGE_NAME%
@@ -72,28 +77,30 @@ if %ERRORLEVEL% NEQ 0 (
 	)
 )
 
-%adb% shell mkdir -p %ANDROID_STORAGE_LOCATION%
-%adb% push --sync "D:\Program Files (x86)\Steam\steamapps\common\Quake 3 Arena\baseq3" %ANDROID_STORAGE_LOCATION%
-if %ERRORLEVEL% NEQ 0 (
-	popd
-	popd
-	echo "Failed to transfer files."
-	exit /b 1
-)
-%adb% push --sync ..\code\renderergl2\glsl %ANDROID_STORAGE_LOCATION%/baseq3/
-if %ERRORLEVEL% NEQ 0 (
-	popd
-	popd
-	echo "Failed to transfer shaders."
-	exit /b 1
-)
-%adb% push --sync autoexec.cfg %ANDROID_STORAGE_LOCATION%/baseq3/
-if %ERRORLEVEL% NEQ 0 (
-	popd
-	popd
-	echo "Failed to transfer autoexec."
-	exit /b 1
-)
+@REM %adb% shell mkdir -p %ANDROID_STORAGE_LOCATION%
+@REM %adb% push --sync "D:\Program Files (x86)\Steam\steamapps\common\Quake 3 Arena\baseq3" %ANDROID_STORAGE_LOCATION%
+@REM if %ERRORLEVEL% NEQ 0 (
+@REM 	popd
+@REM 	popd
+@REM 	echo "Failed to transfer files."
+@REM 	exit /b 1
+@REM )
+
+@REM %adb% push --sync ..\code\renderergl2\glsl %ANDROID_STORAGE_LOCATION%/baseq3/
+@REM if %ERRORLEVEL% NEQ 0 (
+@REM 	popd
+@REM 	popd
+@REM 	echo "Failed to transfer shaders."
+@REM 	exit /b 1
+@REM )
+
+@REM %adb% push --sync autoexec.cfg %ANDROID_STORAGE_LOCATION%/baseq3/
+@REM if %ERRORLEVEL% NEQ 0 (
+@REM 	popd
+@REM 	popd
+@REM 	echo "Failed to transfer autoexec."
+@REM 	exit /b 1
+@REM )
 
 %adb% logcat -c
 %adb% shell am start -n %PACKAGE_NAME%/.MainActivity
@@ -104,4 +111,6 @@ if %ERRORLEVEL% NEQ 0 (
 	exit 1
 )
 %adb% logcat *:S Quake3:V SDL:V DEBUG:V
+
+:END
 endlocal
