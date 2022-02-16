@@ -259,8 +259,7 @@ void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles, qboolean crossh
 
 	if (!cgs.localServer)
 	{
-		if (trap_Cvar_VariableValue("vr_mp6DoF") == 1.0f &&
-			!crosshair)
+		if (!crosshair)
 		{
 			//Use absolute position for the faked 6DoF for multiplayer
 			vec3_t offset, weaponposition;
@@ -275,14 +274,6 @@ void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles, qboolean crossh
 		{
 			vec3_t weaponoffset;
 			VectorSet(weaponoffset, 0.0f, 0.0f, 0.0f);
-
-			//Fixed point
-			if (!crosshair) {
-				vec2_t temp;
-				rotateAboutOrigin(0.25f, -0.25f, -vr->hmdorientation[YAW], temp);
-				VectorSet(weaponoffset, temp[0], -0.3f, temp[1]);
-			}
-
 			CG_ConvertFromVR(weaponoffset, cg.refdef.vieworg, origin);
 		}
 	}
@@ -1309,7 +1300,8 @@ static void CG_LightningBolt( centity_t *cent, vec3_t origin ) {
 	memset( &beam, 0, sizeof( beam ) );
 
 	// CPMA  "true" lightning
-	if ((cent->currentState.number == cg.predictedPlayerState.clientNum) && (cg_trueLightning.value != 0)) {
+	if (cent->currentState.number == cg.predictedPlayerState.clientNum)// && (cg_trueLightning.value != 0))
+	{
 		vec3_t angle;
 		CG_CalculateVRWeaponPosition(muzzlePoint, angle, qfalse);
 		AngleVectors(angle, forward, NULL, NULL );

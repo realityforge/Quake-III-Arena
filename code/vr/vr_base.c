@@ -20,6 +20,13 @@ static engine_t vr_engine;
 
 cvar_t *vr_worldscale = NULL;
 cvar_t *vr_hudDepth = NULL;
+cvar_t *vr_righthanded = NULL;
+cvar_t *vr_snapturn = NULL;
+cvar_t *vr_heightAdjust = NULL;
+cvar_t *vr_extralatencymode = NULL;
+cvar_t *vr_directionMode = NULL;
+cvar_t *vr_weaponPitch = NULL;
+cvar_t *vr_twoHandedWeapons = NULL;
 
 engine_t* VR_Init( ovrJava java )
 {
@@ -41,6 +48,13 @@ void VR_InitCvars( void )
 {
 	vr_worldscale = Cvar_Get ("vr_worldscale", "32.0", CVAR_ARCHIVE);
 	vr_hudDepth = Cvar_Get ("vr_hudDepth", "3", CVAR_ARCHIVE);
+	vr_righthanded = Cvar_Get ("vr_righthanded", "1", CVAR_ARCHIVE);
+	vr_snapturn = Cvar_Get ("vr_snapturn", "45", CVAR_ARCHIVE);
+	vr_extralatencymode = Cvar_Get ("vr_extralatencymode", "1", CVAR_ARCHIVE);
+	vr_directionMode = Cvar_Get ("vr_directionMode", "0", CVAR_ARCHIVE); // 0 = HMD, 1 = Off-hand
+	vr_weaponPitch = Cvar_Get ("vr_weaponPitch", "-20", CVAR_ARCHIVE);
+	vr_heightAdjust = Cvar_Get ("vr_heightAdjust", "0.0", CVAR_ARCHIVE);
+    vr_twoHandedWeapons = Cvar_Get ("vr_twoHandedWeapons", "1", CVAR_ARCHIVE);
 
 	// Values are:  scale,right,up,forward,pitch,yaw,roll
 	// VALUES PROVIDED BY SkillFur - Thank-you!
