@@ -120,6 +120,12 @@ void VR_DestroyRenderer( engine_t* engine ) {
 }
 
 
+void VR_ReInitRenderer()
+{
+    VR_DestroyRenderer( VR_GetEngine() );
+    VR_InitRenderer( VR_GetEngine() );
+}
+
 
 // Assumes landscape cylinder shape.
 static ovrMatrix4f CylinderModelMatrix( const int texWidth, const int texHeight,

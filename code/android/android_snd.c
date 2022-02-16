@@ -299,6 +299,8 @@ void SNDDMA_Shutdown( void ) {
 	bqPlayerObject = NULL;
 	outputMixObject = NULL;
 	engineObject = NULL;
+
+	snd_inited = 0;
 }
 
 /*

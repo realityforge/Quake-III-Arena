@@ -244,6 +244,7 @@ int		max_polyverts;
 ** setting variables, checking GL constants, and reporting the gfx system config
 ** to the user.
 */
+void VR_ReInitRenderer();
 static void InitOpenGL( void )
 {
 	//
@@ -295,6 +296,8 @@ static void InitOpenGL( void )
 
 	// set default state
 	GL_SetDefaultState();
+
+	VR_ReInitRenderer();
 }
 
 /*

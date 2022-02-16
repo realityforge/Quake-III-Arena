@@ -459,17 +459,15 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
     //Taunt / Gesture
 	if ((buttons & ovrButton_X) && !(controller->buttons & ovrButton_X)) {
 		sendButtonActionSimple("+button3");
-		//Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_X, qtrue, 0, NULL);
 	} else if (!(buttons & ovrButton_X) && (controller->buttons & ovrButton_X)) {
         sendButtonActionSimple("-button3");
-		//Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_X, qfalse, 0, NULL);
 	}
 
 	// Y button - unassigned right now
 	if ((buttons & ovrButton_Y) && !(controller->buttons & ovrButton_Y)) {
-		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_Y, qtrue, 0, NULL);
+		//Actually want this to reset the player location
+		vr.realign_weapon = qtrue;
 	} else if (!(buttons & ovrButton_Y) && (controller->buttons & ovrButton_Y)) {
-		Com_QueueEvent(in_vrEventTime, SE_KEY, K_PAD0_Y, qfalse, 0, NULL);
 	}
 
 	controller->buttons = buttons;
