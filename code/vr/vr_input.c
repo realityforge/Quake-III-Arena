@@ -204,7 +204,8 @@ void IN_VRInit( void )
 
 static void IN_VRController( qboolean isRightController, ovrTracking remoteTracking )
 {
-	if (isRightController == (vr_righthanded->integer != 0))
+
+    if (isRightController == (vr_righthanded->integer != 0))
 	{
 		//Set gun angles - We need to calculate all those we might need (including adjustments) for the client to then take its pick
 		vec3_t rotation = {0};
@@ -222,6 +223,14 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
 		vr.weaponoffset[0] = remoteTracking.HeadPose.Pose.Position.x - vr.hmdposition[0];
 		vr.weaponoffset[1] = remoteTracking.HeadPose.Pose.Position.y - vr.hmdposition[1];
 		vr.weaponoffset[2] = remoteTracking.HeadPose.Pose.Position.z - vr.hmdposition[2];
+
+
+		if (vr.virtual_screen ||
+            cl.snap.ps.pm_type == PM_INTERMISSION)
+        {
+		    int mouse_multiplier = 10;
+            Com_QueueEvent(in_vrEventTime, SE_MOUSE, vr.weaponangles_delta[YAW] * mouse_multiplier, -vr.weaponangles_delta[PITCH] * mouse_multiplier, 0, NULL);
+        }
 	} else {
         vec3_t rotation = {0};
         rotation[PITCH] =-20.0f;
