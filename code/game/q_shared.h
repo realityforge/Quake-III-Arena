@@ -191,21 +191,6 @@ static inline unsigned int __lwbrx(register void *addr, register int offset) {
     return word;
 }
 
-static inline unsigned short __lhbrx(register void *addr, register int offset) {
-    register unsigned short halfword;
-    
-    asm("lhbrx %0,%2,%1" : "=r" (halfword) : "r" (addr), "b" (offset));
-    return halfword;
-}
-
-static inline float __fctiw(register float f) {
-    register float fi;
-    
-    asm("fctiw %0,%1" : "=f" (fi) : "f" (f));
-
-    return fi;
-}
-
 #define BigShort
 static inline short LittleShort(short l) { return ShortSwap(l); }
 #define BigLong
