@@ -120,6 +120,12 @@ static char	*opnames[256] = {
             return word;
         }
     #else
+static inline unsigned int __lwbrx(register void *addr, register int offset) {
+    register unsigned int word;
+
+    asm("lwbrx %0,%2,%1" : "=r" (word) : "r" (addr), "b" (offset));
+    return word;
+}
 	#define loadWord(addr) __lwbrx(addr,0)
     #endif
 #else
