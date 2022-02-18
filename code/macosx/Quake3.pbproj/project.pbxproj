@@ -4198,7 +4198,6 @@
 				012ADB2900868211C697A10E,
 				012ADB2A00868211C697A10E,
 				012ADB2B00868211C697A10E,
-				012ADB2C00868211C697A10E,
 				012ADB2D00868211C697A10E,
 				012ADB2E00868211C697A10E,
 			);
@@ -4268,14 +4267,6 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.c;
 			path = sv_net_chan.c;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		012ADB2C00868211C697A10E = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.c;
-			path = sv_rankings.c;
 			refType = 4;
 			sourceTree = "<group>";
 		};
