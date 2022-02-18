@@ -163,7 +163,7 @@ static ID_INLINE float BigFloat(const float *l) { FloatSwap(l); }
 
 //======================= MAC OS X DEFINES =====================
 
-#if defined(MACOS_X)
+#if defined(__APPLE__) || defined(__APPLE_CC__)
 
 #define MAC_STATIC
 #define __cdecl
