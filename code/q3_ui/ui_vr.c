@@ -237,18 +237,6 @@ static void VR_Event( void* ptr, int notification ) {
 	}
 }
 
-
-
-/*
-=================
-Controls_StatusBar
-=================
-*/
-static void VR_StatusBar( void *self )
-{
-	UI_DrawString(SCREEN_WIDTH * 0.50, SCREEN_HEIGHT * 0.80, "Use Arrow Keys or CLICK to change", UI_SMALLFONT|UI_CENTER, colorWhite );
-}
-
 static void VR_MenuInit( void ) {
 	int				y;
 
@@ -273,7 +261,7 @@ static void VR_MenuInit( void ) {
 
 	static const char *s_directionmode[] =
 			{
-					"HMD",
+					"HMD (Default)",
 					"Off-hand Controller",
 					NULL
 			};
@@ -281,7 +269,7 @@ static void VR_MenuInit( void ) {
 	static const char *s_refreshrate[] =
 			{
 					"60",
-					"72",
+					"72 (Default)",
 					"80",
 					"90",
 					"120",
@@ -292,7 +280,7 @@ static void VR_MenuInit( void ) {
 			{
 					"None",
 					"Blood Only",
-					"Blood & Gibs",
+					"Blood & Gibs (Default)",
 					"Extra Gore (Performance Hit)",
 					NULL
 			};
@@ -406,9 +394,8 @@ static void VR_MenuInit( void ) {
 	s_VR.weaponpitch.generic.name	     = "Weapon Pitch:";
 	s_VR.weaponpitch.generic.id 	     = ID_WEAPONPITCH;
 	s_VR.weaponpitch.generic.callback  	= VR_Event;
-	s_VR.weaponpitch.minvalue		     = -25;
-	s_VR.weaponpitch.maxvalue		     = 5;
-	s_VR.weaponpitch.generic.statusbar 	= VR_StatusBar;
+	s_VR.weaponpitch.minvalue		     = 0;
+	s_VR.weaponpitch.maxvalue		     = 30;
 
     y += BIGCHAR_HEIGHT;
 	s_VR.heightadjust.generic.type	     = MTYPE_SLIDER;
@@ -420,7 +407,6 @@ static void VR_MenuInit( void ) {
 	s_VR.heightadjust.generic.callback  	= VR_Event;
 	s_VR.heightadjust.minvalue		     = 0.0f;
 	s_VR.heightadjust.maxvalue		     = 1.0f;
-	s_VR.heightadjust.generic.statusbar 	= VR_StatusBar;
 
     y += BIGCHAR_HEIGHT;
     s_VR.twohanded.generic.type        = MTYPE_RADIOBUTTON;

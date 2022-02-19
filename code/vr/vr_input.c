@@ -219,9 +219,9 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
 		vr.weaponposition[1] = remoteTracking.HeadPose.Pose.Position.y + vr_heightAdjust->value;
 		vr.weaponposition[2] = remoteTracking.HeadPose.Pose.Position.z;
 
-		vr.weaponoffset[0] = vr.weaponposition[0] - vr.hmdposition[0];
-		vr.weaponoffset[1] = vr.weaponposition[1] - vr.hmdposition[1];
-		vr.weaponoffset[2] = vr.weaponposition[2] - vr.hmdposition[2];
+		VectorCopy(vr.weaponoffset_last[1], vr.weaponoffset_last[0]);
+		VectorCopy(vr.weaponoffset, vr.weaponoffset_last[1]);
+		VectorSubtract(vr.weaponposition, vr.hmdposition, vr.weaponoffset);
 
 		if (vr.virtual_screen ||
             cl.snap.ps.pm_type == PM_INTERMISSION)
@@ -239,27 +239,34 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
         vr.offhandposition[1] = remoteTracking.HeadPose.Pose.Position.y + vr_heightAdjust->value;
         vr.offhandposition[2] = remoteTracking.HeadPose.Pose.Position.z;
 
-        vr.offhandoffset[0] = vr.offhandposition[0] - vr.hmdposition[0];
-        vr.offhandoffset[1] = vr.offhandposition[1] - vr.hmdposition[1];
-        vr.offhandoffset[2] = vr.offhandposition[2] - vr.hmdposition[2];
+        VectorCopy(vr.offhandoffset_last[1], vr.offhandoffset_last[0]);
+        VectorCopy(vr.offhandoffset, vr.offhandoffset_last[1]);
+        VectorSubtract(vr.offhandposition, vr.hmdposition, vr.offhandoffset);
 	}
 
     vr.weapon_zoomed = vr_weaponScope->integer &&
                        vr.weapon_stabilised &&
                        (cl.snap.ps.weapon == WP_RAILGUN) &&
-                       (VectorLength(vr.weaponoffset) < 0.2f) &&
+                       (VectorLength(vr.weaponoffset) < 0.24f) &&
                        cl.snap.ps.stats[STAT_HEALTH] > 0;
 
     if (vr_twoHandedWeapons->integer && vr.weapon_stabilised)
     {
-        float x = vr.offhandoffset[0] - (vr.weapon_zoomed ? 0 : vr.weaponoffset[0]);
-        float y = vr.offhandoffset[1] - (vr.weapon_zoomed ? 0 : vr.weaponoffset[1]);
-        float z = vr.offhandoffset[2] - (vr.weapon_zoomed ? 0 : vr.weaponoffset[2]);
-        float zxDist = length(x, z);
+        vec3_t vec[3];
+        VectorSubtract(vr.offhandoffset, vr.weaponoffset, vec[0]);
+        VectorSubtract(vr.offhandoffset_last[0], vr.weaponoffset_last[0], vec[1]);
+        VectorSubtract(vr.offhandoffset_last[1], vr.weaponoffset_last[1], vec[2]);
 
-        if (zxDist != 0.0f && z != 0.0f) {
-            VectorSet(vr.weaponangles, -degrees(atanf(y / zxDist)),
-                      -degrees(atan2f(x, -z)), vr.weaponangles[ROLL] / 2.0f); //Dampen roll on stabilised weapon
+        vec3_t v;
+        VectorAdd(vec[0], vec[1], v);
+        VectorAdd(v, vec[2], v);
+        VectorScale(v, 1.0f/3.0f, v);
+
+        float zxDist = length(v[0], v[2]);
+
+        if (zxDist != 0.0f && v[2] != 0.0f) {
+            VectorSet(vr.weaponangles, -degrees(atanf(v[1] / zxDist)),
+                      -degrees(atan2f(v[0], -v[2])), vr.weaponangles[ROLL] / 2.0f); //Dampen roll on stabilised weapon
         }
     }
 

@@ -32,10 +32,12 @@ typedef struct {
     vec3_t weaponangles_delta;
 
     vec3_t weaponoffset;
+    vec3_t weaponoffset_last[2];
     vec3_t weaponposition;
 
     vec3_t offhandangles;
     vec3_t offhandoffset;
+    vec3_t offhandoffset_last[2];
     vec3_t offhandposition;
 
     //////////////////////////////////////
