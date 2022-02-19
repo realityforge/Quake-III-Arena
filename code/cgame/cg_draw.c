@@ -2570,8 +2570,8 @@ static void CG_Draw2D(stereoFrame_t stereoFrame)
 	if ( cg.snap->ps.persistant[PERS_TEAM] == TEAM_SPECTATOR ) {
 		CG_DrawSpectator();
 
-		if(stereoFrame == STEREO_CENTER)
-			CG_DrawCrosshair();
+//		if(stereoFrame == STEREO_CENTER)
+//			CG_DrawCrosshair();
 
 		CG_DrawCrosshairNames();
 	} else {
@@ -2591,9 +2591,12 @@ static void CG_Draw2D(stereoFrame_t stereoFrame)
 
 #ifdef MISSIONPACK
 			CG_DrawProxWarning();
-#endif      
-			if(stereoFrame == STEREO_CENTER)
+#endif
+
+			//Use 2D crosshair when using weapon zoom
+			if(vr->weapon_zoomed)
 				CG_DrawCrosshair();
+
 			CG_DrawCrosshairNames();
 			CG_DrawWeaponSelect();
 
@@ -2666,7 +2669,7 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 	// clear around the rendered view if sized down
 	CG_TileClear();
 
-	if(stereoView != STEREO_CENTER)
+	if(!vr->weapon_zoomed)
 		CG_DrawCrosshair3D();
 
 	// offset vieworg appropriately if we're doing stereo separation
@@ -2710,7 +2713,8 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 		}
 	}
 
-	VectorMA(cg.refdef.vieworg, -separation, cg.refdef.viewaxis[1], cg.refdef.vieworg);
+	float zoomCoeff =  ((2.5f-vr->weapon_zoomLevel)/1.5f);
+	VectorMA(cg.refdef.vieworg, -separation * zoomCoeff, cg.refdef.viewaxis[1], cg.refdef.vieworg);
 
 	// draw 3D view
 	trap_R_RenderScene( &cg.refdef );

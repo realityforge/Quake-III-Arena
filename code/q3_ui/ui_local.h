@@ -406,6 +406,12 @@ extern void UI_PreferencesMenu( void );
 extern void Preferences_Cache( void );
 
 //
+// ui_vr.c
+//
+extern void UI_VRMenu( void );
+extern void VR_Cache( void );
+
+//
 // ui_specifyleague.c
 //
 extern void UI_SpecifyLeagueMenu( void );
@@ -446,6 +452,7 @@ extern void ServerInfo_Cache( void );
 extern void UI_GraphicsOptionsMenu( void );
 extern void GraphicsOptions_Cache( void );
 extern void DriverInfo_Cache( void );
+
 
 //
 // ui_players.c

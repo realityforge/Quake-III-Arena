@@ -43,11 +43,12 @@ SETUP MENU
 #define ID_CUSTOMIZECONTROLS	11
 #define ID_SYSTEMCONFIG			12
 #define ID_GAME					13
-#define ID_CDKEY				14
-#define ID_LOAD					15
-#define ID_SAVE					16
-#define ID_DEFAULTS				17
-#define ID_BACK					18
+#define ID_VR					14
+#define ID_CDKEY				15
+#define ID_LOAD					16
+#define ID_SAVE					17
+#define ID_DEFAULTS				18
+#define ID_BACK					19
 
 
 typedef struct {
@@ -60,6 +61,7 @@ typedef struct {
 	menutext_s		setupcontrols;
 	menutext_s		setupsystem;
 	menutext_s		game;
+	menutext_s		vr;
 	menutext_s		cdkey;
 //	menutext_s		load;
 //	menutext_s		save;
@@ -121,6 +123,10 @@ static void UI_SetupMenu_Event( void *ptr, int event ) {
 
 	case ID_GAME:
 		UI_PreferencesMenu();
+		break;
+
+	case ID_VR:
+		UI_VRMenu();
 		break;
 
 	case ID_CDKEY:
@@ -228,6 +234,17 @@ static void UI_SetupMenu_Init( void ) {
 	setupMenuInfo.game.style						= UI_CENTER;
 
 	y += SETUP_MENU_VERTICAL_SPACING;
+	setupMenuInfo.vr.generic.type					= MTYPE_PTEXT;
+	setupMenuInfo.vr.generic.flags				    = QMF_CENTER_JUSTIFY|QMF_PULSEIFFOCUS;
+	setupMenuInfo.vr.generic.x					    = 320;
+	setupMenuInfo.vr.generic.y					    = y;
+	setupMenuInfo.vr.generic.id					    = ID_VR;
+	setupMenuInfo.vr.generic.callback			    = UI_SetupMenu_Event;
+	setupMenuInfo.vr.string						    = "VR OPTIONS";
+	setupMenuInfo.vr.color						    = color_red;
+	setupMenuInfo.vr.style						    = UI_CENTER;
+
+	y += SETUP_MENU_VERTICAL_SPACING;
 	setupMenuInfo.cdkey.generic.type				= MTYPE_PTEXT;
 	setupMenuInfo.cdkey.generic.flags				= QMF_CENTER_JUSTIFY|QMF_PULSEIFFOCUS;
 	setupMenuInfo.cdkey.generic.x					= 320;
@@ -293,6 +310,7 @@ static void UI_SetupMenu_Init( void ) {
 	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.setupcontrols );
 	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.setupsystem );
 	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.game );
+	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.vr );
 	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.cdkey );
 //	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.load );
 //	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.save );

@@ -247,8 +247,21 @@ void VR_DrawFrame( engine_t* engine ) {
 
 	float fov_y = vrapi_GetSystemPropertyInt( engine->ovr, VRAPI_SYS_PROP_SUGGESTED_EYE_FOV_DEGREES_Y);
 	float fov_x = vrapi_GetSystemPropertyInt( engine->ovr, VRAPI_SYS_PROP_SUGGESTED_EYE_FOV_DEGREES_X);
+
+	if (vr.weapon_zoomed) {
+		vr.weapon_zoomLevel += 0.05;
+		if (vr.weapon_zoomLevel > 2.5f)
+            vr.weapon_zoomLevel = 2.5f;
+	}
+	else {
+	    //Zoom back out quicker
+        vr.weapon_zoomLevel -= 0.1;
+		if (vr.weapon_zoomLevel < 1.0f)
+            vr.weapon_zoomLevel = 1.0f;
+	}
+
 	const ovrMatrix4f projectionMatrix = ovrMatrix4f_CreateProjectionFov(
-			fov_x, fov_y, 0.0f, 0.0f, 1.0f, 0.0f );
+			fov_x / vr.weapon_zoomLevel, fov_y / vr.weapon_zoomLevel, 0.0f, 0.0f, 1.0f, 0.0f );
 
 	static float playerYaw = 0;
 
@@ -299,11 +312,15 @@ void VR_DrawFrame( engine_t* engine ) {
 
 		ovrLayerProjection2 layer = vrapi_DefaultLayerProjection2();
 		layer.HeadPose = engine->tracking.HeadPose;
-				
-		for (int eye = 0; eye < VRAPI_FRAME_LAYER_EYE_MAX; ++eye) {
+
+        const ovrMatrix4f defaultProjection = ovrMatrix4f_CreateProjectionFov(
+                fov_x, fov_y, 0.0f, 0.0f, 1.0f, 0.0f );
+
+
+        for (int eye = 0; eye < VRAPI_FRAME_LAYER_EYE_MAX; ++eye) {
 			layer.Textures[eye].ColorSwapChain = engine->framebuffers[eye].colorTexture;
 			layer.Textures[eye].SwapChainIndex = engine->framebuffers[eye].swapchainIndex;
-			layer.Textures[eye].TexCoordsFromTanAngles = ovrMatrix4f_TanAngleMatrixFromProjection(&projectionMatrix);
+			layer.Textures[eye].TexCoordsFromTanAngles = ovrMatrix4f_TanAngleMatrixFromProjection(&defaultProjection);
 		}
 
 

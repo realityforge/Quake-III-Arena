@@ -706,14 +706,31 @@ static int CG_CalcViewValues( void ) {
 	// position eye relative to origin
 	if (!cgs.localServer)
     {
-    	//We are connected to a multiplayer server, so make the appropriate adjustment to the view
-    	//angles as we send orientation to the server that includes the weapon angles
-		vec3_t angles;
-		VectorCopy(vr->hmdorientation, angles);
-        angles[YAW] = (cg.refdefViewAngles[YAW] + vr->hmdorientation[YAW]) - vr->weaponangles[YAW];
-		AnglesToAxis( angles, cg.refdef.viewaxis );
+		if (vr->weapon_zoomed) {
+			//If we are zoomed, then we use the refdefViewANgles (which are the weapon angles)
+			vec3_t angles;
+			VectorCopy(cg.refdefViewAngles, angles);
+			angles[ROLL] = 0;
+			AnglesToAxis( angles, cg.refdef.viewaxis );
+		} else {
+			//We are connected to a multiplayer server, so make the appropriate adjustment to the view
+			//angles as we send orientation to the server that includes the weapon angles
+			vec3_t angles;
+			VectorCopy(vr->hmdorientation, angles);
+			angles[YAW] =
+					(cg.refdefViewAngles[YAW] + vr->hmdorientation[YAW]) - vr->weaponangles[YAW];
+			AnglesToAxis(angles, cg.refdef.viewaxis);
+		}
     } else {
-		AnglesToAxis( cg.refdefViewAngles, cg.refdef.viewaxis );
+		if (vr->weapon_zoomed) {
+			vec3_t angles;
+			angles[ROLL] = 0;
+			angles[PITCH] = vr->weaponangles[PITCH];
+			angles[YAW] = (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]) + vr->weaponangles[YAW];
+			AnglesToAxis(angles, cg.refdef.viewaxis);
+		} else {
+			AnglesToAxis(cg.refdefViewAngles, cg.refdef.viewaxis);
+		}
     }
 
 	if ( cg.hyperspace ) {

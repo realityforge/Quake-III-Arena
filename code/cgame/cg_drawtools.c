@@ -47,7 +47,8 @@ Adjusted for resolution and screen aspect ratio
 */
 void CG_AdjustFrom640( float *x, float *y, float *w, float *h ) {
 
-	if (vr->virtual_screen)
+	if (vr->virtual_screen ||
+		vr->weapon_zoomed)
 	{
 		// scale for screen sizes
 		*x *= cgs.screenXScale;

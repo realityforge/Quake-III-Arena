@@ -37,9 +37,9 @@ int demo_protocols[] =
 #define MAX_NUM_ARGVS	50
 
 #define MIN_DEDICATED_COMHUNKMEGS 1
-#define MIN_COMHUNKMEGS		128
-#define DEF_COMHUNKMEGS 	256
-#define DEF_COMZONEMEGS		48
+#define MIN_COMHUNKMEGS		256
+#define DEF_COMHUNKMEGS 	512
+#define DEF_COMZONEMEGS		256
 #define DEF_COMHUNKMEGS_S	XSTRING(DEF_COMHUNKMEGS)
 #define DEF_COMZONEMEGS_S	XSTRING(DEF_COMZONEMEGS)
 
@@ -98,6 +98,8 @@ cvar_t	*com_busyWait;
 #ifndef DEDICATED
 cvar_t  *con_autochat;
 #endif
+
+extern cvar_t *vr_refreshrate;
 
 #if idx64
 	int (*Q_VMftol)(void);
@@ -2741,7 +2743,7 @@ void Com_Init( char *commandLine ) {
 	// init commands and vars
 	//
 	com_altivec = Cvar_Get ("com_altivec", "1", CVAR_ARCHIVE);
-	com_maxfps = Cvar_Get ("com_maxfps", "72", CVAR_ARCHIVE);
+	com_maxfps = Cvar_Get ("com_maxfps", "72", CVAR_ARCHIVE); // NOW UNUSED
 	com_blood = Cvar_Get ("com_blood", "1", CVAR_ARCHIVE);
 
 	com_logfile = Cvar_Get ("logfile", "0", CVAR_TEMP );
@@ -2763,9 +2765,9 @@ void Com_Init( char *commandLine ) {
 	com_ansiColor = Cvar_Get( "com_ansiColor", "0", CVAR_ARCHIVE );
 
 	com_unfocused = Cvar_Get( "com_unfocused", "0", CVAR_ROM );
-	com_maxfpsUnfocused = Cvar_Get( "com_maxfpsUnfocused", "0", CVAR_ARCHIVE );
+	com_maxfpsUnfocused = Cvar_Get( "com_maxfpsUnfocused", "0", CVAR_ARCHIVE ); // UNUSED
 	com_minimized = Cvar_Get( "com_minimized", "0", CVAR_ROM );
-	com_maxfpsMinimized = Cvar_Get( "com_maxfpsMinimized", "0", CVAR_ARCHIVE );
+	com_maxfpsMinimized = Cvar_Get( "com_maxfpsMinimized", "0", CVAR_ARCHIVE ); // UNUSED
 	com_abnormalExit = Cvar_Get( "com_abnormalExit", "0", CVAR_ROM );
 	com_busyWait = Cvar_Get("com_busyWait", "0", CVAR_ARCHIVE);
 	Cvar_Get("com_errorMessage", "", CVAR_ROM | CVAR_NORESTART);
@@ -3104,12 +3106,16 @@ void Com_Frame( void ) {
 			minMsec = SV_FrameMsec();
 		else
 		{
+
+/*
 			if(com_minimized->integer && com_maxfpsMinimized->integer > 0)
 				minMsec = 1000 / com_maxfpsMinimized->integer;
 			else if(com_unfocused->integer && com_maxfpsUnfocused->integer > 0)
 				minMsec = 1000 / com_maxfpsUnfocused->integer;
-			else if(com_maxfps->integer > 0)
-				minMsec = 1000 / com_maxfps->integer;
+			else
+*/
+			if(vr_refreshrate->integer > 0)
+				minMsec = 1000 / vr_refreshrate->integer;
 			else
 				minMsec = 1;
 			

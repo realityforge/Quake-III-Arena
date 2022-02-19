@@ -27,6 +27,9 @@ cvar_t *vr_extralatencymode = NULL;
 cvar_t *vr_directionMode = NULL;
 cvar_t *vr_weaponPitch = NULL;
 cvar_t *vr_twoHandedWeapons = NULL;
+cvar_t *vr_refreshrate = NULL;
+cvar_t *vr_weaponZoom = NULL;
+cvar_t *vr_jumpTrigger = NULL;
 
 engine_t* VR_Init( ovrJava java )
 {
@@ -55,6 +58,9 @@ void VR_InitCvars( void )
 	vr_weaponPitch = Cvar_Get ("vr_weaponPitch", "-20", CVAR_ARCHIVE);
 	vr_heightAdjust = Cvar_Get ("vr_heightAdjust", "0.0", CVAR_ARCHIVE);
     vr_twoHandedWeapons = Cvar_Get ("vr_twoHandedWeapons", "1", CVAR_ARCHIVE);
+	vr_refreshrate = Cvar_Get ("vr_refreshrate", "0", CVAR_ARCHIVE);
+	vr_weaponZoom = Cvar_Get ("vr_weaponZoom", "0", CVAR_ARCHIVE);
+	vr_jumpTrigger = Cvar_Get ("vr_jumpTrigger", "1", CVAR_ARCHIVE);
 
 	// Values are:  scale,right,up,forward,pitch,yaw,roll
 	// VALUES PROVIDED BY SkillFur - Thank-you!

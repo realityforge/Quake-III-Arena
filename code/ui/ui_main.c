@@ -3042,13 +3042,13 @@ static void UI_Update(const char *name) {
  	} else if (Q_stricmp(name, "ui_setRate") == 0) {
 		float rate = trap_Cvar_VariableValue("rate");
 		if (rate >= 5000) {
-			trap_Cvar_Set("cl_maxpackets", "30");
+//			trap_Cvar_Set("cl_maxpackets", "30");
 			trap_Cvar_Set("cl_packetdup", "1");
 		} else if (rate >= 4000) {
-			trap_Cvar_Set("cl_maxpackets", "15");
+//			trap_Cvar_Set("cl_maxpackets", "15");
 			trap_Cvar_Set("cl_packetdup", "2");		// favor less prediction errors when there's packet loss
 		} else {
-			trap_Cvar_Set("cl_maxpackets", "15");
+//			trap_Cvar_Set("cl_maxpackets", "15");
 			trap_Cvar_Set("cl_packetdup", "1");		// favor lower bandwidth
 		}
  	} else if (Q_stricmp(name, "ui_GetName") == 0) {

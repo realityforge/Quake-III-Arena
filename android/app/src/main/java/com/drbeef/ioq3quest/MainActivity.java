@@ -7,6 +7,8 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.core.app.ActivityCompat;
@@ -29,7 +31,7 @@ import java.util.zip.ZipInputStream;
 
 import static android.system.Os.setenv;
 
-public class MainActivity extends SDLActivity
+public class MainActivity extends SDLActivity // implements KeyEvent.Callback
 {
 	private int permissionCount = 0;
 	private static final int READ_EXTERNAL_STORAGE_PERMISSION_ID = 1;
@@ -40,34 +42,36 @@ public class MainActivity extends SDLActivity
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.i(TAG,"onCreate called");
+		Log.i(TAG, "onCreate called");
 		try {
 			checkPermissionsAndInitialize();
-		} catch (Exception e) {}
+		} catch (Exception e) {
+		}
 		super.onCreate(savedInstanceState);
 
-		//InputMethodManager imm = (InputMethodManager)   getSystemService(Context.INPUT_METHOD_SERVICE);
-		//imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 	}
 
-	/** Initializes the Activity only if the permission has been granted. */
+
+	/**
+	 * Initializes the Activity only if the permission has been granted.
+	 */
 	private void checkPermissionsAndInitialize() throws IOException {
 		// Boilerplate for checking runtime permissions in Android.
 		if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-				!= PackageManager.PERMISSION_GRANTED){
+				!= PackageManager.PERMISSION_GRANTED) {
 			ActivityCompat.requestPermissions(this,
 					new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
 							Manifest.permission.WRITE_EXTERNAL_STORAGE},
 					WRITE_EXTERNAL_STORAGE_PERMISSION_ID);
-		}
-		else
-		{
+		} else {
 			// Permissions have already been granted.
 			create();
 		}
 	}
 
-	/** Handles the user accepting the permission. */
+	/**
+	 * Handles the user accepting the permission.
+	 */
 	@Override
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
 		if (requestCode == WRITE_EXTERNAL_STORAGE_PERMISSION_ID) {
@@ -134,8 +138,7 @@ public class MainActivity extends SDLActivity
 		commandLineParams = new String();
 
 		//See if user is trying to use command line params
-		if (new File("/sdcard/ioquake3Quest/commandline.txt").exists())
-		{
+		if (new File("/sdcard/ioquake3Quest/commandline.txt").exists()) {
 			BufferedReader br;
 			try {
 				br = new BufferedReader(new FileReader("/sdcard/ioquake3Quest/commandline.txt"));
@@ -158,9 +161,7 @@ public class MainActivity extends SDLActivity
 		Log.d(TAG, "setting env");
 		try {
 			setenv("commandline", commandLineParams, true);
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 		}
 
 		Log.d(TAG, "nativeCreate");
@@ -210,8 +211,43 @@ public class MainActivity extends SDLActivity
 	}
 
 	public static native void nativeCreate(MainActivity thisObject);
+	public static native void nativeKeyDown(MainActivity thisObject, int var1, int var2);
+	public static native void nativeKeyUp(MainActivity thisObject, int var1, int var2);
 
 	static {
 		System.loadLibrary("main");
 	}
+
+	public void showkeyboard() {
+
+		//InputMethodManager imm = (InputMethodManager)   getSystemService(Context.INPUT_METHOD_SERVICE);
+		//imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+	}
+/*
+	// Key events
+	@Override
+	public boolean onKeyDown(int var1, KeyEvent var2)
+	{
+		nativeKeyDown(this, var1, var2.getKeyCode());
+		return true;
+	}
+
+	@Override
+	public boolean onKeyLongPress(int var1, KeyEvent var2)
+	{
+		nativeKeyUp(this, var1, var2.getKeyCode());
+		return true;
+	}
+
+	@Override
+	public boolean onKeyUp(int var1, KeyEvent var2)
+	{
+		return true;
+	}
+
+	@Override
+	public boolean onKeyMultiple(int var1, int var2, KeyEvent var3)
+	{
+		return true;
+	}*/
 }

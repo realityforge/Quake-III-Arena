@@ -12,6 +12,7 @@
 #include "vr_clientinfo.h"
 
 #include <unistd.h>
+#include <jni.h>
 
 #ifdef USE_LOCAL_HEADERS
 #	include "SDL.h"
@@ -68,6 +69,10 @@ extern cvar_t *vr_directionMode;
 extern cvar_t *vr_weaponPitch;
 extern cvar_t *vr_heightAdjust;
 extern cvar_t *vr_twoHandedWeapons;
+extern cvar_t *vr_refreshrate;
+extern cvar_t *vr_weaponZoom;
+extern cvar_t *vr_jumpTrigger;
+
 
 void rotateAboutOrigin(float x, float y, float rotation, vec2_t out)
 {
@@ -218,7 +223,6 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
 		vr.weaponoffset[1] = vr.weaponposition[1] - vr.hmdposition[1];
 		vr.weaponoffset[2] = vr.weaponposition[2] - vr.hmdposition[2];
 
-
 		if (vr.virtual_screen ||
             cl.snap.ps.pm_type == PM_INTERMISSION)
         {
@@ -240,11 +244,17 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
         vr.offhandoffset[2] = vr.offhandposition[2] - vr.hmdposition[2];
 	}
 
+    vr.weapon_zoomed = vr_weaponZoom->integer &&
+                       vr.weapon_stabilised &&
+                       (cl.snap.ps.weapon == WP_RAILGUN) &&
+                       (VectorLength(vr.weaponoffset) < 0.3f) &&
+                       cl.snap.ps.stats[STAT_HEALTH] > 0;
+
     if (vr_twoHandedWeapons->integer && vr.weapon_stabilised)
     {
-        float x = vr.offhandoffset[0] - vr.weaponoffset[0];
-        float y = vr.offhandoffset[1] - vr.weaponoffset[1];
-        float z = vr.offhandoffset[2] - vr.weaponoffset[2];
+        float x = vr.offhandoffset[0] - (vr.weapon_zoomed ? 0 : vr.weaponoffset[0]);
+        float y = vr.offhandoffset[1] - (vr.weapon_zoomed ? 0 : vr.weaponoffset[1]);
+        float z = vr.offhandoffset[2] - (vr.weapon_zoomed ? 0 : vr.weaponoffset[2]);
         float zxDist = length(x, z);
 
         if (zxDist != 0.0f && z != 0.0f) {
@@ -252,6 +262,7 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
                       -degrees(atan2f(x, -z)), vr.weaponangles[ROLL] / 2.0f); //Dampen roll on stabilised weapon
         }
     }
+
 }
 
 static void IN_VRJoystick( qboolean isRightController, float joystickX, float joystickY )
@@ -375,17 +386,29 @@ static void IN_VRTriggers( qboolean isRightController, float index ) {
 		}
 	}
 
-	//off hand trigger Jump as well
-	if (isRightController != (vr_righthanded->integer != 0)) {
-		if (!(controller->axisButtons & VR_TOUCH_AXIS_TRIGGER_INDEX) && index > pressedThreshold) {
-			controller->axisButtons |= VR_TOUCH_AXIS_TRIGGER_INDEX;
-			Com_QueueEvent(in_vrEventTime, SE_KEY, K_SPACE, qtrue, 0, NULL);
-		} else if ((controller->axisButtons & VR_TOUCH_AXIS_TRIGGER_INDEX) && index < releasedThreshold) {
-			controller->axisButtons &= ~VR_TOUCH_AXIS_TRIGGER_INDEX;
-			Com_QueueEvent(in_vrEventTime, SE_KEY, K_SPACE, qfalse, 0, NULL);
-		}
-	}
+	//off hand trigger Jump as well - if configured
+	if (vr_jumpTrigger->integer) {
+        if (isRightController != (vr_righthanded->integer != 0)) {
+            if (!(controller->axisButtons & VR_TOUCH_AXIS_TRIGGER_INDEX) &&
+                index > pressedThreshold) {
+                controller->axisButtons |= VR_TOUCH_AXIS_TRIGGER_INDEX;
+                Com_QueueEvent(in_vrEventTime, SE_KEY, K_SPACE, qtrue, 0, NULL);
+            } else if ((controller->axisButtons & VR_TOUCH_AXIS_TRIGGER_INDEX) &&
+                       index < releasedThreshold) {
+                controller->axisButtons &= ~VR_TOUCH_AXIS_TRIGGER_INDEX;
+                Com_QueueEvent(in_vrEventTime, SE_KEY, K_SPACE, qfalse, 0, NULL);
+            }
+        }
+    }
 }
+
+void jni_showkeyboard( void )
+{
+	jclass callbackClass = (*VR_GetEngine()->java.Env)->GetObjectClass(VR_GetEngine()->java.Env, VR_GetEngine()->java.ActivityObject);
+	jmethodID android_showkeyboard = (*VR_GetEngine()->java.Env)->GetMethodID(VR_GetEngine()->java.Env, callbackClass, "showkeyboard","()V");
+	return (*(VR_GetEngine()->java.Env))->CallVoidMethod(VR_GetEngine()->java.Env, VR_GetEngine()->java.ActivityObject, android_showkeyboard);
+}
+
 
 static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
 {
@@ -466,7 +489,8 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
 	// Y button - unassigned right now
 	if ((buttons & ovrButton_Y) && !(controller->buttons & ovrButton_Y)) {
 		//Actually want this to reset the player location
-		vr.realign_weapon = qtrue;
+		//jni_showkeyboard();
+		vr.realign_playspace = qtrue;
 	} else if (!(buttons & ovrButton_Y) && (controller->buttons & ovrButton_Y)) {
 	}
 
@@ -492,6 +516,11 @@ void IN_VRInputFrame( void )
         result = vrapi_SetExtraLatencyMode(VR_GetEngine()->ovr, VRAPI_EXTRA_LATENCY_MODE_ON);
         assert(result == VRAPI_INITIALIZE_SUCCESS);
     }
+
+	if (vr_refreshrate != NULL && vr_refreshrate->integer)
+	{
+		vrapi_SetDisplayRefreshRate(VR_GetEngine()->ovr, (float)vr_refreshrate->integer);
+	}
 
     result = vrapi_SetClockLevels(VR_GetEngine()->ovr, 4, 4);
     assert(result == VRAPI_INITIALIZE_SUCCESS);
