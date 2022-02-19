@@ -350,18 +350,20 @@ static void CG_OffsetFirstPersonView( void ) {
 
 	VectorCopy(cg.refdef.vieworg, cg.v_death_origin);
 
+	float hitRollCoeff = trap_Cvar_VariableValue("vr_rollWhenHit");
+
 	// add angles based on damage kick
 	if ( cg.damageTime ) {
 		ratio = cg.time - cg.damageTime;
 		if ( ratio < DAMAGE_DEFLECT_TIME ) {
 			ratio /= DAMAGE_DEFLECT_TIME;
 			angles[PITCH] += ratio * cg.v_dmg_pitch;
-			angles[ROLL] += ratio * cg.v_dmg_roll;
+			angles[ROLL] += ratio * cg.v_dmg_roll * hitRollCoeff;
 		} else {
 			ratio = 1.0 - ( ratio - DAMAGE_DEFLECT_TIME ) / DAMAGE_RETURN_TIME;
 			if ( ratio > 0 ) {
 				angles[PITCH] += ratio * cg.v_dmg_pitch;
-				angles[ROLL] += ratio * cg.v_dmg_roll;
+				angles[ROLL] += ratio * cg.v_dmg_roll * hitRollCoeff;
 			}
 		}
 	}
@@ -612,7 +614,6 @@ static void CG_DamageBlendBlob( void ) {
 	trap_R_AddRefEntityToScene( &ent );
 }
 
-
 /*
 ===============
 CG_CalcViewValues
@@ -710,8 +711,8 @@ static int CG_CalcViewValues( void ) {
 			//If we are zoomed, then we use the refdefViewANgles (which are the weapon angles)
 			vec3_t angles;
 			VectorCopy(cg.refdefViewAngles, angles);
-			angles[ROLL] = 0;
-			AnglesToAxis( angles, cg.refdef.viewaxis );
+            angles[ROLL] = vr->hmdorientation[ROLL];
+            AnglesToAxis( angles, cg.refdef.viewaxis );
 		} else {
 			//We are connected to a multiplayer server, so make the appropriate adjustment to the view
 			//angles as we send orientation to the server that includes the weapon angles
@@ -724,7 +725,7 @@ static int CG_CalcViewValues( void ) {
     } else {
 		if (vr->weapon_zoomed) {
 			vec3_t angles;
-			angles[ROLL] = 0;
+			angles[ROLL] = vr->hmdorientation[ROLL];
 			angles[PITCH] = vr->weaponangles[PITCH];
 			angles[YAW] = (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]) + vr->weaponangles[YAW];
 			AnglesToAxis(angles, cg.refdef.viewaxis);

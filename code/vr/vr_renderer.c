@@ -255,7 +255,7 @@ void VR_DrawFrame( engine_t* engine ) {
 	}
 	else {
 	    //Zoom back out quicker
-        vr.weapon_zoomLevel -= 0.1;
+        vr.weapon_zoomLevel -= 0.25f;
 		if (vr.weapon_zoomLevel < 1.0f)
             vr.weapon_zoomLevel = 1.0f;
 	}

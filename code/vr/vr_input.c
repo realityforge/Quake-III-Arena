@@ -70,7 +70,7 @@ extern cvar_t *vr_weaponPitch;
 extern cvar_t *vr_heightAdjust;
 extern cvar_t *vr_twoHandedWeapons;
 extern cvar_t *vr_refreshrate;
-extern cvar_t *vr_weaponZoom;
+extern cvar_t *vr_weaponScope;
 extern cvar_t *vr_jumpTrigger;
 
 
@@ -244,10 +244,10 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
         vr.offhandoffset[2] = vr.offhandposition[2] - vr.hmdposition[2];
 	}
 
-    vr.weapon_zoomed = vr_weaponZoom->integer &&
+    vr.weapon_zoomed = vr_weaponScope->integer &&
                        vr.weapon_stabilised &&
                        (cl.snap.ps.weapon == WP_RAILGUN) &&
-                       (VectorLength(vr.weaponoffset) < 0.3f) &&
+                       (VectorLength(vr.weaponoffset) < 0.2f) &&
                        cl.snap.ps.stats[STAT_HEALTH] > 0;
 
     if (vr_twoHandedWeapons->integer && vr.weapon_stabilised)

@@ -48,10 +48,12 @@ VR OPTIONS MENU
 #define ID_WEAPONPITCH			133
 #define ID_HEIGHTADJUST			134
 #define ID_TWOHANDED			135
-#define ID_DRAWHUD			    136
-#define ID_GORE 			    137
+#define ID_SCOPE				136
+#define ID_DRAWHUD			    137
+#define ID_ROLLHIT			    138
+#define ID_GORE 			    139
 
-#define ID_BACK					138
+#define ID_BACK					140
 
 #define	NUM_HUDDEPTH			6
 #define	NUM_DIRECTIONMODE		2
@@ -76,6 +78,8 @@ typedef struct {
 	menuslider_s 		weaponpitch;
     menuslider_s 		heightadjust;
     menuradiobutton_s	twohanded;
+    menuradiobutton_s	scope;
+    menuradiobutton_s	rollhit;
 	menulist_s 			gore;
 
 	menubitmap_s		back;
@@ -110,15 +114,17 @@ static void VR_SetMenuItems( void ) {
 			s_VR.refreshrate.curvalue = 4;
 			break;
 	}
-    s_VR.weaponpitch.curvalue		= trap_Cvar_VariableValue( "vr_weaponPitch" )  != 0;
+    s_VR.weaponpitch.curvalue		= trap_Cvar_VariableValue( "vr_weaponPitch" )  + 25;
     s_VR.heightadjust.curvalue		= trap_Cvar_VariableValue( "vr_heightAdjust" )  != 0;
     s_VR.twohanded.curvalue		    = trap_Cvar_VariableValue( "vr_twoHandedWeapons" ) != 0;
+    s_VR.scope.curvalue		    = trap_Cvar_VariableValue( "vr_weaponScope" ) != 0;
+    s_VR.rollhit.curvalue		    = trap_Cvar_VariableValue( "vr_rollWhenHit" ) != 0;
 
     //GORE
     {
-        int level = trap_Cvar_VariableValue( "cg_gibs" ) +
-					trap_Cvar_VariableValue( "com_blood" ) +
-                	trap_Cvar_VariableValue( "cg_megagibs" );
+        int level = trap_Cvar_VariableValue( "com_blood" ) +
+					trap_Cvar_VariableValue( "cg_gibs" ) +
+					trap_Cvar_VariableValue( "cg_megagibs" );
 
 		s_VR.gore.curvalue		    = level % NUM_GORE;
     }
@@ -175,7 +181,7 @@ static void VR_Event( void* ptr, int notification ) {
 		break;
 
     case ID_WEAPONPITCH:
-        trap_Cvar_SetValue( "vr_weaponPitch", s_VR.weaponpitch.curvalue );
+        trap_Cvar_SetValue( "vr_weaponPitch", s_VR.weaponpitch.curvalue - 25 );
         break;
 
     case ID_HEIGHTADJUST:
@@ -186,8 +192,16 @@ static void VR_Event( void* ptr, int notification ) {
         trap_Cvar_SetValue( "vr_twoHandedWeapons", s_VR.twohanded.curvalue );
         break;
 
+    case ID_SCOPE:
+        trap_Cvar_SetValue( "vr_weaponScope", s_VR.scope.curvalue );
+        break;
+
     case ID_DRAWHUD:
         trap_Cvar_SetValue( "cg_drawStatus", s_VR.drawhud.curvalue );
+        break;
+
+    case ID_ROLLHIT:
+        trap_Cvar_SetValue( "vr_rollWhenHit", s_VR.rollhit.curvalue );
         break;
 
 	case ID_GORE: {
@@ -198,8 +212,8 @@ static void VR_Event( void* ptr, int notification ) {
 					trap_Cvar_SetValue( "cg_megagibs", 0);
 					break;
 				case 1:
-					trap_Cvar_SetValue( "com_blood", 0);
-					trap_Cvar_SetValue( "cg_gibs", 1);
+					trap_Cvar_SetValue( "com_blood", 1);
+					trap_Cvar_SetValue( "cg_gibs", 0);
 					trap_Cvar_SetValue( "cg_megagibs", 0);
 					break;
 				case 2:
@@ -277,9 +291,9 @@ static void VR_MenuInit( void ) {
 	static const char *s_gore[] =
 			{
 					"None",
-					"Gibs Only",
+					"Blood Only",
 					"Blood & Gibs",
-					"Extra Gore",
+					"Extra Gore (Performance Hit)",
 					NULL
 			};
 
@@ -417,6 +431,24 @@ static void VR_MenuInit( void ) {
     s_VR.twohanded.generic.x	          = VR_X_POS;
     s_VR.twohanded.generic.y	          = y;
 
+    y += BIGCHAR_HEIGHT;
+    s_VR.scope.generic.type        = MTYPE_RADIOBUTTON;
+    s_VR.scope.generic.name	      = "Railgun Scope:";
+    s_VR.scope.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+    s_VR.scope.generic.callback    = VR_Event;
+    s_VR.scope.generic.id          = ID_SCOPE;
+    s_VR.scope.generic.x	          = VR_X_POS;
+    s_VR.scope.generic.y	          = y;
+
+    y += BIGCHAR_HEIGHT;
+    s_VR.rollhit.generic.type        = MTYPE_RADIOBUTTON;
+    s_VR.rollhit.generic.name	      = "Roll when hit:";
+    s_VR.rollhit.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+    s_VR.rollhit.generic.callback    = VR_Event;
+    s_VR.rollhit.generic.id          = ID_ROLLHIT;
+    s_VR.rollhit.generic.x	          = VR_X_POS;
+    s_VR.rollhit.generic.y	          = y;
+
 
 	y += BIGCHAR_HEIGHT + 10;
 	s_VR.gore.generic.type		= MTYPE_SPINCONTROL;
@@ -453,6 +485,7 @@ static void VR_MenuInit( void ) {
 	Menu_AddItem( &s_VR.menu, &s_VR.weaponpitch );
 	Menu_AddItem( &s_VR.menu, &s_VR.heightadjust );
 	Menu_AddItem( &s_VR.menu, &s_VR.twohanded );
+	Menu_AddItem( &s_VR.menu, &s_VR.scope );
 	Menu_AddItem( &s_VR.menu, &s_VR.gore );
 
 	Menu_AddItem( &s_VR.menu, &s_VR.back );

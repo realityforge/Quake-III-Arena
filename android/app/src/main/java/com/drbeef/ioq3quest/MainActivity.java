@@ -121,6 +121,9 @@ public class MainActivity extends SDLActivity // implements KeyEvent.Callback
 		//copy demo
 		copy_asset("/sdcard/ioquake3Quest/baseq3", "pak0.pk3", false);
 
+		//Scope
+		copy_asset("/sdcard/ioquake3Quest/baseq3", "scope.tga", false);
+
 		//glsl
 		copy_asset("/sdcard/ioquake3Quest", "glsl.zip", true);
 		new File("/sdcard/ioquake3Quest/baseq3/glsl").mkdirs();

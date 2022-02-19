@@ -739,6 +739,8 @@ typedef struct {
 	qhandle_t	backTileShader;
 	qhandle_t	noammoShader;
 
+	qhandle_t	scopeShader;
+
 	qhandle_t	smokePuffShader;
 	qhandle_t	smokePuffRageProShader;
 	qhandle_t	shotgunSmokePuffShader;
@@ -783,6 +785,8 @@ typedef struct {
 	qhandle_t	ringFlashModel;
 	qhandle_t	dishFlashModel;
 	qhandle_t	lightningExplosionModel;
+
+	qhandle_t	reticleShader;
 
 	// weapon effect shaders
 	qhandle_t	railExplosionShader;

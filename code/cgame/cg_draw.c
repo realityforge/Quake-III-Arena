@@ -2536,6 +2536,49 @@ void CG_DrawTimedMenus( void ) {
 	}
 }
 #endif
+
+/*
+==============
+CG_DrawWeapReticle
+==============
+*/
+static void CG_DrawWeapReticle( void )
+{
+	int weap;
+	vec4_t color = {0, 0, 0, 1};
+
+	float indent = 0.2;
+	float X_WIDTH=640;
+	float Y_HEIGHT=480;
+
+	float x = (X_WIDTH * indent), y = (Y_HEIGHT * indent) + 3, w = (X_WIDTH * (1-(2*indent))) / 2.0f, h = (Y_HEIGHT * (1-(2*indent))) / 2;
+
+	CG_AdjustFrom640( &x, &y, &w, &h );
+
+	// sides
+	CG_FillRect( 0, 0, (X_WIDTH * indent), Y_HEIGHT, color );
+	CG_FillRect( X_WIDTH * (1 - indent), 0, (X_WIDTH * indent), Y_HEIGHT, color );
+	// top/bottom
+	CG_FillRect( X_WIDTH * indent, 0, X_WIDTH * (1-indent), Y_HEIGHT * indent, color );
+	CG_FillRect( X_WIDTH * indent, Y_HEIGHT * (1-indent), X_WIDTH * (1-indent), Y_HEIGHT * indent, color );
+
+	{
+		// center
+		if ( cgs.media.reticleShader ) {
+			trap_R_DrawStretchPic( x, y, w, h, 0, 0, 1, 1, cgs.media.reticleShader );    // tl
+			trap_R_DrawStretchPic( x + w, y, w, h, 1, 0, 0, 1, cgs.media.reticleShader );  // tr
+			trap_R_DrawStretchPic( x, y + h, w, h, 0, 1, 1, 0, cgs.media.reticleShader );    // bl
+			trap_R_DrawStretchPic( x + w, y + h, w, h, 1, 1, 0, 0, cgs.media.reticleShader );  // br
+		}
+
+		// hairs
+		CG_FillRect( 84, 242, 177, 2, color );   // left
+		CG_FillRect( 320, 245, 1, 58, color );   // center top
+		CG_FillRect( 319, 303, 2, 178, color );  // center bot
+		CG_FillRect( 380, 242, 177, 2, color );  // right
+	}
+}
+
 /*
 =================
 CG_Draw2D
@@ -2593,9 +2636,9 @@ static void CG_Draw2D(stereoFrame_t stereoFrame)
 			CG_DrawProxWarning();
 #endif
 
-			//Use 2D crosshair when using weapon zoom
-			if(vr->weapon_zoomed)
-				CG_DrawCrosshair();
+			if(vr->weapon_zoomed) {
+				CG_DrawWeapReticle();
+			}
 
 			CG_DrawCrosshairNames();
 			CG_DrawWeaponSelect();
