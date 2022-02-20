@@ -252,21 +252,20 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
 
     if (vr_twoHandedWeapons->integer && vr.weapon_stabilised)
     {
-        vec3_t vec[3];
-        VectorSubtract(vr.offhandoffset, vr.weaponoffset, vec[0]);
-        VectorSubtract(vr.offhandoffset_last[0], vr.weaponoffset_last[0], vec[1]);
-        VectorSubtract(vr.offhandoffset_last[1], vr.weaponoffset_last[1], vec[2]);
+        //Apply smoothing to the weapon hand
+        vec3_t smooth_weaponoffset;
+        VectorAdd(vr.weaponoffset, vr.weaponoffset_last[0], smooth_weaponoffset);
+        VectorAdd(smooth_weaponoffset, vr.weaponoffset_last[1],smooth_weaponoffset);
+        VectorScale(smooth_weaponoffset, 1.0f/3.0f, smooth_weaponoffset);
 
-        vec3_t v;
-        VectorAdd(vec[0], vec[1], v);
-        VectorAdd(v, vec[2], v);
-        VectorScale(v, 1.0f/3.0f, v);
+        vec3_t vec;
+        VectorSubtract(vr.offhandoffset, smooth_weaponoffset, vec);
 
-        float zxDist = length(v[0], v[2]);
+        float zxDist = length(vec[0], vec[2]);
 
-        if (zxDist != 0.0f && v[2] != 0.0f) {
-            VectorSet(vr.weaponangles, -degrees(atanf(v[1] / zxDist)),
-                      -degrees(atan2f(v[0], -v[2])), vr.weaponangles[ROLL] / 2.0f); //Dampen roll on stabilised weapon
+        if (zxDist != 0.0f && vec[2] != 0.0f) {
+            VectorSet(vr.weaponangles, -degrees(atanf(vec[1] / zxDist)),
+                      -degrees(atan2f(vec[0], -vec[2])), vr.weaponangles[ROLL] / 2.0f); //Dampen roll on stabilised weapon
         }
     }
 
