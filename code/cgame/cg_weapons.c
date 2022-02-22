@@ -1795,31 +1795,6 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 
 	// add everything onto the hand
 	CG_AddPlayerWeapon( &hand, ps, &cg.predictedPlayerEntity, ps->persistant[PERS_TEAM] );
-
-	//Weapon offset debugging
-	if (qfalse)
-	{
-		vec3_t _origin;
-		vec3_t endForward, endRight, endUp;
-		vec3_t _angles;
-		clientInfo_t ci;
-		CG_CalculateVRWeaponPosition( _origin, _angles, qfalse );
-
-		vec3_t forward, right, up;
-		AngleVectors(_angles, forward, right, up);
-
-		VectorMA(_origin, 60, forward, endForward);
-		VectorSet(ci.color1, 1, 0, 0); // Forward is red
-		CG_RailTrail2(&ci, _origin, endForward);
-
-		VectorMA(_origin, 30, right, endRight);
-		VectorSet(ci.color1, 0, 1, 0); // right is green
-		CG_RailTrail2(&ci, _origin, endRight);
-
-		VectorMA(_origin, 30, up, endUp);
-		VectorSet(ci.color1, 0, 0, 1); // up is blue
-		CG_RailTrail2(&ci, _origin, endUp);
-	}
 }
 
 /*
@@ -2114,6 +2089,69 @@ void CG_FireWeapon( centity_t *cent ) {
 	if ( weap->ejectBrassFunc && cg_brassTime.integer > 0 ) {
 		weap->ejectBrassFunc( cent );
 	}
+
+	//Are we the player?
+	if (cent->currentState.number == cg.predictedPlayerState.clientNum)
+	{
+		int position = vr->weapon_stabilised ? 4 : (vr->right_handed ? 1 : 2);
+
+		static int haptic_skip = 0;
+        // This is to adjust the excessive fire rate of the plasma-gun/machine-gun, everything else fires slower (or has haptics that compensate)
+        // so this will just fire every other time for the affected weapons
+        ++haptic_skip;
+
+		//Haptics
+		switch (ent->weapon) {
+			case WP_GAUNTLET:
+				trap_HapticEvent("chainsaw_fire", position, 0, 50, 0, 0);
+				break;
+			case WP_MACHINEGUN:
+                if (haptic_skip & 1) {
+                    trap_HapticEvent("machinegun_fire", position, 0, 100, 0, 0);
+                }
+				break;
+			case WP_SHOTGUN:
+				trap_HapticEvent("shotgun_fire", position, 0, 100, 0, 0);
+				break;
+			case WP_GRENADE_LAUNCHER:
+				trap_HapticEvent("handgrenade_fire", position, 0, 80, 0, 0);
+				break;
+			case WP_ROCKET_LAUNCHER:
+				trap_HapticEvent("rocket_fire", position, 0, 100, 0, 0);
+				break;
+			case WP_LIGHTNING:
+				trap_HapticEvent("RTCWQuest:fire_tesla", position, 0, 100, 0, 0);
+				break;
+			case WP_RAILGUN:
+				trap_HapticEvent("RTCWQuest:fire_sniper", position, 0, 100, 0, 0);
+				break;
+			case WP_PLASMAGUN:
+				if (haptic_skip & 1) {
+					trap_HapticEvent("plasmagun_fire", position, 0, 100, 0, 0);
+				}
+				break;
+			case WP_BFG:
+				trap_HapticEvent("bfg_fire", position, 0, 100, 0, 0);
+				break;
+			case WP_GRAPPLING_HOOK:
+				trap_HapticEvent("chainsaw_fire", position, 0, 100, 0, 0);
+				break;
+#ifdef MISSIONPACK
+			case WP_NAILGUN:
+				trap_HapticEvent("shotgun_fire", position, 0, 100, 0, 0);
+				break;
+			case WP_PROX_LAUNCHER:
+				trap_HapticEvent("handgrenade_fire", position, 0, 100, 0, 0);
+				break;
+			case WP_CHAINGUN:
+				if (haptic_skip & 1) {
+					trap_HapticEvent("chaingun_fire", position, 0, 100, 0, 0);
+				}
+				break;
+#endif
+		}
+
+	}
 }
 
 
@@ -2330,6 +2368,11 @@ CG_MissileHitPlayer
 */
 void CG_MissileHitPlayer( int weapon, vec3_t origin, vec3_t dir, int entityNum ) {
 	CG_Bleed( origin, entityNum );
+
+	if ( entityNum == vr->clientNum )
+    {
+        trap_HapticEvent("fireball", 0, 0, 80, 0, 0);
+	}
 
 	// some weapons will make an explosion with the blood, while
 	// others will just make the blood

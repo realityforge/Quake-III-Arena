@@ -46,20 +46,6 @@ extern "C"
 
 		return JNI_VERSION_1_4;
 	}
-
-    JNIEXPORT void JNICALL Java_com_drbeef_ioq3quest_MainActivity_nativeKeyDown(JNIEnv* env, jclass cls, jobject thisObject,
-            jint var1 , jint var2 )
-    {
-	    char buffer[10];
-	    Com_sprintf(buffer, 10, "%c", (char)var2);
-        Cbuf_AddText(buffer);
-    }
-
-    JNIEXPORT void JNICALL Java_com_drbeef_ioq3quest_MainActivity_nativeKeyUp(JNIEnv* env, jclass cls, jobject thisObject,
-            jint var1 , jint var2)
-    {
-
-    }
 }
 
 static void ioq3_logfn(const char* msg)

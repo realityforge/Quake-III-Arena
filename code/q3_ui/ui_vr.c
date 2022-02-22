@@ -41,23 +41,24 @@ VR OPTIONS MENU
 
 #define ID_HUDDEPTH			    127
 #define ID_RIGHTHANDED			128
-#define ID_SNAPTURN				129
-#define ID_DIRECTIONMODE		130
-#define ID_JUMPTRIGGER			131
-#define ID_REFRESHRATE			132
-#define ID_WEAPONPITCH			133
-#define ID_HEIGHTADJUST			134
-#define ID_TWOHANDED			135
-#define ID_SCOPE				136
-#define ID_DRAWHUD			    137
-#define ID_ROLLHIT			    138
-#define ID_GORE 			    139
+#define ID_AUTOSWITCH			129
+#define ID_SNAPTURN				130
+#define ID_DIRECTIONMODE		131
+#define ID_JUMPTRIGGER			132
+#define ID_REFRESHRATE			133
+#define ID_WEAPONPITCH			134
+#define ID_HEIGHTADJUST			135
+#define ID_TWOHANDED			136
+#define ID_SCOPE				137
+#define ID_DRAWHUD			    138
+#define ID_ROLLHIT			    139
+#define ID_GORE 			    140
 
-#define ID_BACK					140
+#define ID_BACK					141
 
 #define	NUM_HUDDEPTH			6
 #define	NUM_DIRECTIONMODE		2
-#define	NUM_REFRESHRATE			5
+#define	NUM_REFRESHRATE			4
 #define	NUM_GORE    			4
 
 
@@ -71,6 +72,7 @@ typedef struct {
     menuradiobutton_s	drawhud;
 	menulist_s          huddepth;
 	menuradiobutton_s	righthanded;
+	menuradiobutton_s	autoswitch;
 	menulist_s          snapturn;
 	menulist_s          directionmode;
 	menuradiobutton_s	jumptrigger;
@@ -92,6 +94,7 @@ static void VR_SetMenuItems( void ) {
     s_VR.drawhud.curvalue		= trap_Cvar_VariableValue( "cg_drawStatus" ) != 0;
 	s_VR.huddepth.curvalue		= (int)trap_Cvar_VariableValue( "vr_hudDepth" ) % NUM_HUDDEPTH;
 	s_VR.righthanded.curvalue		= trap_Cvar_VariableValue( "vr_righthanded" ) != 0;
+	s_VR.autoswitch.curvalue		= trap_Cvar_VariableValue( "cg_autoswitch" ) != 0;
 	s_VR.snapturn.curvalue		= (int)trap_Cvar_VariableValue( "vr_snapturn" ) / 45;
 	s_VR.directionmode.curvalue		= (int)trap_Cvar_VariableValue( "vr_directionMode" )  % NUM_DIRECTIONMODE;
 	s_VR.jumptrigger.curvalue		= trap_Cvar_VariableValue( "vr_jumpTrigger" )  != 0;
@@ -110,12 +113,9 @@ static void VR_SetMenuItems( void ) {
 		case 90:
 			s_VR.refreshrate.curvalue = 3;
 			break;
-		case 120:
-			s_VR.refreshrate.curvalue = 4;
-			break;
 	}
     s_VR.weaponpitch.curvalue		= trap_Cvar_VariableValue( "vr_weaponPitch" )  + 25;
-    s_VR.heightadjust.curvalue		= trap_Cvar_VariableValue( "vr_heightAdjust" )  != 0;
+    s_VR.heightadjust.curvalue		= trap_Cvar_VariableValue( "vr_heightAdjust" );
     s_VR.twohanded.curvalue		    = trap_Cvar_VariableValue( "vr_twoHandedWeapons" ) != 0;
     s_VR.scope.curvalue		    = trap_Cvar_VariableValue( "vr_weaponScope" ) != 0;
     s_VR.rollhit.curvalue		    = trap_Cvar_VariableValue( "vr_rollWhenHit" ) != 0;
@@ -145,6 +145,10 @@ static void VR_Event( void* ptr, int notification ) {
 		trap_Cvar_SetValue( "vr_righthanded", s_VR.righthanded.curvalue );
 		break;
 
+	case ID_AUTOSWITCH:
+		trap_Cvar_SetValue( "cg_autoswitch", s_VR.autoswitch.curvalue );
+		break;
+
 	case ID_SNAPTURN:
 		trap_Cvar_SetValue( "vr_snapturn", s_VR.snapturn.curvalue * 45 );
 		break;
@@ -171,9 +175,6 @@ static void VR_Event( void* ptr, int notification ) {
 					break;
 				case 3:
 					refresh = 90;
-					break;
-				case 4:
-					refresh = 120;
 					break;
 			}
 			trap_Cvar_SetValue("vr_refreshrate", refresh);
@@ -272,7 +273,6 @@ static void VR_MenuInit( void ) {
 					"72 (Default)",
 					"80",
 					"90",
-					"120",
 					NULL
 			};
 
@@ -343,6 +343,15 @@ static void VR_MenuInit( void ) {
 	s_VR.righthanded.generic.id          = ID_RIGHTHANDED;
 	s_VR.righthanded.generic.x	          = VR_X_POS;
 	s_VR.righthanded.generic.y	          = y;
+
+	y += BIGCHAR_HEIGHT;
+	s_VR.autoswitch.generic.type      = MTYPE_RADIOBUTTON;
+	s_VR.autoswitch.generic.flags	    = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+	s_VR.autoswitch.generic.name	    = "Autoswitch Weapons:";
+	s_VR.autoswitch.generic.id        = ID_AUTOSWITCH;
+	s_VR.autoswitch.generic.callback  = VR_Event;
+	s_VR.autoswitch.generic.x	          = VR_X_POS;
+	s_VR.autoswitch.generic.y	          = y;
 
 	y += BIGCHAR_HEIGHT;
 	s_VR.snapturn.generic.type			= MTYPE_SPINCONTROL;
@@ -464,6 +473,7 @@ static void VR_MenuInit( void ) {
 
 	Menu_AddItem( &s_VR.menu, &s_VR.huddepth );
 	Menu_AddItem( &s_VR.menu, &s_VR.righthanded );
+	Menu_AddItem( &s_VR.menu, &s_VR.autoswitch );
 	Menu_AddItem( &s_VR.menu, &s_VR.snapturn );
 	Menu_AddItem( &s_VR.menu, &s_VR.directionmode );
 	Menu_AddItem( &s_VR.menu, &s_VR.jumptrigger );

@@ -2547,11 +2547,11 @@ static void CG_DrawWeapReticle( void )
 	int weap;
 	vec4_t color = {0, 0, 0, 1};
 
-	float indent = 0.2;
+	float indent = 0.16;
 	float X_WIDTH=640;
 	float Y_HEIGHT=480;
 
-	float x = (X_WIDTH * indent), y = (Y_HEIGHT * indent) + 3, w = (X_WIDTH * (1-(2*indent))) / 2.0f, h = (Y_HEIGHT * (1-(2*indent))) / 2;
+	float x = (X_WIDTH * indent), y = (Y_HEIGHT * indent), w = (X_WIDTH * (1-(2*indent))) / 2.0f, h = (Y_HEIGHT * (1-(2*indent))) / 2;
 
 	CG_AdjustFrom640( &x, &y, &w, &h );
 
@@ -2572,10 +2572,10 @@ static void CG_DrawWeapReticle( void )
 		}
 
 		// hairs
-		CG_FillRect( 84, 242, 177, 2, color );   // left
-		CG_FillRect( 320, 245, 1, 58, color );   // center top
-		CG_FillRect( 319, 303, 2, 178, color );  // center bot
-		CG_FillRect( 380, 242, 177, 2, color );  // right
+		CG_FillRect( 84, 239, 177, 2, color );   // left
+		CG_FillRect( 320, 242, 1, 58, color );   // center top
+		CG_FillRect( 319, 300, 2, 178, color );  // center bot
+		CG_FillRect( 380, 239, 177, 2, color );  // right
 	}
 }
 

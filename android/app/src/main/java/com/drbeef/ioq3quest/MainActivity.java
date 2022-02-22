@@ -1,18 +1,16 @@
 package com.drbeef.ioq3quest;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.os.Environment;
+import android.os.RemoteException;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import com.drbeef.externalhapticsservice.HapticServiceClient;
 
 import org.libsdl.app.SDLActivity;
 
@@ -38,7 +36,11 @@ public class MainActivity extends SDLActivity // implements KeyEvent.Callback
 	private static final int WRITE_EXTERNAL_STORAGE_PERMISSION_ID = 2;
 	private static final String TAG = "ioquake3Quest";
 
+	private boolean hapticsEnabled = false;
+
 	String commandLineParams;
+
+	private HapticServiceClient externalHapticsServiceClient = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +169,12 @@ public class MainActivity extends SDLActivity // implements KeyEvent.Callback
 		} catch (Exception e) {
 		}
 
+		externalHapticsServiceClient = new HapticServiceClient(this, (state, desc) -> {
+			Log.v(TAG, "ExternalHapticsService is:" + desc);
+		});
+
+		externalHapticsServiceClient.bindService();
+
 		Log.d(TAG, "nativeCreate");
 		nativeCreate(this);
 	}
@@ -214,43 +222,42 @@ public class MainActivity extends SDLActivity // implements KeyEvent.Callback
 	}
 
 	public static native void nativeCreate(MainActivity thisObject);
-	public static native void nativeKeyDown(MainActivity thisObject, int var1, int var2);
-	public static native void nativeKeyUp(MainActivity thisObject, int var1, int var2);
 
 	static {
 		System.loadLibrary("main");
 	}
 
-	public void showkeyboard() {
+	public void haptic_event(String event, int position, int flags, int intensity, float angle, float yHeight)  {
 
-		//InputMethodManager imm = (InputMethodManager)   getSystemService(Context.INPUT_METHOD_SERVICE);
-		//imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-	}
-/*
-	// Key events
-	@Override
-	public boolean onKeyDown(int var1, KeyEvent var2)
-	{
-		nativeKeyDown(this, var1, var2.getKeyCode());
-		return true;
+		if (externalHapticsServiceClient.hasService()) {
+			try {
+				if (!hapticsEnabled)
+				{
+					externalHapticsServiceClient.getHapticsService().hapticEnable();
+					hapticsEnabled = true;
+					return;
+				}
+
+				if (event.compareTo("frame_tick") == 0)
+				{
+					externalHapticsServiceClient.getHapticsService().hapticFrameTick();
+				}
+
+				//Use the Doom3Quest haptic patterns for now
+				String app = "Doom3Quest";
+				if (event.contains(":"))
+				{
+					String[] items = event.split(":");
+					app = items[0];
+					event = items[1];
+				}
+				externalHapticsServiceClient.getHapticsService().hapticEvent(app, event, position, flags, intensity, angle, yHeight);
+			}
+			catch (RemoteException r)
+			{
+				Log.v(TAG, r.toString());
+			}
+		}
 	}
 
-	@Override
-	public boolean onKeyLongPress(int var1, KeyEvent var2)
-	{
-		nativeKeyUp(this, var1, var2.getKeyCode());
-		return true;
-	}
-
-	@Override
-	public boolean onKeyUp(int var1, KeyEvent var2)
-	{
-		return true;
-	}
-
-	@Override
-	public boolean onKeyMultiple(int var1, int var2, KeyEvent var3)
-	{
-		return true;
-	}*/
 }

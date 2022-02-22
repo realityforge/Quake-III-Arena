@@ -16,6 +16,8 @@ bool VR_useScreenLayer( void );
 
 float radians(float deg);
 
+void VR_HapticEvent(const char* event, int position, int flags, int intensity, float angle, float yHeight );
+
 #endif
 
 #endif

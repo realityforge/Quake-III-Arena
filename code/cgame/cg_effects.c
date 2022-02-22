@@ -24,7 +24,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // of event processing
 
 #include "cg_local.h"
+#include "../vr/vr_clientinfo.h"
 
+extern vr_clientinfo_t* vr;
 
 /*
 ==================

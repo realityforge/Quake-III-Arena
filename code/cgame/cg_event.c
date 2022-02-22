@@ -550,6 +550,13 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 	}
 	ci = &cgs.clientinfo[ clientNum ];
 
+	if (event >= EV_USE_ITEM0 && event <= EV_USE_ITEM15)
+	{
+		if (clientNum == cg.predictedPlayerState.clientNum) {
+			trap_HapticEvent("pickup_shield", 0, 0, 100, 0, 0);
+		}
+	}
+
 	switch ( event ) {
 	//
 	// movement generated events
@@ -598,6 +605,7 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 			// smooth landing z changes
 			cg.landChange = -8;
 			cg.landTime = cg.time;
+			trap_HapticEvent("jump_landing", 0, 0, 20, 0, 0);
 		}
 		break;
 	case EV_FALL_MEDIUM:
@@ -608,6 +616,7 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 			// smooth landing z changes
 			cg.landChange = -16;
 			cg.landTime = cg.time;
+			trap_HapticEvent("jump_landing", 0, 0, 60, 0, 0);
 		}
 		break;
 	case EV_FALL_FAR:
@@ -618,6 +627,7 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 			// smooth landing z changes
 			cg.landChange = -24;
 			cg.landTime = cg.time;
+			trap_HapticEvent("jump_landing", 0, 0, 100, 0, 0);
 		}
 		break;
 
@@ -676,11 +686,17 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 		// boing sound at origin, jump sound on player
 		trap_S_StartSound ( cent->lerpOrigin, -1, CHAN_VOICE, cgs.media.jumpPadSound );
 		trap_S_StartSound (NULL, es->number, CHAN_VOICE, CG_CustomSound( es->number, "*jump1.wav" ) );
+		if ( clientNum == cg.predictedPlayerState.clientNum ) {
+			trap_HapticEvent("jump_start", 0, 0, 100, 0, 0);
+		}
 		break;
 
 	case EV_JUMP:
 		DEBUGNAME("EV_JUMP");
 		trap_S_StartSound (NULL, es->number, CHAN_VOICE, CG_CustomSound( es->number, "*jump1.wav" ) );
+		if ( clientNum == cg.predictedPlayerState.clientNum ) {
+			trap_HapticEvent("jump_start", 0, 0, 50, 0, 0);
+		}
 		break;
 	case EV_TAUNT:
 		DEBUGNAME("EV_TAUNT");
@@ -746,6 +762,9 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 			// will be played at prediction time
 			if ( item->giType == IT_POWERUP || item->giType == IT_TEAM) {
 				trap_S_StartSound (NULL, es->number, CHAN_AUTO,	cgs.media.n_healthSound );
+				if ( clientNum == cg.predictedPlayerState.clientNum ) {
+					trap_HapticEvent("pickup_weapon", 0, 0, 100, 0, 0);
+				}
 			} else if (item->giType == IT_PERSISTANT_POWERUP) {
 #ifdef MISSIONPACK
 				switch (item->giTag ) {
@@ -763,8 +782,14 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 					break;
 				}
 #endif
+				if ( clientNum == cg.predictedPlayerState.clientNum ) {
+					trap_HapticEvent("pickup_weapon", 0, 0, 100, 0, 0);
+				}
 			} else {
 				trap_S_StartSound (NULL, es->number, CHAN_AUTO,	trap_S_RegisterSound( item->pickup_sound, qfalse ) );
+				if ( clientNum == cg.predictedPlayerState.clientNum ) {
+					trap_HapticEvent("pickup_shield", 0, 0, 30, 0, 0);
+				}
 			}
 
 			// show icon and name on status bar
@@ -811,6 +836,11 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 	case EV_CHANGE_WEAPON:
 		DEBUGNAME("EV_CHANGE_WEAPON");
 		trap_S_StartSound (NULL, es->number, CHAN_AUTO, cgs.media.selectSound );
+		if ( clientNum == cg.predictedPlayerState.clientNum ) {
+			vr->realign = 4; // auto trigger weapon re-align in 4 frames
+			int position = vr->weapon_stabilised ? 4 : (vr->right_handed ? 1 : 2);
+			trap_HapticEvent("weapon_switch", 0, 0, 100, 0, 0);
+		}
 		break;
 	case EV_FIRE_WEAPON:
 		DEBUGNAME("EV_FIRE_WEAPON");
@@ -891,7 +921,10 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 		DEBUGNAME("EV_PLAYER_TELEPORT_IN");
 		trap_S_StartSound (NULL, es->number, CHAN_AUTO, cgs.media.teleInSound );
 		CG_SpawnEffect( position);
-		vr->realign_playspace = qtrue; // auto trigger weapon re-align
+		if (clientNum == cg.predictedPlayerState.clientNum) {
+			vr->realign = 4; // auto trigger weapon re-align in 4 frames
+            trap_HapticEvent("spark", 0, 0, 80, 0, 0);
+		}
 		break;
 
 	case EV_PLAYER_TELEPORT_OUT:
@@ -1203,22 +1236,31 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 			cg.powerupTime = cg.time;
 		}
 		trap_S_StartSound (NULL, es->number, CHAN_ITEM, cgs.media.quadSound );
+		if ( clientNum == cg.predictedPlayerState.clientNum ) {
+			trap_HapticEvent("decontaminate", 0, 0, 100, 0, 0);
+		}
 		break;
 	case EV_POWERUP_BATTLESUIT:
 		DEBUGNAME("EV_POWERUP_BATTLESUIT");
-		if ( es->number == cg.snap->ps.clientNum ) {
+		if ( es->number == cg.predictedPlayerState.clientNum ) {
 			cg.powerupActive = PW_BATTLESUIT;
 			cg.powerupTime = cg.time;
 		}
 		trap_S_StartSound (NULL, es->number, CHAN_ITEM, cgs.media.protectSound );
+		if ( clientNum == cg.snap->ps.clientNum ) {
+			trap_HapticEvent("decontaminate", 0, 0, 100, 0, 0);
+		}
 		break;
 	case EV_POWERUP_REGEN:
 		DEBUGNAME("EV_POWERUP_REGEN");
-		if ( es->number == cg.snap->ps.clientNum ) {
+		if ( es->number == cg.predictedPlayerState.clientNum ) {
 			cg.powerupActive = PW_REGEN;
 			cg.powerupTime = cg.time;
 		}
 		trap_S_StartSound (NULL, es->number, CHAN_ITEM, cgs.media.regenSound );
+		if ( clientNum == cg.predictedPlayerState.clientNum ) {
+			trap_HapticEvent("decontaminate", 0, 0, 100, 0, 0);
+		}
 		break;
 
 	case EV_GIB_PLAYER:
@@ -1230,6 +1272,11 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 			trap_S_StartSound( NULL, es->number, CHAN_BODY, cgs.media.gibSound );
 		}
 		CG_GibPlayer( cent->lerpOrigin );
+
+		if ( clientNum == cg.snap->ps.clientNum ) {
+			trap_HapticEvent("shield_break", 0, 0, 100, 0, 0);
+		}
+
 		break;
 
 	case EV_STOPLOOPINGSOUND:

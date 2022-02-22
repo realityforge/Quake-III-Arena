@@ -24,6 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "client.h"
 
 #include "../botlib/botlib.h"
+#include "../vr/vr_base.h"
 #include "../vr/vr_clientinfo.h"
 
 #ifdef USE_MUMBLE
@@ -693,6 +694,10 @@ intptr_t CL_CgameSystemCalls( intptr_t *args ) {
 		return re.GetEntityToken( VMA(1), args[2] );
 	case CG_R_INPVS:
 		return re.inPVS( VMA(1), VMA(2) );
+	case CG_HAPTICEVENT:
+	    VR_HapticEvent( VMA(1), args[2], args[3], args[4], VMF(5), VMF(6) );
+		return 0;
+
 
 	default:
 	        assert(0);

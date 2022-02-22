@@ -593,21 +593,21 @@ void CL_FinishMove( usercmd_t *cmd ) {
 	// can be determined without allowing cheating
 	cmd->serverTime = cl.serverTime;
 
+	vr.clientNum = cl.snap.ps.clientNum;
+
 	//If we are running with a remote non-vr server, then the best we can do is pass the angles from the weapon
 	//and adjust the move values accordingly, to "fake" a 3DoF weapon but keeping the movement correct
 	if ( !com_sv_running || !com_sv_running->integer )
 	{
-		vr.clientNum = -1;
         vr.local_server = qfalse;
 
 		vec3_t angles;
 		VectorCopy(vr.weaponangles, angles);
 
-		if (vr.realign_playspace)
+		if (--vr.realign == 0)
 		{
 			VectorCopy(vr.hmdposition, vr.hmdorigin);
 			vr.realign_pitch -= (cl.snap.ps.viewangles[PITCH]-vr.weaponangles[PITCH]) ;
-			vr.realign_playspace = qfalse;
 		}
 
 		angles[PITCH] += vr.realign_pitch;
@@ -626,7 +626,6 @@ void CL_FinishMove( usercmd_t *cmd ) {
 	else {
 		//Record client number - local server uses this to know we can use absolute angles
 		//rather than deltas
-		vr.clientNum = cl.snap.ps.clientNum;
         vr.local_server = qtrue;
 
 		for (i = 0; i < 3; i++) {

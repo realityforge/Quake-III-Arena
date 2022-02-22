@@ -22,6 +22,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
 // cg_players.c -- handle the media and animation for player entities
 #include "cg_local.h"
+#include "../vr/vr_clientinfo.h"
+
+extern vr_clientinfo_t* vr;
+
 
 char	*cg_customSoundNames[MAX_CUSTOM_SOUNDS] = {
 	"*death1.wav",
@@ -1619,6 +1623,37 @@ static void CG_DustTrail( centity_t *cent ) {
 
 #endif
 
+void CG_CalculateVROffHandPosition( vec3_t origin, vec3_t angles )
+{
+	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
+
+	if (!cgs.localServer)
+	{
+		//Use absolute position for the faked 6DoF for multiplayer
+		vec3_t offset, offhandposition;
+		VectorSubtract(vr->offhandposition, vr->hmdorigin, offhandposition);
+		VectorCopy(offhandposition, offset);
+		offset[1] = vr->offhandoffset[1]; // up/down is index 1 in this case
+		CG_ConvertFromVR(offset, cg.refdef.vieworg, origin);
+		origin[2] -= PLAYER_HEIGHT;
+		origin[2] += vr->hmdposition[1] * worldscale;
+	}
+	else
+	{
+		//Local server - true 6DoF offset from HMD
+		CG_ConvertFromVR(vr->offhandoffset, cg.refdef.vieworg, origin);
+		origin[2] -= PLAYER_HEIGHT;
+		origin[2] += vr->hmdposition[1] * worldscale;
+	}
+
+	VectorCopy(vr->offhandangles, angles);
+
+//	if ( cgs.localServer )
+	{
+		angles[YAW] += cg.refdefViewAngles[YAW];
+	}
+}
+
 /*
 ===============
 CG_TrailItem
@@ -1629,16 +1664,29 @@ static void CG_TrailItem( centity_t *cent, qhandle_t hModel ) {
 	vec3_t			angles;
 	vec3_t			axis[3];
 
-	VectorCopy( cent->lerpAngles, angles );
-	angles[PITCH] = 0;
-	angles[ROLL] = 0;
-	AnglesToAxis( angles, axis );
+	memset(&ent, 0, sizeof(ent));
 
-	memset( &ent, 0, sizeof( ent ) );
-	VectorMA( cent->lerpOrigin, -16, axis[0], ent.origin );
-	ent.origin[2] += 16;
-	angles[YAW] += 90;
-	AnglesToAxis( angles, ent.axis );
+	if (cent->currentState.clientNum == vr->clientNum)
+	{
+		CG_CalculateVROffHandPosition(ent.origin, angles);
+		AnglesToAxis(angles, ent.axis);
+
+		vec3_t forward;
+        AngleVectors( angles, forward, NULL, NULL );
+        VectorMA( ent.origin, -16, forward, ent.origin );
+
+    } else {
+		VectorCopy(cent->lerpAngles, angles);
+		angles[PITCH] = 0;
+		angles[ROLL] = 0;
+		AnglesToAxis(angles, axis);
+
+		memset(&ent, 0, sizeof(ent));
+		VectorMA(cent->lerpOrigin, -16, axis[0], ent.origin);
+		ent.origin[2] += 16;
+		angles[YAW] += 90;
+		AnglesToAxis(angles, ent.axis);
+	}
 
 	ent.hModel = hModel;
 	trap_R_AddRefEntityToScene( &ent );

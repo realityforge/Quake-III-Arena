@@ -172,6 +172,13 @@ void CG_DamageFeedback( int yawByte, int pitchByte, int damage ) {
 		cg.damageY = -1.0;
 	}
 
+	if (damage > 30)
+	{
+		trap_HapticEvent("shotgun", 0, 0, 100, yaw, 0);
+	} else {
+		trap_HapticEvent("bullet", 0, 0, 100, yaw, 0);
+	}
+
 	// don't let the screen flashes vary as much
 	if ( kick > 10 ) {
 		kick = 10;

@@ -73,6 +73,9 @@ extern cvar_t *vr_refreshrate;
 extern cvar_t *vr_weaponScope;
 extern cvar_t *vr_jumpTrigger;
 
+jclass callbackClass;
+jmethodID android_haptic_event;
+
 
 void rotateAboutOrigin(float x, float y, float rotation, vec2_t out)
 {
@@ -199,6 +202,10 @@ static float length(float x, float y)
 void IN_VRInit( void )
 {
 	memset(&vr, 0, sizeof(vr));
+
+	engine_t *engine = VR_GetEngine();
+    callbackClass = (*engine->java.Env)->GetObjectClass(engine->java.Env, engine->java.ActivityObject);
+    android_haptic_event = (*engine->java.Env)->GetMethodID(engine->java.Env, callbackClass, "haptic_event","(Ljava/lang/String;IIIFF)V");
 }
 
 static void IN_VRController( qboolean isRightController, ovrTracking remoteTracking )
@@ -408,11 +415,11 @@ static void IN_VRTriggers( qboolean isRightController, float index ) {
     }
 }
 
-void jni_showkeyboard( void )
+void VR_HapticEvent(const char* event, int position, int flags, int intensity, float angle, float yHeight )
 {
-	jclass callbackClass = (*VR_GetEngine()->java.Env)->GetObjectClass(VR_GetEngine()->java.Env, VR_GetEngine()->java.ActivityObject);
-	jmethodID android_showkeyboard = (*VR_GetEngine()->java.Env)->GetMethodID(VR_GetEngine()->java.Env, callbackClass, "showkeyboard","()V");
-	return (*(VR_GetEngine()->java.Env))->CallVoidMethod(VR_GetEngine()->java.Env, VR_GetEngine()->java.ActivityObject, android_showkeyboard);
+    engine_t* engine = VR_GetEngine();
+	jstring StringArg1 = (*(engine->java.Env))->NewStringUTF(engine->java.Env, event);
+	(*(engine->java.Env))->CallVoidMethod(engine->java.Env, engine->java.ActivityObject, android_haptic_event, StringArg1, position, flags, intensity, angle, yHeight);
 }
 
 
@@ -496,7 +503,7 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
 	if ((buttons & ovrButton_Y) && !(controller->buttons & ovrButton_Y)) {
 		//Actually want this to reset the player location
 		//jni_showkeyboard();
-		vr.realign_playspace = qtrue;
+		vr.realign = 4;
 	} else if (!(buttons & ovrButton_Y) && (controller->buttons & ovrButton_Y)) {
 	}
 
@@ -533,7 +540,10 @@ void IN_VRInputFrame( void )
 
 	vr.virtual_screen = VR_useScreenLayer();
 
-	{
+	//trigger frame tick for haptics
+    VR_HapticEvent("frame_tick", 0, 0, 0, 0, 0);
+
+    {
 		// We extract Yaw, Pitch, Roll instead of directly using the orientation
 		// to allow "additional" yaw manipulation with mouse/controller.
 		const ovrQuatf quatHmd =  VR_GetEngine()->tracking.HeadPose.Pose.Orientation;
