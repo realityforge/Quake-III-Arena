@@ -83,7 +83,7 @@ void CG_AdjustFrom640( float *x, float *y, float *w, float *h ) {
 		}
 
 		*x += (cg.refdef.width - (640 * screenXScale)) / 2.0f + xoffset;
-		*y += (cg.refdef.height - (480 * screenYScale)) / 2.0f + trap_Cvar_VariableValue( "vr_hudYOffset" );
+		*y += (cg.refdef.height - (480 * screenYScale)) / 2.0f - trap_Cvar_VariableValue( "vr_hudYOffset" );
 	}
 }
 

@@ -2348,10 +2348,13 @@ void CG_Player( centity_t *cent ) {
 		return;
 	}
 
-	// get the player model information
-	qboolean firstPersonBody = (!cg.renderingThirdPerson) &&
+	//Are we drawing the first person body
+	qboolean firstPersonBody = ( cent->currentState.number == cg.snap->ps.clientNum) &&
+	        (!cg.renderingThirdPerson) &&
 	        (cg_firstPersonBodyScale.value > 0.0f) &&
 			( cgs.gametype != GT_SINGLE_PLAYER );
+
+    // get the player model information
 	renderfx = 0;
 	if ( cent->currentState.number == cg.snap->ps.clientNum) {
 		if (!cg.renderingThirdPerson) {

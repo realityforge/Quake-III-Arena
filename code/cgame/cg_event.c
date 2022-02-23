@@ -605,7 +605,7 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 			// smooth landing z changes
 			cg.landChange = -8;
 			cg.landTime = cg.time;
-			trap_HapticEvent("jump_landing", 0, 0, 20, 0, 0);
+			trap_HapticEvent("jump_landing", 0, 0, 40, 0, 0);
 		}
 		break;
 	case EV_FALL_MEDIUM:
@@ -763,7 +763,7 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 			if ( item->giType == IT_POWERUP || item->giType == IT_TEAM) {
 				trap_S_StartSound (NULL, es->number, CHAN_AUTO,	cgs.media.n_healthSound );
 				if ( clientNum == cg.predictedPlayerState.clientNum ) {
-					trap_HapticEvent("pickup_weapon", 0, 0, 40, 0, 0);
+					trap_HapticEvent("pickup_weapon", 0, 0, 80, 0, 0);
 				}
 			} else if (item->giType == IT_PERSISTANT_POWERUP) {
 #ifdef MISSIONPACK
@@ -783,12 +783,12 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 				}
 #endif
 				if ( clientNum == cg.predictedPlayerState.clientNum ) {
-					trap_HapticEvent("pickup_weapon", 0, 0, 30, 0, 0);
+					trap_HapticEvent("pickup_weapon", 0, 0, 50, 0, 0);
 				}
 			} else {
 				trap_S_StartSound (NULL, es->number, CHAN_AUTO,	trap_S_RegisterSound( item->pickup_sound, qfalse ) );
 				if ( clientNum == cg.predictedPlayerState.clientNum ) {
-					trap_HapticEvent("RTCWQuest:pickup_item", 0, 0, 20, 0, 0);
+					trap_HapticEvent("RTCWQuest:pickup_item", 0, 0, 100, 0, 0);
 				}
 			}
 
