@@ -1650,7 +1650,7 @@ void CG_CalculateVROffHandPosition( vec3_t origin, vec3_t angles )
 
 //	if ( cgs.localServer )
 	{
-		angles[YAW] += cg.refdefViewAngles[YAW];
+		angles[YAW] += cg.refdefViewAngles[YAW] - vr->weaponangles[YAW];
 	}
 }
 
