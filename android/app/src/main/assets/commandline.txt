@@ -1,1 +1,1 @@
-+set fs_basepath /sdcard/ioquake3Quest/ +set fs_game baseq3 +set fs_basegame baseq3 +password drbeef
++set fs_basepath /sdcard/ioquake3Quest/ +set fs_game baseq3 +set fs_basegame baseq3

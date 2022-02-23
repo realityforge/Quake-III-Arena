@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../vr/vr_clientinfo.h"
 
 extern vr_clientinfo_t* vr;
-
+extern vmCvar_t	cg_firstPersonBodyScale;
 
 char	*cg_customSoundNames[MAX_CUSTOM_SOUNDS] = {
 	"*death1.wav",
@@ -1659,10 +1659,15 @@ void CG_CalculateVROffHandPosition( vec3_t origin, vec3_t angles )
 CG_TrailItem
 ===============
 */
-static void CG_TrailItem( centity_t *cent, qhandle_t hModel ) {
+void CG_TrailItem( centity_t *cent, qhandle_t hModel, vec3_t offset, float scale ) {
 	refEntity_t		ent;
 	vec3_t			angles;
 	vec3_t			axis[3];
+
+	if (!cent)
+	{
+		return;
+	}
 
 	memset(&ent, 0, sizeof(ent));
 
@@ -1670,11 +1675,16 @@ static void CG_TrailItem( centity_t *cent, qhandle_t hModel ) {
 	{
 		CG_CalculateVROffHandPosition(ent.origin, angles);
 		AnglesToAxis(angles, ent.axis);
+        VectorScale( ent.axis[0], scale, ent.axis[0] );
+        VectorScale( ent.axis[1], scale, ent.axis[1] );
+        VectorScale( ent.axis[2], scale, ent.axis[2] );
 
-		vec3_t forward;
-        AngleVectors( angles, forward, NULL, NULL );
-        VectorMA( ent.origin, -16, forward, ent.origin );
-
+		vec3_t forward, right, up;
+        AngleVectors( angles, forward, right, up );
+        VectorMA( ent.origin, offset[0], right, ent.origin );
+		VectorMA( ent.origin, offset[1], forward, ent.origin );
+        VectorMA( ent.origin, offset[2], up, ent.origin );
+        ent.nonNormalizedAxes = qtrue;
     } else {
 		VectorCopy(cent->lerpAngles, angles);
 		angles[PITCH] = 0;
@@ -1890,6 +1900,19 @@ static void CG_PlayerPowerups( centity_t *cent, refEntity_t *torso ) {
 	int		powerups;
 	clientInfo_t	*ci;
 
+	//Player held items should render in the off-hand
+    if ( cent->currentState.number == cg.snap->ps.clientNum && !cg.renderingThirdPerson )
+    {
+        int		value;
+        value = cg.snap->ps.stats[STAT_HOLDABLE_ITEM];
+        if ( value ) {
+            CG_RegisterItemVisuals( value );
+            vec3_t offset;
+            VectorSet(offset, 0, 0, -8);
+            CG_TrailItem( cent, cg_items[ value ].models[0], offset, 0.5f );
+        }
+    }
+
 	powerups = cent->currentState.powerups;
 	if ( !powerups ) {
 		return;
@@ -1912,7 +1935,9 @@ static void CG_PlayerPowerups( centity_t *cent, refEntity_t *torso ) {
 			CG_PlayerFlag( cent, cgs.media.redFlagFlapSkin, torso );
 		}
 		else {
-			CG_TrailItem( cent, cgs.media.redFlagModel );
+			vec3_t offset;
+			VectorSet(offset, 0, -16, 0);
+			CG_TrailItem( cent, cgs.media.redFlagModel, offset, 1.0f );
 		}
 		trap_R_AddLightToScene( cent->lerpOrigin, 200 + (rand()&31), 1.0, 0.2f, 0.2f );
 	}
@@ -1923,7 +1948,9 @@ static void CG_PlayerPowerups( centity_t *cent, refEntity_t *torso ) {
 			CG_PlayerFlag( cent, cgs.media.blueFlagFlapSkin, torso );
 		}
 		else {
-			CG_TrailItem( cent, cgs.media.blueFlagModel );
+			vec3_t offset;
+			VectorSet(offset, 0, -16, 0);
+			CG_TrailItem( cent, cgs.media.blueFlagModel, offset, 1.0f );
 		}
 		trap_R_AddLightToScene( cent->lerpOrigin, 200 + (rand()&31), 0.2f, 0.2f, 1.0 );
 	}
@@ -1934,7 +1961,9 @@ static void CG_PlayerPowerups( centity_t *cent, refEntity_t *torso ) {
 			CG_PlayerFlag( cent, cgs.media.neutralFlagFlapSkin, torso );
 		}
 		else {
-			CG_TrailItem( cent, cgs.media.neutralFlagModel );
+			vec3_t offset;
+			VectorSet(offset, 0, -16, 0);
+			CG_TrailItem( cent, cgs.media.neutralFlagModel, offset, 1.0f );
 		}
 		trap_R_AddLightToScene( cent->lerpOrigin, 200 + (rand()&31), 1.0, 1.0, 1.0 );
 	}
@@ -2320,10 +2349,16 @@ void CG_Player( centity_t *cent ) {
 	}
 
 	// get the player model information
+	qboolean firstPersonBody = (!cg.renderingThirdPerson) &&
+	        (cg_firstPersonBodyScale.value > 0.0f) &&
+			( cgs.gametype != GT_SINGLE_PLAYER );
 	renderfx = 0;
 	if ( cent->currentState.number == cg.snap->ps.clientNum) {
 		if (!cg.renderingThirdPerson) {
-			renderfx = RF_THIRD_PERSON;			// only draw in mirrors
+			if (cg_firstPersonBodyScale.value == 0 ||
+					cgs.gametype == GT_SINGLE_PLAYER) {
+				renderfx = RF_THIRD_PERSON;            // only draw in mirrors
+			}
 		} else {
 			if (cg_cameraMode.integer) {
 				return;
@@ -2337,7 +2372,24 @@ void CG_Player( centity_t *cent ) {
 	memset( &head, 0, sizeof(head) );
 
 	// get the rotation information
-	CG_PlayerAngles( cent, legs.axis, torso.axis, head.axis );
+	if (firstPersonBody)
+	{
+		vec3_t angles;
+		VectorClear(angles);
+		angles[YAW] = cg.refdefViewAngles[YAW] + vr->hmdorientation[YAW] - vr->weaponangles[YAW];
+		AnglesToAxis(angles, legs.axis);
+        VectorScale( legs.axis[0], cg_firstPersonBodyScale.value, legs.axis[0] );
+        VectorScale( legs.axis[1], cg_firstPersonBodyScale.value, legs.axis[1] );
+        VectorScale( legs.axis[2], cg_firstPersonBodyScale.value, legs.axis[2] );
+		AnglesToAxis(vec3_origin, torso.axis);
+        VectorScale( torso.axis[0], cg_firstPersonBodyScale.value, torso.axis[0] );
+        VectorScale( torso.axis[1], cg_firstPersonBodyScale.value, torso.axis[1] );
+        VectorScale( torso.axis[2], cg_firstPersonBodyScale.value, torso.axis[2] );
+		//Don't care about head
+	}
+	else {
+		CG_PlayerAngles(cent, legs.axis, torso.axis, head.axis);
+	}
 	
 	// get the animation state (after rotation, to allow feet shuffle)
 	CG_PlayerAnimation( cent, &legs.oldframe, &legs.frame, &legs.backlerp,
@@ -2393,7 +2445,7 @@ void CG_Player( centity_t *cent ) {
 
 	VectorCopy( cent->lerpOrigin, torso.lightingOrigin );
 
-	CG_PositionRotatedEntityOnTag( &torso, &legs, ci->legsModel, "tag_torso");
+    CG_PositionRotatedEntityOnTag(&torso, &legs, ci->legsModel, "tag_torso");
 
 	torso.shadowPlane = shadowPlane;
 	torso.renderfx = renderfx;
@@ -2619,12 +2671,15 @@ void CG_Player( centity_t *cent ) {
 
 	VectorCopy( cent->lerpOrigin, head.lightingOrigin );
 
-	CG_PositionRotatedEntityOnTag( &head, &torso, ci->torsoModel, "tag_head");
+    CG_PositionRotatedEntityOnTag(&head, &torso, ci->torsoModel, "tag_head");
 
 	head.shadowPlane = shadowPlane;
 	head.renderfx = renderfx;
 
-	CG_AddRefEntityWithPowerups( &head, &cent->currentState, ci->team );
+	if (!firstPersonBody)
+	{
+		CG_AddRefEntityWithPowerups(&head, &cent->currentState, ci->team);
+	}
 
 #ifdef MISSIONPACK
 	CG_BreathPuffs(cent, &head);
@@ -2635,7 +2690,9 @@ void CG_Player( centity_t *cent ) {
 	//
 	// add the gun / barrel / flash
 	//
-	CG_AddPlayerWeapon( &torso, NULL, cent, ci->team );
+	if (!firstPersonBody) {
+		CG_AddPlayerWeapon(&torso, NULL, cent, ci->team);
+	}
 
 	// add powerups floating behind the player
 	CG_PlayerPowerups( cent, &torso );

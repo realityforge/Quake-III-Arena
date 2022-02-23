@@ -1206,6 +1206,10 @@ extern  vmCvar_t		cg_recordSPDemoName;
 extern	vmCvar_t		cg_obeliskRespawnDelay;
 #endif
 
+
+void CG_TrailItem( centity_t *cent, qhandle_t hModel, vec3_t offset, float scale );
+
+
 //
 // cg_main.c
 //

@@ -458,7 +458,7 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
 	}
 
     if (isRightController) {
-        if (vr_righthanded->integer) {
+        if (vr_righthanded->integer == 0) {
             //Right thumbstick is "use item"
             if ((buttons & ovrButton_RThumb) && !(controller->buttons & ovrButton_RThumb)) {
                 Com_QueueEvent(in_vrEventTime, SE_KEY, K_ENTER, qtrue, 0, NULL);
@@ -467,20 +467,20 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
             }
         }
         else {
-            //right thumbstick is scoreboard
+            //Right thumbstick is nothing
             if ((buttons & ovrButton_RThumb) && !(controller->buttons & ovrButton_RThumb)) {
-                sendButtonActionSimple("+scores");
+                //
             } else if (!(buttons & ovrButton_RThumb) && (controller->buttons & ovrButton_RThumb)) {
-                sendButtonActionSimple("-scores");
+                //
             }
         }
     } else {
-        if (vr_righthanded->integer) {
+        if (vr_righthanded->integer == 0) {
             //left thumbstick is scoreboard
             if ((buttons & ovrButton_LThumb) && !(controller->buttons & ovrButton_LThumb)) {
-                sendButtonActionSimple("+scores");
+                //
             } else if (!(buttons & ovrButton_LThumb) && (controller->buttons & ovrButton_LThumb)) {
-                sendButtonActionSimple("-scores");
+                //
             }
         } else {
             //left thumbstick is "use item"
@@ -499,12 +499,12 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
         sendButtonActionSimple("-button3");
 	}
 
-	// Y button - unassigned right now
+	// Y button - show scoreboard (and trigger realign just in case)
 	if ((buttons & ovrButton_Y) && !(controller->buttons & ovrButton_Y)) {
-		//Actually want this to reset the player location
-		//jni_showkeyboard();
+        sendButtonActionSimple("+scores");
 		vr.realign = 4;
 	} else if (!(buttons & ovrButton_Y) && (controller->buttons & ovrButton_Y)) {
+        sendButtonActionSimple("-scores");
 	}
 
 	controller->buttons = buttons;
