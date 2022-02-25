@@ -1905,11 +1905,13 @@ static void CG_PlayerPowerups( centity_t *cent, refEntity_t *torso ) {
     {
         int		value;
         value = cg.snap->ps.stats[STAT_HOLDABLE_ITEM];
-        if ( value ) {
+
+        if (!(trap_Cvar_VariableValue("vr_twoHandedWeapons") != 0.0f && vr->weapon_stabilised)
+        		&& value ) {
             CG_RegisterItemVisuals( value );
             vec3_t offset;
             VectorSet(offset, 0, 0, -8);
-            CG_TrailItem( cent, cg_items[ value ].models[0], offset, 0.5f );
+            CG_TrailItem( cent, cg_items[ value ].models[0], offset, 0.25f );
         }
     }
 
