@@ -109,7 +109,7 @@ MULTIPLAYER MENU (SERVER BROWSER)
 static const char *master_items[] = {
 	"Local",
 	"Internet",
-	"Master1",
+	"Quake3Quest Master",
 	"Master2",
 	"Master3",
 	"Master4",

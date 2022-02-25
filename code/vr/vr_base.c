@@ -29,7 +29,6 @@ cvar_t *vr_weaponPitch = NULL;
 cvar_t *vr_twoHandedWeapons = NULL;
 cvar_t *vr_refreshrate = NULL;
 cvar_t *vr_weaponScope = NULL;
-cvar_t *vr_jumpTrigger = NULL;
 cvar_t *vr_rollWhenHit = NULL;
 cvar_t *vr_hudYOffset = NULL;
 
@@ -62,7 +61,6 @@ void VR_InitCvars( void )
     vr_twoHandedWeapons = Cvar_Get ("vr_twoHandedWeapons", "1", CVAR_ARCHIVE);
 	vr_refreshrate = Cvar_Get ("vr_refreshrate", "0", CVAR_ARCHIVE);
     vr_weaponScope = Cvar_Get ("vr_weaponScope", "1", CVAR_ARCHIVE);
-	vr_jumpTrigger = Cvar_Get ("vr_jumpTrigger", "1", CVAR_ARCHIVE);
 	vr_rollWhenHit = Cvar_Get ("vr_rollWhenHit", "0", CVAR_ARCHIVE);
 	vr_hudYOffset = Cvar_Get ("vr_hudYOffset", "0", CVAR_ARCHIVE);
 
@@ -82,6 +80,34 @@ void VR_InitCvars( void )
 	Cvar_Get ("vr_weapon_adjustment_10", "0.8,-5.5,6,0,0,0,0", CVAR_ARCHIVE);
 	Cvar_Get ("vr_weapon_adjustment_11", "0.8,-5.5,6,0,0,0,0", CVAR_ARCHIVE);
 	Cvar_Get ("vr_weapon_adjustment_12", "0.8,-5.5,6,0,0,0,0", CVAR_ARCHIVE);
+
+	//Button remapping
+	Cvar_Get ("vr_button_map_A", "+moveup", CVAR_ARCHIVE); // Jump
+	Cvar_Get ("vr_button_map_A_ALT", "", CVAR_ARCHIVE); // unmapped
+	Cvar_Get ("vr_button_map_B", "+movedown", CVAR_ARCHIVE); // Crouch
+	Cvar_Get ("vr_button_map_B_ALT", "", CVAR_ARCHIVE); // unmapped
+	Cvar_Get ("vr_button_map_X", "+button2", CVAR_ARCHIVE); // Use Item
+	Cvar_Get ("vr_button_map_X_ALT", "", CVAR_ARCHIVE); // unmapped
+	Cvar_Get ("vr_button_map_Y", "+button3", CVAR_ARCHIVE); // Gesture
+	Cvar_Get ("vr_button_map_Y_ALT", "", CVAR_ARCHIVE); // unmapped
+	Cvar_Get ("vr_button_map_SECONDARYTHUMBSTICK", "+scores", CVAR_ARCHIVE); // Scoreboard
+	Cvar_Get ("vr_button_map_SECONDARYTHUMBSTICK_ALT", "", CVAR_ARCHIVE); // unmapped
+	Cvar_Get ("vr_button_map_PRIMARYTHUMBSTICK", "", CVAR_ARCHIVE); // unmapped
+	Cvar_Get ("vr_button_map_PRIMARYTHUMBSTICK_ALT", "weapon 1", CVAR_ARCHIVE); // Switch to gauntlet
+	Cvar_Get ("vr_button_map_RTHUMBFORWARD", "weapnext", CVAR_ARCHIVE); //Next Weapon
+	Cvar_Get ("vr_button_map_RTHUMBFORWARD_ALT", "", CVAR_ARCHIVE); // unmapped
+	Cvar_Get ("vr_button_map_RTHUMBBACK", "weapprev", CVAR_ARCHIVE); // Previous Weapon
+	Cvar_Get ("vr_button_map_RTHUMBBACK_ALT", "", CVAR_ARCHIVE); // unmapped
+	Cvar_Get ("vr_button_map_SECONDARYTRIGGER", "+moveup", CVAR_ARCHIVE); // Also Jump
+	Cvar_Get ("vr_button_map_SECONDARYTRIGGER_ALT", "", CVAR_ARCHIVE); // unmapped
+	Cvar_Get ("vr_button_map_PRIMARYTRIGGER", "+attack", CVAR_ARCHIVE); // Fire
+	Cvar_Get ("vr_button_map_PRIMARYTRIGGER_ALT", "", CVAR_ARCHIVE); // unmapped
+	Cvar_Get ("vr_button_map_SECONDARYGRIP", "+weapon_stabilise", CVAR_ARCHIVE); // Weapon stabilisation
+	Cvar_Get ("vr_button_map_SECONDARYGRIP_ALT", "", CVAR_ARCHIVE); // unmapped
+
+	// enables the alt mapping of a button
+	Cvar_Get ("vr_button_map_PRIMARYGRIP", "+alt", CVAR_ARCHIVE);
+	Cvar_Get ("vr_button_map_PRIMARYGRIP_ALT", "", CVAR_ARCHIVE);
 
 }
 

@@ -44,7 +44,6 @@ VR OPTIONS MENU
 #define ID_AUTOSWITCH			129
 #define ID_SNAPTURN				130
 #define ID_DIRECTIONMODE		131
-#define ID_JUMPTRIGGER			132
 #define ID_REFRESHRATE			133
 #define ID_WEAPONPITCH			134
 #define ID_HEIGHTADJUST			135
@@ -77,7 +76,6 @@ typedef struct {
 	menuradiobutton_s	autoswitch;
 	menulist_s          snapturn;
 	menulist_s          directionmode;
-	menuradiobutton_s	jumptrigger;
 	menulist_s          refreshrate;
 	menuslider_s 		weaponpitch;
     menuslider_s 		heightadjust;
@@ -101,7 +99,6 @@ static void VR_SetMenuItems( void ) {
 	s_VR.autoswitch.curvalue		= trap_Cvar_VariableValue( "cg_autoswitch" ) != 0;
 	s_VR.snapturn.curvalue		= (int)trap_Cvar_VariableValue( "vr_snapturn" ) / 45;
 	s_VR.directionmode.curvalue		= (int)trap_Cvar_VariableValue( "vr_directionMode" )  % NUM_DIRECTIONMODE;
-	s_VR.jumptrigger.curvalue		= trap_Cvar_VariableValue( "vr_jumpTrigger" )  != 0;
 	int refresh		= (int)trap_Cvar_VariableValue( "vr_refreshrate" );
 	switch (refresh)
 	{
@@ -161,10 +158,6 @@ static void VR_Event( void* ptr, int notification ) {
 
 	case ID_DIRECTIONMODE:
 		trap_Cvar_SetValue( "vr_directionMode", s_VR.directionmode.curvalue );
-		break;
-
-	case ID_JUMPTRIGGER:
-		trap_Cvar_SetValue( "vr_jumpTrigger", s_VR.jumptrigger.curvalue );
 		break;
 
 	case ID_REFRESHRATE: {
@@ -329,7 +322,7 @@ static void VR_MenuInit( void ) {
 	s_VR.framer.width  	   = 256;
 	s_VR.framer.height  	   = 334;
 
-	y = 144;
+	y = 120;
     s_VR.drawhud.generic.type        = MTYPE_RADIOBUTTON;
     s_VR.drawhud.generic.name	      = "Draw HUD:";
     s_VR.drawhud.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
@@ -388,15 +381,6 @@ static void VR_MenuInit( void ) {
 	s_VR.directionmode.generic.id			= ID_DIRECTIONMODE;
 	s_VR.directionmode.itemnames	        	= s_directionmode;
 	s_VR.directionmode.numitems				= NUM_DIRECTIONMODE;
-
-	y += BIGCHAR_HEIGHT;
-	s_VR.jumptrigger.generic.type        = MTYPE_RADIOBUTTON;
-	s_VR.jumptrigger.generic.name	     = "Off-hand Trigger Jump:";
-	s_VR.jumptrigger.generic.flags	     = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
-	s_VR.jumptrigger.generic.callback    = VR_Event;
-	s_VR.jumptrigger.generic.id          = ID_JUMPTRIGGER;
-	s_VR.jumptrigger.generic.x	         = VR_X_POS;
-	s_VR.jumptrigger.generic.y	         = y;
 
 	y += BIGCHAR_HEIGHT;
 	s_VR.refreshrate.generic.type		= MTYPE_SPINCONTROL;
@@ -511,7 +495,6 @@ static void VR_MenuInit( void ) {
 	Menu_AddItem( &s_VR.menu, &s_VR.autoswitch );
 	Menu_AddItem( &s_VR.menu, &s_VR.snapturn );
 	Menu_AddItem( &s_VR.menu, &s_VR.directionmode );
-	Menu_AddItem( &s_VR.menu, &s_VR.jumptrigger );
 	Menu_AddItem( &s_VR.menu, &s_VR.refreshrate );
 	Menu_AddItem( &s_VR.menu, &s_VR.weaponpitch );
 	Menu_AddItem( &s_VR.menu, &s_VR.heightadjust );

@@ -26,7 +26,7 @@
 #include <GLES3/gl32.h>
 #endif
 
-#define SUPER_SAMPLE  1.2f
+#define SUPER_SAMPLE  1.15f
 
 extern vr_clientinfo_t vr;
 
