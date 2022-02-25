@@ -1,5 +1,5 @@
 build
-code/VrApi/
+android/app/src/main/cpp/code/VrApi/
 *.swp
 *tags
 *~
@@ -47,7 +47,6 @@ profile
 .gradle/
 .cxx/
 .settings/
-assets/
 jniLibs/
 Debug/
 Release/
@@ -55,3 +54,4 @@ Release/
 .classpath
 .project
 local.properties
+drbeef-release-key.keystore

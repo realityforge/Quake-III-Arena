@@ -144,7 +144,7 @@ COPYBINDIR=$(COPYDIR)
 endif
 
 ifndef MOUNT_DIR
-MOUNT_DIR=code
+MOUNT_DIR=android/app/src/main/cpp/code
 endif
 
 ifndef BUILD_DIR
