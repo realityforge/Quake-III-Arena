@@ -635,6 +635,21 @@ static int CG_CalcViewValues( void ) {
 
 	ps = &cg.predictedPlayerState;
 
+	/*
+	vec3_t weaponorigin, weaponangles;
+	CG_CalculateVRWeaponPosition(weaponorigin, weaponangles, qfalse);
+	vec3_t forward, end, dir;
+	AngleVectors(weaponangles, forward, NULL, NULL);
+	VectorMA(weaponorigin, 2048, forward, end);
+    trace_t		trace;
+    CG_Trace( &trace, ps->origin, NULL, NULL, end, cg.predictedPlayerState.clientNum, MASK_SOLID );
+	VectorSubtract(trace.endpos, ps->origin, dir);
+	VectorCopy(vr->calculated_weaponangles, vr->last_calculated_weaponangles);
+	vectoangles(dir, vr->calculated_weaponangles);
+	//convert to real-world angles
+	vr->calculated_weaponangles[YAW] -= (cg.refdefViewAngles[YAW] - vr->last_calculated_weaponangles[YAW]);
+*/
+
 	//HACK!! - should change this to a renderer function call
 	//Indicate to renderer whether we are in deathcam mode, We don't want sky in death cam mode
 	trap_Cvar_Set( "vr_deathCam", ((ps->stats[STAT_HEALTH] <= 0) &&
