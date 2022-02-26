@@ -561,6 +561,12 @@ void RE_EndFrame( int *frontEndMsec, int *backEndMsec ) {
 
 	R_IssueRenderCommands( qtrue );
 
+	if (r_useFlush->integer)
+	{
+		//FLush all open gl commands
+		qglFlush();
+	}
+
 	R_InitNextFrame();
 
 	if ( frontEndMsec ) {

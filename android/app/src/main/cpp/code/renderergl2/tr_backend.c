@@ -1773,6 +1773,12 @@ const void* RB_SwitchEye( const void* data ) {
 	if(tess.numIndexes)
 		RB_EndSurface();
 
+	if (r_useFlush->integer)
+	{
+		//FLush all open gl commands up to now
+		qglFlush();
+	}
+
 	// Not calling FBO_Bind explicitly, since we just update the frameBuffer
 	// within the struct.
 	if (tr.renderFbo == glState.currentFBO)
