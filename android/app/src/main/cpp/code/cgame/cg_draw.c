@@ -1991,7 +1991,7 @@ static void CG_DrawCrosshair3D(void)
 	vec3_t viewaxis[3];
 	vec3_t weaponangles;
 	vec3_t origin;
-    CG_CalculateVRWeaponPosition(origin, weaponangles, qfalse);
+    CG_CalculateVRWeaponPosition(origin, weaponangles);
 	AnglesToAxis(weaponangles, viewaxis);
 	maxdist = (cgs.glconfig.vidWidth * stereoSep * zProj / (2 * xmax)) * 1.5f;
 	VectorMA(origin, maxdist, viewaxis[0], endpos);

@@ -1646,17 +1646,14 @@ void CG_CalculateVROffHandPosition( vec3_t origin, vec3_t angles )
 		origin[2] += vr->hmdposition[1] * worldscale;
 	}
 
+	VectorCopy(vr->offhandangles, angles);
 	if ( !cgs.localServer )
 	{
 		//Calculate the offhand angles from "first principles"
 		float deltaYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]);
 		angles[YAW] = deltaYaw + (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]) + vr->offhandangles[YAW];
-		float deltaPitch = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[PITCH]);
-		angles[PITCH] = vr->realign_pitch + deltaPitch + (vr->clientviewangles[PITCH] - vr->hmdorientation[PITCH]) + vr->offhandangles[PITCH];
-		angles[ROLL] = vr->offhandangles[ROLL];
 	} else
 	{
-		VectorCopy(vr->offhandangles, angles);
 		angles[YAW] += (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]);
 	}
 }

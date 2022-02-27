@@ -604,13 +604,18 @@ void CL_FinishMove( usercmd_t *cmd ) {
 	{
         vr.local_server = qfalse;
 
-		vec3_t angles;
+        //Realign in playspace
+        if (--vr.realign == 0)
+        {
+            VectorCopy(vr.hmdposition, vr.hmdorigin);
+        }
+
+        vec3_t angles;
 		VectorCopy(vr.calculated_weaponangles, angles);
 
+		//Adjust for difference in server angles
         float deltaPitch = SHORT2ANGLE(cl.snap.ps.delta_angles[PITCH]);
-		Com_Printf("realign_pitch: %f, delta pitch: %f", vr.realign_pitch, deltaPitch);
-
-		angles[PITCH] += vr.realign_pitch;
+		angles[PITCH] -= deltaPitch;
 		angles[YAW] += (cl.viewangles[YAW] - vr.hmdorientation[YAW]);
 		angles[ROLL] = 0; // suppress roll
 

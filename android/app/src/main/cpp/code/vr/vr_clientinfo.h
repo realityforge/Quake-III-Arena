@@ -13,8 +13,7 @@ typedef struct {
     qboolean virtual_screen;
     qboolean local_server; // used in bg_pmove.c
 
-    int realign; // used to realign the weapon/playspace in a multiplayer game
-    float realign_pitch; // used to realign the weapon pitch in a multiplayer game
+    int realign; // used to realign the fake 6DoF playspace in a multiplayer game
 
     int clientNum;
     vec3_t clientviewangles; //orientation in the client - we use this in the cgame

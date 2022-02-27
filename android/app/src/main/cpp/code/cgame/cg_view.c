@@ -707,18 +707,10 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 
     if (stereoView == STEREO_LEFT)
     {
-        //Have to do this here so we can use the predicted player state
-        if (--vr->realign == 0)
-        {
-            VectorCopy(vr->hmdposition, vr->hmdorigin);
-            vr->realign_pitch -= (cg.predictedPlayerState.viewangles[PITCH]-vr->calculated_weaponangles[PITCH]) ;
-            vr->realign_pitch = AngleNormalize180(vr->realign_pitch);
-        }
-
         VectorCopy(vr->calculated_weaponangles, vr->last_calculated_weaponangles);
 
         vec3_t weaponorigin, weaponangles;
-        CG_CalculateVRWeaponPosition(weaponorigin, weaponangles, qfalse);
+        CG_CalculateVRWeaponPosition(weaponorigin, weaponangles);
 
         vec3_t forward, end, dir;
         AngleVectors(weaponangles, forward, NULL, NULL);

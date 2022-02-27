@@ -255,28 +255,25 @@ void CG_ConvertFromVR(vec3_t in, vec3_t offset, vec3_t out)
 	}
 }
 
-void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles, qboolean crosshair )
+void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles )
 {
 	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
 
 	if (!cgs.localServer)
 	{
-		if (!crosshair)
-		{
-			//Use absolute position for the faked 6DoF for multiplayer
-			vec3_t weaponoffset;
-			VectorSubtract(vr->weaponposition, vr->hmdorigin, weaponoffset);
-			weaponoffset[1] = vr->weaponoffset[1]; // up/down is index 1 in this case
-			CG_ConvertFromVR(weaponoffset, cg.refdef.vieworg, origin);
-			origin[2] -= PLAYER_HEIGHT;
-			origin[2] += vr->hmdposition[1] * worldscale;
-		}
-		else
-		{
-			vec3_t weaponoffset;
-			VectorSet(weaponoffset, 0.0f, 0.0f, 0.0f);
-			CG_ConvertFromVR(weaponoffset, cg.refdef.vieworg, origin);
-		}
+        //Use absolute position for the faked 6DoF for multiplayer
+        vec3_t weaponoffset;
+        VectorSubtract(vr->weaponposition, vr->hmdorigin, weaponoffset);
+        weaponoffset[1] = vr->weaponoffset[1]; // up/down is index 1 in this case
+        CG_ConvertFromVR(weaponoffset, cg.refdef.vieworg, origin);
+        origin[2] -= PLAYER_HEIGHT;
+        origin[2] += vr->hmdposition[1] * worldscale;
+
+        //Calculate the weapon angles from "first principles"
+        float deltaYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]);
+        angles[YAW] = deltaYaw + (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]) + vr->weaponangles[YAW];
+        angles[PITCH] = vr->weaponangles[PITCH];
+        angles[ROLL] = vr->weaponangles[ROLL];
 	}
 	else
 	{
@@ -284,22 +281,9 @@ void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles, qboolean crossh
 		CG_ConvertFromVR(vr->weaponoffset, cg.refdef.vieworg, origin);
 		origin[2] -= PLAYER_HEIGHT;
 		origin[2] += vr->hmdposition[1] * worldscale;
-	}
 
-
-
-	if ( !cgs.localServer )
-	{
-		//Calculate the weapon angles from "first principles"
-        float deltaYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]);
-        angles[YAW] = deltaYaw + (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]) + vr->weaponangles[YAW];
-        float deltaPitch = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[PITCH]);
-        angles[PITCH] = vr->realign_pitch + deltaPitch + vr->weaponangles[PITCH];
-        angles[ROLL] = vr->weaponangles[ROLL];
-    } else
- 	{
         VectorCopy(vr->weaponangles, angles);
-		angles[YAW] += (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]);
+        angles[YAW] += (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]);
 	}
 }
 
@@ -1307,7 +1291,7 @@ static void CG_LightningBolt( centity_t *cent, vec3_t origin ) {
 	if (cent->currentState.number == cg.predictedPlayerState.clientNum)// && (cg_trueLightning.value != 0))
 	{
 		vec3_t angle;
-		CG_CalculateVRWeaponPosition(muzzlePoint, angle, qfalse);
+		CG_CalculateVRWeaponPosition(muzzlePoint, angle);
 		AngleVectors(angle, forward, NULL, NULL );
 	} else {
 		// !CPMA
@@ -1717,7 +1701,7 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 	memset (&hand, 0, sizeof(hand));
 
 	// set up gun position
-	CG_CalculateVRWeaponPosition( hand.origin, angles, qfalse );
+	CG_CalculateVRWeaponPosition( hand.origin, angles );
 
 	//Scale / Move gun etc
 	float scale = 1.0f;
