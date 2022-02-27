@@ -621,7 +621,8 @@ CG_CalcViewValues
 Sets cg.refdef view values
 ===============
 */
-static int CG_CalcViewValues( void ) {
+void CG_RailTrail2( clientInfo_t *ci, vec3_t start, vec3_t end );
+static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 	playerState_t	*ps;
 
 	memset( &cg.refdef, 0, sizeof( cg.refdef ) );
@@ -634,21 +635,6 @@ static int CG_CalcViewValues( void ) {
 	CG_CalcVrect();
 
 	ps = &cg.predictedPlayerState;
-
-	/*
-	vec3_t weaponorigin, weaponangles;
-	CG_CalculateVRWeaponPosition(weaponorigin, weaponangles, qfalse);
-	vec3_t forward, end, dir;
-	AngleVectors(weaponangles, forward, NULL, NULL);
-	VectorMA(weaponorigin, 2048, forward, end);
-    trace_t		trace;
-    CG_Trace( &trace, ps->origin, NULL, NULL, end, cg.predictedPlayerState.clientNum, MASK_SOLID );
-	VectorSubtract(trace.endpos, ps->origin, dir);
-	VectorCopy(vr->calculated_weaponangles, vr->last_calculated_weaponangles);
-	vectoangles(dir, vr->calculated_weaponangles);
-	//convert to real-world angles
-	vr->calculated_weaponangles[YAW] -= (cg.refdefViewAngles[YAW] - vr->last_calculated_weaponangles[YAW]);
-*/
 
 	//HACK!! - should change this to a renderer function call
 	//Indicate to renderer whether we are in deathcam mode, We don't want sky in death cam mode
@@ -719,6 +705,69 @@ static int CG_CalcViewValues( void ) {
 		CG_OffsetFirstPersonView();
 	}
 
+    if (stereoView == STEREO_LEFT)
+    {
+        //Have to do this here so we can use the predicted player state
+        if (--vr->realign == 0)
+        {
+            VectorCopy(vr->hmdposition, vr->hmdorigin);
+            vr->realign_pitch -= (cg.predictedPlayerState.viewangles[PITCH]-vr->calculated_weaponangles[PITCH]) ;
+            vr->realign_pitch = AngleNormalize180(vr->realign_pitch);
+        }
+
+        VectorCopy(vr->calculated_weaponangles, vr->last_calculated_weaponangles);
+
+        vec3_t weaponorigin, weaponangles;
+        CG_CalculateVRWeaponPosition(weaponorigin, weaponangles, qfalse);
+
+        vec3_t forward, end, dir;
+        AngleVectors(weaponangles, forward, NULL, NULL);
+        VectorMA(weaponorigin, 4096, forward, end);
+        trace_t trace;
+        CG_Trace(&trace, weaponorigin, NULL, NULL, end, cg.predictedPlayerState.clientNum,
+                 MASK_SOLID);
+
+        if (cg_debugWeaponAiming.integer)
+        {
+            clientInfo_t ci;
+            VectorSet(ci.color1, 1, 0, 0); // Forward is red
+            CG_RailTrail2(&ci, weaponorigin, trace.endpos);
+        }
+
+        {
+            VectorSubtract(trace.endpos, cg.refdef.vieworg, dir);
+            vectoangles(dir, vr->calculated_weaponangles);
+
+            vec3_t origin;
+            VectorCopy(ps->origin, origin);
+			origin[2] += cg.predictedPlayerState.viewheight;
+            int timeDelta = cg.time - cg.duckTime;
+            if ( timeDelta < DUCK_TIME) {
+                origin[2] -= cg.duckChange * (DUCK_TIME - timeDelta) / DUCK_TIME;
+            }
+
+            vec3_t forward2, end2, dir2;
+            AngleVectors(vr->calculated_weaponangles, forward2, NULL, NULL);
+            VectorMA(origin, 4096, forward2, end2);
+
+            trace_t trace2;
+            CG_Trace(&trace2, cg.refdef.vieworg, NULL, NULL, end2, cg.predictedPlayerState.clientNum,
+                     MASK_SOLID);
+
+            if (cg_debugWeaponAiming.integer)
+            {
+                clientInfo_t ci;
+                VectorSet(ci.color1, 0, 1, 0);
+                CG_RailTrail2(&ci, cg.refdef.vieworg, trace2.endpos);
+            }
+
+            //convert to real-world angles - should be very close to real weapon angles
+            float deltaYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]);
+            vr->calculated_weaponangles[YAW] -= (deltaYaw + (vr->clientviewangles[YAW] -
+                                                             vr->hmdorientation[YAW]));
+        }
+    }
+
 	// position eye relative to origin
 	if (!cgs.localServer)
     {
@@ -734,7 +783,7 @@ static int CG_CalcViewValues( void ) {
 			vec3_t angles;
 			VectorCopy(vr->hmdorientation, angles);
 			angles[YAW] =
-					(cg.refdefViewAngles[YAW] + vr->hmdorientation[YAW]) - vr->weaponangles[YAW];
+					(cg.refdefViewAngles[YAW] + vr->hmdorientation[YAW]) - vr->last_calculated_weaponangles[YAW];
 			AnglesToAxis(angles, cg.refdef.viewaxis);
 		}
     } else {
@@ -742,7 +791,7 @@ static int CG_CalcViewValues( void ) {
 			vec3_t angles;
 			angles[ROLL] = vr->hmdorientation[ROLL];
 			angles[PITCH] = vr->weaponangles[PITCH];
-			angles[YAW] = (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]) + vr->weaponangles[YAW];
+			angles[YAW] = (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]) + vr->last_calculated_weaponangles[YAW];
 			AnglesToAxis(angles, cg.refdef.viewaxis);
 		} else {
 			AnglesToAxis(cg.refdefViewAngles, cg.refdef.viewaxis);
@@ -869,7 +918,7 @@ void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demo
 							&& cg_thirdPerson.integer;
 
 	// build cg.refdef
-	inwater = CG_CalcViewValues();
+	inwater = CG_CalcViewValues( stereoView );
 
 	// first person blend blobs, done after AnglesToAxis
 	if ( !cg.renderingThirdPerson ) {

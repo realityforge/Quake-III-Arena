@@ -1991,9 +1991,9 @@ static void CG_DrawCrosshair3D(void)
 	vec3_t viewaxis[3];
 	vec3_t weaponangles;
 	vec3_t origin;
-    CG_CalculateVRWeaponPosition(origin, weaponangles, qtrue);
+    CG_CalculateVRWeaponPosition(origin, weaponangles, qfalse);
 	AnglesToAxis(weaponangles, viewaxis);
-	maxdist = cgs.glconfig.vidWidth * stereoSep * zProj / (2 * xmax);
+	maxdist = (cgs.glconfig.vidWidth * stereoSep * zProj / (2 * xmax)) * 1.5f;
 	VectorMA(origin, maxdist, viewaxis[0], endpos);
 	CG_Trace(&trace, origin, NULL, NULL, endpos, 0, MASK_SHOT);
 
@@ -2544,7 +2544,8 @@ CG_DrawWeapReticle
 static void CG_DrawWeapReticle( void )
 {
 	int weap;
-	vec4_t color = {0, 0, 0, 1};
+	vec4_t light_color = {0.7, 0.7, 0.7, 1};
+	vec4_t black = {0.0, 0.0, 0.0, 1};
 
 	float indent = 0.16;
 	float X_WIDTH=640;
@@ -2555,11 +2556,11 @@ static void CG_DrawWeapReticle( void )
 	CG_AdjustFrom640( &x, &y, &w, &h );
 
 	// sides
-	CG_FillRect( 0, 0, (X_WIDTH * indent), Y_HEIGHT, color );
-	CG_FillRect( X_WIDTH * (1 - indent), 0, (X_WIDTH * indent), Y_HEIGHT, color );
+	CG_FillRect( 0, 0, (X_WIDTH * indent), Y_HEIGHT, black );
+	CG_FillRect( X_WIDTH * (1 - indent), 0, (X_WIDTH * indent), Y_HEIGHT, black );
 	// top/bottom
-	CG_FillRect( X_WIDTH * indent, 0, X_WIDTH * (1-indent), Y_HEIGHT * indent, color );
-	CG_FillRect( X_WIDTH * indent, Y_HEIGHT * (1-indent), X_WIDTH * (1-indent), Y_HEIGHT * indent, color );
+	CG_FillRect( X_WIDTH * indent, 0, X_WIDTH * (1-indent), Y_HEIGHT * indent, black );
+	CG_FillRect( X_WIDTH * indent, Y_HEIGHT * (1-indent), X_WIDTH * (1-indent), Y_HEIGHT * indent, black );
 
 	{
 		// center
@@ -2571,10 +2572,10 @@ static void CG_DrawWeapReticle( void )
 		}
 
 		// hairs
-		CG_FillRect( 84, 239, 177, 2, color );   // left
-		CG_FillRect( 320, 242, 1, 58, color );   // center top
-		CG_FillRect( 319, 300, 2, 178, color );  // center bot
-		CG_FillRect( 380, 239, 177, 2, color );  // right
+		CG_FillRect( 84, 239, 177, 2, light_color );   // left
+		CG_FillRect( 320, 242, 1, 58, light_color );   // center top
+		CG_FillRect( 319, 300, 2, 178, light_color );  // center bot
+		CG_FillRect( 380, 239, 177, 2, light_color );  // right
 	}
 }
 
@@ -2741,7 +2742,7 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 			VectorClear(pos);
 			VectorSubtract(vr->hmdposition, vr->hmdorigin, hmdposition);
 			rotateAboutOrigin(hmdposition[2], hmdposition[0],
-							  cg.refdefViewAngles[YAW] - vr->weaponangles[YAW], pos);
+							  cg.refdefViewAngles[YAW] - vr->calculated_weaponangles[YAW], pos);
 			VectorScale(pos, worldscale, pos);
 			VectorSubtract(cg.refdef.vieworg, pos, vieworg);
 

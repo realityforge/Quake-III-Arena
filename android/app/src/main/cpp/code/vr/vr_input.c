@@ -587,14 +587,14 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
 
     if (isRightController == !vr_righthanded->integer)
     {
-        if ((buttons & ovrButton_RThumb) && !(controller->buttons & ovrButton_RThumb)) {
+        if ((buttons & ovrButton_LThumb) && !(controller->buttons & ovrButton_LThumb)) {
             if (IN_GetButtonAction("SECONDARYTHUMBSTICK", action))
             {
                 IN_SendButtonAction(action, qtrue);
             }
 
-            vr.realign = 4;
-        } else if (!(buttons & ovrButton_RThumb) && (controller->buttons & ovrButton_RThumb)) {
+            vr.realign = 3;
+        } else if (!(buttons & ovrButton_LThumb) && (controller->buttons & ovrButton_LThumb)) {
             if (IN_GetButtonAction("SECONDARYTHUMBSTICK", action))
             {
                 IN_SendButtonAction(action, qfalse);

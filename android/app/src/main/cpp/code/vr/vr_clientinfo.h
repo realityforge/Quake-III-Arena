@@ -14,9 +14,10 @@ typedef struct {
     qboolean local_server; // used in bg_pmove.c
 
     int realign; // used to realign the weapon/playspace in a multiplayer game
-    int realign_pitch; // used to realign the weapon pitch in a multiplayer game
+    float realign_pitch; // used to realign the weapon pitch in a multiplayer game
 
     int clientNum;
+    vec3_t clientviewangles; //orientation in the client - we use this in the cgame
 
     vec3_t hmdposition;
     vec3_t hmdorigin; //used to recenter the mp fake 6DoF playspace
@@ -28,8 +29,8 @@ typedef struct {
     vec3_t hmdorientation_delta;
 	
     vec3_t weaponangles;
-//    vec3_t calculated_weaponangles;
-//    vec3_t last_calculated_weaponangles;
+    vec3_t last_calculated_weaponangles;
+    vec3_t calculated_weaponangles; //Calculated as the angle required to hit the point that the controller is pointing at, but coming from the view origin
     vec3_t weaponangles_last; // Don't use this, it is just for calculating delta!
     vec3_t weaponangles_delta;
 

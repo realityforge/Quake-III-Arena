@@ -234,7 +234,9 @@ void CG_ConvertFromVR(vec3_t in, vec3_t offset, vec3_t out)
 	{
 		//We are connected to a multiplayer server, so make the appropriate adjustment to the view
 		//angles as we send orientation to the server that includes the weapon angles
-		rotateAboutOrigin(vrSpace[0], vrSpace[1], cg.refdefViewAngles[YAW] - vr->weaponangles[YAW], r);
+		float deltaYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]);
+		float angleYaw = deltaYaw + (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]);
+		rotateAboutOrigin(vrSpace[0], vrSpace[1], angleYaw, r);
 	} else {
 		rotateAboutOrigin(vrSpace[0], vrSpace[1], cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW], r);
 	}
@@ -262,11 +264,10 @@ void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles, qboolean crossh
 		if (!crosshair)
 		{
 			//Use absolute position for the faked 6DoF for multiplayer
-			vec3_t offset, weaponposition;
-			VectorSubtract(vr->weaponposition, vr->hmdorigin, weaponposition);
-			VectorCopy(weaponposition, offset);
-			offset[1] = vr->weaponoffset[1]; // up/down is index 1 in this case
-			CG_ConvertFromVR(offset, cg.refdef.vieworg, origin);
+			vec3_t weaponoffset;
+			VectorSubtract(vr->weaponposition, vr->hmdorigin, weaponoffset);
+			weaponoffset[1] = vr->weaponoffset[1]; // up/down is index 1 in this case
+			CG_ConvertFromVR(weaponoffset, cg.refdef.vieworg, origin);
 			origin[2] -= PLAYER_HEIGHT;
 			origin[2] += vr->hmdposition[1] * worldscale;
 		}
@@ -286,15 +287,18 @@ void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles, qboolean crossh
 	}
 
 
-	VectorCopy(vr->weaponangles, angles);
 
 	if ( !cgs.localServer )
 	{
-		//take player state angles provided by server
-		angles[YAW] = cg.predictedPlayerState.viewangles[YAW]; //cg.snap->ps.viewangles[YAW];
-		angles[PITCH] = cg.predictedPlayerState.viewangles[PITCH]; //cg.snap->ps.viewangles[PITCH];
-	} else
+		//Calculate the weapon angles from "first principles"
+        float deltaYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]);
+        angles[YAW] = deltaYaw + (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]) + vr->weaponangles[YAW];
+        float deltaPitch = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[PITCH]);
+        angles[PITCH] = vr->realign_pitch + deltaPitch + vr->weaponangles[PITCH];
+        angles[ROLL] = vr->weaponangles[ROLL];
+    } else
  	{
+        VectorCopy(vr->weaponangles, angles);
 		angles[YAW] += (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]);
 	}
 }
@@ -497,7 +501,7 @@ void CG_RailTrail2( clientInfo_t *ci, vec3_t start, vec3_t end ) {
 
     le->leType = LE_FADE_RGB;
     le->startTime = cg.time;
-    le->endTime = cg.time + 25;
+    le->endTime = cg.time + 15;
     le->lifeRate = 1.0 / ( le->endTime - le->startTime );
 
     re->shaderTime = cg.time / 1000.0f;

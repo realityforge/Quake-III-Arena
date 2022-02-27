@@ -312,6 +312,7 @@ void CL_AdjustAngles( void ) {
 	cl.viewangles[PITCH] -= speed*cl_pitchspeed->value * CL_KeyState (&in_lookup);
 	cl.viewangles[PITCH] += speed*cl_pitchspeed->value * CL_KeyState (&in_lookdown);
  */
+
 	cl.viewangles[YAW] -= vr.hmdorientation_delta[YAW];
 
     //Make angles good
@@ -322,6 +323,8 @@ void CL_AdjustAngles( void ) {
 
 	cl.viewangles[PITCH] = vr.hmdorientation[PITCH];
 	cl.viewangles[ROLL] = vr.hmdorientation[ROLL];
+
+    VectorCopy(cl.viewangles, vr.clientviewangles);
 }
 
 /*
@@ -602,13 +605,10 @@ void CL_FinishMove( usercmd_t *cmd ) {
         vr.local_server = qfalse;
 
 		vec3_t angles;
-		VectorCopy(vr.weaponangles, angles);
+		VectorCopy(vr.calculated_weaponangles, angles);
 
-		if (--vr.realign == 0)
-		{
-			VectorCopy(vr.hmdposition, vr.hmdorigin);
-			vr.realign_pitch -= (cl.snap.ps.viewangles[PITCH]-vr.weaponangles[PITCH]) ;
-		}
+        float deltaPitch = SHORT2ANGLE(cl.snap.ps.delta_angles[PITCH]);
+		Com_Printf("realign_pitch: %f, delta pitch: %f", vr.realign_pitch, deltaPitch);
 
 		angles[PITCH] += vr.realign_pitch;
 		angles[YAW] += (cl.viewangles[YAW] - vr.hmdorientation[YAW]);
@@ -619,7 +619,7 @@ void CL_FinishMove( usercmd_t *cmd ) {
 		}
 
 		vec3_t out;
-		rotateAboutOrigin(cmd->rightmove, cmd->forwardmove, -vr.weaponangles[YAW], out);
+		rotateAboutOrigin(cmd->rightmove, cmd->forwardmove, -vr.calculated_weaponangles[YAW], out);
 		cmd->rightmove = out[0];
 		cmd->forwardmove = out[1];
 	}
