@@ -1428,7 +1428,13 @@ static void CG_DrawHoldableItem( void ) {
 	value = cg.snap->ps.stats[STAT_HOLDABLE_ITEM];
 	if ( value ) {
 		CG_RegisterItemVisuals( value );
-		//CG_DrawPic( 640-ICON_SIZE, (SCREEN_HEIGHT-ICON_SIZE)/2, ICON_SIZE, ICON_SIZE, cg_items[ value ].icon );
+
+		//If we are two handing the weapon, move the item icon back to the HUD
+        if (trap_Cvar_VariableValue("vr_twoHandedWeapons") != 0.0f && vr->weapon_stabilised)
+        {
+            CG_DrawPic(640 - ICON_SIZE, (SCREEN_HEIGHT - ICON_SIZE) / 2, ICON_SIZE, ICON_SIZE,
+                       cg_items[value].icon);
+        }
 	}
 }
 #endif // MISSIONPACK

@@ -1677,6 +1677,11 @@ void CG_TrailItem( centity_t *cent, qhandle_t hModel, vec3_t offset, float scale
 
 	if (cent->currentState.clientNum == vr->clientNum)
 	{
+		if (trap_Cvar_VariableValue("vr_twoHandedWeapons") != 0.0f && vr->weapon_stabilised)
+		{
+			return;
+		}
+
 		CG_CalculateVROffHandPosition(ent.origin, angles);
 		AnglesToAxis(angles, ent.axis);
         VectorScale( ent.axis[0], scale, ent.axis[0] );
@@ -1910,12 +1915,11 @@ static void CG_PlayerPowerups( centity_t *cent, refEntity_t *torso ) {
         int		value;
         value = cg.snap->ps.stats[STAT_HOLDABLE_ITEM];
 
-        if (!(trap_Cvar_VariableValue("vr_twoHandedWeapons") != 0.0f && vr->weapon_stabilised)
-        		&& value ) {
+        if (value ) {
             CG_RegisterItemVisuals( value );
             vec3_t offset;
-            VectorSet(offset, 0, 0, -8);
-            CG_TrailItem( cent, cg_items[ value ].models[0], offset, 0.25f );
+            VectorSet(offset, 0, 4, -8);
+            CG_TrailItem( cent, cg_items[ value ].models[0], offset, 0.35f );
         }
     }
 

@@ -187,6 +187,57 @@ void QuatToYawPitchRoll(ovrQuatf q, vec3_t rotation, vec3_t out) {
     GetAnglesFromVectors(forwardNormal, rightNormal, upNormal, out);
 }
 
+//0 = left, 1 = right
+float vibration_channel_duration[2] = {0.0f, 0.0f};
+float vibration_channel_intensity[2] = {0.0f, 0.0f};
+ovrDeviceID controllerIDs[2];
+
+void VR_Vibrate( int duration, int chan, float intensity )
+{
+    for (int i = 0; i < 2; ++i)
+    {
+        int channel = (i + 1) & chan;
+        if (channel)
+        {
+            if (vibration_channel_duration[channel-1] > 0.0f)
+                return;
+
+            if (vibration_channel_duration[channel-1] == -1.0f && duration != 0.0f)
+                return;
+
+            vibration_channel_duration[channel-1] = duration;
+            vibration_channel_intensity[channel-1] = intensity;
+        }
+    }
+}
+
+
+static void VR_processHaptics() {
+    static float lastFrameTime = 0.0f;
+    float timestamp = (float)(Sys_Milliseconds( ));
+    float frametime = timestamp - lastFrameTime;
+    lastFrameTime = timestamp;
+
+    for (int i = 0; i < 2; ++i) {
+        if (vibration_channel_duration[i] > 0.0f ||
+            vibration_channel_duration[i] == -1.0f) {
+            vrapi_SetHapticVibrationSimple(VR_GetEngine()->ovr, controllerIDs[i],
+                                           vibration_channel_intensity[i]);
+
+            if (vibration_channel_duration[i] != -1.0f) {
+                vibration_channel_duration[i] -= frametime;
+
+                if (vibration_channel_duration[i] < 0.0f) {
+                    vibration_channel_duration[i] = 0.0f;
+                    vibration_channel_intensity[i] = 0.0f;
+                }
+            }
+        } else {
+            vrapi_SetHapticVibrationSimple(VR_GetEngine()->ovr, controllerIDs[i], 0.0f);
+        }
+    }
+}
+
 static void IN_SendButtonAction(const char* action, qboolean pressed)
 {
     if (action)
@@ -220,6 +271,47 @@ void VR_HapticEvent(const char* event, int position, int flags, int intensity, f
     engine_t* engine = VR_GetEngine();
     jstring StringArg1 = (*(engine->java.Env))->NewStringUTF(engine->java.Env, event);
     (*(engine->java.Env))->CallVoidMethod(engine->java.Env, engine->java.ActivityObject, android_haptic_event, StringArg1, position, flags, intensity, angle, yHeight);
+
+    //Controller Haptic Support
+    int weaponFireChannel = vr.weapon_stabilised ? 3 : (vr_righthanded->integer ? 2 : 1);
+    if (strcmp(event, "pickup_shield") == 0 ||
+            strcmp(event, "pickup_weapon") == 0 ||
+            strstr(event, "pickup_item") != NULL)
+    {
+        VR_Vibrate(100, 3, 1.0);
+    }
+    else if (strcmp(event, "weapon_switch") == 0)
+    {
+        VR_Vibrate(250, vr_righthanded->integer ? 2 : 1, 0.8);
+    }
+    else if (strcmp(event, "shotgun") == 0 || strcmp(event, "fireball") == 0)
+    {
+        VR_Vibrate(400, 3, 1.0);
+    }
+    else if (strcmp(event, "bullet") == 0)
+    {
+        VR_Vibrate(150, 3, 1.0);
+    }
+    else if (strcmp(event, "chainsaw_fire") == 0 ||
+        strcmp(event, "RTCWQuest:fire_tesla") == 0)
+    {
+        VR_Vibrate(500, weaponFireChannel, 1.0);
+    }
+    else if (strcmp(event, "machinegun_fire") == 0 || strcmp(event, "plasmagun_fire") == 0)
+    {
+        VR_Vibrate(90, weaponFireChannel, 0.8);
+    }
+    else if (strcmp(event, "shotgun_fire") == 0)
+    {
+        VR_Vibrate(250, weaponFireChannel, 1.0);
+    }
+    else if (strcmp(event, "rocket_fire") == 0 ||
+        strcmp(event, "RTCWQuest:fire_sniper") == 0 ||
+        strcmp(event, "bfg_fire") == 0 ||
+        strcmp(event, "handgrenade_fire") == 0 )
+    {
+        VR_Vibrate(400, weaponFireChannel, 1.0);
+    }
 }
 
 static qboolean IN_GetButtonAction(const char* button, char* action)
@@ -472,6 +564,7 @@ static void IN_VRTriggers( qboolean isRightController, float index ) {
             {
                 controller->axisButtons |= VR_TOUCH_AXIS_TRIGGER_INDEX;
                 Com_QueueEvent(in_vrEventTime, SE_KEY, K_MOUSE1, qtrue, 0, NULL);
+                VR_Vibrate(200, vr_righthanded->integer ? 2 : 1, 0.8);
             }
             else if ((controller->axisButtons & VR_TOUCH_AXIS_TRIGGER_INDEX) &&
                      index < releasedThreshold)
@@ -704,6 +797,8 @@ void IN_VRInputFrame( void )
 
 	vr.virtual_screen = VR_useScreenLayer();
 
+    VR_processHaptics();
+
 	//trigger frame tick for haptics
     VR_HapticEvent("frame_tick", 0, 0, 0, 0, 0);
 
@@ -770,9 +865,11 @@ void IN_VRInputFrame( void )
 		if (caps.ControllerCapabilities & ovrControllerCaps_LeftHand) {
 			isRight = qfalse;
 			controller = &leftController;
+            controllerIDs[0] = capsHeader.DeviceID;
 		} else if (caps.ControllerCapabilities & ovrControllerCaps_RightHand) {
 			isRight = qtrue;
 			controller = &rightController;
+            controllerIDs[1] = capsHeader.DeviceID;
 		}
 		else {
 			continue;
