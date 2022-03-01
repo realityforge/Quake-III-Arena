@@ -1,0 +1,28 @@
+cc_library(
+    name = "opusfile",
+    srcs = [
+        "src/http.c",
+        "src/info.c",
+        "src/internal.c",
+        "src/internal.h",
+        "src/opusfile.c",
+        "src/stream.c",
+        "src/wincerts.c",
+        "src/winerrno.h",
+    ],
+    hdrs = [
+        "include/opusfile.h",
+    ],
+    #    copts = [
+    #        "-Wno-unused-function",
+    #        "-Wno-unused-variable",
+    #    ],
+    defines = ["USE_CODEC_VORBIS"],
+    includes = [
+        "include",
+    ],
+    deps = [
+        "//code/libogg-1.3.3:ogg",
+        "//code/opus-1.2.1:opus",
+    ],
+)

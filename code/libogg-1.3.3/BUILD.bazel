@@ -11,5 +11,8 @@ cc_library(
     ],
     defines = ["USE_INTERNAL_JPEG"],
     includes = ["include"],
-    visibility = ["//code/libvorbis-1.3.6:__pkg__"],
+    visibility = [
+        "//code/libvorbis-1.3.6:__pkg__",
+        "//code/opusfile-0.9:__pkg__",
+    ],
 )
