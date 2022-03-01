@@ -40,3 +40,7 @@ profile
 *.sdf
 *.opensdf
 *.suo
+
+# Bazel Build files
+####################
+/bazel-*
