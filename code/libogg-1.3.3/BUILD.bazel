@@ -1,0 +1,14 @@
+cc_library(
+    name = "ogg",
+    srcs = [
+        "include/ogg/config_types.h",
+        "include/ogg/os_types.h",
+        "src/bitwise.c",
+        "src/framing.c",
+    ],
+    hdrs = [
+        "include/ogg/ogg.h",
+    ],
+    defines = ["USE_INTERNAL_JPEG"],
+    includes = ["include"],
+)
