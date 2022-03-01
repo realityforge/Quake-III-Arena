@@ -44,3 +44,8 @@ profile
 # Bazel Build files
 ####################
 /bazel-*
+
+
+# Temp directories local notes
+####################
+/tmp
