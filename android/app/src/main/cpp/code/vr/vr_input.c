@@ -402,6 +402,8 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
                        (VectorLength(vr.weaponoffset) < 0.24f) &&
                        cl.snap.ps.stats[STAT_HEALTH] > 0;
 
+    vr.show_console = (VectorLength(vr.offhandoffset) < 0.2f);
+
     if (vr_twoHandedWeapons->integer && vr.weapon_stabilised)
     {
         //Apply smoothing to the weapon hand

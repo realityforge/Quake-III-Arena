@@ -22,10 +22,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // console.c
 
 #include "client.h"
+#include "../vr/vr_clientinfo.h"
 
 
 int g_console_field_width = 78;
 
+extern vr_clientinfo_t vr;
 
 #define	NUM_CON_TIMES 4
 
@@ -554,6 +556,11 @@ void Con_DrawInput (void) {
 }
 
 
+static int Con_GetChatOffsetY( void )
+{
+	return vr.show_console ? (-30 * vr.hmdorientation[PITCH]) : 0;
+}
+
 /*
 ================
 Con_DrawNotify
@@ -598,7 +605,7 @@ void Con_DrawNotify (void)
 				currentColor = ColorIndexForNumber( text[x]>>8 );
 				re.SetColor( g_color_table[currentColor] );
 			}
-			SCR_DrawSmallChar( cl_conXOffset->integer + con.xadjust + (x+1)*SMALLCHAR_WIDTH, v, text[x] & 0xff );
+			SCR_DrawSmallChar( cl_conXOffset->integer + con.xadjust + (x+1)*SMALLCHAR_WIDTH + 500, v + Con_GetChatOffsetY(), text[x] & 0xff );
 		}
 
 		v += SMALLCHAR_HEIGHT;
