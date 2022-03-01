@@ -232,7 +232,6 @@ cc_library(
     ],
     copts = [
         "-Wno-incompatible-pointer-types",
-        #            "-Wno-unused-variable",
     ],
     defines = [
         "OPUS_BUILD",
