@@ -220,21 +220,32 @@ static void CG_CalcVrect (void) {
 
 /*
 ===============
-CG_OffsetDeathView
+CG_OffsetVRThirdPersonView
 
 ===============
 */
-static void CG_OffsetDeathView( void ) {
+static void CG_OffsetVRThirdPersonView( void ) {
+    float scale = 1.0f;
 
-    vec3_t position_delta;
-    VectorNegate(vr->hmdposition_delta, position_delta);
-    CG_ConvertFromVR(position_delta, NULL, position_delta);
-    position_delta[2] = 0;
-    VectorScale(position_delta, (DEATH_WORLDSCALE_MULTIPLIER / 2), position_delta);
+	if (cg.predictedPlayerState.pm_type == PM_SPECTATOR ||
+            (cg.predictedPlayerState.pm_flags & PMF_FOLLOW))
+	{
+		scale *= SPECTATOR_WORLDSCALE_MULTIPLIER;
+	}
+	else if (( cg.predictedPlayerState.stats[STAT_HEALTH] <= 0 ) &&
+        ( cg.predictedPlayerState.pm_type != PM_INTERMISSION ))
+    {
+        scale *= DEATH_WORLDSCALE_MULTIPLIER;
+    }
 
-    VectorAdd(cg.v_death_origin, position_delta, cg.v_death_origin);
-    VectorCopy(cg.v_death_origin, cg.refdef.vieworg);
-    cg.refdef.vieworg[2] += DEATH_WORLDSCALE_MULTIPLIER * cg.predictedPlayerState.viewheight;
+	{
+		vec3_t position;
+		VectorCopy(vr->hmdposition, position);
+		CG_ConvertFromVR(position, NULL, position);
+        position[2] = 0;
+		VectorScale(position, scale, position);
+		VectorAdd(cg.refdef.vieworg, position, cg.refdef.vieworg);
+	}
 }
 
 /*
@@ -254,8 +265,6 @@ static void CG_OffsetThirdPersonView( void ) {
 	vec3_t		focusPoint;
 	float		focusDist;
 	float		forwardScale, sideScale;
-
-	VectorCopy(cg.refdef.vieworg, cg.v_death_origin);
 
 	cg.refdef.vieworg[2] += cg.predictedPlayerState.viewheight;
 
@@ -347,8 +356,6 @@ static void CG_OffsetFirstPersonView( void ) {
 
 	origin = cg.refdef.vieworg;
 	angles = cg.refdefViewAngles;
-
-	VectorCopy(cg.refdef.vieworg, cg.v_death_origin);
 
 	float hitRollCoeff = trap_Cvar_VariableValue("vr_rollWhenHit");
 
@@ -638,8 +645,9 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 
 	//HACK!! - should change this to a renderer function call
 	//Indicate to renderer whether we are in deathcam mode, We don't want sky in death cam mode
-	trap_Cvar_Set( "vr_deathCam", ((ps->stats[STAT_HEALTH] <= 0) &&
-		( ps->pm_type != PM_INTERMISSION )) ? "1" : "0" );
+	trap_Cvar_Set( "vr_noSkybox", (((ps->stats[STAT_HEALTH] <= 0) &&
+		( ps->pm_type != PM_INTERMISSION )) || ps->pm_type == PM_SPECTATOR ||
+			(ps->pm_flags & PMF_FOLLOW)) ? "1" : "0" );
 
 	// intermission view
 	static float hmdYaw = 0;
@@ -694,9 +702,11 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 		}
 	}
 
-	if (cg.snap->ps.stats[STAT_HEALTH] <= 0) {
-	    //If dead, view the map from above
-        CG_OffsetDeathView();
+	if (cg.snap->ps.stats[STAT_HEALTH] <= 0 ||
+            ps->pm_type == PM_SPECTATOR ||
+            ps->pm_flags & PMF_FOLLOW) {
+	    //If dead, or spectating, view the map from above
+        CG_OffsetVRThirdPersonView();
     } else if ( cg.renderingThirdPerson ) {
 		// back away from character
 		CG_OffsetThirdPersonView();
@@ -705,7 +715,7 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 		CG_OffsetFirstPersonView();
 	}
 
-    if (stereoView == STEREO_LEFT)
+    if (!cgs.localServer && stereoView == STEREO_LEFT)
     {
         VectorCopy(vr->calculated_weaponangles, vr->last_calculated_weaponangles);
 
@@ -769,7 +779,17 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 			VectorCopy(cg.refdefViewAngles, angles);
             angles[ROLL] = vr->hmdorientation[ROLL];
             AnglesToAxis( angles, cg.refdef.viewaxis );
-		} else {
+		}
+		else if (ps->pm_flags & PMF_FOLLOW)
+		{
+			//If we're following someone,
+			vec3_t angles;
+			VectorCopy(vr->hmdorientation, angles);
+			angles[YAW] = vr->clientviewangles[YAW];
+			AnglesToAxis(angles, cg.refdef.viewaxis);
+		}
+		else
+		{
 			//We are connected to a multiplayer server, so make the appropriate adjustment to the view
 			//angles as we send orientation to the server that includes the weapon angles
 			vec3_t angles;
@@ -783,7 +803,7 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 			vec3_t angles;
 			angles[ROLL] = vr->hmdorientation[ROLL];
 			angles[PITCH] = vr->weaponangles[PITCH];
-			angles[YAW] = (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]) + vr->last_calculated_weaponangles[YAW];
+			angles[YAW] = (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]) + vr->weaponangles[YAW];
 			AnglesToAxis(angles, cg.refdef.viewaxis);
 		} else {
 			AnglesToAxis(cg.refdefViewAngles, cg.refdef.viewaxis);
@@ -906,8 +926,9 @@ void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demo
 	CG_PredictPlayerState();
 
 	// decide on third person view
-	cg.renderingThirdPerson = cg.snap->ps.persistant[PERS_TEAM] != TEAM_SPECTATOR
-							&& cg_thirdPerson.integer;
+	cg.renderingThirdPerson = cg.predictedPlayerState.pm_type == PM_SPECTATOR ||
+			cg.predictedPlayerState.pm_flags & PMF_FOLLOW ||
+			cg_thirdPerson.integer;
 
 	// build cg.refdef
 	inwater = CG_CalcViewValues( stereoView );

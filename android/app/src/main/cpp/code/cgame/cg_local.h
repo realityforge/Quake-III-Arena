@@ -77,7 +77,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define	NUM_CROSSHAIRS		10
 
 //multiplying size you go to when dead looking down on the match
-#define DEATH_WORLDSCALE_MULTIPLIER	40
+#define DEATH_WORLDSCALE_MULTIPLIER			40
+#define SPECTATOR_WORLDSCALE_MULTIPLIER		10
 
 #define PLAYER_HEIGHT           48
 
@@ -631,7 +632,6 @@ typedef struct {
 	float		v_dmg_time;
 	float		v_dmg_pitch;
 	float		v_dmg_roll;
-	vec3_t 		v_death_origin;
 
 	// temp working variables for player view
 	float		bobfracsin;

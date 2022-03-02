@@ -2725,10 +2725,17 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 	vec3_t baseOrg;
 	VectorCopy( cg.refdef.vieworg, baseOrg );
 
-	float worldscale = trap_Cvar_VariableValue("vr_worldscale") *
-			(( cg.snap->ps.stats[STAT_HEALTH] <= 0 ) &&
-			 ( cg.snap->ps.pm_type != PM_INTERMISSION ) ? DEATH_WORLDSCALE_MULTIPLIER : 1.0f);
-
+	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
+    if (cg.snap->ps.pm_type == PM_SPECTATOR ||
+			(cg.snap->ps.pm_flags & PMF_FOLLOW))
+    {
+        worldscale *= SPECTATOR_WORLDSCALE_MULTIPLIER;
+    }
+	else if (( cg.snap->ps.stats[STAT_HEALTH] <= 0 ) &&
+			 ( cg.snap->ps.pm_type != PM_INTERMISSION ))
+	{
+		worldscale *= DEATH_WORLDSCALE_MULTIPLIER;
+	}
 
 	float ipd = trap_Cvar_VariableValue("r_stereoSeparation") / 1000.0f;
 	float separation = worldscale * (ipd / 2) * (stereoView == STEREO_LEFT ? -1.0f : 1.0f);

@@ -255,8 +255,17 @@ void CG_ConvertFromVR(vec3_t in, vec3_t offset, vec3_t out)
 	}
 }
 
+static void CG_CalculateWeaponPosition( vec3_t origin, vec3_t angles );
+
 void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles )
 {
+	if (cg.predictedPlayerState.pm_type == PM_SPECTATOR ||
+		cg.predictedPlayerState.pm_flags & PMF_FOLLOW)
+	{
+		CG_CalculateWeaponPosition(origin, angles);
+		return;
+	}
+
 	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
 
 	if (!cgs.localServer)
