@@ -1,0 +1,14 @@
+cc_library(
+    name = "renderercommon_support",
+    srcs = [
+        "puff.c",
+        "q_math.c",
+        "q_platform.h",
+        "q_shared.c",
+        "surfaceflags.h",
+    ],
+    hdrs = [
+        "puff.h",
+        "q_shared.h",
+    ],
+)
