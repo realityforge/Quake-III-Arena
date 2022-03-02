@@ -11,4 +11,5 @@ cc_library(
         "puff.h",
         "q_shared.h",
     ],
+    visibility = ["//code/renderercommon:__pkg__"],
 )

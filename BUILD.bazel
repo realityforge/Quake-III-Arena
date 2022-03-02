@@ -8,6 +8,7 @@ cc_library(
         "//code/libvorbis-1.3.6:vorbis",
         "//code/opus-1.2.1:opus",
         "//code/opusfile-0.9:opusfile",
+        "//code/qcommon:renderercommon_support",
         "//code/zlib",
     ],
 )
