@@ -31,6 +31,7 @@ int			old_com_frameTime;
 
 extern vr_clientinfo_t vr;
 extern cvar_t *vr_refreshrate;
+extern cvar_t *vr_sendRollToServer;
 
 /*
 ===============================================================================
@@ -617,7 +618,10 @@ void CL_FinishMove( usercmd_t *cmd ) {
         float deltaPitch = SHORT2ANGLE(cl.snap.ps.delta_angles[PITCH]);
 		angles[PITCH] -= deltaPitch;
 		angles[YAW] += (cl.viewangles[YAW] - vr.hmdorientation[YAW]);
-		angles[ROLL] = 0; // suppress roll
+		if (!vr_sendRollToServer->integer)
+		{
+			angles[ROLL] = 0; // suppress roll
+		}
 
 		for (i = 0; i < 3; i++) {
 			cmd->angles[i] = ANGLE2SHORT(angles[i]);
