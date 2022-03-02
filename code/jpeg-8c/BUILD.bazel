@@ -61,4 +61,8 @@ cc_library(
         "jpeglib.h",
     ],
     defines = ["USE_INTERNAL_JPEG"],
+    includes = ["."],
+    visibility = [
+        "//code/SDL2:__pkg__",
+    ],
 )

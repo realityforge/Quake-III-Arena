@@ -2,6 +2,7 @@
 cc_library(
     name = "compile_test",
     deps = [
+        "//code/SDL2:sdl",
         "//code/jpeg-8c:jpeg",
         "//code/libogg-1.3.3:ogg",
         "//code/libvorbis-1.3.6:vorbis",
