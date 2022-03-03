@@ -45,6 +45,9 @@ profile
 ####################
 /bazel-*
 
+# JetBrains IDE
+###############
+/.clwb
 
 # Temp directories local notes
 ####################
