@@ -10,6 +10,7 @@ cc_library(
         "//code/opusfile-0.9:opusfile",
         "//code/qcommon:renderercommon_support",
         "//code/renderercommon",
+        "//code/renderergl1",
         "//code/zlib",
     ],
 )
