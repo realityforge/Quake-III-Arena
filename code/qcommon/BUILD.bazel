@@ -13,3 +13,18 @@ cc_library(
     ],
     visibility = ["//code/renderercommon:__pkg__"],
 )
+
+cc_library(
+    name = "qfiles",
+    hdrs = ["qfiles.h"],
+    visibility = ["//code/renderergl1:__pkg__"],
+)
+
+cc_library(
+    name = "qcommon",
+    hdrs = [
+        "cm_public.h",
+        "qcommon.h",
+    ],
+    visibility = ["//code/renderergl1:__pkg__"],
+)

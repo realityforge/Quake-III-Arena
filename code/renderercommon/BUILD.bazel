@@ -15,6 +15,9 @@ cc_library(
         "tr_types.h",
     ],
     defines = ["USE_LOCAL_HEADERS"],
+    visibility = [
+        "//code/renderergl1:__pkg__",
+    ],
     deps = [
         "//code/SDL2:sdl",
         "//code/jpeg-8c:jpeg",
