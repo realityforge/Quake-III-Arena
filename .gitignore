@@ -41,7 +41,7 @@ profile
 *.opensdf
 *.suo
 
-# Bazel Build files
+# Bazel Build dirs
 ####################
 /bazel-*
 
