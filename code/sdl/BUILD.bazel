@@ -1,0 +1,15 @@
+cc_library(
+    name = "sdl_renderer",
+    srcs = [
+        "sdl_gamma.c",
+        "sdl_glimp.c",
+        "sdl_icon.h",
+    ],
+    defines = ["USE_LOCAL_HEADERS"],
+    deps = [
+        "//code/SDL2:sdl",
+        "//code/qcommon",
+        "//code/renderercommon",
+        "//code/sys:sys_local",
+    ],
+)

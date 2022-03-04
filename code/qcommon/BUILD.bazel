@@ -28,6 +28,7 @@ cc_library(
     ],
     visibility = [
         "//code/renderergl1:__pkg__",
+        "//code/sdl:__pkg__",
         "//code/sys:__pkg__",
     ],
     deps = [
