@@ -98,7 +98,9 @@ cc_library(
         "include/close_code.h",
     ],
     strip_include_prefix = "include",
-    visibility = ["//code/renderercommon:__pkg__"],
+    visibility = [
+        "//code/renderercommon:__pkg__",
+    ],
     deps = [
         ":sdl_library",
         "//code/jpeg-8c:jpeg",
