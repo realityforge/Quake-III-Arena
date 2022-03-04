@@ -25,6 +25,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define UI_API_VERSION	6
 
+#include "../qcommon/q_shared.h"
+
 typedef struct {
 	connstate_t		connState;
 	int				connectPacketCount;
