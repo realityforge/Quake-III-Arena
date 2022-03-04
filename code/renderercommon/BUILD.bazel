@@ -1,4 +1,16 @@
 cc_library(
+    name = "api",
+    hdrs = [
+        "tr_public.h",
+        "tr_types.h",
+    ],
+    visibility = [
+        "//code/renderergl1:__pkg__",
+        "//code/sdl:__pkg__",
+    ],
+)
+
+cc_library(
     name = "renderercommon",
     srcs = [
         "iqm.h",
@@ -11,8 +23,6 @@ cc_library(
         "tr_image_png.c",
         "tr_image_tga.c",
         "tr_noise.c",
-        "tr_public.h",
-        "tr_types.h",
     ],
     defines = ["USE_LOCAL_HEADERS"],
     visibility = [
@@ -20,6 +30,7 @@ cc_library(
         "//code/sdl:__pkg__",
     ],
     deps = [
+        ":api",
         "//code/SDL2:sdl",
         "//code/jpeg-8c:jpeg",
         "//code/qcommon:renderercommon_support",
