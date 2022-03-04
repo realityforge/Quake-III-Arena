@@ -16,13 +16,12 @@ NOTE: Hand tracking is enabled, but this has been done because I got too annoyed
 The scripts assume that you installed everything in the default locations. In case you want to deviate from that, the paths are in ./android/run.(sh|bat) and in Makefile.local.
 
 #### Linux
-1. Open Makefile.local and uncomment the Linux section.
+1. Update ANDROID_NDK path in Makefile.local
 2. Run ./android/run.sh
 
 #### Windows
-1. Open Makefile.local and uncomment the Windows section.
-2. Replace \<username\> with your windows username folder as it appears in C:\Users.
-3. Open git bash and run ./android/run.bat.
+1. Replace \<username\> with your windows username folder as it appears in C:\Users.
+2. Open git bash and run ./android/run.bat.
 
 # Original ioq3 README:
                    ,---------------------------------------.
