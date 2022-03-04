@@ -1,0 +1,11 @@
+cc_library(
+    name = "sys_local",
+    srcs = [
+        "sys_local.h",
+    ],
+    defines = ["USE_LOCAL_HEADERS"],
+    visibility = ["//code/sdl:__pkg__"],
+    deps = [
+        "//code/qcommon",
+    ],
+)
