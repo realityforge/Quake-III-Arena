@@ -27,4 +27,7 @@ cc_library(
         "qcommon.h",
     ],
     visibility = ["//code/renderergl1:__pkg__"],
+    deps = [
+        ":qfiles",
+    ],
 )
