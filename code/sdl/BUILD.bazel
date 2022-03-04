@@ -1,4 +1,19 @@
 cc_library(
+    name = "sdl_snd",
+    srcs = [
+        "sdl_snd.c",
+    ],
+    defines = ["USE_LOCAL_HEADERS"],
+    deps = [
+        "//code/SDL2:sdl",
+        "//code/client",
+        "//code/client:snd_api",
+        "//code/client:snd_internal_api",
+        "//code/qcommon",
+    ],
+)
+
+cc_library(
     name = "sdl_input",
     srcs = [
         "sdl_input.c",

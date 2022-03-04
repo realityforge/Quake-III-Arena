@@ -29,3 +29,16 @@ cc_library(
         "//code/qcommon:q_shared",
     ],
 )
+
+cc_library(
+    name = "snd_internal_api",
+    hdrs = [
+        "snd_local.h",
+    ],
+    visibility = ["//code/sdl:__pkg__"],
+    deps = [
+        ":snd_api",
+        "//code/qcommon",
+        "//code/qcommon:q_shared",
+    ],
+)
