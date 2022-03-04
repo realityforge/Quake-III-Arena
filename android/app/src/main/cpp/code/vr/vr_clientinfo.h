@@ -29,7 +29,6 @@ typedef struct {
     vec3_t hmdorientation_delta;
 	
     vec3_t weaponangles;
-    vec3_t last_calculated_weaponangles;
     vec3_t calculated_weaponangles; //Calculated as the angle required to hit the point that the controller is pointing at, but coming from the view origin
     vec3_t weaponangles_last; // Don't use this, it is just for calculating delta!
     vec3_t weaponangles_delta;

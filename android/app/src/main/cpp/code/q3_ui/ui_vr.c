@@ -52,10 +52,11 @@ VR OPTIONS MENU
 #define ID_DRAWHUD			    138
 #define ID_ROLLHIT			    139
 #define ID_HUDYOFFSET		    140
-#define ID_BODYSCALE		    141
-#define ID_GORE 			    142
+#define ID_SENDROLL			    141
+#define ID_LASERSIGHT		    142
+#define ID_GORE 			    143
 
-#define ID_BACK					143
+#define ID_BACK					144
 
 #define	NUM_HUDDEPTH			6
 #define	NUM_DIRECTIONMODE		2
@@ -83,7 +84,8 @@ typedef struct {
     menuradiobutton_s	scope;
     menuradiobutton_s	rollhit;
 	menuslider_s 		hudyoffset;
-    menuslider_s	    bodyscale;
+	menuradiobutton_s	sendroll;
+	menuradiobutton_s	lasersight;
 	menulist_s 			gore;
 
 	menubitmap_s		back;
@@ -121,7 +123,8 @@ static void VR_SetMenuItems( void ) {
     s_VR.scope.curvalue		    = trap_Cvar_VariableValue( "vr_weaponScope" ) != 0;
     s_VR.rollhit.curvalue		    = trap_Cvar_VariableValue( "vr_rollWhenHit" ) != 0;
     s_VR.hudyoffset.curvalue		    = trap_Cvar_VariableValue( "vr_hudYOffset" ) + 200;
-    s_VR.bodyscale.curvalue		    = trap_Cvar_VariableValue( "cg_firstPersonBodyScale" );
+	s_VR.sendroll.curvalue		    = trap_Cvar_VariableValue( "vr_sendRollToServer" ) != 0;
+	s_VR.lasersight.curvalue		    = trap_Cvar_VariableValue( "vr_lasersight" ) != 0;
 
     //GORE
     {
@@ -208,8 +211,12 @@ static void VR_Event( void* ptr, int notification ) {
         trap_Cvar_SetValue( "vr_hudYOffset", s_VR.hudyoffset.curvalue - 200);
         break;
 
-    case ID_BODYSCALE:
-        trap_Cvar_SetValue( "cg_firstPersonBodyScale", s_VR.bodyscale.curvalue);
+    case ID_SENDROLL:
+        trap_Cvar_SetValue( "vr_sendRollToServer", s_VR.sendroll.curvalue);
+        break;
+
+    case ID_LASERSIGHT:
+        trap_Cvar_SetValue( "vr_lasersight", s_VR.lasersight.curvalue);
         break;
 
 	case ID_GORE: {
@@ -322,7 +329,7 @@ static void VR_MenuInit( void ) {
 	s_VR.framer.width  	   = 256;
 	s_VR.framer.height  	   = 334;
 
-	y = 120;
+	y = 100;
     s_VR.drawhud.generic.type        = MTYPE_RADIOBUTTON;
     s_VR.drawhud.generic.name	      = "Draw HUD:";
     s_VR.drawhud.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
@@ -453,16 +460,23 @@ static void VR_MenuInit( void ) {
 	s_VR.hudyoffset.minvalue		     = 0;
 	s_VR.hudyoffset.maxvalue		     = 400;
 
-    y += BIGCHAR_HEIGHT;
-    s_VR.bodyscale.generic.type        = MTYPE_SLIDER;
-    s_VR.bodyscale.generic.name	      = "1st-Person Body Scale:";
-    s_VR.bodyscale.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
-    s_VR.bodyscale.generic.callback    = VR_Event;
-    s_VR.bodyscale.generic.id          = ID_BODYSCALE;
-    s_VR.bodyscale.generic.x	          = VR_X_POS;
-    s_VR.bodyscale.generic.y	          = y;
-	s_VR.bodyscale.minvalue		     	= 0.0f;
-	s_VR.bodyscale.maxvalue		     	= 1.0f;
+	y += BIGCHAR_HEIGHT;
+	s_VR.sendroll.generic.type        = MTYPE_RADIOBUTTON;
+	s_VR.sendroll.generic.name	      = "Send Roll Angle to Server:";
+	s_VR.sendroll.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+	s_VR.sendroll.generic.callback    = VR_Event;
+	s_VR.sendroll.generic.id          = ID_SENDROLL;
+	s_VR.sendroll.generic.x	          = VR_X_POS;
+	s_VR.sendroll.generic.y	          = y;
+
+	y += BIGCHAR_HEIGHT;
+	s_VR.lasersight.generic.type        = MTYPE_RADIOBUTTON;
+	s_VR.lasersight.generic.name	      = "Laser Sight:";
+	s_VR.lasersight.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+	s_VR.lasersight.generic.callback    = VR_Event;
+	s_VR.lasersight.generic.id          = ID_LASERSIGHT;
+	s_VR.lasersight.generic.x	          = VR_X_POS;
+	s_VR.lasersight.generic.y	          = y;
 
 	y += BIGCHAR_HEIGHT + 10;
 	s_VR.gore.generic.type		= MTYPE_SPINCONTROL;
@@ -502,7 +516,8 @@ static void VR_MenuInit( void ) {
 	Menu_AddItem( &s_VR.menu, &s_VR.scope );
 	Menu_AddItem( &s_VR.menu, &s_VR.rollhit );
 	Menu_AddItem( &s_VR.menu, &s_VR.hudyoffset );
-	Menu_AddItem( &s_VR.menu, &s_VR.bodyscale );
+	Menu_AddItem( &s_VR.menu, &s_VR.sendroll );
+	Menu_AddItem( &s_VR.menu, &s_VR.lasersight );
 	Menu_AddItem( &s_VR.menu, &s_VR.gore );
 
 	Menu_AddItem( &s_VR.menu, &s_VR.back );

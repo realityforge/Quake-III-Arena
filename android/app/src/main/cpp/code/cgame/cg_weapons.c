@@ -235,6 +235,11 @@ void CG_ConvertFromVR(vec3_t in, vec3_t offset, vec3_t out)
 		//We are connected to a multiplayer server, so make the appropriate adjustment to the view
 		//angles as we send orientation to the server that includes the weapon angles
 		float deltaYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]);
+		if (cg.snap->ps.pm_flags & PMF_FOLLOW)
+		{
+			//Don't include delta if following another player
+			deltaYaw = 0.0f;
+		}
 		float angleYaw = deltaYaw + (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]);
 		rotateAboutOrigin(vrSpace[0], vrSpace[1], angleYaw, r);
 	} else {
@@ -259,8 +264,7 @@ static void CG_CalculateWeaponPosition( vec3_t origin, vec3_t angles );
 
 void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles )
 {
-	if (cg.predictedPlayerState.pm_type == PM_SPECTATOR ||
-		cg.predictedPlayerState.pm_flags & PMF_FOLLOW)
+	if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW))
 	{
 		CG_CalculateWeaponPosition(origin, angles);
 		return;
@@ -482,45 +486,30 @@ static void CG_NailgunEjectBrass( centity_t *cent ) {
 
 /*
 ==========================
-CG_RailTrail2
+CG_LaserSight
 ==========================
 */
-void CG_RailTrail2( clientInfo_t *ci, vec3_t start, vec3_t end ) {
-    localEntity_t   *le;
-    refEntity_t     *re;
+void CG_LaserSight( vec3_t start, vec3_t end ) {
+    refEntity_t     re;
+	memset( &re, 0, sizeof( re ) );
 
-    le = CG_AllocLocalEntity();
-    re = &le->refEntity;
+	//Ensure shader is loaded
+	cgs.media.railCoreShader = trap_R_RegisterShader( "railCore" );
 
-    le->leType = LE_FADE_RGB;
-    le->startTime = cg.time;
-    le->endTime = cg.time + 15;
-    le->lifeRate = 1.0 / ( le->endTime - le->startTime );
+    re.reType = RT_LASERSIGHT;
+    re.customShader = cgs.media.railCoreShader;
 
-    re->shaderTime = cg.time / 1000.0f;
-    re->reType = RT_RAIL_CORE;
-    re->customShader = cgs.media.railCoreShader;
+    VectorCopy( start, re.origin );
+    VectorCopy( end, re.oldorigin );
 
-    VectorCopy( start, re->origin );
-    VectorCopy( end, re->oldorigin );
+    AxisClear( re.axis );
 
-//	// still allow different colors so we can tell AI shots from player shots, etc.
-    le->color[3] = 1.0f;
-    if ( ci ) {
-        if (ci->health == 1)
-        {
-            le->color[3] = (ci->handicap / 255.0f);
-        }
-        le->color[0] = ci->color1[0] * 0.75;
-        le->color[1] = ci->color1[1] * 0.75;
-        le->color[2] = ci->color1[2] * 0.75;
-    } else {
-        le->color[0] = 1;
-        le->color[1] = 0;
-        le->color[2] = 0;
-    }
+	re.shaderRGBA[0] = 0xff;
+	re.shaderRGBA[1] = 0x00;
+	re.shaderRGBA[2] = 0x00;
+	re.shaderRGBA[3] = 0x40;
 
-    AxisClear( re->axis );
+	trap_R_AddRefEntityToScene(&re);
 }
 
 /*
@@ -1712,7 +1701,18 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 	// set up gun position
 	CG_CalculateVRWeaponPosition( hand.origin, angles );
 
-	//Scale / Move gun etc
+	if (trap_Cvar_VariableValue("vr_lasersight") != 0.0f)
+	{
+		vec3_t forward, end, dir;
+		AngleVectors(angles, forward, NULL, NULL);
+		VectorMA(hand.origin, 4096, forward, end);
+		trace_t trace;
+		CG_Trace(&trace, hand.origin, NULL, NULL, end, cg.predictedPlayerState.clientNum,
+				 MASK_SOLID);
+		CG_LaserSight(hand.origin, trace.endpos);
+	}
+
+		//Scale / Move gun etc
 	float scale = 1.0f;
 	{
 		char cvar_name[64];

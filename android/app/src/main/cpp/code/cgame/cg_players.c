@@ -25,7 +25,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../vr/vr_clientinfo.h"
 
 extern vr_clientinfo_t* vr;
-extern vmCvar_t	cg_firstPersonBodyScale;
 
 char	*cg_customSoundNames[MAX_CUSTOM_SOUNDS] = {
 	"*death1.wav",
@@ -2028,6 +2027,14 @@ Float sprites over the player's head
 static void CG_PlayerSprites( centity_t *cent ) {
 	int		team;
 
+	//Put a sprite over the followed player's head
+	if ( cent->currentState.number == cg.snap->ps.clientNum &&
+			cg.renderingThirdPerson &&
+			cg.snap->ps.pm_flags & PMF_FOLLOW) {
+		CG_PlayerFloatSprite( cent, cgs.media.friendShader );
+		return;
+	}
+
 	if ( cent->currentState.eFlags & EF_CONNECTION ) {
 		CG_PlayerFloatSprite( cent, cgs.media.connectionShader );
 		return;
@@ -2358,20 +2365,11 @@ void CG_Player( centity_t *cent ) {
 		return;
 	}
 
-	//Are we drawing the first person body
-	qboolean firstPersonBody = ( cent->currentState.number == cg.snap->ps.clientNum) &&
-	        (!cg.renderingThirdPerson) &&
-	        (cg_firstPersonBodyScale.value > 0.0f) &&
-			( cgs.gametype != GT_SINGLE_PLAYER );
-
     // get the player model information
 	renderfx = 0;
 	if ( cent->currentState.number == cg.snap->ps.clientNum) {
 		if (!cg.renderingThirdPerson) {
-			if (cg_firstPersonBodyScale.value == 0 ||
-					cgs.gametype == GT_SINGLE_PLAYER) {
-				renderfx = RF_THIRD_PERSON;            // only draw in mirrors
-			}
+			renderfx = RF_THIRD_PERSON;            // only draw in mirrors
 		} else {
 			if (cg_cameraMode.integer) {
 				return;
@@ -2385,25 +2383,8 @@ void CG_Player( centity_t *cent ) {
 	memset( &head, 0, sizeof(head) );
 
 	// get the rotation information
-	if (firstPersonBody)
-	{
-		vec3_t angles;
-		VectorClear(angles);
-		angles[YAW] = cg.refdefViewAngles[YAW] + vr->hmdorientation[YAW] - vr->weaponangles[YAW];
-		AnglesToAxis(angles, legs.axis);
-        VectorScale( legs.axis[0], cg_firstPersonBodyScale.value, legs.axis[0] );
-        VectorScale( legs.axis[1], cg_firstPersonBodyScale.value, legs.axis[1] );
-        VectorScale( legs.axis[2], cg_firstPersonBodyScale.value, legs.axis[2] );
-		AnglesToAxis(vec3_origin, torso.axis);
-        VectorScale( torso.axis[0], cg_firstPersonBodyScale.value, torso.axis[0] );
-        VectorScale( torso.axis[1], cg_firstPersonBodyScale.value, torso.axis[1] );
-        VectorScale( torso.axis[2], cg_firstPersonBodyScale.value, torso.axis[2] );
-		//Don't care about head
-	}
-	else {
-		CG_PlayerAngles(cent, legs.axis, torso.axis, head.axis);
-	}
-	
+	CG_PlayerAngles(cent, legs.axis, torso.axis, head.axis);
+
 	// get the animation state (after rotation, to allow feet shuffle)
 	CG_PlayerAnimation( cent, &legs.oldframe, &legs.frame, &legs.backlerp,
 		 &torso.oldframe, &torso.frame, &torso.backlerp );
@@ -2689,10 +2670,7 @@ void CG_Player( centity_t *cent ) {
 	head.shadowPlane = shadowPlane;
 	head.renderfx = renderfx;
 
-	if (!firstPersonBody)
-	{
-		CG_AddRefEntityWithPowerups(&head, &cent->currentState, ci->team);
-	}
+	CG_AddRefEntityWithPowerups(&head, &cent->currentState, ci->team);
 
 #ifdef MISSIONPACK
 	CG_BreathPuffs(cent, &head);
@@ -2703,9 +2681,7 @@ void CG_Player( centity_t *cent ) {
 	//
 	// add the gun / barrel / flash
 	//
-	if (!firstPersonBody) {
-		CG_AddPlayerWeapon(&torso, NULL, cent, ci->team);
-	}
+	CG_AddPlayerWeapon(&torso, NULL, cent, ci->team);
 
 	// add powerups floating behind the player
 	CG_PlayerPowerups( cent, &torso );

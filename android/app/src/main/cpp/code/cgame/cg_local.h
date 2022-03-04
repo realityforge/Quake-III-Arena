@@ -527,6 +527,9 @@ typedef struct {
 	refdef_t	refdef;
 	vec3_t		refdefViewAngles;		// will be converted to refdef.viewaxis
 
+	// view origin in VR thirdperson
+	vec3_t 		vr_vieworigin;
+
 	// zoom key
 	qboolean	zoomed;
 	int			zoomTime;
@@ -1396,6 +1399,7 @@ void CG_GrappleTrail( centity_t *ent, const weaponInfo_t *wi );
 void CG_AddViewWeapon (playerState_t *ps);
 void CG_AddPlayerWeapon( refEntity_t *parent, playerState_t *ps, centity_t *cent, int team );
 void CG_DrawWeaponSelect( void );
+void CG_LaserSight( vec3_t start, vec3_t end );
 
 void CG_OutOfAmmoChange( void );	// should this be in pmove?
 

@@ -32,6 +32,7 @@ cvar_t *vr_weaponScope = NULL;
 cvar_t *vr_rollWhenHit = NULL;
 cvar_t *vr_hudYOffset = NULL;
 cvar_t *vr_sendRollToServer = NULL;
+cvar_t *vr_lasersight = NULL;
 
 engine_t* VR_Init( ovrJava java )
 {
@@ -64,7 +65,8 @@ void VR_InitCvars( void )
     vr_weaponScope = Cvar_Get ("vr_weaponScope", "1", CVAR_ARCHIVE);
 	vr_rollWhenHit = Cvar_Get ("vr_rollWhenHit", "0", CVAR_ARCHIVE);
 	vr_hudYOffset = Cvar_Get ("vr_hudYOffset", "0", CVAR_ARCHIVE);
-	vr_sendRollToServer = Cvar_Get ("vr_sendRollToServer", "0", CVAR_ARCHIVE);
+	vr_sendRollToServer = Cvar_Get ("vr_sendRollToServer", "1", CVAR_ARCHIVE);
+	vr_lasersight = Cvar_Get ("vr_lasersight", "0", CVAR_ARCHIVE);
 
 	// Values are:  scale,right,up,forward,pitch,yaw,roll
 	// VALUES PROVIDED BY SkillFur - Thank-you!

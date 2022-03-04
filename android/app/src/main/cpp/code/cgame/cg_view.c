@@ -226,17 +226,35 @@ CG_OffsetVRThirdPersonView
 */
 static void CG_OffsetVRThirdPersonView( void ) {
     float scale = 1.0f;
-
-	if (cg.predictedPlayerState.pm_type == PM_SPECTATOR ||
-            (cg.predictedPlayerState.pm_flags & PMF_FOLLOW))
+    
+ 	if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW))
 	{
 		scale *= SPECTATOR_WORLDSCALE_MULTIPLIER;
+		
+		//Check to see if the followed player has moved far enough away to mean we should update our location
+		vec3_t currentOrigin;
+		VectorCopy(cg.refdef.vieworg, currentOrigin);
+		VectorSubtract(currentOrigin, cg.vr_vieworigin, currentOrigin);
+		currentOrigin[2] = 0;
+		if (VectorLength(currentOrigin) > 400)
+		{
+			VectorCopy(cg.refdef.vieworg, cg.vr_vieworigin);
+
+			//Move behind the player
+			vec3_t angles;
+			vec3_t		forward, right, up;
+			VectorCopy(vr->clientviewangles, angles);
+			angles[PITCH] = 0;
+			AngleVectors( angles, forward, right, up );
+			VectorMA( cg.vr_vieworigin, -60, forward, cg.vr_vieworigin );
+		}
 	}
 	else if (( cg.predictedPlayerState.stats[STAT_HEALTH] <= 0 ) &&
         ( cg.predictedPlayerState.pm_type != PM_INTERMISSION ))
     {
         scale *= DEATH_WORLDSCALE_MULTIPLIER;
-    }
+		VectorCopy(cg.refdef.vieworg, cg.vr_vieworigin);
+	}
 
 	{
 		vec3_t position;
@@ -244,7 +262,7 @@ static void CG_OffsetVRThirdPersonView( void ) {
 		CG_ConvertFromVR(position, NULL, position);
         position[2] = 0;
 		VectorScale(position, scale, position);
-		VectorAdd(cg.refdef.vieworg, position, cg.refdef.vieworg);
+		VectorAdd(cg.vr_vieworigin, position, cg.refdef.vieworg);
 	}
 }
 
@@ -628,7 +646,6 @@ CG_CalcViewValues
 Sets cg.refdef view values
 ===============
 */
-void CG_RailTrail2( clientInfo_t *ci, vec3_t start, vec3_t end );
 static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 	playerState_t	*ps;
 
@@ -646,8 +663,9 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 	//HACK!! - should change this to a renderer function call
 	//Indicate to renderer whether we are in deathcam mode, We don't want sky in death cam mode
 	trap_Cvar_Set( "vr_noSkybox", (((ps->stats[STAT_HEALTH] <= 0) &&
-		( ps->pm_type != PM_INTERMISSION )) || ps->pm_type == PM_SPECTATOR ||
-			(ps->pm_flags & PMF_FOLLOW)) ? "1" : "0" );
+                                    ( ps->pm_type != PM_INTERMISSION )) ||
+                                   cg.demoPlayback ||
+                                   (cg.snap->ps.pm_flags & PMF_FOLLOW) ? "1" : "0" ));
 
 	// intermission view
 	static float hmdYaw = 0;
@@ -702,23 +720,26 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 		}
 	}
 
-	if (cg.snap->ps.stats[STAT_HEALTH] <= 0 ||
-            ps->pm_type == PM_SPECTATOR ||
-            ps->pm_flags & PMF_FOLLOW) {
+	if (( cg.predictedPlayerState.stats[STAT_HEALTH] <= 0 ) &&
+		( cg.predictedPlayerState.pm_type != PM_INTERMISSION ) ||
+            ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW)))
+	{
 	    //If dead, or spectating, view the map from above
         CG_OffsetVRThirdPersonView();
-    } else if ( cg.renderingThirdPerson ) {
+    }
+    else if ( cg.renderingThirdPerson )
+    {
 		// back away from character
 		CG_OffsetThirdPersonView();
-	} else {
+	}
+	else
+	{
 		// offset for local bobbing and kicks
 		CG_OffsetFirstPersonView();
 	}
 
     if (!cgs.localServer && stereoView == STEREO_LEFT)
     {
-        VectorCopy(vr->calculated_weaponangles, vr->last_calculated_weaponangles);
-
         vec3_t weaponorigin, weaponangles;
         CG_CalculateVRWeaponPosition(weaponorigin, weaponangles);
 
@@ -731,9 +752,7 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 
         if (cg_debugWeaponAiming.integer)
         {
-            clientInfo_t ci;
-            VectorSet(ci.color1, 1, 0, 0); // Forward is red
-            CG_RailTrail2(&ci, weaponorigin, trace.endpos);
+            CG_LaserSight(weaponorigin, trace.endpos);
         }
 
         {
@@ -758,9 +777,7 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 
             if (cg_debugWeaponAiming.integer)
             {
-                clientInfo_t ci;
-                VectorSet(ci.color1, 0, 1, 0);
-                CG_RailTrail2(&ci, cg.refdef.vieworg, trace2.endpos);
+                CG_LaserSight(cg.refdef.vieworg, trace2.endpos);
             }
 
             //convert to real-world angles - should be very close to real weapon angles
@@ -780,7 +797,7 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
             angles[ROLL] = vr->hmdorientation[ROLL];
             AnglesToAxis( angles, cg.refdef.viewaxis );
 		}
-		else if (ps->pm_flags & PMF_FOLLOW)
+		else if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW))
 		{
 			//If we're following someone,
 			vec3_t angles;
@@ -794,8 +811,8 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 			//angles as we send orientation to the server that includes the weapon angles
 			vec3_t angles;
 			VectorCopy(vr->hmdorientation, angles);
-			angles[YAW] =
-					(cg.refdefViewAngles[YAW] + vr->hmdorientation[YAW]) - vr->last_calculated_weaponangles[YAW];
+            float deltaYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]);
+            angles[YAW] = deltaYaw + vr->clientviewangles[YAW];
 			AnglesToAxis(angles, cg.refdef.viewaxis);
 		}
     } else {
@@ -805,7 +822,17 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 			angles[PITCH] = vr->weaponangles[PITCH];
 			angles[YAW] = (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]) + vr->weaponangles[YAW];
 			AnglesToAxis(angles, cg.refdef.viewaxis);
-		} else {
+		}
+		else if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW))
+		{
+			//If we're following someone,
+			vec3_t angles;
+			VectorCopy(vr->hmdorientation, angles);
+			angles[YAW] = vr->clientviewangles[YAW];
+			AnglesToAxis(angles, cg.refdef.viewaxis);
+		}
+		else 
+		{
 			AnglesToAxis(cg.refdefViewAngles, cg.refdef.viewaxis);
 		}
     }
@@ -927,7 +954,7 @@ void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demo
 
 	// decide on third person view
 	cg.renderingThirdPerson = cg.predictedPlayerState.pm_type == PM_SPECTATOR ||
-			cg.predictedPlayerState.pm_flags & PMF_FOLLOW ||
+            cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW) ||
 			cg_thirdPerson.integer;
 
 	// build cg.refdef

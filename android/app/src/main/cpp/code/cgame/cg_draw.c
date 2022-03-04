@@ -2726,8 +2726,7 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 	VectorCopy( cg.refdef.vieworg, baseOrg );
 
 	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
-    if (cg.snap->ps.pm_type == PM_SPECTATOR ||
-			(cg.snap->ps.pm_flags & PMF_FOLLOW))
+    if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW))
     {
         worldscale *= SPECTATOR_WORLDSCALE_MULTIPLIER;
     }
@@ -2749,7 +2748,10 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 		//If connected to external server, allow some amount of faked positional tracking
 		cg.refdef.vieworg[2] -= PLAYER_HEIGHT;
 		cg.refdef.vieworg[2] += vr->hmdposition[1] * worldscale;
-		if (cg.snap->ps.stats[STAT_HEALTH] > 0)
+		if (cg.snap->ps.stats[STAT_HEALTH] > 0 &&
+                //Don't use fake positional if following another player  - this is handled in  the
+                //VR third person code
+		    !( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW)))
 		{
 			vec3_t pos, hmdposition, vieworg;
 			VectorClear(pos);
