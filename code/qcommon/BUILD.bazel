@@ -3,15 +3,30 @@ cc_library(
     srcs = [
         "puff.c",
         "q_math.c",
-        "q_platform.h",
         "q_shared.c",
-        "surfaceflags.h",
     ],
     hdrs = [
         "puff.h",
-        "q_shared.h",
     ],
     visibility = ["//code/renderercommon:__pkg__"],
+    deps = [
+        ":q_shared",
+    ],
+)
+
+cc_library(
+    name = "q_shared",
+    hdrs = [
+        "q_platform.h",
+        "q_shared.h",
+        "surfaceflags.h",
+    ],
+    visibility = [
+        "//code/cgame:__pkg__",
+        "//code/client:__pkg__",
+        "//code/game:__pkg__",
+        "//code/ui:__pkg__",
+    ],
 )
 
 cc_library(
@@ -27,11 +42,13 @@ cc_library(
         "qcommon.h",
     ],
     visibility = [
+        "//code/client:__pkg__",
         "//code/renderergl1:__pkg__",
         "//code/sdl:__pkg__",
         "//code/sys:__pkg__",
     ],
     deps = [
+        ":q_shared",
         ":qfiles",
     ],
 )

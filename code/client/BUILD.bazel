@@ -1,0 +1,31 @@
+cc_library(
+    name = "client",
+    srcs = [
+        "keycodes.h",
+        "keys.h",
+    ],
+    hdrs = [
+        "client.h",
+    ],
+    defines = ["USE_LOCAL_HEADERS"],
+    visibility = ["//code/sdl:__pkg__"],
+    deps = [
+        "//code/cgame:api",
+        "//code/game:api",
+        "//code/opus-1.2.1:opus",
+        "//code/qcommon",
+        "//code/renderercommon:api",
+        "//code/ui:api",
+    ],
+)
+
+cc_library(
+    name = "snd_api",
+    hdrs = [
+        "snd_public.h",
+    ],
+    visibility = ["//code/sdl:__pkg__"],
+    deps = [
+        "//code/qcommon:q_shared",
+    ],
+)
