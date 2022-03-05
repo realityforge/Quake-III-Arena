@@ -405,12 +405,6 @@ extern void UI_PreferencesMenu( void );
 extern void Preferences_Cache( void );
 
 //
-// ui_specifyleague.c
-//
-extern void UI_SpecifyLeagueMenu( void );
-extern void SpecifyLeague_Cache( void );
-
-//
 // ui_specifyserver.c
 //
 extern void UI_SpecifyServerMenu( void );

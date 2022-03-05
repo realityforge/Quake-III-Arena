@@ -3291,7 +3291,6 @@
 				012ADADE00868211C697A10E,
 				012ADADF00868211C697A10E,
 				012ADAE000868211C697A10E,
-				012ADAE100868211C697A10E,
 				012ADAE200868211C697A10E,
 				012ADAE300868211C697A10E,
 				012ADAE400868211C697A10E,
@@ -3601,14 +3600,6 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.c;
 			path = ui_sparena.c;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		012ADAE100868211C697A10E = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.c;
-			path = ui_specifyleague.c;
 			refType = 4;
 			sourceTree = "<group>";
 		};
