@@ -3269,7 +3269,6 @@
 				012ADAC800868211C697A10E,
 				012ADAC900868211C697A10E,
 				012ADACA00868211C697A10E,
-				012ADACB00868211C697A10E,
 				012ADACC00868211C697A10E,
 				012ADACD00868211C697A10E,
 				012ADACE00868211C697A10E,
@@ -3281,14 +3280,11 @@
 				012ADAD400868211C697A10E,
 				012ADAD500868211C697A10E,
 				012ADAD600868211C697A10E,
-				012ADAD700868211C697A10E,
-				012ADAD800868211C697A10E,
 				012ADAD900868211C697A10E,
 				012ADADA00868211C697A10E,
 				012ADADB00868211C697A10E,
 				012ADADC00868211C697A10E,
 				012ADADD00868211C697A10E,
-				012ADADE00868211C697A10E,
 				012ADADF00868211C697A10E,
 				012ADAE000868211C697A10E,
 				012ADAE200868211C697A10E,
@@ -3427,14 +3423,6 @@
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		012ADACB00868211C697A10E = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.c;
-			path = ui_login.c;
-			refType = 4;
-			sourceTree = "<group>";
-		};
 		012ADACC00868211C697A10E = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
@@ -3523,22 +3511,6 @@
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		012ADAD700868211C697A10E = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.c;
-			path = ui_rankings.c;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		012ADAD800868211C697A10E = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.c;
-			path = ui_rankstatus.c;
-			refType = 4;
-			sourceTree = "<group>";
-		};
 		012ADAD900868211C697A10E = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
@@ -3576,14 +3548,6 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.c;
 			path = ui_setup.c;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		012ADADE00868211C697A10E = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.c;
-			path = ui_signup.c;
 			refType = 4;
 			sourceTree = "<group>";
 		};

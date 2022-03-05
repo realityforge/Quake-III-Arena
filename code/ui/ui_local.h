@@ -1082,25 +1082,6 @@ void UI_SPUnlockMedals_f( void );
 
 void UI_InitGameinfo( void );
 
-//
-// ui_login.c
-//
-void Login_Cache( void );
-void UI_LoginMenu( void );
-
-//
-// ui_signup.c
-//
-void Signup_Cache( void );
-void UI_SignupMenu( void );
-
-//
-// ui_rankstatus.c
-//
-void RankStatus_Cache( void );
-void UI_RankStatusMenu( void );
-
-
 // new ui 
 
 #define ASSET_BACKGROUND "uiBackground"
