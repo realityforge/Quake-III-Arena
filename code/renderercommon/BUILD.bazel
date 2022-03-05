@@ -6,6 +6,7 @@ cc_library(
     ],
     visibility = [
         "//code/client:__pkg__",
+        "//code/q3_ui:__pkg__",
         "//code/renderergl1:__pkg__",
         "//code/sdl:__pkg__",
     ],

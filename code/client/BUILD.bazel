@@ -8,7 +8,10 @@ cc_library(
         "client.h",
     ],
     defines = ["USE_LOCAL_HEADERS"],
-    visibility = ["//code/sdl:__pkg__"],
+    visibility = [
+        "//code/q3_ui:__pkg__",
+        "//code/sdl:__pkg__",
+    ],
     deps = [
         "//code/cgame:api",
         "//code/game:api",

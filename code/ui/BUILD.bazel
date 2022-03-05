@@ -5,6 +5,7 @@ cc_library(
     ],
     visibility = [
         "//code/client:__pkg__",
+        "//code/q3_ui:__pkg__",
     ],
     deps = [
         "//code/qcommon:q_shared",
