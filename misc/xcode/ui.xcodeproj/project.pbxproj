@@ -98,17 +98,13 @@
 		A137C8F8258DC8D1009AC639 /* ui_local.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ui_local.h; sourceTree = "<group>"; };
 		A137C8F9258DC8D1009AC639 /* ui_specifyserver.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_specifyserver.c; sourceTree = "<group>"; };
 		A137C8FA258DC8D1009AC639 /* ui_cinematics.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_cinematics.c; sourceTree = "<group>"; };
-		A137C8FB258DC8D1009AC639 /* ui_rankstatus.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_rankstatus.c; sourceTree = "<group>"; };
 		A137C8FC258DC8D1009AC639 /* ui_qmenu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_qmenu.c; sourceTree = "<group>"; };
 		A137C8FD258DC8D1009AC639 /* ui_menu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_menu.c; sourceTree = "<group>"; };
 		A137C8FE258DC8D1009AC639 /* ui_mods.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_mods.c; sourceTree = "<group>"; };
-		A137C8FF258DC8D1009AC639 /* ui_signup.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_signup.c; sourceTree = "<group>"; };
-		A137C900258DC8D1009AC639 /* ui_rankings.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_rankings.c; sourceTree = "<group>"; };
 		A137C901258DC8D1009AC639 /* ui_cdkey.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_cdkey.c; sourceTree = "<group>"; };
 		A137C902258DC8D1009AC639 /* ui_atoms.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_atoms.c; sourceTree = "<group>"; };
 		A137C903258DC8D1009AC639 /* ui_video.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_video.c; sourceTree = "<group>"; };
 		A137C904258DC8D1009AC639 /* ui_players.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_players.c; sourceTree = "<group>"; };
-		A137C905258DC8D1009AC639 /* ui_specifyleague.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_specifyleague.c; sourceTree = "<group>"; };
 		A137C906258DC8D1009AC639 /* ui_splevel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_splevel.c; sourceTree = "<group>"; };
 		A137C907258DC8D1009AC639 /* ui_removebots.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_removebots.c; sourceTree = "<group>"; };
 		A137C908258DC8D1009AC639 /* ui_addbots.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_addbots.c; sourceTree = "<group>"; };
@@ -121,7 +117,6 @@
 		A137C90F258DC8D1009AC639 /* ui_playermodel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_playermodel.c; sourceTree = "<group>"; };
 		A137C910258DC8D1009AC639 /* ui_demo2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_demo2.c; sourceTree = "<group>"; };
 		A137C911258DC8D1009AC639 /* ui_team.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_team.c; sourceTree = "<group>"; };
-		A137C912258DC8D1009AC639 /* ui_login.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_login.c; sourceTree = "<group>"; };
 		A137C913258DC8D1009AC639 /* ui_display.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_display.c; sourceTree = "<group>"; };
 		A137C914258DC8D1009AC639 /* ui_mfield.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_mfield.c; sourceTree = "<group>"; };
 		A137C915258DC8D1009AC639 /* ui_startserver.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_startserver.c; sourceTree = "<group>"; };
@@ -252,7 +247,6 @@
 				A137C8F6258DC8D1009AC639 /* ui_ingame.c */,
 				A137C90B258DC8D1009AC639 /* ui_loadconfig.c */,
 				A137C8F8258DC8D1009AC639 /* ui_local.h */,
-				A137C912258DC8D1009AC639 /* ui_login.c */,
 				A137C8F2258DC8D1009AC639 /* ui_main.c */,
 				A137C8FD258DC8D1009AC639 /* ui_menu.c */,
 				A137C914258DC8D1009AC639 /* ui_mfield.c */,
@@ -264,17 +258,13 @@
 				A137C90E258DC8D1009AC639 /* ui_playersettings.c */,
 				A137C919258DC8D1009AC639 /* ui_preferences.c */,
 				A137C8FC258DC8D1009AC639 /* ui_qmenu.c */,
-				A137C900258DC8D1009AC639 /* ui_rankings.c */,
-				A137C8FB258DC8D1009AC639 /* ui_rankstatus.c */,
 				A137C907258DC8D1009AC639 /* ui_removebots.c */,
 				A137C8F0258DC8D1009AC639 /* ui_saveconfig.c */,
 				A137C91A258DC8D1009AC639 /* ui_serverinfo.c */,
 				A137C8F3258DC8D1009AC639 /* ui_servers2.c */,
 				A137C8EE258DC8D1009AC639 /* ui_setup.c */,
-				A137C8FF258DC8D1009AC639 /* ui_signup.c */,
 				A137C8F1258DC8D1009AC639 /* ui_sound.c */,
 				A137C90C258DC8D1009AC639 /* ui_sparena.c */,
-				A137C905258DC8D1009AC639 /* ui_specifyleague.c */,
 				A137C8F9258DC8D1009AC639 /* ui_specifyserver.c */,
 				A137C906258DC8D1009AC639 /* ui_splevel.c */,
 				A137C916258DC8D1009AC639 /* ui_sppostgame.c */,
