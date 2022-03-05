@@ -824,11 +824,6 @@ void UI_SetActiveMenu( uiMenuCommand_t menu ) {
 		UI_ConfirmMenu( "Bad CD Key", 0, NeedCDKeyAction );
 		return;
 	case UIMENU_INGAME:
-		/*
-		//GRank
-		UI_RankingsMenu();
-		return;
-		*/
 		trap_Cvar_Set( "cl_paused", "1" );
 		UI_InGameMenu();
 		return;
