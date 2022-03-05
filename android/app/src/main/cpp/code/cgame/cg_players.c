@@ -2030,7 +2030,7 @@ static void CG_PlayerSprites( centity_t *cent ) {
 	//Put a sprite over the followed player's head
 	if ( cent->currentState.number == cg.snap->ps.clientNum &&
 			cg.renderingThirdPerson &&
-			cg.snap->ps.pm_flags & PMF_FOLLOW) {
+			(cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON)) {
 		CG_PlayerFloatSprite( cent, cgs.media.friendShader );
 		return;
 	}

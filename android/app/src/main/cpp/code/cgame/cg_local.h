@@ -77,7 +77,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define	NUM_CROSSHAIRS		10
 
 //multiplying size you go to when dead looking down on the match
-#define DEATH_WORLDSCALE_MULTIPLIER			40
+#define DEATH_WORLDSCALE_MULTIPLIER			30
 #define SPECTATOR_WORLDSCALE_MULTIPLIER		10
 
 #define PLAYER_HEIGHT           48

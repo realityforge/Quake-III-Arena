@@ -71,6 +71,7 @@ extern cvar_t *vr_heightAdjust;
 extern cvar_t *vr_twoHandedWeapons;
 extern cvar_t *vr_refreshrate;
 extern cvar_t *vr_weaponScope;
+extern cvar_t *vr_hapticIntensity;
 
 jclass callbackClass;
 jmethodID android_haptic_event;
@@ -206,7 +207,7 @@ void VR_Vibrate( int duration, int chan, float intensity )
                 return;
 
             vibration_channel_duration[channel-1] = duration;
-            vibration_channel_intensity[channel-1] = intensity;
+            vibration_channel_intensity[channel-1] = intensity * vr_hapticIntensity->value;
         }
     }
 }
@@ -268,9 +269,14 @@ static void IN_SendButtonAction(const char* action, qboolean pressed)
 
 void VR_HapticEvent(const char* event, int position, int flags, int intensity, float angle, float yHeight )
 {
+    if (vr_hapticIntensity->value == 0.0f)
+    {
+        return;
+    }
+
     engine_t* engine = VR_GetEngine();
     jstring StringArg1 = (*(engine->java.Env))->NewStringUTF(engine->java.Env, event);
-    (*(engine->java.Env))->CallVoidMethod(engine->java.Env, engine->java.ActivityObject, android_haptic_event, StringArg1, position, flags, intensity, angle, yHeight);
+    (*(engine->java.Env))->CallVoidMethod(engine->java.Env, engine->java.ActivityObject, android_haptic_event, StringArg1, position, flags, intensity * vr_hapticIntensity->value, angle, yHeight);
 
     //Controller Haptic Support
     int weaponFireChannel = vr.weapon_stabilised ? 3 : (vr_righthanded->integer ? 2 : 1);
@@ -714,14 +720,21 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
     //Jump
     if ((buttons & ovrButton_A) && !(controller->buttons & ovrButton_A))
     {
-        if (IN_GetButtonAction("A", action))
+        if (cl.snap.ps.pm_flags & PMF_FOLLOW)
         {
-            IN_SendButtonAction(action, qtrue);
+            Cbuf_AddText("cmd team spectator\n");
+        }
+        else
+        {
+            if (IN_GetButtonAction("A", action))
+            {
+                IN_SendButtonAction(action, qtrue);
+            }
         }
     }
     else if (!(buttons & ovrButton_A) && (controller->buttons & ovrButton_A))
     {
-        if (IN_GetButtonAction("A", action))
+        if (IN_GetButtonAction("A", action) && !(cl.snap.ps.pm_flags & PMF_FOLLOW))
         {
             IN_SendButtonAction(action, qfalse);
         }
@@ -741,17 +754,28 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
     }
 
     //X default is "use item"
-	if ((buttons & ovrButton_X) && !(controller->buttons & ovrButton_X)) {
-        if (IN_GetButtonAction("X", action))
+    if ((buttons & ovrButton_X) && !(controller->buttons & ovrButton_X))
+    {
+        if (cl.snap.ps.pm_flags & PMF_FOLLOW)
         {
-            IN_SendButtonAction(action, qtrue);
+            //Switch follow mode
+            vr.follow_mode = 1 - vr.follow_mode;
         }
-	} else if (!(buttons & ovrButton_X) && (controller->buttons & ovrButton_X)) {
-        if (IN_GetButtonAction("X", action))
+        else
+        {
+            if (IN_GetButtonAction("X", action))
+            {
+                IN_SendButtonAction(action, qtrue);
+            }
+        }
+    }
+    else if (!(buttons & ovrButton_X) && (controller->buttons & ovrButton_X))
+    {
+        if (IN_GetButtonAction("X", action) && !(cl.snap.ps.pm_flags & PMF_FOLLOW))
         {
             IN_SendButtonAction(action, qfalse);
         }
-	}
+    }
 
     //Y default is Gesture
     if ((buttons & ovrButton_Y) && !(controller->buttons & ovrButton_Y)) {

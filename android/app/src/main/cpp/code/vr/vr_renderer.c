@@ -268,7 +268,8 @@ void VR_DrawFrame( engine_t* engine ) {
     int eyeW, eyeH;
     VR_GetResolution(engine, &eyeW, &eyeH);
 
-    if (VR_useScreenLayer())
+    if (VR_useScreenLayer() ||
+			(cl.snap.ps.pm_flags & PMF_FOLLOW && vr.follow_mode == VRFM_FIRSTPERSON))
 	{
 		static ovrLayer_Union2 cylinderLayer;
 		memset( &cylinderLayer, 0, sizeof( ovrLayer_Union2 ) );

@@ -1714,6 +1714,7 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 
 		//Scale / Move gun etc
 	float scale = 1.0f;
+    if (!(cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_FIRSTPERSON))
 	{
 		char cvar_name[64];
 		Com_sprintf(cvar_name, sizeof(cvar_name), "vr_weapon_adjustment_%i", ps->weapon);

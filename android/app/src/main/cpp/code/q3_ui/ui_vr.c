@@ -55,8 +55,9 @@ VR OPTIONS MENU
 #define ID_SENDROLL			    141
 #define ID_LASERSIGHT		    142
 #define ID_GORE 			    143
+#define ID_HAPTICINTENSITY	    144
 
-#define ID_BACK					144
+#define ID_BACK					145
 
 #define	NUM_HUDDEPTH			6
 #define	NUM_DIRECTIONMODE		2
@@ -86,6 +87,7 @@ typedef struct {
 	menuslider_s 		hudyoffset;
 	menuradiobutton_s	sendroll;
 	menuradiobutton_s	lasersight;
+	menuslider_s 		hapticintensity;
 	menulist_s 			gore;
 
 	menubitmap_s		back;
@@ -217,6 +219,10 @@ static void VR_Event( void* ptr, int notification ) {
 
     case ID_LASERSIGHT:
         trap_Cvar_SetValue( "vr_lasersight", s_VR.lasersight.curvalue);
+        break;
+
+    case ID_HAPTICINTENSITY:
+        trap_Cvar_SetValue( "vr_hapticIntensity", s_VR.hapticintensity.curvalue);
         break;
 
 	case ID_GORE: {
@@ -478,6 +484,17 @@ static void VR_MenuInit( void ) {
 	s_VR.lasersight.generic.x	          = VR_X_POS;
 	s_VR.lasersight.generic.y	          = y;
 
+	y += BIGCHAR_HEIGHT;
+	s_VR.hapticintensity.generic.type	     = MTYPE_SLIDER;
+	s_VR.hapticintensity.generic.x			 = VR_X_POS;
+	s_VR.hapticintensity.generic.y			 = y;
+	s_VR.hapticintensity.generic.flags	 	= QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+	s_VR.hapticintensity.generic.name	     = "Haptic Intensity:";
+	s_VR.hapticintensity.generic.id 	     	= ID_HAPTICINTENSITY;
+	s_VR.hapticintensity.generic.callback  	= VR_Event;
+	s_VR.hapticintensity.minvalue		     = 0;
+	s_VR.hapticintensity.maxvalue		     = 1.0;
+
 	y += BIGCHAR_HEIGHT + 10;
 	s_VR.gore.generic.type		= MTYPE_SPINCONTROL;
 	s_VR.gore.generic.flags		= QMF_PULSEIFFOCUS|QMF_SMALLFONT;
@@ -518,6 +535,7 @@ static void VR_MenuInit( void ) {
 	Menu_AddItem( &s_VR.menu, &s_VR.hudyoffset );
 	Menu_AddItem( &s_VR.menu, &s_VR.sendroll );
 	Menu_AddItem( &s_VR.menu, &s_VR.lasersight );
+	Menu_AddItem( &s_VR.menu, &s_VR.hapticintensity );
 	Menu_AddItem( &s_VR.menu, &s_VR.gore );
 
 	Menu_AddItem( &s_VR.menu, &s_VR.back );

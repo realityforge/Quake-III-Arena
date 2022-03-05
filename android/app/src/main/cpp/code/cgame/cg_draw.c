@@ -2725,33 +2725,43 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 	vec3_t baseOrg;
 	VectorCopy( cg.refdef.vieworg, baseOrg );
 
+	float heightOffset = 0.0f;
 	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
-    if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW))
+    if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON))
     {
         worldscale *= SPECTATOR_WORLDSCALE_MULTIPLIER;
+        //Just move camera down about 20cm
+        heightOffset = -0.2f;
     }
 	else if (( cg.snap->ps.stats[STAT_HEALTH] <= 0 ) &&
 			 ( cg.snap->ps.pm_type != PM_INTERMISSION ))
 	{
 		worldscale *= DEATH_WORLDSCALE_MULTIPLIER;
+		//Just move camera down about 50cm
+		heightOffset = -0.5f;
 	}
+
 
 	float ipd = trap_Cvar_VariableValue("r_stereoSeparation") / 1000.0f;
 	float separation = worldscale * (ipd / 2) * (stereoView == STEREO_LEFT ? -1.0f : 1.0f);
 
-	if (cgs.localServer) {
-		cg.refdef.vieworg[2] -= PLAYER_HEIGHT;
-		cg.refdef.vieworg[2] += vr->hmdposition[1] * worldscale;
-	}
-	else
+	if (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_FIRSTPERSON)
+    {
+	    //Do nothing to view height if we are following in first person
+    }
+    else
+    {
+        cg.refdef.vieworg[2] -= PLAYER_HEIGHT;
+        cg.refdef.vieworg[2] += (vr->hmdposition[1] + heightOffset) * worldscale;
+    }
+
+    if (!cgs.localServer)
 	{
-		//If connected to external server, allow some amount of faked positional tracking
-		cg.refdef.vieworg[2] -= PLAYER_HEIGHT;
-		cg.refdef.vieworg[2] += vr->hmdposition[1] * worldscale;
+		//If connected to a remote server, allow some amount of faked positional tracking
 		if (cg.snap->ps.stats[STAT_HEALTH] > 0 &&
                 //Don't use fake positional if following another player  - this is handled in  the
                 //VR third person code
-		    !( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW)))
+		    !( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON)))
 		{
 			vec3_t pos, hmdposition, vieworg;
 			VectorClear(pos);

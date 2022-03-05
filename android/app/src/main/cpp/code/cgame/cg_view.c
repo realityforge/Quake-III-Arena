@@ -227,16 +227,15 @@ CG_OffsetVRThirdPersonView
 static void CG_OffsetVRThirdPersonView( void ) {
     float scale = 1.0f;
     
- 	if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW))
+ 	if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON))
 	{
 		scale *= SPECTATOR_WORLDSCALE_MULTIPLIER;
 		
 		//Check to see if the followed player has moved far enough away to mean we should update our location
-		vec3_t currentOrigin;
-		VectorCopy(cg.refdef.vieworg, currentOrigin);
-		VectorSubtract(currentOrigin, cg.vr_vieworigin, currentOrigin);
-		currentOrigin[2] = 0;
-		if (VectorLength(currentOrigin) > 400)
+		vec3_t current;
+		VectorSubtract(cg.refdef.vieworg, cg.vr_vieworigin, current);
+        current[2] = 0;
+		if (VectorLength(current) > 400)
 		{
 			VectorCopy(cg.refdef.vieworg, cg.vr_vieworigin);
 
@@ -665,7 +664,7 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 	trap_Cvar_Set( "vr_noSkybox", (((ps->stats[STAT_HEALTH] <= 0) &&
                                     ( ps->pm_type != PM_INTERMISSION )) ||
                                    cg.demoPlayback ||
-                                   (cg.snap->ps.pm_flags & PMF_FOLLOW) ? "1" : "0" ));
+                                   (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON) ? "1" : "0" ));
 
 	// intermission view
 	static float hmdYaw = 0;
@@ -722,7 +721,7 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 
 	if (( cg.predictedPlayerState.stats[STAT_HEALTH] <= 0 ) &&
 		( cg.predictedPlayerState.pm_type != PM_INTERMISSION ) ||
-            ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW)))
+            ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON)))
 	{
 	    //If dead, or spectating, view the map from above
         CG_OffsetVRThirdPersonView();
@@ -797,7 +796,7 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
             angles[ROLL] = vr->hmdorientation[ROLL];
             AnglesToAxis( angles, cg.refdef.viewaxis );
 		}
-		else if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW))
+		else if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON))
 		{
 			//If we're following someone,
 			vec3_t angles;
@@ -805,7 +804,7 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 			angles[YAW] = vr->clientviewangles[YAW];
 			AnglesToAxis(angles, cg.refdef.viewaxis);
 		}
-		else
+		else if (!(cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_FIRSTPERSON))
 		{
 			//We are connected to a multiplayer server, so make the appropriate adjustment to the view
 			//angles as we send orientation to the server that includes the weapon angles
@@ -815,6 +814,10 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
             angles[YAW] = deltaYaw + vr->clientviewangles[YAW];
 			AnglesToAxis(angles, cg.refdef.viewaxis);
 		}
+        else
+        {
+            AnglesToAxis(cg.refdefViewAngles, cg.refdef.viewaxis);
+        }
     } else {
 		if (vr->weapon_zoomed) {
 			vec3_t angles;
@@ -823,7 +826,7 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 			angles[YAW] = (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]) + vr->weaponangles[YAW];
 			AnglesToAxis(angles, cg.refdef.viewaxis);
 		}
-		else if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW))
+		else if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON))
 		{
 			//If we're following someone,
 			vec3_t angles;
@@ -954,7 +957,7 @@ void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demo
 
 	// decide on third person view
 	cg.renderingThirdPerson = cg.predictedPlayerState.pm_type == PM_SPECTATOR ||
-            cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW) ||
+            cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON) ||
 			cg_thirdPerson.integer;
 
 	// build cg.refdef

@@ -5,6 +5,11 @@
 
 #define NUM_WEAPON_SAMPLES      10
 
+typedef enum {
+    VRFM_THIRDPERSON,
+    VRFM_FIRSTPERSON
+} followMode_t;
+
 typedef struct {
     qboolean weapon_stabilised;
     qboolean weapon_zoomed;
@@ -13,6 +18,7 @@ typedef struct {
     qboolean right_handed;
     qboolean virtual_screen;
     qboolean local_server; // used in bg_pmove.c
+    followMode_t follow_mode;
 
     int realign; // used to realign the fake 6DoF playspace in a multiplayer game
 
