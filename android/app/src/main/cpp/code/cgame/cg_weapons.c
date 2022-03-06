@@ -2060,7 +2060,24 @@ void CG_DrawHolsteredWeapons( void )
 		trap_R_AddRefEntityToScene( &blob );
 	}
 
-    float startingPositionYaw = cg.refdefViewAngles[YAW] + (((j - (j&1 ? 0 : 1)) / 2.0f) * SEP);
+	vec3_t viewangles, vieworg;
+    VectorCopy(cg.refdefViewAngles, viewangles);
+    VectorCopy(cg.refdef.vieworg, vieworg);
+    if (!cgs.localServer)
+    {
+        VectorCopy(vr->hmdorientation, viewangles);
+        viewangles[YAW] = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]) + vr->clientviewangles[YAW];
+
+        vec3_t pos, hmdposition;
+        VectorClear(pos);
+        VectorSubtract(vr->hmdposition, vr->hmdorigin, hmdposition);
+        rotateAboutOrigin(hmdposition[2], hmdposition[0],
+                          cg.refdefViewAngles[YAW] - vr->calculated_weaponangles[YAW], pos);
+		VectorScale(pos, trap_Cvar_VariableValue("vr_worldscale"), pos);
+        VectorSubtract(cg.refdef.vieworg, pos, vieworg);
+    }
+
+    float startingPositionYaw = viewangles[YAW] + (((j - (j&1 ? 0 : 1)) / 2.0f) * SEP);
     startingPositionYaw = AngleNormalize360(startingPositionYaw);
     for (int w = j-1; w >= 0; --w)
     {
@@ -2074,7 +2091,7 @@ void CG_DrawHolsteredWeapons( void )
 
             int dist = (cg.time - cg.weaponHolsterTime) / 10;
             if (dist > DIST) dist = DIST;
-            VectorMA(cg.refdef.vieworg, dist, forward, iconOrigin);
+            VectorMA(vieworg, dist, forward, iconOrigin);
 
             float worldscale = trap_Cvar_VariableValue("vr_worldscale");
             iconOrigin[2] -= PLAYER_HEIGHT;
@@ -2110,7 +2127,7 @@ void CG_DrawHolsteredWeapons( void )
 				VectorCopy(iconOrigin, ent.origin);
 
 				vec3_t iconAngles;
-				VectorCopy(cg.refdefViewAngles, iconAngles);
+				VectorCopy(viewangles, iconAngles);
 				iconAngles[YAW] -= 145.0f;
 				if (weapons[w] == WP_GAUNTLET)
 				{
