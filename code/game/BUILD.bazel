@@ -5,6 +5,20 @@ cc_library(
     ],
     visibility = [
         "//code/client:__pkg__",
+        "//code/server:__pkg__",
+    ],
+    deps = [
+        "//code/qcommon:q_shared",
+    ],
+)
+
+cc_library(
+    name = "server_api",
+    hdrs = [
+        "g_public.h",
+    ],
+    visibility = [
+        "//code/server:__pkg__",
     ],
     deps = [
         "//code/qcommon:q_shared",

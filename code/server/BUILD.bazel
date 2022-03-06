@@ -1,0 +1,23 @@
+cc_library(
+    name = "server",
+    srcs = [
+        "server.h",
+        "sv_bot.c",
+        "sv_ccmds.c",
+        "sv_client.c",
+        "sv_game.c",
+        "sv_init.c",
+        "sv_main.c",
+        "sv_net_chan.c",
+        "sv_snapshot.c",
+        "sv_world.c",
+    ],
+    #    defines = ["USE_LOCAL_HEADERS"],
+    deps = [
+        "//code/botlib:api",
+        "//code/game:api",
+        "//code/game:server_api",
+        "//code/qcommon",
+        "//code/qcommon:q_shared",
+    ],
+)
