@@ -1,7 +1,6 @@
 cc_library(
     name = "renderergl1",
     srcs = [
-        "tr_altivec.c",
         "tr_animation.c",
         "tr_backend.c",
         "tr_bsp.c",

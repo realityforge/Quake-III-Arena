@@ -11,7 +11,6 @@ fi
 # can not build 64bit binaries, making 10.5 the minimum version.   This has been tested 
 # with xcode 3.1 (xcode31_2199_developerdvd.dmg).  It contains the 10.5 SDK and a decent
 # enough gcc to actually compile ioquake3
-# For PPC macs, G4's or better are required to run ioquake3.
 
 unset X86_64_SDK
 unset X86_64_CFLAGS
@@ -19,9 +18,6 @@ unset X86_64_MACOSX_VERSION_MIN
 unset X86_SDK
 unset X86_CFLAGS
 unset X86_MACOSX_VERSION_MIN
-unset PPC_SDK
-unset PPC_CFLAGS
-unset PPC_MACOSX_VERSION_MIN
 
 if [ -d /Developer/SDKs/MacOSX10.5.sdk ]; then
 	X86_64_SDK=/Developer/SDKs/MacOSX10.5.sdk
@@ -31,10 +27,6 @@ if [ -d /Developer/SDKs/MacOSX10.5.sdk ]; then
 	X86_SDK=/Developer/SDKs/MacOSX10.5.sdk
 	X86_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.5.sdk"
 	X86_MACOSX_VERSION_MIN="10.5"
-
-	PPC_SDK=/Developer/SDKs/MacOSX10.5.sdk
-	PPC_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.5.sdk"
-	PPC_MACOSX_VERSION_MIN="10.5"
 fi
 
 # SDL 2.0.5+ (x86, x86_64) only supports MacOSX 10.6 and later
@@ -53,7 +45,7 @@ else
 fi
 # end SDL 2.0.5
 
-if [ -z $X86_64_SDK ] || [ -z $X86_SDK ] || [ -z $PPC_SDK ]; then
+if [ -z $X86_64_SDK ] || [ -z $X86_SDK ]; then
 	echo "\
 ERROR: This script is for building a Universal Binary.  You cannot build
        for a different architecture unless you have the proper Mac OS X SDKs
@@ -69,7 +61,6 @@ fi
 
 echo "Building X86_64 Client/Dedicated Server against \"$X86_64_SDK\""
 echo "Building X86 Client/Dedicated Server against \"$X86_SDK\""
-echo "Building PPC Client/Dedicated Server against \"$PPC_SDK\""
 echo
 
 # For parallel make on multicore boxes...
@@ -91,17 +82,8 @@ echo;echo
 
 echo;echo
 
-# PPC client and server
-#if [ -d build/release-darwin-ppc ]; then
-#	rm -r build/release-darwin-ppc
-#fi
-(ARCH=ppc CC=gcc-4.0 CFLAGS=$PPC_CFLAGS MACOSX_VERSION_MIN=$PPC_MACOSX_VERSION_MIN make -j$NCPU) || exit 1;
-
-echo
-
 # use the following shell script to build a universal application bundle
 export MACOSX_DEPLOYMENT_TARGET="10.5"
-export MACOSX_DEPLOYMENT_TARGET_PPC="$PPC_MACOSX_VERSION_MIN"
 export MACOSX_DEPLOYMENT_TARGET_X86="$X86_MACOSX_VERSION_MIN"
 export MACOSX_DEPLOYMENT_TARGET_X86_64="$X86_64_MACOSX_VERSION_MIN"
 "./make-macosx-app.sh" release

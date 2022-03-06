@@ -225,9 +225,6 @@
 		27AAD01A178E00E80093DFC0 /* q_shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = q_shared.h; sourceTree = "<group>"; };
 		27AAD01D178E00F00093DFC0 /* surfaceflags.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = surfaceflags.h; sourceTree = "<group>"; };
 		27AAD01E178E01160093DFC0 /* vm_none.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm_none.c; sourceTree = "<group>"; };
-		27AAD01F178E01160093DFC0 /* vm_powerpc_asm.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm_powerpc_asm.c; sourceTree = "<group>"; };
-		27AAD020178E01160093DFC0 /* vm_powerpc_asm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vm_powerpc_asm.h; sourceTree = "<group>"; };
-		27AAD021178E01160093DFC0 /* vm_powerpc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm_powerpc.c; sourceTree = "<group>"; };
 		27AAD022178E01160093DFC0 /* vm_sparc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm_sparc.c; sourceTree = "<group>"; };
 		27AAD023178E01160093DFC0 /* vm_sparc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vm_sparc.h; sourceTree = "<group>"; };
 		27AAD025178E013E0093DFC0 /* sdl_gamma.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sdl_gamma.c; sourceTree = "<group>"; };
@@ -474,9 +471,6 @@
 				2711BE9A14D136DF005EB142 /* vm_interpreted.c */,
 				2711BE9B14D136DF005EB142 /* vm_local.h */,
 				27AAD01E178E01160093DFC0 /* vm_none.c */,
-				27AAD01F178E01160093DFC0 /* vm_powerpc_asm.c */,
-				27AAD020178E01160093DFC0 /* vm_powerpc_asm.h */,
-				27AAD021178E01160093DFC0 /* vm_powerpc.c */,
 				27AAD022178E01160093DFC0 /* vm_sparc.c */,
 				27AAD023178E01160093DFC0 /* vm_sparc.h */,
 				2711BE9E14D136DF005EB142 /* vm_x86.c */,

@@ -81,7 +81,6 @@ function symlinkArch()
 
     IS32=`file "${SRCFILE}.${EXT}" | grep "i386"`
     IS64=`file "${SRCFILE}.${EXT}" | grep "x86_64"`
-    ISPPC=`file "${SRCFILE}.${EXT}" | grep "ppc"`
     ISARM=`file "${SRCFILE}.${EXT}" | grep "arm64"`
 
     if [ "${IS32}" != "" ]; then
@@ -98,14 +97,6 @@ function symlinkArch()
         fi
     elif [ -L "${DSTFILE}x86_64.${EXT}" ]; then
         rm "${DSTFILE}x86_64.${EXT}"
-    fi
-
-    if [ "${ISPPC}" != "" ]; then
-        if [ ! -L "${DSTFILE}ppc.${EXT}" ]; then
-            ln -s "${SRCFILE}.${EXT}" "${DSTFILE}ppc.${EXT}"
-        fi
-    elif [ -L "${DSTFILE}ppc.${EXT}" ]; then
-        rm "${DSTFILE}ppc.${EXT}"
     fi
 
     if [ "${ISARM}" != "" ]; then
@@ -332,16 +323,10 @@ PLIST="<?xml version=\"1.0\" encoding=\"UTF-8\"?>
     <key>LSMinimumSystemVersion</key>
     <string>${MACOSX_DEPLOYMENT_TARGET}</string>"
 
-if [ -n "${MACOSX_DEPLOYMENT_TARGET_PPC}" ] || [ -n "${MACOSX_DEPLOYMENT_TARGET_X86}" ] || [ -n "${MACOSX_DEPLOYMENT_TARGET_X86_64}" ] || [ -n "${MACOSX_DEPLOYMENT_TARGET_ARM64}" ]; then
+if [ [ -n "${MACOSX_DEPLOYMENT_TARGET_X86}" ] || [ -n "${MACOSX_DEPLOYMENT_TARGET_X86_64}" ] || [ -n "${MACOSX_DEPLOYMENT_TARGET_ARM64}" ]; then
 	PLIST="${PLIST}
     <key>LSMinimumSystemVersionByArchitecture</key>
     <dict>"
-
-	if [ -n "${MACOSX_DEPLOYMENT_TARGET_PPC}" ]; then
-	PLIST="${PLIST}
-        <key>ppc</key>
-        <string>${MACOSX_DEPLOYMENT_TARGET_PPC}</string>"
-	fi
 
 	if [ -n "${MACOSX_DEPLOYMENT_TARGET_X86}" ]; then
 	PLIST="${PLIST}

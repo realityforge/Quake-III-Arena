@@ -52,12 +52,6 @@ for arch in $topdir/build/release-*; do
 		x86_64) echo "define(HAVE_X86_64,yes)dnl" >> defines.m4
 			copystartscript $arch
 		;;
-		ppc) echo "define(HAVE_PPC,yes)dnl" >> defines.m4
-			copystartscript $arch
-		;;
-		ppc64) echo "define(HAVE_PPC64,yes)dnl" >> defines.m4
-			copystartscript $arch
-		;;
 		*)
 			echo "architecture $arch unsupported"
 			continue;

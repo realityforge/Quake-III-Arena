@@ -39,7 +39,6 @@ fi
 # can not build 64bit binaries, making 10.5 the minimum version.   This has been tested 
 # with xcode 3.1 (xcode31_2199_developerdvd.dmg).  It contains the 10.5 SDK and a decent
 # enough gcc to actually compile ioquake3
-# For PPC macs, G4's or better are required to run ioquake3.
 
 unset ARCH_SDK
 unset ARCH_CFLAGS
@@ -83,7 +82,6 @@ NCPU=`sysctl -n hw.ncpu`
 
 # use the following shell script to build an application bundle
 export MACOSX_DEPLOYMENT_TARGET="${ARCH_MACOSX_VERSION_MIN}"
-export MACOSX_DEPLOYMENT_TARGET_PPC=
 export MACOSX_DEPLOYMENT_TARGET_X86=
 export MACOSX_DEPLOYMENT_TARGET_X86_64=
 export MACOSX_DEPLOYMENT_TARGET_ARM64=
