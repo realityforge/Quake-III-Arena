@@ -1,11 +1,14 @@
 build
 Makefile.local
+
+# *nix tool files
+############################
 *.swp
 *tags
 *~
 
-# OS X
-####################
+# OS X files
+############################
 .Spotlight-V100/
 .Trashes/
 ._*
@@ -25,7 +28,6 @@ make-macosx-values.local
 *.xcuserstate
 *.moved-aside
 *~.nib
-.idea/
 DerivedData/
 project.xcworkspace/
 xcuserdata/
@@ -42,13 +44,14 @@ profile
 *.suo
 
 # Bazel Build dirs
-####################
+############################
 /bazel-*
 
-# JetBrains IDE
-###############
+# JetBrains IDEs
+############################
 /.clwb
+/.idea
 
-# Temp directories local notes
-####################
+# Temp dirs and local notes
+############################
 /tmp
