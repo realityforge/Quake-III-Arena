@@ -1,19 +1,6 @@
 #
 # Quake3 Unix Makefile
 #
-# Currently build for the following:
-#	Linux i386 (full client)
-#	Linux Alpha (dedicated server only) (TTimo: dropped)
-#	FreeBSD i386 (dedicated server only) (TTimo: maybe worth updating)
-#	SGI IRIX (full client) (TTimo: who's in charge - dropped otherwise)
-#   Linux PPC (full client) (TTimo: dropped)
-#
-# Nov '98 by Zoid <zoid@idsoftware.com>
-#
-# Loki Hacking by Bernd Kreimeier 
-#  and a little more by Ryan C. Gordon.
-#  and a little more by Rafael Barrero
-#
 # GNU Make required
 #
 
@@ -88,26 +75,11 @@ ifeq ($(PLATFORM),linux)
     GLIBC=
   endif #libc6 test
 
-  ifneq (,$(findstring alpha,$(shell uname -m)))
-    ARCH=axp
-    RPMARCH=alpha
-    VENDOR=dec
-  else
-    ifneq (,$(findstring ppc,$(shell uname -m)))
-      #used for linux builds
-      MESADIR=/usr/src/DRI-CVS/xc/xc/
-      ARCH=ppc
-      RPMARCH=ppc
-      VENDOR=unknown
-      DLL_ONLY=true
-    else #default to i386
-      MESADIR=../Mesa/
-      ARCH=i386
-      RPMARCH=i386
-      VENDOR=unknown
-      DLL_ONLY=false
-    endif
-  endif
+  MESADIR=../Mesa/
+  ARCH=i386
+  RPMARCH=i386
+  VENDOR=unknown
+  DLL_ONLY=false
 
   # bk001205: no mo'  -I/usr/include/glide, no FX
   # bk001205: no mo'  -Dstricmp=strcasecmp, see q_shared.h
@@ -190,137 +162,6 @@ ifeq ($(PLATFORM),linux)
 ## $(B)/$(PLATFORM)q3static   \
 
 else # ifeq Linux
-
-#############################################################################
-# SETUP AND BUILD -- FREEBSD
-#############################################################################
-
-ifeq ($(PLATFORM),freebsd)
-
-GLIBC= #libc is irrelevant
-
-ifneq (,$(findstring alpha,$(shell uname -m)))
-ARCH=axp
-RPMARCH=alpha
-VENDOR=dec
-else #default to i386
-ARCH=i386
-RPMARCH=i386
-VENDOR=unknown
-endif #alpha test
-
-
-BASE_CFLAGS =  -pipe
-
-GL_CFLAGS = -I$(MESADIR)/include -I/usr/X11R6/include
-
-DEBUG_CFLAGS=$(BASE_CFLAGS) -g  -Wall -Werror
-ifeq ($(ARCH),axp)
-CC=pgcc
-RELEASE_CFLAGS=$(BASE_CFLAGS) -DNDEBUG -O6 -ffast-math -funroll-loops -fomit-frame-pointer -fexpensive-optimizations
-else
-#NEWPGCC=/loki/global/x86/bin/gcc # raistlin012301
-#NEWPGCC=/usr/local/gcc-2.95.2/bin/gcc
-NEWPGCC=/home/raistllin/src/gcc/build/install/bin/gcc
-CC=$(shell if [ -f $(NEWPGCC) ]; then echo $(NEWPGCC); else echo pgcc; fi )
-RELEASE_CFLAGS=$(BASE_CFLAGS) -DNDEBUG -O6 -mcpu=pentiumpro -march=pentium -fomit-frame-pointer -pipe -ffast-math -malign-loops=2 -malign-jumps=2 -malign-functions=2 -fno-strict-aliasing - fstrength-reduce
-endif
-
-LIBEXT=a
-
-SHLIBEXT=so
-SHLIBCFLAGS=-fPIC
-SHLIBLDFLAGS=-shared $(LDFLAGS)
-
-ARFLAGS=ar rv
-RANLIB=ranlib
-
-THREAD_LDFLAGS=-lpthread
-# don't need -ldl (FreeBSD)
-LDFLAGS=-lm
-#GLLDFLAGS=-L/usr/X11R6/lib -L$(MESADIR)/lib -lGL -lX11 -lXext -lXxf86dga -lXxf86vm
-#GLLDFLAGS=-L/usr/X11/lib -lGL -lX11 -lXext -lm
-GLLDFLAGS=-L/usr/X11R6/lib -lGL -lX11 -lXext -lXxf86dga -lXxf86vm
-
-ifeq ($(ARCH),axp)
-TARGETS=\
-        $(B)/$(PLATFORM)q3ded
-else
-TARGETS=\
-	$(B)/$(PLATFORM)quake3 \
-	$(B)/baseq3/cgame$(ARCH).$(SHLIBEXT) \
-	$(B)/baseq3/qagame$(ARCH).$(SHLIBEXT) \
-	$(B)/baseq3/ui$(ARCH).$(SHLIBEXT)     \
-	$(B)/missionpack/cgame$(ARCH).$(SHLIBEXT) \
-	$(B)/missionpack/qagame$(ARCH).$(SHLIBEXT) \
-	$(B)/missionpack/ui$(ARCH).$(SHLIBEXT)
-endif
-
-else # ifeq freebsd
-
-#############################################################################
-# SETUP AND BUILD -- IRIX
-#############################################################################
-
-ifeq ($(PLATFORM),irix)
-
-ARCH=mips  #default to MIPS
-VENDOR=sgi
-GLIBC=  #libc is irrelevant
-
-CC=cc
-BASE_CFLAGS=-Dstricmp=strcasecmp -Xcpluscomm -woff 1185 -mips3 \
-	-nostdinc -I. -I$(ROOT)/usr/include
-RELEASE_CFLAGS=$(BASE_CFLAGS) -O3
-DEBUG_CFLAGS=$(BASE_CFLAGS) -g
-
-LIBEXT=a
-
-SHLIBEXT=so
-SHLIBCFLAGS=
-SHLIBLDFLAGS=-shared
-
-ARFLAGS=ar rv
-RANLIB=ranlib
-
-LDFLAGS=-ldl -lm
-GLLDFLAGS=-L/usr/X11/lib -lGL -lX11 -lXext -lm
-
-TARGETS=$(B)/sgiquake3 \
-	$(B)/q3ded
-
-else # ifeq IRIX
-
-#############################################################################
-# SETUP AND BUILD -- GENERIC
-#############################################################################
-
-#CC=egcs
-#BASE_CFLAGS=-Dstricmp=strcasecmp
-#DEBUG_CFLAGS=$(BASE_CFLAGS) -g 
-#RELEASE_CFLAGS=$(BASE_CFLAGS) -DNDEBUG -O3
-
-LIBEXT=a
-
-SHLIBEXT=so
-SHLIBCFLAGS=-fPIC
-SHLIBLDFLAGS=-shared
-
-ARFLAGS=ar rv
-RANLIB=ranlib
-
-ifeq ($(PLATFORM),freebsd)
-LDFLAGS=-lm
-else
-LDFLAGS=-ldl -lm
-endif # ifeq freebsd
-
-TARGETS=\
-	$(B)/$(PLATFORM)q3ded
-
-endif #Linux
-endif #FreeBSD
-endif #IRIX
 
 DO_CC=$(CC) $(CFLAGS) -o $@ -c $<
 DO_CXX=$(CXX) $(CFLAGS) -o $@ -c $<

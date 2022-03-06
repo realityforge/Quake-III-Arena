@@ -37,7 +37,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <sys/wait.h>
 #include <sys/mman.h>
 #include <errno.h>
-#ifdef __linux__ // rb010123
+#ifdef __linux__
   #include <mntent.h>
 #endif
 #include <dlfcn.h>
@@ -349,18 +349,6 @@ void Sys_Init(void)
 #if defined __linux__
 #if defined __i386__
   Cvar_Set( "arch", "linux i386" );
-#elif defined __alpha__
-  Cvar_Set( "arch", "linux alpha" );
-#elif defined __FreeBSD__
-
-#if defined __i386__ // FreeBSD
-  Cvar_Set( "arch", "freebsd i386" );
-#elif defined __alpha__
-  Cvar_Set( "arch", "freebsd alpha" );
-#else
-  Cvar_Set( "arch", "freebsd unknown" );
-#endif // FreeBSD
-
 #else
   Cvar_Set( "arch", "linux unknown" );
 #endif
@@ -658,7 +646,7 @@ Sys_UnloadDll
 */
 void Sys_UnloadDll( void *dllHandle ) {
   // bk001206 - verbose error reporting
-  const char* err; // rb010123 - now const
+  const char* err;
   if ( !dllHandle )
   {
     Com_Printf("Sys_UnloadDll(NULL)\n");

@@ -30,9 +30,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifdef __linux__ // rb0101023 - guard this
 #include <linux/soundcard.h>
 #endif
-#ifdef __FreeBSD__ // rb0101023 - added
-#include <sys/soundcard.h>
-#endif
 #include <stdio.h>
 
 #include "../game/q_shared.h"

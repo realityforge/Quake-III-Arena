@@ -54,14 +54,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <GL/fxmesa.h>
 #endif
 
-#elif defined( __FreeBSD__ ) // rb010123
-
-#include <GL/gl.h>
-#include <GL/glx.h>
-#if defined(__FX__)
-#include <GL/fxmesa.h>
-#endif
-
 #else
 
 #include <gl.h>
@@ -157,7 +149,7 @@ extern	void ( APIENTRY * qglUnlockArraysEXT) (void);
 //===========================================================================
 
 // non-windows systems will just redefine qgl* to gl*
-#if !defined( _WIN32 ) && !(defined(__APPLE__) || defined(__APPLE_CC__)) && !defined( __linux__ ) && !defined( __FreeBSD__ ) // rb010123
+#if !defined( _WIN32 ) && !(defined(__APPLE__) || defined(__APPLE_CC__)) && !defined( __linux__ )
 
 #include "qgl_linked.h"
 
@@ -544,7 +536,7 @@ extern BOOL ( WINAPI * qwglSwapIntervalEXT)( int interval );
 
 #endif	// _WIN32
 
-#if ( (defined __linux__ )  || (defined __FreeBSD__ ) ) // rb010123
+#if (defined __linux__ )
 
 //FX Mesa Functions
 // bk001129 - from cvs1.17 (mkv)
@@ -565,7 +557,7 @@ extern Bool (*qglXMakeCurrent)( Display *dpy, GLXDrawable drawable, GLXContext c
 extern void (*qglXCopyContext)( Display *dpy, GLXContext src, GLXContext dst, GLuint mask );
 extern void (*qglXSwapBuffers)( Display *dpy, GLXDrawable drawable );
 
-#endif // __linux__ || __FreeBSD__ // rb010123
+#endif // __linux__
 
 #endif	// _WIN32 && __linux__
 

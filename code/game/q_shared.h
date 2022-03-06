@@ -243,35 +243,6 @@ inline static float LittleFloat (const float *l) { return FloatSwap(l); }
 
 #endif
 
-//======================= FreeBSD DEFINES =====================
-#ifdef __FreeBSD__ // rb010123
-
-#define stricmp strcasecmp
-
-#define MAC_STATIC
-#define ID_INLINE inline 
-
-#ifdef __i386__
-#define CPUSTRING       "freebsd-i386"
-#elif defined __axp__
-#define CPUSTRING       "freebsd-alpha"
-#else
-#define CPUSTRING       "freebsd-other"
-#endif
-
-#define	PATH_SEP '/'
-
-// bk010116 - omitted Q3STATIC (see Linux above), broken target
-
-#define BigShort
-static short LittleShort(short l) { return ShortSwap(l); }
-#define BigLong
-static int LittleLong (int l) { return LongSwap(l); }
-#define BigFloat
-static float LittleFloat (const float *l) { return FloatSwap(l); }
-
-#endif
-
 //=============================================================
 
 typedef unsigned char 		byte;
