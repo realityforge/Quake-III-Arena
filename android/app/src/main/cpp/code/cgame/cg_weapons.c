@@ -2145,7 +2145,10 @@ void CG_DrawHolsteredWeapons( void )
                     refEntity_t barrel;
                     memset(&barrel, 0, sizeof(barrel));
                     barrel.hModel = cg_weapons[weapons[w]].barrelModel;
-                    AnglesToAxis(vec3_origin, barrel.axis);
+                    vec3_t barrelAngles;
+                    VectorClear(barrelAngles);
+                    barrelAngles[ROLL] = AngleNormalize360(cg.time * 0.9f);
+                    AnglesToAxis(barrelAngles, barrel.axis);
                     CG_PositionRotatedEntityOnTag(&barrel, &ent, cg_weapons[weapons[w]].weaponModel,
                                                   "tag_barrel");
                     trap_R_AddRefEntityToScene(&barrel);
