@@ -3673,9 +3673,7 @@
 				012ADB0100868211C697A10E,
 				012ADB0200868211C697A10E,
 				012ADB0300868211C697A10E,
-				012ADB0400868211C697A10E,
 				012ADB0500868211C697A10E,
-				4FB23863047AB9F60098ACF3,
 			);
 			isa = PBXGroup;
 			path = qcommon;
@@ -3863,14 +3861,6 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			path = vm_local.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		012ADB0400868211C697A10E = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.c;
-			path = vm_ppc.c;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -8755,26 +8745,6 @@
 //4F2
 //4F3
 //4F4
-		4FB23863047AB9F60098ACF3 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.c;
-			path = vm_ppc_new.c;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		4FB23865047AB9F60098ACF3 = {
-			fileRef = 4FB23863047AB9F60098ACF3;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		4FB23867047ABF780098ACF3 = {
-			fileRef = 4FB23863047AB9F60098ACF3;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		4FEFFEDA047B008000719638 = {
 			fileRef = 012ADAF100868211C697A10E;
 			isa = PBXBuildFile;
@@ -10276,12 +10246,6 @@
 			settings = {
 			};
 		};
-		4FF0911B04896C0E00030DA8 = {
-			fileRef = 4FB23863047AB9F60098ACF3;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		4FF0911C04896C0E00030DA8 = {
 			fileRef = 012ADAF100868211C697A10E;
 			isa = PBXBuildFile;
@@ -11609,12 +11573,6 @@
 		};
 		4FF091DD04896C1600030DA8 = {
 			fileRef = 012ADAB500868211C697A10E;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		4FF091DF04896C1600030DA8 = {
-			fileRef = 4FB23863047AB9F60098ACF3;
 			isa = PBXBuildFile;
 			settings = {
 			};

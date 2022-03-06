@@ -544,12 +544,6 @@ Q3OBJ = \
 	  Q3OBJ += $(B)/client/vm_x86.o
     endif
 
-    ifeq ($(ARCH),ppc)
-      ifeq ($(DLL_ONLY),false)
-        Q3OBJ += $(B)/client/vm_ppc.o
-      endif
-    endif
-
 #	$(B)/client/jctrans.o \
 
 #platform specific objects
@@ -767,13 +761,7 @@ $(B)/client/snapvector.o : $(UDIR)/snapvector.nasm; $(DO_NASM)
 $(B)/client/vm_x86.o : $(CMDIR)/vm_x86.c; $(DO_CC) 
 endif
 
-ifeq ($(ARCH),ppc)
-ifeq ($(DLL_ONLY),false)
-$(B)/client/vm_ppc.o : $(CMDIR)/vm_ppc.c; $(DO_CC)
-endif
-endif
-
-$(B)/client/unzip.o : $(CMDIR)/unzip.c; $(DO_CC) 
+$(B)/client/unzip.o : $(CMDIR)/unzip.c; $(DO_CC)
 $(B)/client/vm.o : $(CMDIR)/vm.c; $(DO_CC) 
 $(B)/client/vm_interpreted.o : $(CMDIR)/vm_interpreted.c; $(DO_CC) 
 
@@ -921,12 +909,6 @@ ifeq ($(ARCH),i386)
   Q3DOBJ += $(B)/ded/vm_x86.o $(B)/ded/ftol.o $(B)/ded/snapvector.o
 endif
 
-ifeq ($(ARCH),ppc)
-  ifeq ($(DLL_ONLY),false)
-    Q3DOBJ += $(B)/ded/vm_ppc.o
-  endif
-endif
-
 $(B)/$(PLATFORM)q3ded : $(Q3DOBJ)
 	$(CC)  -o $@ $(Q3DOBJ) $(LDFLAGS)
 
@@ -1000,13 +982,6 @@ $(B)/ded/vm_x86.o : $(CMDIR)/vm_x86.c; $(DO_DED_CC)
 $(B)/ded/ftol.o : $(UDIR)/ftol.nasm; $(DO_NASM)
 $(B)/ded/snapvector.o : $(UDIR)/snapvector.nasm; $(DO_NASM) 
 endif
-
-ifeq ($(ARCH),ppc)
-ifeq ($(DLL_ONLY),false)
-$(B)/ded/vm_ppc.o : $(CMDIR)/vm_ppc.c; $(DO_DED_CC)
-endif
-endif
-
 
 #############################################################################
 ## QVM
@@ -1638,14 +1613,7 @@ ifeq ($(ARCH),i386)
   Q3SOBJ += $(B)/q3static/vm_x86.o
 endif
 
-ifeq ($(ARCH),ppc)
-  ifeq ($(DLL_ONLY),false)
-    Q3SOBJ += $(B)/q3static/vm_ppc.o
-  endif
-endif
-
-
-$(B)/q3static/cl_cgame.o : $(CDIR)/cl_cgame.c; $(DO_CC) -DQ3_STATIC 
+$(B)/q3static/cl_cgame.o : $(CDIR)/cl_cgame.c; $(DO_CC) -DQ3_STATIC
 $(B)/q3static/cl_cin.o : $(CDIR)/cl_cin.c; $(DO_CC) -DQ3_STATIC 
 $(B)/q3static/cl_console.o : $(CDIR)/cl_console.c; $(DO_CC) -DQ3_STATIC 
 $(B)/q3static/cl_input.o : $(CDIR)/cl_input.c; $(DO_CC) -DQ3_STATIC 
@@ -1791,12 +1759,6 @@ $(B)/q3static/vm_interpreted.o : $(CMDIR)/vm_interpreted.c; $(DO_CC) -DQ3_STATIC
 
 ifeq ($(ARCH),i386)
   $(B)/q3static/vm_x86.o : $(CMDIR)/vm_x86.c; $(DO_CC) -DQ3_STATIC
-endif
-
-ifeq ($(ARCH),ppc)
-ifeq ($(DLL_ONLY),false)
-$(B)/q3static/vm_ppc.o : $(CMDIR)/vm_ppc.c; $(DO_CC) -DQ3_STATIC
-endif
 endif
 
 $(B)/q3static/ahoptim.o  : $(FTDIR)/ahoptim.c;   $(DO_CC) -DQ3_STATIC

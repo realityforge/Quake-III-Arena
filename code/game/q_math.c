@@ -545,7 +545,6 @@ void VectorRotate( vec3_t in, vec3_t matrix[3], vec3_t out )
 
 //============================================================================
 
-#if !idppc
 /*
 ** float q_rsqrt( float number )
 */
@@ -576,7 +575,6 @@ float Q_fabs( float f ) {
 	tmp &= 0x7FFFFFFF;
 	return * ( float * ) &tmp;
 }
-#endif
 
 //============================================================
 

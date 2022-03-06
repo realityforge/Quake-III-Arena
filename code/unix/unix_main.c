@@ -724,8 +724,6 @@ void *Sys_LoadDll( const char *name, char *fqpath ,
   getcwd(curpath, sizeof(curpath));
 #if defined __i386__
   snprintf (fname, sizeof(fname), "%si386.so", name);
-#elif defined __powerpc__   //rcg010207 - PPC support.
-  snprintf (fname, sizeof(fname), "%sppc.so", name);
 #elif defined __axp__
   snprintf (fname, sizeof(fname), "%saxp.so", name);
 #elif defined __mips__
