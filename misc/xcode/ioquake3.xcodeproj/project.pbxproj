@@ -114,7 +114,6 @@
 		2711BE7414D13696005EB142 /* sv_init.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sv_init.c; path = server/sv_init.c; sourceTree = "<group>"; };
 		2711BE7514D13696005EB142 /* sv_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sv_main.c; path = server/sv_main.c; sourceTree = "<group>"; };
 		2711BE7614D13696005EB142 /* sv_net_chan.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sv_net_chan.c; path = server/sv_net_chan.c; sourceTree = "<group>"; };
-		2711BE7714D13696005EB142 /* sv_rankings.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sv_rankings.c; path = server/sv_rankings.c; sourceTree = "<group>"; };
 		2711BE7814D13696005EB142 /* sv_snapshot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sv_snapshot.c; path = server/sv_snapshot.c; sourceTree = "<group>"; };
 		2711BE7914D13696005EB142 /* sv_world.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sv_world.c; path = server/sv_world.c; sourceTree = "<group>"; };
 		2711BE8514D136DF005EB142 /* cm_load.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cm_load.c; sourceTree = "<group>"; };
@@ -431,7 +430,6 @@
 				2711BE7414D13696005EB142 /* sv_init.c */,
 				2711BE7514D13696005EB142 /* sv_main.c */,
 				2711BE7614D13696005EB142 /* sv_net_chan.c */,
-				2711BE7714D13696005EB142 /* sv_rankings.c */,
 				2711BE7814D13696005EB142 /* sv_snapshot.c */,
 				2711BE7914D13696005EB142 /* sv_world.c */,
 			);
