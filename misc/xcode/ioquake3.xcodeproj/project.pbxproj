@@ -87,7 +87,6 @@
 		A1403E58256F15E700DFAD74 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1403E57256F15E700DFAD74 /* Images.xcassets */; };
 		A163B25A2193AEA100C48278 /* libopus.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A1665973219341DF0086B74B /* libopus.dylib */; };
 		A163B25C2193AF1E00C48278 /* renderer_opengl1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A163B25B2193AF1E00C48278 /* renderer_opengl1.dylib */; };
-		A1665971219107490086B74B /* sys_autoupdater.c in Sources */ = {isa = PBXBuildFile; fileRef = A1665970219107490086B74B /* sys_autoupdater.c */; };
 		A1F3185E2603127800A11B0E /* ftola.c in Sources */ = {isa = PBXBuildFile; fileRef = 274FAB7D178FA97100B17C7A /* ftola.c */; };
 		A1F318612603128500A11B0E /* snapvector.c in Sources */ = {isa = PBXBuildFile; fileRef = 274FAB81178FA97100B17C7A /* snapvector.c */; };
 /* End PBXBuildFile section */
@@ -349,7 +348,6 @@
 		A166508A218BF45D0086B74B /* SDL_opengles2_gl2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_opengles2_gl2.h; sourceTree = "<group>"; };
 		A16659652191052E0086B74B /* libSDL2main.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2main.a; path = ../../code/libs/macosx/libSDL2main.a; sourceTree = "<group>"; };
 		A1665967219105430086B74B /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../code/libs/macosx/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
-		A1665970219107490086B74B /* sys_autoupdater.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sys_autoupdater.c; sourceTree = "<group>"; };
 		A1665973219341DF0086B74B /* libopus.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; path = libopus.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -612,7 +610,6 @@
 		27AACFDD178DF85B0093DFC0 /* sys */ = {
 			isa = PBXGroup;
 			children = (
-				A1665970219107490086B74B /* sys_autoupdater.c */,
 				27AACFDE178DF8760093DFC0 /* con_log.c */,
 				27AACFDF178DF8760093DFC0 /* con_passive.c */,
 				27AACFE0178DF8760093DFC0 /* con_tty.c */,
@@ -866,7 +863,6 @@
 				2711BE7D14D13696005EB142 /* sv_game.c in Sources */,
 				2711BE7E14D13696005EB142 /* sv_init.c in Sources */,
 				2711BE7F14D13696005EB142 /* sv_main.c in Sources */,
-				A1665971219107490086B74B /* sys_autoupdater.c in Sources */,
 				2711BE8014D13696005EB142 /* sv_net_chan.c in Sources */,
 				2711BE8214D13696005EB142 /* sv_snapshot.c in Sources */,
 				2711BE8314D13696005EB142 /* sv_world.c in Sources */,

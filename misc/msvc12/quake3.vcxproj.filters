@@ -60,7 +60,6 @@
     <ClCompile Include="..\..\code\server\sv_world.c" />
     <ClCompile Include="..\..\code\sys\con_log.c" />
     <ClCompile Include="..\..\code\sys\con_passive.c" />
-    <ClCompile Include="..\..\code\sys\sys_autoupdater.c" />
     <ClCompile Include="..\..\code\sys\sys_main.c" />
     <ClCompile Include="..\..\code\sys\sys_win32.c" />
     <ClCompile Include="..\..\code\opus-1.1.4\src\analysis.c">
