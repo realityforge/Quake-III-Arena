@@ -56,8 +56,9 @@ VR OPTIONS MENU
 #define ID_LASERSIGHT		    142
 #define ID_GORE 			    143
 #define ID_HAPTICINTENSITY	    144
+#define ID_HOLSTER2D		    145
 
-#define ID_BACK					145
+#define ID_BACK					146
 
 #define	NUM_HUDDEPTH			6
 #define	NUM_DIRECTIONMODE		2
@@ -88,6 +89,7 @@ typedef struct {
 	menuradiobutton_s	sendroll;
 	menuradiobutton_s	lasersight;
 	menuslider_s 		hapticintensity;
+	menuradiobutton_s	holster2d;
 	menulist_s 			gore;
 
 	menubitmap_s		back;
@@ -127,6 +129,8 @@ static void VR_SetMenuItems( void ) {
     s_VR.hudyoffset.curvalue		    = trap_Cvar_VariableValue( "vr_hudYOffset" ) + 200;
 	s_VR.sendroll.curvalue		    = trap_Cvar_VariableValue( "vr_sendRollToServer" ) != 0;
 	s_VR.lasersight.curvalue		    = trap_Cvar_VariableValue( "vr_lasersight" ) != 0;
+	s_VR.hapticintensity.curvalue		= trap_Cvar_VariableValue( "vr_hapticIntensity" );
+	s_VR.holster2d.curvalue		    = trap_Cvar_VariableValue( "cg_holsterSimple2DIcons" ) != 0;
 
     //GORE
     {
@@ -225,7 +229,11 @@ static void VR_Event( void* ptr, int notification ) {
         trap_Cvar_SetValue( "vr_hapticIntensity", s_VR.hapticintensity.curvalue);
         break;
 
-	case ID_GORE: {
+	case ID_HOLSTER2D:
+		trap_Cvar_SetValue( "cg_holsterSimple2DIcons", s_VR.holster2d.curvalue);
+		break;
+
+		case ID_GORE: {
 			switch ((int)s_VR.gore.curvalue) {
 				case 0:
 					trap_Cvar_SetValue( "com_blood", 0);
@@ -495,6 +503,15 @@ static void VR_MenuInit( void ) {
 	s_VR.hapticintensity.minvalue		     = 0;
 	s_VR.hapticintensity.maxvalue		     = 1.0;
 
+	y += BIGCHAR_HEIGHT;
+	s_VR.holster2d.generic.type        = MTYPE_RADIOBUTTON;
+	s_VR.holster2d.generic.name	      = "Simple Icons on Weapon Selector:";
+	s_VR.holster2d.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+	s_VR.holster2d.generic.callback    = VR_Event;
+	s_VR.holster2d.generic.id          = ID_HOLSTER2D;
+	s_VR.holster2d.generic.x	          = VR_X_POS;
+	s_VR.holster2d.generic.y	          = y;
+
 	y += BIGCHAR_HEIGHT + 10;
 	s_VR.gore.generic.type		= MTYPE_SPINCONTROL;
 	s_VR.gore.generic.flags		= QMF_PULSEIFFOCUS|QMF_SMALLFONT;
@@ -535,6 +552,7 @@ static void VR_MenuInit( void ) {
 	Menu_AddItem( &s_VR.menu, &s_VR.hudyoffset );
 	Menu_AddItem( &s_VR.menu, &s_VR.sendroll );
 	Menu_AddItem( &s_VR.menu, &s_VR.lasersight );
+	Menu_AddItem( &s_VR.menu, &s_VR.holster2d );
 	Menu_AddItem( &s_VR.menu, &s_VR.hapticintensity );
 	Menu_AddItem( &s_VR.menu, &s_VR.gore );
 

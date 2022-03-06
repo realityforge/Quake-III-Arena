@@ -1635,7 +1635,6 @@ void CG_AddPlayerWeapon( refEntity_t *parent, playerState_t *ps, centity_t *cent
 		}
 	}
 }
-
 /*
 ==============
 CG_AddViewWeapon
@@ -1691,6 +1690,12 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 		fovOffset = 0;
 	}
 */
+
+    if (vr->weapon_select)
+    {
+        CG_DrawHolsteredWeapons();
+        return;
+    }
 
 	cent = &cg.predictedPlayerEntity;	// &cg_entities[cg.snap->ps.clientNum];
 	CG_RegisterWeapon( ps->weapon );
@@ -1995,6 +2000,147 @@ void CG_Weapon_f( void ) {
 	}
 
 	cg.weaponSelect = num;
+}
+
+//Selects the currently selected holstered weapon (if one _is_ selected)
+void CG_HolsterSelect_f( void )
+{
+	cg.weaponHolsterTime = 0;
+
+    if (cg.weaponHolsterSelection == WP_NONE ||
+			cg.weaponSelect == cg.weaponHolsterSelection)
+    {
+        return;
+    }
+
+	cg.weaponSelectTime = cg.time;
+	cg.weaponSelect = cg.weaponHolsterSelection;
+    cg.weaponHolsterSelection = WP_NONE;
+}
+
+void CG_DrawHolsteredWeapons( void )
+{
+    int weapons[MAX_WEAPONS];
+    memset(weapons, 0, sizeof(int) * MAX_WEAPONS);
+
+    if (cg.weaponHolsterTime == 0)
+    {
+        cg.weaponHolsterTime = cg.time;
+    }
+
+    int j = 0;
+    for ( int i = 0 ; i < MAX_WEAPONS ; i++ ) {
+		if (cg.weaponSelect == i)
+		{
+			continue;
+		}
+
+		if ( CG_WeaponSelectable( i ) ) {
+            weapons[j++] = i;
+        }
+    }
+
+	const float SCALE = 0.1f;
+	const float DIST = 10.0f;
+	const float SEP = 14.0f;
+    cg.weaponHolsterSelection = WP_NONE;
+
+    vec3_t weaponOrigin, weaponAngles;
+    CG_CalculateVRWeaponPosition(weaponOrigin, weaponAngles);
+	{
+		refEntity_t		blob;
+		memset( &blob, 0, sizeof( blob ) );
+		VectorCopy( weaponOrigin, blob.origin );
+		AnglesToAxis(weaponAngles, blob.axis);
+		VectorScale( blob.axis[0], 0.07f, blob.axis[0] );
+		VectorScale( blob.axis[1], 0.07f, blob.axis[1] );
+		VectorScale( blob.axis[2], 0.07f, blob.axis[2] );
+		blob.nonNormalizedAxes = qtrue;
+		blob.hModel = cgs.media.smallSphereModel;
+		trap_R_AddRefEntityToScene( &blob );
+	}
+
+    float startingPositionYaw = cg.refdefViewAngles[YAW] + (((j - (j&1 ? 0 : 1)) / 2.0f) * SEP);
+    startingPositionYaw = AngleNormalize360(startingPositionYaw);
+    for (int w = j-1; w >= 0; --w)
+    {
+		if ( cg_weapons[ weapons[w] ].item ) {
+            //first calculate holster slot position
+            vec3_t angles, iconOrigin;
+            VectorClear(angles);
+            angles[YAW] = startingPositionYaw - (w * SEP) - 4; // add a few degrees as models aren't central
+            vec3_t forward;
+            AngleVectors(angles, forward, NULL, NULL);
+
+            int dist = (cg.time - cg.weaponHolsterTime) / 10;
+            if (dist > DIST) dist = DIST;
+            VectorMA(cg.refdef.vieworg, dist, forward, iconOrigin);
+
+            float worldscale = trap_Cvar_VariableValue("vr_worldscale");
+            iconOrigin[2] -= PLAYER_HEIGHT;
+            iconOrigin[2] += (vr->hmdposition[1] * 0.85f) * worldscale;
+
+            //Float sprite above selected weapon
+            qboolean selected = qfalse;
+            vec3_t length;
+            VectorSubtract(weaponOrigin, iconOrigin, length);
+            if (VectorLength(length) <= 1.75f && dist == DIST)
+            {
+                cg.weaponHolsterSelection = weapons[w];
+                selected = qtrue;
+
+                refEntity_t		sprite;
+                memset( &sprite, 0, sizeof( sprite ) );
+                VectorCopy( iconOrigin, sprite.origin );
+                sprite.origin[2] += 2.5f + (0.5f * sinf(DEG2RAD(AngleNormalize360(cg.time/6))));
+                sprite.reType = RT_SPRITE;
+                sprite.customShader = cgs.media.friendShader;
+                sprite.radius = 0.5f;
+                sprite.shaderRGBA[0] = 255;
+                sprite.shaderRGBA[1] = 255;
+                sprite.shaderRGBA[2] = 255;
+                sprite.shaderRGBA[3] = 255;
+                trap_R_AddRefEntityToScene( &sprite );
+            }
+
+            if (!cg_holsterSimple2DIcons.integer)
+			{
+				refEntity_t ent;
+				memset(&ent, 0, sizeof(ent));
+				VectorCopy(iconOrigin, ent.origin);
+
+				vec3_t iconAngles;
+				VectorCopy(cg.refdefViewAngles, iconAngles);
+				iconAngles[YAW] -= 145.0f;
+				if (weapons[w] == WP_GAUNTLET)
+				{
+					iconAngles[ROLL] -= 90.0f;
+				}
+				AnglesToAxis(iconAngles, ent.axis);
+				VectorScale(ent.axis[0], SCALE + (selected ? 0.04f : 0), ent.axis[0]);
+				VectorScale(ent.axis[1], SCALE + (selected ? 0.04f : 0), ent.axis[1]);
+				VectorScale(ent.axis[2], SCALE + (selected ? 0.04f : 0), ent.axis[2]);
+				ent.nonNormalizedAxes = qtrue;
+
+				ent.hModel = cg_weapons[weapons[w]].weaponModel;
+				trap_R_AddRefEntityToScene(&ent);
+			}
+			else
+			{
+				refEntity_t		sprite;
+				memset( &sprite, 0, sizeof( sprite ) );
+				VectorCopy( iconOrigin, sprite.origin );
+				sprite.reType = RT_SPRITE;
+				sprite.customShader = cg_weapons[weapons[w]].weaponIcon;
+				sprite.radius = 0.6f + (selected ? 0.1f : 0);
+				sprite.shaderRGBA[0] = 255;
+				sprite.shaderRGBA[1] = 255;
+				sprite.shaderRGBA[2] = 255;
+				sprite.shaderRGBA[3] = 255;
+				trap_R_AddRefEntityToScene( &sprite );
+			}
+		}
+    }
 }
 
 /*

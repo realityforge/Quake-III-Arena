@@ -252,6 +252,14 @@ static void IN_SendButtonAction(const char* action, qboolean pressed)
         {
             vr.weapon_stabilised = pressed;
         }
+        else if (strcmp(action, "+weapon_select") == 0)
+        {
+            vr.weapon_select = pressed;
+            if (!pressed)
+            {
+                Cbuf_AddText("holster_select");
+            }
+        }
         else if (action[0] == '+')
         {
             char command[256];

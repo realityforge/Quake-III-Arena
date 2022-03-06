@@ -618,6 +618,9 @@ typedef struct {
 	int			weaponAnimation;
 	int			weaponAnimationTime;
 
+	int			weaponHolsterSelection;
+	int 		weaponHolsterTime;
+
 	// blend blobs
 	float		damageTime;
 	float		damageX, damageY, damageValue;
@@ -782,6 +785,8 @@ typedef struct {
 	qhandle_t	redKamikazeShader;
 	qhandle_t	blueKamikazeShader;
 #endif
+
+	qhandle_t	smallSphereModel;
 
 	// weapon effect models
 	qhandle_t	bulletFlashModel;
@@ -1114,6 +1119,7 @@ extern	vmCvar_t		cg_drawFPS;
 extern	vmCvar_t		cg_drawSnapshot;
 extern	vmCvar_t		cg_draw3dIcons;
 extern	vmCvar_t		cg_debugWeaponAiming;
+extern	vmCvar_t		cg_holsterSimple2DIcons;
 extern	vmCvar_t		cg_drawIcons;
 extern	vmCvar_t		cg_drawAmmoWarning;
 extern	vmCvar_t		cg_drawCrosshair;
@@ -1380,6 +1386,7 @@ void CG_PositionRotatedEntityOnTag( refEntity_t *entity, const refEntity_t *pare
 void CG_NextWeapon_f( void );
 void CG_PrevWeapon_f( void );
 void CG_Weapon_f( void );
+void CG_HolsterSelect_f( void );
 
 void rotateAboutOrigin(float x, float y, float rotation, vec2_t out);
 void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles );
@@ -1397,6 +1404,7 @@ void CG_Bullet( vec3_t origin, int sourceEntityNum, vec3_t normal, qboolean fles
 void CG_RailTrail( clientInfo_t *ci, vec3_t start, vec3_t end );
 void CG_GrappleTrail( centity_t *ent, const weaponInfo_t *wi );
 void CG_AddViewWeapon (playerState_t *ps);
+void CG_DrawHolsteredWeapons( void );
 void CG_AddPlayerWeapon( refEntity_t *parent, playerState_t *ps, centity_t *cent, int team );
 void CG_DrawWeaponSelect( void );
 void CG_LaserSight( vec3_t start, vec3_t end );

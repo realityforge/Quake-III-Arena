@@ -117,6 +117,7 @@ vmCvar_t	cg_drawAmmoWarning;
 vmCvar_t	cg_drawCrosshair;
 vmCvar_t	cg_drawCrosshairNames;
 vmCvar_t	cg_debugWeaponAiming;
+vmCvar_t	cg_holsterSimple2DIcons;
 vmCvar_t	cg_fragMessage;
 vmCvar_t	cg_drawRewards;
 vmCvar_t	cg_crosshairSize;
@@ -235,6 +236,7 @@ static cvarTable_t cvarTable[] = {
 	{ &cg_drawSnapshot, "cg_drawSnapshot", "0", CVAR_ARCHIVE  },
 	{ &cg_draw3dIcons, "cg_draw3dIcons", "1", CVAR_ARCHIVE  },
 	{ &cg_debugWeaponAiming, "cg_debugWeaponAiming", "0", CVAR_ARCHIVE  },
+	{ &cg_holsterSimple2DIcons, "cg_holsterSimple2DIcons", "0", CVAR_ARCHIVE  },
 	{ &cg_drawIcons, "cg_drawIcons", "1", CVAR_ARCHIVE  },
 	{ &cg_drawAmmoWarning, "cg_drawAmmoWarning", "1", CVAR_ARCHIVE  },
 	{ &cg_drawAttacker, "cg_drawAttacker", "0", CVAR_ARCHIVE  },
@@ -1046,6 +1048,9 @@ static void CG_RegisterGraphics( void ) {
 	cgs.media.bloodMarkShader = trap_R_RegisterShader( "bloodMark" );
 
     cgs.media.reticleShader = trap_R_RegisterShader( "scope.tga" );
+
+	//Used for the weapon selector
+	cgs.media.smallSphereModel = trap_R_RegisterModel("models/powerups/health/small_sphere.md3");
 
 	// register the inline models
 	cgs.numInlineModels = trap_CM_NumInlineModels();
