@@ -275,7 +275,7 @@ LOKISETUPDIR=misc/setup
 NSISDIR=misc/nsis
 SDLHDIR=$(MOUNT_DIR)/SDL2
 SDLLIBSDIR=$(MOUNT_DIR)/SDL2/libs
-LIBSDIR=$(MOUNT_DIR)/libs
+CURLLIBSDIR=$(MOUNT_DIR)/curl-7.54.0/libs
 
 bin_path=$(shell which $(1) 2> /dev/null)
 
@@ -694,9 +694,9 @@ ifdef MINGW
       ifeq ($(USE_LOCAL_HEADERS),1)
         CLIENT_CFLAGS += -DCURL_STATICLIB
         ifeq ($(ARCH),x86_64)
-          CLIENT_LIBS += $(LIBSDIR)/win64/libcurl.a -lcrypt32
+          CLIENT_LIBS += $(CURLLIBSDIR)/win64/libcurl.a -lcrypt32
         else
-          CLIENT_LIBS += $(LIBSDIR)/win32/libcurl.a -lcrypt32
+          CLIENT_LIBS += $(CURLLIBSDIR)/win32/libcurl.a -lcrypt32
         endif
       else
         CLIENT_LIBS += $(CURL_LIBS)
