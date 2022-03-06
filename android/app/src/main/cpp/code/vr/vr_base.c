@@ -102,8 +102,16 @@ void VR_InitCvars( void )
 	Cvar_Get ("vr_button_map_PRIMARYTHUMBSTICK_ALT", "weapon 1", CVAR_ARCHIVE); // Switch to gauntlet
 	Cvar_Get ("vr_button_map_RTHUMBFORWARD", "weapnext", CVAR_ARCHIVE); //Next Weapon
 	Cvar_Get ("vr_button_map_RTHUMBFORWARD_ALT", "", CVAR_ARCHIVE); // unmapped
+	Cvar_Get ("vr_button_map_RTHUMBFORWARDLEFT", "", CVAR_ARCHIVE); // unmapped
+    Cvar_Get ("vr_button_map_RTHUMBFORWARDLEFT_ALT", "", CVAR_ARCHIVE); // unmapped
+    Cvar_Get ("vr_button_map_RTHUMBFORWARDRIGHT", "", CVAR_ARCHIVE); // unmapped
+    Cvar_Get ("vr_button_map_RTHUMBFORWARDRIGHT_ALT", "", CVAR_ARCHIVE); // unmapped
 	Cvar_Get ("vr_button_map_RTHUMBBACK", "weapprev", CVAR_ARCHIVE); // Previous Weapon
 	Cvar_Get ("vr_button_map_RTHUMBBACK_ALT", "", CVAR_ARCHIVE); // unmapped
+	Cvar_Get ("vr_button_map_RTHUMBBACKLEFT", "", CVAR_ARCHIVE); // unmapped
+    Cvar_Get ("vr_button_map_RTHUMBBACKLEFT_ALT", "", CVAR_ARCHIVE); // unmapped
+    Cvar_Get ("vr_button_map_RTHUMBBACKRIGHT", "", CVAR_ARCHIVE); // unmapped
+    Cvar_Get ("vr_button_map_RTHUMBBACKRIGHT_ALT", "", CVAR_ARCHIVE); // unmapped
 	Cvar_Get ("vr_button_map_SECONDARYTRIGGER", "+moveup", CVAR_ARCHIVE); // Also Jump
 	Cvar_Get ("vr_button_map_SECONDARYTRIGGER_ALT", "", CVAR_ARCHIVE); // unmapped
 	Cvar_Get ("vr_button_map_PRIMARYTRIGGER", "+attack", CVAR_ARCHIVE); // Fire

@@ -22,10 +22,14 @@
 
 enum {
 	VR_TOUCH_AXIS_UP = 1 << 0,
-	VR_TOUCH_AXIS_DOWN = 1 << 1,
-	VR_TOUCH_AXIS_LEFT = 1 << 2,
-	VR_TOUCH_AXIS_RIGHT = 1 << 3,
-	VR_TOUCH_AXIS_TRIGGER_INDEX = 1 << 4,
+	VR_TOUCH_AXIS_UPLEFT = 1 << 1,
+	VR_TOUCH_AXIS_UPRIGHT = 1 << 2,
+	VR_TOUCH_AXIS_DOWN = 1 << 3,
+	VR_TOUCH_AXIS_DOWNLEFT = 1 << 4,
+	VR_TOUCH_AXIS_DOWNRIGHT = 1 << 5,
+	VR_TOUCH_AXIS_LEFT = 1 << 6,
+	VR_TOUCH_AXIS_RIGHT = 1 << 7,
+	VR_TOUCH_AXIS_TRIGGER_INDEX = 1 << 8,
 };
 
 typedef struct {
@@ -497,72 +501,211 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
         }
         else //right controller
         {
-            //yaw
-            if (vr_snapturn->integer > 0)
-			{
-            	int snap = 45;
-            	if (vr_snapturn->integer > 1)
-				{
-            		snap = vr_snapturn->integer;
+
+            // up, up-left, up-right (use release threshold to be more sensitive)
+            if (joystickY > releasedThreshold) {
+
+                // stop left & right
+                controller->axisButtons &= ~VR_TOUCH_AXIS_LEFT;
+                controller->axisButtons &= ~VR_TOUCH_AXIS_RIGHT;
+
+                // up-left (use release threshold to be more sensitive)
+                if (joystickX < -releasedThreshold) {
+                    // stop up
+                    if ((controller->axisButtons & VR_TOUCH_AXIS_UP) && IN_GetButtonAction("RTHUMBFORWARD", action)) {
+                        IN_SendButtonAction(action, qfalse);
+                    }
+                    controller->axisButtons &= ~VR_TOUCH_AXIS_UP;
+                    // stop up-right
+                    if ((controller->axisButtons & VR_TOUCH_AXIS_UPRIGHT) && IN_GetButtonAction("RTHUMBFORWARDRIGHT", action)) {
+                        IN_SendButtonAction(action, qfalse);
+                    }
+                    controller->axisButtons &= ~VR_TOUCH_AXIS_UPRIGHT;
+                    // start up-left
+                    if (!(controller->axisButtons & VR_TOUCH_AXIS_UPLEFT)) {
+                        controller->axisButtons |= VR_TOUCH_AXIS_UPLEFT;
+                        if (IN_GetButtonAction("RTHUMBFORWARDLEFT", action)) {
+                            IN_SendButtonAction(action, qtrue);
+                        }
+                    }
+
+                // up-right (use release threshold to be more sensitive)
+				} else if (joystickX > releasedThreshold) {
+				    // stop up
+                    if ((controller->axisButtons & VR_TOUCH_AXIS_UP) && IN_GetButtonAction("RTHUMBFORWARD", action)) {
+                        IN_SendButtonAction(action, qfalse);
+                    }
+                    controller->axisButtons &= ~VR_TOUCH_AXIS_UP;
+                    // stop up-left
+                    if ((controller->axisButtons & VR_TOUCH_AXIS_UPLEFT) && IN_GetButtonAction("RTHUMBFORWARDLEFT", action)) {
+                        IN_SendButtonAction(action, qfalse);
+                    }
+                    controller->axisButtons &= ~VR_TOUCH_AXIS_UPLEFT;
+                    // start up-right
+                    if (!(controller->axisButtons & VR_TOUCH_AXIS_UPRIGHT)) {
+                        controller->axisButtons |= VR_TOUCH_AXIS_UPRIGHT;
+                        if (IN_GetButtonAction("RTHUMBFORWARDRIGHT", action)) {
+                            IN_SendButtonAction(action, qtrue);
+                        }
+                    }
+
+                // direct-up
+				} else {
+                    // stop up-left
+                    if ((controller->axisButtons & VR_TOUCH_AXIS_UPLEFT) && IN_GetButtonAction("RTHUMBFORWARDLEFT", action)) {
+                        IN_SendButtonAction(action, qfalse);
+                    }
+                    controller->axisButtons &= ~VR_TOUCH_AXIS_UPLEFT;
+                    // stop up-right
+                    if ((controller->axisButtons & VR_TOUCH_AXIS_UPRIGHT) && IN_GetButtonAction("RTHUMBFORWARDRIGHT", action)) {
+                        IN_SendButtonAction(action, qfalse);
+                    }
+                    controller->axisButtons &= ~VR_TOUCH_AXIS_UPRIGHT;
+                    // start up
+                    if (!(controller->axisButtons & VR_TOUCH_AXIS_UP) && joystickY > pressedThreshold) {
+                        controller->axisButtons |= VR_TOUCH_AXIS_UP;
+                        if (IN_GetButtonAction("RTHUMBFORWARD", action)) {
+                            IN_SendButtonAction(action, qtrue);
+                        }
+                    }
 				}
 
-				if (!(controller->axisButtons & VR_TOUCH_AXIS_RIGHT) && joystickX > pressedThreshold) {
-					controller->axisButtons |= VR_TOUCH_AXIS_RIGHT;
-					CL_SnapTurn(snap);
-				} else if ((controller->axisButtons & VR_TOUCH_AXIS_RIGHT) &&
-						joystickX < releasedThreshold) {
-					controller->axisButtons &= ~VR_TOUCH_AXIS_RIGHT;
+            // down, down-left, down-right (use release threshold to be more sensitive)
+            } else if (joystickY < -releasedThreshold) {
+
+                // stop left & right
+                controller->axisButtons &= ~VR_TOUCH_AXIS_LEFT;
+                controller->axisButtons &= ~VR_TOUCH_AXIS_RIGHT;
+
+                // down-left (use release threshold to be more sensitive)
+                if (joystickX < -releasedThreshold) {
+                    // stop down
+                    if ((controller->axisButtons & VR_TOUCH_AXIS_DOWN) && IN_GetButtonAction("RTHUMBBACK", action)) {
+                        IN_SendButtonAction(action, qfalse);
+                    }
+                    controller->axisButtons &= ~VR_TOUCH_AXIS_DOWN;
+                    // stop down-right
+                    if ((controller->axisButtons & VR_TOUCH_AXIS_DOWNRIGHT) && IN_GetButtonAction("RTHUMBBACKRIGHT", action)) {
+                        IN_SendButtonAction(action, qfalse);
+                    }
+                    controller->axisButtons &= ~VR_TOUCH_AXIS_DOWNRIGHT;
+                    // start down-left
+                    if (!(controller->axisButtons & VR_TOUCH_AXIS_DOWNLEFT)) {
+                        controller->axisButtons |= VR_TOUCH_AXIS_DOWNLEFT;
+                        if (IN_GetButtonAction("RTHUMBBACKLEFT", action)) {
+                            IN_SendButtonAction(action, qtrue);
+                        }
+                    }
+
+                // down-right (use release threshold to be more sensitive)
+				} else if (joystickX > releasedThreshold) {
+				    // stop down
+                    if ((controller->axisButtons & VR_TOUCH_AXIS_DOWN) && IN_GetButtonAction("RTHUMBBACK", action)) {
+                        IN_SendButtonAction(action, qfalse);
+                    }
+                    controller->axisButtons &= ~VR_TOUCH_AXIS_DOWN;
+                    // stop down-left
+                    if ((controller->axisButtons & VR_TOUCH_AXIS_DOWNLEFT) && IN_GetButtonAction("RTHUMBBACKLEFT", action)) {
+                        IN_SendButtonAction(action, qfalse);
+                    }
+                    controller->axisButtons &= ~VR_TOUCH_AXIS_DOWNLEFT;
+                    // start down-right
+                    if (!(controller->axisButtons & VR_TOUCH_AXIS_DOWNRIGHT)) {
+                        controller->axisButtons |= VR_TOUCH_AXIS_DOWNRIGHT;
+                        if (IN_GetButtonAction("RTHUMBBACKRIGHT", action)) {
+                            IN_SendButtonAction(action, qtrue);
+                        }
+                    }
+
+                // direct-down
+				} else {
+                    // stop down-left
+                    if ((controller->axisButtons & VR_TOUCH_AXIS_DOWNLEFT) && IN_GetButtonAction("RTHUMBBACKLEFT", action)) {
+                        IN_SendButtonAction(action, qfalse);
+                    }
+                    controller->axisButtons &= ~VR_TOUCH_AXIS_DOWNLEFT;
+                    // stop down-right
+                    if ((controller->axisButtons & VR_TOUCH_AXIS_DOWNRIGHT) && IN_GetButtonAction("RTHUMBBACKRIGHT", action)) {
+                        IN_SendButtonAction(action, qfalse);
+                    }
+                    controller->axisButtons &= ~VR_TOUCH_AXIS_DOWNRIGHT;
+                    // start down
+                    if (!(controller->axisButtons & VR_TOUCH_AXIS_DOWN) && joystickY < -pressedThreshold) {
+                        controller->axisButtons |= VR_TOUCH_AXIS_DOWN;
+                        if (IN_GetButtonAction("RTHUMBBACK", action)) {
+                            IN_SendButtonAction(action, qtrue);
+                        }
+                    }
 				}
 
-				if (!(controller->axisButtons & VR_TOUCH_AXIS_LEFT) && joystickX < -pressedThreshold) {
-					controller->axisButtons |= VR_TOUCH_AXIS_LEFT;
-					CL_SnapTurn(-snap);
-				} else if ((controller->axisButtons & VR_TOUCH_AXIS_LEFT) &&
-						   joystickX > -releasedThreshold) {
-					controller->axisButtons &= ~VR_TOUCH_AXIS_LEFT;
-				}
-			}
-            else
-			{
-            	//smooth turn
-				const float x = joystickX * cl_sensitivity->value * m_yaw->value;
-				Com_QueueEvent(in_vrEventTime, SE_MOUSE, x, 0, 0, NULL);
-			}
+            // left & right
+            } else {
 
-			//Default up/down on right thumbstick is weapon switch
-            if (!(controller->axisButtons & VR_TOUCH_AXIS_UP) && joystickY > pressedThreshold)
-            {
-                controller->axisButtons |= VR_TOUCH_AXIS_UP;
-                if (IN_GetButtonAction("RTHUMBFORWARD", action))
-                {
-                    IN_SendButtonAction(action, qtrue);
+                // stop up-left
+                if ((controller->axisButtons & VR_TOUCH_AXIS_UPLEFT) && IN_GetButtonAction("RTHUMBFORWARDLEFT", action)) {
+                    IN_SendButtonAction(action, qfalse);
                 }
-            }
-            else if ((controller->axisButtons & VR_TOUCH_AXIS_UP) &&
-                     joystickY < releasedThreshold)
-            {
-                if (IN_GetButtonAction("RTHUMBFORWARD", action))
-                {
+                controller->axisButtons &= ~VR_TOUCH_AXIS_UPLEFT;
+                // stop up
+                if ((controller->axisButtons & VR_TOUCH_AXIS_UP) && IN_GetButtonAction("RTHUMBFORWARD", action)) {
                     IN_SendButtonAction(action, qfalse);
                 }
                 controller->axisButtons &= ~VR_TOUCH_AXIS_UP;
-            }
-
-
-            if (!(controller->axisButtons & VR_TOUCH_AXIS_DOWN) && joystickY < -pressedThreshold) {
-                controller->axisButtons |= VR_TOUCH_AXIS_DOWN;
-                if (IN_GetButtonAction("RTHUMBBACK", action))
-                {
-                    IN_SendButtonAction(action, qtrue);
-                }
-            } else if ((controller->axisButtons & VR_TOUCH_AXIS_DOWN) &&
-                       joystickY > -releasedThreshold) {
-                controller->axisButtons &= ~VR_TOUCH_AXIS_DOWN;
-                if (IN_GetButtonAction("RTHUMBBACK", action))
-                {
+                // stop up-right
+                if ((controller->axisButtons & VR_TOUCH_AXIS_UPRIGHT) && IN_GetButtonAction("RTHUMBFORWARDRIGHT", action)) {
                     IN_SendButtonAction(action, qfalse);
                 }
+                controller->axisButtons &= ~VR_TOUCH_AXIS_UPRIGHT;
+                // stop down-left
+                if ((controller->axisButtons & VR_TOUCH_AXIS_DOWNLEFT) && IN_GetButtonAction("RTHUMBBACKLEFT", action)) {
+                    IN_SendButtonAction(action, qfalse);
+                }
+                controller->axisButtons &= ~VR_TOUCH_AXIS_DOWNLEFT;
+                // stop down
+                if ((controller->axisButtons & VR_TOUCH_AXIS_DOWN) && IN_GetButtonAction("RTHUMBBACK", action)) {
+                    IN_SendButtonAction(action, qfalse);
+                }
+                controller->axisButtons &= ~VR_TOUCH_AXIS_DOWN;
+                // stop down-right
+                if ((controller->axisButtons & VR_TOUCH_AXIS_DOWNRIGHT) && IN_GetButtonAction("RTHUMBBACKRIGHT", action)) {
+                    IN_SendButtonAction(action, qfalse);
+                }
+                controller->axisButtons &= ~VR_TOUCH_AXIS_DOWNRIGHT;
+
+                //yaw
+                if (vr_snapturn->integer > 0)
+			    {
+            	    int snap = 45;
+            	    if (vr_snapturn->integer > 1)
+				    {
+            		    snap = vr_snapturn->integer;
+				    }
+
+				    if (!(controller->axisButtons & VR_TOUCH_AXIS_RIGHT) && joystickX > pressedThreshold) {
+					    controller->axisButtons |= VR_TOUCH_AXIS_RIGHT;
+					    CL_SnapTurn(snap);
+				    } else if ((controller->axisButtons & VR_TOUCH_AXIS_RIGHT) &&
+					    	joystickX < releasedThreshold) {
+					    controller->axisButtons &= ~VR_TOUCH_AXIS_RIGHT;
+				    }
+
+				    if (!(controller->axisButtons & VR_TOUCH_AXIS_LEFT) && joystickX < -pressedThreshold) {
+					    controller->axisButtons |= VR_TOUCH_AXIS_LEFT;
+					    CL_SnapTurn(-snap);
+				    } else if ((controller->axisButtons & VR_TOUCH_AXIS_LEFT) &&
+					    	   joystickX > -releasedThreshold) {
+					    controller->axisButtons &= ~VR_TOUCH_AXIS_LEFT;
+				    }
+			    }
+                else
+			    {
+            	    //smooth turn
+				    const float x = joystickX * cl_sensitivity->value * m_yaw->value;
+				    Com_QueueEvent(in_vrEventTime, SE_MOUSE, x, 0, 0, NULL);
+			    }
+
             }
+
         }
     }
 }
