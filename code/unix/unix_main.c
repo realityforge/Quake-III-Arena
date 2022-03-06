@@ -351,8 +351,6 @@ void Sys_Init(void)
   Cvar_Set( "arch", "linux i386" );
 #elif defined __alpha__
   Cvar_Set( "arch", "linux alpha" );
-#elif defined __sparc__
-  Cvar_Set( "arch", "linux sparc" );
 #elif defined __FreeBSD__
 
 #if defined __i386__ // FreeBSD
@@ -365,14 +363,6 @@ void Sys_Init(void)
 
 #else
   Cvar_Set( "arch", "linux unknown" );
-#endif
-#elif defined __sun__
-#if defined __i386__
-  Cvar_Set( "arch", "solaris x86" );
-#elif defined __sparc__
-  Cvar_Set( "arch", "solaris sparc" );
-#else
-  Cvar_Set( "arch", "solaris unknown" );
 #endif
 #else
   Cvar_Set( "arch", "unknown" );
