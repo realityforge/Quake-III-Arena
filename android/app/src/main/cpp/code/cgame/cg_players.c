@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../vr/vr_clientinfo.h"
 
 extern vr_clientinfo_t* vr;
+extern vmCvar_t	cg_firstPersonBodyScale;
 
 char	*cg_customSoundNames[MAX_CUSTOM_SOUNDS] = {
 	"*death1.wav",
@@ -2366,10 +2367,17 @@ void CG_Player( centity_t *cent ) {
 	}
 
     // get the player model information
+	qboolean firstPersonBody =  ( cent->currentState.number == cg.snap->ps.clientNum) &&
+			(!cg.renderingThirdPerson) &&
+			(cg_firstPersonBodyScale.value > 0.0f);
+
 	renderfx = 0;
 	if ( cent->currentState.number == cg.snap->ps.clientNum) {
 		if (!cg.renderingThirdPerson) {
-			renderfx = RF_THIRD_PERSON;            // only draw in mirrors
+			if (cg_firstPersonBodyScale.value == 0)
+			{
+				renderfx = RF_THIRD_PERSON;            // only draw in mirrors
+			}
 		} else {
 			if (cg_cameraMode.integer) {
 				return;
@@ -2383,7 +2391,25 @@ void CG_Player( centity_t *cent ) {
 	memset( &head, 0, sizeof(head) );
 
 	// get the rotation information
-	CG_PlayerAngles(cent, legs.axis, torso.axis, head.axis);
+	if (firstPersonBody)
+	{
+		vec3_t angles;
+		VectorClear(angles);
+		angles[YAW] = cg.refdefViewAngles[YAW] + vr->hmdorientation[YAW] - vr->weaponangles[YAW];
+		AnglesToAxis(angles, legs.axis);
+		VectorScale( legs.axis[0], cg_firstPersonBodyScale.value, legs.axis[0] );
+		VectorScale( legs.axis[1], cg_firstPersonBodyScale.value, legs.axis[1] );
+		VectorScale( legs.axis[2], cg_firstPersonBodyScale.value, legs.axis[2] );
+		AnglesToAxis(vec3_origin, torso.axis);
+		VectorScale( torso.axis[0], cg_firstPersonBodyScale.value, torso.axis[0] );
+		VectorScale( torso.axis[1], cg_firstPersonBodyScale.value, torso.axis[1] );
+		VectorScale( torso.axis[2], cg_firstPersonBodyScale.value, torso.axis[2] );
+		//Don't care about head
+	}
+	else
+	{
+		CG_PlayerAngles(cent, legs.axis, torso.axis, head.axis);
+	}
 
 	// get the animation state (after rotation, to allow feet shuffle)
 	CG_PlayerAnimation( cent, &legs.oldframe, &legs.frame, &legs.backlerp,
@@ -2670,7 +2696,10 @@ void CG_Player( centity_t *cent ) {
 	head.shadowPlane = shadowPlane;
 	head.renderfx = renderfx;
 
-	CG_AddRefEntityWithPowerups(&head, &cent->currentState, ci->team);
+	if (!firstPersonBody)
+	{
+		CG_AddRefEntityWithPowerups(&head, &cent->currentState, ci->team);
+	}
 
 #ifdef MISSIONPACK
 	CG_BreathPuffs(cent, &head);
@@ -2681,7 +2710,9 @@ void CG_Player( centity_t *cent ) {
 	//
 	// add the gun / barrel / flash
 	//
-	CG_AddPlayerWeapon(&torso, NULL, cent, ci->team);
+	if (!firstPersonBody) {
+		CG_AddPlayerWeapon(&torso, NULL, cent, ci->team);
+	}
 
 	// add powerups floating behind the player
 	CG_PlayerPowerups( cent, &torso );

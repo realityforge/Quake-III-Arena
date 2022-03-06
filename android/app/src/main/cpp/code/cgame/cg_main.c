@@ -151,6 +151,7 @@ vmCvar_t	cg_ignore;
 vmCvar_t	cg_simpleItems;
 vmCvar_t	cg_fov;
 vmCvar_t	cg_zoomFov;
+vmCvar_t	cg_firstPersonBodyScale;
 vmCvar_t	cg_thirdPerson;
 vmCvar_t	cg_thirdPersonRange;
 vmCvar_t	cg_thirdPersonAngle;
@@ -278,6 +279,7 @@ static cvarTable_t cvarTable[] = {
 	{ &cg_tracerLength, "cg_tracerlength", "100", CVAR_CHEAT },
 	{ &cg_thirdPersonRange, "cg_thirdPersonRange", "40", CVAR_CHEAT },
 	{ &cg_thirdPersonAngle, "cg_thirdPersonAngle", "0", CVAR_CHEAT },
+	{ &cg_firstPersonBodyScale, "cg_firstPersonBodyScale", "0", CVAR_ARCHIVE },
 	{ &cg_thirdPerson, "cg_thirdPerson", "0", 0 },
 	{ &cg_teamChatTime, "cg_teamChatTime", "3000", CVAR_ARCHIVE  },
 	{ &cg_teamChatHeight, "cg_teamChatHeight", "0", CVAR_ARCHIVE  },

@@ -57,8 +57,9 @@ VR OPTIONS MENU
 #define ID_GORE 			    143
 #define ID_HAPTICINTENSITY	    144
 #define ID_HOLSTER2D		    145
+#define ID_BODYSCALE		    146
 
-#define ID_BACK					146
+#define ID_BACK					147
 
 #define	NUM_HUDDEPTH			6
 #define	NUM_DIRECTIONMODE		2
@@ -90,6 +91,7 @@ typedef struct {
 	menuradiobutton_s	lasersight;
 	menuslider_s 		hapticintensity;
 	menuradiobutton_s	holster2d;
+    menuslider_s	    bodyscale;
 	menulist_s 			gore;
 
 	menubitmap_s		back;
@@ -131,6 +133,7 @@ static void VR_SetMenuItems( void ) {
 	s_VR.lasersight.curvalue		    = trap_Cvar_VariableValue( "vr_lasersight" ) != 0;
 	s_VR.hapticintensity.curvalue		= trap_Cvar_VariableValue( "vr_hapticIntensity" );
 	s_VR.holster2d.curvalue		    = trap_Cvar_VariableValue( "cg_holsterSimple2DIcons" ) != 0;
+    s_VR.bodyscale.curvalue		    = trap_Cvar_VariableValue( "cg_firstPersonBodyScale" );
 
     //GORE
     {
@@ -231,7 +234,11 @@ static void VR_Event( void* ptr, int notification ) {
 
 	case ID_HOLSTER2D:
 		trap_Cvar_SetValue( "cg_holsterSimple2DIcons", s_VR.holster2d.curvalue);
-		break;
+        break;
+
+    case ID_BODYSCALE:
+        trap_Cvar_SetValue( "cg_firstPersonBodyScale", s_VR.bodyscale.curvalue);
+        break;
 
 		case ID_GORE: {
 			switch ((int)s_VR.gore.curvalue) {
@@ -343,7 +350,7 @@ static void VR_MenuInit( void ) {
 	s_VR.framer.width  	   = 256;
 	s_VR.framer.height  	   = 334;
 
-	y = 100;
+	y = 84;
     s_VR.drawhud.generic.type        = MTYPE_RADIOBUTTON;
     s_VR.drawhud.generic.name	      = "Draw HUD:";
     s_VR.drawhud.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
@@ -512,6 +519,17 @@ static void VR_MenuInit( void ) {
 	s_VR.holster2d.generic.x	          = VR_X_POS;
 	s_VR.holster2d.generic.y	          = y;
 
+    y += BIGCHAR_HEIGHT;
+    s_VR.bodyscale.generic.type        = MTYPE_SLIDER;
+    s_VR.bodyscale.generic.name	      = "1st-Person Body Scale:";
+    s_VR.bodyscale.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+    s_VR.bodyscale.generic.callback    = VR_Event;
+    s_VR.bodyscale.generic.id          = ID_BODYSCALE;
+    s_VR.bodyscale.generic.x	          = VR_X_POS;
+    s_VR.bodyscale.generic.y	          = y;
+    s_VR.bodyscale.minvalue		     	= 0.0f;
+    s_VR.bodyscale.maxvalue		     	= 1.0f;
+
 	y += BIGCHAR_HEIGHT + 10;
 	s_VR.gore.generic.type		= MTYPE_SPINCONTROL;
 	s_VR.gore.generic.flags		= QMF_PULSEIFFOCUS|QMF_SMALLFONT;
@@ -554,6 +572,7 @@ static void VR_MenuInit( void ) {
 	Menu_AddItem( &s_VR.menu, &s_VR.lasersight );
 	Menu_AddItem( &s_VR.menu, &s_VR.holster2d );
 	Menu_AddItem( &s_VR.menu, &s_VR.hapticintensity );
+    Menu_AddItem( &s_VR.menu, &s_VR.bodyscale );
 	Menu_AddItem( &s_VR.menu, &s_VR.gore );
 
 	Menu_AddItem( &s_VR.menu, &s_VR.back );
