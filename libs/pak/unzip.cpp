@@ -942,10 +942,6 @@ uLong crc32   OF((uLong crc, const Byte *buf, uInt len));
 ============================================================================
 */
 
-#ifdef _SGI_SOURCE
-#define	__BIG_ENDIAN__
-#endif
-
 #ifdef __BIG_ENDIAN__
 
 short   __LittleShort (short l)

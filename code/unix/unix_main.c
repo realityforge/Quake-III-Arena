@@ -374,12 +374,6 @@ void Sys_Init(void)
 #else
   Cvar_Set( "arch", "solaris unknown" );
 #endif
-#elif defined __sgi__
-#if defined __mips__
-  Cvar_Set( "arch", "sgi mips" );
-#else
-  Cvar_Set( "arch", "sgi unknown" );
-#endif
 #else
   Cvar_Set( "arch", "unknown" );
 #endif
@@ -726,8 +720,6 @@ void *Sys_LoadDll( const char *name, char *fqpath ,
   snprintf (fname, sizeof(fname), "%si386.so", name);
 #elif defined __axp__
   snprintf (fname, sizeof(fname), "%saxp.so", name);
-#elif defined __mips__
-  snprintf (fname, sizeof(fname), "%smips.so", name);
 #else
 #error Unknown arch
 #endif

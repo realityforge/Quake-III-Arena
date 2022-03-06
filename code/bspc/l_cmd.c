@@ -920,10 +920,6 @@ int ParseNum (char *str)
 ============================================================================
 */
 
-#ifdef _SGI_SOURCE
-#define	__BIG_ENDIAN__
-#endif
-
 #ifdef __BIG_ENDIAN__
 
 short   LittleShort (short l)
