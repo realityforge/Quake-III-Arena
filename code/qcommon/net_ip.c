@@ -73,13 +73,7 @@ static qboolean	winsockInitialized = qfalse;
 #	include <sys/types.h>
 #	include <sys/time.h>
 #	include <unistd.h>
-#	if !defined(__sun) && !defined(__sgi)
-#		include <ifaddrs.h>
-#	endif
-
-#	ifdef __sun
-#		include <sys/filio.h>
-#	endif
+#   include <ifaddrs.h>
 
 typedef int SOCKET;
 #	define INVALID_SOCKET		-1

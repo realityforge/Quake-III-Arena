@@ -563,14 +563,6 @@ static int GLimp_SetMode(int mode, qboolean fullscreen, qboolean noborder, qbool
 		else
 			perChannelColorBits = 4;
 
-#ifdef __sgi /* Fix for SGIs grabbing too many bits of color */
-		if (perChannelColorBits == 4)
-			perChannelColorBits = 0; /* Use minimum size for 16-bit color */
-
-		/* Need alpha or else SGIs choose 36+ bit RGB mode */
-		SDL_GL_SetAttribute( SDL_GL_ALPHA_SIZE, 1);
-#endif
-
 		SDL_GL_SetAttribute( SDL_GL_RED_SIZE, perChannelColorBits );
 		SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, perChannelColorBits );
 		SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, perChannelColorBits );

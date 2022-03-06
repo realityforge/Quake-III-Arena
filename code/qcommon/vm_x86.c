@@ -26,10 +26,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifdef _WIN32
   #include <windows.h>
 #else
-  #ifdef __FreeBSD__
-  #include <sys/types.h>
-  #endif
-
   #include <sys/mman.h> // for PROT_ stuff
 
   /* need this on NX enabled systems (i386 with PAE kernel or

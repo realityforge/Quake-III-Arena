@@ -148,14 +148,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 //================================================================= LINUX ===
 
-#if defined(__linux__) || defined(__FreeBSD_kernel__) || defined(__GNU__)
+#if defined(__linux__) || defined(__GNU__)
 
 #include <endian.h>
 
 #if defined(__linux__)
 #define OS_STRING "linux"
-#elif defined(__FreeBSD_kernel__)
-#define OS_STRING "kFreeBSD"
 #else
 #define OS_STRING "GNU"
 #endif
@@ -178,91 +176,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #else
 #define Q3_LITTLE_ENDIAN
 #endif
-
-#define DLL_EXT ".so"
-
-#endif
-
-//=================================================================== BSD ===
-
-#if defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__)
-
-#include <sys/types.h>
-#include <machine/endian.h>
-
-#ifndef __BSD__
-  #define __BSD__
-#endif
-
-#if defined(__FreeBSD__)
-#define OS_STRING "freebsd"
-#elif defined(__OpenBSD__)
-#define OS_STRING "openbsd"
-#elif defined(__NetBSD__)
-#define OS_STRING "netbsd"
-#endif
-
-#define ID_INLINE inline
-#define PATH_SEP '/'
-
-#ifdef __i386__
-#define ARCH_STRING "x86"
-#elif defined __amd64__
-#undef idx64
-#define idx64 1
-#define ARCH_STRING "x86_64"
-#elif defined __axp__
-#define ARCH_STRING "alpha"
-#endif
-
-#if BYTE_ORDER == BIG_ENDIAN
-#define Q3_BIG_ENDIAN
-#else
-#define Q3_LITTLE_ENDIAN
-#endif
-
-#define DLL_EXT ".so"
-
-#endif
-
-//================================================================= SUNOS ===
-
-#ifdef __sun
-
-#include <stdint.h>
-#include <sys/byteorder.h>
-
-#define OS_STRING "solaris"
-#define ID_INLINE inline
-#define PATH_SEP '/'
-
-#ifdef __i386__
-#define ARCH_STRING "x86"
-#elif defined __sparc
-#define ARCH_STRING "sparc"
-#endif
-
-#if defined( _BIG_ENDIAN )
-#define Q3_BIG_ENDIAN
-#elif defined( _LITTLE_ENDIAN )
-#define Q3_LITTLE_ENDIAN
-#endif
-
-#define DLL_EXT ".so"
-
-#endif
-
-//================================================================== IRIX ===
-
-#ifdef __sgi
-
-#define OS_STRING "irix"
-#define ID_INLINE __inline
-#define PATH_SEP '/'
-
-#define ARCH_STRING "mips"
-
-#define Q3_BIG_ENDIAN // SGI's MIPS are always big endian
 
 #define DLL_EXT ".so"
 
