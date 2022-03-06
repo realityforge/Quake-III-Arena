@@ -2122,17 +2122,35 @@ void CG_DrawHolsteredWeapons( void )
 				VectorScale(ent.axis[2], SCALE + (selected ? 0.04f : 0), ent.axis[2]);
 				ent.nonNormalizedAxes = qtrue;
 
+				if( weapons[w] == WP_RAILGUN ) {
+					clientInfo_t *ci = &cgs.clientinfo[cg.predictedPlayerState.clientNum];
+					if( cg_entities[cg.predictedPlayerState.clientNum].pe.railFireTime + 1500 > cg.time ) {
+						int scale = 255 * ( cg.time - cg_entities[cg.predictedPlayerState.clientNum].pe.railFireTime ) / 1500;
+						ent.shaderRGBA[0] = ( ci->c1RGBA[0] * scale ) >> 8;
+						ent.shaderRGBA[1] = ( ci->c1RGBA[1] * scale ) >> 8;
+						ent.shaderRGBA[2] = ( ci->c1RGBA[2] * scale ) >> 8;
+						ent.shaderRGBA[3] = 255;
+					}
+					else {
+						Byte4Copy( ci->c1RGBA, ent.shaderRGBA );
+					}
+				}
+
+
 				ent.hModel = cg_weapons[weapons[w]].weaponModel;
 				trap_R_AddRefEntityToScene(&ent);
 
-                if ( cg_weapons[weapons[w]].barrelModel ) {
+                if ( cg_weapons[weapons[w]].barrelModel )
+                {
                     refEntity_t barrel;
-                    memset( &barrel, 0, sizeof( barrel ) );
+                    memset(&barrel, 0, sizeof(barrel));
                     barrel.hModel = cg_weapons[weapons[w]].barrelModel;
-                    AnglesToAxis( vec3_origin, barrel.axis );
-                    CG_PositionRotatedEntityOnTag( &barrel, &ent, cg_weapons[weapons[w]].weaponModel, "tag_barrel" );
+                    AnglesToAxis(vec3_origin, barrel.axis);
+                    CG_PositionRotatedEntityOnTag(&barrel, &ent, cg_weapons[weapons[w]].weaponModel,
+                                                  "tag_barrel");
                     trap_R_AddRefEntityToScene(&barrel);
                 }
+
 			}
 			else
 			{
