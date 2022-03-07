@@ -3,12 +3,6 @@
 *.swp
 *~
 
-*.user
-.vs/
-.vscode/
-build/
-cmake-*
-output/
 # OS X files
 ############################
 .Spotlight-V100/
