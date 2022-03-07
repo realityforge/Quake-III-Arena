@@ -1,3 +1,5 @@
+load("@rules_cc//cc:defs.bzl", "cc_import", "cc_library")
+
 # This should use select/configurable attributes ala https://bazel.build/docs/configurable-attributes
 # to select the appropriate library ... actually there is probably a "real" bazel way
 cc_import(
