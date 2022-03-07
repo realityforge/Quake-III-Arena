@@ -272,9 +272,13 @@ static void IN_SendButtonAction(const char* action, qboolean pressed)
         }
         else if (pressed)
         {
-            char command[256];
-            Com_sprintf(command, sizeof(command), "%s\n", action);
-            Cbuf_AddText(command);
+            if (strcmp(action, "uturn") == 0) {
+                CL_SnapTurn(180);
+            } else {
+                char command[256];
+                Com_sprintf(command, sizeof(command), "%s\n", action);
+                Cbuf_AddText(command);
+            }
         }
     }
 }
