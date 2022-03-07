@@ -47,6 +47,7 @@ cc_library(
         "qcommon.h",
     ],
     visibility = [
+        "//code/botlib:__pkg__",
         "//code/client:__pkg__",
         "//code/renderergl1:__pkg__",
         "//code/sdl:__pkg__",
