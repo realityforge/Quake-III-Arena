@@ -4,6 +4,14 @@
 build/
 cmake-*
 output/
+# OS X files
+############################
+.Spotlight-V100/
+.Trashes/
+._*
+.DS_Store
+Icon?
+
 
 # JetBrains IDEs
 ############################
