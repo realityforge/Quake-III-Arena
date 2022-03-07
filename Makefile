@@ -212,10 +212,6 @@ ifndef USE_INTERNAL_VORBIS
 USE_INTERNAL_VORBIS=$(USE_INTERNAL_LIBS)
 endif
 
-ifndef USE_INTERNAL_OPUS
-USE_INTERNAL_OPUS=$(USE_INTERNAL_LIBS)
-endif
-
 ifndef USE_INTERNAL_ZLIB
 USE_INTERNAL_ZLIB=$(USE_INTERNAL_LIBS)
 endif
@@ -1089,16 +1085,10 @@ ifeq ($(USE_CODEC_OPUS),1)
 endif
 
 ifeq ($(NEED_OPUS),1)
-  ifeq ($(USE_INTERNAL_OPUS),1)
-    OPUS_CFLAGS = -DOPUS_BUILD -DHAVE_LRINTF -DFLOATING_POINT -DFLOAT_APPROX -DUSE_ALLOCA \
-      -I$(OPUSDIR)/include -I$(OPUSDIR)/celt -I$(OPUSDIR)/silk \
-      -I$(OPUSDIR)/silk/float -I$(OPUSFILEDIR)/include
-  else
-    OPUS_CFLAGS ?= $(shell $(PKG_CONFIG) --silence-errors --cflags opusfile opus || true)
-    OPUS_LIBS ?= $(shell $(PKG_CONFIG) --silence-errors --libs opusfile opus || echo -lopusfile -lopus)
-  endif
+  OPUS_CFLAGS = -DOPUS_BUILD -DHAVE_LRINTF -DFLOATING_POINT -DFLOAT_APPROX -DUSE_ALLOCA \
+    -I$(OPUSDIR)/include -I$(OPUSDIR)/celt -I$(OPUSDIR)/silk \
+    -I$(OPUSDIR)/silk/float -I$(OPUSFILEDIR)/include
   CLIENT_CFLAGS += $(OPUS_CFLAGS)
-  CLIENT_LIBS += $(OPUS_LIBS)
   NEED_OGG=1
 endif
 
@@ -1936,7 +1926,6 @@ ifeq ($(ARCH),x86_64)
 endif
 
 ifeq ($(NEED_OPUS),1)
-ifeq ($(USE_INTERNAL_OPUS),1)
 Q3OBJ += \
   $(B)/client/opus/analysis.o \
   $(B)/client/opus/mlp.o \
@@ -2081,7 +2070,6 @@ Q3OBJ += \
   $(B)/client/opusfile.o \
   $(B)/client/stream.o \
   $(B)/client/wincerts.o
-endif
 endif
 
 ifeq ($(NEED_OGG),1)
@@ -2933,7 +2921,6 @@ ifdef MINGW
 		USE_RENDERER_DLOPEN=$(USE_RENDERER_DLOPEN) \
 		USE_OPENAL_DLOPEN=$(USE_OPENAL_DLOPEN) \
 		USE_CURL_DLOPEN=$(USE_CURL_DLOPEN) \
-		USE_INTERNAL_OPUS=$(USE_INTERNAL_OPUS) \
 		USE_INTERNAL_ZLIB=$(USE_INTERNAL_ZLIB) \
 		USE_INTERNAL_JPEG=$(USE_INTERNAL_JPEG)
 else
