@@ -18,7 +18,7 @@ cc_library(
         "include",
     ],
     deps = [
-        "//code/libogg-1.3.3:ogg",
+        "//third_party/ogg",
         "//third_party/opus",
     ],
 )

@@ -80,5 +80,5 @@ cc_library(
         "include",
         "lib",
     ],
-    deps = ["//code/libogg-1.3.3:ogg"],
+    deps = ["//third_party/ogg"],
 )
