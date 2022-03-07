@@ -4,10 +4,12 @@
 build/
 cmake-*
 output/
-tmp/
 
 # JetBrains IDEs
 ############################
 /.clwb
 /.idea
 
+# Temp dirs and local notes
+############################
+/tmp
