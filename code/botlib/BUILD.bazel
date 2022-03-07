@@ -6,6 +6,7 @@ cc_library(
         "botlib.h",
     ],
     visibility = [
+        "//code/game:__pkg__",
         "//code/server:__pkg__",
     ],
     deps = [
@@ -84,6 +85,9 @@ cc_library(
         "BOTLIB",
     ],
     includes = ["."],
+    visibility = [
+        "//code/game:__pkg__",
+    ],
     deps = [
         ":api",
         "//code/qcommon",
