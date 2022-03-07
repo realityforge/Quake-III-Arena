@@ -15,10 +15,10 @@ cc_library(
     deps = [
         "//code/cgame:api",
         "//code/game:api",
-        "//code/opus-1.2.1:opus",
         "//code/qcommon",
         "//code/renderercommon:api",
         "//code/ui:api",
+        "//third_party/opus",
     ],
 )
 
