@@ -2083,7 +2083,7 @@ void CG_DrawHolsteredWeapons( void )
     {
 		if ( cg_weapons[ weapons[w] ].item ) {
             //first calculate holster slot position
-            vec3_t angles, iconOrigin;
+            vec3_t angles, iconOrigin,iconBackground;
             VectorClear(angles);
             angles[YAW] = startingPositionYaw - (w * SEP) - 4; // add a few degrees as models aren't central
             vec3_t forward;
@@ -2092,10 +2092,13 @@ void CG_DrawHolsteredWeapons( void )
             int dist = (cg.time - cg.weaponHolsterTime) / 10;
             if (dist > DIST) dist = DIST;
             VectorMA(vieworg, dist, forward, iconOrigin);
+            VectorMA(vieworg, dist+0.01f, forward, iconBackground);
 
             float worldscale = trap_Cvar_VariableValue("vr_worldscale");
             iconOrigin[2] -= PLAYER_HEIGHT;
             iconOrigin[2] += (vr->hmdposition[1] * 0.85f) * worldscale;
+			iconBackground[2] -= PLAYER_HEIGHT;
+			iconBackground[2] += (vr->hmdposition[1] * 0.85f) * worldscale;
 
             //Float sprite above selected weapon
             qboolean selected = qfalse;
@@ -2109,7 +2112,7 @@ void CG_DrawHolsteredWeapons( void )
                 refEntity_t		sprite;
                 memset( &sprite, 0, sizeof( sprite ) );
                 VectorCopy( iconOrigin, sprite.origin );
-                sprite.origin[2] += 2.5f + (0.5f * sinf(DEG2RAD(AngleNormalize360(cg.time/6))));
+                sprite.origin[2] += 2.5f + (0.5f * sinf(DEG2RAD(AngleNormalize360((cg.time - cg.weaponHolsterTime)/4))));
                 sprite.reType = RT_SPRITE;
                 sprite.customShader = cgs.media.friendShader;
                 sprite.radius = 0.5f;
@@ -2164,7 +2167,7 @@ void CG_DrawHolsteredWeapons( void )
                     barrel.hModel = cg_weapons[weapons[w]].barrelModel;
                     vec3_t barrelAngles;
                     VectorClear(barrelAngles);
-                    barrelAngles[ROLL] = AngleNormalize360(cg.time * 0.9f);
+                    barrelAngles[ROLL] = AngleNormalize360((cg.time - cg.weaponHolsterTime) * 0.9f);
                     AnglesToAxis(barrelAngles, barrel.axis);
                     CG_PositionRotatedEntityOnTag(&barrel, &ent, cg_weapons[weapons[w]].weaponModel,
                                                   "tag_barrel");
@@ -2180,6 +2183,16 @@ void CG_DrawHolsteredWeapons( void )
 				sprite.reType = RT_SPRITE;
 				sprite.customShader = cg_weapons[weapons[w]].weaponIcon;
 				sprite.radius = 0.6f + (selected ? 0.1f : 0);
+				sprite.shaderRGBA[0] = 255;
+				sprite.shaderRGBA[1] = 255;
+				sprite.shaderRGBA[2] = 255;
+				sprite.shaderRGBA[3] = 255;
+				trap_R_AddRefEntityToScene( &sprite );
+
+				//And now the selection background
+				VectorCopy( iconBackground, sprite.origin );
+				sprite.customShader = cgs.media.selectShader;
+				sprite.radius = 0.7f + (selected ? 0.1f : 0);
 				sprite.shaderRGBA[0] = 255;
 				sprite.shaderRGBA[1] = 255;
 				sprite.shaderRGBA[2] = 255;
