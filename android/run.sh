@@ -19,7 +19,7 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 
-PACKAGE_NAME=com.sparkie.ioq3quest
+PACKAGE_NAME=com.drbeef.ioq3quest
 ANDROID_STORAGE_LOCATION=/sdcard/Android/data/$PACKAGE_NAME/files/
 APK_LOCATION=./app/build/outputs/apk/debug/app-debug.apk
 
@@ -32,22 +32,22 @@ if [ $? -ne 0 ]; then
 		exit 1
 	fi
 fi
-adb shell mkdir -p $ANDROID_STORAGE_LOCATION
-adb push --sync ~/.local/share/Steam/steamapps/common/Quake\ 3\ Arena/baseq3 $ANDROID_STORAGE_LOCATION
-if [ $? -ne 0 ]; then
-	echo "Failed to transfer files."
-	exit 1
-fi
-adb push --sync ../code/renderergl2/glsl $ANDROID_STORAGE_LOCATION/baseq3/
-if [ $? -ne 0 ]; then
-	echo "Failed to transfer shaders."
-	exit 1
-fi
-adb push --sync autoexec.cfg $ANDROID_STORAGE_LOCATION/baseq3/
-if [ $? -ne 0 ]; then
-	echo "Failed to transfer autoexec."
-	exit 1
-fi
+#adb shell mkdir -p $ANDROID_STORAGE_LOCATION
+#adb push --sync ~/.local/share/Steam/steamapps/common/Quake\ 3\ Arena/baseq3 $ANDROID_STORAGE_LOCATION
+#if [ $? -ne 0 ]; then
+#	echo "Failed to transfer files."
+#	exit 1
+#fi
+#adb push --sync ../code/renderergl2/glsl $ANDROID_STORAGE_LOCATION/baseq3/
+#if [ $? -ne 0 ]; then
+#	echo "Failed to transfer shaders."
+#	exit 1
+#fi
+#adb push --sync autoexec.cfg $ANDROID_STORAGE_LOCATION/baseq3/
+#if [ $? -ne 0 ]; then
+#	echo "Failed to transfer autoexec."
+#	exit 1
+#fi
 
 adb logcat -c
 adb shell am start -n $PACKAGE_NAME/.MainActivity
