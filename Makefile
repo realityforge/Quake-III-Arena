@@ -208,10 +208,6 @@ ifndef USE_INTERNAL_VORBIS
 USE_INTERNAL_VORBIS=$(USE_INTERNAL_LIBS)
 endif
 
-ifndef USE_INTERNAL_ZLIB
-USE_INTERNAL_ZLIB=$(USE_INTERNAL_LIBS)
-endif
-
 ifndef USE_LOCAL_HEADERS
 USE_LOCAL_HEADERS=$(USE_INTERNAL_LIBS)
 endif
@@ -1110,14 +1106,8 @@ ifeq ($(USE_MUMBLE),1)
   CLIENT_CFLAGS += -DUSE_MUMBLE
 endif
 
-ifeq ($(USE_INTERNAL_ZLIB),1)
-  ZLIB_CFLAGS = -DNO_GZIP -I$(ZDIR)
-else
-  ZLIB_CFLAGS ?= $(shell $(PKG_CONFIG) --silence-errors --cflags zlib || true)
-  ZLIB_LIBS ?= $(shell $(PKG_CONFIG) --silence-errors --libs zlib || echo -lz)
-endif
+ZLIB_CFLAGS = -DNO_GZIP -I$(ZDIR)
 BASE_CFLAGS += $(ZLIB_CFLAGS)
-LIBS += $(ZLIB_LIBS)
 
 BASE_CFLAGS += -DUSE_INTERNAL_JPEG
 BASE_CFLAGS += -I$(JPDIR)
@@ -2080,7 +2070,6 @@ Q3OBJ += \
 endif
 endif
 
-ifeq ($(USE_INTERNAL_ZLIB),1)
 Q3OBJ += \
   $(B)/client/adler32.o \
   $(B)/client/crc32.o \
@@ -2088,7 +2077,6 @@ Q3OBJ += \
   $(B)/client/inflate.o \
   $(B)/client/inftrees.o \
   $(B)/client/zutil.o
-endif
 
 ifeq ($(HAVE_VM_COMPILED),true)
   ifneq ($(findstring $(ARCH),x86 x86_64),)
@@ -2252,7 +2240,6 @@ ifeq ($(ARCH),x86_64)
       $(B)/ded/ftola.o
 endif
 
-ifeq ($(USE_INTERNAL_ZLIB),1)
 Q3DOBJ += \
   $(B)/ded/adler32.o \
   $(B)/ded/crc32.o \
@@ -2260,7 +2247,6 @@ Q3DOBJ += \
   $(B)/ded/inflate.o \
   $(B)/ded/inftrees.o \
   $(B)/ded/zutil.o
-endif
 
 ifeq ($(HAVE_VM_COMPILED),true)
   ifneq ($(findstring $(ARCH),x86 x86_64),)
@@ -2893,8 +2879,7 @@ ifdef MINGW
 		SDLDLL=$(SDLDLL) \
 		USE_RENDERER_DLOPEN=$(USE_RENDERER_DLOPEN) \
 		USE_OPENAL_DLOPEN=$(USE_OPENAL_DLOPEN) \
-		USE_CURL_DLOPEN=$(USE_CURL_DLOPEN) \
-		USE_INTERNAL_ZLIB=$(USE_INTERNAL_ZLIB)
+		USE_CURL_DLOPEN=$(USE_CURL_DLOPEN)
 else
 	@$(MAKE) VERSION=$(VERSION) -C $(LOKISETUPDIR) V=$(V)
 endif

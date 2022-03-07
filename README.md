@@ -144,9 +144,8 @@ Makefile.local:
   USE_FREETYPE         - enable FreeType support for rendering fonts
   USE_INTERNAL_LIBS    - build internal libraries instead of dynamically
                          linking against system libraries; this just sets
-                         the default for USE_INTERNAL_ZLIB etc.
+                         the default for USE_INTERNAL_* etc.
                          and USE_LOCAL_HEADERS
-  USE_INTERNAL_ZLIB    - build and link against internal zlib
   USE_LOCAL_HEADERS    - use headers local to ioq3 instead of system ones
   DEBUG_CFLAGS         - C compiler flags to use for building debug version
   COPYDIR              - the target installation directory

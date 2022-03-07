@@ -25,9 +25,6 @@ endif
 ifndef USE_INTERNAL_SPEEX
 USE_INTERNAL_SPEEX=1
 endif
-ifndef USE_INTERNAL_ZLIB
-USE_INTERNAL_ZLIB=1
-endif
 ifndef SDLDLL
 	ifeq ($(ARCH),x86_64)
 		SDLDLL=SDL264.dll
@@ -56,10 +53,6 @@ endif
 ifeq ($(USE_INTERNAL_SPEEX),1)
 	DEFINES+= -DUSE_INTERNAL_SPEEX
 endif
-ifeq ($(USE_INTERNAL_ZLIB),1)
-	DEFINES+= -DUSE_INTERNAL_ZLIB
-endif
-
 
 all: ioquake3-$(VERSION)-$(RELEASE).$(ARCH).exe
 
