@@ -1944,8 +1944,6 @@
 				012ADA4F00868211C697A10E,
 				012ADA5000868211C697A10E,
 				012ADA5100868211C697A10E,
-				012ADA5200868211C697A10E,
-				012ADA5300868211C697A10E,
 				012ADA5400868211C697A10E,
 				012ADA5500868211C697A10E,
 				012ADA5600868211C697A10E,
@@ -2326,22 +2324,6 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			path = g_public.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		012ADA5200868211C697A10E = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.c;
-			path = g_rankings.c;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		012ADA5300868211C697A10E = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = g_rankings.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
