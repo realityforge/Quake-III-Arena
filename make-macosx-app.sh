@@ -323,7 +323,7 @@ PLIST="<?xml version=\"1.0\" encoding=\"UTF-8\"?>
     <key>LSMinimumSystemVersion</key>
     <string>${MACOSX_DEPLOYMENT_TARGET}</string>"
 
-if [ [ -n "${MACOSX_DEPLOYMENT_TARGET_X86}" ] || [ -n "${MACOSX_DEPLOYMENT_TARGET_X86_64}" ] || [ -n "${MACOSX_DEPLOYMENT_TARGET_ARM64}" ]; then
+if [ -n "${MACOSX_DEPLOYMENT_TARGET_X86}" ] || [ -n "${MACOSX_DEPLOYMENT_TARGET_X86_64}" ] || [ -n "${MACOSX_DEPLOYMENT_TARGET_ARM64}" ]; then
 	PLIST="${PLIST}
     <key>LSMinimumSystemVersionByArchitecture</key>
     <dict>"
