@@ -248,6 +248,6 @@ cc_library(
     ],
     visibility = [
         "//code/client:__pkg__",
-        "//code/opusfile-0.9:__pkg__",
+        "//third_party/opusfile:__pkg__",
     ],
 )

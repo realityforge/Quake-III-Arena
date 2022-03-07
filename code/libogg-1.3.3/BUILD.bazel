@@ -13,6 +13,6 @@ cc_library(
     includes = ["include"],
     visibility = [
         "//code/libvorbis-1.3.6:__pkg__",
-        "//code/opusfile-0.9:__pkg__",
+        "//third_party/opusfile:__pkg__",
     ],
 )
