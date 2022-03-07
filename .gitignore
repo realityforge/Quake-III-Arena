@@ -1,8 +1,13 @@
 *.user
-.idea
 .vs/
 .vscode/
 build/
 cmake-*
 output/
 tmp/
+
+# JetBrains IDEs
+############################
+/.clwb
+/.idea
+
