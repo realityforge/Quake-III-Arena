@@ -14,11 +14,6 @@ ifeq ($(shell uname -m), aarch64)
   COMPILE_ARCH=arm64
 endif
 
-ifeq ($(COMPILE_PLATFORM),sunos)
-  # Solaris uname and GNU uname differ
-  COMPILE_ARCH=$(shell uname -p | sed -e 's/i.86/x86/')
-endif
-
 ifndef BUILD_STANDALONE
   BUILD_STANDALONE =
 endif
@@ -79,17 +74,6 @@ ifeq ($(COMPILE_ARCH),amd64)
 endif
 ifeq ($(COMPILE_ARCH),x64)
   COMPILE_ARCH=x86_64
-endif
-
-ifeq ($(COMPILE_ARCH),powerpc)
-  COMPILE_ARCH=ppc
-endif
-ifeq ($(COMPILE_ARCH),powerpc64)
-  COMPILE_ARCH=ppc64
-endif
-
-ifeq ($(COMPILE_ARCH),axp)
-  COMPILE_ARCH=alpha
 endif
 
 ifndef ARCH
@@ -320,11 +304,11 @@ MKDIR=mkdir -p
 EXTRA_FILES=
 CLIENT_EXTRA_FILES=
 
-ifneq (,$(findstring "$(COMPILE_PLATFORM)", "linux" "gnu_kfreebsd" "kfreebsd-gnu" "gnu"))
+ifneq (,$(findstring "$(COMPILE_PLATFORM)", "linux" "gnu"))
   TOOLS_CFLAGS += -DARCH_STRING=\"$(COMPILE_ARCH)\"
 endif
 
-ifneq (,$(findstring "$(PLATFORM)", "linux" "gnu_kfreebsd" "kfreebsd-gnu" "gnu"))
+ifneq (,$(findstring "$(PLATFORM)", "linux" "gnu"))
   BASE_CFLAGS = -Wall -fno-strict-aliasing -Wimplicit -Wstrict-prototypes \
     -pipe -DUSE_ICON -DARCH_STRING=\\\"$(ARCH)\\\"
   CLIENT_CFLAGS += $(SDL_CFLAGS)
@@ -342,24 +326,8 @@ ifneq (,$(findstring "$(PLATFORM)", "linux" "gnu_kfreebsd" "kfreebsd-gnu" "gnu")
     OPTIMIZE = $(OPTIMIZEVM) -ffast-math
     HAVE_VM_COMPILED=true
   else
-  ifeq ($(ARCH),ppc)
-    HAVE_VM_COMPILED=true
-  endif
-  ifeq ($(ARCH),ppc64)
-    HAVE_VM_COMPILED=true
-  endif
-  ifeq ($(ARCH),sparc)
-    OPTIMIZE += -mtune=ultrasparc3 -mv8plus
-    OPTIMIZEVM += -mtune=ultrasparc3 -mv8plus
-    HAVE_VM_COMPILED=true
-  endif
   ifeq ($(ARCH),armv7l)
     HAVE_VM_COMPILED=true
-  endif
-  ifeq ($(ARCH),alpha)
-    # According to http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=410555
-    # -ffast-math will cause the client to die with SIGFPE on Alpha
-    OPTIMIZE = $(OPTIMIZEVM)
   endif
   endif
   endif
@@ -398,9 +366,6 @@ ifneq (,$(findstring "$(PLATFORM)", "linux" "gnu_kfreebsd" "kfreebsd-gnu" "gnu")
     # linux32 make ...
     BASE_CFLAGS += -m32
   else
-  ifeq ($(ARCH),ppc64)
-    BASE_CFLAGS += -m64
-  endif
   endif
 else # ifeq Linux
 
@@ -417,10 +382,7 @@ ifeq ($(PLATFORM),darwin)
 
   # Default minimum Mac OS X version
   ifeq ($(MACOSX_VERSION_MIN),)
-    MACOSX_VERSION_MIN=10.7
-    ifneq ($(findstring $(ARCH),ppc ppc64),)
-      MACOSX_VERSION_MIN=10.5
-    endif
+    MACOSX_VERSION_MIN=10.5
     ifeq ($(ARCH),arm64)
       MACOSX_VERSION_MIN=11.0
     endif
@@ -445,12 +407,6 @@ ifeq ($(PLATFORM),darwin)
     MACOSX_ARCH=i386
   endif
 
-  ifeq ($(ARCH),ppc)
-    BASE_CFLAGS += -arch ppc
-  endif
-  ifeq ($(ARCH),ppc64)
-    BASE_CFLAGS += -arch ppc64
-  endif
   ifeq ($(ARCH),x86)
     OPTIMIZEVM += -march=prescott -mfpmath=sse
     # x86 vm will crash without -mstackrealign since MMX instructions will be
@@ -482,12 +438,8 @@ ifeq ($(PLATFORM),darwin)
 
     ifndef CC
       ifndef DARWIN
-        # macOS 10.9 SDK
-        DARWIN=13
-        ifneq ($(findstring $(ARCH),ppc ppc64),)
-          # macOS 10.5 SDK, though as of writing osxcross doesn't support ppc/ppc64
-          DARWIN=9
-        endif
+        # macOS 10.5 SDK
+        DARWIN=9
         ifeq ($(ARCH),arm64)
           # macOS 11.3 SDK
           DARWIN=20.4
@@ -729,262 +681,9 @@ ifdef MINGW
     SDLDLL=SDL2.dll
   endif
 
-else # ifdef MINGW
-
-#############################################################################
-# SETUP AND BUILD -- FREEBSD
-#############################################################################
-
-ifeq ($(PLATFORM),freebsd)
-
-  # flags
-  BASE_CFLAGS = \
-    -Wall -fno-strict-aliasing -Wimplicit -Wstrict-prototypes \
-    -DUSE_ICON -DMAP_ANONYMOUS=MAP_ANON
-  CLIENT_CFLAGS += $(SDL_CFLAGS)
-  HAVE_VM_COMPILED = true
-
-  OPTIMIZEVM =
-  OPTIMIZE = $(OPTIMIZEVM) -ffast-math
-
-  SHLIBEXT=so
-  SHLIBCFLAGS=-fPIC
-  SHLIBLDFLAGS=-shared $(LDFLAGS)
-
-  THREAD_LIBS=-lpthread
-  # don't need -ldl (FreeBSD)
-  LIBS=-lm
-
-  CLIENT_LIBS =
-
-  CLIENT_LIBS += $(SDL_LIBS)
-  RENDERER_LIBS = $(SDL_LIBS)
-
-  # optional features/libraries
-  ifeq ($(USE_OPENAL),1)
-    ifeq ($(USE_OPENAL_DLOPEN),1)
-      CLIENT_LIBS += $(THREAD_LIBS) $(OPENAL_LIBS)
-    endif
-  endif
-
-  ifeq ($(USE_CURL),1)
-    CLIENT_CFLAGS += $(CURL_CFLAGS)
-    ifeq ($(USE_CURL_DLOPEN),1)
-      CLIENT_LIBS += $(CURL_LIBS)
-    endif
-  endif
-
-  # cross-compiling tweaks
-  ifeq ($(ARCH),x86)
-    ifeq ($(CROSS_COMPILING),1)
-      BASE_CFLAGS += -m32
-    endif
-  endif
-  ifeq ($(ARCH),x86_64)
-    ifeq ($(CROSS_COMPILING),1)
-      BASE_CFLAGS += -m64
-    endif
-  endif
-else # ifeq freebsd
-
-#############################################################################
-# SETUP AND BUILD -- OPENBSD
-#############################################################################
-
-ifeq ($(PLATFORM),openbsd)
-
-  BASE_CFLAGS = -Wall -fno-strict-aliasing -Wimplicit -Wstrict-prototypes \
-    -pipe -DUSE_ICON -DMAP_ANONYMOUS=MAP_ANON
-  CLIENT_CFLAGS += $(SDL_CFLAGS)
-
-  OPTIMIZEVM = -O3
-  OPTIMIZE = $(OPTIMIZEVM) -ffast-math
-
-  ifeq ($(ARCH),x86_64)
-    OPTIMIZEVM = -O3
-    OPTIMIZE = $(OPTIMIZEVM) -ffast-math
-    HAVE_VM_COMPILED = true
-  else
-  ifeq ($(ARCH),x86)
-    OPTIMIZEVM = -O3 -march=i586
-    OPTIMIZE = $(OPTIMIZEVM) -ffast-math
-    HAVE_VM_COMPILED=true
-  else
-  ifeq ($(ARCH),ppc)
-    HAVE_VM_COMPILED=true
-  endif
-  ifeq ($(ARCH),ppc64)
-    HAVE_VM_COMPILED=true
-  endif
-  ifeq ($(ARCH),sparc64)
-    OPTIMIZE += -mtune=ultrasparc3 -mv8plus
-    OPTIMIZEVM += -mtune=ultrasparc3 -mv8plus
-    HAVE_VM_COMPILED=true
-  endif
-  ifeq ($(ARCH),alpha)
-    # According to http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=410555
-    # -ffast-math will cause the client to die with SIGFPE on Alpha
-    OPTIMIZE = $(OPTIMIZEVM)
-  endif
-  endif
-  endif
-
-  ifeq ($(USE_CURL),1)
-    CLIENT_CFLAGS += $(CURL_CFLAGS)
-    USE_CURL_DLOPEN=0
-  endif
-
-  # no shm_open on OpenBSD
-  USE_MUMBLE=0
-
-  SHLIBEXT=so
-  SHLIBCFLAGS=-fPIC
-  SHLIBLDFLAGS=-shared $(LDFLAGS)
-
-  THREAD_LIBS=-lpthread
-  LIBS=-lm
-
-  CLIENT_LIBS =
-
-  CLIENT_LIBS += $(SDL_LIBS)
-  RENDERER_LIBS = $(SDL_LIBS)
-
-  ifeq ($(USE_OPENAL),1)
-    ifneq ($(USE_OPENAL_DLOPEN),1)
-      CLIENT_LIBS += $(THREAD_LIBS) $(OPENAL_LIBS)
-    endif
-  endif
-
-  ifeq ($(USE_CURL),1)
-    ifneq ($(USE_CURL_DLOPEN),1)
-      CLIENT_LIBS += $(CURL_LIBS)
-    endif
-  endif
-else # ifeq openbsd
-
-#############################################################################
-# SETUP AND BUILD -- NETBSD
-#############################################################################
-
-ifeq ($(PLATFORM),netbsd)
-
-  LIBS=-lm
-  SHLIBEXT=so
-  SHLIBCFLAGS=-fPIC
-  SHLIBLDFLAGS=-shared $(LDFLAGS)
-  THREAD_LIBS=-lpthread
-
-  BASE_CFLAGS = -Wall -fno-strict-aliasing -Wimplicit -Wstrict-prototypes
-
-  ifeq ($(ARCH),x86)
-    HAVE_VM_COMPILED=true
-  endif
-
-  BUILD_CLIENT = 0
-else # ifeq netbsd
-
-#############################################################################
-# SETUP AND BUILD -- IRIX
-#############################################################################
-
-ifeq ($(PLATFORM),irix64)
-  LIB=lib
-
-  ARCH=mips
-
-  CC = c99
-
-  BASE_CFLAGS=-Dstricmp=strcasecmp -Xcpluscomm -woff 1185 \
-    -I. -I$(ROOT)/usr/include
-  CLIENT_CFLAGS += $(SDL_CFLAGS)
-  OPTIMIZE = -O3
-
-  SHLIBEXT=so
-  SHLIBCFLAGS=
-  SHLIBLDFLAGS=-shared
-
-  LIBS=-ldl -lm -lgen
-
-  # FIXME: The X libraries probably aren't necessary?
-  CLIENT_LIBS=-L/usr/X11/$(LIB) $(SDL_LIBS) \
-    -lX11 -lXext -lm
-  RENDERER_LIBS = $(SDL_LIBS)
-
-else # ifeq IRIX
-
-#############################################################################
-# SETUP AND BUILD -- SunOS
-#############################################################################
-
-ifeq ($(PLATFORM),sunos)
-
-  CC=gcc
-  INSTALL=ginstall
-  MKDIR=gmkdir -p
-  COPYDIR="/usr/local/share/games/quake3"
-
-  ifneq ($(ARCH),x86)
-    ifneq ($(ARCH),sparc)
-      $(error arch $(ARCH) is currently not supported)
-    endif
-  endif
-
-  BASE_CFLAGS = -Wall -fno-strict-aliasing -Wimplicit -Wstrict-prototypes \
-    -pipe -DUSE_ICON
-  CLIENT_CFLAGS += $(SDL_CFLAGS)
-
-  OPTIMIZEVM = -O3 -funroll-loops
-
-  ifeq ($(ARCH),sparc)
-    OPTIMIZEVM += -O3 \
-      -fstrength-reduce -falign-functions=2 \
-      -mtune=ultrasparc3 -mv8plus -mno-faster-structs
-    HAVE_VM_COMPILED=true
-  else
-  ifeq ($(ARCH),x86)
-    OPTIMIZEVM += -march=i586 -fomit-frame-pointer \
-      -falign-functions=2 -fstrength-reduce
-    HAVE_VM_COMPILED=true
-    BASE_CFLAGS += -m32
-    CLIENT_CFLAGS += -I/usr/X11/include/NVIDIA
-    CLIENT_LDFLAGS += -L/usr/X11/lib/NVIDIA -R/usr/X11/lib/NVIDIA
-  endif
-  endif
-
-  OPTIMIZE = $(OPTIMIZEVM) -ffast-math
-
-  SHLIBEXT=so
-  SHLIBCFLAGS=-fPIC
-  SHLIBLDFLAGS=-shared $(LDFLAGS)
-
-  THREAD_LIBS=-lpthread
-  LIBS=-lsocket -lnsl -ldl -lm
-
-  BOTCFLAGS=-O0
-
-  CLIENT_LIBS +=$(SDL_LIBS) -lX11 -lXext -liconv -lm
-  RENDERER_LIBS = $(SDL_LIBS)
-
-else # ifeq sunos
-
-#############################################################################
-# SETUP AND BUILD -- GENERIC
-#############################################################################
-  BASE_CFLAGS=
-  OPTIMIZE = -O3
-
-  SHLIBEXT=so
-  SHLIBCFLAGS=-fPIC
-  SHLIBLDFLAGS=-shared
-
-endif #Linux
-endif #darwin
-endif #MINGW
-endif #FreeBSD
-endif #OpenBSD
-endif #NetBSD
-endif #IRIX
-endif #SunOS
+endif
+endif
+endif
 
 ifndef CC
   CC=gcc
