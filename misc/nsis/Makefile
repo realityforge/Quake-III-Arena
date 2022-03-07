@@ -28,9 +28,6 @@ endif
 ifndef USE_INTERNAL_ZLIB
 USE_INTERNAL_ZLIB=1
 endif
-ifndef USE_INTERNAL_JPEG
-USE_INTERNAL_JPEG=1
-endif
 ifndef SDLDLL
 	ifeq ($(ARCH),x86_64)
 		SDLDLL=SDL264.dll
@@ -61,9 +58,6 @@ ifeq ($(USE_INTERNAL_SPEEX),1)
 endif
 ifeq ($(USE_INTERNAL_ZLIB),1)
 	DEFINES+= -DUSE_INTERNAL_ZLIB
-endif
-ifeq ($(USE_INTERNAL_JPEG),1)
-	DEFINES+= -DUSE_INTERNAL_JPEG
 endif
 
 

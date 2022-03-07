@@ -32,17 +32,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * You may also wish to include "jerror.h".
  */
 
-#ifdef USE_INTERNAL_JPEG
-#  define JPEG_INTERNALS
-#endif
+// We need to include this before including jpeg library
+#define JPEG_INTERNALS
 
-#include <jpeglib.h>
-
-#ifndef USE_INTERNAL_JPEG
-#  if JPEG_LIB_VERSION < 80 && !defined(MEM_SRCDST_SUPPORTED)
-#    error Need system libjpeg >= 80 or jpeg_mem_ support
-#  endif
-#endif
+#include "jpeglib.h"
 
 /* Catching errors, as done in libjpeg's example.c */
 typedef struct q_jpeg_error_mgr_s

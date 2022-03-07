@@ -84,9 +84,6 @@ Section "ioquake3 (required)"
 !ifndef USE_INTERNAL_ZLIB
   File "zlib1.dll"
 !endif
-!ifndef USE_INTERNAL_JPEG
-  File "jpeg8c.dll"
-!endif
 
   ; Put file there
   File "../../build/release-mingw32-x86/ioq3ded.x86.exe"
@@ -194,9 +191,6 @@ Section "Uninstall"
 !endif
 !ifndef USE_INTERNAL_ZLIB
   Delete $INSTDIR\zlib1.dll
-!endif
-!ifndef USE_INTERNAL_JPEG
-  Delete $INSTDIR\jpeg8c.dll
 !endif
 
   Delete $INSTDIR\SDL2.dll
