@@ -204,10 +204,6 @@ ifndef USE_INTERNAL_LIBS
 USE_INTERNAL_LIBS=1
 endif
 
-ifndef USE_INTERNAL_OGG
-USE_INTERNAL_OGG=$(USE_INTERNAL_LIBS)
-endif
-
 ifndef USE_INTERNAL_VORBIS
 USE_INTERNAL_VORBIS=$(USE_INTERNAL_LIBS)
 endif
@@ -1102,14 +1098,8 @@ ifeq ($(USE_CODEC_VORBIS),1)
 endif
 
 ifeq ($(NEED_OGG),1)
-  ifeq ($(USE_INTERNAL_OGG),1)
-    OGG_CFLAGS = -I$(OGGDIR)/include
-  else
-    OGG_CFLAGS ?= $(shell $(PKG_CONFIG) --silence-errors --cflags ogg || true)
-    OGG_LIBS ?= $(shell $(PKG_CONFIG) --silence-errors --libs ogg || echo -logg)
-  endif
+  OGG_CFLAGS = -I$(OGGDIR)/include
   CLIENT_CFLAGS += $(OGG_CFLAGS)
-  CLIENT_LIBS += $(OGG_LIBS)
 endif
 
 ifeq ($(USE_RENDERER_DLOPEN),1)
@@ -2058,11 +2048,9 @@ Q3OBJ += \
 endif
 
 ifeq ($(NEED_OGG),1)
-ifeq ($(USE_INTERNAL_OGG),1)
 Q3OBJ += \
   $(B)/client/bitwise.o \
   $(B)/client/framing.o
-endif
 endif
 
 ifeq ($(USE_CODEC_VORBIS),1)

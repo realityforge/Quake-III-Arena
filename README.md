@@ -147,7 +147,6 @@ Makefile.local:
                          the default for USE_INTERNAL_ZLIB etc.
                          and USE_LOCAL_HEADERS
   USE_INTERNAL_ZLIB    - build and link against internal zlib
-  USE_INTERNAL_OGG     - build and link against internal ogg library
   USE_LOCAL_HEADERS    - use headers local to ioq3 instead of system ones
   DEBUG_CFLAGS         - C compiler flags to use for building debug version
   COPYDIR              - the target installation directory
