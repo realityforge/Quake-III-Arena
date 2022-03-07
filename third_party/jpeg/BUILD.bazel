@@ -62,7 +62,7 @@ cc_library(
     ],
     includes = ["."],
     visibility = [
-        "//code/SDL2:__pkg__",
         "//code/renderercommon:__pkg__",
+        "//third_party/sdl:__pkg__",
     ],
 )

@@ -33,8 +33,8 @@ cc_library(
     ],
     deps = [
         ":api",
-        "//code/SDL2:sdl",
         "//code/qcommon:renderercommon_support",
         "//third_party/jpeg",
+        "//third_party/sdl",
     ],
 )

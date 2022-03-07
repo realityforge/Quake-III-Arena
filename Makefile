@@ -265,8 +265,8 @@ Q3LCCETCDIR=$(MOUNT_DIR)/tools/lcc/etc
 Q3LCCSRCDIR=$(MOUNT_DIR)/tools/lcc/src
 LOKISETUPDIR=misc/setup
 NSISDIR=misc/nsis
-SDLHDIR=$(MOUNT_DIR)/SDL2
-SDLLIBSDIR=$(MOUNT_DIR)/SDL2/libs
+SDLHDIR=third_party/sdl
+SDLLIBSDIR=third_party/sdl/libs
 CURLLIBSDIR=$(MOUNT_DIR)/curl-7.54.0/libs
 
 bin_path=$(shell which $(1) 2> /dev/null)

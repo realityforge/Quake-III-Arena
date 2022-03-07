@@ -5,11 +5,11 @@ cc_library(
     ],
     defines = ["USE_LOCAL_HEADERS"],
     deps = [
-        "//code/SDL2:sdl",
         "//code/client",
         "//code/client:snd_api",
         "//code/client:snd_internal_api",
         "//code/qcommon",
+        "//third_party/sdl",
     ],
 )
 
@@ -20,11 +20,11 @@ cc_library(
     ],
     defines = ["USE_LOCAL_HEADERS"],
     deps = [
-        "//code/SDL2:sdl",
         "//code/client",
         "//code/client:snd_api",
         "//code/qcommon",
         "//code/sys:sys_local",
+        "//third_party/sdl",
     ],
 )
 
@@ -37,9 +37,9 @@ cc_library(
     ],
     defines = ["USE_LOCAL_HEADERS"],
     deps = [
-        "//code/SDL2:sdl",
         "//code/qcommon",
         "//code/renderercommon",
         "//code/sys:sys_local",
+        "//third_party/sdl",
     ],
 )
