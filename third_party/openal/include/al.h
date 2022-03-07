@@ -30,7 +30,7 @@ extern "C" {
 #define AL_ILLEGAL_ENUM                          AL_INVALID_ENUM
 #define AL_ILLEGAL_COMMAND                       AL_INVALID_OPERATION
 
-/** Supported AL version. */
+/** Supported openal version. */
 #define AL_VERSION_1_0
 #define AL_VERSION_1_1
 
@@ -363,16 +363,16 @@ typedef void ALvoid;
 /** No error. */
 #define AL_NO_ERROR                              0
 
-/** Invalid name paramater passed to AL call. */
+/** Invalid name paramater passed to openal call. */
 #define AL_INVALID_NAME                          0xA001
 
-/** Invalid enum parameter passed to AL call. */
+/** Invalid enum parameter passed to openal call. */
 #define AL_INVALID_ENUM                          0xA002
 
-/** Invalid value parameter passed to AL call. */
+/** Invalid value parameter passed to openal call. */
 #define AL_INVALID_VALUE                         0xA003
 
-/** Illegal AL call. */
+/** Illegal openal call. */
 #define AL_INVALID_OPERATION                     0xA004
 
 /** Not enough memory. */
@@ -468,7 +468,7 @@ AL_API ALdouble AL_APIENTRY alGetDouble(ALenum param);
 /**
  * Error retrieval.
  *
- * Obtain the first error generated in the AL context since the last check.
+ * Obtain the first error generated in the openal context since the last check.
  */
 AL_API ALenum AL_APIENTRY alGetError(void);
 
@@ -574,7 +574,7 @@ AL_API void AL_APIENTRY alGetBufferi(ALuint buffer, ALenum param, ALint *value);
 AL_API void AL_APIENTRY alGetBuffer3i(ALuint buffer, ALenum param, ALint *value1, ALint *value2, ALint *value3);
 AL_API void AL_APIENTRY alGetBufferiv(ALuint buffer, ALenum param, ALint *values);
 
-/** Pointer-to-function type, useful for dynamically getting AL entry points. */
+/** Pointer-to-function type, useful for dynamically getting openal entry points. */
 typedef void          (AL_APIENTRY *LPALENABLE)(ALenum capability);
 typedef void          (AL_APIENTRY *LPALDISABLE)(ALenum capability);
 typedef ALboolean     (AL_APIENTRY *LPALISENABLED)(ALenum capability);

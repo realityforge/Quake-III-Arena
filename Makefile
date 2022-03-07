@@ -254,6 +254,7 @@ NSISDIR=misc/nsis
 CURLLIBSDIR=$(MOUNT_DIR)/curl-7.54.0/libs
 JPDIR=third_party/jpeg
 OGGDIR=third_party/ogg
+OPENALDIR=third_party/openal
 OPUSDIR=third_party/opus
 OPUSFILEDIR=third_party/opusfile
 SDLHDIR=third_party/sdl
@@ -374,6 +375,9 @@ ifneq (,$(findstring "$(PLATFORM)", "linux" "gnu_kfreebsd" "kfreebsd-gnu" "gnu")
   RENDERER_LIBS = $(SDL_LIBS)
 
   ifeq ($(USE_OPENAL),1)
+    ifeq ($(USE_LOCAL_HEADERS),1)
+      CLIENT_CFLAGS += -I$(OPENALDIR)/include
+    endif
     ifneq ($(USE_OPENAL_DLOPEN),1)
       CLIENT_LIBS += $(THREAD_LIBS) $(OPENAL_LIBS)
     endif
@@ -510,6 +514,9 @@ ifeq ($(PLATFORM),darwin)
     ifneq ($(USE_LOCAL_HEADERS),1)
       CLIENT_CFLAGS += -I/System/Library/Frameworks/OpenAL.framework/Headers
     endif
+    ifeq ($(USE_LOCAL_HEADERS),1)
+      CLIENT_CFLAGS += -I$(OPENALDIR)/include
+    endif
     ifneq ($(USE_OPENAL_DLOPEN),1)
       CLIENT_LIBS += -framework OpenAL
     endif
@@ -611,6 +618,9 @@ ifdef MINGW
   endif
 
   ifeq ($(USE_OPENAL),1)
+    ifeq ($(USE_LOCAL_HEADERS),1)
+      CLIENT_CFLAGS += -I$(OPENALDIR)/include
+    endif
     CLIENT_CFLAGS += $(OPENAL_CFLAGS)
     ifneq ($(USE_OPENAL_DLOPEN),1)
       CLIENT_LDFLAGS += $(OPENAL_LDFLAGS)
