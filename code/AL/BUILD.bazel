@@ -1,0 +1,14 @@
+cc_library(
+    name = "api",
+    srcs = [
+        "alext.h",
+        "efx.h",
+        "efx-creative.h",
+        "efx-presets.h",
+    ],
+    hdrs = [
+        "al.h",
+        "alc.h",
+    ],
+    includes = ["."],
+)
