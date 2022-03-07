@@ -1,3 +1,3 @@
 # libopusfile Support
 
-This is a version of the "libopusfile" release 0.9 from `Xiph.Org`.
+This is version `0.9` of the `"libopusfile"` library from `Xiph.Org`.
