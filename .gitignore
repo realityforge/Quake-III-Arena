@@ -52,6 +52,10 @@ profile
 /.clwb
 /.idea
 
+# Local scripts
+############################
+/l*.sh
+
 # Temp dirs and local notes
 ############################
 /tmp
