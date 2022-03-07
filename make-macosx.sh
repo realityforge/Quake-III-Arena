@@ -6,7 +6,7 @@
 if [ $# -ne 1 ]; then
 	echo "Usage:   $0 target_architecture"
 	echo "Example: $0 x86"
-	echo "other valid options are arm64, x86_64 or ppc"
+	echo "other valid options are arm64, x86_64 or x86"
 	echo
 	echo "If you don't know or care about architectures please consider using make-macosx-ub.sh instead of this script."
 	exit 1
@@ -16,13 +16,11 @@ if [ "$1" == "x86" ]; then
 	BUILDARCH=x86
 elif [ "$1" == "x86_64" ]; then
 	BUILDARCH=x86_64
-elif [ "$1" == "ppc" ]; then
-	BUILDARCH=ppc
 elif [ "$1" == "arm64" ]; then
 	BUILDARCH=arm64
 else
 	echo "Invalid architecture: $1"
-	echo "Valid architectures are arm64, x86_64, x86, or ppc"
+	echo "Valid architectures are arm64, x86_64 or x86"
 	exit 1
 fi
 
@@ -44,15 +42,8 @@ unset ARCH_SDK
 unset ARCH_CFLAGS
 unset ARCH_MACOSX_VERSION_MIN
 
-# SDL 2.0.1 (ppc) supports MacOSX 10.5
 # SDL 2.0.5+ (x86, x86_64) supports MacOSX 10.6 and later
-if [ $BUILDARCH = "ppc" ]; then
-	if [ -d /Developer/SDKs/MacOSX10.5.sdk ]; then
-		ARCH_SDK=/Developer/SDKs/MacOSX10.5.sdk
-		ARCH_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.5.sdk"
-	fi
-	ARCH_MACOSX_VERSION_MIN="10.5"
-elif [ -d /Developer/SDKs/MacOSX10.6.sdk ]; then
+if [ -d /Developer/SDKs/MacOSX10.6.sdk ]; then
 	ARCH_SDK=/Developer/SDKs/MacOSX10.6.sdk
 	ARCH_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.6.sdk"
 	ARCH_MACOSX_VERSION_MIN="10.6"
@@ -73,11 +64,7 @@ fi
 # For parallel make on multicore boxes...
 NCPU=`sysctl -n hw.ncpu`
 
-
 # intel client and server
-#if [ -d build/release-darwin-${BUILDARCH} ]; then
-#	rm -r build/release-darwin-${BUILDARCH}
-#fi
 (ARCH=${BUILDARCH} CFLAGS=$ARCH_CFLAGS MACOSX_VERSION_MIN=$ARCH_MACOSX_VERSION_MIN make -j$NCPU) || exit 1;
 
 # use the following shell script to build an application bundle
