@@ -11,6 +11,7 @@ cc_library(
         "//code/q3_ui:__pkg__",
         "//code/renderergl1:__pkg__",
         "//code/sdl:__pkg__",
+        "//code/ui:__pkg__",
     ],
 )
 

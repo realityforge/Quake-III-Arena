@@ -13,3 +13,25 @@ cc_library(
         "//code/qcommon:q_shared",
     ],
 )
+
+cc_library(
+    name = "ui",
+    srcs = [
+        "ui_atoms.c",
+        "ui_gameinfo.c",
+        "ui_local.h",
+        "ui_main.c",
+        "ui_players.c",
+        "ui_shared.c",
+        "ui_shared.h",
+        "ui_syscalls.c",
+    ],
+    deps = [
+        ":api",
+        "//code/client",
+        "//code/game:api",
+        "//code/qcommon:q_shared",
+        "//code/renderercommon:api",
+        "//ui",
+    ],
+)
