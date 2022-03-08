@@ -382,7 +382,7 @@ ifeq ($(PLATFORM),darwin)
 
   # Default minimum Mac OS X version
   ifeq ($(MACOSX_VERSION_MIN),)
-    MACOSX_VERSION_MIN=10.5
+    MACOSX_VERSION_MIN=10.7
     ifeq ($(ARCH),arm64)
       MACOSX_VERSION_MIN=11.0
     endif
