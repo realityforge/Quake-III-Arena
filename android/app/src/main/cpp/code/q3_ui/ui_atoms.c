@@ -1015,7 +1015,7 @@ void UI_Cache_f( void ) {
 	ServerOptions_Cache();
 	DriverInfo_Cache();
 	GraphicsOptions_Cache();
-	UI_DisplayOptionsMenu_Cache();
+//	UI_DisplayOptionsMenu_Cache();
 	UI_SoundOptionsMenu_Cache();
 	UI_NetworkOptionsMenu_Cache();
 	UI_SPLevelMenu_Cache();
@@ -1028,7 +1028,7 @@ void UI_Cache_f( void ) {
 //	UI_LoadConfig_Cache();
 //	UI_SaveConfigMenu_Cache();
 	UI_BotSelectMenu_Cache();
-	UI_CDKeyMenu_Cache();
+//	UI_CDKeyMenu_Cache();
 	UI_ModsMenu_Cache();
 
 }

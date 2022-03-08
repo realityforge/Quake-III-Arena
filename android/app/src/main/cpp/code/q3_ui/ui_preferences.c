@@ -49,10 +49,15 @@ GAME OPTIONS MENU
 #define ID_SYNCEVERYFRAME		134
 #define ID_FORCEMODEL			135
 #define ID_DRAWTEAMOVERLAY		136
-#define ID_ALLOWDOWNLOAD			137
-#define ID_BACK					138
+#define ID_ALLOWDOWNLOAD		137
+#define ID_LASERSIGHT		    138
+#define ID_DRAWHUD			    139
+#define ID_HOLSTER2D		    140
+#define ID_GORE 			    141
+#define ID_BACK					142
 
 #define	NUM_CROSSHAIRS			10
+#define	NUM_GORE    			4
 
 
 typedef struct {
@@ -63,6 +68,7 @@ typedef struct {
 	menubitmap_s		framer;
 
 	menulist_s			crosshair;
+	menuradiobutton_s	lasersight;
 	menuradiobutton_s	simpleitems;
 	menuradiobutton_s	brass;
 	menuradiobutton_s	wallmarks;
@@ -72,7 +78,10 @@ typedef struct {
 	menuradiobutton_s	synceveryframe;
 	menuradiobutton_s	forcemodel;
 	menulist_s			drawteamoverlay;
+    menuradiobutton_s	drawhud;
 	menuradiobutton_s	allowdownload;
+	menuradiobutton_s	holster2d;
+	menulist_s 			gore;
 	menubitmap_s		back;
 
 	qhandle_t			crosshairShader[NUM_CROSSHAIRS];
@@ -89,18 +98,38 @@ static const char *teamoverlay_names[] =
 	NULL
 };
 
+static const char *s_gore[] =
+{
+	"None",
+	"Blood Only",
+	"Blood & Gibs (Default)",
+	"Extra Gore (Performance Hit)",
+	NULL
+};
+
 static void Preferences_SetMenuItems( void ) {
 	s_preferences.crosshair.curvalue		= (int)trap_Cvar_VariableValue( "cg_drawCrosshair" ) % NUM_CROSSHAIRS;
+	s_preferences.lasersight.curvalue		= trap_Cvar_VariableValue( "vr_lasersight" ) != 0;
 	s_preferences.simpleitems.curvalue		= trap_Cvar_VariableValue( "cg_simpleItems" ) != 0;
 	s_preferences.brass.curvalue			= trap_Cvar_VariableValue( "cg_brassTime" ) != 0;
 	s_preferences.wallmarks.curvalue		= trap_Cvar_VariableValue( "cg_marks" ) != 0;
 	s_preferences.identifytarget.curvalue	= trap_Cvar_VariableValue( "cg_drawCrosshairNames" ) != 0;
-	s_preferences.dynamiclights.curvalue	= trap_Cvar_VariableValue( "r_dynamiclight" ) != 0;
+//	s_preferences.dynamiclights.curvalue	= trap_Cvar_VariableValue( "r_dynamiclight" ) != 0;
 	s_preferences.highqualitysky.curvalue	= trap_Cvar_VariableValue ( "r_fastsky" ) == 0;
-	s_preferences.synceveryframe.curvalue	= trap_Cvar_VariableValue( "r_finish" ) != 0;
+//	s_preferences.synceveryframe.curvalue	= trap_Cvar_VariableValue( "r_finish" ) != 0;
 	s_preferences.forcemodel.curvalue		= trap_Cvar_VariableValue( "cg_forcemodel" ) != 0;
 	s_preferences.drawteamoverlay.curvalue	= Com_Clamp( 0, 3, trap_Cvar_VariableValue( "cg_drawTeamOverlay" ) );
-	s_preferences.allowdownload.curvalue	= trap_Cvar_VariableValue( "cl_allowDownload" ) != 0;
+    s_preferences.drawhud.curvalue			= trap_Cvar_VariableValue( "cg_drawStatus" ) != 0;
+//	s_preferences.allowdownload.curvalue	= trap_Cvar_VariableValue( "cl_allowDownload" ) != 0;
+	s_preferences.holster2d.curvalue		= trap_Cvar_VariableValue( "cg_holsterSimple2DIcons" ) != 0;
+    //GORE
+    {
+        int level = trap_Cvar_VariableValue( "com_blood" ) +
+					trap_Cvar_VariableValue( "cg_gibs" ) +
+					trap_Cvar_VariableValue( "cg_megagibs" );
+
+		s_preferences.gore.curvalue		    = level % NUM_GORE;
+    }
 }
 
 
@@ -156,6 +185,44 @@ static void Preferences_Event( void* ptr, int notification ) {
 	case ID_ALLOWDOWNLOAD:
 		trap_Cvar_SetValue( "cl_allowDownload", s_preferences.allowdownload.curvalue );
 		trap_Cvar_SetValue( "sv_allowDownload", s_preferences.allowdownload.curvalue );
+		break;
+
+    case ID_LASERSIGHT:
+        trap_Cvar_SetValue( "vr_lasersight", s_preferences.lasersight.curvalue);
+        break;
+
+    case ID_DRAWHUD:
+        trap_Cvar_SetValue( "cg_drawStatus", s_preferences.drawhud.curvalue );
+        break;
+
+	case ID_HOLSTER2D:
+		trap_Cvar_SetValue( "cg_holsterSimple2DIcons", s_preferences.holster2d.curvalue);
+        break;
+
+	case ID_GORE: {
+		switch ((int)s_preferences.gore.curvalue) {
+			case 0:
+				trap_Cvar_SetValue( "com_blood", 0);
+				trap_Cvar_SetValue( "cg_gibs", 0);
+				trap_Cvar_SetValue( "cg_megagibs", 0);
+				break;
+			case 1:
+				trap_Cvar_SetValue( "com_blood", 1);
+				trap_Cvar_SetValue( "cg_gibs", 0);
+				trap_Cvar_SetValue( "cg_megagibs", 0);
+				break;
+			case 2:
+				trap_Cvar_SetValue( "com_blood", 1);
+				trap_Cvar_SetValue( "cg_gibs", 1);
+				trap_Cvar_SetValue( "cg_megagibs", 0);
+				break;
+			case 3:
+				trap_Cvar_SetValue( "com_blood", 1);
+				trap_Cvar_SetValue( "cg_gibs", 1);
+				trap_Cvar_SetValue( "cg_megagibs", 1);
+				break;
+			}
+		}
 		break;
 
 	case ID_BACK:
@@ -247,7 +314,7 @@ static void Preferences_MenuInit( void ) {
 	s_preferences.framer.width  	   = 256;
 	s_preferences.framer.height  	   = 334;
 
-	y = 144;
+	y = 110;
 	s_preferences.crosshair.generic.type		= MTYPE_SPINCONTROL;
 	s_preferences.crosshair.generic.flags		= QMF_PULSEIFFOCUS|QMF_SMALLFONT|QMF_NODEFAULTINIT|QMF_OWNERDRAW;
 	s_preferences.crosshair.generic.x			= PREFERENCES_X_POS;
@@ -263,15 +330,33 @@ static void Preferences_MenuInit( void ) {
 	s_preferences.crosshair.numitems			= NUM_CROSSHAIRS;
 
 	y += BIGCHAR_HEIGHT+2+4;
+	s_preferences.lasersight.generic.type        = MTYPE_RADIOBUTTON;
+	s_preferences.lasersight.generic.name	      = "Laser Sight:";
+	s_preferences.lasersight.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+	s_preferences.lasersight.generic.callback    = Preferences_Event;
+	s_preferences.lasersight.generic.id          = ID_LASERSIGHT;
+	s_preferences.lasersight.generic.x	          = PREFERENCES_X_POS;
+	s_preferences.lasersight.generic.y	          = y;
+
+	y += BIGCHAR_HEIGHT+2;
 	s_preferences.simpleitems.generic.type        = MTYPE_RADIOBUTTON;
-	s_preferences.simpleitems.generic.name	      = "Simple Items:";
+	s_preferences.simpleitems.generic.name	      = "Simple Items (World):";
 	s_preferences.simpleitems.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
 	s_preferences.simpleitems.generic.callback    = Preferences_Event;
 	s_preferences.simpleitems.generic.id          = ID_SIMPLEITEMS;
 	s_preferences.simpleitems.generic.x	          = PREFERENCES_X_POS;
 	s_preferences.simpleitems.generic.y	          = y;
 
-	y += BIGCHAR_HEIGHT;
+	y += BIGCHAR_HEIGHT+2;
+	s_preferences.holster2d.generic.type        = MTYPE_RADIOBUTTON;
+	s_preferences.holster2d.generic.name	      = "Simple Items (Holster):";
+	s_preferences.holster2d.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+	s_preferences.holster2d.generic.callback    = Preferences_Event;
+	s_preferences.holster2d.generic.id          = ID_HOLSTER2D;
+	s_preferences.holster2d.generic.x	          = PREFERENCES_X_POS;
+	s_preferences.holster2d.generic.y	          = y;
+
+	y += BIGCHAR_HEIGHT+2;
 	s_preferences.wallmarks.generic.type          = MTYPE_RADIOBUTTON;
 	s_preferences.wallmarks.generic.name	      = "Marks on Walls:";
 	s_preferences.wallmarks.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
@@ -289,14 +374,14 @@ static void Preferences_MenuInit( void ) {
 	s_preferences.brass.generic.x	              = PREFERENCES_X_POS;
 	s_preferences.brass.generic.y	              = y;
 
-	y += BIGCHAR_HEIGHT+2;
-	s_preferences.dynamiclights.generic.type      = MTYPE_RADIOBUTTON;
-	s_preferences.dynamiclights.generic.name	  = "Dynamic Lights:";
-	s_preferences.dynamiclights.generic.flags     = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
-	s_preferences.dynamiclights.generic.callback  = Preferences_Event;
-	s_preferences.dynamiclights.generic.id        = ID_DYNAMICLIGHTS;
-	s_preferences.dynamiclights.generic.x	      = PREFERENCES_X_POS;
-	s_preferences.dynamiclights.generic.y	      = y;
+//	y += BIGCHAR_HEIGHT+2;
+//	s_preferences.dynamiclights.generic.type      = MTYPE_RADIOBUTTON;
+//	s_preferences.dynamiclights.generic.name	  = "Dynamic Lights:";
+//	s_preferences.dynamiclights.generic.flags     = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+//	s_preferences.dynamiclights.generic.callback  = Preferences_Event;
+//	s_preferences.dynamiclights.generic.id        = ID_DYNAMICLIGHTS;
+//	s_preferences.dynamiclights.generic.x	      = PREFERENCES_X_POS;
+//	s_preferences.dynamiclights.generic.y	      = y;
 
 	y += BIGCHAR_HEIGHT+2;
 	s_preferences.identifytarget.generic.type     = MTYPE_RADIOBUTTON;
@@ -316,14 +401,14 @@ static void Preferences_MenuInit( void ) {
 	s_preferences.highqualitysky.generic.x	      = PREFERENCES_X_POS;
 	s_preferences.highqualitysky.generic.y	      = y;
 
-	y += BIGCHAR_HEIGHT+2;
-	s_preferences.synceveryframe.generic.type     = MTYPE_RADIOBUTTON;
-	s_preferences.synceveryframe.generic.name	  = "Sync Every Frame:";
-	s_preferences.synceveryframe.generic.flags	  = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
-	s_preferences.synceveryframe.generic.callback = Preferences_Event;
-	s_preferences.synceveryframe.generic.id       = ID_SYNCEVERYFRAME;
-	s_preferences.synceveryframe.generic.x	      = PREFERENCES_X_POS;
-	s_preferences.synceveryframe.generic.y	      = y;
+//	y += BIGCHAR_HEIGHT+2;
+//	s_preferences.synceveryframe.generic.type     = MTYPE_RADIOBUTTON;
+//	s_preferences.synceveryframe.generic.name	  = "Sync Every Frame:";
+//	s_preferences.synceveryframe.generic.flags	  = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+//	s_preferences.synceveryframe.generic.callback = Preferences_Event;
+//	s_preferences.synceveryframe.generic.id       = ID_SYNCEVERYFRAME;
+//	s_preferences.synceveryframe.generic.x	      = PREFERENCES_X_POS;
+//	s_preferences.synceveryframe.generic.y	      = y;
 
 	y += BIGCHAR_HEIGHT+2;
 	s_preferences.forcemodel.generic.type     = MTYPE_RADIOBUTTON;
@@ -345,13 +430,33 @@ static void Preferences_MenuInit( void ) {
 	s_preferences.drawteamoverlay.itemnames			= teamoverlay_names;
 
 	y += BIGCHAR_HEIGHT+2;
-	s_preferences.allowdownload.generic.type     = MTYPE_RADIOBUTTON;
-	s_preferences.allowdownload.generic.name	   = "Automatic Downloading:";
-	s_preferences.allowdownload.generic.flags	   = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
-	s_preferences.allowdownload.generic.callback = Preferences_Event;
-	s_preferences.allowdownload.generic.id       = ID_ALLOWDOWNLOAD;
-	s_preferences.allowdownload.generic.x	       = PREFERENCES_X_POS;
-	s_preferences.allowdownload.generic.y	       = y;
+    s_preferences.drawhud.generic.type        = MTYPE_RADIOBUTTON;
+    s_preferences.drawhud.generic.name	      = "Draw HUD:";
+    s_preferences.drawhud.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+    s_preferences.drawhud.generic.callback    = Preferences_Event;
+    s_preferences.drawhud.generic.id          = ID_DRAWHUD;
+    s_preferences.drawhud.generic.x	          = PREFERENCES_X_POS;
+    s_preferences.drawhud.generic.y	          = y;
+
+//	y += BIGCHAR_HEIGHT+2;
+//	s_preferences.allowdownload.generic.type     = MTYPE_RADIOBUTTON;
+//	s_preferences.allowdownload.generic.name	   = "Automatic Downloading:";
+//	s_preferences.allowdownload.generic.flags	   = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+//	s_preferences.allowdownload.generic.callback = Preferences_Event;
+//	s_preferences.allowdownload.generic.id       = ID_ALLOWDOWNLOAD;
+//	s_preferences.allowdownload.generic.x	       = PREFERENCES_X_POS;
+//	s_preferences.allowdownload.generic.y	       = y;
+
+	y += BIGCHAR_HEIGHT+16;
+	s_preferences.gore.generic.type		= MTYPE_SPINCONTROL;
+	s_preferences.gore.generic.flags		= QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+	s_preferences.gore.generic.x			= PREFERENCES_X_POS - 120;
+	s_preferences.gore.generic.y			= y;
+	s_preferences.gore.generic.name		= "Gore:";
+	s_preferences.gore.generic.callback	= Preferences_Event;
+	s_preferences.gore.generic.id		= ID_GORE;
+	s_preferences.gore.itemnames	        = s_gore;
+	s_preferences.gore.numitems			= NUM_GORE;
 
 	s_preferences.back.generic.type	    = MTYPE_BITMAP;
 	s_preferences.back.generic.name     = ART_BACK0;
@@ -369,16 +474,20 @@ static void Preferences_MenuInit( void ) {
 	Menu_AddItem( &s_preferences.menu, &s_preferences.framer );
 
 	Menu_AddItem( &s_preferences.menu, &s_preferences.crosshair );
+	Menu_AddItem( &s_preferences.menu, &s_preferences.lasersight );
 	Menu_AddItem( &s_preferences.menu, &s_preferences.simpleitems );
 	Menu_AddItem( &s_preferences.menu, &s_preferences.wallmarks );
 	Menu_AddItem( &s_preferences.menu, &s_preferences.brass );
-	Menu_AddItem( &s_preferences.menu, &s_preferences.dynamiclights );
+//	Menu_AddItem( &s_preferences.menu, &s_preferences.dynamiclights );
 	Menu_AddItem( &s_preferences.menu, &s_preferences.identifytarget );
 	Menu_AddItem( &s_preferences.menu, &s_preferences.highqualitysky );
-	Menu_AddItem( &s_preferences.menu, &s_preferences.synceveryframe );
+//	Menu_AddItem( &s_preferences.menu, &s_preferences.synceveryframe );
 	Menu_AddItem( &s_preferences.menu, &s_preferences.forcemodel );
 	Menu_AddItem( &s_preferences.menu, &s_preferences.drawteamoverlay );
-	Menu_AddItem( &s_preferences.menu, &s_preferences.allowdownload );
+	Menu_AddItem( &s_preferences.menu, &s_preferences.drawhud );
+	Menu_AddItem( &s_preferences.menu, &s_preferences.holster2d );
+//	Menu_AddItem( &s_preferences.menu, &s_preferences.allowdownload );
+	Menu_AddItem( &s_preferences.menu, &s_preferences.gore );
 
 	Menu_AddItem( &s_preferences.menu, &s_preferences.back );
 

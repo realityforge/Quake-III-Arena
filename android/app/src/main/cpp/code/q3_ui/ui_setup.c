@@ -41,14 +41,15 @@ SETUP MENU
 
 #define ID_CUSTOMIZEPLAYER		10
 #define ID_CUSTOMIZECONTROLS	11
-#define ID_SYSTEMCONFIG			12
+#define ID_COMFORT              12
 #define ID_GAME					13
-#define ID_VR					14
-#define ID_CDKEY				15
-#define ID_LOAD					16
-#define ID_SAVE					17
-#define ID_DEFAULTS				18
-#define ID_BACK					19
+#define ID_SYSTEMCONFIG			14
+#define ID_VR					15
+#define ID_CDKEY				16
+#define ID_LOAD					17
+#define ID_SAVE					18
+#define ID_DEFAULTS				19
+#define ID_BACK					20
 
 
 typedef struct {
@@ -59,10 +60,11 @@ typedef struct {
 	menubitmap_s	framer;
 	menutext_s		setupplayer;
 	menutext_s		setupcontrols;
-	menutext_s		setupsystem;
+	menutext_s      comfort;
 	menutext_s		game;
-	menutext_s		vr;
-	menutext_s		cdkey;
+	menutext_s		setupsystem;
+//	menutext_s		vr;
+//	menutext_s		cdkey;
 //	menutext_s		load;
 //	menutext_s		save;
 	menutext_s		defaults;
@@ -114,24 +116,28 @@ static void UI_SetupMenu_Event( void *ptr, int event ) {
 		break;
 
 	case ID_CUSTOMIZECONTROLS:
-		UI_ControlsMenu();
+		UI_Controls3Menu();
 		break;
 
-	case ID_SYSTEMCONFIG:
-		UI_GraphicsOptionsMenu();
+	case ID_COMFORT:
+		UI_ComfortMenu();
 		break;
 
 	case ID_GAME:
 		UI_PreferencesMenu();
 		break;
 
-	case ID_VR:
-		UI_VRMenu();
+	case ID_SYSTEMCONFIG:
+		UI_GraphicsOptionsMenu();
 		break;
 
-	case ID_CDKEY:
-		UI_CDKeyMenu();
-		break;
+//	case ID_VR:
+//		UI_VRMenu();
+//		break;
+
+//	case ID_CDKEY:
+//		UI_CDKeyMenu();
+//		break;
 
 //	case ID_LOAD:
 //		UI_LoadConfigMenu();
@@ -200,17 +206,39 @@ static void UI_SetupMenu_Init( void ) {
 	setupMenuInfo.setupplayer.color					= color_red;
 	setupMenuInfo.setupplayer.style					= UI_CENTER;
 
-/*	y += SETUP_MENU_VERTICAL_SPACING;
+	y += SETUP_MENU_VERTICAL_SPACING;
 	setupMenuInfo.setupcontrols.generic.type		= MTYPE_PTEXT;
 	setupMenuInfo.setupcontrols.generic.flags		= QMF_CENTER_JUSTIFY|QMF_PULSEIFFOCUS;
 	setupMenuInfo.setupcontrols.generic.x			= 320;
 	setupMenuInfo.setupcontrols.generic.y			= y;
 	setupMenuInfo.setupcontrols.generic.id			= ID_CUSTOMIZECONTROLS;
-	setupMenuInfo.setupcontrols.generic.callback	= UI_SetupMenu_Event; 
+	setupMenuInfo.setupcontrols.generic.callback	= UI_SetupMenu_Event;
 	setupMenuInfo.setupcontrols.string				= "CONTROLS";
 	setupMenuInfo.setupcontrols.color				= color_red;
 	setupMenuInfo.setupcontrols.style				= UI_CENTER;
-*/
+
+	y += SETUP_MENU_VERTICAL_SPACING;
+	setupMenuInfo.comfort.generic.type		        = MTYPE_PTEXT;
+	setupMenuInfo.comfort.generic.flags		        = QMF_CENTER_JUSTIFY|QMF_PULSEIFFOCUS;
+	setupMenuInfo.comfort.generic.x			        = 320;
+	setupMenuInfo.comfort.generic.y			        = y;
+	setupMenuInfo.comfort.generic.id			    = ID_COMFORT;
+	setupMenuInfo.comfort.generic.callback	        = UI_SetupMenu_Event;
+	setupMenuInfo.comfort.string				    = "COMFORT OPTIONS";
+	setupMenuInfo.comfort.color				        = color_red;
+	setupMenuInfo.comfort.style				        = UI_CENTER;
+
+	y += SETUP_MENU_VERTICAL_SPACING;
+	setupMenuInfo.game.generic.type					= MTYPE_PTEXT;
+	setupMenuInfo.game.generic.flags				= QMF_CENTER_JUSTIFY|QMF_PULSEIFFOCUS;
+	setupMenuInfo.game.generic.x					= 320;
+	setupMenuInfo.game.generic.y					= y;
+	setupMenuInfo.game.generic.id					= ID_GAME;
+	setupMenuInfo.game.generic.callback				= UI_SetupMenu_Event;
+	setupMenuInfo.game.string						= "GAME OPTIONS";
+	setupMenuInfo.game.color						= color_red;
+	setupMenuInfo.game.style						= UI_CENTER;
+
 	y += SETUP_MENU_VERTICAL_SPACING;
 	setupMenuInfo.setupsystem.generic.type			= MTYPE_PTEXT;
 	setupMenuInfo.setupsystem.generic.flags			= QMF_CENTER_JUSTIFY|QMF_PULSEIFFOCUS;
@@ -222,38 +250,27 @@ static void UI_SetupMenu_Init( void ) {
 	setupMenuInfo.setupsystem.color					= color_red;
 	setupMenuInfo.setupsystem.style					= UI_CENTER;
 
-	y += SETUP_MENU_VERTICAL_SPACING;
-	setupMenuInfo.game.generic.type					= MTYPE_PTEXT;
-	setupMenuInfo.game.generic.flags				= QMF_CENTER_JUSTIFY|QMF_PULSEIFFOCUS;
-	setupMenuInfo.game.generic.x					= 320;
-	setupMenuInfo.game.generic.y					= y;
-	setupMenuInfo.game.generic.id					= ID_GAME;
-	setupMenuInfo.game.generic.callback				= UI_SetupMenu_Event; 
-	setupMenuInfo.game.string						= "GAME OPTIONS";
-	setupMenuInfo.game.color						= color_red;
-	setupMenuInfo.game.style						= UI_CENTER;
+//	y += SETUP_MENU_VERTICAL_SPACING;
+//	setupMenuInfo.vr.generic.type					= MTYPE_PTEXT;
+//	setupMenuInfo.vr.generic.flags				    = QMF_CENTER_JUSTIFY|QMF_PULSEIFFOCUS;
+//	setupMenuInfo.vr.generic.x					    = 320;
+//	setupMenuInfo.vr.generic.y					    = y;
+//	setupMenuInfo.vr.generic.id					    = ID_VR;
+//	setupMenuInfo.vr.generic.callback			    = UI_SetupMenu_Event;
+//	setupMenuInfo.vr.string						    = "VR OPTIONS";
+//	setupMenuInfo.vr.color						    = color_red;
+//	setupMenuInfo.vr.style						    = UI_CENTER;
 
-	y += SETUP_MENU_VERTICAL_SPACING;
-	setupMenuInfo.vr.generic.type					= MTYPE_PTEXT;
-	setupMenuInfo.vr.generic.flags				    = QMF_CENTER_JUSTIFY|QMF_PULSEIFFOCUS;
-	setupMenuInfo.vr.generic.x					    = 320;
-	setupMenuInfo.vr.generic.y					    = y;
-	setupMenuInfo.vr.generic.id					    = ID_VR;
-	setupMenuInfo.vr.generic.callback			    = UI_SetupMenu_Event;
-	setupMenuInfo.vr.string						    = "VR OPTIONS";
-	setupMenuInfo.vr.color						    = color_red;
-	setupMenuInfo.vr.style						    = UI_CENTER;
-
-	y += SETUP_MENU_VERTICAL_SPACING;
-	setupMenuInfo.cdkey.generic.type				= MTYPE_PTEXT;
-	setupMenuInfo.cdkey.generic.flags				= QMF_CENTER_JUSTIFY|QMF_PULSEIFFOCUS;
-	setupMenuInfo.cdkey.generic.x					= 320;
-	setupMenuInfo.cdkey.generic.y					= y;
-	setupMenuInfo.cdkey.generic.id					= ID_CDKEY;
-	setupMenuInfo.cdkey.generic.callback			= UI_SetupMenu_Event; 
-	setupMenuInfo.cdkey.string						= "CD Key";
-	setupMenuInfo.cdkey.color						= color_red;
-	setupMenuInfo.cdkey.style						= UI_CENTER;
+//	y += SETUP_MENU_VERTICAL_SPACING;
+//	setupMenuInfo.cdkey.generic.type				= MTYPE_PTEXT;
+//	setupMenuInfo.cdkey.generic.flags				= QMF_CENTER_JUSTIFY|QMF_PULSEIFFOCUS;
+//	setupMenuInfo.cdkey.generic.x					= 320;
+//	setupMenuInfo.cdkey.generic.y					= y;
+//	setupMenuInfo.cdkey.generic.id					= ID_CDKEY;
+//	setupMenuInfo.cdkey.generic.callback			= UI_SetupMenu_Event;
+//	setupMenuInfo.cdkey.string						= "CD Key";
+//	setupMenuInfo.cdkey.color						= color_red;
+//	setupMenuInfo.cdkey.style						= UI_CENTER;
 
 	if( !trap_Cvar_VariableValue( "cl_paused" ) ) {
 #if 0
@@ -307,11 +324,12 @@ static void UI_SetupMenu_Init( void ) {
 	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.framel );
 	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.framer );
 	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.setupplayer );
-//	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.setupcontrols );
-	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.setupsystem );
+	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.setupcontrols );
+	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.comfort );
 	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.game );
-	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.vr );
-	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.cdkey );
+	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.setupsystem );
+//	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.vr );
+//	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.cdkey );
 //	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.load );
 //	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.save );
 	if( !trap_Cvar_VariableValue( "cl_paused" ) ) {

@@ -250,7 +250,8 @@ static void IN_SendButtonAction(const char* action, qboolean pressed)
         //handle our special actions first
         if (strcmp(action, "+alt") == 0)
         {
-            alt_key_mode_active = pressed;
+            qboolean alt_key_enabled = Cvar_VariableValue( "vr_altKeyEnabled" ) != 0;
+            alt_key_mode_active = pressed && alt_key_enabled;
         }
         else if (strcmp(action, "+weapon_stabilise") == 0)
         {

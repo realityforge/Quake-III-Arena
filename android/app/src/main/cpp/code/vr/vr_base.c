@@ -27,6 +27,7 @@ cvar_t *vr_extralatencymode = NULL;
 cvar_t *vr_directionMode = NULL;
 cvar_t *vr_weaponPitch = NULL;
 cvar_t *vr_twoHandedWeapons = NULL;
+cvar_t *vr_altKeyEnabled = NULL;
 cvar_t *vr_refreshrate = NULL;
 cvar_t *vr_weaponScope = NULL;
 cvar_t *vr_rollWhenHit = NULL;
@@ -62,6 +63,7 @@ void VR_InitCvars( void )
 	vr_weaponPitch = Cvar_Get ("vr_weaponPitch", "-20", CVAR_ARCHIVE);
 	vr_heightAdjust = Cvar_Get ("vr_heightAdjust", "0.0", CVAR_ARCHIVE);
     vr_twoHandedWeapons = Cvar_Get ("vr_twoHandedWeapons", "1", CVAR_ARCHIVE);
+    vr_altKeyEnabled = Cvar_Get ("vr_altKeyEnabled", "0", CVAR_ARCHIVE);
 	vr_refreshrate = Cvar_Get ("vr_refreshrate", "72", CVAR_ARCHIVE);
     vr_weaponScope = Cvar_Get ("vr_weaponScope", "1", CVAR_ARCHIVE);
 	vr_rollWhenHit = Cvar_Get ("vr_rollWhenHit", "0", CVAR_ARCHIVE);
