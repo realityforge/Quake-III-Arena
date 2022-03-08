@@ -620,6 +620,7 @@ typedef struct {
 
 	int			weaponHolsterSelection;
 	int 		weaponHolsterTime;
+	float 		weaponHolsterYaw;
 
 	// blend blobs
 	float		damageTime;
@@ -1390,6 +1391,7 @@ void CG_HolsterSelect_f( void );
 
 void rotateAboutOrigin(float x, float y, float rotation, vec2_t out);
 void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles );
+void CG_CalculateVROffHandPosition( vec3_t origin, vec3_t angles );
 void CG_ConvertFromVR(vec3_t in, vec3_t offset, vec3_t out);
 
 void CG_RegisterWeapon( int weaponNum );

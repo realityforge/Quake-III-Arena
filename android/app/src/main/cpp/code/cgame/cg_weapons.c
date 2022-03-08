@@ -2026,6 +2026,7 @@ void CG_DrawHolsteredWeapons( void )
     if (cg.weaponHolsterTime == 0)
     {
         cg.weaponHolsterTime = cg.time;
+        cg.weaponHolsterYaw = vr->hmdorientation[YAW];
     }
 
     int j = 0;
@@ -2040,34 +2041,37 @@ void CG_DrawHolsteredWeapons( void )
         }
     }
 
-	const float SCALE = 0.1f;
-	const float DIST = 10.0f;
-	const float SEP = 14.0f;
+	float SCALE = 0.05f;
+	const float DIST = 9.0f;
+	const float SEP = 16.0f;
     cg.weaponHolsterSelection = WP_NONE;
 
-    vec3_t weaponOrigin, weaponAngles;
-    CG_CalculateVRWeaponPosition(weaponOrigin, weaponAngles);
+    vec3_t controllerOrigin, controllerAngles;
+    CG_CalculateVRWeaponPosition(controllerOrigin, controllerAngles);
+
 	{
 		refEntity_t		blob;
 		memset( &blob, 0, sizeof( blob ) );
-		VectorCopy( weaponOrigin, blob.origin );
-		AnglesToAxis(weaponAngles, blob.axis);
-		VectorScale( blob.axis[0], 0.07f, blob.axis[0] );
-		VectorScale( blob.axis[1], 0.07f, blob.axis[1] );
-		VectorScale( blob.axis[2], 0.07f, blob.axis[2] );
+		VectorCopy( controllerOrigin, blob.origin );
+		AnglesToAxis(vec3_origin, blob.axis);
+		VectorScale( blob.axis[0], 0.045f, blob.axis[0] );
+		VectorScale( blob.axis[1], 0.045f, blob.axis[1] );
+		VectorScale( blob.axis[2], 0.045f, blob.axis[2] );
 		blob.nonNormalizedAxes = qtrue;
 		blob.hModel = cgs.media.smallSphereModel;
 		trap_R_AddRefEntityToScene( &blob );
 	}
 
-	vec3_t viewangles, vieworg;
+	vec3_t viewangles, vieworg, viewForward, viewRight, viewUp;
     VectorCopy(cg.refdefViewAngles, viewangles);
     VectorCopy(cg.refdef.vieworg, vieworg);
+
+    VectorCopy(vr->hmdorientation, viewangles);
+    viewangles[YAW] = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]) +
+            vr->clientviewangles[YAW] - vr->hmdorientation[YAW] + cg.weaponHolsterYaw;
+
     if (!cgs.localServer)
     {
-        VectorCopy(vr->hmdorientation, viewangles);
-        viewangles[YAW] = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]) + vr->clientviewangles[YAW];
-
         vec3_t pos, hmdposition;
         VectorClear(pos);
         VectorSubtract(vr->hmdposition, vr->hmdorigin, hmdposition);
@@ -2077,8 +2081,9 @@ void CG_DrawHolsteredWeapons( void )
         VectorSubtract(cg.refdef.vieworg, pos, vieworg);
     }
 
-    float startingPositionYaw = viewangles[YAW] + (((j - (j&1 ? 0 : 1)) / 2.0f) * SEP);
-    startingPositionYaw = AngleNormalize360(startingPositionYaw);
+	AngleVectors(viewangles, viewForward, viewRight, viewUp);
+
+    float startingPositionYaw = AngleNormalize360(viewangles[YAW] + (((j-1)/2.0f) * SEP));
     for (int w = j-1; w >= 0; --w)
     {
 		if ( cg_weapons[ weapons[w] ].item ) {
@@ -2089,7 +2094,7 @@ void CG_DrawHolsteredWeapons( void )
             vec3_t forward;
             AngleVectors(angles, forward, NULL, NULL);
 
-            int dist = (cg.time - cg.weaponHolsterTime) / 10;
+            float dist = (cg.time - cg.weaponHolsterTime) / 10;
             if (dist > DIST) dist = DIST;
             VectorMA(vieworg, dist, forward, iconOrigin);
             VectorMA(vieworg, dist+0.01f, forward, iconBackground);
@@ -2101,13 +2106,14 @@ void CG_DrawHolsteredWeapons( void )
 			iconBackground[2] += (vr->hmdposition[1] * 0.85f) * worldscale;
 
             //Float sprite above selected weapon
-            qboolean selected = qfalse;
-            vec3_t length;
-            VectorSubtract(weaponOrigin, iconOrigin, length);
-            if (VectorLength(length) <= 1.75f && dist == DIST)
+            vec3_t diff;
+            VectorSubtract(controllerOrigin, iconOrigin, diff);
+            float length = VectorLength(diff);
+            if (length <= 1.5f &&
+                dist == DIST &&
+                cg.weaponHolsterSelection == WP_NONE)
             {
                 cg.weaponHolsterSelection = weapons[w];
-                selected = qtrue;
 
                 refEntity_t		sprite;
                 memset( &sprite, 0, sizeof( sprite ) );
@@ -2129,6 +2135,21 @@ void CG_DrawHolsteredWeapons( void )
 				memset(&ent, 0, sizeof(ent));
 				VectorCopy(iconOrigin, ent.origin);
 
+				//Shift the weapon model a bit to be in the sphere
+				if (weapons[w] == WP_GAUNTLET)
+				{
+                    SCALE = 0.065f;
+					VectorMA(ent.origin, 0.3f, viewUp, ent.origin);
+                    VectorMA(ent.origin, 0.15f, viewRight, ent.origin);
+                    VectorMA(ent.origin, -0.15f, viewForward, ent.origin);
+				}
+				else
+				{
+					VectorMA(ent.origin, 0.3f, viewForward, ent.origin);
+					VectorMA(ent.origin, -0.2f, viewRight, ent.origin);
+					VectorMA(ent.origin, 0.5f, viewUp, ent.origin);
+				}
+
 				vec3_t iconAngles;
 				VectorCopy(viewangles, iconAngles);
 				iconAngles[YAW] -= 145.0f;
@@ -2137,9 +2158,9 @@ void CG_DrawHolsteredWeapons( void )
 					iconAngles[ROLL] -= 90.0f;
 				}
 				AnglesToAxis(iconAngles, ent.axis);
-				VectorScale(ent.axis[0], SCALE + (selected ? 0.04f : 0), ent.axis[0]);
-				VectorScale(ent.axis[1], SCALE + (selected ? 0.04f : 0), ent.axis[1]);
-				VectorScale(ent.axis[2], SCALE + (selected ? 0.04f : 0), ent.axis[2]);
+				VectorScale(ent.axis[0], SCALE + (cg.weaponHolsterSelection == weapons[w] ? 0.04f : 0), ent.axis[0]);
+				VectorScale(ent.axis[1], SCALE + (cg.weaponHolsterSelection == weapons[w] ? 0.04f : 0), ent.axis[1]);
+				VectorScale(ent.axis[2], SCALE + (cg.weaponHolsterSelection == weapons[w] ? 0.04f : 0), ent.axis[2]);
 				ent.nonNormalizedAxes = qtrue;
 
 				if( weapons[w] == WP_RAILGUN ) {
@@ -2156,6 +2177,23 @@ void CG_DrawHolsteredWeapons( void )
 					}
 				}
 
+				//Wrap weapon in a small sphere
+				{
+					refEntity_t		blob;
+					memset( &blob, 0, sizeof( blob ) );
+					VectorCopy( iconOrigin, blob.origin );
+					AnglesToAxis(vec3_origin, blob.axis);
+					VectorScale( blob.axis[0], 0.1f + (cg.weaponHolsterSelection == weapons[w] ? 0.035f : 0), blob.axis[0] );
+					VectorScale( blob.axis[1], 0.1f + (cg.weaponHolsterSelection == weapons[w] ? 0.035f : 0), blob.axis[1] );
+					VectorScale( blob.axis[2], 0.1f + (cg.weaponHolsterSelection == weapons[w] ? 0.035f : 0), blob.axis[2] );
+					blob.nonNormalizedAxes = qtrue;
+					blob.hModel = cgs.media.smallSphereModel;
+					blob.shaderRGBA[0] = 255;
+					blob.shaderRGBA[1] = 255;
+					blob.shaderRGBA[2] = 255;
+					blob.shaderRGBA[3] = 80;
+					trap_R_AddRefEntityToScene( &blob );
+				}
 
 				ent.hModel = cg_weapons[weapons[w]].weaponModel;
 				trap_R_AddRefEntityToScene(&ent);
@@ -2182,7 +2220,7 @@ void CG_DrawHolsteredWeapons( void )
 				VectorCopy( iconOrigin, sprite.origin );
 				sprite.reType = RT_SPRITE;
 				sprite.customShader = cg_weapons[weapons[w]].weaponIcon;
-				sprite.radius = 0.6f + (selected ? 0.1f : 0);
+				sprite.radius = 0.6f + (cg.weaponHolsterSelection == weapons[w] ? 0.1f : 0);
 				sprite.shaderRGBA[0] = 255;
 				sprite.shaderRGBA[1] = 255;
 				sprite.shaderRGBA[2] = 255;
@@ -2192,7 +2230,7 @@ void CG_DrawHolsteredWeapons( void )
 				//And now the selection background
 				VectorCopy( iconBackground, sprite.origin );
 				sprite.customShader = cgs.media.selectShader;
-				sprite.radius = 0.7f + (selected ? 0.1f : 0);
+				sprite.radius = 0.7f + (cg.weaponHolsterSelection == weapons[w] ? 0.1f : 0);
 				sprite.shaderRGBA[0] = 255;
 				sprite.shaderRGBA[1] = 255;
 				sprite.shaderRGBA[2] = 255;

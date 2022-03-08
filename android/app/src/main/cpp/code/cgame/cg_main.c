@@ -1049,7 +1049,8 @@ static void CG_RegisterGraphics( void ) {
 	cgs.media.wakeMarkShader = trap_R_RegisterShader( "wake" );
 	cgs.media.bloodMarkShader = trap_R_RegisterShader( "bloodMark" );
 
-    cgs.media.reticleShader = trap_R_RegisterShader( "scope.tga" );
+	//Load from pakQ3Q
+    cgs.media.reticleShader = trap_R_RegisterShader( "gfx/weapon/scope" );
 
 	//Used for the weapon selector
 	cgs.media.smallSphereModel = trap_R_RegisterModel("models/powerups/health/small_sphere.md3");

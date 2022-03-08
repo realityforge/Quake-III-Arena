@@ -82,34 +82,6 @@ public class MainActivity extends SDLActivity // implements KeyEvent.Callback
 		}
 	}
 
-	public static void unzip(File zipFile, File targetDirectory) throws IOException {
-		ZipInputStream zis = new ZipInputStream(
-				new BufferedInputStream(new FileInputStream(zipFile)));
-		try {
-			ZipEntry ze;
-			int count;
-			byte[] buffer = new byte[8192];
-			while ((ze = zis.getNextEntry()) != null) {
-				File file = new File(targetDirectory, ze.getName());
-				File dir = ze.isDirectory() ? file : file.getParentFile();
-				if (!dir.isDirectory() && !dir.mkdirs())
-					throw new FileNotFoundException("Failed to ensure directory: " +
-							dir.getAbsolutePath());
-				if (ze.isDirectory())
-					continue;
-				FileOutputStream fout = new FileOutputStream(file);
-				try {
-					while ((count = zis.read(buffer)) != -1)
-						fout.write(buffer, 0, count);
-				} finally {
-					fout.close();
-				}
-			}
-		} finally {
-			zis.close();
-		}
-	}
-
 	public void create() throws IOException {
 		//Make the directories
 		new File("/sdcard/ioquake3Quest/baseq3").mkdirs();
@@ -123,21 +95,9 @@ public class MainActivity extends SDLActivity // implements KeyEvent.Callback
 		//copy demo
 		copy_asset("/sdcard/ioquake3Quest/baseq3", "pak0.pk3", false);
 
-		//Scope
-		copy_asset("/sdcard/ioquake3Quest/baseq3", "scope.tga", false);
-
-		//glsl
-		copy_asset("/sdcard/ioquake3Quest", "glsl.zip", true);
-		new File("/sdcard/ioquake3Quest/baseq3/glsl").mkdirs();
-		unzip(new File("/sdcard/ioquake3Quest/glsl.zip"), new File("/sdcard/ioquake3Quest/baseq3/glsl"));
-		new File("/sdcard/ioquake3Quest/missionpack/glsl").mkdirs();
-		unzip(new File("/sdcard/ioquake3Quest/glsl.zip"), new File("/sdcard/ioquake3Quest/missionpack/glsl"));
-
-		copy_asset("/sdcard/ioquake3Quest", "ui.zip", true);
-		unzip(new File("/sdcard/ioquake3Quest/ui.zip"), new File("/sdcard/ioquake3Quest/missionpack"));
-
-		new File("/sdcard/ioquake3Quest/glsl.zip").delete();
-		new File("/sdcard/ioquake3Quest/ui.zip").delete();
+		//our special pak file
+		copy_asset("/sdcard/ioquake3Quest/baseq3", "pakQ3Q.pk3", true);
+		copy_asset("/sdcard/ioquake3Quest/missionpack", "pakQ3Q.pk3", true);
 
 		//Read these from a file and pass through
 		commandLineParams = new String();
