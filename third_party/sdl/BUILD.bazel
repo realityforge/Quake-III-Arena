@@ -1,11 +1,36 @@
 load("@rules_cc//cc:defs.bzl", "cc_import", "cc_library")
 
-# This should use select/configurable attributes ala https://bazel.build/docs/configurable-attributes
-# to select the appropriate library ... actually there is probably a "real" bazel way
+config_setting(
+    name = "windows_x86_64",
+    constraint_values = [
+        "@platforms//os:windows",
+        "@platforms//cpu:x86_64",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+# Should we even bother supporting 32 bit windows? (or 32-bit anything?)
+config_setting(
+    name = "windows_x86_32",
+    constraint_values = [
+        "@platforms//os:windows",
+        "@platforms//cpu:x86_32",
+    ],
+    visibility = ["//visibility:public"],
+)
+
 cc_import(
     name = "sdl_library",
-    shared_library = "libs/macosx/libSDL2-2.0.0.dylib",
-    static_library = "libs/macosx/libSDL2-2.0.0.a",
+    shared_library = select({
+        "@platforms//os:macos": "libs/macosx/libSDL2-2.0.0.dylib",
+        ":windows_x86_32": "libs/win32/SDL2.dll",
+        ":windows_x86_64": "libs/win64/SDL264.dll",
+    }),
+    static_library = select({
+        "@platforms//os:macos": "libs/macosx/libSDL2-2.0.0.a",
+        ":windows_x86_32": "libs/win32/libSDL2main.a",
+        ":windows_x86_64": "libs/win64/libSDL264main.a",
+    }),
 )
 
 cc_library(
