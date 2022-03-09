@@ -590,7 +590,6 @@ typedef struct {
 	qhandle_t		rb_off;
 	float				scale;
 	float				bias;
-	qboolean		demoversion;
 	qboolean		firstdraw;
 } uiStatic_t;
 

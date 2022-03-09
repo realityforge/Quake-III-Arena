@@ -635,10 +635,6 @@ qboolean UI_CanShowTierVideo( int tier ) {
 		return qfalse;
 	}
 
-	if( uis.demoversion && tier != 8 ) {
-		return qfalse;
-	}
-
 	trap_Cvar_VariableStringBuffer( "g_spVideos", videos, sizeof(videos) );
 
 	Com_sprintf( key, sizeof(key), "tier%i", tier );
@@ -810,11 +806,4 @@ void UI_InitGameinfo( void ) {
 	UI_InitMemory();
 	UI_LoadArenas();
 	UI_LoadBots();
-
-	if( ui_numSpecialSinglePlayerArenas == 0 && ui_numSinglePlayerArenas == 4 ) {
-		uis.demoversion = qtrue;
-	}
-	else {
-		uis.demoversion = qfalse;
-	}
 }
