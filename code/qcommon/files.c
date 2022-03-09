@@ -2598,9 +2598,6 @@ void FS_Shutdown( qboolean closemfp ) {
 #endif
 }
 
-void Com_AppendCDKey( const char *filename );
-void Com_ReadCDKey( const char *filename );
- 
 /*
 ================
 FS_ReorderPurePaks
@@ -2690,12 +2687,6 @@ static void FS_Startup( const char *gameName ) {
 		if (fs_homepath->string[0] && Q_stricmp(fs_homepath->string,fs_basepath->string)) {
 			FS_AddGameDirectory(fs_homepath->string, fs_gamedirvar->string);
 		}
-	}
-
-	Com_ReadCDKey( "baseq3" );
-	fs = Cvar_Get ("fs_game", "", CVAR_INIT|CVAR_SYSTEMINFO );
-	if (fs && fs->string[0] != 0) {
-		Com_AppendCDKey( fs->string );
 	}
 
 	// add our commands

@@ -35,7 +35,6 @@ ui_video
 ui_addbots
 ui_removebots
 ui_teamorders
-ui_cdkey
 ui_mods
 bg_misc
 bg_lib

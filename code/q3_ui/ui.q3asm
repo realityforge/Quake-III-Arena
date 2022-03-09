@@ -37,7 +37,6 @@ ui_removebots
 ui_teamorders
 ui_loadconfig
 ui_saveconfig
-ui_cdkey
 ui_mods
 bg_misc
 bg_lib

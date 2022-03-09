@@ -205,8 +205,6 @@ typedef struct {
 	int			nextHeartbeatTime;
 	challenge_t	challenges[MAX_CHALLENGES];	// to prevent invalid IPs from connecting
 	netadr_t	redirectAddress;			// for rcon return messages
-
-	netadr_t	authorizeAddress;			// for rcon return messages
 } serverStatic_t;
 
 //=============================================================================
@@ -242,7 +240,6 @@ extern	cvar_t	*sv_gametype;
 extern	cvar_t	*sv_pure;
 extern	cvar_t	*sv_floodProtect;
 extern	cvar_t	*sv_lanForceRate;
-extern	cvar_t	*sv_strictAuth;
 
 //===========================================================
 
@@ -283,8 +280,6 @@ void SV_SpawnServer( char *server, qboolean killBots );
 void SV_GetChallenge( netadr_t from );
 
 void SV_DirectConnect( netadr_t from );
-
-void SV_AuthorizeIpPacket( netadr_t from );
 
 void SV_ExecuteClientMessage( client_t *cl, msg_t *msg );
 void SV_UserinfoChanged( client_t *cl );

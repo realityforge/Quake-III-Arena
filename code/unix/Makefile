@@ -1141,7 +1141,6 @@ Q3UIOBJ = \
         $(B)/baseq3/ui/bg_misc.o \
         $(B)/baseq3/ui/ui_addbots.o \
         $(B)/baseq3/ui/ui_atoms.o \
-        $(B)/baseq3/ui/ui_cdkey.o \
         $(B)/baseq3/ui/ui_cinematics.o \
         $(B)/baseq3/ui/ui_confirm.o \
         $(B)/baseq3/ui/ui_connect.o \
@@ -1190,8 +1189,7 @@ $(B)/baseq3/ui/bg_misc.o : $(GDIR)/bg_misc.c; $(DO_SHLIB_CC)
 $(B)/baseq3/ui/ui_addbots.o : $(Q3UIDIR)/ui_addbots.c; $(DO_SHLIB_CC) 
 $(B)/baseq3/ui/ui_atoms.o : $(Q3UIDIR)/ui_atoms.c; $(DO_SHLIB_CC) 
 $(B)/baseq3/ui/ui_cinematics.o : $(Q3UIDIR)/ui_cinematics.c; $(DO_SHLIB_CC) 
-$(B)/baseq3/ui/ui_cdkey.o : $(Q3UIDIR)/ui_cdkey.c; $(DO_SHLIB_CC)
-$(B)/baseq3/ui/ui_confirm.o : $(Q3UIDIR)/ui_confirm.c; $(DO_SHLIB_CC) 
+$(B)/baseq3/ui/ui_confirm.o : $(Q3UIDIR)/ui_confirm.c; $(DO_SHLIB_CC)
 $(B)/baseq3/ui/ui_connect.o : $(Q3UIDIR)/ui_connect.c; $(DO_SHLIB_CC) 
 $(B)/baseq3/ui/ui_controls2.o : $(Q3UIDIR)/ui_controls2.c; $(DO_SHLIB_CC) 
 $(B)/baseq3/ui/ui_credits.o : $(Q3UIDIR)/ui_credits.c; $(DO_SHLIB_CC) 
@@ -1723,7 +1721,6 @@ $(B)/q3static/g_weapon.o : $(GDIR)/g_weapon.c; $(DO_CC) -DQ3_STATIC
 Q3SOBJ += \
         $(B)/q3static/ui_addbots.o \
         $(B)/q3static/ui_atoms.o \
-        $(B)/q3static/ui_cdkey.o \
         $(B)/q3static/ui_cinematics.o \
         $(B)/q3static/ui_confirm.o \
         $(B)/q3static/ui_connect.o \
@@ -1766,8 +1763,7 @@ Q3SOBJ += \
 $(B)/q3static/ui_addbots.o : $(Q3UIDIR)/ui_addbots.c; $(DO_CC) -DQ3_STATIC 
 $(B)/q3static/ui_atoms.o : $(Q3UIDIR)/ui_atoms.c; $(DO_CC) -DQ3_STATIC 
 $(B)/q3static/ui_cinematics.o : $(Q3UIDIR)/ui_cinematics.c; $(DO_CC) -DQ3_STATIC 
-$(B)/q3static/ui_cdkey.o : $(Q3UIDIR)/ui_cdkey.c; $(DO_CC) -DQ3_STATIC
-$(B)/q3static/ui_confirm.o : $(Q3UIDIR)/ui_confirm.c; $(DO_CC) -DQ3_STATIC 
+$(B)/q3static/ui_confirm.o : $(Q3UIDIR)/ui_confirm.c; $(DO_CC) -DQ3_STATIC
 $(B)/q3static/ui_connect.o : $(Q3UIDIR)/ui_connect.c; $(DO_CC) -DQ3_STATIC 
 $(B)/q3static/ui_controls2.o : $(Q3UIDIR)/ui_controls2.c; $(DO_CC) -DQ3_STATIC 
 $(B)/q3static/ui_credits.o : $(Q3UIDIR)/ui_credits.c; $(DO_CC) -DQ3_STATIC 
