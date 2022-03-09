@@ -88,21 +88,8 @@ zip files of the form "pak0.pk3", "pak1.pk3", etc.  Zip files are searched in de
 from the highest number to the lowest, and will always take precedence over the filesystem.
 This allows a pk3 distributed as a patch to override all existing data.
 
-Because we will have updated executables freely available online, there is no point to
-trying to restrict demo / oem versions of the game with code changes.  Demo / oem versions
-should be exactly the same executables as release versions, but with different data that
-automatically restricts where game media can come from to prevent add-ons from working.
-
-After the paths are initialized, quake will look for the product.txt file.  If not
-found and verified, the game will run in restricted mode.  In restricted mode, only 
-files contained in demoq3/pak0.pk3 will be available for loading, and only if the zip header is
-verified to not have been modified.  A single exception is made for q3config.cfg.  Files
-can still be written out in restricted mode, so screenshots and demos are allowed.
-Restricted mode can be tested by setting "+set fs_restrict 1" on the command line, even
-if there is a valid product.txt under the basepath or cdpath.
-
-If not running in restricted mode, and a file is not found in any local filesystem,
-an attempt will be made to download it and save it under the base path.
+If a file is not found in any local filesystem, an attempt will be made to download it
+ and save it under the base path.
 
 If the "fs_copyfiles" cvar is set to 1, then every time a file is sourced from the cd
 path, it will be copied over to the base path.  This is a development aid to help build
@@ -254,7 +241,6 @@ static	cvar_t		*fs_basegame;
 static	cvar_t		*fs_cdpath;
 static	cvar_t		*fs_copyfiles;
 static	cvar_t		*fs_gamedirvar;
-static	cvar_t		*fs_restrict;
 static	searchpath_t	*fs_searchpaths;
 static	int			fs_readCount;			// total bytes read
 static	int			fs_loadCount;			// total files read
@@ -305,11 +291,6 @@ static char		*fs_serverReferencedPakNames[MAX_SEARCH_PATHS];		// pk3 names
 // last valid game folder used
 char lastValidBase[MAX_OSPATH];
 char lastValidGame[MAX_OSPATH];
-
-// productId: This file is copyright 1999 Id Software, and may not be duplicated except during a licensed installation of the full commercial version of Quake 3:Arena
-static byte fs_scrambledProductId[152] = {
-220, 129, 255, 108, 244, 163, 171, 55, 133, 65, 199, 36, 140, 222, 53, 99, 65, 171, 175, 232, 236, 193, 210, 250, 169, 104, 231, 231, 21, 201, 170, 208, 135, 175, 130, 136, 85, 215, 71, 23, 96, 32, 96, 83, 44, 240, 219, 138, 184, 215, 73, 27, 196, 247, 55, 139, 148, 68, 78, 203, 213, 238, 139, 23, 45, 205, 118, 186, 236, 230, 231, 107, 212, 1, 10, 98, 30, 20, 116, 180, 216, 248, 166, 35, 45, 22, 215, 229, 35, 116, 250, 167, 117, 3, 57, 55, 201, 229, 218, 222, 128, 12, 141, 149, 32, 110, 168, 215, 184, 53, 31, 147, 62, 12, 138, 67, 132, 54, 125, 6, 221, 148, 140, 4, 21, 44, 198, 3, 126, 12, 100, 236, 61, 42, 44, 251, 15, 135, 14, 134, 89, 92, 177, 246, 152, 106, 124, 78, 118, 80, 28, 42
-};
 
 #ifdef FS_MISSING
 FILE*		missingFiles = NULL;
@@ -1167,7 +1148,7 @@ int FS_FOpenFileRead( const char *filename, fileHandle_t *file, qboolean uniqueF
       //   this test can make the search fail although the file is in the directory
       // I had the problem on https://zerowing.idsoftware.com/bugzilla/show_bug.cgi?id=8
       // turned out I used FS_FileExists instead
-			if ( fs_restrict->integer || fs_numServerPaks ) {
+			if ( fs_numServerPaks ) {
 
 				if ( Q_stricmp( filename + l - 4, ".cfg" )		// for config files
 					&& Q_stricmp( filename + l - 5, ".menu" )	// menu files
@@ -1934,7 +1915,7 @@ char **FS_ListFilteredFiles( const char *path, const char *extension, char *filt
 			char	*name;
 
 			// don't scan directories for files if we are pure or restricted
-			if ( fs_restrict->integer || fs_numServerPaks ) {
+			if ( fs_numServerPaks ) {
 		        continue;
 		    } else {
 				netpath = FS_BuildOSPath( search->dir->path, search->dir->gamedir, path );
@@ -2754,7 +2735,6 @@ static void FS_Startup( const char *gameName ) {
 	}
 	fs_homepath = Cvar_Get ("fs_homepath", homePath, CVAR_INIT );
 	fs_gamedirvar = Cvar_Get ("fs_game", "", CVAR_INIT|CVAR_SYSTEMINFO );
-	fs_restrict = Cvar_Get ("fs_restrict", "", CVAR_INIT );
 
 	// add search path elements in reverse priority order
 	if (fs_cdpath->string[0]) {
@@ -2824,67 +2804,6 @@ static void FS_Startup( const char *gameName ) {
 	}
 #endif
 	Com_Printf( "%d files in pk3 files\n", fs_packFiles );
-}
-
-
-/*
-===================
-FS_SetRestrictions
-
-Looks for product keys and restricts media add on ability
-if the full version is not found
-===================
-*/
-static void FS_SetRestrictions( void ) {
-	searchpath_t	*path;
-
-#ifndef PRE_RELEASE_DEMO
-	char	*productId;
-
-	// if fs_restrict is set, don't even look for the id file,
-	// which allows the demo release to be tested even if
-	// the full game is present
-	if ( !fs_restrict->integer ) {
-		// look for the full game id
-		FS_ReadFile( "productid.txt", (void **)&productId );
-		if ( productId ) {
-			// check against the hardcoded string
-			int		seed, i;
-
-			seed = 5000;
-			for ( i = 0 ; i < sizeof( fs_scrambledProductId ) ; i++ ) {
-				if ( ( fs_scrambledProductId[i] ^ (seed&255) ) != productId[i] ) {
-					break;
-				}
-				seed = (69069 * seed + 1);
-			}
-
-			FS_FreeFile( productId );
-
-			if ( i == sizeof( fs_scrambledProductId ) ) {
-				return;	// no restrictions
-			}
-			Com_Error( ERR_FATAL, "Invalid product identification" );
-		}
-	}
-#endif
-	Cvar_Set( "fs_restrict", "1" );
-
-	Com_Printf( "\nRunning in restricted demo mode.\n\n" );
-
-	// restart the filesystem with just the demo directory
-	FS_Shutdown(qfalse);
-	FS_Startup( DEMOGAME );
-
-	// make sure that the pak file has the header checksum we expect
-	for ( path = fs_searchpaths ; path ; path = path->next ) {
-		if ( path->pack ) {
-			// a tiny attempt to keep the checksum from being scannable from the exe
-			if ( (path->pack->checksum ^ 0x02261994u) != (DEMO_PAK_CHECKSUM ^ 0x02261994u) ) {
-				Com_Error( ERR_FATAL, "Corrupted pak0.pk3: %u", path->pack->checksum );
-			}
-		}
-	}
 }
 
 /*
@@ -3249,13 +3168,9 @@ void FS_InitFilesystem( void ) {
 	Com_StartupVariable( "fs_homepath" );
 	Com_StartupVariable( "fs_game" );
 	Com_StartupVariable( "fs_copyfiles" );
-	Com_StartupVariable( "fs_restrict" );
 
 	// try to start up normally
 	FS_Startup( BASEGAME );
-
-	// see if we are going to allow add-ons
-	FS_SetRestrictions();
 
 	// if we can't find default.cfg, assume that the paths are
 	// busted and error out now, rather than getting an unreadable
@@ -3291,9 +3206,6 @@ void FS_Restart( int checksumFeed ) {
 	// try to start up normally
 	FS_Startup( BASEGAME );
 
-	// see if we are going to allow add-ons
-	FS_SetRestrictions();
-
 	// if we can't find default.cfg, assume that the paths are
 	// busted and error out now, rather than getting an unreadable
 	// graphics screen when the font fails to load
@@ -3306,7 +3218,6 @@ void FS_Restart( int checksumFeed ) {
 			Cvar_Set("fs_gamedirvar", lastValidGame);
 			lastValidBase[0] = '\0';
 			lastValidGame[0] = '\0';
-			Cvar_Set( "fs_restrict", "0" );
 			FS_Restart(checksumFeed);
 			Com_Error( ERR_DROP, "Invalid game folder\n" );
 			return;

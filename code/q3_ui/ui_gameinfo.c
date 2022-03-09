@@ -811,7 +811,7 @@ void UI_InitGameinfo( void ) {
 	UI_LoadArenas();
 	UI_LoadBots();
 
-	if( (trap_Cvar_VariableValue( "fs_restrict" )) || (ui_numSpecialSinglePlayerArenas == 0 && ui_numSinglePlayerArenas == 4) ) {
+	if( ui_numSpecialSinglePlayerArenas == 0 && ui_numSinglePlayerArenas == 4 ) {
 		uis.demoversion = qtrue;
 	}
 	else {
