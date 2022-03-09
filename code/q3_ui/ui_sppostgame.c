@@ -347,14 +347,7 @@ static void UI_SPPostgameMenu_MenuDraw( void ) {
 
 	// phase 3
 	if( postgameMenuInfo.phase == 3 ) {
-		if( uis.demoversion ) {
-			if( postgameMenuInfo.won == 1 && UI_ShowTierVideo( 8 )) {
-				trap_Cvar_Set( "nextmap", "" );
-				trap_Cmd_ExecuteText( EXEC_APPEND, "disconnect; cinematic demoEnd.RoQ\n" );
-				return;
-			}
-		}
-		else if( postgameMenuInfo.won > -1 && UI_ShowTierVideo( postgameMenuInfo.won + 1 )) {
+		if( postgameMenuInfo.won > -1 && UI_ShowTierVideo( postgameMenuInfo.won + 1 )) {
 			if( postgameMenuInfo.won == postgameMenuInfo.lastTier ) {
 				trap_Cvar_Set( "nextmap", "" );
 				trap_Cmd_ExecuteText( EXEC_APPEND, "disconnect; cinematic end.RoQ\n" );

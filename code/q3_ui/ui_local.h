@@ -551,7 +551,6 @@ typedef struct {
 	float				xscale;
 	float				yscale;
 	float				bias;
-	qboolean			demoversion;
 	qboolean			firstdraw;
 } uiStatic_t;
 
