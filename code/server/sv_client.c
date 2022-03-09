@@ -80,24 +80,8 @@ void SV_GetChallenge( netadr_t from ) {
 		challenge->connected = qfalse;
 	}
 
-	// if they are on a lan address, send the challengeResponse immediately
-	if ( Sys_IsLANAddress( from ) ) {
-		challenge->pingTime = svs.time;
-		NET_OutOfBandPrint( NS_SERVER, from, "challengeResponse %i", challenge->challenge );
-		return;
-	}
-
-	// if they have been challenging for a long time and we
-	// haven't heard anything from the authorize server, go ahead and
-	// let them in, assuming the id server is down
-	if ( svs.time - challenge->firstTime > AUTHORIZE_TIMEOUT ) {
-		Com_DPrintf( "authorize server timed out\n" );
-
-		challenge->pingTime = svs.time;
-		NET_OutOfBandPrint( NS_SERVER, challenge->adr, 
-			"challengeResponse %i", challenge->challenge );
-		return;
-	}
+    challenge->pingTime = svs.time;
+    NET_OutOfBandPrint( NS_SERVER, challenge->adr, "challengeResponse %i", challenge->challenge );
 }
 
 /*
