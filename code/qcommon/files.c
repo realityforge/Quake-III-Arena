@@ -121,7 +121,7 @@ server download, to be written to home path + current game's directory
 
 
 The filesystem can be safely shutdown and reinitialized with different
-basedir / cddir / game combinations, but all other subsystems that rely on it
+basedir / game combinations, but all other subsystems that rely on it
 (sound, video) must also be forced to restart.
 
 Because the same files are loaded by both the clip model (CM_) and renderer (TR_)

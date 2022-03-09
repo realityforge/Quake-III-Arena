@@ -793,12 +793,6 @@ qboolean UI_IsFullscreen( void ) {
 	return qfalse;
 }
 
-static void NeedCDAction( qboolean result ) {
-	if ( !result ) {
-		trap_Cmd_ExecuteText( EXEC_APPEND, "quit\n" );
-	}
-}
-
 static void NeedCDKeyAction( qboolean result ) {
 	if ( !result ) {
 		trap_Cmd_ExecuteText( EXEC_APPEND, "quit\n" );
@@ -816,9 +810,6 @@ void UI_SetActiveMenu( uiMenuCommand_t menu ) {
 		return;
 	case UIMENU_MAIN:
 		UI_MainMenu();
-		return;
-	case UIMENU_NEED_CD:
-		UI_ConfirmMenu( "Insert the CD", 0, NeedCDAction );
 		return;
 	case UIMENU_BAD_CD_KEY:
 		UI_ConfirmMenu( "Bad CD Key", 0, NeedCDKeyAction );
