@@ -677,18 +677,6 @@ extern void UI_TeamOrdersMenu_f( void );
 extern void UI_TeamOrdersMenu_Cache( void );
 
 //
-// ui_loadconfig.c
-//
-void UI_LoadConfig_Cache( void );
-void UI_LoadConfigMenu( void );
-
-//
-// ui_saveconfig.c
-//
-void UI_SaveConfigMenu_Cache( void );
-void UI_SaveConfigMenu( void );
-
-//
 // ui_display.c
 //
 void UI_DisplayOptionsMenu_Cache( void );

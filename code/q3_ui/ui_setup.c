@@ -43,8 +43,6 @@ SETUP MENU
 #define ID_CUSTOMIZECONTROLS	11
 #define ID_SYSTEMCONFIG			12
 #define ID_GAME					13
-#define ID_LOAD					15
-#define ID_SAVE					16
 #define ID_DEFAULTS				17
 #define ID_BACK					18
 
@@ -120,14 +118,6 @@ static void UI_SetupMenu_Event( void *ptr, int event ) {
 	case ID_GAME:
 		UI_PreferencesMenu();
 		break;
-
-//	case ID_LOAD:
-//		UI_LoadConfigMenu();
-//		break;
-
-//	case ID_SAVE:
-//		UI_SaveConfigMenu();
-//		break;
 
 	case ID_DEFAULTS:
 		UI_ConfirmMenu( "SET TO DEFAULTS?", Setup_ResetDefaults_Draw, Setup_ResetDefaults_Action );
@@ -222,30 +212,6 @@ static void UI_SetupMenu_Init( void ) {
 	setupMenuInfo.game.style						= UI_CENTER;
 
 	if( !trap_Cvar_VariableValue( "cl_paused" ) ) {
-#if 0
-		y += SETUP_MENU_VERTICAL_SPACING;
-		setupMenuInfo.load.generic.type					= MTYPE_PTEXT;
-		setupMenuInfo.load.generic.flags				= QMF_CENTER_JUSTIFY|QMF_PULSEIFFOCUS;
-		setupMenuInfo.load.generic.x					= 320;
-		setupMenuInfo.load.generic.y					= y;
-		setupMenuInfo.load.generic.id					= ID_LOAD;
-		setupMenuInfo.load.generic.callback				= UI_SetupMenu_Event; 
-		setupMenuInfo.load.string						= "LOAD";
-		setupMenuInfo.load.color						= color_red;
-		setupMenuInfo.load.style						= UI_CENTER;
-
-		y += SETUP_MENU_VERTICAL_SPACING;
-		setupMenuInfo.save.generic.type					= MTYPE_PTEXT;
-		setupMenuInfo.save.generic.flags				= QMF_CENTER_JUSTIFY|QMF_PULSEIFFOCUS;
-		setupMenuInfo.save.generic.x					= 320;
-		setupMenuInfo.save.generic.y					= y;
-		setupMenuInfo.save.generic.id					= ID_SAVE;
-		setupMenuInfo.save.generic.callback				= UI_SetupMenu_Event; 
-		setupMenuInfo.save.string						= "SAVE";
-		setupMenuInfo.save.color						= color_red;
-		setupMenuInfo.save.style						= UI_CENTER;
-#endif
-
 		y += SETUP_MENU_VERTICAL_SPACING;
 		setupMenuInfo.defaults.generic.type				= MTYPE_PTEXT;
 		setupMenuInfo.defaults.generic.flags			= QMF_CENTER_JUSTIFY|QMF_PULSEIFFOCUS;
