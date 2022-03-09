@@ -657,8 +657,6 @@ void			trap_LAN_GetPing( int n, char *buf, int buflen, int *pingtime );
 void			trap_LAN_GetPingInfo( int n, char *buf, int buflen );
 int				trap_MemoryRemaining( void );
 
-void			trap_SetPbClStatus( int status );
-
 //
 // ui_addbots.c
 //

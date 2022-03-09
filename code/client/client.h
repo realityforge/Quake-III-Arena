@@ -238,7 +238,6 @@ typedef struct {
 	int			maxPing;
 	int			ping;
 	qboolean	visible;
-	int			punkbuster;
 } serverInfo_t;
 
 typedef struct {

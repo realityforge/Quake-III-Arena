@@ -122,7 +122,6 @@ typedef enum {
 	UI_LAN_COMPARESERVERS,
 	// 1.32
 	UI_FS_SEEK,
-	UI_SET_PBCLSTATUS,
 
 	UI_MEMSET = 100,
 	UI_MEMCPY,
@@ -148,7 +147,6 @@ typedef enum {
 #define SORT_CLIENTS		2
 #define SORT_GAME			3
 #define SORT_PING			4
-#define SORT_PUNKBUSTER		5
 
 typedef enum {
 	UI_GETAPIVERSION = 0,	// system reserved
