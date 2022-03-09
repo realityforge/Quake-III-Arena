@@ -4,7 +4,6 @@
 	loadMenu { "ui/main.menu" }
  	loadMenu { "ui/joinserver.menu" }
  	loadMenu { "ui/filter.menu" }
-	loadMenu { "ui/punkbuster.menu" }
  	loadMenu { "ui/player.menu" }
  	loadMenu { "ui/setup.menu" }
  	loadMenu { "ui/fight.menu" }

@@ -386,7 +386,3 @@ void trap_CIN_SetExtents (int handle, int x, int y, int w, int h) {
 void	trap_R_RemapShader( const char *oldShader, const char *newShader, const char *timeOffset ) {
 	syscall( UI_R_REMAP_SHADER, oldShader, newShader, timeOffset );
 }
-
-void trap_SetPbClStatus( int status ) {
-	syscall( UI_SET_PBCLSTATUS, status );
-}
