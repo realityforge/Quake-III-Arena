@@ -78,7 +78,6 @@ void SV_GetChallenge( netadr_t from ) {
 		challenge->firstTime = svs.time;
 		challenge->time = svs.time;
 		challenge->connected = qfalse;
-		i = oldest;
 	}
 
 	// if they are on a lan address, send the challengeResponse immediately
