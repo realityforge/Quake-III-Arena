@@ -164,115 +164,6 @@ char *Sys_GetClipboardData(void)
 #endif
 }
 
-#ifdef DEDICATED
-#	define PID_FILENAME PRODUCT_NAME "_server.pid"
-#else
-#	define PID_FILENAME PRODUCT_NAME ".pid"
-#endif
-
-/*
-=================
-Sys_PIDFileName
-=================
-*/
-static char *Sys_PIDFileName( const char *gamedir )
-{
-	const char *homePath = Cvar_VariableString( "fs_homepath" );
-
-	if( *homePath != '\0' )
-		return va( "%s/%s/%s", homePath, gamedir, PID_FILENAME );
-
-	return NULL;
-}
-
-/*
-=================
-Sys_RemovePIDFile
-=================
-*/
-void Sys_RemovePIDFile( const char *gamedir )
-{
-	char *pidFile = Sys_PIDFileName( gamedir );
-
-	if( pidFile != NULL )
-		remove( pidFile );
-}
-
-/*
-=================
-Sys_WritePIDFile
-
-Return qtrue if there is an existing stale PID file
-=================
-*/
-static qboolean Sys_WritePIDFile( const char *gamedir )
-{
-	char      *pidFile = Sys_PIDFileName( gamedir );
-	FILE      *f;
-	qboolean  stale = qfalse;
-
-	if( pidFile == NULL )
-		return qfalse;
-
-	// First, check if the pid file is already there
-	if( ( f = fopen( pidFile, "r" ) ) != NULL )
-	{
-		char  pidBuffer[ 64 ] = { 0 };
-		int   pid;
-
-		pid = fread( pidBuffer, sizeof( char ), sizeof( pidBuffer ) - 1, f );
-		fclose( f );
-
-		if(pid > 0)
-		{
-			pid = atoi( pidBuffer );
-			if( !Sys_PIDIsRunning( pid ) )
-				stale = qtrue;
-		}
-		else
-			stale = qtrue;
-	}
-
-	if( FS_CreatePath( pidFile ) ) {
-		return 0;
-	}
-
-	if( ( f = fopen( pidFile, "w" ) ) != NULL )
-	{
-		fprintf( f, "%d", Sys_PID( ) );
-		fclose( f );
-	}
-	else
-		Com_Printf( S_COLOR_YELLOW "Couldn't write %s.\n", pidFile );
-
-	return stale;
-}
-
-/*
-=================
-Sys_InitPIDFile
-=================
-*/
-void Sys_InitPIDFile( const char *gamedir ) {
-	if( Sys_WritePIDFile( gamedir ) ) {
-#ifndef DEDICATED
-		char message[1024];
-		char modName[MAX_OSPATH];
-
-		FS_GetModDescription( gamedir, modName, sizeof ( modName ) );
-		Q_CleanStr( modName );
-
-		Com_sprintf( message, sizeof (message), "The last time %s ran, "
-			"it didn't exit properly. This may be due to inappropriate video "
-			"settings. Would you like to start with \"safe\" video settings?", modName );
-
-		if( Sys_Dialog( DT_YES_NO, message, "Abnormal Exit" ) == DR_YES ) {
-			Cvar_Set( "com_abnormalExit", "1" );
-		}
-#endif
-	}
-}
-
 /*
 =================
 Sys_Exit
@@ -287,12 +178,6 @@ static __attribute__ ((noreturn)) void Sys_Exit( int exitCode )
 #ifndef DEDICATED
 	SDL_Quit( );
 #endif
-
-	if( exitCode < 2 && com_fullyInitialized )
-	{
-		// Normal exit
-		Sys_RemovePIDFile( FS_GetCurrentGameDir() );
-	}
 
 	NET_Shutdown( );
 
