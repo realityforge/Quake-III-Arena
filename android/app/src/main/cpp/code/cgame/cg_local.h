@@ -1003,6 +1003,9 @@ typedef struct {
 	sfxHandle_t	wstbimpdSound;
 	sfxHandle_t	wstbactvSound;
 
+	// comfort vignette
+	qhandle_t	vignetteShader;
+	qhandle_t	maskShader;
 } cgMedia_t;
 
 

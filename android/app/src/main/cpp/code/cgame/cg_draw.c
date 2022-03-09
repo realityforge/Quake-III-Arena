@@ -2586,6 +2586,53 @@ static void CG_DrawWeapReticle( void )
 }
 
 /*
+==============
+CG_DrawVignette
+==============
+*/
+float currentComfortVignetteValue = 0.0f;
+
+static void CG_DrawVignette( void )
+{
+
+	float comfortVignetteValue = trap_Cvar_VariableValue( "vr_comfortVignette" );
+	if (comfortVignetteValue <= 0.0f || comfortVignetteValue > 1.0f)
+	{
+		return;
+	}
+
+	if (VectorLength(cg.predictedPlayerState.velocity) > 30.0)
+	{
+		if (currentComfortVignetteValue <  comfortVignetteValue)
+		{
+			currentComfortVignetteValue += comfortVignetteValue * 0.05;
+			if (currentComfortVignetteValue > 1.0f)
+				currentComfortVignetteValue = 1.0f;
+		}
+	} else{
+		if (currentComfortVignetteValue >  0.0f)
+			currentComfortVignetteValue -= comfortVignetteValue * 0.05;
+	}
+
+	if (currentComfortVignetteValue > 0.0f && currentComfortVignetteValue <= 1.0f && !(vr->weapon_zoomed))
+	{
+		int x = (int)(0 + currentComfortVignetteValue * cg.refdef.width / 3);
+		int w = (int)(cg.refdef.width - 2 * x);
+		int y = (int)(0 + currentComfortVignetteValue * cg.refdef.height / 3);
+		int h = (int)(cg.refdef.height - 2 * y);
+
+		// sides
+		trap_R_DrawStretchPic( 0, 0, x, cg.refdef.height, 0, 0, 1, 1, cgs.media.maskShader );
+		trap_R_DrawStretchPic( cg.refdef.width - x, 0, x, cg.refdef.height, 0, 0, 1, 1, cgs.media.maskShader );
+		// top/bottom
+		trap_R_DrawStretchPic( x, 0, cg.refdef.width - x, y, 0, 0, 1, 1, cgs.media.maskShader );
+		trap_R_DrawStretchPic( x, cg.refdef.height - y, cg.refdef.width - x, y, 0, 0, 1, 1, cgs.media.maskShader );
+		// vignette
+		trap_R_DrawStretchPic( x, y, w, h, 0, 0, 1, 1, cgs.media.vignetteShader );
+	}
+}
+
+/*
 =================
 CG_Draw2D
 =================
@@ -2626,6 +2673,8 @@ static void CG_Draw2D(stereoFrame_t stereoFrame)
 	} else {
 		// don't draw any status if dead or the scoreboard is being explicitly shown
 		if ( !cg.showScores && cg.snap->ps.stats[STAT_HEALTH] > 0 ) {
+
+			CG_DrawVignette();
 
 #ifdef MISSIONPACK
 			if ( cg_drawStatus.integer ) {

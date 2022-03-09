@@ -39,14 +39,15 @@ COMFORT OPTIONS MENU
 
 #define VR_X_POS		360
 
-#define ID_HEIGHTADJUST			127
-#define ID_SNAPTURN				128
-#define ID_ROLLHIT			    129
-#define ID_HAPTICINTENSITY	    130
-#define ID_HUDDEPTH			    131
-#define ID_HUDYOFFSET		    132
+#define ID_COMFORTVIGNETTE		127
+#define ID_HEIGHTADJUST			128
+#define ID_SNAPTURN				129
+#define ID_ROLLHIT			    130
+#define ID_HAPTICINTENSITY	    131
+#define ID_HUDDEPTH			    132
+#define ID_HUDYOFFSET		    133
 
-#define ID_BACK					133
+#define ID_BACK					134
 
 #define	NUM_HUDDEPTH			6
 
@@ -58,6 +59,7 @@ typedef struct {
 	menubitmap_s		framel;
 	menubitmap_s		framer;
 
+    menuslider_s 		comfortvignette;
     menuslider_s 		heightadjust;
 	menulist_s          snapturn;
     menuradiobutton_s	rollhit;
@@ -72,6 +74,7 @@ static comfort_t s_comfort;
 
 
 static void Comfort_SetMenuItems( void ) {
+    s_comfort.comfortvignette.curvalue		= trap_Cvar_VariableValue( "vr_comfortVignette" );
     s_comfort.heightadjust.curvalue		= trap_Cvar_VariableValue( "vr_heightAdjust" );
 	s_comfort.snapturn.curvalue		= (int)trap_Cvar_VariableValue( "vr_snapturn" ) / 45;
     s_comfort.rollhit.curvalue		    = trap_Cvar_VariableValue( "vr_rollWhenHit" ) != 0;
@@ -87,6 +90,10 @@ static void Comfort_MenuEvent( void* ptr, int notification ) {
 	}
 
 	switch( ((menucommon_s*)ptr)->id ) {
+    case ID_COMFORTVIGNETTE:
+        trap_Cvar_SetValue( "vr_comfortVignette", s_comfort.comfortvignette.curvalue );
+        break;
+
     case ID_HEIGHTADJUST:
         trap_Cvar_SetValue( "vr_heightAdjust", s_comfort.heightadjust.curvalue );
         break;
@@ -169,7 +176,18 @@ static void Comfort_MenuInit( void ) {
 	s_comfort.framer.width  	   = 256;
 	s_comfort.framer.height  	   = 334;
 
-	y = 198;
+	y = 180;
+	s_comfort.comfortvignette.generic.type	     = MTYPE_SLIDER;
+	s_comfort.comfortvignette.generic.x			 = VR_X_POS;
+    s_comfort.comfortvignette.generic.y			 = y;
+	s_comfort.comfortvignette.generic.flags	 	= QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+	s_comfort.comfortvignette.generic.name	     = "Comfort Vignette:";
+	s_comfort.comfortvignette.generic.id 	     = ID_COMFORTVIGNETTE;
+	s_comfort.comfortvignette.generic.callback  	= Comfort_MenuEvent;
+	s_comfort.comfortvignette.minvalue		     = 0.0f;
+	s_comfort.comfortvignette.maxvalue		     = 1.0f;
+
+	y += BIGCHAR_HEIGHT+2;
 	s_comfort.heightadjust.generic.type	     = MTYPE_SLIDER;
 	s_comfort.heightadjust.generic.x			 = VR_X_POS;
     s_comfort.heightadjust.generic.y			 = y;
@@ -248,6 +266,7 @@ static void Comfort_MenuInit( void ) {
 	Menu_AddItem( &s_comfort.menu, &s_comfort.framel );
 	Menu_AddItem( &s_comfort.menu, &s_comfort.framer );
 
+	Menu_AddItem( &s_comfort.menu, &s_comfort.comfortvignette );
 	Menu_AddItem( &s_comfort.menu, &s_comfort.heightadjust );
 	Menu_AddItem( &s_comfort.menu, &s_comfort.snapturn );
 	Menu_AddItem( &s_comfort.menu, &s_comfort.rollhit );
