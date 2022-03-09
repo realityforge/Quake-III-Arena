@@ -28,6 +28,8 @@ These tasks are intended to be undertaken in the future but have not been priori
 * Add bHaptics support.
 * Switch renderer to nvrhi1 and/or WebGPU.
 * Change the start place for VR to be a location with a 3D menu that can be interacted with rather than a 2D menu projected onto a barrel.
+* Add mechanism for downloading Quake3Arena and Quake3TeamArena content from Steam? User supplies username and password. We save the username, generate a user secret as an "encrypted version" of a username+password hash using a public key and download the content immediately. If we ever need to download again, we will need to re-enter password.
+* Re-add code equivalent to CD Key checking. i.e. Allow at most a single player online that is attached to a particular Steam account. Use the above described "user secret". The master server has access to private key to decode the secret and will ensure that the username matches and that there is a single user with that username present.
 
 ## Task Descriptions
 
