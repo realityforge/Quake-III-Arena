@@ -620,7 +620,9 @@ typedef struct {
 
 	int			weaponHolsterSelection;
 	int 		weaponHolsterTime;
-	float 		weaponHolsterYaw;
+	vec3_t		weaponHolsterAngles;
+	vec3_t		weaponHolsterOrigin;
+	vec3_t		weaponHolsterOffset;
 
 	// blend blobs
 	float		damageTime;

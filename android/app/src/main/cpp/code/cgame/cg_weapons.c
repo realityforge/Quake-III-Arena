@@ -260,6 +260,48 @@ void CG_ConvertFromVR(vec3_t in, vec3_t offset, vec3_t out)
 	}
 }
 
+static void CG_CalculateVRPositionInWorld( vec3_t in_position,  vec3_t in_offset, vec3_t in_orientation, vec3_t origin, vec3_t angles )
+{
+    float worldscale = trap_Cvar_VariableValue("vr_worldscale");
+
+    if (!cgs.localServer)
+    {
+        //Use absolute position for the faked 6DoF for multiplayer
+        vec3_t offset;
+        VectorSubtract(in_position, vr->hmdorigin, offset);
+        offset[1] = 0; // up/down is index 1 in this case
+        CG_ConvertFromVR(offset, cg.refdef.vieworg, origin);
+        origin[2] -= PLAYER_HEIGHT;
+        origin[2] += in_position[1] * worldscale;
+    }
+    else
+    {
+        //Local server - true 6DoF offset from HMD
+		vec3_t offset;
+		VectorCopy(in_offset, offset);
+		offset[1] = 0; // up/down is index 1 in this case
+        CG_ConvertFromVR(offset, cg.refdef.vieworg, origin);
+        origin[2] -= PLAYER_HEIGHT;
+        origin[2] += in_position[1] * worldscale;
+    }
+
+    VectorCopy(in_orientation, angles);
+    if ( !cgs.localServer )
+    {
+        //Calculate the offhand angles from "first principles"
+        float deltaYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]);
+        angles[YAW] = deltaYaw + (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]) + in_orientation[YAW];
+    } else
+    {
+        angles[YAW] += (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]);
+    }
+}
+
+void CG_CalculateVROffHandPosition( vec3_t origin, vec3_t angles )
+{
+    CG_CalculateVRPositionInWorld(vr->offhandposition, vr->offhandoffset, vr->offhandangles, origin, angles);
+}
+
 static void CG_CalculateWeaponPosition( vec3_t origin, vec3_t angles );
 
 void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles )
@@ -270,34 +312,7 @@ void CG_CalculateVRWeaponPosition( vec3_t origin, vec3_t angles )
 		return;
 	}
 
-	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
-
-	if (!cgs.localServer)
-	{
-        //Use absolute position for the faked 6DoF for multiplayer
-        vec3_t weaponoffset;
-        VectorSubtract(vr->weaponposition, vr->hmdorigin, weaponoffset);
-        weaponoffset[1] = vr->weaponoffset[1]; // up/down is index 1 in this case
-        CG_ConvertFromVR(weaponoffset, cg.refdef.vieworg, origin);
-        origin[2] -= PLAYER_HEIGHT;
-        origin[2] += vr->hmdposition[1] * worldscale;
-
-        //Calculate the weapon angles from "first principles"
-        float deltaYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]);
-        angles[YAW] = deltaYaw + (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]) + vr->weaponangles[YAW];
-        angles[PITCH] = vr->weaponangles[PITCH];
-        angles[ROLL] = vr->weaponangles[ROLL];
-	}
-	else
-	{
-		//Local server - true 6DoF offset from HMD
-		CG_ConvertFromVR(vr->weaponoffset, cg.refdef.vieworg, origin);
-		origin[2] -= PLAYER_HEIGHT;
-		origin[2] += vr->hmdposition[1] * worldscale;
-
-        VectorCopy(vr->weaponangles, angles);
-        angles[YAW] += (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]);
-	}
+    CG_CalculateVRPositionInWorld(vr->weaponposition, vr->weaponoffset, vr->weaponangles, origin, angles);
 }
 
 /*
@@ -2020,31 +2035,17 @@ void CG_HolsterSelect_f( void )
 
 void CG_DrawHolsteredWeapons( void )
 {
-    int weapons[MAX_WEAPONS];
-    memset(weapons, 0, sizeof(int) * MAX_WEAPONS);
-
     if (cg.weaponHolsterTime == 0)
     {
         cg.weaponHolsterTime = cg.time;
-        cg.weaponHolsterYaw = vr->hmdorientation[YAW];
+        VectorCopy(vr->weaponangles, cg.weaponHolsterAngles);
+        VectorCopy(vr->weaponposition, cg.weaponHolsterOrigin);
+        VectorCopy(vr->weaponoffset, cg.weaponHolsterOffset);
     }
 
-    int j = 0;
-    for ( int i = 0 ; i < MAX_WEAPONS ; i++ ) {
-		if (cg.weaponSelect == i)
-		{
-			continue;
-		}
-
-		if ( CG_WeaponSelectable( i ) ) {
-            weapons[j++] = i;
-        }
-    }
-
-	float SCALE = 0.05f;
-	const float DIST = 9.0f;
-	const float SEP = 16.0f;
-    cg.weaponHolsterSelection = WP_NONE;
+    float SCALE = 0.04f;
+	const float DIST = 4.2f;
+	const float SEP = 360.0f / (WP_NUM_WEAPONS - 1); // Exclude grappling hook
 
     vec3_t controllerOrigin, controllerAngles;
     CG_CalculateVRWeaponPosition(controllerOrigin, controllerAngles);
@@ -2054,66 +2055,63 @@ void CG_DrawHolsteredWeapons( void )
 		memset( &blob, 0, sizeof( blob ) );
 		VectorCopy( controllerOrigin, blob.origin );
 		AnglesToAxis(vec3_origin, blob.axis);
-		VectorScale( blob.axis[0], 0.045f, blob.axis[0] );
-		VectorScale( blob.axis[1], 0.045f, blob.axis[1] );
-		VectorScale( blob.axis[2], 0.045f, blob.axis[2] );
+		VectorScale( blob.axis[0], SCALE - 0.01f, blob.axis[0] );
+		VectorScale( blob.axis[1], SCALE - 0.01f, blob.axis[1] );
+		VectorScale( blob.axis[2], SCALE - 0.01f, blob.axis[2] );
 		blob.nonNormalizedAxes = qtrue;
 		blob.hModel = cgs.media.smallSphereModel;
 		trap_R_AddRefEntityToScene( &blob );
 	}
 
-	vec3_t viewangles, vieworg, viewForward, viewRight, viewUp;
-    VectorCopy(cg.refdefViewAngles, viewangles);
-    VectorCopy(cg.refdef.vieworg, vieworg);
+	vec3_t holsterAngles, holsterOrigin, holsterForward, holsterRight, holsterUp, dummy;
+    CG_CalculateVRPositionInWorld(cg.weaponHolsterOrigin, cg.weaponHolsterOffset, cg.weaponHolsterAngles, holsterOrigin, holsterAngles);
 
-    VectorCopy(vr->hmdorientation, viewangles);
-    viewangles[YAW] = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]) +
-            vr->clientviewangles[YAW] - vr->hmdorientation[YAW] + cg.weaponHolsterYaw;
+	AngleVectors(holsterAngles, holsterForward, holsterRight, holsterUp);
 
-    if (!cgs.localServer)
+	//VectorMA(holsterOrigin, -2.0f, holsterForward, holsterOrigin);
+
+    //float startingPositionYaw = AngleNormalize360(holsterAngles[YAW] + (((WP_NUM_WEAPONS-2)/2.0f) * SEP));
+    qboolean selected = qfalse;
+    for (int w = WP_NUM_WEAPONS-1; w > 0; --w)
     {
-        vec3_t pos, hmdposition;
-        VectorClear(pos);
-        VectorSubtract(vr->hmdposition, vr->hmdorigin, hmdposition);
-        rotateAboutOrigin(hmdposition[2], hmdposition[0],
-                          cg.refdefViewAngles[YAW] - vr->calculated_weaponangles[YAW], pos);
-		VectorScale(pos, trap_Cvar_VariableValue("vr_worldscale"), pos);
-        VectorSubtract(cg.refdef.vieworg, pos, vieworg);
-    }
+        if (w == WP_GRAPPLING_HOOK)
+        {
+            continue;
+        }
 
-	AngleVectors(viewangles, viewForward, viewRight, viewUp);
+		{
+			qboolean selectable = CG_WeaponSelectable(w);
 
-    float startingPositionYaw = AngleNormalize360(viewangles[YAW] + (((j-1)/2.0f) * SEP));
-    for (int w = j-1; w >= 0; --w)
-    {
-		if ( cg_weapons[ weapons[w] ].item ) {
             //first calculate holster slot position
             vec3_t angles, iconOrigin,iconBackground;
             VectorClear(angles);
-            angles[YAW] = startingPositionYaw - (w * SEP) - 4; // add a few degrees as models aren't central
-            vec3_t forward;
-            AngleVectors(angles, forward, NULL, NULL);
+            angles[YAW] = holsterAngles[YAW];
+            angles[PITCH] = holsterAngles[PITCH];
+            angles[ROLL] = AngleNormalize360(180 - (w * SEP) - 4); // add a few degrees as models aren't central
+            vec3_t forward, up;
+            AngleVectors(angles, forward, NULL, up);
 
-            float dist = (cg.time - cg.weaponHolsterTime) / 10;
-            if (dist > DIST) dist = DIST;
-            VectorMA(vieworg, dist, forward, iconOrigin);
-            VectorMA(vieworg, dist+0.01f, forward, iconBackground);
+            float frac = (cg.time - cg.weaponHolsterTime) / (60 * DIST);
+            if (frac > 1.0f) frac = 1.0f;
+
+            VectorMA(holsterOrigin, (DIST*frac), up, iconOrigin);
+            VectorMA(iconOrigin, 0.01f, forward, iconBackground);
 
             float worldscale = trap_Cvar_VariableValue("vr_worldscale");
-            iconOrigin[2] -= PLAYER_HEIGHT;
-            iconOrigin[2] += (vr->hmdposition[1] * 0.85f) * worldscale;
-			iconBackground[2] -= PLAYER_HEIGHT;
-			iconBackground[2] += (vr->hmdposition[1] * 0.85f) * worldscale;
 
             //Float sprite above selected weapon
             vec3_t diff;
             VectorSubtract(controllerOrigin, iconOrigin, diff);
             float length = VectorLength(diff);
             if (length <= 1.5f &&
-                dist == DIST &&
-                cg.weaponHolsterSelection == WP_NONE)
+                frac == 1.0f &&
+                selectable)
             {
-                cg.weaponHolsterSelection = weapons[w];
+            	if (cg.weaponHolsterSelection != w)
+				{
+					cg.weaponHolsterSelection = w;
+					trap_HapticEvent("selector_icon", 0, 0, 100, 0, 0);
+				}
 
                 refEntity_t		sprite;
                 memset( &sprite, 0, sizeof( sprite ) );
@@ -2127,43 +2125,68 @@ void CG_DrawHolsteredWeapons( void )
                 sprite.shaderRGBA[2] = 255;
                 sprite.shaderRGBA[3] = 255;
                 trap_R_AddRefEntityToScene( &sprite );
+
+				selected = qtrue;
             }
 
             if (!cg_holsterSimple2DIcons.integer)
 			{
+				//Wrap weapon in a small sphere - absent weapon will be a very small sphere
+				{
+				    float f2 = 1.0f;
+				    if (!selectable) f2 = 0.05f;
+					refEntity_t		blob;
+					memset( &blob, 0, sizeof( blob ) );
+					VectorCopy( iconOrigin, blob.origin );
+					AnglesToAxis(vec3_origin, blob.axis);
+					VectorScale( blob.axis[0], (SCALE*frac*f2) + 0.05f + (cg.weaponHolsterSelection == w ? 0.035f : 0), blob.axis[0] );
+					VectorScale( blob.axis[1], (SCALE*frac*f2) + 0.05f + (cg.weaponHolsterSelection == w ? 0.035f : 0), blob.axis[1] );
+					VectorScale( blob.axis[2], (SCALE*frac*f2) + 0.05f + (cg.weaponHolsterSelection == w ? 0.035f : 0), blob.axis[2] );
+					blob.nonNormalizedAxes = qtrue;
+					blob.hModel = cgs.media.smallSphereModel;
+					blob.customShader = cgs.media.invisShader;
+					trap_R_AddRefEntityToScene( &blob );
+				}
+
+				if (!selectable)
+				{
+					continue;
+				}
+
 				refEntity_t ent;
 				memset(&ent, 0, sizeof(ent));
 				VectorCopy(iconOrigin, ent.origin);
 
 				//Shift the weapon model a bit to be in the sphere
-				if (weapons[w] == WP_GAUNTLET)
+				if (w == WP_GAUNTLET)
 				{
                     SCALE = 0.065f;
-					VectorMA(ent.origin, 0.3f, viewUp, ent.origin);
-                    VectorMA(ent.origin, 0.15f, viewRight, ent.origin);
-                    VectorMA(ent.origin, -0.15f, viewForward, ent.origin);
+					VectorMA(ent.origin, 0.3f, holsterUp, ent.origin);
+                    VectorMA(ent.origin, 0.15f, holsterRight, ent.origin);
+                    VectorMA(ent.origin, -0.15f, holsterForward, ent.origin);
 				}
 				else
 				{
-					VectorMA(ent.origin, 0.3f, viewForward, ent.origin);
-					VectorMA(ent.origin, -0.2f, viewRight, ent.origin);
-					VectorMA(ent.origin, 0.5f, viewUp, ent.origin);
+					VectorMA(ent.origin, 0.3f, holsterForward, ent.origin);
+					VectorMA(ent.origin, -0.2f, holsterRight, ent.origin);
+					VectorMA(ent.origin, 0.5f, holsterUp, ent.origin);
 				}
 
 				vec3_t iconAngles;
-				VectorCopy(viewangles, iconAngles);
+				VectorCopy(holsterAngles, iconAngles);
+                iconAngles[PITCH] = 10;
 				iconAngles[YAW] -= 145.0f;
-				if (weapons[w] == WP_GAUNTLET)
+				if (w == WP_GAUNTLET)
 				{
 					iconAngles[ROLL] -= 90.0f;
 				}
 				AnglesToAxis(iconAngles, ent.axis);
-				VectorScale(ent.axis[0], SCALE + (cg.weaponHolsterSelection == weapons[w] ? 0.04f : 0), ent.axis[0]);
-				VectorScale(ent.axis[1], SCALE + (cg.weaponHolsterSelection == weapons[w] ? 0.04f : 0), ent.axis[1]);
-				VectorScale(ent.axis[2], SCALE + (cg.weaponHolsterSelection == weapons[w] ? 0.04f : 0), ent.axis[2]);
+				VectorScale(ent.axis[0], ((SCALE+0.01f)*frac) + (cg.weaponHolsterSelection == w ? 0.04f : 0), ent.axis[0]);
+				VectorScale(ent.axis[1], ((SCALE+0.01f)*frac) + (cg.weaponHolsterSelection == w ? 0.04f : 0), ent.axis[1]);
+				VectorScale(ent.axis[2], ((SCALE+0.01f)*frac) + (cg.weaponHolsterSelection == w ? 0.04f : 0), ent.axis[2]);
 				ent.nonNormalizedAxes = qtrue;
 
-				if( weapons[w] == WP_RAILGUN ) {
+				if( w == WP_RAILGUN ) {
 					clientInfo_t *ci = &cgs.clientinfo[cg.predictedPlayerState.clientNum];
 					if( cg_entities[cg.predictedPlayerState.clientNum].pe.railFireTime + 1500 > cg.time ) {
 						int scale = 255 * ( cg.time - cg_entities[cg.predictedPlayerState.clientNum].pe.railFireTime ) / 1500;
@@ -2177,37 +2200,19 @@ void CG_DrawHolsteredWeapons( void )
 					}
 				}
 
-				//Wrap weapon in a small sphere
-				{
-					refEntity_t		blob;
-					memset( &blob, 0, sizeof( blob ) );
-					VectorCopy( iconOrigin, blob.origin );
-					AnglesToAxis(vec3_origin, blob.axis);
-					VectorScale( blob.axis[0], 0.1f + (cg.weaponHolsterSelection == weapons[w] ? 0.035f : 0), blob.axis[0] );
-					VectorScale( blob.axis[1], 0.1f + (cg.weaponHolsterSelection == weapons[w] ? 0.035f : 0), blob.axis[1] );
-					VectorScale( blob.axis[2], 0.1f + (cg.weaponHolsterSelection == weapons[w] ? 0.035f : 0), blob.axis[2] );
-					blob.nonNormalizedAxes = qtrue;
-					blob.hModel = cgs.media.smallSphereModel;
-					blob.shaderRGBA[0] = 255;
-					blob.shaderRGBA[1] = 255;
-					blob.shaderRGBA[2] = 255;
-					blob.shaderRGBA[3] = 80;
-					trap_R_AddRefEntityToScene( &blob );
-				}
-
-				ent.hModel = cg_weapons[weapons[w]].weaponModel;
+				ent.hModel = cg_weapons[w].weaponModel;
 				trap_R_AddRefEntityToScene(&ent);
 
-                if ( cg_weapons[weapons[w]].barrelModel )
+                if ( cg_weapons[w].barrelModel )
                 {
                     refEntity_t barrel;
                     memset(&barrel, 0, sizeof(barrel));
-                    barrel.hModel = cg_weapons[weapons[w]].barrelModel;
+                    barrel.hModel = cg_weapons[w].barrelModel;
                     vec3_t barrelAngles;
                     VectorClear(barrelAngles);
                     barrelAngles[ROLL] = AngleNormalize360((cg.time - cg.weaponHolsterTime) * 0.9f);
                     AnglesToAxis(barrelAngles, barrel.axis);
-                    CG_PositionRotatedEntityOnTag(&barrel, &ent, cg_weapons[weapons[w]].weaponModel,
+                    CG_PositionRotatedEntityOnTag(&barrel, &ent, cg_weapons[w].weaponModel,
                                                   "tag_barrel");
                     trap_R_AddRefEntityToScene(&barrel);
                 }
@@ -2217,20 +2222,24 @@ void CG_DrawHolsteredWeapons( void )
 			{
 				refEntity_t		sprite;
 				memset( &sprite, 0, sizeof( sprite ) );
-				VectorCopy( iconOrigin, sprite.origin );
-				sprite.reType = RT_SPRITE;
-				sprite.customShader = cg_weapons[weapons[w]].weaponIcon;
-				sprite.radius = 0.6f + (cg.weaponHolsterSelection == weapons[w] ? 0.1f : 0);
-				sprite.shaderRGBA[0] = 255;
-				sprite.shaderRGBA[1] = 255;
-				sprite.shaderRGBA[2] = 255;
-				sprite.shaderRGBA[3] = 255;
-				trap_R_AddRefEntityToScene( &sprite );
+
+				if (selectable)
+				{
+					VectorCopy(iconOrigin, sprite.origin);
+					sprite.reType = RT_SPRITE;
+					sprite.customShader = cg_weapons[w].weaponIcon;
+					sprite.radius = 0.6f + (cg.weaponHolsterSelection == w ? 0.1f : 0);
+					sprite.shaderRGBA[0] = 255;
+					sprite.shaderRGBA[1] = 255;
+					sprite.shaderRGBA[2] = 255;
+					sprite.shaderRGBA[3] = 255;
+					trap_R_AddRefEntityToScene(&sprite);
+				}
 
 				//And now the selection background
 				VectorCopy( iconBackground, sprite.origin );
 				sprite.customShader = cgs.media.selectShader;
-				sprite.radius = 0.7f + (cg.weaponHolsterSelection == weapons[w] ? 0.1f : 0);
+				sprite.radius = 0.7f + (cg.weaponHolsterSelection == w ? 0.1f : 0);
 				sprite.shaderRGBA[0] = 255;
 				sprite.shaderRGBA[1] = 255;
 				sprite.shaderRGBA[2] = 255;
@@ -2239,6 +2248,11 @@ void CG_DrawHolsteredWeapons( void )
 			}
 		}
     }
+
+    if (!selected)
+	{
+    	cg.weaponHolsterSelection = WP_NONE;
+	}
 }
 
 /*

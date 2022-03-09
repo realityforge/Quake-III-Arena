@@ -335,6 +335,11 @@ void VR_HapticEvent(const char* event, int position, int flags, int intensity, f
     {
         VR_Vibrate(400, weaponFireChannel, 1.0);
     }
+    else if (strcmp(event, "selector_icon") == 0)
+    {
+        //Quick blip
+        VR_Vibrate(50, (vr_righthanded->integer ? 2 : 1), 1.0);
+    }
 }
 
 static qboolean IN_GetButtonAction(const char* button, char* action)

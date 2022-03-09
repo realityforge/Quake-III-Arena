@@ -1623,41 +1623,6 @@ static void CG_DustTrail( centity_t *cent ) {
 
 #endif
 
-void CG_CalculateVROffHandPosition( vec3_t origin, vec3_t angles )
-{
-	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
-
-	if (!cgs.localServer)
-	{
-		//Use absolute position for the faked 6DoF for multiplayer
-		vec3_t offset, offhandposition;
-		VectorSubtract(vr->offhandposition, vr->hmdorigin, offhandposition);
-		VectorCopy(offhandposition, offset);
-		offset[1] = vr->offhandoffset[1]; // up/down is index 1 in this case
-		CG_ConvertFromVR(offset, cg.refdef.vieworg, origin);
-		origin[2] -= PLAYER_HEIGHT;
-		origin[2] += vr->hmdposition[1] * worldscale;
-	}
-	else
-	{
-		//Local server - true 6DoF offset from HMD
-		CG_ConvertFromVR(vr->offhandoffset, cg.refdef.vieworg, origin);
-		origin[2] -= PLAYER_HEIGHT;
-		origin[2] += vr->hmdposition[1] * worldscale;
-	}
-
-	VectorCopy(vr->offhandangles, angles);
-	if ( !cgs.localServer )
-	{
-		//Calculate the offhand angles from "first principles"
-		float deltaYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]);
-		angles[YAW] = deltaYaw + (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]) + vr->offhandangles[YAW];
-	} else
-	{
-		angles[YAW] += (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]);
-	}
-}
-
 /*
 ===============
 CG_TrailItem
