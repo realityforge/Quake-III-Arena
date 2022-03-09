@@ -27,6 +27,7 @@ cvar_t *vr_extralatencymode = NULL;
 cvar_t *vr_directionMode = NULL;
 cvar_t *vr_weaponPitch = NULL;
 cvar_t *vr_twoHandedWeapons = NULL;
+cvar_t *vr_altKeyEnabled = NULL;
 cvar_t *vr_refreshrate = NULL;
 cvar_t *vr_weaponScope = NULL;
 cvar_t *vr_rollWhenHit = NULL;
@@ -34,6 +35,7 @@ cvar_t *vr_hudYOffset = NULL;
 cvar_t *vr_sendRollToServer = NULL;
 cvar_t *vr_lasersight = NULL;
 cvar_t *vr_hapticIntensity = NULL;
+cvar_t *vr_comfortVignette = NULL;
 
 engine_t* VR_Init( ovrJava java )
 {
@@ -62,6 +64,7 @@ void VR_InitCvars( void )
 	vr_weaponPitch = Cvar_Get ("vr_weaponPitch", "-20", CVAR_ARCHIVE);
 	vr_heightAdjust = Cvar_Get ("vr_heightAdjust", "0.0", CVAR_ARCHIVE);
     vr_twoHandedWeapons = Cvar_Get ("vr_twoHandedWeapons", "1", CVAR_ARCHIVE);
+    vr_altKeyEnabled = Cvar_Get ("vr_altKeyEnabled", "0", CVAR_ARCHIVE);
 	vr_refreshrate = Cvar_Get ("vr_refreshrate", "72", CVAR_ARCHIVE);
     vr_weaponScope = Cvar_Get ("vr_weaponScope", "1", CVAR_ARCHIVE);
 	vr_rollWhenHit = Cvar_Get ("vr_rollWhenHit", "0", CVAR_ARCHIVE);
@@ -69,6 +72,7 @@ void VR_InitCvars( void )
 	vr_sendRollToServer = Cvar_Get ("vr_sendRollToServer", "1", CVAR_ARCHIVE);
 	vr_lasersight = Cvar_Get ("vr_lasersight", "0", CVAR_ARCHIVE);
     vr_hapticIntensity = Cvar_Get ("vr_hapticIntensity", "1.0", CVAR_ARCHIVE);
+    vr_comfortVignette = Cvar_Get ("vr_comfortVignette", "0.0", CVAR_ARCHIVE);
 
 	// Values are:  scale,right,up,forward,pitch,yaw,roll
 	// VALUES PROVIDED BY SkillFur - Thank-you!

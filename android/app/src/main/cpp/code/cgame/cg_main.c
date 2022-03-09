@@ -1051,6 +1051,8 @@ static void CG_RegisterGraphics( void ) {
 
 	//Load from pakQ3Q
     cgs.media.reticleShader = trap_R_RegisterShader( "gfx/weapon/scope" );
+    cgs.media.vignetteShader = trap_R_RegisterShader( "gfx/vignette" );
+    cgs.media.maskShader = trap_R_RegisterShader( "gfx/mask" );
 
 	//Used for the weapon selector
 	cgs.media.smallSphereModel = trap_R_RegisterModel("models/powerups/health/small_sphere.md3");

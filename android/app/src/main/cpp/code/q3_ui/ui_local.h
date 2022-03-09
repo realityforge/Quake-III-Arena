@@ -412,6 +412,18 @@ extern void UI_VRMenu( void );
 extern void VR_Cache( void );
 
 //
+// ui_controls3.c
+//
+extern void UI_Controls3Menu( void );
+extern void Controls3_Cache( void );
+
+//
+// ui_comfort.c
+//
+extern void UI_ComfortMenu( void );
+extern void Comfort_Cache( void );
+
+//
 // ui_specifyleague.c
 //
 extern void UI_SpecifyLeagueMenu( void );
