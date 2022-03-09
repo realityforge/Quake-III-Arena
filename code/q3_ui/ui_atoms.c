@@ -963,8 +963,6 @@ void UI_Cache_f( void ) {
 	UI_AddBots_Cache();
 	UI_RemoveBots_Cache();
 	UI_SetupMenu_Cache();
-//	UI_LoadConfig_Cache();
-//	UI_SaveConfigMenu_Cache();
 	UI_BotSelectMenu_Cache();
 	UI_ModsMenu_Cache();
 
