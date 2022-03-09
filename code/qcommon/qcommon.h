@@ -856,9 +856,6 @@ void	CL_ForwardCommandToServer( const char *string );
 // things like godmode, noclip, etc, are commands directed to the server,
 // so when they are typed in at the console, they will need to be forwarded.
 
-void CL_CDDialog( void );
-// bring up the "need a cd to play" dialog
-
 void CL_ShutdownAll( void );
 // shutdown all the client stuff
 
@@ -987,8 +984,6 @@ qboolean	Sys_StringToAdr( const char *s, netadr_t *a );
 
 qboolean	Sys_IsLANAddress (netadr_t adr);
 void		Sys_ShowIP(void);
-
-qboolean	Sys_CheckCD( void );
 
 void	Sys_Mkdir( const char *path );
 char	*Sys_Cwd( void );

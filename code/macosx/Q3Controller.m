@@ -335,9 +335,6 @@ extern void CL_Quit_f(void);
         } NS_ENDHANDLER;
     } while(0);
     
-    // Provoke the CD scanning code into looking up the CD.
-    Sys_CheckCD();
-    
     // Let the filesystem know where our local install is
     Sys_SetDefaultInstallPath([installationPath cString]);
 

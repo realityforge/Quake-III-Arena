@@ -440,7 +440,6 @@ name:						default:			module(s):			description:
 
 "basedir"					""					l_utils.c			base directory
 "gamedir"					""					l_utils.c			game directory
-"cddir"						""					l_utils.c			CD directory
 
 "log"						"0"					l_log.c				enable/disable creating a log file
 "maxclients"				"4"					be_interface.c		maximum number of clients
