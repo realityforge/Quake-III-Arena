@@ -11,7 +11,6 @@
  	loadMenu { "ui/skirmish.menu" }
  	loadMenu { "ui/createserver.menu" }
 	loadMenu { "ui/controls.menu" }
-	loadMenu { "ui/cdkey.menu" }
 	loadMenu { "ui/system.menu" }
 	loadMenu { "ui/options.menu" }
 	loadMenu { "ui/help.menu" }

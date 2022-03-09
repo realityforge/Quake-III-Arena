@@ -920,7 +920,7 @@ void Cvar_WriteVariables(fileHandle_t f)
 
 	for (var = cvar_vars; var; var = var->next)
 	{
-		if(!var->name || Q_stricmp( var->name, "cl_cdkey" ) == 0)
+		if(!var->name)
 			continue;
 
 		if( var->flags & CVAR_ARCHIVE ) {

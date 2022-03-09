@@ -5,7 +5,6 @@ cc_library(
     srcs = [
         "ui_addbots.c",
         "ui_atoms.c",
-        "ui_cdkey.c",
         "ui_cinematics.c",
         "ui_confirm.c",
         "ui_connect.c",
