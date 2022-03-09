@@ -27,7 +27,7 @@ These tasks are intended to be undertaken in the future but have not been priori
 * Add Quest support.
 * Add bHaptics support.
 * Switch renderer to nvrhi1 and/or WebGPU.
-* Change the start place for VR to be a location with a 3D menu that can be intereacted with rather than a 2D menu projected onto a barrel.
+* Change the start place for VR to be a location with a 3D menu that can be interacted with rather than a 2D menu projected onto a barrel.
 
 ## Task Descriptions
 
