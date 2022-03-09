@@ -85,7 +85,6 @@ cvar_t	*com_maxfpsUnfocused;
 cvar_t	*com_minimized;
 cvar_t	*com_maxfpsMinimized;
 cvar_t	*com_abnormalExit;
-cvar_t	*com_standalone;
 cvar_t	*com_gamename;
 cvar_t	*com_protocol;
 #ifdef LEGACY_PROTOCOL
@@ -2534,7 +2533,6 @@ void Com_Init( char *commandLine ) {
 	// done early so bind command exists
 	CL_InitKeyCommands();
 
-	com_standalone = Cvar_Get("com_standalone", "0", CVAR_ROM);
 	com_basegame = Cvar_Get("com_basegame", BASEGAME, CVAR_INIT);
 	com_homepath = Cvar_Get("com_homepath", "", CVAR_INIT|CVAR_PROTECTED);
 

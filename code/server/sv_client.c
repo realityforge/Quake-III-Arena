@@ -45,9 +45,6 @@ sent to that ip.
 ioquake3: we added a possibility for clients to add a challenge
 to their packets, to make it more difficult for malicious servers
 to hi-jack client connections.
-Also, the auth stuff is completely disabled for com_standalone games
-as well as IPv6 connections, since there is no way to use the
-v4-only auth server for these new types of connections.
 =================
 */
 void SV_GetChallenge(netadr_t from)

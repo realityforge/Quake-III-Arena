@@ -233,8 +233,6 @@ The defaults for these variables differ depending on the target platform.
                                       via UDP, in kbyte/s
 
   com_ansiColor                     - enable use of ANSI escape codes in the tty
-  com_standalone (read only)        - If set to 1, quake3 is running in
-                                      standalone mode
   com_basegame                      - Use a different base than baseq3. If no
                                       original Quake3 or TeamArena pak files
                                       are found, this will enable running in
@@ -428,9 +426,7 @@ website. Just make sure the game is called with:
     +set com_basegame <yournewbase>
 
 in any links/scripts you install for your users to start the game. The
-binary must not detect any original quake3 game pak files. If this
-condition is met, the game will set com_standalone to 1 and is then running
-in stand alone mode.
+binary must not detect any original quake3 game pak files.
 
 If you want the engine to use a different directory in your homepath than
 e.g. "Quake3" on Windows or ".q3a" on Linux, then set a new name at startup
