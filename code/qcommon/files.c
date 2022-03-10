@@ -2771,25 +2771,6 @@ void FS_Path_f( void ) {
 
 /*
 ============
-FS_TouchFile_f
-============
-*/
-void FS_TouchFile_f( void ) {
-	fileHandle_t	f;
-
-	if ( Cmd_Argc() != 2 ) {
-		Com_Printf( "Usage: touchFile <file>\n" );
-		return;
-	}
-
-	FS_FOpenFileRead( Cmd_Argv( 1 ), &f, qfalse );
-	if ( f ) {
-		FS_FCloseFile( f );
-	}
-}
-
-/*
-============
 FS_Which
 ============
 */
@@ -3358,7 +3339,6 @@ static void FS_Startup( const char *gameName )
 	Cmd_AddCommand ("path", FS_Path_f);
 	Cmd_AddCommand ("dir", FS_Dir_f );
 	Cmd_AddCommand ("fdir", FS_NewDir_f );
-	Cmd_AddCommand ("touchFile", FS_TouchFile_f );
 	Cmd_AddCommand ("which", FS_Which_f );
 
 	// https://zerowing.idsoftware.com/bugzilla/show_bug.cgi?id=506
