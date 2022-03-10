@@ -2043,32 +2043,42 @@ void CG_DrawHolsteredWeapons( void )
         VectorCopy(vr->weaponoffset, cg.weaponHolsterOffset);
     }
 
+    float worldscale = trap_Cvar_VariableValue("vr_worldscale");
+
     float SCALE = 0.04f;
-	const float DIST = 4.2f;
+	const float DIST = 5.0f;
 	const float SEP = 360.0f / (WP_NUM_WEAPONS - 1); // Exclude grappling hook
+	float frac = (cg.time - cg.weaponHolsterTime) / (50 * DIST);
+	if (frac > 1.0f) frac = 1.0f;
 
-    vec3_t controllerOrigin, controllerAngles;
+	vec3_t controllerOrigin, controllerAngles, controllerOffset, selectorOrigin;
     CG_CalculateVRWeaponPosition(controllerOrigin, controllerAngles);
-
-	{
-		refEntity_t		blob;
-		memset( &blob, 0, sizeof( blob ) );
-		VectorCopy( controllerOrigin, blob.origin );
-		AnglesToAxis(vec3_origin, blob.axis);
-		VectorScale( blob.axis[0], SCALE - 0.01f, blob.axis[0] );
-		VectorScale( blob.axis[1], SCALE - 0.01f, blob.axis[1] );
-		VectorScale( blob.axis[2], SCALE - 0.01f, blob.axis[2] );
-		blob.nonNormalizedAxes = qtrue;
-		blob.hModel = cgs.media.smallSphereModel;
-		trap_R_AddRefEntityToScene( &blob );
-	}
+    VectorSubtract(vr->weaponposition, cg.weaponHolsterOrigin, controllerOffset);
 
 	vec3_t holsterAngles, holsterOrigin, holsterForward, holsterRight, holsterUp, dummy;
     CG_CalculateVRPositionInWorld(cg.weaponHolsterOrigin, cg.weaponHolsterOffset, cg.weaponHolsterAngles, holsterOrigin, holsterAngles);
 
 	AngleVectors(holsterAngles, holsterForward, holsterRight, holsterUp);
 
-	//VectorMA(holsterOrigin, -2.0f, holsterForward, holsterOrigin);
+	VectorMA(holsterOrigin, (DIST*frac), holsterForward, holsterOrigin);
+    VectorCopy(holsterOrigin, selectorOrigin);
+
+    VectorMA(selectorOrigin, DIST * ((holsterAngles[YAW] - controllerAngles[YAW]) / 22.5f), holsterRight, selectorOrigin);
+    VectorMA(selectorOrigin, DIST * ((holsterAngles[PITCH] - controllerAngles[PITCH]) / 22.5f), holsterUp, selectorOrigin);
+
+    {
+        refEntity_t		blob;
+        memset( &blob, 0, sizeof( blob ) );
+        VectorCopy( selectorOrigin, blob.origin );
+        AnglesToAxis(vec3_origin, blob.axis);
+        VectorScale( blob.axis[0], SCALE - 0.01f, blob.axis[0] );
+        VectorScale( blob.axis[1], SCALE - 0.01f, blob.axis[1] );
+        VectorScale( blob.axis[2], SCALE - 0.01f, blob.axis[2] );
+        blob.nonNormalizedAxes = qtrue;
+        blob.hModel = cgs.media.smallSphereModel;
+        trap_R_AddRefEntityToScene( &blob );
+    }
+
 
     //float startingPositionYaw = AngleNormalize360(holsterAngles[YAW] + (((WP_NUM_WEAPONS-2)/2.0f) * SEP));
     qboolean selected = qfalse;
@@ -2091,17 +2101,12 @@ void CG_DrawHolsteredWeapons( void )
             vec3_t forward, up;
             AngleVectors(angles, forward, NULL, up);
 
-            float frac = (cg.time - cg.weaponHolsterTime) / (60 * DIST);
-            if (frac > 1.0f) frac = 1.0f;
-
             VectorMA(holsterOrigin, (DIST*frac), up, iconOrigin);
             VectorMA(iconOrigin, 0.01f, forward, iconBackground);
 
-            float worldscale = trap_Cvar_VariableValue("vr_worldscale");
-
             //Float sprite above selected weapon
             vec3_t diff;
-            VectorSubtract(controllerOrigin, iconOrigin, diff);
+            VectorSubtract(selectorOrigin, iconOrigin, diff);
             float length = VectorLength(diff);
             if (length <= 1.5f &&
                 frac == 1.0f &&
