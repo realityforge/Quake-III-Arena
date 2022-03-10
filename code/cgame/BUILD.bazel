@@ -13,36 +13,89 @@ cc_library(
     ],
 )
 
+_COMMON_SRC = [
+    "cg_main.c",
+    "cg_consolecmds.c",
+    "cg_drawtools.c",
+    "cg_effects.c",
+    "cg_ents.c",
+    "cg_event.c",
+    "cg_info.c",
+    "cg_localents.c",
+    "cg_marks.c",
+    "cg_particles.c",
+    "cg_players.c",
+    "cg_playerstate.c",
+    "cg_predict.c",
+    "cg_scoreboard.c",
+    "cg_servercmds.c",
+    "cg_snapshot.c",
+    "cg_view.c",
+    "cg_weapons.c",
+    "cg_local.h",
+]
+
+_BASEQ3_SRC = _COMMON_SRC + ["cg_draw.c"]
+
+_MISSIONPACK_SRC = _COMMON_SRC + ["cg_newdraw.c"]
+
+# cg_syscalls is required when building the shared library but
+# should not be required when building qvm library
+_NATIVE_LIB_SRC = ["cg_syscalls.c"]
+
 cc_library(
-    name = "cgame",
-    srcs = [
-        "cg_consolecmds.c",
-        "cg_draw.c",
-        "cg_drawtools.c",
-        "cg_effects.c",
-        "cg_ents.c",
-        "cg_event.c",
-        "cg_info.c",
-        "cg_local.h",
-        "cg_localents.c",
-        "cg_main.c",
-        "cg_marks.c",
-        # Should this next one be TA only?
-        #"cg_newdraw.c",
-        "cg_particles.c",
-        "cg_players.c",
-        "cg_playerstate.c",
-        "cg_predict.c",
-        "cg_scoreboard.c",
-        "cg_servercmds.c",
-        "cg_snapshot.c",
-        "cg_syscalls.c",
-        "cg_view.c",
-        "cg_weapons.c",
+    name = "baseq3",
+    srcs = _BASEQ3_SRC + _NATIVE_LIB_SRC,
+    deps = [
+        ":api",
+        "//code/game:bg",
+        "//code/game:bg_api",
+        "//code/qcommon:common",
+        "//code/qcommon:q_shared",
+        "//code/renderercommon:api",
     ],
+)
+
+cc_library(
+    name = "baseq3-qvm",
+    srcs = _BASEQ3_SRC,
     deps = [
         ":api",
         "//code/game:bg_api",
+        "//code/game:bg_lib-qvm",
+        "//code/qcommon:common",
+        "//code/qcommon:q_shared",
+        "//code/renderercommon:api",
+    ],
+)
+
+cc_library(
+    name = "missionpack",
+    srcs = _MISSIONPACK_SRC + _NATIVE_LIB_SRC,
+    defines = ["MISSIONPACK"],
+    deps = [
+        ":api",
+        "//code/game:bg",
+        "//code/game:bg_api",
+        "//code/qcommon:common",
+        "//code/qcommon:q_shared",
+        "//code/renderercommon:api",
+        "//code/ui:shared",
+    ],
+)
+
+cc_library(
+    name = "missionpack-qvm",
+    srcs = _MISSIONPACK_SRC,
+    defines = [
+        "MISSIONPACK",
+    ],
+    deps = [
+        ":api",
+        "//code/game:bg",
+        "//code/game:bg_api",
+        "//code/game:bg_lib-qvm",
+        "//code/qcommon:common",
         "//code/qcommon:q_shared",
         "//code/renderercommon:api",
         "//code/ui:shared",
