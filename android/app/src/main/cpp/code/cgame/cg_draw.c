@@ -2601,7 +2601,7 @@ static void CG_DrawVignette( void )
 		return;
 	}
 
-	if (VectorLength(cg.predictedPlayerState.velocity) > 30.0)
+	if (VectorLength(cg.predictedPlayerState.velocity) > 30.0 || vr->smooth_turning)
 	{
 		if (currentComfortVignetteValue <  comfortVignetteValue)
 		{

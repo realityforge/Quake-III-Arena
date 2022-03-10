@@ -516,6 +516,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
             if (joystickY > releasedThreshold) {
 
                 // stop left & right
+                vr.smooth_turning = false;
                 if ((controller->axisButtons & VR_TOUCH_AXIS_LEFT) && IN_GetButtonAction("RTHUMBLEFT", action)) {
                     IN_SendButtonAction(action, qfalse);
                 }
@@ -590,6 +591,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
             } else if (joystickY < -releasedThreshold) {
 
                 // stop left & right
+                vr.smooth_turning = false;
                 if ((controller->axisButtons & VR_TOUCH_AXIS_LEFT) && IN_GetButtonAction("RTHUMBLEFT", action)) {
                     IN_SendButtonAction(action, qfalse);
                 }
@@ -699,6 +701,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 
                     // left action
                     if (IN_GetButtonAction("RTHUMBLEFT", action)) {
+                        vr.smooth_turning = false;
                         if (!(controller->axisButtons & VR_TOUCH_AXIS_LEFT)) {
                             IN_SendButtonAction(action, qtrue);
                         }
@@ -706,6 +709,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 
                     // yaw (snap turn)
                     } else if (vr_snapturn->integer > 0) {
+                        vr.smooth_turning = false;
                         int snap = 45;
                         if (vr_snapturn->integer > 1) {
                             snap = vr_snapturn->integer;
@@ -716,6 +720,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 
                     // yaw (smooth turn)
                     } else {
+                        vr.smooth_turning = true;
                         const float x = joystickX * cl_sensitivity->value * m_yaw->value;
                         Com_QueueEvent(in_vrEventTime, SE_MOUSE, x, 0, 0, NULL);
                     }
@@ -723,6 +728,9 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
                     controller->axisButtons |= VR_TOUCH_AXIS_LEFT;
 
                 } else if (joystickX > -releasedThreshold) {
+                    if (joystickX < releasedThreshold) {
+                        vr.smooth_turning = false;
+                    }
                     if ((controller->axisButtons & VR_TOUCH_AXIS_LEFT) && IN_GetButtonAction("RTHUMBLEFT", action)) {
                         IN_SendButtonAction(action, qfalse);
                     }
@@ -734,6 +742,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 
                     // right action
                     if (IN_GetButtonAction("RTHUMBRIGHT", action)) {
+                        vr.smooth_turning = false;
                         if (!(controller->axisButtons & VR_TOUCH_AXIS_RIGHT)) {
                             IN_SendButtonAction(action, qtrue);
                         }
@@ -741,6 +750,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 
                     // yaw (snap turn)
                     } else if (vr_snapturn->integer > 0) {
+                        vr.smooth_turning = false;
                         int snap = 45;
                         if (vr_snapturn->integer > 1) {
                             snap = vr_snapturn->integer;
@@ -751,6 +761,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 
                     // yaw (smooth turn)
                     } else {
+                        vr.smooth_turning = true;
                         const float x = joystickX * cl_sensitivity->value * m_yaw->value;
                         Com_QueueEvent(in_vrEventTime, SE_MOUSE, x, 0, 0, NULL);
                     }
@@ -758,6 +769,9 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
                     controller->axisButtons |= VR_TOUCH_AXIS_RIGHT;
 
                 } else if (joystickX < releasedThreshold) {
+                    if (joystickX > -releasedThreshold) {
+                        vr.smooth_turning = false;
+                    }
                     if ((controller->axisButtons & VR_TOUCH_AXIS_RIGHT) && IN_GetButtonAction("RTHUMBRIGHT", action)) {
                         IN_SendButtonAction(action, qfalse);
                     }
