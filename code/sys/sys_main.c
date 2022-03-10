@@ -95,16 +95,6 @@ char *Sys_DefaultInstallPath(void)
 
 /*
 =================
-Sys_DefaultAppPath
-=================
-*/
-char *Sys_DefaultAppPath(void)
-{
-	return Sys_BinaryPath();
-}
-
-/*
-=================
 Sys_In_Restart_f
 
 Restart the input subsystem
