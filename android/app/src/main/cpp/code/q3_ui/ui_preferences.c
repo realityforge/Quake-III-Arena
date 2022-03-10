@@ -54,7 +54,8 @@ GAME OPTIONS MENU
 #define ID_DRAWHUD			    139
 #define ID_HOLSTER2D		    140
 #define ID_GORE 			    141
-#define ID_BACK					142
+#define ID_SHOWINHAND		    142
+#define ID_BACK					143
 
 #define	NUM_CROSSHAIRS			10
 #define	NUM_GORE    			4
@@ -82,6 +83,7 @@ typedef struct {
 	menuradiobutton_s	allowdownload;
 	menuradiobutton_s	holster2d;
 	menulist_s 			gore;
+	menuradiobutton_s	showinhand;
 	menubitmap_s		back;
 
 	qhandle_t			crosshairShader[NUM_CROSSHAIRS];
@@ -130,6 +132,7 @@ static void Preferences_SetMenuItems( void ) {
 
 		s_preferences.gore.curvalue		    = level % NUM_GORE;
     }
+	s_preferences.showinhand.curvalue		= trap_Cvar_VariableValue( "vr_showItemInHand" ) != 0;
 }
 
 
@@ -224,6 +227,10 @@ static void Preferences_Event( void* ptr, int notification ) {
 			}
 		}
 		break;
+
+	case ID_SHOWINHAND:
+		trap_Cvar_SetValue( "vr_showItemInHand", s_preferences.showinhand.curvalue);
+        break;
 
 	case ID_BACK:
 		UI_PopMenu();
@@ -357,6 +364,15 @@ static void Preferences_MenuInit( void ) {
 	s_preferences.holster2d.generic.y	          = y;
 
 	y += BIGCHAR_HEIGHT+2;
+	s_preferences.showinhand.generic.type        = MTYPE_RADIOBUTTON;
+	s_preferences.showinhand.generic.name	      = "Show Item In Hand:";
+	s_preferences.showinhand.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+	s_preferences.showinhand.generic.callback    = Preferences_Event;
+	s_preferences.showinhand.generic.id          = ID_SHOWINHAND;
+	s_preferences.showinhand.generic.x	          = PREFERENCES_X_POS;
+	s_preferences.showinhand.generic.y	          = y;
+
+	y += BIGCHAR_HEIGHT+2;
 	s_preferences.wallmarks.generic.type          = MTYPE_RADIOBUTTON;
 	s_preferences.wallmarks.generic.name	      = "Marks on Walls:";
 	s_preferences.wallmarks.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
@@ -488,6 +504,7 @@ static void Preferences_MenuInit( void ) {
 	Menu_AddItem( &s_preferences.menu, &s_preferences.holster2d );
 //	Menu_AddItem( &s_preferences.menu, &s_preferences.allowdownload );
 	Menu_AddItem( &s_preferences.menu, &s_preferences.gore );
+	Menu_AddItem( &s_preferences.menu, &s_preferences.showinhand );
 
 	Menu_AddItem( &s_preferences.menu, &s_preferences.back );
 
