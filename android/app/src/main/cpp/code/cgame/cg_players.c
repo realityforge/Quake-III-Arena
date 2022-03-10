@@ -1642,7 +1642,9 @@ void CG_TrailItem( centity_t *cent, qhandle_t hModel, vec3_t offset, float scale
 
 	if (cent->currentState.clientNum == vr->clientNum)
 	{
-		if (trap_Cvar_VariableValue("vr_twoHandedWeapons") != 0.0f && vr->weapon_stabilised)
+		qboolean show_in_hand_enabled = trap_Cvar_VariableValue( "vr_showItemInHand" ) != 0.0f;
+        qboolean two_handed_enabled = trap_Cvar_VariableValue("vr_twoHandedWeapons") != 0.0f;
+		if (!show_in_hand_enabled || (two_handed_enabled && vr->weapon_stabilised))
 		{
 			return;
 		}
