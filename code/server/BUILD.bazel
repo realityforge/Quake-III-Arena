@@ -17,7 +17,7 @@ cc_library(
     #    defines = ["USE_LOCAL_HEADERS"],
     deps = [
         "//code/botlib:api",
-        "//code/game:api",
+        "//code/game:bg_api",
         "//code/game:server_api",
         "//code/qcommon",
         "//code/qcommon:q_shared",

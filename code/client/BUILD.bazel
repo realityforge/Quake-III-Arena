@@ -17,7 +17,7 @@ cc_library(
     ],
     deps = [
         "//code/cgame:api",
-        "//code/game:api",
+        "//code/game:bg_api",
         "//code/qcommon",
         "//code/renderercommon:api",
         "//code/ui:api",
