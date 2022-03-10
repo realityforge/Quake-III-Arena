@@ -4,13 +4,27 @@ cc_library(
     name = "renderercommon_support",
     srcs = [
         "puff.c",
+    ],
+    hdrs = [
+        "puff.h",
+    ],
+    visibility = ["//code/renderercommon:__pkg__"],
+    deps = [
+        ":common",
+        ":q_shared",
+    ],
+)
+
+cc_library(
+    name = "common",
+    srcs = [
         "q_math.c",
         "q_shared.c",
     ],
     hdrs = [
         "puff.h",
     ],
-    visibility = ["//code/renderercommon:__pkg__"],
+    visibility = ["//code/cgame:__pkg__"],
     deps = [
         ":q_shared",
     ],
