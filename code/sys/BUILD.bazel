@@ -43,6 +43,7 @@ cc_library(
         "sys_loadlib.h",
     ],
     defines = ["USE_LOCAL_HEADERS"],
+    visibility = ["//code:__subpackages__"],
     deps = [
         ":sys_local",
         "//code/qcommon",

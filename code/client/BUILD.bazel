@@ -24,6 +24,7 @@ cc_library(
         "//code/game:bg_api",
         "//code/qcommon",
         "//code/renderercommon:api",
+        "//code/sys:main",
         "//code/sys:sys_local",
         "//code/ui:api",
     ],
@@ -39,6 +40,7 @@ cc_library(
     ],
     defines = ["USE_CURL"],
     deps = [
+        ":api",
         "//code/cgame:api",
         "//code/game:bg_api",
         "//code/qcommon",
@@ -64,6 +66,7 @@ cc_library(
         "//code/ui:__pkg__",
     ],
     deps = [
+        ":snd_api",
         "//code/cgame:api",
         "//code/game:bg_api",
         "//code/qcommon",
