@@ -29,6 +29,20 @@ cc_library(
     ],
 )
 
+# TODO: This should not be a CC library as it is targeting qvm but we can address later
+cc_library(
+    name = "bg_lib-qvm",
+    srcs = [
+        "bg_lib.c",
+    ],
+    hdrs = [
+        "bg_lib.h",
+    ],
+    visibility = [
+        "//code/cgame:__pkg__",
+    ],
+)
+
 cc_library(
     # bg = Both Game which is shared between client and server games
     # It probably should be separated in a more meaningful way but
