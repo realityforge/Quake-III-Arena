@@ -5639,11 +5639,6 @@ displayContextDef_t *Display_GetContext() {
 	return DC;
 }
  
-#ifndef MISSIONPACK // bk001206
-static float captureX;
-static float captureY;
-#endif
-
 void *Display_CaptureItem(int x, int y) {
 	int i;
 
