@@ -3,11 +3,11 @@ load("@rules_cc//cc:defs.bzl", "cc_library")
 cc_library(
     name = "client",
     srcs = [
-        "keycodes.h",
         "keys.h",
     ],
     hdrs = [
         "client.h",
+        "keycodes.h",
     ],
     defines = ["USE_LOCAL_HEADERS"],
     visibility = [
