@@ -30,6 +30,25 @@ cc_library(
 )
 
 cc_library(
+    name = "curl",
+    srcs = [
+        "cl_curl.c",
+    ],
+    hdrs = [
+        "cl_curl.h",
+    ],
+    defines = ["USE_CURL"],
+    deps = [
+        "//code/cgame:api",
+        "//code/game:bg_api",
+        "//code/qcommon",
+        "//code/renderercommon:api",
+        "//code/ui:api",
+        "//third_party/opus",
+    ],
+)
+
+cc_library(
     name = "api",
     srcs = [
         "keys.h",

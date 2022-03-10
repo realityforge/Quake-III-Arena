@@ -235,7 +235,7 @@ Q3LCCETCDIR=$(MOUNT_DIR)/tools/lcc/etc
 Q3LCCSRCDIR=$(MOUNT_DIR)/tools/lcc/src
 LOKISETUPDIR=misc/setup
 NSISDIR=misc/nsis
-CURLLIBSDIR=$(MOUNT_DIR)/curl-7.54.0/libs
+CURLLIBSDIR=third_party/curl/libs
 JPDIR=third_party/jpeg
 OGGDIR=third_party/ogg
 OPENALDIR=third_party/openal
@@ -764,7 +764,7 @@ ifeq ($(USE_OPENAL),1)
 endif
 
 ifeq ($(USE_CURL),1)
-  CLIENT_CFLAGS += -DUSE_CURL
+  CLIENT_CFLAGS += -DUSE_CURL -Ithird_party/curl/include
   ifeq ($(USE_CURL_DLOPEN),1)
     CLIENT_CFLAGS += -DUSE_CURL_DLOPEN
   endif
