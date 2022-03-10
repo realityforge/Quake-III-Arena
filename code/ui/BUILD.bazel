@@ -15,6 +15,27 @@ cc_library(
 )
 
 cc_library(
+    name = "shared",
+    srcs = [
+        "ui_shared.c",
+    ],
+    hdrs = [
+        "ui_shared.h",
+    ],
+    includes = ["."],
+    visibility = [
+        "//code/cgame:__pkg__",
+    ],
+    deps = [
+        ":api",
+        "//code/client",
+        "//code/qcommon:q_shared",
+        "//code/renderercommon:api",
+        "//ui",
+    ],
+)
+
+cc_library(
     name = "ui",
     srcs = [
         "ui_atoms.c",
@@ -26,12 +47,9 @@ cc_library(
         "ui_shared.h",
         "ui_syscalls.c",
     ],
-    visibility = [
-        # TODO: Should move shared.h to a separate module so cgame can depend upon it but this will mean have to tease apart client aswell
-        "//code/cgame:__pkg__",
-    ],
     deps = [
         ":api",
+        ":shared",
         "//code/client",
         "//code/game:bg_api",
         "//code/qcommon:q_shared",
