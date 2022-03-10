@@ -253,7 +253,6 @@ static	cvar_t		*fs_homepath;
 static  cvar_t          *fs_apppath;
 #endif
 static	cvar_t		*fs_steampath;
-static	cvar_t		*fs_gogpath;
 static	cvar_t		*fs_microsoftstorepath;
 
 static	cvar_t		*fs_basepath;
@@ -763,21 +762,6 @@ long FS_SV_FOpenFileRead(const char *filename, fileHandle_t *fp)
 			if ( fs_debug->integer )
 			{
 				Com_Printf( "FS_SV_FOpenFileRead (fs_steampath): %s\n", ospath );
-			}
-
-			fsh[f].handleFiles.file.o = Sys_FOpen( ospath, "rb" );
-			fsh[f].handleSync = qfalse;
-		}
-
-		// Check fs_gogpath
-		if (!fsh[f].handleFiles.file.o && fs_gogpath->string[0])
-		{
-			ospath = FS_BuildOSPath( fs_gogpath->string, filename, "" );
-			ospath[strlen(ospath)-1] = '\0';
-
-			if ( fs_debug->integer )
-			{
-				Com_Printf( "FS_SV_FOpenFileRead (fs_gogpath): %s\n", ospath );
 			}
 
 			fsh[f].handleFiles.file.o = Sys_FOpen( ospath, "rb" );
@@ -2532,7 +2516,7 @@ int	FS_GetModList( char *listbuf, int bufsize ) {
 	qboolean bDrop = qfalse;
 
 	// paths to search for mods
-	const char * const paths[] = { fs_basepath->string, fs_homepath->string, fs_steampath->string, fs_gogpath->string };
+	const char * const paths[] = { fs_basepath->string, fs_homepath->string, fs_steampath->string };
 
 	*listbuf = 0;
 	nMods = nTotal = 0;
@@ -3353,10 +3337,6 @@ static void FS_Startup( const char *gameName )
 	if (fs_microsoftstorepath->string[0]) {
 		FS_AddGameDirectory(fs_microsoftstorepath->string, gameName);
 	}
-	fs_gogpath = Cvar_Get ("fs_gogpath", Sys_GogPath(), CVAR_INIT|CVAR_PROTECTED );
-	if (fs_gogpath->string[0]) {
-		FS_AddGameDirectory( fs_gogpath->string, gameName );
-	}
 	fs_steampath = Cvar_Get ("fs_steampath", Sys_SteamPath(), CVAR_INIT|CVAR_PROTECTED );
 	if (fs_steampath->string[0]) {
 		FS_AddGameDirectory( fs_steampath->string, gameName );
@@ -3381,9 +3361,6 @@ static void FS_Startup( const char *gameName )
 
 	// check for additional base game so mods can be based upon other mods
 	if ( fs_basegame->string[0] && Q_stricmp( fs_basegame->string, gameName ) ) {
-		if (fs_gogpath->string[0]) {
-			FS_AddGameDirectory(fs_gogpath->string, fs_basegame->string);
-		}
 		if (fs_steampath->string[0]) {
 			FS_AddGameDirectory(fs_steampath->string, fs_basegame->string);
 		}
@@ -3397,9 +3374,6 @@ static void FS_Startup( const char *gameName )
 
 	// check for additional game folder for mods
 	if ( fs_gamedirvar->string[0] && Q_stricmp( fs_gamedirvar->string, gameName ) ) {
-		if (fs_gogpath->string[0]) {
-			FS_AddGameDirectory(fs_gogpath->string, fs_gamedirvar->string);
-		}
 		if (fs_steampath->string[0]) {
 			FS_AddGameDirectory(fs_steampath->string, fs_gamedirvar->string);
 		}
