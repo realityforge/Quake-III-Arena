@@ -1,0 +1,54 @@
+load("@rules_cc//cc:defs.bzl", "cc_import", "cc_library")
+
+# TODO: Move this to some central place?
+config_setting(
+    name = "windows_x86_64",
+    constraint_values = [
+        "@platforms//os:windows",
+        "@platforms//cpu:x86_64",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+# TODO: Move this to some central place?
+config_setting(
+    name = "windows_x86_32",
+    constraint_values = [
+        "@platforms//os:windows",
+        "@platforms//cpu:x86_32",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+#cc_import(
+#    name = "curl_library",
+#    static_library = select({
+#        ":windows_x86_32": "libs/win32/libcurl.a",
+#        ":windows_x86_64": "libs/win64/libcurl.a",
+#    }),
+#)
+
+cc_library(
+    name = "curl",
+    srcs = [
+        "include/curl/curlbuild.h",
+        "include/curl/curlrules.h",
+        "include/curl/curlver.h",
+        "include/curl/easy.h",
+        "include/curl/mprintf.h",
+        "include/curl/multi.h",
+        "include/curl/stdcheaders.h",
+        "include/curl/system.h",
+        "include/curl/typecheck-gcc.h",
+    ],
+    hdrs = [
+        "include/curl/curl.h",
+    ],
+    strip_include_prefix = "include",
+    visibility = [
+        "//code/client:__pkg__",
+    ],
+    #    deps = [
+    #        ":curl_library",
+    #    ],
+)
