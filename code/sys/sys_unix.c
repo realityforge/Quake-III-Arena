@@ -114,17 +114,6 @@ char *Sys_SteamPath( void )
 
 /*
 ================
-Sys_GogPath
-================
-*/
-char *Sys_GogPath( void )
-{
-	// GOG also doesn't let you install Quake 3 on Mac/Linux
-	return gogPath;
-}
-
-/*
-================
 Sys_Milliseconds
 ================
 */
