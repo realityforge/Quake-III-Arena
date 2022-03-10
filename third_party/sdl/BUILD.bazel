@@ -128,6 +128,7 @@ cc_library(
     visibility = [
         "//code/renderercommon:__pkg__",
         "//code/sdl:__pkg__",
+        "//code/sys:__pkg__",
     ],
     deps = [
         ":sdl_library",

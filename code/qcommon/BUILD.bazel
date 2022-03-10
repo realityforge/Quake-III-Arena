@@ -38,7 +38,7 @@ cc_library(
         "surfaceflags.h",
     ],
     visibility = [
-        "//code/botlib:__pkg__",
+        "//code:__subpackages__",
         "//code/cgame:__pkg__",
         "//code/client:__pkg__",
         "//code/game:__pkg__",

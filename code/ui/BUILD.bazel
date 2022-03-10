@@ -28,7 +28,7 @@ cc_library(
     ],
     deps = [
         ":api",
-        "//code/client",
+        "//code/client:api",
         "//code/qcommon:q_shared",
         "//code/renderercommon:api",
         "//ui",
@@ -50,7 +50,7 @@ cc_library(
     deps = [
         ":api",
         ":shared",
-        "//code/client",
+        "//code/client:api",
         "//code/game:bg_api",
         "//code/qcommon:q_shared",
         "//code/renderercommon:api",

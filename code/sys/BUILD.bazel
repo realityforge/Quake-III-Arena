@@ -6,8 +6,66 @@ cc_library(
         "sys_local.h",
     ],
     defines = ["USE_LOCAL_HEADERS"],
-    visibility = ["//code/sdl:__pkg__"],
+    visibility = [
+        "//code/client:__pkg__",
+        "//code/sdl:__pkg__",
+    ],
     deps = [
         "//code/qcommon",
+        "//third_party/sdl",
+    ],
+)
+
+cc_library(
+    name = "sys_local-dedicated",
+    srcs = [
+        "sys_local.h",
+    ],
+    defines = [
+        "USE_LOCAL_HEADERS",
+        "DEDICATED",
+    ],
+    visibility = [
+        "//code/client:__pkg__",
+        "//code/sdl:__pkg__",
+    ],
+    deps = [
+        "//code/qcommon",
+    ],
+)
+
+cc_library(
+    name = "main",
+    srcs = [
+        "sys_main.c",
+    ],
+    hdrs = [
+        "sys_loadlib.h",
+    ],
+    defines = ["USE_LOCAL_HEADERS"],
+    deps = [
+        ":sys_local",
+        "//code/qcommon",
+        "//code/qcommon:q_shared",
+        "//third_party/sdl",
+    ],
+)
+
+cc_library(
+    name = "main-dedicated",
+    srcs = [
+        "sys_main.c",
+    ],
+    hdrs = [
+        "sys_loadlib.h",
+    ],
+    defines = [
+        "DEDICATED",
+        "USE_LOCAL_HEADERS",
+    ],
+    deps = [
+        ":sys_local-dedicated",
+        "//code/qcommon",
+        "//code/qcommon:q_shared",
     ],
 )

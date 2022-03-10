@@ -6,6 +6,7 @@ cc_library(
         "botlib.h",
     ],
     visibility = [
+        "//code/client:__pkg__",
         "//code/game:__pkg__",
         "//code/server:__pkg__",
     ],

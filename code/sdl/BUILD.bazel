@@ -7,7 +7,7 @@ cc_library(
     ],
     defines = ["USE_LOCAL_HEADERS"],
     deps = [
-        "//code/client",
+        "//code/client:api",
         "//code/client:snd_api",
         "//code/client:snd_internal_api",
         "//code/qcommon",
@@ -22,7 +22,7 @@ cc_library(
     ],
     defines = ["USE_LOCAL_HEADERS"],
     deps = [
-        "//code/client",
+        "//code/client:api",
         "//code/client:snd_api",
         "//code/qcommon",
         "//code/sys:sys_local",
