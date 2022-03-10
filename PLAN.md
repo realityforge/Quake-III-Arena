@@ -32,7 +32,7 @@ These tasks are intended to be undertaken in the future but have not been priori
 * Change the start place for VR to be a location with a 3D menu that can be interacted with rather than a 2D menu projected onto a barrel.
 * Add mechanism for downloading Quake3Arena and Quake3TeamArena content from Steam? User supplies username and password. We save the username, generate a user secret as an "encrypted version" of a username+password hash using a public key and download the content immediately. If we ever need to download again, we will need to re-enter password.
 * Re-add code equivalent to CD Key checking. i.e. Allow at most a single player online that is attached to a particular Steam account. Use the above described "user secret". The master server has access to private key to decode the secret and will ensure that the username matches and that there is a single user with that username present.
-* Import or write own master server service. It probably should support the ability for games to register current matches plus players in the service. Maybe implemented as start of a K8 cluster.
+* Import or write own master server service. It probably should support the ability for games to register current matches plus players in the service. Maybe implemented as start of a K8 cluster. Note the one that ioq3 uses is available at [dpmaster-2.2.zip](http://icculus.org/twilight/darkplaces/files/dpmaster-2.2.zip)
 * Add global rankings and statistics service. This would be part of the same cluster as the auth and master server list.
 
 ## Task Descriptions
