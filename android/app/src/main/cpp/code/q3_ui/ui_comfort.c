@@ -41,13 +41,12 @@ COMFORT OPTIONS MENU
 
 #define ID_COMFORTVIGNETTE		127
 #define ID_HEIGHTADJUST			128
-#define ID_SNAPTURN				129
-#define ID_ROLLHIT			    130
-#define ID_HAPTICINTENSITY	    131
-#define ID_HUDDEPTH			    132
-#define ID_HUDYOFFSET		    133
+#define ID_ROLLHIT			    129
+#define ID_HAPTICINTENSITY	    130
+#define ID_HUDDEPTH			    131
+#define ID_HUDYOFFSET		    132
 
-#define ID_BACK					134
+#define ID_BACK					133
 
 #define	NUM_HUDDEPTH			6
 
@@ -61,7 +60,6 @@ typedef struct {
 
     menuslider_s 		comfortvignette;
     menuslider_s 		heightadjust;
-	menulist_s          snapturn;
     menuradiobutton_s	rollhit;
 	menuslider_s 		hapticintensity;
 	menulist_s          huddepth;
@@ -76,7 +74,6 @@ static comfort_t s_comfort;
 static void Comfort_SetMenuItems( void ) {
     s_comfort.comfortvignette.curvalue		= trap_Cvar_VariableValue( "vr_comfortVignette" );
     s_comfort.heightadjust.curvalue		= trap_Cvar_VariableValue( "vr_heightAdjust" );
-	s_comfort.snapturn.curvalue		= (int)trap_Cvar_VariableValue( "vr_snapturn" ) / 45;
     s_comfort.rollhit.curvalue		    = trap_Cvar_VariableValue( "vr_rollWhenHit" ) != 0;
 	s_comfort.hapticintensity.curvalue		= trap_Cvar_VariableValue( "vr_hapticIntensity" );
 	s_comfort.huddepth.curvalue		= (int)trap_Cvar_VariableValue( "vr_hudDepth" ) % NUM_HUDDEPTH;
@@ -97,10 +94,6 @@ static void Comfort_MenuEvent( void* ptr, int notification ) {
     case ID_HEIGHTADJUST:
         trap_Cvar_SetValue( "vr_heightAdjust", s_comfort.heightadjust.curvalue );
         break;
-
-	case ID_SNAPTURN:
-		trap_Cvar_SetValue( "vr_snapturn", s_comfort.snapturn.curvalue * 45 );
-		break;
 
     case ID_ROLLHIT:
         trap_Cvar_SetValue( "vr_rollWhenHit", s_comfort.rollhit.curvalue );
@@ -138,14 +131,6 @@ static void Comfort_MenuInit( void ) {
             NULL
     };
 
-	static const char *s_snapturn[] =
-			{
-					"Smooth Turning",
-					"45 Degrees",
-					"90 Degrees",
-					NULL
-			};
-
 	memset( &s_comfort, 0 ,sizeof(comfort_t) );
 
 	Comfort_Cache();
@@ -176,7 +161,7 @@ static void Comfort_MenuInit( void ) {
 	s_comfort.framer.width  	   = 256;
 	s_comfort.framer.height  	   = 334;
 
-	y = 180;
+	y = 198;
 	s_comfort.comfortvignette.generic.type	     = MTYPE_SLIDER;
 	s_comfort.comfortvignette.generic.x			 = VR_X_POS;
     s_comfort.comfortvignette.generic.y			 = y;
@@ -197,17 +182,6 @@ static void Comfort_MenuInit( void ) {
 	s_comfort.heightadjust.generic.callback  	= Comfort_MenuEvent;
 	s_comfort.heightadjust.minvalue		     = 0.0f;
 	s_comfort.heightadjust.maxvalue		     = 1.0f;
-
-	y += BIGCHAR_HEIGHT+2;
-	s_comfort.snapturn.generic.type			= MTYPE_SPINCONTROL;
-	s_comfort.snapturn.generic.flags			= QMF_PULSEIFFOCUS|QMF_SMALLFONT;
-	s_comfort.snapturn.generic.x				= VR_X_POS;
-	s_comfort.snapturn.generic.y				= y;
-	s_comfort.snapturn.generic.name			= "Turning Mode:";
-	s_comfort.snapturn.generic.callback		= Comfort_MenuEvent;
-	s_comfort.snapturn.generic.id			= ID_SNAPTURN;
-	s_comfort.snapturn.itemnames	        	= s_snapturn;
-	s_comfort.snapturn.numitems				= 3;
 
     y += BIGCHAR_HEIGHT+2;
     s_comfort.rollhit.generic.type        = MTYPE_RADIOBUTTON;
@@ -268,7 +242,6 @@ static void Comfort_MenuInit( void ) {
 
 	Menu_AddItem( &s_comfort.menu, &s_comfort.comfortvignette );
 	Menu_AddItem( &s_comfort.menu, &s_comfort.heightadjust );
-	Menu_AddItem( &s_comfort.menu, &s_comfort.snapturn );
 	Menu_AddItem( &s_comfort.menu, &s_comfort.rollhit );
 	Menu_AddItem( &s_comfort.menu, &s_comfort.hapticintensity );
 	Menu_AddItem( &s_comfort.menu, &s_comfort.huddepth );

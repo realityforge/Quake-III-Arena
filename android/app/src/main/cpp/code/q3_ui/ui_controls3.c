@@ -43,11 +43,12 @@ CONTROLS OPTIONS MENU
 #define ID_SCOPE				128
 #define ID_TWOHANDED			129
 #define ID_DIRECTIONMODE		130
-#define ID_RIGHTHANDED			131
-#define ID_WEAPONPITCH			132
-#define ID_ALTKEY				133
+#define ID_SNAPTURN				131
+#define ID_RIGHTHANDED			132
+#define ID_WEAPONPITCH			133
+#define ID_ALTKEY				134
 
-#define ID_BACK					134
+#define ID_BACK					135
 
 #define	NUM_DIRECTIONMODE		2
 
@@ -63,6 +64,7 @@ typedef struct {
 	menuradiobutton_s	scope;
 	menuradiobutton_s	twohanded;
 	menulist_s          directionmode;
+	menulist_s          snapturn;
 	menuradiobutton_s	righthanded;
 	menuslider_s 		weaponpitch;
 	menuradiobutton_s	altkey;
@@ -78,6 +80,7 @@ static void Controls3_SetMenuItems( void ) {
     s_controls3.scope.curvalue				= trap_Cvar_VariableValue( "vr_weaponScope" ) != 0;
     s_controls3.twohanded.curvalue		    = trap_Cvar_VariableValue( "vr_twoHandedWeapons" ) != 0;
 	s_controls3.directionmode.curvalue		= (int)trap_Cvar_VariableValue( "vr_directionMode" )  % NUM_DIRECTIONMODE;
+	s_controls3.snapturn.curvalue			= (int)trap_Cvar_VariableValue( "vr_snapturn" ) / 45;
 	s_controls3.righthanded.curvalue		= trap_Cvar_VariableValue( "vr_righthanded" ) != 0;
     s_controls3.weaponpitch.curvalue		= trap_Cvar_VariableValue( "vr_weaponPitch" )  + 25;
     s_controls3.altkey.curvalue			    = trap_Cvar_VariableValue( "vr_altKeyEnabled" ) != 0;
@@ -106,6 +109,10 @@ static void Controls3_MenuEvent( void* ptr, int notification ) {
 		trap_Cvar_SetValue( "vr_directionMode", s_controls3.directionmode.curvalue );
 		break;
 
+	case ID_SNAPTURN:
+		trap_Cvar_SetValue( "vr_snapturn", s_controls3.snapturn.curvalue * 45 );
+		break;
+
 	case ID_RIGHTHANDED:
 		trap_Cvar_SetValue( "vr_righthanded", s_controls3.righthanded.curvalue );
 		break;
@@ -131,6 +138,14 @@ static void Controls3_MenuInit( void ) {
 			{
 					"HMD (Default)",
 					"Off-hand Controller",
+					NULL
+			};
+
+	static const char *s_snapturn[] =
+			{
+					"Smooth Turning",
+					"45 Degrees",
+					"90 Degrees",
 					NULL
 			};
 
@@ -164,7 +179,7 @@ static void Controls3_MenuInit( void ) {
 	s_controls3.framer.width  	   = 256;
 	s_controls3.framer.height  	   = 334;
 
-	y = 180;
+	y = 162;
 	s_controls3.autoswitch.generic.type      = MTYPE_RADIOBUTTON;
 	s_controls3.autoswitch.generic.flags	    = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
 	s_controls3.autoswitch.generic.name	    = "Autoswitch Weapons:";
@@ -201,6 +216,17 @@ static void Controls3_MenuInit( void ) {
 	s_controls3.directionmode.generic.id			= ID_DIRECTIONMODE;
 	s_controls3.directionmode.itemnames	        	= s_directionmode;
 	s_controls3.directionmode.numitems				= NUM_DIRECTIONMODE;
+
+	y += BIGCHAR_HEIGHT+2;
+	s_controls3.snapturn.generic.type			= MTYPE_SPINCONTROL;
+	s_controls3.snapturn.generic.flags			= QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+	s_controls3.snapturn.generic.x				= VR_X_POS;
+	s_controls3.snapturn.generic.y				= y;
+	s_controls3.snapturn.generic.name			= "Turning Mode:";
+	s_controls3.snapturn.generic.callback		= Controls3_MenuEvent;
+	s_controls3.snapturn.generic.id				= ID_SNAPTURN;
+	s_controls3.snapturn.itemnames	        	= s_snapturn;
+	s_controls3.snapturn.numitems				= 3;
 
 	y += BIGCHAR_HEIGHT+2;
 	s_controls3.righthanded.generic.type        = MTYPE_RADIOBUTTON;
@@ -250,6 +276,7 @@ static void Controls3_MenuInit( void ) {
 	Menu_AddItem( &s_controls3.menu, &s_controls3.scope );
 	Menu_AddItem( &s_controls3.menu, &s_controls3.twohanded );
 	Menu_AddItem( &s_controls3.menu, &s_controls3.directionmode );
+	Menu_AddItem( &s_controls3.menu, &s_controls3.snapturn );
 	Menu_AddItem( &s_controls3.menu, &s_controls3.righthanded );
 	Menu_AddItem( &s_controls3.menu, &s_controls3.weaponpitch );
 	Menu_AddItem( &s_controls3.menu, &s_controls3.altkey );
