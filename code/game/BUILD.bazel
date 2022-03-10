@@ -30,6 +30,27 @@ cc_library(
 )
 
 cc_library(
+    # bg = Both Game which is shared between client and server games
+    # It probably should be separated in a more meaningful way but
+    # that is a job for another time
+    name = "bg",
+    srcs = [
+        "bg_local.h",
+        "bg_misc.c",
+        "bg_pmove.c",
+        "bg_slidemove.c",
+    ],
+    includes = ["."],
+    visibility = [
+        "//code/cgame:__pkg__",
+    ],
+    deps = [
+        ":bg_api",
+        "//code/qcommon:q_shared",
+    ],
+)
+
+cc_library(
     name = "game",
     srcs = [
         "ai_chat.c",
@@ -46,12 +67,6 @@ cc_library(
         "ai_team.h",
         "ai_vcmd.c",
         "ai_vcmd.h",
-        "bg_lib.c",
-        "bg_lib.h",
-        "bg_local.h",
-        "bg_misc.c",
-        "bg_pmove.c",
-        "bg_slidemove.c",
         "chars.h",
         "g_active.c",
         "g_arenas.c",
@@ -83,7 +98,7 @@ cc_library(
     ],
     includes = ["."],
     deps = [
-        ":api",
+        ":bg",
         ":server_api",
         "//code/botlib",
         "//code/botlib:api",
