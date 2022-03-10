@@ -26,6 +26,10 @@ cc_library(
         "ui_shared.h",
         "ui_syscalls.c",
     ],
+    visibility = [
+        # TODO: Should move shared.h to a separate module so cgame can depend upon it but this will mean have to tease apart client aswell
+        "//code/cgame:__pkg__",
+    ],
     deps = [
         ":api",
         "//code/client",

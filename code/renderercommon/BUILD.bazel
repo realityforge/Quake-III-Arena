@@ -7,6 +7,7 @@ cc_library(
         "tr_types.h",
     ],
     visibility = [
+        "//code/cgame:__pkg__",
         "//code/client:__pkg__",
         "//code/q3_ui:__pkg__",
         "//code/renderergl1:__pkg__",

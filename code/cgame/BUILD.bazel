@@ -12,3 +12,39 @@ cc_library(
         "//code/qcommon:q_shared",
     ],
 )
+
+cc_library(
+    name = "cgame",
+    srcs = [
+        "cg_consolecmds.c",
+        "cg_draw.c",
+        "cg_drawtools.c",
+        "cg_effects.c",
+        "cg_ents.c",
+        "cg_event.c",
+        "cg_info.c",
+        "cg_local.h",
+        "cg_localents.c",
+        "cg_main.c",
+        "cg_marks.c",
+        # Should this next one be TA only?
+        #"cg_newdraw.c",
+        "cg_particles.c",
+        "cg_players.c",
+        "cg_playerstate.c",
+        "cg_predict.c",
+        "cg_scoreboard.c",
+        "cg_servercmds.c",
+        "cg_snapshot.c",
+        "cg_syscalls.c",
+        "cg_view.c",
+        "cg_weapons.c",
+    ],
+    deps = [
+        ":api",
+        "//code/game:api",
+        "//code/qcommon:q_shared",
+        "//code/renderercommon:api",
+        "//code/ui",
+    ],
+)
