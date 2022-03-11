@@ -2074,7 +2074,7 @@ void CG_DrawHolsteredWeapons( void )
 	VectorMA(holsterOrigin, ((DIST*2.0f)*frac), holsterForward, holsterOrigin);
     VectorCopy(holsterOrigin, selectorOrigin);
 
-    float x = ((holsterAngles[YAW] - controllerAngles[YAW]) / 22.5f);
+    float x = (sinf(DEG2RAD(holsterAngles[YAW] - controllerAngles[YAW])) / sinf(DEG2RAD(22.5f)));
     float y = ((holsterAngles[PITCH] - controllerAngles[PITCH]) / 22.5f);
     float len = length(x, y);
     if (len > 1.0f)
