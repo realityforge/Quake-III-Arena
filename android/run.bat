@@ -5,7 +5,7 @@ setlocal
 set BUILD_TYPE=release
 set KEYSTORE=
 set KEYSTORE_PASS=
-set VERSION=0.12.0
+set VERSION=0.21.1
 
 set ANDROID_SDK_ROOT=%AppData%\..\Local\Android\Sdk
 set adb="%ANDROID_SDK_ROOT%\platform-tools\adb.exe"
@@ -25,6 +25,8 @@ if %BUILD_TYPE%==release (
 if %BUILD_TYPE%==debug (
 	set GRADLE_BUILD_TYPE=:app:assembleDebug
 )
+
+echo #define Q3QVERSION  "%VERSION%" > .\android\app\src\main\cpp\code\vr\vr_version.h
 
 pushd %~dp0\..
 %make% -j %NUMBER_OF_PROCESSORS% %BUILD_TYPE%

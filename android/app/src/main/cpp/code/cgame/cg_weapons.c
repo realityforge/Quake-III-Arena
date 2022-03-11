@@ -249,9 +249,8 @@ void CG_ConvertFromVR(vec3_t in, vec3_t offset, vec3_t out)
 	vrSpace[0] = -r[0];
 	vrSpace[1] = -r[1];
 
-	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
 	vec3_t temp;
-	VectorScale(vrSpace, worldscale, temp);
+	VectorScale(vrSpace, cg.worldscale, temp);
 
 	if (offset) {
 		VectorAdd(temp, offset, out);
@@ -262,8 +261,6 @@ void CG_ConvertFromVR(vec3_t in, vec3_t offset, vec3_t out)
 
 static void CG_CalculateVRPositionInWorld( vec3_t in_position,  vec3_t in_offset, vec3_t in_orientation, vec3_t origin, vec3_t angles )
 {
-    float worldscale = trap_Cvar_VariableValue("vr_worldscale");
-
     if (!cgs.localServer)
     {
         //Use absolute position for the faked 6DoF for multiplayer
@@ -272,7 +269,7 @@ static void CG_CalculateVRPositionInWorld( vec3_t in_position,  vec3_t in_offset
         offset[1] = 0; // up/down is index 1 in this case
         CG_ConvertFromVR(offset, cg.refdef.vieworg, origin);
         origin[2] -= PLAYER_HEIGHT;
-        origin[2] += in_position[1] * worldscale;
+        origin[2] += in_position[1] * cg.worldscale;
     }
     else
     {
@@ -282,7 +279,7 @@ static void CG_CalculateVRPositionInWorld( vec3_t in_position,  vec3_t in_offset
 		offset[1] = 0; // up/down is index 1 in this case
         CG_ConvertFromVR(offset, cg.refdef.vieworg, origin);
         origin[2] -= PLAYER_HEIGHT;
-        origin[2] += in_position[1] * worldscale;
+        origin[2] += in_position[1] * cg.worldscale;
     }
 
     VectorCopy(in_orientation, angles);
@@ -504,7 +501,7 @@ static void CG_NailgunEjectBrass( centity_t *cent ) {
 CG_LaserSight
 ==========================
 */
-void CG_LaserSight( vec3_t start, vec3_t end, byte colour[4] ) {
+void CG_LaserSight( vec3_t start, vec3_t end, byte colour[4], float width ) {
     refEntity_t     re;
 	memset( &re, 0, sizeof( re ) );
 
@@ -516,6 +513,9 @@ void CG_LaserSight( vec3_t start, vec3_t end, byte colour[4] ) {
 
     VectorCopy( start, re.origin );
     VectorCopy( end, re.oldorigin );
+
+    //radius is used to store width info
+    re.radius = width;
 
     AxisClear( re.axis );
 
@@ -1736,7 +1736,7 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 		colour[2] = 0x00;
 		colour[3] = 0x40;
 
-		CG_LaserSight(hand.origin, trace.endpos, colour);
+		CG_LaserSight(hand.origin, trace.endpos, colour, 1.0f);
 	}
 
 		//Scale / Move gun etc
@@ -2055,9 +2055,7 @@ void CG_DrawHolsteredWeapons( void )
         VectorCopy(vr->weaponoffset, cg.weaponHolsterOffset);
     }
 
-    float worldscale = trap_Cvar_VariableValue("vr_worldscale");
-
-    float SCALE = 0.04f;
+    float SCALE = 0.05f;
 	const float DIST = 5.0f;
 	const float SEP = 360.0f / (WP_NUM_WEAPONS - 1); // Exclude grappling hook
 	float frac = (cg.time - cg.weaponHolsterTime) / (25 * DIST);
@@ -2067,12 +2065,13 @@ void CG_DrawHolsteredWeapons( void )
     CG_CalculateVRWeaponPosition(controllerOrigin, controllerAngles);
     VectorSubtract(vr->weaponposition, cg.weaponHolsterOrigin, controllerOffset);
 
-	vec3_t holsterAngles, holsterOrigin, holsterForward, holsterRight, holsterUp, dummy;
+	vec3_t holsterAngles, holsterOrigin, beamOrigin, holsterForward, holsterRight, holsterUp;
     CG_CalculateVRPositionInWorld(cg.weaponHolsterOrigin, cg.weaponHolsterOffset, cg.weaponHolsterAngles, holsterOrigin, holsterAngles);
 
 	AngleVectors(holsterAngles, holsterForward, holsterRight, holsterUp);
 
-	VectorMA(holsterOrigin, (DIST*frac), holsterForward, holsterOrigin);
+	VectorCopy(holsterOrigin, beamOrigin);
+	VectorMA(holsterOrigin, ((DIST*2.0f)*frac), holsterForward, holsterOrigin);
     VectorCopy(holsterOrigin, selectorOrigin);
 
     float x = ((holsterAngles[YAW] - controllerAngles[YAW]) / 22.5f);
@@ -2098,12 +2097,20 @@ void CG_DrawHolsteredWeapons( void )
         blob.nonNormalizedAxes = qtrue;
         blob.hModel = cgs.media.smallSphereModel;
         trap_R_AddRefEntityToScene( &blob );
+
+		byte colour[4];
+		colour[0] = 0x00;
+		colour[1] = 0x00;
+		colour[2] = 0xff;
+		colour[3] = 0x40;
+		CG_LaserSight(beamOrigin, selectorOrigin, colour, 0.1f);
     }
 
 
     //float startingPositionYaw = AngleNormalize360(holsterAngles[YAW] + (((WP_NUM_WEAPONS-2)/2.0f) * SEP));
     qboolean selected = qfalse;
-    for (int w = WP_NUM_WEAPONS-1; w > 0; --w)
+	int w = 0;
+    for (int c = 0; c < WP_NUM_WEAPONS-1; ++c, ++w)
     {
         if (w == WP_GRAPPLING_HOOK)
         {
@@ -2118,7 +2125,7 @@ void CG_DrawHolsteredWeapons( void )
             VectorClear(angles);
             angles[YAW] = holsterAngles[YAW];
             angles[PITCH] = holsterAngles[PITCH];
-            angles[ROLL] = AngleNormalize360(180 - (w * SEP) - 4); // add a few degrees as models aren't central
+            angles[ROLL] = AngleNormalize360(180 + (w * SEP) - 4); // add a few degrees as models aren't central
             vec3_t forward, up;
             AngleVectors(angles, forward, NULL, up);
 

@@ -55,3 +55,4 @@ Release/
 .project
 local.properties
 drbeef-release-key.keystore
+android/app/src/main/cpp/code/vr/vr_version.h

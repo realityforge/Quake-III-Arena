@@ -31,6 +31,8 @@ MAIN MENU
 
 #include "ui_local.h"
 
+#include "../vr/vr_version.h"
+
 
 #define ID_SINGLEPLAYER			10
 #define ID_MULTIPLAYER			11
@@ -190,7 +192,7 @@ static void Main_MenuDraw( void ) {
 
 	origin[0] = 300;
 	origin[1] = 0;
-	origin[2] = -32;
+	origin[2] = -128;
 
 	trap_R_ClearScene();
 
@@ -198,9 +200,12 @@ static void Main_MenuDraw( void ) {
 
 	memset( &ent, 0, sizeof(ent) );
 
-	adjust = 5.0 * sin( (float)uis.realtime / 5000 );
-	VectorSet( angles, 0, 180 + adjust, 0 );
+	//adjust = 5.0 * sin( (float)uis.realtime / 4000 );
+	VectorSet( angles, 5.0 * sin( (float)uis.realtime / 3000 ), 180 + 5.0 * sin( (float)uis.realtime / 4000 ), 0 );
 	AnglesToAxis( angles, ent.axis );
+	VectorScale(ent.axis[1], 1.6f, ent.axis[1]);
+	VectorScale(ent.axis[2], 6.0f, ent.axis[2]);
+	ent.nonNormalizedAxes = qtrue;
 	ent.hModel = s_main.bannerModel;
 	VectorCopy( origin, ent.origin );
 	VectorCopy( origin, ent.lightingOrigin );
@@ -221,11 +226,18 @@ static void Main_MenuDraw( void ) {
 		Menu_Draw( &s_main.menu );		
 	}
 
+	int yPos = 410;
 	if (uis.demoversion) {
-		UI_DrawProportionalString( 320, 372, "DEMO      FOR MATURE AUDIENCES      DEMO", UI_CENTER|UI_SMALLFONT, color );
-		UI_DrawString( 320, 400, "Quake III Arena(c) 1999-2000, Id Software, Inc.  All Rights Reserved", UI_CENTER|UI_SMALLFONT, color );
+		UI_DrawProportionalString( 320, 372, "DEMO DEMO DEMO DEMO DEMO DEMO DEMO DEMO DEMO", UI_CENTER|UI_SMALLFONT, color );
+		UI_DrawString( 320, yPos, "Quake III Arena(c) 1999-2000, Id Software, Inc.  All Rights Reserved", UI_CENTER|UI_SMALLFONT, color );
 	} else {
-		UI_DrawString( 320, 450, "Quake III Arena(c) 1999-2000, Id Software, Inc.  All Rights Reserved", UI_CENTER|UI_SMALLFONT, color );
+		UI_DrawString( 320, yPos, "Quake III Arena(c) 1999-2000, Id Software, Inc.  All Rights Reserved", UI_CENTER|UI_SMALLFONT, color );
+        yPos += SMALLCHAR_HEIGHT;
+		UI_DrawString( 320, yPos, "Quake3Quest " Q3QVERSION " - Visit Quake3Quest.com for discord invite.", UI_CENTER|UI_SMALLFONT, color );
+        yPos += SMALLCHAR_HEIGHT;
+		UI_DrawString( 320, yPos, "Join our discord for news, leaderboards and community!", UI_CENTER|UI_SMALLFONT, color );
+        yPos += SMALLCHAR_HEIGHT;
+		UI_DrawString( 320, yPos, "Get mods & mappacks via the companion app!", UI_CENTER|UI_SMALLFONT, color );
 	}
 }
 

@@ -2777,7 +2777,7 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 	VectorCopy( cg.refdef.vieworg, baseOrg );
 
 	float heightOffset = 0.0f;
-	float worldscale = trap_Cvar_VariableValue("vr_worldscale");
+	float worldscale = cg.worldscale;
     if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON))
     {
         worldscale *= SPECTATOR_WORLDSCALE_MULTIPLIER;

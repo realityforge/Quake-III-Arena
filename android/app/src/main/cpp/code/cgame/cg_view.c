@@ -757,7 +757,7 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 			colour[2] = 0x00;
 			colour[3] = 0x40;
 
-			CG_LaserSight(weaponorigin, trace.endpos, colour);
+			CG_LaserSight(weaponorigin, trace.endpos, colour, 1.0f);
         }
 
         {
@@ -788,7 +788,7 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 				colour[2] = 0x00;
 				colour[3] = 0x40;
 
-				CG_LaserSight(cg.refdef.vieworg, trace2.endpos, colour);
+				CG_LaserSight(cg.refdef.vieworg, trace2.endpos, colour, 1.0f);
             }
 
             //convert to real-world angles - should be very close to real weapon angles
@@ -930,6 +930,8 @@ void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demo
 
 	cg.time = serverTime;
 	cg.demoPlayback = demoPlayback;
+
+	cg.worldscale = trap_Cvar_VariableValue("vr_worldscale");
 
 	// update cvars
 	CG_UpdateCvars();
