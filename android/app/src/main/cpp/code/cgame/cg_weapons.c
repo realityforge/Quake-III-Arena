@@ -504,7 +504,7 @@ static void CG_NailgunEjectBrass( centity_t *cent ) {
 CG_LaserSight
 ==========================
 */
-void CG_LaserSight( vec3_t start, vec3_t end ) {
+void CG_LaserSight( vec3_t start, vec3_t end, byte colour[4] ) {
     refEntity_t     re;
 	memset( &re, 0, sizeof( re ) );
 
@@ -519,10 +519,10 @@ void CG_LaserSight( vec3_t start, vec3_t end ) {
 
     AxisClear( re.axis );
 
-	re.shaderRGBA[0] = 0xff;
-	re.shaderRGBA[1] = 0x00;
-	re.shaderRGBA[2] = 0x00;
-	re.shaderRGBA[3] = 0x40;
+	re.shaderRGBA[0] = colour[0];
+	re.shaderRGBA[1] = colour[1];
+	re.shaderRGBA[2] = colour[2];
+	re.shaderRGBA[3] = colour[3];
 
 	trap_R_AddRefEntityToScene(&re);
 }
@@ -1729,7 +1729,14 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 		trace_t trace;
 		CG_Trace(&trace, hand.origin, NULL, NULL, end, cg.predictedPlayerState.clientNum,
 				 MASK_SOLID);
-		CG_LaserSight(hand.origin, trace.endpos);
+
+		byte colour[4];
+		colour[0] = 0xff;
+		colour[1] = 0x00;
+		colour[2] = 0x00;
+		colour[3] = 0x40;
+
+		CG_LaserSight(hand.origin, trace.endpos, colour);
 	}
 
 		//Scale / Move gun etc
@@ -2033,6 +2040,11 @@ void CG_HolsterSelect_f( void )
     cg.weaponHolsterSelection = WP_NONE;
 }
 
+static float length(float x, float y)
+{
+	return sqrtf(powf(x, 2.0f) + powf(y, 2.0f));
+}
+
 void CG_DrawHolsteredWeapons( void )
 {
     if (cg.weaponHolsterTime == 0)
@@ -2048,7 +2060,7 @@ void CG_DrawHolsteredWeapons( void )
     float SCALE = 0.04f;
 	const float DIST = 5.0f;
 	const float SEP = 360.0f / (WP_NUM_WEAPONS - 1); // Exclude grappling hook
-	float frac = (cg.time - cg.weaponHolsterTime) / (50 * DIST);
+	float frac = (cg.time - cg.weaponHolsterTime) / (25 * DIST);
 	if (frac > 1.0f) frac = 1.0f;
 
 	vec3_t controllerOrigin, controllerAngles, controllerOffset, selectorOrigin;
@@ -2063,10 +2075,19 @@ void CG_DrawHolsteredWeapons( void )
 	VectorMA(holsterOrigin, (DIST*frac), holsterForward, holsterOrigin);
     VectorCopy(holsterOrigin, selectorOrigin);
 
-    VectorMA(selectorOrigin, DIST * ((holsterAngles[YAW] - controllerAngles[YAW]) / 22.5f), holsterRight, selectorOrigin);
-    VectorMA(selectorOrigin, DIST * ((holsterAngles[PITCH] - controllerAngles[PITCH]) / 22.5f), holsterUp, selectorOrigin);
+    float x = ((holsterAngles[YAW] - controllerAngles[YAW]) / 22.5f);
+    float y = ((holsterAngles[PITCH] - controllerAngles[PITCH]) / 22.5f);
+    float len = length(x, y);
+    if (len > 1.0f)
+	{
+    	x *= (1.0f / len);
+    	y *= (1.0f / len);
+	}
 
-    {
+	VectorMA(selectorOrigin, DIST * x, holsterRight, selectorOrigin);
+    VectorMA(selectorOrigin, DIST * y, holsterUp, selectorOrigin);
+
+	{
         refEntity_t		blob;
         memset( &blob, 0, sizeof( blob ) );
         VectorCopy( selectorOrigin, blob.origin );

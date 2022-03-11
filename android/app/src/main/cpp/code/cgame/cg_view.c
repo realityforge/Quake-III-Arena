@@ -751,7 +751,13 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 
         if (cg_debugWeaponAiming.integer)
         {
-            CG_LaserSight(weaponorigin, trace.endpos);
+			byte colour[4];
+			colour[0] = 0xff;
+			colour[1] = 0x00;
+			colour[2] = 0x00;
+			colour[3] = 0x40;
+
+			CG_LaserSight(weaponorigin, trace.endpos, colour);
         }
 
         {
@@ -776,7 +782,13 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 
             if (cg_debugWeaponAiming.integer)
             {
-                CG_LaserSight(cg.refdef.vieworg, trace2.endpos);
+				byte colour[4];
+				colour[0] = 0x00;
+				colour[1] = 0xff;
+				colour[2] = 0x00;
+				colour[3] = 0x40;
+
+				CG_LaserSight(cg.refdef.vieworg, trace2.endpos, colour);
             }
 
             //convert to real-world angles - should be very close to real weapon angles
