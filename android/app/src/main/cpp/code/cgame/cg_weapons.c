@@ -2070,6 +2070,7 @@ void CG_DrawHolsteredWeapons( void )
 
 	AngleVectors(holsterAngles, holsterForward, holsterRight, holsterUp);
 
+	VectorCopy(controllerOrigin, holsterOrigin);
 	VectorCopy(holsterOrigin, beamOrigin);
 	VectorMA(holsterOrigin, ((DIST*2.0f)*frac), holsterForward, holsterOrigin);
     VectorCopy(holsterOrigin, selectorOrigin);
