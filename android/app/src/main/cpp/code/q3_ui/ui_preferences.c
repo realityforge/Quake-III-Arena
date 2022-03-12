@@ -123,7 +123,7 @@ static void Preferences_SetMenuItems( void ) {
 	s_preferences.drawteamoverlay.curvalue	= Com_Clamp( 0, 3, trap_Cvar_VariableValue( "cg_drawTeamOverlay" ) );
     s_preferences.drawhud.curvalue			= trap_Cvar_VariableValue( "cg_drawStatus" ) != 0;
 //	s_preferences.allowdownload.curvalue	= trap_Cvar_VariableValue( "cl_allowDownload" ) != 0;
-	s_preferences.holster2d.curvalue		= trap_Cvar_VariableValue( "cg_holsterSimple2DIcons" ) != 0;
+	s_preferences.holster2d.curvalue		= trap_Cvar_VariableValue( "cg_weaponSelectorSimple2DIcons" ) != 0;
     //GORE
     {
         int level = trap_Cvar_VariableValue( "com_blood" ) +
@@ -199,7 +199,7 @@ static void Preferences_Event( void* ptr, int notification ) {
         break;
 
 	case ID_HOLSTER2D:
-		trap_Cvar_SetValue( "cg_holsterSimple2DIcons", s_preferences.holster2d.curvalue);
+		trap_Cvar_SetValue( "cg_weaponSelectorSimple2DIcons", s_preferences.holster2d.curvalue);
         break;
 
 	case ID_GORE: {

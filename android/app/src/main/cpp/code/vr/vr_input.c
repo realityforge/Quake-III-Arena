@@ -250,8 +250,7 @@ static void IN_SendButtonAction(const char* action, qboolean pressed)
         //handle our special actions first
         if (strcmp(action, "+alt") == 0)
         {
-            qboolean alt_key_enabled = Cvar_VariableValue( "vr_altKeyEnabled" ) != 0;
-            alt_key_mode_active = pressed && alt_key_enabled;
+            alt_key_mode_active = pressed;
         }
         else if (strcmp(action, "+weapon_stabilise") == 0)
         {
@@ -262,7 +261,7 @@ static void IN_SendButtonAction(const char* action, qboolean pressed)
             vr.weapon_select = pressed;
             if (!pressed)
             {
-                Cbuf_AddText("holster_select");
+                Cbuf_AddText("weapon_select");
             }
         }
         else if (action[0] == '+')
@@ -458,6 +457,12 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
     char action[256];
 	vrController_t* controller = isRightController == qtrue ? &rightController : &leftController;
 
+	if (isRightController)
+    {
+	    vr.thumbstick_location[0] = joystickX;
+	    vr.thumbstick_location[1] = joystickY;
+    }
+
 	if (vr.virtual_screen ||
             cl.snap.ps.pm_type == PM_INTERMISSION)
 	{
@@ -509,7 +514,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
             //forward/back
             Com_QueueEvent(in_vrEventTime, SE_JOYSTICK_AXIS, 1, joystick[1] * 127.0f + positional[1] * 127.0f, 0, NULL);
         }
-        else //right controller
+        else if (!vr.weapon_select) //right controller
         {
 
             // up, up-left, up-right (use release threshold to be more sensitive)

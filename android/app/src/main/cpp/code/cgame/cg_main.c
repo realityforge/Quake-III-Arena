@@ -117,7 +117,7 @@ vmCvar_t	cg_drawAmmoWarning;
 vmCvar_t	cg_drawCrosshair;
 vmCvar_t	cg_drawCrosshairNames;
 vmCvar_t	cg_debugWeaponAiming;
-vmCvar_t	cg_holsterSimple2DIcons;
+vmCvar_t	cg_weaponSelectorSimple2DIcons;
 vmCvar_t	cg_fragMessage;
 vmCvar_t	cg_drawRewards;
 vmCvar_t	cg_crosshairSize;
@@ -237,7 +237,7 @@ static cvarTable_t cvarTable[] = {
 	{ &cg_drawSnapshot, "cg_drawSnapshot", "0", CVAR_ARCHIVE  },
 	{ &cg_draw3dIcons, "cg_draw3dIcons", "1", CVAR_ARCHIVE  },
 	{ &cg_debugWeaponAiming, "cg_debugWeaponAiming", "0", CVAR_ARCHIVE  },
-	{ &cg_holsterSimple2DIcons, "cg_holsterSimple2DIcons", "0", CVAR_ARCHIVE  },
+	{ &cg_weaponSelectorSimple2DIcons, "cg_weaponSelectorSimple2DIcons", "0", CVAR_ARCHIVE  },
 	{ &cg_drawIcons, "cg_drawIcons", "1", CVAR_ARCHIVE  },
 	{ &cg_drawAmmoWarning, "cg_drawAmmoWarning", "1", CVAR_ARCHIVE  },
 	{ &cg_drawAttacker, "cg_drawAttacker", "0", CVAR_ARCHIVE  },

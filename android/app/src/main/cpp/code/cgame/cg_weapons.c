@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // cg_weapons.c -- events and effects dealing with weapons
 #include "cg_local.h"
 #include "../vr/vr_clientinfo.h"
+#include "../vr/vr_types.h"
 
 extern vr_clientinfo_t *vr;
 
@@ -1708,7 +1709,7 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 
     if (vr->weapon_select)
     {
-        CG_DrawHolsteredWeapons();
+        CG_DrawWeaponSelector();
         return;
     }
 
@@ -2024,20 +2025,20 @@ void CG_Weapon_f( void ) {
 	cg.weaponSelect = num;
 }
 
-//Selects the currently selected holstered weapon (if one _is_ selected)
-void CG_HolsterSelect_f( void )
+//Selects the currently selected weapon (if one _is_ selected)
+void CG_WeaponSelectorSelect_f( void )
 {
-	cg.weaponHolsterTime = 0;
+	cg.weaponSelectorTime = 0;
 
-    if (cg.weaponHolsterSelection == WP_NONE ||
-			cg.weaponSelect == cg.weaponHolsterSelection)
+    if (cg.weaponSelectorSelection == WP_NONE ||
+			cg.weaponSelect == cg.weaponSelectorSelection)
     {
         return;
     }
 
 	cg.weaponSelectTime = cg.time;
-	cg.weaponSelect = cg.weaponHolsterSelection;
-    cg.weaponHolsterSelection = WP_NONE;
+	cg.weaponSelect = cg.weaponSelectorSelection;
+    cg.weaponSelectorSelection = WP_NONE;
 }
 
 static float length(float x, float y)
@@ -2045,47 +2046,82 @@ static float length(float x, float y)
 	return sqrtf(powf(x, 2.0f) + powf(y, 2.0f));
 }
 
-void CG_DrawHolsteredWeapons( void )
+void CG_DrawWeaponSelector( void )
 {
-    if (cg.weaponHolsterTime == 0)
+    if (cg.weaponSelectorTime == 0)
     {
-        cg.weaponHolsterTime = cg.time;
-        VectorCopy(vr->weaponangles, cg.weaponHolsterAngles);
-        VectorCopy(vr->weaponposition, cg.weaponHolsterOrigin);
-        VectorCopy(vr->weaponoffset, cg.weaponHolsterOffset);
+        cg.weaponSelectorTime = cg.time;
+        VectorCopy(vr->weaponangles, cg.weaponSelectorAngles);
+        VectorCopy(vr->weaponposition, cg.weaponSelectorOrigin);
+        VectorCopy(vr->weaponoffset, cg.weaponSelectorOffset);
+    }
+
+    const int selectorMode = (int)trap_Cvar_VariableValue("vr_weaponSelectorMode");
+    float DEPTH = 5.0f;
+    float RAD = 5.0f;
+
+    if (selectorMode == WS_HMD) // HMD locked
+    {
+        VectorCopy(vr->hmdorientation, cg.weaponSelectorAngles);
+        VectorCopy(vr->hmdposition, cg.weaponSelectorOrigin);
+        VectorClear(cg.weaponSelectorOffset);
+        DEPTH = 7.0f;
+        RAD = 4.0f;
     }
 
     float SCALE = 0.05f;
-	const float DIST = 5.0f;
-	const float SEP = 360.0f / (WP_NUM_WEAPONS - 1); // Exclude grappling hook
-	float frac = (cg.time - cg.weaponHolsterTime) / (25 * DIST);
+	const float SEP = 360.0f / (WP_NUM_WEAPONS - 2); // Exclude grappling hook
+	float frac = (cg.time - cg.weaponSelectorTime) / (20 * DEPTH);
 	if (frac > 1.0f) frac = 1.0f;
 
 	vec3_t controllerOrigin, controllerAngles, controllerOffset, selectorOrigin;
     CG_CalculateVRWeaponPosition(controllerOrigin, controllerAngles);
-    VectorSubtract(vr->weaponposition, cg.weaponHolsterOrigin, controllerOffset);
+    VectorSubtract(vr->weaponposition, cg.weaponSelectorOrigin, controllerOffset);
 
 	vec3_t holsterAngles, holsterOrigin, beamOrigin, holsterForward, holsterRight, holsterUp;
-    CG_CalculateVRPositionInWorld(cg.weaponHolsterOrigin, cg.weaponHolsterOffset, cg.weaponHolsterAngles, holsterOrigin, holsterAngles);
+    CG_CalculateVRPositionInWorld(cg.weaponSelectorOrigin, cg.weaponSelectorOffset, cg.weaponSelectorAngles, holsterOrigin, holsterAngles);
 
 	AngleVectors(holsterAngles, holsterForward, holsterRight, holsterUp);
 
-	VectorCopy(controllerOrigin, holsterOrigin);
-	VectorCopy(holsterOrigin, beamOrigin);
-	VectorMA(holsterOrigin, ((DIST*2.0f)*frac), holsterForward, holsterOrigin);
-    VectorCopy(holsterOrigin, selectorOrigin);
-
-    float x = (sinf(DEG2RAD(holsterAngles[YAW] - controllerAngles[YAW])) / sinf(DEG2RAD(22.5f)));
-    float y = ((holsterAngles[PITCH] - controllerAngles[PITCH]) / 22.5f);
-    float len = length(x, y);
-    if (len > 1.0f)
+	if (selectorMode == WS_CONTROLLER)
 	{
-    	x *= (1.0f / len);
-    	y *= (1.0f / len);
+		VectorCopy(controllerOrigin, holsterOrigin);
+	}
+	else
+	{
+		VectorMA(holsterOrigin, -2.0f, holsterUp, holsterOrigin);
 	}
 
-	VectorMA(selectorOrigin, DIST * x, holsterRight, selectorOrigin);
-    VectorMA(selectorOrigin, DIST * y, holsterUp, selectorOrigin);
+	VectorCopy(holsterOrigin, beamOrigin);
+	VectorMA(holsterOrigin, ((DEPTH*2.0f)*((selectorMode == WS_CONTROLLER) ? frac : 1.0f)), holsterForward, holsterOrigin);
+    VectorCopy(holsterOrigin, selectorOrigin);
+
+    float x = 0.0f;
+    float y = 0.0f;
+    if (selectorMode == WS_CONTROLLER)
+    {
+        x = (sinf(DEG2RAD(holsterAngles[YAW] - controllerAngles[YAW])) / sinf(DEG2RAD(22.5f)));
+        y = ((holsterAngles[PITCH] - controllerAngles[PITCH]) / 22.5f);
+
+        float len = length(x, y);
+        if (len > 1.0f)
+        {
+            x *= (1.0f / len);
+            y *= (1.0f / len);
+        }
+    }
+    else //selectorMode == WS_HMD
+    {
+        if (length(vr->thumbstick_location[0], vr->thumbstick_location[1]) > 0.95f)
+		{
+			float a = atan2(vr->thumbstick_location[0], vr->thumbstick_location[1]);
+			x = sinf(a) * 0.95f;
+			y = cosf(a) * 0.95f;
+		}
+    }
+
+	VectorMA(selectorOrigin, RAD * x, holsterRight, selectorOrigin);
+    VectorMA(selectorOrigin, RAD * y, holsterUp, selectorOrigin);
 
 	{
         refEntity_t		blob;
@@ -2099,39 +2135,43 @@ void CG_DrawHolsteredWeapons( void )
         blob.hModel = cgs.media.smallSphereModel;
         trap_R_AddRefEntityToScene( &blob );
 
-		byte colour[4];
-		colour[0] = 0x00;
-		colour[1] = 0x00;
-		colour[2] = 0xff;
-		colour[3] = 0x40;
-		CG_LaserSight(beamOrigin, selectorOrigin, colour, 0.1f);
+		if (selectorMode == WS_CONTROLLER)
+		{
+			byte colour[4];
+			colour[0] = 0x00;
+			colour[1] = 0x00;
+			colour[2] = 0xff;
+			colour[3] = 0x40;
+			CG_LaserSight(beamOrigin, selectorOrigin, colour, 0.1f);
+		}
     }
 
-
-    //float startingPositionYaw = AngleNormalize360(holsterAngles[YAW] + (((WP_NUM_WEAPONS-2)/2.0f) * SEP));
     qboolean selected = qfalse;
-	int w = 0;
-    for (int c = 0; c < WP_NUM_WEAPONS-1; ++c, ++w)
+	int w = 1;
+    for (int c = 0; c < WP_NUM_WEAPONS-2; ++c, ++w)
     {
         if (w == WP_GRAPPLING_HOOK)
         {
             continue;
         }
 
+        CG_RegisterWeapon(w);
+
 		{
-			qboolean selectable = CG_WeaponSelectable(w);
+			qboolean selectable = CG_WeaponSelectable(w) && cg.snap->ps.ammo[ w ];
 
             //first calculate holster slot position
-            vec3_t angles, iconOrigin,iconBackground;
+            vec3_t angles, iconOrigin,iconBackground,iconForeground;
             VectorClear(angles);
             angles[YAW] = holsterAngles[YAW];
             angles[PITCH] = holsterAngles[PITCH];
-            angles[ROLL] = AngleNormalize360(180 + (w * SEP) - 4); // add a few degrees as models aren't central
+            angles[ROLL] = AngleNormalize360((w * SEP));
             vec3_t forward, up;
             AngleVectors(angles, forward, NULL, up);
 
-            VectorMA(holsterOrigin, (DIST*frac), up, iconOrigin);
-            VectorMA(iconOrigin, 0.01f, forward, iconBackground);
+            VectorMA(holsterOrigin, (RAD*frac), up, iconOrigin);
+            VectorMA(iconOrigin, 0.1f, forward, iconBackground);
+            VectorMA(iconOrigin, -0.1f, forward, iconForeground);
 
             //Float sprite above selected weapon
             vec3_t diff;
@@ -2141,51 +2181,48 @@ void CG_DrawHolsteredWeapons( void )
                 frac == 1.0f &&
                 selectable)
             {
-            	if (cg.weaponHolsterSelection != w)
+            	if (cg.weaponSelectorSelection != w)
 				{
-					cg.weaponHolsterSelection = w;
+					cg.weaponSelectorSelection = w;
 					trap_HapticEvent("selector_icon", 0, 0, 100, 0, 0);
 				}
 
-                refEntity_t		sprite;
-                memset( &sprite, 0, sizeof( sprite ) );
-                VectorCopy( iconOrigin, sprite.origin );
-                sprite.origin[2] += 2.5f + (0.5f * sinf(DEG2RAD(AngleNormalize360((cg.time - cg.weaponHolsterTime)/4))));
-                sprite.reType = RT_SPRITE;
-                sprite.customShader = cgs.media.friendShader;
-                sprite.radius = 0.5f;
-                sprite.shaderRGBA[0] = 255;
-                sprite.shaderRGBA[1] = 255;
-                sprite.shaderRGBA[2] = 255;
-                sprite.shaderRGBA[3] = 255;
-                trap_R_AddRefEntityToScene( &sprite );
-
 				selected = qtrue;
             }
-
-            if (!cg_holsterSimple2DIcons.integer)
+            
+            if (cg.weaponSelectorSelection == w)
 			{
-				//Wrap weapon in a small sphere - absent weapon will be a very small sphere
+				refEntity_t		sprite;
+				memset( &sprite, 0, sizeof( sprite ) );
+				VectorCopy( iconOrigin, sprite.origin );
+				sprite.origin[2] += 2.5f + (0.5f * sinf(DEG2RAD(AngleNormalize360((cg.time - cg.weaponSelectorTime)/4))));
+				sprite.reType = RT_SPRITE;
+				sprite.customShader = cgs.media.friendShader;
+				sprite.radius = 0.5f;
+				sprite.shaderRGBA[0] = 255;
+				sprite.shaderRGBA[1] = 255;
+				sprite.shaderRGBA[2] = 255;
+				sprite.shaderRGBA[3] = 255;
+				trap_R_AddRefEntityToScene( &sprite );
+			}
+
+            if (!cg_weaponSelectorSimple2DIcons.integer)
+			{
+/*				if (selectable)
 				{
-				    float f2 = 1.0f;
-				    if (!selectable) f2 = 0.05f;
-					refEntity_t		blob;
+				    refEntity_t		blob;
 					memset( &blob, 0, sizeof( blob ) );
 					VectorCopy( iconOrigin, blob.origin );
 					AnglesToAxis(vec3_origin, blob.axis);
-					VectorScale( blob.axis[0], (SCALE*frac*f2) + 0.05f + (cg.weaponHolsterSelection == w ? 0.035f : 0), blob.axis[0] );
-					VectorScale( blob.axis[1], (SCALE*frac*f2) + 0.05f + (cg.weaponHolsterSelection == w ? 0.035f : 0), blob.axis[1] );
-					VectorScale( blob.axis[2], (SCALE*frac*f2) + 0.05f + (cg.weaponHolsterSelection == w ? 0.035f : 0), blob.axis[2] );
+					float sphereScale = (SCALE*frac) + 0.05f + (cg.weaponSelectorSelection == w ? 0.035f : 0);
+					VectorScale( blob.axis[0], sphereScale, blob.axis[0] );
+					VectorScale( blob.axis[1], sphereScale, blob.axis[1] );
+					VectorScale( blob.axis[2], sphereScale, blob.axis[2] );
 					blob.nonNormalizedAxes = qtrue;
 					blob.hModel = cgs.media.smallSphereModel;
-					blob.customShader = cgs.media.invisShader;
+                    blob.customShader = cgs.media.invisShader;
 					trap_R_AddRefEntityToScene( &blob );
-				}
-
-				if (!selectable)
-				{
-					continue;
-				}
+				}*/
 
 				refEntity_t ent;
 				memset(&ent, 0, sizeof(ent));
@@ -2214,10 +2251,14 @@ void CG_DrawHolsteredWeapons( void )
 				{
 					iconAngles[ROLL] -= 90.0f;
 				}
+
+                float weaponScale = ((SCALE+0.02f)*frac) +
+				        (cg.weaponSelectorSelection == w ? 0.04f : 0);
+
 				AnglesToAxis(iconAngles, ent.axis);
-				VectorScale(ent.axis[0], ((SCALE+0.01f)*frac) + (cg.weaponHolsterSelection == w ? 0.04f : 0), ent.axis[0]);
-				VectorScale(ent.axis[1], ((SCALE+0.01f)*frac) + (cg.weaponHolsterSelection == w ? 0.04f : 0), ent.axis[1]);
-				VectorScale(ent.axis[2], ((SCALE+0.01f)*frac) + (cg.weaponHolsterSelection == w ? 0.04f : 0), ent.axis[2]);
+				VectorScale(ent.axis[0], weaponScale, ent.axis[0]);
+				VectorScale(ent.axis[1], weaponScale, ent.axis[1]);
+				VectorScale(ent.axis[2], weaponScale, ent.axis[2]);
 				ent.nonNormalizedAxes = qtrue;
 
 				if( w == WP_RAILGUN ) {
@@ -2235,6 +2276,10 @@ void CG_DrawHolsteredWeapons( void )
 				}
 
 				ent.hModel = cg_weapons[w].weaponModel;
+				if (!selectable)
+                {
+                    ent.customShader = cgs.media.invisShader;				    
+                }
 				trap_R_AddRefEntityToScene(&ent);
 
                 if ( cg_weapons[w].barrelModel )
@@ -2244,10 +2289,14 @@ void CG_DrawHolsteredWeapons( void )
                     barrel.hModel = cg_weapons[w].barrelModel;
                     vec3_t barrelAngles;
                     VectorClear(barrelAngles);
-                    barrelAngles[ROLL] = AngleNormalize360((cg.time - cg.weaponHolsterTime) * 0.9f);
+                    barrelAngles[ROLL] = AngleNormalize360((cg.time - cg.weaponSelectorTime) * 0.9f);
                     AnglesToAxis(barrelAngles, barrel.axis);
                     CG_PositionRotatedEntityOnTag(&barrel, &ent, cg_weapons[w].weaponModel,
                                                   "tag_barrel");
+                    if (!selectable)
+                    {
+                        barrel.customShader = cgs.media.invisShader;
+                    }
                     trap_R_AddRefEntityToScene(&barrel);
                 }
 
@@ -2257,35 +2306,49 @@ void CG_DrawHolsteredWeapons( void )
 				refEntity_t		sprite;
 				memset( &sprite, 0, sizeof( sprite ) );
 
-				if (selectable)
+                VectorCopy(iconOrigin, sprite.origin);
+                sprite.reType = RT_SPRITE;
+                sprite.customShader = cg_weapons[w].weaponIcon;
+                sprite.radius = 0.6f + (cg.weaponSelectorSelection == w ? 0.1f : 0);
+                sprite.shaderRGBA[0] = 255;
+                sprite.shaderRGBA[1] = 255;
+                sprite.shaderRGBA[2] = 255;
+                sprite.shaderRGBA[3] = 255;
+                trap_R_AddRefEntityToScene(&sprite);
+
+				//And now the selection background
+				memset( &sprite, 0, sizeof( sprite ) );
+				VectorCopy( iconBackground, sprite.origin );
+                sprite.reType = RT_SPRITE;
+				sprite.customShader = cgs.media.selectShader;
+				sprite.radius = 0.7f + (cg.weaponSelectorSelection == w ? 0.1f : 0);
+				sprite.shaderRGBA[0] = 255;
+				sprite.shaderRGBA[1] = 255;
+				sprite.shaderRGBA[2] = 255;
+				sprite.shaderRGBA[3] = 255;
+				trap_R_AddRefEntityToScene( &sprite );
+
+				if (!selectable)
 				{
-					VectorCopy(iconOrigin, sprite.origin);
-					sprite.reType = RT_SPRITE;
-					sprite.customShader = cg_weapons[w].weaponIcon;
-					sprite.radius = 0.6f + (cg.weaponHolsterSelection == w ? 0.1f : 0);
+					memset(&sprite, 0, sizeof(sprite));
+					VectorCopy(iconForeground, sprite.origin);
+                    sprite.reType = RT_SPRITE;
+					sprite.customShader = cgs.media.noammoShader;
+					sprite.radius = 0.7f;
 					sprite.shaderRGBA[0] = 255;
 					sprite.shaderRGBA[1] = 255;
 					sprite.shaderRGBA[2] = 255;
 					sprite.shaderRGBA[3] = 255;
 					trap_R_AddRefEntityToScene(&sprite);
 				}
-
-				//And now the selection background
-				VectorCopy( iconBackground, sprite.origin );
-				sprite.customShader = cgs.media.selectShader;
-				sprite.radius = 0.7f + (cg.weaponHolsterSelection == w ? 0.1f : 0);
-				sprite.shaderRGBA[0] = 255;
-				sprite.shaderRGBA[1] = 255;
-				sprite.shaderRGBA[2] = 255;
-				sprite.shaderRGBA[3] = 255;
-				trap_R_AddRefEntityToScene( &sprite );
 			}
 		}
     }
 
-    if (!selected)
+    //Only reset selection if using controller pointer
+    if (!selected && selectorMode == WS_CONTROLLER)
 	{
-    	cg.weaponHolsterSelection = WP_NONE;
+    	cg.weaponSelectorSelection = WP_NONE;
 	}
 }
 

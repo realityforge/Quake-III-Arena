@@ -132,7 +132,7 @@ static void VR_SetMenuItems( void ) {
 	s_VR.sendroll.curvalue		    = trap_Cvar_VariableValue( "vr_sendRollToServer" ) != 0;
 	s_VR.lasersight.curvalue		    = trap_Cvar_VariableValue( "vr_lasersight" ) != 0;
 	s_VR.hapticintensity.curvalue		= trap_Cvar_VariableValue( "vr_hapticIntensity" );
-	s_VR.holster2d.curvalue		    = trap_Cvar_VariableValue( "cg_holsterSimple2DIcons" ) != 0;
+	s_VR.holster2d.curvalue		    = trap_Cvar_VariableValue( "cg_weaponSelectorSimple2DIcons" ) != 0;
     s_VR.bodyscale.curvalue		    = trap_Cvar_VariableValue( "cg_firstPersonBodyScale" );
 
     //GORE
@@ -233,7 +233,7 @@ static void VR_Event( void* ptr, int notification ) {
         break;
 
 	case ID_HOLSTER2D:
-		trap_Cvar_SetValue( "cg_holsterSimple2DIcons", s_VR.holster2d.curvalue);
+		trap_Cvar_SetValue( "cg_weaponSelectorSimple2DIcons", s_VR.holster2d.curvalue);
         break;
 
     case ID_BODYSCALE:

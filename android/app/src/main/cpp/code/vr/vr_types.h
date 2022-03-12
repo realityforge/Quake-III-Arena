@@ -31,4 +31,11 @@ typedef struct {
 	framebuffer_t framebuffers[VRAPI_FRAME_LAYER_EYE_MAX];
 } engine_t;
 
+typedef enum {
+	WS_CONTROLLER,
+	WS_HMD,
+	WS_ALTKEY,
+	WS_PREVNEXT
+} weaponSelectorType_t;
+
 #endif

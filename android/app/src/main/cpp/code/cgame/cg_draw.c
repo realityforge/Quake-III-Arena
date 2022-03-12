@@ -2841,7 +2841,7 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 	VectorCopy( baseOrg, cg.refdef.vieworg );
 
 	//Don't draw HUD whilst selecting the weapon with the holster (it gets in the way)
-	if (cg.weaponHolsterTime == 0)
+	if (cg.weaponSelectorTime == 0)
     {
         // draw status bar and other floating elements
         hudStereoView = stereoView;

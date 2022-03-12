@@ -46,7 +46,7 @@ CONTROLS OPTIONS MENU
 #define ID_SNAPTURN				131
 #define ID_RIGHTHANDED			132
 #define ID_WEAPONPITCH			133
-#define ID_ALTKEY				134
+#define ID_WEAPONSELECTORMODE	134
 
 #define ID_BACK					135
 
@@ -67,7 +67,7 @@ typedef struct {
 	menulist_s          snapturn;
 	menuradiobutton_s	righthanded;
 	menuslider_s 		weaponpitch;
-	menuradiobutton_s	altkey;
+	menulist_s			weaponselectormode;
 
 	menubitmap_s		back;
 } controls3_t;
@@ -83,7 +83,7 @@ static void Controls3_SetMenuItems( void ) {
 	s_controls3.snapturn.curvalue			= (int)trap_Cvar_VariableValue( "vr_snapturn" ) / 45;
 	s_controls3.righthanded.curvalue		= trap_Cvar_VariableValue( "vr_righthanded" ) != 0;
     s_controls3.weaponpitch.curvalue		= trap_Cvar_VariableValue( "vr_weaponPitch" )  + 25;
-    s_controls3.altkey.curvalue			    = trap_Cvar_VariableValue( "vr_altKeyEnabled" ) != 0;
+    s_controls3.weaponselectormode.curvalue	= (int)trap_Cvar_VariableValue( "vr_weaponSelectorMode" ) % 4;
 }
 
 
@@ -121,8 +121,33 @@ static void Controls3_MenuEvent( void* ptr, int notification ) {
         trap_Cvar_SetValue( "vr_weaponPitch", s_controls3.weaponpitch.curvalue - 25 );
         break;
 
-    case ID_ALTKEY:
-        trap_Cvar_SetValue( "vr_altKeyEnabled", s_controls3.altkey.curvalue );
+    case ID_WEAPONSELECTORMODE:
+		{
+			switch (s_controls3.weaponselectormode.curvalue)
+			{
+				case 0: //Controller
+					trap_Cvar_Set( "vr_button_map_PRIMARYGRIP", "+weapon_select");
+					trap_Cvar_Set( "vr_button_map_RTHUMBFORWARD", "");
+					trap_Cvar_Set( "vr_button_map_RTHUMBBACK", "uturn");
+					break;
+				case 1: //HMD
+					trap_Cvar_Set( "vr_button_map_PRIMARYGRIP", "+weapon_select");
+					trap_Cvar_Set( "vr_button_map_RTHUMBFORWARD", "");
+					trap_Cvar_Set( "vr_button_map_RTHUMBBACK", "uturn");
+					break;
+				case 2: //Alt-Key bindings
+					trap_Cvar_Set( "vr_button_map_PRIMARYGRIP", "+alt");
+					trap_Cvar_Set( "vr_button_map_RTHUMBFORWARD", "");
+					trap_Cvar_Set( "vr_button_map_RTHUMBBACK", "uturn");
+					break;
+				case 3: //Thumbstick
+					trap_Cvar_Set( "vr_button_map_PRIMARYGRIP", "");
+					trap_Cvar_Set( "vr_button_map_RTHUMBFORWARD", "weapnext");
+					trap_Cvar_Set( "vr_button_map_RTHUMBBACK", "weapprev");
+					break;
+			}
+		}
+        trap_Cvar_SetValue( "vr_weaponSelectorMode", s_controls3.weaponselectormode.curvalue );
         break;
 
 	case ID_BACK:
@@ -146,6 +171,15 @@ static void Controls3_MenuInit( void ) {
 					"Smooth Turning",
 					"45 Degrees",
 					"90 Degrees",
+					NULL
+			};
+
+	static const char *s_weaponselectormode[] =
+			{
+					"Controller Weapon Selector",
+					"HMD Weapon Wheel",
+					"Alt-Key Bindings",
+					"Thumbstick Forward/Back",
 					NULL
 			};
 
@@ -248,14 +282,16 @@ static void Controls3_MenuInit( void ) {
 	s_controls3.weaponpitch.minvalue		     = 0;
 	s_controls3.weaponpitch.maxvalue		     = 30;
 
-    y += BIGCHAR_HEIGHT+2;
-	s_controls3.altkey.generic.type	    	 = MTYPE_RADIOBUTTON;
-	s_controls3.altkey.generic.x			 = VR_X_POS;
-    s_controls3.altkey.generic.y			 = y;
-	s_controls3.altkey.generic.flags	 	= QMF_PULSEIFFOCUS|QMF_SMALLFONT;
-	s_controls3.altkey.generic.name	    	 = "ALT Layout Trigger:";
-	s_controls3.altkey.generic.id 	     	= ID_ALTKEY;
-	s_controls3.altkey.generic.callback  	= Controls3_MenuEvent;
+	y += BIGCHAR_HEIGHT+2;
+	s_controls3.weaponselectormode.generic.type			= MTYPE_SPINCONTROL;
+	s_controls3.weaponselectormode.generic.flags			= QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+	s_controls3.weaponselectormode.generic.x				= VR_X_POS;
+	s_controls3.weaponselectormode.generic.y				= y;
+	s_controls3.weaponselectormode.generic.name			= "Weapon Selector Mode:";
+	s_controls3.weaponselectormode.generic.callback		= Controls3_MenuEvent;
+	s_controls3.weaponselectormode.generic.id				= ID_WEAPONSELECTORMODE;
+	s_controls3.weaponselectormode.itemnames	        	= s_weaponselectormode;
+	s_controls3.weaponselectormode.numitems				= 4;
 
 	s_controls3.back.generic.type	    = MTYPE_BITMAP;
 	s_controls3.back.generic.name     = ART_BACK0;
@@ -279,7 +315,7 @@ static void Controls3_MenuInit( void ) {
 	Menu_AddItem( &s_controls3.menu, &s_controls3.snapturn );
 	Menu_AddItem( &s_controls3.menu, &s_controls3.righthanded );
 	Menu_AddItem( &s_controls3.menu, &s_controls3.weaponpitch );
-	Menu_AddItem( &s_controls3.menu, &s_controls3.altkey );
+	Menu_AddItem( &s_controls3.menu, &s_controls3.weaponselectormode );
 
 	Menu_AddItem( &s_controls3.menu, &s_controls3.back );
 

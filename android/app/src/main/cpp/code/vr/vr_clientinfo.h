@@ -50,6 +50,8 @@ typedef struct {
     vec3_t offhandoffset_last[2];
     vec3_t offhandposition;
 
+    vec2_t thumbstick_location;
+
     //////////////////////////////////////
     //    Test stuff for weapon alignment
     //////////////////////////////////////
