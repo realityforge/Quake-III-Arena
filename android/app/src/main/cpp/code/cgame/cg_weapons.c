@@ -2058,19 +2058,17 @@ void CG_DrawWeaponSelector( void )
 
     const int selectorMode = (int)trap_Cvar_VariableValue("vr_weaponSelectorMode");
     float DEPTH = 5.0f;
-    float RAD = 5.0f;
+    float RAD = 4.0f;
+	float SCALE = 0.05f;
 
     if (selectorMode == WS_HMD) // HMD locked
     {
         VectorCopy(vr->hmdorientation, cg.weaponSelectorAngles);
         VectorCopy(vr->hmdposition, cg.weaponSelectorOrigin);
         VectorClear(cg.weaponSelectorOffset);
-        DEPTH = 7.0f;
-        RAD = 4.0f;
+        DEPTH = 7.5f; // push a bit further away from the HMD origin
     }
 
-    float SCALE = 0.05f;
-	const float SEP = 360.0f / (WP_NUM_WEAPONS - 2); // Exclude grappling hook
 	float frac = (cg.time - cg.weaponSelectorTime) / (20 * DEPTH);
 	if (frac > 1.0f) frac = 1.0f;
 
@@ -2089,7 +2087,7 @@ void CG_DrawWeaponSelector( void )
 	}
 	else
 	{
-		VectorMA(holsterOrigin, -2.0f, holsterUp, holsterOrigin);
+		VectorMA(holsterOrigin, -3.0f, holsterUp, holsterOrigin);
 	}
 
 	VectorCopy(holsterOrigin, beamOrigin);
@@ -2146,10 +2144,17 @@ void CG_DrawWeaponSelector( void )
 		}
     }
 
+#define IGNORE_ANGLE -999.0f
+#ifdef MISSIONPACK
+	float rollAngles[WP_NUM_WEAPONS] = {IGNORE_ANGLE, 30.0f, 60.0f, 90.0f, 120.0f, 150.0f, 180.0f, 210.0f, 240.0f, 270.0f, IGNORE_ANGLE, 300.0f, 330.0f, 0.0f};
+#else
+	float rollAngles[WP_NUM_WEAPONS] = {IGNORE_ANGLE, 18.0f, 54.0f, 90.0f, 135.0f, 180.0f, 225.0f, 270.0f, 306.0f, 342.0f, IGNORE_ANGLE};
+#endif
+
     qboolean selected = qfalse;
-	int w = 1;
-    for (int c = 0; c < WP_NUM_WEAPONS-2; ++c, ++w)
+    for (int c = 0; c < WP_NUM_WEAPONS-1; ++c)
     {
+        int w = c+1;
         if (w == WP_GRAPPLING_HOOK)
         {
             continue;
@@ -2165,19 +2170,19 @@ void CG_DrawWeaponSelector( void )
             VectorClear(angles);
             angles[YAW] = holsterAngles[YAW];
             angles[PITCH] = holsterAngles[PITCH];
-            angles[ROLL] = AngleNormalize360((w * SEP));
+            angles[ROLL] = rollAngles[w];
             vec3_t forward, up;
             AngleVectors(angles, forward, NULL, up);
 
             VectorMA(holsterOrigin, (RAD*frac), up, iconOrigin);
-            VectorMA(iconOrigin, 0.1f, forward, iconBackground);
-            VectorMA(iconOrigin, -0.1f, forward, iconForeground);
+            VectorMA(iconOrigin, 0.2f, forward, iconBackground);
+            VectorMA(iconOrigin, -0.2f, forward, iconForeground);
 
             //Float sprite above selected weapon
             vec3_t diff;
             VectorSubtract(selectorOrigin, iconOrigin, diff);
             float length = VectorLength(diff);
-            if (length <= 1.5f &&
+            if (length <= 1.2f &&
                 frac == 1.0f &&
                 selectable)
             {
