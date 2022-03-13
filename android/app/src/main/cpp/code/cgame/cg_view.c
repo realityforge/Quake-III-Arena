@@ -260,7 +260,8 @@ static void CG_OffsetVRThirdPersonView( void ) {
 		//Move camera if the user is pushing thumbstick
 		vec3_t angles, forward, right, up;
 		VectorCopy(vr->offhandangles, angles);
-		angles[YAW] += (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]);
+        float deltaYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]);
+		angles[YAW] += deltaYaw + (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]);
 		AngleVectors(angles, forward, right, up);
 		VectorMA(cg.vr_vieworigin, vr->thumbstick_location[THUMB_LEFT][1] * 5.0f, forward, cg.vr_vieworigin);
 		VectorMA(cg.vr_vieworigin, vr->thumbstick_location[THUMB_LEFT][0] * 5.0f, right, cg.vr_vieworigin);
