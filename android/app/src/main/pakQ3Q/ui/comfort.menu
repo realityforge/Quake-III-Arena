@@ -86,7 +86,7 @@ itemDef {
 		group grpComfort
       		type ITEM_TYPE_SLIDER
 		text "Haptic Intensity:"
-		cvarfloat "vr_hudYOffset" 0.2 0 1
+		cvarfloat "vr_hapticIntensity" 0.2 0 1
 		rect 99 225 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
