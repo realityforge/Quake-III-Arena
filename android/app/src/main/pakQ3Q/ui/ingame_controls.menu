@@ -4,7 +4,7 @@
 \\ SETUP MENU \\
 
 menuDef {
-    	name "ingame_controls3"
+    	name "ingame_controls"
     	visible 0
     	fullscreen 0
 			outOfBoundsClick			// this closes the window if it gets a click out of the rectangle
@@ -160,8 +160,8 @@ itemDef {
 
 
 itemDef {
-      		name controls3
-		group grpControls3
+      		name controls
+		group grpControls
 		type ITEM_TYPE_YESNO
 		text "Autoswitch Weapons:"
 		cvar "cg_autoswitch"
@@ -175,8 +175,8 @@ itemDef {
     		}
 
 	itemDef {
-      		name controls3
-		group grpControls3
+      		name controls
+		group grpControls
       		type ITEM_TYPE_YESNO
 		text "Railgun Scope:"
 		cvar "vr_weaponScope"
@@ -189,8 +189,8 @@ itemDef {
       		visible 1 
     		}
 	itemDef {
-      		name controls3
-		group grpControls3
+      		name controls
+		group grpControls
       		type ITEM_TYPE_YESNO
 		text "Two-Handed Weapons:"
 		cvar "vr_twoHandedWeapons"
@@ -204,8 +204,8 @@ itemDef {
     		}
 	
 	itemDef {
-      		name controls3
-		group grpControls3
+      		name controls
+		group grpControls
       		type ITEM_TYPE_MULTI
 		text "Direction Mode:"
 		cvar "vr_directionMode"
@@ -220,8 +220,8 @@ itemDef {
     		}
 
 	itemDef {
-      		name controls3
-		group grpControls3
+      		name controls
+		group grpControls
 		text "Turning Mode:"
 		cvar "vr_snapturn"
 		cvarFloatList { "Smooth Turning" 0 "45 Degrees" 45 "90 Degrees" 90 }
@@ -235,8 +235,8 @@ itemDef {
     		}
 
 	itemDef {
-      		name controls3
-		group grpControls3
+      		name controls
+		group grpControls
       		type ITEM_TYPE_YESNO
 		text "Right-Handed:"
 		cvar "vr_righthanded"
@@ -250,8 +250,8 @@ itemDef {
     		}
 
 	itemDef {
-      		name controls3
-		group grpControls3
+      		name controls
+		group grpControls
       		type ITEM_TYPE_SLIDER
 		text "Weapon Pitch:"
 		cvarfloat "vr_weaponPitch" 5 -25 5
@@ -265,12 +265,12 @@ itemDef {
     		}
 
 	itemDef {
-      		name controls3
-		group grpControls3
+      		name controls
+		group grpControls
       		type ITEM_TYPE_MULTI
 		text "Weapon Selector Mode:"
 		cvar "vr_weaponSelectorMode"
-		cvarFloatList { "Controller Weapon Selector" 0 "HMD Weapon Wheel" 1 "Alt-Key Bindings" 2 "Thumbstick Forward/Back" 3 }
+		cvarFloatList { "Controller Weapon Selector" 0 "HMD Weapon Wheel" 1 }
 		rect 30 160 200 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 143
@@ -281,8 +281,8 @@ itemDef {
     		}
 	
 	itemDef {
-      		name controls3
-		group grpControls3
+      		name controls
+		group grpControls
       	style 1
 		text "Comfort Options"
 		rect 100 195 100 20
@@ -295,8 +295,8 @@ itemDef {
     		}
 
 	itemDef {
-      		name controls3
-		group grpControls3
+      		name controls
+		group grpControls
       		type ITEM_TYPE_SLIDER
 		text "Comfort Vignette:"
 		cvarfloat "vr_comfortVignette" 0.2 0 1
@@ -309,8 +309,8 @@ itemDef {
       		visible 1 
     		}
 	itemDef {
-      		name controls3
-		group grpControls3
+      		name controls
+		group grpControls
       		type ITEM_TYPE_SLIDER
 		text "Height Adjust:"
 		cvarfloat "vr_heightAdjust" 0.2 0 1
@@ -323,8 +323,8 @@ itemDef {
       		visible 1 
     		}
 	itemDef {
-      		name controls3
-		group grpControls3
+      		name controls
+		group grpControls
       		type ITEM_TYPE_YESNO
 		text "Roll When Hit:"
 		cvar "vr_rollWhenHit"
@@ -337,11 +337,11 @@ itemDef {
       		visible 1 
     		}
 itemDef {
-      		name controls3				
-		group grpControls3
+      		name controls				
+		group grpControls
       		type ITEM_TYPE_SLIDER
 		text "Haptic Intensity:"
-		cvarfloat "vr_hudYOffset" 0.2 0 1
+		cvarfloat "vr_hapticIntensity" 0.2 0 1
 		rect 30 280 200 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 143
@@ -351,8 +351,8 @@ itemDef {
       		visible 1 
     		}
 itemDef {
-      		name controls3				
-		group grpControls3
+      		name controls				
+		group grpControls
       		type ITEM_TYPE_MULTI
 		text "HUD Depth:"
 		cvar "vr_hudDepth"
@@ -366,8 +366,8 @@ itemDef {
       		visible 1 
     		}
 itemDef {
-      		name controls3				
-		group grpControls3
+      		name controls				
+		group grpControls
       		type ITEM_TYPE_SLIDER
 		text "HUD Y Offset:"
 		cvarfloat "vr_hudYOffset" 20 -200 200
