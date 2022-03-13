@@ -2355,6 +2355,18 @@ void CG_DrawWeaponSelector( void )
 	{
     	cg.weaponSelectorSelection = WP_NONE;
 	}
+
+	// In case HMD weapon selector was invoked by thumbstick axis, thumbstick
+	// is centered select weapon (if any selected) and close the selector
+	if (selectorMode == WS_HMD && vr->weapon_select_autoclose && frac > 0.25f) {
+	    if (x > -0.1f && x < 0.1f && y > -0.1f && y < 0.1f) {
+	        if (selected) {
+	            cg.weaponSelect = cg.weaponSelectorSelection;
+	        }
+	    	vr->weapon_select = qfalse;
+            vr->weapon_select_autoclose = qfalse;
+	    }
+	}
 }
 
 /*
