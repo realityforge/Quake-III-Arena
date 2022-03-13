@@ -241,8 +241,8 @@ static void Controls3_MenuInit( void ) {
 
 	static const char *s_controlschema[] =
 			{
-					"Primary",
-					"Secondary",
+					"Default (Weapon Selector on Right Grip)",
+					"Alternative (Weapon Selector on Right Thumbstick)",
 					NULL
 			};
 
