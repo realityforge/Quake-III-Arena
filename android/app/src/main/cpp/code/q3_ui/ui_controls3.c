@@ -47,8 +47,10 @@ CONTROLS OPTIONS MENU
 #define ID_RIGHTHANDED			132
 #define ID_WEAPONPITCH			133
 #define ID_WEAPONSELECTORMODE	134
+#define ID_UTURN				135
+#define ID_CONTROLSCHEMA		136
 
-#define ID_BACK					135
+#define ID_BACK					137
 
 #define	NUM_DIRECTIONMODE		2
 
@@ -65,9 +67,11 @@ typedef struct {
 	menuradiobutton_s	twohanded;
 	menulist_s          directionmode;
 	menulist_s          snapturn;
+	menuradiobutton_s   uturn;
 	menuradiobutton_s	righthanded;
 	menuslider_s 		weaponpitch;
 	menulist_s			weaponselectormode;
+	menulist_s          controlschema;
 
 	menubitmap_s		back;
 } controls3_t;
@@ -81,9 +85,11 @@ static void Controls3_SetMenuItems( void ) {
     s_controls3.twohanded.curvalue		    = trap_Cvar_VariableValue( "vr_twoHandedWeapons" ) != 0;
 	s_controls3.directionmode.curvalue		= (int)trap_Cvar_VariableValue( "vr_directionMode" )  % NUM_DIRECTIONMODE;
 	s_controls3.snapturn.curvalue			= (int)trap_Cvar_VariableValue( "vr_snapturn" ) / 45;
+	s_controls3.uturn.curvalue				= trap_Cvar_VariableValue( "vr_uturn" ) != 0;
 	s_controls3.righthanded.curvalue		= trap_Cvar_VariableValue( "vr_righthanded" ) != 0;
     s_controls3.weaponpitch.curvalue		= trap_Cvar_VariableValue( "vr_weaponPitch" )  + 25;
-    s_controls3.weaponselectormode.curvalue	= (int)trap_Cvar_VariableValue( "vr_weaponSelectorMode" ) % 4;
+    s_controls3.weaponselectormode.curvalue	= (int)trap_Cvar_VariableValue( "vr_weaponSelectorMode" ) % 2;
+    s_controls3.controlschema.curvalue		= (int)trap_Cvar_VariableValue( "vr_controlSchema" ) % 2;
 }
 
 
@@ -122,32 +128,84 @@ static void Controls3_MenuEvent( void* ptr, int notification ) {
         break;
 
     case ID_WEAPONSELECTORMODE:
+        trap_Cvar_SetValue( "vr_weaponSelectorMode", s_controls3.weaponselectormode.curvalue );
+        break;
+
+    case ID_UTURN:
 		{
-			switch (s_controls3.weaponselectormode.curvalue)
+			if (s_controls3.uturn.curvalue) {
+				if (s_controls3.controlschema.curvalue == 0) {
+					trap_Cvar_Set("vr_button_map_RTHUMBBACK", "uturn");
+				} else {
+					trap_Cvar_Set("vr_button_map_RTHUMBBACK_ALT", "uturn");
+				}
+			} else {
+				if (s_controls3.controlschema.curvalue == 0) {
+					trap_Cvar_Set("vr_button_map_RTHUMBBACK", "");
+				} else {
+					trap_Cvar_Set("vr_button_map_RTHUMBBACK_ALT", "");
+				}
+        	}
+        }
+        trap_Cvar_SetValue( "vr_uturn", s_controls3.uturn.curvalue );
+        break;
+
+    case ID_CONTROLSCHEMA:
+		{
+			switch (s_controls3.controlschema.curvalue)
 			{
-				case 0: //Controller
-					trap_Cvar_Set( "vr_button_map_PRIMARYGRIP", "+weapon_select");
-					trap_Cvar_Set( "vr_button_map_RTHUMBFORWARD", "");
-					trap_Cvar_Set( "vr_button_map_RTHUMBBACK", "uturn");
+				case 0: // Default schema
+					trap_Cvar_Set("vr_button_map_RTHUMBLEFT", ""); // empty ~ turn left
+					trap_Cvar_Set("vr_button_map_RTHUMBRIGHT", ""); // empty ~ turn right
+					trap_Cvar_Set("vr_button_map_RTHUMBFORWARD", "weapnext"); // next weapon
+					if (s_controls3.uturn.curvalue) {
+						trap_Cvar_Set("vr_button_map_RTHUMBBACK", "uturn"); // u-turn
+					} else {
+						trap_Cvar_Set("vr_button_map_RTHUMBBACK", "weapprev"); // previous weapon
+					}
+					trap_Cvar_Set("vr_button_map_PRIMARYGRIP", "+weapon_select"); // weapon selector
+					trap_Cvar_Set("vr_button_map_PRIMARYTHUMBSTICK", ""); // unmapped
+					trap_Cvar_Set("vr_button_map_RTHUMBFORWARD_ALT", ""); // unmapped
+					trap_Cvar_Set("vr_button_map_RTHUMBFORWARDRIGHT", ""); // unmapped
+					trap_Cvar_Set("vr_button_map_RTHUMBFORWARDRIGHT_ALT", ""); // unmapped
+					trap_Cvar_Set("vr_button_map_RTHUMBRIGHT_ALT", ""); // unmapped
+					trap_Cvar_Set("vr_button_map_RTHUMBBACKRIGHT", ""); // unmapped
+					trap_Cvar_Set("vr_button_map_RTHUMBBACKRIGHT_ALT", ""); // unmapped
+					trap_Cvar_Set("vr_button_map_RTHUMBBACK_ALT", ""); // unmapped
+					trap_Cvar_Set("vr_button_map_RTHUMBBACKLEFT", ""); // unmapped
+					trap_Cvar_Set("vr_button_map_RTHUMBBACKLEFT_ALT", ""); // unmapped
+					trap_Cvar_Set("vr_button_map_RTHUMBLEFT_ALT", ""); // unmapped
+					trap_Cvar_Set("vr_button_map_RTHUMBFORWARDLEFT", ""); // unmapped
+					trap_Cvar_Set("vr_button_map_RTHUMBFORWARDLEFT_ALT", ""); // unmapped
 					break;
-				case 1: //HMD
-					trap_Cvar_Set( "vr_button_map_PRIMARYGRIP", "+weapon_select");
-					trap_Cvar_Set( "vr_button_map_RTHUMBFORWARD", "");
-					trap_Cvar_Set( "vr_button_map_RTHUMBBACK", "uturn");
-					break;
-				case 2: //Alt-Key bindings
-					trap_Cvar_Set( "vr_button_map_PRIMARYGRIP", "+alt");
-					trap_Cvar_Set( "vr_button_map_RTHUMBFORWARD", "");
-					trap_Cvar_Set( "vr_button_map_RTHUMBBACK", "uturn");
-					break;
-				case 3: //Thumbstick
-					trap_Cvar_Set( "vr_button_map_PRIMARYGRIP", "");
-					trap_Cvar_Set( "vr_button_map_RTHUMBFORWARD", "weapnext");
-					trap_Cvar_Set( "vr_button_map_RTHUMBBACK", "weapprev");
+				default: // Now we have only two schemas
+					// All directions as weapon select (useful for HMD wheel)
+					trap_Cvar_Set("vr_button_map_RTHUMBFORWARD", "+weapon_select");
+					trap_Cvar_Set("vr_button_map_RTHUMBFORWARDRIGHT", "+weapon_select");
+					trap_Cvar_Set("vr_button_map_RTHUMBRIGHT", "+weapon_select");
+					trap_Cvar_Set("vr_button_map_RTHUMBBACKRIGHT", "+weapon_select");
+					trap_Cvar_Set("vr_button_map_RTHUMBBACK", "+weapon_select");
+					trap_Cvar_Set("vr_button_map_RTHUMBBACKLEFT", "+weapon_select");
+					trap_Cvar_Set("vr_button_map_RTHUMBLEFT", "+weapon_select");
+					trap_Cvar_Set("vr_button_map_RTHUMBFORWARDLEFT", "+weapon_select");
+					trap_Cvar_Set("vr_button_map_PRIMARYTHUMBSTICK", "+weapon_select");
+					trap_Cvar_Set("vr_button_map_PRIMARYGRIP", "+alt"); // switch to alt layout
+					trap_Cvar_Set("vr_button_map_RTHUMBLEFT_ALT", ""); // empty ~ turn left
+					trap_Cvar_Set("vr_button_map_RTHUMBRIGHT_ALT", ""); // empty ~ turn right
+					trap_Cvar_Set("vr_button_map_RTHUMBFORWARD_ALT", "weapnext");
+					if (s_controls3.uturn.curvalue) {
+						trap_Cvar_Set("vr_button_map_RTHUMBBACK_ALT", "uturn");
+					} else {
+						trap_Cvar_Set("vr_button_map_RTHUMBBACK_ALT", "weapprev");
+					}
+					trap_Cvar_Set("vr_button_map_RTHUMBFORWARDRIGHT_ALT", ""); // unmapped
+					trap_Cvar_Set("vr_button_map_RTHUMBBACKRIGHT_ALT", ""); // unmapped
+					trap_Cvar_Set("vr_button_map_RTHUMBBACKLEFT_ALT", ""); // unmapped
+					trap_Cvar_Set("vr_button_map_RTHUMBFORWARDLEFT_ALT", ""); // unmapped
 					break;
 			}
 		}
-        trap_Cvar_SetValue( "vr_weaponSelectorMode", s_controls3.weaponselectormode.curvalue );
+        trap_Cvar_SetValue( "vr_controlSchema", s_controls3.controlschema.curvalue );
         break;
 
 	case ID_BACK:
@@ -178,8 +236,13 @@ static void Controls3_MenuInit( void ) {
 			{
 					"Controller Weapon Selector",
 					"HMD Weapon Wheel",
-					"Alt-Key Bindings",
-					"Thumbstick Forward/Back",
+					NULL
+			};
+
+	static const char *s_controlschema[] =
+			{
+					"Primary",
+					"Secondary",
 					NULL
 			};
 
@@ -213,7 +276,7 @@ static void Controls3_MenuInit( void ) {
 	s_controls3.framer.width  	   = 256;
 	s_controls3.framer.height  	   = 334;
 
-	y = 162;
+	y = 126;
 	s_controls3.autoswitch.generic.type      = MTYPE_RADIOBUTTON;
 	s_controls3.autoswitch.generic.flags	    = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
 	s_controls3.autoswitch.generic.name	    = "Autoswitch Weapons:";
@@ -263,6 +326,15 @@ static void Controls3_MenuInit( void ) {
 	s_controls3.snapturn.numitems				= 3;
 
 	y += BIGCHAR_HEIGHT+2;
+	s_controls3.uturn.generic.type			= MTYPE_RADIOBUTTON;
+	s_controls3.uturn.generic.flags			= QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+	s_controls3.uturn.generic.x				= VR_X_POS;
+	s_controls3.uturn.generic.y				= y;
+	s_controls3.uturn.generic.name			= "Quick U-Turn:";
+	s_controls3.uturn.generic.callback		= Controls3_MenuEvent;
+	s_controls3.uturn.generic.id				= ID_UTURN;
+
+	y += BIGCHAR_HEIGHT+2;
 	s_controls3.righthanded.generic.type        = MTYPE_RADIOBUTTON;
 	s_controls3.righthanded.generic.name	      = "Right-Handed:";
 	s_controls3.righthanded.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
@@ -291,7 +363,18 @@ static void Controls3_MenuInit( void ) {
 	s_controls3.weaponselectormode.generic.callback		= Controls3_MenuEvent;
 	s_controls3.weaponselectormode.generic.id				= ID_WEAPONSELECTORMODE;
 	s_controls3.weaponselectormode.itemnames	        	= s_weaponselectormode;
-	s_controls3.weaponselectormode.numitems				= 4;
+	s_controls3.weaponselectormode.numitems				= 2;
+
+	y += BIGCHAR_HEIGHT+2;
+	s_controls3.controlschema.generic.type			= MTYPE_SPINCONTROL;
+	s_controls3.controlschema.generic.flags			= QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+	s_controls3.controlschema.generic.x				= VR_X_POS;
+	s_controls3.controlschema.generic.y				= y;
+	s_controls3.controlschema.generic.name			= "Control Schema:";
+	s_controls3.controlschema.generic.callback		= Controls3_MenuEvent;
+	s_controls3.controlschema.generic.id				= ID_CONTROLSCHEMA;
+	s_controls3.controlschema.itemnames	        	= s_controlschema;
+	s_controls3.controlschema.numitems				= 2;
 
 	s_controls3.back.generic.type	    = MTYPE_BITMAP;
 	s_controls3.back.generic.name     = ART_BACK0;
@@ -313,9 +396,11 @@ static void Controls3_MenuInit( void ) {
 	Menu_AddItem( &s_controls3.menu, &s_controls3.twohanded );
 	Menu_AddItem( &s_controls3.menu, &s_controls3.directionmode );
 	Menu_AddItem( &s_controls3.menu, &s_controls3.snapturn );
+	Menu_AddItem( &s_controls3.menu, &s_controls3.uturn );
 	Menu_AddItem( &s_controls3.menu, &s_controls3.righthanded );
 	Menu_AddItem( &s_controls3.menu, &s_controls3.weaponpitch );
 	Menu_AddItem( &s_controls3.menu, &s_controls3.weaponselectormode );
+	Menu_AddItem( &s_controls3.menu, &s_controls3.controlschema );
 
 	Menu_AddItem( &s_controls3.menu, &s_controls3.back );
 
