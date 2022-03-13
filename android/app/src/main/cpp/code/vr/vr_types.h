@@ -38,4 +38,11 @@ typedef enum {
 	WS_PREVNEXT
 } weaponSelectorType_t;
 
+typedef enum {
+    VRFM_THIRDPERSON,		//Camera will auto move to keep up with player
+	VRFM_THIRDPERSON_2,		//Camera is completely free movement with the thumbstick
+    VRFM_FIRSTPERSON,		//Obvious isn't it?..
+    VRFM_NUM_FOLLOWMODES
+} vrFollowMode_t;
+
 #endif

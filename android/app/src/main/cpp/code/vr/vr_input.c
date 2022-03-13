@@ -463,11 +463,8 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
     char action[256];
 	vrController_t* controller = isRightController == qtrue ? &rightController : &leftController;
 
-	if (isRightController)
-    {
-	    vr.thumbstick_location[0] = joystickX;
-	    vr.thumbstick_location[1] = joystickY;
-    }
+    vr.thumbstick_location[isRightController][0] = joystickX;
+    vr.thumbstick_location[isRightController][1] = joystickY;
 
 	if (vr.virtual_screen ||
             cl.snap.ps.pm_type == PM_INTERMISSION)
@@ -995,7 +992,7 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
         if (cl.snap.ps.pm_flags & PMF_FOLLOW)
         {
             //Switch follow mode
-            vr.follow_mode = 1 - vr.follow_mode;
+            vr.follow_mode = (vr.follow_mode+1) % VRFM_NUM_FOLLOWMODES;
         }
         else
         {

@@ -226,8 +226,10 @@ CG_OffsetVRThirdPersonView
 */
 static void CG_OffsetVRThirdPersonView( void ) {
     float scale = 1.0f;
-    
- 	if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON))
+
+    //Follow mode 1
+ 	if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW &&
+							 vr->follow_mode == VRFM_THIRDPERSON))
 	{
 		scale *= SPECTATOR_WORLDSCALE_MULTIPLIER;
 		
@@ -248,11 +250,20 @@ static void CG_OffsetVRThirdPersonView( void ) {
 			VectorMA( cg.vr_vieworigin, -60, forward, cg.vr_vieworigin );
 		}
 	}
-	else if (( cg.predictedPlayerState.stats[STAT_HEALTH] <= 0 ) &&
-        ( cg.predictedPlayerState.pm_type != PM_INTERMISSION ))
+	//Death or follow mode 2
+	else if ((( cg.predictedPlayerState.stats[STAT_HEALTH] <= 0 ) &&
+        ( cg.predictedPlayerState.pm_type != PM_INTERMISSION )) ||
+			(cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON_2))
     {
-        scale *= DEATH_WORLDSCALE_MULTIPLIER;
-		VectorCopy(cg.refdef.vieworg, cg.vr_vieworigin);
+        scale *= SPECTATOR2_WORLDSCALE_MULTIPLIER;
+
+		//Move camera if the user is pushing thumbstick
+		vec3_t angles, forward, right, up;
+		VectorCopy(vr->offhandangles, angles);
+		angles[YAW] += (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]);
+		AngleVectors(angles, forward, right, up);
+		VectorMA(cg.vr_vieworigin, vr->thumbstick_location[THUMB_LEFT][1] * 5.0f, forward, cg.vr_vieworigin);
+		VectorMA(cg.vr_vieworigin, vr->thumbstick_location[THUMB_LEFT][0] * 5.0f, right, cg.vr_vieworigin);
 	}
 
 	{
@@ -664,7 +675,7 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 	trap_Cvar_Set( "vr_noSkybox", (((ps->stats[STAT_HEALTH] <= 0) &&
                                     ( ps->pm_type != PM_INTERMISSION )) ||
                                    cg.demoPlayback ||
-                                   (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON) ? "1" : "0" ));
+                                   CG_IsThirdPersonFollowMode() ? "1" : "0" ));
 
 	// intermission view
 	static float hmdYaw = 0;
@@ -721,21 +732,27 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 
 	if (( cg.predictedPlayerState.stats[STAT_HEALTH] <= 0 ) &&
 		( cg.predictedPlayerState.pm_type != PM_INTERMISSION ) ||
-            ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON)))
+            ( cg.demoPlayback || CG_IsThirdPersonFollowMode()))
 	{
 	    //If dead, or spectating, view the map from above
         CG_OffsetVRThirdPersonView();
     }
-    else if ( cg.renderingThirdPerson )
+    else
     {
-		// back away from character
-		CG_OffsetThirdPersonView();
-	}
-	else
-	{
-		// offset for local bobbing and kicks
-		CG_OffsetFirstPersonView();
-	}
+        if (cg.renderingThirdPerson)
+        {
+            // back away from character
+            CG_OffsetThirdPersonView();
+        }
+        else
+        {
+            // offset for local bobbing and kicks
+            CG_OffsetFirstPersonView();
+        }
+
+        //Reset this in case we die or follow
+        VectorCopy(cg.refdef.vieworg, cg.vr_vieworigin);
+    }
 
     if (!cgs.localServer && stereoView == STEREO_LEFT)
     {
@@ -808,7 +825,7 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
             angles[ROLL] = vr->hmdorientation[ROLL];
             AnglesToAxis( angles, cg.refdef.viewaxis );
 		}
-		else if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON))
+		else if ( cg.demoPlayback || CG_IsThirdPersonFollowMode())
 		{
 			//If we're following someone,
 			vec3_t angles;
@@ -838,7 +855,7 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
 			angles[YAW] = (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]) + vr->weaponangles[YAW];
 			AnglesToAxis(angles, cg.refdef.viewaxis);
 		}
-		else if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON))
+		else if ( cg.demoPlayback || CG_IsThirdPersonFollowMode())
 		{
 			//If we're following someone,
 			vec3_t angles;
@@ -918,6 +935,12 @@ static void CG_PlayBufferedSounds( void ) {
 
 //=========================================================================
 
+qboolean CG_IsThirdPersonFollowMode( void )
+{
+	return 	cg.snap->ps.pm_flags & PMF_FOLLOW &&
+			(vr->follow_mode == VRFM_THIRDPERSON || vr->follow_mode == VRFM_THIRDPERSON_2);
+}
+
 /*
 =================
 CG_DrawActiveFrame
@@ -971,7 +994,7 @@ void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demo
 
 	// decide on third person view
 	cg.renderingThirdPerson = cg.predictedPlayerState.pm_type == PM_SPECTATOR ||
-            cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON) ||
+            cg.demoPlayback || CG_IsThirdPersonFollowMode() ||
 			cg_thirdPerson.integer;
 
 	// build cg.refdef

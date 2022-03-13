@@ -2784,10 +2784,11 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
         //Just move camera down about 20cm
         heightOffset = -0.2f;
     }
-	else if (( cg.snap->ps.stats[STAT_HEALTH] <= 0 ) &&
-			 ( cg.snap->ps.pm_type != PM_INTERMISSION ))
+	else if ((( cg.snap->ps.stats[STAT_HEALTH] <= 0 ) &&
+			 ( cg.snap->ps.pm_type != PM_INTERMISSION )) ||
+			(cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON_2))
 	{
-		worldscale *= DEATH_WORLDSCALE_MULTIPLIER;
+		worldscale *= SPECTATOR2_WORLDSCALE_MULTIPLIER;
 		//Just move camera down about 50cm
 		heightOffset = -0.5f;
 	}
@@ -2812,7 +2813,7 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 		if (cg.snap->ps.stats[STAT_HEALTH] > 0 &&
                 //Don't use fake positional if following another player  - this is handled in  the
                 //VR third person code
-		    !( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON)))
+		    !( cg.demoPlayback || CG_IsThirdPersonFollowMode()))
 		{
 			vec3_t pos, hmdposition, vieworg;
 			VectorClear(pos);

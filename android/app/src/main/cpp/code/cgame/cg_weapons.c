@@ -2110,9 +2110,9 @@ void CG_DrawWeaponSelector( void )
     }
     else //selectorMode == WS_HMD
     {
-        if (length(vr->thumbstick_location[0], vr->thumbstick_location[1]) > 0.95f)
+        if (length(vr->thumbstick_location[THUMB_RIGHT][0], vr->thumbstick_location[THUMB_RIGHT][1]) > 0.95f)
 		{
-			float a = atan2(vr->thumbstick_location[0], vr->thumbstick_location[1]);
+			float a = atan2(vr->thumbstick_location[THUMB_RIGHT][0], vr->thumbstick_location[THUMB_RIGHT][1]);
 			x = sinf(a) * 0.95f;
 			y = cosf(a) * 0.95f;
 		}

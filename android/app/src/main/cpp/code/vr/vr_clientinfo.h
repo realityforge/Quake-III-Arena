@@ -5,10 +5,8 @@
 
 #define NUM_WEAPON_SAMPLES      10
 
-typedef enum {
-    VRFM_THIRDPERSON,
-    VRFM_FIRSTPERSON
-} followMode_t;
+#define THUMB_LEFT  0
+#define THUMB_RIGHT 1
 
 typedef struct {
     qboolean weapon_stabilised;
@@ -18,7 +16,7 @@ typedef struct {
     qboolean right_handed;
     qboolean virtual_screen;
     qboolean local_server; // used in bg_pmove.c
-    followMode_t follow_mode;
+    vrFollowMode_t follow_mode;
     qboolean weapon_select;
     qboolean smooth_turning;
 
@@ -50,7 +48,7 @@ typedef struct {
     vec3_t offhandoffset_last[2];
     vec3_t offhandposition;
 
-    vec2_t thumbstick_location;
+    vec2_t thumbstick_location[2]; //left / right thumbstick locations - used in cgame
 
     //////////////////////////////////////
     //    Test stuff for weapon alignment
