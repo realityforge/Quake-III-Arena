@@ -256,6 +256,12 @@ static void IN_SendButtonAction(const char* action, qboolean pressed)
         {
             vr.weapon_stabilised = pressed;
         }
+        //Special case for moveup as we can send a space key instead allowing us to skip
+        //server search in the server menu
+        else if (strcmp(action, "+moveup") == 0)
+        {
+            Com_QueueEvent(in_vrEventTime, SE_KEY, K_SPACE, pressed, 0, NULL);
+        }
         else if (strcmp(action, "+weapon_select") == 0)
         {
             vr.weapon_select = pressed;
