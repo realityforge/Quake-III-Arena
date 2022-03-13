@@ -2094,6 +2094,15 @@ void CG_DrawWeaponSelector( void )
 	VectorMA(holsterOrigin, ((DEPTH*2.0f)*((selectorMode == WS_CONTROLLER) ? frac : 1.0f)), holsterForward, holsterOrigin);
     VectorCopy(holsterOrigin, selectorOrigin);
 
+    float thumbstickAxisX = 0.0f;
+    float thumbstickAxisY = 0.0f;
+    if (length(vr->thumbstick_location[THUMB_RIGHT][0], vr->thumbstick_location[THUMB_RIGHT][1]) > 0.95f)
+    {
+        float a = atan2(vr->thumbstick_location[THUMB_RIGHT][0], vr->thumbstick_location[THUMB_RIGHT][1]);
+        thumbstickAxisX = sinf(a) * 0.95f;
+        thumbstickAxisY = cosf(a) * 0.95f;
+	}
+
     float x = 0.0f;
     float y = 0.0f;
     if (selectorMode == WS_CONTROLLER)
@@ -2110,12 +2119,8 @@ void CG_DrawWeaponSelector( void )
     }
     else //selectorMode == WS_HMD
     {
-        if (length(vr->thumbstick_location[THUMB_RIGHT][0], vr->thumbstick_location[THUMB_RIGHT][1]) > 0.95f)
-		{
-			float a = atan2(vr->thumbstick_location[THUMB_RIGHT][0], vr->thumbstick_location[THUMB_RIGHT][1]);
-			x = sinf(a) * 0.95f;
-			y = cosf(a) * 0.95f;
-		}
+        x = thumbstickAxisX;
+        y = thumbstickAxisY;
     }
 
 	VectorMA(selectorOrigin, RAD * x, holsterRight, selectorOrigin);
@@ -2356,10 +2361,10 @@ void CG_DrawWeaponSelector( void )
     	cg.weaponSelectorSelection = WP_NONE;
 	}
 
-	// In case HMD weapon selector was invoked by thumbstick axis, thumbstick
-	// is centered select weapon (if any selected) and close the selector
-	if (selectorMode == WS_HMD && vr->weapon_select_autoclose && frac > 0.25f) {
-	    if (x > -0.1f && x < 0.1f && y > -0.1f && y < 0.1f) {
+	// In case was invoked by thumbstick axis and thumbstick is centered
+	// select weapon (if any selected) and close the selector
+	if (vr->weapon_select_autoclose && frac > 0.25f) {
+	    if (thumbstickAxisX > -0.1f && thumbstickAxisX < 0.1f && thumbstickAxisY > -0.1f && thumbstickAxisY < 0.1f) {
 	        if (selected) {
 	            cg.weaponSelect = cg.weaponSelectorSelection;
 	        }
