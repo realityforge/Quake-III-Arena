@@ -37,7 +37,7 @@ CONTROLS OPTIONS MENU
 #define ART_BACK0				"menu/art/back_0"
 #define ART_BACK1				"menu/art/back_1"
 
-#define VR_X_POS		360
+#define VR_X_POS		260
 
 #define ID_AUTOSWITCH			127
 #define ID_SCOPE				128
