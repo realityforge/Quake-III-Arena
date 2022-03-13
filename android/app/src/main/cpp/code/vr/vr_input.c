@@ -351,21 +351,25 @@ void VR_HapticEvent(const char* event, int position, int flags, int intensity, f
 static qboolean IN_GetButtonAction(const char* button, char* action)
 {
     char cvarname[256];
-    Com_sprintf(cvarname, 256, "vr_button_map_%s%s", button, alt_key_mode_active ? "_ALT" : "");
+    if (alt_key_mode_active) {
+        Com_sprintf(cvarname, 256, "vr_button_map_%s_ALT", button);
+    } else {
+        Com_sprintf(cvarname, 256, "vr_button_map_%s", button);
+    }
+
     char * val = Cvar_VariableString(cvarname);
     if (val && strlen(val) > 0)
     {
         Com_sprintf(action, 256, "%s", val);
         return qtrue;
     }
-
-    //If we didn't find something for this button and the alt key is active, then see if the un-alt key has a function
-    if (alt_key_mode_active)
+    else if (alt_key_mode_active)
     {
+        // No action found for buttom ALT mapping. Check if we are not
+        // holding ALT key itself (there is no ALT function for ALT)
         Com_sprintf(cvarname, 256, "vr_button_map_%s", button);
         char * val = Cvar_VariableString(cvarname);
-        if (val && strlen(val) > 0)
-        {
+        if (val && strcmp(val, "+alt") == 0) {
             Com_sprintf(action, 256, "%s", val);
             return qtrue;
         }
