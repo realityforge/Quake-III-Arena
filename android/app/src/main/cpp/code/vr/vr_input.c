@@ -243,7 +243,7 @@ static void VR_processHaptics() {
     }
 }
 
-static void IN_SendButtonAction(const char* action, qboolean pressed)
+static void IN_SendButtonAction(const char* action, qboolean pressed, qboolean isThumbstickAxis)
 {
     if (action)
     {
@@ -265,6 +265,7 @@ static void IN_SendButtonAction(const char* action, qboolean pressed)
         else if (strcmp(action, "+weapon_select") == 0)
         {
             vr.weapon_select = pressed;
+            vr.weapon_select_autoclose = isThumbstickAxis;
             if (!pressed)
             {
                 Cbuf_AddText("weapon_select");
@@ -350,21 +351,25 @@ void VR_HapticEvent(const char* event, int position, int flags, int intensity, f
 static qboolean IN_GetButtonAction(const char* button, char* action)
 {
     char cvarname[256];
-    Com_sprintf(cvarname, 256, "vr_button_map_%s%s", button, alt_key_mode_active ? "_ALT" : "");
+    if (alt_key_mode_active) {
+        Com_sprintf(cvarname, 256, "vr_button_map_%s_ALT", button);
+    } else {
+        Com_sprintf(cvarname, 256, "vr_button_map_%s", button);
+    }
+
     char * val = Cvar_VariableString(cvarname);
     if (val && strlen(val) > 0)
     {
         Com_sprintf(action, 256, "%s", val);
         return qtrue;
     }
-
-    //If we didn't find something for this button and the alt key is active, then see if the un-alt key has a function
-    if (alt_key_mode_active)
+    else if (alt_key_mode_active)
     {
+        // No action found for buttom ALT mapping. Check if we are not
+        // holding ALT key itself (there is no ALT function for ALT)
         Com_sprintf(cvarname, 256, "vr_button_map_%s", button);
         char * val = Cvar_VariableString(cvarname);
-        if (val && strlen(val) > 0)
-        {
+        if (val && strcmp(val, "+alt") == 0) {
             Com_sprintf(action, 256, "%s", val);
             return qtrue;
         }
@@ -526,11 +531,11 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
                 // stop left & right
                 vr.smooth_turning = false;
                 if ((controller->axisButtons & VR_TOUCH_AXIS_LEFT) && IN_GetButtonAction("RTHUMBLEFT", action)) {
-                    IN_SendButtonAction(action, qfalse);
+                    IN_SendButtonAction(action, qfalse, qtrue);
                 }
                 controller->axisButtons &= ~VR_TOUCH_AXIS_LEFT;
                 if ((controller->axisButtons & VR_TOUCH_AXIS_RIGHT) && IN_GetButtonAction("RTHUMBRIGHT", action)) {
-                    IN_SendButtonAction(action, qfalse);
+                    IN_SendButtonAction(action, qfalse, qtrue);
                 }
                 controller->axisButtons &= ~VR_TOUCH_AXIS_RIGHT;
 
@@ -538,19 +543,19 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
                 if (joystickX < -releasedThreshold) {
                     // stop up
                     if ((controller->axisButtons & VR_TOUCH_AXIS_UP) && IN_GetButtonAction("RTHUMBFORWARD", action)) {
-                        IN_SendButtonAction(action, qfalse);
+                        IN_SendButtonAction(action, qfalse, qtrue);
                     }
                     controller->axisButtons &= ~VR_TOUCH_AXIS_UP;
                     // stop up-right
                     if ((controller->axisButtons & VR_TOUCH_AXIS_UPRIGHT) && IN_GetButtonAction("RTHUMBFORWARDRIGHT", action)) {
-                        IN_SendButtonAction(action, qfalse);
+                        IN_SendButtonAction(action, qfalse, qtrue);
                     }
                     controller->axisButtons &= ~VR_TOUCH_AXIS_UPRIGHT;
                     // start up-left
                     if (!(controller->axisButtons & VR_TOUCH_AXIS_UPLEFT)) {
                         controller->axisButtons |= VR_TOUCH_AXIS_UPLEFT;
                         if (IN_GetButtonAction("RTHUMBFORWARDLEFT", action)) {
-                            IN_SendButtonAction(action, qtrue);
+                            IN_SendButtonAction(action, qtrue, qtrue);
                         }
                     }
 
@@ -558,19 +563,19 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
                 } else if (joystickX > releasedThreshold) {
                     // stop up
                     if ((controller->axisButtons & VR_TOUCH_AXIS_UP) && IN_GetButtonAction("RTHUMBFORWARD", action)) {
-                        IN_SendButtonAction(action, qfalse);
+                        IN_SendButtonAction(action, qfalse, qtrue);
                     }
                     controller->axisButtons &= ~VR_TOUCH_AXIS_UP;
                     // stop up-left
                     if ((controller->axisButtons & VR_TOUCH_AXIS_UPLEFT) && IN_GetButtonAction("RTHUMBFORWARDLEFT", action)) {
-                        IN_SendButtonAction(action, qfalse);
+                        IN_SendButtonAction(action, qfalse, qtrue);
                     }
                     controller->axisButtons &= ~VR_TOUCH_AXIS_UPLEFT;
                     // start up-right
                     if (!(controller->axisButtons & VR_TOUCH_AXIS_UPRIGHT)) {
                         controller->axisButtons |= VR_TOUCH_AXIS_UPRIGHT;
                         if (IN_GetButtonAction("RTHUMBFORWARDRIGHT", action)) {
-                            IN_SendButtonAction(action, qtrue);
+                            IN_SendButtonAction(action, qtrue, qtrue);
                         }
                     }
 
@@ -578,19 +583,19 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
                 } else {
                     // stop up-left
                     if ((controller->axisButtons & VR_TOUCH_AXIS_UPLEFT) && IN_GetButtonAction("RTHUMBFORWARDLEFT", action)) {
-                        IN_SendButtonAction(action, qfalse);
+                        IN_SendButtonAction(action, qfalse, qtrue);
                     }
                     controller->axisButtons &= ~VR_TOUCH_AXIS_UPLEFT;
                     // stop up-right
                     if ((controller->axisButtons & VR_TOUCH_AXIS_UPRIGHT) && IN_GetButtonAction("RTHUMBFORWARDRIGHT", action)) {
-                        IN_SendButtonAction(action, qfalse);
+                        IN_SendButtonAction(action, qfalse, qtrue);
                     }
                     controller->axisButtons &= ~VR_TOUCH_AXIS_UPRIGHT;
                     // start up
                     if (!(controller->axisButtons & VR_TOUCH_AXIS_UP) && joystickY > pressedThreshold) {
                         controller->axisButtons |= VR_TOUCH_AXIS_UP;
                         if (IN_GetButtonAction("RTHUMBFORWARD", action)) {
-                            IN_SendButtonAction(action, qtrue);
+                            IN_SendButtonAction(action, qtrue, qtrue);
                         }
                     }
                 }
@@ -601,11 +606,11 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
                 // stop left & right
                 vr.smooth_turning = false;
                 if ((controller->axisButtons & VR_TOUCH_AXIS_LEFT) && IN_GetButtonAction("RTHUMBLEFT", action)) {
-                    IN_SendButtonAction(action, qfalse);
+                    IN_SendButtonAction(action, qfalse, qtrue);
                 }
                 controller->axisButtons &= ~VR_TOUCH_AXIS_LEFT;
                 if ((controller->axisButtons & VR_TOUCH_AXIS_RIGHT) && IN_GetButtonAction("RTHUMBRIGHT", action)) {
-                    IN_SendButtonAction(action, qfalse);
+                    IN_SendButtonAction(action, qfalse, qtrue);
                 }
                 controller->axisButtons &= ~VR_TOUCH_AXIS_RIGHT;
 
@@ -613,19 +618,19 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
                 if (joystickX < -releasedThreshold) {
                     // stop down
                     if ((controller->axisButtons & VR_TOUCH_AXIS_DOWN) && IN_GetButtonAction("RTHUMBBACK", action)) {
-                        IN_SendButtonAction(action, qfalse);
+                        IN_SendButtonAction(action, qfalse, qtrue);
                     }
                     controller->axisButtons &= ~VR_TOUCH_AXIS_DOWN;
                     // stop down-right
                     if ((controller->axisButtons & VR_TOUCH_AXIS_DOWNRIGHT) && IN_GetButtonAction("RTHUMBBACKRIGHT", action)) {
-                        IN_SendButtonAction(action, qfalse);
+                        IN_SendButtonAction(action, qfalse, qtrue);
                     }
                     controller->axisButtons &= ~VR_TOUCH_AXIS_DOWNRIGHT;
                     // start down-left
                     if (!(controller->axisButtons & VR_TOUCH_AXIS_DOWNLEFT)) {
                         controller->axisButtons |= VR_TOUCH_AXIS_DOWNLEFT;
                         if (IN_GetButtonAction("RTHUMBBACKLEFT", action)) {
-                            IN_SendButtonAction(action, qtrue);
+                            IN_SendButtonAction(action, qtrue, qtrue);
                         }
                     }
 
@@ -633,19 +638,19 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
                 } else if (joystickX > releasedThreshold) {
                     // stop down
                     if ((controller->axisButtons & VR_TOUCH_AXIS_DOWN) && IN_GetButtonAction("RTHUMBBACK", action)) {
-                        IN_SendButtonAction(action, qfalse);
+                        IN_SendButtonAction(action, qfalse, qtrue);
                     }
                     controller->axisButtons &= ~VR_TOUCH_AXIS_DOWN;
                     // stop down-left
                     if ((controller->axisButtons & VR_TOUCH_AXIS_DOWNLEFT) && IN_GetButtonAction("RTHUMBBACKLEFT", action)) {
-                        IN_SendButtonAction(action, qfalse);
+                        IN_SendButtonAction(action, qfalse, qtrue);
                     }
                     controller->axisButtons &= ~VR_TOUCH_AXIS_DOWNLEFT;
                     // start down-right
                     if (!(controller->axisButtons & VR_TOUCH_AXIS_DOWNRIGHT)) {
                         controller->axisButtons |= VR_TOUCH_AXIS_DOWNRIGHT;
                         if (IN_GetButtonAction("RTHUMBBACKRIGHT", action)) {
-                            IN_SendButtonAction(action, qtrue);
+                            IN_SendButtonAction(action, qtrue, qtrue);
                         }
                     }
 
@@ -653,19 +658,19 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
                 } else {
                     // stop down-left
                     if ((controller->axisButtons & VR_TOUCH_AXIS_DOWNLEFT) && IN_GetButtonAction("RTHUMBBACKLEFT", action)) {
-                        IN_SendButtonAction(action, qfalse);
+                        IN_SendButtonAction(action, qfalse, qtrue);
                     }
                     controller->axisButtons &= ~VR_TOUCH_AXIS_DOWNLEFT;
                     // stop down-right
                     if ((controller->axisButtons & VR_TOUCH_AXIS_DOWNRIGHT) && IN_GetButtonAction("RTHUMBBACKRIGHT", action)) {
-                        IN_SendButtonAction(action, qfalse);
+                        IN_SendButtonAction(action, qfalse, qtrue);
                     }
                     controller->axisButtons &= ~VR_TOUCH_AXIS_DOWNRIGHT;
                     // start down
                     if (!(controller->axisButtons & VR_TOUCH_AXIS_DOWN) && joystickY < -pressedThreshold) {
                         controller->axisButtons |= VR_TOUCH_AXIS_DOWN;
                         if (IN_GetButtonAction("RTHUMBBACK", action)) {
-                            IN_SendButtonAction(action, qtrue);
+                            IN_SendButtonAction(action, qtrue, qtrue);
                         }
                     }
                 }
@@ -675,32 +680,32 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 
                 // stop up-left
                 if ((controller->axisButtons & VR_TOUCH_AXIS_UPLEFT) && IN_GetButtonAction("RTHUMBFORWARDLEFT", action)) {
-                    IN_SendButtonAction(action, qfalse);
+                    IN_SendButtonAction(action, qfalse, qtrue);
                 }
                 controller->axisButtons &= ~VR_TOUCH_AXIS_UPLEFT;
                 // stop up
                 if ((controller->axisButtons & VR_TOUCH_AXIS_UP) && IN_GetButtonAction("RTHUMBFORWARD", action)) {
-                    IN_SendButtonAction(action, qfalse);
+                    IN_SendButtonAction(action, qfalse, qtrue);
                 }
                 controller->axisButtons &= ~VR_TOUCH_AXIS_UP;
                 // stop up-right
                 if ((controller->axisButtons & VR_TOUCH_AXIS_UPRIGHT) && IN_GetButtonAction("RTHUMBFORWARDRIGHT", action)) {
-                    IN_SendButtonAction(action, qfalse);
+                    IN_SendButtonAction(action, qfalse, qtrue);
                 }
                 controller->axisButtons &= ~VR_TOUCH_AXIS_UPRIGHT;
                 // stop down-left
                 if ((controller->axisButtons & VR_TOUCH_AXIS_DOWNLEFT) && IN_GetButtonAction("RTHUMBBACKLEFT", action)) {
-                    IN_SendButtonAction(action, qfalse);
+                    IN_SendButtonAction(action, qfalse, qtrue);
                 }
                 controller->axisButtons &= ~VR_TOUCH_AXIS_DOWNLEFT;
                 // stop down
                 if ((controller->axisButtons & VR_TOUCH_AXIS_DOWN) && IN_GetButtonAction("RTHUMBBACK", action)) {
-                    IN_SendButtonAction(action, qfalse);
+                    IN_SendButtonAction(action, qfalse, qtrue);
                 }
                 controller->axisButtons &= ~VR_TOUCH_AXIS_DOWN;
                 // stop down-right
                 if ((controller->axisButtons & VR_TOUCH_AXIS_DOWNRIGHT) && IN_GetButtonAction("RTHUMBBACKRIGHT", action)) {
-                    IN_SendButtonAction(action, qfalse);
+                    IN_SendButtonAction(action, qfalse, qtrue);
                 }
                 controller->axisButtons &= ~VR_TOUCH_AXIS_DOWNRIGHT;
 
@@ -711,7 +716,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
                     if (IN_GetButtonAction("RTHUMBLEFT", action)) {
                         vr.smooth_turning = false;
                         if (!(controller->axisButtons & VR_TOUCH_AXIS_LEFT)) {
-                            IN_SendButtonAction(action, qtrue);
+                            IN_SendButtonAction(action, qtrue, qtrue);
                         }
                         controller->axisButtons |= VR_TOUCH_AXIS_LEFT;
 
@@ -740,7 +745,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
                         vr.smooth_turning = false;
                     }
                     if ((controller->axisButtons & VR_TOUCH_AXIS_LEFT) && IN_GetButtonAction("RTHUMBLEFT", action)) {
-                        IN_SendButtonAction(action, qfalse);
+                        IN_SendButtonAction(action, qfalse, qtrue);
                     }
                     controller->axisButtons &= ~VR_TOUCH_AXIS_LEFT;
                 }
@@ -752,7 +757,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
                     if (IN_GetButtonAction("RTHUMBRIGHT", action)) {
                         vr.smooth_turning = false;
                         if (!(controller->axisButtons & VR_TOUCH_AXIS_RIGHT)) {
-                            IN_SendButtonAction(action, qtrue);
+                            IN_SendButtonAction(action, qtrue, qtrue);
                         }
                         controller->axisButtons |= VR_TOUCH_AXIS_RIGHT;
 
@@ -781,7 +786,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
                         vr.smooth_turning = false;
                     }
                     if ((controller->axisButtons & VR_TOUCH_AXIS_RIGHT) && IN_GetButtonAction("RTHUMBRIGHT", action)) {
-                        IN_SendButtonAction(action, qfalse);
+                        IN_SendButtonAction(action, qfalse, qtrue);
                     }
                     controller->axisButtons &= ~VR_TOUCH_AXIS_RIGHT;
                 }
@@ -828,7 +833,7 @@ static void IN_VRTriggers( qboolean isRightController, float index ) {
                 controller->axisButtons |= VR_TOUCH_AXIS_TRIGGER_INDEX;
                 if (IN_GetButtonAction("PRIMARYTRIGGER", action))
                 {
-                    IN_SendButtonAction(action, qtrue);
+                    IN_SendButtonAction(action, qtrue, qfalse);
                 }
             }
             else if ((controller->axisButtons & VR_TOUCH_AXIS_TRIGGER_INDEX) &&
@@ -837,7 +842,7 @@ static void IN_VRTriggers( qboolean isRightController, float index ) {
                 controller->axisButtons &= ~VR_TOUCH_AXIS_TRIGGER_INDEX;
                 if (IN_GetButtonAction("PRIMARYTRIGGER", action))
                 {
-                    IN_SendButtonAction(action, qfalse);
+                    IN_SendButtonAction(action, qfalse, qfalse);
                 }
             }
         }
@@ -851,7 +856,7 @@ static void IN_VRTriggers( qboolean isRightController, float index ) {
                 controller->axisButtons |= VR_TOUCH_AXIS_TRIGGER_INDEX;
                 if (IN_GetButtonAction("SECONDARYTRIGGER", action))
                 {
-                    IN_SendButtonAction(action, qtrue);
+                    IN_SendButtonAction(action, qtrue, qfalse);
                 }
             }
             else if ((controller->axisButtons & VR_TOUCH_AXIS_TRIGGER_INDEX) &&
@@ -860,7 +865,7 @@ static void IN_VRTriggers( qboolean isRightController, float index ) {
                 controller->axisButtons &= ~VR_TOUCH_AXIS_TRIGGER_INDEX;
                 if (IN_GetButtonAction("SECONDARYTRIGGER", action))
                 {
-                    IN_SendButtonAction(action, qfalse);
+                    IN_SendButtonAction(action, qfalse, qfalse);
                 }
             }
         }
@@ -887,7 +892,7 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
         {
             if (IN_GetButtonAction("SECONDARYGRIP", action))
             {
-                IN_SendButtonAction(action, qtrue);
+                IN_SendButtonAction(action, qtrue, qfalse);
             }
         }
         else if (!(buttons & ovrButton_GripTrigger) &&
@@ -895,7 +900,7 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
         {
             if (IN_GetButtonAction("SECONDARYGRIP", action))
             {
-                IN_SendButtonAction(action, qfalse);
+                IN_SendButtonAction(action, qfalse, qfalse);
             }
         }
 	}
@@ -905,7 +910,7 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
         {
             if (IN_GetButtonAction("PRIMARYGRIP", action))
             {
-                IN_SendButtonAction(action, qtrue);
+                IN_SendButtonAction(action, qtrue, qfalse);
             }
         }
         else if (!(buttons & ovrButton_GripTrigger) &&
@@ -913,7 +918,7 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
         {
             if (IN_GetButtonAction("PRIMARYGRIP", action))
             {
-                IN_SendButtonAction(action, qfalse);
+                IN_SendButtonAction(action, qfalse, qfalse);
             }
         }
     }
@@ -924,14 +929,14 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
         if ((buttons & ovrButton_LThumb) && !(controller->buttons & ovrButton_LThumb)) {
             if (IN_GetButtonAction("SECONDARYTHUMBSTICK", action))
             {
-                IN_SendButtonAction(action, qtrue);
+                IN_SendButtonAction(action, qtrue, qfalse);
             }
 
             vr.realign = 3;
         } else if (!(buttons & ovrButton_LThumb) && (controller->buttons & ovrButton_LThumb)) {
             if (IN_GetButtonAction("SECONDARYTHUMBSTICK", action))
             {
-                IN_SendButtonAction(action, qfalse);
+                IN_SendButtonAction(action, qfalse, qfalse);
             }
         }
     }
@@ -940,12 +945,12 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
         if ((buttons & ovrButton_RThumb) && !(controller->buttons & ovrButton_RThumb)) {
             if (IN_GetButtonAction("PRIMARYTHUMBSTICK", action))
             {
-                IN_SendButtonAction(action, qtrue);
+                IN_SendButtonAction(action, qtrue, qfalse);
             }
         } else if (!(buttons & ovrButton_RThumb) && (controller->buttons & ovrButton_RThumb)) {
             if (IN_GetButtonAction("PRIMARYTHUMBSTICK", action))
             {
-                IN_SendButtonAction(action, qfalse);
+                IN_SendButtonAction(action, qfalse, qfalse);
             }
         }
     }
@@ -961,7 +966,7 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
         {
             if (IN_GetButtonAction("A", action))
             {
-                IN_SendButtonAction(action, qtrue);
+                IN_SendButtonAction(action, qtrue, qfalse);
             }
         }
     }
@@ -969,7 +974,7 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
     {
         if (IN_GetButtonAction("A", action) && !(cl.snap.ps.pm_flags & PMF_FOLLOW))
         {
-            IN_SendButtonAction(action, qfalse);
+            IN_SendButtonAction(action, qfalse, qfalse);
         }
     }
 
@@ -977,12 +982,12 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
     if ((buttons & ovrButton_B) && !(controller->buttons & ovrButton_B)) {
         if (IN_GetButtonAction("B", action))
         {
-            IN_SendButtonAction(action, qtrue);
+            IN_SendButtonAction(action, qtrue, qfalse);
         }
     } else if (!(buttons & ovrButton_B) && (controller->buttons & ovrButton_B)) {
         if (IN_GetButtonAction("B", action))
         {
-            IN_SendButtonAction(action, qfalse);
+            IN_SendButtonAction(action, qfalse, qfalse);
         }
     }
 
@@ -998,7 +1003,7 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
         {
             if (IN_GetButtonAction("X", action))
             {
-                IN_SendButtonAction(action, qtrue);
+                IN_SendButtonAction(action, qtrue, qfalse);
             }
         }
     }
@@ -1006,7 +1011,7 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
     {
         if (IN_GetButtonAction("X", action) && !(cl.snap.ps.pm_flags & PMF_FOLLOW))
         {
-            IN_SendButtonAction(action, qfalse);
+            IN_SendButtonAction(action, qfalse, qfalse);
         }
     }
 
@@ -1014,12 +1019,12 @@ static void IN_VRButtonsChanged( qboolean isRightController, uint32_t buttons )
     if ((buttons & ovrButton_Y) && !(controller->buttons & ovrButton_Y)) {
         if (IN_GetButtonAction("Y", action))
         {
-            IN_SendButtonAction(action, qtrue);
+            IN_SendButtonAction(action, qtrue, qfalse);
         }
     } else if (!(buttons & ovrButton_Y) && (controller->buttons & ovrButton_Y)) {
         if (IN_GetButtonAction("Y", action))
         {
-            IN_SendButtonAction(action, qfalse);
+            IN_SendButtonAction(action, qfalse, qfalse);
         }
     }
 

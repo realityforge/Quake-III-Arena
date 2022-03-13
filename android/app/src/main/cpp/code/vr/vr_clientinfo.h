@@ -18,6 +18,7 @@ typedef struct {
     qboolean local_server; // used in bg_pmove.c
     vrFollowMode_t follow_mode;
     qboolean weapon_select;
+    qboolean weapon_select_autoclose;
     qboolean smooth_turning;
 
     int realign; // used to realign the fake 6DoF playspace in a multiplayer game
