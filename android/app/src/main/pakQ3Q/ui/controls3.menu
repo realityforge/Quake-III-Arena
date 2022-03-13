@@ -149,7 +149,7 @@ itemDef {
       		type ITEM_TYPE_MULTI
 		text "Weapon Selector Mode:"
 		cvar "vr_weaponSelectorMode"
-		cvarFloatList { "Controller Weapon Selector" 0 "HMD Weapon Wheel" 1 "Alt-Key Bindings" 2 "Thumbstick Forward/Back" 3 }
+		cvarFloatList { "Controller Weapon Selector" 0 "HMD Weapon Wheel" 1 }
 		rect 99 300 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128

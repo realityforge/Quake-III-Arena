@@ -270,7 +270,7 @@ itemDef {
       		type ITEM_TYPE_MULTI
 		text "Weapon Selector Mode:"
 		cvar "vr_weaponSelectorMode"
-		cvarFloatList { "Controller Weapon Selector" 0 "HMD Weapon Wheel" 1 "Alt-Key Bindings" 2 "Thumbstick Forward/Back" 3 }
+		cvarFloatList { "Controller Weapon Selector" 0 "HMD Weapon Wheel" 1 }
 		rect 30 160 200 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 143
@@ -341,7 +341,7 @@ itemDef {
 		group grpControls
       		type ITEM_TYPE_SLIDER
 		text "Haptic Intensity:"
-		cvarfloat "vr_hudYOffset" 0.2 0 1
+		cvarfloat "vr_hapticIntensity" 0.2 0 1
 		rect 30 280 200 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 143
