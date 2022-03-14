@@ -949,7 +949,9 @@ char	*Sys_GetCurrentUser( void );
 
 void	QDECL Sys_Error( const char *error, ...);
 void	Sys_Quit (void);
+#ifndef DEDICATED
 char	*Sys_GetClipboardData( void );	// note that this isn't journaled...
+#endif
 
 void	Sys_Print( const char *msg );
 

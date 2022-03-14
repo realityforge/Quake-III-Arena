@@ -1065,10 +1065,12 @@ void Sys_AppActivate (void)
 {
 }
 
+#ifndef DEDICATED
 char *Sys_GetClipboardData(void)
 {
   return NULL;
 }
+#endif
 
 void  Sys_Print( const char *msg )
 {

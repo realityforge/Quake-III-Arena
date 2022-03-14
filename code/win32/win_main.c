@@ -395,6 +395,7 @@ void	Sys_FreeFileList( char **list ) {
 
 //========================================================
 
+#ifndef DEDICATED
 /*
 ================
 Sys_GetClipboardData
@@ -421,7 +422,7 @@ char *Sys_GetClipboardData( void ) {
 	}
 	return data;
 }
-
+#endif
 
 /*
 ========================================================================

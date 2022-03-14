@@ -130,6 +130,7 @@ void	* QDECL Sys_LoadDll( const char *name, char *fqpath , int (QDECL **entryPoi
 }
 
 //===========================================================================
+#ifndef DEDICATED
 
 char *Sys_GetClipboardData(void) // FIXME
 {
@@ -148,16 +149,7 @@ char *Sys_GetClipboardData(void) // FIXME
     }
     return NULL;
 }
-
-char *Sys_GetWholeClipboard ( void )
-{
-    return NULL;
-}
-
-void Sys_SetClipboard (const char *contents)
-{
-}
-
+#endif
 
 /*
 ==================
