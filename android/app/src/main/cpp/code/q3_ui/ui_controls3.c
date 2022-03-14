@@ -155,8 +155,8 @@ static void Controls3_MenuEvent( void* ptr, int notification ) {
 			switch (s_controls3.controlschema.curvalue)
 			{
 				case 0: // Default schema
-					trap_Cvar_Set("vr_button_map_RTHUMBLEFT", ""); // empty ~ turn left
-					trap_Cvar_Set("vr_button_map_RTHUMBRIGHT", ""); // empty ~ turn right
+					trap_Cvar_Set("vr_button_map_RTHUMBLEFT", "turnleft"); // turn left
+					trap_Cvar_Set("vr_button_map_RTHUMBRIGHT", "turnright"); // turn right
 					trap_Cvar_Set("vr_button_map_RTHUMBFORWARD", "weapnext"); // next weapon
 					if (s_controls3.uturn.curvalue) {
 						trap_Cvar_Set("vr_button_map_RTHUMBBACK", "uturn"); // u-turn
@@ -190,8 +190,8 @@ static void Controls3_MenuEvent( void* ptr, int notification ) {
 					trap_Cvar_Set("vr_button_map_RTHUMBFORWARDLEFT", "+weapon_select");
 					trap_Cvar_Set("vr_button_map_PRIMARYTHUMBSTICK", "+weapon_select");
 					trap_Cvar_Set("vr_button_map_PRIMARYGRIP", "+alt"); // switch to alt layout
-					trap_Cvar_Set("vr_button_map_RTHUMBLEFT_ALT", ""); // empty ~ turn left
-					trap_Cvar_Set("vr_button_map_RTHUMBRIGHT_ALT", ""); // empty ~ turn right
+					trap_Cvar_Set("vr_button_map_RTHUMBLEFT_ALT", "turnleft"); // turn left
+					trap_Cvar_Set("vr_button_map_RTHUMBRIGHT_ALT", "turnright"); // turn right
 					trap_Cvar_Set("vr_button_map_RTHUMBFORWARD_ALT", "weapnext");
 					if (s_controls3.uturn.curvalue) {
 						trap_Cvar_Set("vr_button_map_RTHUMBBACK_ALT", "uturn");
