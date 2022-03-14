@@ -1439,20 +1439,6 @@ static const char *UI_OpponentLeaderHead() {
 }
 #endif
 
-#ifndef MISSIONPACK // bk001206
-static const char *UI_OpponentLeaderModel() {
-	int i;
-	const char *head = UI_OpponentLeaderHead();
-	for (i = 0; i < uiInfo.characterCount; i++) {
-		if (Q_stricmp(head, uiInfo.characterList[i].name) == 0) {
-			return uiInfo.characterList[i].base;
-		}
-	}
-	return "James";
-}
-#endif
-
-
 static qboolean updateOpponentModel = qtrue;
 static void UI_DrawOpponent(rectDef_t *rect) {
   static playerInfo_t info2;
