@@ -824,9 +824,6 @@ typedef struct {
 	int				q3SelectedHead;
 
 	int effectsColor;
-
-	qboolean inGameLoad;
-
 }	uiInfo_t;
 
 extern uiInfo_t uiInfo;
