@@ -387,11 +387,6 @@ void  Sys_Error( const char *error, ...)
   Sys_Exit( 1 ); // bk010104 - use single exit point.
 } 
 
-void floating_point_exception_handler(int whatever)
-{
-  signal(SIGFPE, floating_point_exception_handler);
-}
-
 // initialize the console input (tty mode if wanted and possible)
 void Sys_ConsoleInputInit()
 {
