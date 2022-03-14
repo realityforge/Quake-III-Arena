@@ -77,9 +77,7 @@ Sys_SetDefaultInstallPath
 */
 void Sys_SetDefaultInstallPath(const char *path)
 {
-    Sys_Print( va( "Setting DefaultInstallPath to %s\n", path ) );
 	Q_strncpyz(installPath, path, sizeof(installPath));
-    exit(0);
 }
 
 /*
