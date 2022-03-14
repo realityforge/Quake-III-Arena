@@ -40,7 +40,6 @@ static char		*ui_arenaInfos[MAX_ARENAS];
 
 #ifndef MISSIONPACK
 static int		ui_numSinglePlayerArenas;
-static int		ui_numSpecialSinglePlayerArenas;
 #endif
 
 /*
