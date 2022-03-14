@@ -319,25 +319,6 @@ void Sys_Error( const char *error, ... )
 	Sys_Exit( 3 );
 }
 
-#if 0
-/*
-=================
-Sys_Warn
-=================
-*/
-static __attribute__ ((format (printf, 1, 2))) void Sys_Warn( char *warning, ... )
-{
-	va_list argptr;
-	char    string[1024];
-
-	va_start (argptr,warning);
-	Q_vsnprintf (string, sizeof(string), warning, argptr);
-	va_end (argptr);
-
-	CON_Print( va( "Warning: %s", string ) );
-}
-#endif
-
 /*
 =================
 Sys_UnloadDll
