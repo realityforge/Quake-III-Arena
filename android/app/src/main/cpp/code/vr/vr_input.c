@@ -249,7 +249,10 @@ static qboolean IN_SendButtonAction(const char* action, qboolean pressed, qboole
     if (action)
     {
         //handle our special actions first
-        if (strcmp(action, "+alt") == 0)
+        if (strcmp(action, "blank") == 0) {
+            // empty function to block alt fallback on unmapped alt buttons
+        }
+        else if (strcmp(action, "+alt") == 0)
         {
             alt_key_mode_active = pressed;
         }

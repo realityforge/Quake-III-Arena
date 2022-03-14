@@ -143,10 +143,10 @@ void VR_InitCvars( void )
         } else {
             Cvar_Get ("vr_button_map_RTHUMBBACK_ALT", "weapprev", CVAR_ARCHIVE);
         }
-        Cvar_Get ("vr_button_map_RTHUMBFORWARDRIGHT_ALT", "", CVAR_ARCHIVE); // unmapped
-        Cvar_Get ("vr_button_map_RTHUMBBACKRIGHT_ALT", "", CVAR_ARCHIVE); // unmapped
-        Cvar_Get ("vr_button_map_RTHUMBBACKLEFT_ALT", "", CVAR_ARCHIVE); // unmapped
-        Cvar_Get ("vr_button_map_RTHUMBFORWARDLEFT_ALT", "", CVAR_ARCHIVE); // unmapped
+        Cvar_Get ("vr_button_map_RTHUMBFORWARDRIGHT_ALT", "blank", CVAR_ARCHIVE); // unmapped
+        Cvar_Get ("vr_button_map_RTHUMBBACKRIGHT_ALT", "blank", CVAR_ARCHIVE); // unmapped
+        Cvar_Get ("vr_button_map_RTHUMBBACKLEFT_ALT", "blank", CVAR_ARCHIVE); // unmapped
+        Cvar_Get ("vr_button_map_RTHUMBFORWARDLEFT_ALT", "blank", CVAR_ARCHIVE); // unmapped
 	}
 
 	//Remaining button mapping (buttons not affected by schemas)
