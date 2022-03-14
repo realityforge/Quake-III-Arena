@@ -1001,9 +1001,6 @@ int UI_SourceForLAN(void) {
 
 
 static const char *handicapValues[] = {"None","95","90","85","80","75","70","65","60","55","50","45","40","35","30","25","20","15","10","5",NULL};
-#ifndef MISSIONPACK
-static int numHandicaps = ARRAY_LEN(handicapValues);
-#endif
 
 static void UI_DrawHandicap(rectDef_t *rect, float scale, vec4_t color, int textStyle) {
   int i, h;
