@@ -77,7 +77,9 @@ Sys_SetDefaultInstallPath
 */
 void Sys_SetDefaultInstallPath(const char *path)
 {
+    Sys_Print( va( "Setting DefaultInstallPath to %s\n", path ) );
 	Q_strncpyz(installPath, path, sizeof(installPath));
+    exit(0);
 }
 
 /*
@@ -335,23 +337,6 @@ static __attribute__ ((format (printf, 1, 2))) void Sys_Warn( char *warning, ...
 	CON_Print( va( "Warning: %s", string ) );
 }
 #endif
-
-/*
-============
-Sys_FileTime
-
-returns -1 if not present
-============
-*/
-int Sys_FileTime( char *path )
-{
-	struct stat buf;
-
-	if (stat (path,&buf) == -1)
-		return -1;
-
-	return buf.st_mtime;
-}
 
 /*
 =================
