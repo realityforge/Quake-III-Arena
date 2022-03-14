@@ -156,7 +156,7 @@ vmCvar_t  ui_debug;
 vmCvar_t  ui_initialized;
 vmCvar_t  ui_teamArenaFirstRun;
 
-void _UI_Init( qboolean );
+void _UI_Init();
 void _UI_Shutdown( void );
 void _UI_KeyEvent( int key, qboolean down );
 void _UI_MouseEvent( int dx, int dy );
@@ -168,7 +168,7 @@ int vmMain( int command, int arg0, int arg1, int arg2, int arg3, int arg4, int a
 		  return UI_API_VERSION;
 
 	  case UI_INIT:
-		  _UI_Init(arg0);
+		  _UI_Init();
 		  return 0;
 
 	  case UI_SHUTDOWN:
@@ -4967,11 +4967,9 @@ static void UI_BuildQ3Model_List( void )
 UI_Init
 =================
 */
-void _UI_Init( qboolean inGameLoad ) {
+void _UI_Init() {
 	const char *menuSet;
 	int start;
-
-	//uiInfo.inGameLoad = inGameLoad;
 
 	UI_RegisterCvars();
 	UI_InitMemory();
@@ -5068,16 +5066,9 @@ void _UI_Init( qboolean inGameLoad ) {
 		menuSet = "ui/menus.txt";
 	}
 
-#if 0
-	if (uiInfo.inGameLoad) {
-		UI_LoadMenus("ui/ingame.txt", qtrue);
-	} else { // bk010222: left this: UI_LoadMenus(menuSet, qtrue);
-	}
-#else 
 	UI_LoadMenus(menuSet, qtrue);
 	UI_LoadMenus("ui/ingame.txt", qfalse);
-#endif
-	
+
 	Menus_CloseAll();
 
 	trap_LAN_LoadCachedServers();
@@ -5161,15 +5152,6 @@ void _UI_MouseEvent( int dx, int dy )
 
 }
 
-void UI_LoadNonIngame() {
-	const char *menuSet = UI_Cvar_VariableString("ui_menuFiles");
-	if (menuSet == NULL || menuSet[0] == '\0') {
-		menuSet = "ui/menus.txt";
-	}
-	UI_LoadMenus(menuSet, qfalse);
-	uiInfo.inGameLoad = qfalse;
-}
-
 void _UI_SetActiveMenu( uiMenuCommand_t menu ) {
 	char buf[256];
 
@@ -5189,11 +5171,6 @@ void _UI_SetActiveMenu( uiMenuCommand_t menu ) {
 	  case UIMENU_MAIN:
 			//trap_Cvar_Set( "sv_killserver", "1" );
 			trap_Key_SetCatcher( KEYCATCH_UI );
-			//trap_S_StartLocalSound( trap_S_RegisterSound("sound/misc/menu_background.wav", qfalse) , CHAN_LOCAL_SOUND );
-			//trap_S_StartBackgroundTrack("sound/misc/menu_background.wav", NULL);
-			if (uiInfo.inGameLoad) {
-				UI_LoadNonIngame();
-			}
 			Menus_CloseAll();
 			Menus_ActivateByName("main");
 			trap_Cvar_VariableStringBuffer("com_errorMessage", buf, sizeof(buf));
@@ -5212,9 +5189,6 @@ void _UI_SetActiveMenu( uiMenuCommand_t menu ) {
 	  case UIMENU_POSTGAME:
 			//trap_Cvar_Set( "sv_killserver", "1" );
 			trap_Key_SetCatcher( KEYCATCH_UI );
-			if (uiInfo.inGameLoad) {
-				UI_LoadNonIngame();
-			}
 			Menus_CloseAll();
 			Menus_ActivateByName("endofgame");
 		  return;
