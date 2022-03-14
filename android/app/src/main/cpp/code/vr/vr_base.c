@@ -37,6 +37,7 @@ cvar_t *vr_lasersight = NULL;
 cvar_t *vr_hapticIntensity = NULL;
 cvar_t *vr_comfortVignette = NULL;
 cvar_t *vr_weaponSelectorMode = NULL;
+cvar_t *vr_weaponSelectorWithHud = NULL;
 
 engine_t* VR_Init( ovrJava java )
 {
@@ -75,6 +76,7 @@ void VR_InitCvars( void )
     vr_hapticIntensity = Cvar_Get ("vr_hapticIntensity", "1.0", CVAR_ARCHIVE);
     vr_comfortVignette = Cvar_Get ("vr_comfortVignette", "0.0", CVAR_ARCHIVE);
 	vr_weaponSelectorMode = Cvar_Get ("vr_weaponSelectorMode", "0", CVAR_ARCHIVE);
+	vr_weaponSelectorWithHud = Cvar_Get ("vr_weaponSelectorWithHud", "0", CVAR_ARCHIVE);
 
 	// Values are:  scale,right,up,forward,pitch,yaw,roll
 	// VALUES PROVIDED BY SkillFur - Thank-you!
