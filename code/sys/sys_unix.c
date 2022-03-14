@@ -861,26 +861,6 @@ void Sys_SetEnv(const char *name, const char *value)
 }
 
 /*
-==============
-Sys_PID
-==============
-*/
-int Sys_PID( void )
-{
-	return getpid( );
-}
-
-/*
-==============
-Sys_PIDIsRunning
-==============
-*/
-qboolean Sys_PIDIsRunning( int pid )
-{
-	return kill( pid, 0 ) == 0;
-}
-
-/*
 =================
 Sys_DllExtension
 
