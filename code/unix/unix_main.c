@@ -387,28 +387,6 @@ void  Sys_Error( const char *error, ...)
   Sys_Exit( 1 ); // bk010104 - use single exit point.
 } 
 
-void Sys_Warn (char *warning, ...)
-{ 
-  va_list     argptr;
-  char        string[1024];
-
-  va_start (argptr,warning);
-  vsprintf (string,warning,argptr);
-  va_end (argptr);
-
-  if (ttycon_on)
-  {
-    tty_Hide();
-  }
-
-  fprintf(stderr, "Warning: %s", string);
-
-  if (ttycon_on)
-  {
-    tty_Show();
-  }
-} 
-
 void floating_point_exception_handler(int whatever)
 {
   signal(SIGFPE, floating_point_exception_handler);
