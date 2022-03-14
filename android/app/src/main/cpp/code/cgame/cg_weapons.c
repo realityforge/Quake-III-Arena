@@ -2087,7 +2087,8 @@ void CG_DrawWeaponSelector( void )
 	}
 	else
 	{
-		VectorMA(holsterOrigin, -3.0f, holsterUp, holsterOrigin);
+		// Do not shift weapon wheel down in order to fit inside comfort vignette
+		//VectorMA(holsterOrigin, -3.0f, holsterUp, holsterOrigin);
 	}
 
 	VectorCopy(holsterOrigin, beamOrigin);
