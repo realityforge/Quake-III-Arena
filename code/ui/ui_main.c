@@ -4815,13 +4815,6 @@ static void UI_Pause(qboolean b) {
 	}
 }
 
-#ifndef MISSIONPACK // bk001206
-static int UI_OwnerDraw_Width(int ownerDraw) {
-  // bk001205 - LCC missing return value
-  return 0;
-}
-#endif
-
 static int UI_PlayCinematic(const char *name, float x, float y, float w, float h) {
   return trap_CIN_PlayCinematic(name, x, y, w, h, (CIN_loop | CIN_silent));
 }
