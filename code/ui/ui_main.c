@@ -4852,12 +4852,6 @@ static void UI_Pause(qboolean b) {
 	}
 }
 
-#ifndef MISSIONPACK
-static int UI_OwnerDraw_Width(int ownerDraw) {
-  return 0;
-}
-#endif
-
 static int UI_PlayCinematic(const char *name, float x, float y, float w, float h) {
   return trap_CIN_PlayCinematic(name, x, y, w, h, (CIN_loop | CIN_silent));
 }
