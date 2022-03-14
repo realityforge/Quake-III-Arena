@@ -179,14 +179,6 @@ or configs will never get loaded from disk!
 
 */
 
-// if this is defined, the executable positively won't work with any paks other
-// than the demo pak, even if productid is present.  This is only used for our
-// last demo release to prevent the mac and linux users from using the demo
-// executable with the production windows pak before the mac/linux products
-// hit the shelves a little later
-// NOW defined in build files
-//#define PRE_RELEASE_TADEMO
-
 #define MAX_ZPATH			256
 #define	MAX_SEARCH_PATHS	4096
 #define MAX_FILEHASH_SIZE	1024

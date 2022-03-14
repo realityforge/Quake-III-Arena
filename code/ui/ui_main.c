@@ -28,9 +28,6 @@ USER INTERFACE MAIN
 =======================================================================
 */
 
-// use this to get a demo build without an explicit demo build, i.e. to get the demo ui files to build
-//#define PRE_RELEASE_TADEMO
-
 #include "ui_local.h"
 
 uiInfo_t uiInfo;
@@ -991,12 +988,8 @@ void UI_Load() {
 
 	String_Init();
 
-#ifdef PRE_RELEASE_TADEMO
-	UI_ParseGameInfo("demogameinfo.txt");
-#else
 	UI_ParseGameInfo("gameinfo.txt");
 	UI_LoadArenas();
-#endif
 
 	UI_LoadMenus(menuSet, qtrue);
 	Menus_CloseAll();
@@ -3236,11 +3229,7 @@ static void UI_RunMenuScript(char **args) {
 		} else if (Q_stricmp(name, "clearError") == 0) {
 			trap_Cvar_Set("com_errorMessage", "");
 		} else if (Q_stricmp(name, "loadGameInfo") == 0) {
-#ifdef PRE_RELEASE_TADEMO
-			UI_ParseGameInfo("demogameinfo.txt");
-#else
 			UI_ParseGameInfo("gameinfo.txt");
-#endif
 			UI_LoadBestScores(uiInfo.mapList[ui_currentMap.integer].mapLoadName, uiInfo.gameTypes[ui_gameType.integer].gtEnum);
 		} else if (Q_stricmp(name, "resetScores") == 0) {
 			UI_ClearScores();
@@ -5070,14 +5059,9 @@ void _UI_Init( qboolean inGameLoad ) {
   uiInfo.characterCount = 0;
   uiInfo.aliasCount = 0;
 
-#ifdef PRE_RELEASE_TADEMO
-	UI_ParseTeamInfo("demoteaminfo.txt");
-	UI_ParseGameInfo("demogameinfo.txt");
-#else
 	UI_ParseTeamInfo("teaminfo.txt");
 	UI_LoadTeams();
 	UI_ParseGameInfo("gameinfo.txt");
-#endif
 
 	menuSet = UI_Cvar_VariableString("ui_menuFiles");
 	if (menuSet == NULL || menuSet[0] == '\0') {
