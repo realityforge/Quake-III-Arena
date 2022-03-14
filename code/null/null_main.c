@@ -47,10 +47,6 @@ void Sys_Quit (void) {
 	exit (0);
 }
 
-char *Sys_GetClipboardData( void ) {
-	return NULL;
-}
-
 int		Sys_Milliseconds (void) {
 	return 0;
 }

@@ -125,6 +125,7 @@ char *Sys_ConsoleInput(void)
 	return CON_Input( );
 }
 
+#ifndef DEDICATED
 /*
 ==================
 Sys_GetClipboardData
@@ -132,9 +133,6 @@ Sys_GetClipboardData
 */
 char *Sys_GetClipboardData(void)
 {
-#ifdef DEDICATED
-	return NULL;
-#else
 	char *data = NULL;
 	char *cliptext;
 
@@ -151,8 +149,8 @@ char *Sys_GetClipboardData(void)
 		SDL_free( cliptext );
 	}
 	return data;
-#endif
 }
+#endif
 
 /*
 =================
