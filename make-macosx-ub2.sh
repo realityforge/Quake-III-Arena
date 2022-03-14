@@ -30,18 +30,10 @@ fi
 # For parallel make on multicore boxes...
 NCPU=`sysctl -n hw.ncpu`
 
-# x86_64 client and server
-#if [ -d build/release-release-x86_64 ]; then
-#	rm -r build/release-darwin-x86_64
-#fi
 (ARCH=x86_64 CFLAGS=$X86_64_CFLAGS MACOSX_VERSION_MIN=$X86_64_MACOSX_VERSION_MIN make -j$NCPU) || exit 1;
 
 echo;echo
 
-# arm64 client and server
-#if [ -d build/release-release-arm64 ]; then
-#	rm -r build/release-darwin-arm64
-#fi
 (ARCH=arm64 CFLAGS=$ARM64_CFLAGS MACOSX_VERSION_MIN=$ARM64_MACOSX_VERSION_MIN make -j$NCPU) || exit 1;
 
 echo
