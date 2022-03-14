@@ -1417,13 +1417,6 @@ static const char *UI_AIFromName(const char *name) {
 	return "James";
 }
 
-#ifndef MISSIONPACK // bk001206
-static const char *UI_OpponentLeaderHead() {
-	const char *leader = UI_OpponentLeaderName();
-	return UI_AIFromName(leader);
-}
-#endif
-
 static qboolean updateOpponentModel = qtrue;
 static void UI_DrawOpponent(rectDef_t *rect) {
   static playerInfo_t info2;
