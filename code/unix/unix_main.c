@@ -409,23 +409,6 @@ void Sys_Warn (char *warning, ...)
   }
 } 
 
-/*
-============
-Sys_FileTime
-
-returns -1 if not present
-============
-*/
-int Sys_FileTime (char *path)
-{
-  struct  stat  buf;
-
-  if (stat (path,&buf) == -1)
-    return -1;
-
-  return buf.st_mtime;
-}
-
 void floating_point_exception_handler(int whatever)
 {
   signal(SIGFPE, floating_point_exception_handler);
