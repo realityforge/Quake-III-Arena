@@ -1417,18 +1417,6 @@ static const char *UI_AIFromName(const char *name) {
 }
 
 #ifndef MISSIONPACK
-static const int UI_AIIndex(const char *name) {
-	int j;
-	for (j = 0; j < uiInfo.characterCount; j++) {
-		if (Q_stricmp(name, uiInfo.characterList[j].name) == 0) {
-			return j;
-		}
-	}
-	return 0;
-}
-#endif
-
-#ifndef MISSIONPACK
 static const char *UI_OpponentLeaderHead(void) {
 	const char *leader = UI_OpponentLeaderName();
 	return UI_AIFromName(leader);
