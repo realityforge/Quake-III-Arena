@@ -38,10 +38,6 @@ static char		*ui_botInfos[MAX_BOTS];
 static int		ui_numArenas;
 static char		*ui_arenaInfos[MAX_ARENAS];
 
-#ifndef MISSIONPACK // bk001206
-static int		ui_numSinglePlayerArenas;
-#endif
-
 /*
 ===============
 UI_ParseInfos
