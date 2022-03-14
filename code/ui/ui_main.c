@@ -5805,23 +5805,6 @@ static void UI_StopServerRefresh( void )
 
 /*
 =================
-ArenaServers_MaxPing
-=================
-*/
-#ifndef MISSIONPACK
-static int ArenaServers_MaxPing( void ) {
-	int		maxPing;
-
-	maxPing = (int)trap_Cvar_VariableValue( "cl_maxPing" );
-	if( maxPing < 100 ) {
-		maxPing = 100;
-	}
-	return maxPing;
-}
-#endif
-
-/*
-=================
 UI_DoServerRefresh
 =================
 */
