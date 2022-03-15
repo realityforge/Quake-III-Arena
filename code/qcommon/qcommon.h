@@ -716,7 +716,6 @@ extern	cvar_t	*com_speeds;
 extern	cvar_t	*com_timescale;
 extern	cvar_t	*com_sv_running;
 extern	cvar_t	*com_cl_running;
-extern	cvar_t	*com_viewlog;			// 0 = hidden, 1 = visible, 2 = minimized
 extern	cvar_t	*com_version;
 extern	cvar_t	*com_blood;
 extern	cvar_t	*com_buildScript;		// for building release pak files
@@ -967,8 +966,6 @@ void	Sys_BeginStreamedFile( fileHandle_t f, int readahead );
 void	Sys_EndStreamedFile( fileHandle_t f );
 int		Sys_StreamedRead( void *buffer, int size, int count, fileHandle_t f );
 void	Sys_StreamSeek( fileHandle_t f, int offset, int origin );
-
-void	Sys_ShowConsole( int level, qboolean quitOnClose );
 
 void	Sys_SendPacket( int length, const void *data, netadr_t to );
 

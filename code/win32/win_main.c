@@ -123,7 +123,6 @@ void QDECL Sys_Error( const char *error, ... ) {
 	Conbuf_AppendText( "\n" );
 
 	Sys_SetErrorText( text );
-	Sys_ShowConsole( 1, qtrue );
 
 	timeEndPeriod( 1 );
 
@@ -1133,12 +1132,6 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 	_getcwd (cwd, sizeof(cwd));
 	Com_Printf("Working directory: %s\n", cwd);
-
-	// hide the early console since we've reached the point where we
-	// have a working graphics subsystems
-	if ( !com_dedicated->integer && !com_viewlog->integer ) {
-		Sys_ShowConsole( 0, qfalse );
-	}
 
     // main game loop
 	while( 1 ) {

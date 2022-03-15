@@ -89,25 +89,6 @@ static LONG WINAPI ConWndProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPara
 		{
 			SetFocus( s_wcd.hwndInputLine );
 		}
-
-		if ( com_viewlog && ( com_dedicated && !com_dedicated->integer ) )
-		{
-			// if the viewlog is open, check to see if it's being minimized
-			if ( com_viewlog->integer == 1 )
-			{
-				if ( HIWORD( wParam ) )		// minimized flag
-				{
-					Cvar_Set( "viewlog", "2" );
-				}
-			}
-			else if ( com_viewlog->integer == 2 )
-			{
-				if ( !HIWORD( wParam ) )		// minimized flag
-				{
-					Cvar_Set( "viewlog", "1" );
-				}
-			}
-		}
 		break;
 
 	case WM_CLOSE:
@@ -119,11 +100,6 @@ static LONG WINAPI ConWndProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPara
 		else if ( s_wcd.quitOnClose )
 		{
 			PostQuitMessage( 0 );
-		}
-		else
-		{
-			Sys_ShowConsole( 0, qfalse );
-			Cvar_Set( "viewlog", "0" );
 		}
 		return 0;
 	case WM_CTLCOLORSTATIC:
@@ -436,41 +412,6 @@ void Sys_DestroyConsole( void ) {
 		CloseWindow( s_wcd.hWnd );
 		DestroyWindow( s_wcd.hWnd );
 		s_wcd.hWnd = 0;
-	}
-}
-
-/*
-** Sys_ShowConsole
-*/
-void Sys_ShowConsole( int visLevel, qboolean quitOnClose )
-{
-	s_wcd.quitOnClose = quitOnClose;
-
-	if ( visLevel == s_wcd.visLevel )
-	{
-		return;
-	}
-
-	s_wcd.visLevel = visLevel;
-
-	if ( !s_wcd.hWnd )
-		return;
-
-	switch ( visLevel )
-	{
-	case 0:
-		ShowWindow( s_wcd.hWnd, SW_HIDE );
-		break;
-	case 1:
-		ShowWindow( s_wcd.hWnd, SW_SHOWNORMAL );
-		SendMessage( s_wcd.hwndBuffer, EM_LINESCROLL, 0, 0xffff );
-		break;
-	case 2:
-		ShowWindow( s_wcd.hWnd, SW_MINIMIZE );
-		break;
-	default:
-		Sys_Error( "Invalid visLevel %d sent to Sys_ShowConsole\n", visLevel );
-		break;
 	}
 }
 

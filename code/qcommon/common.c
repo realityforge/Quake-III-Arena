@@ -60,7 +60,6 @@ static fileHandle_t logfile;
 fileHandle_t	com_journalFile;			// events are written here
 fileHandle_t	com_journalDataFile;		// config files are written here
 
-cvar_t	*com_viewlog;
 cvar_t	*com_speeds;
 cvar_t	*com_developer;
 cvar_t	*com_dedicated;
@@ -2307,7 +2306,6 @@ void Com_Init( char *commandLine ) {
 	com_fixedtime = Cvar_Get ("fixedtime", "0", CVAR_CHEAT);
 	com_showtrace = Cvar_Get ("com_showtrace", "0", CVAR_CHEAT);
 	com_dropsim = Cvar_Get ("com_dropsim", "0", CVAR_CHEAT);
-	com_viewlog = Cvar_Get( "viewlog", "0", CVAR_CHEAT );
 	com_speeds = Cvar_Get ("com_speeds", "0", 0);
 	com_timedemo = Cvar_Get ("timedemo", "0", CVAR_CHEAT);
 	com_cameraMode = Cvar_Get ("com_cameraMode", "0", CVAR_CHEAT);
@@ -2323,12 +2321,6 @@ void Com_Init( char *commandLine ) {
 #if defined(_WIN32) && defined(_DEBUG)
 	com_noErrorInterrupt = Cvar_Get( "com_noErrorInterrupt", "0", 0 );
 #endif
-
-	if ( com_dedicated->integer ) {
-		if ( !com_viewlog->integer ) {
-			Cvar_Set( "viewlog", "1" );
-		}
-	}
 
 	if ( com_developer && com_developer->integer ) {
 		Cmd_AddCommand ("error", Com_Error_f);
@@ -2350,7 +2342,6 @@ void Com_Init( char *commandLine ) {
 	com_dedicated->modified = qfalse;
 	if ( !com_dedicated->integer ) {
 		CL_Init();
-		Sys_ShowConsole( com_viewlog->integer, qfalse );
 	}
 
 	// set com_frameTime so that if a map is started on the
@@ -2535,14 +2526,6 @@ void Com_Frame( void ) {
 	// write config file if anything changed
 	Com_WriteConfiguration(); 
 
-	// if "viewlog" has been modified, show or hide the log console
-	if ( com_viewlog->modified ) {
-		if ( !com_dedicated->value ) {
-			Sys_ShowConsole( com_viewlog->integer, qfalse );
-		}
-		com_viewlog->modified = qfalse;
-	}
-
 	//
 	// main event loop
 	//
@@ -2590,10 +2573,8 @@ void Com_Frame( void ) {
 		com_dedicated->modified = qfalse;
 		if ( !com_dedicated->integer ) {
 			CL_Init();
-			Sys_ShowConsole( com_viewlog->integer, qfalse );
 		} else {
 			CL_Shutdown();
-			Sys_ShowConsole( 1, qtrue );
 		}
 	}
 
