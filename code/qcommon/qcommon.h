@@ -961,9 +961,6 @@ int		Sys_Milliseconds (void);
 
 void	Sys_SnapVector( float *v );
 
-// the system console is shown when a dedicated server is running
-void	Sys_DisplaySystemConsole( qboolean show );
-
 int		Sys_GetProcessorId( void );
 
 void	Sys_BeginStreamedFile( fileHandle_t f, int readahead );
