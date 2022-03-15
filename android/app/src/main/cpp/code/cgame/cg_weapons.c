@@ -2097,9 +2097,9 @@ void CG_DrawWeaponSelector( void )
 
     float thumbstickAxisX = 0.0f;
     float thumbstickAxisY = 0.0f;
+	float a = atan2(vr->thumbstick_location[THUMB_RIGHT][0], vr->thumbstick_location[THUMB_RIGHT][1]);
     if (length(vr->thumbstick_location[THUMB_RIGHT][0], vr->thumbstick_location[THUMB_RIGHT][1]) > 0.95f)
     {
-        float a = atan2(vr->thumbstick_location[THUMB_RIGHT][0], vr->thumbstick_location[THUMB_RIGHT][1]);
         thumbstickAxisX = sinf(a) * 0.95f;
         thumbstickAxisY = cosf(a) * 0.95f;
 	}
@@ -2150,21 +2150,23 @@ void CG_DrawWeaponSelector( void )
 		}
     }
 
-#define IGNORE_ANGLE -999.0f
 #ifdef MISSIONPACK
-	float rollAngles[WP_NUM_WEAPONS] = {IGNORE_ANGLE, 30.0f, 60.0f, 90.0f, 120.0f, 150.0f, 180.0f, 210.0f, 240.0f, 270.0f, IGNORE_ANGLE, 300.0f, 330.0f, 0.0f};
+	float iconAngles[WP_NUM_WEAPONS] = {0.0f, 30.0f, 60.0f, 90.0f, 120.0f, 150.0f, 180.0f, 210.0f, 240.0f, 270.0f, 300.0f, 330.0f, 360.0f, 390.0f};
 #else
-	float rollAngles[WP_NUM_WEAPONS] = {IGNORE_ANGLE, 18.0f, 54.0f, 90.0f, 135.0f, 180.0f, 225.0f, 270.0f, 306.0f, 342.0f, IGNORE_ANGLE};
+	float iconAngles[WP_NUM_WEAPONS] = {0.0f, 30.0f, 60.0f, 90.0f, 135.0f, 180.0f, 225.0f, 270.0f, 315.0f, 360.0f, 390.0f};
 #endif
 
     qboolean selected = qfalse;
-    for (int c = 0; c < WP_NUM_WEAPONS-1; ++c)
+	int w = 0;
+    for (int index = 0; index < WP_NUM_WEAPONS-1; ++index)
     {
-        int w = c+1;
-        if (w == WP_GRAPPLING_HOOK)
+        if ((index+1) == WP_GRAPPLING_HOOK)
         {
             continue;
         }
+
+        //increment now we know we aren't looking at an invalid weapon id
+        ++w;
 
         CG_RegisterWeapon(w);
 
@@ -2176,7 +2178,7 @@ void CG_DrawWeaponSelector( void )
             VectorClear(angles);
             angles[YAW] = holsterAngles[YAW];
             angles[PITCH] = holsterAngles[PITCH];
-            angles[ROLL] = rollAngles[w];
+            angles[ROLL] = iconAngles[w];
             vec3_t forward, up;
             AngleVectors(angles, forward, NULL, up);
 
@@ -2184,22 +2186,48 @@ void CG_DrawWeaponSelector( void )
             VectorMA(iconOrigin, 0.2f, forward, iconBackground);
             VectorMA(iconOrigin, -0.2f, forward, iconForeground);
 
-            //Float sprite above selected weapon
-            vec3_t diff;
-            VectorSubtract(selectorOrigin, iconOrigin, diff);
-            float length = VectorLength(diff);
-            if (length <= 1.2f &&
-                frac == 1.0f &&
-                selectable)
-            {
-            	if (cg.weaponSelectorSelection != w)
+			if (selectorMode == WS_CONTROLLER)
+			{
+				vec3_t diff;
+				VectorSubtract(selectorOrigin, iconOrigin, diff);
+				float length = VectorLength(diff);
+				if (length <= 1.2f &&
+					frac == 1.0f &&
+					selectable)
 				{
-					cg.weaponSelectorSelection = w;
-					trap_HapticEvent("selector_icon", 0, 0, 100, 0, 0);
-				}
+					if (cg.weaponSelectorSelection != w)
+					{
+						cg.weaponSelectorSelection = w;
+						trap_HapticEvent("selector_icon", 0, 0, 100, 0, 0);
+					}
 
-				selected = qtrue;
-            }
+					selected = qtrue;
+				}
+			}
+			else
+			{
+			    //For HMD selector, the weapon can be selected before the selector has finished
+			    //its opening animation, use angles to identify the selected weapon, rather than
+			    //the position of the selector pointer
+			    float angle = AngleNormalize360(RAD2DEG(a));
+			    float angle360 = angle + 360; // HACK - Account for the icon at the top
+
+			    float low = ((iconAngles[w-1]+iconAngles[w])/2.0f);
+			    float high = ((iconAngles[w]+iconAngles[w+1])/2.0f);
+
+				if (((angle > low && angle <= high) || (angle360 > low && angle360 <= high)) &&
+				    (length(vr->thumbstick_location[THUMB_RIGHT][0], vr->thumbstick_location[THUMB_RIGHT][1]) > 0.5f) &&
+				    selectable)
+				{
+					if (cg.weaponSelectorSelection != w)
+					{
+						cg.weaponSelectorSelection = w;
+						trap_HapticEvent("selector_icon", 0, 0, 100, 0, 0);
+					}
+
+					selected = qtrue;
+				}
+			}
             
             if (cg.weaponSelectorSelection == w)
 			{
