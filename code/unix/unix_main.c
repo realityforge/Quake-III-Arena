@@ -291,32 +291,6 @@ field_t *Hist_Next()
 // general sys routines
 // =============================================================
 
-#if 0
-// NOTE TTimo this is not used .. looks interesting though? protection against buffer overflow kind of stuff?
-void Sys_Printf (char *fmt, ...)
-{
-  va_list   argptr;
-  char    text[1024];
-  unsigned char   *p;
-
-  va_start (argptr,fmt);
-  vsprintf (text,fmt,argptr);
-  va_end (argptr);
-
-  if (strlen(text) > sizeof(text))
-    Sys_Error("memory overwrite in Sys_Printf");
-
-  for (p = (unsigned char *)text; *p; p++)
-  {
-    *p &= 0x7f;
-    if ((*p > 128 || *p < 32) && *p != 10 && *p != 13 && *p != 9)
-      printf("[%02x]", *p);
-    else
-      putc(*p, stdout);
-  }
-}
-#endif
-
 // single exit point (regular exit or in case of signal fault)
 void Sys_Exit( int ex ) {
   Sys_ConsoleInputShutdown();
