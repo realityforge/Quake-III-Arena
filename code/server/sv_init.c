@@ -741,7 +741,6 @@ void SV_Shutdown( char *finalmsg ) {
 		SV_FinalMessage( finalmsg );
 	}
 
-	SV_RemoveOperatorCommands();
 #ifdef DEDICATED
 	SV_MasterShutdown();
 #endif

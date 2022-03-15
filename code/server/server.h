@@ -329,7 +329,6 @@ void QDECL SV_SendServerCommand( client_t *cl, const char *fmt, ...) __attribute
 
 
 void SV_AddOperatorCommands (void);
-void SV_RemoveOperatorCommands (void);
 
 
 #ifdef DEDICATED
