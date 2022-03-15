@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 	Quake's menu framework system.
 **********************************************************************/
 #include "ui_local.h"
+#include "SDL.h"
 
 sfxHandle_t menu_in_sound;
 sfxHandle_t menu_move_sound;
@@ -1653,6 +1654,18 @@ sfxHandle_t Menu_DefaultKey( menuframework_s *m, int key )
 
 			case MTYPE_FIELD:
 				sound = MenuField_Key( (menufield_s*)item, &key );
+
+#if __ANDROID__
+				//show virtual keyboard
+				menufield_s* m = (menufield_s*)item;
+				if ( key == 178 )
+				{
+				    //delete value on click
+				    sprintf( m->field.buffer, "" );
+				}
+				m->field.cursor = strlen( m->field.buffer );
+				SDL_StartTextInput();
+#endif
 				break;
 		}
 

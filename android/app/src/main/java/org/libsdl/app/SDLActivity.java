@@ -264,6 +264,9 @@ public class SDLActivity extends Activity {
         if (SDLActivity.mBrokenLibraries) {
            return;
         }
+        if (mScreenKeyboardShown) {
+            return;
+        }
 
         SDLActivity.mHasFocus = hasFocus;
         if (hasFocus) {
