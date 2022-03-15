@@ -989,14 +989,6 @@ void GLimp_Init( qboolean fixedFunction )
 	r_allowResize = ri.Cvar_Get( "r_allowResize", "0", CVAR_ARCHIVE | CVAR_LATCH );
 	r_centerWindow = ri.Cvar_Get( "r_centerWindow", "0", CVAR_ARCHIVE | CVAR_LATCH );
 
-	if( ri.Cvar_VariableIntegerValue( "com_abnormalExit" ) )
-	{
-		ri.Cvar_Set( "r_mode", va( "%d", R_MODE_FALLBACK ) );
-		ri.Cvar_Set( "r_fullscreen", "0" );
-		ri.Cvar_Set( "r_centerWindow", "0" );
-		ri.Cvar_Set( "com_abnormalExit", "0" );
-	}
-
 	ri.Sys_GLimpInit( );
 
 	// Create the window and set up the context
