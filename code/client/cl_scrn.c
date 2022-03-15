@@ -570,7 +570,7 @@ void SCR_UpdateScreen( void ) {
 
 	// If there is no VM, there are also no rendering commands issued. Stop the renderer in
 	// that case.
-	if( uivm || com_dedicated->integer )
+	if( uivm )
 	{
 		// XXX
 		int in_anaglyphMode = Cvar_VariableIntegerValue("r_anaglyphMode");

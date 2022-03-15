@@ -1271,12 +1271,6 @@ memory on the hunk from cgame, ui, and renderer
 =====================
 */
 void CL_MapLoading( void ) {
-	if ( com_dedicated->integer ) {
-		clc.state = CA_DISCONNECTED;
-		Key_SetCatcher( KEYCATCH_CONSOLE );
-		return;
-	}
-
 	if ( !com_cl_running->integer ) {
 		return;
 	}
@@ -3064,10 +3058,6 @@ void CL_StartHunkUsers( qboolean rendererOnly ) {
 		S_BeginRegistration();
 	}
 
-	if( com_dedicated->integer ) {
-		return;
-	}
-
 	if ( !cls.uiStarted ) {
 		cls.uiStarted = qtrue;
 		CL_InitUI();
@@ -3583,10 +3573,9 @@ void CL_Init( void ) {
 	Cmd_AddCommand ("model", CL_SetModel_f );
 	Cmd_AddCommand ("video", CL_Video_f );
 	Cmd_AddCommand ("stopvideo", CL_StopVideo_f );
-	if( !com_dedicated->integer ) {
-		Cmd_AddCommand ("sayto", CL_Sayto_f );
-		Cmd_SetCommandCompletionFunc( "sayto", CL_CompletePlayerName );
-	}
+    Cmd_AddCommand ("sayto", CL_Sayto_f );
+    Cmd_SetCommandCompletionFunc( "sayto", CL_CompletePlayerName );
+
 	CL_InitRef();
 
 	SCR_Init ();

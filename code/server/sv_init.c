@@ -22,6 +22,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "server.h"
 
+// we don't need nearly as many when playing locally
+#ifdef DEDICATED
+#  define LOCAL_PACKET_BACKUP PACKET_BACKUP
+#else
+#  define LOCAL_PACKET_BACKUP 4
+#endif
+
 
 /*
 ===============
@@ -270,12 +277,7 @@ static void SV_Startup( void ) {
 	SV_BoundMaxClients( 1 );
 
 	svs.clients = Z_Malloc (sizeof(client_t) * sv_maxclients->integer );
-	if ( com_dedicated->integer ) {
-		svs.numSnapshotEntities = sv_maxclients->integer * PACKET_BACKUP * MAX_SNAPSHOT_ENTITIES;
-	} else {
-		// we don't need nearly as many when playing locally
-		svs.numSnapshotEntities = sv_maxclients->integer * 4 * MAX_SNAPSHOT_ENTITIES;
-	}
+    svs.numSnapshotEntities = sv_maxclients->integer * LOCAL_PACKET_BACKUP * MAX_SNAPSHOT_ENTITIES;
 	svs.initialized = qtrue;
 
 	// Don't respect sv_killserver unless a server is actually running
@@ -348,12 +350,7 @@ void SV_ChangeMaxClients( void ) {
 	Hunk_FreeTempMemory( oldClients );
 	
 	// allocate new snapshot entities
-	if ( com_dedicated->integer ) {
-		svs.numSnapshotEntities = sv_maxclients->integer * PACKET_BACKUP * MAX_SNAPSHOT_ENTITIES;
-	} else {
-		// we don't need nearly as many when playing locally
-		svs.numSnapshotEntities = sv_maxclients->integer * 4 * MAX_SNAPSHOT_ENTITIES;
-	}
+    svs.numSnapshotEntities = sv_maxclients->integer * LOCAL_PACKET_BACKUP * MAX_SNAPSHOT_ENTITIES;
 }
 
 /*
@@ -607,14 +604,6 @@ void SV_SpawnServer( char *server, qboolean killBots ) {
 
 	Hunk_SetMark();
 
-#ifndef DEDICATED
-	if ( com_dedicated->integer ) {
-		// restart renderer in order to show console for dedicated servers
-		// launched through the regular binary
-		CL_StartHunkUsers( qtrue );
-	}
-#endif
-
 	Com_Printf ("-----------------------------------\n");
 }
 
@@ -752,7 +741,9 @@ void SV_Shutdown( char *finalmsg ) {
 	}
 
 	SV_RemoveOperatorCommands();
+#ifdef DEDICATED
 	SV_MasterShutdown();
+#endif
 	SV_ShutdownGameProgs();
 
 	// free current level

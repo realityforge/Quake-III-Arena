@@ -1426,13 +1426,12 @@ void SV_AddOperatorCommands( void ) {
 	Cmd_AddCommand ("map", SV_Map_f);
 	Cmd_SetCommandCompletionFunc( "map", SV_CompleteMapName );
 	Cmd_AddCommand ("killserver", SV_KillServer_f);
-	if( com_dedicated->integer ) {
-		Cmd_AddCommand ("say", SV_ConSay_f);
-		Cmd_AddCommand ("tell", SV_ConTell_f);
-		Cmd_AddCommand ("sayto", SV_ConSayto_f);
-		Cmd_SetCommandCompletionFunc( "sayto", SV_CompletePlayerName );
-	}
-	
+#ifdef DEDICATED
+    Cmd_AddCommand ("say", SV_ConSay_f);
+    Cmd_AddCommand ("tell", SV_ConTell_f);
+    Cmd_AddCommand ("sayto", SV_ConSayto_f);
+    Cmd_SetCommandCompletionFunc( "sayto", SV_CompletePlayerName );
+#endif
 	Cmd_AddCommand("rehashbans", SV_RehashBans_f);
 	Cmd_AddCommand("listbans", SV_ListBans_f);
 	Cmd_AddCommand("banaddr", SV_BanAddr_f);

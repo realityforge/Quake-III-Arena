@@ -71,6 +71,7 @@ EVENT MESSAGES
 =============================================================================
 */
 
+#ifdef DEDICATED
 /*
 ===============
 SV_ExpandNewlines
@@ -96,6 +97,7 @@ static char	*SV_ExpandNewlines( char *in ) {
 
 	return string;
 }
+#endif
 
 /*
 ======================
@@ -201,10 +203,12 @@ void QDECL SV_SendServerCommand(client_t *cl, const char *fmt, ...) {
 		return;
 	}
 
-	// hack to echo broadcast prints to console
-	if ( com_dedicated->integer && !strncmp( (char *)message, "print", 5) ) {
+#ifdef DEDICATED
+    // hack to echo broadcast prints to console
+	if ( !strncmp( (char *)message, "print", 5) ) {
 		Com_Printf ("broadcast: %s\n", SV_ExpandNewlines((char *)message) );
 	}
+#endif
 
 	// send the data to all relevant clients
 	for (j = 0, client = svs.clients; j < sv_maxclients->integer ; j++, client++) {
@@ -212,6 +216,7 @@ void QDECL SV_SendServerCommand(client_t *cl, const char *fmt, ...) {
 	}
 }
 
+#ifdef DEDICATED
 
 /*
 ==============================================================================
@@ -243,8 +248,7 @@ void SV_MasterHeartbeat(const char *message)
 
 	netenabled = Cvar_VariableIntegerValue("net_enabled");
 
-	// "dedicated 1" is for lan play, "dedicated 2" is for inet public play
-	if (!com_dedicated || com_dedicated->integer != 2 || !(netenabled & (NET_ENABLEV4 | NET_ENABLEV6)))
+	if (!(netenabled & (NET_ENABLEV4 | NET_ENABLEV6)))
 		return;		// only dedicated servers send heartbeats
 
 	// if not time yet, don't send anything
@@ -341,6 +345,7 @@ void SV_MasterShutdown( void ) {
 	// when the master tries to poll the server, it won't respond, so
 	// it will be removed from the list
 }
+#endif
 
 
 /*
@@ -1081,7 +1086,9 @@ void SV_Frame( int msec ) {
 
 	sv.timeResidual += msec;
 
-	if (!com_dedicated->integer) SV_BotFrame (sv.time + sv.timeResidual);
+#ifndef DEDICATED
+	SV_BotFrame (sv.time + sv.timeResidual);
+#endif
 
 	// if time is about to hit the 32nd bit, kick all clients
 	// and clear sv.time, rather
@@ -1124,7 +1131,9 @@ void SV_Frame( int msec ) {
 	// update ping based on the all received frames
 	SV_CalcPings();
 
-	if (com_dedicated->integer) SV_BotFrame (sv.time);
+#ifdef DEDICATED
+	SV_BotFrame (sv.time);
+#endif
 
 	// run the game simulation in chunks
 	while ( sv.timeResidual >= frameMsec ) {
@@ -1146,8 +1155,10 @@ void SV_Frame( int msec ) {
 	// send messages back to the clients
 	SV_SendClientMessages();
 
+#ifdef DEDICATED
 	// send a heartbeat to the master if needed
 	SV_MasterHeartbeat(HEARTBEAT_FOR_MASTER);
+#endif
 }
 
 /*

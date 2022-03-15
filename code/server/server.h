@@ -334,7 +334,9 @@ void SV_AddOperatorCommands (void);
 void SV_RemoveOperatorCommands (void);
 
 
+#ifdef DEDICATED
 void SV_MasterShutdown (void);
+#endif
 int SV_RateMsec(client_t *client);
 
 
