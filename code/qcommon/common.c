@@ -52,7 +52,6 @@ char	*com_argv[MAX_NUM_ARGVS+1];
 jmp_buf abortframe;		// an ERR_DROP occurred, exit the entire frame
 
 
-FILE *debuglogfile;
 static fileHandle_t pipefile;
 static fileHandle_t logfile;
 fileHandle_t	com_journalFile;			// events are written here
