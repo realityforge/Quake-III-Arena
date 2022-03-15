@@ -42,6 +42,18 @@ cc_library(
 )
 
 cc_library(
+    name = "vm_x86",
+    srcs = [
+        "vm_x86.c",
+    ],
+    deps = [
+        ":vm",
+        ":q_shared",
+        ":qcommon",
+    ],
+)
+
+cc_library(
     name = "files",
     srcs = [
         "files.c",
