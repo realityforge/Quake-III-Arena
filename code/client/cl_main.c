@@ -3169,8 +3169,6 @@ void CL_InitRef( void ) {
 	ri.ftol = Q_ftol;
 
 	ri.Sys_SetEnv = Sys_SetEnv;
-	ri.Sys_GLimpSafeInit = Sys_GLimpSafeInit;
-	ri.Sys_GLimpInit = Sys_GLimpInit;
 	ri.Sys_LowPhysicalMemory = Sys_LowPhysicalMemory;
 
 	ret = GetRefAPI( REF_API_VERSION, &ri );

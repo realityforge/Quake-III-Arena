@@ -177,8 +177,6 @@ typedef struct {
 
 	// system stuff
 	void	(*Sys_SetEnv)( const char *name, const char *value );
-	void	(*Sys_GLimpSafeInit)( void );
-	void	(*Sys_GLimpInit)( void );
 	qboolean (*Sys_LowPhysicalMemory)( void );
 } refimport_t;
 
