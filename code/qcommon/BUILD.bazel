@@ -31,6 +31,7 @@ cc_library(
     name = "vm",
     srcs = [
         "vm.c",
+        "vm_interpreted.c",
     ],
     hdrs = [
         "vm_local.h",
