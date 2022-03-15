@@ -220,3 +220,24 @@ cc_library(
         ":qfiles",
     ],
 )
+
+_CMD_SRC = ["cmd.c"]
+
+cc_library(
+    name = "cmd",
+    srcs = _CMD_SRC,
+    deps = [
+        ":q_shared",
+        ":qcommon",
+    ],
+)
+
+cc_library(
+    name = "cmd-dedicated",
+    srcs = _CMD_SRC,
+    defines = ["DEDICATED"],
+    deps = [
+        ":q_shared",
+        ":qcommon",
+    ],
+)
