@@ -1917,8 +1917,6 @@ Q3DOBJ = \
   $(B)/ded/l_script.o \
   $(B)/ded/l_struct.o \
   \
-  $(B)/ded/null_client.o \
-  \
   $(B)/ded/con_log.o \
   $(B)/ded/sys_main.o
 

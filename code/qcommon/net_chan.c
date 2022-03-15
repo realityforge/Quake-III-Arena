@@ -117,10 +117,12 @@ void Netchan_TransmitNextFragment( netchan_t *chan ) {
 	outgoingSequence = chan->outgoingSequence | FRAGMENT_BIT;
 	MSG_WriteLong(&send, outgoingSequence);
 
+#ifndef DEDICATED
 	// send the qport if we are a client
 	if ( chan->sock == NS_CLIENT ) {
 		MSG_WriteShort( &send, qport->integer );
 	}
+#endif
 
 #ifdef LEGACY_PROTOCOL
 	if(!chan->compat)
@@ -199,9 +201,11 @@ void Netchan_Transmit( netchan_t *chan, int length, const byte *data ) {
 
 	MSG_WriteLong( &send, chan->outgoingSequence );
 
+#ifndef DEDICATED
 	// send the qport if we are a client
 	if(chan->sock == NS_CLIENT)
 		MSG_WriteShort(&send, qport->integer);
+#endif
 
 #ifdef LEGACY_PROTOCOL
 	if(!chan->compat)
@@ -551,10 +555,13 @@ void NET_SendPacket( netsrc_t sock, int length, const void *data, netadr_t to ) 
 		return;
 	}
 
+#ifndef DEDICATED
 	if ( sock == NS_CLIENT && cl_packetdelay->integer > 0 ) {
 		NET_QueuePacket( length, data, to, cl_packetdelay->integer );
 	}
-	else if ( sock == NS_SERVER && sv_packetdelay->integer > 0 ) {
+	else
+#endif
+    if ( sock == NS_SERVER && sv_packetdelay->integer > 0 ) {
 		NET_QueuePacket( length, data, to, sv_packetdelay->integer );
 	}
 	else {

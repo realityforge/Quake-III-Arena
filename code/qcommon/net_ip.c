@@ -1631,8 +1631,10 @@ void NET_Event(fd_set *fdr)
 
 			if(com_sv_running->integer)
 				Com_RunAndTimeServerPacket(&from, &netmsg);
+#ifndef DEDICATED
 			else
 				CL_PacketEvent(from, &netmsg);
+#endif
 		}
 		else
 			break;
