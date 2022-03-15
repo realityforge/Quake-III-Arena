@@ -141,6 +141,7 @@ cc_library(
     visibility = ["//code/renderergl1:__pkg__"],
 )
 
+# collision map library
 cc_library(
     name = "cm",
     srcs = [
