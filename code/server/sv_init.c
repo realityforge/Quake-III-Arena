@@ -773,8 +773,10 @@ void SV_Shutdown( char *finalmsg ) {
 
 	Com_Printf( "---------------------------\n" );
 
+#ifndef DEDICATED
 	// disconnect any local clients
 	if( sv_killserver->integer != 2 )
 		CL_Disconnect( qfalse );
+#endif
 }
 
