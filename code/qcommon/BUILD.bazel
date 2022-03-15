@@ -67,6 +67,14 @@ cc_library(
     ],
 )
 
+# TODO: Move this to third_party?
+cc_library(
+    name = "json",
+    hdrs = [
+        "json.h",
+    ],
+)
+
 # TODO: Use shared version or move this to third_party?
 cc_library(
     name = "unzip",
