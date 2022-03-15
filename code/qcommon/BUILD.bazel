@@ -48,9 +48,9 @@ cc_library(
         "vm_x86.c",
     ],
     deps = [
-        ":vm",
         ":q_shared",
         ":qcommon",
+        ":vm",
     ],
 )
 
