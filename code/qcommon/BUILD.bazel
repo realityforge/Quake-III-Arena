@@ -67,6 +67,19 @@ cc_library(
     ],
 )
 
+cc_library(
+    name = "files-dedicated",
+    srcs = [
+        "files.c",
+    ],
+    defines = ["DEDICATED"],
+    deps = [
+        ":q_shared",
+        ":qcommon",
+        ":unzip",
+    ],
+)
+
 # TODO: Move this to third_party?
 cc_library(
     name = "json",
@@ -104,6 +117,24 @@ cc_library(
         "net_chan.c",
         "net_ip.c",
     ],
+    deps = [
+        ":common",
+        ":q_shared",
+        ":qcommon",
+    ],
+)
+
+cc_library(
+    name = "net-dedicated",
+    srcs = [
+        "huffman.c",
+        "md4.c",
+        "md5.c",
+        "msg.c",
+        "net_chan.c",
+        "net_ip.c",
+    ],
+    defines = ["DEDICATED"],
     deps = [
         ":common",
         ":q_shared",
