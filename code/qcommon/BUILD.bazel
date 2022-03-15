@@ -28,6 +28,20 @@ cc_library(
 )
 
 cc_library(
+    name = "vm",
+    srcs = [
+        "vm.c",
+    ],
+    hdrs = [
+        "vm_local.h",
+    ],
+    deps = [
+        ":q_shared",
+        ":qcommon",
+    ],
+)
+
+cc_library(
     name = "files",
     srcs = [
         "files.c",
