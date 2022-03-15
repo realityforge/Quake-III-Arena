@@ -1,7 +1,8 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 
+# TODO: Why not switch to zlib's inflate rather than usin g slower puff? If we decide to keep it then at least move it to third party
 cc_library(
-    name = "renderercommon_support",
+    name = "puff",
     srcs = [
         "puff.c",
     ],
