@@ -92,15 +92,17 @@ static LONG WINAPI ConWndProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPara
 		break;
 
 	case WM_CLOSE:
-		if ( ( com_dedicated && com_dedicated->integer ) )
+#ifdef DEDICATED
 		{
 			cmdString = CopyString( "quit" );
 			Sys_QueEvent( 0, SE_CONSOLE, 0, 0, strlen( cmdString ) + 1, cmdString );
 		}
-		else if ( s_wcd.quitOnClose )
+#else
+        if ( s_wcd.quitOnClose )
 		{
 			PostQuitMessage( 0 );
 		}
+#endif
 		return 0;
 	case WM_CTLCOLORSTATIC:
 		if ( ( HWND ) lParam == s_wcd.hwndBuffer )

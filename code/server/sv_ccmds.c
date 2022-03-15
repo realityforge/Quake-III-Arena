@@ -477,6 +477,7 @@ static void SV_Status_f( void ) {
 	}
 	Com_Printf ("\n");
 }
+#ifdef DEDICATED
 
 /*
 ==================
@@ -509,7 +510,7 @@ static void SV_ConSay_f(void) {
 
 	SV_SendServerCommand(NULL, "chat \"%s\n\"", text);
 }
-
+#endif
 
 /*
 ==================
@@ -616,9 +617,9 @@ void SV_AddOperatorCommands( void ) {
 	Cmd_AddCommand ("sectorlist", SV_SectorList_f);
 	Cmd_AddCommand ("map", SV_Map_f);
 	Cmd_AddCommand ("killserver", SV_KillServer_f);
-	if( com_dedicated->integer ) {
-		Cmd_AddCommand ("say", SV_ConSay_f);
-	}
+#ifdef DEDICATED
+    Cmd_AddCommand ("say", SV_ConSay_f);
+#endif
 }
 
 /*

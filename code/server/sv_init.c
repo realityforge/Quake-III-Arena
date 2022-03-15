@@ -22,6 +22,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "server.h"
 
+// we don't need nearly as many when playing locally
+#ifdef DEDICATED
+#  define LOCAL_PACKET_BACKUP PACKET_BACKUP
+#else
+#  define LOCAL_PACKET_BACKUP 4
+#endif
+
 /*
 ===============
 SV_SetConfigstring
@@ -223,12 +230,7 @@ void SV_Startup( void ) {
 	SV_BoundMaxClients( 1 );
 
 	svs.clients = Z_Malloc (sizeof(client_t) * sv_maxclients->integer );
-	if ( com_dedicated->integer ) {
-		svs.numSnapshotEntities = sv_maxclients->integer * PACKET_BACKUP * 64;
-	} else {
-		// we don't need nearly as many when playing locally
-		svs.numSnapshotEntities = sv_maxclients->integer * 4 * 64;
-	}
+    svs.numSnapshotEntities = sv_maxclients->integer * LOCAL_PACKET_BACKUP * 64;
 	svs.initialized = qtrue;
 
 	Cvar_Set( "sv_running", "1" );
@@ -293,12 +295,7 @@ void SV_ChangeMaxClients( void ) {
 	Hunk_FreeTempMemory( oldClients );
 	
 	// allocate new snapshot entities
-	if ( com_dedicated->integer ) {
-		svs.numSnapshotEntities = sv_maxclients->integer * PACKET_BACKUP * 64;
-	} else {
-		// we don't need nearly as many when playing locally
-		svs.numSnapshotEntities = sv_maxclients->integer * 4 * 64;
-	}
+    svs.numSnapshotEntities = sv_maxclients->integer * LOCAL_PACKET_BACKUP * 64;
 }
 
 /*
@@ -514,9 +511,9 @@ void SV_SpawnServer( char *server, qboolean killBots ) {
 
 		// if a dedicated pure server we need to touch the cgame because it could be in a
 		// seperate pk3 file and the client will need to load the latest cgame.qvm
-		if ( com_dedicated->integer ) {
-			SV_TouchCGame();
-		}
+#ifdef DEDICATED
+		SV_TouchCGame();
+#endif
 	}
 	else {
 		Cvar_Set( "sv_paks", "" );
@@ -673,7 +670,9 @@ void SV_Shutdown( char *finalmsg ) {
 	}
 
 	SV_RemoveOperatorCommands();
+#ifdef DEDICATED
 	SV_MasterShutdown();
+#endif
 	SV_ShutdownGameProgs();
 
 	// free current level

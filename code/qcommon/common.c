@@ -39,8 +39,11 @@ int demo_protocols[] =
 
 #define MAX_NUM_ARGVS	50
 
-#define MIN_DEDICATED_COMHUNKMEGS 1
-#define MIN_COMHUNKMEGS 56
+#ifdef DEDICATED
+#  define MIN_COMHUNKMEGS 1
+#else
+#  define MIN_COMHUNKMEGS 56
+#endif
 #ifdef MACOS_X
 #define DEF_COMHUNKMEGS "64"
 #define DEF_COMZONEMEGS "24"
@@ -62,7 +65,6 @@ fileHandle_t	com_journalDataFile;		// config files are written here
 
 cvar_t	*com_speeds;
 cvar_t	*com_developer;
-cvar_t	*com_dedicated;
 cvar_t	*com_timescale;
 cvar_t	*com_fixedtime;
 cvar_t	*com_dropsim;		// 0.0 to 1.0, simulated packet drops
@@ -1498,15 +1500,8 @@ void Com_InitHunkMemory( void ) {
 	// allocate the stack based hunk allocator
 	cv = Cvar_Get( "com_hunkMegs", DEF_COMHUNKMEGS, CVAR_LATCH | CVAR_ARCHIVE );
 
-	// if we are not dedicated min allocation is 56, otherwise min is 1
-	if (com_dedicated && com_dedicated->integer) {
-		nMinAlloc = MIN_DEDICATED_COMHUNKMEGS;
-		pMsg = "Minimum com_hunkMegs for a dedicated server is %i, allocating %i megs.\n";
-	}
-	else {
-		nMinAlloc = MIN_COMHUNKMEGS;
-		pMsg = "Minimum com_hunkMegs is %i, allocating %i megs.\n";
-	}
+    nMinAlloc = MIN_COMHUNKMEGS;
+    pMsg = "Minimum com_hunkMegs is %i, allocating %i megs.\n";
 
 	if ( cv->integer < nMinAlloc ) {
 		s_hunkTotal = 1024 * 1024 * nMinAlloc;
@@ -2303,12 +2298,6 @@ void Com_Init( char *commandLine ) {
 	// override anything from the config files with command line args
 	Com_StartupVariable( NULL );
 
-  // get dedicated here for proper hunk megs initialization
-#ifdef DEDICATED
-	com_dedicated = Cvar_Get ("dedicated", "1", CVAR_ROM);
-#else
-	com_dedicated = Cvar_Get ("dedicated", "0", CVAR_LATCH);
-#endif
 	// allocate the stack based hunk allocator
 	Com_InitHunkMemory();
 
@@ -2362,12 +2351,9 @@ void Com_Init( char *commandLine ) {
 	VM_Init();
 	SV_Init();
 
-	com_dedicated->modified = qfalse;
-	if ( !com_dedicated->integer ) {
 #ifndef DEDICATED
-		CL_Init();
+    CL_Init();
 #endif
-	}
 
 	// set com_frameTime so that if a map is started on the
 	// command line it will still be able to count on com_frameTime
@@ -2375,16 +2361,16 @@ void Com_Init( char *commandLine ) {
 	com_frameTime = Com_Milliseconds();
 
 	// add + commands from command line
+#ifndef DEDICATED
 	if ( !Com_AddStartupCommands() ) {
 		// if the user didn't give any commands, run default action
-		if ( !com_dedicated->integer ) {
-			Cbuf_AddText ("cinematic idlogo.RoQ\n");
-			if( !com_introPlayed->integer ) {
-				Cvar_Set( com_introPlayed->name, "1" );
-				Cvar_Set( "nextmap", "cinematic intro.RoQ" );
-			}
+        Cbuf_AddText ("cinematic idlogo.RoQ\n");
+        if( !com_introPlayed->integer ) {
+            Cvar_Set( com_introPlayed->name, "1" );
+            Cvar_Set( "nextmap", "cinematic intro.RoQ" );
 		}
 	}
+#endif
 
 	// start in full screen ui mode
 	Cvar_Set("r_uiFullScreen", "1");
@@ -2488,15 +2474,15 @@ int Com_ModifyMsec( int msec ) {
 		msec = 1;
 	}
 
-	if ( com_dedicated->integer ) {
-		// dedicated servers don't want to clamp for a much longer
-		// period, because it would mess up all the client's views
-		// of time.
-		if ( msec > 500 ) {
-			Com_Printf( "Hitch warning: %i msec frame time\n", msec );
-		}
-		clampTime = 5000;
-	} else 
+#ifdef DEDICATED
+    // dedicated servers don't want to clamp for a much longer
+    // period, because it would mess up all the client's views
+    // of time.
+    if ( msec > 500 ) {
+        Com_Printf( "Hitch warning: %i msec frame time\n", msec );
+    }
+    clampTime = 5000;
+#else
 	if ( !com_sv_running->integer ) {
 		// clients of remote servers do not want to clamp time, because
 		// it would skew their view of the server's time temporarily
@@ -2507,6 +2493,7 @@ int Com_ModifyMsec( int msec ) {
 		// flying off edges when something hitches.
 		clampTime = 200;
 	}
+#endif
 
 	if ( msec > clampTime ) {
 		msec = clampTime;
@@ -2562,12 +2549,17 @@ void Com_Frame( void ) {
 		timeBeforeFirstEvents = Sys_Milliseconds ();
 	}
 
-	// we may want to spin here if things are going too fast
-	if ( !com_dedicated->integer && com_maxfps->integer > 0 && !com_timedemo->integer ) {
+#ifdef DEDICATED
+    minMsec = 1;
+#else
+    // we may want to spin here if things are going too fast
+	if ( com_maxfps->integer > 0 && !com_timedemo->integer ) {
 		minMsec = 1000 / com_maxfps->integer;
 	} else {
 		minMsec = 1;
 	}
+#endif
+
 	do {
 		com_frameTime = Com_EventLoop();
 		if ( lastTime > com_frameTime ) {
@@ -2592,49 +2584,34 @@ void Com_Frame( void ) {
 
 	SV_Frame( msec );
 
-	// if "dedicated" has been modified, start up
-	// or shut down the client system.
-	// Do this after the server may have started,
-	// but before the client tries to auto-connect
-	if ( com_dedicated->modified ) {
-		// get the latched value
-		Cvar_Get( "dedicated", "0", 0 );
-		com_dedicated->modified = qfalse;
-		if ( !com_dedicated->integer ) {
-			CL_Init();
-		} else {
-			CL_Shutdown();
-		}
-	}
-
+#ifndef DEDICATED
 	//
 	// client system
 	//
-	if ( !com_dedicated->integer ) {
-		//
-		// run event loop a second time to get server to client packets
-		// without a frame of latency
-		//
-		if ( com_speeds->integer ) {
-			timeBeforeEvents = Sys_Milliseconds ();
-		}
-		Com_EventLoop();
-		Cbuf_Execute ();
+    //
+    // run event loop a second time to get server to client packets
+    // without a frame of latency
+    //
+    if ( com_speeds->integer ) {
+        timeBeforeEvents = Sys_Milliseconds ();
+    }
+    Com_EventLoop();
+    Cbuf_Execute ();
 
 
-		//
-		// client side
-		//
-		if ( com_speeds->integer ) {
-			timeBeforeClient = Sys_Milliseconds ();
-		}
+    //
+    // client side
+    //
+    if ( com_speeds->integer ) {
+        timeBeforeClient = Sys_Milliseconds ();
+    }
 
-		CL_Frame( msec );
+    CL_Frame( msec );
 
-		if ( com_speeds->integer ) {
-			timeAfter = Sys_Milliseconds ();
-		}
-	}
+    if ( com_speeds->integer ) {
+        timeAfter = Sys_Milliseconds ();
+    }
+#endif
 
 	//
 	// report timing information

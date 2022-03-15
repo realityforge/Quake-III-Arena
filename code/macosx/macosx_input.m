@@ -93,11 +93,6 @@ static void Sys_ReenableMouseMovement()
 
 void Sys_InitInput(void)
 {
-    // no input with dedicated servers
-    if ( com_dedicated->integer ) {
-            return;
-    }
-	
     // The Cvars don't seem to work really early.
     [(Q3Controller *)[NSApp delegate] showBanner];
 
@@ -147,11 +142,6 @@ void Sys_InitInput(void)
 
 void Sys_ShutdownInput(void)
 {
-    // no input with dedicated servers
-    if ( !com_dedicated || com_dedicated->integer ) {
-            return;
-    }
-
     Com_Printf( "------- Input Shutdown -------\n" );
     if ( !inputActive ) {
         return;
@@ -252,9 +242,6 @@ static char *Sys_ConsoleInput(void)
     fd_set	fdset;
     struct timeval timeout;
 
-    if (!com_dedicated || !com_dedicated->integer)
-        return NULL;
-    
     if (!stdin_active)
         return NULL;
     
@@ -876,15 +863,13 @@ sysEvent_t Sys_GetEvent( void )
 
     // During debugging it is sometimes usefull to be able to start/stop mouse input.
     // Don't turn on the input when we've disabled it because we're hidden, however.
-    if (!com_dedicated->integer) {
-        if (in_nomouse->integer == mouseactive && !Sys_IsHidden) {
-            if (in_nomouse->integer)
-                Sys_StopMouseInput();
-            else
-                Sys_StartMouseInput();
-        }
+    if (in_nomouse->integer == mouseactive && !Sys_IsHidden) {
+        if (in_nomouse->integer)
+            Sys_StopMouseInput();
+        else
+            Sys_StartMouseInput();
     }
-    
+
     // check for network packets
     MSG_Init( &netmsg, sys_packetReceived, sizeof( sys_packetReceived ) );
     if ( Sys_GetPacket ( &adr, &netmsg ) ) {
