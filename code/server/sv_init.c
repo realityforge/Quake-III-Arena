@@ -599,8 +599,10 @@ void SV_SpawnServer( char *server, qboolean killBots ) {
 	// to all clients
 	sv.state = SS_GAME;
 
+#ifdef DEDICATED
 	// send a heartbeat now so the master will get up to date info
 	SV_Heartbeat_f();
+#endif
 
 	Hunk_SetMark();
 

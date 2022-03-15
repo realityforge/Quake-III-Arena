@@ -1257,8 +1257,6 @@ static void SV_ConSayto_f(void) {
 	SV_SendServerCommand(saytocl, "chat \"%s\"", text);
 }
 
-#endif
-
 /*
 ==================
 SV_Heartbeat_f
@@ -1270,6 +1268,7 @@ void SV_Heartbeat_f( void ) {
 	svs.nextHeartbeatTime = -9999999;
 }
 
+#endif
 
 /*
 ===========
@@ -1415,7 +1414,6 @@ void SV_AddOperatorCommands( void ) {
 	}
 	initialized = qtrue;
 
-	Cmd_AddCommand ("heartbeat", SV_Heartbeat_f);
 	Cmd_AddCommand ("kick", SV_Kick_f);
 	Cmd_AddCommand ("kickbots", SV_KickBots_f);
 	Cmd_AddCommand ("kickall", SV_KickAll_f);
@@ -1431,6 +1429,7 @@ void SV_AddOperatorCommands( void ) {
 	Cmd_SetCommandCompletionFunc( "map", SV_CompleteMapName );
 	Cmd_AddCommand ("killserver", SV_KillServer_f);
 #ifdef DEDICATED
+    Cmd_AddCommand ("heartbeat", SV_Heartbeat_f);
     Cmd_AddCommand ("say", SV_ConSay_f);
     Cmd_AddCommand ("tell", SV_ConTell_f);
     Cmd_AddCommand ("sayto", SV_ConSayto_f);

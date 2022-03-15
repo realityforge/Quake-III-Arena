@@ -238,7 +238,9 @@ typedef struct {
 	int			numSnapshotEntities;		// sv_maxclients->integer*PACKET_BACKUP*MAX_SNAPSHOT_ENTITIES
 	int			nextSnapshotEntities;		// next snapshotEntities to use
 	entityState_t	*snapshotEntities;		// [numSnapshotEntities]
+#ifdef DEDICATED
 	int			nextHeartbeatTime;
+#endif
 	challenge_t	challenges[MAX_CHALLENGES];	// to prevent invalid IPs from connecting
 	netadr_t	redirectAddress;			// for rcon return messages
 	int			masterResolveTime[MAX_MASTER_SERVERS]; // next svs.time that server should do dns lookup for master server
@@ -377,11 +379,12 @@ int SV_WriteDownloadToClient(client_t *cl , msg_t *msg);
 int SV_SendDownloadMessages(void);
 int SV_SendQueuedMessages(void);
 
-
+#ifdef DEDICATED
 //
 // sv_ccmds.c
 //
 void SV_Heartbeat_f( void );
+#endif
 
 //
 // sv_snapshot.c

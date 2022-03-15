@@ -462,9 +462,11 @@ gotnewcl:
 			count++;
 		}
 	}
+#ifdef DEDICATED
 	if ( count == 1 || count == sv_maxclients->integer ) {
 		SV_Heartbeat_f();
 	}
+#endif
 }
 
 /*
@@ -560,9 +562,11 @@ void SV_DropClient( client_t *drop, const char *reason ) {
 			break;
 		}
 	}
+#ifdef DEDICATED
 	if ( i == sv_maxclients->integer ) {
 		SV_Heartbeat_f();
 	}
+#endif
 }
 
 /*
