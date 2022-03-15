@@ -1116,6 +1116,7 @@ static void SV_Status_f( void ) {
 	}
 	Com_Printf ("\n");
 }
+#ifdef DEDICATED
 
 /*
 ==================
@@ -1256,6 +1257,7 @@ static void SV_ConSayto_f(void) {
 	SV_SendServerCommand(saytocl, "chat \"%s\"", text);
 }
 
+#endif
 
 /*
 ==================
@@ -1360,6 +1362,7 @@ static void SV_CompleteMapName( char *args, int argNum ) {
 		Field_CompleteFilename( "maps", "bsp", qtrue, qfalse );
 	}
 }
+#ifdef DEDICATED
 
 /*
 ==================
@@ -1397,6 +1400,7 @@ static void SV_CompletePlayerName( char *args, int argNum ) {
 		Field_CompletePlayerName( namesPtr, nameCount );
 	}
 }
+#endif
 
 /*
 ==================
