@@ -175,8 +175,6 @@ typedef struct client_s {
 // out before legitimate users connected
 #define	MAX_CHALLENGES	1024
 
-#define	AUTHORIZE_TIMEOUT	5000
-
 typedef struct {
 	netadr_t	adr;
 	int			challenge;
