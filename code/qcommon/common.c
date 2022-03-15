@@ -68,7 +68,6 @@ cvar_t	*com_timescale;
 cvar_t	*com_fixedtime;
 cvar_t	*com_dropsim;		// 0.0 to 1.0, simulated packet drops
 cvar_t	*com_journal;
-cvar_t	*com_maxfps;
 cvar_t	*com_timedemo;
 cvar_t	*com_sv_running;
 cvar_t	*com_cl_running;
@@ -83,6 +82,9 @@ cvar_t	*sv_paused;
 cvar_t	*com_cameraMode;
 #if defined(_WIN32) && defined(_DEBUG)
 cvar_t	*com_noErrorInterrupt;
+#endif
+#ifdef DEDICATED
+cvar_t	*com_maxfps;
 #endif
 
 // com_speeds times
@@ -2307,7 +2309,6 @@ void Com_Init( char *commandLine ) {
 	//
 	// init commands and vars
 	//
-	com_maxfps = Cvar_Get ("com_maxfps", "85", CVAR_ARCHIVE);
 	com_blood = Cvar_Get ("com_blood", "1", CVAR_ARCHIVE);
 
 	com_developer = Cvar_Get ("developer", "0", CVAR_TEMP );
@@ -2328,6 +2329,10 @@ void Com_Init( char *commandLine ) {
 	com_buildScript = Cvar_Get( "com_buildScript", "0", 0 );
 
 	com_introPlayed = Cvar_Get( "com_introplayed", "0", CVAR_ARCHIVE);
+
+#ifndef DEDICATED
+    com_maxfps = Cvar_Get ("com_maxfps", "85", CVAR_ARCHIVE);
+#endif
 
 #if defined(_WIN32) && defined(_DEBUG)
 	com_noErrorInterrupt = Cvar_Get( "com_noErrorInterrupt", "0", 0 );
