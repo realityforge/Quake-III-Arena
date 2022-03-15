@@ -25,3 +25,16 @@ cc_library(
         "//code/qcommon:q_shared",
     ],
 )
+
+cc_library(
+    name = "server-dedicated",
+    srcs = _SERVER_SRC,
+    defines = ["DEDICATED"],
+    deps = [
+        "//code/botlib:api",
+        "//code/game:bg_api",
+        "//code/game:server_api",
+        "//code/qcommon",
+        "//code/qcommon:q_shared",
+    ],
+)
