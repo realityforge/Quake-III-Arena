@@ -202,7 +202,9 @@ typedef struct {
 	int			numSnapshotEntities;		// sv_maxclients->integer*PACKET_BACKUP*MAX_PACKET_ENTITIES
 	int			nextSnapshotEntities;		// next snapshotEntities to use
 	entityState_t	*snapshotEntities;		// [numSnapshotEntities]
+#ifdef DEDICATED
 	int			nextHeartbeatTime;
+#endif
 	challenge_t	challenges[MAX_CHALLENGES];	// to prevent invalid IPs from connecting
 	netadr_t	redirectAddress;			// for rcon return messages
 } serverStatic_t;
@@ -290,10 +292,13 @@ void SV_ClientThink (client_t *cl, usercmd_t *cmd);
 
 void SV_WriteDownloadToClient( client_t *cl , msg_t *msg );
 
+#ifdef DEDICATED
+
 //
 // sv_ccmds.c
 //
 void SV_Heartbeat_f( void );
+#endif
 
 //
 // sv_snapshot.c

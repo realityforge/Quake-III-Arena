@@ -510,7 +510,6 @@ static void SV_ConSay_f(void) {
 
 	SV_SendServerCommand(NULL, "chat \"%s\n\"", text);
 }
-#endif
 
 /*
 ==================
@@ -522,6 +521,7 @@ Also called by SV_DropClient, SV_DirectConnect, and SV_SpawnServer
 void SV_Heartbeat_f( void ) {
 	svs.nextHeartbeatTime = -9999999;
 }
+#endif
 
 
 /*
@@ -606,7 +606,6 @@ void SV_AddOperatorCommands( void ) {
 	}
 	initialized = qtrue;
 
-	Cmd_AddCommand ("heartbeat", SV_Heartbeat_f);
 	Cmd_AddCommand ("kick", SV_Kick_f);
 	Cmd_AddCommand ("clientkick", SV_KickNum_f);
 	Cmd_AddCommand ("status", SV_Status_f);
@@ -618,6 +617,7 @@ void SV_AddOperatorCommands( void ) {
 	Cmd_AddCommand ("map", SV_Map_f);
 	Cmd_AddCommand ("killserver", SV_KillServer_f);
 #ifdef DEDICATED
+    Cmd_AddCommand ("heartbeat", SV_Heartbeat_f);
     Cmd_AddCommand ("say", SV_ConSay_f);
 #endif
 }
