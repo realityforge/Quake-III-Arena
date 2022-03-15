@@ -2618,9 +2618,9 @@ static void CG_DrawVignette( void )
 
 	if (currentComfortVignetteValue > 0.0f && currentComfortVignetteValue <= 1.0f && !(vr->weapon_zoomed))
 	{
-		int x = (int)(0 + currentComfortVignetteValue * cg.refdef.width / 3);
+		int x = (int)(0 + currentComfortVignetteValue * cg.refdef.width / 3.5f);
 		int w = (int)(cg.refdef.width - 2 * x);
-		int y = (int)(0 + currentComfortVignetteValue * cg.refdef.height / 3);
+		int y = (int)(0 + currentComfortVignetteValue * cg.refdef.height / 3.5f);
 		int h = (int)(cg.refdef.height - 2 * y);
 
 		// sides
@@ -2677,6 +2677,11 @@ static void CG_Draw2D(stereoFrame_t stereoFrame)
 		if ( !cg.showScores && cg.snap->ps.stats[STAT_HEALTH] > 0 ) {
 
 			CG_DrawVignette();
+
+			// If weapon selector is active, check whether draw HUD
+			if (cg.weaponSelectorTime != 0 && trap_Cvar_VariableValue("vr_weaponSelectorWithHud") == 0) {
+				return;
+			}
 
 #ifdef MISSIONPACK
 			if ( cg_drawStatus.integer ) {
@@ -2841,13 +2846,9 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 
 	VectorCopy( baseOrg, cg.refdef.vieworg );
 
-	//Don't draw HUD whilst selecting the weapon with the holster (it gets in the way)
-	if (cg.weaponSelectorTime == 0)
-    {
-        // draw status bar and other floating elements
-        hudStereoView = stereoView;
-        CG_Draw2D(hudStereoView);
-    }
+    // draw status bar and other floating elements
+    hudStereoView = stereoView;
+    CG_Draw2D(hudStereoView);
 }
 
 

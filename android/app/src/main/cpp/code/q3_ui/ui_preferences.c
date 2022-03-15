@@ -55,7 +55,8 @@ GAME OPTIONS MENU
 #define ID_HOLSTER2D		    140
 #define ID_GORE 			    141
 #define ID_SHOWINHAND		    142
-#define ID_BACK					143
+#define ID_SELECTORWITHHUD		143
+#define ID_BACK					144
 
 #define	NUM_CROSSHAIRS			10
 #define	NUM_GORE    			4
@@ -84,6 +85,7 @@ typedef struct {
 	menuradiobutton_s	holster2d;
 	menulist_s 			gore;
 	menuradiobutton_s	showinhand;
+	menuradiobutton_s	selectorwithhud;
 	menubitmap_s		back;
 
 	qhandle_t			crosshairShader[NUM_CROSSHAIRS];
@@ -133,6 +135,7 @@ static void Preferences_SetMenuItems( void ) {
 		s_preferences.gore.curvalue		    = level % NUM_GORE;
     }
 	s_preferences.showinhand.curvalue		= trap_Cvar_VariableValue( "vr_showItemInHand" ) != 0;
+	s_preferences.selectorwithhud.curvalue	= trap_Cvar_VariableValue( "vr_weaponSelectorWithHud" ) != 0;
 }
 
 
@@ -232,6 +235,10 @@ static void Preferences_Event( void* ptr, int notification ) {
 		trap_Cvar_SetValue( "vr_showItemInHand", s_preferences.showinhand.curvalue);
         break;
 
+	case ID_SELECTORWITHHUD:
+		trap_Cvar_SetValue( "vr_weaponSelectorWithHud", s_preferences.selectorwithhud.curvalue);
+        break;
+
 	case ID_BACK:
 		UI_PopMenu();
 		break;
@@ -321,7 +328,7 @@ static void Preferences_MenuInit( void ) {
 	s_preferences.framer.width  	   = 256;
 	s_preferences.framer.height  	   = 334;
 
-	y = 110;
+	y = 92;
 	s_preferences.crosshair.generic.type		= MTYPE_SPINCONTROL;
 	s_preferences.crosshair.generic.flags		= QMF_PULSEIFFOCUS|QMF_SMALLFONT|QMF_NODEFAULTINIT|QMF_OWNERDRAW;
 	s_preferences.crosshair.generic.x			= PREFERENCES_X_POS;
@@ -454,6 +461,15 @@ static void Preferences_MenuInit( void ) {
     s_preferences.drawhud.generic.x	          = PREFERENCES_X_POS;
     s_preferences.drawhud.generic.y	          = y;
 
+	y += BIGCHAR_HEIGHT+2;
+    s_preferences.selectorwithhud.generic.type        = MTYPE_RADIOBUTTON;
+    s_preferences.selectorwithhud.generic.name	      = "Draw HUD On Weapon Selector:";
+    s_preferences.selectorwithhud.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+    s_preferences.selectorwithhud.generic.callback    = Preferences_Event;
+    s_preferences.selectorwithhud.generic.id          = ID_SELECTORWITHHUD;
+    s_preferences.selectorwithhud.generic.x	          = PREFERENCES_X_POS;
+    s_preferences.selectorwithhud.generic.y	          = y;
+
 //	y += BIGCHAR_HEIGHT+2;
 //	s_preferences.allowdownload.generic.type     = MTYPE_RADIOBUTTON;
 //	s_preferences.allowdownload.generic.name	   = "Automatic Downloading:";
@@ -505,6 +521,7 @@ static void Preferences_MenuInit( void ) {
 //	Menu_AddItem( &s_preferences.menu, &s_preferences.allowdownload );
 	Menu_AddItem( &s_preferences.menu, &s_preferences.gore );
 	Menu_AddItem( &s_preferences.menu, &s_preferences.showinhand );
+	Menu_AddItem( &s_preferences.menu, &s_preferences.selectorwithhud );
 
 	Menu_AddItem( &s_preferences.menu, &s_preferences.back );
 

@@ -275,13 +275,28 @@ itemDef {
       		visible 1  
 	}
 
+itemDef {
+      		name options
+		group grpOptions
+      		type ITEM_TYPE_YESNO
+		text "Statusbar On Weapon Selector:"
+		cvar "vr_weaponSelectorWithHud"
+		rect 99 335 256 20
+      		textalign ITEM_ALIGN_RIGHT
+      		textalignx 128
+      		textaligny 20
+		textscale .3
+      		forecolor 1 1 1 1
+      		visible 1
+	}
+
 		itemDef {
       		name options
 		group grpOptions
       		type ITEM_TYPE_YESNO
 		text "Blood:"
 		cvar "com_blood"
-		rect 99 345 256 20
+		rect 99 365 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
       		textaligny 20
@@ -296,7 +311,7 @@ itemDef {
       		type ITEM_TYPE_YESNO
 		text "Gibs:"
 		cvar "cg_gibs"
-		rect 99 365 256 20
+		rect 99 385 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
       		textaligny 20
@@ -311,7 +326,7 @@ itemDef {
       		type ITEM_TYPE_YESNO
 		text "Extra Gibs (Performance Hit):"
 		cvar "cg_megagibs"
-		rect 99 385 256 20
+		rect 99 405 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
       		textaligny 20

@@ -37,6 +37,7 @@ cvar_t *vr_lasersight = NULL;
 cvar_t *vr_hapticIntensity = NULL;
 cvar_t *vr_comfortVignette = NULL;
 cvar_t *vr_weaponSelectorMode = NULL;
+cvar_t *vr_weaponSelectorWithHud = NULL;
 
 engine_t* VR_Init( ovrJava java )
 {
@@ -75,6 +76,7 @@ void VR_InitCvars( void )
     vr_hapticIntensity = Cvar_Get ("vr_hapticIntensity", "1.0", CVAR_ARCHIVE);
     vr_comfortVignette = Cvar_Get ("vr_comfortVignette", "0.0", CVAR_ARCHIVE);
 	vr_weaponSelectorMode = Cvar_Get ("vr_weaponSelectorMode", "0", CVAR_ARCHIVE);
+	vr_weaponSelectorWithHud = Cvar_Get ("vr_weaponSelectorWithHud", "0", CVAR_ARCHIVE);
 
 	// Values are:  scale,right,up,forward,pitch,yaw,roll
 	// VALUES PROVIDED BY SkillFur - Thank-you!
@@ -99,8 +101,8 @@ void VR_InitCvars( void )
 	qboolean uturnEnabled = Cvar_VariableValue( "vr_uturn" ) != 0;
 	int controlSchema = (int)Cvar_VariableValue( "vr_controlSchema" ) % 2;
 	if (controlSchema == 0) {
-        Cvar_Get ("vr_button_map_RTHUMBLEFT", "", CVAR_ARCHIVE); // empty ~ turn left
-        Cvar_Get ("vr_button_map_RTHUMBRIGHT", "", CVAR_ARCHIVE); // empty ~ turn right
+        Cvar_Get ("vr_button_map_RTHUMBLEFT", "turnleft", CVAR_ARCHIVE); // turn left
+        Cvar_Get ("vr_button_map_RTHUMBRIGHT", "turnright", CVAR_ARCHIVE); // turn right
         Cvar_Get ("vr_button_map_RTHUMBFORWARD", "weapnext", CVAR_ARCHIVE); // next weapon
         if (uturnEnabled) {
             Cvar_Get ("vr_button_map_RTHUMBBACK", "uturn", CVAR_ARCHIVE); // u-turn
@@ -133,18 +135,18 @@ void VR_InitCvars( void )
     	Cvar_Get ("vr_button_map_RTHUMBFORWARDLEFT", "+weapon_select", CVAR_ARCHIVE);
     	Cvar_Get ("vr_button_map_PRIMARYTHUMBSTICK", "+weapon_select", CVAR_ARCHIVE);
     	Cvar_Get ("vr_button_map_PRIMARYGRIP", "+alt", CVAR_ARCHIVE); // switch to alt layout
-        Cvar_Get ("vr_button_map_RTHUMBLEFT_ALT", "", CVAR_ARCHIVE); // empty ~ turn left
-        Cvar_Get ("vr_button_map_RTHUMBRIGHT_ALT", "", CVAR_ARCHIVE); // empty ~ turn right
+        Cvar_Get ("vr_button_map_RTHUMBLEFT_ALT", "turnleft", CVAR_ARCHIVE); // turn left
+        Cvar_Get ("vr_button_map_RTHUMBRIGHT_ALT", "turnright", CVAR_ARCHIVE); // turn right
         Cvar_Get ("vr_button_map_RTHUMBFORWARD_ALT", "weapnext", CVAR_ARCHIVE);
         if (uturnEnabled) {
             Cvar_Get ("vr_button_map_RTHUMBBACK_ALT", "uturn", CVAR_ARCHIVE);
         } else {
             Cvar_Get ("vr_button_map_RTHUMBBACK_ALT", "weapprev", CVAR_ARCHIVE);
         }
-        Cvar_Get ("vr_button_map_RTHUMBFORWARDRIGHT_ALT", "", CVAR_ARCHIVE); // unmapped
-        Cvar_Get ("vr_button_map_RTHUMBBACKRIGHT_ALT", "", CVAR_ARCHIVE); // unmapped
-        Cvar_Get ("vr_button_map_RTHUMBBACKLEFT_ALT", "", CVAR_ARCHIVE); // unmapped
-        Cvar_Get ("vr_button_map_RTHUMBFORWARDLEFT_ALT", "", CVAR_ARCHIVE); // unmapped
+        Cvar_Get ("vr_button_map_RTHUMBFORWARDRIGHT_ALT", "blank", CVAR_ARCHIVE); // unmapped
+        Cvar_Get ("vr_button_map_RTHUMBBACKRIGHT_ALT", "blank", CVAR_ARCHIVE); // unmapped
+        Cvar_Get ("vr_button_map_RTHUMBBACKLEFT_ALT", "blank", CVAR_ARCHIVE); // unmapped
+        Cvar_Get ("vr_button_map_RTHUMBFORWARDLEFT_ALT", "blank", CVAR_ARCHIVE); // unmapped
 	}
 
 	//Remaining button mapping (buttons not affected by schemas)
