@@ -185,9 +185,6 @@ void S_AdpcmGetSamples(sndBuffer *chunk, short *to);
 
 // wavelet function
 
-#define SENTINEL_MULAW_ZERO_RUN 127
-#define SENTINEL_MULAW_FOUR_BIT_RUN 126
-
 void S_FreeOldestSound();
 
 #define	NXStream byte
