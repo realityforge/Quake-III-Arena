@@ -1903,7 +1903,7 @@ CL_Snd_Restart
 Restart the sound subsystem
 =================
 */
-void CL_Snd_Shutdown(void)
+static void CL_Snd_Shutdown(void)
 {
 	S_Shutdown();
 	cls.soundStarted = qfalse;
