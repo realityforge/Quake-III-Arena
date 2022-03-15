@@ -688,7 +688,9 @@ void SV_Shutdown( char *finalmsg ) {
 
 	Com_Printf( "---------------------------\n" );
 
+#ifndef DEDICATED
 	// disconnect any local clients
 	CL_Disconnect( qfalse );
+#endif
 }
 
