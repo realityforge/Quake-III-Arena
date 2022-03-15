@@ -27,7 +27,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #endif
 
 #include "../renderercommon/tr_common.h"
-#include "../qcommon/qcommon.h"
 
 extern SDL_Window *SDL_window;
 
