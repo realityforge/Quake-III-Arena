@@ -2193,16 +2193,24 @@ int Com_EventLoop( void ) {
 		switch(ev.evType)
 		{
 			case SE_KEY:
-				CL_KeyEvent( ev.evValue, ev.evValue2, ev.evTime );
-			break;
+#ifndef DEDICATED
+                CL_KeyEvent( ev.evValue, ev.evValue2, ev.evTime );
+#endif
+                break;
 			case SE_CHAR:
+#ifndef DEDICATED
 				CL_CharEvent( ev.evValue );
+#endif
 			break;
 			case SE_MOUSE:
+#ifndef DEDICATED
 				CL_MouseEvent( ev.evValue, ev.evValue2, ev.evTime );
-			break;
+#endif
+                break;
 			case SE_JOYSTICK_AXIS:
+#ifndef DEDICATED
 				CL_JoystickEvent( ev.evValue, ev.evValue2, ev.evTime );
+#endif
 			break;
 			case SE_CONSOLE:
 				Cbuf_AddText( (char *)ev.evPtr );
@@ -2959,8 +2967,10 @@ void Com_Frame( void ) {
 		else
 			NET_Sleep(timeVal - 1);
 	} while(Com_TimeVal(minMsec));
-	
+
+#ifndef DEDICATED
 	IN_Frame();
+#endif
 
 	lastTime = com_frameTime;
 	com_frameTime = Com_EventLoop();

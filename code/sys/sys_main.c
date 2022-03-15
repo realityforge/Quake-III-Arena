@@ -93,6 +93,7 @@ char *Sys_DefaultInstallPath(void)
 		return Sys_Cwd();
 }
 
+#ifndef DEDICATED
 /*
 =================
 Sys_In_Restart_f
@@ -102,16 +103,15 @@ Restart the input subsystem
 */
 void Sys_In_Restart_f( void )
 {
-#ifndef DEDICATED
 	if( !SDL_WasInit( SDL_INIT_VIDEO ) )
 	{
 		Com_Printf( "in_restart: Cannot restart input while video is shutdown\n" );
 		return;
 	}
-#endif
 
 	IN_Restart( );
 }
+#endif
 
 /*
 =================
@@ -211,7 +211,9 @@ Sys_Init
 */
 void Sys_Init(void)
 {
+#ifndef DEDICATED
 	Cmd_AddCommand( "in_restart", Sys_In_Restart_f );
+#endif
 	Cvar_Set( "arch", OS_STRING " " ARCH_STRING );
 	Cvar_Set( "username", Sys_GetCurrentUser( ) );
 }

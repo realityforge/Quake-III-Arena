@@ -1918,7 +1918,6 @@ Q3DOBJ = \
   $(B)/ded/l_struct.o \
   \
   $(B)/ded/null_client.o \
-  $(B)/ded/null_input.o \
   $(B)/ded/null_snddma.o \
   \
   $(B)/ded/con_log.o \
