@@ -1,8 +1,6 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 
-cc_library(
-    name = "server",
-    srcs = [
+_SERVER_SRC = [
         "server.h",
         "sv_bot.c",
         "sv_ccmds.c",
@@ -13,7 +11,11 @@ cc_library(
         "sv_net_chan.c",
         "sv_snapshot.c",
         "sv_world.c",
-    ],
+]
+
+cc_library(
+    name = "server",
+    srcs = _SERVER_SRC,
     #    defines = ["USE_LOCAL_HEADERS"],
     deps = [
         "//code/botlib:api",
