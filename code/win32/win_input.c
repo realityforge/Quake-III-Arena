@@ -105,15 +105,6 @@ WIN32 MOUSE CONTROL
 
 /*
 ================
-IN_InitWin32Mouse
-================
-*/
-void IN_InitWin32Mouse( void ) 
-{
-}
-
-/*
-================
 IN_ShutdownWin32Mouse
 ================
 */
@@ -586,7 +577,6 @@ void IN_StartupMouse( void )
 		Com_Printf ("Falling back to Win32 mouse support...\n");
 	}
 	s_wmv.mouseInitialized = qtrue;
-	IN_InitWin32Mouse();
 }
 
 /*
