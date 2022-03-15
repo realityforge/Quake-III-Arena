@@ -1019,9 +1019,6 @@ void CL_InitRef(void);
 void CL_StartHunkUsers( qboolean rendererOnly );
 // start all the client stuff using the hunk
 
-void CL_Snd_Shutdown(void);
-// Restart sound subsystem
-
 void Key_KeynameCompletion( void(*callback)(const char *s) );
 // for keyname autocompletion
 
