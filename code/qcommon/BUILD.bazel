@@ -15,7 +15,7 @@ cc_library(
     ],
 )
 
-# TODO: Separate out headers for cvars to here?
+# TODO: Separate out headers for cvars to here? Actually lets create a much better console var library that is probably inspired by the work in q2java modernized
 cc_library(
     name = "cvar",
     srcs = [
