@@ -522,9 +522,13 @@ delta functions
 =============================================================================
 */
 
+#ifndef DEDICATED
 extern cvar_t *cl_shownet;
 
 #define	LOG(x) if( cl_shownet->integer == 4 ) { Com_Printf("%s ", x ); };
+#else
+#define	LOG(x)
+#endif
 
 void MSG_WriteDelta( msg_t *msg, int oldV, int newV, int bits ) {
 	if ( oldV == newV ) {
@@ -972,7 +976,6 @@ If the delta removes the entity, entityState_t->number will be set to MAX_GENTIT
 Can go from either a baseline or a previous packet_entity
 ==================
 */
-extern	cvar_t	*cl_shownet;
 
 void MSG_ReadDeltaEntity( msg_t *msg, entityState_t *from, entityState_t *to, 
 						 int number) {
@@ -998,9 +1001,11 @@ void MSG_ReadDeltaEntity( msg_t *msg, entityState_t *from, entityState_t *to,
 	if ( MSG_ReadBits( msg, 1 ) == 1 ) {
 		Com_Memset( to, 0, sizeof( *to ) );	
 		to->number = MAX_GENTITIES - 1;
+#ifndef DEDICATED
 		if ( cl_shownet->integer >= 2 || cl_shownet->integer == -1 ) {
 			Com_Printf( "%3i: #%-3i remove\n", msg->readcount, number );
 		}
+#endif
 		return;
 	}
 
@@ -1016,12 +1021,16 @@ void MSG_ReadDeltaEntity( msg_t *msg, entityState_t *from, entityState_t *to,
 
 	// shownet 2/3 will interleave with other printed info, -1 will
 	// just print the delta records`
+#ifndef DEDICATED
 	if ( cl_shownet->integer >= 2 || cl_shownet->integer == -1 ) {
 		print = 1;
 		Com_Printf( "%3i: #%-3i ", msg->readcount, to->number );
 	} else {
+#endif
 		print = 0;
+#ifndef DEDICATED
 	}
+#endif
 
 	to->number = number;
 
@@ -1335,14 +1344,18 @@ void MSG_ReadDeltaPlayerstate (msg_t *msg, playerState_t *from, playerState_t *t
 		startBit = ( msg->readcount - 1 ) * 8 + msg->bit - GENTITYNUM_BITS;
 	}
 
+#ifndef DEDICATED
 	// shownet 2/3 will interleave with other printed info, -2 will
 	// just print the delta records
 	if ( cl_shownet->integer >= 2 || cl_shownet->integer == -2 ) {
 		print = 1;
 		Com_Printf( "%3i: playerstate ", msg->readcount );
 	} else {
+#endif
 		print = 0;
+#ifndef DEDICATED
 	}
+#endif
 
 	numFields = sizeof( playerStateFields ) / sizeof( playerStateFields[0] );
 	lc = MSG_ReadByte(msg);

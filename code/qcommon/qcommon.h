@@ -135,7 +135,9 @@ typedef enum {
 } netadrtype_t;
 
 typedef enum {
+#ifndef DEDICATED
 	NS_CLIENT,
+#endif
 	NS_SERVER
 } netsrc_t;
 
