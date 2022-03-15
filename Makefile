@@ -10,9 +10,6 @@ COMPILE_ARCH=$(shell uname -m | sed -e 's/i.86/x86/' | sed -e 's/^arm.*/arm/')
 ifeq ($(shell uname -m), arm64)
   COMPILE_ARCH=arm64
 endif
-ifeq ($(shell uname -m), aarch64)
-  COMPILE_ARCH=arm64
-endif
 
 ifndef BUILD_STANDALONE
   BUILD_STANDALONE =
