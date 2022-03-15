@@ -27,16 +27,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 botlib_export_t	*botlib_export;
 
-// these functions must be used instead of pointer arithmetic, because
-// the game allocates gentities with private information after the server shared part
-int	SV_NumForGentity( sharedEntity_t *ent ) {
-	int		num;
-
-	num = ( (byte *)ent - (byte *)sv.gentities ) / sv.gentitySize;
-
-	return num;
-}
-
 sharedEntity_t *SV_GentityNum( int num ) {
 	sharedEntity_t *ent;
 
