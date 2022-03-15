@@ -135,7 +135,7 @@ static qboolean IN_IsConsoleKey( keyNum_t key, int character )
 		while( numConsoleKeys < MAX_CONSOLE_KEYS )
 		{
 			consoleKey_t *c = &consoleKeys[ numConsoleKeys ];
-			int charCode = 0;
+			int charCode;
 
 			token = COM_Parse( &text_p );
 			if( !token[ 0 ] )
@@ -328,7 +328,7 @@ IN_GobbleMotionEvents
 static void IN_GobbleMotionEvents( void )
 {
 	SDL_Event dummy[ 1 ];
-	int val = 0;
+	int val;
 
 	// Gobble any mouse motion events
 	SDL_PumpEvents( );
@@ -452,8 +452,8 @@ IN_InitJoystick
 */
 static void IN_InitJoystick( void )
 {
-	int i = 0;
-	int total = 0;
+	int i;
+	int total;
 	char buf[16384] = "";
 
 	if (gamepad)
@@ -775,8 +775,8 @@ static void IN_JoyMove( void )
 {
 	unsigned int axes = 0;
 	unsigned int hats = 0;
-	int total = 0;
-	int i = 0;
+	int total;
+	int i;
 
 	if (gamepad)
 	{
@@ -984,7 +984,7 @@ IN_ProcessEvents
 static void IN_ProcessEvents( void )
 {
 	SDL_Event e;
-	keyNum_t key = 0;
+	keyNum_t key;
 	static keyNum_t lastKeyDown = 0;
 
 	if( !SDL_WasInit( SDL_INIT_VIDEO ) )
