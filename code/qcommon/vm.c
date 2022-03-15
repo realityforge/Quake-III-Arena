@@ -128,24 +128,6 @@ vmSymbol_t *VM_ValueToFunctionSymbol( vm_t *vm, int value ) {
 	return sym;
 }
 
-
-/*
-===============
-VM_SymbolToValue
-===============
-*/
-int VM_SymbolToValue( vm_t *vm, const char *symbol ) {
-	vmSymbol_t	*sym;
-
-	for ( sym = vm->symbols ; sym ; sym = sym->next ) {
-		if ( !strcmp( symbol, sym->symName ) ) {
-			return sym->symValue;
-		}
-	}
-	return 0;
-}
-
-
 /*
 =====================
 VM_SymbolForCompiledPointer
