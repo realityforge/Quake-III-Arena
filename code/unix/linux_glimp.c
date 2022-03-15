@@ -1699,6 +1699,7 @@ void GLimp_WakeRenderer( void *data ) {}
 
 #endif
 
+#ifndef DEDICATED
 /*****************************************************************************/
 /* MOUSE                                                                     */
 /*****************************************************************************/
@@ -1759,6 +1760,7 @@ void IN_Frame (void) {
 void IN_Activate(void)
 {
 }
+#endif
 
 // bk001130 - cvs1.17 joystick code (mkv) was here, no linux_joystick.c
 

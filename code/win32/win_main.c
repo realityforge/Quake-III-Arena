@@ -928,6 +928,7 @@ sysEvent_t Sys_GetEvent( void ) {
 
 //================================================================
 
+#ifndef DEDICATED
 /*
 =================
 Sys_In_Restart_f
@@ -939,7 +940,7 @@ void Sys_In_Restart_f( void ) {
 	IN_Shutdown();
 	IN_Init();
 }
-
+#endif
 
 /*
 =================
@@ -971,7 +972,9 @@ void Sys_Init( void ) {
 	// NT gets 18ms resolution
 	timeBeginPeriod( 1 );
 
+#ifndef DEDICATED
 	Cmd_AddCommand ("in_restart", Sys_In_Restart_f);
+#endif
 	Cmd_AddCommand ("net_restart", Sys_Net_Restart_f);
 
 	g_wv.osversion.dwOSVersionInfoSize = sizeof( g_wv.osversion );
@@ -1152,8 +1155,10 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 		startTime = Sys_Milliseconds();
 
+#ifndef DEDICATED
 		// make sure mouse and joystick are only called once a frame
 		IN_Frame();
+#endif
 
 		// run the game
 		Com_Frame();

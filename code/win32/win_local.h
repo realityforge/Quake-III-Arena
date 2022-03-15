@@ -51,6 +51,7 @@ qboolean	Sys_GetPacket ( netadr_t *net_from, msg_t *net_message );
 
 void	Sys_SetErrorText( const char *text );
 
+#ifndef DEDICATED
 // Input subsystem
 
 void	IN_Init (void);
@@ -64,6 +65,7 @@ void	IN_DeactivateWin32Mouse( void);
 
 void	IN_Activate (qboolean active);
 void	IN_Frame (void);
+#endif
 
 // window procedure
 LONG WINAPI MainWndProc (
