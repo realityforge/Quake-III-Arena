@@ -322,10 +322,6 @@ ifneq (,$(findstring "$(PLATFORM)", "linux" "gnu"))
     OPTIMIZEVM = -O3 -march=i586
     OPTIMIZE = $(OPTIMIZEVM) -ffast-math
     HAVE_VM_COMPILED=true
-  else
-  ifeq ($(ARCH),armv7l)
-    HAVE_VM_COMPILED=true
-  endif
   endif
   endif
 
@@ -1789,9 +1785,6 @@ ifeq ($(HAVE_VM_COMPILED),true)
     Q3OBJ += \
       $(B)/client/vm_x86.o
   endif
-  ifeq ($(ARCH),armv7l)
-    Q3OBJ += $(B)/client/vm_armv7l.o
-  endif
 endif
 
 ifdef MINGW
@@ -1955,9 +1948,6 @@ ifeq ($(HAVE_VM_COMPILED),true)
   ifneq ($(findstring $(ARCH),x86 x86_64),)
     Q3DOBJ += \
       $(B)/ded/vm_x86.o
-  endif
-  ifeq ($(ARCH),armv7l)
-    Q3DOBJ += $(B)/client/vm_armv7l.o
   endif
 endif
 
