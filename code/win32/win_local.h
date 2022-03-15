@@ -49,6 +49,8 @@ char	*Sys_ConsoleInput (void);
 
 qboolean	Sys_GetPacket ( netadr_t *net_from, msg_t *net_message );
 
+void	Sys_SetErrorText( const char *text );
+
 // Input subsystem
 
 void	IN_Init (void);
