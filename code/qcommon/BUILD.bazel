@@ -15,6 +15,66 @@ cc_library(
     ],
 )
 
+# TODO: Separate out headers for cvars to here?
+cc_library(
+    name = "cvar",
+    srcs = [
+        "cvar.c",
+    ],
+    deps = [
+        ":q_shared",
+        ":qcommon",
+    ],
+)
+
+cc_library(
+    name = "files",
+    srcs = [
+        "files.c",
+    ],
+    deps = [
+        ":q_shared",
+        ":qcommon",
+        ":unzip",
+    ],
+)
+
+# TODO: Use shared version or move this to third_party?
+cc_library(
+    name = "unzip",
+    srcs = [
+        "ioapi.c",
+        "ioapi.h",
+        "unzip.c",
+    ],
+    hdrs = [
+        "unzip.h",
+    ],
+    defines = ["USE_LOCAL_HEADERS"],
+    deps = [
+        ":q_shared",
+        ":qcommon",
+        "//third_party/zlib",
+    ],
+)
+
+cc_library(
+    name = "net",
+    srcs = [
+        "huffman.c",
+        "md4.c",
+        "md5.c",
+        "msg.c",
+        "net_chan.c",
+        "net_ip.c",
+    ],
+    deps = [
+        ":common",
+        ":q_shared",
+        ":qcommon",
+    ],
+)
+
 cc_library(
     name = "common",
     srcs = [

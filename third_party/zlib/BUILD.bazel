@@ -22,4 +22,7 @@ cc_library(
     ],
     defines = ["NO_GZIP"],
     includes = ["."],
+    visibility = [
+        "//code/qcommon:__pkg__",
+    ],
 )
