@@ -412,17 +412,6 @@ int AAS_BestReachableArea(vec3_t origin, vec3_t mins, vec3_t maxs, vec3_t goalor
 		} //end if
 		else
 		{
-			//it can very well happen that the AAS_PointAreaNum function tells that
-			//a point is in an area and that starting a AAS_TraceClientBBox from that
-			//point will return trace.startsolid qtrue
-#if 0
-			if (AAS_PointAreaNum(start))
-			{
-				Log_Write("point %f %f %f in area %d but trace startsolid", start[0], start[1], start[2], areanum);
-				AAS_DrawPermanentCross(start, 4, LINECOLOR_RED);
-			} //end if
-			botimport.Print(PRT_MESSAGE, "AAS_BestReachableArea: start solid\n");
-#endif
 			VectorCopy(start, goalorigin);
 			return areanum;
 		} //end else
