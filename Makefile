@@ -1792,9 +1792,6 @@ ifeq ($(HAVE_VM_COMPILED),true)
     Q3OBJ += \
       $(B)/client/vm_x86.o
   endif
-  ifeq ($(ARCH),sparc)
-    Q3OBJ += $(B)/client/vm_sparc.o
-  endif
   ifeq ($(ARCH),armv7l)
     Q3OBJ += $(B)/client/vm_armv7l.o
   endif
@@ -1961,9 +1958,6 @@ ifeq ($(HAVE_VM_COMPILED),true)
   ifneq ($(findstring $(ARCH),x86 x86_64),)
     Q3DOBJ += \
       $(B)/ded/vm_x86.o
-  endif
-  ifeq ($(ARCH),sparc)
-    Q3DOBJ += $(B)/ded/vm_sparc.o
   endif
   ifeq ($(ARCH),armv7l)
     Q3DOBJ += $(B)/client/vm_armv7l.o
