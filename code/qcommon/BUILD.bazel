@@ -142,6 +142,25 @@ cc_library(
 )
 
 cc_library(
+    name = "cm",
+    srcs = [
+        "cm_load.c",
+        "cm_local.h",
+        "cm_patch.c",
+        "cm_patch.h",
+        "cm_polylib.c",
+        "cm_polylib.h",
+        "cm_test.c",
+        "cm_trace.c",
+    ],
+    hdrs = ["cm_local.h"],
+    deps = [
+        ":q_shared",
+        ":qcommon",
+    ],
+)
+
+cc_library(
     name = "qcommon",
     hdrs = [
         "cm_public.h",
