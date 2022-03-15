@@ -1,0 +1,82 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "local",
+    srcs = [
+        "tr_extratypes.h",
+        "tr_extramath.h",
+        "tr_postprocess.h",
+    ],
+    hdrs = [
+        "tr_fbo.h",
+        "tr_local.h",
+    ],
+    defines = ["USE_LOCAL_HEADERS"],
+    includes = ["."],
+    deps = [
+        "//code/qcommon",
+        "//code/qcommon:qfiles",
+        "//code/renderercommon",
+    ],
+)
+
+cc_library(
+    name = "renderergl2",
+    srcs = [
+        "tr_dsa.c",
+        "tr_model_iqm.c",
+        "tr_curve.c",
+        "tr_model.c",
+        "tr_sky.c",
+        "tr_surface.c",
+        "tr_extramath.c",
+        "tr_bsp.c",
+        "tr_postprocess.c",
+        "tr_animation.c",
+        "tr_backend.c",
+        "tr_world.c",
+        "tr_glsl.c",
+        "tr_scene.c",
+        "tr_init.c",
+        "tr_shade.c",
+        "tr_image.c",
+        "tr_flares.c",
+        "tr_vbo.c",
+        "tr_shadows.c",
+        "tr_dsa.h",
+        "tr_image_dds.c",
+        "tr_fbo.c",
+        "tr_light.c",
+        "tr_main.c",
+        "tr_mesh.c",
+        "tr_shade_calc.c",
+        "tr_marks.c",
+        "tr_cmds.c",
+        "tr_extensions.c",
+        "tr_shader.c",
+    ],
+    defines = ["USE_LOCAL_HEADERS"],
+    includes = ["."],
+    deps = [
+        ":local",
+        "//code/qcommon",
+        "//code/qcommon:json",
+        "//code/qcommon:qfiles",
+        "//code/renderercommon",
+    ],
+)
+
+cc_library(
+    name = "tr_subs",
+    srcs = [
+        "tr_subs.c",
+    ],
+    defines = ["USE_LOCAL_HEADERS"],
+    includes = ["."],
+    deps = [
+        ":local",
+        "//code/qcommon",
+        "//code/qcommon:qfiles",
+        "//code/renderercommon",
+    ],
+)

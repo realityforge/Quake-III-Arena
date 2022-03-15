@@ -86,6 +86,9 @@ cc_library(
     hdrs = [
         "json.h",
     ],
+    visibility = [
+        "//code/renderergl2:__pkg__"
+    ]
 )
 
 # TODO: Use shared version or move this to third_party?
@@ -178,7 +181,10 @@ cc_library(
 cc_library(
     name = "qfiles",
     hdrs = ["qfiles.h"],
-    visibility = ["//code/renderergl1:__pkg__"],
+    visibility = [
+        "//code/renderergl1:__pkg__",
+        "//code/renderergl2:__pkg__",
+    ],
 )
 
 # collision map library
@@ -211,6 +217,7 @@ cc_library(
         "//code/botlib:__pkg__",
         "//code/client:__pkg__",
         "//code/renderergl1:__pkg__",
+        "//code/renderergl2:__pkg__",
         "//code/sdl:__pkg__",
         "//code/server:__pkg__",
         "//code/sys:__pkg__",

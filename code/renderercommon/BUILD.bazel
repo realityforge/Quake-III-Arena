@@ -33,6 +33,7 @@ cc_library(
     defines = ["USE_LOCAL_HEADERS"],
     visibility = [
         "//code/renderergl1:__pkg__",
+        "//code/renderergl2:__pkg__",
         "//code/sdl:__pkg__",
     ],
     deps = [
