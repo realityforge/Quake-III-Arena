@@ -62,7 +62,6 @@ cvar_t	*com_developer;
 cvar_t	*com_timescale;
 cvar_t	*com_fixedtime;
 cvar_t	*com_journal;
-cvar_t	*com_maxfps;
 cvar_t	*com_timedemo;
 cvar_t	*com_sv_running;
 cvar_t	*com_cl_running;
@@ -81,10 +80,6 @@ cvar_t  *cl_packetdelay;
 cvar_t  *sv_packetdelay;
 cvar_t	*com_cameraMode;
 cvar_t	*com_ansiColor;
-cvar_t	*com_unfocused;
-cvar_t	*com_maxfpsUnfocused;
-cvar_t	*com_minimized;
-cvar_t	*com_maxfpsMinimized;
 cvar_t	*com_gamename;
 cvar_t	*com_protocol;
 #ifdef LEGACY_PROTOCOL
@@ -94,6 +89,11 @@ cvar_t	*com_basegame;
 cvar_t  *com_homepath;
 cvar_t	*com_busyWait;
 #ifndef DEDICATED
+cvar_t	*com_maxfps;
+cvar_t	*com_maxfpsUnfocused;
+cvar_t	*com_maxfpsMinimized;
+cvar_t	*com_unfocused;
+cvar_t	*com_minimized;
 cvar_t  *con_autochat;
 #endif
 
@@ -2585,7 +2585,6 @@ void Com_Init( char *commandLine ) {
 	//
 	// init commands and vars
 	//
-	com_maxfps = Cvar_Get ("com_maxfps", "85", CVAR_ARCHIVE);
 	com_blood = Cvar_Get ("com_blood", "1", CVAR_ARCHIVE);
 
 	com_logfile = Cvar_Get ("logfile", "0", CVAR_TEMP );
@@ -2606,10 +2605,6 @@ void Com_Init( char *commandLine ) {
 	com_buildScript = Cvar_Get( "com_buildScript", "0", 0 );
 	com_ansiColor = Cvar_Get( "com_ansiColor", "0", CVAR_ARCHIVE );
 
-	com_unfocused = Cvar_Get( "com_unfocused", "0", CVAR_ROM );
-	com_maxfpsUnfocused = Cvar_Get( "com_maxfpsUnfocused", "0", CVAR_ARCHIVE );
-	com_minimized = Cvar_Get( "com_minimized", "0", CVAR_ROM );
-	com_maxfpsMinimized = Cvar_Get( "com_maxfpsMinimized", "0", CVAR_ARCHIVE );
 	com_busyWait = Cvar_Get("com_busyWait", "0", CVAR_ARCHIVE);
 	Cvar_Get("com_errorMessage", "", CVAR_ROM | CVAR_NORESTART);
 
@@ -2632,6 +2627,11 @@ void Com_Init( char *commandLine ) {
 		Cvar_Get("protocol", com_protocol->string, CVAR_ROM);
 
 #ifndef DEDICATED
+    com_maxfps = Cvar_Get ("com_maxfps", "85", CVAR_ARCHIVE);
+    com_maxfpsUnfocused = Cvar_Get( "com_maxfpsUnfocused", "0", CVAR_ARCHIVE );
+    com_maxfpsMinimized = Cvar_Get( "com_maxfpsMinimized", "0", CVAR_ARCHIVE );
+    com_unfocused = Cvar_Get( "com_unfocused", "0", CVAR_ROM );
+    com_minimized = Cvar_Get( "com_minimized", "0", CVAR_ROM );
 	con_autochat = Cvar_Get("con_autochat", "1", CVAR_ARCHIVE);
 #endif
 
