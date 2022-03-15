@@ -1,6 +1,20 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
+    name = "local",
+    hdrs = [
+        "tr_local.h",
+    ],
+    defines = ["USE_LOCAL_HEADERS"],
+    includes = ["."],
+    deps = [
+        "//code/qcommon",
+        "//code/qcommon:qfiles",
+        "//code/renderercommon",
+    ],
+)
+
+cc_library(
     name = "renderergl1",
     srcs = [
         "tr_animation.c",
@@ -12,7 +26,6 @@ cc_library(
         "tr_image.c",
         "tr_init.c",
         "tr_light.c",
-        "tr_local.h",
         "tr_main.c",
         "tr_marks.c",
         "tr_mesh.c",
@@ -24,13 +37,28 @@ cc_library(
         "tr_shader.c",
         "tr_shadows.c",
         "tr_sky.c",
-        "tr_subs.c",
         "tr_surface.c",
         "tr_world.c",
     ],
     defines = ["USE_LOCAL_HEADERS"],
     includes = ["."],
     deps = [
+        ":local",
+        "//code/qcommon",
+        "//code/qcommon:qfiles",
+        "//code/renderercommon",
+    ],
+)
+
+cc_library(
+    name = "tr_subs",
+    srcs = [
+        "tr_subs.c",
+    ],
+    defines = ["USE_LOCAL_HEADERS"],
+    includes = ["."],
+    deps = [
+        ":local",
         "//code/qcommon",
         "//code/qcommon:qfiles",
         "//code/renderercommon",
