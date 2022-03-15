@@ -213,8 +213,6 @@ typedef struct client_s {
 // while not allowing a single ip to grab all challenge resources
 #define MAX_CHALLENGES_MULTI (MAX_CHALLENGES / 2)
 
-#define	AUTHORIZE_TIMEOUT	5000
-
 typedef struct {
 	netadr_t	adr;
 	int			challenge;
