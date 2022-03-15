@@ -129,35 +129,6 @@ vmSymbol_t *VM_ValueToFunctionSymbol( vm_t *vm, int value ) {
 }
 
 /*
-=====================
-VM_SymbolForCompiledPointer
-=====================
-*/
-const char *VM_SymbolForCompiledPointer( vm_t *vm, void *code ) {
-	int			i;
-
-	if ( code < (void *)vm->codeBase ) {
-		return "Before code block";
-	}
-	if ( code >= (void *)(vm->codeBase + vm->codeLength) ) {
-		return "After code block";
-	}
-
-	// find which original instruction it is after
-	for ( i = 0 ; i < vm->codeLength ; i++ ) {
-		if ( (void *)vm->instructionPointers[i] > code ) {
-			break;
-		}
-	}
-	i--;
-
-	// now look up the bytecode instruction pointer
-	return VM_ValueToSymbol( vm, i );
-}
-
-
-
-/*
 ===============
 ParseHex
 ===============
