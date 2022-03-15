@@ -1093,12 +1093,7 @@ int		Sys_Milliseconds (void);
 
 qboolean Sys_RandomBytes( byte *string, int len );
 
-// the system console is shown when a dedicated server is running
-void	Sys_DisplaySystemConsole( qboolean show );
-
 cpuFeatures_t Sys_GetProcessorFeatures( void );
-
-void	Sys_SetErrorText( const char *text );
 
 void	Sys_SendPacket( int length, const void *data, netadr_t to );
 
