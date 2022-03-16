@@ -19,12 +19,13 @@ typedef struct {
     vrFollowMode_t follow_mode;
     qboolean weapon_select;
     qboolean weapon_select_autoclose;
-    qboolean smooth_turning;
 
     int realign; // used to realign the fake 6DoF playspace in a multiplayer game
 
     int clientNum;
     vec3_t clientviewangles; //orientation in the client - we use this in the cgame
+    float clientview_yaw_last; // Don't use this, it is just for calculating delta!
+    float clientview_yaw_delta;
 
     vec3_t hmdposition;
     vec3_t hmdorigin; //used to recenter the mp fake 6DoF playspace
