@@ -40,12 +40,12 @@ tmp_node_t *AAS_RefreshMergedTree_r(tmp_node_t *tmpnode)
 		while(tmparea->mergedarea) tmparea = tmparea->mergedarea;
 		tmpnode->tmparea = tmparea;
 		return tmpnode;
-	} //end if
+	}
 	//do the children recursively
 	tmpnode->children[0] = AAS_RefreshMergedTree_r(tmpnode->children[0]);
 	tmpnode->children[1] = AAS_RefreshMergedTree_r(tmpnode->children[1]);
 	return tmpnode;
-} //end of the function AAS_RefreshMergedTree_r
+}
 //===========================================================================
 // returns true if the two given faces would create a non-convex area at
 // the given sides, otherwise false is returned
@@ -70,15 +70,15 @@ int NonConvex(tmp_face_t *face1, tmp_face_t *face2, int side1, int side2)
 	for (i = 0; i < w1->numpoints; i++)
 	{
 		if (DotProduct(plane2->normal, w1->p[i]) - plane2->dist < -CONVEX_EPSILON) return true;
-	} //end for
+	}
 	//check if one of the points of face2 is at the back of the plane of face1
 	for (i = 0; i < w2->numpoints; i++)
 	{
 		if (DotProduct(plane1->normal, w2->p[i]) - plane1->dist < -CONVEX_EPSILON) return true;
-	} //end for
+	}
 
 	return false;
-} //end of the function NonConvex
+}
 //===========================================================================
 // try to merge the areas at both sides of the given face
 //
@@ -139,8 +139,8 @@ int AAS_TryMergeFaceAreas(tmp_face_t *seperatingface)
 			if (AAS_GapFace(face2, side2)) area2faceflags |= FACE_GAP;
 			//if the two faces would create a non-convex area
 			if (NonConvex(face1, face2, side1, side2)) return false;
-		} //end for
-	} //end for
+		}
+	}
 	//if one area has gap faces (that aren't seperating the two areas)
 	//and the other has ground faces (that aren't seperating the two areas),
 	//the areas can't be merged
@@ -149,7 +149,7 @@ int AAS_TryMergeFaceAreas(tmp_face_t *seperatingface)
 	{
 //		Log_Print("   can't merge: ground/gap\n");
 		return false;
-	} //end if
+	}
 
 //	Log_Print("merged area %d & %d to %d with %d faces\n", tmparea1->areanum, tmparea2->areanum, newarea->areanum, numfaces);
 //	return false;
@@ -176,11 +176,11 @@ int AAS_TryMergeFaceAreas(tmp_face_t *seperatingface)
 				face1->backarea == tmparea1))
 		{
 			continue;
-		} //end if
+		}
 		//
 		AAS_RemoveFaceFromArea(face1, tmparea1);
 		AAS_AddFaceSideToArea(face1, side1, newarea);
-	} //end for
+	}
 	//add all the faces (except the seperating ones) from the second area
 	//to the new area
 	for (face2 = tmparea2->tmpfaces; face2; face2 = nextface2)
@@ -194,11 +194,11 @@ int AAS_TryMergeFaceAreas(tmp_face_t *seperatingface)
 				face2->backarea == tmparea1))
 		{
 			continue;
-		} //end if
+		}
 		//
 		AAS_RemoveFaceFromArea(face2, tmparea2);
 		AAS_AddFaceSideToArea(face2, side2, newarea);
-	} //end for
+	}
 	//free all shared faces
 	for (face1 = tmparea1->tmpfaces; face1; face1 = nextface1)
 	{
@@ -208,7 +208,7 @@ int AAS_TryMergeFaceAreas(tmp_face_t *seperatingface)
 		AAS_RemoveFaceFromArea(face1, face1->frontarea);
 		AAS_RemoveFaceFromArea(face1, face1->backarea);
 		AAS_FreeTmpFace(face1);
-	} //end for
+	}
 	//
 	tmparea1->mergedarea = newarea;
 	tmparea1->invalid = true;
@@ -219,7 +219,7 @@ int AAS_TryMergeFaceAreas(tmp_face_t *seperatingface)
 	AAS_FlipAreaFaces(newarea);
 //	Log_Print("merged area %d & %d to %d with %d faces\n", tmparea1->areanum, tmparea2->areanum, newarea->areanum);
 	return true;
-} //end of the function AAS_TryMergeFaceAreas
+}
 //===========================================================================
 // try to merge areas
 // merged areas are added to the end of the convex area list so merging
@@ -249,7 +249,7 @@ void AAS_MergeAreas(void)
 		{
 //			Log_Print("   area invalid\n");
 			continue;
-		} //end if
+		}
 		//
 //		if (!(tmparea->settings->areaflags & AREA_GROUNDED)) continue;
 		//
@@ -268,10 +268,10 @@ void AAS_MergeAreas(void)
 				{
 					qprintf("\r%6d", ++nummerges);
 					break;
-				} //end if
-			} //end if
-		} //end for
-	} //end for
+				}
+			}
+		}
+	}
 	//merge all areas
 	for (tmparea = tmpaasworld.areas; tmparea; tmparea = tmparea->l_next)
 	{
@@ -281,7 +281,7 @@ void AAS_MergeAreas(void)
 		{
 //			Log_Print("   area invalid\n");
 			continue;
-		} //end if
+		}
 		//
 		for (face = tmparea->tmpfaces; face; face = face->next[side])
 		{
@@ -294,14 +294,14 @@ void AAS_MergeAreas(void)
 				{
 					qprintf("\r%6d", ++nummerges);
 					break;
-				} //end if
-			} //end if
-		} //end for
-	} //end for
+				}
+			}
+		}
+	}
 	Log_Print("\r%6d areas merged\n", nummerges);
 	//refresh the merged tree
 	AAS_RefreshMergedTree_r(tmpaasworld.nodes);
-} //end of the function AAS_MergeAreas*/
+}
 
 int AAS_GroundArea(tmp_area_t *tmparea)
 {
@@ -312,9 +312,9 @@ int AAS_GroundArea(tmp_area_t *tmparea)
 	{
 		side = (face->frontarea != tmparea);
 		if (face->faceflags & FACE_GROUND) return true;
-	} //end for
+	}
 	return false;
-} //end of the function AAS_GroundArea
+}
 
 void AAS_MergeAreas(void)
 {
@@ -341,12 +341,12 @@ void AAS_MergeAreas(void)
 			if (tmparea->invalid)
 			{
 				continue;
-			} //end if
+			}
 			//
 			if (groundfirst)
 			{
 				if (!AAS_GroundArea(tmparea)) continue;
-			} //end if
+			}
 			//
 			for (face = tmparea->tmpfaces; face; face = face->next[side])
 			{
@@ -361,24 +361,24 @@ void AAS_MergeAreas(void)
 					if (groundfirst)
 					{
 						if (!AAS_GroundArea(othertmparea)) continue;
-					} //end if
+					}
 					if (AAS_TryMergeFaceAreas(face))
 					{
 						qprintf("\r%6d", ++nummerges);
 						merges++;
 						break;
-					} //end if
-				} //end if
-			} //end for
-		} //end for
+					}
+				}
+			}
+		}
 		if (!merges)
 		{
 			if (groundfirst) groundfirst = false;
 			else break;
-		} //end if
-	} //end for
+		}
+	}
 	qprintf("\n");
 	Log_Write("%6d areas merged\r\n", nummerges);
 	//refresh the merged tree
 	AAS_RefreshMergedTree_r(tmpaasworld.nodes);
-} //end of the function AAS_MergeAreas
+}

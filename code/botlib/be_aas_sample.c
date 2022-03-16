@@ -77,10 +77,10 @@ void AAS_PresenceTypeBoundingBox(int presencetype, vec3_t mins, vec3_t maxs)
 	{
 		botimport.Print(PRT_FATAL, "AAS_PresenceTypeBoundingBox: unknown presence type\n");
 		index = 2;
-	} //end if
+	}
 	VectorCopy(boxmins[index], mins);
 	VectorCopy(boxmaxs[index], maxs);
-} //end of the function AAS_PresenceTypeBoundingBox
+}
 void AAS_InitAASLinkHeap(void)
 {
 	int i, max_aaslinks;
@@ -97,7 +97,7 @@ void AAS_InitAASLinkHeap(void)
 		if (max_aaslinks < 0) max_aaslinks = 0;
 		aasworld.linkheapsize = max_aaslinks;
 		aasworld.linkheap = (aas_link_t *) GetHunkMemory(max_aaslinks * sizeof(aas_link_t));
-	} //end if
+	}
 	//link the links on the heap
 	aasworld.linkheap[0].prev_ent = NULL;
 	aasworld.linkheap[0].next_ent = &aasworld.linkheap[1];
@@ -105,20 +105,20 @@ void AAS_InitAASLinkHeap(void)
 	{
 		aasworld.linkheap[i].prev_ent = &aasworld.linkheap[i - 1];
 		aasworld.linkheap[i].next_ent = &aasworld.linkheap[i + 1];
-	} //end for
+	}
 	aasworld.linkheap[max_aaslinks-1].prev_ent = &aasworld.linkheap[max_aaslinks-2];
 	aasworld.linkheap[max_aaslinks-1].next_ent = NULL;
 	//pointer to the first free link
 	aasworld.freelinks = &aasworld.linkheap[0];
 	//
 	numaaslinks = max_aaslinks;
-} //end of the function AAS_InitAASLinkHeap
+}
 void AAS_FreeAASLinkHeap(void)
 {
 	if (aasworld.linkheap) FreeMemory(aasworld.linkheap);
 	aasworld.linkheap = NULL;
 	aasworld.linkheapsize = 0;
-} //end of the function AAS_FreeAASLinkHeap
+}
 aas_link_t *AAS_AllocAASLink(void)
 {
 	aas_link_t *link;
@@ -131,14 +131,14 @@ aas_link_t *AAS_AllocAASLink(void)
 #endif
 		{
 			botimport.Print(PRT_FATAL, "empty aas link heap\n");
-		} //end if
+		}
 		return NULL;
-	} //end if
+	}
 	if (aasworld.freelinks) aasworld.freelinks = aasworld.freelinks->next_ent;
 	if (aasworld.freelinks) aasworld.freelinks->prev_ent = NULL;
 	numaaslinks--;
 	return link;
-} //end of the function AAS_AllocAASLink
+}
 void AAS_DeAllocAASLink(aas_link_t *link)
 {
 	if (aasworld.freelinks) aasworld.freelinks->prev_ent = link;
@@ -148,19 +148,19 @@ void AAS_DeAllocAASLink(aas_link_t *link)
 	link->next_area = NULL;
 	aasworld.freelinks = link;
 	numaaslinks++;
-} //end of the function AAS_DeAllocAASLink
+}
 void AAS_InitAASLinkedEntities(void)
 {
 	if (!aasworld.loaded) return;
 	if (aasworld.arealinkedentities) FreeMemory(aasworld.arealinkedentities);
 	aasworld.arealinkedentities = (aas_link_t **) GetClearedHunkMemory(
 						aasworld.numareas * sizeof(aas_link_t *));
-} //end of the function AAS_InitAASLinkedEntities
+}
 void AAS_FreeAASLinkedEntities(void)
 {
 	if (aasworld.arealinkedentities) FreeMemory(aasworld.arealinkedentities);
 	aasworld.arealinkedentities = NULL;
-} //end of the function AAS_InitAASLinkedEntities
+}
 //===========================================================================
 // returns the AAS area the point is in
 //
@@ -179,7 +179,7 @@ int AAS_PointAreaNum(vec3_t point)
 	{
 		botimport.Print(PRT_ERROR, "AAS_PointAreaNum: aas not loaded\n");
 		return 0;
-	} //end if
+	}
 
 	//start with node 1 because node zero is a dummy used for solid leafs
 	nodenum = 1;
@@ -191,7 +191,7 @@ int AAS_PointAreaNum(vec3_t point)
 		{
 			botimport.Print(PRT_ERROR, "nodenum = %d >= aasworld.numnodes = %d\n", nodenum, aasworld.numnodes);
 			return 0;
-		} //end if
+		}
 #endif //AAS_SAMPLE_DEBUG
 		node = &aasworld.nodes[nodenum];
 #ifdef AAS_SAMPLE_DEBUG
@@ -199,22 +199,22 @@ int AAS_PointAreaNum(vec3_t point)
 		{
 			botimport.Print(PRT_ERROR, "node->planenum = %d >= aasworld.numplanes = %d\n", node->planenum, aasworld.numplanes);
 			return 0;
-		} //end if
+		}
 #endif //AAS_SAMPLE_DEBUG
 		plane = &aasworld.planes[node->planenum];
 		dist = DotProduct(point, plane->normal) - plane->dist;
 		if (dist > 0) nodenum = node->children[0];
 		else nodenum = node->children[1];
-	} //end while
+	}
 	if (!nodenum)
 	{
 #ifdef AAS_SAMPLE_DEBUG
 		botimport.Print(PRT_MESSAGE, "in solid\n");
 #endif //AAS_SAMPLE_DEBUG
 		return 0;
-	} //end if
+	}
 	return -nodenum;
-} //end of the function AAS_PointAreaNum
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -234,9 +234,9 @@ int AAS_PointReachabilityAreaIndex( vec3_t origin )
 		for (i = 0; i < aasworld.numclusters; i++)
 		{
 			index += aasworld.clusters[i].numreachabilityareas;
-		} //end for
+		}
 		return index;
-	} //end if
+	}
 
 	areanum = AAS_PointAreaNum( origin );
 	if ( !areanum || !AAS_AreaReachability(areanum) )
@@ -247,25 +247,25 @@ int AAS_PointReachabilityAreaIndex( vec3_t origin )
 	{
 		cluster = aasworld.portals[-cluster].frontcluster;
 		areanum = aasworld.portals[-cluster].clusterareanum[0];
-	} //end if
+	}
 
 	index = 0;
 	for (i = 0; i < cluster; i++)
 	{
 		index += aasworld.clusters[i].numreachabilityareas;
-	} //end for
+	}
 	index += areanum;
 	return index;
-} //end of the function AAS_PointReachabilityAreaIndex
+}
 int AAS_AreaCluster(int areanum)
 {
 	if (areanum <= 0 || areanum >= aasworld.numareas)
 	{
 		botimport.Print(PRT_ERROR, "AAS_AreaCluster: invalid area number\n");
 		return 0;
-	} //end if
+	}
 	return aasworld.areasettings[areanum].cluster;
-} //end of the function AAS_AreaCluster
+}
 //===========================================================================
 // returns the presence types of the given area
 //
@@ -280,9 +280,9 @@ int AAS_AreaPresenceType(int areanum)
 	{
 		botimport.Print(PRT_ERROR, "AAS_AreaPresenceType: invalid area number\n");
 		return 0;
-	} //end if
+	}
 	return aasworld.areasettings[areanum].presencetype;
-} //end of the function AAS_AreaPresenceType
+}
 //===========================================================================
 // returns the presence type at the given point
 //
@@ -299,7 +299,7 @@ int AAS_PointPresenceType(vec3_t point)
 	areanum = AAS_PointAreaNum(point);
 	if (!areanum) return PRESENCE_NONE;
 	return aasworld.areasettings[areanum].presencetype;
-} //end of the function AAS_PointPresenceType
+}
 //===========================================================================
 // calculates the minimum distance between the origin of the box and the
 // given plane when both will collide on the given side of the plane
@@ -330,8 +330,8 @@ vec_t AAS_BoxOriginDistanceFromPlane(vec3_t normal, vec3_t mins, vec3_t maxs, in
 			if (normal[i] > BBOX_NORMAL_EPSILON) v1[i] = maxs[i];
 			else if (normal[i] < -BBOX_NORMAL_EPSILON) v1[i] = mins[i];
 			else v1[i] = 0;
-		} //end for
-	} //end if
+		}
+	}
 	else
 	{
 		//get a point of the box that would be one of the first
@@ -341,14 +341,14 @@ vec_t AAS_BoxOriginDistanceFromPlane(vec3_t normal, vec3_t mins, vec3_t maxs, in
 			if (normal[i] > BBOX_NORMAL_EPSILON) v1[i] = mins[i];
 			else if (normal[i] < -BBOX_NORMAL_EPSILON) v1[i] = maxs[i];
 			else v1[i] = 0;
-		} //end for
-	} //end else
+		}
+	}
 	//
 	VectorCopy(normal, v2);
 	VectorInverse(v2);
 //	VectorNegate(normal, v2);
 	return DotProduct(v1, v2);
-} //end of the function AAS_BoxOriginDistanceFromPlane
+}
 qboolean AAS_AreaEntityCollision(int areanum, vec3_t start, vec3_t end,
 										int presencetype, int passent, aas_trace_t *trace)
 {
@@ -372,8 +372,8 @@ qboolean AAS_AreaEntityCollision(int areanum, vec3_t start, vec3_t end,
 												CONTENTS_SOLID|CONTENTS_PLAYERCLIP, &bsptrace))
 		{
 			collision = qtrue;
-		} //end if
-	} //end for
+		}
+	}
 	if (collision)
 	{
 		trace->startsolid = bsptrace.startsolid;
@@ -382,9 +382,9 @@ qboolean AAS_AreaEntityCollision(int areanum, vec3_t start, vec3_t end,
 		trace->area = 0;
 		trace->planenum = 0;
 		return qtrue;
-	} //end if
+	}
 	return qfalse;
-} //end of the function AAS_AreaEntityCollision
+}
 //===========================================================================
 // recursive subdivision of the line by the BSP tree.
 //
@@ -437,7 +437,7 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
 			trace.area = 0;
 			trace.planenum = 0;
 			return trace;
-		} //end if
+		}
 		//number of the current node to test the line against
 		nodenum = tstack_p->nodenum;
 		//if it is an area
@@ -448,7 +448,7 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
 			{
 				botimport.Print(PRT_ERROR, "AAS_TraceBoundingBox: -nodenum out of range\n");
 				return trace;
-			} //end if
+			}
 #endif //AAS_SAMPLE_DEBUG
 			//botimport.Print(PRT_MESSAGE, "areanum = %d, must be %d\n", -nodenum, AAS_PointAreaNum(start));
 			//if can't enter the area because it hasn't got the right presence type
@@ -464,7 +464,7 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
 					trace.startsolid = qtrue;
 					trace.fraction = 0.0;
 					VectorClear(v1);
-				} //end if
+				}
 				else
 				{
 					trace.startsolid = qfalse;
@@ -472,7 +472,7 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
 					VectorSubtract(tstack_p->start, start, v2);
 					trace.fraction = VectorLength(v2) / VectorNormalize(v1);
 					VectorMA(tstack_p->start, -0.125, v1, tstack_p->start);
-				} //end else
+				}
 				VectorCopy(tstack_p->start, trace.endpos);
 				trace.ent = 0;
 				trace.area = -nodenum;
@@ -482,7 +482,7 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
 				plane = &aasworld.planes[trace.planenum];
 				if (DotProduct(v1, plane->normal) > 0) trace.planenum ^= 1;
 				return trace;
-			} //end if
+			}
 			else
 			{
 				if (passent >= 0)
@@ -496,14 +496,14 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
 							VectorSubtract(end, start, v1);
 							VectorSubtract(trace.endpos, start, v2);
 							trace.fraction = VectorLength(v2) / VectorLength(v1);
-						} //end if
+						}
 						return trace;
-					} //end if
-				} //end if
-			} //end else
+					}
+				}
+			}
 			trace.lastarea = -nodenum;
 			continue;
-		} //end if
+		}
 		//if it is a solid leaf
 		if (!nodenum)
 		{
@@ -517,7 +517,7 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
 				trace.startsolid = qtrue;
 				trace.fraction = 0.0;
 				VectorClear(v1);
-			} //end if
+			}
 			else
 			{
 				trace.startsolid = qfalse;
@@ -525,7 +525,7 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
 				VectorSubtract(tstack_p->start, start, v2);
 				trace.fraction = VectorLength(v2) / VectorNormalize(v1);
 				VectorMA(tstack_p->start, -0.125, v1, tstack_p->start);
-			} //end else
+			}
 			VectorCopy(tstack_p->start, trace.endpos);
 			trace.ent = 0;
 			trace.area = 0;	//hit solid leaf
@@ -535,13 +535,13 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
 			plane = &aasworld.planes[trace.planenum];
 			if (DotProduct(v1, plane->normal) > 0) trace.planenum ^= 1;
 			return trace;
-		} //end if
+		}
 #ifdef AAS_SAMPLE_DEBUG
 		if (nodenum > aasworld.numnodes)
 		{
 			botimport.Print(PRT_ERROR, "AAS_TraceBoundingBox: nodenum out of range\n");
 			return trace;
-		} //end if
+		}
 #endif //AAS_SAMPLE_DEBUG
 		//the node to test against
 		aasnode = &aasworld.nodes[nodenum];
@@ -560,26 +560,26 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
 				front = cur_start[0] - plane->dist;
 				back = cur_end[0] - plane->dist;
 				break;
-			} //end case
+			}
 			case PLANE_Y:
 			{
 				front = cur_start[1] - plane->dist;
 				back = cur_end[1] - plane->dist;
 				break;
-			} //end case
+			}
 			case PLANE_Z:
 			{
 				front = cur_start[2] - plane->dist;
 				back = cur_end[2] - plane->dist;
 				break;
-			} //end case*/
+			}*/
 			default: //gee it's not an axial plane
 			{
 				front = DotProduct(cur_start, plane->normal) - plane->dist;
 				back = DotProduct(cur_end, plane->normal) - plane->dist;
 				break;
-			} //end default
-		} //end switch
+			}
+		}
 		// bk010221 - old location of FPE hack and divide by zero expression
 		//if the whole to be traced line is totally at the front of this node
 		//only go down the tree with the front child
@@ -593,8 +593,8 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
 			{
 				botimport.Print(PRT_ERROR, "AAS_TraceBoundingBox: stack overflow\n");
 				return trace;
-			} //end if
-		} //end if
+			}
+		}
 		//if the whole to be traced line is totally at the back of this node
 		//only go down the tree with the back child
 		else if ((front < ON_EPSILON && back < ON_EPSILON))
@@ -607,8 +607,8 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
 			{
 				botimport.Print(PRT_ERROR, "AAS_TraceBoundingBox: stack overflow\n");
 				return trace;
-			} //end if
-		} //end if
+			}
+		}
 		//go down the tree both at the front and back of the node
 		else
 		{
@@ -644,7 +644,7 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
 			{
 				botimport.Print(PRT_ERROR, "AAS_TraceBoundingBox: stack overflow\n");
 				return trace;
-			} //end if
+			}
 			//now put the part near the start of the line on the stack so we will
 			//continue with thats part first. This way we'll find the first
 			//hit of the bbox
@@ -657,11 +657,11 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
 			{
 				botimport.Print(PRT_ERROR, "AAS_TraceBoundingBox: stack overflow\n");
 				return trace;
-			} //end if
-		} //end else
-	} //end while
+			}
+		}
+	}
 //	return trace;
-} //end of the function AAS_TraceClientBBox
+}
 //===========================================================================
 // recursive subdivision of the line by the BSP tree.
 //
@@ -702,7 +702,7 @@ int AAS_TraceAreas(vec3_t start, vec3_t end, int *areas, vec3_t *points, int max
 		if (tstack_p < tracestack)
 		{
 			return numareas;
-		} //end if
+		}
 		//number of the current node to test the line against
 		nodenum = tstack_p->nodenum;
 		//if it is an area
@@ -713,7 +713,7 @@ int AAS_TraceAreas(vec3_t start, vec3_t end, int *areas, vec3_t *points, int max
 			{
 				botimport.Print(PRT_ERROR, "AAS_TraceAreas: -nodenum = %d out of range\n", -nodenum);
 				return numareas;
-			} //end if
+			}
 #endif //AAS_SAMPLE_DEBUG
 			//botimport.Print(PRT_MESSAGE, "areanum = %d, must be %d\n", -nodenum, AAS_PointAreaNum(start));
 			areas[numareas] = -nodenum;
@@ -721,18 +721,18 @@ int AAS_TraceAreas(vec3_t start, vec3_t end, int *areas, vec3_t *points, int max
 			numareas++;
 			if (numareas >= maxareas) return numareas;
 			continue;
-		} //end if
+		}
 		//if it is a solid leaf
 		if (!nodenum)
 		{
 			continue;
-		} //end if
+		}
 #ifdef AAS_SAMPLE_DEBUG
 		if (nodenum > aasworld.numnodes)
 		{
 			botimport.Print(PRT_ERROR, "AAS_TraceAreas: nodenum out of range\n");
 			return numareas;
-		} //end if
+		}
 #endif //AAS_SAMPLE_DEBUG
 		//the node to test against
 		aasnode = &aasworld.nodes[nodenum];
@@ -751,26 +751,26 @@ int AAS_TraceAreas(vec3_t start, vec3_t end, int *areas, vec3_t *points, int max
 				front = cur_start[0] - plane->dist;
 				back = cur_end[0] - plane->dist;
 				break;
-			} //end case
+			}
 			case PLANE_Y:
 			{
 				front = cur_start[1] - plane->dist;
 				back = cur_end[1] - plane->dist;
 				break;
-			} //end case
+			}
 			case PLANE_Z:
 			{
 				front = cur_start[2] - plane->dist;
 				back = cur_end[2] - plane->dist;
 				break;
-			} //end case*/
+			}*/
 			default: //gee it's not an axial plane
 			{
 				front = DotProduct(cur_start, plane->normal) - plane->dist;
 				back = DotProduct(cur_end, plane->normal) - plane->dist;
 				break;
-			} //end default
-		} //end switch
+			}
+		}
 
 		//if the whole to be traced line is totally at the front of this node
 		//only go down the tree with the front child
@@ -784,8 +784,8 @@ int AAS_TraceAreas(vec3_t start, vec3_t end, int *areas, vec3_t *points, int max
 			{
 				botimport.Print(PRT_ERROR, "AAS_TraceAreas: stack overflow\n");
 				return numareas;
-			} //end if
-		} //end if
+			}
+		}
 		//if the whole to be traced line is totally at the back of this node
 		//only go down the tree with the back child
 		else if (front <= 0 && back <= 0)
@@ -798,8 +798,8 @@ int AAS_TraceAreas(vec3_t start, vec3_t end, int *areas, vec3_t *points, int max
 			{
 				botimport.Print(PRT_ERROR, "AAS_TraceAreas: stack overflow\n");
 				return numareas;
-			} //end if
-		} //end if
+			}
+		}
 		//go down the tree both at the front and back of the node
 		else
 		{
@@ -830,7 +830,7 @@ int AAS_TraceAreas(vec3_t start, vec3_t end, int *areas, vec3_t *points, int max
 			{
 				botimport.Print(PRT_ERROR, "AAS_TraceAreas: stack overflow\n");
 				return numareas;
-			} //end if
+			}
 			//now put the part near the start of the line on the stack so we will
 			//continue with thats part first. This way we'll find the first
 			//hit of the bbox
@@ -843,11 +843,11 @@ int AAS_TraceAreas(vec3_t start, vec3_t end, int *areas, vec3_t *points, int max
 			{
 				botimport.Print(PRT_ERROR, "AAS_TraceAreas: stack overflow\n");
 				return numareas;
-			} //end if
-		} //end else
-	} //end while
+			}
+		}
+	}
 //	return numareas;
-} //end of the function AAS_TraceAreas
+}
 //===========================================================================
 // a simple cross product
 //
@@ -895,7 +895,7 @@ qboolean AAS_InsideFace(aas_face_t *face, vec3_t pnormal, vec3_t point, float ep
 		if (lastvertex && lastvertex != edge->v[firstvertex])
 		{
 			botimport.Print(PRT_MESSAGE, "winding not counter clockwise\n");
-		} //end if
+		}
 		lastvertex = edge->v[!firstvertex];
 #endif //AAS_SAMPLE_DEBUG
 		//vector from first edge point to point possible in face
@@ -912,9 +912,9 @@ qboolean AAS_InsideFace(aas_face_t *face, vec3_t pnormal, vec3_t point, float ep
 		//origin (first vertex of edge) to the point 
 		//if the dotproduct is smaller than zero the point is outside the face
 		if (DotProduct(pointvec, sepnormal) < -epsilon) return qfalse;
-	} //end for
+	}
 	return qtrue;
-} //end of the function AAS_InsideFace
+}
 qboolean AAS_PointInsideFace(int facenum, vec3_t point, float epsilon)
 {
 	int i, firstvertex, edgenum;
@@ -945,9 +945,9 @@ qboolean AAS_PointInsideFace(int facenum, vec3_t point, float epsilon)
 		CrossProduct(edgevec, plane->normal, sepnormal);
 		//
 		if (DotProduct(pointvec, sepnormal) < -epsilon) return qfalse;
-	} //end for
+	}
 	return qtrue;
-} //end of the function AAS_PointInsideFace
+}
 //===========================================================================
 // returns the ground face the given point is above in the given area
 //
@@ -978,10 +978,10 @@ aas_face_t *AAS_AreaGroundFace(int areanum, vec3_t point)
 			else VectorCopy(up, normal);
 			//check if the point is in the face
 			if (AAS_InsideFace(face, normal, point, 0.01f)) return face;
-		} //end if
-	} //end for
+		}
+	}
 	return NULL;
-} //end of the function AAS_AreaGroundFace
+}
 //===========================================================================
 // returns the face the trace end position is situated in
 //
@@ -996,7 +996,7 @@ void AAS_FacePlane(int facenum, vec3_t normal, float *dist)
 	plane = &aasworld.planes[aasworld.faces[facenum].planenum];
 	VectorCopy(plane->normal, normal);
 	*dist = plane->dist;
-} //end of the function AAS_FacePlane
+}
 //===========================================================================
 // returns the face the trace end position is situated in
 //
@@ -1036,28 +1036,28 @@ aas_face_t *AAS_TraceEndFace(aas_trace_t *trace)
 						aasworld.planes[face->planenum].normal, trace->endpos))
 					{
 						return firstface;
-					} //end if
+					}
 					firstface = face;
-				} //end if
+				}
 				else
 				{
 					if (AAS_InsideFace(face,
 						aasworld.planes[face->planenum].normal, trace->endpos))
 					{
 						return face;
-					} //end if
-				} //end else
-			} //end if
+					}
+				}
+			}
 			else
 			{
 				firstface = face;
-			} //end else*/
+			}*/
 			if (AAS_InsideFace(face,
 						aasworld.planes[face->planenum].normal, trace->endpos, 0.01f)) return face;
-		} //end if
-	} //end for
+		}
+	}
 	return firstface;
-} //end of the function AAS_TraceEndFace
+}
 int AAS_BoxOnPlaneSide2(vec3_t absmins, vec3_t absmaxs, aas_plane_t *p)
 {
 	int i, sides;
@@ -1070,13 +1070,13 @@ int AAS_BoxOnPlaneSide2(vec3_t absmins, vec3_t absmaxs, aas_plane_t *p)
 		{
 			corners[0][i] = absmins[i];
 			corners[1][i] = absmaxs[i];
-		} //end if
+		}
 		else
 		{
 			corners[1][i] = absmins[i];
 			corners[0][i] = absmaxs[i];
-		} //end else
-	} //end for
+		}
+	}
 	dist1 = DotProduct(p->normal, corners[0]) - p->dist;
 	dist2 = DotProduct(p->normal, corners[1]) - p->dist;
 	sides = 0;
@@ -1084,7 +1084,7 @@ int AAS_BoxOnPlaneSide2(vec3_t absmins, vec3_t absmaxs, aas_plane_t *p)
 	if (dist2 < 0) sides |= 2;
 
 	return sides;
-} //end of the function AAS_BoxOnPlaneSide2
+}
 //int AAS_BoxOnPlaneSide(vec3_t absmins, vec3_t absmaxs, aas_plane_t *p)
 #define AAS_BoxOnPlaneSide(absmins, absmaxs, p) (\
 	( (p)->type < 3) ?\
@@ -1109,7 +1109,7 @@ int AAS_BoxOnPlaneSide2(vec3_t absmins, vec3_t absmaxs, aas_plane_t *p)
 	(\
 		AAS_BoxOnPlaneSide2((absmins), (absmaxs), (p))\
 	)\
-) //end of the function AAS_BoxOnPlaneSide
+)
 //===========================================================================
 // remove the links to this entity from all areas
 //
@@ -1131,8 +1131,8 @@ void AAS_UnlinkFromAreas(aas_link_t *areas)
 		if (link->next_ent) link->next_ent->prev_ent = link->prev_ent;
 		//deallocate the link structure
 		AAS_DeAllocAASLink(link);
-	} //end for
-} //end of the function AAS_UnlinkFromAreas
+	}
+}
 //===========================================================================
 // link the entity to the areas the bounding box is totally or partly
 // situated in. This is done with recursion down the tree using the
@@ -1161,7 +1161,7 @@ aas_link_t *AAS_AASLinkEntity(vec3_t absmins, vec3_t absmaxs, int entnum)
 	{
 		botimport.Print(PRT_ERROR, "AAS_LinkEntity: aas not loaded\n");
 		return NULL;
-	} //end if
+	}
 
 	areas = NULL;
 	//
@@ -1188,7 +1188,7 @@ aas_link_t *AAS_AASLinkEntity(vec3_t absmins, vec3_t absmaxs, int entnum)
 			for (link = aasworld.arealinkedentities[-nodenum]; link; link = link->next_ent)
 			{
 				if (link->entnum == entnum) break;
-			} //end for
+			}
 			if (link) continue;
 			//
 			link = AAS_AllocAASLink();
@@ -1208,7 +1208,7 @@ aas_link_t *AAS_AASLinkEntity(vec3_t absmins, vec3_t absmaxs, int entnum)
 			aasworld.arealinkedentities[-nodenum] = link;
 			//
 			continue;
-		} //end if
+		}
 		//if solid leaf
 		if (!nodenum) continue;
 		//the node to test against
@@ -1222,26 +1222,26 @@ aas_link_t *AAS_AASLinkEntity(vec3_t absmins, vec3_t absmaxs, int entnum)
 		{
 			lstack_p->nodenum = aasnode->children[0];
 			lstack_p++;
-		} //end if
+		}
 		if (lstack_p >= &linkstack[127])
 		{
 			botimport.Print(PRT_ERROR, "AAS_LinkEntity: stack overflow\n");
 			break;
-		} //end if
+		}
 		//if on the back side of the node
 		if (side & 2)
 		{
 			lstack_p->nodenum = aasnode->children[1];
 			lstack_p++;
-		} //end if
+		}
 		if (lstack_p >= &linkstack[127])
 		{
 			botimport.Print(PRT_ERROR, "AAS_LinkEntity: stack overflow\n");
 			break;
-		} //end if
-	} //end while
+		}
+	}
 	return areas;
-} //end of the function AAS_AASLinkEntity
+}
 aas_link_t *AAS_LinkEntityClientBBox(vec3_t absmins, vec3_t absmaxs, int entnum, int presencetype)
 {
 	vec3_t mins, maxs;
@@ -1252,7 +1252,7 @@ aas_link_t *AAS_LinkEntityClientBBox(vec3_t absmins, vec3_t absmaxs, int entnum,
 	VectorSubtract(absmaxs, mins, newabsmaxs);
 	//relink the entity
 	return AAS_AASLinkEntity(newabsmins, newabsmaxs, entnum);
-} //end of the function AAS_LinkEntityClientBBox
+}
 int AAS_BBoxAreas(vec3_t absmins, vec3_t absmaxs, int *areas, int maxareas)
 {
 	aas_link_t *linkedareas, *link;
@@ -1266,10 +1266,10 @@ int AAS_BBoxAreas(vec3_t absmins, vec3_t absmaxs, int *areas, int maxareas)
 		num++;
 		if (num >= maxareas)
 			break;
-	} //end for
+	}
 	AAS_UnlinkFromAreas(linkedareas);
 	return num;
-} //end of the function AAS_BBoxAreas
+}
 int AAS_AreaInfo( int areanum, aas_areainfo_t *info )
 {
 	aas_areasettings_t *settings;
@@ -1279,7 +1279,7 @@ int AAS_AreaInfo( int areanum, aas_areainfo_t *info )
 	{
 		botimport.Print(PRT_ERROR, "AAS_AreaInfo: areanum %d out of range\n", areanum);
 		return 0;
-	} //end if
+	}
 	settings = &aasworld.areasettings[areanum];
 	info->cluster = settings->cluster;
 	info->contents = settings->contents;
@@ -1289,10 +1289,10 @@ int AAS_AreaInfo( int areanum, aas_areainfo_t *info )
 	VectorCopy(aasworld.areas[areanum].maxs, info->maxs);
 	VectorCopy(aasworld.areas[areanum].center, info->center);
 	return sizeof(aas_areainfo_t);
-} //end of the function AAS_AreaInfo
+}
 aas_plane_t *AAS_PlaneFromNum(int planenum)
 {
 	if (!aasworld.loaded) return 0;
 
 	return &aasworld.planes[planenum];
-} //end of the function AAS_PlaneFromNum
+}

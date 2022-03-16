@@ -165,7 +165,7 @@ void TH_InitMaxTH(void)
 	memset(thworld.planehash, 0, PLANEHASH_SIZE * sizeof(th_plane_t *));
 	memset(thworld.edgehash, 0, EDGEHASH_SIZE * sizeof(th_edge_t *));
 	memset(thworld.trianglehash, 0, TRIANGLEHASH_SIZE * sizeof(th_triangle_t *));
-} //end of the function TH_InitMaxTH
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -189,7 +189,7 @@ void TH_FreeMaxTH(void)
 	if (thworld.tetrahedrons) FreeMemory(thworld.tetrahedrons);
 	thworld.tetrahedrons = NULL;
 	thworld.numtetrahedrons = 0;
-} //end of the function TH_FreeMaxTH
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -199,7 +199,7 @@ void TH_FreeMaxTH(void)
 float TH_TriangleArea(th_triangle_t *tri)
 {
 	return 0;
-} //end of the function TH_TriangleArea
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -219,7 +219,7 @@ float TH_TetrahedronVolume(th_tetrahedron_t *tetrahedron)
 		edgenum = tri->edges[i];
 		if (edgenum < 0) verts[i] = thworld.edges[abs(edgenum)].v[1];
 		else verts[i] = thworld.edges[edgenum].v[0];
-	} //end for
+	}
 	//
 	tri2 = &thworld.triangles[abs(tetrahedron->triangles[1])];
 	for (j = 0; j < 3; j++)
@@ -230,13 +230,13 @@ float TH_TetrahedronVolume(th_tetrahedron_t *tetrahedron)
 		if (v2 != verts[0] &&
 			v2 != verts[1] &&
 			v2 != verts[2]) break;
-	} //end for
+	}
 
 	plane = &thworld.planes[tri->planenum];
 	d = -(DotProduct (thworld.vertexes[v2].v, plane->normal) - plane->dist);
 	volume = TH_TriangleArea(tri) * d / 3;
 	return volume;
-} //end of the function TH_TetrahedronVolume
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -251,9 +251,9 @@ int TH_PlaneSignBits(vec3_t normal)
 	for (i = 2; i >= 0; i--)
 	{
 		signbits = (signbits << 1) + Sign(normal[i]);
-	} //end for
+	}
 	return signbits;
-} //end of the function TH_PlaneSignBits
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -281,7 +281,7 @@ int TH_PlaneTypeForNormal(vec3_t normal)
 	if (ay >= ax && ay >= az)
 		return PLANE_ANYY;
 	return PLANE_ANYZ;
-} //end of the function TH_PlaneTypeForNormal
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -297,7 +297,7 @@ qboolean TH_PlaneEqual(th_plane_t *p, vec3_t normal, vec_t dist)
 	&& fabs(p->dist - dist) < DIST_EPSILON )
 		return true;
 	return false;
-} //end of the function TH_PlaneEqual
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -313,7 +313,7 @@ void TH_AddPlaneToHash(th_plane_t *p)
 
 	p->hashnext = thworld.planehash[hash];
 	thworld.planehash[hash] = p;
-} //end of the function TH_AddPlaneToHash
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -355,13 +355,13 @@ int TH_CreateFloatPlane(vec3_t normal, vec_t dist)
 			TH_AddPlaneToHash(p);
 			TH_AddPlaneToHash(p+1);
 			return thworld.numplanes - 1;
-		} //end if
-	} //end if
+		}
+	}
 
 	TH_AddPlaneToHash(p);
 	TH_AddPlaneToHash(p+1);
 	return thworld.numplanes - 2;
-} //end of the function TH_CreateFloatPlane
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -379,15 +379,15 @@ void TH_SnapVector(vec3_t normal)
 			VectorClear (normal);
 			normal[i] = 1;
 			break;
-		} //end if
+		}
 		if ( fabs(normal[i] - -1) < NORMAL_EPSILON )
 		{
 			VectorClear (normal);
 			normal[i] = -1;
 			break;
-		} //end if
-	} //end for
-} //end of the function TH_SnapVector
+		}
+	}
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -400,7 +400,7 @@ void TH_SnapPlane(vec3_t normal, vec_t *dist)
 
 	if (fabs(*dist-Q_rint(*dist)) < DIST_EPSILON)
 		*dist = Q_rint(*dist);
-} //end of the function TH_SnapPlane
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -426,11 +426,11 @@ int TH_FindFloatPlane(vec3_t normal, vec_t dist)
 			if (TH_PlaneEqual(p, normal, dist))
 			{
 				return p - thworld.planes;
-			} //end if
-		} //end for
-	} //end for
+			}
+		}
+	}
 	return TH_CreateFloatPlane(normal, dist);
-} //end of the function TH_FindFloatPlane
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -455,7 +455,7 @@ int TH_PlaneFromPoints(int v1, int v2, int v3)
 	dist = DotProduct(p0, normal);
 
 	return TH_FindFloatPlane(normal, dist);
-} //end of the function TH_PlaneFromPoints
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -472,7 +472,7 @@ void TH_AddEdgeUser(int edgenum)
 	//increase vertex user count as well
 	thworld.vertexes[edge->v[0]].usercount++;
 	thworld.vertexes[edge->v[1]].usercount++;
-} //end of the function TH_AddEdgeUser
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -489,7 +489,7 @@ void TH_RemoveEdgeUser(int edgenum)
 	//decrease vertex user count as well
 	thworld.vertexes[edge->v[0]].usercount--;
 	thworld.vertexes[edge->v[1]].usercount--;
-} //end of the function TH_RemoveEdgeUser
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -503,8 +503,8 @@ void TH_FreeTriangleEdges(th_triangle_t *tri)
 	for (i = 0; i < 3; i++)
 	{
 		TH_RemoveEdgeUser(abs(tri->edges[i]));
-	} //end for
-} //end of the function TH_FreeTriangleEdges
+	}
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -522,7 +522,7 @@ unsigned TH_HashVec(vec3_t vec)
 		Error("HashVec: point %f %f %f outside valid range", vec[0], vec[1], vec[2]);
 	
 	return y*VERTEXHASH_SIZE + x;
-} //end of the function TH_HashVec
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -541,7 +541,7 @@ int TH_FindVertex(vec3_t v)
 			vert[i] = Q_rint(v[i]);
 		else
 			vert[i] = v[i];
-	} //end for
+	}
 
 	h = TH_HashVec(vert);
 
@@ -552,10 +552,10 @@ int TH_FindVertex(vec3_t v)
 			fabs(vertex->v[2] - vert[2]) < VERTEX_EPSILON)
 		{
 			return vertex - thworld.vertexes;
-		} //end if
-	} //end for
+		}
+	}
 	return 0;
-} //end of the function TH_FindVertex
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -569,7 +569,7 @@ void TH_AddVertexToHash(th_vertex_t *vertex)
 	hashvalue = TH_HashVec(vertex->v);
 	vertex->hashnext = thworld.vertexhash[hashvalue];
 	thworld.vertexhash[hashvalue] = vertex;
-} //end of the function TH_AddVertexToHash
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -586,7 +586,7 @@ int TH_CreateVertex(vec3_t v)
 	TH_AddVertexToHash(&thworld.vertexes[thworld.numvertexes]);
 	thworld.numvertexes++;
 	return thworld.numvertexes-1;
-} //end of the function TH_CreateVertex
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -600,7 +600,7 @@ int TH_FindOrCreateVertex(vec3_t v)
 	vertexnum = TH_FindVertex(v);
 	if (!vertexnum) vertexnum = TH_CreateVertex(v);
 	return vertexnum;
-} //end of the function TH_FindOrCreateVertex
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -618,9 +618,9 @@ int TH_FindEdge(int v1, int v2)
 	{
 		if (edge->v[0] == v1 && edge->v[1] == v2) return edge - thworld.edges;
 		if (edge->v[1] == v1 && edge->v[0] == v2) return -(edge - thworld.edges);
-	} //end for
+	}
 	return 0;
-} //end of the function TH_FindEdge
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -634,7 +634,7 @@ void TH_AddEdgeToHash(th_edge_t *edge)
 	hashvalue = (edge->v[0] + edge->v[1]) & (EDGEHASH_SIZE-1);
 	edge->hashnext = thworld.edgehash[hashvalue];
 	thworld.edgehash[hashvalue] = edge;
-} //end of the function TH_AddEdgeToHash
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -653,7 +653,7 @@ int TH_CreateEdge(int v1, int v2)
 	edge->v[1] = v2;
 	TH_AddEdgeToHash(edge);
 	return thworld.numedges-1;
-} //end of the function TH_CreateEdge
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -667,7 +667,7 @@ int TH_FindOrCreateEdge(int v1, int v2)
 	edgenum = TH_FindEdge(v1, v2);
 	if (!edgenum) edgenum = TH_CreateEdge(v1, v2);
 	return edgenum;
-} //end of the function TH_FindOrCreateEdge
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -683,7 +683,7 @@ int TH_FindTriangle(int verts[3])
 	{
 		edges[i] = TH_FindEdge(verts[i], verts[(i+1)%3]);
 		if (!edges[i]) return false;
-	} //end for
+	}
 	hashvalue = (abs(edges[0]) + abs(edges[1]) + abs(edges[2])) & (TRIANGLEHASH_SIZE-1);
 	for (tri = thworld.trianglehash[hashvalue]; tri; tri = tri->next)
 	{
@@ -692,11 +692,11 @@ int TH_FindTriangle(int verts[3])
 			if (abs(tri->edges[i]) != abs(edges[0]) &&
 				abs(tri->edges[i]) != abs(edges[1]) &&
 				abs(tri->edges[i]) != abs(edges[2])) break;
-		} //end for
+		}
 		if (i >= 3) return tri - thworld.triangles;
-	} //end for
+	}
 	return 0;
-} //end of the function TH_FindTriangle
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -710,7 +710,7 @@ void TH_AddTriangleToHash(th_triangle_t *tri)
 	hashvalue = (abs(tri->edges[0]) + abs(tri->edges[1]) + abs(tri->edges[2])) & (TRIANGLEHASH_SIZE-1);
 	tri->hashnext = thworld.trianglehash[hashvalue];
 	thworld.trianglehash[hashvalue] = tri;
-} //end of the function TH_AddTriangleToHash
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -728,8 +728,8 @@ void TH_CreateTrianglePlanes(int verts[3], th_plane_t *triplane, th_plane_t *pla
 		CrossProduct(dir, triplane->normal, planes[i].normal);
 		VectorNormalize(planes[i].normal);
 		planes[i].dist = DotProduct(thworld.vertexes[verts[i]].v, planes[i].normal);
-	} //end for
-} //end of the function TH_CreateTrianglePlanes
+	}
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -749,7 +749,7 @@ int TH_CreateTriangle(int verts[3])
 	{
 		tri->edges[i] = TH_FindOrCreateEdge(verts[i], verts[(i+1)%3]);
 		TH_AddEdgeUser(abs(tri->edges[i]));
-	} //end for
+	}
 	tri->front = 0;
 	tri->back = 0;
 	tri->planenum = TH_PlaneFromPoints(verts[0], verts[1], verts[2]);
@@ -762,9 +762,9 @@ int TH_CreateTriangle(int verts[3])
 	for (i = 0; i < 3; i++)
 	{
 		AddPointToBounds(thworld.vertexes[verts[i]].v, tri->mins, tri->maxs);
-	} //end for
+	}
 	return thworld.numtriangles-1;
-} //end of the function TH_CreateTriangle
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -786,15 +786,15 @@ int TH_CreateTetrahedron(int triangles[4])
 		if (thworld.triangles[abs(triangles[i])].front)
 		{
 			thworld.triangles[abs(triangles[i])].back = thworld.numtetrahedrons-1;
-		} //end if
+		}
 		else
 		{
 			thworld.triangles[abs(triangles[i])].front = thworld.numtetrahedrons-1;
-		} //end else
-	} //end for
+		}
+	}
 	tetrahedron->volume = 0;
 	return thworld.numtetrahedrons-1;
-} //end of the function TH_CreateTetrahedron
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -828,9 +828,9 @@ int TH_IntersectTrianglePlanes(int v1, int v2, th_plane_t *triplane, th_plane_t 
 		side = d < 0;
 		if (i && side != lastside) return false;
 		lastside = side;
-	} //end for
+	}
 	return true;
-} //end of the function TH_IntersectTrianglePlanes
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -849,9 +849,9 @@ int TH_OutsideBoundingBox(int v1, int v2, vec3_t mins, vec3_t maxs)
 	{
 		if (p1[i] < mins[i] && p2[i] < mins[i]) return true;
 		if (p1[i] > maxs[i] && p2[i] > maxs[i]) return true;
-	} //end for
+	}
 	return false;
-} //end of the function TH_OutsideBoundingBox
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -881,15 +881,15 @@ int TH_TryEdge(int v1, int v2)
 		{
 			v = thworld.edges[abs(tri->edges[j])].v[tri->edges[j] < 0];
 			if (v == v1 || v == v2) break;
-		} //end for
+		}
 		if (j < 3) continue;
 		//get the triangle plane
 		plane = &thworld.planes[tri->planenum];
 		//if the edge intersects with a triangle then it's not valid
 		if (TH_IntersectTrianglePlanes(v1, v2, plane, tri->planes)) return false;
-	} //end for
+	}
 	return true;
-} //end of the function TH_TryEdge
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -924,13 +924,13 @@ int TH_TryTriangle(int verts[3])
 		{
 			if (verts[j] == thworld.edges[j].v[0] ||
 				verts[j] == thworld.edges[j].v[1]) break;
-		} //end for
+		}
 		if (j < 3) continue;
 		//if this edge intersects with the triangle
 		if (TH_IntersectTrianglePlanes(thworld.edges[i].v[0], thworld.edges[i].v[1], &triplane, planes)) return false;
-	} //end for
+	}
 	return true;
-} //end of the function TH_TryTriangle
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -943,7 +943,7 @@ void TH_AddTriangleToList(th_triangle_t **trianglelist, th_triangle_t *tri)
 	tri->next = *trianglelist;
 	if (*trianglelist) (*trianglelist)->prev = tri;
 	*trianglelist = tri;
-} //end of the function TH_AddTriangleToList
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -955,7 +955,7 @@ void TH_RemoveTriangleFromList(th_triangle_t **trianglelist, th_triangle_t *tri)
 	if (tri->next) tri->next->prev = tri->prev;
 	if (tri->prev) tri->prev->next = tri->next;
 	else *trianglelist = tri->next;
-} //end of the function TH_RemoveTriangleFromList
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -980,9 +980,9 @@ int TH_FindTetrahedron1(th_triangle_t *tri, int *triangles)
 			for (j = 0; j < 3; j++)
 			{
 				if (edgenum == abs(tri2->edges[j])) break;
-			} //end for
+			}
 			if (j < 3) break;
-		} //end for
+		}
 		//if the triangles have a shared edge
 		if (i < 3)
 		{
@@ -1018,13 +1018,13 @@ int TH_FindTetrahedron1(th_triangle_t *tri, int *triangles)
 						if (!triangles[2]) triangles[2] = TH_CreateTriangle(verts1);
 						if (!triangles[3]) triangles[3] = TH_CreateTriangle(verts2);
 						return true;
-					} //end if
-				} //end if
-			} //end if
-		} //end if
-	} //end for
+					}
+				}
+			}
+		}
+	}
 	return false;
-} //end of the function TH_FindTetrahedron
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -1043,7 +1043,7 @@ int TH_FindTetrahedron2(th_triangle_t *tri, int *triangles)
 		edgenum = tri->edges[i];
 		if (edgenum < 0) verts[i] = thworld.edges[abs(edgenum)].v[1];
 		else verts[i] = thworld.edges[edgenum].v[0];
-	} //end for
+	}
 	//
 	plane = &thworld.planes[tri->planenum];
 	for (v1 = 0; v1 < thworld.numvertexes; v1++)
@@ -1058,7 +1058,7 @@ int TH_FindTetrahedron2(th_triangle_t *tri, int *triangles)
 		{
 			if (v1 == verts[i]) break;
 			if (!TH_TryEdge(v1, verts[i])) break;
-		} //end for
+		}
 		if (i < 3) continue;
 		//check if the triangles are valid
 		for (i = 0; i < 3; i++)
@@ -1071,8 +1071,8 @@ int TH_FindTetrahedron2(th_triangle_t *tri, int *triangles)
 			if (!triangles[i])
 			{
 				if (!TH_TryTriangle(triverts)) break;
-			} //end if
-		} //end for
+			}
+		}
 		if (i < 3) continue;
 		//create the tetrahedron triangles using the new vertex
 		for (i = 0; i < 3; i++)
@@ -1083,15 +1083,15 @@ int TH_FindTetrahedron2(th_triangle_t *tri, int *triangles)
 				triverts[1] = verts[i];
 				triverts[2] = verts[(i+1)%3];
 				triangles[i] = TH_CreateTriangle(triverts);
-			} //end if
-		} //end for
+			}
+		}
 		//add the existing triangle
 		triangles[3] = tri - thworld.triangles;
 		//
 		return true;
-	} //end for
+	}
 	return false;
-} //end of the function TH_FindTetrahedron2
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -1118,8 +1118,8 @@ void TH_TetrahedralDecomposition(th_triangle_t *triangles)
 //				Error("triangle without tetrahedron");
 				TH_RemoveTriangleFromList(&triangles, tri);
 				continue;
-			} //end if
-		} //end if
+			}
+		}
 		//create a tetrahedron from the triangles
 		TH_CreateTetrahedron(thtriangles);
 		//
@@ -1131,13 +1131,13 @@ void TH_TetrahedralDecomposition(th_triangle_t *triangles)
 				TH_RemoveTriangleFromList(&triangles, &thworld.triangles[abs(thtriangles[i])]);
 				TH_AddTriangleToList(&donetriangles, &thworld.triangles[abs(thtriangles[i])]);
 				TH_FreeTriangleEdges(&thworld.triangles[abs(thtriangles[i])]);
-			} //end if
+			}
 			else
 			{
 				TH_AddTriangleToList(&triangles, &thworld.triangles[abs(thtriangles[i])]);
-			} //end else
-		} //end for
-	} //end for*/
+			}
+		}
+	}*/
 	qprintf("%6d tetrahedrons", thworld.numtetrahedrons);
 	do
 	{
@@ -1154,13 +1154,13 @@ void TH_TetrahedralDecomposition(th_triangle_t *triangles)
 //					if (!TH_FindTetrahedron2(tri, thtriangles))
 					{
 						continue;
-					} //end if
-				} //end if
+					}
+				}
 				numtriangles++;
 				//create a tetrahedron from the triangles
 				TH_CreateTetrahedron(thtriangles);
 				qprintf("\r%6d", thworld.numtetrahedrons);
-			} //end for
+			}
 		} while(numtriangles);
  		for (i = 1; i < thworld.numtriangles; i++)
 		{
@@ -1172,13 +1172,13 @@ void TH_TetrahedralDecomposition(th_triangle_t *triangles)
 				if (!TH_FindTetrahedron2(tri, thtriangles))
 				{
 					continue;
-				} //end if
-			} //end if
+				}
+			}
 			numtriangles++;
 			//create a tetrahedron from the triangles
 			TH_CreateTetrahedron(thtriangles);
 			qprintf("\r%6d", thworld.numtetrahedrons);
-		} //end for
+		}
 	} while(numtriangles);
 	//
 	numtriangles = 0;
@@ -1186,10 +1186,10 @@ void TH_TetrahedralDecomposition(th_triangle_t *triangles)
 	{
 		tri = &thworld.triangles[i];
 		if (!tri->front && !tri->back) numtriangles++;
-	} //end for
+	}
 	Log_Print("\r%6d triangles with front only\n", numtriangles);
 	Log_Print("\r%6d tetrahedrons\n", thworld.numtetrahedrons-1);
-} //end of the function TH_TetrahedralDecomposition
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -1203,7 +1203,7 @@ void TH_AASFaceVertex(aas_face_t *face, int index, vec3_t vertex)
 	edgenum = aasworld.edgeindex[face->firstedge + index];
 	side = edgenum < 0;
 	VectorCopy(aasworld.vertexes[aasworld.edges[abs(edgenum)].v[side]], vertex);
-} //end of the function TH_AASFaceVertex
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -1224,9 +1224,9 @@ int TH_Colinear(float *v0, float *v1, float *v2)
 	if (d < 10)
 	{
 		return true;
-	} //end if
+	}
 	return false;
-} //end of the function TH_Colinear
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -1245,9 +1245,9 @@ void TH_FaceCenter(aas_face_t *face, vec3_t center)
 		side = edgenum < 0;
 		edge = &aasworld.edges[abs(edgenum)];
 		VectorAdd(aasworld.vertexes[edge->v[side]], center, center);
-	} //end for
+	}
 	VectorScale(center, 1.0 / face->numedges, center);
-} //end of the function TH_FaceCenter
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -1272,7 +1272,7 @@ th_triangle_t *TH_CreateAASFaceTriangles(aas_face_t *face)
 		TH_AASFaceVertex(face, (i+2)%face->numedges, p4);
 		if (TH_Colinear(p2, p3, p4)) continue;
 		break;
-	} //end for
+	}
 	//if there are three points that are not colinear
 	if (i < face->numedges)
 	{
@@ -1290,8 +1290,8 @@ th_triangle_t *TH_CreateAASFaceTriangles(aas_face_t *face)
 			tri = &thworld.triangles[trinum];
 			tri->front = -1;
 			TH_AddTriangleToList(&triangles, tri);
-		} //end for
-	} //end if
+		}
+	}
 	else
 	{
 		//fan triangulation
@@ -1309,10 +1309,10 @@ th_triangle_t *TH_CreateAASFaceTriangles(aas_face_t *face)
 			tri = &thworld.triangles[trinum];
 			tri->front = -1;
 			TH_AddTriangleToList(&triangles, tri);
-		} //end for
-	} //end else
+		}
+	}
 	return triangles;
-} //end of the function TH_CreateAASFaceTriangles
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -1342,18 +1342,18 @@ th_triangle_t *TH_AASToTriangleMesh(void)
 				if (aasworld.areasettings[otherareanum].presencetype & PRESENCE_NORMAL) continue;
 				*/
 				continue;
-			} //end if
+			}
 			//
 			tri = TH_CreateAASFaceTriangles(face);
 			for (; tri; tri = nexttri)
 			{
 				nexttri = tri->next;
 				TH_AddTriangleToList(&triangles, tri);
-			} //end for
-		} //end if
-	} //end for
+			}
+		}
+	}
 	return triangles;
-} //end of the function TH_AASToTriangleMesh
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -1380,10 +1380,10 @@ void TH_AASToTetrahedrons(char *filename)
 		cnt++;
 		if (tri->prev != lasttri) Log_Print("BAH\n");
 		lasttri = tri;
-	} //end for
+	}
 	Log_Print("%6d triangles\n", cnt);
 	//create a tetrahedral decomposition of the world bounded by triangles
 	TH_TetrahedralDecomposition(triangles);
 	//
 	TH_FreeMaxTH();
-} //end of the function TH_AASToTetrahedrons
+}

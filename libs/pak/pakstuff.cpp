@@ -781,7 +781,7 @@ boolean AddToDirListAlphabetized(DIRLIST **list, char *dirname, int from)
 	{
 		newPtr->next = *list;
 		*list = newPtr;
-	} //End if
+	}
 	else
 	{
 		previousPtr->next = newPtr;
@@ -820,7 +820,7 @@ boolean AddToFileListAlphabetized(FILELIST **list, char *filename, UInt32 offset
 	{
 		newPtr->next = *list;
 		*list = newPtr;
-	} //End if
+	}
 	else
 	{
 		previousPtr->next = newPtr;

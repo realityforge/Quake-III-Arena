@@ -49,7 +49,7 @@ node_t *NodeForPoint (node_t *node, vec3_t origin)
 			node = node->children[1];
 	}
 	return node;
-} //end of the function NodeForPoint
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -82,7 +82,7 @@ void Tree_FreePortals_r (node_t *node)
 		FreePortal(p);
 	}
 	node->portals = NULL;
-} //end of the function Tree_FreePortals_r
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -99,7 +99,7 @@ void Tree_Free_r (node_t *node)
 	{
 		Tree_Free_r (node->children[0]);
 		Tree_Free_r (node->children[1]);
-	} //end if
+	}
 	//free bspbrushes
 //	FreeBrushList (node->brushlist);
 	for (brush = node->brushlist; brush; brush = nextbrush)
@@ -109,7 +109,7 @@ void Tree_Free_r (node_t *node)
 		freedtreemem += MemorySize(brush);
 #endif //ME
 		FreeBrush(brush);
-	} //end for
+	}
 	node->brushlist = NULL;
 
 	/*
@@ -123,7 +123,7 @@ void Tree_Free_r (node_t *node)
 		freedtreemem += sizeof(face_t);
 #endif //ME
 		FreeFace(f);
-	} //end for
+	}
 	*/
 
 	// free the node
@@ -133,14 +133,14 @@ void Tree_Free_r (node_t *node)
 		freedtreemem += MemorySize(node->volume);
 #endif //ME
 		FreeBrush (node->volume);
-	} //end if
+	}
 
 	if (numthreads == 1) c_nodes--;
 #ifdef ME
 	freedtreemem += MemorySize(node);
 #endif //ME
 	FreeMemory(node);
-} //end of the function Tree_Free_r
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -165,7 +165,7 @@ void Tree_Free(tree_t *tree)
 	PrintMemorySize(freedtreemem);
 	Log_Print(" of tree memory\n");
 #endif //ME
-} //end of the function Tree_Free
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -181,7 +181,7 @@ tree_t *Tree_Alloc(void)
 	ClearBounds (tree->mins, tree->maxs);
 
 	return tree;
-} //end of the function Tree_Alloc
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -215,7 +215,7 @@ void Tree_Print_r (node_t *node, int depth)
 		plane->dist);
 	Tree_Print_r (node->children[0], depth+1);
 	Tree_Print_r (node->children[1], depth+1);
-} //end of the function Tree_Print_r
+}
 //===========================================================================
 // NODES THAT DON'T SEPERATE DIFFERENT CONTENTS CAN BE PRUNED
 //
@@ -260,14 +260,14 @@ void Tree_PruneNodes_r (node_t *node)
 			next = b->next;
 			b->next = node->brushlist;
 			node->brushlist = b;
-		} //end for
+		}
 		//free the child nodes
 		FreeMemory(node->children[0]);
 		FreeMemory(node->children[1]);
 		//two nodes are cut away
 		c_pruned += 2;
-	} //end if
-} //end of the function Tree_PruneNodes_r
+	}
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -280,4 +280,4 @@ void Tree_PruneNodes(node_t *node)
 	c_pruned = 0;
 	Tree_PruneNodes_r(node);
 	Log_Print("%5i pruned nodes\n", c_pruned);
-} //end of the function Tree_PruneNodes
+}

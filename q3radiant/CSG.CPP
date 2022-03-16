@@ -146,9 +146,9 @@ brush_t *Brush_Merge(brush_t *brush1, brush_t *brush2, int onlyshape)
 									face1->plane.dist, face2->plane.dist))
 			{
 				return NULL;
-			} //end if
-		} //end for
-	} //end for
+			}
+		}
+	}
 	//
 	newbrush = Brush_Alloc();
 	//
@@ -265,7 +265,7 @@ brush_t *Brush_MergeListPairs(brush_t *brushlist, int onlyshape)
 					for (tail = brushlist; tail; tail = tail->next)
 					{
 						if (!tail->next) break;
-					} //end for
+					}
 					merged++;
 					nummerges++;
 					break;

@@ -53,21 +53,21 @@ void AAS_Error(char *fmt, ...)
 	va_end(argptr);
 
 	Error(text);
-} //end of the function AAS_Error
+}
 int Sys_MilliSeconds(void)
 {
 	return clock() * 1000 / CLOCKS_PER_SEC;
-} //end of the function Sys_MilliSeconds
+}
 void AAS_DebugLine(vec3_t start, vec3_t end, int color)
 {
-} //end of the function AAS_DebugLine
+}
 void AAS_ClearShownDebugLines(void)
 {
-} //end of the function AAS_ClearShownDebugLines
+}
 char *BotImport_BSPEntityData(void)
 {
 	return CM_EntityString();
-} //end of the function AAS_GetEntityData
+}
 void BotImport_Trace(bsp_trace_t *bsptrace, vec3_t start, vec3_t mins, vec3_t maxs, vec3_t end, int passent, int contentmask)
 {
 	trace_t result;
@@ -87,15 +87,15 @@ void BotImport_Trace(bsp_trace_t *bsptrace, vec3_t start, vec3_t mins, vec3_t ma
 	bsptrace->sidenum = 0;
 	bsptrace->startsolid = result.startsolid;
 	bsptrace->surface.flags = result.surfaceFlags;
-} //end of the function BotImport_Trace
+}
 int BotImport_PointContents(vec3_t p)
 {
 	return CM_PointContents(p, worldmodel);
-} //end of the function BotImport_PointContents
+}
 void *BotImport_GetMemory(int size)
 {
 	return GetMemory(size);
-} //end of the function BotImport_GetMemory
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -112,7 +112,7 @@ void BotImport_Print(int type, char *fmt, ...)
 	printf(buf);
 	if (buf[0] != '\r') Log_Write(buf);
 	va_end(argptr);
-} //end of the function BotImport_Print
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -137,12 +137,12 @@ void BotImport_BSPModelMinsMaxsOrigin(int modelnum, vec3_t angles, vec3_t outmin
 		{
 			mins[i] = (mins[i] + maxs[i]) * 0.5 - max;
 			maxs[i] = (mins[i] + maxs[i]) * 0.5 + max;
-		} //end for
-	} //end if
+		}
+	}
 	if (outmins) VectorCopy(mins, outmins);
 	if (outmaxs) VectorCopy(maxs, outmaxs);
 	if (origin) VectorClear(origin);
-} //end of the function BotImport_BSPModelMinsMaxsOrigin
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -159,7 +159,7 @@ void Com_DPrintf(char *fmt, ...)
 	printf(buf);
 	if (buf[0] != '\r') Log_Write(buf);
 	va_end(argptr);
-} //end of the function Com_DPrintf
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -196,7 +196,7 @@ void AAS_InitBotImport(void)
 	botimport.PointContents = BotImport_PointContents;
 	botimport.Print = BotImport_Print;
 	botimport.BSPModelMinsMaxsOrigin = BotImport_BSPModelMinsMaxsOrigin;
-} //end of the function AAS_InitBotImport
+}
 void AAS_CalcReachAndClusters(struct quakefile_s *qf)
 {
 	float time;
@@ -229,4 +229,4 @@ void AAS_CalcReachAndClusters(struct quakefile_s *qf)
 	while(AAS_ContinueInitReachability(time)) time++;
 	//calculate clusters
 	AAS_InitClustering();
-} //end of the function AAS_CalcReachAndClusters
+}

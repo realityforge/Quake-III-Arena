@@ -181,7 +181,7 @@ void Sin_AllocMaxBSP(void)
 	Log_Print("allocated ");
 	PrintMemorySize(sin_allocatedbspmem);
 	Log_Print(" of BSP memory\n");
-} //end of the function Sin_AllocMaxBSP
+}
 
 void Sin_FreeMaxBSP(void)
 {
@@ -267,7 +267,7 @@ void Sin_FreeMaxBSP(void)
 	PrintMemorySize(sin_allocatedbspmem);
 	Log_Print(" of BSP memory\n");
 	sin_allocatedbspmem = 0;
-} //end of the function Sin_FreeMaxBSP
+}
 
 #define WCONVEX_EPSILON		0.5
 
@@ -295,7 +295,7 @@ float Sin_FaceOnWinding(sin_dface_t *face, winding_t *winding)
 	{
 		VectorNegate(plane.normal, plane.normal);
 		plane.dist = -plane.dist;
-	} //end if
+	}
 	for (i = 0; i < face->numedges && w; i++)
 	{
 		//get the first and second vertex of the edge
@@ -312,15 +312,15 @@ float Sin_FaceOnWinding(sin_dface_t *face, winding_t *winding)
 		dist = DotProduct(normal, v1);
 		//
 		ChopWindingInPlace(&w, normal, dist, 0.9); //CLIP_EPSILON
-	} //end for
+	}
 	if (w)
 	{
 		area = WindingArea(w);
 		FreeWinding(w);
 		return area;
-	} //end if
+	}
 	return 0;
-} //end of the function Sin_FaceOnWinding
+}
 //===========================================================================
 // creates a winding for the given brush side on the given brush
 //
@@ -350,9 +350,9 @@ winding_t *Sin_BrushSideWinding(sin_dbrush_t *brush, sin_dbrushside_t *baseside)
 		//
 		plane = &sin_dplanes[side->planenum^1];
 		ChopWindingInPlace(&w, plane->normal, plane->dist, 0); //CLIP_EPSILON);
-	} //end for
+	}
 	return w;
-} //end of the function Sin_BrushSideWinding
+}
 int Sin_HintSkipBrush(sin_dbrush_t *brush)
 {
 	int j;
@@ -366,11 +366,11 @@ int Sin_HintSkipBrush(sin_dbrush_t *brush)
 			if (sin_texinfo[brushside->texinfo].flags & (SURF_SKIP|SURF_HINT))
 			{
 				return true;
-			} //end if
-		} //end if
-	} //end for
+			}
+		}
+	}
 	return false;
-} //end of the function Sin_HintSkipBrush
+}
 //===========================================================================
 // fix screwed brush texture references
 //
@@ -405,7 +405,7 @@ void Sin_FixTextureReferences(void)
 			{
 				sin_dbrushsidetextured[brush->firstside + j] = true;
 				continue;
-			} //end if
+			}
 			else
 			{
 				//RemoveEqualPoints(w, 0.2);
@@ -414,7 +414,7 @@ void Sin_FixTextureReferences(void)
 					FreeWinding(w);
 					sin_dbrushsidetextured[brush->firstside + j] = true;
 					continue;
-				} //end if
+				}
 				else
 				{
 					we = WindingError(w);
@@ -427,13 +427,13 @@ void Sin_FixTextureReferences(void)
 						FreeWinding(w);
 						sin_dbrushsidetextured[brush->firstside + j] = true;
 						continue;
-					} //end if
-				} //end else
-			} //end else
+					}
+				}
+			}
 			if (WindingArea(w) < 20)
 			{
 				sin_dbrushsidetextured[brush->firstside + j] = true;
-			} //end if
+			}
 			//find a face for texturing this brush
 			for (k = 0; k < sin_numfaces; k++)
 			{
@@ -446,12 +446,12 @@ void Sin_FixTextureReferences(void)
 					brushside->texinfo = face->texinfo;
 					sin_dbrushsidetextured[brush->firstside + j] = true;
 					break;
-				} //end if
-			} //end for
+				}
+			}
 			FreeWinding(w);
-		} //end for
-	} //end for
-} //end of the function Sin_FixTextureReferences*/
+		}
+	}
+}
 
 /*
 ===============
@@ -487,7 +487,7 @@ int Sin_CompressVis (byte *vis, byte *dest)
 	}
 	
 	return dest_p - dest;
-} //end of the function Sin_CompressVis
+}
 
 
 /*
@@ -523,7 +523,7 @@ void Sin_DecompressVis (byte *in, byte *decompressed)
 			c--;
 		}
 	} while (out - decompressed < row);
-} //end of the function Sin_DecompressVis
+}
 
 //=============================================================================
 
@@ -772,7 +772,7 @@ void Sin_SwapBSPFile (qboolean todisk)
 		sin_dvis->bitofs[i][0] = LittleLong (sin_dvis->bitofs[i][0]);
 		sin_dvis->bitofs[i][1] = LittleLong (sin_dvis->bitofs[i][1]);
 	}
-} //end of the function Sin_SwapBSPFile
+}
 
 
 sin_dheader_t	*header;
@@ -887,7 +887,7 @@ void	Sin_LoadBSPFile(char *filename, int offset, int length)
 // swap everything
 //	
 	Sin_SwapBSPFile (false);
-} //end of the function Sin_LoadBSPFile
+}
 
 /*
 =============
@@ -929,7 +929,7 @@ void	Sin_LoadBSPFileTexinfo (char *filename)
 	FreeMemory(header);		// everything has been copied out
 		
 	Sin_SwapBSPFile (false);
-} //end of the function Sin_LoadBSPFilesTexinfo
+}
 
 
 //============================================================================
@@ -1059,10 +1059,10 @@ void Sin_ParseEntities (void)
 
 	while(ParseEntity(script))
 	{
-	} //end while
+	}
 
 	FreeScript(script);
-} //end of the function Sin_ParseEntities
+}
 
 
 /*
@@ -1111,7 +1111,7 @@ void Sin_UnparseEntities (void)
 			Error ("Entity text too long");
 	}
 	sin_entdatasize = end - buf + 1;
-} //end of the function Sin_UnparseEntities
+}
 
 #ifdef SIN
 void  FreeValueKeys(entity_t *ent)

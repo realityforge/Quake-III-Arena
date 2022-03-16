@@ -140,9 +140,9 @@ int BotValidWeaponNumber(int weaponnum)
 	{
 		botimport.Print(PRT_ERROR, "weapon number out of range\n");
 		return qfalse;
-	} //end if
+	}
 	return qtrue;
-} //end of the function BotValidWeaponNumber
+}
 //========================================================================
 //
 // Parameter:				-
@@ -155,14 +155,14 @@ bot_weaponstate_t *BotWeaponStateFromHandle(int handle)
 	{
 		botimport.Print(PRT_FATAL, "move state handle %d out of range\n", handle);
 		return NULL;
-	} //end if
+	}
 	if (!botweaponstates[handle])
 	{
 		botimport.Print(PRT_FATAL, "invalid move state %d\n", handle);
 		return NULL;
-	} //end if
+	}
 	return botweaponstates[handle];
-} //end of the function BotWeaponStateFromHandle
+}
 #ifdef DEBUG_AI_WEAP
 void DumpWeaponConfig(weaponconfig_t *wc)
 {
@@ -175,13 +175,13 @@ void DumpWeaponConfig(weaponconfig_t *wc)
 	{
 		WriteStructure(fp, &projectileinfo_struct, (char *) &wc->projectileinfo[i]);
 		Log_Flush();
-	} //end for
+	}
 	for (i = 0; i < wc->numweapons; i++)
 	{
 		WriteStructure(fp, &weaponinfo_struct, (char *) &wc->weaponinfo[i]);
 		Log_Flush();
-	} //end for
-} //end of the function DumpWeaponConfig
+	}
+}
 #endif //DEBUG_AI_WEAP
 weaponconfig_t *LoadWeaponConfig(char *filename)
 {
@@ -199,14 +199,14 @@ weaponconfig_t *LoadWeaponConfig(char *filename)
 		botimport.Print(PRT_ERROR, "max_weaponinfo = %d\n", max_weaponinfo);
 		max_weaponinfo = 32;
 		LibVarSet("max_weaponinfo", "32");
-	} //end if
+	}
 	max_projectileinfo = (int) LibVarValue("max_projectileinfo", "32");
 	if (max_projectileinfo < 0)
 	{
 		botimport.Print(PRT_ERROR, "max_projectileinfo = %d\n", max_projectileinfo);
 		max_projectileinfo = 32;
 		LibVarSet("max_projectileinfo", "32");
-	} //end if
+	}
 	strncpy(path, filename, MAX_PATH);
 	PC_SetBaseFolder(BOTFILESBASEFOLDER);
 	source = LoadSourceFile(path);
@@ -214,7 +214,7 @@ weaponconfig_t *LoadWeaponConfig(char *filename)
 	{
 		botimport.Print(PRT_ERROR, "counldn't load %s\n", path);
 		return NULL;
-	} //end if
+	}
 	//initialize weapon config
 	wc = (weaponconfig_t *) GetClearedHunkMemory(sizeof(weaponconfig_t) +
 										max_weaponinfo * sizeof(weaponinfo_t) +
@@ -235,17 +235,17 @@ weaponconfig_t *LoadWeaponConfig(char *filename)
 				FreeMemory(wc);
 				FreeSource(source);
 				return NULL;
-			} //end if
+			}
 			if (weaponinfo.number < 0 || weaponinfo.number >= max_weaponinfo)
 			{
 				botimport.Print(PRT_ERROR, "weapon info number %d out of range in %s\n", weaponinfo.number, path);
 				FreeMemory(wc);
 				FreeSource(source);
 				return NULL;
-			} //end if
+			}
 			Com_Memcpy(&wc->weaponinfo[weaponinfo.number], &weaponinfo, sizeof(weaponinfo_t));
 			wc->weaponinfo[weaponinfo.number].valid = qtrue;
-		} //end if
+		}
 		else if (!strcmp(token.string, "projectileinfo"))
 		{
 			if (wc->numprojectiles >= max_projectileinfo)
@@ -254,24 +254,24 @@ weaponconfig_t *LoadWeaponConfig(char *filename)
 				FreeMemory(wc);
 				FreeSource(source);
 				return NULL;
-			} //end if
+			}
 			Com_Memset(&wc->projectileinfo[wc->numprojectiles], 0, sizeof(projectileinfo_t));
 			if (!ReadStructure(source, &projectileinfo_struct, (char *) &wc->projectileinfo[wc->numprojectiles]))
 			{
 				FreeMemory(wc);
 				FreeSource(source);
 				return NULL;
-			} //end if
+			}
 			wc->numprojectiles++;
-		} //end if
+		}
 		else
 		{
 			botimport.Print(PRT_ERROR, "unknown definition %s in %s\n", token.string, path);
 			FreeMemory(wc);
 			FreeSource(source);
 			return NULL;
-		} //end else
-	} //end while
+		}
+	}
 	FreeSource(source);
 	//fix up weapons
 	for (i = 0; i < wc->numweapons; i++)
@@ -282,13 +282,13 @@ weaponconfig_t *LoadWeaponConfig(char *filename)
 			botimport.Print(PRT_ERROR, "weapon %d has no name in %s\n", i, path);
 			FreeMemory(wc);
 			return NULL;
-		} //end if
+		}
 		if (!wc->weaponinfo[i].projectile[0])
 		{
 			botimport.Print(PRT_ERROR, "weapon %s has no projectile in %s\n", wc->weaponinfo[i].name, path);
 			FreeMemory(wc);
 			return NULL;
-		} //end if
+		}
 		//find the projectile info and copy it to the weapon info
 		for (j = 0; j < wc->numprojectiles; j++)
 		{
@@ -296,19 +296,19 @@ weaponconfig_t *LoadWeaponConfig(char *filename)
 			{
 				Com_Memcpy(&wc->weaponinfo[i].proj, &wc->projectileinfo[j], sizeof(projectileinfo_t));
 				break;
-			} //end if
-		} //end for
+			}
+		}
 		if (j == wc->numprojectiles)
 		{
 			botimport.Print(PRT_ERROR, "weapon %s uses undefined projectile in %s\n", wc->weaponinfo[i].name, path);
 			FreeMemory(wc);
 			return NULL;
-		} //end if
-	} //end for
+		}
+	}
 	if (!wc->numweapons) botimport.Print(PRT_WARNING, "no weapon info loaded\n");
 	botimport.Print(PRT_MESSAGE, "loaded %s\n", path);
 	return wc;
-} //end of the function LoadWeaponConfig
+}
 int *WeaponWeightIndex(weightconfig_t *wwc, weaponconfig_t *wc)
 {
 	int *index, i;
@@ -319,9 +319,9 @@ int *WeaponWeightIndex(weightconfig_t *wwc, weaponconfig_t *wc)
 	for (i = 0; i < wc->numweapons; i++)
 	{
 		index[i] = FindFuzzyWeight(wwc, wc->weaponinfo[i].name);
-	} //end for
+	}
 	return index;
-} //end of the function WeaponWeightIndex
+}
 void BotFreeWeaponWeights(int weaponstate)
 {
 	bot_weaponstate_t *ws;
@@ -330,7 +330,7 @@ void BotFreeWeaponWeights(int weaponstate)
 	if (!ws) return;
 	if (ws->weaponweightconfig) FreeWeightConfig(ws->weaponweightconfig);
 	if (ws->weaponweightindex) FreeMemory(ws->weaponweightindex);
-} //end of the function BotFreeWeaponWeights
+}
 int BotLoadWeaponWeights(int weaponstate, char *filename)
 {
 	bot_weaponstate_t *ws;
@@ -344,11 +344,11 @@ int BotLoadWeaponWeights(int weaponstate, char *filename)
 	{
 		botimport.Print(PRT_FATAL, "couldn't load weapon config %s\n", filename);
 		return BLERR_CANNOTLOADWEAPONWEIGHTS;
-	} //end if
+	}
 	if (!weaponconfig) return BLERR_CANNOTLOADWEAPONCONFIG;
 	ws->weaponweightindex = WeaponWeightIndex(ws->weaponweightconfig, weaponconfig);
 	return BLERR_NOERROR;
-} //end of the function BotLoadWeaponWeights
+}
 void BotGetWeaponInfo(int weaponstate, int weapon, weaponinfo_t *weaponinfo)
 {
 	bot_weaponstate_t *ws;
@@ -358,7 +358,7 @@ void BotGetWeaponInfo(int weaponstate, int weapon, weaponinfo_t *weaponinfo)
 	if (!ws) return;
 	if (!weaponconfig) return;
 	Com_Memcpy(weaponinfo, &weaponconfig->weaponinfo[weapon], sizeof(weaponinfo_t));
-} //end of the function BotGetWeaponInfo
+}
 int BotChooseBestFightWeapon(int weaponstate, int *inventory)
 {
 	int i, index, bestweapon;
@@ -386,10 +386,10 @@ int BotChooseBestFightWeapon(int weaponstate, int *inventory)
 		{
 			bestweight = weight;
 			bestweapon = i;
-		} //end if
-	} //end for
+		}
+	}
 	return bestweapon;
-} //end of the function BotChooseBestFightWeapon
+}
 void BotResetWeaponState(int weaponstate)
 {
 	struct weightconfig_s *weaponweightconfig;
@@ -404,7 +404,7 @@ void BotResetWeaponState(int weaponstate)
 	//Com_Memset(ws, 0, sizeof(bot_weaponstate_t));
 	ws->weaponweightconfig = weaponweightconfig;
 	ws->weaponweightindex = weaponweightindex;
-} //end of the function BotResetWeaponState
+}
 //========================================================================
 //
 // Parameter:				-
@@ -421,10 +421,10 @@ int BotAllocWeaponState(void)
 		{
 			botweaponstates[i] = GetClearedMemory(sizeof(bot_weaponstate_t));
 			return i;
-		} //end if
-	} //end for
+		}
+	}
 	return 0;
-} //end of the function BotAllocWeaponState
+}
 //========================================================================
 //
 // Parameter:				-
@@ -437,16 +437,16 @@ void BotFreeWeaponState(int handle)
 	{
 		botimport.Print(PRT_FATAL, "move state handle %d out of range\n", handle);
 		return;
-	} //end if
+	}
 	if (!botweaponstates[handle])
 	{
 		botimport.Print(PRT_FATAL, "invalid move state %d\n", handle);
 		return;
-	} //end if
+	}
 	BotFreeWeaponWeights(handle);
 	FreeMemory(botweaponstates[handle]);
 	botweaponstates[handle] = NULL;
-} //end of the function BotFreeWeaponState
+}
 int BotSetupWeaponAI(void)
 {
 	char *file;
@@ -457,14 +457,14 @@ int BotSetupWeaponAI(void)
 	{
 		botimport.Print(PRT_FATAL, "couldn't load the weapon config\n");
 		return BLERR_CANNOTLOADWEAPONCONFIG;
-	} //end if
+	}
 
 #ifdef DEBUG_AI_WEAP
 	DumpWeaponConfig(weaponconfig);
 #endif //DEBUG_AI_WEAP
 	//
 	return BLERR_NOERROR;
-} //end of the function BotSetupWeaponAI
+}
 void BotShutdownWeaponAI(void)
 {
 	int i;
@@ -477,7 +477,7 @@ void BotShutdownWeaponAI(void)
 		if (botweaponstates[i])
 		{
 			BotFreeWeaponState(i);
-		} //end if
-	} //end for
-} //end of the function BotShutdownWeaponAI
+		}
+	}
+}
 

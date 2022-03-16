@@ -263,11 +263,11 @@ winding_t *Winding_InsertPoint(winding_t *w, vec3_t point, int spot)
 	if (spot > w->numpoints)
 	{
 		Error("Winding_InsertPoint: spot > w->numpoints");
-	} //end if
+	}
 	if (spot < 0)
 	{
 		Error("Winding_InsertPoint: spot < 0");
-	} //end if
+	}
 	neww = Winding_Alloc(w->numpoints + 1);
 	neww->numpoints = w->numpoints + 1;
 	for (i = 0, j = 0; i < neww->numpoints; i++)
@@ -626,13 +626,13 @@ winding_t *Winding_TryMerge(winding_t *f1, winding_t *f2, vec3_t planenormal, in
 					break;
 				if (fabs(p2[k] - p3[k]) > 0.1)//EQUAL_EPSILON) //ME
 					break;
-			} //end for
+			}
 			if (k==3)
 				break;
-		} //end for
+		}
 		if (j < f2->numpoints)
 			break;
-	} //end for
+	}
 	
 	if (i == f1->numpoints)
 		return NULL;			// no matching edges

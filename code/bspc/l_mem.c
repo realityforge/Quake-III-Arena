@@ -36,7 +36,7 @@ void PrintMemorySize(unsigned long size)
 	if (number2) Log_Print("%ld KB", number2);
 	if (number2 && number3) Log_Print(" and ");
 	if (number3) Log_Print("%ld bytes", number3);
-} //end of the function PrintFileSize
+}
 
 #ifndef MEMDEBUG
 int MemorySize(void *ptr)
@@ -51,7 +51,7 @@ int MemorySize(void *ptr)
 #else
 	return 0;
 #endif
-} //end of the function MemorySize
+}
 void *GetClearedMemory(int size)
 {
 	void *ptr;
@@ -61,7 +61,7 @@ void *GetClearedMemory(int size)
 	memset(ptr, 0, size);
 	allocedmemory += MemorySize(ptr);
 	return ptr;
-} //end of the function GetClearedMemory
+}
 void *GetMemory(unsigned long size)
 {
 	void *ptr;
@@ -69,16 +69,16 @@ void *GetMemory(unsigned long size)
 	if (!ptr) Error("out of memory");
 	allocedmemory += MemorySize(ptr);
 	return ptr;
-} //end of the function GetMemory
+}
 void FreeMemory(void *ptr)
 {
 	allocedmemory -= MemorySize(ptr);
 	free(ptr);
-} //end of the function FreeMemory
+}
 int TotalAllocatedMemory(void)
 {
 	return allocedmemory;
-} //end of the function TotalAllocatedMemory
+}
 
 #else
 
@@ -108,13 +108,13 @@ void LinkMemoryBlock(memoryblock_t *block)
 	block->next = memory;
 	if (memory) memory->prev = block;
 	memory = block;
-} //end of the function LinkMemoryBlock
+}
 void UnlinkMemoryBlock(memoryblock_t *block)
 {
 	if (block->prev) block->prev->next = block->next;
 	else memory = block->next;
 	if (block->next) block->next->prev = block->prev;
-} //end of the function UnlinkMemoryBlock
+}
 #ifdef MEMDEBUG
 void *GetMemoryDebug(unsigned long size, char *label, char *file, int line)
 #else
@@ -138,7 +138,7 @@ void *GetMemory(unsigned long size)
 	totalmemorysize += block->size;
 	numblocks++;
 	return block->ptr;
-} //end of the function GetMemoryDebug
+}
 #ifdef MEMDEBUG
 void *GetClearedMemoryDebug(unsigned long size, char *label, char *file, int line)
 #else
@@ -153,15 +153,15 @@ void *GetClearedMemory(unsigned long size)
 #endif //MEMDEBUG
 	memset(ptr, 0, size);
 	return ptr;
-} //end of the function GetClearedMemoryLabelled
+}
 void *GetClearedHunkMemory(unsigned long size)
 {
 	return GetClearedMemory(size);
-} //end of the function GetClearedHunkMemory
+}
 void *GetHunkMemory(unsigned long size)
 {
 	return GetMemory(size);
-} //end of the function GetHunkMemory
+}
 memoryblock_t *BlockFromPointer(void *ptr, char *str)
 {
 	memoryblock_t *block;
@@ -174,19 +174,19 @@ memoryblock_t *BlockFromPointer(void *ptr, char *str)
 		Error("%s: NULL pointer\n", str);
 #endif MEMDEBUG
 		return NULL;
-	} //end if
+	}
 	block = (memoryblock_t *) ((char *) ptr - sizeof(memoryblock_t));
 	if (block->id != MEM_ID)
 	{
 		Error("%s: invalid memory block\n", str);
-	} //end if
+	}
 	if (block->ptr != ptr)
 	{
 		
 		Error("%s: memory block pointer invalid\n", str);
-	} //end if
+	}
 	return block;
-} //end of the function BlockFromPointer
+}
 void FreeMemory(void *ptr)
 {
 	memoryblock_t *block;
@@ -198,7 +198,7 @@ void FreeMemory(void *ptr)
 	numblocks--;
 	//
 	free(block);
-} //end of the function FreeMemory
+}
 int MemoryByteSize(void *ptr)
 {
 	memoryblock_t *block;
@@ -206,16 +206,16 @@ int MemoryByteSize(void *ptr)
 	block = BlockFromPointer(ptr, "MemoryByteSize");
 	if (!block) return 0;
 	return block->size;
-} //end of the function MemoryByteSize
+}
 int MemorySize(void *ptr)
 {
 	return MemoryByteSize(ptr);
-} //end of the function MemorySize
+}
 void PrintUsedMemorySize(void)
 {
 	printf("total botlib memory: %d KB\n", totalmemorysize >> 10);
 	printf("total memory blocks: %d\n", numblocks);
-} //end of the function PrintUsedMemorySize
+}
 void PrintMemoryLabels(void)
 {
 	memoryblock_t *block;
@@ -229,8 +229,8 @@ void PrintMemoryLabels(void)
 		Log_Write("%6d, %p, %8d: %24s line %6d: %s", i, block->ptr, block->size, block->file, block->line, block->label);
 #endif //MEMDEBUG
 		i++;
-	} //end for
-} //end of the function PrintMemoryLabels
+	}
+}
 void DumpMemory(void)
 {
 	memoryblock_t *block;
@@ -238,13 +238,13 @@ void DumpMemory(void)
 	for (block = memory; block; block = memory)
 	{
 		FreeMemory(block->ptr);
-	} //end for
+	}
 	totalmemorysize = 0;
-} //end of the function DumpMemory
+}
 int TotalAllocatedMemory(void)
 {
 	return totalmemorysize;
-} //end of the function TotalAllocatedMemory
+}
 #endif
 
 //===========================================================================
@@ -270,10 +270,10 @@ void Hunk_ClearHigh(void)
 	{
 		nexth = h->next;
 		FreeMemory(h);
-	} //end for
+	}
 	memhunk_high = NULL;
 	memhunk_high_size = 16 * 1024 * 1024;
-} //end of the function Hunk_ClearHigh
+}
 void *Hunk_Alloc(int size)
 {
 	memhunk_t *h;
@@ -286,12 +286,12 @@ void *Hunk_Alloc(int size)
 	memhunk_high = h;
 	memhunk_high_size -= size;
 	return h->ptr;
-} //end of the function Hunk_Alloc
+}
 void *Z_Malloc(int size)
 {
 	return GetClearedMemory(size);
-} //end of the function Z_Malloc
+}
 void Z_Free (void *ptr)
 {
 	FreeMemory(ptr);
-} //end of the function Z_Free
+}

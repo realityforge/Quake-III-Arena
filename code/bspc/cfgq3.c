@@ -34,7 +34,7 @@ bbox	//30x30x56
 	flags			0x0000
 	mins			{-15, -15, -24}
 	maxs			{15, 15, 32}
-} //end bbox
+}
 
 bbox	//30x30x40
 {
@@ -42,7 +42,7 @@ bbox	//30x30x40
 	flags			0x0001
 	mins			{-15, -15, -24}
 	maxs			{15, 15, 16}
-} //end bbox
+}
 
 settings
 {
@@ -81,4 +81,4 @@ settings
 	rs_falldamage5				300
 	rs_falldamage10				500
 	rs_maxjumpfallheight		450
-} //end settings
+}

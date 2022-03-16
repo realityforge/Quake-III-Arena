@@ -146,7 +146,7 @@ void Q1_AllocMaxBSP(void)
 	Log_Print("allocated ");
 	PrintMemorySize(q1_allocatedbspmem);
 	Log_Print(" of BSP memory\n");
-} //end of the function Q1_AllocMaxBSP
+}
 
 void Q1_FreeMaxBSP(void)
 {
@@ -215,7 +215,7 @@ void Q1_FreeMaxBSP(void)
 	PrintMemorySize(q1_allocatedbspmem);
 	Log_Print(" of BSP memory\n");
 	q1_allocatedbspmem = 0;
-} //end of the function Q1_FreeMaxBSP
+}
 //#endif //ME
 
 /*
@@ -550,7 +550,7 @@ void Q1_PrintBSPFileSizes (void)
 	printf ("      lightdata    %6i\n", q1_lightdatasize);
 	printf ("      visdata      %6i\n", q1_visdatasize);
 	printf ("      entdata      %6i\n", q1_entdatasize);
-} //end of the function Q1_PrintBSPFileSizes
+}
 
 
 /*
@@ -571,10 +571,10 @@ void Q1_ParseEntities (void)
 
 	while(ParseEntity(script))
 	{
-	} //end while
+	}
 
 	FreeScript(script);
-} //end of the function Q1_ParseEntities
+}
 
 
 /*
@@ -617,4 +617,4 @@ void Q1_UnparseEntities (void)
 			Error ("Entity text too long");
 	}
 	q1_entdatasize = end - buf + 1;
-} //end of the function Q1_UnparseEntities
+}

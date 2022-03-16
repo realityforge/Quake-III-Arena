@@ -69,7 +69,7 @@ int HL_TextureContents(char *name)
 	//*/
 
 	return CONTENTS_SOLID;
-} //end of the function HL_TextureContents
+}
 //===========================================================================
 // Generates two new brushes, leaving the original
 // unchanged
@@ -108,21 +108,21 @@ void HL_SplitBrush(bspbrush_t *brush, int planenum, int nodenum,
 				d_front = d;
 			if (d < 0 && d < d_back)
 				d_back = d;
-		} //end for
-	} //end for
+		}
+	}
 
 	if (d_front < 0.1) // PLANESIDE_EPSILON)
 	{	// only on back
 		*back = CopyBrush (brush);
 		Log_Print("HL_SplitBrush: only on back\n");
 		return;
-	} //end if
+	}
 	if (d_back > -0.1) // PLANESIDE_EPSILON)
 	{	// only on front
 		*front = CopyBrush (brush);
 		Log_Print("HL_SplitBrush: only on front\n");
 		return;
-	} //end if
+	}
 
 	// create a new winding from the split plane
 
@@ -131,7 +131,7 @@ void HL_SplitBrush(bspbrush_t *brush, int planenum, int nodenum,
 	{
 		plane2 = &mapplanes[brush->sides[i].planenum ^ 1];
 		ChopWindingInPlace(&w, plane2->normal, plane2->dist, 0); // PLANESIDE_EPSILON);
-	} //end for
+	}
 
 	if (!w || WindingIsTiny(w))
 	{	// the brush isn't really split
@@ -149,7 +149,7 @@ void HL_SplitBrush(bspbrush_t *brush, int planenum, int nodenum,
 	if (WindingIsHuge(w))
 	{
 		Log_Print("HL_SplitBrush: WARNING huge split winding\n");
-	} //end of
+	}
 
 	midwinding = w;
 
@@ -159,7 +159,7 @@ void HL_SplitBrush(bspbrush_t *brush, int planenum, int nodenum,
 	{
 		b[i] = AllocBrush (brush->numsides+1);
 		b[i]->original = brush->original;
-	} //end for
+	}
 
 	// split all the current windings
 
@@ -191,8 +191,8 @@ void HL_SplitBrush(bspbrush_t *brush, int planenum, int nodenum,
 //			cs->original = s->original;
 			cs->winding = cw[j];
 			cs->flags &= ~SFL_TESTED;
-		} //end for
-	} //end for
+		}
+	}
 
 
 	// see if we have valid polygons on both sides
@@ -206,16 +206,16 @@ void HL_SplitBrush(bspbrush_t *brush, int planenum, int nodenum,
 			{
 				Log_Print("HL_SplitBrush: bogus brush after clip\n");
 				break;
-			} //end if
-		} //end for
+			}
+		}
 
 		if (b[i]->numsides < 3 || j < 3)
 		{
 			FreeBrush (b[i]);
 			b[i] = NULL;
 			Log_Print("HL_SplitBrush: numsides < 3\n");
-		} //end if
-	} //end for
+		}
+	}
 
 	if ( !(b[0] && b[1]) )
 	{
@@ -227,14 +227,14 @@ void HL_SplitBrush(bspbrush_t *brush, int planenum, int nodenum,
 		{
 			FreeBrush (b[0]);
 			*front = CopyBrush (brush);
-		} //end if
+		}
 		if (b[1])
 		{
 			FreeBrush (b[1]);
 			*back = CopyBrush (brush);
-		} //end if
+		}
 		return;
-	} //end if
+	}
 
 	// add the midwinding to both sides
 	for (i = 0; i < 2; i++)
@@ -253,7 +253,7 @@ void HL_SplitBrush(bspbrush_t *brush, int planenum, int nodenum,
 			cs->winding = CopyWinding (midwinding);
 		else
 			cs->winding = midwinding;
-	} //end for
+	}
 
 
 {
@@ -268,13 +268,13 @@ void HL_SplitBrush(bspbrush_t *brush, int planenum, int nodenum,
 			FreeBrush (b[i]);
 			b[i] = NULL;
 			Log_Print("HL_SplitBrush: tiny volume after clip\n");
-		} //end if
-	} //end for
+		}
+	}
 } //*/
 
 	*front = b[0];
 	*back = b[1];
-} //end of the function HL_SplitBrush
+}
 //===========================================================================
 // returns true if the tree starting at nodenum has only solid leaves
 //
@@ -291,7 +291,7 @@ int HL_SolidTree_r(int nodenum)
 			case HL_CONTENTS_EMPTY:
 			{
 				return false;
-			} //end case
+			}
 			case HL_CONTENTS_SOLID:
 #ifdef HLCONTENTS
 			case HL_CONTENTS_CLIP:
@@ -302,7 +302,7 @@ int HL_SolidTree_r(int nodenum)
 #endif //HLCONTENTS
 			{
 				return true;
-			} //end case
+			}
 			case HL_CONTENTS_WATER:
 			case HL_CONTENTS_SLIME:
 			case HL_CONTENTS_LAVA:
@@ -319,14 +319,14 @@ int HL_SolidTree_r(int nodenum)
 			default:
 			{
 				return false;
-			} //end default
-		} //end switch
+			}
+		}
 		return false;
-	} //end if
+	}
 	if (!HL_SolidTree_r(hl_dnodes[nodenum].children[0])) return false;
 	if (!HL_SolidTree_r(hl_dnodes[nodenum].children[1])) return false;
 	return true;
-} //end of the function HL_SolidTree_r
+}
 bspbrush_t *HL_CreateBrushes_r(bspbrush_t *brush, int nodenum)
 {
 	int planenum;
@@ -342,14 +342,14 @@ bspbrush_t *HL_CreateBrushes_r(bspbrush_t *brush, int nodenum)
 #ifdef HL_PRINT
 			qprintf("\r%5i", ++hl_numbrushes);
 #endif //HL_PRINT
-		} //end if
+		}
 		switch(leaf->contents)
 		{
 			case HL_CONTENTS_EMPTY:
 			{
 				FreeBrush(brush);
 				return NULL;
-			} //end case
+			}
 			case HL_CONTENTS_SOLID:
 #ifdef HLCONTENTS
 			case HL_CONTENTS_CLIP:
@@ -361,22 +361,22 @@ bspbrush_t *HL_CreateBrushes_r(bspbrush_t *brush, int nodenum)
 			{
 				brush->side = CONTENTS_SOLID;
 				return brush;
-			} //end case
+			}
 			case HL_CONTENTS_WATER:
 			{
 				brush->side = CONTENTS_WATER;
 				return brush;
-			} //end case
+			}
 			case HL_CONTENTS_SLIME:
 			{
 				brush->side = CONTENTS_SLIME;
 				return brush;
-			} //end case
+			}
 			case HL_CONTENTS_LAVA:
 			{
 				brush->side = CONTENTS_LAVA;
 				return brush;
-			} //end case
+			}
 #ifdef HLCONTENTS
 			//these contents should not be found in the BSP
 			case HL_CONTENTS_ORIGIN:
@@ -389,22 +389,22 @@ bspbrush_t *HL_CreateBrushes_r(bspbrush_t *brush, int nodenum)
 			{
 				Error("HL_CreateBrushes_r: found contents %d in Half-Life BSP", leaf->contents);
 				return NULL;
-			} //end case
+			}
 #endif //HLCONTENTS
 			default:
 			{
 				Error("HL_CreateBrushes_r: unknown contents %d in Half-Life BSP", leaf->contents);
 				return NULL;
-			} //end default
-		} //end switch
+			}
+		}
 		return NULL;
-	} //end if
+	}
 	//if the rest of the tree is solid
 	/*if (HL_SolidTree_r(nodenum))
 	{
 		brush->side = CONTENTS_SOLID;
 		return brush;
-	} //end if*/
+	}*/
 	//
 	planenum = hl_dnodes[nodenum].planenum;
 	planenum = FindFloatPlane(hl_dplanes[planenum].normal, hl_dplanes[planenum].dist);
@@ -417,7 +417,7 @@ bspbrush_t *HL_CreateBrushes_r(bspbrush_t *brush, int nodenum)
 	{
 		Log_Print("HL_CreateBrushes_r: WARNING node not splitting brush\n");
 		//return NULL;
-	} //end if
+	}
 	//create brushes recursively
 	if (front) front = HL_CreateBrushes_r(front, hl_dnodes[nodenum].children[0]);
 	if (back) back = HL_CreateBrushes_r(back, hl_dnodes[nodenum].children[1]);
@@ -427,12 +427,12 @@ bspbrush_t *HL_CreateBrushes_r(bspbrush_t *brush, int nodenum)
 		for (brush = front; brush->next; brush = brush->next);
 		brush->next = back;
 		return front;
-	} //end if
+	}
 	else
 	{
 		return back;
-	} //end else
-} //end of the function HL_CreateBrushes_r
+	}
+}
 bspbrush_t *HL_CreateBrushesFromBSP(int modelnum)
 {
 	bspbrush_t *brushlist;
@@ -451,7 +451,7 @@ bspbrush_t *HL_CreateBrushesFromBSP(int modelnum)
 	{
 		mins[i] -= 8;
 		maxs[i] += 8;
-	} //end for
+	}
 	//NOTE: have to add the BSP tree mins and maxs to the MAP mins and maxs
 	AddPointToBounds(mins, map_mins, map_maxs);
 	AddPointToBounds(maxs, map_mins, map_maxs);
@@ -461,7 +461,7 @@ bspbrush_t *HL_CreateBrushesFromBSP(int modelnum)
 		Log_Print("brush size: %5.0f,%5.0f,%5.0f to %5.0f,%5.0f,%5.0f\n",
 							map_mins[0], map_mins[1], map_mins[2],
 							map_maxs[0], map_maxs[1], map_maxs[2]);
-	} //end if
+	}
 	//create one huge brush containing the whole world
 	brush = BrushFromBounds(mins, maxs);
 	VectorCopy(mins, brush->mins);
@@ -479,7 +479,7 @@ bspbrush_t *HL_CreateBrushesFromBSP(int modelnum)
 #endif //HL_PRINT
 	//now we've got a list with brushes!
 	return brushlist;
-} //end of the function HL_CreateBrushesFromBSP
+}
 bspbrush_t *HL_MergeBrushes(bspbrush_t *brushlist, int modelnum)
 {
 	int nummerges, merged;
@@ -494,7 +494,7 @@ bspbrush_t *HL_MergeBrushes(bspbrush_t *brushlist, int modelnum)
 		for (tail = brushlist; tail; tail = tail->next)
 		{
 			if (!tail->next) break;
-		} //end for
+		}
 		merged = 0;
 		newbrushlist = NULL;
 		for (b1 = brushlist; b1; b1 = brushlist)
@@ -523,13 +523,13 @@ bspbrush_t *HL_MergeBrushes(bspbrush_t *brushlist, int modelnum)
 					for (tail = brushlist; tail; tail = tail->next)
 					{
 						if (!tail->next) break;
-					} //end for
+					}
 					merged++;
 					if (!modelnum) qprintf("\r%5d", nummerges++);
 					break;
-				} //end if
+				}
 				lastb2 = b2;
-			} //end for
+			}
 			//if b1 can't be merged with any of the other brushes
 			if (!b2)
 			{
@@ -537,13 +537,13 @@ bspbrush_t *HL_MergeBrushes(bspbrush_t *brushlist, int modelnum)
 				//keep b1
 				b1->next = newbrushlist;
 				newbrushlist = b1;
-			} //end else
-		} //end for
+			}
+		}
 		brushlist = newbrushlist;
 	} while(merged);
 	if (!modelnum) qprintf("\n");
 	return newbrushlist;
-} //end of the function HL_MergeBrushes
+}
 //===========================================================================
 // returns the amount the face and the winding have overlap
 //
@@ -568,7 +568,7 @@ float HL_FaceOnWinding(hl_dface_t *face, winding_t *winding)
 	{
 		VectorNegate(plane.normal, plane.normal);
 		plane.dist = -plane.dist;
-	} //end if
+	}
 	for (i = 0; i < face->numedges && w; i++)
 	{
 		//get the first and second vertex of the edge
@@ -585,15 +585,15 @@ float HL_FaceOnWinding(hl_dface_t *face, winding_t *winding)
 		dist = DotProduct(normal, v1);
 		//
 		ChopWindingInPlace(&w, normal, dist, 0.9); //CLIP_EPSILON
-	} //end for
+	}
 	if (w)
 	{
 		area = WindingArea(w);
 		FreeWinding(w);
 		return area;
-	} //end if
+	}
 	return 0;
-} //end of the function HL_FaceOnWinding
+}
 //===========================================================================
 // returns a list with brushes created by splitting the given brush with
 // planes that go through the face edges and are orthogonal to the face plane
@@ -617,7 +617,7 @@ bspbrush_t *HL_SplitBrushWithFace(bspbrush_t *brush, hl_dface_t *face)
 	{
 		VectorNegate(plane.normal, plane.normal);
 		plane.dist = -plane.dist;
-	} //end if
+	}
 	splits = 0;
 	brushlist = NULL;
 	for (i = 0; i < face->numedges; i++)
@@ -647,27 +647,27 @@ bspbrush_t *HL_SplitBrushWithFace(bspbrush_t *brush, hl_dface_t *face)
 			back->next = brushlist;
 			brushlist = back;
 			splits++;
-		} //end if
+		}
 		if (!front)
 		{
 			Log_Print("HL_SplitBrushWithFace: no new brush\n");
 			FreeBrushList(brushlist);
 			return NULL;
-		} //end if
+		}
 		//copy the brush contents
 		front->side = brush->side;
 		//continue splitting the front brush
 		brush = front;
-	} //end for
+	}
 	if (!splits)
 	{
 		FreeBrush(front);
 		return NULL;
-	} //end if
+	}
 	front->next = brushlist;
 	brushlist = front;
 	return brushlist;
-} //end of the function HL_SplitBrushWithFace
+}
 bspbrush_t *HL_TextureBrushes(bspbrush_t *brushlist, int modelnum)
 {
 	float area, largestarea;
@@ -685,7 +685,7 @@ bspbrush_t *HL_TextureBrushes(bspbrush_t *brushlist, int modelnum)
 	for (brushlistend = brushlist; brushlistend; brushlistend = brushlistend->next)
 	{
 		if (!brushlistend->next) break;
-	} //end for
+	}
 	//there's no previous brush when at the start of the list
 	prevbrush = NULL;
 	//go over the brush list
@@ -736,7 +736,7 @@ bspbrush_t *HL_TextureBrushes(bspbrush_t *brushlist, int modelnum)
 									{
 										brushlistend = prevbrush;
 										nextbrush = newbrushes;
-									} //end if
+									}
 									//add the new brushes to the end of the list
 									if (brushlistend) brushlistend->next = newbrushes;
 									else brushlist = newbrushes;
@@ -749,26 +749,26 @@ bspbrush_t *HL_TextureBrushes(bspbrush_t *brushlist, int modelnum)
 									for (brushlistend = brushlist; brushlistend; brushlistend = brushlistend->next)
 									{
 										if (!brushlistend->next) break;
-									} //end for
+									}
 									break;
-								} //end if
+								}
 								else
 								{
 									Log_Write("brush %d: no real texture split", numbrushes);
-								} //end else
-							} //end if
+								}
+							}
 							else
 							{
 								//best face for texturing this brush side
 								bestfacenum = i;
-							} //end else
-						} //end if
-					} //end if
-				} //end for
+							}
+						}
+					}
+				}
 				//if the brush was split the original brush is removed
 				//and we just continue with the next one in the list
 				if (i < hl_numfaces) break;
-			} //end if
+			}
 			else
 			{
 				//find the face with the largest overlap with this brush side
@@ -786,10 +786,10 @@ bspbrush_t *HL_TextureBrushes(bspbrush_t *brushlist, int modelnum)
 						{
 							largestarea = area;
 							bestfacenum = i;
-						} //end if
-					} //end if
-				} //end for
-			} //end else
+						}
+					}
+				}
+			}
 			//if a face was found for texturing this brush side
 			if (bestfacenum >= 0)
 			{
@@ -799,7 +799,7 @@ bspbrush_t *HL_TextureBrushes(bspbrush_t *brushlist, int modelnum)
 				{
 					map_texinfo[texinfonum].vecs[0][n] = hl_texinfo[texinfonum].vecs[0][n];
 					map_texinfo[texinfonum].vecs[1][n] = hl_texinfo[texinfonum].vecs[1][n];
-				} //end for
+				}
 				//make sure the two vectors aren't of zero length otherwise use the default
 				//vector to prevent a divide by zero in the map writing
 				if (VectorLength(map_texinfo[texinfonum].vecs[0]) < 0.01)
@@ -826,24 +826,24 @@ bspbrush_t *HL_TextureBrushes(bspbrush_t *brushlist, int modelnum)
 				if (texinfonum > map_numtexinfo) map_numtexinfo = texinfonum;
 				//this side is textured
 				side->flags |= SFL_TEXTURED;
-			} //end if
+			}
 			else
 			{
 				//no texture for this side
 				side->texinfo = TEXINFO_NODE;
 				//this side is textured
 				side->flags |= SFL_TEXTURED;
-			} //end if
-		} //end for
+			}
+		}
 		//
 		if (!modelnum && prevbrush != brush) qprintf("\r%5d", ++numbrushes);
 		//previous brush in the list
 		prevbrush = brush;
-	} //end for
+	}
 	if (!modelnum) qprintf("\n");
 	//return the new list with brushes
 	return brushlist;
-} //end of the function HL_TextureBrushes
+}
 void HL_FixContentsTextures(bspbrush_t *brushlist)
 {
 	int i, texinfonum;
@@ -860,7 +860,7 @@ void HL_FixContentsTextures(bspbrush_t *brushlist)
 		{
 			texinfonum = brush->sides[i].texinfo;
 			if (HL_TextureContents(map_texinfo[texinfonum].texture) == brush->side) break;
-		} //end for
+		}
 		//if no specific contents texture was found
 		if (i >= brush->numsides)
 		{
@@ -871,9 +871,9 @@ void HL_FixContentsTextures(bspbrush_t *brushlist)
 				{
 					texinfonum = i;
 					break;
-				} //end if
-			} //end for
-		} //end if
+				}
+			}
+		}
 		//
 		if (texinfonum >= 0)
 		{
@@ -881,11 +881,11 @@ void HL_FixContentsTextures(bspbrush_t *brushlist)
 			for (i = 0; i < brush->numsides; i++)
 			{
 				brush->sides[i].texinfo = texinfonum;
-			} //end for
-		} //end if
+			}
+		}
 		else Log_Print("brush contents %d with wrong textures\n", brush->side);
 		//
-	} //end for
+	}
 	/*
 	for (brush = brushlist; brush; brush = brush->next)
 	{
@@ -896,10 +896,10 @@ void HL_FixContentsTextures(bspbrush_t *brushlist)
 			{
 				Error("brush contents %d with wrong contents textures %s\n", brush->side,
 							HL_TextureContents(map_texinfo[texinfonum].texture));
-			} //end if
-		} //end for
-	} //end for*/
-} //end of the function HL_FixContentsTextures
+			}
+		}
+	}*/
+}
 void HL_BSPBrushToMapBrush(bspbrush_t *bspbrush, entity_t *mapent)
 {
 	mapbrush_t *mapbrush;
@@ -934,26 +934,26 @@ void HL_BSPBrushToMapBrush(bspbrush_t *bspbrush, entity_t *mapent)
 			//this brush side is textured
 			side->flags |= SFL_TEXTURED;
 			besttexinfo = side->texinfo;
-		} //end if
+		}
 		//
 		nummapbrushsides++;
 		mapbrush->numsides++;
-	} //end for
+	}
 	//
 	if (besttexinfo == TEXINFO_NODE)
 	{
 		mapbrush->numsides = 0;
 		hl_numclipbrushes++;
 		return;
-	} //end if
+	}
 	//set the texinfo for all the brush sides without texture
 	for (i = 0; i < mapbrush->numsides; i++)
 	{
 		if (mapbrush->original_sides[i].texinfo == TEXINFO_NODE)
 		{
 			mapbrush->original_sides[i].texinfo = besttexinfo;
-		} //end if
-	} //end for
+		}
+	}
 	//contents of the brush
 	mapbrush->contents = bspbrush->side;
 	//
@@ -962,7 +962,7 @@ void HL_BSPBrushToMapBrush(bspbrush_t *bspbrush, entity_t *mapent)
 		//create the AAS brushes from this brush, add brush bevels
 		AAS_CreateMapBrushes(mapbrush, mapent, true);
 		return;
-	} //end if
+	}
 	//create windings for sides and bounds for brush
 	MakeBrushWindings(mapbrush);
 	//add brush bevels
@@ -970,7 +970,7 @@ void HL_BSPBrushToMapBrush(bspbrush_t *bspbrush, entity_t *mapent)
 	//a new brush has been created
 	nummapbrushes++;
 	mapent->numbrushes++;
-} //end of the function HL_BSPBrushToMapBrush
+}
 void HL_CreateMapBrushes(entity_t *mapent, int modelnum)
 {
 	bspbrush_t *brushlist, *brush, *nextbrush;
@@ -987,7 +987,7 @@ void HL_CreateMapBrushes(entity_t *mapent, int modelnum)
 	{
 		brushlist = HL_MergeBrushes(brushlist, modelnum);
 		//brushlist = HL_MergeBrushes(brushlist, modelnum);
-	} //end if
+	}
 	//
 	if (!modelnum) qprintf("converting brushes to map brushes\n");
 	if (!modelnum) qprintf("%5d brushes", i = 0);
@@ -998,12 +998,12 @@ void HL_CreateMapBrushes(entity_t *mapent, int modelnum)
 		brush->next = NULL;
 		FreeBrush(brush);
 		if (!modelnum) qprintf("\r%5d", ++i);
-	} //end for
+	}
 	if (!modelnum) qprintf("\n");
-} //end of the function HL_CreateMapBrushes
+}
 void HL_ResetMapLoading(void)
 {
-} //end of the function HL_ResetMapLoading
+}
 void HL_LoadMapFromBSP(char *filename, int offset, int length)
 {
 	int i, modelnum;
@@ -1036,7 +1036,7 @@ void HL_LoadMapFromBSP(char *filename, int offset, int length)
 		if (classname && !strcmp(classname, "worldspawn"))
 		{
 			modelnum = 0;
-		} //end if
+		}
 		else
 		{
 			//
@@ -1044,11 +1044,11 @@ void HL_LoadMapFromBSP(char *filename, int offset, int length)
 			if (!model || *model != '*') continue;
 			model++;
 			modelnum = atoi(model);
-		} //end else
+		}
 		//create map brushes for the entity
 		HL_CreateMapBrushes(&entities[i], modelnum);
-	} //end for
+	}
 	//
 	qprintf("%5d map brushes\n", nummapbrushes);
 	qprintf("%5d clip brushes\n", hl_numclipbrushes);
-} //end of the function HL_LoadMapFromBSP
+}

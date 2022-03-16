@@ -121,7 +121,7 @@ HWND program_hwnd;
 void SetProgramHandle(HWND hwnd)
 {
 	program_hwnd = hwnd;
-} //end of the function SetProgramHandle
+}
 
 /*
 =================
@@ -150,7 +150,7 @@ void Error (char *error, ...)
 	Log_Close();
 
 	exit(1);
-} //end of the function Error
+}
 
 void Warning(char *szFormat, ...)
 {
@@ -164,7 +164,7 @@ void Warning(char *szFormat, ...)
 	MessageBox(program_hwnd, szBuffer, "Warning", MB_OK);
 
 	Log_Write(szBuffer);
-} //end of the function Warning
+}
 
 
 #else
@@ -189,7 +189,7 @@ void Error (char *error, ...)
 	Log_Close();
 
 	exit (1);
-} //end of the function Error
+}
 
 void Warning(char *warning, ...)
 {
@@ -202,7 +202,7 @@ void Warning(char *warning, ...)
 	printf("WARNING: %s\n", text);
 
 	Log_Write(text);
-} //end of the function Warning
+}
 
 #endif
 
@@ -227,7 +227,7 @@ void qprintf(char *format, ...)
 	vprintf(format, argptr);
 #endif //WINBSPC
 	va_end(argptr);
-} //end of the function qprintf
+}
 
 void Com_Error(int level, char *error, ...)
 {
@@ -238,7 +238,7 @@ void Com_Error(int level, char *error, ...)
 	vsprintf(text, error, argptr);
 	va_end(argptr);
 	Error(text);
-} //end of the funcion Com_Error
+}
 
 void Com_Printf( const char *fmt, ... )
 {
@@ -249,7 +249,7 @@ void Com_Printf( const char *fmt, ... )
 	vsprintf(text, fmt, argptr);
 	va_end(argptr);
 	Log_Print(text);
-} //end of the funcion Com_Printf
+}
 
 /*
 
@@ -1212,15 +1212,15 @@ void QCopyFile (char *from, char *to)
 void FS_FreeFile(void *buf)
 {
 	FreeMemory(buf);
-} //end of the function FS_FreeFile
+}
 
 int FS_ReadFileAndCache(const char *qpath, void **buffer)
 {
 	return LoadFile((char *) qpath, buffer, 0, 0);
-} //end of the function FS_ReadFileAndCache
+}
 
 int FS_FOpenFileRead( const char *filename, FILE **file, qboolean uniqueFILE )
 {
 	*file = fopen(filename, "rb");
 	return (*file != NULL);
-} //end of the function FS_FOpenFileRead
+}

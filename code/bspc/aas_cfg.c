@@ -112,7 +112,7 @@ void DefaultCfg(void)
 	{
 		if ((cfg_fields[i].type & FT_TYPE) == FT_FLOAT)
 			*(float *)( ((char*)&cfg) + cfg_fields[i].offset ) = FLT_MAX;
-	} //end for
+	}
 	//
 	cfg.numbboxes = 2;
 	//bbox 0
@@ -139,7 +139,7 @@ void DefaultCfg(void)
 	cfg.phys_gravitydirection[1]	= 0;
 	cfg.phys_gravitydirection[2]	= -1;
 	cfg.phys_maxsteepness			= 0.7;
-} //end of the function DefaultCfg
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -161,7 +161,7 @@ char	* QDECL va( char *format, ... )
 	va_end (argptr);
 
 	return buf;
-} //end of the function va
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -181,10 +181,10 @@ void SetCfgLibVars(void)
 			if (value != FLT_MAX)
 			{
 				LibVarSet(cfg_fields[i].name, va("%f", value));
-			} //end if
-		} //end if
-	} //end for
-} //end of the function SetCfgLibVars
+			}
+		}
+	}
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -202,7 +202,7 @@ int LoadCfgFile(char *filename)
 	{
 		Log_Print("couldn't open cfg file %s\n", filename);
 		return false;
-	} //end if
+	}
 
 	settingsdefined = false;
 	memset(&cfg, 0, sizeof(cfg_t));
@@ -214,39 +214,39 @@ int LoadCfgFile(char *filename)
 			if (cfg.numbboxes >= AAS_MAX_BBOXES)
 			{
 				SourceError(source, "too many bounding box volumes defined");
-			} //end if
+			}
 			if (!ReadStructure(source, &bbox_struct, (char *) &cfg.bboxes[cfg.numbboxes]))
 			{
 				FreeSource(source);
 				return false;
-			} //end if
+			}
 			cfg.allpresencetypes |= cfg.bboxes[cfg.numbboxes].presencetype;
 			cfg.numbboxes++;
-		} //end if
+		}
 		else if (!stricmp(token.string, "settings"))
 		{
 			if (settingsdefined)
 			{
 				SourceWarning(source, "settings already defined\n");
-			} //end if
+			}
 			settingsdefined = true;
 			if (!ReadStructure(source, &cfg_struct, (char *) &cfg))
 			{
 				FreeSource(source);
 				return false;
-			} //end if
-		} //end else if
-	} //end while
+			}
+		}
+	}
 	if (VectorLength(cfg.phys_gravitydirection) < 0.9 || VectorLength(cfg.phys_gravitydirection) > 1.1)
 	{
 		SourceError(source, "invalid gravity direction specified");
-	} //end if
+	}
 	if (cfg.numbboxes <= 0)
 	{
 		SourceError(source, "no bounding volumes specified");
-	} //end if
+	}
 	FreeSource(source);
 	SetCfgLibVars();
 	Log_Print("using cfg file %s\n", filename);
 	return true;
-} //end of the function LoadCfgFile
+}

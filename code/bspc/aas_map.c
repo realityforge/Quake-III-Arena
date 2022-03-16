@@ -66,8 +66,8 @@ vec_t BoxOriginDistanceFromPlane(vec3_t normal, vec3_t mins, vec3_t maxs, int si
 			if (normal[i] > BBOX_NORMAL_EPSILON) v1[i] = maxs[i];
 			else if (normal[i] < -BBOX_NORMAL_EPSILON) v1[i] = mins[i];
 			else v1[i] = 0;
-		} //end for
-	} //end if
+		}
+	}
 	else
 	{
 		for (i = 0; i < 3; i++)
@@ -75,12 +75,12 @@ vec_t BoxOriginDistanceFromPlane(vec3_t normal, vec3_t mins, vec3_t maxs, int si
 			if (normal[i] > BBOX_NORMAL_EPSILON) v1[i] = mins[i];
 			else if (normal[i] < -BBOX_NORMAL_EPSILON) v1[i] = maxs[i];
 			else v1[i] = 0;
-		} //end for
-	} //end else
+		}
+	}
 	VectorCopy(normal, v2);
 	VectorInverse(v2);
 	return DotProduct(v1, v2);
-} //end of the function BoxOriginDistanceFromPlane
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -138,8 +138,8 @@ void AAS_ExpandMapBrush(mapbrush_t *brush, vec3_t mins, vec3_t maxs)
 		//when player clip contents brushes are read from the bsp tree
 		//they have the texinfo field set to TEXINFO_NODE
 		//s->texinfo = 0;
-	} //end for
-} //end of the function AAS_ExpandMapBrush
+	}
+}
 void AAS_SetTexinfo(mapbrush_t *brush)
 {
 	int n;
@@ -164,8 +164,8 @@ void AAS_SetTexinfo(mapbrush_t *brush)
 			side = brush->original_sides + n;
 			//side->flags |= SFL_TEXTURED|SFL_VISIBLE;
 			side->texinfo = 0;
-		} //end for
-	} //end if
+		}
+	}
 	else
 	{
 		//only use brush sides as splitters if they are textured
@@ -176,9 +176,9 @@ void AAS_SetTexinfo(mapbrush_t *brush)
 			//don't use side as splitter (set texinfo to TEXINFO_NODE) if not textured
 			if (side->flags & (SFL_TEXTURED|SFL_BEVEL)) side->texinfo = 0;
 			else side->texinfo = TEXINFO_NODE;
-		} //end for
-	} //end else
-} //end of the function AAS_SetTexinfo
+		}
+	}
+}
 void FreeBrushWindings(mapbrush_t *brush)
 {
 	int n;
@@ -189,8 +189,8 @@ void FreeBrushWindings(mapbrush_t *brush)
 		side = brush->original_sides + n;
 		//
 		if (side->winding) FreeWinding(side->winding);
-	} //end for
-} //end of the function FreeBrushWindings
+	}
+}
 void AAS_AddMapBrushSide(mapbrush_t *brush, int planenum)
 {
 	side_t *side;
@@ -209,7 +209,7 @@ void AAS_AddMapBrushSide(mapbrush_t *brush, int planenum)
 	//
 	nummapbrushsides++;
 	brush->numsides++;
-} //end of the function AAS_AddMapBrushSide
+}
 void AAS_FixMapBrush(mapbrush_t *brush)
 {
 	int i, j, planenum;
@@ -232,7 +232,7 @@ void AAS_FixMapBrush(mapbrush_t *brush)
 			if (brush->original_sides[j].flags & SFL_BEVEL) continue;
 			plane = &mapplanes[brush->original_sides[j].planenum^1];
 			ChopWindingInPlace(&w, plane->normal, plane->dist, 0); //CLIP_EPSILON);
-		} //end for
+		}
 
 		side = &brush->original_sides[i];
 		side->winding = w;
@@ -241,9 +241,9 @@ void AAS_FixMapBrush(mapbrush_t *brush)
 			for (j = 0; j < w->numpoints; j++)
 			{
 				AddPointToBounds(w->p[j], brush->mins, brush->maxs);
-			} //end for
-		} //end if
-	} //end for
+			}
+		}
+	}
 	//
 	for (i = 0; i < brush->numsides; i++)
 	{
@@ -258,9 +258,9 @@ void AAS_FixMapBrush(mapbrush_t *brush)
 									plane1->dist, plane2->dist))
 			{
 				Log_Print("non convex brush");
-			} //end if
-		} //end for
-	} //end for
+			}
+		}
+	}
 
 	//NOW close the fucking brush!!
 	for (i = 0; i < 3; i++)
@@ -274,7 +274,7 @@ void AAS_FixMapBrush(mapbrush_t *brush)
 			//
 			Log_Print("mins out of range: added extra brush side\n");
 			AAS_AddMapBrushSide(brush, planenum);
-		} //end if
+		}
 		if (brush->maxs[i] > MAX_MAP_BOUNDS)
 		{
 			VectorClear(normal);
@@ -284,15 +284,15 @@ void AAS_FixMapBrush(mapbrush_t *brush)
 			//
 			Log_Print("maxs out of range: added extra brush side\n");
 			AAS_AddMapBrushSide(brush, planenum);
-		} //end if
+		}
 		if (brush->mins[i] > MAX_MAP_BOUNDS || brush->maxs[i] < -MAX_MAP_BOUNDS)
 		{
 			Log_Print("entity %i, brush %i: no visible sides on brush\n", brush->entitynum, brush->brushnum);
-		} //end if
-	} //end for
+		}
+	}
 	//free all the windings
 	FreeBrushWindings(brush);
-} //end of the function AAS_FixMapBrush
+}
 qboolean AAS_MakeBrushWindings(mapbrush_t *ob)
 {
 	int			i, j;
@@ -337,9 +337,9 @@ qboolean AAS_MakeBrushWindings(mapbrush_t *ob)
 									plane1->dist, plane2->dist))
 			{
 				Log_Print("non convex brush");
-			} //end if
-		} //end for
-	} //end for
+			}
+		}
+	}
 	//check for out of bound brushes
 	for (i = 0; i < 3; i++)
 	{
@@ -350,17 +350,17 @@ qboolean AAS_MakeBrushWindings(mapbrush_t *ob)
 			Log_Print("ob->mins[%d] = %f, ob->maxs[%d] = %f\n", i, ob->mins[i], i, ob->maxs[i]);
 			ob->numsides = 0; //remove the brush
 			break;
-		} //end if
+		}
 		if (ob->mins[i] > MAX_MAP_BOUNDS || ob->maxs[i] < -MAX_MAP_BOUNDS)
 		{
 			Log_Print("entity %i, brush %i: no visible sides on brush\n", ob->entitynum, ob->brushnum);
 			Log_Print("ob->mins[%d] = %f, ob->maxs[%d] = %f\n", i, ob->mins[i], i, ob->maxs[i]);
 			ob->numsides = 0; //remove the brush
 			break;
-		} //end if
-	} //end for
+		}
+	}
 	return true;
-} //end of the function AAS_MakeBrushWindings
+}
 mapbrush_t *AAS_CopyMapBrush(mapbrush_t *brush, entity_t *mapent)
 {
 	int n;
@@ -393,12 +393,12 @@ mapbrush_t *AAS_CopyMapBrush(mapbrush_t *brush, entity_t *mapent)
 		newside->planenum = side->planenum;
 		newside->texinfo = side->texinfo;
 		nummapbrushsides++;
-	} //end for
+	}
 	//
 	nummapbrushes++;
 	mapent->numbrushes++;
 	return newbrush;
-} //end of the function AAS_CopyMapBrush
+}
 int mark_entities[MAX_MAP_ENTITIES];
 
 int AAS_AlwaysTriggered_r(char *targetname)
@@ -447,7 +447,7 @@ int AAS_ValidEntity(entity_t *mapent)
 	if (mapent == &entities[0])
 	{
 		return true;
-	} //end if
+	}
 	//some of the func_wall brushes are also used for AAS
 	else if (!strcmp("func_wall", ValueForKey(mapent, "classname")))
 	{
@@ -457,8 +457,8 @@ int AAS_ValidEntity(entity_t *mapent)
 		{
 			//Log_Print("func_wall USED in deathmatch mode %d\n", atoi(ValueForKey(mapent, "spawnflags")));
 			return true;
-		} //end if
-	} //end else if
+		}
+	}
 	else if (!strcmp("func_door_rotating", ValueForKey(mapent, "classname")))
 	{
 		//if the func_door_rotating is present in deathmatch
@@ -469,18 +469,18 @@ int AAS_ValidEntity(entity_t *mapent)
 			{
 				//Log_Print("found func_door_rotating in deathmatch\ntargetname %s\n", ValueForKey(mapent, "targetname"));
 				return true;
-			} //end if
-		} //end if
-	} //end else if
+			}
+		}
+	}
 	else if (!strcmp("trigger_hurt", ValueForKey(mapent, "classname")))
 	{
 		//"dmg" is the damage, for instance: "dmg" "666"
 		return true;
-	} //end else if
+	}
 	else if (!strcmp("trigger_push", ValueForKey(mapent, "classname")))
 	{
 		return true;
-	} //end else if
+	}
 	else if (!strcmp("trigger_multiple", ValueForKey(mapent, "classname")))
 	{
 		//find out if the trigger_multiple is pointing to a target_teleporter
@@ -493,25 +493,25 @@ int AAS_ValidEntity(entity_t *mapent)
 				if (!strcmp("target_teleporter", ValueForKey(&entities[i], "classname")))
 				{
 					return true;
-				} //end if
-			} //end if
-		} //end for
-	} //end else if
+				}
+			}
+		}
+	}
 	else if (!strcmp("trigger_teleport", ValueForKey(mapent, "classname")))
 	{
 		return true;
-	} //end else if
+	}
 	else if (!strcmp("func_static", ValueForKey(mapent, "classname")))
 	{
 		//FIXME: easy/medium/hard/deathmatch specific?
 		return true;
-	} //end else if
+	}
 	else if (!strcmp("func_door", ValueForKey(mapent, "classname")))
 	{
 		return true;
-	} //end else if
+	}
 	return false;
-} //end of the function AAS_ValidEntity
+}
 int AAS_TransformPlane(int planenum, vec3_t origin, vec3_t angles)
 {
 	float newdist, matrix[3][3];
@@ -523,7 +523,7 @@ int AAS_TransformPlane(int planenum, vec3_t origin, vec3_t angles)
 	RotatePoint(normal, matrix);
 	newdist = mapplanes[planenum].dist + DotProduct(normal, origin);
 	return FindFloatPlane(normal, newdist);
-} //end of the function AAS_TransformPlane
+}
 //===========================================================================
 // this function sets the func_rotating_door in it's final position
 //
@@ -564,19 +564,19 @@ void AAS_PositionFuncRotatingBrush(entity_t *mapent, mapbrush_t *brush)
 		VectorCopy(pos1, pos2);
 		VectorCopy(angles, pos1);
 		VectorInverse(movedir);
-	} //end if
+	}
 	//
 	for (i = 0; i < brush->numsides; i++)
 	{
 		s = &brush->original_sides[i];
 		s->planenum = AAS_TransformPlane(s->planenum, mapent->origin, pos2);
-	} //end for
+	}
 	//
 	FreeBrushWindings(brush);
 	AAS_MakeBrushWindings(brush);
 	AddBrushBevels(brush);
 	FreeBrushWindings(brush);
-} //end of the function AAS_PositionFuncRotatingBrush
+}
 void AAS_PositionBrush(entity_t *mapent, mapbrush_t *brush)
 {
 	side_t *s;
@@ -587,7 +587,7 @@ void AAS_PositionBrush(entity_t *mapent, mapbrush_t *brush)
 	if (!strcmp(ValueForKey(mapent, "classname"), "func_door_rotating"))
 	{
 		AAS_PositionFuncRotatingBrush(mapent, brush);
-	} //end if
+	}
 	else
 	{
 		if (mapent->origin[0] || mapent->origin[1] || mapent->origin[2])
@@ -598,8 +598,8 @@ void AAS_PositionBrush(entity_t *mapent, mapbrush_t *brush)
 				newdist = mapplanes[s->planenum].dist +
 						DotProduct(mapplanes[s->planenum].normal, mapent->origin);
 				s->planenum = FindFloatPlane(mapplanes[s->planenum].normal, newdist);
-			} //end for
-		} //end if
+			}
+		}
 		//if it's a trigger hurt
 		if (!strcmp("trigger_hurt", ValueForKey(mapent, "classname")))
 		{
@@ -614,28 +614,28 @@ void AAS_PositionBrush(entity_t *mapent, mapbrush_t *brush)
 				// always avoid so set lava contents
 				brush->contents |= CONTENTS_LAVA;
 			}
-		} //end if
+		}
 		//
 		else if (!strcmp("trigger_push", ValueForKey(mapent, "classname")))
 		{
 			//set the jumppad contents
 			brush->contents = CONTENTS_JUMPPAD;
 			//Log_Print("found trigger_push brush\n");
-		} //end if
+		}
 		//
 		else if (!strcmp("trigger_multiple", ValueForKey(mapent, "classname")))
 		{
 			//set teleporter contents
 			brush->contents = CONTENTS_TELEPORTER;
 			//Log_Print("found trigger_multiple teleporter brush\n");
-		} //end if
+		}
 		//
 		else if (!strcmp("trigger_teleport", ValueForKey(mapent, "classname")))
 		{
 			//set teleporter contents
 			brush->contents = CONTENTS_TELEPORTER;
 			//Log_Print("found trigger_teleport teleporter brush\n");
-		} //end if
+		}
 		else if (!strcmp("func_door", ValueForKey(mapent, "classname")))
 		{
 			//set mover contents
@@ -643,9 +643,9 @@ void AAS_PositionBrush(entity_t *mapent, mapbrush_t *brush)
 			//get the model number
 			model = ValueForKey(mapent, "model");
 			brush->modelnum = atoi(model+1);
-		} //end if
-	} //end else
-} //end of the function AAS_PositionBrush
+		}
+	}
+}
 //===========================================================================
 // uses the global cfg_t cfg
 //
@@ -665,7 +665,7 @@ void AAS_CreateMapBrushes(mapbrush_t *brush, entity_t *mapent, int addbevels)
 		nummapbrushsides -= brush->numsides;
 		brush->numsides = 0;
 		return;
-	} //end if
+	}
 	//
 	AAS_PositionBrush(mapent, brush);
 	//from all normal solid brushes only the textured brush sides will
@@ -679,7 +679,7 @@ void AAS_CreateMapBrushes(mapbrush_t *brush, entity_t *mapent, int addbevels)
 	{
 		brush->contents = CONTENTS_CLUSTERPORTAL;
 		brush->leafnum = -1;
-	} //end if
+	}
 	//window and playerclip are used for player clipping, make them solid
 	if (brush->contents & (CONTENTS_WINDOW | CONTENTS_PLAYERCLIP))
 	{
@@ -687,13 +687,13 @@ void AAS_CreateMapBrushes(mapbrush_t *brush, entity_t *mapent, int addbevels)
 		brush->contents &= ~(CONTENTS_WINDOW | CONTENTS_PLAYERCLIP);
 		brush->contents |= CONTENTS_SOLID;
 		brush->leafnum = -1;
-	} //end if
+	}
 	//
 	if (brush->contents & CONTENTS_BOTCLIP)
 	{
 		brush->contents = CONTENTS_SOLID;
 		brush->leafnum = -1;
-	} //end if
+	}
 	//
 	//Log_Write("brush %d contents = ", brush->brushnum);
 	//PrintContents(brush->contents);
@@ -714,7 +714,7 @@ void AAS_CreateMapBrushes(mapbrush_t *brush, entity_t *mapent, int addbevels)
 		nummapbrushsides -= brush->numsides;
 		brush->numsides = 0;
 		return;
-	} //end if
+	}
 	//fix the map brush
 	//AAS_FixMapBrush(brush);
 	//if brush bevels should be added (for real map brushes, not bsp map brushes)
@@ -729,7 +729,7 @@ void AAS_CreateMapBrushes(mapbrush_t *brush, entity_t *mapent, int addbevels)
 		AAS_MakeBrushWindings(brush);
 		AddBrushBevels(brush);
 		FreeBrushWindings(brush);
-	} //end if
+	}
 	//NOTE: add the brush to the WORLD entity!!!
 	mapent = &entities[0];
 	//there's at least one new brush for now
@@ -750,7 +750,7 @@ void AAS_CreateMapBrushes(mapbrush_t *brush, entity_t *mapent, int addbevels)
 		//FIXME: use max bounding box created from all bboxes
 		AAS_ExpandMapBrush(brush, cfg.bboxes[0].mins, cfg.bboxes[0].maxs);
 		AAS_MakeBrushWindings(brush);
-	} //end if
+	}
 	//area portal brushes are NOT expanded
 	else if (brush->contents & CONTENTS_CLUSTERPORTAL)
 	{
@@ -759,7 +759,7 @@ void AAS_CreateMapBrushes(mapbrush_t *brush, entity_t *mapent, int addbevels)
 		//FIXME: use max bounding box created from all bboxes
 		AAS_ExpandMapBrush(brush, cfg.bboxes[0].mins, cfg.bboxes[0].maxs);
 		AAS_MakeBrushWindings(brush);
-	} //end if
+	}
 	//all solid brushes are expanded for all bounding boxes
 	else if (brush->contents & (CONTENTS_SOLID
 										| CONTENTS_LADDER
@@ -771,13 +771,13 @@ void AAS_CreateMapBrushes(mapbrush_t *brush, entity_t *mapent, int addbevels)
 		for (i = 1; i < cfg.numbboxes; i++)
 		{
 			bboxbrushes[i] = AAS_CopyMapBrush(brush, mapent);
-		} //end for
+		}
 		//expand every brush for it's bounding box and create windings
 		for (i = 0; i < cfg.numbboxes; i++)
 		{
 			AAS_ExpandMapBrush(bboxbrushes[i], cfg.bboxes[i].mins, cfg.bboxes[i].maxs);
 			bboxbrushes[i]->expansionbbox = cfg.bboxes[i].presencetype;
 			AAS_MakeBrushWindings(bboxbrushes[i]);
-		} //end for
-	} //end else
-} //end of the function AAS_CreateMapBrushes
+		}
+	}
+}

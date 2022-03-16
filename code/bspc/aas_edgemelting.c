@@ -54,10 +54,10 @@ int AAS_MeltFaceWinding(tmp_face_t *face1, tmp_face_t *face2)
 			face1->winding = neww;
 
 			splits++;
-		} //end if
-	} //end for
+		}
+	}
 	return splits;
-} //end of the function AAS_MeltFaceWinding
+}
 //===========================================================================
 // melt the windings of the area faces
 //
@@ -78,10 +78,10 @@ int AAS_MeltFaceWindingsOfArea(tmp_area_t *tmparea)
 			side2 = face2->frontarea != tmparea;
 			if (face1 == face2) continue;
 			num_windingsplits += AAS_MeltFaceWinding(face1, face2);
-		} //end for
-	} //end for
+		}
+	}
 	return num_windingsplits;
-} //end of the function AAS_MeltFaceWindingsOfArea
+}
 //===========================================================================
 // melt the windings of the faces of all areas
 //
@@ -101,8 +101,8 @@ void AAS_MeltAreaFaceWindings(void)
 	{
 		num_windingsplits += AAS_MeltFaceWindingsOfArea(tmparea);
 		qprintf("\r%6d", num_windingsplits);
-	} //end for
+	}
 	qprintf("\n");
 	Log_Write("%6d edges melted\r\n", num_windingsplits);
-} //end of the function AAS_MeltAreaFaceWindings
+}
 
