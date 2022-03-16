@@ -657,7 +657,7 @@ CG_CalcViewValues
 Sets cg.refdef view values
 ===============
 */
-static int CG_CalcViewValues( stereoFrame_t stereoView ) {
+static int CG_CalcViewValues( ) {
 	playerState_t	*ps;
 
 	memset( &cg.refdef, 0, sizeof( cg.refdef ) );
@@ -755,7 +755,7 @@ static int CG_CalcViewValues( stereoFrame_t stereoView ) {
         VectorCopy(cg.refdef.vieworg, cg.vr_vieworigin);
     }
 
-    if (!cgs.localServer && stereoView == STEREO_LEFT)
+    if (!cgs.localServer && cg.stereoView == STEREO_LEFT)
     {
         vec3_t weaponorigin, weaponangles;
         CG_CalculateVRWeaponPosition(weaponorigin, weaponangles);
@@ -954,6 +954,7 @@ void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demo
 
 	cg.time = serverTime;
 	cg.demoPlayback = demoPlayback;
+	cg.stereoView = stereoView;
 
 	cg.worldscale = trap_Cvar_VariableValue("vr_worldscale");
 
@@ -990,8 +991,11 @@ void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demo
 	// this counter will be bumped for every valid scene we generate
 	cg.clientFrame++;
 
-	// update cg.predictedPlayerState
-	CG_PredictPlayerState();
+	if (cg.stereoView == STEREO_LEFT)
+	{
+		// update cg.predictedPlayerState - only do this on the first eye render
+		CG_PredictPlayerState();
+	}
 
 	// decide on third person view
 	cg.renderingThirdPerson = cg.predictedPlayerState.pm_type == PM_SPECTATOR ||
@@ -999,7 +1003,7 @@ void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demo
 			cg_thirdPerson.integer;
 
 	// build cg.refdef
-	inwater = CG_CalcViewValues( stereoView );
+	inwater = CG_CalcViewValues( );
 
 	// first person blend blobs, done after AnglesToAxis
 	if ( !cg.renderingThirdPerson ) {
@@ -1063,7 +1067,7 @@ void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demo
 	}
 
 	// actually issue the rendering calls
-	CG_DrawActive( stereoView );
+	CG_DrawActive();
 
 	if ( cg_stats.integer ) {
 		CG_Printf( "cg.clientFrame:%i\n", cg.clientFrame );

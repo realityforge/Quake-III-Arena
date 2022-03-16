@@ -40,7 +40,6 @@ int sortedTeamPlayers[TEAM_MAXOVERLAY];
 int	numSortedTeamPlayers;
 
 extern vr_clientinfo_t* vr;
-extern stereoFrame_t hudStereoView;
 
 char systemChat[256];
 char teamChat1[256];
@@ -983,7 +982,7 @@ CG_DrawUpperRight
 
 =====================
 */
-static void CG_DrawUpperRight(stereoFrame_t stereoFrame)
+static void CG_DrawUpperRight()
 {
 	float	y;
 
@@ -995,7 +994,7 @@ static void CG_DrawUpperRight(stereoFrame_t stereoFrame)
 	if ( cg_drawSnapshot.integer ) {
 		y = CG_DrawSnapshot( y );
 	}
-	if (cg_drawFPS.integer && (stereoFrame == STEREO_CENTER || stereoFrame == STEREO_RIGHT)) {
+	if (cg_drawFPS.integer && (cg.stereoView == STEREO_CENTER || cg.stereoView == STEREO_RIGHT)) {
 		y = CG_DrawFPS( y );
 	}
 	if ( cg_drawTimer.integer ) {
@@ -2639,7 +2638,7 @@ static void CG_DrawVignette( void )
 CG_Draw2D
 =================
 */
-static void CG_Draw2D(stereoFrame_t stereoFrame)
+static void CG_Draw2D()
 {
 #ifdef MISSIONPACK
 	if (cgs.orderPending && cg.time > cgs.orderTime) {
@@ -2727,10 +2726,10 @@ static void CG_Draw2D(stereoFrame_t stereoFrame)
 
 #ifdef MISSIONPACK
 	if (!cg_paused.integer) {
-		CG_DrawUpperRight(stereoFrame);
+		CG_DrawUpperRight();
 	}
 #else
-	CG_DrawUpperRight(stereoFrame);
+	CG_DrawUpperRight();
 #endif
 
 #ifndef MISSIONPACK
@@ -2757,7 +2756,7 @@ CG_DrawActive
 Perform all drawing needed to completely fill the screen
 =====================
 */
-void CG_DrawActive( stereoFrame_t stereoView ) {
+void CG_DrawActive( void ) {
 	// optionally draw the info screen instead
 	if ( !cg.snap ) {
 		CG_DrawInformation();
@@ -2800,7 +2799,7 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 
 
 	float ipd = trap_Cvar_VariableValue("r_stereoSeparation") / 1000.0f;
-	float separation = worldscale * (ipd / 2) * (stereoView == STEREO_LEFT ? -1.0f : 1.0f);
+	float separation = worldscale * (ipd / 2) * (cg.stereoView == STEREO_LEFT ? -1.0f : 1.0f);
 
 	if (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_FIRSTPERSON)
     {
@@ -2847,8 +2846,7 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 	VectorCopy( baseOrg, cg.refdef.vieworg );
 
     // draw status bar and other floating elements
-    hudStereoView = stereoView;
-    CG_Draw2D(hudStereoView);
+    CG_Draw2D();
 }
 
 

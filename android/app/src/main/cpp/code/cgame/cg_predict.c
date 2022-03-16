@@ -297,8 +297,12 @@ static void CG_TouchItem( centity_t *cent ) {
 			return;
 	}
 
-	// grab it
-	BG_AddPredictableEventToPlayerstate( EV_ITEM_PICKUP, cent->currentState.modelindex , &cg.predictedPlayerState);
+	if (cg.stereoView == STEREO_LEFT)
+	{
+		// grab it
+		BG_AddPredictableEventToPlayerstate(EV_ITEM_PICKUP, cent->currentState.modelindex,
+											&cg.predictedPlayerState);
+	}
 
 	// remove it from the frame so it won't be drawn
 	cent->currentState.eFlags |= EF_NODRAW;

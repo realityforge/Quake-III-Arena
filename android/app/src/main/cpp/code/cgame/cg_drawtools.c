@@ -25,7 +25,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../vr/vr_clientinfo.h"
 
 int hudflags = 0;
-stereoFrame_t hudStereoView = STEREO_CENTER;
 extern vr_clientinfo_t* vr;
 
 void CG_SetHUDFlags(int flags)
@@ -63,7 +62,7 @@ void CG_AdjustFrom640( float *x, float *y, float *w, float *h ) {
 
         const auto depth = (int)trap_Cvar_VariableValue( "vr_hudDepth" );
 		int xoffset = 120 - (depth * 20);
-		if (hudStereoView == STEREO_RIGHT) {
+		if (cg.stereoView == STEREO_RIGHT) {
 			xoffset *= -1;
 		}
 
