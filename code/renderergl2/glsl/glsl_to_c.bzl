@@ -1,5 +1,3 @@
-load("@rules_cc//cc:defs.bzl", "cc_library")
-
 def glsl_to_c(name):
     native.genrule(
         name = name + "_generator",
@@ -9,7 +7,7 @@ def glsl_to_c(name):
         tools = ["//code/tools:stringify"],
     )
 
-    cc_library(
+    native.cc_library(
         name = name,
         srcs = [
             ":" + name + "_generator",
