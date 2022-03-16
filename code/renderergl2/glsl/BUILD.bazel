@@ -1,0 +1,92 @@
+load(":glsl_to_c.bzl", "glsl_to_c")
+
+glsl_to_c(name = "bokeh_fp")
+
+glsl_to_c(name = "bokeh_vp")
+
+glsl_to_c(name = "calclevels4x_fp")
+
+glsl_to_c(name = "calclevels4x_vp")
+
+glsl_to_c(name = "depthblur_fp")
+
+glsl_to_c(name = "depthblur_vp")
+
+glsl_to_c(name = "dlight_fp")
+
+glsl_to_c(name = "dlight_vp")
+
+glsl_to_c(name = "down4x_fp")
+
+glsl_to_c(name = "down4x_vp")
+
+glsl_to_c(name = "fogpass_fp")
+
+glsl_to_c(name = "fogpass_vp")
+
+glsl_to_c(name = "generic_fp")
+
+glsl_to_c(name = "generic_vp")
+
+glsl_to_c(name = "lightall_fp")
+
+glsl_to_c(name = "lightall_vp")
+
+glsl_to_c(name = "pshadow_fp")
+
+glsl_to_c(name = "pshadow_vp")
+
+glsl_to_c(name = "shadowfill_fp")
+
+glsl_to_c(name = "shadowfill_vp")
+
+glsl_to_c(name = "shadowmask_fp")
+
+glsl_to_c(name = "shadowmask_vp")
+
+glsl_to_c(name = "ssao_fp")
+
+glsl_to_c(name = "ssao_vp")
+
+glsl_to_c(name = "texturecolor_fp")
+
+glsl_to_c(name = "texturecolor_vp")
+
+glsl_to_c(name = "tonemap_fp")
+
+glsl_to_c(name = "tonemap_vp")
+
+cc_library(
+    name = "glsl",
+    visibility = ["//code/renderergl2:__pkg__"],
+    deps = [
+        ":bokeh_fp",
+        ":bokeh_vp",
+        ":calclevels4x_fp",
+        ":calclevels4x_vp",
+        ":depthblur_fp",
+        ":depthblur_vp",
+        ":dlight_fp",
+        ":dlight_vp",
+        ":down4x_fp",
+        ":down4x_vp",
+        ":fogpass_fp",
+        ":fogpass_vp",
+        ":generic_fp",
+        ":generic_vp",
+        ":lightall_fp",
+        ":lightall_vp",
+        ":pshadow_fp",
+        ":pshadow_vp",
+        ":shadowfill_fp",
+        ":shadowfill_vp",
+        ":shadowmask_fp",
+        ":shadowmask_vp",
+        ":ssao_fp",
+        ":ssao_vp",
+        ":texturecolor_fp",
+        ":texturecolor_vp",
+        ":tonemap_fp",
+        ":tonemap_vp",
+    ],
+)

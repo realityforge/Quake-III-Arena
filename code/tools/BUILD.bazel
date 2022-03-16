@@ -1,0 +1,9 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+
+cc_binary(
+    name = "stringify",
+    srcs = ["stringify.c"],
+    visibility = [
+        "//code/renderergl2/glsl:__pkg__",
+    ],
+)
