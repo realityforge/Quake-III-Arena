@@ -313,16 +313,10 @@ ifneq (,$(findstring "$(PLATFORM)", "linux" "gnu"))
   OPTIMIZEVM = -O3
   OPTIMIZE = $(OPTIMIZEVM) -ffast-math
 
-  ifeq ($(ARCH),x86_64)
-    OPTIMIZEVM = -O3
-    OPTIMIZE = $(OPTIMIZEVM) -ffast-math
-    HAVE_VM_COMPILED = true
-  else
   ifeq ($(ARCH),x86)
     OPTIMIZEVM = -O3 -march=i586
     OPTIMIZE = $(OPTIMIZEVM) -ffast-math
     HAVE_VM_COMPILED=true
-  endif
   endif
 
   SHLIBEXT=so
