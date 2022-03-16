@@ -26,12 +26,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 int c_numprunes;
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 tmp_node_t *AAS_PruneNodes_r(tmp_node_t *tmpnode)
 {
 	tmp_area_t *tmparea1, *tmparea2;
@@ -75,12 +69,6 @@ tmp_node_t *AAS_PruneNodes_r(tmp_node_t *tmpnode)
 	//
 	return tmpnode;
 } //end of the function AAS_PruneNodes_r
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_PruneNodes(void)
 {
 	Log_Write("AAS_PruneNodes\r\n");

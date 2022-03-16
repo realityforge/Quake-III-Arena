@@ -343,12 +343,6 @@ __inline float AAS_RoutingTime(void)
 {
 	return AAS_Time();
 } //end of the function AAS_RoutingTime
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_GetAreaContentsTravelFlags(int areanum)
 {
 	int contents, tfl;
@@ -836,24 +830,12 @@ void AAS_FreeAllPortalCache(void)
 	FreeMemory(aasworld.portalcache);
 	aasworld.portalcache = NULL;
 } //end of the function AAS_FreeAllPortalCache
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_InitPortalCache(void)
 {
 	//
 	aasworld.portalcache = (aas_routingcache_t **) GetClearedMemory(
 								aasworld.numareas * sizeof(aas_routingcache_t *));
 } //end of the function AAS_InitPortalCache
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_InitRoutingUpdate(void)
 {
 	int i, maxreachabilityareas;

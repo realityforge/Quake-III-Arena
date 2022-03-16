@@ -450,12 +450,6 @@ winding_t *Q2_BrushSideWinding(dbrush_t *brush, dbrushside_t *baseside)
 	} //end for
 	return w;
 } //end of the function Q2_BrushSideWinding
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int Q2_HintSkipBrush(dbrush_t *brush)
 {
 	int j;

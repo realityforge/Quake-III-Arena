@@ -49,12 +49,6 @@ int dplanes2mapplanes[MAX_MAPFILE_PLANES];
 
 //====================================================================
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Q2_CreateMapTexinfo(void)
 {
 	int i;
@@ -116,12 +110,6 @@ int	Q2_BrushContents (mapbrush_t *b)
 
 #define BBOX_NORMAL_EPSILON			0.0001
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void MakeAreaPortalBrush(mapbrush_t *brush)
 {
 	int sn;
@@ -139,12 +127,6 @@ void MakeAreaPortalBrush(mapbrush_t *brush)
 		s->contents = CONTENTS_AREAPORTAL;
 	} //end for
 } //end of the function MakeAreaPortalBrush
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void DPlanes2MapPlanes(void)
 {
 	int i;
@@ -154,12 +136,6 @@ void DPlanes2MapPlanes(void)
 		dplanes2mapplanes[i] = FindFloatPlane(dplanes[i].normal, dplanes[i].dist);
 	} //end for
 } //end of the function DPlanes2MapPlanes
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void MarkVisibleBrushSides(mapbrush_t *brush)
 {
 	int n, i, planenum;
@@ -650,12 +626,6 @@ void Q2_LoadMapFile(char *filename)
 } //end of the function Q2_LoadMapFile
 
 #ifdef ME		//Begin MAP loading from BSP file
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Q2_SetLeafBrushesModelNumbers(int leafnum, int modelnum)
 {
 	int i, brushnum;
@@ -669,23 +639,11 @@ void Q2_SetLeafBrushesModelNumbers(int leafnum, int modelnum)
 		dbrushleafnums[brushnum] = leafnum;
 	} //end for
 } //end of the function Q2_SetLeafBrushesModelNumbers
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Q2_InitNodeStack(void)
 {
 	nodestackptr = nodestack;
 	nodestacksize = 0;
 } //end of the function Q2_InitNodeStack
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Q2_PushNodeStack(int num)
 {
 	*nodestackptr = num;
@@ -697,12 +655,6 @@ void Q2_PushNodeStack(int num)
 		Error("Q2_PushNodeStack: stack overflow\n");
 	} //end if
 } //end of the function Q2_PushNodeStack
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int Q2_PopNodeStack(void)
 {
 	//if the stack is empty
@@ -713,12 +665,6 @@ int Q2_PopNodeStack(void)
 	//return the top value from the stack
 	return *nodestackptr;
 } //end of the function Q2_PopNodeStack
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Q2_SetBrushModelNumbers(entity_t *mapent)
 {
 	int n, pn;
@@ -763,12 +709,6 @@ void Q2_SetBrushModelNumbers(entity_t *mapent)
 		} //end else
 	} while(pn >= 0);
 } //end of the function Q2_SetBrushModelNumbers
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Q2_BSPBrushToMapBrush(dbrush_t *bspbrush, entity_t *mapent)
 {
 	mapbrush_t *b;
@@ -1044,12 +984,6 @@ qboolean Q2_ParseBSPEntity(int entnum)
 	} //end if
 	return true;
 } //end of the function Q2_ParseBSPEntity
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Q2_LoadMapFromBSP(char *filename, int offset, int length)
 {
 	int i;

@@ -37,12 +37,6 @@ typedef struct logfile_s
 
 logfile_t logfile;
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Log_Open(char *filename)
 {
 	if (!filename || !strlen(filename))
@@ -64,12 +58,6 @@ void Log_Open(char *filename)
 	strncpy(logfile.filename, filename, MAX_LOGFILENAMESIZE);
 	printf("Opened log %s\n", logfile.filename);
 } //end of the function Log_Create
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Log_Close(void)
 {
 	if (!logfile.fp)
@@ -85,12 +73,6 @@ void Log_Close(void)
 	logfile.fp = NULL;
 	printf("Closed log %s\n", logfile.filename);
 } //end of the function Log_Close
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Log_Shutdown(void)
 {
 	if (logfile.fp) Log_Close();
@@ -149,12 +131,6 @@ void Log_Print(char *fmt, ...)
 		fflush(logfile.fp);
 	} //end if
 } //end of the function Log_Print
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Log_Write(char *fmt, ...)
 {
 	va_list ap;
@@ -168,12 +144,6 @@ void Log_Write(char *fmt, ...)
 	fprintf(logfile.fp, "%s", buf);
 	fflush(logfile.fp);
 } //end of the function Log_Write
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Log_WriteTimeStamped(char *fmt, ...)
 {
 	va_list ap;
@@ -192,22 +162,10 @@ void Log_WriteTimeStamped(char *fmt, ...)
 	logfile.numwrites++;
 	fflush(logfile.fp);
 } //end of the function Log_Write
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 FILE *Log_FileStruct(void)
 {
 	return logfile.fp;
 } //end of the function Log_FileStruct
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Log_Flush(void)
 {
 	if (logfile.fp) fflush(logfile.fp);

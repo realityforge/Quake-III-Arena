@@ -353,12 +353,6 @@ winding_t *Sin_BrushSideWinding(sin_dbrush_t *brush, sin_dbrushside_t *baseside)
 	} //end for
 	return w;
 } //end of the function Sin_BrushSideWinding
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int Sin_HintSkipBrush(sin_dbrush_t *brush)
 {
 	int j;

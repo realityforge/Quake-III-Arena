@@ -27,12 +27,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define CONVEX_EPSILON		0.3
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 tmp_node_t *AAS_RefreshMergedTree_r(tmp_node_t *tmpnode)
 {
 	tmp_area_t *tmparea;

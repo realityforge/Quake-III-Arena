@@ -30,12 +30,6 @@ int hl_numclipbrushes;
 //#define HL_PRINT
 #define HLCONTENTS
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int HL_TextureContents(char *name)
 {
 	if (!Q_strncasecmp (name, "sky",3))
@@ -333,12 +327,6 @@ int HL_SolidTree_r(int nodenum)
 	if (!HL_SolidTree_r(hl_dnodes[nodenum].children[1])) return false;
 	return true;
 } //end of the function HL_SolidTree_r
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 bspbrush_t *HL_CreateBrushes_r(bspbrush_t *brush, int nodenum)
 {
 	int planenum;
@@ -445,12 +433,6 @@ bspbrush_t *HL_CreateBrushes_r(bspbrush_t *brush, int nodenum)
 		return back;
 	} //end else
 } //end of the function HL_CreateBrushes_r
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 bspbrush_t *HL_CreateBrushesFromBSP(int modelnum)
 {
 	bspbrush_t *brushlist;
@@ -498,12 +480,6 @@ bspbrush_t *HL_CreateBrushesFromBSP(int modelnum)
 	//now we've got a list with brushes!
 	return brushlist;
 } //end of the function HL_CreateBrushesFromBSP
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 bspbrush_t *HL_MergeBrushes(bspbrush_t *brushlist, int modelnum)
 {
 	int nummerges, merged;
@@ -692,12 +668,6 @@ bspbrush_t *HL_SplitBrushWithFace(bspbrush_t *brush, hl_dface_t *face)
 	brushlist = front;
 	return brushlist;
 } //end of the function HL_SplitBrushWithFace
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 bspbrush_t *HL_TextureBrushes(bspbrush_t *brushlist, int modelnum)
 {
 	float area, largestarea;
@@ -874,12 +844,6 @@ bspbrush_t *HL_TextureBrushes(bspbrush_t *brushlist, int modelnum)
 	//return the new list with brushes
 	return brushlist;
 } //end of the function HL_TextureBrushes
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void HL_FixContentsTextures(bspbrush_t *brushlist)
 {
 	int i, texinfonum;
@@ -936,12 +900,6 @@ void HL_FixContentsTextures(bspbrush_t *brushlist)
 		} //end for
 	} //end for*/
 } //end of the function HL_FixContentsTextures
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void HL_BSPBrushToMapBrush(bspbrush_t *bspbrush, entity_t *mapent)
 {
 	mapbrush_t *mapbrush;
@@ -1013,12 +971,6 @@ void HL_BSPBrushToMapBrush(bspbrush_t *bspbrush, entity_t *mapent)
 	nummapbrushes++;
 	mapent->numbrushes++;
 } //end of the function HL_BSPBrushToMapBrush
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void HL_CreateMapBrushes(entity_t *mapent, int modelnum)
 {
 	bspbrush_t *brushlist, *brush, *nextbrush;
@@ -1049,21 +1001,9 @@ void HL_CreateMapBrushes(entity_t *mapent, int modelnum)
 	} //end for
 	if (!modelnum) qprintf("\n");
 } //end of the function HL_CreateMapBrushes
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void HL_ResetMapLoading(void)
 {
 } //end of the function HL_ResetMapLoading
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void HL_LoadMapFromBSP(char *filename, int offset, int length)
 {
 	int i, modelnum;

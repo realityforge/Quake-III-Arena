@@ -735,12 +735,6 @@ void Sin_LoadMapFile (char *filename)
 
 
 #ifdef ME		//Begin MAP loading from BSP file
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Sin_CreateMapTexinfo(void)
 {
 	int i;
@@ -761,12 +755,6 @@ void Sin_CreateMapTexinfo(void)
 		map_texinfo[i].nexttexinfo = -1;
 	} //end for
 } //end of the function Sin_CreateMapTexinfo
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Sin_SetLeafBrushesModelNumbers(int leafnum, int modelnum)
 {
 	int i, brushnum;
@@ -780,23 +768,11 @@ void Sin_SetLeafBrushesModelNumbers(int leafnum, int modelnum)
 		dbrushleafnums[brushnum] = leafnum;
 	} //end for
 } //end of the function Sin_SetLeafBrushesModelNumbers
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Sin_InitNodeStack(void)
 {
 	nodestackptr = nodestack;
 	nodestacksize = 0;
 } //end of the function Sin_InitNodeStack
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Sin_PushNodeStack(int num)
 {
 	*nodestackptr = num;
@@ -808,12 +784,6 @@ void Sin_PushNodeStack(int num)
 		Error("Sin_PushNodeStack: stack overflow\n");
 	} //end if
 } //end of the function Sin_PushNodeStack
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int Sin_PopNodeStack(void)
 {
 	//if the stack is empty
@@ -824,12 +794,6 @@ int Sin_PopNodeStack(void)
 	//return the top value from the stack
 	return *nodestackptr;
 } //end of the function Sin_PopNodeStack
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Sin_SetBrushModelNumbers(entity_t *mapent)
 {
 	int n, pn;
@@ -874,12 +838,6 @@ void Sin_SetBrushModelNumbers(entity_t *mapent)
 		} //end else
 	} while(pn >= 0);
 } //end of the function Sin_SetBrushModelNumbers
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Sin_BSPBrushToMapBrush(sin_dbrush_t *bspbrush, entity_t *mapent)
 {
 	mapbrush_t *b;
@@ -1150,12 +1108,6 @@ qboolean Sin_ParseBSPEntity(int entnum)
 	} //end if
 	return true;
 } //end of the function Sin_ParseBSPEntity
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Sin_LoadMapFromBSP(char *filename, int offset, int length)
 {
 	int i;

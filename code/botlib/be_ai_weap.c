@@ -163,12 +163,6 @@ bot_weaponstate_t *BotWeaponStateFromHandle(int handle)
 	} //end if
 	return botweaponstates[handle];
 } //end of the function BotWeaponStateFromHandle
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 #ifdef DEBUG_AI_WEAP
 void DumpWeaponConfig(weaponconfig_t *wc)
 {
@@ -189,12 +183,6 @@ void DumpWeaponConfig(weaponconfig_t *wc)
 	} //end for
 } //end of the function DumpWeaponConfig
 #endif //DEBUG_AI_WEAP
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 weaponconfig_t *LoadWeaponConfig(char *filename)
 {
 	int max_weaponinfo, max_projectileinfo;
@@ -321,12 +309,6 @@ weaponconfig_t *LoadWeaponConfig(char *filename)
 	botimport.Print(PRT_MESSAGE, "loaded %s\n", path);
 	return wc;
 } //end of the function LoadWeaponConfig
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int *WeaponWeightIndex(weightconfig_t *wwc, weaponconfig_t *wc)
 {
 	int *index, i;
@@ -340,12 +322,6 @@ int *WeaponWeightIndex(weightconfig_t *wwc, weaponconfig_t *wc)
 	} //end for
 	return index;
 } //end of the function WeaponWeightIndex
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void BotFreeWeaponWeights(int weaponstate)
 {
 	bot_weaponstate_t *ws;
@@ -355,12 +331,6 @@ void BotFreeWeaponWeights(int weaponstate)
 	if (ws->weaponweightconfig) FreeWeightConfig(ws->weaponweightconfig);
 	if (ws->weaponweightindex) FreeMemory(ws->weaponweightindex);
 } //end of the function BotFreeWeaponWeights
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int BotLoadWeaponWeights(int weaponstate, char *filename)
 {
 	bot_weaponstate_t *ws;
@@ -379,12 +349,6 @@ int BotLoadWeaponWeights(int weaponstate, char *filename)
 	ws->weaponweightindex = WeaponWeightIndex(ws->weaponweightconfig, weaponconfig);
 	return BLERR_NOERROR;
 } //end of the function BotLoadWeaponWeights
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void BotGetWeaponInfo(int weaponstate, int weapon, weaponinfo_t *weaponinfo)
 {
 	bot_weaponstate_t *ws;
@@ -395,12 +359,6 @@ void BotGetWeaponInfo(int weaponstate, int weapon, weaponinfo_t *weaponinfo)
 	if (!weaponconfig) return;
 	Com_Memcpy(weaponinfo, &weaponconfig->weaponinfo[weapon], sizeof(weaponinfo_t));
 } //end of the function BotGetWeaponInfo
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int BotChooseBestFightWeapon(int weaponstate, int *inventory)
 {
 	int i, index, bestweapon;
@@ -432,12 +390,6 @@ int BotChooseBestFightWeapon(int weaponstate, int *inventory)
 	} //end for
 	return bestweapon;
 } //end of the function BotChooseBestFightWeapon
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void BotResetWeaponState(int weaponstate)
 {
 	struct weightconfig_s *weaponweightconfig;
@@ -495,12 +447,6 @@ void BotFreeWeaponState(int handle)
 	FreeMemory(botweaponstates[handle]);
 	botweaponstates[handle] = NULL;
 } //end of the function BotFreeWeaponState
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int BotSetupWeaponAI(void)
 {
 	char *file;
@@ -519,12 +465,6 @@ int BotSetupWeaponAI(void)
 	//
 	return BLERR_NOERROR;
 } //end of the function BotSetupWeaponAI
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void BotShutdownWeaponAI(void)
 {
 	int i;

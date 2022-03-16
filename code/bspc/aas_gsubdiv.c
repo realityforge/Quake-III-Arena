@@ -91,12 +91,6 @@ void AAS_SplitFace(tmp_face_t *face, vec3_t normal, float dist,
 		(*backface)->faceflags = face->faceflags;
 	} //end if
 } //end of the function AAS_SplitFace
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 winding_t *AAS_SplitWinding(tmp_area_t *tmparea, int planenum)
 {
 	tmp_face_t *face;
@@ -118,12 +112,6 @@ winding_t *AAS_SplitWinding(tmp_area_t *tmparea, int planenum)
 	} //end for
 	return splitwinding;
 } //end of the function AAS_SplitWinding
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_TestSplitPlane(tmp_area_t *tmparea, vec3_t normal, float dist,
 							int *facesplits, int *groundsplits, int *epsilonfaces)
 {
@@ -184,12 +172,6 @@ int AAS_TestSplitPlane(tmp_area_t *tmparea, vec3_t normal, float dist,
 	} //end for
 	return true;
 } //end of the function AAS_TestSplitPlane
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_SplitArea(tmp_area_t *tmparea, int planenum, tmp_area_t **frontarea, tmp_area_t **backarea)
 {
 	int side;
@@ -318,12 +300,6 @@ void AAS_SplitArea(tmp_area_t *tmparea, int planenum, tmp_area_t **frontarea, tm
 	AAS_CheckArea((*frontarea));
 	AAS_CheckArea((*backarea));
 } //end of the function AAS_SplitArea
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_FindBestAreaSplitPlane(tmp_area_t *tmparea, vec3_t normal, float *dist)
 {
 	int side1, side2;
@@ -409,12 +385,6 @@ int AAS_FindBestAreaSplitPlane(tmp_area_t *tmparea, vec3_t normal, float *dist)
 	} //end else
 	return foundsplitter;
 } //end of the function AAS_FindBestAreaSplitPlane
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 tmp_node_t *AAS_SubdivideArea_r(tmp_node_t *tmpnode)
 {
 	int planenum;
@@ -447,12 +417,6 @@ tmp_node_t *AAS_SubdivideArea_r(tmp_node_t *tmpnode)
 	} //end if
 	return tmpnode;
 } //end of the function AAS_SubdivideArea_r
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 tmp_node_t *AAS_GravitationalSubdivision_r(tmp_node_t *tmpnode)
 {
 	//if this is a solid leaf
@@ -481,12 +445,6 @@ void AAS_GravitationalSubdivision(void)
 	qprintf("\n");
 	Log_Write("%6i gravitational subdivisions\r\n", numgravitationalsubdivisions);
 } //end of the function AAS_GravitationalSubdivision
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 tmp_node_t *AAS_RefreshLadderSubdividedTree_r(tmp_node_t *tmpnode, tmp_area_t *tmparea,
 												  tmp_node_t *tmpnode1, tmp_node_t *tmpnode2, int planenum)
 {
@@ -620,12 +578,6 @@ tmp_node_t *AAS_LadderSubdivideArea_r(tmp_node_t *tmpnode)
 	//
 	return tmpnode;
 } //end of the function AAS_LadderSubdivideArea_r
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 tmp_node_t *AAS_LadderSubdivision_r(tmp_node_t *tmpnode)
 {
 	//if this is a solid leaf
@@ -637,12 +589,6 @@ tmp_node_t *AAS_LadderSubdivision_r(tmp_node_t *tmpnode)
 	tmpnode->children[1] = AAS_LadderSubdivision_r(tmpnode->children[1]);
 	return tmpnode;
 } //end of the function AAS_LadderSubdivision_r
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_LadderSubdivision(void)
 {
 	Log_Write("AAS_LadderSubdivision\r\n");

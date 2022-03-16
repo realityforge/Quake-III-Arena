@@ -71,12 +71,6 @@ void Vector2Angles(vec3_t value1, vec3_t angles)
 	angles[ROLL] = 0;
 } //end of the function Vector2Angles
 #endif //BOTLIB
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void ConvertPath(char *path)
 {
 	while(*path)
@@ -85,12 +79,6 @@ void ConvertPath(char *path)
 		path++;
 	} //end while
 } //end of the function ConvertPath
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AppendPathSeperator(char *path, int length)
 {
 	int pathlen = strlen(path);
@@ -237,12 +225,6 @@ qboolean FindQuakeFile2(char *basedir, char *gamedir, char *filename, foundfile_
 	file->length = 0;
 	return false;
 } //end of the function FindQuakeFile2
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 #ifdef BOTLIB
 qboolean FindQuakeFile(char *filename, foundfile_t *file)
 {

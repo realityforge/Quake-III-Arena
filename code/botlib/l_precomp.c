@@ -143,12 +143,6 @@ void QDECL SourceError(source_t *source, char *str, ...)
 	Log_Print("error: file %s, line %d: %s\n", source->scriptstack->filename, source->scriptstack->line, text);
 #endif //BSPC
 } //end of the function SourceError
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void QDECL SourceWarning(source_t *source, char *str, ...)
 {
 	char text[1024];

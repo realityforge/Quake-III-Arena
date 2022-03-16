@@ -111,12 +111,6 @@ vec_t CapsuleOriginDistanceFromPlane(vec3_t normal, vec3_t mins, vec3_t maxs)
 		return -normal[2] * offset_up + radius;
 	}
 }
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_ExpandMapBrush(mapbrush_t *brush, vec3_t mins, vec3_t maxs)
 {
 	int sn;
@@ -146,12 +140,6 @@ void AAS_ExpandMapBrush(mapbrush_t *brush, vec3_t mins, vec3_t maxs)
 		//s->texinfo = 0;
 	} //end for
 } //end of the function AAS_ExpandMapBrush
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_SetTexinfo(mapbrush_t *brush)
 {
 	int n;
@@ -191,12 +179,6 @@ void AAS_SetTexinfo(mapbrush_t *brush)
 		} //end for
 	} //end else
 } //end of the function AAS_SetTexinfo
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void FreeBrushWindings(mapbrush_t *brush)
 {
 	int n;
@@ -209,12 +191,6 @@ void FreeBrushWindings(mapbrush_t *brush)
 		if (side->winding) FreeWinding(side->winding);
 	} //end for
 } //end of the function FreeBrushWindings
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_AddMapBrushSide(mapbrush_t *brush, int planenum)
 {
 	side_t *side;
@@ -234,12 +210,6 @@ void AAS_AddMapBrushSide(mapbrush_t *brush, int planenum)
 	nummapbrushsides++;
 	brush->numsides++;
 } //end of the function AAS_AddMapBrushSide
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_FixMapBrush(mapbrush_t *brush)
 {
 	int i, j, planenum;
@@ -323,12 +293,6 @@ void AAS_FixMapBrush(mapbrush_t *brush)
 	//free all the windings
 	FreeBrushWindings(brush);
 } //end of the function AAS_FixMapBrush
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 qboolean AAS_MakeBrushWindings(mapbrush_t *ob)
 {
 	int			i, j;
@@ -397,12 +361,6 @@ qboolean AAS_MakeBrushWindings(mapbrush_t *ob)
 	} //end for
 	return true;
 } //end of the function AAS_MakeBrushWindings
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 mapbrush_t *AAS_CopyMapBrush(mapbrush_t *brush, entity_t *mapent)
 {
 	int n;
@@ -441,12 +399,6 @@ mapbrush_t *AAS_CopyMapBrush(mapbrush_t *brush, entity_t *mapent)
 	mapent->numbrushes++;
 	return newbrush;
 } //end of the function AAS_CopyMapBrush
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int mark_entities[MAX_MAP_ENTITIES];
 
 int AAS_AlwaysTriggered_r(char *targetname)
@@ -486,12 +438,6 @@ int AAS_AlwaysTriggered(char *targetname) {
 	memset( mark_entities, 0, sizeof(mark_entities) );
 	return AAS_AlwaysTriggered_r( targetname );
 }
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_ValidEntity(entity_t *mapent)
 {
 	int i;
@@ -566,12 +512,6 @@ int AAS_ValidEntity(entity_t *mapent)
 	} //end else if
 	return false;
 } //end of the function AAS_ValidEntity
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_TransformPlane(int planenum, vec3_t origin, vec3_t angles)
 {
 	float newdist, matrix[3][3];
@@ -637,12 +577,6 @@ void AAS_PositionFuncRotatingBrush(entity_t *mapent, mapbrush_t *brush)
 	AddBrushBevels(brush);
 	FreeBrushWindings(brush);
 } //end of the function AAS_PositionFuncRotatingBrush
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_PositionBrush(entity_t *mapent, mapbrush_t *brush)
 {
 	side_t *s;

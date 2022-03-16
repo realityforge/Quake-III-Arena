@@ -75,12 +75,6 @@ PLANE FINDING
 */
 
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int PlaneSignBits(vec3_t normal)
 {
 	int i, signbits;
@@ -92,12 +86,6 @@ int PlaneSignBits(vec3_t normal)
 	} //end for
 	return signbits;
 } //end of the function PlaneSignBits
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int PlaneTypeForNormal(vec3_t normal)
 {
 	vec_t	ax, ay, az;
@@ -120,12 +108,6 @@ int PlaneTypeForNormal(vec3_t normal)
 		return PLANE_ANYY;
 	return PLANE_ANYZ;
 } //end of the function PlaneTypeForNormal
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 //ME NOTE: changed from 0.00001
 #define	NORMAL_EPSILON	0.0001
 //ME NOTE: changed from 0.01
@@ -148,12 +130,6 @@ qboolean	PlaneEqual(plane_t *p, vec3_t normal, vec_t dist)
 #endif
 	return false;
 } //end of the function PlaneEqual
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AddPlaneToHash(plane_t *p)
 {
 	int		hash;
@@ -164,12 +140,6 @@ void AddPlaneToHash(plane_t *p)
 	p->hash_chain = planehash[hash];
 	planehash[hash] = p;
 } //end of the function AddPlaneToHash
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int CreateNewFloatPlane (vec3_t normal, vec_t dist)
 {
 	plane_t	*p, temp;
@@ -212,12 +182,6 @@ int CreateNewFloatPlane (vec3_t normal, vec_t dist)
 	AddPlaneToHash (p+1);
 	return nummapplanes - 2;
 } //end of the function CreateNewFloatPlane
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void SnapVector(vec3_t normal)
 {
 	int		i;
@@ -238,12 +202,6 @@ void SnapVector(vec3_t normal)
 		}
 	}
 } //end of the function SnapVector
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void SnapPlane(vec3_t normal, vec_t *dist)
 {
 	SnapVector(normal);
@@ -251,12 +209,6 @@ void SnapPlane(vec3_t normal, vec_t *dist)
 	if (fabs(*dist-Q_rint(*dist)) < DIST_EPSILON)
 		*dist = Q_rint(*dist);
 } //end of the function SnapPlane
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 #ifndef USE_HASHING
 int FindFloatPlane(vec3_t normal, vec_t dist)
 {
@@ -305,12 +257,6 @@ int FindFloatPlane (vec3_t normal, vec_t dist)
 	return i;
 } //end of the function FindFloatPlane
 #endif
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int PlaneFromPoints (int *p0, int *p1, int *p2)
 {
 	vec3_t	t1, t2, normal;
@@ -644,12 +590,6 @@ int BrushExists(mapbrush_t *brush)
 	} //end for
 	return false;
 } //end of the function BrushExists
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 qboolean WriteMapBrush(FILE *fp, mapbrush_t *brush, vec3_t origin)
 {
 	int sn, rotate, shift[2], sv, tv, planenum, p1, i, j;
@@ -841,12 +781,6 @@ qboolean WriteMapBrush(FILE *fp, mapbrush_t *brush, vec3_t origin)
 	c_writtenbrushes++;
 	return true;
 } //end of the function WriteMapBrush
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 qboolean WriteOriginBrush(FILE *fp, vec3_t origin)
 {
 	vec3_t normal;
@@ -899,12 +833,6 @@ qboolean WriteOriginBrush(FILE *fp, vec3_t origin)
 	c_writtenbrushes++;
 	return true;
 } //end of the function WriteOriginBrush
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 mapbrush_t *GetAreaPortalBrush(entity_t *mapent)
 {
 	int portalnum, bn;
@@ -935,12 +863,6 @@ mapbrush_t *GetAreaPortalBrush(entity_t *mapent)
 		return NULL;
 	} //end else
 } //end of the function GetAreaPortalBrush
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 qboolean WriteMapFileSafe(FILE *fp)
 {
 	char key[1024], value[1024];
@@ -1057,12 +979,6 @@ qboolean WriteMapFileSafe(FILE *fp)
 	if (fprintf(fp, "//total of %d brushes\n", c_writtenbrushes) < 0) return false;
 	return true;
 } //end of the function WriteMapFileSafe
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void WriteMapFile(char *filename)
 {
 	FILE *fp;
@@ -1090,12 +1006,6 @@ void WriteMapFile(char *filename)
 	Log_Print("written %d brushes\n", c_writtenbrushes);
 	Log_Print("map file written in %5.0f seconds\n", I_FloatTime() - start_time);
 } //end of the function WriteMapFile
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void PrintMapInfo(void)
 {
 	Log_Print("\n");
@@ -1112,12 +1022,6 @@ void PrintMapInfo(void)
 //	Log_Print("size: %5.0f,%5.0f,%5.0f to %5.0f,%5.0f,%5.0f\n", map_mins[0],map_mins[1],map_mins[2],
 //		map_maxs[0],map_maxs[1],map_maxs[2]);
 } //end of the function PrintMapInfo
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void ResetMapLoading(void)
 {
 	int i;
@@ -1173,12 +1077,6 @@ void ResetMapLoading(void)
 	num_entities = 0;
 	memset(entities, 0, MAX_MAP_ENTITIES * sizeof(entity_t));
 } //end of the function ResetMapLoading
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 #ifndef Q1_BSPVERSION
 #define Q1_BSPVERSION	29
 #endif

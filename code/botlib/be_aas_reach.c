@@ -176,12 +176,6 @@ float AAS_AreaVolume(int areanum)
 	volume /= 3;
 	return volume;
 } //end of the function AAS_AreaVolume
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_BestReachableLinkArea(aas_link_t *areas)
 {
 	aas_link_t *link;
@@ -351,12 +345,6 @@ int AAS_BestReachableFromJumpPadArea(vec3_t origin, vec3_t mins, vec3_t maxs)
 	} //end for
 	return 0;
 } //end of the function AAS_BestReachableFromJumpPadArea
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_BestReachableArea(vec3_t origin, vec3_t mins, vec3_t maxs, vec3_t goalorigin)
 {
 	int areanum, i, j, k, l;
@@ -436,12 +424,6 @@ int AAS_BestReachableArea(vec3_t origin, vec3_t mins, vec3_t maxs, vec3_t goalor
 	//
 	return areanum;
 } //end of the function AAS_BestReachableArea
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_SetupReachabilityHeap(void)
 {
 	int i;
@@ -456,12 +438,6 @@ void AAS_SetupReachabilityHeap(void)
 	nextreachability = reachabilityheap;
 	numlreachabilities = 0;
 } //end of the function AAS_InitReachabilityHeap
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_ShutDownReachabilityHeap(void)
 {
 	FreeMemory(reachabilityheap);
@@ -714,42 +690,18 @@ int AAS_AreaLadder(int areanum)
 {
 	return (aasworld.areasettings[areanum].areaflags & AREA_LADDER);
 } //end of the function AAS_AreaLadder
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_AreaJumpPad(int areanum)
 {
 	return (aasworld.areasettings[areanum].contents & AREACONTENTS_JUMPPAD);
 } //end of the function AAS_AreaJumpPad
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_AreaTeleporter(int areanum)
 {
 	return (aasworld.areasettings[areanum].contents & AREACONTENTS_TELEPORTER);
 } //end of the function AAS_AreaTeleporter
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_AreaClusterPortal(int areanum)
 {
 	return (aasworld.areasettings[areanum].contents & AREACONTENTS_CLUSTERPORTAL);
 } //end of the function AAS_AreaClusterPortal
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_AreaDoNotEnter(int areanum)
 {
 	return (aasworld.areasettings[areanum].contents & AREACONTENTS_DONOTENTER);
@@ -3914,12 +3866,6 @@ int AAS_Reachability_Grapple(int area1num, int area2num)
 	//
 	return qfalse;
 } //end of the function AAS_Reachability_Grapple
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_SetWeaponJumpAreaFlags(void)
 {
 	int ent, i;
@@ -4292,12 +4238,6 @@ void AAS_Reachability_WalkOffLedge(int areanum)
 		} //end for
 	} //end for
 } //end of the function AAS_Reachability_WalkOffLedge
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_StoreReachability(void)
 {
 	int i;
@@ -4496,12 +4436,6 @@ int AAS_ContinueInitReachability(float time)
 	//not yet finished
 	return qtrue;
 } //end of the function AAS_ContinueInitReachability
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_InitReachability(void)
 {
 	if (!aasworld.loaded) return;

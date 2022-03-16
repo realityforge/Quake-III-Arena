@@ -28,12 +28,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define AAS_Error			Error
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_SwapAASData(void)
 {
 	int i, j;
@@ -387,12 +381,6 @@ qboolean AAS_LoadAASFile(char *filename, int fpoffset, int fplength)
 	fclose(fp);
 	return true;
 } //end of the function AAS_LoadAASFile
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_WriteAASLump(FILE *fp, aas_header_t *h, int lumpnum, void *data, int length)
 {
 	aas_lump_t *lump;
@@ -413,12 +401,6 @@ int AAS_WriteAASLump(FILE *fp, aas_header_t *h, int lumpnum, void *data, int len
 	} //end if
 	return true;
 } //end of the function AAS_WriteAASLump
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_ShowNumReachabilities(int tt, char *name)
 {
 	int i, num;
@@ -431,12 +413,6 @@ void AAS_ShowNumReachabilities(int tt, char *name)
 	} //end for
 	Log_Print("%6d %s\n", num, name);
 } //end of the function AAS_ShowNumReachabilities
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_ShowTotals(void)
 {
 	Log_Print("numvertexes = %d\r\n", aasworld.numvertexes);

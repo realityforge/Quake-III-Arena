@@ -30,12 +30,6 @@ int		c_boundary_sides;
 int		c_portalmemory;
 
 //portal_t *portallist = NULL;
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 portal_t *AllocPortal (void)
 {
 	portal_t	*p;
@@ -58,12 +52,6 @@ portal_t *AllocPortal (void)
 	
 	return p;
 } //end of the function AllocPortal
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void FreePortal (portal_t *p)
 {
 	if (p->winding) FreeWinding(p->winding);
@@ -92,12 +80,6 @@ int VisibleContents (int contents)
 
 	return 0;
 } //end of the function VisibleContents
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int ClusterContents (node_t *node)
 {
 	int		c1, c2, c;
@@ -183,12 +165,6 @@ qboolean Portal_EntityFlood (portal_t *p, int s)
 
 int		c_tinyportals;
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AddPortalToNodes (portal_t *p, node_t *front, node_t *back)
 {
 	if (p->nodes[0] || p->nodes[1])
@@ -202,12 +178,6 @@ void AddPortalToNodes (portal_t *p, node_t *front, node_t *back)
 	p->next[1] = back->portals;
 	back->portals = p;
 } //end of the function AddPortalToNodes
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void RemovePortalFromNode (portal_t *portal, node_t *l)
 {
 	portal_t	**pp, *t;
@@ -267,12 +237,6 @@ void RemovePortalFromNode (portal_t *portal, node_t *l)
 	} //end for
 //#endif
 } //end of the function RemovePortalFromNode
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void PrintPortal (portal_t *p)
 {
 	int			i;
@@ -352,12 +316,6 @@ void MakeHeadnodePortals (tree_t *tree)
 		} //end for
 	} //end for
 } //end of the function MakeHeadNodePortals
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 #define	BASE_WINDING_EPSILON		0.001
 #define	SPLIT_WINDING_EPSILON	0.001
 
@@ -579,12 +537,6 @@ void SplitNodePortals (node_t *node)
 
 	node->portals = NULL;
 } //end of the function SplitNodePortals
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void CalcNodeBounds (node_t *node)
 {
 	portal_t	*p;
@@ -600,12 +552,6 @@ void CalcNodeBounds (node_t *node)
 			AddPointToBounds (p->winding->p[i], node->mins, node->maxs);
 	}
 } //end of the function CalcNodeBounds
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int c_numportalizednodes;
 
 void MakeTreePortals_r (node_t *node)
@@ -640,12 +586,6 @@ void MakeTreePortals_r (node_t *node)
 	MakeTreePortals_r (node->children[0]);
 	MakeTreePortals_r (node->children[1]);
 } //end of the function MakeTreePortals_r
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void MakeTreePortals(tree_t *tree)
 {
 
@@ -680,12 +620,6 @@ FLOOD ENTITIES
 node_t *p_firstnode;
 node_t *p_lastnode;
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 #ifdef P_NODESTACK
 void P_AddNodeToList(node_t *node)
 {
@@ -719,12 +653,6 @@ node_t *P_NextNodeFromList(void)
 	if (!p_firstnode) p_lastnode = NULL;
 	return node;
 } //end of the function P_NextNodeFromList
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void FloodPortals(node_t *firstnode)
 {
 	node_t *node;
@@ -750,12 +678,6 @@ void FloodPortals(node_t *firstnode)
 		} //end for
 	} //end for
 } //end of the function FloodPortals
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int numrec;
 
 void FloodPortals_r (node_t *node, int dist)
@@ -785,12 +707,6 @@ void FloodPortals_r (node_t *node, int dist)
 	} //end for
 	Log_Print("\r%6d", --numrec);
 } //end of the function FloodPortals_r
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 qboolean PlaceOccupant (node_t *headnode, vec3_t origin, entity_t *occupant)
 {
 	node_t *node;
@@ -918,12 +834,6 @@ int c_outside;
 int c_inside;
 int c_solid;
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void FillOutside_r (node_t *node)
 {
 	if (node->planenum != PLANENUM_LEAF)
@@ -980,12 +890,6 @@ FLOOD AREAS
 
 int		c_areas;
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void FloodAreas_r (node_t *node)
 {
 	portal_t	*p;
@@ -1104,12 +1008,6 @@ void SetAreaPortalAreas_r (node_t *node)
 		} //end if
 	} //end if
 } //end of the function SetAreaPortalAreas_r
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 /*
 void EmitAreaPortals(node_t *headnode)
 {
@@ -1234,12 +1132,6 @@ gotit:
 	p->sidefound = true;
 	p->side = bestside;
 } //end of the function FindPortalSide
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void MarkVisibleSides_r (node_t *node)
 {
 	portal_t *p;
@@ -1267,12 +1159,6 @@ void MarkVisibleSides_r (node_t *node)
 			p->side->flags |= SFL_VISIBLE;
 	} //end for
 } //end of the function MarkVisibleSides_r
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void MarkVisibleSides(tree_t *tree, int startbrush, int endbrush)
 {
 	int		i, j;

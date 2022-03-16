@@ -48,12 +48,6 @@ aas_t aasworld;
 
 libvar_t *saveroutingcache;
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void QDECL AAS_Error(char *fmt, ...)
 {
 	char str[1024];
@@ -64,12 +58,6 @@ void QDECL AAS_Error(char *fmt, ...)
 	va_end(arglist);
 	botimport.Print(PRT_FATAL, str);
 } //end of the function AAS_Error
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 char *AAS_StringFromIndex(char *indexname, char *stringindex[], int numindexes, int index)
 {
 	if (!aasworld.indexessetup)
@@ -92,12 +80,6 @@ char *AAS_StringFromIndex(char *indexname, char *stringindex[], int numindexes, 
 	} //end if
 	return stringindex[index];
 } //end of the function AAS_StringFromIndex
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_IndexFromString(char *indexname, char *stringindex[], int numindexes, char *string)
 {
 	int i;
@@ -113,32 +95,14 @@ int AAS_IndexFromString(char *indexname, char *stringindex[], int numindexes, ch
 	} //end for
 	return 0;
 } //end of the function AAS_IndexFromString
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 char *AAS_ModelFromIndex(int index)
 {
 	return AAS_StringFromIndex("ModelFromIndex", &aasworld.configstrings[CS_MODELS], MAX_MODELS, index);
 } //end of the function AAS_ModelFromIndex
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_IndexFromModel(char *modelname)
 {
 	return AAS_IndexFromString("IndexFromModel", &aasworld.configstrings[CS_MODELS], MAX_MODELS, modelname);
 } //end of the function AAS_IndexFromModel
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_UpdateStringIndexes(int numconfigstrings, char *configstrings[])
 {
 	int i;
@@ -154,32 +118,14 @@ void AAS_UpdateStringIndexes(int numconfigstrings, char *configstrings[])
 	} //end for
 	aasworld.indexessetup = qtrue;
 } //end of the function AAS_UpdateStringIndexes
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_Loaded(void)
 {
 	return aasworld.loaded;
 } //end of the function AAS_Loaded
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_Initialized(void)
 {
 	return aasworld.initialized;
 } //end of the function AAS_Initialized
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_SetInitialized(void)
 {
 	aasworld.initialized = qtrue;
@@ -191,12 +137,6 @@ void AAS_SetInitialized(void)
 	//AAS_RoutingInfo();
 #endif
 } //end of the function AAS_SetInitialized
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_ContinueInit(float time)
 {
 	//if no AAS file loaded
@@ -275,12 +215,6 @@ int AAS_StartFrame(float time)
 	aasworld.numframes++;
 	return BLERR_NOERROR;
 } //end of the function AAS_StartFrame
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 float AAS_Time(void)
 {
 	return aasworld.time;
@@ -301,12 +235,6 @@ void AAS_ProjectPointOntoVector( vec3_t point, vec3_t vStart, vec3_t vEnd, vec3_
 	// project onto the directional vector for this segment
 	VectorMA( vStart, DotProduct( pVec, vec ), vec, vProj );
 } //end of the function AAS_ProjectPointOntoVector
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_LoadFiles(const char *mapname)
 {
 	int errnum;
@@ -397,12 +325,6 @@ int AAS_Setup(void)
 	aasworld.numframes = 0;
 	return BLERR_NOERROR;
 } //end of the function AAS_Setup
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_Shutdown(void)
 {
 	AAS_ShutdownAlternativeRouting();

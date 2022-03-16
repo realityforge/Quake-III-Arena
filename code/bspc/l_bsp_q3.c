@@ -174,12 +174,6 @@ void Q3_PlaneFromPoints(vec3_t p0, vec3_t p1, vec3_t p2, vec3_t normal, float *d
 
 	*dist = DotProduct(p0, normal);
 } //end of the function PlaneFromPoints
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Q3_SurfacePlane(q3_dsurface_t *surface, vec3_t normal, float *dist)
 {
 	int i;
@@ -227,12 +221,6 @@ void Q3_SurfacePlane(q3_dsurface_t *surface, vec3_t normal, float *dist)
 	} //end if
 	*dist = DotProduct(p0, normal);
 } //end of the function Q3_SurfacePlane
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 q3_dplane_t *q3_surfaceplanes;
 
 void Q3_CreatePlanarSurfacePlanes(void)
@@ -253,12 +241,6 @@ void Q3_CreatePlanarSurfacePlanes(void)
 		//											q3_surfaceplanes[i].normal[2], q3_surfaceplanes[i].dist);
 	} //end for
 } //end of the function Q3_CreatePlanarSurfacePlanes
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 /*
 void Q3_SurfacePlane(q3_dsurface_t *surface, vec3_t normal, float *dist)
 {

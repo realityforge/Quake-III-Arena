@@ -45,12 +45,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 //#define AASFILEDEBUG
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_SwapAASData(void)
 {
 	int i, j;
@@ -230,12 +224,6 @@ void AAS_DumpAASData(void)
 	aasworld.initialized = qfalse;
 	aasworld.savefile = qfalse;
 } //end of the function AAS_DumpAASData
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 #ifdef AASFILEDEBUG
 void AAS_FileInfo(void)
 {
@@ -487,12 +475,6 @@ int AAS_LoadAASFile(char *filename)
 	//
 	return BLERR_NOERROR;
 } //end of the function AAS_LoadAASFile
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 static int AAS_WriteAASLump_offset;
 
 int AAS_WriteAASLump(fileHandle_t fp, aas_header_t *h, int lumpnum, void *data, int length)

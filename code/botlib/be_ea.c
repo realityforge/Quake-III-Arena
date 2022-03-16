@@ -42,62 +42,26 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 bot_input_t *botinputs;
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void EA_Say(int client, char *str)
 {
 	botimport.BotClientCommand(client, va("say %s", str) );
 } //end of the function EA_Say
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void EA_SayTeam(int client, char *str)
 {
 	botimport.BotClientCommand(client, va("say_team %s", str));
 } //end of the function EA_SayTeam
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void EA_Tell(int client, int clientto, char *str)
 {
 	botimport.BotClientCommand(client, va("tell %d, %s", clientto, str));
 } //end of the function EA_SayTeam
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void EA_UseItem(int client, char *it)
 {
 	botimport.BotClientCommand(client, va("use %s", it));
 } //end of the function EA_UseItem
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void EA_DropItem(int client, char *it)
 {
 	botimport.BotClientCommand(client, va("drop %s", it));
 } //end of the function EA_DropItem
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void EA_UseInv(int client, char *inv)
 {
 	botimport.BotClientCommand(client, va("invuse %s", inv));
@@ -126,12 +90,6 @@ void EA_Gesture(int client)
 
 	bi->actionflags |= ACTION_GESTURE;
 } //end of the function EA_Gesture
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void EA_Command(int client, char *command)
 {
 	botimport.BotClientCommand(client, command);

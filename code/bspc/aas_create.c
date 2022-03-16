@@ -39,12 +39,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 tmp_aas_t tmpaasworld;
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_InitTmpAAS(void)
 {
 	//tmp faces
@@ -61,12 +55,6 @@ void AAS_InitTmpAAS(void)
 	//
 	tmpaasworld.nodebuffer = NULL;
 } //end of the function AAS_InitTmpAAS
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_FreeTmpAAS(void)
 {
 	tmp_face_t *f, *nextf;
@@ -94,12 +82,6 @@ void AAS_FreeTmpAAS(void)
 		FreeMemory(nb);
 	} //end for
 } //end of the function AAS_FreeTmpAAS
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 tmp_face_t *AAS_AllocTmpFace(void)
 {
 	tmp_face_t *tmpface;
@@ -113,12 +95,6 @@ tmp_face_t *AAS_AllocTmpFace(void)
 	tmpaasworld.numfaces++;
 	return tmpface;
 } //end of the function AAS_AllocTmpFace
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_FreeTmpFace(tmp_face_t *tmpface)
 {
 	if (tmpface->l_next) tmpface->l_next->l_prev = tmpface->l_prev;
@@ -130,12 +106,6 @@ void AAS_FreeTmpFace(tmp_face_t *tmpface)
 	FreeMemory(tmpface);
 	tmpaasworld.numfaces--;
 } //end of the function AAS_FreeTmpFace
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 tmp_area_t *AAS_AllocTmpArea(void)
 {
 	tmp_area_t *tmparea;
@@ -149,12 +119,6 @@ tmp_area_t *AAS_AllocTmpArea(void)
 	tmpaasworld.numareas++;
 	return tmparea;
 } //end of the function AAS_AllocTmpArea
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_FreeTmpArea(tmp_area_t *tmparea)
 {
 	if (tmparea->l_next) tmparea->l_next->l_prev = tmparea->l_prev;
@@ -164,12 +128,6 @@ void AAS_FreeTmpArea(tmp_area_t *tmparea)
 	FreeMemory(tmparea);
 	tmpaasworld.numareas--;
 } //end of the function AAS_FreeTmpArea
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 tmp_node_t *AAS_AllocTmpNode(void)
 {
 	tmp_nodebuf_t *nodebuf;
@@ -185,12 +143,6 @@ tmp_node_t *AAS_AllocTmpNode(void)
 	tmpaasworld.numnodes++;
 	return &tmpaasworld.nodebuffer->nodes[tmpaasworld.nodebuffer->numnodes++];
 } //end of the function AAS_AllocTmpNode
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_FreeTmpNode(tmp_node_t *tmpnode)
 {
 	tmpaasworld.numnodes--;
@@ -305,12 +257,6 @@ void AAS_RemoveFaceFromArea(tmp_face_t *tmpface, tmp_area_t *tmparea)
 	tmpface->prev[side] = NULL;
 	tmpface->next[side] = NULL;
 } //end of the function AAS_RemoveFaceFromArea
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_CheckArea(tmp_area_t *tmparea)
 {
 	int side;
@@ -366,12 +312,6 @@ void AAS_CheckArea(tmp_area_t *tmparea)
 #endif L_DEBUG
 	} //end for
 } //end of the function AAS_CheckArea
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_CheckFaceWindingPlane(tmp_face_t *face)
 {
 	float dist, sign1, sign2;
@@ -421,12 +361,6 @@ void AAS_CheckFaceWindingPlane(tmp_face_t *face)
 		} //end else
 	} //end if
 } //end of the function AAS_CheckFaceWindingPlane
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_CheckAreaWindingPlanes(void)
 {
 	int side;
@@ -444,12 +378,6 @@ void AAS_CheckAreaWindingPlanes(void)
 		} //end for
 	} //end for
 } //end of the function AAS_CheckAreaWindingPlanes
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_FlipAreaFaces(tmp_area_t *tmparea)
 {
 	int side;
@@ -509,12 +437,6 @@ void AAS_FlipAreaFaces(tmp_area_t *tmparea)
 #endif
 	} //end for
 } //end of the function AAS_FlipAreaFaces
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_RemoveAreaFaceColinearPoints(void)
 {
 	int side;
@@ -532,12 +454,6 @@ void AAS_RemoveAreaFaceColinearPoints(void)
 		} //end for
 	} //end for
 } //end of the function AAS_RemoveAreaFaceColinearPoints
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_RemoveTinyFaces(void)
 {
 	int side, num;
@@ -566,12 +482,6 @@ void AAS_RemoveTinyFaces(void)
 	} //end for
 	Log_Write("%d tiny faces removed\r\n", num);
 } //end of the function AAS_RemoveTinyFaces
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_CreateAreaSettings(void)
 {
 	int i, flags, side, numgrounded, numladderareas, numliquidareas;
@@ -751,12 +661,6 @@ tmp_node_t *AAS_CreateArea(node_t *node)
 	//
 	return tmpnode;
 } //end of the function AAS_CreateArea
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 tmp_node_t *AAS_CreateAreas_r(node_t *node)
 {
 	tmp_node_t *tmpnode;
@@ -780,12 +684,6 @@ tmp_node_t *AAS_CreateAreas_r(node_t *node)
 
 	return AAS_CreateArea(node);
 } //end of the function AAS_CreateAreas_r
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_CreateAreas(node_t *node)
 {
 	Log_Write("AAS_CreateAreas\r\n");
@@ -794,12 +692,6 @@ void AAS_CreateAreas(node_t *node)
 	qprintf("\n");
 	Log_Write("%6d areas created\r\n", tmpaasworld.numareas);
 } //end of the function AAS_CreateAreas
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_PrintNumGroundFaces(void)
 {
 	tmp_face_t *tmpface;
@@ -859,12 +751,6 @@ void AAS_CheckAreaSharedFaces(tmp_area_t *tmparea1, tmp_area_t *tmparea2)
 		} //end if
 	} //end if
 } //end of the function AAS_CheckAreaSharedFaces
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_CheckSharedFaces(void)
 {
 	tmp_area_t *tmparea1, *tmparea2;
@@ -878,12 +764,6 @@ void AAS_CheckSharedFaces(void)
 		} //end for
 	} //end for
 } //end of the function AAS_CheckSharedFaces
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_FlipFace(tmp_face_t *face)
 {
 	tmp_area_t *frontarea, *backarea;
@@ -905,12 +785,6 @@ void AAS_FlipFace(tmp_face_t *face)
 	AAS_AddFaceSideToArea(face, 1, frontarea);
 	AAS_AddFaceSideToArea(face, 0, backarea);
 } //end of the function AAS_FlipFace
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 /*
 void AAS_FlipAreaSharedFaces(tmp_area_t *tmparea1, tmp_area_t *tmparea2)
 {
@@ -956,12 +830,6 @@ void AAS_FlipAreaSharedFaces(tmp_area_t *tmparea1, tmp_area_t *tmparea2)
 		} //end for
 	} while(face1);
 } //end of the function AAS_FlipAreaSharedFaces
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_FlipSharedFaces(void)
 {
 	int i;
@@ -983,12 +851,6 @@ void AAS_FlipSharedFaces(void)
 	Log_Print("\r%6d areas checked for shared face flipping\n", i);
 } //end of the function AAS_FlipSharedFaces
 */
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_FlipSharedFaces(void)
 {
 	int i, side1, side2;

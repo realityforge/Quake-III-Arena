@@ -24,12 +24,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../botlib/aasfile.h"
 #include "aas_create.h"
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_TryMergeFaces(tmp_face_t *face1, tmp_face_t *face2)
 {
 	winding_t *neww;
@@ -120,12 +114,6 @@ int AAS_TryMergeFaces(tmp_face_t *face1, tmp_face_t *face2)
 		AAS_RemoveFaceFromArea(face2, &tmpaasworld.areas[face2->backarea]);
 	return true;
 } //end of the function AAS_TryMergeFaces*/
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_MergeAreaFaces(void)
 {
 	int num_facemerges = 0;
@@ -171,12 +159,6 @@ void AAS_MergeAreaFaces(void)
 	qprintf("\n");
 	Log_Write("%6d face merges\r\n", num_facemerges);
 } //end of the function AAS_MergeAreaFaces
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_MergePlaneFaces(tmp_area_t *tmparea, int planenum)
 {
 	tmp_face_t *face1, *face2, *nextface2;
@@ -207,12 +189,6 @@ void AAS_MergePlaneFaces(tmp_area_t *tmparea, int planenum)
 		} //end for
 	} //end for
 } //end of the function AAS_MergePlaneFaces
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_CanMergePlaneFaces(tmp_area_t *tmparea, int planenum)
 {
 	tmp_area_t *frontarea, *backarea;
@@ -241,12 +217,6 @@ int AAS_CanMergePlaneFaces(tmp_area_t *tmparea, int planenum)
 	} //end for
 	return merge;
 } //end of the function AAS_CanMergePlaneFaces
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_MergeAreaPlaneFaces(void)
 {
 	int num_facemerges = 0;

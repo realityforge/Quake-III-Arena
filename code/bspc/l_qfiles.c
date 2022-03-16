@@ -107,12 +107,6 @@ int QuakeFileType(char *filename)
 	ExtractFileExtension(filename, ext+1);
 	return QuakeFileExtensionType(ext);
 } //end of the function QuakeFileTypeFromFileName
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 char *StringContains(char *str1, char *str2, int casesensitive)
 {
 	int len, i, j;

@@ -307,12 +307,6 @@ int Q1_SolidTree_r(int nodenum)
 	if (!Q1_SolidTree_r(q1_dnodes[nodenum].children[1])) return false;
 	return true;
 } //end of the function Q1_SolidTree_r
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 bspbrush_t *Q1_CreateBrushes_r(bspbrush_t *brush, int nodenum)
 {
 	int planenum;
@@ -419,12 +413,6 @@ bspbrush_t *Q1_CreateBrushes_r(bspbrush_t *brush, int nodenum)
 		return back;
 	} //end else
 } //end of the function Q1_CreateBrushes_r
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 bspbrush_t *Q1_CreateBrushesFromBSP(int modelnum)
 {
 	bspbrush_t *brushlist;
@@ -472,12 +460,6 @@ bspbrush_t *Q1_CreateBrushesFromBSP(int modelnum)
 	//now we've got a list with brushes!
 	return brushlist;
 } //end of the function Q1_CreateBrushesFromBSP
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 q1_dleaf_t *Q1_PointInLeaf(int startnode, vec3_t point)
 {
 	int nodenum;
@@ -499,12 +481,6 @@ q1_dleaf_t *Q1_PointInLeaf(int startnode, vec3_t point)
 
 	return &q1_dleafs[-nodenum - 1];
 } //end of the function Q1_PointInLeaf
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 float Q1_FaceArea(q1_dface_t *face)
 {
 	int i;
@@ -527,12 +503,6 @@ float Q1_FaceArea(q1_dface_t *face)
 	} //end for
 	return total;
 } //end of the function AAS_FaceArea
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Q1_FacePlane(q1_dface_t *face, vec3_t normal, float *dist)
 {
 	vec_t *v1, *v2, *v3;
@@ -554,12 +524,6 @@ void Q1_FacePlane(q1_dface_t *face, vec3_t normal, float *dist)
 	VectorNormalize(normal);
 	*dist = DotProduct(v1, normal);
 } //end of the function Q1_FacePlane
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 bspbrush_t *Q1_MergeBrushes(bspbrush_t *brushlist, int modelnum)
 {
 	int nummerges, merged;
@@ -748,12 +712,6 @@ bspbrush_t *Q1_SplitBrushWithFace(bspbrush_t *brush, q1_dface_t *face)
 	brushlist = front;
 	return brushlist;
 } //end of the function Q1_SplitBrushWithFace
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 bspbrush_t *Q1_TextureBrushes(bspbrush_t *brushlist, int modelnum)
 {
 	float area, largestarea;
@@ -930,12 +888,6 @@ bspbrush_t *Q1_TextureBrushes(bspbrush_t *brushlist, int modelnum)
 	//return the new list with brushes
 	return brushlist;
 } //end of the function Q1_TextureBrushes
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Q1_FixContentsTextures(bspbrush_t *brushlist)
 {
 	int i, texinfonum;
@@ -992,12 +944,6 @@ void Q1_FixContentsTextures(bspbrush_t *brushlist)
 		} //end for
 	} //end for*/
 } //end of the function Q1_FixContentsTextures
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Q1_BSPBrushToMapBrush(bspbrush_t *bspbrush, entity_t *mapent)
 {
 	mapbrush_t *mapbrush;
@@ -1071,12 +1017,6 @@ void Q1_BSPBrushToMapBrush(bspbrush_t *bspbrush, entity_t *mapent)
 	nummapbrushes++;
 	mapent->numbrushes++;
 } //end of the function Q1_BSPBrushToMapBrush
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Q1_CreateMapBrushes(entity_t *mapent, int modelnum)
 {
 	bspbrush_t *brushlist, *brush, *nextbrush;
@@ -1107,21 +1047,9 @@ void Q1_CreateMapBrushes(entity_t *mapent, int modelnum)
 	} //end for
 	if (!modelnum) qprintf("\n");
 } //end of the function Q1_CreateMapBrushes
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Q1_ResetMapLoading(void)
 {
 } //end of the function Q1_ResetMapLoading
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void Q1_LoadMapFromBSP(char *filename, int offset, int length)
 {
 	int i, modelnum;

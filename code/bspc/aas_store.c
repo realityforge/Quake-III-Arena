@@ -83,24 +83,12 @@ typedef struct max_aas_s
 //maximums of everything
 max_aas_t max_aas;
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_CountTmpNodes(tmp_node_t *tmpnode)
 {
 	if (!tmpnode) return 0;
 	return AAS_CountTmpNodes(tmpnode->children[0]) +
 				AAS_CountTmpNodes(tmpnode->children[1]) + 1;
 } //end of the function AAS_CountTmpNodes
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_InitMaxAAS(void)
 {
 	int numfaces, numpoints, numareas;
@@ -135,12 +123,6 @@ void AAS_InitMaxAAS(void)
 	max_aas.max_portalindexsize = 0;
 	max_aas.max_clusters = 0;
 } //end of the function AAS_InitMaxAAS
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_AllocMaxAAS(void)
 {
 	int i;
@@ -220,12 +202,6 @@ void AAS_AllocMaxAAS(void)
 	for (i = 0; i < max_aas.max_edges; i++) aas_edgechain[i] = -1;
 	for (i = 0; i < EDGE_HASH_SIZE; i++) aas_hashedges[i] = -1;
 } //end of the function AAS_AllocMaxAAS
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_FreeMaxAAS(void)
 {
 	//bounding boxes
@@ -297,12 +273,6 @@ void AAS_FreeMaxAAS(void)
 	if (aas_edgechain) FreeMemory(aas_edgechain);
 	aas_edgechain = NULL;
 } //end of the function AAS_FreeMaxAAS
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 unsigned AAS_HashVec(vec3_t vec)
 {
 	int x, y;
@@ -402,12 +372,6 @@ qboolean AAS_GetVertex(vec3_t v, int *vnum)
 	aasworld.numvertexes++;
 	return false;
 } //end of the function AAS_GetVertex
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 unsigned AAS_HashEdge(int v1, int v2)
 {
 	int vnum1, vnum2;
@@ -424,12 +388,6 @@ unsigned AAS_HashEdge(int v1, int v2)
 	} //end else
 	return (vnum1 + vnum2) & (EDGE_HASH_SIZE-1);
 } //end of the function AAS_HashVec
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_AddEdgeToHash(int edgenum)
 {
 	int hash;
@@ -442,12 +400,6 @@ void AAS_AddEdgeToHash(int edgenum)
 	aas_edgechain[edgenum] = aas_hashedges[hash];
 	aas_hashedges[hash] = edgenum;
 } //end of the function AAS_AddEdgeToHash
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 qboolean AAS_FindHashedEdge(int v1num, int v2num, int *edgenum)
 {
 	int e, hash;
@@ -551,12 +503,6 @@ qboolean AAS_GetEdge(vec3_t v1, vec3_t v2, int *edgenum)
 	aasworld.numedges++;
 	return false;
 } //end of the function AAS_GetEdge
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_PlaneTypeForNormal(vec3_t normal)
 {
 	vec_t	ax, ay, az;
@@ -577,12 +523,6 @@ int AAS_PlaneTypeForNormal(vec3_t normal)
 	if (ay >= ax && ay >= az) return PLANE_ANYY;
 	return PLANE_ANYZ;
 } //end of the function AAS_PlaneTypeForNormal
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_AddPlaneToHash(int planenum)
 {
 	int hash;
@@ -596,12 +536,6 @@ void AAS_AddPlaneToHash(int planenum)
 	aas_planechain[planenum] = aas_hashplanes[hash];
 	aas_hashplanes[hash] = planenum;
 } //end of the function AAS_AddPlaneToHash
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_PlaneEqual(vec3_t normal, float dist, int planenum)
 {
 	float diff;
@@ -625,12 +559,6 @@ int AAS_PlaneEqual(vec3_t normal, float dist, int planenum)
 	} //end if
 	return false;
 } //end of the function AAS_PlaneEqual
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 qboolean AAS_FindPlane(vec3_t normal, float dist, int *planenum)
 {
 	int i;
@@ -645,12 +573,6 @@ qboolean AAS_FindPlane(vec3_t normal, float dist, int *planenum)
 	} //end for
 	return false;
 } //end of the function AAS_FindPlane
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 qboolean AAS_FindHashedPlane(vec3_t normal, float dist, int *planenum)
 {
 	int i, p;
@@ -676,12 +598,6 @@ qboolean AAS_FindHashedPlane(vec3_t normal, float dist, int *planenum)
 	} //end for
 	return false;
 } //end of the function AAS_FindHashedPlane
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 qboolean AAS_GetPlane(vec3_t normal, vec_t dist, int *planenum)
 {
 	aas_plane_t *plane, temp;
@@ -737,12 +653,6 @@ qboolean AAS_GetPlane(vec3_t normal, vec_t dist, int *planenum)
 	return false;
 #endif //STOREPLANESDOUBLE
 } //end of the function AAS_GetPlane
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 qboolean AAS_GetFace(winding_t *w, plane_t *p, int side, int *facenum)
 {
 	int edgenum, i, j;
@@ -796,12 +706,6 @@ qboolean AAS_GetFace(winding_t *w, plane_t *p, int side, int *facenum)
 	aasworld.numfaces++;
 	return true;
 } //end of the function AAS_GetFace
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 /*
 qboolean AAS_GetFace(winding_t *w, plane_t *p, int side, int *facenum)
 {
@@ -873,12 +777,6 @@ qboolean AAS_GetFace(winding_t *w, plane_t *p, int side, int *facenum)
 	aasworld.numfaces++;
 	return false;
 } //end of the function AAS_GetFace*/
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_StoreAreaSettings(tmp_areasettings_t *tmpareasettings)
 {
 	aas_areasettings_t *areasettings;
@@ -892,12 +790,6 @@ void AAS_StoreAreaSettings(tmp_areasettings_t *tmpareasettings)
 		Log_Print("WARNING: more than %d mover models\n", AREACONTENTS_MAXMODELNUM);
 	areasettings->contents |= (tmpareasettings->modelnum & AREACONTENTS_MAXMODELNUM) << AREACONTENTS_MODELNUMSHIFT;
 } //end of the function AAS_StoreAreaSettings
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_StoreArea(tmp_area_t *tmparea)
 {
 	int side, edgenum, i;
@@ -1013,12 +905,6 @@ int AAS_StoreArea(tmp_area_t *tmparea)
 	aasworld.numareas++;
 	return -(aasworld.numareas - 1);
 } //end of the function AAS_StoreArea
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_StoreTree_r(tmp_node_t *tmpnode)
 {
 	int aasnodenum;
@@ -1044,12 +930,6 @@ int AAS_StoreTree_r(tmp_node_t *tmpnode)
 	aasnode->children[1] = AAS_StoreTree_r(tmpnode->children[1]);
 	return aasnodenum;
 } //end of the function AAS_StoreTree_r
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_StoreBoundingBoxes(void)
 {
 	if (cfg.numbboxes > max_aas.max_bboxes)
@@ -1059,12 +939,6 @@ void AAS_StoreBoundingBoxes(void)
 	aasworld.numbboxes = cfg.numbboxes;
 	memcpy(aasworld.bboxes, cfg.bboxes, cfg.numbboxes * sizeof(aas_bbox_t));
 } //end of the function AAS_StoreBoundingBoxes
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_StoreFile(char *filename)
 {
 	AAS_AllocMaxAAS();

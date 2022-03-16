@@ -33,12 +33,6 @@ there will be no brush overlap after csg phase
 int minplanenums[3];
 int maxplanenums[3];
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void CheckBSPBrush(bspbrush_t *brush)
 {
 	int i, j;
@@ -81,12 +75,6 @@ void CheckBSPBrush(bspbrush_t *brush)
 		} //end if
 	} //end for
 } //end of the function CheckBSPBrush
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void BSPBrushWindings(bspbrush_t *brush)
 {
 	int i, j;
@@ -262,12 +250,6 @@ bspbrush_t *TryMergeBrushes(bspbrush_t *brush1, bspbrush_t *brush2)
 	CheckBSPBrush(newbrush);
 	return newbrush;
 } //end of the function TryMergeBrushes
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 bspbrush_t *MergeBrushes(bspbrush_t *brushlist)
 {
 	int nummerges, merged;
@@ -325,12 +307,6 @@ bspbrush_t *MergeBrushes(bspbrush_t *brushlist)
 	qprintf("\n");
 	return newbrushlist;
 } //end of the function MergeBrushes
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void SplitBrush2 (bspbrush_t *brush, int planenum,
 	bspbrush_t **front, bspbrush_t **back)
 {
@@ -510,12 +486,6 @@ bspbrush_t *ClipBrushToBox(bspbrush_t *brush, vec3_t clipmins, vec3_t clipmaxs)
 	}
 	return brush;
 } //end of the function ClipBrushToBox
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 bspbrush_t *MakeBspBrushList(int startbrush, int endbrush,
 											vec3_t clipmins, vec3_t clipmaxs)
 {
@@ -601,12 +571,6 @@ bspbrush_t *MakeBspBrushList(int startbrush, int endbrush,
 
 	return brushlist;
 } //end of the function MakeBspBrushList
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 bspbrush_t *AddBrushListToTail (bspbrush_t *list, bspbrush_t *tail)
 {
 	bspbrush_t	*walk, *next;
@@ -647,12 +611,6 @@ bspbrush_t *CullList(bspbrush_t *list, bspbrush_t *skip1)
 	}
 	return newlist;
 } //end of the function CullList
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 /*
 void WriteBrushMap(char *name, bspbrush_t *list)
 {
@@ -866,12 +824,6 @@ newlist:
 
 	return keep;
 } //end of the function ChopBrushes
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 bspbrush_t *InitialBrushList (bspbrush_t *list)
 {
 	bspbrush_t *b;
@@ -905,12 +857,6 @@ bspbrush_t *InitialBrushList (bspbrush_t *list)
 
 	return out;
 } //end of the function InitialBrushList
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 bspbrush_t *OptimizedBrushList (bspbrush_t *list)
 {
 	bspbrush_t *b;
@@ -934,12 +880,6 @@ bspbrush_t *OptimizedBrushList (bspbrush_t *list)
 //	WriteBrushList ("vis.gl", out, true);
 	return out;
 } //end of the function OptimizeBrushList
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 tree_t *ProcessWorldBrushes(int brush_start, int brush_end)
 {
 	bspbrush_t *brushes;

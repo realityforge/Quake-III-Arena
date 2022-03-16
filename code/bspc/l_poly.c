@@ -804,12 +804,6 @@ winding_t *TryMergeWinding (winding_t *f1, winding_t *f2, vec3_t planenormal)
 }
 
 //#ifdef ME
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 winding_t *MergeWindings(winding_t *w1, winding_t *w2, vec3_t planenormal)
 {
 	winding_t *neww;
@@ -906,22 +900,10 @@ winding_t *MergeWindings(winding_t *w1, winding_t *w2, vec3_t planenormal)
 	RemoveColinearPoints(neww);
 	return neww;
 } //end of the function MergeWindings
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 char *WindingErrorString(void)
 {
 	return windingerror;
 } //end of the function WindingErrorString
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int WindingError(winding_t *w)
 {
 	int		i, j;
@@ -999,12 +981,6 @@ int WindingError(winding_t *w)
 	} //end for
 	return WE_NONE;
 } //end of the function WindingError
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void RemoveEqualPoints(winding_t *w, float epsilon)
 {
 	int i, nump;
@@ -1121,12 +1097,6 @@ int PointOnWinding(winding_t *w, vec3_t normal, float dist, vec3_t point, int *s
 	} //end for
 	return false;
 } //end of the function PointOnWinding
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int FindPlaneSeperatingWindings(winding_t *w1, winding_t *w2, vec3_t dir,
 											vec3_t normal, float *dist)
 {
@@ -1229,12 +1199,6 @@ int FindPlaneSeperatingWindings(winding_t *w1, winding_t *w2, vec3_t dir,
 	} //end for
 	return false;
 } //end of the function FindPlaneSeperatingWindings
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 #define WCONVEX_EPSILON		0.2
 
 int WindingsNonConvex(winding_t *w1, winding_t *w2,
@@ -1258,12 +1222,6 @@ int WindingsNonConvex(winding_t *w1, winding_t *w2,
 
 	return false;
 } //end of the function WindingsNonConvex
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 /*
 #define VERTEX_EPSILON		0.5
 
