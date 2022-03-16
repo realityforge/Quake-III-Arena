@@ -1061,6 +1061,7 @@ static void IN_VRButtons( qboolean isRightController, uint32_t buttons )
     {
         if (cl.snap.ps.pm_flags & PMF_FOLLOW)
         {
+            controller->buttons |= ovrButton_X;
             //Switch follow mode
             vr.follow_mode = (vr.follow_mode+1) % VRFM_NUM_FOLLOWMODES;
         }
@@ -1106,8 +1107,6 @@ static void IN_VRButtons( qboolean isRightController, uint32_t buttons )
             IN_SendButtonAction(action, qfalse, qfalse, 0);
         }
     }
-
-	controller->buttons = buttons;
 }
 
 void IN_VRInputFrame( void )
