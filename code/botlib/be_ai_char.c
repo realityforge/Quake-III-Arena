@@ -664,12 +664,6 @@ float Characteristic_Float(int character, int index)
 	} //end else if
 //	return 0;
 } //end of the function Characteristic_Float
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 float Characteristic_BFloat(int character, int index, float min, float max)
 {
 	float value;

@@ -247,12 +247,6 @@ void AAS_SetMovedir(vec3_t angles, vec3_t movedir)
 		AngleVectors(angles, movedir, NULL, NULL);
 	} //end else
 } //end of the function AAS_SetMovedir
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_JumpReachRunStart(aas_reachability_t *reach, vec3_t runstart)
 {
 	vec3_t hordir, start, cmdmove;

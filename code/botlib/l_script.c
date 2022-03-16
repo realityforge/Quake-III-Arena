@@ -164,12 +164,6 @@ punctuation_t default_punctuations[] =
 char basefolder[MAX_QPATH];
 #endif
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void PS_CreatePunctuationTable(script_t *script, punctuation_t *punctuations)
 {
 	int i;
@@ -204,12 +198,6 @@ void PS_CreatePunctuationTable(script_t *script, punctuation_t *punctuations)
 		} //end if
 	} //end for
 } //end of the function PS_CreatePunctuationTable
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 char *PunctuationFromNum(script_t *script, int num)
 {
 	int i;
@@ -220,12 +208,6 @@ char *PunctuationFromNum(script_t *script, int num)
 	} //end for
 	return "unknown punctuation";
 } //end of the function PunctuationFromNum
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void QDECL ScriptError(script_t *script, char *str, ...)
 {
 	char text[1024];
@@ -246,12 +228,6 @@ void QDECL ScriptError(script_t *script, char *str, ...)
 	Log_Print("error: file %s, line %d: %s\n", script->filename, script->line, text);
 #endif //BSPC
 } //end of the function ScriptError
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void QDECL ScriptWarning(script_t *script, char *str, ...)
 {
 	char text[1024];
@@ -272,12 +248,6 @@ void QDECL ScriptWarning(script_t *script, char *str, ...)
 	Log_Print("warning: file %s, line %d: %s\n", script->filename, script->line, text);
 #endif //BSPC
 } //end of the function ScriptWarning
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void SetScriptPunctuations(script_t *script, punctuation_t *p)
 {
 #ifdef PUNCTABLE

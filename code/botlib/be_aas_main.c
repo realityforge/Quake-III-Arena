@@ -48,12 +48,6 @@ aas_t aasworld;
 
 libvar_t *saveroutingcache;
 
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void QDECL AAS_Error(char *fmt, ...)
 {
 	char str[1024];
@@ -64,32 +58,14 @@ void QDECL AAS_Error(char *fmt, ...)
 	va_end(arglist);
 	botimport.Print(PRT_FATAL, "%s", str);
 } //end of the function AAS_Error
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_Loaded(void)
 {
 	return aasworld.loaded;
 } //end of the function AAS_Loaded
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_Initialized(void)
 {
 	return aasworld.initialized;
 } //end of the function AAS_Initialized
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_SetInitialized(void)
 {
 	aasworld.initialized = qtrue;
@@ -101,12 +77,6 @@ void AAS_SetInitialized(void)
 	//AAS_RoutingInfo();
 #endif
 } //end of the function AAS_SetInitialized
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_ContinueInit(float time)
 {
 	//if no AAS file loaded
@@ -185,12 +155,6 @@ int AAS_StartFrame(float time)
 	aasworld.numframes++;
 	return BLERR_NOERROR;
 } //end of the function AAS_StartFrame
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 float AAS_Time(void)
 {
 	return aasworld.time;
@@ -211,12 +175,6 @@ void AAS_ProjectPointOntoVector( vec3_t point, vec3_t vStart, vec3_t vEnd, vec3_
 	// project onto the directional vector for this segment
 	VectorMA( vStart, DotProduct( pVec, vec ), vec, vProj );
 } //end of the function AAS_ProjectPointOntoVector
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_LoadFiles(const char *mapname)
 {
 	int errnum;
@@ -306,12 +264,6 @@ int AAS_Setup(void)
 	aasworld.numframes = 0;
 	return BLERR_NOERROR;
 } //end of the function AAS_Setup
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_Shutdown(void)
 {
 	AAS_ShutdownAlternativeRouting();

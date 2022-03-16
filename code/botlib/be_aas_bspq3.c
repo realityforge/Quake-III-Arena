@@ -161,12 +161,6 @@ int AAS_PointContents(vec3_t point)
 {
 	return botimport.PointContents(point);
 } //end of the function AAS_PointContents
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 qboolean AAS_EntityCollision(int entnum,
 					vec3_t start, vec3_t boxmins, vec3_t boxmaxs, vec3_t end,
 								int contentmask, bsp_trace_t *trace)
@@ -203,12 +197,6 @@ qboolean AAS_inPHS(vec3_t p1, vec3_t p2)
 {
 	return qtrue;
 } //end of the function AAS_inPHS
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_BSPModelMinsMaxsOrigin(int modelnum, vec3_t angles, vec3_t mins, vec3_t maxs, vec3_t origin)
 {
 	botimport.BSPModelMinsMaxsOrigin(modelnum, angles, mins, maxs, origin);
@@ -223,22 +211,10 @@ void AAS_BSPModelMinsMaxsOrigin(int modelnum, vec3_t angles, vec3_t mins, vec3_t
 void AAS_UnlinkFromBSPLeaves(bsp_link_t *leaves)
 {
 } //end of the function AAS_UnlinkFromBSPLeaves
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 bsp_link_t *AAS_BSPLinkEntity(vec3_t absmins, vec3_t absmaxs, int entnum, int modelnum)
 {
 	return NULL;
 } //end of the function AAS_BSPLinkEntity
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_BoxEntities(vec3_t absmins, vec3_t absmaxs, int *list, int maxcount)
 {
 	return 0;
@@ -293,12 +269,6 @@ int AAS_ValueForBSPEpairKey(int ent, char *key, char *value, int size)
 	} //end for
 	return qfalse;
 } //end of the function AAS_FindBSPEpair
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_VectorForBSPEpairKey(int ent, char *key, vec3_t v)
 {
 	char buf[MAX_EPAIRKEY];
@@ -314,12 +284,6 @@ int AAS_VectorForBSPEpairKey(int ent, char *key, vec3_t v)
 	v[2] = v3;
 	return qtrue;
 } //end of the function AAS_VectorForBSPEpairKey
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_FloatForBSPEpairKey(int ent, char *key, float *value)
 {
 	char buf[MAX_EPAIRKEY];
@@ -329,12 +293,6 @@ int AAS_FloatForBSPEpairKey(int ent, char *key, float *value)
 	*value = atof(buf);
 	return qtrue;
 } //end of the function AAS_FloatForBSPEpairKey
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_IntForBSPEpairKey(int ent, char *key, int *value)
 {
 	char buf[MAX_EPAIRKEY];
@@ -441,22 +399,10 @@ void AAS_ParseBSPEntities(void)
 	} //end while
 	FreeScript(script);
 } //end of the function AAS_ParseBSPEntities
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 int AAS_BSPTraceLight(vec3_t start, vec3_t end, vec3_t endpos, int *red, int *green, int *blue)
 {
 	return 0;
 } //end of the function AAS_BSPTraceLight
-//===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//===========================================================================
 void AAS_DumpBSPData(void)
 {
 	AAS_FreeBSPEntities();
