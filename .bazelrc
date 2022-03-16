@@ -31,9 +31,18 @@ build --tool_java_runtime_version=remotejdk_11
 # Enabling this flag is equivalent to using --config=linux on Linux, --config=windows on Windows, etc.
 build --enable_platform_specific_config
 
+# default to optimizing compilation
+build --compilation_mode=opt
+
 #
 # Config specific build options.
 #
+
+# Use debug compilation mode which includes the debug symbols
+build:dbg --compilation_mode=dbg
+
+# Define DEBUG which turns on debugging in some parts of the library
+build:dbg --copt -DDEBUG
 
 # Sets the default Apple platform to macOS.
 build:macos --apple_platform_type=macos
