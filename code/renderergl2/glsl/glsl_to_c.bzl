@@ -3,8 +3,8 @@ def glsl_to_c(name):
         name = name + "_generator",
         srcs = [name + ".glsl"],
         outs = [name + ".c"],
-        cmd = "$(location //code/tools:stringify) $< $@",
-        tools = ["//code/tools:stringify"],
+        cmd = "$(location :stringify) $< $@",
+        tools = [":stringify"],
     )
 
     native.cc_library(

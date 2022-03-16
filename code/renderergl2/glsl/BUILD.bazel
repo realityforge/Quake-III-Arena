@@ -90,3 +90,8 @@ cc_library(
         ":tonemap_vp",
     ],
 )
+
+cc_binary(
+    name = "stringify",
+    srcs = ["stringify.c"],
+)
