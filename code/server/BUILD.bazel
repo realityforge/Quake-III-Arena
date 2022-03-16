@@ -1,14 +1,14 @@
 _SERVER_SRC = [
-        "server.h",
-        "sv_bot.c",
-        "sv_ccmds.c",
-        "sv_client.c",
-        "sv_game.c",
-        "sv_init.c",
-        "sv_main.c",
-        "sv_net_chan.c",
-        "sv_snapshot.c",
-        "sv_world.c",
+    "server.h",
+    "sv_bot.c",
+    "sv_ccmds.c",
+    "sv_client.c",
+    "sv_game.c",
+    "sv_init.c",
+    "sv_main.c",
+    "sv_net_chan.c",
+    "sv_snapshot.c",
+    "sv_world.c",
 ]
 
 cc_library(
