@@ -85,8 +85,8 @@ cc_library(
         "json.h",
     ],
     visibility = [
-        "//code/renderergl2:__pkg__"
-    ]
+        "//code/renderergl2:__pkg__",
+    ],
 )
 
 # TODO: Use shared version or move this to third_party?
