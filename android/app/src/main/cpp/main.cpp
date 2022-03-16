@@ -84,8 +84,7 @@ int main(int argc, char* argv[]) {
 	VR_EnterVR(engine, java);
 
 	while (1) {
-		//Polling events here breaks sdl_input keyboard!
-		/*SDL_Event event;
+		SDL_Event event;
 		while (SDL_PollEvent(&event)) {
 			LOGI("Received SDL Event: %d", event.type);
 			switch (event.type)
@@ -98,7 +97,7 @@ int main(int argc, char* argv[]) {
 					VR_LeaveVR(engine);
 					break;
 			}
-		}*/
+		}
 
 		VR_DrawFrame(engine);
 	}
