@@ -72,7 +72,7 @@ typedef struct optimized_s
 int AAS_KeepEdge(aas_edge_t *edge)
 {
 	return 1;
-} //end of the function AAS_KeepFace
+}
 int AAS_OptimizeEdge(optimized_t *optimized, int edgenum)
 {
 	int i, optedgenum;
@@ -87,7 +87,7 @@ int AAS_OptimizeEdge(optimized_t *optimized, int edgenum)
 		//keep the edge reversed sign
 		if (edgenum > 0) return optedgenum;
 		else return -optedgenum;
-	} //end if
+	}
 
 	optedge = &optimized->edges[optimized->numedges];
 
@@ -96,27 +96,27 @@ int AAS_OptimizeEdge(optimized_t *optimized, int edgenum)
 		if (optimized->vertexoptimizeindex[edge->v[i]])
 		{
 			optedge->v[i] = optimized->vertexoptimizeindex[edge->v[i]];
-		} //end if
+		}
 		else
 		{
 			VectorCopy(aasworld.vertexes[edge->v[i]], optimized->vertexes[optimized->numvertexes]);
 			optedge->v[i] = optimized->numvertexes;
 			optimized->vertexoptimizeindex[edge->v[i]] = optimized->numvertexes;
 			optimized->numvertexes++;
-		} //end else
-	} //end for
+		}
+	}
 	optimized->edgeoptimizeindex[abs(edgenum)] = optimized->numedges;
 	optedgenum = optimized->numedges;
 	optimized->numedges++;
 	//keep the edge reversed sign
 	if (edgenum > 0) return optedgenum;
 	else return -optedgenum;
-} //end of the function AAS_OptimizeEdge
+}
 int AAS_KeepFace(aas_face_t *face)
 {
 	if (!(face->faceflags & FACE_LADDER)) return 0;
 	else return 1;
-} //end of the function AAS_KeepFace
+}
 int AAS_OptimizeFace(optimized_t *optimized, int facenum)
 {
 	int i, edgenum, optedgenum, optfacenum;
@@ -131,7 +131,7 @@ int AAS_OptimizeFace(optimized_t *optimized, int facenum)
 		//keep the face side sign
 		if (facenum > 0) return optfacenum;
 		else return -optfacenum;
-	} //end if
+	}
 
 	optface = &optimized->faces[optimized->numfaces];
 	Com_Memcpy(optface, face, sizeof(aas_face_t));
@@ -147,15 +147,15 @@ int AAS_OptimizeFace(optimized_t *optimized, int facenum)
 			optimized->edgeindex[optface->firstedge + optface->numedges] = optedgenum;
 			optface->numedges++;
 			optimized->edgeindexsize++;
-		} //end if
-	} //end for
+		}
+	}
 	optimized->faceoptimizeindex[abs(facenum)] = optimized->numfaces;
 	optfacenum = optimized->numfaces;
 	optimized->numfaces++;
 	//keep the face side sign
 	if (facenum > 0) return optfacenum;
 	else return -optfacenum;
-} //end of the function AAS_OptimizeFace
+}
 void AAS_OptimizeArea(optimized_t *optimized, int areanum)
 {
 	int i, facenum, optfacenum;
@@ -176,9 +176,9 @@ void AAS_OptimizeArea(optimized_t *optimized, int areanum)
 			optimized->faceindex[optarea->firstface + optarea->numfaces] = optfacenum;
 			optarea->numfaces++;
 			optimized->faceindexsize++;
-		} //end if
-	} //end for
-} //end of the function AAS_OptimizeArea
+		}
+	}
+}
 void AAS_OptimizeAlloc(optimized_t *optimized)
 {
 	optimized->vertexes = (aas_vertex_t *) GetClearedMemory(aasworld.numvertexes * sizeof(aas_vertex_t));
@@ -197,7 +197,7 @@ void AAS_OptimizeAlloc(optimized_t *optimized)
 	optimized->vertexoptimizeindex = (int *) GetClearedMemory(aasworld.numvertexes * sizeof(int));
 	optimized->edgeoptimizeindex = (int *) GetClearedMemory(aasworld.numedges * sizeof(int));
 	optimized->faceoptimizeindex = (int *) GetClearedMemory(aasworld.numfaces * sizeof(int));
-} //end of the function AAS_OptimizeAlloc
+}
 void AAS_OptimizeStore(optimized_t *optimized)
 {
 	//store the optimized vertexes
@@ -228,7 +228,7 @@ void AAS_OptimizeStore(optimized_t *optimized)
 	FreeMemory(optimized->vertexoptimizeindex);
 	FreeMemory(optimized->edgeoptimizeindex);
 	FreeMemory(optimized->faceoptimizeindex);
-} //end of the function AAS_OptimizeStore
+}
 void AAS_Optimize(void)
 {
 	int i, sign;
@@ -238,7 +238,7 @@ void AAS_Optimize(void)
 	for (i = 1; i < aasworld.numareas; i++)
 	{
 		AAS_OptimizeArea(&optimized, i);
-	} //end for
+	}
 	//reset the reachability face pointers
 	for (i = 0; i < aasworld.reachabilitysize; i++)
 	{
@@ -256,9 +256,9 @@ void AAS_Optimize(void)
 		sign = aasworld.reachability[i].edgenum;
 		aasworld.reachability[i].edgenum = optimized.edgeoptimizeindex[abs(aasworld.reachability[i].edgenum)];
 		if (sign < 0) aasworld.reachability[i].edgenum = -aasworld.reachability[i].edgenum;
-	} //end for
+	}
 	//store the optimized AAS data into aasworld
 	AAS_OptimizeStore(&optimized);
 	//print some nice stuff :)
 	botimport.Print(PRT_MESSAGE, "AAS data optimized.\n");
-} //end of the function AAS_Optimize
+}

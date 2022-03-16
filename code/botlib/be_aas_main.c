@@ -57,15 +57,15 @@ void QDECL AAS_Error(char *fmt, ...)
 	Q_vsnprintf(str, sizeof(str), fmt, arglist);
 	va_end(arglist);
 	botimport.Print(PRT_FATAL, "%s", str);
-} //end of the function AAS_Error
+}
 int AAS_Loaded(void)
 {
 	return aasworld.loaded;
-} //end of the function AAS_Loaded
+}
 int AAS_Initialized(void)
 {
 	return aasworld.initialized;
-} //end of the function AAS_Initialized
+}
 void AAS_SetInitialized(void)
 {
 	aasworld.initialized = qtrue;
@@ -76,7 +76,7 @@ void AAS_SetInitialized(void)
 	//
 	//AAS_RoutingInfo();
 #endif
-} //end of the function AAS_SetInitialized
+}
 void AAS_ContinueInit(float time)
 {
 	//if no AAS file loaded
@@ -97,17 +97,17 @@ void AAS_ContinueInit(float time)
 		if (AAS_WriteAASFile(aasworld.filename))
 		{
 			botimport.Print(PRT_MESSAGE, "%s written successfully\n", aasworld.filename);
-		} //end if
+		}
 		else
 		{
 			botimport.Print(PRT_ERROR, "couldn't write %s\n", aasworld.filename);
-		} //end else
-	} //end if
+		}
+	}
 	//initialize the routing
 	AAS_InitRouting();
 	//at this point AAS is initialized
 	AAS_SetInitialized();
-} //end of the function AAS_ContinueInit
+}
 //===========================================================================
 // called at the start of every frame
 //
@@ -133,32 +133,32 @@ int AAS_StartFrame(float time)
 		{
 			AAS_RoutingInfo();
 			LibVarSet("showcacheupdates", "0");
-		} //end if
+		}
 		if (LibVarGetValue("showmemoryusage"))
 		{
 			PrintUsedMemorySize();
 			LibVarSet("showmemoryusage", "0");
-		} //end if
+		}
 		if (LibVarGetValue("memorydump"))
 		{
 			PrintMemoryLabels();
 			LibVarSet("memorydump", "0");
-		} //end if
-	} //end if
+		}
+	}
 	//
 	if (saveroutingcache->value)
 	{
 		AAS_WriteRouteCache();
 		LibVarSet("saveroutingcache", "0");
-	} //end if
+	}
 	//
 	aasworld.numframes++;
 	return BLERR_NOERROR;
-} //end of the function AAS_StartFrame
+}
 float AAS_Time(void)
 {
 	return aasworld.time;
-} //end of the function AAS_Time
+}
 //===========================================================================
 //
 // Parameter:			-
@@ -174,7 +174,7 @@ void AAS_ProjectPointOntoVector( vec3_t point, vec3_t vStart, vec3_t vEnd, vec3_
 	VectorNormalize( vec );
 	// project onto the directional vector for this segment
 	VectorMA( vStart, DotProduct( pVec, vec ), vec, vProj );
-} //end of the function AAS_ProjectPointOntoVector
+}
 int AAS_LoadFiles(const char *mapname)
 {
 	int errnum;
@@ -197,7 +197,7 @@ int AAS_LoadFiles(const char *mapname)
 	botimport.Print(PRT_MESSAGE, "loaded %s\n", aasfile);
 	Q_strncpyz(aasworld.filename, aasfile, sizeof(aasworld.filename));
 	return BLERR_NOERROR;
-} //end of the function AAS_LoadFiles
+}
 //===========================================================================
 // called every time a map changes
 //
@@ -213,7 +213,7 @@ int AAS_LoadMap(const char *mapname)
 	if (!mapname)
 	{
 		return 0;
-	} //end if
+	}
 	//
 	aasworld.initialized = qfalse;
 	//NOTE: free the routing caches before loading a new map because
@@ -226,7 +226,7 @@ int AAS_LoadMap(const char *mapname)
 	{
 		aasworld.loaded = qfalse;
 		return errnum;
-	} //end if
+	}
 	//
 	AAS_InitSettings();
 	//initialize the AAS link heap for the new map
@@ -239,7 +239,7 @@ int AAS_LoadMap(const char *mapname)
 	AAS_InitAlternativeRouting();
 	//everything went ok
 	return 0;
-} //end of the function AAS_LoadMap
+}
 //===========================================================================
 // called when the library is first loaded
 //
@@ -263,7 +263,7 @@ int AAS_Setup(void)
 	//LibVarSet("forcereachability", "1");		//force reachability calculation
 	aasworld.numframes = 0;
 	return BLERR_NOERROR;
-} //end of the function AAS_Setup
+}
 void AAS_Shutdown(void)
 {
 	AAS_ShutdownAlternativeRouting();
@@ -287,4 +287,4 @@ void AAS_Shutdown(void)
 	// freed and reallocated, so there's no need to free that memory here
 	//print shutdown
 	botimport.Print(PRT_MESSAGE, "AAS shutdown.\n");
-} //end of the function AAS_Shutdown
+}

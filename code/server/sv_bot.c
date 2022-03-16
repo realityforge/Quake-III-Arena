@@ -118,7 +118,7 @@ void BotDrawDebugPolygons(void (*drawPoly)(int color, int numPoints, float *poin
 		botlib_export->BotLibVarSet("bot_highlightarea", bot_highlightarea->string);
 		botlib_export->Test(parm0, NULL, svs.clients[0].gentity->r.currentOrigin, 
 			svs.clients[0].gentity->r.currentAngles);
-	} //end if
+	}
 	//draw all debug polys
 	for (i = 0; i < bot_maxdebugpolys; i++) {
 		poly = &debugpolygons[i];
