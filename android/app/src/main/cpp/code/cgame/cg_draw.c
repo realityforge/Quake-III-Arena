@@ -2602,7 +2602,8 @@ static void CG_DrawVignette( void )
 		return;
 	}
 
-	if (VectorLength(cg.predictedPlayerState.velocity) > 30.0 || vr->smooth_turning)
+	const float yawDelta = abs(vr->clientview_yaw_delta);
+	if (VectorLength(cg.predictedPlayerState.velocity) > 30.0 || (yawDelta > 0 && yawDelta < 20) || (yawDelta > 340))
 	{
 		if (currentComfortVignetteValue <  comfortVignetteValue)
 		{

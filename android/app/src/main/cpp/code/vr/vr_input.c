@@ -291,11 +291,6 @@ static qboolean IN_SendButtonAction(const char* action, qboolean pressed, qboole
                     }
                     CL_SnapTurn(-snap);
                 } else { // yaw (smooth turn)
-                    // TODO How to disable this once enabled?
-                    // (In this method i do not know to which button it is assigned and
-                    // since i need to invoke the button repeatedly, i will not receive
-                    // the "pressed=false" event)
-                    // vr.smooth_turning = true;
                     float value = (isThumbstickAxis ? axisValue : 1.0f) * cl_sensitivity->value * m_yaw->value;
                     Com_QueueEvent(in_vrEventTime, SE_MOUSE, -value, 0, 0, NULL);
                     return qtrue;
@@ -308,11 +303,6 @@ static qboolean IN_SendButtonAction(const char* action, qboolean pressed, qboole
                     }
                     CL_SnapTurn(snap);
                 } else { // yaw (smooth turn)
-                    // TODO How to disable this once enabled?
-                    // (In this method i do not know to which button it is assigned and
-                    // since i need to invoke the button repeatedly, i will not receive
-                    // the "pressed=false" event)
-                    // vr.smooth_turning = true;
                     float value = (isThumbstickAxis ? axisValue : 1.0f) * cl_sensitivity->value * m_yaw->value;
                     Com_QueueEvent(in_vrEventTime, SE_MOUSE, value, 0, 0, NULL);
                     return qtrue;
@@ -1164,6 +1154,11 @@ void IN_VRInputFrame( void )
 
 		//Keep this for our records
 		VectorCopy(vr.hmdorientation, vr.hmdorientation_last);
+
+		// View yaw delta
+		const float clientview_yaw = vr.clientviewangles[YAW] - vr.hmdorientation[YAW];
+		vr.clientview_yaw_delta = vr.clientview_yaw_last - clientview_yaw;
+		vr.clientview_yaw_last = clientview_yaw;
 	}
 
 
