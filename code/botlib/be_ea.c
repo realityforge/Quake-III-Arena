@@ -38,7 +38,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_interface.h"
 
 #define MAX_USERMOVE				400
-#define MAX_COMMANDARGUMENTS		10
 #define ACTION_JUMPEDLASTFRAME		128
 
 bot_input_t *botinputs;
