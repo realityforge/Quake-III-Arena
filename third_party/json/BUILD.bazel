@@ -1,0 +1,10 @@
+cc_library(
+    name = "json",
+    hdrs = [
+        "json.h",
+    ],
+    includes = ["."],
+    visibility = [
+        "//code/renderergl2:__pkg__",
+    ],
+)

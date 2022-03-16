@@ -234,6 +234,7 @@ LOKISETUPDIR=misc/setup
 NSISDIR=misc/nsis
 CURLLIBSDIR=third_party/curl/libs
 JPDIR=third_party/jpeg
+JSONDIR=third_party/json
 OGGDIR=third_party/ogg
 OPENALDIR=third_party/openal
 OPUSDIR=third_party/opus
@@ -710,6 +711,11 @@ ifneq ($(BUILD_CLIENT),0)
       TARGETS += $(B)/$(CLIENTBIN)_opengl2$(FULLBINEXT)
     endif
   endif
+endif
+
+
+ifneq ($(BUILD_RENDERER_OPENGL2),0)
+  CLIENT_CFLAGS += -I$(JSONDIR)
 endif
 
 ifneq ($(BUILD_GAME_SO),0)

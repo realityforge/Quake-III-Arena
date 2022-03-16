@@ -56,9 +56,9 @@ cc_library(
     deps = [
         ":local",
         "//code/qcommon",
-        "//code/qcommon:json",
         "//code/qcommon:qfiles",
         "//code/renderercommon",
+        "//third_party/json",
     ],
 )
 
