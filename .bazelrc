@@ -1,3 +1,20 @@
+#
+# Bazel adds additional config if the relevant config is specified. A config named X can be specified
+# via --config=X and multiple config are valid. The config options supported by this build are as follows:
+#
+# Macosx options
+#     darwin_arm64:
+#
+# Other build options:
+#     dbg:              Build with debug info
+#
+# Note that the inspiration from this comes from the https://github.com/tensorflow/tensorflow/blob/master/.bazelrc
+# and that .bazelrc should be used as a source of future configuration and maybe also https://github.com/envoyproxy/envoy/blob/main/.bazelrc
+
+#
+# Default build options. These are applied first and unconditionally.
+#
+
 # Make Bazel print out all options from rc files.
 build --announce_rc
 
@@ -9,3 +26,17 @@ build --incompatible_strict_action_env
 build --host_force_python=PY3
 build --java_runtime_version=remotejdk_11
 build --tool_java_runtime_version=remotejdk_11
+
+# Picks up host-OS-specific config lines from bazelrc files. Supported OS identifiers are linux, macos, windows, freebsd, and openbsd.
+# Enabling this flag is equivalent to using --config=linux on Linux, --config=windows on Windows, etc.
+build --enable_platform_specific_config
+
+#
+# Config specific build options.
+#
+
+# Sets the default Apple platform to macOS.
+build:macos --apple_platform_type=macos
+
+# Settings for MacOS on ARM CPUs.
+build:macos_arm64 --cpu=darwin_arm64
