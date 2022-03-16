@@ -391,12 +391,6 @@ void RemoveLevelItemFromList(levelitem_t *li)
 	else levelitems = li->next;
 	if (li->next) li->next->prev = li->prev;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void BotFreeInfoEntities(void)
 {
 	maplocation_t *ml, *nextml;
@@ -415,12 +409,6 @@ void BotFreeInfoEntities(void)
 	}
 	campspots = NULL;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void BotInitInfoEntities(void)
 {
 	char classname[MAX_EPAIRKEY];
@@ -477,12 +465,6 @@ void BotInitInfoEntities(void)
 		botimport.Print(PRT_MESSAGE, "%d camp spots\n", numcampspots);
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void BotInitLevelItems(void)
 {
 	int i, spawnflags, value;
@@ -687,12 +669,6 @@ void BotAddToAvoidGoals(bot_goalstate_t *gs, int number, float avoidtime)
 		}
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void BotRemoveFromAvoidGoals(int goalstate, int number)
 {
 	int i;
@@ -727,12 +703,6 @@ float BotAvoidGoalTime(int goalstate, int number)
 	}
 	return 0;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void BotSetAvoidGoalTime(int goalstate, int number, float avoidtime)
 {
 	bot_goalstate_t *gs;
@@ -766,12 +736,6 @@ void BotSetAvoidGoalTime(int goalstate, int number, float avoidtime)
 		BotAddToAvoidGoals(gs, number, avoidtime);
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int BotGetLevelItemGoal(int index, char *name, bot_goal_t *goal)
 {
 	levelitem_t *li;
@@ -820,12 +784,6 @@ int BotGetLevelItemGoal(int index, char *name, bot_goal_t *goal)
 	}
 	return -1;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int BotGetMapLocationGoal(char *name, bot_goal_t *goal)
 {
 	maplocation_t *ml;
@@ -848,12 +806,6 @@ int BotGetMapLocationGoal(char *name, bot_goal_t *goal)
 	}
 	return qfalse;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int BotGetNextCampSpotGoal(int num, bot_goal_t *goal)
 {
 	int i;
@@ -879,12 +831,6 @@ int BotGetNextCampSpotGoal(int num, bot_goal_t *goal)
 	}
 	return 0;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void BotFindEntityForLevelItem(levelitem_t *li)
 {
 	int ent, modelindex;
@@ -919,12 +865,6 @@ void BotFindEntityForLevelItem(levelitem_t *li)
 		}
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 
 //NOTE: enum entityType_t in bg_public.h
 #define ET_ITEM			2
@@ -1630,12 +1570,6 @@ int BotSetupGoalAI(void)
 	//everything went ok
 	return BLERR_NOERROR;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void BotShutdownGoalAI(void)
 {
 	int i;

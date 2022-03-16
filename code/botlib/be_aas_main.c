@@ -159,12 +159,6 @@ float AAS_Time(void)
 {
 	return aasworld.time;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void AAS_ProjectPointOntoVector( vec3_t point, vec3_t vStart, vec3_t vEnd, vec3_t vProj )
 {
 	vec3_t pVec, vec;

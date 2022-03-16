@@ -156,12 +156,6 @@ int AAS_UpdateEntity(int entnum, bot_entitystate_t *state)
 	}
 	return BLERR_NOERROR;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void AAS_EntityInfo(int entnum, aas_entityinfo_t *info)
 {
 	if (!aasworld.initialized)
@@ -340,12 +334,6 @@ int AAS_BestReachableEntityArea(int entnum)
 	ent = &aasworld.entities[entnum];
 	return AAS_BestReachableLinkArea(ent->areas);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int AAS_NextEntity(int entnum)
 {
 	if (!aasworld.loaded) return 0;

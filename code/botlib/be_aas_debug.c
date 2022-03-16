@@ -118,12 +118,6 @@ void AAS_DebugLine(vec3_t start, vec3_t end, int color)
 		}
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void AAS_PermanentLine(vec3_t start, vec3_t end, int color)
 {
 	int line;
@@ -131,12 +125,6 @@ void AAS_PermanentLine(vec3_t start, vec3_t end, int color)
 	line = botimport.DebugLineCreate();
 	botimport.DebugLineShow(line, start, end, color);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void AAS_DrawPermanentCross(vec3_t origin, float size, int color)
 {
 	int i, debugline;

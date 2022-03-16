@@ -198,12 +198,6 @@ int AAS_BestReachableLinkArea(aas_link_t *areas)
 	}
 	return 0;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int AAS_GetJumpPadInfo(int ent, vec3_t areastart, vec3_t absmins, vec3_t absmaxs, vec3_t velocity)
 {
 	int modelnum, ent2;
@@ -275,12 +269,6 @@ int AAS_GetJumpPadInfo(int ent, vec3_t areastart, vec3_t absmins, vec3_t absmaxs
 	velocity[2] = time * gravity;
 	return qtrue;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int AAS_BestReachableFromJumpPadArea(vec3_t origin, vec3_t mins, vec3_t maxs)
 {
 	int ent, bot_visualizejumppads, bestareanum;
@@ -590,12 +578,6 @@ float AAS_FallDelta(float distance)
 	delta = t * gravity;
 	return delta * delta * 0.0001;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 float AAS_MaxJumpHeight(float phys_jumpvel)
 {
 	float phys_gravity;
@@ -658,22 +640,10 @@ int AAS_AreaLiquid(int areanum)
 	if (aasworld.areasettings[areanum].areaflags & AREA_LIQUID) return qtrue;
 	else return qfalse;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int AAS_AreaLava(int areanum)
 {
 	return (aasworld.areasettings[areanum].contents & AREACONTENTS_LAVA);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int AAS_AreaSlime(int areanum)
 {
 	return (aasworld.areasettings[areanum].contents & AREACONTENTS_SLIME);
@@ -2653,12 +2623,6 @@ int AAS_Reachability_Ladder(int area1num, int area2num)
 	}
 	return qfalse;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int AAS_TravelFlagsForTeam(int ent)
 {
 	int notteam;
@@ -3092,12 +3056,6 @@ void AAS_Reachability_Elevator(void)
 		}
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 aas_lreachability_t *AAS_FindFaceReachabilities(vec3_t *facepoints, int numpoints, aas_plane_t *plane, int towardsface)
 {
 	int i, j, k, l;
@@ -3217,12 +3175,6 @@ aas_lreachability_t *AAS_FindFaceReachabilities(vec3_t *facepoints, int numpoint
 	}
 	return lreachabilities;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void AAS_Reachability_FuncBobbing(void)
 {
 	int ent, spawnflags, modelnum, axis;
@@ -3430,12 +3382,6 @@ void AAS_Reachability_FuncBobbing(void)
 		}
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void AAS_Reachability_JumpPad(void)
 {
 	int face2num, i, ret, area2num, visualize, ent, bot_visualizejumppads;

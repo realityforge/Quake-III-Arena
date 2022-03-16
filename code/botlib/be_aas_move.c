@@ -47,12 +47,6 @@ aas_settings_t aassettings;
 
 //#define AAS_MOVE_DEBUG
 
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int AAS_DropToFloor(vec3_t origin, vec3_t mins, vec3_t maxs)
 {
 	vec3_t end;
@@ -65,12 +59,6 @@ int AAS_DropToFloor(vec3_t origin, vec3_t mins, vec3_t maxs)
 	VectorCopy(trace.endpos, origin);
 	return qtrue;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void AAS_InitSettings(void)
 {
 	aassettings.phys_gravitydirection[0]	= 0;
@@ -221,12 +209,6 @@ int AAS_Swimming(vec3_t origin)
 	if (AAS_PointContents(testorg) & (CONTENTS_LAVA|CONTENTS_SLIME|CONTENTS_WATER)) return qtrue;
 	return qfalse;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 static vec3_t VEC_UP			= {0, -1,  0};
 static vec3_t MOVEDIR_UP		= {0,  0,  1};
 static vec3_t VEC_DOWN		= {0, -2,  0};
@@ -326,23 +308,11 @@ float AAS_WeaponJumpZVelocity(vec3_t origin, float radiusdamage)
 	//rocket impact velocity + jump velocity
 	return kvel[2] + aassettings.phys_jumpvel;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 float AAS_RocketJumpZVelocity(vec3_t origin)
 {
 	//rocket radius damage is 120 (p_weapon.c: Weapon_RocketLauncher_Fire)
 	return AAS_WeaponJumpZVelocity(origin, 120);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 float AAS_BFGJumpZVelocity(vec3_t origin)
 {
 	//bfg radius damage is 1000 (p_weapon.c: weapon_bfg_fire)
@@ -399,12 +369,6 @@ void AAS_ApplyFriction(vec3_t vel, float friction, float stopspeed,
 		vel[1] *= newspeed;
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int AAS_ClipToBBox(aas_trace_t *trace, vec3_t start, vec3_t end, int presencetype, vec3_t mins, vec3_t maxs)
 {
 	int i, j, side;
@@ -968,12 +932,6 @@ int AAS_ClientMovementPrediction(struct aas_clientmove_s *move,
 	//
 	return qtrue;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int AAS_PredictClientMovement(struct aas_clientmove_s *move,
 								int entnum, vec3_t origin,
 								int presencetype, int onground,
@@ -988,12 +946,6 @@ int AAS_PredictClientMovement(struct aas_clientmove_s *move,
 										frametime, stopevent, stopareanum,
 										mins, maxs, visualize);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int AAS_ClientMovementHitBBox(struct aas_clientmove_s *move,
 								int entnum, vec3_t origin,
 								int presencetype, int onground,
@@ -1007,12 +959,6 @@ int AAS_ClientMovementHitBBox(struct aas_clientmove_s *move,
 										frametime, SE_HITBOUNDINGBOX, 0,
 										mins, maxs, visualize);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void AAS_TestMovementPrediction(int entnum, vec3_t origin, vec3_t dir)
 {
 	vec3_t velocity, cmdmove;

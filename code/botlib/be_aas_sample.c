@@ -214,12 +214,6 @@ int AAS_PointAreaNum(vec3_t point)
 	}
 	return -nodenum;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int AAS_PointReachabilityAreaIndex( vec3_t origin )
 {
 	int areanum, cluster, i, index;

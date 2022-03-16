@@ -219,24 +219,12 @@ int AAS_BoxEntities(vec3_t absmins, vec3_t absmaxs, int *list, int maxcount)
 {
 	return 0;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int AAS_NextBSPEntity(int ent)
 {
 	ent++;
 	if (ent >= 1 && ent < bspworld.numentities) return ent;
 	return 0;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int AAS_BSPEntityInRange(int ent)
 {
 	if (ent <= 0 || ent >= bspworld.numentities)
@@ -246,12 +234,6 @@ int AAS_BSPEntityInRange(int ent)
 	}
 	return qtrue;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int AAS_ValueForBSPEpairKey(int ent, char *key, char *value, int size)
 {
 	bsp_epair_t *epair;
@@ -302,12 +284,6 @@ int AAS_IntForBSPEpairKey(int ent, char *key, int *value)
 	*value = atoi(buf);
 	return qtrue;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void AAS_FreeBSPEntities(void)
 {
 	int i;
@@ -328,12 +304,6 @@ void AAS_FreeBSPEntities(void)
 	}
 	bspworld.numentities = 0;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void AAS_ParseBSPEntities(void)
 {
 	script_t *script;

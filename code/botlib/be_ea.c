@@ -66,22 +66,10 @@ void EA_UseInv(int client, char *inv)
 {
 	botimport.BotClientCommand(client, va("invuse %s", inv));
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_DropInv(int client, char *inv)
 {
 	botimport.BotClientCommand(client, va("invdrop %s", inv));
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_Gesture(int client)
 {
 	bot_input_t *bi;
@@ -94,12 +82,6 @@ void EA_Command(int client, char *command)
 {
 	botimport.BotClientCommand(client, command);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_SelectWeapon(int client, int weapon)
 {
 	bot_input_t *bi;
@@ -108,12 +90,6 @@ void EA_SelectWeapon(int client, int weapon)
 
 	bi->weapon = weapon;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_Attack(int client)
 {
 	bot_input_t *bi;
@@ -122,12 +98,6 @@ void EA_Attack(int client)
 
 	bi->actionflags |= ACTION_ATTACK;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_Talk(int client)
 {
 	bot_input_t *bi;
@@ -136,12 +106,6 @@ void EA_Talk(int client)
 
 	bi->actionflags |= ACTION_TALK;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_Use(int client)
 {
 	bot_input_t *bi;
@@ -150,12 +114,6 @@ void EA_Use(int client)
 
 	bi->actionflags |= ACTION_USE;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_Respawn(int client)
 {
 	bot_input_t *bi;
@@ -164,12 +122,6 @@ void EA_Respawn(int client)
 
 	bi->actionflags |= ACTION_RESPAWN;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_Jump(int client)
 {
 	bot_input_t *bi;
@@ -185,12 +137,6 @@ void EA_Jump(int client)
 		bi->actionflags |= ACTION_JUMP;
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_DelayedJump(int client)
 {
 	bot_input_t *bi;
@@ -206,12 +152,6 @@ void EA_DelayedJump(int client)
 		bi->actionflags |= ACTION_DELAYEDJUMP;
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_Crouch(int client)
 {
 	bot_input_t *bi;
@@ -220,12 +160,6 @@ void EA_Crouch(int client)
 
 	bi->actionflags |= ACTION_CROUCH;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_Walk(int client)
 {
 	bot_input_t *bi;
@@ -234,12 +168,6 @@ void EA_Walk(int client)
 
 	bi->actionflags |= ACTION_WALK;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_Action(int client, int action)
 {
 	bot_input_t *bi;
@@ -248,12 +176,6 @@ void EA_Action(int client, int action)
 
 	bi->actionflags |= action;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_MoveUp(int client)
 {
 	bot_input_t *bi;
@@ -262,12 +184,6 @@ void EA_MoveUp(int client)
 
 	bi->actionflags |= ACTION_MOVEUP;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_MoveDown(int client)
 {
 	bot_input_t *bi;
@@ -276,12 +192,6 @@ void EA_MoveDown(int client)
 
 	bi->actionflags |= ACTION_MOVEDOWN;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_MoveForward(int client)
 {
 	bot_input_t *bi;
@@ -290,12 +200,6 @@ void EA_MoveForward(int client)
 
 	bi->actionflags |= ACTION_MOVEFORWARD;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_MoveBack(int client)
 {
 	bot_input_t *bi;
@@ -304,12 +208,6 @@ void EA_MoveBack(int client)
 
 	bi->actionflags |= ACTION_MOVEBACK;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_MoveLeft(int client)
 {
 	bot_input_t *bi;
@@ -318,12 +216,6 @@ void EA_MoveLeft(int client)
 
 	bi->actionflags |= ACTION_MOVELEFT;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_MoveRight(int client)
 {
 	bot_input_t *bi;
@@ -332,12 +224,6 @@ void EA_MoveRight(int client)
 
 	bi->actionflags |= ACTION_MOVERIGHT;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_Move(int client, vec3_t dir, float speed)
 {
 	bot_input_t *bi;
@@ -350,12 +236,6 @@ void EA_Move(int client, vec3_t dir, float speed)
 	else if (speed < -MAX_USERMOVE) speed = -MAX_USERMOVE;
 	bi->speed = speed;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_View(int client, vec3_t viewangles)
 {
 	bot_input_t *bi;
@@ -364,21 +244,9 @@ void EA_View(int client, vec3_t viewangles)
 
 	VectorCopy(viewangles, bi->viewangles);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_EndRegular(int client, float thinktime)
 {
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_GetInput(int client, float thinktime, bot_input_t *input)
 {
 	bot_input_t *bi;
@@ -387,12 +255,6 @@ void EA_GetInput(int client, float thinktime, bot_input_t *input)
 	bi->thinktime = thinktime;
 	Com_Memcpy(input, bi, sizeof(bot_input_t));
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_ResetInput(int client)
 {
 	bot_input_t *bi;
@@ -407,12 +269,6 @@ void EA_ResetInput(int client)
 	bi->actionflags = 0;
 	if (jumped) bi->actionflags |= ACTION_JUMPEDLASTFRAME;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int EA_Setup(void)
 {
 	//initialize the bot inputs
@@ -420,12 +276,6 @@ int EA_Setup(void)
 									botlibglobals.maxclients * sizeof(bot_input_t));
 	return BLERR_NOERROR;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void EA_Shutdown(void)
 {
 	FreeMemory(botinputs);

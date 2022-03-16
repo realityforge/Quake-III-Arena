@@ -395,12 +395,6 @@ int IsWhiteSpace(char c)
 		|| c == '+' || c == '=') return qfalse;
 	return qtrue;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void BotRemoveTildes(char *message)
 {
 	int i;
@@ -790,12 +784,6 @@ void BotReplaceReplySynonyms(char *string, unsigned long int context)
 		if (!*str1) break;
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int BotLoadChatMessage(source_t *source, char *chatmessagestring)
 {
 	char *ptr;
@@ -1551,12 +1539,6 @@ void BotFreeReplyChat(bot_replychat_t *replychat)
 		FreeMemory(rp);
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void BotCheckValidReplyChatKeySet(source_t *source, bot_replychatkey_t *keys)
 {
 	int allprefixed, hasvariableskey, hasstringkey;
@@ -1658,12 +1640,6 @@ void BotCheckValidReplyChatKeySet(source_t *source, bot_replychatkey_t *keys)
 								"invalid when outputting one of the chat messages");
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 bot_replychat_t *BotLoadReplyChat(char *filename)
 {
 	char chatmessagestring[MAX_MESSAGE_SIZE];
@@ -2006,12 +1982,6 @@ bot_chat_t *BotLoadInitialChat(char *chatfile, char *chatname)
 	//character was read successfully
 	return chat;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void BotFreeChatFile(int chatstate)
 {
 	bot_chatstate_t *cs;
@@ -2073,12 +2043,6 @@ int BotLoadChatFile(int chatstate, char *chatfile, char *chatname)
 
 	return BLERR_NOERROR;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int BotExpandChatMessage(char *outmessage, char *message, unsigned long mcontext,
 							 bot_match_t *match, unsigned long vcontext, int reply)
 {
@@ -2194,12 +2158,6 @@ int BotExpandChatMessage(char *outmessage, char *message, unsigned long mcontext
 	//return true if a random was expanded
 	return expansion;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void BotConstructChatMessage(bot_chatstate_t *chatstate, char *message, unsigned long mcontext,
 							 bot_match_t *match, unsigned long vcontext, int reply)
 {
@@ -2568,12 +2526,6 @@ int BotChatLength(int chatstate)
 	if (!cs) return 0;
 	return strlen(cs->chatmessage);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void BotEnterChat(int chatstate, int clientto, int sendto)
 {
 	bot_chatstate_t *cs;
@@ -2604,12 +2556,6 @@ void BotEnterChat(int chatstate, int clientto, int sendto)
 		strcpy(cs->chatmessage, "");
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void BotGetChatMessage(int chatstate, char *buf, int size)
 {
 	bot_chatstate_t *cs;
@@ -2623,12 +2569,6 @@ void BotGetChatMessage(int chatstate, char *buf, int size)
 	//clear the chat message from the state
 	strcpy(cs->chatmessage, "");
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void BotSetChatGender(int chatstate, int gender)
 {
 	bot_chatstate_t *cs;
