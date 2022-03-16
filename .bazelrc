@@ -1,0 +1,11 @@
+# Make Bazel print out all options from rc files.
+build --announce_rc
+
+# Use an environment with a static value for PATH and does not inherit LD_LIBRARY_PATH or TMPDIR
+# The goal is to enable cross-user caching when a shared cache is used
+build --incompatible_strict_action_env
+
+# Lock down some runtime versions
+build --host_force_python=PY3
+build --java_runtime_version=remotejdk_11
+build --tool_java_runtime_version=remotejdk_11
