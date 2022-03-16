@@ -96,12 +96,6 @@ void *BotImport_GetMemory(int size)
 {
 	return GetMemory(size);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void BotImport_Print(int type, char *fmt, ...)
 {
 	va_list argptr;
@@ -113,12 +107,6 @@ void BotImport_Print(int type, char *fmt, ...)
 	if (buf[0] != '\r') Log_Write(buf);
 	va_end(argptr);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void BotImport_BSPModelMinsMaxsOrigin(int modelnum, vec3_t angles, vec3_t outmins, vec3_t outmaxs, vec3_t origin)
 {
 	clipHandle_t h;
@@ -143,12 +131,6 @@ void BotImport_BSPModelMinsMaxsOrigin(int modelnum, vec3_t angles, vec3_t outmin
 	if (outmaxs) VectorCopy(maxs, outmaxs);
 	if (origin) VectorClear(origin);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Com_DPrintf(char *fmt, ...)
 {
 	va_list argptr;
@@ -160,30 +142,12 @@ void Com_DPrintf(char *fmt, ...)
 	if (buf[0] != '\r') Log_Write(buf);
 	va_end(argptr);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int COM_Compress( char *data_p ) {
 	return strlen(data_p);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Com_Memset (void* dest, const int val, const size_t count) {
 	memset(dest, val, count);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Com_Memcpy (void* dest, const void* src, const size_t count) {
 	memcpy(dest, src, count);
 }

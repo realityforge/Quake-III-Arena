@@ -98,12 +98,6 @@ void FreeFuzzySeperators_r(fuzzyseperator_t *fs)
 	if (fs->next) FreeFuzzySeperators_r(fs->next);
 	FreeMemory(fs);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void FreeWeightConfig2(weightconfig_t *config)
 {
 	int i;
@@ -115,23 +109,11 @@ void FreeWeightConfig2(weightconfig_t *config)
 	}
 	FreeMemory(config);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void FreeWeightConfig(weightconfig_t *config)
 {
 	if (!LibVarGetValue("bot_reloadcharacters")) return;
 	FreeWeightConfig2(config);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 fuzzyseperator_t *ReadFuzzySeperators_r(source_t *source)
 {
 	int newindent, index, def, founddefault;
@@ -683,12 +665,6 @@ void InterbreedWeightConfigs(weightconfig_t *config1, weightconfig_t *config2,
 									configout->weights[i].firstseperator);
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void BotShutdownWeights(void)
 {
 	int i;

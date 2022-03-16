@@ -32,12 +32,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define NODESTACKSIZE		1024
 
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void PrintContents(int contents);
 
 int	Q3_BrushContents(mapbrush_t *b)
@@ -122,12 +116,6 @@ int	Q3_BrushContents(mapbrush_t *b)
 	return contents;
 }
 #define BBOX_NORMAL_EPSILON			0.0001
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Q3_DPlanes2MapPlanes(void)
 {
 	int i;
@@ -137,12 +125,6 @@ void Q3_DPlanes2MapPlanes(void)
 		dplanes2mapplanes[i] = FindFloatPlane(q3_dplanes[i].normal, q3_dplanes[i].dist);
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Q3_BSPBrushToMapBrush(q3_dbrush_t *bspbrush, entity_t *mapent)
 {
 	mapbrush_t *b;
@@ -365,12 +347,6 @@ void Q3_BSPBrushToMapBrush(q3_dbrush_t *bspbrush, entity_t *mapent)
 	nummapbrushes++;
 	mapent->numbrushes++;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Q3_ParseBSPBrushes(entity_t *mapent)
 {
 	int i;
@@ -380,12 +356,6 @@ void Q3_ParseBSPBrushes(entity_t *mapent)
 		Q3_BSPBrushToMapBrush(&q3_dbrushes[q3_dmodels[mapent->modelnum].firstBrush + i], mapent);
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 qboolean Q3_ParseBSPEntity(int entnum)
 {
 	entity_t *mapent;
@@ -439,12 +409,6 @@ qboolean Q3_ParseBSPEntity(int entnum)
 	}
 	return true;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 #define	MAX_PATCH_VERTS		1024
 
 void AAS_CreateCurveBrushes(void)
@@ -598,12 +562,6 @@ void AAS_CreateCurveBrushes(void)
 	//qprintf("\r%6d curve brushes", nummapbrushsides);//++numcurvebrushes);
 	qprintf("\r%6d curve brushes\n", numcurvebrushes);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void AAS_ExpandMapBrush(mapbrush_t *brush, vec3_t mins, vec3_t maxs);
 
 void Q3_LoadMapFromBSP(struct quakefile_s *qf)
@@ -664,12 +622,6 @@ void Q3_LoadMapFromBSP(struct quakefile_s *qf)
 		Log_Print("\n");
 	}*/
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Q3_ResetMapLoading(void)
 {
 	//reset for map loading from bsp

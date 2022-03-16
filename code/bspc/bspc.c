@@ -78,12 +78,6 @@ qboolean	forcesidesvisible;	//force all brush sides to be visible when loaded fr
 qboolean	capsule_collision = 0;
 
 /*
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void ProcessWorldModel (void)
 {
 	entity_t	*e;
@@ -139,12 +133,6 @@ void ProcessWorldModel (void)
 
 	Tree_Free(tree);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void ProcessSubModel (void)
 {
 	entity_t	*e;
@@ -170,12 +158,6 @@ void ProcessSubModel (void)
 	WriteBSP (tree->headnode);
 	Tree_Free(tree);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void ProcessModels (void)
 {
 	BeginBSPFile();
@@ -196,12 +178,6 @@ void ProcessModels (void)
 	}
 	EndBSPFile();
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Win_Map2Bsp(char *bspfilename)
 {
 	double start, end;
@@ -238,12 +214,6 @@ void Win_Map2Bsp(char *bspfilename)
 	end = I_FloatTime();
 	Log_Print("%5.0f seconds elapsed\n", end-start);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Map2Bsp(char *mapfilename, char *outputfilename)
 {
 	double start, end;
@@ -312,12 +282,6 @@ void Map2Bsp(char *mapfilename, char *outputfilename)
 	Log_Print("%5.0f seconds elapsed\n", end-start);
 }
 */
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void AASOuputFile(quakefile_t *qf, char *outputpath, char *filename)
 {
 	char ext[MAX_PATH];
@@ -363,12 +327,6 @@ void AASOuputFile(quakefile_t *qf, char *outputpath, char *filename)
 		strcat(filename, "aas");
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void CreateAASFilesForAllBSPFiles(char *quakepath)
 {
 #if defined(WIN32)|defined(_WIN32)
@@ -457,12 +415,6 @@ void CreateAASFilesForAllBSPFiles(char *quakepath)
 	globfree(&globbuf);
 #endif
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 quakefile_t *GetArgumentFiles(int argc, char *argv[], int *i, char *ext)
 {
 	quakefile_t *qfiles, *lastqf, *qf;
@@ -487,12 +439,6 @@ quakefile_t *GetArgumentFiles(int argc, char *argv[], int *i, char *ext)
 	}
 	return qfiles;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 
 #define COMP_BSP2MAP		1
 #define COMP_BSP2AAS		2

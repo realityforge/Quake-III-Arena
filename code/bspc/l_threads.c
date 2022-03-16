@@ -170,12 +170,6 @@ void ThreadSetupSemaphore(void)
 {
 	semaphore = CreateSemaphore(NULL, 0, 99999999, "bspc");
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void ThreadShutdownSemaphore(void)
 {
 }
@@ -679,42 +673,18 @@ void ThreadShutdownLock(void)
 {
 	threaded = false;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void ThreadSetupSemaphore(void)
 {
 	sem_init(&semaphore, 0, 0);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void ThreadShutdownSemaphore(void)
 {
 	sem_destroy(&semaphore);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void ThreadSemaphoreWait(void)
 {
 	sem_wait(&semaphore);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void ThreadSemaphoreIncrease(int count)
 {
 	int i;
@@ -1100,12 +1070,6 @@ void ThreadShutdownLock(void)
 void ThreadSetupSemaphore(void)
 {
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void ThreadShutdownSemaphore(void)
 {
 }

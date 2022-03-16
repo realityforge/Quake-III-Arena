@@ -146,12 +146,6 @@ typedef struct th_s
 
 th_t thworld;
 
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_InitMaxTH(void)
 {
 	//get memory for the tetrahedron data
@@ -166,12 +160,6 @@ void TH_InitMaxTH(void)
 	memset(thworld.edgehash, 0, EDGEHASH_SIZE * sizeof(th_edge_t *));
 	memset(thworld.trianglehash, 0, TRIANGLEHASH_SIZE * sizeof(th_triangle_t *));
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_FreeMaxTH(void)
 {
 	if (thworld.vertexes) FreeMemory(thworld.vertexes);
@@ -190,22 +178,10 @@ void TH_FreeMaxTH(void)
 	thworld.tetrahedrons = NULL;
 	thworld.numtetrahedrons = 0;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 float TH_TriangleArea(th_triangle_t *tri)
 {
 	return 0;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 float TH_TetrahedronVolume(th_tetrahedron_t *tetrahedron)
 {
 	int edgenum, verts[3], i, j, v2;
@@ -237,12 +213,6 @@ float TH_TetrahedronVolume(th_tetrahedron_t *tetrahedron)
 	volume = TH_TriangleArea(tri) * d / 3;
 	return volume;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_PlaneSignBits(vec3_t normal)
 {
 	int i, signbits;
@@ -254,12 +224,6 @@ int TH_PlaneSignBits(vec3_t normal)
 	}
 	return signbits;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_PlaneTypeForNormal(vec3_t normal)
 {
 	vec_t	ax, ay, az;
@@ -282,12 +246,6 @@ int TH_PlaneTypeForNormal(vec3_t normal)
 		return PLANE_ANYY;
 	return PLANE_ANYZ;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 qboolean TH_PlaneEqual(th_plane_t *p, vec3_t normal, vec_t dist)
 {
 	if (
@@ -298,12 +256,6 @@ qboolean TH_PlaneEqual(th_plane_t *p, vec3_t normal, vec_t dist)
 		return true;
 	return false;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_AddPlaneToHash(th_plane_t *p)
 {
 	int hash;
@@ -314,12 +266,6 @@ void TH_AddPlaneToHash(th_plane_t *p)
 	p->hashnext = thworld.planehash[hash];
 	thworld.planehash[hash] = p;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_CreateFloatPlane(vec3_t normal, vec_t dist)
 {
 	th_plane_t *p, temp;
@@ -362,12 +308,6 @@ int TH_CreateFloatPlane(vec3_t normal, vec_t dist)
 	TH_AddPlaneToHash(p+1);
 	return thworld.numplanes - 2;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_SnapVector(vec3_t normal)
 {
 	int		i;
@@ -388,12 +328,6 @@ void TH_SnapVector(vec3_t normal)
 		}
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_SnapPlane(vec3_t normal, vec_t *dist)
 {
 	TH_SnapVector(normal);
@@ -401,12 +335,6 @@ void TH_SnapPlane(vec3_t normal, vec_t *dist)
 	if (fabs(*dist-Q_rint(*dist)) < DIST_EPSILON)
 		*dist = Q_rint(*dist);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_FindFloatPlane(vec3_t normal, vec_t dist)
 {
 	int i;
@@ -431,12 +359,6 @@ int TH_FindFloatPlane(vec3_t normal, vec_t dist)
 	}
 	return TH_CreateFloatPlane(normal, dist);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_PlaneFromPoints(int v1, int v2, int v3)
 {
 	vec3_t t1, t2, normal;
@@ -456,12 +378,6 @@ int TH_PlaneFromPoints(int v1, int v2, int v3)
 
 	return TH_FindFloatPlane(normal, dist);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_AddEdgeUser(int edgenum)
 {
 	th_edge_t *edge;
@@ -473,12 +389,6 @@ void TH_AddEdgeUser(int edgenum)
 	thworld.vertexes[edge->v[0]].usercount++;
 	thworld.vertexes[edge->v[1]].usercount++;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_RemoveEdgeUser(int edgenum)
 {
 	th_edge_t *edge;
@@ -490,12 +400,6 @@ void TH_RemoveEdgeUser(int edgenum)
 	thworld.vertexes[edge->v[0]].usercount--;
 	thworld.vertexes[edge->v[1]].usercount--;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_FreeTriangleEdges(th_triangle_t *tri)
 {
 	int i;
@@ -505,12 +409,6 @@ void TH_FreeTriangleEdges(th_triangle_t *tri)
 		TH_RemoveEdgeUser(abs(tri->edges[i]));
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 unsigned TH_HashVec(vec3_t vec)
 {
 	int x, y;
@@ -523,12 +421,6 @@ unsigned TH_HashVec(vec3_t vec)
 	
 	return y*VERTEXHASH_SIZE + x;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_FindVertex(vec3_t v)
 {
 	int i, h;
@@ -556,12 +448,6 @@ int TH_FindVertex(vec3_t v)
 	}
 	return 0;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_AddVertexToHash(th_vertex_t *vertex)
 {
 	int hashvalue;
@@ -570,12 +456,6 @@ void TH_AddVertexToHash(th_vertex_t *vertex)
 	vertex->hashnext = thworld.vertexhash[hashvalue];
 	thworld.vertexhash[hashvalue] = vertex;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_CreateVertex(vec3_t v)
 {
 	if (thworld.numvertexes == 0) thworld.numvertexes = 1;
@@ -587,12 +467,6 @@ int TH_CreateVertex(vec3_t v)
 	thworld.numvertexes++;
 	return thworld.numvertexes-1;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_FindOrCreateVertex(vec3_t v)
 {
 	int vertexnum;
@@ -601,12 +475,6 @@ int TH_FindOrCreateVertex(vec3_t v)
 	if (!vertexnum) vertexnum = TH_CreateVertex(v);
 	return vertexnum;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_FindEdge(int v1, int v2)
 {
 	int hashvalue;
@@ -621,12 +489,6 @@ int TH_FindEdge(int v1, int v2)
 	}
 	return 0;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_AddEdgeToHash(th_edge_t *edge)
 {
 	int hashvalue;
@@ -635,12 +497,6 @@ void TH_AddEdgeToHash(th_edge_t *edge)
 	edge->hashnext = thworld.edgehash[hashvalue];
 	thworld.edgehash[hashvalue] = edge;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_CreateEdge(int v1, int v2)
 {
 	th_edge_t *edge;
@@ -654,12 +510,6 @@ int TH_CreateEdge(int v1, int v2)
 	TH_AddEdgeToHash(edge);
 	return thworld.numedges-1;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_FindOrCreateEdge(int v1, int v2)
 {
 	int edgenum;
@@ -668,12 +518,6 @@ int TH_FindOrCreateEdge(int v1, int v2)
 	if (!edgenum) edgenum = TH_CreateEdge(v1, v2);
 	return edgenum;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_FindTriangle(int verts[3])
 {
 	int i, hashvalue, edges[3];
@@ -697,12 +541,6 @@ int TH_FindTriangle(int verts[3])
 	}
 	return 0;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_AddTriangleToHash(th_triangle_t *tri)
 {
 	int hashvalue;
@@ -711,12 +549,6 @@ void TH_AddTriangleToHash(th_triangle_t *tri)
 	tri->hashnext = thworld.trianglehash[hashvalue];
 	thworld.trianglehash[hashvalue] = tri;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_CreateTrianglePlanes(int verts[3], th_plane_t *triplane, th_plane_t *planes)
 {
 	int i;
@@ -730,12 +562,6 @@ void TH_CreateTrianglePlanes(int verts[3], th_plane_t *triplane, th_plane_t *pla
 		planes[i].dist = DotProduct(thworld.vertexes[verts[i]].v, planes[i].normal);
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_CreateTriangle(int verts[3])
 {
 	th_triangle_t *tri;
@@ -765,12 +591,6 @@ int TH_CreateTriangle(int verts[3])
 	}
 	return thworld.numtriangles-1;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_CreateTetrahedron(int triangles[4])
 {
 	th_tetrahedron_t *tetrahedron;
@@ -795,12 +615,6 @@ int TH_CreateTetrahedron(int triangles[4])
 	tetrahedron->volume = 0;
 	return thworld.numtetrahedrons-1;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_IntersectTrianglePlanes(int v1, int v2, th_plane_t *triplane, th_plane_t *planes)
 {
 	float *p1, *p2, front, back, frac, d;
@@ -831,12 +645,6 @@ int TH_IntersectTrianglePlanes(int v1, int v2, th_plane_t *triplane, th_plane_t 
 	}
 	return true;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_OutsideBoundingBox(int v1, int v2, vec3_t mins, vec3_t maxs)
 {
 	float *p1, *p2;
@@ -852,12 +660,6 @@ int TH_OutsideBoundingBox(int v1, int v2, vec3_t mins, vec3_t maxs)
 	}
 	return false;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_TryEdge(int v1, int v2)
 {
 	int i, j, v;
@@ -890,12 +692,6 @@ int TH_TryEdge(int v1, int v2)
 	}
 	return true;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_TryTriangle(int verts[3])
 {
 	th_plane_t planes[3], triplane;
@@ -931,12 +727,6 @@ int TH_TryTriangle(int verts[3])
 	}
 	return true;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_AddTriangleToList(th_triangle_t **trianglelist, th_triangle_t *tri)
 {
 	tri->prev = NULL;
@@ -944,24 +734,12 @@ void TH_AddTriangleToList(th_triangle_t **trianglelist, th_triangle_t *tri)
 	if (*trianglelist) (*trianglelist)->prev = tri;
 	*trianglelist = tri;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_RemoveTriangleFromList(th_triangle_t **trianglelist, th_triangle_t *tri)
 {
 	if (tri->next) tri->next->prev = tri->prev;
 	if (tri->prev) tri->prev->next = tri->next;
 	else *trianglelist = tri->next;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_FindTetrahedron1(th_triangle_t *tri, int *triangles)
 {
 	int i, j, edgenum, side, v1, v2, v3, v4;
@@ -1025,12 +803,6 @@ int TH_FindTetrahedron1(th_triangle_t *tri, int *triangles)
 	}
 	return false;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_FindTetrahedron2(th_triangle_t *tri, int *triangles)
 {
 	int i, edgenum, v1, verts[3], triverts[3];
@@ -1092,12 +864,6 @@ int TH_FindTetrahedron2(th_triangle_t *tri, int *triangles)
 	}
 	return false;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_TetrahedralDecomposition(th_triangle_t *triangles)
 {
 	int i, thtriangles[4], numtriangles;
@@ -1190,12 +956,6 @@ void TH_TetrahedralDecomposition(th_triangle_t *triangles)
 	Log_Print("\r%6d triangles with front only\n", numtriangles);
 	Log_Print("\r%6d tetrahedrons\n", thworld.numtetrahedrons-1);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_AASFaceVertex(aas_face_t *face, int index, vec3_t vertex)
 {
 	int edgenum, side;
@@ -1204,12 +964,6 @@ void TH_AASFaceVertex(aas_face_t *face, int index, vec3_t vertex)
 	side = edgenum < 0;
 	VectorCopy(aasworld.vertexes[aasworld.edges[abs(edgenum)].v[side]], vertex);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TH_Colinear(float *v0, float *v1, float *v2)
 {
 	vec3_t t1, t2, vcross;
@@ -1227,12 +981,6 @@ int TH_Colinear(float *v0, float *v1, float *v2)
 	}
 	return false;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_FaceCenter(aas_face_t *face, vec3_t center)
 {
 	int i, edgenum, side;
@@ -1248,12 +996,6 @@ void TH_FaceCenter(aas_face_t *face, vec3_t center)
 	}
 	VectorScale(center, 1.0 / face->numedges, center);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 th_triangle_t *TH_CreateAASFaceTriangles(aas_face_t *face)
 {
 	int i, first, verts[3], trinum;
@@ -1313,12 +1055,6 @@ th_triangle_t *TH_CreateAASFaceTriangles(aas_face_t *face)
 	}
 	return triangles;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 th_triangle_t *TH_AASToTriangleMesh(void)
 {
 	int i, j, facenum, otherareanum;
@@ -1354,12 +1090,6 @@ th_triangle_t *TH_AASToTriangleMesh(void)
 	}
 	return triangles;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void TH_AASToTetrahedrons(char *filename)
 {
 	th_triangle_t *triangles, *tri, *lasttri;

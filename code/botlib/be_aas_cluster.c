@@ -249,12 +249,6 @@ int AAS_FloodClusterAreasUsingReachabilities(int clusternum)
 	}
 	return qtrue;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void AAS_NumberClusterPortals(int clusternum)
 {
 	int i, portalnum;
@@ -276,12 +270,6 @@ void AAS_NumberClusterPortals(int clusternum)
 		}
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void AAS_NumberClusterAreas(int clusternum)
 {
 	int i, portalnum;
@@ -350,12 +338,6 @@ void AAS_NumberClusterAreas(int clusternum)
 		}
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int AAS_FindClusters(void)
 {
 	int i;
@@ -886,12 +868,6 @@ void AAS_CountForcedClusterPortals(void)
 	}
 	botimport.Print(PRT_MESSAGE, "%6d forced portal areas\n", num);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void AAS_CreateViewPortals(void)
 {
 	int i;

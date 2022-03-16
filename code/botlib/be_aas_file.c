@@ -306,12 +306,6 @@ char *AAS_LoadAASLump(fileHandle_t fp, int offset, int length, int *lastoffset, 
 	}
 	return buf;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void AAS_DData(unsigned char *data, int size)
 {
 	int i;

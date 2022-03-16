@@ -140,12 +140,6 @@ void DefaultCfg(void)
 	cfg.phys_gravitydirection[2]	= -1;
 	cfg.phys_maxsteepness			= 0.7;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 char	* QDECL va( char *format, ... )
 {
 	va_list		argptr;
@@ -162,12 +156,6 @@ char	* QDECL va( char *format, ... )
 
 	return buf;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void SetCfgLibVars(void)
 {
 	int i;
@@ -185,12 +173,6 @@ void SetCfgLibVars(void)
 		}
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int LoadCfgFile(char *filename)
 {
 	source_t *source;

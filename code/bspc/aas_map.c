@@ -48,12 +48,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define BBOX_NORMAL_EPSILON			0.0001
 
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 vec_t BoxOriginDistanceFromPlane(vec3_t normal, vec3_t mins, vec3_t maxs, int side)
 {
 	vec3_t v1, v2;
@@ -81,12 +75,6 @@ vec_t BoxOriginDistanceFromPlane(vec3_t normal, vec3_t mins, vec3_t maxs, int si
 	VectorInverse(v2);
 	return DotProduct(v1, v2);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 vec_t CapsuleOriginDistanceFromPlane(vec3_t normal, vec3_t mins, vec3_t maxs)
 {
 	float offset_up, offset_down, width, radius;

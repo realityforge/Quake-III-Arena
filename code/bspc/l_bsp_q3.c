@@ -95,12 +95,6 @@ char			q3_dbrushsidetextured[Q3_MAX_MAP_BRUSHSIDES];
 
 extern qboolean forcesidesvisible;
 
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Q3_FreeMaxBSP(void)
 {
 	if (q3_dmodels) FreeMemory(q3_dmodels);
@@ -157,12 +151,6 @@ void Q3_FreeMaxBSP(void)
 }
 
 
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Q3_PlaneFromPoints(vec3_t p0, vec3_t p1, vec3_t p2, vec3_t normal, float *dist)
 {
 	vec3_t t1, t2;

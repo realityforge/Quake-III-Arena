@@ -113,12 +113,6 @@ void PrintContents(int contents)
 
 //#endif DEBUG
 
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void ResetBrushBSP(void)
 {
 	c_nodes = 0;
@@ -131,12 +125,6 @@ void ResetBrushBSP(void)
 	c_nodememory = 0;
 	c_peak_totalbspmemory = 0;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void FindBrushInTree (node_t *node, int brushnum)
 {
 	bspbrush_t	*b;
@@ -151,12 +139,6 @@ void FindBrushInTree (node_t *node, int brushnum)
 	FindBrushInTree(node->children[0], brushnum);
 	FindBrushInTree(node->children[1], brushnum);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void DrawBrushList (bspbrush_t *brush, node_t *node)
 {
 	int		i;
@@ -180,12 +162,6 @@ void DrawBrushList (bspbrush_t *brush, node_t *node)
 	}
 	GLS_EndScene ();
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void WriteBrushList (char *name, bspbrush_t *brush, qboolean onlyvis)
 {
 	int		i;
@@ -210,12 +186,6 @@ void WriteBrushList (char *name, bspbrush_t *brush, qboolean onlyvis)
 
 	fclose (f);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void PrintBrush (bspbrush_t *brush)
 {
 	int		i;
@@ -249,12 +219,6 @@ void BoundBrush (bspbrush_t *brush)
 			AddPointToBounds (w->p[j], brush->mins, brush->maxs);
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void CreateBrushWindings (bspbrush_t *brush)
 {
 	int			i, j;
@@ -314,12 +278,6 @@ bspbrush_t	*BrushFromBounds (vec3_t mins, vec3_t maxs)
 
 	return b;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int BrushOutOfBounds(bspbrush_t *brush, vec3_t mins, vec3_t maxs, float epsilon)
 {
 	int i, j, n;
@@ -340,12 +298,6 @@ int BrushOutOfBounds(bspbrush_t *brush, vec3_t mins, vec3_t maxs, float epsilon)
 	}
 	return false;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 vec_t BrushVolume (bspbrush_t *brush)
 {
 	int i;
@@ -381,12 +333,6 @@ vec_t BrushVolume (bspbrush_t *brush)
 	volume /= 3;
 	return volume;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int CountBrushList (bspbrush_t *brushes)
 {
 	int c;
@@ -395,12 +341,6 @@ int CountBrushList (bspbrush_t *brushes)
 	for ( ; brushes; brushes = brushes->next) c++;
 	return c;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 node_t *AllocNode (void)
 {
 	node_t	*node;
@@ -413,12 +353,6 @@ node_t *AllocNode (void)
 	}
 	return node;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 bspbrush_t *AllocBrush (int numsides)
 {
 	bspbrush_t	*bb;
@@ -436,12 +370,6 @@ bspbrush_t *AllocBrush (int numsides)
 	}
 	return bb;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void FreeBrush (bspbrush_t *brushes)
 {
 	int			i;
@@ -457,12 +385,6 @@ void FreeBrush (bspbrush_t *brushes)
 	}
 	FreeMemory(brushes);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void FreeBrushList (bspbrush_t *brushes)
 {
 	bspbrush_t	*next;
@@ -500,12 +422,6 @@ bspbrush_t *CopyBrush (bspbrush_t *brush)
 
 	return newbrush;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 node_t *PointInLeaf (node_t *node, vec3_t point)
 {
 	vec_t		d;
@@ -640,12 +556,6 @@ int BoxOnPlaneSide (vec3_t emins, vec3_t emaxs, plane_t *p)
 	return sides;
 }
 #endif
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int QuickTestBrushToPlanenum (bspbrush_t *brush, int planenum, int *numsplits)
 {
 	int i, num;
@@ -692,12 +602,6 @@ int QuickTestBrushToPlanenum (bspbrush_t *brush, int planenum, int *numsplits)
 
 	return s;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TestBrushToPlanenum (bspbrush_t *brush, int planenum,
 						 int *numsplits, qboolean *hintsplit, int *epsilonbrush)
 {
@@ -918,12 +822,6 @@ void LeafNode(node_t *node, bspbrush_t *brushes)
 
 	node->brushlist = brushes;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void CheckPlaneAgainstParents (int pnum, node_t *node)
 {
 	node_t	*p;
@@ -933,12 +831,6 @@ void CheckPlaneAgainstParents (int pnum, node_t *node)
 		if (p->planenum == pnum) Error("Tried parent");
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 qboolean CheckPlaneAgainstVolume (int pnum, node_t *node)
 {
 	bspbrush_t	*front, *back;
@@ -1099,12 +991,6 @@ side_t *SelectSplitSide (bspbrush_t *brushes, node_t *node)
 
 	return bestside;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int BrushMostlyOnSide (bspbrush_t *brush, plane_t *plane)
 {
 	int			i, j;
@@ -1335,13 +1221,7 @@ void SplitBrush (bspbrush_t *brush, int planenum,
 	*front = b[0];
 	*back = b[1];
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
-void SplitBrushList (bspbrush_t *brushes, 
+void SplitBrushList (bspbrush_t *brushes,
 	node_t *node, bspbrush_t **front, bspbrush_t **back)
 {
 	bspbrush_t	*brush, *newbrush, *newbrush2;
@@ -1399,12 +1279,6 @@ void SplitBrushList (bspbrush_t *brushes,
 		}
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void CheckBrushLists(bspbrush_t *brushlist1, bspbrush_t *brushlist2)
 {
 	bspbrush_t *brush1, *brush2;
@@ -1417,12 +1291,6 @@ void CheckBrushLists(bspbrush_t *brushlist1, bspbrush_t *brushlist2)
 		}
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int numrecurse = 0;
 
 node_t *BuildTree_r (node_t *node, bspbrush_t *brushes)
@@ -1508,12 +1376,6 @@ node_t *BuildTree_r (node_t *node, bspbrush_t *brushes)
 
 	return node;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 node_t *firstnode;		//first node in the list
 node_t *lastnode;			//last node in the list
 int nodelistsize;			//number of nodes in the list

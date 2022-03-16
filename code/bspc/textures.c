@@ -26,12 +26,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 int nummiptex;
 textureref_t textureref[MAX_MAP_TEXTURES];
 
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int FindMiptex (char *name)
 {
 	int i;
@@ -66,12 +60,6 @@ int FindMiptex (char *name)
 
 	return i;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 vec3_t	baseaxis[18] =
 {
 {0,0,1}, {1,0,0}, {0,-1,0},		// floor
@@ -104,12 +92,6 @@ void TextureAxisFromPlane(plane_t *pln, vec3_t xv, vec3_t yv)
 	VectorCopy (baseaxis[bestaxis*3+1], xv);
 	VectorCopy (baseaxis[bestaxis*3+2], yv);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int TexinfoForBrushTexture(plane_t *plane, brush_texture_t *bt, vec3_t origin)
 {
 	vec3_t	vecs[2];

@@ -56,12 +56,6 @@ qfile_exttyp_t quakefiletypes[] =
 	{NULL, 0}
 };
 
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int QuakeFileExtensionType(char *extension)
 {
 	int i;
@@ -75,12 +69,6 @@ int QuakeFileExtensionType(char *extension)
 	}
 	return QFILETYPE_UNKNOWN;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 char *QuakeFileTypeExtension(int type)
 {
 	int i;
@@ -94,12 +82,6 @@ char *QuakeFileTypeExtension(int type)
 	}
 	return QFILEEXT_UNKNOWN;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int QuakeFileType(char *filename)
 {
 	char ext[_MAX_PATH] = ".";
@@ -129,12 +111,6 @@ char *StringContains(char *str1, char *str2, int casesensitive)
 	}
 	return NULL;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int FileFilter(char *filter, char *filename, int casesensitive)
 {
 	char buf[1024];
@@ -227,12 +203,6 @@ int FileFilter(char *filter, char *filename, int casesensitive)
 	}
 	return true;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 quakefile_t *FindQuakeFilesInZip(char *zipfile, char *filter)
 {
 	unzFile			uf;
@@ -285,12 +255,6 @@ quakefile_t *FindQuakeFilesInZip(char *zipfile, char *filter)
 
 	return qfiles;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 quakefile_t *FindQuakeFilesInPak(char *pakfile, char *filter)
 {
 	FILE *fp;
@@ -393,12 +357,6 @@ quakefile_t *FindQuakeFilesInPak(char *pakfile, char *filter)
 	free(packfiles);
 	return qfiles;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 quakefile_t *FindQuakeFilesWithPakFilter(char *pakfilter, char *filter)
 {
 #if defined(WIN32)|defined(_WIN32)
@@ -524,12 +482,6 @@ quakefile_t *FindQuakeFilesWithPakFilter(char *pakfilter, char *filter)
 	}
 	return qfiles;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 quakefile_t *FindQuakeFiles(char *filter)
 {
 	char *str;
@@ -557,12 +509,6 @@ quakefile_t *FindQuakeFiles(char *filter)
 	}
 	return FindQuakeFilesWithPakFilter(NULL, newfilter);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int LoadQuakeFile(quakefile_t *qf, void **bufferptr)
 {
 	FILE *fp;
@@ -606,12 +552,6 @@ int LoadQuakeFile(quakefile_t *qf, void **bufferptr)
 		return length;
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 int ReadQuakeFile(quakefile_t *qf, void *buffer, int offset, int length)
 {
 	FILE *fp;

@@ -77,12 +77,6 @@ void Log_Shutdown(void)
 {
 	if (logfile.fp) Log_Close();
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Log_UnifyEndOfLine(char *buf)
 {
 	int i;
@@ -100,12 +94,6 @@ void Log_UnifyEndOfLine(char *buf)
 		}
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Log_Print(char *fmt, ...)
 {
 	va_list ap;

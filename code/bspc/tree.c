@@ -28,12 +28,6 @@ int freedtreemem = 0;
 
 void RemovePortalFromNode (portal_t *portal, node_t *l);
 
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 node_t *NodeForPoint (node_t *node, vec3_t origin)
 {
 	plane_t	*plane;
@@ -50,12 +44,6 @@ node_t *NodeForPoint (node_t *node, vec3_t origin)
 	}
 	return node;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Tree_FreePortals_r (node_t *node)
 {
 	portal_t	*p, *nextp;
@@ -83,12 +71,6 @@ void Tree_FreePortals_r (node_t *node)
 	}
 	node->portals = NULL;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Tree_Free_r (node_t *node)
 {
 //	face_t *f, *nextf;
@@ -141,12 +123,6 @@ void Tree_Free_r (node_t *node)
 #endif //ME
 	FreeMemory(node);
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Tree_Free(tree_t *tree)
 {
 	//if no tree just return
@@ -166,12 +142,6 @@ void Tree_Free(tree_t *tree)
 	Log_Print(" of tree memory\n");
 #endif //ME
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 tree_t *Tree_Alloc(void)
 {
 	tree_t	*tree;
@@ -182,12 +152,6 @@ tree_t *Tree_Alloc(void)
 
 	return tree;
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Tree_Print_r (node_t *node, int depth)
 {
 	int		i;
@@ -268,12 +232,6 @@ void Tree_PruneNodes_r (node_t *node)
 		c_pruned += 2;
 	}
 }
-//===========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//===========================================================================
 void Tree_PruneNodes(node_t *node)
 {
 	Log_Print("------- Prune Nodes --------\n");
