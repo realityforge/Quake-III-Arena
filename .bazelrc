@@ -40,3 +40,17 @@ build:macos --apple_platform_type=macos
 
 # Settings for MacOS on ARM CPUs.
 build:macos_arm64 --cpu=darwin_arm64
+
+# When printing the location part of messages, attempt to use a path relative to the workspace directory
+common:ci --attempt_to_print_relative_paths
+
+# If a command fails, print out the full command line.
+build:ci --verbose_failures
+# prints extra debugging information on execution
+build:ci --sandbox_debug
+build:ci --spawn_strategy=standalone
+build:ci --genrule_strategy=standalone
+
+test:ci --test_strategy=standalone
+# Print test logs for failed tests
+test:ci --test_output=errors
