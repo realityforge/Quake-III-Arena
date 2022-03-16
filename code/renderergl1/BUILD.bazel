@@ -3,7 +3,6 @@ cc_library(
     hdrs = [
         "tr_local.h",
     ],
-    defines = ["USE_LOCAL_HEADERS"],
     includes = ["."],
     deps = [
         "//code/qcommon",
@@ -38,7 +37,6 @@ cc_library(
         "tr_surface.c",
         "tr_world.c",
     ],
-    defines = ["USE_LOCAL_HEADERS"],
     includes = ["."],
     deps = [
         ":local",
@@ -53,7 +51,6 @@ cc_library(
     srcs = [
         "tr_subs.c",
     ],
-    defines = ["USE_LOCAL_HEADERS"],
     includes = ["."],
     deps = [
         ":local",

@@ -14,7 +14,6 @@ _SERVER_SRC = [
 cc_library(
     name = "server",
     srcs = _SERVER_SRC,
-    #    defines = ["USE_LOCAL_HEADERS"],
     deps = [
         "//code/botlib:api",
         "//code/game:bg_api",

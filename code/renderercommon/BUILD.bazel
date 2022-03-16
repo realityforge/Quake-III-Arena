@@ -28,7 +28,6 @@ cc_library(
         "tr_image_tga.c",
         "tr_noise.c",
     ],
-    defines = ["USE_LOCAL_HEADERS"],
     visibility = [
         "//code/renderergl1:__pkg__",
         "//code/renderergl2:__pkg__",

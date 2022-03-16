@@ -3,7 +3,6 @@ cc_library(
     srcs = [
         "sdl_snd.c",
     ],
-    defines = ["USE_LOCAL_HEADERS"],
     deps = [
         "//code/client:api",
         "//code/client:snd_api",
@@ -18,7 +17,6 @@ cc_library(
     srcs = [
         "sdl_input.c",
     ],
-    defines = ["USE_LOCAL_HEADERS"],
     deps = [
         "//code/client:api",
         "//code/client:snd_api",
@@ -35,7 +33,6 @@ cc_library(
         "sdl_glimp.c",
         "sdl_icon.h",
     ],
-    defines = ["USE_LOCAL_HEADERS"],
     deps = [
         "//code/qcommon",
         "//code/renderercommon",

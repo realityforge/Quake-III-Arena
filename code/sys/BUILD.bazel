@@ -3,7 +3,6 @@ cc_library(
     srcs = [
         "sys_local.h",
     ],
-    defines = ["USE_LOCAL_HEADERS"],
     visibility = [
         "//code/client:__pkg__",
         "//code/sdl:__pkg__",
@@ -20,7 +19,6 @@ cc_library(
         "sys_local.h",
     ],
     defines = [
-        "USE_LOCAL_HEADERS",
         "DEDICATED",
     ],
     visibility = [
@@ -40,7 +38,6 @@ cc_library(
     hdrs = [
         "sys_loadlib.h",
     ],
-    defines = ["USE_LOCAL_HEADERS"],
     visibility = ["//code:__subpackages__"],
     deps = [
         ":sys_local",
@@ -60,7 +57,6 @@ cc_library(
     ],
     defines = [
         "DEDICATED",
-        "USE_LOCAL_HEADERS",
     ],
     deps = [
         ":sys_local-dedicated",

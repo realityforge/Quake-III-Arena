@@ -100,7 +100,6 @@ cc_library(
     hdrs = [
         "unzip.h",
     ],
-    defines = ["USE_LOCAL_HEADERS"],
     deps = [
         ":q_shared",
         ":qcommon",
