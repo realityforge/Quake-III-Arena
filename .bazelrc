@@ -49,6 +49,11 @@ build:dbg --compilation_mode=dbg
 # Define DEBUG which turns on debugging in some parts of the library
 build:dbg --copt -DDEBUG
 
+# Tell the compiler to perform more aggressive floating-point optimizations that are not fully compliant
+# with the ISO C or C++ standard. Numerically robust floating-point programs are expected to behave correctly.
+build:linux --copt -ffast-math
+build:macos --copt -ffast-math
+
 # Sets the default Apple platform to macOS.
 build:macos --apple_platform_type=macos
 
