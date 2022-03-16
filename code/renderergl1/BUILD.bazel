@@ -64,3 +64,13 @@ cc_library(
         "//code/renderercommon",
     ],
 )
+
+# See comment at //code/renderergl2:librenderergl2
+cc_binary(
+    name = "librenderergl1",
+    linkshared = 1,
+    deps = [
+        ":renderergl1",
+        ":tr_subs",
+    ],
+)
