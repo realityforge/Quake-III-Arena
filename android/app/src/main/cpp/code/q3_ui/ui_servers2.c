@@ -160,7 +160,7 @@ static char* netnames[] = {
 	NULL
 };
 
-static char quake3worldMessage[] = "Visit www.quake3world.com - News, Community, Events, Files";
+static char quake3questMessage[] = "Visit quake3.quakevr.com - For the Team Beef Discord invite for news/events/chat";
 
 const char* punkbuster_items[] = {
 	"Disabled",
@@ -438,7 +438,7 @@ static void ArenaServers_UpdateMenu( void ) {
 
 			// update status bar
 			if( g_servertype >= UIAS_GLOBAL0 && g_servertype <= UIAS_GLOBAL5 ) {
-				g_arenaservers.statusbar.string = quake3worldMessage;
+				g_arenaservers.statusbar.string = quake3questMessage;
 			}
 			else {
 				g_arenaservers.statusbar.string = "";
@@ -472,7 +472,7 @@ static void ArenaServers_UpdateMenu( void ) {
 
 			// update status bar
 			if( g_servertype >= UIAS_GLOBAL0 && g_servertype <= UIAS_GLOBAL5 ) {
-				g_arenaservers.statusbar.string = quake3worldMessage;
+				g_arenaservers.statusbar.string = quake3questMessage;
 			}
 			else {
 				g_arenaservers.statusbar.string = "";
