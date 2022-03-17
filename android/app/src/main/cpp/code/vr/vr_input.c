@@ -67,6 +67,7 @@ float degrees(float rad) {
 #endif
 
 extern cvar_t *vr_righthanded;
+extern cvar_t *vr_switchThumbsticks;
 extern cvar_t *vr_snapturn;
 extern cvar_t *vr_extralatencymode;
 extern cvar_t *vr_directionMode;
@@ -505,7 +506,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 		Com_QueueEvent(in_vrEventTime, SE_MOUSE, x, y, 0, NULL);
 	} else
 	{
-		if (isRightController == qfalse) {
+		if (isRightController == (vr_switchThumbsticks->integer != 0)) {
 			vec3_t positional;
 			VectorClear(positional);
 

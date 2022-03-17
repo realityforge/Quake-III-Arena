@@ -1090,7 +1090,7 @@ void GraphicsOptions_MenuInit( void )
 	static const char *s_refreshrate[] =
 	{
 		"60",
-		"72 (Default)",
+		"72 (Recommended)",
 		"80",
 		"90",
 		NULL
