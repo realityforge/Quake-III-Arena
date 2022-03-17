@@ -29,6 +29,10 @@
 
 #include <string.h>
 #include <stdint.h>
+#ifdef WIN32
+#include <windows.h>
+#define uint32_t UINT32
+#endif
 
 typedef unsigned char 		byte;
 
