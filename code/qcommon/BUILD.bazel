@@ -83,7 +83,6 @@ cc_library(
     srcs = [
         "huffman.c",
         "md4.c",
-        "md5.c",
         "msg.c",
         "net_chan.c",
         "net_ip.c",
@@ -100,7 +99,6 @@ cc_library(
     srcs = [
         "huffman.c",
         "md4.c",
-        "md5.c",
         "msg.c",
         "net_chan.c",
         "net_ip.c",

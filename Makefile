@@ -1332,7 +1332,6 @@ Q3OBJ = \
   $(B)/client/cvar.o \
   $(B)/client/files.o \
   $(B)/client/md4.o \
-  $(B)/client/md5.o \
   $(B)/client/msg.o \
   $(B)/client/net_chan.o \
   $(B)/client/net_ip.o \

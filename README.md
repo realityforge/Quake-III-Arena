@@ -26,7 +26,6 @@ Some of the major features currently implemented are:
   * Optional Ogg Vorbis support
   * Much improved QVM tools
   * Support for various esoteric operating systems
-  * cl_guid support
   * HTTP/FTP download redirection (using cURL)
   * Multiuser support on Windows systems (user specific game data
     is stored in "%APPDATA%\Quake3")
@@ -163,7 +162,6 @@ The defaults for these variables differ depending on the target platform.
   cl_autoRecordDemo                 - record a new demo on each map change
   cl_aviFrameRate                   - the framerate to use when capturing video
   cl_aviMotionJpeg                  - use the mjpeg codec when capturing video
-  cl_guidServerUniq                 - makes cl_guid unique for each server
   cl_cURLLib                        - filename of cURL library to load
   cl_consoleKeys                    - space delimited list of key names or
                                       characters that toggle the console

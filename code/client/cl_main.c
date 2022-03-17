@@ -116,8 +116,6 @@ cvar_t	*cl_serverStatusResendTime;
 
 cvar_t	*cl_lanForcePackets;
 
-cvar_t	*cl_guidServerUniq;
-
 cvar_t	*cl_consoleKeys;
 
 cvar_t	*cl_rate;
@@ -1316,28 +1314,6 @@ void CL_ClearState (void) {
 	Com_Memset( &cl, 0, sizeof( cl ) );
 }
 
-/*
-====================
-CL_UpdateGUID
-
-update cl_guid using QKEY_FILE and optional prefix
-====================
-*/
-static void CL_UpdateGUID( const char *prefix, int prefix_len )
-{
-	fileHandle_t f;
-	int len;
-
-	len = FS_SV_FOpenFileRead( QKEY_FILE, &f );
-	FS_FCloseFile( f );
-
-	if( len != QKEY_SIZE ) 
-		Cvar_Set( "cl_guid", "" );
-	else
-		Cvar_Set( "cl_guid", Com_MD5File( QKEY_FILE, QKEY_SIZE,
-			prefix, prefix_len ) );
-}
-
 static void CL_OldGame(void)
 {
 	if(cl_oldGameSet)
@@ -1455,8 +1431,6 @@ void CL_Disconnect( qboolean showMainMenu ) {
 		SCR_UpdateScreen( );
 		CL_CloseAVI( );
 	}
-
-	CL_UpdateGUID( NULL, 0 );
 
 	if(!noGameRestart)
 		CL_OldGame();
@@ -1652,11 +1626,6 @@ void CL_Connect_f( void ) {
 	serverString = NET_AdrToStringwPort(clc.serverAddress);
 
 	Com_Printf( "%s resolved to %s\n", clc.servername, serverString);
-
-	if( cl_guidServerUniq->integer )
-		CL_UpdateGUID( serverString, strlen( serverString ) );
-	else
-		CL_UpdateGUID( NULL, 0 );
 
 	// if we aren't playing on a lan, we need to authenticate
 	// with the cd key
@@ -3279,47 +3248,6 @@ void CL_StopVideo_f( void )
   CL_CloseAVI( );
 }
 
-/*
-===============
-CL_GenerateQKey
-
-test to see if a valid QKEY_FILE exists.  If one does not, try to generate
-it by filling it with 2048 bytes of random data.
-===============
-*/
-static void CL_GenerateQKey(void)
-{
-	int len = 0;
-	unsigned char buff[ QKEY_SIZE ];
-	fileHandle_t f;
-
-	len = FS_SV_FOpenFileRead( QKEY_FILE, &f );
-	FS_FCloseFile( f );
-	if( len == QKEY_SIZE ) {
-		Com_Printf( "QKEY found.\n" );
-		return;
-	}
-	else {
-		if( len > 0 ) {
-			Com_Printf( "QKEY file size != %d, regenerating\n",
-				QKEY_SIZE );
-		}
-
-		Com_Printf( "QKEY building random string\n" );
-		Com_RandomBytes( buff, sizeof(buff) );
-
-		f = FS_SV_FOpenFileWrite( QKEY_FILE );
-		if( !f ) {
-			Com_Printf( "QKEY could not open %s for write\n",
-				QKEY_FILE );
-			return;
-		}
-		FS_Write( buff, sizeof(buff), f );
-		FS_FCloseFile( f );
-		Com_Printf( "QKEY generated\n" );
-	}
-} 
-
 void CL_Sayto_f( void ) {
 	char		*rawname;
 	char		name[MAX_NAME_LENGTH];
@@ -3494,8 +3422,6 @@ void CL_Init( void ) {
 
 	cl_lanForcePackets = Cvar_Get ("cl_lanForcePackets", "1", CVAR_ARCHIVE);
 
-	cl_guidServerUniq = Cvar_Get ("cl_guidServerUniq", "1", CVAR_ARCHIVE);
-
 	// ~ and `, as keys and characters
 	cl_consoleKeys = Cvar_Get( "cl_consoleKeys", "~ ` 0x7e 0x60", CVAR_ARCHIVE);
 
@@ -3581,10 +3507,6 @@ void CL_Init( void ) {
 //	Cbuf_Execute ();
 
 	Cvar_Set( "cl_running", "1" );
-
-	CL_GenerateQKey();
-	Cvar_Get( "cl_guid", "", CVAR_USERINFO | CVAR_ROM );
-	CL_UpdateGUID( NULL, 0 );
 
 	Com_Printf( "----- Client Initialization Complete -----\n" );
 }
