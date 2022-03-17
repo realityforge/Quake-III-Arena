@@ -266,7 +266,9 @@ void QDECL Com_Error( int code, const char *fmt, ... ) {
 	static int	lastErrorTime;
 	static int	errorCount;
 	int			currentTime;
+#ifndef DEDICATED
 	qboolean	restartClient;
+#endif
 
 	if(com_errorEntered)
 		Sys_Error("recursive error after: %s", com_errorMessage);
@@ -299,7 +301,9 @@ void QDECL Com_Error( int code, const char *fmt, ... ) {
 	if (code != ERR_DISCONNECT)
 		Cvar_Set("com_errorMessage", com_errorMessage);
 
+#ifndef DEDICATED
 	restartClient = com_gameClientRestarting && !( com_cl_running && com_cl_running->integer );
+#endif
 
 	com_gameRestarting = qfalse;
 	com_gameClientRestarting = qfalse;
@@ -2863,9 +2867,12 @@ void Com_Frame( void ) {
 
 	int		msec, minMsec;
 	int		timeVal, timeValSV;
-	static int	lastTime = 0, bias = 0;
- 
-	int		timeBeforeFirstEvents;
+	static int	lastTime = 0;
+#ifndef DEDICATED
+    static int	bias = 0;
+#endif
+
+    int		timeBeforeFirstEvents;
 	int		timeBeforeServer;
 	int		timeBeforeEvents;
 	int		timeBeforeClient;
