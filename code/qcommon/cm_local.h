@@ -176,9 +176,6 @@ typedef struct leafList_s {
 	void	(*storeLeafs)( struct leafList_s *ll, int nodenum );
 } leafList_t;
 
-
-int CM_BoxBrushes( const vec3_t mins, const vec3_t maxs, cbrush_t **list, int listsize );
-
 void CM_StoreLeafs( leafList_t *ll, int nodenum );
 void CM_StoreBrushes( leafList_t *ll, int nodenum );
 
