@@ -101,38 +101,6 @@ void Sys_SnapVector( float *v )
 */
 #pragma optimize( "", off )
 
-/*
-** --------------------------------------------------------------------------------
-**
-** PROCESSOR STUFF
-**
-** --------------------------------------------------------------------------------
-*/
-static void CPUID( int func, unsigned regs[4] )
-{
-	unsigned regEAX, regEBX, regECX, regEDX;
-
-#ifndef __VECTORC
-	__asm mov eax, func
-	__asm __emit 00fh
-	__asm __emit 0a2h
-	__asm mov regEAX, eax
-	__asm mov regEBX, ebx
-	__asm mov regECX, ecx
-	__asm mov regEDX, edx
-
-	regs[0] = regEAX;
-	regs[1] = regEBX;
-	regs[2] = regECX;
-	regs[3] = regEDX;
-#else
-	regs[0] = 0;
-	regs[1] = 0;
-	regs[2] = 0;
-	regs[3] = 0;
-#endif
-}
-
 static int IsPentium( void )
 {
 	__asm 
