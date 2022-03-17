@@ -363,7 +363,7 @@ static void Preferences_MenuInit( void ) {
 
 	y += BIGCHAR_HEIGHT+2;
 	s_preferences.holster2d.generic.type        = MTYPE_RADIOBUTTON;
-	s_preferences.holster2d.generic.name	      = "Simple Items (Holster):";
+	s_preferences.holster2d.generic.name	      = "Simple Items (Weapon Wheel):";
 	s_preferences.holster2d.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
 	s_preferences.holster2d.generic.callback    = Preferences_Event;
 	s_preferences.holster2d.generic.id          = ID_HOLSTER2D;
@@ -463,7 +463,7 @@ static void Preferences_MenuInit( void ) {
 
 	y += BIGCHAR_HEIGHT+2;
     s_preferences.selectorwithhud.generic.type        = MTYPE_RADIOBUTTON;
-    s_preferences.selectorwithhud.generic.name	      = "Draw HUD On Weapon Selector:";
+    s_preferences.selectorwithhud.generic.name	      = "Draw HUD On Weapon Wheel:";
     s_preferences.selectorwithhud.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
     s_preferences.selectorwithhud.generic.callback    = Preferences_Event;
     s_preferences.selectorwithhud.generic.id          = ID_SELECTORWITHHUD;

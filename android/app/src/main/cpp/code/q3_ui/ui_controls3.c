@@ -37,7 +37,7 @@ CONTROLS OPTIONS MENU
 #define ART_BACK0				"menu/art/back_0"
 #define ART_BACK1				"menu/art/back_1"
 
-#define VR_X_POS		260
+#define VR_X_POS		330
 
 #define ID_AUTOSWITCH			127
 #define ID_SCOPE				128
@@ -49,8 +49,9 @@ CONTROLS OPTIONS MENU
 #define ID_WEAPONSELECTORMODE	134
 #define ID_UTURN				135
 #define ID_CONTROLSCHEMA		136
+#define ID_SWITCHTHUMBSTICKS	137
 
-#define ID_BACK					137
+#define ID_BACK					138
 
 #define	NUM_DIRECTIONMODE		2
 
@@ -72,6 +73,7 @@ typedef struct {
 	menuslider_s 		weaponpitch;
 	menulist_s			weaponselectormode;
 	menulist_s          controlschema;
+	menuradiobutton_s	switchthumbsticks;
 
 	menubitmap_s		back;
 } controls3_t;
@@ -90,6 +92,7 @@ static void Controls3_SetMenuItems( void ) {
     s_controls3.weaponpitch.curvalue		= trap_Cvar_VariableValue( "vr_weaponPitch" )  + 25;
     s_controls3.weaponselectormode.curvalue	= (int)trap_Cvar_VariableValue( "vr_weaponSelectorMode" ) % 2;
     s_controls3.controlschema.curvalue		= (int)trap_Cvar_VariableValue( "vr_controlSchema" ) % 2;
+    s_controls3.switchthumbsticks.curvalue	= trap_Cvar_VariableValue( "vr_switchThumbsticks" ) != 0;
 }
 
 
@@ -208,6 +211,10 @@ static void Controls3_MenuEvent( void* ptr, int notification ) {
         trap_Cvar_SetValue( "vr_controlSchema", s_controls3.controlschema.curvalue );
         break;
 
+	case ID_SWITCHTHUMBSTICKS:
+		trap_Cvar_SetValue( "vr_switchThumbsticks", s_controls3.switchthumbsticks.curvalue );
+		break;
+
 	case ID_BACK:
 		UI_PopMenu();
 		break;
@@ -234,15 +241,15 @@ static void Controls3_MenuInit( void ) {
 
 	static const char *s_weaponselectormode[] =
 			{
-					"Controller Weapon Selector",
-					"HMD Weapon Wheel",
+					"Controller Based",
+					"HMD/Thumbstick Based",
 					NULL
 			};
 
 	static const char *s_controlschema[] =
 			{
-					"Default (Weapon Selector on Right Grip)",
-					"Alternative (Weapon Selector on Right Thumbstick)",
+					"Weapon Wheel on Grip",
+					"Weapon Wheel on Thumbstick",
 					NULL
 			};
 
@@ -343,6 +350,15 @@ static void Controls3_MenuInit( void ) {
 	s_controls3.righthanded.generic.x	          = VR_X_POS;
 	s_controls3.righthanded.generic.y	          = y;
 
+	y += BIGCHAR_HEIGHT+2;
+	s_controls3.switchthumbsticks.generic.type        = MTYPE_RADIOBUTTON;
+	s_controls3.switchthumbsticks.generic.name	      = "Switch Thumbsticks:";
+	s_controls3.switchthumbsticks.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+	s_controls3.switchthumbsticks.generic.callback    = Controls3_MenuEvent;
+	s_controls3.switchthumbsticks.generic.id          = ID_SWITCHTHUMBSTICKS;
+	s_controls3.switchthumbsticks.generic.x	          = VR_X_POS;
+	s_controls3.switchthumbsticks.generic.y	          = y;
+
     y += BIGCHAR_HEIGHT+2;
 	s_controls3.weaponpitch.generic.type	     = MTYPE_SLIDER;
 	s_controls3.weaponpitch.generic.x			 = VR_X_POS;
@@ -359,7 +375,7 @@ static void Controls3_MenuInit( void ) {
 	s_controls3.weaponselectormode.generic.flags			= QMF_PULSEIFFOCUS|QMF_SMALLFONT;
 	s_controls3.weaponselectormode.generic.x				= VR_X_POS;
 	s_controls3.weaponselectormode.generic.y				= y;
-	s_controls3.weaponselectormode.generic.name			= "Weapon Selector Mode:";
+	s_controls3.weaponselectormode.generic.name			= "Weapon Wheel Mode:";
 	s_controls3.weaponselectormode.generic.callback		= Controls3_MenuEvent;
 	s_controls3.weaponselectormode.generic.id				= ID_WEAPONSELECTORMODE;
 	s_controls3.weaponselectormode.itemnames	        	= s_weaponselectormode;
@@ -401,6 +417,7 @@ static void Controls3_MenuInit( void ) {
 	Menu_AddItem( &s_controls3.menu, &s_controls3.weaponpitch );
 	Menu_AddItem( &s_controls3.menu, &s_controls3.weaponselectormode );
 	Menu_AddItem( &s_controls3.menu, &s_controls3.controlschema );
+	Menu_AddItem( &s_controls3.menu, &s_controls3.switchthumbsticks );
 
 	Menu_AddItem( &s_controls3.menu, &s_controls3.back );
 

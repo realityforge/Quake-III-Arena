@@ -2095,10 +2095,13 @@ void CG_DrawWeaponSelector( void )
 	VectorMA(holsterOrigin, ((DEPTH*2.0f)*((selectorMode == WS_CONTROLLER) ? frac : 1.0f)), holsterForward, holsterOrigin);
     VectorCopy(holsterOrigin, selectorOrigin);
 
+    const int switchThumbsticks = (int)trap_Cvar_VariableValue("vr_switchThumbsticks");
+    const int thumb = switchThumbsticks !=0 ? THUMB_LEFT : THUMB_RIGHT;
+
     float thumbstickAxisX = 0.0f;
     float thumbstickAxisY = 0.0f;
-	float a = atan2(vr->thumbstick_location[THUMB_RIGHT][0], vr->thumbstick_location[THUMB_RIGHT][1]);
-    if (length(vr->thumbstick_location[THUMB_RIGHT][0], vr->thumbstick_location[THUMB_RIGHT][1]) > 0.95f)
+	float a = atan2(vr->thumbstick_location[thumb][0], vr->thumbstick_location[thumb][1]);
+    if (length(vr->thumbstick_location[thumb][0], vr->thumbstick_location[thumb][1]) > 0.95f)
     {
         thumbstickAxisX = sinf(a) * 0.95f;
         thumbstickAxisY = cosf(a) * 0.95f;
@@ -2216,7 +2219,7 @@ void CG_DrawWeaponSelector( void )
 			    float high = ((iconAngles[w]+iconAngles[w+1])/2.0f);
 
 				if (((angle > low && angle <= high) || (angle360 > low && angle360 <= high)) &&
-				    (length(vr->thumbstick_location[THUMB_RIGHT][0], vr->thumbstick_location[THUMB_RIGHT][1]) > 0.5f) &&
+				    (length(vr->thumbstick_location[thumb][0], vr->thumbstick_location[thumb][1]) > 0.5f) &&
 				    selectable)
 				{
 					if (cg.weaponSelectorSelection != w)

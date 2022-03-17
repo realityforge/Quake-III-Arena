@@ -131,10 +131,25 @@ itemDef {
 	itemDef {
       		name controls3
 		group grpControls3
+      		type ITEM_TYPE_YESNO
+		text "Switch Thumbsticks:"
+		cvar "vr_switchThumbsticks"
+		rect 99 275 256 20
+      		textalign ITEM_ALIGN_RIGHT
+      		textalignx 128
+      		textaligny 20
+		textscale .333
+      		forecolor 1 1 1 1
+      		visible 1
+    		}
+
+	itemDef {
+      		name controls3
+		group grpControls3
       		type ITEM_TYPE_SLIDER
 		text "Weapon Pitch:"
 		cvarfloat "vr_weaponPitch" 5 -25 5
-		rect 99 275 256 20
+		rect 99 300 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
       		textaligny 20
@@ -147,10 +162,10 @@ itemDef {
       		name controls3
 		group grpControls3
       		type ITEM_TYPE_MULTI
-		text "Weapon Selector Mode:"
+		text "Weapon Wheel Mode:"
 		cvar "vr_weaponSelectorMode"
-		cvarFloatList { "Controller Weapon Selector" 0 "HMD Weapon Wheel" 1 }
-		rect 99 300 256 20
+		cvarFloatList { "Controller Based" 0 "HMD/Thumbstick Based" 1 }
+		rect 99 325 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
       		textaligny 20
