@@ -235,6 +235,7 @@ NSISDIR=misc/nsis
 CURLLIBSDIR=third_party/curl/libs
 JPDIR=third_party/jpeg
 JSONDIR=third_party/json
+PUFFDIR=third_party/puff
 UNZIPDIR=third_party/unzip
 OGGDIR=third_party/ogg
 OPENALDIR=third_party/openal
@@ -716,7 +717,7 @@ endif
 
 
 ifneq ($(BUILD_RENDERER_OPENGL2),0)
-  CLIENT_CFLAGS += -I$(JSONDIR)
+  CLIENT_CFLAGS += -I$(JSONDIR) -I$(PUFFDIR)
 endif
 
 # Add includes for unzip library
@@ -1369,7 +1370,6 @@ Q3OBJ = \
   \
   $(B)/client/unzip.o \
   $(B)/client/ioapi.o \
-  $(B)/client/puff.o \
   $(B)/client/vm.o \
   $(B)/client/vm_interpreted.o \
   \
@@ -2331,6 +2331,9 @@ $(B)/renderergl1/%.o: $(JPDIR)/%.c
 $(B)/renderergl1/%.o: $(RCOMMONDIR)/%.c
 	$(DO_REF_CC)
 
+$(B)/renderergl1/%.o: $(PUFFDIR)/%.c
+	$(DO_REF_CC)
+
 $(B)/renderergl1/%.o: $(RGL1DIR)/%.c
 	$(DO_REF_CC)
 
@@ -2338,6 +2341,9 @@ $(B)/renderergl2/glsl/%.c: $(RGL2DIR)/glsl/%.glsl $(STRINGIFY)
 	$(DO_REF_STR)
 
 $(B)/renderergl2/glsl/%.o: $(B)/renderergl2/glsl/%.c
+	$(DO_REF_CC)
+
+$(B)/renderergl2/%.o: $(PUFFDIR)/%.c
 	$(DO_REF_CC)
 
 $(B)/renderergl2/%.o: $(RCOMMONDIR)/%.c
