@@ -897,34 +897,6 @@ void Z_Free( void *ptr ) {
 	}
 }
 
-
-/*
-================
-Z_FreeTags
-================
-*/
-void Z_FreeTags( int tag ) {
-	memzone_t	*zone;
-
-	if ( tag == TAG_SMALL ) {
-		zone = smallzone;
-	}
-	else {
-		zone = mainzone;
-	}
-	// use the rover as our pointer, because
-	// Z_Free automatically adjusts it
-	zone->rover = zone->blocklist.next;
-	do {
-		if ( zone->rover->tag == tag ) {
-			Z_Free( (void *)(zone->rover + 1) );
-			continue;
-		}
-		zone->rover = zone->rover->next;
-	} while ( zone->rover != &zone->blocklist );
-}
-
-
 /*
 ================
 Z_TagMalloc
