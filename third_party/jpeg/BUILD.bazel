@@ -60,6 +60,9 @@ cc_library(
     hdrs = [
         "jpeglib.h",
     ],
+    copts = [
+        "-Wnomain",
+    ],
     includes = ["."],
     visibility = [
         "//code/renderercommon:__pkg__",
