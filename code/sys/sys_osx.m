@@ -34,6 +34,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #import <Carbon/Carbon.h>
 #import <Cocoa/Cocoa.h>
 
+// NSCriticalAlertStyle was deprecated in macOS 10.12
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
 /*
 ==============
 Sys_Dialog
