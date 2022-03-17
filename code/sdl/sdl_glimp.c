@@ -584,12 +584,6 @@ static int GLimp_SetMode(int mode, qboolean fullscreen, qboolean noborder, qbool
 		
 		SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
 
-#if 0 // if multisampling is enabled on X11, this causes create window to fail.
-		// If not allowing software GL, demand accelerated
-		if( !r_allowSoftwareGL->integer )
-			SDL_GL_SetAttribute( SDL_GL_ACCELERATED_VISUAL, 1 );
-#endif
-
 		if( ( SDL_window = SDL_CreateWindow( CLIENT_WINDOW_TITLE, x, y,
 				glConfig.vidWidth, glConfig.vidHeight, flags ) ) == NULL )
 		{
