@@ -5,7 +5,7 @@ cc_library(
         "cvar.c",
     ],
     deps = [
-        ":q_shared",
+        ":shared_api",
         ":qcommon",
     ],
 )
@@ -20,7 +20,7 @@ cc_library(
         "vm_local.h",
     ],
     deps = [
-        ":q_shared",
+        ":shared_api",
         ":qcommon",
     ],
 )
@@ -31,7 +31,7 @@ cc_library(
         "vm_x86.c",
     ],
     deps = [
-        ":q_shared",
+        ":shared_api",
         ":qcommon",
         ":vm",
     ],
@@ -43,7 +43,7 @@ cc_library(
         "files.c",
     ],
     deps = [
-        ":q_shared",
+        ":shared_api",
         ":qcommon",
         "//third_party/unzip",
     ],
@@ -56,7 +56,7 @@ cc_library(
     ],
     defines = ["DEDICATED"],
     deps = [
-        ":q_shared",
+        ":shared_api",
         ":qcommon",
         "//third_party/unzip",
     ],
@@ -72,8 +72,8 @@ cc_library(
         "net_ip.c",
     ],
     deps = [
-        ":common",
-        ":q_shared",
+        ":shared",
+        ":shared_api",
         ":qcommon",
     ],
 )
@@ -89,26 +89,38 @@ cc_library(
     ],
     defines = ["DEDICATED"],
     deps = [
-        ":common",
-        ":q_shared",
+        ":shared",
+        ":shared_api",
+        ":qcommon",
+    ],
+)
+
+
+cc_library(
+    name = "common",
+    srcs = [
+        "common.c",
+    ],
+    deps = [
+        ":shared_api",
         ":qcommon",
     ],
 )
 
 cc_library(
-    name = "common",
+    name = "shared",
     srcs = [
         "q_math.c",
         "q_shared.c",
     ],
     visibility = ["//code/cgame:__pkg__"],
     deps = [
-        ":q_shared",
+        ":shared_api",
     ],
 )
 
 cc_library(
-    name = "q_shared",
+    name = "shared_api",
     hdrs = [
         "q_platform.h",
         "q_shared.h",
@@ -150,7 +162,7 @@ cc_library(
     ],
     hdrs = ["cm_local.h"],
     deps = [
-        ":q_shared",
+        ":shared_api",
         ":qcommon",
     ],
 )
@@ -173,7 +185,7 @@ cc_library(
         "//third_party/unzip:__pkg__",
     ],
     deps = [
-        ":q_shared",
+        ":shared_api",
         ":qfiles",
     ],
 )
@@ -184,7 +196,7 @@ cc_library(
     name = "cmd",
     srcs = _CMD_SRC,
     deps = [
-        ":q_shared",
+        ":shared_api",
         ":qcommon",
     ],
 )
@@ -194,7 +206,7 @@ cc_library(
     srcs = _CMD_SRC,
     defines = ["DEDICATED"],
     deps = [
-        ":q_shared",
+        ":shared_api",
         ":qcommon",
     ],
 )

@@ -80,7 +80,7 @@ cc_library(
     ],
     visibility = ["//code/sdl:__pkg__"],
     deps = [
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared_api",
     ],
 )
 
@@ -93,6 +93,6 @@ cc_library(
     deps = [
         ":snd_api",
         "//code/qcommon",
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared_api",
     ],
 )

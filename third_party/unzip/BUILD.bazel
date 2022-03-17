@@ -15,7 +15,7 @@ cc_library(
     visibility = ["//code/qcommon:__pkg__"],
     deps = [
         "//code/qcommon",
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared_api",
         "//third_party/zlib",
     ],
 )

@@ -35,7 +35,7 @@ cc_library(
     ],
     deps = [
         ":api",
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared_api",
         "//third_party/jpeg",
         "//third_party/puff",
         "//third_party/sdl",

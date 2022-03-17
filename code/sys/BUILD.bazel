@@ -42,7 +42,7 @@ cc_library(
     deps = [
         ":sys_local",
         "//code/qcommon",
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared_api",
         "//third_party/sdl",
     ],
 )
@@ -61,6 +61,6 @@ cc_library(
     deps = [
         ":sys_local-dedicated",
         "//code/qcommon",
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared_api",
     ],
 )

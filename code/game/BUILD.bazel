@@ -10,7 +10,7 @@ cc_library(
         "//code/ui:__pkg__",
     ],
     deps = [
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared_api",
     ],
 )
 
@@ -23,7 +23,7 @@ cc_library(
         "//code/server:__pkg__",
     ],
     deps = [
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared_api",
     ],
 )
 
@@ -58,7 +58,7 @@ cc_library(
     ],
     deps = [
         ":bg_api",
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared_api",
     ],
 )
 
@@ -114,7 +114,7 @@ cc_library(
         ":server_api",
         "//code/botlib",
         "//code/botlib:api",
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared_api",
         "//ui",
     ],
 )

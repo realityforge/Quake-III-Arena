@@ -8,7 +8,7 @@ cc_library(
         "//code/q3_ui:__pkg__",
     ],
     deps = [
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared_api",
     ],
 )
 
@@ -27,7 +27,7 @@ cc_library(
     deps = [
         ":api",
         "//code/client:api",
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared_api",
         "//code/renderercommon:api",
         "//ui",
     ],
@@ -50,7 +50,7 @@ cc_library(
         ":shared",
         "//code/client:api",
         "//code/game:bg_api",
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared_api",
         "//code/renderercommon:api",
         "//ui",
     ],

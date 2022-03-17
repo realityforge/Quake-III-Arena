@@ -7,7 +7,7 @@ cc_library(
         "//code/client:__pkg__",
     ],
     deps = [
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared_api",
     ],
 )
 
@@ -48,8 +48,8 @@ cc_library(
         ":api",
         "//code/game:bg",
         "//code/game:bg_api",
-        "//code/qcommon:common",
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared",
+        "//code/qcommon:shared_api",
         "//code/renderercommon:api",
     ],
 )
@@ -61,8 +61,8 @@ cc_library(
         ":api",
         "//code/game:bg_api",
         "//code/game:bg_lib-qvm",
-        "//code/qcommon:common",
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared",
+        "//code/qcommon:shared_api",
         "//code/renderercommon:api",
     ],
 )
@@ -75,8 +75,8 @@ cc_library(
         ":api",
         "//code/game:bg",
         "//code/game:bg_api",
-        "//code/qcommon:common",
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared",
+        "//code/qcommon:shared_api",
         "//code/renderercommon:api",
         "//code/ui:shared",
     ],
@@ -93,8 +93,8 @@ cc_library(
         "//code/game:bg",
         "//code/game:bg_api",
         "//code/game:bg_lib-qvm",
-        "//code/qcommon:common",
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared",
+        "//code/qcommon:shared_api",
         "//code/renderercommon:api",
         "//code/ui:shared",
     ],

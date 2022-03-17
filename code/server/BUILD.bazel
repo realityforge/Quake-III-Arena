@@ -19,7 +19,7 @@ cc_library(
         "//code/game:bg_api",
         "//code/game:server_api",
         "//code/qcommon",
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared_api",
     ],
 )
 
@@ -32,6 +32,6 @@ cc_library(
         "//code/game:bg_api",
         "//code/game:server_api",
         "//code/qcommon",
-        "//code/qcommon:q_shared",
+        "//code/qcommon:shared_api",
     ],
 )
