@@ -778,7 +778,6 @@ void *Z_Malloc( int size );			// returns 0 filled memory
 void *S_Malloc( int size );			// NOT 0 filled memory only for small allocations
 #endif
 void Z_Free( void *ptr );
-void Z_FreeTags( int tag );
 int Z_AvailableMemory( void );
 void Z_LogHeap( void );
 
@@ -1033,8 +1032,6 @@ void	Huff_offsetReceive (node_t *node, int *ch, byte *fin, int *offset);
 void	Huff_offsetTransmit (huff_t *huff, int ch, byte *fout, int *offset);
 void	Huff_putBit( int bit, byte *fout, int *offset);
 int		Huff_getBit( byte *fout, int *offset);
-
-extern huffman_t clientHuffTables;
 
 #define	SV_ENCODE_START		4
 #define SV_DECODE_START		12
