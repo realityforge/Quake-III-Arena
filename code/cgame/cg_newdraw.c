@@ -1336,15 +1336,6 @@ void CG_DrawNewTeamInfo(rectDef_t *rect, float text_x, float text_y, float scale
 			// draw weapon icon
 			xx += PIC_WIDTH + 1;
 
-// weapon used is not that useful, use the space for task
-#if 0
-			if ( cg_weapons[ci->curWeapon].weaponIcon ) {
-				CG_DrawPic( xx, y, PIC_WIDTH, PIC_WIDTH, cg_weapons[ci->curWeapon].weaponIcon );
-			} else {
-				CG_DrawPic( xx, y, PIC_WIDTH, PIC_WIDTH, cgs.media.deferShader );
-			}
-#endif
-
 			trap_R_SetColor(NULL);
 			if (cgs.orderPending) {
 				// blink the icon
