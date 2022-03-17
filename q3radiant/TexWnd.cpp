@@ -2725,29 +2725,6 @@ LONG WINAPI TexWndProc (
 		//wglDeleteContext( s_hglrcTexture );
 		 ReleaseDC( hWnd, s_hdcTexture );
 		return 0;
-#if 0
-	case WM_PAINT:
-        { 
-		    PAINTSTRUCT	ps;
-
-		    BeginPaint(hWnd, &ps);
-
-        if ( !qwglMakeCurrent( s_hdcTexture, s_hglrcTexture ) )
-        //if ( !wglMakeCurrent( ps.hdc, s_hglrcTexture ) )
-        {
-          Sys_Printf("ERROR: wglMakeCurrent failed..\n ");
-          Sys_Printf("Please restart Q3Radiant if the Texture view is not working\n");
-        }
-        else
-        {
-			    Texture_Draw2 (rect.right-rect.left, rect.bottom-rect.top - g_nTextureOffset);
-			    qwglSwapBuffers(s_hdcTexture);
-          TRACE("Texture Paint\n");
-        }
-		    EndPaint(hWnd, &ps);
-        }
-		return 0;
-#endif
 	case WM_MBUTTONDOWN:
 	case WM_RBUTTONDOWN:
 	case WM_LBUTTONDOWN:

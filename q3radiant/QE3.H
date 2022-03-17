@@ -311,12 +311,6 @@ BOOL CALLBACK Win_Dialog (
 //
 void WCam_Create (HINSTANCE hInstance);
 
-
-//
-// win_xy.c
-//
-void WXY_Create (HINSTANCE hInstance);
-
 //
 // win_z.c
 //

@@ -280,20 +280,6 @@ void GetEntityControls(HWND ghwndEntity)
   g_wndTabs.InsertItem(0, "Entities");
   g_wndTabs.ShowWindow(SW_SHOW);
 
-#if 0
-	for (i=0 ; i<12 ; i++)
-	{
-		hwndEnt[EntCheck1 + i] = CreateWindow ("button", NULL, 
-		BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE,
-		5, 100, 180, 99,
-		entwindow,
-		(HMENU)IDC_E_STATUS,
-		main_instance,
-		NULL);
-		if (!hwndEnt[EntCheck1 + i])
-			Error ("CreateWindow failed");
-	}
-#endif
 	SendMessage(hwndEnt[EntList], WM_SETFONT, (WPARAM)GetStockObject(DEFAULT_GUI_FONT), (LPARAM)TRUE);
 	SendMessage(hwndEnt[EntProps], WM_SETFONT, (WPARAM)GetStockObject(DEFAULT_GUI_FONT), (LPARAM)TRUE);
 	SendMessage(hwndEnt[EntComment], WM_SETFONT, (WPARAM)GetStockObject(DEFAULT_GUI_FONT), (LPARAM)TRUE);

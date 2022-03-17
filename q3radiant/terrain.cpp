@@ -1046,112 +1046,7 @@ void DrawTerrain( terrainMesh_t *pm, bool bPoints, bool bShade ) {
 		qglDisable( GL_LIGHTING );
 	}
 
-#if 0
-	terrainVert_t	*currentrow;
-	terrainVert_t	*nextrow;
-	float			x2;
-	float			y2;
-
-	// Draw normals
-	qglDisable( GL_TEXTURE_2D );
-	qglDisable( GL_BLEND );
-	qglColor3f( 1, 1, 1 );
-	qglBegin( GL_LINES );
-
-	y2 = pm->origin[ 1 ];
-	nextrow = pm->heightmap;
-	for( y = 0; y < h; y++ ) {
-		y1 = y2;
-		y2 += scale_y;
-
-		x2 = pm->origin[ 0 ];
-		currentrow = nextrow;
-		nextrow = currentrow + pm->width;
-		for( x = 0; x < w; x++ ) {
-			x1 = x2;
-			x2 += scale_x;
-
-			// normals
-			qglVertex3f( x1, y1, pm->origin[ 2 ] + currentrow[ x ].height );
-			qglVertex3f( x1 + currentrow[ x ].normal[ 0 ] * 16.0f, y1 + currentrow[ x ].normal[ 1 ] * 16.0f, pm->origin[ 2 ] + currentrow[ x ].height + currentrow[ x ].normal[ 2 ] * 16.0f );
-
-			qglVertex3f( x2, y1, pm->origin[ 2 ] + currentrow[ x + 1 ].height );
-			qglVertex3f( x2 + currentrow[ x + 1 ].normal[ 0 ] * 16.0f, y1 + currentrow[ x + 1 ].normal[ 1 ] * 16.0f, pm->origin[ 2 ] + currentrow[ x + 1 ].height + currentrow[ x + 1 ].normal[ 2 ] * 16.0f );
-
-			qglVertex3f( x1, y2, pm->origin[ 2 ] + nextrow[ x ].height );
-			qglVertex3f( x1 + nextrow[ x ].normal[ 0 ] * 16.0f, y2 + nextrow[ x ].normal[ 1 ] * 16.0f, pm->origin[ 2 ] + nextrow[ x ].height + nextrow[ x ].normal[ 2 ] * 16.0f );
-
-			qglVertex3f( x2, y2, pm->origin[ 2 ] + nextrow[ x + 1 ].height );
-			qglVertex3f( x2 + nextrow[ x + 1 ].normal[ 0 ] * 16.0f, y2 + nextrow[ x + 1 ].normal[ 1 ] * 16.0f, pm->origin[ 2 ] + nextrow[ x + 1 ].height + nextrow[ x + 1 ].normal[ 2 ] * 16.0f );
-		}
-	}
-
-	qglEnd ();
-	qglEnable( GL_TEXTURE_2D );
-#endif
-
-#if 0
-	if ( bPoints && ( g_qeglobals.d_select_mode == sel_terrainpoint || g_qeglobals.d_select_mode == sel_area ) ) {
-		qglPointSize( 6 );
-		qglDisable( GL_TEXTURE_2D );
-		qglDisable( GL_BLEND );
-
-		qglBegin( GL_POINTS );
-
-		nIndex = 0;
-
-		qglColor4f( 1, 0, 1, 1 );
-
-		y1 = pm->origin[ 1 ];
-		for ( y = 0; y < pm->height; y++, y1 += pm->scale_y ) {
-			x1 = pm->origin[ 0 ];
-			for( x = 0; x < pm->width; x++, x1 += pm->scale_x ) {
-				// FIXME: need to not do loop lookups inside here
-				n = Terrain_PointInMoveList( &pm->heightmap[ x + y * pm->width ] );
-				if ( n >= 0 ) {
-					VectorSet( pSelectedPoints[ nIndex ], x1, y1, pm->heightmap[ x + y * pm->width ].height + pm->origin[ 2 ] );
-					nIndex++;
-				} else {
-					qglVertex3f( x1, y1, pm->origin[ 2 ] + pm->heightmap[ x + y * pm->width ].height );
-				}
-			}
-		}
-
-		qglEnd();
-		
-		qglEnable( GL_TEXTURE_2D );
-
-		if ( nIndex > 0 ) {
-			qglBegin( GL_POINTS );
-			qglColor4f( 0, 0, 1, 1 );
-			while( nIndex-- > 0 ) {
-				qglVertex3fv( pSelectedPoints[ nIndex ] );
-			}
-		
-			qglEnd();
-		}
-	}
-#endif
-
 	if ( g_qeglobals.d_numterrapoints && ( ( g_qeglobals.d_select_mode == sel_terrainpoint ) || ( g_qeglobals.d_select_mode == sel_terraintexture ) ) ) {
-#if 0 
-		qglPointSize( 6 );
-		qglDisable( GL_TEXTURE_2D );
-		qglDisable( GL_BLEND );
-
-		qglBegin( GL_POINTS );
-
-		qglColor4f( 1, 0, 1, 1 );
-
-		for( i = 0; i < g_qeglobals.d_numterrapoints; i++ ) {
-			qglVertex3fv( g_qeglobals.d_terrapoints[ i ]->xyz );
-		}
-
-		qglEnd();
-			
-		qglEnable( GL_TEXTURE_2D );
-#endif
-
 		brush_t			*pb;
 		terrainMesh_t	*pm;
 
@@ -1314,32 +1209,7 @@ terrainMesh_t *SingleTerrainSelected( void ) {
 }
 
 void Terrain_Edit( void ) {
-	//brush_t *pb;
-	//terrainMesh_t *p;
-	//int i;
-	//int j;
-
-//	g_qeglobals.d_numpoints = 0;
 	g_qeglobals.d_numterrapoints = 0;
-#if 0	
-	for( pb = selected_brushes.next; pb != &selected_brushes ; pb = pb->next ) {
-		if ( pb->terrainBrush ) {
-			p = pb->pTerrain;
-
-			if ( ( g_qeglobals.d_numpoints + p->width * p->height ) > MAX_POINTS ) {
-				Warning( "Too many points on terrain\n" );
-				continue;
-			}
-			for( i = 0; i < p->width; i++ ) {
-				for( j = 0; j < p->height; j++ ) {
-					Terrain_CalcVertPos( p, i, j, g_qeglobals.d_points[ g_qeglobals.d_numpoints ] );
-					g_qeglobals.d_numpoints++;
-				}
-			}
-		}
-	}
-#endif
-   
 	g_qeglobals.d_select_mode = sel_terrainpoint;
 }
 
@@ -1670,16 +1540,6 @@ Select the face
 ============
 */
 void Select_TerrainFace ( brush_t * brush, terrainFace_t *terraface ) {
-#if 0
-	UnSelect_Brush( brush );
-
-	if( numselfaces < MAX_SEL_FACES ) {
-		selfaces[numselfaces].face = NULL;
-		selfaces[numselfaces].brush = brush;
-		selfaces[numselfaces].terraface = terraface;
-		numselfaces++;
-	}
-#endif
 }
 
 void Select_TerrainFacesFromBrush( brush_t *brush ) {

@@ -501,51 +501,6 @@ void DrawBrushEntityName (brush_t *b)
 	if (b != b->owner->brushes.onext)
 		return;	// not key brush
 
-// MERGEME
-#if 0
-	if (!(g_qeglobals.d_savedinfo.exclude & EXCLUDE_ANGLES))
-	{
-		// draw the angle pointer
-		a = FloatForKey (b->owner, "angle");
-		if (a)
-		{
-			s = sin (a/180*Q_PI);
-			c = cos (a/180*Q_PI);
-			for (i=0 ; i<3 ; i++)
-				mid[i] = (b->mins[i] + b->maxs[i])*0.5; 
-
-			qglBegin (GL_LINE_STRIP);
-			qglVertex3fv (mid);
-			mid[0] += c*8;
-			mid[1] += s*8;
-			mid[2] += s*8;
-			qglVertex3fv (mid);
-			mid[0] -= c*4;
-			mid[1] -= s*4;
-			mid[2] -= s*4;
-			mid[0] -= s*4;
-			mid[1] += c*4;
-			mid[2] += c*4;
-			qglVertex3fv (mid);
-			mid[0] += c*4;
-			mid[1] += s*4;
-			mid[2] += s*4;
-			mid[0] += s*4;
-			mid[1] -= c*4;
-			mid[2] -= c*4;
-			qglVertex3fv (mid);
-			mid[0] -= c*4;
-			mid[1] -= s*4;
-			mid[2] -= s*4;
-			mid[0] += s*4;
-			mid[1] -= c*4;
-			mid[2] -= c*4;
-			qglVertex3fv (mid);
-			qglEnd ();
-		}
-	}
-#endif
-
 	if (g_qeglobals.d_savedinfo.show_names)
 	{
 		name = ValueForKey (b->owner, "classname");
@@ -3996,21 +3951,6 @@ void Brush_Draw( brush_t *b )
 			}
 		}
 		
-#if 0
-		if (b->alphaBrush)
-		{
-			if (!(face->texdef.flags & SURF_ALPHA))
-				continue;
-			//--qglPushAttrib(GL_ALL_ATTRIB_BITS);
-			qglDisable(GL_CULL_FACE);
-			//--qglTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-			//--qglBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			//--qglDisable(GL_DEPTH_TEST);
-			//--qglBlendFunc (GL_SRC_ALPHA, GL_DST_ALPHA);
-			//--qglEnable (GL_BLEND);
-		}
-#endif
-		
 		if ((nDrawMode == cd_texture || nDrawMode == cd_light) && face->d_texture != prev)
 		{
 			// set the texture for this face
@@ -4063,16 +4003,6 @@ void Brush_Draw( brush_t *b )
 		}
 		qglEnd();
 	}
-	
-#if 0
-	if (b->alphaBrush)
-	{
-		//--qglPopAttrib();
-		qglEnable(GL_CULL_FACE);
-		//--qglDisable (GL_BLEND);
-		//--qglTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-	}
-#endif
 	
 	if (b->owner->eclass->fixedsize && (nDrawMode == cd_texture || nDrawMode == cd_light))
 		qglEnable (GL_TEXTURE_2D);

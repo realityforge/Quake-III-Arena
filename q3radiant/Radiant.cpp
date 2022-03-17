@@ -83,17 +83,6 @@ BOOL CRadiantApp::InitInstance()
 	//  the specific initialization routines you do not need.
   //AfxEnableMemoryTracking(FALSE);
 
-	// VC7 says deprecated and no longer necessary
-#if 0
-
-#ifdef _AFXDLL
-	Enable3dControls();			// Call this when using MFC in a shared DLL
-#else
-	Enable3dControlsStatic();	// Call this when linking to MFC statically
-#endif
-
-#endif
-
 	// If there's a .INI file in the directory use it instead of registry
 	char RadiantPath[_MAX_PATH];
 	GetModuleFileName( NULL, RadiantPath, _MAX_PATH );

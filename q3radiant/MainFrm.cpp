@@ -838,15 +838,6 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;      // fail to create
 	}
 
-#if 0
-	if (!m_wndScaleBar.Create(this) ||
-		!m_wndScaleBar.LoadToolBar(IDR_TOOLBAR_SCALELOCK))
-	{
-		TRACE0("Failed to create scaling toolbar\n");
-		return -1;      // fail to create
-	}
-#endif
-
 	// TODO: Remove this if you don't want tool tips or a resizeable toolbar
 	m_wndToolBar.SetBarStyle(m_wndToolBar.GetBarStyle() |
 		CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC);
@@ -1016,22 +1007,6 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
   }
   else
   {
-    // hack that keeps SGI OpenGL from crashing on texture load with no map
-#if 0
-    if (g_PrefsDlg.m_bSGIOpenGL)
-    {
-      vec3_t vMin, vMax;
-      vMin[0] = vMin[1] = vMin[2] = 0;
-      vMax[0] = vMax[1] = vMax[2] = 8;
-      brush_t* pBrush = Brush_Create(vMin, vMax, &g_qeglobals.d_texturewin.texdef);
-	    Entity_LinkBrush (world_entity, pBrush);
-      Brush_Build(pBrush);
-	    Brush_AddToList (pBrush, &active_brushes);
-      Select_Brush(pBrush);
-      Sys_UpdateWindows(W_ALL);
-      PostMessage(WM_COMMAND, ID_SELECTION_DELETE, 0); 
-    }
-#endif
 	  // load plugins before the first Map_LoadFile
 	  // required for model plugins
     if (g_PrefsDlg.m_bLoadLastMap && g_PrefsDlg.m_strLastMap.GetLength() > 0)
@@ -1178,33 +1153,6 @@ void CMainFrame::CreateQEChildren()
 
   if (!bProjectLoaded)
   {
-#if 0
-    // let's try the default project directory..
-    char* pBuff = new char[1024];
-    ::GetCurrentDirectory(1024, pBuff);
-    CString strDefProj = g_strAppPath;
-    AddSlash(strDefProj);
-    strDefProj += "defproj";
-    if (::SetCurrentDirectory(strDefProj))
-    {
-	    bProjectLoaded = QE_LoadProject("scripts/quake.qe4");
-      if (bProjectLoaded)
-      {
-        // setup auto load stuff for the default map
-        g_PrefsDlg.m_bLoadLast = TRUE;
-        AddSlash(strDefProj);
-        strDefProj += "maps\\defproj.map";
-        g_PrefsDlg.m_strLastMap = strDefProj;
-        g_PrefsDlg.SavePrefs();
-      }
-    }
-    else
-    {
-      ::SetCurrentDirectory(pBuff);
-    }
-    delete []pBuff;
-#endif
-
     if (!bProjectLoaded)
     {
       Sys_Printf ("Using default.qe4. You may experience problems. See the readme.txt\n");
@@ -1726,19 +1674,6 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
     // Z window takes up 10% of right edge
     // XY window takes up 60% of middle
     // TEX and CAM windows take up 30% of left
-#if 0
-    int xTex = 1;
-    int xXY = 1 + xTex + ((float)rctParent.Width()) * .30;
-    int xZ = 1 + xXY + ((float)rctParent.Width()) * .60;
-    int yXY = 1;
-    int yTex = 1 + ((float)rctParent.Height()) * .45;
-    m_pXYWnd->SetWindowPos(NULL, xXY, yXY, ((float)rctParent.Width()) * .60, rctParent.Height() - 2, SWP_SHOWWINDOW);
-    m_pXZWnd->SetWindowPos(NULL, xXY, yXY, ((float)rctParent.Width()) * .60, rctParent.Height() - 2, SWP_SHOWWINDOW);
-    m_pYZWnd->SetWindowPos(NULL, xXY, yXY, ((float)rctParent.Width()) * .60, rctParent.Height() - 2, SWP_SHOWWINDOW);
-    m_pCamWnd->SetWindowPos(NULL, xTex, yXY, ((float)rctParent.Width()) *.30, ((float)rctParent.Height()) * .45, SWP_SHOWWINDOW);
-    m_pTexWnd->SetWindowPos(NULL, xTex, yTex, ((float)rctParent.Width()) *.30, ((float)rctParent.Height()) * .45, SWP_SHOWWINDOW);
-#endif
-
     LoadWindowPlacement(m_pXYWnd->GetSafeHwnd(), "xywindow");
     LoadWindowPlacement(m_pXZWnd->GetSafeHwnd(), "xzwindow");
     LoadWindowPlacement(m_pYZWnd->GetSafeHwnd(), "yzwindow");
@@ -3151,15 +3086,6 @@ void CMainFrame::OnHelpCommandlist()
 {
   CCommandsDlg dlg;
   dlg.DoModal();
-#if 0
-  if (g_b3Dfx)
-  {
-    C3DFXCamWnd* pWnd = new C3DFXCamWnd();
-    CRect rect(50,50,400, 400);
-    pWnd->Create(_3DFXCAMERA_WINDOW_CLASS, "", QE3_CHILDSTYLE, rect, this, 1234);
-    pWnd->ShowWindow(SW_SHOW);
-  }
-#endif
 }
 
 void CMainFrame::OnFileNewproject() 
@@ -4243,25 +4169,6 @@ void CMainFrame::OnDontselectcurve()
 
 void CMainFrame::OnConvertcurves() 
 {
-#if 0
-  Select_Deselect();
-	for (brush_t* pb = active_brushes.next ; pb != &active_brushes ; pb = pb->next)
-	{
-    if (pb->curveBrush)
-    {
-	    for (face_t* f = pb->brush_faces ; f ; f=f->next) 
-      {
-		    if (f->texdef.contents & CONTENTS_LADDER)
-        {
-          f->texdef.contents &= ~CONTENTS_LADDER;
-          f->texdef.contents |= CONTENTS_NEGATIVE_CURVE;
-        }
-      }
-		}
-  }
-  Map_BuildBrushData();
-#endif
-
 }
 
 void CMainFrame::OnDynamicLighting() 

@@ -362,54 +362,6 @@ void RunBsp (char *command)
 	  Sleep (100);	// give the new process a chance to open it's window
 
 	  BringWindowToTop( g_qeglobals.d_hwndMain );	// pop us back on top
-#if 0
-	  //
-	  // write qe3bsp.bat
-	  //
-	  sprintf (batpath, "%sqe3bsp.bat", temppath);
-	  hFile = fopen(batpath, "w");
-	  if (!hFile)
-		  Error ("Can't write to %s", batpath);
-	  fprintf (hFile, sys);
-	  fclose (hFile);
-
-	  //
-	  // write qe3bsp2.bat
-	  //
-	  sprintf (batpath, "%sqe3bsp2.bat", temppath);
-	  hFile = fopen(batpath, "w");
-	  if (!hFile)
-		  Error ("Can't write to %s", batpath);
-	  fprintf (hFile, "%sqe3bsp.bat > %s", temppath, outputpath);
-	  fclose (hFile);
-
-	  Pointfile_Delete ();
-
-	  GetStartupInfo (&startupinfo);
-
-	  ret = CreateProcess(
-      batpath,		// pointer to name of executable module 
-      NULL,			// pointer to command line string
-      NULL,			// pointer to process security attributes 
-      NULL,			// pointer to thread security attributes 
-      FALSE,			// handle inheritance flag 
-      0 /*DETACHED_PROCESS*/,		// creation flags
-      NULL,			// pointer to new environment block 
-      NULL,			// pointer to current directory name 
-      &startupinfo,	// pointer to STARTUPINFO 
-      &ProcessInformation 	// pointer to PROCESS_INFORMATION  
-     );
-
-	  if (!ret)
-		  Error ("CreateProcess failed");
-
-	  bsp_process = ProcessInformation.hProcess;
-
-	  Sleep (100);	// give the new process a chance to open it's window
-
-	  //BringWindowToTop( g_qeglobals.d_hwndMain );	// pop us back on top
-	  //SetFocus (g_qeglobals.d_hwndCamera);
-#endif
   }
 }
 

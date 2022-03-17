@@ -209,25 +209,7 @@ void InterpolateInteriorPoints( patchMesh_t *p )
     next = ( i == p->width - 1 ) ? 1 : ( i + 1 ) % p->width;
     prev = ( i == 0 ) ? p->width - 2 : i - 1;
 
-#if 0
-		if ( i == 0 ) 
-    {
-			next = ( i + 1 ) % p->width;
-			prev = p->width - 2;		      // joined wrap case
-		} 
-    else if ( i == p->width - 1 ) 
-    {
-			next = 1;
-			prev = i - 1;
-		} 
-    else 
-    {
-			next = ( i + 1 ) % p->width;
-			prev = i - 1;
-		}
-#endif
-
-		for ( j = 0 ; j < p->height ; j++ ) 
+		for ( j = 0 ; j < p->height ; j++ )
     {
 			for ( k = 0 ; k < 3 ; k++ ) 
       {
@@ -577,20 +559,6 @@ brush_t* AddBrushForPatch(patchMesh_t *pm, bool bLinkToWorld )
   }
 
   return b;
-}
-
-void Patch_SetPointIntensities(int n)
-{
-#if 0
-	patchMesh_t	*p = patchMeshes[n];
-  for (int i = 0; i < p->width; i++)
-  {
-    for (int j = 0; j < p->height; j++)
-    {
-
-    }
-  }
-#endif
 }
 
 // very approximate widths and heights
@@ -1862,64 +1830,10 @@ void AddPoint(patchMesh_t* p, vec3_t v, bool bWeldOrDrill = true)
               continue;
             }
           }
-#if 0
-          int l = 0;
-	        for ( int k = 0; k < 2; k++ )
-          {
-		        if (fabs(v[k] - p->ctrl[i][j].xyz[k]) > EQUAL_EPSILON)
-              continue;
-             l++;
-          }
-          if (l >= 2 && PointInMoveList(p->ctrl[i][j].xyz) == -1)
-          {
-            g_qeglobals.d_move_points[g_qeglobals.d_num_move_points++] = p->ctrl[i][j].xyz;
-            continue;
-          }
-#endif
         }
       }
     }
   }
-#if 0
-  if (g_qeglobals.d_num_move_points == 1)
-  {
-    // single point selected
-    // FIXME: the two loops can probably be reduced to one
-	  for ( int i = 0 ; i < p->width ; i++ ) 
-    {
-		  for ( int j = 0 ; j < p->height ; j++ ) 
-      {
-        int n = PointInMoveList(v);
-        if (n >= 0)
-        {
-          if (((i & 0x01) && (j & 0x01)) == 0)
-          {
-            // put any sibling fixed points
-            // into the inverse list
-            int p1, p2, p3, p4;
-            p1 = i + 2;
-            p2 = i - 2;
-            p3 = j + 2;
-            p4 = j - 2;
-            if (p1 < p->width)
-            {
-
-            }
-            if (p2 >= 0)
-            {
-            }
-            if (p3 < p->height)
-            {
-            }
-            if (p4 >= 0)
-            {
-            }
-          }
-        }
-      }
-    }
-  }
-#endif
 }
 
 /*
@@ -2618,28 +2532,6 @@ void Patch_DrawCam(patchMesh_t *pm)
 	  DrawPatchMesh( pm , pm->bSelected, true );
   }
 
-#if 0 // this paints normal indicators on the ctrl points
-      //--qglDisable (GL_DEPTH_TEST);
-      qglDisable (GL_TEXTURE_2D);
-      qglColor3f (1,1,1);
-
-      for (int i = 0; i < pm->width; i++)
-      {
-        for (int j = 0; j < pm->height; j++)
-        {
-          vec3_t temp;
-	        qglBegin (GL_LINES);
-		      qglVertex3fv (pm->ctrl[i][j].xyz);
-		      VectorMA (pm->ctrl[i][j].xyz, 8, pm->ctrl[i][j].normal, temp);
-		      qglVertex3fv (temp);
-	        qglEnd ();
-        }
-      }
-      qglEnable (GL_TEXTURE_2D);
-      //--qglEnable (GL_DEPTH_TEST);
-#endif
-
-
   qglPopAttrib();
 }
 
@@ -2673,56 +2565,6 @@ void Patch_BuildPoints (brush_t *b)
 		}
 	}
 }
-
-
-
-//
-//===============
-//Patch_WriteFile
-//===============
-//
-#if 0
-void Patch_WriteFile (char *name) 
-{
-	char patchName[1024];
-  time_t ltime;
-	strcpy(patchName, name);
-	StripExtension (patchName);
-	strcat (patchName, ".patch");
-
-  FILE *file = fopen(patchName, "w");
-  if (file)
-  {
-	  time(&ltime);
-	  fprintf (file, "// %s saved on %s\n", name, ctime(&ltime) );
-
-    for (int i = 0; i < numPatchMeshes; i++)
-    {
-		  fprintf(file, "{\n");
-      fprintf(file, " %s\n", patchMeshes[i].d_texture->name);
-      fprintf(file, " ( %i %i %i ) \n", patchMeshes[i].width, patchMeshes[i].height, patchMeshes[i].negative);
-      for (int w = 0; w < patchMeshes[i].width; w++)
-      {
-        for (int h = 0; h < patchMeshes[i].height; h++)
-        {
-          fprintf(file, " ( ");
-          for (int k = 0; k < 5; k++)
-          {
-            float f = patchMeshes[i].ctrl[w][h][k];
-            if (f == int(f))
-              fprintf(file, "%i ", (int)f);
-            else
-              fprintf(file, "%f ", f);
-          }
-          fprintf(file, ")\n");
-        }
-      }
-      fprintf(file, "}\n");
-    }
-    fclose(file);
-  }
-}
-#endif
 
 /*
 ==================
@@ -4913,25 +4755,6 @@ void Select_SnapToGrid()
     if (pb->patchBrush)
     {
       patchMesh_t *p = pb->pPatch;
-#if 0
-	    float		ctrl[MAX_PATCH_WIDTH][MAX_PATCH_HEIGHT][5];
-      memcpy(ctrl, p->ctrl, sizeof(p->ctrl));
-      i = p->width;
-      p->width = p->height;
-      p->height = i;
-      for (i = 0; i < p->width; i++)
-      {
-        int l = p->height-1;
-        for (j = 0; j < p->height; j++)
-        {
-          for (k = 0; k < 5; k++)
-          {
-            p->ctrl[i][l][k] = ctrl[j][i][k];
-          }
-          l--;
-        }
-      }
-#else
       for (i = 0; i < p->width; i++)
       {
         for (j = 0; j < p->height; j++)
@@ -4942,7 +4765,6 @@ void Select_SnapToGrid()
           }
         }
       }
-#endif
       vec3_t vMin, vMax;
       Patch_CalcBounds(p, vMin, vMax);
       Brush_RebuildBrush(p->pSymbiot, vMin, vMax);

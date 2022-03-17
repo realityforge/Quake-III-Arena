@@ -1091,17 +1091,6 @@ void Select_CompleteTall (void)
 
 		Brush_RemoveFromList (b);
 		Brush_AddToList (b, &selected_brushes);
-#if 0
-    // old stuff
-    for (i=0 ; i<2 ; i++)
-			if (b->maxs[i] > maxs[i] || b->mins[i] < mins[i])
-				break;
-		if (i == 2)
-		{
-			Brush_RemoveFromList (b);
-			Brush_AddToList (b, &selected_brushes);
-		}
-#endif
 	}
 	Sys_UpdateWindows (W_ALL);
 }
@@ -1137,19 +1126,6 @@ void Select_PartialTall (void)
 
   	Brush_RemoveFromList (b);
 		Brush_AddToList (b, &selected_brushes);
-
-
-#if 0
-// old stuff
-		for (i=0 ; i<2 ; i++)
-			if (b->mins[i] > maxs[i] || b->maxs[i] < mins[i])
-				break;
-		if (i == 2)
-		{
-			Brush_RemoveFromList (b);
-			Brush_AddToList (b, &selected_brushes);
-		}
-#endif
 	}
 	Sys_UpdateWindows (W_ALL);
 }

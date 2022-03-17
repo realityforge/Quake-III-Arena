@@ -369,24 +369,6 @@ void LoadModel(const char *pLocation, eclass_t *e, vec3_t &vMin, vec3_t &vMax, e
   {
     Sys_Printf(" failed.\n");
   }
-
-#if 0
-  if (pModel->pTriList != NULL && pModel->nTriCount > 0 && !bMD3)
-  {
-	  if(fabs(vMin[2]) < ((vMax[2]-vMin[2]) / 10.0))	// > 90% above 0 point.
-	    pModel->nModelPosition = 1;
-//	sprintf (cPath, "%s/%sskin.pcx", ValueForKey(g_qeglobals.d_project_entity, "basepath"), pLocation);
-    sprintf (cPath, "%s/%s", ValueForKey(g_qeglobals.d_project_entity, "basepath"), cSkin);
- 	  pModel->nTextureBind = Texture_LoadSkin(cPath, &pModel->nSkinWidth, &pModel->nSkinHeight);
-    if (pModel->nTextureBind == -1)
-    {
-//      sprintf (cPath, "%sskin.pcx", pLocation);
-		  strcpy (cPath, cSkin);
-      pModel->nTextureBind = Texture_LoadSkin(cPath, &pModel->nSkinWidth, &pModel->nSkinHeight);
-    }
-  }
-#endif
-
 }
 
 void setSpecialLoad(eclass_t *e, const char* pWhat, char*& p)
@@ -504,13 +486,6 @@ eclass_t *Eclass_InitFromText (char *text)
 	len = t-text;
 	e->comments = (char*)qmalloc (len+1);
 	memcpy (e->comments, text, len);
-#if 0
-	for (i=0 ; i<len ; i++)
-		if (text[i] == '\n')
-			e->comments[i] = '\r';
-		else
-			e->comments[i] = text[i];
-#endif
 	e->comments[len] = 0;
 	
   setSpecialLoad(e, "model=", e->modelpath);

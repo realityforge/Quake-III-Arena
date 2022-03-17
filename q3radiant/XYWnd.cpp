@@ -2264,16 +2264,6 @@ void CXYWnd::DrawRotateIcon()
 	qglBegin(GL_POINTS);
 	qglVertex3f (x,y,0);
 	qglEnd ();
-
-#if 0
-	qglBegin(GL_LINES);
-	qglVertex3f (x-6,y+6,0);
-	qglVertex3f (x+6,y+6,0);
-	qglVertex3f (x-6,y-6,0);
-	qglVertex3f (x+6,y-6,0);
-	qglEnd ();
-#endif
-
 }
 
 void CXYWnd::DrawCameraIcon()
@@ -2314,14 +2304,6 @@ void CXYWnd::DrawCameraIcon()
 	qglVertex3f (x, y, 0);
 	qglVertex3f (x+48*cos(a-Q_PI/4), y+48*sin(a-Q_PI/4), 0);
 	qglEnd ();
-
-#if 0
-  char text[128];
-	qglRasterPos2f (x+64, y+64);
-	sprintf (text, "%f",g_pParentWnd->GetCamera()->Camera().angles[YAW]);
-	qglCallLists (strlen(text), GL_UNSIGNED_BYTE, text);
-#endif
-
 }
 
 void CXYWnd::DrawZIcon (void)
@@ -2393,11 +2375,6 @@ BOOL FilterBrush(brush_t *pb)
     }
     if (!f)
       return TRUE;
-
-#if 0
-    if (strstr(pb->brush_faces->texdef.name, "caulk"))
-      return TRUE;
-#endif
 
     //++timo FIXME: .. same deal here?
     if (strstr(pb->brush_faces->texdef.name, "donotenter"))
@@ -3483,9 +3460,7 @@ bool CXYWnd::UndoAvailable()
 
 void CXYWnd::Paste()
 {
-#if 1
-
-  CWaitCursor WaitCursor; 
+  CWaitCursor WaitCursor;
   bool bPasted = false;
   UINT nClipboard = ::RegisterClipboardFormat("RadiantClippings");
   if (nClipboard > 0 && OpenClipboard() && ::IsClipboardFormatAvailable(nClipboard))
@@ -3515,56 +3490,6 @@ void CXYWnd::Paste()
     Map_ImportBuffer(pBuffer);
     delete []pBuffer;
   }
-
-#if 0
-  if (g_PatchClipboard.GetLength() > 0)
-  {
-    g_PatchClipboard.SeekToBegin();
-    int nLen = g_PatchClipboard.GetLength();
-    char* pBuffer = new char[nLen+1];
-    g_PatchClipboard.Read(pBuffer, nLen);
-    pBuffer[nLen] = '\0';
-    Patch_ReadBuffer(pBuffer, true);
-    delete []pBuffer;
-  }
-#endif
-
-#else
-  if (g_brClipboard.next != &g_brClipboard || g_enClipboard.next != &g_enClipboard)
-  {
-    Select_Deselect();
-
-	  for (brush_t* pBrush = g_brClipboard.next ; pBrush != NULL && pBrush != &g_brClipboard ; pBrush=pBrush->next)
-    {
-      brush_t* pClone = Brush_Clone(pBrush);
-	    //pClone->owner = pBrush->owner;
-      if (pClone->owner == NULL)
-			  Entity_LinkBrush (world_entity, pClone);
-    	
-      Brush_AddToList (pClone, &selected_brushes);
-      Brush_Build(pClone);
-    }
-
-    for (entity_t* pEntity = g_enClipboard.next; pEntity != NULL && pEntity != &g_enClipboard; pEntity = pEntity->next)
-    {
-      entity_t* pEClone = Entity_Clone(pEntity);
-			for (brush_t* pEB = pEntity->brushes.onext ; pEB != &pEntity->brushes ; pEB=pEB->onext)
-			{
-        brush_t* pClone = Brush_Clone(pEB);
-	      Brush_AddToList (pClone, &selected_brushes);
-        Entity_LinkBrush(pEClone, pClone);
-        Brush_Build(pClone);
-        if (pClone->owner && pClone->owner != world_entity)
-        {
-			    UpdateEntitySel(pClone->owner->eclass);
-        }
-			}
-    }
-
-    Sys_UpdateWindows(W_ALL);
-  }
-  else Sys_Printf("Nothing to paste.../n");
-#endif
 }
 
 

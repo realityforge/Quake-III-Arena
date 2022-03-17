@@ -464,13 +464,6 @@ void CCamWnd::Cam_MouseControl (float dtime)
 	yl = m_Camera.height/3;
 	yh = yl*2;
 
-  //Sys_Printf("xf-%f  yf-%f  xl-%i  xh-i%  yl-i%  yh-i%\n",xf,yf,xl,xh,yl,yh);
-#if 0
-	// strafe
-	if (buttony < yl && (buttonx < xl || buttonx > xh))
-		VectorMA (camera.origin, xf*dtime*g_nMoveSpeed, camera.right, camera.origin);
-	else
-#endif
 	{
 		xf *= 1.0 - fabs(yf);
 		if (xf < 0)
@@ -489,18 +482,6 @@ void CCamWnd::Cam_MouseControl (float dtime)
 		VectorMA (m_Camera.origin, yf*dtime*g_nMoveSpeed, m_Camera.forward, m_Camera.origin);
 		m_Camera.angles[YAW] += xf*-dtime*g_nAngleSpeed;
 	}
-
-#if 0
-  if (g_PrefsDlg.m_bQE4Painting)
-  {
-    MSG msg;
-    if (::PeekMessage( &msg, NULL, 0, 0, PM_REMOVE )) 
-    { 
-      TranslateMessage(&msg);
-      DispatchMessage(&msg);
-    }
-  }
-#endif
 
   int nUpdate = (g_PrefsDlg.m_bCamXYUpdate) ? (W_CAMERA | W_XY) : (W_CAMERA);
 	Sys_UpdateWindows (nUpdate);
@@ -689,26 +670,6 @@ qboolean CCamWnd::CullBrush (brush_t *b)
 
 	return false;
 }
-
-#if 0
-void CCamWnd::DrawLightRadius(brush_t* pBrush)
-{
-  // if lighting
-  int nRadius = Brush_LightRadius(pBrush);
-  if (nRadius > 0)
-  {
-    Brush_SetLightColor(pBrush);
-	  qglEnable (GL_BLEND);
-	  qglPolygonMode (GL_FRONT_AND_BACK, GL_LINE);
-	  qglBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	  qglDisable (GL_TEXTURE_2D);
-
-    qglEnable(GL_TEXTURE_2D);
-    qglDisable(GL_BLEND);
-    qglPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
-  }
-}
-#endif
 
 /*
 ==============
@@ -1033,19 +994,6 @@ void CCamWnd::Cam_Draw()
 	// bind back to the default texture so that we don't have problems
 	// elsewhere using/modifying texture maps between contexts
 	qglBindTexture( GL_TEXTURE_2D, 0 );
-	
-#if 0
-	// area selection hack
-	if (g_qeglobals.d_select_mode == sel_area)
-	{
-		qglEnable (GL_BLEND);
-		qglBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		qglColor4f(0.0, 0.0, 1.0, 0.25);
-		qglPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
-		qglRectfv(g_qeglobals.d_vAreaTL, g_qeglobals.d_vAreaBR);
-		qglDisable (GL_BLEND);
-	}
-#endif
 	
 	qglFinish();
 	QE_CheckOpenGLForErrors();
