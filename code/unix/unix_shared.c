@@ -240,11 +240,8 @@ char **Sys_ListFiles( const char *directory, const char *extension, char *filter
 	int			nfiles;
 	char		**listCopy;
 	char		*list[MAX_FOUND_FILES];
-	//int			flag; // bk001204 - unused
 	int			i;
 	struct stat st;
-
-	int			extLen;
 
 	if (filter) {
 
