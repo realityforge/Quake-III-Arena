@@ -45,6 +45,7 @@ build --copt -DUSE_LOCAL_HEADERS
 # See https://embeddedartistry.com/blog/2017/06/07/warnings-weverything-and-the-kitchen-sink/ for descriptions on what these entail.
 #
 build --copt -Wall
+build --copt -Wpedantic
 
 #
 # Config specific build options.
