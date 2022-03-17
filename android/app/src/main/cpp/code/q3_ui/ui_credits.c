@@ -31,6 +31,7 @@ CREDITS
 
 #include "ui_local.h"
 
+#include "../qcommon/qcommon.h"
 
 typedef struct {
 	menuframework_s	menu;
@@ -85,6 +86,88 @@ static void UI_CreditMenu_Draw_ioq3( void ) {
 
 
 /*
+===============
+UI_CreditMenu_Draw_ioq3
+===============
+*/
+static void UI_CreditMenu_Draw_q3q( void ) {
+	int		y;
+	int		i;
+
+/*
+Quake3Quest by Team Beef & Friends
+-------------------------------------
+Lead programmer
+Dr Beef
+
+Additional coding
+Baggyg, MuaDiB, Lubos, Sparkie
+
+Additional Contributions
+Bummser, Skillfur, Ceno, Cukier, Eispfogel, Pizzaluigi
+
+Dedicated Beta Testers
+XQuader, Ceno, Cukier, Bummser, Retro1N, Benny91, April, Ikarus,
+Bim, Lubos, MasakaPete, Config2, Maniac, Ghostdog72, Slydog43,
+Cornelius, Ferret, RealityForge, PvtGenO, SatanSlayer
+
+Special Thanks to the whole discord!
+*/
+
+	y = 12;
+
+	UI_DrawProportionalString( 320, y, "Quake3Quest by Team Beef & Friends", UI_CENTER|UI_SMALLFONT, color_red );
+	y += PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
+	UI_DrawProportionalString( 320, y, "----------------------------------", UI_CENTER|UI_SMALLFONT, color_white );
+
+    y += 1.42 * PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
+    UI_DrawProportionalString( 320, y, "Team Beef are DrBeef,  Baggyg,  Bummser", UI_CENTER|UI_SMALLFONT, color_blue );
+    y += 1.42 * PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
+	UI_DrawProportionalString( 320, y, "Lead programmer", UI_CENTER|UI_SMALLFONT, color_red );
+	y += PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
+    UI_DrawString( 320, y, "DrBeef", UI_CENTER|UI_SMALLFONT, color_white );
+
+    y += 1.42 * PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
+    UI_DrawProportionalString( 320, y, "Companion App", UI_CENTER|UI_SMALLFONT, color_red );
+    y += PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
+    UI_DrawString( 320, y, "Baggyg", UI_CENTER|UI_SMALLFONT, color_white );
+
+	y += 1.42 * PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
+	UI_DrawProportionalString( 320, y, "Additional Quake3Quest coding", UI_CENTER|UI_SMALLFONT, color_red );
+	y += PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
+    UI_DrawString( 320, y, "Baggyg, MuadDiB, Lubos, Sparkie", UI_CENTER|UI_SMALLFONT, color_white );
+
+	y += 1.42 * PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
+	UI_DrawProportionalString( 320, y, "Additional Contributions", UI_CENTER|UI_SMALLFONT, color_red );
+	y += PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
+	UI_DrawString( 320, y, "Bummser, Skillfur, Ceno, Cukier, Eispfogel, Pizzaluigi", UI_CENTER|UI_SMALLFONT, color_white );
+
+	y += 1.42 * PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
+	UI_DrawProportionalString( 320, y, "Dedicated Beta Testers", UI_CENTER|UI_SMALLFONT, color_red );
+	y += PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
+	UI_DrawString( 320, y, "XQuader, Ceno, Cukier, Bummser, Retro1N, Benny91, April, Ikarus,", UI_CENTER|UI_SMALLFONT, color_white );
+	y += PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
+	UI_DrawString( 320, y, "Bim, Lubos, MasakaPete, Config2, Maniac, Ghostdog72, Slydog43,", UI_CENTER|UI_SMALLFONT, color_white );
+	y += PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
+	UI_DrawString( 320, y, "Cornelius, Ferret, RealityForge, PvtGenO, SatanSlayer", UI_CENTER|UI_SMALLFONT, color_white );
+
+	y += 1.42 * PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
+	UI_DrawProportionalString( 320, y, "Special Thanks to the whole Team Beef discord!", UI_CENTER|UI_SMALLFONT, color_red );
+
+	qboolean skipIOQ3Credits = trap_Cvar_VariableValue("skip_ioq3_credits") == 1.0f;
+	if (skipIOQ3Credits)
+	{
+		y += 1.42 * PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
+		UI_DrawProportionalString(320, y, "..and additional thanks to all the", UI_CENTER | UI_SMALLFONT, color_orange);
+		y += PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
+		UI_DrawProportionalString(320, y, "original ioquake3 contributors!", UI_CENTER | UI_SMALLFONT, color_orange);
+	}
+
+	UI_DrawString( 320, 459, "Quake3Quest: https://www.quake3.quakevr.com/", UI_CENTER|UI_SMALLFONT, color_red );
+}
+
+
+/*
 =================
 UI_CreditMenu_Key
 =================
@@ -94,9 +177,16 @@ static sfxHandle_t UI_CreditMenu_Key( int key ) {
 		return 0;
 	}
 
+	qboolean skipIOQ3Credits = trap_Cvar_VariableValue("skip_ioq3_credits") == 1.0f;
+
 	s_credits.frame++;
 	if (s_credits.frame == 1) {
-		s_credits.menu.draw = UI_CreditMenu_Draw_ioq3;
+		s_credits.menu.draw = UI_CreditMenu_Draw_q3q;
+	} else if (s_credits.frame == 2 && !skipIOQ3Credits) {
+		//Only show these once the first time someone plays
+		trap_Cvar_SetValue("skip_ioq3_credits", 1.0f);
+        trap_Cmd_ExecuteText( EXEC_APPEND, "writeconfig " Q3CONFIG_CFG "/n");
+        s_credits.menu.draw = UI_CreditMenu_Draw_ioq3;
 	} else {
 		trap_Cmd_ExecuteText( EXEC_APPEND, "quit\n" );
 	}
@@ -158,7 +248,7 @@ static void UI_CreditMenu_Draw( void ) {
 	UI_DrawProportionalString( 320, y, "Eric Webb", UI_CENTER|UI_SMALLFONT, color_white );
 
 	y += 1.35 * PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
-	UI_DrawString( 320, y, "To order: 1-800-idgames     www.quake3arena.com     www.idsoftware.com", UI_CENTER|UI_SMALLFONT, color_red );
+	UI_DrawString( 320, y, "Buy the full game on Steam:  https://store.steampowered.com/app/2200/Quake_III_Arena", UI_CENTER|UI_SMALLFONT, color_red );
 	y += SMALLCHAR_HEIGHT;
 	UI_DrawString( 320, y, "Quake III Arena(c) 1999-2000, Id Software, Inc.  All Rights Reserved", UI_CENTER|UI_SMALLFONT, color_red );
 }

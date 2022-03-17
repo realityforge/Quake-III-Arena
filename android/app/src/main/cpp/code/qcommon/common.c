@@ -2947,7 +2947,7 @@ void Com_WriteConfiguration( void ) {
 	Com_WriteConfigToFile( Q3CONFIG_CFG );
 
 	// not needed for dedicated or standalone
-#if !defined(DEDICATED) && !defined(STANDALONE)
+#if 0 //!defined(DEDICATED) && !defined(STANDALONE)
 	if(!com_standalone->integer)
 	{
 		const char *gamedir;

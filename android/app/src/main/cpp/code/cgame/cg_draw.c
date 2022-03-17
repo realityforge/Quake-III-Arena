@@ -2823,8 +2823,9 @@ void CG_DrawActive( void ) {
 			vec3_t pos, hmdposition, vieworg;
 			VectorClear(pos);
 			VectorSubtract(vr->hmdposition, vr->hmdorigin, hmdposition);
-			rotateAboutOrigin(hmdposition[2], hmdposition[0],
-							  cg.refdefViewAngles[YAW] - vr->calculated_weaponangles[YAW], pos);
+
+			float angleYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]) + (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]);
+			rotateAboutOrigin(hmdposition[2], hmdposition[0], angleYaw, pos);
 			VectorScale(pos, worldscale, pos);
 			VectorSubtract(cg.refdef.vieworg, pos, vieworg);
 

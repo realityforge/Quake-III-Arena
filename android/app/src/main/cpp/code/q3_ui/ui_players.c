@@ -591,7 +591,7 @@ static void UI_PlayerAngles( playerInfo_t *pi, vec3_t legs[3], vec3_t torso[3], 
 	float		dest;
 	float		adjust;
 
-    pi->viewAngles[YAW] = AngleNormalize360(uis.realtime / 50.0f);
+    pi->viewAngles[YAW] = 180 + (45.0f * sinf(DEG2RAD(AngleNormalize360(uis.realtime / 40.0f))));
 
 	VectorCopy( pi->viewAngles, headAngles );
 	headAngles[YAW] = AngleMod( headAngles[YAW] );
@@ -805,8 +805,6 @@ void UI_DrawPlayer( float x, float y, float w, float h, playerInfo_t *pi, int ti
 	VectorCopy (legs.origin, legs.oldorigin);
 
     UI_ScaleModel(&legs);
-    //UI_ScaleModel(&torso);
-    //UI_ScaleModel(&head);
 
 	trap_R_AddRefEntityToScene( &legs );
 

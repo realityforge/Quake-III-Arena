@@ -51,16 +51,6 @@ typedef struct {
     vec3_t offhandposition;
 
     vec2_t thumbstick_location[2]; //left / right thumbstick locations - used in cgame
-
-    //////////////////////////////////////
-    //    Test stuff for weapon alignment
-    //////////////////////////////////////
-
-    char    test_name[256];
-    float   test_scale;
-    vec3_t  test_angles;
-    vec3_t  test_offset;
-
 } vr_clientinfo_t;
 
 #endif //vr_clientinfo_h

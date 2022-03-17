@@ -57,6 +57,7 @@ engine_t* VR_Init( ovrJava java )
 
 void VR_InitCvars( void )
 {
+	Cvar_Get ("skip_ioq3_credits", "0.0", CVAR_ARCHIVE);
 	vr_worldscale = Cvar_Get ("vr_worldscale", "32.0", CVAR_ARCHIVE);
 	vr_hudDepth = Cvar_Get ("vr_hudDepth", "3", CVAR_ARCHIVE);
 	vr_righthanded = Cvar_Get ("vr_righthanded", "1", CVAR_ARCHIVE);
