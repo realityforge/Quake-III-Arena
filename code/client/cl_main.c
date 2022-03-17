@@ -525,15 +525,6 @@ void CL_CaptureVoip(void)
 
 				Com_DPrintf("VoIP: Send %d frames, %d bytes, %f power\n",
 				            voipFrames, bytes, clc.voipPower);
-
-				#if 0
-				static FILE *encio = NULL;
-				if (encio == NULL) encio = fopen("voip-outgoing-encoded.bin", "wb");
-				if (encio != NULL) { fwrite(clc.voipOutgoingData, bytes, 1, encio); fflush(encio); }
-				static FILE *decio = NULL;
-				if (decio == NULL) decio = fopen("voip-outgoing-decoded.bin", "wb");
-				if (decio != NULL) { fwrite(sampbuffer, voipFrames * VOIP_MAX_FRAME_SAMPLES * 2, 1, decio); fflush(decio); }
-				#endif
 			}
 		}
 	}
