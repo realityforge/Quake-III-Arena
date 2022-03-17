@@ -30,12 +30,6 @@ CONNECTION SCREEN
 ===============================================================================
 */
 
-qboolean	passwordNeeded = qtrue;
-menufield_s passwordField;
-
-static connstate_t	lastConnState;
-static char			lastLoadingText[MAX_INFO_VALUE];
-
 static void UI_ReadableSize ( char *buf, int bufsize, int value )
 {
 	if (value > 1024*1024*1024 ) { // gigs
@@ -208,35 +202,6 @@ void UI_DrawConnectScreen( qboolean overlay ) {
 		UI_DrawProportionalString_AutoWrapped( 320, 192, 630, 20, cstate.messageString, UI_CENTER|UI_SMALLFONT|UI_DROPSHADOW, menu_text_color );
 	}
 
-#if 0
-	// display password field
-	if ( passwordNeeded ) {
-		s_ingame_menu.x = SCREEN_WIDTH * 0.50 - 128;
-		s_ingame_menu.nitems = 0;
-		s_ingame_menu.wrapAround = qtrue;
-
-		passwordField.generic.type = MTYPE_FIELD;
-		passwordField.generic.name = "Password:";
-		passwordField.generic.callback = 0;
-		passwordField.generic.x		= 10;
-		passwordField.generic.y		= 180;
-		Field_Clear( &passwordField.field );
-		passwordField.width = 256;
-		passwordField.field.widthInChars = 16;
-		Q_strncpyz( passwordField.field.buffer, Cvar_VariableString("password"), 
-			sizeof(passwordField.field.buffer) );
-
-		Menu_AddItem( &s_ingame_menu, ( void * ) &s_customize_player_action );
-
-		MField_Draw( &passwordField );
-	}
-#endif
-
-	if ( lastConnState > cstate.connState ) {
-		lastLoadingText[0] = '\0';
-	}
-	lastConnState = cstate.connState;
-
 	switch ( cstate.connState ) {
 	case CA_CONNECTING:
 		s = va("Awaiting challenge...%i", cstate.connectPacketCount);
@@ -264,19 +229,4 @@ void UI_DrawConnectScreen( qboolean overlay ) {
 	}
 
 	UI_DrawProportionalString( 320, 128, s, UI_CENTER|UI_SMALLFONT|UI_DROPSHADOW, color_white );
-
-	// password required / connection rejected information goes here
-}
-
-
-/*
-===================
-UI_KeyConnect
-===================
-*/
-void UI_KeyConnect( int key ) {
-	if ( key == K_ESCAPE ) {
-		trap_Cmd_ExecuteText( EXEC_APPEND, "disconnect\n" );
-		return;
-	}
 }
