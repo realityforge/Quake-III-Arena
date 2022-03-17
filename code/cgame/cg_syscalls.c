@@ -26,12 +26,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #error "Do not use in VM build"
 #endif
 
+#include "qcommon.h"
 #include "cg_local.h"
 
-static intptr_t (QDECL *syscall)( intptr_t arg, ... ) = (intptr_t (QDECL *)( intptr_t, ...))-1;
+static vmDllSystemCall syscall = (vmDllSystemCall)-1;
 
-
-Q_EXPORT void dllEntry( intptr_t (QDECL  *syscallptr)( intptr_t arg,... ) ) {
+Q_EXPORT void dllEntry( vmDllSystemCall syscallptr ) {
 	syscall = syscallptr;
 }
 

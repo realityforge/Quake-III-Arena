@@ -348,6 +348,7 @@ typedef enum {
 } sharedTraps_t;
 
 typedef intptr_t (QDECL *vmMainProc)(int callNum, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11);
+typedef intptr_t (QDECL *vmDllSystemCall)(intptr_t, ...);
 
 void	VM_Init( void );
 vm_t	*VM_Create( const char *module, intptr_t (*systemCalls)(intptr_t *), 
@@ -1057,8 +1058,7 @@ NON-PORTABLE SYSTEM SERVICES
 void	Sys_Init (void);
 
 // general development dll loading for virtual machine testing
-void	* QDECL Sys_LoadGameDll( const char *name, vmMainProc *entryPoint,
-				  intptr_t (QDECL *systemcalls)(intptr_t, ...) );
+void	* QDECL Sys_LoadGameDll( const char *name, vmMainProc *entryPoint, vmDllSystemCall systemCall );
 void	Sys_UnloadDll( void *dllHandle );
 
 qboolean Sys_DllExtension( const char *name );

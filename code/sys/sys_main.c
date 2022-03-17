@@ -412,12 +412,12 @@ Sys_LoadGameDll
 Used to load a development dll instead of a virtual machine
 =================
 */
-void *Sys_LoadGameDll(const char *name,
-	vmMainProc *entryPoint,
-	intptr_t (*systemcalls)(intptr_t, ...))
+void *Sys_LoadGameDll(const char *name, vmMainProc *entryPoint, vmDllSystemCall systemCall)
 {
 	void *libHandle;
-	void (*dllEntry)(intptr_t (*syscallptr)(intptr_t, ...));
+    typedef void (*vmRegisterSystemCall)(vmDllSystemCall);
+
+    vmRegisterSystemCall dllEntry;
 
 	assert(name);
 
@@ -436,8 +436,8 @@ void *Sys_LoadGameDll(const char *name,
 		return NULL;
 	}
 
-	dllEntry = Sys_LoadFunction( libHandle, "dllEntry" );
-	*entryPoint = Sys_LoadFunction( libHandle, "vmMain" );
+	dllEntry = (vmRegisterSystemCall)Sys_LoadFunction(libHandle, "dllEntry" );
+	*entryPoint = (vmMainProc)Sys_LoadFunction( libHandle, "vmMain" );
 
 	if ( !*entryPoint || !dllEntry )
 	{
@@ -447,8 +447,8 @@ void *Sys_LoadGameDll(const char *name,
 		return NULL;
 	}
 
-	Com_Printf ( "Sys_LoadGameDll(%s) found vmMain function at %p\n", name, *entryPoint );
-	dllEntry( systemcalls );
+	Com_Printf ( "Sys_LoadGameDll(%s) found vmMain function at %p\n", name, (void *) *entryPoint );
+	dllEntry( systemCall );
 
 	return libHandle;
 }

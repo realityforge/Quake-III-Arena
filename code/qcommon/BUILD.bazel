@@ -164,6 +164,7 @@ cc_library(
     includes = ["."],
     visibility = [
         "//code/botlib:__pkg__",
+        "//code/cgame:__pkg__",
         "//code/client:__pkg__",
         "//code/renderergl1:__pkg__",
         "//code/renderergl2:__pkg__",
