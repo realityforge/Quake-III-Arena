@@ -336,7 +336,7 @@ void CL_Record_f( void ) {
 	}
 
 	// baselines
-	Com_Memset (&nullstate, 0, sizeof(nullstate));
+	memset (&nullstate, 0, sizeof(nullstate));
 	for ( i = 0; i < MAX_GENTITIES ; i++ ) {
 		ent = &cl.entityBaselines[i];
 		if ( !ent->number ) {
@@ -663,9 +663,9 @@ void CL_MapLoading( void ) {
 	// if we are already connected to the local host, stay connected
 	if ( cls.state >= CA_CONNECTED && !Q_stricmp( cls.servername, "localhost" ) ) {
 		cls.state = CA_CONNECTED;		// so the connect screen is drawn
-		Com_Memset( cls.updateInfoString, 0, sizeof( cls.updateInfoString ) );
-		Com_Memset( clc.serverMessage, 0, sizeof( clc.serverMessage ) );
-		Com_Memset( &cl.gameState, 0, sizeof( cl.gameState ) );
+		memset( cls.updateInfoString, 0, sizeof( cls.updateInfoString ) );
+		memset( clc.serverMessage, 0, sizeof( clc.serverMessage ) );
+		memset( &cl.gameState, 0, sizeof( cl.gameState ) );
 		clc.lastPacketSentTime = -9999;
 		SCR_UpdateScreen();
 	} else {
@@ -695,7 +695,7 @@ void CL_ClearState (void) {
 
 //	S_StopAllSounds();
 
-	Com_Memset( &cl, 0, sizeof( cl ) );
+	memset( &cl, 0, sizeof( cl ) );
 }
 
 
@@ -752,7 +752,7 @@ void CL_Disconnect( qboolean showMainMenu ) {
 	CL_ClearState ();
 
 	// wipe the client connection
-	Com_Memset( &clc, 0, sizeof( clc ) );
+	memset( &clc, 0, sizeof( clc ) );
 
 	cls.state = CA_DISCONNECTED;
 
@@ -2000,7 +2000,7 @@ void CL_ShutdownRef( void ) {
 		return;
 	}
 	re.Shutdown( qtrue );
-	Com_Memset( &re, 0, sizeof( re ) );
+	memset( &re, 0, sizeof( re ) );
 }
 
 /*
@@ -2346,7 +2346,7 @@ void CL_Shutdown( void ) {
 
 	recursive = qfalse;
 
-	Com_Memset( &cls, 0, sizeof( cls ) );
+	memset( &cls, 0, sizeof( cls ) );
 
 	Com_Printf( "-----------------------\n" );
 
@@ -2713,10 +2713,10 @@ void CL_LocalServers_f( void ) {
 
 	for (i = 0; i < MAX_OTHER_SERVERS; i++) {
 		qboolean b = cls.localServers[i].visible;
-		Com_Memset(&cls.localServers[i], 0, sizeof(cls.localServers[i]));
+		memset(&cls.localServers[i], 0, sizeof(cls.localServers[i]));
 		cls.localServers[i].visible = b;
 	}
-	Com_Memset( &to, 0, sizeof( to ) );
+	memset( &to, 0, sizeof( to ) );
 
 	// The 'xxx' in the message is a challenge that will be echoed back
 	// by the server.  We don't care about that here, but master servers
@@ -2973,7 +2973,7 @@ void CL_Ping_f( void ) {
 		return;	
 	}
 
-	Com_Memset( &to, 0, sizeof(netadr_t) );
+	memset( &to, 0, sizeof(netadr_t) );
 
 	server = Cmd_Argv(1);
 
@@ -3109,7 +3109,7 @@ void CL_ServerStatus_f(void) {
 	char		*server;
 	serverStatus_t *serverStatus;
 
-	Com_Memset( &to, 0, sizeof(netadr_t) );
+	memset( &to, 0, sizeof(netadr_t) );
 
 	if ( Cmd_Argc() != 2 ) {
 		if ( cls.state != CA_ACTIVE || clc.demoplaying ) {

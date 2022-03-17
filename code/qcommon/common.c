@@ -492,7 +492,7 @@ void Info_Print( const char *s ) {
 		l = o - key;
 		if (l < 20)
 		{
-			Com_Memset (o, ' ', 20-l);
+			memset (o, ' ', 20-l);
 			key[20] = 0;
 		}
 		else
@@ -835,7 +835,7 @@ void Z_Free( void *ptr ) {
 	zone->used -= block->size;
 	// set the block to something that should cause problems
 	// if it is referenced...
-	Com_Memset( ptr, 0xaa, block->size - sizeof( *block ) );
+	memset( ptr, 0xaa, block->size - sizeof( *block ) );
 
 	block->tag = 0;		// mark as free
 	
@@ -1006,7 +1006,7 @@ void *Z_Malloc( int size ) {
 #else
 	buf = Z_TagMalloc( size, TAG_GENERAL );
 #endif
-	Com_Memset( buf, 0, size );
+	memset( buf, 0, size );
 
 	return buf;
 }
@@ -1697,7 +1697,7 @@ void *Hunk_Alloc( int size, ha_pref preference ) {
 
 	hunk_permanent->temp = hunk_permanent->permanent;
 
-	Com_Memset( buf, 0, size );
+	memset( buf, 0, size );
 
 #ifdef HUNK_DEBUG
 	{
@@ -2140,7 +2140,7 @@ int Com_EventLoop( void ) {
 				Com_Printf("Com_EventLoop: oversize packet\n");
 				continue;
 			}
-			Com_Memcpy( buf.data, (byte *)((netadr_t *)ev.evPtr + 1), buf.cursize );
+			memcpy( buf.data, (byte *)((netadr_t *)ev.evPtr + 1), buf.cursize );
 			if ( com_sv_running->integer ) {
 				Com_RunAndTimeServerPacket( &evFrom, &buf );
 #ifndef DEDICATED
@@ -2678,12 +2678,12 @@ void Com_Shutdown (void) {
 #if !( defined __linux__ )
 #if ((!id386) && (!defined __i386__)) // rcg010212 - for PPC
 
-void Com_Memcpy (void* dest, const void* src, const size_t count)
+void memcpy (void* dest, const void* src, const size_t count)
 {
 	memcpy(dest, src, count);
 }
 
-void Com_Memset (void* dest, const int val, const size_t count)
+void memset (void* dest, const int val, const size_t count)
 {
 	memset(dest, val, count);
 }
@@ -2754,7 +2754,7 @@ outta:
 
 // optimized memory copy routine that handles all alignment
 // cases and block sizes efficiently
-void Com_Memcpy (void* dest, const void* src, const size_t count) {
+void memcpy (void* dest, const void* src, const size_t count) {
 	Com_Prefetch (src, count, PRE_READ);
 	__asm
 	{
@@ -2853,7 +2853,7 @@ outta:
 	}
 }
 
-void Com_Memset (void* dest, const int val, const size_t count)
+void memset (void* dest, const int val, const size_t count)
 {
 	unsigned int fillval;
 
@@ -3150,7 +3150,7 @@ void Field_CompleteCommand( field_t *field ) {
 		return;	// no matches
 	}
 
-	Com_Memcpy(&temp, completionField, sizeof(field_t));
+	memcpy(&temp, completionField, sizeof(field_t));
 
 	if ( matchCount == 1 ) {
 		Com_sprintf( completionField->buffer, sizeof( completionField->buffer ), "\\%s", shortestMatch );

@@ -778,7 +778,7 @@ void FS_FCloseFile( fileHandle_t f ) {
 		if ( fsh[f].handleFiles.unique ) {
 			unzClose( fsh[f].handleFiles.file.z );
 		}
-		Com_Memset( &fsh[f], 0, sizeof( fsh[f] ) );
+		memset( &fsh[f], 0, sizeof( fsh[f] ) );
 		return;
 	}
 
@@ -786,7 +786,7 @@ void FS_FCloseFile( fileHandle_t f ) {
 	if (fsh[f].handleFiles.file.o) {
 		fclose (fsh[f].handleFiles.file.o);
 	}
-	Com_Memset( &fsh[f], 0, sizeof( fsh[f] ) );
+	memset( &fsh[f], 0, sizeof( fsh[f] ) );
 }
 
 /*
@@ -1092,7 +1092,7 @@ int FS_FOpenFileRead( const char *filename, fileHandle_t *file, qboolean uniqueF
 					// set the file position in the zip file (also sets the current file info)
 					unzSetCurrentFileInfoPosition(pak->handle, pakFile->pos);
 					// copy the file info into the unzip structure
-					Com_Memcpy( zfi, pak->handle, sizeof(unz_s) );
+					memcpy( zfi, pak->handle, sizeof(unz_s) );
 					// we copy this back into the structure
 					zfi->file = temp;
 					// open the file in the zip
@@ -2119,7 +2119,7 @@ int	FS_GetModList( char *listbuf, int bufsize ) {
         if ( nDescLen > 0 && descHandle) {
           FILE *file;
           file = FS_FileForHandle(descHandle);
-          Com_Memset( descPath, 0, sizeof( descPath ) );
+          memset( descPath, 0, sizeof( descPath ) );
           nDescLen = fread(descPath, 1, 48, file);
           if (nDescLen >= 0) {
             descPath[nDescLen] = '\0';
@@ -2267,7 +2267,7 @@ void FS_SortFileList(char **filelist, int numfiles) {
 		sortedlist[j] = filelist[i];
 		numsortedfiles++;
 	}
-	Com_Memcpy(filelist, sortedlist, numfiles * sizeof( *filelist ) );
+	memcpy(filelist, sortedlist, numfiles * sizeof( *filelist ) );
 	Z_Free(sortedlist);
 }
 

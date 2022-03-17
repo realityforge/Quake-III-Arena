@@ -235,7 +235,7 @@ static	void R_LoadVisibility( lump_t *l ) {
 
 	len = ( s_worldData.numClusters + 63 ) & ~63;
 	s_worldData.novis = ri.Hunk_Alloc( len, h_low );
-	Com_Memset( s_worldData.novis, 0xff, len );
+	memset( s_worldData.novis, 0xff, len );
 
     len = l->filelen;
 	if ( !len ) {
@@ -254,7 +254,7 @@ static	void R_LoadVisibility( lump_t *l ) {
 		byte	*dest;
 
 		dest = ri.Hunk_Alloc( len - 8, h_low );
-		Com_Memcpy( dest, buf + 8, len - 8 );
+		memcpy( dest, buf + 8, len - 8 );
 		s_worldData.vis = dest;
 	}
 }
@@ -1205,13 +1205,13 @@ void R_MovePatchSurfacesToHunk(void) {
 		//
 		size = (grid->width * grid->height - 1) * sizeof( drawVert_t ) + sizeof( *grid );
 		hunkgrid = ri.Hunk_Alloc( size, h_low );
-		Com_Memcpy(hunkgrid, grid, size);
+		memcpy(hunkgrid, grid, size);
 
 		hunkgrid->widthLodError = ri.Hunk_Alloc( grid->width * 4, h_low );
-		Com_Memcpy( hunkgrid->widthLodError, grid->widthLodError, grid->width * 4 );
+		memcpy( hunkgrid->widthLodError, grid->widthLodError, grid->width * 4 );
 
 		hunkgrid->heightLodError = ri.Hunk_Alloc( grid->height * 4, h_low );
-		Com_Memcpy( grid->heightLodError, grid->heightLodError, grid->height * 4 );
+		memcpy( grid->heightLodError, grid->heightLodError, grid->height * 4 );
 
 		R_FreeSurfaceGridMesh( grid );
 
@@ -1447,7 +1447,7 @@ static	void R_LoadShaders( lump_t *l ) {
 	s_worldData.shaders = out;
 	s_worldData.numShaders = count;
 
-	Com_Memcpy( out, in, count*sizeof(*out) );
+	memcpy( out, in, count*sizeof(*out) );
 
 	for ( i=0 ; i<count ; i++ ) {
 		out[i].surfaceFlags = LittleLong( out[i].surfaceFlags );
@@ -1672,7 +1672,7 @@ void R_LoadLightGrid( lump_t *l ) {
 	}
 
 	w->lightGridData = ri.Hunk_Alloc( l->filelen, h_low );
-	Com_Memcpy( w->lightGridData, (void *)(fileBase + l->fileofs), l->filelen );
+	memcpy( w->lightGridData, (void *)(fileBase + l->fileofs), l->filelen );
 
 	// deal with overbright bits
 	for ( i = 0 ; i < numGridPoints ; i++ ) {
@@ -1816,7 +1816,7 @@ void RE_LoadWorldMap( const char *name ) {
 	// try will not look at the partially loaded version
 	tr.world = NULL;
 
-	Com_Memset( &s_worldData, 0, sizeof( s_worldData ) );
+	memset( &s_worldData, 0, sizeof( s_worldData ) );
 	Q_strncpyz( s_worldData.name, name, sizeof( s_worldData.name ) );
 
 	Q_strncpyz( s_worldData.baseName, COM_SkipPath( s_worldData.name ), sizeof( s_worldData.name ) );

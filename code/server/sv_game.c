@@ -805,11 +805,11 @@ int SV_GameSystemCalls( int *args ) {
 		return botlib_export->ai.GeneticParentsAndChildSelection(args[1], VMA(2), VMA(3), VMA(4), VMA(5));
 
 	case TRAP_MEMSET:
-		Com_Memset( VMA(1), args[2], args[3] );
+		memset( VMA(1), args[2], args[3] );
 		return 0;
 
 	case TRAP_MEMCPY:
-		Com_Memcpy( VMA(1), VMA(2), args[3] );
+		memcpy( VMA(1), VMA(2), args[3] );
 		return 0;
 
 	case TRAP_STRNCPY:

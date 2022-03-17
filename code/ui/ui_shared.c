@@ -3796,7 +3796,7 @@ void Item_OwnerDraw_Paint(itemDef_t *item) {
 		}
 
 		if (item->cvarFlags & (CVAR_ENABLE | CVAR_DISABLE) && !Item_EnableShowViaCvar(item, CVAR_ENABLE)) {
-		  memcpy(color, parent->disableColor, sizeof(vec4_t)); // bk001207 - FIXME: Com_Memcpy
+		  memcpy(color, parent->disableColor, sizeof(vec4_t));
 		}
 	
 		if (item->text) {

@@ -145,7 +145,7 @@ qboolean	CL_GetSnapshot( int snapshotNumber, snapshot_t *snapshot ) {
 	snapshot->serverCommandSequence = clSnap->serverCommandNum;
 	snapshot->ping = clSnap->ping;
 	snapshot->serverTime = clSnap->serverTime;
-	Com_Memcpy( snapshot->areamask, clSnap->areamask, sizeof( snapshot->areamask ) );
+	memcpy( snapshot->areamask, clSnap->areamask, sizeof( snapshot->areamask ) );
 	snapshot->ps = clSnap->ps;
 	count = clSnap->numEntities;
 	if ( count > MAX_ENTITIES_IN_SNAPSHOT ) {
@@ -219,7 +219,7 @@ void CL_ConfigstringModified( void ) {
 	// build the new gameState_t
 	oldGs = cl.gameState;
 
-	Com_Memset( &cl.gameState, 0, sizeof( cl.gameState ) );
+	memset( &cl.gameState, 0, sizeof( cl.gameState ) );
 
 	// leave the first 0 for uninitialized strings
 	cl.gameState.dataCount = 1;
@@ -242,7 +242,7 @@ void CL_ConfigstringModified( void ) {
 
 		// append it to the gameState string buffer
 		cl.gameState.stringOffsets[ i ] = cl.gameState.dataCount;
-		Com_Memcpy( cl.gameState.stringData + cl.gameState.dataCount, dup, len + 1 );
+		memcpy( cl.gameState.stringData + cl.gameState.dataCount, dup, len + 1 );
 		cl.gameState.dataCount += len + 1;
 	}
 
@@ -337,7 +337,7 @@ rescan:
 		// clear notify lines and outgoing commands before passing
 		// the restart to the cgame
 		Con_ClearNotify();
-		Com_Memset( cl.cmds, 0, sizeof( cl.cmds ) );
+		memset( cl.cmds, 0, sizeof( cl.cmds ) );
 		return qtrue;
 	}
 
@@ -617,10 +617,10 @@ int CL_CgameSystemCalls( int *args ) {
 
 
 	case CG_MEMSET:
-		Com_Memset( VMA(1), args[2], args[3] );
+		memset( VMA(1), args[2], args[3] );
 		return 0;
 	case CG_MEMCPY:
-		Com_Memcpy( VMA(1), VMA(2), args[3] );
+		memcpy( VMA(1), VMA(2), args[3] );
 		return 0;
 	case CG_STRNCPY:
 		return (int)strncpy( VMA(1), VMA(2), args[3] );

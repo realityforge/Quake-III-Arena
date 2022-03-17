@@ -376,7 +376,7 @@ void RB_TakeScreenshot( int x, int y, int width, int height, char *fileName ) {
 		
 	buffer = ri.Hunk_AllocateTempMemory(glConfig.vidWidth*glConfig.vidHeight*3+18);
 
-	Com_Memset (buffer, 0, 18);
+	memset (buffer, 0, 18);
 	buffer[2] = 2;		// uncompressed type
 	buffer[12] = width & 255;
 	buffer[13] = width >> 8;
@@ -542,7 +542,7 @@ void R_LevelShot( void ) {
 	source = ri.Hunk_AllocateTempMemory( glConfig.vidWidth * glConfig.vidHeight * 3 );
 
 	buffer = ri.Hunk_AllocateTempMemory( 128 * 128*3 + 18);
-	Com_Memset (buffer, 0, 18);
+	memset (buffer, 0, 18);
 	buffer[2] = 2;		// uncompressed type
 	buffer[12] = 128;
 	buffer[14] = 128;
@@ -1018,16 +1018,16 @@ void R_Init( void ) {
 	ri.Printf( PRINT_ALL, "----- R_Init -----\n" );
 
 	// clear all our internal state
-	Com_Memset( &tr, 0, sizeof( tr ) );
-	Com_Memset( &backEnd, 0, sizeof( backEnd ) );
-	Com_Memset( &tess, 0, sizeof( tess ) );
+	memset( &tr, 0, sizeof( tr ) );
+	memset( &backEnd, 0, sizeof( backEnd ) );
+	memset( &tess, 0, sizeof( tess ) );
 
 //	Swap_Init();
 
 	if ( (int)tess.xyz & 15 ) {
 		Com_Printf( "WARNING: tess.xyz not 16 byte aligned\n" );
 	}
-	Com_Memset( tess.constantColor255, 255, sizeof( tess.constantColor255 ) );
+	memset( tess.constantColor255, 255, sizeof( tess.constantColor255 ) );
 
 	//
 	// init function tables
@@ -1167,7 +1167,7 @@ refexport_t *GetRefAPI ( int apiVersion, refimport_t *rimp ) {
 
 	ri = *rimp;
 
-	Com_Memset( &re, 0, sizeof( re ) );
+	memset( &re, 0, sizeof( re ) );
 
 	if ( apiVersion != REF_API_VERSION ) {
 		ri.Printf(PRINT_ALL, "Mismatched REF_API_VERSION: expected %i, got %i\n", 

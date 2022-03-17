@@ -628,7 +628,7 @@ qboolean AAS_ConnectedAreas(int *areanums, int numareas)
 {
 	int connectedareas[MAX_PORTALAREAS], i;
 
-	Com_Memset(connectedareas, 0, sizeof(connectedareas));
+	memset(connectedareas, 0, sizeof(connectedareas));
 	if (numareas < 1) return qfalse;
 	if (numareas == 1) return qtrue;
 	AAS_ConnectedAreas_r(areanums, numareas, connectedareas, 0);
@@ -706,8 +706,8 @@ int AAS_CheckAreaForPossiblePortals(int areanum)
 	//it must be a grounded area
 	if (!(aasworld.areasettings[areanum].areaflags & AREA_GROUNDED)) return 0;
 	//
-	Com_Memset(numareafrontfaces, 0, sizeof(numareafrontfaces));
-	Com_Memset(numareabackfaces, 0, sizeof(numareabackfaces));
+	memset(numareafrontfaces, 0, sizeof(numareafrontfaces));
+	memset(numareabackfaces, 0, sizeof(numareabackfaces));
 	numareas = numfrontfaces = numbackfaces = 0;
 	numfrontareas = numbackareas = 0;
 	frontplanenum = backplanenum = -1;

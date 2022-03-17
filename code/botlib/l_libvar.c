@@ -73,7 +73,7 @@ libvar_t *LibVarAlloc(char *var_name)
 	libvar_t *v;
 
 	v = (libvar_t *) GetMemory(sizeof(libvar_t) + strlen(var_name) + 1);
-	Com_Memset(v, 0, sizeof(libvar_t));
+	memset(v, 0, sizeof(libvar_t));
 	v->name = (char *) v + sizeof(libvar_t);
 	strcpy(v->name, var_name);
 	//add the variable in the list

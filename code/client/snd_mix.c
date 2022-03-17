@@ -469,7 +469,7 @@ void S_PaintChannels( int endtime ) {
 			if ( s_rawend ) {
 				//Com_DPrintf ("background sound underrun\n");
 			}
-			Com_Memset(paintbuffer, 0, (end - s_paintedtime) * sizeof(portable_samplepair_t));
+			memset(paintbuffer, 0, (end - s_paintedtime) * sizeof(portable_samplepair_t));
 		} else {
 			// copy from the streaming sound source
 			int		s;

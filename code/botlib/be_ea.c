@@ -275,7 +275,7 @@ void EA_GetInput(int client, float thinktime, bot_input_t *input)
 //	bi->actionflags &= ~ACTION_JUMPEDLASTFRAME;
 
 	bi->thinktime = thinktime;
-	Com_Memcpy(input, bi, sizeof(bot_input_t));
+	memcpy(input, bi, sizeof(bot_input_t));
 
 	/*
 	bi->thinktime = 0;

@@ -404,7 +404,7 @@ void VM_Compile( vm_t *vm, vmHeader_t *header ) {
 	buf = Z_Malloc( maxLength );
 	jused = Z_Malloc(header->instructionCount + 2 );
 	
-	Com_Memset(jused, 0, header->instructionCount+2);
+	memset(jused, 0, header->instructionCount+2);
 
 	for(pass=0;pass<2;pass++) {
 	oc0 = -23423;
@@ -1051,7 +1051,7 @@ void VM_Compile( vm_t *vm, vmHeader_t *header ) {
 	// copy to an exact size buffer on the hunk
 	vm->codeLength = compiledOfs;
 	vm->codeBase = Hunk_Alloc( compiledOfs, h_low );
-	Com_Memcpy( vm->codeBase, buf, compiledOfs );
+	memcpy( vm->codeBase, buf, compiledOfs );
 	Z_Free( buf );
 	Z_Free( jused );
 	Com_Printf( "VM file %s compiled to %i bytes of code\n", vm->name, compiledOfs );

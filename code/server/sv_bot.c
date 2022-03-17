@@ -331,7 +331,7 @@ int BotImport_DebugPolygonCreate(int color, int numPoints, vec3_t *points) {
 	poly->inuse = qtrue;
 	poly->color = color;
 	poly->numPoints = numPoints;
-	Com_Memcpy(poly->points, points, numPoints * sizeof(vec3_t));
+	memcpy(poly->points, points, numPoints * sizeof(vec3_t));
 	//
 	return i;
 }
@@ -349,7 +349,7 @@ void BotImport_DebugPolygonShow(int id, int color, int numPoints, vec3_t *points
 	poly->inuse = qtrue;
 	poly->color = color;
 	poly->numPoints = numPoints;
-	Com_Memcpy(poly->points, points, numPoints * sizeof(vec3_t));
+	memcpy(poly->points, points, numPoints * sizeof(vec3_t));
 }
 
 /*

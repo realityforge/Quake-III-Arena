@@ -45,7 +45,7 @@ void MSG_Init( msg_t *buf, byte *data, int length ) {
 	if (!msgInit) {
 		MSG_initHuffman();
 	}
-	Com_Memset (buf, 0, sizeof(*buf));
+	memset (buf, 0, sizeof(*buf));
 	buf->data = data;
 	buf->maxsize = length;
 }
@@ -54,7 +54,7 @@ void MSG_InitOOB( msg_t *buf, byte *data, int length ) {
 	if (!msgInit) {
 		MSG_initHuffman();
 	}
-	Com_Memset (buf, 0, sizeof(*buf));
+	memset (buf, 0, sizeof(*buf));
 	buf->data = data;
 	buf->maxsize = length;
 	buf->oob = qtrue;
@@ -88,9 +88,9 @@ void MSG_Copy(msg_t *buf, byte *data, int length, msg_t *src)
 	if (length<src->cursize) {
 		Com_Error( ERR_DROP, "MSG_Copy: can't copy into a smaller msg_t buffer");
 	}
-	Com_Memcpy(buf, src, sizeof(msg_t));
+	memcpy(buf, src, sizeof(msg_t));
 	buf->data = data;
-	Com_Memcpy(buf->data, src->data, src->cursize);
+	memcpy(buf->data, src->data, src->cursize);
 }
 
 /*
@@ -999,7 +999,7 @@ void MSG_ReadDeltaEntity( msg_t *msg, entityState_t *from, entityState_t *to,
 
 	// check for a remove
 	if ( MSG_ReadBits( msg, 1 ) == 1 ) {
-		Com_Memset( to, 0, sizeof( *to ) );	
+		memset( to, 0, sizeof( *to ) );
 		to->number = MAX_GENTITIES - 1;
 #ifndef DEDICATED
 		if ( cl_shownet->integer >= 2 || cl_shownet->integer == -1 ) {
@@ -1181,7 +1181,7 @@ void MSG_WriteDeltaPlayerstate( msg_t *msg, struct playerState_s *from, struct p
 
 	if (!from) {
 		from = &dummy;
-		Com_Memset (&dummy, 0, sizeof(dummy));
+		memset (&dummy, 0, sizeof(dummy));
 	}
 
 	c = msg->cursize;
@@ -1334,7 +1334,7 @@ void MSG_ReadDeltaPlayerstate (msg_t *msg, playerState_t *from, playerState_t *t
 
 	if ( !from ) {
 		from = &dummy;
-		Com_Memset( &dummy, 0, sizeof( dummy ) );
+		memset( &dummy, 0, sizeof( dummy ) );
 	}
 	*to = *from;
 

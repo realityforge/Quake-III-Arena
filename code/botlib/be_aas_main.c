@@ -335,7 +335,7 @@ void AAS_Shutdown(void)
 	//free the entities
 	if (aasworld.entities) FreeMemory(aasworld.entities);
 	//clear the aasworld structure
-	Com_Memset(&aasworld, 0, sizeof(aas_t));
+	memset(&aasworld, 0, sizeof(aas_t));
 	//aas has not been initialized
 	aasworld.initialized = qfalse;
 	//NOTE: as soon as a new .bsp file is loaded the .bsp file memory is

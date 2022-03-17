@@ -71,7 +71,7 @@ void VM_Init( void ) {
 	Cmd_AddCommand ("vmprofile", VM_VmProfile_f );
 	Cmd_AddCommand ("vminfo", VM_VmInfo_f );
 
-	Com_Memset( vmTable, 0, sizeof( vmTable ) );
+	memset( vmTable, 0, sizeof( vmTable ) );
 }
 
 
@@ -311,10 +311,10 @@ vm_t *VM_Restart( vm_t *vm ) {
 	dataLength = 1 << i;
 
 	// clear the data
-	Com_Memset( vm->dataBase, 0, dataLength );
+	memset( vm->dataBase, 0, dataLength );
 
 	// copy the intialized data
-	Com_Memcpy( vm->dataBase, (byte *)header + header->dataOffset, header->dataLength + header->litLength );
+	memcpy( vm->dataBase, (byte *)header + header->dataOffset, header->dataLength + header->litLength );
 
 	// byte swap the longs
 	for ( i = 0 ; i < header->dataLength ; i += 4 ) {
@@ -426,7 +426,7 @@ vm_t *VM_Create( const char *module, int (*systemCalls)(int *),
 	vm->dataMask = dataLength - 1;
 
 	// copy the intialized data
-	Com_Memcpy( vm->dataBase, (byte *)header + header->dataOffset, header->dataLength + header->litLength );
+	memcpy( vm->dataBase, (byte *)header + header->dataOffset, header->dataLength + header->litLength );
 
 	// byte swap the longs
 	for ( i = 0 ; i < header->dataLength ; i += 4 ) {
@@ -472,7 +472,7 @@ void VM_Free( vm_t *vm ) {
 
 	if ( vm->dllHandle ) {
 		Sys_UnloadDll( vm->dllHandle );
-		Com_Memset( vm, 0, sizeof( *vm ) );
+		memset( vm, 0, sizeof( *vm ) );
 	}
 #if 0	// now automatically freed by hunk
 	if ( vm->codeBase ) {
@@ -485,7 +485,7 @@ void VM_Free( vm_t *vm ) {
 		Z_Free( vm->instructionPointers );
 	}
 #endif
-	Com_Memset( vm, 0, sizeof( *vm ) );
+	memset( vm, 0, sizeof( *vm ) );
 
 	currentVM = NULL;
 	lastVM = NULL;
@@ -497,7 +497,7 @@ void VM_Clear(void) {
 		if ( vmTable[i].dllHandle ) {
 			Sys_UnloadDll( vmTable[i].dllHandle );
 		}
-		Com_Memset( &vmTable[i], 0, sizeof( vm_t ) );
+		memset( &vmTable[i], 0, sizeof( vm_t ) );
 	}
 	currentVM = NULL;
 	lastVM = NULL;

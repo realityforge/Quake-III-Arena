@@ -21,9 +21,9 @@ typedef unsigned long int UINT4;
 
 All rights reserved.
   
-License to copy and use this software is granted provided that it is identified as the “RSA Data Security, Inc. MD4 Message-Digest Algorithm” in all material mentioning or referencing this software or this function.
-License is also granted to make and use derivative works provided that such works are identified as “derived from the RSA Data Security, Inc. MD4 Message-Digest Algorithm” in all material mentioning or referencing the derived work.
-RSA Data Security, Inc. makes no representations concerning either the merchantability of this software or the suitability of this software for any particular purpose. It is provided “as is” without express or implied warranty of any kind.
+License to copy and use this software is granted provided that it is identified as the ï¿½RSA Data Security, Inc. MD4 Message-Digest Algorithmï¿½ in all material mentioning or referencing this software or this function.
+License is also granted to make and use derivative works provided that such works are identified as ï¿½derived from the RSA Data Security, Inc. MD4 Message-Digest Algorithmï¿½ in all material mentioning or referencing the derived work.
+RSA Data Security, Inc. makes no representations concerning either the merchantability of this software or the suitability of this software for any particular purpose. It is provided ï¿½as isï¿½ without express or implied warranty of any kind.
   
 These notices must be retained in any copies of any part of this documentation and/or software. */
 
@@ -39,11 +39,11 @@ void MD4Update (MD4_CTX *, const unsigned char *, unsigned int);
 void MD4Final (unsigned char [16], MD4_CTX *);
 
 #ifndef __VECTORC  
-void Com_Memset (void* dest, const int val, const size_t count);
-void Com_Memcpy (void* dest, const void* src, const size_t count);
+void memset (void* dest, const int val, const size_t count);
+void memcpy (void* dest, const void* src, const size_t count);
 #else
-#define Com_Memset memset
-#define Com_Memcpy memcpy
+#define memset memset
+#define memcpy memcpy
 #endif
 
 /* MD4C.C - RSA Data Security, Inc., MD4 message-digest algorithm */
@@ -130,7 +130,7 @@ void MD4Update (MD4_CTX *context, const unsigned char *input, unsigned int input
 	/* Transform as many times as possible.*/
 	if (inputLen >= partLen)
 	{
- 		Com_Memcpy((POINTER)&context->buffer[index], (POINTER)input, partLen);
+ 		memcpy((POINTER)&context->buffer[index], (POINTER)input, partLen);
  		MD4Transform (context->state, context->buffer);
 
  		for (i = partLen; i + 63 < inputLen; i += 64)
@@ -142,7 +142,7 @@ void MD4Update (MD4_CTX *context, const unsigned char *input, unsigned int input
  		i = 0;
 
 	/* Buffer remaining input */
-	Com_Memcpy ((POINTER)&context->buffer[index], (POINTER)&input[i], inputLen-i);
+	memcpy ((POINTER)&context->buffer[index], (POINTER)&input[i], inputLen-i);
 }
 
 
@@ -167,7 +167,7 @@ void MD4Final (unsigned char digest[16], MD4_CTX *context)
 	Encode (digest, context->state, 16);
 
 	/* Zeroize sensitive information.*/
-	Com_Memset ((POINTER)context, 0, sizeof (*context));
+	memset ((POINTER)context, 0, sizeof (*context));
 }
 
 
@@ -238,7 +238,7 @@ state[2] += c;
 state[3] += d;
 
 	/* Zeroize sensitive information.*/
-	Com_Memset ((POINTER)x, 0, sizeof (x));
+	memset ((POINTER)x, 0, sizeof (x));
 }
 
 
