@@ -28,7 +28,7 @@
 */
 
 #include <string.h>
-#include <stdlib.h>
+#include <stdint.h>
 
 typedef unsigned char 		byte;
 
