@@ -27,8 +27,10 @@
 	$Id: mdfour.c,v 1.1 2002/08/23 22:03:27 abster Exp $
 */
 
-#include "q_shared.h"
-#include "qcommon.h"
+#include <string.h>
+#include <stdlib.h>
+
+typedef unsigned char 		byte;
 
 struct mdfour {
 	uint32_t A, B, C, D;
@@ -141,8 +143,8 @@ static void mdfour_tail(byte *in, int n)
 
 	b = m->totalN * 8;
 
-	Com_Memset(buf, 0, 128);
-	if (n) Com_Memcpy(buf, in, n);
+    memset(buf, 0, 128);
+	if (n) memcpy(buf, in, n);
 	buf[n] = 0x80;
 
 	if (n <= 55) {
