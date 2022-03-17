@@ -3278,16 +3278,6 @@ void AAS_Reachability_FuncBobbing(void)
 		//
 		end_plane.dist = end_edgeverts[0][2];
 		VectorSet(end_plane.normal, 0, 0, 1);
-		//
-#ifndef BSPC
-#if 0
-		for (i = 0; i < 4; i++)
-		{
-			AAS_PermanentLine(start_edgeverts[i], start_edgeverts[(i+1)%4], 1);
-			AAS_PermanentLine(end_edgeverts[i], end_edgeverts[(i+1)%4], 1);
-		}
-#endif
-#endif
 		VectorCopy(move_start, move_start_top);
 		move_start_top[2] += maxs[2] - mid[2] + 24; //+ bbox maxs z
 		VectorCopy(move_end, move_end_top);
