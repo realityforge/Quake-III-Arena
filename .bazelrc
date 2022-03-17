@@ -38,6 +38,7 @@ build --compilation_mode=opt
 # In the future when the Makefile build has been removed, then this define can be removed from the source
 # and here
 build --copt -DUSE_LOCAL_HEADERS
+build --copt -Wall
 
 #
 # Config specific build options.
