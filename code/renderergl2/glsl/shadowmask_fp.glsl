@@ -46,20 +46,6 @@ float PCF(const sampler2DShadow shadowmap, const vec2 st, const float dist)
 	float mult;
 	float scale = 2.0 / r_shadowMapSize;
 
-#if 0
-	// from http://http.developer.nvidia.com/GPUGems/gpugems_ch11.html
-	vec2 offset = vec2(greaterThan(fract(var_DepthTex.xy * r_FBufScale * 0.5), vec2(0.25)));
-	offset.y += offset.x;
-	if (offset.y > 1.1) offset.y = 0.0;
-	
-	mult = shadow2D(shadowmap, vec3(st + (offset + vec2(-1.5,  0.5)) * scale, dist))
-	     + shadow2D(shadowmap, vec3(st + (offset + vec2( 0.5,  0.5)) * scale, dist))
-	     + shadow2D(shadowmap, vec3(st + (offset + vec2(-1.5, -1.5)) * scale, dist))
-	     + shadow2D(shadowmap, vec3(st + (offset + vec2( 0.5, -1.5)) * scale, dist));
-	 
-	mult *= 0.25;
-#endif
-
 #if defined(USE_SHADOW_FILTER)
 	float r = random(var_DepthTex.xy);
 	float sinr = sin(r) * scale;
