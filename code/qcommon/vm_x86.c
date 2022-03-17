@@ -246,13 +246,6 @@ static void Emit1( int v )
 	LastCommand = LAST_COMMAND_NONE;
 }
 
-#if 0
-static void Emit2( int v ) {
-	Emit1( v & 255 );
-	Emit1( ( v >> 8 ) & 255 );
-}
-#endif
-
 static void Emit4( int v ) {
 	Emit1( v & 255 );
 	Emit1( ( v >> 8 ) & 255 );
@@ -1060,24 +1053,6 @@ void VM_Compile( vm_t *vm, vmHeader_t *header ) {
 	for ( i = 0 ; i < header->instructionCount ; i++ ) {
 		vm->instructionPointers[i] += (int)vm->codeBase;
 	}
-
-#if 0 // ndef _WIN32
-	// Must make the newly generated code executable
-	{
-		int r;
-		unsigned long addr;
-		int psize = getpagesize();
-
-		addr = ((int)vm->codeBase & ~(psize-1)) - psize;
-
-		r = mprotect((char*)addr, vm->codeLength + (int)vm->codeBase - addr + psize, 
-			PROT_READ | PROT_WRITE | PROT_EXEC );
-
-		if (r < 0)
-			Com_Error( ERR_FATAL, "mprotect failed to change PROT_EXEC" );
-	}
-#endif
-
 }
 
 /*

@@ -474,17 +474,6 @@ void VM_Free( vm_t *vm ) {
 		Sys_UnloadDll( vm->dllHandle );
 		memset( vm, 0, sizeof( *vm ) );
 	}
-#if 0	// now automatically freed by hunk
-	if ( vm->codeBase ) {
-		Z_Free( vm->codeBase );
-	}
-	if ( vm->dataBase ) {
-		Z_Free( vm->dataBase );
-	}
-	if ( vm->instructionPointers ) {
-		Z_Free( vm->instructionPointers );
-	}
-#endif
 	memset( vm, 0, sizeof( *vm ) );
 
 	currentVM = NULL;
