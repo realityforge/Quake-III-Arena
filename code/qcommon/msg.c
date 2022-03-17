@@ -71,12 +71,6 @@ void MSG_Bitstream( msg_t *buf ) {
 	buf->oob = qfalse;
 }
 
-void MSG_BeginReading( msg_t *msg ) {
-	msg->readcount = 0;
-	msg->bit = 0;
-	msg->oob = qfalse;
-}
-
 void MSG_BeginReadingOOB( msg_t *msg ) {
 	msg->readcount = 0;
 	msg->bit = 0;
@@ -305,12 +299,6 @@ void MSG_WriteLong( msg_t *sb, int c ) {
 	MSG_WriteBits( sb, c, 32 );
 }
 
-void MSG_WriteFloat( msg_t *sb, float f ) {
-	floatint_t dat;
-	dat.f = f;
-	MSG_WriteBits( sb, dat.i, 32 );
-}
-
 void MSG_WriteString( msg_t *sb, const char *s ) {
 	if ( !s ) {
 		MSG_WriteData (sb, "", 1);
@@ -367,28 +355,11 @@ void MSG_WriteAngle( msg_t *sb, float f ) {
 	MSG_WriteByte (sb, (int)(f*256/360) & 255);
 }
 
-void MSG_WriteAngle16( msg_t *sb, float f ) {
-	MSG_WriteShort (sb, ANGLE2SHORT(f));
-}
-
-
 //============================================================
 
 //
 // reading functions
 //
-
-// returns -1 if no more characters are available
-int MSG_ReadChar (msg_t *msg ) {
-	int	c;
-	
-	c = (signed char)MSG_ReadBits( msg, 8 );
-	if ( msg->readcount > msg->cursize ) {
-		c = -1;
-	}	
-	
-	return c;
-}
 
 int MSG_ReadByte( msg_t *msg ) {
 	int	c;
@@ -397,17 +368,6 @@ int MSG_ReadByte( msg_t *msg ) {
 	if ( msg->readcount > msg->cursize ) {
 		c = -1;
 	}	
-	return c;
-}
-
-int MSG_LookaheadByte( msg_t *msg ) {
-	const int bloc = Huff_getBloc();
-	const int readcount = msg->readcount;
-	const int bit = msg->bit;
-	int c = MSG_ReadByte(msg);
-	Huff_setBloc(bloc);
-	msg->readcount = readcount;
-	msg->bit = bit;
 	return c;
 }
 
@@ -431,17 +391,6 @@ int MSG_ReadLong( msg_t *msg ) {
 	}	
 	
 	return c;
-}
-
-float MSG_ReadFloat( msg_t *msg ) {
-	floatint_t dat;
-	
-	dat.i = MSG_ReadBits( msg, 32 );
-	if ( msg->readcount > msg->cursize ) {
-		dat.f = -1;
-	}	
-	
-	return dat.f;	
 }
 
 char *MSG_ReadString( msg_t *msg ) {
@@ -532,10 +481,6 @@ char *MSG_ReadStringLine( msg_t *msg ) {
 	string[l] = '\0';
 	
 	return string;
-}
-
-float MSG_ReadAngle16( msg_t *msg ) {
-	return SHORT2ANGLE(MSG_ReadShort(msg));
 }
 
 void MSG_ReadData( msg_t *msg, void *data, int len ) {
