@@ -1141,14 +1141,6 @@ void ClientEndFrame( gentity_t *ent ) {
 	}
 #endif
 
-	// save network bandwidth
-#if 0
-	if ( !g_synchronousClients->integer && ent->client->ps.pm_type == PM_NORMAL ) {
-		// FIXME: this must change eventually for non-sync demo recording
-		VectorClear( ent->client->ps.viewangles );
-	}
-#endif
-
 	//
 	// If the end of unit layout is displayed, don't give
 	// the player any normal movement attributes
