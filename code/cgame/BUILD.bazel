@@ -44,8 +44,8 @@ _NATIVE_LIB_SRC = ["cg_syscalls.c"]
 # See //code/renderergl2:librenderergl2 for an explanation why we create a .so rather than a .dylib under OSX.
 cc_binary(
     name = "baseq3",
-    linkshared = 1,
     srcs = _BASEQ3_SRC + _NATIVE_LIB_SRC,
+    linkshared = 1,
     deps = [
         ":api",
         "//code/game:bg",
@@ -72,9 +72,9 @@ cc_library(
 # See //code/renderergl2:librenderergl2 for an explanation why we create a .so rather than a .dylib under OSX.
 cc_binary(
     name = "missionpack",
-    linkshared = 1,
     srcs = _MISSIONPACK_SRC + _NATIVE_LIB_SRC,
     defines = ["MISSIONPACK"],
+    linkshared = 1,
     deps = [
         ":api",
         "//code/game:bg",
