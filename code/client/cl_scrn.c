@@ -226,11 +226,6 @@ void SCR_DrawBigString( int x, int y, const char *s, float alpha, qboolean noCol
 	SCR_DrawStringExt( x, y, BIGCHAR_WIDTH, s, color, qfalse, noColorEscape );
 }
 
-void SCR_DrawBigStringColor( int x, int y, const char *s, vec4_t color, qboolean noColorEscape ) {
-	SCR_DrawStringExt( x, y, BIGCHAR_WIDTH, s, color, qtrue, noColorEscape );
-}
-
-
 /*
 ==================
 SCR_DrawSmallString[Color]
@@ -288,14 +283,6 @@ static int SCR_Strlen( const char *str ) {
 
 	return count;
 }
-
-/*
-** SCR_GetBigStringWidth
-*/ 
-int	SCR_GetBigStringWidth( const char *str ) {
-	return SCR_Strlen( str ) * BIGCHAR_WIDTH;
-}
-
 
 //===============================================================================
 
