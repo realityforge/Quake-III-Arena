@@ -76,15 +76,6 @@ static void UI_DisplayDownloadInfo( const char *downloadName ) {
 	downloadCount = trap_Cvar_VariableValue( "cl_downloadCount" );
 	downloadTime = trap_Cvar_VariableValue( "cl_downloadTime" );
 
-#if 0 // bk010104
-	fprintf( stderr, "\n\n-----------------------------------------------\n");
-	fprintf( stderr, "DB: downloadSize:  %16d\n", downloadSize );
-	fprintf( stderr, "DB: downloadCount: %16d\n", downloadCount );
-	fprintf( stderr, "DB: downloadTime:  %16d\n", downloadTime );  
-  	fprintf( stderr, "DB: UI realtime:   %16d\n", uis.realtime );	// bk
-	fprintf( stderr, "DB: UI frametime:  %16d\n", uis.frametime );	// bk
-#endif
-
 	leftWidth = width = UI_ProportionalStringWidth( dlText ) * UI_ProportionalSizeScale( style );
 	width = UI_ProportionalStringWidth( etaText ) * UI_ProportionalSizeScale( style );
 	if (width > leftWidth) leftWidth = width;
