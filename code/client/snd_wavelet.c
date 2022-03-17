@@ -237,16 +237,3 @@ void encodeMuLaw( sfx_t *sfx, short *packets) {
 	}
 }
 
-void decodeMuLaw(sndBuffer *chunk, short *to) {
-	int				i;
-	byte			*out;
-
-	int size = chunk->size;
-	
-	out = (byte *)chunk->sndChunk;
-	for(i=0;i<size;i++) {
-		to[i] = mulawToShort[out[i]];
-	}
-}
-
-
