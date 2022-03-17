@@ -13,6 +13,7 @@ cc_library(
     hdrs = [
         "include/opusfile.h",
     ],
+    copts = ["-Wno-maybe-uninitialized"],
     defines = ["USE_CODEC_VORBIS"],
     includes = [
         "include",
