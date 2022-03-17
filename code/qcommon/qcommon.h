@@ -66,22 +66,17 @@ void MSG_WriteLong (msg_t *sb, int c);
 void MSG_WriteFloat (msg_t *sb, float f);
 void MSG_WriteString (msg_t *sb, const char *s);
 void MSG_WriteBigString (msg_t *sb, const char *s);
-void MSG_WriteAngle16 (msg_t *sb, float f);
 
-void	MSG_BeginReading (msg_t *sb);
 void	MSG_BeginReadingOOB(msg_t *sb);
 
 int		MSG_ReadBits( msg_t *msg, int bits );
 
-int		MSG_ReadChar (msg_t *sb);
 int		MSG_ReadByte (msg_t *sb);
 int		MSG_ReadShort (msg_t *sb);
 int		MSG_ReadLong (msg_t *sb);
-float	MSG_ReadFloat (msg_t *sb);
 char	*MSG_ReadString (msg_t *sb);
 char	*MSG_ReadBigString (msg_t *sb);
 char	*MSG_ReadStringLine (msg_t *sb);
-float	MSG_ReadAngle16 (msg_t *sb);
 void	MSG_ReadData (msg_t *sb, void *buffer, int size);
 
 

@@ -71,12 +71,6 @@ void MSG_Bitstream( msg_t *buf ) {
 	buf->oob = qfalse;
 }
 
-void MSG_BeginReading( msg_t *msg ) {
-	msg->readcount = 0;
-	msg->bit = 0;
-	msg->oob = qfalse;
-}
-
 void MSG_BeginReadingOOB( msg_t *msg ) {
 	msg->readcount = 0;
 	msg->bit = 0;
@@ -356,28 +350,11 @@ void MSG_WriteAngle( msg_t *sb, float f ) {
 	MSG_WriteByte (sb, (int)(f*256/360) & 255);
 }
 
-void MSG_WriteAngle16( msg_t *sb, float f ) {
-	MSG_WriteShort (sb, ANGLE2SHORT(f));
-}
-
-
 //============================================================
 
 //
 // reading functions
 //
-
-// returns -1 if no more characters are available
-int MSG_ReadChar (msg_t *msg ) {
-	int	c;
-	
-	c = (signed char)MSG_ReadBits( msg, 8 );
-	if ( msg->readcount > msg->cursize ) {
-		c = -1;
-	}	
-	
-	return c;
-}
 
 int MSG_ReadByte( msg_t *msg ) {
 	int	c;
@@ -409,21 +386,6 @@ int MSG_ReadLong( msg_t *msg ) {
 	}	
 	
 	return c;
-}
-
-float MSG_ReadFloat( msg_t *msg ) {
-	union {
-		byte	b[4];
-		float	f;
-		int	l;
-	} dat;
-	
-	dat.l = MSG_ReadBits( msg, 32 );
-	if ( msg->readcount > msg->cursize ) {
-		dat.f = -1;
-	}	
-	
-	return dat.f;	
 }
 
 char *MSG_ReadString( msg_t *msg ) {
@@ -499,10 +461,6 @@ char *MSG_ReadStringLine( msg_t *msg ) {
 	string[l] = 0;
 	
 	return string;
-}
-
-float MSG_ReadAngle16( msg_t *msg ) {
-	return SHORT2ANGLE(MSG_ReadShort(msg));
 }
 
 void MSG_ReadData( msg_t *msg, void *data, int len ) {
