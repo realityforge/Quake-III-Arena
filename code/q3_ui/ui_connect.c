@@ -204,10 +204,6 @@ void UI_DrawConnectScreen( qboolean overlay ) {
 		}
 		s = "Awaiting gamestate...";
 		break;
-	case CA_LOADING:
-		return;
-	case CA_PRIMED:
-		return;
 	default:
 		return;
 	}
