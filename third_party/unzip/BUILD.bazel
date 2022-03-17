@@ -11,6 +11,7 @@ cc_library(
     hdrs = [
         "unzip.h",
     ],
+    includes = ["."],
     visibility = ["//code/qcommon:__pkg__"],
     deps = [
         "//code/qcommon",
