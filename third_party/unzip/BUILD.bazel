@@ -1,0 +1,20 @@
+# unzip is (probably) legacy code to unzip which should switch to zlib
+# It is also not "third_party" as such as it uses Z_Malloc and Z_Free
+# However if we switch to zlib and pass in allocators/deallocators then we should be fine
+cc_library(
+    name = "unzip",
+    srcs = [
+        "ioapi.c",
+        "ioapi.h",
+        "unzip.c",
+    ],
+    hdrs = [
+        "unzip.h",
+    ],
+    visibility = ["//code/qcommon:__pkg__"],
+    deps = [
+        "//code/qcommon",
+        "//code/qcommon:q_shared",
+        "//third_party/zlib",
+    ],
+)

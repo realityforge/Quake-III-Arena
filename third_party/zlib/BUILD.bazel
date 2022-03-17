@@ -22,5 +22,6 @@ cc_library(
     includes = ["."],
     visibility = [
         "//code/qcommon:__pkg__",
+        "//third_party/unzip:__pkg__",
     ],
 )

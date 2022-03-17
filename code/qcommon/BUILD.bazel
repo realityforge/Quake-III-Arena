@@ -61,7 +61,7 @@ cc_library(
     deps = [
         ":q_shared",
         ":qcommon",
-        ":unzip",
+        "//third_party/unzip",
     ],
 )
 
@@ -74,25 +74,7 @@ cc_library(
     deps = [
         ":q_shared",
         ":qcommon",
-        ":unzip",
-    ],
-)
-
-# TODO: Use shared version or move this to third_party?
-cc_library(
-    name = "unzip",
-    srcs = [
-        "ioapi.c",
-        "ioapi.h",
-        "unzip.c",
-    ],
-    hdrs = [
-        "unzip.h",
-    ],
-    deps = [
-        ":q_shared",
-        ":qcommon",
-        "//third_party/zlib",
+        "//third_party/unzip",
     ],
 )
 
@@ -161,6 +143,7 @@ cc_library(
         "//code/q3_ui:__pkg__",
         "//code/server:__pkg__",
         "//code/ui:__pkg__",
+        "//third_party/unzip:__pkg__",
     ],
 )
 
@@ -199,6 +182,7 @@ cc_library(
         "cm_public.h",
         "qcommon.h",
     ],
+    includes = ["."],
     visibility = [
         "//code/botlib:__pkg__",
         "//code/client:__pkg__",
@@ -207,6 +191,7 @@ cc_library(
         "//code/sdl:__pkg__",
         "//code/server:__pkg__",
         "//code/sys:__pkg__",
+        "//third_party/unzip:__pkg__",
     ],
     deps = [
         ":q_shared",

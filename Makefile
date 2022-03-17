@@ -235,6 +235,7 @@ NSISDIR=misc/nsis
 CURLLIBSDIR=third_party/curl/libs
 JPDIR=third_party/jpeg
 JSONDIR=third_party/json
+UNZIPDIR=third_party/unzip
 OGGDIR=third_party/ogg
 OPENALDIR=third_party/openal
 OPUSDIR=third_party/opus
@@ -717,6 +718,12 @@ endif
 ifneq ($(BUILD_RENDERER_OPENGL2),0)
   CLIENT_CFLAGS += -I$(JSONDIR)
 endif
+
+# Add includes for unzip library
+CLIENT_CFLAGS += -I$(UNZIPDIR)
+CFLAGS += -I$(UNZIPDIR)
+# include of common dir from unzip
+CFLAGS += -I$(CMDIR)
 
 ifneq ($(BUILD_GAME_SO),0)
   ifneq ($(BUILD_BASEGAME),0)
@@ -2270,6 +2277,9 @@ $(B)/client/%.o: $(SDIR)/%.c
 $(B)/client/%.o: $(CMDIR)/%.c
 	$(DO_CC)
 
+$(B)/client/%.o: $(UNZIPDIR)/%.c
+	$(DO_CC)
+
 $(B)/client/%.o: $(BLIBDIR)/%.c
 	$(DO_BOT_CC)
 
@@ -2349,6 +2359,9 @@ $(B)/ded/%.o: $(SDIR)/%.c
 	$(DO_DED_CC)
 
 $(B)/ded/%.o: $(CMDIR)/%.c
+	$(DO_DED_CC)
+
+$(B)/ded/%.o: $(UNZIPDIR)/%.c
 	$(DO_DED_CC)
 
 $(B)/ded/%.o: $(ZDIR)/%.c
