@@ -386,7 +386,7 @@ vm_t *VM_Create( const char *module, int (*systemCalls)(int *),
 		}
 
 		Com_Printf( "Failed to load dll, looking for qvm.\n" );
-		interpret = VMI_COMPILED;
+		interpret = VMI_BYTECODE;
 	}
 
 	// load the image
@@ -440,13 +440,9 @@ vm_t *VM_Create( const char *module, int (*systemCalls)(int *),
 	// copy or compile the instructions
 	vm->codeLength = header->codeLength;
 
-	if ( interpret >= VMI_COMPILED ) {
-		vm->compiled = qtrue;
-		VM_Compile( vm, header );
-	} else {
-		vm->compiled = qfalse;
-		VM_PrepareInterpreter( vm, header );
-	}
+    // TODO: Reinstate compilation of the bytecode here
+    vm->compiled = qfalse;
+    VM_PrepareInterpreter( vm, header );
 
 	// free the original file
 	FS_FreeFile( header );
