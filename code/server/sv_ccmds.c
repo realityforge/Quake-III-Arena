@@ -615,6 +615,11 @@ void SV_AddOperatorCommands( void ) {
 	Cmd_AddCommand ("map_restart", SV_MapRestart_f);
 	Cmd_AddCommand ("sectorlist", SV_SectorList_f);
 	Cmd_AddCommand ("map", SV_Map_f);
+#ifndef PRE_RELEASE_DEMO
+	Cmd_AddCommand ("devmap", SV_Map_f);
+	Cmd_AddCommand ("spmap", SV_Map_f);
+	Cmd_AddCommand ("spdevmap", SV_Map_f);
+#endif
 	Cmd_AddCommand ("killserver", SV_KillServer_f);
 #ifdef DEDICATED
     Cmd_AddCommand ("heartbeat", SV_Heartbeat_f);
