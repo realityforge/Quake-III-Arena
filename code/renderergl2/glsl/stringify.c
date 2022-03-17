@@ -27,6 +27,7 @@ int main(int argc, char **argv)
     char *base = basename(inFile);
     *strrchr(base, '.') = '\0';
 
+    fprintf(ofp, "#pragma GCC diagnostic ignored \"-Woverlength-strings\"\n");
     fprintf(ofp, "const char *fallbackShader_%s =\n", base);
 
     while(fgets(buffer, sizeof(buffer), ifp))

@@ -9,6 +9,7 @@ def glsl_to_c(name):
 
     native.cc_library(
         name = name,
+        copts = ["-Wno-overlength-strings"],
         srcs = [
             ":" + name + "_generator",
         ],
