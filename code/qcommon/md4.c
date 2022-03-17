@@ -29,9 +29,9 @@
 
 #include <string.h>
 #include <stdint.h>
-#ifdef WIN32
-#include <windows.h>
-#define uint32_t UINT32
+#ifdef _MSC_VER
+#include <io.h>
+typedef unsigned __int32 uint32_t;
 #endif
 
 typedef unsigned char 		byte;
