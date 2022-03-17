@@ -47,6 +47,11 @@ build --copt -DUSE_LOCAL_HEADERS
 build --copt -Wall
 build --copt -Wpedantic
 
+# The following warnings produce too many positives and will only be enabled after the code has been moved to bazel
+# and we are reasonably sure we have a stable build environment
+# build --copt -Wextra
+# build --copt -Weverything
+
 #
 # Config specific build options.
 #
