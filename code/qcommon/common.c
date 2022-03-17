@@ -97,11 +97,8 @@ cvar_t	*com_minimized;
 cvar_t  *con_autochat;
 #endif
 
-#if idx64
-	int (*Q_VMftol)(void);
-#elif id386
+#if id386
 	long (QDECL *Q_ftol)(float f);
-	int (QDECL *Q_VMftol)(void);
 	void (QDECL *Q_SnapVector)(vec3_t vec);
 #endif
 
@@ -2437,15 +2434,12 @@ static void Com_DetectSSE(void)
 
 		Q_ftol = qftolsse;
 #endif
-		Q_VMftol = qvmftolsse;
-
 		Com_Printf("SSE instruction set enabled\n");
 #if !idx64
 	}
 	else
 	{
 		Q_ftol = qftolx87;
-		Q_VMftol = qvmftolx87;
 		Q_SnapVector = qsnapvectorx87;
 
 		Com_Printf("SSE instruction set not available\n");

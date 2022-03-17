@@ -43,22 +43,6 @@ long qftolsse(float f)
   return retval;
 }
 
-int qvmftolsse(void)
-{
-  int retval;
-  
-  __asm__ volatile
-  (
-    "movss (" EDI ", " EBX ", 4), %%xmm0\n"
-    "cvttss2si %%xmm0, %0\n"
-    : "=r" (retval)
-    :
-    : "%xmm0"
-  );
-  
-  return retval;
-}
-
 long qftolx87(float f)
 {
   long retval;
@@ -79,23 +63,4 @@ long qftolx87(float f)
   return retval;
 }
 
-int qvmftolx87(void)
-{
-  int retval;
-  unsigned short oldcw = 0;
-
-  __asm__ volatile
-  (
-    "fnstcw %1\n"
-    "fldcw %2\n"
-    "flds (" EDI ", " EBX ", 4)\n"
-    "fistpl (" EDI ", " EBX ", 4)\n"
-    "fldcw %1\n"
-    "mov (" EDI ", " EBX ", 4), %0\n"
-    : "=r" (retval)
-    : "m" (oldcw), "m" (fpucw)
-  );
-  
-  return retval;
-}
 #endif

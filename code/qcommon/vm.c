@@ -569,7 +569,7 @@ vm_t *VM_Create( const char *module, intptr_t (*systemCalls)(intptr_t *),
 			
 			Com_Printf("Failed loading dll, trying next\n");
 		}
-		else if(retval == VMI_COMPILED)
+		else if(retval == VMI_BYTECODE)
 		{
 			vm->searchPath = startSearch;
 			if((header = VM_LoadQVM(vm, qtrue, qfalse)))
@@ -592,25 +592,9 @@ vm_t *VM_Create( const char *module, intptr_t (*systemCalls)(intptr_t *),
 	// copy or compile the instructions
 	vm->codeLength = header->codeLength;
 
-	vm->compiled = qfalse;
-
-#ifdef NO_VM_COMPILED
-	if(interpret >= VMI_COMPILED) {
-		Com_Printf("Architecture doesn't have a bytecode compiler, using interpreter\n");
-		interpret = VMI_BYTECODE;
-	}
-#else
-	if(interpret != VMI_BYTECODE)
-	{
-		vm->compiled = qtrue;
-		VM_Compile( vm, header );
-	}
-#endif
-	// VM_Compile may have reset vm->compiled if compilation failed
-	if (!vm->compiled)
-	{
-		VM_PrepareInterpreter( vm, header );
-	}
+    // TODO: Reinstate compilation of the bytecode here
+    vm->compiled = qfalse;
+    VM_PrepareInterpreter( vm, header );
 
 	// free the original file
 	FS_FreeFile( header );
@@ -768,12 +752,7 @@ intptr_t QDECL VM_Call( vm_t *vm, int callnum, ... )
                             args[8],  args[9], args[10], args[11]);
 	} else {
 #if ( id386 || idsparc ) && !defined __clang__ // calling convention doesn't need conversion in some cases
-#ifndef NO_VM_COMPILED
-		if ( vm->compiled )
-			r = VM_CallCompiled( vm, (int*)&callnum );
-		else
-#endif
-			r = VM_CallInterpreted( vm, (int*)&callnum );
+        r = VM_CallInterpreted( vm, (int*)&callnum );
 #else
 		struct {
 			int callnum;
@@ -787,12 +766,7 @@ intptr_t QDECL VM_Call( vm_t *vm, int callnum, ... )
 			a.args[i] = va_arg(ap, int);
 		}
 		va_end(ap);
-#ifndef NO_VM_COMPILED
-		if ( vm->compiled )
-			r = VM_CallCompiled( vm, &a.callnum );
-		else
-#endif
-			r = VM_CallInterpreted( vm, &a.callnum );
+        r = VM_CallInterpreted( vm, &a.callnum );
 #endif
 	}
 	--vm->callLevel;

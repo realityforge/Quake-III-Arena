@@ -306,7 +306,6 @@ ifneq (,$(findstring "$(PLATFORM)", "linux" "gnu"))
   ifeq ($(ARCH),x86)
     OPTIMIZEVM = -O3 -march=i586
     OPTIMIZE = $(OPTIMIZEVM) -ffast-math
-    HAVE_VM_COMPILED=true
   endif
 
   SHLIBEXT=so
@@ -351,7 +350,6 @@ else # ifeq Linux
 #############################################################################
 
 ifeq ($(PLATFORM),darwin)
-  HAVE_VM_COMPILED=true
   LIBS = -framework Cocoa
   CLIENT_LIBS=
   RENDERER_LIBS=
@@ -558,12 +556,10 @@ ifdef MINGW
   ifeq ($(ARCH),x86_64)
     OPTIMIZEVM = -O3
     OPTIMIZE = $(OPTIMIZEVM) -ffast-math
-    HAVE_VM_COMPILED = true
   endif
   ifeq ($(ARCH),x86)
     OPTIMIZEVM = -O3 -march=i586
     OPTIMIZE = $(OPTIMIZEVM) -ffast-math
-    HAVE_VM_COMPILED = true
   endif
 
   SHLIBEXT=dll
@@ -667,11 +663,6 @@ endif
 
 ifndef RANLIB
   RANLIB=ranlib
-endif
-
-ifneq ($(HAVE_VM_COMPILED),true)
-  BASE_CFLAGS += -DNO_VM_COMPILED
-  BUILD_GAME_QVM=0
 endif
 
 TARGETS =
@@ -1021,7 +1012,6 @@ targets: makedirs
 	@echo "  VERSION: $(VERSION)"
 	@echo "  COMPILE_PLATFORM: $(COMPILE_PLATFORM)"
 	@echo "  COMPILE_ARCH: $(COMPILE_ARCH)"
-	@echo "  HAVE_VM_COMPILED: $(HAVE_VM_COMPILED)"
 	@echo "  PKG_CONFIG: $(PKG_CONFIG)"
 	@echo "  CC: $(CC)"
 ifeq ($(PLATFORM),mingw32)
@@ -1772,13 +1762,6 @@ Q3OBJ += \
   $(B)/client/inftrees.o \
   $(B)/client/zutil.o
 
-ifeq ($(HAVE_VM_COMPILED),true)
-  ifneq ($(findstring $(ARCH),x86 x86_64),)
-    Q3OBJ += \
-      $(B)/client/vm_x86.o
-  endif
-endif
-
 ifdef MINGW
   Q3OBJ += \
     $(B)/client/win_resource.o \
@@ -1931,13 +1914,6 @@ Q3DOBJ += \
   $(B)/ded/inflate.o \
   $(B)/ded/inftrees.o \
   $(B)/ded/zutil.o
-
-ifeq ($(HAVE_VM_COMPILED),true)
-  ifneq ($(findstring $(ARCH),x86 x86_64),)
-    Q3DOBJ += \
-      $(B)/ded/vm_x86.o
-  endif
-endif
 
 ifdef MINGW
   Q3DOBJ += \

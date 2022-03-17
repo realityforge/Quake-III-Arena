@@ -189,9 +189,6 @@ struct vm_s {
 extern	vm_t	*currentVM;
 extern	int		vm_debugLevel;
 
-void VM_Compile( vm_t *vm, vmHeader_t *header );
-int	VM_CallCompiled( vm_t *vm, int *args );
-
 void VM_PrepareInterpreter( vm_t *vm, vmHeader_t *header );
 int	VM_CallInterpreted( vm_t *vm, int *args );
 

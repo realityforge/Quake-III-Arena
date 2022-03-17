@@ -1378,7 +1378,7 @@ In each searchpath try:
 
 Enable search for DLL by setting enableDll to FSVM_ENABLEDLL
 
-write found DLL or QVM to "found" and return VMI_NATIVE if DLL, VMI_COMPILED if QVM
+write found DLL or QVM to "found" and return VMI_NATIVE if DLL, VMI_BYTECODE if QVM
 Return the searchpath in "startSearch".
 =================
 */
@@ -1427,7 +1427,7 @@ int FS_FindVM(void **startSearch, char *found, int foundlen, const char *name, i
 			if(FS_FOpenFileReadDir(qvmName, search, NULL, qfalse, qfalse) > 0)
 			{
 				*startSearch = search;
-				return VMI_COMPILED;
+				return VMI_BYTECODE;
 			}
 		}
 		else if(search->pack)
@@ -1450,7 +1450,7 @@ int FS_FindVM(void **startSearch, char *found, int foundlen, const char *name, i
 			{
 				*startSearch = search;
 
-				return VMI_COMPILED;
+				return VMI_BYTECODE;
 			}
 		}
 

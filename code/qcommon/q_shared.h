@@ -445,23 +445,18 @@ int Q_isnan(float x);
 
 #if idx64
   extern long qftolsse(float f);
-  extern int qvmftolsse(void);
   extern void qsnapvectorsse(vec3_t vec);
 
   #define Q_ftol qftolsse
   #define Q_SnapVector qsnapvectorsse
 
-  extern int (*Q_VMftol)(void);
 #elif id386
   extern long QDECL qftolx87(float f);
   extern long QDECL qftolsse(float f);
-  extern int QDECL qvmftolx87(void);
-  extern int QDECL qvmftolsse(void);
   extern void QDECL qsnapvectorx87(vec3_t vec);
   extern void QDECL qsnapvectorsse(vec3_t vec);
 
   extern long (QDECL *Q_ftol)(float f);
-  extern int (QDECL *Q_VMftol)(void);
   extern void (QDECL *Q_SnapVector)(vec3_t vec);
 #else
   // Q_ftol must expand to a function name so the pluggable renderer can take

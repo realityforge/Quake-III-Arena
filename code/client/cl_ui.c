@@ -1051,8 +1051,8 @@ void CL_InitUI( void ) {
 	if(cl_connectedToPureServer)
 	{
 		// if sv_pure is set we only allow qvms to be loaded
-		if(interpret != VMI_COMPILED && interpret != VMI_BYTECODE)
-			interpret = VMI_COMPILED;
+		if(interpret != VMI_BYTECODE)
+			interpret = VMI_BYTECODE;
 	}
 
 	uivm = VM_Create( "ui", CL_UISystemCalls, interpret );

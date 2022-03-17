@@ -43,12 +43,6 @@ IFDEF idx64
 	ret
   qftolsse ENDP
 
-  qvmftolsse PROC
-    movss xmm0, dword ptr [rdi + rbx * 4]
-	cvttss2si eax, xmm0
-	ret
-  qvmftolsse ENDP
-
 ELSE
 ; qftol using FPU
 
@@ -68,22 +62,12 @@ ELSE
     qftolx87m [esp + 6]
   qftolx87 ENDP
 
-  qvmftolx87 PROC
-    qftolx87m [edi + ebx * 4]
-  qvmftolx87 ENDP
-
 ; qftol using SSE
   qftolsse PROC
     movss xmm0, dword ptr [esp + 4]
     cvttss2si eax, xmm0
 	ret
   qftolsse ENDP
-
-  qvmftolsse PROC
-    movss xmm0, dword ptr [edi + ebx * 4]
-	cvttss2si eax, xmm0
-	ret
-  qvmftolsse ENDP
 ENDIF
 
 end
