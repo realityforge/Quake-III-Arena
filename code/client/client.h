@@ -496,8 +496,6 @@ void CL_ReadPackets (void);
 void CL_WritePacket( void );
 void IN_CenterView (void);
 
-void CL_VerifyCode( void );
-
 float CL_KeyState (kbutton_t *key);
 int Key_StringToKeynum( char *str );
 char *Key_KeynumToString (int keynum);
