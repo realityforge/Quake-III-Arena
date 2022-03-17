@@ -47,26 +47,6 @@ cvar_t *snddevice;
 /* Some devices may work only with 48000 */
 static int tryrates[] = { 22050, 11025, 44100, 48000, 8000 };
 
-static qboolean use_custom_memset = qfalse;
-// https://zerowing.idsoftware.com/bugzilla/show_bug.cgi?id=371 
-void Snd_Memset (void* dest, const int val, const size_t count)
-{
-  int *pDest;
-  int i, iterate;
-
-  if (!use_custom_memset)
-  {
-    Com_Memset(dest,val,count);
-    return;
-  }
-  iterate = count / sizeof(int);
-  pDest = (int*)dest;
-  for(i=0; i<iterate; i++)
-  {
-    pDest[i] = val;
-  }
-}
-
 qboolean SNDDMA_Init(void)
 {
 	int rc;
@@ -211,16 +191,6 @@ qboolean SNDDMA_Init(void)
 	if (!dma.buffer)
 		dma.buffer = (unsigned char *) mmap(NULL, info.fragstotal
 			* info.fragsize, PROT_WRITE|PROT_READ, MAP_FILE|MAP_SHARED, audio_fd, 0);
-
-  if (dma.buffer == MAP_FAILED)
-  {
-    Com_Printf("Could not mmap dma buffer PROT_WRITE|PROT_READ\n");
-    Com_Printf("trying mmap PROT_WRITE (with associated better compatibility / less performance code)\n");
-		dma.buffer = (unsigned char *) mmap(NULL, info.fragstotal
-			* info.fragsize, PROT_WRITE, MAP_FILE|MAP_SHARED, audio_fd, 0);
-    // NOTE TTimo could add a variable to force using regular memset on systems that are known to be safe
-    use_custom_memset = qtrue;
-  }
 
 	if (dma.buffer == MAP_FAILED) {
 		perror(snddevice->string);
