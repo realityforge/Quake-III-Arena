@@ -944,7 +944,6 @@ public:
 	void stopCamera() {
 		cameraRunning = true;
 	}
-	void getActiveSegmentInfo(int segment, idVec3_t &origin, idVec3_t &direction, float *fv);
 
 	bool getCameraInfo(long time, idVec3_t &origin, idVec3_t &direction, float *fv);
 	bool getCameraInfo(long time, float *origin, float *direction, float *fv) {

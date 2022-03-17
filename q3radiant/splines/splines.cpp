@@ -440,43 +440,6 @@ void idSplineList::write(fileHandle_t file, const char *p) {
 	FS_Write(s.c_str(), s.length(), file);
 }
 
-
-void idCameraDef::getActiveSegmentInfo(int segment, idVec3_t &origin, idVec3_t &direction, float *fov) {
-#if 0
-	if (!cameraSpline.validTime()) {
-		buildCamera();
-	}
-	double d = (double)segment / numSegments();
-	getCameraInfo(d * totalTime * 1000, origin, direction, fov);
-#endif
-/*
-	if (!cameraSpline.validTime()) {
-		buildCamera();
-	}
-	origin = *cameraSpline.getSegmentPoint(segment);
-	
-
-	idVec3_t temp;
-
-	int numTargets = getTargetSpline()->controlPoints.Num();
-	int count = cameraSpline.splineTime.Num();
-	if (numTargets == 0) {
-		// follow the path
-		if (cameraSpline.getActiveSegment() < count - 1) {
-			temp = *cameraSpline.splinePoints[cameraSpline.getActiveSegment()+1];
-		}
-	} else if (numTargets == 1) {
-		temp = *getTargetSpline()->controlPoints[0];
-	} else {
-		temp = *getTargetSpline()->getSegmentPoint(segment);
-	}
-
-	temp -= origin;
-	temp.Normalize();
-	direction = temp;
-*/
-}
-
 bool idCameraDef::getCameraInfo(long time, idVec3_t &origin, idVec3_t &direction, float *fv) {
 
 
