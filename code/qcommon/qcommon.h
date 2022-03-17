@@ -944,8 +944,6 @@ void	*Sys_GetUIAPI( void );
 void	Sys_UnloadBotLib( void );
 void	*Sys_GetBotLibAPI( void *parms );
 
-char	*Sys_GetCurrentUser( void );
-
 void	QDECL Sys_Error( const char *error, ...);
 void	Sys_Quit (void);
 #ifndef DEDICATED

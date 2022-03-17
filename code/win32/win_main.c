@@ -1088,8 +1088,6 @@ void Sys_Init( void ) {
 	Cvar_SetValue( "sys_cpuid", cpuid );
 	Com_Printf( "%s\n", Cvar_VariableString( "sys_cpustring" ) );
 
-	Cvar_Set( "username", Sys_GetCurrentUser() );
-
 	IN_Init();		// FIXME: not in dedicated?
 }
 

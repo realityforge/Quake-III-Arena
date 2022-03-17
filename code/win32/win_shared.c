@@ -276,25 +276,6 @@ int Sys_GetProcessorId( void )
 */
 #pragma optimize( "", on )
 
-//============================================
-
-char *Sys_GetCurrentUser( void )
-{
-	static char s_userName[1024];
-	unsigned long size = sizeof( s_userName );
-
-
-	if ( !GetUserName( s_userName, &size ) )
-		strcpy( s_userName, "player" );
-
-	if ( !s_userName[0] )
-	{
-		strcpy( s_userName, "player" );
-	}
-
-	return s_userName;
-}
-
 char	*Sys_DefaultHomePath(void) {
 	return NULL;
 }

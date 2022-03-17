@@ -411,16 +411,6 @@ int Sys_GetProcessorId( void )
 	return CPUID_GENERIC;
 }
 
-char *Sys_GetCurrentUser( void )
-{
-	struct passwd *p;
-
-	if ( (p = getpwuid( getuid() )) == NULL ) {
-		return "player";
-	}
-	return p->pw_name;
-}
-
 #if defined(__linux__)
 // TTimo 
 // sysconf() in libc, POSIX.1 compliant

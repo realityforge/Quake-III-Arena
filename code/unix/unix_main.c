@@ -334,8 +334,6 @@ void Sys_Init(void)
   Cvar_Set( "arch", "unknown" );
 #endif
 
-  Cvar_Set( "username", Sys_GetCurrentUser() );
-
 #ifndef DEDICATED
   IN_Init();
 #endif
