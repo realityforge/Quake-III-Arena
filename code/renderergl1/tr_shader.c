@@ -1418,11 +1418,6 @@ static void ParseSurfaceParm( char **text ) {
 		if ( !Q_stricmp( token, infoParms[i].name ) ) {
 			shader.surfaceFlags |= infoParms[i].surfaceFlags;
 			shader.contentFlags |= infoParms[i].contents;
-#if 0
-			if ( infoParms[i].clearSolid ) {
-				si->contents &= ~CONTENTS_SOLID;
-			}
-#endif
 			break;
 		}
 	}
@@ -1792,10 +1787,6 @@ static collapse_t	collapse[] = {
 
 	{ GLS_DSTBLEND_ONE | GLS_SRCBLEND_ONE, GLS_DSTBLEND_ONE | GLS_SRCBLEND_ONE,
 		GL_ADD, GLS_DSTBLEND_ONE | GLS_SRCBLEND_ONE },
-#if 0
-	{ 0, GLS_DSTBLEND_ONE_MINUS_SRC_ALPHA | GLS_SRCBLEND_SRC_ALPHA,
-		GL_DECAL, 0 },
-#endif
 	{ -1 }
 };
 

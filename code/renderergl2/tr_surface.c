@@ -391,12 +391,6 @@ static void RB_SurfaceVertsAndIndexes( int numVerts, srfVert_t *verts, int numIn
 			VectorCopy4(dv->lightdir, lightdir);
 	}
 
-#if 0  // nothing even uses vertex dlightbits
-	for ( i = 0 ; i < numVerts ; i++ ) {
-		tess.vertexDlightBits[ tess.numVertexes + i ] = dlightBits;
-	}
-#endif
-
 	tess.dlightBits |= dlightBits;
 	tess.pshadowBits |= pshadowBits;
 
@@ -1145,23 +1139,6 @@ Draws x/y/z lines from the origin for orientation debugging
 */
 static void RB_SurfaceAxis( void ) {
 	// FIXME: implement this
-#if 0
-	GL_BindToTMU( tr.whiteImage, TB_COLORMAP );
-	GL_State( GLS_DEFAULT );
-	qglLineWidth( 3 );
-	qglBegin( GL_LINES );
-	qglColor3f( 1,0,0 );
-	qglVertex3f( 0,0,0 );
-	qglVertex3f( 16,0,0 );
-	qglColor3f( 0,1,0 );
-	qglVertex3f( 0,0,0 );
-	qglVertex3f( 0,16,0 );
-	qglColor3f( 0,0,1 );
-	qglVertex3f( 0,0,0 );
-	qglVertex3f( 0,0,16 );
-	qglEnd();
-	qglLineWidth( 1 );
-#endif
 }
 
 //===========================================================================

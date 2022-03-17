@@ -1424,25 +1424,6 @@ void GLSL_InitGPUShaders(void)
 		numEtcShaders++;
 	}
 
-#if 0
-	attribs = ATTR_POSITION | ATTR_TEXCOORD;
-	extradefines[0] = '\0';
-
-	if (!GLSL_InitGPUShader(&tr.testcubeShader, "testcube", attribs, qtrue, extradefines, qtrue, NULL, NULL))
-	{
-		ri.Error(ERR_FATAL, "Could not load testcube shader!");
-	}
-
-	GLSL_InitUniforms(&tr.testcubeShader);
-
-	GLSL_SetUniformInt(&tr.testcubeShader, UNIFORM_TEXTUREMAP, TB_COLORMAP);
-
-	GLSL_FinishGPUShader(&tr.testcubeShader);
-
-	numEtcShaders++;
-#endif
-
-
 	endTime = ri.Milliseconds();
 
 	ri.Printf(PRINT_ALL, "loaded %i GLSL shaders (%i gen %i light %i etc) in %5.2f seconds\n", 
