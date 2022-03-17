@@ -312,19 +312,10 @@ static void hashtable_stats (hashtable_t *H)
       nodes += len;
     }
   meanlen = (float)(nodes) / (H->buckets - empties);
-#if 0
-/* Long stats display */
-  report(" Total buckets: %d\n", H->buckets);
-  report(" Total stored nodes: %d\n", nodes);
-  report(" Longest chain: %d\n", longest);
-  report(" Empty chains: %d\n", empties);
-  report(" Mean non-empty chain length: %f\n", meanlen);
-#else //0
 /* Short stats display */
   report(", %d buckets, %d nodes", H->buckets, nodes);
   report("\n");
   report(" Longest chain: %d, empty chains: %d, mean non-empty: %f", longest, empties, meanlen);
-#endif //0
   report("\n");
 }
 
