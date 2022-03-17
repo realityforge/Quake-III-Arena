@@ -91,13 +91,6 @@ static int iss8(int32_t v)
 	return (SCHAR_MIN <= v && v <= SCHAR_MAX);
 }
 
-#if 0
-static int isu8(uint32_t v)
-{
-	return (v <= UCHAR_MAX);
-}
-#endif
-
 static int NextConstant4(void)
 {
 	return ((unsigned int)code[pc] | ((unsigned int)code[pc+1]<<8) | ((unsigned int)code[pc+2]<<16) | ((unsigned int)code[pc+3]<<24));

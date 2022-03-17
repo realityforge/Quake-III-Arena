@@ -50,16 +50,6 @@ vm_t	vmTable[MAX_VM];
 void VM_VmInfo_f( void );
 void VM_VmProfile_f( void );
 
-
-
-#if 0 // 64bit!
-// converts a VM pointer to a C pointer and
-// checks to make sure that the range is acceptable
-void	*VM_VM2C( vmptr_t p, int length ) {
-	return (void *)p;
-}
-#endif
-
 void VM_Debug( int level ) {
 	vm_debugLevel = level;
 }
@@ -664,17 +654,6 @@ void VM_Free( vm_t *vm ) {
 		Sys_UnloadDll( vm->dllHandle );
 		memset( vm, 0, sizeof( *vm ) );
 	}
-#if 0	// now automatically freed by hunk
-	if ( vm->codeBase ) {
-		Z_Free( vm->codeBase );
-	}
-	if ( vm->dataBase ) {
-		Z_Free( vm->dataBase );
-	}
-	if ( vm->instructionPointers ) {
-		Z_Free( vm->instructionPointers );
-	}
-#endif
 	memset( vm, 0, sizeof( *vm ) );
 
 	currentVM = NULL;

@@ -321,13 +321,6 @@ cvar_t *Cvar_Get( const char *var_name, const char *var_value, int flags ) {
 		var_name = "BADNAME";
 	}
 
-#if 0		// FIXME: values with backslash happen
-	if ( !Cvar_ValidateString( var_value ) ) {
-		Com_Printf("invalid cvar value string: %s\n", var_value );
-		var_value = "BADVALUE";
-	}
-#endif
-
 	var = Cvar_FindVar (var_name);
 	
 	if(var)
@@ -510,13 +503,6 @@ cvar_t *Cvar_Set2( const char *var_name, const char *value, qboolean force ) {
 		Com_Printf("invalid cvar name string: %s\n", var_name );
 		var_name = "BADNAME";
 	}
-
-#if 0	// FIXME
-	if ( value && !Cvar_ValidateString( value ) ) {
-		Com_Printf("invalid cvar value string: %s\n", value );
-		var_value = "BADVALUE";
-	}
-#endif
 
 	var = Cvar_FindVar (var_name);
 	if (!var) {
