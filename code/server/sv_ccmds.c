@@ -1427,14 +1427,12 @@ void SV_AddOperatorCommands( void ) {
 	Cmd_AddCommand ("sectorlist", SV_SectorList_f);
 	Cmd_AddCommand ("map", SV_Map_f);
 	Cmd_SetCommandCompletionFunc( "map", SV_CompleteMapName );
-#ifndef PRE_RELEASE_DEMO
 	Cmd_AddCommand ("devmap", SV_Map_f);
 	Cmd_SetCommandCompletionFunc( "devmap", SV_CompleteMapName );
 	Cmd_AddCommand ("spmap", SV_Map_f);
 	Cmd_SetCommandCompletionFunc( "spmap", SV_CompleteMapName );
 	Cmd_AddCommand ("spdevmap", SV_Map_f);
 	Cmd_SetCommandCompletionFunc( "spdevmap", SV_CompleteMapName );
-#endif
 	Cmd_AddCommand ("killserver", SV_KillServer_f);
 #ifdef DEDICATED
     Cmd_AddCommand ("heartbeat", SV_Heartbeat_f);
