@@ -506,24 +506,9 @@ EndBSPFile
 */
 void EndBSPFile (void)
 {
-#if 0
-	char	path[1024];
-	int		len;
-	byte	*buf;
-#endif
-
-
 	EmitBrushes ();
 	EmitPlanes ();
 	Q2_UnparseEntities ();
-
-	// load the pop
-#if 0
-	sprintf (path, "%s/pics/pop.lmp", gamedir);
-	len = LoadFile (path, &buf);
-	memcpy (dpop, buf, sizeof(dpop));
-	FreeMemory(buf);
-#endif
 }
 
 

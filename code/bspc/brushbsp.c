@@ -446,52 +446,6 @@ node_t *PointInLeaf (node_t *node, vec3_t point)
 // Returns:				-
 // Changes Globals:		-
 //===========================================================================
-#if 0
-int BoxOnPlaneSide (vec3_t mins, vec3_t maxs, plane_t *plane)
-{
-	int		side;
-	int		i;
-	vec3_t	corners[2];
-	vec_t	dist1, dist2;
-
-	// axial planes are easy
-	if (plane->type < 3)
-	{
-		side = 0;
-		if (maxs[plane->type] > plane->dist+PLANESIDE_EPSILON)
-			side |= PSIDE_FRONT;
-		if (mins[plane->type] < plane->dist-PLANESIDE_EPSILON)
-			side |= PSIDE_BACK;
-		return side;
-	}
-
-	// create the proper leading and trailing verts for the box
-
-	for (i=0 ; i<3 ; i++)
-	{
-		if (plane->normal[i] < 0)
-		{
-			corners[0][i] = mins[i];
-			corners[1][i] = maxs[i];
-		}
-		else
-		{
-			corners[1][i] = mins[i];
-			corners[0][i] = maxs[i];
-		}
-	}
-
-	dist1 = DotProduct (plane->normal, corners[0]) - plane->dist;
-	dist2 = DotProduct (plane->normal, corners[1]) - plane->dist;
-	side = 0;
-	if (dist1 >= PLANESIDE_EPSILON)
-		side = PSIDE_FRONT;
-	if (dist2 < PLANESIDE_EPSILON)
-		side |= PSIDE_BACK;
-
-	return side;
-}
-#else
 int BoxOnPlaneSide (vec3_t emins, vec3_t emaxs, plane_t *p)
 {
 	float	dist1, dist2;
@@ -555,7 +509,7 @@ int BoxOnPlaneSide (vec3_t emins, vec3_t emaxs, plane_t *p)
 
 	return sides;
 }
-#endif
+
 int QuickTestBrushToPlanenum (bspbrush_t *brush, int planenum, int *numsplits)
 {
 	int i, num;
@@ -699,15 +653,6 @@ int TestBrushToPlanenum (bspbrush_t *brush, int planenum,
 		|| (d_back < 0.0 && d_back > -1.0) )
 		(*epsilonbrush)++;
 
-#if 0
-	if (*numsplits == 0)
-	{	//	didn't really need to be split
-		if (front) s = PSIDE_FRONT;
-		else if (back) s = PSIDE_BACK;
-		else s = 0;
-	}
-#endif
-
 	return s;
 }
 //===========================================================================
@@ -721,11 +666,6 @@ int TestBrushToPlanenum (bspbrush_t *brush, int planenum,
 #define	EDGE_LENGTH	0.2
 qboolean WindingIsTiny (winding_t *w)
 {
-#if 0
-	if (WindingArea (w) < 1)
-		return true;
-	return false;
-#else
 	int		i, j;
 	vec_t	len;
 	vec3_t	delta;
@@ -744,7 +684,6 @@ qboolean WindingIsTiny (winding_t *w)
 		}
 	}
 	return true;
-#endif
 }
 //===========================================================================
 // Returns true if the winding still has one of the points
@@ -1123,13 +1062,6 @@ void SplitBrush (bspbrush_t *brush, int planenum,
 		{
 			if (!cw[j])
 				continue;
-#if 0
-			if (WindingIsTiny (cw[j]))
-			{
-				FreeWinding (cw[j]);
-				continue;
-			}
-#endif
 			cs = &b[j]->sides[b[j]->numsides];
 			b[j]->numsides++;
 			*cs = *s;

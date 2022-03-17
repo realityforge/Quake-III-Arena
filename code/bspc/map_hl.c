@@ -175,13 +175,6 @@ void HL_SplitBrush(bspbrush_t *brush, int planenum, int nodenum,
 		{
 			if (!cw[j])
 				continue;
-#if 0
-			if (WindingIsTiny (cw[j]))
-			{
-				FreeWinding (cw[j]);
-				continue;
-			}
-#endif
 			cs = &b[j]->sides[b[j]->numsides];
 			b[j]->numsides++;
 			*cs = *s;
