@@ -372,7 +372,7 @@ static int GLimp_SetMode(int mode, qboolean fullscreen, qboolean noborder, qbool
 	int perChannelColorBits;
 	int colorBits, depthBits, stencilBits;
 	int samples;
-	int i = 0;
+	int i;
 	SDL_Surface *icon = NULL;
 	Uint32 flags = SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL;
 	SDL_DisplayMode desktopMode;
@@ -1084,7 +1084,7 @@ void GLimp_EndFrame( void )
 	{
 		int         fullscreen;
 		qboolean    needToToggle;
-		qboolean    sdlToggled = qfalse;
+		qboolean    sdlToggled;
 
 		// Find out the current state
 		fullscreen = !!( SDL_GetWindowFlags( SDL_window ) & SDL_WINDOW_FULLSCREEN );
