@@ -201,7 +201,7 @@ void S_ChannelSetup( void ) {
 	channel_t *p, *q;
 
 	// clear all the sounds so they don't
-	Com_Memset( s_channels, 0, sizeof( s_channels ) );
+	memset( s_channels, 0, sizeof( s_channels ) );
 
 	p = s_channels;;
 	q = p + MAX_CHANNELS;
@@ -301,7 +301,7 @@ static sfx_t *S_FindName( const char *name ) {
 	}
 	
 	sfx = &s_knownSfx[i];
-	Com_Memset (sfx, 0, sizeof(*sfx));
+	memset (sfx, 0, sizeof(*sfx));
 	strcpy (sfx->soundName, name);
 
 	sfx->next = sfxHash[hash];
@@ -396,8 +396,8 @@ void S_Base_BeginRegistration( void ) {
 	if (s_numSfx == 0) {
 		SND_setup();
 
-		Com_Memset(s_knownSfx, '\0', sizeof(s_knownSfx));
-		Com_Memset(sfxHash, '\0', sizeof(sfx_t *) * LOOP_HASH);
+		memset(s_knownSfx, '\0', sizeof(s_knownSfx));
+		memset(sfxHash, '\0', sizeof(sfx_t *) * LOOP_HASH);
 
 		S_Base_RegisterSound("sound/feedback/hit.wav", qfalse);		// changed to a sound in baseq3
 	}
@@ -692,13 +692,13 @@ void S_Base_ClearSoundBuffer( void ) {
 		return;
 
 	// stop looping sounds
-	Com_Memset(loopSounds, 0, MAX_GENTITIES*sizeof(loopSound_t));
-	Com_Memset(loop_channels, 0, MAX_CHANNELS*sizeof(channel_t));
+	memset(loopSounds, 0, MAX_GENTITIES*sizeof(loopSound_t));
+	memset(loop_channels, 0, MAX_CHANNELS*sizeof(channel_t));
 	numLoopChannels = 0;
 
 	S_ChannelSetup();
 
-	Com_Memset(s_rawend, '\0', sizeof (s_rawend));
+	memset(s_rawend, '\0', sizeof (s_rawend));
 
 	if (dma.samplebits == 8)
 		clear = 0x80;
@@ -707,7 +707,7 @@ void S_Base_ClearSoundBuffer( void ) {
 
 	SNDDMA_BeginPainting ();
 	if (dma.buffer)
-		Com_Memset(dma.buffer, clear, dma.samples * dma.samplebits/8);
+		memset(dma.buffer, clear, dma.samples * dma.samplebits/8);
 	SNDDMA_Submit ();
 }
 
@@ -1576,7 +1576,7 @@ qboolean S_Base_Init( soundInterface_t *si ) {
 		s_soundMuted = 1;
 //		s_numSfx = 0;
 
-		Com_Memset(sfxHash, 0, sizeof(sfx_t *)*LOOP_HASH);
+		memset(sfxHash, 0, sizeof(sfx_t *)*LOOP_HASH);
 
 		s_soundtime = 0;
 		s_paintedtime = 0;

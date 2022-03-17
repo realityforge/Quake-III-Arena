@@ -270,7 +270,7 @@ token_t *PC_CopyToken(token_t *token)
 		return NULL;
 	}
 //	freetokens = freetokens->next;
-	Com_Memcpy(t, token, sizeof(token_t));
+	memcpy(t, token, sizeof(token_t));
 	t->next = NULL;
 	numtokens++;
 	return t;
@@ -325,7 +325,7 @@ int PC_ReadSourceToken(source_t *source, token_t *token)
 		FreeScript(script);
 	}
 	//copy the already available token
-	Com_Memcpy(token, source->tokens, sizeof(token_t));
+	memcpy(token, source->tokens, sizeof(token_t));
 	//free the read token
 	t = source->tokens;
 	source->tokens = source->tokens->next;
@@ -675,7 +675,7 @@ void PC_AddBuiltinDefines(source_t *source)
 	for (i = 0; builtin[i].string; i++)
 	{
 		define = (define_t *) GetMemory(sizeof(define_t));
-		Com_Memset(define, 0, sizeof(define_t));
+		memset(define, 0, sizeof(define_t));
 		define->name = (char *) GetMemory(strlen(builtin[i].string) + 1);
 		strcpy(define->name, builtin[i].string);
 		define->flags |= DEFINE_FIXED;
@@ -1027,7 +1027,7 @@ int PC_Directive_include(source_t *source)
 #ifdef QUAKE
 	if (!script)
 	{
-		Com_Memset(&file, 0, sizeof(foundfile_t));
+		memset(&file, 0, sizeof(foundfile_t));
 		script = LoadScriptFile(path);
 		if (script) Q_strncpyz(script->filename, path, sizeof(script->filename));
 	}
@@ -1205,7 +1205,7 @@ int PC_Directive_define(source_t *source)
 	}
 	//allocate define
 	define = (define_t *) GetMemory(sizeof(define_t));
-	Com_Memset(define, 0, sizeof(define_t));
+	memset(define, 0, sizeof(define_t));
 	define->name = (char *) GetMemory(strlen(token.string) + 1);
 	strcpy(define->name, token.string);
 	//add the define to the source
@@ -1316,7 +1316,7 @@ define_t *PC_DefineFromString(char *string)
 
 	script = LoadScriptMemory(string, strlen(string), "*extern");
 	//create a new source
-	Com_Memset(&src, 0, sizeof(source_t));
+	memset(&src, 0, sizeof(source_t));
 	Q_strncpyz(src.filename, "*extern", sizeof(src.filename));
 	src.scriptstack = script;
 #if DEFINEHASHING
@@ -2769,7 +2769,7 @@ int PC_ReadToken(source_t *source, token_t *token)
 			}
 		}
 		//copy token for unreading
-		Com_Memcpy(&source->token, token, sizeof(token_t));
+		memcpy(&source->token, token, sizeof(token_t));
 		//found a token
 		return qtrue;
 	}
@@ -2901,7 +2901,7 @@ int PC_CheckTokenType(source_t *source, int type, int subtype, token_t *token)
 	if (tok.type == type &&
 			(tok.subtype & subtype) == subtype)
 	{
-		Com_Memcpy(token, &tok, sizeof(token_t));
+		memcpy(token, &tok, sizeof(token_t));
 		return qtrue;
 	}
 	//
@@ -2993,7 +2993,7 @@ source_t *LoadSourceFile(const char *filename)
 	script->next = NULL;
 
 	source = (source_t *) GetMemory(sizeof(source_t));
-	Com_Memset(source, 0, sizeof(source_t));
+	memset(source, 0, sizeof(source_t));
 
 	Q_strncpyz(source->filename, filename, sizeof(source->filename));
 	source->scriptstack = script;
@@ -3026,7 +3026,7 @@ source_t *LoadSourceMemory(char *ptr, int length, char *name)
 	script->next = NULL;
 
 	source = (source_t *) GetMemory(sizeof(source_t));
-	Com_Memset(source, 0, sizeof(source_t));
+	memset(source, 0, sizeof(source_t));
 
 	Q_strncpyz(source->filename, name, sizeof(source->filename));
 	source->scriptstack = script;

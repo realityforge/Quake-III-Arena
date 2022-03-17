@@ -112,7 +112,7 @@ void *GetClearedMemory(unsigned long size)
 #else
 	ptr = GetMemory(size);
 #endif //MEMDEBUG
-	Com_Memset(ptr, 0, size);
+	memset(ptr, 0, size);
 	return ptr;
 }
 #ifdef MEMDEBUG
@@ -152,7 +152,7 @@ void *GetClearedHunkMemory(unsigned long size)
 #else
 	ptr = GetHunkMemory(size);
 #endif //MEMDEBUG
-	Com_Memset(ptr, 0, size);
+	memset(ptr, 0, size);
 	return ptr;
 }
 memoryblock_t *BlockFromPointer(void *ptr, char *str)
@@ -280,7 +280,7 @@ void *GetClearedMemory(unsigned long size)
 #else
 	ptr = GetMemory(size);
 #endif //MEMDEBUG
-	Com_Memset(ptr, 0, size);
+	memset(ptr, 0, size);
 	return ptr;
 }
 #ifdef MEMDEBUG
@@ -310,7 +310,7 @@ void *GetClearedHunkMemory(unsigned long size)
 #else
 	ptr = GetHunkMemory(size);
 #endif //MEMDEBUG
-	Com_Memset(ptr, 0, size);
+	memset(ptr, 0, size);
 	return ptr;
 }
 void FreeMemory(void *ptr)

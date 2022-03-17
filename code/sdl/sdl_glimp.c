@@ -418,7 +418,7 @@ static int GLimp_SetMode(int mode, qboolean fullscreen, qboolean noborder, qbool
 	}
 	else
 	{
-		Com_Memset( &desktopMode, 0, sizeof( SDL_DisplayMode ) );
+		memset( &desktopMode, 0, sizeof( SDL_DisplayMode ) );
 
 		ri.Printf( PRINT_ALL,
 				"Cannot determine display aspect, assuming 1.333\n" );

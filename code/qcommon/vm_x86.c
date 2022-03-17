@@ -1080,14 +1080,14 @@ void VM_Compile(vm_t *vm, vmHeader_t *header)
 	jused = Z_Malloc(jusedSize);
 	code = Z_Malloc(header->codeLength+32);
 	
-	Com_Memset(jused, 0, jusedSize);
-	Com_Memset(buf, 0, maxLength);
+	memset(jused, 0, jusedSize);
+	memset(buf, 0, maxLength);
 
 	// copy code in larger buffer and put some zeros at the end
 	// so we can safely look ahead for a few instructions in it
 	// without a chance to get false-positive because of some garbage bytes
-	Com_Memset(code, 0, header->codeLength+32);
-	Com_Memcpy(code, (byte *)header + header->codeOffset, header->codeLength );
+	memset(code, 0, header->codeLength+32);
+	memcpy(code, (byte *)header + header->codeOffset, header->codeLength );
 
 	// ensure that the optimisation pass knows about all the jump
 	// table targets
@@ -1659,7 +1659,7 @@ void VM_Compile(vm_t *vm, vmHeader_t *header)
 	        Com_Error(ERR_FATAL, "VM_CompileX86: malloc failed");
 #endif
 
-	Com_Memcpy( vm->codeBase, buf, compiledOfs );
+	memcpy( vm->codeBase, buf, compiledOfs );
 
 #ifdef VM_X86_MMAP
 	if(mprotect(vm->codeBase, compiledOfs, PROT_READ|PROT_EXEC))

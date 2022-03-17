@@ -508,7 +508,7 @@ void StringReplaceWords(char *string, char *synonym, char *replacement)
 		{
 			memmove(str + strlen(replacement), str+strlen(synonym), strlen(str+strlen(synonym))+1);
 			//append the synonum replacement
-			Com_Memcpy(str, replacement, strlen(replacement));
+			memcpy(str, replacement, strlen(replacement));
 		}
 		//find the next synonym in the string
 		str = StringContainsWord(str+strlen(replacement), synonym, qfalse);
@@ -772,7 +772,7 @@ void BotReplaceReplySynonyms(char *string, unsigned long int context)
 				memmove(str1 + strlen(replacement), str1+strlen(synonym->string),
 							strlen(str1+strlen(synonym->string)) + 1);
 				//append the synonum replacement
-				Com_Memcpy(str1, replacement, strlen(replacement));
+				memcpy(str1, replacement, strlen(replacement));
 				//
 				break;
 			}
@@ -2281,7 +2281,7 @@ void BotInitialChat(int chatstate, char *type, int mcontext, char *var0, char *v
 		return;
 	}
 	//
-	Com_Memset(&match, 0, sizeof(match));
+	memset(&match, 0, sizeof(match));
 	index = 0;
 	if( var0 ) {
 		strcat(match.string, var0);
@@ -2379,7 +2379,7 @@ int BotReplyChat(int chatstate, char *message, int mcontext, int vcontext, char 
 
 	cs = BotChatStateFromHandle(chatstate);
 	if (!cs) return qfalse;
-	Com_Memset(&match, 0, sizeof(bot_match_t));
+	memset(&match, 0, sizeof(bot_match_t));
 	strcpy(match.string, message);
 	bestpriority = -1;
 	bestchatmessage = NULL;
@@ -2442,7 +2442,7 @@ int BotReplyChat(int chatstate, char *message, int mcontext, int vcontext, char 
 				//if the reply chat has a message
 				if (m)
 				{
-					Com_Memcpy(&bestmatch, &match, sizeof(bot_match_t));
+					memcpy(&bestmatch, &match, sizeof(bot_match_t));
 					bestchatmessage = m;
 					bestrchat = rchat;
 					bestpriority = rchat->priority;
@@ -2589,7 +2589,7 @@ void BotSetChatName(int chatstate, char *name, int client)
 	cs = BotChatStateFromHandle(chatstate);
 	if (!cs) return;
 	cs->client = client;
-	Com_Memset(cs->name, 0, sizeof(cs->name));
+	memset(cs->name, 0, sizeof(cs->name));
 	strncpy(cs->name, name, sizeof(cs->name)-1);
 	cs->name[sizeof(cs->name)-1] = '\0';
 }

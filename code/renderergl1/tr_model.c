@@ -396,7 +396,7 @@ static qboolean R_LoadMD3 (model_t *mod, int lod, void *buffer, const char *mod_
 	mod->dataSize += size;
 	mod->md3[lod] = ri.Hunk_Alloc( size, h_low );
 
-	Com_Memcpy (mod->md3[lod], buffer, LittleLong(pinmodel->ofsEnd) );
+	memcpy (mod->md3[lod], buffer, LittleLong(pinmodel->ofsEnd) );
 
     LL(mod->md3[lod]->ident);
     LL(mod->md3[lod]->version);

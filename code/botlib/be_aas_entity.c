@@ -161,18 +161,18 @@ void AAS_EntityInfo(int entnum, aas_entityinfo_t *info)
 	if (!aasworld.initialized)
 	{
 		botimport.Print(PRT_FATAL, "AAS_EntityInfo: aasworld not initialized\n");
-		Com_Memset(info, 0, sizeof(aas_entityinfo_t));
+		memset(info, 0, sizeof(aas_entityinfo_t));
 		return;
 	}
 
 	if (entnum < 0 || entnum >= aasworld.maxentities)
 	{
 		botimport.Print(PRT_FATAL, "AAS_EntityInfo: entnum %d out of range\n", entnum);
-		Com_Memset(info, 0, sizeof(aas_entityinfo_t));
+		memset(info, 0, sizeof(aas_entityinfo_t));
 		return;
 	}
 
-	Com_Memcpy(info, &aasworld.entities[entnum].i, sizeof(aas_entityinfo_t));
+	memcpy(info, &aasworld.entities[entnum].i, sizeof(aas_entityinfo_t));
 }
 void AAS_EntityOrigin(int entnum, vec3_t origin)
 {

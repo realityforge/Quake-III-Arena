@@ -341,7 +341,7 @@ void R_RotateForViewer (void)
 	float	viewerMatrix[16];
 	vec3_t	origin;
 
-	Com_Memset (&tr.or, 0, sizeof(tr.or));
+	memset (&tr.or, 0, sizeof(tr.or));
 	tr.or.axis[0][0] = 1;
 	tr.or.axis[1][1] = 1;
 	tr.or.axis[2][2] = 1;
@@ -626,7 +626,7 @@ void R_PlaneForSurface (surfaceType_t *surfType, cplane_t *plane) {
 	vec4_t			plane4;
 
 	if (!surfType) {
-		Com_Memset (plane, 0, sizeof(*plane));
+		memset (plane, 0, sizeof(*plane));
 		plane->normal[0] = 1;
 		return;
 	}
@@ -650,7 +650,7 @@ void R_PlaneForSurface (surfaceType_t *surfType, cplane_t *plane) {
 		plane->dist = plane4[3];
 		return;
 	default:
-		Com_Memset (plane, 0, sizeof(*plane));
+		memset (plane, 0, sizeof(*plane));
 		plane->normal[0] = 1;		
 		return;
 	}

@@ -72,7 +72,7 @@ qboolean R_CompareVert(srfVert_t * v1, srfVert_t * v2, qboolean checkST)
 =============
 R_CalcTexDirs
 
-Lengyel, Eric. “Computing Tangent Space Basis Vectors for an Arbitrary Mesh”. Terathon Software 3D Graphics Library, 2001. http://www.terathon.com/code/tangent.html
+Lengyel, Eric. ï¿½Computing Tangent Space Basis Vectors for an Arbitrary Meshï¿½. Terathon Software 3D Graphics Library, 2001. http://www.terathon.com/code/tangent.html
 =============
 */
 void R_CalcTexDirs(vec3_t sdir, vec3_t tdir, const vec3_t v1, const vec3_t v2,
@@ -104,7 +104,7 @@ void R_CalcTexDirs(vec3_t sdir, vec3_t tdir, const vec3_t v1, const vec3_t v2,
 =============
 R_CalcTangentSpace
 
-Lengyel, Eric. “Computing Tangent Space Basis Vectors for an Arbitrary Mesh”. Terathon Software 3D Graphics Library, 2001. http://www.terathon.com/code/tangent.html
+Lengyel, Eric. ï¿½Computing Tangent Space Basis Vectors for an Arbitrary Meshï¿½. Terathon Software 3D Graphics Library, 2001. http://www.terathon.com/code/tangent.html
 =============
 */
 vec_t R_CalcTangentSpace(vec3_t tangent, vec3_t bitangent, const vec3_t normal, const vec3_t sdir, const vec3_t tdir)
@@ -568,7 +568,7 @@ void R_RotateForViewer (void)
 	float	viewerMatrix[16];
 	vec3_t	origin;
 
-	Com_Memset (&tr.or, 0, sizeof(tr.or));
+	memset (&tr.or, 0, sizeof(tr.or));
 	tr.or.axis[0][0] = 1;
 	tr.or.axis[1][1] = 1;
 	tr.or.axis[2][2] = 1;
@@ -976,7 +976,7 @@ void R_PlaneForSurface (surfaceType_t *surfType, cplane_t *plane) {
 	vec4_t			plane4;
 
 	if (!surfType) {
-		Com_Memset (plane, 0, sizeof(*plane));
+		memset (plane, 0, sizeof(*plane));
 		plane->normal[0] = 1;
 		return;
 	}
@@ -1000,7 +1000,7 @@ void R_PlaneForSurface (surfaceType_t *surfType, cplane_t *plane) {
 		plane->dist = plane4[3];
 		return;
 	default:
-		Com_Memset (plane, 0, sizeof(*plane));
+		memset (plane, 0, sizeof(*plane));
 		plane->normal[0] = 1;		
 		return;
 	}
@@ -1791,7 +1791,7 @@ void R_RenderDlightCubemaps(const refdef_t *fd)
 		if ((1 << i) & tr.refdef.dlightMask)
 			continue;
 
-		Com_Memset( &shadowParms, 0, sizeof( shadowParms ) );
+		memset( &shadowParms, 0, sizeof( shadowParms ) );
 
 		shadowParms.viewportX = tr.refdef.x;
 		shadowParms.viewportY = glConfig.vidHeight - ( tr.refdef.y + PSHADOW_MAP_SIZE );
@@ -2078,7 +2078,7 @@ void R_RenderPshadowMaps(const refdef_t *fd)
 		pshadow_t *shadow = &tr.refdef.pshadows[i];
 		int j;
 
-		Com_Memset( &shadowParms, 0, sizeof( shadowParms ) );
+		memset( &shadowParms, 0, sizeof( shadowParms ) );
 
 		if (glRefConfig.framebufferObject)
 		{
@@ -2485,7 +2485,7 @@ void R_RenderSunShadowMaps(const refdef_t *fd, int level)
 	{
 		int firstDrawSurf;
 
-		Com_Memset( &shadowParms, 0, sizeof( shadowParms ) );
+		memset( &shadowParms, 0, sizeof( shadowParms ) );
 
 		if (glRefConfig.framebufferObject)
 		{
@@ -2636,7 +2636,7 @@ void R_RenderCubemapSide( int cubemapIndex, int cubemapSide, qboolean subscene )
 		}
 	}
 
-	Com_Memset( &parms, 0, sizeof( parms ) );
+	memset( &parms, 0, sizeof( parms ) );
 
 	parms.viewportX = 0;
 	parms.viewportY = 0;

@@ -77,7 +77,7 @@ void VM_Init( void ) {
 	Cmd_AddCommand ("vmprofile", VM_VmProfile_f );
 	Cmd_AddCommand ("vminfo", VM_VmInfo_f );
 
-	Com_Memset( vmTable, 0, sizeof( vmTable ) );
+	memset( vmTable, 0, sizeof( vmTable ) );
 }
 
 
@@ -420,11 +420,11 @@ vmHeader_t *VM_LoadQVM( vm_t *vm, qboolean alloc, qboolean unpure)
 			return NULL;
 		}
 		
-		Com_Memset(vm->dataBase, 0, vm->dataAlloc);
+		memset(vm->dataBase, 0, vm->dataAlloc);
 	}
 
 	// copy the intialized data
-	Com_Memcpy( vm->dataBase, (byte *)header.h + header.h->dataOffset,
+	memcpy( vm->dataBase, (byte *)header.h + header.h->dataOffset,
 		header.h->dataLength + header.h->litLength );
 
 	// byte swap the longs
@@ -457,10 +457,10 @@ vmHeader_t *VM_LoadQVM( vm_t *vm, qboolean alloc, qboolean unpure)
 				return NULL;
 			}
 
-			Com_Memset(vm->jumpTableTargets, 0, header.h->jtrgLength);
+			memset(vm->jumpTableTargets, 0, header.h->jtrgLength);
 		}
 
-		Com_Memcpy(vm->jumpTableTargets, (byte *) header.h + header.h->dataOffset +
+		memcpy(vm->jumpTableTargets, (byte *) header.h + header.h->dataOffset +
 				header.h->dataLength + header.h->litLength, header.h->jtrgLength);
 
 		// byte swap the longs
@@ -662,7 +662,7 @@ void VM_Free( vm_t *vm ) {
 
 	if ( vm->dllHandle ) {
 		Sys_UnloadDll( vm->dllHandle );
-		Com_Memset( vm, 0, sizeof( *vm ) );
+		memset( vm, 0, sizeof( *vm ) );
 	}
 #if 0	// now automatically freed by hunk
 	if ( vm->codeBase ) {
@@ -675,7 +675,7 @@ void VM_Free( vm_t *vm ) {
 		Z_Free( vm->instructionPointers );
 	}
 #endif
-	Com_Memset( vm, 0, sizeof( *vm ) );
+	memset( vm, 0, sizeof( *vm ) );
 
 	currentVM = NULL;
 	lastVM = NULL;
@@ -957,5 +957,5 @@ void VM_BlockCopy(unsigned int dest, unsigned int src, size_t n)
 		Com_Error(ERR_DROP, "OP_BLOCK_COPY out of range!");
 	}
 
-	Com_Memcpy(currentVM->dataBase + dest, currentVM->dataBase + src, n);
+	memcpy(currentVM->dataBase + dest, currentVM->dataBase + src, n);
 }

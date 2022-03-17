@@ -328,7 +328,7 @@ void SV_ChangeMaxClients( void ) {
 			oldClients[i] = svs.clients[i];
 		}
 		else {
-			Com_Memset(&oldClients[i], 0, sizeof(client_t));
+			memset(&oldClients[i], 0, sizeof(client_t));
 		}
 	}
 
@@ -337,7 +337,7 @@ void SV_ChangeMaxClients( void ) {
 
 	// allocate new clients
 	svs.clients = Z_Malloc ( sv_maxclients->integer * sizeof(client_t) );
-	Com_Memset( svs.clients, 0, sv_maxclients->integer * sizeof(client_t) );
+	memset( svs.clients, 0, sv_maxclients->integer * sizeof(client_t) );
 
 	// copy the clients over
 	for ( i = 0 ; i < count ; i++ ) {
@@ -366,7 +366,7 @@ static void SV_ClearServer(void) {
 			Z_Free( sv.configstrings[i] );
 		}
 	}
-	Com_Memset (&sv, 0, sizeof(sv));
+	memset (&sv, 0, sizeof(sv));
 }
 
 /*
@@ -759,7 +759,7 @@ void SV_Shutdown( char *finalmsg ) {
 		
 		Z_Free(svs.clients);
 	}
-	Com_Memset( &svs, 0, sizeof( svs ) );
+	memset( &svs, 0, sizeof( svs ) );
 
 	Cvar_Set( "sv_running", "0" );
 	Cvar_Set("ui_singlePlayerActive", "0");

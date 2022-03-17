@@ -313,7 +313,7 @@ void CL_VoipParseTargets(void)
 	char *end;
 	int val;
 
-	Com_Memset(clc.voipTargets, 0, sizeof(clc.voipTargets));
+	memset(clc.voipTargets, 0, sizeof(clc.voipTargets));
 	clc.voipFlags &= ~VOIP_SPATIAL;
 
 	while(target)
@@ -333,7 +333,7 @@ void CL_VoipParseTargets(void)
 		{
 			if(!Q_stricmpn(target, "all", 3))
 			{
-				Com_Memset(clc.voipTargets, ~0, sizeof(clc.voipTargets));
+				memset(clc.voipTargets, ~0, sizeof(clc.voipTargets));
 				return;
 			}
 			if(!Q_stricmpn(target, "spatial", 7))
@@ -776,7 +776,7 @@ void CL_Record_f( void ) {
 	}
 
 	// baselines
-	Com_Memset (&nullstate, 0, sizeof(nullstate));
+	memset (&nullstate, 0, sizeof(nullstate));
 	for ( i = 0; i < MAX_GENTITIES ; i++ ) {
 		ent = &cl.entityBaselines[i];
 		if ( !ent->number ) {
@@ -1279,9 +1279,9 @@ void CL_MapLoading( void ) {
 	// if we are already connected to the local host, stay connected
 	if ( clc.state >= CA_CONNECTED && !Q_stricmp( clc.servername, "localhost" ) ) {
 		clc.state = CA_CONNECTED;		// so the connect screen is drawn
-		Com_Memset( cls.updateInfoString, 0, sizeof( cls.updateInfoString ) );
-		Com_Memset( clc.serverMessage, 0, sizeof( clc.serverMessage ) );
-		Com_Memset( &cl.gameState, 0, sizeof( cl.gameState ) );
+		memset( cls.updateInfoString, 0, sizeof( cls.updateInfoString ) );
+		memset( clc.serverMessage, 0, sizeof( clc.serverMessage ) );
+		memset( &cl.gameState, 0, sizeof( cl.gameState ) );
 		clc.lastPacketSentTime = -9999;
 		SCR_UpdateScreen();
 	} else {
@@ -1311,7 +1311,7 @@ void CL_ClearState (void) {
 
 //	S_StopAllSounds();
 
-	Com_Memset( &cl, 0, sizeof( cl ) );
+	memset( &cl, 0, sizeof( cl ) );
 }
 
 static void CL_OldGame(void)
@@ -1410,7 +1410,7 @@ void CL_Disconnect( qboolean showMainMenu ) {
 	CL_ClearState ();
 
 	// wipe the client connection
-	Com_Memset( &clc, 0, sizeof( clc ) );
+	memset( &clc, 0, sizeof( clc ) );
 
 	clc.state = CA_DISCONNECTED;
 
@@ -2964,7 +2964,7 @@ void CL_ShutdownRef( void ) {
 		re.Shutdown( qtrue );
 	}
 
-	Com_Memset( &re, 0, sizeof( re ) );
+	memset( &re, 0, sizeof( re ) );
 
 #ifdef USE_RENDERER_DLOPEN
 	if ( rendererLib ) {
@@ -3573,7 +3573,7 @@ void CL_Shutdown(char *finalmsg, qboolean disconnect, qboolean quit)
 
 	recursive = qfalse;
 
-	Com_Memset( &cls, 0, sizeof( cls ) );
+	memset( &cls, 0, sizeof( cls ) );
 	Key_SetCatcher( 0 );
 
 	Com_Printf( "-----------------------\n" );
@@ -3939,10 +3939,10 @@ void CL_LocalServers_f( void ) {
 
 	for (i = 0; i < MAX_OTHER_SERVERS; i++) {
 		qboolean b = cls.localServers[i].visible;
-		Com_Memset(&cls.localServers[i], 0, sizeof(cls.localServers[i]));
+		memset(&cls.localServers[i], 0, sizeof(cls.localServers[i]));
 		cls.localServers[i].visible = b;
 	}
-	Com_Memset( &to, 0, sizeof( to ) );
+	memset( &to, 0, sizeof( to ) );
 
 	// The 'xxx' in the message is a challenge that will be echoed back
 	// by the server.  We don't care about that here, but master servers
@@ -4255,7 +4255,7 @@ void CL_Ping_f( void ) {
 		server = Cmd_Argv(2);
 	}
 
-	Com_Memset( &to, 0, sizeof(netadr_t) );
+	memset( &to, 0, sizeof(netadr_t) );
 
 	if ( !NET_StringToAdr( server, &to, family ) ) {
 		return;
@@ -4404,7 +4404,7 @@ void CL_ServerStatus_f(void) {
 	
 	if(!toptr)
 	{
-		Com_Memset( &to, 0, sizeof(netadr_t) );
+		memset( &to, 0, sizeof(netadr_t) );
 	
 		if(argc == 2)
 			server = Cmd_Argv(1);

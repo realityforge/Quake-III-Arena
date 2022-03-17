@@ -543,7 +543,7 @@ void Info_Print( const char *s ) {
 		l = o - key;
 		if (l < 20)
 		{
-			Com_Memset (o, ' ', 20-l);
+			memset (o, ' ', 20-l);
 			key[20] = 0;
 		}
 		else
@@ -870,7 +870,7 @@ void Z_Free( void *ptr ) {
 	zone->used -= block->size;
 	// set the block to something that should cause problems
 	// if it is referenced...
-	Com_Memset( ptr, 0xaa, block->size - sizeof( *block ) );
+	memset( ptr, 0xaa, block->size - sizeof( *block ) );
 
 	block->tag = 0;		// mark as free
 	
@@ -1042,7 +1042,7 @@ void *Z_Malloc( int size ) {
 #else
 	buf = Z_TagMalloc( size, TAG_GENERAL );
 #endif
-	Com_Memset( buf, 0, size );
+	memset( buf, 0, size );
 
 	return buf;
 }
@@ -1736,7 +1736,7 @@ void *Hunk_Alloc( int size, ha_pref preference ) {
 
 	hunk_permanent->temp = hunk_permanent->permanent;
 
-	Com_Memset( buf, 0, size );
+	memset( buf, 0, size );
 
 #ifdef HUNK_DEBUG
 	{
@@ -2515,7 +2515,7 @@ void Com_Init( char *commandLine ) {
 	}
 
 	// Clear queues
-	Com_Memset( &eventQueue[ 0 ], 0, MAX_QUEUED_EVENTS * sizeof( sysEvent_t ) );
+	memset( &eventQueue[ 0 ], 0, MAX_QUEUED_EVENTS * sizeof( sysEvent_t ) );
 
 	// initialize the weak pseudo-random number generator for use later.
 	Com_InitRand();

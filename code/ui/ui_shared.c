@@ -3892,7 +3892,7 @@ void Item_OwnerDraw_Paint(itemDef_t *item) {
 		}
 
 		if (item->cvarFlags & (CVAR_ENABLE | CVAR_DISABLE) && !Item_EnableShowViaCvar(item, CVAR_ENABLE)) {
-		  Com_Memcpy(color, parent->disableColor, sizeof(vec4_t));
+		  memcpy(color, parent->disableColor, sizeof(vec4_t));
 		}
 	
 		if (item->text) {

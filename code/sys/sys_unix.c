@@ -563,7 +563,7 @@ Sys_ClearExecBuffer
 static void Sys_ClearExecBuffer( void )
 {
 	execBufferPointer = execBuffer;
-	Com_Memset( execArgv, 0, sizeof( execArgv ) );
+	memset( execArgv, 0, sizeof( execArgv ) );
 	execArgc = 0;
 }
 

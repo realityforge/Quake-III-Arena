@@ -97,7 +97,7 @@ void Cbuf_AddText( const char *text ) {
 		Com_Printf ("Cbuf_AddText: overflow\n");
 		return;
 	}
-	Com_Memcpy(&cmd_text.data[cmd_text.cursize], text, l);
+	memcpy(&cmd_text.data[cmd_text.cursize], text, l);
 	cmd_text.cursize += l;
 }
 
@@ -126,7 +126,7 @@ void Cbuf_InsertText( const char *text ) {
 	}
 
 	// copy the new text in
-	Com_Memcpy( cmd_text.data, text, len - 1 );
+	memcpy( cmd_text.data, text, len - 1 );
 
 	// add a \n
 	cmd_text.data[ len - 1 ] = '\n';
@@ -227,7 +227,7 @@ void Cbuf_Execute (void)
 			i = MAX_CMD_LINE - 1;
 		}
 				
-		Com_Memcpy (line, text, i);
+		memcpy (line, text, i);
 		line[i] = 0;
 		
 // delete the text from the command buffer and move remaining commands down
