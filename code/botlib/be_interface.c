@@ -109,8 +109,6 @@ int Export_BotLibSetup(void)
 	
 	botDeveloper = LibVarGetValue("bot_developer");
  	memset( &botlibglobals, 0, sizeof(botlibglobals) );
-	//initialize byte swapping (litte endian etc.)
-//	Swap_Init();
 
 	if(botDeveloper)
 	{
