@@ -1134,20 +1134,6 @@ void CL_PlayDemo_f( void ) {
 	clc.firstDemoFrameSkipped = qfalse;
 }
 
-
-/*
-====================
-CL_StartDemoLoop
-
-Closing the main menu will restart the demo loop
-====================
-*/
-void CL_StartDemoLoop( void ) {
-	// start the demo loop again
-	Cbuf_AddText ("d1\n");
-	Key_SetCatcher( 0 );
-}
-
 /*
 ==================
 CL_NextDemo
