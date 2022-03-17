@@ -135,7 +135,7 @@ Special Thanks to the whole discord!
 	y += 1.42 * PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
 	UI_DrawProportionalString( 320, y, "Additional Quake3Quest coding", UI_CENTER|UI_SMALLFONT, color_red );
 	y += PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
-    UI_DrawString( 320, y, "Baggyg, MuadDiB, Lubos, Sparkie", UI_CENTER|UI_SMALLFONT, color_white );
+    UI_DrawString( 320, y, "Sparkie, MuadDiB, Lubos, Baggyg", UI_CENTER|UI_SMALLFONT, color_white );
 
 	y += 1.42 * PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
 	UI_DrawProportionalString( 320, y, "Additional Contributions", UI_CENTER|UI_SMALLFONT, color_red );

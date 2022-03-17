@@ -80,7 +80,12 @@ static int R_CullModel( mdvModel_t *model, trRefEntity_t *ent ) {
 	mdvFrame_t	*oldFrame, *newFrame;
 	int			i;
 
-	// compute frame pointers
+    if (vr_thirdPersonSpectator->integer)
+    {
+        return CULL_IN;
+    }
+
+    // compute frame pointers
 	newFrame = model->frames + ent->e.frame;
 	oldFrame = model->frames + ent->e.oldframe;
 
@@ -324,13 +329,17 @@ void R_AddMD3Surfaces( trRefEntity_t *ent ) {
 
 	model = tr.currentModel->mdv[lod];
 
-	//
-	// cull the entire model if merged bounding box of both frames
-	// is outside the view frustum.
-	//
-	cull = R_CullModel ( model, ent );
-	if ( cull == CULL_OUT ) {
-		return;
+	if (!vr_thirdPersonSpectator->integer)
+	{
+		//
+		// cull the entire model if merged bounding box of both frames
+		// is outside the view frustum.
+		//
+		cull = R_CullModel(model, ent);
+		if (cull == CULL_OUT)
+		{
+			return;
+		}
 	}
 
 	//

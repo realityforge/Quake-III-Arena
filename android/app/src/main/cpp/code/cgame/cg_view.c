@@ -261,7 +261,7 @@ static void CG_OffsetVRThirdPersonView( void ) {
 		vec3_t angles, forward, right, up;
 		VectorCopy(vr->offhandangles, angles);
         float deltaYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]);
-		angles[YAW] += deltaYaw + (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]);
+		angles[YAW] += (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]);
 		AngleVectors(angles, forward, right, up);
 		VectorMA(cg.vr_vieworigin, vr->thumbstick_location[THUMB_LEFT][1] * 5.0f, forward, cg.vr_vieworigin);
 		VectorMA(cg.vr_vieworigin, vr->thumbstick_location[THUMB_LEFT][0] * 5.0f, right, cg.vr_vieworigin);
@@ -673,7 +673,7 @@ static int CG_CalcViewValues( ) {
 
 	//HACK!! - should change this to a renderer function call
 	//Indicate to renderer whether we are in deathcam mode, We don't want sky in death cam mode
-	trap_Cvar_Set( "vr_noSkybox", (((ps->stats[STAT_HEALTH] <= 0) &&
+	trap_Cvar_Set( "vr_thirdPersonSpectator", (((ps->stats[STAT_HEALTH] <= 0) &&
                                     ( ps->pm_type != PM_INTERMISSION )) ||
                                    cg.demoPlayback ||
                                    CG_IsThirdPersonFollowMode() ? "1" : "0" ));

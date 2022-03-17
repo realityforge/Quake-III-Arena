@@ -1263,13 +1263,17 @@ void R_AddIQMSurfaces( trRefEntity_t *ent ) {
 		ent->e.oldframe = 0;
 	}
 
-	//
-	// cull the entire model if merged bounding box of both frames
-	// is outside the view frustum.
-	//
-	cull = R_CullIQM ( data, ent );
-	if ( cull == CULL_OUT ) {
-		return;
+	if (!vr_thirdPersonSpectator->integer)
+	{
+		//
+		// cull the entire model if merged bounding box of both frames
+		// is outside the view frustum.
+		//
+		cull = R_CullIQM(data, ent);
+		if (cull == CULL_OUT)
+		{
+			return;
+		}
 	}
 
 	//

@@ -47,6 +47,11 @@ static int R_MDRCullModel( mdrHeader_t *header, trRefEntity_t *ent ) {
 	mdrFrame_t	*oldFrame, *newFrame;
 	int			i, frameSize;
 
+	if (vr_thirdPersonSpectator->integer)
+	{
+		return CULL_IN;
+	}
+
 	frameSize = (size_t)( &((mdrFrame_t *)0)->bones[ header->numBones ] );
 	
 	// compute frame pointers
