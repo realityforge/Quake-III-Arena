@@ -339,19 +339,6 @@ extern void CL_Quit_f(void);
     Sys_SetDefaultInstallPath([installationPath cString]);
 
     cmdline = NULL;
-#if 0
-    if (GRCheckFileForCmd()) {
-	GRGetWaitingCmd();
-	if (GRHasProperty( 'Exec' )) {
-            NSString *cfgPath, *grCfg;
-            cfgPath = [[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent];
-            cfgPath = [cfgPath stringByAppendingPathComponent: [NSString stringWithCString: GRGetPropertyStr( 'Exec' )]];
-            grCfg = [NSString stringWithContentsOfFile: cfgPath];
-            cmdline = malloc(strlen([grCfg cString])+1);
-            [grCfg getCString: cmdline];
-	}
-    }
-#endif
     if (!cmdline) {
         // merge the command line, this is kinda silly	
         for (commandLineLength = 1, argumentIndex = 1; argumentIndex < argc; argumentIndex++)

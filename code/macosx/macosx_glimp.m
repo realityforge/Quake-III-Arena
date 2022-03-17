@@ -259,12 +259,6 @@ static qboolean CreateGameWindow( qboolean isSecondTry )
         ri.Error(ERR_FATAL, "Could not get current graphics mode for display 0x%08x\n", glw_state.display);
     }
 
-#if 0
-    ri.Printf( PRINT_ALL, "... desktop mode %d = %dx%d %s\n", glw_state.desktopMode,
-               glw_state.desktopDesc.width, glw_state.desktopDesc.height,
-               depthStrings[glw_state.desktopDesc.depth]);
-#endif
-
     ri.Printf( PRINT_ALL, "...setting mode %d:\n", current_mode );
     if ( !R_GetModeInfo( &glConfig.vidWidth, &glConfig.vidHeight, &glConfig.windowAspect, current_mode ) )  {
         ri.Printf( PRINT_ALL, " invalid mode\n" );
@@ -823,26 +817,11 @@ static void GLW_InitExtensions( void )
 #endif
 
 
-#if 0   // Win32 does this differently than we do -- I'll provide a C function that looks the same
-        // that will do the correct ObjC stuff
-        // WGL_EXT_swap_control
-        qwglSwapIntervalEXT = ( BOOL (WINAPI *)(int)) qwglGetProcAddress( "wglSwapIntervalEXT" );
-        if ( qwglSwapIntervalEXT )
-        {
-                ri.Printf( PRINT_ALL, "...using WGL_EXT_swap_control\n" );
-                r_swapInterval->modified = qtrue;	// force a set next frame
-        }
-        else
-        {
-                ri.Printf( PRINT_ALL, "...WGL_EXT_swap_control not found\n" );
-        }
-#else
         if (r_swapInterval) {
             ri.Printf( PRINT_ALL, "...using +[NSOpenGLContext setParameter:] for qwglSwapIntervalEXT\n" );
             r_swapInterval->modified = qtrue;	// force a set next frame
         }
-#endif
-        
+
         // GL_ARB_multitexture
         qglMultiTexCoord2fARB = NULL;
         qglActiveTextureARB = NULL;
@@ -990,13 +969,6 @@ static unsigned long Sys_QueryVideoMemory()
             if (vram > maxVRAM)
                 maxVRAM = vram;
         }
-        
-#if 0
-        err = CGLDestroyRendererInfo(rendererInfo);
-        if (err) {
-            Com_Printf("CGLDestroyRendererInfo -> %d\n", err);
-        }
-#endif
     }
 
     return maxVRAM;

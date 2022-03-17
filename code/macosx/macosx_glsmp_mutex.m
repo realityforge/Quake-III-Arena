@@ -124,20 +124,7 @@ void GLimp_FrontEndSleep(void)
 
     pthread_mutex_lock(&smpMutex); {
         while (smpData) {
-#if 0
-            struct timespec ts;
-            int result;
-            
-            ts.tv_sec = 1;
-            ts.tv_nsec = 0;
-            result = pthread_cond_timedwait_relative_np(&mainThreadCondition, &smpMutex, &ts);
-            if (result) {
-                Com_Printf("GLimp_FrontEndSleep timed out.  Probably due to R_SyncRenderThread called due to Com_Error being called\n");
-                break;
-            }
-#else
             pthread_cond_wait(&mainThreadCondition, &smpMutex);
-#endif
         }
     } pthread_mutex_unlock(&smpMutex);
 

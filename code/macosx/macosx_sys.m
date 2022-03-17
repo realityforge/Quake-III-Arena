@@ -256,46 +256,7 @@ char *ansiColors[8] =
 	  
 void Sys_Print(const char *text)
 {
-#if 0
-	/* Okay, this is a stupid hack, but what the hell, I was bored. ;) */
-	const char *scan = text;
-	int index;
-	
-	/* Make sure terminal mode is reset at the start of the line... */
-	fputs("\033[0m", stdout);
-	
-	while(*scan) {
-		/* See if we have a color control code.  If so, snarf the character, 
-		print what we have so far, print the ANSI Terminal color code,
-		skip over the color control code and continue */
-		if(Q_IsColorString(scan)) {
-			index = ColorIndex(scan[1]);
-			
-			/* Flush current message */
-			if(scan != text) {
-				fwrite(text, scan - text, 1, stdout);
-			}
-			
-			/* Write ANSI color code */
-			fputs(ansiColors[index], stdout);
-			
-			/* Reset search */
-			text = scan+2;
-			scan = text;
-			continue;			
-		}
-		scan++;
-	}
-
-	/* Flush whatever's left */
-	fputs(text, stdout);
-
-	/* Make sure terminal mode is reset at the end of the line too... */
-	fputs("\033[0m", stdout);
-
-#else
     fputs(text, stdout);
-#endif	
 }
 
 //===================================================================

@@ -240,25 +240,6 @@ static /*inline*/ void _WaitMsg(MsgPort *port, unsigned int *msgCode, void **msg
 #define SendMsg(p, c, d) _SendMsg(p, c, d, __PRETTY_FUNCTION__, #p, #c)
 #define WaitMsg(p, c, d) _WaitMsg(p, c, d, __PRETTY_FUNCTION__, #p)
 
-#if 0
-static void _Log(const char *msg)
-{
-    int rc;
-    
-    rc = pthread_mutex_lock(&logMutex);
-    if (rc)
-        ri.Printf(PRINT_ALL, "_Log: pthread_mutex_lock returned %d: %s\n", rc, strerror(rc));
-
-    fputs(msg,stderr);
-    fflush(stderr);
-    
-    rc = pthread_mutex_unlock(&logMutex);
-    if (rc)
-        ri.Printf(PRINT_ALL, "_Log: pthread_mutex_unlock returned %d: %s\n", rc, strerror(rc));
-}
-#endif
-
-
 //
 // The main Q3 SMP API
 //
