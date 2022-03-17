@@ -103,19 +103,12 @@ static void UI_DisplayDownloadInfo( const char *downloadName ) {
 		UI_DrawProportionalString( leftWidth, 192, 
 			va("(%s of %s copied)", dlSizeBuf, totalSizeBuf), style, color_white );
 	} else {
-	  // bk010108
-	  //float elapsedTime = (float)(uis.realtime - downloadTime); // current - start (msecs)
-	  //elapsedTime = elapsedTime * 0.001f; // in seconds
-	  //if ( elapsedTime <= 0.0f ) elapsedTime == 0.0f;
 	  if ( (uis.realtime - downloadTime) / 1000) {
 			xferRate = downloadCount / ((uis.realtime - downloadTime) / 1000);
 		  //xferRate = (int)( ((float)downloadCount) / elapsedTime);
 		} else {
 			xferRate = 0;
 		}
-
-	  //fprintf( stderr, "DB: elapsedTime:  %16.8f\n", elapsedTime );	// bk
-	  //fprintf( stderr, "DB: xferRate:   %16d\n", xferRate );	// bk
 
 		UI_ReadableSize( xferRateBuf, sizeof xferRateBuf, xferRate );
 
