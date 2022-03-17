@@ -382,37 +382,6 @@ float FloatNoSwap (float f)
 }
 
 /*
-================
-Swap_Init
-================
-*/
-void Swap_Init (void)
-{
-	byte	swaptest[2] = {1,0};
-
-// set the byte swapping variables in a portable manner	
-	if ( *(short *)swaptest == 1)
-	{
-		_BigShort = ShortSwap;
-		_LittleShort = ShortNoSwap;
-		_BigLong = LongSwap;
-		_LittleLong = LongNoSwap;
-		_BigFloat = FloatSwap;
-		_LittleFloat = FloatNoSwap;
-	}
-	else
-	{
-		_BigShort = ShortNoSwap;
-		_LittleShort = ShortSwap;
-		_BigLong = LongNoSwap;
-		_LittleLong = LongSwap;
-		_BigFloat = FloatNoSwap;
-		_LittleFloat = FloatSwap;
-	}
-
-}
-
-/*
 ===============
 Com_ParseInfos
 ===============

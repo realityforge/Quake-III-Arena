@@ -773,8 +773,6 @@ qint64  BigLong64 (qint64 l);
 qint64  LittleLong64 (qint64 l);
 float	BigFloat (const float *l);
 float	LittleFloat (const float *l);
-
-void	Swap_Init (void);
 */
 char	* QDECL va(char *format, ...);
 
