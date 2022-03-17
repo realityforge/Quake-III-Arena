@@ -1069,15 +1069,6 @@ void    Sys_ConfigureFPU() { // bk001213 - divide by zero
   static int fpu_word = _FPU_DEFAULT & ~(_FPU_MASK_ZM | _FPU_MASK_IM);
   int current = 0;
   _FPU_GETCW(current);
-  if ( current!=fpu_word)
-  {
-#if 0
-    Com_Printf("FPU Control 0x%x (was 0x%x)\n", fpu_word, current );
-    _FPU_SETCW( fpu_word );
-    _FPU_GETCW( current );
-    assert(fpu_word==current);
-#endif
-  }
 #else // NDEBUG
   static int fpu_word = _FPU_DEFAULT;
   _FPU_SETCW( fpu_word );

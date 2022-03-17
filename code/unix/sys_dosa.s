@@ -42,16 +42,6 @@ C(MaskExceptions):
 
 	ret
 
-#if 0
-.globl C(unmaskexceptions)
-C(unmaskexceptions):
-	fnstenv	fpenv
-	andl		$0xFFFFFFE0,fpenv
-	fldenv	fpenv
-
-	ret
-#endif
-
 	.data
 
 	.align	4

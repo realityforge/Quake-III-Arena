@@ -1430,22 +1430,6 @@ void GLimp_Init( void )
       attempted3Dfx = qtrue;
     }
 
-    #if 0
-    // TTimo
-    // https://zerowing.idsoftware.com/bugzilla/show_bug.cgi?id=455
-    // old legacy load code, was confusing people who had a bad OpenGL setup
-    if ( !attempted3Dfx && !success )
-    {
-      attempted3Dfx = qtrue;
-      if ( GLW_LoadOpenGL( _3DFX_DRIVER_NAME ) )
-      {
-        ri.Cvar_Set( "r_glDriver", _3DFX_DRIVER_NAME );
-        r_glDriver->modified = qfalse;
-        success = qtrue;
-      }
-    }
-    #endif
-
     // try ICD before trying 3Dfx standalone driver
     if ( !attemptedlibGL && !success )
     {
