@@ -248,28 +248,6 @@ void String_Init() {
 
 /*
 =================
-PC_SourceWarning
-=================
-*/
-void PC_SourceWarning(int handle, char *format, ...) {
-	int line;
-	char filename[128];
-	va_list argptr;
-	static char string[4096];
-
-	va_start (argptr, format);
-	vsprintf (string, format, argptr);
-	va_end (argptr);
-
-	filename[0] = '\0';
-	line = 0;
-	trap_PC_SourceFileAndLine(handle, filename, &line);
-
-	Com_Printf(S_COLOR_YELLOW "WARNING: %s, line %d: %s\n", filename, line, string);
-}
-
-/*
-=================
 PC_SourceError
 =================
 */
