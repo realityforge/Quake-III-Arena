@@ -95,11 +95,6 @@ static long generateHashValue( const char *fname ) {
 	return hash;
 }
 
-/*
-===============
-GL_TextureMode
-===============
-*/
 void GL_TextureMode( const char *string ) {
 	int		i;
 	image_t	*glt;
@@ -137,11 +132,6 @@ void GL_TextureMode( const char *string ) {
 	}
 }
 
-/*
-===============
-R_SumOfUsedImages
-===============
-*/
 int R_SumOfUsedImages( void ) {
 	int	total;
 	int i;
@@ -156,11 +146,6 @@ int R_SumOfUsedImages( void ) {
 	return total;
 }
 
-/*
-===============
-R_ImageList_f
-===============
-*/
 void R_ImageList_f( void ) {
 	int		i;
 	image_t	*image;
@@ -491,13 +476,6 @@ byte	mipBlendColors[16][4] = {
 	{0,0,255,128},
 };
 
-
-/*
-===============
-Upload32
-
-===============
-*/
 extern qboolean charSet;
 static void Upload32( unsigned *data, 
 						  int width, int height, 
@@ -791,14 +769,6 @@ image_t *R_CreateImage( const char *name, const byte *pic, int width, int height
 	return image;
 }
 
-
-/*
-=========================================================
-
-BMP LOADING
-
-=========================================================
-*/
 typedef struct
 {
 	char id[2];
@@ -968,21 +938,6 @@ static void LoadBMP( const char *name, byte **pic, int *width, int *height )
 
 }
 
-
-/*
-=================================================================
-
-PCX LOADING
-
-=================================================================
-*/
-
-
-/*
-==============
-LoadPCX
-==============
-*/
 static void LoadPCX ( const char *filename, byte **pic, byte **palette, int *width, int *height)
 {
 	byte	*raw;
@@ -1072,12 +1027,6 @@ static void LoadPCX ( const char *filename, byte **pic, byte **palette, int *wid
 	ri.FS_FreeFile (pcx);
 }
 
-
-/*
-==============
-LoadPCX32
-==============
-*/
 static void LoadPCX32 ( const char *filename, byte **pic, int *width, int *height) {
 	byte	*palette;
 	byte	*pic8;
@@ -1113,11 +1062,6 @@ TARGA LOADING
 =========================================================
 */
 
-/*
-=============
-LoadTGA
-=============
-*/
 static void LoadTGA ( const char *name, byte **pic, int *width, int *height)
 {
 	int		columns, rows, numPixels;
@@ -1892,11 +1836,6 @@ image_t	*R_FindImageFile( const char *name, qboolean mipmap, qboolean allowPicmi
 }
 
 
-/*
-================
-R_CreateDlightImage
-================
-*/
 #define	DLIGHT_SIZE	16
 static void R_CreateDlightImage( void ) {
 	int		x,y;
@@ -1926,11 +1865,6 @@ static void R_CreateDlightImage( void ) {
 }
 
 
-/*
-=================
-R_InitFogTable
-=================
-*/
 void R_InitFogTable( void ) {
 	int		i;
 	float	d;
@@ -1980,11 +1914,6 @@ float	R_FogFactor( float s, float t ) {
 	return d;
 }
 
-/*
-================
-R_CreateFogImage
-================
-*/
 #define	FOG_S	256
 #define	FOG_T	32
 static void R_CreateFogImage( void ) {
@@ -2023,11 +1952,6 @@ static void R_CreateFogImage( void ) {
 	qglTexParameterfv( GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor );
 }
 
-/*
-==================
-R_CreateDefaultImage
-==================
-*/
 #define	DEFAULT_SIZE	16
 static void R_CreateDefaultImage( void ) {
 	int		x;
@@ -2059,11 +1983,6 @@ static void R_CreateDefaultImage( void ) {
 	tr.defaultImage = R_CreateImage("*default", (byte *)data, DEFAULT_SIZE, DEFAULT_SIZE, qtrue, qfalse, GL_REPEAT );
 }
 
-/*
-==================
-R_CreateBuiltinImages
-==================
-*/
 void R_CreateBuiltinImages( void ) {
 	int		x,y;
 	byte	data[DEFAULT_SIZE][DEFAULT_SIZE][4];
@@ -2098,11 +2017,6 @@ void R_CreateBuiltinImages( void ) {
 }
 
 
-/*
-===============
-R_SetColorMappings
-===============
-*/
 void R_SetColorMappings( void ) {
 	int		i, j;
 	float	g;
@@ -2183,11 +2097,6 @@ void R_SetColorMappings( void ) {
 	}
 }
 
-/*
-===============
-R_InitImages
-===============
-*/
 void	R_InitImages( void ) {
 	memset(hashTable, 0, sizeof(hashTable));
 	// build brightness translation tables
@@ -2197,11 +2106,6 @@ void	R_InitImages( void ) {
 	R_CreateBuiltinImages();
 }
 
-/*
-===============
-R_DeleteTextures
-===============
-*/
 void R_DeleteTextures( void ) {
 	int		i;
 
@@ -2225,13 +2129,7 @@ void R_DeleteTextures( void ) {
 	}
 }
 
-/*
-============================================================================
 
-SKINS
-
-============================================================================
-*/
 
 /*
 ==================
@@ -2341,12 +2239,6 @@ static char *CommaParse( char **data_p ) {
 }
 
 
-/*
-===============
-RE_RegisterSkin
-
-===============
-*/
 qhandle_t RE_RegisterSkin( const char *name ) {
 	qhandle_t	hSkin;
 	skin_t		*skin;
@@ -2445,11 +2337,6 @@ qhandle_t RE_RegisterSkin( const char *name ) {
 }
 
 
-/*
-===============
-R_InitSkins
-===============
-*/
 void	R_InitSkins( void ) {
 	skin_t		*skin;
 
@@ -2463,11 +2350,6 @@ void	R_InitSkins( void ) {
 	skin->surfaces[0]->shader = tr.defaultShader;
 }
 
-/*
-===============
-R_GetSkinByHandle
-===============
-*/
 skin_t	*R_GetSkinByHandle( qhandle_t hSkin ) {
 	if ( hSkin < 1 || hSkin >= tr.numSkins ) {
 		return tr.skins[0];
@@ -2475,11 +2357,6 @@ skin_t	*R_GetSkinByHandle( qhandle_t hSkin ) {
 	return tr.skins[ hSkin ];
 }
 
-/*
-===============
-R_SkinList_f
-===============
-*/
 void	R_SkinList_f( void ) {
 	int			i, j;
 	skin_t		*skin;

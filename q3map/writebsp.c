@@ -21,11 +21,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "qbsp.h"
 
-/*
-============
-EmitShader
-============
-*/
 int	EmitShader( const char *shader ) {
 	int				i;
 	shaderInfo_t	*si;
@@ -80,11 +75,6 @@ void EmitPlanes (void)
 
 
 
-/*
-==================
-EmitLeaf
-==================
-*/
 void EmitLeaf (node_t *node)
 {
 	dleaf_t				*leaf_p;
@@ -141,11 +131,6 @@ void EmitLeaf (node_t *node)
 }
 
 
-/*
-============
-EmitDrawNode_r
-============
-*/
 int EmitDrawNode_r (node_t *node)
 {
 	dnode_t	*n;
@@ -194,11 +179,6 @@ int EmitDrawNode_r (node_t *node)
 
 
 
-/*
-============
-SetModelNumbers
-============
-*/
 void SetModelNumbers (void)
 {
 	int		i;
@@ -216,11 +196,6 @@ void SetModelNumbers (void)
 
 }
 
-/*
-============
-SetLightStyles
-============
-*/
 #define	MAX_SWITCHED_LIGHTS	32
 void SetLightStyles (void)
 {
@@ -266,11 +241,6 @@ void SetLightStyles (void)
 
 //===========================================================
 
-/*
-==================
-BeginBSPFile
-==================
-*/
 void BeginBSPFile( void ) {
 	// these values may actually be initialized
 	// if the file existed when loaded, so clear them explicitly
@@ -286,11 +256,6 @@ void BeginBSPFile( void ) {
 }
 
 
-/*
-============
-EndBSPFile
-============
-*/
 void EndBSPFile( void ) {
 	char	path[1024];
 
@@ -306,11 +271,6 @@ void EndBSPFile( void ) {
 
 //===========================================================
 
-/*
-============
-EmitBrushes
-============
-*/
 void EmitBrushes ( bspbrush_t *brushes ) {
 	int				j;
 	dbrush_t		*db;
@@ -348,11 +308,6 @@ void EmitBrushes ( bspbrush_t *brushes ) {
 }
 
 
-/*
-==================
-BeginModel
-==================
-*/
 void BeginModel( void ) {
 	dmodel_t	*mod;
 	bspbrush_t	*b;
@@ -398,11 +353,6 @@ void BeginModel( void ) {
 
 
 
-/*
-==================
-EndModel
-==================
-*/
 void EndModel( node_t *headnode ) {
 	dmodel_t	*mod;
 

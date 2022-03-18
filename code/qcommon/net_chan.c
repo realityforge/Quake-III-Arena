@@ -62,12 +62,6 @@ static char *netsrcString[2] = {
 	"server"
 };
 
-/*
-===============
-Netchan_Init
-
-===============
-*/
 void Netchan_Init( int port ) {
 	port &= 0xffff;
 	showpackets = Cvar_Get ("showpackets", "0", CVAR_TEMP );
@@ -459,16 +453,6 @@ qboolean	NET_CompareAdr (netadr_t a, netadr_t b)
 qboolean	NET_IsLocalAddress( netadr_t adr ) {
 	return adr.type == NA_LOOPBACK;
 }
-
-
-
-/*
-=============================================================================
-
-LOOPBACK BUFFERS FOR LOCAL PLAYER
-
-=============================================================================
-*/
 
 // there needs to be enough loopback messages to hold a complete
 // gamestate of maximum size

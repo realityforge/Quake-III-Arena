@@ -34,11 +34,6 @@ int		c_nodes;
 
 
 
-/*
-================
-CountBrushList
-================
-*/
 int	CountBrushList (bspbrush_t *brushes)
 {
 	int	c;
@@ -50,11 +45,6 @@ int	CountBrushList (bspbrush_t *brushes)
 }
 
 
-/*
-================
-AllocBrush
-================
-*/
 bspbrush_t *AllocBrush (int numsides)
 {
 	bspbrush_t	*bb;
@@ -68,11 +58,6 @@ bspbrush_t *AllocBrush (int numsides)
 	return bb;
 }
 
-/*
-================
-FreeBrush
-================
-*/
 void FreeBrush (bspbrush_t *brushes)
 {
 	int			i;
@@ -86,11 +71,6 @@ void FreeBrush (bspbrush_t *brushes)
 }
 
 
-/*
-================
-FreeBrushList
-================
-*/
 void FreeBrushList (bspbrush_t *brushes)
 {
 	bspbrush_t	*next;
@@ -131,11 +111,6 @@ bspbrush_t *CopyBrush (bspbrush_t *brush)
 }
 
 
-/*
-================
-DrawBrushList
-================
-*/
 void DrawBrushList (bspbrush_t *brush)
 {
 	int		i;
@@ -157,11 +132,6 @@ void DrawBrushList (bspbrush_t *brush)
 
 
 
-/*
-================
-WriteBrushList
-================
-*/
 void WriteBrushList (char *name, bspbrush_t *brush, qboolean onlyvis)
 {
 	int		i;
@@ -188,11 +158,6 @@ void WriteBrushList (char *name, bspbrush_t *brush, qboolean onlyvis)
 }
 
 
-/*
-=============
-PrintBrush
-=============
-*/
 void PrintBrush (bspbrush_t *brush)
 {
 	int		i;
@@ -318,12 +283,6 @@ bspbrush_t	*BrushFromBounds (vec3_t mins, vec3_t maxs)
 	return b;
 }
 
-/*
-==================
-BrushVolume
-
-==================
-*/
 vec_t BrushVolume (bspbrush_t *brush)
 {
 	int			i;
@@ -367,11 +326,6 @@ vec_t BrushVolume (bspbrush_t *brush)
 }
 
 
-/*
-==================
-WriteBspBrushMap
-==================
-*/
 void WriteBspBrushMap (char *name, bspbrush_t *list)
 {
 	FILE	*f;
@@ -411,12 +365,6 @@ void WriteBspBrushMap (char *name, bspbrush_t *list)
 
 //=====================================================================================
 
-/*
-====================
-FilterBrushIntoTree_r
-
-====================
-*/
 int FilterBrushIntoTree_r( bspbrush_t *b, node_t *node ) {
 	bspbrush_t		*front, *back;
 	int				c;
@@ -538,11 +486,6 @@ void FilterStructuralBrushesIntoTree( entity_t *e, tree_t *tree ) {
 
 
 
-/*
-================
-AllocTree
-================
-*/
 tree_t *AllocTree (void)
 {
 	tree_t	*tree;
@@ -554,11 +497,6 @@ tree_t *AllocTree (void)
 	return tree;
 }
 
-/*
-================
-AllocNode
-================
-*/
 node_t *AllocNode (void)
 {
 	node_t	*node;
@@ -629,12 +567,6 @@ qboolean WindingIsHuge (winding_t *w)
 
 //============================================================
 
-/*
-==================
-BrushMostlyOnSide
-
-==================
-*/
 int BrushMostlyOnSide (bspbrush_t *brush, plane_t *plane)
 {
 	int			i, j;

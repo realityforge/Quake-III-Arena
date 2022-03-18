@@ -229,11 +229,6 @@ static unsigned s_stipple[32] =
 	0xaaaaaaaa, 0x55555555,0xaaaaaaaa, 0x55555555,
 };
 
-/*
-============
-WXY_WndProc
-============
-*/
 LONG WINAPI XYWndProc (
     HWND    hWnd,
     UINT    uMsg,
@@ -1794,11 +1789,6 @@ qboolean CXYWnd::DragDelta (int x, int y, vec3_t move)
 }
 
 
-/*
-==============
-NewBrushDrag
-==============
-*/
 void CXYWnd::NewBrushDrag (int x, int y)
 {
 	vec3_t	mins, maxs, junk;
@@ -1855,11 +1845,6 @@ void CXYWnd::NewBrushDrag (int x, int y)
 
 }
 
-/*
-==============
-XY_MouseMoved
-==============
-*/
 void CXYWnd::XY_MouseMoved (int x, int y, int buttons)
 {
 	vec3_t	point;
@@ -1982,20 +1967,9 @@ void CXYWnd::XY_MouseMoved (int x, int y, int buttons)
 }
 
 
-/*
-============================================================================
-
-DRAWING
-
-============================================================================
-*/
 
 
-/*
-==============
-XY_DrawGrid
-==============
-*/
+
 void CXYWnd::XY_DrawGrid()
 {
 	float	x, y, xb, xe, yb, ye;
@@ -2149,11 +2123,6 @@ void CXYWnd::XY_DrawGrid()
 
 }
 
-/*
-==============
-XY_DrawBlockGrid
-==============
-*/
 void CXYWnd::XY_DrawBlockGrid()
 {
 	float	x, y, xb, xe, yb, ye;
@@ -2345,11 +2314,6 @@ void CXYWnd::DrawZIcon (void)
 }
 
 
-/*
-==================
-FilterBrush
-==================
-*/
 BOOL FilterBrush(brush_t *pb)
 {
 	if (!pb->owner)
@@ -2699,11 +2663,6 @@ void CXYWnd::PaintSizeInfo(int nDim1, int nDim2, vec3_t vMinBounds, vec3_t vMaxB
 
 
 
-/*
-==============
-XY_Draw
-==============
-*/
 long g_lCount = 0;
 long g_lTotal = 0;
 extern void DrawBrushEntityName (brush_t *b);
@@ -2991,11 +2950,6 @@ void CXYWnd::XY_Draw()
 	}
 }
 
-/*
-==============
-XY_Overlay
-==============
-*/
 void CXYWnd::XY_Overlay()
 {
 	int	w, h;

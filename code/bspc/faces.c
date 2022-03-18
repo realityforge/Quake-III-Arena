@@ -258,11 +258,6 @@ void FaceFromSuperverts (node_t *node, face_t *f, int base)
 }
 
 
-/*
-==================
-EmitFaceVertexes
-==================
-*/
 void EmitFaceVertexes (node_t *node, face_t *f)
 {
 	winding_t	*w;
@@ -293,11 +288,6 @@ void EmitFaceVertexes (node_t *node, face_t *f)
 	FaceFromSuperverts (node, f, 0);
 }
 
-/*
-==================
-EmitVertexes_r
-==================
-*/
 void EmitVertexes_r (node_t *node)
 {
 	int		i;
@@ -434,12 +424,6 @@ void TestEdge (vec_t start, vec_t end, int p1, int p2, int startvert)
 	numsuperverts++;
 }
 
-/*
-==================
-FixFaceEdges
-
-==================
-*/
 void FixFaceEdges (node_t *node, face_t *f)
 {
 	int		p1, p2;
@@ -503,11 +487,6 @@ void FixFaceEdges (node_t *node, face_t *f)
 	FaceFromSuperverts (node, f, base);
 }
 
-/*
-==================
-FixEdges_r
-==================
-*/
 void FixEdges_r (node_t *node)
 {
 	int		i;
@@ -523,12 +502,6 @@ void FixEdges_r (node_t *node)
 		FixEdges_r (node->children[i]);
 }
 
-/*
-===========
-FixTjuncs
-
-===========
-*/
 void FixTjuncs (node_t *headnode)
 {
 	// snap and merge all vertexes
@@ -685,11 +658,6 @@ face_t *TryMerge (face_t *f1, face_t *f2, vec3_t planenormal)
 	return newf;
 }
 
-/*
-===============
-MergeNodeFaces
-===============
-*/
 void MergeNodeFaces (node_t *node)
 {
 	face_t	*f1, *f2, *end;
@@ -833,12 +801,6 @@ void SubdivideNodeFaces (node_t *node)
 int	c_nodefaces;
 
 
-/*
-============
-FaceFromPortal
-
-============
-*/
 face_t *FaceFromPortal (portal_t *p, int pside)
 {
 	face_t	*f;
@@ -924,11 +886,6 @@ void MakeFaces_r (node_t *node)
 	}
 }
 
-/*
-============
-MakeFaces
-============
-*/
 void MakeFaces (node_t *node)
 {
 	qprintf ("--- MakeFaces ---\n");

@@ -65,11 +65,6 @@ cvar_t		*con_notifytime;
 vec4_t	console_color = {1.0, 1.0, 1.0, 1.0};
 
 
-/*
-================
-Con_ToggleConsole_f
-================
-*/
 void Con_ToggleConsole_f (void) {
 	// Can not close console when not conencted anywhere
 	if ( cls.state == CA_DISCONNECTED && cls.keyCatchers == KEYCATCH_CONSOLE ) {
@@ -83,11 +78,6 @@ void Con_ToggleConsole_f (void) {
 	cls.keyCatchers ^= KEYCATCH_CONSOLE;
 }
 
-/*
-================
-Con_MessageMode_f
-================
-*/
 void Con_MessageMode_f (void) {
 	chat_playerNum = -1;
 	chat_team = qfalse;
@@ -144,11 +134,6 @@ void Con_MessageMode4_f (void) {
 	cls.keyCatchers ^= KEYCATCH_MESSAGE;
 }
 
-/*
-================
-Con_Clear_f
-================
-*/
 void Con_Clear_f (void) {
 	int		i;
 
@@ -222,11 +207,6 @@ void Con_Dump_f (void)
 }
 
 						
-/*
-================
-Con_ClearNotify
-================
-*/
 void Con_ClearNotify( void ) {
 	int		i;
 	
@@ -303,11 +283,6 @@ void Con_CheckResize (void)
 }
 
 
-/*
-================
-Con_Init
-================
-*/
 void Con_Init (void) {
 	int		i;
 
@@ -331,11 +306,6 @@ void Con_Init (void) {
 }
 
 
-/*
-===============
-Con_Linefeed
-===============
-*/
 void Con_Linefeed (qboolean skipnotify)
 {
 	int		i;
@@ -457,13 +427,7 @@ void CL_ConsolePrint( char *txt ) {
 }
 
 
-/*
-==============================================================================
 
-DRAWING
-
-==============================================================================
-*/
 
 
 /*
@@ -686,11 +650,6 @@ void Con_DrawSolidConsole( float frac ) {
 
 
 
-/*
-==================
-Con_DrawConsole
-==================
-*/
 void Con_DrawConsole( void ) {
 	// check for console width changes from a vid mode change
 	Con_CheckResize ();

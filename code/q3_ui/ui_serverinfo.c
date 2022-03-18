@@ -92,11 +92,6 @@ void Favorites_Add( void )
 }
 
 
-/*
-=================
-ServerInfo_Event
-=================
-*/
 static void ServerInfo_Event( void* ptr, int event )
 {
 	switch (((menucommon_s*)ptr)->id)
@@ -118,11 +113,6 @@ static void ServerInfo_Event( void* ptr, int event )
 	}
 }
 
-/*
-=================
-ServerInfo_MenuDraw
-=================
-*/
 static void ServerInfo_MenuDraw( void )
 {
 	const char		*s;
@@ -149,21 +139,11 @@ static void ServerInfo_MenuDraw( void )
 	Menu_Draw( &s_serverinfo.menu );
 }
 
-/*
-=================
-ServerInfo_MenuKey
-=================
-*/
 static sfxHandle_t ServerInfo_MenuKey( int key )
 {
 	return ( Menu_DefaultKey( &s_serverinfo.menu, key ) );
 }
 
-/*
-=================
-ServerInfo_Cache
-=================
-*/
 void ServerInfo_Cache( void )
 {
 	int	i;
@@ -177,11 +157,6 @@ void ServerInfo_Cache( void )
 	}
 }
 
-/*
-=================
-UI_ServerInfoMenu
-=================
-*/
 void UI_ServerInfoMenu( void )
 {
 	const char		*s;

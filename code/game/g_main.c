@@ -328,11 +328,6 @@ void G_RemapTeamShaders() {
 }
 
 
-/*
-=================
-G_RegisterCvars
-=================
-*/
 void G_RegisterCvars( void ) {
 	int			i;
 	cvarTable_t	*cv;
@@ -362,11 +357,6 @@ void G_RegisterCvars( void ) {
 	level.warmupModificationCount = g_warmup.modificationCount;
 }
 
-/*
-=================
-G_UpdateCvars
-=================
-*/
 void G_UpdateCvars( void ) {
 	int			i;
 	cvarTable_t	*cv;
@@ -396,12 +386,6 @@ void G_UpdateCvars( void ) {
 	}
 }
 
-/*
-============
-G_InitGame
-
-============
-*/
 void G_InitGame( int levelTime, int randomSeed, int restart ) {
 	int					i;
 
@@ -507,11 +491,6 @@ void G_InitGame( int levelTime, int randomSeed, int restart ) {
 
 
 
-/*
-=================
-G_ShutdownGame
-=================
-*/
 void G_ShutdownGame( int restart ) {
 	G_Printf ("==== ShutdownGame ====\n");
 
@@ -645,11 +624,6 @@ void RemoveTournamentLoser( void ) {
 	SetTeam( &g_entities[ clientNum ], "s" );
 }
 
-/*
-=======================
-RemoveTournamentWinner
-=======================
-*/
 void RemoveTournamentWinner( void ) {
 	int			clientNum;
 
@@ -667,11 +641,6 @@ void RemoveTournamentWinner( void ) {
 	SetTeam( &g_entities[ clientNum ], "s" );
 }
 
-/*
-=======================
-AdjustTournamentScores
-=======================
-*/
 void AdjustTournamentScores( void ) {
 	int			clientNum;
 
@@ -689,12 +658,6 @@ void AdjustTournamentScores( void ) {
 
 }
 
-/*
-=============
-SortRanks
-
-=============
-*/
 int QDECL SortRanks( const void *a, const void *b ) {
 	gclient_t	*ca, *cb;
 
@@ -864,15 +827,6 @@ void CalculateRanks( void ) {
 	}
 }
 
-
-/*
-========================================================================
-
-MAP CHANGING
-
-========================================================================
-*/
-
 /*
 ========================
 SendScoreboardMessageToAllClients
@@ -954,11 +908,6 @@ void FindIntermissionPoint( void ) {
 
 }
 
-/*
-==================
-BeginIntermission
-==================
-*/
 void BeginIntermission( void ) {
 	int			i;
 	gentity_t	*client;
@@ -1255,11 +1204,6 @@ void CheckIntermissionExit( void ) {
 	ExitLevel();
 }
 
-/*
-=============
-ScoreIsTied
-=============
-*/
 qboolean ScoreIsTied( void ) {
 	int		a, b;
 
@@ -1377,17 +1321,6 @@ void CheckExitRules( void ) {
 	}
 }
 
-
-
-/*
-========================================================================
-
-FUNCTIONS CALLED EVERY FRAME
-
-========================================================================
-*/
-
-
 /*
 =============
 CheckTournament
@@ -1501,11 +1434,6 @@ void CheckTournament( void ) {
 }
 
 
-/*
-==================
-CheckVote
-==================
-*/
 void CheckVote( void ) {
 	if ( level.voteExecuteTime && level.voteExecuteTime < level.time ) {
 		level.voteExecuteTime = 0;
@@ -1535,11 +1463,6 @@ void CheckVote( void ) {
 
 }
 
-/*
-==================
-PrintTeam
-==================
-*/
 void PrintTeam(int team, char *message) {
 	int i;
 
@@ -1550,11 +1473,6 @@ void PrintTeam(int team, char *message) {
 	}
 }
 
-/*
-==================
-SetLeader
-==================
-*/
 void SetLeader(int team, int client) {
 	int i;
 
@@ -1579,11 +1497,6 @@ void SetLeader(int team, int client) {
 	PrintTeam(team, va("print \"%s is the new team leader\n\"", level.clients[client].pers.netname) );
 }
 
-/*
-==================
-CheckTeamLeader
-==================
-*/
 void CheckTeamLeader( int team ) {
 	int i;
 
@@ -1611,11 +1524,6 @@ void CheckTeamLeader( int team ) {
 	}
 }
 
-/*
-==================
-CheckTeamVote
-==================
-*/
 void CheckTeamVote( int team ) {
 	int cs_offset;
 
@@ -1657,11 +1565,6 @@ void CheckTeamVote( int team ) {
 }
 
 
-/*
-==================
-CheckCvars
-==================
-*/
 void CheckCvars( void ) {
 	static int lastMod = -1;
 

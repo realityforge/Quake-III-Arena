@@ -343,11 +343,6 @@ static menucommon_s **g_controls[] = {
 	g_misc_controls,
 };
 
-/*
-=================
-Controls_InitCvars
-=================
-*/
 static void Controls_InitCvars( void )
 {
 	int				i;
@@ -371,11 +366,6 @@ static void Controls_InitCvars( void )
 	}
 }
 
-/*
-=================
-Controls_GetCvarDefault
-=================
-*/
 static float Controls_GetCvarDefault( char* name )
 {
 	configcvar_t*	cvarptr;
@@ -394,11 +384,6 @@ static float Controls_GetCvarDefault( char* name )
 	return (cvarptr->defaultvalue);
 }
 
-/*
-=================
-Controls_GetCvarValue
-=================
-*/
 static float Controls_GetCvarValue( char* name )
 {
 	configcvar_t*	cvarptr;
@@ -418,11 +403,6 @@ static float Controls_GetCvarValue( char* name )
 }
 
 
-/*
-=================
-Controls_UpdateModel
-=================
-*/
 static void Controls_UpdateModel( int anim ) {
 	VectorClear( s_controls.playerViewangles );
 	VectorClear( s_controls.playerMoveangles );
@@ -546,11 +526,6 @@ static void Controls_UpdateModel( int anim ) {
 }
 
 
-/*
-=================
-Controls_Update
-=================
-*/
 static void Controls_Update( void ) {
 	int		i;
 	int		j;
@@ -643,11 +618,6 @@ static void Controls_Update( void ) {
 }
 
 
-/*
-=================
-Controls_DrawKeyBinding
-=================
-*/
 static void Controls_DrawKeyBinding( void *self )
 {
 	menuaction_s*	a;
@@ -719,22 +689,12 @@ static void Controls_DrawKeyBinding( void *self )
 	}
 }
 
-/*
-=================
-Controls_StatusBar
-=================
-*/
 static void Controls_StatusBar( void *self )
 {
 	UI_DrawString(SCREEN_WIDTH * 0.50, SCREEN_HEIGHT * 0.80, "Use Arrow Keys or CLICK to change", UI_SMALLFONT|UI_CENTER, colorWhite );
 }
 
 
-/*
-=================
-Controls_DrawPlayer
-=================
-*/
 static void Controls_DrawPlayer( void *self ) {
 	menubitmap_s	*b;
 	char			buf[MAX_QPATH];
@@ -751,11 +711,6 @@ static void Controls_DrawPlayer( void *self ) {
 }
 
 
-/*
-=================
-Controls_GetKeyAssignment
-=================
-*/
 static void Controls_GetKeyAssignment (char *command, int *twokeys)
 {
 	int		count;
@@ -780,11 +735,6 @@ static void Controls_GetKeyAssignment (char *command, int *twokeys)
 	}
 }
 
-/*
-=================
-Controls_GetConfig
-=================
-*/
 static void Controls_GetConfig( void )
 {
 	int		i;
@@ -816,11 +766,6 @@ static void Controls_GetConfig( void )
 	s_controls.freelook.curvalue     = UI_ClampCvar( 0, 1, Controls_GetCvarValue( "cl_freelook" ) );
 }
 
-/*
-=================
-Controls_SetConfig
-=================
-*/
 static void Controls_SetConfig( void )
 {
 	int		i;
@@ -859,11 +804,6 @@ static void Controls_SetConfig( void )
 	trap_Cmd_ExecuteText( EXEC_APPEND, "in_restart\n" );
 }
 
-/*
-=================
-Controls_SetDefaults
-=================
-*/
 static void Controls_SetDefaults( void )
 {
 	int	i;
@@ -892,11 +832,6 @@ static void Controls_SetDefaults( void )
 	s_controls.freelook.curvalue     = Controls_GetCvarDefault( "cl_freelook" );
 }
 
-/*
-=================
-Controls_MenuKey
-=================
-*/
 static sfxHandle_t Controls_MenuKey( int key )
 {
 	int			id;
@@ -1015,11 +950,6 @@ ignorekey:
 	return Menu_DefaultKey( &s_controls.menu, key );
 }
 
-/*
-=================
-Controls_ResetDefaults_Action
-=================
-*/
 static void Controls_ResetDefaults_Action( qboolean result ) {
 	if( !result ) {
 		return;
@@ -1030,21 +960,11 @@ static void Controls_ResetDefaults_Action( qboolean result ) {
 	Controls_Update();
 }
 
-/*
-=================
-Controls_ResetDefaults_Draw
-=================
-*/
 static void Controls_ResetDefaults_Draw( void ) {
 	UI_DrawProportionalString( SCREEN_WIDTH/2, 356 + PROP_HEIGHT * 0, "WARNING: This will reset all", UI_CENTER|UI_SMALLFONT, color_yellow );
 	UI_DrawProportionalString( SCREEN_WIDTH/2, 356 + PROP_HEIGHT * 1, "controls to their default values.", UI_CENTER|UI_SMALLFONT, color_yellow );
 }
 
-/*
-=================
-Controls_MenuEvent
-=================
-*/
 static void Controls_MenuEvent( void* ptr, int event )
 {
 	switch (((menucommon_s*)ptr)->id)
@@ -1128,11 +1048,6 @@ static void Controls_MenuEvent( void* ptr, int event )
 	}
 }
 
-/*
-=================
-Controls_ActionEvent
-=================
-*/
 static void Controls_ActionEvent( void* ptr, int event )
 {
 	if (event == QM_LOSTFOCUS)
@@ -1150,11 +1065,6 @@ static void Controls_ActionEvent( void* ptr, int event )
 	}
 }
 
-/*
-=================
-Controls_InitModel
-=================
-*/
 static void Controls_InitModel( void )
 {
 	memset( &s_controls.playerinfo, 0, sizeof(playerInfo_t) );
@@ -1164,11 +1074,6 @@ static void Controls_InitModel( void )
 	Controls_UpdateModel( ANIM_IDLE );
 }
 
-/*
-=================
-Controls_InitWeapons
-=================
-*/
 static void Controls_InitWeapons( void ) {
 	gitem_t *	item;
 
@@ -1180,11 +1085,6 @@ static void Controls_InitWeapons( void ) {
 	}
 }
 
-/*
-=================
-Controls_MenuInit
-=================
-*/
 static void Controls_MenuInit( void )
 {
 	static char playername[32];
@@ -1643,11 +1543,6 @@ static void Controls_MenuInit( void )
 }
 
 
-/*
-=================
-Controls_Cache
-=================
-*/
 void Controls_Cache( void ) {
 	trap_R_RegisterShaderNoMip( ART_BACK0 );
 	trap_R_RegisterShaderNoMip( ART_BACK1 );
@@ -1656,11 +1551,6 @@ void Controls_Cache( void ) {
 }
 
 
-/*
-=================
-UI_ControlsMenu
-=================
-*/
 void UI_ControlsMenu( void ) {
 	Controls_MenuInit();
 	UI_PushMenu( &s_controls.menu );

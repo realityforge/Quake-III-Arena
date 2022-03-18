@@ -51,11 +51,6 @@ static terrainSurf_t	*lastSurface = NULL;
 static int				numsurfaces = 0;
 static int				maxsurfaces = 0;
 
-/*
-================
-ShaderForLayer
-================
-*/
 shaderInfo_t *ShaderForLayer( int minlayer, int maxlayer, const char *shadername ) {
 	char	shader[ MAX_QPATH ];
 
@@ -68,11 +63,6 @@ shaderInfo_t *ShaderForLayer( int minlayer, int maxlayer, const char *shadername
 	return ShaderInfoForShader( shader );
 }
 
-/*
-================
-CompareVert
-================
-*/
 qboolean CompareVert( drawVert_t *v1, drawVert_t *v2, qboolean checkst ) {
 	int i;
 
@@ -88,11 +78,6 @@ qboolean CompareVert( drawVert_t *v1, drawVert_t *v2, qboolean checkst ) {
 	return qtrue;
 }
 
-/*
-================
-LoadAlphaMap
-================
-*/
 byte *LoadAlphaMap( int *num_layers, int *alphawidth, int *alphaheight ) {
 	int			*alphamap32;
 	byte		*alphamap;
@@ -151,11 +136,6 @@ byte *LoadAlphaMap( int *num_layers, int *alphawidth, int *alphaheight ) {
 	return alphamap;
 }
 
-/*
-================
-CalcTerrainSize
-================
-*/
 void CalcTerrainSize( vec3_t mins, vec3_t maxs, vec3_t size ) {
 	bspbrush_t	*brush;
 	int			i;
@@ -355,11 +335,6 @@ static void SideAsTristrip( terrainSurf_t *surf, int *index, int num ) {
 	surf->numIndexes += ni;
 }
 
-/*
-================
-CreateTerrainSurface
-================
-*/
 void CreateTerrainSurface( terrainSurf_t *surf, shaderInfo_t *shader ) {
 	int					i, j, k;
 	drawVert_t			*out;
@@ -413,11 +388,6 @@ void CreateTerrainSurface( terrainSurf_t *surf, shaderInfo_t *shader ) {
 	}
 }
 
-/*
-================
-EmitTerrainVerts
-================
-*/
 void EmitTerrainVerts( side_t *side, terrainSurf_t *surf, int maxlayer, int alpha[ MAX_POINTS_ON_WINDING ], qboolean projecttexture ) {
 	int			i;
 	int			j;
@@ -506,11 +476,6 @@ void EmitTerrainVerts( side_t *side, terrainSurf_t *surf, int maxlayer, int alph
 	free( indices );
 }
 
-/*
-================
-SurfaceForShader
-================
-*/
 terrainSurf_t *SurfaceForShader( shaderInfo_t *shader, int x, int y ) {
 	int i;
 
@@ -539,11 +504,6 @@ terrainSurf_t *SurfaceForShader( shaderInfo_t *shader, int x, int y ) {
 	return lastSurface;
 }
 
-/*
-================
-SetTerrainTextures
-================
-*/
 void SetTerrainTextures( void ) {
 	int				i;
 	int				x, y;

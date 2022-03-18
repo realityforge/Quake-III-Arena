@@ -171,11 +171,6 @@ md3Header_t *R_LoadMD3( const char *mod_name ) {
 }
 
 
-/*
-================
-LoadModel
-================
-*/
 md3Header_t *LoadModel( const char *modelName ) {
 	int				i;
 	loadedModel_t	*lm;
@@ -420,11 +415,6 @@ void InsertASEModel( const char *modelName, vec3_t origin, float angle, tree_t *
 
 
 
-/*
-=====================
-AddTriangleModels
-=====================
-*/
 void AddTriangleModels( tree_t *tree ) {
 	int			entity_num;
 	entity_t	*entity;

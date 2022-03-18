@@ -75,12 +75,6 @@ model / sound configstring indexes
 =========================================================================
 */
 
-/*
-================
-G_FindConfigstringIndex
-
-================
-*/
 int G_FindConfigstringIndex( char *name, int start, int max, qboolean create ) {
 	int		i;
 	char	s[MAX_STRING_CHARS];
@@ -433,11 +427,6 @@ gentity_t *G_Spawn( void ) {
 	return e;
 }
 
-/*
-=================
-G_EntitiesFree
-=================
-*/
 qboolean G_EntitiesFree( void ) {
 	int			i;
 	gentity_t	*e;
@@ -504,16 +493,6 @@ gentity_t *G_TempEntity( vec3_t origin, int event ) {
 	return e;
 }
 
-
-
-/*
-==============================================================================
-
-Kill box
-
-==============================================================================
-*/
-
 /*
 =================
 G_KillBox
@@ -563,7 +542,6 @@ void G_AddPredictableEvent( gentity_t *ent, int event, int eventParm ) {
 	BG_AddPredictableEventToPlayerstate( event, eventParm, &ent->client->ps );
 }
 
-
 /*
 ===============
 G_AddEvent
@@ -596,11 +574,6 @@ void G_AddEvent( gentity_t *ent, int event, int eventParm ) {
 }
 
 
-/*
-=============
-G_Sound
-=============
-*/
 void G_Sound( gentity_t *ent, int channel, int soundIndex ) {
 	gentity_t	*te;
 

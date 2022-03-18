@@ -131,11 +131,6 @@ void S_SoundInfo_f(void) {
 
 
 
-/*
-================
-S_Init
-================
-*/
 void S_Init( void ) {
 	cvar_t	*cv;
 	qboolean	r;
@@ -328,11 +323,6 @@ static sfx_t *S_FindName( const char *name ) {
 	return sfx;
 }
 
-/*
-=================
-S_DefaultSound
-=================
-*/
 void S_DefaultSound( sfx_t *sfx ) {
 	
 	int		i;
@@ -361,12 +351,6 @@ void S_DisableSounds( void ) {
 	s_soundMuted = qtrue;
 }
 
-/*
-=====================
-S_BeginRegistration
-
-=====================
-*/
 void S_BeginRegistration( void ) {
 	s_soundMuted = qfalse;		// we can play again
 
@@ -625,11 +609,6 @@ void S_StartSound(vec3_t origin, int entityNum, int entchannel, sfxHandle_t sfxH
 }
 
 
-/*
-==================
-S_StartLocalSound
-==================
-*/
 void S_StartLocalSound( sfxHandle_t sfxHandle, int channelNum ) {
 	if ( !s_soundStarted || s_soundMuted ) {
 		return;
@@ -678,11 +657,6 @@ void S_ClearSoundBuffer( void ) {
 	SNDDMA_Submit ();
 }
 
-/*
-==================
-S_StopAllSounds
-==================
-*/
 void S_StopAllSounds(void) {
 	if ( !s_soundStarted ) {
 		return;
@@ -708,12 +682,6 @@ void S_StopLoopingSound(int entityNum) {
 	loopSounds[entityNum].kill = qfalse;
 }
 
-/*
-==================
-S_ClearLoopingSounds
-
-==================
-*/
 void S_ClearLoopingSounds( qboolean killall ) {
 	int i;
 	for ( i = 0 ; i < MAX_GENTITIES ; i++) {
@@ -1346,15 +1314,6 @@ void S_SoundList_f( void ) {
 	S_DisplayFreeMemory();
 }
 
-
-/*
-===============================================================================
-
-background music functions
-
-===============================================================================
-*/
-
 int	FGetLittleLong( fileHandle_t f ) {
 	int		v;
 
@@ -1398,11 +1357,6 @@ int S_FindWavChunk( fileHandle_t f, char *chunk ) {
 	return len;
 }
 
-/*
-======================
-S_StopBackgroundTrack
-======================
-*/
 void S_StopBackgroundTrack( void ) {
 	if ( !s_backgroundFile ) {
 		return;
@@ -1413,11 +1367,6 @@ void S_StopBackgroundTrack( void ) {
 	s_rawend = 0;
 }
 
-/*
-======================
-S_StartBackgroundTrack
-======================
-*/
 void S_StartBackgroundTrack( const char *intro, const char *loop ){
 	int		len;
 	char	dump[16];
@@ -1504,11 +1453,6 @@ void S_StartBackgroundTrack( const char *intro, const char *loop ){
 	Sys_BeginStreamedFile( s_backgroundFile, 0x10000 );
 }
 
-/*
-======================
-S_UpdateBackgroundTrack
-======================
-*/
 void S_UpdateBackgroundTrack( void ) {
 	int		bufferSamples;
 	int		fileSamples;
@@ -1586,11 +1530,6 @@ void S_UpdateBackgroundTrack( void ) {
 }
 
 
-/*
-======================
-S_FreeOldestSound
-======================
-*/
 
 void S_FreeOldestSound() {
 	int	i, oldest, used;

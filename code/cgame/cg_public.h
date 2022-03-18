@@ -61,15 +61,6 @@ enum {
   CGAME_EVENT_EDITHUD
 };
 
-
-/*
-==================================================================
-
-functions imported from the main executable
-
-==================================================================
-*/
-
 #define	CGAME_IMPORT_API_VERSION	4
 
 typedef enum {

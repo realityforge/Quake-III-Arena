@@ -45,11 +45,6 @@ void StripTrailing(char *e)
 	}
 }
 
-/*
-=================
-ParseEpair
-=================
-*/
 epair_t *ParseEpair(script_t *script)
 {
 	epair_t *e;
@@ -77,11 +72,6 @@ epair_t *ParseEpair(script_t *script)
 }
 
 
-/*
-================
-ParseEntity
-================
-*/
 qboolean	ParseEntity(script_t *script)
 {
 	epair_t *e;

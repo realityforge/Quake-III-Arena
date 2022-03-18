@@ -27,11 +27,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 z_t		z;
 
-/*
-============
-Z_Init
-============
-*/
 void Z_Init (void)
 {
 	z.origin[0] = 0;
@@ -41,23 +36,8 @@ void Z_Init (void)
 	z.scale = 1;
 }
 
-
-
-/*
-============================================================================
-
-  MOUSE ACTIONS
-
-============================================================================
-*/
-
 static	int	cursorx, cursory;
 
-/*
-==============
-Z_MouseDown
-==============
-*/
 void Z_MouseDown (int x, int y, int buttons)
 {
 	vec3_t	org, dir, vup, vright;
@@ -110,21 +90,11 @@ void Z_MouseDown (int x, int y, int buttons)
 
 }
 
-/*
-==============
-Z_MouseUp
-==============
-*/
 void Z_MouseUp (int x, int y, int buttons)
 {
 	Drag_MouseUp ();
 }
 
-/*
-==============
-Z_MouseMoved
-==============
-*/
 void Z_MouseMoved (int x, int y, int buttons)
 {
 	if (!buttons)
@@ -158,20 +128,9 @@ void Z_MouseMoved (int x, int y, int buttons)
 }
 
 
-/*
-============================================================================
-
-DRAWING
-
-============================================================================
-*/
 
 
-/*
-==============
-Z_DrawGrid
-==============
-*/
+
 void Z_DrawGrid (void)
 {
 	float	zz, zb, ze;
@@ -265,11 +224,6 @@ void ZDrawCameraIcon (void)
 
 GLbitfield glbitClear = GL_COLOR_BUFFER_BIT; //HACK
 
-/*
-==============
-Z_Draw
-==============
-*/
 void Z_Draw (void)
 {
     brush_t	*brush;

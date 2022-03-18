@@ -28,11 +28,6 @@ int		c_peak_portals;
 int		c_boundary;
 int		c_boundary_sides;
 
-/*
-===========
-AllocPortal
-===========
-*/
 portal_t *AllocPortal (void)
 {
 	portal_t	*p;
@@ -88,11 +83,6 @@ qboolean Portal_Passable(portal_t *p) {
 
 int		c_tinyportals;
 
-/*
-=============
-AddPortalToNodes
-=============
-*/
 void AddPortalToNodes (portal_t *p, node_t *front, node_t *back)
 {
 	if (p->nodes[0] || p->nodes[1])
@@ -108,11 +98,6 @@ void AddPortalToNodes (portal_t *p, node_t *front, node_t *back)
 }
 
 
-/*
-=============
-RemovePortalFromNode
-=============
-*/
 void RemovePortalFromNode (portal_t *portal, node_t *l)
 {
 	portal_t	**pp, *t;
@@ -234,11 +219,6 @@ void MakeHeadnodePortals (tree_t *tree)
 //===================================================
 
 
-/*
-================
-BaseWindingForNode
-================
-*/
 #define	BASE_WINDING_EPSILON	0.001
 #define	SPLIT_WINDING_EPSILON	0.001
 
@@ -452,11 +432,6 @@ void SplitNodePortals (node_t *node)
 }
 
 
-/*
-================
-CalcNodeBounds
-================
-*/
 void CalcNodeBounds (node_t *node)
 {
 	portal_t	*p;
@@ -473,11 +448,6 @@ void CalcNodeBounds (node_t *node)
 	}
 }
 
-/*
-==================
-MakeTreePortals_r
-==================
-*/
 void MakeTreePortals_r (node_t *node)
 {
 	int		i;
@@ -510,11 +480,6 @@ void MakeTreePortals_r (node_t *node)
 	MakeTreePortals_r (node->children[1]);
 }
 
-/*
-==================
-MakeTreePortals
-==================
-*/
 void MakeTreePortals (tree_t *tree)
 {
 	qprintf( "----- MakeTreePortals -----\n");
@@ -533,11 +498,6 @@ FLOOD ENTITIES
 
 int		c_floodedleafs;
 
-/*
-=============
-FloodPortals_r
-=============
-*/
 void FloodPortals_r (node_t *node, int dist) {
 	portal_t	*p;
 	int			s;
@@ -559,11 +519,6 @@ void FloodPortals_r (node_t *node, int dist) {
 	}
 }
 
-/*
-=============
-PlaceOccupant
-=============
-*/
 qboolean PlaceOccupant (node_t *headnode, vec3_t origin, entity_t *occupant)
 {
 	node_t	*node;
@@ -649,11 +604,6 @@ FLOOD AREAS
 
 int		c_areas;
 
-/*
-=============
-FloodAreas_r
-=============
-*/
 void FloodAreas_r (node_t *node)
 {
 	portal_t	*p;
@@ -739,11 +689,6 @@ void FindAreas_r (node_t *node)
 	c_areas++;
 }
 
-/*
-=============
-CheckAreas_r
-=============
-*/
 void CheckAreas_r (node_t *node)
 {
 	bspbrush_t	*b;

@@ -820,12 +820,6 @@ void Sys_QueEvent( int time, sysEventType_t type, int value, int value2, int ptr
 	ev->evPtr = ptr;
 }
 
-/*
-================
-Sys_GetEvent
-
-================
-*/
 sysEvent_t Sys_GetEvent( void )
 {
     sysEvent_t	ev;

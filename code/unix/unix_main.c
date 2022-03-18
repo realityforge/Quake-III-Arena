@@ -99,11 +99,6 @@ static int hist_current = -1, hist_count = 0;
 // bk001207 
 #define MEM_THRESHOLD 96*1024*1024
 
-/*
-==================
-Sys_LowPhysicalMemory()
-==================
-*/
 qboolean Sys_LowPhysicalMemory() {
   //MEMORYSTATUS stat;
   //GlobalMemoryStatus (&stat);
@@ -111,29 +106,14 @@ qboolean Sys_LowPhysicalMemory() {
   return qfalse; // bk001207 - FIXME
 }
 
-/*
-==================
-Sys_FunctionCmp
-==================
-*/
 int Sys_FunctionCmp(void *f1, void *f2) {
   return qtrue;
 }
 
-/*
-==================
-Sys_FunctionCheckSum
-==================
-*/
 int Sys_FunctionCheckSum(void *f1) {
   return 0;
 }
 
-/*
-==================
-Sys_MonkeyShouldBeSpanked
-==================
-*/
 int Sys_MonkeyShouldBeSpanked( void ) {
   return 0;
 }
@@ -568,12 +548,6 @@ char *Sys_ConsoleInput(void)
 
 /*****************************************************************************/
 
-/*
-=================
-Sys_UnloadDll
-
-=================
-*/
 void Sys_UnloadDll( void *dllHandle ) {
   // bk001206 - verbose error reporting
   const char* err;
@@ -776,34 +750,16 @@ void Sys_StreamThread( void )
   }
 }
 
-/*
-===============
-Sys_InitStreamThread
-
-================
-*/
-void Sys_InitStreamThread( void ) 
+void Sys_InitStreamThread( void )
 {
 }
 
-/*
-===============
-Sys_ShutdownStreamThread
-
-================
-*/
-void Sys_ShutdownStreamThread( void ) 
+void Sys_ShutdownStreamThread( void )
 {
 }
 
 
-/*
-===============
-Sys_BeginStreamedFile
-
-================
-*/
-void Sys_BeginStreamedFile( fileHandle_t f, int readAhead ) 
+void Sys_BeginStreamedFile( fileHandle_t f, int readAhead )
 {
   if ( stream.file )
   {
@@ -818,13 +774,7 @@ void Sys_BeginStreamedFile( fileHandle_t f, int readAhead )
   stream.eof = qfalse;
 }
 
-/*
-===============
-Sys_EndStreamedFile
-
-================
-*/
-void Sys_EndStreamedFile( fileHandle_t f ) 
+void Sys_EndStreamedFile( fileHandle_t f )
 {
   if ( f != stream.file )
   {
@@ -836,13 +786,7 @@ void Sys_EndStreamedFile( fileHandle_t f )
 }
 
 
-/*
-===============
-Sys_StreamedRead
-
-================
-*/
-int Sys_StreamedRead( void *buffer, int size, int count, fileHandle_t f ) 
+int Sys_StreamedRead( void *buffer, int size, int count, fileHandle_t f )
 {
   int   available;
   int   remaining;
@@ -889,12 +833,6 @@ int Sys_StreamedRead( void *buffer, int size, int count, fileHandle_t f )
   return(count * size - remaining) / size;
 }
 
-/*
-===============
-Sys_StreamSeek
-
-================
-*/
 void Sys_StreamSeek( fileHandle_t f, int offset, int origin ) {
   // clear to that point
   FS_Seek( f, offset, origin );
@@ -964,12 +902,6 @@ void Sys_QueEvent( int time, sysEventType_t type, int value, int value2, int ptr
   ev->evPtr = ptr;
 }
 
-/*
-================
-Sys_GetEvent
-
-================
-*/
 sysEvent_t Sys_GetEvent( void ) {
   sysEvent_t  ev;
   char    *s;

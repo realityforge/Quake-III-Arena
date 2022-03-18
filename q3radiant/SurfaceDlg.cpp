@@ -105,15 +105,6 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CSurfaceDlg message handlers
 
-
-/*
-===================================================
-
-  SURFACE INSPECTOR
-
-===================================================
-*/
-
 texdef_t	g_old_texdef;
 texdef_t	g_patch_texdef;
 HWND		g_surfwin = NULL;
@@ -416,11 +407,6 @@ void CSurfaceDlg::GetTexMods()
 
 }
 
-/*
-=================
-UpdateSpinners
-=================
-*/
 
 void CSurfaceDlg::UpdateSpinners(bool bUp, int nID)
 {

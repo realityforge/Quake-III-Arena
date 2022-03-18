@@ -169,11 +169,6 @@ static void Preferences_Event( void* ptr, int notification ) {
 }
 
 
-/*
-=================
-Crosshair_Draw
-=================
-*/
 static void Crosshair_Draw( void *self ) {
 	menulist_s	*s;
 	float		*color;
@@ -390,11 +385,6 @@ static void Preferences_MenuInit( void ) {
 }
 
 
-/*
-===============
-Preferences_Cache
-===============
-*/
 void Preferences_Cache( void ) {
 	int		n;
 
@@ -408,11 +398,6 @@ void Preferences_Cache( void ) {
 }
 
 
-/*
-===============
-UI_PreferencesMenu
-===============
-*/
 void UI_PreferencesMenu( void ) {
 	Preferences_MenuInit();
 	UI_PushMenu( &s_preferences.menu );

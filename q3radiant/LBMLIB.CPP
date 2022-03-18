@@ -28,16 +28,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "pakstuff.h"
 #include "jpeglib.h"
 
-
-/*
-============================================================================
-
-						LBM STUFF
-
-============================================================================
-*/
-
-
 typedef unsigned char	UBYTE;
 //conflicts with windows typedef short			WORD;
 typedef unsigned short	UWORD;
@@ -140,11 +130,6 @@ byte  *LBMRLEDecompress (byte *source,byte *unpacked, int bpwidth)
 }
 
 
-/*
-=================
-LoadLBM
-=================
-*/
 void LoadLBM (char *filename, byte **picture, byte **palette)
 {
 	byte    *LBMbuffer, *picbuffer, *cmapbuffer;
@@ -261,20 +246,6 @@ void LoadLBM (char *filename, byte **picture, byte **palette)
 		*palette = cmapbuffer;
 }
 
-
-/*
-============================================================================
-
-							WRITE LBM
-
-============================================================================
-*/
-
-/*
-==============
-WriteLBMfile
-==============
-*/
 void WriteLBMfile (char *filename, byte *data,
 				   int width, int height, byte *palette)
 {
@@ -406,11 +377,6 @@ typedef struct
     unsigned char	data;			// unbounded
 } pcx_t;
 
-/*
-==============
-LoadPCX
-==============
-*/
 void LoadPCX (char *filename, byte **pic, byte **palette, int *width, int *height)
 {
 	byte	*raw = 0;
@@ -642,15 +608,6 @@ void Save256Image (char *name, byte *pixels, byte *palette,
 		Error ("%s doesn't have a known image extension", name);
 }
 
-
-
-/*
-============================================================================
-
-TARGA IMAGE
-
-============================================================================
-*/
 typedef struct _TargaHeader {
 	unsigned char 	id_length, colormap_type, image_type;
 	unsigned short	colormap_index, colormap_length;
@@ -874,21 +831,6 @@ static void LoadBMP( const char *name, byte **pic, int *width, int *height )
 
 }
 
-
-/*
-=================================================================
-
-PCX LOADING
-
-=================================================================
-*/
-
-
-/*
-==============
-LoadPCX
-==============
-*/
 static void LoadPCX ( const char *filename, byte **pic, byte **palette, int *width, int *height)
 {
 	byte	*raw;
@@ -983,12 +925,6 @@ static void LoadPCX ( const char *filename, byte **pic, byte **palette, int *wid
 	free(pcx);
 }
 
-
-/*
-==============
-LoadPCX32
-==============
-*/
 static void LoadPCX32 ( const char *filename, byte **pic, int *width, int *height) {
 	byte	*palette;
 	byte	*pic8;
@@ -1024,11 +960,6 @@ TARGA LOADING
 =========================================================
 */
 
-/*
-=============
-LoadTGA
-=============
-*/
 void LoadTGA ( const char *name, byte **pic, int *width, int *height)
 {
 	int		columns, rows, numPixels;

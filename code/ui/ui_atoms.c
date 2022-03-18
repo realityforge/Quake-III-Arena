@@ -59,11 +59,6 @@ void QDECL Com_Printf( const char *msg, ... ) {
 qboolean newUI = qfalse;
 
 
-/*
-=================
-UI_ClampCvar
-=================
-*/
 float UI_ClampCvar( float min, float max, float value )
 {
 	if ( value < min ) return min;
@@ -71,11 +66,6 @@ float UI_ClampCvar( float min, float max, float value )
 	return value;
 }
 
-/*
-=================
-UI_StartDemoLoop
-=================
-*/
 void UI_StartDemoLoop( void ) {
 	trap_Cmd_ExecuteText( EXEC_APPEND, "d1\n" );
 }
@@ -159,11 +149,6 @@ void UI_LoadBestScores(const char *map, int game) {
 	} 
 }
 
-/*
-===============
-UI_ClearScores
-===============
-*/
 void UI_ClearScores() {
 	char	gameList[4096];
 	char *gameFile;
@@ -199,11 +184,6 @@ static void	UI_Cache_f() {
 	Display_CacheAll();
 }
 
-/*
-=======================
-UI_CalcPostGameStats
-=======================
-*/
 static void UI_CalcPostGameStats() {
 	char		map[MAX_QPATH];
 	char		fileName[MAX_QPATH];
@@ -300,11 +280,6 @@ static void UI_CalcPostGameStats() {
 }
 
 
-/*
-=================
-UI_ConsoleCommand
-=================
-*/
 qboolean UI_ConsoleCommand( int realTime ) {
 	char	*cmd;
 
@@ -359,11 +334,6 @@ qboolean UI_ConsoleCommand( int realTime ) {
 	return qfalse;
 }
 
-/*
-=================
-UI_Shutdown
-=================
-*/
 void UI_Shutdown( void ) {
 }
 

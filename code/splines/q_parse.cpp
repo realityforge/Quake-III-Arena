@@ -23,13 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "q_shared.hpp"
 
-/*
-============================================================================
 
-PARSING
-
-============================================================================
-*/
 
 // multiple character punctuation tokens
 static const char *punctuation[] = {
@@ -50,11 +44,6 @@ static parseInfo_t	parseInfo[MAX_PARSE_INFO];
 static int			parseInfoNum;
 static parseInfo_t	*pi = &parseInfo[0];
 
-/*
-===================
-Com_BeginParseSession
-===================
-*/
 void Com_BeginParseSession( const char *filename ) {
 	if ( parseInfoNum == MAX_PARSE_INFO - 1 ) {
 		Com_Error( ERR_FATAL, "Com_BeginParseSession: session overflow" );
@@ -66,11 +55,6 @@ void Com_BeginParseSession( const char *filename ) {
 	Q_strncpyz( pi->parseFile, filename, sizeof( pi->parseFile ) );
 }
 
-/*
-===================
-Com_EndParseSession
-===================
-*/
 void Com_EndParseSession( void ) {
 	if ( parseInfoNum == 0 ) {
 		Com_Error( ERR_FATAL, "Com_EndParseSession: session underflow" );
@@ -79,11 +63,6 @@ void Com_EndParseSession( void ) {
 	pi = &parseInfo[parseInfoNum];
 }
 
-/*
-===================
-Com_GetCurrentParseLine
-===================
-*/
 int Com_GetCurrentParseLine( void ) {
 	return pi->lines;
 }
@@ -354,11 +333,6 @@ static char *Com_ParseExt( const char *(*data_p), qboolean allowLineBreaks ) {
 	return pi->token;
 }
 
-/*
-===================
-Com_Parse
-===================
-*/
 const char *Com_Parse( const char *(*data_p) ) {
 	if ( pi->ungetToken ) {
 		pi->ungetToken = qfalse;
@@ -367,11 +341,6 @@ const char *Com_Parse( const char *(*data_p) ) {
 	return Com_ParseExt( data_p, qtrue );
 }
 
-/*
-===================
-Com_ParseOnLine
-===================
-*/
 const char *Com_ParseOnLine( const char *(*data_p) ) {
 	if ( pi->ungetToken ) {
 		pi->ungetToken = qfalse;
@@ -382,11 +351,6 @@ const char *Com_ParseOnLine( const char *(*data_p) ) {
 
 
 
-/*
-==================
-Com_MatchToken
-==================
-*/
 void Com_MatchToken( const char *(*buf_p), const char *match, qboolean warning ) {
 	const char	*token;
 
@@ -428,11 +392,6 @@ void Com_SkipBracedSection( const char *(*program) ) {
 	} while( depth && *program );
 }
 
-/*
-=================
-Com_SkipRestOfLine
-=================
-*/
 void Com_SkipRestOfLine ( const char *(*data) ) {
 	const char	*p;
 	int		c;
@@ -448,11 +407,6 @@ void Com_SkipRestOfLine ( const char *(*data) ) {
 	*data = p;
 }
 
-/*
-====================
-Com_ParseRestOfLine
-====================
-*/
 const char *Com_ParseRestOfLine( const char *(*data_p) ) {
 	static char	line[MAX_TOKEN_CHARS];
 	const char *token;

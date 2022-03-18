@@ -41,11 +41,6 @@ static char installPath[MAX_OSPATH];
 // Used to determine where to store user-specific files
 static char homePath[MAX_OSPATH];
 
-/*
-================
-Sys_Milliseconds
-================
-*/
 /* base time in seconds, that's our origin
    timeval:tv_sec is an int: 
    assuming this wraps every 0x7fffffff - ~68 years since the Epoch (1970) - we're safe till 2038

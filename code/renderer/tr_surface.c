@@ -40,11 +40,6 @@ use the shader system.
 //============================================================================
 
 
-/*
-==============
-RB_CheckOverflow
-==============
-*/
 void RB_CheckOverflow( int verts, int indexes ) {
 	if (tess.numVertexes + verts < SHADER_MAX_VERTEXES
 		&& tess.numIndexes + indexes < SHADER_MAX_INDEXES) {
@@ -64,11 +59,6 @@ void RB_CheckOverflow( int verts, int indexes ) {
 }
 
 
-/*
-==============
-RB_AddQuadStampExt
-==============
-*/
 void RB_AddQuadStampExt( vec3_t origin, vec3_t left, vec3_t up, byte *color, float s1, float t1, float s2, float t2 ) {
 	vec3_t		normal;
 	int			ndx;
@@ -136,20 +126,10 @@ void RB_AddQuadStampExt( vec3_t origin, vec3_t left, vec3_t up, byte *color, flo
 	tess.numIndexes += 6;
 }
 
-/*
-==============
-RB_AddQuadStamp
-==============
-*/
 void RB_AddQuadStamp( vec3_t origin, vec3_t left, vec3_t up, byte *color ) {
 	RB_AddQuadStampExt( origin, left, up, color, 0, 0, 1, 1 );
 }
 
-/*
-==============
-RB_SurfaceSprite
-==============
-*/
 static void RB_SurfaceSprite( void ) {
 	vec3_t		left, up;
 	float		radius;
@@ -181,11 +161,6 @@ static void RB_SurfaceSprite( void ) {
 }
 
 
-/*
-=============
-RB_SurfacePolychain
-=============
-*/
 void RB_SurfacePolychain( srfPoly_t *p ) {
 	int		i;
 	int		numv;
@@ -215,11 +190,6 @@ void RB_SurfacePolychain( srfPoly_t *p ) {
 }
 
 
-/*
-=============
-RB_SurfaceTriangles
-=============
-*/
 void RB_SurfaceTriangles( srfTriangles_t *srf ) {
 	int			i;
 	drawVert_t	*dv;
@@ -276,12 +246,7 @@ void RB_SurfaceTriangles( srfTriangles_t *srf ) {
 
 
 
-/*
-==============
-RB_SurfaceBeam
-==============
-*/
-void RB_SurfaceBeam( void ) 
+void RB_SurfaceBeam( void )
 {
 #define NUM_BEAM_SEGS 6
 	refEntity_t *e;
@@ -666,11 +631,6 @@ static void LerpMeshVertexes (md3Surface_t *surf, float backlerp)
    	}
 }
 
-/*
-=============
-RB_SurfaceMesh
-=============
-*/
 void RB_SurfaceMesh(md3Surface_t *surface) {
 	int				j;
 	float			backlerp;
@@ -713,11 +673,6 @@ void RB_SurfaceMesh(md3Surface_t *surface) {
 }
 
 
-/*
-==============
-RB_SurfaceFace
-==============
-*/
 void RB_SurfaceFace( srfSurfaceFace_t *surf ) {
 	int			i;
 	unsigned	*indices, *tessIndexes;
@@ -958,15 +913,6 @@ void RB_SurfaceGrid( srfGridMesh_t *cv ) {
 		used += rows - 1;
 	}
 }
-
-
-/*
-===========================================================================
-
-NULL MODEL
-
-===========================================================================
-*/
 
 /*
 ===================

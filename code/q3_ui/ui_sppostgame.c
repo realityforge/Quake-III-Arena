@@ -96,11 +96,6 @@ char	*ui_medalSounds[] = {
 };
 
 
-/*
-=================
-UI_SPPostgameMenu_AgainEvent
-=================
-*/
 static void UI_SPPostgameMenu_AgainEvent( void* ptr, int event )
 {
 	if (event != QM_ACTIVATED) {
@@ -111,11 +106,6 @@ static void UI_SPPostgameMenu_AgainEvent( void* ptr, int event )
 }
 
 
-/*
-=================
-UI_SPPostgameMenu_NextEvent
-=================
-*/
 static void UI_SPPostgameMenu_NextEvent( void* ptr, int event ) {
 	int			currentSet;
 	int			levelSet;
@@ -156,11 +146,6 @@ static void UI_SPPostgameMenu_NextEvent( void* ptr, int event ) {
 }
 
 
-/*
-=================
-UI_SPPostgameMenu_MenuEvent
-=================
-*/
 static void UI_SPPostgameMenu_MenuEvent( void* ptr, int event )
 {
 	if (event != QM_ACTIVATED) {
@@ -171,11 +156,6 @@ static void UI_SPPostgameMenu_MenuEvent( void* ptr, int event )
 }
 
 
-/*
-=================
-UI_SPPostgameMenu_MenuKey
-=================
-*/
 static sfxHandle_t UI_SPPostgameMenu_MenuKey( int key ) {
 	if ( uis.realtime < postgameMenuInfo.ignoreKeysTime ) {
 		return 0;
@@ -257,11 +237,6 @@ static void UI_SPPostgameMenu_DrawAwardsPresentation( int timer ) {
 }
 
 
-/*
-=================
-UI_SPPostgameMenu_MenuDrawScoreLine
-=================
-*/
 static void UI_SPPostgameMenu_MenuDrawScoreLine( int n, int y ) {
 	int		rank;
 	char	name[64];
@@ -288,11 +263,6 @@ static void UI_SPPostgameMenu_MenuDrawScoreLine( int n, int y ) {
 }
 
 
-/*
-=================
-UI_SPPostgameMenu_MenuDraw
-=================
-*/
 static void UI_SPPostgameMenu_MenuDraw( void ) {
 	int		timer;
 	int		serverId;
@@ -387,11 +357,6 @@ static void UI_SPPostgameMenu_MenuDraw( void ) {
 }
 
 
-/*
-=================
-UI_SPPostgameMenu_Cache
-=================
-*/
 void UI_SPPostgameMenu_Cache( void ) {
 	int			n;
 	qboolean	buildscript;
@@ -417,11 +382,6 @@ void UI_SPPostgameMenu_Cache( void ) {
 }
 
 
-/*
-=================
-UI_SPPostgameMenu_Init
-=================
-*/
 static void UI_SPPostgameMenu_Init( void ) {
 	postgameMenuInfo.menu.wrapAround	= qtrue;
 	postgameMenuInfo.menu.key			= UI_SPPostgameMenu_MenuKey;
@@ -488,11 +448,6 @@ static void Prepname( int index ) {
 }
 
 
-/*
-=================
-UI_SPPostgameMenu_f
-=================
-*/
 void UI_SPPostgameMenu_f( void ) {
 	int			playerGameRank;
 	int			playerClientNum;

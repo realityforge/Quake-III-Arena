@@ -278,12 +278,6 @@ void* __qmalloc (size_t nSize)
 	return b;
 }
 
-
-/*
-====================
-Extract file parts
-====================
-*/
 void __ExtractFilePath (const char *path, char *dest)
 {
 	const char *src;

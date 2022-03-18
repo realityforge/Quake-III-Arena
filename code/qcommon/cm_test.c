@@ -22,12 +22,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "cm_local.h"
 
 
-/*
-==================
-CM_PointLeafnum_r
-
-==================
-*/
 int CM_PointLeafnum_r( const vec3_t p, int num ) {
 	float		d;
 	cNode_t		*node;
@@ -59,16 +53,6 @@ int CM_PointLeafnum( const vec3_t p ) {
 	}
 	return CM_PointLeafnum_r (p, 0);
 }
-
-
-/*
-======================================================================
-
-LEAF LISTING
-
-======================================================================
-*/
-
 
 void CM_StoreLeafs( leafList_t *ll, int nodenum ) {
 	int		leafNum;
@@ -155,11 +139,6 @@ void CM_BoxLeafnums_r( leafList_t *ll, int nodenum ) {
 	}
 }
 
-/*
-==================
-CM_BoxLeafnums
-==================
-*/
 int	CM_BoxLeafnums( const vec3_t mins, const vec3_t maxs, int *list, int listsize, int *lastLeaf) {
 	leafList_t	ll;
 
@@ -180,12 +159,6 @@ int	CM_BoxLeafnums( const vec3_t mins, const vec3_t maxs, int *list, int listsiz
 	return ll.count;
 }
 
-/*
-==================
-CM_PointContents
-
-==================
-*/
 int CM_PointContents( const vec3_t p, clipHandle_t model ) {
 	int			leafnum;
 	int			i, k;
@@ -264,13 +237,7 @@ int	CM_TransformedPointContents( const vec3_t p, clipHandle_t model, const vec3_
 
 
 
-/*
-===============================================================================
 
-PVS
-
-===============================================================================
-*/
 
 byte	*CM_ClusterPVS (int cluster) {
 	if (cluster < 0 || cluster >= cm.numClusters || !cm.vised ) {
@@ -282,13 +249,7 @@ byte	*CM_ClusterPVS (int cluster) {
 
 
 
-/*
-===============================================================================
 
-AREAPORTALS
-
-===============================================================================
-*/
 
 void CM_FloodArea_r( int areaNum, int floodnum) {
 	int		i;
@@ -313,12 +274,6 @@ void CM_FloodArea_r( int areaNum, int floodnum) {
 	}
 }
 
-/*
-====================
-CM_FloodAreaConnections
-
-====================
-*/
 void	CM_FloodAreaConnections( void ) {
 	int		i;
 	cArea_t	*area;
@@ -339,12 +294,6 @@ void	CM_FloodAreaConnections( void ) {
 
 }
 
-/*
-====================
-CM_AdjustAreaPortalState
-
-====================
-*/
 void	CM_AdjustAreaPortalState( int area1, int area2, qboolean open ) {
 	if ( area1 < 0 || area2 < 0 ) {
 		return;
@@ -368,12 +317,6 @@ void	CM_AdjustAreaPortalState( int area1, int area2, qboolean open ) {
 	CM_FloodAreaConnections ();
 }
 
-/*
-====================
-CM_AreasConnected
-
-====================
-*/
 qboolean	CM_AreasConnected( int area1, int area2 ) {
 #ifndef BSPC
 	if ( cm_noAreas->integer ) {

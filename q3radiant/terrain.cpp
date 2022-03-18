@@ -85,11 +85,6 @@ const char *Terrain_GetKeyValue( terrainMesh_t *p, const char *pKey ) {
 	return "";
 }
 
-/*
-==================
-Terrain_MemorySize
-==================
-*/
 int Terrain_MemorySize( terrainMesh_t *p ) {
 	return _msize( p );
 }

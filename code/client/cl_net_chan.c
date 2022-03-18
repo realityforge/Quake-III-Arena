@@ -126,20 +126,10 @@ static void CL_Netchan_Decode( msg_t *msg ) {
 	}
 }
 
-/*
-=================
-CL_Netchan_TransmitNextFragment
-=================
-*/
 void CL_Netchan_TransmitNextFragment( netchan_t *chan ) {
 	Netchan_TransmitNextFragment( chan );
 }
 
-/*
-===============
-CL_Netchan_Transmit
-================
-*/
 void CL_Netchan_Transmit( netchan_t *chan, msg_t* msg ) {
 	MSG_WriteByte( msg, clc_EOF );
 
@@ -150,11 +140,6 @@ void CL_Netchan_Transmit( netchan_t *chan, msg_t* msg ) {
 extern 	int oldsize;
 int newsize = 0;
 
-/*
-=================
-CL_Netchan_Process
-=================
-*/
 qboolean CL_Netchan_Process( netchan_t *chan, msg_t *msg ) {
 	int ret;
 

@@ -33,11 +33,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <io.h>
 #include <conio.h>
 
-/*
-================
-Sys_Milliseconds
-================
-*/
 int			sys_timeBase;
 int Sys_Milliseconds (void)
 {
@@ -53,11 +48,6 @@ int Sys_Milliseconds (void)
 	return sys_curtime;
 }
 
-/*
-================
-Sys_SnapVector
-================
-*/
 long fastftol( float f ) {
 	static int tmp;
 	__asm fld f

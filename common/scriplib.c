@@ -48,11 +48,6 @@ char    token[MAXTOKEN];
 qboolean endofscript;
 qboolean tokenready;                     // only qtrue if UnGetToken was just called
 
-/*
-==============
-AddScriptToStack
-==============
-*/
 void AddScriptToStack( const char *filename ) {
 	int            size;
 
@@ -72,11 +67,6 @@ void AddScriptToStack( const char *filename ) {
 }
 
 
-/*
-==============
-LoadScriptFile
-==============
-*/
 void LoadScriptFile( const char *filename ) {
 	script = scriptstack;
 	AddScriptToStack (filename);
@@ -86,11 +76,6 @@ void LoadScriptFile( const char *filename ) {
 }
 
 
-/*
-==============
-ParseFromMemory
-==============
-*/
 void ParseFromMemory (char *buffer, int size)
 {
 	script = scriptstack;
@@ -152,11 +137,6 @@ qboolean EndOfScript (qboolean crossline)
 	return GetToken (crossline);
 }
 
-/*
-==============
-GetToken
-==============
-*/
 qboolean GetToken (qboolean crossline)
 {
 	char    *token_p;

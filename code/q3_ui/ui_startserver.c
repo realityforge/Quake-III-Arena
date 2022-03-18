@@ -107,11 +107,6 @@ static int gametype_remap2[] = {0, 2, 0, 1, 3};
 static void UI_ServerOptionsMenu( qboolean multiplayer );
 
 
-/*
-=================
-GametypeBits
-=================
-*/
 static int GametypeBits( char *string ) {
 	int		bits;
 	char	*p;
@@ -155,11 +150,6 @@ static int GametypeBits( char *string ) {
 }
 
 
-/*
-=================
-StartServer_Update
-=================
-*/
 static void StartServer_Update( void ) {
 	int				i;
 	int				top;
@@ -220,11 +210,6 @@ static void StartServer_Update( void ) {
 }
 
 
-/*
-=================
-StartServer_MapEvent
-=================
-*/
 static void StartServer_MapEvent( void* ptr, int event ) {
 	if( event != QM_ACTIVATED) {
 		return;
@@ -235,11 +220,6 @@ static void StartServer_MapEvent( void* ptr, int event ) {
 }
 
 
-/*
-=================
-StartServer_GametypeEvent
-=================
-*/
 static void StartServer_GametypeEvent( void* ptr, int event ) {
 	int			i;
 	int			count;
@@ -278,11 +258,6 @@ static void StartServer_GametypeEvent( void* ptr, int event ) {
 }
 
 
-/*
-=================
-StartServer_MenuEvent
-=================
-*/
 static void StartServer_MenuEvent( void* ptr, int event ) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -315,11 +290,6 @@ static void StartServer_MenuEvent( void* ptr, int event ) {
 }
 
 
-/*
-===============
-StartServer_LevelshotDraw
-===============
-*/
 static void StartServer_LevelshotDraw( void *self ) {
 	menubitmap_s	*b;
 	int				x;
@@ -372,11 +342,6 @@ static void StartServer_LevelshotDraw( void *self ) {
 }
 
 
-/*
-=================
-StartServer_MenuInit
-=================
-*/
 static void StartServer_MenuInit( void ) {
 	int	i;
 	int	x;
@@ -542,11 +507,6 @@ static void StartServer_MenuInit( void ) {
 }
 
 
-/*
-=================
-StartServer_Cache
-=================
-*/
 void StartServer_Cache( void )
 {
 	int				i;
@@ -588,26 +548,11 @@ void StartServer_Cache( void )
 }
 
 
-/*
-=================
-UI_StartServerMenu
-=================
-*/
 void UI_StartServerMenu( qboolean multiplayer ) {
 	StartServer_MenuInit();
 	s_startserver.multiplayer = multiplayer;
 	UI_PushMenu( &s_startserver.menu );
 }
-
-
-
-/*
-=============================================================================
-
-SERVER OPTIONS MENU *****
-
-=============================================================================
-*/
 
 #define ID_PLAYER_TYPE			20
 #define ID_MAXCLIENTS			21
@@ -686,11 +631,6 @@ static const char *botSkill_list[] = {
 };
 
 
-/*
-=================
-BotAlreadySelected
-=================
-*/
 static qboolean BotAlreadySelected( const char *checkName ) {
 	int		n;
 
@@ -711,11 +651,6 @@ static qboolean BotAlreadySelected( const char *checkName ) {
 }
 
 
-/*
-=================
-ServerOptions_Start
-=================
-*/
 static void ServerOptions_Start( void ) {
 	int		timelimit;
 	int		fraglimit;
@@ -814,11 +749,6 @@ static void ServerOptions_Start( void ) {
 }
 
 
-/*
-=================
-ServerOptions_InitPlayerItems
-=================
-*/
 static void ServerOptions_InitPlayerItems( void ) {
 	int		n;
 	int		v;
@@ -867,11 +797,6 @@ static void ServerOptions_InitPlayerItems( void ) {
 }
 
 
-/*
-=================
-ServerOptions_SetPlayerItems
-=================
-*/
 static void ServerOptions_SetPlayerItems( void ) {
 	int		start;
 	int		n;
@@ -918,11 +843,6 @@ static void ServerOptions_SetPlayerItems( void ) {
 }
 
 
-/*
-=================
-ServerOptions_Event
-=================
-*/
 static void ServerOptions_Event( void* ptr, int event ) {
 	switch( ((menucommon_s*)ptr)->id ) {
 	
@@ -974,11 +894,6 @@ static void ServerOptions_PlayerNameEvent( void* ptr, int event ) {
 }
 
 
-/*
-=================
-ServerOptions_StatusBar
-=================
-*/
 static void ServerOptions_StatusBar( void* ptr ) {
 	switch( ((menucommon_s*)ptr)->id ) {
 	default:
@@ -988,11 +903,6 @@ static void ServerOptions_StatusBar( void* ptr ) {
 }
 
 
-/*
-===============
-ServerOptions_LevelshotDraw
-===============
-*/
 static void ServerOptions_LevelshotDraw( void *self ) {
 	menubitmap_s	*b;
 	int				x;
@@ -1111,11 +1021,6 @@ static void ServerOptions_InitBotNames( void ) {
 }
 
 
-/*
-=================
-ServerOptions_SetMenuItems
-=================
-*/
 static void ServerOptions_SetMenuItems( void ) {
 	static char picname[64];
 
@@ -1164,11 +1069,6 @@ static void ServerOptions_SetMenuItems( void ) {
 	ServerOptions_SetPlayerItems();
 }
 
-/*
-=================
-PlayerName_Draw
-=================
-*/
 static void PlayerName_Draw( void *item ) {
 	menutext_s	*s;
 	float		*color;
@@ -1211,11 +1111,6 @@ static void PlayerName_Draw( void *item ) {
 }
 
 
-/*
-=================
-ServerOptions_MenuInit
-=================
-*/
 #define OPTIONS_X	456
 
 static void ServerOptions_MenuInit( qboolean multiplayer ) {
@@ -1452,11 +1347,6 @@ static void ServerOptions_MenuInit( qboolean multiplayer ) {
 	ServerOptions_SetMenuItems();
 }
 
-/*
-=================
-ServerOptions_Cache
-=================
-*/
 void ServerOptions_Cache( void ) {
 	trap_R_RegisterShaderNoMip( GAMESERVER_BACK0 );
 	trap_R_RegisterShaderNoMip( GAMESERVER_BACK1 );
@@ -1467,26 +1357,10 @@ void ServerOptions_Cache( void ) {
 }
 
 
-/*
-=================
-UI_ServerOptionsMenu
-=================
-*/
 static void UI_ServerOptionsMenu( qboolean multiplayer ) {
 	ServerOptions_MenuInit( multiplayer );
 	UI_PushMenu( &s_serveroptions.menu );
 }
-
-
-
-/*
-=============================================================================
-
-BOT SELECT MENU *****
-
-=============================================================================
-*/
-
 
 #define BOTSELECT_BACK0			"menu/art/back_0"
 #define BOTSELECT_BACK1			"menu/art/back_1"
@@ -1531,11 +1405,6 @@ typedef struct {
 static botSelectInfo_t	botSelectInfo;
 
 
-/*
-=================
-UI_BotSelectMenu_SortCompare
-=================
-*/
 static int QDECL UI_BotSelectMenu_SortCompare( const void *arg1, const void *arg2 ) {
 	int			num1, num2;
 	const char	*info1, *info2;
@@ -1554,11 +1423,6 @@ static int QDECL UI_BotSelectMenu_SortCompare( const void *arg1, const void *arg
 }
 
 
-/*
-=================
-UI_BotSelectMenu_BuildList
-=================
-*/
 static void UI_BotSelectMenu_BuildList( void ) {
 	int		n;
 
@@ -1579,11 +1443,6 @@ static void UI_BotSelectMenu_BuildList( void ) {
 }
 
 
-/*
-=================
-ServerPlayerIcon
-=================
-*/
 static void ServerPlayerIcon( const char *modelAndSkin, char *iconName, int iconNameMaxSize ) {
 	char	*skin;
 	char	model[MAX_QPATH];
@@ -1605,11 +1464,6 @@ static void ServerPlayerIcon( const char *modelAndSkin, char *iconName, int icon
 }
 
 
-/*
-=================
-UI_BotSelectMenu_UpdateGrid
-=================
-*/
 static void UI_BotSelectMenu_UpdateGrid( void ) {
 	const char	*info;
 	int			i;
@@ -1671,11 +1525,6 @@ static void UI_BotSelectMenu_UpdateGrid( void ) {
 }
 
 
-/*
-=================
-UI_BotSelectMenu_Default
-=================
-*/
 static void UI_BotSelectMenu_Default( char *bot ) {
 	const char	*botInfo;
 	const char	*test;
@@ -1708,11 +1557,6 @@ static void UI_BotSelectMenu_Default( char *bot ) {
 }
 
 
-/*
-=================
-UI_BotSelectMenu_LeftEvent
-=================
-*/
 static void UI_BotSelectMenu_LeftEvent( void* ptr, int event ) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -1725,11 +1569,6 @@ static void UI_BotSelectMenu_LeftEvent( void* ptr, int event ) {
 }
 
 
-/*
-=================
-UI_BotSelectMenu_RightEvent
-=================
-*/
 static void UI_BotSelectMenu_RightEvent( void* ptr, int event ) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -1742,11 +1581,6 @@ static void UI_BotSelectMenu_RightEvent( void* ptr, int event ) {
 }
 
 
-/*
-=================
-UI_BotSelectMenu_BotEvent
-=================
-*/
 static void UI_BotSelectMenu_BotEvent( void* ptr, int event ) {
 	int		i;
 
@@ -1767,11 +1601,6 @@ static void UI_BotSelectMenu_BotEvent( void* ptr, int event ) {
 }
 
 
-/*
-=================
-UI_BotSelectMenu_BackEvent
-=================
-*/
 static void UI_BotSelectMenu_BackEvent( void* ptr, int event ) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -1780,11 +1609,6 @@ static void UI_BotSelectMenu_BackEvent( void* ptr, int event ) {
 }
 
 
-/*
-=================
-UI_BotSelectMenu_SelectEvent
-=================
-*/
 static void UI_BotSelectMenu_SelectEvent( void* ptr, int event ) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -1796,11 +1620,6 @@ static void UI_BotSelectMenu_SelectEvent( void* ptr, int event ) {
 }
 
 
-/*
-=================
-UI_BotSelectMenu_Cache
-=================
-*/
 void UI_BotSelectMenu_Cache( void ) {
 	trap_R_RegisterShaderNoMip( BOTSELECT_BACK0 );
 	trap_R_RegisterShaderNoMip( BOTSELECT_BACK1 );
@@ -1938,11 +1757,6 @@ static void UI_BotSelectMenu_Init( char *bot ) {
 }
 
 
-/*
-=================
-UI_BotSelectMenu
-=================
-*/
 void UI_BotSelectMenu( char *bot ) {
 	UI_BotSelectMenu_Init( bot );
 	UI_PushMenu( &botSelectInfo.menu );

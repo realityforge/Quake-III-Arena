@@ -314,11 +314,6 @@ qboolean	Sys_IsLANAddress (netadr_t adr) {
 	return qfalse;
 }
 
-/*
-==================
-Sys_ShowIP
-==================
-*/
 void Sys_ShowIP(void) {
 	int i;
 
@@ -327,11 +322,6 @@ void Sys_ShowIP(void) {
 	}
 }
 
-/*
-=====================
-NET_GetLocalAddress
-=====================
-*/
 #ifdef MACOS_X
 // Don't do a forward mapping from the hostname of the machine to the IP.  The reason is that we might have obtained an IP address from DHCP and there might not be any name registered for the machine.  On Mac OS X, the machine name defaults to 'localhost' and NetInfo has 127.0.0.1 listed for this name.  Instead, we want to get a list of all the IP network interfaces on the machine.
 // This code adapted from OmniNetworking.
@@ -464,11 +454,6 @@ void NET_GetLocalAddress( void ) {
 }
 #endif
 
-/*
-====================
-NET_OpenIP
-====================
-*/
 // bk001204 - prototype needed
 int NET_IPSocket (char *net_interface, int port);
 void NET_OpenIP (void)
@@ -493,11 +478,6 @@ void NET_OpenIP (void)
 }
 
 
-/*
-====================
-NET_Init
-====================
-*/
 void NET_Init (void)
 {
 	noudp = Cvar_Get ("net_noudp", "0", 0);
@@ -508,11 +488,6 @@ void NET_Init (void)
 }
 
 
-/*
-====================
-NET_IPSocket
-====================
-*/
 int NET_IPSocket (char *net_interface, int port)
 {
 	int newsocket;
@@ -568,11 +543,6 @@ int NET_IPSocket (char *net_interface, int port)
 	return newsocket;
 }
 
-/*
-====================
-NET_Shutdown
-====================
-*/
 void	NET_Shutdown (void)
 {
 	if (ip_socket) {
@@ -582,11 +552,6 @@ void	NET_Shutdown (void)
 }
 
 
-/*
-====================
-NET_ErrorString
-====================
-*/
 char *NET_ErrorString (void)
 {
 	int		code;

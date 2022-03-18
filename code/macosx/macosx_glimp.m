@@ -60,11 +60,6 @@ OTStampList glThreadStampList;
 }
 @end
 
-/*
-============
-CheckErrors
-============
-*/
 void CheckErrors( void )
 {		
     GLenum   err;
@@ -133,11 +128,6 @@ qboolean GLimp_SetMode( qboolean isSecondTry )
     return qtrue;
 }
 
-/*
- =================
- GetPixelAttributes
- =================
- */
 
 #define ADD_ATTR(x) \
 do { \
@@ -230,11 +220,6 @@ static void ReleaseAllDisplays()
     }
 }
 
-/*
-=================
-CreateGameWindow
-=================
-*/
 static qboolean CreateGameWindow( qboolean isSecondTry )
 {
     const char *windowed[] = { "Windowed", "Fullscreen" };
@@ -643,12 +628,6 @@ void GLimp_Shutdown( void )
     Com_Printf("----- Done shutting down GL -----\n");
 }
 
-/*
-===============
-GLimp_SetGamma
-
-===============
-*/
 void GLimp_SetGamma(unsigned char red[256],
                     unsigned char green[256],
                     unsigned char blue[256])

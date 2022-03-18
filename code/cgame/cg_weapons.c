@@ -23,11 +23,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // cg_weapons.c -- events and effects dealing with weapons
 #include "cg_local.h"
 
-/*
-==========================
-CG_MachineGunEjectBrass
-==========================
-*/
 static void CG_MachineGunEjectBrass( centity_t *cent ) {
 	localEntity_t	*le;
 	refEntity_t		*re;
@@ -95,11 +90,6 @@ static void CG_MachineGunEjectBrass( centity_t *cent ) {
 	le->leMarkType = LEMT_NONE;
 }
 
-/*
-==========================
-CG_ShotgunEjectBrass
-==========================
-*/
 static void CG_ShotgunEjectBrass( centity_t *cent ) {
 	localEntity_t	*le;
 	refEntity_t		*re;
@@ -174,11 +164,6 @@ static void CG_ShotgunEjectBrass( centity_t *cent ) {
 
 
 #ifdef MISSIONPACK
-/*
-==========================
-CG_NailgunEjectBrass
-==========================
-*/
 static void CG_NailgunEjectBrass( centity_t *cent ) {
 	localEntity_t	*smoke;
 	vec3_t			origin;
@@ -207,11 +192,6 @@ static void CG_NailgunEjectBrass( centity_t *cent ) {
 #endif
 
 
-/*
-==========================
-CG_RailTrail
-==========================
-*/
 void CG_RailTrail (clientInfo_t *ci, vec3_t start, vec3_t end) {
 	vec3_t axis[36], move, move2, next_move, vec, temp;
 	float  len;
@@ -317,11 +297,6 @@ void CG_RailTrail (clientInfo_t *ci, vec3_t start, vec3_t end) {
 	}
 }
 
-/*
-==========================
-CG_RocketTrail
-==========================
-*/
 static void CG_RocketTrail( centity_t *ent, const weaponInfo_t *wi ) {
 	int		step;
 	vec3_t	origin, lastPos;
@@ -385,11 +360,6 @@ static void CG_RocketTrail( centity_t *ent, const weaponInfo_t *wi ) {
 }
 
 #ifdef MISSIONPACK
-/*
-==========================
-CG_NailTrail
-==========================
-*/
 static void CG_NailTrail( centity_t *ent, const weaponInfo_t *wi ) {
 	int		step;
 	vec3_t	origin, lastPos;
@@ -453,11 +423,6 @@ static void CG_NailTrail( centity_t *ent, const weaponInfo_t *wi ) {
 }
 #endif
 
-/*
-==========================
-CG_NailTrail
-==========================
-*/
 static void CG_PlasmaTrail( centity_t *cent, const weaponInfo_t *wi ) {
 	localEntity_t	*le;
 	refEntity_t		*re;
@@ -548,11 +513,6 @@ static void CG_PlasmaTrail( centity_t *cent, const weaponInfo_t *wi ) {
 	le->angles.trDelta[2] = 0;
 
 }
-/*
-==========================
-CG_GrappleTrail
-==========================
-*/
 void CG_GrappleTrail( centity_t *ent, const weaponInfo_t *wi ) {
 	vec3_t	origin;
 	entityState_t	*es;
@@ -586,11 +546,6 @@ void CG_GrappleTrail( centity_t *ent, const weaponInfo_t *wi ) {
 	trap_R_AddRefEntityToScene( &beam );
 }
 
-/*
-==========================
-CG_GrenadeTrail
-==========================
-*/
 static void CG_GrenadeTrail( centity_t *ent, const weaponInfo_t *wi ) {
 	CG_RocketTrail( ent, wi );
 }
@@ -868,21 +823,6 @@ void CG_RegisterItemVisuals( int itemNum ) {
 	}
 }
 
-
-/*
-========================================================================================
-
-VIEW WEAPON
-
-========================================================================================
-*/
-
-/*
-=================
-CG_MapTorsoToWeaponFrame
-
-=================
-*/
 static int CG_MapTorsoToWeaponFrame( clientInfo_t *ci, int frame ) {
 
 	// change weapon
@@ -907,11 +847,6 @@ static int CG_MapTorsoToWeaponFrame( clientInfo_t *ci, int frame ) {
 }
 
 
-/*
-==============
-CG_CalculateWeaponPosition
-==============
-*/
 static void CG_CalculateWeaponPosition( vec3_t origin, vec3_t angles ) {
 	float	scale;
 	int		delta;
@@ -1136,11 +1071,6 @@ static void CG_SpawnRailTrail( centity_t *cent, vec3_t origin ) {
 }
 
 
-/*
-======================
-CG_MachinegunSpinAngle
-======================
-*/
 #define		SPIN_SPEED	0.9
 #define		COAST_TIME	1000
 static float	CG_MachinegunSpinAngle( centity_t *cent ) {
@@ -1175,11 +1105,6 @@ static float	CG_MachinegunSpinAngle( centity_t *cent ) {
 }
 
 
-/*
-========================
-CG_AddWeaponWithPowerups
-========================
-*/
 static void CG_AddWeaponWithPowerups( refEntity_t *gun, int powerups ) {
 	// add powerup effects
 	if ( powerups & ( 1 << PW_INVIS ) ) {
@@ -1449,11 +1374,6 @@ WEAPON SELECTION
 ==============================================================================
 */
 
-/*
-===================
-CG_DrawWeaponSelect
-===================
-*/
 void CG_DrawWeaponSelect( void ) {
 	int		i;
 	int		bits;
@@ -1525,11 +1445,6 @@ void CG_DrawWeaponSelect( void ) {
 }
 
 
-/*
-===============
-CG_WeaponSelectable
-===============
-*/
 static qboolean CG_WeaponSelectable( int i ) {
 	if ( !cg.snap->ps.ammo[i] ) {
 		return qfalse;
@@ -1541,11 +1456,6 @@ static qboolean CG_WeaponSelectable( int i ) {
 	return qtrue;
 }
 
-/*
-===============
-CG_NextWeapon_f
-===============
-*/
 void CG_NextWeapon_f( void ) {
 	int		i;
 	int		original;
@@ -1577,11 +1487,6 @@ void CG_NextWeapon_f( void ) {
 	}
 }
 
-/*
-===============
-CG_PrevWeapon_f
-===============
-*/
 void CG_PrevWeapon_f( void ) {
 	int		i;
 	int		original;
@@ -1613,11 +1518,6 @@ void CG_PrevWeapon_f( void ) {
 	}
 }
 
-/*
-===============
-CG_Weapon_f
-===============
-*/
 void CG_Weapon_f( void ) {
 	int		num;
 
@@ -1662,16 +1562,6 @@ void CG_OutOfAmmoChange( void ) {
 		}
 	}
 }
-
-
-
-/*
-===================================================================================================
-
-WEAPON EVENTS
-
-===================================================================================================
-*/
 
 /*
 ================
@@ -1945,11 +1835,6 @@ void CG_MissileHitWall( int weapon, int clientNum, vec3_t origin, vec3_t dir, im
 }
 
 
-/*
-=================
-CG_MissileHitPlayer
-=================
-*/
 void CG_MissileHitPlayer( int weapon, vec3_t origin, vec3_t dir, int entityNum ) {
 	CG_Bleed( origin, entityNum );
 
@@ -1970,21 +1855,6 @@ void CG_MissileHitPlayer( int weapon, vec3_t origin, vec3_t dir, int entityNum )
 	}
 }
 
-
-
-/*
-============================================================================
-
-SHOTGUN TRACING
-
-============================================================================
-*/
-
-/*
-================
-CG_ShotgunPellet
-================
-*/
 static void CG_ShotgunPellet( vec3_t start, vec3_t end, int skipNum ) {
 	trace_t		tr;
 	int sourceContentType, destContentType;
@@ -2062,11 +1932,6 @@ static void CG_ShotgunPattern( vec3_t origin, vec3_t origin2, int seed, int othe
 	}
 }
 
-/*
-==============
-CG_ShotgunFire
-==============
-*/
 void CG_ShotgunFire( entityState_t *es ) {
 	vec3_t	v;
 	int		contents;
@@ -2088,20 +1953,9 @@ void CG_ShotgunFire( entityState_t *es ) {
 	CG_ShotgunPattern( es->pos.trBase, es->origin2, es->eventParm, es->otherEntityNum );
 }
 
-/*
-============================================================================
-
-BULLETS
-
-============================================================================
-*/
 
 
-/*
-===============
-CG_Tracer
-===============
-*/
+
 void CG_Tracer( vec3_t source, vec3_t dest ) {
 	vec3_t		forward, right;
 	polyVert_t	verts[4];
@@ -2177,11 +2031,6 @@ void CG_Tracer( vec3_t source, vec3_t dest ) {
 }
 
 
-/*
-======================
-CG_CalcMuzzlePoint
-======================
-*/
 static qboolean	CG_CalcMuzzlePoint( int entityNum, vec3_t muzzle ) {
 	vec3_t		forward;
 	centity_t	*cent;

@@ -31,30 +31,15 @@ extern qboolean loadCamera(const char *name);
 extern void startCamera(int time);
 extern qboolean getCameraInfo(int time, vec3_t *origin, vec3_t *angles);
 
-/*
-====================
-CL_GetGameState
-====================
-*/
 void CL_GetGameState( gameState_t *gs ) {
 	*gs = cl.gameState;
 }
 
-/*
-====================
-CL_GetGlconfig
-====================
-*/
 void CL_GetGlconfig( glconfig_t *glconfig ) {
 	*glconfig = cls.glconfig;
 }
 
 
-/*
-====================
-CL_GetUserCmd
-====================
-*/
 qboolean CL_GetUserCmd( int cmdNumber, usercmd_t *ucmd ) {
 	// cmds[cmdNumber] is the last properly generated command
 
@@ -79,11 +64,6 @@ int CL_GetCurrentCmdNumber( void ) {
 }
 
 
-/*
-====================
-CL_GetParseEntityState
-====================
-*/
 qboolean	CL_GetParseEntityState( int parseEntityNumber, entityState_t *state ) {
 	// can't return anything that hasn't been parsed yet
 	if ( parseEntityNumber >= cl.parseEntitiesNum ) {
@@ -100,21 +80,11 @@ qboolean	CL_GetParseEntityState( int parseEntityNumber, entityState_t *state ) {
 	return qtrue;
 }
 
-/*
-====================
-CL_GetCurrentSnapshotNumber
-====================
-*/
 void	CL_GetCurrentSnapshotNumber( int *snapshotNumber, int *serverTime ) {
 	*snapshotNumber = cl.snap.messageNum;
 	*serverTime = cl.snap.serverTime;
 }
 
-/*
-====================
-CL_GetSnapshot
-====================
-*/
 qboolean	CL_GetSnapshot( int snapshotNumber, snapshot_t *snapshot ) {
 	clSnapshot_t	*clSnap;
 	int				i, count;
@@ -163,40 +133,20 @@ qboolean	CL_GetSnapshot( int snapshotNumber, snapshot_t *snapshot ) {
 	return qtrue;
 }
 
-/*
-=====================
-CL_SetUserCmdValue
-=====================
-*/
 void CL_SetUserCmdValue( int userCmdValue, float sensitivityScale ) {
 	cl.cgameUserCmdValue = userCmdValue;
 	cl.cgameSensitivity = sensitivityScale;
 }
 
-/*
-=====================
-CL_AddCgameCommand
-=====================
-*/
 void CL_AddCgameCommand( const char *cmdName ) {
 	Cmd_AddCommand( cmdName, NULL );
 }
 
-/*
-=====================
-CL_CgameError
-=====================
-*/
 void CL_CgameError( const char *string ) {
 	Com_Error( ERR_DROP, "%s", string );
 }
 
 
-/*
-=====================
-CL_ConfigstringModified
-=====================
-*/
 void CL_ConfigstringModified( void ) {
 	char		*old, *s;
 	int			i, index;
@@ -380,12 +330,6 @@ void CL_CM_LoadMap( const char *mapname ) {
 	CM_LoadMap( mapname, qtrue, &checksum );
 }
 
-/*
-====================
-CL_ShutdonwCGame
-
-====================
-*/
 void CL_ShutdownCGame( void ) {
 	cls.keyCatchers &= ~KEYCATCH_CGAME;
 	cls.cgameStarted = qfalse;
@@ -786,11 +730,6 @@ qboolean CL_GameCommand( void ) {
 
 
 
-/*
-=====================
-CL_CGameRendering
-=====================
-*/
 void CL_CGameRendering( stereoFrame_t stereo ) {
 	VM_Call( cgvm, CG_DRAW_ACTIVE_FRAME, cl.serverTime, stereo, clc.demoplaying );
 	VM_Debug( 0 );
@@ -877,11 +816,6 @@ void CL_AdjustTimeDelta( void ) {
 }
 
 
-/*
-==================
-CL_FirstSnapshot
-==================
-*/
 void CL_FirstSnapshot( void ) {
 	// ignore snapshots that don't have entities
 	if ( cl.snap.snapFlags & SNAPFLAG_NOT_ACTIVE ) {
@@ -907,11 +841,6 @@ void CL_FirstSnapshot( void ) {
 	Sys_BeginProfiling();
 }
 
-/*
-==================
-CL_SetCGameTime
-==================
-*/
 void CL_SetCGameTime( void ) {
 	// getting a valid frame message ends the connection process
 	if ( cls.state != CA_ACTIVE ) {

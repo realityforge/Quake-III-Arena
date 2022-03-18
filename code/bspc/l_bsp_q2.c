@@ -553,12 +553,6 @@ void Q2_FixTextureReferences(void)
 //#endif //ME
 
 
-/*
-===============
-CompressVis
-
-===============
-*/
 int Q2_CompressVis (byte *vis, byte *dest)
 {
 	int		j;
@@ -590,11 +584,6 @@ int Q2_CompressVis (byte *vis, byte *dest)
 }
 
 
-/*
-===================
-DecompressVis
-===================
-*/
 void Q2_DecompressVis (byte *in, byte *decompressed)
 {
 	int		c;
@@ -839,11 +828,6 @@ int Q2_CopyLump (int lump, void *dest, int size, int maxsize)
 	return length / size;
 }
 
-/*
-=============
-LoadBSPFile
-=============
-*/
 void Q2_LoadBSPFile(char *filename, int offset, int length)
 {
 	int			i;

@@ -180,11 +180,6 @@ void Entity_FreeEpairs(entity_t *e)
 	e->epairs = NULL;
 }
 
-/*
-===========
-Entity_AddToList
-===========
-*/
 void Entity_AddToList(entity_t *e, entity_t *list)
 {
 	if (e->next || e->prev)
@@ -195,11 +190,6 @@ void Entity_AddToList(entity_t *e, entity_t *list)
 	e->prev = list;
 }
 
-/*
-===========
-Entity_RemoveFromList
-===========
-*/
 void Entity_RemoveFromList (entity_t *e)
 {
 	if (!e->next || !e->prev)
@@ -242,11 +232,6 @@ void Entity_Free (entity_t *e)
 	free (e);
 }
 
-/*
-=================
-Entity_MemorySize
-=================
-*/
 int Entity_MemorySize(entity_t *e)
 {
 	epair_t	*ep;
@@ -262,11 +247,6 @@ int Entity_MemorySize(entity_t *e)
 	return size;
 }
 
-/*
-=================
-ParseEpair
-=================
-*/
 epair_t *ParseEpair (void)
 {
 	epair_t	*e;
@@ -467,11 +447,6 @@ void VectorMidpoint(vec3_t va, vec3_t vb, vec3_t& out)
 }
 
 
-/*
-============
-Entity_Write
-============
-*/
 void Entity_Write (entity_t *e, FILE *f, qboolean use_region)
 {
 	epair_t		*ep;
@@ -804,11 +779,6 @@ entity_t	*Entity_Create (eclass_t *c)
 }
 
 
-/*
-===========
-Entity_LinkBrush
-===========
-*/
 void Entity_LinkBrush (entity_t *e, brush_t *b)
 {
 	if (b->oprev || b->onext)
@@ -821,11 +791,6 @@ void Entity_LinkBrush (entity_t *e, brush_t *b)
 	e->brushes.onext = b;
 }
 
-/*
-===========
-Entity_UnlinkBrush
-===========
-*/
 void Entity_UnlinkBrush (brush_t *b)
 {
 	//if (!b->owner || !b->onext || !b->oprev)
@@ -838,11 +803,6 @@ void Entity_UnlinkBrush (brush_t *b)
 }
 
 
-/*
-===========
-Entity_Clone
-===========
-*/
 entity_t	*Entity_Clone (entity_t *e)
 {
 	entity_t	*n;

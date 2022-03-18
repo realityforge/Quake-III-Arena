@@ -57,11 +57,6 @@ static teammain_t	s_teammain;
 //static menuaction_s		s_teammain_spectate;
 
 
-/*
-===============
-TeamMain_MenuEvent
-===============
-*/
 static void TeamMain_MenuEvent( void* ptr, int event ) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -91,11 +86,6 @@ static void TeamMain_MenuEvent( void* ptr, int event ) {
 }
 
 
-/*
-===============
-TeamMain_MenuInit
-===============
-*/
 void TeamMain_MenuInit( void ) {
 	int		y;
 	int		gametype;
@@ -189,21 +179,11 @@ void TeamMain_MenuInit( void ) {
 }
 
 
-/*
-===============
-TeamMain_Cache
-===============
-*/
 void TeamMain_Cache( void ) {
 	trap_R_RegisterShaderNoMip( TEAMMAIN_FRAME );
 }
 
 
-/*
-===============
-UI_TeamMainMenu
-===============
-*/
 void UI_TeamMainMenu( void ) {
 	TeamMain_MenuInit();
 	UI_PushMenu ( &s_teammain.menu );

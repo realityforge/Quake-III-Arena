@@ -110,12 +110,6 @@ void FreeStackWinding (winding_t *w, pstack_t *stack)
 	stack->freewindings[i] = 1;
 }
 
-/*
-==============
-VisChopWinding
-
-==============
-*/
 winding_t	*VisChopWinding (winding_t *in, pstack_t *stack, plane_t *split)
 {
 	vec_t	dists[128];
@@ -664,11 +658,6 @@ void PortalFlow (int portalnum)
 		(int)(p - portals),	c_might, c_can, data.c_chains);
 }
 
-/*
-==================
-RecursivePassageFlow
-==================
-*/
 void RecursivePassageFlow (vportal_t *portal, threaddata_t *thread, pstack_t *prevstack)
 {
 	pstack_t	stack;
@@ -743,11 +732,6 @@ void RecursivePassageFlow (vportal_t *portal, threaddata_t *thread, pstack_t *pr
 	}
 }
 
-/*
-===============
-PassageFlow
-===============
-*/
 void PassageFlow (int portalnum)
 {
 	threaddata_t	data;
@@ -793,11 +777,6 @@ void PassageFlow (int portalnum)
 	*/
 }
 
-/*
-==================
-RecursivePassagePortalFlow
-==================
-*/
 void RecursivePassagePortalFlow (vportal_t *portal, threaddata_t *thread, pstack_t *prevstack)
 {
 	pstack_t	stack;
@@ -1006,11 +985,6 @@ void RecursivePassagePortalFlow (vportal_t *portal, threaddata_t *thread, pstack
 	}
 }
 
-/*
-===============
-PassagePortalFlow
-===============
-*/
 void PassagePortalFlow (int portalnum)
 {
 	threaddata_t	data;
@@ -1152,11 +1126,6 @@ winding_t *PassageChopWinding (winding_t *in, winding_t *out, plane_t *split)
 	return neww;
 }
 
-/*
-===============
-AddSeperators
-===============
-*/
 int AddSeperators (winding_t *source, winding_t *pass, qboolean flipclip, plane_t *seperators, int maxseperators)
 {
 	int			i, j, k, l;
@@ -1464,12 +1433,6 @@ all seperating planes, and both portals must be behind the new portal
 int		c_flood, c_vis;
 
 
-/*
-==================
-SimpleFlood
-
-==================
-*/
 void SimpleFlood (vportal_t *srcportal, int leafnum)
 {
 	int		i;
@@ -1497,11 +1460,6 @@ void SimpleFlood (vportal_t *srcportal, int leafnum)
 	}
 }
 
-/*
-==============
-BasePortalVis
-==============
-*/
 void BasePortalVis (int portalnum)
 {
 	int			j, k;
@@ -1586,12 +1544,6 @@ WAAAAAAY too slow.
 ===============================================================================
 */
 
-/*
-==================
-RecursiveLeafBitFlow
-
-==================
-*/
 void RecursiveLeafBitFlow (int leafnum, byte *mightsee, byte *cansee)
 {
 	vportal_t	*p;
@@ -1633,11 +1585,6 @@ void RecursiveLeafBitFlow (int leafnum, byte *mightsee, byte *cansee)
 	}	
 }
 
-/*
-==============
-BetterPortalVis
-==============
-*/
 void BetterPortalVis (int portalnum)
 {
 	vportal_t	*p;

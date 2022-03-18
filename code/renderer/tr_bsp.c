@@ -91,12 +91,6 @@ static void HSVtoRGB( float h, float s, float v, float rgb[3] )
 	}
 }
 
-/*
-===============
-R_ColorShiftLightingBytes
-
-===============
-*/
 static	void R_ColorShiftLightingBytes( byte in[4], byte out[4] ) {
 	int		shift, r, g, b;
 
@@ -125,12 +119,6 @@ static	void R_ColorShiftLightingBytes( byte in[4], byte out[4] ) {
 	out[3] = in[3];
 }
 
-/*
-===============
-R_LoadLightmaps
-
-===============
-*/
 #define	LIGHTMAP_SIZE	128
 static	void R_LoadLightmaps( lump_t *l ) {
 	byte		*buf, *buf_p;
@@ -224,11 +212,6 @@ void		RE_SetWorldVisData( const byte *vis ) {
 }
 
 
-/*
-=================
-R_LoadVisibility
-=================
-*/
 static	void R_LoadVisibility( lump_t *l ) {
 	int		len;
 	byte	*buf;
@@ -262,11 +245,6 @@ static	void R_LoadVisibility( lump_t *l ) {
 //===============================================================================
 
 
-/*
-===============
-ShaderForShaderNum
-===============
-*/
 static shader_t *ShaderForShaderNum( int shaderNum, int lightmapNum ) {
 	shader_t	*shader;
 	dshader_t	*dsh;
@@ -295,11 +273,6 @@ static shader_t *ShaderForShaderNum( int shaderNum, int lightmapNum ) {
 	return shader;
 }
 
-/*
-===============
-ParseFace
-===============
-*/
 static void ParseFace( dsurface_t *ds, drawVert_t *verts, msurface_t *surf, int *indexes  ) {
 	int			i, j;
 	srfSurfaceFace_t	*cv;
@@ -367,11 +340,6 @@ static void ParseFace( dsurface_t *ds, drawVert_t *verts, msurface_t *surf, int 
 }
 
 
-/*
-===============
-ParseMesh
-===============
-*/
 static void ParseMesh ( dsurface_t *ds, drawVert_t *verts, msurface_t *surf ) {
 	srfGridMesh_t	*grid;
 	int				i, j;
@@ -434,11 +402,6 @@ static void ParseMesh ( dsurface_t *ds, drawVert_t *verts, msurface_t *surf ) {
 	grid->lodRadius = VectorLength( tmpVec );
 }
 
-/*
-===============
-ParseTriSurf
-===============
-*/
 static void ParseTriSurf( dsurface_t *ds, drawVert_t *verts, msurface_t *surf, int *indexes ) {
 	srfTriangles_t	*tri;
 	int				i, j;
@@ -493,11 +456,6 @@ static void ParseTriSurf( dsurface_t *ds, drawVert_t *verts, msurface_t *surf, i
 	}
 }
 
-/*
-===============
-ParseFlare
-===============
-*/
 static void ParseFlare( dsurface_t *ds, drawVert_t *verts, msurface_t *surf, int *indexes ) {
 	srfFlare_t		*flare;
 	int				i;
@@ -708,11 +666,6 @@ void R_FixSharedVertexLodError( void ) {
 }
 
 
-/*
-===============
-R_StitchPatches
-===============
-*/
 int R_StitchPatches( int grid1num, int grid2num ) {
 	float *v1, *v2;
 	srfGridMesh_t *grid1, *grid2;
@@ -1154,11 +1107,6 @@ int R_TryStitchingPatch( int grid1num ) {
 	return numstitches;
 }
 
-/*
-===============
-R_StitchAllPatches
-===============
-*/
 void R_StitchAllPatches( void ) {
 	int i, stitched, numstitches;
 	srfGridMesh_t *grid1;
@@ -1187,11 +1135,6 @@ void R_StitchAllPatches( void ) {
 	ri.Printf( PRINT_ALL, "stitched %d LoD cracks\n", numstitches );
 }
 
-/*
-===============
-R_MovePatchSurfacesToHunk
-===============
-*/
 void R_MovePatchSurfacesToHunk(void) {
 	int i, size;
 	srfGridMesh_t *grid, *hunkgrid;
@@ -1219,11 +1162,6 @@ void R_MovePatchSurfacesToHunk(void) {
 	}
 }
 
-/*
-===============
-R_LoadSurfaces
-===============
-*/
 static	void R_LoadSurfaces( lump_t *surfs, lump_t *verts, lump_t *indexLump ) {
 	dsurface_t	*in;
 	msurface_t	*out;
@@ -1295,11 +1233,6 @@ static	void R_LoadSurfaces( lump_t *surfs, lump_t *verts, lump_t *indexLump ) {
 
 
 
-/*
-=================
-R_LoadSubmodels
-=================
-*/
 static	void R_LoadSubmodels( lump_t *l ) {
 	dmodel_t	*in;
 	bmodel_t	*out;
@@ -1337,11 +1270,6 @@ static	void R_LoadSubmodels( lump_t *l ) {
 
 //==================================================================
 
-/*
-=================
-R_SetParent
-=================
-*/
 static	void R_SetParent (mnode_t *node, mnode_t *parent)
 {
 	node->parent = parent;
@@ -1351,11 +1279,6 @@ static	void R_SetParent (mnode_t *node, mnode_t *parent)
 	R_SetParent (node->children[1], node);
 }
 
-/*
-=================
-R_LoadNodesAndLeafs
-=================
-*/
 static	void R_LoadNodesAndLeafs (lump_t *nodeLump, lump_t *leafLump) {
 	int			i, j, p;
 	dnode_t		*in;
@@ -1429,12 +1352,7 @@ static	void R_LoadNodesAndLeafs (lump_t *nodeLump, lump_t *leafLump) {
 
 //=============================================================================
 
-/*
-=================
-R_LoadShaders
-=================
-*/
-static	void R_LoadShaders( lump_t *l ) {	
+static	void R_LoadShaders( lump_t *l ) {
 	int		i, count;
 	dshader_t	*in, *out;
 	
@@ -1456,11 +1374,6 @@ static	void R_LoadShaders( lump_t *l ) {
 }
 
 
-/*
-=================
-R_LoadMarksurfaces
-=================
-*/
 static	void R_LoadMarksurfaces (lump_t *l)
 {	
 	int		i, j, count;
@@ -1484,11 +1397,6 @@ static	void R_LoadMarksurfaces (lump_t *l)
 }
 
 
-/*
-=================
-R_LoadPlanes
-=================
-*/
 static	void R_LoadPlanes( lump_t *l ) {
 	int			i, j;
 	cplane_t	*out;
@@ -1520,12 +1428,6 @@ static	void R_LoadPlanes( lump_t *l ) {
 	}
 }
 
-/*
-=================
-R_LoadFogs
-
-=================
-*/
 static	void R_LoadFogs( lump_t *l, lump_t *brushesLump, lump_t *sidesLump ) {
 	int			i;
 	fog_t		*out;
@@ -1635,12 +1537,6 @@ static	void R_LoadFogs( lump_t *l, lump_t *brushesLump, lump_t *sidesLump ) {
 }
 
 
-/*
-================
-R_LoadLightGrid
-
-================
-*/
 void R_LoadLightGrid( lump_t *l ) {
 	int		i;
 	vec3_t	maxs;
@@ -1681,11 +1577,6 @@ void R_LoadLightGrid( lump_t *l ) {
 	}
 }
 
-/*
-================
-R_LoadEntities
-================
-*/
 void R_LoadEntities( lump_t *l ) {
 	char *p, *token, *s;
 	char keyname[MAX_TOKEN_CHARS];
@@ -1761,11 +1652,6 @@ void R_LoadEntities( lump_t *l ) {
 	}
 }
 
-/*
-=================
-R_GetEntityToken
-=================
-*/
 qboolean R_GetEntityToken( char *buffer, int size ) {
 	const char	*s;
 

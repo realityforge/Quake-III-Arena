@@ -671,11 +671,6 @@ qboolean CCamWnd::CullBrush (brush_t *b)
 	return false;
 }
 
-/*
-==============
-Cam_Draw
-==============
-*/
 
 void CCamWnd::Cam_Draw()
 {

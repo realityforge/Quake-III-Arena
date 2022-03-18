@@ -58,12 +58,6 @@ static int CG_ValidOrder(const char *p) {
 }
 #endif
 
-/*
-=================
-CG_ParseScores
-
-=================
-*/
 static void CG_ParseScores( void ) {
 	int		i, powerups;
 
@@ -107,12 +101,6 @@ static void CG_ParseScores( void ) {
 
 }
 
-/*
-=================
-CG_ParseTeamInfo
-
-=================
-*/
 static void CG_ParseTeamInfo( void ) {
 	int		i;
 	int		client;
@@ -162,11 +150,6 @@ void CG_ParseServerinfo( void ) {
 	trap_Cvar_Set("g_blueTeam", cgs.blueTeam);
 }
 
-/*
-==================
-CG_ParseWarmup
-==================
-*/
 static void CG_ParseWarmup( void ) {
 	const char	*info;
 	int			warmup;
@@ -219,11 +202,6 @@ void CG_SetConfigValues( void ) {
 	cg.warmup = atoi( CG_ConfigString( CS_WARMUP ) );
 }
 
-/*
-=====================
-CG_ShaderStateChanged
-=====================
-*/
 void CG_ShaderStateChanged(void) {
 	char originalShader[MAX_QPATH];
 	char newShader[MAX_QPATH];
@@ -259,12 +237,6 @@ void CG_ShaderStateChanged(void) {
 	}
 }
 
-/*
-================
-CG_ConfigStringModified
-
-================
-*/
 static void CG_ConfigStringModified( void ) {
 	const char	*str;
 	int		num;
@@ -349,12 +321,6 @@ static void CG_ConfigStringModified( void ) {
 }
 
 
-/*
-=======================
-CG_AddToTeamChat
-
-=======================
-*/
 static void CG_AddToTeamChat( const char *str ) {
 	int len;
 	char *p, *ls;
@@ -507,11 +473,6 @@ typedef struct headModelVoiceChat_s
 voiceChatList_t voiceChatLists[MAX_VOICEFILES];
 headModelVoiceChat_t headModelVoiceChat[MAX_HEADMODELS];
 
-/*
-=================
-CG_ParseVoiceChats
-=================
-*/
 int CG_ParseVoiceChats( const char *filename, voiceChatList_t *voiceChatList, int maxVoiceChats ) {
 	int	len, i;
 	fileHandle_t f;
@@ -608,11 +569,6 @@ int CG_ParseVoiceChats( const char *filename, voiceChatList_t *voiceChatList, in
 	return qtrue;
 }
 
-/*
-=================
-CG_LoadVoiceChats
-=================
-*/
 void CG_LoadVoiceChats( void ) {
 	int size;
 
@@ -628,11 +584,6 @@ void CG_LoadVoiceChats( void ) {
 	CG_Printf("voice chat memory size = %d\n", size - trap_MemoryRemaining());
 }
 
-/*
-=================
-CG_HeadModelVoiceChats
-=================
-*/
 int CG_HeadModelVoiceChats( char *filename ) {
 	int	len, i;
 	fileHandle_t f;
@@ -675,11 +626,6 @@ int CG_HeadModelVoiceChats( char *filename ) {
 }
 
 
-/*
-=================
-CG_GetVoiceChat
-=================
-*/
 int CG_GetVoiceChat( voiceChatList_t *voiceChatList, const char *id, sfxHandle_t *snd, char **chat) {
 	int i, rnd;
 
@@ -694,11 +640,6 @@ int CG_GetVoiceChat( voiceChatList_t *voiceChatList, const char *id, sfxHandle_t
 	return qfalse;
 }
 
-/*
-=================
-CG_VoiceChatListForClient
-=================
-*/
 voiceChatList_t *CG_VoiceChatListForClient( int clientNum ) {
 	clientInfo_t *ci;
 	int voiceChatNum, i, j, k, gender;
@@ -799,11 +740,6 @@ typedef struct bufferedVoiceChat_s
 
 bufferedVoiceChat_t voiceChatBuffer[MAX_VOICECHATBUFFER];
 
-/*
-=================
-CG_PlayVoiceChat
-=================
-*/
 void CG_PlayVoiceChat( bufferedVoiceChat_t *vchat ) {
 #ifdef MISSIONPACK
 	// if we are going into the intermission, don't start any voices
@@ -833,11 +769,6 @@ void CG_PlayVoiceChat( bufferedVoiceChat_t *vchat ) {
 #endif
 }
 
-/*
-=====================
-CG_PlayBufferedVoieChats
-=====================
-*/
 void CG_PlayBufferedVoiceChats( void ) {
 #ifdef MISSIONPACK
 	if ( cg.voiceChatTime < cg.time ) {
@@ -852,11 +783,6 @@ void CG_PlayBufferedVoiceChats( void ) {
 #endif
 }
 
-/*
-=====================
-CG_AddBufferedVoiceChat
-=====================
-*/
 void CG_AddBufferedVoiceChat( bufferedVoiceChat_t *vchat ) {
 #ifdef MISSIONPACK
 	// if we are going into the intermission, don't start any voices
@@ -873,11 +799,6 @@ void CG_AddBufferedVoiceChat( bufferedVoiceChat_t *vchat ) {
 #endif
 }
 
-/*
-=================
-CG_VoiceChatLocal
-=================
-*/
 void CG_VoiceChatLocal( int mode, qboolean voiceOnly, int clientNum, int color, const char *cmd ) {
 #ifdef MISSIONPACK
 	char *chat;
@@ -922,11 +843,6 @@ void CG_VoiceChatLocal( int mode, qboolean voiceOnly, int clientNum, int color, 
 #endif
 }
 
-/*
-=================
-CG_VoiceChat
-=================
-*/
 void CG_VoiceChat( int mode ) {
 #ifdef MISSIONPACK
 	const char *cmd;
@@ -950,11 +866,6 @@ void CG_VoiceChat( int mode ) {
 #endif
 }
 
-/*
-=================
-CG_RemoveChatEscapeChar
-=================
-*/
 static void CG_RemoveChatEscapeChar( char *text ) {
 	int i, l;
 

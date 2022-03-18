@@ -274,11 +274,6 @@ void AddPointToBounds( const vec3_t v, vec3_t mins, vec3_t maxs ) {
 }
 
 
-/*
-=================
-PlaneTypeForNormal
-=================
-*/
 int	PlaneTypeForNormal (vec3_t normal) {
 	if (normal[0] == 1.0 || normal[0] == -1.0)
 		return PLANE_X;
@@ -290,11 +285,6 @@ int	PlaneTypeForNormal (vec3_t normal) {
 	return PLANE_NON_AXIAL;
 }
 
-/*
-================
-MatrixMultiply
-================
-*/
 void MatrixMultiply(float in1[3][3], float in2[3][3], float out[3][3]) {
 	out[0][0] = in1[0][0] * in2[0][0] + in1[0][1] * in2[1][0] +
 				in1[0][2] * in2[2][0];

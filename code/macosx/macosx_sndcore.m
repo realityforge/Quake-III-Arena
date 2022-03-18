@@ -44,11 +44,6 @@ static qboolean     s_isRunning;
 static AudioDeviceID outputDeviceID;
 static AudioStreamBasicDescription outputStreamBasicDescription;
 
-/*
-===============
-audioDeviceIOProc
-===============
-*/
 
 OSStatus audioDeviceIOProc(AudioDeviceID inDevice,
                            const AudioTimeStamp *inNow,
@@ -117,11 +112,6 @@ OSStatus audioDeviceIOProc(AudioDeviceID inDevice,
 }
 
 
-/*
-===============
-S_MakeTestPattern
-===============
-*/
 void S_MakeTestPattern( void ) {
     int i;
     float v;
@@ -135,11 +125,6 @@ void S_MakeTestPattern( void ) {
     }
 }
 
-/*
-===============
-SNDDMA_Init
-===============
-*/
 qboolean SNDDMA_Init(void)
 {
     cvar_t *bufferSize;
@@ -256,31 +241,16 @@ qboolean SNDDMA_Init(void)
     return qtrue;
 }
 
-/*
-===============
-SNDDMA_GetBufferDuration
-===============
-*/
 float SNDDMA_GetBufferDuration(void)
 {
     return (float)dma.samples / (float)(dma.channels * dma.speed);
 }
 
-/*
-===============
-SNDDMA_GetDMAPos
-===============
-*/
 int SNDDMA_GetDMAPos(void)
 {
     return s_chunkCount * dma.submission_chunk;
 }
 
-/*
-===============
-SNDDMA_Shutdown
-===============
-*/
 void SNDDMA_Shutdown(void)
 {
     OSStatus status;
@@ -307,19 +277,9 @@ void SNDDMA_Shutdown(void)
     dma.samples = NULL;
 }
 
-/*
-===============
-SNDDMA_BeginPainting
-===============
-*/
 void SNDDMA_BeginPainting(void) {
 }
 
-/*
-===============
-SNDDMA_Submit
-===============
-*/
 void SNDDMA_Submit(void) {
 }
 

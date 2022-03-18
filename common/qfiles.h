@@ -35,15 +35,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // the maximum size of game reletive pathnames
 #define	MAX_QPATH		64
 
-
-/*
-========================================================================
-
-QVM files
-
-========================================================================
-*/
-
 #define	VM_MAGIC	0x12721444
 typedef struct {
 	int		vmMagic;

@@ -413,11 +413,6 @@ static void SV_KickNum_f( void ) {
 	cl->lastPacketTime = svs.time;	// in case there is a funny zombie
 }
 
-/*
-================
-SV_Status_f
-================
-*/
 static void SV_Status_f( void ) {
 	int			i, j, l;
 	client_t	*cl;
@@ -479,11 +474,6 @@ static void SV_Status_f( void ) {
 }
 #ifdef DEDICATED
 
-/*
-==================
-SV_ConSay_f
-==================
-*/
 static void SV_ConSay_f(void) {
 	char	*p;
 	char	text[1024];
@@ -582,22 +572,12 @@ static void SV_DumpUser_f( void ) {
 }
 
 
-/*
-=================
-SV_KillServer
-=================
-*/
 static void SV_KillServer_f( void ) {
 	SV_Shutdown( "killserver" );
 }
 
 //===========================================================
 
-/*
-==================
-SV_AddOperatorCommands
-==================
-*/
 void SV_AddOperatorCommands( void ) {
 	static qboolean	initialized;
 

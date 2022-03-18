@@ -219,11 +219,6 @@ void SortTextures(void)
 	g_qeglobals.d_qtextures = qhead;
 }
 
-/*
-==============
-Texture_InitPalette
-==============
-*/
 void Texture_InitPalette (byte *pal)
 {
     int		r,g,b,v;
@@ -285,11 +280,6 @@ void SetTexParameters (void)
 	}
 }
 
-/*
-============
-Texture_SetMode
-============
-*/
 void Texture_SetMode(int iMenu)
 {
 	int	i, iMode;
@@ -423,11 +413,6 @@ void R_MipMap (byte *in, int &width, int &height)
 	}
 }
 
-/*
-=================
-Texture_LoadTexture
-=================
-*/
 //++timo NOTE: miptex_t is used only for .WAL format .. a bit outdated
 qtexture_t *Texture_LoadTexture (miptex_t *qtex)
 {
@@ -535,11 +520,6 @@ qtexture_t *Texture_LoadTexture (miptex_t *qtex)
 
 
 
-/*
-=================
-Texture_LoadTexture
-=================
-*/
 qtexture_t *Texture_LoadTGATexture (unsigned char* pPixels, int nWidth, int nHeight, char* pPath, int nFlags, int nContents, int nValue )
 {
   int i, j, inf;
@@ -747,11 +727,6 @@ qtexture_t *Texture_CreateSolid (const char *name)
 }
 
 
-/*
-=================
-Texture_MakeDefault
-=================
-*/
 qtexture_t* Texture_MakeDefault (void)
 {
   qtexture_t	*q;
@@ -795,11 +770,6 @@ qtexture_t* Texture_MakeDefault (void)
 }
 
 
-/*
-=================
-Texture_MakeNotexture
-=================
-*/
 void Texture_MakeNotexture (void)
 {
   notexture = Texture_MakeDefault();
@@ -1144,11 +1114,6 @@ qtexture_t * Texture_MakeNoshadertexture( const char *name )
 
 
 
-/*
-===============
-Texture_ForName
-===============
-*/
 //bReload is set to true when called from DemandLoadShaderTexture because it should never re-use
 //an already loaded texture
 qtexture_t *Texture_ForName (const char *name, bool bReplace, bool bShader, bool bNoAlpha, bool bReload, bool makeShader)
@@ -1372,11 +1337,6 @@ qtexture_t *Texture_ForName (const char *name, bool bReplace, bool bShader, bool
 	return q;
 }
 
-/*
-===============
-Texture_ForNamePath
-===============
-*/
 qtexture_t *Texture_ForNamePath(char* name, char* pFullPath)
 {
   byte    *lump;
@@ -1476,12 +1436,6 @@ qtexture_t *Texture_ForNamePath(char* name, char* pFullPath)
 
 
 
-/*
-==================
-FillTextureMenu
-
-==================
-*/
 void FillTextureMenu (CStringArray* pArray)
 {
 	HMENU	hmenu;
@@ -1609,11 +1563,6 @@ void LoadShadersFromDir(const char *pPath)
 }
 
 
-/*
-==============
-Texture_ShowDirectory
-==============
-*/
 void	Texture_ShowDirectory (int menunum, bool bLinked)
 {
 	struct _finddata_t fileinfo;
@@ -1860,12 +1809,6 @@ void Texture_ResetPosition()
 
 
 
-/*
-==================
-Texture_SetInuse
-
-==================
-*/
 void Texture_SetInuse (void)
 {
 	qtexture_t	*q;
@@ -1877,11 +1820,6 @@ void Texture_SetInuse (void)
 }
 
 
-/*
-==============
-Texture_ShowAll
-==============
-*/
 void	Texture_ShowAll()
 {
   Texture_SetInuse();
@@ -1889,11 +1827,6 @@ void	Texture_ShowAll()
 	Sys_UpdateWindows (W_TEXTURE);
 }
 
-/*
-==============
-Texture_ShowInuse
-==============
-*/
 void	Texture_ShowInuse (void)
 {
 	face_t	*f;
@@ -2282,11 +2215,6 @@ void SelectTexture (int mx, int my, bool bShift, bool bFitScale)
 	Sys_Status("Did not select a texture\n", 0);
 }
 
-/*
-==============
-Texture_MouseDown
-==============
-*/
 void Texture_MouseDown (int x, int y, int buttons)
 {
 	Sys_GetCursorPos (&textures_cursorx, &textures_cursory);
@@ -2300,20 +2228,10 @@ void Texture_MouseDown (int x, int y, int buttons)
 	}
 }
 
-/*
-==============
-Texture_MouseUp
-==============
-*/
 void Texture_MouseUp (int x, int y, int buttons)
 {
 }
 
-/*
-==============
-Texture_MouseMoved
-==============
-*/
 void Texture_MouseMoved (int x, int y, int buttons)
 {
 	int scale = 1;
@@ -2344,13 +2262,7 @@ void Texture_MouseMoved (int x, int y, int buttons)
 }
 
 
-/*
-============================================================================
 
-DRAWING
-
-============================================================================
-*/
 
 int imax(int iFloor, int i) { if (i>iFloor) return iFloor; return i; }
 HFONT ghFont = NULL;
@@ -2613,11 +2525,6 @@ void Texture_Cleanup(CStringList *pList)
 
 }
 
-/*
-==================
-Texture_Flush
-==================
-*/
 void Texture_Flush (bool bReload)
 {
   if (!ConfirmModified())
@@ -2686,11 +2593,6 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CTexWnd message handlers
 
-/*
-============
-WTexWndProc
-============
-*/
 LONG WINAPI TexWndProc (
     HWND    hWnd,
     UINT    uMsg,

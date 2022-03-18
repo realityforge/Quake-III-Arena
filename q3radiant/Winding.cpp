@@ -28,11 +28,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define	BOGUS_RANGE	18000
 
-/*
-=============
-Plane_Equal
-=============
-*/
 #define	NORMAL_EPSILON	0.0001
 #define	DIST_EPSILON	0.02
 
@@ -62,11 +57,6 @@ int Plane_Equal(plane_t *a, plane_t *b, int flip)
 	return false;
 }
 
-/*
-============
-Plane_FromPoints
-============
-*/
 int Plane_FromPoints(vec3_t p1, vec3_t p2, vec3_t p3, plane_t *plane)
 {
 	vec3_t v1, v2;
@@ -80,11 +70,6 @@ int Plane_FromPoints(vec3_t p1, vec3_t p2, vec3_t p3, plane_t *plane)
 	return true;
 }
 
-/*
-=================
-Point_Equal
-=================
-*/
 int Point_Equal(vec3_t p1, vec3_t p2, float epsilon)
 {
 	int i;
@@ -97,11 +82,6 @@ int Point_Equal(vec3_t p1, vec3_t p2, float epsilon)
 }
 
 
-/*
-=================
-Winding_BaseForPlane
-=================
-*/
 winding_t *Winding_BaseForPlane (plane_t *p)
 {
 	int		i, x;
@@ -169,11 +149,6 @@ winding_t *Winding_BaseForPlane (plane_t *p)
 	return w;	
 }
 
-/*
-==================
-Winding_Alloc
-==================
-*/
 winding_t *Winding_Alloc (int points)
 {
 	winding_t	*w;
@@ -197,11 +172,6 @@ void Winding_Free (winding_t *w)
 }
 
 
-/*
-==================
-Winding_Clone
-==================
-*/
 winding_t *Winding_Clone(winding_t *w)
 {
 	int			size;
@@ -213,11 +183,6 @@ winding_t *Winding_Clone(winding_t *w)
 	return c;
 }
 
-/*
-==================
-ReverseWinding
-==================
-*/
 winding_t *Winding_Reverse(winding_t *w)
 {
 	int			i;
@@ -233,11 +198,6 @@ winding_t *Winding_Reverse(winding_t *w)
 }
 
 
-/*
-==============
-Winding_RemovePoint
-==============
-*/
 void Winding_RemovePoint(winding_t *w, int point)
 {
 	if (point < 0 || point >= w->numpoints)
@@ -250,11 +210,6 @@ void Winding_RemovePoint(winding_t *w, int point)
 	w->numpoints--;
 }
 
-/*
-=============
-Winding_InsertPoint
-=============
-*/
 winding_t *Winding_InsertPoint(winding_t *w, vec3_t point, int spot)
 {
 	int i, j;
@@ -285,11 +240,6 @@ winding_t *Winding_InsertPoint(winding_t *w, vec3_t point, int spot)
 	return neww;
 }
 
-/*
-==============
-Winding_IsTiny
-==============
-*/
 #define	EDGE_LENGTH	0.2
 
 int Winding_IsTiny (winding_t *w)
@@ -314,11 +264,6 @@ int Winding_IsTiny (winding_t *w)
 	return true;
 }
 
-/*
-==============
-Winding_IsHuge
-==============
-*/
 int Winding_IsHuge(winding_t *w)
 {
 	int		i, j;
@@ -332,11 +277,6 @@ int Winding_IsHuge(winding_t *w)
 	return false;
 }
 
-/*
-=============
-Winding_PlanesConcave
-=============
-*/
 #define WCONVEX_EPSILON		0.2
 
 int Winding_PlanesConcave(winding_t *w1, winding_t *w2,
@@ -692,11 +632,6 @@ winding_t *Winding_TryMerge(winding_t *f1, winding_t *f2, vec3_t planenormal, in
 	return newf;
 }
 
-/*
-============
-Winding_Plane
-============
-*/
 void Winding_Plane (winding_t *w, vec3_t normal, double *dist)
 {
 	vec3_t v1, v2;
@@ -714,11 +649,6 @@ void Winding_Plane (winding_t *w, vec3_t normal, double *dist)
 	*dist = DotProduct(w->points[0], normal);
 }
 
-/*
-=============
-Winding_Area
-=============
-*/
 float Winding_Area (winding_t *w)
 {
 	int		i;
@@ -736,11 +666,6 @@ float Winding_Area (winding_t *w)
 	return total;
 }
 
-/*
-=============
-Winding_Bounds
-=============
-*/
 void Winding_Bounds (winding_t *w, vec3_t mins, vec3_t maxs)
 {
 	vec_t	v;
@@ -763,11 +688,6 @@ void Winding_Bounds (winding_t *w, vec3_t mins, vec3_t maxs)
 }
 
 
-/*
-=================
-Winding_PointInside
-=================
-*/
 int Winding_PointInside(winding_t *w, plane_t *plane, vec3_t point, float epsilon)
 {
 	int i;
@@ -785,11 +705,6 @@ int Winding_PointInside(winding_t *w, plane_t *plane, vec3_t point, float epsilo
 	return true;
 }
 
-/*
-=================
-Winding_VectorIntersect
-=================
-*/
 int Winding_VectorIntersect(winding_t *w, plane_t *plane, vec3_t p1, vec3_t p2, float epsilon)
 {
 	float front, back, frac;

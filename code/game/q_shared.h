@@ -376,13 +376,7 @@ void *Hunk_Alloc( int size, ha_pref preference );
 #define CIN_silent	8
 #define CIN_shader	16
 
-/*
-==============================================================
 
-MATHLIB
-
-==============================================================
-*/
 
 
 typedef float vec_t;
@@ -871,11 +865,6 @@ COLLISION DETECTION
 #define	PLANE_NON_AXIAL	3
 
 
-/*
-=================
-PlaneTypeForNormal
-=================
-*/
 
 #define PlaneTypeForNormal(x) (x[0] == 1.0 ? PLANE_X : (x[1] == 1.0 ? PLANE_Y : (x[2] == 1.0 ? PLANE_Z : PLANE_NON_AXIAL) ) )
 
@@ -943,15 +932,6 @@ typedef enum {
 	CHAN_LOCAL_SOUND,	// chat messages, etc
 	CHAN_ANNOUNCER		// announcer voices, etc
 } soundChannel_t;
-
-
-/*
-========================================================================
-
-  ELEMENTS COMMUNICATED ACROSS THE NET
-
-========================================================================
-*/
 
 #define	ANGLE2SHORT(x)	((int)((x)*65536/360) & 65535)
 #define	SHORT2ANGLE(x)	((x)*(360.0/65536))

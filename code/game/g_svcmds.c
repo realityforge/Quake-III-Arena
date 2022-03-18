@@ -70,11 +70,6 @@ typedef struct ipFilter_s
 static ipFilter_t	ipFilters[MAX_IPFILTERS];
 static int			numIPFilters;
 
-/*
-=================
-StringToFilter
-=================
-*/
 static qboolean StringToFilter (char *s, ipFilter_t *f)
 {
 	char	num[128];
@@ -125,11 +120,6 @@ static qboolean StringToFilter (char *s, ipFilter_t *f)
 	return qtrue;
 }
 
-/*
-=================
-UpdateIPBans
-=================
-*/
 static void UpdateIPBans (void)
 {
 	byte	b[4];
@@ -169,11 +159,6 @@ static void UpdateIPBans (void)
 	trap_Cvar_Set( "g_banIPs", iplist_final );
 }
 
-/*
-=================
-G_FilterPacket
-=================
-*/
 qboolean G_FilterPacket (char *from)
 {
 	int		i;
@@ -203,11 +188,6 @@ qboolean G_FilterPacket (char *from)
 	return g_filterBan.integer == 0;
 }
 
-/*
-=================
-AddIP
-=================
-*/
 static void AddIP( char *str )
 {
 	int		i;
@@ -231,12 +211,7 @@ static void AddIP( char *str )
 	UpdateIPBans();
 }
 
-/*
-=================
-G_ProcessIPBans
-=================
-*/
-void G_ProcessIPBans(void) 
+void G_ProcessIPBans(void)
 {
 	char *s, *t;
 	char		str[MAX_CVAR_VALUE_STRING];
@@ -256,11 +231,6 @@ void G_ProcessIPBans(void)
 }
 
 
-/*
-=================
-Svcmd_AddIP_f
-=================
-*/
 void Svcmd_AddIP_f (void)
 {
 	char		str[MAX_TOKEN_CHARS];
@@ -276,11 +246,6 @@ void Svcmd_AddIP_f (void)
 
 }
 
-/*
-=================
-Svcmd_RemoveIP_f
-=================
-*/
 void Svcmd_RemoveIP_f (void)
 {
 	ipFilter_t	f;
@@ -311,11 +276,6 @@ void Svcmd_RemoveIP_f (void)
 	G_Printf ( "Didn't find %s.\n", str );
 }
 
-/*
-===================
-Svcmd_EntityList_f
-===================
-*/
 void	Svcmd_EntityList_f (void) {
 	int			e;
 	gentity_t		*check;
@@ -437,12 +397,6 @@ void	Svcmd_ForceTeam_f( void ) {
 
 char	*ConcatArgs( int start );
 
-/*
-=================
-ConsoleCommand
-
-=================
-*/
 qboolean	ConsoleCommand( void ) {
 	char	cmd[MAX_TOKEN_CHARS];
 

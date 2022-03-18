@@ -531,11 +531,6 @@ int BotExportTest(int parm0, char *parm1, vec3_t parm2, vec3_t parm3)
 }
 
 
-/*
-============
-Init_AAS_Export
-============
-*/
 static void Init_AAS_Export( aas_export_t *aas ) {
 	//--------------------------------------------
 	// be_aas_entity.c
@@ -586,11 +581,6 @@ static void Init_AAS_Export( aas_export_t *aas ) {
 }
 
   
-/*
-============
-Init_EA_Export
-============
-*/
 static void Init_EA_Export( ea_export_t *ea ) {
 	//ClientCommand elementary actions
 	ea->EA_Command = EA_Command;
@@ -622,11 +612,6 @@ static void Init_EA_Export( ea_export_t *ea ) {
 }
 
 
-/*
-============
-Init_AI_Export
-============
-*/
 static void Init_AI_Export( ai_export_t *ai ) {
 	//-----------------------------------
 	// be_ai_char.h
@@ -724,11 +709,6 @@ static void Init_AI_Export( ai_export_t *ai ) {
 }
 
 
-/*
-============
-GetBotLibAPI
-============
-*/
 botlib_export_t *GetBotLibAPI(int apiVersion, botlib_import_t *import) {
 	assert(import);   // bk001129 - this wasn't set for baseq3/
   botimport = *import;

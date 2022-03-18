@@ -354,11 +354,6 @@ char *copystring(char *s)
 
 
 
-/*
-================
-I_FloatTime
-================
-*/
 double I_FloatTime (void)
 {
 	time_t	t;
@@ -591,11 +586,6 @@ int CheckParm (char *check)
 
 
 
-/*
-================
-Q_filelength
-================
-*/
 int Q_filelength (FILE *f)
 {
 	int		pos;
@@ -649,11 +639,6 @@ void SafeWrite (FILE *f, void *buffer, int count)
 }
 
 
-/*
-==============
-FileExists
-==============
-*/
 qboolean	FileExists (char *filename)
 {
 	FILE	*f;
@@ -665,11 +650,6 @@ qboolean	FileExists (char *filename)
 	return true;
 }
 
-/*
-==============
-LoadFile
-==============
-*/
 int    LoadFile (char *filename, void **bufferptr, int offset, int length)
 {
 	FILE	*f;
@@ -717,11 +697,6 @@ int    TryLoadFile (char *filename, void **bufferptr)
 }
 
 
-/*
-==============
-SaveFile
-==============
-*/
 void    SaveFile (char *filename, void *buffer, int count)
 {
 	FILE	*f;
@@ -1150,11 +1125,6 @@ unsigned short CRC_Value(unsigned short crcvalue)
 }
 //=============================================================================
 
-/*
-============
-CreatePath
-============
-*/
 void	CreatePath (char *path)
 {
 	char	*ofs, c;

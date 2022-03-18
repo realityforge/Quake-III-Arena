@@ -65,11 +65,6 @@ int				c_natural, c_rotate, c_cant;
 #define	LINE_POSITION_EPSILON	0.25
 #define	POINT_ON_LINE_EPSILON	0.25
 
-/*
-====================
-InsertPointOnEdge
-====================
-*/
 void InsertPointOnEdge( vec3_t v, edgeLine_t *e ) {
 	vec3_t		delta;
 	float		d;
@@ -114,11 +109,6 @@ void InsertPointOnEdge( vec3_t v, edgeLine_t *e ) {
 }
 
 
-/*
-====================
-AddEdge
-====================
-*/
 int AddEdge( vec3_t v1, vec3_t v2, qboolean createNonAxial ) {
 	int			i;
 	edgeLine_t	*e;
@@ -196,11 +186,6 @@ int AddEdge( vec3_t v1, vec3_t v2, qboolean createNonAxial ) {
 	return numEdgeLines - 1;
 }
 
-/*
-====================
-AddSurfaceEdges
-====================
-*/
 void AddSurfaceEdges( mapDrawSurface_t *ds ) {
 	int		i;
 
@@ -212,11 +197,6 @@ void AddSurfaceEdges( mapDrawSurface_t *ds ) {
 	}
 }
 
-/*
-================
-ColinearEdge
-================
-*/
 qboolean ColinearEdge( vec3_t v1, vec3_t v2, vec3_t v3 ) {
 	vec3_t	midpoint, dir, offset, on;
 	float	d;
@@ -296,11 +276,6 @@ void AddPatchEdges( mapDrawSurface_t *ds ) {
 }
 
 
-/*
-====================
-FixSurfaceJunctions
-====================
-*/
 #define	MAX_SURFACE_VERTS	256
 void FixSurfaceJunctions( mapDrawSurface_t *ds ) {
 	int			i, j, k;
@@ -460,11 +435,6 @@ void FixSurfaceJunctions( mapDrawSurface_t *ds ) {
 	}
 }
 
-/*
-================
-EdgeCompare
-================
-*/
 int EdgeCompare( const void *elem1, const void *elem2 ) {
 	float	d1, d2;
 

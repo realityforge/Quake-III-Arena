@@ -132,11 +132,6 @@ entity_t *Map_FindClass (char *cname)
 	return NULL;
 }
 
-/*
-================
-Map_Free
-================
-*/
 void Map_Free (void)
 {
   g_bRestoreBetween = false;
@@ -212,11 +207,6 @@ entity_t *AngledEntity()
 
 
 
-/*
-================
-Map_LoadFile
-================
-*/
 void Map_LoadFile (char *filename)
 {
     char		*buf;
@@ -334,11 +324,6 @@ void Map_LoadFile (char *filename)
 
 }
 
-/*
-===========
-Map_SaveFile
-===========
-*/
 void Map_SaveFile (char *filename, qboolean use_region )
 {
 	entity_t	*e, *next;
@@ -442,11 +427,6 @@ void Map_SaveFile (char *filename, qboolean use_region )
   //Patch_WriteFile (filename);
 }
 
-/*
-===========
-Map_New
-===========
-*/
 void Map_New (void)
 {
 	Sys_Printf ("Map_New\n");
@@ -474,13 +454,7 @@ void Map_New (void)
 	modified = false;
 }
 
-/*
-===========================================================
 
-  REGION
-
-===========================================================
-*/
 
 qboolean	region_active;
 vec3_t	region_mins = {MIN_WORLD_COORD, MIN_WORLD_COORD, MIN_WORLD_COORD};
@@ -616,11 +590,6 @@ void Map_ApplyRegion (void)
 }
 
 
-/*
-========================
-Map_RegionSelectedBrushes
-========================
-*/
 void Map_RegionSelectedBrushes (void)
 {
 	Map_RegionOff ();
@@ -652,11 +621,6 @@ void Map_RegionSelectedBrushes (void)
 }
 
 
-/*
-===========
-Map_RegionXY
-===========
-*/
 void Map_RegionXY (void)
 {
 	Map_RegionOff ();
@@ -670,11 +634,6 @@ void Map_RegionXY (void)
 	Map_ApplyRegion ();
 }
 
-/*
-===========
-Map_RegionTallBrush
-===========
-*/
 void Map_RegionTallBrush (void)
 {
 	brush_t	*b;
@@ -695,11 +654,6 @@ void Map_RegionTallBrush (void)
 	Select_Delete ();
 	Map_ApplyRegion ();
 }
-/*
-===========
-Map_RegionBrush
-===========
-*/
 void Map_RegionBrush (void)
 {
 	brush_t	*b;

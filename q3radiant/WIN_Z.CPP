@@ -27,11 +27,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 static HDC   s_hdcZ;
 static HGLRC s_hglrcZ;
 
-/*
-============
-WZ_WndProc
-============
-*/
 LONG WINAPI WZ_WndProc (
     HWND    hWnd,
     UINT    uMsg,
@@ -153,11 +148,6 @@ LONG WINAPI WZ_WndProc (
 }
 
 
-/*
-==============
-WZ_Create
-==============
-*/
 void WZ_Create (HINSTANCE hInstance)
 {
   WNDCLASS   wc;

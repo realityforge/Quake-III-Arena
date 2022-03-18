@@ -47,11 +47,6 @@ void WriteFloat (FILE *f, vec_t v)
 		fprintf (f,"%f ",v);
 }
 
-/*
-=================
-WritePortalFile_r
-=================
-*/
 void WritePortalFile_r (node_t *node)
 {
 	int			i, s;	
@@ -110,11 +105,6 @@ void WritePortalFile_r (node_t *node)
 
 }
 
-/*
-=================
-WriteFaceFile_r
-=================
-*/
 void WriteFaceFile_r (node_t *node)
 {
 	int			i, s;	
@@ -172,11 +162,6 @@ void WriteFaceFile_r (node_t *node)
 	}
 }
 
-/*
-================
-NumberLeafs_r
-================
-*/
 void NumberLeafs_r (node_t *node)
 {
 	portal_t	*p;
@@ -221,11 +206,6 @@ void NumberLeafs_r (node_t *node)
 }
 
 
-/*
-================
-NumberClusters
-================
-*/
 void NumberClusters(tree_t *tree) {
 	num_visclusters = 0;
 	num_visportals = 0;
@@ -241,11 +221,6 @@ void NumberClusters(tree_t *tree) {
 	qprintf ("%5i solidfaces\n", num_solidfaces);
 }
 
-/*
-================
-WritePortalFile
-================
-*/
 void WritePortalFile (tree_t *tree)
 {
 	char	filename[1024];

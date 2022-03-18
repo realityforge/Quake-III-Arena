@@ -217,11 +217,6 @@ void SubdivideAreaLight( shaderInfo_t *ls, winding_t *w, vec3_t normal,
 }
 
 
-/*
-===============
-CountLightmaps
-===============
-*/
 void CountLightmaps( void ) {
 	int			count;
 	int			i;
@@ -381,11 +376,6 @@ void CreateSurfaceLights( void ) {
 
 
 
-/*
-================
-FindSkyBrushes
-================
-*/
 void FindSkyBrushes( void ) {
 	int				i, j;
 	dbrush_t		*b;
@@ -435,11 +425,6 @@ void FindSkyBrushes( void ) {
 =================================================================
 */
 
-/*
-==================
-FindTargetEntity
-==================
-*/
 entity_t *FindTargetEntity( const char *target ) {
 	int			i;
 	const char	*n;
@@ -456,11 +441,6 @@ entity_t *FindTargetEntity( const char *target ) {
 
 
 
-/*
-=============
-CreateEntityLights
-=============
-*/
 void CreateEntityLights (void)
 {
 	int		i;
@@ -592,21 +572,8 @@ void SetEntityOrigins( void ) {
 	}
 }
 
-
-/*
-=================================================================
-
-
-=================================================================
-*/
-
 #define	MAX_POINTS_ON_WINDINGS	64
 
-/*
-================
-PointToPolygonFormFactor
-================
-*/
 float	PointToPolygonFormFactor( const vec3_t point, const vec3_t normal, const winding_t *w ) {
 	vec3_t		triVector, triNormal;
 	int			i, j;
@@ -813,11 +780,6 @@ void SunToPoint( const vec3_t origin, traceWork_t *tw, vec3_t addLight ) {
 	VectorClear( addLight );
 }
 
-/*
-================
-SunToPlane
-================
-*/
 void SunToPlane( const vec3_t origin, const vec3_t normal, vec3_t color, traceWork_t *tw ) {
 	float		angle;
 	vec3_t		sunColor;
@@ -835,12 +797,7 @@ void SunToPlane( const vec3_t origin, const vec3_t normal, vec3_t color, traceWo
 	VectorMA( color, angle, sunColor, color );
 }
 
-/*
-================
-LightingAtSample
-================
-*/
-void LightingAtSample( vec3_t origin, vec3_t normal, vec3_t color, 
+void LightingAtSample( vec3_t origin, vec3_t normal, vec3_t color,
 					  qboolean testOcclusion, qboolean forceSunLight, traceWork_t *tw ) {
 	light_t		*light;
 	trace_t		trace;
@@ -1159,11 +1116,6 @@ mesh_t *LinearSubdivideMesh( mesh_t *in ) {
 	return out;
 }
 
-/*
-==============
-ColorToBytes
-==============
-*/
 void ColorToBytes( const float *color, byte *colorBytes ) {
 	float	max;
 	vec3_t	sample;
@@ -1188,11 +1140,6 @@ void ColorToBytes( const float *color, byte *colorBytes ) {
 
 
 
-/*
-=============
-TraceLtm
-=============
-*/
 void TraceLtm( int num ) {
 	dsurface_t	*ds;
 	int			i, j, k;
@@ -1479,11 +1426,6 @@ vec3_t	gridSize = { 64, 64, 128 };
 int		gridBounds[3];
 
 
-/*
-========================
-LightContributionToPoint
-========================
-*/
 qboolean LightContributionToPoint( const light_t *light, const vec3_t origin,
 								  vec3_t color, traceWork_t *tw ) {
 	trace_t		trace;
@@ -1738,11 +1680,6 @@ void TraceGrid( int num ) {
 }
 
 
-/*
-=============
-SetupGrid
-=============
-*/
 void SetupGrid( void ) {
 	int		i;
 	vec3_t	maxs;
@@ -1761,11 +1698,6 @@ void SetupGrid( void ) {
 
 //=============================================================================
 
-/*
-=============
-RemoveLightsInSolid
-=============
-*/
 void RemoveLightsInSolid(void)
 {
 	light_t *light, *prev;
@@ -1795,11 +1727,6 @@ void RemoveLightsInSolid(void)
 	_printf (" %7i lights in solid\n", numsolid);
 }
 
-/*
-=============
-LightWorld
-=============
-*/
 void LightWorld (void) {
 	float		f;
 
@@ -1932,11 +1859,6 @@ void CreateFilters( void ) {
 	f->si = ShaderInfoForShader( "textures/hell/blocks11ct" );
 }
 
-/*
-=============
-VertexLightingThread
-=============
-*/
 void VertexLightingThread(int num) {
 	dsurface_t	*ds;
 	traceWork_t	tw;
@@ -1962,11 +1884,6 @@ void VertexLightingThread(int num) {
 	VertexLighting( ds, si->vertexShadows, si->forceSunLight, si->vertexScale, &tw );
 }
 
-/*
-=============
-TriSoupLightingThread
-=============
-*/
 void TriSoupLightingThread(int num) {
 	dsurface_t	*ds;
 	traceWork_t	tw;
@@ -1981,11 +1898,6 @@ void TriSoupLightingThread(int num) {
 	}
 }
 
-/*
-=============
-GridAndVertexLighting
-=============
-*/
 void GridAndVertexLighting(void) {
 	SetupGrid();
 
@@ -2009,12 +1921,6 @@ void GridAndVertexLighting(void) {
 	RunThreadsOnIndividual( numDrawSurfaces, qtrue, TriSoupLightingThread );
 }
 
-/*
-========
-LightMain
-
-========
-*/
 int LightMain (int argc, char **argv) {
 	int			i;
 	double		start, end;

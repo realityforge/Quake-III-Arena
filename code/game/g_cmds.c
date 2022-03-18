@@ -24,12 +24,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "../../ui/menudef.h"			// for the voice chats
 
-/*
-==================
-DeathmatchScoreboardMessage
-
-==================
-*/
 void DeathmatchScoreboardMessage( gentity_t *ent ) {
 	char		entry[1024];
 	char		string[1400];
@@ -101,11 +95,6 @@ void Cmd_Score_f( gentity_t *ent ) {
 
 
 
-/*
-==================
-CheatsOk
-==================
-*/
 qboolean	CheatsOk( gentity_t *ent ) {
 	if ( !g_cheats.integer ) {
 		trap_SendServerCommand( ent-g_entities, va("print \"Cheats are not enabled on this server.\n\""));
@@ -119,11 +108,6 @@ qboolean	CheatsOk( gentity_t *ent ) {
 }
 
 
-/*
-==================
-ConcatArgs
-==================
-*/
 char	*ConcatArgs( int start ) {
 	int		i, c, tlen;
 	static char	line[MAX_STRING_CHARS];
@@ -456,11 +440,6 @@ void Cmd_TeamTask_f( gentity_t *ent ) {
 
 
 
-/*
-=================
-Cmd_Kill_f
-=================
-*/
 void Cmd_Kill_f( gentity_t *ent ) {
 	if ( ent->client->sess.sessionTeam == TEAM_SPECTATOR ) {
 		return;
@@ -497,11 +476,6 @@ void BroadcastTeamChange( gclient_t *client, int oldTeam )
 	}
 }
 
-/*
-=================
-SetTeam
-=================
-*/
 void SetTeam( gentity_t *ent, char *s ) {
 	int					team, oldTeam;
 	gclient_t			*client;
@@ -652,11 +626,6 @@ void StopFollowing( gentity_t *ent ) {
 	ent->client->ps.clientNum = ent - g_entities;
 }
 
-/*
-=================
-Cmd_Team_f
-=================
-*/
 void Cmd_Team_f( gentity_t *ent ) {
 	int			oldTeam;
 	char		s[MAX_TOKEN_CHARS];
@@ -699,11 +668,6 @@ void Cmd_Team_f( gentity_t *ent ) {
 }
 
 
-/*
-=================
-Cmd_Follow_f
-=================
-*/
 void Cmd_Follow_f( gentity_t *ent ) {
 	int		i;
 	char	arg[MAX_TOKEN_CHARS];
@@ -746,11 +710,6 @@ void Cmd_Follow_f( gentity_t *ent ) {
 	ent->client->sess.spectatorClient = i;
 }
 
-/*
-=================
-Cmd_FollowCycle_f
-=================
-*/
 void Cmd_FollowCycle_f( gentity_t *ent, int dir ) {
 	int		clientnum;
 	int		original;
@@ -800,11 +759,6 @@ void Cmd_FollowCycle_f( gentity_t *ent, int dir ) {
 }
 
 
-/*
-==================
-G_Say
-==================
-*/
 
 static void G_SayTo( gentity_t *ent, gentity_t *other, int mode, int color, const char *name, const char *message ) {
 	if (!other) {
@@ -897,11 +851,6 @@ void G_Say( gentity_t *ent, gentity_t *target, int mode, const char *chatText ) 
 }
 
 
-/*
-==================
-Cmd_Say_f
-==================
-*/
 static void Cmd_Say_f( gentity_t *ent, int mode, qboolean arg0 ) {
 	char		*p;
 
@@ -921,11 +870,6 @@ static void Cmd_Say_f( gentity_t *ent, int mode, qboolean arg0 ) {
 	G_Say( ent, NULL, mode, p );
 }
 
-/*
-==================
-Cmd_Tell_f
-==================
-*/
 static void Cmd_Tell_f( gentity_t *ent ) {
 	int			targetNum;
 	gentity_t	*target;
@@ -1021,11 +965,6 @@ void G_Voice( gentity_t *ent, gentity_t *target, int mode, const char *id, qbool
 	}
 }
 
-/*
-==================
-Cmd_Voice_f
-==================
-*/
 static void Cmd_Voice_f( gentity_t *ent, int mode, qboolean arg0, qboolean voiceonly ) {
 	char		*p;
 
@@ -1045,11 +984,6 @@ static void Cmd_Voice_f( gentity_t *ent, int mode, qboolean arg0, qboolean voice
 	G_Voice( ent, NULL, mode, p, voiceonly );
 }
 
-/*
-==================
-Cmd_VoiceTell_f
-==================
-*/
 static void Cmd_VoiceTell_f( gentity_t *ent, qboolean voiceonly ) {
 	int			targetNum;
 	gentity_t	*target;
@@ -1083,11 +1017,6 @@ static void Cmd_VoiceTell_f( gentity_t *ent, qboolean voiceonly ) {
 }
 
 
-/*
-==================
-Cmd_VoiceTaunt_f
-==================
-*/
 static void Cmd_VoiceTaunt_f( gentity_t *ent ) {
 	gentity_t *who;
 	int i;
@@ -1187,11 +1116,6 @@ void Cmd_GameCommand_f( gentity_t *ent ) {
 	G_Say( ent, ent, SAY_TELL, gc_orders[order] );
 }
 
-/*
-==================
-Cmd_Where_f
-==================
-*/
 void Cmd_Where_f( gentity_t *ent ) {
 	trap_SendServerCommand( ent-g_entities, va("print \"%s\n\"", vtos( ent->s.origin ) ) );
 }
@@ -1207,11 +1131,6 @@ static const char *gameNames[] = {
 	"Harvester"
 };
 
-/*
-==================
-Cmd_CallVote_f
-==================
-*/
 void Cmd_CallVote_f( gentity_t *ent ) {
 	int		i;
 	char	arg1[MAX_STRING_TOKENS];
@@ -1320,11 +1239,6 @@ void Cmd_CallVote_f( gentity_t *ent ) {
 	trap_SetConfigstring( CS_VOTE_NO, va("%i", level.voteNo ) );	
 }
 
-/*
-==================
-Cmd_Vote_f
-==================
-*/
 void Cmd_Vote_f( gentity_t *ent ) {
 	char		msg[64];
 
@@ -1359,11 +1273,6 @@ void Cmd_Vote_f( gentity_t *ent ) {
 	// for players entering or leaving
 }
 
-/*
-==================
-Cmd_CallTeamVote_f
-==================
-*/
 void Cmd_CallTeamVote_f( gentity_t *ent ) {
 	int		i, team, cs_offset;
 	char	arg1[MAX_STRING_TOKENS];
@@ -1486,11 +1395,6 @@ void Cmd_CallTeamVote_f( gentity_t *ent ) {
 	trap_SetConfigstring( CS_TEAMVOTE_NO + cs_offset, va("%i", level.teamVoteNo[cs_offset] ) );
 }
 
-/*
-==================
-Cmd_TeamVote_f
-==================
-*/
 void Cmd_TeamVote_f( gentity_t *ent ) {
 	int			team, cs_offset;
 	char		msg[64];
@@ -1535,11 +1439,6 @@ void Cmd_TeamVote_f( gentity_t *ent ) {
 }
 
 
-/*
-=================
-Cmd_SetViewpos_f
-=================
-*/
 void Cmd_SetViewpos_f( gentity_t *ent ) {
 	vec3_t		origin, angles;
 	char		buffer[MAX_TOKEN_CHARS];
@@ -1568,11 +1467,6 @@ void Cmd_SetViewpos_f( gentity_t *ent ) {
 
 
 
-/*
-=================
-Cmd_Stats_f
-=================
-*/
 void Cmd_Stats_f( gentity_t *ent ) {
 /*
 	int max, n, i;
@@ -1590,11 +1484,6 @@ void Cmd_Stats_f( gentity_t *ent ) {
 */
 }
 
-/*
-=================
-ClientCommand
-=================
-*/
 void ClientCommand( int clientNum ) {
 	gentity_t *ent;
 	char	cmd[MAX_TOKEN_CHARS];

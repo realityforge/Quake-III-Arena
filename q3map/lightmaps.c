@@ -87,11 +87,6 @@ qboolean AllocLMBlock (int w, int h, int *x, int *y)
 }
 
 
-/*
-===================
-AllocateLightmapForPatch
-===================
-*/
 //#define LIGHTMAP_PATCHSHIFT
 
 void AllocateLightmapForPatch( mapDrawSurface_t *ds ) {
@@ -182,11 +177,6 @@ void AllocateLightmapForPatch( mapDrawSurface_t *ds ) {
 }
 
 
-/*
-===================
-AllocateLightmapForSurface
-===================
-*/
 //#define	LIGHTMAP_BLOCK	16
 void AllocateLightmapForSurface( mapDrawSurface_t *ds ) {
 	vec3_t		mins, maxs, size, exactSize, delta;
@@ -320,11 +310,6 @@ void AllocateLightmapForSurface( mapDrawSurface_t *ds ) {
 	VectorCopy( plane->normal, ds->lightmapVecs[2] );
 }
 
-/*
-===================
-AllocateLightmaps
-===================
-*/
 void AllocateLightmaps( entity_t *e ) {
 	int				i, j;
 	mapDrawSurface_t	*ds;

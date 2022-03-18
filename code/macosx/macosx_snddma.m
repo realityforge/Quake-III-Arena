@@ -50,11 +50,6 @@ static	int				 s_chunkCount;		// number of chunks submitted
 static	SndChannel		*s_sndChan;
 static	ExtSoundHeader	s_sndHeader;
 
-/*
-===============
-S_Callback
-===============
-*/
 void S_Callback( SndChannel *sc, SndCommand *cmd )
 {
     SndCommand		mySndCmd;
@@ -92,11 +87,6 @@ void S_Callback( SndChannel *sc, SndCommand *cmd )
     s_chunkCount++;		// this is the next buffer we will submit
 }
 
-/*
-===============
-S_MakeTestPattern
-===============
-*/
 void S_MakeTestPattern( void ) {
 	int		i;
 	float	v;
@@ -110,11 +100,6 @@ void S_MakeTestPattern( void ) {
 	}
 }
 
-/*
-===============
-SNDDMA_Init
-===============
-*/
 qboolean SNDDMA_Init(void)
 {
     int		err;
@@ -167,20 +152,10 @@ qboolean SNDDMA_Init(void)
     return qtrue;
 }
 
-/*
-===============
-SNDDMA_GetDMAPos
-===============
-*/
 int	SNDDMA_GetDMAPos(void) {
     return s_chunkCount * submissionChunk;
 }
 
-/*
-===============
-SNDDMA_Shutdown
-===============
-*/
 void SNDDMA_Shutdown(void) {
 	if ( s_sndChan ) {
 		SndDisposeChannel( s_sndChan, true );
@@ -188,18 +163,8 @@ void SNDDMA_Shutdown(void) {
 	}
 }
 
-/*
-===============
-SNDDMA_BeginPainting
-===============
-*/
 void SNDDMA_BeginPainting(void) {
 }
 
-/*
-===============
-SNDDMA_Submit
-===============
-*/
 void SNDDMA_Submit(void) {
 }

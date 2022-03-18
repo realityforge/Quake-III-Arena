@@ -22,16 +22,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "qbsp.h"
 
-
-/*
-===============================================================
-
-MESH SUBDIVISION
-
-===============================================================
-*/
-
-
 int	originalWidths[MAX_EXPANDED_AXIS];
 int	originalHeights[MAX_EXPANDED_AXIS];
 
@@ -39,11 +29,6 @@ int	neighbors[8][2] = {
 	{0,1}, {1,1}, {1,0}, {1,-1}, {0,-1}, {-1,-1}, {-1,0}, {-1,1}
 };
 
-/*
-============
-LerpDrawVert
-============
-*/
 void LerpDrawVert( drawVert_t *a, drawVert_t *b, drawVert_t *out ) {
 	out->xyz[0] = 0.5 * (a->xyz[0] + b->xyz[0]);
 	out->xyz[1] = 0.5 * (a->xyz[1] + b->xyz[1]);
@@ -138,12 +123,6 @@ void InvertMesh( mesh_t *in ) {
 	}
 }
 
-/*
-=================
-MakeMeshNormals
-
-=================
-*/
 void MakeMeshNormals( mesh_t in ) {
 	int		i, j, k, dist;
 	vec3_t	normal;
@@ -281,12 +260,6 @@ void PutMeshOnCurve( mesh_t in ) {
 }
 
 
-/*
-=================
-SubdivideMesh
-
-=================
-*/
 mesh_t *SubdivideMesh( mesh_t in, float maxError, float minLength ) {
 	int			i, j, k, l;
 	drawVert_t	prev, next, mid;
@@ -443,11 +416,6 @@ mesh_t *SubdivideMesh( mesh_t in, float maxError, float minLength ) {
 	return CopyMesh(&out);
 }
 
-/*
-================
-ProjectPointOntoVector
-================
-*/
 void ProjectPointOntoVector( vec3_t point, vec3_t vStart, vec3_t vEnd, vec3_t vProj )
 {
 	vec3_t pVec, vec;
@@ -459,11 +427,6 @@ void ProjectPointOntoVector( vec3_t point, vec3_t vStart, vec3_t vEnd, vec3_t vP
 	VectorMA( vStart, DotProduct( pVec, vec ), vec, vProj );
 }
 
-/*
-================
-RemoveLinearMeshColumsRows
-================
-*/
 mesh_t *RemoveLinearMeshColumnsRows( mesh_t *in ) {
 	int i, j, k;
 	float len, maxLength;
@@ -537,11 +500,6 @@ mesh_t *RemoveLinearMeshColumnsRows( mesh_t *in ) {
 	return CopyMesh(&out);
 }
 
-/*
-============
-LerpDrawVertAmount
-============
-*/
 void LerpDrawVertAmount( drawVert_t *a, drawVert_t *b, float amount, drawVert_t *out ) {
 	out->xyz[0] = a->xyz[0] + amount * (b->xyz[0] - a->xyz[0]);
 	out->xyz[1] = a->xyz[1] + amount * (b->xyz[1] - a->xyz[1]);
@@ -564,11 +522,6 @@ void LerpDrawVertAmount( drawVert_t *a, drawVert_t *b, float amount, drawVert_t 
 	VectorNormalize(out->normal, out->normal);
 }
 
-/*
-=================
-SubdivideMeshQuads
-=================
-*/
 mesh_t *SubdivideMeshQuads( mesh_t *in, float minLength, int maxsize, int widthtable[], int heighttable[]) {
 	int			i, j, k, w, h, maxsubdivisions, subdivisions;
 	vec3_t		dir;

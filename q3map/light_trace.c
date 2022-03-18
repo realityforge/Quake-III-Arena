@@ -31,11 +31,6 @@ int				c_testFacets;
 
 surfaceTest_t	*surfaceTest[MAX_MAP_DRAW_SURFS];
 
-/*
-=====================
-CM_GenerateBoundaryForPoints
-=====================
-*/
 void CM_GenerateBoundaryForPoints( float boundary[4], float plane[4], vec3_t a, vec3_t b ) {
 	vec3_t	d1;
 
@@ -46,11 +41,6 @@ void CM_GenerateBoundaryForPoints( float boundary[4], float plane[4], vec3_t a, 
 	boundary[3] = DotProduct( a, boundary );
 }
 
-/*
-=====================
-TextureMatrixFromPoints
-=====================
-*/
 void TextureMatrixFromPoints( cFacet_t *f, drawVert_t *a, drawVert_t *b, drawVert_t *c ) {
 	int			i, j;
 	float		t;
@@ -243,11 +233,6 @@ qboolean CM_GenerateFacetFor4Points( cFacet_t *f, drawVert_t *a, drawVert_t *b, 
 
 
 
-/*
-===============
-SphereFromBounds
-===============
-*/
 void SphereFromBounds( vec3_t mins, vec3_t maxs, vec3_t origin, float *radius ) {
 	vec3_t		temp;
 
@@ -258,11 +243,6 @@ void SphereFromBounds( vec3_t mins, vec3_t maxs, vec3_t origin, float *radius ) 
 }
 
 
-/*
-====================
-FacetsForTriangleSurface
-====================
-*/
 void FacetsForTriangleSurface( dsurface_t *dsurf, shaderInfo_t *si, surfaceTest_t *test ) {
 	int			i;
 	drawVert_t	*v1, *v2, *v3, *v4;
@@ -307,11 +287,6 @@ void FacetsForTriangleSurface( dsurface_t *dsurf, shaderInfo_t *si, surfaceTest_
 	test->numFacets = count;
 }
 
-/*
-====================
-FacetsForPatch
-====================
-*/
 void FacetsForPatch( dsurface_t *dsurf, shaderInfo_t *si, surfaceTest_t *test ) {
 	int			i, j;
 	drawVert_t	*v1, *v2, *v3, *v4;
@@ -407,11 +382,6 @@ void InitSurfacesForTesting( void ) {
 }
 
 
-/*
-=====================
-GenerateBoundaryForPoints
-=====================
-*/
 void GenerateBoundaryForPoints( float boundary[4], float plane[4], vec3_t a, vec3_t b ) {
 	vec3_t	d1;
 
@@ -546,16 +516,6 @@ void TraceAgainstFacet( traceWork_t *tr, shaderInfo_t *shader, cFacet_t *facet )
 //	tr->trace->plane.dist = facet->surface[3];
 }
 
-
-/*
-===============================================================
-
-  LINE TRACING
-
-===============================================================
-*/
-
-
 #define	TRACE_ON_EPSILON	0.1
 
 typedef struct tnode_s
@@ -632,11 +592,6 @@ void InitTrace( void ) {
 }
 
 
-/*
-===================
-PointInSolid
-===================
-*/
 qboolean PointInSolid_r( vec3_t start, int node ) {
 	tnode_t	*tnode;
 	float	front;
@@ -677,12 +632,6 @@ qboolean PointInSolid_r( vec3_t start, int node ) {
 	return qfalse;
 }
 
-/*
-=============
-PointInSolid
-
-=============
-*/
 qboolean PointInSolid( vec3_t start ) {
 	return PointInSolid_r( start, 0 );
 }
@@ -768,11 +717,6 @@ int TraceLine_r( int node, const vec3_t start, const vec3_t stop, traceWork_t *t
 //==========================================================================================
 
 
-/*
-================
-SphereCull
-================
-*/
 qboolean	SphereCull( vec3_t start, vec3_t stop, vec3_t origin, float radius ) {
 	vec3_t		v;
 	float		d;
@@ -804,11 +748,6 @@ qboolean	SphereCull( vec3_t start, vec3_t stop, vec3_t origin, float radius ) {
 	return qfalse;		// must be traced against
 }
 
-/*
-================
-TraceAgainstSurface
-================
-*/
 void	TraceAgainstSurface( traceWork_t *tw, surfaceTest_t *surf ) {
 	int		i;
 

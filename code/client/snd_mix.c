@@ -139,12 +139,6 @@ void S_TransferStereo16 (unsigned long *pbuf, int endtime)
 	}
 }
 
-/*
-===================
-S_TransferPaintBuffer
-
-===================
-*/
 void S_TransferPaintBuffer(int endtime)
 {
 	int 	out_idx;
@@ -213,15 +207,6 @@ void S_TransferPaintBuffer(int endtime)
 		}
 	}
 }
-
-
-/*
-===============================================================================
-
-CHANNEL MIXING
-
-===============================================================================
-*/
 
 static void S_PaintChannelFrom16( channel_t *ch, const sfx_t *sc, int count, int sampleOffset, int bufferOffset ) {
 	int						data, aoff, boff;
@@ -439,11 +424,6 @@ void S_PaintChannelFromMuLaw( channel_t *ch, sfx_t *sc, int count, int sampleOff
 	}
 }
 
-/*
-===================
-S_PaintChannels
-===================
-*/
 void S_PaintChannels( int endtime ) {
 	int 	i;
 	int 	end;

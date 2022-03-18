@@ -517,11 +517,6 @@ void Info_Print( const char *s ) {
 	}
 }
 
-/*
-============
-Com_StringContains
-============
-*/
 char *Com_StringContains(char *str1, char *str2, int casesensitive) {
 	int len, i, j;
 
@@ -546,11 +541,6 @@ char *Com_StringContains(char *str1, char *str2, int casesensitive) {
 	return NULL;
 }
 
-/*
-============
-Com_Filter
-============
-*/
 int Com_Filter(char *filter, char *name, int casesensitive)
 {
 	char buf[MAX_TOKEN_CHARS];
@@ -626,11 +616,6 @@ int Com_Filter(char *filter, char *name, int casesensitive)
 	return qtrue;
 }
 
-/*
-============
-Com_FilterPath
-============
-*/
 int Com_FilterPath(char *filter, char *name, int casesensitive)
 {
 	int i;
@@ -658,11 +643,6 @@ int Com_FilterPath(char *filter, char *name, int casesensitive)
 	return Com_Filter(new_filter, new_name, casesensitive);
 }
 
-/*
-============
-Com_HashKey
-============
-*/
 int Com_HashKey(char *string, int maxlen) {
 	int register hash, i;
 
@@ -674,11 +654,6 @@ int Com_HashKey(char *string, int maxlen) {
 	return hash;
 }
 
-/*
-================
-Com_RealTime
-================
-*/
 int Com_RealTime(qtime_t *qtime) {
 	time_t t;
 	struct tm *tms;
@@ -752,11 +727,6 @@ memzone_t	*smallzone;
 
 void Z_CheckHeap( void );
 
-/*
-========================
-Z_ClearZone
-========================
-*/
 void Z_ClearZone( memzone_t *zone, int size ) {
 	memblock_t	*block;
 	
@@ -777,29 +747,14 @@ void Z_ClearZone( memzone_t *zone, int size ) {
 	block->size = size - sizeof(memzone_t);
 }
 
-/*
-========================
-Z_AvailableZoneMemory
-========================
-*/
 int Z_AvailableZoneMemory( memzone_t *zone ) {
 	return zone->size - zone->used;
 }
 
-/*
-========================
-Z_AvailableMemory
-========================
-*/
 int Z_AvailableMemory( void ) {
 	return Z_AvailableZoneMemory( mainzone );
 }
 
-/*
-========================
-Z_Free
-========================
-*/
 void Z_Free( void *ptr ) {
 	memblock_t	*block, *other;
 	memzone_t *zone;
@@ -865,11 +820,6 @@ void Z_Free( void *ptr ) {
 	}
 }
 
-/*
-================
-Z_TagMalloc
-================
-*/
 #ifdef ZONE_DEBUG
 void *Z_TagMallocDebug( int size, int tag, char *label, char *file, int line ) {
 #else
@@ -956,11 +906,6 @@ void *Z_TagMalloc( int size, int tag ) {
 	return (void *) ((byte *)base + sizeof(memblock_t));
 }
 
-/*
-========================
-Z_Malloc
-========================
-*/
 #ifdef ZONE_DEBUG
 void *Z_MallocDebug( int size, char *label, char *file, int line ) {
 #else
@@ -990,11 +935,6 @@ void *S_Malloc( int size ) {
 }
 #endif
 
-/*
-========================
-Z_CheckHeap
-========================
-*/
 void Z_CheckHeap( void ) {
 	memblock_t	*block;
 	
@@ -1013,11 +953,6 @@ void Z_CheckHeap( void ) {
 	}
 }
 
-/*
-========================
-Z_LogZoneHeap
-========================
-*/
 void Z_LogZoneHeap( memzone_t *zone, char *name ) {
 #ifdef ZONE_DEBUG
 	char dump[32], *ptr;
@@ -1066,11 +1001,6 @@ void Z_LogZoneHeap( memzone_t *zone, char *name ) {
 	FS_Write(buf, strlen(buf), logfile);
 }
 
-/*
-========================
-Z_LogHeap
-========================
-*/
 void Z_LogHeap( void ) {
 	Z_LogZoneHeap( mainzone, "MAIN" );
 	Z_LogZoneHeap( smallzone, "SMALL" );
@@ -1193,11 +1123,6 @@ static	int		s_zoneTotal;
 static	int		s_smallZoneTotal;
 
 
-/*
-=================
-Com_Meminfo_f
-=================
-*/
 void Com_Meminfo_f( void ) {
 	memblock_t	*block;
 	int			zoneBytes, zoneBlocks;
@@ -1334,11 +1259,6 @@ void Com_TouchMemory( void ) {
 
 
 
-/*
-=================
-Com_InitZoneMemory
-=================
-*/
 void Com_InitSmallZoneMemory( void ) {
 	s_smallZoneTotal = 512 * 1024;
 	// bk001205 - was malloc
@@ -1371,11 +1291,6 @@ void Com_InitZoneMemory( void ) {
 
 }
 
-/*
-=================
-Hunk_Log
-=================
-*/
 void Hunk_Log( void) {
 	hunkblock_t	*block;
 	char		buf[4096];
@@ -1401,11 +1316,6 @@ void Hunk_Log( void) {
 	FS_Write(buf, strlen(buf), logfile);
 }
 
-/*
-=================
-Hunk_SmallLog
-=================
-*/
 void Hunk_SmallLog( void) {
 	hunkblock_t	*block, *block2;
 	char		buf[4096];
@@ -1449,11 +1359,6 @@ void Hunk_SmallLog( void) {
 	FS_Write(buf, strlen(buf), logfile);
 }
 
-/*
-=================
-Com_InitZoneMemory
-=================
-*/
 void Com_InitHunkMemory( void ) {
 	cvar_t	*cv;
 	int nMinAlloc;
@@ -1500,11 +1405,6 @@ void Com_InitHunkMemory( void ) {
 #endif
 }
 
-/*
-====================
-Hunk_MemoryRemaining
-====================
-*/
 int	Hunk_MemoryRemaining( void ) {
 	int		low, high;
 
@@ -1538,11 +1438,6 @@ void Hunk_ClearToMark( void ) {
 	hunk_high.permanent = hunk_high.temp = hunk_high.mark;
 }
 
-/*
-=================
-Hunk_CheckMark
-=================
-*/
 qboolean Hunk_CheckMark( void ) {
 	if( hunk_low.mark || hunk_high.mark ) {
 		return qtrue;
@@ -1738,11 +1633,6 @@ void *Hunk_AllocateTempMemory( int size ) {
 }
 
 
-/*
-==================
-Hunk_FreeTempMemory
-==================
-*/
 void Hunk_FreeTempMemory( void *buf ) {
 	hunkHeader_t	*hdr;
 
@@ -1797,11 +1687,6 @@ void Hunk_ClearTempMemory( void ) {
 	}
 }
 
-/*
-=================
-Hunk_Trash
-=================
-*/
 void Hunk_Trash( void ) {
 	int length, i, rnd;
 	char *buf, value;
@@ -1857,11 +1742,6 @@ static int com_pushedEventsTail = 0;
 // bk001129 - static
 static sysEvent_t	com_pushedEvents[MAX_PUSHED_EVENTS];
 
-/*
-=================
-Com_InitJournaling
-=================
-*/
 void Com_InitJournaling( void ) {
 	Com_StartupVariable( "journal" );
 	com_journal = Cvar_Get ("journal", "0", CVAR_INIT);
@@ -1887,11 +1767,6 @@ void Com_InitJournaling( void ) {
 	}
 }
 
-/*
-=================
-Com_GetRealEvent
-=================
-*/
 sysEvent_t	Com_GetRealEvent( void ) {
 	int			r;
 	sysEvent_t	ev;
@@ -1931,11 +1806,6 @@ sysEvent_t	Com_GetRealEvent( void ) {
 }
 
 
-/*
-=================
-Com_InitPushEvent
-=================
-*/
 // bk001129 - added
 void Com_InitPushEvent( void ) {
   // clear the static buffer array
@@ -1948,11 +1818,6 @@ void Com_InitPushEvent( void ) {
 }
 
 
-/*
-=================
-Com_PushEvent
-=================
-*/
 void Com_PushEvent( sysEvent_t *event ) {
 	sysEvent_t		*ev;
 	static int printedWarning = 0; // bk001129 - init, bk001204 - explicit int
@@ -1979,11 +1844,6 @@ void Com_PushEvent( sysEvent_t *event ) {
 	com_pushedEventsHead++;
 }
 
-/*
-=================
-Com_GetEvent
-=================
-*/
 sysEvent_t	Com_GetEvent( void ) {
 	if ( com_pushedEventsHead > com_pushedEventsTail ) {
 		com_pushedEventsTail++;
@@ -1992,11 +1852,6 @@ sysEvent_t	Com_GetEvent( void ) {
 	return Com_GetRealEvent();
 }
 
-/*
-=================
-Com_RunAndTimeServerPacket
-=================
-*/
 void Com_RunAndTimeServerPacket( netadr_t *evFrom, msg_t *buf ) {
 	int		t1, t2, msec;
 
@@ -2209,11 +2064,6 @@ static void Com_Crash_f( void ) {
 	* ( int * ) 0 = 0x12345678;
 }
 
-/*
-=================
-Com_Init
-=================
-*/
 void Com_Init( char *commandLine ) {
 	char	*s;
 
@@ -2422,11 +2272,6 @@ void Com_WriteConfig_f( void ) {
 	Com_WriteConfigToFile( filename );
 }
 
-/*
-================
-Com_ModifyMsec
-================
-*/
 int Com_ModifyMsec( int msec ) {
 	int		clampTime;
 
@@ -2474,11 +2319,6 @@ int Com_ModifyMsec( int msec ) {
 	return msec;
 }
 
-/*
-=================
-Com_Frame
-=================
-*/
 void Com_Frame( void ) {
 
 	int		msec, minMsec;
@@ -2624,11 +2464,6 @@ void Com_Frame( void ) {
 	com_frameNumber++;
 }
 
-/*
-=================
-Com_Shutdown
-=================
-*/
 void Com_Shutdown (void) {
 	if (logfile) {
 		FS_FCloseFile (logfile);
@@ -2994,11 +2829,6 @@ command line completion
 ===========================================
 */
 
-/*
-==================
-Field_Clear
-==================
-*/
 void Field_Clear( field_t *edit ) {
   memset(edit->buffer, 0, MAX_EDIT_LINE);
 	edit->cursor = 0;
@@ -3011,12 +2841,6 @@ static int	matchCount;
 // field we are working on, passed to Field_CompleteCommand (&g_consoleCommand for instance)
 static field_t *completionField;
 
-/*
-===============
-FindMatches
-
-===============
-*/
 static void FindMatches( const char *s ) {
 	int		i;
 
@@ -3037,12 +2861,6 @@ static void FindMatches( const char *s ) {
 	}
 }
 
-/*
-===============
-PrintMatches
-
-===============
-*/
 static void PrintMatches( const char *s ) {
 	if ( !Q_stricmpn( s, shortestMatch, strlen( shortestMatch ) ) ) {
 		Com_Printf( "    %s\n", s );

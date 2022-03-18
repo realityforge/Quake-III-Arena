@@ -32,12 +32,6 @@ qboolean		pacifier;
 
 qboolean	threaded;
 
-/*
-=============
-GetThreadWork
-
-=============
-*/
 int	GetThreadWork (void)
 {
 	int	r;
@@ -91,14 +85,6 @@ void RunThreadsOnIndividual (int workcnt, qboolean showpacifier, void(*func)(int
 	RunThreadsOn (workcnt, showpacifier, ThreadWorkerFunction);
 }
 
-
-/*
-===================================================================
-
-WIN32
-
-===================================================================
-*/
 #ifdef WIN32
 
 #define	USED
@@ -145,11 +131,6 @@ void ThreadUnlock (void)
 	LeaveCriticalSection (&crit);
 }
 
-/*
-=============
-RunThreadsOn
-=============
-*/
 void RunThreadsOn (int workcnt, qboolean showpacifier, void(*func)(int))
 {
 	int		threadid[MAX_THREADS];
@@ -239,11 +220,6 @@ void ThreadUnlock (void)
 }
 
 
-/*
-=============
-RunThreadsOn
-=============
-*/
 void RunThreadsOn (int workcnt, qboolean showpacifier, void(*func)(int))
 {
 	int		i;
@@ -302,13 +278,7 @@ void RunThreadsOn (int workcnt, qboolean showpacifier, void(*func)(int))
 
 #endif
 
-/*
-===================================================================
 
-IRIX
-
-===================================================================
-*/
 
 #ifdef _MIPS_ISA 
 #define	USED
@@ -342,11 +312,6 @@ void ThreadUnlock (void)
 }
 
 
-/*
-=============
-RunThreadsOn
-=============
-*/
 void RunThreadsOn (int workcnt, qboolean showpacifier, void(*func)(int))
 {
 	int		i;
@@ -416,11 +381,6 @@ void ThreadUnlock (void)
 {
 }
 
-/*
-=============
-RunThreadsOn
-=============
-*/
 void RunThreadsOn (int workcnt, qboolean showpacifier, void(*func)(int))
 {
 	int		i;

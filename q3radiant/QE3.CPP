@@ -213,11 +213,6 @@ const char *g_pPathFixups[]=
 
 const int g_nPathFixupCount = sizeof(g_pPathFixups) / sizeof(const char*);
 
-/*
-===========
-QE_LoadProject
-===========
-*/
 qboolean QE_LoadProject (char *projectfile)
 {
 	char	*data;
@@ -309,11 +304,6 @@ qboolean QE_LoadProject (char *projectfile)
 	return true;
 }
 
-/*
-===========
-QE_SaveProject
-===========
-*/
 //extern char	*bsp_commands[256];
 
 qboolean QE_SaveProject (const char* pProjectFile)
@@ -339,11 +329,6 @@ qboolean QE_SaveProject (const char* pProjectFile)
 
 
 
-/*
-===========
-QE_KeyDown
-===========
-*/
 #define	SPEED_MOVE	32
 #define	SPEED_TURN	22.5
 
@@ -524,11 +509,6 @@ void QE_CountBrushesAndUpdateStatusBar( void )
 char		com_token[1024];
 qboolean	com_eof;
 
-/*
-================
-I_FloatTime
-================
-*/
 double I_FloatTime (void)
 {
 	time_t	t;
@@ -617,25 +597,9 @@ skipwhite:
 	return data;
 }
 
-
-
-/*
-=============================================================================
-
-						MISC FUNCTIONS
-
-=============================================================================
-*/
-
-
 int		argc;
 char	*argv[MAX_NUM_ARGVS];
 
-/*
-============
-ParseCommandLine
-============
-*/
 void ParseCommandLine (char *lpCmdLine)
 {
 	argc = 1;
@@ -687,14 +651,6 @@ int CheckParm (char *check)
 	return 0;
 }
 
-
-
-
-/*
-==============
-ParseNum / ParseHex
-==============
-*/
 int ParseHex (char *hex)
 {
 	char    *str;

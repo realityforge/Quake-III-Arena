@@ -104,11 +104,6 @@ typedef struct
 
 static playermodel_t s_playermodel;
 
-/*
-=================
-PlayerModel_UpdateGrid
-=================
-*/
 static void PlayerModel_UpdateGrid( void )
 {
 	int	i;
@@ -164,11 +159,6 @@ static void PlayerModel_UpdateGrid( void )
 	}
 }
 
-/*
-=================
-PlayerModel_UpdateModel
-=================
-*/
 static void PlayerModel_UpdateModel( void )
 {
 	vec3_t	viewangles;
@@ -185,11 +175,6 @@ static void PlayerModel_UpdateModel( void )
 	UI_PlayerInfo_SetInfo( &s_playermodel.playerinfo, LEGS_IDLE, TORSO_STAND, viewangles, moveangles, WP_MACHINEGUN, qfalse );
 }
 
-/*
-=================
-PlayerModel_SaveChanges
-=================
-*/
 static void PlayerModel_SaveChanges( void )
 {
 	trap_Cvar_Set( "model", s_playermodel.modelskin );
@@ -198,11 +183,6 @@ static void PlayerModel_SaveChanges( void )
 	trap_Cvar_Set( "team_headmodel", s_playermodel.modelskin );
 }
 
-/*
-=================
-PlayerModel_MenuEvent
-=================
-*/
 static void PlayerModel_MenuEvent( void* ptr, int event )
 {
 	if (event != QM_ACTIVATED)
@@ -233,11 +213,6 @@ static void PlayerModel_MenuEvent( void* ptr, int event )
 	}
 }
 
-/*
-=================
-PlayerModel_MenuKey
-=================
-*/
 static sfxHandle_t PlayerModel_MenuKey( int key )
 {
 	menucommon_s*	m;
@@ -301,11 +276,6 @@ static sfxHandle_t PlayerModel_MenuKey( int key )
 	return ( Menu_DefaultKey( &s_playermodel.menu, key ) );
 }
 
-/*
-=================
-PlayerModel_PicEvent
-=================
-*/
 static void PlayerModel_PicEvent( void* ptr, int event )
 {
 	int				modelnum;
@@ -361,11 +331,6 @@ static void PlayerModel_PicEvent( void* ptr, int event )
 	}
 }
 
-/*
-=================
-PlayerModel_DrawPlayer
-=================
-*/
 static void PlayerModel_DrawPlayer( void *self )
 {
 	menubitmap_s*	b;
@@ -380,11 +345,6 @@ static void PlayerModel_DrawPlayer( void *self )
 	UI_DrawPlayer( b->generic.x, b->generic.y, b->width, b->height, &s_playermodel.playerinfo, uis.realtime/2 );
 }
 
-/*
-=================
-PlayerModel_BuildList
-=================
-*/
 static void PlayerModel_BuildList( void )
 {
 	int		numdirs;
@@ -449,11 +409,6 @@ static void PlayerModel_BuildList( void )
 		s_playermodel.numpages++;
 }
 
-/*
-=================
-PlayerModel_SetMenuItems
-=================
-*/
 static void PlayerModel_SetMenuItems( void )
 {
 	int				i;
@@ -507,11 +462,6 @@ static void PlayerModel_SetMenuItems( void )
 	}
 }
 
-/*
-=================
-PlayerModel_MenuInit
-=================
-*/
 static void PlayerModel_MenuInit( void )
 {
 	int			i;
@@ -700,11 +650,6 @@ static void PlayerModel_MenuInit( void )
 	PlayerModel_UpdateModel();
 }
 
-/*
-=================
-PlayerModel_Cache
-=================
-*/
 void PlayerModel_Cache( void )
 {
 	int	i;

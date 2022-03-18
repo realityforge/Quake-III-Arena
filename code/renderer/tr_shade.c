@@ -48,12 +48,6 @@ static void APIENTRY R_ArrayElementDiscrete( GLint index ) {
 	qglVertex3fv( tess.xyz[ index ] );
 }
 
-/*
-===================
-R_DrawStripElements
-
-===================
-*/
 static int		c_vertexes;		// for seeing how long our average strips are
 static int		c_begins;
 static void R_DrawStripElements( int numIndexes, const glIndex_t *indexes, void ( APIENTRY *element )(GLint) ) {
@@ -196,24 +190,9 @@ static void R_DrawElements( int numIndexes, const glIndex_t *indexes ) {
 	// anything else will cause no drawing
 }
 
-
-/*
-=============================================================
-
-SURFACE SHADERS
-
-=============================================================
-*/
-
 shaderCommands_t	tess;
 static qboolean	setArraysOnce;
 
-/*
-=================
-R_BindAnimatedImage
-
-=================
-*/
 static void R_BindAnimatedImage( textureBundle_t *bundle ) {
 	int		index;
 
@@ -556,11 +535,6 @@ static void RB_FogPass( void ) {
 	R_DrawElements( tess.numIndexes, tess.indexes );
 }
 
-/*
-===============
-ComputeColors
-===============
-*/
 static void ComputeColors( shaderStage_t *pStage )
 {
 	int		i;
@@ -750,11 +724,6 @@ static void ComputeColors( shaderStage_t *pStage )
 	}
 }
 
-/*
-===============
-ComputeTexCoords
-===============
-*/
 static void ComputeTexCoords( shaderStage_t *pStage ) {
 	int		i;
 	int		b;

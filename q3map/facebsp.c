@@ -26,11 +26,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 int			c_faceLeafs;
 
 
-/*
-================
-AllocBspFace
-================
-*/
 bspface_t	*AllocBspFace( void ) {
 	bspface_t	*f;
 
@@ -40,11 +35,6 @@ bspface_t	*AllocBspFace( void ) {
 	return f;
 }
 
-/*
-================
-FreeBspFace
-================
-*/
 void	FreeBspFace( bspface_t *f ) {
 	if ( f->w ) {
 		FreeWinding( f->w );
@@ -53,11 +43,6 @@ void	FreeBspFace( bspface_t *f ) {
 }
 
 
-/*
-================
-SelectSplitPlaneNum
-================
-*/
 int hintsplit;
 
 #define	BLOCK_SIZE	1024
@@ -149,11 +134,6 @@ int	CountFaceList( bspface_t *list ) {
 	return c;
 }
 
-/*
-================
-BuildFaceTree_r
-================
-*/
 void	BuildFaceTree_r( node_t *node, bspface_t *list ) {
 	bspface_t	*split;
 	bspface_t	*next;
@@ -284,11 +264,6 @@ tree_t *FaceBSP( bspface_t *list ) {
 }
 
 
-/*
-=================
-BspFaceForPortal
-=================
-*/
 bspface_t *BspFaceForPortal( portal_t *p ) {
 	bspface_t	*f;
 
@@ -301,11 +276,6 @@ bspface_t *BspFaceForPortal( portal_t *p ) {
 
 
 
-/*
-=================
-MakeStructuralBspFaceList
-=================
-*/
 bspface_t	*MakeStructuralBspFaceList( bspbrush_t *list ) {
 	bspbrush_t	*b;
 	int			i;
@@ -339,11 +309,6 @@ bspface_t	*MakeStructuralBspFaceList( bspbrush_t *list ) {
 	return flist;
 }
 
-/*
-=================
-MakeVisibleBspFaceList
-=================
-*/
 bspface_t	*MakeVisibleBspFaceList( bspbrush_t *list ) {
 	bspbrush_t	*b;
 	int			i;

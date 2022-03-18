@@ -82,11 +82,6 @@ void Spk_Printf (const char *text, ...)
 };
 #endif
 
-/*
-==================
-Sys_LowPhysicalMemory()
-==================
-*/
 
 qboolean Sys_LowPhysicalMemory() {
 	MEMORYSTATUS stat;
@@ -94,11 +89,6 @@ qboolean Sys_LowPhysicalMemory() {
 	return (stat.dwTotalPhys <= MEM_THRESHOLD) ? qtrue : qfalse;
 }
 
-/*
-==================
-Sys_BeginProfiling
-==================
-*/
 void Sys_BeginProfiling( void ) {
 	// this is just used on the mac build
 }
@@ -141,11 +131,6 @@ void QDECL Sys_Error( const char *error, ... ) {
 	exit (1);
 }
 
-/*
-==============
-Sys_Quit
-==============
-*/
 void Sys_Quit( void ) {
 	timeEndPeriod( 1 );
 	IN_Shutdown();
@@ -154,30 +139,15 @@ void Sys_Quit( void ) {
 	exit (0);
 }
 
-/*
-==============
-Sys_Print
-==============
-*/
 void Sys_Print( const char *msg ) {
 	Conbuf_AppendText( msg );
 }
 
 
-/*
-==============
-Sys_Mkdir
-==============
-*/
 void Sys_Mkdir( const char *path ) {
 	_mkdir (path);
 }
 
-/*
-==============
-Sys_Cwd
-==============
-*/
 char *Sys_Cwd( void ) {
 	static char cwd[MAX_OSPATH];
 
@@ -187,20 +157,10 @@ char *Sys_Cwd( void ) {
 	return cwd;
 }
 
-/*
-==============
-Sys_DefaultCDPath
-==============
-*/
 char *Sys_DefaultCDPath( void ) {
 	return "";
 }
 
-/*
-==============
-Sys_DefaultBasePath
-==============
-*/
 char *Sys_DefaultBasePath( void ) {
 	return Sys_Cwd();
 }
@@ -395,12 +355,6 @@ void	Sys_FreeFileList( char **list ) {
 //========================================================
 
 #ifndef DEDICATED
-/*
-================
-Sys_GetClipboardData
-
-================
-*/
 char *Sys_GetClipboardData( void ) {
 	char *data = NULL;
 	char *cliptext;
@@ -431,12 +385,6 @@ LOAD/UNLOAD DLL
 ========================================================================
 */
 
-/*
-=================
-Sys_UnloadDll
-
-=================
-*/
 void Sys_UnloadDll( void *dllHandle ) {
 	if ( !dllHandle ) {
 		return;
@@ -537,15 +485,6 @@ void * QDECL Sys_LoadDll( const char *name, char *fqpath , int (QDECL **entryPoi
 	return libHandle;
 }
 
-
-/*
-========================================================================
-
-BACKGROUND FILE STREAMING
-
-========================================================================
-*/
-
 #if 1
 
 void Sys_InitStreamThread( void ) {
@@ -632,12 +571,6 @@ void Sys_StreamThread( void ) {
 	}
 }
 
-/*
-===============
-Sys_InitStreamThread
-
-================
-*/
 void Sys_InitStreamThread( void ) {
 	int i;
 
@@ -660,22 +593,10 @@ void Sys_InitStreamThread( void ) {
 	}
 }
 
-/*
-===============
-Sys_ShutdownStreamThread
-
-================
-*/
 void Sys_ShutdownStreamThread( void ) {
 }
 
 
-/*
-===============
-Sys_BeginStreamedFile
-
-================
-*/
 void Sys_BeginStreamedFile( fileHandle_t f, int readAhead ) {
 	if ( stream.sIO[f].file ) {
 		Sys_EndStreamedFile( stream.sIO[f].file );
@@ -693,12 +614,6 @@ void Sys_BeginStreamedFile( fileHandle_t f, int readAhead ) {
 //	LeaveCriticalSection( &stream.crit );
 }
 
-/*
-===============
-Sys_EndStreamedFile
-
-================
-*/
 void Sys_EndStreamedFile( fileHandle_t f ) {
 	if ( f != stream.sIO[f].file ) {
 		Com_Error( ERR_FATAL, "Sys_EndStreamedFile: wrong file");
@@ -715,12 +630,6 @@ void Sys_EndStreamedFile( fileHandle_t f ) {
 }
 
 
-/*
-===============
-Sys_StreamedRead
-
-================
-*/
 int Sys_StreamedRead( void *buffer, int size, int count, fileHandle_t f ) {
 	int		available;
 	int		remaining;
@@ -778,12 +687,6 @@ int Sys_StreamedRead( void *buffer, int size, int count, fileHandle_t f ) {
 	return (count * size - remaining) / size;
 }
 
-/*
-===============
-Sys_StreamSeek
-
-================
-*/
 void Sys_StreamSeek( fileHandle_t f, int offset, int origin ) {
 
 	// halt the thread
@@ -852,12 +755,6 @@ void Sys_QueEvent( int time, sysEventType_t type, int value, int value2, int ptr
 	ev->evPtr = ptr;
 }
 
-/*
-================
-Sys_GetEvent
-
-================
-*/
 sysEvent_t Sys_GetEvent( void ) {
     MSG			msg;
 	sysEvent_t	ev;
@@ -1096,12 +993,6 @@ void Sys_Init( void ) {
 
 int	totalMsec, countMsec;
 
-/*
-==================
-WinMain
-
-==================
-*/
 int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	char		cwd[MAX_OSPATH];
 	int			startTime, endTime;

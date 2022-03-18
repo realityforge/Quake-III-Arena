@@ -249,15 +249,6 @@ void SV_MasterShutdown( void ) {
 }
 #endif
 
-
-/*
-==============================================================================
-
-CONNECTIONLESS COMMANDS
-
-==============================================================================
-*/
-
 /*
 ================
 SVC_Status
@@ -364,12 +355,6 @@ void SVC_Info( netadr_t from ) {
 	NET_OutOfBandPrint( NS_SERVER, from, "infoResponse\n%s", infostring );
 }
 
-/*
-================
-SVC_FlushRedirect
-
-================
-*/
 void SV_FlushRedirect( char *outputbuf ) {
 	NET_OutOfBandPrint( NS_SERVER, svs.redirectAddress, "print\n%s", outputbuf );
 }
@@ -492,11 +477,6 @@ void SV_ConnectionlessPacket( netadr_t from, msg_t *msg ) {
 
 //============================================================================
 
-/*
-=================
-SV_ReadPackets
-=================
-*/
 void SV_PacketEvent( netadr_t from, msg_t *msg ) {
 	int			i;
 	client_t	*cl;
@@ -658,11 +638,6 @@ void SV_CheckTimeouts( void ) {
 }
 
 
-/*
-==================
-SV_CheckPaused
-==================
-*/
 qboolean SV_CheckPaused( void ) {
 	int		count;
 	client_t	*cl;

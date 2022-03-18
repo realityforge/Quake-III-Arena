@@ -236,11 +236,6 @@ void HL_FreeMaxBSP(void)
 }
 //#endif //ME
 
-/*
-===============
-FastChecksum
-===============
-*/
 
 int FastChecksum(void *buffer, int bytes)
 {
@@ -252,11 +247,6 @@ int FastChecksum(void *buffer, int bytes)
 	return checksum;
 }
 
-/*
-===============
-HL_CompressVis
-===============
-*/
 int HL_CompressVis(byte *vis, byte *dest)
 {
 	int		j;
@@ -287,11 +277,6 @@ int HL_CompressVis(byte *vis, byte *dest)
 }
 
 
-/*
-===================
-HL_DecompressVis
-===================
-*/
 void HL_DecompressVis (byte *in, byte *decompressed)
 {
 	int		c;
@@ -512,11 +497,6 @@ int HL_CopyLump (int lump, void *dest, int size, int maxsize)
 	return length / size;
 }
 
-/*
-=============
-HL_LoadBSPFile
-=============
-*/
 void	HL_LoadBSPFile (char *filename, int offset, int length)
 {
 	int			i;

@@ -75,11 +75,6 @@ worldSector_t	sv_worldSectors[AREA_NODES];
 int			sv_numworldSectors;
 
 
-/*
-===============
-SV_SectorList_f
-===============
-*/
 void SV_SectorList_f( void ) {
 	int				i, c;
 	worldSector_t	*sec;
@@ -138,12 +133,6 @@ worldSector_t *SV_CreateworldSector( int depth, vec3_t mins, vec3_t maxs ) {
 	return anode;
 }
 
-/*
-===============
-SV_ClearWorld
-
-===============
-*/
 void SV_ClearWorld( void ) {
 	clipHandle_t	h;
 	vec3_t			mins, maxs;
@@ -158,12 +147,6 @@ void SV_ClearWorld( void ) {
 }
 
 
-/*
-===============
-SV_UnlinkEntity
-
-===============
-*/
 void SV_UnlinkEntity( sharedEntity_t *gEnt ) {
 	svEntity_t		*ent;
 	svEntity_t		*scan;
@@ -195,12 +178,6 @@ void SV_UnlinkEntity( sharedEntity_t *gEnt ) {
 }
 
 
-/*
-===============
-SV_LinkEntity
-
-===============
-*/
 #define MAX_TOTAL_ENT_LEAFS		128
 void SV_LinkEntity( sharedEntity_t *gEnt ) {
 	worldSector_t	*node;
@@ -373,12 +350,6 @@ typedef struct {
 } areaParms_t;
 
 
-/*
-====================
-SV_AreaEntities_r
-
-====================
-*/
 void SV_AreaEntities_r( worldSector_t *node, areaParms_t *ap ) {
 	svEntity_t	*check, *next;
 	sharedEntity_t *gcheck;
@@ -422,11 +393,6 @@ void SV_AreaEntities_r( worldSector_t *node, areaParms_t *ap ) {
 	}
 }
 
-/*
-================
-SV_AreaEntities
-================
-*/
 int SV_AreaEntities( const vec3_t mins, const vec3_t maxs, int *entityList, int maxcount ) {
 	areaParms_t		ap;
 
@@ -459,12 +425,6 @@ typedef struct {
 } moveclip_t;
 
 
-/*
-====================
-SV_ClipToEntity
-
-====================
-*/
 void SV_ClipToEntity( trace_t *trace, const vec3_t start, const vec3_t mins, const vec3_t maxs, const vec3_t end, int entityNum, int contentmask, int capsule ) {
 	sharedEntity_t	*touch;
 	clipHandle_t	clipHandle;
@@ -501,12 +461,6 @@ void SV_ClipToEntity( trace_t *trace, const vec3_t start, const vec3_t mins, con
 }
 
 
-/*
-====================
-SV_ClipMoveToEntities
-
-====================
-*/
 void SV_ClipMoveToEntities( moveclip_t *clip ) {
 	int			i, num;
 	int			touchlist[MAX_GENTITIES];
@@ -649,11 +603,6 @@ void SV_Trace( trace_t *results, const vec3_t start, vec3_t mins, vec3_t maxs, c
 
 
 
-/*
-=============
-SV_PointContents
-=============
-*/
 int SV_PointContents( const vec3_t p, int passEntityNum ) {
 	int			touch[MAX_GENTITIES];
 	sharedEntity_t *hit;

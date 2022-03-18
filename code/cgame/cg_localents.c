@@ -51,11 +51,6 @@ void	CG_InitLocalEntities( void ) {
 }
 
 
-/*
-==================
-CG_FreeLocalEntity
-==================
-*/
 void CG_FreeLocalEntity( localEntity_t *le ) {
 	if ( !le->prev ) {
 		CG_Error( "CG_FreeLocalEntity: not active" );
@@ -148,11 +143,6 @@ void CG_BloodTrail( localEntity_t *le ) {
 }
 
 
-/*
-================
-CG_FragmentBounceMark
-================
-*/
 void CG_FragmentBounceMark( localEntity_t *le, trace_t *trace ) {
 	int			radius;
 
@@ -174,11 +164,6 @@ void CG_FragmentBounceMark( localEntity_t *le, trace_t *trace ) {
 	le->leMarkType = LEMT_NONE;
 }
 
-/*
-================
-CG_FragmentBounceSound
-================
-*/
 void CG_FragmentBounceSound( localEntity_t *le, trace_t *trace ) {
 	if ( le->leBounceSoundType == LEBS_BLOOD ) {
 		// half the gibs will make splat sounds
@@ -205,11 +190,6 @@ void CG_FragmentBounceSound( localEntity_t *le, trace_t *trace ) {
 }
 
 
-/*
-================
-CG_ReflectVelocity
-================
-*/
 void CG_ReflectVelocity( localEntity_t *le, trace_t *trace ) {
 	vec3_t	velocity;
 	float	dot;
@@ -237,11 +217,6 @@ void CG_ReflectVelocity( localEntity_t *le, trace_t *trace ) {
 	}
 }
 
-/*
-================
-CG_AddFragment
-================
-*/
 void CG_AddFragment( localEntity_t *le ) {
 	vec3_t	newOrigin;
 	trace_t	trace;
@@ -324,11 +299,6 @@ These only do simple scaling or modulation before passing to the renderer
 =====================================================================
 */
 
-/*
-====================
-CG_AddFadeRGB
-====================
-*/
 void CG_AddFadeRGB( localEntity_t *le ) {
 	refEntity_t *re;
 	float c;
@@ -346,11 +316,6 @@ void CG_AddFadeRGB( localEntity_t *le ) {
 	trap_R_AddRefEntityToScene( re );
 }
 
-/*
-==================
-CG_AddMoveScaleFade
-==================
-*/
 static void CG_AddMoveScaleFade( localEntity_t *le ) {
 	refEntity_t	*re;
 	float		c;
@@ -466,11 +431,6 @@ static void CG_AddFallScaleFade( localEntity_t *le ) {
 
 
 
-/*
-================
-CG_AddExplosion
-================
-*/
 static void CG_AddExplosion( localEntity_t *ex ) {
 	refEntity_t	*ent;
 
@@ -494,11 +454,6 @@ static void CG_AddExplosion( localEntity_t *ex ) {
 	}
 }
 
-/*
-================
-CG_AddSpriteExplosion
-================
-*/
 static void CG_AddSpriteExplosion( localEntity_t *le ) {
 	refEntity_t	re;
 	float c;
@@ -537,11 +492,6 @@ static void CG_AddSpriteExplosion( localEntity_t *le ) {
 
 
 #ifdef MISSIONPACK
-/*
-====================
-CG_AddKamikaze
-====================
-*/
 void CG_AddKamikaze( localEntity_t *le ) {
 	refEntity_t	*re;
 	refEntity_t shockwave;
@@ -665,20 +615,10 @@ void CG_AddKamikaze( localEntity_t *le ) {
 	}
 }
 
-/*
-===================
-CG_AddInvulnerabilityImpact
-===================
-*/
 void CG_AddInvulnerabilityImpact( localEntity_t *le ) {
 	trap_R_AddRefEntityToScene( &le->refEntity );
 }
 
-/*
-===================
-CG_AddInvulnerabilityJuiced
-===================
-*/
 void CG_AddInvulnerabilityJuiced( localEntity_t *le ) {
 	int t;
 
@@ -697,11 +637,6 @@ void CG_AddInvulnerabilityJuiced( localEntity_t *le ) {
 	}
 }
 
-/*
-===================
-CG_AddRefEntity
-===================
-*/
 void CG_AddRefEntity( localEntity_t *le ) {
 	if (le->endTime < cg.time) {
 		CG_FreeLocalEntity( le );
@@ -711,11 +646,6 @@ void CG_AddRefEntity( localEntity_t *le ) {
 }
 
 #endif
-/*
-===================
-CG_AddScorePlum
-===================
-*/
 #define NUMBER_SIZE		8
 
 void CG_AddScorePlum( localEntity_t *le ) {
@@ -802,12 +732,6 @@ void CG_AddScorePlum( localEntity_t *le ) {
 
 //==============================================================================
 
-/*
-===================
-CG_AddLocalEntities
-
-===================
-*/
 void CG_AddLocalEntities( void ) {
 	localEntity_t	*le, *next;
 

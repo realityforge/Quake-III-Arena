@@ -320,13 +320,7 @@ typedef enum {
 #define UI_PULSE		0x00004000
 
 
-/*
-==============================================================
 
-MATHLIB
-
-==============================================================
-*/
 #ifdef __cplusplus			// so we can include this in C code
 #define	SIDE_FRONT		0
 #define	SIDE_BACK		1

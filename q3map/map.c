@@ -65,21 +65,6 @@ void TestExpandBrushes (void);
 void SetTerrainTextures( void );
 void ParseTerrain( void );
 
-
-/*
-=============================================================================
-
-PLANE FINDING
-
-=============================================================================
-*/
-
-
-/*
-================
-PlaneEqual
-================
-*/
 #define	NORMAL_EPSILON	0.00001
 #define	DIST_EPSILON	0.01
 qboolean	PlaneEqual (plane_t *p, vec3_t normal, vec_t dist)
@@ -101,11 +86,6 @@ qboolean	PlaneEqual (plane_t *p, vec3_t normal, vec_t dist)
 	return qfalse;
 }
 
-/*
-================
-AddPlaneToHash
-================
-*/
 void	AddPlaneToHash (plane_t *p)
 {
 	int		hash;
@@ -117,11 +97,6 @@ void	AddPlaneToHash (plane_t *p)
 	planehash[hash] = p;
 }
 
-/*
-================
-CreateNewFloatPlane
-================
-*/
 int CreateNewFloatPlane (vec3_t normal, vec_t dist)
 {
 	plane_t	*p, temp;
@@ -167,11 +142,6 @@ int CreateNewFloatPlane (vec3_t normal, vec_t dist)
 	return nummapplanes - 2;
 }
 
-/*
-==============
-SnapVector
-==============
-*/
 void	SnapVector (vec3_t normal)
 {
 	int		i;
@@ -193,11 +163,6 @@ void	SnapVector (vec3_t normal)
 	}
 }
 
-/*
-==============
-SnapPlane
-==============
-*/
 void	SnapPlane (vec3_t normal, vec_t *dist)
 {
 	SnapVector (normal);
@@ -206,12 +171,6 @@ void	SnapPlane (vec3_t normal, vec_t *dist)
 		*dist = Q_rint(*dist);
 }
 
-/*
-=============
-FindFloatPlane
-
-=============
-*/
 #ifndef USE_HASHING
 int		FindFloatPlane (vec3_t normal, vec_t dist)
 {
@@ -253,11 +212,6 @@ int		FindFloatPlane (vec3_t normal, vec_t dist)
 }
 #endif
 
-/*
-================
-MapPlaneFromPoints
-================
-*/
 int MapPlaneFromPoints (vec3_t p0, vec3_t p1, vec3_t p2) {
 	vec3_t	t1, t2, normal;
 	vec_t	dist;
@@ -630,11 +584,6 @@ bspbrush_t *FinishBrush( void ) {
 //======================================================================
 
 
-/*
-==================
-textureAxisFromPlane
-==================
-*/
 vec3_t	baseaxis[18] =
 {
 {0,0,1}, {1,0,0}, {0,-1,0},			// floor
@@ -1019,11 +968,6 @@ void MoveBrushesToWorld (entity_t *mapent) {
 }
 
 
-/*
-================
-AdjustBrushesForOrigin
-================
-*/
 void AdjustBrushesForOrigin( entity_t *ent ) {
 	bspbrush_t	*b;
 	int			i;
@@ -1049,11 +993,6 @@ void AdjustBrushesForOrigin( entity_t *ent ) {
 
 }
 
-/*
-================
-ParseMapEntity
-================
-*/
 qboolean	ParseMapEntity (void) {
 	epair_t		*e;
 
@@ -1153,12 +1092,7 @@ qboolean	ParseMapEntity (void) {
 //===================================================================
 
 
-/*
-================
-LoadMapFile
-================
-*/
-void LoadMapFile (char *filename) {		
+void LoadMapFile (char *filename) {
 	bspbrush_t	*b;
 
 	qprintf ("--- LoadMapFile ---\n");

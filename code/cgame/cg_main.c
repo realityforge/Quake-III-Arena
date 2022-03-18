@@ -320,11 +320,6 @@ static cvarTable_t cvarTable[] = { // bk001129
 
 static int  cvarTableSize = sizeof( cvarTable ) / sizeof( cvarTable[0] );
 
-/*
-=================
-CG_RegisterCvars
-=================
-*/
 void CG_RegisterCvars( void ) {
 	int			i;
 	cvarTable_t	*cv;
@@ -366,11 +361,6 @@ static void CG_ForceModelChange( void ) {
 	}
 }
 
-/*
-=================
-CG_UpdateCvars
-=================
-*/
 void CG_UpdateCvars( void ) {
 	int			i;
 	cvarTable_t	*cv;
@@ -465,11 +455,6 @@ void QDECL Com_Printf( const char *msg, ... ) {
 
 #endif
 
-/*
-================
-CG_Argv
-================
-*/
 const char *CG_Argv( int arg ) {
 	static char	buffer[MAX_STRING_CHARS];
 
@@ -794,9 +779,6 @@ static void CG_RegisterSounds( void ) {
 #endif
 
 }
-
-
-//===================================================================================
 
 
 /*
@@ -1160,11 +1142,6 @@ static void CG_RegisterClients( void ) {
 
 //===========================================================================
 
-/*
-=================
-CG_ConfigString
-=================
-*/
 const char *CG_ConfigString( int index ) {
 	if ( index < 0 || index >= MAX_CONFIGSTRINGS ) {
 		CG_Error( "CG_ConfigString: bad index: %i", index );
@@ -1174,12 +1151,6 @@ const char *CG_ConfigString( int index ) {
 
 //==================================================================
 
-/*
-======================
-CG_StartMusic
-
-======================
-*/
 void CG_StartMusic( void ) {
 	char	*s;
 	char	parm1[MAX_QPATH], parm2[MAX_QPATH];

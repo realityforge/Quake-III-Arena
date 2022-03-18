@@ -46,25 +46,13 @@ void CG_TargetCommand_f( void ) {
 
 
 
-/*
-=================
-CG_SizeUp_f
 
-Keybinding command
-=================
-*/
 static void CG_SizeUp_f (void) {
 	trap_Cvar_Set("cg_viewsize", va("%i",(int)(cg_viewsize.integer+10)));
 }
 
 
-/*
-=================
-CG_SizeDown_f
 
-Keybinding command
-=================
-*/
 static void CG_SizeDown_f (void) {
 	trap_Cvar_Set("cg_viewsize", va("%i",(int)(cg_viewsize.integer-10)));
 }
@@ -377,11 +365,6 @@ static void CG_TaskSuicide_f (void ) {
 
 
 /*
-==================
-CG_TeamMenu_f
-==================
-*/
-/*
 static void CG_TeamMenu_f( void ) {
   if (trap_Key_GetCatcher() & KEYCATCH_CGAME) {
     CG_EventHandling(CGAME_EVENT_NONE);
@@ -394,11 +377,6 @@ static void CG_TeamMenu_f( void ) {
 */
 
 /*
-==================
-CG_EditHud_f
-==================
-*/
-/*
 static void CG_EditHud_f( void ) {
   //cls.keyCatchers ^= KEYCATCH_CGAME;
   //VM_Call (cgvm, CG_EVENT_HANDLING, (cls.keyCatchers & KEYCATCH_CGAME) ? CGAME_EVENT_EDITHUD : CGAME_EVENT_NONE);
@@ -407,11 +385,6 @@ static void CG_EditHud_f( void ) {
 
 #endif
 
-/*
-==================
-CG_StartOrbit_f
-==================
-*/
 
 static void CG_StartOrbit_f( void ) {
 	char var[MAX_TOKEN_CHARS];

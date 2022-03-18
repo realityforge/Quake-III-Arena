@@ -54,11 +54,6 @@ static const char *DSoundError( int error ) {
 	return "unknown";
 }
 
-/*
-==================
-SNDDMA_Shutdown
-==================
-*/
 void SNDDMA_Shutdown( void ) {
 	Com_DPrintf( "Shutting down sound system\n" );
 

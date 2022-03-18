@@ -57,11 +57,6 @@ void QDECL Com_Printf( const char *msg, ... ) {
 
 #endif
 
-/*
-=================
-UI_ClampCvar
-=================
-*/
 float UI_ClampCvar( float min, float max, float value )
 {
 	if ( value < min ) return min;
@@ -69,20 +64,10 @@ float UI_ClampCvar( float min, float max, float value )
 	return value;
 }
 
-/*
-=================
-UI_StartDemoLoop
-=================
-*/
 void UI_StartDemoLoop( void ) {
 	trap_Cmd_ExecuteText( EXEC_APPEND, "d1\n" );
 }
 
-/*
-=================
-UI_PushMenu
-=================
-*/
 void UI_PushMenu( menuframework_s *menu )
 {
 	int				i;
@@ -131,11 +116,6 @@ void UI_PushMenu( menuframework_s *menu )
 	uis.firstdraw = qtrue;
 }
 
-/*
-=================
-UI_PopMenu
-=================
-*/
 void UI_PopMenu (void)
 {
 	trap_S_StartLocalSound( menu_out_sound, CHAN_LOCAL_SOUND );
@@ -164,11 +144,6 @@ void UI_ForceMenuOff (void)
 	trap_Cvar_Set( "cl_paused", "0" );
 }
 
-/*
-=================
-UI_LerpColor
-=================
-*/
 void UI_LerpColor(vec4_t a, vec4_t b, vec4_t c, float t)
 {
 	int i;
@@ -337,11 +312,6 @@ static int propMapB[26][3] = {
 
 // bk001205 - code below duplicated in cgame/cg_drawtools.c
 // bk001205 - FIXME: does this belong in ui_shared.c?
-/*
-=================
-UI_DrawBannerString
-=================
-*/
 static void UI_DrawBannerString2( int x, int y, const char* str, vec4_t color )
 {
 	const char* s;
@@ -495,11 +465,6 @@ static void UI_DrawProportionalString2( int x, int y, const char* str, vec4_t co
 	trap_R_SetColor( NULL );
 }
 
-/*
-=================
-UI_ProportionalSizeScale
-=================
-*/
 float UI_ProportionalSizeScale( int style ) {
 	if(  style & UI_SMALLFONT ) {
 		return PROP_SMALL_SIZE_SCALE;
@@ -509,11 +474,6 @@ float UI_ProportionalSizeScale( int style ) {
 }
 
 
-/*
-=================
-UI_DrawProportionalString
-=================
-*/
 void UI_DrawProportionalString( int x, int y, const char* str, int style, vec4_t color ) {
 	vec4_t	drawcolor;
 	int		width;
@@ -570,11 +530,6 @@ void UI_DrawProportionalString( int x, int y, const char* str, int style, vec4_t
 	UI_DrawProportionalString2( x, y, str, color, sizeScale, uis.charsetProp );
 }
 
-/*
-=================
-UI_DrawProportionalString_Wrapped
-=================
-*/
 void UI_DrawProportionalString_AutoWrapped( int x, int y, int xmax, int ystep, const char* str, int style, vec4_t color ) {
 	int width;
 	char *s1,*s2,*s3;
@@ -694,11 +649,6 @@ static void UI_DrawString2( int x, int y, const char* str, vec4_t color, int cha
 	trap_R_SetColor( NULL );
 }
 
-/*
-=================
-UI_DrawString
-=================
-*/
 void UI_DrawString( int x, int y, const char* str, int style, vec4_t color )
 {
 	int		len;
@@ -773,11 +723,6 @@ void UI_DrawString( int x, int y, const char* str, int style, vec4_t color )
 	UI_DrawString2(x,y,str,drawcolor,charw,charh);
 }
 
-/*
-=================
-UI_DrawChar
-=================
-*/
 void UI_DrawChar( int x, int y, int ch, int style, vec4_t color )
 {
 	char	buff[2];
@@ -824,11 +769,6 @@ void UI_SetActiveMenu( uiMenuCommand_t menu ) {
 	}
 }
 
-/*
-=================
-UI_KeyEvent
-=================
-*/
 void UI_KeyEvent( int key, int down ) {
 	sfxHandle_t		s;
 
@@ -849,11 +789,6 @@ void UI_KeyEvent( int key, int down ) {
 		trap_S_StartLocalSound( s, CHAN_LOCAL_SOUND );
 }
 
-/*
-=================
-UI_MouseEvent
-=================
-*/
 void UI_MouseEvent( int dx, int dy )
 {
 	int				i;
@@ -931,11 +866,6 @@ char *UI_Cvar_VariableString( const char *var_name ) {
 }
 
 
-/*
-=================
-UI_Cache
-=================
-*/
 void UI_Cache_f( void ) {
 	MainMenu_Cache();
 	InGame_Cache();
@@ -968,11 +898,6 @@ void UI_Cache_f( void ) {
 }
 
 
-/*
-=================
-UI_ConsoleCommand
-=================
-*/
 qboolean UI_ConsoleCommand( int realTime ) {
 	char	*cmd;
 
@@ -1019,19 +944,9 @@ qboolean UI_ConsoleCommand( int realTime ) {
 	return qfalse;
 }
 
-/*
-=================
-UI_Shutdown
-=================
-*/
 void UI_Shutdown( void ) {
 }
 
-/*
-=================
-UI_Init
-=================
-*/
 void UI_Init( void ) {
 	UI_RegisterCvars();
 
@@ -1155,11 +1070,6 @@ void UI_UpdateScreen( void ) {
 	trap_UpdateScreen();
 }
 
-/*
-=================
-UI_Refresh
-=================
-*/
 void UI_Refresh( int realtime )
 {
 	uis.frametime = realtime - uis.realtime;

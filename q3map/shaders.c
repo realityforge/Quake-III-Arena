@@ -112,11 +112,6 @@ infoParm_t	infoParms[] = {
 };
 
 
-/*
-===============
-LoadShaderImage
-===============
-*/
 
 byte* LoadImageFile(char *filename, qboolean *bTGA)
 {
@@ -157,11 +152,6 @@ byte* LoadImageFile(char *filename, qboolean *bTGA)
   return buffer;
 }
 
-/*
-===============
-LoadShaderImage
-===============
-*/
 static void LoadShaderImage( shaderInfo_t *si ) {
 	char			filename[1024];
 	int				i, count;
@@ -242,11 +232,6 @@ loadTga:
 	VectorScale( color, 1.0/count, si->averageColor );
 }
 
-/*
-===============
-AllocShaderInfo
-===============
-*/
 static shaderInfo_t	*AllocShaderInfo( void ) {
 	shaderInfo_t	*si;
 
@@ -276,11 +261,6 @@ static shaderInfo_t	*AllocShaderInfo( void ) {
 	return si;
 }
 
-/*
-===============
-ShaderInfoForShader
-===============
-*/
 shaderInfo_t	*ShaderInfoForShader( const char *shaderName ) {
 	int				i;
 	shaderInfo_t	*si;
@@ -309,11 +289,6 @@ shaderInfo_t	*ShaderInfoForShader( const char *shaderName ) {
 	return si;
 }
 
-/*
-===============
-ParseShaderFile
-===============
-*/
 static void ParseShaderFile( const char *filename ) {
 	int		i;
 	int		numInfoParms = sizeof(infoParms) / sizeof(infoParms[0]);
@@ -572,11 +547,6 @@ static void ParseShaderFile( const char *filename ) {
 	}
 }
 
-/*
-===============
-LoadShaderInfo
-===============
-*/
 #define	MAX_SHADER_FILES	64
 void LoadShaderInfo( void ) {
 	char			filename[1024];

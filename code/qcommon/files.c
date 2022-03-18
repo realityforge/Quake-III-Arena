@@ -276,21 +276,11 @@ char lastValidGame[MAX_OSPATH];
 FILE*		missingFiles = NULL;
 #endif
 
-/*
-==============
-FS_Initialized
-==============
-*/
 
 qboolean FS_Initialized() {
 	return (fs_searchpaths != NULL);
 }
 
-/*
-=================
-FS_PakIsPure
-=================
-*/
 qboolean FS_PakIsPure( pack_t *pack ) {
 	int i;
 
@@ -520,12 +510,6 @@ static void FS_CopyFile( char *fromOSPath, char *toOSPath ) {
 	free( buf );
 }
 
-/*
-===========
-FS_Remove
-
-===========
-*/
 static void FS_Remove( const char *osPath ) {
 	remove( osPath );
 }
@@ -579,12 +563,6 @@ qboolean FS_SV_FileExists( const char *file )
 }
 
 
-/*
-===========
-FS_SV_FOpenFileWrite
-
-===========
-*/
 fileHandle_t FS_SV_FOpenFileWrite( const char *filename ) {
 	char *ospath;
 	fileHandle_t	f;
@@ -687,12 +665,6 @@ int FS_SV_FOpenFileRead( const char *filename, fileHandle_t *fp ) {
 }
 
 
-/*
-===========
-FS_SV_Rename
-
-===========
-*/
 void FS_SV_Rename( const char *from, const char *to ) {
 	char			*from_ospath, *to_ospath;
 
@@ -723,12 +695,6 @@ void FS_SV_Rename( const char *from, const char *to ) {
 
 
 
-/*
-===========
-FS_Rename
-
-===========
-*/
 void FS_Rename( const char *from, const char *to ) {
 	char			*from_ospath, *to_ospath;
 
@@ -789,12 +755,6 @@ void FS_FCloseFile( fileHandle_t f ) {
 	memset( &fsh[f], 0, sizeof( fsh[f] ) );
 }
 
-/*
-===========
-FS_FOpenFileWrite
-
-===========
-*/
 fileHandle_t FS_FOpenFileWrite( const char *filename ) {
 	char			*ospath;
 	fileHandle_t	f;
@@ -830,12 +790,6 @@ fileHandle_t FS_FOpenFileWrite( const char *filename ) {
 	return f;
 }
 
-/*
-===========
-FS_FOpenFileAppend
-
-===========
-*/
 fileHandle_t FS_FOpenFileAppend( const char *filename ) {
 	char			*ospath;
 	fileHandle_t	f;
@@ -908,11 +862,6 @@ qboolean FS_FilenameCompare( const char *s1, const char *s2 ) {
 	return 0;		// strings are equal
 }
 
-/*
-===========
-FS_ShiftedStrStr
-===========
-*/
 char *FS_ShiftedStrStr(const char *string, const char *substring, int shift) {
 	char buf[MAX_STRING_TOKENS];
 	int i;
@@ -1303,12 +1252,6 @@ void QDECL FS_Printf( fileHandle_t h, const char *fmt, ... ) {
 	FS_Write(msg, strlen(msg), h);
 }
 
-/*
-=================
-FS_Seek
-
-=================
-*/
 int FS_Seek( fileHandle_t f, long offset, int origin ) {
 	int		_origin;
 	char	foo[65536];
@@ -1360,15 +1303,6 @@ int FS_Seek( fileHandle_t f, long offset, int origin ) {
 		return fseek( file, offset, _origin );
 	}
 }
-
-
-/*
-======================================================================================
-
-CONVENIENCE FUNCTIONS FOR ENTIRE FILES
-
-======================================================================================
-*/
 
 int	FS_FileIsInPAK(const char *filename, int *pChecksum ) {
 	searchpath_t	*search;
@@ -1547,11 +1481,6 @@ int FS_ReadFile( const char *qpath, void **buffer ) {
 	return len;
 }
 
-/*
-=============
-FS_FreeFile
-=============
-*/
 void FS_FreeFile( void *buffer ) {
 	if ( !fs_searchpaths ) {
 		Com_Error( ERR_FATAL, "Filesystem call made without initialization\n" );
@@ -1597,16 +1526,6 @@ void FS_WriteFile( const char *qpath, const void *buffer, int size ) {
 
 	FS_FCloseFile( f );
 }
-
-
-
-/*
-==========================================================================
-
-ZIP FILE LOADING
-
-==========================================================================
-*/
 
 /*
 =================
@@ -1750,11 +1669,6 @@ static int FS_ReturnPath( const char *zname, char *zpath, int *depth ) {
 	return len;
 }
 
-/*
-==================
-FS_AddFileToList
-==================
-*/
 static int FS_AddFileToList( char *name, char *list[MAX_FOUND_FILES], int nfiles ) {
 	int		i;
 
@@ -1907,20 +1821,10 @@ char **FS_ListFilteredFiles( const char *path, const char *extension, char *filt
 	return listCopy;
 }
 
-/*
-=================
-FS_ListFiles
-=================
-*/
 char **FS_ListFiles( const char *path, const char *extension, int *numfiles ) {
 	return FS_ListFilteredFiles( path, extension, NULL, numfiles );
 }
 
-/*
-=================
-FS_FreeFileList
-=================
-*/
 void FS_FreeFileList( char **list ) {
 	int		i;
 
@@ -1940,11 +1844,6 @@ void FS_FreeFileList( char **list ) {
 }
 
 
-/*
-================
-FS_GetFileList
-================
-*/
 int	FS_GetFileList(  const char *path, const char *extension, char *listbuf, int bufsize ) {
 	int		nFiles, i, nTotal, nLen;
 	char **pFiles = NULL;
@@ -2154,11 +2053,6 @@ int	FS_GetModList( char *listbuf, int bufsize ) {
 
 //============================================================================
 
-/*
-================
-FS_Dir_f
-================
-*/
 void FS_Dir_f( void ) {
 	char	*path;
 	char	*extension;
@@ -2190,11 +2084,6 @@ void FS_Dir_f( void ) {
 	FS_FreeFileList( dirnames );
 }
 
-/*
-===========
-FS_ConvertPath
-===========
-*/
 void FS_ConvertPath( char *s ) {
 	while (*s) {
 		if ( *s == '\\' || *s == ':' ) {
@@ -2243,11 +2132,6 @@ int FS_PathCmp( const char *s1, const char *s2 ) {
 	return 0;		// strings are equal
 }
 
-/*
-================
-FS_SortFileList
-================
-*/
 void FS_SortFileList(char **filelist, int numfiles) {
 	int i, j, k, numsortedfiles;
 	char **sortedlist;
@@ -2271,11 +2155,6 @@ void FS_SortFileList(char **filelist, int numfiles) {
 	Z_Free(sortedlist);
 }
 
-/*
-================
-FS_NewDir_f
-================
-*/
 void FS_NewDir_f( void ) {
 	char	*filter;
 	char	**dirnames;
@@ -2304,12 +2183,6 @@ void FS_NewDir_f( void ) {
 	FS_FreeFileList( dirnames );
 }
 
-/*
-============
-FS_Path_f
-
-============
-*/
 void FS_Path_f( void ) {
 	searchpath_t	*s;
 	int				i;
@@ -2425,11 +2298,6 @@ static void FS_AddGameDirectory( const char *path, const char *dir ) {
 	Sys_FreeFileList( pakfiles );
 }
 
-/*
-================
-FS_idPak
-================
-*/
 qboolean FS_idPak( char *pak, char *base ) {
 	int i;
 
@@ -2632,11 +2500,6 @@ static void FS_ReorderPurePaks()
 	}
 }
 
-/*
-================
-FS_Startup
-================
-*/
 static void FS_Startup( const char *gameName ) {
         const char *homePath;
 	cvar_t	*fs;
@@ -2925,11 +2788,6 @@ const char *FS_ReferencedPakNames( void ) {
 	return info;
 }
 
-/*
-=====================
-FS_ClearPakReferences
-=====================
-*/
 void FS_ClearPakReferences( int flags ) {
 	searchpath_t *search;
 
@@ -3086,11 +2944,6 @@ void FS_InitFilesystem( void ) {
 }
 
 
-/*
-================
-FS_Restart
-================
-*/
 void FS_Restart( int checksumFeed ) {
 
 	// free anything we currently have loaded

@@ -99,13 +99,7 @@ void MSG_ReportChangeVectors_f( void );
 
 //============================================================================
 
-/*
-==============================================================
 
-NET
-
-==============================================================
-*/
 
 #define	PACKET_BACKUP	32	// number of old messages that must be kept on client and
 							// server for delta comrpession and ping estimation
@@ -206,13 +200,7 @@ void Netchan_TransmitNextFragment( netchan_t *chan );
 qboolean Netchan_Process( netchan_t *chan, msg_t *msg );
 
 
-/*
-==============================================================
 
-PROTOCOL
-
-==============================================================
-*/
 
 #define	PROTOCOL_VERSION	68
 // 1.31 - 67
@@ -397,13 +385,7 @@ void	Cmd_ExecuteString( const char *text );
 // as if it was typed at the console
 
 
-/*
-==============================================================
 
-CVAR
-
-==============================================================
-*/
 
 /*
 
@@ -645,13 +627,7 @@ typedef struct {
 void Field_Clear( field_t *edit );
 void Field_CompleteCommand( field_t *edit );
 
-/*
-==============================================================
 
-MISC
-
-==============================================================
-*/
 
 // TTimo
 // vsnprintf is ISO/IEC 9899:1999
@@ -797,15 +773,6 @@ void Com_TouchMemory( void );
 void Com_Init( char *commandLine );
 void Com_Frame( void );
 void Com_Shutdown( void );
-
-
-/*
-==============================================================
-
-CLIENT / SERVER SYSTEMS
-
-==============================================================
-*/
 
 //
 // client interface

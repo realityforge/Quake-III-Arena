@@ -202,11 +202,6 @@ sourceOps_t		sourceOps[] = {
 int		opcodesHash[ NUM_SOURCE_OPS ];
 
 
-/*
-=============
-HashString
-=============
-*/
 int	HashString( char *s ) {
 	int		v = 0;
 
@@ -218,11 +213,6 @@ int	HashString( char *s ) {
 }
 
 
-/*
-============
-CodeError
-============
-*/
 void CodeError( char *fmt, ... ) {
 	va_list		argptr;
 
@@ -235,11 +225,6 @@ void CodeError( char *fmt, ... ) {
 	va_end( argptr );
 }
 
-/*
-============
-EmitByte
-============
-*/
 void EmitByte( segment_t *seg, int v ) {
 	if ( seg->imageUsed >= MAX_IMAGE ) {
 		Error( "MAX_IMAGE" );
@@ -248,11 +233,6 @@ void EmitByte( segment_t *seg, int v ) {
 	seg->imageUsed++;
 }
 
-/*
-============
-EmitInt
-============
-*/
 void EmitInt( segment_t *seg, int v ) {
 	if ( seg->imageUsed >= MAX_IMAGE - 4) {
 		Error( "MAX_IMAGE" );
@@ -443,22 +423,12 @@ qboolean Parse( void ) {
 }
 
 
-/*
-==============
-ParseValue
-==============
-*/
 int	ParseValue( void ) {
 	Parse();
 	return atoi( token );
 }
 
 
-/*
-==============
-ParseExpression
-==============
-*/
 int	ParseExpression(void) {
 	int		i, j;
 	char	sym[MAX_LINE_LENGTH];
@@ -537,12 +507,6 @@ void HackToSegment( segmentName_t seg ) {
 	}
 }
 
-/*
-==============
-AssembleLine
-
-==============
-*/
 void AssembleLine( void ) {
 	int		v, v2;
 	int		i;
@@ -800,11 +764,6 @@ void AssembleLine( void ) {
 	CodeError( "Unknown token: %s\n", token );
 }
 
-/*
-==============
-InitTables
-==============
-*/
 void InitTables( void ) {
 	int		i;
 
@@ -814,11 +773,6 @@ void InitTables( void ) {
 }
 
 
-/*
-==============
-WriteMapFile
-==============
-*/
 void WriteMapFile( void ) {
 	FILE		*f;
 	symbol_t	*s;
@@ -845,11 +799,6 @@ void WriteMapFile( void ) {
 	fclose( f );
 }
 
-/*
-===============
-WriteVmFile
-===============
-*/
 void WriteVmFile( void ) {
 	char	imageName[MAX_OS_PATH];
 	vmHeader_t	header;
@@ -892,11 +841,6 @@ void WriteVmFile( void ) {
 	fclose( f );
 }
 
-/*
-===============
-Assemble
-===============
-*/
 void Assemble( void ) {
 	int		i;
 	char	filename[MAX_OS_PATH];
@@ -951,12 +895,6 @@ void Assemble( void ) {
 }
 
 
-/*
-=============
-ParseOptionFile
-
-=============
-*/
 void ParseOptionFile( const char *filename ) {
 	char		expanded[MAX_OS_PATH];
 	char		*text, *text_p;
@@ -985,11 +923,6 @@ void ParseOptionFile( const char *filename ) {
 	}
 }
 
-/*
-==============
-main
-==============
-*/
 int main( int argc, char **argv ) {
 	int			i;
 	double		start, end;

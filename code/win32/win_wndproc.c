@@ -79,11 +79,6 @@ static void WIN_EnableAltTab( void )
 	}
 }
 
-/*
-==================
-VID_AppActivate
-==================
-*/
 static void VID_AppActivate(BOOL fActive, BOOL minimize)
 {
 	g_wv.isMinimized = minimize;

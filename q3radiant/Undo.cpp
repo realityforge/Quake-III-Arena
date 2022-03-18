@@ -64,11 +64,6 @@ int g_undoId = 1;						//current undo ID (zero is invalid id)
 int g_redoId = 1;						//current redo ID (zero is invalid id)
 
 
-/*
-=============
-Undo_MemorySize
-=============
-*/
 int Undo_MemorySize(void)
 {
 	/*
@@ -95,11 +90,6 @@ int Undo_MemorySize(void)
 	return g_undoMemorySize;
 }
 
-/*
-=============
-Undo_ClearRedo
-=============
-*/
 void Undo_ClearRedo(void)
 {
 	undo_t *redo, *nextredo;
@@ -165,11 +155,6 @@ void Undo_Clear(void)
 	g_undoId = 1;
 }
 
-/*
-=============
-Undo_SetMaxSize
-=============
-*/
 void Undo_SetMaxSize(int size)
 {
 	Undo_Clear();
@@ -177,21 +162,11 @@ void Undo_SetMaxSize(int size)
 	else g_undoMaxSize = size;
 }
 
-/*
-=============
-Undo_GetMaxSize
-=============
-*/
 int Undo_GetMaxSize(void)
 {
 	return g_undoMaxSize;
 }
 
-/*
-=============
-Undo_SetMaxMemorySize
-=============
-*/
 void Undo_SetMaxMemorySize(int size)
 {
 	Undo_Clear();
@@ -199,21 +174,11 @@ void Undo_SetMaxMemorySize(int size)
 	else g_undoMaxMemorySize = size;
 }
 
-/*
-=============
-Undo_GetMaxMemorySize
-=============
-*/
 int Undo_GetMaxMemorySize(void)
 {
 	return g_undoMaxMemorySize;
 }
 
-/*
-=============
-Undo_FreeFirstUndo
-=============
-*/
 void Undo_FreeFirstUndo(void)
 {
 	undo_t *undo;
@@ -242,11 +207,6 @@ void Undo_FreeFirstUndo(void)
 	g_undoSize--;
 }
 
-/*
-=============
-Undo_GeneralStart
-=============
-*/
 void Undo_GeneralStart(char *operation)
 {
 	undo_t *undo;
@@ -314,11 +274,6 @@ void Undo_GeneralStart(char *operation)
 	}
 }
 
-/*
-=============
-Undo_BrushInUndo
-=============
-*/
 int Undo_BrushInUndo(undo_t *undo, brush_t *brush)
 {
 	brush_t *b;
@@ -330,11 +285,6 @@ int Undo_BrushInUndo(undo_t *undo, brush_t *brush)
 	return false;
 }
 
-/*
-=============
-Undo_EntityInUndo
-=============
-*/
 int Undo_EntityInUndo(undo_t *undo, entity_t *ent)
 {
 	entity_t *e;
@@ -346,22 +296,12 @@ int Undo_EntityInUndo(undo_t *undo, entity_t *ent)
 	return false;
 }
 
-/*
-=============
-Undo_Start
-=============
-*/
 void Undo_Start(char *operation)
 {
 	Undo_ClearRedo();
 	Undo_GeneralStart(operation);
 }
 
-/*
-=============
-Undo_AddBrush
-=============
-*/
 void Undo_AddBrush(brush_t *pBrush)
 {
 	if (!g_lastundo)
@@ -387,11 +327,6 @@ void Undo_AddBrush(brush_t *pBrush)
 	g_undoMemorySize += Brush_MemorySize(pClone);
 }
 
-/*
-=============
-Undo_AddBrushList
-=============
-*/
 void Undo_AddBrushList(brush_t *brushlist)
 {
 	brush_t *pBrush;
@@ -429,11 +364,6 @@ void Undo_AddBrushList(brush_t *brushlist)
 	}
 }
 
-/*
-=============
-Undo_EndBrush
-=============
-*/
 void Undo_EndBrush(brush_t *pBrush)
 {
 	if (!g_lastundo)
@@ -449,11 +379,6 @@ void Undo_EndBrush(brush_t *pBrush)
 	pBrush->undoId = g_lastundo->id;
 }
 
-/*
-=============
-Undo_EndBrushList
-=============
-*/
 void Undo_EndBrushList(brush_t *brushlist)
 {
 	if (!g_lastundo)
@@ -472,11 +397,6 @@ void Undo_EndBrushList(brush_t *brushlist)
 	}
 }
 
-/*
-=============
-Undo_AddEntity
-=============
-*/
 void Undo_AddEntity(entity_t *entity)
 {
 	entity_t* pClone;
@@ -504,11 +424,6 @@ void Undo_AddEntity(entity_t *entity)
 	g_undoMemorySize += Entity_MemorySize(pClone);
 }
 
-/*
-=============
-Undo_EndEntity
-=============
-*/
 void Undo_EndEntity(entity_t *entity)
 {
 	if (!g_lastundo)
@@ -531,11 +446,6 @@ void Undo_EndEntity(entity_t *entity)
 	entity->undoId = g_lastundo->id;
 }
 
-/*
-=============
-Undo_End
-=============
-*/
 void Undo_End(void)
 {
 	if (!g_lastundo)
@@ -561,11 +471,6 @@ void Undo_End(void)
 	//Sys_Printf("undo size = %d, undo memory = %d\n", g_undoSize, g_undoMemorySize);
 }
 
-/*
-=============
-Undo_Undo
-=============
-*/
 void Undo_Undo(void)
 {
 	undo_t *undo, *redo;
@@ -731,11 +636,6 @@ void Undo_Undo(void)
     Sys_UpdateWindows(W_ALL);
 }
 
-/*
-=============
-Undo_Redo
-=============
-*/
 void Undo_Redo(void)
 {
 	undo_t *redo;
@@ -857,22 +757,12 @@ void Undo_Redo(void)
     Sys_UpdateWindows(W_ALL);
 }
 
-/*
-=============
-Undo_RedoAvailable
-=============
-*/
 int Undo_RedoAvailable(void)
 {
 	if (g_lastredo) return true;
 	return false;
 }
 
-/*
-=============
-Undo_UndoAvailable
-=============
-*/
 int Undo_UndoAvailable(void)
 {
 	if (g_lastundo)

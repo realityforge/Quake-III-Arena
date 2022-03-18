@@ -46,11 +46,6 @@ void WriteFloat2 (FILE *f, vec_t v)
 		fprintf (f,"%f ",v);
 }
 
-/*
-=================
-WritePortalFile_r
-=================
-*/
 void WritePortalFile_r (node_t *node)
 {
 	int			i, s;	
@@ -127,11 +122,6 @@ void FillLeafNumbers_r (node_t *node, int num)
 	FillLeafNumbers_r (node->children[1], num);
 }
 
-/*
-================
-NumberLeafs_r
-================
-*/
 void NumberLeafs_r (node_t *node)
 {
 	portal_t	*p;
@@ -171,11 +161,6 @@ void NumberLeafs_r (node_t *node)
 }
 
 
-/*
-================
-CreateVisPortals_r
-================
-*/
 void CreateVisPortals_r (node_t *node)
 {
 	// stop as soon as we get to a detail_seperator, which
@@ -190,11 +175,6 @@ void CreateVisPortals_r (node_t *node)
 	CreateVisPortals_r (node->children[1]);
 }
 
-/*
-================
-FinishVisPortals_r
-================
-*/
 void FinishVisPortals2_r (node_t *node)
 {
 	if (node->planenum == PLANENUM_LEAF)
@@ -235,11 +215,6 @@ void SaveClusters_r (node_t *node)
 	SaveClusters_r (node->children[1]);
 }
 
-/*
-================
-WritePortalFile
-================
-*/
 void WritePortalFile (tree_t *tree)
 {
 	char	filename[1024];

@@ -51,11 +51,6 @@ static	byte	localIP[MAX_IPS][4];
 //=============================================================================
 
 
-/*
-====================
-NET_ErrorString
-====================
-*/
 char *NET_ErrorString( void ) {
 	int		code;
 
@@ -310,11 +305,6 @@ qboolean Sys_GetPacket( netadr_t *net_from, msg_t *net_message ) {
 
 static char socksBuf[4096];
 
-/*
-==================
-Sys_SendPacket
-==================
-*/
 void Sys_SendPacket( int length, const void *data, netadr_t to ) {
 	int				ret;
 	struct sockaddr	addr;
@@ -443,11 +433,6 @@ qboolean Sys_IsLANAddress( netadr_t adr ) {
 	return qfalse;
 }
 
-/*
-==================
-Sys_ShowIP
-==================
-*/
 void Sys_ShowIP(void) {
 	int i;
 
@@ -460,11 +445,6 @@ void Sys_ShowIP(void) {
 //=============================================================================
 
 
-/*
-====================
-NET_IPSocket
-====================
-*/
 int NET_IPSocket( char *net_interface, int port ) {
 	SOCKET				newsocket;
 	struct sockaddr_in	address;
@@ -525,11 +505,6 @@ int NET_IPSocket( char *net_interface, int port ) {
 }
 
 
-/*
-====================
-NET_OpenSocks
-====================
-*/
 void NET_OpenSocks( int port ) {
 	struct sockaddr_in	address;
 	int					err;
@@ -702,11 +677,6 @@ void NET_OpenSocks( int port ) {
 }
 
 
-/*
-=====================
-NET_GetLocalAddress
-=====================
-*/
 void NET_GetLocalAddress( void ) {
 	char				hostname[256];
 	struct hostent		*hostInfo;
@@ -748,11 +718,6 @@ void NET_GetLocalAddress( void ) {
 	}
 }
 
-/*
-====================
-NET_OpenIP
-====================
-*/
 void NET_OpenIP( void ) {
 	cvar_t	*ip;
 	int		port;
@@ -779,11 +744,6 @@ void NET_OpenIP( void ) {
 }
 
 
-/*
-====================
-NET_IPXSocket
-====================
-*/
 int NET_IPXSocket( int port ) {
 	SOCKET				newsocket;
 	struct sockaddr_ipx	address;
@@ -830,11 +790,6 @@ int NET_IPXSocket( int port ) {
 }
 
 
-/*
-====================
-NET_OpenIPX
-====================
-*/
 void NET_OpenIPX( void ) {
 	int		port;
 
@@ -847,11 +802,6 @@ void NET_OpenIPX( void ) {
 //===================================================================
 
 
-/*
-====================
-NET_GetCvars
-====================
-*/
 static qboolean NET_GetCvars( void ) {
 	qboolean	modified;
 
@@ -898,11 +848,6 @@ static qboolean NET_GetCvars( void ) {
 }
 
 
-/*
-====================
-NET_Config
-====================
-*/
 void NET_Config( qboolean enableNetworking ) {
 	qboolean	modified;
 	qboolean	stop;
@@ -970,11 +915,6 @@ void NET_Config( qboolean enableNetworking ) {
 }
 
 
-/*
-====================
-NET_Init
-====================
-*/
 void NET_Init( void ) {
 	int		r;
 
@@ -995,11 +935,6 @@ void NET_Init( void ) {
 }
 
 
-/*
-====================
-NET_Shutdown
-====================
-*/
 void NET_Shutdown( void ) {
 	if ( !winsockInitialized ) {
 		return;
@@ -1021,11 +956,6 @@ void NET_Sleep( int msec ) {
 }
 
 
-/*
-====================
-NET_Restart_f
-====================
-*/
 void NET_Restart( void ) {
 	NET_Config( networkingEnabled );
 }

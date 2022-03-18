@@ -73,20 +73,6 @@ cbrush_t	*box_brush;
 void	CM_InitBoxHull (void);
 void	CM_FloodAreaConnections (void);
 
-
-/*
-===============================================================================
-
-					MAP LOADING
-
-===============================================================================
-*/
-
-/*
-=================
-CMod_LoadShaders
-=================
-*/
 void CMod_LoadShaders( lump_t *l ) {
 	dshader_t	*in, *out;
 	int			i, count;
@@ -113,11 +99,6 @@ void CMod_LoadShaders( lump_t *l ) {
 }
 
 
-/*
-=================
-CMod_LoadSubmodels
-=================
-*/
 void CMod_LoadSubmodels( lump_t *l ) {
 	dmodel_t	*in;
 	cmodel_t	*out;
@@ -170,12 +151,6 @@ void CMod_LoadSubmodels( lump_t *l ) {
 }
 
 
-/*
-=================
-CMod_LoadNodes
-
-=================
-*/
 void CMod_LoadNodes( lump_t *l ) {
 	dnode_t		*in;
 	int			child;
@@ -206,12 +181,6 @@ void CMod_LoadNodes( lump_t *l ) {
 
 }
 
-/*
-=================
-CM_BoundBrush
-
-=================
-*/
 void CM_BoundBrush( cbrush_t *b ) {
 	b->bounds[0][0] = -b->sides[0].plane->dist;
 	b->bounds[1][0] = b->sides[1].plane->dist;
@@ -224,12 +193,6 @@ void CM_BoundBrush( cbrush_t *b ) {
 }
 
 
-/*
-=================
-CMod_LoadBrushes
-
-=================
-*/
 void CMod_LoadBrushes( lump_t *l ) {
 	dbrush_t	*in;
 	cbrush_t	*out;
@@ -261,11 +224,6 @@ void CMod_LoadBrushes( lump_t *l ) {
 
 }
 
-/*
-=================
-CMod_LoadLeafs
-=================
-*/
 void CMod_LoadLeafs (lump_t *l)
 {
 	int			i;
@@ -304,11 +262,6 @@ void CMod_LoadLeafs (lump_t *l)
 	cm.areaPortals = Hunk_Alloc( cm.numAreas * cm.numAreas * sizeof( *cm.areaPortals ), h_high );
 }
 
-/*
-=================
-CMod_LoadPlanes
-=================
-*/
 void CMod_LoadPlanes (lump_t *l)
 {
 	int			i, j;
@@ -345,11 +298,6 @@ void CMod_LoadPlanes (lump_t *l)
 	}
 }
 
-/*
-=================
-CMod_LoadLeafBrushes
-=================
-*/
 void CMod_LoadLeafBrushes (lump_t *l)
 {
 	int			i;
@@ -372,11 +320,6 @@ void CMod_LoadLeafBrushes (lump_t *l)
 	}
 }
 
-/*
-=================
-CMod_LoadLeafSurfaces
-=================
-*/
 void CMod_LoadLeafSurfaces( lump_t *l )
 {
 	int			i;
@@ -399,11 +342,6 @@ void CMod_LoadLeafSurfaces( lump_t *l )
 	}
 }
 
-/*
-=================
-CMod_LoadBrushSides
-=================
-*/
 void CMod_LoadBrushSides (lump_t *l)
 {
 	int				i;
@@ -435,22 +373,12 @@ void CMod_LoadBrushSides (lump_t *l)
 }
 
 
-/*
-=================
-CMod_LoadEntityString
-=================
-*/
 void CMod_LoadEntityString( lump_t *l ) {
 	cm.entityString = Hunk_Alloc( l->filelen, h_high );
 	cm.numEntityChars = l->filelen;
 	memcpy (cm.entityString, cmod_base + l->fileofs, l->filelen);
 }
 
-/*
-=================
-CMod_LoadVisibility
-=================
-*/
 #define	VIS_HEADER	8
 void CMod_LoadVisibility( lump_t *l ) {
 	int		len;
@@ -475,11 +403,6 @@ void CMod_LoadVisibility( lump_t *l ) {
 //==================================================================
 
 
-/*
-=================
-CMod_LoadPatches
-=================
-*/
 #define	MAX_PATCH_VERTS		1024
 void CMod_LoadPatches( lump_t *surfs, lump_t *verts ) {
 	drawVert_t	*dv, *dv_p;
@@ -657,21 +580,11 @@ void CM_LoadMap( const char *name, qboolean clientload, int *checksum ) {
 	}
 }
 
-/*
-==================
-CM_ClearMap
-==================
-*/
 void CM_ClearMap( void ) {
 	memset( &cm, 0, sizeof( cm ) );
 	CM_ClearLevelPatches();
 }
 
-/*
-==================
-CM_ClipHandleToModel
-==================
-*/
 cmodel_t	*CM_ClipHandleToModel( clipHandle_t handle ) {
 	if ( handle < 0 ) {
 		Com_Error( ERR_DROP, "CM_ClipHandleToModel: bad handle %i", handle );
@@ -692,11 +605,6 @@ cmodel_t	*CM_ClipHandleToModel( clipHandle_t handle ) {
 
 }
 
-/*
-==================
-CM_InlineModel
-==================
-*/
 clipHandle_t	CM_InlineModel( int index ) {
 	if ( index < 0 || index >= cm.numSubModels ) {
 		Com_Error (ERR_DROP, "CM_InlineModel: bad number");
@@ -823,11 +731,6 @@ clipHandle_t CM_TempBoxModel( const vec3_t mins, const vec3_t maxs, int capsule 
 	return BOX_MODEL_HANDLE;
 }
 
-/*
-===================
-CM_ModelBounds
-===================
-*/
 void CM_ModelBounds( clipHandle_t model, vec3_t mins, vec3_t maxs ) {
 	cmodel_t	*cmod;
 

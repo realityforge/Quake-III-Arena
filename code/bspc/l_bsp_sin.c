@@ -453,12 +453,6 @@ void Sin_FixTextureReferences(void)
 	}
 }
 
-/*
-===============
-CompressVis
-
-===============
-*/
 int Sin_CompressVis (byte *vis, byte *dest)
 {
 	int		j;
@@ -490,11 +484,6 @@ int Sin_CompressVis (byte *vis, byte *dest)
 }
 
 
-/*
-===================
-DecompressVis
-===================
-*/
 void Sin_DecompressVis (byte *in, byte *decompressed)
 {
 	int		c;
@@ -811,11 +800,6 @@ int Sin_CopyLump (int lump, void *dest, int size)
 }
 #endif
 
-/*
-=============
-Sin_LoadBSPFile
-=============
-*/
 void	Sin_LoadBSPFile(char *filename, int offset, int length)
 {
 	int			i;

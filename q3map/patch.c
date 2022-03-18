@@ -33,11 +33,6 @@ void PrintCtrl( vec3_t ctrl[9] ) {
 	}
 }
 
-/*
-================
-DrawSurfaceForMesh
-================
-*/
 mapDrawSurface_t	*DrawSurfaceForMesh( mesh_t *m ) {
 	mapDrawSurface_t	*ds;
 	int				i, j;

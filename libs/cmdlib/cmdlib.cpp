@@ -109,11 +109,6 @@ void* qmalloc (size_t nSize)
 	return b;
 }
 
-/*
-================
-Q_filelength
-================
-*/
 int Q_filelength (FILE *f)
 {
 	int		pos;
@@ -173,11 +168,6 @@ void SafeWrite (FILE *f, const void *buffer, int count)
 
 
 
-/*
-==============
-LoadFile
-==============
-*/
 int LoadFile (const char *filename, void **bufferptr)
 {
 	FILE	*f;
@@ -234,11 +224,6 @@ int    LoadFileNoCrash (const char *filename, void **bufferptr)
 }
 
 
-/*
-==============
-SaveFile
-==============
-*/
 void    SaveFile (const char *filename, void *buffer, int count)
 {
 	FILE	*f;
@@ -307,12 +292,6 @@ void    StripExtension (char *path)
 		path[length] = 0;
 }
 
-
-/*
-====================
-Extract file parts
-====================
-*/
 void ExtractFilePath (const char *path, char *dest)
 {
 	const char *src;
@@ -421,15 +400,6 @@ char* StrDup(const char* pStr)
   }
   return NULL;
 }
-
-
-/*
-============================================================================
-
-					BYTE ORDER FUNCTIONS
-
-============================================================================
-*/
 
 #ifdef __BIG_ENDIAN__
 

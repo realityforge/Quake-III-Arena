@@ -29,12 +29,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #  define LOCAL_PACKET_BACKUP 4
 #endif
 
-/*
-===============
-SV_SetConfigstring
-
-===============
-*/
 void SV_SetConfigstring (int index, const char *val) {
 	int		len, i;
 	int		maxChunkSize = MAX_STRING_CHARS - 24;
@@ -105,12 +99,6 @@ void SV_SetConfigstring (int index, const char *val) {
 
 
 
-/*
-===============
-SV_GetConfigstring
-
-===============
-*/
 void SV_GetConfigstring( int index, char *buffer, int bufferSize ) {
 	if ( bufferSize < 1 ) {
 		Com_Error( ERR_DROP, "SV_GetConfigstring: bufferSize == %i", bufferSize );
@@ -127,12 +115,6 @@ void SV_GetConfigstring( int index, char *buffer, int bufferSize ) {
 }
 
 
-/*
-===============
-SV_SetUserinfo
-
-===============
-*/
 void SV_SetUserinfo( int index, const char *val ) {
 	if ( index < 0 || index >= sv_maxclients->integer ) {
 		Com_Error (ERR_DROP, "SV_SetUserinfo: bad index %i\n", index);
@@ -148,12 +130,6 @@ void SV_SetUserinfo( int index, const char *val ) {
 
 
 
-/*
-===============
-SV_GetUserinfo
-
-===============
-*/
 void SV_GetUserinfo( int index, char *buffer, int bufferSize ) {
 	if ( bufferSize < 1 ) {
 		Com_Error( ERR_DROP, "SV_GetUserinfo: bufferSize == %i", bufferSize );
@@ -193,12 +169,6 @@ void SV_CreateBaseline( void ) {
 }
 
 
-/*
-===============
-SV_BoundMaxClients
-
-===============
-*/
 void SV_BoundMaxClients( int minimum ) {
 	// get the current maxclients value
 	Cvar_Get( "sv_maxclients", "8", 0 );
@@ -237,11 +207,6 @@ void SV_Startup( void ) {
 }
 
 
-/*
-==================
-SV_ChangeMaxClients
-==================
-*/
 void SV_ChangeMaxClients( void ) {
 	int		oldMaxClients;
 	int		i;
@@ -298,11 +263,6 @@ void SV_ChangeMaxClients( void ) {
     svs.numSnapshotEntities = sv_maxclients->integer * LOCAL_PACKET_BACKUP * 64;
 }
 
-/*
-================
-SV_ClearServer
-================
-*/
 void SV_ClearServer(void) {
 	int i;
 

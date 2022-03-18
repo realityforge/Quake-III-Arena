@@ -227,11 +227,6 @@ static void InitOpenGL( void )
 	GL_SetDefaultState();
 }
 
-/*
-==================
-GL_CheckErrors
-==================
-*/
 void GL_CheckErrors( void ) {
     int		err;
     char	s[64];
@@ -421,11 +416,6 @@ void RB_TakeScreenshotJPEG( int x, int y, int width, int height, char *fileName 
 	ri.Hunk_FreeTempMemory( buffer );
 }
 
-/*
-==================
-RB_TakeScreenshotCmd
-==================
-*/
 const void *RB_TakeScreenshotCmd( const void *data ) {
 	const screenshotCommand_t	*cmd;
 	
@@ -439,11 +429,6 @@ const void *RB_TakeScreenshotCmd( const void *data ) {
 	return (const void *)(cmd + 1);	
 }
 
-/*
-==================
-R_TakeScreenshot
-==================
-*/
 void R_TakeScreenshot( int x, int y, int width, int height, char *name, qboolean jpeg ) {
 	static char	fileName[MAX_OSPATH]; // bad things if two screenshots per frame?
 	screenshotCommand_t	*cmd;
@@ -744,12 +729,7 @@ void GL_SetDefaultState( void )
 }
 
 
-/*
-================
-GfxInfo_f
-================
-*/
-void GfxInfo_f( void ) 
+void GfxInfo_f( void )
 {
 	cvar_t *sys_cpustring = ri.Cvar_Get( "sys_cpustring", "", 0 );
 	const char *enablestrings[] =
@@ -838,12 +818,7 @@ void GfxInfo_f( void )
 	}
 }
 
-/*
-===============
-R_Register
-===============
-*/
-void R_Register( void ) 
+void R_Register( void )
 {
 	//
 	// latched and archived variables
@@ -988,12 +963,7 @@ void R_Register( void )
 	ri.Cmd_AddCommand( "gfxinfo", GfxInfo_f );
 }
 
-/*
-===============
-R_Init
-===============
-*/
-void R_Init( void ) {	
+void R_Init( void ) {
 	int	err;
 	int i;
 	byte *ptr;
@@ -1077,12 +1047,7 @@ void R_Init( void ) {
 	ri.Printf( PRINT_ALL, "----- finished R_Init -----\n" );
 }
 
-/*
-===============
-RE_Shutdown
-===============
-*/
-void RE_Shutdown( qboolean destroyWindow ) {	
+void RE_Shutdown( qboolean destroyWindow ) {
 
 	ri.Printf( PRINT_ALL, "RE_Shutdown( %i )\n", destroyWindow );
 

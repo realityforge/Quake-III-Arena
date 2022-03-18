@@ -181,11 +181,6 @@ void Patch_SetStyle(patchMesh_t *p, int nStyle)
   p->type = (p->type & PATCH_TYPEMASK) | nStyle;
 }
 
-/*
-==================
-Patch_MemorySize
-==================
-*/
 int Patch_MemorySize(patchMesh_t *p)
 {
 	return _msize(p);
@@ -193,12 +188,7 @@ int Patch_MemorySize(patchMesh_t *p)
 
 
 
-/*
-===============
-InterpolateInteriorPoints
-===============
-*/
-void InterpolateInteriorPoints( patchMesh_t *p ) 
+void InterpolateInteriorPoints( patchMesh_t *p )
 {
 	int		i, j, k;
 	int		next, prev;
@@ -219,12 +209,6 @@ void InterpolateInteriorPoints( patchMesh_t *p )
 	}
 }
 
-/*
-=================
-MakeMeshNormals
-
-=================
-*/
 int	neighbors[8][2] = {
 	{0,1}, {1,1}, {1,0}, {1,-1}, {0,-1}, {-1,-1}, {-1,0}, {-1,1}
 };
@@ -366,11 +350,6 @@ void Patch_MeshNormals(patchMesh_t *in )
 
 
 
-/*
-==================
-Patch_CalcBounds
-==================
-*/
 void Patch_CalcBounds(patchMesh_t *p, vec3_t& vMin, vec3_t& vMax)
 {
   vMin[0] = vMin[1] = vMin[2] = 99999;
@@ -393,11 +372,6 @@ void Patch_CalcBounds(patchMesh_t *p, vec3_t& vMin, vec3_t& vMax)
   }
 }
 
-/*
-==================
-Brush_RebuildBrush
-==================
-*/
 void Brush_RebuildBrush(brush_t *b, vec3_t vMins, vec3_t vMaxs)
 {
   //
@@ -563,11 +537,6 @@ brush_t* AddBrushForPatch(patchMesh_t *pm, bool bLinkToWorld )
 
 // very approximate widths and heights
 
-/*
-==================
-Patch_Width
-==================
-*/
 float Patch_Width(patchMesh_t *p)
 {
   float f = 0;
@@ -594,11 +563,6 @@ float Patch_WidthDistanceTo(patchMesh_t *p, int j)
 
 
 
-/*
-==================
-Patch_Height
-==================
-*/
 float Patch_Height(patchMesh_t *p)
 {
   float f = 0;
@@ -1425,11 +1389,6 @@ void GenerateEndCaps(brush_t *brushParent, bool bBevel, bool bEndcap, bool bInve
 }
 
 
-/*
-===============
-BrushToPatchMesh
-===============
-*/
 void Patch_BrushToMesh(bool bCone, bool bBevel, bool bEndcap, bool bSquare, int nHeight)
 {
 	brush_t		*b;
@@ -1656,11 +1615,6 @@ void Patch_BrushToMesh(bool bCone, bool bBevel, bool bEndcap, bool bSquare, int 
 
 }
 
-/*
-==================
-Patch_GenericMesh
-==================
-*/
 brush_t* Patch_GenericMesh(int nWidth, int nHeight, int nOrientation, bool bDeleteSource, bool bOverride)
 {
   int i,j;
@@ -1730,11 +1684,6 @@ brush_t* Patch_GenericMesh(int nWidth, int nHeight, int nOrientation, bool bDele
   //g_qeglobals.d_select_mode = sel_curvepoint;
 }
 
-/*
-==================
-PointInMoveList
-==================
-*/
 int PointInMoveList(float *pf)
 {
   for (int i = 0; i < g_qeglobals.d_num_move_points; i++)
@@ -1745,11 +1694,6 @@ int PointInMoveList(float *pf)
   return -1;
 }
 
-/*
-==================
-PointValueInMoveList
-==================
-*/
 int PointValueInMoveList(vec3_t v)
 {
   for (int i = 0; i < g_qeglobals.d_num_move_points; i++)
@@ -1761,11 +1705,6 @@ int PointValueInMoveList(vec3_t v)
 }
 
 
-/*
-==================
-RemovePointFromMoveList
-==================
-*/
 void RemovePointFromMoveList(vec3_t v)
 {
   int n;
@@ -1779,11 +1718,6 @@ void RemovePointFromMoveList(vec3_t v)
   }
 }
 
-/*
-==================
-ColumnSelected
-==================
-*/
 bool ColumnSelected(patchMesh_t* p, int nCol)
 {
   for (int i = 0; i < p->height; i++)
@@ -1794,11 +1728,6 @@ bool ColumnSelected(patchMesh_t* p, int nCol)
   return true;
 }
 
-/*
-==================
-AddPoint
-==================
-*/
 void AddPoint(patchMesh_t* p, vec3_t v, bool bWeldOrDrill = true)
 {
   int nDim1 = (g_pParentWnd->ActiveXY()->GetViewType() == YZ) ? 1 : 0;
@@ -1836,11 +1765,6 @@ void AddPoint(patchMesh_t* p, vec3_t v, bool bWeldOrDrill = true)
   }
 }
 
-/*
-==================
-SelectRow
-==================
-*/
 void SelectRow(patchMesh_t* p, int nRow, bool bMulti)
 {
   if (!bMulti)
@@ -1852,11 +1776,6 @@ void SelectRow(patchMesh_t* p, int nRow, bool bMulti)
   //Sys_Printf("Selected Row %d\n", nRow);
 }
 
-/*
-==================
-SelectColumn
-==================
-*/
 void SelectColumn(patchMesh_t* p, int nCol, bool bMulti)
 {
   if (!bMulti)
@@ -1869,11 +1788,6 @@ void SelectColumn(patchMesh_t* p, int nCol, bool bMulti)
 }
 
 
-/*
-==================
-AddPatchMovePoint
-==================
-*/
 void AddPatchMovePoint(vec3_t v, bool bMulti, bool bFull)
 {
   if (!g_bSameView && !bMulti && !bFull)
@@ -1936,11 +1850,6 @@ void AddPatchMovePoint(vec3_t v, bool bMulti, bool bFull)
   }
 }
 
-/*
-==================
-Patch_UpdateSelected
-==================
-*/
 void Patch_UpdateSelected(vec3_t vMove)
 {
   int i, j;
@@ -1984,11 +1893,6 @@ void Patch_UpdateSelected(vec3_t vMove)
 
 
 
-/*
-===============
-SampleSinglePatch
-===============
-*/
 void SampleSinglePatch (float ctrl[3][3][5], float u, float v, float out[5]) {
 	float	vCtrl[3][5];
 	int		vPoint;
@@ -2030,12 +1934,7 @@ void SampleSinglePatch (float ctrl[3][3][5], float u, float v, float out[5]) {
 	}
 }
 
-/*
-===================
-DrawSinglePatch
-===================
-*/
-void DrawSinglePatch (float ctrl[3][3][5], bool bPoints) 
+void DrawSinglePatch (float ctrl[3][3][5], bool bPoints)
 {
 	int		i, j;
 	float	u, v;
@@ -2098,11 +1997,6 @@ void DrawSinglePatch (float ctrl[3][3][5], bool bPoints)
 
 }
 
-/*
-=================
-DrawPatchMesh
-=================
-*/
 //FIXME: this routine needs to be reorganized.. should be about 1/4 the size and complexity
 void DrawPatchMesh( patchMesh_t *pm, bool bPoints, bool bShade = false ) {
 	int		i, j, k, l;
@@ -2454,11 +2348,6 @@ void DrawPatchMesh( patchMesh_t *pm, bool bPoints, bool bShade = false ) {
 
 }
 
-/*
-==================
-Patch_DrawXY
-==================
-*/
 void Patch_DrawXY(patchMesh_t *pm)
 {
 	qglPolygonMode (GL_FRONT_AND_BACK, GL_LINE);
@@ -2480,11 +2369,6 @@ void Patch_DrawXY(patchMesh_t *pm)
   }
 }
 
-/*
-==================
-Patch_DrawCam
-==================
-*/
 void Patch_DrawCam(patchMesh_t *pm)
 {
 	qglColor3f (1,1,1);
@@ -2566,11 +2450,6 @@ void Patch_BuildPoints (brush_t *b)
 	}
 }
 
-/*
-==================
-Patch_Move
-==================
-*/
 void Patch_Move(patchMesh_t *pm, const vec3_t vMove, bool bRebuild)
 {
   pm->bDirty = true;
@@ -2591,11 +2470,6 @@ void Patch_Move(patchMesh_t *pm, const vec3_t vMove, bool bRebuild)
 
 }
 
-/*
-==================
-Patch_ApplyMatrix
-==================
-*/
 void Patch_ApplyMatrix(patchMesh_t *p, const vec3_t vOrigin, const vec3_t vMatrix[3], bool bSnap)
 {
   vec3_t vTemp;
@@ -2623,11 +2497,6 @@ void Patch_ApplyMatrix(patchMesh_t *p, const vec3_t vOrigin, const vec3_t vMatri
   Brush_RebuildBrush(p->pSymbiot, vMin, vMax);
 }
 
-/*
-==================
-Patch_EditPatch
-==================
-*/
 void Patch_EditPatch()
 {
   //--patchMesh_t* p = &patchMeshes[n];
@@ -2658,11 +2527,6 @@ void Patch_EditPatch()
 
 
 
-/*
-==================
-Patch_Deselect
-==================
-*/
 //FIXME: need all sorts of asserts throughout a lot of this crap
 void Patch_Deselect()
 {
@@ -2687,11 +2551,6 @@ void Patch_Deselect()
 }
 
 
-/*
-==================
-Patch_Select
-==================
-*/
 void Patch_Select(patchMesh_t *p)
 {
   // maintained for point manip.. which i need to fix as this 
@@ -2701,22 +2560,12 @@ void Patch_Select(patchMesh_t *p)
 }
 
 
-/*
-==================
-Patch_Deselect
-==================
-*/
 void Patch_Deselect(patchMesh_t *p)
 {
   p->bSelected = false;
 }
 
 
-/*
-==================
-Patch_Delete
-==================
-*/
 void Patch_Delete(patchMesh_t *p)
 {
   p->pSymbiot->pPatch = NULL;
@@ -2747,11 +2596,6 @@ void Patch_Delete(patchMesh_t *p)
 }
 
 
-/*
-==================
-Patch_Scale
-==================
-*/
 void Patch_Scale(patchMesh_t *p, const vec3_t vOrigin, const vec3_t vAmt, bool bRebuild)
 {
 
@@ -2779,11 +2623,6 @@ void Patch_Scale(patchMesh_t *p, const vec3_t vOrigin, const vec3_t vAmt, bool b
 }
 
 
-/*
-==================
-Patch_Cleanup
-==================
-*/
 void Patch_Cleanup()
 {
   //--g_nSelectedPatch = -1;
@@ -2792,11 +2631,6 @@ void Patch_Cleanup()
 
 
 
-/*
-==================
-Patch_SetView
-==================
-*/
 void Patch_SetView(int n)
 {
   g_bSameView = (n == g_nPatchClickedView);
@@ -2804,11 +2638,6 @@ void Patch_SetView(int n)
 }
 
 
-/*
-==================
-Patch_SetTexture
-==================
-*/
 // FIXME: need array validation throughout
 void Patch_SetTexture(patchMesh_t *p, texdef_t *tex_def, IPluginTexdef* pPlugTexdef)
 {
@@ -2836,11 +2665,6 @@ void Patch_SetTexture(patchMesh_t *p, texdef_t *tex_def, IPluginTexdef* pPlugTex
 }
 
 
-/*
-==================
-Patch_DragScale
-==================
-*/
 bool Patch_DragScale(patchMesh_t *p, vec3_t vAmt, vec3_t vMove)
 {
   vec3_t vMin, vMax, vScale, vTemp, vMid;
@@ -2902,11 +2726,6 @@ bool Patch_DragScale(patchMesh_t *p, vec3_t vAmt, vec3_t vMove)
 }
 
 
-/*
-==================
-Patch_AddRow
-==================
-*/
 void Patch_AddRow(patchMesh_t *p)
 {
   vec3_t vMin, vMax, vTemp;
@@ -2941,11 +2760,6 @@ void Patch_AddRow(patchMesh_t *p)
   UpdatePatchInspector();
 }
 
-/*
-==================
-Patch_InsertColumn
-==================
-*/
 void Patch_InsertColumn(patchMesh_t *p, bool bAdd)
 {
   int h, w, i, j;
@@ -2995,11 +2809,6 @@ void Patch_InsertColumn(patchMesh_t *p, bool bAdd)
 }
 
 
-/*
-==================
-Patch_InsertRow
-==================
-*/
 void Patch_InsertRow(patchMesh_t *p, bool bAdd)
 {
   int h, w, i, j;
@@ -3049,11 +2858,6 @@ void Patch_InsertRow(patchMesh_t *p, bool bAdd)
 }
 
 
-/*
-==================
-Patch_RemoveRow
-==================
-*/
 void Patch_RemoveRow(patchMesh_t *p, bool bFirst)
 {
   
@@ -3076,11 +2880,6 @@ void Patch_RemoveRow(patchMesh_t *p, bool bFirst)
 }
 
 
-/*
-==================
-Patch_RemoveColumn
-==================
-*/
 void Patch_RemoveColumn(patchMesh_t *p, bool bFirst)
 {
   
@@ -3103,11 +2902,6 @@ void Patch_RemoveColumn(patchMesh_t *p, bool bFirst)
 }
 
 
-/*
-==================
-Patch_AdjustColumns
-==================
-*/
 void Patch_AdjustColumns(patchMesh_t *p, int nCols)
 {
   vec3_t vTemp, vTemp2;
@@ -3152,11 +2946,6 @@ void Patch_AdjustColumns(patchMesh_t *p, int nCols)
 }
 
 
-/*
-==================
-Patch_AdjustRows
-==================
-*/
 void Patch_AdjustRows(patchMesh_t *p, int nRows)
 {
   vec3_t vTemp, vTemp2;
@@ -3253,11 +3042,6 @@ void Patch_DisperseRows()
 
 }
 
-/*
-==================
-Patch_AdjustColumns
-==================
-*/
 void Patch_DisperseColumns()
 {
   vec3_t vTemp, vTemp2;
@@ -3299,11 +3083,6 @@ void Patch_DisperseColumns()
 
 
 
-/*
-==================
-Patch_AdjustSelected
-==================
-*/
 void Patch_AdjustSelected(bool bInsert, bool bColumn, bool bFlag)
 {
   bool bUpdate = false;
@@ -3347,11 +3126,6 @@ void Patch_AdjustSelected(bool bInsert, bool bColumn, bool bFlag)
 }
 
 
-/*
-==================
-Patch_AdjustSelectedRowCols
-==================
-*/
 void Patch_AdjustSelectedRowCols(int nRows, int nCols)
 {
 	for (brush_t* pb = selected_brushes.next ; pb != &selected_brushes ; pb = pb->next)
@@ -3514,12 +3288,6 @@ brush_t* Patch_Parse(bool bOld)
   return b;
 }
 
-
-/*
-==================
-Patch_Write 
-==================
-*/
 void Patch_Write (patchMesh_t *p, CMemFile *file)
 {
 	if (g_qeglobals.bSurfacePropertiesPlugin)
@@ -3615,11 +3383,6 @@ void Patch_Write (patchMesh_t *p, FILE *file)
 }
 
 
-/*
-==================
-Patch_RotateTexture
-==================
-*/
 void Patch_RotateTexture(patchMesh_t *p, float fAngle)
 {
   vec3_t vMin, vMax;
@@ -3641,11 +3404,6 @@ void Patch_RotateTexture(patchMesh_t *p, float fAngle)
 }
 
 
-/*
-==================
-Patch_ScaleTexture
-==================
-*/
 void Patch_ScaleTexture(patchMesh_t *p, float fx, float fy, bool bFixup)
 {
   // FIXME:
@@ -3678,11 +3436,6 @@ void Patch_ScaleTexture(patchMesh_t *p, float fx, float fy, bool bFixup)
 }
 
 
-/*
-==================
-Patch_ShiftTexture
-==================
-*/
 void Patch_ShiftTexture(patchMesh_t *p, float fx, float fy)
 {
   //if (fx)
@@ -3722,11 +3475,6 @@ void patchInvert(patchMesh_t *p)
 	}
 }
 
-/*
-==================
-Patch_ToggleInverted
-==================
-*/
 void Patch_ToggleInverted()
 {
   bool bUpdate = false;
@@ -3747,11 +3495,6 @@ void Patch_ToggleInverted()
   UpdatePatchInspector();
 }
 
-/*
-==================
-Patch_ToggleInverted
-==================
-*/
 void Patch_InvertTexture(bool bY)
 {
   bool bUpdate = false;
@@ -3816,11 +3559,6 @@ void Patch_Save(patchMesh_t *p)
 }
 
 
-/*
-==================
-Patch_Restore
-==================
-*/
 void Patch_Restore(patchMesh_t *p)
 {
   p->width = patchSave.width;

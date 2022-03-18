@@ -34,11 +34,6 @@ DRAWSURF CONSTRUCTION
 =============================================================================
 */
 
-/*
-=================
-AllocDrawSurf
-=================
-*/
 mapDrawSurface_t	*AllocDrawSurf( void ) {
 	mapDrawSurface_t	*ds;
 
@@ -51,11 +46,6 @@ mapDrawSurface_t	*AllocDrawSurf( void ) {
 	return ds;
 }
 
-/*
-=================
-DrawSurfaceForSide
-=================
-*/
 #define	SNAP_FLOAT_TO_INT	8
 #define	SNAP_INT_TO_FLOAT	(1.0/SNAP_FLOAT_TO_INT)
 
@@ -185,12 +175,6 @@ void AddSideRef( side_t *side ) {
 }
 
 
-/*
-=====================
-MergeSides
-
-=====================
-*/
 void MergeSides( entity_t *e, tree_t *tree ) {
 	int				i;
 
@@ -205,11 +189,6 @@ void MergeSides( entity_t *e, tree_t *tree ) {
 
 //=====================================================================
 
-/*
-===================
-SubdivideDrawSurf
-===================
-*/
 void SubdivideDrawSurf( mapDrawSurface_t *ds, winding_t *w, float subdivisions ) {
 	int				i;
 	int				axis;
@@ -594,11 +573,6 @@ int FilterSideIntoTree_r( winding_t *w, side_t *side, mapDrawSurface_t *ds, node
 }
 
 
-/*
-=====================
-FilterFaceIntoTree
-=====================
-*/
 int	FilterFaceIntoTree( mapDrawSurface_t *ds, tree_t *tree ) {
 	int			l;
 	winding_t	*w;
@@ -611,11 +585,6 @@ int	FilterFaceIntoTree( mapDrawSurface_t *ds, tree_t *tree ) {
 
 
 
-/*
-=====================
-FilterPatchSurfIntoTree
-=====================
-*/
 #define	SUBDIVISION_LIMIT		8.0
 int FilterPatchSurfIntoTree( mapDrawSurface_t *ds, tree_t *tree ) {
 	int					i, j;
@@ -657,11 +626,6 @@ int FilterPatchSurfIntoTree( mapDrawSurface_t *ds, tree_t *tree ) {
 }
 
 
-/*
-=====================
-FilterMiscModelSurfIntoTree
-=====================
-*/
 int	FilterMiscModelSurfIntoTree( mapDrawSurface_t *ds, tree_t *tree ) {
 	int			i;
 	int			l;
@@ -685,11 +649,6 @@ int	FilterMiscModelSurfIntoTree( mapDrawSurface_t *ds, tree_t *tree ) {
 	return l;
 }
 
-/*
-=====================
-FilterFlareSurfIntoTree
-=====================
-*/
 int	FilterFlareSurfIntoTree( mapDrawSurface_t *ds, tree_t *tree ) {
 	return FilterMapDrawSurfIntoTree( ds->lightmapOrigin, ds, tree->headnode );
 }
@@ -875,11 +834,6 @@ static void SurfaceAsTristrip( dsurface_t *ds ) {
 	numDrawIndexes += ni;
 }
 
-/*
-===============
-EmitPlanarSurf
-===============
-*/
 void EmitPlanarSurf( mapDrawSurface_t *ds ) {
 	int				j;
 	dsurface_t		*out;
@@ -925,11 +879,6 @@ void EmitPlanarSurf( mapDrawSurface_t *ds ) {
 }
 
 
-/*
-===============
-EmitPatchSurf
-===============
-*/
 void EmitPatchSurf( mapDrawSurface_t *ds ) {
 	int				j;
 	dsurface_t		*out;
@@ -983,11 +932,6 @@ void EmitPatchSurf( mapDrawSurface_t *ds ) {
 	}
 }
 
-/*
-===============
-EmitFlareSurf
-===============
-*/
 void EmitFlareSurf( mapDrawSurface_t *ds ) {
 	dsurface_t		*out;
 
@@ -1007,11 +951,6 @@ void EmitFlareSurf( mapDrawSurface_t *ds ) {
 }
 
 
-/*
-===============
-EmitModelSurf
-===============
-*/
 void EmitModelSurf( mapDrawSurface_t *ds ) {
 	int				j;
 	dsurface_t		*out;

@@ -288,11 +288,6 @@ void Field_BigDraw( field_t *edit, int x, int y, int width, qboolean showCursor 
 	Field_VariableSizeDraw( edit, x, y, width, BIGCHAR_WIDTH, showCursor );
 }
 
-/*
-================
-Field_Paste
-================
-*/
 void Field_Paste( field_t *edit ) {
 	char	*cbd;
 	int		pasteLen, i;
@@ -382,11 +377,6 @@ void Field_KeyDownEvent( field_t *edit, int key ) {
 	}
 }
 
-/*
-==================
-Field_CharEvent
-==================
-*/
 void Field_CharEvent( field_t *edit, int ch ) {
 	int		len;
 
@@ -657,11 +647,6 @@ void Key_SetOverstrikeMode( qboolean state ) {
 }
 
 
-/*
-===================
-Key_IsDown
-===================
-*/
 qboolean Key_IsDown( int keynum ) {
 	if ( keynum == -1 ) {
 		return qfalse;
@@ -777,11 +762,6 @@ char *Key_KeynumToString( int keynum ) {
 }
 
 
-/*
-===================
-Key_SetBinding
-===================
-*/
 void Key_SetBinding( int keynum, const char *binding ) {
 	if ( keynum == -1 ) {
 		return;
@@ -801,11 +781,6 @@ void Key_SetBinding( int keynum, const char *binding ) {
 }
 
 
-/*
-===================
-Key_GetBinding
-===================
-*/
 char *Key_GetBinding( int keynum ) {
 	if ( keynum == -1 ) {
 		return "";
@@ -833,11 +808,6 @@ int Key_GetKey(const char *binding) {
   return -1;
 }
 
-/*
-===================
-Key_Unbind_f
-===================
-*/
 void Key_Unbind_f (void)
 {
 	int		b;
@@ -858,11 +828,6 @@ void Key_Unbind_f (void)
 	Key_SetBinding (b, "");
 }
 
-/*
-===================
-Key_Unbindall_f
-===================
-*/
 void Key_Unbindall_f (void)
 {
 	int		i;
@@ -873,11 +838,6 @@ void Key_Unbindall_f (void)
 }
 
 
-/*
-===================
-Key_Bind_f
-===================
-*/
 void Key_Bind_f (void)
 {
 	int			i, c, b;
@@ -940,12 +900,6 @@ void Key_WriteBindings( fileHandle_t f ) {
 }
 
 
-/*
-============
-Key_Bindlist_f
-
-============
-*/
 void Key_Bindlist_f( void ) {
 	int		i;
 
@@ -956,11 +910,6 @@ void Key_Bindlist_f( void ) {
 	}
 }
 
-/*
-===================
-CL_InitKeyCommands
-===================
-*/
 void CL_InitKeyCommands( void ) {
 	// register our functions
 	Cmd_AddCommand ("bind",Key_Bind_f);
@@ -969,11 +918,6 @@ void CL_InitKeyCommands( void ) {
 	Cmd_AddCommand ("bindlist",Key_Bindlist_f);
 }
 
-/*
-===================
-CL_AddKeyUpCommands
-===================
-*/
 void CL_AddKeyUpCommands( int key, char *kb ) {
 	int i;
 	char button[1024], *buttonPtr;
@@ -1229,11 +1173,6 @@ void CL_CharEvent( int key ) {
 }
 
 
-/*
-===================
-Key_ClearStates
-===================
-*/
 void Key_ClearStates (void)
 {
 	int		i;

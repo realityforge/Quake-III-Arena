@@ -211,12 +211,6 @@ static void CG_CalcVrect (void) {
 //==============================================================================
 
 
-/*
-===============
-CG_OffsetThirdPersonView
-
-===============
-*/
 #define	FOCUS_DISTANCE	512
 static void CG_OffsetThirdPersonView( void ) {
 	vec3_t		forward, right, up;
@@ -302,12 +296,6 @@ static void CG_StepOffset( void ) {
 	}
 }
 
-/*
-===============
-CG_OffsetFirstPersonView
-
-===============
-*/
 static void CG_OffsetFirstPersonView( void ) {
 	float			*origin;
 	float			*angles;
@@ -532,12 +520,6 @@ static int CG_CalcFov( void ) {
 
 
 
-/*
-===============
-CG_DamageBlendBlob
-
-===============
-*/
 static void CG_DamageBlendBlob( void ) {
 	int			t;
 	int			maxTime;
@@ -672,11 +654,6 @@ static int CG_CalcViewValues( void ) {
 }
 
 
-/*
-=====================
-CG_PowerupTimerSounds
-=====================
-*/
 static void CG_PowerupTimerSounds( void ) {
 	int		i;
 	int		t;
@@ -696,11 +673,6 @@ static void CG_PowerupTimerSounds( void ) {
 	}
 }
 
-/*
-=====================
-CG_AddBufferedSound
-=====================
-*/
 void CG_AddBufferedSound( sfxHandle_t sfx ) {
 	if ( !sfx )
 		return;
@@ -711,11 +683,6 @@ void CG_AddBufferedSound( sfxHandle_t sfx ) {
 	}
 }
 
-/*
-=====================
-CG_PlayBufferedSounds
-=====================
-*/
 static void CG_PlayBufferedSounds( void ) {
 	if ( cg.soundTime < cg.time ) {
 		if (cg.soundBufferOut != cg.soundBufferIn && cg.soundBuffer[cg.soundBufferOut]) {

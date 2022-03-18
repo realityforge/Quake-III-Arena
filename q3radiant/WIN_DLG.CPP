@@ -352,11 +352,6 @@ void SelectBrush (int entitynum, int brushnum)
 	Sys_Status ("Selected.", 0);
 }
 
-/*
-=================
-GetSelectionIndex
-=================
-*/
 void GetSelectionIndex (int *ent, int *brush)
 {
 	brush_t		*b, *b2;
@@ -564,11 +559,6 @@ void DoSides(bool bCone, bool bSphere, bool bTorus)
 
 //======================================================================
 
-/*
-===================
-DoAbout
-===================
-*/
 BOOL CALLBACK AboutDlgProc( HWND hwndDlg,
 						    UINT uMsg,
 						    WPARAM wParam,

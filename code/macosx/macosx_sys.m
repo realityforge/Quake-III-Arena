@@ -60,12 +60,6 @@ int main(int argc, const char *argv[]) {
 
 //===========================================================================
 
-/*
-=================
-Sys_UnloadDll
-
-=================
-*/
 void Sys_UnloadDll( void *dllHandle ) {
 	if ( !dllHandle ) {
 		return;
@@ -151,20 +145,10 @@ char *Sys_GetClipboardData(void) // FIXME
 }
 #endif
 
-/*
-==================
-Sys_FunctionCheckSum
-==================
-*/
 int Sys_FunctionCheckSum(void *f1) {
 	return 0;
 }
 
-/*
-==================
-Sys_MonkeyShouldBeSpanked
-==================
-*/
 int Sys_MonkeyShouldBeSpanked( void ) {
 	return 0;
 }
@@ -199,11 +183,6 @@ void Sys_Init(void)
     Sys_InitInput();	
 }
 
-/*
-=================
-Sys_Shutdown
-=================
-*/
 void Sys_Shutdown(void)
 {
     Com_Printf( "----- Sys_Shutdown -----\n" );
@@ -275,11 +254,6 @@ void Sys_StreamSeek( fileHandle_t f, int offset, int origin ) {
 	FS_Seek( f, offset, origin );
 }
 
-/*
-==================
-Sys_LowPhysicalMemory()
-==================
-*/
 #define MEM_THRESHOLD 96*1024*1024
 
 qboolean Sys_LowPhysicalMemory()

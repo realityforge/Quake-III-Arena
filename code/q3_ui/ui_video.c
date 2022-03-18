@@ -63,11 +63,6 @@ typedef struct
 
 static driverinfo_t	s_driverinfo;
 
-/*
-=================
-DriverInfo_Event
-=================
-*/
 static void DriverInfo_Event( void* ptr, int event )
 {
 	if (event != QM_ACTIVATED)
@@ -81,11 +76,6 @@ static void DriverInfo_Event( void* ptr, int event )
 	}
 }
 
-/*
-=================
-DriverInfo_MenuDraw
-=================
-*/
 static void DriverInfo_MenuDraw( void )
 {
 	int	i;
@@ -114,11 +104,6 @@ static void DriverInfo_MenuDraw( void )
 		UI_DrawString( 320, y, s_driverinfo.strings[s_driverinfo.numstrings-1], UI_CENTER|UI_SMALLFONT, text_color_normal );
 }
 
-/*
-=================
-DriverInfo_Cache
-=================
-*/
 void DriverInfo_Cache( void )
 {
 	int	i;
@@ -132,11 +117,6 @@ void DriverInfo_Cache( void )
 	}
 }
 
-/*
-=================
-UI_DriverInfo_Menu
-=================
-*/
 static void UI_DriverInfo_Menu( void )
 {
 	char*	eptr;
@@ -322,11 +302,6 @@ static InitialVideoOptions_s s_ivo_templates[] =
 
 #define NUM_IVO_TEMPLATES ( sizeof( s_ivo_templates ) / sizeof( s_ivo_templates[0] ) )
 
-/*
-=================
-GraphicsOptions_GetInitialVideo
-=================
-*/
 static void GraphicsOptions_GetInitialVideo( void )
 {
 	s_ivo.colordepth  = s_graphicsoptions.colordepth.curvalue;
@@ -341,11 +316,6 @@ static void GraphicsOptions_GetInitialVideo( void )
 	s_ivo.texturebits = s_graphicsoptions.texturebits.curvalue;
 }
 
-/*
-=================
-GraphicsOptions_CheckConfig
-=================
-*/
 static void GraphicsOptions_CheckConfig( void )
 {
 	int i;
@@ -376,11 +346,6 @@ static void GraphicsOptions_CheckConfig( void )
 	s_graphicsoptions.list.curvalue = 4;
 }
 
-/*
-=================
-GraphicsOptions_UpdateMenuItems
-=================
-*/
 static void GraphicsOptions_UpdateMenuItems( void )
 {
 	if ( s_graphicsoptions.driver.curvalue == 1 )
@@ -458,11 +423,6 @@ static void GraphicsOptions_UpdateMenuItems( void )
 	GraphicsOptions_CheckConfig();
 }	
 
-/*
-=================
-GraphicsOptions_ApplyChanges
-=================
-*/
 static void GraphicsOptions_ApplyChanges( void *unused, int notification )
 {
 	if (notification != QM_ACTIVATED)
@@ -532,11 +492,6 @@ static void GraphicsOptions_ApplyChanges( void *unused, int notification )
 	trap_Cmd_ExecuteText( EXEC_APPEND, "vid_restart\n" );
 }
 
-/*
-=================
-GraphicsOptions_Event
-=================
-*/
 static void GraphicsOptions_Event( void* ptr, int event ) {
 	InitialVideoOptions_s *ivo;
 
@@ -598,11 +553,6 @@ static void GraphicsOptions_Event( void* ptr, int event ) {
 }
 
 
-/*
-================
-GraphicsOptions_TQEvent
-================
-*/
 static void GraphicsOptions_TQEvent( void *ptr, int event ) {
 	if( event != QM_ACTIVATED ) {
 	 	return;
@@ -611,11 +561,6 @@ static void GraphicsOptions_TQEvent( void *ptr, int event ) {
 }
 
 
-/*
-================
-GraphicsOptions_MenuDraw
-================
-*/
 void GraphicsOptions_MenuDraw (void)
 {
 //APSFIX - rework this
@@ -624,11 +569,6 @@ void GraphicsOptions_MenuDraw (void)
 	Menu_Draw( &s_graphicsoptions.menu );
 }
 
-/*
-=================
-GraphicsOptions_SetMenuItems
-=================
-*/
 static void GraphicsOptions_SetMenuItems( void )
 {
 	s_graphicsoptions.mode.curvalue = trap_Cvar_VariableValue( "r_mode" );
@@ -712,11 +652,6 @@ static void GraphicsOptions_SetMenuItems( void )
 	}
 }
 
-/*
-================
-GraphicsOptions_MenuInit
-================
-*/
 void GraphicsOptions_MenuInit( void )
 {
 	static const char *s_driver_names[] =
@@ -1042,11 +977,6 @@ void GraphicsOptions_MenuInit( void )
 }
 
 
-/*
-=================
-GraphicsOptions_Cache
-=================
-*/
 void GraphicsOptions_Cache( void ) {
 	trap_R_RegisterShaderNoMip( GRAPHICSOPTIONS_FRAMEL );
 	trap_R_RegisterShaderNoMip( GRAPHICSOPTIONS_FRAMER );
@@ -1057,11 +987,6 @@ void GraphicsOptions_Cache( void ) {
 }
 
 
-/*
-=================
-UI_GraphicsOptionsMenu
-=================
-*/
 void UI_GraphicsOptionsMenu( void ) {
 	GraphicsOptions_MenuInit();
 	UI_PushMenu( &s_graphicsoptions.menu );

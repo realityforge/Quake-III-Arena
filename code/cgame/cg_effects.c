@@ -203,11 +203,6 @@ void CG_SpawnEffect( vec3_t org ) {
 
 
 #ifdef MISSIONPACK
-/*
-===============
-CG_LightningBoltBeam
-===============
-*/
 void CG_LightningBoltBeam( vec3_t start, vec3_t end ) {
 	localEntity_t	*le;
 	refEntity_t		*beam;
@@ -228,11 +223,6 @@ void CG_LightningBoltBeam( vec3_t start, vec3_t end ) {
 	beam->customShader = cgs.media.lightningShader;
 }
 
-/*
-==================
-CG_KamikazeEffect
-==================
-*/
 void CG_KamikazeEffect( vec3_t org ) {
 	localEntity_t	*le;
 	refEntity_t		*re;
@@ -259,11 +249,6 @@ void CG_KamikazeEffect( vec3_t org ) {
 
 }
 
-/*
-==================
-CG_ObeliskExplode
-==================
-*/
 void CG_ObeliskExplode( vec3_t org, int entityNum ) {
 	localEntity_t	*le;
 	vec3_t origin;
@@ -281,11 +266,6 @@ void CG_ObeliskExplode( vec3_t org, int entityNum ) {
 	le->lightColor[2] = 0.0;
 }
 
-/*
-==================
-CG_ObeliskPain
-==================
-*/
 void CG_ObeliskPain( vec3_t org ) {
 	float r;
 	sfxHandle_t sfx;
@@ -303,11 +283,6 @@ void CG_ObeliskPain( vec3_t org ) {
 }
 
 
-/*
-==================
-CG_InvulnerabilityImpact
-==================
-*/
 void CG_InvulnerabilityImpact( vec3_t org, vec3_t angles ) {
 	localEntity_t	*le;
 	refEntity_t		*re;
@@ -344,11 +319,6 @@ void CG_InvulnerabilityImpact( vec3_t org, vec3_t angles ) {
 	trap_S_StartSound (org, ENTITYNUM_NONE, CHAN_BODY, sfx );
 }
 
-/*
-==================
-CG_InvulnerabilityJuiced
-==================
-*/
 void CG_InvulnerabilityJuiced( vec3_t org ) {
 	localEntity_t	*le;
 	refEntity_t		*re;
@@ -379,11 +349,6 @@ void CG_InvulnerabilityJuiced( vec3_t org ) {
 
 #endif
 
-/*
-==================
-CG_ScorePlum
-==================
-*/
 void CG_ScorePlum( int client, vec3_t org, int score ) {
 	localEntity_t	*le;
 	refEntity_t		*re;
@@ -425,12 +390,7 @@ void CG_ScorePlum( int client, vec3_t org, int score ) {
 }
 
 
-/*
-====================
-CG_MakeExplosion
-====================
-*/
-localEntity_t *CG_MakeExplosion( vec3_t origin, vec3_t dir, 
+localEntity_t *CG_MakeExplosion( vec3_t origin, vec3_t dir,
 								qhandle_t hModel, qhandle_t shader,
 								int msec, qboolean isSprite ) {
 	float			ang;
@@ -521,11 +481,6 @@ void CG_Bleed( vec3_t origin, int entityNum ) {
 
 
 
-/*
-==================
-CG_LaunchGib
-==================
-*/
 void CG_LaunchGib( vec3_t origin, vec3_t velocity, qhandle_t hModel ) {
 	localEntity_t	*le;
 	refEntity_t		*re;
@@ -638,11 +593,6 @@ void CG_GibPlayer( vec3_t playerOrigin ) {
 	CG_LaunchGib( origin, velocity, cgs.media.gibLeg );
 }
 
-/*
-==================
-CG_LaunchGib
-==================
-*/
 void CG_LaunchExplode( vec3_t origin, vec3_t velocity, qhandle_t hModel ) {
 	localEntity_t	*le;
 	refEntity_t		*re;

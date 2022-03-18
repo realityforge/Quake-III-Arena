@@ -49,21 +49,10 @@ float	pm_spectatorfriction = 5.0f;
 int		c_pmove = 0;
 
 
-/*
-===============
-PM_AddEvent
-
-===============
-*/
 void PM_AddEvent( int newEvent ) {
 	BG_AddPredictableEventToPlayerstate( newEvent, 0, pm->ps );
 }
 
-/*
-===============
-PM_AddTouchEnt
-===============
-*/
 void PM_AddTouchEnt( int entityNum ) {
 	int		i;
 
@@ -86,11 +75,6 @@ void PM_AddTouchEnt( int entityNum ) {
 	pm->numtouch++;
 }
 
-/*
-===================
-PM_StartTorsoAnim
-===================
-*/
 static void PM_StartTorsoAnim( int anim ) {
 	if ( pm->ps->pm_type >= PM_DEAD ) {
 		return;
@@ -351,11 +335,6 @@ static void PM_SetMovementDir( void ) {
 }
 
 
-/*
-=============
-PM_CheckJump
-=============
-*/
 static qboolean PM_CheckJump( void ) {
 	if ( pm->ps->pm_flags & PMF_RESPAWNED ) {
 		return qfalse;		// don't allow jump until all buttons are up
@@ -392,11 +371,6 @@ static qboolean PM_CheckJump( void ) {
 	return qtrue;
 }
 
-/*
-=============
-PM_CheckWaterJump
-=============
-*/
 static qboolean	PM_CheckWaterJump( void ) {
 	vec3_t	spot;
 	int		cont;
@@ -462,12 +436,6 @@ static void PM_WaterJumpMove( void ) {
 	}
 }
 
-/*
-===================
-PM_WaterMove
-
-===================
-*/
 static void PM_WaterMove( void ) {
 	int		i;
 	vec3_t	wishvel;
@@ -578,12 +546,6 @@ static void PM_FlyMove( void ) {
 }
 
 
-/*
-===================
-PM_AirMove
-
-===================
-*/
 static void PM_AirMove( void ) {
 	int			i;
 	vec3_t		wishvel;
@@ -633,12 +595,6 @@ static void PM_AirMove( void ) {
 	PM_StepSlideMove ( qtrue );
 }
 
-/*
-===================
-PM_GrappleMove
-
-===================
-*/
 static void PM_GrappleMove( void ) {
 	vec3_t vel, v;
 	float vlen;
@@ -659,12 +615,6 @@ static void PM_GrappleMove( void ) {
 	pml.groundPlane = qfalse;
 }
 
-/*
-===================
-PM_WalkMove
-
-===================
-*/
 static void PM_WalkMove( void ) {
 	int			i;
 	vec3_t		wishvel;
@@ -785,11 +735,6 @@ static void PM_WalkMove( void ) {
 }
 
 
-/*
-==============
-PM_DeadMove
-==============
-*/
 static void PM_DeadMove( void ) {
 	float	forward;
 
@@ -810,11 +755,6 @@ static void PM_DeadMove( void ) {
 }
 
 
-/*
-===============
-PM_NoclipMove
-===============
-*/
 static void PM_NoclipMove( void ) {
 	float	speed, drop, friction, control, newspeed;
 	int			i;
@@ -977,11 +917,6 @@ static void PM_CrashLand( void ) {
 }
 
 /*
-=============
-PM_CheckStuck
-=============
-*/
-/*
 void PM_CheckStuck(void) {
 	trace_t trace;
 
@@ -992,11 +927,6 @@ void PM_CheckStuck(void) {
 }
 */
 
-/*
-=============
-PM_CorrectAllSolid
-=============
-*/
 static int PM_CorrectAllSolid( trace_t *trace ) {
 	int			i, j, k;
 	vec3_t		point;
@@ -1075,11 +1005,6 @@ static void PM_GroundTraceMissed( void ) {
 }
 
 
-/*
-=============
-PM_GroundTrace
-=============
-*/
 static void PM_GroundTrace( void ) {
 	vec3_t		point;
 	trace_t		trace;
@@ -1290,11 +1215,6 @@ static void PM_CheckDuck (void)
 //===================================================================
 
 
-/*
-===============
-PM_Footsteps
-===============
-*/
 static void PM_Footsteps( void ) {
 	float		bobmove;
 	int			old;
@@ -1437,11 +1357,6 @@ static void PM_WaterEvents( void ) {		// FIXME?
 }
 
 
-/*
-===============
-PM_BeginWeaponChange
-===============
-*/
 static void PM_BeginWeaponChange( int weapon ) {
 	if ( weapon <= WP_NONE || weapon >= WP_NUM_WEAPONS ) {
 		return;
@@ -1462,11 +1377,6 @@ static void PM_BeginWeaponChange( int weapon ) {
 }
 
 
-/*
-===============
-PM_FinishWeaponChange
-===============
-*/
 static void PM_FinishWeaponChange( void ) {
 	int		weapon;
 
@@ -1486,12 +1396,6 @@ static void PM_FinishWeaponChange( void ) {
 }
 
 
-/*
-==============
-PM_TorsoAnimation
-
-==============
-*/
 static void PM_TorsoAnimation( void ) {
 	if ( pm->ps->weaponstate == WEAPON_READY ) {
 		if ( pm->ps->weapon == WP_GAUNTLET ) {
@@ -1681,11 +1585,6 @@ static void PM_Weapon( void ) {
 	pm->ps->weaponTime += addTime;
 }
 
-/*
-================
-PM_Animate
-================
-*/
 
 static void PM_Animate( void ) {
 	if ( pm->cmd.buttons & BUTTON_GESTURE ) {
@@ -1730,11 +1629,6 @@ static void PM_Animate( void ) {
 }
 
 
-/*
-================
-PM_DropTimers
-================
-*/
 static void PM_DropTimers( void ) {
 	// drop misc timing counter
 	if ( pm->ps->pm_time ) {
@@ -1801,12 +1695,6 @@ void PM_UpdateViewAngles( playerState_t *ps, const usercmd_t *cmd ) {
 }
 
 
-/*
-================
-PmoveSingle
-
-================
-*/
 void trap_SnapVector( float *v );
 
 void PmoveSingle (pmove_t *pmove) {

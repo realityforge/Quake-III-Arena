@@ -68,11 +68,6 @@ void OutputWinding (winding_t *w, FILE *glview)
 	fprintf (glview, "\n");
 }
 
-/*
-=============
-OutputPortal
-=============
-*/
 void OutputPortal (portal_t *p, FILE *glview)
 {
 	winding_t	*w;
@@ -95,11 +90,6 @@ void OutputPortal (portal_t *p, FILE *glview)
 		FreeWinding(w);
 }
 
-/*
-=============
-WriteGLView_r
-=============
-*/
 void WriteGLView_r (node_t *node, FILE *glview)
 {
 	portal_t	*p, *nextp;
@@ -124,11 +114,6 @@ void WriteGLView_r (node_t *node, FILE *glview)
 	}
 }
 
-/*
-=============
-WriteGLView
-=============
-*/
 void WriteGLView (tree_t *tree, char *source)
 {
 	char	name[1024];

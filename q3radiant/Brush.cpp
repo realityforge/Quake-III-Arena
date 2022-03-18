@@ -73,21 +73,6 @@ void PrintVector (vec3_t v)
   printf ("(%5.2f, %5.2f, %5.2f)\n",  v[0],  v[1], v[2]);
 }
 
-
-/*
-=============================================================================
-
-			TEXTURE COORDINATES
-
-=============================================================================
-*/
-
-
-/*
-==================
-textureAxisFromPlane
-==================
-*/
 vec3_t	baseaxis[18] =
 {
 {0,0,1}, {1,0,0}, {0,-1,0},			// floor
@@ -161,11 +146,6 @@ float SetShadeForPlane (plane_t *p)
 vec3_t  vecs[2];
 float	shift[2];
 
-/*
-================
-Face_Alloc
-================
-*/
 face_t *Face_Alloc( void )
 {
 	face_t *f = (face_t*)qmalloc( sizeof( *f ) );
@@ -176,11 +156,6 @@ face_t *Face_Alloc( void )
 	return f;
 }
 
-/*
-================
-Face_Free
-================
-*/
 void Face_Free( face_t *f )
 {
 	assert( f != 0 );
@@ -208,11 +183,6 @@ void Face_Free( face_t *f )
 	free( f );
 }
 
-/*
-================
-Face_Clone
-================
-*/
 face_t	*Face_Clone (face_t *f)
 {
 	face_t	*n;
@@ -249,11 +219,6 @@ face_t	*Face_FullClone (face_t *f)
 	return n;
 }
 
-/*
-================
-Clamp
-================
-*/
 void Clamp(float& f, int nClamp)
 {
   float fFrac = f - static_cast<int>(f);
@@ -261,11 +226,6 @@ void Clamp(float& f, int nClamp)
   f += fFrac;
 }
 
-/*
-================
-Face_MoveTexture
-================
-*/
 void Face_MoveTexture(face_t *f, vec3_t delta)
 {
 	vec3_t vX, vY;
@@ -306,12 +266,7 @@ void Face_MoveTexture(face_t *f, vec3_t delta)
 	}
 }
 
-/*
-================
-Face_SetColor
-================
-*/
-void Face_SetColor (brush_t *b, face_t *f, float fCurveColor) 
+void Face_SetColor (brush_t *b, face_t *f, float fCurveColor)
 {
 	float	shade;
 	qtexture_t *q;
@@ -424,11 +379,6 @@ void Face_TextureVectors (face_t *f, float STfromXYZ[2][4])
 	}
 }
 
-/*
-================
-Face_MakePlane
-================
-*/
 void Face_MakePlane (face_t *f)
 {
 	int		j;
@@ -449,11 +399,6 @@ void Face_MakePlane (face_t *f)
 	f->plane.dist = DotProduct (t3, f->plane.normal);
 }
 
-/*
-================
-EmitTextureCoordinates
-================
-*/
 void EmitTextureCoordinates ( float *xyzst, qtexture_t *q, face_t *f)
 {
 	float	STfromXYZ[2][4];
@@ -465,11 +410,6 @@ void EmitTextureCoordinates ( float *xyzst, qtexture_t *q, face_t *f)
 
 //==========================================================================
 
-/*
-================
-Brush_MakeFacePlanes
-================
-*/
 void Brush_MakeFacePlanes (brush_t *b)
 {
 	face_t	*f;
@@ -480,11 +420,6 @@ void Brush_MakeFacePlanes (brush_t *b)
 	}
 }
 
-/*
-================
-DrawBrushEntityName
-================
-*/
 void DrawBrushEntityName (brush_t *b)
 {
 	char	*name;
@@ -567,11 +502,6 @@ winding_t *Brush_MakeFaceWinding (brush_t *b, face_t *face)
 	return w;
 }
 
-/*
-=================
-Brush_SnapPlanepts
-=================
-*/
 void Brush_SnapPlanepts (brush_t *b)
 {
 	int		i, j;
@@ -784,11 +714,6 @@ brush_t *Brush_MakeConvexBrushes(brush_t *b)
 	return b;
 }
 
-/*
-=================
-Brush_Convex
-=================
-*/
 int Brush_Convex(brush_t *b)
 {
 	face_t *face1, *face2;
@@ -1545,11 +1470,6 @@ int Brush_MoveVertex(brush_t *b, vec3_t vertex, vec3_t delta, vec3_t end, bool b
 	return result;
 }
 
-/*
-=================
-Brush_InsertVertexBetween
-=================
-*/
 int Brush_InsertVertexBetween(brush_t *b, vec3_t p1, vec3_t p2)
 {
 	face_t *face;
@@ -1594,11 +1514,6 @@ int Brush_InsertVertexBetween(brush_t *b, vec3_t p1, vec3_t p2)
 }
 
 
-/*
-=================
-Brush_ResetFaceOriginals
-=================
-*/
 void Brush_ResetFaceOriginals(brush_t *b)
 {
 	face_t *face;
@@ -2509,11 +2424,6 @@ void Brush_Free (brush_t *b, bool bRemoveNode)
 	free (b);
 }
 
-/*
-=============
-Face_MemorySize
-=============
-*/
 int Face_MemorySize(face_t *f )
 {
 	int size = 0;
@@ -2527,11 +2437,6 @@ int Face_MemorySize(face_t *f )
 	return size;
 }
 
-/*
-=============
-Brush_MemorySize
-=============
-*/
 int Brush_MemorySize(brush_t *b)
 {
 	face_t	*f;
@@ -4149,11 +4054,6 @@ void Brush_DrawXY(brush_t *b, int nViewType)
 
 }
 
-/*
-============
-Brush_Move
-============
-*/
 void Brush_Move (brush_t *b, const vec3_t move, bool bSnap)
 {
   int i;

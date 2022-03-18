@@ -73,12 +73,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 static qboolean localClient; // true if local client has been displayed
 
 
-							 /*
-=================
-CG_DrawScoreboard
-=================
-*/
-static void CG_DrawClientScore( int y, score_t *score, float *color, float fade, qboolean largeFormat ) {
+							static void CG_DrawClientScore( int y, score_t *score, float *color, float fade, qboolean largeFormat ) {
 	char	string[1024];
 	vec3_t	headAngles;
 	clientInfo_t	*ci;
@@ -224,11 +219,6 @@ static void CG_DrawClientScore( int y, score_t *score, float *color, float fade,
 	}
 }
 
-/*
-=================
-CG_TeamScoreboard
-=================
-*/
 static int CG_TeamScoreboard( int y, team_t team, float fade, int maxClients, int lineHeight ) {
 	int		i;
 	score_t	*score;
@@ -423,11 +413,6 @@ qboolean CG_DrawOldScoreboard( void ) {
 
 //================================================================================
 
-/*
-================
-CG_CenterGiantLine
-================
-*/
 static void CG_CenterGiantLine( float y, const char *string ) {
 	float		x;
 	vec4_t		color;

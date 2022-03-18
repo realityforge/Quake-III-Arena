@@ -25,11 +25,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "winding.h"
 
 
-/*
-=============
-CSG_MakeHollow
-=============
-*/
 
 void Brush_Scale(brush_t* b)
 {
@@ -458,11 +453,6 @@ brush_t *Brush_Subtract(brush_t *a, brush_t *b)
 	return out;
 }
 
-/*
-=============
-CSG_Subtract
-=============
-*/
 void CSG_Subtract (void)
 {
 	brush_t		*b, *s, *fragments, *nextfragment, *frag, *next, *snext;
@@ -583,11 +573,6 @@ void CSG_Subtract (void)
 	Sys_UpdateWindows(W_ALL);
 }
 
-/*
-=============
-CSG_Merge
-=============
-*/
 void CSG_Merge(void)
 {
 	brush_t *b, *next, *newlist, *newbrush;

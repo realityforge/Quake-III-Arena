@@ -89,21 +89,11 @@ static const facet_t		*debugFacet;
 static qboolean		debugBlock;
 static vec3_t		debugBlockPoints[4];
 
-/*
-=================
-CM_ClearLevelPatches
-=================
-*/
 void CM_ClearLevelPatches( void ) {
 	debugPatchCollide = NULL;
 	debugFacet = NULL;
 }
 
-/*
-=================
-CM_SignbitsForNormal
-=================
-*/
 static int CM_SignbitsForNormal( vec3_t normal ) {
 	int	bits, j;
 
@@ -137,15 +127,6 @@ static qboolean CM_PlaneFromPoints( vec4_t plane, vec3_t a, vec3_t b, vec3_t c )
 	plane[3] = DotProduct( a, plane );
 	return qtrue;
 }
-
-
-/*
-================================================================================
-
-GRID SUBDIVISION
-
-================================================================================
-*/
 
 /*
 =================
@@ -348,11 +329,6 @@ static void CM_SubdivideGridColumns( cGrid_t *grid ) {
 	}
 }
 
-/*
-======================
-CM_ComparePoints
-======================
-*/
 #define	POINT_EPSILON	0.1
 static qboolean CM_ComparePoints( float *a, float *b ) {
 	float		d;
@@ -423,11 +399,6 @@ static	facet_t			facets[MAX_PATCH_PLANES]; //maybe MAX_FACETS ??
 #define	NORMAL_EPSILON	0.0001
 #define	DIST_EPSILON	0.02
 
-/*
-==================
-CM_PlaneEqual
-==================
-*/
 int CM_PlaneEqual(patchPlane_t *p, float plane[4], int *flipped) {
 	float invplane[4];
 
@@ -457,11 +428,6 @@ int CM_PlaneEqual(patchPlane_t *p, float plane[4], int *flipped) {
 	return qfalse;
 }
 
-/*
-==================
-CM_SnapVector
-==================
-*/
 void CM_SnapVector(vec3_t normal) {
 	int		i;
 
@@ -510,11 +476,6 @@ int CM_FindPlane2(float plane[4], int *flipped) {
 	return numPlanes-1;
 }
 
-/*
-==================
-CM_FindPlane
-==================
-*/
 static int CM_FindPlane( float *p1, float *p2, float *p3 ) {
 	float	plane[4];
 	int		i;
@@ -562,11 +523,6 @@ static int CM_FindPlane( float *p1, float *p2, float *p3 ) {
 	return numPlanes-1;
 }
 
-/*
-==================
-CM_PointOnPlaneSide
-==================
-*/
 static int CM_PointOnPlaneSide( float *p, int planeNum ) {
 	float	*plane;
 	float	d;
@@ -589,11 +545,6 @@ static int CM_PointOnPlaneSide( float *p, int planeNum ) {
 	return SIDE_ON;
 }
 
-/*
-==================
-CM_GridPlane
-==================
-*/
 static int	CM_GridPlane( int gridPlanes[MAX_GRID_SIZE][MAX_GRID_SIZE][2], int i, int j, int tri ) {
 	int		p;
 
@@ -611,11 +562,6 @@ static int	CM_GridPlane( int gridPlanes[MAX_GRID_SIZE][MAX_GRID_SIZE][2], int i,
 	return -1;
 }
 
-/*
-==================
-CM_EdgePlaneNum
-==================
-*/
 static int CM_EdgePlaneNum( cGrid_t *grid, int gridPlanes[MAX_GRID_SIZE][MAX_GRID_SIZE][2], int i, int j, int k ) {
 	float	*p1, *p2;
 	vec3_t		up;
@@ -670,11 +616,6 @@ static int CM_EdgePlaneNum( cGrid_t *grid, int gridPlanes[MAX_GRID_SIZE][MAX_GRI
 	return -1;
 }
 
-/*
-===================
-CM_SetBorderInward
-===================
-*/
 static void CM_SetBorderInward( facet_t *facet, cGrid_t *grid, int gridPlanes[MAX_GRID_SIZE][MAX_GRID_SIZE][2],
 						  int i, int j, int which ) {
 	int		k, l;
@@ -799,11 +740,6 @@ static qboolean CM_ValidateFacet( facet_t *facet ) {
 	return qtrue;		// winding is fine
 }
 
-/*
-==================
-CM_AddFacetBevels
-==================
-*/
 void CM_AddFacetBevels( facet_t *facet ) {
 
 	int i, j, k, l;
@@ -972,11 +908,6 @@ typedef enum {
 	EN_LEFT
 } edgeName_t;
 
-/*
-==================
-CM_PatchCollideFromGrid
-==================
-*/
 static void CM_PatchCollideFromGrid( cGrid_t *grid, patchCollide_t *pf ) {
 	int				i, j;
 	float			*p1, *p2, *p3;
@@ -1323,11 +1254,6 @@ void CM_TracePointThroughPatchCollide( traceWork_t *tw, const struct patchCollid
 	}
 }
 
-/*
-====================
-CM_CheckFacetPlane
-====================
-*/
 int CM_CheckFacetPlane(float *plane, vec3_t start, vec3_t end, float *enterFrac, float *leaveFrac, int *hit) {
 	float d1, d2, f;
 
@@ -1369,11 +1295,6 @@ int CM_CheckFacetPlane(float *plane, vec3_t start, vec3_t end, float *enterFrac,
 	return qtrue;
 }
 
-/*
-====================
-CM_TraceThroughPatchCollide
-====================
-*/
 void CM_TraceThroughPatchCollide( traceWork_t *tw, const struct patchCollide_s *pc ) {
 	int i, j, hit, hitnum;
 	float offset, enterFrac, leaveFrac, t;
@@ -1496,20 +1417,6 @@ void CM_TraceThroughPatchCollide( traceWork_t *tw, const struct patchCollide_s *
 	}
 }
 
-
-/*
-=======================================================================
-
-POSITION TEST
-
-=======================================================================
-*/
-
-/*
-====================
-CM_PositionTestInPatchCollide
-====================
-*/
 qboolean CM_PositionTestInPatchCollide( traceWork_t *tw, const struct patchCollide_s *pc ) {
 	int i, j;
 	float offset, t;
@@ -1593,13 +1500,7 @@ qboolean CM_PositionTestInPatchCollide( traceWork_t *tw, const struct patchColli
 	return qfalse;
 }
 
-/*
-=======================================================================
 
-DEBUGGING
-
-=======================================================================
-*/
 
 
 /*

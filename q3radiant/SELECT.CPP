@@ -36,11 +36,6 @@ void clearSelection() {
 	g_qeglobals.selectObject = NULL;
 }
 
-/*
-===========
-Test_Ray
-===========
-*/
 #define	DIST_START	999999
 trace_t Test_Ray (vec3_t origin, vec3_t dir, int flags)
 {
@@ -206,12 +201,6 @@ trace_t Test_Ray (vec3_t origin, vec3_t dir, int flags)
 }
 
 
-/*
-============
-Select_Brush
-
-============
-*/
 void Select_Brush (brush_t *brush, bool bComplete, bool bStatus)
 {
 	brush_t	*b;
@@ -416,11 +405,6 @@ void Select_Deselect (bool bDeselectFaces)
 	Sys_UpdateWindows (W_ALL);
 }
 
-/*
-============
-Select_Move
-============
-*/
 void Select_Move (vec3_t delta, bool bSnap)
 {
 	brush_t	*b;
@@ -581,13 +565,7 @@ void WINAPI Select_SetTexture (texdef_t *texdef, brushprimit_texdef_t *brushprim
 }
 
 
-/*
-================================================================
 
-  TRANSFORMATIONS
-
-================================================================
-*/
 
 void Select_GetBounds (vec3_t mins, vec3_t maxs)
 {
@@ -1244,11 +1222,6 @@ void Select_Ungroup(void)
 }
 
 
-/*
-====================
-Select_MakeStructural
-====================
-*/
 void Select_MakeStructural (void)
 {
 	brush_t	*b;
@@ -1697,11 +1670,6 @@ void Select_ShowAllHidden()
 }
 
 
-/*
-============
-Select_Invert
-============
-*/
 void Select_Invert(void)
 {
 	brush_t *next, *prev;

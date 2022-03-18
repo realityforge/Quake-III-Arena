@@ -60,11 +60,6 @@ typedef struct {
 static optionsmenu_t	s_options;
 
 
-/*
-=================
-Options_Event
-=================
-*/
 static void Options_Event( void* ptr, int event ) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -94,11 +89,6 @@ static void Options_Event( void* ptr, int event ) {
 }
 
 
-/*
-===============
-SystemConfig_Cache
-===============
-*/
 void SystemConfig_Cache( void ) {
 	trap_R_RegisterShaderNoMip( ART_FRAMEL );
 	trap_R_RegisterShaderNoMip( ART_FRAMER );
@@ -106,11 +96,6 @@ void SystemConfig_Cache( void ) {
 	trap_R_RegisterShaderNoMip( ART_BACK1 );
 }
 
-/*
-===============
-Options_MenuInit
-===============
-*/
 void Options_MenuInit( void ) {
 	int				y;
 	uiClientState_t	cstate;
@@ -218,11 +203,6 @@ void Options_MenuInit( void ) {
 }
 
 
-/*
-===============
-UI_SystemConfigMenu
-===============
-*/
 void UI_SystemConfigMenu( void ) {
 	Options_MenuInit();
 	UI_PushMenu ( &s_options.menu );

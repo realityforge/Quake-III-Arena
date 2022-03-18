@@ -256,11 +256,6 @@ void SetEntityOrigins( void );
 
 socket_t *debug_socket;
 
-/*
-=====================
-DebugNet_Setup
-=====================
-*/
 void DebugNet_Setup(void)
 {
 	address_t address;
@@ -276,11 +271,6 @@ void DebugNet_Setup(void)
 	}
 }
 
-/*
-=====================
-DebugNet_Shutdown
-=====================
-*/
 void DebugNet_Shutdown(void)
 {
 	netmessage_t msg;
@@ -296,11 +286,6 @@ void DebugNet_Shutdown(void)
 	Net_Shutdown();
 }
 
-/*
-=====================
-DebugNet_RemoveAllPolys
-=====================
-*/
 void DebugNet_RemoveAllPolys(void)
 {
 	netmessage_t msg;
@@ -312,11 +297,6 @@ void DebugNet_RemoveAllPolys(void)
 	Net_Send(debug_socket, &msg);
 }
 
-/*
-====================
-DebugNet_DrawWinding
-=====================
-*/
 void DebugNet_DrawWinding(winding_t *w, int color)
 {
 	netmessage_t msg;
@@ -337,11 +317,6 @@ void DebugNet_DrawWinding(winding_t *w, int color)
 	Net_Send(debug_socket, &msg);
 }
 
-/*
-=====================
-DebugNet_DrawLine
-=====================
-*/
 void DebugNet_DrawLine(vec3_t p1, vec3_t p2, int color)
 {
 	netmessage_t msg;
@@ -360,11 +335,6 @@ void DebugNet_DrawLine(vec3_t p1, vec3_t p2, int color)
 	Net_Send(debug_socket, &msg);
 }
 
-/*
-=====================
-DebugNet_DrawMesh
-=====================
-*/
 void DebugNet_DrawMesh(mesh_t *mesh)
 {
 	int i, j;
@@ -415,11 +385,6 @@ void DebugNet_DrawMesh(mesh_t *mesh)
 	}
 }
 
-/*
-=====================
-VS_DrawLightVolume
-=====================
-*/
 int VS_ChopWinding (winding_t *in, plane_t *split, float epsilon);
 
 void VS_DrawLightVolume(vsound_t *light, lightvolume_t *volume)
@@ -465,11 +430,6 @@ void VS_DrawLightVolume(vsound_t *light, lightvolume_t *volume)
 	}
 }
 
-/*
-=============
-VS_DrawLightmapPixel
-=============
-*/
 void VS_DrawLightmapPixel(int surfaceNum, int x, int y, int color)
 {
 	winding_t w;
@@ -502,11 +462,6 @@ void VS_DrawLightmapPixel(int surfaceNum, int x, int y, int color)
 	DebugNet_DrawWinding(&w, color);
 }
 
-/*
-============
-VS_DrawPortals
-============
-*/
 void VS_DrawPortals(void)
 {
 	int j;
@@ -519,11 +474,6 @@ void VS_DrawPortals(void)
 	}
 }
 
-/*
-============
-VS_DrawLeaf
-============
-*/
 void VS_DrawLeaf(int cluster)
 {
 	int i;
@@ -540,11 +490,6 @@ void VS_DrawLeaf(int cluster)
 
 #endif //DEBUGNET
 
-/*
-=============
-VS_SplitWinding
-=============
-*/
 int VS_SplitWinding (winding_t *in, winding_t *back, plane_t *split, float epsilon)
 {
 	vec_t	dists[128];
@@ -671,11 +616,6 @@ int VS_SplitWinding (winding_t *in, winding_t *back, plane_t *split, float epsil
 	return SIDE_CROSS;
 }
 
-/*
-=====================
-VS_LinkSurfaceIntoCluster
-=====================
-*/
 void VS_LinkSurfaceIntoCluster(int cluster, int surfaceNum)
 {
 	lleaf_t *leaf;
@@ -704,11 +644,6 @@ void VS_LinkSurfaceIntoCluster(int cluster, int surfaceNum)
 		Error("MAX_MAP_LEAFFACES");
 }
 
-/*
-=====================
-VS_R_LinkSurface
-=====================
-*/
 void VS_R_LinkSurface(int nodenum, int surfaceNum, winding_t *w)
 {
 	int leafnum, cluster, res;
@@ -783,11 +718,6 @@ void VS_LinkSurfaces(void)
 	}
 }
 
-/*
-=====================
-VS_TextureMatrixFromPoints
-=====================
-*/
 void VS_TextureMatrixFromPoints( lFacet_t *f, drawVert_t *a, drawVert_t *b, drawVert_t *c ) {
 	int			i, j;
 	float		t;
@@ -892,11 +822,6 @@ void VS_TextureMatrixFromPoints( lFacet_t *f, drawVert_t *a, drawVert_t *b, draw
 	}
 }
 
-/*
-=====================
-VS_LightmapMatrixFromPoints
-=====================
-*/
 void VS_LightmapMatrixFromPoints( dsurface_t *dsurf, shaderInfo_t *si, lFacet_t *f, drawVert_t *a, drawVert_t *b, drawVert_t *c ) {
 	int			i, j;
 	float		t;
@@ -1128,11 +1053,6 @@ void VS_LightmapMatrixFromPoints( dsurface_t *dsurf, shaderInfo_t *si, lFacet_t 
 	}
 }
 
-/*
-=============
-Plane_Equal
-=============
-*/
 #define	NORMAL_EPSILON	0.0001
 #define	DIST_EPSILON	0.02
 
@@ -1162,11 +1082,6 @@ static int Plane_Equal(plane_t *a, plane_t *b, int flip)
 	return qfalse;
 }
 
-/*
-=============
-VS_PlaneFromPoints
-=============
-*/
 qboolean VS_PlaneFromPoints( plane_t *plane, const vec3_t a, const vec3_t b, const vec3_t c ) {
 	vec3_t	d1, d2;
 
@@ -1181,11 +1096,6 @@ qboolean VS_PlaneFromPoints( plane_t *plane, const vec3_t a, const vec3_t b, con
 	return qtrue;
 }
 
-/*
-=====================
-VS_GenerateBoundaryForPoints
-=====================
-*/
 void VS_GenerateBoundaryForPoints( plane_t *boundary, plane_t *plane, vec3_t a, vec3_t b ) {
 	vec3_t	d1;
 
@@ -1319,11 +1229,6 @@ qboolean VS_GenerateFacetFor4Points( dsurface_t *dsurf, shaderInfo_t *si, lFacet
 	return qtrue;
 }
 
-/*
-===============
-VS_SphereFromBounds
-===============
-*/
 void VS_SphereFromBounds( vec3_t mins, vec3_t maxs, vec3_t origin, float *radius ) {
 	vec3_t		temp;
 
@@ -1333,11 +1238,6 @@ void VS_SphereFromBounds( vec3_t mins, vec3_t maxs, vec3_t origin, float *radius
 	*radius = VectorLength( temp );
 }
 
-/*
-====================
-VS_FacetsForTriangleSurface
-====================
-*/
 void VS_FacetsForTriangleSurface( dsurface_t *dsurf, shaderInfo_t *si, lsurfaceTest_t *test ) {
 	int			i;
 	drawVert_t	*v1, *v2, *v3, *v4;
@@ -1387,11 +1287,6 @@ void VS_FacetsForTriangleSurface( dsurface_t *dsurf, shaderInfo_t *si, lsurfaceT
 	test->numFacets = count;
 }
 
-/*
-====================
-VS_FacetsForPatch
-====================
-*/
 void VS_FacetsForPatch( dsurface_t *dsurf, int surfaceNum, shaderInfo_t *si, lsurfaceTest_t *test ) {
 	int			i, j, x, y;
 	drawVert_t	*v1, *v2, *v3, *v4;
@@ -1484,11 +1379,6 @@ void VS_FacetsForPatch( dsurface_t *dsurf, int surfaceNum, shaderInfo_t *si, lsu
 	FreeMesh(subdivided);
 }
 
-/*
-=====================
-VS_InitSurfacesForTesting
-=====================
-*/
 void VS_InitSurfacesForTesting( void ) {
 
 	int				i, j, k;
@@ -1548,11 +1438,6 @@ void VS_InitSurfacesForTesting( void ) {
 	VS_LinkSurfaces();
 }
 
-/*
-=============
-VS_ChopWinding
-=============
-*/
 int VS_ChopWinding (winding_t *in, plane_t *split, float epsilon)
 {
 	vec_t	dists[128];
@@ -1701,11 +1586,6 @@ int VS_ChopWindingWithBrush(winding_t *w, dbrush_t *brush, winding_t *outwinding
 	return numout;
 }
 
-/*
-=============
-VS_WindingAreaOutsideBrushes
-=============
-*/
 float VS_WindingAreaOutsideBrushes(winding_t *w, int *brushnums, int numbrushes)
 {
 	int i, j, numwindings[2], n;
@@ -1764,11 +1644,6 @@ float VS_WindingAreaOutsideBrushes(winding_t *w, int *brushnums, int numbrushes)
 	return area;
 }
 
-/*
-=============
-VS_R_WindingAreaOutsideSolid
-=============
-*/
 float VS_R_WindingAreaOutsideSolid(winding_t *w, vec3_t normal, int nodenum)
 {
 	int leafnum, res;
@@ -1819,21 +1694,11 @@ float VS_R_WindingAreaOutsideSolid(winding_t *w, vec3_t normal, int nodenum)
 	return area;
 }
 
-/*
-=============
-VS_WindingAreaOutsideSolid
-=============
-*/
 float VS_WindingAreaOutsideSolid(winding_t *w, vec3_t normal)
 {
 	return VS_R_WindingAreaOutsideSolid(w, normal, 0);
 }
 
-/*
-=============
-VS_ChopWindingWithFacet
-=============
-*/
 float VS_ChopWindingWithFacet(winding_t *w, lFacet_t *facet)
 {
 	int i;
@@ -1923,11 +1788,6 @@ void VS_CalcVisibleLightmapPixelArea(void)
 	}
 }
 
-/*
-=============
-VS_FindAdjacentSurface
-=============
-*/
 int VS_FindAdjacentSurface(int surfaceNum, int facetNum, vec3_t p1, vec3_t p2, int *sNum, int *fNum, int *point)
 {
 	int i, j, k;
@@ -2200,11 +2060,6 @@ void VS_SmoothenLightmapEdges(void)
 	}
 }
 
-/*
-=============
-VS_FixLightmapEdges
-=============
-*/
 void VS_FixLightmapEdges(void)
 {
 	int				i, j, x, y, k, foundvalue, height, width, index;
@@ -2551,11 +2406,6 @@ void VS_FixLightmapEdges(void)
 	VS_SmoothenLightmapEdges();
 }
 
-/*
-=============
-VS_ShiftPatchLightmaps
-=============
-*/
 void VS_ShiftPatchLightmaps(void)
 {
 	int				i, j, x, y, k;
@@ -2610,11 +2460,6 @@ void VS_ShiftPatchLightmaps(void)
 	}
 }
 
-/*
-=============
-VS_StoreLightmap
-=============
-*/
 void VS_StoreLightmap(void)
 {
 	int				i, x, y, k;
@@ -2656,11 +2501,6 @@ void VS_StoreLightmap(void)
 	}
 }
 
-/*
-=============
-PointInLeafnum
-=============
-*/
 static int	PointInLeafnum(vec3_t point)
 {
 	int		nodenum;
@@ -2683,11 +2523,6 @@ static int	PointInLeafnum(vec3_t point)
 	return -nodenum - 1;
 }
 
-/*
-=============
-VS_PointInLeafnum_r
-=============
-*/
 int	VS_PointInLeafnum_r(vec3_t point, int nodenum)
 {
 	int leafnum;
@@ -2721,21 +2556,11 @@ int	VS_PointInLeafnum_r(vec3_t point, int nodenum)
 	return leafnum;
 }
 
-/*
-=============
-VS_PointInLeafnum
-=============
-*/
 int	VS_PointInLeafnum(vec3_t point)
 {
 	return VS_PointInLeafnum_r(point, 0);
 }
 
-/*
-=============
-VS_LightLeafnum
-=============
-*/
 int VS_LightLeafnum(vec3_t point)
 {
 	/*
@@ -2780,11 +2605,6 @@ int VS_LightLeafnum(vec3_t point)
 winding_t *lightwindings[MAX_MAP_DRAW_SURFS];
 int numlightwindings;
 
-/*
-=============
-VS_DrawLightWindings
-=============
-*/
 void VS_DrawLightWindings(void)
 {
 	int i;
@@ -2796,11 +2616,6 @@ void VS_DrawLightWindings(void)
 	}
 }
 
-/*
-=============
-VS_LightSurfaceWithVolume
-=============
-*/
 void VS_LightSurfaceWithVolume(int surfaceNum, int facetNum, vsound_t *light, lightvolume_t *volume)
 {
 	winding_t *w;
@@ -2830,11 +2645,6 @@ void VS_LightSurfaceWithVolume(int surfaceNum, int facetNum, vsound_t *light, li
 
 #else
 
-/*
-=============
-VS_LightSurfaceWithVolume
-=============
-*/
 /*
 int VS_PointInsideLightVolume(vec3_t point, lightvolume_t *volume)
 {
@@ -3073,11 +2883,6 @@ void VS_GetFilter(vsound_t *light, lightvolume_t *volume, vec3_t lmp, vec3_t fil
 	}
 }
 
-/*
-=============
-VS_LightSurfaceWithVolume
-=============
-*/
 void VS_LightSurfaceWithVolume( int surfaceNum, int facetNum, vsound_t *light, lightvolume_t *volume )
 {
 	int i;
@@ -3660,11 +3465,6 @@ void VS_LightSurfaceWithVolume( int surfaceNum, int facetNum, vsound_t *light, l
 
 #endif
 
-/*
-=============
-VS_SplitLightVolume
-=============
-*/
 int VS_SplitLightVolume(lightvolume_t *volume, lightvolume_t *back, plane_t *split, float epsilon)
 {
 	lightvolume_t f, b;
@@ -3818,11 +3618,6 @@ int VS_SplitLightVolume(lightvolume_t *volume, lightvolume_t *back, plane_t *spl
 	return 2;
 }
 
-/*
-=============
-VS_PlaneForEdgeToWinding
-=============
-*/
 void VS_PlaneForEdgeToWinding(vec3_t p1, vec3_t p2, winding_t *w, int windingonfront, plane_t *plane)
 {
 	int i, j;
@@ -3875,11 +3670,6 @@ void VS_PlaneForEdgeToWinding(vec3_t p1, vec3_t p2, winding_t *w, int windingonf
 	}
 }
 
-/*
-=============
-VS_R_CastLightAtSurface
-=============
-*/
 void VS_R_FloodLight(vsound_t *light, lightvolume_t *volume, int cluster, int firstportal);
 
 void VS_R_CastLightAtSurface(vsound_t *light, lightvolume_t *volume)
@@ -3920,11 +3710,6 @@ void VS_R_CastLightAtSurface(vsound_t *light, lightvolume_t *volume)
 	}
 }
 
-/*
-=============
-VS_R_SplitLightVolume
-=============
-*/
 static int numvolumes = 0;
 
 int VS_R_SplitLightVolume(vsound_t *light, lightvolume_t *volume, plane_t *split, int cluster, int firstportal)
@@ -3964,11 +3749,6 @@ int VS_R_SplitLightVolume(vsound_t *light, lightvolume_t *volume, plane_t *split
 	return res;
 }
 
-/*
-=============
-VS_R_FloodLight
-=============
-*/
 void VS_R_FloodLight(vsound_t *light, lightvolume_t *volume, int cluster, int firstportal)
 {
 	int i, j, k, res, surfaceNum, backfaceculled, testculled;
@@ -4259,20 +4039,10 @@ void VS_R_FloodLight(vsound_t *light, lightvolume_t *volume, int cluster, int fi
 	}
 }
 
-/*
-=============
-VS_R_FloodAreaSpotLight
-=============
-*/
 void VS_FloodAreaSpotLight(vsound_t *light, winding_t *w, int leafnum)
 {
 }
 
-/*
-=============
-VS_R_SubdivideAreaSpotLight
-=============
-*/
 void VS_R_SubdivideAreaSpotLight(vsound_t *light, int nodenum, winding_t *w)
 {
 	int leafnum, res;
@@ -4317,20 +4087,10 @@ void VS_R_SubdivideAreaSpotLight(vsound_t *light, int nodenum, winding_t *w)
 	}
 }
 
-/*
-=============
-VS_R_FloodRadialAreaLight
-=============
-*/
 void VS_FloodRadialAreaLight(vsound_t *light, winding_t *w, int leafnum)
 {
 }
 
-/*
-=============
-VS_R_SubdivideRadialAreaLight
-=============
-*/
 void VS_R_SubdivideRadialAreaLight(vsound_t *light, int nodenum, winding_t *w)
 {
 	int leafnum, res;
@@ -4375,11 +4135,6 @@ void VS_R_SubdivideRadialAreaLight(vsound_t *light, int nodenum, winding_t *w)
 	}
 }
 
-/*
-=============
-VS_R_FloodDirectedLight
-=============
-*/
 void VS_FloodDirectedLight(vsound_t *light, winding_t *w, int leafnum)
 {
 	int i;
@@ -4424,11 +4179,6 @@ void VS_FloodDirectedLight(vsound_t *light, winding_t *w, int leafnum)
 	}
 }
 
-/*
-=============
-VS_R_SubdivideDirectedAreaLight
-=============
-*/
 void VS_R_SubdivideDirectedAreaLight(vsound_t *light, int nodenum, winding_t *w)
 {
 	int leafnum, res;
@@ -4473,11 +4223,6 @@ void VS_R_SubdivideDirectedAreaLight(vsound_t *light, int nodenum, winding_t *w)
 	}
 }
 
-/*
-=============
-VS_FloodLight
-=============
-*/
 void VS_FloodLight(vsound_t *light)
 {
 	lightvolume_t volume;
@@ -4741,21 +4486,11 @@ void VS_FloodLight(vsound_t *light)
 	}
 }
 
-/*
-=============
-VS_FloodLightThread
-=============
-*/
 void VS_FloodLightThread(int num)
 {
 	VS_FloodLight(vsounds[num]);
 }
 
-/*
-=============
-VS_TestLightLeafs
-=============
-*/
 void VS_TestLightLeafs(void)
 {
 	int leafnum, i;
@@ -4779,11 +4514,6 @@ void VS_TestLightLeafs(void)
 }
 
 
-/*
-=============
-VS_DoForcedTraceLight
-=============
-*/
 // from light.c
 void TraceLtm( int num );
 
@@ -4820,11 +4550,6 @@ void VS_DoForcedTraceLight(int num)
 	TraceLtm(num);
 }
 
-/*
-=============
-VS_DoForcedTraceLightSurfaces
-=============
-*/
 void VS_DoForcedTraceLightSurfaces(void)
 {
 	_printf( "forced trace light\n" );
@@ -4833,11 +4558,6 @@ void VS_DoForcedTraceLightSurfaces(void)
 
 float *oldLightFloats;
 
-/*
-=============
-VS_SurfaceRadiosity
-=============
-*/
 void VS_SurfaceRadiosity( int num ) {
 	dsurface_t		*ds;
 	mesh_t			*mesh;
@@ -4928,11 +4648,6 @@ void VS_Radiosity(void) {
 	free(oldLightFloats);
 }
 
-/*
-=============
-VS_LightWorld
-=============
-*/
 void VS_LightWorld(void)
 {
 	int i, numcastedvolumes, numvsoundsinsolid;
@@ -4979,11 +4694,6 @@ void VS_LightWorld(void)
 	VS_DoForcedTraceLightSurfaces();
 }
 
-/*
-=============
-VS_CreateEntitySpeakers
-=============
-*/
 entity_t *FindTargetEntity( const char *target );
 
 void VS_CreateEntitySpeakers (void)
@@ -5086,12 +4796,7 @@ void VS_CreateEntitySpeakers (void)
 	_printf("%7i entity lights\n", c_entityLights);
 }
 
-/*
-==================
-VS_SubdivideAreaLight
-==================
-*/
-void VS_SubdivideAreaLight( shaderInfo_t *ls, winding_t *w, vec3_t normal, 
+void VS_SubdivideAreaLight( shaderInfo_t *ls, winding_t *w, vec3_t normal,
 						float areaSubdivide, qboolean backsplash ) {
 	float			area, value, intensity;
 	vsound_t			*dl, *dl2;
@@ -5177,11 +4882,6 @@ void VS_SubdivideAreaLight( shaderInfo_t *ls, winding_t *w, vec3_t normal,
 	}
 }
 
-/*
-==================
-VS_CreateFakeSurfaceLights
-==================
-*/
 void VS_CreateFakeSurfaceLights( void ) {
 	int				i, j, side;
 	dsurface_t		*ds;
@@ -5305,11 +5005,6 @@ void VS_CreateFakeSurfaceLights( void ) {
 }
 
 
-/*
-==================
-VS_WindingForBrushSide
-==================
-*/
 winding_t *VS_WindingForBrushSide(dbrush_t *brush, int side, winding_t *w)
 {
 	int i, res;
@@ -5337,11 +5032,6 @@ winding_t *VS_WindingForBrushSide(dbrush_t *brush, int side, winding_t *w)
 	return w;
 }
 
-/*
-==================
-VS_CreateSkyLights
-==================
-*/
 void VS_CreateSkyLights(void)
 {
 	int				i, j, c_skyLights;
@@ -5398,11 +5088,6 @@ void VS_CreateSkyLights(void)
 	_printf("%7i light emitting sky surfaces\n", c_skyLights);
 }
 
-/*
-==================
-VS_SetPortalSphere
-==================
-*/
 void VS_SetPortalSphere (lportal_t *p)
 {
 	int		i;
@@ -5432,11 +5117,6 @@ void VS_SetPortalSphere (lportal_t *p)
 	p->radius = bestr;
 }
 
-/*
-==================
-VS_PlaneFromWinding
-==================
-*/
 void VS_PlaneFromWinding (winding_t *w, plane_t *plane)
 {
 	vec3_t		v1, v2;
@@ -5449,11 +5129,6 @@ void VS_PlaneFromWinding (winding_t *w, plane_t *plane)
 	plane->dist = DotProduct (w->points[0], plane->normal);
 }
 
-/*
-==================
-VS_AllocWinding
-==================
-*/
 winding_t *VS_AllocWinding (int points)
 {
 	winding_t	*w;
@@ -5469,11 +5144,6 @@ winding_t *VS_AllocWinding (int points)
 	return w;
 }
 
-/*
-============
-VS_LoadPortals
-============
-*/
 void VS_LoadPortals (char *name)
 {
 	int			i, j, hint;
@@ -5586,11 +5256,6 @@ void VS_LoadPortals (char *name)
 	fclose (f);
 }
 
-/*
-============
-VLightMain
-============
-*/
 int VSoundMain (int argc, char **argv) {
 	int			i;
 	double		start, end;

@@ -528,11 +528,6 @@ int Q3_CopyLump( q3_dheader_t	*header, int lump, void **dest, int size ) {
 	return length / size;
 }
 
-/*
-=============
-CountTriangles
-=============
-*/
 void CountTriangles( void ) {
 	int i, numTris, numPatchTris;
 	q3_dsurface_t *surface;

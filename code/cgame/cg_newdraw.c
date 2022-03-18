@@ -1728,23 +1728,13 @@ void CG_MouseEvent(int x, int y) {
 
 }
 
-/*
-==================
-CG_HideTeamMenus
-==================
 
-*/
 void CG_HideTeamMenu() {
   Menus_CloseByName("teamMenu");
   Menus_CloseByName("getMenu");
 }
 
-/*
-==================
-CG_ShowTeamMenus
-==================
 
-*/
 void CG_ShowTeamMenu() {
   Menus_OpenByName("teamMenu");
 }

@@ -312,15 +312,6 @@ void Warning (char *error, ...)
   Sys_Printf(text);
 }
 
-
-/*
-======================================================================
-
-FILE DIALOGS
-
-======================================================================
-*/
- 
 qboolean ConfirmModified (void)
 {
 	if (!modified)
@@ -491,12 +482,6 @@ Menu modifications
 =======================================================
 */
 
-/*
-==================
-FillBSPMenu
-
-==================
-*/
 char	*bsp_commands[256];
 
 void FillBSPMenu (void)

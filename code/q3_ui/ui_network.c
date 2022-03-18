@@ -73,11 +73,6 @@ typedef struct {
 static networkOptionsInfo_t	networkOptionsInfo;
 
 
-/*
-=================
-UI_NetworkOptionsMenu_Event
-=================
-*/
 static void UI_NetworkOptionsMenu_Event( void* ptr, int event ) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -127,11 +122,6 @@ static void UI_NetworkOptionsMenu_Event( void* ptr, int event ) {
 }
 
 
-/*
-===============
-UI_NetworkOptionsMenu_Init
-===============
-*/
 static void UI_NetworkOptionsMenu_Init( void ) {
 	int		y;
 	int		rate;
@@ -256,11 +246,6 @@ static void UI_NetworkOptionsMenu_Init( void ) {
 }
 
 
-/*
-===============
-UI_NetworkOptionsMenu_Cache
-===============
-*/
 void UI_NetworkOptionsMenu_Cache( void ) {
 	trap_R_RegisterShaderNoMip( ART_FRAMEL );
 	trap_R_RegisterShaderNoMip( ART_FRAMER );
@@ -269,11 +254,6 @@ void UI_NetworkOptionsMenu_Cache( void ) {
 }
 
 
-/*
-===============
-UI_NetworkOptionsMenu
-===============
-*/
 void UI_NetworkOptionsMenu( void ) {
 	UI_NetworkOptionsMenu_Init();
 	UI_PushMenu( &networkOptionsInfo.menu );

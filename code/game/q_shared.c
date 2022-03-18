@@ -34,11 +34,6 @@ float Com_Clamp( float min, float max, float value ) {
 }
 
 
-/*
-============
-COM_SkipPath
-============
-*/
 char *COM_SkipPath (char *pathname)
 {
 	char	*last;
@@ -53,11 +48,6 @@ char *COM_SkipPath (char *pathname)
 	return last;
 }
 
-/*
-============
-COM_StripExtension
-============
-*/
 void COM_StripExtension( const char *in, char *out ) {
 	while ( *in && *in != '.' ) {
 		*out++ = *in++;
@@ -66,11 +56,6 @@ void COM_StripExtension( const char *in, char *out ) {
 }
 
 
-/*
-==================
-COM_DefaultExtension
-==================
-*/
 void COM_DefaultExtension (char *path, int maxSize, const char *extension ) {
 	char	oldPath[MAX_QPATH];
 	char    *src;
@@ -194,13 +179,7 @@ float FloatNoSwap (const float *f)
 	return *f;
 }
 
-/*
-============================================================================
 
-PARSING
-
-============================================================================
-*/
 
 static	char	com_token[MAX_TOKEN_CHARS];
 static	char	com_parsename[MAX_TOKEN_CHARS];
@@ -450,11 +429,6 @@ char *COM_ParseExt( char **data_p, qboolean allowLineBreaks )
 	return com_token;
 }
 
-/*
-==================
-COM_MatchToken
-==================
-*/
 void COM_MatchToken( char **buf_p, char *match ) {
 	char	*token;
 
@@ -492,11 +466,6 @@ void SkipBracedSection (char **program) {
 	} while( depth && *program );
 }
 
-/*
-=================
-SkipRestOfLine
-=================
-*/
 void SkipRestOfLine ( char **data ) {
 	char	*p;
 	int		c;
@@ -550,15 +519,6 @@ void Parse3DMatrix (char **buf_p, int z, int y, int x, float *m) {
 
 	COM_MatchToken( buf_p, ")" );
 }
-
-
-/*
-============================================================================
-
-					LIBRARY REPLACEMENT FUNCTIONS
-
-============================================================================
-*/
 
 int Q_isprint( int c )
 {
@@ -822,15 +782,6 @@ char	* QDECL va( char *format, ... ) {
 	return buf;
 }
 
-
-/*
-=====================================================================
-
-  INFO STRINGS
-
-=====================================================================
-*/
-
 /*
 ===============
 Info_ValueForKey
@@ -931,11 +882,6 @@ void Info_NextPair( const char **head, char *key, char *value ) {
 }
 
 
-/*
-===================
-Info_RemoveKey
-===================
-*/
 void Info_RemoveKey( char *s, const char *key ) {
 	char	*start;
 	char	pkey[MAX_INFO_KEY];
@@ -986,11 +932,6 @@ void Info_RemoveKey( char *s, const char *key ) {
 
 }
 
-/*
-===================
-Info_RemoveKey_Big
-===================
-*/
 void Info_RemoveKey_Big( char *s, const char *key ) {
 	char	*start;
 	char	pkey[BIG_INFO_KEY];

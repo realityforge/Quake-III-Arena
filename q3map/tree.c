@@ -46,11 +46,6 @@ node_t *NodeForPoint (node_t *node, vec3_t origin)
 
 
 
-/*
-=============
-FreeTreePortals_r
-=============
-*/
 void FreeTreePortals_r (node_t *node)
 {
 	portal_t	*p, *nextp;
@@ -75,11 +70,6 @@ void FreeTreePortals_r (node_t *node)
 	node->portals = NULL;
 }
 
-/*
-=============
-FreeTree_r
-=============
-*/
 void FreeTree_r (node_t *node)
 {
 	// free children
@@ -102,11 +92,6 @@ void FreeTree_r (node_t *node)
 }
 
 
-/*
-=============
-FreeTree
-=============
-*/
 void FreeTree (tree_t *tree)
 {
 	FreeTreePortals_r (tree->headnode);

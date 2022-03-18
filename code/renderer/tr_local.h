@@ -501,13 +501,7 @@ typedef struct {
 } viewParms_t;
 
 
-/*
-==============================================================================
 
-SURFACES
-
-==============================================================================
-*/
 
 // any changes in surfaceType must be mirrored in rb_surfaceTable[]
 typedef enum {
@@ -1228,14 +1222,6 @@ void		GLimp_SetGamma( unsigned char red[256],
 						    unsigned char green[256],
 							unsigned char blue[256] );
 
-
-/*
-====================================================================
-
-TESSELATOR/SHADER DECLARATIONS
-
-====================================================================
-*/
 typedef byte color4ub_t[4];
 
 typedef struct stageVars
@@ -1289,27 +1275,9 @@ void RB_AddQuadStampExt( vec3_t origin, vec3_t left, vec3_t up, byte *color, flo
 
 void RB_ShowImages( void );
 
-
-/*
-============================================================
-
-WORLD MAP
-
-============================================================
-*/
-
 void R_AddBrushModelSurfaces( trRefEntity_t *e );
 void R_AddWorldSurfaces( void );
 qboolean R_inPVS( const vec3_t p1, const vec3_t p2 );
-
-
-/*
-============================================================
-
-FLARES
-
-============================================================
-*/
 
 void R_ClearFlares( void );
 
@@ -1317,53 +1285,22 @@ void RB_AddFlare( void *surface, int fogNum, vec3_t point, vec3_t color, vec3_t 
 void RB_AddDlightFlares( void );
 void RB_RenderFlares (void);
 
-/*
-============================================================
 
-LIGHTS
-
-============================================================
-*/
 
 void R_DlightBmodel( bmodel_t *bmodel );
 void R_SetupEntityLighting( const trRefdef_t *refdef, trRefEntity_t *ent );
 void R_TransformDlights( int count, dlight_t *dl, orientationr_t *or );
 int R_LightForPoint( vec3_t point, vec3_t ambientLight, vec3_t directedLight, vec3_t lightDir );
 
-
-/*
-============================================================
-
-SHADOWS
-
-============================================================
-*/
-
 void RB_ShadowTessEnd( void );
 void RB_ShadowFinish( void );
 void RB_ProjectionShadowDeform( void );
-
-/*
-============================================================
-
-SKIES
-
-============================================================
-*/
 
 void R_BuildCloudData( shaderCommands_t *shader );
 void R_InitSkyTexCoords( float cloudLayerHeight );
 void R_DrawSkyBox( shaderCommands_t *shader );
 void RB_DrawSun( void );
 void RB_ClipSkyPolygons( shaderCommands_t *shader );
-
-/*
-============================================================
-
-CURVE TESSELATION
-
-============================================================
-*/
 
 #define PATCH_STITCHING
 
@@ -1373,25 +1310,8 @@ srfGridMesh_t *R_GridInsertColumn( srfGridMesh_t *grid, int column, int row, vec
 srfGridMesh_t *R_GridInsertRow( srfGridMesh_t *grid, int row, int column, vec3_t point, float loderror );
 void R_FreeSurfaceGridMesh( srfGridMesh_t *grid );
 
-/*
-============================================================
-
-MARKERS, POLYGON PROJECTION ON WORLD POLYGONS
-
-============================================================
-*/
-
 int R_MarkFragments( int numPoints, const vec3_t *points, const vec3_t projection,
 				   int maxPoints, vec3_t pointBuffer, int maxFragments, markFragment_t *fragmentBuffer );
-
-
-/*
-============================================================
-
-SCENE GENERATION
-
-============================================================
-*/
 
 void R_ResetFrameCounts( void );
 
@@ -1402,22 +1322,10 @@ void RE_AddLightToScene( const vec3_t org, float intensity, float r, float g, fl
 void RE_AddAdditiveLightToScene( const vec3_t org, float intensity, float r, float g, float b );
 void RE_RenderScene( const refdef_t *fd );
 
-/*
-=============================================================
-
-ANIMATED MODELS
-
-=============================================================
-*/
-
 void R_MakeAnimModel( model_t *model );
 void R_AddAnimSurfaces( trRefEntity_t *ent );
 void RB_SurfaceAnim( md4Surface_t *surfType );
 
-/*
-=============================================================
-=============================================================
-*/
 void	R_TransformModelToClip( const vec3_t src, const float *modelMatrix, const float *projectionMatrix,
 							vec4_t eye, vec4_t dst );
 void	R_TransformClipToWindow( const vec4_t clip, const viewParms_t *view, vec4_t normalized, vec4_t window );

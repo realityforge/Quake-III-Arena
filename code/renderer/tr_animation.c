@@ -33,11 +33,6 @@ frame.
 
 */
 
-/*
-==============
-R_AddAnimSurfaces
-==============
-*/
 void R_AddAnimSurfaces( trRefEntity_t *ent ) {
 	md4Header_t		*header;
 	md4Surface_t	*surface;
@@ -57,11 +52,6 @@ void R_AddAnimSurfaces( trRefEntity_t *ent ) {
 }
 
 
-/*
-==============
-RB_SurfaceAnim
-==============
-*/
 void RB_SurfaceAnim( md4Surface_t *surface ) {
 	int				i, j, k;
 	float			frontlerp, backlerp;

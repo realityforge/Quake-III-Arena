@@ -177,15 +177,6 @@ void IN_Win32Mouse( int *mx, int *my ) {
 	*my = current_pos.y - window_center_y;
 }
 
-
-/*
-============================================================
-
-DIRECT INPUT MOUSE CONTROL
-
-============================================================
-*/
-
 #undef DEFINE_GUID
 
 #define DEFINE_GUID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) \
@@ -243,11 +234,6 @@ static LPDIRECTINPUTDEVICE	g_pMouse;
 
 void IN_DIMouse( int *mx, int *my );
 
-/*
-========================
-IN_InitDIMouse
-========================
-*/
 qboolean IN_InitDIMouse( void ) {
     HRESULT		hr;
 	int			x, y;
@@ -334,11 +320,6 @@ qboolean IN_InitDIMouse( void ) {
 	return qtrue;
 }
 
-/*
-==========================
-IN_ShutdownDIMouse
-==========================
-*/
 void IN_ShutdownDIMouse( void ) {
     if (g_pMouse) {
 		IDirectInputDevice_Release(g_pMouse);
@@ -351,11 +332,6 @@ void IN_ShutdownDIMouse( void ) {
 	}
 }
 
-/*
-==========================
-IN_ActivateDIMouse
-==========================
-*/
 void IN_ActivateDIMouse( void ) {
 	HRESULT		hr;
 
@@ -373,11 +349,6 @@ void IN_ActivateDIMouse( void ) {
 	}
 }
 
-/*
-==========================
-IN_DeactivateDIMouse
-==========================
-*/
 void IN_DeactivateDIMouse( void ) {
 	if (!g_pMouse) {
 		return;
@@ -386,11 +357,6 @@ void IN_DeactivateDIMouse( void ) {
 }
 
 
-/*
-===================
-IN_DIMouse
-===================
-*/
 void IN_DIMouse( int *mx, int *my ) {
 	DIDEVICEOBJECTDATA	od;
 	DIMOUSESTATE		state;
@@ -541,12 +507,7 @@ void IN_DeactivateMouse( void ) {
 
 
 
-/*
-===========
-IN_StartupMouse
-===========
-*/
-void IN_StartupMouse( void ) 
+void IN_StartupMouse( void )
 {
 	s_wmv.mouseInitialized = qfalse;
   s_wmv.mouseStartupDelayed = qfalse;
@@ -582,11 +543,6 @@ void IN_StartupMouse( void )
 	s_wmv.mouseInitialized = qtrue;
 }
 
-/*
-===========
-IN_MouseEvent
-===========
-*/
 void IN_MouseEvent (int mstate)
 {
 	int		i;
@@ -614,11 +570,6 @@ void IN_MouseEvent (int mstate)
 }
 
 
-/*
-===========
-IN_MouseMove
-===========
-*/
 void IN_MouseMove ( void ) {
 	int		mx, my;
 
@@ -635,18 +586,6 @@ void IN_MouseMove ( void ) {
 	Sys_QueEvent( 0, SE_MOUSE, mx, my, 0, NULL );
 }
 
-
-/*
-=========================================================================
-
-=========================================================================
-*/
-
-/*
-===========
-IN_Startup
-===========
-*/
 void IN_Startup( void ) {
 	Com_Printf ("\n------- Input Initialization -------\n");
 	IN_StartupMouse ();
@@ -658,11 +597,6 @@ void IN_Startup( void ) {
 	in_joystick->modified = qfalse;
 }
 
-/*
-===========
-IN_Shutdown
-===========
-*/
 void IN_Shutdown( void ) {
 	IN_DeactivateMouse();
 	IN_ShutdownDIMouse();
@@ -671,11 +605,6 @@ void IN_Shutdown( void ) {
 }
 
 
-/*
-===========
-IN_Init
-===========
-*/
 void IN_Init( void ) {
 	// MIDI input controler variables
 	in_midi					= Cvar_Get ("in_midi",					"0",		CVAR_ARCHIVE);
@@ -764,24 +693,13 @@ void IN_Frame (void) {
 }
 
 
-/*
-===================
-IN_ClearStates
-===================
-*/
-void IN_ClearStates (void) 
+void IN_ClearStates (void)
 {
 	s_wmv.oldButtonState = 0;
 }
 
 
-/*
-=========================================================================
 
-JOYSTICK
-
-=========================================================================
-*/
 
 /* 
 =============== 
@@ -857,11 +775,6 @@ void IN_StartupJoystick (void) {
 	joy.avail = qtrue; 
 }
 
-/*
-===========
-JoyToF
-===========
-*/
 float JoyToF( int value ) {
 	float	fValue;
 
@@ -899,11 +812,6 @@ int	joyDirectionKeys[16] = {
 	K_JOY26, K_JOY27
 };
 
-/*
-===========
-IN_JoyMove
-===========
-*/
 void IN_JoyMove( void ) {
 	float	fAxisValue;
 	int		i;
@@ -1001,13 +909,7 @@ void IN_JoyMove( void ) {
 	}
 }
 
-/*
-=========================================================================
 
-MIDI
-
-=========================================================================
-*/
 
 static void MIDI_NoteOff( int note )
 {

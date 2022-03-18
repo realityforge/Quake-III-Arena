@@ -47,17 +47,6 @@ int fgetLittleLong (FILE *f)
 	return b1 + (b2<<8) + (b3<<16) + (b4<<24);
 }
 
-
-
-/*
-============================================================================
-
-						LBM STUFF
-
-============================================================================
-*/
-
-
 typedef unsigned char	UBYTE;
 //conflicts with windows typedef short			WORD;
 typedef unsigned short	UWORD;
@@ -160,11 +149,6 @@ byte  *LBMRLEDecompress (byte *source,byte *unpacked, int bpwidth)
 }
 
 
-/*
-=================
-LoadLBM
-=================
-*/
 void LoadLBM (const char *filename, byte **picture, byte **palette)
 {
 	byte    *LBMbuffer, *picbuffer, *cmapbuffer;
@@ -277,20 +261,6 @@ void LoadLBM (const char *filename, byte **picture, byte **palette)
 		*palette = cmapbuffer;
 }
 
-
-/*
-============================================================================
-
-							WRITE LBM
-
-============================================================================
-*/
-
-/*
-==============
-WriteLBMfile
-==============
-*/
 void WriteLBMfile (const char *filename, byte *data,
 				   int width, int height, byte *palette)
 {
@@ -398,15 +368,6 @@ void WriteLBMfile (const char *filename, byte *data,
 	free (lbm);
 }
 
-
-/*
-============================================================================
-
-LOAD PCX
-
-============================================================================
-*/
-
 typedef struct
 {
     char	manufacturer;
@@ -425,11 +386,6 @@ typedef struct
 } pcx_t;
 
 
-/*
-==============
-LoadPCX
-==============
-*/
 void LoadPCX (const char *filename, byte **pic, byte **palette, int *width, int *height)
 {
 	byte	*raw;
@@ -636,11 +592,6 @@ typedef struct _BITMAPCOREINFO {    // bmci
  
 */
 
-/*
-==============
-LoadBMP
-==============
-*/
 void LoadBMP (const char *filename, byte **pic, byte **palette, int *width, int *height)
 {
 	byte	*out;
@@ -754,15 +705,6 @@ void LoadBMP (const char *filename, byte **pic, byte **palette, int *width, int 
 	fclose (fin);
 }
 
-
-/*
-============================================================================
-
-LOAD IMAGE
-
-============================================================================
-*/
-
 /*
 ==============
 Load256Image
@@ -823,17 +765,6 @@ void Save256Image (const char *name, byte *pixels, byte *palette,
 		Error ("%s doesn't have a known image extension", name);
 }
 
-
-
-
-/*
-============================================================================
-
-TARGA IMAGE
-
-============================================================================
-*/
-
 typedef struct _TargaHeader {
 	unsigned char 	id_length, colormap_type, image_type;
 	unsigned short	colormap_index, colormap_length;
@@ -842,11 +773,6 @@ typedef struct _TargaHeader {
 	unsigned char	pixel_size, attributes;
 } TargaHeader;
 
-/*
-=============
-LoadTGABuffer
-=============
-*/
 void LoadTGABuffer ( byte *buffer, byte **pic, int *width, int *height)
 {
 	int		columns, rows, numPixels;
@@ -1055,11 +981,6 @@ void LoadTGABuffer ( byte *buffer, byte **pic, int *width, int *height)
 
 
 
-/*
-=============
-LoadTGA
-=============
-*/
 void LoadTGA (const char *name, byte **pixels, int *width, int *height)
 {
 	byte			*buffer;
@@ -1078,11 +999,6 @@ void LoadTGA (const char *name, byte **pixels, int *width, int *height)
 }
 
 
-/*
-================
-WriteTGA
-================
-*/
 void WriteTGA (const char *filename, byte *data, int width, int height) {
 	byte	*buffer;
 	int		i;

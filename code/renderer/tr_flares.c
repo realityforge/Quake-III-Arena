@@ -83,11 +83,6 @@ typedef struct flare_s {
 flare_t		r_flareStructs[MAX_FLARES];
 flare_t		*r_activeFlares, *r_inactiveFlares;
 
-/*
-==================
-R_ClearFlares
-==================
-*/
 void R_ClearFlares( void ) {
 	int		i;
 
@@ -189,11 +184,6 @@ void RB_AddFlare( void *surface, int fogNum, vec3_t point, vec3_t color, vec3_t 
 	f->eyeZ = eye[2];
 }
 
-/*
-==================
-RB_AddDlightFlares
-==================
-*/
 void RB_AddDlightFlares( void ) {
 	dlight_t		*l;
 	int				i, j, k;
@@ -235,11 +225,6 @@ FLARE BACK END
 ===============================================================================
 */
 
-/*
-==================
-RB_TestFlare
-==================
-*/
 void RB_TestFlare( flare_t *f ) {
 	float			depth;
 	qboolean		visible;
@@ -285,11 +270,6 @@ void RB_TestFlare( flare_t *f ) {
 }
 
 
-/*
-==================
-RB_RenderFlare
-==================
-*/
 void RB_RenderFlare( flare_t *f ) {
 	float			size;
 	vec3_t			color;

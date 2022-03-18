@@ -46,11 +46,6 @@ typedef struct
 static resetMenu_t	s_reset;
 
 
-/*
-=================
-Reset_MenuEvent
-=================
-*/
 void Reset_MenuEvent(void* ptr, int event) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -70,11 +65,6 @@ void Reset_MenuEvent(void* ptr, int event) {
 }
 
 
-/*
-=================
-Reset_MenuKey
-=================
-*/
 static sfxHandle_t Reset_MenuKey( int key ) {
 	switch ( key ) {
 	case K_KP_LEFTARROW:
@@ -99,11 +89,6 @@ static sfxHandle_t Reset_MenuKey( int key ) {
 }
 
 
-/*
-=================
-Reset_MenuDraw
-=================
-*/
 static void Reset_MenuDraw( void ) {
 	UI_DrawNamedPic( 142, 118, 359, 256, ART_FRAME );
 	UI_DrawProportionalString( 320, 194 + 10, "RESET GAME?", UI_CENTER|UI_INVERSE, color_red );
@@ -117,21 +102,11 @@ static void Reset_MenuDraw( void ) {
 }
 
 
-/*
-=================
-Reset_Cache
-=================
-*/
 void Reset_Cache( void ) {
 	trap_R_RegisterShaderNoMip( ART_FRAME );
 }
 
 
-/*
-=================
-UI_ResetMenu
-=================
-*/
 void UI_ResetMenu(void) {
 	uiClientState_t	cstate;
 	int	n1, n2, n3;

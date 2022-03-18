@@ -58,12 +58,6 @@ char		outbase[32];
 
 int			entity_num;
 
-/*
-============
-ProcessWorldModel
-
-============
-*/
 void ProcessWorldModel( void ) {
 	entity_t	*e;
 	tree_t		*tree;
@@ -169,12 +163,6 @@ void ProcessWorldModel( void ) {
 	FreeTree (tree);
 }
 
-/*
-============
-ProcessSubModel
-
-============
-*/
 void ProcessSubModel( void ) {
 	entity_t	*e;
 	tree_t		*tree;
@@ -231,11 +219,6 @@ void ProcessSubModel( void ) {
 }
 
 
-/*
-============
-ProcessModels
-============
-*/
 void ProcessModels (void)
 {
 	qboolean	oldVerbose;
@@ -265,11 +248,6 @@ void ProcessModels (void)
 	verbose = oldVerbose;
 }
 
-/*
-============
-Bspinfo
-============
-*/
 void Bspinfo( int count, char **fileNames ) {
 	int		i;
 	char	source[1024];
@@ -302,11 +280,6 @@ void Bspinfo( int count, char **fileNames ) {
 }
 
 
-/*
-============
-OnlyEnts
-============
-*/
 void OnlyEnts( void ) {
 	char out[1024];
 
@@ -324,11 +297,6 @@ void OnlyEnts( void ) {
 }
 
 
-/*
-============
-OnlyTextures
-============
-*/
 void OnlyTextures( void ) {		// FIXME!!!
 	char	out[1024];
 	int		i;
@@ -349,11 +317,6 @@ void OnlyTextures( void ) {		// FIXME!!!
 }
 
 
-/*
-============
-main
-============
-*/
 int LightMain( int argc, char **argv );
 int VLightMain (int argc, char **argv);
 int VSoundMain (int argc, char **argv);

@@ -74,11 +74,6 @@ typedef struct {
 static soundOptionsInfo_t	soundOptionsInfo;
 
 
-/*
-=================
-UI_SoundOptionsMenu_Event
-=================
-*/
 static void UI_SoundOptionsMenu_Event( void* ptr, int event ) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -141,11 +136,6 @@ static void UI_SoundOptionsMenu_Event( void* ptr, int event ) {
 }
 
 
-/*
-===============
-UI_SoundOptionsMenu_Init
-===============
-*/
 static void UI_SoundOptionsMenu_Init( void ) {
 	int				y;
 
@@ -291,11 +281,6 @@ static void UI_SoundOptionsMenu_Init( void ) {
 }
 
 
-/*
-===============
-UI_SoundOptionsMenu_Cache
-===============
-*/
 void UI_SoundOptionsMenu_Cache( void ) {
 	trap_R_RegisterShaderNoMip( ART_FRAMEL );
 	trap_R_RegisterShaderNoMip( ART_FRAMER );
@@ -304,11 +289,6 @@ void UI_SoundOptionsMenu_Cache( void ) {
 }
 
 
-/*
-===============
-UI_SoundOptionsMenu
-===============
-*/
 void UI_SoundOptionsMenu( void ) {
 	UI_SoundOptionsMenu_Init();
 	UI_PushMenu( &soundOptionsInfo.menu );

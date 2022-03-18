@@ -79,11 +79,6 @@ typedef struct {
 static addBotsMenuInfo_t	addBotsMenuInfo;
 
 
-/*
-=================
-UI_AddBotsMenu_FightEvent
-=================
-*/
 static void UI_AddBotsMenu_FightEvent( void* ptr, int event ) {
 	const char	*team;
 	int			skill;
@@ -102,11 +97,6 @@ static void UI_AddBotsMenu_FightEvent( void* ptr, int event ) {
 }
 
 
-/*
-=================
-UI_AddBotsMenu_BotEvent
-=================
-*/
 static void UI_AddBotsMenu_BotEvent( void* ptr, int event ) {
 	if (event != QM_ACTIVATED) {
 		return;
@@ -118,11 +108,6 @@ static void UI_AddBotsMenu_BotEvent( void* ptr, int event ) {
 }
 
 
-/*
-=================
-UI_AddBotsMenu_BackEvent
-=================
-*/
 static void UI_AddBotsMenu_BackEvent( void* ptr, int event ) {
 	if (event != QM_ACTIVATED) {
 		return;
@@ -131,11 +116,6 @@ static void UI_AddBotsMenu_BackEvent( void* ptr, int event ) {
 }
 
 
-/*
-=================
-UI_AddBotsMenu_SetBotNames
-=================
-*/
 static void UI_AddBotsMenu_SetBotNames( void ) {
 	int			n;
 	const char	*info;
@@ -148,11 +128,6 @@ static void UI_AddBotsMenu_SetBotNames( void ) {
 }
 
 
-/*
-=================
-UI_AddBotsMenu_UpEvent
-=================
-*/
 static void UI_AddBotsMenu_UpEvent( void* ptr, int event ) {
 	if (event != QM_ACTIVATED) {
 		return;
@@ -165,11 +140,6 @@ static void UI_AddBotsMenu_UpEvent( void* ptr, int event ) {
 }
 
 
-/*
-=================
-UI_AddBotsMenu_DownEvent
-=================
-*/
 static void UI_AddBotsMenu_DownEvent( void* ptr, int event ) {
 	if (event != QM_ACTIVATED) {
 		return;
@@ -182,11 +152,6 @@ static void UI_AddBotsMenu_DownEvent( void* ptr, int event ) {
 }
 
 
-/*
-=================
-UI_AddBotsMenu_GetSortedBotNums
-=================
-*/
 static int QDECL UI_AddBotsMenu_SortCompare( const void *arg1, const void *arg2 ) {
 	int			num1, num2;
 	const char	*info1, *info2;
@@ -216,11 +181,6 @@ static void UI_AddBotsMenu_GetSortedBotNums( void ) {
 }
 
 
-/*
-=================
-UI_AddBotsMenu_Draw
-=================
-*/
 static void UI_AddBotsMenu_Draw( void ) {
 	UI_DrawBannerString( 320, 16, "ADD BOTS", UI_CENTER, color_white );
 	UI_DrawNamedPic( 320-233, 240-166, 466, 332, ART_BACKGROUND );
@@ -230,11 +190,6 @@ static void UI_AddBotsMenu_Draw( void ) {
 }
 
 	
-/*
-=================
-UI_AddBotsMenu_Init
-=================
-*/
 static const char *skillNames[] = {
 	"I Can Win",
 	"Bring It On",
@@ -384,11 +339,6 @@ static void UI_AddBotsMenu_Init( void ) {
 }
 
 
-/*
-=================
-UI_AddBots_Cache
-=================
-*/
 void UI_AddBots_Cache( void ) {
 	trap_R_RegisterShaderNoMip( ART_BACK0 );
 	trap_R_RegisterShaderNoMip( ART_BACK1 );
@@ -401,11 +351,6 @@ void UI_AddBots_Cache( void ) {
 }
 
 
-/*
-=================
-UI_AddBotsMenu
-=================
-*/
 void UI_AddBotsMenu( void ) {
 	UI_AddBotsMenu_Init();
 	UI_PushMenu( &addBotsMenuInfo.menu );

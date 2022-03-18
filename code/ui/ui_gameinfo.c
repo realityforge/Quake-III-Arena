@@ -38,11 +38,6 @@ static char		*ui_botInfos[MAX_BOTS];
 static int		ui_numArenas;
 static char		*ui_arenaInfos[MAX_ARENAS];
 
-/*
-===============
-UI_ParseInfos
-===============
-*/
 int UI_ParseInfos( char *buf, int max, char *infos[] ) {
 	char	*token;
 	int		count;
@@ -94,11 +89,6 @@ int UI_ParseInfos( char *buf, int max, char *infos[] ) {
 	return count;
 }
 
-/*
-===============
-UI_LoadArenasFromFile
-===============
-*/
 static void UI_LoadArenasFromFile( char *filename ) {
 	int				len;
 	fileHandle_t	f;
@@ -122,11 +112,6 @@ static void UI_LoadArenasFromFile( char *filename ) {
 	ui_numArenas += UI_ParseInfos( buf, MAX_ARENAS - ui_numArenas, &ui_arenaInfos[ui_numArenas] );
 }
 
-/*
-===============
-UI_LoadArenas
-===============
-*/
 void UI_LoadArenas( void ) {
 	int			numdirs;
 	vmCvar_t	arenasFile;
@@ -205,11 +190,6 @@ void UI_LoadArenas( void ) {
 }
 
 
-/*
-===============
-UI_LoadBotsFromFile
-===============
-*/
 static void UI_LoadBotsFromFile( char *filename ) {
 	int				len;
 	fileHandle_t	f;
@@ -235,11 +215,6 @@ static void UI_LoadBotsFromFile( char *filename ) {
 	ui_numBots += UI_ParseInfos( buf, MAX_BOTS - ui_numBots, &ui_botInfos[ui_numBots] );
 }
 
-/*
-===============
-UI_LoadBots
-===============
-*/
 void UI_LoadBots( void ) {
 	vmCvar_t	botsFile;
 	int			numdirs;
@@ -272,11 +247,6 @@ void UI_LoadBots( void ) {
 }
 
 
-/*
-===============
-UI_GetBotInfoByNumber
-===============
-*/
 char *UI_GetBotInfoByNumber( int num ) {
 	if( num < 0 || num >= ui_numBots ) {
 		trap_Print( va( S_COLOR_RED "Invalid bot number: %i\n", num ) );
@@ -286,11 +256,6 @@ char *UI_GetBotInfoByNumber( int num ) {
 }
 
 
-/*
-===============
-UI_GetBotInfoByName
-===============
-*/
 char *UI_GetBotInfoByName( const char *name ) {
 	int		n;
 	char	*value;

@@ -22,13 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // q_shared.c -- stateless support routines that are included in each code dll
 #include "q_shared.hpp"
 
-/*
-============================================================================
 
-GROWLISTS
-
-============================================================================
-*/
 
 // malloc / free all in one place for debugging
 extern "C" void *Com_Allocate( int bytes );
@@ -110,11 +104,6 @@ float Com_Clamp( float min, float max, float value ) {
 	return value;
 }
 
-/*
-============
-Com_StringContains
-============
-*/
 const char *Com_StringContains( const char *str1, const char *str2, int casesensitive) {
 	int len, i, j;
 
@@ -139,11 +128,6 @@ const char *Com_StringContains( const char *str1, const char *str2, int casesens
 	return NULL;
 }
 
-/*
-============
-Com_Filter
-============
-*/
 int Com_Filter( const char *filter, const char *name, int casesensitive)
 {
 	char buf[MAX_TOKEN_CHARS];
@@ -220,12 +204,6 @@ int Com_Filter( const char *filter, const char *name, int casesensitive)
 }
 
 
-/*
-================
-Com_HashString
-
-================
-*/
 int Com_HashString( const char *fname ) {
 	int		i;
 	long	hash;
@@ -245,11 +223,6 @@ int Com_HashString( const char *fname ) {
 }
 
 
-/*
-============
-Com_SkipPath
-============
-*/
 char *Com_SkipPath (char *pathname)
 {
 	char	*last;
@@ -264,11 +237,6 @@ char *Com_SkipPath (char *pathname)
 	return last;
 }
 
-/*
-============
-Com_StripExtension
-============
-*/
 void Com_StripExtension( const char *in, char *out ) {
 	while ( *in && *in != '.' ) {
 		*out++ = *in++;
@@ -277,11 +245,6 @@ void Com_StripExtension( const char *in, char *out ) {
 }
 
 
-/*
-==================
-Com_DefaultExtension
-==================
-*/
 void Com_DefaultExtension (char *path, int maxSize, const char *extension ) {
 	char	oldPath[MAX_QPATH];
 	char    *src;
@@ -381,11 +344,6 @@ float FloatNoSwap (float f)
 	return f;
 }
 
-/*
-===============
-Com_ParseInfos
-===============
-*/
 int Com_ParseInfos( const char *buf, int max, char infos[][MAX_INFO_STRING] ) {
 	const char	*token;
 	int		count;
@@ -792,11 +750,6 @@ void Info_NextPair( const char *(*head), char key[MAX_INFO_KEY], char value[MAX_
 }
 
 
-/*
-===================
-Info_RemoveKey
-===================
-*/
 void Info_RemoveKey( char *s, const char *key ) {
 	char	*start;
 	char	pkey[MAX_INFO_KEY];
@@ -916,11 +869,6 @@ void Info_SetValueForKey( char *s, const char *key, const char *value ) {
 //====================================================================
 
 
-/*
-===============
-ParseHex
-===============
-*/
 int	ParseHex( const char *text ) {
 	int		value;
 	int		c;

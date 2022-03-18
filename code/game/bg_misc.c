@@ -923,11 +923,6 @@ Only in One Flag CTF games
 int		bg_numItems = sizeof(bg_itemlist) / sizeof(bg_itemlist[0]) - 1;
 
 
-/*
-==============
-BG_FindItemForPowerup
-==============
-*/
 gitem_t	*BG_FindItemForPowerup( powerup_t pw ) {
 	int		i;
 
@@ -944,11 +939,6 @@ gitem_t	*BG_FindItemForPowerup( powerup_t pw ) {
 }
 
 
-/*
-==============
-BG_FindItemForHoldable
-==============
-*/
 gitem_t	*BG_FindItemForHoldable( holdable_t pw ) {
 	int		i;
 
@@ -964,12 +954,6 @@ gitem_t	*BG_FindItemForHoldable( holdable_t pw ) {
 }
 
 
-/*
-===============
-BG_FindItemForWeapon
-
-===============
-*/
 gitem_t	*BG_FindItemForWeapon( weapon_t weapon ) {
 	gitem_t	*it;
 	
@@ -983,12 +967,6 @@ gitem_t	*BG_FindItemForWeapon( weapon_t weapon ) {
 	return NULL;
 }
 
-/*
-===============
-BG_FindItem
-
-===============
-*/
 gitem_t	*BG_FindItem( const char *pickupName ) {
 	gitem_t	*it;
 	
@@ -1189,12 +1167,6 @@ qboolean BG_CanItemBeGrabbed( int gametype, const entityState_t *ent, const play
 
 //======================================================================
 
-/*
-================
-BG_EvaluateTrajectory
-
-================
-*/
 void BG_EvaluateTrajectory( const trajectory_t *tr, int atTime, vec3_t result ) {
 	float		deltaTime;
 	float		phase;
@@ -1407,11 +1379,6 @@ void BG_AddPredictableEventToPlayerstate( int newEvent, int eventParm, playerSta
 	ps->eventSequence++;
 }
 
-/*
-========================
-BG_TouchJumpPad
-========================
-*/
 void BG_TouchJumpPad( playerState_t *ps, entityState_t *jumppad ) {
 	vec3_t	angles;
 	float p;

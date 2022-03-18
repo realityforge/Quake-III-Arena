@@ -261,11 +261,6 @@ void SCR_DrawSmallStringExt( int x, int y, const char *string, float *setColor, 
 
 //===============================================================================
 
-/*
-=================
-SCR_DrawDemoRecording
-=================
-*/
 void SCR_DrawDemoRecording( void ) {
 	char	string[1024];
 	int		pos;
@@ -283,15 +278,6 @@ void SCR_DrawDemoRecording( void ) {
 	SCR_DrawStringExt( 320 - strlen( string ) * 4, 20, 8, string, g_color_table[7], qtrue );
 }
 
-
-/*
-===============================================================================
-
-DEBUG GRAPH
-
-===============================================================================
-*/
-
 typedef struct
 {
 	float	value;
@@ -301,11 +287,6 @@ typedef struct
 static	int			current;
 static	graphsamp_t	values[1024];
 
-/*
-==============
-SCR_DebugGraph
-==============
-*/
 void SCR_DebugGraph (float value, int color)
 {
 	values[current&1023].value = value;
@@ -313,11 +294,6 @@ void SCR_DebugGraph (float value, int color)
 	current++;
 }
 
-/*
-==============
-SCR_DrawDebugGraph
-==============
-*/
 void SCR_DrawDebugGraph (void)
 {
 	int		a, x, y, w, i, h;
@@ -350,11 +326,6 @@ void SCR_DrawDebugGraph (void)
 
 //=============================================================================
 
-/*
-==================
-SCR_Init
-==================
-*/
 void SCR_Init( void ) {
 	cl_timegraph = Cvar_Get ("timegraph", "0", CVAR_CHEAT);
 	cl_debuggraph = Cvar_Get ("debuggraph", "0", CVAR_CHEAT);

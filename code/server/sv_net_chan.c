@@ -126,11 +126,6 @@ static void SV_Netchan_Decode( client_t *client, msg_t *msg ) {
 	}
 }
 
-/*
-=================
-SV_Netchan_TransmitNextFragment
-=================
-*/
 void SV_Netchan_TransmitNextFragment( client_t *client ) {
 	Netchan_TransmitNextFragment( &client->netchan );
 	if (!client->netchan.unsentFragments)
@@ -191,11 +186,6 @@ void SV_Netchan_Transmit( client_t *client, msg_t *msg) {	//int length, const by
 	}
 }
 
-/*
-=================
-Netchan_SV_Process
-=================
-*/
 qboolean SV_Netchan_Process( client_t *client, msg_t *msg ) {
 	int ret;
 	ret = Netchan_Process( &client->netchan, msg );

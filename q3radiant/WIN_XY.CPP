@@ -39,11 +39,6 @@ static unsigned s_stipple[32] =
 	0xaaaaaaaa, 0x55555555,0xaaaaaaaa, 0x55555555,
 };
 
-/*
-============
-WXY_WndProc
-============
-*/
 LONG WINAPI XYWndProc (
     HWND    hWnd,
     UINT    uMsg,

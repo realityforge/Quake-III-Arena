@@ -360,11 +360,6 @@ char *copystring(const char *s)
 
 
 
-/*
-================
-I_FloatTime
-================
-*/
 double I_FloatTime (void)
 {
 	time_t	t;
@@ -564,16 +559,6 @@ char *strlower (char *start)
 	return start;
 }
 
-
-/*
-=============================================================================
-
-						MISC FUNCTIONS
-
-=============================================================================
-*/
-
-
 /*
 =================
 CheckParm
@@ -597,11 +582,6 @@ int CheckParm (const char *check)
 
 
 
-/*
-================
-Q_filelength
-================
-*/
 int Q_filelength (FILE *f)
 {
 	int		pos;
@@ -655,11 +635,6 @@ void SafeWrite (FILE *f, const void *buffer, int count)
 }
 
 
-/*
-==============
-FileExists
-==============
-*/
 qboolean	FileExists (const char *filename)
 {
 	FILE	*f;
@@ -671,11 +646,6 @@ qboolean	FileExists (const char *filename)
 	return qtrue;
 }
 
-/*
-==============
-LoadFile
-==============
-*/
 int    LoadFile( const char *filename, void **bufferptr )
 {
 	FILE	*f;
@@ -754,11 +724,6 @@ int    TryLoadFile (const char *filename, void **bufferptr)
 }
 
 
-/*
-==============
-SaveFile
-==============
-*/
 void    SaveFile (const char *filename, const void *buffer, int count)
 {
 	FILE	*f;
@@ -890,12 +855,6 @@ void ExtractFileExtension (const char *path, char *dest)
 	strcpy (dest,src);
 }
 
-
-/*
-==============
-ParseNum / ParseHex
-==============
-*/
 int ParseHex (const char *hex)
 {
 	const char    *str;
@@ -930,16 +889,6 @@ int ParseNum (const char *str)
 		return ParseHex (str+2);
 	return atol (str);
 }
-
-
-
-/*
-============================================================================
-
-					BYTE ORDER FUNCTIONS
-
-============================================================================
-*/
 
 #ifdef __BIG_ENDIAN__
 
@@ -1118,11 +1067,6 @@ unsigned short CRC_Value(unsigned short crcvalue)
 }
 //=============================================================================
 
-/*
-============
-CreatePath
-============
-*/
 void	CreatePath (const char *path)
 {
 	const char	*ofs;

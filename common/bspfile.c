@@ -171,11 +171,6 @@ void SwapBSPFile( void ) {
 
 
 
-/*
-=============
-CopyLump
-=============
-*/
 int CopyLump( dheader_t	*header, int lump, void *dest, int size ) {
 	int		length, ofs;
 
@@ -191,11 +186,6 @@ int CopyLump( dheader_t	*header, int lump, void *dest, int size ) {
 	return length / size;
 }
 
-/*
-=============
-LoadBSPFile
-=============
-*/
 void	LoadBSPFile( const char *filename ) {
 	dheader_t	*header;
 
@@ -242,11 +232,6 @@ void	LoadBSPFile( const char *filename ) {
 
 //============================================================================
 
-/*
-=============
-AddLump
-=============
-*/
 void AddLump( FILE *bspfile, dheader_t *header, int lumpnum, const void *data, int len ) {
 	lump_t *lump;
 
@@ -370,11 +355,6 @@ void StripTrailing( char *e ) {
 	}
 }
 
-/*
-=================
-ParseEpair
-=================
-*/
 epair_t *ParseEpair( void ) {
 	epair_t	*e;
 
@@ -400,11 +380,6 @@ epair_t *ParseEpair( void ) {
 }
 
 
-/*
-================
-ParseEntity
-================
-*/
 qboolean	ParseEntity( void ) {
 	epair_t		*e;
 	entity_t	*mapent;

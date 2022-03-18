@@ -66,11 +66,6 @@ typedef struct {
 static displayOptionsInfo_t	displayOptionsInfo;
 
 
-/*
-=================
-UI_DisplayOptionsMenu_Event
-=================
-*/
 static void UI_DisplayOptionsMenu_Event( void* ptr, int event ) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -110,11 +105,6 @@ static void UI_DisplayOptionsMenu_Event( void* ptr, int event ) {
 }
 
 
-/*
-===============
-UI_DisplayOptionsMenu_Init
-===============
-*/
 static void UI_DisplayOptionsMenu_Init( void ) {
 	int		y;
 
@@ -240,11 +230,6 @@ static void UI_DisplayOptionsMenu_Init( void ) {
 }
 
 
-/*
-===============
-UI_DisplayOptionsMenu_Cache
-===============
-*/
 void UI_DisplayOptionsMenu_Cache( void ) {
 	trap_R_RegisterShaderNoMip( ART_FRAMEL );
 	trap_R_RegisterShaderNoMip( ART_FRAMER );
@@ -253,11 +238,6 @@ void UI_DisplayOptionsMenu_Cache( void ) {
 }
 
 
-/*
-===============
-UI_DisplayOptionsMenu
-===============
-*/
 void UI_DisplayOptionsMenu( void ) {
 	UI_DisplayOptionsMenu_Init();
 	UI_PushMenu( &displayOptionsInfo.menu );

@@ -291,17 +291,6 @@ void GetEntityControls(HWND ghwndEntity)
 		SendMessage(g_qeglobals.d_hwndEdit, WM_SETFONT, (WPARAM)GetStockObject(DEFAULT_GUI_FONT), (LPARAM)TRUE);
 }
 
-
-
-/*
-===============================================================
-
-ENTITY WINDOW
-
-===============================================================
-*/
-
-
 void FillClassList (void)
 {
 	eclass_t	*pec;
@@ -318,11 +307,6 @@ void FillClassList (void)
 }
 
 
-/*
-==============
-WEnt_Create
-==============
-*/
 void WEnt_Create (HINSTANCE hInstance)
 {
     WNDCLASS   wc;
@@ -361,11 +345,6 @@ void WEnt_Create (HINSTANCE hInstance)
 		Error ("Couldn't create Entity window");
 }
 
-/*
-==============
-CreateEntityWindow
-==============
-*/
 BOOL CreateEntityWindow(HINSTANCE hInstance)
 {
 	HWND hwndEntityPalette;
@@ -398,11 +377,6 @@ BOOL CreateEntityWindow(HINSTANCE hInstance)
 	return TRUE;
 }
 
-/*
-==============
-SetInspectorMode
-==============
-*/
 void SetInspectorMode(int iType)
 {
 	RECT rc;
@@ -726,12 +700,6 @@ void CreateEntity(void)
 
 
 
-/*
-===============
-AddProp
-
-===============
-*/
 void AddProp()
 {
 	char	key[4096];
@@ -783,12 +751,6 @@ void AddProp()
 
 }
 
-/*
-===============
-DelProp
-
-===============
-*/
 void DelProp(void)
 {
 	char	sz[4096];
@@ -829,12 +791,6 @@ BOOL GetSelectAllCriteria(CString &strKey, CString &strVal) {
   return FALSE;
 }
 
-/*
-===============
-EditProp
-
-===============
-*/
 void EditProp(void)
 {
 	int i;
@@ -1154,11 +1110,6 @@ void AssignModel()
 }
 
 
-/*
-=========================
-EntityWndProc
-=========================
-*/
 BOOL CALLBACK EntityWndProc(
     HWND hwndDlg,	// handle to dialog box
     UINT uMsg,		// message

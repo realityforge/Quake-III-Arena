@@ -83,11 +83,6 @@ void PlaneFromWinding (winding_t *w, plane_t *plane)
 }
 
 
-/*
-==================
-NewWinding
-==================
-*/
 winding_t *NewWinding (int points)
 {
 	winding_t	*w;
@@ -151,11 +146,6 @@ void SortPortals (void)
 }
 
 
-/*
-==============
-LeafVectorFromPortalVector
-==============
-*/
 int LeafVectorFromPortalVector (byte *portalbits, byte *leafbits)
 {
 	int			i, j, leafnum;
@@ -249,11 +239,6 @@ void ClusterMerge (int leafnum)
 	memcpy (visBytes + VIS_HEADER_SIZE + leafnum*leafbytes, uncompressed, leafbytes);
 }
 
-/*
-==================
-CalcPortalVis
-==================
-*/
 void CalcPortalVis (void)
 {
 #ifdef MREDEBUG
@@ -266,11 +251,6 @@ void CalcPortalVis (void)
 
 }
 
-/*
-==================
-CalcPassageVis
-==================
-*/
 void CalcPassageVis(void)
 {
 	PassageMemory();
@@ -288,11 +268,6 @@ void CalcPassageVis(void)
 #endif
 }
 
-/*
-==================
-CalcPassagePortalVis
-==================
-*/
 void CalcPassagePortalVis(void)
 {
 	PassageMemory();
@@ -310,11 +285,6 @@ void CalcPassagePortalVis(void)
 #endif
 }
 
-/*
-==================
-CalcFastVis
-==================
-*/
 void CalcFastVis(void)
 {
 	int		i;
@@ -327,11 +297,6 @@ void CalcFastVis(void)
 	}
 }
 
-/*
-==================
-CalcVis
-==================
-*/
 void CalcVis (void)
 {
 	int		i;
@@ -365,11 +330,6 @@ void CalcVis (void)
 	_printf( "Average clusters visible: %i\n", totalvis / portalclusters );
 }
 
-/*
-==================
-SetPortalSphere
-==================
-*/
 void SetPortalSphere (vportal_t *p)
 {
 	int		i;
@@ -399,11 +359,6 @@ void SetPortalSphere (vportal_t *p)
 	p->radius = bestr;
 }
 
-/*
-=============
-Winding_PlanesConcave
-=============
-*/
 #define WCONVEX_EPSILON		0.2
 
 int Winding_PlanesConcave(winding_t *w1, winding_t *w2,
@@ -428,11 +383,6 @@ int Winding_PlanesConcave(winding_t *w1, winding_t *w2,
 	return qfalse;
 }
 
-/*
-============
-TryMergeLeaves
-============
-*/
 int TryMergeLeaves(int l1num, int l2num)
 {
 	int i, j, k, n, numportals;
@@ -510,11 +460,6 @@ int TryMergeLeaves(int l1num, int l2num)
 	return qtrue;
 }
 
-/*
-============
-UpdatePortals
-============
-*/
 void UpdatePortals(void)
 {
 	int i;
@@ -576,11 +521,6 @@ void MergeLeaves(void)
 	_printf("%6d leaves merged\n", totalnummerges);
 }
 
-/*
-============
-TryMergeWinding
-============
-*/
 #define	CONTINUOUS_EPSILON	0.005
 
 winding_t *TryMergeWinding (winding_t *f1, winding_t *f2, vec3_t planenormal)
@@ -679,11 +619,6 @@ winding_t *TryMergeWinding (winding_t *f1, winding_t *f2, vec3_t planenormal)
 	return newf;
 }
 
-/*
-============
-MergeLeafPortals
-============
-*/
 void MergeLeafPortals(void)
 {
 	int i, j, k, nummerges, hintsmerged;
@@ -734,11 +669,6 @@ void MergeLeafPortals(void)
 }
 
 
-/*
-============
-WritePortals
-============
-*/
 int CountActivePortals(void)
 {
 	int num, hints, j;
@@ -760,11 +690,6 @@ int CountActivePortals(void)
 	return num;
 }
 
-/*
-============
-WritePortals
-============
-*/
 void WriteFloat (FILE *f, vec_t v);
 
 void WritePortals(char *filename)
@@ -837,11 +762,6 @@ void WritePortals(char *filename)
 	fclose (pf);
 }
 
-/*
-============
-LoadPortals
-============
-*/
 void LoadPortals (char *name)
 {
 	int			i, j, hint;
@@ -1072,11 +992,6 @@ void CalcPHS (void)
 	_printf ("Average clusters hearable: %i\n", count/portalclusters);
 }
 
-/*
-===========
-VisMain
-===========
-*/
 int VisMain (int argc, char **argv)
 {
 	char		portalfile[1024];

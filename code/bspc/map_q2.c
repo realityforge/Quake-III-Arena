@@ -571,11 +571,6 @@ qboolean	Q2_ParseMapEntity(script_t *script)
 
 //===================================================================
 
-/*
-================
-LoadMapFile
-================
-*/
 void Q2_LoadMapFile(char *filename)
 {		
 	int i;

@@ -229,11 +229,6 @@ static int				g_emptyservers;
 static int				g_fullservers;
 
 
-/*
-=================
-ArenaServers_MaxPing
-=================
-*/
 static int ArenaServers_MaxPing( void ) {
 	int		maxPing;
 
@@ -245,11 +240,6 @@ static int ArenaServers_MaxPing( void ) {
 }
 
 
-/*
-=================
-ArenaServers_Compare
-=================
-*/
 static int QDECL ArenaServers_Compare( const void *arg1, const void *arg2 ) {
 	float			f1;
 	float			f2;
@@ -308,11 +298,6 @@ static int QDECL ArenaServers_Compare( const void *arg1, const void *arg2 ) {
 }
 
 
-/*
-=================
-ArenaServers_Go
-=================
-*/
 static void ArenaServers_Go( void ) {
 	servernode_t*	servernode;
 
@@ -323,11 +308,6 @@ static void ArenaServers_Go( void ) {
 }
 
 
-/*
-=================
-ArenaServers_UpdatePicture
-=================
-*/
 static void ArenaServers_UpdatePicture( void ) {
 	static char		picname[64];
 	servernode_t*	servernodeptr;
@@ -347,11 +327,6 @@ static void ArenaServers_UpdatePicture( void ) {
 }
 
 
-/*
-=================
-ArenaServers_UpdateMenu
-=================
-*/
 static void ArenaServers_UpdateMenu( void ) {
 	int				i;
 	int				j;
@@ -521,11 +496,6 @@ static void ArenaServers_UpdateMenu( void ) {
 }
 
 
-/*
-=================
-ArenaServers_Remove
-=================
-*/
 static void ArenaServers_Remove( void )
 {
 	int				i;
@@ -579,11 +549,6 @@ static void ArenaServers_Remove( void )
 }
 
 
-/*
-=================
-ArenaServers_Insert
-=================
-*/
 static void ArenaServers_Insert( char* adrstr, char* info, int pingtime )
 {
 	servernode_t*	servernodeptr;
@@ -768,11 +733,6 @@ void ArenaServers_LoadFavorites( void )
 }
 
 
-/*
-=================
-ArenaServers_StopRefresh
-=================
-*/
 static void ArenaServers_StopRefresh( void )
 {
 	if (!g_arenaservers.refreshservers)
@@ -801,11 +761,6 @@ static void ArenaServers_StopRefresh( void )
 }
 
 
-/*
-=================
-ArenaServers_DoRefresh
-=================
-*/
 static void ArenaServers_DoRefresh( void )
 {
 	int		i;
@@ -949,11 +904,6 @@ static void ArenaServers_DoRefresh( void )
 }
 
 
-/*
-=================
-ArenaServers_StartRefresh
-=================
-*/
 static void ArenaServers_StartRefresh( void )
 {
 	int		i;
@@ -1036,11 +986,6 @@ static void ArenaServers_StartRefresh( void )
 }
 
 
-/*
-=================
-ArenaServers_SaveChanges
-=================
-*/
 void ArenaServers_SaveChanges( void )
 {
 	int	i;
@@ -1053,11 +998,6 @@ void ArenaServers_SaveChanges( void )
 }
 
 
-/*
-=================
-ArenaServers_Sort
-=================
-*/
 void ArenaServers_Sort( int type ) {
 	if( g_sortkey == type ) {
 		return;
@@ -1068,11 +1008,6 @@ void ArenaServers_Sort( int type ) {
 }
 
 
-/*
-=================
-ArenaServers_SetType
-=================
-*/
 void ArenaServers_SetType( int type )
 {
 	if (g_servertype == type)
@@ -1124,11 +1059,6 @@ void ArenaServers_SetType( int type )
 	strcpy(g_arenaservers.status.string,"hit refresh to update");
 }
 
-/*
-=================
-ArenaServers_Event
-=================
-*/
 static void ArenaServers_Event( void* ptr, int event ) {
 	int		id;
 	int value;
@@ -1218,11 +1148,6 @@ static void ArenaServers_Event( void* ptr, int event ) {
 }
 
 
-/*
-=================
-ArenaServers_MenuDraw
-=================
-*/
 static void ArenaServers_MenuDraw( void )
 {
 	if (g_arenaservers.refreshservers)
@@ -1232,11 +1157,6 @@ static void ArenaServers_MenuDraw( void )
 }
 
 
-/*
-=================
-ArenaServers_MenuKey
-=================
-*/
 static sfxHandle_t ArenaServers_MenuKey( int key ) {
 	if( key == K_SPACE  && g_arenaservers.refreshservers ) {
 		ArenaServers_StopRefresh();	
@@ -1260,11 +1180,6 @@ static sfxHandle_t ArenaServers_MenuKey( int key ) {
 }
 
 
-/*
-=================
-ArenaServers_MenuInit
-=================
-*/
 static void ArenaServers_MenuInit( void ) {
 	int			i;
 	int			type;
@@ -1524,11 +1439,6 @@ static void ArenaServers_MenuInit( void ) {
 }
 
 
-/*
-=================
-ArenaServers_Cache
-=================
-*/
 void ArenaServers_Cache( void ) {
 	trap_R_RegisterShaderNoMip( ART_BACK0 );
 	trap_R_RegisterShaderNoMip( ART_BACK1 );
@@ -1547,11 +1457,6 @@ void ArenaServers_Cache( void ) {
 }
 
 
-/*
-=================
-UI_ArenaServersMenu
-=================
-*/
 void UI_ArenaServersMenu( void ) {
 	ArenaServers_MenuInit();
 	UI_PushMenu( &g_arenaservers.menu );

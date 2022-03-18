@@ -25,11 +25,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "g_local.h"
 
 
-/*
-============
-ScorePlum
-============
-*/
 void ScorePlum( gentity_t *ent, vec3_t origin, int score ) {
 	gentity_t *plum;
 
@@ -128,11 +123,6 @@ void TossClientItems( gentity_t *self ) {
 
 #ifdef MISSIONPACK
 
-/*
-=================
-TossClientCubes
-=================
-*/
 extern gentity_t	*neutralObelisk;
 
 void TossClientCubes( gentity_t *self ) {
@@ -180,11 +170,6 @@ void TossClientCubes( gentity_t *self ) {
 }
 
 
-/*
-=================
-TossClientPersistantPowerups
-=================
-*/
 void TossClientPersistantPowerups( gentity_t *ent ) {
 	gentity_t	*powerup;
 
@@ -209,11 +194,6 @@ void TossClientPersistantPowerups( gentity_t *ent ) {
 #endif
 
 
-/*
-==================
-LookAtKiller
-==================
-*/
 void LookAtKiller( gentity_t *self, gentity_t *inflictor, gentity_t *attacker ) {
 	vec3_t		dir;
 	vec3_t		angles;
@@ -234,11 +214,6 @@ void LookAtKiller( gentity_t *self, gentity_t *inflictor, gentity_t *attacker ) 
 	angles[ROLL] = 0;
 }
 
-/*
-==================
-GibEntity
-==================
-*/
 void GibEntity( gentity_t *self, int killer ) {
 	gentity_t *ent;
 	int i;
@@ -264,11 +239,6 @@ void GibEntity( gentity_t *self, int killer ) {
 	self->r.contents = 0;
 }
 
-/*
-==================
-body_die
-==================
-*/
 void body_die( gentity_t *self, gentity_t *inflictor, gentity_t *attacker, int damage, int meansOfDeath ) {
 	if ( self->health > GIB_HEALTH ) {
 		return;
@@ -318,21 +288,11 @@ char	*modNames[] = {
 };
 
 #ifdef MISSIONPACK
-/*
-==================
-Kamikaze_DeathActivate
-==================
-*/
 void Kamikaze_DeathActivate( gentity_t *ent ) {
 	G_StartKamikaze(ent);
 	G_FreeEntity(ent);
 }
 
-/*
-==================
-Kamikaze_DeathTimer
-==================
-*/
 void Kamikaze_DeathTimer( gentity_t *self ) {
 	gentity_t *ent;
 
@@ -348,11 +308,6 @@ void Kamikaze_DeathTimer( gentity_t *self ) {
 
 #endif
 
-/*
-==================
-CheckAlmostCapture
-==================
-*/
 void CheckAlmostCapture( gentity_t *self, gentity_t *attacker ) {
 	gentity_t	*ent;
 	vec3_t		dir;
@@ -398,11 +353,6 @@ void CheckAlmostCapture( gentity_t *self, gentity_t *attacker ) {
 	}
 }
 
-/*
-==================
-CheckAlmostScored
-==================
-*/
 void CheckAlmostScored( gentity_t *self, gentity_t *attacker ) {
 	gentity_t	*ent;
 	vec3_t		dir;
@@ -431,11 +381,6 @@ void CheckAlmostScored( gentity_t *self, gentity_t *attacker ) {
 	}
 }
 
-/*
-==================
-player_die
-==================
-*/
 void player_die( gentity_t *self, gentity_t *inflictor, gentity_t *attacker, int damage, int meansOfDeath ) {
 	gentity_t	*ent;
 	int			anim;
@@ -682,11 +627,6 @@ void player_die( gentity_t *self, gentity_t *inflictor, gentity_t *attacker, int
 }
 
 
-/*
-================
-CheckArmor
-================
-*/
 int CheckArmor (gentity_t *ent, int damage, int dflags)
 {
 	gclient_t	*client;
@@ -718,11 +658,6 @@ int CheckArmor (gentity_t *ent, int damage, int dflags)
 	return save;
 }
 
-/*
-================
-RaySphereIntersections
-================
-*/
 int RaySphereIntersections( vec3_t origin, float radius, vec3_t point, vec3_t dir, vec3_t intersections[2] ) {
 	float b, c, d, t;
 
@@ -756,11 +691,6 @@ int RaySphereIntersections( vec3_t origin, float radius, vec3_t point, vec3_t di
 }
 
 #ifdef MISSIONPACK
-/*
-================
-G_InvulnerabilityEffect
-================
-*/
 int G_InvulnerabilityEffect( gentity_t *targ, vec3_t dir, vec3_t point, vec3_t impactpoint, vec3_t bouncedir ) {
 	gentity_t	*impact;
 	vec3_t		intersections[2], vec;
@@ -1125,11 +1055,6 @@ qboolean CanDamage (gentity_t *targ, vec3_t origin) {
 }
 
 
-/*
-============
-G_RadiusDamage
-============
-*/
 qboolean G_RadiusDamage ( vec3_t origin, gentity_t *attacker, float damage, float radius,
 					 gentity_t *ignore, int mod) {
 	float		points, dist;

@@ -99,11 +99,6 @@ static void SetSkillColor( int skill, vec4_t color ) {
 }
 
 
-/*
-=================
-UI_SPSkillMenu_SkillEvent
-=================
-*/
 static void UI_SPSkillMenu_SkillEvent( void *ptr, int notification ) {
 	int		id;
 	int		skill;
@@ -129,11 +124,6 @@ static void UI_SPSkillMenu_SkillEvent( void *ptr, int notification ) {
 }
 
 
-/*
-=================
-UI_SPSkillMenu_FightEvent
-=================
-*/
 static void UI_SPSkillMenu_FightEvent( void *ptr, int notification ) {
 	if (notification != QM_ACTIVATED)
 		return;
@@ -142,11 +132,6 @@ static void UI_SPSkillMenu_FightEvent( void *ptr, int notification ) {
 }
 
 
-/*
-=================
-UI_SPSkillMenu_BackEvent
-=================
-*/
 static void UI_SPSkillMenu_BackEvent( void* ptr, int notification ) {
 	if (notification != QM_ACTIVATED) {
 		return;
@@ -157,11 +142,6 @@ static void UI_SPSkillMenu_BackEvent( void* ptr, int notification ) {
 }
 
 
-/*
-=================
-UI_SPSkillMenu_Key
-=================
-*/
 static sfxHandle_t UI_SPSkillMenu_Key( int key ) {
 	if( key == K_MOUSE2 || key == K_ESCAPE ) {
 		trap_S_StartLocalSound( skillMenuInfo.silenceSound, CHAN_ANNOUNCER );
@@ -170,11 +150,6 @@ static sfxHandle_t UI_SPSkillMenu_Key( int key ) {
 }
 
 
-/*
-=================
-UI_SPSkillMenu_Cache
-=================
-*/
 void UI_SPSkillMenu_Cache( void ) {
 	trap_R_RegisterShaderNoMip( ART_FRAME );
 	trap_R_RegisterShaderNoMip( ART_BACK );
@@ -192,11 +167,6 @@ void UI_SPSkillMenu_Cache( void ) {
 }
 
 
-/*
-=================
-UI_SPSkillMenu_Init
-=================
-*/
 static void UI_SPSkillMenu_Init( void ) {
 	int		skill;
 

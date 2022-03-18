@@ -104,11 +104,6 @@ void EmitMarkFace (dleaf_t *leaf_p, face_t *f)
 }
 
 
-/*
-==================
-EmitLeaf
-==================
-*/
 void EmitLeaf (node_t *node)
 {
 	dleaf_t		*leaf_p;
@@ -179,11 +174,6 @@ void EmitLeaf (node_t *node)
 }
 
 
-/*
-==================
-EmitFace
-==================
-*/
 void EmitFace (face_t *f)
 {
 	dface_t	*df;
@@ -227,11 +217,6 @@ void EmitFace (face_t *f)
 	}
 }
 
-/*
-============
-EmitDrawingNode_r
-============
-*/
 int EmitDrawNode_r (node_t *node)
 {
 	dnode_t	*n;
@@ -295,11 +280,6 @@ int EmitDrawNode_r (node_t *node)
 //=========================================================
 
 
-/*
-============
-WriteBSP
-============
-*/
 void WriteBSP (node_t *headnode)
 {
 	int		oldfaces;
@@ -320,11 +300,6 @@ void WriteBSP (node_t *headnode)
 
 //===========================================================
 
-/*
-============
-SetModelNumbers
-============
-*/
 void SetModelNumbers (void)
 {
 	int		i;
@@ -344,11 +319,6 @@ void SetModelNumbers (void)
 
 }
 
-/*
-============
-SetLightStyles
-============
-*/
 #define	MAX_SWITCHED_LIGHTS	32
 void SetLightStyles (void)
 {
@@ -394,11 +364,6 @@ void SetLightStyles (void)
 
 //===========================================================
 
-/*
-============
-EmitBrushes
-============
-*/
 void EmitBrushes (void)
 {
 	int			i, j, bnum, s, x;
@@ -469,11 +434,6 @@ void EmitBrushes (void)
 
 //===========================================================
 
-/*
-==================
-BeginBSPFile
-==================
-*/
 void BeginBSPFile (void)
 {
 	// these values may actually be initialized
@@ -499,11 +459,6 @@ void BeginBSPFile (void)
 }
 
 
-/*
-============
-EndBSPFile
-============
-*/
 void EndBSPFile (void)
 {
 	EmitBrushes ();
@@ -512,11 +467,6 @@ void EndBSPFile (void)
 }
 
 
-/*
-==================
-BeginModel
-==================
-*/
 int	firstmodleaf;
 extern	int firstmodeledge;
 extern	int	firstmodelface;
@@ -562,11 +512,6 @@ void BeginModel (void)
 }
 
 
-/*
-==================
-EndModel
-==================
-*/
 void EndModel (void)
 {
 	dmodel_t	*mod;

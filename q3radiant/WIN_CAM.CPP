@@ -24,11 +24,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "stdafx.h"
 #include "qe3.h"
 
-/*
-============
-CameraWndProc
-============
-*/
 LONG WINAPI WCam_WndProc (
     HWND    hWnd,
     UINT    uMsg,
@@ -221,11 +216,6 @@ LONG WINAPI WCam_WndProc (
 }
 
 
-/*
-==============
-WCam_Create
-==============
-*/
 void WCam_Create (HINSTANCE hInstance)
 {
     WNDCLASS   wc;

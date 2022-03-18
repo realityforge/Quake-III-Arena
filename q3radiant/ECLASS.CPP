@@ -660,11 +660,6 @@ void EClass_InsertSortedList(eclass_t *&pList, eclass_t *e)
 	} while (1);
 }
 
-/*
-=================
-Eclass_InsertAlphabetized
-=================
-*/
 void Eclass_InsertAlphabetized (eclass_t *e)
 {
 #if 1
@@ -701,11 +696,6 @@ void Eclass_InsertAlphabetized (eclass_t *e)
 }
 
 
-/*
-=================
-Eclass_ScanFile
-=================
-*/
 
 qboolean parsing_single = false;
 qboolean eclass_found;

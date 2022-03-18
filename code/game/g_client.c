@@ -64,20 +64,8 @@ void SP_info_player_intermission( gentity_t *ent ) {
 
 
 
-/*
-=======================================================================
 
-  SelectSpawnPoint
 
-=======================================================================
-*/
-
-/*
-================
-SpotWouldTelefrag
-
-================
-*/
 qboolean SpotWouldTelefrag( gentity_t *spot ) {
 	int			i, num;
 	int			touch[MAX_GENTITIES];
@@ -299,12 +287,6 @@ gentity_t *SelectInitialSpawnPoint( vec3_t origin, vec3_t angles ) {
 	return spot;
 }
 
-/*
-===========
-SelectSpectatorSpawnPoint
-
-============
-*/
 gentity_t *SelectSpectatorSpawnPoint( vec3_t origin, vec3_t angles ) {
 	FindIntermissionPoint();
 
@@ -314,19 +296,8 @@ gentity_t *SelectSpectatorSpawnPoint( vec3_t origin, vec3_t angles ) {
 	return NULL;
 }
 
-/*
-=======================================================================
 
-BODYQUE
 
-=======================================================================
-*/
-
-/*
-===============
-InitBodyQue
-===============
-*/
 void InitBodyQue (void) {
 	int		i;
 	gentity_t	*ent;
@@ -471,12 +442,6 @@ void CopyToBodyQue( gentity_t *ent ) {
 //======================================================================
 
 
-/*
-==================
-SetClientViewAngle
-
-==================
-*/
 void SetClientViewAngle( gentity_t *ent, vec3_t angle ) {
 	int			i;
 
@@ -491,11 +456,6 @@ void SetClientViewAngle( gentity_t *ent, vec3_t angle ) {
 	VectorCopy (ent->s.angles, ent->client->ps.viewangles);
 }
 
-/*
-================
-respawn
-================
-*/
 void respawn( gentity_t *ent ) {
 	gentity_t	*tent;
 
@@ -557,12 +517,6 @@ int TeamLeader( int team ) {
 }
 
 
-/*
-================
-PickTeam
-
-================
-*/
 team_t PickTeam( int ignoreClientNum ) {
 	int		counts[TEAM_NUM_TEAMS];
 
@@ -602,11 +556,6 @@ static void ForceClientSkin( gclient_t *client, char *model, const char *skin ) 
 }
 */
 
-/*
-===========
-ClientCheckName
-============
-*/
 static void ClientCleanName( const char *in, char *out, int outSize ) {
 	int		len, colorlessLen;
 	char	ch;

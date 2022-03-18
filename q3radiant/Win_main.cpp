@@ -36,13 +36,7 @@ static HWND CreateToolBar(HINSTANCE hinst);
 
 extern void WXY_Print( void );
 
-/*
-==============================================================================
 
-  MENU
-
-==============================================================================
-*/
 
 void OpenDialog (void);
 void SaveAsDialog (bool bRegion);
@@ -422,12 +416,6 @@ void DLLBuildDone()
 
 }
 
-/*
-=============
-DoColor
-
-=============
-*/
 
 class CMyColorDialog : public CColorDialog 
 {
@@ -629,11 +617,6 @@ BOOL DoMru(HWND hWnd,WORD wId)
 
 
 
-/*
-==============
-Main_Create
-==============
-*/
 
 void MFCCreate (HINSTANCE hInstance)
 {
@@ -726,15 +709,6 @@ void MFCCreate (HINSTANCE hInstance)
 	}
 
 }
-
-
-/*
-=============================================================
-
-REGISTRY INFO
-
-=============================================================
-*/
 
 BOOL SaveRegistryInfo(const char *pszName, void *pvBuf, long lSize)
 {

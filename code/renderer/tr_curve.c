@@ -38,11 +38,6 @@ srfGridMesh_t *R_SubdividePatchToGrid( int width, int height,
 */
 
 
-/*
-============
-LerpDrawVert
-============
-*/
 static void LerpDrawVert( drawVert_t *a, drawVert_t *b, drawVert_t *out ) {
 	out->xyz[0] = 0.5f * (a->xyz[0] + b->xyz[0]);
 	out->xyz[1] = 0.5f * (a->xyz[1] + b->xyz[1]);
@@ -60,11 +55,6 @@ static void LerpDrawVert( drawVert_t *a, drawVert_t *b, drawVert_t *out ) {
 	out->color[3] = (a->color[3] + b->color[3]) >> 1;
 }
 
-/*
-============
-Transpose
-============
-*/
 static void Transpose( int width, int height, drawVert_t ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE] ) {
 	int		i, j;
 	drawVert_t	temp;
@@ -214,11 +204,6 @@ static	int	neighbors[8][2] = {
 }
 
 
-/*
-============
-InvertCtrl
-============
-*/
 static void InvertCtrl( int width, int height, drawVert_t ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE] ) {
 	int		i, j;
 	drawVert_t	temp;
@@ -233,11 +218,6 @@ static void InvertCtrl( int width, int height, drawVert_t ctrl[MAX_GRID_SIZE][MA
 }
 
 
-/*
-=================
-InvertErrorTable
-=================
-*/
 static void InvertErrorTable( float errorTable[2][MAX_GRID_SIZE], int width, int height ) {
 	int		i;
 	float	copy[2][MAX_GRID_SIZE];
@@ -254,12 +234,7 @@ static void InvertErrorTable( float errorTable[2][MAX_GRID_SIZE], int width, int
 
 }
 
-/*
-==================
-PutPointsOnCurve
-==================
-*/
-static void PutPointsOnCurve( drawVert_t	ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE], 
+static void PutPointsOnCurve( drawVert_t	ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE],
 							 int width, int height ) {
 	int			i, j;
 	drawVert_t	prev, next;
@@ -282,11 +257,6 @@ static void PutPointsOnCurve( drawVert_t	ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE],
 	}
 }
 
-/*
-=================
-R_CreateSurfaceGridMesh
-=================
-*/
 srfGridMesh_t *R_CreateSurfaceGridMesh(int width, int height,
 								drawVert_t ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE], float errorTable[2][MAX_GRID_SIZE] ) {
 	int i, j, size;
@@ -341,22 +311,12 @@ srfGridMesh_t *R_CreateSurfaceGridMesh(int width, int height,
 	return grid;
 }
 
-/*
-=================
-R_FreeSurfaceGridMesh
-=================
-*/
 void R_FreeSurfaceGridMesh( srfGridMesh_t *grid ) {
 	ri.Free(grid->widthLodError);
 	ri.Free(grid->heightLodError);
 	ri.Free(grid);
 }
 
-/*
-=================
-R_SubdividePatchToGrid
-=================
-*/
 srfGridMesh_t *R_SubdividePatchToGrid( int width, int height,
 								drawVert_t points[MAX_PATCH_SIZE*MAX_PATCH_SIZE] ) {
 	int			i, j, k, l;
@@ -515,11 +475,6 @@ srfGridMesh_t *R_SubdividePatchToGrid( int width, int height,
 	return R_CreateSurfaceGridMesh( width, height, ctrl, errorTable );
 }
 
-/*
-===============
-R_GridInsertColumn
-===============
-*/
 srfGridMesh_t *R_GridInsertColumn( srfGridMesh_t *grid, int column, int row, vec3_t point, float loderror ) {
 	int i, j;
 	int width, height, oldwidth;
@@ -569,11 +524,6 @@ srfGridMesh_t *R_GridInsertColumn( srfGridMesh_t *grid, int column, int row, vec
 	return grid;
 }
 
-/*
-===============
-R_GridInsertRow
-===============
-*/
 srfGridMesh_t *R_GridInsertRow( srfGridMesh_t *grid, int row, int column, vec3_t point, float loderror ) {
 	int i, j;
 	int width, height, oldheight;

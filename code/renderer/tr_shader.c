@@ -108,11 +108,6 @@ void R_RemapShader(const char *shaderName, const char *newShaderName, const char
 	}
 }
 
-/*
-===============
-ParseVector
-===============
-*/
 static qboolean ParseVector( char **text, int count, float *v ) {
 	char	*token;
 	int		i;
@@ -143,11 +138,6 @@ static qboolean ParseVector( char **text, int count, float *v ) {
 }
 
 
-/*
-===============
-NameToAFunc
-===============
-*/
 static unsigned NameToAFunc( const char *funcname )
 {	
 	if ( !Q_stricmp( funcname, "GT0" ) )
@@ -168,11 +158,6 @@ static unsigned NameToAFunc( const char *funcname )
 }
 
 
-/*
-===============
-NameToSrcBlendMode
-===============
-*/
 static int NameToSrcBlendMode( const char *name )
 {
 	if ( !Q_stricmp( name, "GL_ONE" ) )
@@ -216,11 +201,6 @@ static int NameToSrcBlendMode( const char *name )
 	return GLS_SRCBLEND_ONE;
 }
 
-/*
-===============
-NameToDstBlendMode
-===============
-*/
 static int NameToDstBlendMode( const char *name )
 {
 	if ( !Q_stricmp( name, "GL_ONE" ) )
@@ -260,11 +240,6 @@ static int NameToDstBlendMode( const char *name )
 	return GLS_DSTBLEND_ONE;
 }
 
-/*
-===============
-NameToGenFunc
-===============
-*/
 static genFunc_t NameToGenFunc( const char *funcname )
 {
 	if ( !Q_stricmp( funcname, "sin" ) )
@@ -297,11 +272,6 @@ static genFunc_t NameToGenFunc( const char *funcname )
 }
 
 
-/*
-===================
-ParseWaveForm
-===================
-*/
 static void ParseWaveForm( char **text, waveForm_t *wave )
 {
 	char *token;
@@ -349,11 +319,6 @@ static void ParseWaveForm( char **text, waveForm_t *wave )
 }
 
 
-/*
-===================
-ParseTexMod
-===================
-*/
 static void ParseTexMod( char *_text, shaderStage_t *stage )
 {
 	const char *token;
@@ -579,11 +544,6 @@ static void ParseTexMod( char *_text, shaderStage_t *stage )
 }
 
 
-/*
-===================
-ParseStage
-===================
-*/
 static qboolean ParseStage( shaderStage_t *stage, char **text )
 {
 	char *token;
@@ -1268,11 +1228,6 @@ static void ParseSkyParms( char **text ) {
 }
 
 
-/*
-=================
-ParseSort
-=================
-*/
 void ParseSort( char **text ) {
 	char	*token;
 
@@ -1951,11 +1906,6 @@ static void SortNewShader( void ) {
 }
 
 
-/*
-====================
-GeneratePermanentShader
-====================
-*/
 static shader_t *GeneratePermanentShader( void ) {
 	shader_t	*newShader;
 	int			i, b;
@@ -2940,11 +2890,6 @@ static void ScanAndLoadShaderFiles( void )
 }
 
 
-/*
-====================
-CreateInternalShaders
-====================
-*/
 static void CreateInternalShaders( void ) {
 	tr.numShaders = 0;
 
@@ -2972,11 +2917,6 @@ static void CreateExternalShaders( void ) {
 	tr.sunShader = R_FindShader( "sun", LIGHTMAP_NONE, qtrue );
 }
 
-/*
-==================
-R_InitShaders
-==================
-*/
 void R_InitShaders( void ) {
 	ri.Printf( PRINT_ALL, "Initializing Shaders\n" );
 

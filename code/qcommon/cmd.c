@@ -57,20 +57,6 @@ void Cmd_Wait_f( void ) {
 	}
 }
 
-
-/*
-=============================================================================
-
-						COMMAND BUFFER
-
-=============================================================================
-*/
-
-/*
-============
-Cbuf_Init
-============
-*/
 void Cbuf_Init (void)
 {
 	cmd_text.data = cmd_text_buf;
@@ -133,11 +119,6 @@ void Cbuf_InsertText( const char *text ) {
 }
 
 
-/*
-============
-Cbuf_ExecuteText
-============
-*/
 void Cbuf_ExecuteText (int exec_when, const char *text)
 {
 	switch (exec_when)
@@ -160,11 +141,6 @@ void Cbuf_ExecuteText (int exec_when, const char *text)
 	}
 }
 
-/*
-============
-Cbuf_Execute
-============
-*/
 void Cbuf_Execute (void)
 {
 	int		i;
@@ -221,21 +197,6 @@ void Cbuf_Execute (void)
 	}
 }
 
-
-/*
-==============================================================================
-
-						SCRIPT COMMANDS
-
-==============================================================================
-*/
-
-
-/*
-===============
-Cmd_Exec_f
-===============
-*/
 void Cmd_Exec_f( void ) {
 	char	*f;
 	int		len;
@@ -297,15 +258,6 @@ void Cmd_Echo_f (void)
 	Com_Printf ("\n");
 }
 
-
-/*
-=============================================================================
-
-					COMMAND EXECUTION
-
-=============================================================================
-*/
-
 typedef struct cmd_function_s
 {
 	struct cmd_function_s	*next;
@@ -321,20 +273,10 @@ static	char		cmd_cmd[BIG_INFO_STRING]; // the original command we received (no t
 
 static	cmd_function_t	*cmd_functions;		// possible commands to execute
 
-/*
-============
-Cmd_Argc
-============
-*/
 int		Cmd_Argc( void ) {
 	return cmd_argc;
 }
 
-/*
-============
-Cmd_Argv
-============
-*/
 char	*Cmd_Argv( int arg ) {
 	if ( (unsigned)arg >= cmd_argc ) {
 		return "";
@@ -542,11 +484,6 @@ void Cmd_TokenizeString( const char *text_in ) {
 }
 
 
-/*
-============
-Cmd_AddCommand
-============
-*/
 void	Cmd_AddCommand( const char *cmd_name, xcommand_t function ) {
 	cmd_function_t	*cmd;
 	
@@ -569,11 +506,6 @@ void	Cmd_AddCommand( const char *cmd_name, xcommand_t function ) {
 	cmd_functions = cmd;
 }
 
-/*
-============
-Cmd_RemoveCommand
-============
-*/
 void	Cmd_RemoveCommand( const char *cmd_name ) {
 	cmd_function_t	*cmd, **back;
 
@@ -597,11 +529,6 @@ void	Cmd_RemoveCommand( const char *cmd_name ) {
 }
 
 
-/*
-============
-Cmd_CommandCompletion
-============
-*/
 void	Cmd_CommandCompletion( void(*callback)(const char *s) ) {
 	cmd_function_t	*cmd;
 	
@@ -677,11 +604,6 @@ void	Cmd_ExecuteString( const char *text ) {
 #endif
 }
 
-/*
-============
-Cmd_List_f
-============
-*/
 void Cmd_List_f (void)
 {
 	cmd_function_t	*cmd;
@@ -704,11 +626,6 @@ void Cmd_List_f (void)
 	Com_Printf ("%i commands\n", i);
 }
 
-/*
-============
-Cmd_Init
-============
-*/
 void Cmd_Init (void) {
 	Cmd_AddCommand ("cmdlist",Cmd_List_f);
 	Cmd_AddCommand ("exec",Cmd_Exec_f);

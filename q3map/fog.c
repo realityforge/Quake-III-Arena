@@ -25,11 +25,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 int			c_fogFragment;
 int			c_fogPatchFragments;
 
-/*
-====================
-DrawSurfToMesh
-====================
-*/
 mesh_t	*DrawSurfToMesh( mapDrawSurface_t *ds ) {
 	mesh_t		*m;
 
@@ -43,11 +38,6 @@ mesh_t	*DrawSurfToMesh( mapDrawSurface_t *ds ) {
 }
 
 
-/*
-====================
-SplitMeshByPlane
-====================
-*/
 void SplitMeshByPlane( mesh_t *in, vec3_t normal, float dist, mesh_t **front, mesh_t **back ) {
 	int		w, h, split;
 	float	d[MAX_PATCH_SIZE][MAX_PATCH_SIZE];
@@ -213,11 +203,6 @@ _printf("\n");
 }
 
 
-/*
-====================
-ChopPatchByBrush
-====================
-*/
 qboolean ChopPatchByBrush( mapDrawSurface_t *ds, bspbrush_t *b ) {
 	int			i, j;
 	side_t		*s;
@@ -280,11 +265,6 @@ qboolean ChopPatchByBrush( mapDrawSurface_t *ds, bspbrush_t *b ) {
 
 //===============================================================================
 
-/*
-====================
-WindingFromDrawSurf
-====================
-*/
 winding_t	*WindingFromDrawSurf( mapDrawSurface_t *ds ) {
 	winding_t	*w;
 	int			i;
