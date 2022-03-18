@@ -441,7 +441,6 @@ vm_t *VM_Create( const char *module, int (*systemCalls)(int *),
 	vm->codeLength = header->codeLength;
 
     // TODO: Reinstate compilation of the bytecode here
-    vm->compiled = qfalse;
     VM_PrepareInterpreter( vm, header );
 
 	// free the original file
@@ -582,8 +581,6 @@ int	QDECL VM_Call( vm_t *vm, int callnum, ... ) {
                             args[4],  args[5],  args[6], args[7],
                             args[8],  args[9], args[10], args[11],
                             args[12], args[13], args[14], args[15]);
-	} else if ( vm->compiled ) {
-		r = VM_CallCompiled( vm, &callnum );
 	} else {
 		r = VM_CallInterpreted( vm, &callnum );
 	}
@@ -677,21 +674,11 @@ void VM_VmInfo_f( void ) {
 		if ( vm->dllHandle ) {
 			Com_Printf( "native\n" );
 			continue;
-		}
-		if ( vm->compiled ) {
-			Com_Printf( "compiled on load\n" );
 		} else {
 			Com_Printf( "interpreted\n" );
-		}
-		Com_Printf( "    code length : %7i\n", vm->codeLength );
-		Com_Printf( "    table length: %7i\n", vm->instructionPointersLength );
-		Com_Printf( "    data length : %7i\n", vm->dataMask + 1 );
+            Com_Printf( "    code length : %7i\n", vm->codeLength );
+            Com_Printf( "    table length: %7i\n", vm->instructionCount*4 );
+            Com_Printf( "    data length : %7i\n", vm->dataMask + 1 );
+        }
 	}
 }
-#ifdef oDLL_ONLY // bk010215 - for DLL_ONLY dedicated servers/builds w/o VM
-int	VM_CallCompiled( vm_t *vm, int *args ) {
-  return(0); 
-}
-
-void VM_Compile( vm_t *vm, vmHeader_t *header ) {}
-#endif // DLL_ONLY
