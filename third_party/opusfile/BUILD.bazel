@@ -1,3 +1,9 @@
+# TODO: Move this to some central place?
+config_setting(
+    name = "macos",
+    constraint_values = ["@platforms//os:macos"],
+)
+
 cc_library(
     name = "opusfile",
     srcs = [
@@ -13,7 +19,10 @@ cc_library(
     hdrs = [
         "include/opusfile.h",
     ],
-    copts = ["-Wno-maybe-uninitialized"],
+    copts = select({
+        ":macos": [],
+        "//conditions:default": ["-Wno-maybe-uninitialized"],
+    }),
     defines = ["USE_CODEC_VORBIS"],
     includes = ["include"],
     deps = [
