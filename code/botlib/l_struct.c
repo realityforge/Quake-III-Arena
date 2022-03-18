@@ -197,10 +197,7 @@ int ReadString(source_t *source, fielddef_t *fd, void *p)
 	//remove the double quotes
 	StripDoubleQuotes(token.string);
 	//copy the string
-	strncpy((char *) p, token.string, MAX_STRINGFIELD);
-	//make sure the string is closed with a zero
-	((char *)p)[MAX_STRINGFIELD-1] = '\0';
-	//
+    Q_strncpyz((char *) p, token.string, MAX_STRINGFIELD);
 	return 1;
 }
 int ReadStructure(source_t *source, structdef_t *def, char *structure)
