@@ -160,7 +160,6 @@ struct vm_s {
 	// for interpreted modules
 	qboolean	currentlyInterpreting;
 
-	qboolean	compiled;
 	byte		*codeBase;
 	int			entryOfs;
 	int			codeLength;
