@@ -28,7 +28,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 **
 ** GLimp_EndFrame
 ** GLimp_Init
-** GLimp_LogComment
 ** GLimp_Shutdown
 **
 ** Note that the GLW_xxx functions are Windows specific GL-subsystem
@@ -70,7 +69,6 @@ static qboolean s_classRegistered = qfalse;
 //
 // function declaration
 //
-void	 QGL_EnableLogging( qboolean enable );
 qboolean QGL_Init( const char *dllname );
 void     QGL_Shutdown( void );
 
@@ -1244,9 +1242,6 @@ void GLimp_EndFrame (void)
 			SwapBuffers( glw_state.hDC );
 		}
 	}
-
-	// check logging
-	QGL_EnableLogging( r_logFile->integer );
 }
 
 static void GLW_StartOpenGL( void )
@@ -1488,13 +1483,6 @@ void GLimp_Shutdown( void )
 		glw_state.pixelFormatSet = qfalse;
 	}
 
-	// close the r_logFile
-	if ( glw_state.log_fp )
-	{
-		fclose( glw_state.log_fp );
-		glw_state.log_fp = 0;
-	}
-
 	// reset display settings
 	if ( glw_state.cdsFullscreen )
 	{
@@ -1509,17 +1497,6 @@ void GLimp_Shutdown( void )
 	memset( &glConfig, 0, sizeof( glConfig ) );
 	memset( &glState, 0, sizeof( glState ) );
 }
-
-/*
-** GLimp_LogComment
-*/
-void GLimp_LogComment( char *comment ) 
-{
-	if ( glw_state.log_fp ) {
-		fprintf( glw_state.log_fp, "%s", comment );
-	}
-}
-
 
 /*
 ===========================================================

@@ -619,11 +619,6 @@ void GLimp_Shutdown( void )
         glw_state.window = nil;
     }
 
-    if (glw_state.log_fp) {
-        fclose(glw_state.log_fp);
-        glw_state.log_fp = 0;
-    }
-
     for (displayIndex = 0; displayIndex < glw_state.displayCount; displayIndex++) {
         free(glw_state.originalDisplayGammaTables[displayIndex].red);
         free(glw_state.originalDisplayGammaTables[displayIndex].blue);
@@ -647,15 +642,6 @@ void GLimp_Shutdown( void )
 
     Com_Printf("----- Done shutting down GL -----\n");
 }
-
-/*
-===============
-GLimp_LogComment
-
-===============
-*/
-void	GLimp_LogComment( char *comment ) {
-        }
 
 /*
 ===============

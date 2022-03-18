@@ -39,7 +39,6 @@ void IN_StartupJoystick( void );
 
 // GL subsystem
 qboolean QGL_Init( const char *dllname );
-void QGL_EnableLogging( qboolean enable );
 void QGL_Shutdown( void );
 
 char *strlwr (char *s);
