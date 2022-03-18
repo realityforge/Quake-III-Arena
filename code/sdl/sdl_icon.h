@@ -1,5 +1,7 @@
 /* GIMP RGBA C-Source image dump (sdl_icon.h) */
 
+#pragma GCC diagnostic ignored "-Woverlength-strings"
+
 static const struct {
   unsigned int 	 width;
   unsigned int 	 height;
