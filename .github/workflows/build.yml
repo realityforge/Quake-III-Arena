@@ -21,10 +21,11 @@ jobs:
       run: make release
       env:
         ARCHIVE: 1
-    - uses: actions/upload-artifact@v2
-      with:
-        name: Linux
-        path: build/*.zip
+#    Re-enable archives when there is someone other than me using the product
+#    - uses: actions/upload-artifact@v2
+#      with:
+#        name: Linux
+#        path: build/*.zip
   windows:
     name: Windows
     runs-on: windows-2019
@@ -36,10 +37,11 @@ jobs:
         make release
       env:
         ARCHIVE: 1
-    - uses: actions/upload-artifact@v2
-      with:
-        name: Windows
-        path: build/*.zip
+#    Re-enable archives when there is someone other than me using the product
+#    - uses: actions/upload-artifact@v2
+#      with:
+#        name: Windows
+#        path: build/*.zip
   macos:
     name: macOS
     runs-on: macos-11
@@ -49,7 +51,8 @@ jobs:
       run: make release
       env:
         ARCHIVE: 1
-    - uses: actions/upload-artifact@v2
-      with:
-        name: macOS
-        path: build/*.zip
+#    Re-enable archives when there is someone other than me using the product
+#    - uses: actions/upload-artifact@v2
+#      with:
+#        name: macOS
+#        path: build/*.zip
