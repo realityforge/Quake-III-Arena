@@ -46,11 +46,6 @@ static char		memoryPool[POOLSIZE];
 static int		allocPoint, outOfMemory;
 
 
-/*
-===============
-UI_Alloc
-===============
-*/
 void *UI_Alloc( int size ) {
 	char	*p;
 
@@ -66,21 +61,11 @@ void *UI_Alloc( int size ) {
 	return p;
 }
 
-/*
-===============
-UI_InitMemory
-===============
-*/
 void UI_InitMemory( void ) {
 	allocPoint = 0;
 	outOfMemory = qfalse;
 }
 
-/*
-===============
-UI_ParseInfos
-===============
-*/
 int UI_ParseInfos( char *buf, int max, char *infos[] ) {
 	char	*token;
 	int		count;
@@ -132,11 +117,6 @@ int UI_ParseInfos( char *buf, int max, char *infos[] ) {
 	return count;
 }
 
-/*
-===============
-UI_LoadArenasFromFile
-===============
-*/
 static void UI_LoadArenasFromFile( char *filename ) {
 	int				len;
 	fileHandle_t	f;
@@ -160,11 +140,6 @@ static void UI_LoadArenasFromFile( char *filename ) {
 	ui_numArenas += UI_ParseInfos( buf, MAX_ARENAS - ui_numArenas, &ui_arenaInfos[ui_numArenas] );
 }
 
-/*
-===============
-UI_LoadArenas
-===============
-*/
 static void UI_LoadArenas( void ) {
 	int			numdirs;
 	vmCvar_t	arenasFile;
@@ -261,11 +236,6 @@ static void UI_LoadArenas( void ) {
 	}
 }
 
-/*
-===============
-UI_GetArenaInfoByNumber
-===============
-*/
 const char *UI_GetArenaInfoByNumber( int num ) {
 	int		n;
 	char	*value;
@@ -286,11 +256,6 @@ const char *UI_GetArenaInfoByNumber( int num ) {
 }
 
 
-/*
-===============
-UI_GetArenaInfoByNumber
-===============
-*/
 const char *UI_GetArenaInfoByMap( const char *map ) {
 	int			n;
 
@@ -304,11 +269,6 @@ const char *UI_GetArenaInfoByMap( const char *map ) {
 }
 
 
-/*
-===============
-UI_GetSpecialArenaInfo
-===============
-*/
 const char *UI_GetSpecialArenaInfo( const char *tag ) {
 	int			n;
 
@@ -321,11 +281,6 @@ const char *UI_GetSpecialArenaInfo( const char *tag ) {
 	return NULL;
 }
 
-/*
-===============
-UI_LoadBotsFromFile
-===============
-*/
 static void UI_LoadBotsFromFile( char *filename ) {
 	int				len;
 	fileHandle_t	f;
@@ -350,11 +305,6 @@ static void UI_LoadBotsFromFile( char *filename ) {
 	if (outOfMemory) trap_Print(S_COLOR_YELLOW"WARNING: not enough memory in pool to load all bots\n");
 }
 
-/*
-===============
-UI_LoadBots
-===============
-*/
 static void UI_LoadBots( void ) {
 	vmCvar_t	botsFile;
 	int			numdirs;
@@ -387,11 +337,6 @@ static void UI_LoadBots( void ) {
 }
 
 
-/*
-===============
-UI_GetBotInfoByNumber
-===============
-*/
 char *UI_GetBotInfoByNumber( int num ) {
 	if( num < 0 || num >= ui_numBots ) {
 		trap_Print( va( S_COLOR_RED "Invalid bot number: %i\n", num ) );
@@ -401,11 +346,6 @@ char *UI_GetBotInfoByNumber( int num ) {
 }
 
 
-/*
-===============
-UI_GetBotInfoByName
-===============
-*/
 char *UI_GetBotInfoByName( const char *name ) {
 	int		n;
 	char	*value;
@@ -512,11 +452,6 @@ void UI_SetBestScore( int level, int score ) {
 }
 
 
-/*
-===============
-UI_LogAwardData
-===============
-*/
 void UI_LogAwardData( int award, int data ) {
 	char	key[16];
 	char	awardData[MAX_INFO_VALUE];
@@ -541,11 +476,6 @@ void UI_LogAwardData( int award, int data ) {
 }
 
 
-/*
-===============
-UI_GetAwardLevel
-===============
-*/
 int UI_GetAwardLevel( int award ) {
 	char	key[16];
 	char	awardData[MAX_INFO_VALUE];
@@ -557,11 +487,6 @@ int UI_GetAwardLevel( int award ) {
 }
 
 
-/*
-===============
-UI_TierCompleted
-===============
-*/
 int UI_TierCompleted( int levelWon ) {
 	int			level;
 	int			n;
@@ -595,11 +520,6 @@ int UI_TierCompleted( int levelWon ) {
 }
 
 
-/*
-===============
-UI_ShowTierVideo
-===============
-*/
 qboolean UI_ShowTierVideo( int tier ) {
 	char	key[16];
 	char	videos[MAX_INFO_VALUE];
@@ -622,11 +542,6 @@ qboolean UI_ShowTierVideo( int tier ) {
 }
 
 
-/*
-===============
-UI_CanShowTierVideo
-===============
-*/
 qboolean UI_CanShowTierVideo( int tier ) {
 	char	key[16];
 	char	videos[MAX_INFO_VALUE];
@@ -701,51 +616,26 @@ void UI_NewGame( void ) {
 }
 
 
-/*
-===============
-UI_GetNumArenas
-===============
-*/
 int UI_GetNumArenas( void ) {
 	return ui_numArenas;
 }
 
 
-/*
-===============
-UI_GetNumSPArenas
-===============
-*/
 int UI_GetNumSPArenas( void ) {
 	return ui_numSinglePlayerArenas;
 }
 
 
-/*
-===============
-UI_GetNumSPTiers
-===============
-*/
 int UI_GetNumSPTiers( void ) {
 	return ui_numSinglePlayerArenas / ARENAS_PER_TIER;
 }
 
 
-/*
-===============
-UI_GetNumBots
-===============
-*/
 int UI_GetNumBots( void ) {
 	return ui_numBots;
 }
 
 
-/*
-===============
-UI_SPUnlock_f
-===============
-*/
 void UI_SPUnlock_f( void ) {
 	char	arenaKey[16];
 	char	scores[MAX_INFO_VALUE];
@@ -773,11 +663,6 @@ void UI_SPUnlock_f( void ) {
 }
 
 
-/*
-===============
-UI_SPUnlockMedals_f
-===============
-*/
 void UI_SPUnlockMedals_f( void ) {
 	int		n;
 	char	key[16];
@@ -796,11 +681,6 @@ void UI_SPUnlockMedals_f( void ) {
 }
 
 
-/*
-===============
-UI_InitGameinfo
-===============
-*/
 void UI_InitGameinfo( void ) {
 
 	UI_InitMemory();

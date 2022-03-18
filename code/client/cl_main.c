@@ -540,14 +540,6 @@ void CL_CaptureVoip(void)
 #endif
 
 /*
-=======================================================================
-
-CLIENT RELIABLE COMMAND COMMUNICATION
-
-=======================================================================
-*/
-
-/*
 ======================
 CL_AddReliableCommand
 
@@ -808,11 +800,6 @@ CLIENT SIDE DEMO PLAYBACK
 =======================================================================
 */
 
-/*
-=================
-CL_DemoFrameDurationSDev
-=================
-*/
 static float CL_DemoFrameDurationSDev( void )
 {
 	int i;
@@ -840,11 +827,6 @@ static float CL_DemoFrameDurationSDev( void )
 	return sqrt( variance );
 }
 
-/*
-=================
-CL_DemoCompleted
-=================
-*/
 void CL_DemoCompleted( void )
 {
 	char buffer[ MAX_STRING_CHARS ];
@@ -905,11 +887,6 @@ void CL_DemoCompleted( void )
 	CL_NextDemo();
 }
 
-/*
-=================
-CL_ReadDemoMessage
-=================
-*/
 void CL_ReadDemoMessage( void ) {
 	int			r;
 	msg_t		buf;
@@ -958,11 +935,6 @@ void CL_ReadDemoMessage( void ) {
 	CL_ParseServerMessage( &buf );
 }
 
-/*
-====================
-CL_WalkDemoExt
-====================
-*/
 static int CL_WalkDemoExt(char *arg, char *name, int *demofile)
 {
 	int i = 0;
@@ -1021,11 +993,6 @@ static int CL_WalkDemoExt(char *arg, char *name, int *demofile)
 	return -1;
 }
 
-/*
-====================
-CL_CompleteDemoName
-====================
-*/
 static void CL_CompleteDemoName( char *args, int argNum )
 {
 	if( argNum == 2 )
@@ -1161,11 +1128,6 @@ void CL_NextDemo( void ) {
 
 //======================================================================
 
-/*
-=====================
-CL_ShutdownAll
-=====================
-*/
 void CL_ShutdownAll(qboolean shutdownRef)
 {
 	if(CL_VideoRecording())
@@ -1447,12 +1409,6 @@ void CL_ForwardCommandToServer( const char *string ) {
 	}
 }
 
-/*
-===================
-CL_RequestMotd
-
-===================
-*/
 void CL_RequestMotd( void ) {
 #ifdef UPDATE_SERVER_NAME
 	char		info[MAX_INFO_STRING];
@@ -1490,11 +1446,6 @@ CONSOLE COMMANDS
 ======================================================================
 */
 
-/*
-==================
-CL_ForwardToServer_f
-==================
-*/
 void CL_ForwardToServer_f( void ) {
 	if ( clc.state != CA_ACTIVE || clc.demoplaying ) {
 		Com_Printf ("Not connected to a server.\n");
@@ -1507,11 +1458,6 @@ void CL_ForwardToServer_f( void ) {
 	}
 }
 
-/*
-==================
-CL_Disconnect_f
-==================
-*/
 void CL_Disconnect_f( void ) {
 	SCR_StopCinematic();
 	Cvar_Set("ui_singlePlayerActive", "0");
@@ -1521,12 +1467,6 @@ void CL_Disconnect_f( void ) {
 }
 
 
-/*
-================
-CL_Reconnect_f
-
-================
-*/
 void CL_Reconnect_f( void ) {
 	if ( !strlen( cl_reconnectArgs ) )
 		return;
@@ -1534,12 +1474,6 @@ void CL_Reconnect_f( void ) {
 	Cbuf_AddText( va("connect %s\n", cl_reconnectArgs ) );
 }
 
-/*
-================
-CL_Connect_f
-
-================
-*/
 void CL_Connect_f( void ) {
 	char	server[MAX_OSPATH];
 	const char	*serverString;
@@ -1626,11 +1560,6 @@ void CL_Connect_f( void ) {
 
 #define MAX_RCON_MESSAGE 1024
 
-/*
-==================
-CL_CompleteRcon
-==================
-*/
 static void CL_CompleteRcon( char *args, int argNum )
 {
 	if( argNum == 2 )
@@ -1643,11 +1572,6 @@ static void CL_CompleteRcon( char *args, int argNum )
 	}
 }
 
-/*
-==================
-CL_CompletePlayerName
-==================
-*/
 static void CL_CompletePlayerName( char *args, int argNum )
 {
 	if( argNum == 2 )
@@ -1739,11 +1663,6 @@ void CL_Rcon_f( void ) {
 	cls.rconAddress = to;
 }
 
-/*
-=================
-CL_SendPureChecksums
-=================
-*/
 void CL_SendPureChecksums( void ) {
 	char cMsg[MAX_INFO_VALUE];
 
@@ -1753,11 +1672,6 @@ void CL_SendPureChecksums( void ) {
 	CL_AddReliableCommand(cMsg, qfalse);
 }
 
-/*
-=================
-CL_ResetPureClientAtServer
-=================
-*/
 void CL_ResetPureClientAtServer( void ) {
 	CL_AddReliableCommand("vdr", qfalse);
 }
@@ -1875,20 +1789,10 @@ void CL_OpenedPK3List_f( void ) {
 	Com_Printf("Opened PK3 Names: %s\n", FS_LoadedPakNames());
 }
 
-/*
-==================
-CL_PureList_f
-==================
-*/
 void CL_ReferencedPK3List_f( void ) {
 	Com_Printf("Referenced PK3 Names: %s\n", FS_ReferencedPakNames());
 }
 
-/*
-==================
-CL_Configstrings_f
-==================
-*/
 void CL_Configstrings_f( void ) {
 	int		i;
 	int		ofs;
@@ -1907,11 +1811,6 @@ void CL_Configstrings_f( void ) {
 	}
 }
 
-/*
-==============
-CL_Clientinfo_f
-==============
-*/
 void CL_Clientinfo_f( void ) {
 	Com_Printf( "--------- Client Information ---------\n" );
 	Com_Printf( "state: %i\n", clc.state );
@@ -2243,12 +2142,6 @@ void CL_CheckForResend( void ) {
 }
 
 
-/*
-===================
-CL_MotdPacket
-
-===================
-*/
 void CL_MotdPacket( netadr_t from ) {
 #ifdef UPDATE_SERVER_NAME
 	char	*challenge;
@@ -2274,11 +2167,6 @@ void CL_MotdPacket( netadr_t from ) {
 #endif
 }
 
-/*
-===================
-CL_InitServerInfo
-===================
-*/
 void CL_InitServerInfo( serverInfo_t *server, netadr_t *address ) {
 	server->adr = *address;
 	server->clients = 0;
@@ -2297,11 +2185,6 @@ void CL_InitServerInfo( serverInfo_t *server, netadr_t *address ) {
 
 #define MAX_SERVERSPERPACKET	256
 
-/*
-===================
-CL_ServersResponsePacket
-===================
-*/
 void CL_ServersResponsePacket( const netadr_t* from, msg_t *msg, qboolean extended ) {
 	int				i, j, count, total;
 	netadr_t addresses[MAX_SERVERSPERPACKET];
@@ -2695,12 +2578,6 @@ void CL_PacketEvent( netadr_t from, msg_t *msg ) {
 	}
 }
 
-/*
-==================
-CL_CheckTimeout
-
-==================
-*/
 void CL_CheckTimeout( void ) {
 	//
 	// check timeout
@@ -2737,12 +2614,6 @@ qboolean CL_CheckPaused(void)
 
 //============================================================================
 
-/*
-==================
-CL_CheckUserinfo
-
-==================
-*/
 void CL_CheckUserinfo( void ) {
 	// don't add reliable commands when not yet connected
 	if(clc.state < CA_CONNECTED)
@@ -2760,12 +2631,6 @@ void CL_CheckUserinfo( void ) {
 	}
 }
 
-/*
-==================
-CL_Frame
-
-==================
-*/
 void CL_Frame ( int msec ) {
 
 	if ( !com_cl_running->integer ) {
@@ -2931,11 +2796,6 @@ static __attribute__ ((format (printf, 2, 3))) void QDECL CL_RefPrintf( int prin
 
 
 
-/*
-============
-CL_ShutdownRef
-============
-*/
 void CL_ShutdownRef( void ) {
 	if ( re.Shutdown ) {
 		re.Shutdown( qtrue );
@@ -2951,11 +2811,6 @@ void CL_ShutdownRef( void ) {
 #endif
 }
 
-/*
-============
-CL_InitRenderer
-============
-*/
 void CL_InitRenderer( void ) {
 	// this sets up the renderer and calls R_Init
 	re.BeginRegistration( &cls.glconfig );
@@ -3010,11 +2865,6 @@ void CL_StartHunkUsers( qboolean rendererOnly ) {
 	}
 }
 
-/*
-============
-CL_RefMalloc
-============
-*/
 void *CL_RefMalloc( int size ) {
 	return Z_TagMalloc( size, TAG_RENDERER );
 }
@@ -3023,11 +2873,6 @@ int CL_ScaledMilliseconds(void) {
 	return Sys_Milliseconds()*com_timescale->value;
 }
 
-/*
-============
-CL_InitRef
-============
-*/
 void CL_InitRef( void ) {
 	refimport_t	ri;
 	refexport_t	*ret;
@@ -3215,11 +3060,6 @@ void CL_Video_f( void )
   CL_OpenAVIForWriting( filename );
 }
 
-/*
-===============
-CL_StopVideo_f
-===============
-*/
 void CL_StopVideo_f( void )
 {
   CL_CloseAVI( );
@@ -3275,11 +3115,6 @@ void CL_Sayto_f( void ) {
 	CL_AddReliableCommand(va("tell %i \"%s\"", clientNum, p ), qfalse);
 }
 
-/*
-====================
-CL_Init
-====================
-*/
 void CL_Init( void ) {
 	Com_Printf( "----- Client Initialization -----\n" );
 
@@ -3489,12 +3324,6 @@ void CL_Init( void ) {
 }
 
 
-/*
-===============
-CL_Shutdown
-
-===============
-*/
 void CL_Shutdown(char *finalmsg, qboolean disconnect, qboolean quit)
 {
 	static qboolean recursive = qfalse;
@@ -3599,11 +3428,6 @@ static void CL_SetServerInfoByAddress(netadr_t from, const char *info, int ping)
 
 }
 
-/*
-===================
-CL_ServerInfoPacket
-===================
-*/
 void CL_ServerInfoPacket( netadr_t from, msg_t *msg ) {
 	int		i, type;
 	char	info[MAX_INFO_STRING];
@@ -3713,11 +3537,6 @@ void CL_ServerInfoPacket( netadr_t from, msg_t *msg ) {
 	}
 }
 
-/*
-===================
-CL_GetServerStatus
-===================
-*/
 serverStatus_t *CL_GetServerStatus( netadr_t from ) {
 	int i, oldest, oldestTime;
 
@@ -3742,11 +3561,6 @@ serverStatus_t *CL_GetServerStatus( netadr_t from ) {
 	return &cl_serverStatusList[oldest];
 }
 
-/*
-===================
-CL_ServerStatus
-===================
-*/
 int CL_ServerStatus( char *serverAddress, char *serverStatusString, int maxLen ) {
 	int i;
 	netadr_t	to;
@@ -3805,11 +3619,6 @@ int CL_ServerStatus( char *serverAddress, char *serverStatusString, int maxLen )
 	return qfalse;
 }
 
-/*
-===================
-CL_ServerStatusResponse
-===================
-*/
 void CL_ServerStatusResponse( netadr_t from, msg_t *msg ) {
 	char	*s;
 	char	info[MAX_INFO_STRING];
@@ -3898,11 +3707,6 @@ void CL_ServerStatusResponse( netadr_t from, msg_t *msg ) {
 	}
 }
 
-/*
-==================
-CL_LocalServers_f
-==================
-*/
 void CL_LocalServers_f( void ) {
 	char		*message;
 	int			i, j;
@@ -4045,11 +3849,6 @@ void CL_GlobalServers_f( void ) {
 }
 
 
-/*
-==================
-CL_GetPing
-==================
-*/
 void CL_GetPing( int n, char *buf, int buflen, int *pingtime )
 {
 	const char	*str;
@@ -4088,11 +3887,6 @@ void CL_GetPing( int n, char *buf, int buflen, int *pingtime )
 	*pingtime = time;
 }
 
-/*
-==================
-CL_GetPingInfo
-==================
-*/
 void CL_GetPingInfo( int n, char *buf, int buflen )
 {
 	if (n < 0 || n >= MAX_PINGREQUESTS || !cl_pinglist[n].adr.port)
@@ -4106,11 +3900,6 @@ void CL_GetPingInfo( int n, char *buf, int buflen )
 	Q_strncpyz( buf, cl_pinglist[n].info, buflen );
 }
 
-/*
-==================
-CL_ClearPing
-==================
-*/
 void CL_ClearPing( int n )
 {
 	if (n < 0 || n >= MAX_PINGREQUESTS)
@@ -4119,11 +3908,6 @@ void CL_ClearPing( int n )
 	cl_pinglist[n].adr.port = 0;
 }
 
-/*
-==================
-CL_GetPingQueueCount
-==================
-*/
 int CL_GetPingQueueCount( void )
 {
 	int		i;
@@ -4142,11 +3926,6 @@ int CL_GetPingQueueCount( void )
 	return (count);
 }
 
-/*
-==================
-CL_GetFreePing
-==================
-*/
 ping_t* CL_GetFreePing( void )
 {
 	ping_t*	pingptr;
@@ -4199,11 +3978,6 @@ ping_t* CL_GetFreePing( void )
 	return (best);
 }
 
-/*
-==================
-CL_Ping_f
-==================
-*/
 void CL_Ping_f( void ) {
 	netadr_t	to;
 	ping_t*		pingptr;
@@ -4249,11 +4023,6 @@ void CL_Ping_f( void ) {
 	NET_OutOfBandPrint( NS_CLIENT, to, "getinfo xxx" );
 }
 
-/*
-==================
-CL_UpdateVisiblePings_f
-==================
-*/
 qboolean CL_UpdateVisiblePings_f(int source) {
 	int			slots, i;
 	char		buff[MAX_STRING_CHARS];
@@ -4353,11 +4122,6 @@ qboolean CL_UpdateVisiblePings_f(int source) {
 	return status;
 }
 
-/*
-==================
-CL_ServerStatus_f
-==================
-*/
 void CL_ServerStatus_f(void) {
 	netadr_t	to, *toptr = NULL;
 	char		*server;
@@ -4410,11 +4174,6 @@ void CL_ServerStatus_f(void) {
 	serverStatus->pending = qtrue;
 }
 
-/*
-==================
-CL_ShowIP_f
-==================
-*/
 void CL_ShowIP_f(void) {
 	Sys_ShowIP();
 }

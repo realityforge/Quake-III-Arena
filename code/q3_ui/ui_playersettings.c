@@ -99,11 +99,6 @@ static const char *handicap_items[] = {
 };
 
 
-/*
-=================
-PlayerSettings_DrawName
-=================
-*/
 static void PlayerSettings_DrawName( void *self ) {
 	menufield_s		*f;
 	qboolean		focus;
@@ -171,11 +166,6 @@ static void PlayerSettings_DrawName( void *self ) {
 }
 
 
-/*
-=================
-PlayerSettings_DrawHandicap
-=================
-*/
 static void PlayerSettings_DrawHandicap( void *self ) {
 	menulist_s		*item;
 	qboolean		focus;
@@ -197,11 +187,6 @@ static void PlayerSettings_DrawHandicap( void *self ) {
 }
 
 
-/*
-=================
-PlayerSettings_DrawEffects
-=================
-*/
 static void PlayerSettings_DrawEffects( void *self ) {
 	menulist_s		*item;
 	qboolean		focus;
@@ -225,11 +210,6 @@ static void PlayerSettings_DrawEffects( void *self ) {
 }
 
 
-/*
-=================
-PlayerSettings_DrawPlayer
-=================
-*/
 static void PlayerSettings_DrawPlayer( void *self ) {
 	menubitmap_s	*b;
 	vec3_t			viewangles;
@@ -251,11 +231,6 @@ static void PlayerSettings_DrawPlayer( void *self ) {
 }
 
 
-/*
-=================
-PlayerSettings_SaveChanges
-=================
-*/
 static void PlayerSettings_SaveChanges( void ) {
 	// name
 	trap_Cvar_Set( "name", s_playersettings.name.field.buffer );
@@ -268,11 +243,6 @@ static void PlayerSettings_SaveChanges( void ) {
 }
 
 
-/*
-=================
-PlayerSettings_MenuKey
-=================
-*/
 static sfxHandle_t PlayerSettings_MenuKey( int key ) {
 	if( key == K_MOUSE2 || key == K_ESCAPE ) {
 		PlayerSettings_SaveChanges();
@@ -281,11 +251,6 @@ static sfxHandle_t PlayerSettings_MenuKey( int key ) {
 }
 
 
-/*
-=================
-PlayerSettings_SetMenuItems
-=================
-*/
 static void PlayerSettings_SetMenuItems( void ) {
 	vec3_t	viewangles;
 	int		c;
@@ -317,11 +282,6 @@ static void PlayerSettings_SetMenuItems( void ) {
 }
 
 
-/*
-=================
-PlayerSettings_MenuEvent
-=================
-*/
 static void PlayerSettings_MenuEvent( void* ptr, int event ) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -345,11 +305,6 @@ static void PlayerSettings_MenuEvent( void* ptr, int event ) {
 }
 
 
-/*
-=================
-PlayerSettings_MenuInit
-=================
-*/
 static void PlayerSettings_MenuInit( void ) {
 	int		y;
 
@@ -478,11 +433,6 @@ static void PlayerSettings_MenuInit( void ) {
 }
 
 
-/*
-=================
-PlayerSettings_Cache
-=================
-*/
 void PlayerSettings_Cache( void ) {
 	trap_R_RegisterShaderNoMip( ART_FRAMEL );
 	trap_R_RegisterShaderNoMip( ART_FRAMER );
@@ -502,11 +452,6 @@ void PlayerSettings_Cache( void ) {
 }
 
 
-/*
-=================
-UI_PlayerSettingsMenu
-=================
-*/
 void UI_PlayerSettingsMenu( void ) {
 	PlayerSettings_MenuInit();
 	UI_PushMenu( &s_playersettings.menu );

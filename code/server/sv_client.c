@@ -645,11 +645,6 @@ static void SV_SendClientGameState( client_t *client ) {
 }
 
 
-/*
-==================
-SV_ClientEnterWorld
-==================
-*/
 void SV_ClientEnterWorld( client_t *client, usercmd_t *cmd ) {
 	int		clientNum;
 	sharedEntity_t *ent;
@@ -776,11 +771,6 @@ static void SV_NextDownload_f( client_t *cl )
 	SV_DropClient( cl, "broken download" );
 }
 
-/*
-==================
-SV_BeginDownload_f
-==================
-*/
 static void SV_BeginDownload_f( client_t *cl ) {
 
 	// Kill any existing download
@@ -1242,11 +1232,6 @@ static void SV_VerifyPaks_f( client_t *cl ) {
 	}
 }
 
-/*
-=================
-SV_ResetPureClient_f
-=================
-*/
 static void SV_ResetPureClient_f( client_t *cl ) {
 	cl->pureAuthentic = 0;
 	cl->gotCP = qfalse;
@@ -1355,11 +1340,6 @@ void SV_UserinfoChanged( client_t *cl ) {
 }
 
 
-/*
-==================
-SV_UpdateUserinfo_f
-==================
-*/
 static void SV_UpdateUserinfo_f( client_t *cl ) {
 	Q_strncpyz( cl->userinfo, Cmd_Argv(1), sizeof(cl->userinfo) );
 
@@ -1381,11 +1361,6 @@ void SV_UpdateVoipIgnore(client_t *cl, const char *idstr, qboolean ignore)
 	}
 }
 
-/*
-==================
-SV_Voip_f
-==================
-*/
 static void SV_Voip_f( client_t *cl ) {
 	const char *cmd = Cmd_Argv(1);
 	if (strcmp(cmd, "ignore") == 0) {
@@ -1456,11 +1431,6 @@ void SV_ExecuteClientCommand( client_t *cl, const char *s, qboolean clientOK ) {
 		Com_DPrintf( "client text ignored for %s: %s\n", cl->name, Cmd_Argv(0) );
 }
 
-/*
-===============
-SV_ClientCommand
-===============
-*/
 static qboolean SV_ClientCommand( client_t *cl, msg_t *msg ) {
 	int		seq;
 	const char	*s;

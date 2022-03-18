@@ -47,41 +47,21 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 static char binaryPath[ MAX_OSPATH ] = { 0 };
 static char installPath[ MAX_OSPATH ] = { 0 };
 
-/*
-=================
-Sys_SetBinaryPath
-=================
-*/
 void Sys_SetBinaryPath(const char *path)
 {
 	Q_strncpyz(binaryPath, path, sizeof(binaryPath));
 }
 
-/*
-=================
-Sys_BinaryPath
-=================
-*/
 char *Sys_BinaryPath(void)
 {
 	return binaryPath;
 }
 
-/*
-=================
-Sys_SetDefaultInstallPath
-=================
-*/
 void Sys_SetDefaultInstallPath(const char *path)
 {
 	Q_strncpyz(installPath, path, sizeof(installPath));
 }
 
-/*
-=================
-Sys_DefaultInstallPath
-=================
-*/
 char *Sys_DefaultInstallPath(void)
 {
 	if (*installPath)
@@ -123,11 +103,6 @@ char *Sys_ConsoleInput(void)
 }
 
 #ifndef DEDICATED
-/*
-==================
-Sys_GetClipboardData
-==================
-*/
 char *Sys_GetClipboardData(void)
 {
 	char *data = NULL;
@@ -171,21 +146,11 @@ static __attribute__ ((noreturn)) void Sys_Exit( int exitCode )
 	exit( exitCode );
 }
 
-/*
-=================
-Sys_Quit
-=================
-*/
 void Sys_Quit( void )
 {
 	Sys_Exit( 0 );
 }
 
-/*
-=================
-Sys_GetProcessorFeatures
-=================
-*/
 cpuFeatures_t Sys_GetProcessorFeatures( void )
 {
 	cpuFeatures_t features = 0;
@@ -201,11 +166,6 @@ cpuFeatures_t Sys_GetProcessorFeatures( void )
 	return features;
 }
 
-/*
-=================
-Sys_Init
-=================
-*/
 void Sys_Init(void)
 {
 #ifndef DEDICATED
@@ -283,22 +243,12 @@ void Sys_AnsiColorPrint( const char *msg )
 	}
 }
 
-/*
-=================
-Sys_Print
-=================
-*/
 void Sys_Print( const char *msg )
 {
 	CON_LogWrite( msg );
 	CON_Print( msg );
 }
 
-/*
-=================
-Sys_Error
-=================
-*/
 void Sys_Error( const char *error, ... )
 {
 	va_list argptr;
@@ -313,11 +263,6 @@ void Sys_Error( const char *error, ... )
 	Sys_Exit( 3 );
 }
 
-/*
-=================
-Sys_UnloadDll
-=================
-*/
 void Sys_UnloadDll( void *dllHandle )
 {
 	if( !dllHandle )
@@ -453,11 +398,6 @@ void *Sys_LoadGameDll(const char *name, vmMainProc *entryPoint, vmDllSystemCall 
 	return libHandle;
 }
 
-/*
-=================
-Sys_ParseArgs
-=================
-*/
 void Sys_ParseArgs( int argc, char **argv )
 {
 	if( argc == 2 )
@@ -484,11 +424,6 @@ void Sys_ParseArgs( int argc, char **argv )
 #	endif
 #endif
 
-/*
-=================
-Sys_SigHandler
-=================
-*/
 void Sys_SigHandler( int signal )
 {
 	static qboolean signalcaught = qfalse;
@@ -515,11 +450,6 @@ void Sys_SigHandler( int signal )
 		Sys_Exit( 2 );
 }
 
-/*
-=================
-main
-=================
-*/
 int main( int argc, char **argv )
 {
 	int   i;

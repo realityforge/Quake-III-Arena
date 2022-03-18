@@ -474,11 +474,6 @@ void G_SpawnGEntityFromSpawnVars( void ) {
 
 
 
-/*
-====================
-G_AddSpawnVarToken
-====================
-*/
 char *G_AddSpawnVarToken( const char *string ) {
 	int		l;
 	char	*dest;

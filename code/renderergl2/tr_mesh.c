@@ -70,11 +70,6 @@ static float ProjectRadius( float r, vec3_t location )
 	return pr;
 }
 
-/*
-=============
-R_CullModel
-=============
-*/
 static int R_CullModel( mdvModel_t *model, trRefEntity_t *ent ) {
 	vec3_t		bounds[2];
 	mdvFrame_t	*oldFrame, *newFrame;
@@ -157,12 +152,6 @@ static int R_CullModel( mdvModel_t *model, trRefEntity_t *ent ) {
 }
 
 
-/*
-=================
-R_ComputeLOD
-
-=================
-*/
 int R_ComputeLOD( trRefEntity_t *ent ) {
 	float radius;
 	float flod, lodscale;
@@ -237,12 +226,6 @@ int R_ComputeLOD( trRefEntity_t *ent ) {
 	return lod;
 }
 
-/*
-=================
-R_ComputeFogNum
-
-=================
-*/
 int R_ComputeFogNum( mdvModel_t *model, trRefEntity_t *ent ) {
 	int				i, j;
 	fog_t			*fog;

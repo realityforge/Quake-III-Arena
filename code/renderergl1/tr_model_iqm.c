@@ -960,11 +960,6 @@ qboolean R_LoadIQM( model_t *mod, void *buffer, int filesize, const char *mod_na
 	return qtrue;
 }
 
-/*
-=============
-R_CullIQM
-=============
-*/
 static int R_CullIQM( iqmData_t *data, trRefEntity_t *ent ) {
 	vec3_t		bounds[2];
 	vec_t		*oldBounds, *newBounds;
@@ -1000,12 +995,6 @@ static int R_CullIQM( iqmData_t *data, trRefEntity_t *ent ) {
 	}
 }
 
-/*
-=================
-R_ComputeIQMFogNum
-
-=================
-*/
 int R_ComputeIQMFogNum( iqmData_t *data, trRefEntity_t *ent ) {
 	int			i, j;
 	fog_t			*fog;

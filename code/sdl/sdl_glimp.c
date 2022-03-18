@@ -78,11 +78,6 @@ QGL_ARB_vertex_array_object_PROCS
 QGL_EXT_direct_state_access_PROCS
 #undef GLE
 
-/*
-===============
-GLimp_Shutdown
-===============
-*/
 void GLimp_Shutdown( void )
 {
 	ri.IN_Shutdown();
@@ -102,11 +97,6 @@ void GLimp_Minimize( void )
 	SDL_MinimizeWindow( SDL_window );
 }
 
-/*
-===============
-GLimp_CompareModes
-===============
-*/
 static int GLimp_CompareModes( const void *a, const void *b )
 {
 	const float ASPECT_EPSILON = 0.001f;
@@ -129,11 +119,6 @@ static int GLimp_CompareModes( const void *a, const void *b )
 }
 
 
-/*
-===============
-GLimp_DetectAvailableModes
-===============
-*/
 static void GLimp_DetectAvailableModes(void)
 {
 	int i, j;
@@ -350,11 +335,6 @@ static void GLimp_ClearProcAddresses( void ) {
 #undef GLE
 }
 
-/*
-===============
-GLimp_SetMode
-===============
-*/
 static int GLimp_SetMode(int mode, qboolean fullscreen, qboolean noborder, qboolean fixedFunction)
 {
 	const char *glstring;
@@ -721,11 +701,6 @@ static int GLimp_SetMode(int mode, qboolean fullscreen, qboolean noborder, qbool
 	return RSERR_OK;
 }
 
-/*
-===============
-GLimp_StartDriverAndSetMode
-===============
-*/
 static qboolean GLimp_StartDriverAndSetMode(int mode, qboolean fullscreen, qboolean noborder, qboolean gl3Core)
 {
 	rserr_t err;
@@ -771,11 +746,6 @@ static qboolean GLimp_StartDriverAndSetMode(int mode, qboolean fullscreen, qbool
 }
 
 
-/*
-===============
-GLimp_InitExtensions
-===============
-*/
 static void GLimp_InitExtensions( qboolean fixedFunction )
 {
 	if ( !r_allowExtensions->integer )

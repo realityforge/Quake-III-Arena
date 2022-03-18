@@ -108,11 +108,6 @@ qhandle_t R_RegisterMD3(const char *name, model_t *mod)
 	return 0;
 }
 
-/*
-====================
-R_RegisterMDR
-====================
-*/
 qhandle_t R_RegisterMDR(const char *name, model_t *mod)
 {
 	union {
@@ -146,11 +141,6 @@ qhandle_t R_RegisterMDR(const char *name, model_t *mod)
 	return mod->index;
 }
 
-/*
-====================
-R_RegisterIQM
-====================
-*/
 qhandle_t R_RegisterIQM(const char *name, model_t *mod)
 {
 	union {
@@ -364,11 +354,6 @@ qhandle_t RE_RegisterModel( const char *name ) {
 	return hModel;
 }
 
-/*
-=================
-R_LoadMD3
-=================
-*/
 static qboolean R_LoadMD3 (model_t *mod, int lod, void *buffer, const char *mod_name ) {
 	int					i, j;
 	md3Header_t			*pinmodel;
@@ -526,12 +511,7 @@ static qboolean R_LoadMD3 (model_t *mod, int lod, void *buffer, const char *mod_
 
 
 
-/*
-=================
-R_LoadMDR
-=================
-*/
-static qboolean R_LoadMDR( model_t *mod, void *buffer, int filesize, const char *mod_name ) 
+static qboolean R_LoadMDR( model_t *mod, void *buffer, int filesize, const char *mod_name )
 {
 	int					i, j, k, l;
 	mdrHeader_t			*pinmodel, *mdr;
@@ -890,11 +870,6 @@ void RE_BeginRegistration( glconfig_t *glconfigOut ) {
 
 //=============================================================================
 
-/*
-===============
-R_ModelInit
-===============
-*/
 void R_ModelInit( void ) {
 	model_t		*mod;
 
@@ -906,11 +881,6 @@ void R_ModelInit( void ) {
 }
 
 
-/*
-================
-R_Modellist_f
-================
-*/
 void R_Modellist_f( void ) {
 	int		i, j;
 	model_t	*mod;
@@ -942,11 +912,6 @@ void R_Modellist_f( void ) {
 //=============================================================================
 
 
-/*
-================
-R_GetTag
-================
-*/
 static md3Tag_t *R_GetTag( md3Header_t *mod, int frame, const char *tagName ) {
 	md3Tag_t		*tag;
 	int				i;
@@ -1008,12 +973,7 @@ md3Tag_t *R_GetAnimTag( mdrHeader_t *mod, int framenum, const char *tagName, md3
 	return NULL;
 }
 
-/*
-================
-R_LerpTag
-================
-*/
-int R_LerpTag( orientation_t *tag, qhandle_t handle, int startFrame, int endFrame, 
+int R_LerpTag( orientation_t *tag, qhandle_t handle, int startFrame, int endFrame,
 					 float frac, const char *tagName ) {
 	md3Tag_t	*start, *end;
 	md3Tag_t	start_space, end_space;
@@ -1065,11 +1025,6 @@ int R_LerpTag( orientation_t *tag, qhandle_t handle, int startFrame, int endFram
 }
 
 
-/*
-====================
-R_ModelBounds
-====================
-*/
 void R_ModelBounds( qhandle_t handle, vec3_t mins, vec3_t maxs ) {
 	model_t		*model;
 

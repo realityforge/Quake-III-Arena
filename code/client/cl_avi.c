@@ -74,22 +74,12 @@ static aviFileData_t afd;
 static byte buffer[ MAX_AVI_BUFFER ];
 static int  bufIndex;
 
-/*
-===============
-SafeFS_Write
-===============
-*/
 static ID_INLINE void SafeFS_Write( const void *buffer, int len, fileHandle_t f )
 {
   if( FS_Write( buffer, len, f ) < len )
     Com_Error( ERR_DROP, "Failed to write avi file" );
 }
 
-/*
-===============
-WRITE_STRING
-===============
-*/
 static ID_INLINE void WRITE_STRING( const char *s )
 {
   memcpy( &buffer[ bufIndex ], s, strlen( s ) );
@@ -122,11 +112,6 @@ static ID_INLINE void WRITE_2BYTES( int x )
   bufIndex += 2;
 }
 
-/*
-===============
-START_CHUNK
-===============
-*/
 static ID_INLINE void START_CHUNK( const char *s )
 {
   if( afd.chunkStackTop == MAX_RIFF_CHUNKS )
@@ -140,11 +125,6 @@ static ID_INLINE void START_CHUNK( const char *s )
   WRITE_4BYTES( 0 );
 }
 
-/*
-===============
-END_CHUNK
-===============
-*/
 static ID_INLINE void END_CHUNK( void )
 {
   int endIndex = bufIndex;
@@ -162,11 +142,6 @@ static ID_INLINE void END_CHUNK( void )
   bufIndex = PAD( bufIndex, 2 );
 }
 
-/*
-===============
-CL_WriteAVIHeader
-===============
-*/
 void CL_WriteAVIHeader( void )
 {
   bufIndex = 0;
@@ -424,11 +399,6 @@ qboolean CL_OpenAVIForWriting( const char *fileName )
   return qtrue;
 }
 
-/*
-===============
-CL_CheckFileSize
-===============
-*/
 static qboolean CL_CheckFileSize( int bytesToAdd )
 {
   unsigned int newFileSize;
@@ -455,11 +425,6 @@ static qboolean CL_CheckFileSize( int bytesToAdd )
   return qfalse;
 }
 
-/*
-===============
-CL_WriteAVIVideoFrame
-===============
-*/
 void CL_WriteAVIVideoFrame( const byte *imageBuffer, int size )
 {
   int   chunkOffset = afd.fileSize - afd.moviOffset - 8;
@@ -502,11 +467,6 @@ void CL_WriteAVIVideoFrame( const byte *imageBuffer, int size )
 
 #define PCM_BUFFER_SIZE 44100
 
-/*
-===============
-CL_WriteAVIAudioFrame
-===============
-*/
 void CL_WriteAVIAudioFrame( const byte *pcmBuffer, int size )
 {
   static byte pcmCaptureBuffer[ PCM_BUFFER_SIZE ] = { 0 };
@@ -568,11 +528,6 @@ void CL_WriteAVIAudioFrame( const byte *pcmBuffer, int size )
   }
 }
 
-/*
-===============
-CL_TakeVideoFrame
-===============
-*/
 void CL_TakeVideoFrame( void )
 {
   // AVI file isn't open
@@ -657,11 +612,6 @@ qboolean CL_CloseAVI( void )
   return qtrue;
 }
 
-/*
-===============
-CL_VideoRecording
-===============
-*/
 qboolean CL_VideoRecording( void )
 {
   return afd.fileOpen;

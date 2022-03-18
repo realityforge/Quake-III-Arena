@@ -950,15 +950,6 @@ void Com_Init( char *commandLine );
 void Com_Frame( void );
 void Com_Shutdown( void );
 
-
-/*
-==============================================================
-
-CLIENT / SERVER SYSTEMS
-
-==============================================================
-*/
-
 //
 // client interface
 //

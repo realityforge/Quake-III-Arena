@@ -109,13 +109,7 @@ void SP_trigger_multiple( gentity_t *ent ) {
 
 
 
-/*
-==============================================================================
 
-trigger_always
-
-==============================================================================
-*/
 
 void trigger_always_think( gentity_t *ent ) {
 	G_UseTargets(ent, ent);
@@ -132,13 +126,7 @@ void SP_trigger_always (gentity_t *ent) {
 }
 
 
-/*
-==============================================================================
 
-trigger_push
-
-==============================================================================
-*/
 
 void trigger_push_touch (gentity_t *self, gentity_t *other, trace_t *trace ) {
 
@@ -260,13 +248,7 @@ void SP_target_push( gentity_t *self ) {
 	self->use = Use_target_push;
 }
 
-/*
-==============================================================================
 
-trigger_teleport
-
-==============================================================================
-*/
 
 void trigger_teleporter_touch (gentity_t *self, gentity_t *other, trace_t *trace ) {
 	gentity_t	*dest;
@@ -323,13 +305,7 @@ void SP_trigger_teleport( gentity_t *self ) {
 }
 
 
-/*
-==============================================================================
 
-trigger_hurt
-
-==============================================================================
-*/
 
 /*QUAKED trigger_hurt (.5 .5 .5) ? START_OFF - SILENT NO_PROTECTION SLOW
 Any entity that touches this will be hurt.
@@ -402,13 +378,7 @@ void SP_trigger_hurt( gentity_t *self ) {
 }
 
 
-/*
-==============================================================================
 
-timer
-
-==============================================================================
-*/
 
 
 /*QUAKED func_timer (0.3 0.1 0.6) (-8 -8 -8) (8 8 8) START_ON

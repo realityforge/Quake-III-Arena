@@ -103,11 +103,6 @@ static const char *teamMessages[] = {
 };
 
 
-/*
-===============
-UI_TeamOrdersMenu_BackEvent
-===============
-*/
 static void UI_TeamOrdersMenu_BackEvent( void *ptr, int event ) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -116,11 +111,6 @@ static void UI_TeamOrdersMenu_BackEvent( void *ptr, int event ) {
 }
 
 
-/*
-===============
-UI_TeamOrdersMenu_SetList
-===============
-*/
 static void UI_TeamOrdersMenu_SetList( int id ) {
 	switch( id ) {
 	default:
@@ -147,11 +137,6 @@ static void UI_TeamOrdersMenu_SetList( int id ) {
 }
 
 
-/*
-=================
-UI_TeamOrdersMenu_Key
-=================
-*/
 sfxHandle_t UI_TeamOrdersMenu_Key( int key ) {
 	menulist_s	*l;
 	int	x;
@@ -208,11 +193,6 @@ sfxHandle_t UI_TeamOrdersMenu_Key( int key ) {
 }
 
 
-/*
-=================
-UI_TeamOrdersMenu_ListDraw
-=================
-*/
 static void UI_TeamOrdersMenu_ListDraw( void *self ) {
 	menulist_s	*l;
 	int			x;
@@ -246,11 +226,6 @@ static void UI_TeamOrdersMenu_ListDraw( void *self ) {
 }
 
 
-/*
-===============
-UI_TeamOrdersMenu_ListEvent
-===============
-*/
 static void UI_TeamOrdersMenu_ListEvent( void *ptr, int event ) {
 	int		id;
 	int		selection;
@@ -285,11 +260,6 @@ static void UI_TeamOrdersMenu_ListEvent( void *ptr, int event ) {
 }
 
 
-/*
-===============
-UI_TeamOrdersMenu_BuildBotList
-===============
-*/
 static void UI_TeamOrdersMenu_BuildBotList( void ) {
 	uiClientState_t	cs;
 	int		numPlayers;
@@ -339,11 +309,6 @@ static void UI_TeamOrdersMenu_BuildBotList( void ) {
 }
 
 
-/*
-===============
-UI_TeamOrdersMenu_Init
-===============
-*/
 static void UI_TeamOrdersMenu_Init( void ) {
 	UI_TeamOrdersMenu_Cache();
 
@@ -397,11 +362,6 @@ static void UI_TeamOrdersMenu_Init( void ) {
 }
 
 
-/*
-=================
-UI_TeamOrdersMenu_Cache
-=================
-*/
 void UI_TeamOrdersMenu_Cache( void ) {
 	trap_R_RegisterShaderNoMip( ART_FRAME );
 	trap_R_RegisterShaderNoMip( ART_BACK0 );
@@ -409,22 +369,12 @@ void UI_TeamOrdersMenu_Cache( void ) {
 }
 
 
-/*
-===============
-UI_TeamOrdersMenu
-===============
-*/
 void UI_TeamOrdersMenu( void ) {
 	UI_TeamOrdersMenu_Init();
 	UI_PushMenu( &teamOrdersMenuInfo.menu );
 }
 
 
-/*
-===============
-UI_TeamOrdersMenu_f
-===============
-*/
 void UI_TeamOrdersMenu_f( void ) {
 	uiClientState_t	cs;
 	char	info[MAX_INFO_STRING];

@@ -263,11 +263,6 @@ int S_AdpcmMemoryNeeded( const wavinfo_t *info ) {
 }
 
 
-/*
-====================
-S_AdpcmGetSamples
-====================
-*/
 void S_AdpcmGetSamples(sndBuffer *chunk, short *to) {
 	adpcm_state_t	state;
 	byte			*out;
@@ -282,11 +277,6 @@ void S_AdpcmGetSamples(sndBuffer *chunk, short *to) {
 }
 
 
-/*
-====================
-S_AdpcmEncodeSound
-====================
-*/
 void S_AdpcmEncodeSound( sfx_t *sfx, short *samples ) {
 	adpcm_state_t	state;
 	int				inOffset;

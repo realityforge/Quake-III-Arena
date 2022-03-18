@@ -40,11 +40,6 @@ use the shader system.
 //============================================================================
 
 
-/*
-==============
-RB_CheckOverflow
-==============
-*/
 void RB_CheckOverflow( int verts, int indexes ) {
 	if (tess.numVertexes + verts < SHADER_MAX_VERTEXES
 		&& tess.numIndexes + indexes < SHADER_MAX_INDEXES) {
@@ -78,11 +73,6 @@ void RB_CheckVao(vao_t *vao)
 }
 
 
-/*
-==============
-RB_AddQuadStampExt
-==============
-*/
 void RB_AddQuadStampExt( vec3_t origin, vec3_t left, vec3_t up, float color[4], float s1, float t1, float s2, float t2 ) {
 	vec3_t		normal;
 	int16_t     iNormal[4];
@@ -158,11 +148,6 @@ void RB_AddQuadStampExt( vec3_t origin, vec3_t left, vec3_t up, float color[4], 
 	tess.numIndexes += 6;
 }
 
-/*
-==============
-RB_AddQuadStamp
-==============
-*/
 void RB_AddQuadStamp( vec3_t origin, vec3_t left, vec3_t up, float color[4] ) {
 	RB_AddQuadStampExt( origin, left, up, color, 0, 0, 1, 1 );
 }
@@ -232,11 +217,6 @@ void RB_InstantQuad(vec4_t quadVerts[4])
 }
 
 
-/*
-==============
-RB_SurfaceSprite
-==============
-*/
 static void RB_SurfaceSprite( void ) {
 	vec3_t		left, up;
 	float		radius;
@@ -272,11 +252,6 @@ static void RB_SurfaceSprite( void ) {
 }
 
 
-/*
-=============
-RB_SurfacePolychain
-=============
-*/
 static void RB_SurfacePolychain( srfPoly_t *p ) {
 	int		i;
 	int		numv;
@@ -440,11 +415,6 @@ static qboolean RB_SurfaceVaoCached(int numVerts, srfVert_t *verts, int numIndex
 }
 
 
-/*
-=============
-RB_SurfaceTriangles
-=============
-*/
 static void RB_SurfaceTriangles( srfBspSurface_t *srf ) {
 	if (RB_SurfaceVaoCached(srf->numVerts, srf->verts, srf->numIndexes,
 		srf->indexes, srf->dlightBits, srf->pshadowBits))
@@ -458,11 +428,6 @@ static void RB_SurfaceTriangles( srfBspSurface_t *srf ) {
 
 
 
-/*
-==============
-RB_SurfaceBeam
-==============
-*/
 static void RB_SurfaceBeam( void )
 {
 #define NUM_BEAM_SEGS 6
@@ -830,11 +795,6 @@ static void LerpMeshVertexes(mdvSurface_t *surf, float backlerp)
 }
 
 
-/*
-=============
-RB_SurfaceMesh
-=============
-*/
 static void RB_SurfaceMesh(mdvSurface_t *surface) {
 	int				j;
 	float			backlerp;
@@ -875,11 +835,6 @@ static void RB_SurfaceMesh(mdvSurface_t *surface) {
 }
 
 
-/*
-==============
-RB_SurfaceFace
-==============
-*/
 static void RB_SurfaceFace( srfBspSurface_t *srf ) {
 	if (RB_SurfaceVaoCached(srf->numVerts, srf->verts, srf->numIndexes,
 		srf->indexes, srf->dlightBits, srf->pshadowBits))
@@ -1118,15 +1073,6 @@ static void RB_SurfaceGrid( srfBspSurface_t *srf ) {
 		used += rows - 1;
 	}
 }
-
-
-/*
-===========================================================================
-
-NULL MODEL
-
-===========================================================================
-*/
 
 /*
 ===================

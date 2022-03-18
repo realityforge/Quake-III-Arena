@@ -64,11 +64,6 @@ typedef struct voiceCommand_s
 	void (*func)(bot_state_t *bs, int client, int mode);
 } voiceCommand_t;
 
-/*
-==================
-BotVoiceChat_GetFlag
-==================
-*/
 void BotVoiceChat_GetFlag(bot_state_t *bs, int client, int mode) {
 	//
 	if (gametype == GT_CTF) {
@@ -108,11 +103,6 @@ void BotVoiceChat_GetFlag(bot_state_t *bs, int client, int mode) {
 #endif //DEBUG
 }
 
-/*
-==================
-BotVoiceChat_Offense
-==================
-*/
 void BotVoiceChat_Offense(bot_state_t *bs, int client, int mode) {
 	if ( gametype == GT_CTF
 #ifdef MISSIONPACK
@@ -164,11 +154,6 @@ void BotVoiceChat_Offense(bot_state_t *bs, int client, int mode) {
 #endif //DEBUG
 }
 
-/*
-==================
-BotVoiceChat_Defend
-==================
-*/
 void BotVoiceChat_Defend(bot_state_t *bs, int client, int mode) {
 #ifdef MISSIONPACK
 	if ( gametype == GT_OBELISK || gametype == GT_HARVESTER) {
@@ -217,20 +202,10 @@ void BotVoiceChat_Defend(bot_state_t *bs, int client, int mode) {
 #endif //DEBUG
 }
 
-/*
-==================
-BotVoiceChat_DefendFlag
-==================
-*/
 void BotVoiceChat_DefendFlag(bot_state_t *bs, int client, int mode) {
 	BotVoiceChat_Defend(bs, client, mode);
 }
 
-/*
-==================
-BotVoiceChat_Patrol
-==================
-*/
 void BotVoiceChat_Patrol(bot_state_t *bs, int client, int mode) {
 	//
 	bs->decisionmaker = client;
@@ -249,11 +224,6 @@ void BotVoiceChat_Patrol(bot_state_t *bs, int client, int mode) {
 #endif //DEBUG
 }
 
-/*
-==================
-BotVoiceChat_Camp
-==================
-*/
 void BotVoiceChat_Camp(bot_state_t *bs, int client, int mode) {
 	int areanum;
 	aas_entityinfo_t entinfo;
@@ -305,11 +275,6 @@ void BotVoiceChat_Camp(bot_state_t *bs, int client, int mode) {
 #endif //DEBUG
 }
 
-/*
-==================
-BotVoiceChat_FollowMe
-==================
-*/
 void BotVoiceChat_FollowMe(bot_state_t *bs, int client, int mode) {
 	int areanum;
 	aas_entityinfo_t entinfo;
@@ -359,11 +324,6 @@ void BotVoiceChat_FollowMe(bot_state_t *bs, int client, int mode) {
 #endif //DEBUG
 }
 
-/*
-==================
-BotVoiceChat_FollowFlagCarrier
-==================
-*/
 void BotVoiceChat_FollowFlagCarrier(bot_state_t *bs, int client, int mode) {
 	int carrier;
 
@@ -375,11 +335,6 @@ void BotVoiceChat_FollowFlagCarrier(bot_state_t *bs, int client, int mode) {
 #endif //DEBUG
 }
 
-/*
-==================
-BotVoiceChat_ReturnFlag
-==================
-*/
 void BotVoiceChat_ReturnFlag(bot_state_t *bs, int client, int mode) {
 	//if not in CTF mode
 	if (
@@ -407,20 +362,10 @@ void BotVoiceChat_ReturnFlag(bot_state_t *bs, int client, int mode) {
 #endif //DEBUG
 }
 
-/*
-==================
-BotVoiceChat_StartLeader
-==================
-*/
 void BotVoiceChat_StartLeader(bot_state_t *bs, int client, int mode) {
 	ClientName(client, bs->teamleader, sizeof(bs->teamleader));
 }
 
-/*
-==================
-BotVoiceChat_StopLeader
-==================
-*/
 void BotVoiceChat_StopLeader(bot_state_t *bs, int client, int mode) {
 	char netname[MAX_MESSAGE_SIZE];
 
@@ -430,11 +375,6 @@ void BotVoiceChat_StopLeader(bot_state_t *bs, int client, int mode) {
 	}
 }
 
-/*
-==================
-BotVoiceChat_WhoIsLeader
-==================
-*/
 void BotVoiceChat_WhoIsLeader(bot_state_t *bs, int client, int mode) {
 	char netname[MAX_MESSAGE_SIZE];
 
@@ -449,11 +389,6 @@ void BotVoiceChat_WhoIsLeader(bot_state_t *bs, int client, int mode) {
 	}
 }
 
-/*
-==================
-BotVoiceChat_WantOnDefense
-==================
-*/
 void BotVoiceChat_WantOnDefense(bot_state_t *bs, int client, int mode) {
 	char netname[MAX_NETNAME];
 	int preference;
@@ -470,11 +405,6 @@ void BotVoiceChat_WantOnDefense(bot_state_t *bs, int client, int mode) {
 	trap_EA_Action(bs->client, ACTION_AFFIRMATIVE);
 }
 
-/*
-==================
-BotVoiceChat_WantOnOffense
-==================
-*/
 void BotVoiceChat_WantOnOffense(bot_state_t *bs, int client, int mode) {
 	char netname[MAX_NETNAME];
 	int preference;

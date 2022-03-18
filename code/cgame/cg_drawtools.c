@@ -314,11 +314,6 @@ void CG_TileClear( void ) {
 
 
 
-/*
-================
-CG_FadeColor
-================
-*/
 float *CG_FadeColor( int startMsec, int totalMsec ) {
 	static vec4_t		color;
 	int			t;
@@ -345,11 +340,6 @@ float *CG_FadeColor( int startMsec, int totalMsec ) {
 }
 
 
-/*
-================
-CG_TeamColor
-================
-*/
 float *CG_TeamColor( int team ) {
 	static vec4_t	red = {1, 0.2f, 0.2f, 1};
 	static vec4_t	blue = {0.2f, 0.2f, 1, 1};
@@ -370,11 +360,6 @@ float *CG_TeamColor( int team ) {
 
 
 
-/*
-=================
-CG_GetColorForHealth
-=================
-*/
 void CG_GetColorForHealth( int health, int armor, vec4_t hcolor ) {
 	int		count;
 	int		max;
@@ -413,11 +398,6 @@ void CG_GetColorForHealth( int health, int armor, vec4_t hcolor ) {
 	}
 }
 
-/*
-=================
-CG_ColorForHealth
-=================
-*/
 void CG_ColorForHealth( vec4_t hcolor ) {
 
 	CG_GetColorForHealth( cg.snap->ps.stats[STAT_HEALTH], 
@@ -576,11 +556,6 @@ static int propMapB[26][3] = {
 #define PROPB_SPACE_WIDTH	12
 #define PROPB_HEIGHT		36
 
-/*
-=================
-UI_DrawBannerString
-=================
-*/
 static void UI_DrawBannerString2( int x, int y, const char* str, vec4_t color )
 {
 	const char* s;
@@ -735,11 +710,6 @@ static void UI_DrawProportionalString2( int x, int y, const char* str, vec4_t co
 	trap_R_SetColor( NULL );
 }
 
-/*
-=================
-UI_ProportionalSizeScale
-=================
-*/
 float UI_ProportionalSizeScale( int style ) {
 	if(  style & UI_SMALLFONT ) {
 		return 0.75;
@@ -749,11 +719,6 @@ float UI_ProportionalSizeScale( int style ) {
 }
 
 
-/*
-=================
-UI_DrawProportionalString
-=================
-*/
 void UI_DrawProportionalString( int x, int y, const char* str, int style, vec4_t color ) {
 	vec4_t	drawcolor;
 	int		width;

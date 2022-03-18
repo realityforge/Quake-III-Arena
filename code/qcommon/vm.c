@@ -54,11 +54,6 @@ void VM_Debug( int level ) {
 	vm_debugLevel = level;
 }
 
-/*
-==============
-VM_Init
-==============
-*/
 void VM_Init( void ) {
 	Cvar_Get( "vm_cgame", "2", CVAR_ARCHIVE );	// !@# SHIP WITH SET TO 2
 	Cvar_Get( "vm_game", "2", CVAR_ARCHIVE );	// !@# SHIP WITH SET TO 2
@@ -124,11 +119,6 @@ vmSymbol_t *VM_ValueToFunctionSymbol( vm_t *vm, int value ) {
 	return sym;
 }
 
-/*
-===============
-ParseHex
-===============
-*/
 int	ParseHex( const char *text ) {
 	int		value;
 	int		c;
@@ -152,11 +142,6 @@ int	ParseHex( const char *text ) {
 	return value;
 }
 
-/*
-===============
-VM_LoadSymbols
-===============
-*/
 void VM_LoadSymbols( vm_t *vm ) {
 	union {
 		char	*c;
@@ -610,11 +595,6 @@ vm_t *VM_Create( const char *module, intptr_t (*systemCalls)(intptr_t *),
 	return vm;
 }
 
-/*
-==============
-VM_Free
-==============
-*/
 void VM_Free( vm_t *vm ) {
 
 	if(!vm) {
@@ -792,12 +772,6 @@ static int QDECL VM_ProfileSort( const void *a, const void *b ) {
 	return 0;
 }
 
-/*
-==============
-VM_VmProfile_f
-
-==============
-*/
 void VM_VmProfile_f( void ) {
 	vm_t		*vm;
 	vmSymbol_t	**sorted, *sym;
@@ -839,12 +813,6 @@ void VM_VmProfile_f( void ) {
 	Z_Free( sorted );
 }
 
-/*
-==============
-VM_VmInfo_f
-
-==============
-*/
 void VM_VmInfo_f( void ) {
 	vm_t	*vm;
 	int		i;

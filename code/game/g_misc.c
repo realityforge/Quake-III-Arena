@@ -68,13 +68,7 @@ void SP_light( gentity_t *self ) {
 
 
 
-/*
-=================================================================================
 
-TELEPORTERS
-
-=================================================================================
-*/
 
 void TeleportPlayer( gentity_t *player, vec3_t origin, vec3_t angles ) {
 	gentity_t	*tent;
@@ -226,13 +220,7 @@ void SP_misc_portal_camera(gentity_t *ent) {
 	ent->s.clientNum = roll/360.0 * 256;
 }
 
-/*
-======================================================================
 
-  SHOOTERS
-
-======================================================================
-*/
 
 void Use_Shooter( gentity_t *ent, gentity_t *other, gentity_t *activator ) {
 	vec3_t		dir;

@@ -403,11 +403,6 @@ void RB_BeginDrawingView (void) {
 }
 
 
-/*
-==================
-RB_RenderDrawSurfList
-==================
-*/
 void RB_RenderDrawSurfList( drawSurf_t *drawSurfs, int numDrawSurfs ) {
 	shader_t		*shader = NULL, *oldShader;
 	int				fogNum, oldFogNum;
@@ -750,12 +745,6 @@ void RE_UploadCinematic (int w, int h, int cols, int rows, const byte *data, int
 }
 
 
-/*
-=============
-RB_SetColor
-
-=============
-*/
 const void	*RB_SetColor( const void *data ) {
 	const setColorCommand_t	*cmd;
 
@@ -769,11 +758,6 @@ const void	*RB_SetColor( const void *data ) {
 	return (const void *)(cmd + 1);
 }
 
-/*
-=============
-RB_StretchPic
-=============
-*/
 const void *RB_StretchPic ( const void *data ) {
 	const stretchPicCommand_t	*cmd;
 	shader_t *shader;
@@ -853,12 +837,6 @@ const void *RB_StretchPic ( const void *data ) {
 }
 
 
-/*
-=============
-RB_DrawSurfs
-
-=============
-*/
 const void	*RB_DrawSurfs( const void *data ) {
 	const drawSurfsCommand_t	*cmd;
 	qboolean isShadowView;
@@ -1163,12 +1141,6 @@ const void	*RB_DrawSurfs( const void *data ) {
 }
 
 
-/*
-=============
-RB_DrawBuffer
-
-=============
-*/
 const void	*RB_DrawBuffer( const void *data ) {
 	const drawBufferCommand_t	*cmd;
 
@@ -1251,12 +1223,6 @@ void RB_ShowImages( void ) {
 
 }
 
-/*
-=============
-RB_ColorMask
-
-=============
-*/
 const void *RB_ColorMask(const void *data)
 {
 	const colorMaskCommand_t *cmd = data;
@@ -1279,12 +1245,6 @@ const void *RB_ColorMask(const void *data)
 	return (const void *)(cmd + 1);
 }
 
-/*
-=============
-RB_ClearDepth
-
-=============
-*/
 const void *RB_ClearDepth(const void *data)
 {
 	const clearDepthCommand_t *cmd = data;
@@ -1323,12 +1283,6 @@ const void *RB_ClearDepth(const void *data)
 }
 
 
-/*
-=============
-RB_SwapBuffers
-
-=============
-*/
 const void	*RB_SwapBuffers( const void *data ) {
 	const swapBuffersCommand_t	*cmd;
 
@@ -1391,12 +1345,6 @@ const void	*RB_SwapBuffers( const void *data ) {
 	return (const void *)(cmd + 1);
 }
 
-/*
-=============
-RB_CapShadowMap
-
-=============
-*/
 const void *RB_CapShadowMap(const void *data)
 {
 	const capShadowmapCommand_t *cmd = data;
@@ -1427,12 +1375,6 @@ const void *RB_CapShadowMap(const void *data)
 }
 
 
-/*
-=============
-RB_PostProcess
-
-=============
-*/
 const void *RB_PostProcess(const void *data)
 {
 	const postProcessCommand_t *cmd = data;
@@ -1567,12 +1509,6 @@ const void *RB_PostProcess(const void *data)
 // FIXME: put this function declaration elsewhere
 void R_SaveDDS(const char *filename, byte *pic, int width, int height, int depth);
 
-/*
-=============
-RB_ExportCubemaps
-
-=============
-*/
 const void *RB_ExportCubemaps(const void *data)
 {
 	const exportCubemapsCommand_t *cmd = data;
@@ -1633,11 +1569,6 @@ const void *RB_ExportCubemaps(const void *data)
 }
 
 
-/*
-====================
-RB_ExecuteRenderCommands
-====================
-*/
 void RB_ExecuteRenderCommands( const void *data ) {
 	int		t1, t2;
 

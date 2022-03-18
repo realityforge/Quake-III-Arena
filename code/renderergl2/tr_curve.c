@@ -38,11 +38,6 @@ srfBspSurface_t *R_SubdividePatchToGrid( int width, int height,
 */
 
 
-/*
-============
-LerpDrawVert
-============
-*/
 static void LerpDrawVert( srfVert_t *a, srfVert_t *b, srfVert_t *out ) {
 	out->xyz[0] = 0.5f * (a->xyz[0] + b->xyz[0]);
 	out->xyz[1] = 0.5f * (a->xyz[1] + b->xyz[1]);
@@ -60,11 +55,6 @@ static void LerpDrawVert( srfVert_t *a, srfVert_t *b, srfVert_t *out ) {
 	out->color[3] = ((int)a->color[3] + (int)b->color[3]) >> 1;
 }
 
-/*
-============
-Transpose
-============
-*/
 static void Transpose( int width, int height, srfVert_t ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE] ) {
 	int		i, j;
 	srfVert_t	temp;
@@ -291,11 +281,6 @@ static int MakeMeshIndexes(int width, int height, glIndex_t indexes[(MAX_GRID_SI
 }
 
 
-/*
-============
-InvertCtrl
-============
-*/
 static void InvertCtrl( int width, int height, srfVert_t ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE] ) {
 	int		i, j;
 	srfVert_t	temp;
@@ -310,11 +295,6 @@ static void InvertCtrl( int width, int height, srfVert_t ctrl[MAX_GRID_SIZE][MAX
 }
 
 
-/*
-=================
-InvertErrorTable
-=================
-*/
 static void InvertErrorTable( float errorTable[2][MAX_GRID_SIZE], int width, int height ) {
 	int		i;
 	float	copy[2][MAX_GRID_SIZE];
@@ -331,12 +311,7 @@ static void InvertErrorTable( float errorTable[2][MAX_GRID_SIZE], int width, int
 
 }
 
-/*
-==================
-PutPointsOnCurve
-==================
-*/
-static void PutPointsOnCurve( srfVert_t	ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE], 
+static void PutPointsOnCurve( srfVert_t	ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE],
 							 int width, int height ) {
 	int			i, j;
 	srfVert_t	prev, next;
@@ -359,11 +334,6 @@ static void PutPointsOnCurve( srfVert_t	ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE],
 	}
 }
 
-/*
-=================
-R_CreateSurfaceGridMesh
-=================
-*/
 void R_CreateSurfaceGridMesh(srfBspSurface_t *grid, int width, int height,
 								srfVert_t ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE], float errorTable[2][MAX_GRID_SIZE],
 								int numIndexes, glIndex_t indexes[(MAX_GRID_SIZE-1)*(MAX_GRID_SIZE-1)*2*3]) {
@@ -425,11 +395,6 @@ void R_CreateSurfaceGridMesh(srfBspSurface_t *grid, int width, int height,
 	//
 }
 
-/*
-=================
-R_FreeSurfaceGridMesh
-=================
-*/
 static void R_FreeSurfaceGridMeshData( srfBspSurface_t *grid ) {
 	ri.Free(grid->widthLodError);
 	ri.Free(grid->heightLodError);
@@ -437,11 +402,6 @@ static void R_FreeSurfaceGridMeshData( srfBspSurface_t *grid ) {
 	ri.Free(grid->verts);
 }
 
-/*
-=================
-R_SubdividePatchToGrid
-=================
-*/
 void R_SubdividePatchToGrid( srfBspSurface_t *grid, int width, int height,
 								srfVert_t points[MAX_PATCH_SIZE*MAX_PATCH_SIZE] ) {
 	int			i, j, k, l;
@@ -618,11 +578,6 @@ void R_SubdividePatchToGrid( srfBspSurface_t *grid, int width, int height,
 	R_CreateSurfaceGridMesh(grid, width, height, ctrl, errorTable, numIndexes, indexes);
 }
 
-/*
-===============
-R_GridInsertColumn
-===============
-*/
 void R_GridInsertColumn( srfBspSurface_t *grid, int column, int row, vec3_t point, float loderror ) {
 	int i, j;
 	int width, height, oldwidth;
@@ -678,11 +633,6 @@ void R_GridInsertColumn( srfBspSurface_t *grid, int column, int row, vec3_t poin
 	VectorCopy(lodOrigin, grid->lodOrigin);
 }
 
-/*
-===============
-R_GridInsertRow
-===============
-*/
 void R_GridInsertRow( srfBspSurface_t *grid, int row, int column, vec3_t point, float loderror ) {
 	int i, j;
 	int width, height, oldheight;

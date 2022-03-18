@@ -410,12 +410,6 @@ void CG_DrawFlagModel( float x, float y, float w, float h, int team, qboolean fo
 	}
 }
 
-/*
-================
-CG_DrawStatusBarHead
-
-================
-*/
 #ifndef MISSIONPACK
 
 static void CG_DrawStatusBarHead( float x ) {
@@ -470,24 +464,12 @@ static void CG_DrawStatusBarHead( float x ) {
 }
 #endif // MISSIONPACK
 
-/*
-================
-CG_DrawStatusBarFlag
-
-================
-*/
 #ifndef MISSIONPACK
 static void CG_DrawStatusBarFlag( float x, int team ) {
 	CG_DrawFlagModel( x, 480 - ICON_SIZE, ICON_SIZE, ICON_SIZE, team, qfalse );
 }
 #endif // MISSIONPACK
 
-/*
-================
-CG_DrawTeamBackground
-
-================
-*/
 void CG_DrawTeamBackground( int x, int y, int w, int h, float alpha, int team )
 {
 	vec4_t		hcolor;
@@ -509,12 +491,6 @@ void CG_DrawTeamBackground( int x, int y, int w, int h, float alpha, int team )
 	trap_R_SetColor( NULL );
 }
 
-/*
-================
-CG_DrawStatusBar
-
-================
-*/
 #ifndef MISSIONPACK
 static void CG_DrawStatusBar( void ) {
 	int			color;
@@ -652,12 +628,6 @@ static void CG_DrawStatusBar( void ) {
 ===========================================================================================
 */
 
-/*
-================
-CG_DrawAttacker
-
-================
-*/
 static float CG_DrawAttacker( float y ) {
 	int			t;
 	float		size;
@@ -705,11 +675,6 @@ static float CG_DrawAttacker( float y ) {
 	return y + BIGCHAR_HEIGHT + 2;
 }
 
-/*
-==================
-CG_DrawSnapshot
-==================
-*/
 static float CG_DrawSnapshot( float y ) {
 	char		*s;
 	int			w;
@@ -723,11 +688,6 @@ static float CG_DrawSnapshot( float y ) {
 	return y + BIGCHAR_HEIGHT + 4;
 }
 
-/*
-==================
-CG_DrawFPS
-==================
-*/
 #define	FPS_FRAMES	4
 static float CG_DrawFPS( float y ) {
 	char		*s;
@@ -767,11 +727,6 @@ static float CG_DrawFPS( float y ) {
 	return y + BIGCHAR_HEIGHT + 4;
 }
 
-/*
-=================
-CG_DrawTimer
-=================
-*/
 static float CG_DrawTimer( float y ) {
 	char		*s;
 	int			w;
@@ -795,11 +750,6 @@ static float CG_DrawTimer( float y ) {
 }
 
 
-/*
-=================
-CG_DrawTeamOverlay
-=================
-*/
 
 static float CG_DrawTeamOverlay( float y, qboolean right, qboolean upper ) {
 	int x, w, h, xx;
@@ -969,12 +919,6 @@ static float CG_DrawTeamOverlay( float y, qboolean right, qboolean upper ) {
 }
 
 
-/*
-=====================
-CG_DrawUpperRight
-
-=====================
-*/
 static void CG_DrawUpperRight(stereoFrame_t stereoFrame)
 {
 	float	y;
@@ -1162,11 +1106,6 @@ static float CG_DrawScores( float y ) {
 }
 #endif // MISSIONPACK
 
-/*
-================
-CG_DrawPowerups
-================
-*/
 #ifndef MISSIONPACK
 static float CG_DrawPowerups( float y ) {
 	int		sorted[MAX_POWERUPS];
@@ -1268,12 +1207,6 @@ static float CG_DrawPowerups( float y ) {
 }
 #endif // MISSIONPACK
 
-/*
-=====================
-CG_DrawLowerRight
-
-=====================
-*/
 #ifndef MISSIONPACK
 static void CG_DrawLowerRight( void ) {
 	float	y;
@@ -1289,11 +1222,6 @@ static void CG_DrawLowerRight( void ) {
 }
 #endif // MISSIONPACK
 
-/*
-===================
-CG_DrawPickupItem
-===================
-*/
 #ifndef MISSIONPACK
 static int CG_DrawPickupItem( int y ) {
 	int		value;
@@ -1321,12 +1249,6 @@ static int CG_DrawPickupItem( int y ) {
 }
 #endif // MISSIONPACK
 
-/*
-=====================
-CG_DrawLowerLeft
-
-=====================
-*/
 #ifndef MISSIONPACK
 static void CG_DrawLowerLeft( void ) {
 	float	y;
@@ -1345,11 +1267,6 @@ static void CG_DrawLowerLeft( void ) {
 
 //===========================================================================================
 
-/*
-=================
-CG_DrawTeamInfo
-=================
-*/
 #ifndef MISSIONPACK
 static void CG_DrawTeamInfo( void ) {
 	int h;
@@ -1408,11 +1325,6 @@ static void CG_DrawTeamInfo( void ) {
 }
 #endif // MISSIONPACK
 
-/*
-===================
-CG_DrawHoldableItem
-===================
-*/
 #ifndef MISSIONPACK
 static void CG_DrawHoldableItem( void ) { 
 	int		value;
@@ -1426,12 +1338,7 @@ static void CG_DrawHoldableItem( void ) {
 }
 #endif // MISSIONPACK
 
-/*
-===================
-CG_DrawReward
-===================
-*/
-static void CG_DrawReward( void ) { 
+static void CG_DrawReward( void ) {
 	float	*color;
 	int		i, count;
 	float	x, y;
@@ -1499,13 +1406,7 @@ static void CG_DrawReward( void ) {
 }
 
 
-/*
-===============================================================================
 
-LAGOMETER
-
-===============================================================================
-*/
 
 #define	LAG_SAMPLES		128
 
@@ -1606,11 +1507,6 @@ static void CG_DrawDisconnect( void ) {
 #define	MAX_LAGOMETER_PING	900
 #define	MAX_LAGOMETER_RANGE	300
 
-/*
-==============
-CG_DrawLagometer
-==============
-*/
 static void CG_DrawLagometer( void ) {
 	int		a, x, y, i;
 	float	v;
@@ -1718,17 +1614,6 @@ static void CG_DrawLagometer( void ) {
 	CG_DrawDisconnect();
 }
 
-
-
-/*
-===============================================================================
-
-CENTER PRINTING
-
-===============================================================================
-*/
-
-
 /*
 ==============
 CG_CenterPrint
@@ -1757,11 +1642,6 @@ void CG_CenterPrint( const char *str, int y, int charWidth ) {
 }
 
 
-/*
-===================
-CG_DrawCenterString
-===================
-*/
 static void CG_DrawCenterString( void ) {
 	char	*start;
 	int		l;
@@ -1827,20 +1707,9 @@ static void CG_DrawCenterString( void ) {
 
 
 
-/*
-================================================================================
-
-CROSSHAIR
-
-================================================================================
-*/
 
 
-/*
-=================
-CG_DrawCrosshair
-=================
-*/
+
 static void CG_DrawCrosshair(void)
 {
 	float		w, h;
@@ -1975,11 +1844,6 @@ static void CG_DrawCrosshair3D(void)
 
 
 
-/*
-=================
-CG_ScanForCrosshairEntity
-=================
-*/
 static void CG_ScanForCrosshairEntity( void ) {
 	trace_t		trace;
 	vec3_t		start, end;
@@ -2011,11 +1875,6 @@ static void CG_ScanForCrosshairEntity( void ) {
 }
 
 
-/*
-=====================
-CG_DrawCrosshairNames
-=====================
-*/
 static void CG_DrawCrosshairNames( void ) {
 	float		*color;
 	char		*name;
@@ -2056,11 +1915,6 @@ static void CG_DrawCrosshairNames( void ) {
 
 //==============================================================================
 
-/*
-=================
-CG_DrawSpectator
-=================
-*/
 static void CG_DrawSpectator(void) {
 	CG_DrawBigString(320 - 9 * 8, 440, "SPECTATOR", 1.0F);
 	if ( cgs.gametype == GT_TOURNAMENT ) {
@@ -2071,11 +1925,6 @@ static void CG_DrawSpectator(void) {
 	}
 }
 
-/*
-=================
-CG_DrawVote
-=================
-*/
 static void CG_DrawVote(void) {
 	char	*s;
 	int		sec;
@@ -2105,11 +1954,6 @@ static void CG_DrawVote(void) {
 #endif
 }
 
-/*
-=================
-CG_DrawTeamVote
-=================
-*/
 static void CG_DrawTeamVote(void) {
 	char	*s;
 	int		sec, cs_offset;
@@ -2204,11 +2048,6 @@ static qboolean CG_DrawScoreboard( void ) {
 #endif
 }
 
-/*
-=================
-CG_DrawIntermission
-=================
-*/
 static void CG_DrawIntermission( void ) {
 //	int key;
 #ifdef MISSIONPACK
@@ -2226,11 +2065,6 @@ static void CG_DrawIntermission( void ) {
 	cg.scoreBoardShowing = CG_DrawScoreboard();
 }
 
-/*
-=================
-CG_DrawFollow
-=================
-*/
 static qboolean CG_DrawFollow( void ) {
 	float		x;
 	vec4_t		color;
@@ -2258,11 +2092,6 @@ static qboolean CG_DrawFollow( void ) {
 
 
 
-/*
-=================
-CG_DrawAmmoWarning
-=================
-*/
 static void CG_DrawAmmoWarning( void ) {
 	const char	*s;
 	int			w;
@@ -2286,11 +2115,6 @@ static void CG_DrawAmmoWarning( void ) {
 
 
 #ifdef MISSIONPACK
-/*
-=================
-CG_DrawProxWarning
-=================
-*/
 static void CG_DrawProxWarning( void ) {
 	char s [32];
 	int			w;
@@ -2320,11 +2144,6 @@ static void CG_DrawProxWarning( void ) {
 #endif
 
 
-/*
-=================
-CG_DrawWarmup
-=================
-*/
 static void CG_DrawWarmup( void ) {
 	int			w;
 	int			sec;

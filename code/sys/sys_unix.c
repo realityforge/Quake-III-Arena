@@ -44,11 +44,6 @@ qboolean stdinIsATTY;
 // Used to determine where to store user-specific files
 static char homePath[ MAX_OSPATH ] = { 0 };
 
-/*
-==================
-Sys_DefaultHomePath
-==================
-*/
 char *Sys_DefaultHomePath(void)
 {
 	char *p;
@@ -78,11 +73,6 @@ char *Sys_DefaultHomePath(void)
 	return homePath;
 }
 
-/*
-================
-Sys_Milliseconds
-================
-*/
 /* base time in seconds, that's our origin
    timeval:tv_sec is an int:
    assuming this wraps every 0x7fffffff - ~68 years since the Epoch (1970) - we're safe till 2038 */
@@ -110,11 +100,6 @@ int Sys_Milliseconds (void)
 	return curtime;
 }
 
-/*
-==================
-Sys_RandomBytes
-==================
-*/
 qboolean Sys_RandomBytes( byte *string, int len )
 {
 	FILE *fp;
@@ -149,31 +134,16 @@ qboolean Sys_LowPhysicalMemory( void )
 	return qfalse;
 }
 
-/*
-==================
-Sys_Basename
-==================
-*/
 const char *Sys_Basename( char *path )
 {
 	return basename( path );
 }
 
-/*
-==================
-Sys_Dirname
-==================
-*/
 const char *Sys_Dirname( char *path )
 {
 	return dirname( path );
 }
 
-/*
-==============
-Sys_FOpen
-==============
-*/
 FILE *Sys_FOpen( const char *ospath, const char *mode ) {
 	struct stat buf;
 
@@ -184,11 +154,6 @@ FILE *Sys_FOpen( const char *ospath, const char *mode ) {
 	return fopen( ospath, mode );
 }
 
-/*
-==================
-Sys_Mkdir
-==================
-*/
 qboolean Sys_Mkdir( const char *path )
 {
 	int result = mkdir( path, 0750 );
@@ -199,11 +164,6 @@ qboolean Sys_Mkdir( const char *path )
 	return qtrue;
 }
 
-/*
-==================
-Sys_Mkfifo
-==================
-*/
 FILE *Sys_Mkfifo( const char *ospath )
 {
 	FILE	*fifo;
@@ -229,11 +189,6 @@ FILE *Sys_Mkfifo( const char *ospath )
 	return fifo;
 }
 
-/*
-==================
-Sys_Cwd
-==================
-*/
 char *Sys_Cwd( void )
 {
 	static char cwd[MAX_OSPATH];
@@ -257,11 +212,6 @@ DIRECTORY SCANNING
 
 #define MAX_FOUND_FILES 0x1000
 
-/*
-==================
-Sys_ListFilteredFiles
-==================
-*/
 void Sys_ListFilteredFiles( const char *basedir, char *subdirs, char *filter, char **list, int *numfiles )
 {
 	char          search[MAX_OSPATH], newsubdirs[MAX_OSPATH];
@@ -314,11 +264,6 @@ void Sys_ListFilteredFiles( const char *basedir, char *subdirs, char *filter, ch
 	closedir(fdir);
 }
 
-/*
-==================
-Sys_ListFiles
-==================
-*/
 char **Sys_ListFiles( const char *directory, const char *extension, char *filter, int *numfiles, qboolean wantsubs )
 {
 	struct dirent *d;
@@ -414,11 +359,6 @@ char **Sys_ListFiles( const char *directory, const char *extension, char *filter
 	return listCopy;
 }
 
-/*
-==================
-Sys_FreeFileList
-==================
-*/
 void Sys_FreeFileList( char **list )
 {
 	int i;
@@ -540,11 +480,6 @@ static char *execBufferPointer;
 static char *execArgv[ 16 ];
 static int execArgc;
 
-/*
-==============
-Sys_ClearExecBuffer
-==============
-*/
 static void Sys_ClearExecBuffer( void )
 {
 	execBufferPointer = execBuffer;
@@ -552,11 +487,6 @@ static void Sys_ClearExecBuffer( void )
 	execArgc = 0;
 }
 
-/*
-==============
-Sys_AppendToExecBuffer
-==============
-*/
 static void Sys_AppendToExecBuffer( const char *text )
 {
 	size_t size = sizeof( execBuffer ) - ( execBufferPointer - execBuffer );
@@ -571,11 +501,6 @@ static void Sys_AppendToExecBuffer( const char *text )
 	execBufferPointer += length;
 }
 
-/*
-==============
-Sys_Exec
-==============
-*/
 static int Sys_Exec( void )
 {
 	pid_t pid = fork( );
@@ -604,11 +529,6 @@ static int Sys_Exec( void )
 	}
 }
 
-/*
-==============
-Sys_ZenityCommand
-==============
-*/
 static void Sys_ZenityCommand( dialogType_t type, const char *message, const char *title )
 {
 	Sys_ClearExecBuffer( );
@@ -637,11 +557,6 @@ static void Sys_ZenityCommand( dialogType_t type, const char *message, const cha
 	Sys_AppendToExecBuffer( va( "--title=%s", title ) );
 }
 
-/*
-==============
-Sys_KdialogCommand
-==============
-*/
 static void Sys_KdialogCommand( dialogType_t type, const char *message, const char *title )
 {
 	Sys_ClearExecBuffer( );
@@ -661,11 +576,6 @@ static void Sys_KdialogCommand( dialogType_t type, const char *message, const ch
 	Sys_AppendToExecBuffer( va( "--title=%s", title ) );
 }
 
-/*
-==============
-Sys_XmessageCommand
-==============
-*/
 static void Sys_XmessageCommand( dialogType_t type, const char *message, const char *title )
 {
 	Sys_ClearExecBuffer( );

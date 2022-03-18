@@ -21,11 +21,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "tr_local.h"
 
-/*
-=====================
-R_PerformanceCounters
-=====================
-*/
 void R_PerformanceCounters( void ) {
 	if ( !r_speeds->integer ) {
 		// clear the counters even if we aren't printing
@@ -77,11 +72,6 @@ void R_PerformanceCounters( void ) {
 }
 
 
-/*
-====================
-R_IssueRenderCommands
-====================
-*/
 void R_IssueRenderCommands( qboolean runPerformanceCounters ) {
 	renderCommandList_t	*cmdList;
 
@@ -158,12 +148,6 @@ void *R_GetCommandBuffer( int bytes ) {
 }
 
 
-/*
-=============
-R_AddDrawSurfCmd
-
-=============
-*/
 void	R_AddDrawSurfCmd( drawSurf_t *drawSurfs, int numDrawSurfs ) {
 	drawSurfsCommand_t	*cmd;
 
@@ -181,12 +165,6 @@ void	R_AddDrawSurfCmd( drawSurf_t *drawSurfs, int numDrawSurfs ) {
 }
 
 
-/*
-=============
-R_AddCapShadowmapCmd
-
-=============
-*/
 void	R_AddCapShadowmapCmd( int map, int cubeSide ) {
 	capShadowmapCommand_t	*cmd;
 
@@ -201,12 +179,6 @@ void	R_AddCapShadowmapCmd( int map, int cubeSide ) {
 }
 
 
-/*
-=============
-R_AddPostProcessCmd
-
-=============
-*/
 void	R_AddPostProcessCmd( void ) {
 	postProcessCommand_t	*cmd;
 
@@ -251,12 +223,7 @@ void	RE_SetColor( const float *rgba ) {
 }
 
 
-/*
-=============
-RE_StretchPic
-=============
-*/
-void RE_StretchPic ( float x, float y, float w, float h, 
+void RE_StretchPic ( float x, float y, float w, float h,
 					  float s1, float t1, float s2, float t2, qhandle_t hShader ) {
 	stretchPicCommand_t	*cmd;
 
@@ -556,11 +523,6 @@ void RE_EndFrame( int *frontEndMsec, int *backEndMsec ) {
 	backEnd.pc.msec = 0;
 }
 
-/*
-=============
-RE_TakeVideoFrame
-=============
-*/
 void RE_TakeVideoFrame( int width, int height,
 		byte *captureBuffer, byte *encodeBuffer, qboolean motionJpeg )
 {

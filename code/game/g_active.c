@@ -167,11 +167,6 @@ void P_WorldEffects( gentity_t *ent ) {
 
 
 
-/*
-===============
-G_SetClientSound
-===============
-*/
 void G_SetClientSound( gentity_t *ent ) {
 #ifdef MISSIONPACK
 	if( ent->s.eFlags & EF_TICKING ) {
@@ -190,11 +185,6 @@ void G_SetClientSound( gentity_t *ent ) {
 
 //==============================================================
 
-/*
-==============
-ClientImpacts
-==============
-*/
 void ClientImpacts( gentity_t *ent, pmove_t *pm ) {
 	int		i, j;
 	trace_t	trace;
@@ -309,11 +299,6 @@ void	G_TouchTriggers( gentity_t *ent ) {
 	}
 }
 
-/*
-=================
-SpectatorThink
-=================
-*/
 void SpectatorThink( gentity_t *ent, usercmd_t *ucmd ) {
 	pmove_t	pm;
 	gclient_t	*client;
@@ -505,11 +490,6 @@ void ClientTimerActions( gentity_t *ent, int msec ) {
 #endif
 }
 
-/*
-====================
-ClientIntermissionThink
-====================
-*/
 void ClientIntermissionThink( gclient_t *client ) {
 	client->ps.eFlags &= ~EF_TALK;
 	client->ps.eFlags &= ~EF_FIRING;
@@ -661,11 +641,6 @@ void ClientEvents( gentity_t *ent, int oldEventSequence ) {
 }
 
 #ifdef MISSIONPACK
-/*
-==============
-StuckInOtherClient
-==============
-*/
 static int StuckInOtherClient(gentity_t *ent) {
 	int i;
 	gentity_t	*ent2;
@@ -705,11 +680,6 @@ static int StuckInOtherClient(gentity_t *ent) {
 
 void BotTestSolid(vec3_t origin);
 
-/*
-==============
-SendPendingPredictableEvents
-==============
-*/
 void SendPendingPredictableEvents( playerState_t *ps ) {
 	gentity_t *t;
 	int event, seq;
@@ -1049,12 +1019,6 @@ void G_RunClient( gentity_t *ent ) {
 }
 
 
-/*
-==================
-SpectatorClientEndFrame
-
-==================
-*/
 void SpectatorClientEndFrame( gentity_t *ent ) {
 	gclient_t	*cl;
 

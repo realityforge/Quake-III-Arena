@@ -62,11 +62,6 @@ cvar_t		*con_notifytime;
 #define	DEFAULT_CONSOLE_WIDTH	78
 
 
-/*
-================
-Con_ToggleConsole_f
-================
-*/
 void Con_ToggleConsole_f (void) {
 	// Can't toggle the console when it's the only thing available
 	if ( clc.state == CA_DISCONNECTED && Key_GetCatcher( ) == KEYCATCH_CONSOLE ) {
@@ -83,21 +78,11 @@ void Con_ToggleConsole_f (void) {
 	Key_SetCatcher( Key_GetCatcher( ) ^ KEYCATCH_CONSOLE );
 }
 
-/*
-===================
-Con_ToggleMenu_f
-===================
-*/
 void Con_ToggleMenu_f( void ) {
 	CL_KeyEvent( K_ESCAPE, qtrue, Sys_Milliseconds() );
 	CL_KeyEvent( K_ESCAPE, qfalse, Sys_Milliseconds() );
 }
 
-/*
-================
-Con_MessageMode_f
-================
-*/
 void Con_MessageMode_f (void) {
 	chat_playerNum = -1;
 	chat_team = qfalse;
@@ -154,11 +139,6 @@ void Con_MessageMode4_f (void) {
 	Key_SetCatcher( Key_GetCatcher( ) ^ KEYCATCH_MESSAGE );
 }
 
-/*
-================
-Con_Clear_f
-================
-*/
 void Con_Clear_f (void) {
 	int		i;
 
@@ -256,11 +236,6 @@ void Con_Dump_f (void)
 }
 
 						
-/*
-================
-Con_ClearNotify
-================
-*/
 void Con_ClearNotify( void ) {
 	int		i;
 	
@@ -336,11 +311,6 @@ void Con_CheckResize (void)
 	con.display = con.current;
 }
 
-/*
-==================
-Cmd_CompleteTxtName
-==================
-*/
 void Cmd_CompleteTxtName( char *args, int argNum ) {
 	if( argNum == 2 ) {
 		Field_CompleteFilename( "", "txt", qfalse, qtrue );
@@ -348,11 +318,6 @@ void Cmd_CompleteTxtName( char *args, int argNum ) {
 }
 
 
-/*
-================
-Con_Init
-================
-*/
 void Con_Init (void) {
 	int		i;
 
@@ -379,11 +344,6 @@ void Con_Init (void) {
 	Cmd_SetCommandCompletionFunc( "condump", Cmd_CompleteTxtName );
 }
 
-/*
-================
-Con_Shutdown
-================
-*/
 void Con_Shutdown(void)
 {
 	Cmd_RemoveCommand("toggleconsole");
@@ -396,11 +356,6 @@ void Con_Shutdown(void)
 	Cmd_RemoveCommand("condump");
 }
 
-/*
-===============
-Con_Linefeed
-===============
-*/
 void Con_Linefeed (qboolean skipnotify)
 {
 	int		i;
@@ -520,13 +475,7 @@ void CL_ConsolePrint( char *txt ) {
 }
 
 
-/*
-==============================================================================
 
-DRAWING
-
-==============================================================================
-*/
 
 
 /*
@@ -744,11 +693,6 @@ void Con_DrawSolidConsole( float frac ) {
 
 
 
-/*
-==================
-Con_DrawConsole
-==================
-*/
 void Con_DrawConsole( void ) {
 	// check for console width changes from a vid mode change
 	Con_CheckResize ();

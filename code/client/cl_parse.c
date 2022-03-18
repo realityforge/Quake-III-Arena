@@ -44,15 +44,6 @@ void SHOWNET( msg_t *msg, char *s) {
 	}
 }
 
-
-/*
-=========================================================================
-
-MESSAGE PARSING
-
-=========================================================================
-*/
-
 /*
 ==================
 CL_DeltaEntity
@@ -82,12 +73,6 @@ void CL_DeltaEntity (msg_t *msg, clSnapshot_t *frame, int newnum, entityState_t 
 	frame->numEntities++;
 }
 
-/*
-==================
-CL_ParsePacketEntities
-
-==================
-*/
 void CL_ParsePacketEntities( msg_t *msg, clSnapshot_t *oldframe, clSnapshot_t *newframe) {
 	int			newnum;
 	entityState_t	*oldstate;
@@ -435,11 +420,6 @@ void CL_SystemInfoChanged( void ) {
 	cl_connectedToPureServer = Cvar_VariableValue( "sv_pure" );
 }
 
-/*
-==================
-CL_ParseServerInfo
-==================
-*/
 static void CL_ParseServerInfo(void)
 {
 	const char *serverInfo;
@@ -454,11 +434,6 @@ static void CL_ParseServerInfo(void)
 		sizeof(clc.sv_dlURL));
 }
 
-/*
-==================
-CL_ParseGamestate
-==================
-*/
 void CL_ParseGamestate( msg_t *msg ) {
 	int				i;
 	entityState_t	*es;
@@ -841,11 +816,6 @@ void CL_ParseCommandString( msg_t *msg ) {
 }
 
 
-/*
-=====================
-CL_ParseServerMessage
-=====================
-*/
 void CL_ParseServerMessage( msg_t *msg ) {
 	int			cmd;
 

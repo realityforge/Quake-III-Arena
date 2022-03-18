@@ -79,11 +79,6 @@ typedef struct {
 static demos_t	s_demos;
 
 
-/*
-===============
-Demos_MenuEvent
-===============
-*/
 static void Demos_MenuEvent( void *ptr, int event ) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -111,11 +106,6 @@ static void Demos_MenuEvent( void *ptr, int event ) {
 }
 
 
-/*
-===============
-Demos_MenuInit
-===============
-*/
 static void Demos_MenuInit( void ) {
 	int		i, j;
 	int		len;
@@ -276,11 +266,6 @@ static void Demos_MenuInit( void ) {
 	Menu_AddItem( &s_demos.menu, &s_demos.go );
 }
 
-/*
-=================
-Demos_Cache
-=================
-*/
 void Demos_Cache( void ) {
 	trap_R_RegisterShaderNoMip( ART_BACK0 );
 	trap_R_RegisterShaderNoMip( ART_BACK1 );
@@ -293,11 +278,6 @@ void Demos_Cache( void ) {
 	trap_R_RegisterShaderNoMip( ART_ARROWRIGHT );
 }
 
-/*
-===============
-UI_DemosMenu
-===============
-*/
 void UI_DemosMenu( void ) {
 	Demos_MenuInit();
 	UI_PushMenu( &s_demos.menu );

@@ -344,11 +344,6 @@ void RotatePointAroundVector( vec3_t dst, const vec3_t dir, const vec3_t point,
 	}
 }
 
-/*
-===============
-RotateAroundDirection
-===============
-*/
 void RotateAroundDirection( vec3_t axis[3], float yaw ) {
 
 	// create an arbitrary axis[1] 
@@ -408,11 +403,6 @@ void vectoangles( const vec3_t value1, vec3_t angles ) {
 }
 
 
-/*
-=================
-AnglesToAxis
-=================
-*/
 void AnglesToAxis( const vec3_t angles, vec3_t axis[3] ) {
 	vec3_t	right;
 
@@ -523,12 +513,6 @@ float Q_fabs( float f ) {
 
 //============================================================
 
-/*
-===============
-LerpAngle
-
-===============
-*/
 float LerpAngle (float from, float to, float frac) {
 	float	a;
 
@@ -621,11 +605,6 @@ float AngleDelta ( float angle1, float angle2 ) {
 //============================================================
 
 
-/*
-=================
-SetPlaneSignbits
-=================
-*/
 void SetPlaneSignbits (cplane_t *out) {
 	int	bits, j;
 
@@ -684,11 +663,6 @@ int BoxOnPlaneSide(vec3_t emins, vec3_t emaxs, struct cplane_s *p)
 }
 
 
-/*
-=================
-RadiusFromBounds
-=================
-*/
 float RadiusFromBounds( const vec3_t mins, const vec3_t maxs ) {
 	int		i;
 	vec3_t	corner;
@@ -876,11 +850,6 @@ int Q_log2( int val ) {
 
 
 /*
-=================
-PlaneTypeForNormal
-=================
-*/
-/*
 int	PlaneTypeForNormal (vec3_t normal) {
 	if ( normal[0] == 1.0 )
 		return PLANE_X;
@@ -894,11 +863,6 @@ int	PlaneTypeForNormal (vec3_t normal) {
 */
 
 
-/*
-================
-MatrixMultiply
-================
-*/
 void MatrixMultiply(float in1[3][3], float in2[3][3], float out[3][3]) {
 	out[0][0] = in1[0][0] * in2[0][0] + in1[0][1] * in2[1][0] +
 				in1[0][2] * in2[2][0];

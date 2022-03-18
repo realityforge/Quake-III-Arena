@@ -25,13 +25,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
 
-/*
-===============================================================================
 
-PUSHMOVE
-
-===============================================================================
-*/
 
 typedef struct {
 	gentity_t	*ent;
@@ -42,12 +36,6 @@ typedef struct {
 pushed_t	pushed[MAX_GENTITIES], *pushed_p;
 
 
-/*
-============
-G_TestEntityPosition
-
-============
-*/
 gentity_t	*G_TestEntityPosition( gentity_t *ent ) {
 	trace_t	tr;
 	int		mask;
@@ -69,21 +57,11 @@ gentity_t	*G_TestEntityPosition( gentity_t *ent ) {
 	return NULL;
 }
 
-/*
-================
-G_CreateRotationMatrix
-================
-*/
 void G_CreateRotationMatrix(vec3_t angles, vec3_t matrix[3]) {
 	AngleVectors(angles, matrix[0], matrix[1], matrix[2]);
 	VectorInverse(matrix[1]);
 }
 
-/*
-================
-G_TransposeMatrix
-================
-*/
 void G_TransposeMatrix(vec3_t matrix[3], vec3_t transpose[3]) {
 	int i, j;
 	for (i = 0; i < 3; i++) {
@@ -93,11 +71,6 @@ void G_TransposeMatrix(vec3_t matrix[3], vec3_t transpose[3]) {
 	}
 }
 
-/*
-================
-G_RotatePoint
-================
-*/
 void G_RotatePoint(vec3_t point, vec3_t matrix[3]) {
 	vec3_t tvec;
 
@@ -198,11 +171,6 @@ qboolean	G_TryPushingEntity( gentity_t *check, gentity_t *pusher, vec3_t move, v
 	return qfalse;
 }
 
-/*
-==================
-G_CheckProxMinePosition
-==================
-*/
 qboolean G_CheckProxMinePosition( gentity_t *check ) {
 	vec3_t		start, end;
 	trace_t	tr;
@@ -217,11 +185,6 @@ qboolean G_CheckProxMinePosition( gentity_t *check ) {
 	return qtrue;
 }
 
-/*
-==================
-G_TryPushingProxMine
-==================
-*/
 qboolean G_TryPushingProxMine( gentity_t *check, gentity_t *pusher, vec3_t move, vec3_t amove ) {
 	vec3_t		forward, right, up;
 	vec3_t		org, org2, move2;
@@ -412,11 +375,6 @@ qboolean G_MoverPush( gentity_t *pusher, vec3_t move, vec3_t amove, gentity_t **
 }
 
 
-/*
-=================
-G_MoverTeam
-=================
-*/
 void G_MoverTeam( gentity_t *ent ) {
 	vec3_t		move, amove;
 	gentity_t	*part, *obstacle;
@@ -469,12 +427,6 @@ void G_MoverTeam( gentity_t *ent ) {
 	}
 }
 
-/*
-================
-G_RunMover
-
-================
-*/
 void G_RunMover( gentity_t *ent ) {
 	// if not a team captain, don't do anything, because
 	// the captain will handle everything
@@ -501,11 +453,6 @@ Pos1 is "at rest", pos2 is "activated"
 ============================================================================
 */
 
-/*
-===============
-SetMoverState
-===============
-*/
 void SetMoverState( gentity_t *ent, moverState_t moverState, int time ) {
 	vec3_t			delta;
 	float			f;
@@ -557,13 +504,6 @@ void MatchTeam( gentity_t *teamLeader, int moverState, int time ) {
 	}
 }
 
-
-
-/*
-================
-ReturnToPos1
-================
-*/
 void ReturnToPos1( gentity_t *ent ) {
 	MatchTeam( ent, MOVER_2TO1, level.time );
 
@@ -577,11 +517,6 @@ void ReturnToPos1( gentity_t *ent ) {
 }
 
 
-/*
-================
-Reached_BinaryMover
-================
-*/
 void Reached_BinaryMover( gentity_t *ent ) {
 
 	// stop the looping sound
@@ -624,11 +559,6 @@ void Reached_BinaryMover( gentity_t *ent ) {
 }
 
 
-/*
-================
-Use_BinaryMover
-================
-*/
 void Use_BinaryMover( gentity_t *ent, gentity_t *other, gentity_t *activator ) {
 	int		total;
 	int		partial;
@@ -792,11 +722,6 @@ targeted by another entity.
 ===============================================================================
 */
 
-/*
-================
-Blocked_Door
-================
-*/
 void Blocked_Door( gentity_t *ent, gentity_t *other ) {
 	// remove anything other than a client
 	if ( !other->client ) {
@@ -821,11 +746,6 @@ void Blocked_Door( gentity_t *ent, gentity_t *other ) {
 	Use_BinaryMover( ent, ent, other );
 }
 
-/*
-================
-Touch_DoorTriggerSpectator
-================
-*/
 static void Touch_DoorTriggerSpectator( gentity_t *ent, gentity_t *other, trace_t *trace ) {
 	int axis;
 	float doorMin, doorMax;
@@ -849,11 +769,6 @@ static void Touch_DoorTriggerSpectator( gentity_t *ent, gentity_t *other, trace_
 	TeleportPlayer(other, origin, tv(10000000.0, 0, 0));
 }
 
-/*
-================
-Touch_DoorTrigger
-================
-*/
 void Touch_DoorTrigger( gentity_t *ent, gentity_t *other, trace_t *trace ) {
 	if ( other->client && other->client->sess.sessionTeam == TEAM_SPECTATOR ) {
 		// if the door is not open and not opening
@@ -1015,13 +930,7 @@ void SP_func_door (gentity_t *ent) {
 
 }
 
-/*
-===============================================================================
 
-PLAT
-
-===============================================================================
-*/
 
 /*
 ==============
@@ -1159,20 +1068,8 @@ void SP_func_plat (gentity_t *ent) {
 }
 
 
-/*
-===============================================================================
 
-BUTTON
 
-===============================================================================
-*/
-
-/*
-==============
-Touch_Button
-
-===============
-*/
 void Touch_Button(gentity_t *ent, gentity_t *other, trace_t *trace ) {
 	if ( !other->client ) {
 		return;
@@ -1243,13 +1140,7 @@ void SP_func_button( gentity_t *ent ) {
 
 
 
-/*
-===============================================================================
 
-TRAIN
-
-===============================================================================
-*/
 
 
 #define TRAIN_START_ON		1
@@ -1268,11 +1159,6 @@ void Think_BeginMoving( gentity_t *ent ) {
 	ent->s.pos.trType = TR_LINEAR_STOP;
 }
 
-/*
-===============
-Reached_Train
-===============
-*/
 void Reached_Train( gentity_t *ent ) {
 	gentity_t		*next;
 	float			speed;
@@ -1456,13 +1342,7 @@ void SP_func_train (gentity_t *self) {
 	self->think = Think_SetupTrainTargets;
 }
 
-/*
-===============================================================================
 
-STATIC
-
-===============================================================================
-*/
 
 
 /*QUAKED func_static (0 .5 .8) ?
@@ -1479,13 +1359,7 @@ void SP_func_static( gentity_t *ent ) {
 }
 
 
-/*
-===============================================================================
 
-ROTATING
-
-===============================================================================
-*/
 
 
 /*QUAKED func_rotating (0 .5 .8) ? START_ON - X_AXIS Y_AXIS
@@ -1529,13 +1403,7 @@ void SP_func_rotating (gentity_t *ent) {
 }
 
 
-/*
-===============================================================================
 
-BOBBING
-
-===============================================================================
-*/
 
 
 /*QUAKED func_bobbing (0 .5 .8) ? X_AXIS Y_AXIS
@@ -1577,13 +1445,7 @@ void SP_func_bobbing (gentity_t *ent) {
 	}
 }
 
-/*
-===============================================================================
 
-PENDULUM
-
-===============================================================================
-*/
 
 
 /*QUAKED func_pendulum (0 .5 .8) ?

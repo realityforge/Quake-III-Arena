@@ -56,11 +56,6 @@ static float sdlMasterGain = 1.0f;
 #endif
 
 
-/*
-===============
-SNDDMA_AudioCallback
-===============
-*/
 static void SNDDMA_AudioCallback(void *userdata, Uint8 *stream, int len)
 {
 	int pos = (dmapos * (dma.samplebits/8));
@@ -149,11 +144,6 @@ static struct
 
 static int formatToStringTableSize = ARRAY_LEN( formatToStringTable );
 
-/*
-===============
-SNDDMA_PrintAudiospec
-===============
-*/
 static void SNDDMA_PrintAudiospec(const char *str, const SDL_AudioSpec *spec)
 {
 	int		i;
@@ -178,11 +168,6 @@ static void SNDDMA_PrintAudiospec(const char *str, const SDL_AudioSpec *spec)
 	Com_Printf( "  Channels: %d\n", (int) spec->channels );
 }
 
-/*
-===============
-SNDDMA_Init
-===============
-*/
 qboolean SNDDMA_Init(void)
 {
 	SDL_AudioSpec desired;
@@ -317,21 +302,11 @@ qboolean SNDDMA_Init(void)
 	return qtrue;
 }
 
-/*
-===============
-SNDDMA_GetDMAPos
-===============
-*/
 int SNDDMA_GetDMAPos(void)
 {
 	return dmapos;
 }
 
-/*
-===============
-SNDDMA_Shutdown
-===============
-*/
 void SNDDMA_Shutdown(void)
 {
 	if (sdlPlaybackDevice != 0)
@@ -372,11 +347,6 @@ void SNDDMA_Submit(void)
 	SDL_UnlockAudioDevice(sdlPlaybackDevice);
 }
 
-/*
-===============
-SNDDMA_BeginPainting
-===============
-*/
 void SNDDMA_BeginPainting (void)
 {
 	SDL_LockAudioDevice(sdlPlaybackDevice);

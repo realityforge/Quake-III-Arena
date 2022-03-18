@@ -49,12 +49,7 @@ static vec3_t sky_clip[6] =
 static float	sky_mins[2][6], sky_maxs[2][6];
 static float	sky_min, sky_max;
 
-/*
-================
-AddSkyPolygon
-================
-*/
-static void AddSkyPolygon (int nump, vec3_t vecs) 
+static void AddSkyPolygon (int nump, vec3_t vecs)
 {
 	int		i,j;
 	vec3_t	v, av;
@@ -142,12 +137,7 @@ static void AddSkyPolygon (int nump, vec3_t vecs)
 
 #define	ON_EPSILON		0.1f			// point on plane side epsilon
 #define	MAX_CLIP_VERTS	64
-/*
-================
-ClipSkyPolygon
-================
-*/
-static void ClipSkyPolygon (int nump, vec3_t vecs, int stage) 
+static void ClipSkyPolygon (int nump, vec3_t vecs, int stage)
 {
 	float	*norm;
 	float	*v;
@@ -238,11 +228,6 @@ static void ClipSkyPolygon (int nump, vec3_t vecs, int stage)
 	ClipSkyPolygon (newc[1], newv[1][0], stage+1);
 }
 
-/*
-==============
-ClearSkyBox
-==============
-*/
 static void ClearSkyBox (void) {
 	int		i;
 
@@ -252,11 +237,6 @@ static void ClearSkyBox (void) {
 	}
 }
 
-/*
-================
-RB_ClipSkyPolygons
-================
-*/
 void RB_ClipSkyPolygons( shaderCommands_t *input )
 {
 	vec3_t		p[5];	// need one extra point for clipping

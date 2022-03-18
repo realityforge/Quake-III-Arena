@@ -76,12 +76,6 @@ void CG_BuildSolidList( void ) {
 	}
 }
 
-/*
-====================
-CG_ClipMoveToEntities
-
-====================
-*/
 static void CG_ClipMoveToEntities ( const vec3_t start, const vec3_t mins, const vec3_t maxs, const vec3_t end,
 							int skipNumber, int mask, trace_t *tr ) {
 	int			i, x, zd, zu;
@@ -137,12 +131,7 @@ static void CG_ClipMoveToEntities ( const vec3_t start, const vec3_t mins, const
 	}
 }
 
-/*
-================
-CG_Trace
-================
-*/
-void	CG_Trace( trace_t *result, const vec3_t start, const vec3_t mins, const vec3_t maxs, const vec3_t end, 
+void	CG_Trace( trace_t *result, const vec3_t start, const vec3_t mins, const vec3_t maxs, const vec3_t end,
 					 int skipNumber, int mask ) {
 	trace_t	t;
 
@@ -154,11 +143,6 @@ void	CG_Trace( trace_t *result, const vec3_t start, const vec3_t mins, const vec
 	*result = t;
 }
 
-/*
-================
-CG_PointContents
-================
-*/
 int		CG_PointContents( const vec3_t point, int passEntityNum ) {
 	int			i;
 	entityState_t	*ent;
@@ -253,11 +237,6 @@ static void CG_InterpolatePlayerState( qboolean grabAngles ) {
 
 }
 
-/*
-===================
-CG_TouchItem
-===================
-*/
 static void CG_TouchItem( centity_t *cent ) {
 	gitem_t		*item;
 

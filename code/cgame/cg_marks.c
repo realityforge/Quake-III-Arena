@@ -59,11 +59,6 @@ void	CG_InitMarkPolys( void ) {
 }
 
 
-/*
-==================
-CG_FreeMarkPoly
-==================
-*/
 void CG_FreeMarkPoly( markPoly_t *le ) {
 	if ( !le->prevMark || !le->nextMark ) {
 		CG_Error( "CG_FreeLocalEntity: not active" );
@@ -222,11 +217,6 @@ void CG_ImpactMark( qhandle_t markShader, const vec3_t origin, const vec3_t dir,
 }
 
 
-/*
-===============
-CG_AddMarks
-===============
-*/
 #define	MARK_TOTAL_TIME		10000
 #define	MARK_FADE_TIME		1000
 

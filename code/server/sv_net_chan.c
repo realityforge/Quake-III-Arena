@@ -133,11 +133,6 @@ static void SV_Netchan_Decode( client_t *client, msg_t *msg ) {
 
 
 
-/*
-=================
-SV_Netchan_FreeQueue
-=================
-*/
 void SV_Netchan_FreeQueue(client_t *client)
 {
 	netchan_buffer_t *netbuf, *next;
@@ -152,11 +147,6 @@ void SV_Netchan_FreeQueue(client_t *client)
 	client->netchan_end_queue = &client->netchan_start_queue;
 }
 
-/*
-=================
-SV_Netchan_TransmitNextInQueue
-=================
-*/
 void SV_Netchan_TransmitNextInQueue(client_t *client)
 {
 	netchan_buffer_t *netbuf;
@@ -254,11 +244,6 @@ void SV_Netchan_Transmit( client_t *client, msg_t *msg)
 	}
 }
 
-/*
-=================
-Netchan_SV_Process
-=================
-*/
 qboolean SV_Netchan_Process( client_t *client, msg_t *msg ) {
 	int ret;
 	ret = Netchan_Process( &client->netchan, msg );

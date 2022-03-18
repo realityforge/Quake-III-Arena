@@ -120,11 +120,6 @@ static int	minTier;
 static int	maxTier;
 
 
-/*
-=================
-PlayerIcon
-=================
-*/
 static void PlayerIcon( const char *modelAndSkin, char *iconName, int iconNameMaxSize ) {
 	char	*skin;
 	char	model[MAX_QPATH];
@@ -146,11 +141,6 @@ static void PlayerIcon( const char *modelAndSkin, char *iconName, int iconNameMa
 }
 
 
-/*
-=================
-PlayerIconhandle
-=================
-*/
 static qhandle_t PlayerIconHandle( const char *modelAndSkin ) {
 	char	iconName[MAX_QPATH];
 
@@ -159,11 +149,6 @@ static qhandle_t PlayerIconHandle( const char *modelAndSkin ) {
 }
 
 
-/*
-=================
-UI_SPLevelMenu_SetBots
-=================
-*/
 static void UI_SPLevelMenu_SetBots( void ) {
 	char	*p;
 	char	*bot;
@@ -218,11 +203,6 @@ static void UI_SPLevelMenu_SetBots( void ) {
 }
 
 
-/*
-=================
-UI_SPLevelMenu_SetMenuItems
-=================
-*/
 static void UI_SPLevelMenu_SetMenuArena( int n, int level, const char *arenaInfo ) {
 	char		map[MAX_QPATH];
 
@@ -349,11 +329,6 @@ static void UI_SPLevelMenu_SetMenuItems( void ) {
 }
 
 
-/*
-=================
-UI_SPLevelMenu_ResetEvent
-=================
-*/
 static void UI_SPLevelMenu_ResetDraw( void ) {
 	UI_DrawProportionalString( SCREEN_WIDTH/2, 356 + PROP_HEIGHT * 0, "WARNING: This resets all of the", UI_CENTER|UI_SMALLFONT, color_yellow );
 	UI_DrawProportionalString( SCREEN_WIDTH/2, 356 + PROP_HEIGHT * 1, "single player game variables.", UI_CENTER|UI_SMALLFONT, color_yellow );
@@ -389,11 +364,6 @@ static void UI_SPLevelMenu_ResetEvent( void* ptr, int event )
 }
 
 
-/*
-=================
-UI_SPLevelMenu_LevelEvent
-=================
-*/
 static void UI_SPLevelMenu_LevelEvent( void* ptr, int notification ) {
 	if (notification != QM_ACTIVATED) {
 		return;
@@ -411,11 +381,6 @@ static void UI_SPLevelMenu_LevelEvent( void* ptr, int notification ) {
 }
 
 
-/*
-=================
-UI_SPLevelMenu_LeftArrowEvent
-=================
-*/
 static void UI_SPLevelMenu_LeftArrowEvent( void* ptr, int notification ) {
 	if (notification != QM_ACTIVATED) {
 		return;
@@ -430,11 +395,6 @@ static void UI_SPLevelMenu_LeftArrowEvent( void* ptr, int notification ) {
 }
 
 
-/*
-=================
-UI_SPLevelMenu_RightArrowEvent
-=================
-*/
 static void UI_SPLevelMenu_RightArrowEvent( void* ptr, int notification ) {
 	if (notification != QM_ACTIVATED) {
 		return;
@@ -449,11 +409,6 @@ static void UI_SPLevelMenu_RightArrowEvent( void* ptr, int notification ) {
 }
 
 
-/*
-=================
-UI_SPLevelMenu_PlayerEvent
-=================
-*/
 static void UI_SPLevelMenu_PlayerEvent( void* ptr, int notification ) {
 	if (notification != QM_ACTIVATED) {
 		return;
@@ -463,11 +418,6 @@ static void UI_SPLevelMenu_PlayerEvent( void* ptr, int notification ) {
 }
 
 
-/*
-=================
-UI_SPLevelMenu_AwardEvent
-=================
-*/
 static void UI_SPLevelMenu_AwardEvent( void* ptr, int notification ) {
 	int		n;
 
@@ -480,11 +430,6 @@ static void UI_SPLevelMenu_AwardEvent( void* ptr, int notification ) {
 }
 
 
-/*
-=================
-UI_SPLevelMenu_NextEvent
-=================
-*/
 static void UI_SPLevelMenu_NextEvent( void* ptr, int notification ) {
 	if (notification != QM_ACTIVATED) {
 		return;
@@ -502,11 +447,6 @@ static void UI_SPLevelMenu_NextEvent( void* ptr, int notification ) {
 }
 
 
-/*
-=================
-UI_SPLevelMenu_BackEvent
-=================
-*/
 static void UI_SPLevelMenu_BackEvent( void* ptr, int notification ) {
 	if (notification != QM_ACTIVATED) {
 		return;
@@ -520,11 +460,6 @@ static void UI_SPLevelMenu_BackEvent( void* ptr, int notification ) {
 }
 
 
-/*
-=================
-UI_SPLevelMenu_CustomEvent
-=================
-*/
 static void UI_SPLevelMenu_CustomEvent( void* ptr, int notification ) {
 	if (notification != QM_ACTIVATED) {
 		return;
@@ -534,11 +469,6 @@ static void UI_SPLevelMenu_CustomEvent( void* ptr, int notification ) {
 }
 
 
-/*
-=================
-UI_SPLevelMenu_MenuDraw
-=================
-*/
 #define LEVEL_DESC_LEFT_MARGIN		332
 
 static void UI_SPLevelMenu_MenuDraw( void ) {
@@ -672,11 +602,6 @@ static void UI_SPLevelMenu_MenuDraw( void ) {
 }
 
 
-/*
-=================
-UI_SPLevelMenu_Cache
-=================
-*/
 void UI_SPLevelMenu_Cache( void ) {
 	int				n;
 
@@ -714,11 +639,6 @@ void UI_SPLevelMenu_Cache( void ) {
 }
 
 
-/*
-=================
-UI_SPLevelMenu_Init
-=================
-*/
 static void UI_SPLevelMenu_Init( void ) {
 	int		skill;
 	int		n;
@@ -938,11 +858,6 @@ static void UI_SPLevelMenu_Init( void ) {
 }
 
 
-/*
-=================
-UI_SPLevelMenu
-=================
-*/
 void UI_SPLevelMenu( void ) {
 	int			level;
 	int			trainingLevel;
@@ -994,11 +909,6 @@ void UI_SPLevelMenu( void ) {
 }
 
 
-/*
-=================
-UI_SPLevelMenu_f
-=================
-*/
 void UI_SPLevelMenu_f( void ) {
 	trap_Key_SetCatcher( KEYCATCH_UI );
 	uis.menusp = 0;
@@ -1006,11 +916,6 @@ void UI_SPLevelMenu_f( void ) {
 }
 
 
-/*
-=================
-UI_SPLevelMenu_ReInit
-=================
-*/
 void UI_SPLevelMenu_ReInit( void ) {
 	levelMenuInfo.reinit = qtrue;
 }

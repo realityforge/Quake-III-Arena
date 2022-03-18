@@ -46,11 +46,6 @@ static float		jumpHeight;
 sfxHandle_t weaponChangeSound;
 
 
-/*
-===============
-UI_PlayerInfo_SetWeapon
-===============
-*/
 static void UI_PlayerInfo_SetWeapon( playerInfo_t *pi, weapon_t weaponNum ) {
 	gitem_t *	item;
 	char		path[MAX_QPATH];
@@ -146,11 +141,6 @@ tryagain:
 }
 
 
-/*
-===============
-UI_ForceLegsAnim
-===============
-*/
 static void UI_ForceLegsAnim( playerInfo_t *pi, int anim ) {
 	pi->legsAnim = ( ( pi->legsAnim & ANIM_TOGGLEBIT ) ^ ANIM_TOGGLEBIT ) | anim;
 
@@ -160,11 +150,6 @@ static void UI_ForceLegsAnim( playerInfo_t *pi, int anim ) {
 }
 
 
-/*
-===============
-UI_SetLegsAnim
-===============
-*/
 static void UI_SetLegsAnim( playerInfo_t *pi, int anim ) {
 	if ( pi->pendingLegsAnim ) {
 		anim = pi->pendingLegsAnim;
@@ -174,11 +159,6 @@ static void UI_SetLegsAnim( playerInfo_t *pi, int anim ) {
 }
 
 
-/*
-===============
-UI_ForceTorsoAnim
-===============
-*/
 static void UI_ForceTorsoAnim( playerInfo_t *pi, int anim ) {
 	pi->torsoAnim = ( ( pi->torsoAnim & ANIM_TOGGLEBIT ) ^ ANIM_TOGGLEBIT ) | anim;
 
@@ -192,11 +172,6 @@ static void UI_ForceTorsoAnim( playerInfo_t *pi, int anim ) {
 }
 
 
-/*
-===============
-UI_SetTorsoAnim
-===============
-*/
 static void UI_SetTorsoAnim( playerInfo_t *pi, int anim ) {
 	if ( pi->pendingTorsoAnim ) {
 		anim = pi->pendingTorsoAnim;
@@ -207,11 +182,6 @@ static void UI_SetTorsoAnim( playerInfo_t *pi, int anim ) {
 }
 
 
-/*
-===============
-UI_TorsoSequencing
-===============
-*/
 static void UI_TorsoSequencing( playerInfo_t *pi ) {
 	int		currentAnim;
 
@@ -252,11 +222,6 @@ static void UI_TorsoSequencing( playerInfo_t *pi ) {
 }
 
 
-/*
-===============
-UI_LegsSequencing
-===============
-*/
 static void UI_LegsSequencing( playerInfo_t *pi ) {
 	int		currentAnim;
 
@@ -283,12 +248,7 @@ static void UI_LegsSequencing( playerInfo_t *pi ) {
 }
 
 
-/*
-======================
-UI_PositionEntityOnTag
-======================
-*/
-static void UI_PositionEntityOnTag( refEntity_t *entity, const refEntity_t *parent, 
+static void UI_PositionEntityOnTag( refEntity_t *entity, const refEntity_t *parent,
 							clipHandle_t parentModel, char *tagName ) {
 	int				i;
 	orientation_t	lerped;
@@ -309,12 +269,7 @@ static void UI_PositionEntityOnTag( refEntity_t *entity, const refEntity_t *pare
 }
 
 
-/*
-======================
-UI_PositionRotatedEntityOnTag
-======================
-*/
-static void UI_PositionRotatedEntityOnTag( refEntity_t *entity, const refEntity_t *parent, 
+static void UI_PositionRotatedEntityOnTag( refEntity_t *entity, const refEntity_t *parent,
 							clipHandle_t parentModel, char *tagName ) {
 	int				i;
 	orientation_t	lerped;
@@ -336,11 +291,6 @@ static void UI_PositionRotatedEntityOnTag( refEntity_t *entity, const refEntity_
 }
 
 
-/*
-===============
-UI_SetLerpFrameAnimation
-===============
-*/
 static void UI_SetLerpFrameAnimation( playerInfo_t *ci, lerpFrame_t *lf, int newAnimation ) {
 	animation_t	*anim;
 
@@ -358,11 +308,6 @@ static void UI_SetLerpFrameAnimation( playerInfo_t *ci, lerpFrame_t *lf, int new
 }
 
 
-/*
-===============
-UI_RunLerpFrame
-===============
-*/
 static void UI_RunLerpFrame( playerInfo_t *ci, lerpFrame_t *lf, int newAnimation ) {
 	int			f, numFrames;
 	animation_t	*anim;
@@ -436,11 +381,6 @@ static void UI_RunLerpFrame( playerInfo_t *ci, lerpFrame_t *lf, int newAnimation
 }
 
 
-/*
-===============
-UI_PlayerAnimation
-===============
-*/
 static void UI_PlayerAnimation( playerInfo_t *pi, int *legsOld, int *legs, float *legsBackLerp,
 						int *torsoOld, int *torso, float *torsoBackLerp ) {
 
@@ -476,11 +416,6 @@ static void UI_PlayerAnimation( playerInfo_t *pi, int *legsOld, int *legs, float
 }
 
 
-/*
-==================
-UI_SwingAngles
-==================
-*/
 static void UI_SwingAngles( float destination, float swingTolerance, float clampTolerance,
 					float speed, float *angle, qboolean *swinging ) {
 	float	swing;
@@ -538,11 +473,6 @@ static void UI_SwingAngles( float destination, float swingTolerance, float clamp
 }
 
 
-/*
-======================
-UI_MovedirAdjustment
-======================
-*/
 static float UI_MovedirAdjustment( playerInfo_t *pi ) {
 	vec3_t		relativeAngles;
 	vec3_t		moveVector;
@@ -582,11 +512,6 @@ static float UI_MovedirAdjustment( playerInfo_t *pi ) {
 }
 
 
-/*
-===============
-UI_PlayerAngles
-===============
-*/
 static void UI_PlayerAngles( playerInfo_t *pi, vec3_t legs[3], vec3_t torso[3], vec3_t head[3] ) {
 	vec3_t		legsAngles, torsoAngles, headAngles;
 	float		dest;
@@ -651,11 +576,6 @@ static void UI_PlayerAngles( playerInfo_t *pi, vec3_t legs[3], vec3_t torso[3], 
 }
 
 
-/*
-===============
-UI_PlayerFloatSprite
-===============
-*/
 static void UI_PlayerFloatSprite( playerInfo_t *pi, vec3_t origin, qhandle_t shader ) {
 	refEntity_t		ent;
 
@@ -670,11 +590,6 @@ static void UI_PlayerFloatSprite( playerInfo_t *pi, vec3_t origin, qhandle_t sha
 }
 
 
-/*
-======================
-UI_MachinegunSpinAngle
-======================
-*/
 float	UI_MachinegunSpinAngle( playerInfo_t *pi ) {
 	int		delta;
 	float	angle;
@@ -707,11 +622,6 @@ float	UI_MachinegunSpinAngle( playerInfo_t *pi ) {
 }
 
 
-/*
-===============
-UI_DrawPlayer
-===============
-*/
 void UI_DrawPlayer( float x, float y, float w, float h, playerInfo_t *pi, int time ) {
 	refdef_t		refdef;
 	refEntity_t		legs = {0};
@@ -919,11 +829,6 @@ void UI_DrawPlayer( float x, float y, float w, float h, playerInfo_t *pi, int ti
 	trap_R_RenderScene( &refdef );
 }
 
-/*
-==========================
-UI_FileExists
-==========================
-*/
 static qboolean	UI_FileExists(const char *filename) {
 	int len;
 
@@ -934,11 +839,6 @@ static qboolean	UI_FileExists(const char *filename) {
 	return qfalse;
 }
 
-/*
-==========================
-UI_FindClientHeadFile
-==========================
-*/
 static qboolean	UI_FindClientHeadFile( char *filename, int length, const char *teamName, const char *headModelName, const char *headSkinName, const char *base, const char *ext ) {
 	char *team, *headsFolder;
 	int i;
@@ -986,11 +886,6 @@ static qboolean	UI_FindClientHeadFile( char *filename, int length, const char *t
 	return qfalse;
 }
 
-/*
-==========================
-UI_RegisterClientSkin
-==========================
-*/
 static qboolean	UI_RegisterClientSkin( playerInfo_t *pi, const char *modelName, const char *skinName, const char *headModelName, const char *headSkinName , const char *teamName) {
 	char		filename[MAX_QPATH];
 
@@ -1036,11 +931,6 @@ static qboolean	UI_RegisterClientSkin( playerInfo_t *pi, const char *modelName, 
 }
 
 
-/*
-======================
-UI_ParseAnimationFile
-======================
-*/
 static qboolean UI_ParseAnimationFile( const char *filename, playerInfo_t *pi ) {
 	char		*text_p, *prev;
 	int			len;
@@ -1189,11 +1079,6 @@ static qboolean UI_ParseAnimationFile( const char *filename, playerInfo_t *pi ) 
 	return qtrue;
 }
 
-/*
-==========================
-UI_RegisterClientModelname
-==========================
-*/
 qboolean UI_RegisterClientModelname( playerInfo_t *pi, const char *modelSkinName, const char *headModelSkinName, const char *teamName ) {
 	char		modelName[MAX_QPATH];
 	char		skinName[MAX_QPATH];
@@ -1293,11 +1178,6 @@ qboolean UI_RegisterClientModelname( playerInfo_t *pi, const char *modelSkinName
 }
 
 
-/*
-===============
-UI_PlayerInfo_SetModel
-===============
-*/
 void UI_PlayerInfo_SetModel( playerInfo_t *pi, const char *model, const char *headmodel, char *teamName ) {
 	memset( pi, 0, sizeof(*pi) );
 	UI_RegisterClientModelname( pi, model, headmodel, teamName );
@@ -1312,11 +1192,6 @@ void UI_PlayerInfo_SetModel( playerInfo_t *pi, const char *model, const char *he
 }
 
 
-/*
-===============
-UI_PlayerInfo_SetInfo
-===============
-*/
 void UI_PlayerInfo_SetInfo( playerInfo_t *pi, int legsAnim, int torsoAnim, vec3_t viewAngles, vec3_t moveAngles, weapon_t weaponNumber, qboolean chat ) {
 	int			currentAnim;
 	weapon_t	weaponNum;

@@ -36,12 +36,7 @@ BASIC MATH
 ===============================================================================
 */
 
-/*
-================
-RotatePoint
-================
-*/
-void RotatePoint(vec3_t point, /*const*/ vec3_t matrix[3]) { // FIXME 
+void RotatePoint(vec3_t point, /*const*/ vec3_t matrix[3]) { // FIXME
 	vec3_t tvec;
 
 	VectorCopy(point, tvec);
@@ -50,11 +45,6 @@ void RotatePoint(vec3_t point, /*const*/ vec3_t matrix[3]) { // FIXME
 	point[2] = DotProduct(matrix[2], tvec);
 }
 
-/*
-================
-TransposeMatrix
-================
-*/
 void TransposeMatrix(/*const*/ vec3_t matrix[3], vec3_t transpose[3]) { // FIXME
 	int i, j;
 	for (i = 0; i < 3; i++) {
@@ -64,21 +54,11 @@ void TransposeMatrix(/*const*/ vec3_t matrix[3], vec3_t transpose[3]) { // FIXME
 	}
 }
 
-/*
-================
-CreateRotationMatrix
-================
-*/
 void CreateRotationMatrix(const vec3_t angles, vec3_t matrix[3]) {
 	AngleVectors(angles, matrix[0], matrix[1], matrix[2]);
 	VectorInverse(matrix[1]);
 }
 
-/*
-================
-CM_ProjectPointOntoVector
-================
-*/
 void CM_ProjectPointOntoVector( vec3_t point, vec3_t vStart, vec3_t vDir, vec3_t vProj )
 {
 	vec3_t pVec;
@@ -88,11 +68,6 @@ void CM_ProjectPointOntoVector( vec3_t point, vec3_t vStart, vec3_t vDir, vec3_t
 	VectorMA( vStart, DotProduct( pVec, vDir ), vDir, vProj );
 }
 
-/*
-================
-CM_DistanceFromLineSquared
-================
-*/
 float CM_DistanceFromLineSquared(vec3_t p, vec3_t lp1, vec3_t lp2, vec3_t dir) {
 	vec3_t proj, t;
 	int j;
@@ -113,11 +88,6 @@ float CM_DistanceFromLineSquared(vec3_t p, vec3_t lp1, vec3_t lp2, vec3_t dir) {
 	return VectorLengthSquared(t);
 }
 
-/*
-================
-CM_VectorDistanceSquared
-================
-*/
 float CM_VectorDistanceSquared(vec3_t p1, vec3_t p2) {
 	vec3_t dir;
 
@@ -125,11 +95,6 @@ float CM_VectorDistanceSquared(vec3_t p1, vec3_t p2) {
 	return VectorLengthSquared(dir);
 }
 
-/*
-================
-SquareRootFloat
-================
-*/
 float SquareRootFloat(float number) {
 	floatint_t t;
 	float x, y;
@@ -144,20 +109,6 @@ float SquareRootFloat(float number) {
 	return number * y;
 }
 
-
-/*
-===============================================================================
-
-POSITION TESTING
-
-===============================================================================
-*/
-
-/*
-================
-CM_TestBoxInBrush
-================
-*/
 void CM_TestBoxInBrush( traceWork_t *tw, cbrush_t *brush ) {
 	int			i;
 	cplane_t	*plane;
@@ -234,11 +185,6 @@ void CM_TestBoxInBrush( traceWork_t *tw, cbrush_t *brush ) {
 
 
 
-/*
-================
-CM_TestInLeaf
-================
-*/
 void CM_TestInLeaf( traceWork_t *tw, cLeaf_t *leaf ) {
 	int			k;
 	int			brushnum;
@@ -401,11 +347,6 @@ void CM_TestBoundingBoxInCapsule( traceWork_t *tw, clipHandle_t model ) {
 	CM_TestInLeaf( tw, &cmod->leaf );
 }
 
-/*
-==================
-CM_PositionTest
-==================
-*/
 #define	MAX_POSITION_LEAFS	1024
 void CM_PositionTest( traceWork_t *tw ) {
 	int		leafs[MAX_POSITION_LEAFS];
@@ -444,20 +385,9 @@ void CM_PositionTest( traceWork_t *tw ) {
 	}
 }
 
-/*
-===============================================================================
-
-TRACING
-
-===============================================================================
-*/
 
 
-/*
-================
-CM_TraceThroughPatch
-================
-*/
+
 
 void CM_TraceThroughPatch( traceWork_t *tw, cPatch_t *patch ) {
 	float		oldFrac;
@@ -474,11 +404,6 @@ void CM_TraceThroughPatch( traceWork_t *tw, cPatch_t *patch ) {
 	}
 }
 
-/*
-================
-CM_TraceThroughBrush
-================
-*/
 void CM_TraceThroughBrush( traceWork_t *tw, cbrush_t *brush ) {
 	int			i;
 	cplane_t	*plane, *clipplane;
@@ -661,11 +586,6 @@ void CM_TraceThroughBrush( traceWork_t *tw, cbrush_t *brush ) {
 	}
 }
 
-/*
-================
-CM_TraceThroughLeaf
-================
-*/
 void CM_TraceThroughLeaf( traceWork_t *tw, cLeaf_t *leaf ) {
 	int			k;
 	int			brushnum;
@@ -1140,11 +1060,6 @@ void CM_TraceThroughTree( traceWork_t *tw, int num, float p1f, float p2f, vec3_t
 //======================================================================
 
 
-/*
-==================
-CM_Trace
-==================
-*/
 void CM_Trace( trace_t *results, const vec3_t start, const vec3_t end, vec3_t mins, vec3_t maxs,
 						  clipHandle_t model, const vec3_t origin, int brushmask, int capsule, sphere_t *sphere ) {
 	int			i;
@@ -1358,11 +1273,6 @@ void CM_Trace( trace_t *results, const vec3_t start, const vec3_t end, vec3_t mi
 	*results = tw.trace;
 }
 
-/*
-==================
-CM_BoxTrace
-==================
-*/
 void CM_BoxTrace( trace_t *results, const vec3_t start, const vec3_t end,
 						  vec3_t mins, vec3_t maxs,
 						  clipHandle_t model, int brushmask, int capsule ) {

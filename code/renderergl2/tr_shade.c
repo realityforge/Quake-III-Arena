@@ -31,36 +31,14 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 
-/*
-==================
-R_DrawElements
-
-==================
-*/
 
 void R_DrawElements( int numIndexes, int firstIndex )
 {
 	qglDrawElements(GL_TRIANGLES, numIndexes, GL_INDEX_TYPE, BUFFER_OFFSET(firstIndex * sizeof(glIndex_t)));
 }
 
-
-/*
-=============================================================
-
-SURFACE SHADERS
-
-=============================================================
-*/
-
 shaderCommands_t	tess;
 
-
-/*
-=================
-R_BindAnimatedImageToTMU
-
-=================
-*/
 static void R_BindAnimatedImageToTMU( textureBundle_t *bundle, int tmu ) {
 	int64_t index;
 

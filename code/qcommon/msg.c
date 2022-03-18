@@ -514,13 +514,6 @@ extern cvar_t *cl_shownet;
 #else
 #define	LOG(x)
 #endif
-/*
-=============================================================================
-
-delta functions with keys
-  
-=============================================================================
-*/
 
 int kbitmask[32] = {
 	0x00000001, 0x00000003, 0x00000007, 0x0000000F,
@@ -570,20 +563,6 @@ float MSG_ReadDeltaKeyFloat( msg_t *msg, int key, float oldV ) {
 	return oldV;
 }
 
-
-/*
-============================================================================
-
-usercmd_t communication
-
-============================================================================
-*/
-
-/*
-=====================
-MSG_WriteDeltaUsercmdKey
-=====================
-*/
 void MSG_WriteDeltaUsercmdKey( msg_t *msg, int key, usercmd_t *from, usercmd_t *to ) {
 	if ( to->serverTime - from->serverTime < 256 ) {
 		MSG_WriteBits( msg, 1, 1 );
@@ -617,11 +596,6 @@ void MSG_WriteDeltaUsercmdKey( msg_t *msg, int key, usercmd_t *from, usercmd_t *
 }
 
 
-/*
-=====================
-MSG_ReadDeltaUsercmdKey
-=====================
-*/
 void MSG_ReadDeltaUsercmdKey( msg_t *msg, int key, usercmd_t *from, usercmd_t *to ) {
 	if ( MSG_ReadBits( msg, 1 ) ) {
 		to->serverTime = from->serverTime + MSG_ReadBits( msg, 8 );
@@ -1000,15 +974,6 @@ void MSG_ReadDeltaEntity( msg_t *msg, entityState_t *from, entityState_t *to,
 	}
 }
 
-
-/*
-============================================================================
-
-plyer_state_t communication
-
-============================================================================
-*/
-
 // using the stringizing operator to save typing...
 #define	PSF(x) #x,(size_t)&((playerState_t*)0)->x
 
@@ -1064,12 +1029,6 @@ netField_t	playerStateFields[] =
 { PSF(loopSound), 16 }
 };
 
-/*
-=============
-MSG_WriteDeltaPlayerstate
-
-=============
-*/
 void MSG_WriteDeltaPlayerstate( msg_t *msg, struct playerState_s *from, struct playerState_s *to ) {
 	int				i;
 	playerState_t	dummy;
@@ -1217,11 +1176,6 @@ void MSG_WriteDeltaPlayerstate( msg_t *msg, struct playerState_s *from, struct p
 }
 
 
-/*
-===================
-MSG_ReadDeltaPlayerstate
-===================
-*/
 void MSG_ReadDeltaPlayerstate (msg_t *msg, playerState_t *from, playerState_t *to ) {
 	int			i, lc;
 	int			bits;

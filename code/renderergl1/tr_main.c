@@ -157,48 +157,24 @@ int R_CullPointAndRadius( vec3_t pt, float radius )
 }
 
 
-/*
-=================
-R_LocalNormalToWorld
-
-=================
-*/
 void R_LocalNormalToWorld (vec3_t local, vec3_t world) {
 	world[0] = local[0] * tr.or.axis[0][0] + local[1] * tr.or.axis[1][0] + local[2] * tr.or.axis[2][0];
 	world[1] = local[0] * tr.or.axis[0][1] + local[1] * tr.or.axis[1][1] + local[2] * tr.or.axis[2][1];
 	world[2] = local[0] * tr.or.axis[0][2] + local[1] * tr.or.axis[1][2] + local[2] * tr.or.axis[2][2];
 }
 
-/*
-=================
-R_LocalPointToWorld
-
-=================
-*/
 void R_LocalPointToWorld (vec3_t local, vec3_t world) {
 	world[0] = local[0] * tr.or.axis[0][0] + local[1] * tr.or.axis[1][0] + local[2] * tr.or.axis[2][0] + tr.or.origin[0];
 	world[1] = local[0] * tr.or.axis[0][1] + local[1] * tr.or.axis[1][1] + local[2] * tr.or.axis[2][1] + tr.or.origin[1];
 	world[2] = local[0] * tr.or.axis[0][2] + local[1] * tr.or.axis[1][2] + local[2] * tr.or.axis[2][2] + tr.or.origin[2];
 }
 
-/*
-=================
-R_WorldToLocal
-
-=================
-*/
 void R_WorldToLocal (vec3_t world, vec3_t local) {
 	local[0] = DotProduct(world, tr.or.axis[0]);
 	local[1] = DotProduct(world, tr.or.axis[1]);
 	local[2] = DotProduct(world, tr.or.axis[2]);
 }
 
-/*
-==========================
-R_TransformModelToClip
-
-==========================
-*/
 void R_TransformModelToClip( const vec3_t src, const float *modelMatrix, const float *projectionMatrix,
 							vec4_t eye, vec4_t dst ) {
 	int i;
@@ -220,12 +196,6 @@ void R_TransformModelToClip( const vec3_t src, const float *modelMatrix, const f
 	}
 }
 
-/*
-==========================
-R_TransformClipToWindow
-
-==========================
-*/
 void R_TransformClipToWindow( const vec4_t clip, const viewParms_t *view, vec4_t normalized, vec4_t window ) {
 	normalized[0] = clip[0] / clip[3];
 	normalized[1] = clip[1] / clip[3];
@@ -240,12 +210,6 @@ void R_TransformClipToWindow( const vec4_t clip, const viewParms_t *view, vec4_t
 }
 
 
-/*
-==========================
-myGlMultMatrix
-
-==========================
-*/
 void myGlMultMatrix( const float *a, const float *b, float *out ) {
 	int		i, j;
 
@@ -505,11 +469,6 @@ void R_SetupFrustum (viewParms_t *dest, float xmin, float xmax, float ymax, floa
 	}
 }
 
-/*
-===============
-R_SetupProjection
-===============
-*/
 void R_SetupProjection(viewParms_t *dest, float zProj, qboolean computeFrustum)
 {
 	float	xmin, xmax, ymin, ymax;
@@ -580,11 +539,6 @@ void R_SetupProjectionZ(viewParms_t *dest)
 	dest->projectionMatrix[14] = -2 * zFar * zNear / depth;
 }
 
-/*
-=================
-R_MirrorPoint
-=================
-*/
 void R_MirrorPoint (vec3_t in, orientation_t *surface, orientation_t *camera, vec3_t out) {
 	int		i;
 	vec3_t	local;
@@ -614,11 +568,6 @@ void R_MirrorVector (vec3_t in, orientation_t *surface, orientation_t *camera, v
 }
 
 
-/*
-=============
-R_PlaneForSurface
-=============
-*/
 void R_PlaneForSurface (surfaceType_t *surfType, cplane_t *plane) {
 	srfTriangles_t	*tri;
 	srfPoly_t		*poly;
@@ -1041,11 +990,6 @@ DRAWSURF SORTING
 ==========================================================================================
 */
 
-/*
-===============
-R_Radix
-===============
-*/
 static ID_INLINE void R_Radix( int byte, int size, drawSurf_t *source, drawSurf_t *dest )
 {
   int           count[ 256 ] = { 0 };
@@ -1094,12 +1038,7 @@ static void R_RadixSort( drawSurf_t *source, int size )
 
 //==========================================================================================
 
-/*
-=================
-R_AddDrawSurf
-=================
-*/
-void R_AddDrawSurf( surfaceType_t *surface, shader_t *shader, 
+void R_AddDrawSurf( surfaceType_t *surface, shader_t *shader,
 				   int fogIndex, int dlightMap ) {
 	int			index;
 
@@ -1114,12 +1053,7 @@ void R_AddDrawSurf( surfaceType_t *surface, shader_t *shader,
 	tr.refdef.numDrawSurfs++;
 }
 
-/*
-=================
-R_DecomposeSort
-=================
-*/
-void R_DecomposeSort( unsigned sort, int *entityNum, shader_t **shader, 
+void R_DecomposeSort( unsigned sort, int *entityNum, shader_t **shader,
 					 int *fogNum, int *dlightMap ) {
 	*fogNum = ( sort >> QSORT_FOGNUM_SHIFT ) & 31;
 	*shader = tr.sortedShaders[ ( sort >> QSORT_SHADERNUM_SHIFT ) & (MAX_SHADERS-1) ];
@@ -1127,11 +1061,6 @@ void R_DecomposeSort( unsigned sort, int *entityNum, shader_t **shader,
 	*dlightMap = sort & 3;
 }
 
-/*
-=================
-R_SortDrawSurfs
-=================
-*/
 void R_SortDrawSurfs( drawSurf_t *drawSurfs, int numDrawSurfs ) {
 	shader_t		*shader;
 	int				fogNum;
@@ -1176,11 +1105,6 @@ void R_SortDrawSurfs( drawSurf_t *drawSurfs, int numDrawSurfs ) {
 	R_AddDrawSurfCmd( drawSurfs, numDrawSurfs );
 }
 
-/*
-=============
-R_AddEntitySurfaces
-=============
-*/
 void R_AddEntitySurfaces (void) {
 	trRefEntity_t	*ent;
 	shader_t		*shader;
@@ -1268,11 +1192,6 @@ void R_AddEntitySurfaces (void) {
 }
 
 
-/*
-====================
-R_GenerateDrawSurfs
-====================
-*/
 void R_GenerateDrawSurfs( void ) {
 	R_AddWorldSurfaces ();
 
@@ -1293,11 +1212,6 @@ void R_GenerateDrawSurfs( void ) {
 	R_AddEntitySurfaces ();
 }
 
-/*
-================
-R_DebugPolygon
-================
-*/
 void R_DebugPolygon( int color, int numPoints, float *points ) {
 	int		i;
 

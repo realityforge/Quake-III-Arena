@@ -93,11 +93,6 @@ typedef struct {
 static soundOptionsInfo_t	soundOptionsInfo;
 
 
-/*
-=================
-UI_SoundOptionsMenu_Event
-=================
-*/
 static void UI_SoundOptionsMenu_Event( void* ptr, int event ) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -179,11 +174,6 @@ static void UI_SoundOptionsMenu_Event( void* ptr, int event ) {
 	}
 }
 
-/*
-=================
-SoundOptions_UpdateMenuItems
-=================
-*/
 static void SoundOptions_UpdateMenuItems( void )
 {
 	if ( soundOptionsInfo.soundSystem.curvalue == UISND_SDL )
@@ -215,11 +205,6 @@ static void SoundOptions_UpdateMenuItems( void )
 	}
 }
 
-/*
-================
-SoundOptions_MenuDraw
-================
-*/
 void SoundOptions_MenuDraw (void)
 {
 //APSFIX - rework this
@@ -228,11 +213,6 @@ void SoundOptions_MenuDraw (void)
 	Menu_Draw( &soundOptionsInfo.menu );
 }
 
-/*
-===============
-UI_SoundOptionsMenu_Init
-===============
-*/
 static void UI_SoundOptionsMenu_Init( void ) {
 	int				y;
 	int				speed;
@@ -423,11 +403,6 @@ static void UI_SoundOptionsMenu_Init( void ) {
 }
 
 
-/*
-===============
-UI_SoundOptionsMenu_Cache
-===============
-*/
 void UI_SoundOptionsMenu_Cache( void ) {
 	trap_R_RegisterShaderNoMip( ART_FRAMEL );
 	trap_R_RegisterShaderNoMip( ART_FRAMER );
@@ -438,11 +413,6 @@ void UI_SoundOptionsMenu_Cache( void ) {
 }
 
 
-/*
-===============
-UI_SoundOptionsMenu
-===============
-*/
 void UI_SoundOptionsMenu( void ) {
 	UI_SoundOptionsMenu_Init();
 	UI_PushMenu( &soundOptionsInfo.menu );

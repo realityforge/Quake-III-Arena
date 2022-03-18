@@ -64,20 +64,10 @@ char nodeswitch[MAX_NODESWITCHES+1][144];
 
 #define LOOKAHEAD_DISTANCE			300
 
-/*
-==================
-BotResetNodeSwitches
-==================
-*/
 void BotResetNodeSwitches(void) {
 	numnodeswitches = 0;
 }
 
-/*
-==================
-BotDumpNodeSwitches
-==================
-*/
 void BotDumpNodeSwitches(bot_state_t *bs) {
 	int i;
 	char netname[MAX_NETNAME];
@@ -90,11 +80,6 @@ void BotDumpNodeSwitches(bot_state_t *bs) {
 	BotAI_Print(PRT_FATAL, "");
 }
 
-/*
-==================
-BotRecordNodeSwitch
-==================
-*/
 void BotRecordNodeSwitch(bot_state_t *bs, char *node, char *str, char *s) {
 	char netname[MAX_NETNAME];
 
@@ -108,11 +93,6 @@ void BotRecordNodeSwitch(bot_state_t *bs, char *node, char *str, char *s) {
 	numnodeswitches++;
 }
 
-/*
-==================
-BotGetAirGoal
-==================
-*/
 int BotGetAirGoal(bot_state_t *bs, bot_goal_t *goal) {
 	bsp_trace_t bsptrace;
 	vec3_t end, mins = {-15, -15, -2}, maxs = {15, 15, 2};
@@ -148,11 +128,6 @@ int BotGetAirGoal(bot_state_t *bs, bot_goal_t *goal) {
 	return qfalse;
 }
 
-/*
-==================
-BotGoForAir
-==================
-*/
 int BotGoForAir(bot_state_t *bs, int tfl, bot_goal_t *ltg, float range) {
 	bot_goal_t goal;
 
@@ -183,11 +158,6 @@ int BotGoForAir(bot_state_t *bs, int tfl, bot_goal_t *ltg, float range) {
 	return qfalse;
 }
 
-/*
-==================
-BotNearbyGoal
-==================
-*/
 int BotNearbyGoal(bot_state_t *bs, int tfl, bot_goal_t *ltg, float range) {
 	int ret;
 
@@ -221,11 +191,6 @@ int BotNearbyGoal(bot_state_t *bs, int tfl, bot_goal_t *ltg, float range) {
 	return ret;
 }
 
-/*
-==================
-BotReachedGoal
-==================
-*/
 int BotReachedGoal(bot_state_t *bs, bot_goal_t *goal) {
 	if (goal->flags & GFL_ITEM) {
 		//if touching the goal
@@ -274,11 +239,6 @@ int BotReachedGoal(bot_state_t *bs, bot_goal_t *goal) {
 	return qfalse;
 }
 
-/*
-==================
-BotGetItemLongTermGoal
-==================
-*/
 int BotGetItemLongTermGoal(bot_state_t *bs, int tfl, bot_goal_t *goal) {
 	//if the bot has no goal
 	if (!trap_BotGetTopGoal(bs->gs, goal)) {
@@ -1035,11 +995,6 @@ int BotGetLongTermGoal(bot_state_t *bs, int tfl, int retreat, bot_goal_t *goal) 
 	return BotGetItemLongTermGoal(bs, tfl, goal);
 }
 
-/*
-==================
-BotLongTermGoal
-==================
-*/
 int BotLongTermGoal(bot_state_t *bs, int tfl, int retreat, bot_goal_t *goal) {
 	aas_entityinfo_t entinfo;
 	char teammate[MAX_MESSAGE_SIZE];
@@ -1123,11 +1078,6 @@ int BotLongTermGoal(bot_state_t *bs, int tfl, int retreat, bot_goal_t *goal) {
 	return BotGetLongTermGoal(bs, tfl, retreat, goal);
 }
 
-/*
-==================
-AIEnter_Intermission
-==================
-*/
 void AIEnter_Intermission(bot_state_t *bs, char *s) {
 	BotRecordNodeSwitch(bs, "intermission", "", s);
 	//reset the bot state
@@ -1139,11 +1089,6 @@ void AIEnter_Intermission(bot_state_t *bs, char *s) {
 	bs->ainode = AINode_Intermission;
 }
 
-/*
-==================
-AINode_Intermission
-==================
-*/
 int AINode_Intermission(bot_state_t *bs) {
 	//if the intermission ended
 	if (!BotIntermission(bs)) {
@@ -1158,11 +1103,6 @@ int AINode_Intermission(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-AIEnter_Observer
-==================
-*/
 void AIEnter_Observer(bot_state_t *bs, char *s) {
 	BotRecordNodeSwitch(bs, "observer", "", s);
 	//reset the bot state
@@ -1170,11 +1110,6 @@ void AIEnter_Observer(bot_state_t *bs, char *s) {
 	bs->ainode = AINode_Observer;
 }
 
-/*
-==================
-AINode_Observer
-==================
-*/
 int AINode_Observer(bot_state_t *bs) {
 	//if the bot left observer mode
 	if (!BotIsObserver(bs)) {
@@ -1183,22 +1118,12 @@ int AINode_Observer(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-AIEnter_Stand
-==================
-*/
 void AIEnter_Stand(bot_state_t *bs, char *s) {
 	BotRecordNodeSwitch(bs, "stand", "", s);
 	bs->standfindenemy_time = FloatTime() + 1;
 	bs->ainode = AINode_Stand;
 }
 
-/*
-==================
-AINode_Stand
-==================
-*/
 int AINode_Stand(bot_state_t *bs) {
 
 	//if the bot's health decreased
@@ -1227,11 +1152,6 @@ int AINode_Stand(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-AIEnter_Respawn
-==================
-*/
 void AIEnter_Respawn(bot_state_t *bs, char *s) {
 	BotRecordNodeSwitch(bs, "respawn", "", s);
 	//reset some states
@@ -1253,11 +1173,6 @@ void AIEnter_Respawn(bot_state_t *bs, char *s) {
 	bs->ainode = AINode_Respawn;
 }
 
-/*
-==================
-AINode_Respawn
-==================
-*/
 int AINode_Respawn(bot_state_t *bs) {
 	// if waiting for the actual respawn
 	if (bs->respawn_wait) {
@@ -1286,11 +1201,6 @@ int AINode_Respawn(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-BotSelectActivateWeapon
-==================
-*/
 int BotSelectActivateWeapon(bot_state_t *bs) {
 	//
 	if (bs->inventory[INVENTORY_MACHINEGUN] > 0 && bs->inventory[INVENTORY_BULLETS] > 0)
@@ -1430,21 +1340,11 @@ void BotClearPath(bot_state_t *bs, bot_moveresult_t *moveresult) {
 	}
 }
 
-/*
-==================
-AIEnter_Seek_ActivateEntity
-==================
-*/
 void AIEnter_Seek_ActivateEntity(bot_state_t *bs, char *s) {
 	BotRecordNodeSwitch(bs, "activate entity", "", s);
 	bs->ainode = AINode_Seek_ActivateEntity;
 }
 
-/*
-==================
-AINode_Seek_Activate_Entity
-==================
-*/
 int AINode_Seek_ActivateEntity(bot_state_t *bs) {
 	bot_goal_t *goal;
 	vec3_t target, dir, ideal_viewangles;
@@ -1640,11 +1540,6 @@ int AINode_Seek_ActivateEntity(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-AIEnter_Seek_NBG
-==================
-*/
 void AIEnter_Seek_NBG(bot_state_t *bs, char *s) {
 	bot_goal_t goal;
 	char buf[144];
@@ -1659,11 +1554,6 @@ void AIEnter_Seek_NBG(bot_state_t *bs, char *s) {
 	bs->ainode = AINode_Seek_NBG;
 }
 
-/*
-==================
-AINode_Seek_NBG
-==================
-*/
 int AINode_Seek_NBG(bot_state_t *bs) {
 	bot_goal_t goal;
 	vec3_t target, dir;
@@ -1773,11 +1663,6 @@ int AINode_Seek_NBG(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-AIEnter_Seek_LTG
-==================
-*/
 void AIEnter_Seek_LTG(bot_state_t *bs, char *s) {
 	bot_goal_t goal;
 	char buf[144];
@@ -1792,11 +1677,6 @@ void AIEnter_Seek_LTG(bot_state_t *bs, char *s) {
 	bs->ainode = AINode_Seek_LTG;
 }
 
-/*
-==================
-AINode_Seek_LTG
-==================
-*/
 int AINode_Seek_LTG(bot_state_t *bs)
 {
 	bot_goal_t goal;
@@ -1960,11 +1840,6 @@ int AINode_Seek_LTG(bot_state_t *bs)
 	return qtrue;
 }
 
-/*
-==================
-AIEnter_Battle_Fight
-==================
-*/
 void AIEnter_Battle_Fight(bot_state_t *bs, char *s) {
 	BotRecordNodeSwitch(bs, "battle fight", "", s);
 	trap_BotResetLastAvoidReach(bs->ms);
@@ -1972,11 +1847,6 @@ void AIEnter_Battle_Fight(bot_state_t *bs, char *s) {
 	bs->flags &= ~BFL_FIGHTSUICIDAL;
 }
 
-/*
-==================
-AIEnter_Battle_SuicidalFight
-==================
-*/
 void AIEnter_Battle_SuicidalFight(bot_state_t *bs, char *s) {
 	BotRecordNodeSwitch(bs, "battle fight", "", s);
 	trap_BotResetLastAvoidReach(bs->ms);
@@ -1984,11 +1854,6 @@ void AIEnter_Battle_SuicidalFight(bot_state_t *bs, char *s) {
 	bs->flags |= BFL_FIGHTSUICIDAL;
 }
 
-/*
-==================
-AINode_Battle_Fight
-==================
-*/
 int AINode_Battle_Fight(bot_state_t *bs) {
 	int areanum;
 	vec3_t target;
@@ -2144,22 +2009,12 @@ int AINode_Battle_Fight(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-AIEnter_Battle_Chase
-==================
-*/
 void AIEnter_Battle_Chase(bot_state_t *bs, char *s) {
 	BotRecordNodeSwitch(bs, "battle chase", "", s);
 	bs->chase_time = FloatTime();
 	bs->ainode = AINode_Battle_Chase;
 }
 
-/*
-==================
-AINode_Battle_Chase
-==================
-*/
 int AINode_Battle_Chase(bot_state_t *bs)
 {
 	bot_goal_t goal;
@@ -2284,21 +2139,11 @@ int AINode_Battle_Chase(bot_state_t *bs)
 	return qtrue;
 }
 
-/*
-==================
-AIEnter_Battle_Retreat
-==================
-*/
 void AIEnter_Battle_Retreat(bot_state_t *bs, char *s) {
 	BotRecordNodeSwitch(bs, "battle retreat", "", s);
 	bs->ainode = AINode_Battle_Retreat;
 }
 
-/*
-==================
-AINode_Battle_Retreat
-==================
-*/
 int AINode_Battle_Retreat(bot_state_t *bs) {
 	bot_goal_t goal;
 	aas_entityinfo_t entinfo;
@@ -2473,21 +2318,11 @@ int AINode_Battle_Retreat(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-AIEnter_Battle_NBG
-==================
-*/
 void AIEnter_Battle_NBG(bot_state_t *bs, char *s) {
 	BotRecordNodeSwitch(bs, "battle NBG", "", s);
 	bs->ainode = AINode_Battle_NBG;
 }
 
-/*
-==================
-AINode_Battle_NBG
-==================
-*/
 int AINode_Battle_NBG(bot_state_t *bs) {
 	int areanum;
 	bot_goal_t goal;

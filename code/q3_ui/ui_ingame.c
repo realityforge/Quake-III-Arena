@@ -67,11 +67,6 @@ typedef struct {
 static ingamemenu_t	s_ingame;
 
 
-/*
-=================
-InGame_RestartAction
-=================
-*/
 static void InGame_RestartAction( qboolean result ) {
 	if( !result ) {
 		return;
@@ -82,11 +77,6 @@ static void InGame_RestartAction( qboolean result ) {
 }
 
 
-/*
-=================
-InGame_QuitAction
-=================
-*/
 static void InGame_QuitAction( qboolean result ) {
 	if( !result ) {
 		return;
@@ -96,11 +86,6 @@ static void InGame_QuitAction( qboolean result ) {
 }
 
 
-/*
-=================
-InGame_Event
-=================
-*/
 void InGame_Event( void *ptr, int notification ) {
 	if( notification != QM_ACTIVATED ) {
 		return;
@@ -150,11 +135,6 @@ void InGame_Event( void *ptr, int notification ) {
 }
 
 
-/*
-=================
-InGame_MenuInit
-=================
-*/
 void InGame_MenuInit( void ) {
 	int		y;
 	uiClientState_t	cs;
@@ -321,21 +301,11 @@ void InGame_MenuInit( void ) {
 }
 
 
-/*
-=================
-InGame_Cache
-=================
-*/
 void InGame_Cache( void ) {
 	trap_R_RegisterShaderNoMip( INGAME_FRAME );
 }
 
 
-/*
-=================
-UI_InGameMenu
-=================
-*/
 void UI_InGameMenu( void ) {
 	// force as top level menu
 	uis.menusp = 0;  

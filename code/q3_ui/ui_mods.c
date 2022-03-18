@@ -63,11 +63,6 @@ typedef struct {
 static mods_t	s_mods;
 
 
-/*
-===============
-UI_Mods_MenuEvent
-===============
-*/
 static void UI_Mods_MenuEvent( void *ptr, int event ) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -87,11 +82,6 @@ static void UI_Mods_MenuEvent( void *ptr, int event ) {
 }
 
 
-/*
-===============
-UI_Mods_ParseInfos
-===============
-*/
 static void UI_Mods_ParseInfos( char *modDir, char *modDesc ) {
 	s_mods.fs_gameList[s_mods.list.numitems] = s_mods.fs_gamePtr;
 	Q_strncpyz( s_mods.fs_gamePtr, modDir, 16 );
@@ -106,11 +96,6 @@ static void UI_Mods_ParseInfos( char *modDir, char *modDesc ) {
 }
 
 
-/*
-===============
-UI_Mods_LoadMods
-===============
-*/
 static void UI_Mods_LoadMods( void ) {
 	int		numdirs;
 	char	dirlist[2048];
@@ -144,11 +129,6 @@ static void UI_Mods_LoadMods( void ) {
 }
 
 
-/*
-===============
-UI_Mods_MenuInit
-===============
-*/
 static void UI_Mods_MenuInit( void ) {
 	UI_ModsMenu_Cache();
 
@@ -221,11 +201,6 @@ static void UI_Mods_MenuInit( void ) {
 	Menu_AddItem( &s_mods.menu, &s_mods.go );
 }
 
-/*
-=================
-UI_Mods_Cache
-=================
-*/
 void UI_ModsMenu_Cache( void ) {
 	trap_R_RegisterShaderNoMip( ART_BACK0 );
 	trap_R_RegisterShaderNoMip( ART_BACK1 );
@@ -236,11 +211,6 @@ void UI_ModsMenu_Cache( void ) {
 }
 
 
-/*
-===============
-UI_ModsMenu
-===============
-*/
 void UI_ModsMenu( void ) {
 	UI_Mods_MenuInit();
 	UI_PushMenu( &s_mods.menu );

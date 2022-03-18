@@ -60,11 +60,6 @@ static SDL_Window *SDL_window = NULL;
 
 #define CTRL(a) ((a)-'a'+1)
 
-/*
-===============
-IN_PrintKey
-===============
-*/
 static void IN_PrintKey( const SDL_Keysym *keysym, keyNum_t key, qboolean down )
 {
 	if( down )
@@ -320,11 +315,6 @@ static keyNum_t IN_TranslateSDLToQ3Key( SDL_Keysym *keysym, qboolean down )
 	return key;
 }
 
-/*
-===============
-IN_GobbleMotionEvents
-===============
-*/
 static void IN_GobbleMotionEvents( void )
 {
 	SDL_Event dummy[ 1 ];
@@ -339,11 +329,6 @@ static void IN_GobbleMotionEvents( void )
 		Com_Printf( "IN_GobbleMotionEvents failed: %s\n", SDL_GetError( ) );
 }
 
-/*
-===============
-IN_ActivateMouse
-===============
-*/
 static void IN_ActivateMouse( qboolean isFullscreen )
 {
 	if (!mouseAvailable || !SDL_WasInit( SDL_INIT_VIDEO ) )
@@ -377,11 +362,6 @@ static void IN_ActivateMouse( qboolean isFullscreen )
 	mouseActive = qtrue;
 }
 
-/*
-===============
-IN_DeactivateMouse
-===============
-*/
 static void IN_DeactivateMouse( qboolean isFullscreen )
 {
 	if( !SDL_WasInit( SDL_INIT_VIDEO ) )
@@ -445,11 +425,6 @@ struct
 } stick_state;
 
 
-/*
-===============
-IN_InitJoystick
-===============
-*/
 static void IN_InitJoystick( void )
 {
 	int i;
@@ -539,11 +514,6 @@ static void IN_InitJoystick( void )
 	SDL_GameControllerEventState(SDL_QUERY);
 }
 
-/*
-===============
-IN_ShutdownJoystick
-===============
-*/
 static void IN_ShutdownJoystick( void )
 {
 	if ( !SDL_WasInit( SDL_INIT_GAMECONTROLLER ) )
@@ -637,11 +607,6 @@ static qboolean KeyToAxisAndSign(int keynum, int *outAxis, int *outSign)
 	return *outSign != 0;
 }
 
-/*
-===============
-IN_GamepadMove
-===============
-*/
 static void IN_GamepadMove( void )
 {
 	int i;
@@ -766,11 +731,6 @@ static void IN_GamepadMove( void )
 }
 
 
-/*
-===============
-IN_JoyMove
-===============
-*/
 static void IN_JoyMove( void )
 {
 	unsigned int axes = 0;
@@ -976,11 +936,6 @@ static void IN_JoyMove( void )
 	stick_state.oldaxes = axes;
 }
 
-/*
-===============
-IN_ProcessEvents
-===============
-*/
 static void IN_ProcessEvents( void )
 {
 	SDL_Event e;
@@ -1163,11 +1118,6 @@ static void IN_ProcessEvents( void )
 	}
 }
 
-/*
-===============
-IN_Frame
-===============
-*/
 void IN_Frame( void )
 {
 	qboolean loading;
@@ -1211,11 +1161,6 @@ void IN_Frame( void )
 	}
 }
 
-/*
-===============
-IN_Init
-===============
-*/
 void IN_Init( void *windowData )
 {
 	int appState;
@@ -1252,11 +1197,6 @@ void IN_Init( void *windowData )
 	Com_DPrintf( "------------------------------------\n" );
 }
 
-/*
-===============
-IN_Shutdown
-===============
-*/
 void IN_Shutdown( void )
 {
 	SDL_StopTextInput( );
@@ -1269,11 +1209,6 @@ void IN_Shutdown( void )
 	SDL_window = NULL;
 }
 
-/*
-===============
-IN_Restart
-===============
-*/
 void IN_Restart( void )
 {
 	IN_ShutdownJoystick( );

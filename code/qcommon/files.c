@@ -282,21 +282,11 @@ FILE*		missingFiles = NULL;
 #  endif
 #endif
 
-/*
-==============
-FS_Initialized
-==============
-*/
 
 qboolean FS_Initialized( void ) {
 	return (fs_searchpaths != NULL);
 }
 
-/*
-=================
-FS_PakIsPure
-=================
-*/
 qboolean FS_PakIsPure( pack_t *pack ) {
 	int i;
 
@@ -384,11 +374,6 @@ void	FS_ForceFlush( fileHandle_t f ) {
 	setvbuf( file, NULL, _IONBF, 0 );
 }
 
-/*
-================
-FS_fplength
-================
-*/
 
 long FS_fplength(FILE *h)
 {
@@ -537,24 +522,12 @@ static void FS_CheckFilenameIsMutable( const char *filename,
 	}
 }
 
-/*
-===========
-FS_Remove
-
-===========
-*/
 void FS_Remove( const char *osPath ) {
 	FS_CheckFilenameIsMutable( osPath, __func__ );
 
 	remove( osPath );
 }
 
-/*
-===========
-FS_HomeRemove
-
-===========
-*/
 void FS_HomeRemove( const char *homePath ) {
 	FS_CheckFilenameIsMutable( homePath, __func__ );
 
@@ -617,12 +590,6 @@ qboolean FS_SV_FileExists( const char *file )
 }
 
 
-/*
-===========
-FS_SV_FOpenFileWrite
-
-===========
-*/
 fileHandle_t FS_SV_FOpenFileWrite( const char *filename ) {
 	char *ospath;
 	fileHandle_t	f;
@@ -730,12 +697,6 @@ long FS_SV_FOpenFileRead(const char *filename, fileHandle_t *fp)
 }
 
 
-/*
-===========
-FS_SV_Rename
-
-===========
-*/
 void FS_SV_Rename( const char *from, const char *to, qboolean safe ) {
 	char			*from_ospath, *to_ospath;
 
@@ -766,12 +727,6 @@ void FS_SV_Rename( const char *from, const char *to, qboolean safe ) {
 
 
 
-/*
-===========
-FS_Rename
-
-===========
-*/
 void FS_Rename( const char *from, const char *to ) {
 	char			*from_ospath, *to_ospath;
 
@@ -827,12 +782,6 @@ void FS_FCloseFile( fileHandle_t f ) {
 	memset( &fsh[f], 0, sizeof( fsh[f] ) );
 }
 
-/*
-===========
-FS_FOpenFileWrite
-
-===========
-*/
 fileHandle_t FS_FOpenFileWrite( const char *filename ) {
 	char			*ospath;
 	fileHandle_t	f;
@@ -870,12 +819,6 @@ fileHandle_t FS_FOpenFileWrite( const char *filename ) {
 	return f;
 }
 
-/*
-===========
-FS_FOpenFileAppend
-
-===========
-*/
 fileHandle_t FS_FOpenFileAppend( const char *filename ) {
 	char			*ospath;
 	fileHandle_t	f;
@@ -914,12 +857,6 @@ fileHandle_t FS_FOpenFileAppend( const char *filename ) {
 	return f;
 }
 
-/*
-===========
-FS_FCreateOpenPipeFile
-
-===========
-*/
 fileHandle_t FS_FCreateOpenPipeFile( const char *filename ) {
 	char	    		*ospath;
 	FILE					*fifo;
@@ -1579,12 +1516,6 @@ void QDECL FS_Printf( fileHandle_t h, const char *fmt, ... ) {
 
 #define PK3_SEEK_BUFFER_SIZE 65536
 
-/*
-=================
-FS_Seek
-
-=================
-*/
 int FS_Seek( fileHandle_t f, long offset, int origin ) {
 	int		_origin;
 
@@ -1673,15 +1604,6 @@ int FS_Seek( fileHandle_t f, long offset, int origin ) {
 		return fseek( file, offset, _origin );
 	}
 }
-
-
-/*
-======================================================================================
-
-CONVENIENCE FUNCTIONS FOR ENTIRE FILES
-
-======================================================================================
-*/
 
 int	FS_FileIsInPAK(const char *filename, int *pChecksum ) {
 	searchpath_t	*search;
@@ -1887,11 +1809,6 @@ long FS_ReadFile(const char *qpath, void **buffer)
 	return FS_ReadFileDir(qpath, NULL, qfalse, buffer);
 }
 
-/*
-=============
-FS_FreeFile
-=============
-*/
 void FS_FreeFile( void *buffer ) {
 	if ( !fs_searchpaths ) {
 		Com_Error( ERR_FATAL, "Filesystem call made without initialization" );
@@ -1937,16 +1854,6 @@ void FS_WriteFile( const char *qpath, const void *buffer, int size ) {
 
 	FS_FCloseFile( f );
 }
-
-
-
-/*
-==========================================================================
-
-ZIP FILE LOADING
-
-==========================================================================
-*/
 
 /*
 =================
@@ -2133,11 +2040,6 @@ static int FS_ReturnPath( const char *zname, char *zpath, int *depth ) {
 	return len;
 }
 
-/*
-==================
-FS_AddFileToList
-==================
-*/
 static int FS_AddFileToList( char *name, char *list[MAX_FOUND_FILES], int nfiles ) {
 	int		i;
 
@@ -2290,20 +2192,10 @@ char **FS_ListFilteredFiles( const char *path, const char *extension, char *filt
 	return listCopy;
 }
 
-/*
-=================
-FS_ListFiles
-=================
-*/
 char **FS_ListFiles( const char *path, const char *extension, int *numfiles ) {
 	return FS_ListFilteredFiles( path, extension, NULL, numfiles, qfalse );
 }
 
-/*
-=================
-FS_FreeFileList
-=================
-*/
 void FS_FreeFileList( char **list ) {
 	int		i;
 
@@ -2323,11 +2215,6 @@ void FS_FreeFileList( char **list ) {
 }
 
 
-/*
-================
-FS_GetFileList
-================
-*/
 int	FS_GetFileList(  const char *path, const char *extension, char *listbuf, int bufsize ) {
 	int		nFiles, i, nTotal, nLen;
 	char **pFiles = NULL;
@@ -2420,11 +2307,6 @@ static char** Sys_ConcatenateFileLists( char **list0, char **list1 )
 	return cat;
 }
 
-/*
-================
-FS_GetModDescription
-================
-*/
 void FS_GetModDescription( const char *modDir, char *description, int descriptionLen ) {
 	fileHandle_t	descHandle;
 	char			descPath[MAX_QPATH];
@@ -2556,11 +2438,6 @@ int	FS_GetModList( char *listbuf, int bufsize ) {
 
 //============================================================================
 
-/*
-================
-FS_Dir_f
-================
-*/
 void FS_Dir_f( void ) {
 	char	*path;
 	char	*extension;
@@ -2592,11 +2469,6 @@ void FS_Dir_f( void ) {
 	FS_FreeFileList( dirnames );
 }
 
-/*
-===========
-FS_ConvertPath
-===========
-*/
 void FS_ConvertPath( char *s ) {
 	while (*s) {
 		if ( *s == '\\' || *s == ':' ) {
@@ -2645,11 +2517,6 @@ int FS_PathCmp( const char *s1, const char *s2 ) {
 	return 0;		// strings are equal
 }
 
-/*
-================
-FS_SortFileList
-================
-*/
 void FS_SortFileList(char **filelist, int numfiles) {
 	int i, j, k, numsortedfiles;
 	char **sortedlist;
@@ -2673,11 +2540,6 @@ void FS_SortFileList(char **filelist, int numfiles) {
 	Z_Free(sortedlist);
 }
 
-/*
-================
-FS_NewDir_f
-================
-*/
 void FS_NewDir_f( void ) {
 	char	*filter;
 	char	**dirnames;
@@ -2706,12 +2568,6 @@ void FS_NewDir_f( void ) {
 	FS_FreeFileList( dirnames );
 }
 
-/*
-============
-FS_Path_f
-
-============
-*/
 void FS_Path_f( void ) {
 	searchpath_t	*s;
 	int				i;
@@ -2741,11 +2597,6 @@ void FS_Path_f( void ) {
 	}
 }
 
-/*
-============
-FS_Which
-============
-*/
 
 qboolean FS_Which(const char *filename, void *searchPath)
 {
@@ -2768,11 +2619,6 @@ qboolean FS_Which(const char *filename, void *searchPath)
 	return qfalse;
 }
 
-/*
-============
-FS_Which_f
-============
-*/
 void FS_Which_f( void ) {
 	searchpath_t	*search;
 	char		*filename;
@@ -2956,11 +2802,6 @@ void FS_AddGameDirectory( const char *path, const char *dir ) {
 	fs_searchpaths = search;
 }
 
-/*
-================
-FS_idPak
-================
-*/
 qboolean FS_idPak(char *pak, char *base, int numPaks)
 {
 	int i;
@@ -3224,11 +3065,6 @@ static void FS_ReorderPurePaks( void )
 	}
 }
 
-/*
-================
-FS_Startup
-================
-*/
 static void FS_Startup( const char *gameName )
 {
 	const char *homePath;
@@ -3514,11 +3350,6 @@ const char *FS_ReferencedPakNames( void ) {
 	return info;
 }
 
-/*
-=====================
-FS_ClearPakReferences
-=====================
-*/
 void FS_ClearPakReferences( int flags ) {
 	searchpath_t *search;
 
@@ -3683,11 +3514,6 @@ void FS_InitFilesystem( void ) {
 }
 
 
-/*
-================
-FS_Restart
-================
-*/
 void FS_Restart( int checksumFeed ) {
 	const char *lastGameDir;
 

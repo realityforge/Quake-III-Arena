@@ -179,11 +179,6 @@ void CON_Shutdown( void )
 	fcntl(STDIN_FILENO, F_SETFL, fcntl(STDIN_FILENO, F_GETFL, 0) & ~O_NONBLOCK);
 }
 
-/*
-==================
-Hist_Add
-==================
-*/
 void Hist_Add(field_t *field)
 {
 	int i;
@@ -209,11 +204,6 @@ void Hist_Add(field_t *field)
 	hist_current = -1; // re-init
 }
 
-/*
-==================
-Hist_Prev
-==================
-*/
 field_t *Hist_Prev( void )
 {
 	int hist_prev;
@@ -230,11 +220,6 @@ field_t *Hist_Prev( void )
 	return &(ttyEditLines[hist_current]);
 }
 
-/*
-==================
-Hist_Next
-==================
-*/
 field_t *Hist_Next( void )
 {
 	assert(hist_count <= CON_HISTORY);
@@ -323,11 +308,6 @@ void CON_Init( void )
 	CON_Show();
 }
 
-/*
-==================
-CON_Input
-==================
-*/
 char *CON_Input( void )
 {
 	// we use this when sending back commands
@@ -494,11 +474,6 @@ char *CON_Input( void )
 	return NULL;
 }
 
-/*
-==================
-CON_Print
-==================
-*/
 void CON_Print( const char *msg )
 {
 	if (!msg[0])

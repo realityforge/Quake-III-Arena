@@ -33,11 +33,6 @@ static qhandle_t	loadingPlayerIcons[MAX_LOADING_PLAYER_ICONS];
 static qhandle_t	loadingItemIcons[MAX_LOADING_ITEM_ICONS];
 
 
-/*
-===================
-CG_DrawLoadingIcons
-===================
-*/
 static void CG_DrawLoadingIcons( void ) {
 	int		n;
 	int		x, y;
@@ -59,23 +54,12 @@ static void CG_DrawLoadingIcons( void ) {
 }
 
 
-/*
-======================
-CG_LoadingString
-
-======================
-*/
 void CG_LoadingString( const char *s ) {
 	Q_strncpyz( cg.infoScreenText, s, sizeof( cg.infoScreenText ) );
 
 	trap_UpdateScreen();
 }
 
-/*
-===================
-CG_LoadingItem
-===================
-*/
 void CG_LoadingItem( int itemNum ) {
 	gitem_t		*item;
 
@@ -88,11 +72,6 @@ void CG_LoadingItem( int itemNum ) {
 	CG_LoadingString( item->pickup_name );
 }
 
-/*
-===================
-CG_LoadingClient
-===================
-*/
 void CG_LoadingClient( int clientNum ) {
 	const char		*info;
 	char			*skin;

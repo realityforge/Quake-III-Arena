@@ -64,22 +64,12 @@ typedef struct bot_ctftaskpreference_s
 bot_ctftaskpreference_t ctftaskpreferences[MAX_CLIENTS];
 
 
-/*
-==================
-BotValidTeamLeader
-==================
-*/
 int BotValidTeamLeader(bot_state_t *bs) {
 	if (!strlen(bs->teamleader)) return qfalse;
 	if (ClientFromName(bs->teamleader) == -1) return qfalse;
 	return qtrue;
 }
 
-/*
-==================
-BotNumTeamMates
-==================
-*/
 int BotNumTeamMates(bot_state_t *bs) {
 	int i, numplayers;
 	char buf[MAX_INFO_STRING];
@@ -99,11 +89,6 @@ int BotNumTeamMates(bot_state_t *bs) {
 	return numplayers;
 }
 
-/*
-==================
-BotClientTravelTimeToGoal
-==================
-*/
 int BotClientTravelTimeToGoal(int client, bot_goal_t *goal) {
 	playerState_t ps;
 	int areanum;
@@ -118,11 +103,6 @@ int BotClientTravelTimeToGoal(int client, bot_goal_t *goal) {
 	return trap_AAS_AreaTravelTimeToGoalArea(areanum, ps.origin, goal->areanum, TFL_DEFAULT);
 }
 
-/*
-==================
-BotSortTeamMatesByBaseTravelTime
-==================
-*/
 int BotSortTeamMatesByBaseTravelTime(bot_state_t *bs, int *teammates, int maxteammates) {
 
 	int i, j, k, numteammates, traveltime;
@@ -179,11 +159,6 @@ int BotSortTeamMatesByBaseTravelTime(bot_state_t *bs, int *teammates, int maxtea
 	return numteammates;
 }
 
-/*
-==================
-BotSetTeamMateTaskPreference
-==================
-*/
 void BotSetTeamMateTaskPreference(bot_state_t *bs, int teammate, int preference) {
 	char teammatename[MAX_NETNAME];
 
@@ -192,11 +167,6 @@ void BotSetTeamMateTaskPreference(bot_state_t *bs, int teammate, int preference)
 	strcpy(ctftaskpreferences[teammate].name, teammatename);
 }
 
-/*
-==================
-BotGetTeamMateTaskPreference
-==================
-*/
 int BotGetTeamMateTaskPreference(bot_state_t *bs, int teammate) {
 	char teammatename[MAX_NETNAME];
 
@@ -206,11 +176,6 @@ int BotGetTeamMateTaskPreference(bot_state_t *bs, int teammate) {
 	return ctftaskpreferences[teammate].preference;
 }
 
-/*
-==================
-BotSortTeamMatesByTaskPreference
-==================
-*/
 int BotSortTeamMatesByTaskPreference(bot_state_t *bs, int *teammates, int numteammates) {
 	int defenders[MAX_CLIENTS], numdefenders;
 	int attackers[MAX_CLIENTS], numattackers;
@@ -244,11 +209,6 @@ int BotSortTeamMatesByTaskPreference(bot_state_t *bs, int *teammates, int numtea
 	return numteammates;
 }
 
-/*
-==================
-BotSayTeamOrders
-==================
-*/
 void BotSayTeamOrderAlways(bot_state_t *bs, int toclient) {
 	char teamchat[MAX_MESSAGE_SIZE];
 	char buf[MAX_MESSAGE_SIZE];
@@ -267,11 +227,6 @@ void BotSayTeamOrderAlways(bot_state_t *bs, int toclient) {
 	}
 }
 
-/*
-==================
-BotSayTeamOrders
-==================
-*/
 void BotSayTeamOrder(bot_state_t *bs, int toclient) {
 #ifdef MISSIONPACK
 	// voice chats only
@@ -283,11 +238,6 @@ void BotSayTeamOrder(bot_state_t *bs, int toclient) {
 #endif
 }
 
-/*
-==================
-BotVoiceChat
-==================
-*/
 void BotVoiceChat(bot_state_t *bs, int toclient, char *voicechat) {
 #ifdef MISSIONPACK
 	if (toclient == -1)
@@ -299,11 +249,6 @@ void BotVoiceChat(bot_state_t *bs, int toclient, char *voicechat) {
 #endif
 }
 
-/*
-==================
-BotVoiceChatOnly
-==================
-*/
 void BotVoiceChatOnly(bot_state_t *bs, int toclient, char *voicechat) {
 #ifdef MISSIONPACK
 	if (toclient == -1)
@@ -315,22 +260,12 @@ void BotVoiceChatOnly(bot_state_t *bs, int toclient, char *voicechat) {
 #endif
 }
 
-/*
-==================
-BotSayVoiceTeamOrder
-==================
-*/
 void BotSayVoiceTeamOrder(bot_state_t *bs, int toclient, char *voicechat) {
 #ifdef MISSIONPACK
 	BotVoiceChat(bs, toclient, voicechat);
 #endif
 }
 
-/*
-==================
-BotCTFOrders
-==================
-*/
 void BotCTFOrders_BothFlagsNotAtBase(bot_state_t *bs) {
 	int numteammates, defenders, attackers, i, other;
 	int teammates[MAX_CLIENTS] = {0};
@@ -440,11 +375,6 @@ void BotCTFOrders_BothFlagsNotAtBase(bot_state_t *bs) {
 	}
 }
 
-/*
-==================
-BotCTFOrders
-==================
-*/
 void BotCTFOrders_FlagNotAtBase(bot_state_t *bs) {
 	int numteammates, defenders, attackers, i;
 	int teammates[MAX_CLIENTS];
@@ -581,11 +511,6 @@ void BotCTFOrders_FlagNotAtBase(bot_state_t *bs) {
 	}
 }
 
-/*
-==================
-BotCTFOrders
-==================
-*/
 void BotCTFOrders_EnemyFlagNotAtBase(bot_state_t *bs) {
 	int numteammates, defenders, attackers, i, other;
 	int teammates[MAX_CLIENTS];
@@ -684,11 +609,6 @@ void BotCTFOrders_EnemyFlagNotAtBase(bot_state_t *bs) {
 }
 
 
-/*
-==================
-BotCTFOrders
-==================
-*/
 void BotCTFOrders_BothFlagsAtBase(bot_state_t *bs) {
 	int numteammates, defenders, attackers, i;
 	int teammates[MAX_CLIENTS] = {0};
@@ -825,11 +745,6 @@ void BotCTFOrders_BothFlagsAtBase(bot_state_t *bs) {
 	}
 }
 
-/*
-==================
-BotCTFOrders
-==================
-*/
 void BotCTFOrders(bot_state_t *bs) {
 	int flagstatus;
 
@@ -846,11 +761,6 @@ void BotCTFOrders(bot_state_t *bs) {
 }
 
 
-/*
-==================
-BotCreateGroup
-==================
-*/
 void BotCreateGroup(bot_state_t *bs, int *teammates, int groupsize) {
 	char name[MAX_NETNAME], leadername[MAX_NETNAME];
 	int i;
@@ -1888,11 +1798,6 @@ void BotHarvesterOrders(bot_state_t *bs) {
 }
 #endif
 
-/*
-==================
-FindHumanTeamLeader
-==================
-*/
 int FindHumanTeamLeader(bot_state_t *bs) {
 	int i;
 
@@ -1919,11 +1824,6 @@ int FindHumanTeamLeader(bot_state_t *bs) {
 	return qfalse;
 }
 
-/*
-==================
-BotTeamAI
-==================
-*/
 void BotTeamAI(bot_state_t *bs) {
 	int numteammates;
 	char netname[MAX_NETNAME];

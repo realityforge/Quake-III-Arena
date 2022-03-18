@@ -70,11 +70,6 @@ typedef struct {
 
 static errorMessage_t s_errorMessage;
 
-/*
-=================
-MainMenu_ExitAction
-=================
-*/
 static void MainMenu_ExitAction( qboolean result ) {
 	if( !result ) {
 		return;
@@ -85,11 +80,6 @@ static void MainMenu_ExitAction( qboolean result ) {
 
 
 
-/*
-=================
-Main_MenuEvent
-=================
-*/
 void Main_MenuEvent (void* ptr, int event) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -132,11 +122,6 @@ void Main_MenuEvent (void* ptr, int event) {
 }
 
 
-/*
-===============
-MainMenu_Cache
-===============
-*/
 void MainMenu_Cache( void ) {
 	s_main.bannerModel = trap_R_RegisterModel( MAIN_BANNER_MODEL );
 }
@@ -225,11 +210,6 @@ static void Main_MenuDraw( void ) {
 }
 
 
-/*
-===============
-UI_TeamArenaExists
-===============
-*/
 static qboolean UI_TeamArenaExists( void ) {
 	int		numdirs;
 	char	dirlist[2048];

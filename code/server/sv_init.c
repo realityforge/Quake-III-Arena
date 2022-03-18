@@ -104,12 +104,6 @@ void SV_UpdateConfigstrings(client_t *client)
 	}
 }
 
-/*
-===============
-SV_SetConfigstring
-
-===============
-*/
 void SV_SetConfigstring (int index, const char *val) {
 	int		i;
 	client_t	*client;
@@ -152,12 +146,6 @@ void SV_SetConfigstring (int index, const char *val) {
 	}
 }
 
-/*
-===============
-SV_GetConfigstring
-
-===============
-*/
 void SV_GetConfigstring( int index, char *buffer, int bufferSize ) {
 	if ( bufferSize < 1 ) {
 		Com_Error( ERR_DROP, "SV_GetConfigstring: bufferSize == %i", bufferSize );
@@ -174,12 +162,6 @@ void SV_GetConfigstring( int index, char *buffer, int bufferSize ) {
 }
 
 
-/*
-===============
-SV_SetUserinfo
-
-===============
-*/
 void SV_SetUserinfo( int index, const char *val ) {
 	if ( index < 0 || index >= sv_maxclients->integer ) {
 		Com_Error (ERR_DROP, "SV_SetUserinfo: bad index %i", index);
@@ -195,12 +177,6 @@ void SV_SetUserinfo( int index, const char *val ) {
 
 
 
-/*
-===============
-SV_GetUserinfo
-
-===============
-*/
 void SV_GetUserinfo( int index, char *buffer, int bufferSize ) {
 	if ( bufferSize < 1 ) {
 		Com_Error( ERR_DROP, "SV_GetUserinfo: bufferSize == %i", bufferSize );
@@ -240,12 +216,6 @@ static void SV_CreateBaseline( void ) {
 }
 
 
-/*
-===============
-SV_BoundMaxClients
-
-===============
-*/
 static void SV_BoundMaxClients( int minimum ) {
 	// get the current maxclients value
 	Cvar_Get( "sv_maxclients", "8", 0 );
@@ -292,11 +262,6 @@ static void SV_Startup( void ) {
 }
 
 
-/*
-==================
-SV_ChangeMaxClients
-==================
-*/
 void SV_ChangeMaxClients( void ) {
 	int		oldMaxClients;
 	int		i;
@@ -353,11 +318,6 @@ void SV_ChangeMaxClients( void ) {
     svs.numSnapshotEntities = sv_maxclients->integer * LOCAL_PACKET_BACKUP * MAX_SNAPSHOT_ENTITIES;
 }
 
-/*
-================
-SV_ClearServer
-================
-*/
 static void SV_ClearServer(void) {
 	int i;
 
@@ -369,11 +329,6 @@ static void SV_ClearServer(void) {
 	memset (&sv, 0, sizeof(sv));
 }
 
-/*
-================
-SV_TouchFile
-================
-*/
 static void SV_TouchFile( const char *filename ) {
 	fileHandle_t	f;
 

@@ -149,11 +149,6 @@ void S_Base_MasterGain( float val )
 
 
 
-/*
-=================
-S_Base_SoundList
-=================
-*/
 void S_Base_SoundList( void ) {
 	int		i;
 	sfx_t	*sfx;
@@ -310,11 +305,6 @@ static sfx_t *S_FindName( const char *name ) {
 	return sfx;
 }
 
-/*
-=================
-S_DefaultSound
-=================
-*/
 void S_DefaultSound( sfx_t *sfx ) {
 	
 	int		i;
@@ -384,12 +374,6 @@ sfxHandle_t	S_Base_RegisterSound( const char *name, qboolean compressed ) {
 	return sfx - s_knownSfx;
 }
 
-/*
-=====================
-S_BeginRegistration
-
-=====================
-*/
 void S_Base_BeginRegistration( void ) {
 	s_soundMuted = qfalse;		// we can play again
 
@@ -658,11 +642,6 @@ void S_Base_StartSound( vec3_t origin, int entityNum, int entchannel, sfxHandle_
 	S_Base_StartSoundEx( origin, entityNum, entchannel, sfxHandle, qfalse );
 }
 
-/*
-==================
-S_StartLocalSound
-==================
-*/
 void S_Base_StartLocalSound( sfxHandle_t sfxHandle, int channelNum ) {
 	if ( !s_soundStarted || s_soundMuted ) {
 		return;
@@ -711,11 +690,6 @@ void S_Base_ClearSoundBuffer( void ) {
 	SNDDMA_Submit ();
 }
 
-/*
-==================
-S_StopAllSounds
-==================
-*/
 void S_Base_StopAllSounds(void) {
 	if ( !s_soundStarted ) {
 		return;
@@ -741,12 +715,6 @@ void S_Base_StopLoopingSound(int entityNum) {
 	loopSounds[entityNum].kill = qfalse;
 }
 
-/*
-==================
-S_ClearLoopingSounds
-
-==================
-*/
 void S_Base_ClearLoopingSounds( qboolean killall ) {
 	int i;
 	for ( i = 0 ; i < MAX_GENTITIES ; i++) {
@@ -1340,21 +1308,6 @@ void S_Update_(void) {
 	lastTime = thisTime;
 }
 
-
-
-/*
-===============================================================================
-
-background music functions
-
-===============================================================================
-*/
-
-/*
-======================
-S_StopBackgroundTrack
-======================
-*/
 void S_Base_StopBackgroundTrack( void ) {
 	if(!s_backgroundStream)
 		return;
@@ -1363,11 +1316,6 @@ void S_Base_StopBackgroundTrack( void ) {
 	s_rawend[0] = 0;
 }
 
-/*
-======================
-S_OpenBackgroundStream
-======================
-*/
 static void S_OpenBackgroundStream( const char *filename ) {
 	// close the background track, but DON'T reset s_rawend
 	// if restarting the same back ground track
@@ -1389,11 +1337,6 @@ static void S_OpenBackgroundStream( const char *filename ) {
 	}
 }
 
-/*
-======================
-S_StartBackgroundTrack
-======================
-*/
 void S_Base_StartBackgroundTrack( const char *intro, const char *loop ){
 	if ( !intro ) {
 		intro = "";
@@ -1414,11 +1357,6 @@ void S_Base_StartBackgroundTrack( const char *intro, const char *loop ){
 	S_OpenBackgroundStream( intro );
 }
 
-/*
-======================
-S_UpdateBackgroundTrack
-======================
-*/
 void S_UpdateBackgroundTrack( void ) {
 	int		bufferSamples;
 	int		fileSamples;
@@ -1489,11 +1427,6 @@ void S_UpdateBackgroundTrack( void ) {
 }
 
 
-/*
-======================
-S_FreeOldestSound
-======================
-*/
 
 void S_FreeOldestSound( void ) {
 	int	i, oldest, used;
@@ -1543,11 +1476,6 @@ void S_Base_Shutdown( void ) {
 	Cmd_RemoveCommand("s_info");
 }
 
-/*
-================
-S_Init
-================
-*/
 qboolean S_Base_Init( soundInterface_t *si ) {
 	qboolean	r;
 

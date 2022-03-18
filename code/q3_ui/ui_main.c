@@ -84,11 +84,6 @@ Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, i
 }
 
 
-/*
-================
-cvars
-================
-*/
 
 typedef struct {
 	vmCvar_t	*vmCvar;
@@ -217,11 +212,6 @@ static cvarTable_t		cvarTable[] = {
 static int cvarTableSize = ARRAY_LEN( cvarTable );
 
 
-/*
-=================
-UI_RegisterCvars
-=================
-*/
 void UI_RegisterCvars( void ) {
 	int			i;
 	cvarTable_t	*cv;
@@ -231,11 +221,6 @@ void UI_RegisterCvars( void ) {
 	}
 }
 
-/*
-=================
-UI_UpdateCvars
-=================
-*/
 void UI_UpdateCvars( void ) {
 	int			i;
 	cvarTable_t	*cv;

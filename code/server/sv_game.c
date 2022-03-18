@@ -183,11 +183,6 @@ qboolean SV_inPVSIgnorePortals( const vec3_t p1, const vec3_t p2)
 }
 
 
-/*
-========================
-SV_AdjustAreaPortalState
-========================
-*/
 void SV_AdjustAreaPortalState( sharedEntity_t *ent, qboolean open ) {
 	svEntity_t	*svEnt;
 
@@ -199,11 +194,6 @@ void SV_AdjustAreaPortalState( sharedEntity_t *ent, qboolean open ) {
 }
 
 
-/*
-==================
-SV_EntityContact
-==================
-*/
 qboolean	SV_EntityContact( vec3_t mins, vec3_t maxs, const sharedEntity_t *gEnt, int capsule ) {
 	const float	*origin, *angles;
 	clipHandle_t	ch;
@@ -221,12 +211,6 @@ qboolean	SV_EntityContact( vec3_t mins, vec3_t maxs, const sharedEntity_t *gEnt,
 }
 
 
-/*
-===============
-SV_GetServerinfo
-
-===============
-*/
 void SV_GetServerinfo( char *buffer, int bufferSize ) {
 	if ( bufferSize < 1 ) {
 		Com_Error( ERR_DROP, "SV_GetServerinfo: bufferSize == %i", bufferSize );
@@ -234,12 +218,6 @@ void SV_GetServerinfo( char *buffer, int bufferSize ) {
 	Q_strncpyz( buffer, Cvar_InfoString( CVAR_SERVERINFO ), bufferSize );
 }
 
-/*
-===============
-SV_LocateGameData
-
-===============
-*/
 void SV_LocateGameData( sharedEntity_t *gEnts, int numGEntities, int sizeofGEntity_t,
 					   playerState_t *clients, int sizeofGameClient ) {
 	sv.gentities = gEnts;
@@ -251,12 +229,6 @@ void SV_LocateGameData( sharedEntity_t *gEnts, int numGEntities, int sizeofGEnti
 }
 
 
-/*
-===============
-SV_GetUsercmd
-
-===============
-*/
 void SV_GetUsercmd( int clientNum, usercmd_t *cmd ) {
 	if ( clientNum < 0 || clientNum >= sv_maxclients->integer ) {
 		Com_Error( ERR_DROP, "SV_GetUsercmd: bad clientNum:%i", clientNum );

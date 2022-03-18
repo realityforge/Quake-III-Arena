@@ -342,11 +342,6 @@ int Pickup_Armor( gentity_t *ent, gentity_t *other ) {
 
 //======================================================================
 
-/*
-===============
-RespawnItem
-===============
-*/
 void RespawnItem( gentity_t *ent ) {
 	if (!ent) {
 		return;
@@ -418,11 +413,6 @@ void RespawnItem( gentity_t *ent ) {
 }
 
 
-/*
-===============
-Touch_Item
-===============
-*/
 void Touch_Item (gentity_t *ent, gentity_t *other, trace_t *trace) {
 	int			respawn;
 	qboolean	predict;
@@ -716,11 +706,6 @@ void FinishSpawningItem( gentity_t *ent ) {
 
 qboolean	itemRegistered[MAX_ITEMS];
 
-/*
-==================
-G_CheckTeamItems
-==================
-*/
 void G_CheckTeamItems( void ) {
 
 	// Set up team stuff
@@ -800,11 +785,6 @@ void G_CheckTeamItems( void ) {
 #endif
 }
 
-/*
-==============
-ClearRegisteredItems
-==============
-*/
 void ClearRegisteredItems( void ) {
 	memset( itemRegistered, 0, sizeof( itemRegistered ) );
 
@@ -862,11 +842,6 @@ void SaveRegisteredItems( void ) {
 	trap_SetConfigstring(CS_ITEMS, string);
 }
 
-/*
-============
-G_ItemDisabled
-============
-*/
 int G_ItemDisabled( gitem_t *item ) {
 
 	char name[128];
@@ -914,12 +889,6 @@ void G_SpawnItem (gentity_t *ent, gitem_t *item) {
 }
 
 
-/*
-================
-G_BounceItem
-
-================
-*/
 void G_BounceItem( gentity_t *ent, trace_t *trace ) {
 	vec3_t	velocity;
 	float	dot;
@@ -949,12 +918,6 @@ void G_BounceItem( gentity_t *ent, trace_t *trace ) {
 }
 
 
-/*
-================
-G_RunItem
-
-================
-*/
 void G_RunItem( gentity_t *ent ) {
 	vec3_t		origin;
 	trace_t		tr;

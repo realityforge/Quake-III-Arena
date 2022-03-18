@@ -143,11 +143,6 @@ static int numIP;
 //=============================================================================
 
 
-/*
-====================
-NET_ErrorString
-====================
-*/
 char *NET_ErrorString( void ) {
 #ifdef _WIN32
 	//FIXME: replace with FormatMessage?
@@ -258,11 +253,6 @@ static struct addrinfo *SearchAddrInfo(struct addrinfo *hints, sa_family_t famil
 	return NULL;
 }
 
-/*
-=============
-Sys_StringToSockaddr
-=============
-*/
 static qboolean Sys_StringToSockaddr(const char *s, struct sockaddr *sadr, int sadr_len, sa_family_t family)
 {
 	struct addrinfo hints;
@@ -327,11 +317,6 @@ static qboolean Sys_StringToSockaddr(const char *s, struct sockaddr *sadr, int s
 	return qfalse;
 }
 
-/*
-=============
-Sys_SockaddrToString
-=============
-*/
 static void Sys_SockaddrToString(char *dest, int destlen, struct sockaddr *input)
 {
 	socklen_t inputlen;
@@ -345,11 +330,6 @@ static void Sys_SockaddrToString(char *dest, int destlen, struct sockaddr *input
 		*dest = '\0';
 }
 
-/*
-=============
-Sys_StringToAdr
-=============
-*/
 qboolean Sys_StringToAdr( const char *s, netadr_t *a, netadrtype_t family ) {
 	struct sockaddr_storage sadr;
 	sa_family_t fam;
@@ -629,11 +609,6 @@ qboolean NET_GetPacket(netadr_t *net_from, msg_t *net_message, fd_set *fdr)
 
 static char socksBuf[4096];
 
-/*
-==================
-Sys_SendPacket
-==================
-*/
 void Sys_SendPacket( int length, const void *data, netadr_t to ) {
 	int				ret = SOCKET_ERROR;
 	struct sockaddr_storage	addr;
@@ -775,11 +750,6 @@ qboolean Sys_IsLANAddress( netadr_t adr ) {
 	return qfalse;
 }
 
-/*
-==================
-Sys_ShowIP
-==================
-*/
 void Sys_ShowIP(void) {
 	int i;
 	char addrbuf[NET_ADDRSTRMAXLEN];
@@ -799,11 +769,6 @@ void Sys_ShowIP(void) {
 //=============================================================================
 
 
-/*
-====================
-NET_IPSocket
-====================
-*/
 SOCKET NET_IPSocket( char *net_interface, int port, int *err ) {
 	SOCKET				newsocket;
 	struct sockaddr_in	address;
@@ -1053,11 +1018,6 @@ void NET_LeaveMulticast6()
 	}
 }
 
-/*
-====================
-NET_OpenSocks
-====================
-*/
 void NET_OpenSocks( int port ) {
 	struct sockaddr_in	address;
 	struct hostent		*h;
@@ -1220,11 +1180,6 @@ void NET_OpenSocks( int port ) {
 }
 
 
-/*
-=====================
-NET_AddLocalAddress
-=====================
-*/
 static void NET_AddLocalAddress(char *ifname, struct sockaddr *addr, struct sockaddr *netmask)
 {
 	int addrlen;
@@ -1336,11 +1291,6 @@ static void NET_GetLocalAddress( void ) {
 }
 #endif
 
-/*
-====================
-NET_OpenIP
-====================
-*/
 void NET_OpenIP( void ) {
 	int		i;
 	int		err;
@@ -1404,11 +1354,6 @@ void NET_OpenIP( void ) {
 //===================================================================
 
 
-/*
-====================
-NET_GetCvars
-====================
-*/
 static qboolean NET_GetCvars( void ) {
 	int modified;
 
@@ -1478,11 +1423,6 @@ static qboolean NET_GetCvars( void ) {
 }
 
 
-/*
-====================
-NET_Config
-====================
-*/
 void NET_Config( qboolean enableNetworking ) {
 	qboolean	modified;
 	qboolean	stop;
@@ -1559,11 +1499,6 @@ void NET_Config( qboolean enableNetworking ) {
 }
 
 
-/*
-====================
-NET_Init
-====================
-*/
 void NET_Init( void ) {
 #ifdef _WIN32
 	int		r;
@@ -1584,11 +1519,6 @@ void NET_Init( void ) {
 }
 
 
-/*
-====================
-NET_Shutdown
-====================
-*/
 void NET_Shutdown( void ) {
 	if ( !networkingEnabled ) {
 		return;
@@ -1694,11 +1624,6 @@ void NET_Sleep(int msec)
 		NET_Event(&fdr);
 }
 
-/*
-====================
-NET_Restart_f
-====================
-*/
 void NET_Restart_f(void)
 {
 	NET_Config(qtrue);

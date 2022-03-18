@@ -83,11 +83,6 @@ void Sys_SetFloatEnv(void)
 	_controlfp(FPUCW, FPUCWMASK);
 }
 
-/*
-================
-Sys_DefaultHomePath
-================
-*/
 char *Sys_DefaultHomePath( void )
 {
 	TCHAR szPath[MAX_PATH];
@@ -130,11 +125,6 @@ char *Sys_DefaultHomePath( void )
 	return homePath;
 }
 
-/*
-================
-Sys_Milliseconds
-================
-*/
 int sys_timeBase;
 int Sys_Milliseconds (void)
 {
@@ -150,11 +140,6 @@ int Sys_Milliseconds (void)
 	return sys_curtime;
 }
 
-/*
-================
-Sys_RandomBytes
-================
-*/
 qboolean Sys_RandomBytes( byte *string, int len )
 {
 	HCRYPTPROV  prov;
@@ -175,11 +160,6 @@ qboolean Sys_RandomBytes( byte *string, int len )
 
 #define MEM_THRESHOLD 96*1024*1024
 
-/*
-==================
-Sys_LowPhysicalMemory
-==================
-*/
 qboolean Sys_LowPhysicalMemory( void )
 {
 	MEMORYSTATUS stat;
@@ -187,11 +167,6 @@ qboolean Sys_LowPhysicalMemory( void )
 	return (stat.dwTotalPhys <= MEM_THRESHOLD) ? qtrue : qfalse;
 }
 
-/*
-==============
-Sys_Basename
-==============
-*/
 const char *Sys_Basename( char *path )
 {
 	static char base[ MAX_OSPATH ] = { 0 };
@@ -217,11 +192,6 @@ const char *Sys_Basename( char *path )
 	return base;
 }
 
-/*
-==============
-Sys_Dirname
-==============
-*/
 const char *Sys_Dirname( char *path )
 {
 	static char dir[ MAX_OSPATH ] = { 0 };
@@ -238,11 +208,6 @@ const char *Sys_Dirname( char *path )
 	return dir;
 }
 
-/*
-==============
-Sys_FOpen
-==============
-*/
 FILE *Sys_FOpen( const char *ospath, const char *mode ) {
 	size_t length;
 
@@ -255,11 +220,6 @@ FILE *Sys_FOpen( const char *ospath, const char *mode ) {
 	return fopen( ospath, mode );
 }
 
-/*
-==============
-Sys_Mkdir
-==============
-*/
 qboolean Sys_Mkdir( const char *path )
 {
 	if( !CreateDirectory( path, NULL ) )
@@ -282,11 +242,6 @@ FILE *Sys_Mkfifo( const char *ospath )
 	return NULL;
 }
 
-/*
-==============
-Sys_Cwd
-==============
-*/
 char *Sys_Cwd( void ) {
 	static char cwd[MAX_OSPATH];
 
@@ -306,11 +261,6 @@ DIRECTORY SCANNING
 
 #define MAX_FOUND_FILES 0x1000
 
-/*
-==============
-Sys_ListFilteredFiles
-==============
-*/
 void Sys_ListFilteredFiles( const char *basedir, char *subdirs, char *filter, char **list, int *numfiles )
 {
 	char		search[MAX_OSPATH], newsubdirs[MAX_OSPATH];
@@ -359,11 +309,6 @@ void Sys_ListFilteredFiles( const char *basedir, char *subdirs, char *filter, ch
 	_findclose (findhandle);
 }
 
-/*
-==============
-strgtr
-==============
-*/
 static qboolean strgtr(const char *s0, const char *s1)
 {
 	int l0, l1, i;
@@ -386,11 +331,6 @@ static qboolean strgtr(const char *s0, const char *s1)
 	return qfalse;
 }
 
-/*
-==============
-Sys_ListFiles
-==============
-*/
 char **Sys_ListFiles( const char *directory, const char *extension, char *filter, int *numfiles, qboolean wantsubs )
 {
 	char		search[MAX_OSPATH];
@@ -498,11 +438,6 @@ char **Sys_ListFiles( const char *directory, const char *extension, char *filter
 	return listCopy;
 }
 
-/*
-==============
-Sys_FreeFileList
-==============
-*/
 void Sys_FreeFileList( char **list )
 {
 	int i;

@@ -108,25 +108,10 @@ void R_DlightBmodel( bmodel_t *bmodel ) {
 	}
 }
 
-
-/*
-=============================================================================
-
-LIGHT SAMPLING
-
-=============================================================================
-*/
-
 extern	cvar_t	*r_ambientScale;
 extern	cvar_t	*r_directedScale;
 extern	cvar_t	*r_debugLight;
 
-/*
-=================
-R_SetupEntityLightingGrid
-
-=================
-*/
 static void R_SetupEntityLightingGrid( trRefEntity_t *ent, world_t *world ) {
 	vec3_t	lightOrigin;
 	int		pos[3];
@@ -263,11 +248,6 @@ static void R_SetupEntityLightingGrid( trRefEntity_t *ent, world_t *world ) {
 }
 
 
-/*
-===============
-LogLight
-===============
-*/
 static void LogLight( trRefEntity_t *ent ) {
 	int	max1, max2;
 
@@ -423,11 +403,6 @@ void R_SetupEntityLighting( const trRefdef_t *refdef, trRefEntity_t *ent ) {
 	VectorCopy(lightDir, ent->lightDir);
 }
 
-/*
-=================
-R_LightForPoint
-=================
-*/
 int R_LightForPoint( vec3_t point, vec3_t ambientLight, vec3_t directedLight, vec3_t lightDir )
 {
 	trRefEntity_t ent;

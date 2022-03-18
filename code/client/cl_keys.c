@@ -419,11 +419,6 @@ void Field_BigDraw( field_t *edit, int x, int y, int width, qboolean showCursor,
 	Field_VariableSizeDraw( edit, x, y, width, BIGCHAR_WIDTH, showCursor, noColorEscape );
 }
 
-/*
-================
-Field_Paste
-================
-*/
 void Field_Paste( field_t *edit ) {
 	char	*cbd;
 	int		pasteLen, i;
@@ -509,11 +504,6 @@ void Field_KeyDownEvent( field_t *edit, int key ) {
 	}
 }
 
-/*
-==================
-Field_CharEvent
-==================
-*/
 void Field_CharEvent( field_t *edit, int ch ) {
 	int		len;
 
@@ -797,11 +787,6 @@ void Key_SetOverstrikeMode( qboolean state ) {
 }
 
 
-/*
-===================
-Key_IsDown
-===================
-*/
 qboolean Key_IsDown( int keynum ) {
 	if ( keynum < 0 || keynum >= MAX_KEYS ) {
 		return qfalse;
@@ -898,11 +883,6 @@ char *Key_KeynumToString( int keynum ) {
 }
 
 
-/*
-===================
-Key_SetBinding
-===================
-*/
 void Key_SetBinding( int keynum, const char *binding ) {
 	if ( keynum < 0 || keynum >= MAX_KEYS ) {
 		return;
@@ -922,11 +902,6 @@ void Key_SetBinding( int keynum, const char *binding ) {
 }
 
 
-/*
-===================
-Key_GetBinding
-===================
-*/
 char *Key_GetBinding( int keynum ) {
 	if ( keynum < 0 || keynum >= MAX_KEYS ) {
 		return "";
@@ -954,11 +929,6 @@ int Key_GetKey(const char *binding) {
   return -1;
 }
 
-/*
-===================
-Key_Unbind_f
-===================
-*/
 void Key_Unbind_f (void)
 {
 	int		b;
@@ -979,11 +949,6 @@ void Key_Unbind_f (void)
 	Key_SetBinding (b, "");
 }
 
-/*
-===================
-Key_Unbindall_f
-===================
-*/
 void Key_Unbindall_f (void)
 {
 	int		i;
@@ -994,11 +959,6 @@ void Key_Unbindall_f (void)
 }
 
 
-/*
-===================
-Key_Bind_f
-===================
-*/
 void Key_Bind_f (void)
 {
 	int			i, c, b;
@@ -1061,12 +1021,6 @@ void Key_WriteBindings( fileHandle_t f ) {
 }
 
 
-/*
-============
-Key_Bindlist_f
-
-============
-*/
 void Key_Bindlist_f( void ) {
 	int		i;
 
@@ -1077,11 +1031,6 @@ void Key_Bindlist_f( void ) {
 	}
 }
 
-/*
-============
-Key_KeynameCompletion
-============
-*/
 void Key_KeynameCompletion( void(*callback)(const char *s) ) {
 	int		i;
 
@@ -1089,11 +1038,6 @@ void Key_KeynameCompletion( void(*callback)(const char *s) ) {
 		callback( keynames[ i ].name );
 }
 
-/*
-====================
-Key_CompleteUnbind
-====================
-*/
 static void Key_CompleteUnbind( char *args, int argNum )
 {
 	if( argNum == 2 )
@@ -1106,11 +1050,6 @@ static void Key_CompleteUnbind( char *args, int argNum )
 	}
 }
 
-/*
-====================
-Key_CompleteBind
-====================
-*/
 static void Key_CompleteBind( char *args, int argNum )
 {
 	char *p;
@@ -1133,11 +1072,6 @@ static void Key_CompleteBind( char *args, int argNum )
 	}
 }
 
-/*
-===================
-CL_InitKeyCommands
-===================
-*/
 void CL_InitKeyCommands( void ) {
 	// register our functions
 	Cmd_AddCommand ("bind",Key_Bind_f);
@@ -1405,11 +1339,6 @@ void CL_CharEvent( int key ) {
 }
 
 
-/*
-===================
-Key_ClearStates
-===================
-*/
 void Key_ClearStates (void)
 {
 	int		i;
@@ -1428,20 +1357,10 @@ void Key_ClearStates (void)
 
 static int keyCatchers = 0;
 
-/*
-====================
-Key_GetCatcher
-====================
-*/
 int Key_GetCatcher( void ) {
 	return keyCatchers;
 }
 
-/*
-====================
-Key_SetCatcher
-====================
-*/
 void Key_SetCatcher( int catcher ) {
 	// If the catcher state is changing, clear all key states
 	if( catcher != keyCatchers )

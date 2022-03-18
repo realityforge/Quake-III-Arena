@@ -31,11 +31,6 @@ static	vec3_t	muzzle;
 
 #define NUM_NAILSHOTS 15
 
-/*
-================
-G_BounceProjectile
-================
-*/
 void G_BounceProjectile( vec3_t start, vec3_t impact, vec3_t dir, vec3_t endout ) {
 	vec3_t v, newv;
 	float dot;
@@ -49,23 +44,12 @@ void G_BounceProjectile( vec3_t start, vec3_t impact, vec3_t dir, vec3_t endout 
 }
 
 
-/*
-======================================================================
 
-GAUNTLET
-
-======================================================================
-*/
 
 void Weapon_Gauntlet( gentity_t *ent ) {
 
 }
 
-/*
-===============
-CheckGauntletAttack
-===============
-*/
 qboolean CheckGauntletAttack( gentity_t *ent ) {
 	trace_t		tr;
 	vec3_t		end;
@@ -123,13 +107,7 @@ qboolean CheckGauntletAttack( gentity_t *ent ) {
 }
 
 
-/*
-======================================================================
 
-MACHINEGUN
-
-======================================================================
-*/
 
 /*
 ======================
@@ -236,13 +214,7 @@ void Bullet_Fire (gentity_t *ent, float spread, int damage, int mod ) {
 }
 
 
-/*
-======================================================================
 
-BFG
-
-======================================================================
-*/
 
 void BFG_Fire ( gentity_t *ent ) {
 	gentity_t	*m;
@@ -255,13 +227,7 @@ void BFG_Fire ( gentity_t *ent ) {
 }
 
 
-/*
-======================================================================
 
-SHOTGUN
-
-======================================================================
-*/
 
 // DEFAULT_SHOTGUN_SPREAD and DEFAULT_SHOTGUN_COUNT	are in bg_public.h, because
 // client predicts same spreads
@@ -359,15 +325,6 @@ void weapon_supershotgun_fire (gentity_t *ent) {
 	ShotgunPattern( tent->s.pos.trBase, tent->s.origin2, tent->s.eventParm, ent );
 }
 
-
-/*
-======================================================================
-
-GRENADE LAUNCHER
-
-======================================================================
-*/
-
 void weapon_grenadelauncher_fire (gentity_t *ent) {
 	gentity_t	*m;
 
@@ -382,13 +339,7 @@ void weapon_grenadelauncher_fire (gentity_t *ent) {
 //	VectorAdd( m->s.pos.trDelta, ent->client->ps.velocity, m->s.pos.trDelta );	// "real" physics
 }
 
-/*
-======================================================================
 
-ROCKET
-
-======================================================================
-*/
 
 void Weapon_RocketLauncher_Fire (gentity_t *ent) {
 	gentity_t	*m;
@@ -400,15 +351,6 @@ void Weapon_RocketLauncher_Fire (gentity_t *ent) {
 //	VectorAdd( m->s.pos.trDelta, ent->client->ps.velocity, m->s.pos.trDelta );	// "real" physics
 }
 
-
-/*
-======================================================================
-
-PLASMA GUN
-
-======================================================================
-*/
-
 void Weapon_Plasmagun_Fire (gentity_t *ent) {
 	gentity_t	*m;
 
@@ -419,20 +361,6 @@ void Weapon_Plasmagun_Fire (gentity_t *ent) {
 //	VectorAdd( m->s.pos.trDelta, ent->client->ps.velocity, m->s.pos.trDelta );	// "real" physics
 }
 
-/*
-======================================================================
-
-RAILGUN
-
-======================================================================
-*/
-
-
-/*
-=================
-weapon_railgun_fire
-=================
-*/
 #define	MAX_RAIL_HITS	4
 void weapon_railgun_fire (gentity_t *ent) {
 	vec3_t		end;
@@ -556,15 +484,6 @@ void weapon_railgun_fire (gentity_t *ent) {
 
 }
 
-
-/*
-======================================================================
-
-GRAPPLING HOOK
-
-======================================================================
-*/
-
 void Weapon_GrapplingHook_Fire (gentity_t *ent)
 {
 	if (!ent->client->fireHeld && !ent->client->hook)
@@ -679,13 +598,7 @@ void Weapon_LightningFire( gentity_t *ent ) {
 }
 
 #ifdef MISSIONPACK
-/*
-======================================================================
 
-NAILGUN
-
-======================================================================
-*/
 
 void Weapon_Nailgun_Fire (gentity_t *ent) {
 	gentity_t	*m;
@@ -699,15 +612,6 @@ void Weapon_Nailgun_Fire (gentity_t *ent) {
 
 //	VectorAdd( m->s.pos.trDelta, ent->client->ps.velocity, m->s.pos.trDelta );	// "real" physics
 }
-
-
-/*
-======================================================================
-
-PROXIMITY MINE LAUNCHER
-
-======================================================================
-*/
 
 void weapon_proxlauncher_fire (gentity_t *ent) {
 	gentity_t	*m;
@@ -728,11 +632,6 @@ void weapon_proxlauncher_fire (gentity_t *ent) {
 //======================================================================
 
 
-/*
-===============
-LogAccuracyHit
-===============
-*/
 qboolean LogAccuracyHit( gentity_t *target, gentity_t *attacker ) {
 	if( !target->takedamage ) {
 		return qfalse;
@@ -794,11 +693,6 @@ void CalcMuzzlePointOrigin ( gentity_t *ent, vec3_t origin, vec3_t forward, vec3
 
 
 
-/*
-===============
-FireWeapon
-===============
-*/
 void FireWeapon( gentity_t *ent ) {
 	if (ent->client->ps.powerups[PW_QUAD] ) {
 		s_quadFactor = g_quadfactor.value;
@@ -885,11 +779,6 @@ void FireWeapon( gentity_t *ent ) {
 
 #ifdef MISSIONPACK
 
-/*
-===============
-KamikazeRadiusDamage
-===============
-*/
 static void KamikazeRadiusDamage( vec3_t origin, gentity_t *attacker, float damage, float radius ) {
 	float		dist;
 	gentity_t	*ent;
@@ -950,11 +839,6 @@ static void KamikazeRadiusDamage( vec3_t origin, gentity_t *attacker, float dama
 	}
 }
 
-/*
-===============
-KamikazeShockWave
-===============
-*/
 static void KamikazeShockWave( vec3_t origin, gentity_t *attacker, float damage, float push, float radius ) {
 	float		dist;
 	gentity_t	*ent;
@@ -1016,11 +900,6 @@ static void KamikazeShockWave( vec3_t origin, gentity_t *attacker, float damage,
 	}
 }
 
-/*
-===============
-KamikazeDamage
-===============
-*/
 static void KamikazeDamage( gentity_t *self ) {
 	int i;
 	float t;
@@ -1073,11 +952,6 @@ static void KamikazeDamage( gentity_t *self ) {
 	VectorCopy(newangles, self->movedir);
 }
 
-/*
-===============
-G_StartKamikaze
-===============
-*/
 void G_StartKamikaze( gentity_t *ent ) {
 	gentity_t	*explosion;
 	gentity_t	*te;

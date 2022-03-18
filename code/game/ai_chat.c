@@ -60,11 +60,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define TIME_BETWEENCHATTING	25
 
 
-/*
-==================
-BotNumActivePlayers
-==================
-*/
 int BotNumActivePlayers(void) {
 	int i, num;
 	char buf[MAX_INFO_STRING];
@@ -82,11 +77,6 @@ int BotNumActivePlayers(void) {
 	return num;
 }
 
-/*
-==================
-BotIsFirstInRankings
-==================
-*/
 int BotIsFirstInRankings(bot_state_t *bs) {
 	int i, score;
 	char buf[MAX_INFO_STRING];
@@ -105,11 +95,6 @@ int BotIsFirstInRankings(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-BotIsLastInRankings
-==================
-*/
 int BotIsLastInRankings(bot_state_t *bs) {
 	int i, score;
 	char buf[MAX_INFO_STRING];
@@ -128,11 +113,6 @@ int BotIsLastInRankings(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-BotFirstClientInRankings
-==================
-*/
 char *BotFirstClientInRankings(void) {
 	int i, bestscore, bestclient;
 	char buf[MAX_INFO_STRING];
@@ -157,11 +137,6 @@ char *BotFirstClientInRankings(void) {
 	return name;
 }
 
-/*
-==================
-BotLastClientInRankings
-==================
-*/
 char *BotLastClientInRankings(void) {
 	int i, worstscore, bestclient;
 	char buf[MAX_INFO_STRING];
@@ -186,11 +161,6 @@ char *BotLastClientInRankings(void) {
 	return name;
 }
 
-/*
-==================
-BotRandomOpponentName
-==================
-*/
 char *BotRandomOpponentName(bot_state_t *bs) {
 	int i, count;
 	char buf[MAX_INFO_STRING];
@@ -225,11 +195,6 @@ char *BotRandomOpponentName(bot_state_t *bs) {
 	return name;
 }
 
-/*
-==================
-BotMapTitle
-==================
-*/
 
 char *BotMapTitle(void) {
 	char info[1024];
@@ -244,11 +209,6 @@ char *BotMapTitle(void) {
 }
 
 
-/*
-==================
-BotWeaponNameForMeansOfDeath
-==================
-*/
 
 char *BotWeaponNameForMeansOfDeath(int mod) {
 	switch(mod) {
@@ -277,11 +237,6 @@ char *BotWeaponNameForMeansOfDeath(int mod) {
 	}
 }
 
-/*
-==================
-BotRandomWeaponName
-==================
-*/
 char *BotRandomWeaponName(void) {
 	int rnd;
 
@@ -308,11 +263,6 @@ char *BotRandomWeaponName(void) {
 	}
 }
 
-/*
-==================
-BotVisibleEnemies
-==================
-*/
 int BotVisibleEnemies(bot_state_t *bs) {
 	float vis;
 	int i;
@@ -340,11 +290,6 @@ int BotVisibleEnemies(bot_state_t *bs) {
 	return qfalse;
 }
 
-/*
-==================
-BotValidChatPosition
-==================
-*/
 int BotValidChatPosition(bot_state_t *bs) {
 	vec3_t point, start, end, mins, maxs;
 	bsp_trace_t trace;
@@ -380,11 +325,6 @@ int BotValidChatPosition(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-BotChat_EnterGame
-==================
-*/
 int BotChat_EnterGame(bot_state_t *bs) {
 	char name[32];
 	float rnd;
@@ -413,11 +353,6 @@ int BotChat_EnterGame(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-BotChat_ExitGame
-==================
-*/
 int BotChat_ExitGame(bot_state_t *bs) {
 	char name[32];
 	float rnd;
@@ -446,11 +381,6 @@ int BotChat_ExitGame(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-BotChat_StartLevel
-==================
-*/
 int BotChat_StartLevel(bot_state_t *bs) {
 	char name[32];
 	float rnd;
@@ -480,11 +410,6 @@ int BotChat_StartLevel(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-BotChat_EndLevel
-==================
-*/
 int BotChat_EndLevel(bot_state_t *bs) {
 	char name[32];
 	float rnd;
@@ -542,11 +467,6 @@ int BotChat_EndLevel(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-BotChat_Death
-==================
-*/
 int BotChat_Death(bot_state_t *bs) {
 	char name[32];
 	float rnd;
@@ -645,11 +565,6 @@ int BotChat_Death(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-BotChat_Kill
-==================
-*/
 int BotChat_Kill(bot_state_t *bs) {
 	char name[32];
 	float rnd;
@@ -711,11 +626,6 @@ int BotChat_Kill(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-BotChat_EnemySuicide
-==================
-*/
 int BotChat_EnemySuicide(bot_state_t *bs) {
 	char name[32];
 	float rnd;
@@ -745,11 +655,6 @@ int BotChat_EnemySuicide(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-BotChat_HitTalking
-==================
-*/
 int BotChat_HitTalking(bot_state_t *bs) {
 	char name[32], *weap;
 	int lasthurt_client;
@@ -784,11 +689,6 @@ int BotChat_HitTalking(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-BotChat_HitNoDeath
-==================
-*/
 int BotChat_HitNoDeath(bot_state_t *bs) {
 	char name[32], *weap;
 	float rnd;
@@ -829,11 +729,6 @@ int BotChat_HitNoDeath(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-BotChat_HitNoKill
-==================
-*/
 int BotChat_HitNoKill(bot_state_t *bs) {
 	char name[32], *weap;
 	float rnd;
@@ -867,11 +762,6 @@ int BotChat_HitNoKill(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-BotChat_Random
-==================
-*/
 int BotChat_Random(bot_state_t *bs) {
 	float rnd;
 	char name[32];
@@ -936,11 +826,6 @@ int BotChat_Random(bot_state_t *bs) {
 	return qtrue;
 }
 
-/*
-==================
-BotChatTime
-==================
-*/
 float BotChatTime(bot_state_t *bs) {
 	//int cpm;
 
@@ -949,11 +834,6 @@ float BotChatTime(bot_state_t *bs) {
 	return 2.0;	//(float) trap_BotChatLength(bs->cs) * 30 / cpm;
 }
 
-/*
-==================
-BotChatTest
-==================
-*/
 void BotChatTest(bot_state_t *bs) {
 
 	char name[32];

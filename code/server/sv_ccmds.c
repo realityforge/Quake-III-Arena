@@ -1046,11 +1046,6 @@ static int SV_Strlen( const char *str ) {
 	return count;
 }
 
-/*
-================
-SV_Status_f
-================
-*/
 static void SV_Status_f( void ) {
 	int			i, j, l;
 	client_t	*cl;
@@ -1118,11 +1113,6 @@ static void SV_Status_f( void ) {
 }
 #ifdef DEDICATED
 
-/*
-==================
-SV_ConSay_f
-==================
-*/
 static void SV_ConSay_f(void) {
 	char	*p;
 	char	text[1024];
@@ -1151,11 +1141,6 @@ static void SV_ConSay_f(void) {
 	SV_SendServerCommand(NULL, "chat \"%s\"", text);
 }
 
-/*
-==================
-SV_ConTell_f
-==================
-*/
 static void SV_ConTell_f(void) {
 	char	*p;
 	char	text[1024];
@@ -1192,11 +1177,6 @@ static void SV_ConTell_f(void) {
 }
 
 
-/*
-==================
-SV_ConSayto_f
-==================
-*/
 static void SV_ConSayto_f(void) {
 	char		*p;
 	char		text[1024];
@@ -1340,22 +1320,12 @@ static void SV_DumpUser_f( void ) {
 }
 
 
-/*
-=================
-SV_KillServer
-=================
-*/
 static void SV_KillServer_f( void ) {
 	SV_Shutdown( "killserver" );
 }
 
 //===========================================================
 
-/*
-==================
-SV_CompleteMapName
-==================
-*/
 static void SV_CompleteMapName( char *args, int argNum ) {
 	if( argNum == 2 ) {
 		Field_CompleteFilename( "maps", "bsp", qtrue, qfalse );
@@ -1363,11 +1333,6 @@ static void SV_CompleteMapName( char *args, int argNum ) {
 }
 #ifdef DEDICATED
 
-/*
-==================
-SV_CompletePlayerName
-==================
-*/
 static void SV_CompletePlayerName( char *args, int argNum ) {
 	if( argNum == 2 ) {
 		char		names[MAX_CLIENTS][MAX_NAME_LENGTH];
@@ -1401,11 +1366,6 @@ static void SV_CompletePlayerName( char *args, int argNum ) {
 }
 #endif
 
-/*
-==================
-SV_AddOperatorCommands
-==================
-*/
 void SV_AddOperatorCommands( void ) {
 	static qboolean	initialized;
 

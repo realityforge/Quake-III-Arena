@@ -325,11 +325,6 @@ static leakyBucket_t buckets[ MAX_BUCKETS ];
 static leakyBucket_t *bucketHashes[ MAX_HASHES ];
 leakyBucket_t outboundLeakyBucket;
 
-/*
-================
-SVC_HashForAddress
-================
-*/
 static long SVC_HashForAddress( netadr_t address ) {
 	byte 		*ip = NULL;
 	size_t	size = 0;
@@ -435,11 +430,6 @@ static leakyBucket_t *SVC_BucketForAddress( netadr_t address, int burst, int per
 	return NULL;
 }
 
-/*
-================
-SVC_RateLimit
-================
-*/
 qboolean SVC_RateLimit( leakyBucket_t *bucket, int burst, int period ) {
 	if ( bucket != NULL ) {
 		int now = Sys_Milliseconds();
@@ -644,12 +634,6 @@ void SVC_Info( netadr_t from ) {
 	NET_OutOfBandPrint( NS_SERVER, from, "infoResponse\n%s", infostring );
 }
 
-/*
-================
-SVC_FlushRedirect
-
-================
-*/
 static void SV_FlushRedirect( char *outputbuf ) {
 	NET_OutOfBandPrint( NS_SERVER, svs.redirectAddress, "print\n%s", outputbuf );
 }
@@ -778,11 +762,6 @@ static void SV_ConnectionlessPacket( netadr_t from, msg_t *msg ) {
 
 //============================================================================
 
-/*
-=================
-SV_PacketEvent
-=================
-*/
 void SV_PacketEvent( netadr_t from, msg_t *msg ) {
 	int			i;
 	client_t	*cl;
@@ -940,11 +919,6 @@ static void SV_CheckTimeouts( void ) {
 }
 
 
-/*
-==================
-SV_CheckPaused
-==================
-*/
 static qboolean SV_CheckPaused( void ) {
 	int		count;
 	client_t	*cl;

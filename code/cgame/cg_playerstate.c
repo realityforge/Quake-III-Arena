@@ -84,11 +84,6 @@ void CG_CheckAmmo( void ) {
 	}
 }
 
-/*
-==============
-CG_DamageFeedback
-==============
-*/
 void CG_DamageFeedback( int yawByte, int pitchByte, int damage ) {
 	float		left, front, up;
 	float		kick;
@@ -204,11 +199,6 @@ void CG_Respawn( void ) {
 
 extern char *eventnames[];
 
-/*
-==============
-CG_CheckPlayerstateEvents
-==============
-*/
 void CG_CheckPlayerstateEvents( playerState_t *ps, playerState_t *ops ) {
 	int			i;
 	int			event;
@@ -242,11 +232,6 @@ void CG_CheckPlayerstateEvents( playerState_t *ps, playerState_t *ops ) {
 	}
 }
 
-/*
-==================
-CG_CheckChangedPredictableEvents
-==================
-*/
 void CG_CheckChangedPredictableEvents( playerState_t *ps ) {
 	int i;
 	int event;
@@ -278,11 +263,6 @@ void CG_CheckChangedPredictableEvents( playerState_t *ps ) {
 	}
 }
 
-/*
-==================
-pushReward
-==================
-*/
 static void pushReward(sfxHandle_t sfx, qhandle_t shader, int rewardCount) {
 	if (cg.rewardStack < (MAX_REWARDSTACK-1)) {
 		cg.rewardStack++;
@@ -292,11 +272,6 @@ static void pushReward(sfxHandle_t sfx, qhandle_t shader, int rewardCount) {
 	}
 }
 
-/*
-==================
-CG_CheckLocalSounds
-==================
-*/
 void CG_CheckLocalSounds( playerState_t *ps, playerState_t *ops ) {
 	int			highScore, reward;
 #ifdef MISSIONPACK
@@ -488,12 +463,6 @@ void CG_CheckLocalSounds( playerState_t *ps, playerState_t *ops ) {
 	}
 }
 
-/*
-===============
-CG_TransitionPlayerState
-
-===============
-*/
 void CG_TransitionPlayerState( playerState_t *ps, playerState_t *ops ) {
 	// check for changing follow mode
 	if ( ps->clientNum != ops->clientNum ) {

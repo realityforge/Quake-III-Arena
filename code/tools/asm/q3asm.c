@@ -442,11 +442,6 @@ static int atoiNoCap (const char *s)
 
 
 
-/*
-=============
-HashString
-=============
-*/
 /* Default hash function of Kazlib 1.19, slightly modified. */
 static unsigned int HashString (const char *key)
 {
@@ -472,11 +467,6 @@ static unsigned int HashString (const char *key)
 }
 
 
-/*
-============
-CodeError
-============
-*/
 static void CodeError( char *fmt, ... ) {
 	va_list		argptr;
 
@@ -489,11 +479,6 @@ static void CodeError( char *fmt, ... ) {
 	va_end( argptr );
 }
 
-/*
-============
-EmitByte
-============
-*/
 static void EmitByte( segment_t *seg, int v ) {
 	if ( seg->imageUsed >= MAX_IMAGE ) {
 		Error( "MAX_IMAGE" );
@@ -502,11 +487,6 @@ static void EmitByte( segment_t *seg, int v ) {
 	seg->imageUsed++;
 }
 
-/*
-============
-EmitInt
-============
-*/
 static void EmitInt( segment_t *seg, int v ) {
 	if ( seg->imageUsed >= MAX_IMAGE - 4) {
 		Error( "MAX_IMAGE" );
@@ -702,22 +682,12 @@ static qboolean Parse( void ) {
 }
 
 
-/*
-==============
-ParseValue
-==============
-*/
 static int ParseValue( void ) {
 	Parse();
 	return atoiNoCap( token );
 }
 
 
-/*
-==============
-ParseExpression
-==============
-*/
 static int ParseExpression(void) {
 	/* Hand optimization, PhaethonH */
 	int		i, j;
@@ -1141,12 +1111,6 @@ STAT("LABEL");
 
 
 
-/*
-==============
-AssembleLine
-
-==============
-*/
 static void AssembleLine( void ) {
 	hashchain_t *hc;
 	sourceOps_t *op;
@@ -1279,11 +1243,6 @@ Empirical frequency statistics from FI 2001.01.23:
 	CodeError( "Unknown token: %s\n", token );
 }
 
-/*
-==============
-InitTables
-==============
-*/
 void InitTables( void ) {
 	int i;
 
@@ -1297,11 +1256,6 @@ void InitTables( void ) {
 }
 
 
-/*
-==============
-WriteMapFile
-==============
-*/
 static void WriteMapFile( void ) {
 	FILE		*f;
 	symbol_t	*s;
@@ -1329,11 +1283,6 @@ static void WriteMapFile( void ) {
 	fclose( f );
 }
 
-/*
-===============
-WriteVmFile
-===============
-*/
 static void WriteVmFile( void ) {
 	char	imageName[MAX_OS_PATH];
 	vmHeader_t	header;
@@ -1408,11 +1357,6 @@ static void WriteVmFile( void ) {
 	fclose( f );
 }
 
-/*
-===============
-Assemble
-===============
-*/
 static void Assemble( void ) {
 	int		i;
 	char	filename[MAX_OS_PATH];
@@ -1474,12 +1418,6 @@ static void Assemble( void ) {
 }
 
 
-/*
-=============
-ParseOptionFile
-
-=============
-*/
 static void ParseOptionFile( const char *filename ) {
 	char		expanded[MAX_OS_PATH];
 	char		*text, *text_p;
@@ -1522,11 +1460,6 @@ Assemble LCC bytecode assembly to Q3VM bytecode.\n\
 ", argv0);
 }
 
-/*
-==============
-main
-==============
-*/
 int main( int argc, char **argv ) {
 	int			i;
 	double		start, end;

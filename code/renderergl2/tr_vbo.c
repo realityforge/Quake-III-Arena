@@ -94,11 +94,6 @@ void Vao_SetVertexPointers(vao_t *vao)
 	}
 }
 
-/*
-============
-R_CreateVao
-============
-*/
 vao_t *R_CreateVao(const char *name, byte *vertexes, int vertexesSize, byte *indexes, int indexesSize, vaoUsage_t usage)
 {
 	vao_t          *vao;
@@ -328,11 +323,6 @@ vao_t *R_CreateVao2(const char *name, int numVertexes, srfVert_t *verts, int num
 }
 
 
-/*
-============
-R_BindVao
-============
-*/
 void R_BindVao(vao_t * vao)
 {
 	if(!vao)
@@ -374,11 +364,6 @@ void R_BindVao(vao_t * vao)
 	}
 }
 
-/*
-============
-R_BindNullVao
-============
-*/
 void R_BindNullVao(void)
 {
 	if(glState.currentVao)
@@ -402,11 +387,6 @@ void R_BindNullVao(void)
 }
 
 
-/*
-============
-R_InitVaos
-============
-*/
 void R_InitVaos(void)
 {
 	int             vertexesSize, indexesSize;
@@ -496,11 +476,6 @@ void R_InitVaos(void)
 	GL_CheckErrors();
 }
 
-/*
-============
-R_ShutdownVaos
-============
-*/
 void R_ShutdownVaos(void)
 {
 	int             i;
@@ -531,11 +506,6 @@ void R_ShutdownVaos(void)
 	tr.numVaos = 0;
 }
 
-/*
-============
-R_VaoList_f
-============
-*/
 void R_VaoList_f(void)
 {
 	int             i;

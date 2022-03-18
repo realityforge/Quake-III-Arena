@@ -265,11 +265,6 @@ void SCR_DrawSmallStringExt( int x, int y, const char *string, float *setColor, 
 
 //===============================================================================
 
-/*
-=================
-SCR_DrawDemoRecording
-=================
-*/
 void SCR_DrawDemoRecording( void ) {
 	char	string[1024];
 	int		pos;
@@ -289,11 +284,6 @@ void SCR_DrawDemoRecording( void ) {
 
 
 #ifdef USE_VOIP
-/*
-=================
-SCR_DrawVoipMeter
-=================
-*/
 void SCR_DrawVoipMeter( void ) {
 	char	buffer[16];
 	char	string[256];
@@ -327,36 +317,15 @@ void SCR_DrawVoipMeter( void ) {
 }
 #endif
 
-
-
-
-/*
-===============================================================================
-
-DEBUG GRAPH
-
-===============================================================================
-*/
-
 static	int			current;
 static	float		values[1024];
 
-/*
-==============
-SCR_DebugGraph
-==============
-*/
 void SCR_DebugGraph (float value)
 {
 	values[current] = value;
 	current = (current + 1) % ARRAY_LEN(values);
 }
 
-/*
-==============
-SCR_DrawDebugGraph
-==============
-*/
 void SCR_DrawDebugGraph (void)
 {
 	int		a, x, y, w, i, h;
@@ -388,11 +357,6 @@ void SCR_DrawDebugGraph (void)
 
 //=============================================================================
 
-/*
-==================
-SCR_Init
-==================
-*/
 void SCR_Init( void ) {
 	cl_timegraph = Cvar_Get ("timegraph", "0", CVAR_CHEAT);
 	cl_debuggraph = Cvar_Get ("debuggraph", "0", CVAR_CHEAT);

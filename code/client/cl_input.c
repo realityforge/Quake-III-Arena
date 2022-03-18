@@ -348,11 +348,6 @@ void CL_KeyMove( usercmd_t *cmd ) {
 	cmd->upmove = ClampChar( up );
 }
 
-/*
-=================
-CL_MouseEvent
-=================
-*/
 void CL_MouseEvent( int dx, int dy, int time ) {
 	if ( Key_GetCatcher( ) & KEYCATCH_UI ) {
 		VM_Call( uivm, UI_MOUSE_EVENT, dx, dy );
@@ -378,11 +373,6 @@ void CL_JoystickEvent( int axis, int value, int time ) {
 	cl.joystickAxis[axis] = value;
 }
 
-/*
-=================
-CL_JoystickMove
-=================
-*/
 void CL_JoystickMove( usercmd_t *cmd ) {
 	float	anglespeed;
 
@@ -421,11 +411,6 @@ void CL_JoystickMove( usercmd_t *cmd ) {
 	cmd->upmove = ClampChar( cmd->upmove + (int)up );
 }
 
-/*
-=================
-CL_MouseMove
-=================
-*/
 
 void CL_MouseMove(usercmd_t *cmd)
 {
@@ -511,11 +496,6 @@ void CL_MouseMove(usercmd_t *cmd)
 }
 
 
-/*
-==============
-CL_CmdButtons
-==============
-*/
 void CL_CmdButtons( usercmd_t *cmd ) {
 	int		i;
 
@@ -543,11 +523,6 @@ void CL_CmdButtons( usercmd_t *cmd ) {
 }
 
 
-/*
-==============
-CL_FinishMove
-==============
-*/
 void CL_FinishMove( usercmd_t *cmd ) {
 	int		i;
 
@@ -564,11 +539,6 @@ void CL_FinishMove( usercmd_t *cmd ) {
 }
 
 
-/*
-=================
-CL_CreateCmd
-=================
-*/
 usercmd_t CL_CreateCmd( void ) {
 	usercmd_t	cmd;
 	vec3_t		oldAngles;
@@ -920,11 +890,6 @@ void CL_SendCmd( void ) {
 	CL_WritePacket();
 }
 
-/*
-============
-CL_InitInput
-============
-*/
 void CL_InitInput( void ) {
 	Cmd_AddCommand ("centerview",IN_CenterView);
 
@@ -996,11 +961,6 @@ void CL_InitInput( void ) {
 	cl_debugMove = Cvar_Get ("cl_debugMove", "0", 0);
 }
 
-/*
-============
-CL_ShutdownInput
-============
-*/
 void CL_ShutdownInput(void)
 {
 	Cmd_RemoveCommand("centerview");

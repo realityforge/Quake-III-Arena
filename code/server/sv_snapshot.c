@@ -114,11 +114,6 @@ static void SV_EmitPacketEntities( clientSnapshot_t *from, clientSnapshot_t *to,
 
 
 
-/*
-==================
-SV_WriteSnapshotToClient
-==================
-*/
 static void SV_WriteSnapshotToClient( client_t *client, msg_t *msg ) {
 	clientSnapshot_t	*frame, *oldframe;
 	int					lastframe;
@@ -240,11 +235,6 @@ typedef struct {
 	int		snapshotEntities[MAX_SNAPSHOT_ENTITIES];	
 } snapshotEntityNumbers_t;
 
-/*
-=======================
-SV_QsortEntityNumbers
-=======================
-*/
 static int QDECL SV_QsortEntityNumbers( const void *a, const void *b ) {
 	int	*ea, *eb;
 
@@ -263,11 +253,6 @@ static int QDECL SV_QsortEntityNumbers( const void *a, const void *b ) {
 }
 
 
-/*
-===============
-SV_AddEntToSnapshot
-===============
-*/
 static void SV_AddEntToSnapshot( svEntity_t *svEnt, sharedEntity_t *gEnt, snapshotEntityNumbers_t *eNums ) {
 	// if we have already added this entity to this snapshot, don't add again
 	if ( svEnt->snapshotCounter == sv.snapshotCounter ) {
@@ -284,12 +269,7 @@ static void SV_AddEntToSnapshot( svEntity_t *svEnt, sharedEntity_t *gEnt, snapsh
 	eNums->numSnapshotEntities++;
 }
 
-/*
-===============
-SV_AddEntitiesVisibleFromPoint
-===============
-*/
-static void SV_AddEntitiesVisibleFromPoint( vec3_t origin, clientSnapshot_t *frame, 
+static void SV_AddEntitiesVisibleFromPoint( vec3_t origin, clientSnapshot_t *frame,
 									snapshotEntityNumbers_t *eNums, qboolean portal ) {
 	int		e, i;
 	sharedEntity_t *ent;
@@ -635,11 +615,6 @@ void SV_SendClientSnapshot( client_t *client ) {
 }
 
 
-/*
-=======================
-SV_SendClientMessages
-=======================
-*/
 void SV_SendClientMessages(void)
 {
 	int		i;

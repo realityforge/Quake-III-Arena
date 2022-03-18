@@ -247,12 +247,6 @@ void RB_ShadowFinish( void ) {
 }
 
 
-/*
-=================
-RB_ProjectionShadowDeform
-
-=================
-*/
 void RB_ProjectionShadowDeform( void ) {
 	float	*xyz;
 	int		i;

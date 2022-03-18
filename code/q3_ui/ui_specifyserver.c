@@ -61,11 +61,6 @@ typedef struct
 
 static specifyserver_t	s_specifyserver;
 
-/*
-=================
-SpecifyServer_Event
-=================
-*/
 static void SpecifyServer_Event( void* ptr, int event )
 {
 	char	buff[256];
@@ -95,11 +90,6 @@ static void SpecifyServer_Event( void* ptr, int event )
 	}
 }
 
-/*
-=================
-SpecifyServer_MenuInit
-=================
-*/
 void SpecifyServer_MenuInit( void )
 {
 	// zero set all our globals
@@ -182,11 +172,6 @@ void SpecifyServer_MenuInit( void )
 	Com_sprintf( s_specifyserver.port.field.buffer, 6, "%i", 27960 );
 }
 
-/*
-=================
-SpecifyServer_Cache
-=================
-*/
 void SpecifyServer_Cache( void )
 {
 	int	i;
@@ -200,11 +185,6 @@ void SpecifyServer_Cache( void )
 	}
 }
 
-/*
-=================
-UI_SpecifyServerMenu
-=================
-*/
 void UI_SpecifyServerMenu( void )
 {
 	SpecifyServer_MenuInit();

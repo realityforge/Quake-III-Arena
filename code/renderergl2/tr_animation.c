@@ -36,11 +36,6 @@ frame.
 
 // copied and adapted from tr_mesh.c
 
-/*
-=============
-R_MDRCullModel
-=============
-*/
 
 static int R_MDRCullModel( mdrHeader_t *header, trRefEntity_t *ent ) {
 	vec3_t		bounds[2];
@@ -128,12 +123,6 @@ static int R_MDRCullModel( mdrHeader_t *header, trRefEntity_t *ent ) {
 	}
 }
 
-/*
-=================
-R_MDRComputeFogNum
-
-=================
-*/
 
 int R_MDRComputeFogNum( mdrHeader_t *header, trRefEntity_t *ent ) {
 	int				i, j;
@@ -170,11 +159,6 @@ int R_MDRComputeFogNum( mdrHeader_t *header, trRefEntity_t *ent ) {
 }
 
 
-/*
-==============
-R_MDRAddAnimSurfaces
-==============
-*/
 
 // much stuff in there is just copied from R_AddMd3Surfaces in tr_mesh.c
 
@@ -307,11 +291,6 @@ void R_MDRAddAnimSurfaces( trRefEntity_t *ent ) {
 	}
 }
 
-/*
-==============
-RB_MDRSurfaceAnim
-==============
-*/
 void RB_MDRSurfaceAnim( mdrSurface_t *surface )
 {
 	int				i, j, k;

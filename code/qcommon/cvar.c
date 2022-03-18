@@ -56,11 +56,6 @@ static long generateHashValue( const char *fname ) {
 	return hash;
 }
 
-/*
-============
-Cvar_ValidateString
-============
-*/
 static qboolean Cvar_ValidateString( const char *s ) {
 	if ( !s ) {
 		return qfalse;
@@ -77,11 +72,6 @@ static qboolean Cvar_ValidateString( const char *s ) {
 	return qtrue;
 }
 
-/*
-============
-Cvar_FindVar
-============
-*/
 static cvar_t *Cvar_FindVar( const char *var_name ) {
 	cvar_t	*var;
 	long hash;
@@ -97,11 +87,6 @@ static cvar_t *Cvar_FindVar( const char *var_name ) {
 	return NULL;
 }
 
-/*
-============
-Cvar_VariableValue
-============
-*/
 float Cvar_VariableValue( const char *var_name ) {
 	cvar_t	*var;
 	
@@ -112,11 +97,6 @@ float Cvar_VariableValue( const char *var_name ) {
 }
 
 
-/*
-============
-Cvar_VariableIntegerValue
-============
-*/
 int Cvar_VariableIntegerValue( const char *var_name ) {
 	cvar_t	*var;
 	
@@ -127,11 +107,6 @@ int Cvar_VariableIntegerValue( const char *var_name ) {
 }
 
 
-/*
-============
-Cvar_VariableString
-============
-*/
 char *Cvar_VariableString( const char *var_name ) {
 	cvar_t *var;
 	
@@ -142,11 +117,6 @@ char *Cvar_VariableString( const char *var_name ) {
 }
 
 
-/*
-============
-Cvar_VariableStringBuffer
-============
-*/
 void Cvar_VariableStringBuffer( const char *var_name, char *buffer, int bufsize ) {
 	cvar_t *var;
 	
@@ -159,11 +129,6 @@ void Cvar_VariableStringBuffer( const char *var_name, char *buffer, int bufsize 
 	}
 }
 
-/*
-============
-Cvar_Flags
-============
-*/
 int Cvar_Flags(const char *var_name)
 {
 	cvar_t *var;
@@ -179,11 +144,6 @@ int Cvar_Flags(const char *var_name)
 	}
 }
 
-/*
-============
-Cvar_CommandCompletion
-============
-*/
 void Cvar_CommandCompletion(void (*callback)(const char *s))
 {
 	cvar_t		*cvar;
@@ -195,11 +155,6 @@ void Cvar_CommandCompletion(void (*callback)(const char *s))
 	}
 }
 
-/*
-============
-Cvar_Validate
-============
-*/
 static const char *Cvar_Validate( cvar_t *var,
     const char *value, qboolean warn )
 {
@@ -606,20 +561,10 @@ cvar_t *Cvar_Set2( const char *var_name, const char *value, qboolean force ) {
 	return var;
 }
 
-/*
-============
-Cvar_Set
-============
-*/
 void Cvar_Set( const char *var_name, const char *value) {
 	Cvar_Set2 (var_name, value, qtrue);
 }
 
-/*
-============
-Cvar_SetSafe
-============
-*/
 void Cvar_SetSafe( const char *var_name, const char *value )
 {
 	int flags = Cvar_Flags( var_name );
@@ -637,20 +582,10 @@ void Cvar_SetSafe( const char *var_name, const char *value )
 	Cvar_Set( var_name, value );
 }
 
-/*
-============
-Cvar_SetLatched
-============
-*/
 void Cvar_SetLatched( const char *var_name, const char *value) {
 	Cvar_Set2 (var_name, value, qfalse);
 }
 
-/*
-============
-Cvar_SetValue
-============
-*/
 void Cvar_SetValue( const char *var_name, float value) {
 	char	val[32];
 
@@ -662,11 +597,6 @@ void Cvar_SetValue( const char *var_name, float value) {
 	Cvar_Set (var_name, val);
 }
 
-/*
-============
-Cvar_SetValueSafe
-============
-*/
 void Cvar_SetValueSafe( const char *var_name, float value )
 {
 	char val[32];
@@ -678,20 +608,10 @@ void Cvar_SetValueSafe( const char *var_name, float value )
 	Cvar_SetSafe( var_name, val );
 }
 
-/*
-============
-Cvar_Reset
-============
-*/
 void Cvar_Reset( const char *var_name ) {
 	Cvar_Set2( var_name, NULL, qfalse );
 }
 
-/*
-============
-Cvar_ForceReset
-============
-*/
 void Cvar_ForceReset(const char *var_name)
 {
 	Cvar_Set2(var_name, NULL, qtrue);
@@ -878,11 +798,6 @@ void Cvar_Set_f( void ) {
 	}
 }
 
-/*
-============
-Cvar_Reset_f
-============
-*/
 void Cvar_Reset_f( void ) {
 	if ( Cmd_Argc() != 2 ) {
 		Com_Printf ("usage: reset <variable>\n");
@@ -931,11 +846,6 @@ void Cvar_WriteVariables(fileHandle_t f)
 	}
 }
 
-/*
-============
-Cvar_List_f
-============
-*/
 void Cvar_List_f( void ) {
 	cvar_t	*var;
 	int		i;
@@ -1006,11 +916,6 @@ void Cvar_List_f( void ) {
 	Com_Printf ("%i cvar indexes\n", cvar_numIndexes);
 }
 
-/*
-============
-Cvar_ListModified_f
-============
-*/
 void Cvar_ListModified_f( void ) {
 	cvar_t	*var;
 	int		totalModified;
@@ -1214,11 +1119,6 @@ void Cvar_Restart_f(void)
 	Cvar_Restart(qfalse);
 }
 
-/*
-=====================
-Cvar_InfoString
-=====================
-*/
 char *Cvar_InfoString(int bit)
 {
 	static char	info[MAX_INFO_STRING];
@@ -1259,20 +1159,10 @@ char *Cvar_InfoString_Big(int bit)
 
 
 
-/*
-=====================
-Cvar_InfoStringBuffer
-=====================
-*/
 void Cvar_InfoStringBuffer( int bit, char* buff, int buffsize ) {
 	Q_strncpyz(buff,Cvar_InfoString(bit),buffsize);
 }
 
-/*
-=====================
-Cvar_CheckRange
-=====================
-*/
 void Cvar_CheckRange( cvar_t *var, float min, float max, qboolean integral )
 {
 	var->validate = qtrue;
@@ -1284,11 +1174,6 @@ void Cvar_CheckRange( cvar_t *var, float min, float max, qboolean integral )
 	Cvar_Set( var->name, var->string );
 }
 
-/*
-=====================
-Cvar_SetDescription
-=====================
-*/
 void Cvar_SetDescription( cvar_t *var, const char *var_description )
 {
 	if( var_description && var_description[0] != '\0' )
@@ -1397,11 +1282,6 @@ void	Cvar_Update( vmCvar_t *vmCvar ) {
 	vmCvar->integer = cv->integer;
 }
 
-/*
-==================
-Cvar_CompleteCvarName
-==================
-*/
 void Cvar_CompleteCvarName( char *args, int argNum )
 {
 	if( argNum == 2 )

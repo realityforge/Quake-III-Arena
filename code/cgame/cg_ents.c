@@ -84,16 +84,6 @@ void CG_PositionRotatedEntityOnTag( refEntity_t *entity, const refEntity_t *pare
 	MatrixMultiply( tempAxis, ((refEntity_t *)parent)->axis, entity->axis );
 }
 
-
-
-/*
-==========================================================================
-
-FUNCTIONS CALLED EACH FRAME
-
-==========================================================================
-*/
-
 /*
 ======================
 CG_SetEntitySoundPosition
@@ -155,11 +145,6 @@ static void CG_EntityEffects( centity_t *cent ) {
 }
 
 
-/*
-==================
-CG_General
-==================
-*/
 static void CG_General( centity_t *cent ) {
 	refEntity_t			ent;
 	entityState_t		*s1;
@@ -219,11 +204,6 @@ static void CG_Speaker( centity_t *cent ) {
 	cent->miscTime = cg.time + cent->currentState.frame * 100 + cent->currentState.clientNum * 100 * crandom();
 }
 
-/*
-==================
-CG_Item
-==================
-*/
 static void CG_Item( centity_t *cent ) {
 	refEntity_t		ent;
 	entityState_t	*es;
@@ -406,11 +386,6 @@ static void CG_Item( centity_t *cent ) {
 
 //============================================================================
 
-/*
-===============
-CG_Missile
-===============
-*/
 static void CG_Missile( centity_t *cent ) {
 	refEntity_t			ent;
 	entityState_t		*s1;
@@ -556,11 +531,6 @@ static void CG_Grapple( centity_t *cent ) {
 	trap_R_AddRefEntityToScene( &ent );
 }
 
-/*
-===============
-CG_Mover
-===============
-*/
 static void CG_Mover( centity_t *cent ) {
 	refEntity_t			ent;
 	entityState_t		*s1;
@@ -624,11 +594,6 @@ void CG_Beam( centity_t *cent ) {
 }
 
 
-/*
-===============
-CG_Portal
-===============
-*/
 static void CG_Portal( centity_t *cent ) {
 	refEntity_t			ent;
 	entityState_t		*s1;
@@ -657,21 +622,11 @@ static void CG_Portal( centity_t *cent ) {
 }
 
 
-/*
-================
-CG_CreateRotationMatrix
-================
-*/
 void CG_CreateRotationMatrix(vec3_t angles, vec3_t matrix[3]) {
 	AngleVectors(angles, matrix[0], matrix[1], matrix[2]);
 	VectorInverse(matrix[1]);
 }
 
-/*
-================
-CG_TransposeMatrix
-================
-*/
 void CG_TransposeMatrix(vec3_t matrix[3], vec3_t transpose[3]) {
 	int i, j;
 	for (i = 0; i < 3; i++) {
@@ -681,11 +636,6 @@ void CG_TransposeMatrix(vec3_t matrix[3], vec3_t transpose[3]) {
 	}
 }
 
-/*
-================
-CG_RotatePoint
-================
-*/
 void CG_RotatePoint(vec3_t point, vec3_t matrix[3]) {
 	vec3_t tvec;
 
@@ -745,11 +695,6 @@ void CG_AdjustPositionForMover(const vec3_t in, int moverNum, int fromTime, int 
 }
 
 
-/*
-=============================
-CG_InterpolateEntityPosition
-=============================
-*/
 static void CG_InterpolateEntityPosition( centity_t *cent ) {
 	vec3_t		current, next;
 	float		f;
@@ -780,12 +725,6 @@ static void CG_InterpolateEntityPosition( centity_t *cent ) {
 
 }
 
-/*
-===============
-CG_CalcEntityLerpPositions
-
-===============
-*/
 static void CG_CalcEntityLerpPositions( centity_t *cent ) {
 
 	// if this player does not want to see extrapolated players
@@ -822,11 +761,6 @@ static void CG_CalcEntityLerpPositions( centity_t *cent ) {
 	}
 }
 
-/*
-===============
-CG_TeamBase
-===============
-*/
 static void CG_TeamBase( centity_t *cent ) {
 	refEntity_t model;
 #ifdef MISSIONPACK
@@ -975,12 +909,6 @@ static void CG_TeamBase( centity_t *cent ) {
 #endif
 }
 
-/*
-===============
-CG_AddCEntity
-
-===============
-*/
 static void CG_AddCEntity( centity_t *cent ) {
 	// event-only entities will have been dealt with already
 	if ( cent->currentState.eType >= ET_EVENTS ) {
@@ -1034,12 +962,6 @@ static void CG_AddCEntity( centity_t *cent ) {
 	}
 }
 
-/*
-===============
-CG_AddPacketEntities
-
-===============
-*/
 void CG_AddPacketEntities( void ) {
 	int					num;
 	centity_t			*cent;

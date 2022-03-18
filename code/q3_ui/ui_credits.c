@@ -20,13 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 //
-/*
-=======================================================================
 
-CREDITS
-
-=======================================================================
-*/
 
 
 #include "ui_local.h"
@@ -84,11 +78,6 @@ static void UI_CreditMenu_Draw_ioq3( void ) {
 }
 
 
-/*
-=================
-UI_CreditMenu_Key
-=================
-*/
 static sfxHandle_t UI_CreditMenu_Key( int key ) {
 	if( key & K_CHAR_FLAG ) {
 		return 0;
@@ -104,11 +93,6 @@ static sfxHandle_t UI_CreditMenu_Key( int key ) {
 }
 
 
-/*
-===============
-UI_CreditMenu_Draw
-===============
-*/
 static void UI_CreditMenu_Draw( void ) {
 	int		y;
 
@@ -164,11 +148,6 @@ static void UI_CreditMenu_Draw( void ) {
 }
 
 
-/*
-===============
-UI_CreditMenu
-===============
-*/
 void UI_CreditMenu( void ) {
 	memset( &s_credits, 0 ,sizeof(s_credits) );
 

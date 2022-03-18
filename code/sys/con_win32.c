@@ -99,11 +99,6 @@ static BOOL WINAPI CON_CtrlHandler( DWORD sig )
 	return TRUE;
 }
 
-/*
-==================
-CON_HistAdd
-==================
-*/
 static void CON_HistAdd( void )
 {
 	Q_strncpyz( qconsole_history[ qconsole_history_oldest ], qconsole_line,
@@ -120,11 +115,6 @@ static void CON_HistAdd( void )
 	qconsole_history_pos = qconsole_history_oldest;
 }
 
-/*
-==================
-CON_HistPrev
-==================
-*/
 static void CON_HistPrev( void )
 {
 	int pos;
@@ -143,11 +133,6 @@ static void CON_HistPrev( void )
 	qconsole_cursor = qconsole_linelen;
 }
 
-/*
-==================
-CON_HistNext
-==================
-*/
 static void CON_HistNext( void )
 {
 	int pos;
@@ -177,11 +162,6 @@ static void CON_HistNext( void )
 }
 
 
-/*
-==================
-CON_Show
-==================
-*/
 static void CON_Show( void )
 {
 	CONSOLE_SCREEN_BUFFER_INFO binfo;
@@ -246,11 +226,6 @@ static void CON_Show( void )
 	SetConsoleCursorPosition( qconsole_hout, cursorPos );
 }
 
-/*
-==================
-CON_Hide
-==================
-*/
 static void CON_Hide( void )
 {
 	int realLen;
@@ -265,11 +240,6 @@ static void CON_Hide( void )
 }
 
 
-/*
-==================
-CON_Shutdown
-==================
-*/
 void CON_Shutdown( void )
 {
 	CON_Hide( );
@@ -280,11 +250,6 @@ void CON_Shutdown( void )
 	CloseHandle( qconsole_hin );
 }
 
-/*
-==================
-CON_Init
-==================
-*/
 void CON_Init( void )
 {
 	CONSOLE_SCREEN_BUFFER_INFO info;
@@ -323,11 +288,6 @@ void CON_Init( void )
 	SetConsoleTextAttribute( qconsole_hout, CON_ColorCharToAttrib( COLOR_WHITE ) );
 }
 
-/*
-==================
-CON_Input
-==================
-*/
 char *CON_Input( void )
 {
 	INPUT_RECORD buff[ MAX_EDIT_LINE ];
@@ -539,11 +499,6 @@ void CON_WindowsColorPrint( const char *msg )
 	}
 }
 
-/*
-==================
-CON_Print
-==================
-*/
 void CON_Print( const char *msg )
 {
 	CON_Hide( );

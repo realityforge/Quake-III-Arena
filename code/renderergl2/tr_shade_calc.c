@@ -93,20 +93,8 @@ void RB_CalcStretchTexMatrix( const waveForm_t *wf, float *matrix )
 	matrix[1] = 0; matrix[3] = p; matrix[5] = 0.5f - 0.5f * p;
 }
 
-/*
-====================================================================
 
-DEFORMATIONS
 
-====================================================================
-*/
-
-/*
-========================
-RB_CalcDeformVertexes
-
-========================
-*/
 void RB_CalcDeformVertexes( deformStage_t *ds )
 {
 	int i;
@@ -190,12 +178,6 @@ void RB_CalcDeformNormals( deformStage_t *ds ) {
 	}
 }
 
-/*
-========================
-RB_CalcBulgeVertexes
-
-========================
-*/
 void RB_CalcBulgeVertexes( deformStage_t *ds ) {
 	int i;
 	const float *st = ( const float * ) tess.texCoords[0];
@@ -332,11 +314,6 @@ void DeformText( const char *text ) {
 	}
 }
 
-/*
-==================
-GlobalVectorToLocal
-==================
-*/
 static void GlobalVectorToLocal( const vec3_t in, vec3_t out ) {
 	out[0] = DotProduct( in, backEnd.or.axis[0] );
 	out[1] = DotProduct( in, backEnd.or.axis[1] );
@@ -537,12 +514,6 @@ static void Autosprite2Deform( void ) {
 }
 
 
-/*
-=====================
-RB_DeformTessGeometry
-
-=====================
-*/
 void RB_DeformTessGeometry( void ) {
 	int		i;
 	deformStage_t	*ds;
@@ -594,13 +565,7 @@ void RB_DeformTessGeometry( void ) {
 	}
 }
 
-/*
-====================================================================
 
-COLORS
-
-====================================================================
-*/
 
 
 /*
@@ -653,15 +618,6 @@ void RB_CalcModulateColorsByFog( unsigned char *colors ) {
 		colors[2] *= f;
 	}
 }
-
-
-/*
-====================================================================
-
-TEX COORDS
-
-====================================================================
-*/
 
 /*
 ========================

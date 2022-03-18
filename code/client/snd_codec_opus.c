@@ -209,11 +209,6 @@ const OpusFileCallbacks S_OggOpus_Callbacks =
  &S_OggOpus_Callback_close
 };
 
-/*
-=================
-S_OggOpus_CodecOpenStream
-=================
-*/
 snd_stream_t *S_OggOpus_CodecOpenStream(const char *filename)
 {
 	snd_stream_t *stream;
@@ -308,11 +303,6 @@ snd_stream_t *S_OggOpus_CodecOpenStream(const char *filename)
 	return stream;
 }
 
-/*
-=================
-S_OggOpus_CodecCloseStream
-=================
-*/
 void S_OggOpus_CodecCloseStream(snd_stream_t *stream)
 {
 	// check if input is valid
@@ -328,11 +318,6 @@ void S_OggOpus_CodecCloseStream(snd_stream_t *stream)
 	S_CodecUtilClose(&stream);
 }
 
-/*
-=================
-S_OggOpus_CodecReadStream
-=================
-*/
 int S_OggOpus_CodecReadStream(snd_stream_t *stream, int bytes, void *buffer)
 {
 	// buffer handling

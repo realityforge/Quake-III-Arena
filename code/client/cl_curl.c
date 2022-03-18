@@ -58,11 +58,6 @@ const char *(*qcurl_multi_strerror)(CURLMcode);
 
 static void *cURLLib = NULL;
 
-/*
-=================
-GPA
-=================
-*/
 static void *GPA(char *str)
 {
 	void *rv;
@@ -82,11 +77,6 @@ static void *GPA(char *str)
 }
 #endif /* USE_CURL_DLOPEN */
 
-/*
-=================
-CL_cURL_Init
-=================
-*/
 qboolean CL_cURL_Init()
 {
 #ifdef USE_CURL_DLOPEN
@@ -141,11 +131,6 @@ qboolean CL_cURL_Init()
 #endif /* USE_CURL_DLOPEN */
 }
 
-/*
-=================
-CL_cURL_Shutdown
-=================
-*/
 void CL_cURL_Shutdown( void )
 {
 	CL_cURL_Cleanup();

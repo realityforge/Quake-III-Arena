@@ -27,11 +27,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
 
-/*
-==================
-CG_ResetEntity
-==================
-*/
 static void CG_ResetEntity( centity_t *cent ) {
 	// if the previous snapshot this entity was updated in is at least
 	// an event window back in time then we can reset the previous event

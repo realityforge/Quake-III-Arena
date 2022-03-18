@@ -157,11 +157,6 @@ void AddTeamScore(vec3_t origin, int team, int score) {
 	level.teamScores[ team ] += score;
 }
 
-/*
-==============
-OnSameTeam
-==============
-*/
 qboolean OnSameTeam( gentity_t *ent1, gentity_t *ent2 ) {
 	if ( !ent1->client || !ent2->client ) {
 		return qfalse;
@@ -237,11 +232,6 @@ void Team_CheckDroppedItem( gentity_t *dropped ) {
 	}
 }
 
-/*
-================
-Team_ForceGesture
-================
-*/
 void Team_ForceGesture(int team) {
 	int i;
 	gentity_t *ent;
@@ -673,11 +663,6 @@ void Team_DroppedFlagThink(gentity_t *ent) {
 }
 
 
-/*
-==============
-Team_DroppedFlagThink
-==============
-*/
 int Team_TouchOurFlag( gentity_t *ent, gentity_t *other, int team ) {
 	int			i;
 	gentity_t	*player;
@@ -1009,12 +994,6 @@ gentity_t *SelectRandomTeamSpawnPoint( int teamstate, team_t team ) {
 }
 
 
-/*
-===========
-SelectCTFSpawnPoint
-
-============
-*/
 gentity_t *SelectCTFSpawnPoint ( team_t team, int teamstate, vec3_t origin, vec3_t angles, qboolean isbot ) {
 	gentity_t	*spot;
 
@@ -1189,11 +1168,6 @@ void SP_team_CTF_bluespawn(gentity_t *ent) {
 
 
 #ifdef MISSIONPACK
-/*
-================
-Obelisks
-================
-*/
 
 static void ObeliskRegen( gentity_t *self ) {
 	self->nextthink = level.time + g_obeliskRegenPeriod.integer * 1000;
@@ -1445,11 +1419,6 @@ void SP_team_neutralobelisk( gentity_t *ent ) {
 }
 
 
-/*
-================
-CheckObeliskAttack
-================
-*/
 qboolean CheckObeliskAttack( gentity_t *obelisk, gentity_t *attacker ) {
 	gentity_t	*te;
 

@@ -25,11 +25,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "tr_dsa.h"
 
-/*
-=============
-R_CheckFBO
-=============
-*/
 qboolean R_CheckFBO(const FBO_t * fbo)
 {
 	GLenum code = qglCheckNamedFramebufferStatusEXT(fbo->frameBuffer, GL_FRAMEBUFFER);
@@ -72,11 +67,6 @@ qboolean R_CheckFBO(const FBO_t * fbo)
 	return qfalse;
 }
 
-/*
-============
-FBO_Create
-============
-*/
 FBO_t          *FBO_Create(const char *name, int width, int height)
 {
 	FBO_t          *fbo;
@@ -112,11 +102,6 @@ FBO_t          *FBO_Create(const char *name, int width, int height)
 	return fbo;
 }
 
-/*
-=================
-FBO_CreateBuffer
-=================
-*/
 void FBO_CreateBuffer(FBO_t *fbo, int format, int index, int multisample)
 {
 	uint32_t *pRenderBuffer;
@@ -193,11 +178,6 @@ void FBO_CreateBuffer(FBO_t *fbo, int format, int index, int multisample)
 }
 
 
-/*
-=================
-FBO_AttachImage
-=================
-*/
 void FBO_AttachImage(FBO_t *fbo, image_t *image, GLenum attachment, GLuint cubemapside)
 {
 	GLenum target = GL_TEXTURE_2D;
@@ -213,11 +193,6 @@ void FBO_AttachImage(FBO_t *fbo, image_t *image, GLenum attachment, GLuint cubem
 }
 
 
-/*
-============
-FBO_Bind
-============
-*/
 void FBO_Bind(FBO_t * fbo)
 {
 	if (!glRefConfig.framebufferObject)
@@ -233,11 +208,6 @@ void FBO_Bind(FBO_t * fbo)
 	glState.currentFBO = fbo;
 }
 
-/*
-============
-FBO_Init
-============
-*/
 void FBO_Init(void)
 {
 	int             i;
@@ -410,11 +380,6 @@ void FBO_Init(void)
 	glState.currentFBO = NULL;
 }
 
-/*
-============
-FBO_Shutdown
-============
-*/
 void FBO_Shutdown(void)
 {
 	int             i, j;
@@ -448,11 +413,6 @@ void FBO_Shutdown(void)
 	}
 }
 
-/*
-============
-R_FBOList_f
-============
-*/
 void R_FBOList_f(void)
 {
 	int             i;

@@ -1268,27 +1268,9 @@ void RB_AddQuadStampExt( vec3_t origin, vec3_t left, vec3_t up, byte *color, flo
 
 void RB_ShowImages( void );
 
-
-/*
-============================================================
-
-WORLD MAP
-
-============================================================
-*/
-
 void R_AddBrushModelSurfaces( trRefEntity_t *e );
 void R_AddWorldSurfaces( void );
 qboolean R_inPVS( const vec3_t p1, const vec3_t p2 );
-
-
-/*
-============================================================
-
-FLARES
-
-============================================================
-*/
 
 void R_ClearFlares( void );
 
@@ -1296,53 +1278,20 @@ void RB_AddFlare( void *surface, int fogNum, vec3_t point, vec3_t color, vec3_t 
 void RB_AddDlightFlares( void );
 void RB_RenderFlares (void);
 
-/*
-============================================================
-
-LIGHTS
-
-============================================================
-*/
-
 void R_DlightBmodel( bmodel_t *bmodel );
 void R_SetupEntityLighting( const trRefdef_t *refdef, trRefEntity_t *ent );
 void R_TransformDlights( int count, dlight_t *dl, orientationr_t *or );
 int R_LightForPoint( vec3_t point, vec3_t ambientLight, vec3_t directedLight, vec3_t lightDir );
 
-
-/*
-============================================================
-
-SHADOWS
-
-============================================================
-*/
-
 void RB_ShadowTessEnd( void );
 void RB_ShadowFinish( void );
 void RB_ProjectionShadowDeform( void );
-
-/*
-============================================================
-
-SKIES
-
-============================================================
-*/
 
 void R_BuildCloudData( shaderCommands_t *shader );
 void R_InitSkyTexCoords( float cloudLayerHeight );
 void R_DrawSkyBox( shaderCommands_t *shader );
 void RB_DrawSun( float scale, shader_t *shader );
 void RB_ClipSkyPolygons( shaderCommands_t *shader );
-
-/*
-============================================================
-
-CURVE TESSELATION
-
-============================================================
-*/
 
 #define PATCH_STITCHING
 
@@ -1352,25 +1301,8 @@ srfGridMesh_t *R_GridInsertColumn( srfGridMesh_t *grid, int column, int row, vec
 srfGridMesh_t *R_GridInsertRow( srfGridMesh_t *grid, int row, int column, vec3_t point, float loderror );
 void R_FreeSurfaceGridMesh( srfGridMesh_t *grid );
 
-/*
-============================================================
-
-MARKERS, POLYGON PROJECTION ON WORLD POLYGONS
-
-============================================================
-*/
-
 int R_MarkFragments( int numPoints, const vec3_t *points, const vec3_t projection,
 				   int maxPoints, vec3_t pointBuffer, int maxFragments, markFragment_t *fragmentBuffer );
-
-
-/*
-============================================================
-
-SCENE GENERATION
-
-============================================================
-*/
 
 void R_ResetFrameCounts( void );
 
@@ -1380,14 +1312,6 @@ void RE_AddPolyToScene( qhandle_t hShader , int numVerts, const polyVert_t *vert
 void RE_AddLightToScene( const vec3_t org, float intensity, float r, float g, float b );
 void RE_AddAdditiveLightToScene( const vec3_t org, float intensity, float r, float g, float b );
 void RE_RenderScene( const refdef_t *fd );
-
-/*
-=============================================================
-
-UNCOMPRESSING BONES
-
-=============================================================
-*/
 
 #define MC_BITS_X (16)
 #define MC_BITS_Y (16)
@@ -1400,14 +1324,6 @@ UNCOMPRESSING BONES
 
 void MC_UnCompress(float mat[3][4],const unsigned char * comp);
 
-/*
-=============================================================
-
-ANIMATED MODELS
-
-=============================================================
-*/
-
 void R_MDRAddAnimSurfaces( trRefEntity_t *ent );
 void RB_MDRSurfaceAnim( mdrSurface_t *surface );
 qboolean R_LoadIQM (model_t *mod, void *buffer, int filesize, const char *name );
@@ -1417,10 +1333,6 @@ int R_IQMLerpTag( orientation_t *tag, iqmData_t *data,
                   int startFrame, int endFrame,
                   float frac, const char *tagName );
 
-/*
-=============================================================
-=============================================================
-*/
 void	R_TransformModelToClip( const vec3_t src, const float *modelMatrix, const float *projectionMatrix,
 							vec4_t eye, vec4_t dst );
 void	R_TransformClipToWindow( const vec4_t clip, const viewParms_t *view, vec4_t normalized, vec4_t window );

@@ -108,11 +108,6 @@ void MField_Draw( mfield_t *edit, int x, int y, int style, vec4_t color ) {
 	UI_DrawChar( x + ( edit->cursor - prestep ) * charw, y, cursorChar, style & ~(UI_CENTER|UI_RIGHT), color );
 }
 
-/*
-================
-MField_Paste
-================
-*/
 void MField_Paste( mfield_t *edit ) {
 	char	pasteBuffer[64];
 	int		pasteLen, i;
@@ -199,11 +194,6 @@ void MField_KeyDownEvent( mfield_t *edit, int key ) {
 	}
 }
 
-/*
-==================
-MField_CharEvent
-==================
-*/
 void MField_CharEvent( mfield_t *edit, int ch ) {
 	int		len;
 
@@ -277,22 +267,12 @@ void MField_CharEvent( mfield_t *edit, int ch ) {
 	}
 }
 
-/*
-==================
-MField_Clear
-==================
-*/
 void MField_Clear( mfield_t *edit ) {
 	edit->buffer[0] = 0;
 	edit->cursor = 0;
 	edit->scroll = 0;
 }
 
-/*
-==================
-MenuField_Init
-==================
-*/
 void MenuField_Init( menufield_s* m ) {
 	int	l;
 	int	w;
@@ -324,11 +304,6 @@ void MenuField_Init( menufield_s* m ) {
 	m->generic.bottom = m->generic.y + h;
 }
 
-/*
-==================
-MenuField_Draw
-==================
-*/
 void MenuField_Draw( menufield_s *f )
 {
 	int		x;
@@ -381,11 +356,6 @@ void MenuField_Draw( menufield_s *f )
 	MField_Draw( &f->field, x + w, y, style, color );
 }
 
-/*
-==================
-MenuField_Key
-==================
-*/
 sfxHandle_t MenuField_Key( menufield_s* m, int* key )
 {
 	int keycode;

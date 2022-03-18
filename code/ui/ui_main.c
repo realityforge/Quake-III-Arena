@@ -561,11 +561,6 @@ void UI_ShowPostGame(qboolean newHigh) {
 	uiInfo.soundHighScore = newHigh;
   _UI_SetActiveMenu(UIMENU_POSTGAME);
 }
-/*
-=================
-_UI_Refresh
-=================
-*/
 
 void UI_DrawCenteredPic(qhandle_t image, int w, int h) {
   int x, y;
@@ -637,11 +632,6 @@ void _UI_Refresh( int realtime )
 
 }
 
-/*
-=================
-_UI_Shutdown
-=================
-*/
 void _UI_Shutdown( void ) {
 	trap_LAN_SaveCachedServers();
 }
@@ -1708,11 +1698,6 @@ static void UI_DrawCrosshair(rectDef_t *rect, float scale, vec4_t color) {
  	trap_R_SetColor( NULL );
 }
 
-/*
-===============
-UI_BuildPlayerList
-===============
-*/
 static void UI_BuildPlayerList( void ) {
 	uiClientState_t	cs;
 	int		n, count, team, team2, playerTeamNumber;
@@ -2640,21 +2625,11 @@ static float UI_GetValue(int ownerDraw) {
   return 0;
 }
 
-/*
-=================
-UI_ServersQsortCompare
-=================
-*/
 static int QDECL UI_ServersQsortCompare( const void *arg1, const void *arg2 ) {
 	return trap_LAN_CompareServers( UI_SourceForLAN(), uiInfo.serverStatus.sortKey, uiInfo.serverStatus.sortDir, *(int*)arg1, *(int*)arg2);
 }
 
 
-/*
-=================
-UI_ServersSort
-=================
-*/
 void UI_ServersSort(int column, qboolean force) {
 
 	if ( !force ) {
@@ -2710,11 +2685,6 @@ static void UI_StartSinglePlayer(void) {
 }
 */
 
-/*
-===============
-UI_LoadMods
-===============
-*/
 static void UI_LoadMods( void ) {
 	int		numdirs;
 	char	dirlist[2048];
@@ -2741,11 +2711,6 @@ static void UI_LoadMods( void ) {
 }
 
 
-/*
-===============
-UI_LoadTeams
-===============
-*/
 static void UI_LoadTeams( void ) {
 	char	teamList[4096];
 	char	*teamName;
@@ -2765,11 +2730,6 @@ static void UI_LoadTeams( void ) {
 }
 
 
-/*
-===============
-UI_LoadMovies
-===============
-*/
 static void UI_LoadMovies( void ) {
 	char	movielist[4096];
 	char	*moviename;
@@ -2797,11 +2757,6 @@ static void UI_LoadMovies( void ) {
 
 #define NAMEBUFSIZE (MAX_DEMOS * 32)
 
-/*
-===============
-UI_LoadDemos
-===============
-*/
 static void UI_LoadDemos( void ) {
 	char	demolist[NAMEBUFSIZE];
 	char	demoExt[32];
@@ -3433,11 +3388,6 @@ static void UI_RunMenuScript(char **args) {
 static void UI_GetTeamColor(vec4_t *color) {
 }
 
-/*
-==================
-UI_MapCountByGameType
-==================
-*/
 static int UI_MapCountByGameType(qboolean singlePlayer) {
 	int i, c, game;
 	c = 0;
@@ -3480,11 +3430,6 @@ qboolean UI_hasSkinForBase(const char *base, const char *team) {
 	return qfalse;
 }
 
-/*
-==================
-UI_MapCountByTeam
-==================
-*/
 static int UI_HeadCountByTeam(void) {
 	static int init = 0;
 	int i, j, k, c, tIndex;
@@ -3539,11 +3484,6 @@ static int UI_HeadCountByTeam(void) {
 	return c;
 }
 
-/*
-==================
-UI_InsertServerIntoDisplayList
-==================
-*/
 static void UI_InsertServerIntoDisplayList(int num, int position) {
 	int i;
 
@@ -3563,11 +3503,6 @@ static void UI_InsertServerIntoDisplayList(int num, int position) {
 	}
 }
 
-/*
-==================
-UI_RemoveServerFromDisplayList
-==================
-*/
 static void UI_RemoveServerFromDisplayList(int num) {
 	int i, j;
 
@@ -3582,11 +3517,6 @@ static void UI_RemoveServerFromDisplayList(int num) {
 	}
 }
 
-/*
-==================
-UI_BinaryServerInsertion
-==================
-*/
 static void UI_BinaryServerInsertion(int num) {
 	int mid, offset, res, len;
 
@@ -3621,11 +3551,6 @@ static void UI_BinaryServerInsertion(int num) {
 	UI_InsertServerIntoDisplayList(num, offset);
 }
 
-/*
-==================
-UI_BuildServerDisplayList
-==================
-*/
 static void UI_BuildServerDisplayList(int force) {
 	int i, count, clients, maxClients, ping, game, len, visible;
 	char info[MAX_STRING_CHARS];
@@ -3772,11 +3697,6 @@ serverStatusCvar_t serverStatusCvars[] = {
 	{NULL, NULL}
 };
 
-/*
-==================
-UI_SortServerStatusInfo
-==================
-*/
 static void UI_SortServerStatusInfo( serverStatusInfo_t *info ) {
 	int i, j, index;
 	char *tmp1, *tmp2;
@@ -3808,11 +3728,6 @@ static void UI_SortServerStatusInfo( serverStatusInfo_t *info ) {
 	}
 }
 
-/*
-==================
-UI_GetServerStatusInfo
-==================
-*/
 static int UI_GetServerStatusInfo( const char *serverAddress, serverStatusInfo_t *info ) {
 	char *p, *score, *ping, *name;
 	int i, len;
@@ -3914,11 +3829,6 @@ static int UI_GetServerStatusInfo( const char *serverAddress, serverStatusInfo_t
 	return qfalse;
 }
 
-/*
-==================
-stristr
-==================
-*/
 static char *stristr(char *str, char *charset) {
 	int i;
 
@@ -3932,11 +3842,6 @@ static char *stristr(char *str, char *charset) {
 	return NULL;
 }
 
-/*
-==================
-UI_BuildFindPlayerList
-==================
-*/
 static void UI_BuildFindPlayerList(qboolean force) {
 	static int numFound, numTimeOuts;
 	int i, j, resend;
@@ -4070,11 +3975,6 @@ static void UI_BuildFindPlayerList(qboolean force) {
 	}
 }
 
-/*
-==================
-UI_BuildServerStatus
-==================
-*/
 static void UI_BuildServerStatus(qboolean force) {
 
 	if (uiInfo.nextFindPlayerRefresh) {
@@ -4103,11 +4003,6 @@ static void UI_BuildServerStatus(qboolean force) {
 	}
 }
 
-/*
-==================
-UI_FeederCount
-==================
-*/
 static int UI_FeederCount(float feederID) {
 	if (feederID == FEEDER_HEADS) {
 		return UI_HeadCountByTeam();
@@ -4873,11 +4768,6 @@ static void UI_RunCinematicFrame(int handle) {
 
 
 
-/*
-=================
-PlayerModel_BuildList
-=================
-*/
 static void UI_BuildQ3Model_List( void )
 {
 	int		numdirs;
@@ -4944,11 +4834,6 @@ static void UI_BuildQ3Model_List( void )
 
 
 
-/*
-=================
-UI_Init
-=================
-*/
 void _UI_Init( void ) {
 	const char *menuSet;
 
@@ -5082,11 +4967,6 @@ void _UI_Init( void ) {
 }
 
 
-/*
-=================
-UI_KeyEvent
-=================
-*/
 void _UI_KeyEvent( int key, qboolean down ) {
 
   if (Menu_Count() > 0) {
@@ -5109,11 +4989,6 @@ void _UI_KeyEvent( int key, qboolean down ) {
   //}
 }
 
-/*
-=================
-UI_MouseEvent
-=================
-*/
 void _UI_MouseEvent( int dx, int dy )
 {
 	int bias;
@@ -5455,11 +5330,6 @@ void UI_DrawConnectScreen( qboolean overlay ) {
 }
 
 
-/*
-================
-cvars
-================
-*/
 
 typedef struct {
 	vmCvar_t	*vmCvar;
@@ -5714,11 +5584,6 @@ static cvarTable_t		cvarTable[] = {
 static int		cvarTableSize = ARRAY_LEN( cvarTable );
 
 
-/*
-=================
-UI_RegisterCvars
-=================
-*/
 void UI_RegisterCvars( void ) {
 	int			i;
 	cvarTable_t	*cv;
@@ -5728,11 +5593,6 @@ void UI_RegisterCvars( void ) {
 	}
 }
 
-/*
-=================
-UI_UpdateCvars
-=================
-*/
 void UI_UpdateCvars( void ) {
 	int			i;
 	cvarTable_t	*cv;
@@ -5747,11 +5607,6 @@ void UI_UpdateCvars( void ) {
 }
 
 
-/*
-=================
-ArenaServers_StopRefresh
-=================
-*/
 static void UI_StopServerRefresh( void )
 {
 	int count;
@@ -5773,11 +5628,6 @@ static void UI_StopServerRefresh( void )
 
 }
 
-/*
-=================
-UI_DoServerRefresh
-=================
-*/
 static void UI_DoServerRefresh( void )
 {
 	qboolean wait = qfalse;
@@ -5820,11 +5670,6 @@ static void UI_DoServerRefresh( void )
 	UI_BuildServerDisplayList(qfalse);
 }
 
-/*
-=================
-UI_StartServerRefresh
-=================
-*/
 static void UI_StartServerRefresh(qboolean full, qboolean force)
 {
 	char	*ptr;

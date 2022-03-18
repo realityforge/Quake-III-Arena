@@ -74,11 +74,6 @@ const char	*CG_PlaceString( int rank ) {
 	return str;
 }
 
-/*
-=============
-CG_Obituary
-=============
-*/
 static void CG_Obituary( entityState_t *ent ) {
 	int			mod;
 	int			target, attacker;
@@ -336,11 +331,6 @@ static void CG_Obituary( entityState_t *ent ) {
 
 //==========================================================================
 
-/*
-===============
-CG_UseItem
-===============
-*/
 static void CG_UseItem( centity_t *cent ) {
 	clientInfo_t *ci;
 	int			itemNum, clientNum;
@@ -1242,12 +1232,6 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 }
 
 
-/*
-==============
-CG_CheckEvents
-
-==============
-*/
 void CG_CheckEvents( centity_t *cent ) {
 	// check for event-only entities
 	if ( cent->currentState.eType > ET_EVENTS ) {

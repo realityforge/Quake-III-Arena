@@ -84,11 +84,7 @@ static char		memoryPool[MEM_POOL_SIZE];
 static int		allocPoint, outOfMemory;
 
 
-/*
-===============
-UI_Alloc
-===============
-*/				  
+
 void *UI_Alloc( int size ) {
 	char	*p; 
 
@@ -108,11 +104,6 @@ void *UI_Alloc( int size ) {
 	return p;
 }
 
-/*
-===============
-UI_InitMemory
-===============
-*/
 void UI_InitMemory( void ) {
 	allocPoint = 0;
 	outOfMemory = qfalse;
@@ -227,11 +218,6 @@ void String_Report(void) {
 	Com_Printf("Memory Pool is %.1f%% full, %i bytes out of %i used.\n", f, allocPoint, MEM_POOL_SIZE);
 }
 
-/*
-=================
-String_Init
-=================
-*/
 void String_Init(void) {
 	int i;
 	for (i = 0; i < HASH_TABLE_SIZE; i++) {
@@ -249,11 +235,6 @@ void String_Init(void) {
 	}
 }
 
-/*
-=================
-PC_SourceError
-=================
-*/
 static __attribute__ ((format (printf, 2, 3))) void PC_SourceError(int handle, char *format, ...) {
 	int line;
 	char filename[128];
@@ -271,11 +252,6 @@ static __attribute__ ((format (printf, 2, 3))) void PC_SourceError(int handle, c
 	Com_Printf(S_COLOR_RED "ERROR: %s, line %d: %s\n", filename, line, string);
 }
 
-/*
-=================
-LerpColor
-=================
-*/
 void LerpColor(vec4_t a, vec4_t b, vec4_t c, float t)
 {
 	int i;
@@ -291,11 +267,6 @@ void LerpColor(vec4_t a, vec4_t b, vec4_t c, float t)
 	}
 }
 
-/*
-=================
-Float_Parse
-=================
-*/
 qboolean Float_Parse(char **p, float *f) {
 	char	*token;
 	token = COM_ParseExt(p, qfalse);
@@ -307,11 +278,6 @@ qboolean Float_Parse(char **p, float *f) {
 	}
 }
 
-/*
-=================
-PC_Float_Parse
-=================
-*/
 qboolean PC_Float_Parse(int handle, float *f) {
 	pc_token_t token;
 	int negative = qfalse;
@@ -334,11 +300,6 @@ qboolean PC_Float_Parse(int handle, float *f) {
 	return qtrue;
 }
 
-/*
-=================
-Color_Parse
-=================
-*/
 qboolean Color_Parse(char **p, vec4_t *c) {
 	int i;
 	float f;
@@ -352,11 +313,6 @@ qboolean Color_Parse(char **p, vec4_t *c) {
 	return qtrue;
 }
 
-/*
-=================
-PC_Color_Parse
-=================
-*/
 qboolean PC_Color_Parse(int handle, vec4_t *c) {
 	int i;
 	float f;
@@ -370,11 +326,6 @@ qboolean PC_Color_Parse(int handle, vec4_t *c) {
 	return qtrue;
 }
 
-/*
-=================
-Int_Parse
-=================
-*/
 qboolean Int_Parse(char **p, int *i) {
 	char	*token;
 	token = COM_ParseExt(p, qfalse);
@@ -387,11 +338,6 @@ qboolean Int_Parse(char **p, int *i) {
 	}
 }
 
-/*
-=================
-PC_Int_Parse
-=================
-*/
 qboolean PC_Int_Parse(int handle, int *i) {
 	pc_token_t token;
 	int negative = qfalse;
@@ -415,11 +361,6 @@ qboolean PC_Int_Parse(int handle, int *i) {
 	return qtrue;
 }
 
-/*
-=================
-Rect_Parse
-=================
-*/
 qboolean Rect_Parse(char **p, rectDef_t *r) {
 	if (Float_Parse(p, &r->x)) {
 		if (Float_Parse(p, &r->y)) {
@@ -433,11 +374,6 @@ qboolean Rect_Parse(char **p, rectDef_t *r) {
 	return qfalse;
 }
 
-/*
-=================
-PC_Rect_Parse
-=================
-*/
 qboolean PC_Rect_Parse(int handle, rectDef_t *r) {
 	if (PC_Float_Parse(handle, &r->x)) {
 		if (PC_Float_Parse(handle, &r->y)) {
@@ -451,11 +387,6 @@ qboolean PC_Rect_Parse(int handle, rectDef_t *r) {
 	return qfalse;
 }
 
-/*
-=================
-String_Parse
-=================
-*/
 qboolean String_Parse(char **p, const char **out) {
 	char *token;
 
@@ -467,11 +398,6 @@ qboolean String_Parse(char **p, const char **out) {
 	return qfalse;
 }
 
-/*
-=================
-PC_String_Parse
-=================
-*/
 qboolean PC_String_Parse(int handle, const char **out) {
 	pc_token_t token;
 
@@ -482,11 +408,6 @@ qboolean PC_String_Parse(int handle, const char **out) {
     return qtrue;
 }
 
-/*
-=================
-PC_Script_Parse
-=================
-*/
 qboolean PC_Script_Parse(int handle, const char **out) {
 	char script[1024];
 	pc_token_t token;
@@ -3262,11 +3183,6 @@ static bind_t g_bindings[] =
 
 static const int g_bindCount = ARRAY_LEN(g_bindings);
 
-/*
-=================
-Controls_GetKeyAssignment
-=================
-*/
 static void Controls_GetKeyAssignment (char *command, int *twokeys)
 {
 	int		count;
@@ -3292,11 +3208,6 @@ static void Controls_GetKeyAssignment (char *command, int *twokeys)
 	}
 }
 
-/*
-=================
-Controls_GetConfig
-=================
-*/
 void Controls_GetConfig( void )
 {
 	int		i;
@@ -3313,11 +3224,6 @@ void Controls_GetConfig( void )
 	}
 }
 
-/*
-=================
-Controls_SetConfig
-=================
-*/
 void Controls_SetConfig(qboolean restart)
 {
 	int		i;
@@ -3338,11 +3244,6 @@ void Controls_SetConfig(qboolean restart)
 	DC->executeText(EXEC_APPEND, "in_restart\n");
 }
 
-/*
-=================
-Controls_SetDefaults
-=================
-*/
 void Controls_SetDefaults( void )
 {
 	int	i;
@@ -4311,11 +4212,6 @@ void Menu_Paint(menuDef_t *menu, qboolean forcePaint) {
 	}
 }
 
-/*
-===============
-Item_ValidateTypeData
-===============
-*/
 void Item_ValidateTypeData(itemDef_t *item) {
 	if (item->typeData) {
 		return;
@@ -5174,11 +5070,6 @@ keywordHash_t itemParseKeywords[] = {
 
 keywordHash_t *itemParseKeywordHash[KEYWORDHASH_SIZE];
 
-/*
-===============
-Item_SetupKeywordHash
-===============
-*/
 void Item_SetupKeywordHash(void) {
 	int i;
 
@@ -5217,11 +5108,6 @@ static const char *knownRatios[ ][2] =
 	{ NULL    , NULL    }
 };
 
-/*
-===============
-UI_ResolutionToAspect
-===============
-*/
 static void UI_ResolutionToAspect( const char *resolution, char *aspect, size_t aspectLength ) {
 	int i, w, h;
 	char *x;
@@ -5362,11 +5248,6 @@ static void Item_ApplyHacks( itemDef_t *item ) {
 
 }
 
-/*
-===============
-Item_Parse
-===============
-*/
 qboolean Item_Parse(int handle, itemDef_t *item) {
 	pc_token_t token;
 	keywordHash_t *key;
@@ -5760,11 +5641,6 @@ keywordHash_t menuParseKeywords[] = {
 
 keywordHash_t *menuParseKeywordHash[KEYWORDHASH_SIZE];
 
-/*
-===============
-Menu_SetupKeywordHash
-===============
-*/
 void Menu_SetupKeywordHash(void) {
 	int i;
 
@@ -5774,11 +5650,6 @@ void Menu_SetupKeywordHash(void) {
 	}
 }
 
-/*
-===============
-Menu_Parse
-===============
-*/
 qboolean Menu_Parse(int handle, menuDef_t *menu) {
 	pc_token_t token;
 	keywordHash_t *key;
@@ -5814,11 +5685,6 @@ qboolean Menu_Parse(int handle, menuDef_t *menu) {
 	return qfalse;
 }
 
-/*
-===============
-Menu_New
-===============
-*/
 void Menu_New(int handle) {
 	menuDef_t *menu = &Menus[menuCount];
 

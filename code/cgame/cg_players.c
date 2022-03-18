@@ -40,12 +40,6 @@ char	*cg_customSoundNames[MAX_CUSTOM_SOUNDS] = {
 };
 
 
-/*
-================
-CG_CustomSound
-
-================
-*/
 sfxHandle_t	CG_CustomSound( int clientNum, const char *soundName ) {
 	clientInfo_t *ci;
 	int			i;
@@ -68,16 +62,6 @@ sfxHandle_t	CG_CustomSound( int clientNum, const char *soundName ) {
 	CG_Error( "Unknown custom sound: %s", soundName );
 	return 0;
 }
-
-
-
-/*
-=============================================================================
-
-CLIENT INFO
-
-=============================================================================
-*/
 
 /*
 ======================
@@ -290,11 +274,6 @@ static qboolean	CG_ParseAnimationFile( const char *filename, clientInfo_t *ci ) 
 	return qtrue;
 }
 
-/*
-==========================
-CG_FileExists
-==========================
-*/
 static qboolean	CG_FileExists(const char *filename) {
 	int len;
 
@@ -305,11 +284,6 @@ static qboolean	CG_FileExists(const char *filename) {
 	return qfalse;
 }
 
-/*
-==========================
-CG_FindClientModelFile
-==========================
-*/
 static qboolean	CG_FindClientModelFile( char *filename, int length, clientInfo_t *ci, const char *teamName, const char *modelName, const char *skinName, const char *base, const char *ext ) {
 	char *team, *charactersFolder;
 	int i;
@@ -380,11 +354,6 @@ static qboolean	CG_FindClientModelFile( char *filename, int length, clientInfo_t
 	return qfalse;
 }
 
-/*
-==========================
-CG_FindClientHeadFile
-==========================
-*/
 static qboolean	CG_FindClientHeadFile( char *filename, int length, clientInfo_t *ci, const char *teamName, const char *headModelName, const char *headSkinName, const char *base, const char *ext ) {
 	char *team, *headsFolder;
 	int i;
@@ -456,11 +425,6 @@ static qboolean	CG_FindClientHeadFile( char *filename, int length, clientInfo_t 
 	return qfalse;
 }
 
-/*
-==========================
-CG_RegisterClientSkin
-==========================
-*/
 static qboolean	CG_RegisterClientSkin( clientInfo_t *ci, const char *teamName, const char *modelName, const char *skinName, const char *headModelName, const char *headSkinName ) {
 	char filename[MAX_QPATH];
 
@@ -514,11 +478,6 @@ static qboolean	CG_RegisterClientSkin( clientInfo_t *ci, const char *teamName, c
 	return qtrue;
 }
 
-/*
-==========================
-CG_RegisterClientModelname
-==========================
-*/
 static qboolean CG_RegisterClientModelname( clientInfo_t *ci, const char *modelName, const char *skinName, const char *headModelName, const char *headSkinName, const char *teamName ) {
 	char	filename[MAX_QPATH];
 	const char		*headName;
@@ -613,11 +572,6 @@ static qboolean CG_RegisterClientModelname( clientInfo_t *ci, const char *modelN
 	return qtrue;
 }
 
-/*
-====================
-CG_ColorFromString
-====================
-*/
 static void CG_ColorFromString( const char *v, vec3_t color ) {
 	int val;
 
@@ -733,11 +687,6 @@ static void CG_LoadClientInfo( int clientNum, clientInfo_t *ci ) {
 	}
 }
 
-/*
-======================
-CG_CopyClientInfoModel
-======================
-*/
 static void CG_CopyClientInfoModel( clientInfo_t *from, clientInfo_t *to ) {
 	VectorCopy( from->headOffset, to->headOffset );
 	to->footsteps = from->footsteps;
@@ -757,11 +706,6 @@ static void CG_CopyClientInfoModel( clientInfo_t *from, clientInfo_t *to ) {
 	memcpy( to->sounds, from->sounds, sizeof( to->sounds ) );
 }
 
-/*
-======================
-CG_ScanForExistingClientInfo
-======================
-*/
 static qboolean CG_ScanForExistingClientInfo( clientInfo_t *ci ) {
 	int		i;
 	clientInfo_t	*match;
@@ -868,11 +812,6 @@ static void CG_SetDeferredClientInfo( int clientNum, clientInfo_t *ci ) {
 }
 
 
-/*
-======================
-CG_NewClientInfo
-======================
-*/
 void CG_NewClientInfo( int clientNum ) {
 	clientInfo_t *ci;
 	clientInfo_t newInfo;
@@ -1218,11 +1157,6 @@ static void CG_RunLerpFrame( clientInfo_t *ci, lerpFrame_t *lf, int newAnimation
 }
 
 
-/*
-===============
-CG_ClearLerpFrame
-===============
-*/
 static void CG_ClearLerpFrame( clientInfo_t *ci, lerpFrame_t *lf, int animationNumber ) {
 	lf->frameTime = lf->oldFrameTime = cg.time;
 	CG_SetLerpFrameAnimation( ci, lf, animationNumber );
@@ -1230,11 +1164,6 @@ static void CG_ClearLerpFrame( clientInfo_t *ci, lerpFrame_t *lf, int animationN
 }
 
 
-/*
-===============
-CG_PlayerAnimation
-===============
-*/
 static void CG_PlayerAnimation( centity_t *cent, int *legsOld, int *legs, float *legsBackLerp,
 						int *torsoOld, int *torso, float *torsoBackLerp ) {
 	clientInfo_t	*ci;
@@ -1282,11 +1211,6 @@ PLAYER ANGLES
 =============================================================================
 */
 
-/*
-==================
-CG_SwingAngles
-==================
-*/
 static void CG_SwingAngles( float destination, float swingTolerance, float clampTolerance,
 					float speed, float *angle, qboolean *swinging ) {
 	float	swing;
@@ -1343,11 +1267,6 @@ static void CG_SwingAngles( float destination, float swingTolerance, float clamp
 	}
 }
 
-/*
-=================
-CG_AddPainTwitch
-=================
-*/
 static void CG_AddPainTwitch( centity_t *cent, vec3_t torsoAngles ) {
 	int		t;
 	float	f;
@@ -1493,11 +1412,6 @@ static void CG_PlayerAngles( centity_t *cent, vec3_t legs[3], vec3_t torso[3], v
 
 //==========================================================================
 
-/*
-===============
-CG_HasteTrail
-===============
-*/
 static void CG_HasteTrail( centity_t *cent ) {
 	localEntity_t	*smoke;
 	vec3_t			origin;
@@ -1533,11 +1447,6 @@ static void CG_HasteTrail( centity_t *cent ) {
 }
 
 #ifdef MISSIONPACK
-/*
-===============
-CG_BreathPuffs
-===============
-*/
 static void CG_BreathPuffs( centity_t *cent, refEntity_t *head) {
 	clientInfo_t *ci;
 	vec3_t up, origin;
@@ -1569,11 +1478,6 @@ static void CG_BreathPuffs( centity_t *cent, refEntity_t *head) {
 	ci->breathPuffTime = cg.time + 2000;
 }
 
-/*
-===============
-CG_DustTrail
-===============
-*/
 static void CG_DustTrail( centity_t *cent ) {
 	int				anim;
 	vec3_t end, vel;
@@ -1619,11 +1523,6 @@ static void CG_DustTrail( centity_t *cent ) {
 
 #endif
 
-/*
-===============
-CG_TrailItem
-===============
-*/
 static void CG_TrailItem( centity_t *cent, qhandle_t hModel ) {
 	refEntity_t		ent;
 	vec3_t			angles;
@@ -1645,11 +1544,6 @@ static void CG_TrailItem( centity_t *cent, qhandle_t hModel ) {
 }
 
 
-/*
-===============
-CG_PlayerFlag
-===============
-*/
 static void CG_PlayerFlag( centity_t *cent, qhandle_t hSkin, refEntity_t *torso ) {
 	clientInfo_t	*ci;
 	refEntity_t	pole;
@@ -1763,11 +1657,6 @@ static void CG_PlayerFlag( centity_t *cent, qhandle_t hSkin, refEntity_t *torso 
 
 
 #ifdef MISSIONPACK
-/*
-===============
-CG_PlayerTokens
-===============
-*/
 static void CG_PlayerTokens( centity_t *cent, int renderfx ) {
 	int			tokens, i, j;
 	float		angle;
@@ -1833,11 +1722,6 @@ static void CG_PlayerTokens( centity_t *cent, int renderfx ) {
 #endif
 
 
-/*
-===============
-CG_PlayerPowerups
-===============
-*/
 static void CG_PlayerPowerups( centity_t *cent, refEntity_t *torso ) {
 	int		powerups;
 	clientInfo_t	*ci;
@@ -2186,11 +2070,6 @@ void CG_AddRefEntityWithPowerups( refEntity_t *ent, entityState_t *state, int te
 	}
 }
 
-/*
-=================
-CG_LightVerts
-=================
-*/
 int CG_LightVerts( vec3_t normal, int numVerts, polyVert_t *verts )
 {
 	int				i, j;
@@ -2233,11 +2112,6 @@ int CG_LightVerts( vec3_t normal, int numVerts, polyVert_t *verts )
 	return qtrue;
 }
 
-/*
-===============
-CG_Player
-===============
-*/
 void CG_Player( centity_t *cent ) {
 	clientInfo_t	*ci;
 	refEntity_t		legs;

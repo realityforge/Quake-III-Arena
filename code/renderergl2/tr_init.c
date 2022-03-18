@@ -292,11 +292,6 @@ static void InitOpenGL( void )
 	GL_SetDefaultState();
 }
 
-/*
-==================
-GL_CheckErrors
-==================
-*/
 void GL_CheckErrs( char *file, int line ) {
 	int		err;
 	char	s[64];
@@ -551,11 +546,6 @@ void RB_TakeScreenshotJPEG(int x, int y, int width, int height, char *fileName)
 	ri.Hunk_FreeTempMemory(buffer);
 }
 
-/*
-==================
-RB_TakeScreenshotCmd
-==================
-*/
 const void *RB_TakeScreenshotCmd( const void *data ) {
 	const screenshotCommand_t	*cmd;
 	
@@ -573,11 +563,6 @@ const void *RB_TakeScreenshotCmd( const void *data ) {
 	return (const void *)(cmd + 1);	
 }
 
-/*
-==================
-R_TakeScreenshot
-==================
-*/
 void R_TakeScreenshot( int x, int y, int width, int height, char *name, qboolean jpeg ) {
 	static char	fileName[MAX_OSPATH]; // bad things if two screenshots per frame?
 	screenshotCommand_t	*cmd;
@@ -834,11 +819,6 @@ void R_ScreenShotJPEG_f (void) {
 
 //============================================================================
 
-/*
-==================
-R_ExportCubemaps
-==================
-*/
 void R_ExportCubemaps(void)
 {
 	exportCubemapsCommand_t	*cmd;
@@ -851,11 +831,6 @@ void R_ExportCubemaps(void)
 }
 
 
-/*
-==================
-R_ExportCubemaps_f
-==================
-*/
 void R_ExportCubemaps_f(void)
 {
 	R_ExportCubemaps();
@@ -863,11 +838,6 @@ void R_ExportCubemaps_f(void)
 
 //============================================================================
 
-/*
-==================
-RB_TakeVideoFrameCmd
-==================
-*/
 const void *RB_TakeVideoFrameCmd( const void *data )
 {
 	const videoFrameCommand_t	*cmd;
@@ -1021,12 +991,7 @@ void R_PrintLongString(const char *string) {
 	}
 }
 
-/*
-================
-GfxInfo_f
-================
-*/
-void GfxInfo_f( void ) 
+void GfxInfo_f( void )
 {
 	const char *enablestrings[] =
 	{
@@ -1104,12 +1069,7 @@ void GfxInfo_f( void )
 	}
 }
 
-/*
-================
-GfxMemInfo_f
-================
-*/
-void GfxMemInfo_f( void ) 
+void GfxMemInfo_f( void )
 {
 	switch (glRefConfig.memInfo)
 	{
@@ -1156,12 +1116,7 @@ void GfxMemInfo_f( void )
 	}
 }
 
-/*
-===============
-R_Register
-===============
-*/
-void R_Register( void ) 
+void R_Register( void )
 {
 	//
 	// latched and archived variables
@@ -1398,12 +1353,7 @@ void R_ShutDownQueries(void)
 		qglDeleteQueries(ARRAY_LEN(tr.sunFlareQuery), tr.sunFlareQuery);
 }
 
-/*
-===============
-R_Init
-===============
-*/
-void R_Init( void ) {	
+void R_Init( void ) {
 	int	err;
 	int i;
 	byte *ptr;
@@ -1498,12 +1448,7 @@ void R_Init( void ) {
 	ri.Printf( PRINT_ALL, "----- finished R_Init -----\n" );
 }
 
-/*
-===============
-RE_Shutdown
-===============
-*/
-void RE_Shutdown( qboolean destroyWindow ) {	
+void RE_Shutdown( qboolean destroyWindow ) {
 
 	ri.Printf( PRINT_ALL, "RE_Shutdown( %i )\n", destroyWindow );
 

@@ -24,12 +24,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define	MISSILE_PRESTEP_TIME	50
 
-/*
-================
-G_BounceMissile
-
-================
-*/
 void G_BounceMissile( gentity_t *ent, trace_t *trace ) {
 	vec3_t	velocity;
 	float	dot;
@@ -94,11 +88,6 @@ void G_ExplodeMissile( gentity_t *ent ) {
 
 
 #ifdef MISSIONPACK
-/*
-================
-ProximityMine_Explode
-================
-*/
 static void ProximityMine_Explode( gentity_t *mine ) {
 	G_ExplodeMissile( mine );
 	// if the prox mine has a trigger free it
@@ -108,21 +97,11 @@ static void ProximityMine_Explode( gentity_t *mine ) {
 	}
 }
 
-/*
-================
-ProximityMine_Die
-================
-*/
 static void ProximityMine_Die( gentity_t *ent, gentity_t *inflictor, gentity_t *attacker, int damage, int mod ) {
 	ent->think = ProximityMine_Explode;
 	ent->nextthink = level.time + 1;
 }
 
-/*
-================
-ProximityMine_Trigger
-================
-*/
 void ProximityMine_Trigger( gentity_t *trigger, gentity_t *other, trace_t *trace ) {
 	vec3_t		v;
 	gentity_t	*mine;
@@ -159,11 +138,6 @@ void ProximityMine_Trigger( gentity_t *trigger, gentity_t *other, trace_t *trace
 	G_FreeEntity( trigger );
 }
 
-/*
-================
-ProximityMine_Activate
-================
-*/
 static void ProximityMine_Activate( gentity_t *ent ) {
 	gentity_t	*trigger;
 	float		r;
@@ -198,11 +172,6 @@ static void ProximityMine_Activate( gentity_t *ent ) {
 	ent->activator = trigger;
 }
 
-/*
-================
-ProximityMine_ExplodeOnPlayer
-================
-*/
 static void ProximityMine_ExplodeOnPlayer( gentity_t *mine ) {
 	gentity_t	*player;
 
@@ -223,11 +192,6 @@ static void ProximityMine_ExplodeOnPlayer( gentity_t *mine ) {
 	}
 }
 
-/*
-================
-ProximityMine_Player
-================
-*/
 static void ProximityMine_Player( gentity_t *mine, gentity_t *player ) {
 	if( mine->s.eFlags & EF_NODRAW ) {
 		return;
@@ -262,11 +226,6 @@ static void ProximityMine_Player( gentity_t *mine, gentity_t *player ) {
 }
 #endif
 
-/*
-================
-G_MissileImpact
-================
-*/
 void G_MissileImpact( gentity_t *ent, trace_t *trace ) {
 	gentity_t		*other;
 	qboolean		hitClient = qfalse;
@@ -440,11 +399,6 @@ void G_MissileImpact( gentity_t *ent, trace_t *trace ) {
 	trap_LinkEntity( ent );
 }
 
-/*
-================
-G_RunMissile
-================
-*/
 void G_RunMissile( gentity_t *ent ) {
 	vec3_t		origin;
 	trace_t		tr;
@@ -513,12 +467,6 @@ void G_RunMissile( gentity_t *ent ) {
 
 //=============================================================================
 
-/*
-=================
-fire_plasma
-
-=================
-*/
 gentity_t *fire_plasma (gentity_t *self, vec3_t start, vec3_t dir) {
 	gentity_t	*bolt;
 
@@ -555,11 +503,6 @@ gentity_t *fire_plasma (gentity_t *self, vec3_t start, vec3_t dir) {
 //=============================================================================
 
 
-/*
-=================
-fire_grenade
-=================
-*/
 gentity_t *fire_grenade (gentity_t *self, vec3_t start, vec3_t dir) {
 	gentity_t	*bolt;
 
@@ -597,11 +540,6 @@ gentity_t *fire_grenade (gentity_t *self, vec3_t start, vec3_t dir) {
 //=============================================================================
 
 
-/*
-=================
-fire_bfg
-=================
-*/
 gentity_t *fire_bfg (gentity_t *self, vec3_t start, vec3_t dir) {
 	gentity_t	*bolt;
 
@@ -637,11 +575,6 @@ gentity_t *fire_bfg (gentity_t *self, vec3_t start, vec3_t dir) {
 //=============================================================================
 
 
-/*
-=================
-fire_rocket
-=================
-*/
 gentity_t *fire_rocket (gentity_t *self, vec3_t start, vec3_t dir) {
 	gentity_t	*bolt;
 
@@ -674,11 +607,6 @@ gentity_t *fire_rocket (gentity_t *self, vec3_t start, vec3_t dir) {
 	return bolt;
 }
 
-/*
-=================
-fire_grapple
-=================
-*/
 gentity_t *fire_grapple (gentity_t *self, vec3_t start, vec3_t dir) {
 	gentity_t	*hook;
 
@@ -712,11 +640,6 @@ gentity_t *fire_grapple (gentity_t *self, vec3_t start, vec3_t dir) {
 
 
 #ifdef MISSIONPACK
-/*
-=================
-fire_nail
-=================
-*/
 #define NAILGUN_SPREAD	500
 
 gentity_t *fire_nail( gentity_t *self, vec3_t start, vec3_t forward, vec3_t right, vec3_t up ) {
@@ -762,11 +685,6 @@ gentity_t *fire_nail( gentity_t *self, vec3_t start, vec3_t forward, vec3_t righ
 }	
 
 
-/*
-=================
-fire_prox
-=================
-*/
 gentity_t *fire_prox( gentity_t *self, vec3_t start, vec3_t dir ) {
 	gentity_t	*bolt;
 

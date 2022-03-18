@@ -314,11 +314,6 @@ static int R_PshadowSurface( msurface_t *surf, int pshadowBits ) {
 }
 
 
-/*
-======================
-R_AddWorldSurface
-======================
-*/
 static void R_AddWorldSurface( msurface_t *surf, int dlightBits, int pshadowBits ) {
 	// FIXME: bmodel fog?
 
@@ -350,11 +345,6 @@ static void R_AddWorldSurface( msurface_t *surf, int dlightBits, int pshadowBits
 =============================================================
 */
 
-/*
-=================
-R_AddBrushModelSurfaces
-=================
-*/
 void R_AddBrushModelSurfaces ( trRefEntity_t *ent ) {
 	bmodel_t	*bmodel;
 	int			clip;
@@ -384,21 +374,6 @@ void R_AddBrushModelSurfaces ( trRefEntity_t *ent ) {
 	}
 }
 
-
-/*
-=============================================================
-
-	WORLD MODEL
-
-=============================================================
-*/
-
-
-/*
-================
-R_RecursiveWorldNode
-================
-*/
 static void R_RecursiveWorldNode( mnode_t *node, uint32_t planeBits, uint32_t dlightBits, uint32_t pshadowBits ) {
 
 	do {
@@ -584,11 +559,6 @@ static void R_RecursiveWorldNode( mnode_t *node, uint32_t planeBits, uint32_t dl
 }
 
 
-/*
-===============
-R_PointInLeaf
-===============
-*/
 static mnode_t *R_PointInLeaf( const vec3_t p ) {
 	mnode_t		*node;
 	float		d;
@@ -615,11 +585,6 @@ static mnode_t *R_PointInLeaf( const vec3_t p ) {
 	return node;
 }
 
-/*
-==============
-R_ClusterPVS
-==============
-*/
 static const byte *R_ClusterPVS (int cluster) {
 	if (!tr.world->vis || cluster < 0 || cluster >= tr.world->numClusters ) {
 		return NULL;
@@ -628,11 +593,6 @@ static const byte *R_ClusterPVS (int cluster) {
 	return tr.world->vis + cluster * tr.world->clusterBytes;
 }
 
-/*
-=================
-R_inPVS
-=================
-*/
 qboolean R_inPVS( const vec3_t p1, const vec3_t p2 ) {
 	mnode_t *leaf;
 	byte	*vis;
@@ -733,11 +693,6 @@ static void R_MarkLeaves (void) {
 }
 
 
-/*
-=============
-R_AddWorldSurfaces
-=============
-*/
 void R_AddWorldSurfaces (void) {
 	uint32_t planeBits, dlightBits, pshadowBits;
 
