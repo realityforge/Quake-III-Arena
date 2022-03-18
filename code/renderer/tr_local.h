@@ -40,12 +40,6 @@ long myftol( float f );
 #define	myftol(x) ((int)(x))
 #endif
 
-
-// everything that is needed by the backend needs
-// to be double buffered to allow it to run in
-// parallel on a dual cpu machine
-#define	SMP_FRAMES		2
-
 // 12 bits
 // see QSORT_SHADERNUM_SHIFT
 #define	MAX_SHADERS				16384
@@ -570,7 +564,7 @@ typedef struct srfGridMesh_s {
 	surfaceType_t	surfaceType;
 
 	// dynamic lighting information
-	int				dlightBits[SMP_FRAMES];
+	int				dlightBits;
 
 	// culling information
 	vec3_t			meshBounds[2];
@@ -600,7 +594,7 @@ typedef struct {
 	cplane_t	plane;
 
 	// dynamic lighting information
-	int			dlightBits[SMP_FRAMES];
+	int			dlightBits;
 
 	// triangle definitions (no normals at points)
 	int			numPoints;
@@ -616,7 +610,7 @@ typedef struct {
 	surfaceType_t	surfaceType;
 
 	// dynamic lighting information
-	int				dlightBits[SMP_FRAMES];
+	int				dlightBits;
 
 	// culling information (FIXME: use this!)
 	vec3_t			bounds[2];
@@ -848,7 +842,6 @@ typedef struct {
 // all state modified by the back end is seperated
 // from the front end state
 typedef struct {
-	int			smpFrame;
 	trRefdef_t	refdef;
 	viewParms_t	viewParms;
 	orientationr_t	or;
@@ -879,8 +872,6 @@ typedef struct {
 	int						sceneCount;		// incremented every scene
 	int						viewCount;		// incremented every view (twice a scene if portaled)
 											// and every R_MarkFragments call
-
-	int						smpFrame;		// toggles from 0 to 1 every endFrame
 
 	int						frameSceneNum;	// zeroed at RE_BeginFrame
 
@@ -1066,8 +1057,6 @@ extern	cvar_t	*r_portalOnly;
 
 extern	cvar_t	*r_subdivisions;
 extern	cvar_t	*r_lodCurveError;
-extern	cvar_t	*r_smp;
-extern	cvar_t	*r_showSmp;
 extern	cvar_t	*r_skipBackEnd;
 
 extern	cvar_t	*r_ignoreGLErrors;
@@ -1232,11 +1221,6 @@ IMPLEMENTATION SPECIFIC FUNCTIONS
 void		GLimp_Init( void );
 void		GLimp_Shutdown( void );
 void		GLimp_EndFrame( void );
-
-qboolean	GLimp_SpawnRenderThread( void (*function)( void ) );
-void		*GLimp_RendererSleep( void );
-void		GLimp_FrontEndSleep( void );
-void		GLimp_WakeRenderer( void *data );
 
 // NOTE TTimo linux works with float gamma value, not the gamma table
 //   the params won't be used, getting the r_gamma cvar directly
@@ -1409,7 +1393,7 @@ SCENE GENERATION
 ============================================================
 */
 
-void R_ToggleSmpFrame( void );
+void R_ResetFrameCounts( void );
 
 void RE_ClearScene( void );
 void RE_AddRefEntityToScene( const refEntity_t *ent );
@@ -1468,7 +1452,6 @@ RENDERER BACK END FUNCTIONS
 =============================================================
 */
 
-void RB_RenderThread( void );
 void RB_ExecuteRenderCommands( const void *data );
 
 /*
@@ -1558,9 +1541,7 @@ typedef enum {
 #define	MAX_POLYVERTS	3000
 
 // all of the information needed by the back end must be
-// contained in a backEndData_t.  This entire structure is
-// duplicated so the front and back end can run in parallel
-// on an SMP machine
+// contained in a backEndData_t.
 typedef struct {
 	drawSurf_t	drawSurfs[MAX_DRAWSURFS];
 	dlight_t	dlights[MAX_DLIGHTS];
@@ -1573,7 +1554,7 @@ typedef struct {
 extern	int		max_polys;
 extern	int		max_polyverts;
 
-extern	backEndData_t	*backEndData[SMP_FRAMES];	// the second one may not be allocated
+extern	backEndData_t	*backEndData;
 
 extern	volatile renderCommandList_t	*renderCommandList;
 
@@ -1583,10 +1564,7 @@ extern	volatile qboolean	renderThreadActive;
 void *R_GetCommandBuffer( int bytes );
 void RB_ExecuteRenderCommands( const void *data );
 
-void R_InitCommandBuffers( void );
-void R_ShutdownCommandBuffers( void );
-
-void R_SyncRenderThread( void );
+void R_IssuePendingRenderCommands( void );
 
 void R_AddDrawSurfCmd( drawSurf_t *drawSurfs, int numDrawSurfs );
 

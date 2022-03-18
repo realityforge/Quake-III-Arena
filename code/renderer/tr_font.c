@@ -341,8 +341,7 @@ void RE_RegisterFont(const char *fontName, int pointSize, fontInfo_t *font) {
 	// we also need to adjust the scale based on point size relative to 48 points as the ui scaling is based on a 48 point font
 	glyphScale *= 48.0f / pointSize;
 
-	// make sure the render thread is stopped
-	R_SyncRenderThread();
+	R_IssuePendingRenderCommands();
 
   if (registeredFontCount >= MAX_FONTS) {
     ri.Printf(PRINT_ALL, "RE_RegisterFont: Too many fonts registered already.\n");

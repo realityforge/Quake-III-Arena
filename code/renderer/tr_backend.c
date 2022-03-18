@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "tr_local.h"
 
-backEndData_t	*backEndData[SMP_FRAMES];
+backEndData_t	*backEndData;
 backEndState_t	backEnd;
 
 
@@ -719,7 +719,7 @@ void RE_StretchRaw (int x, int y, int w, int h, int cols, int rows, const byte *
 	if ( !tr.registered ) {
 		return;
 	}
-	R_SyncRenderThread();
+    R_IssuePendingRenderCommands();
 
 	// we definately want to sync every frame for the cinematics
 	qglFinish();
@@ -1068,12 +1068,6 @@ void RB_ExecuteRenderCommands( const void *data ) {
 
 	t1 = ri.Milliseconds ();
 
-	if ( !r_smp->integer || data == backEndData[0]->commands.cmds ) {
-		backEnd.smpFrame = 0;
-	} else {
-		backEnd.smpFrame = 1;
-	}
-
 	while ( 1 ) {
 		switch ( *(const int *)data ) {
 		case RC_SET_COLOR:
@@ -1105,30 +1099,3 @@ void RB_ExecuteRenderCommands( const void *data ) {
 	}
 
 }
-
-
-/*
-================
-RB_RenderThread
-================
-*/
-void RB_RenderThread( void ) {
-	const void	*data;
-
-	// wait for either a rendering command or a quit command
-	while ( 1 ) {
-		// sleep until we have work to do
-		data = GLimp_RendererSleep();
-
-		if ( !data ) {
-			return;	// all done, renderer is shutting down
-		}
-
-		renderThreadActive = qtrue;
-
-		RB_ExecuteRenderCommands( data );
-
-		renderThreadActive = qfalse;
-	}
-}
-

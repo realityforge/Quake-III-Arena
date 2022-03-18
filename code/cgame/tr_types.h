@@ -199,7 +199,6 @@ typedef struct {
 	// used CDS.
 	qboolean				isFullscreen;
 	qboolean				stereoEnabled;
-	qboolean				smpActive;		// dual processor
 } glconfig_t;
 
 // FIXME: VM should be OS agnostic .. in theory

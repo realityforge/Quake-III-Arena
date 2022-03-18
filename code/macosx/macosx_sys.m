@@ -294,24 +294,3 @@ qboolean Sys_LowPhysicalMemory()
 {
     return NSRealMemoryAvailable() <= MEM_THRESHOLD;
 }
-
-static unsigned int _Sys_ProcessorCount = 0;
-
-unsigned int Sys_ProcessorCount()
-{
-    if (!_Sys_ProcessorCount) {
-        int name[] = {CTL_HW, HW_NCPU};
-        size_t size;
-    
-        size = sizeof(_Sys_ProcessorCount);
-        if (sysctl(name, 2, &_Sys_ProcessorCount, &size, NULL, 0) < 0) {
-            perror("sysctl");
-            _Sys_ProcessorCount = 1;
-        } else {
-            Com_Printf("System processor count is %d\n", _Sys_ProcessorCount);
-        }
-    }
-    
-    return _Sys_ProcessorCount;
-}
-

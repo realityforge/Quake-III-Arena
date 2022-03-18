@@ -120,9 +120,7 @@ qhandle_t RE_RegisterModel( const char *name ) {
 	// only set the name after the model has been successfully loaded
 	Q_strncpyz( mod->name, name, sizeof( mod->name ) );
 
-
-	// make sure the render thread is stopped
-	R_SyncRenderThread();
+    R_IssuePendingRenderCommands();
 
 	mod->numLods = 0;
 
@@ -532,7 +530,7 @@ void RE_BeginRegistration( glconfig_t *glconfigOut ) {
 
 	*glconfigOut = glConfig;
 
-	R_SyncRenderThread();
+    R_IssuePendingRenderCommands();
 
 	tr.viewCluster = -1;		// force markleafs to regenerate
 	R_ClearFlares();

@@ -386,12 +386,3 @@ int Sys_GetProcessorId( void )
 {
 	return CPUID_GENERIC;
 }
-
-#if defined(__linux__)
-// TTimo 
-// sysconf() in libc, POSIX.1 compliant
-unsigned int Sys_ProcessorCount()
-{
-  return sysconf(_SC_NPROCESSORS_ONLN);
-}
-#endif
