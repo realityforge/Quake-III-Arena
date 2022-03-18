@@ -15,9 +15,7 @@ cc_library(
     ],
     copts = ["-Wno-maybe-uninitialized"],
     defines = ["USE_CODEC_VORBIS"],
-    includes = [
-        "include",
-    ],
+    includes = ["include"],
     deps = [
         "//third_party/ogg",
         "//third_party/opus",
