@@ -1972,6 +1972,9 @@ void CG_Init( int serverMessageNum, int serverCommandSequence, int clientNum ) {
 	CG_ShaderStateChanged();
 
 	trap_S_ClearLoopingSounds( qtrue );
+
+	const char *serverinfo = CG_ConfigString( CS_SERVERINFO );
+	vr->no_crosshair = (strcasestr(serverinfo, "nocrosshair") != NULL || strcasestr(serverinfo, "no crosshair") != NULL);
 }
 
 /*

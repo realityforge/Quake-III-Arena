@@ -515,6 +515,10 @@ void G_InitGame( int levelTime, int randomSeed, int restart ) {
 	G_RemapTeamShaders();
 
 	trap_SetConfigstring( CS_INTERMISSION, "" );
+
+	char serverinfo[MAX_INFO_STRING];
+	trap_GetServerinfo( serverinfo, sizeof( serverinfo ) );
+	vr->no_crosshair = (strcasestr(serverinfo, "nocrosshair") != NULL || strcasestr(serverinfo, "no crosshair") != NULL);
 }
 
 

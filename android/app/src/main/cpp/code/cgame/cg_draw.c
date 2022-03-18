@@ -1884,7 +1884,7 @@ static void CG_DrawCrosshair(void)
 	float		x, y;
 	int			ca;
 
-	if ( !cg_drawCrosshair.integer ) {
+	if ( !cg_drawCrosshair.integer || vr->no_crosshair ) {
 		return;
 	}
 
@@ -1951,7 +1951,7 @@ static void CG_DrawCrosshair3D(void)
 	char rendererinfos[128];
 	refEntity_t ent;
 
-	if ( !cg_drawCrosshair.integer ) {
+	if ( !cg_drawCrosshair.integer || vr->no_crosshair ) {
 		return;
 	}
 

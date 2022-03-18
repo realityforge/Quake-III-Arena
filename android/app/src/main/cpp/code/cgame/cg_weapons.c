@@ -1722,7 +1722,7 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 	// set up gun position
 	CG_CalculateVRWeaponPosition( hand.origin, angles );
 
-	if (trap_Cvar_VariableValue("vr_lasersight") != 0.0f)
+	if (trap_Cvar_VariableValue("vr_lasersight") != 0.0f && !vr->no_crosshair)
 	{
 		vec3_t forward, end, dir;
 		AngleVectors(angles, forward, NULL, NULL);
