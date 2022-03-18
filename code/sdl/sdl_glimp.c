@@ -829,9 +829,12 @@ static void GLimp_InitExtensions( qboolean fixedFunction )
 		{
 			if ( r_ext_multitexture->value )
 			{
-				qglMultiTexCoord2fARB = SDL_GL_GetProcAddress( "glMultiTexCoord2fARB" );
-				qglActiveTextureARB = SDL_GL_GetProcAddress( "glActiveTextureARB" );
-				qglClientActiveTextureARB = SDL_GL_GetProcAddress( "glClientActiveTextureARB" );
+                qglMultiTexCoord2fARB =
+                        (void (APIENTRYP)(GLenum, GLfloat, GLfloat)) SDL_GL_GetProcAddress("glMultiTexCoord2fARB");
+                qglActiveTextureARB =
+                        (void (APIENTRYP)(GLenum)) SDL_GL_GetProcAddress("glActiveTextureARB");
+                qglClientActiveTextureARB =
+                        (void (APIENTRYP)(GLenum)) SDL_GL_GetProcAddress("glClientActiveTextureARB");
 
 				if ( qglActiveTextureARB )
 				{
