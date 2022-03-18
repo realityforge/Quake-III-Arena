@@ -36,6 +36,7 @@ cc_library(
     hdrs = [
         "bg_lib.h",
     ],
+    copts = ["-Wno-empty-translation-unit"],
     visibility = [
         "//code/cgame:__pkg__",
     ],
