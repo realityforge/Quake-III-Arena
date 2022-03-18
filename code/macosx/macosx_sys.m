@@ -275,14 +275,6 @@ void Sys_StreamSeek( fileHandle_t f, int offset, int origin ) {
 	FS_Seek( f, offset, origin );
 }
 
-
-void OutputDebugString(char * s)
-{
-#ifdef DEBUG
-    fprintf(stderr, "%s", s);
-#endif
-}
-
 /*
 ==================
 Sys_LowPhysicalMemory()
