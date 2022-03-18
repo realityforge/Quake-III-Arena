@@ -1,9 +1,4 @@
 # Quake 3 Port to Oculus Quest
-This project is a port of the ioq3 engine to the Oculus Quest. This is simply a hobby project of mine, don't get any expectations of me having a high velocity on this. Feel free to contribute however.
-
-I'm not providing binaries, due to the early state of the project. If you want to build this yourself, follow the instuctions below. You can already walk and look around in DM6 for example.
-
-NOTE: Hand tracking is enabled, but this has been done because I got too annoyed with grabbing my controllers every time when booting the title. Use controllers to actually walk around.
 
 ## Building
 
