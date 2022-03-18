@@ -1472,16 +1472,6 @@ void RB_StageIteratorGeneric( void )
 	}
 
 	//
-	// log this call
-	//
-	if ( r_logFile->integer ) 
-	{
-		// don't just call LogComment, or we will get
-		// a call to va() every frame!
-		GLimp_LogComment( va("--- RB_StageIteratorGeneric( %s ) ---\n", tess.shader->name) );
-	}
-
-	//
 	// set face culling appropriately
 	//
 	if (input->shader->cullType == CT_TWO_SIDED)
@@ -1659,6 +1649,4 @@ void RB_EndSurface( void ) {
 	tess.numIndexes = 0;
 	tess.numVertexes = 0;
 	tess.firstIndex = 0;
-
-	GLimp_LogComment( "----------\n" );
 }

@@ -1480,12 +1480,6 @@ void GLSL_BindProgram(shaderProgram_t * program)
 	GLuint programObject = program ? program->program : 0;
 	char *name = program ? program->name : "NULL";
 
-	if(r_logFile->integer)
-	{
-		// don't just call LogComment, or we will get a call to va() every frame!
-		GLimp_LogComment(va("--- GLSL_BindProgram( %s ) ---\n", name));
-	}
-
 	if (GL_UseProgram(programObject))
 		backEnd.pc.c_glslShaderBinds++;
 }

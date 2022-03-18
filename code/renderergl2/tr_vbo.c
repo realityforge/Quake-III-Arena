@@ -342,12 +342,6 @@ void R_BindVao(vao_t * vao)
 		return;
 	}
 
-	if(r_logFile->integer)
-	{
-		// don't just call LogComment, or we will get a call to va() every frame!
-		GLimp_LogComment(va("--- R_BindVao( %s ) ---\n", vao->name));
-	}
-
 	if(glState.currentVao != vao)
 	{
 		glState.currentVao = vao;
@@ -387,8 +381,6 @@ R_BindNullVao
 */
 void R_BindNullVao(void)
 {
-	GLimp_LogComment("--- R_BindNullVao ---\n");
-
 	if(glState.currentVao)
 	{
 		if (glRefConfig.vertexArrayObject)
@@ -593,8 +585,6 @@ Update the default VAO to replace the client side vertex arrays
 */
 void RB_UpdateTessVao(unsigned int attribBits)
 {
-	GLimp_LogComment("--- RB_UpdateTessVao ---\n");
-
 	backEnd.pc.c_dynamicVaoDraws++;
 
 	// update the default VAO

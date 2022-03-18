@@ -102,16 +102,6 @@ void GLimp_Minimize( void )
 	SDL_MinimizeWindow( SDL_window );
 }
 
-
-/*
-===============
-GLimp_LogComment
-===============
-*/
-void GLimp_LogComment( char *comment )
-{
-}
-
 /*
 ===============
 GLimp_CompareModes

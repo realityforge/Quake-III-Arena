@@ -229,12 +229,6 @@ void FBO_Bind(FBO_t * fbo)
 	if (glState.currentFBO == fbo)
 		return;
 		
-	if (r_logFile->integer)
-	{
-		// don't just call LogComment, or we will get a call to va() every frame!
-		GLimp_LogComment(va("--- FBO_Bind( %s ) ---\n", fbo ? fbo->name : "NULL"));
-	}
-
 	GL_BindFramebuffer(GL_FRAMEBUFFER, fbo ? fbo->frameBuffer : 0);
 	glState.currentFBO = fbo;
 }

@@ -177,8 +177,6 @@ based on Tess_InstantQuad from xreal
 */
 void RB_InstantQuad2(vec4_t quadVerts[4], vec2_t texCoords[4])
 {
-	GLimp_LogComment("--- RB_InstantQuad2 ---\n");
-
 	tess.numVertexes = 0;
 	tess.numIndexes = 0;
 	tess.firstIndex = 0;
@@ -1188,8 +1186,6 @@ void RB_SurfaceVaoMdvMesh(srfVaoMdvMesh_t * surface)
 	//mdvModel_t     *mdvModel;
 	//mdvSurface_t   *mdvSurface;
 	refEntity_t    *refEnt;
-
-	GLimp_LogComment("--- RB_SurfaceVaoMdvMesh ---\n");
 
 	if (ShaderRequiresCPUDeforms(tess.shader))
 	{

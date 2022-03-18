@@ -1383,8 +1383,6 @@ const void	*RB_SwapBuffers( const void *data ) {
 		qglFinish();
 	}
 
-	GLimp_LogComment( "***************** RB_SwapBuffers *****************\n\n\n" );
-
 	GLimp_EndFrame();
 
 	backEnd.framePostProcessed = qfalse;
