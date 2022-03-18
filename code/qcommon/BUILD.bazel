@@ -120,6 +120,7 @@ cc_library(
         "//code/game:__pkg__",
         "//code/q3_ui:__pkg__",
         "//code/server:__pkg__",
+        "//code/sys:__pkg__",
         "//code/ui:__pkg__",
         "//third_party/unzip:__pkg__",
     ],
