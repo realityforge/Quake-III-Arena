@@ -68,7 +68,6 @@ systemCall:
 	// save the stack to allow recursive VM entry
 	currentVM->programStack = programStack - 4;
 	*(int *)((byte *)currentVM->dataBase + programStack + 4) = syscallNum;
-//VM_LogSyscalls(  (int *)((byte *)currentVM->dataBase + programStack + 4) );
 	*(opStack+1) = currentVM->systemCall( (int *)((byte *)currentVM->dataBase + programStack + 4) );
 
 _asm {

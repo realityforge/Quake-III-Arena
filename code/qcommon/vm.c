@@ -688,28 +688,6 @@ void VM_VmInfo_f( void ) {
 		Com_Printf( "    data length : %7i\n", vm->dataMask + 1 );
 	}
 }
-
-/*
-===============
-VM_LogSyscalls
-
-Insert calls to this while debugging the vm compiler
-===============
-*/
-void VM_LogSyscalls( int *args ) {
-	static	int		callnum;
-	static	FILE	*f;
-
-	if ( !f ) {
-		f = fopen("syscalls.log", "w" );
-	}
-	callnum++;
-	fprintf(f, "%i: %i (%i) = %i %i %i %i\n", callnum, args - (int *)currentVM->dataBase,
-		args[0], args[1], args[2], args[3], args[4] );
-}
-
-
-
 #ifdef oDLL_ONLY // bk010215 - for DLL_ONLY dedicated servers/builds w/o VM
 int	VM_CallCompiled( vm_t *vm, int *args ) {
   return(0); 
