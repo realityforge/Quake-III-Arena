@@ -55,9 +55,6 @@ PLATFORM=$(COMPILE_PLATFORM)
 endif
 export PLATFORM
 
-ifeq ($(PLATFORM),mingw32)
-  MINGW=1
-endif
 ifeq ($(PLATFORM),mingw64)
   MINGW=1
 endif
@@ -503,9 +500,6 @@ ifdef MINGW
     # We need to figure out the correct gcc and windres
     ifeq ($(ARCH),x86_64)
       MINGW_PREFIXES=x86_64-w64-mingw32 amd64-mingw32msvc
-    endif
-    ifeq ($(ARCH),x86)
-      MINGW_PREFIXES=i686-w64-mingw32 i586-mingw32msvc i686-pc-mingw32
     endif
 
     ifndef CC
