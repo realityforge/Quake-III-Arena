@@ -1,5 +1,11 @@
 name: Build
-on: [push, pull_request]
+on:
+  # Always run "Build" action for any commit on master branch
+  push:
+    branches:
+      - 'master'
+  # Always run the "Build" action when a pull request is opened, synchronized (aka pushed to) or reopened
+  pull_request:
 
 jobs:
   linux:
