@@ -10,13 +10,17 @@ NOTE: Hand tracking is enabled, but this has been done because I got too annoyed
 ### Prerequisites
 1. Install your copy of Quake III Arena from Steam.
 2. Android Studio with NDK version 21.1.6352462.
-3. Copy the Oculus VR SDK from https://developer.oculus.com/downloads/package/oculus-mobile-sdk/ and extract the VrApi folder to ./code/VrApi/
+3. Copy the Oculus VR SDK from https://developer.oculus.com/downloads/package/oculus-mobile-sdk/ and extract the VrApi folder to ./android/app/src/main/cpp/code/VrApi/
 
 ### Building and running the build
 The scripts assume that you installed everything in the default locations. In case you want to deviate from that, the paths are in ./android/run.(sh|bat) and in Makefile.local.
 
 #### Linux
 1. Update ANDROID_NDK path in Makefile.local
+2. Run ./android/run.sh
+
+#### MacOS
+1. If you are not using the default Android Studio installation paths (~/Library/Android/sdk/ndk), update ANDROID_NDK path in Makefile.local
 2. Run ./android/run.sh
 
 #### Windows
