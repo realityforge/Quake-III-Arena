@@ -53,7 +53,6 @@ static int ttycon_show_overdue = 0;
 
 // some key codes that the terminal may be using, initialised on start up
 static int TTY_erase;
-static int TTY_eof;
 
 static struct termios TTY_tc;
 
@@ -299,7 +298,6 @@ void CON_Init( void )
 	Field_Clear(&TTY_con);
 	tcgetattr (STDIN_FILENO, &TTY_tc);
 	TTY_erase = TTY_tc.c_cc[VERASE];
-	TTY_eof = TTY_tc.c_cc[VEOF];
 	tc = TTY_tc;
 
 	/*
