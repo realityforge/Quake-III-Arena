@@ -5,8 +5,8 @@ cc_library(
         "cvar.c",
     ],
     deps = [
-        ":shared_api",
         ":qcommon",
+        ":shared_api",
     ],
 )
 
@@ -20,8 +20,8 @@ cc_library(
         "vm_local.h",
     ],
     deps = [
-        ":shared_api",
         ":qcommon",
+        ":shared_api",
     ],
 )
 
@@ -31,8 +31,8 @@ cc_library(
         "files.c",
     ],
     deps = [
-        ":shared_api",
         ":qcommon",
+        ":shared_api",
         "//third_party/unzip",
     ],
 )
@@ -44,8 +44,8 @@ cc_library(
     ],
     defines = ["DEDICATED"],
     deps = [
-        ":shared_api",
         ":qcommon",
+        ":shared_api",
         "//third_party/unzip",
     ],
 )
@@ -60,9 +60,9 @@ cc_library(
         "net_ip.c",
     ],
     deps = [
+        ":qcommon",
         ":shared",
         ":shared_api",
-        ":qcommon",
     ],
 )
 
@@ -77,12 +77,11 @@ cc_library(
     ],
     defines = ["DEDICATED"],
     deps = [
+        ":qcommon",
         ":shared",
         ":shared_api",
-        ":qcommon",
     ],
 )
-
 
 cc_library(
     name = "common",
@@ -90,8 +89,8 @@ cc_library(
         "common.c",
     ],
     deps = [
-        ":shared_api",
         ":qcommon",
+        ":shared_api",
     ],
 )
 
@@ -150,8 +149,8 @@ cc_library(
     ],
     hdrs = ["cm_local.h"],
     deps = [
-        ":shared_api",
         ":qcommon",
+        ":shared_api",
     ],
 )
 
@@ -174,8 +173,8 @@ cc_library(
         "//third_party/unzip:__pkg__",
     ],
     deps = [
-        ":shared_api",
         ":qfiles",
+        ":shared_api",
     ],
 )
 
@@ -185,8 +184,8 @@ cc_library(
     name = "cmd",
     srcs = _CMD_SRC,
     deps = [
-        ":shared_api",
         ":qcommon",
+        ":shared_api",
     ],
 )
 
@@ -195,7 +194,7 @@ cc_library(
     srcs = _CMD_SRC,
     defines = ["DEDICATED"],
     deps = [
-        ":shared_api",
         ":qcommon",
+        ":shared_api",
     ],
 )
