@@ -873,25 +873,6 @@ void VM_VmInfo_f( void ) {
 }
 
 /*
-===============
-VM_LogSyscalls
-
-Insert calls to this while debugging the vm compiler
-===============
-*/
-void VM_LogSyscalls( int *args ) {
-	static	int		callnum;
-	static	FILE	*f;
-
-	if ( !f ) {
-		f = fopen("syscalls.log", "w" );
-	}
-	callnum++;
-	fprintf(f, "%i: %p (%i) = %i %i %i %i\n", callnum, (void*)(args - (int *)currentVM->dataBase),
-		args[0], args[1], args[2], args[3], args[4] );
-}
-
-/*
 =================
 VM_BlockCopy
 Executes a block copy operation within currentVM data space

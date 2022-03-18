@@ -474,8 +474,6 @@ nextInstruction2:
 #endif
 				*(int *)&image[ programStack + 4 ] = -1 - programCounter;
 
-//VM_LogSyscalls( (int *)&image[ programStack + 4 ] );
-				{
 					// the vm has ints on the stack, we expect
 					// pointers so we might have to convert it
 					if (sizeof(intptr_t) != sizeof(int)) {
