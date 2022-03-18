@@ -9,6 +9,9 @@
 #define THUMB_RIGHT 1
 
 typedef struct {
+    float fov_x;
+    float fov_y;
+
     qboolean weapon_stabilised;
     qboolean weapon_zoomed;
     qboolean show_console;

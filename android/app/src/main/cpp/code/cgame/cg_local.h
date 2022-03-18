@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../game/bg_public.h"
 #include "cg_public.h"
 
+#include "../vr/vr_types.h"
 
 // The entire cgame module is unloaded and reloaded on each level change,
 // so there is NO persistant data between levels on the client side.
@@ -1267,7 +1268,8 @@ void CG_TestModelPrevSkin_f (void);
 void CG_ZoomDown_f( void );
 void CG_ZoomUp_f( void );
 void CG_AddBufferedSound( sfxHandle_t sfx);
-qboolean CG_IsThirdPersonFollowMode( void );
+qboolean CG_IsThirdPersonFollowMode( vrFollowMode_t followMode );
+qboolean CG_IsDeathCam( void );
 
 void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demoPlayback );
 

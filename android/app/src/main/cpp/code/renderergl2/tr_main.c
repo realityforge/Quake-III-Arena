@@ -207,7 +207,7 @@ int R_CullLocalBox(vec3_t localBounds[2]) {
 	int			anyBack;
 	int			front, back;
 
-	if ( r_nocull->integer ) {
+	if ( r_nocull->integer || vr_thirdPersonSpectator->integer ) {
 		return CULL_CLIP;
 	}
 
@@ -258,7 +258,7 @@ int R_CullLocalBox(vec3_t localBounds[2]) {
 	vec3_t          v;
 	vec3_t          worldBounds[2];
 
-	if(r_nocull->integer)
+	if(r_nocull->integer || vr_thirdPersonSpectator->integer)
 	{
 		return CULL_CLIP;
 	}
@@ -352,7 +352,7 @@ int R_CullPointAndRadiusEx( const vec3_t pt, float radius, const cplane_t* frust
 	const cplane_t	*frust;
 	qboolean mightBeClipped = qfalse;
 
-	if ( r_nocull->integer ) {
+	if ( r_nocull->integer || vr_thirdPersonSpectator->integer) {
 		return CULL_CLIP;
 	}
 
@@ -678,75 +678,38 @@ static void R_SetFarClip( void )
 =================
 R_SetupFrustum
 
-Set up the culling frustum planes for the current view using the results we got from computing the first two rows of
-the projection matrix.
+Setup that culling frustum planes for the current view
 =================
 */
-void R_SetupFrustum (viewParms_t *dest, float xmin, float xmax, float ymax, float zProj, float zFar, float stereoSep)
-{
-	vec3_t ofsorigin;
-	float oppleg, adjleg, length;
+void R_SetupFrustum( void ) {
 	int i;
-	
-	if(stereoSep == 0 && xmin == -xmax)
-	{
-		// symmetric case can be simplified
-		VectorCopy(dest->or.origin, ofsorigin);
+	float xs, xc;
+	float ang;
 
-		length = sqrt(xmax * xmax + zProj * zProj);
-		oppleg = xmax / length;
-		adjleg = zProj / length;
+	ang = tr.viewParms.fovX / 180 * M_PI * 0.5f;
+	xs = sinf( ang );
+	xc = cosf( ang );
 
-		VectorScale(dest->or.axis[0], oppleg, dest->frustum[0].normal);
-		VectorMA(dest->frustum[0].normal, adjleg, dest->or.axis[1], dest->frustum[0].normal);
+	VectorScale( tr.viewParms.or.axis[0], xs, tr.viewParms.frustum[0].normal );
+	VectorMA( tr.viewParms.frustum[0].normal, xc, tr.viewParms.or.axis[1], tr.viewParms.frustum[0].normal );
 
-		VectorScale(dest->or.axis[0], oppleg, dest->frustum[1].normal);
-		VectorMA(dest->frustum[1].normal, -adjleg, dest->or.axis[1], dest->frustum[1].normal);
-	}
-	else
-	{
-		// In stereo rendering, due to the modification of the projection matrix, dest->or.origin is not the
-		// actual origin that we're rendering so offset the tip of the view pyramid.
-		VectorMA(dest->or.origin, stereoSep, dest->or.axis[1], ofsorigin);
-	
-		oppleg = xmax + stereoSep;
-		length = sqrt(oppleg * oppleg + zProj * zProj);
-		VectorScale(dest->or.axis[0], oppleg / length, dest->frustum[0].normal);
-		VectorMA(dest->frustum[0].normal, zProj / length, dest->or.axis[1], dest->frustum[0].normal);
+	VectorScale( tr.viewParms.or.axis[0], xs, tr.viewParms.frustum[1].normal );
+	VectorMA( tr.viewParms.frustum[1].normal, -xc, tr.viewParms.or.axis[1], tr.viewParms.frustum[1].normal );
 
-		oppleg = xmin + stereoSep;
-		length = sqrt(oppleg * oppleg + zProj * zProj);
-		VectorScale(dest->or.axis[0], -oppleg / length, dest->frustum[1].normal);
-		VectorMA(dest->frustum[1].normal, -zProj / length, dest->or.axis[1], dest->frustum[1].normal);
-	}
+	ang = tr.viewParms.fovY / 180 * M_PI * 0.5f;
+	xs = sin( ang );
+	xc = cos( ang );
 
-	length = sqrt(ymax * ymax + zProj * zProj);
-	oppleg = ymax / length;
-	adjleg = zProj / length;
+	VectorScale( tr.viewParms.or.axis[0], xs, tr.viewParms.frustum[2].normal );
+	VectorMA( tr.viewParms.frustum[2].normal, xc, tr.viewParms.or.axis[2], tr.viewParms.frustum[2].normal );
 
-	VectorScale(dest->or.axis[0], oppleg, dest->frustum[2].normal);
-	VectorMA(dest->frustum[2].normal, adjleg, dest->or.axis[2], dest->frustum[2].normal);
+	VectorScale( tr.viewParms.or.axis[0], xs, tr.viewParms.frustum[3].normal );
+	VectorMA( tr.viewParms.frustum[3].normal, -xc, tr.viewParms.or.axis[2], tr.viewParms.frustum[3].normal );
 
-	VectorScale(dest->or.axis[0], oppleg, dest->frustum[3].normal);
-	VectorMA(dest->frustum[3].normal, -adjleg, dest->or.axis[2], dest->frustum[3].normal);
-	
-	for (i=0 ; i<4 ; i++) {
-		dest->frustum[i].type = PLANE_NON_AXIAL;
-		dest->frustum[i].dist = DotProduct (ofsorigin, dest->frustum[i].normal);
-		SetPlaneSignbits( &dest->frustum[i] );
-	}
-
-	if (zFar != 0.0f)
-	{
-		vec3_t farpoint;
-
-		VectorMA(ofsorigin, zFar, dest->or.axis[0], farpoint);
-		VectorScale(dest->or.axis[0], -1.0f, dest->frustum[4].normal);
-
-		dest->frustum[4].type = PLANE_NON_AXIAL;
-		dest->frustum[4].dist = DotProduct (farpoint, dest->frustum[4].normal);
-		SetPlaneSignbits( &dest->frustum[4] );
-		dest->flags |= VPF_FARPLANEFRUSTUM;
+	for ( i = 0 ; i < 4 ; i++ ) {
+		tr.viewParms.frustum[i].type = PLANE_NON_AXIAL;
+		tr.viewParms.frustum[i].dist = DotProduct( tr.viewParms.or.origin, tr.viewParms.frustum[i].normal );
+		SetPlaneSignbits( &tr.viewParms.frustum[i] );
 	}
 }
 
@@ -810,7 +773,7 @@ void R_SetupProjection(viewParms_t *dest, float zProj, float zFar, qboolean comp
 	
 	// Now that we have all the data for the projection matrix we can also setup the view frustum.
 	if(computeFrustum)
-		R_SetupFrustum(dest, xmin, xmax, ymax, zProj, zFar, stereoSep);
+		R_SetupFrustum( );//dest, xmin, xmax, ymax, zProj, zFar, stereoSep);
 }
 
 /*

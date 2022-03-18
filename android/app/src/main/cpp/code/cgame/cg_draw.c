@@ -1875,6 +1875,7 @@ CROSSHAIR
 CG_DrawCrosshair
 =================
 */
+/*
 static void CG_DrawCrosshair(void)
 {
 	float		w, h;
@@ -1930,7 +1931,7 @@ static void CG_DrawCrosshair(void)
 		w, h, 0, 0, 1, 1, hShader );
 
 	trap_R_SetColor( NULL );
-}
+}*/
 
 /*
 =================
@@ -2550,7 +2551,6 @@ CG_DrawWeapReticle
 */
 static void CG_DrawWeapReticle( void )
 {
-	int weap;
 	vec4_t light_color = {0.7, 0.7, 0.7, 1};
 	vec4_t black = {0.0, 0.0, 0.0, 1};
 
@@ -2602,7 +2602,7 @@ static void CG_DrawVignette( void )
 		return;
 	}
 
-	const float yawDelta = abs(vr->clientview_yaw_delta);
+	const float yawDelta = fabsf(vr->clientview_yaw_delta);
 	if (VectorLength(cg.predictedPlayerState.velocity) > 30.0 || (yawDelta > 0 && yawDelta < 20) || (yawDelta > 340))
 	{
 		if (currentComfortVignetteValue <  comfortVignetteValue)
@@ -2783,15 +2783,13 @@ void CG_DrawActive( void ) {
 
 	float heightOffset = 0.0f;
 	float worldscale = cg.worldscale;
-    if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON))
+    if ( cg.demoPlayback || CG_IsThirdPersonFollowMode(VRFM_THIRDPERSON_1))
     {
         worldscale *= SPECTATOR_WORLDSCALE_MULTIPLIER;
         //Just move camera down about 20cm
         heightOffset = -0.2f;
     }
-	else if ((( cg.snap->ps.stats[STAT_HEALTH] <= 0 ) &&
-			 ( cg.snap->ps.pm_type != PM_INTERMISSION )) ||
-			(cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON_2))
+	else if (CG_IsDeathCam() || CG_IsThirdPersonFollowMode(VRFM_THIRDPERSON_2))
 	{
 		worldscale *= SPECTATOR2_WORLDSCALE_MULTIPLIER;
 		//Just move camera down about 50cm
@@ -2818,7 +2816,7 @@ void CG_DrawActive( void ) {
 		if (cg.snap->ps.stats[STAT_HEALTH] > 0 &&
                 //Don't use fake positional if following another player  - this is handled in  the
                 //VR third person code
-		    !( cg.demoPlayback || CG_IsThirdPersonFollowMode()))
+		    !( cg.demoPlayback || CG_IsThirdPersonFollowMode(VRFM_QUERY)))
 		{
 			vec3_t pos, hmdposition, vieworg;
 			VectorClear(pos);

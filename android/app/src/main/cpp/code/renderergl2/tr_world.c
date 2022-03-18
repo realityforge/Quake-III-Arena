@@ -32,7 +32,7 @@ added to the sorting list.
 ================
 */
 static qboolean	R_CullSurface( msurface_t *surf ) {
-	if ( r_nocull->integer || surf->cullinfo.type == CULLINFO_NONE) {
+	if ( (r_nocull->integer || vr_thirdPersonSpectator->integer) || surf->cullinfo.type == CULLINFO_NONE) {
 		return qfalse;
 	}
 
@@ -407,14 +407,14 @@ static void R_RecursiveWorldNode( mnode_t *node, uint32_t planeBits, uint32_t dl
 
 		// if the node wasn't marked as potentially visible, exit
 		// pvs is skipped for depth shadows
-		if (!r_nocull->integer && !(tr.viewParms.flags & VPF_DEPTHSHADOW) && node->visCounts[tr.visIndex] != tr.visCounts[tr.visIndex]) {
+		if (!vr_thirdPersonSpectator->integer && !(tr.viewParms.flags & VPF_DEPTHSHADOW) && node->visCounts[tr.visIndex] != tr.visCounts[tr.visIndex]) {
 			return;
 		}
 
 		// if the bounding volume is outside the frustum, nothing
 		// inside can be visible OPTIMIZE: don't do this all the way to leafs?
 
-		if ( !r_nocull->integer ) {
+		if ( !r_nocull->integer && !vr_thirdPersonSpectator->integer ) {
 			int		r;
 
 			if ( planeBits & 1 ) {

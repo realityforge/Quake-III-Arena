@@ -228,8 +228,7 @@ static void CG_OffsetVRThirdPersonView( void ) {
     float scale = 1.0f;
 
     //Follow mode 1
- 	if ( cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW &&
-							 vr->follow_mode == VRFM_THIRDPERSON))
+ 	if ( cg.demoPlayback || CG_IsThirdPersonFollowMode(VRFM_THIRDPERSON_1))
 	{
 		scale *= SPECTATOR_WORLDSCALE_MULTIPLIER;
 		
@@ -251,17 +250,15 @@ static void CG_OffsetVRThirdPersonView( void ) {
 		}
 	}
 	//Death or follow mode 2
-	else if ((( cg.predictedPlayerState.stats[STAT_HEALTH] <= 0 ) &&
-        ( cg.predictedPlayerState.pm_type != PM_INTERMISSION )) ||
-			(cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_THIRDPERSON_2))
+	else if (CG_IsDeathCam() ||CG_IsThirdPersonFollowMode(VRFM_THIRDPERSON_2))
     {
         scale *= SPECTATOR2_WORLDSCALE_MULTIPLIER;
 
 		//Move camera if the user is pushing thumbstick
 		vec3_t angles, forward, right, up;
 		VectorCopy(vr->offhandangles, angles);
-        float deltaYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]);
-		angles[YAW] += (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]);
+        float deltaYaw = CG_IsDeathCam() ? SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]) : 0.0f;
+		angles[YAW] += deltaYaw + (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]);
 		AngleVectors(angles, forward, right, up);
 		VectorMA(cg.vr_vieworigin, vr->thumbstick_location[THUMB_LEFT][1] * 5.0f, forward, cg.vr_vieworigin);
 		VectorMA(cg.vr_vieworigin, vr->thumbstick_location[THUMB_LEFT][0] * 5.0f, right, cg.vr_vieworigin);
@@ -525,6 +522,8 @@ static int CG_CalcFov( void ) {
 	float	f;
 	int		inwater;
 
+
+/*
 	if ( cg.predictedPlayerState.pm_type == PM_INTERMISSION ) {
 		// if in intermission, use a fixed value
 		fov_x = 90;
@@ -534,7 +533,7 @@ static int CG_CalcFov( void ) {
 			// dmflag to prevent wide fov for all clients
 			fov_x = 90;
 		} else {
-			fov_x = cg_fov.value;
+			fov_x = vr->fov_x;
 			if ( fov_x < 1 ) {
 				fov_x = 1;
 			} else if ( fov_x > 160 ) {
@@ -568,6 +567,7 @@ static int CG_CalcFov( void ) {
 	x = cg.refdef.width / tan( fov_x / 360 * M_PI );
 	fov_y = atan2( cg.refdef.height, x );
 	fov_y = fov_y * 360 / M_PI;
+*/
 
 	// warp if underwater
 	contents = CG_PointContents( cg.refdef.vieworg, -1 );
@@ -583,9 +583,9 @@ static int CG_CalcFov( void ) {
 	}
 
 
-	// set it
-	cg.refdef.fov_x = fov_x;
-	cg.refdef.fov_y = fov_y;
+	// Seems we can get away with actually using 10 degrees less on the FOV
+	cg.refdef.fov_x = vr->fov_x - 10;
+	cg.refdef.fov_y = vr->fov_y - 10;
 
 	if ( !cg.zoomed ) {
 		cg.zoomSensitivity = 1;
@@ -671,13 +671,6 @@ static int CG_CalcViewValues( ) {
 
 	ps = &cg.predictedPlayerState;
 
-	//HACK!! - should change this to a renderer function call
-	//Indicate to renderer whether we are in deathcam mode, We don't want sky in death cam mode
-	trap_Cvar_Set( "vr_thirdPersonSpectator", (((ps->stats[STAT_HEALTH] <= 0) &&
-                                    ( ps->pm_type != PM_INTERMISSION )) ||
-                                   cg.demoPlayback ||
-                                   CG_IsThirdPersonFollowMode() ? "1" : "0" ));
-
 	// intermission view
 	static float hmdYaw = 0;
 	if ( ps->pm_type == PM_INTERMISSION ) {
@@ -731,9 +724,7 @@ static int CG_CalcViewValues( ) {
 		}
 	}
 
-	if (( cg.predictedPlayerState.stats[STAT_HEALTH] <= 0 ) &&
-		( cg.predictedPlayerState.pm_type != PM_INTERMISSION ) ||
-            ( cg.demoPlayback || CG_IsThirdPersonFollowMode()))
+	if (CG_IsDeathCam() || cg.demoPlayback || CG_IsThirdPersonFollowMode(VRFM_QUERY))
 	{
 	    //If dead, or spectating, view the map from above
         CG_OffsetVRThirdPersonView();
@@ -790,7 +781,7 @@ static int CG_CalcViewValues( ) {
                 origin[2] -= cg.duckChange * (DUCK_TIME - timeDelta) / DUCK_TIME;
             }
 
-            vec3_t forward2, end2, dir2;
+            vec3_t forward2, end2;
             AngleVectors(vr->calculated_weaponangles, forward2, NULL, NULL);
             VectorMA(origin, 4096, forward2, end2);
 
@@ -826,7 +817,7 @@ static int CG_CalcViewValues( ) {
             angles[ROLL] = vr->hmdorientation[ROLL];
             AnglesToAxis( angles, cg.refdef.viewaxis );
 		}
-		else if ( cg.demoPlayback || CG_IsThirdPersonFollowMode())
+		else if ( cg.demoPlayback || CG_IsThirdPersonFollowMode(VRFM_QUERY))
 		{
 			//If we're following someone,
 			vec3_t angles;
@@ -856,7 +847,7 @@ static int CG_CalcViewValues( ) {
 			angles[YAW] = (cg.refdefViewAngles[YAW] - vr->hmdorientation[YAW]) + vr->weaponangles[YAW];
 			AnglesToAxis(angles, cg.refdef.viewaxis);
 		}
-		else if ( cg.demoPlayback || CG_IsThirdPersonFollowMode())
+		else if ( cg.demoPlayback || CG_IsThirdPersonFollowMode(VRFM_QUERY))
 		{
 			//If we're following someone,
 			vec3_t angles;
@@ -936,10 +927,21 @@ static void CG_PlayBufferedSounds( void ) {
 
 //=========================================================================
 
-qboolean CG_IsThirdPersonFollowMode( void )
+qboolean CG_IsThirdPersonFollowMode( vrFollowMode_t followMode )
 {
-	return 	cg.snap->ps.pm_flags & PMF_FOLLOW &&
-			(vr->follow_mode == VRFM_THIRDPERSON || vr->follow_mode == VRFM_THIRDPERSON_2);
+	if (followMode == VRFM_QUERY)
+	{
+		return cg.snap->ps.pm_flags & PMF_FOLLOW &&
+			   (vr->follow_mode == VRFM_THIRDPERSON_1 || vr->follow_mode == VRFM_THIRDPERSON_2);
+	}
+
+	return 	cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == followMode;
+}
+
+qboolean CG_IsDeathCam( void )
+{
+	return 	(( cg.predictedPlayerState.stats[STAT_HEALTH] <= 0 ) &&
+               ( cg.predictedPlayerState.pm_type != PM_INTERMISSION ));
 }
 
 /*
@@ -960,6 +962,12 @@ void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demo
 
 	// update cvars
 	CG_UpdateCvars();
+
+    //HACK!! - should change this to a renderer function call
+    //Indicate to renderer whether we are in deathcam mode, We don't want sky in death cam mode
+    trap_Cvar_Set( "vr_thirdPersonSpectator", (CG_IsDeathCam() ||
+                                               cg.demoPlayback ||
+                                               CG_IsThirdPersonFollowMode(VRFM_QUERY) ? "1" : "0" ));
 
 	// if we are only updating the screen as a loading
 	// pacifier, don't even try to read snapshots
@@ -999,7 +1007,7 @@ void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demo
 
 	// decide on third person view
 	cg.renderingThirdPerson = cg.predictedPlayerState.pm_type == PM_SPECTATOR ||
-            cg.demoPlayback || CG_IsThirdPersonFollowMode() ||
+            cg.demoPlayback || CG_IsThirdPersonFollowMode(VRFM_QUERY) ||
 			cg_thirdPerson.integer;
 
 	// build cg.refdef
