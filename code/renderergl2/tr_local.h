@@ -2246,7 +2246,7 @@ SCENE GENERATION
 ============================================================
 */
 
-void R_InitNextFrame( void );
+void R_ResetFrameCounts( void );
 
 void RE_ClearScene( void );
 void RE_AddRefEntityToScene( const refEntity_t *ent );

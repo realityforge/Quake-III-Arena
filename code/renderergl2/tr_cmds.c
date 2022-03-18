@@ -544,7 +544,7 @@ void RE_EndFrame( int *frontEndMsec, int *backEndMsec ) {
 
 	R_IssueRenderCommands( qtrue );
 
-	R_InitNextFrame();
+	R_ResetFrameCounts();
 
 	if ( frontEndMsec ) {
 		*frontEndMsec = tr.frontEndMsec;

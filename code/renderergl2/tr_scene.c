@@ -38,11 +38,11 @@ int			r_numpolyverts;
 
 /*
 ====================
-R_InitNextFrame
+R_ResetFrameCounts
 
 ====================
 */
-void R_InitNextFrame( void ) {
+void R_ResetFrameCounts( void ) {
 	backEndData->commands.used = 0;
 
 	r_firstSceneDrawSurf = 0;

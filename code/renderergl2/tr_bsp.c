@@ -2641,7 +2641,7 @@ void R_RenderMissingCubemaps(void)
 				RE_ClearScene();
 				R_RenderCubemapSide(i, j, qfalse);
 				R_IssuePendingRenderCommands();
-				R_InitNextFrame();
+				R_ResetFrameCounts();
 			}
 		}
 	}
