@@ -33,7 +33,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #import <mach/mach.h>
 #import <mach/mach_error.h>
 
-cvar_t	*r_allowSoftwareGL;		// don't abort out if the pixelformat claims software
 cvar_t  *r_enablerender;                // Enable actual rendering
 cvar_t  *r_appleTransformHint;          // Enable Apple transform hint
 
@@ -173,11 +172,6 @@ static NSOpenGLPixelFormatAttribute *GetPixelAttributes()
         ADD_ATTR(CGDisplayIDToOpenGLDisplayMask(Sys_DisplayToUse()));
     }
     
-    // Require hardware acceleration unless otherwise directed
-    if (!r_allowSoftwareGL->integer) {
-        ADD_ATTR(NSOpenGLPFAAccelerated);
-    }
-
     // Require double-buffer
     ADD_ATTR(NSOpenGLPFADoubleBuffer);
 
@@ -468,10 +462,9 @@ void GLimp_Init( void )
         Sys_StoreGammaTables();
     }
     
-    r_allowSoftwareGL = ri.Cvar_Get( "r_allowSoftwareGL", "0", CVAR_LATCH );
     r_enablerender = ri.Cvar_Get("r_enablerender", "1", 0 );
 
-    if (Sys_QueryVideoMemory() == 0 && !r_allowSoftwareGL->integer) {
+    if (Sys_QueryVideoMemory() == 0) {
         ri.Error( ERR_FATAL, "Could not initialize OpenGL.  There does not appear to be an OpenGL-supported video card in your system.\n" );
     }
     

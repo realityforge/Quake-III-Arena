@@ -115,7 +115,6 @@ cvar_t   *in_joystick      = NULL;
 cvar_t   *in_joystickDebug = NULL;
 cvar_t   *joy_threshold    = NULL;
 
-cvar_t  *r_allowSoftwareGL;   // don't abort out if the pixelformat claims software
 cvar_t  *r_previousglDriver;
 
 qboolean vidmode_ext = qfalse;
@@ -1156,27 +1155,6 @@ int GLW_SetMode( const char *drivername, int mode, qboolean fullscreen )
   glstring = qglGetString (GL_RENDERER);
   ri.Printf( PRINT_ALL, "GL_RENDERER: %s\n", glstring );
 
-  // bk010122 - new software token (Indirect)
-  if ( !Q_stricmp( glstring, "Mesa X11")
-       || !Q_stricmp( glstring, "Mesa GLX Indirect") )
-  {
-    if ( !r_allowSoftwareGL->integer )
-    {
-      ri.Printf( PRINT_ALL, "\n\n***********************************************************\n" );
-      ri.Printf( PRINT_ALL, " You are using software Mesa (no hardware acceleration)!   \n" );
-      ri.Printf( PRINT_ALL, " Driver DLL used: %s\n", drivername ); 
-      ri.Printf( PRINT_ALL, " If this is intentional, add\n" );
-      ri.Printf( PRINT_ALL, "       \"+set r_allowSoftwareGL 1\"\n" );
-      ri.Printf( PRINT_ALL, " to the command line when starting the game.\n" );
-      ri.Printf( PRINT_ALL, "***********************************************************\n");
-      GLimp_Shutdown( );
-      return RSERR_INVALID_MODE;
-    } else
-    {
-      ri.Printf( PRINT_ALL, "...using software Mesa (r_allowSoftwareGL==1).\n" );
-    }
-  }
-
   return RSERR_OK;
 }
 
@@ -1399,8 +1377,6 @@ void GLimp_Init( void )
     ri.Cvar_Set( "r_smp", "0" );
   }
 #endif
-
-  r_allowSoftwareGL = ri.Cvar_Get( "r_allowSoftwareGL", "0", CVAR_LATCH );
 
   r_previousglDriver = ri.Cvar_Get( "r_previousglDriver", "", CVAR_ROM );
 
