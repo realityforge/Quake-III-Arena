@@ -473,7 +473,7 @@ nextInstruction2:
 				stomped = *(int *)&image[ programStack + 4 ];
 #endif
 				*(int *)&image[ programStack + 4 ] = -1 - programCounter;
-
+                {
 					// the vm has ints on the stack, we expect
 					// pointers so we might have to convert it
 					if (sizeof(intptr_t) != sizeof(int)) {
