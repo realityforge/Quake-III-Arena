@@ -25,19 +25,19 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "sys_local.h"
 
 #include <signal.h>
-//#include <sys/types.h>
 #include <sys/stat.h>
 #include <errno.h>
 #include <stdio.h>
 #include <dirent.h>
 #include <unistd.h>
-//#include <sys/mman.h>
 #include <sys/time.h>
-//#include <pwd.h>
 #include <libgen.h>
 #include <fcntl.h>
 #include <fenv.h>
-//#include <sys/wait.h>
+
+#ifndef __APPLE__
+#include <sys/wait.h>
+#endif
 
 qboolean stdinIsATTY;
 
