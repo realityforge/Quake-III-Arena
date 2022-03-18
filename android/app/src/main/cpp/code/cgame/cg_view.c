@@ -513,17 +513,17 @@ Fixed fov at intermissions, otherwise account for fov variable and zooms.
 #define	WAVE_FREQUENCY	0.4
 
 static int CG_CalcFov( void ) {
-	float	x;
+	int		contents;
+	int		inwater;
 	float	phase;
 	float	v;
-	int		contents;
+/*	float	x;
 	float	fov_x, fov_y;
 	float	zoomFov;
 	float	f;
-	int		inwater;
 
 
-/*
+
 	if ( cg.predictedPlayerState.pm_type == PM_INTERMISSION ) {
 		// if in intermission, use a fixed value
 		fov_x = 90;
@@ -574,8 +574,8 @@ static int CG_CalcFov( void ) {
 	if ( contents & ( CONTENTS_WATER | CONTENTS_SLIME | CONTENTS_LAVA ) ){
 		phase = cg.time / 1000.0 * WAVE_FREQUENCY * M_PI * 2;
 		v = WAVE_AMPLITUDE * sin( phase );
-		fov_x += v;
-		fov_y -= v;
+//		fov_x += v;
+//		fov_y -= v;
 		inwater = qtrue;
 	}
 	else {
@@ -583,9 +583,8 @@ static int CG_CalcFov( void ) {
 	}
 
 
-	// Seems we can get away with actually using 10 degrees less on the FOV
-	cg.refdef.fov_x = vr->fov_x - 10;
-	cg.refdef.fov_y = vr->fov_y - 10;
+	cg.refdef.fov_x = vr->fov_x;
+	cg.refdef.fov_y = vr->fov_y;
 
 	if ( !cg.zoomed ) {
 		cg.zoomSensitivity = 1;
@@ -593,7 +592,8 @@ static int CG_CalcFov( void ) {
 		cg.zoomSensitivity = cg.refdef.fov_y / 75.0;
 	}
 
-	return inwater;
+	//We don't do the under-water fov warping in VR
+	return qfalse; //inwater;
 }
 
 
