@@ -193,12 +193,6 @@ int g_gametype = 0;
 //additional dropped item weight
 libvar_t *droppedweight = NULL;
 
-//========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//========================================================================
 bot_goalstate_t *BotGoalStateFromHandle(int handle)
 {
 	if (handle <= 0 || handle > MAX_CLIENTS)
@@ -319,10 +313,6 @@ itemconfig_t *LoadItemConfig(char *filename)
 }
 //===========================================================================
 // index to find the weight function of an iteminfo
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int *ItemWeightIndex(weightconfig_t *iwc, itemconfig_t *ic)
 {
@@ -1103,10 +1093,6 @@ int BotGetSecondGoal(int goalstate, bot_goal_t *goal)
 }
 //===========================================================================
 // pops a new long term goal on the goal stack in the goalstate
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int BotChooseLTGItem(int goalstate, vec3_t origin, int *inventory, int travelflags)
 {
@@ -1528,12 +1514,6 @@ int BotAllocGoalState(int client)
 	}
 	return 0;
 }
-//========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//========================================================================
 void BotFreeGoalState(int handle)
 {
 	if (handle <= 0 || handle > MAX_CLIENTS)

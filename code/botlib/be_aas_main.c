@@ -110,10 +110,6 @@ void AAS_ContinueInit(float time)
 }
 //===========================================================================
 // called at the start of every frame
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int AAS_StartFrame(float time)
 {
@@ -194,10 +190,6 @@ int AAS_LoadFiles(const char *mapname)
 }
 //===========================================================================
 // called every time a map changes
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int AAS_LoadMap(const char *mapname)
 {
@@ -236,10 +228,6 @@ int AAS_LoadMap(const char *mapname)
 }
 //===========================================================================
 // called when the library is first loaded
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int AAS_Setup(void)
 {

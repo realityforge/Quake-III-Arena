@@ -213,10 +213,6 @@ int AAS_FloodClusterAreas_r(int areanum, int clusternum)
 }
 //===========================================================================
 // try to flood from all areas without cluster into areas with a cluster set
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int AAS_FloodClusterAreasUsingReachabilities(int clusternum)
 {
@@ -641,10 +637,6 @@ qboolean AAS_ConnectedAreas(int *areanums, int numareas)
 }
 //===========================================================================
 // gets adjacent areas with less presence types recursively
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int AAS_GetAdjacentAreasWithLessPresenceTypes_r(int *areanums, int numareas, int curareanum)
 {

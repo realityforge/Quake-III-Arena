@@ -210,12 +210,6 @@ bot_randomlist_t *randomstrings = NULL;
 //reply chats
 bot_replychat_t *replychats = NULL;
 
-//========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//========================================================================
 bot_chatstate_t *BotChatStateFromHandle(int handle)
 {
 	if (handle <= 0 || handle > MAX_CLIENTS)
@@ -232,10 +226,6 @@ bot_chatstate_t *BotChatStateFromHandle(int handle)
 }
 //===========================================================================
 // initialize the heap with unused console messages
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void InitConsoleMessageHeap(void)
 {
@@ -260,10 +250,6 @@ void InitConsoleMessageHeap(void)
 }
 //===========================================================================
 // allocate one console message from the heap
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 bot_consolemessage_t *AllocConsoleMessage(void)
 {
@@ -275,10 +261,6 @@ bot_consolemessage_t *AllocConsoleMessage(void)
 }
 //===========================================================================
 // deallocate one console message from the heap
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void FreeConsoleMessage(bot_consolemessage_t *message)
 {
@@ -697,10 +679,6 @@ bot_synonymlist_t *BotLoadSynonyms(char *filename)
 }
 //===========================================================================
 // replace all the synonyms in the string
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void BotReplaceSynonyms(char *string, unsigned long int context)
 {
@@ -2181,10 +2159,6 @@ void BotConstructChatMessage(bot_chatstate_t *chatstate, char *message, unsigned
 }
 //===========================================================================
 // randomly chooses one of the chat message of the given type
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 char *BotChooseInitialChatMessage(bot_chatstate_t *cs, char *type)
 {
@@ -2606,12 +2580,6 @@ void BotResetChatAI(void)
 		}
 	}
 }
-//========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//========================================================================
 int BotAllocChatState(void)
 {
 	int i;
@@ -2626,12 +2594,6 @@ int BotAllocChatState(void)
 	}
 	return 0;
 }
-//========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//========================================================================
 void BotFreeChatState(int handle)
 {
 	bot_consolemessage_t m;

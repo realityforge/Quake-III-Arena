@@ -95,10 +95,6 @@ void AAS_RoutingInfo(void)
 //===========================================================================
 // returns the number of the area in the cluster
 // assumes the given area is in the given cluster or a portal of the cluster
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 static ID_INLINE int AAS_ClusterAreaNum(int cluster, int areanum)
 {
@@ -1076,8 +1072,6 @@ void AAS_FreeRoutingCaches(void)
 // update the given routing cache
 //
 // Parameter:			areacache		: routing cache to update
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 void AAS_UpdateAreaRoutingCache(aas_routingcache_t *areacache)
 {
@@ -1554,10 +1548,6 @@ int AAS_AreaReachabilityToGoalArea(int areanum, vec3_t origin, int goalareanum, 
 }
 //===========================================================================
 // predict the route and stop on one of the stop events
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 int AAS_PredictRoute(struct aas_predictroute_s *route, int areanum, vec3_t origin,
 							int goalareanum, int travelflags, int maxareas, int maxtime,

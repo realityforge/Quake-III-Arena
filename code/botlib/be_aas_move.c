@@ -103,10 +103,6 @@ void AAS_InitSettings(void)
 }
 //===========================================================================
 // returns qtrue if the bot is against a ladder
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 int AAS_AgainstLadder(vec3_t origin)
 {
@@ -165,10 +161,6 @@ int AAS_AgainstLadder(vec3_t origin)
 }
 //===========================================================================
 // returns qtrue if the bot is on the ground
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 int AAS_OnGround(vec3_t origin, int presencetype, int passent)
 {
@@ -195,10 +187,6 @@ int AAS_OnGround(vec3_t origin, int presencetype, int passent)
 }
 //===========================================================================
 // returns qtrue if a bot at the given position is swimming
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int AAS_Swimming(vec3_t origin)
 {
@@ -258,10 +246,6 @@ void AAS_JumpReachRunStart(aas_reachability_t *reach, vec3_t runstart)
 }
 //===========================================================================
 // returns the Z velocity when rocket jumping at the origin
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 float AAS_WeaponJumpZVelocity(vec3_t origin, float radiusdamage)
 {
@@ -320,10 +304,6 @@ float AAS_BFGJumpZVelocity(vec3_t origin)
 }
 //===========================================================================
 // applies ground friction to the given velocity
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 void AAS_Accelerate(vec3_t velocity, float frametime, vec3_t wishdir, float wishspeed, float accel)
 {
@@ -347,10 +327,6 @@ void AAS_Accelerate(vec3_t velocity, float frametime, vec3_t wishdir, float wish
 }
 //===========================================================================
 // applies ground friction to the given velocity
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 void AAS_ApplyFriction(vec3_t vel, float friction, float stopspeed,
 													float frametime)
@@ -446,7 +422,6 @@ int AAS_ClipToBBox(aas_trace_t *trace, vec3_t start, vec3_t end, int presencetyp
 //						stopevent		: events that stop the prediction
 //						stopareanum		: stop as soon as entered this area
 // Returns:				aas_clientmove_t
-// Changes Globals:		-
 //===========================================================================
 int AAS_ClientMovementPrediction(struct aas_clientmove_s *move,
 								int entnum, vec3_t origin,
@@ -986,7 +961,6 @@ void AAS_TestMovementPrediction(int entnum, vec3_t origin, vec3_t dir)
 //						end		: end position of jump
 //						*speed	: returned speed for jump
 // Returns:				qfalse if too high or too far from start to end
-// Changes Globals:		-
 //===========================================================================
 int AAS_HorizontalVelocityForJump(float zvel, vec3_t start, vec3_t end, float *velocity)
 {

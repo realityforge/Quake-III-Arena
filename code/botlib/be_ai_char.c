@@ -76,12 +76,6 @@ typedef struct bot_character_s
 
 bot_character_t *botcharacters[MAX_CLIENTS + 1];
 
-//========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//========================================================================
 bot_character_t *BotCharacterFromHandle(int handle)
 {
 	if (handle <= 0 || handle > MAX_CLIENTS)
@@ -114,12 +108,6 @@ void BotDumpCharacter(bot_character_t *ch)
 	}
 	Log_Write("}\n");
 }
-//========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//========================================================================
 void BotFreeCharacterStrings(bot_character_t *ch)
 {
 	int i;
@@ -132,12 +120,6 @@ void BotFreeCharacterStrings(bot_character_t *ch)
 		}
 	}
 }
-//========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//========================================================================
 void BotFreeCharacter2(int handle)
 {
 	if (handle <= 0 || handle > MAX_CLIENTS)
@@ -154,12 +136,6 @@ void BotFreeCharacter2(int handle)
 	FreeMemory(botcharacters[handle]);
 	botcharacters[handle] = NULL;
 }
-//========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//========================================================================
 void BotFreeCharacter(int handle)
 {
 	if (!LibVarGetValue("bot_reloadcharacters")) return;

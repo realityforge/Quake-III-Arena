@@ -116,12 +116,6 @@ int modeltypes[MAX_MODELS];
 
 bot_movestate_t *botmovestates[MAX_CLIENTS+1];
 
-//========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//========================================================================
 int BotAllocMoveState(void)
 {
 	int i;
@@ -136,12 +130,6 @@ int BotAllocMoveState(void)
 	}
 	return 0;
 }
-//========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//========================================================================
 void BotFreeMoveState(int handle)
 {
 	if (handle <= 0 || handle > MAX_CLIENTS)
@@ -157,12 +145,6 @@ void BotFreeMoveState(int handle)
 	FreeMemory(botmovestates[handle]);
 	botmovestates[handle] = NULL;
 }
-//========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//========================================================================
 bot_movestate_t *BotMoveStateFromHandle(int handle)
 {
 	if (handle <= 0 || handle > MAX_CLIENTS)
@@ -177,12 +159,6 @@ bot_movestate_t *BotMoveStateFromHandle(int handle)
 	}
 	return botmovestates[handle];
 }
-//========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//========================================================================
 void BotInitMoveState(int handle, bot_initmove_t *initmove)
 {
 	bot_movestate_t *ms;
@@ -209,12 +185,6 @@ void BotInitMoveState(int handle, bot_initmove_t *initmove)
 	ms->moveflags &= ~MFL_GRAPPLEPULL;
 	if (initmove->or_moveflags & MFL_GRAPPLEPULL) ms->moveflags |= MFL_GRAPPLEPULL;
 }
-//========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//========================================================================
 float AngleDiff(float ang1, float ang2)
 {
 	float diff;
@@ -345,10 +315,6 @@ int BotReachabilityArea(vec3_t origin, int client)
 }
 //===========================================================================
 // returns the reachability area the bot is in
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 /*
 int BotReachabilityArea(vec3_t origin, int testground)
@@ -478,12 +444,6 @@ int MoverDown(aas_reachability_t *reach)
 	if (origin[2] + maxs[2] < reach->start[2]) return qtrue;
 	return qfalse;
 }
-//========================================================================
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
-//========================================================================
 void BotSetBrushModelTypes(void)
 {
 	int ent, modelnum;
@@ -2226,10 +2186,6 @@ bot_moveresult_t BotFinishTravel_FuncBobbing(bot_movestate_t *ms, aas_reachabili
 // 0  no valid grapple hook visible
 // 1  the grapple hook is still flying
 // 2  the grapple hooked into a wall
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int GrappleState(bot_movestate_t *ms, aas_reachability_t *reach)
 {
@@ -2423,10 +2379,6 @@ bot_moveresult_t BotTravel_Grapple(bot_movestate_t *ms, aas_reachability_t *reac
 	return result;
 }
 //===========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:			-
 //===========================================================================
 bot_moveresult_t BotTravel_RocketJump(bot_movestate_t *ms, aas_reachability_t *reach)
 {
@@ -2613,10 +2565,6 @@ bot_moveresult_t BotFinishTravel_JumpPad(bot_movestate_t *ms, aas_reachability_t
 }
 //===========================================================================
 // time before the reachability times out
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int BotReachabilityTime(aas_reachability_t *reach)
 {

@@ -65,7 +65,6 @@ int botlibsetup = qfalse;
 //===========================================================================
 //
 // several functions used by the exported functions
-//
 //===========================================================================
 
 int Sys_MilliSeconds(void)
