@@ -1012,7 +1012,6 @@ typedef struct {
 
 	// comfort vignette
 	qhandle_t	vignetteShader;
-	qhandle_t	maskShader;
 } cgMedia_t;
 
 
