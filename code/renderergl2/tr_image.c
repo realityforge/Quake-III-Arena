@@ -2441,7 +2441,6 @@ image_t	*R_FindImageFile( const char *name, imgType_t type, imgFlags_t flags )
 			normalPic = ri.Malloc(width * height * 4);
 			RGBAtoNormal(pic, normalPic, width, height, flags & IMGFLAG_CLAMPTOEDGE);
 
-#if 1
 			// Brighten up the original image to work with the normal map
 			RGBAtoYCoCgA(pic, pic, width, height);
 			for (y = 0; y < height; y++)
@@ -2457,61 +2456,6 @@ image_t	*R_FindImageFile( const char *name, imgType_t type, imgFlags_t flags )
 				}
 			}
 			YCoCgAtoRGBA(pic, pic, width, height);
-#else
-			// Blur original image's luma to work with the normal map
-			{
-				byte *blurPic;
-
-				RGBAtoYCoCgA(pic, pic, width, height);
-				blurPic = ri.Malloc(width * height);
-
-				for (y = 1; y < height - 1; y++)
-				{
-					byte *picbyte  = pic     + y * width * 4;
-					byte *blurbyte = blurPic + y * width;
-
-					picbyte += 4;
-					blurbyte += 1;
-
-					for (x = 1; x < width - 1; x++)
-					{
-						int result;
-
-						result = *(picbyte - (width + 1) * 4) + *(picbyte - width * 4) + *(picbyte - (width - 1) * 4) +
-						         *(picbyte -          1  * 4) + *(picbyte            ) + *(picbyte +          1  * 4) +
-						         *(picbyte + (width - 1) * 4) + *(picbyte + width * 4) + *(picbyte + (width + 1) * 4);
-
-						result /= 9;
-
-						*blurbyte = result;
-						picbyte += 4;
-						blurbyte += 1;
-					}
-				}
-
-				// FIXME: do borders
-
-				for (y = 1; y < height - 1; y++)
-				{
-					byte *picbyte  = pic     + y * width * 4;
-					byte *blurbyte = blurPic + y * width;
-
-					picbyte += 4;
-					blurbyte += 1;
-
-					for (x = 1; x < width - 1; x++)
-					{
-						picbyte[0] = *blurbyte;
-						picbyte += 4;
-						blurbyte += 1;
-					}
-				}
-
-				ri.Free(blurPic);
-
-				YCoCgAtoRGBA(pic, pic, width, height);
-			}
-#endif
 
 			R_CreateImage( normalName, normalPic, normalWidth, normalHeight, IMGTYPE_NORMAL, normalFlags, 0 );
 			ri.Free( normalPic );	

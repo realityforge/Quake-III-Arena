@@ -554,7 +554,6 @@ void R_SubdividePatchToGrid( srfBspSurface_t *grid, int width, int height,
 		height--;
 	}
 
-#if 1
 	// flip for longest tristrips as an optimization
 	// the results should be visually identical with or
 	// without this step
@@ -566,7 +565,6 @@ void R_SubdividePatchToGrid( srfBspSurface_t *grid, int width, int height,
 		height = t;
 		InvertCtrl( width, height, ctrl );
 	}
-#endif
 
 	// calculate indexes
 	numIndexes = MakeMeshIndexes(width, height, indexes);

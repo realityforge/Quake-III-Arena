@@ -1860,13 +1860,11 @@ void R_RenderPshadowMaps(const refdef_t *fd)
 		vec3_t ambientLight, directedLight, lightDir;
 
 		VectorSet(lightDir, 0.57735f, 0.57735f, 0.57735f);
-#if 1
 		R_LightForPoint(shadow->viewOrigin, ambientLight, directedLight, lightDir);
 
 		// sometimes there's no light
 		if (DotProduct(lightDir, lightDir) < 0.9f)
 			VectorSet(lightDir, 0.0f, 0.0f, 1.0f);
-#endif
 
 		if (shadow->viewRadius * 3.0f > shadow->lightRadius)
 		{
