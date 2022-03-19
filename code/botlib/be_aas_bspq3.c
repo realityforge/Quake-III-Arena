@@ -139,10 +139,6 @@ void PrintContents(int contents)
 #endif // BSP_DEBUG
 //===========================================================================
 // traces axial boxes of any size through the world
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 bsp_trace_t AAS_Trace(vec3_t start, vec3_t mins, vec3_t maxs, vec3_t end, int passent, int contentmask)
 {
@@ -152,10 +148,6 @@ bsp_trace_t AAS_Trace(vec3_t start, vec3_t mins, vec3_t maxs, vec3_t end, int pa
 }
 //===========================================================================
 // returns the contents at the given point
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int AAS_PointContents(vec3_t point)
 {
@@ -177,10 +169,6 @@ qboolean AAS_EntityCollision(int entnum,
 }
 //===========================================================================
 // returns true if in Potentially Hearable Set
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 qboolean AAS_inPVS(vec3_t p1, vec3_t p2)
 {
@@ -188,10 +176,6 @@ qboolean AAS_inPVS(vec3_t p1, vec3_t p2)
 }
 //===========================================================================
 // returns true if in Potentially Visible Set
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 qboolean AAS_inPHS(vec3_t p1, vec3_t p2)
 {
@@ -203,10 +187,6 @@ void AAS_BSPModelMinsMaxsOrigin(int modelnum, vec3_t angles, vec3_t mins, vec3_t
 }
 //===========================================================================
 // unlinks the entity from all leaves
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void AAS_UnlinkFromBSPLeaves(bsp_link_t *leaves)
 {
@@ -386,10 +366,6 @@ void AAS_DumpBSPData(void)
 }
 //===========================================================================
 // load an bsp file
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int AAS_LoadBSPFile(void)
 {

@@ -163,10 +163,6 @@ void AAS_FreeAASLinkedEntities(void)
 }
 //===========================================================================
 // returns the AAS area the point is in
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int AAS_PointAreaNum(vec3_t point)
 {
@@ -262,10 +258,6 @@ int AAS_AreaCluster(int areanum)
 }
 //===========================================================================
 // returns the presence types of the given area
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int AAS_AreaPresenceType(int areanum)
 {
@@ -279,10 +271,6 @@ int AAS_AreaPresenceType(int areanum)
 }
 //===========================================================================
 // returns the presence type at the given point
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int AAS_PointPresenceType(vec3_t point)
 {
@@ -304,10 +292,6 @@ int AAS_PointPresenceType(vec3_t point)
 // side		=	side of the plane we want to calculate the distance from
 //					0 normal vector side
 //					1 not normal vector side
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 vec_t AAS_BoxOriginDistanceFromPlane(vec3_t normal, vec3_t mins, vec3_t maxs, int side)
 {
@@ -381,10 +365,6 @@ qboolean AAS_AreaEntityCollision(int areanum, vec3_t start, vec3_t end,
 }
 //===========================================================================
 // recursive subdivision of the line by the BSP tree.
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
 																				int passent)
@@ -658,10 +638,6 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
 }
 //===========================================================================
 // recursive subdivision of the line by the BSP tree.
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int AAS_TraceAreas(vec3_t start, vec3_t end, int *areas, vec3_t *points, int maxareas)
 {
@@ -844,10 +820,6 @@ int AAS_TraceAreas(vec3_t start, vec3_t end, int *areas, vec3_t *points, int max
 }
 //===========================================================================
 // a simple cross product
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 // void AAS_OrthogonalToVectors(vec3_t v1, vec3_t v2, vec3_t res)
 #define AAS_OrthogonalToVectors(v1, v2, res) \
@@ -861,7 +833,6 @@ int AAS_TraceAreas(vec3_t start, vec3_t end, int *areas, vec3_t *points, int max
 //								pnormal	: normal of the plane to use for the face
 //								point		: point to test if inside face boundaries
 // Returns:					qtrue if the point is within the face boundaries
-// Changes Globals:		-
 //===========================================================================
 qboolean AAS_InsideFace(aas_face_t *face, vec3_t pnormal, vec3_t point, float epsilon)
 {
@@ -944,10 +915,6 @@ qboolean AAS_PointInsideFace(int facenum, vec3_t point, float epsilon)
 }
 //===========================================================================
 // returns the ground face the given point is above in the given area
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 aas_face_t *AAS_AreaGroundFace(int areanum, vec3_t point)
 {
@@ -978,10 +945,6 @@ aas_face_t *AAS_AreaGroundFace(int areanum, vec3_t point)
 }
 //===========================================================================
 // returns the face the trace end position is situated in
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void AAS_FacePlane(int facenum, vec3_t normal, float *dist)
 {
@@ -993,10 +956,6 @@ void AAS_FacePlane(int facenum, vec3_t normal, float *dist)
 }
 //===========================================================================
 // returns the face the trace end position is situated in
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 aas_face_t *AAS_TraceEndFace(aas_trace_t *trace)
 {
@@ -1106,10 +1065,6 @@ int AAS_BoxOnPlaneSide2(vec3_t absmins, vec3_t absmaxs, aas_plane_t *p)
 )
 //===========================================================================
 // remove the links to this entity from all areas
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void AAS_UnlinkFromAreas(aas_link_t *areas)
 {
@@ -1131,10 +1086,6 @@ void AAS_UnlinkFromAreas(aas_link_t *areas)
 // link the entity to the areas the bounding box is totally or partly
 // situated in. This is done with recursion down the tree using the
 // bounding box to test for plane sides
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 
 typedef struct

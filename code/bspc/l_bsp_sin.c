@@ -273,10 +273,6 @@ void Sin_FreeMaxBSP(void)
 
 //===========================================================================
 // returns the amount the face and the winding overlap
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 float Sin_FaceOnWinding(sin_dface_t *face, winding_t *winding)
 {
@@ -323,10 +319,6 @@ float Sin_FaceOnWinding(sin_dface_t *face, winding_t *winding)
 }
 //===========================================================================
 // creates a winding for the given brush side on the given brush
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 winding_t *Sin_BrushSideWinding(sin_dbrush_t *brush, sin_dbrushside_t *baseside)
 {
@@ -373,10 +365,6 @@ int Sin_HintSkipBrush(sin_dbrush_t *brush)
 }
 //===========================================================================
 // fix screwed brush texture references
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 qboolean WindingIsTiny(winding_t *w);
 

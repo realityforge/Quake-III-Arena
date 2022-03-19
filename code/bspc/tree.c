@@ -182,10 +182,6 @@ void Tree_Print_r (node_t *node, int depth)
 }
 //===========================================================================
 // NODES THAT DON'T SEPERATE DIFFERENT CONTENTS CAN BE PRUNED
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 void Tree_PruneNodes_r (node_t *node)
 {

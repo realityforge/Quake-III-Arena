@@ -293,10 +293,6 @@ unsigned AAS_HashVec(vec3_t vec)
 // returns true if the vertex was found in the list
 // stores the vertex number in *vnum
 // stores a new vertex if not stored already
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 qboolean AAS_GetVertex(vec3_t v, int *vnum)
 {
@@ -434,10 +430,6 @@ qboolean AAS_FindHashedEdge(int v1num, int v2num, int *edgenum)
 // stores the edge number in *edgenum (negative if reversed edge)
 // stores new edge if not stored already
 // returns zero when the edge is degenerate
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 qboolean AAS_GetEdge(vec3_t v1, vec3_t v2, int *edgenum)
 {

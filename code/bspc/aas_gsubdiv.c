@@ -37,10 +37,6 @@ int numladdersubdivisions = 0;
 
 //===========================================================================
 // NOTE: the original face is invalid after splitting
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void AAS_SplitFace(tmp_face_t *face, vec3_t normal, float dist,
 							tmp_face_t **frontface, tmp_face_t **backface)
@@ -430,10 +426,6 @@ tmp_node_t *AAS_GravitationalSubdivision_r(tmp_node_t *tmpnode)
 }
 //===========================================================================
 // NOTE: merge faces and melt edges first
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void AAS_GravitationalSubdivision(void)
 {
@@ -473,10 +465,6 @@ tmp_node_t *AAS_RefreshLadderSubdividedTree_r(tmp_node_t *tmpnode, tmp_area_t *t
 // find an area with ladder faces and ground faces that are not connected
 // split the area with a horizontal plane at the lowest vertex of all
 // ladder faces in the area
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 tmp_node_t *AAS_LadderSubdivideArea_r(tmp_node_t *tmpnode)
 {

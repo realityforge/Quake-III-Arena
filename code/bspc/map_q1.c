@@ -32,10 +32,6 @@ int q1_numclipbrushes;
 //===========================================================================
 // water, slime and lava brush textures names always start with a *
 // followed by the type: "slime", "lava" or otherwise water
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int Q1_TextureContents(char *name)
 {
@@ -55,10 +51,6 @@ int Q1_TextureContents(char *name)
 //
 // modified for Half-Life because there are quite a lot of tiny node leaves
 // in the Half-Life bsps
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void Q1_SplitBrush(bspbrush_t *brush, int planenum, int nodenum,
 						 bspbrush_t **front, bspbrush_t **back)
@@ -250,10 +242,6 @@ void Q1_SplitBrush(bspbrush_t *brush, int planenum, int nodenum,
 }
 //===========================================================================
 // returns true if the tree starting at nodenum has only solid leaves
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int Q1_SolidTree_r(int nodenum)
 {
@@ -583,10 +571,6 @@ bspbrush_t *Q1_MergeBrushes(bspbrush_t *brushlist, int modelnum)
 }
 //===========================================================================
 // returns the amount the face and the winding overlap
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 float Q1_FaceOnWinding(q1_dface_t *face, winding_t *winding)
 {
@@ -634,10 +618,6 @@ float Q1_FaceOnWinding(q1_dface_t *face, winding_t *winding)
 //===========================================================================
 // returns a list with brushes created by splitting the given brush with
 // planes that go through the face edges and are orthogonal to the face plane
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 bspbrush_t *Q1_SplitBrushWithFace(bspbrush_t *brush, q1_dface_t *face)
 {

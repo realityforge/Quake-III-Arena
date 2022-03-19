@@ -263,9 +263,6 @@ void SetScriptPunctuations(script_t *script, punctuation_t *p)
 // Reads spaces, tabs, C-like comments etc.
 // When a newline character is found the scripts line counter is increased.
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int PS_ReadWhiteSpace(script_t *script)
 {
@@ -323,8 +320,6 @@ int PS_ReadWhiteSpace(script_t *script)
 //
 // Parameter:				script		: script to read from
 //								ch				: place to store the read escape character
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int PS_ReadEscapeCharacter(script_t *script, char *ch)
 {
@@ -402,7 +397,6 @@ int PS_ReadEscapeCharacter(script_t *script, char *ch)
 // Parameter:				script		: script to read from
 //								token			: buffer to store the string
 // Returns:					qtrue when a string was read succesfully
-// Changes Globals:		-
 //============================================================================
 int PS_ReadString(script_t *script, token_t *token, int quote)
 {
@@ -489,9 +483,6 @@ int PS_ReadString(script_t *script, token_t *token, int quote)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int PS_ReadName(script_t *script, token_t *token)
 {
@@ -519,9 +510,6 @@ int PS_ReadName(script_t *script, token_t *token)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 void NumberValue(char *string, int subtype, unsigned long int *intvalue,
 															long double *floatvalue)
@@ -591,9 +579,6 @@ void NumberValue(char *string, int subtype, unsigned long int *intvalue,
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int PS_ReadNumber(script_t *script, token_t *token)
 {
@@ -699,9 +684,6 @@ int PS_ReadNumber(script_t *script, token_t *token)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int PS_ReadLiteral(script_t *script, token_t *token)
 {
@@ -746,9 +728,6 @@ int PS_ReadLiteral(script_t *script, token_t *token)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int PS_ReadPunctuation(script_t *script, token_t *token)
 {
@@ -787,9 +766,6 @@ int PS_ReadPunctuation(script_t *script, token_t *token)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int PS_ReadPrimitive(script_t *script, token_t *token)
 {
@@ -813,9 +789,6 @@ int PS_ReadPrimitive(script_t *script, token_t *token)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int PS_ReadToken(script_t *script, token_t *token)
 {
@@ -887,9 +860,6 @@ int PS_ReadToken(script_t *script, token_t *token)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int PS_ExpectTokenString(script_t *script, char *string)
 {
@@ -910,9 +880,6 @@ int PS_ExpectTokenString(script_t *script, char *string)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int PS_ExpectTokenType(script_t *script, int type, int subtype, token_t *token)
 {
@@ -968,9 +935,6 @@ int PS_ExpectTokenType(script_t *script, int type, int subtype, token_t *token)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int PS_ExpectAnyToken(script_t *script, token_t *token)
 {
@@ -986,9 +950,6 @@ int PS_ExpectAnyToken(script_t *script, token_t *token)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int PS_CheckTokenString(script_t *script, char *string)
 {
@@ -1003,9 +964,6 @@ int PS_CheckTokenString(script_t *script, char *string)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int PS_CheckTokenType(script_t *script, int type, int subtype, token_t *token)
 {
@@ -1025,9 +983,6 @@ int PS_CheckTokenType(script_t *script, int type, int subtype, token_t *token)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int PS_SkipUntilString(script_t *script, char *string)
 {
@@ -1041,9 +996,6 @@ int PS_SkipUntilString(script_t *script, char *string)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 void PS_UnreadLastToken(script_t *script)
 {
@@ -1051,9 +1003,6 @@ void PS_UnreadLastToken(script_t *script)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 void PS_UnreadToken(script_t *script, token_t *token)
 {
@@ -1063,9 +1012,6 @@ void PS_UnreadToken(script_t *script, token_t *token)
 //============================================================================
 // returns the next character of the read white space, returns NULL if none
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 char PS_NextWhiteSpaceChar(script_t *script)
 {
@@ -1080,9 +1026,6 @@ char PS_NextWhiteSpaceChar(script_t *script)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 void StripDoubleQuotes(char *string)
 {
@@ -1097,9 +1040,6 @@ void StripDoubleQuotes(char *string)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 void StripSingleQuotes(char *string)
 {
@@ -1114,9 +1054,6 @@ void StripSingleQuotes(char *string)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 long double ReadSignedFloat(script_t *script)
 {
@@ -1137,9 +1074,6 @@ long double ReadSignedFloat(script_t *script)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 signed long int ReadSignedInt(script_t *script)
 {
@@ -1160,9 +1094,6 @@ signed long int ReadSignedInt(script_t *script)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 void SetScriptFlags(script_t *script, int flags)
 {
@@ -1170,9 +1101,6 @@ void SetScriptFlags(script_t *script, int flags)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int GetScriptFlags(script_t *script)
 {
@@ -1180,9 +1108,6 @@ int GetScriptFlags(script_t *script)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 void ResetScript(script_t *script)
 {
@@ -1205,9 +1130,6 @@ void ResetScript(script_t *script)
 //============================================================================
 // returns true if at the end of the script
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int EndOfScript(script_t *script)
 {
@@ -1215,9 +1137,6 @@ int EndOfScript(script_t *script)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int NumLinesCrossed(script_t *script)
 {
@@ -1225,9 +1144,6 @@ int NumLinesCrossed(script_t *script)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int ScriptSkipTo(script_t *script, char *value)
 {
@@ -1252,9 +1168,6 @@ int ScriptSkipTo(script_t *script, char *value)
 #ifndef BOTLIB
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 int FileLength(FILE *fp)
 {
@@ -1271,9 +1184,6 @@ int FileLength(FILE *fp)
 #endif
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 script_t *LoadScriptFile(const char *filename)
 {
@@ -1340,9 +1250,6 @@ script_t *LoadScriptFile(const char *filename)
 }
 //============================================================================
 //
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //============================================================================
 script_t *LoadScriptMemory(char *ptr, int length, char *name)
 {
@@ -1376,9 +1283,6 @@ script_t *LoadScriptMemory(char *ptr, int length, char *name)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 void FreeScript(script_t *script)
 {
@@ -1389,9 +1293,6 @@ void FreeScript(script_t *script)
 }
 //============================================================================
 //
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //============================================================================
 void PS_SetBaseFolder(char *path)
 {

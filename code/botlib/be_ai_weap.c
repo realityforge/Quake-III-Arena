@@ -128,12 +128,6 @@ typedef struct bot_weaponstate_s
 static bot_weaponstate_t *botweaponstates[MAX_CLIENTS+1];
 static weaponconfig_t *weaponconfig;
 
-//========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//========================================================================
 int BotValidWeaponNumber(int weaponnum)
 {
 	if (weaponnum <= 0 || weaponnum > weaponconfig->numweapons)
@@ -143,12 +137,6 @@ int BotValidWeaponNumber(int weaponnum)
 	}
 	return qtrue;
 }
-//========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//========================================================================
 bot_weaponstate_t *BotWeaponStateFromHandle(int handle)
 {
 	if (handle <= 0 || handle > MAX_CLIENTS)
@@ -405,12 +393,6 @@ void BotResetWeaponState(int weaponstate)
 	ws->weaponweightconfig = weaponweightconfig;
 	ws->weaponweightindex = weaponweightindex;
 }
-//========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//========================================================================
 int BotAllocWeaponState(void)
 {
 	int i;
@@ -425,12 +407,6 @@ int BotAllocWeaponState(void)
 	}
 	return 0;
 }
-//========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//========================================================================
 void BotFreeWeaponState(int handle)
 {
 	if (handle <= 0 || handle > MAX_CLIENTS)

@@ -274,10 +274,6 @@ int PlaneFromPoints (int *p0, int *p1, int *p2)
 //===========================================================================
 // Adds any additional planes necessary to allow the brush to be expanded
 // against axial bounding boxes
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void AddBrushBevels (mapbrush_t *b)
 {
@@ -437,10 +433,6 @@ void AddBrushBevels (mapbrush_t *b)
 }
 //===========================================================================
 // creates windigs for sides and mins / maxs for the brush
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 qboolean MakeBrushWindings(mapbrush_t *ob)
 {
@@ -495,10 +487,6 @@ qboolean MakeBrushWindings(mapbrush_t *ob)
 // FIXME: currently doesn't mark all bevels
 // NOTE: when one brush bevel is found the remaining sides of the brush
 //       are bevels as well (when the brush isn't expanded for AAS :))
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void MarkBrushBevels(mapbrush_t *brush)
 {
@@ -551,10 +539,6 @@ void MarkBrushBevels(mapbrush_t *brush)
 }
 //===========================================================================
 // returns true if the map brush already exists
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int BrushExists(mapbrush_t *brush)
 {

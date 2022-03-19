@@ -149,10 +149,6 @@ void AAS_FreeTmpNode(tmp_node_t *tmpnode)
 }
 //===========================================================================
 // returns true if the face is a gap from the given side
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int AAS_GapFace(tmp_face_t *tmpface, int side)
 {
@@ -168,10 +164,6 @@ int AAS_GapFace(tmp_face_t *tmpface, int side)
 }
 //===========================================================================
 // returns true if the face is a ground face
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int AAS_GroundFace(tmp_face_t *tmpface)
 {
@@ -190,10 +182,6 @@ int AAS_GroundFace(tmp_face_t *tmpface)
 //
 // side :	0 = front side
 //				1 = back side
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void AAS_AddFaceSideToArea(tmp_face_t *tmpface, int side, tmp_area_t *tmparea)
 {
@@ -222,10 +210,6 @@ void AAS_AddFaceSideToArea(tmp_face_t *tmpface, int side, tmp_area_t *tmparea)
 }
 //===========================================================================
 // remove (a side of) a face from an area
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void AAS_RemoveFaceFromArea(tmp_face_t *tmpface, tmp_area_t *tmparea)
 {
@@ -540,10 +524,6 @@ void AAS_CreateAreaSettings(void)
 }
 //===========================================================================
 // create a tmp AAS area from a leaf node
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 tmp_node_t *AAS_CreateArea(node_t *node)
 {
@@ -711,10 +691,6 @@ void AAS_PrintNumGroundFaces(void)
 // since areas are convex they should only have ONE shared face
 // however due to crappy face merging there are sometimes several
 // shared faces
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void AAS_CheckAreaSharedFaces(tmp_area_t *tmparea1, tmp_area_t *tmparea2)
 {
@@ -889,10 +865,6 @@ void AAS_FlipSharedFaces(void)
 //===========================================================================
 // creates an .AAS file with the given name
 // a MAP should be loaded before calling this
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void AAS_Create(char *aasfile)
 {

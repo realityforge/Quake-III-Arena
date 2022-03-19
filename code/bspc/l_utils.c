@@ -39,12 +39,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #endif //BOTLIB
 
 #ifdef BOTLIB
-//========================================================================
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
-//========================================================================
 void Vector2Angles(vec3_t value1, vec3_t angles)
 {
 	float	forward;

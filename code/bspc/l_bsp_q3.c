@@ -242,10 +242,6 @@ void Q3_SurfacePlane(q3_dsurface_t *surface, vec3_t normal, float *dist)
 }
 //===========================================================================
 // returns the amount the face and the winding overlap
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 float Q3_FaceOnWinding(q3_dsurface_t *surface, winding_t *winding)
 {
@@ -284,10 +280,6 @@ float Q3_FaceOnWinding(q3_dsurface_t *surface, winding_t *winding)
 }
 //===========================================================================
 // creates a winding for the given brush side on the given brush
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 winding_t *Q3_BrushSideWinding(q3_dbrush_t *brush, q3_dbrushside_t *baseside)
 {
@@ -316,10 +308,6 @@ winding_t *Q3_BrushSideWinding(q3_dbrush_t *brush, q3_dbrushside_t *baseside)
 }
 //===========================================================================
 // fix screwed brush texture references
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 qboolean WindingIsTiny(winding_t *w);
 

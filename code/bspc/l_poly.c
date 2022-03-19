@@ -951,9 +951,7 @@ void RemoveEqualPoints(winding_t *w, float epsilon)
 // (for instance when spot is zero then the point is added at position zero)
 // the original winding is NOT freed
 //
-// Parameter:				-
 // Returns:					the new winding with the added point
-// Changes Globals:		-
 //===========================================================================
 winding_t *AddWindingPoint(winding_t *w, vec3_t point, int spot)
 {
@@ -988,9 +986,7 @@ winding_t *AddWindingPoint(winding_t *w, vec3_t point, int spot)
 // the position where the new point should be added in the winding is
 // stored in *spot
 //
-// Parameter:				-
 // Returns:					true if the point is on the winding
-// Changes Globals:		-
 //===========================================================================
 #define MELT_ON_EPSILON		0.2
 

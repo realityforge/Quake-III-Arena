@@ -199,10 +199,6 @@ void PrintBrush (bspbrush_t *brush)
 }
 //===========================================================================
 // Sets the mins/maxs based on the windings
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 void BoundBrush (bspbrush_t *brush)
 {
@@ -248,10 +244,6 @@ void CreateBrushWindings (bspbrush_t *brush)
 }
 //===========================================================================
 // Creates a new axial brush
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 bspbrush_t	*BrushFromBounds (vec3_t mins, vec3_t maxs)
 {
@@ -398,10 +390,6 @@ void FreeBrushList (bspbrush_t *brushes)
 }
 //===========================================================================
 // Duplicates the brush, the sides, and the windings
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 bspbrush_t *CopyBrush (bspbrush_t *brush)
 {
@@ -441,10 +429,6 @@ node_t *PointInLeaf (node_t *node, vec3_t point)
 }
 //===========================================================================
 // Returns PSIDE_FRONT, PSIDE_BACK, or PSIDE_BOTH
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 int BoxOnPlaneSide (vec3_t emins, vec3_t emaxs, plane_t *p)
 {
@@ -658,10 +642,6 @@ int TestBrushToPlanenum (bspbrush_t *brush, int planenum,
 //===========================================================================
 // Returns true if the winding would be crunched out of
 // existance by the vertex snapping.
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 #define	EDGE_LENGTH	0.2
 qboolean WindingIsTiny (winding_t *w)
@@ -688,10 +668,6 @@ qboolean WindingIsTiny (winding_t *w)
 //===========================================================================
 // Returns true if the winding still has one of the points
 // from basewinding for plane
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 qboolean WindingIsHuge (winding_t *w)
 {
@@ -707,10 +683,6 @@ qboolean WindingIsHuge (winding_t *w)
 }
 //===========================================================================
 // creates a leaf out of the given nodes with the given brushes
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 void LeafNode(node_t *node, bspbrush_t *brushes)
 {
@@ -788,10 +760,6 @@ qboolean CheckPlaneAgainstVolume (int pnum, node_t *node)
 // Using a hueristic, choses one of the sides out of the brushlist
 // to partition the brushes with.
 // Returns NULL if there are no valid planes to split with..
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 side_t *SelectSplitSide (bspbrush_t *brushes, node_t *node)
 {
@@ -964,10 +932,6 @@ int BrushMostlyOnSide (bspbrush_t *brush, plane_t *plane)
 //===========================================================================
 // Generates two new brushes, leaving the original
 // unchanged
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 void SplitBrush (bspbrush_t *brush, int planenum,
 	bspbrush_t **front, bspbrush_t **back)
@@ -1506,10 +1470,6 @@ void BuildTreeThread(int threadid)
 }
 //===========================================================================
 // build the bsp tree using a node list
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 void BuildTree(tree_t *tree)
 {
@@ -1542,10 +1502,6 @@ void BuildTree(tree_t *tree)
 }
 //===========================================================================
 // The incoming brush list will be freed before exiting
-//
-// Parameter:			-
-// Returns:				-
-// Changes Globals:		-
 //===========================================================================
 tree_t *BrushBSP(bspbrush_t *brushlist, vec3_t mins, vec3_t maxs)
 {

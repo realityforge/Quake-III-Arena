@@ -65,10 +65,6 @@ void FreePortal (portal_t *p)
 //===========================================================================
 // Returns the single content bit of the
 // strongest visible content present
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int VisibleContents (int contents)
 {
@@ -103,10 +99,6 @@ int ClusterContents (node_t *node)
 // the PVS calculation to see through it.
 // The nodes on either side of the portal may actually be clusters,
 // not leaves, so all contents should be ored together
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 qboolean Portal_VisFlood (portal_t *p)
 {
@@ -140,10 +132,6 @@ qboolean Portal_VisFlood (portal_t *p)
 // The entity flood determines which areas are
 // "outside" on the map, which are then filled in.
 // Flowing from side s to side !s
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 qboolean Portal_EntityFlood (portal_t *p, int s)
 {
@@ -249,10 +237,6 @@ void PrintPortal (portal_t *p)
 }
 //===========================================================================
 // The created portals will face the global outside_node
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 #define	SIDESPACE	8
 
@@ -354,10 +338,6 @@ winding_t *BaseWindingForNode (node_t *node)
 //===========================================================================
 // create the new portal by taking the full plane winding for the cutting
 // plane and clipping it by all of parents of this node
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 qboolean WindingIsTiny (winding_t *w);
 
@@ -431,10 +411,6 @@ void MakeNodePortal (node_t *node)
 //===========================================================================
 // Move or split the portals that bound node so that the node's
 // children have portals instead of node.
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void SplitNodePortals (node_t *node)
 {
@@ -639,10 +615,6 @@ void P_AddNodeToList(node_t *node)
 #endif //P_NODESTACK
 //===========================================================================
 // get the first node from the front of the node list
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 node_t *P_NextNodeFromList(void)
 {
@@ -751,10 +723,6 @@ qboolean PlaceOccupant (node_t *headnode, vec3_t origin, entity_t *occupant)
 }
 //===========================================================================
 // Marks all nodes that can be reached by entites
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 qboolean FloodEntities (tree_t *tree)
 {
@@ -863,10 +831,6 @@ void FillOutside_r (node_t *node)
 }
 //===========================================================================
 // Fill all nodes that can't be reached by entities
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void FillOutside (node_t *headnode)
 {
@@ -938,10 +902,6 @@ void FloodAreas_r (node_t *node)
 //===========================================================================
 // Just decend the tree, and for each node that hasn't had an
 // area set, flood fill out from there
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void FindAreas_r (node_t *node)
 {
@@ -972,10 +932,6 @@ void FindAreas_r (node_t *node)
 //===========================================================================
 // Just decend the tree, and for each node that hasn't had an
 // area set, flood fill out from there
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void SetAreaPortalAreas_r (node_t *node)
 {
@@ -1047,10 +1003,6 @@ void EmitAreaPortals(node_t *headnode)
 */
 //===========================================================================
 // Mark each leaf with an area, bounded by CONTENTS_AREAPORTAL
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void FloodAreas (tree_t *tree)
 {
@@ -1061,10 +1013,6 @@ void FloodAreas (tree_t *tree)
 }
 //===========================================================================
 // Finds a brush side to use for texturing the given portal
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void FindPortalSide (portal_t *p)
 {

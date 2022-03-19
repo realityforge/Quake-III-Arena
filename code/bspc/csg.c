@@ -96,10 +96,6 @@ void BSPBrushWindings(bspbrush_t *brush)
 }
 //===========================================================================
 // NOTE: can't keep brush->original intact
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 bspbrush_t *TryMergeBrushes(bspbrush_t *brush1, bspbrush_t *brush2)
 {
@@ -316,10 +312,6 @@ void SplitBrush2 (bspbrush_t *brush, int planenum,
 // Returns a list of brushes that remain after B is subtracted from A.
 // May by empty if A is contained inside B.
 // The originals are undisturbed.
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 bspbrush_t *SubtractBrush (bspbrush_t *a, bspbrush_t *b)
 {	// a - b = out (list)
@@ -356,10 +348,6 @@ bspbrush_t *SubtractBrush (bspbrush_t *a, bspbrush_t *b)
 // two provided brushes, or NULL if they are disjoint.
 //
 // The originals are undisturbed.
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 bspbrush_t *IntersectBrush (bspbrush_t *a, bspbrush_t *b)
 {
@@ -384,10 +372,6 @@ bspbrush_t *IntersectBrush (bspbrush_t *a, bspbrush_t *b)
 //===========================================================================
 // Returns true if the two brushes definately do not intersect.
 // There will be false negatives for some non-axial combinations.
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 qboolean BrushesDisjoint (bspbrush_t *a, bspbrush_t *b)
 {
@@ -416,10 +400,6 @@ qboolean BrushesDisjoint (bspbrush_t *a, bspbrush_t *b)
 // Returns a content word for the intersection of two brushes.
 // Some combinations will generate a combination (water + clip),
 // but most will be the stronger of the two contents.
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int IntersectionContents (int c1, int c2)
 {
@@ -433,10 +413,6 @@ int IntersectionContents (int c1, int c2)
 }
 //===========================================================================
 // Any planes shared with the box edge will be set to no texinfo
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 bspbrush_t *ClipBrushToBox(bspbrush_t *brush, vec3_t clipmins, vec3_t clipmaxs)
 {
@@ -576,10 +552,6 @@ bspbrush_t *AddBrushListToTail (bspbrush_t *list, bspbrush_t *tail)
 }
 //===========================================================================
 // Builds a new list that doesn't hold the given brush
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 bspbrush_t *CullList(bspbrush_t *list, bspbrush_t *skip1)
 {
@@ -639,10 +611,6 @@ void WriteBrushMap(char *name, bspbrush_t *list)
 */
 //===========================================================================
 // Returns true if b1 is allowed to bite b2
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 qboolean BrushGE (bspbrush_t *b1, bspbrush_t *b2)
 {
@@ -677,10 +645,6 @@ qboolean BrushGE (bspbrush_t *b1, bspbrush_t *b2)
 //===========================================================================
 // Carves any intersecting solid brushes into the minimum number
 // of non-intersecting brushes.
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 bspbrush_t *ChopBrushes (bspbrush_t *head)
 {

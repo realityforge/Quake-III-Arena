@@ -151,10 +151,6 @@ void AAS_SwapAASData(void)
 }
 //===========================================================================
 // dump the current loaded aas file
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void AAS_DumpAASData(void)
 {
@@ -182,10 +178,6 @@ void AAS_DumpAASData(void)
 }
 //===========================================================================
 // allocate memory and read a lump of a AAS file
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 char *AAS_LoadAASLump(FILE *fp, int offset, int length, void *buf)
 {
@@ -226,10 +218,6 @@ void AAS_DData(unsigned char *data, int size)
 }
 //===========================================================================
 // load an aas file
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 qboolean AAS_LoadAASFile(char *filename, int fpoffset, int fplength)
 {
@@ -443,10 +431,6 @@ void AAS_ShowTotals(void)
 }
 //===========================================================================
 // aas data is useless after writing to file because it is byte swapped
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 qboolean AAS_WriteAASFile(char *filename)
 {

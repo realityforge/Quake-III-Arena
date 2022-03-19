@@ -514,10 +514,6 @@ int AAS_TransformPlane(int planenum, vec3_t origin, vec3_t angles)
 }
 //===========================================================================
 // this function sets the func_rotating_door in it's final position
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void AAS_PositionFuncRotatingBrush(entity_t *mapent, mapbrush_t *brush)
 {
@@ -636,10 +632,6 @@ void AAS_PositionBrush(entity_t *mapent, mapbrush_t *brush)
 }
 //===========================================================================
 // uses the global cfg_t cfg
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void AAS_CreateMapBrushes(mapbrush_t *brush, entity_t *mapent, int addbevels)
 {

@@ -76,10 +76,6 @@ int HL_TextureContents(char *name)
 //
 // modified for Half-Life because there are quite a lot of tiny node leaves
 // in the Half-Life bsps
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 void HL_SplitBrush(bspbrush_t *brush, int planenum, int nodenum,
 						 bspbrush_t **front, bspbrush_t **back)
@@ -270,10 +266,6 @@ void HL_SplitBrush(bspbrush_t *brush, int planenum, int nodenum,
 }
 //===========================================================================
 // returns true if the tree starting at nodenum has only solid leaves
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int HL_SolidTree_r(int nodenum)
 {
@@ -539,10 +531,6 @@ bspbrush_t *HL_MergeBrushes(bspbrush_t *brushlist, int modelnum)
 }
 //===========================================================================
 // returns the amount the face and the winding have overlap
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 float HL_FaceOnWinding(hl_dface_t *face, winding_t *winding)
 {
@@ -590,10 +578,6 @@ float HL_FaceOnWinding(hl_dface_t *face, winding_t *winding)
 //===========================================================================
 // returns a list with brushes created by splitting the given brush with
 // planes that go through the face edges and are orthogonal to the face plane
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 bspbrush_t *HL_SplitBrushWithFace(bspbrush_t *brush, hl_dface_t *face)
 {

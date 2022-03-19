@@ -49,10 +49,6 @@ tmp_node_t *AAS_RefreshMergedTree_r(tmp_node_t *tmpnode)
 //===========================================================================
 // returns true if the two given faces would create a non-convex area at
 // the given sides, otherwise false is returned
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int NonConvex(tmp_face_t *face1, tmp_face_t *face2, int side1, int side2)
 {
@@ -83,8 +79,6 @@ int NonConvex(tmp_face_t *face1, tmp_face_t *face2, int side1, int side2)
 // try to merge the areas at both sides of the given face
 //
 // Parameter:				seperatingface		: face that seperates two areas
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 int AAS_TryMergeFaceAreas(tmp_face_t *seperatingface)
 {
@@ -225,8 +219,6 @@ int AAS_TryMergeFaceAreas(tmp_face_t *seperatingface)
 // merged areas are added to the end of the convex area list so merging
 // will be tried for those areas as well
 //
-// Parameter:				-
-// Returns:					-
 // Changes Globals:		tmpaasworld
 //===========================================================================
 /*

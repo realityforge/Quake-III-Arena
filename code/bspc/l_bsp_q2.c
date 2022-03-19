@@ -370,10 +370,6 @@ int InsideFace(dface_t *face, vec3_t point)
 }
 //===========================================================================
 // returns the amount the face and the winding overlap
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 float Q2_FaceOnWinding(q2_dface_t *face, winding_t *winding)
 {
@@ -420,10 +416,6 @@ float Q2_FaceOnWinding(q2_dface_t *face, winding_t *winding)
 }
 //===========================================================================
 // creates a winding for the given brush side on the given brush
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 winding_t *Q2_BrushSideWinding(dbrush_t *brush, dbrushside_t *baseside)
 {
@@ -470,10 +462,6 @@ int Q2_HintSkipBrush(dbrush_t *brush)
 }
 //===========================================================================
 // fix screwed brush texture references
-//
-// Parameter:				-
-// Returns:					-
-// Changes Globals:		-
 //===========================================================================
 qboolean WindingIsTiny(winding_t *w);
 
