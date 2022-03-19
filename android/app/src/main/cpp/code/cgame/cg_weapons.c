@@ -2195,7 +2195,7 @@ void CG_DrawWeaponSelector( void )
 				vec3_t diff;
 				VectorSubtract(selectorOrigin, iconOrigin, diff);
 				float length = VectorLength(diff);
-				if (length <= 1.2f &&
+				if (length <= 1.5f &&
 					frac == 1.0f &&
 					selectable)
 				{
@@ -2255,20 +2255,10 @@ void CG_DrawWeaponSelector( void )
 				memset(&ent, 0, sizeof(ent));
 				VectorCopy(iconOrigin, ent.origin);
 
-				//Shift the weapon model a bit to be in the sphere
-				if (weaponId == WP_GAUNTLET)
-				{
-                    SCALE = 0.065f;
-					VectorMA(ent.origin, 0.3f, wheelUp, ent.origin);
-                    VectorMA(ent.origin, 0.15f, wheelRight, ent.origin);
-                    VectorMA(ent.origin, -0.15f, wheelForward, ent.origin);
-				}
-				else
-				{
-					VectorMA(ent.origin, 0.3f, wheelForward, ent.origin);
-					VectorMA(ent.origin, -0.2f, wheelRight, ent.origin);
-					VectorMA(ent.origin, 0.5f, wheelUp, ent.origin);
-				}
+				//Shift model a bit
+                VectorMA(ent.origin, 0.3f, wheelForward, ent.origin);
+                VectorMA(ent.origin, -0.2f, wheelRight, ent.origin);
+                VectorMA(ent.origin, 0.1f, wheelUp, ent.origin);
 
 				vec3_t iconAngles;
 				VectorCopy(wheelAngles, iconAngles);
