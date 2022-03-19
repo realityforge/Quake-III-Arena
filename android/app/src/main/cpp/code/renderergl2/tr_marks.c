@@ -139,10 +139,7 @@ void R_BoxSurfaces_r(mnode_t *node, vec3_t mins, vec3_t maxs, surfaceType_t **li
 
 	// do the tail recursion in a loop
 	while ( node->contents == -1 ) {
-		if (!vr_thirdPersonSpectator->integer)
-			s = BoxOnPlaneSide( mins, maxs, node->plane );
-		else
-			s = 0;
+		s = BoxOnPlaneSide( mins, maxs, node->plane );
 
 		if (s == 1) {
 			node = node->children[0];
@@ -172,10 +169,7 @@ void R_BoxSurfaces_r(mnode_t *node, vec3_t mins, vec3_t maxs, surfaceType_t **li
 		// extra check for surfaces to avoid list overflows
 		else if (*(surf->data) == SF_FACE) {
 			// the face plane should go through the box
-			if (!vr_thirdPersonSpectator->integer)
-				s = BoxOnPlaneSide( mins, maxs, &surf->cullinfo.plane );
-			else
-				s = 0;
+			s = BoxOnPlaneSide( mins, maxs, &surf->cullinfo.plane );
 
 			if (s == 1 || s == 2) {
 				*surfViewCount = tr.viewCount;

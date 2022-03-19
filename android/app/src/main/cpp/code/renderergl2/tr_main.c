@@ -207,7 +207,7 @@ int R_CullLocalBox(vec3_t localBounds[2]) {
 	int			anyBack;
 	int			front, back;
 
-	if ( r_nocull->integer || vr_thirdPersonSpectator->integer ) {
+	if ( r_nocull->integer ) {
 		return CULL_CLIP;
 	}
 
@@ -258,7 +258,7 @@ int R_CullLocalBox(vec3_t localBounds[2]) {
 	vec3_t          v;
 	vec3_t          worldBounds[2];
 
-	if(r_nocull->integer || vr_thirdPersonSpectator->integer)
+	if(r_nocull->integer )
 	{
 		return CULL_CLIP;
 	}
@@ -293,11 +293,6 @@ int R_CullBox(vec3_t worldBounds[2]) {
 	cplane_t       *frust;
 	qboolean        anyClip;
 	int             r, numPlanes;
-
-	if (vr_thirdPersonSpectator->integer)
-	{
-		return CULL_IN;
-	}
 
 	numPlanes = (tr.viewParms.flags & VPF_FARPLANEFRUSTUM) ? 5 : 4;
 
@@ -352,7 +347,7 @@ int R_CullPointAndRadiusEx( const vec3_t pt, float radius, const cplane_t* frust
 	const cplane_t	*frust;
 	qboolean mightBeClipped = qfalse;
 
-	if ( r_nocull->integer || vr_thirdPersonSpectator->integer) {
+	if ( r_nocull->integer ) {
 		return CULL_CLIP;
 	}
 
@@ -1910,13 +1905,10 @@ void R_RenderPshadowMaps(const refdef_t *fd)
 			if (!radius)
 				continue;
 
-			if (!vr_thirdPersonSpectator->integer)
-            {
-                // Cull entities that are behind the viewer by more than lightRadius
-                VectorSubtract(ent->e.origin, fd->vieworg, diff);
-                if (DotProduct(diff, fd->viewaxis[0]) < -r_pshadowDist->value)
-                    continue;
-            }
+			// Cull entities that are behind the viewer by more than lightRadius
+			VectorSubtract(ent->e.origin, fd->vieworg, diff);
+			if (DotProduct(diff, fd->viewaxis[0]) < -r_pshadowDist->value)
+				continue;
 
 			memset(&shadow, 0, sizeof(shadow));
 

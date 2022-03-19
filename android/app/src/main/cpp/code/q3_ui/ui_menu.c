@@ -232,13 +232,14 @@ static void Main_MenuDraw( void ) {
 		UI_DrawString( 320, yPos, "Quake III Arena(c) 1999-2000, Id Software, Inc.  All Rights Reserved", UI_CENTER|UI_SMALLFONT, color );
 	} else {
 		UI_DrawString( 320, yPos, "Quake III Arena(c) 1999-2000, Id Software, Inc.  All Rights Reserved", UI_CENTER|UI_SMALLFONT, color );
-        yPos += SMALLCHAR_HEIGHT;
-		UI_DrawString( 320, yPos, "Quake3Quest " Q3QVERSION " - Visit quake3.quakevr.com for discord invite.", UI_CENTER|UI_SMALLFONT, color );
-        yPos += SMALLCHAR_HEIGHT;
-		UI_DrawString( 320, yPos, "Join our discord for news, leaderboards and community!", UI_CENTER|UI_SMALLFONT, color );
-        yPos += SMALLCHAR_HEIGHT;
-		UI_DrawString( 320, yPos, "Get mods & mappacks via the companion app!", UI_CENTER|UI_SMALLFONT, color );
 	}
+
+	yPos += SMALLCHAR_HEIGHT;
+	UI_DrawString( 320, yPos, "Quake3Quest " Q3QVERSION " - Visit quake3.quakevr.com for discord invite.", UI_CENTER|UI_SMALLFONT, color );
+	yPos += SMALLCHAR_HEIGHT;
+	UI_DrawString( 320, yPos, "Join our discord for news, leaderboards and community!", UI_CENTER|UI_SMALLFONT, color );
+	yPos += SMALLCHAR_HEIGHT;
+	UI_DrawString( 320, yPos, "Get mods & mappacks via the companion app!", UI_CENTER|UI_SMALLFONT, color );
 }
 
 
