@@ -2603,7 +2603,7 @@ static void CG_DrawVignette( void )
 	}
 
 	const float yawDelta = fabsf(vr->clientview_yaw_delta);
-	if (VectorLength(cg.predictedPlayerState.velocity) > 30.0 || (yawDelta > 0 && yawDelta < 20) || (yawDelta > 340))
+	if (VectorLength(cg.predictedPlayerState.velocity) > 30.0 || (yawDelta > 1 && yawDelta < 20) || (yawDelta > 340))
 	{
 		if (currentComfortVignetteValue <  comfortVignetteValue)
 		{
