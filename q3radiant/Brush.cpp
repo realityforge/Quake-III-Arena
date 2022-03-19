@@ -3369,7 +3369,6 @@ bool PaintedModel(brush_t *b, bool bOkToTexture)
         {
           for (j = 0; j < 3; j++)
           {
-#if 1
             float x = model->pTriList[i].v[j][0] + v[0];
             float y = model->pTriList[i].v[j][1] + v[1];
             if (a)
@@ -3382,35 +3381,6 @@ bool PaintedModel(brush_t *b, bool bOkToTexture)
             //qglTexCoord2f (pEclass->pTriList[i].st[j][0] / pEclass->nSkinWidth, pEclass->pTriList[i].st[j][1] / pEclass->nSkinHeight);
             qglTexCoord2f (model->pTriList[i].st[j][0], model->pTriList[i].st[j][1]);
             qglVertex3f(x, y, model->pTriList[i].v[j][2] + v[2]);
-#else
-            float x = model->pTriList[i].v[j][0] + v[0];
-            float y = model->pTriList[i].v[j][1] + v[1];
-            float z = model->pTriList[i].v[j][2] + v[2];
-
-            if (b->owner->vRotation[0])
-            {
-              float y2 = (((y - v[1]) * vCos[0]) - ((z - v[2]) * vSin[0])) + v[1];
-              float z2 = (((y - v[1]) * vSin[0]) + ((z - v[2]) * vCos[0])) + v[2];
-              y = y2;
-              z = z2;
-            }
-            if (b->owner->vRotation[1])
-            {
-              float z2 = (((z - v[2]) * vCos[1]) - ((x - v[0]) * vSin[1])) + v[2];
-              float x2 = (((z - v[2]) * vSin[1]) + ((x - v[0]) * vCos[1])) + v[0];
-              x = x2;
-              z = z2;
-            }
-            if (b->owner->vRotation[2])
-            {
-              float x2 = (((x - v[0]) * vCos[2]) - ((y - v[1]) * vSin[2])) + v[0];
-              float y2 = (((x - v[0]) * vSin[2]) + ((y - v[1]) * vCos[2])) + v[1];
-              x = x2;
-              y = y2;
-            }
-            qglTexCoord2f (model->pTriList[i].st[j][0], model->pTriList[i].st[j][1]);
-            qglVertex3f(x, y, z);
-#endif
             if (g_bDoIt)
             {
               vTest[j][0] = x;

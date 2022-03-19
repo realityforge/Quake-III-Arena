@@ -817,15 +817,13 @@ static qboolean GLW_StartDriverAndSetMode( const char *drivername,
   rserr_t err;
 
   // don't ever bother going into fullscreen with a voodoo card
-#if 1	// JDC: I reenabled this
   if ( Q_stristr( drivername, "Voodoo" ) )
   {
     ri.Cvar_Set( "r_fullscreen", "0" );
     r_fullscreen->modified = qfalse;
     fullscreen = qfalse;
   }
-#endif
-	
+
 	if (fullscreen && in_nograb->value)
 	{
 		ri.Printf( PRINT_ALL, "Fullscreen not allowed with in_nograb 1\n");

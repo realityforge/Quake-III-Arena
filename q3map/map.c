@@ -69,20 +69,12 @@ void ParseTerrain( void );
 #define	DIST_EPSILON	0.01
 qboolean	PlaneEqual (plane_t *p, vec3_t normal, vec_t dist)
 {
-#if 1
 	if (
 	   fabs(p->normal[0] - normal[0]) < NORMAL_EPSILON
 	&& fabs(p->normal[1] - normal[1]) < NORMAL_EPSILON
 	&& fabs(p->normal[2] - normal[2]) < NORMAL_EPSILON
 	&& fabs(p->dist - dist) < DIST_EPSILON )
 		return qtrue;
-#else
-	if (p->normal[0] == normal[0]
-		&& p->normal[1] == normal[1]
-		&& p->normal[2] == normal[2]
-		&& p->dist == dist)
-		return qtrue;
-#endif
 	return qfalse;
 }
 

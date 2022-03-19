@@ -1589,30 +1589,8 @@ void Patch_BrushToMesh(bool bCone, bool bBevel, bool bEndcap, bool bSquare, int 
 */
   
   b = AddBrushForPatch(p);
-
-
-#if 1
     Select_Delete();
     Select_Brush(b);
-#else
-  if (!bCone)
-  {
-    Select_Delete();
-    Select_Brush(b);
-    GenerateEndCaps(b, bBevel, bEndcap, bInverted);
-    eclass_t *pecNew = Eclass_ForName("func_group", false);
-    if (pecNew)
-    {
-      Entity_Create(pecNew);
-    }
-  }
-  else
-  {
-    Select_Delete();
-    Select_Brush(b);
-  }
-#endif
-
 }
 
 brush_t* Patch_GenericMesh(int nWidth, int nHeight, int nOrientation, bool bDeleteSource, bool bOverride)
@@ -3830,60 +3808,12 @@ void Patch_BendHandleESC()
 
 void Patch_SetBendRotateOrigin(patchMesh_t *p)
 {
-#if 1
   int nType = g_pParentWnd->ActiveXY()->GetViewType();
   int nDim3 = (nType == XY) ? 2 : (nType == YZ) ? 0 : 1;
 
   g_vBendOrigin[nDim3] = 0;
   VectorCopy(g_vBendOrigin, g_pParentWnd->ActiveXY()->RotateOrigin());
   return;
-#else
-  int nDim1 = (g_pParentWnd->ActiveXY()->GetViewType() == YZ) ? 1 : 0;
-  int nDim2 = (g_pParentWnd->ActiveXY()->GetViewType() == XY) ? 1 : 2;
-
-  float fxLo, fyLo, fxHi, fyHi;
-  fxLo = fyLo = 9999;
-  fxHi = fyHi = -9999;
-
-  if (g_bPatchAxisOnRow)
-  {
-    for (int i = 0; i < p->width; i++)
-    {
-      if (p->ctrl[i][g_nPatchAxisIndex].xyz[nDim1] < fxLo)
-        fxLo = p->ctrl[i][g_nPatchAxisIndex].xyz[nDim1];
-
-      if (p->ctrl[i][g_nPatchAxisIndex].xyz[nDim1] > fxHi)
-        fxHi = p->ctrl[i][g_nPatchAxisIndex].xyz[nDim1];
-
-      if (p->ctrl[i][g_nPatchAxisIndex].xyz[nDim2] < fyLo)
-        fyLo = p->ctrl[i][g_nPatchAxisIndex].xyz[nDim2];
-
-      if (p->ctrl[i][g_nPatchAxisIndex].xyz[nDim2] > fyHi)
-        fyHi = p->ctrl[i][g_nPatchAxisIndex].xyz[nDim2];
-    }
-  }
-  else
-  {
-    for (int i = 0; i < p->height; i++)
-    {
-      if (p->ctrl[g_nPatchAxisIndex][i].xyz[nDim1] < fxLo)
-        fxLo = p->ctrl[g_nPatchAxisIndex][i].xyz[nDim1];
-
-      if (p->ctrl[g_nPatchAxisIndex][i].xyz[nDim1] > fxHi)
-        fxHi = p->ctrl[g_nPatchAxisIndex][i].xyz[nDim1];
-
-      if (p->ctrl[g_nPatchAxisIndex][i].xyz[nDim2] < fyLo)
-        fyLo = p->ctrl[g_nPatchAxisIndex][i].xyz[nDim2];
-
-      if (p->ctrl[g_nPatchAxisIndex][i].xyz[nDim2] > fyHi)
-        fyHi = p->ctrl[g_nPatchAxisIndex][i].xyz[nDim2];
-    }
-  }
-
-  g_pParentWnd->ActiveXY()->RotateOrigin()[0] = g_pParentWnd->ActiveXY()->RotateOrigin()[1] = g_pParentWnd->ActiveXY()->RotateOrigin()[2] = 0.0;
-  g_pParentWnd->ActiveXY()->RotateOrigin()[nDim1] = (fxLo + fxHi) * 0.5;
-  g_pParentWnd->ActiveXY()->RotateOrigin()[nDim2] = (fyLo + fyHi) * 0.5;
-#endif
 }
 
 // also sets the rotational origin

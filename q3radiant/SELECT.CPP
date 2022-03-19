@@ -433,7 +433,6 @@ the selected brushes off of their old positions
 */
 void Select_Clone (void)
 {
-#if 1
   ASSERT(g_pParentWnd->ActiveXY());
   g_bScreenUpdates = false;  
   g_pParentWnd->ActiveXY()->Copy();
@@ -442,78 +441,6 @@ void Select_Clone (void)
   g_pParentWnd->NudgeSelection(3, g_qeglobals.d_gridsize);
   g_bScreenUpdates = true;  
   Sys_UpdateWindows(W_ALL);
-#else
-
-	brush_t		*b, *b2, *n, *next, *next2;
-	vec3_t		delta;
-	entity_t	*e;
-
-	g_qeglobals.d_workcount++;
-	clearSelection();
-
-	delta[0] = g_qeglobals.d_gridsize;
-	delta[1] = g_qeglobals.d_gridsize;
-	delta[2] = 0;
-
-	for (b=selected_brushes.next ; b != &selected_brushes ; b=next)
-	{
-		next = b->next;
-		// if the brush is a world brush, handle simply
-		if (b->owner == world_entity)
-		{
-			n = Brush_Clone (b);
-			Brush_AddToList (n, &active_brushes);
-			Entity_LinkBrush (world_entity, n);
-			Brush_Build( n );
-			Brush_Move (b, delta);
-			continue;
-		}
-
-		e = Entity_Clone (b->owner);
-		// clear the target / targetname
-		DeleteKey (e, "target");
-		DeleteKey (e, "targetname");
-
-		// if the brush is a fixed size entity, create a new entity
-		if (b->owner->eclass->fixedsize)
-		{
-			n = Brush_Clone (b);
-			Brush_AddToList (n, &active_brushes);
-			Entity_LinkBrush (e, n);
-			Brush_Build( n );
-			Brush_Move (b, delta);
-			continue;
-		}
-        
-		// brush is a complex entity, grab all the other ones now
-
-		next = &selected_brushes;
-
-		for ( b2 = b ; b2 != &selected_brushes ; b2=next2)
-		{
-			next2 = b2->next;
-			if (b2->owner != b->owner)
-			{
-				if (next == &selected_brushes)
-					next = b2;
-				continue;
-			}
-
-			// move b2 to the start of selected_brushes,
-			// so it won't be hit again
-			Brush_RemoveFromList (b2);
-			Brush_AddToList (b2, &selected_brushes);
-			
-			n = Brush_Clone (b2);
-			Brush_AddToList (n, &active_brushes);
-			Entity_LinkBrush (e, n);
-			Brush_Build( n );
-			Brush_Move (b2, delta, true);
-		}
-
-	}
-	Sys_UpdateWindows (W_ALL);
-#endif
 }
 
 

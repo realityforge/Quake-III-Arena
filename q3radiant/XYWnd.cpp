@@ -3286,8 +3286,7 @@ bool OnList(entity_t* pFind, CPtrArray* pList)
 
 void CXYWnd::Copy()
 {
-#if 1
-  CWaitCursor WaitCursor; 
+  CWaitCursor WaitCursor;
   g_Clipboard.SetLength(0);
   g_PatchClipboard.SetLength(0);
   
@@ -3320,46 +3319,6 @@ void CXYWnd::Copy()
   {
     Sys_Printf("Unable to register Windows clipboard formats, copy/paste between editors will not be possible");
   }
-
-/*
-  CString strOut;
-  ::GetTempPath(1024, strOut.GetBuffer(1024));
-  strOut.ReleaseBuffer();
-  AddSlash(strOut);
-  strOut += "RadiantClipboard.$$$";
-  Map_SaveSelected(strOut.GetBuffer(0));
-*/
-
-#else
-  CPtrArray holdArray;
-  CleanList(&g_brClipboard);
-  CleanCopyEntities();
-	for (brush_t* pBrush = selected_brushes.next ; pBrush != NULL && pBrush != &selected_brushes ; pBrush=pBrush->next)
-  {
-		if (pBrush->owner == world_entity)
-    {
-      brush_t* pClone = Brush_Clone(pBrush);
-      pClone->owner = NULL;
-  	  Brush_AddToList (pClone, &g_brClipboard);
-    }
-    else
-    {
-      if (!OnList(pBrush->owner, &holdArray))
-      {
-        entity_t* e = pBrush->owner;
-        holdArray.Add(reinterpret_cast<void*>(e));
-        entity_t* pEClone = Entity_CopyClone(e);
-			  for (brush_t* pEB = e->brushes.onext ; pEB != &e->brushes ; pEB=pEB->onext)
-			  {
-          brush_t* pClone = Brush_Clone(pEB);
-	        //Brush_AddToList (pClone, &g_brClipboard);
-          Entity_LinkBrush(pEClone, pClone);
-          Brush_Build(pClone);
-			  }
-      }
-    }
-  }
-#endif
 }
 
 void CXYWnd::Undo()

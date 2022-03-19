@@ -662,37 +662,7 @@ void EClass_InsertSortedList(eclass_t *&pList, eclass_t *e)
 
 void Eclass_InsertAlphabetized (eclass_t *e)
 {
-#if 1
   EClass_InsertSortedList(eclass, e);
-#else
-	eclass_t	*s;
-	
-	if (!eclass)
-	{
-		eclass = e;
-		return;
-	}
-
-
-	s = eclass;
-	if (stricmp (e->name, s->name) < 0)
-	{
-		e->next = s;
-		eclass = e;
-		return;
-	}
-
-	do
-	{
-		if (!s->next || stricmp (e->name, s->next->name) < 0)
-		{
-			e->next = s->next;
-			s->next = e;
-			return;
-		}
-		s=s->next;
-	} while (1);
-#endif
 }
 
 
