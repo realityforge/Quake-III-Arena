@@ -243,7 +243,7 @@ static void GLSL_GetShaderHeader( GLenum shaderType, const GLchar *extra, char *
 	// HACK: abuse the GLSL preprocessor to turn GLSL 1.20 shaders into 1.30 ones
 #ifdef __ANDROID__
 	Q_strcat(dest, size, "#version 300 es\n");
-	Q_strcat(dest, size, "precision mediump float;\n");
+	Q_strcat(dest, size, "precision highp float;\n");
 	if(shaderType == GL_VERTEX_SHADER)
 	{
 		Q_strcat(dest, size, "#define attribute in\n");
