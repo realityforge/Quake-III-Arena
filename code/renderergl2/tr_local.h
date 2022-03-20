@@ -2105,7 +2105,6 @@ FLARES
 void R_ClearFlares( void );
 
 void RB_AddFlare( void *surface, int fogNum, vec3_t point, vec3_t color, vec3_t normal );
-void RB_AddDlightFlares( void );
 void RB_RenderFlares (void);
 
 /*

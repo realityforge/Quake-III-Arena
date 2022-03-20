@@ -1275,7 +1275,6 @@ qboolean R_inPVS( const vec3_t p1, const vec3_t p2 );
 void R_ClearFlares( void );
 
 void RB_AddFlare( void *surface, int fogNum, vec3_t point, vec3_t color, vec3_t normal );
-void RB_AddDlightFlares( void );
 void RB_RenderFlares (void);
 
 void R_DlightBmodel( bmodel_t *bmodel );
