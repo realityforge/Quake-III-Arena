@@ -21,14 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		cl_cin.c
- *
- * desc:		video and cinematic playback
- *
- * $Archive: /MissionPack/code/client/cl_cin.c $
- *
- * cl_glconfig.hwtype trtypes 3dfx/ragepro need 256x256
- *
+ * video and cinematic playback
  *****************************************************************************/
 
 #include "client.h"

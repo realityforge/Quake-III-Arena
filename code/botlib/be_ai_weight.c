@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		be_ai_weight.c
- *
- * desc:		fuzzy logic
- *
- * $Archive: /MissionPack/code/botlib/be_ai_weight.c $
- *
+ * fuzzy logic
  *****************************************************************************/
 
 #include "../qcommon/q_shared.h"

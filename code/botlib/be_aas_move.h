@@ -20,15 +20,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-/*****************************************************************************
- * name:		be_aas_move.h
- *
- * desc:		AAS
- *
- * $Archive: /source/code/botlib/be_aas_move.h $
- *
- *****************************************************************************/
-
 #ifdef AASINTERN
 extern aas_settings_t aassettings;
 #endif //AASINTERN

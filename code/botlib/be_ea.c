@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		be_ea.c
- *
- * desc:		elementary actions
- *
- * $Archive: /MissionPack/code/botlib/be_ea.c $
- *
+ * elementary actions
  *****************************************************************************/
 
 #include "../qcommon/q_shared.h"

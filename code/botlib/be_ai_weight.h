@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		be_ai_weight.h
- *
- * desc:		fuzzy weights
- *
- * $Archive: /source/code/botlib/be_ai_weight.h $
- *
+ * fuzzy weights
  *****************************************************************************/
 
 #define WT_BALANCE			1

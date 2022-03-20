@@ -21,14 +21,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		l_struct.h
- *
- * desc:		structure reading/writing
- *
- * $Archive: /source/code/botlib/l_struct.h $
- *
+ * structure reading/writing
  *****************************************************************************/
-
 
 #define MAX_STRINGFIELD				80
 //field types

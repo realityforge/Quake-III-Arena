@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		be_interface.h
- *
- * desc:		botlib interface
- *
- * $Archive: /source/code/botlib/be_interface.h $
- *
+ * botlib interface
  *****************************************************************************/
 
 //#define DEBUG			//debug code

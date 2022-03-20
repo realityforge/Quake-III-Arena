@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		l_precomp.h
- *
- * desc:		pre compiler
- *
- * $Archive: /source/code/botlib/l_precomp.h $
- *
+ * pre compiler
  *****************************************************************************/
 
 #ifndef PATH_SEPERATORSTR

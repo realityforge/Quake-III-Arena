@@ -22,12 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
 
 /*****************************************************************************
- * name:		be_aas.h
- *
- * desc:		Area Awareness System, stuff exported to the AI
- *
- * $Archive: /source/code/botlib/be_aas.h $
- *
+ * Area Awareness System, stuff exported to the AI
  *****************************************************************************/
 
 #ifndef MAX_STRINGFIELD

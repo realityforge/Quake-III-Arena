@@ -20,18 +20,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-/*****************************************************************************
- * name:		be_aas_debug.h
- *
- * desc:		AAS
- *
- * $Archive: /source/code/botlib/be_aas_debug.h $
- *
- *****************************************************************************/
-
 //clear the shown debug lines
 void AAS_ClearShownDebugLines(void);
-//
 void AAS_ClearShownPolygons(void);
 //show a debug line
 void AAS_DebugLine(vec3_t start, vec3_t end, int color);

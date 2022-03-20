@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		l_log.h
- *
- * desc:		log file
- *
- * $Archive: /source/code/botlib/l_log.h $
- *
+ * log file
  *****************************************************************************/
 
 //open a log file

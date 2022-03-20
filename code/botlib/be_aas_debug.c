@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		be_aas_debug.c
- *
- * desc:		AAS debug code
- *
- * $Archive: /MissionPack/code/botlib/be_aas_debug.c $
- *
+ * AAS debug code
  *****************************************************************************/
 
 #include "../qcommon/q_shared.h"

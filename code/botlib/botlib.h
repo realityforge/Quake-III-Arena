@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 //
 /*****************************************************************************
- * name:		botlib.h
- *
- * desc:		bot AI library
- *
- * $Archive: /source/code/game/botai.h $
- *
+ * bot AI library
  *****************************************************************************/
 
 #include "../qcommon/q_shared.h"

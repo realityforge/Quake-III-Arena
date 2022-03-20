@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		l_script.c
- *
- * desc:		lexicographical parser
- *
- * $Archive: /MissionPack/code/botlib/l_script.c $
- *
+ * lexicographical parser
  *****************************************************************************/
 
 //#define SCREWUP

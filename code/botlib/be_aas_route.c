@@ -20,15 +20,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-/*****************************************************************************
- * name:		be_aas_route.c
- *
- * desc:		AAS
- *
- * $Archive: /MissionPack/code/botlib/be_aas_route.c $
- *
- *****************************************************************************/
-
 #include "../qcommon/q_shared.h"
 #include "l_utils.h"
 #include "l_memory.h"

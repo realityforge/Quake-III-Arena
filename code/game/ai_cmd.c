@@ -19,16 +19,6 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-//
-
-/*****************************************************************************
- * name:		ai_cmd.c
- *
- * desc:		Quake3 bot AI
- *
- * $Archive: /MissionPack/code/game/ai_cmd.c $
- *
- *****************************************************************************/
 
 #include "g_local.h"
 #include "../botlib/botlib.h"

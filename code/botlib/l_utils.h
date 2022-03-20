@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		l_util.h
- *
- * desc:		utils
- *
- * $Archive: /source/code/botlib/l_util.h $
- *
+ * utils
  *****************************************************************************/
 
 #define Vector2Angles(v,a)		vectoangles(v,a)

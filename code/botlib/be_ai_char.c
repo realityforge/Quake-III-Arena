@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		be_ai_char.c
- *
- * desc:		bot characters
- *
- * $Archive: /MissionPack/code/botlib/be_ai_char.c $
- *
+ * bot characters
  *****************************************************************************/
 
 #include "../qcommon/q_shared.h"

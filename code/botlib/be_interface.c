@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		be_interface.c
- *
- * desc:		bot library interface
- *
- * $Archive: /MissionPack/code/botlib/be_interface.c $
- *
+ * bot library interface
  *****************************************************************************/
 
 #include "../qcommon/q_shared.h"
