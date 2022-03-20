@@ -457,6 +457,7 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
         }
 	} else {
         vec3_t rotation = {0};
+        QuatToYawPitchRoll(remoteTracking.HeadPose.Pose.Orientation, rotation, vr.offhandangles2); // used for off-hand direction mode
         rotation[PITCH] = vr_weaponPitch->value;
         QuatToYawPitchRoll(remoteTracking.HeadPose.Pose.Orientation, rotation, vr.offhandangles);
 
@@ -529,7 +530,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 					rotateAboutOrigin(joystickX, joystickY, vr.hmdorientation[YAW], joystick);
 				} else {
                 	//Off-hand based
-					rotateAboutOrigin(joystickX, joystickY, vr.offhandangles[YAW], joystick);
+					rotateAboutOrigin(joystickX, joystickY, vr.offhandangles2[YAW], joystick);
 				}
             }
             else
@@ -548,7 +549,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 					joystick[1] = joystickY;
 				} else {
 					//Off-hand based
-					rotateAboutOrigin(joystickX, joystickY, vr.offhandangles[YAW] - vr.hmdorientation[YAW], joystick);
+					rotateAboutOrigin(joystickX, joystickY, vr.offhandangles2[YAW] - vr.hmdorientation[YAW], joystick);
 				}
             }
 

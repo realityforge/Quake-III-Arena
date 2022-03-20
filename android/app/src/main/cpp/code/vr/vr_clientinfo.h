@@ -50,6 +50,7 @@ typedef struct {
     vec3_t weaponposition;
 
     vec3_t offhandangles;
+    vec3_t offhandangles2;
     vec3_t offhandoffset;
     vec3_t offhandoffset_last[2];
     vec3_t offhandposition;
