@@ -2592,6 +2592,7 @@ CG_DrawVignette
 ==============
 */
 float currentComfortVignetteValue = 0.0f;
+float filteredViewYawDelta = 0.0f;
 
 static void CG_DrawVignette( void )
 {
@@ -2602,8 +2603,13 @@ static void CG_DrawVignette( void )
 		return;
 	}
 
-	const float yawDelta = fabsf(vr->clientview_yaw_delta);
-	if (VectorLength(cg.predictedPlayerState.velocity) > 30.0 || (yawDelta > 1 && yawDelta < 20) || (yawDelta > 340))
+	float yawDelta = fabsf(vr->clientview_yaw_delta);
+	if (yawDelta > 180)
+	{
+		yawDelta = fabs(yawDelta - 360);
+	}
+	filteredViewYawDelta = filteredViewYawDelta * 0.75f + yawDelta * 0.25f;
+	if (VectorLength(cg.predictedPlayerState.velocity) > 30.0 || (filteredViewYawDelta > 1))
 	{
 		if (currentComfortVignetteValue <  comfortVignetteValue)
 		{
