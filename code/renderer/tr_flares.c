@@ -184,39 +184,6 @@ void RB_AddFlare( void *surface, int fogNum, vec3_t point, vec3_t color, vec3_t 
 	f->eyeZ = eye[2];
 }
 
-void RB_AddDlightFlares( void ) {
-	dlight_t		*l;
-	int				i, j, k;
-	fog_t			*fog;
-
-	if ( !r_flares->integer ) {
-		return;
-	}
-
-	l = backEnd.refdef.dlights;
-	fog = tr.world->fogs;
-	for (i=0 ; i<backEnd.refdef.num_dlights ; i++, l++) {
-
-		// find which fog volume the light is in 
-		for ( j = 1 ; j < tr.world->numfogs ; j++ ) {
-			fog = &tr.world->fogs[j];
-			for ( k = 0 ; k < 3 ; k++ ) {
-				if ( l->origin[k] < fog->bounds[0][k] || l->origin[k] > fog->bounds[1][k] ) {
-					break;
-				}
-			}
-			if ( k == 3 ) {
-				break;
-			}
-		}
-		if ( j == tr.world->numfogs ) {
-			j = 0;
-		}
-
-		RB_AddFlare( (void *)l, j, l->origin, l->color, NULL );
-	}
-}
-
 /*
 ===============================================================================
 
@@ -361,8 +328,6 @@ void RB_RenderFlares (void) {
 	if ( !r_flares->integer ) {
 		return;
 	}
-
-//	RB_AddDlightFlares();
 
 	// perform z buffer readback on each flare in this view
 	draw = qfalse;
