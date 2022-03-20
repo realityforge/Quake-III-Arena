@@ -1,5 +1,5 @@
 build
-android/app/src/main/cpp/code/VrApi/
+android/app/src/main/cpp/code/VrApi
 *.swp
 *tags
 *~
