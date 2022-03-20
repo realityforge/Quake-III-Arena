@@ -1724,7 +1724,7 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 
 	if (trap_Cvar_VariableValue("vr_lasersight") != 0.0f && !vr->no_crosshair)
 	{
-		vec3_t forward, end, dir;
+		vec3_t forward, end;
 		AngleVectors(angles, forward, NULL, NULL);
 		VectorMA(hand.origin, 4096, forward, end);
 		trace_t trace;
@@ -2195,7 +2195,7 @@ void CG_DrawWeaponSelector( void )
 				vec3_t diff;
 				VectorSubtract(selectorOrigin, iconOrigin, diff);
 				float length = VectorLength(diff);
-				if (length <= 1.5f &&
+				if (length <= 1.4f &&
 					frac == 1.0f &&
 					selectable)
 				{

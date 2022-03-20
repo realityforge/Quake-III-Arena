@@ -259,7 +259,17 @@ static qboolean IN_SendButtonAction(const char* action, qboolean pressed, qboole
         }
         else if (strcmp(action, "+weapon_stabilise") == 0)
         {
-            vr.weapon_stabilised = pressed;
+            //stabilised weapon only triggered when controllers close enough (40cm) to each other
+            if (pressed)
+            {
+                vec3_t l;
+                VectorSubtract(vr.weaponposition, vr.offhandposition, l);
+                vr.weapon_stabilised =  VectorLength(l) < 0.4f;
+            }
+            else
+            {
+                vr.weapon_stabilised =  qfalse;
+            }
         }
         //Special case for moveup as we can send a space key instead allowing us to skip
         //server search in the server menu

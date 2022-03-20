@@ -1027,13 +1027,13 @@ GraphicsOptions_MenuInit
 */
 void GraphicsOptions_MenuInit( void )
 {
-	static const char *s_driver_names[] =
+/*	static const char *s_driver_names[] =
 	{
 		"Default",
 		"Voodoo",
 		NULL
 	};
-
+*/
 	static const char *tq_names[] =
 	{
 		"Default",
@@ -1081,13 +1081,13 @@ void GraphicsOptions_MenuInit( void )
 		"High",
 		NULL
 	};
-	static const char *enabled_names[] =
+/*	static const char *enabled_names[] =
 	{
 		"Off",
 		"On",
 		NULL
 	};
-	static const char *s_refreshrate[] =
+*/	static const char *s_refreshrate[] =
 	{
 		"60",
 		"72 (Recommended)",
