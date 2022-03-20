@@ -2623,14 +2623,19 @@ static void CG_DrawVignette( void )
 		int y = (int)(0 + currentComfortVignetteValue * cg.refdef.height / 3.5f);
 		int h = (int)(cg.refdef.height - 2 * y);
 
+		vec4_t black = {0.0, 0.0, 0.0, 1};
+		trap_R_SetColor( black );
+
 		// sides
-		trap_R_DrawStretchPic( 0, 0, x, cg.refdef.height, 0, 0, 1, 1, cgs.media.maskShader );
-		trap_R_DrawStretchPic( cg.refdef.width - x, 0, x, cg.refdef.height, 0, 0, 1, 1, cgs.media.maskShader );
+		trap_R_DrawStretchPic( 0, 0, x, cg.refdef.height, 0, 0, 1, 1, cgs.media.whiteShader );
+		trap_R_DrawStretchPic( cg.refdef.width - x, 0, x, cg.refdef.height, 0, 0, 1, 1, cgs.media.whiteShader );
 		// top/bottom
-		trap_R_DrawStretchPic( x, 0, cg.refdef.width - x, y, 0, 0, 1, 1, cgs.media.maskShader );
-		trap_R_DrawStretchPic( x, cg.refdef.height - y, cg.refdef.width - x, y, 0, 0, 1, 1, cgs.media.maskShader );
+		trap_R_DrawStretchPic( x, 0, cg.refdef.width - x, y, 0, 0, 1, 1, cgs.media.whiteShader );
+		trap_R_DrawStretchPic( x, cg.refdef.height - y, cg.refdef.width - x, y, 0, 0, 1, 1, cgs.media.whiteShader );
 		// vignette
 		trap_R_DrawStretchPic( x, y, w, h, 0, 0, 1, 1, cgs.media.vignetteShader );
+
+		trap_R_SetColor( NULL );
 	}
 }
 
