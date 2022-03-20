@@ -443,7 +443,7 @@ ifeq ($(PLATFORM),android)
   CLIENT_CFLAGS += $(SDL_CFLAGS) -DSDL_DISABLE_IMMINTRIN_H -fno-builtin-cos -fno-builtin-sin
 
   OPTIMIZEVM = -O3 -funroll-loops -fomit-frame-pointer
-  OPTIMIZE = $(OPTIMIZEVM) -ffast-math
+  OPTIMIZE = $(OPTIMIZEVM)
 
   HAVE_VM_COMPILED = false
 
