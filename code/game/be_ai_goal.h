@@ -19,14 +19,8 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-//
 /*****************************************************************************
- * name:		be_ai_goal.h
- *
- * desc:		goal AI
- *
- * $Archive: /source/code/botlib/be_ai_goal.h $
- *
+ * goal AI
  *****************************************************************************/
 
 #define MAX_AVOIDGOALS			256

@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		be_ai_goal.c
- *
- * desc:		goal AI
- *
- * $Archive: /MissionPack/code/botlib/be_ai_goal.c $
- *
+ * goal AI
  *****************************************************************************/
 
 #include "../game/q_shared.h"

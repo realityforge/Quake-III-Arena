@@ -20,15 +20,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-/*****************************************************************************
- * name:		be_aas_bsp.h
- *
- * desc:		AAS
- *
- * $Archive: /source/code/botlib/be_aas_bsp.h $
- *
- *****************************************************************************/
-
 #ifdef AASINTERN
 //loads the given BSP file
 int AAS_LoadBSPFile(void);

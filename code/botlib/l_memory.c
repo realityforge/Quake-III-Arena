@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		l_memory.c
- *
- * desc:		memory allocation
- *
- * $Archive: /MissionPack/code/botlib/l_memory.c $
- *
+ * memory allocation
  *****************************************************************************/
 
 #include "../game/q_shared.h"

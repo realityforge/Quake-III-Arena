@@ -20,15 +20,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-/*****************************************************************************
- * name:		be_aas_entity.h
- *
- * desc:		AAS
- *
- * $Archive: /source/code/botlib/be_aas_entity.h $
- *
- *****************************************************************************/
-
 #ifdef AASINTERN
 //invalidates all entity infos
 void AAS_InvalidateEntities(void);

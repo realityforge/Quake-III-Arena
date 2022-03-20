@@ -20,15 +20,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-/*****************************************************************************
- * name:		be_aas_file.h
- *
- * desc:		AAS
- *
- * $Archive: /source/code/botlib/be_aas_file.h $
- *
- *****************************************************************************/
-
 #ifdef AASINTERN
 //loads the AAS file with the given name
 int AAS_LoadAASFile(char *filename);

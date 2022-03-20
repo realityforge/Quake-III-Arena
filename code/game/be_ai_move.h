@@ -22,12 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
 
 /*****************************************************************************
- * name:		be_ai_move.h
- *
- * desc:		movement AI
- *
- * $Archive: /source/code/botlib/be_ai_move.h $
- *
+ * movement AI
  *****************************************************************************/
 
 //movement types

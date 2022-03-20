@@ -1,14 +1,5 @@
 /*****************************************************************************
- * name:		unzip.c
- *
- * desc:		IO on .zip files using portions of zlib 
- *
- * $Archive: /source/code/qcommon/unzip.c $
- * $Author: ttimo $ 
- * $Revision: 1.1.1.3 $
- * $Modtime: 10/19/99 3:59p $
- * $Date: 2000/01/11 16:37:27 $
- *
+ * IO on .zip files using portions of zlib
  *****************************************************************************/
 
 #include <stdio.h>

@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		be_aas_bspq3.c
- *
- * desc:		BSP, Environment Sampling
- *
- * $Archive: /MissionPack/code/botlib/be_aas_bspq3.c $
- *
+ * BSP, Environment Sampling
  *****************************************************************************/
 
 #include "../game/q_shared.h"

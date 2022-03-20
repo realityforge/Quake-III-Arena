@@ -20,15 +20,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-/*****************************************************************************
- * name:		be_aas_reach.h
- *
- * desc:		AAS
- *
- * $Archive: /source/code/botlib/be_aas_reach.h $
- *
- *****************************************************************************/
-
 #ifdef AASINTERN
 //initialize calculating the reachabilities
 void AAS_InitReachability(void);

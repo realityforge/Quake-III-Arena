@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		l_libvar.c
- *
- * desc:		bot library variables
- *
- * $Archive: /MissionPack/code/botlib/l_libvar.c $
- *
+ * bot library variables
  *****************************************************************************/
 
 #include "../game/q_shared.h"

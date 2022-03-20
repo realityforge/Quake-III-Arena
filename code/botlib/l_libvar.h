@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		l_libvar.h
- *
- * desc:		botlib vars
- *
- * $Archive: /source/code/botlib/l_libvar.h $
- *
+ * botlib vars
  *****************************************************************************/
 
 //library variable

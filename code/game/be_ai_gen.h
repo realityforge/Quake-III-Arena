@@ -22,12 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
 
 /*****************************************************************************
- * name:		be_ai_gen.h
- *
- * desc:		genetic selection
- *
- * $Archive: /source/code/botlib/be_ai_gen.h $
- *
+ * genetic selection
  *****************************************************************************/
 
 int GeneticParentsAndChildSelection(int numranks, float *ranks, int *parent1, int *parent2, int *child);

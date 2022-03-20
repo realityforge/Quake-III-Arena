@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		be_aas_reach.c
- *
- * desc:		reachability calculations
- *
- * $Archive: /MissionPack/code/botlib/be_aas_reach.c $
- *
+ * reachability calculations
  *****************************************************************************/
 
 #include "../game/q_shared.h"

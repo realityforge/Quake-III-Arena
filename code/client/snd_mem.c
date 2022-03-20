@@ -20,26 +20,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-/*****************************************************************************
- * name:		snd_mem.c
- *
- * desc:		sound caching
- *
- * $Archive: /MissionPack/code/client/snd_mem.c $
- *
- *****************************************************************************/
-
 #include "snd_local.h"
 
 #define DEF_COMSOUNDMEGS "8"
-
-/*
-===============================================================================
-
-memory management
-
-===============================================================================
-*/
 
 static	sndBuffer	*buffer = NULL;
 static	sndBuffer	*freelist = NULL;
@@ -98,14 +81,6 @@ void SND_setup() {
 
 	Com_Printf("Sound memory manager started\n");
 }
-
-/*
-===============================================================================
-
-WAV loading
-
-===============================================================================
-*/
 
 static	byte	*data_p;
 static	byte 	*iff_end;

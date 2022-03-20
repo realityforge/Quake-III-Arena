@@ -22,12 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
 
 /*****************************************************************************
- * name:		l_precomp.c
- *
- * desc:		pre compiler
- *
- * $Archive: /MissionPack/code/botlib/l_precomp.c $
- *
+ * pre compiler
  *****************************************************************************/
 
 //Notes:			fix: PC_StringizeTokens

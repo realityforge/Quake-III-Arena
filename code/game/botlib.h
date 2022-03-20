@@ -19,15 +19,6 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-//
-/*****************************************************************************
- * name:		botlib.h
- *
- * desc:		bot AI library
- *
- * $Archive: /source/code/game/botai.h $
- *
- *****************************************************************************/
 
 #include "../qcommon/q_shared.h"
 

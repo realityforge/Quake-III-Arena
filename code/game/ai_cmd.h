@@ -19,17 +19,6 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-//
-
-/*****************************************************************************
- * name:		ai_cmd.h
- *
- * desc:		Quake3 bot AI
- *
- * $Archive: /source/code/botai/ai_chat.c $
- *
- *****************************************************************************/
-
 extern int notleader[MAX_CLIENTS];
 
 int BotMatchMessage(bot_state_t *bs, char *message);

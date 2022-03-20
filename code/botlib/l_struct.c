@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*****************************************************************************
- * name:		l_struct.c
- *
- * desc:		structure reading / writing
- *
- * $Archive: /MissionPack/CODE/botlib/l_struct.c $
- *
+ * structure reading / writing
  *****************************************************************************/
 
 #ifdef BOTLIB
