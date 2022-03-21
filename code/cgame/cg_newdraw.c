@@ -1733,10 +1733,7 @@ void CG_EventHandling(int type) {
   if (type == CGAME_EVENT_NONE) {
     CG_HideTeamMenu();
   }
-
 }
-
-
 
 void CG_KeyEvent(int key, qboolean down) {
 
