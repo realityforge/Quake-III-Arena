@@ -41,7 +41,6 @@ typedef struct logfile_s
 {
 	char filename[MAX_LOGFILENAMESIZE];
 	FILE *fp;
-	int numwrites;
 } logfile_t;
 
 static logfile_t logfile;
