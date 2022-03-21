@@ -1732,7 +1732,6 @@ void CG_EventHandling(int type) {
 	cgs.eventHandling = type;
   if (type == CGAME_EVENT_NONE) {
     CG_HideTeamMenu();
-  } else if (type == CGAME_EVENT_SCOREBOARD) {
   }
 
 }
