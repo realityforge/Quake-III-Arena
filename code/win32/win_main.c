@@ -126,15 +126,12 @@ void QDECL Sys_Error( const char *error, ... ) {
       	DispatchMessage (&msg);
 	}
 
-	Sys_DestroyConsole();
-
 	exit (1);
 }
 
 void Sys_Quit( void ) {
 	timeEndPeriod( 1 );
 	IN_Shutdown();
-	Sys_DestroyConsole();
 
 	exit (0);
 }
@@ -582,18 +579,6 @@ sysEvent_t Sys_GetEvent( void ) {
       	DispatchMessage (&msg);
 	}
 
-	// check for console commands
-	s = Sys_ConsoleInput();
-	if ( s ) {
-		char	*b;
-		int		len;
-
-		len = strlen( s ) + 1;
-		b = Z_Malloc( len );
-		Q_strncpyz( b, s, len-1 );
-		Sys_QueEvent( 0, SE_CONSOLE, 0, 0, len, b );
-	}
-
 	// check for network packets
 	MSG_Init( &netmsg, sys_packetReceived, sizeof( sys_packetReceived ) );
 	if ( Sys_GetPacket ( &adr, &netmsg ) ) {
@@ -805,9 +790,6 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 	g_wv.hInstance = hInstance;
 	Q_strncpyz( sys_cmdline, lpCmdLine, sizeof( sys_cmdline ) );
-
-	// done before Com/Sys_Init since we need this for error output
-	Sys_CreateConsole();
 
 	// no abort/retry/fail errors
 	SetErrorMode( SEM_FAILCRITICALERRORS );

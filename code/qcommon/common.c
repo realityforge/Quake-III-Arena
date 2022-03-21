@@ -1937,10 +1937,6 @@ int Com_EventLoop( void ) {
 			CL_JoystickEvent( ev.evValue, ev.evValue2, ev.evTime );
 #endif
 			break;
-		case SE_CONSOLE:
-			Cbuf_AddText( (char *)ev.evPtr );
-			Cbuf_AddText( "\n" );
-			break;
 		case SE_PACKET:
 			// this cvar allows simulation of connections that
 			// drop a lot of packets.  Note that loopback connections

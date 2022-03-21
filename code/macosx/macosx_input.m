@@ -234,37 +234,6 @@ static void Sys_StopMouseInput()
 #include <sys/time.h>
 #include <unistd.h>
 
-static char *Sys_ConsoleInput(void)
-{
-    extern qboolean stdin_active;
-    static char text[256];
-    int     len;
-    fd_set	fdset;
-    struct timeval timeout;
-
-    if (!stdin_active)
-        return NULL;
-    
-    FD_ZERO(&fdset);
-    FD_SET(fileno(stdin), &fdset);
-    timeout.tv_sec = 0;
-    timeout.tv_usec = 0;
-    if (select (1, &fdset, NULL, NULL, &timeout) == -1 || !FD_ISSET(fileno(stdin), &fdset))
-        return NULL;
-
-    len = read (fileno(stdin), text, sizeof(text));
-    if (len == 0) { // eof!
-        stdin_active = qfalse;
-        return NULL;
-    }
-
-    if (len < 1)
-        return NULL;
-    text[len-1] = 0;    // rip off the /n and terminate
-
-    return text;
-}
-
 //===========================================================================
 // Mouse input
 //===========================================================================
@@ -841,19 +810,6 @@ sysEvent_t Sys_GetEvent( void )
 
     // Check for mouse and keyboard events
     Sys_SendKeyEvents(currentTime);
-
-    // check for console commands
-    s = Sys_ConsoleInput();
-    if ( s ) {
-        char	*b;
-        int		len;
-    
-        len = strlen( s ) + 1;
-        b = Z_Malloc( len );
-        strcpy( b, s );
-        Sys_QueEvent( currentTime, SE_CONSOLE, 0, 0, len, b );
-    }
-    
 
     // During debugging it is sometimes usefull to be able to start/stop mouse input.
     // Don't turn on the input when we've disabled it because we're hidden, however.
