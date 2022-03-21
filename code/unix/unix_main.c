@@ -285,34 +285,6 @@ void *Sys_LoadDll( const char *name, char *fqpath ,
 /*
 ========================================================================
 
-BACKGROUND FILE STREAMING
-
-========================================================================
-*/
-
-void Sys_InitStreamThread( void ) {
-}
-
-void Sys_ShutdownStreamThread( void ) {
-}
-
-void Sys_BeginStreamedFile( fileHandle_t f, int readAhead ) {
-}
-
-void Sys_EndStreamedFile( fileHandle_t f ) {
-}
-
-int Sys_StreamedRead( void *buffer, int size, int count, fileHandle_t f ) {
-  return FS_Read( buffer, size * count, f );
-}
-
-void Sys_StreamSeek( fileHandle_t f, int offset, int origin ) {
-  FS_Seek( f, offset, origin );
-}
-
-/*
-========================================================================
-
 EVENT LOOP
 
 ========================================================================
