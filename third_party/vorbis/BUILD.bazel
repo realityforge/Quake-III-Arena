@@ -80,5 +80,8 @@ cc_library(
         "include",
         "lib",
     ],
+    visibility = [
+        "//code/client:__pkg__",
+    ],
     deps = ["//third_party/ogg"],
 )

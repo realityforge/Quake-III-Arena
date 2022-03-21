@@ -97,3 +97,39 @@ cc_library(
         "//code/qcommon:shared_api",
     ],
 )
+
+cc_library(
+    name = "snd_codec_api",
+    hdrs = [
+        "snd_codec.h",
+    ],
+    defines = [
+        "USE_CODEC_OPUS",
+        "USE_CODEC_VORBIS",
+    ],
+    deps = [
+        "//code/qcommon",
+        "//code/qcommon:shared_api",
+        "//third_party/opus",
+        "//third_party/vorbis",
+    ],
+)
+
+cc_library(
+    name = "openal_support",
+    srcs = [
+        "qal.c",
+        "qal.h",
+        "snd_openal.c",
+    ],
+    defines = ["USE_OPENAL"],
+    deps = [
+        ":api",
+        ":snd_api",
+        ":snd_codec_api",
+        ":snd_internal_api",
+        "//code/qcommon",
+        "//code/qcommon:shared_api",
+        "//third_party/openal",
+    ],
+)

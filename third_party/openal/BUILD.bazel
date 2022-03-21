@@ -11,4 +11,7 @@ cc_library(
         "include/alc.h",
     ],
     includes = ["include"],
+    visibility = [
+        "//code/client:__pkg__",
+    ],
 )
