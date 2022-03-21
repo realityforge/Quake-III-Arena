@@ -1505,7 +1505,6 @@ int CIN_PlayCinematic( const char *arg, int x, int y, int w, int h, int systemBi
 	if (RoQID == 0x1084)
 	{
 		RoQ_init();
-//		FS_Read (cin.file, cinTable[currentHandle].RoQFrameSize+8, cinTable[currentHandle].iFile);
 		// let the background thread start reading ahead
 		Sys_BeginStreamedFile( cinTable[currentHandle].iFile, 0x10000 );
 
