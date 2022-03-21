@@ -400,49 +400,7 @@ void RB_MDRSurfaceAnim( mdrSurface_t *surface )
 	tess.numVertexes += surface->numVerts;
 }
 
-
-#define MC_MASK_X ((1<<(MC_BITS_X))-1)
-#define MC_MASK_Y ((1<<(MC_BITS_Y))-1)
-#define MC_MASK_Z ((1<<(MC_BITS_Z))-1)
-#define MC_MASK_VECT ((1<<(MC_BITS_VECT))-1)
-
 #define MC_SCALE_VECT (1.0f/(float)((1<<(MC_BITS_VECT-1))-2))
-
-#define MC_POS_X (0)
-#define MC_SHIFT_X (0)
-
-#define MC_POS_Y ((((MC_BITS_X))/8))
-#define MC_SHIFT_Y ((((MC_BITS_X)%8)))
-
-#define MC_POS_Z ((((MC_BITS_X+MC_BITS_Y))/8))
-#define MC_SHIFT_Z ((((MC_BITS_X+MC_BITS_Y)%8)))
-
-#define MC_POS_V11 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z))/8))
-#define MC_SHIFT_V11 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z)%8)))
-
-#define MC_POS_V12 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z+MC_BITS_VECT))/8))
-#define MC_SHIFT_V12 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z+MC_BITS_VECT)%8)))
-
-#define MC_POS_V13 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z+MC_BITS_VECT*2))/8))
-#define MC_SHIFT_V13 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z+MC_BITS_VECT*2)%8)))
-
-#define MC_POS_V21 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z+MC_BITS_VECT*3))/8))
-#define MC_SHIFT_V21 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z+MC_BITS_VECT*3)%8)))
-
-#define MC_POS_V22 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z+MC_BITS_VECT*4))/8))
-#define MC_SHIFT_V22 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z+MC_BITS_VECT*4)%8)))
-
-#define MC_POS_V23 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z+MC_BITS_VECT*5))/8))
-#define MC_SHIFT_V23 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z+MC_BITS_VECT*5)%8)))
-
-#define MC_POS_V31 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z+MC_BITS_VECT*6))/8))
-#define MC_SHIFT_V31 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z+MC_BITS_VECT*6)%8)))
-
-#define MC_POS_V32 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z+MC_BITS_VECT*7))/8))
-#define MC_SHIFT_V32 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z+MC_BITS_VECT*7)%8)))
-
-#define MC_POS_V33 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z+MC_BITS_VECT*8))/8))
-#define MC_SHIFT_V33 ((((MC_BITS_X+MC_BITS_Y+MC_BITS_Z+MC_BITS_VECT*8)%8)))
 
 void MC_UnCompress(float mat[3][4],const unsigned char * comp)
 {
