@@ -46,9 +46,6 @@ int demo_protocols[] =
 #define DEF_COMHUNKMEGS_S	XSTRING(DEF_COMHUNKMEGS)
 #define DEF_COMZONEMEGS_S	XSTRING(DEF_COMZONEMEGS)
 
-int		com_argc;
-char	*com_argv[MAX_NUM_ARGVS+1];
-
 jmp_buf abortframe;		// an ERR_DROP occurred, exit the entire frame
 
 
