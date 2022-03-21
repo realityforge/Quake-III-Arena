@@ -74,21 +74,6 @@ qboolean Sys_LowPhysicalMemory() {
   return qfalse;
 }
 
-int Sys_FunctionCmp(void *f1, void *f2) {
-  return qtrue;
-}
-
-int Sys_FunctionCheckSum(void *f1) {
-  return 0;
-}
-
-int Sys_MonkeyShouldBeSpanked( void ) {
-  return 0;
-}
-
-void Sys_BeginProfiling( void ) {
-}
-
 #ifndef DEDICATED
 /*
 =================

@@ -145,26 +145,6 @@ char *Sys_GetClipboardData(void) // FIXME
 }
 #endif
 
-int Sys_FunctionCheckSum(void *f1) {
-	return 0;
-}
-
-int Sys_MonkeyShouldBeSpanked( void ) {
-	return 0;
-}
-
-//===========================================================================
-
-void Sys_BeginProfiling(void)
-{
-}
-
-void Sys_EndProfiling(void)
-{
-}
-
-//===========================================================================
-
 /*
 ================
 Sys_Init
@@ -186,8 +166,7 @@ void Sys_Init(void)
 void Sys_Shutdown(void)
 {
     Com_Printf( "----- Sys_Shutdown -----\n" );
-    Sys_EndProfiling();
-    Sys_ShutdownInput();	
+    Sys_ShutdownInput();
     Com_Printf( "------------------------\n" );
 }
 
