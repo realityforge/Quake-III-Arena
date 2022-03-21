@@ -24,22 +24,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * lexicographical parser
  *****************************************************************************/
 
-//#define SCREWUP
 //#define BOTLIB
 //#define BSPC
-
-#ifdef SCREWUP
-#include <stdio.h>
-#include <stdlib.h>
-#include <limits.h>
-#include <string.h>
-#include <stdarg.h>
-#include "l_memory.h"
-#include "l_script.h"
-
-typedef enum {qfalse, qtrue}	qboolean;
-
-#endif //SCREWUP
 
 #ifdef BOTLIB
 //include files for usage in the bot library
