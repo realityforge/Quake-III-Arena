@@ -30,6 +30,18 @@ cc_library(
     ],
 )
 
+objc_library(
+    name = "sys_osx",
+    non_arc_srcs = [
+        "sys_osx.m",
+    ],
+    deps = [
+        ":sys_local",
+        "//code/qcommon",
+        "//code/qcommon:shared_api",
+    ],
+)
+
 cc_library(
     name = "main",
     srcs = [
