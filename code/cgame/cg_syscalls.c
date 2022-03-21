@@ -422,20 +422,6 @@ void trap_CIN_SetExtents (int handle, int x, int y, int w, int h) {
   syscall(CG_CIN_SETEXTENTS, handle, x, y, w, h);
 }
 
-/*
-qboolean trap_loadCamera( const char *name ) {
-	return syscall( CG_LOADCAMERA, name );
-}
-
-void trap_startCamera(int time) {
-	syscall(CG_STARTCAMERA, time);
-}
-
-qboolean trap_getCameraInfo( int time, vec3_t *origin, vec3_t *angles) {
-	return syscall( CG_GETCAMERAINFO, time, origin, angles );
-}
-*/
-
 qboolean trap_GetEntityToken( char *buffer, int bufferSize ) {
 	return syscall( CG_GET_ENTITY_TOKEN, buffer, bufferSize );
 }

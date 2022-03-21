@@ -404,20 +404,6 @@ static void CG_StartOrbit_f( void ) {
 	}
 }
 
-/*
-static void CG_Camera_f( void ) {
-	char name[1024];
-	trap_Argv( 1, name, sizeof(name));
-	if (trap_loadCamera(name)) {
-		cg.cameraMode = qtrue;
-		trap_startCamera(cg.time);
-	} else {
-		CG_Printf ("Unable to load camera %s\n",name);
-	}
-}
-*/
-
-
 typedef struct {
 	char	*cmd;
 	void	(*function)(void);

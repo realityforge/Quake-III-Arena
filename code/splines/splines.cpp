@@ -1183,11 +1183,6 @@ void idCameraDef::addTarget(const char *name, idCameraPosition::positionType typ
 idCameraDef camera;
 
 extern "C" {
-qboolean loadCamera(const char *name) {
-  camera.clear();
-  return static_cast<qboolean>(camera.load(name));
-}
-
 qboolean getCameraInfo(int time, float *origin, float*angles) {
 	idVec3_t dir, org;
 	org[0] = origin[0];
