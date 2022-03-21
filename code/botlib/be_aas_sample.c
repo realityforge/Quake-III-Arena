@@ -941,17 +941,6 @@ aas_face_t *AAS_AreaGroundFace(int areanum, vec3_t point)
 //===========================================================================
 // returns the face the trace end position is situated in
 //===========================================================================
-void AAS_FacePlane(int facenum, vec3_t normal, float *dist)
-{
-	aas_plane_t *plane;
-
-	plane = &aasworld.planes[aasworld.faces[facenum].planenum];
-	VectorCopy(plane->normal, normal);
-	*dist = plane->dist;
-}
-//===========================================================================
-// returns the face the trace end position is situated in
-//===========================================================================
 aas_face_t *AAS_TraceEndFace(aas_trace_t *trace)
 {
 	int i, facenum;
