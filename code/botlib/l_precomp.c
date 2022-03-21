@@ -1288,11 +1288,6 @@ int PC_OperatorPriority(int op)
 	return qfalse;
 }
 
-//#define AllocValue()			GetClearedMemory(sizeof(value_t));
-//#define FreeValue(val)		FreeMemory(val)
-//#define AllocOperator(op)		op = (operator_t *) GetClearedMemory(sizeof(operator_t));
-//#define FreeOperator(op)		FreeMemory(op);
-
 #define MAX_VALUES		64
 #define MAX_OPERATORS	64
 #define AllocValue(val)									\
@@ -1369,7 +1364,6 @@ int PC_EvaluateTokens(source_t *source, token_t *tokens, signed long int *intval
 					error = 1;
 					break;
 				}
-				//v = (value_t *) GetClearedMemory(sizeof(value_t));
 				AllocValue(v);
 #if DEFINEHASHING
 				if (PC_FindHashedDefine(source->definehash, t->string))
@@ -1414,7 +1408,6 @@ int PC_EvaluateTokens(source_t *source, token_t *tokens, signed long int *intval
 					error = 1;
 					break;
 				}
-				//v = (value_t *) GetClearedMemory(sizeof(value_t));
 				AllocValue(v);
 				if (negativevalue)
 				{
@@ -2404,32 +2397,6 @@ int PC_CheckTokenString(source_t *source, char *string)
 	PC_UnreadSourceToken(source, &tok);
 	return qfalse;
 }
-int PC_CheckTokenType(source_t *source, int type, int subtype, token_t *token)
-{
-	token_t tok;
-
-	if (!PC_ReadToken(source, &tok)) return qfalse;
-	//if the type matches
-	if (tok.type == type &&
-			(tok.subtype & subtype) == subtype)
-	{
-		memcpy(token, &tok, sizeof(token_t));
-		return qtrue;
-	}
-	//
-	PC_UnreadSourceToken(source, &tok);
-	return qfalse;
-}
-int PC_SkipUntilString(source_t *source, char *string)
-{
-	token_t token;
-
-	while(PC_ReadToken(source, &token))
-	{
-		if (!strcmp(token.string, string)) return qtrue;
-	}
-	return qfalse;
-}
 void PC_UnreadLastToken(source_t *source)
 {
 	PC_UnreadSourceToken(source, &source->token);
@@ -2454,33 +2421,6 @@ source_t *LoadSourceFile(const char *filename)
 	memset(source, 0, sizeof(source_t));
 
 	Q_strncpyz(source->filename, filename, sizeof(source->filename));
-	source->scriptstack = script;
-	source->tokens = NULL;
-	source->defines = NULL;
-	source->indentstack = NULL;
-	source->skip = 0;
-
-#if DEFINEHASHING
-	source->definehash = GetClearedMemory(DEFINEHASHSIZE * sizeof(define_t *));
-#endif //DEFINEHASHING
-	PC_AddGlobalDefinesToSource(source);
-	return source;
-}
-source_t *LoadSourceMemory(char *ptr, int length, char *name)
-{
-	source_t *source;
-	script_t *script;
-
-	PC_InitTokenHeap();
-
-	script = LoadScriptMemory(ptr, length, name);
-	if (!script) return NULL;
-	script->next = NULL;
-
-	source = (source_t *) GetMemory(sizeof(source_t));
-	memset(source, 0, sizeof(source_t));
-
-	Q_strncpyz(source->filename, name, sizeof(source->filename));
 	source->scriptstack = script;
 	source->tokens = NULL;
 	source->defines = NULL;
