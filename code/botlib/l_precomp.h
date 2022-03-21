@@ -124,16 +124,8 @@ int PC_WhiteSpaceBeforeToken(token_t *token);
 int PC_AddDefine(source_t *source, char *string);
 //add a globals define that will be added to all opened sources
 int PC_AddGlobalDefine(char *string);
-//remove the given global define
-int PC_RemoveGlobalDefine(char *name);
 //remove all globals defines
 void PC_RemoveAllGlobalDefines(void);
-//add builtin defines
-void PC_AddBuiltinDefines(source_t *source);
-//set the source include path
-void PC_SetIncludePath(source_t *source, char *path);
-//set the punction set
-void PC_SetPunctuations(source_t *source, punctuation_t *p);
 //set the base folder to load files from
 void PC_SetBaseFolder(char *path);
 //load a source file

@@ -102,14 +102,7 @@ typedef struct directive_s
 
 #define DEFINEHASHSIZE		1024
 
-#define TOKEN_HEAP_SIZE		4096
-
 int numtokens;
-/*
-int tokenheapinitialized;				//true when the token heap is initialized
-token_t token_heap[TOKEN_HEAP_SIZE];	//heap with tokens
-token_t *freetokens;					//free tokens from the heap
-*/
 
 //list with global defines added to every source loaded
 define_t *globaldefines;
@@ -422,34 +415,8 @@ int PC_MergeTokens(token_t *t1, token_t *t2)
 	//FIXME: merging of two number of the same sub type
 	return qfalse;
 }
-/*
-void PC_PrintDefine(define_t *define)
-{
-	printf("define->name = %s\n", define->name);
-	printf("define->flags = %d\n", define->flags);
-	printf("define->builtin = %d\n", define->builtin);
-	printf("define->numparms = %d\n", define->numparms);
-//	token_t *parms;					//define parameters
-//	token_t *tokens;					//macro tokens (possibly containing parm tokens)
-//	struct define_s *next;			//next defined macro in a list
-}*/
-#if DEFINEHASHING
-void PC_PrintDefineHashTable(define_t **definehash)
-{
-	int i;
-	define_t *d;
 
-	for (i = 0; i < DEFINEHASHSIZE; i++)
-	{
-		Log_Write("%4d:", i);
-		for (d = definehash[i]; d; d = d->hashnext)
-		{
-			Log_Write(" %s", d->name);
-		}
-		Log_Write("\n");
-	}
-}
-//char primes[16] = {1, 3, 5, 7, 11, 13, 17, 19, 23, 27, 29, 31, 37, 41, 43, 47};
+#if DEFINEHASHING
 
 int PC_NameHash(char *name)
 {
@@ -459,8 +426,6 @@ int PC_NameHash(char *name)
 	for (i = 0; name[i] != '\0'; i++)
 	{
 		hash += name[i] * (119 + i);
-		//hash += (name[i] << 7) + i;
-		//hash += (name[i] << (i&15));
 	}
 	hash = (hash ^ (hash >> 10) ^ (hash >> 20)) & (DEFINEHASHSIZE-1);
 	return hash;
@@ -497,9 +462,7 @@ define_t *PC_FindDefine(define_t *defines, char *name)
 	return NULL;
 }
 //============================================================================
-//
-// Returns:					number of the parm
-//								if no parm found with the given name -1 is returned
+// Returns the number of the parm if no parm found with the given name -1 is returned
 //============================================================================
 int PC_FindDefineParm(define_t *define, char *name)
 {
@@ -533,40 +496,6 @@ void PC_FreeDefine(define_t *define)
 	//free the define
 	FreeMemory(define->name);
 	FreeMemory(define);
-}
-void PC_AddBuiltinDefines(source_t *source)
-{
-	int i;
-	define_t *define;
-	struct builtin
-	{
-		char *string;
-		int builtin;
-	} builtin[] = {
-		{ "__LINE__",	BUILTIN_LINE },
-		{ "__FILE__",	BUILTIN_FILE },
-		{ "__DATE__",	BUILTIN_DATE },
-		{ "__TIME__",	BUILTIN_TIME },
-//		{ "__STDC__", BUILTIN_STDC },
-		{ NULL, 0 }
-	};
-
-	for (i = 0; builtin[i].string; i++)
-	{
-		define = (define_t *) GetMemory(sizeof(define_t));
-		memset(define, 0, sizeof(define_t));
-		define->name = (char *) GetMemory(strlen(builtin[i].string) + 1);
-		strcpy(define->name, builtin[i].string);
-		define->flags |= DEFINE_FIXED;
-		define->builtin = builtin[i].builtin;
-		//add the define to the source
-#if DEFINEHASHING
-		PC_AddDefineToHash(define, source->definehash);
-#else
-		define->next = source->defines;
-		source->defines = define;
-#endif //DEFINEHASHING
-	}
 }
 int PC_ExpandBuiltinDefine(source_t *source, token_t *deftoken, define_t *define,
 										token_t **firsttoken, token_t **lasttoken)
@@ -1172,23 +1101,8 @@ define_t *PC_DefineFromString(char *string)
 	//
 	return NULL;
 }
-int PC_AddDefine(source_t *source, char *string)
-{
-	define_t *define;
-
-	define = PC_DefineFromString(string);
-	if (!define) return qfalse;
-#if DEFINEHASHING
-	PC_AddDefineToHash(define, source->definehash);
-#else //DEFINEHASHING
-	define->next = source->defines;
-	source->defines = define;
-#endif //DEFINEHASHING
-	return qtrue;
-}
 //============================================================================
 // add a globals define that will be added to all opened sources
-//
 //============================================================================
 int PC_AddGlobalDefine(char *string)
 {
@@ -1201,24 +1115,7 @@ int PC_AddGlobalDefine(char *string)
 	return qtrue;
 }
 //============================================================================
-// remove the given global define
-//
-//============================================================================
-int PC_RemoveGlobalDefine(char *name)
-{
-	define_t *define;
-
-	define = PC_FindDefine(globaldefines, name);
-	if (define)
-	{
-		PC_FreeDefine(define);
-		return qtrue;
-	}
-	return qfalse;
-}
-//============================================================================
 // remove all globals defines
-//
 //============================================================================
 void PC_RemoveAllGlobalDefines(void)
 {
@@ -2546,24 +2443,6 @@ void PC_UnreadLastToken(source_t *source)
 void PC_UnreadToken(source_t *source, token_t *token)
 {
 	PC_UnreadSourceToken(source, token);
-}
-void PC_SetIncludePath(source_t *source, char *path)
-{
-	size_t len;
-
-	Q_strncpyz(source->includepath, path, sizeof(source->includepath)-1);
-
-	len = strlen(source->includepath);
-	//add trailing path seperator
-	if (len > 0 && source->includepath[len-1] != '\\' &&
-		source->includepath[len-1] != '/')
-	{
-		strcat(source->includepath, PATHSEPERATOR_STR);
-	}
-}
-void PC_SetPunctuations(source_t *source, punctuation_t *p)
-{
-	source->punctuations = p;
 }
 //============================================================================
 //
