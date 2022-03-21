@@ -412,14 +412,9 @@ extern	vec3_t	bytedirs[NUMVERTEXNORMALS];
 extern	vec4_t		colorBlack;
 extern	vec4_t		colorRed;
 extern	vec4_t		colorGreen;
-extern	vec4_t		colorBlue;
 extern	vec4_t		colorYellow;
-extern	vec4_t		colorMagenta;
-extern	vec4_t		colorCyan;
 extern	vec4_t		colorWhite;
-extern	vec4_t		colorLtGrey;
 extern	vec4_t		colorMdGrey;
-extern	vec4_t		colorDkGrey;
 
 #define Q_COLOR_ESCAPE	'^'
 #define Q_IsColorString(p)	( p && *(p) == Q_COLOR_ESCAPE && *((p)+1) && *((p)+1) != Q_COLOR_ESCAPE )
