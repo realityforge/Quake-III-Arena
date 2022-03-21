@@ -657,7 +657,7 @@ static void CG_DrawBlueFlagHead(rectDef_t *rect) {
 	  if ( cgs.clientinfo[i].infoValid && cgs.clientinfo[i].team == TEAM_RED  && cgs.clientinfo[i].powerups & ( 1<< PW_BLUEFLAG )) {
       vec3_t angles;
       VectorClear( angles );
- 		  angles[YAW] = 180 + 20 * sin( cg.time / 650.0 );;
+ 		  angles[YAW] = 180 + 20 * sin( cg.time / 650.0 );
       CG_DrawHead( rect->x, rect->y, rect->w, rect->h, 0,angles );
       return;
     }
@@ -707,7 +707,7 @@ static void CG_DrawRedFlagHead(rectDef_t *rect) {
 	  if ( cgs.clientinfo[i].infoValid && cgs.clientinfo[i].team == TEAM_BLUE  && cgs.clientinfo[i].powerups & ( 1<< PW_REDFLAG )) {
       vec3_t angles;
       VectorClear( angles );
- 		  angles[YAW] = 180 + 20 * sin( cg.time / 650.0 );;
+ 		  angles[YAW] = 180 + 20 * sin( cg.time / 650.0 );
       CG_DrawHead( rect->x, rect->y, rect->w, rect->h, 0,angles );
       return;
     }

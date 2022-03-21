@@ -84,7 +84,7 @@ void SND_setup(void) {
 	sfxScratchPointer = NULL;
 
 	inUse = scs*sizeof(sndBuffer);
-	p = buffer;;
+	p = buffer;
 	q = p + scs;
 	while (--q > p)
 		*(sndBuffer **)q = q-1;

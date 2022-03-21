@@ -181,7 +181,7 @@ sfxHandle_t UI_TeamOrdersMenu_Key( int key ) {
 			l->oldvalue = l->curvalue;
 
 			if( l->curvalue == l->numitems - 1 ) {
-				l->curvalue = 0;;
+				l->curvalue = 0;
 			}
 			else {
 				l->curvalue++;
