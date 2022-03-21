@@ -29,7 +29,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 //#define SCREWUP
 //#define BOTLIB
-//#define QUAKE
 //#define MEQCC
 
 #ifdef SCREWUP
@@ -81,12 +80,6 @@ typedef enum {qfalse, qtrue}	qboolean;
 #define Q_stricmp	stricmp
 
 #endif //BSPC
-
-#if defined(QUAKE) && !defined(BSPC)
-#include "l_utils.h"
-#endif //QUAKE
-
-//#define DEBUG_EVAL
 
 #define MAX_DEFINEPARMS			128
 
@@ -737,9 +730,6 @@ int PC_Directive_include(source_t *source)
 	script_t *script;
 	token_t token;
 	char path[MAX_QPATH];
-#ifdef QUAKE
-	foundfile_t file;
-#endif //QUAKE
 
 	if (source->skip > 0) return qtrue;
 	//
@@ -795,14 +785,6 @@ int PC_Directive_include(source_t *source)
 		SourceError(source, "#include without file name");
 		return qfalse;
 	}
-#ifdef QUAKE
-	if (!script)
-	{
-		memset(&file, 0, sizeof(foundfile_t));
-		script = LoadScriptFile(path);
-		if (script) Q_strncpyz(script->filename, path, sizeof(script->filename));
-	}
-#endif //QUAKE
 	if (!script)
 	{
 #ifdef SCREWUP
