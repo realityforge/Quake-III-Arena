@@ -2853,7 +2853,7 @@ void CTexWnd::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 {
 	CWnd::OnVScroll(nSBCode, nPos, pScrollBar);
 
-  int n = GetScrollPos(SB_VERT);;
+  int n = GetScrollPos(SB_VERT);
   switch (nSBCode)
   {
     case SB_LINEUP :

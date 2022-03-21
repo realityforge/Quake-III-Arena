@@ -357,7 +357,7 @@ void LoadModel(const char *pLocation, eclass_t *e, vec3_t &vMin, vec3_t &vMax, e
           }
 
           pModel->pTriList[i].st[k][0] = pST[tri.index_st[k]].s / pModel->nSkinWidth;
-          pModel->pTriList[i].st[k][1] = pST[tri.index_st[k]].t / pModel->nSkinHeight;;
+          pModel->pTriList[i].st[k][1] = pST[tri.index_st[k]].t / pModel->nSkinHeight;
           ExtendBounds (pModel->pTriList[i].v[k], vMin, vMax);
 		    }
         pTris += sizeof(dtriangle_t);

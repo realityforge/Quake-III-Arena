@@ -962,7 +962,7 @@ void Terrain_ParseFace( terrainFace_t *face ) {
 }
 
 #define MAX_TERRAIN_TEXTURES 128
-static int			numtextures = 0;;
+static int			numtextures = 0;
 static shaderInfo_t	*textures[ MAX_TERRAIN_TEXTURES ];
 
 void Terrain_AddTexture( shaderInfo_t *texture ) {

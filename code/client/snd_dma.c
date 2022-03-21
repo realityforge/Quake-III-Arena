@@ -37,10 +37,8 @@ void S_UpdateBackgroundTrack( void );
 
 static fileHandle_t s_backgroundFile;
 static wavinfo_t	s_backgroundInfo;
-//int			s_nextWavChunk;
 static int			s_backgroundSamples;
 static char		s_backgroundLoop[MAX_QPATH];
-//static char		s_backgroundMusic[MAX_QPATH]; //TTimo: unused
 
 
 // =======================================================================
@@ -200,7 +198,7 @@ void S_ChannelSetup() {
 	// clear all the sounds so they don't
 	memset( s_channels, 0, sizeof( s_channels ) );
 
-	p = s_channels;;
+	p = s_channels;
 	q = p + MAX_CHANNELS;
 	while (--q > p) {
 		*(channel_t **)q = q-1;
@@ -1343,7 +1341,6 @@ int S_FindWavChunk( fileHandle_t f, char *chunk ) {
 		return 0;
 	}
 	len = (len + 1 ) & ~1;		// pad to word boundary
-//	s_nextWavChunk += len + 8;
 
 	if ( strcmp( name, chunk ) ) {
 		return 0;

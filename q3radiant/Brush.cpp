@@ -178,7 +178,7 @@ void Face_Free( face_t *f )
 		GETPLUGINTEXDEF(f)->DecRef();
 	}
 
-	f->texdef.~texdef_t();;
+	f->texdef.~texdef_t();
 
 	free( f );
 }
@@ -2432,7 +2432,7 @@ int Face_MemorySize(face_t *f )
 	{
 		size += _msize(f->face_winding);
 	}
-	//f->texdef.~texdef_t();;
+	//f->texdef.~texdef_t();
 	size += _msize(f);
 	return size;
 }
