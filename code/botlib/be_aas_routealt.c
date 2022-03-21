@@ -79,9 +79,6 @@ int AAS_AlternativeRouteGoals(vec3_t start, int startareanum, vec3_t goal, int g
 										 aas_altroutegoal_t *altroutegoals, int maxaltroutegoals,
 										 int type)
 {
-#ifndef ENABLE_ALTROUTING
-	return 0;
-#else
 	int i, j, bestareanum;
 	int numaltroutegoals, nummidrangeareas;
 	int starttime, goaltime, goaltraveltime;
@@ -184,24 +181,19 @@ int AAS_AlternativeRouteGoals(vec3_t start, int startareanum, vec3_t goal, int g
 	botimport.Print(PRT_MESSAGE, "alternative route goals in %d msec\n", Sys_MilliSeconds() - startmillisecs);
 #endif
 	return numaltroutegoals;
-#endif
 }
 void AAS_InitAlternativeRouting(void)
 {
-#ifdef ENABLE_ALTROUTING
 	if (midrangeareas) FreeMemory(midrangeareas);
 	midrangeareas = (midrangearea_t *) GetMemory(aasworld.numareas * sizeof(midrangearea_t));
 	if (clusterareas) FreeMemory(clusterareas);
 	clusterareas = (int *) GetMemory(aasworld.numareas * sizeof(int));
-#endif
 }
 void AAS_ShutdownAlternativeRouting(void)
 {
-#ifdef ENABLE_ALTROUTING
 	if (midrangeareas) FreeMemory(midrangeareas);
 	midrangeareas = NULL;
 	if (clusterareas) FreeMemory(clusterareas);
 	clusterareas = NULL;
 	numclusterareas = 0;
-#endif
 }
