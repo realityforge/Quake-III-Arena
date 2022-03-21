@@ -1075,7 +1075,6 @@ static void RoQReset( void ) {
 
 	FS_FCloseFile( cinTable[currentHandle].iFile );
 	FS_FOpenFileRead (cinTable[currentHandle].fileName, &cinTable[currentHandle].iFile, qtrue);
-	// let the background thread start reading ahead
 	FS_Read (cin.file, 16, cinTable[currentHandle].iFile);
 	RoQ_init();
 	cinTable[currentHandle].status = FMV_LOOPED;
