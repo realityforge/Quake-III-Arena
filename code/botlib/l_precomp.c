@@ -190,9 +190,6 @@ void PC_PushScript(source_t *source, script_t *script)
 	script->next = source->scriptstack;
 	source->scriptstack = script;
 }
-//============================================================================
-//
-//============================================================================
 void PC_InitTokenHeap(void)
 {
 	/*
@@ -208,9 +205,6 @@ void PC_InitTokenHeap(void)
 	tokenheapinitialized = qtrue;
 	*/
 }
-//============================================================================
-//
-//============================================================================
 token_t *PC_CopyToken(token_t *token)
 {
 	token_t *t;
@@ -2444,9 +2438,6 @@ void PC_UnreadToken(source_t *source, token_t *token)
 {
 	PC_UnreadSourceToken(source, token);
 }
-//============================================================================
-//
-//============================================================================
 source_t *LoadSourceFile(const char *filename)
 {
 	source_t *source;
@@ -2558,9 +2549,6 @@ void FreeSource(source_t *source)
 	//free the source itself
 	FreeMemory(source);
 }
-//============================================================================
-//
-//============================================================================
 
 #define MAX_SOURCEFILES		64
 
@@ -2585,9 +2573,6 @@ int PC_LoadSourceHandle(const char *filename)
 	sourceFiles[i] = source;
 	return i;
 }
-//============================================================================
-//
-//============================================================================
 int PC_FreeSourceHandle(int handle)
 {
 	if (handle < 1 || handle >= MAX_SOURCEFILES)
@@ -2599,9 +2584,6 @@ int PC_FreeSourceHandle(int handle)
 	sourceFiles[handle] = NULL;
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_ReadTokenHandle(int handle, pc_token_t *pc_token)
 {
 	token_t token;
@@ -2622,9 +2604,6 @@ int PC_ReadTokenHandle(int handle, pc_token_t *pc_token)
 		StripDoubleQuotes(pc_token->string);
 	return ret;
 }
-//============================================================================
-//
-//============================================================================
 int PC_SourceFileAndLine(int handle, char *filename, int *line)
 {
 	if (handle < 1 || handle >= MAX_SOURCEFILES)
@@ -2639,16 +2618,10 @@ int PC_SourceFileAndLine(int handle, char *filename, int *line)
 		*line = 0;
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 void PC_SetBaseFolder(char *path)
 {
 	PS_SetBaseFolder(path);
 }
-//============================================================================
-//
-//============================================================================
 void PC_CheckOpenSourceHandles(void)
 {
 	int i;

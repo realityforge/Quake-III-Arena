@@ -1179,9 +1179,6 @@ script_t *LoadScriptFile(const char *filename)
 
 	return script;
 }
-//============================================================================
-//
-//============================================================================
 script_t *LoadScriptMemory(char *ptr, int length, char *name)
 {
 	void *buffer;
