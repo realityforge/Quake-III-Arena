@@ -52,7 +52,6 @@ char	*com_argv[MAX_NUM_ARGVS+1];
 jmp_buf abortframe;		// an ERR_DROP occurred, exit the entire frame
 
 
-static fileHandle_t pipefile;
 static fileHandle_t logfile;
 fileHandle_t	com_journalFile;			// events are written here
 fileHandle_t	com_journalDataFile;		// config files are written here
@@ -66,7 +65,6 @@ cvar_t	*com_timedemo;
 cvar_t	*com_sv_running;
 cvar_t	*com_cl_running;
 cvar_t	*com_logfile;		// 1 = buffer log, 2 = flush after each print
-cvar_t	*com_pipefile;
 cvar_t	*com_showtrace;
 cvar_t	*com_version;
 cvar_t	*com_blood;
@@ -2457,65 +2455,8 @@ void Com_Init( char *commandLine ) {
 
 	com_fullyInitialized = qtrue;
 
-	com_pipefile = Cvar_Get( "com_pipefile", "", CVAR_ARCHIVE|CVAR_LATCH );
-	if( com_pipefile->string[0] )
-	{
-		pipefile = FS_FCreateOpenPipeFile( com_pipefile->string );
-	}
-
 	Com_Printf ("--- Common Initialization Complete ---\n");
 }
-
-/*
-===============
-Com_ReadFromPipe
-
-Read whatever is in com_pipefile, if anything, and execute it
-===============
-*/
-void Com_ReadFromPipe( void )
-{
-	static char buf[MAX_STRING_CHARS];
-	static int accu = 0;
-	int read;
-
-	if( !pipefile )
-		return;
-
-	while( ( read = FS_Read( buf + accu, sizeof( buf ) - accu - 1, pipefile ) ) > 0 )
-	{
-		char *brk = NULL;
-		int i;
-
-		for( i = accu; i < accu + read; ++i )
-		{
-			if( buf[ i ] == '\0' )
-				buf[ i ] = '\n';
-			if( buf[ i ] == '\n' || buf[ i ] == '\r' )
-				brk = &buf[ i + 1 ];
-		}
-		buf[ accu + read ] = '\0';
-
-		accu += read;
-
-		if( brk )
-		{
-			char tmp = *brk;
-			*brk = '\0';
-			Cbuf_ExecuteText( EXEC_APPEND, buf );
-			*brk = tmp;
-
-			accu -= brk - buf;
-			memmove( buf, brk, accu + 1 );
-		}
-		else if( accu >= sizeof( buf ) - 1 ) // full
-		{
-			Cbuf_ExecuteText( EXEC_APPEND, buf );
-			accu = 0;
-		}
-	}
-}
-
 
 //==================================================================
 
@@ -2828,8 +2769,6 @@ void Com_Frame( void ) {
 		c_pointcontents = 0;
 	}
 
-	Com_ReadFromPipe( );
-
 	com_frameNumber++;
 }
 
@@ -2843,12 +2782,6 @@ void Com_Shutdown (void) {
 		FS_FCloseFile( com_journalFile );
 		com_journalFile = 0;
 	}
-
-	if( pipefile ) {
-		FS_FCloseFile( pipefile );
-		FS_HomeRemove( com_pipefile->string );
-	}
-
 }
 
 /*

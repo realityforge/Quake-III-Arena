@@ -636,7 +636,6 @@ void	FS_GetModDescription( const char *modDir, char *description, int descriptio
 
 fileHandle_t	FS_FOpenFileWrite( const char *qpath );
 fileHandle_t	FS_FOpenFileAppend( const char *filename );
-fileHandle_t	FS_FCreateOpenPipeFile( const char *filename );
 // will properly create any needed paths and deal with seperater character issues
 
 fileHandle_t FS_SV_FOpenFileWrite( const char *filename );
@@ -1079,7 +1078,6 @@ void		Sys_ShowIP(void);
 
 FILE	*Sys_FOpen( const char *ospath, const char *mode );
 qboolean Sys_Mkdir( const char *path );
-FILE	*Sys_Mkfifo( const char *ospath );
 char	*Sys_Cwd( void );
 void	Sys_SetDefaultInstallPath(const char *path);
 char	*Sys_DefaultInstallPath(void);

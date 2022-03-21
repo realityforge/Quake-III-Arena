@@ -244,10 +244,6 @@ The defaults for these variables differ depending on the target platform.
   com_maxfpsMinimized               - Maximum frames per second when minimized
   com_busyWait                      - Will use a busy loop to wait for rendering
                                       next frame when set to non-zero value
-  com_pipefile                      - Specify filename to create a named pipe
-                                      through which other processes can control
-                                      the server while it is running.
-                                      Nonfunctional on Windows.
   com_gamename                      - Gamename sent to master server in
                                       getservers[Ext] query and infoResponse
                                       "gamename" infostring value. Also used
