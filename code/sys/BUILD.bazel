@@ -59,6 +59,7 @@ cc_library(
 cc_library(
     name = "main",
     srcs = [
+        "con_log.c",
         "sys_main.c",
     ],
     hdrs = [
