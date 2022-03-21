@@ -174,9 +174,6 @@ typedef struct {
 
 	// math
 	long    (*ftol)(float f);
-
-	// system stuff
-	qboolean (*Sys_LowPhysicalMemory)( void );
 } refimport_t;
 
 

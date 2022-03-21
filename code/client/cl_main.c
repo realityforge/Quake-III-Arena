@@ -2895,8 +2895,6 @@ void CL_InitRef( void ) {
 
 	ri.ftol = Q_ftol;
 
-	ri.Sys_LowPhysicalMemory = Sys_LowPhysicalMemory;
-
 	ret = GetRefAPI( REF_API_VERSION, &ri );
 
 #if defined __USEA3D && defined __A3D_GEOM

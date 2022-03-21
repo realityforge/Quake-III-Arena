@@ -1090,8 +1090,6 @@ char **Sys_ListFiles( const char *directory, const char *extension, char *filter
 void	Sys_FreeFileList( char **list );
 void	Sys_Sleep(int msec);
 
-qboolean Sys_LowPhysicalMemory( void );
-
 typedef enum
 {
 	DR_YES = 0,

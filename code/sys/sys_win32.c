@@ -158,15 +158,6 @@ qboolean Sys_RandomBytes( byte *string, int len )
 	return qtrue;
 }
 
-#define MEM_THRESHOLD 96*1024*1024
-
-qboolean Sys_LowPhysicalMemory( void )
-{
-	MEMORYSTATUS stat;
-	GlobalMemoryStatus (&stat);
-	return (stat.dwTotalPhys <= MEM_THRESHOLD) ? qtrue : qfalse;
-}
-
 const char *Sys_Basename( char *path )
 {
 	static char base[ MAX_OSPATH ] = { 0 };
