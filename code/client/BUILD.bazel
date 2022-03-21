@@ -142,7 +142,12 @@ cc_library(
 cc_library(
     name = "snd",
     srcs = [
+        "snd_adpcm.c",
+        "snd_dma.c",
         "snd_main.c",
+        "snd_mem.c",
+        "snd_mix.c",
+        "snd_wavelet.c",
     ],
     deps = [
         ":api",
