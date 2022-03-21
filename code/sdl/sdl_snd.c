@@ -270,12 +270,6 @@ qboolean SNDDMA_Init(void)
 	{
 		Com_Printf("SDL audio capture support disabled by user ('+set s_sdlCapture 1' to enable)\n");
 	}
-#if USE_MUMBLE
-	else if (cl_useMumble->integer)
-	{
-		Com_Printf("SDL audio capture support disabled for Mumble support\n");
-	}
-#endif
 	else
 	{
 		/* !!! FIXME: list available devices and let cvar specify one, like OpenAL does */

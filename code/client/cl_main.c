@@ -27,15 +27,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../sys/sys_local.h"
 #include "../sys/sys_loadlib.h"
 
-#ifdef USE_MUMBLE
-#include "libmumblelink.h"
-#endif
-
-#ifdef USE_MUMBLE
-cvar_t	*cl_useMumble;
-cvar_t	*cl_mumbleScale;
-#endif
-
 #ifdef USE_VOIP
 cvar_t	*cl_voipUseVAD;
 cvar_t	*cl_voipVADThreshold;
@@ -160,44 +151,6 @@ void CL_CheckForResend( void );
 void CL_ShowIP_f(void);
 void CL_ServerStatus_f(void);
 void CL_ServerStatusResponse( netadr_t from, msg_t *msg );
-
-#ifdef USE_MUMBLE
-static
-void CL_UpdateMumble(void)
-{
-	vec3_t pos, forward, up;
-	float scale = cl_mumbleScale->value;
-	float tmp;
-	
-	if(!cl_useMumble->integer)
-		return;
-
-	// !!! FIXME: not sure if this is even close to correct.
-	AngleVectors( cl.snap.ps.viewangles, forward, NULL, up);
-
-	pos[0] = cl.snap.ps.origin[0] * scale;
-	pos[1] = cl.snap.ps.origin[2] * scale;
-	pos[2] = cl.snap.ps.origin[1] * scale;
-
-	tmp = forward[1];
-	forward[1] = forward[2];
-	forward[2] = tmp;
-
-	tmp = up[1];
-	up[1] = up[2];
-	up[2] = tmp;
-
-	if(cl_useMumble->integer > 1) {
-		fprintf(stderr, "%f %f %f, %f %f %f, %f %f %f\n",
-			pos[0], pos[1], pos[2],
-			forward[0], forward[1], forward[2],
-			up[0], up[1], up[2]);
-	}
-
-	mumble_update_coordinates(pos, forward, up);
-}
-#endif
-
 
 #ifdef USE_VOIP
 static
@@ -395,12 +348,6 @@ void CL_CaptureVoip(void)
 	const qboolean useVad = (cl_voipUseVAD->integer != 0);
 	qboolean initialFrame = qfalse;
 	qboolean finalFrame = qfalse;
-
-#if USE_MUMBLE
-	// if we're using Mumble, don't try to handle VoIP transmission ourselves.
-	if (cl_useMumble->integer)
-		return;
-#endif
 
 	// If your data rate is too low, you'll get Connection Interrupted warnings
 	//  when VoIP packets arrive, even if you have a broadband connection.
@@ -1292,13 +1239,6 @@ void CL_Disconnect( qboolean showMainMenu ) {
 	}
 	*clc.downloadTempName = *clc.downloadName = 0;
 	Cvar_Set( "cl_downloadName", "" );
-
-#ifdef USE_MUMBLE
-	if (cl_useMumble->integer && mumble_islinked()) {
-		Com_Printf("Mumble: Unlinking from Mumble application\n");
-		mumble_unlink();
-	}
-#endif
 
 #ifdef USE_VOIP
 	if (cl_voipSend->integer) {
@@ -2753,10 +2693,6 @@ void CL_Frame ( int msec ) {
 	CL_CaptureVoip();
 #endif
 
-#ifdef USE_MUMBLE
-	CL_UpdateMumble();
-#endif
-
 	// advance local effects for next frame
 	SCR_RunCinematic();
 
@@ -3255,11 +3191,6 @@ void CL_Init( void ) {
 
 	Cvar_Get ("password", "", CVAR_USERINFO);
 	Cvar_Get ("cg_predictItems", "1", CVAR_USERINFO | CVAR_ARCHIVE );
-
-#ifdef USE_MUMBLE
-	cl_useMumble = Cvar_Get ("cl_useMumble", "0", CVAR_ARCHIVE | CVAR_LATCH);
-	cl_mumbleScale = Cvar_Get ("cl_mumbleScale", "0.0254", CVAR_ARCHIVE);
-#endif
 
 #ifdef USE_VOIP
 	cl_voipSend = Cvar_Get ("cl_voipSend", "0", 0);

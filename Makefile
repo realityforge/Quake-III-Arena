@@ -163,10 +163,6 @@ ifndef USE_CODEC_OPUS
 USE_CODEC_OPUS=1
 endif
 
-ifndef USE_MUMBLE
-USE_MUMBLE=1
-endif
-
 ifndef USE_VOIP
 USE_VOIP=1
 endif
@@ -316,10 +312,6 @@ ifneq (,$(findstring "$(PLATFORM)", "linux" "gnu"))
     ifneq ($(USE_CURL_DLOPEN),1)
       CLIENT_LIBS += $(CURL_LIBS)
     endif
-  endif
-
-  ifeq ($(USE_MUMBLE),1)
-    CLIENT_LIBS += -lrt
   endif
 
   ifeq ($(ARCH),x86)
@@ -753,10 +745,6 @@ endif
 
 ifeq ($(USE_RENDERER_DLOPEN),1)
   CLIENT_CFLAGS += -DUSE_RENDERER_DLOPEN
-endif
-
-ifeq ($(USE_MUMBLE),1)
-  CLIENT_CFLAGS += -DUSE_MUMBLE
 endif
 
 ZLIB_CFLAGS = -DNO_GZIP -I$(ZDIR)
@@ -1557,11 +1545,6 @@ endif
 ifeq ($(PLATFORM),darwin)
   Q3OBJ += \
     $(B)/client/sys_osx.o
-endif
-
-ifeq ($(USE_MUMBLE),1)
-  Q3OBJ += \
-    $(B)/client/libmumblelink.o
 endif
 
 ifneq ($(USE_RENDERER_DLOPEN),0)

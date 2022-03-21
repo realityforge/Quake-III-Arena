@@ -1,23 +1,6 @@
 ioquake3 VoIP support documentation.
 Last updated 6/25/2008 by Ryan C. Gordon.
 
-There are two ways to use VoIP in ioquake3. You can either use Mumble as an
- external program, for which ioq3 now supplies some basic hooks, or you can
- use the new built-in VoIP support.
-
-Mumble is here: http://mumble.sourceforge.net/  ... ioquake3 can supply it
- with your in-game position, but everything else is whatever features Mumble
- offers outside of the game. To use it, start Mumble before you start ioq3,
- and run the game with +set cl_useMumble 1. This should work on at least
- Linux, Mac OS X, and Windows, and probably other platforms Mumble supports
- in the future.
-
-The built-in stuff offers tighter in-game integration, works on any platform
- that ioquake3 supports, and doesn't require anything more than a recent build
- of the game. The rest of this document is concerned with the built-in VoIP
- support.
-
-
 Quick start for servers:
     - run a recent build of ioquake3.
     - Make sure your network settings are set to broadband.
