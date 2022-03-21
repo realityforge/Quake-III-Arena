@@ -112,10 +112,6 @@ int PC_ExpectTokenType(source_t *source, int type, int subtype, token_t *token);
 int PC_ExpectAnyToken(source_t *source, token_t *token);
 //returns true when the token is available
 int PC_CheckTokenString(source_t *source, char *string);
-//returns true an reads the token when a token with the given type is available
-int PC_CheckTokenType(source_t *source, int type, int subtype, token_t *token);
-//skip tokens until the given token string is read
-int PC_SkipUntilString(source_t *source, char *string);
 //unread the last token read from the script
 void PC_UnreadLastToken(source_t *source);
 //unread the given token
@@ -124,8 +120,6 @@ void PC_UnreadToken(source_t *source, token_t *token);
 int PC_ReadLine(source_t *source, token_t *token);
 //returns true if there was a white space in front of the token
 int PC_WhiteSpaceBeforeToken(token_t *token);
-//add a define to the source
-int PC_AddDefine(source_t *source, char *string);
 //add a globals define that will be added to all opened sources
 int PC_AddGlobalDefine(char *string);
 //remove all globals defines
@@ -134,8 +128,6 @@ void PC_RemoveAllGlobalDefines(void);
 void PC_SetBaseFolder(char *path);
 //load a source file
 source_t *LoadSourceFile(const char *filename);
-//load a source from memory
-source_t *LoadSourceMemory(char *ptr, int length, char *name);
 //free the given source
 void FreeSource(source_t *source);
 //print a source error
