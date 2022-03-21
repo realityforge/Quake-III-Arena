@@ -25,16 +25,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 static portable_samplepair_t paintbuffer[PAINTBUFFER_SIZE];
 static int snd_vol;
+static int*     snd_p;
+static int      snd_linear_count;
+static short*   snd_out;
 
-// bk001119 - these not static, required by unix/snd_mixa.s
-int*     snd_p;  
-int      snd_linear_count;
-short*   snd_out;
-
-#if !( defined __linux__ && (defined __i386__) )
-#if	!id386
-
-void S_WriteLinearBlastStereo16 (void)
+static void S_WriteLinearBlastStereo16 (void)
 {
 	int		i;
 	int		val;
@@ -58,57 +53,6 @@ void S_WriteLinearBlastStereo16 (void)
 			snd_out[i+1] = val;
 	}
 }
-#else
-
-__declspec( naked ) void S_WriteLinearBlastStereo16 (void)
-{
-	__asm {
-
- push edi
- push ebx
- mov ecx,ds:dword ptr[snd_linear_count]
- mov ebx,ds:dword ptr[snd_p]
- mov edi,ds:dword ptr[snd_out]
-LWLBLoopTop:
- mov eax,ds:dword ptr[-8+ebx+ecx*4]
- sar eax,8
- cmp eax,07FFFh
- jg LClampHigh
- cmp eax,0FFFF8000h
- jnl LClampDone
- mov eax,0FFFF8000h
- jmp LClampDone
-LClampHigh:
- mov eax,07FFFh
-LClampDone:
- mov edx,ds:dword ptr[-4+ebx+ecx*4]
- sar edx,8
- cmp edx,07FFFh
- jg LClampHigh2
- cmp edx,0FFFF8000h
- jnl LClampDone2
- mov edx,0FFFF8000h
- jmp LClampDone2
-LClampHigh2:
- mov edx,07FFFh
-LClampDone2:
- shl edx,16
- and eax,0FFFFh
- or edx,eax
- mov ds:dword ptr[-4+edi+ecx*2],edx
- sub ecx,2
- jnz LWLBLoopTop
- pop ebx
- pop edi
- ret
-	}
-}
-
-#endif
-#else
-// forward declare, implementation somewhere else
-void S_WriteLinearBlastStereo16 (void);
-#endif
 
 void S_TransferStereo16 (unsigned long *pbuf, int endtime)
 {

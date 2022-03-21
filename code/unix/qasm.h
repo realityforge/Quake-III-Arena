@@ -275,10 +275,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 	.extern C(snd_scaletable)
 	.extern C(paintbuffer)
-	.extern C(snd_linear_count)
-	.extern C(snd_p)
-	.extern C(snd_vol)
-	.extern C(snd_out)
 	.extern C(vright)
 	.extern C(vup)
 	.extern C(vpn)
