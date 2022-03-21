@@ -1711,14 +1711,6 @@ void CG_HideTeamMenu( void ) {
   Menus_CloseByName("getMenu");
 }
 
-
-void CG_ShowTeamMenu( void ) {
-  Menus_OpenByName("teamMenu");
-}
-
-
-
-
 /*
 ==================
 CG_EventHandling
