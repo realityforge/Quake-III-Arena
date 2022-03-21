@@ -491,25 +491,6 @@ void StringReplaceWords(char *string, char *synonym, char *replacement)
 		str = StringContainsWord(str+strlen(replacement), synonym, qfalse);
 	}
 }
-void BotDumpSynonymList(bot_synonymlist_t *synlist)
-{
-	FILE *fp;
-	bot_synonymlist_t *syn;
-	bot_synonym_t *synonym;
-
-	fp = Log_FilePointer();
-	if (!fp) return;
-	for (syn = synlist; syn; syn = syn->next)
-	{
-	        fprintf(fp, "%ld : [", syn->context);
-		for (synonym = syn->firstsynonym; synonym; synonym = synonym->next)
-		{
-			fprintf(fp, "(\"%s\", %1.2f)", synonym->string, synonym->weight);
-			if (synonym->next) fprintf(fp, ", ");
-		}
-		fprintf(fp, "]\n");
-	}
-}
 bot_synonymlist_t *BotLoadSynonyms(char *filename)
 {
 	int pass, size, contextlevel, numsynonyms;
@@ -657,9 +638,7 @@ bot_synonymlist_t *BotLoadSynonyms(char *filename)
 				}
 			}
 		}
-		//
 		FreeSource(source);
-		//
 		if (contextlevel > 0)
 		{
 			SourceError(source, "missing }");
@@ -667,9 +646,6 @@ bot_synonymlist_t *BotLoadSynonyms(char *filename)
 		}
 	}
 	botimport.Print(PRT_MESSAGE, "loaded %s\n", filename);
-	//
-	//BotDumpSynonymList(synlist);
-	//
 	return synlist;
 }
 //===========================================================================
