@@ -2146,35 +2146,6 @@ static void Com_Crash_f( void ) {
 
 /*
 ==================
-Com_Setenv_f
-
-For controlling environment variables
-==================
-*/
-void Com_Setenv_f(void)
-{
-	int argc = Cmd_Argc();
-	char *arg1 = Cmd_Argv(1);
-
-	if(argc > 2)
-	{
-		char *arg2 = Cmd_ArgsFrom(2);
-		
-		Sys_SetEnv(arg1, arg2);
-	}
-	else if(argc == 2)
-	{
-		char *env = getenv(arg1);
-		
-		if(env)
-			Com_Printf("%s=%s\n", arg1, env);
-		else
-			Com_Printf("%s undefined\n", arg1);
-        }
-}
-
-/*
-==================
 Com_ExecuteCfg
 
 For controlling environment variables
@@ -2380,7 +2351,6 @@ void Com_Init( char *commandLine ) {
 	Com_InitJournaling();
 
 	// Add some commands here already so users can use them from config files
-	Cmd_AddCommand ("setenv", Com_Setenv_f);
 	if (com_developer && com_developer->integer)
 	{
 		Cmd_AddCommand ("error", Com_Error_f);

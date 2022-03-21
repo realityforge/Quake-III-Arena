@@ -176,7 +176,6 @@ typedef struct {
 	long    (*ftol)(float f);
 
 	// system stuff
-	void	(*Sys_SetEnv)( const char *name, const char *value );
 	qboolean (*Sys_LowPhysicalMemory)( void );
 } refimport_t;
 
