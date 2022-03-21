@@ -388,14 +388,9 @@ extern	vec3_t	bytedirs[NUMVERTEXNORMALS];
 extern	vec4_t		colorBlack;
 extern	vec4_t		colorRed;
 extern	vec4_t		colorGreen;
-extern	vec4_t		colorBlue;
 extern	vec4_t		colorYellow;
-extern	vec4_t		colorMagenta;
-extern	vec4_t		colorCyan;
 extern	vec4_t		colorWhite;
-extern	vec4_t		colorLtGrey;
 extern	vec4_t		colorMdGrey;
-extern	vec4_t		colorDkGrey;
 
 #define Q_COLOR_ESCAPE	'^'
 qboolean Q_IsColorString(const char *p);  // ^[0-9a-zA-Z]
