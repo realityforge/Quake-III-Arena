@@ -1749,10 +1749,7 @@ void CG_EventHandling(int type) {
     CG_HideTeamMenu();
   } else if (type == CGAME_EVENT_SCOREBOARD) {
   }
-
 }
-
-
 
 void CG_KeyEvent(int key, qboolean down) {
 
