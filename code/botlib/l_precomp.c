@@ -30,7 +30,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //#define SCREWUP
 //#define BOTLIB
 //#define QUAKE
-//#define QUAKEC
 //#define MEQCC
 
 #ifdef SCREWUP
@@ -2191,47 +2190,6 @@ int PC_ReadDollarDirective(source_t *source)
 	return qfalse;
 }
 
-#ifdef QUAKEC
-int BuiltinFunction(source_t *source)
-{
-	token_t token;
-
-	if (!PC_ReadSourceToken(source, &token)) return qfalse;
-	if (token.type == TT_NUMBER)
-	{
-		PC_UnreadSourceToken(source, &token);
-		return qtrue;
-	}
-	else
-	{
-		PC_UnreadSourceToken(source, &token);
-		return qfalse;
-	}
-}
-int QuakeCMacro(source_t *source)
-{
-	int i;
-	token_t token;
-
-	if (!PC_ReadSourceToken(source, &token)) return qtrue;
-	if (token.type != TT_NAME)
-	{
-		PC_UnreadSourceToken(source, &token);
-		return qtrue;
-	}
-	//find the precompiler directive
-	for (i = 0; dollardirectives[i].name; i++)
-	{
-		if (!strcmp(dollardirectives[i].name, token.string))
-		{
-			PC_UnreadSourceToken(source, &token);
-			return qfalse;
-		}
-	}
-	PC_UnreadSourceToken(source, &token);
-	return qtrue;
-}
-#endif //QUAKEC
 int PC_ReadToken(source_t *source, token_t *token)
 {
 	define_t *define;
@@ -2242,25 +2200,15 @@ int PC_ReadToken(source_t *source, token_t *token)
 		//check for precompiler directives
 		if (token->type == TT_PUNCTUATION && *token->string == '#')
 		{
-#ifdef QUAKEC
-			if (!BuiltinFunction(source))
-#endif //QUAKC
-			{
-				//read the precompiler directive
-				if (!PC_ReadDirective(source)) return qfalse;
-				continue;
-			}
+            //read the precompiler directive
+            if (!PC_ReadDirective(source)) return qfalse;
+            continue;
 		}
 		if (token->type == TT_PUNCTUATION && *token->string == '$')
 		{
-#ifdef QUAKEC
-			if (!QuakeCMacro(source))
-#endif //QUAKEC
-			{
-				//read the precompiler directive
-				if (!PC_ReadDollarDirective(source)) return qfalse;
-				continue;
-			}
+            //read the precompiler directive
+            if (!PC_ReadDollarDirective(source)) return qfalse;
+            continue;
 		}
 		// recursively concatenate strings that are behind each other still resolving defines
 		if (token->type == TT_STRING)
