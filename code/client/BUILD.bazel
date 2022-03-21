@@ -116,6 +116,43 @@ cc_library(
 )
 
 cc_library(
+    name = "snd_codec",
+    srcs = [
+        "snd_codec.c",
+        "snd_codec_ogg.c",
+        "snd_codec_opus.c",
+        "snd_codec_wav.c",
+    ],
+    #    defines = [
+    #        "USE_CODEC_OPUS",
+    #        "USE_CODEC_VORBIS",
+    #    ],
+    deps = [
+        ":api",
+        ":snd_codec_api",
+        "//code/qcommon",
+        "//code/qcommon:shared_api",
+        "//third_party/opus",
+        "//third_party/opusfile",
+        "//third_party/vorbis",
+    ],
+)
+
+cc_library(
+    name = "snd",
+    srcs = [
+        "snd_main.c",
+    ],
+    deps = [
+        ":api",
+        ":snd_codec_api",
+        ":snd_internal_api",
+        "//code/qcommon",
+        "//code/qcommon:shared_api",
+    ],
+)
+
+cc_library(
     name = "openal_support",
     srcs = [
         "qal.c",
