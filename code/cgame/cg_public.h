@@ -55,8 +55,7 @@ typedef struct {
 } snapshot_t;
 
 enum {
-  CGAME_EVENT_NONE,
-  CGAME_EVENT_SCOREBOARD
+  CGAME_EVENT_NONE
 };
 
 #define	CGAME_IMPORT_API_VERSION	4
