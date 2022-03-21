@@ -458,26 +458,16 @@ void Sys_FreeFileList( char **list )
 ==============
 Sys_Sleep
 
-Block execution for msec or until input is received.
+Block execution for msec
 ==============
 */
 void Sys_Sleep( int msec )
 {
 	if( msec == 0 )
 		return;
-
-#ifdef DEDICATED
-	if( msec < 0 )
-		WaitForSingleObject( GetStdHandle( STD_INPUT_HANDLE ), INFINITE );
-	else
-		WaitForSingleObject( GetStdHandle( STD_INPUT_HANDLE ), msec );
-#else
-	// Client Sys_Sleep doesn't support waiting on stdin
-	if( msec < 0 )
-		return;
-
+	else if( msec < 0 )
+        msec = 10;
 	Sleep( msec );
-#endif
 }
 
 /*

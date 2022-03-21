@@ -791,8 +791,7 @@ typedef enum {
 	SE_KEY,			// evValue is a key code, evValue2 is the down flag
 	SE_CHAR,		// evValue is an ascii char
 	SE_MOUSE,		// evValue and evValue2 are relative signed x / y moves
-	SE_JOYSTICK_AXIS,	// evValue is an axis number and evValue2 is the current state (-127 to 127)
-	SE_CONSOLE		// evPtr is a char*
+	SE_JOYSTICK_AXIS	// evValue is an axis number and evValue2 is the current state (-127 to 127)
 } sysEventType_t;
 
 typedef struct {
@@ -1088,7 +1087,6 @@ char	*Sys_DefaultInstallPath(void);
 char	*Sys_DefaultHomePath(void);
 const char *Sys_Dirname( char *path );
 const char *Sys_Basename( char *path );
-char *Sys_ConsoleInput(void);
 
 char **Sys_ListFiles( const char *directory, const char *extension, char *filter, int *numfiles, qboolean wantsubs );
 void	Sys_FreeFileList( char **list );

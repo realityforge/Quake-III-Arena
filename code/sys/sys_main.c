@@ -90,18 +90,6 @@ void Sys_In_Restart_f( void )
 }
 #endif
 
-/*
-=================
-Sys_ConsoleInput
-
-Handle new console input
-=================
-*/
-char *Sys_ConsoleInput(void)
-{
-	return CON_Input( );
-}
-
 #ifndef DEDICATED
 char *Sys_GetClipboardData(void)
 {
@@ -133,8 +121,6 @@ Single exit point (regular exit or in case of error)
 */
 static __attribute__ ((noreturn)) void Sys_Exit( int exitCode )
 {
-	CON_Shutdown( );
-
 #ifndef DEDICATED
 	SDL_Quit( );
 #endif
@@ -246,7 +232,10 @@ void Sys_AnsiColorPrint( const char *msg )
 void Sys_Print( const char *msg )
 {
 	CON_LogWrite( msg );
-	CON_Print( msg );
+    if( com_ansiColor && com_ansiColor->integer )
+        Sys_AnsiColorPrint( msg );
+    else
+        fputs( msg, stderr );
 }
 
 void Sys_Error( const char *error, ... )
@@ -513,7 +502,6 @@ int main( int argc, char **argv )
 		Q_strcat( commandLine, sizeof( commandLine ), " " );
 	}
 
-	CON_Init( );
 	Com_Init( commandLine );
 	NET_Init( );
 

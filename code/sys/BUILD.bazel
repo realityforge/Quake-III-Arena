@@ -14,32 +14,6 @@ cc_library(
 )
 
 cc_library(
-    name = "con_tty",
-    srcs = [
-        "con_tty.c",
-    ],
-    deps = [
-        ":sys_local",
-        "//code/client:api",
-        "//code/qcommon",
-        "//code/qcommon:shared_api",
-    ],
-)
-
-cc_library(
-    name = "con_tty-dedicated",
-    srcs = [
-        "con_tty.c",
-    ],
-    defines = ["DEDICATED"],
-    deps = [
-        ":sys_local",
-        "//code/qcommon",
-        "//code/qcommon:shared_api",
-    ],
-)
-
-cc_library(
     name = "sys_local-dedicated",
     srcs = [
         "sys_local.h",

@@ -1156,14 +1156,6 @@ Q3OBJ = \
   $(B)/client/con_log.o \
   $(B)/client/sys_main.o
 
-ifdef MINGW
-  Q3OBJ += \
-    $(B)/client/con_passive.o
-else
-  Q3OBJ += \
-    $(B)/client/con_tty.o
-endif
-
 Q3R2OBJ = \
   $(B)/renderergl2/tr_animation.o \
   $(B)/renderergl2/tr_backend.o \
@@ -1684,12 +1676,10 @@ Q3DOBJ += \
 ifdef MINGW
   Q3DOBJ += \
     $(B)/ded/win_resource.o \
-    $(B)/ded/sys_win32.o \
-    $(B)/ded/con_win32.o
+    $(B)/ded/sys_win32.o
 else
   Q3DOBJ += \
-    $(B)/ded/sys_unix.o \
-    $(B)/ded/con_tty.o
+    $(B)/ded/sys_unix.o
 endif
 
 ifeq ($(PLATFORM),darwin)

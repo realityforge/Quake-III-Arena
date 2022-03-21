@@ -41,11 +41,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #endif
 
 // Console
-void CON_Shutdown( void );
-void CON_Init( void );
-char *CON_Input( void );
-void CON_Print( const char *message );
-
 unsigned int CON_LogSize( void );
 unsigned int CON_LogWrite( const char *in );
 unsigned int CON_LogRead( char *out, unsigned int outSize );

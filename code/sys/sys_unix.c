@@ -39,8 +39,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <sys/wait.h>
 #endif
 
-qboolean stdinIsATTY;
-
 // Used to determine where to store user-specific files
 static char homePath[ MAX_OSPATH ] = { 0 };
 
@@ -378,41 +376,17 @@ void Sys_FreeFileList( char **list )
 ==================
 Sys_Sleep
 
-Block execution for msec or until input is received.
+Block execution for msec
 ==================
 */
 void Sys_Sleep( int msec )
 {
-	if( msec == 0 )
-		return;
+    if (msec == 0)
+        return;
+    else if (msec < 0)
+        msec = 10;
 
-	if( stdinIsATTY )
-	{
-		fd_set fdset;
-
-		FD_ZERO(&fdset);
-		FD_SET(STDIN_FILENO, &fdset);
-		if( msec < 0 )
-		{
-			select(STDIN_FILENO + 1, &fdset, NULL, NULL, NULL);
-		}
-		else
-		{
-			struct timeval timeout;
-
-			timeout.tv_sec = msec/1000;
-			timeout.tv_usec = (msec%1000)*1000;
-			select(STDIN_FILENO + 1, &fdset, NULL, NULL, &timeout);
-		}
-	}
-	else
-	{
-		// With nothing to select() on, we can't wait indefinitely
-		if( msec < 0 )
-			msec = 10;
-
-		usleep( msec * 1000 );
-	}
+    usleep(msec * 1000);
 }
 
 /*
@@ -681,8 +655,6 @@ Unix specific initialisation
 */
 void Sys_PlatformInit( void )
 {
-	const char* term = getenv( "TERM" );
-
 	signal( SIGHUP, Sys_SigHandler );
 	signal( SIGQUIT, Sys_SigHandler );
 	signal( SIGTRAP, Sys_SigHandler );
@@ -690,9 +662,6 @@ void Sys_PlatformInit( void )
 	signal( SIGBUS, Sys_SigHandler );
 
 	Sys_SetFloatEnv();
-
-	stdinIsATTY = isatty( STDIN_FILENO ) &&
-		!( term && ( !strcmp( term, "raw" ) || !strcmp( term, "dumb" ) ) );
 }
 
 /*

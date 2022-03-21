@@ -1856,19 +1856,6 @@ sysEvent_t Com_GetSystemEvent( void )
 		return eventQueue[ ( eventTail - 1 ) & MASK_QUEUED_EVENTS ];
 	}
 
-	// check for console commands
-	s = Sys_ConsoleInput();
-	if ( s )
-	{
-		char  *b;
-		int   len;
-
-		len = strlen( s ) + 1;
-		b = Z_Malloc( len );
-		strcpy( b, s );
-		Com_QueueEvent( 0, SE_CONSOLE, 0, 0, len, b );
-	}
-
 	// return if we have data
 	if ( eventHead > eventTail )
 	{
@@ -2045,10 +2032,6 @@ int Com_EventLoop( void ) {
 #ifndef DEDICATED
 				CL_JoystickEvent( ev.evValue, ev.evValue2, ev.evTime );
 #endif
-			break;
-			case SE_CONSOLE:
-				Cbuf_AddText( (char *)ev.evPtr );
-				Cbuf_AddText( "\n" );
 			break;
 			default:
 				Com_Error( ERR_FATAL, "Com_EventLoop: bad event type %i", ev.evType );
