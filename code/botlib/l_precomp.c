@@ -114,9 +114,6 @@ token_t *freetokens;					//free tokens from the heap
 //list with global defines added to every source loaded
 define_t *globaldefines;
 
-//============================================================================
-//
-//============================================================================
 void QDECL SourceError(source_t *source, char *str, ...)
 {
 	char text[1024];
@@ -153,9 +150,6 @@ void QDECL SourceWarning(source_t *source, char *str, ...)
 	Log_Print("warning: file %s, line %d: %s\n", source->scriptstack->filename, source->scriptstack->line, text);
 #endif //BSPC
 }
-//============================================================================
-//
-//============================================================================
 void PC_PushIndent(source_t *source, int type, int skip)
 {
 	indent_t *indent;
@@ -168,9 +162,6 @@ void PC_PushIndent(source_t *source, int type, int skip)
 	indent->next = source->indentstack;
 	source->indentstack = indent;
 }
-//============================================================================
-//
-//============================================================================
 void PC_PopIndent(source_t *source, int *type, int *skip)
 {
 	indent_t *indent;
@@ -190,9 +181,6 @@ void PC_PopIndent(source_t *source, int *type, int *skip)
 	source->skip -= indent->skip;
 	FreeMemory(indent);
 }
-//============================================================================
-//
-//============================================================================
 void PC_PushScript(source_t *source, script_t *script)
 {
 	script_t *s;
@@ -209,9 +197,6 @@ void PC_PushScript(source_t *source, script_t *script)
 	script->next = source->scriptstack;
 	source->scriptstack = script;
 }
-//============================================================================
-//
-//============================================================================
 void PC_InitTokenHeap(void)
 {
 	/*
@@ -227,9 +212,6 @@ void PC_InitTokenHeap(void)
 	tokenheapinitialized = qtrue;
 	*/
 }
-//============================================================================
-//
-//============================================================================
 token_t *PC_CopyToken(token_t *token)
 {
 	token_t *t;
@@ -252,9 +234,6 @@ token_t *PC_CopyToken(token_t *token)
 	numtokens++;
 	return t;
 }
-//============================================================================
-//
-//============================================================================
 void PC_FreeToken(token_t *token)
 {
 	//free(token);
@@ -263,9 +242,6 @@ void PC_FreeToken(token_t *token)
 //	freetokens = token;
 	numtokens--;
 }
-//============================================================================
-//
-//============================================================================
 int PC_ReadSourceToken(source_t *source, token_t *token)
 {
 	token_t *t;
@@ -303,9 +279,6 @@ int PC_ReadSourceToken(source_t *source, token_t *token)
 	PC_FreeToken(t);
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_UnreadSourceToken(source_t *source, token_t *token)
 {
 	token_t *t;
@@ -315,9 +288,6 @@ int PC_UnreadSourceToken(source_t *source, token_t *token)
 	source->tokens = t;
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_ReadDefineParms(source_t *source, define_t *define, token_t **parms, int maxparms)
 {
 	token_t token, *t, *last;
@@ -411,9 +381,6 @@ int PC_ReadDefineParms(source_t *source, define_t *define, token_t **parms, int 
 	}
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_StringizeTokens(token_t *tokens, token_t *token)
 {
 	token_t *t;
@@ -430,9 +397,6 @@ int PC_StringizeTokens(token_t *tokens, token_t *token)
 	strncat(token->string, "\"", MAX_TOKEN - strlen(token->string));
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_MergeTokens(token_t *t1, token_t *t2)
 {
 	//merging of a name with a name or number
@@ -453,9 +417,6 @@ int PC_MergeTokens(token_t *t1, token_t *t2)
 	//FIXME: merging of two number of the same sub type
 	return qfalse;
 }
-//============================================================================
-//
-//============================================================================
 /*
 void PC_PrintDefine(define_t *define)
 {
@@ -468,9 +429,6 @@ void PC_PrintDefine(define_t *define)
 //	struct define_s *next;			//next defined macro in a list
 } */
 #if DEFINEHASHING
-//============================================================================
-//
-//============================================================================
 void PC_PrintDefineHashTable(define_t **definehash)
 {
 	int i;
@@ -486,9 +444,6 @@ void PC_PrintDefineHashTable(define_t **definehash)
 		Log_Write("\n");
 	}
 }
-//============================================================================
-//
-//============================================================================
 //char primes[16] = {1, 3, 5, 7, 11, 13, 17, 19, 23, 27, 29, 31, 37, 41, 43, 47};
 
 int PC_NameHash(char *name)
@@ -505,9 +460,6 @@ int PC_NameHash(char *name)
 	hash = (hash ^ (hash >> 10) ^ (hash >> 20)) & (DEFINEHASHSIZE-1);
 	return hash;
 }
-//============================================================================
-//
-//============================================================================
 void PC_AddDefineToHash(define_t *define, define_t **definehash)
 {
 	int hash;
@@ -516,9 +468,6 @@ void PC_AddDefineToHash(define_t *define, define_t **definehash)
 	define->hashnext = definehash[hash];
 	definehash[hash] = define;
 }
-//============================================================================
-//
-//============================================================================
 define_t *PC_FindHashedDefine(define_t **definehash, char *name)
 {
 	define_t *d;
@@ -532,9 +481,6 @@ define_t *PC_FindHashedDefine(define_t **definehash, char *name)
 	return NULL;
 }
 #endif //DEFINEHASHING
-//============================================================================
-//
-//============================================================================
 define_t *PC_FindDefine(define_t *defines, char *name)
 {
 	define_t *d;
@@ -563,9 +509,6 @@ int PC_FindDefineParm(define_t *define, char *name)
 	}
 	return -1;
 }
-//============================================================================
-//
-//============================================================================
 void PC_FreeDefine(define_t *define)
 {
 	token_t *t, *next;
@@ -585,9 +528,6 @@ void PC_FreeDefine(define_t *define)
 	//free the define
 	FreeMemory(define);
 }
-//============================================================================
-//
-//============================================================================
 void PC_AddBuiltinDefines(source_t *source)
 {
 	int i;
@@ -622,9 +562,6 @@ void PC_AddBuiltinDefines(source_t *source)
 #endif //DEFINEHASHING
 	}
 }
-//============================================================================
-//
-//============================================================================
 int PC_ExpandBuiltinDefine(source_t *source, token_t *deftoken, define_t *define,
 										token_t **firsttoken, token_t **lasttoken)
 {
@@ -696,9 +633,6 @@ int PC_ExpandBuiltinDefine(source_t *source, token_t *deftoken, define_t *define
 	}
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_ExpandDefine(source_t *source, token_t *deftoken, define_t *define,
 										token_t **firsttoken, token_t **lasttoken)
 {
@@ -831,9 +765,6 @@ int PC_ExpandDefine(source_t *source, token_t *deftoken, define_t *define,
 	//
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_ExpandDefineIntoSource(source_t *source, token_t *deftoken, define_t *define)
 {
 	token_t *firsttoken, *lasttoken;
@@ -848,9 +779,6 @@ int PC_ExpandDefineIntoSource(source_t *source, token_t *deftoken, define_t *def
 	}
 	return qfalse;
 }
-//============================================================================
-//
-//============================================================================
 void PC_ConvertPath(char *path)
 {
 	char *ptr;
@@ -875,9 +803,6 @@ void PC_ConvertPath(char *path)
 		ptr++;
 	}
 }
-//============================================================================
-//
-//============================================================================
 int PC_Directive_include(source_t *source)
 {
 	script_t *script;
@@ -985,25 +910,16 @@ int PC_ReadLine(source_t *source, token_t *token)
 	} while(!strcmp(token->string, "\\"));
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_WhiteSpaceBeforeToken(token_t *token)
 {
 	return token->endwhitespace_p - token->whitespace_p > 0;
 }
-//============================================================================
-//
-//============================================================================
 void PC_ClearTokenWhiteSpace(token_t *token)
 {
 	token->whitespace_p = NULL;
 	token->endwhitespace_p = NULL;
 	token->linescrossed = 0;
 }
-//============================================================================
-//
-//============================================================================
 int PC_Directive_undef(source_t *source)
 {
 	token_t token;
@@ -1066,9 +982,6 @@ int PC_Directive_undef(source_t *source)
 #endif //DEFINEHASHING
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_Directive_define(source_t *source)
 {
 	token_t token, *t, *last;
@@ -1206,9 +1119,6 @@ int PC_Directive_define(source_t *source)
 	}
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 define_t *PC_DefineFromString(char *string)
 {
 	script_t *script;
@@ -1262,8 +1172,6 @@ define_t *PC_DefineFromString(char *string)
 	return NULL;
 }
 //============================================================================
-//
-//============================================================================
 int PC_AddDefine(source_t *source, char *string)
 {
 	define_t *define;
@@ -1278,9 +1186,7 @@ int PC_AddDefine(source_t *source, char *string)
 #endif //DEFINEHASHING
 	return qtrue;
 }
-//============================================================================
 // add a globals define that will be added to all opened sources
-//
 //============================================================================
 int PC_AddGlobalDefine(char *string)
 {
@@ -1294,7 +1200,6 @@ int PC_AddGlobalDefine(char *string)
 }
 //============================================================================
 // remove the given global define
-//
 //============================================================================
 int PC_RemoveGlobalDefine(char *name)
 {
@@ -1310,7 +1215,6 @@ int PC_RemoveGlobalDefine(char *name)
 }
 //============================================================================
 // remove all globals defines
-//
 //============================================================================
 void PC_RemoveAllGlobalDefines(void)
 {
@@ -1322,9 +1226,6 @@ void PC_RemoveAllGlobalDefines(void)
 		PC_FreeDefine(define);
 	}
 }
-//============================================================================
-//
-//============================================================================
 define_t *PC_CopyDefine(source_t *source, define_t *define)
 {
 	define_t *newdefine;
@@ -1362,9 +1263,6 @@ define_t *PC_CopyDefine(source_t *source, define_t *define)
 	}
 	return newdefine;
 }
-//============================================================================
-//
-//============================================================================
 void PC_AddGlobalDefinesToSource(source_t *source)
 {
 	define_t *define, *newdefine;
@@ -1380,9 +1278,6 @@ void PC_AddGlobalDefinesToSource(source_t *source)
 #endif //DEFINEHASHING
 	}
 }
-//============================================================================
-//
-//============================================================================
 int PC_Directive_if_def(source_t *source, int type)
 {
 	token_t token;
@@ -1409,23 +1304,14 @@ int PC_Directive_if_def(source_t *source, int type)
 	PC_PushIndent(source, type, skip);
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_Directive_ifdef(source_t *source)
 {
 	return PC_Directive_if_def(source, INDENT_IFDEF);
 }
-//============================================================================
-//
-//============================================================================
 int PC_Directive_ifndef(source_t *source)
 {
 	return PC_Directive_if_def(source, INDENT_IFNDEF);
 }
-//============================================================================
-//
-//============================================================================
 int PC_Directive_else(source_t *source)
 {
 	int type, skip;
@@ -1444,9 +1330,6 @@ int PC_Directive_else(source_t *source)
 	PC_PushIndent(source, INDENT_ELSE, !skip);
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_Directive_endif(source_t *source)
 {
 	int type, skip;
@@ -1459,9 +1342,6 @@ int PC_Directive_endif(source_t *source)
 	}
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 typedef struct operator_s
 {
 	int operator;
@@ -1988,9 +1868,6 @@ int PC_EvaluateTokens(source_t *source, token_t *tokens, signed long int *intval
 	if (floatvalue) *floatvalue = 0;
 	return qfalse;
 }
-//============================================================================
-//
-//============================================================================
 int PC_Evaluate(source_t *source, signed long int *intvalue,
 												double *floatvalue, int integer)
 {
@@ -2084,9 +1961,6 @@ int PC_Evaluate(source_t *source, signed long int *intvalue,
 	//
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_DollarEvaluate(source_t *source, signed long int *intvalue,
 												double *floatvalue, int integer)
 {
@@ -2189,9 +2063,6 @@ int PC_DollarEvaluate(source_t *source, signed long int *intvalue,
 	//
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_Directive_elif(source_t *source)
 {
 	signed long int value;
@@ -2208,9 +2079,6 @@ int PC_Directive_elif(source_t *source)
 	PC_PushIndent(source, INDENT_ELIF, skip);
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_Directive_if(source_t *source)
 {
 	signed long int value;
@@ -2221,17 +2089,11 @@ int PC_Directive_if(source_t *source)
 	PC_PushIndent(source, INDENT_IF, skip);
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_Directive_line(source_t *source)
 {
 	SourceError(source, "#line directive not supported");
 	return qfalse;
 }
-//============================================================================
-//
-//============================================================================
 int PC_Directive_error(source_t *source)
 {
 	token_t token;
@@ -2241,9 +2103,6 @@ int PC_Directive_error(source_t *source)
 	SourceError(source, "#error directive: %s", token.string);
 	return qfalse;
 }
-//============================================================================
-//
-//============================================================================
 int PC_Directive_pragma(source_t *source)
 {
 	token_t token;
@@ -2252,9 +2111,6 @@ int PC_Directive_pragma(source_t *source)
 	while(PC_ReadLine(source, &token)) ;
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 void UnreadSignToken(source_t *source)
 {
 	token_t token;
@@ -2268,9 +2124,6 @@ void UnreadSignToken(source_t *source)
 	token.subtype = P_SUB;
 	PC_UnreadSourceToken(source, &token);
 }
-//============================================================================
-//
-//============================================================================
 int PC_Directive_eval(source_t *source)
 {
 	signed long int value;
@@ -2289,9 +2142,6 @@ int PC_Directive_eval(source_t *source)
 	if (value < 0) UnreadSignToken(source);
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_Directive_evalfloat(source_t *source)
 {
 	double value;
@@ -2309,9 +2159,6 @@ int PC_Directive_evalfloat(source_t *source)
 	if (value < 0) UnreadSignToken(source);
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 directive_t directives[20] =
 {
 	{"if", PC_Directive_if},
@@ -2364,9 +2211,6 @@ int PC_ReadDirective(source_t *source)
 	SourceError(source, "unknown precompiler directive %s", token.string);
 	return qfalse;
 }
-//============================================================================
-//
-//============================================================================
 int PC_DollarDirective_evalint(source_t *source)
 {
 	signed long int value;
@@ -2389,9 +2233,6 @@ int PC_DollarDirective_evalint(source_t *source)
 	if (value < 0) UnreadSignToken(source);
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_DollarDirective_evalfloat(source_t *source)
 {
 	double value;
@@ -2413,9 +2254,6 @@ int PC_DollarDirective_evalfloat(source_t *source)
 	if (value < 0) UnreadSignToken(source);
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 directive_t dollardirectives[20] =
 {
 	{"evalint", PC_DollarDirective_evalint},
@@ -2459,9 +2297,6 @@ int PC_ReadDollarDirective(source_t *source)
 }
 
 #ifdef QUAKEC
-//============================================================================
-//
-//============================================================================
 int BuiltinFunction(source_t *source)
 {
 	token_t token;
@@ -2478,9 +2313,6 @@ int BuiltinFunction(source_t *source)
 		return qfalse;
 	}
 }
-//============================================================================
-//
-//============================================================================
 int QuakeCMacro(source_t *source)
 {
 	int i;
@@ -2505,9 +2337,6 @@ int QuakeCMacro(source_t *source)
 	return qtrue;
 }
 #endif //QUAKEC
-//============================================================================
-//
-//============================================================================
 int PC_ReadToken(source_t *source, token_t *token)
 {
 	define_t *define;
@@ -2585,9 +2414,6 @@ int PC_ReadToken(source_t *source, token_t *token)
 		return qtrue;
 	}
 }
-//============================================================================
-//
-//============================================================================
 int PC_ExpectTokenString(source_t *source, char *string)
 {
 	token_t token;
@@ -2605,9 +2431,6 @@ int PC_ExpectTokenString(source_t *source, char *string)
 	}
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_ExpectTokenType(source_t *source, int type, int subtype, token_t *token)
 {
 	char str[MAX_TOKEN];
@@ -2655,9 +2478,6 @@ int PC_ExpectTokenType(source_t *source, int type, int subtype, token_t *token)
 	}
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_ExpectAnyToken(source_t *source, token_t *token)
 {
 	if (!PC_ReadToken(source, token))
@@ -2670,9 +2490,6 @@ int PC_ExpectAnyToken(source_t *source, token_t *token)
 		return qtrue;
 	}
 }
-//============================================================================
-//
-//============================================================================
 int PC_CheckTokenString(source_t *source, char *string)
 {
 	token_t tok;
@@ -2684,9 +2501,6 @@ int PC_CheckTokenString(source_t *source, char *string)
 	PC_UnreadSourceToken(source, &tok);
 	return qfalse;
 }
-//============================================================================
-//
-//============================================================================
 int PC_CheckTokenType(source_t *source, int type, int subtype, token_t *token)
 {
 	token_t tok;
@@ -2703,9 +2517,6 @@ int PC_CheckTokenType(source_t *source, int type, int subtype, token_t *token)
 	PC_UnreadSourceToken(source, &tok);
 	return qfalse;
 }
-//============================================================================
-//
-//============================================================================
 int PC_SkipUntilString(source_t *source, char *string)
 {
 	token_t token;
@@ -2716,23 +2527,14 @@ int PC_SkipUntilString(source_t *source, char *string)
 	}
 	return qfalse;
 }
-//============================================================================
-//
-//============================================================================
 void PC_UnreadLastToken(source_t *source)
 {
 	PC_UnreadSourceToken(source, &source->token);
 }
-//============================================================================
-//
-//============================================================================
 void PC_UnreadToken(source_t *source, token_t *token)
 {
 	PC_UnreadSourceToken(source, token);
 }
-//============================================================================
-//
-//============================================================================
 void PC_SetIncludePath(source_t *source, char *path)
 {
 	strncpy(source->includepath, path, MAX_PATH);
@@ -2743,16 +2545,10 @@ void PC_SetIncludePath(source_t *source, char *path)
 		strcat(source->includepath, PATHSEPERATOR_STR);
 	}
 }
-//============================================================================
-//
-//============================================================================
 void PC_SetPunctuations(source_t *source, punctuation_t *p)
 {
 	source->punctuations = p;
 }
-//============================================================================
-//
-//============================================================================
 source_t *LoadSourceFile(const char *filename)
 {
 	source_t *source;
@@ -2781,9 +2577,6 @@ source_t *LoadSourceFile(const char *filename)
 	PC_AddGlobalDefinesToSource(source);
 	return source;
 }
-//============================================================================
-//
-//============================================================================
 source_t *LoadSourceMemory(char *ptr, int length, char *name)
 {
 	source_t *source;
@@ -2811,9 +2604,6 @@ source_t *LoadSourceMemory(char *ptr, int length, char *name)
 	PC_AddGlobalDefinesToSource(source);
 	return source;
 }
-//============================================================================
-//
-//============================================================================
 void FreeSource(source_t *source)
 {
 	script_t *script;
@@ -2870,9 +2660,6 @@ void FreeSource(source_t *source)
 	//free the source itself
 	FreeMemory(source);
 }
-//============================================================================
-//
-//============================================================================
 
 #define MAX_SOURCEFILES		64
 
@@ -2897,9 +2684,6 @@ int PC_LoadSourceHandle(const char *filename)
 	sourceFiles[i] = source;
 	return i;
 }
-//============================================================================
-//
-//============================================================================
 int PC_FreeSourceHandle(int handle)
 {
 	if (handle < 1 || handle >= MAX_SOURCEFILES)
@@ -2911,9 +2695,6 @@ int PC_FreeSourceHandle(int handle)
 	sourceFiles[handle] = NULL;
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 int PC_ReadTokenHandle(int handle, pc_token_t *pc_token)
 {
 	token_t token;
@@ -2934,9 +2715,6 @@ int PC_ReadTokenHandle(int handle, pc_token_t *pc_token)
 		StripDoubleQuotes(pc_token->string);
 	return ret;
 }
-//============================================================================
-//
-//============================================================================
 int PC_SourceFileAndLine(int handle, char *filename, int *line)
 {
 	if (handle < 1 || handle >= MAX_SOURCEFILES)
@@ -2951,16 +2729,10 @@ int PC_SourceFileAndLine(int handle, char *filename, int *line)
 		*line = 0;
 	return qtrue;
 }
-//============================================================================
-//
-//============================================================================
 void PC_SetBaseFolder(char *path)
 {
 	PS_SetBaseFolder(path);
 }
-//============================================================================
-//
-//============================================================================
 void PC_CheckOpenSourceHandles(void)
 {
 	int i;

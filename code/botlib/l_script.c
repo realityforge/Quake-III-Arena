@@ -476,9 +476,6 @@ int PS_ReadString(script_t *script, token_t *token, int quote)
 	token->subtype = len;
 	return 1;
 }
-//============================================================================
-//
-//============================================================================
 int PS_ReadName(script_t *script, token_t *token)
 {
 	int len = 0;
@@ -503,9 +500,6 @@ int PS_ReadName(script_t *script, token_t *token)
 	token->subtype = len;
 	return 1;
 }
-//============================================================================
-//
-//============================================================================
 void NumberValue(char *string, int subtype, unsigned long int *intvalue,
 															long double *floatvalue)
 {
@@ -572,9 +566,6 @@ void NumberValue(char *string, int subtype, unsigned long int *intvalue,
 		*floatvalue = *intvalue;
 	}
 }
-//============================================================================
-//
-//============================================================================
 int PS_ReadNumber(script_t *script, token_t *token)
 {
 	int len = 0, i;
@@ -677,9 +668,6 @@ int PS_ReadNumber(script_t *script, token_t *token)
 	if (!(token->subtype & TT_FLOAT)) token->subtype |= TT_INTEGER;
 	return 1;
 }
-//============================================================================
-//
-//============================================================================
 int PS_ReadLiteral(script_t *script, token_t *token)
 {
 	token->type = TT_LITERAL;
@@ -721,9 +709,6 @@ int PS_ReadLiteral(script_t *script, token_t *token)
 	//
 	return 1;
 }
-//============================================================================
-//
-//============================================================================
 int PS_ReadPunctuation(script_t *script, token_t *token)
 {
 	int len;
@@ -759,9 +744,6 @@ int PS_ReadPunctuation(script_t *script, token_t *token)
 	}
 	return 0;
 }
-//============================================================================
-//
-//============================================================================
 int PS_ReadPrimitive(script_t *script, token_t *token)
 {
 	int len;
@@ -782,9 +764,6 @@ int PS_ReadPrimitive(script_t *script, token_t *token)
 	//primitive reading successfull
 	return 1;
 }
-//============================================================================
-//
-//============================================================================
 int PS_ReadToken(script_t *script, token_t *token)
 {
 	//if there is a token available (from UnreadToken)
@@ -853,9 +832,6 @@ int PS_ReadToken(script_t *script, token_t *token)
 	//succesfully read a token
 	return 1;
 }
-//============================================================================
-//
-//============================================================================
 int PS_ExpectTokenString(script_t *script, char *string)
 {
 	token_t token;
@@ -873,9 +849,6 @@ int PS_ExpectTokenString(script_t *script, char *string)
 	}
 	return 1;
 }
-//============================================================================
-//
-//============================================================================
 int PS_ExpectTokenType(script_t *script, int type, int subtype, token_t *token)
 {
 	char str[MAX_TOKEN];
@@ -928,9 +901,6 @@ int PS_ExpectTokenType(script_t *script, int type, int subtype, token_t *token)
 	}
 	return 1;
 }
-//============================================================================
-//
-//============================================================================
 int PS_ExpectAnyToken(script_t *script, token_t *token)
 {
 	if (!PS_ReadToken(script, token))
@@ -943,9 +913,6 @@ int PS_ExpectAnyToken(script_t *script, token_t *token)
 		return 1;
 	}
 }
-//============================================================================
-//
-//============================================================================
 int PS_CheckTokenString(script_t *script, char *string)
 {
 	token_t tok;
@@ -957,9 +924,6 @@ int PS_CheckTokenString(script_t *script, char *string)
 	script->script_p = script->lastscript_p;
 	return 0;
 }
-//============================================================================
-//
-//============================================================================
 int PS_CheckTokenType(script_t *script, int type, int subtype, token_t *token)
 {
 	token_t tok;
@@ -976,9 +940,6 @@ int PS_CheckTokenType(script_t *script, int type, int subtype, token_t *token)
 	script->script_p = script->lastscript_p;
 	return 0;
 }
-//============================================================================
-//
-//============================================================================
 int PS_SkipUntilString(script_t *script, char *string)
 {
 	token_t token;
@@ -989,16 +950,10 @@ int PS_SkipUntilString(script_t *script, char *string)
 	}
 	return 0;
 }
-//============================================================================
-//
-//============================================================================
 void PS_UnreadLastToken(script_t *script)
 {
 	script->tokenavailable = 1;
 }
-//============================================================================
-//
-//============================================================================
 void PS_UnreadToken(script_t *script, token_t *token)
 {
 	memcpy(&script->token, token, sizeof(token_t));
@@ -1019,9 +974,6 @@ char PS_NextWhiteSpaceChar(script_t *script)
 		return 0;
 	}
 }
-//============================================================================
-//
-//============================================================================
 void StripDoubleQuotes(char *string)
 {
 	if (*string == '\"')
@@ -1033,9 +985,6 @@ void StripDoubleQuotes(char *string)
 		string[strlen(string)-1] = '\0';
 	}
 }
-//============================================================================
-//
-//============================================================================
 void StripSingleQuotes(char *string)
 {
 	if (*string == '\'')
@@ -1047,9 +996,6 @@ void StripSingleQuotes(char *string)
 		string[strlen(string)-1] = '\0';
 	}
 }
-//============================================================================
-//
-//============================================================================
 long double ReadSignedFloat(script_t *script)
 {
 	token_t token;
@@ -1067,9 +1013,6 @@ long double ReadSignedFloat(script_t *script)
 	}
 	return sign * token.floatvalue;
 }
-//============================================================================
-//
-//============================================================================
 signed long int ReadSignedInt(script_t *script)
 {
 	token_t token;
@@ -1087,23 +1030,14 @@ signed long int ReadSignedInt(script_t *script)
 	}
 	return sign * token.intvalue;
 }
-//============================================================================
-//
-//============================================================================
 void SetScriptFlags(script_t *script, int flags)
 {
 	script->flags = flags;
 }
-//============================================================================
-//
-//============================================================================
 int GetScriptFlags(script_t *script)
 {
 	return script->flags;
 }
-//============================================================================
-//
-//============================================================================
 void ResetScript(script_t *script)
 {
 	//pointer in script buffer
@@ -1130,16 +1064,10 @@ int EndOfScript(script_t *script)
 {
 	return script->script_p >= script->end_p;
 }
-//============================================================================
-//
-//============================================================================
 int NumLinesCrossed(script_t *script)
 {
 	return script->line - script->lastline;
 }
-//============================================================================
-//
-//============================================================================
 int ScriptSkipTo(script_t *script, char *value)
 {
 	int len;
@@ -1161,9 +1089,6 @@ int ScriptSkipTo(script_t *script, char *value)
 	} while(1);
 }
 #ifndef BOTLIB
-//============================================================================
-//
-//============================================================================
 int FileLength(FILE *fp)
 {
 	int pos;
@@ -1177,9 +1102,6 @@ int FileLength(FILE *fp)
 	return end;
 }
 #endif
-//============================================================================
-//
-//============================================================================
 script_t *LoadScriptFile(const char *filename)
 {
 #ifdef BOTLIB
@@ -1243,9 +1165,6 @@ script_t *LoadScriptFile(const char *filename)
 
 	return script;
 }
-//============================================================================
-//
-//============================================================================
 script_t *LoadScriptMemory(char *ptr, int length, char *name)
 {
 	void *buffer;
@@ -1276,9 +1195,6 @@ script_t *LoadScriptMemory(char *ptr, int length, char *name)
 	//
 	return script;
 }
-//============================================================================
-//
-//============================================================================
 void FreeScript(script_t *script)
 {
 #ifdef PUNCTABLE
@@ -1286,9 +1202,6 @@ void FreeScript(script_t *script)
 #endif //PUNCTABLE
 	FreeMemory(script);
 }
-//============================================================================
-//
-//============================================================================
 void PS_SetBaseFolder(char *path)
 {
 #ifdef BSPC
