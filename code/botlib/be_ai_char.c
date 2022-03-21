@@ -35,7 +35,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "aasfile.h"
 #include "botlib.h"
 #include "be_aas.h"
-#include "be_aas_funcs.h"
 #include "be_interface.h"
 #include "be_ai_char.h"
 
