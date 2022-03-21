@@ -53,8 +53,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define MAX_DEFINEPARMS			128
 
-#define DEFINEHASHING			1
-
 //directive name with parse function
 typedef struct directive_s
 {
@@ -366,8 +364,6 @@ int PC_MergeTokens(token_t *t1, token_t *t2)
 	return qfalse;
 }
 
-#if DEFINEHASHING
-
 int PC_NameHash(char *name)
 {
 	int hash, i;
@@ -400,7 +396,6 @@ define_t *PC_FindHashedDefine(define_t **definehash, char *name)
 	}
 	return NULL;
 }
-#endif //DEFINEHASHING
 define_t *PC_FindDefine(define_t *defines, char *name)
 {
 	define_t *d;
@@ -809,7 +804,6 @@ int PC_Directive_undef(source_t *source)
 		SourceError(source, "expected name, found %s", token.string);
 		return qfalse;
 	}
-#if DEFINEHASHING
 
 	hash = PC_NameHash(token.string);
 	for (lastdefine = NULL, define = source->definehash[hash]; define; define = define->hashnext)
@@ -830,26 +824,6 @@ int PC_Directive_undef(source_t *source)
 		}
 		lastdefine = define;
 	}
-#else //DEFINEHASHING
-	for (lastdefine = NULL, define = source->defines; define; define = define->next)
-	{
-		if (!strcmp(define->name, token.string))
-		{
-			if (define->flags & DEFINE_FIXED)
-			{
-				SourceWarning(source, "can't undef %s", token.string);
-			}
-			else
-			{
-				if (lastdefine) lastdefine->next = define->next;
-				else source->defines = define->next;
-				PC_FreeDefine(define);
-			}
-			break;
-		}
-		lastdefine = define;
-	}
-#endif //DEFINEHASHING
 	return qtrue;
 }
 int PC_Directive_define(source_t *source)
@@ -871,11 +845,7 @@ int PC_Directive_define(source_t *source)
 		return qfalse;
 	}
 	//check if the define already exists
-#if DEFINEHASHING
 	define = PC_FindHashedDefine(source->definehash, token.string);
-#else
-	define = PC_FindDefine(source->defines, token.string);
-#endif //DEFINEHASHING
 	if (define)
 	{
 		if (define->flags & DEFINE_FIXED)
@@ -894,12 +864,7 @@ int PC_Directive_define(source_t *source)
 	define->name = (char *) GetMemory(strlen(token.string) + 1);
 	strcpy(define->name, token.string);
 	//add the define to the source
-#if DEFINEHASHING
 	PC_AddDefineToHash(define, source->definehash);
-#else //DEFINEHASHING
-	define->next = source->defines;
-	source->defines = define;
-#endif //DEFINEHASHING
 	//if nothing is defined, just return
 	if (!PC_ReadLine(source, &token)) return qtrue;
 	//if it is a define with parameters
@@ -998,9 +963,7 @@ define_t *PC_DefineFromString(char *string)
 	memset(&src, 0, sizeof(source_t));
 	Q_strncpyz(src.filename, "*extern", sizeof(src.filename));
 	src.scriptstack = script;
-#if DEFINEHASHING
 	src.definehash = GetClearedMemory(DEFINEHASHSIZE * sizeof(define_t *));
-#endif //DEFINEHASHING
 	//create a define from the source
 	res = PC_Directive_define(&src);
 	//free any tokens if left
@@ -1009,7 +972,6 @@ define_t *PC_DefineFromString(char *string)
 		src.tokens = src.tokens->next;
 		PC_FreeToken(t);
 	}
-#ifdef DEFINEHASHING
 	def = NULL;
 	for (i = 0; i < DEFINEHASHSIZE; i++)
 	{
@@ -1019,13 +981,7 @@ define_t *PC_DefineFromString(char *string)
 			break;
 		}
 	}
-#else
-	def = src.defines;
-#endif //DEFINEHASHING
-	//
-#if DEFINEHASHING
 	FreeMemory(src.definehash);
-#endif //DEFINEHASHING
 	//
 	FreeScript(script);
 	//if the define was created successfully
@@ -1105,12 +1061,7 @@ void PC_AddGlobalDefinesToSource(source_t *source)
 	for (define = globaldefines; define; define = define->next)
 	{
 		newdefine = PC_CopyDefine(source, define);
-#if DEFINEHASHING
 		PC_AddDefineToHash(newdefine, source->definehash);
-#else //DEFINEHASHING
-		newdefine->next = source->defines;
-		source->defines = newdefine;
-#endif //DEFINEHASHING
 	}
 }
 int PC_Directive_if_def(source_t *source, int type)
@@ -1130,11 +1081,7 @@ int PC_Directive_if_def(source_t *source, int type)
 		SourceError(source, "expected name after #ifdef, found %s", token.string);
 		return qfalse;
 	}
-#if DEFINEHASHING
 	d = PC_FindHashedDefine(source->definehash, token.string);
-#else
-	d = PC_FindDefine(source->defines, token.string);
-#endif //DEFINEHASHING
 	skip = (type == INDENT_IFDEF) == (d == NULL);
 	PC_PushIndent(source, type, skip);
 	return qtrue;
@@ -1305,11 +1252,7 @@ int PC_EvaluateTokens(source_t *source, token_t *tokens, signed long int *intval
 					break;
 				}
 				AllocValue(v);
-#if DEFINEHASHING
 				if (PC_FindHashedDefine(source->definehash, t->string))
-#else			
-				if (PC_FindDefine(source->defines, t->string))
-#endif //DEFINEHASHING
 				{
 					v->intvalue = 1;
 					v->floatvalue = 1;
@@ -1739,11 +1682,7 @@ int PC_Evaluate(source_t *source, signed long int *intvalue,
 			else
 			{
 				//then it must be a define
-#if DEFINEHASHING
 				define = PC_FindHashedDefine(source->definehash, token.string);
-#else
-				define = PC_FindDefine(source->defines, token.string);
-#endif //DEFINEHASHING
 				if (!define)
 				{
 					SourceError(source, "can't evaluate %s, not defined", token.string);
@@ -1838,11 +1777,7 @@ int PC_DollarEvaluate(source_t *source, signed long int *intvalue,
 			else
 			{
 				//then it must be a define
-#if DEFINEHASHING
 				define = PC_FindHashedDefine(source->definehash, token.string);
-#else
-				define = PC_FindDefine(source->defines, token.string);
-#endif //DEFINEHASHING
 				if (!define)
 				{
 					SourceError(source, "can't evaluate %s, not defined", token.string);
@@ -2179,11 +2114,7 @@ int PC_ReadToken(source_t *source, token_t *token)
 		if (token->type == TT_NAME)
 		{
 			//check if the name is a define macro
-#if DEFINEHASHING
 			define = PC_FindHashedDefine(source->definehash, token->string);
-#else
-			define = PC_FindDefine(source->defines, token->string);
-#endif //DEFINEHASHING
 			//if it is a define macro
 			if (define)
 			{
@@ -2316,9 +2247,7 @@ source_t *LoadSourceFile(const char *filename)
 	source->indentstack = NULL;
 	source->skip = 0;
 
-#if DEFINEHASHING
 	source->definehash = GetClearedMemory(DEFINEHASHSIZE * sizeof(define_t *));
-#endif //DEFINEHASHING
 	PC_AddGlobalDefinesToSource(source);
 	return source;
 }
@@ -2345,7 +2274,6 @@ void FreeSource(source_t *source)
 		source->tokens = source->tokens->next;
 		PC_FreeToken(token);
 	}
-#if DEFINEHASHING
 	for (i = 0; i < DEFINEHASHSIZE; i++)
 	{
 		while(source->definehash[i])
@@ -2355,15 +2283,6 @@ void FreeSource(source_t *source)
 			PC_FreeDefine(define);
 		}
 	}
-#else //DEFINEHASHING
-	//free all defines
-	while(source->defines)
-	{
-		define = source->defines;
-		source->defines = source->defines->next;
-		PC_FreeDefine(define);
-	}
-#endif //DEFINEHASHING
 	//free all indents
 	while(source->indentstack)
 	{
@@ -2371,10 +2290,7 @@ void FreeSource(source_t *source)
 		source->indentstack = source->indentstack->next;
 		FreeMemory(indent);
 	}
-#if DEFINEHASHING
-	//
 	if (source->definehash) FreeMemory(source->definehash);
-#endif //DEFINEHASHING
 	//free the source itself
 	FreeMemory(source);
 }
