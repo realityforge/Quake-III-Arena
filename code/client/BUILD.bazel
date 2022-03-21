@@ -57,6 +57,7 @@ cc_library(
         "client.h",
         "keycodes.h",
     ],
+    defines = ["USE_VOIP"],
     visibility = [
         "//code/q3_ui:__pkg__",
         "//code/sdl:__pkg__",
