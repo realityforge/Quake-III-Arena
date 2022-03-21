@@ -82,13 +82,6 @@ void Spk_Printf (const char *text, ...)
 };
 #endif
 
-
-qboolean Sys_LowPhysicalMemory() {
-	MEMORYSTATUS stat;
-  GlobalMemoryStatus (&stat);
-	return (stat.dwTotalPhys <= MEM_THRESHOLD) ? qtrue : qfalse;
-}
-
 /*
 =============
 Sys_Error

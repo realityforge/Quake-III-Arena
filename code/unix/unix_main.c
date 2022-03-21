@@ -67,13 +67,6 @@ qboolean stdin_active = qtrue;
 // General routines
 // =======================================================================
 
-// bk001207 
-#define MEM_THRESHOLD 96*1024*1024
-
-qboolean Sys_LowPhysicalMemory() {
-  return qfalse;
-}
-
 #ifndef DEDICATED
 /*
 =================

@@ -1087,9 +1087,7 @@ Touch all images to make sure they are resident
 */
 void RE_EndRegistration( void ) {
     R_IssuePendingRenderCommands();
-	if (!Sys_LowPhysicalMemory()) {
-		RB_ShowImages();
-	}
+	RB_ShowImages();
 }
 
 

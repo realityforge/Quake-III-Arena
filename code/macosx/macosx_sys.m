@@ -217,9 +217,3 @@ void Sys_Print(const char *text)
     fputs(text, stdout);
 }
 
-#define MEM_THRESHOLD 96*1024*1024
-
-qboolean Sys_LowPhysicalMemory()
-{
-    return NSRealMemoryAvailable() <= MEM_THRESHOLD;
-}
