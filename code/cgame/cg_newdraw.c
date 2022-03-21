@@ -1734,15 +1734,6 @@ void CG_HideTeamMenu() {
   Menus_CloseByName("getMenu");
 }
 
-/*
-==================
-CG_EventHandling
-==================
- type 0 - no event handling
-      1 - team menu
-      2 - hud editor
-
-*/
 void CG_EventHandling(int type) {
 	cgs.eventHandling = type;
   if (type == CGAME_EVENT_NONE) {
