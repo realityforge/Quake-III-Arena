@@ -34,7 +34,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_interface.h"
 #include "be_aas_def.h"
 
-#define ENABLE_ALTROUTING
 //#define ALTROUTE_DEBUG
 
 typedef struct midrangearea_s
