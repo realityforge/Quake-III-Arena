@@ -97,7 +97,7 @@ void S_Base_SoundInfo(void) {
 		Com_Printf("%5d samplebits (%s)\n", dma.samplebits, dma.isfloat ? "float" : "int");
 		Com_Printf("%5d submission_chunk\n", dma.submission_chunk);
 		Com_Printf("%5d speed\n", dma.speed);
-		Com_Printf("%p dma buffer\n", dma.buffer);
+		Com_Printf("%p dma buffer\n", (void *)dma.buffer);
 		if ( s_backgroundStream ) {
 			Com_Printf("Background file: %s\n", s_backgroundLoop );
 		} else {
