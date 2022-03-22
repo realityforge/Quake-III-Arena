@@ -121,7 +121,6 @@ Makefile.local:
   BUILD_CLIENT         - build the 'ioquake3' client binary
   BUILD_BASEGAME       - build the 'baseq3' binaries
   BUILD_MISSIONPACK    - build the 'missionpack' binaries
-  BUILD_GAME_SO        - build the game shared libraries
   BUILD_GAME_QVM       - build the game qvms
   BUILD_STANDALONE     - build binaries suited for stand-alone games
   SERVERBIN            - rename 'ioq3ded' server binary
