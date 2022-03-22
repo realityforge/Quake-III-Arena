@@ -97,10 +97,10 @@ int main(int argc, char* argv[]) {
 			hasFocus = g_HasFocus;
 			if (!hasFocus && !Cvar_VariableValue ("cl_paused")) {
 				Com_QueueEvent( Sys_Milliseconds(), SE_KEY, K_ESCAPE, qtrue, 0, NULL );
-				Com_QueueEvent( Sys_Milliseconds(), SE_KEY, K_CONSOLE, qtrue, 0, NULL );
+				//Com_QueueEvent( Sys_Milliseconds(), SE_KEY, K_CONSOLE, qtrue, 0, NULL );
 				paused = true;
 			} else if (hasFocus && paused) {
-				Com_QueueEvent( Sys_Milliseconds(), SE_KEY, K_CONSOLE, qtrue, 0, NULL );
+				//Com_QueueEvent( Sys_Milliseconds(), SE_KEY, K_CONSOLE, qtrue, 0, NULL );
 				Com_QueueEvent( Sys_Milliseconds(), SE_KEY, K_ESCAPE, qtrue, 0, NULL );
 				paused = false;
 			}
