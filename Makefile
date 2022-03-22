@@ -57,7 +57,8 @@ ifeq ($(PLATFORM),mingw64)
 endif
 
 ifeq ($(COMPILE_ARCH),i86pc)
-  COMPILE_ARCH=x86
+	echo "Building on 32-bit platforms is not supported"
+	exit 2
 endif
 
 ifeq ($(COMPILE_ARCH),amd64)
@@ -65,6 +66,11 @@ ifeq ($(COMPILE_ARCH),amd64)
 endif
 ifeq ($(COMPILE_ARCH),x64)
   COMPILE_ARCH=x86_64
+endif
+
+ifeq ($(ARCH),x86)
+	echo "Building for 32-bit platforms is not supported"
+	exit 2
 endif
 
 ifndef ARCH
@@ -283,11 +289,6 @@ ifneq (,$(findstring "$(PLATFORM)", "linux" "gnu"))
   OPTIMIZEVM = -O3
   OPTIMIZE = $(OPTIMIZEVM) -ffast-math
 
-  ifeq ($(ARCH),x86)
-    OPTIMIZEVM = -O3 -march=i586
-    OPTIMIZE = $(OPTIMIZEVM) -ffast-math
-  endif
-
   SHLIBEXT=so
   SHLIBCFLAGS=-fPIC -fvisibility=hidden
   SHLIBLDFLAGS=-shared $(LDFLAGS)
@@ -312,12 +313,6 @@ ifneq (,$(findstring "$(PLATFORM)", "linux" "gnu"))
     ifneq ($(USE_CURL_DLOPEN),1)
       CLIENT_LIBS += $(CURL_LIBS)
     endif
-  endif
-
-  ifeq ($(ARCH),x86)
-    # linux32 make ...
-    BASE_CFLAGS += -m32
-  else
   endif
 else # ifeq Linux
 
@@ -354,16 +349,6 @@ ifeq ($(PLATFORM),darwin)
                  -DMAC_OS_X_VERSION_MIN_REQUIRED=$(MAC_OS_X_VERSION_MIN_REQUIRED)
 
   MACOSX_ARCH=$(ARCH)
-  ifeq ($(ARCH),x86)
-    MACOSX_ARCH=i386
-  endif
-
-  ifeq ($(ARCH),x86)
-    OPTIMIZEVM += -march=prescott -mfpmath=sse
-    # x86 vm will crash without -mstackrealign since MMX instructions will be
-    # used no matter what and they corrupt the frame pointer in VM calls
-    BASE_CFLAGS += -arch i386 -m32 -mstackrealign
-  endif
   ifeq ($(ARCH),x86_64)
     OPTIMIZEVM += -mfpmath=sse
     BASE_CFLAGS += -arch x86_64
@@ -530,10 +515,6 @@ ifdef MINGW
     OPTIMIZEVM = -O3
     OPTIMIZE = $(OPTIMIZEVM) -ffast-math
   endif
-  ifeq ($(ARCH),x86)
-    OPTIMIZEVM = -O3 -march=i586
-    OPTIMIZE = $(OPTIMIZEVM) -ffast-math
-  endif
 
   SHLIBEXT=dll
   SHLIBCFLAGS=
@@ -553,9 +534,6 @@ ifdef MINGW
     # host architecture that we're running under (as tools run on the host)
     ifeq ($(COMPILE_ARCH),x86_64)
       TOOLS_MINGW_PREFIXES=x86_64-w64-mingw32 amd64-mingw32msvc
-    endif
-    ifeq ($(COMPILE_ARCH),x86)
-      TOOLS_MINGW_PREFIXES=i686-w64-mingw32 i586-mingw32msvc i686-pc-mingw32
     endif
 
     TOOLS_CC=$(firstword $(strip $(foreach TOOLS_MINGW_PREFIX, $(TOOLS_MINGW_PREFIXES), \
@@ -591,12 +569,7 @@ ifdef MINGW
     endif
   endif
 
-  ifeq ($(ARCH),x86)
-    # build 32bit
-    BASE_CFLAGS += -m32
-  else
-    BASE_CFLAGS += -m64
-  endif
+  BASE_CFLAGS += -m64
 
   # libmingw32 must be linked before libSDLmain
   CLIENT_LIBS += -lmingw32
@@ -604,21 +577,12 @@ ifdef MINGW
 
   ifeq ($(USE_LOCAL_HEADERS),1)
     CLIENT_CFLAGS += -I$(SDLHDIR)/include
-    ifeq ($(ARCH),x86)
-    CLIENT_LIBS += $(SDLLIBSDIR)/win32/libSDL2main.a \
-                      $(SDLLIBSDIR)/win32/libSDL2.dll.a
-    RENDERER_LIBS += $(SDLLIBSDIR)/win32/libSDL2main.a \
-                      $(SDLLIBSDIR)/win32/libSDL2.dll.a
-    SDLDLL=SDL2.dll
-    CLIENT_EXTRA_FILES += $(SDLLIBSDIR)/win32/SDL2.dll
-    else
     CLIENT_LIBS += $(SDLLIBSDIR)/win64/libSDL264main.a \
                       $(SDLLIBSDIR)/win64/libSDL264.dll.a
     RENDERER_LIBS += $(SDLLIBSDIR)/win64/libSDL264main.a \
                       $(SDLLIBSDIR)/win64/libSDL264.dll.a
     SDLDLL=SDL264.dll
     CLIENT_EXTRA_FILES += $(SDLLIBSDIR)/win64/SDL264.dll
-    endif
   else
     CLIENT_CFLAGS += $(SDL_CFLAGS)
     CLIENT_LIBS += $(SDL_LIBS)
@@ -1324,13 +1288,6 @@ JPGOBJ = \
 	$(B)/renderergl1/jquant2.o \
 	$(B)/renderergl1/jutils.o
 
-ifeq ($(ARCH),x86)
-  Q3OBJ += \
-    $(B)/client/snd_mixa.o \
-    $(B)/client/matha.o \
-    $(B)/client/snapvector.o \
-    $(B)/client/ftola.o
-endif
 ifeq ($(ARCH),x86_64)
   Q3OBJ += \
     $(B)/client/snapvector.o \
@@ -1653,12 +1610,6 @@ Q3DOBJ = \
   $(B)/ded/con_log.o \
   $(B)/ded/sys_main.o
 
-ifeq ($(ARCH),x86)
-  Q3DOBJ += \
-      $(B)/ded/matha.o \
-      $(B)/ded/snapvector.o \
-      $(B)/ded/ftola.o
-endif
 ifeq ($(ARCH),x86_64)
   Q3DOBJ += \
       $(B)/ded/snapvector.o \

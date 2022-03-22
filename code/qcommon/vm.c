@@ -262,7 +262,6 @@ Dlls will call this directly
 ============
 */
 intptr_t QDECL VM_DllSyscall( intptr_t arg, ... ) {
-#if !id386 || defined __clang__
   // rcg010206 - see commentary above
   intptr_t args[MAX_VMSYSCALL_ARGS];
   int i;
@@ -276,9 +275,6 @@ intptr_t QDECL VM_DllSyscall( intptr_t arg, ... ) {
   va_end(ap);
   
   return currentVM->systemCall( args );
-#else // original id code
-	return currentVM->systemCall( &arg );
-#endif
 }
 
 
@@ -730,9 +726,6 @@ intptr_t QDECL VM_Call( vm_t *vm, int callnum, ... )
                             args[4],  args[5],  args[6], args[7],
                             args[8],  args[9], args[10], args[11]);
 	} else {
-#if ( id386 ) && !defined __clang__ // calling convention doesn't need conversion in some cases
-        r = VM_CallInterpreted( vm, (int*)&callnum );
-#else
 		struct {
 			int callnum;
 			int args[MAX_VMMAIN_ARGS-1];
@@ -746,7 +739,6 @@ intptr_t QDECL VM_Call( vm_t *vm, int callnum, ... )
 		}
 		va_end(ap);
         r = VM_CallInterpreted( vm, &a.callnum );
-#endif
 	}
 	--vm->callLevel;
 

@@ -26,18 +26,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // this is for determining if we have an asm version of a C function
 #define idx64 0
 
-#ifdef Q3_VM
-
-#define id386 0
-
-#else
-
+#ifndef Q3_VM
 #if (defined _M_IX86 || defined __i386__) && !defined(C_ONLY)
-#define id386 1
-#else
-#define id386 0
+#error "32-bit platforms are not supported"
 #endif
-
 #endif
 
 #ifndef __ASM_I386__ // don't include the C bits if included from qasm.h
@@ -70,33 +62,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #if defined( __WIN64__ ) 
 #define ARCH_STRING "x86_64"
-#elif defined _M_ALPHA
-#define ARCH_STRING "AXP"
-#endif
-
-#define Q3_LITTLE_ENDIAN
-
-#define DLL_EXT ".dll"
-
-#elif defined(_WIN32) || defined(__WIN32__)
-
-#undef QDECL
-#define QDECL __cdecl
-
-#undef QCALL
-#define QCALL __stdcall
-
-#if defined( _MSC_VER )
-#define OS_STRING "win_msvc"
-#elif defined __MINGW32__
-#define OS_STRING "win_mingw"
-#endif
-
-#define ID_INLINE __inline
-#define PATH_SEP '\\'
-
-#if defined( _M_IX86 ) || defined( __i386__ )
-#define ARCH_STRING "x86"
 #elif defined _M_ALPHA
 #define ARCH_STRING "AXP"
 #endif
