@@ -13,7 +13,6 @@ cc_library(
         "ui_gameinfo.c",
         "ui_ingame.c",
         "ui_local.h",
-        #        "ui_login.c",
         "ui_main.c",
         "ui_menu.c",
         "ui_mfield.c",
