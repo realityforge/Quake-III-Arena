@@ -98,12 +98,8 @@ cc_library(
         "con_log.c",
         "sys_main.c",
     ],
-    hdrs = [
-        "sys_loadlib.h",
-    ],
-    defines = [
-        "DEDICATED",
-    ],
+    hdrs = ["sys_loadlib.h"],
+    defines = ["DEDICATED"],
     deps = [
         ":sys_local-dedicated",
         "//code/qcommon",
