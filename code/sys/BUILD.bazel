@@ -30,6 +30,25 @@ cc_library(
     ],
 )
 
+cc_library(
+    name = "sys_unix-dedicated",
+    srcs = ["sys_unix.c"],
+    defines = ["DEDICATED"],
+    deps = [
+        ":sys_local-dedicated",
+        "//code/qcommon",
+    ],
+)
+
+cc_library(
+    name = "sys_unix",
+    srcs = ["sys_unix.c"],
+    deps = [
+        ":sys_local",
+        "//code/qcommon",
+    ],
+)
+
 objc_library(
     name = "sys_osx",
     non_arc_srcs = [
