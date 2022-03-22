@@ -239,7 +239,6 @@ typedef enum {
 	BOTLIB_START_FRAME,
 	BOTLIB_LOAD_MAP,
 	BOTLIB_UPDATENTITY,
-	BOTLIB_TEST,
 
 	BOTLIB_GET_SNAPSHOT_ENTITY,		// ( int client, int ent );
 	BOTLIB_GET_CONSOLE_MESSAGE,		// ( int client, char *message, int size );

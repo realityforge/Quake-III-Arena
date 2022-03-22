@@ -257,7 +257,6 @@ typedef enum {
 #define	EF_AWARD_IMPRESSIVE	0x00008000		// draw an impressive sprite
 #define	EF_AWARD_DEFEND		0x00010000		// draw a defend sprite
 #define	EF_AWARD_ASSIST		0x00020000		// draw a assist sprite
-#define EF_AWARD_DENIED		0x00040000		// denied
 #define EF_TEAMVOTED		0x00080000		// already cast a team vote
 
 // NOTE: may not have more than 16
@@ -655,12 +654,9 @@ qboolean	BG_CanItemBeGrabbed( int gametype, const entityState_t *ent, const play
 #define	DF_NO_FOOTSTEPS			32
 
 // content masks
-#define	MASK_ALL				(-1)
 #define	MASK_SOLID				(CONTENTS_SOLID)
 #define	MASK_PLAYERSOLID		(CONTENTS_SOLID|CONTENTS_PLAYERCLIP|CONTENTS_BODY)
-#define	MASK_DEADSOLID			(CONTENTS_SOLID|CONTENTS_PLAYERCLIP)
 #define	MASK_WATER				(CONTENTS_WATER|CONTENTS_LAVA|CONTENTS_SLIME)
-#define	MASK_OPAQUE				(CONTENTS_SOLID|CONTENTS_SLIME|CONTENTS_LAVA)
 #define	MASK_SHOT				(CONTENTS_SOLID|CONTENTS_BODY|CONTENTS_CORPSE)
 
 

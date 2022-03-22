@@ -234,10 +234,6 @@ void	trap_R_AddPolyToScene( qhandle_t hShader , int numVerts, const polyVert_t *
 	syscall( CG_R_ADDPOLYTOSCENE, hShader, numVerts, verts );
 }
 
-int		trap_R_LightForPoint( vec3_t point, vec3_t ambientLight, vec3_t directedLight, vec3_t lightDir ) {
-	return syscall( CG_R_LIGHTFORPOINT, point, ambientLight, directedLight, lightDir );
-}
-
 void	trap_R_AddLightToScene( const vec3_t org, float intensity, float r, float g, float b ) {
 	syscall( CG_R_ADDLIGHTTOSCENE, org, PASSFLOAT(intensity), PASSFLOAT(r), PASSFLOAT(g), PASSFLOAT(b) );
 }

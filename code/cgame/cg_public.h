@@ -162,8 +162,6 @@ typedef enum {
 	CG_SQRT,
 	CG_FLOOR,
 	CG_CEIL,
-	CG_TESTPRINTINT,
-	CG_TESTPRINTFLOAT,
 	CG_ACOS
 } cgameImport_t;
 

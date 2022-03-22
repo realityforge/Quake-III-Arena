@@ -86,7 +86,6 @@ void AAS_ClearShownDebugLines(void)
 	{
 		if (debuglines[i])
 		{
-			//botimport.DebugLineShow(debuglines[i], NULL, NULL, LINECOLOR_NONE);
 			botimport.DebugLineDelete(debuglines[i]);
 			debuglines[i] = 0;
 			debuglinevisible[i] = qfalse;

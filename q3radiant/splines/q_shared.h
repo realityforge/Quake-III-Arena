@@ -391,7 +391,6 @@ extern	vec4_t		colorMdGrey;
 extern vec4_t	g_color_table[8];
 
 #define	MAKERGB( v, r, g, b ) v[0]=r;v[1]=g;v[2]=b
-#define	MAKERGBA( v, r, g, b, a ) v[0]=r;v[1]=g;v[2]=b;v[3]=a
 
 #define DEG2RAD( a ) ( ( (a) * M_PI ) / 180.0F )
 #define RAD2DEG( a ) ( ( (a) * 180.0f ) / M_PI )

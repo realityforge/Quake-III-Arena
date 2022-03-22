@@ -55,8 +55,7 @@ typedef struct particle_s
 
 	float		startfade;
 	qboolean	rotate;
-	int			snum;
-	
+
 	qboolean	link;
 
 	// Ridah
