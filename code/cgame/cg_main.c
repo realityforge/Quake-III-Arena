@@ -165,9 +165,7 @@ vmCvar_t	cg_hudFiles;
 vmCvar_t 	cg_scorePlum;
 vmCvar_t 	cg_smoothClients;
 vmCvar_t	pmove_fixed;
-//vmCvar_t	cg_pmove_fixed;
 vmCvar_t	pmove_msec;
-vmCvar_t	cg_pmove_msec;
 vmCvar_t	cg_cameraMode;
 vmCvar_t	cg_cameraOrbit;
 vmCvar_t	cg_cameraOrbitDelay;
@@ -1074,21 +1072,7 @@ static void CG_RegisterGraphics( void ) {
 
 #endif
 	CG_ClearParticles ();
-/*
-	for (i=1; i<MAX_PARTICLES_AREAS; i++)
-	{
-		{
-			int rval;
-
-			rval = CG_NewParticleArea ( CS_PARTICLES + i);
-			if (!rval)
-				break;
-		}
-	}
-*/
 }
-
-
 
 /*																																			
 =======================

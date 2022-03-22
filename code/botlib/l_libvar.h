@@ -51,8 +51,4 @@ float LibVarValue(char *var_name, char *value);
 char *LibVarString(char *var_name, char *value);
 //sets the library variable
 void LibVarSet(char *var_name, char *value);
-//returns true if the library variable has been modified
-qboolean LibVarChanged(char *var_name);
-//sets the library variable to unmodified
-void LibVarSetNotModified(char *var_name);
 

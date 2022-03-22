@@ -150,13 +150,6 @@ void CrossProduct (const vec3_t v1, const vec3_t v2, vec3_t cross)
 	cross[2] = v1[0]*v2[1] - v1[1]*v2[0];
 }
 
-void _VectorMA (vec3_t va, double scale, vec3_t vb, vec3_t vc)
-{
-	vc[0] = va[0] + scale*vb[0];
-	vc[1] = va[1] + scale*vb[1];
-	vc[2] = va[2] + scale*vb[2];
-}
-
 vec_t VectorNormalize(vec3_t inout)
 {
 	vec_t	length, ilength;

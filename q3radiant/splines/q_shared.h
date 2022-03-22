@@ -459,9 +459,6 @@ void Vector5Add( const idVec5_t &va, const idVec5_t &vb, idVec5_t &out);
 void VectorRotate3( vec3_c vIn, vec3_c vRotation, vec3_p out);
 void VectorRotate3Origin(vec3_c vIn, vec3_c vRotation, vec3_c vOrigin, vec3_p out);
 
-
-int Q_log2(int val);
-
 int		Q_rand( int *seed );
 float	Q_random( int *seed );
 float	Q_crandom( int *seed );
@@ -487,7 +484,6 @@ void	AnglesSubtract( angles_c v1, angles_c v2, angles_p v3 );
 
 float AngleNormalize360 ( float angle );
 float AngleNormalize180 ( float angle );
-float AngleDelta ( float angle1, float angle2 );
 
 qboolean PlaneFromPoints( vec4_t &plane, vec3_c a, vec3_c b, vec3_c c );
 void ProjectPointOnPlane( vec3_p dst, vec3_c p, vec3_c normal );

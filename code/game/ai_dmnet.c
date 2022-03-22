@@ -187,17 +187,6 @@ int BotReachedGoal(bot_state_t *bs, bot_goal_t *goal) {
 		}
 		//if the goal isn't there
 		if (trap_BotItemGoalInVisButNotVisible(bs->entitynum, bs->eye, bs->viewangles, goal)) {
-			/*
-			float avoidtime;
-			int t;
-
-			avoidtime = trap_BotAvoidGoalTime(bs->gs, goal->number);
-			if (avoidtime > 0) {
-				t = trap_AAS_AreaTravelTimeToGoalArea(bs->areanum, bs->origin, goal->areanum, bs->tfl);
-				if ((float) t * 0.009 < avoidtime)
-					return qtrue;
-			}
-			*/
 			return qtrue;
 		}
 		//if in the goal area and below or above the goal and not swimming

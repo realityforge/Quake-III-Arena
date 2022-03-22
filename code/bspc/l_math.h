@@ -68,7 +68,6 @@ qboolean VectorCompare (vec3_t v1, vec3_t v2);
 #define	VectorMA(v, s, b, o)	((o)[0]=(v)[0]+(b)[0]*(s),(o)[1]=(v)[1]+(b)[1]*(s),(o)[2]=(v)[2]+(b)[2]*(s))
 
 vec_t Q_rint (vec_t in);
-void _VectorMA(vec3_t va, double scale, vec3_t vb, vec3_t vc);
 
 double VectorLength(vec3_t v);
 void CrossProduct(const vec3_t v1, const vec3_t v2, vec3_t cross);

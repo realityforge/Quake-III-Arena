@@ -250,16 +250,6 @@ void ByteToDir( int b, vec3_t dir ) {
 }
 
 
-unsigned ColorBytes3 (float r, float g, float b) {
-	unsigned	i;
-
-	( (byte *)&i )[0] = r * 255;
-	( (byte *)&i )[1] = g * 255;
-	( (byte *)&i )[2] = b * 255;
-
-	return i;
-}
-
 unsigned ColorBytes4 (float r, float g, float b, float a) {
 	unsigned	i;
 
@@ -627,22 +617,6 @@ float AngleNormalize180 ( float angle ) {
 	}
 	return angle;
 }
-
-
-/*
-=================
-AngleDelta
-
-returns the normalized delta from angle1 to angle2
-=================
-*/
-float AngleDelta ( float angle1, float angle2 ) {
-	return AngleNormalize180( angle1 - angle2 );
-}
-
-
-//============================================================
-
 
 void SetPlaneSignbits (cplane_t *out) {
 	int	bits, j;
@@ -1088,38 +1062,6 @@ vec_t VectorNormalize2( const vec3_t v, vec3_t out) {
 	return length;
 
 }
-
-void _VectorMA( const vec3_t veca, float scale, const vec3_t vecb, vec3_t vecc) {
-	vecc[0] = veca[0] + scale*vecb[0];
-	vecc[1] = veca[1] + scale*vecb[1];
-	vecc[2] = veca[2] + scale*vecb[2];
-}
-
-int Q_log2( int val ) {
-	int answer;
-
-	answer = 0;
-	while ( ( val>>=1 ) != 0 ) {
-		answer++;
-	}
-	return answer;
-}
-
-
-
-/*
-int	PlaneTypeForNormal (vec3_t normal) {
-	if ( normal[0] == 1.0 )
-		return PLANE_X;
-	if ( normal[1] == 1.0 )
-		return PLANE_Y;
-	if ( normal[2] == 1.0 )
-		return PLANE_Z;
-	
-	return PLANE_NON_AXIAL;
-}
-*/
-
 
 void MatrixMultiply(float in1[3][3], float in2[3][3], float out[3][3]) {
 	out[0][0] = in1[0][0] * in2[0][0] + in1[0][1] * in2[1][0] +

@@ -624,23 +624,6 @@ void RemoveTournamentLoser( void ) {
 	SetTeam( &g_entities[ clientNum ], "s" );
 }
 
-void RemoveTournamentWinner( void ) {
-	int			clientNum;
-
-	if ( level.numPlayingClients != 2 ) {
-		return;
-	}
-
-	clientNum = level.sortedClients[0];
-
-	if ( level.clients[ clientNum ].pers.connected != CON_CONNECTED ) {
-		return;
-	}
-
-	// make them a spectator
-	SetTeam( &g_entities[ clientNum ], "s" );
-}
-
 void AdjustTournamentScores( void ) {
 	int			clientNum;
 
@@ -1613,8 +1596,6 @@ Advances the non-player objects in the world
 void G_RunFrame( int levelTime ) {
 	int			i;
 	gentity_t	*ent;
-	int			msec;
-int start, end;
 
 	// if we are waiting for the level to restart, do nothing
 	if ( level.restarted ) {

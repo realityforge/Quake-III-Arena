@@ -329,38 +329,6 @@ void BotReportStatus(bot_state_t *bs) {
 	}
 }
 
-void BotTeamplayReport(void) {
-	int i;
-	char buf[MAX_INFO_STRING];
-
-	BotAI_Print(PRT_MESSAGE, S_COLOR_RED"RED\n");
-	for (i = 0; i < maxclients && i < MAX_CLIENTS; i++) {
-		//
-		if ( !botstates[i] || !botstates[i]->inuse ) continue;
-		//
-		trap_GetConfigstring(CS_PLAYERS+i, buf, sizeof(buf));
-		//if no config string or no name
-		if (!strlen(buf) || !strlen(Info_ValueForKey(buf, "n"))) continue;
-		//skip spectators
-		if (atoi(Info_ValueForKey(buf, "t")) == TEAM_RED) {
-			BotReportStatus(botstates[i]);
-		}
-	}
-	BotAI_Print(PRT_MESSAGE, S_COLOR_BLUE"BLUE\n");
-	for (i = 0; i < maxclients && i < MAX_CLIENTS; i++) {
-		//
-		if ( !botstates[i] || !botstates[i]->inuse ) continue;
-		//
-		trap_GetConfigstring(CS_PLAYERS+i, buf, sizeof(buf));
-		//if no config string or no name
-		if (!strlen(buf) || !strlen(Info_ValueForKey(buf, "n"))) continue;
-		//skip spectators
-		if (atoi(Info_ValueForKey(buf, "t")) == TEAM_BLUE) {
-			BotReportStatus(botstates[i]);
-		}
-	}
-}
-
 void BotSetInfoConfigString(bot_state_t *bs) {
 	char goalname[MAX_MESSAGE_SIZE];
 	char netname[MAX_MESSAGE_SIZE];
@@ -1227,8 +1195,6 @@ int BotAIStartFrame(int time) {
 	trap_Cvar_Update(&bot_report);
 
 	if (bot_report.integer) {
-//		BotTeamplayReport();
-//		trap_Cvar_Set("bot_report", "0");
 		BotUpdateInfoConfigStrings();
 	}
 

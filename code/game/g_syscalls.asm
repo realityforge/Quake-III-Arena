@@ -42,7 +42,6 @@ equ trap_DebugPolygonCreate	-40
 equ trap_DebugPolygonDelete	-41
 equ trap_RealTime			-42
 equ trap_SnapVector			-43
-equ trap_EntityContactCapsule	-45
 
 equ	memset					-101
 equ	memcpy					-102
@@ -53,10 +52,6 @@ equ	atan2					-106
 equ	sqrt					-107
 equ floor					-111
 equ	ceil					-112
-equ	testPrintInt			-113
-equ	testPrintFloat			-114
-
-
 
 equ trap_BotLibSetup					-201
 equ trap_BotLibShutdown					-202
@@ -98,9 +93,6 @@ equ trap_AAS_AreaTravelTimeToGoalArea	-317
 equ trap_AAS_Swimming					-318
 equ trap_AAS_PredictClientMovement		-319
 
-
-
-equ trap_EA_Say							-401
 equ trap_EA_SayTeam						-402
 equ trap_EA_Command						-403
 
@@ -134,9 +126,7 @@ equ trap_BotNextConsoleMessage			-512
 equ trap_BotNumConsoleMessages			-513
 equ trap_BotInitialChat					-514
 equ trap_BotReplyChat					-515
-equ trap_BotChatLength					-516
 equ trap_BotEnterChat					-517
-equ trap_StringContains					-518
 equ trap_BotFindMatch					-519
 equ trap_BotMatchVariable				-520
 equ trap_UnifyWhiteSpaces				-521
@@ -160,11 +150,8 @@ equ trap_BotChooseNBGItem				-537
 equ trap_BotTouchingGoal				-538
 equ trap_BotItemGoalInVisButNotVisible	-539
 equ trap_BotGetLevelItemGoal			-540
-equ trap_BotAvoidGoalTime				-541
-equ trap_BotInitLevelItems				-542
 equ trap_BotUpdateEntityItems			-543
 equ trap_BotLoadItemWeights				-544
-equ trap_BotFreeItemWeights				-546
 equ trap_BotSaveGoalFuzzyLogic			-546
 equ trap_BotAllocGoalState				-547
 equ trap_BotFreeGoalState				-548
@@ -174,7 +161,6 @@ equ trap_BotMoveToGoal					-550
 equ trap_BotMoveInDirection				-551
 equ trap_BotResetAvoidReach				-552
 equ trap_BotResetLastAvoidReach			-553
-equ trap_BotReachabilityArea			-554
 equ trap_BotMovementViewTarget			-555
 equ trap_BotAllocMoveState				-556
 equ trap_BotFreeMoveState				-557
@@ -190,7 +176,6 @@ equ trap_GeneticParentsAndChildSelection -565
 equ trap_BotInterbreedGoalFuzzyLogic	-566
 equ trap_BotMutateGoalFuzzyLogic		-567
 equ trap_BotGetNextCampSpotGoal			-568
-equ trap_BotGetMapLocationGoal			-569
 equ trap_BotNumInitialChats				-570
 equ trap_BotGetChatMessage				-571
 equ trap_BotRemoveFromAvoidGoals		-572

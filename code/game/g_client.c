@@ -88,70 +88,7 @@ qboolean SpotWouldTelefrag( gentity_t *spot ) {
 	return qfalse;
 }
 
-/*
-================
-SelectNearestDeathmatchSpawnPoint
-
-Find the spot that we DON'T want to use
-================
-*/
 #define	MAX_SPAWN_POINTS	128
-gentity_t *SelectNearestDeathmatchSpawnPoint( vec3_t from ) {
-	gentity_t	*spot;
-	vec3_t		delta;
-	float		dist, nearestDist;
-	gentity_t	*nearestSpot;
-
-	nearestDist = 999999;
-	nearestSpot = NULL;
-	spot = NULL;
-
-	while ((spot = G_Find (spot, FOFS(classname), "info_player_deathmatch")) != NULL) {
-
-		VectorSubtract( spot->s.origin, from, delta );
-		dist = VectorLength( delta );
-		if ( dist < nearestDist ) {
-			nearestDist = dist;
-			nearestSpot = spot;
-		}
-	}
-
-	return nearestSpot;
-}
-
-
-/*
-================
-SelectRandomDeathmatchSpawnPoint
-
-go to a random point that doesn't telefrag
-================
-*/
-#define	MAX_SPAWN_POINTS	128
-gentity_t *SelectRandomDeathmatchSpawnPoint( void ) {
-	gentity_t	*spot;
-	int			count;
-	int			selection;
-	gentity_t	*spots[MAX_SPAWN_POINTS];
-
-	count = 0;
-	spot = NULL;
-
-	while ((spot = G_Find (spot, FOFS(classname), "info_player_deathmatch")) != NULL) {
-		if ( SpotWouldTelefrag( spot ) ) {
-			continue;
-		}
-		spots[ count ] = spot;
-		count++;
-	}
-
-	if ( !count ) {	// no spots that won't telefrag
-		return G_Find( NULL, FOFS(classname), "info_player_deathmatch");
-	}
-
-	selection = rand() % count;
-	return spots[ selection ];
-}
 
 /*
 ===========
@@ -228,34 +165,6 @@ Chooses a player start, deathmatch start, etc
 */
 gentity_t *SelectSpawnPoint ( vec3_t avoidPoint, vec3_t origin, vec3_t angles ) {
 	return SelectRandomFurthestSpawnPoint( avoidPoint, origin, angles );
-
-	/*
-	gentity_t	*spot;
-	gentity_t	*nearestSpot;
-
-	nearestSpot = SelectNearestDeathmatchSpawnPoint( avoidPoint );
-
-	spot = SelectRandomDeathmatchSpawnPoint ( );
-	if ( spot == nearestSpot ) {
-		// roll again if it would be real close to point of death
-		spot = SelectRandomDeathmatchSpawnPoint ( );
-		if ( spot == nearestSpot ) {
-			// last try
-			spot = SelectRandomDeathmatchSpawnPoint ( );
-		}		
-	}
-
-	// find a single player start spot
-	if (!spot) {
-		G_Error( "Couldn't find a spawn point" );
-	}
-
-	VectorCopy (spot->s.origin, origin);
-	origin[2] += 9;
-	VectorCopy (spot->s.angles, angles);
-
-	return spot;
-	*/
 }
 
 /*

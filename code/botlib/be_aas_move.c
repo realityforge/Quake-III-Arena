@@ -188,26 +188,7 @@ int AAS_Swimming(vec3_t origin)
 	if (AAS_PointContents(testorg) & (CONTENTS_LAVA|CONTENTS_SLIME|CONTENTS_WATER)) return qtrue;
 	return qfalse;
 }
-static vec3_t VEC_UP			= {0, -1,  0};
-static vec3_t MOVEDIR_UP		= {0,  0,  1};
-static vec3_t VEC_DOWN		= {0, -2,  0};
-static vec3_t MOVEDIR_DOWN	= {0,  0, -1};
 
-void AAS_SetMovedir(vec3_t angles, vec3_t movedir)
-{
-	if (VectorCompare(angles, VEC_UP))
-	{
-		VectorCopy(MOVEDIR_UP, movedir);
-	}
-	else if (VectorCompare(angles, VEC_DOWN))
-	{
-		VectorCopy(MOVEDIR_DOWN, movedir);
-	}
-	else
-	{
-		AngleVectors(angles, movedir, NULL, NULL);
-	}
-}
 void AAS_JumpReachRunStart(aas_reachability_t *reach, vec3_t runstart)
 {
 	vec3_t hordir, start, cmdmove;

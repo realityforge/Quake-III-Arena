@@ -218,8 +218,6 @@ void BotSaveGoalFuzzyLogic(int goalstate, char *filename)
 	bot_goalstate_t *gs;
 
 	gs = BotGoalStateFromHandle(goalstate);
-
-	//WriteWeightConfig(filename, gs->itemweightconfig);
 }
 void BotMutateGoalFuzzyLogic(int goalstate, float range)
 {
@@ -809,41 +807,6 @@ int BotGetNextCampSpotGoal(int num, bot_goal_t *goal)
 	}
 	return 0;
 }
-void BotFindEntityForLevelItem(levelitem_t *li)
-{
-	int ent, modelindex;
-	itemconfig_t *ic;
-	aas_entityinfo_t entinfo;
-	vec3_t dir;
-
-	ic = itemconfig;
-	if (!itemconfig) return;
-	for (ent = AAS_NextEntity(0); ent; ent = AAS_NextEntity(ent))
-	{
-		//get the model index of the entity
-		modelindex = AAS_EntityModelindex(ent);
-		//
-		if (!modelindex) continue;
-		//get info about the entity
-		AAS_EntityInfo(ent, &entinfo);
-		//if the entity is still moving
-		if (entinfo.origin[0] != entinfo.lastvisorigin[0] ||
-				entinfo.origin[1] != entinfo.lastvisorigin[1] ||
-				entinfo.origin[2] != entinfo.lastvisorigin[2]) continue;
-		//
-		if (ic->iteminfo[li->iteminfo].modelindex == modelindex)
-		{
-			//check if the entity is very close
-			VectorSubtract(li->origin, entinfo.origin, dir);
-			if (VectorLength(dir) < 30)
-			{
-				//found an entity for this level item
-				li->entitynum = ent;
-			}
-		}
-	}
-}
-
 //NOTE: enum entityType_t in bg_public.h
 #define ET_ITEM			2
 
@@ -1005,14 +968,6 @@ void BotUpdateEntityItems(void)
 		AddLevelItemToList(li);
 		//botimport.Print(PRT_MESSAGE, "found new level item %s\n", ic->iteminfo[i].classname);
 	}
-	/*
-	for (li = levelitems; li; li = li->next)
-	{
-		if (!li->entitynum)
-		{
-			BotFindEntityForLevelItem(li);
-		}
-	}*/
 }
 void BotDumpGoalStack(int goalstate)
 {
@@ -1185,28 +1140,6 @@ int BotChooseLTGItem(int goalstate, vec3_t origin, int *inventory, int travelfla
 	//if no goal item found
 	if (!bestitem)
 	{
-		/*
-		//if not in lava or slime
-		if (!AAS_AreaLava(areanum) && !AAS_AreaSlime(areanum))
-		{
-			if (AAS_RandomGoalArea(areanum, travelflags, &goal.areanum, goal.origin))
-			{
-				VectorSet(goal.mins, -15, -15, -15);
-				VectorSet(goal.maxs, 15, 15, 15);
-				goal.entitynum = 0;
-				goal.number = 0;
-				goal.flags = GFL_ROAM;
-				goal.iteminfo = 0;
-				//push the goal on the stack
-				BotPushGoal(goalstate, &goal);
-				//
-#ifdef DEBUG
-				botimport.Print(PRT_MESSAGE, "chosen roam goal area %d\n", goal.areanum);
-#endif //DEBUG
-				return qtrue;
-			}
-		}
-		*/
 		return qfalse;
 	}
 	//create a bot goal for this item

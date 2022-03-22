@@ -489,9 +489,7 @@ typedef struct {
 #define Vector4Copy(a,b)		((b)[0]=(a)[0],(b)[1]=(a)[1],(b)[2]=(a)[2],(b)[3]=(a)[3])
 
 #define	SnapVector(v) {v[0]=((int)(v[0]));v[1]=((int)(v[1]));v[2]=((int)(v[2]));}
-void _VectorMA( const vec3_t veca, float scale, const vec3_t vecb, vec3_t vecc );
 
-unsigned ColorBytes3 (float r, float g, float b);
 unsigned ColorBytes4 (float r, float g, float b, float a);
 
 float NormalizeColor( const vec3_t in, vec3_t out );
@@ -577,7 +575,6 @@ void CrossProduct( const vec3_t v1, const vec3_t v2, vec3_t cross );
 vec_t VectorNormalize (vec3_t v);		// returns vector length
 vec_t VectorNormalize2( const vec3_t v, vec3_t out );
 void VectorRotate( vec3_t in, vec3_t matrix[3], vec3_t out );
-int Q_log2(int val);
 
 float Q_acos(float c);
 
@@ -604,7 +601,6 @@ void	AnglesSubtract( vec3_t v1, vec3_t v2, vec3_t v3 );
 
 float AngleNormalize360 ( float angle );
 float AngleNormalize180 ( float angle );
-float AngleDelta ( float angle1, float angle2 );
 
 qboolean PlaneFromPoints( vec4_t plane, const vec3_t a, const vec3_t b, const vec3_t c );
 void ProjectPointOnPlane( vec3_t dst, const vec3_t p, const vec3_t normal );

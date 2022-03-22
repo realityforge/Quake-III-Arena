@@ -550,21 +550,6 @@ void ScaleFuzzySeperator_r(fuzzyseperator_t *fs, float scale)
 	}
 	if (fs->next) ScaleFuzzySeperator_r(fs->next, scale);
 }
-void ScaleWeight(weightconfig_t *config, char *name, float scale)
-{
-	int i;
-
-	if (scale < 0) scale = 0;
-	else if (scale > 1) scale = 1;
-	for (i = 0; i < config->numweights; i++)
-	{
-		if (!strcmp(name, config->weights[i].name))
-		{
-			ScaleFuzzySeperator_r(config->weights[i].firstseperator, scale);
-			break;
-		}
-	}
-}
 void ScaleFuzzySeperatorBalanceRange_r(fuzzyseperator_t *fs, float scale)
 {
 	if (fs->child)
@@ -583,17 +568,6 @@ void ScaleFuzzySeperatorBalanceRange_r(fuzzyseperator_t *fs, float scale)
 		}
 	}
 	if (fs->next) ScaleFuzzySeperatorBalanceRange_r(fs->next, scale);
-}
-void ScaleFuzzyBalanceRange(weightconfig_t *config, float scale)
-{
-	int i;
-
-	if (scale < 0) scale = 0;
-	else if (scale > 100) scale = 100;
-	for (i = 0; i < config->numweights; i++)
-	{
-		ScaleFuzzySeperatorBalanceRange_r(config->weights[i].firstseperator, scale);
-	}
 }
 int InterbreedFuzzySeperator_r(fuzzyseperator_t *fs1, fuzzyseperator_t *fs2,
 								fuzzyseperator_t *fsout)

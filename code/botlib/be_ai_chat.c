@@ -909,37 +909,6 @@ char *RandomString(char *name)
 	}
 	return NULL;
 }
-void BotDumpMatchTemplates(bot_matchtemplate_t *matches)
-{
-	FILE *fp;
-	bot_matchtemplate_t *mt;
-	bot_matchpiece_t *mp;
-	bot_matchstring_t *ms;
-
-	fp = Log_FilePointer();
-	if (!fp) return;
-	for (mt = matches; mt; mt = mt->next)
-	{
-	        fprintf(fp, "{ " );
-		for (mp = mt->first; mp; mp = mp->next)
-		{
-			if (mp->type == MT_STRING)
-			{
-				for (ms = mp->firststring; ms; ms = ms->next)
-				{
-					fprintf(fp, "\"%s\"", ms->string);
-					if (ms->next) fprintf(fp, "|");
-				}
-			}
-			else if (mp->type == MT_VARIABLE)
-			{
-				fprintf(fp, "%d", mp->variable);
-			}
-			if (mp->next) fprintf(fp, ", ");
-		}
-		fprintf(fp, " = (%d, %d);}\n", mt->type, mt->subtype);
-	}
-}
 void BotFreeMatchPieces(bot_matchpiece_t *matchpieces)
 {
 	bot_matchpiece_t *mp, *nextmp;
@@ -1154,9 +1123,6 @@ bot_matchtemplate_t *BotLoadMatchTemplates(char *matchfile)
 	//free the source
 	FreeSource(source);
 	botimport.Print(PRT_MESSAGE, "loaded %s\n", matchfile);
-	//
-	//BotDumpMatchTemplates(matches);
-	//
 	return matches;
 }
 int StringsMatch(bot_matchpiece_t *pieces, bot_match_t *match)
@@ -1394,55 +1360,6 @@ void BotCheckReplyChatIntegrety(bot_replychat_t *replychat)
 	{
 		nexts = s->next;
 		FreeMemory(s);
-	}
-}
-void BotDumpReplyChat(bot_replychat_t *replychat)
-{
-	FILE *fp;
-	bot_replychat_t *rp;
-	bot_replychatkey_t *key;
-	bot_chatmessage_t *cm;
-	bot_matchpiece_t *mp;
-
-	fp = Log_FilePointer();
-	if (!fp) return;
-	fprintf(fp, "BotDumpReplyChat:\n");
-	for (rp = replychat; rp; rp = rp->next)
-	{
-		fprintf(fp, "[");
-		for (key = rp->keys; key; key = key->next)
-		{
-			if (key->flags & RCKFL_AND) fprintf(fp, "&");
-			else if (key->flags & RCKFL_NOT) fprintf(fp, "!");
-			//
-			if (key->flags & RCKFL_NAME) fprintf(fp, "name");
-			else if (key->flags & RCKFL_GENDERFEMALE) fprintf(fp, "female");
-			else if (key->flags & RCKFL_GENDERMALE) fprintf(fp, "male");
-			else if (key->flags & RCKFL_GENDERLESS) fprintf(fp, "it");
-			else if (key->flags & RCKFL_VARIABLES)
-			{
-				fprintf(fp, "(");
-				for (mp = key->match; mp; mp = mp->next)
-				{
-					if (mp->type == MT_STRING) fprintf(fp, "\"%s\"", mp->firststring->string);
-					else fprintf(fp, "%d", mp->variable);
-					if (mp->next) fprintf(fp, ", ");
-				}
-				fprintf(fp, ")");
-			}
-			else if (key->flags & RCKFL_STRING)
-			{
-				fprintf(fp, "\"%s\"", key->string);
-			}
-			if (key->next) fprintf(fp, ", ");
-			else fprintf(fp, "] = %1.0f\n", rp->priority);
-		}
-		fprintf(fp, "{\n");
-		for (cm = rp->firstchatmessage; cm; cm = cm->next)
-		{
-			fprintf(fp, "\t\"%s\";\n", cm->chatmessage);
-		}
-		fprintf(fp, "}\n");
 	}
 }
 void BotFreeReplyChat(bot_replychat_t *replychat)
@@ -1713,8 +1630,6 @@ bot_replychat_t *BotLoadReplyChat(char *filename)
 	}
 	FreeSource(source);
 	botimport.Print(PRT_MESSAGE, "loaded %s\n", filename);
-	//
-	//BotDumpReplyChat(replychatlist);
 	if (bot_developer)
 	{
 		BotCheckReplyChatIntegrety(replychatlist);
@@ -1723,25 +1638,6 @@ bot_replychat_t *BotLoadReplyChat(char *filename)
 	if (!replychatlist) botimport.Print(PRT_MESSAGE, "no rchats\n");
 	//
 	return replychatlist;
-}
-void BotDumpInitialChat(bot_chat_t *chat)
-{
-	bot_chattype_t *t;
-	bot_chatmessage_t *m;
-
-	Log_Write("{");
-	for (t = chat->types; t; t = t->next)
-	{
-		Log_Write(" type \"%s\"", t->name);
-		Log_Write(" {");
-		Log_Write("  numchatmessages = %d", t->numchatmessages);
-		for (m = t->firstchatmessage; m; m = m->next)
-		{
-			Log_Write("  \"%s\"", m->chatmessage);
-		}
-		Log_Write(" }");
-	}
-	Log_Write("}");
 }
 bot_chat_t *BotLoadInitialChat(char *chatfile, char *chatname)
 {
@@ -1895,10 +1791,7 @@ bot_chat_t *BotLoadInitialChat(char *chatfile, char *chatname)
 			return NULL;
 		}
 	}
-	//
 	botimport.Print(PRT_MESSAGE, "loaded %s from %s\n", chatname, chatfile);
-	//
-	//BotDumpInitialChat(chat);
 	if (bot_developer)
 	{
 		BotCheckInitialChatIntegrety(chat);
@@ -2257,41 +2150,6 @@ void BotInitialChat(int chatstate, char *type, int mcontext, char *var0, char *v
  	//
 	BotConstructChatMessage(cs, message, mcontext, &match, 0, qfalse);
 }
-void BotPrintReplyChatKeys(bot_replychat_t *replychat)
-{
-	bot_replychatkey_t *key;
-	bot_matchpiece_t *mp;
-
-	botimport.Print(PRT_MESSAGE, "[");
-	for (key = replychat->keys; key; key = key->next)
-	{
-		if (key->flags & RCKFL_AND) botimport.Print(PRT_MESSAGE, "&");
-		else if (key->flags & RCKFL_NOT) botimport.Print(PRT_MESSAGE, "!");
-		//
-		if (key->flags & RCKFL_NAME) botimport.Print(PRT_MESSAGE, "name");
-		else if (key->flags & RCKFL_GENDERFEMALE) botimport.Print(PRT_MESSAGE, "female");
-		else if (key->flags & RCKFL_GENDERMALE) botimport.Print(PRT_MESSAGE, "male");
-		else if (key->flags & RCKFL_GENDERLESS) botimport.Print(PRT_MESSAGE, "it");
-		else if (key->flags & RCKFL_VARIABLES)
-		{
-			botimport.Print(PRT_MESSAGE, "(");
-			for (mp = key->match; mp; mp = mp->next)
-			{
-				if (mp->type == MT_STRING) botimport.Print(PRT_MESSAGE, "\"%s\"", mp->firststring->string);
-				else botimport.Print(PRT_MESSAGE, "%d", mp->variable);
-				if (mp->next) botimport.Print(PRT_MESSAGE, ", ");
-			}
-			botimport.Print(PRT_MESSAGE, ")");
-		}
-		else if (key->flags & RCKFL_STRING)
-		{
-			botimport.Print(PRT_MESSAGE, "\"%s\"", key->string);
-		}
-		if (key->next) botimport.Print(PRT_MESSAGE, ", ");
-		else botimport.Print(PRT_MESSAGE, "] = %1.0f\n", replychat->priority);
-	}
-	botimport.Print(PRT_MESSAGE, "{\n");
-}
 int BotReplyChat(int chatstate, char *message, int mcontext, int vcontext, char *var0, char *var1, char *var2, char *var3, char *var4, char *var5, char *var6, char *var7)
 {
 	bot_replychat_t *rchat, *bestrchat;
@@ -2517,19 +2375,6 @@ void BotSetChatName(int chatstate, char *name, int client)
 	memset(cs->name, 0, sizeof(cs->name));
 	strncpy(cs->name, name, sizeof(cs->name));
 	cs->name[sizeof(cs->name)-1] = '\0';
-}
-void BotResetChatAI(void)
-{
-	bot_replychat_t *rchat;
-	bot_chatmessage_t *m;
-
-	for (rchat = replychats; rchat; rchat = rchat->next)
-	{
-		for (m = rchat->firstchatmessage; m; m = m->next)
-		{
-			m->time = 0;
-		}
-	}
 }
 int BotAllocChatState(void)
 {
