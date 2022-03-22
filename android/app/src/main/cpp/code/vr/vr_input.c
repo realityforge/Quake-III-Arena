@@ -452,8 +452,13 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
 		if (vr.virtual_screen ||
             cl.snap.ps.pm_type == PM_INTERMISSION)
         {
-		    int mouse_multiplier = 10;
-            Com_QueueEvent(in_vrEventTime, SE_MOUSE, vr.weaponangles_delta[YAW] * mouse_multiplier, -vr.weaponangles_delta[PITCH] * mouse_multiplier, 0, NULL);
+            if (vr.menuCursorX && vr.menuCursorY)
+            {
+                int x = 320 - tan(vr.weaponangles[YAW] * (M_PI*2 / 360)) * 400;
+                int y = 240 + tan((vr.weaponangles[PITCH] + vr_weaponPitch->value) * (M_PI*2 / 360)) * 400;
+                *vr.menuCursorX = x;
+                *vr.menuCursorY = y;
+            }
         }
 	} else {
         vec3_t rotation = {0};

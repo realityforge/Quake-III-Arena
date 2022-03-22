@@ -5277,6 +5277,9 @@ void _UI_MouseEvent( int dx, int dy )
 	else if (uiInfo.uiDC.cursory > SCREEN_HEIGHT)
 		uiInfo.uiDC.cursory = SCREEN_HEIGHT;
 
+	vr->menuCursorX = &uiInfo.uiDC.cursorx;
+	vr->menuCursorY = &uiInfo.uiDC.cursory;
+
   if (Menu_Count() > 0) {
     //menuDef_t *menu = Menu_GetFocused();
     //Menu_HandleMouseMove(menu, uiInfo.uiDC.cursorx, uiInfo.uiDC.cursory);
