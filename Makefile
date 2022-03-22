@@ -201,7 +201,6 @@ RCOMMONDIR=$(MOUNT_DIR)/renderercommon
 RGL2DIR=$(MOUNT_DIR)/renderergl2
 CMDIR=$(MOUNT_DIR)/qcommon
 SDLDIR=$(MOUNT_DIR)/sdl
-ASMDIR=$(MOUNT_DIR)/asm
 SYSDIR=$(MOUNT_DIR)/sys
 GDIR=$(MOUNT_DIR)/game
 CGDIR=$(MOUNT_DIR)/cgame
@@ -1823,13 +1822,6 @@ $(B)/$(MISSIONPACK)/ui$(SHLIBNAME): $(MPUIOBJ)
 ## CLIENT/SERVER RULES
 #############################################################################
 
-$(B)/client/%.o: $(ASMDIR)/%.s
-	$(DO_AS)
-
-# k8 so inline assembler knows about SSE
-$(B)/client/%.o: $(ASMDIR)/%.c
-	$(DO_CC) -march=k8
-
 $(B)/client/%.o: $(CDIR)/%.c
 	$(DO_CC)
 
@@ -1905,14 +1897,6 @@ $(B)/renderergl2/%.o: $(RCOMMONDIR)/%.c
 
 $(B)/renderergl2/%.o: $(RGL2DIR)/%.c
 	$(DO_REF_CC)
-
-
-$(B)/ded/%.o: $(ASMDIR)/%.s
-	$(DO_AS)
-
-# k8 so inline assembler knows about SSE
-$(B)/ded/%.o: $(ASMDIR)/%.c
-	$(DO_CC) -march=k8
 
 $(B)/ded/%.o: $(SDIR)/%.c
 	$(DO_DED_CC)
