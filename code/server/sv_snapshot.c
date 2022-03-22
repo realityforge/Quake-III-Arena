@@ -275,7 +275,7 @@ static void SV_AddEntitiesVisibleFromPoint( vec3_t origin, clientSnapshot_t *fra
 	// during an error shutdown message we may need to transmit
 	// the shutdown message after the server has shutdown, so
 	// specfically check for it
-	if ( sv.state != SS_DEAD ) {
+	if ( sv.state == SS_DEAD ) {
 		return;
 	}
 
