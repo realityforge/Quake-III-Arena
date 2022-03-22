@@ -437,6 +437,8 @@ int Q_isnan(float x);
 // Q_ftol must expand to a function name so the pluggable renderer can take
 // its address
 #define Q_ftol lrintf
+// Q_SnapVector is provided to ensure that the rounding behavior (and, if necessary, the
+//  precision) of DLL and QVM code are identical e.g. for network-visible operations.
 #define Q_SnapVector(vec)\
 do\
 {\
