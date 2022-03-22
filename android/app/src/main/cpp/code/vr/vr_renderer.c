@@ -35,8 +35,28 @@ void APIENTRY VR_GLDebugLog(GLenum source, GLenum type, GLuint id,
 {
 	if (type == GL_DEBUG_TYPE_ERROR || type == GL_DEBUG_TYPE_PERFORMANCE || ENABLE_GL_DEBUG_VERBOSE)
 	{
-		Com_Printf("GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
-			(type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""), type, severity, message);
+		char typeStr[128];
+		switch (type) {
+			case GL_DEBUG_TYPE_ERROR: sprintf(typeStr, "ERROR"); break;
+			case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: sprintf(typeStr, "DEPRECATED_BEHAVIOR"); break;
+			case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR: sprintf(typeStr, "UNDEFINED_BEHAVIOR"); break;
+			case GL_DEBUG_TYPE_PORTABILITY: sprintf(typeStr, "PORTABILITY"); break;
+			case GL_DEBUG_TYPE_PERFORMANCE: sprintf(typeStr, "PERFORMANCE"); break;
+			case GL_DEBUG_TYPE_MARKER: sprintf(typeStr, "MARKER"); break;
+			case GL_DEBUG_TYPE_PUSH_GROUP: sprintf(typeStr, "PUSH_GROUP"); break;
+			case GL_DEBUG_TYPE_POP_GROUP: sprintf(typeStr, "POP_GROUP"); break;
+			default: sprintf(typeStr, "OTHER"); break;
+		}
+
+		char severinityStr[128];
+		switch (severity) {
+			case GL_DEBUG_SEVERITY_HIGH: sprintf(severinityStr, "HIGH"); break;
+			case GL_DEBUG_SEVERITY_MEDIUM: sprintf(severinityStr, "MEDIUM"); break;
+			case GL_DEBUG_SEVERITY_LOW: sprintf(severinityStr, "LOW"); break;
+			default: sprintf(severinityStr, "VERBOSE"); break;
+		}
+
+		Com_Printf("[%s] GL issue - %s: %s\n", severinityStr, typeStr, message);
 	}
 }
 
