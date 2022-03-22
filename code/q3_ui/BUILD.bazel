@@ -19,7 +19,6 @@ cc_library(
         "ui_mfield.c",
         "ui_mods.c",
         "ui_network.c",
-        "ui_options.c",
         "ui_playermodel.c",
         "ui_players.c",
         "ui_playersettings.c",
