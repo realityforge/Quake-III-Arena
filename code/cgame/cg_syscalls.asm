@@ -70,7 +70,6 @@ equ trap_PC_SourceFileAndLine			-69
 equ trap_S_StopBackgroundTrack			-70
 equ trap_RealTime						-71
 equ trap_SnapVector						-72
-equ trap_R_LightForPoint				-74
 equ trap_CIN_PlayCinematic				-75
 equ trap_CIN_StopCinematic				-76
 equ trap_CIN_RunCinematic 				-77

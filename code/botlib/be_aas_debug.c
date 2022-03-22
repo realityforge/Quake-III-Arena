@@ -86,7 +86,6 @@ void AAS_ClearShownDebugLines(void)
 	{
 		if (debuglines[i])
 		{
-			//botimport.DebugLineShow(debuglines[i], NULL, NULL, LINECOLOR_NONE);
 			botimport.DebugLineDelete(debuglines[i]);
 			debuglines[i] = 0;
 			debuglinevisible[i] = qfalse;
@@ -649,23 +648,6 @@ void AAS_FloodAreas_r(int areanum, int cluster, int *done)
 			continue;
 		if (AAS_AreaCluster(nextareanum) != cluster)
 			continue;
-		/*
-		if ((reach->traveltype & TRAVELTYPE_MASK) == TRAVEL_WALKOFFLEDGE)
-		{
-			AAS_DebugLine(reach->start, reach->end, 1);
-		}
-		*/
 		AAS_FloodAreas_r(nextareanum, cluster, done);
 	}
-}
-
-void AAS_FloodAreas(vec3_t origin)
-{
-	int areanum, cluster, *done;
-
-	done = (int *) GetClearedMemory(aasworld.numareas * sizeof(int));
-	areanum = AAS_PointAreaNum(origin);
-	cluster = AAS_AreaCluster(areanum);
-	AAS_FloodAreas_r(areanum, cluster, done);
-	FreeMemory(done);
 }

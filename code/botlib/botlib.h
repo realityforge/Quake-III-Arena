@@ -42,12 +42,10 @@ struct weaponinfo_s;
 
 #define BOTFILESBASEFOLDER		"botfiles"
 //debug line colors
-#define LINECOLOR_NONE			-1
 #define LINECOLOR_RED			1//0xf2f2f0f0L
 #define LINECOLOR_GREEN			2//0xd0d1d2d3L
 #define LINECOLOR_BLUE			3//0xf3f3f1f1L
 #define LINECOLOR_YELLOW		4//0xdcdddedfL
-#define LINECOLOR_ORANGE		5//0xe0e1e2e3L
 
 //Print types
 #define PRT_MESSAGE				1
@@ -423,8 +421,6 @@ typedef struct botlib_export_s
 	int (*BotLibLoadMap)(const char *mapname);
 	//entity updates
 	int (*BotLibUpdateEntity)(int ent, bot_entitystate_t *state);
-	//just for testing
-	int (*Test)(int parm0, char *parm1, vec3_t parm2, vec3_t parm3);
 } botlib_export_t;
 
 //linking of bot library

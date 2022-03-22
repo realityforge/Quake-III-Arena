@@ -129,17 +129,12 @@ typedef enum {
 
 
 
-typedef int	vmptr_t;
-
 typedef struct vmSymbol_s {
 	struct vmSymbol_s	*next;
 	int		symValue;
 	int		profileCount;
 	char	symName[1];		// variable sized
 } vmSymbol_t;
-
-#define	VM_OFFSET_PROGRAM_STACK		0
-#define	VM_OFFSET_SYSTEM_CALL		4
 
 struct vm_s {
     // DO NOT MOVE OR CHANGE THESE WITHOUT CHANGING THE VM_OFFSET_* DEFINES
@@ -157,11 +152,7 @@ struct vm_s {
 	vmMainProc	entryPoint;
 	void (*destroy)(vm_t* self);
 
-	// for interpreted modules
-	qboolean	currentlyInterpreting;
-
 	byte		*codeBase;
-	int			entryOfs;
 	int			codeLength;
 
 	intptr_t	*instructionPointers;

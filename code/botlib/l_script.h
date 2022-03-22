@@ -188,8 +188,6 @@ typedef struct script_s
 
 //read a token from the script
 int PS_ReadToken(script_t *script, token_t *token);
-//expect a certain token
-int PS_ExpectTokenString(script_t *script, char *string);
 //expect a certain token type
 int PS_ExpectTokenType(script_t *script, int type, int subtype, token_t *token);
 //expect a token

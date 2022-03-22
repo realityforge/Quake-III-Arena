@@ -55,34 +55,6 @@ void AAS_RemoveClusterAreas(void)
 		aasworld.areasettings[i].cluster = 0;
 	}
 }
-void AAS_ClearCluster(int clusternum)
-{
-	int i;
-
-	for (i = 1; i < aasworld.numareas; i++)
-	{
-		if (aasworld.areasettings[i].cluster == clusternum)
-		{
-			aasworld.areasettings[i].cluster = 0;
-		}
-	}
-}
-void AAS_RemovePortalsClusterReference(int clusternum)
-{
-	int portalnum;
-
-	for (portalnum = 1; portalnum < aasworld.numportals; portalnum++)
-	{
-		if (aasworld.portals[portalnum].frontcluster == clusternum)
-		{
-			aasworld.portals[portalnum].frontcluster = 0;
-		}
-		if (aasworld.portals[portalnum].backcluster == clusternum)
-		{
-			aasworld.portals[portalnum].backcluster = 0;
-		}
-	}
-}
 int AAS_UpdatePortal(int areanum, int clusternum)
 {
 	int portalnum;
@@ -237,27 +209,6 @@ int AAS_FloodClusterAreasUsingReachabilities(int clusternum)
 	}
 	return qtrue;
 }
-void AAS_NumberClusterPortals(int clusternum)
-{
-	int i, portalnum;
-	aas_cluster_t *cluster;
-	aas_portal_t *portal;
-
-	cluster = &aasworld.clusters[clusternum];
-	for (i = 0; i < cluster->numportals; i++)
-	{
-		portalnum = aasworld.portalindex[cluster->firstportal + i];
-		portal = &aasworld.portals[portalnum];
-		if (portal->frontcluster == clusternum)
-		{
-			portal->clusterareanum[0] = cluster->numareas++;
-		}
-		else
-		{
-			portal->clusterareanum[1] = cluster->numareas++;
-		}
-	}
-}
 void AAS_NumberClusterAreas(int clusternum)
 {
 	int i, portalnum;
@@ -363,9 +314,7 @@ int AAS_FindClusters(void)
 		if (!AAS_FloodClusterAreasUsingReachabilities(aasworld.numclusters))
 			return qfalse;
 		//number the cluster areas
-		//AAS_NumberClusterPortals(aasworld.numclusters);
 		AAS_NumberClusterAreas(aasworld.numclusters);
-		//Log_Write("cluster %d has %d areas\r\n", aasworld.numclusters, cluster->numareas);
 		aasworld.numclusters++;
 	}
 	return qtrue;
@@ -804,16 +753,6 @@ void AAS_FindPossiblePortals(void)
 	}
 	botimport.Print(PRT_MESSAGE, "\r%6d possible portal areas\n", numpossibleportals);
 }
-void AAS_RemoveAllPortals(void)
-{
-	int i;
-
-	for (i = 1; i < aasworld.numareas; i++)
-	{
-		aasworld.areasettings[i].contents &= ~AREACONTENTS_CLUSTERPORTAL;
-	}
-}
-
 int AAS_TestPortals(void)
 {
 	int i;

@@ -303,9 +303,6 @@ int	VM_CallInterpreted( vm_t *vm, int *args ) {
 	vmSymbol_t	*profileSymbol;
 #endif
 
-	// interpret the code
-	vm->currentlyInterpreting = qtrue;
-
 	// we might be called recursively, so this might not be the very top
 	programStack = stackOnEntry = vm->programStack;
 
@@ -859,8 +856,6 @@ nextInstruction2:
 	}
 
 done:
-	vm->currentlyInterpreting = qfalse;
-
 	if (opStackOfs != 1 || *opStack != 0xDEADBEEF)
 		Com_Error(ERR_DROP, "Interpreter error: opStack[0] = %X, opStackOfs = %d", opStack[0], opStackOfs);
 

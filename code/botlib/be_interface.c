@@ -54,8 +54,6 @@ botlib_export_t be_botlib_export;
 botlib_import_t botimport;
 //
 int botDeveloper;
-//qtrue if the library is setup
-int botlibsetup = qfalse;
 
 //===========================================================================
 //
@@ -65,17 +63,6 @@ int botlibsetup = qfalse;
 int Sys_MilliSeconds(void)
 {
 	return clock() * 1000 / CLOCKS_PER_SEC;
-}
-qboolean ValidClientNumber(int num, char *str)
-{
-	if (num < 0 || num > botlibglobals.maxclients)
-	{
-		//weird: the disabled stuff results in a crash
-		botimport.Print(PRT_ERROR, "%s: invalid client number %d, [0, %d]\n",
-										str, num, botlibglobals.maxclients);
-		return qfalse;
-	}
-	return qtrue;
 }
 qboolean ValidEntityNumber(int num, char *str)
 {
@@ -127,7 +114,6 @@ int Export_BotLibSetup(void)
 	errnum = BotSetupMoveAI();		//be_ai_move.c
 	if (errnum != BLERR_NOERROR) return errnum;
 
-	botlibsetup = qtrue;
 	botlibglobals.botlibsetup = qtrue;
 
 	return BLERR_NOERROR;
@@ -161,8 +147,6 @@ int Export_BotLibShutdown(void)
 #endif
 	//shut down library log file
 	Log_Shutdown();
-	//
-	botlibsetup = qfalse;
 	botlibglobals.botlibsetup = qfalse;
 	// print any files still open
 	PC_CheckOpenSourceHandles();
@@ -219,15 +203,11 @@ int Export_BotLibUpdateEntity(int ent, bot_entitystate_t *state)
 
 	return AAS_UpdateEntity(ent, state);
 }
-void AAS_TestMovementPrediction(int entnum, vec3_t origin, vec3_t dir);
-void ElevatorBottomCenter(aas_reachability_t *reach, vec3_t bottomcenter);
 int BotGetReachabilityToGoal(vec3_t origin, int areanum,
 									  int lastgoalareanum, int lastareanum,
 									  int *avoidreach, float *avoidreachtimes, int *avoidreachtries,
 									  bot_goal_t *goal, int travelflags,
 									  struct bot_avoidspot_s *avoidspots, int numavoidspots, int *flags);
-
-int AAS_PointLight(vec3_t origin, int *red, int *green, int *blue);
 
 int AAS_TraceAreas(vec3_t start, vec3_t end, int *areas, vec3_t *points, int maxareas);
 
@@ -236,14 +216,6 @@ int AAS_Reachability_WeaponJump(int area1num, int area2num);
 int BotFuzzyPointReachabilityArea(vec3_t origin);
 
 float BotGapDistance(vec3_t origin, vec3_t hordir, int entnum);
-
-void AAS_FloodAreas(vec3_t origin);
-
-int BotExportTest(int parm0, char *parm1, vec3_t parm2, vec3_t parm3)
-{
-	return 0;
-}
-
 
 static void Init_AAS_Export( aas_export_t *aas ) {
 	//--------------------------------------------
@@ -453,7 +425,6 @@ botlib_export_t *GetBotLibAPI(int apiVersion, botlib_import_t *import) {
 	be_botlib_export.BotLibStartFrame = Export_BotLibStartFrame;
 	be_botlib_export.BotLibLoadMap = Export_BotLibLoadMap;
 	be_botlib_export.BotLibUpdateEntity = Export_BotLibUpdateEntity;
-	be_botlib_export.Test = BotExportTest;
 
 	return &be_botlib_export;
 }

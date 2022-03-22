@@ -162,20 +162,6 @@ qboolean AAS_EntityCollision(int entnum,
 	}
 	return qfalse;
 }
-//===========================================================================
-// returns true if in Potentially Hearable Set
-//===========================================================================
-qboolean AAS_inPVS(vec3_t p1, vec3_t p2)
-{
-	return botimport.inPVS(p1, p2);
-}
-//===========================================================================
-// returns true if in Potentially Visible Set
-//===========================================================================
-qboolean AAS_inPHS(vec3_t p1, vec3_t p2)
-{
-	return qtrue;
-}
 void AAS_BSPModelMinsMaxsOrigin(int modelnum, vec3_t angles, vec3_t mins, vec3_t maxs, vec3_t origin)
 {
 	botimport.BSPModelMinsMaxsOrigin(modelnum, angles, mins, maxs, origin);
@@ -189,10 +175,6 @@ void AAS_UnlinkFromBSPLeaves(bsp_link_t *leaves)
 bsp_link_t *AAS_BSPLinkEntity(vec3_t absmins, vec3_t absmaxs, int entnum, int modelnum)
 {
 	return NULL;
-}
-int AAS_BoxEntities(vec3_t absmins, vec3_t absmaxs, int *list, int maxcount)
-{
-	return 0;
 }
 int AAS_NextBSPEntity(int ent)
 {
@@ -343,10 +325,6 @@ void AAS_ParseBSPEntities(void)
 		}
 	}
 	FreeScript(script);
-}
-int AAS_BSPTraceLight(vec3_t start, vec3_t end, vec3_t endpos, int *red, int *green, int *blue)
-{
-	return 0;
 }
 void AAS_DumpBSPData(void)
 {

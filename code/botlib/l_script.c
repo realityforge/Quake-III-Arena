@@ -756,23 +756,6 @@ int PS_ReadToken(script_t *script, token_t *token)
 	//successfully read a token
 	return 1;
 }
-int PS_ExpectTokenString(script_t *script, char *string)
-{
-	token_t token;
-
-	if (!PS_ReadToken(script, &token))
-	{
-		ScriptError(script, "couldn't find expected %s", string);
-		return 0;
-	}
-
-	if (strcmp(token.string, string))
-	{
-		ScriptError(script, "expected %s, found %s", string, token.string);
-		return 0;
-	}
-	return 1;
-}
 int PS_ExpectTokenType(script_t *script, int type, int subtype, token_t *token)
 {
 	char str[MAX_TOKEN];

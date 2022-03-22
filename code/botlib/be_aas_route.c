@@ -73,7 +73,6 @@ int numportalcacheupdates;
 #endif //ROUTING_DEBUG
 
 int routingcachesize;
-int max_routingcachesize;
 
 #ifdef ROUTING_DEBUG
 void AAS_RoutingInfo(void)
@@ -1025,7 +1024,6 @@ void AAS_InitRouting(void)
 #endif //ROUTING_DEBUG
 	//
 	routingcachesize = 0;
-	max_routingcachesize = 1024 * (int) LibVarValue("max_routingcache", "4096");
 	// read any routing cache if available
 	AAS_ReadRouteCache();
 }
@@ -1643,10 +1641,6 @@ int AAS_PredictRoute(struct aas_predictroute_s *route, int areanum, vec3_t origi
 		return qfalse;
 	return qtrue;
 }
-int AAS_BridgeWalkable(int areanum)
-{
-	return qfalse;
-}
 void AAS_ReachabilityFromNum(int num, struct aas_reachability_s *reach)
 {
 	if (!aasworld.initialized)
@@ -1710,146 +1704,4 @@ int AAS_NextModelReachability(int num, int modelnum)
 		}
 	}
 	return 0;
-}
-int AAS_AreaVisible(int srcarea, int destarea)
-{
-	return qfalse;
-}
-float DistancePointToLine(vec3_t v1, vec3_t v2, vec3_t point)
-{
-	vec3_t vec, p2;
-
-	AAS_ProjectPointOntoVector(point, v1, v2, p2);
-	VectorSubtract(point, p2, vec);
-	return VectorLength(vec);
-}
-int AAS_NearestHideArea(int srcnum, vec3_t origin, int areanum, int enemynum, vec3_t enemyorigin, int enemyareanum, int travelflags)
-{
-	int i, j, nextareanum, badtravelflags, numreach, bestarea;
-	unsigned short int t, besttraveltime;
-	static unsigned short int *hidetraveltimes;
-	aas_routingupdate_t *updateliststart, *updatelistend, *curupdate, *nextupdate;
-	aas_reachability_t *reach;
-	float dist1, dist2;
-	vec3_t v1, v2, p;
-	qboolean startVisible;
-
-	//
-	if (!hidetraveltimes)
-	{
-		hidetraveltimes = (unsigned short int *) GetClearedMemory(aasworld.numareas * sizeof(unsigned short int));
-	}
-	else
-	{
-		memset(hidetraveltimes, 0, aasworld.numareas * sizeof(unsigned short int));
-	}
-	besttraveltime = 0;
-	bestarea = 0;
-	//assume visible
-	startVisible = qtrue;
-	//
-	badtravelflags = ~travelflags;
-	//
-	curupdate = &aasworld.areaupdate[areanum];
-	curupdate->areanum = areanum;
-	VectorCopy(origin, curupdate->start);
-	curupdate->areatraveltimes = aasworld.areatraveltimes[areanum][0];
-	curupdate->tmptraveltime = 0;
-	//put the area to start with in the current read list
-	curupdate->next = NULL;
-	curupdate->prev = NULL;
-	updateliststart = curupdate;
-	updatelistend = curupdate;
-	//while there are updates in the list
-	while (updateliststart)
-	{
-		curupdate = updateliststart;
-		//
-		if (curupdate->next) curupdate->next->prev = NULL;
-		else updatelistend = NULL;
-		updateliststart = curupdate->next;
-		//
-		curupdate->inlist = qfalse;
-		//check all reversed reachability links
-		numreach = aasworld.areasettings[curupdate->areanum].numreachableareas;
-		reach = &aasworld.reachability[aasworld.areasettings[curupdate->areanum].firstreachablearea];
-		//
-		for (i = 0; i < numreach; i++, reach++)
-		{
-			//if an undesired travel type is used
-			if (AAS_TravelFlagForType_inline(reach->traveltype) & badtravelflags) continue;
-			//
-			if (AAS_AreaContentsTravelFlags_inline(reach->areanum) & badtravelflags) continue;
-			//number of the area the reachability leads to
-			nextareanum = reach->areanum;
-			// if this moves us into the enemies area, skip it
-			if (nextareanum == enemyareanum) continue;
-			//time already travelled plus the traveltime through
-			//the current area plus the travel time from the reachability
-			t = curupdate->tmptraveltime +
-						AAS_AreaTravelTime(curupdate->areanum, curupdate->start, reach->start) +
-							reach->traveltime;
-
-			//avoid going near the enemy
-			AAS_ProjectPointOntoVector(enemyorigin, curupdate->start, reach->end, p);
-			for (j = 0; j < 3; j++)
-				if ((p[j] > curupdate->start[j] && p[j] > reach->end[j]) ||
-					(p[j] < curupdate->start[j] && p[j] < reach->end[j]))
-					break;
-			if (j < 3)
-			{
-				VectorSubtract(enemyorigin, reach->end, v2);
-			}
-			else
-			{
-				VectorSubtract(enemyorigin, p, v2);
-			}
-			dist2 = VectorLength(v2);
-			//never go through the enemy
-			if (dist2 < 40) continue;
-			//
-			VectorSubtract(enemyorigin, curupdate->start, v1);
-			dist1 = VectorLength(v1);
-			//
-			if (dist2 < dist1)
-			{
-				t += (dist1 - dist2) * 10;
-			}
-			// if we weren't visible when starting, make sure we don't move into their view
-			if (!startVisible && AAS_AreaVisible(enemyareanum, nextareanum)) {
-				continue;
-			}
-			//
-			if (besttraveltime && t >= besttraveltime) continue;
-			//
-			if (!hidetraveltimes[nextareanum] ||
-					hidetraveltimes[nextareanum] > t)
-			{
-				//if the nextarea is not visible from the enemy area
-				if (!AAS_AreaVisible(enemyareanum, nextareanum))
-				{
-					besttraveltime = t;
-					bestarea = nextareanum;
-				}
-				hidetraveltimes[nextareanum] = t;
-				nextupdate = &aasworld.areaupdate[nextareanum];
-				nextupdate->areanum = nextareanum;
-				nextupdate->tmptraveltime = t;
-				//remember where we entered this area
-				VectorCopy(reach->end, nextupdate->start);
-				//if this update is not in the list yet
-				if (!nextupdate->inlist)
-				{
-					//add the new update to the end of the list
-					nextupdate->next = NULL;
-					nextupdate->prev = updatelistend;
-					if (updatelistend) updatelistend->next = nextupdate;
-					else updateliststart = nextupdate;
-					updatelistend = nextupdate;
-					nextupdate->inlist = qtrue;
-				}
-			}
-		}
-	}
-	return bestarea;
 }
