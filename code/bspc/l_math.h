@@ -68,11 +68,6 @@ qboolean VectorCompare (vec3_t v1, vec3_t v2);
 #define	VectorMA(v, s, b, o)	((o)[0]=(v)[0]+(b)[0]*(s),(o)[1]=(v)[1]+(b)[1]*(s),(o)[2]=(v)[2]+(b)[2]*(s))
 
 vec_t Q_rint (vec_t in);
-vec_t _DotProduct (vec3_t v1, vec3_t v2);
-void _VectorSubtract (vec3_t va, vec3_t vb, vec3_t out);
-void _VectorAdd (vec3_t va, vec3_t vb, vec3_t out);
-void _VectorCopy (vec3_t in, vec3_t out);
-void _VectorScale (vec3_t v, vec_t scale, vec3_t out);
 void _VectorMA(vec3_t va, double scale, vec3_t vb, vec3_t vc);
 
 double VectorLength(vec3_t v);

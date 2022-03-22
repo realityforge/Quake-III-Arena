@@ -217,17 +217,6 @@ signed char ClampChar( int i ) {
 	return i;
 }
 
-signed short ClampShort( int i ) {
-	if ( i < -32768 ) {
-		return -32768;
-	}
-	if ( i > 0x7fff ) {
-		return 0x7fff;
-	}
-	return i;
-}
-
-
 // this isn't a real cheap function to call!
 int DirToByte( vec3_t dir ) {
 	int		i, best;
@@ -1105,43 +1094,6 @@ void _VectorMA( const vec3_t veca, float scale, const vec3_t vecb, vec3_t vecc) 
 	vecc[1] = veca[1] + scale*vecb[1];
 	vecc[2] = veca[2] + scale*vecb[2];
 }
-
-
-vec_t _DotProduct( const vec3_t v1, const vec3_t v2 ) {
-	return v1[0]*v2[0] + v1[1]*v2[1] + v1[2]*v2[2];
-}
-
-void _VectorSubtract( const vec3_t veca, const vec3_t vecb, vec3_t out ) {
-	out[0] = veca[0]-vecb[0];
-	out[1] = veca[1]-vecb[1];
-	out[2] = veca[2]-vecb[2];
-}
-
-void _VectorAdd( const vec3_t veca, const vec3_t vecb, vec3_t out ) {
-	out[0] = veca[0]+vecb[0];
-	out[1] = veca[1]+vecb[1];
-	out[2] = veca[2]+vecb[2];
-}
-
-void _VectorCopy( const vec3_t in, vec3_t out ) {
-	out[0] = in[0];
-	out[1] = in[1];
-	out[2] = in[2];
-}
-
-void _VectorScale( const vec3_t in, vec_t scale, vec3_t out ) {
-	out[0] = in[0]*scale;
-	out[1] = in[1]*scale;
-	out[2] = in[2]*scale;
-}
-
-void Vector4Scale( const vec4_t in, vec_t scale, vec4_t out ) {
-	out[0] = in[0]*scale;
-	out[1] = in[1]*scale;
-	out[2] = in[2]*scale;
-	out[3] = in[3]*scale;
-}
-
 
 int Q_log2( int val ) {
 	int answer;

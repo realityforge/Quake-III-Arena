@@ -178,7 +178,6 @@ typedef struct leafList_s {
 
 
 void CM_StoreLeafs( leafList_t *ll, int nodenum );
-void CM_StoreBrushes( leafList_t *ll, int nodenum );
 
 void CM_BoxLeafnums_r( leafList_t *ll, int nodenum );
 

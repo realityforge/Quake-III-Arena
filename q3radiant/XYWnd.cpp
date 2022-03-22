@@ -458,7 +458,6 @@ void CXYWnd::DropPathPoint(UINT nFlags, CPoint point)
 void CXYWnd::AddPointPoint(UINT nFlags, vec3_t* pVec)
 {
   g_PointPoints[g_nPointCount].Set(true);
-  //g_PointPoints[g_nPointCount].m_ptScreen = point;
   _VectorCopy(*pVec, g_PointPoints[g_nPointCount]);
   g_PointPoints[g_nPointCount].SetPointPtr(pVec);
   g_nPointCount++;

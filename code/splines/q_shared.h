@@ -421,10 +421,7 @@ extern	mat3_t	axisDefault;
 float Q_fabs( float f );
 float Q_rsqrt( float f );		// reciprocal square root
 
-#define SQRTFAST( x ) ( 1.0f / Q_rsqrt( x ) )
-
 signed char ClampChar( int i );
-signed short ClampShort( int i );
 
 // this isn't a real cheap function to call!
 int DirToByte( const idVec3_t &dir );

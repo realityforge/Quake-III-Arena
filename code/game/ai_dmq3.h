@@ -22,8 +22,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 //setup the deathmatch AI
 void BotSetupDeathmatchAI(void);
-//shutdown the deathmatch AI
-void BotShutdownDeathmatchAI(void);
 //let the bot live within it's deathmatch AI net
 void BotDeathmatchAI(bot_state_t *bs, float thinktime);
 //free waypoints
@@ -80,8 +78,6 @@ float BotFeelingBad(bot_state_t *bs);
 int BotWantsToRetreat(bot_state_t *bs);
 //returns true if the bot wants to chase
 int BotWantsToChase(bot_state_t *bs);
-//returns true if the bot wants to help
-int BotWantsToHelp(bot_state_t *bs);
 //returns true if the bot can and wants to rocketjump
 int BotCanAndWantsToRocketJump(bot_state_t *bs);
 // returns true if the bot has a persistant powerup and a weapon
