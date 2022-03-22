@@ -88,13 +88,6 @@ float CM_DistanceFromLineSquared(vec3_t p, vec3_t lp1, vec3_t lp2, vec3_t dir) {
 	return VectorLengthSquared(t);
 }
 
-float CM_VectorDistanceSquared(vec3_t p1, vec3_t p2) {
-	vec3_t dir;
-
-	VectorSubtract(p2, p1, dir);
-	return VectorLengthSquared(dir);
-}
-
 float SquareRootFloat(float number) {
 	floatint_t t;
 	float x, y;

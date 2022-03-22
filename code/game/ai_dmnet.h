@@ -29,7 +29,6 @@ void AIEnter_Stand(bot_state_t *bs, char *s);
 void AIEnter_Seek_ActivateEntity(bot_state_t *bs, char *s);
 void AIEnter_Seek_NBG(bot_state_t *bs, char *s);
 void AIEnter_Seek_LTG(bot_state_t *bs, char *s);
-void AIEnter_Seek_Camp(bot_state_t *bs, char *s);
 void AIEnter_Battle_Fight(bot_state_t *bs, char *s);
 void AIEnter_Battle_Chase(bot_state_t *bs, char *s);
 void AIEnter_Battle_Retreat(bot_state_t *bs, char *s);

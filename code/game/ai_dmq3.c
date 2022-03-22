@@ -207,13 +207,6 @@ qboolean EntityIsChatting(aas_entityinfo_t *entinfo) {
 	return qfalse;
 }
 
-qboolean EntityHasQuad(aas_entityinfo_t *entinfo) {
-	if (entinfo->powerups & (1 << PW_QUAD)) {
-		return qtrue;
-	}
-	return qfalse;
-}
-
 #ifdef MISSIONPACK
 qboolean EntityHasKamikaze(aas_entityinfo_t *entinfo) {
 	if (entinfo->flags & EF_KAMIKAZE) {
@@ -1248,19 +1241,6 @@ char *ClientName(int client, char *name, int size) {
 	return name;
 }
 
-char *ClientSkin(int client, char *skin, int size) {
-	char buf[MAX_INFO_STRING];
-
-	if (client < 0 || client >= MAX_CLIENTS) {
-		BotAI_Print(PRT_ERROR, "ClientSkin: client out of range\n");
-		return "[client out of range]";
-	}
-	trap_GetConfigstring(CS_PLAYERS+client, buf, sizeof(buf));
-	strncpy(skin, Info_ValueForKey(buf, "model"), size-1);
-	skin[size-1] = '\0';
-	return skin;
-}
-
 int ClientFromName(char *name) {
 	int i;
 	char buf[MAX_INFO_STRING];
@@ -2071,10 +2051,6 @@ int BotWantsToChase(bot_state_t *bs) {
 	if (BotAggression(bs) > 50)
 		return qtrue;
 	return qfalse;
-}
-
-int BotWantsToHelp(bot_state_t *bs) {
-	return qtrue;
 }
 
 int BotCanAndWantsToRocketJump(bot_state_t *bs) {
@@ -3920,32 +3896,6 @@ int BotGoForActivateGoal(bot_state_t *bs, bot_activategoal_t *activategoal) {
 	}
 }
 
-void BotPrintActivateGoalInfo(bot_state_t *bs, bot_activategoal_t *activategoal, int bspent) {
-	char netname[MAX_NETNAME];
-	char classname[128];
-	char buf[128];
-
-	ClientName(bs->client, netname, sizeof(netname));
-	trap_AAS_ValueForBSPEpairKey(bspent, "classname", classname, sizeof(classname));
-	if (activategoal->shoot) {
-		Com_sprintf(buf, sizeof(buf), "%s: I have to shoot at a %s from %1.1f %1.1f %1.1f in area %d\n",
-						netname, classname,
-						activategoal->goal.origin[0],
-						activategoal->goal.origin[1],
-						activategoal->goal.origin[2],
-						activategoal->goal.areanum);
-	}
-	else {
-		Com_sprintf(buf, sizeof(buf), "%s: I have to activate a %s at %1.1f %1.1f %1.1f in area %d\n",
-						netname, classname,
-						activategoal->goal.origin[0],
-						activategoal->goal.origin[1],
-						activategoal->goal.origin[2],
-						activategoal->goal.areanum);
-	}
-	trap_EA_Say(bs->client, buf);
-}
-
 void BotRandomMove(bot_state_t *bs, bot_moveresult_t *moveresult) {
 	vec3_t dir, angles;
 
@@ -4784,52 +4734,6 @@ void BotDeathmatchAI(bot_state_t *bs, float thinktime) {
 	bs->lasthitcount = bs->cur_ps.persistant[PERS_HITS];
 }
 
-void BotSetEntityNumForGoalWithModel(bot_goal_t *goal, int eType, char *modelname) {
-	gentity_t *ent;
-	int i, modelindex;
-	vec3_t dir;
-
-	modelindex = G_ModelIndex( modelname );
-	ent = &g_entities[0];
-	for (i = 0; i < level.num_entities; i++, ent++) {
-		if ( !ent->inuse ) {
-			continue;
-		}
-		if ( eType && ent->s.eType != eType) {
-			continue;
-		}
-		if (ent->s.modelindex != modelindex) {
-			continue;
-		}
-		VectorSubtract(goal->origin, ent->s.origin, dir);
-		if (VectorLengthSquared(dir) < Square(10)) {
-			goal->entitynum = i;
-			return;
-		}
-	}
-}
-
-void BotSetEntityNumForGoal(bot_goal_t *goal, char *classname) {
-	gentity_t *ent;
-	int i;
-	vec3_t dir;
-
-	ent = &g_entities[0];
-	for (i = 0; i < level.num_entities; i++, ent++) {
-		if ( !ent->inuse ) {
-			continue;
-		}
-		if ( Q_stricmp(ent->classname, classname) != 0 ) {
-			continue;
-		}
-		VectorSubtract(goal->origin, ent->s.origin, dir);
-		if (VectorLengthSquared(dir) < Square(10)) {
-			goal->entitynum = i;
-			return;
-		}
-	}
-}
-
 void BotSetEntityNumForGoalWithActivator(bot_goal_t *goal, char *classname) {
 	gentity_t *ent;
 	int i;
@@ -4849,33 +4753,6 @@ void BotSetEntityNumForGoalWithActivator(bot_goal_t *goal, char *classname) {
 			return;
 		}
 	}
-}
-
-int BotGoalForBSPEntity( char *classname, bot_goal_t *goal ) {
-	char value[MAX_INFO_STRING];
-	vec3_t origin, start, end;
-	int ent, numareas, areas[10];
-
-	memset(goal, 0, sizeof(bot_goal_t));
-	for (ent = trap_AAS_NextBSPEntity(0); ent; ent = trap_AAS_NextBSPEntity(ent)) {
-		if (!trap_AAS_ValueForBSPEpairKey(ent, "classname", value, sizeof(value)))
-			continue;
-		if (!strcmp(value, classname)) {
-			if (!trap_AAS_VectorForBSPEpairKey(ent, "origin", origin))
-				return qfalse;
-			VectorCopy(origin, goal->origin);
-			VectorCopy(origin, start);
-			start[2] -= 32;
-			VectorCopy(origin, end);
-			end[2] += 32;
-			numareas = trap_AAS_TraceAreas(start, end, areas, NULL, 10);
-			if (!numareas)
-				return qfalse;
-			goal->areanum = areas[0];
-			return qtrue;
-		}
-	}
-	return qfalse;
 }
 
 void BotSetupDeathmatchAI(void) {
@@ -4940,8 +4817,4 @@ void BotSetupDeathmatchAI(void) {
 	}
 	//initialize the waypoint heap
 	BotInitWaypoints();
-}
-
-void BotShutdownDeathmatchAI(void) {
-	altroutegoals_setup = qfalse;
 }

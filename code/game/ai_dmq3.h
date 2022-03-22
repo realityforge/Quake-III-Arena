@@ -22,8 +22,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 //setup the deathmatch AI
 void BotSetupDeathmatchAI(void);
-//shutdown the deathmatch AI
-void BotShutdownDeathmatchAI(void);
 //let the bot live within its deathmatch AI net
 void BotDeathmatchAI(bot_state_t *bs, float thinktime);
 //free waypoints
@@ -64,8 +62,6 @@ void BotSetTeamStatus(bot_state_t *bs);
 char *ClientName(int client, char *name, int size);
 //returns a simplified client name
 char *EasyClientName(int client, char *name, int size);
-//returns the skin used by the client
-char *ClientSkin(int client, char *skin, int size);
 // returns the appropriate synonym context for the current game type and situation
 int BotSynonymContext(bot_state_t *bs);
 // set last ordered task
@@ -80,8 +76,6 @@ float BotFeelingBad(bot_state_t *bs);
 int BotWantsToRetreat(bot_state_t *bs);
 //returns true if the bot wants to chase
 int BotWantsToChase(bot_state_t *bs);
-//returns true if the bot wants to help
-int BotWantsToHelp(bot_state_t *bs);
 //returns true if the bot can and wants to rocketjump
 int BotCanAndWantsToRocketJump(bot_state_t *bs);
 // returns true if the bot has a persistant powerup and a weapon
