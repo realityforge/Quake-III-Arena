@@ -248,14 +248,6 @@ long RllDecodeStereoToStereo(unsigned char *from,short *to,unsigned int size,cha
 	return (size>>1);	//*sizeof(short));
 }
 
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
-
 static void move8_32( byte *src, byte *dst, int spl )
 {
 	double *dsrc, *ddst;
@@ -282,14 +274,6 @@ static void move8_32( byte *src, byte *dst, int spl )
 	ddst[0] = dsrc[0]; ddst[1] = dsrc[1]; ddst[2] = dsrc[2]; ddst[3] = dsrc[3];
 }
 
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
-
 static void move4_32( byte *src, byte *dst, int spl  )
 {
 	double *dsrc, *ddst;
@@ -307,14 +291,6 @@ static void move4_32( byte *src, byte *dst, int spl  )
 	dsrc += dspl; ddst += dspl;
 	ddst[0] = dsrc[0]; ddst[1] = dsrc[1];
 }
-
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
 
 static void blit8_32( byte *src, byte *dst, int spl  )
 {
@@ -342,13 +318,6 @@ static void blit8_32( byte *src, byte *dst, int spl  )
 	ddst[0] = dsrc[0]; ddst[1] = dsrc[1]; ddst[2] = dsrc[2]; ddst[3] = dsrc[3];
 }
 
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
 #define movs double
 static void blit4_32( byte *src, byte *dst, int spl  )
 {
@@ -368,14 +337,6 @@ static void blit4_32( byte *src, byte *dst, int spl  )
 	ddst[0] = dsrc[0]; ddst[1] = dsrc[1];
 }
 
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
-
 static void blit2_32( byte *src, byte *dst, int spl  )
 {
 	double *dsrc, *ddst;
@@ -388,14 +349,6 @@ static void blit2_32( byte *src, byte *dst, int spl  )
 	ddst[0] = dsrc[0];
 	ddst[dspl] = dsrc[1];
 }
-
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
 
 static void blitVQQuad32fs( byte **status, unsigned char *data )
 {
@@ -475,14 +428,6 @@ int		spl;
 	} while ( status[index] != NULL );
 }
 
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
-
 static void ROQ_GenYUVTables( void )
 {
 	float t_ub,t_vr,t_ug,t_vg;
@@ -539,14 +484,6 @@ static void ROQ_GenYUVTables( void )
 	*d++ = *b;	\
 	a++; b++; }
 
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
-
 static unsigned short yuv_to_rgb( long y, long u, long v )
 { 
 	long r,g,b,YY = (long)(ROQ_YY_tab[(y)]);
@@ -561,13 +498,6 @@ static unsigned short yuv_to_rgb( long y, long u, long v )
 	return (unsigned short)((r<<11)+(g<<5)+(b));
 }
 
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
 #if defined(__APPLE__) || defined(__APPLE_CC__)
 
 static inline unsigned int yuv_to_rgb24( long y, long u, long v )
@@ -601,14 +531,6 @@ static unsigned int yuv_to_rgb24( long y, long u, long v )
 	return LittleLong ((r)|(g<<8)|(b<<16)|(255<<24));
 }
 #endif
-
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
 
 static void decodeCodeBook( byte *input, unsigned short roq_flags )
 {
@@ -861,14 +783,6 @@ static void decodeCodeBook( byte *input, unsigned short roq_flags )
 	}
 }
 
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
-
 static void recurseQuad( long startX, long startY, long quadSize, long xOff, long yOff )
 {
 	byte *scroff;
@@ -901,14 +815,6 @@ static void recurseQuad( long startX, long startY, long quadSize, long xOff, lon
 	}
 }
 
-
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
 
 static void setupQuad( long xOff, long yOff )
 {
@@ -945,14 +851,6 @@ static void setupQuad( long xOff, long yOff )
 		cin.qStatus[1][i] = temp;			  // eoq
 	}
 }
-
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
 
 static void readQuadInfo( byte *qData )
 {
@@ -999,15 +897,7 @@ static void readQuadInfo( byte *qData )
 #endif
 }
 
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
-
-static void RoQPrepMcomp( long xoff, long yoff ) 
+static void RoQPrepMcomp( long xoff, long yoff )
 {
 	long i, j, x, y, temp, temp2;
 
@@ -1023,15 +913,7 @@ static void RoQPrepMcomp( long xoff, long yoff )
 	}
 }
 
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
-
-static void initRoQ() 
+static void initRoQ()
 {
 	if (currentHandle < 0) return;
 
@@ -1041,14 +923,6 @@ static void initRoQ()
 	ROQ_GenYUVTables();
 	RllSetupTable();
 }
-
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
 
 static void RoQReset() {
 	
@@ -1061,14 +935,6 @@ static void RoQReset() {
 	RoQ_init();
 	cinTable[currentHandle].status = FMV_LOOPED;
 }
-
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
 
 static void RoQInterrupt(void)
 {
@@ -1193,14 +1059,6 @@ redump:
 	cinTable[currentHandle].RoQPlayed	+= cinTable[currentHandle].RoQFrameSize+8;
 }
 
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
-
 static void RoQ_init( void )
 {
 	// we need to use CL_ScaledMilliseconds because of the smp mode calls from the renderer
@@ -1224,14 +1082,6 @@ static void RoQ_init( void )
 	}
 
 }
-
-/******************************************************************************
-*
-* Function:		
-*
-* Description:	
-*
-******************************************************************************/
 
 static void RoQShutdown( void ) {
 	const char *s;
