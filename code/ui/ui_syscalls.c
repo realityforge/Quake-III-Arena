@@ -86,10 +86,6 @@ void trap_Cvar_Create( const char *var_name, const char *var_value, int flags ) 
 	syscall( UI_CVAR_CREATE, var_name, var_value, flags );
 }
 
-void trap_Cvar_InfoStringBuffer( int bit, char *buffer, int bufsize ) {
-	syscall( UI_CVAR_INFOSTRINGBUFFER, bit, buffer, bufsize );
-}
-
 int trap_Argc( void ) {
 	return syscall( UI_ARGC );
 }
@@ -120,10 +116,6 @@ void trap_FS_FCloseFile( fileHandle_t f ) {
 
 int trap_FS_GetFileList(  const char *path, const char *extension, char *listbuf, int bufsize ) {
 	return syscall( UI_FS_GETFILELIST, path, extension, listbuf, bufsize );
-}
-
-int trap_FS_Seek( fileHandle_t f, long offset, int origin ) {
-	return syscall( UI_FS_SEEK, f, offset, origin );
 }
 
 qhandle_t trap_R_RegisterModel( const char *name ) {
@@ -316,10 +308,6 @@ int trap_LAN_CompareServers( int source, int sortKey, int sortDir, int s1, int s
 
 int trap_MemoryRemaining( void ) {
 	return syscall( UI_MEMORY_REMAINING );
-}
-
-int trap_PC_AddGlobalDefine( char *define ) {
-	return syscall( UI_PC_ADD_GLOBAL_DEFINE, define );
 }
 
 int trap_PC_LoadSource( const char *filename ) {

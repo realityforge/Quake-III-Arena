@@ -37,7 +37,6 @@ typedef struct scrollInfo_s {
 	float xStart;
 	float yStart;
 	itemDef_t *item;
-	qboolean scrollDir;
 } scrollInfo_t;
 
 static scrollInfo_t scrollInfo;
@@ -57,7 +56,6 @@ static itemDef_t *g_editItem = NULL;
 menuDef_t Menus[MAX_MENUS];      // defined menus
 int menuCount = 0;               // how many
 
-menuDef_t *menuStack[MAX_OPEN_MENUS];
 int openMenuCount = 0;
 
 static qboolean debugMode = qfalse;
@@ -147,7 +145,6 @@ typedef struct stringDef_s {
 static int strPoolIndex = 0;
 static char strPool[STRING_POOL_SIZE];
 
-static int strHandleCount = 0;
 static stringDef_t *strHandle[HASH_TABLE_SIZE];
 
 
@@ -220,7 +217,6 @@ void String_Init() {
 	for (i = 0; i < HASH_TABLE_SIZE; i++) {
 		strHandle[i] = 0;
 	}
-	strHandleCount = 0;
 	strPoolIndex = 0;
 	menuCount = 0;
 	openMenuCount = 0;
@@ -904,13 +900,6 @@ menuDef_t *Menus_FindByName(const char *p) {
   return NULL;
 }
 
-void Menus_ShowByName(const char *p) {
-	menuDef_t *menu = Menus_FindByName(p);
-	if (menu) {
-		Menus_Activate(menu);
-	}
-}
-
 void Menus_OpenByName(const char *p) {
   Menus_ActivateByName(p);
 }
@@ -1589,16 +1578,6 @@ void Item_MouseLeave(itemDef_t *item) {
   }
 }
 
-itemDef_t *Menu_HitTest(menuDef_t *menu, float x, float y) {
-  int i;
-  for (i = 0; i < menu->itemCount; i++) {
-    if (Rect_ContainsPoint(&menu->items[i]->window.rect, x, y)) {
-      return menu->items[i];
-    }
-  }
-  return NULL;
-}
-
 void Item_SetMouseOver(itemDef_t *item, qboolean focus) {
   if (item) {
     if (focus) {
@@ -2187,7 +2166,6 @@ void Item_StartCapture(itemDef_t *item, int key) {
 				scrollInfo.nextAdjustTime = DC->realTime + SCROLL_TIME_ADJUST;
 				scrollInfo.adjustValue = SCROLL_TIME_START;
 				scrollInfo.scrollKey = key;
-				scrollInfo.scrollDir = (flags & WINDOW_LB_LEFTARROW) ? qtrue : qfalse;
 				scrollInfo.item = item;
 				captureData = &scrollInfo;
 				captureFunc = &Scroll_ListBox_AutoFunc;
@@ -2319,9 +2297,6 @@ qboolean Item_HandleKey(itemDef_t *item, int key, qboolean down) {
     case ITEM_TYPE_SLIDER:
       return Item_Slider_HandleKey(item, key, down);
       break;
-    //case ITEM_TYPE_IMAGE:
-    //  Item_Image_Paint(item);
-    //  break;
     default:
       return qfalse;
       break;
@@ -2657,10 +2632,6 @@ void ToWindowCoords(float *x, float *y, windowDef_t *window) {
 	} 
 	*x += window->rect.x;
 	*y += window->rect.y;
-}
-
-void Rect_ToWindowCoords(rectDef_t *rect, windowDef_t *window) {
-	ToWindowCoords(&rect->x, &rect->y, window);
 }
 
 void Item_SetTextExtents(itemDef_t *item, int *width, int *height, const char *text) {
@@ -3474,14 +3445,6 @@ void Item_Model_Paint(itemDef_t *item) {
 
 }
 
-
-void Item_Image_Paint(itemDef_t *item) {
-	if (item == NULL) {
-		return;
-	}
-	DC->drawHandlePic(item->window.rect.x+1, item->window.rect.y+1, item->window.rect.w-2, item->window.rect.h-2, item->asset);
-}
-
 void Item_ListBox_Paint(itemDef_t *item) {
 	float x, y, size, count, i, thumb;
 	qhandle_t image;
@@ -3863,9 +3826,6 @@ void Item_Paint(itemDef_t *item) {
     case ITEM_TYPE_LISTBOX:
       Item_ListBox_Paint(item);
       break;
-    //case ITEM_TYPE_IMAGE:
-    //  Item_Image_Paint(item);
-    //  break;
     case ITEM_TYPE_MODEL:
       Item_Model_Paint(item);
       break;
@@ -3894,18 +3854,6 @@ void Menu_Init(menuDef_t *menu) {
 	menu->fadeClamp = DC->Assets.fadeClamp;
 	menu->fadeCycle = DC->Assets.fadeCycle;
 	Window_Init(&menu->window);
-}
-
-itemDef_t *Menu_GetFocusedItem(menuDef_t *menu) {
-  int i;
-  if (menu) {
-    for (i = 0; i < menu->itemCount; i++) {
-      if (menu->items[i]->window.flags & WINDOW_HASFOCUS) {
-        return menu->items[i];
-      }
-    }
-  }
-  return NULL;
 }
 
 menuDef_t *Menu_GetFocused() {
@@ -3971,14 +3919,10 @@ qboolean Menus_AnyFullScreenVisible() {
 menuDef_t *Menus_ActivateByName(const char *p) {
   int i;
   menuDef_t *m = NULL;
-	menuDef_t *focus = Menu_GetFocused();
   for (i = 0; i < menuCount; i++) {
     if (Q_stricmp(Menus[i].window.name, p) == 0) {
 	    m = &Menus[i];
 			Menus_Activate(m);
-			if (openMenuCount < MAX_OPEN_MENUS && focus != NULL) {
-				menuStack[openMenuCount++] = focus;
-			}
     } else {
       Menus[i].window.flags &= ~WINDOW_HASFOCUS;
     }

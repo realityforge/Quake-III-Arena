@@ -300,11 +300,6 @@ short   ShortSwap (short l)
 	return (b1<<8) + b2;
 }
 
-short	ShortNoSwap (short l)
-{
-	return l;
-}
-
 int    LongSwap (int l)
 {
 	byte    b1,b2,b3,b4;
@@ -315,11 +310,6 @@ int    LongSwap (int l)
 	b4 = (l>>24)&255;
 
 	return ((int)b1<<24) + ((int)b2<<16) + ((int)b3<<8) + b4;
-}
-
-int	LongNoSwap (int l)
-{
-	return l;
 }
 
 float FloatSwap (float f)
@@ -337,11 +327,6 @@ float FloatSwap (float f)
 	dat2.b[2] = dat1.b[1];
 	dat2.b[3] = dat1.b[0];
 	return dat2.f;
-}
-
-float FloatNoSwap (float f)
-{
-	return f;
 }
 
 int Com_ParseInfos( const char *buf, int max, char infos[][MAX_INFO_STRING] ) {

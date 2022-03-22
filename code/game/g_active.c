@@ -1138,10 +1138,6 @@ void ClientEndFrame( gentity_t *ent ) {
 		BG_PlayerStateToEntityState( &ent->client->ps, &ent->s, qtrue );
 	}
 	SendPendingPredictableEvents( &ent->client->ps );
-
-	// set the bit for the reachability area the client is currently in
-//	i = trap_AAS_PointReachabilityAreaIndex( ent->client->ps.origin );
-//	ent->client->areabits[i >> 3] |= 1 << (i & 7);
 }
 
 

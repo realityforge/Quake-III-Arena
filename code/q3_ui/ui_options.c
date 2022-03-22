@@ -201,9 +201,3 @@ void Options_MenuInit( void ) {
 	Menu_AddItem( &s_options.menu, ( void * ) &s_options.network );
 	Menu_AddItem( &s_options.menu, ( void * ) &s_options.back );
 }
-
-
-void UI_SystemConfigMenu( void ) {
-	Options_MenuInit();
-	UI_PushMenu ( &s_options.menu );
-}

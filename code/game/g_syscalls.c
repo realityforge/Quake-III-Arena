@@ -80,10 +80,6 @@ int trap_FS_GetFileList(  const char *path, const char *extension, char *listbuf
 	return syscall( G_FS_GETFILELIST, path, extension, listbuf, bufsize );
 }
 
-int trap_FS_Seek( fileHandle_t f, long offset, int origin ) {
-	return syscall( G_FS_SEEK, f, offset, origin );
-}
-
 void	trap_SendConsoleCommand( int exec_when, const char *text ) {
 	syscall( G_SEND_CONSOLE_COMMAND, exec_when, text );
 }
@@ -150,21 +146,12 @@ void trap_Trace( trace_t *results, const vec3_t start, const vec3_t mins, const 
 	syscall( G_TRACE, results, start, mins, maxs, end, passEntityNum, contentmask );
 }
 
-void trap_TraceCapsule( trace_t *results, const vec3_t start, const vec3_t mins, const vec3_t maxs, const vec3_t end, int passEntityNum, int contentmask ) {
-	syscall( G_TRACECAPSULE, results, start, mins, maxs, end, passEntityNum, contentmask );
-}
-
 int trap_PointContents( const vec3_t point, int passEntityNum ) {
 	return syscall( G_POINT_CONTENTS, point, passEntityNum );
 }
 
-
 qboolean trap_InPVS( const vec3_t p1, const vec3_t p2 ) {
 	return syscall( G_IN_PVS, p1, p2 );
-}
-
-qboolean trap_InPVSIgnorePortals( const vec3_t p1, const vec3_t p2 ) {
-	return syscall( G_IN_PVS_IGNORE_PORTALS, p1, p2 );
 }
 
 void trap_AdjustAreaPortalState( gentity_t *ent, qboolean open ) {
@@ -241,10 +228,6 @@ int trap_BotLibVarSet(char *var_name, char *value) {
 	return syscall( BOTLIB_LIBVAR_SET, var_name, value );
 }
 
-int trap_BotLibVarGet(char *var_name, char *value, int size) {
-	return syscall( BOTLIB_LIBVAR_GET, var_name, value, size );
-}
-
 int trap_BotLibDefine(char *string) {
 	return syscall( BOTLIB_PC_ADD_GLOBAL_DEFINE, string );
 }
@@ -259,10 +242,6 @@ int trap_BotLibLoadMap(const char *mapname) {
 
 int trap_BotLibUpdateEntity(int ent, void /* struct bot_updateentity_s */ *bue) {
 	return syscall( BOTLIB_UPDATENTITY, ent, bue );
-}
-
-int trap_BotLibTest(int parm0, char *parm1, vec3_t parm2, vec3_t parm3) {
-	return syscall( BOTLIB_TEST, parm0, parm1, parm2, parm3 );
 }
 
 int trap_BotGetSnapshotEntity( int clientNum, int sequence ) {
@@ -297,10 +276,6 @@ float trap_AAS_Time(void) {
 
 int trap_AAS_PointAreaNum(vec3_t point) {
 	return syscall( BOTLIB_AAS_POINT_AREA_NUM, point );
-}
-
-int trap_AAS_PointReachabilityAreaIndex(vec3_t point) {
-	return syscall( BOTLIB_AAS_POINT_REACHABILITY_AREA_INDEX, point );
 }
 
 int trap_AAS_TraceAreas(vec3_t start, vec3_t end, int *areas, vec3_t *points, int maxareas) {
@@ -411,52 +386,12 @@ void trap_EA_Crouch(int client) {
 	syscall( BOTLIB_EA_CROUCH, client );
 }
 
-void trap_EA_MoveUp(int client) {
-	syscall( BOTLIB_EA_MOVE_UP, client );
-}
-
-void trap_EA_MoveDown(int client) {
-	syscall( BOTLIB_EA_MOVE_DOWN, client );
-}
-
-void trap_EA_MoveForward(int client) {
-	syscall( BOTLIB_EA_MOVE_FORWARD, client );
-}
-
-void trap_EA_MoveBack(int client) {
-	syscall( BOTLIB_EA_MOVE_BACK, client );
-}
-
-void trap_EA_MoveLeft(int client) {
-	syscall( BOTLIB_EA_MOVE_LEFT, client );
-}
-
-void trap_EA_MoveRight(int client) {
-	syscall( BOTLIB_EA_MOVE_RIGHT, client );
-}
-
 void trap_EA_SelectWeapon(int client, int weapon) {
 	syscall( BOTLIB_EA_SELECT_WEAPON, client, weapon );
 }
 
-void trap_EA_Jump(int client) {
-	syscall( BOTLIB_EA_JUMP, client );
-}
-
-void trap_EA_DelayedJump(int client) {
-	syscall( BOTLIB_EA_DELAYED_JUMP, client );
-}
-
-void trap_EA_Move(int client, vec3_t dir, float speed) {
-	syscall( BOTLIB_EA_MOVE, client, dir, PASSFLOAT(speed) );
-}
-
 void trap_EA_View(int client, vec3_t viewangles) {
 	syscall( BOTLIB_EA_VIEW, client, viewangles );
-}
-
-void trap_EA_EndRegular(int client, float thinktime) {
-	syscall( BOTLIB_EA_END_REGULAR, client, PASSFLOAT(thinktime) );
 }
 
 void trap_EA_GetInput(int client, float thinktime, void /* struct bot_input_s */ *input) {
@@ -475,20 +410,10 @@ void trap_BotFreeCharacter(int character) {
 	syscall( BOTLIB_AI_FREE_CHARACTER, character );
 }
 
-float trap_Characteristic_Float(int character, int index) {
-	int temp;
-	temp = syscall( BOTLIB_AI_CHARACTERISTIC_FLOAT, character, index );
-	return (*(float*)&temp);
-}
-
 float trap_Characteristic_BFloat(int character, int index, float min, float max) {
 	int temp;
 	temp = syscall( BOTLIB_AI_CHARACTERISTIC_BFLOAT, character, index, PASSFLOAT(min), PASSFLOAT(max) );
 	return (*(float*)&temp);
-}
-
-int trap_Characteristic_Integer(int character, int index) {
-	return syscall( BOTLIB_AI_CHARACTERISTIC_INTEGER, character, index );
 }
 
 int trap_Characteristic_BInteger(int character, int index, int min, int max) {

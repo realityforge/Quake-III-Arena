@@ -2390,9 +2390,6 @@ shader_t *R_FindShader( const char *name, int lightmapIndex, qboolean mipRawImag
 
 	// FIXME: set these "need" values apropriately
 	shader.needsNormal = qtrue;
-	shader.needsST1 = qtrue;
-	shader.needsST2 = qtrue;
-	shader.needsColor = qtrue;
 
 	//
 	// attempt to define shader from an explicit parameter file
@@ -2515,9 +2512,6 @@ qhandle_t RE_RegisterShaderFromImage(const char *name, int lightmapIndex, image_
 
 	// FIXME: set these "need" values apropriately
 	shader.needsNormal = qtrue;
-	shader.needsST1 = qtrue;
-	shader.needsST2 = qtrue;
-	shader.needsColor = qtrue;
 
 	//
 	// create the default shading commands

@@ -59,23 +59,6 @@ int CL_GetCurrentCmdNumber( void ) {
 	return cl.cmdNumber;
 }
 
-
-qboolean	CL_GetParseEntityState( int parseEntityNumber, entityState_t *state ) {
-	// can't return anything that hasn't been parsed yet
-	if ( parseEntityNumber >= cl.parseEntitiesNum ) {
-		Com_Error( ERR_DROP, "CL_GetParseEntityState: %i >= %i",
-			parseEntityNumber, cl.parseEntitiesNum );
-	}
-
-	// can't return anything that has been overwritten in the circular buffer
-	if ( parseEntityNumber <= cl.parseEntitiesNum - MAX_PARSE_ENTITIES ) {
-		return qfalse;
-	}
-
-	*state = cl.parseEntities[ parseEntityNumber & ( MAX_PARSE_ENTITIES - 1 ) ];
-	return qtrue;
-}
-
 void	CL_GetCurrentSnapshotNumber( int *snapshotNumber, int *serverTime ) {
 	*snapshotNumber = cl.snap.messageNum;
 	*serverTime = cl.snap.serverTime;

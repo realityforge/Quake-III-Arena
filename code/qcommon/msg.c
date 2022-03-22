@@ -346,12 +346,6 @@ void MSG_WriteBigString( msg_t *sb, const char *s ) {
 	}
 }
 
-void MSG_WriteAngle( msg_t *sb, float f ) {
-	MSG_WriteByte (sb, (int)(f*256/360) & 255);
-}
-
-//============================================================
-
 //
 // reading functions
 //
@@ -545,25 +539,6 @@ void MSG_WriteDeltaKey( msg_t *msg, int key, int oldV, int newV, int bits ) {
 int	MSG_ReadDeltaKey( msg_t *msg, int key, int oldV, int bits ) {
 	if ( MSG_ReadBits( msg, 1 ) ) {
 		return MSG_ReadBits( msg, bits ) ^ (key & kbitmask[bits]);
-	}
-	return oldV;
-}
-
-void MSG_WriteDeltaKeyFloat( msg_t *msg, int key, float oldV, float newV ) {
-	if ( oldV == newV ) {
-		MSG_WriteBits( msg, 0, 1 );
-		return;
-	}
-	MSG_WriteBits( msg, 1, 1 );
-	MSG_WriteBits( msg, (*(int *)&newV) ^ key, 32 );
-}
-
-float MSG_ReadDeltaKeyFloat( msg_t *msg, int key, float oldV ) {
-	if ( MSG_ReadBits( msg, 1 ) ) {
-		float	newV;
-
-		*(int *)&newV = MSG_ReadBits( msg, 32 ) ^ key;
-		return newV;
 	}
 	return oldV;
 }

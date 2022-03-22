@@ -174,7 +174,6 @@ typedef struct centity_s {
 
 	int				muzzleFlashTime;	// move to playerEntity?
 	int				previousEvent;
-	int				teleportFlag;
 
 	int				trailTime;		// so missile trails can handle dropped initial packets
 	int				dustTrailTime;
@@ -185,7 +184,6 @@ typedef struct centity_s {
 	playerEntity_t	pe;
 
 	int				errorTime;		// decay the error from this time
-	vec3_t			errorOrigin;
 	vec3_t			errorAngles;
 	
 	qboolean		extrapolated;	// false if origin / angles is an interpolation
@@ -391,7 +389,6 @@ typedef struct weaponInfo_s {
 
 	vec3_t			weaponMidpoint;		// so it will rotate centered instead of by tag
 
-	float			flashDlight;
 	vec3_t			flashDlightColor;
 	sfxHandle_t		flashSound[4];		// fast firing weapons randomly choose
 
@@ -426,12 +423,6 @@ typedef struct {
 	qhandle_t		models[MAX_ITEM_MODELS];
 	qhandle_t		icon;
 } itemInfo_t;
-
-
-typedef struct {
-	int				itemNum;
-} powerupInfo_t;
-
 
 #define MAX_SKULLTRAIL		10
 
@@ -651,7 +642,7 @@ typedef struct {
 // all of the model, shader, and sound references that are
 // loaded at gamestate time are stored in cgMedia_t
 // Other media that can be tied to clients, weapons, or items are
-// stored in the clientInfo_t, itemInfo_t, weaponInfo_t, and powerupInfo_t
+// stored in the clientInfo_t, itemInfo_t, weaponInfo_t
 typedef struct {
 	qhandle_t	charsetShader;
 	qhandle_t	charsetProp;
@@ -1231,9 +1222,6 @@ void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demo
 void CG_AdjustFrom640( float *x, float *y, float *w, float *h );
 void CG_FillRect( float x, float y, float width, float height, const float *color );
 void CG_DrawPic( float x, float y, float width, float height, qhandle_t hShader );
-void CG_DrawString( float x, float y, const char *string, 
-				   float charWidth, float charHeight, const float *modulate );
-
 
 void CG_DrawStringExt( int x, int y, const char *string, const float *setColor, 
 		qboolean forceColor, qboolean shadow, int charWidth, int charHeight, int maxChars );
@@ -1496,7 +1484,6 @@ int			trap_FS_FOpenFile( const char *qpath, fileHandle_t *f, fsMode_t mode );
 void		trap_FS_Read( void *buffer, int len, fileHandle_t f );
 void		trap_FS_Write( const void *buffer, int len, fileHandle_t f );
 void		trap_FS_FCloseFile( fileHandle_t f );
-int			trap_FS_Seek( fileHandle_t f, long offset, int origin ); // fsOrigin_t
 
 // add commands to the local console as if they were typed in
 // for map changing, etc.  The command is not executed immediately,

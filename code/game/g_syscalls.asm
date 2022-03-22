@@ -27,7 +27,6 @@ equ	trap_SetBrushModel		-24
 equ	trap_Trace				-25
 equ	trap_PointContents		-26
 equ trap_InPVS				-27
-equ	trap_InPVSIgnorePortals	-28
 equ	trap_AdjustAreaPortalState	-29
 equ	trap_AreasConnected		-30
 equ	trap_LinkEntity			-31
@@ -43,9 +42,7 @@ equ trap_DebugPolygonCreate	-40
 equ trap_DebugPolygonDelete	-41
 equ trap_RealTime			-42
 equ trap_SnapVector			-43
-equ trap_TraceCapsule		-44
 equ trap_EntityContactCapsule	-45
-equ trap_FS_Seek -46
 
 equ	memset					-101
 equ	memcpy					-102
@@ -64,12 +61,10 @@ equ	testPrintFloat			-114
 equ trap_BotLibSetup					-201
 equ trap_BotLibShutdown					-202
 equ trap_BotLibVarSet					-203
-equ trap_BotLibVarGet					-204
 equ trap_BotLibDefine					-205
 equ trap_BotLibStartFrame				-206
 equ trap_BotLibLoadMap					-207
 equ trap_BotLibUpdateEntity				-208
-equ trap_BotLibTest						-209
 
 equ trap_BotGetSnapshotEntity			-210
 equ trap_BotGetServerCommand		-211
@@ -116,20 +111,10 @@ equ trap_EA_Attack						-407
 equ trap_EA_Use							-408
 equ trap_EA_Respawn						-409
 equ trap_EA_Crouch						-410
-equ trap_EA_MoveUp						-411
-equ trap_EA_MoveDown					-412
-equ trap_EA_MoveForward					-413
-equ trap_EA_MoveBack					-414
-equ trap_EA_MoveLeft					-415
-equ trap_EA_MoveRight					-416
 
 equ trap_EA_SelectWeapon				-417
-equ trap_EA_Jump						-418
-equ trap_EA_DelayedJump					-419
-equ trap_EA_Move						-420
 equ trap_EA_View						-421
 
-equ trap_EA_EndRegular					-422
 equ trap_EA_GetInput					-423
 equ trap_EA_ResetInput					-424
 
@@ -137,9 +122,7 @@ equ trap_EA_ResetInput					-424
 
 equ trap_BotLoadCharacter				-501
 equ trap_BotFreeCharacter				-502
-equ trap_Characteristic_Float			-503
 equ trap_Characteristic_BFloat			-504
-equ trap_Characteristic_Integer			-505
 equ trap_Characteristic_BInteger		-506
 equ trap_Characteristic_String			-507
 
@@ -216,7 +199,6 @@ equ trap_BotSetAvoidGoalTime			-574
 equ trap_BotAddAvoidSpot				-575
 equ trap_AAS_AlternativeRouteGoals		-576
 equ trap_AAS_PredictRoute				-577
-equ trap_AAS_PointReachabilityAreaIndex	-578
 
 equ trap_BotLibLoadSource				-579
 equ trap_BotLibFreeSource				-580

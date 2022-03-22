@@ -240,8 +240,6 @@ void IN_Button13Down(void) {IN_KeyDown(&in_buttons[13]);}
 void IN_Button13Up(void) {IN_KeyUp(&in_buttons[13]);}
 void IN_Button14Down(void) {IN_KeyDown(&in_buttons[14]);}
 void IN_Button14Up(void) {IN_KeyUp(&in_buttons[14]);}
-void IN_Button15Down(void) {IN_KeyDown(&in_buttons[15]);}
-void IN_Button15Up(void) {IN_KeyUp(&in_buttons[15]);}
 
 void IN_ButtonDown (void) {
 	IN_KeyDown(&in_buttons[1]);}

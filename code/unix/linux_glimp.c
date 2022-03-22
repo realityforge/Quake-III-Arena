@@ -76,9 +76,7 @@ typedef enum
   RSERR_OK,
 
   RSERR_INVALID_FULLSCREEN,
-  RSERR_INVALID_MODE,
-
-  RSERR_UNKNOWN
+  RSERR_INVALID_MODE
 } rserr_t;
 
 glwstate_t glw_state;
@@ -87,9 +85,6 @@ static Display *dpy = NULL;
 static int scrnum;
 static Window win = 0;
 static GLXContext ctx = NULL;
-
-// bk001206 - not needed anymore
-// static qboolean autorepeaton = qtrue;
 
 #define KEY_MASK (KeyPressMask | KeyReleaseMask)
 #define MOUSE_MASK (ButtonPressMask | ButtonReleaseMask | \

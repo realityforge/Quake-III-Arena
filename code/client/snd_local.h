@@ -167,7 +167,6 @@ portable_samplepair_t *S_GetRawSamplePointer();
 void S_Spatialize(channel_t *ch);
 
 // adpcm functions
-int  S_AdpcmMemoryNeeded( const wavinfo_t *info );
 void S_AdpcmEncodeSound( sfx_t *sfx, short *samples );
 void S_AdpcmGetSamples(sndBuffer *chunk, short *to);
 
@@ -175,12 +174,8 @@ void S_AdpcmGetSamples(sndBuffer *chunk, short *to);
 
 void S_FreeOldestSound();
 
-#define	NXStream byte
-
-void encodeWavelet(sfx_t *sfx, short *packets);
 void decodeWavelet( sndBuffer *stream, short *packets);
 
-void encodeMuLaw( sfx_t *sfx, short *packets);
 extern short mulawToShort[256];
 
 extern short *sfxScratchBuffer;

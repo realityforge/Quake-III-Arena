@@ -965,7 +965,7 @@ void RB_StageIteratorGeneric( void )
 	//
 	// now do fog
 	//
-	if ( tess.fogNum && tess.shader->fogPass ) {
+	if ( tess.fogNum && tess.shader->fogPass != FP_NONE ) {
 		RB_FogPass();
 	}
 
@@ -1041,7 +1041,7 @@ void RB_StageIteratorVertexLitTexture( void )
 	//
 	// now do fog
 	//
-	if ( tess.fogNum && tess.shader->fogPass ) {
+	if ( tess.fogNum && tess.shader->fogPass != FP_NONE ) {
 		RB_FogPass();
 	}
 
@@ -1123,7 +1123,7 @@ void RB_StageIteratorLightmappedMultitexture( void ) {
 	//
 	// now do fog
 	//
-	if ( tess.fogNum && tess.shader->fogPass ) {
+	if ( tess.fogNum && tess.shader->fogPass != FP_NONE ) {
 		RB_FogPass();
 	}
 

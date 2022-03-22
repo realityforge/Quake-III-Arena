@@ -116,11 +116,6 @@ short   ShortSwap (short l)
 	return (b1<<8) + b2;
 }
 
-short	ShortNoSwap (short l)
-{
-	return l;
-}
-
 int    LongSwap (int l)
 {
 	byte    b1,b2,b3,b4;
@@ -133,31 +128,6 @@ int    LongSwap (int l)
 	return ((int)b1<<24) + ((int)b2<<16) + ((int)b3<<8) + b4;
 }
 
-int	LongNoSwap (int l)
-{
-	return l;
-}
-
-qint64 Long64Swap (qint64 ll)
-{
-	qint64	result;
-
-	result.b0 = ll.b7;
-	result.b1 = ll.b6;
-	result.b2 = ll.b5;
-	result.b3 = ll.b4;
-	result.b4 = ll.b3;
-	result.b5 = ll.b2;
-	result.b6 = ll.b1;
-	result.b7 = ll.b0;
-
-	return result;
-}
-
-qint64 Long64NoSwap (qint64 ll)
-{
-	return ll;
-}
 
 typedef union {
     float	f;
@@ -173,13 +143,6 @@ float FloatSwap (const float *f) {
 
 	return out.f;
 }
-
-float FloatNoSwap (const float *f)
-{
-	return *f;
-}
-
-
 
 static	char	com_token[MAX_TOKEN_CHARS];
 static	char	com_parsename[MAX_TOKEN_CHARS];

@@ -389,36 +389,6 @@ int BotAddressedToBot(bot_state_t *bs, bot_match_t *match) {
 	return qtrue;
 }
 
-int BotGPSToPosition(char *buf, vec3_t position) {
-	int i, j = 0;
-	int num, sign;
-
-	for (i = 0; i < 3; i++) {
-		num = 0;
-		while(buf[j] == ' ') j++;
-		if (buf[j] == '-') {
-			j++;
-			sign = -1;
-		}
-		else {
-			sign = 1;
-		}
-		while (buf[j]) {
-			if (buf[j] >= '0' && buf[j] <= '9') {
-				num = num * 10 + buf[j] - '0';
-				j++;
-			}
-			else {
-				j++;
-				break;
-			}
-		}
-		BotAI_Print(PRT_MESSAGE, "%d\n", sign * num);
-		position[i] = (float) sign * num;
-	}
-	return qtrue;
-}
-
 void BotMatch_HelpAccompany(bot_state_t *bs, bot_match_t *match) {
 	int client, other, areanum;
 	char teammate[MAX_MESSAGE_SIZE];
@@ -1053,7 +1023,6 @@ void BotMatch_CheckPoint(bot_state_t *bs, bot_match_t *match) {
 	//
 	trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
 	client = ClientFromName(netname);
-	//BotGPSToPosition(buf, position);
 	sscanf(buf, "%f %f %f", &position[0], &position[1], &position[2]);
 	position[2] += 0.5;
 	areanum = BotPointAreaNum(position);
