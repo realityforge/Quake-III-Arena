@@ -82,6 +82,11 @@ public class MainActivity extends SDLActivity // implements KeyEvent.Callback
 		}
 	}
 
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		nativeFocusChanged(hasFocus);
+	}
+
 	public void create() throws IOException {
 		//Make the directories
 		new File("/sdcard/ioquake3Quest/baseq3").mkdirs();
@@ -188,6 +193,7 @@ public class MainActivity extends SDLActivity // implements KeyEvent.Callback
 	}
 
 	public static native void nativeCreate(MainActivity thisObject);
+	public static native void nativeFocusChanged(boolean focus);
 
 	static {
 		System.loadLibrary("main");
