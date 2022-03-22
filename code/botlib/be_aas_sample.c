@@ -276,51 +276,6 @@ int AAS_PointPresenceType(vec3_t point)
 	if (!areanum) return PRESENCE_NONE;
 	return aasworld.areasettings[areanum].presencetype;
 }
-//===========================================================================
-// calculates the minimum distance between the origin of the box and the
-// given plane when both will collide on the given side of the plane
-//
-// normal	=	normal vector of plane to calculate distance from
-// mins		=	minimums of box relative to origin
-// maxs		=	maximums of box relative to origin
-// side		=	side of the plane we want to calculate the distance from
-//					0 normal vector side
-//					1 not normal vector side
-//===========================================================================
-vec_t AAS_BoxOriginDistanceFromPlane(vec3_t normal, vec3_t mins, vec3_t maxs, int side)
-{
-	vec3_t v1, v2;
-	int i;
-
-	//swap maxs and mins when on the other side of the plane
-	if (side)
-	{
-		//get a point of the box that would be one of the first
-		//to collide with the plane
-		for (i = 0; i < 3; i++)
-		{
-			if (normal[i] > BBOX_NORMAL_EPSILON) v1[i] = maxs[i];
-			else if (normal[i] < -BBOX_NORMAL_EPSILON) v1[i] = mins[i];
-			else v1[i] = 0;
-		}
-	}
-	else
-	{
-		//get a point of the box that would be one of the first
-		//to collide with the plane
-		for (i = 0; i < 3; i++)
-		{
-			if (normal[i] > BBOX_NORMAL_EPSILON) v1[i] = mins[i];
-			else if (normal[i] < -BBOX_NORMAL_EPSILON) v1[i] = maxs[i];
-			else v1[i] = 0;
-		}
-	}
-	//
-	VectorCopy(normal, v2);
-	VectorInverse(v2);
-//	VectorNegate(normal, v2);
-	return DotProduct(v1, v2);
-}
 qboolean AAS_AreaEntityCollision(int areanum, vec3_t start, vec3_t end,
 										int presencetype, int passent, aas_trace_t *trace)
 {

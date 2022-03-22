@@ -678,8 +678,6 @@ static int StuckInOtherClient(gentity_t *ent) {
 }
 #endif
 
-void BotTestSolid(vec3_t origin);
-
 void SendPendingPredictableEvents( playerState_t *ps ) {
 	gentity_t *t;
 	int event, seq;

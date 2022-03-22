@@ -5048,10 +5048,6 @@ qboolean _UI_IsFullscreen( void ) {
 	return Menus_AnyFullScreenVisible();
 }
 
-
-
-static connstate_t	lastConnState;
-
 static void UI_ReadableSize ( char *buf, int bufsize, int value )
 {
 	if (value > 1024*1024*1024 ) { // gigs
@@ -5264,8 +5260,6 @@ void UI_DrawConnectScreen( qboolean overlay ) {
 	if ( cstate.connState < CA_CONNECTED ) {
 		Text_PaintCenter_AutoWrapped(centerPoint, yStart + 176, 630, 20, scale, colorWhite, cstate.messageString, 0);
 	}
-
-	lastConnState = cstate.connState;
 
 	switch ( cstate.connState ) {
 	case CA_CONNECTING:

@@ -200,16 +200,6 @@ void ByteToDir( int b, vec3_t dir ) {
 }
 
 
-unsigned ColorBytes3 (float r, float g, float b) {
-	unsigned	i;
-
-	( (byte *)&i )[0] = r * 255;
-	( (byte *)&i )[1] = g * 255;
-	( (byte *)&i )[2] = b * 255;
-
-	return i;
-}
-
 unsigned ColorBytes4 (float r, float g, float b, float a) {
 	unsigned	i;
 
@@ -220,28 +210,6 @@ unsigned ColorBytes4 (float r, float g, float b, float a) {
 
 	return i;
 }
-
-float NormalizeColor( const vec3_t in, vec3_t out ) {
-	float	max;
-	
-	max = in[0];
-	if ( in[1] > max ) {
-		max = in[1];
-	}
-	if ( in[2] > max ) {
-		max = in[2];
-	}
-
-	if ( !max ) {
-		VectorClear( out );
-	} else {
-		out[0] = in[0] / max;
-		out[1] = in[1] / max;
-		out[2] = in[2] / max;
-	}
-	return max;
-}
-
 
 /*
 =====================
@@ -573,22 +541,6 @@ float AngleNormalize180 ( float angle ) {
 	return angle;
 }
 
-
-/*
-=================
-AngleDelta
-
-returns the normalized delta from angle1 to angle2
-=================
-*/
-float AngleDelta ( float angle1, float angle2 ) {
-	return AngleNormalize180( angle1 - angle2 );
-}
-
-
-//============================================================
-
-
 void SetPlaneSignbits (cplane_t *out) {
 	int	bits, j;
 
@@ -690,54 +642,6 @@ void AddPointToBounds( const vec3_t v, vec3_t mins, vec3_t maxs ) {
 	}
 }
 
-qboolean BoundsIntersect(const vec3_t mins, const vec3_t maxs,
-		const vec3_t mins2, const vec3_t maxs2)
-{
-	if ( maxs[0] < mins2[0] ||
-		maxs[1] < mins2[1] ||
-		maxs[2] < mins2[2] ||
-		mins[0] > maxs2[0] ||
-		mins[1] > maxs2[1] ||
-		mins[2] > maxs2[2])
-	{
-		return qfalse;
-	}
-
-	return qtrue;
-}
-
-qboolean BoundsIntersectSphere(const vec3_t mins, const vec3_t maxs,
-		const vec3_t origin, vec_t radius)
-{
-	if ( origin[0] - radius > maxs[0] ||
-		origin[0] + radius < mins[0] ||
-		origin[1] - radius > maxs[1] ||
-		origin[1] + radius < mins[1] ||
-		origin[2] - radius > maxs[2] ||
-		origin[2] + radius < mins[2])
-	{
-		return qfalse;
-	}
-
-	return qtrue;
-}
-
-qboolean BoundsIntersectPoint(const vec3_t mins, const vec3_t maxs,
-		const vec3_t origin)
-{
-	if ( origin[0] > maxs[0] ||
-		origin[0] < mins[0] ||
-		origin[1] > maxs[1] ||
-		origin[1] < mins[1] ||
-		origin[2] > maxs[2] ||
-		origin[2] < mins[2])
-	{
-		return qfalse;
-	}
-
-	return qtrue;
-}
-
 vec_t VectorNormalize( vec3_t v ) {
 	float	length, ilength;
 
@@ -777,36 +681,6 @@ vec_t VectorNormalize2( const vec3_t v, vec3_t out) {
 	return length;
 
 }
-
-vec_t _DotProduct( const vec3_t v1, const vec3_t v2 ) {
-	return v1[0]*v2[0] + v1[1]*v2[1] + v1[2]*v2[2];
-}
-
-int Q_log2( int val ) {
-	int answer;
-
-	answer = 0;
-	while ( ( val>>=1 ) != 0 ) {
-		answer++;
-	}
-	return answer;
-}
-
-
-
-/*
-int	PlaneTypeForNormal (vec3_t normal) {
-	if ( normal[0] == 1.0 )
-		return PLANE_X;
-	if ( normal[1] == 1.0 )
-		return PLANE_Y;
-	if ( normal[2] == 1.0 )
-		return PLANE_Z;
-	
-	return PLANE_NON_AXIAL;
-}
-*/
-
 
 void MatrixMultiply(float in1[3][3], float in2[3][3], float out[3][3]) {
 	out[0][0] = in1[0][0] * in2[0][0] + in1[0][1] * in2[1][0] +

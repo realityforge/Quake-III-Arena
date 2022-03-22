@@ -137,14 +137,12 @@ void FBO_CreateBuffer(FBO_t *fbo, int format, int index, int multisample)
 		case GL_STENCIL_INDEX4:
 		case GL_STENCIL_INDEX8:
 		case GL_STENCIL_INDEX16:
-			fbo->stencilFormat = format;
 			pRenderBuffer = &fbo->stencilBuffer;
 			attachment = GL_STENCIL_ATTACHMENT;
 			break;
 
 		case GL_DEPTH_STENCIL:
 		case GL_DEPTH24_STENCIL8:
-			fbo->packedDepthStencilFormat = format;
 			pRenderBuffer = &fbo->packedDepthStencilBuffer;
 			attachment = 0; // special for stencil and depth
 			break;
@@ -411,30 +409,6 @@ void FBO_Shutdown(void)
 		if(fbo->frameBuffer)
 			qglDeleteFramebuffers(1, &fbo->frameBuffer);
 	}
-}
-
-void R_FBOList_f(void)
-{
-	int             i;
-	FBO_t          *fbo;
-
-	if(!glRefConfig.framebufferObject)
-	{
-		ri.Printf(PRINT_ALL, "GL_EXT_framebuffer_object is not available.\n");
-		return;
-	}
-
-	ri.Printf(PRINT_ALL, "             size       name\n");
-	ri.Printf(PRINT_ALL, "----------------------------------------------------------\n");
-
-	for(i = 0; i < tr.numFBOs; i++)
-	{
-		fbo = tr.fbos[i];
-
-		ri.Printf(PRINT_ALL, "  %4i: %4i %4i %s\n", i, fbo->width, fbo->height, fbo->name);
-	}
-
-	ri.Printf(PRINT_ALL, " %i FBOs\n", tr.numFBOs);
 }
 
 void FBO_BlitFromTexture(struct image_s *src, vec4_t inSrcTexCorners, vec2_t inSrcTexScale, FBO_t *dst, ivec4_t inDstBox, struct shaderProgram_s *shaderProgram, vec4_t inColor, int blend)

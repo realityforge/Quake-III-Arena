@@ -828,7 +828,6 @@ int		trap_AAS_Swimming(vec3_t origin);
 int		trap_AAS_PredictClientMovement(void /* aas_clientmove_s */ *move, int entnum, vec3_t origin, int presencetype, int onground, vec3_t velocity, vec3_t cmdmove, int cmdframes, int maxframes, float frametime, int stopevent, int stopareanum, int visualize);
 
 
-void	trap_EA_Say(int client, char *str);
 void	trap_EA_SayTeam(int client, char *str);
 void	trap_EA_Command(int client, char *command);
 
@@ -860,10 +859,8 @@ int		trap_BotNumConsoleMessages(int chatstate);
 void	trap_BotInitialChat(int chatstate, char *type, int mcontext, char *var0, char *var1, char *var2, char *var3, char *var4, char *var5, char *var6, char *var7 );
 int		trap_BotNumInitialChats(int chatstate, char *type);
 int		trap_BotReplyChat(int chatstate, char *message, int mcontext, int vcontext, char *var0, char *var1, char *var2, char *var3, char *var4, char *var5, char *var6, char *var7 );
-int		trap_BotChatLength(int chatstate);
 void	trap_BotEnterChat(int chatstate, int client, int sendto);
 void	trap_BotGetChatMessage(int chatstate, char *buf, int size);
-int		trap_StringContains(char *str1, char *str2, int casesensitive);
 int		trap_BotFindMatch(char *str, void /* struct bot_match_s */ *match, unsigned long int context);
 void	trap_BotMatchVariable(void /* struct bot_match_s */ *match, int variable, char *buf, int size);
 void	trap_UnifyWhiteSpaces(char *string);
@@ -887,14 +884,10 @@ int		trap_BotChooseNBGItem(int goalstate, vec3_t origin, int *inventory, int tra
 int		trap_BotTouchingGoal(vec3_t origin, void /* struct bot_goal_s */ *goal);
 int		trap_BotItemGoalInVisButNotVisible(int viewer, vec3_t eye, vec3_t viewangles, void /* struct bot_goal_s */ *goal);
 int		trap_BotGetNextCampSpotGoal(int num, void /* struct bot_goal_s */ *goal);
-int		trap_BotGetMapLocationGoal(char *name, void /* struct bot_goal_s */ *goal);
 int		trap_BotGetLevelItemGoal(int index, char *classname, void /* struct bot_goal_s */ *goal);
-float	trap_BotAvoidGoalTime(int goalstate, int number);
 void	trap_BotSetAvoidGoalTime(int goalstate, int number, float avoidtime);
-void	trap_BotInitLevelItems(void);
 void	trap_BotUpdateEntityItems(void);
 int		trap_BotLoadItemWeights(int goalstate, char *filename);
-void	trap_BotFreeItemWeights(int goalstate);
 void	trap_BotInterbreedGoalFuzzyLogic(int parent1, int parent2, int child);
 void	trap_BotSaveGoalFuzzyLogic(int goalstate, char *filename);
 void	trap_BotMutateGoalFuzzyLogic(int goalstate, float range);
@@ -906,7 +899,6 @@ void	trap_BotMoveToGoal(void /* struct bot_moveresult_s */ *result, int movestat
 int		trap_BotMoveInDirection(int movestate, vec3_t dir, float speed, int type);
 void	trap_BotResetAvoidReach(int movestate);
 void	trap_BotResetLastAvoidReach(int movestate);
-int		trap_BotReachabilityArea(vec3_t origin, int testground);
 int		trap_BotMovementViewTarget(int movestate, void /* struct bot_goal_s */ *goal, int travelflags, float lookahead, vec3_t target);
 int		trap_BotPredictVisiblePosition(vec3_t origin, int areanum, void /* struct bot_goal_s */ *goal, int travelflags, vec3_t target);
 int		trap_BotAllocMoveState(void);

@@ -650,23 +650,6 @@ void RemoveTournamentLoser( void ) {
 	SetTeam( &g_entities[ clientNum ], "s" );
 }
 
-void RemoveTournamentWinner( void ) {
-	int			clientNum;
-
-	if ( level.numPlayingClients != 2 ) {
-		return;
-	}
-
-	clientNum = level.sortedClients[0];
-
-	if ( level.clients[ clientNum ].pers.connected != CON_CONNECTED ) {
-		return;
-	}
-
-	// make them a spectator
-	SetTeam( &g_entities[ clientNum ], "s" );
-}
-
 void AdjustTournamentScores( void ) {
 	int			clientNum;
 

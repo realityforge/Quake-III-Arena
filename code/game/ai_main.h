@@ -27,8 +27,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //bot flags
 #define BFL_STRAFERIGHT				1	//strafe to the right
 #define BFL_ATTACKED				2	//bot has attacked last ai frame
-#define BFL_ATTACKJUMPED			4	//bot jumped during attack last frame
-#define BFL_AIMATENEMY				8	//bot aimed at the enemy this frame
 #define BFL_AVOIDRIGHT				16	//avoid obstacles by going to the right
 #define BFL_IDEALVIEWSET			32	//bot has ideal view angles set
 #define BFL_FIGHTSUICIDAL			64	//bot is in a suicidal fight
@@ -144,8 +142,6 @@ typedef struct bot_state_s
 	int entergamechat;								//true when the bot used an enter game chat
 	int num_deaths;									//number of time this bot died
 	int num_kills;									//number of kills of this bot
-	int revenge_enemy;								//the revenge enemy
-	int revenge_kills;								//number of kills the enemy made
 	int lastframe_health;							//health value the last frame
 	int lasthitcount;								//number of hits last frame
 	int chatto;										//chat to all or team

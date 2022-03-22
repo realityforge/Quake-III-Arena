@@ -43,10 +43,8 @@ typedef struct FBO_s
 	int             depthFormat;
 
 	uint32_t        stencilBuffer;
-	int             stencilFormat;
 
 	uint32_t        packedDepthStencilBuffer;
-	int             packedDepthStencilFormat;
 
 	int             width;
 	int             height;

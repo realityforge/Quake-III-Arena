@@ -396,16 +396,6 @@ define_t *PC_FindHashedDefine(define_t **definehash, char *name)
 	}
 	return NULL;
 }
-define_t *PC_FindDefine(define_t *defines, char *name)
-{
-	define_t *d;
-
-	for (d = defines; d; d = d->next)
-	{
-		if (!strcmp(d->name, name)) return d;
-	}
-	return NULL;
-}
 //============================================================================
 // Returns the number of the parm if no parm found with the given name -1 is returned
 //============================================================================

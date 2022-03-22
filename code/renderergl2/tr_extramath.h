@@ -35,11 +35,9 @@ void Mat4Copy( const mat4_t in, mat4_t out );
 void Mat4Multiply( const mat4_t in1, const mat4_t in2, mat4_t out );
 void Mat4Transform( const mat4_t in1, const vec4_t in2, vec4_t out );
 qboolean Mat4Compare(const mat4_t a, const mat4_t b);
-void Mat4Dump( const mat4_t in );
 void Mat4Translation( vec3_t vec, mat4_t out );
 void Mat4Ortho( float left, float right, float bottom, float top, float znear, float zfar, mat4_t out );
 void Mat4View(vec3_t axes[3], vec3_t origin, mat4_t out);
-void Mat4SimpleInverse( const mat4_t in, mat4_t out);
 
 #define VectorCopy2(a,b)		((b)[0]=(a)[0],(b)[1]=(a)[1])
 #define VectorSet2(v,x,y)       ((v)[0]=(x),(v)[1]=(y));
@@ -54,7 +52,6 @@ void Mat4SimpleInverse( const mat4_t in, mat4_t out);
 #define OffsetByteToFloat(a)    ((float)(a) * 1.0f/127.5f - 1.0f)
 #define FloatToOffsetByte(a)    (byte)((a) * 127.5f + 128.0f)
 #define ByteToFloat(a)          ((float)(a) * 1.0f/255.0f)
-#define FloatToByte(a)          (byte)((a) * 255.0f)
 
 static ID_INLINE int VectorCompare4(const vec4_t v1, const vec4_t v2)
 {
@@ -97,7 +94,5 @@ void BoundingSphereOfSpheres(vec3_t origin1, float radius1, vec3_t origin2, floa
 #endif
 
 int NextPowerOfTwo(int in);
-unsigned short FloatToHalf(float in);
-float HalfToFloat(unsigned short in);
 
 #endif

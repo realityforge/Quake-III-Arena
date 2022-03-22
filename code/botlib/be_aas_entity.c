@@ -293,42 +293,6 @@ void AAS_UnlinkInvalidEntities(void)
 		}
 	}
 }
-int AAS_NearestEntity(vec3_t origin, int modelindex)
-{
-	int i, bestentnum;
-	float dist, bestdist;
-	aas_entity_t *ent;
-	vec3_t dir;
-
-	bestentnum = 0;
-	bestdist = 99999;
-	for (i = 0; i < aasworld.maxentities; i++)
-	{
-		ent = &aasworld.entities[i];
-		if (ent->i.modelindex != modelindex) continue;
-		VectorSubtract(ent->i.origin, origin, dir);
-		if (fabsf(dir[0]) < 40)
-		{
-			if (fabsf(dir[1]) < 40)
-			{
-				dist = VectorLength(dir);
-				if (dist < bestdist)
-				{
-					bestdist = dist;
-					bestentnum = i;
-				}
-			}
-		}
-	}
-	return bestentnum;
-}
-int AAS_BestReachableEntityArea(int entnum)
-{
-	aas_entity_t *ent;
-
-	ent = &aasworld.entities[entnum];
-	return AAS_BestReachableLinkArea(ent->areas);
-}
 int AAS_NextEntity(int entnum)
 {
 	if (!aasworld.loaded) return 0;

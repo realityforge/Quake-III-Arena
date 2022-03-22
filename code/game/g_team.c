@@ -25,8 +25,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
 typedef struct teamgame_s {
-	float			last_flag_capture;
-	int				last_capture_team;
 	flagStatus_t	redStatus;	// CTF
 	flagStatus_t	blueStatus;	// CTF
 	flagStatus_t	flagStatus;	// One Flag CTF
@@ -79,16 +77,6 @@ const char *TeamName(int team)  {
 	else if (team==TEAM_SPECTATOR)
 		return "SPECTATOR";
 	return "FREE";
-}
-
-const char *TeamColorString(int team) {
-	if (team==TEAM_RED)
-		return S_COLOR_RED;
-	else if (team==TEAM_BLUE)
-		return S_COLOR_BLUE;
-	else if (team==TEAM_SPECTATOR)
-		return S_COLOR_YELLOW;
-	return S_COLOR_WHITE;
 }
 
 // NULL for everyone
@@ -712,9 +700,6 @@ int Team_TouchOurFlag( gentity_t *ent, gentity_t *other, int team ) {
 #endif
 
 	cl->ps.powerups[enemy_flag] = 0;
-
-	teamgame.last_flag_capture = level.time;
-	teamgame.last_capture_team = team;
 
 	// Increase the team's score
 	AddTeamScore(ent->s.pos.trBase, other->client->sess.sessionTeam, 1);

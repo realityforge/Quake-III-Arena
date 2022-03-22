@@ -186,27 +186,3 @@ void LibVarSet(const char *var_name, const char *value)
 	//variable is modified
 	v->modified = qtrue;
 }
-qboolean LibVarChanged(const char *var_name)
-{
-	libvar_t *v;
-
-	v = LibVarGet(var_name);
-	if (v)
-	{
-		return v->modified;
-	}
-	else
-	{
-		return qfalse;
-	}
-}
-void LibVarSetNotModified(const char *var_name)
-{
-	libvar_t *v;
-
-	v = LibVarGet(var_name);
-	if (v)
-	{
-		v->modified = qfalse;
-	}
-}

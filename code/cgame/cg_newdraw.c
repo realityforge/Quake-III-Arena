@@ -46,15 +46,6 @@ void CG_InitTeamChat(void) {
   memset(systemChat, 0, sizeof(systemChat));
 }
 
-void CG_SetPrintString(int type, const char *p) {
-  if (type == SYSTEM_PRINT) {
-    strcpy(systemChat, p);
-  } else {
-    strcpy(teamChat2, teamChat1);
-    strcpy(teamChat1, p);
-  }
-}
-
 void CG_CheckOrderPending(void) {
 	if (cgs.gametype < GT_CTF) {
 		return;
@@ -1730,14 +1721,6 @@ void CG_KeyEvent(int key, qboolean down) {
 		return;
 	}
 
-  //if (key == trap_Key_GetKey("teamMenu") || !Display_CaptureItem(cgs.cursorX, cgs.cursorY)) {
-    // if we see this then we should always be visible
-  //  CG_EventHandling(CGAME_EVENT_NONE);
-  //  trap_Key_SetCatcher(0);
-  //}
-
-
-
   Display_HandleKey(key, down, cgs.cursorX, cgs.cursorY);
 
 	if (cgs.capturedItem) {
@@ -1747,16 +1730,6 @@ void CG_KeyEvent(int key, qboolean down) {
 			cgs.capturedItem = Display_CaptureItem(cgs.cursorX, cgs.cursorY);
 		}
 	}
-}
-
-int CG_ClientNumFromName(const char *p) {
-  int i;
-  for (i = 0; i < cgs.maxclients; i++) {
-    if (cgs.clientinfo[i].infoValid && Q_stricmp(cgs.clientinfo[i].name, p) == 0) {
-      return i;
-    }
-  }
-  return -1;
 }
 
 void CG_ShowResponseHead(void) {

@@ -565,22 +565,6 @@ int AAS_AreaSwim(int areanum)
 	else return qfalse;
 }
 //===========================================================================
-// returns qtrue if the area contains a liquid
-//===========================================================================
-int AAS_AreaLiquid(int areanum)
-{
-	if (aasworld.areasettings[areanum].areaflags & AREA_LIQUID) return qtrue;
-	else return qfalse;
-}
-int AAS_AreaLava(int areanum)
-{
-	return (aasworld.areasettings[areanum].contents & AREACONTENTS_LAVA);
-}
-int AAS_AreaSlime(int areanum)
-{
-	return (aasworld.areasettings[areanum].contents & AREACONTENTS_SLIME);
-}
-//===========================================================================
 // returns qtrue if the area contains ground faces
 //===========================================================================
 int AAS_AreaGrounded(int areanum)
@@ -3272,87 +3256,8 @@ void AAS_Reachability_JumpPad(void)
 		if (strcmp(classname, "trigger_push")) continue;
 		//
 		if (!AAS_GetJumpPadInfo(ent, areastart, absmins, absmaxs, velocity)) continue;
-		/*
-		//
-		AAS_FloatForBSPEpairKey(ent, "speed", &speed);
-		if (!speed) speed = 1000;
-//		AAS_VectorForBSPEpairKey(ent, "angles", angles);
-//		AAS_SetMovedir(angles, velocity);
-//		VectorScale(velocity, speed, velocity);
-		VectorClear(angles);
-		//get the mins, maxs and origin of the model
-		AAS_ValueForBSPEpairKey(ent, "model", model, MAX_EPAIRKEY);
-		if (model[0]) modelnum = atoi(model+1);
-		else modelnum = 0;
-		AAS_BSPModelMinsMaxsOrigin(modelnum, angles, absmins, absmaxs, origin);
-		VectorAdd(origin, absmins, absmins);
-		VectorAdd(origin, absmaxs, absmaxs);
-		//
-#ifdef REACH_DEBUG
-		botimport.Print(PRT_MESSAGE, "absmins = %f %f %f\n", absmins[0], absmins[1], absmins[2]);
-		botimport.Print(PRT_MESSAGE, "absmaxs = %f %f %f\n", absmaxs[0], absmaxs[1], absmaxs[2]);
-#endif REACH_DEBUG
-		VectorAdd(absmins, absmaxs, origin);
-		VectorScale (origin, 0.5, origin);
-
-		//get the start areas
-		VectorCopy(origin, teststart);
-		teststart[2] += 64;
-		trace = AAS_TraceClientBBox(teststart, origin, PRESENCE_CROUCH, -1);
-		if (trace.startsolid)
-		{
-			botimport.Print(PRT_MESSAGE, "trigger_push start solid\n");
-			VectorCopy(origin, areastart);
-		}
-		else
-		{
-			VectorCopy(trace.endpos, areastart);
-		}
-		areastart[2] += 0.125;
-		//
-		//AAS_DrawPermanentCross(origin, 4, 4);
-		//get the target entity
-		AAS_ValueForBSPEpairKey(ent, "target", target, MAX_EPAIRKEY);
-		for (ent2 = AAS_NextBSPEntity(0); ent2; ent2 = AAS_NextBSPEntity(ent2))
-		{
-			if (!AAS_ValueForBSPEpairKey(ent2, "targetname", targetname, MAX_EPAIRKEY)) continue;
-			if (!strcmp(targetname, target)) break;
-		}
-		if (!ent2)
-		{
-			botimport.Print(PRT_MESSAGE, "trigger_push without target entity %s\n", target);
-			continue;
-		}
-		AAS_VectorForBSPEpairKey(ent2, "origin", ent2origin);
-		//
-		height = ent2origin[2] - origin[2];
-		gravity = aassettings.sv_gravity;
-		time = sqrt( height / ( 0.5 * gravity ) );
-		if (!time)
-		{
-			botimport.Print(PRT_MESSAGE, "trigger_push without time\n");
-			continue;
-		}
-		// set s.origin2 to the push velocity
-		VectorSubtract ( ent2origin, origin, velocity);
-		dist = VectorNormalize( velocity);
-		forward = dist / time;
-		//FIXME: why multiply by 1.1
-		forward *= 1.1;
-		VectorScale(velocity, forward, velocity);
-		velocity[2] = time * gravity;
-		*/
 		//get the areas the jump pad brush is in
 		areas = AAS_LinkEntityClientBBox(absmins, absmaxs, -1, PRESENCE_CROUCH);
-		/*
-		for (link = areas; link; link = link->next_area)
-		{
-			if (link->areanum == 563)
-			{
-				ret = qfalse;
-			}
-		}
-        */
 		for (link = areas; link; link = link->next_area)
 		{
 			if (AAS_AreaJumpPad(link->areanum)) break;

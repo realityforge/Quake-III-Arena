@@ -89,14 +89,6 @@ qboolean Mat4Compare( const mat4_t a, const mat4_t b )
 		     a[ 3] != b[ 3] || a[ 7] != b[ 7] || a[11] != b[11] || a[15] != b[15]);
 }
 
-void Mat4Dump( const mat4_t in )
-{
-	ri.Printf(PRINT_ALL, "%3.5f %3.5f %3.5f %3.5f\n", in[ 0], in[ 4], in[ 8], in[12]);
-	ri.Printf(PRINT_ALL, "%3.5f %3.5f %3.5f %3.5f\n", in[ 1], in[ 5], in[ 9], in[13]);
-	ri.Printf(PRINT_ALL, "%3.5f %3.5f %3.5f %3.5f\n", in[ 2], in[ 6], in[10], in[14]);
-	ri.Printf(PRINT_ALL, "%3.5f %3.5f %3.5f %3.5f\n", in[ 3], in[ 7], in[11], in[15]);
-}
-
 void Mat4Translation( vec3_t vec, mat4_t out )
 {
 	out[ 0] = 1.0f; out[ 4] = 0.0f; out[ 8] = 0.0f; out[12] = vec[0];
@@ -134,26 +126,6 @@ void Mat4View(vec3_t axes[3], vec3_t origin, mat4_t out)
 	out[13] = -DotProduct(origin, axes[1]);
 	out[14] = -DotProduct(origin, axes[2]);
 	out[15] = 1;
-}
-
-void Mat4SimpleInverse( const mat4_t in, mat4_t out)
-{
-	vec3_t v;
-	float invSqrLen;
- 
-	VectorCopy(in + 0, v);
-	invSqrLen = 1.0f / DotProduct(v, v); VectorScale(v, invSqrLen, v);
-	out[ 0] = v[0]; out[ 4] = v[1]; out[ 8] = v[2]; out[12] = -DotProduct(v, &in[12]);
-
-	VectorCopy(in + 4, v);
-	invSqrLen = 1.0f / DotProduct(v, v); VectorScale(v, invSqrLen, v);
-	out[ 1] = v[0]; out[ 5] = v[1]; out[ 9] = v[2]; out[13] = -DotProduct(v, &in[12]);
-
-	VectorCopy(in + 8, v);
-	invSqrLen = 1.0f / DotProduct(v, v); VectorScale(v, invSqrLen, v);
-	out[ 2] = v[0]; out[ 6] = v[1]; out[10] = v[2]; out[14] = -DotProduct(v, &in[12]);
-
-	out[ 3] = 0.0f; out[ 7] = 0.0f; out[11] = 0.0f; out[15] = 1.0f;
 }
 
 void VectorLerp( vec3_t a, vec3_t b, float lerp, vec3_t c)
@@ -197,51 +169,4 @@ int NextPowerOfTwo(int in)
 		;
 
 	return out;
-}
-
-union f32_u {
-	float f;
-	uint32_t ui;
-	struct {
-		unsigned int fraction:23;
-		unsigned int exponent:8;
-		unsigned int sign:1;
-	} pack;
-};
-
-union f16_u {
-	uint16_t ui;
-	struct {
-		unsigned int fraction:10;
-		unsigned int exponent:5;
-		unsigned int sign:1;
-	} pack;
-};
-
-uint16_t FloatToHalf(float in)
-{
-	union f32_u f32;
-	union f16_u f16;
-
-	f32.f = in;
-
-	f16.pack.exponent = CLAMP((int)(f32.pack.exponent) - 112, 0, 31);
-	f16.pack.fraction = f32.pack.fraction >> 13;
-	f16.pack.sign     = f32.pack.sign;
-
-	return f16.ui;
-}
-
-float HalfToFloat(uint16_t in)
-{
-	union f32_u f32;
-	union f16_u f16;
-
-	f16.ui = in;
-
-	f32.pack.exponent = (int)(f16.pack.exponent) + 112;
-	f32.pack.fraction = f16.pack.fraction << 13;
-	f32.pack.sign = f16.pack.sign;
-
-	return f32.f;
 }

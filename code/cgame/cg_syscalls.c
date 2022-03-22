@@ -133,10 +133,6 @@ clipHandle_t trap_CM_TempBoxModel( const vec3_t mins, const vec3_t maxs ) {
 	return syscall( CG_CM_TEMPBOXMODEL, mins, maxs );
 }
 
-clipHandle_t trap_CM_TempCapsuleModel( const vec3_t mins, const vec3_t maxs ) {
-	return syscall( CG_CM_TEMPCAPSULEMODEL, mins, maxs );
-}
-
 int		trap_CM_PointContents( const vec3_t p, clipHandle_t model ) {
 	return syscall( CG_CM_POINTCONTENTS, p, model );
 }
@@ -151,12 +147,6 @@ void	trap_CM_BoxTrace( trace_t *results, const vec3_t start, const vec3_t end,
 	syscall( CG_CM_BOXTRACE, results, start, end, mins, maxs, model, brushmask );
 }
 
-void	trap_CM_CapsuleTrace( trace_t *results, const vec3_t start, const vec3_t end,
-						  const vec3_t mins, const vec3_t maxs,
-						  clipHandle_t model, int brushmask ) {
-	syscall( CG_CM_CAPSULETRACE, results, start, end, mins, maxs, model, brushmask );
-}
-
 void	trap_CM_TransformedBoxTrace( trace_t *results, const vec3_t start, const vec3_t end,
 						  const vec3_t mins, const vec3_t maxs,
 						  clipHandle_t model, int brushmask,
@@ -164,14 +154,7 @@ void	trap_CM_TransformedBoxTrace( trace_t *results, const vec3_t start, const ve
 	syscall( CG_CM_TRANSFORMEDBOXTRACE, results, start, end, mins, maxs, model, brushmask, origin, angles );
 }
 
-void	trap_CM_TransformedCapsuleTrace( trace_t *results, const vec3_t start, const vec3_t end,
-						  const vec3_t mins, const vec3_t maxs,
-						  clipHandle_t model, int brushmask,
-						  const vec3_t origin, const vec3_t angles ) {
-	syscall( CG_CM_TRANSFORMEDCAPSULETRACE, results, start, end, mins, maxs, model, brushmask, origin, angles );
-}
-
-int		trap_CM_MarkFragments( int numPoints, const vec3_t *points, 
+int		trap_CM_MarkFragments( int numPoints, const vec3_t *points,
 				const vec3_t projection,
 				int maxPoints, vec3_t pointBuffer,
 				int maxFragments, markFragment_t *fragmentBuffer ) {
@@ -254,20 +237,12 @@ void	trap_R_AddPolyToScene( qhandle_t hShader , int numVerts, const polyVert_t *
 	syscall( CG_R_ADDPOLYTOSCENE, hShader, numVerts, verts );
 }
 
-void	trap_R_AddPolysToScene( qhandle_t hShader , int numVerts, const polyVert_t *verts, int num ) {
-	syscall( CG_R_ADDPOLYSTOSCENE, hShader, numVerts, verts, num );
-}
-
 int		trap_R_LightForPoint( vec3_t point, vec3_t ambientLight, vec3_t directedLight, vec3_t lightDir ) {
 	return syscall( CG_R_LIGHTFORPOINT, point, ambientLight, directedLight, lightDir );
 }
 
 void	trap_R_AddLightToScene( const vec3_t org, float intensity, float r, float g, float b ) {
 	syscall( CG_R_ADDLIGHTTOSCENE, org, PASSFLOAT(intensity), PASSFLOAT(r), PASSFLOAT(g), PASSFLOAT(b) );
-}
-
-void	trap_R_AddAdditiveLightToScene( const vec3_t org, float intensity, float r, float g, float b ) {
-	syscall( CG_R_ADDADDITIVELIGHTTOSCENE, org, PASSFLOAT(intensity), PASSFLOAT(r), PASSFLOAT(g), PASSFLOAT(b) );
 }
 
 void	trap_R_RenderScene( const refdef_t *fd ) {
@@ -328,14 +303,6 @@ void		trap_SetUserCmdValue( int stateValue, float sensitivityScale ) {
 	syscall( CG_SETUSERCMDVALUE, stateValue, PASSFLOAT(sensitivityScale) );
 }
 
-void		testPrintInt( char *string, int i ) {
-	syscall( CG_TESTPRINTINT, string, i );
-}
-
-void		testPrintFloat( char *string, float f ) {
-	syscall( CG_TESTPRINTFLOAT, string, PASSFLOAT(f) );
-}
-
 int trap_MemoryRemaining( void ) {
 	return syscall( CG_MEMORY_REMAINING );
 }
@@ -350,10 +317,6 @@ int trap_Key_GetCatcher( void ) {
 
 void trap_Key_SetCatcher( int catcher ) {
 	syscall( CG_KEY_SETCATCHER, catcher );
-}
-
-int trap_Key_GetKey( const char *binding ) {
-	return syscall( CG_KEY_GETKEY, binding );
 }
 
 int trap_PC_LoadSource( const char *filename ) {
@@ -415,8 +378,4 @@ void trap_CIN_SetExtents (int handle, int x, int y, int w, int h) {
 
 qboolean trap_GetEntityToken( char *buffer, int bufferSize ) {
 	return syscall( CG_GET_ENTITY_TOKEN, buffer, bufferSize );
-}
-
-qboolean trap_R_inPVS( const vec3_t p1, const vec3_t p2 ) {
-	return syscall( CG_R_INPVS, p1, p2 );
 }

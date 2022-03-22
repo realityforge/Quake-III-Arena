@@ -56,8 +56,6 @@ static itemDef_t *g_editItem = NULL;
 menuDef_t Menus[MAX_MENUS];      // defined menus
 int menuCount = 0;               // how many
 
-int openMenuCount = 0;
-
 static qboolean debugMode = qfalse;
 
 #define DOUBLE_CLICK_DELAY 300
@@ -222,7 +220,6 @@ void String_Init(void) {
 	}
 	strPoolIndex = 0;
 	menuCount = 0;
-	openMenuCount = 0;
 	UI_InitMemory();
 	Item_SetupKeywordHash();
 	Menu_SetupKeywordHash();

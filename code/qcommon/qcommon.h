@@ -343,7 +343,6 @@ typedef enum {
 	TRAP_FLOOR,
 	TRAP_CEIL,
 
-	TRAP_TESTPRINTINT,
 	TRAP_TESTPRINTFLOAT
 } sharedTraps_t;
 

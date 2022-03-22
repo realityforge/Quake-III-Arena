@@ -83,10 +83,6 @@ void CRC_Init(unsigned short *crcvalue)
 {
 	*crcvalue = CRC_INIT_VALUE;
 }
-void CRC_ProcessByte(unsigned short *crcvalue, byte data)
-{
-	*crcvalue = (*crcvalue << 8) ^ crctable[(*crcvalue >> 8) ^ data];
-}
 unsigned short CRC_Value(unsigned short crcvalue)
 {
 	return crcvalue ^ CRC_XOR_VALUE;
@@ -105,13 +101,4 @@ unsigned short CRC_ProcessString(unsigned char *data, int length)
 		crcvalue = (crcvalue << 8) ^ crctable[ind];
 	}
 	return CRC_Value(crcvalue);
-}
-void CRC_ContinueProcessString(unsigned short *crc, char *data, int length)
-{
-	int i;
-
-	for (i = 0; i < length; i++)
-	{
-		*crc = (*crc << 8) ^ crctable[(*crc >> 8) ^ data[i]];
-	}
 }

@@ -363,8 +363,6 @@ int BotAddressedToBot(bot_state_t *bs, bot_match_t *match) {
 				break;
 			}
 		}
-		//Com_sprintf(buf, sizeof(buf), "not addressed to me but %s", addressedto);
-		//trap_EA_Say(bs->client, buf);
 		return qfalse;
 	}
 	else {
