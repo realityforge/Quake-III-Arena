@@ -334,12 +334,6 @@ void R_LocalPointToWorld (const vec3_t local, vec3_t world) {
 	world[2] = local[0] * tr.or.axis[0][2] + local[1] * tr.or.axis[1][2] + local[2] * tr.or.axis[2][2] + tr.or.origin[2];
 }
 
-void R_WorldToLocal (const vec3_t world, vec3_t local) {
-	local[0] = DotProduct(world, tr.or.axis[0]);
-	local[1] = DotProduct(world, tr.or.axis[1]);
-	local[2] = DotProduct(world, tr.or.axis[2]);
-}
-
 void R_TransformModelToClip( const vec3_t src, const float *modelMatrix, const float *projectionMatrix,
 							vec4_t eye, vec4_t dst ) {
 	int i;

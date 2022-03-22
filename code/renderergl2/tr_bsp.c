@@ -41,7 +41,6 @@ static	world_t		s_worldData;
 static	byte		*fileBase;
 
 int			c_subdivisions;
-int			c_gridVerts;
 
 //===============================================================================
 
@@ -148,28 +147,6 @@ static void R_ColorShiftLightingFloats(float in[4], float out[4])
 	out[1] = g;
 	out[2] = b;
 	out[3] = in[3];
-}
-
-// Modified from http://graphicrants.blogspot.jp/2009/04/rgbm-color-encoding.html
-void ColorToRGBM(const vec3_t color, unsigned char rgbm[4])
-{
-	vec3_t          sample;
-	float			maxComponent;
-
-	VectorCopy(color, sample);
-
-	maxComponent = MAX(sample[0], sample[1]);
-	maxComponent = MAX(maxComponent, sample[2]);
-	maxComponent = CLAMP(maxComponent, 1.0f/255.0f, 1.0f);
-
-	rgbm[3] = (unsigned char) ceil(maxComponent * 255.0f);
-	maxComponent = 255.0f / rgbm[3];
-
-	VectorScale(sample, maxComponent, sample);
-
-	rgbm[0] = (unsigned char) (sample[0] * 255);
-	rgbm[1] = (unsigned char) (sample[1] * 255);
-	rgbm[2] = (unsigned char) (sample[2] * 255);
 }
 
 void ColorToRGB16(const vec3_t color, uint16_t rgb16[3])
@@ -2623,7 +2600,6 @@ void RE_LoadWorldMap( const char *name ) {
 	COM_StripExtension(s_worldData.baseName, s_worldData.baseName, sizeof(s_worldData.baseName));
 
 	startMarker = ri.Hunk_Alloc(0, h_low);
-	c_gridVerts = 0;
 
 	header = (dheader_t *)buffer.b;
 	fileBase = (byte *)header;

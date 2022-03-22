@@ -122,7 +122,6 @@ typedef struct alSfx_s
 	qboolean	isDefault;				// Couldn't be loaded - use default FX
 	qboolean	isDefaultChecked;		// Sound has been check if it isDefault
 	qboolean	inMemory;				// Sound is stored in memory
-	qboolean	isLocked;				// Sound is locked (can not be unloaded)
 	int				lastUsedTime;		// Time last used
 
 	int				loopCnt;		// number of loops using this sfx
@@ -433,7 +432,6 @@ qboolean S_AL_BufferInit( void )
 	// Load the default sound, and lock it
 	default_sfx = S_AL_BufferFind("sound/feedback/hit.wav");
 	S_AL_BufferUse(default_sfx);
-	knownSfx[default_sfx].isLocked = qtrue;
 
 	// All done
 	alBuffersInitialised = qtrue;
@@ -447,9 +445,6 @@ void S_AL_BufferShutdown( void )
 
 	if(!alBuffersInitialised)
 		return;
-
-	// Unlock the default sound effect
-	knownSfx[default_sfx].isLocked = qfalse;
 
 	// Free all used effects
 	for(i = 0; i < numSfx; i++)

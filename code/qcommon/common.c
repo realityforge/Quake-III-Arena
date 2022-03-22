@@ -1842,7 +1842,6 @@ void Com_QueueEvent( int time, sysEventType_t type, int value, int value2, int p
 sysEvent_t Com_GetSystemEvent( void )
 {
 	sysEvent_t  ev;
-	char        *s;
 
 	// return if we have data
 	if ( eventHead > eventTail )

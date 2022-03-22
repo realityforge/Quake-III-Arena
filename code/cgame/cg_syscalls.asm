@@ -64,7 +64,6 @@ equ trap_Key_IsDown						-61
 equ trap_Key_GetCatcher					-62
 equ trap_Key_SetCatcher					-63
 equ trap_Key_GetKey						-64
-equ trap_PC_AddGlobalDefine				-65
 equ	trap_PC_LoadSource					-66
 equ trap_PC_FreeSource					-67
 equ trap_PC_ReadToken					-68
@@ -72,7 +71,6 @@ equ trap_PC_SourceFileAndLine			-69
 equ trap_S_StopBackgroundTrack			-70
 equ trap_RealTime						-71
 equ trap_SnapVector						-72
-equ trap_RemoveCommand					-73
 equ trap_R_LightForPoint				-74
 equ trap_CIN_PlayCinematic				-75
 equ trap_CIN_StopCinematic				-76
@@ -89,7 +87,6 @@ equ trap_R_AddAdditiveLightToScene		-86
 equ trap_GetEntityToken					-87
 equ	trap_R_AddPolysToScene				-88
 equ trap_R_inPVS						-89
-equ trap_FS_Seek			-90
 
 equ	memset						-101
 equ	memcpy						-102

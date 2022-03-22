@@ -97,19 +97,6 @@ typedef struct iqmpose
     float channelscale[10];
 } iqmPose_t;
 
-typedef struct iqmanim
-{
-    unsigned int name;
-    unsigned int first_frame, num_frames;
-    float framerate;
-    unsigned int flags;
-} iqmAnim_t;
-
-enum
-{
-    IQM_LOOP = 1<<0
-};
-
 typedef struct iqmvertexarray
 {
     unsigned int type;
@@ -122,7 +109,7 @@ typedef struct iqmvertexarray
 typedef struct iqmbounds
 {
     float bbmin[3], bbmax[3];
-    float xyradius, radius;
+    float radius;
 } iqmBounds_t;
 
 #endif

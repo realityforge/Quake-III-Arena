@@ -39,9 +39,7 @@ typedef enum
 	RSERR_OK,
 
 	RSERR_INVALID_FULLSCREEN,
-	RSERR_INVALID_MODE,
-
-	RSERR_UNKNOWN
+	RSERR_INVALID_MODE
 } rserr_t;
 
 SDL_Window *SDL_window = NULL;
@@ -49,7 +47,6 @@ static SDL_GLContext SDL_glContext = NULL;
 
 cvar_t *r_allowResize; // make window resizable
 cvar_t *r_centerWindow;
-cvar_t *r_sdlDriver;
 
 int qglMajorVersion, qglMinorVersion;
 int qglesMajorVersion, qglesMinorVersion;
@@ -717,7 +714,6 @@ static qboolean GLimp_StartDriverAndSetMode(int mode, qboolean fullscreen, qbool
 
 		driverName = SDL_GetCurrentVideoDriver( );
 		ri.Printf( PRINT_ALL, "SDL using driver \"%s\"\n", driverName );
-		ri.Cvar_Set( "r_sdlDriver", driverName );
 	}
 
 	if (fullscreen && ri.Cvar_VariableIntegerValue( "in_nograb" ) )
@@ -939,7 +935,6 @@ void GLimp_Init( qboolean fixedFunction )
 {
 	ri.Printf( PRINT_DEVELOPER, "Glimp_Init( )\n" );
 
-	r_sdlDriver = ri.Cvar_Get( "r_sdlDriver", "", CVAR_ROM );
 	r_allowResize = ri.Cvar_Get( "r_allowResize", "0", CVAR_ARCHIVE | CVAR_LATCH );
 	r_centerWindow = ri.Cvar_Get( "r_centerWindow", "0", CVAR_ARCHIVE | CVAR_LATCH );
 

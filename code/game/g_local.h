@@ -111,7 +111,6 @@ struct gentity_s {
 	int			soundLoop;
 	gentity_t	*parent;
 	gentity_t	*nextTrain;
-	gentity_t	*prevTrain;
 	vec3_t		pos1, pos2;
 
 	char		*message;
@@ -139,7 +138,6 @@ struct gentity_s {
 
 	int			pain_debounce_time;
 	int			fly_sound_debounce_time;	// wind tunnel
-	int			last_move_time;
 
 	int			health;
 
@@ -437,15 +435,10 @@ void G_CheckTeamItems( void );
 void G_RunItem( gentity_t *ent );
 void RespawnItem( gentity_t *ent );
 
-void UseHoldableItem( gentity_t *ent );
-void PrecacheItem (gitem_t *it);
 gentity_t *Drop_Item( gentity_t *ent, gitem_t *item, float angle );
 gentity_t *LaunchItem( gitem_t *item, vec3_t origin, vec3_t velocity );
-void SetRespawn (gentity_t *ent, float delay);
 void G_SpawnItem (gentity_t *ent, gitem_t *item);
 void FinishSpawningItem( gentity_t *ent );
-void Think_Weapon (gentity_t *ent);
-int ArmorIndex (gentity_t *ent);
 void	Add_Ammo (gentity_t *ent, int weapon, int count);
 void Touch_Item (gentity_t *ent, gentity_t *other, trace_t *trace);
 
@@ -757,7 +750,6 @@ void	trap_FS_Read( void *buffer, int len, fileHandle_t f );
 void	trap_FS_Write( const void *buffer, int len, fileHandle_t f );
 void	trap_FS_FCloseFile( fileHandle_t f );
 int		trap_FS_GetFileList( const char *path, const char *extension, char *listbuf, int bufsize );
-int		trap_FS_Seek( fileHandle_t f, long offset, int origin ); // fsOrigin_t
 void	trap_SendConsoleCommand( int exec_when, const char *text );
 void	trap_Cvar_Register( vmCvar_t *cvar, const char *var_name, const char *value, int flags );
 void	trap_Cvar_Update( vmCvar_t *cvar );
@@ -777,7 +769,6 @@ void	trap_SetBrushModel( gentity_t *ent, const char *name );
 void	trap_Trace( trace_t *results, const vec3_t start, const vec3_t mins, const vec3_t maxs, const vec3_t end, int passEntityNum, int contentmask );
 int		trap_PointContents( const vec3_t point, int passEntityNum );
 qboolean trap_InPVS( const vec3_t p1, const vec3_t p2 );
-qboolean trap_InPVSIgnorePortals( const vec3_t p1, const vec3_t p2 );
 void	trap_AdjustAreaPortalState( gentity_t *ent, qboolean open );
 qboolean trap_AreasConnected( int area1, int area2 );
 void	trap_LinkEntity( gentity_t *ent );
@@ -795,12 +786,10 @@ void	trap_DebugPolygonDelete(int id);
 int		trap_BotLibSetup( void );
 int		trap_BotLibShutdown( void );
 int		trap_BotLibVarSet(char *var_name, char *value);
-int		trap_BotLibVarGet(char *var_name, char *value, int size);
 int		trap_BotLibDefine(char *string);
 int		trap_BotLibStartFrame(float time);
 int		trap_BotLibLoadMap(const char *mapname);
 int		trap_BotLibUpdateEntity(int ent, void /* struct bot_updateentity_s */ *bue);
-int		trap_BotLibTest(int parm0, char *parm1, vec3_t parm2, vec3_t parm3);
 
 int		trap_BotGetSnapshotEntity( int clientNum, int sequence );
 int		trap_BotGetServerCommand(int clientNum, char *message, int size);
@@ -815,7 +804,6 @@ void	trap_AAS_PresenceTypeBoundingBox(int presencetype, vec3_t mins, vec3_t maxs
 float	trap_AAS_Time(void);
 
 int		trap_AAS_PointAreaNum(vec3_t point);
-int		trap_AAS_PointReachabilityAreaIndex(vec3_t point);
 int		trap_AAS_TraceAreas(vec3_t start, vec3_t end, int *areas, vec3_t *points, int maxareas);
 
 int		trap_AAS_PointContents(vec3_t point);
@@ -851,29 +839,16 @@ void	trap_EA_Attack(int client);
 void	trap_EA_Use(int client);
 void	trap_EA_Respawn(int client);
 void	trap_EA_Crouch(int client);
-void	trap_EA_MoveUp(int client);
-void	trap_EA_MoveDown(int client);
-void	trap_EA_MoveForward(int client);
-void	trap_EA_MoveBack(int client);
-void	trap_EA_MoveLeft(int client);
-void	trap_EA_MoveRight(int client);
 void	trap_EA_SelectWeapon(int client, int weapon);
-void	trap_EA_Jump(int client);
-void	trap_EA_DelayedJump(int client);
-void	trap_EA_Move(int client, vec3_t dir, float speed);
 void	trap_EA_View(int client, vec3_t viewangles);
 
-void	trap_EA_EndRegular(int client, float thinktime);
 void	trap_EA_GetInput(int client, float thinktime, void /* struct bot_input_s */ *input);
 void	trap_EA_ResetInput(int client);
 
 
 int		trap_BotLoadCharacter(char *charfile, float skill);
 void	trap_BotFreeCharacter(int character);
-float	trap_Characteristic_Float(int character, int index);
 float	trap_Characteristic_BFloat(int character, int index, float min, float max);
-int		trap_Characteristic_Integer(int character, int index);
-int		trap_Characteristic_BInteger(int character, int index, int min, int max);
 void	trap_Characteristic_String(int character, int index, char *buf, int size);
 
 int		trap_BotAllocChatState(void);

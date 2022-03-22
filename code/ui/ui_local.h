@@ -133,17 +133,13 @@ extern vmCvar_t ui_serverStatusTimeOut;
 // ui_qmenu.c
 //
 
-#define RCOLUMN_OFFSET			( BIGCHAR_WIDTH )
-#define LCOLUMN_OFFSET			(-BIGCHAR_WIDTH )
-
 #define SLIDER_RANGE			10
 #define	MAX_EDIT_LINE			256
 
 #define MAX_MENUDEPTH			8
 #define MAX_MENUITEMS			96
 
-#define MTYPE_NULL				0
-#define MTYPE_SLIDER			1	
+#define MTYPE_SLIDER			1
 #define MTYPE_ACTION			2
 #define MTYPE_SPINCONTROL		3
 #define MTYPE_FIELD				4
@@ -164,7 +160,6 @@ extern vmCvar_t ui_serverStatusTimeOut;
 #define QMF_HIGHLIGHT_IF_FOCUS	0x00000080	// steady focus
 #define QMF_PULSEIFFOCUS		0x00000100	// pulse if focus
 #define QMF_HASMOUSEFOCUS		0x00000200
-#define QMF_NOONOFFTEXT			0x00000400
 #define QMF_MOUSEONLY			0x00000800	// only mouse input allowed
 #define QMF_HIDDEN				0x00001000	// skips drawing
 #define QMF_GRAYED				0x00002000	// grays and disables
@@ -290,19 +285,13 @@ typedef struct
 } menutext_s;
 
 extern void			Menu_Cache( void );
-extern void			Menu_Focus( menucommon_s *m );
 extern void			Menu_AddItem( menuframework_s *menu, void *item );
 extern void			Menu_AdjustCursor( menuframework_s *menu, int dir );
 extern void			Menu_Draw( menuframework_s *menu );
 extern void			*Menu_ItemAtCursor( menuframework_s *m );
-extern sfxHandle_t	Menu_ActivateItem( menuframework_s *s, menucommon_s* item );
 extern void			Menu_SetCursor( menuframework_s *s, int cursor );
 extern void			Menu_SetCursorToItem( menuframework_s *m, void* ptr );
 extern sfxHandle_t	Menu_DefaultKey( menuframework_s *s, int key );
-extern void			Bitmap_Init( menubitmap_s *b );
-extern void			Bitmap_Draw( menubitmap_s *b );
-extern void			ScrollList_Draw( menulist_s *l );
-extern sfxHandle_t	ScrollList_Key( menulist_s *l, int key );
 extern sfxHandle_t	menu_in_sound;
 extern sfxHandle_t	menu_move_sound;
 extern sfxHandle_t	menu_out_sound;
@@ -310,21 +299,12 @@ extern sfxHandle_t	menu_buzz_sound;
 extern sfxHandle_t	menu_null_sound;
 extern sfxHandle_t	weaponChangeSound;
 extern vec4_t		menu_text_color;
-extern vec4_t		menu_grayed_color;
-extern vec4_t		menu_dark_color;
-extern vec4_t		menu_highlight_color;
-extern vec4_t		menu_red_color;
-extern vec4_t		menu_black_color;
-extern vec4_t		menu_dim_color;
 extern vec4_t		color_black;
 extern vec4_t		color_white;
 extern vec4_t		color_yellow;
 extern vec4_t		color_blue;
 extern vec4_t		color_orange;
 extern vec4_t		color_red;
-extern vec4_t		color_dim;
-extern vec4_t		name_color;
-extern vec4_t		list_color;
 extern vec4_t		listbar_color;
 extern vec4_t		text_color_disabled; 
 extern vec4_t		text_color_normal;
@@ -333,17 +313,6 @@ extern vec4_t		text_color_highlight;
 extern char	*ui_medalNames[];
 extern char	*ui_medalPicNames[];
 extern char	*ui_medalSounds[];
-
-//
-// ui_mfield.c
-//
-extern void			MField_Clear( mfield_t *edit );
-extern void			MField_KeyDownEvent( mfield_t *edit, int key );
-extern void			MField_CharEvent( mfield_t *edit, int ch );
-extern void			MField_Draw( mfield_t *edit, int x, int y, int style, vec4_t color );
-extern void			MenuField_Init( menufield_s* m );
-extern void			MenuField_Draw( menufield_s *f );
-extern sfxHandle_t	MenuField_Key( menufield_s* m, int* key );
 
 //
 // ui_main.c
@@ -587,14 +556,11 @@ typedef struct {
 
 
 // new ui stuff
-#define UI_NUMFX 7
 #define MAX_HEADS 64
 #define MAX_ALIASES 64
-#define MAX_HEADNAME  32
 #define MAX_TEAMS 64
 #define MAX_GAMETYPES 16
 #define MAX_MAPS 128
-#define MAX_SPMAPS 16
 #define PLAYERS_PER_TEAM 5
 #define MAX_PINGREQUESTS		32
 #define MAX_ADDRESSLENGTH		64
@@ -602,7 +568,6 @@ typedef struct {
 #define MAX_MAPNAMELENGTH		16
 #define MAX_STATUSLENGTH		64
 #define MAX_LISTBOXWIDTH		59
-#define UI_FONT_THRESHOLD		0.1
 #define MAX_DISPLAY_SERVERS		2048
 #define MAX_SERVERSTATUS_LINES	128
 #define MAX_SERVERSTATUS_TEXT	1024
@@ -684,22 +649,16 @@ typedef struct {
 
 typedef struct serverStatus_s {
 	pinglist_t pingList[MAX_PINGREQUESTS];
-	int		numqueriedservers;
-	int		currentping;
-	int		nextpingtime;
-	int		maxservers;
 	int		refreshtime;
 	int		numServers;
 	int		sortKey;
 	int		sortDir;
-	int		lastCount;
 	qboolean refreshActive;
 	int		currentServer;
 	int		displayServers[MAX_DISPLAY_SERVERS];
 	int		numDisplayServers;
 	int		numPlayersOnServers;
 	int		nextDisplayRefresh;
-	int		nextSortTime;
 	qhandle_t currentServerPreview;
 	int		currentServerCinematic;
 	int		motdLen;
@@ -831,9 +790,7 @@ extern uiInfo_t uiInfo;
 
 extern void			UI_Init( void );
 extern void			UI_Shutdown( void );
-extern void			UI_KeyEvent( int key );
 extern void			UI_MouseEvent( int dx, int dy );
-extern void			UI_Refresh( int realtime );
 extern qboolean		UI_ConsoleCommand( int realTime );
 extern float		UI_ClampCvar( float min, float max, float value );
 extern void			UI_DrawNamedPic( float x, float y, float width, float height, const char *picname );
@@ -842,7 +799,6 @@ extern void			UI_FillRect( float x, float y, float width, float height, const fl
 extern void			UI_DrawRect( float x, float y, float width, float height, const float *color );
 extern void     UI_DrawTopBottom(float x, float y, float w, float h);
 extern void     UI_DrawSides(float x, float y, float w, float h);
-extern void			UI_UpdateScreen( void );
 extern void			UI_SetColor( const float *rgba );
 extern void			UI_LerpColor(vec4_t a, vec4_t b, vec4_t c, float t);
 extern void			UI_DrawBannerString( int x, int y, const char* str, int style, vec4_t color );
@@ -853,7 +809,6 @@ extern void			UI_DrawString( int x, int y, const char* str, int style, vec4_t co
 extern void			UI_DrawChar( int x, int y, int ch, int style, vec4_t color );
 extern qboolean 	UI_CursorInRect (int x, int y, int width, int height);
 extern void			UI_AdjustFrom640( float *x, float *y, float *w, float *h );
-extern void			UI_DrawTextBox (int x, int y, int width, int lines);
 extern qboolean		UI_IsFullscreen( void );
 extern void			UI_SetActiveMenu( uiMenuCommand_t menu );
 extern void			UI_PushMenu ( menuframework_s *menu );
@@ -861,9 +816,6 @@ extern void			UI_PopMenu (void);
 extern void			UI_ForceMenuOff (void);
 extern char			*UI_Argv( int arg );
 extern char			*UI_Cvar_VariableString( const char *var_name );
-extern void			UI_Refresh( int time );
-extern void			UI_KeyEvent( int key );
-extern void			UI_StartDemoLoop( void );
 extern qboolean		m_entersound;
 void UI_LoadBestScores(const char *map, int game);
 extern uiStatic_t	uis;
@@ -907,7 +859,6 @@ void			trap_Cvar_VariableStringBuffer( const char *var_name, char *buffer, int b
 void			trap_Cvar_SetValue( const char *var_name, float value );
 void			trap_Cvar_Reset( const char *name );
 void			trap_Cvar_Create( const char *var_name, const char *var_value, int flags );
-void			trap_Cvar_InfoStringBuffer( int bit, char *buffer, int bufsize );
 int				trap_Argc( void );
 void			trap_Argv( int n, char *buffer, int bufferLength );
 void			trap_Cmd_ExecuteText( int exec_when, const char *text );	// don't use EXEC_NOW!
@@ -916,7 +867,6 @@ void			trap_FS_Read( void *buffer, int len, fileHandle_t f );
 void			trap_FS_Write( const void *buffer, int len, fileHandle_t f );
 void			trap_FS_FCloseFile( fileHandle_t f );
 int				trap_FS_GetFileList(  const char *path, const char *extension, char *listbuf, int bufsize );
-int				trap_FS_Seek( fileHandle_t f, long offset, int origin ); // fsOrigin_t
 qhandle_t		trap_R_RegisterModel( const char *name );
 qhandle_t		trap_R_RegisterSkin( const char *name );
 qhandle_t		trap_R_RegisterShaderNoMip( const char *name );
@@ -1053,8 +1003,6 @@ void UI_SPUnlockMedals_f( void );
 void UI_InitGameinfo( void );
 
 // new ui 
-
-#define ASSET_BACKGROUND "uiBackground"
 
 // for tracking sp game info in Team Arena
 typedef struct postGameInfo_s {

@@ -9,7 +9,6 @@ equ	trap_Cvar_VariableStringBuffer			-6
 equ	trap_Cvar_SetValue						-7
 equ	trap_Cvar_Reset							-8
 equ	trap_Cvar_Create						-9
-equ	trap_Cvar_InfoStringBuffer				-10
 equ	trap_Argc								-11
 equ	trap_Argv								-12
 equ	trap_Cmd_ExecuteText					-13
@@ -55,7 +54,6 @@ equ trap_Cvar_Update						-52
 equ trap_MemoryRemaining					-53
 equ trap_R_RegisterFont						-56
 equ trap_R_ModelBounds						-57
-equ trap_PC_AddGlobalDefine					-58
 equ	trap_PC_LoadSource						-59
 equ trap_PC_FreeSource						-60
 equ trap_PC_ReadToken						-61
@@ -83,7 +81,6 @@ equ trap_LAN_ServerStatus					-83
 equ trap_LAN_GetServerPing					-84
 equ trap_LAN_ServerIsVisible				-85
 equ trap_LAN_CompareServers					-86
-equ trap_FS_Seek		-87
 
 equ	memset						-101
 equ	memcpy						-102

@@ -101,20 +101,12 @@ void	trap_FS_FCloseFile( fileHandle_t f ) {
 	syscall( CG_FS_FCLOSEFILE, f );
 }
 
-int trap_FS_Seek( fileHandle_t f, long offset, int origin ) {
-	return syscall( CG_FS_SEEK, f, offset, origin );
-}
-
 void	trap_SendConsoleCommand( const char *text ) {
 	syscall( CG_SENDCONSOLECOMMAND, text );
 }
 
 void	trap_AddCommand( const char *cmdName ) {
 	syscall( CG_ADDCOMMAND, cmdName );
-}
-
-void	trap_RemoveCommand( const char *cmdName ) {
-	syscall( CG_REMOVECOMMAND, cmdName );
 }
 
 void	trap_SendClientCommand( const char *s ) {
@@ -362,10 +354,6 @@ void trap_Key_SetCatcher( int catcher ) {
 
 int trap_Key_GetKey( const char *binding ) {
 	return syscall( CG_KEY_GETKEY, binding );
-}
-
-int trap_PC_AddGlobalDefine( char *define ) {
-	return syscall( CG_PC_ADD_GLOBAL_DEFINE, define );
 }
 
 int trap_PC_LoadSource( const char *filename ) {

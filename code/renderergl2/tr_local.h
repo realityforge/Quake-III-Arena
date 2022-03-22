@@ -166,12 +166,8 @@ typedef enum {
 
 	SS_BLEND0,			// regular transparency and filters
 	SS_BLEND1,			// generally only used for additive type effects
-	SS_BLEND2,
-	SS_BLEND3,
 
-	SS_BLEND6,
 	SS_STENCIL_SHADOW,
-	SS_ALMOST_NEAREST,	// gun smoke puffs
 
 	SS_NEAREST			// blood blobs
 } shaderSort_t;
@@ -1855,8 +1851,6 @@ static ID_INLINE qboolean ShaderRequiresCPUDeforms(const shader_t * shader)
 
 //====================================================================
 
-void R_SwapBuffers( int );
-
 void R_RenderView( viewParms_t *parms );
 void R_RenderDlightCubemaps(const refdef_t *fd);
 void R_RenderPshadowMaps(const refdef_t *fd);
@@ -1864,10 +1858,6 @@ void R_RenderSunShadowMaps(const refdef_t *fd, int level);
 void R_RenderCubemapSide( int cubemapIndex, int cubemapSide, qboolean subscene );
 
 void R_AddMD3Surfaces( trRefEntity_t *e );
-void R_AddNullModelSurfaces( trRefEntity_t *e );
-void R_AddBeamSurfaces( trRefEntity_t *e );
-void R_AddRailSurfaces( trRefEntity_t *e, qboolean isUnderwater );
-void R_AddLightningBoltSurfaces( trRefEntity_t *e );
 
 void R_AddPolygonSurfaces( void );
 
@@ -1990,7 +1980,6 @@ const void *RB_TakeVideoFrameCmd( const void *data );
 //
 shader_t	*R_FindShader( const char *name, int lightmapIndex, qboolean mipRawImage );
 shader_t	*R_GetShaderByHandle( qhandle_t hShader );
-shader_t	*R_GetShaderByState( int index, long *cycleTime );
 shader_t *R_FindShaderByName( const char *name );
 void		R_InitShaders( void );
 void		R_ShaderList_f( void );
@@ -2352,20 +2341,7 @@ typedef struct {
 
 typedef struct {
 	int		commandId;
-	image_t	*image;
-	int		width;
-	int		height;
-	void	*data;
-} subImageCommand_t;
-
-typedef struct {
-	int		commandId;
 } swapBuffersCommand_t;
-
-typedef struct {
-	int		commandId;
-	int		buffer;
-} endFrameCommand_t;
 
 typedef struct {
 	int		commandId;

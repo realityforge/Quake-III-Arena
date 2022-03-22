@@ -226,43 +226,6 @@ void S_AdpcmEncode( short indata[], char outdata[], int len, struct adpcm_state 
     state->index = index;
 }
 
-
-/*
-====================
-S_AdpcmMemoryNeeded
-
-Returns the amount of memory (in bytes) needed to store the samples in out internal adpcm format
-====================
-*/
-int S_AdpcmMemoryNeeded( const wavinfo_t *info ) {
-	float	scale;
-	int		scaledSampleCount;
-	int		sampleMemory;
-	int		blockCount;
-	int		headerMemory;
-
-	// determine scale to convert from input sampling rate to desired sampling rate
-	scale = (float)info->rate / dma.speed;
-
-	// calc number of samples at playback sampling rate
-	scaledSampleCount = info->samples / scale;
-
-	// calc memory need to store those samples using ADPCM at 4 bits per sample
-	sampleMemory = scaledSampleCount / 2;
-
-	// calc number of sample blocks needed of PAINTBUFFER_SIZE
-	blockCount = scaledSampleCount / PAINTBUFFER_SIZE;
-	if( scaledSampleCount % PAINTBUFFER_SIZE ) {
-		blockCount++;
-	}
-
-	// calc memory needed to store the block headers
-	headerMemory = blockCount * sizeof(adpcm_state_t);
-
-	return sampleMemory + headerMemory;
-}
-
-
 void S_AdpcmGetSamples(sndBuffer *chunk, short *to) {
 	adpcm_state_t	state;
 	byte			*out;

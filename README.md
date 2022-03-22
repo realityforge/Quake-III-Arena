@@ -302,8 +302,6 @@ The defaults for these variables differ depending on the target platform.
                                       developers should increase the mark
                                       triangle limits in cg_marks.c if they
                                       intend to use this.
-  r_sdlDriver                       - read only, indicates the SDL driver
-                                      backend being used
   r_noborder                        - Remove window decoration from window
                                       managers, like borders and titlebar.
   r_screenshotJpegQuality           - Controls quality of jpeg screenshots

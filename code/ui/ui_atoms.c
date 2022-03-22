@@ -51,18 +51,11 @@ void QDECL Com_Printf( const char *msg, ... ) {
 	trap_Print( text );
 }
 
-qboolean newUI = qfalse;
-
-
 float UI_ClampCvar( float min, float max, float value )
 {
 	if ( value < min ) return min;
 	if ( value > max ) return max;
 	return value;
-}
-
-void UI_StartDemoLoop( void ) {
-	trap_Cmd_ExecuteText( EXEC_APPEND, "d1\n" );
 }
 
 char *UI_Argv( int arg ) {
@@ -457,17 +450,6 @@ void UI_DrawRect( float x, float y, float width, float height, const float *colo
 
 void UI_SetColor( const float *rgba ) {
 	trap_R_SetColor( rgba );
-}
-
-void UI_UpdateScreen( void ) {
-	trap_UpdateScreen();
-}
-
-
-void UI_DrawTextBox (int x, int y, int width, int lines)
-{
-	UI_FillRect( x + BIGCHAR_WIDTH/2, y + BIGCHAR_HEIGHT/2, ( width + 1 ) * BIGCHAR_WIDTH, ( lines + 1 ) * BIGCHAR_HEIGHT, colorBlack );
-	UI_DrawRect( x + BIGCHAR_WIDTH/2, y + BIGCHAR_HEIGHT/2, ( width + 1 ) * BIGCHAR_WIDTH, ( lines + 1 ) * BIGCHAR_HEIGHT, colorWhite );
 }
 
 qboolean UI_CursorInRect (int x, int y, int width, int height)

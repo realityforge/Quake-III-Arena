@@ -1553,7 +1553,7 @@ void RB_StageIteratorGeneric( void )
 	//
 	// now do fog
 	//
-	if ( tess.fogNum && tess.shader->fogPass ) {
+	if ( tess.fogNum && tess.shader->fogPass != FP_NONE ) {
 		RB_FogPass();
 	}
 

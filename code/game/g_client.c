@@ -920,11 +920,6 @@ char *ClientConnect( int clientNum, qboolean firstTime, qboolean isBot ) {
 	// count current clients and rank for scoreboard
 	CalculateRanks();
 
-	// for statistics
-//	client->areabits = areabits;
-//	if ( !client->areabits )
-//		client->areabits = G_Alloc( (trap_AAS_PointReachabilityAreaIndex( NULL ) + 7) / 8 );
-
 	return NULL;
 }
 

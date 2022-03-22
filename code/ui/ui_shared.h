@@ -106,12 +106,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define	NUM_CROSSHAIRS			10
 
 typedef struct {
-  const char *command;
-  const char *args[MAX_SCRIPT_ARGS];
-} scriptDef_t;
-
-
-typedef struct {
   float x;    // horiz position
   float y;    // vert position
   float w;    // width
@@ -390,7 +384,6 @@ const char *String_Alloc(const char *p);
 void String_Init( void );
 void String_Report( void );
 void Init_Display(displayContextDef_t *dc);
-void Display_ExpandMacros(char * buff);
 void Menu_Init(menuDef_t *menu);
 void Item_Init(itemDef_t *item);
 void Menu_PostParse(menuDef_t *menu);
@@ -403,7 +396,6 @@ qboolean Color_Parse(char **p, vec4_t *c);
 qboolean Int_Parse(char **p, int *i);
 qboolean Rect_Parse(char **p, rectDef_t *r);
 qboolean String_Parse(char **p, const char **out);
-qboolean Script_Parse(char **p, const char **out);
 qboolean PC_Float_Parse(int handle, float *f);
 qboolean PC_Color_Parse(int handle, vec4_t *c);
 qboolean PC_Int_Parse(int handle, int *i);
@@ -426,7 +418,6 @@ int Display_CursorType(int x, int y);
 qboolean Display_KeyBindPending( void );
 void Menus_OpenByName(const char *p);
 menuDef_t *Menus_FindByName(const char *p);
-void Menus_ShowByName(const char *p);
 void Menus_CloseByName(const char *p);
 void Display_HandleKey(int key, qboolean down, int x, int y);
 void LerpColor(vec4_t a, vec4_t b, vec4_t c, float t);
@@ -443,7 +434,6 @@ void Controls_GetConfig( void );
 void Controls_SetConfig(qboolean restart);
 void Controls_SetDefaults( void );
 
-int			trap_PC_AddGlobalDefine( char *define );
 int			trap_PC_LoadSource( const char *filename );
 int			trap_PC_FreeSource( int handle );
 int			trap_PC_ReadToken( int handle, pc_token_t *pc_token );

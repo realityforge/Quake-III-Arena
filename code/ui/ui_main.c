@@ -126,8 +126,6 @@ static const char *UI_SelectedHead(int index, int *actual);
 static int UI_GetIndexFromSelection(int actual);
 static void UI_DrawCinematic(int handle, float x, float y, float w, float h);
 
-int ProcessNewUI( int command, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6 );
-
 /*
 ================
 vmMain
@@ -194,10 +192,6 @@ Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, i
 
 void AssetCache( void ) {
 	int n;
-	//if (Assets.textFont == NULL) {
-	//}
-	//Assets.background = trap_R_RegisterShaderNoMip( ASSET_BACKGROUND );
-	//Com_Printf("Menu Size: %i bytes\n", sizeof(Menus));
 	uiInfo.uiDC.Assets.gradientBar = trap_R_RegisterShaderNoMip( ASSET_GRADIENTBAR );
 	uiInfo.uiDC.Assets.fxBasePic = trap_R_RegisterShaderNoMip( ART_FX_BASE );
 	uiInfo.uiDC.Assets.fxPic[0] = trap_R_RegisterShaderNoMip( ART_FX_RED );
@@ -562,13 +556,6 @@ void UI_ShowPostGame(qboolean newHigh) {
   _UI_SetActiveMenu(UIMENU_POSTGAME);
 }
 
-void UI_DrawCenteredPic(qhandle_t image, int w, int h) {
-  int x, y;
-  x = (SCREEN_WIDTH - w) / 2;
-  y = (SCREEN_HEIGHT - h) / 2;
-  UI_DrawHandlePic(x, y, w, h, image);
-}
-
 int frameCount = 0;
 int startTime;
 
@@ -813,19 +800,8 @@ qboolean Asset_Parse(int handle) {
 	return qfalse;
 }
 
-void Font_Report( void ) {
-  int i;
-  Com_Printf("Font Info\n");
-  Com_Printf("=========\n");
-  for ( i = 32; i < 96; i++) {
-    Com_Printf("Glyph handle %i: %i\n", i, uiInfo.uiDC.Assets.textFont.glyphs[i].glyph);
-  }
-}
-
 void UI_Report( void ) {
   String_Report();
-  //Font_Report();
-
 }
 
 void UI_ParseMenu(const char *menuFile) {
@@ -5075,7 +5051,6 @@ qboolean _UI_IsFullscreen( void ) {
 
 
 static connstate_t	lastConnState;
-static char			lastLoadingText[MAX_INFO_VALUE];
 
 static void UI_ReadableSize ( char *buf, int bufsize, int value )
 {
@@ -5290,9 +5265,6 @@ void UI_DrawConnectScreen( qboolean overlay ) {
 		Text_PaintCenter_AutoWrapped(centerPoint, yStart + 176, 630, 20, scale, colorWhite, cstate.messageString, 0);
 	}
 
-	if ( lastConnState > cstate.connState ) {
-		lastLoadingText[0] = '\0';
-	}
 	lastConnState = cstate.connState;
 
 	switch ( cstate.connState ) {

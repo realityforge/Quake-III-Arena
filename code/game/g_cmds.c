@@ -1566,25 +1566,6 @@ void Cmd_SetViewpos_f( gentity_t *ent ) {
 	TeleportPlayer( ent, origin, angles );
 }
 
-
-
-void Cmd_Stats_f( gentity_t *ent ) {
-/*
-	int max, n, i;
-
-	max = trap_AAS_PointReachabilityAreaIndex( NULL );
-
-	n = 0;
-	for ( i = 0; i < max; i++ ) {
-		if ( ent->client->areabits[i >> 3] & (1 << (i & 7)) )
-			n++;
-	}
-
-	//trap_SendServerCommand( ent-g_entities, va("print \"visited %d of %d areas\n\"", n, max));
-	trap_SendServerCommand( ent-g_entities, va("print \"%d%% level coverage\n\"", n * 100 / max));
-*/
-}
-
 void ClientCommand( int clientNum ) {
 	gentity_t *ent;
 	char	cmd[MAX_TOKEN_CHARS];
@@ -1694,8 +1675,6 @@ void ClientCommand( int clientNum ) {
 		Cmd_GameCommand_f( ent );
 	else if (Q_stricmp (cmd, "setviewpos") == 0)
 		Cmd_SetViewpos_f( ent );
-	else if (Q_stricmp (cmd, "stats") == 0)
-		Cmd_Stats_f( ent );
 	else
 		trap_SendServerCommand( clientNum, va("print \"unknown cmd %s\n\"", cmd ) );
 }

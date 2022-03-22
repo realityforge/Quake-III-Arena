@@ -299,20 +299,6 @@ static sfx_t *S_FindName( const char *name ) {
 	return sfx;
 }
 
-void S_DefaultSound( sfx_t *sfx ) {
-	
-	int		i;
-
-	sfx->soundLength = 512;
-	sfx->soundData = SND_malloc();
-	sfx->soundData->next = NULL;
-
-
-	for ( i = 0 ; i < sfx->soundLength ; i++ ) {
-		sfx->soundData->sndChunk[i] = i;
-	}
-}
-
 /*
 ===================
 S_DisableSounds
