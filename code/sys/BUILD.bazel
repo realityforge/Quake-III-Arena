@@ -61,6 +61,19 @@ objc_library(
     ],
 )
 
+objc_library(
+    name = "sys_osx-dedicated",
+    defines = ["DEDICATED"],
+    non_arc_srcs = [
+        "sys_osx.m",
+    ],
+    deps = [
+        ":sys_local-dedicated",
+        "//code/qcommon",
+        "//code/qcommon:shared_api",
+    ],
+)
+
 cc_library(
     name = "main",
     srcs = [
