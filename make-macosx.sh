@@ -5,22 +5,20 @@
 
 if [ $# -ne 1 ]; then
 	echo "Usage:   $0 target_architecture"
-	echo "Example: $0 x86"
-	echo "other valid options are arm64, x86_64 or x86"
+	echo "Example: $0 arm64"
+	echo "valid options are arm64 or x86_64"
 	echo
 	echo "If you don't know or care about architectures please consider using make-macosx-ub.sh instead of this script."
 	exit 1
 fi
 
-if [ "$1" == "x86" ]; then
-	BUILDARCH=x86
-elif [ "$1" == "x86_64" ]; then
+if [ "$1" == "x86_64" ]; then
 	BUILDARCH=x86_64
 elif [ "$1" == "arm64" ]; then
 	BUILDARCH=arm64
 else
 	echo "Invalid architecture: $1"
-	echo "Valid architectures are arm64, x86_64 or x86"
+	echo "Valid architectures are arm64 or x86_64"
 	exit 1
 fi
 

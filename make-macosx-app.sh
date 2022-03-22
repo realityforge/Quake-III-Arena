@@ -5,15 +5,13 @@
 # if arch is defined, it we will store the .app bundle in the target arch build directory
 if [ $# == 0 ] || [ $# -gt 2 ]; then
 	echo "Usage:   $0 target <arch>"
-	echo "Example: $0 release x86"
+	echo "Example: $0 release x86_64"
 	echo "Valid targets are:"
 	echo " release"
 	echo " debug"
 	echo
 	echo "Optional architectures are:"
-	echo " x86"
 	echo " x86_64"
-	echo " ppc"
 	echo " arm64"
 	echo
 	exit 1
@@ -36,20 +34,14 @@ CURRENT_ARCH=""
 
 # validate the architecture if it was specified
 if [ "$2" != "" ]; then
-	if [ "$2" == "x86" ]; then
-		CURRENT_ARCH="x86"
-	elif [ "$2" == "x86_64" ]; then
+	if [ "$2" == "x86_64" ]; then
 		CURRENT_ARCH="x86_64"
-	elif [ "$2" == "ppc" ]; then
-		CURRENT_ARCH="ppc"
 	elif [ "$2" == "arm64" ]; then
 		CURRENT_ARCH="arm64"
 	else
 		echo "Invalid architecture: $2"
 		echo "Valid architectures are:"
-		echo " x86"
 		echo " x86_64"
-		echo " ppc"
 		echo " arm64"
 		echo
 		exit 1
@@ -79,15 +71,10 @@ function symlinkArch()
 
     pushd "${DSTPATH}" > /dev/null
 
-    IS32=`file "${SRCFILE}.${EXT}" | grep "i386"`
     IS64=`file "${SRCFILE}.${EXT}" | grep "x86_64"`
     ISARM=`file "${SRCFILE}.${EXT}" | grep "arm64"`
 
-    if [ "${IS32}" != "" ]; then
-        if [ ! -L "${DSTFILE}x86.${EXT}" ]; then
-            ln -s "${SRCFILE}.${EXT}" "${DSTFILE}x86.${EXT}"
-        fi
-    elif [ -L "${DSTFILE}x86.${EXT}" ]; then
+    if [ -L "${DSTFILE}x86.${EXT}" ]; then
         rm "${DSTFILE}x86.${EXT}"
     fi
 
@@ -111,9 +98,7 @@ function symlinkArch()
 }
 
 SEARCH_ARCHS="																	\
-	x86																			\
 	x86_64																		\
-	ppc																			\
 	arm64																		\
 "
 
@@ -123,7 +108,6 @@ HAS_CP=`command -v cp`
 # if lipo is not available, we cannot make a universal binary, print a warning
 if [ ! -x "${HAS_LIPO}" ] && [ "${CURRENT_ARCH}" == "" ]; then
 	CURRENT_ARCH=`uname -m`
-	if [ "${CURRENT_ARCH}" == "i386" ]; then CURRENT_ARCH="x86"; fi
 	echo "$0 cannot make a universal binary, falling back to architecture ${CURRENT_ARCH}"
 fi
 
@@ -137,7 +121,6 @@ AVAILABLE_ARCHS=""
 IOQ3_VERSION=`grep '^VERSION=' Makefile | sed -e 's/.*=\(.*\)/\1/'`
 IOQ3_CLIENT_ARCHS=""
 IOQ3_SERVER_ARCHS=""
-IOQ3_RENDERER_GL1_ARCHS=""
 IOQ3_RENDERER_GL2_ARCHS=""
 IOQ3_CGAME_ARCHS=""
 IOQ3_GAME_ARCHS=""
@@ -161,7 +144,6 @@ CGAME_NAME="${CGAME}.dylib"
 GAME_NAME="${GAME}.dylib"
 UI_NAME="${UI}.dylib"
 
-RENDERER_OPENGL1_NAME="${RENDERER_OPENGL}1.dylib"
 RENDERER_OPENGL2_NAME="${RENDERER_OPENGL}2.dylib"
 
 ICNSDIR="misc"
@@ -183,7 +165,6 @@ for ARCH in $SEARCH_ARCHS; do
 	BUILT_PRODUCTS_DIR="${OBJROOT}/${TARGET_NAME}-darwin-${CURRENT_ARCH}"
 	IOQ3_CLIENT="${EXECUTABLE_NAME}.${CURRENT_ARCH}"
 	IOQ3_SERVER="${DEDICATED_NAME}.${CURRENT_ARCH}"
-	IOQ3_RENDERER_GL1="${RENDERER_OPENGL}1_${CURRENT_ARCH}.dylib"
 	IOQ3_RENDERER_GL2="${RENDERER_OPENGL}2_${CURRENT_ARCH}.dylib"
 	IOQ3_CGAME="${CGAME}${CURRENT_ARCH}.dylib"
 	IOQ3_GAME="${GAME}${CURRENT_ARCH}.dylib"
@@ -207,9 +188,6 @@ for ARCH in $SEARCH_ARCHS; do
 	fi
 
 	# renderers
-	if [ -e ${BUILT_PRODUCTS_DIR}/${IOQ3_RENDERER_GL1} ]; then
-		IOQ3_RENDERER_GL1_ARCHS="${BUILT_PRODUCTS_DIR}/${IOQ3_RENDERER_GL1} ${IOQ3_RENDERER_GL1_ARCHS}"
-	fi
 	if [ -e ${BUILT_PRODUCTS_DIR}/${IOQ3_RENDERER_GL2} ]; then
 		IOQ3_RENDERER_GL2_ARCHS="${BUILT_PRODUCTS_DIR}/${IOQ3_RENDERER_GL2} ${IOQ3_RENDERER_GL2_ARCHS}"
 	fi
@@ -397,9 +375,7 @@ action "${BUNDLEBINDIR}/${EXECUTABLE_NAME}"				"${IOQ3_CLIENT_ARCHS}"
 action "${BUNDLEBINDIR}/${DEDICATED_NAME}"				"${IOQ3_SERVER_ARCHS}"
 
 # renderers
-action "${BUNDLEBINDIR}/${RENDERER_OPENGL1_NAME}"		"${IOQ3_RENDERER_GL1_ARCHS}"
 action "${BUNDLEBINDIR}/${RENDERER_OPENGL2_NAME}"		"${IOQ3_RENDERER_GL2_ARCHS}"
-symlinkArch "${RENDERER_OPENGL}1" "${RENDERER_OPENGL}1" "_" "${BUNDLEBINDIR}"
 symlinkArch "${RENDERER_OPENGL}2" "${RENDERER_OPENGL}2" "_" "${BUNDLEBINDIR}"
 
 # game
