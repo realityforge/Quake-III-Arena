@@ -458,6 +458,7 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
                 int y = 240 + tan((vr.weaponangles[PITCH] + vr_weaponPitch->value) * (M_PI*2 / 360)) * 300;
                 *vr.menuCursorX = x;
                 *vr.menuCursorY = y;
+                Com_QueueEvent(in_vrEventTime, SE_MOUSE, 0, 0, 0, NULL);
             }
         }
 	} else {
@@ -513,14 +514,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
     vr.thumbstick_location[isRightController][0] = joystickX;
     vr.thumbstick_location[isRightController][1] = joystickY;
 
-	if (vr.virtual_screen ||
-            cl.snap.ps.pm_type == PM_INTERMISSION)
-	{
-		const float x = joystickX * 5.0;
-		const float y = joystickY * -5.0;
-
-		Com_QueueEvent(in_vrEventTime, SE_MOUSE, x, y, 0, NULL);
-	} else
+	if (!vr.virtual_screen && cl.snap.ps.pm_type != PM_INTERMISSION)
 	{
 		if (isRightController == (vr_switchThumbsticks->integer != 0)) {
 			vec3_t positional;
