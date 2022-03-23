@@ -286,8 +286,6 @@ void VR_DrawFrame( engine_t* engine ) {
 	const ovrMatrix4f projectionMatrix = ovrMatrix4f_CreateProjectionFov(
 			fov_x / vr.weapon_zoomLevel, fov_y / vr.weapon_zoomLevel, 0.0f, 0.0f, 1.0f, 0.0f );
 
-	static float playerYaw = 0;
-
     int eyeW, eyeH;
     VR_GetResolution(engine, &eyeW, &eyeH);
 
@@ -299,7 +297,7 @@ void VR_DrawFrame( engine_t* engine ) {
 
 		// Add a simple cylindrical layer
 		cylinderLayer.Cylinder =
-				BuildCylinderLayer(engine, eyeW, eyeW * 0.75f, &engine->tracking, radians(playerYaw) );
+				BuildCylinderLayer(engine, eyeW, eyeW * 0.75f, &engine->tracking, radians(vr.menuYaw) );
 
 		const ovrLayerHeader2* layers[] = {
 			&cylinderLayer.Header
@@ -332,7 +330,7 @@ void VR_DrawFrame( engine_t* engine ) {
 	}
 	else
 	{
-		playerYaw = vr.hmdorientation[YAW];
+		vr.menuYaw = vr.hmdorientation[YAW];
 
 		ovrLayerProjection2 layer = vrapi_DefaultLayerProjection2();
 		layer.HeadPose = engine->tracking.HeadPose;

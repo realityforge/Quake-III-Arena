@@ -477,8 +477,8 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
                 yaw = (vr_righthanded->integer != 0) ? vr.weaponangles[YAW] : vr.offhandangles[YAW];
                 pitch = (vr_righthanded->integer != 0) ? vr.weaponangles[PITCH] : vr.offhandangles[PITCH];
             }
-            int x = 320 - tan(yaw * (M_PI*2 / 360)) * 300;
-            int y = 240 + tan((pitch + vr_weaponPitch->value) * (M_PI*2 / 360)) * 300;
+            int x = 320 - tan((yaw - vr.menuYaw) * (M_PI*2 / 360)) * 400;
+            int y = 240 + tan((pitch + vr_weaponPitch->value) * (M_PI*2 / 360)) * 400;
             *vr.menuCursorX = x;
             *vr.menuCursorY = y;
             Com_QueueEvent(in_vrEventTime, SE_MOUSE, 0, 0, 0, NULL);

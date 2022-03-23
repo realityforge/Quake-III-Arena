@@ -57,6 +57,7 @@ typedef struct {
 
     vec2_t thumbstick_location[2]; //left / right thumbstick locations - used in cgame
 
+    float menuYaw;
     int *menuCursorX;
     int *menuCursorY;
     qboolean menuLeftHanded;
