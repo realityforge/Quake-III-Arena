@@ -57,12 +57,8 @@ cc_library(
         "jutils.c",
         "jversion.h",
     ],
-    hdrs = [
-        "jpeglib.h",
-    ],
-    copts = [
-        "-Wno-main",
-    ],
+    hdrs = ["jpeglib.h"],
+    copts = ["-Wno-main"],
     includes = ["."],
     visibility = [
         "//code/renderercommon:__pkg__",
