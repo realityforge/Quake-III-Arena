@@ -72,6 +72,7 @@ cc_library(
         "include/vorbis/vorbisfile.h",
     ],
     copts = [
+        "-Wno-unused-but-set-variable",
         "-Wno-unused-function",
         "-Wno-unused-variable",
     ],
