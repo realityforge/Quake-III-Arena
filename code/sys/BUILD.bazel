@@ -37,6 +37,7 @@ cc_library(
 cc_library(
     name = "sys_unix",
     srcs = ["sys_unix.c"],
+    visibility = ["//code/client:__pkg__"],
     deps = [
         ":sys_local",
         "//code/qcommon",
@@ -45,7 +46,9 @@ cc_library(
 
 objc_library(
     name = "sys_osx",
+    linkopts = ["-framework Cocoa"],
     non_arc_srcs = ["sys_osx.m"],
+    visibility = ["//code/client:__pkg__"],
     deps = [
         ":sys_local",
         "//code/qcommon",

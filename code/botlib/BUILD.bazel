@@ -83,6 +83,7 @@ cc_library(
     ],
     includes = ["."],
     visibility = [
+        "//code/client:__pkg__",
         "//code/game:__pkg__",
         "//code/server:__pkg__",
     ],

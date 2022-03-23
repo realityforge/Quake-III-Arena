@@ -17,6 +17,7 @@ cc_import(
         "@platforms//os:macos": "libs/macosx/libSDL2main.a",
         ":windows_x86_64": "libs/win64/libSDL264main.a",
     }),
+    visibility = ["//code/client:__pkg__"],
 )
 
 cc_library(
@@ -112,11 +113,9 @@ cc_library(
     ],
     strip_include_prefix = "include",
     visibility = [
+        "//code/client:__pkg__",
         "//code/renderercommon:__pkg__",
         "//code/sdl:__pkg__",
         "//code/sys:__pkg__",
-    ],
-    deps = [
-        ":sdl_library",
     ],
 )

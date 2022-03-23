@@ -176,3 +176,39 @@ cc_library(
         "//third_party/openal",
     ],
 )
+
+cc_binary(
+    name = "clientexe",
+    linkopts = [
+        "-F/Library/Frameworks",
+        "-framework SDL2",
+        "-framework OpenAL",
+    ],
+    deps = [
+        ":client",
+        ":openal_support",
+        ":snd",
+        ":snd_codec",
+        "//code/server",
+        "//code/qcommon:cm",
+        "//code/qcommon:cmd",
+        "//code/qcommon:common",
+        "//code/botlib",
+        "//code/sys:main",
+        # This next two should be conditional on operating system
+        "//code/sys:sys_osx",
+        "//code/sys:sys_unix",
+        "//code/sys:sys_local",
+        "//code/qcommon:cvar",
+        "//code/qcommon:files",
+        "//code/qcommon:net",
+        "//third_party/unzip",
+        "//code/qcommon:vm",
+        "//code/sdl:sdl_input",
+        "//code/sdl:sdl_renderer",
+        "//code/sdl:sdl_snd",
+        "//third_party/opus",
+        "//third_party/sdl",
+        "//code/renderergl2",
+    ],
+)

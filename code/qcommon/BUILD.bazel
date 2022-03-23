@@ -5,6 +5,7 @@ cc_library(
         "cvar.c",
     ],
     visibility = [
+        "//code/client:__pkg__",
         "//code/server:__pkg__",
     ],
     deps = [
@@ -23,6 +24,7 @@ cc_library(
         "vm_local.h",
     ],
     visibility = [
+        "//code/client:__pkg__",
         "//code/server:__pkg__",
     ],
     deps = [
@@ -36,6 +38,7 @@ cc_library(
     srcs = [
         "files.c",
     ],
+    visibility = ["//code/client:__pkg__"],
     deps = [
         ":qcommon",
         ":shared_api",
@@ -65,6 +68,10 @@ cc_library(
         "msg.c",
         "net_chan.c",
         "net_ip.c",
+    ],
+    visibility = [
+        "//code/client:__pkg__",
+        "//code/server:__pkg__",
     ],
     deps = [
         ":qcommon",
@@ -96,6 +103,7 @@ cc_library(
     srcs = [
         "common.c",
     ],
+    visibility = ["//code/client:__pkg__"],
     deps = [
         ":qcommon",
         ":shared_api",
@@ -171,6 +179,7 @@ cc_library(
     ],
     hdrs = ["cm_local.h"],
     visibility = [
+        "//code/client:__pkg__",
         "//code/server:__pkg__",
     ],
     deps = [
@@ -208,6 +217,7 @@ _CMD_SRC = ["cmd.c"]
 cc_library(
     name = "cmd",
     srcs = _CMD_SRC,
+    visibility = ["//code/client:__pkg__"],
     deps = [
         ":qcommon",
         ":shared_api",
