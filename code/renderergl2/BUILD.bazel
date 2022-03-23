@@ -58,6 +58,7 @@ cc_library(
         "//code/qcommon",
         "//code/qcommon:qfiles",
         "//code/renderercommon",
+        "//code/renderergl2/glsl",
         "//third_party/json",
     ],
 )
