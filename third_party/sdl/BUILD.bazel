@@ -118,6 +118,5 @@ cc_library(
     ],
     deps = [
         ":sdl_library",
-        "//third_party/jpeg",
     ],
 )
