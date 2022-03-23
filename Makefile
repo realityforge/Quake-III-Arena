@@ -546,7 +546,8 @@ ifdef MINGW
     CLIENT_CFLAGS += $(CURL_CFLAGS)
     ifneq ($(USE_CURL_DLOPEN),1)
       ifeq ($(USE_LOCAL_HEADERS),1)
-        CLIENT_CFLAGS += -DCURL_STATICLIB CLIENT_LIBS += $(CURLLIBSDIR)/win64/libcurl.a -lcrypt32
+        CLIENT_CFLAGS += -DCURL_STATICLIB
+        CLIENT_LIBS += $(CURLLIBSDIR)/win64/libcurl.a -lcrypt32
       else
         CLIENT_LIBS += $(CURL_LIBS)
       endif
