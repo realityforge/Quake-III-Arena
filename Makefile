@@ -1222,12 +1222,6 @@ JPGOBJ = \
 	$(B)/renderergl2/jquant2.o \
 	$(B)/renderergl2/jutils.o
 
-ifeq ($(ARCH),x86_64)
-  Q3OBJ += \
-    $(B)/client/snapvector.o \
-    $(B)/client/ftola.o
-endif
-
 ifeq ($(NEED_OPUS),1)
 Q3OBJ += \
   $(B)/client/opus/analysis.o \
@@ -1532,12 +1526,6 @@ Q3DOBJ = \
   \
   $(B)/ded/con_log.o \
   $(B)/ded/sys_main.o
-
-ifeq ($(ARCH),x86_64)
-  Q3DOBJ += \
-      $(B)/ded/snapvector.o \
-      $(B)/ded/ftola.o
-endif
 
 Q3DOBJ += \
   $(B)/ded/adler32.o \
