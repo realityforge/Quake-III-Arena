@@ -487,10 +487,8 @@ ifdef MINGW
 
   BASE_CFLAGS = -Wall -fno-strict-aliasing -Wimplicit -Wstrict-prototypes
 
-  # In the absence of wspiapi.h, require Windows XP or later
-  ifeq ($(shell test -e $(CMDIR)/wspiapi.h; echo $$?),1)
-    BASE_CFLAGS += -DWINVER=0x501
-  endif
+  # Require Windows XP or later
+  BASE_CFLAGS += -DWINVER=0x501
 
   ifeq ($(USE_OPENAL),1)
     ifeq ($(USE_LOCAL_HEADERS),1)
