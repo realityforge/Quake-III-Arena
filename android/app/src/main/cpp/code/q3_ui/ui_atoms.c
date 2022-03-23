@@ -915,27 +915,23 @@ UI_MouseEvent
 void UI_MouseEvent( int dx, int dy )
 {
 	int				i;
-	int				bias;
 	menucommon_s*	m;
 
 	if (!uis.activemenu)
 		return;
 
-	// convert X bias to 640 coords
-	bias = uis.bias / UI_GetXScale();
-
 	// update mouse screen position
 	uis.cursorx += dx;
-	if (uis.cursorx < -bias)
-		uis.cursorx = -bias;
-	else if (uis.cursorx > SCREEN_WIDTH+bias)
-		uis.cursorx = SCREEN_WIDTH+bias;
+	if (uis.cursorx < -16)
+		uis.cursorx = -16;
+	else if (uis.cursorx > SCREEN_WIDTH+16)
+		uis.cursorx = SCREEN_WIDTH+16;
 
 	uis.cursory += dy;
-	if (uis.cursory < 0)
-		uis.cursory = 0;
-	else if (uis.cursory > SCREEN_HEIGHT)
-		uis.cursory = SCREEN_HEIGHT;
+	if (uis.cursory < -16)
+		uis.cursory = -16;
+	else if (uis.cursory > SCREEN_HEIGHT+16)
+		uis.cursory = SCREEN_HEIGHT+16;
 
 	vr->menuCursorX = &uis.cursorx;
 	vr->menuCursorY = &uis.cursory;
