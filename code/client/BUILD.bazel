@@ -45,7 +45,6 @@ cc_library(
         "//code/qcommon",
         "//code/renderercommon:api",
         "//code/ui:api",
-        "//third_party/opus",
     ],
 )
 
