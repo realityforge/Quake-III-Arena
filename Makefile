@@ -485,8 +485,7 @@ ifdef MINGW
     $(error Cannot find a suitable cross compiler for $(PLATFORM))
   endif
 
-  BASE_CFLAGS = -Wall -fno-strict-aliasing -Wimplicit -Wstrict-prototypes \
-    -DUSE_ICON
+  BASE_CFLAGS = -Wall -fno-strict-aliasing -Wimplicit -Wstrict-prototypes -DUSE_ICON
 
   # In the absence of wspiapi.h, require Windows XP or later
   ifeq ($(shell test -e $(CMDIR)/wspiapi.h; echo $$?),1)
