@@ -1,8 +1,6 @@
 cc_library(
     name = "sys_local",
-    srcs = [
-        "sys_local.h",
-    ],
+    srcs = ["sys_local.h"],
     visibility = [
         "//code/client:__pkg__",
         "//code/sdl:__pkg__",
@@ -15,20 +13,14 @@ cc_library(
 
 cc_library(
     name = "sys_local-dedicated",
-    srcs = [
-        "sys_local.h",
-    ],
-    defines = [
-        "DEDICATED",
-    ],
+    srcs = ["sys_local.h"],
+    defines = ["DEDICATED"],
     visibility = [
         "//code/client:__pkg__",
         "//code/sdl:__pkg__",
         "//code/server:__pkg__",
     ],
-    deps = [
-        "//code/qcommon",
-    ],
+    deps = ["//code/qcommon"],
 )
 
 cc_library(
@@ -64,9 +56,7 @@ objc_library(
 objc_library(
     name = "sys_osx-dedicated",
     defines = ["DEDICATED"],
-    non_arc_srcs = [
-        "sys_osx.m",
-    ],
+    non_arc_srcs = ["sys_osx.m"],
     visibility = ["//code/server:__pkg__"],
     deps = [
         ":sys_local-dedicated",
