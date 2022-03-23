@@ -20,7 +20,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define ENABLE_GL_DEBUG 1
+#define ENABLE_GL_DEBUG 0
 #define ENABLE_GL_DEBUG_VERBOSE 0
 #if ENABLE_GL_DEBUG
 #include <GLES3/gl32.h>
