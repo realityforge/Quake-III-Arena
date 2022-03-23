@@ -9,6 +9,7 @@
 #include <string>
 
 extern "C" {
+	#include <client/keycodes.h>
 	#include <qcommon/q_shared.h>
 	#include <qcommon/qcommon.h>
 	#include <vr/vr_base.h>
@@ -28,6 +29,7 @@ extern "C" {
 static JNIEnv* g_Env = NULL;
 static JavaVM* g_JavaVM = NULL;
 static jobject g_ActivityObject = NULL;
+static bool    g_HasFocus = true;
 
 
 extern "C"
@@ -36,6 +38,11 @@ extern "C"
 	{
 		g_ActivityObject = env->NewGlobalRef(thisObject);
     }
+
+	JNIEXPORT void JNICALL Java_com_drbeef_ioq3quest_MainActivity_nativeFocusChanged(JNIEnv *env, jclass clazz, jboolean focus)
+	{
+	    g_HasFocus = focus;
+	}
 
 	JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
 	{
@@ -83,7 +90,22 @@ int main(int argc, char* argv[]) {
 
 	VR_EnterVR(engine, java);
 
+	bool hasFocus = true;
+	bool paused = false;
 	while (1) {
+		if (hasFocus != g_HasFocus) {
+			hasFocus = g_HasFocus;
+			if (!hasFocus && !Cvar_VariableValue ("cl_paused")) {
+				Com_QueueEvent( Sys_Milliseconds(), SE_KEY, K_ESCAPE, qtrue, 0, NULL );
+				//Com_QueueEvent( Sys_Milliseconds(), SE_KEY, K_CONSOLE, qtrue, 0, NULL );
+				paused = true;
+			} else if (hasFocus && paused) {
+				//Com_QueueEvent( Sys_Milliseconds(), SE_KEY, K_CONSOLE, qtrue, 0, NULL );
+				Com_QueueEvent( Sys_Milliseconds(), SE_KEY, K_ESCAPE, qtrue, 0, NULL );
+				paused = false;
+			}
+		}
+
 		SDL_Event event;
 		while (SDL_PollEvent(&event)) {
 			LOGI("Received SDL Event: %d", event.type);
