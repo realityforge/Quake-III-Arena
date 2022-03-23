@@ -454,8 +454,8 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
         {
             if (vr.menuCursorX && vr.menuCursorY)
             {
-                int x = 320 - tan(vr.weaponangles[YAW] * (M_PI*2 / 360)) * 400;
-                int y = 240 + tan((vr.weaponangles[PITCH] + vr_weaponPitch->value) * (M_PI*2 / 360)) * 400;
+                int x = 320 - tan(vr.weaponangles[YAW] * (M_PI*2 / 360)) * 300;
+                int y = 240 + tan((vr.weaponangles[PITCH] + vr_weaponPitch->value) * (M_PI*2 / 360)) * 300;
                 *vr.menuCursorX = x;
                 *vr.menuCursorY = y;
             }
