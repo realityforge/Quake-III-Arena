@@ -24,6 +24,7 @@ cc_library(
     visibility = [
         "//code/client:__pkg__",
         "//code/sdl:__pkg__",
+        "//code/server:__pkg__",
     ],
     deps = [
         "//code/qcommon",
@@ -34,6 +35,7 @@ cc_library(
     name = "sys_unix-dedicated",
     srcs = ["sys_unix.c"],
     defines = ["DEDICATED"],
+    visibility = ["//code/server:__pkg__"],
     deps = [
         ":sys_local-dedicated",
         "//code/qcommon",
@@ -67,6 +69,7 @@ objc_library(
     non_arc_srcs = [
         "sys_osx.m",
     ],
+    visibility = ["//code/server:__pkg__"],
     deps = [
         ":sys_local-dedicated",
         "//code/qcommon",
@@ -100,6 +103,7 @@ cc_library(
     ],
     hdrs = ["sys_loadlib.h"],
     defines = ["DEDICATED"],
+    visibility = ["//code/server:__pkg__"],
     deps = [
         ":sys_local-dedicated",
         "//code/qcommon",

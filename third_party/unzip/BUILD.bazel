@@ -12,7 +12,10 @@ cc_library(
         "unzip.h",
     ],
     includes = ["."],
-    visibility = ["//code/qcommon:__pkg__"],
+    visibility = [
+        "//code/qcommon:__pkg__",
+        "//code/server:__pkg__",
+    ],
     deps = [
         "//code/qcommon",
         "//code/qcommon:shared_api",

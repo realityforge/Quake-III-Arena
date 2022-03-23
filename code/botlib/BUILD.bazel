@@ -86,6 +86,7 @@ cc_library(
     includes = ["."],
     visibility = [
         "//code/game:__pkg__",
+        "//code/server:__pkg__",
     ],
     deps = [
         ":api",

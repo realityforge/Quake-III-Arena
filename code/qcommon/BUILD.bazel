@@ -4,6 +4,7 @@ cc_library(
     srcs = [
         "cvar.c",
     ],
+    visibility = ["//code/server:__pkg__"],
     deps = [
         ":qcommon",
         ":shared_api",
@@ -19,6 +20,7 @@ cc_library(
     hdrs = [
         "vm_local.h",
     ],
+    visibility = ["//code/server:__pkg__"],
     deps = [
         ":qcommon",
         ":shared_api",
@@ -43,6 +45,7 @@ cc_library(
         "files.c",
     ],
     defines = ["DEDICATED"],
+    visibility = ["//code/server:__pkg__"],
     deps = [
         ":qcommon",
         ":shared_api",
@@ -76,6 +79,7 @@ cc_library(
         "net_ip.c",
     ],
     defines = ["DEDICATED"],
+    visibility = ["//code/server:__pkg__"],
     deps = [
         ":qcommon",
         ":shared",
@@ -99,7 +103,8 @@ cc_library(
     srcs = [
         "common.c",
     ],
-    defines=["DEDICATED"],
+    defines = ["DEDICATED"],
+    visibility = ["//code/server:__pkg__"],
     deps = [
         ":qcommon",
         ":shared_api",
@@ -161,6 +166,7 @@ cc_library(
         "cm_trace.c",
     ],
     hdrs = ["cm_local.h"],
+    visibility = ["//code/server:__pkg__"],
     deps = [
         ":qcommon",
         ":shared_api",
@@ -206,6 +212,7 @@ cc_library(
     name = "cmd-dedicated",
     srcs = _CMD_SRC,
     defines = ["DEDICATED"],
+    visibility = ["//code/server:__pkg__"],
     deps = [
         ":qcommon",
         ":shared_api",

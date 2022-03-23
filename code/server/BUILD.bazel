@@ -35,3 +35,24 @@ cc_library(
         "//code/qcommon:shared_api",
     ],
 )
+
+cc_binary(
+    name = "ded",
+    deps = [
+        ":server-dedicated",
+        "//code/qcommon:cm",
+        "//code/qcommon:cmd-dedicated",
+        "//code/qcommon:common-dedicated",
+        "//code/botlib",
+        "//code/sys:main-dedicated",
+        # This next two should be conditional on operating system
+        "//code/sys:sys_osx-dedicated",
+        "//code/sys:sys_unix-dedicated",
+        "//code/sys:sys_local-dedicated",
+        "//code/qcommon:cvar",
+        "//code/qcommon:files-dedicated",
+        "//code/qcommon:net-dedicated",
+        "//third_party/unzip",
+        "//code/qcommon:vm",
+    ],
+)
