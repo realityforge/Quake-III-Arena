@@ -5259,23 +5259,21 @@ UI_MouseEvent
 */
 void _UI_MouseEvent( int dx, int dy )
 {
-	int bias;
-
-	// convert X bias to 640 coords
-	bias = uiInfo.uiDC.bias / uiInfo.uiDC.xscale;
-
 	// update mouse screen position
 	uiInfo.uiDC.cursorx += dx;
-	if (uiInfo.uiDC.cursorx < -bias)
-		uiInfo.uiDC.cursorx = -bias;
-	else if (uiInfo.uiDC.cursorx > SCREEN_WIDTH+bias)
-		uiInfo.uiDC.cursorx = SCREEN_WIDTH+bias;
+	if (uiInfo.uiDC.cursorx < -16)
+		uiInfo.uiDC.cursorx = -16;
+	else if (uiInfo.uiDC.cursorx > SCREEN_WIDTH+16)
+		uiInfo.uiDC.cursorx = SCREEN_WIDTH+16;
 
 	uiInfo.uiDC.cursory += dy;
-	if (uiInfo.uiDC.cursory < 0)
-		uiInfo.uiDC.cursory = 0;
-	else if (uiInfo.uiDC.cursory > SCREEN_HEIGHT)
-		uiInfo.uiDC.cursory = SCREEN_HEIGHT;
+	if (uiInfo.uiDC.cursory < -16)
+		uiInfo.uiDC.cursory = -16;
+	else if (uiInfo.uiDC.cursory > SCREEN_HEIGHT+16)
+		uiInfo.uiDC.cursory = SCREEN_HEIGHT+16;
+
+	vr->menuCursorX = &uiInfo.uiDC.cursorx;
+	vr->menuCursorY = &uiInfo.uiDC.cursory;
 
   if (Menu_Count() > 0) {
     //menuDef_t *menu = Menu_GetFocused();

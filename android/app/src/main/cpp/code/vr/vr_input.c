@@ -448,13 +448,6 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
 		VectorCopy(vr.weaponoffset_last[1], vr.weaponoffset_last[0]);
 		VectorCopy(vr.weaponoffset, vr.weaponoffset_last[1]);
 		VectorSubtract(vr.weaponposition, vr.hmdposition, vr.weaponoffset);
-
-		if (vr.virtual_screen ||
-            cl.snap.ps.pm_type == PM_INTERMISSION)
-        {
-		    int mouse_multiplier = 10;
-            Com_QueueEvent(in_vrEventTime, SE_MOUSE, vr.weaponangles_delta[YAW] * mouse_multiplier, -vr.weaponangles_delta[PITCH] * mouse_multiplier, 0, NULL);
-        }
 	} else {
         vec3_t rotation = {0};
         QuatToYawPitchRoll(remoteTracking.HeadPose.Pose.Orientation, rotation, vr.offhandangles2); // used for off-hand direction mode
@@ -471,33 +464,56 @@ static void IN_VRController( qboolean isRightController, ovrTracking remoteTrack
         VectorSubtract(vr.offhandposition, vr.hmdposition, vr.offhandoffset);
 	}
 
-    vr.weapon_zoomed = vr_weaponScope->integer &&
-                       vr.weapon_stabilised &&
-                       (cl.snap.ps.weapon == WP_RAILGUN) &&
-                       (VectorLength(vr.weaponoffset) < 0.24f) &&
-                       cl.snap.ps.stats[STAT_HEALTH] > 0;
-
-    vr.show_console = (VectorLength(vr.offhandoffset) < 0.2f);
-
-    if (vr_twoHandedWeapons->integer && vr.weapon_stabilised)
+	if (vr.virtual_screen || cl.snap.ps.pm_type == PM_INTERMISSION)
     {
-        //Apply smoothing to the weapon hand
-        vec3_t smooth_weaponoffset;
-        VectorAdd(vr.weaponoffset, vr.weaponoffset_last[0], smooth_weaponoffset);
-        VectorAdd(smooth_weaponoffset, vr.weaponoffset_last[1],smooth_weaponoffset);
-        VectorScale(smooth_weaponoffset, 1.0f/3.0f, smooth_weaponoffset);
-
-        vec3_t vec;
-        VectorSubtract(vr.offhandoffset, smooth_weaponoffset, vec);
-
-        float zxDist = length(vec[0], vec[2]);
-
-        if (zxDist != 0.0f && vec[2] != 0.0f) {
-            VectorSet(vr.weaponangles, -degrees(atanf(vec[1] / zxDist)),
-                      -degrees(atan2f(vec[0], -vec[2])), vr.weaponangles[ROLL] / 2.0f); //Dampen roll on stabilised weapon
+        if (vr.menuCursorX && vr.menuCursorY)
+        {
+            float yaw;
+            float pitch;
+            if (vr.menuLeftHanded) {
+                yaw = (vr_righthanded->integer != 0) ? vr.offhandangles[YAW] : vr.weaponangles[YAW];
+                pitch = (vr_righthanded->integer != 0) ? vr.offhandangles[PITCH] : vr.weaponangles[PITCH];
+            } else {
+                yaw = (vr_righthanded->integer != 0) ? vr.weaponangles[YAW] : vr.offhandangles[YAW];
+                pitch = (vr_righthanded->integer != 0) ? vr.weaponangles[PITCH] : vr.offhandangles[PITCH];
+            }
+            int x = 320 - tan(yaw * (M_PI*2 / 360)) * 300;
+            int y = 240 + tan((pitch + vr_weaponPitch->value) * (M_PI*2 / 360)) * 300;
+            *vr.menuCursorX = x;
+            *vr.menuCursorY = y;
+            Com_QueueEvent(in_vrEventTime, SE_MOUSE, 0, 0, 0, NULL);
         }
     }
+    else
+    {
 
+        vr.weapon_zoomed = vr_weaponScope->integer &&
+                           vr.weapon_stabilised &&
+                           (cl.snap.ps.weapon == WP_RAILGUN) &&
+                           (VectorLength(vr.weaponoffset) < 0.24f) &&
+                           cl.snap.ps.stats[STAT_HEALTH] > 0;
+
+        vr.show_console = (VectorLength(vr.offhandoffset) < 0.2f);
+
+        if (vr_twoHandedWeapons->integer && vr.weapon_stabilised)
+        {
+            //Apply smoothing to the weapon hand
+            vec3_t smooth_weaponoffset;
+            VectorAdd(vr.weaponoffset, vr.weaponoffset_last[0], smooth_weaponoffset);
+            VectorAdd(smooth_weaponoffset, vr.weaponoffset_last[1],smooth_weaponoffset);
+            VectorScale(smooth_weaponoffset, 1.0f/3.0f, smooth_weaponoffset);
+
+            vec3_t vec;
+            VectorSubtract(vr.offhandoffset, smooth_weaponoffset, vec);
+
+            float zxDist = length(vec[0], vec[2]);
+
+            if (zxDist != 0.0f && vec[2] != 0.0f) {
+                VectorSet(vr.weaponangles, -degrees(atanf(vec[1] / zxDist)),
+                          -degrees(atan2f(vec[0], -vec[2])), vr.weaponangles[ROLL] / 2.0f); //Dampen roll on stabilised weapon
+            }
+        }
+    }
 }
 
 static void IN_VRJoystick( qboolean isRightController, float joystickX, float joystickY )
@@ -508,14 +524,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
     vr.thumbstick_location[isRightController][0] = joystickX;
     vr.thumbstick_location[isRightController][1] = joystickY;
 
-	if (vr.virtual_screen ||
-            cl.snap.ps.pm_type == PM_INTERMISSION)
-	{
-		const float x = joystickX * 5.0;
-		const float y = joystickY * -5.0;
-
-		Com_QueueEvent(in_vrEventTime, SE_MOUSE, x, y, 0, NULL);
-	} else
+	if (!vr.virtual_screen && cl.snap.ps.pm_type != PM_INTERMISSION)
 	{
 		if (isRightController == (vr_switchThumbsticks->integer != 0)) {
 			vec3_t positional;
@@ -808,22 +817,25 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
 static void IN_VRTriggers( qboolean isRightController, float index ) {
 	vrController_t* controller = isRightController == qtrue ? &rightController : &leftController;
 
-	//Primary controller trigger is mouse click in screen mode or in intermission
+	// Controllers are used for menu navigation in screen mode or in intermission
 	if (VR_useScreenLayer() || cl.snap.ps.pm_type == PM_INTERMISSION)
     {
-        if (isRightController == (vr_righthanded->integer != 0))
+        if (!(controller->axisButtons & VR_TOUCH_AXIS_TRIGGER_INDEX) && index > pressedThreshold)
         {
-            if (!(controller->axisButtons & VR_TOUCH_AXIS_TRIGGER_INDEX) &&
-                index > pressedThreshold)
-            {
-                controller->axisButtons |= VR_TOUCH_AXIS_TRIGGER_INDEX;
+            controller->axisButtons |= VR_TOUCH_AXIS_TRIGGER_INDEX;
+            if ((isRightController && !vr.menuLeftHanded) || (!isRightController && vr.menuLeftHanded)) {
+                // Active controller confirms selection
                 Com_QueueEvent(in_vrEventTime, SE_KEY, K_MOUSE1, qtrue, 0, NULL);
                 VR_Vibrate(200, vr_righthanded->integer ? 2 : 1, 0.8);
+            } else {
+                // Inactive controller becomes active one
+                vr.menuLeftHanded = !vr.menuLeftHanded;
             }
-            else if ((controller->axisButtons & VR_TOUCH_AXIS_TRIGGER_INDEX) &&
-                     index < releasedThreshold)
-            {
-                controller->axisButtons &= ~VR_TOUCH_AXIS_TRIGGER_INDEX;
+        }
+        else if ((controller->axisButtons & VR_TOUCH_AXIS_TRIGGER_INDEX) && index < releasedThreshold)
+        {
+            controller->axisButtons &= ~VR_TOUCH_AXIS_TRIGGER_INDEX;
+            if ((isRightController && !vr.menuLeftHanded) || (!isRightController && vr.menuLeftHanded)) {
                 Com_QueueEvent(in_vrEventTime, SE_KEY, K_MOUSE1, qfalse, 0, NULL);
             }
         }

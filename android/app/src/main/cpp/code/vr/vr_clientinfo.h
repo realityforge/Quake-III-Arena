@@ -56,6 +56,10 @@ typedef struct {
     vec3_t offhandposition;
 
     vec2_t thumbstick_location[2]; //left / right thumbstick locations - used in cgame
+
+    int *menuCursorX;
+    int *menuCursorY;
+    qboolean menuLeftHanded;
 } vr_clientinfo_t;
 
 #endif //vr_clientinfo_h
