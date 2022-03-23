@@ -337,8 +337,7 @@ ifeq ($(PLATFORM),darwin)
   endif
 
   LDFLAGS += -mmacosx-version-min=$(MACOSX_VERSION_MIN)
-  BASE_CFLAGS += -mmacosx-version-min=$(MACOSX_VERSION_MIN) \
-                 -DMAC_OS_X_VERSION_MIN_REQUIRED=$(MAC_OS_X_VERSION_MIN_REQUIRED)
+  BASE_CFLAGS += -mmacosx-version-min=$(MACOSX_VERSION_MIN) -DMAC_OS_X_VERSION_MIN_REQUIRED=$(MAC_OS_X_VERSION_MIN_REQUIRED)
 
   MACOSX_ARCH=$(ARCH)
   ifeq ($(ARCH),x86_64)
