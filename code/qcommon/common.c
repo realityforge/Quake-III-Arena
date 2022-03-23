@@ -1253,6 +1253,8 @@ Touch all known used data to make sure it is paged in
 ===============
 */
 void Com_TouchMemory( void ) {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
 	int		start, end;
 	int		i, j;
 	unsigned	sum;
@@ -1290,6 +1292,7 @@ void Com_TouchMemory( void ) {
 	end = Sys_Milliseconds();
 
 	Com_Printf( "Com_TouchMemory: %i msec\n", end - start );
+#pragma GCC diagnostic pop
 }
 
 
@@ -1357,7 +1360,10 @@ void Hunk_Log( void) {
 void Hunk_SmallLog( void) {
 	hunkblock_t	*block, *block2;
 	char		buf[4096];
-	int size, locsize, numBlocks;
+	int size, numBlocks;
+#ifdef HUNK_DEBUG
+    int locsize;
+#endif
 
 	if (!logfile || !FS_Initialized())
 		return;
@@ -1372,7 +1378,9 @@ void Hunk_SmallLog( void) {
 		if (block->printed) {
 			continue;
 		}
+#ifdef HUNK_DEBUG
 		locsize = block->size;
+#endif
 		for (block2 = block->next; block2; block2 = block2->next) {
 			if (block->line != block2->line) {
 				continue;
@@ -1381,7 +1389,9 @@ void Hunk_SmallLog( void) {
 				continue;
 			}
 			size += block2->size;
+#ifdef HUNK_DEBUG
 			locsize += block2->size;
+#endif
 			block2->printed = qtrue;
 		}
 #ifdef HUNK_DEBUG
