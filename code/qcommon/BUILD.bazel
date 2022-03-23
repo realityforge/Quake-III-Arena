@@ -4,7 +4,9 @@ cc_library(
     srcs = [
         "cvar.c",
     ],
-    visibility = ["//code/server:__pkg__"],
+    visibility = [
+        "//code/server:__pkg__",
+    ],
     deps = [
         ":qcommon",
         ":shared_api",
@@ -20,7 +22,9 @@ cc_library(
     hdrs = [
         "vm_local.h",
     ],
-    visibility = ["//code/server:__pkg__"],
+    visibility = [
+        "//code/server:__pkg__",
+    ],
     deps = [
         ":qcommon",
         ":shared_api",
@@ -166,7 +170,9 @@ cc_library(
         "cm_trace.c",
     ],
     hdrs = ["cm_local.h"],
-    visibility = ["//code/server:__pkg__"],
+    visibility = [
+        "//code/server:__pkg__",
+    ],
     deps = [
         ":qcommon",
         ":shared_api",
