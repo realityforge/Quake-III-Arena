@@ -338,44 +338,6 @@ void R_ShutdownVaos(void)
 	tr.numVaos = 0;
 }
 
-void R_VaoList_f(void)
-{
-	int             i;
-	vao_t          *vao;
-	int             vertexesSize = 0;
-	int             indexesSize = 0;
-
-	ri.Printf(PRINT_ALL, " size          name\n");
-	ri.Printf(PRINT_ALL, "----------------------------------------------------------\n");
-
-	for(i = 0; i < tr.numVaos; i++)
-	{
-		vao = tr.vaos[i];
-
-		ri.Printf(PRINT_ALL, "%d.%02d MB %s\n", vao->vertexesSize / (1024 * 1024),
-				  (vao->vertexesSize % (1024 * 1024)) * 100 / (1024 * 1024), vao->name);
-
-		vertexesSize += vao->vertexesSize;
-	}
-
-	for(i = 0; i < tr.numVaos; i++)
-	{
-		vao = tr.vaos[i];
-
-		ri.Printf(PRINT_ALL, "%d.%02d MB %s\n", vao->indexesSize / (1024 * 1024),
-				  (vao->indexesSize % (1024 * 1024)) * 100 / (1024 * 1024), vao->name);
-
-		indexesSize += vao->indexesSize;
-	}
-
-	ri.Printf(PRINT_ALL, " %i total VAOs\n", tr.numVaos);
-	ri.Printf(PRINT_ALL, " %d.%02d MB total vertices memory\n", vertexesSize / (1024 * 1024),
-			  (vertexesSize % (1024 * 1024)) * 100 / (1024 * 1024));
-	ri.Printf(PRINT_ALL, " %d.%02d MB total triangle indices memory\n", indexesSize / (1024 * 1024),
-			  (indexesSize % (1024 * 1024)) * 100 / (1024 * 1024));
-}
-
-
 /*
 ==============
 RB_UpdateTessVao

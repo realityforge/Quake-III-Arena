@@ -2179,7 +2179,6 @@ void Vao_SetVertexPointers(vao_t *vao);
 
 void            R_InitVaos(void);
 void            R_ShutdownVaos(void);
-void            R_VaoList_f(void);
 
 void            RB_UpdateTessVao(unsigned int attribBits);
 
