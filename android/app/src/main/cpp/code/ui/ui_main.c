@@ -163,15 +163,20 @@ Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, i
 		  return UI_API_VERSION;
 
 	  case UI_INIT: {
-			  int ptr[2] = {arg1, arg2};
-			  vr = (vr_clientinfo_t *) (*(long *) (ptr));
-			  _UI_Init(arg0);
-		  }
-		  return 0;
+			int ptr[2] = {arg1, arg2};
+			vr = (vr_clientinfo_t *) (*(long *) (ptr));
+			_UI_Init(arg0);
+			vr->menuCursorX = &uiInfo.uiDC.cursorx;
+			vr->menuCursorY = &uiInfo.uiDC.cursory;
+		}
+		return 0;
 
-	  case UI_SHUTDOWN:
-		  _UI_Shutdown();
-		  return 0;
+	  case UI_SHUTDOWN: {
+			vr->menuCursorX = NULL;
+			vr->menuCursorY = NULL;
+			_UI_Shutdown();
+		}
+		return 0;
 
 	  case UI_KEY_EVENT:
 		  _UI_KeyEvent( arg0, arg1 );
@@ -5271,9 +5276,6 @@ void _UI_MouseEvent( int dx, int dy )
 		uiInfo.uiDC.cursory = -16;
 	else if (uiInfo.uiDC.cursory > SCREEN_HEIGHT+16)
 		uiInfo.uiDC.cursory = SCREEN_HEIGHT+16;
-
-	vr->menuCursorX = &uiInfo.uiDC.cursorx;
-	vr->menuCursorY = &uiInfo.uiDC.cursory;
 
   if (Menu_Count() > 0) {
     //menuDef_t *menu = Menu_GetFocused();
