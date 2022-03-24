@@ -2168,7 +2168,6 @@ VERTEX BUFFER OBJECTS
 void R_VaoPackTangent(int16_t *out, vec4_t v);
 void R_VaoPackNormal(int16_t *out, vec3_t v);
 void R_VaoPackColor(uint16_t *out, vec4_t c);
-void R_VaoUnpackTangent(vec4_t v, int16_t *pack);
 void R_VaoUnpackNormal(vec3_t v, int16_t *pack);
 
 vao_t          *R_CreateVao(const char *name, byte *vertexes, int vertexesSize, byte *indexes, int indexesSize, vaoUsage_t usage);
