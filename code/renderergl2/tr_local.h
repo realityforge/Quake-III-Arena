@@ -2171,7 +2171,6 @@ void R_VaoPackColor(uint16_t *out, vec4_t c);
 void R_VaoUnpackNormal(vec3_t v, int16_t *pack);
 
 vao_t          *R_CreateVao(const char *name, byte *vertexes, int vertexesSize, byte *indexes, int indexesSize, vaoUsage_t usage);
-vao_t          *R_CreateVao2(const char *name, int numVertexes, srfVert_t *verts, int numIndexes, glIndex_t *inIndexes);
 
 void            R_BindVao(vao_t *vao);
 void            R_BindNullVao(void);
