@@ -47,6 +47,9 @@ jobs:
     runs-on: macos-11
     steps:
     - uses: actions/checkout@v2
+    - name: install_dependencies
+      run: |
+        brew install SDL2
     - name: Compile
       run: make release
       env:
