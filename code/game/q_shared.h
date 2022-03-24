@@ -1213,10 +1213,8 @@ typedef enum {
 	FMV_IDLE,
 	FMV_PLAY,		// play
 	FMV_EOF,		// all other conditions, i.e. stop/EOF/abort
-	FMV_ID_BLT,
 	FMV_ID_IDLE,
-	FMV_LOOPED,
-	FMV_ID_WAIT
+	FMV_LOOPED
 } e_status;
 
 typedef enum _flag_status {
