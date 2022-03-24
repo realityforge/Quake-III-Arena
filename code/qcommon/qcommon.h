@@ -767,18 +767,6 @@ MISC
 ==============================================================
 */
 
-// returned by Sys_GetProcessorFeatures
-typedef enum
-{
-  CF_RDTSC      = 1 << 0,
-  CF_MMX        = 1 << 1,
-  CF_MMX_EXT    = 1 << 2,
-  CF_3DNOW      = 1 << 3,
-  CF_3DNOW_EXT  = 1 << 4,
-  CF_SSE        = 1 << 5,
-  CF_SSE2       = 1 << 6,
-} cpuFeatures_t;
-
 // centralized and cleaned, that's the max string you can send to a Com_Printf / Com_DPrintf (above gets truncated)
 #define	MAXPRINTMSG	4096
 
@@ -1064,8 +1052,6 @@ void	Sys_Print( const char *msg );
 int		Sys_Milliseconds (void);
 
 qboolean Sys_RandomBytes( byte *string, int len );
-
-cpuFeatures_t Sys_GetProcessorFeatures( void );
 
 void	Sys_SendPacket( int length, const void *data, netadr_t to );
 
