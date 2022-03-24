@@ -268,6 +268,8 @@ INSTALL=install
 MKDIR=mkdir -p
 EXTRA_FILES=
 CLIENT_EXTRA_FILES=
+CLIENT_LIBS=
+RENDERER_LIBS=
 
 ifneq (,$(findstring "$(COMPILE_PLATFORM)", "linux" "gnu"))
   TOOLS_CFLAGS += -DARCH_STRING=\"$(COMPILE_ARCH)\"
