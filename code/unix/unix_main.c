@@ -415,14 +415,12 @@ void    Sys_ConfigureFPU() { // bk001213 - divide by zero
 }
 
 void Sys_PrintBinVersion( const char* name ) {
-  char* date = __DATE__;
-  char* time = __TIME__;
   char* sep = "==============================================================";
   fprintf( stdout, "\n\n%s\n", sep );
 #ifdef DEDICATED
-  fprintf( stdout, "Linux Quake3 Dedicated Server [%s %s]\n", date, time );  
+  fprintf( stdout, "Linux Quake3 Dedicated Server\n" );
 #else
-  fprintf( stdout, "Linux Quake3 Full Executable  [%s %s]\n", date, time );  
+  fprintf( stdout, "Linux Quake3 Full Executable\n" );
 #endif
   fprintf( stdout, " local install: %s\n", name );
   fprintf( stdout, "%s\n\n", sep );

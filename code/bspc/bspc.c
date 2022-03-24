@@ -461,7 +461,7 @@ int main (int argc, char **argv)
 	start_time = I_FloatTime();
 
 	Log_Open("bspc.log");		//open a log file
-	Log_Print("BSPC version "BSPC_VERSION", %s %s\n", __DATE__, __TIME__);
+	Log_Print("BSPC version "BSPC_VERSION"\n");
 
 	DefaultCfg();
 	for (i = 1; i < argc; i++)
