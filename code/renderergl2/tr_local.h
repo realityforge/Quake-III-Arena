@@ -2201,7 +2201,6 @@ GLSL
 
 void GLSL_InitGPUShaders(void);
 void GLSL_ShutdownGPUShaders(void);
-void GLSL_VertexAttribPointers(uint32_t attribBits);
 void GLSL_BindProgram(shaderProgram_t * program);
 
 void GLSL_SetUniformInt(shaderProgram_t *program, int uniformNum, GLint value);
