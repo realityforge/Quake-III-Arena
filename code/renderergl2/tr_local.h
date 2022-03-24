@@ -2438,7 +2438,6 @@ extern	backEndData_t	*backEndData;	// the second one may not be allocated
 
 
 void *R_GetCommandBuffer( int bytes );
-void RB_ExecuteRenderCommands( const void *data );
 
 void R_IssuePendingRenderCommands( void );
 
