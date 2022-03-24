@@ -171,22 +171,22 @@ typedef struct bot_goalstate_s
 	float avoidgoaltimes[MAX_AVOIDGOALS];		//times to avoid the goals
 } bot_goalstate_t;
 
-bot_goalstate_t *botgoalstates[MAX_CLIENTS + 1]; // bk001206 - FIXME: init?
+static bot_goalstate_t *botgoalstates[MAX_CLIENTS + 1]; // bk001206 - FIXME: init?
 //item configuration
-itemconfig_t *itemconfig = NULL; // bk001206 - init
+static itemconfig_t *itemconfig = NULL; // bk001206 - init
 //level items
-levelitem_t *levelitemheap = NULL; // bk001206 - init
-levelitem_t *freelevelitems = NULL; // bk001206 - init
-levelitem_t *levelitems = NULL; // bk001206 - init
-int numlevelitems = 0;
+static levelitem_t *levelitemheap = NULL; // bk001206 - init
+static levelitem_t *freelevelitems = NULL; // bk001206 - init
+static levelitem_t *levelitems = NULL; // bk001206 - init
+static int numlevelitems = 0;
 //map locations
-maplocation_t *maplocations = NULL; // bk001206 - init
+static maplocation_t *maplocations = NULL; // bk001206 - init
 //camp spots
-campspot_t *campspots = NULL; // bk001206 - init
+static campspot_t *campspots = NULL; // bk001206 - init
 //the game type
-int g_gametype = 0; // bk001206 - init
+static int g_gametype = 0; // bk001206 - init
 //additional dropped item weight
-libvar_t *droppedweight = NULL; // bk001206 - init
+static libvar_t *droppedweight = NULL; // bk001206 - init
 
 bot_goalstate_t *BotGoalStateFromHandle(int handle)
 {
