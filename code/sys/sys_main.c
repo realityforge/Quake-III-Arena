@@ -23,13 +23,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <signal.h>
 #include <stdlib.h>
 #include <limits.h>
-#include <sys/types.h>
 #include <stdarg.h>
 #include <stdio.h>
-#include <sys/stat.h>
 #include <string.h>
-#include <ctype.h>
-#include <errno.h>
 
 #ifndef DEDICATED
 #ifdef USE_LOCAL_HEADERS
