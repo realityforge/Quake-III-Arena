@@ -176,7 +176,6 @@ typedef struct aas_altroutegoal_s
 typedef struct aas_predictroute_s
 {
 	vec3_t endpos;			//position at the end of movement prediction
-	int endarea;			//area at end of movement prediction
 	int stopevent;			//event that made the prediction stop
 	int endcontents;		//contents at the end of movement prediction
 	int endtravelflags;		//end travel flags
