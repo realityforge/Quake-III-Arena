@@ -193,7 +193,6 @@ typedef struct aas_altroutegoal_s
 	vec3_t origin;
 	int areanum;
 	unsigned short starttraveltime;
-	unsigned short goaltraveltime;
 	unsigned short extratraveltime;
 } aas_altroutegoal_t;
 
