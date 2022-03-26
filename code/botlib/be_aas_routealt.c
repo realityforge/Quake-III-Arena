@@ -163,7 +163,6 @@ int AAS_AlternativeRouteGoals(vec3_t start, int startareanum, vec3_t goal, int g
 		//FIXME: add alternative goal origin
 		VectorCopy(aasworld.areas[bestareanum].center, altroutegoals[numaltroutegoals].origin);
 		altroutegoals[numaltroutegoals].areanum = bestareanum;
-		altroutegoals[numaltroutegoals].starttraveltime = midrangeareas[bestareanum].starttime;
 		numaltroutegoals++;
 		//
 #ifdef ALTROUTE_DEBUG
