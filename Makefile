@@ -412,22 +412,9 @@ ifeq ($(PLATFORM),darwin)
   BASE_CFLAGS += -D_THREAD_SAFE=1
 
   RENDERER_LIBS += -framework OpenGL
-
-  ifeq ($(USE_LOCAL_HEADERS),1)
-    BASE_CFLAGS += -I$(SDLHDIR)/include
-
-    # We copy sdlmain before ranlib'ing it so that subversion doesn't think
-    #  the file has been modified by each build.
-    LIBSDLMAIN=$(B)/libSDL2main.a
-    LIBSDLMAINSRC=$(SDLLIBSDIR)/macosx/libSDL2main.a
-    CLIENT_LIBS += $(SDLLIBSDIR)/macosx/libSDL2-2.0.0.dylib
-    RENDERER_LIBS += $(SDLLIBSDIR)/macosx/libSDL2-2.0.0.dylib
-    CLIENT_EXTRA_FILES += $(SDLLIBSDIR)/macosx/libSDL2-2.0.0.dylib
-  else
-    BASE_CFLAGS += -I/Library/Frameworks/SDL2.framework/Headers
-    CLIENT_LIBS += -framework SDL2
-    RENDERER_LIBS += -framework SDL2
-  endif
+  CLIENT_LIBS += -framework SDL2 -F/Library/Frameworks
+  RENDERER_LIBS += -framework SDL2 -F/Library/Frameworks
+  BASE_CFLAGS += -I/Library/Frameworks/SDL2.framework/Headers
 
   OPTIMIZE = $(OPTIMIZEVM) -ffast-math
 
