@@ -190,8 +190,6 @@ typedef struct centity_s {
 	vec3_t			rawOrigin;
 	vec3_t			rawAngles;
 
-	vec3_t			beamEnd;
-
 	// exact interpolated position of entity on this frame
 	vec3_t			lerpOrigin;
 	vec3_t			lerpAngles;
