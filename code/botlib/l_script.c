@@ -824,7 +824,6 @@ int PS_ExpectAnyToken(script_t *script, token_t *token)
 }
 //============================================================================
 // returns the next character of the read white space, returns NULL if none
-//
 //============================================================================
 char PS_NextWhiteSpaceChar(script_t *script)
 {
