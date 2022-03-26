@@ -37,8 +37,6 @@ int AAS_BestReachableArea(vec3_t origin, vec3_t mins, vec3_t maxs, vec3_t goalor
 int AAS_BestReachableFromJumpPadArea(vec3_t origin, vec3_t mins, vec3_t maxs);
 //returns the next reachability using the given model
 int AAS_NextModelReachability(int num, int modelnum);
-//returns the total area of the ground faces of the given area
-float AAS_AreaGroundFaceArea(int areanum);
 //returns true if the area is crouch only
 int AAS_AreaCrouch(int areanum);
 //returns true if a player can swim in this area
