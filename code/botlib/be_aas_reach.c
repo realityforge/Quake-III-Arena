@@ -458,27 +458,6 @@ int AAS_AreaReachability(int areanum)
 	return aasworld.areasettings[areanum].numreachableareas;
 }
 //===========================================================================
-// returns the surface area of all ground faces together of the area
-//===========================================================================
-float AAS_AreaGroundFaceArea(int areanum)
-{
-	int i;
-	float total;
-	aas_area_t *area;
-	aas_face_t *face;
-
-	total = 0;
-	area = &aasworld.areas[areanum];
-	for (i = 0; i < area->numfaces; i++)
-	{
-		face = &aasworld.faces[abs(aasworld.faceindex[area->firstface + i])];
-		if (!(face->faceflags & FACE_GROUND)) continue;
-		//
-		total += AAS_FaceArea(face);
-	}
-	return total;
-}
-//===========================================================================
 // returns the center of a face
 //===========================================================================
 void AAS_FaceCenter(int facenum, vec3_t center)
@@ -844,16 +823,6 @@ int AAS_Reachability_EqualFloorHeight(int area1num, int area2num)
 		{
 			lreach->traveltime += aassettings.rs_startcrouch;
 		}
-		/*
-		//NOTE: if there's nearby solid or a gap area after this area
-		if (!AAS_NearbySolidOrGap(lreach->start, lreach->end))
-		{
-			lreach->traveltime += 100;
-		}
-		*/
-		//avoid rather small areas
-		//if (AAS_AreaGroundFaceArea(lreach->areanum) < 500) lreach->traveltime += 100;
-		//
 		reach_equalfloor++;
 		return qtrue;
 	}
@@ -1184,16 +1153,6 @@ int AAS_Reachability_Step_Barrier_WaterJump_WalkOffLedge(int area1num, int area2
 			}
 			lreach->next = areareachability[area1num];
 			areareachability[area1num] = lreach;
-			//NOTE: if there's nearby solid or a gap area after this area
-			/*
-			if (!AAS_NearbySolidOrGap(lreach->start, lreach->end))
-			{
-				lreach->traveltime += 100;
-			}
-			*/
-			//avoid rather small areas
-			//if (AAS_AreaGroundFaceArea(lreach->areanum) < 500) lreach->traveltime += 100;
-			//
 			reach_step++;
 			return qtrue;
 		}
