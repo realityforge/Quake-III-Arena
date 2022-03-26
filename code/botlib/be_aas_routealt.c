@@ -164,9 +164,6 @@ int AAS_AlternativeRouteGoals(vec3_t start, int startareanum, vec3_t goal, int g
 		VectorCopy(aasworld.areas[bestareanum].center, altroutegoals[numaltroutegoals].origin);
 		altroutegoals[numaltroutegoals].areanum = bestareanum;
 		altroutegoals[numaltroutegoals].starttraveltime = midrangeareas[bestareanum].starttime;
-		altroutegoals[numaltroutegoals].extratraveltime =
-					(midrangeareas[bestareanum].starttime + midrangeareas[bestareanum].goaltime) -
-								goaltraveltime;
 		numaltroutegoals++;
 		//
 #ifdef ALTROUTE_DEBUG
