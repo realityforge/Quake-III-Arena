@@ -151,7 +151,6 @@ static void BotImport_Trace(bsp_trace_t *bsptrace, vec3_t start, vec3_t mins, ve
 	bsptrace->surface.flags = trace.surfaceFlags;
 	bsptrace->ent = trace.entityNum;
 	bsptrace->exp_dist = 0;
-	bsptrace->sidenum = 0;
 	bsptrace->contents = 0;
 }
 
@@ -172,7 +171,6 @@ static void BotImport_EntityTrace(bsp_trace_t *bsptrace, vec3_t start, vec3_t mi
 	bsptrace->surface.flags = trace.surfaceFlags;
 	bsptrace->ent = trace.entityNum;
 	bsptrace->exp_dist = 0;
-	bsptrace->sidenum = 0;
 	bsptrace->contents = 0;
 }
 

@@ -40,7 +40,6 @@ typedef struct midrangearea_s
 {
 	int valid;
 	unsigned short starttime;
-	unsigned short goaltime;
 } midrangearea_t;
 
 midrangearea_t *midrangeareas;
@@ -127,7 +126,6 @@ int AAS_AlternativeRouteGoals(vec3_t start, int startareanum, vec3_t goal, int g
 		//this is a mid range area
 		midrangeareas[i].valid = qtrue;
 		midrangeareas[i].starttime = starttime;
-		midrangeareas[i].goaltime = goaltime;
 		Log_Write("%d midrange area %d", nummidrangeareas, i);
 		nummidrangeareas++;
 	}
