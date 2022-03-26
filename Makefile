@@ -414,7 +414,13 @@ ifeq ($(PLATFORM),darwin)
   RENDERER_LIBS += -framework OpenGL
   CLIENT_LIBS += -framework SDL2 -F/Library/Frameworks
   RENDERER_LIBS += -framework SDL2 -F/Library/Frameworks
-  BASE_CFLAGS += -I/Library/Frameworks/SDL2.framework/Headers
+
+  ifeq ($(USE_LOCAL_HEADERS),1)
+    # TODO: Alreayd require framework so maybe use include from there ... but this would involve changing code
+    BASE_CFLAGS += -I$(SDLHDIR)/include
+  else
+    BASE_CFLAGS += -I/Library/Frameworks/SDL2.framework/Headers
+  endif
 
   OPTIMIZE = $(OPTIMIZEVM) -ffast-math
 
