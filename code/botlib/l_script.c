@@ -822,17 +822,6 @@ int PS_ExpectAnyToken(script_t *script, token_t *token)
 		return 1;
 	}
 }
-int PS_CheckTokenString(script_t *script, char *string)
-{
-	token_t tok;
-
-	if (!PS_ReadToken(script, &tok)) return 0;
-	//if the token is available
-	if (!strcmp(tok.string, string)) return 1;
-	//token not available
-	script->script_p = script->lastscript_p;
-	return 0;
-}
 int PS_CheckTokenType(script_t *script, int type, int subtype, token_t *token)
 {
 	token_t tok;
