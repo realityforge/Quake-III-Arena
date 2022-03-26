@@ -822,11 +822,6 @@ int PS_ExpectAnyToken(script_t *script, token_t *token)
 		return 1;
 	}
 }
-void PS_UnreadToken(script_t *script, token_t *token)
-{
-	memcpy(&script->token, token, sizeof(token_t));
-	script->tokenavailable = 1;
-}
 //============================================================================
 // returns the next character of the read white space, returns NULL if none
 //
