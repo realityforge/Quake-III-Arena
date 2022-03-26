@@ -861,7 +861,6 @@ void PS_UnreadLastToken(script_t *script)
 }
 //============================================================================
 // returns the next character of the read white space, returns NULL if none
-//
 //============================================================================
 char PS_NextWhiteSpaceChar(script_t *script)
 {
