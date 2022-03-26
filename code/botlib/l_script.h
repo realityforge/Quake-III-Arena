@@ -196,8 +196,6 @@ int PS_ExpectTokenType(script_t *script, int type, int subtype, token_t *token);
 int PS_ExpectAnyToken(script_t *script, token_t *token);
 //returns true an reads the token when a token with the given type is available
 int PS_CheckTokenType(script_t *script, int type, int subtype, token_t *token);
-//skip tokens until the given token string is read
-int PS_SkipUntilString(script_t *script, char *string);
 //unread the last token read from the script
 void PS_UnreadLastToken(script_t *script);
 //unread the given token

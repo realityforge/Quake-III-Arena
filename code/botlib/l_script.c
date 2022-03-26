@@ -855,16 +855,6 @@ int PS_CheckTokenType(script_t *script, int type, int subtype, token_t *token)
 	script->script_p = script->lastscript_p;
 	return 0;
 }
-int PS_SkipUntilString(script_t *script, char *string)
-{
-	token_t token;
-
-	while(PS_ReadToken(script, &token))
-	{
-		if (!strcmp(token.string, string)) return 1;
-	}
-	return 0;
-}
 void PS_UnreadLastToken(script_t *script)
 {
 	script->tokenavailable = 1;
