@@ -822,16 +822,6 @@ int PS_ExpectAnyToken(script_t *script, token_t *token)
 		return 1;
 	}
 }
-int PS_SkipUntilString(script_t *script, char *string)
-{
-	token_t token;
-
-	while(PS_ReadToken(script, &token))
-	{
-		if (!strcmp(token.string, string)) return 1;
-	}
-	return 0;
-}
 void PS_UnreadLastToken(script_t *script)
 {
 	script->tokenavailable = 1;
