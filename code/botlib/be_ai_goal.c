@@ -435,7 +435,6 @@ void BotInitInfoEntities(void)
 			}
 			cs->next = campspots;
 			campspots = cs;
-			//AAS_DrawPermanentCross(cs->origin, 4, LINECOLOR_YELLOW);
 			numcampspots++;
 		}
 	}

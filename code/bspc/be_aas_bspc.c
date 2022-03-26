@@ -84,7 +84,6 @@ void BotImport_Trace(bsp_trace_t *bsptrace, vec3_t start, vec3_t mins, vec3_t ma
 	VectorCopy(result.plane.normal, bsptrace->plane.normal);
 	bsptrace->plane.signbits = result.plane.signbits;
 	bsptrace->plane.type = result.plane.type;
-	bsptrace->sidenum = 0;
 	bsptrace->startsolid = result.startsolid;
 	bsptrace->surface.flags = result.surfaceFlags;
 }

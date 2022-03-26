@@ -130,7 +130,6 @@ void BotAI_Trace(bsp_trace_t *bsptrace, vec3_t start, vec3_t mins, vec3_t maxs, 
 	bsptrace->surface.value = trace.surfaceFlags;
 	bsptrace->ent = trace.entityNum;
 	bsptrace->exp_dist = 0;
-	bsptrace->sidenum = 0;
 	bsptrace->contents = 0;
 }
 

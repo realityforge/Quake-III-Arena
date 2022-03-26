@@ -47,8 +47,6 @@ extern botlib_import_t botimport;
 //NOTE: all travel times are in hundreth of a second
 //maximum number of reachability links
 #define AAS_MAX_REACHABILITYSIZE			65536
-//number of areas reachability is calculated for each frame
-#define REACHABILITYAREASPERCYCLE			15
 //number of units reachability points are placed inside the areas
 #define INSIDEUNITS							2
 #define INSIDEUNITS_WALKEND					5
@@ -70,11 +68,7 @@ int reach_teleport;		//teleport
 int reach_elevator;		//use an elevator
 int reach_funcbob;		//use a func bob
 int reach_grapple;		//grapple hook
-int reach_doublejump;	//double jump
-int reach_rampjump;		//ramp jump
-int reach_strafejump;	//strafe jump (just normal jump but further)
 int reach_rocketjump;	//rocket jump
-int reach_bfgjump;		//bfg jump
 int reach_jumppad;		//jump pads
 //if true grapple reachabilities are skipped
 int calcgrapplereach;
@@ -223,7 +217,6 @@ int AAS_GetJumpPadInfo(int ent, vec3_t areastart, vec3_t absmins, vec3_t absmaxs
 	}
 	areastart[2] += 0.125;
 	//
-	//AAS_DrawPermanentCross(origin, 4, 4);
 	//get the target entity
 	AAS_ValueForBSPEpairKey(ent, "target", target, MAX_EPAIRKEY);
 	for (ent2 = AAS_NextBSPEntity(0); ent2; ent2 = AAS_NextBSPEntity(ent2))
@@ -575,13 +568,6 @@ int AAS_AreaDoNotEnter(int areanum)
 	return (aasworld.areasettings[areanum].contents & AREACONTENTS_DONOTENTER);
 }
 //===========================================================================
-// returns the time it takes perform a barrier jump
-//===========================================================================
-unsigned short int AAS_BarrierJumpTravelTime(void)
-{
-	return aassettings.phys_jumpvel / (aassettings.phys_gravity * 0.1);
-}
-//===========================================================================
 // returns true if there already exists a reachability from area1 to area2
 //===========================================================================
 qboolean AAS_ReachabilityExists(int area1num, int area2num)
@@ -591,35 +577,6 @@ qboolean AAS_ReachabilityExists(int area1num, int area2num)
 	for (r = areareachability[area1num]; r; r = r->next)
 	{
 		if (r->areanum == area2num) return qtrue;
-	}
-	return qfalse;
-}
-//===========================================================================
-// returns true if there is a solid just after the end point when going
-// from start to end
-//===========================================================================
-int AAS_NearbySolidOrGap(vec3_t start, vec3_t end)
-{
-	vec3_t dir, testpoint;
-	int areanum;
-
-	VectorSubtract(end, start, dir);
-	dir[2] = 0;
-	VectorNormalize(dir);
-	VectorMA(end, 48, dir, testpoint);
-
-	areanum = AAS_PointAreaNum(testpoint);
-	if (!areanum)
-	{
-		testpoint[2] += 16;
-		areanum = AAS_PointAreaNum(testpoint);
-		if (!areanum) return qtrue;
-	}
-	VectorMA(end, 64, dir, testpoint);
-	areanum = AAS_PointAreaNum(testpoint);
-	if (areanum)
-	{
-		if (!AAS_AreaSwim(areanum) && !AAS_AreaGrounded(areanum)) return qtrue;
 	}
 	return qfalse;
 }
@@ -779,11 +736,6 @@ int AAS_Reachability_EqualFloorHeight(int area1num, int area2num)
 					end[2] += 0.125;
 					//
 					height = DotProduct(invgravity, start);
-					//NOTE: if there's nearby solid or a gap area after this area
-					//disabled this crap
-					//if (AAS_NearbySolidOrGap(start, end)) height += 200;
-					//NOTE: disabled because it disables reachabilities to very small areas
-					//if (AAS_PointAreaNum(end) != area2num) continue;
 					//get the longest lowest edge
 					if (height < bestheight ||
 							(height < bestheight + 1 && length > bestlength))
@@ -1250,7 +1202,7 @@ int AAS_Reachability_Step_Barrier_WaterJump_WalkOffLedge(int area1num, int area2
 					VectorMA(ground_beststart, INSIDEUNITS_WALKSTART, ground_bestnormal, lreach->start);
 					VectorMA(ground_bestend, INSIDEUNITS_WALKEND, ground_bestnormal, lreach->end);
 					lreach->traveltype = TRAVEL_BARRIERJUMP;
-					lreach->traveltime = aassettings.rs_barrierjump;//AAS_BarrierJumpTravelTime();
+					lreach->traveltime = aassettings.rs_barrierjump;
 					lreach->next = areareachability[area1num];
 					areareachability[area1num] = lreach;
 					//we've got another barrierjump reachability
@@ -3056,17 +3008,10 @@ void AAS_Reachability_FuncBobbing(void)
 		//
 		move_start[axis] -= height;
 		move_end[axis] += height;
-		//
+
 		Log_Write("funcbob model %d, start = {%1.1f, %1.1f, %1.1f} end = {%1.1f, %1.1f, %1.1f}\n",
 					modelnum, move_start[0], move_start[1], move_start[2], move_end[0], move_end[1], move_end[2]);
-		//
-#ifndef BSPC
-		/*
-		AAS_DrawPermanentCross(move_start, 4, 1);
-		AAS_DrawPermanentCross(move_end, 4, 2);
-		*/
-#endif
-		//
+
 		for (i = 0; i < 4; i++)
 		{
 			VectorCopy(move_start, start_edgeverts[i]);
