@@ -230,22 +230,6 @@ int AAS_OriginOfMoverWithModelNum(int modelnum, vec3_t origin)
 	}
 	return qfalse;
 }
-void AAS_EntitySize(int entnum, vec3_t mins, vec3_t maxs)
-{
-	aas_entity_t *ent;
-
-	if (!aasworld.initialized) return;
-
-	if (entnum < 0 || entnum >= aasworld.maxentities)
-	{
-		botimport.Print(PRT_FATAL, "AAS_EntitySize: entnum %d out of range\n", entnum);
-		return;
-	}
-
-	ent = &aasworld.entities[entnum];
-	VectorCopy(ent->i.mins, mins);
-	VectorCopy(ent->i.maxs, maxs);
-}
 void AAS_EntityBSPData(int entnum, bsp_entdata_t *entdata)
 {
 	aas_entity_t *ent;

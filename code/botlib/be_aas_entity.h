@@ -33,8 +33,6 @@ int AAS_UpdateEntity(int ent, bot_entitystate_t *state);
 void AAS_EntityBSPData(int entnum, bsp_entdata_t *entdata);
 #endif //AASINTERN
 
-//returns the size of the entity bounding box in mins and maxs
-void AAS_EntitySize(int entnum, vec3_t mins, vec3_t maxs);
 //returns the BSP model number of the entity
 int AAS_EntityModelNum(int entnum);
 //returns the origin of an entity with the given model number
