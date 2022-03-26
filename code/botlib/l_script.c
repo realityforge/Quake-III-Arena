@@ -698,19 +698,15 @@ int PS_ReadToken(script_t *script, token_t *token)
 		memcpy(token, &script->token, sizeof(token_t));
 		return 1;
 	}
-	//save script pointer
-	script->lastscript_p = script->script_p;
 	//save line counter
 	script->lastline = script->line;
 	//clear the token stuff
 	memset(token, 0, sizeof(token_t));
 	//start of the white space
-	script->whitespace_p = script->script_p;
 	token->whitespace_p = script->script_p;
 	//read unusefull stuff
 	if (!PS_ReadWhiteSpace(script)) return 0;
 	//end of the white space
-	script->endwhitespace_p = script->script_p;
 	token->endwhitespace_p = script->script_p;
 	//line the token is on
 	token->line = script->line;
@@ -810,32 +806,6 @@ int PS_ExpectTokenType(script_t *script, int type, int subtype, token_t *token)
 	}
 	return 1;
 }
-int PS_ExpectAnyToken(script_t *script, token_t *token)
-{
-	if (!PS_ReadToken(script, token))
-	{
-		ScriptError(script, "couldn't read expected token");
-		return 0;
-	}
-	else
-	{
-		return 1;
-	}
-}
-//============================================================================
-// returns the next character of the read white space, returns NULL if none
-//============================================================================
-char PS_NextWhiteSpaceChar(script_t *script)
-{
-	if (script->whitespace_p != script->endwhitespace_p)
-	{
-		return *script->whitespace_p++;
-	}
-	else
-	{
-		return 0;
-	}
-}
 void StripDoubleQuotes(char *string)
 {
 	if (*string == '\"')
@@ -858,81 +828,9 @@ void StripSingleQuotes(char *string)
 		string[strlen(string)-1] = '\0';
 	}
 }
-float ReadSignedFloat(script_t *script)
-{
-	token_t token;
-	float sign = 1.0;
-
-	PS_ExpectAnyToken(script, &token);
-	if (!strcmp(token.string, "-"))
-	{
-		if(!PS_ExpectAnyToken(script, &token))
-		{
-			ScriptError(script, "Missing float value");
-			return 0;
-		}
-
-		sign = -1.0;
-	}
-	
-	if (token.type != TT_NUMBER)
-	{
-		ScriptError(script, "expected float value, found %s", token.string);
-		return 0;
-	}
-
-	return sign * token.floatvalue;
-}
-signed long int ReadSignedInt(script_t *script)
-{
-	token_t token;
-	signed long int sign = 1;
-
-	PS_ExpectAnyToken(script, &token);
-	if (!strcmp(token.string, "-"))
-	{
-		if(!PS_ExpectAnyToken(script, &token))
-		{
-			ScriptError(script, "Missing integer value");
-			return 0;
-		}
-
-		sign = -1;
-	}
-
-	if (token.type != TT_NUMBER || token.subtype == TT_FLOAT)
-	{
-		ScriptError(script, "expected integer value, found %s", token.string);
-		return 0;
-	}
-	
-	return sign * token.intvalue;
-}
 void SetScriptFlags(script_t *script, int flags)
 {
 	script->flags = flags;
-}
-int GetScriptFlags(script_t *script)
-{
-	return script->flags;
-}
-void ResetScript(script_t *script)
-{
-	//pointer in script buffer
-	script->script_p = script->buffer;
-	//pointer in script buffer before reading token
-	script->lastscript_p = script->buffer;
-	//begin of white space
-	script->whitespace_p = NULL;
-	//end of white space
-	script->endwhitespace_p = NULL;
-	//set if there's a token available in script->token
-	script->tokenavailable = 0;
-	//
-	script->line = 1;
-	script->lastline = 1;
-	//clear the saved token
-	memset(&script->token, 0, sizeof(token_t));
 }
 //============================================================================
 // returns true if at the end of the script
@@ -991,8 +889,6 @@ script_t *LoadScriptFile(const char *filename)
 	script->length = length;
 	//pointer in script buffer
 	script->script_p = script->buffer;
-	//pointer in script buffer before reading token
-	script->lastscript_p = script->buffer;
 	//pointer to end of script buffer
 	script->end_p = &script->buffer[length];
 	//set if there's a token available in script->token
@@ -1031,8 +927,6 @@ script_t *LoadScriptMemory(char *ptr, int length, char *name)
 	script->length = length;
 	//pointer in script buffer
 	script->script_p = script->buffer;
-	//pointer in script buffer before reading token
-	script->lastscript_p = script->buffer;
 	//pointer to end of script buffer
 	script->end_p = &script->buffer[length];
 	//set if there's a token available in script->token

@@ -45,8 +45,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define SCFL_NOSTRINGWHITESPACES	0x0004
 #define SCFL_NOSTRINGESCAPECHARS	0x0008
 #define SCFL_PRIMITIVE				0x0010
-#define SCFL_NOBINARYNUMBERS		0x0020
-#define SCFL_NONUMBERVALUES		0x0040
 
 //token types
 #define TT_STRING						1			// string
@@ -172,9 +170,6 @@ typedef struct script_s
 	char *buffer;					//buffer containing the script
 	char *script_p;					//current pointer in the script
 	char *end_p;					//pointer to the end of the script
-	char *lastscript_p;				//script pointer before reading token
-	char *whitespace_p;				//begin of the white space
-	char *endwhitespace_p;			//end of the white space
 	int length;						//length of the script in bytes
 	int line;						//current line in script
 	int lastline;					//line before reading token
@@ -190,26 +185,14 @@ typedef struct script_s
 int PS_ReadToken(script_t *script, token_t *token);
 //expect a certain token type
 int PS_ExpectTokenType(script_t *script, int type, int subtype, token_t *token);
-//expect a token
-int PS_ExpectAnyToken(script_t *script, token_t *token);
-//returns the next character of the read white space, returns NULL if none
-char PS_NextWhiteSpaceChar(script_t *script);
 //remove any leading and trailing double quotes from the token
 void StripDoubleQuotes(char *string);
 //remove any leading and trailing single quotes from the token
 void StripSingleQuotes(char *string);
-//read a possible signed integer
-signed long int ReadSignedInt(script_t *script);
-//read a possible signed floating point number
-float ReadSignedFloat(script_t *script);
 //set an array with punctuations, NULL restores default C/C++ set
 void SetScriptPunctuations(script_t *script, punctuation_t *p);
 //set script flags
 void SetScriptFlags(script_t *script, int flags);
-//get script flags
-int GetScriptFlags(script_t *script);
-//reset a script
-void ResetScript(script_t *script);
 //returns true if at the end of the script
 int EndOfScript(script_t *script);
 //returns a pointer to the punctuation with the given number
