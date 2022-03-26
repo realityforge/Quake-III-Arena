@@ -822,10 +822,6 @@ int PS_ExpectAnyToken(script_t *script, token_t *token)
 		return 1;
 	}
 }
-void PS_UnreadLastToken(script_t *script)
-{
-	script->tokenavailable = 1;
-}
 void PS_UnreadToken(script_t *script, token_t *token)
 {
 	memcpy(&script->token, token, sizeof(token_t));

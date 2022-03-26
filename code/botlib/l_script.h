@@ -192,8 +192,6 @@ int PS_ReadToken(script_t *script, token_t *token);
 int PS_ExpectTokenType(script_t *script, int type, int subtype, token_t *token);
 //expect a token
 int PS_ExpectAnyToken(script_t *script, token_t *token);
-//unread the last token read from the script
-void PS_UnreadLastToken(script_t *script);
 //unread the given token
 void PS_UnreadToken(script_t *script, token_t *token);
 //returns the next character of the read white space, returns NULL if none
