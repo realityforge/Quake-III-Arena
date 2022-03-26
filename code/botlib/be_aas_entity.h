@@ -41,8 +41,6 @@ int AAS_OriginOfMoverWithModelNum(int modelnum, vec3_t origin);
 void AAS_EntityInfo(int entnum, aas_entityinfo_t *info);
 //returns the next entity
 int AAS_NextEntity(int entnum);
-//returns the origin of the entity
-void AAS_EntityOrigin(int entnum, vec3_t origin);
 //returns the entity type
 int AAS_EntityType(int entnum);
 //returns the model index of the entity

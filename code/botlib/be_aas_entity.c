@@ -169,17 +169,6 @@ void AAS_EntityInfo(int entnum, aas_entityinfo_t *info)
 
 	memcpy(info, &aasworld.entities[entnum].i, sizeof(aas_entityinfo_t));
 }
-void AAS_EntityOrigin(int entnum, vec3_t origin)
-{
-	if (entnum < 0 || entnum >= aasworld.maxentities)
-	{
-		botimport.Print(PRT_FATAL, "AAS_EntityOrigin: entnum %d out of range\n", entnum);
-		VectorClear(origin);
-		return;
-	}
-
-	VectorCopy(aasworld.entities[entnum].i.origin, origin);
-}
 int AAS_EntityModelindex(int entnum)
 {
 	if (entnum < 0 || entnum >= aasworld.maxentities)
