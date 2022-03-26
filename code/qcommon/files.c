@@ -517,12 +517,6 @@ static void FS_CheckFilenameIsMutable( const char *filename,
 	}
 }
 
-void FS_Remove( const char *osPath ) {
-	FS_CheckFilenameIsMutable( osPath, __func__ );
-
-	remove( osPath );
-}
-
 void FS_HomeRemove( const char *homePath ) {
 	FS_CheckFilenameIsMutable( homePath, __func__ );
 
