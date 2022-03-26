@@ -43,13 +43,29 @@ cc_library(
 )
 
 cc_library(
+    # bg_misc = Both Game part used by TA ui
+    name = "bg_misc",
+    srcs = [
+        "bg_local.h",
+        "bg_misc.c",
+    ],
+    includes = ["."],
+    visibility = [
+        "//code/ui:__pkg__",
+    ],
+    deps = [
+        ":bg_api",
+        "//code/qcommon:shared_api",
+    ],
+)
+
+cc_library(
     # bg = Both Game which is shared between client and server games
     # It probably should be separated in a more meaningful way but
     # that is a job for another time
     name = "bg",
     srcs = [
         "bg_local.h",
-        "bg_misc.c",
         "bg_pmove.c",
         "bg_slidemove.c",
     ],
