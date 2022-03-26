@@ -503,10 +503,6 @@ static void FS_CopyFile( char *fromOSPath, char *toOSPath ) {
 	free( buf );
 }
 
-static void FS_Remove( const char *osPath ) {
-	remove( osPath );
-}
-
 /*
 ================
 FS_FileExists
@@ -682,7 +678,7 @@ void FS_SV_Rename( const char *from, const char *to ) {
 	if (rename( from_ospath, to_ospath )) {
 		// Failed, try copying it and deleting the original
 		FS_CopyFile ( from_ospath, to_ospath );
-		FS_Remove ( from_ospath );
+		remove( from_ospath );
 	}
 }
 
