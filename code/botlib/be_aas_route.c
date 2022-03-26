@@ -1549,7 +1549,6 @@ int AAS_PredictRoute(struct aas_predictroute_s *route, int areanum, vec3_t origi
 
 	//init output
 	route->stopevent = RSE_NONE;
-	route->endarea = goalareanum;
 	route->endcontents = 0;
 	route->endtravelflags = 0;
 	VectorCopy(origin, route->endpos);
@@ -1573,7 +1572,6 @@ int AAS_PredictRoute(struct aas_predictroute_s *route, int areanum, vec3_t origi
 			if (AAS_TravelFlagForType_inline(reach->traveltype) & stoptfl)
 			{
 				route->stopevent = RSE_USETRAVELTYPE;
-				route->endarea = curareanum;
 				route->endcontents = aasworld.areasettings[curareanum].contents;
 				route->endtravelflags = AAS_TravelFlagForType_inline(reach->traveltype);
 				VectorCopy(reach->start, route->endpos);
@@ -1582,7 +1580,6 @@ int AAS_PredictRoute(struct aas_predictroute_s *route, int areanum, vec3_t origi
 			if (AAS_AreaContentsTravelFlags_inline(reach->areanum) & stoptfl)
 			{
 				route->stopevent = RSE_USETRAVELTYPE;
-				route->endarea = reach->areanum;
 				route->endcontents = aasworld.areasettings[reach->areanum].contents;
 				route->endtravelflags = AAS_AreaContentsTravelFlags_inline(reach->areanum);
 				VectorCopy(reach->end, route->endpos);
@@ -1603,7 +1600,6 @@ int AAS_PredictRoute(struct aas_predictroute_s *route, int areanum, vec3_t origi
 				if (aasworld.areasettings[testareanum].contents & stopcontents)
 				{
 					route->stopevent = RSE_ENTERCONTENTS;
-					route->endarea = testareanum;
 					route->endcontents = aasworld.areasettings[testareanum].contents;
 					VectorCopy(reach->end, route->endpos);
 					route->time += AAS_AreaTravelTime(areanum, origin, reach->start);
@@ -1616,7 +1612,6 @@ int AAS_PredictRoute(struct aas_predictroute_s *route, int areanum, vec3_t origi
 				if (testareanum == stopareanum)
 				{
 					route->stopevent = RSE_ENTERAREA;
-					route->endarea = testareanum;
 					route->endcontents = aasworld.areasettings[testareanum].contents;
 					VectorCopy(reach->start, route->endpos);
 					return qtrue;
@@ -1626,7 +1621,6 @@ int AAS_PredictRoute(struct aas_predictroute_s *route, int areanum, vec3_t origi
 
 		route->time += AAS_AreaTravelTime(areanum, origin, reach->start);
 		route->time += reach->traveltime;
-		route->endarea = reach->areanum;
 		route->endcontents = aasworld.areasettings[reach->areanum].contents;
 		route->endtravelflags = AAS_TravelFlagForType_inline(reach->traveltype);
 		VectorCopy(reach->end, route->endpos);
