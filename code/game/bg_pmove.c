@@ -1906,8 +1906,5 @@ void Pmove (pmove_t *pmove) {
 			pmove->cmd.upmove = 20;
 		}
 	}
-
-	//PM_CheckStuck();
-
 }
 
