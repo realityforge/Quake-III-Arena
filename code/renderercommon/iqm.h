@@ -18,8 +18,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-#ifndef __IQM_H__
-#define __IQM_H__
+#ifndef IQM_H
+#define IQM_H
 
 #define IQM_MAGIC "INTERQUAKEMODEL"
 #define IQM_VERSION 2

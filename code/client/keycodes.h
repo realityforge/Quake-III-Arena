@@ -20,8 +20,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 //
-#ifndef __KEYCODES_H__
-#define __KEYCODES_H__
+#ifndef KEYCODES_H
+#define KEYCODES_H
 
 //
 // these are the key numbers that should be passed to KeyEvent

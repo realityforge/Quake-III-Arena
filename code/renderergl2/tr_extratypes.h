@@ -20,8 +20,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-#ifndef __TR_EXTRATYPES_H__
-#define __TR_EXTRATYPES_H__
+#ifndef TR_EXTRATYPES_H
+#define TR_EXTRATYPES_H
 
 // tr_extratypes.h, for mods that want to extend tr_types.h without losing compatibility with original VMs
 
