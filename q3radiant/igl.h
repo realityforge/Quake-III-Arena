@@ -97,8 +97,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // all purpose OpenGL interface for Q3Radiant plugins
 //
 
-#ifndef __IGL_H__
-#define __IGL_H__
+#ifndef IGL_H
+#define IGL_H
 
 // we use this class to let plugins draw inside the Radiant windows
 class IGLWindow

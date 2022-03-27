@@ -19,8 +19,8 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-#ifndef __QFILES_H__
-#define __QFILES_H__
+#ifndef QFILES_H
+#define QFILES_H
 
 //
 // qfiles.h: quake file formats

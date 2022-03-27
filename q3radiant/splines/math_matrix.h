@@ -19,8 +19,8 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-#ifndef __MATH_MATRIX_H__
-#define __MATH_MATRIX_H__
+#ifndef MATH_MATRIX_H
+#define MATH_MATRIX_H
 
 #include <string.h>
 #include "math_vector.h"
@@ -220,4 +220,4 @@ ID_INLINE mat3_t SkewSymmetric( idVec3_t const &src ) {
 
 extern mat3_t mat3_default;
 
-#endif /* !__MATH_MATRIX_H__ */
+#endif /* !MATH_MATRIX_H */

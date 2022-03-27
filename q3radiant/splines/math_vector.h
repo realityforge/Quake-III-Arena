@@ -19,8 +19,8 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-#ifndef __MATH_VECTOR_H__
-#define __MATH_VECTOR_H__
+#ifndef MATH_VECTOR_H
+#define MATH_VECTOR_H
 
 #pragma warning(disable : 4244)
 
@@ -556,4 +556,4 @@ ID_INLINE float& idVec5_t::operator[]( int index ) {
 	return ( &x )[ index ];
 }
 
-#endif /* !__MATH_VECTOR_H__ */
+#endif /* !MATH_VECTOR_H */

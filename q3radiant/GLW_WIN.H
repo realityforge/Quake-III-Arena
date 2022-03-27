@@ -23,8 +23,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #  error You should not be including this file on this platform
 #endif
 
-#ifndef __GLW_WIN_H__
-#define __GLW_WIN_H__
+#ifndef GLW_WIN_H
+#define GLW_WIN_H
 
 typedef struct
 {

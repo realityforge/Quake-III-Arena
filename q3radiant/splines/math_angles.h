@@ -19,8 +19,8 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-#ifndef __MATH_ANGLES_H__
-#define __MATH_ANGLES_H__
+#ifndef MATH_ANGLES_H
+#define MATH_ANGLES_H
 
 #include <stdlib.h>
 #include <assert.h>
@@ -192,4 +192,4 @@ inline angles_t& angles_t::Zero( void ) {
 	return *this;
 }
 
-#endif /* !__MATH_ANGLES_H__ */
+#endif /* !MATH_ANGLES_H */

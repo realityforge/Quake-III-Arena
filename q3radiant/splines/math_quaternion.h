@@ -19,8 +19,8 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-#ifndef __MATH_QUATERNION_H__
-#define __MATH_QUATERNION_H__
+#ifndef MATH_QUATERNION_H
+#define MATH_QUATERNION_H
 
 #include <assert.h>
 #include <math.h>
@@ -187,4 +187,4 @@ inline quat_t quat_t::operator-() {
 	return quat_t( -x, -y, -z, -w );
 }
 
-#endif /* !__MATH_QUATERNION_H__ */
+#endif /* !MATH_QUATERNION_H */

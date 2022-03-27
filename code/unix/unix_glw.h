@@ -23,8 +23,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #error You should include this file only on Linux platforms
 #endif
 
-#ifndef __GLW_LINUX_H__
-#define __GLW_LINUX_H__
+#ifndef GLW_LINUX_H
+#define GLW_LINUX_H
 
 typedef struct
 {

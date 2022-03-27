@@ -19,8 +19,8 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-#ifndef __QEDEFS_H__
-#define __QEDEFS_H__
+#ifndef QEDEFS_H
+#define QEDEFS_H
 
 #define QE_VERSION  0x0501
 

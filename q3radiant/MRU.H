@@ -32,8 +32,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
 //*************************************************************
 
-#ifndef __MRU_H__
-#define __MRU_H__
+#ifndef MRU_H
+#define MRU_H
 
 #define NBMRUMENUSHOW   6       // Default number of MRU showed in the menu File
 #define NBMRUMENU       9       // Default number of MRU stored

@@ -23,8 +23,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ** QGL.H
 */
 
-#ifndef __QGL_H__
-#define __QGL_H__
+#ifndef QGL_H
+#define QGL_H
 
 #ifdef _WIN32
 #  include <windows.h>

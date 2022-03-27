@@ -19,8 +19,8 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-#ifndef __UTIL_LIST_H__
-#define __UTIL_LIST_H__
+#ifndef UTIL_LIST_H
+#define UTIL_LIST_H
 
 #include <stdlib.h>
 #include <assert.h>
@@ -343,4 +343,4 @@ inline void idList<type>::Sort( cmp_t *compare ) {
 	qsort( ( void * )m_list, ( size_t )m_num, sizeof( type ), compare );
 }
 
-#endif /* !__UTIL_LIST_H__ */
+#endif /* !UTIL_LIST_H */

@@ -21,8 +21,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 //need to rewrite this
 
-#ifndef __UTIL_STR_H__
-#define __UTIL_STR_H__
+#ifndef UTIL_STR_H
+#define UTIL_STR_H
 
 #include <assert.h>
 #include <string.h>
