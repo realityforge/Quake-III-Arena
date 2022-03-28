@@ -34,8 +34,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // headers for internal classes used in Messaging.cpp
 // 
 
-#ifndef __MESSAGING_H_
-#define __MESSAGING_H_
+#ifndef MESSAGING_H
+#define MESSAGING_H
 
 class CXYWndWrapper : public IXYWndWrapper
 {

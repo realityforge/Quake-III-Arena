@@ -19,8 +19,8 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-#ifndef __QE3_H__
-#define __QE3_H__
+#ifndef QE3_H__
+#define QE3_H__
 
 // disable data conversion warnings for gl
 #pragma warning(disable : 4244)     // MIPS

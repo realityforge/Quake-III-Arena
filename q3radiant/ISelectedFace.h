@@ -73,8 +73,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // Quick interface hack for selected face interface
 // this one really needs more work, but I'm in a hurry with TexTool
 
-#ifndef __ISELECTEDFACE_H_
-#define __ISELECTEDFACE_H_
+#ifndef ISELECTEDFACE_H
+#define ISELECTEDFACE_H
 
 // define a GUID for this interface so plugins can access and reference it
 // {5416A2A0-8633-11d3-8EF3-88B61F3A3B12}

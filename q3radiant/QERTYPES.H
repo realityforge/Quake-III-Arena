@@ -160,7 +160,7 @@ typedef struct qtexture_s
 
 	// cast this one to an IPluginQTexture if you are using it
 	// NOTE: casting can be done with a GETPLUGINQTEXTURE defined in isurfaceplugin.h
-	// TODO: if the __ISURFACEPLUGIN_H_ header is used, use a union { void *pData; IPluginQTexture *pPluginQTexture } kind of thing ?
+	// TODO: if the ISURFACEPLUGIN_H header is used, use a union { void *pData; IPluginQTexture *pPluginQTexture } kind of thing ?
 	void					*pData;
 
 	//++timo FIXME: this is the actual filename of the texture
@@ -207,7 +207,7 @@ typedef struct face_s
 
 	// cast this one to an IPluginTexdef if you are using it
 	// NOTE: casting can be done with a GETPLUGINTEXDEF defined in isurfaceplugin.h
-	// TODO: if the __ISURFACEPLUGIN_H_ header is used, use a union { void *pData; IPluginTexdef *pPluginTexdef } kind of thing ?
+	// TODO: if the ISURFACEPLUGIN_H header is used, use a union { void *pData; IPluginTexdef *pPluginTexdef } kind of thing ?
 	void					*pData;
 } face_t;
 
@@ -285,7 +285,7 @@ typedef struct {
 	epair_t *epairs;
   // cast this one to an IPluginTexdef if you are using it
   // NOTE: casting can be done with a GETPLUGINTEXDEF defined in isurfaceplugin.h
-  // TODO: if the __ISURFACEPLUGIN_H_ header is used, use a union { void *pData; IPluginTexdef *pPluginTexdef } kind of thing ?
+  // TODO: if the ISURFACEPLUGIN_H header is used, use a union { void *pData; IPluginTexdef *pPluginTexdef } kind of thing ?
   void					*pData;
 } patchMesh_t;
 

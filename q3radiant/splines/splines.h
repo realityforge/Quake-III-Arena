@@ -19,8 +19,8 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-#ifndef __SPLINES_H
-#define __SPLINES_H
+#ifndef SPLINES_H
+#define SPLINES_H
 
 extern "C" {
 #ifdef Q3RADIANT

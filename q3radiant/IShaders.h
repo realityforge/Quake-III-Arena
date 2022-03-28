@@ -40,8 +40,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // a set of functions to manipulate textures in Radiant
 // 
 
-#ifndef __ISHADERS_H_
-#define __ISHADERS_H_
+#ifndef ISHADERS_H
+#define ISHADERS_H
 
 // define a GUID for this interface so plugins can access and reference it
 // {D42F798A-DF57-11d3-A3EE-0004AC96D4C3}

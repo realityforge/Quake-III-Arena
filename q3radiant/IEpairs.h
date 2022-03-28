@@ -61,8 +61,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // virtual class to allow plugin operations on entities epairs
 //
 
-#ifndef _IEPAIRS_H_
-#define _IEPAIRS_H_
+#ifndef IEPAIRS_H
+#define IEPAIRS_H
 
 class IEpair
 {

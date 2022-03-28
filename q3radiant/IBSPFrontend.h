@@ -63,8 +63,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // DELAYED: - hotkeys !
 // SUCCESS: - try again getting feedback from Q3Build
 
-#ifndef __IBSPFRONTEND_H_
-#define __IBSPFRONTEND_H_
+#ifndef IBSPFRONTEND_H
+#define IBSPFRONTEND_H
 
 // define a GUID for this interface so plugins can access and reference it
 // {8ED6A480-BA5E-11d3-A3E3-0004AC96D4C3}

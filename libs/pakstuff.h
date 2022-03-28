@@ -19,8 +19,8 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-#ifndef _PAKSTUFF_H_
-#define _PAKSTUFF_H_
+#ifndef PAKSTUFF_H
+#define PAKSTUFF_H
 
 #include <windows.h>
 #ifdef __cplusplus

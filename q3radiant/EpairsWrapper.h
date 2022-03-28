@@ -39,8 +39,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // virtual class to allow plugin operations on entities epairs
 // this is the internal header for our implementation
 
-#ifndef _EPAIRSWRAPPER_H_
-#define _EPAIRSWRAPPER_H_
+#ifndef EPAIRSWRAPPER_H
+#define EPAIRSWRAPPER_H
 
 class CEpairsWrapper : public IEpair
 {

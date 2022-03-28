@@ -19,8 +19,8 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-#ifndef __CHARBUFFER_HPP
-#define __CHARBUFFER_HPP
+#ifndef CHARBUFFER_HPP
+#define CHARBUFFER_HPP
 
 class CCharBuffer
 {
@@ -104,6 +104,6 @@ class CCharBuffer
 };
 //
 //-----------------------------------------------------------------------------
-#endif // __CCHARBUFFER_HPP
+#endif // CCHARBUFFER_HPP
 //-----------------------------------------------------------------------------
 //

@@ -63,8 +63,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // all purpose scriplib interface for Q3Radiant plugins (cf. parse.h)
 //
 
-#ifndef __ISCRIPLIB_H_
-#define __ISCRIPLIB_H_
+#ifndef ISCRIPLIB_H
+#define ISCRIPLIB_H
 
 // {4B115280-95FC-11d3-8EF3-0000E8E8657B}
 static const GUID QERScripLibTable_GUID = 

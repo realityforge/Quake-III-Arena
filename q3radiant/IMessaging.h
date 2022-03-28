@@ -33,8 +33,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // DESCRIPTION:
 // interface for all-purpose messaging in Radiant
 
-#ifndef __IMESSAGING_H_
-#define __IMESSAGING_H_
+#ifndef IMESSAGING_H
+#define IMESSAGING_H
 
 // this one can be hooked in the GL window procs for customizing GUI through plugins
 class IWindowListener

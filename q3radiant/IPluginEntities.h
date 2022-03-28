@@ -60,8 +60,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // _QERPlugEntitiesFactory is a set of commands Radiant uses to instanciate plugin entities
 // next are basics for plugin entities ( interfaces )
 
-#ifndef __IPLUGINENTITIES_H_
-#define __IPLUGINENTITIES_H_
+#ifndef IPLUGINENTITIES_H
+#define IPLUGINENTITIES_H
 
 // define a GUID for this interface so plugins can access and reference it
 // {9613F500-8C7C-11d3-8EF3-C9EB56B6B7BE}

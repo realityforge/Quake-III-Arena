@@ -19,8 +19,8 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-#ifndef __TR_PUBLIC_H
-#define __TR_PUBLIC_H
+#ifndef TR_PUBLIC_H
+#define TR_PUBLIC_H
 
 #include "../cgame/tr_types.h"
 
@@ -164,4 +164,4 @@ typedef struct {
 // returned.
 refexport_t*GetRefAPI( int apiVersion, refimport_t *rimp );
 
-#endif	// __TR_PUBLIC_H
+#endif	// TR_PUBLIC_H
