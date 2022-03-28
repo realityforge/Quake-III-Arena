@@ -1,5 +1,7 @@
-cc_library(
-    name = "q3_ui",
+load("//build_defs:rules.bzl", "UI_COPTS", "UI_LINKOPTS")
+
+cc_binary(
+    name = "ui",
     srcs = [
         "ui_addbots.c",
         "ui_atoms.c",
@@ -38,10 +40,22 @@ cc_library(
         "ui_teamorders.c",
         "ui_video.c",
     ],
+    copts = UI_COPTS,
+    defines = [
+        "MAC_OS_X_VERSION_MIN_REQUIRED=1100",
+    ],
+    linkopts = UI_LINKOPTS,
+    linkshared = 1,
     deps = [
+        "//build_defs:exported_symbols.lds",
         "//code/client:api",
+        "//code/game:bg_api",
+        "//code/game:bg_misc",
+        "//code/qcommon:shared",
         "//code/qcommon:shared_api",
         "//code/renderercommon:api",
         "//code/ui:api",
+        "//code/ui:shared",
+        "//code/ui:ui_syscalls",
     ],
 )

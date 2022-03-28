@@ -129,7 +129,11 @@ cc_library(
         "q_math.c",
         "q_shared.c",
     ],
-    visibility = ["//code/cgame:__pkg__"],
+    visibility = [
+        "//code/cgame:__pkg__",
+        "//code/q3_ui:__pkg__",
+        "//code/ui:__pkg__",
+    ],
     deps = [
         ":shared_api",
     ],
@@ -143,11 +147,12 @@ cc_library(
         "surfaceflags.h",
     ],
     visibility = [
-        "//code:__subpackages__",
+        "//code/botlib:__pkg__",
         "//code/cgame:__pkg__",
         "//code/client:__pkg__",
         "//code/game:__pkg__",
         "//code/q3_ui:__pkg__",
+        "//code/renderercommon:__pkg__",
         "//code/server:__pkg__",
         "//code/sys:__pkg__",
         "//code/ui:__pkg__",

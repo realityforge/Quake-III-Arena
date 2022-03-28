@@ -1,3 +1,5 @@
+load("//build_defs:rules.bzl", "UI_COPTS", "UI_LINKOPTS")
+
 cc_library(
     name = "api",
     hdrs = [
@@ -13,6 +15,20 @@ cc_library(
 )
 
 cc_library(
+    name = "local_api",
+    hdrs = [
+        "ui_local.h",
+    ],
+    deps = [
+        ":api",
+        ":shared",
+        "//code/client:api",
+        "//code/qcommon:shared_api",
+        "//code/renderercommon:api",
+    ],
+)
+
+cc_library(
     name = "shared",
     srcs = [
         "ui_shared.c",
@@ -20,9 +36,11 @@ cc_library(
     hdrs = [
         "ui_shared.h",
     ],
+    copts = UI_COPTS,
     includes = ["."],
     visibility = [
         "//code/cgame:__pkg__",
+        "//code/q3_ui:__pkg__",
     ],
     deps = [
         ":api",
@@ -33,30 +51,50 @@ cc_library(
     ],
 )
 
-_COMMON_SRC = [
-    "ui_atoms.c",
-    "ui_gameinfo.c",
-    "ui_local.h",
-    "ui_main.c",
-    "ui_players.c",
-    "ui_shared.c",
-    "ui_shared.h",
-]
-
-# cg_syscalls is required when building the shared library but
-# should not be required when building qvm library
-_NATIVE_LIB_SRC = ["ui_syscalls.c"]
+# syscalls is required when building the shared library but should not be required when building vm library
+cc_library(
+    name = "ui_syscalls",
+    srcs = ["ui_syscalls.c"],
+    copts = UI_COPTS,
+    visibility = [
+        "//code/q3_ui:__pkg__",
+    ],
+    deps = [
+        ":api",
+        ":local_api",
+        "//code/client:api",
+        "//code/qcommon:shared_api",
+        "//code/renderercommon:api",
+        "//ui",
+    ],
+)
 
 # See //code/renderergl2:librenderergl2 for an explanation why we create a .so rather than a .dylib under OSX.
 cc_binary(
     name = "ui",
-    srcs = _COMMON_SRC + _NATIVE_LIB_SRC,
+    srcs = [
+        "ui_atoms.c",
+        "ui_gameinfo.c",
+        "ui_main.c",
+        "ui_players.c",
+    ],
+    copts = UI_COPTS,
+    defines = [
+        "MAC_OS_X_VERSION_MIN_REQUIRED=1100",
+        "MISSIONPACK",
+    ],
+    linkopts = UI_LINKOPTS,
     linkshared = 1,
     deps = [
         ":api",
+        ":local_api",
         ":shared",
+        ":ui_syscalls",
+        "//build_defs:exported_symbols.lds",
         "//code/client:api",
         "//code/game:bg_api",
+        "//code/game:bg_misc",
+        "//code/qcommon:shared",
         "//code/qcommon:shared_api",
         "//code/renderercommon:api",
         "//ui",
