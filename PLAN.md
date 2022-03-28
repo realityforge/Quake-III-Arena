@@ -19,7 +19,7 @@ The tasks that are the current focus and in probable order of attack:
 These tasks are intended to be undertaken in the future but have not been prioritized or thought about in great depth.
 
 * Add cross compiling support so can build images for other platforms where viable.
-* Generate base docker images from packages. The base docker images will have basic configuration configurable as environment variables but will include no media by default. They may take inspiration from [ioquake3-server-docker](https://github.com/MarioVilas/ioquake3-server-docker) and [gamesvr-ioquake3](https://github.com/LacledesLAN/gamesvr-ioquake3).
+* Generate base docker images from packages. The base docker images will have basic configuration configurable as environment variables but will include no media by default. They may take inspiration from [ioquake3-server-docker](https://github.com/MarioVilas/ioquake3-server-docker) and [gamesvr-ioquake3](https://github.com/LacledesLAN/gamesvr-ioquake3) or [Quake3Quest-servers](https://github.com/ceno/Quake3Quest-servers).
 * Add semi-automated performance profiling by being able to process demos and record the statistics.
 * Translate PAK files into a more modern format with explicit dependencies.
 * Change the maps and other media to use content based addressing when cross-referencing between maps, shaders, materials etc.
