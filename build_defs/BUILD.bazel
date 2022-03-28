@@ -1,0 +1,4 @@
+exports_files([
+    "exported_symbols.lds",
+    "exported_symbols.def",
+])

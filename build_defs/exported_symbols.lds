@@ -1,0 +1,2 @@
+_vmMain
+_dllEntry
