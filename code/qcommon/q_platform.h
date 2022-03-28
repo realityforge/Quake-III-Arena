@@ -97,7 +97,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define Q3_LITTLE_ENDIAN
 #endif
 
-#define DLL_EXT ".dylib"
+#define DLL_EXT ".so"
 
 #endif
 

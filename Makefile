@@ -424,7 +424,7 @@ ifeq ($(PLATFORM),darwin)
 
   OPTIMIZE = $(OPTIMIZEVM) -ffast-math
 
-  SHLIBEXT=dylib
+  SHLIBEXT=so
   SHLIBCFLAGS=-fPIC -fno-common
   SHLIBLDFLAGS=-dynamiclib $(LDFLAGS)
 

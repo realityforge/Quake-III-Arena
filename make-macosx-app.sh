@@ -53,7 +53,7 @@ fi
 # application bundles for a single architecture as well.
 function symlinkArch()
 {
-    EXT="dylib"
+    EXT="so"
     SEP="${3}"
     SRCFILE="${1}"
     DSTFILE="${2}${SEP}"
@@ -140,11 +140,11 @@ RENDERER_OPENGL="renderer_opengl"
 
 DEDICATED_NAME="ioq3ded"
 
-CGAME_NAME="${CGAME}.dylib"
-GAME_NAME="${GAME}.dylib"
-UI_NAME="${UI}.dylib"
+CGAME_NAME="${CGAME}.so"
+GAME_NAME="${GAME}.so"
+UI_NAME="${UI}.so"
 
-RENDERER_OPENGL2_NAME="${RENDERER_OPENGL}2.dylib"
+RENDERER_OPENGL2_NAME="${RENDERER_OPENGL}2.so"
 
 ICNSDIR="misc"
 ICNS="quake3_flat.icns"
@@ -165,10 +165,10 @@ for ARCH in $SEARCH_ARCHS; do
 	BUILT_PRODUCTS_DIR="${OBJROOT}/${TARGET_NAME}-darwin-${CURRENT_ARCH}"
 	IOQ3_CLIENT="${EXECUTABLE_NAME}.${CURRENT_ARCH}"
 	IOQ3_SERVER="${DEDICATED_NAME}.${CURRENT_ARCH}"
-	IOQ3_RENDERER_GL2="${RENDERER_OPENGL}2_${CURRENT_ARCH}.dylib"
-	IOQ3_CGAME="${CGAME}${CURRENT_ARCH}.dylib"
-	IOQ3_GAME="${GAME}${CURRENT_ARCH}.dylib"
-	IOQ3_UI="${UI}${CURRENT_ARCH}.dylib"
+	IOQ3_RENDERER_GL2="${RENDERER_OPENGL}2_${CURRENT_ARCH}.so"
+	IOQ3_CGAME="${CGAME}${CURRENT_ARCH}.so"
+	IOQ3_GAME="${GAME}${CURRENT_ARCH}.so"
+	IOQ3_UI="${UI}${CURRENT_ARCH}.so"
 
 	if [ ! -d ${BUILT_PRODUCTS_DIR} ]; then
 		CURRENT_ARCH=""
