@@ -19,8 +19,8 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-#ifndef __TR_PUBLIC_H
-#define __TR_PUBLIC_H
+#ifndef TR_PUBLIC_H
+#define TR_PUBLIC_H
 
 #include "tr_types.h"
 
@@ -186,4 +186,4 @@ typedef	refexport_t* (QDECL *GetRefAPI_t) (int apiVersion, refimport_t * rimp);
 refexport_t*GetRefAPI( int apiVersion, refimport_t *rimp );
 #endif
 
-#endif	// __TR_PUBLIC_H
+#endif	// TR_PUBLIC_H

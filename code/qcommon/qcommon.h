@@ -20,8 +20,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 // qcommon.h -- definitions common between client and server, but not game.or ref modules
-#ifndef _QCOMMON_H_
-#define _QCOMMON_H_
+#ifndef QCOMMON_H
+#define QCOMMON_H
 
 #include "q_shared.h"
 #include "cm_public.h"
@@ -1149,4 +1149,4 @@ int		Huff_getBit( byte *fout, int *offset);
 #define DLF_NO_UDP 4
 #define DLF_NO_DISCONNECT 8
 
-#endif // _QCOMMON_H_
+#endif // QCOMMON_H

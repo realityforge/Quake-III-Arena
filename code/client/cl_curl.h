@@ -99,4 +99,4 @@ void CL_cURL_Shutdown( void );
 void CL_cURL_BeginDownload( const char *localName, const char *remoteURL );
 void CL_cURL_PerformDownload( void );
 void CL_cURL_Cleanup( void );
-#endif	// __QCURL_H__
+#endif	// QCURL_H
