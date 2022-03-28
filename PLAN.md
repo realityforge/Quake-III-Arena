@@ -40,6 +40,7 @@ These tasks are intended to be undertaken in the future but have not been priori
 * Import or write own master server service. It probably should support the ability for games to register current matches plus players in the service. Maybe implemented as start of a K8 cluster. Note the one that ioq3 uses is available at [dpmaster-2.2.zip](http://icculus.org/twilight/darkplaces/files/dpmaster-2.2.zip)
 * Add global rankings and statistics service. This would be part of the same cluster as the auth and master server list.
 * Add mechanism for running game either as DEMO or with bots fighting bots. The supply cvar names and acceptable values for the cvars and run the game with different combinations of cvars as part of a test battery. 
+* Figure out a nicer way to enable some debug settings (i.e. Curl debug, VM<->Engine Call logs etc) so that they can either be compiled out or toggled at runtime.
 
 ## Task Descriptions
 
