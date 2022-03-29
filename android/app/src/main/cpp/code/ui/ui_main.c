@@ -3082,7 +3082,7 @@ static void UI_Update(const char *name) {
 				trap_Cvar_SetValue( "r_subdivisions", 12 );
 			break;
 			case 2:
-				trap_Cvar_SetValue( "r_subdivisions", 20 );
+				trap_Cvar_SetValue( "r_subdivisions", 80 );
 			break;
 		}
 	} else if (Q_stricmp(name, "ui_glCustom") == 0) {
