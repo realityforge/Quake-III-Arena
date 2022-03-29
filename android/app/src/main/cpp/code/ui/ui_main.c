@@ -3070,7 +3070,7 @@ static void UI_Update(const char *name) {
 		}
 	} else if (Q_stricmp(name, "r_lodbias") == 0) {
 		switch (val) {
-			case 0:
+			case -1:
 				trap_Cvar_SetValue( "r_subdivisions", 4 );
 			break;
 			case 1:

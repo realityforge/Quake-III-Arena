@@ -736,7 +736,7 @@ static void GraphicsOptions_ApplyChanges( void *unused, int notification )
 
 	if ( s_graphicsoptions.geometry.curvalue == 2 )
 	{
-		trap_Cvar_SetValue( "r_lodBias", 0 );
+		trap_Cvar_SetValue( "r_lodBias", -1 );
 		trap_Cvar_SetValue( "r_subdivisions", 4 );
 	}
 	else if ( s_graphicsoptions.geometry.curvalue == 1 )
@@ -746,7 +746,7 @@ static void GraphicsOptions_ApplyChanges( void *unused, int notification )
 	}
 	else
 	{
-		trap_Cvar_SetValue( "r_lodBias", 1 );
+		trap_Cvar_SetValue( "r_lodBias", 2 );
 		trap_Cvar_SetValue( "r_subdivisions", 20 );
 	}
 
@@ -981,20 +981,13 @@ static void GraphicsOptions_SetMenuItems( void )
 		s_graphicsoptions.filter.curvalue = 1;
 	}
 
-	if ( trap_Cvar_VariableValue( "r_lodBias" ) > 0 )
-	{
-		if ( trap_Cvar_VariableValue( "r_subdivisions" ) >= 20 )
-		{
-			s_graphicsoptions.geometry.curvalue = 0;
-		}
-		else
-		{
-			s_graphicsoptions.geometry.curvalue = 1;
-		}
-	}
-	else
-	{
+	int lodbias = trap_Cvar_VariableValue( "r_lodBias" );
+	if (lodbias == -1) {
 		s_graphicsoptions.geometry.curvalue = 2;
+	} else if (lodbias == 1) {
+		s_graphicsoptions.geometry.curvalue = 1;
+	} else {
+		s_graphicsoptions.geometry.curvalue = 0;
 	}
 
 	switch ( ( int ) trap_Cvar_VariableValue( "r_colorbits" ) )
