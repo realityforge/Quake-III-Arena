@@ -54,6 +54,7 @@ cc_library(
     defines = CLIENT_GAME_DEFINES,
     includes = ["."],
     visibility = [
+        "//code/cgame:__pkg__",
         "//code/q3_ui:__pkg__",
         "//code/ui:__pkg__",
     ],
