@@ -1,14 +1,8 @@
 cc_library(
     name = "api",
-    hdrs = [
-        "cg_public.h",
-    ],
-    visibility = [
-        "//code/client:__pkg__",
-    ],
-    deps = [
-        "//code/qcommon:shared_api",
-    ],
+    hdrs = ["cg_public.h"],
+    visibility = ["//code/client:__pkg__"],
+    deps = ["//code/qcommon:shared_api"],
 )
 
 _COMMON_SRC = [
