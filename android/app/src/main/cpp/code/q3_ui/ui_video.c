@@ -251,8 +251,10 @@ GRAPHICS OPTIONS MENU
 #define ID_REFRESHRATE		111
 #define ID_DYNAMICLIGHTS	112
 #define ID_SYNCEVERYFRAME	113
+#define ID_SHADOWS		114
 
 #define	NUM_REFRESHRATE	4
+#define NUM_SHADOWS 2
 
 typedef struct {
 	menuframework_s	menu;
@@ -282,6 +284,7 @@ typedef struct {
     menulist_s		refreshrate;
 	menuradiobutton_s	dynamiclights;
 	menuradiobutton_s	synceveryframe;
+	menulist_s		shadows;
 
 	menubitmap_s	apply;
 	menubitmap_s	back;
@@ -302,6 +305,7 @@ typedef struct
 	int refreshrate;
 	qboolean dynamiclights;
 	qboolean synceveryframe;
+	int shadows;
 } InitialVideoOptions_s;
 
 static InitialVideoOptions_s	s_ivo;
@@ -493,6 +497,7 @@ static void GraphicsOptions_GetInitialVideo( void )
 	s_ivo.refreshrate = s_graphicsoptions.refreshrate.curvalue;
 	s_ivo.dynamiclights = s_graphicsoptions.dynamiclights.curvalue;
 	s_ivo.synceveryframe = s_graphicsoptions.synceveryframe.curvalue;
+	s_ivo.shadows     = s_graphicsoptions.refreshrate.curvalue;
 }
 
 /*
@@ -816,6 +821,20 @@ static void GraphicsOptions_Event( void* ptr, int event ) {
 		trap_Cvar_SetValue( "r_finish", s_graphicsoptions.synceveryframe.curvalue );
 		break;
 
+	case ID_SHADOWS: {
+			int shadows;
+			switch (s_graphicsoptions.shadows.curvalue) {
+				case 0:
+					shadows = 1;
+					break;
+				default:
+					shadows = 3;
+					break;
+				}
+			trap_Cvar_SetValue("cg_shadows", shadows);
+		}
+		break;
+
 	case ID_LIST:
 		ivo = &s_ivo_templates[s_graphicsoptions.list.curvalue];
 
@@ -1016,6 +1035,17 @@ static void GraphicsOptions_SetMenuItems( void )
 			s_graphicsoptions.refreshrate.curvalue = 3;
 			break;
 	}
+
+	switch ( (int) trap_Cvar_VariableValue( "cg_shadows" ) )
+	{
+		case 1:
+			s_graphicsoptions.shadows.curvalue = 0;
+			break;
+		default:
+			s_graphicsoptions.shadows.curvalue = 1;
+			break;
+	}
+
 	s_graphicsoptions.dynamiclights.curvalue	= trap_Cvar_VariableValue( "r_dynamiclight" ) != 0;
 	s_graphicsoptions.synceveryframe.curvalue	= trap_Cvar_VariableValue( "r_finish" ) != 0;
 }
@@ -1087,12 +1117,19 @@ void GraphicsOptions_MenuInit( void )
 		"On",
 		NULL
 	};
-*/	static const char *s_refreshrate[] =
+*/
+	static const char *s_refreshrate[] =
 	{
 		"60",
 		"72 (Recommended)",
 		"80",
 		"90",
+		NULL
+	};
+	static const char *s_shadows[] =
+	{
+		"Low",
+		"High",
 		NULL
 	};
 
@@ -1173,7 +1210,7 @@ void GraphicsOptions_MenuInit( void )
 	s_graphicsoptions.network.style				= UI_RIGHT;
 	s_graphicsoptions.network.color				= color_red;
 
-	y = 272 - 7 * (BIGCHAR_HEIGHT + 2);
+	y = 254 - 7 * (BIGCHAR_HEIGHT + 2);
 	s_graphicsoptions.list.generic.type     = MTYPE_SPINCONTROL;
 	s_graphicsoptions.list.generic.name     = "Graphics Settings:";
 	s_graphicsoptions.list.generic.flags    = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
@@ -1282,6 +1319,18 @@ void GraphicsOptions_MenuInit( void )
 	s_graphicsoptions.dynamiclights.generic.id        = ID_DYNAMICLIGHTS;
 	y += BIGCHAR_HEIGHT+2;
 
+	// references "cg_shadows"
+	s_graphicsoptions.shadows.generic.type		= MTYPE_SPINCONTROL;
+	s_graphicsoptions.shadows.generic.name		= "Shadow Detail:";
+	s_graphicsoptions.shadows.generic.flags		= QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+	s_graphicsoptions.shadows.generic.x			= 400;
+	s_graphicsoptions.shadows.generic.y			= y;
+	s_graphicsoptions.shadows.itemnames	        = s_shadows;
+	s_graphicsoptions.shadows.generic.callback	= GraphicsOptions_Event;
+	s_graphicsoptions.shadows.generic.id		= ID_SHADOWS;
+	s_graphicsoptions.shadows.numitems			= NUM_SHADOWS;
+	y += BIGCHAR_HEIGHT+2;
+
 	// references/modifies "r_lodBias" & "subdivisions"
 	s_graphicsoptions.geometry.generic.type  = MTYPE_SPINCONTROL;
 	s_graphicsoptions.geometry.generic.name	 = "Geometric Detail:";
@@ -1371,6 +1420,7 @@ void GraphicsOptions_MenuInit( void )
 //	Menu_AddItem( &s_graphicsoptions.menu, ( void * ) &s_graphicsoptions.fs );
 	Menu_AddItem( &s_graphicsoptions.menu, ( void * ) &s_graphicsoptions.lighting );
 	Menu_AddItem( &s_graphicsoptions.menu, ( void * ) &s_graphicsoptions.dynamiclights );
+	Menu_AddItem( &s_graphicsoptions.menu, ( void * ) &s_graphicsoptions.shadows );
 	Menu_AddItem( &s_graphicsoptions.menu, ( void * ) &s_graphicsoptions.geometry );
 	Menu_AddItem( &s_graphicsoptions.menu, ( void * ) &s_graphicsoptions.tq );
 	Menu_AddItem( &s_graphicsoptions.menu, ( void * ) &s_graphicsoptions.texturebits );

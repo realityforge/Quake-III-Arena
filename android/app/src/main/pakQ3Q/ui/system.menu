@@ -180,13 +180,29 @@ itemDef {
     		}
 
 	itemDef {
+  		name graphics
+		group grpSystem
+   		type ITEM_TYPE_MULTI
+		text "Shadow Detail:"
+		cvar "cg_shadows"
+		cvarFloatList { "Low" 1 "High" 3 }
+		rect 99 192 256 20
+   		textalign ITEM_ALIGN_RIGHT
+  		textalignx 128
+   		textaligny 20
+		textscale .333
+   		forecolor 1 1 1 1
+   		visible 0
+	}
+
+	itemDef {
    		name graphics
 		group grpSystem
     		type ITEM_TYPE_MULTI
 		text "Geometric Detail:"
 		cvar "r_lodbias"
 		cvarFloatList { "High" 0 "Medium" 1 "Low" 2 }
-		rect 99 192 256 20
+		rect 99 217 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
       		textaligny 20
@@ -203,7 +219,7 @@ itemDef {
 		text "Texture Detail:"
 		cvar "r_picmip"
 		cvarFloatList { "Low" 2 "Normal" 1 "High" 0 }
-		rect 99 217 256 20
+		rect 99 242 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
       		textaligny 20
@@ -220,7 +236,7 @@ itemDef {
 		text "Texture Quality:"
 		cvar "r_texturebits"
 		cvarFloatList { "Default" 0 "16 bit" 16 "32 bit" 32 }
-		rect 99 244 256 20
+		rect 99 267 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
       		textaligny 20
@@ -236,7 +252,7 @@ itemDef {
 		text "Texture Filter:"
 		cvar "r_texturemode"
 		cvarStrList { "Bilinear", "GL_LINEAR_MIPMAP_NEAREST", "Trilinear", "GL_LINEAR_MIPMAP_LINEAR"  }
-		rect 99 269 256 20
+		rect 99 292 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
       		textaligny 20
@@ -251,7 +267,7 @@ itemDef {
       		type ITEM_TYPE_YESNO
 		text "Compress Textures:"
 		cvar "r_ext_compressed_textures"
-		rect 99 294 256 20
+		rect 99 317 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
       		textaligny 20
