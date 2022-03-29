@@ -172,6 +172,8 @@ int R_ComputeLOD( trRefEntity_t *ent ) {
 	    int lod = r_lodbias->integer + r_lodbias->integer;
 	    if (lod >= tr.currentModel->numLods)
 	        lod = tr.currentModel->numLods - 1;
+	    if (lod < 0)
+	        lod = 0;
 	    return lod;
 	}
 
