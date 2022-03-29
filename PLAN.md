@@ -28,7 +28,7 @@ These tasks are intended to be undertaken in the future but have not been priori
 * Add semi-automated performance profiling by being able to process demos and record the statistics.
 * Translate PAK files into a more modern format with explicit dependencies.
 * Change the maps and other media to use content based addressing when cross-referencing between maps, shaders, materials etc.
-* The above two tasks probably require a completely rewritten filesystem layer.
+* The above two tasks probably require a completely rewritten filesystem layer. Maybe take inspiration from [physfs](https://icculus.org/physfs/)
 * Port to Android.
 * Use a WASM runtime to run cl_game and game rather than QVM. Switch to using any "standard" compiler that emits wasm as the compiler for this game logic. Ideally the WASM runtime will support SIMD. The Q3A engine should support the easy addition of new methods to interface.
 * Add Quest support.
