@@ -38,9 +38,11 @@ _NATIVE_LIB_SRC = ["cg_syscalls.c"]
 cc_binary(
     name = "baseq3",
     srcs = _BASEQ3_SRC + _NATIVE_LIB_SRC,
+    linkopts = CLIENT_GAME_LINKOPTS,
     linkshared = 1,
     deps = [
         ":api",
+        "//build_defs:exported_symbols.lds",
         "//code/game:bg",
         "//code/game:bg_api",
         "//code/qcommon",
