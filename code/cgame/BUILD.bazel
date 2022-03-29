@@ -35,7 +35,6 @@ _MISSIONPACK_SRC = _COMMON_SRC + ["cg_newdraw.c"]
 # should not be required when building qvm library
 _NATIVE_LIB_SRC = ["cg_syscalls.c"]
 
-# See //code/renderergl2:librenderergl2 for an explanation why we create a .so rather than a .dylib under OSX.
 cc_binary(
     name = "baseq3",
     srcs = _BASEQ3_SRC + _NATIVE_LIB_SRC,
