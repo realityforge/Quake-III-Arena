@@ -41,6 +41,7 @@ These tasks are intended to be undertaken in the future but have not been priori
 * Add global rankings and statistics service. This would be part of the same cluster as the auth and master server list. See [quake3-vsp-stats](https://hub.docker.com/r/evilru/quake3-vsp-stats) for further inspiration.
 * Add mechanism for running game either as DEMO or with bots fighting bots. The supply cvar names and acceptable values for the cvars and run the game with different combinations of cvars as part of a test battery. 
 * Figure out a nicer way to enable some debug settings (i.e. Curl debug, VM<->Engine Call logs etc) so that they can either be compiled out or toggled at runtime.
+* Incorporate AI code from Quake4? It is reportedly much improved.... See [Game-Mod-Q4](https://github.com/engineerOfLies/Game-Mod-Q4) for source.
 
 ## Task Descriptions
 
