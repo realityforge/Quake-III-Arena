@@ -1,4 +1,4 @@
-load("//build_defs:rules.bzl", "SERVER_GAME_DEFINES", "CLIENT_GAME_DEFINES")
+load("//build_defs:rules.bzl", "CLIENT_GAME_DEFINES", "SERVER_GAME_DEFINES")
 
 cc_library(
     name = "bg_api",
@@ -148,10 +148,7 @@ _COMMON_SRC = [
 
 # cg_syscalls is required when building the shared library but
 # should not be required when building qvm library
-_NATIVE_LIB_SRC = [
-    #"g_syscalls.asm",
-    "g_syscalls.c",
-]
+_NATIVE_LIB_SRC = ["g_syscalls.c"]
 
 # See //code/renderergl2:librenderergl2 for an explanation why we create a .so rather than a .dylib under OSX.
 cc_binary(
