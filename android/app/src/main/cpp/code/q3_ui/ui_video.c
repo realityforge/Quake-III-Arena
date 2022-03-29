@@ -750,8 +750,8 @@ static void GraphicsOptions_ApplyChanges( void *unused, int notification )
 	else
 	{
 		trap_Cvar_SetValue( "r_lodBias", 2 );
-		trap_Cvar_SetValue( "r_subdivisions", 20 );
- 	}
+		trap_Cvar_SetValue( "r_subdivisions", 80 );
+	}
 
 	if ( s_graphicsoptions.filter.curvalue )
 	{
