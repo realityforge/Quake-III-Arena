@@ -78,10 +78,8 @@ cc_library(
         "l_utils.h",
     ],
     hdrs = ["be_aas.h"],
+    defines = ["BOTLIB"],
     includes = ["."],
-    local_defines = [
-        "BOTLIB",
-    ],
     visibility = [
         "//code/client:__pkg__",
         "//code/game:__pkg__",
