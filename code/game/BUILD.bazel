@@ -1,3 +1,5 @@
+load("//build_defs:rules.bzl", "SERVER_GAME_DEFINES", "CLIENT_GAME_DEFINES")
+
 cc_library(
     name = "bg_api",
     hdrs = [
@@ -44,12 +46,31 @@ cc_library(
 )
 
 cc_library(
-    # bg_misc = Both Game part used by TA ui
-    name = "bg_misc",
+    name = "bg_misc-client",
     srcs = [
         "bg_local.h",
         "bg_misc.c",
     ],
+    defines = CLIENT_GAME_DEFINES,
+    includes = ["."],
+    visibility = [
+        "//code/q3_ui:__pkg__",
+        "//code/ui:__pkg__",
+    ],
+    deps = [
+        ":bg_api",
+        "//code/qcommon:shared_api",
+    ],
+)
+
+cc_library(
+    # bg_misc = Both Game part used by TA ui
+    name = "bg_misc-server",
+    srcs = [
+        "bg_local.h",
+        "bg_misc.c",
+    ],
+    defines = SERVER_GAME_DEFINES,
     includes = ["."],
     visibility = [
         "//code/q3_ui:__pkg__",

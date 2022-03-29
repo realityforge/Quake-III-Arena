@@ -48,7 +48,7 @@ cc_binary(
         "//build_defs:exported_symbols.lds",
         "//code/client:api",
         "//code/game:bg_api",
-        "//code/game:bg_misc",
+        "//code/game:bg_misc-client",
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
         "//code/renderercommon:api",
