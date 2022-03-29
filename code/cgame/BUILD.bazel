@@ -29,7 +29,7 @@ _COMMON_SRC = [
 
 _BASEQ3_SRC = _COMMON_SRC + ["cg_draw.c"]
 
-_MISSIONPACK_SRC = _COMMON_SRC + ["cg_newdraw.c"]
+_TEAM_ARENA_SRC = _COMMON_SRC + ["cg_newdraw.c"]
 
 # cg_syscalls is required when building the shared library but
 # should not be required when building qvm library
@@ -68,8 +68,8 @@ cc_library(
 # See //code/renderergl2:librenderergl2 for an explanation why we create a .so rather than a .dylib under OSX.
 cc_binary(
     name = "missionpack",
-    srcs = _MISSIONPACK_SRC + _NATIVE_LIB_SRC,
     defines = ["MISSIONPACK"],
+    srcs = _TEAM_ARENA_SRC + _NATIVE_LIB_SRC,
     linkshared = 1,
     deps = [
         ":api",
@@ -85,10 +85,10 @@ cc_binary(
 
 cc_library(
     name = "missionpack-qvm",
-    srcs = _MISSIONPACK_SRC,
     defines = [
         "MISSIONPACK",
     ],
+    srcs = _TEAM_ARENA_SRC,
     deps = [
         ":api",
         "//code/game:bg",
