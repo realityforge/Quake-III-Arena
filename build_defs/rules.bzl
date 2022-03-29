@@ -30,4 +30,6 @@ UI_DEFINES = ["UI"]
 
 TEAM_ARENA_DEFINES = ["MISSIONPACK"]
 
-QVM_DEFINES = ["Q3_VM"]
+# TODO: Should define Q3_VM but can not do that until we get WASM compilation working and/or we stop linking against c library
+QVM_DEFINES = []
+#QVM_DEFINES = ["Q3_VM"]
