@@ -68,7 +68,7 @@ cc_library(
 )
 
 cc_binary(
-    name = "missionpack",
+    name = "teamarena",
     defines = ["MISSIONPACK"],
     srcs = _TEAM_ARENA_SRC + _NATIVE_LIB_SRC,
     linkshared = 1,
@@ -85,7 +85,7 @@ cc_binary(
 )
 
 cc_library(
-    name = "missionpack-qvm",
+    name = "teamarena-qvm",
     defines = [
         "MISSIONPACK",
     ],
