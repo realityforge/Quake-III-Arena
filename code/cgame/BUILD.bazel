@@ -67,7 +67,6 @@ cc_library(
     ],
 )
 
-# See //code/renderergl2:librenderergl2 for an explanation why we create a .so rather than a .dylib under OSX.
 cc_binary(
     name = "missionpack",
     defines = ["MISSIONPACK"],
