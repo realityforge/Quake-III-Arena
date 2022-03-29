@@ -1,4 +1,4 @@
-load("//build_defs:rules.bzl", "UI_COPTS", "UI_LINKOPTS")
+load("//build_defs:rules.bzl", "UI_COPTS", "UI_DEFINES", "UI_LINKOPTS")
 
 cc_binary(
     name = "ui",
@@ -41,9 +41,7 @@ cc_binary(
         "ui_video.c",
     ],
     copts = UI_COPTS,
-    defines = [
-        "MAC_OS_X_VERSION_MIN_REQUIRED=1100",
-    ],
+    defines = ["MAC_OS_X_VERSION_MIN_REQUIRED=1100"] + UI_DEFINES,
     linkopts = UI_LINKOPTS,
     linkshared = 1,
     deps = [

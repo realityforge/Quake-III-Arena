@@ -1,4 +1,4 @@
-load("//build_defs:rules.bzl", "UI_COPTS", "UI_LINKOPTS")
+load("//build_defs:rules.bzl", "TEAM_ARENA_DEFINES", "UI_COPTS", "UI_DEFINES", "UI_LINKOPTS")
 
 cc_library(
     name = "api",
@@ -79,10 +79,7 @@ cc_binary(
         "ui_players.c",
     ],
     copts = UI_COPTS,
-    defines = [
-        "MAC_OS_X_VERSION_MIN_REQUIRED=1100",
-        "MISSIONPACK",
-    ],
+    defines = ["MAC_OS_X_VERSION_MIN_REQUIRED=1100"] + TEAM_ARENA_DEFINES + UI_DEFINES,
     linkopts = UI_LINKOPTS,
     linkshared = 1,
     deps = [
