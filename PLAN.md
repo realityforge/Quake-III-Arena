@@ -24,6 +24,7 @@ These tasks are intended to be undertaken in the future but have not been priori
     - https://discord.com/channels/641218476198985728/942433811218714664/951602427189157958
     - https://discord.com/channels/641218476198985728/942433811218714664/945439823190184007
     - https://lvlworld.com/
+    - https://www.moddb.com/games/quake-iii-arena/addons/dreamcast-mappack-mpsp-music-repack
 
 * Add semi-automated performance profiling by being able to process demos and record the statistics.
 * Translate PAK files into a more modern format with explicit dependencies.
