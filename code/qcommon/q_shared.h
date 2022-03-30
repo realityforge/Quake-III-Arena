@@ -219,9 +219,6 @@ typedef int		clipHandle_t;
 // expand constants before stringifying them
 #define XSTRING(s)			STRING(s)
 
-#define	MAX_QINT			0x7fffffff
-#define	MIN_QINT			(-MAX_QINT-1)
-
 #define ARRAY_LEN(x)			(sizeof(x) / sizeof(*(x)))
 
 // angle indexes
