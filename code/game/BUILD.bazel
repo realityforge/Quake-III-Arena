@@ -1,4 +1,4 @@
-load("//build_defs:rules.bzl", "CLIENT_GAME_DEFINES", "SERVER_GAME_DEFINES")
+load("//build_defs:rules.bzl", "CLIENT_GAME_DEFINES", "SERVER_GAME_COPTS", "SERVER_GAME_DEFINES", "SERVER_GAME_LINKOPTS", "TEAM_ARENA_DEFINES")
 
 cc_library(
     name = "bg_api",
@@ -146,20 +146,49 @@ _COMMON_SRC = [
     "syn.h",
 ]
 
+_BASEQ3_SRC = _COMMON_SRC
+
 # cg_syscalls is required when building the shared library but
 # should not be required when building qvm library
 _NATIVE_LIB_SRC = ["g_syscalls.c"]
 
 cc_binary(
-    name = "game",
-    srcs = _COMMON_SRC + _NATIVE_LIB_SRC,
-    includes = ["."],
+    name = "baseq3",
+    srcs = _BASEQ3_SRC + _NATIVE_LIB_SRC,
+    copts = SERVER_GAME_COPTS,
+    defines = ["MAC_OS_X_VERSION_MIN_REQUIRED=1100"] + SERVER_GAME_DEFINES,
+    linkopts = SERVER_GAME_LINKOPTS,
     linkshared = 1,
     deps = [
         ":bg",
         ":server_api",
+        "//build_defs:exported_symbols.lds",
         "//code/botlib",
         "//code/botlib:api",
+        "//code/game:bg_misc-server",
+        "//code/qcommon:shared",
+        "//code/qcommon:shared_api",
+        "//ui",
+    ],
+)
+
+_TEAM_ARENA_SRC = _COMMON_SRC
+
+cc_binary(
+    name = "teamarena",
+    srcs = _TEAM_ARENA_SRC + _NATIVE_LIB_SRC,
+    copts = SERVER_GAME_COPTS,
+    defines = ["MAC_OS_X_VERSION_MIN_REQUIRED=1100"] + TEAM_ARENA_DEFINES + SERVER_GAME_DEFINES,
+    linkopts = SERVER_GAME_LINKOPTS,
+    linkshared = 1,
+    deps = [
+        ":bg",
+        ":server_api",
+        "//build_defs:exported_symbols.lds",
+        "//code/botlib",
+        "//code/botlib:api",
+        "//code/game:bg_misc-server",
+        "//code/qcommon:shared",
         "//code/qcommon:shared_api",
         "//ui",
     ],

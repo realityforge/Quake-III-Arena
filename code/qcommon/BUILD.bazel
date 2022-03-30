@@ -131,6 +131,7 @@ cc_library(
     ],
     visibility = [
         "//code/cgame:__pkg__",
+        "//code/game:__pkg__",
         "//code/q3_ui:__pkg__",
         "//code/ui:__pkg__",
     ],
