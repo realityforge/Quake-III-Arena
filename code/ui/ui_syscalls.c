@@ -29,6 +29,16 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #error "Do not use in VM build"
 #endif
 
+#pragma clang diagnostic ignored "-Wvariadic-macros"
+#pragma clang diagnostic ignored "-Wgnu-zero-variadic-macro-arguments"
+#ifdef TRACE_UI_VM
+#  define VMTRACE(code, fmt, args...) trap_Print( va( "TRACE %s:%d %s(" fmt ")[Code=%s (%d)]\n", __FILE__, __LINE__, __func__, ##args, #code, code) )
+#  define VMVTRACE(code) trap_Print( va( "TRACE %s:%d %s()[Code=%s (%d)]\n", __FILE__, __LINE__, __func__, #code, code) )
+#else
+#  define VMTRACE(code, fmt, args...)
+#  define VMVTRACE(code)
+#endif
+
 static vmDllSystemCall syscall = (vmDllSystemCall)-1;
 
 Q_EXPORT void dllEntry( vmDllSystemCall syscallptr ) {
@@ -49,117 +59,146 @@ void trap_Print( const char *string ) {
 #pragma clang diagnostic ignored "-Winvalid-noreturn"
 void trap_Error(const char *string)
 {
+	VMTRACE(UI_ERROR, "string=%s", string);
 	syscall(UI_ERROR, string);
 }
 #pragma clang diagnostic pop
 
 int trap_Milliseconds( void ) {
+	VMVTRACE(UI_MILLISECONDS);
 	return syscall( UI_MILLISECONDS ); 
 }
 
 void trap_Cvar_Register( vmCvar_t *cvar, const char *var_name, const char *value, int flags ) {
+	VMTRACE(UI_CVAR_REGISTER, "handle=%d, name=%s, value=%s, flags=%d", (cvar ? cvar->handle : 0), var_name, value, flags);
 	syscall( UI_CVAR_REGISTER, cvar, var_name, value, flags );
 }
 
 void trap_Cvar_Update( vmCvar_t *cvar ) {
+	VMTRACE(UI_CVAR_UPDATE, "handle=%d", cvar->handle );
 	syscall( UI_CVAR_UPDATE, cvar );
 }
 
 void trap_Cvar_Set( const char *var_name, const char *value ) {
+	VMTRACE(UI_CVAR_SET, "name=%s, value=%s", var_name, value);
 	syscall( UI_CVAR_SET, var_name, value );
 }
 
 float trap_Cvar_VariableValue( const char *var_name ) {
+	VMTRACE(UI_CVAR_VARIABLEVALUE, "name=%s", var_name);
 	floatint_t fi;
 	fi.i = syscall( UI_CVAR_VARIABLEVALUE, var_name );
 	return fi.f;
 }
 
 void trap_Cvar_VariableStringBuffer( const char *var_name, char *buffer, int bufsize ) {
+	VMTRACE(UI_CVAR_VARIABLESTRINGBUFFER, "name=%s, size=%d", var_name, bufsize);
 	syscall( UI_CVAR_VARIABLESTRINGBUFFER, var_name, buffer, bufsize );
 }
 
 void trap_Cvar_SetValue( const char *var_name, float value ) {
+	VMTRACE(UI_CVAR_SETVALUE, "name=%s, size=%f", var_name, value);
 	syscall( UI_CVAR_SETVALUE, var_name, PASSFLOAT( value ) );
 }
 
 void trap_Cvar_Reset( const char *name ) {
+	VMTRACE(UI_CVAR_RESET, "name=%s", name);
 	syscall( UI_CVAR_RESET, name ); 
 }
 
 void trap_Cvar_Create( const char *var_name, const char *var_value, int flags ) {
+	VMTRACE(UI_CVAR_CREATE, "name=%s, value=%s, flags=%d", var_name, var_value, flags);
 	syscall( UI_CVAR_CREATE, var_name, var_value, flags );
 }
 
 int trap_Argc( void ) {
+	VMVTRACE(UI_ARGC);
 	return syscall( UI_ARGC );
 }
 
 void trap_Argv( int n, char *buffer, int bufferLength ) {
+	VMTRACE(UI_ARGV, "n=%d", n);
 	syscall( UI_ARGV, n, buffer, bufferLength );
 }
 
 void trap_Cmd_ExecuteText( int exec_when, const char *text ) {
+	VMTRACE(UI_ARGV, "when=%d, text=%s", exec_when, text);
 	syscall( UI_CMD_EXECUTETEXT, exec_when, text );
 }
 
 int trap_FS_FOpenFile( const char *qpath, fileHandle_t *f, fsMode_t mode ) {
+	VMTRACE(UI_FS_FOPENFILE, "path=%s, mode=%d", qpath, mode);
 	return syscall( UI_FS_FOPENFILE, qpath, f, mode );
 }
 
 void trap_FS_Read( void *buffer, int len, fileHandle_t f ) {
+	VMTRACE(UI_FS_READ, "handle=%d, len=%d", f, len);
 	syscall( UI_FS_READ, buffer, len, f );
 }
 
 void trap_FS_Write( const void *buffer, int len, fileHandle_t f ) {
+	VMTRACE(UI_FS_WRITE, "handle=%d, len=%d", f, len);
 	syscall( UI_FS_WRITE, buffer, len, f );
 }
 
 void trap_FS_FCloseFile( fileHandle_t f ) {
+	VMTRACE(UI_FS_FCLOSEFILE, "handle=%d", f);
 	syscall( UI_FS_FCLOSEFILE, f );
 }
 
 int trap_FS_GetFileList(  const char *path, const char *extension, char *listbuf, int bufsize ) {
+	VMTRACE(UI_FS_GETFILELIST, "path=%s, extension=%s", path, extension);
 	return syscall( UI_FS_GETFILELIST, path, extension, listbuf, bufsize );
 }
 
 qhandle_t trap_R_RegisterModel( const char *name ) {
+	VMTRACE(UI_R_REGISTERMODEL, "name=%s", name);
 	return syscall( UI_R_REGISTERMODEL, name );
 }
 
 qhandle_t trap_R_RegisterSkin( const char *name ) {
+	VMTRACE(UI_R_REGISTERSKIN, "name=%s", name);
 	return syscall( UI_R_REGISTERSKIN, name );
 }
 
 void trap_R_RegisterFont(const char *fontName, int pointSize, fontInfo_t *font) {
+	VMTRACE(UI_R_REGISTERFONT, "fontName=%s, pointSize=%d", fontName, pointSize);
 	syscall( UI_R_REGISTERFONT, fontName, pointSize, font );
 }
 
 qhandle_t trap_R_RegisterShaderNoMip( const char *name ) {
+	VMTRACE(UI_R_REGISTERSHADERNOMIP, "name=%s", name);
 	return syscall( UI_R_REGISTERSHADERNOMIP, name );
 }
 
 void trap_R_ClearScene( void ) {
+	VMVTRACE(UI_R_REGISTERSHADERNOMIP);
 	syscall( UI_R_CLEARSCENE );
 }
 
 void trap_R_AddRefEntityToScene( const refEntity_t *re ) {
+	VMVTRACE(UI_R_ADDREFENTITYTOSCENE);
 	syscall( UI_R_ADDREFENTITYTOSCENE, re );
 }
 
 void trap_R_AddPolyToScene( qhandle_t hShader , int numVerts, const polyVert_t *verts ) {
+	VMTRACE(UI_S_STOPBACKGROUNDTRACK, "hShader=%d, numVerts=%d", hShader, numVerts);
 	syscall( UI_R_ADDPOLYTOSCENE, hShader, numVerts, verts );
 }
 
 void trap_R_AddLightToScene( const vec3_t org, float intensity, float r, float g, float b ) {
+    VMTRACE(UI_R_ADDLIGHTTOSCENE, "org=(%f,%f,%f), intensity=%f, rgb=(%f,%f,%f)", org[0], org[1], org[2], intensity, r, g, b);
 	syscall( UI_R_ADDLIGHTTOSCENE, org, PASSFLOAT(intensity), PASSFLOAT(r), PASSFLOAT(g), PASSFLOAT(b) );
 }
 
 void trap_R_RenderScene( const refdef_t *fd ) {
+    VMTRACE(UI_R_RENDERSCENE, "x=%d, y=%d, width=%d, height=%d, fov_c=%f, fov_y=%f", fd->x, fd->y, fd->width, fd->height, fd->fov_x, fd->fov_y);
 	syscall( UI_R_RENDERSCENE, fd );
 }
 
 void trap_R_SetColor( const float *rgba ) {
+    if(rgba) VMTRACE(UI_R_SETCOLOR, "rgba=(%f,%f,%f,%f)", rgba[0], rgba[1], rgba[2], rgba[3]);
+    else VMTRACE(UI_R_SETCOLOR, "rgba=NULL");
 	syscall( UI_R_SETCOLOR, rgba );
 }
 
@@ -172,6 +211,7 @@ void	trap_R_ModelBounds( clipHandle_t model, vec3_t mins, vec3_t maxs ) {
 }
 
 void trap_UpdateScreen( void ) {
+	VMVTRACE(UI_UPDATESCREEN);
 	syscall( UI_UPDATESCREEN );
 }
 
@@ -204,6 +244,7 @@ qboolean trap_Key_IsDown( int keynum ) {
 }
 
 qboolean trap_Key_GetOverstrikeMode( void ) {
+	VMVTRACE(UI_KEY_GETOVERSTRIKEMODE);
 	return syscall( UI_KEY_GETOVERSTRIKEMODE );
 }
 
@@ -212,10 +253,12 @@ void trap_Key_SetOverstrikeMode( qboolean state ) {
 }
 
 void trap_Key_ClearStates( void ) {
+	VMVTRACE(UI_KEY_CLEARSTATES);
 	syscall( UI_KEY_CLEARSTATES );
 }
 
 int trap_Key_GetCatcher( void ) {
+	VMVTRACE(UI_KEY_GETCATCHER);
 	return syscall( UI_KEY_GETCATCHER );
 }
 
@@ -256,6 +299,7 @@ int trap_LAN_GetServerPing( int source, int n ) {
 }
 
 int trap_LAN_GetPingQueueCount( void ) {
+	VMVTRACE(UI_LAN_GETPINGQUEUECOUNT);
 	return syscall( UI_LAN_GETPINGQUEUECOUNT );
 }
 
@@ -264,10 +308,12 @@ int trap_LAN_ServerStatus( const char *serverAddress, char *serverStatus, int ma
 }
 
 void trap_LAN_SaveCachedServers( void ) {
+	VMVTRACE(UI_LAN_SAVECACHEDSERVERS);
 	syscall( UI_LAN_SAVECACHEDSERVERS );
 }
 
 void trap_LAN_LoadCachedServers( void ) {
+	VMVTRACE(UI_LAN_LOADCACHEDSERVERS);
 	syscall( UI_LAN_LOADCACHEDSERVERS );
 }
 
@@ -312,6 +358,7 @@ int trap_LAN_CompareServers( int source, int sortKey, int sortDir, int s1, int s
 }
 
 int trap_MemoryRemaining( void ) {
+	VMVTRACE(UI_MEMORY_REMAINING);
 	return syscall( UI_MEMORY_REMAINING );
 }
 
@@ -332,6 +379,7 @@ int trap_PC_SourceFileAndLine( int handle, char *filename, int *line ) {
 }
 
 void trap_S_StopBackgroundTrack( void ) {
+	VMVTRACE(UI_S_STOPBACKGROUNDTRACK);
 	syscall( UI_S_STOPBACKGROUNDTRACK );
 }
 
