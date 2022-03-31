@@ -75,8 +75,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //enemy stuff
 #define ENEMY_HORIZONTAL_DIST		200
 #define ENEMY_HEIGHT				201
-#define NUM_VISIBLE_ENEMIES			202
-#define NUM_VISIBLE_TEAMMATES		203
 
 // if running the mission pack
 #ifdef MISSIONPACK
