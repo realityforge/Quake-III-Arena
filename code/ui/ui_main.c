@@ -1814,7 +1814,6 @@ static void UI_DrawServerMOTD(rectDef_t *rect, float scale, vec4_t color) {
 }
 
 static void UI_DrawKeyBindStatus(rectDef_t *rect, float scale, vec4_t color, int textStyle) {
-//	int ofs = 0; TTimo: unused
 	if (Display_KeyBindPending()) {
 		Text_Paint(rect->x, rect->y, scale, color, "Waiting for new key... Press ESCAPE to cancel", 0, 0, textStyle);
 	} else {
@@ -3526,7 +3525,6 @@ static void UI_BinaryServerInsertion(int num) {
 static void UI_BuildServerDisplayList(qboolean force) {
 	int i, count, clients, maxClients, ping, game, len, visible;
 	char info[MAX_STRING_CHARS];
-//	qboolean startRefresh = qtrue; TTimo: unused
 	static int numinvisible;
 
 	if (!(force || uiInfo.uiDC.realTime > uiInfo.serverStatus.nextDisplayRefresh)) {
@@ -4428,7 +4426,6 @@ static void UI_ParseTeamInfo(const char *teamFile) {
 	char	*token;
   char *p;
   char *buff = NULL;
-  //static int mode = 0; TTimo: unused
 
   buff = GetMenuBuffer(teamFile);
   if (!buff) {
@@ -4576,11 +4573,6 @@ static qboolean MapList_Parse(char **p) {
 				} 
 			}
 
-			//mapList[mapCount].imageName = String_Alloc(va("levelshots/%s", mapList[mapCount].mapLoadName));
-			//if (uiInfo.mapCount == 0) {
-			  // only load the first cinematic, selection loads the others
-  			//  uiInfo.mapList[uiInfo.mapCount].cinematic = trap_CIN_PlayCinematic(va("%s.roq",uiInfo.mapList[uiInfo.mapCount].mapLoadName), qfalse, qfalse, qtrue, 0, 0, 0, 0);
-			//}
   		uiInfo.mapList[uiInfo.mapCount].cinematic = -1;
 			uiInfo.mapList[uiInfo.mapCount].levelShot = trap_R_RegisterShaderNoMip(va("levelshots/%s_small", uiInfo.mapList[uiInfo.mapCount].mapLoadName));
 
@@ -4598,7 +4590,6 @@ static void UI_ParseGameInfo(const char *teamFile) {
 	char	*token;
 	char *p;
 	char *buff = NULL;
-	//int mode = 0; TTimo: unused
 
 	buff = GetMenuBuffer(teamFile);
 	if (!buff) {
