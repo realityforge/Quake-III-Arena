@@ -117,11 +117,7 @@ Makefile.local:
   CFLAGS               - use this for custom CFLAGS
   V                    - set to show cc command line when building
   DEFAULT_BASEDIR      - extra path to search for baseq3 and such
-  BUILD_SERVER         - build the 'ioq3ded' server binary
   BUILD_CLIENT         - build the 'ioquake3' client binary
-  BUILD_BASEGAME       - build the 'baseq3' binaries
-  BUILD_MISSIONPACK    - build the 'missionpack' binaries
-  BUILD_GAME_QVM       - build the game qvms
   BUILD_STANDALONE     - build binaries suited for stand-alone games
   SERVERBIN            - rename 'ioq3ded' server binary
   CLIENTBIN            - rename 'ioquake3' client binary

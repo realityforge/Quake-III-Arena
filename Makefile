@@ -17,15 +17,6 @@ endif
 ifndef BUILD_CLIENT
   BUILD_CLIENT     =
 endif
-ifndef BUILD_SERVER
-  BUILD_SERVER     =
-endif
-ifndef BUILD_BASEGAME
-  BUILD_BASEGAME =
-endif
-ifndef BUILD_MISSIONPACK
-  BUILD_MISSIONPACK=
-endif
 
 #############################################################################
 #
@@ -590,9 +581,7 @@ ifndef SHLIBNAME
   SHLIBNAME=$(ARCH).$(SHLIBEXT)
 endif
 
-ifneq ($(BUILD_SERVER),0)
-  TARGETS += $(B)/$(SERVERBIN)$(FULLBINEXT)
-endif
+TARGETS += $(B)/$(SERVERBIN)$(FULLBINEXT)
 
 ifneq ($(BUILD_CLIENT),0)
   ifneq ($(USE_RENDERER_DLOPEN),0)
@@ -610,18 +599,14 @@ CFLAGS += -I$(UNZIPDIR)
 # include of common dir from unzip
 CFLAGS += -I$(CMDIR)
 
-ifneq ($(BUILD_BASEGAME),0)
 TARGETS += \
   $(B)/$(BASEGAME)/cgame$(SHLIBNAME) \
   $(B)/$(BASEGAME)/qagame$(SHLIBNAME) \
   $(B)/$(BASEGAME)/ui$(SHLIBNAME)
-endif
-ifneq ($(BUILD_MISSIONPACK),0)
 TARGETS += \
   $(B)/$(MISSIONPACK)/cgame$(SHLIBNAME) \
   $(B)/$(MISSIONPACK)/qagame$(SHLIBNAME) \
   $(B)/$(MISSIONPACK)/ui$(SHLIBNAME)
-endif
 
 ifeq ($(USE_OPENAL),1)
   CLIENT_CFLAGS += -DUSE_OPENAL
@@ -1944,12 +1929,8 @@ OBJ = $(Q3OBJ) $(Q3R2OBJ) $(Q3DOBJ) $(JPGOBJ) \
 
 copyfiles: release
 	@if [ ! -d $(COPYDIR)/$(BASEGAME) ]; then echo "You need to set COPYDIR to where your Quake3 data is!"; fi
-  ifneq ($(BUILD_BASEGAME),0)
 	-$(MKDIR) -m 0755 $(COPYDIR)/$(BASEGAME)
-  endif
-  ifneq ($(BUILD_MISSIONPACK),0)
 	-$(MKDIR) -m 0755 $(COPYDIR)/$(MISSIONPACK)
-  endif
 
 ifneq ($(BUILD_CLIENT),0)
 	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(CLIENTBIN)$(FULLBINEXT) $(COPYBINDIR)/$(CLIENTBIN)$(FULLBINEXT)
@@ -1958,22 +1939,16 @@ ifneq ($(BUILD_CLIENT),0)
   endif
 endif
 
-ifneq ($(BUILD_SERVER),0)
 	@if [ -f $(BR)/$(SERVERBIN)$(FULLBINEXT) ]; then \
 		$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(SERVERBIN)$(FULLBINEXT) $(COPYBINDIR)/$(SERVERBIN)$(FULLBINEXT); \
 	fi
-endif
 
-ifneq ($(BUILD_BASEGAME),0)
 	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(BASEGAME)/cgame$(SHLIBNAME) $(COPYDIR)/$(BASEGAME)/.
 	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(BASEGAME)/qagame$(SHLIBNAME) $(COPYDIR)/$(BASEGAME)/.
 	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(BASEGAME)/ui$(SHLIBNAME) $(COPYDIR)/$(BASEGAME)/.
-endif
-ifneq ($(BUILD_MISSIONPACK),0)
 	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(MISSIONPACK)/cgame$(SHLIBNAME) $(COPYDIR)/$(MISSIONPACK)/.
 	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(MISSIONPACK)/qagame$(SHLIBNAME) $(COPYDIR)/$(MISSIONPACK)/.
 	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(MISSIONPACK)/ui$(SHLIBNAME) $(COPYDIR)/$(MISSIONPACK)/.
-endif
 
 clean: clean-debug clean-release
 
