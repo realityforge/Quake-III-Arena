@@ -427,7 +427,7 @@ Example line:
 
 If you really changed parts that would make vanilla ioquake3 incompatible with
 your mod, we have included another way to conveniently build a stand-alone
-binary. Just run make with the option BUILD_STANDALONE=1. Don't forget to edit
+binary. Just add `BASE_CFLAGS += -DSTANDALONE` to Makefile.local. Don't forget to edit
 the PRODUCT_NAME and subsequent #defines in qcommon/q_shared.h with
 information appropriate for your project.
 

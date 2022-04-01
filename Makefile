@@ -11,9 +11,6 @@ ifeq ($(shell uname -m), arm64)
   COMPILE_ARCH=arm64
 endif
 
-ifndef BUILD_STANDALONE
-  BUILD_STANDALONE =
-endif
 ifndef BUILD_CLIENT
   BUILD_CLIENT     =
 endif
@@ -679,10 +676,6 @@ endif
 
 ifeq ($(USE_LOCAL_HEADERS),1)
   BASE_CFLAGS += -DUSE_LOCAL_HEADERS
-endif
-
-ifeq ($(BUILD_STANDALONE),1)
-  BASE_CFLAGS += -DSTANDALONE
 endif
 
 ifeq ($(GENERATE_DEPENDENCIES),1)
