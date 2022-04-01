@@ -48,9 +48,9 @@ cc_binary(
     deps = [
         ":api",
         "//build_defs:exported_symbols.lds",
-        "//code/game:bg",
+        "//code/game:bg-baseq3",
         "//code/game:bg_api",
-        "//code/game:bg_misc-client",
+        "//code/game:bg_misc-client-baseq3",
         "//code/qcommon",
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
@@ -84,9 +84,9 @@ cc_binary(
     deps = [
         ":api",
         "//build_defs:exported_symbols.lds",
-        "//code/game:bg",
+        "//code/game:bg-teamarena",
         "//code/game:bg_api",
-        "//code/game:bg_misc-client",
+        "//code/game:bg_misc-client-teamarena",
         "//code/qcommon",
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",

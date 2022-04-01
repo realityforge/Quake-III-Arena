@@ -46,7 +46,7 @@ cc_library(
 )
 
 cc_library(
-    name = "bg_misc-client",
+    name = "bg_misc-client-baseq3",
     srcs = [
         "bg_local.h",
         "bg_misc.c",
@@ -65,15 +65,15 @@ cc_library(
 )
 
 cc_library(
-    # bg_misc = Both Game part used by TA ui
-    name = "bg_misc-server",
+    name = "bg_misc-client-teamarena",
     srcs = [
         "bg_local.h",
         "bg_misc.c",
     ],
-    defines = SERVER_GAME_DEFINES,
+    defines = CLIENT_GAME_DEFINES + TEAM_ARENA_DEFINES,
     includes = ["."],
     visibility = [
+        "//code/cgame:__pkg__",
         "//code/q3_ui:__pkg__",
         "//code/ui:__pkg__",
     ],
@@ -87,12 +87,33 @@ cc_library(
     # bg = Both Game which is shared between client and server games
     # It probably should be separated in a more meaningful way but
     # that is a job for another time
-    name = "bg",
+    name = "bg-baseq3",
     srcs = [
         "bg_local.h",
         "bg_pmove.c",
         "bg_slidemove.c",
     ],
+    includes = ["."],
+    visibility = [
+        "//code/cgame:__pkg__",
+    ],
+    deps = [
+        ":bg_api",
+        "//code/qcommon:shared_api",
+    ],
+)
+
+cc_library(
+    # bg = Both Game which is shared between client and server games
+    # It probably should be separated in a more meaningful way but
+    # that is a job for another time
+    name = "bg-teamarena",
+    srcs = [
+        "bg_local.h",
+        "bg_pmove.c",
+        "bg_slidemove.c",
+    ],
+    defines = TEAM_ARENA_DEFINES,
     includes = ["."],
     visibility = [
         "//code/cgame:__pkg__",
@@ -162,7 +183,7 @@ cc_binary(
     linkopts = SERVER_GAME_LINKOPTS,
     linkshared = 1,
     deps = [
-        ":bg",
+        ":bg-baseq3",
         ":server_api",
         "//build_defs:exported_symbols.lds",
         "//code/botlib",
@@ -183,7 +204,7 @@ cc_binary(
     linkopts = SERVER_GAME_LINKOPTS,
     linkshared = 1,
     deps = [
-        ":bg",
+        ":bg-teamarena",
         ":server_api",
         "//build_defs:exported_symbols.lds",
         "//code/botlib",
