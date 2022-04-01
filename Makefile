@@ -102,14 +102,6 @@ ifndef MISSIONPACK_CFLAGS
 MISSIONPACK_CFLAGS=-DMISSIONPACK
 endif
 
-ifndef COPYDIR
-COPYDIR="/usr/local/games/quake3"
-endif
-
-ifndef COPYBINDIR
-COPYBINDIR=$(COPYDIR)
-endif
-
 ifndef MOUNT_DIR
 MOUNT_DIR=code
 endif
@@ -1927,29 +1919,6 @@ OBJ = $(Q3OBJ) $(Q3R2OBJ) $(Q3DOBJ) $(JPGOBJ) \
   $(MPGOBJ) $(Q3GOBJ) $(Q3CGOBJ) $(MPCGOBJ) $(Q3UIOBJ) $(MPUIOBJ) \
   $(Q3R2STRINGOBJ)
 
-copyfiles: release
-	@if [ ! -d $(COPYDIR)/$(BASEGAME) ]; then echo "You need to set COPYDIR to where your Quake3 data is!"; fi
-	-$(MKDIR) -m 0755 $(COPYDIR)/$(BASEGAME)
-	-$(MKDIR) -m 0755 $(COPYDIR)/$(MISSIONPACK)
-
-ifneq ($(BUILD_CLIENT),0)
-	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(CLIENTBIN)$(FULLBINEXT) $(COPYBINDIR)/$(CLIENTBIN)$(FULLBINEXT)
-  ifneq ($(USE_RENDERER_DLOPEN),0)
-	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/renderer_opengl2_$(SHLIBNAME) $(COPYBINDIR)/renderer_opengl2_$(SHLIBNAME)
-  endif
-endif
-
-	@if [ -f $(BR)/$(SERVERBIN)$(FULLBINEXT) ]; then \
-		$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(SERVERBIN)$(FULLBINEXT) $(COPYBINDIR)/$(SERVERBIN)$(FULLBINEXT); \
-	fi
-
-	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(BASEGAME)/cgame$(SHLIBNAME) $(COPYDIR)/$(BASEGAME)/.
-	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(BASEGAME)/qagame$(SHLIBNAME) $(COPYDIR)/$(BASEGAME)/.
-	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(BASEGAME)/ui$(SHLIBNAME) $(COPYDIR)/$(BASEGAME)/.
-	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(MISSIONPACK)/cgame$(SHLIBNAME) $(COPYDIR)/$(MISSIONPACK)/.
-	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(MISSIONPACK)/qagame$(SHLIBNAME) $(COPYDIR)/$(MISSIONPACK)/.
-	$(INSTALL) $(STRIP_FLAG) -m 0755 $(BR)/$(MISSIONPACK)/ui$(SHLIBNAME) $(COPYDIR)/$(MISSIONPACK)/.
-
 clean: clean-debug clean-release
 
 clean-debug:
@@ -1991,7 +1960,7 @@ ifneq ($(B),)
   -include $(OBJ_D_FILES)
 endif
 
-.PHONY: all clean clean2 clean-debug clean-release copyfiles \
+.PHONY: all clean clean2 clean-debug clean-release \
 	debug default dist distclean makedirs \
 	release targets \
 	toolsclean toolsclean2 toolsclean-debug toolsclean-release \

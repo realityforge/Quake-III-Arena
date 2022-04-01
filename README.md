@@ -97,13 +97,6 @@ For Mac OS X, building a Universal Binary 2 (arm64, x86_64)
   4. Copy the resulting ioquake3.app in /build/release-darwin-universal2
      to your /Applications/ioquake3 folder.
 
-Installation, for *nix
-  1. Set the COPYDIR variable in the shell to be where you installed Quake 3
-     to. By default it will be /usr/local/games/quake3 if you haven't set it.
-     This is the path as used by the original Linux Q3 installer and subsequent
-     point releases.
-  2. Run 'make copyfiles'.
-
 It is also possible to cross compile for Windows under *nix using MinGW. Your
 distribution may have mingw32 packages available. On debian/Ubuntu, you need to
 install 'mingw-w64'. Thereafter cross compiling is simply a case running
@@ -141,7 +134,6 @@ Makefile.local:
                          and USE_LOCAL_HEADERS
   USE_LOCAL_HEADERS    - use headers local to ioq3 instead of system ones
   DEBUG_CFLAGS         - C compiler flags to use for building debug version
-  COPYDIR              - the target installation directory
   TEMPDIR              - specify user defined directory for temp files
 ```
 
