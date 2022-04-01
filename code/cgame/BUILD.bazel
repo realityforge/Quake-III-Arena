@@ -101,7 +101,6 @@ cc_library(
     defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES + QVM_DEFINES,
     deps = [
         ":api",
-        "//code/game:bg",
         "//code/game:bg_api",
         "//code/game:bg_lib-qvm",
         "//code/qcommon:shared",
