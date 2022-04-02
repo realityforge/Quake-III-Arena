@@ -207,19 +207,8 @@ static void GLSL_ViewMatricesUniformBuffer(const float value[32]) {
         {
             case HUD_ORTHO_PROJECTION:
             {
-            	if (vr.virtual_screen)
-				{
-					vec3_t translate;
-					VectorSet(translate, -10, 0, 0);
-					Mat4Translation( translate, viewMatrices );
-					VectorSet(translate, 10, 0, 0);
-					Mat4Translation( translate, viewMatrices + 16 );
-				}
-				else
-				{
-					Mat4Identity( viewMatrices );
-					Mat4Identity( viewMatrices + 16 );
-				}
+                Mat4Identity( viewMatrices );
+                Mat4Identity( viewMatrices + 16 );
             }
             break;
             default:

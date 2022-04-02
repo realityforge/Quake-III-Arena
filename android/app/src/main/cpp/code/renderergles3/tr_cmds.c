@@ -430,6 +430,8 @@ void RE_BeginFrame( stereoFrame_t stereoFrame ) {
 	}
 	
 	tr.refdef.stereoFrame = stereoFrame;
+
+	GLSL_PrepareUniformBuffers();
 }
 
 
