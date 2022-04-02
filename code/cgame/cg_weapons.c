@@ -1919,21 +1919,18 @@ static void CG_ShotgunPattern( vec3_t origin, vec3_t origin2, int seed, int othe
 void CG_ShotgunFire( entityState_t *es ) {
 	vec3_t	v;
 	int		contents;
+    vec3_t			up;
 
 	VectorSubtract( es->origin2, es->pos.trBase, v );
 	VectorNormalize( v );
 	VectorScale( v, 32, v );
 	VectorAdd( es->pos.trBase, v, v );
-	if ( cgs.glconfig.hardwareType != GLHW_RAGEPRO ) {
-		// ragepro can't alpha fade, so don't even bother with smoke
-		vec3_t			up;
 
-		contents = CG_PointContents( es->pos.trBase, 0 );
-		if ( !( contents & CONTENTS_WATER ) ) {
-			VectorSet( up, 0, 0, 8 );
-			CG_SmokePuff( v, up, 32, 1, 1, 1, 0.33f, 900, cg.time, 0, LEF_PUFF_DONT_SCALE, cgs.media.shotgunSmokePuffShader );
-		}
-	}
+    contents = CG_PointContents( es->pos.trBase, 0 );
+    if ( !( contents & CONTENTS_WATER ) ) {
+        VectorSet( up, 0, 0, 8 );
+        CG_SmokePuff( v, up, 32, 1, 1, 1, 0.33f, 900, cg.time, 0, LEF_PUFF_DONT_SCALE, cgs.media.shotgunSmokePuffShader );
+    }
 	CG_ShotgunPattern( es->pos.trBase, es->origin2, es->eventParm, es->otherEntityNum );
 }
 
