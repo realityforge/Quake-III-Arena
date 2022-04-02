@@ -218,13 +218,6 @@ GRAPHICS OPTIONS MENU
 #define GRAPHICSOPTIONS_ACCEPT0	"menu/art/accept_0"
 #define GRAPHICSOPTIONS_ACCEPT1	"menu/art/accept_1"
 
-static const char *s_drivers[] =
-{
-	OPENGL_DRIVER_NAME,
-	_3DFX_DRIVER_NAME,
-	0
-};
-
 #define ID_BACK2		101
 #define ID_FULLSCREEN	102
 #define ID_LIST			103
@@ -274,7 +267,6 @@ typedef struct
 	int texturebits;
 	int geometry;
 	int filter;
-	int driver;
 	qboolean extensions;
 } InitialVideoOptions_s;
 
@@ -305,7 +297,6 @@ static InitialVideoOptions_s s_ivo_templates[] =
 static void GraphicsOptions_GetInitialVideo( void )
 {
 	s_ivo.colordepth  = s_graphicsoptions.colordepth.curvalue;
-	s_ivo.driver      = s_graphicsoptions.driver.curvalue;
 	s_ivo.mode        = s_graphicsoptions.mode.curvalue;
 	s_ivo.fullscreen  = s_graphicsoptions.fs.curvalue;
 	s_ivo.extensions  = s_graphicsoptions.allow_extensions.curvalue;
@@ -323,8 +314,6 @@ static void GraphicsOptions_CheckConfig( void )
 	for ( i = 0; i < NUM_IVO_TEMPLATES; i++ )
 	{
 		if ( s_ivo_templates[i].colordepth != s_graphicsoptions.colordepth.curvalue )
-			continue;
-		if ( s_ivo_templates[i].driver != s_graphicsoptions.driver.curvalue )
 			continue;
 		if ( s_ivo_templates[i].mode != s_graphicsoptions.mode.curvalue )
 			continue;
@@ -348,18 +337,8 @@ static void GraphicsOptions_CheckConfig( void )
 
 static void GraphicsOptions_UpdateMenuItems( void )
 {
-	if ( s_graphicsoptions.driver.curvalue == 1 )
-	{
-		s_graphicsoptions.fs.curvalue = 1;
-		s_graphicsoptions.fs.generic.flags |= QMF_GRAYED;
-		s_graphicsoptions.colordepth.curvalue = 1;
-	}
-	else
-	{
-		s_graphicsoptions.fs.generic.flags &= ~QMF_GRAYED;
-	}
-
-	if ( s_graphicsoptions.fs.curvalue == 0 || s_graphicsoptions.driver.curvalue == 1 )
+    s_graphicsoptions.fs.generic.flags &= ~QMF_GRAYED;
+	if ( s_graphicsoptions.fs.curvalue == 0 )
 	{
 		s_graphicsoptions.colordepth.curvalue = 0;
 		s_graphicsoptions.colordepth.generic.flags |= QMF_GRAYED;
@@ -403,10 +382,6 @@ static void GraphicsOptions_UpdateMenuItems( void )
 	{
 		s_graphicsoptions.apply.generic.flags &= ~(QMF_HIDDEN|QMF_INACTIVE);
 	}
-	if ( s_ivo.driver != s_graphicsoptions.driver.curvalue )
-	{
-		s_graphicsoptions.apply.generic.flags &= ~(QMF_HIDDEN|QMF_INACTIVE);
-	}
 	if ( s_ivo.texturebits != s_graphicsoptions.texturebits.curvalue )
 	{
 		s_graphicsoptions.apply.generic.flags &= ~(QMF_HIDDEN|QMF_INACTIVE);
@@ -444,7 +419,6 @@ static void GraphicsOptions_ApplyChanges( void *unused, int notification )
 	trap_Cvar_SetValue( "r_allowExtensions", s_graphicsoptions.allow_extensions.curvalue );
 	trap_Cvar_SetValue( "r_mode", s_graphicsoptions.mode.curvalue );
 	trap_Cvar_SetValue( "r_fullscreen", s_graphicsoptions.fs.curvalue );
-	trap_Cvar_Set( "r_glDriver", ( char * ) s_drivers[s_graphicsoptions.driver.curvalue] );
 	switch ( s_graphicsoptions.colordepth.curvalue )
 	{
 	case 0:
@@ -501,14 +475,6 @@ static void GraphicsOptions_Event( void* ptr, int event ) {
 
 	switch( ((menucommon_s*)ptr)->id ) {
 	case ID_MODE:
-		// clamp 3dfx video modes
-		if ( s_graphicsoptions.driver.curvalue == 1 )
-		{
-			if ( s_graphicsoptions.mode.curvalue < 2 )
-				s_graphicsoptions.mode.curvalue = 2;
-			else if ( s_graphicsoptions.mode.curvalue > 6 )
-				s_graphicsoptions.mode.curvalue = 6;
-		}
 		break;
 
 	case ID_LIST:
@@ -646,21 +612,10 @@ static void GraphicsOptions_SetMenuItems( void )
 	{
 		s_graphicsoptions.colordepth.curvalue = 0;
 	}
-	if ( s_graphicsoptions.driver.curvalue == 1 )
-	{
-		s_graphicsoptions.colordepth.curvalue = 1;
-	}
 }
 
 void GraphicsOptions_MenuInit( void )
 {
-	static const char *s_driver_names[] =
-	{
-		"Default",
-		"Voodoo",
-		0
-	};
-
 	static const char *tq_names[] =
 	{
 		"Default",
@@ -815,15 +770,6 @@ void GraphicsOptions_MenuInit( void )
 	s_graphicsoptions.list.itemnames        = s_graphics_options_names;
 	y += 2 * ( BIGCHAR_HEIGHT + 2 );
 
-	s_graphicsoptions.driver.generic.type  = MTYPE_SPINCONTROL;
-	s_graphicsoptions.driver.generic.name  = "GL Driver:";
-	s_graphicsoptions.driver.generic.flags = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
-	s_graphicsoptions.driver.generic.x     = 400;
-	s_graphicsoptions.driver.generic.y     = y;
-	s_graphicsoptions.driver.itemnames     = s_driver_names;
-	s_graphicsoptions.driver.curvalue      = (uis.glconfig.driverType == GLDRV_VOODOO);
-	y += BIGCHAR_HEIGHT+2;
-
 	// references/modifies "r_allowExtensions"
 	s_graphicsoptions.allow_extensions.generic.type     = MTYPE_SPINCONTROL;
 	s_graphicsoptions.allow_extensions.generic.name	    = "GL Extensions:";
@@ -951,7 +897,6 @@ void GraphicsOptions_MenuInit( void )
 	Menu_AddItem( &s_graphicsoptions.menu, ( void * ) &s_graphicsoptions.network );
 
 	Menu_AddItem( &s_graphicsoptions.menu, ( void * ) &s_graphicsoptions.list );
-	Menu_AddItem( &s_graphicsoptions.menu, ( void * ) &s_graphicsoptions.driver );
 	Menu_AddItem( &s_graphicsoptions.menu, ( void * ) &s_graphicsoptions.allow_extensions );
 	Menu_AddItem( &s_graphicsoptions.menu, ( void * ) &s_graphicsoptions.mode );
 	Menu_AddItem( &s_graphicsoptions.menu, ( void * ) &s_graphicsoptions.colordepth );
@@ -968,12 +913,6 @@ void GraphicsOptions_MenuInit( void )
 
 	GraphicsOptions_SetMenuItems();
 	GraphicsOptions_GetInitialVideo();
-
-	if ( uis.glconfig.driverType == GLDRV_ICD &&
-		 uis.glconfig.hardwareType == GLHW_3DFX_2D3D )
-	{
-		s_graphicsoptions.driver.generic.flags |= QMF_HIDDEN|QMF_INACTIVE;
-	}
 }
 
 

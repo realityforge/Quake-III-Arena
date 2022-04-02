@@ -148,26 +148,6 @@ typedef enum {
 	TC_S3TC
 } textureCompression_t;
 
-typedef enum {
-	GLDRV_ICD,					// driver is integrated with window system
-								// WARNING: there are tests that check for
-								// > GLDRV_ICD for minidriverness, so this
-								// should always be the lowest value in this
-								// enum set
-	GLDRV_STANDALONE,			// driver is a non-3Dfx standalone driver
-	GLDRV_VOODOO				// driver is a 3Dfx standalone driver
-} glDriverType_t;
-
-typedef enum {
-	GLHW_GENERIC,			// where everthing works the way it should
-	GLHW_3DFX_2D3D,			// Voodoo Banshee or Voodoo3, relevant since if this is
-							// the hardware type then there can NOT exist a secondary
-							// display adapter
-	GLHW_RIVA128,			// where you can't interpolate alpha
-	GLHW_RAGEPRO,			// where you can't modulate alpha on alpha textures
-	GLHW_PERMEDIA2			// where you don't have src*dst
-} glHardwareType_t;
-
 typedef struct {
 	char					renderer_string[MAX_STRING_CHARS];
 	char					vendor_string[MAX_STRING_CHARS];
@@ -178,9 +158,6 @@ typedef struct {
 	int						maxActiveTextures;		// multitexture ability
 
 	int						colorBits, depthBits, stencilBits;
-
-	glDriverType_t			driverType;
-	glHardwareType_t		hardwareType;
 
 	qboolean				deviceSupportsGamma;
 	textureCompression_t	textureCompression;
@@ -206,7 +183,6 @@ typedef struct {
 /*
 #ifdef Q3_VM
 
-#define _3DFX_DRIVER_NAME	"Voodoo"
 #define OPENGL_DRIVER_NAME	"Default"
 
 #elif defined(_WIN32)
@@ -214,12 +190,10 @@ typedef struct {
 
 #if defined(Q3_VM) || defined(_WIN32)
 
-#define _3DFX_DRIVER_NAME	"3dfxvgl"
 #define OPENGL_DRIVER_NAME	"opengl32"
 
 #else
 
-#define _3DFX_DRIVER_NAME	"libMesaVoodooGL.so"
 // https://zerowing.idsoftware.com/bugzilla/show_bug.cgi?id=524
 #define OPENGL_DRIVER_NAME	"libGL.so.1"
 

@@ -89,7 +89,6 @@ cvar_t	*r_primitives;
 cvar_t	*r_texturebits;
 
 cvar_t	*r_drawBuffer;
-cvar_t  *r_glDriver;
 cvar_t	*r_lightmap;
 cvar_t	*r_vertexLight;
 cvar_t	*r_uiFullScreen;
@@ -193,7 +192,6 @@ static void InitOpenGL( void )
 	//
 	// GLimp_Init directly or indirectly references the following cvars:
 	//		- r_fullscreen
-	//		- r_glDriver
 	//		- r_mode
 	//		- r_(color|depth|stencil)bits
 	//		- r_ignorehwgamma
@@ -801,17 +799,9 @@ void GfxInfo_f( void )
 	ri.Printf( PRINT_ALL, "compiled vertex arrays: %s\n", enablestrings[qglLockArraysEXT != 0 ] );
 	ri.Printf( PRINT_ALL, "texenv add: %s\n", enablestrings[glConfig.textureEnvAddAvailable != 0] );
 	ri.Printf( PRINT_ALL, "compressed textures: %s\n", enablestrings[glConfig.textureCompression!=TC_NONE] );
-	if ( r_vertexLight->integer || glConfig.hardwareType == GLHW_PERMEDIA2 )
+	if ( r_vertexLight->integer )
 	{
 		ri.Printf( PRINT_ALL, "HACK: using vertex lightmap approximation\n" );
-	}
-	if ( glConfig.hardwareType == GLHW_RAGEPRO )
-	{
-		ri.Printf( PRINT_ALL, "HACK: ragePro approximations\n" );
-	}
-	if ( glConfig.hardwareType == GLHW_RIVA128 )
-	{
-		ri.Printf( PRINT_ALL, "HACK: riva128 approximations\n" );
 	}
 	if ( r_finish->integer ) {
 		ri.Printf( PRINT_ALL, "Forcing glFinish\n" );
@@ -823,7 +813,6 @@ void R_Register( void )
 	//
 	// latched and archived variables
 	//
-	r_glDriver = ri.Cvar_Get( "r_glDriver", OPENGL_DRIVER_NAME, CVAR_ARCHIVE | CVAR_LATCH );
 	r_allowExtensions = ri.Cvar_Get( "r_allowExtensions", "1", CVAR_ARCHIVE | CVAR_LATCH );
 	r_ext_compressed_textures = ri.Cvar_Get( "r_ext_compressed_textures", "0", CVAR_ARCHIVE | CVAR_LATCH );
 	r_ext_gamma_control = ri.Cvar_Get( "r_ext_gamma_control", "1", CVAR_ARCHIVE | CVAR_LATCH );
