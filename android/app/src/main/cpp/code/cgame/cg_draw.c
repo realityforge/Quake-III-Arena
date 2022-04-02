@@ -2761,6 +2761,34 @@ static void CG_Draw2D()
 }
 
 
+//
+// HACK HACK HACK
+//
+//Render an empty scene - seems to sort the weird out-of-body thing
+//when the HUD isn't being drawn. Need to get to the bottom of this
+//it shouldn't cost frames, but it is ugly
+static void CG_EmptySceneHackHackHack( void )
+{
+	refdef_t refdef;
+	memset( &refdef, 0, sizeof( refdef ) );
+
+	refdef.rdflags = RDF_NOWORLDMODEL;
+	AxisClear( refdef.viewaxis );
+
+	refdef.fov_x = 30;
+	refdef.fov_y = 30;
+
+	refdef.x = 0;
+	refdef.y = 0;
+	refdef.width = cgs.glconfig.vidWidth;
+	refdef.height = cgs.glconfig.vidHeight;
+
+	refdef.time = cg.time;
+
+	trap_R_ClearScene();
+	trap_R_RenderScene( &refdef );
+}
+
 /*
 =====================
 CG_DrawActive
@@ -2797,19 +2825,23 @@ void CG_DrawActive( void ) {
     if ( cg.demoPlayback || CG_IsThirdPersonFollowMode(VRFM_THIRDPERSON_1))
     {
         worldscale *= SPECTATOR_WORLDSCALE_MULTIPLIER;
+		trap_Cvar_SetValue("vr_worldscaleScaler", SPECTATOR_WORLDSCALE_MULTIPLIER);
         //Just move camera down about 20cm
         heightOffset = -0.2f;
     }
 	else if (CG_IsDeathCam() || CG_IsThirdPersonFollowMode(VRFM_THIRDPERSON_2))
 	{
 		worldscale *= SPECTATOR2_WORLDSCALE_MULTIPLIER;
+		trap_Cvar_SetValue("vr_worldscaleScaler", SPECTATOR2_WORLDSCALE_MULTIPLIER);
 		//Just move camera down about 50cm
 		heightOffset = -0.5f;
 	}
+	else
+	{
+		float zoomCoeff =  ((2.5f-vr->weapon_zoomLevel)/1.5f); // normally 1.0
+		trap_Cvar_SetValue("vr_worldscaleScaler", zoomCoeff);
+	}
 
-
-	float ipd = trap_Cvar_VariableValue("r_stereoSeparation") / 1000.0f;
-	float separation = worldscale * (ipd / 2) * (cg.stereoView == STEREO_LEFT ? -1.0f : 1.0f);
 
 	if (cg.snap->ps.pm_flags & PMF_FOLLOW && vr->follow_mode == VRFM_FIRSTPERSON)
     {
@@ -2848,16 +2880,50 @@ void CG_DrawActive( void ) {
 		}
 	}
 
-	float zoomCoeff =  ((2.5f-vr->weapon_zoomLevel)/1.5f);
-	VectorMA(cg.refdef.vieworg, -separation * zoomCoeff, cg.refdef.viewaxis[1], cg.refdef.vieworg);
+	//Now draw the HUD shader in the world
+	{
+		refEntity_t ent;
+		trace_t trace;
+		vec3_t viewaxis[3];
+		vec3_t weaponangles;
+		vec3_t origin, endpos;
+
+		float scale = trap_Cvar_VariableValue("vr_worldscaleScaler");
+        float dist = (trap_Cvar_VariableValue("vr_hudDepth")+1) * 6 * scale;
+        float radius = dist / 3.0f;
+
+		VectorMA(cg.refdef.vieworg, dist, cg.refdef.viewaxis[0], endpos);
+		VectorMA(endpos, trap_Cvar_VariableValue("vr_hudYOffset") / 20, cg.refdef.viewaxis[2], endpos);
+
+		memset(&ent, 0, sizeof(ent));
+		ent.reType = RT_SPRITE;
+		ent.renderfx = RF_DEPTHHACK;
+
+		VectorCopy(endpos, ent.origin);
+
+		ent.radius = radius;
+		ent.invert = qtrue;
+		ent.customShader = cgs.media.hudShader;
+
+		trap_R_AddRefEntityToScene(&ent);
+	}
 
 	// draw 3D view
 	trap_R_RenderScene( &cg.refdef );
 
 	VectorCopy( baseOrg, cg.refdef.vieworg );
 
-    // draw status bar and other floating elements
-    CG_Draw2D();
+	{
+		//Tell renderer we want to draw to the HUD buffer
+		trap_R_HUDBufferStart();
+
+		// draw status bar and other floating elements
+		CG_Draw2D();
+
+		trap_R_HUDBufferEnd();
+	}
+
+	CG_EmptySceneHackHackHack();
 }
 
 
