@@ -1974,6 +1974,13 @@ void CG_Init( int serverMessageNum, int serverCommandSequence, int clientNum ) {
 
 	const char *serverinfo = CG_ConfigString( CS_SERVERINFO );
 	vr->no_crosshair = (strcasestr(serverinfo, "nocrosshair") != NULL || strcasestr(serverinfo, "no crosshair") != NULL);
+	vr->local_server = cgs.localServer;
+#ifdef MISSIONPACK
+	vr->single_player = trap_Cvar_VariableValue("ui_singlePlayerActive");
+#else
+	vr->single_player = trap_Cvar_VariableValue( "g_gametype" ) == GT_SINGLE_PLAYER;
+#endif
+	vr->use_fake_6dof = !vr->single_player;
 }
 
 /*
