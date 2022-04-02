@@ -1935,12 +1935,12 @@ static void CG_ShotgunPattern( vec3_t origin, vec3_t origin2, int seed, int othe
 void CG_ShotgunFire( entityState_t *es ) {
 	vec3_t	v;
 	int		contents;
+    vec3_t			up;
 
 	VectorSubtract( es->origin2, es->pos.trBase, v );
 	VectorNormalize( v );
 	VectorScale( v, 32, v );
 	VectorAdd( es->pos.trBase, v, v );
-    vec3_t			up;
 
     contents = trap_CM_PointContents( es->pos.trBase, 0 );
     if ( !( contents & CONTENTS_WATER ) ) {
