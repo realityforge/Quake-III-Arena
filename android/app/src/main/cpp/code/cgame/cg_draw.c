@@ -2909,22 +2909,32 @@ void CG_DrawActive( void ) {
         float dist = (trap_Cvar_VariableValue("vr_hudDepth")+2) * 6 * scale;
         float radius = dist / 3.0f;
 
-        float viewYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]) + (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]);
-
-        static float hmd_yaw_x = 0.0f;
-        static float hmd_yaw_y = 1.0f;
+        if (cg.snap->ps.stats[STAT_HEALTH] > 0 &&
+                cg.snap->ps.pm_type != PM_INTERMISSION)
         {
-            hmd_yaw_x = 0.95f * hmd_yaw_x + 0.05f * cosf(DEG2RAD(vr->hmdorientation[YAW]));
-            hmd_yaw_y = 0.95f * hmd_yaw_y + 0.05f * sinf(DEG2RAD(vr->hmdorientation[YAW]));
+            float viewYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]) +
+                            (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]);
+
+            static float hmd_yaw_x = 0.0f;
+            static float hmd_yaw_y = 1.0f;
+            {
+                hmd_yaw_x = 0.97f * hmd_yaw_x + 0.03f * cosf(DEG2RAD(vr->hmdorientation[YAW]));
+                hmd_yaw_y = 0.97f * hmd_yaw_y + 0.03f * sinf(DEG2RAD(vr->hmdorientation[YAW]));
+            }
+
+            angles[YAW] = viewYaw + RAD2DEG(atan2(hmd_yaw_y, hmd_yaw_x));
+            angles[PITCH] = 0;
+            angles[ROLL] = 0;
+            AngleVectors(angles, forward, right, up);
+
+            VectorMA(cg.refdef.vieworg, dist, forward, endpos);
+            VectorMA(endpos, trap_Cvar_VariableValue("vr_hudYOffset") / 20, up, endpos);
         }
-
-		angles[YAW] = viewYaw + RAD2DEG(atan2(hmd_yaw_y, hmd_yaw_x));
-        angles[PITCH] = 0;
-        angles[ROLL] = 0;
-        AngleVectors(angles, forward, right, up);
-
-		VectorMA(cg.refdef.vieworg, dist, forward, endpos);
-		VectorMA(endpos, trap_Cvar_VariableValue("vr_hudYOffset") / 20, up, endpos);
+        else
+        {
+            //Lock to face
+            VectorMA(cg.refdef.vieworg, dist, cg.refdef.viewaxis[0], endpos);
+        }
 
 		memset(&ent, 0, sizeof(ent));
 		ent.reType = RT_SPRITE;
