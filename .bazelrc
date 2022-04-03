@@ -39,6 +39,9 @@ build --compilation_mode=opt
 # and here
 build --copt -DUSE_LOCAL_HEADERS
 
+# If a command fails, print out the full command line.
+build --verbose_failures
+
 #
 # Enable some warnings.
 #
@@ -76,8 +79,6 @@ build:macos_arm64 --cpu=darwin_arm64
 # When printing the location part of messages, attempt to use a path relative to the workspace directory
 common:ci --attempt_to_print_relative_paths
 
-# If a command fails, print out the full command line.
-build:ci --verbose_failures
 # prints extra debugging information on execution
 build:ci --sandbox_debug
 build:ci --spawn_strategy=standalone
