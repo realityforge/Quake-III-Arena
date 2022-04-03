@@ -67,9 +67,9 @@ typedef struct uniformInfo_s
 uniformInfo_t;
 
 typedef enum {
-//	STEREO_ORTHO_PROJECTION, // An orthographic projection with slight stereo view matrix
 	HUD_ORTHO_PROJECTION, // Orthographic projection and no stereo view
 	VR_PROJECTION,
+	MONO_VR_PROJECTION,
 
 	PROJECTION_COUNT
 } projection_t;
@@ -185,7 +185,7 @@ glslPrintLog_t;
 GLSL_ViewMatricesUniformBuffer
 ====================
 */
-static void GLSL_ViewMatricesUniformBuffer(const float value[32]) {
+static void GLSL_ViewMatricesUniformBuffer(const float eyeView[32], const float modelView[32]) {
 
 	for (int i = 0; i < PROJECTION_COUNT; ++i)
 	{
@@ -211,9 +211,16 @@ static void GLSL_ViewMatricesUniformBuffer(const float value[32]) {
                 Mat4Identity( viewMatrices + 16 );
             }
             break;
-            default:
+            case VR_PROJECTION:
             {
-                memcpy((char *) viewMatrices, value, 32 * sizeof(float));
+                Mat4Copy(eyeView, viewMatrices);
+                Mat4Copy(eyeView+16, viewMatrices+16);
+            }
+            break;
+            case MONO_VR_PROJECTION:
+            {
+                Mat4Copy(modelView, viewMatrices);
+                Mat4Copy(modelView, viewMatrices+16);
             }
             break;
         }
@@ -1667,18 +1674,17 @@ void GLSL_PrepareUniformBuffers(void)
     Mat4Ortho(0, width, height, 0, 0, 1, orthoProjectionMatrix);
 
     //ortho projection matrix
-/*    GLSL_ProjectionMatricesUniformBuffer(projectionMatricesBuffer[STEREO_ORTHO_PROJECTION],
-            orthoProjectionMatrix);
-*/
     GLSL_ProjectionMatricesUniformBuffer(projectionMatricesBuffer[HUD_ORTHO_PROJECTION],
             orthoProjectionMatrix);
 
     //VR projection matrix
     GLSL_ProjectionMatricesUniformBuffer(projectionMatricesBuffer[VR_PROJECTION],
             tr.vrParms.projection);
+    GLSL_ProjectionMatricesUniformBuffer(projectionMatricesBuffer[MONO_VR_PROJECTION],
+            tr.vrParms.projection);
 
-	//Set up the buffers that won't change this frame
-	GLSL_ViewMatricesUniformBuffer(tr.viewParms.world.eyeViewMatrix);
+    //Set all view matrices
+	GLSL_ViewMatricesUniformBuffer(tr.viewParms.world.eyeViewMatrix, tr.viewParms.world.modelView);
 }
 
 void GLSL_BindProgram(shaderProgram_t * program)
@@ -1697,8 +1703,10 @@ void GLSL_BindProgram(shaderProgram_t * program)
 }
 
 static GLuint GLSL_CalculateProjection() {
-    GLuint result =  VR_PROJECTION;
+    GLuint result =  glState.isDrawingHUD ? MONO_VR_PROJECTION : VR_PROJECTION;
 
+    //If we are using an orthographic projection, then we don't need the mono VR projection
+    //as we aren't drawing models to the HUD
     if (Mat4Compare(&orthoProjectionMatrix, glState.projection))
     {
 		result = HUD_ORTHO_PROJECTION;

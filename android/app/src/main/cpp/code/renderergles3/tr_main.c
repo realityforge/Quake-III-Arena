@@ -1520,7 +1520,7 @@ static void R_AddEntitySurface (int entityNum)
 	tr.shiftedEntityNum = tr.currentEntityNum << QSORT_REFENTITYNUM_SHIFT;
 
 	//
-	// the weapon model must be handled special --
+	// the weapon model (and HUD sprite) must be handled special --
 	// we don't want the hacked weapon position showing in 
 	// mirrors, because the true body position will already be drawn
 	//

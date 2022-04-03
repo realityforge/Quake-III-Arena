@@ -2647,10 +2647,10 @@ static void CG_DrawVignette( void )
 
 /*
 =================
-CG_Draw2D
+CG_DrawHUD2D - Draw 2D elements always intended for the in-world HUD
 =================
 */
-static void CG_Draw2D()
+static void CG_DrawHUD2D()
 {
 #ifdef MISSIONPACK
 	if (cgs.orderPending && cg.time > cgs.orderTime) {
@@ -2671,23 +2671,13 @@ static void CG_Draw2D()
 		return;
 	}
 
-/*
-	if (cg.cameraMode) {
-		return;
-	}
-*/
 	if ( cg.snap->ps.persistant[PERS_TEAM] == TEAM_SPECTATOR ) {
 		CG_DrawSpectator();
-
-//		if(stereoFrame == STEREO_CENTER)
-//			CG_DrawCrosshair();
 
 		CG_DrawCrosshairNames();
 	} else {
 		// don't draw any status if dead or the scoreboard is being explicitly shown
 		if ( !cg.showScores && cg.snap->ps.stats[STAT_HEALTH] > 0 ) {
-
-			CG_DrawVignette();
 
 			// If weapon selector is active, check whether draw HUD
 			if (cg.weaponSelectorTime != 0 && trap_Cvar_VariableValue("vr_weaponSelectorWithHud") == 0) {
@@ -2708,10 +2698,6 @@ static void CG_Draw2D()
 #ifdef MISSIONPACK
 			CG_DrawProxWarning();
 #endif
-
-			if(vr->weapon_zoomed) {
-				CG_DrawWeapReticle();
-			}
 
 			CG_DrawCrosshairNames();
 			CG_DrawWeaponSelect();
@@ -2758,6 +2744,37 @@ static void CG_Draw2D()
 	if ( !cg.scoreBoardShowing) {
 		CG_DrawCenterString();
 	}
+}
+
+/*
+=================
+CG_DrawScreen2D - Draws 2D elements always intended for the screen
+=================
+*/
+static void CG_DrawScreen2D()
+{
+	// if we are taking a levelshot for the menu, don't draw anything
+	if ( cg.levelShot ) {
+		return;
+	}
+
+	if ( cg_draw2D.integer == 0 ) {
+		return;
+	}
+
+	if ( cg.snap->ps.pm_type == PM_INTERMISSION ) {
+		return;
+	}
+
+	if ( cg.snap->ps.persistant[PERS_TEAM] != TEAM_SPECTATOR   &&
+	    !cg.showScores && cg.snap->ps.stats[STAT_HEALTH] > 0 ) {
+
+        CG_DrawVignette();
+
+        if(vr->weapon_zoomed) {
+            CG_DrawWeapReticle();
+        }
+    }
 }
 
 
@@ -2897,7 +2914,7 @@ void CG_DrawActive( void ) {
 
 		memset(&ent, 0, sizeof(ent));
 		ent.reType = RT_SPRITE;
-		ent.renderfx = RF_DEPTHHACK;
+		ent.renderfx = RF_DEPTHHACK | RF_FIRST_PERSON;
 
 		VectorCopy(endpos, ent.origin);
 
@@ -2918,9 +2935,12 @@ void CG_DrawActive( void ) {
 		trap_R_HUDBufferStart();
 
 		// draw status bar and other floating elements
-		CG_Draw2D();
+        CG_DrawHUD2D();
 
 		trap_R_HUDBufferEnd();
+
+		//Now draw the screen 2D stuff
+        CG_DrawScreen2D();
 	}
 
 	CG_EmptySceneHackHackHack();

@@ -8,6 +8,6 @@ sprites/vr/hud
 	cull disable
 	{
 		clampmap sprites/plasmaa.tga
-		blendfunc GL_ONE GL_ONE
+		blendfunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }

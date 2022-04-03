@@ -1390,6 +1390,7 @@ typedef struct {
 
 	mat4_t        modelMatrix;
 	mat4_t        projection;
+	qboolean 		isDrawingHUD;
 } glstate_t;
 
 typedef enum {

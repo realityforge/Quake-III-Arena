@@ -1771,6 +1771,7 @@ const void* RB_HUDBuffer( const void* data ) {
 
     if (cmd->start && tr.renderFbo->frameBuffer != tr.hudFbo->frameBuffer)
     {
+        glState.isDrawingHUD = qtrue;
         //keep record of current render fbo and switch to the hud buffer
         tr.backupFrameBuffer = tr.renderFbo->frameBuffer;
         tr.renderFbo->frameBuffer = tr.hudFbo->frameBuffer;
@@ -1790,11 +1791,12 @@ const void* RB_HUDBuffer( const void* data ) {
             ri.Error( "Error binding Framebuffer: %i\n", result );
         }
 
-        qglClearColor( 0.0f, 0.0f,  0.0f, 1.0f );
+        qglClearColor( 0.0f, 0.0f,  0.0f, 0.0f );
         qglClear( GL_COLOR_BUFFER_BIT );
     }
     else if (tr.renderFbo->frameBuffer == tr.hudFbo->frameBuffer)
     {
+        glState.isDrawingHUD = qfalse;
         //restore the true render fbo
         tr.renderFbo->frameBuffer = tr.backupFrameBuffer;
         GL_BindFramebuffer(GL_FRAMEBUFFER, tr.renderFbo->frameBuffer);

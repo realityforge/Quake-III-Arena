@@ -54,9 +54,9 @@ void CG_AdjustFrom640( float *x, float *y, float *w, float *h )
 		*y *= cgs.screenYScale;
 		if (hudflags & HUD_FLAGS_DRAWMODEL)
 		{
-			*w *= (cgs.screenXScale * 2.0f);
+			*w *= (cgs.screenXScale * 4.0f);
 			*x -= (*w / 3);
-			*h *= (cgs.screenYScale * 2.0f);
+			*h *= (cgs.screenYScale * 4.0f);
 			*y -= (*h / 3);
 		}
 		else
