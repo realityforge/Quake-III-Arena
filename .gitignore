@@ -46,6 +46,7 @@ profile
 # Bazel Build dirs
 ############################
 /bazel-*
+/*.bazelrc
 
 # JetBrains IDEs
 ############################

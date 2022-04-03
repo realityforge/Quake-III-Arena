@@ -86,3 +86,6 @@ build:ci --genrule_strategy=standalone
 test:ci --test_strategy=standalone
 # Print test logs for failed tests
 test:ci --test_output=errors
+
+# Try and import a user specific configuration
+try-import %workspace%/user.bazelrc
