@@ -6,7 +6,7 @@ genrule(
         "@q3a_missionpack_pak2//:files",
         "@q3a_missionpack_pak3//:files",
     ],
-    outs = ["pak0.pk3"],
+    outs = ["missionpack_pak0.pk3"],
     cmd = """
 rm -rf pak
 cp -r external/q3a_missionpack_pak0 pak
