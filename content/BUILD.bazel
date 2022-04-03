@@ -1,0 +1,25 @@
+genrule(
+    name = "missionpack",
+    srcs = [
+        "@q3a_missionpack_pak0//:files",
+        "@q3a_missionpack_pak1//:files",
+        "@q3a_missionpack_pak2//:files",
+        "@q3a_missionpack_pak3//:files",
+    ],
+    outs = ["pak0.pk3"],
+    cmd = """
+rm -rf pak
+cp -r external/q3a_missionpack_pak0 pak
+cp -a external/q3a_missionpack_pak1/. pak
+cp -a external/q3a_missionpack_pak2/. pak
+cp -a external/q3a_missionpack_pak3/. pak
+cd pak
+rm *.cfg
+rm *.config
+rm vm/cgame.qvm
+rm vm/qagame.qvm
+rm vm/ui.qvm
+find .  ! -type d |  sed -e "s/^\\.\\///" | awk '{print "\\"" $$0 "\\"" }' | sort | xargs ../$(location @bazel_tools//tools/zip:zipper) c ../$@
+    """,
+    tools = ["@bazel_tools//tools/zip:zipper"],
+)
