@@ -539,7 +539,7 @@ static void CG_DrawStatusBar( void ) {
 		{ 0.5f, 0.5f, 0.5f, 1.0f },     // weapon firing
 		{ 1.0f, 1.0f, 1.0f, 1.0f } };   // health > 100
 
-	if ( cg_drawStatus.integer == 0 ) {
+	if ( trap_Cvar_VariableValue( "vr_hudDrawStatus" ) == 0 ) {
 		return;
 	}
 
@@ -2662,10 +2662,6 @@ static void CG_DrawHUD2D()
 		return;
 	}
 
-	if ( cg_draw2D.integer == 0 ) {
-		return;
-	}
-
 	if ( cg.snap->ps.pm_type == PM_INTERMISSION ) {
 		CG_DrawIntermission();
 		return;
@@ -2685,7 +2681,7 @@ static void CG_DrawHUD2D()
 			}
 
 #ifdef MISSIONPACK
-			if ( cg_drawStatus.integer ) {
+			if ( trap_Cvar_VariableValue( "vr_hudDrawStatus" ) != 0.0f ) {
 				Menu_PaintAll();
 				CG_DrawTimedMenus();
 			}
@@ -2755,10 +2751,6 @@ static void CG_DrawScreen2D()
 {
 	// if we are taking a levelshot for the menu, don't draw anything
 	if ( cg.levelShot ) {
-		return;
-	}
-
-	if ( cg_draw2D.integer == 0 ) {
 		return;
 	}
 
@@ -2898,6 +2890,7 @@ void CG_DrawActive( void ) {
 	}
 
 	//Now draw the HUD shader in the world
+    if (trap_Cvar_VariableValue("vr_hudDrawStatus") == 1.0f)
 	{
 		refEntity_t ent;
 		trace_t trace;
@@ -2917,13 +2910,15 @@ void CG_DrawActive( void ) {
 
             static float hmd_yaw_x = 0.0f;
             static float hmd_yaw_y = 1.0f;
+            static float prevPitch = 0.0f;
             {
-                hmd_yaw_x = 0.97f * hmd_yaw_x + 0.03f * cosf(DEG2RAD(vr->hmdorientation[YAW]));
-                hmd_yaw_y = 0.97f * hmd_yaw_y + 0.03f * sinf(DEG2RAD(vr->hmdorientation[YAW]));
+                hmd_yaw_x = 0.98f * hmd_yaw_x + 0.02f * cosf(DEG2RAD(vr->hmdorientation[YAW]));
+                hmd_yaw_y = 0.98f * hmd_yaw_y + 0.02f * sinf(DEG2RAD(vr->hmdorientation[YAW]));
             }
 
             angles[YAW] = viewYaw + RAD2DEG(atan2(hmd_yaw_y, hmd_yaw_x));
-            angles[PITCH] = 0;
+            angles[PITCH] = 0.98f * prevPitch + 0.02f * vr->hmdorientation[PITCH];
+            prevPitch = angles[PITCH];
             angles[ROLL] = 0;
             AngleVectors(angles, forward, right, up);
 
@@ -2955,6 +2950,8 @@ void CG_DrawActive( void ) {
 	VectorCopy( baseOrg, cg.refdef.vieworg );
 
 	{
+		cg.drawingHUD = qtrue;
+
 		//Tell renderer we want to draw to the HUD buffer
 		trap_R_HUDBufferStart();
 
@@ -2962,6 +2959,8 @@ void CG_DrawActive( void ) {
         CG_DrawHUD2D();
 
 		trap_R_HUDBufferEnd();
+
+		cg.drawingHUD = qfalse;
 
 		//Now draw the screen 2D stuff
         CG_DrawScreen2D();

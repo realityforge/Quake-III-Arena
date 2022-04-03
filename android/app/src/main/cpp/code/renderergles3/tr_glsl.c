@@ -57,6 +57,7 @@ extern const char *fallbackShader_tonemap_vp;
 extern const char *fallbackShader_tonemap_fp;
 
 extern cvar_t *vr_hudDepth;
+extern cvar_t *vr_hudDrawStatus;
 extern vr_clientinfo_t vr;
 
 typedef struct uniformInfo_s
@@ -68,6 +69,7 @@ uniformInfo_t;
 
 typedef enum {
 	HUD_ORTHO_PROJECTION, // Orthographic projection and no stereo view
+	STEREO_ORTHO_PROJECTION, // Orthographic projection with a slight stereo offset per eye
 	VR_PROJECTION,
 	MONO_VR_PROJECTION,
 
@@ -209,6 +211,17 @@ static void GLSL_ViewMatricesUniformBuffer(const float eyeView[32], const float 
             {
                 Mat4Identity( viewMatrices );
                 Mat4Identity( viewMatrices + 16 );
+            }
+            break;
+            case STEREO_ORTHO_PROJECTION:
+            {
+				const auto depth = (6-vr_hudDepth->integer) * 16;
+                vec3_t translate;
+                VectorSet(translate, depth, 0, 0);
+                Mat4Translation( translate, viewMatrices );
+
+                VectorSet(translate, -depth, 0, 0);
+                Mat4Translation( translate, viewMatrices + 16 );
             }
             break;
             case VR_PROJECTION:
@@ -1673,8 +1686,10 @@ void GLSL_PrepareUniformBuffers(void)
 
     Mat4Ortho(0, width, height, 0, 0, 1, orthoProjectionMatrix);
 
-    //ortho projection matrix
+    //ortho projection matrices
     GLSL_ProjectionMatricesUniformBuffer(projectionMatricesBuffer[HUD_ORTHO_PROJECTION],
+            orthoProjectionMatrix);
+    GLSL_ProjectionMatricesUniformBuffer(projectionMatricesBuffer[STEREO_ORTHO_PROJECTION],
             orthoProjectionMatrix);
 
     //VR projection matrix
@@ -1709,7 +1724,14 @@ static GLuint GLSL_CalculateProjection() {
     //as we aren't drawing models to the HUD
     if (Mat4Compare(&orthoProjectionMatrix, glState.projection))
     {
-		result = HUD_ORTHO_PROJECTION;
+        if (glState.isDrawingHUD && vr_hudDrawStatus->integer == 2)
+		{
+			result = STEREO_ORTHO_PROJECTION;
+		}
+		else
+		{
+			result = HUD_ORTHO_PROJECTION;
+		}
     }
 
     return result;

@@ -101,7 +101,7 @@ static VR_t s_VR;
 
 
 static void VR_SetMenuItems( void ) {
-    s_VR.drawhud.curvalue		= trap_Cvar_VariableValue( "cg_drawStatus" ) != 0;
+    s_VR.drawhud.curvalue		= (int)trap_Cvar_VariableValue( "vr_hudDrawStatus" ) % 2;
 	s_VR.huddepth.curvalue		= (int)trap_Cvar_VariableValue( "vr_hudDepth" ) % NUM_HUDDEPTH;
 	s_VR.righthanded.curvalue		= trap_Cvar_VariableValue( "vr_righthanded" ) != 0;
 	s_VR.autoswitch.curvalue		= trap_Cvar_VariableValue( "cg_autoswitch" ) != 0;
@@ -209,7 +209,7 @@ static void VR_Event( void* ptr, int notification ) {
         break;
 
     case ID_DRAWHUD:
-        trap_Cvar_SetValue( "cg_drawStatus", s_VR.drawhud.curvalue );
+        trap_Cvar_SetValue( "vr_hudDrawStatus", s_VR.drawhud.curvalue );
         break;
 
     case ID_ROLLHIT:

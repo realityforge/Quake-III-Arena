@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 backEndData_t	*backEndData;
 backEndState_t	backEnd;
 
+extern cvar_t *vr_hudDrawStatus;
 
 static float	s_flipMatrix[16] = {
 	// convert from our coordinate system (looking down X)
@@ -1772,34 +1773,47 @@ const void* RB_HUDBuffer( const void* data ) {
     if (cmd->start && tr.renderFbo->frameBuffer != tr.hudFbo->frameBuffer)
     {
         glState.isDrawingHUD = qtrue;
-        //keep record of current render fbo and switch to the hud buffer
-        tr.backupFrameBuffer = tr.renderFbo->frameBuffer;
-        tr.renderFbo->frameBuffer = tr.hudFbo->frameBuffer;
 
-        // Render to framebuffer
-        GL_BindFramebuffer(GL_FRAMEBUFFER, tr.hudFbo->frameBuffer);
-        qglBindRenderbuffer(GL_RENDERBUFFER, 0);
-        qglFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tr.hudImage->texnum, 0);
+        //Only set the HUD buffer if we are using the in-world HUD otherwise
+        //just flag we are drawing the hud
+        if (vr_hudDrawStatus->integer == 1)
+		{
+			//keep record of current render fbo and switch to the hud buffer
+			tr.backupFrameBuffer = tr.renderFbo->frameBuffer;
+			tr.renderFbo->frameBuffer = tr.hudFbo->frameBuffer;
 
-        // Attach combined depth+stencil
-        qglFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, tr.hudDepthImage->texnum);
-        qglFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, tr.hudDepthImage->texnum);
+			// Render to framebuffer
+			GL_BindFramebuffer(GL_FRAMEBUFFER, tr.hudFbo->frameBuffer);
+			qglBindRenderbuffer(GL_RENDERBUFFER, 0);
+			qglFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
+									tr.hudImage->texnum, 0);
 
-        GLenum result = qglCheckFramebufferStatus(GL_FRAMEBUFFER);
-        if(result != GL_FRAMEBUFFER_COMPLETE)
-        {
-            ri.Error( "Error binding Framebuffer: %i\n", result );
-        }
+			// Attach combined depth+stencil
+			qglFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER,
+									   tr.hudDepthImage->texnum);
+			qglFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER,
+									   tr.hudDepthImage->texnum);
 
-        qglClearColor( 0.0f, 0.0f,  0.0f, 0.0f );
-        qglClear( GL_COLOR_BUFFER_BIT );
+			GLenum result = qglCheckFramebufferStatus(GL_FRAMEBUFFER);
+			if (result != GL_FRAMEBUFFER_COMPLETE)
+			{
+				ri.Error("Error binding Framebuffer: %i\n", result);
+			}
+
+			qglClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+			qglClear(GL_COLOR_BUFFER_BIT);
+		}
     }
-    else if (tr.renderFbo->frameBuffer == tr.hudFbo->frameBuffer)
+    else if (glState.isDrawingHUD)
     {
         glState.isDrawingHUD = qfalse;
-        //restore the true render fbo
-        tr.renderFbo->frameBuffer = tr.backupFrameBuffer;
-        GL_BindFramebuffer(GL_FRAMEBUFFER, tr.renderFbo->frameBuffer);
+
+		if (vr_hudDrawStatus->integer == 1)
+		{
+			//restore the true render fbo
+			tr.renderFbo->frameBuffer = tr.backupFrameBuffer;
+			GL_BindFramebuffer(GL_FRAMEBUFFER, tr.renderFbo->frameBuffer);
+		}
     }
 
     glState.currentFBO = tr.renderFbo;

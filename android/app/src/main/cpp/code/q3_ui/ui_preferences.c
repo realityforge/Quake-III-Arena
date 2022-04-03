@@ -80,7 +80,7 @@ typedef struct {
 	menuradiobutton_s	synceveryframe;
 	menuradiobutton_s	forcemodel;
 	menulist_s			drawteamoverlay;
-    menuradiobutton_s	drawhud;
+	menulist_s			drawhud;
 	menuradiobutton_s	allowdownload;
 	menuradiobutton_s	holster2d;
 	menulist_s 			gore;
@@ -92,6 +92,14 @@ typedef struct {
 } preferences_t;
 
 static preferences_t s_preferences;
+
+static const char *hud_names[] =
+{
+	"off",
+	"floating",
+	"static (performance)",
+	NULL
+};
 
 static const char *teamoverlay_names[] =
 {
@@ -123,7 +131,7 @@ static void Preferences_SetMenuItems( void ) {
 //	s_preferences.synceveryframe.curvalue	= trap_Cvar_VariableValue( "r_finish" ) != 0;
 	s_preferences.forcemodel.curvalue		= trap_Cvar_VariableValue( "cg_forcemodel" ) != 0;
 	s_preferences.drawteamoverlay.curvalue	= Com_Clamp( 0, 3, trap_Cvar_VariableValue( "cg_drawTeamOverlay" ) );
-    s_preferences.drawhud.curvalue			= trap_Cvar_VariableValue( "cg_drawStatus" ) != 0;
+    s_preferences.drawhud.curvalue			= trap_Cvar_VariableValue( "vr_hudDrawStatus" );
 //	s_preferences.allowdownload.curvalue	= trap_Cvar_VariableValue( "cl_allowDownload" ) != 0;
 	s_preferences.holster2d.curvalue		= trap_Cvar_VariableValue( "cg_weaponSelectorSimple2DIcons" ) != 0;
 	s_preferences.gore.curvalue				= trap_Cvar_VariableValue( "vr_goreLevel" );
@@ -191,7 +199,8 @@ static void Preferences_Event( void* ptr, int notification ) {
         break;
 
     case ID_DRAWHUD:
-        trap_Cvar_SetValue( "cg_drawStatus", s_preferences.drawhud.curvalue );
+        trap_Cvar_SetValue( "vr_hudDrawStatus", s_preferences.drawhud.curvalue );
+		trap_Cvar_SetValue("cg_draw3dIcons", (s_preferences.drawhud.curvalue == 2) ? 0 : 1);
         break;
 
 	case ID_HOLSTER2D:
@@ -446,13 +455,14 @@ static void Preferences_MenuInit( void ) {
 	s_preferences.drawteamoverlay.itemnames			= teamoverlay_names;
 
 	y += BIGCHAR_HEIGHT+2;
-    s_preferences.drawhud.generic.type        = MTYPE_RADIOBUTTON;
-    s_preferences.drawhud.generic.name	      = "Draw HUD:";
+    s_preferences.drawhud.generic.type        = MTYPE_SPINCONTROL;
+    s_preferences.drawhud.generic.name	      = "HUD Mode:";
     s_preferences.drawhud.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
     s_preferences.drawhud.generic.callback    = Preferences_Event;
     s_preferences.drawhud.generic.id          = ID_DRAWHUD;
     s_preferences.drawhud.generic.x	          = PREFERENCES_X_POS;
     s_preferences.drawhud.generic.y	          = y;
+	s_preferences.drawhud.itemnames			  = hud_names;
 
 	y += BIGCHAR_HEIGHT+2;
     s_preferences.selectorwithhud.generic.type        = MTYPE_RADIOBUTTON;

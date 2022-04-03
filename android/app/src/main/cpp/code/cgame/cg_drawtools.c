@@ -46,8 +46,8 @@ Adjusted for resolution and screen aspect ratio
 */
 void CG_AdjustFrom640( float *x, float *y, float *w, float *h )
 {
-/*	if ( cg.snap == NULL ||
-			cg.snap->ps.pm_type != PM_INTERMISSION)*/
+	if ( trap_Cvar_VariableValue("vr_hudDrawStatus") != 2.0f ||
+			!cg.drawingHUD)
 	{
 		// scale for screen sizes
 		*x *= cgs.screenXScale;
@@ -65,11 +65,10 @@ void CG_AdjustFrom640( float *x, float *y, float *w, float *h )
 			*h *= cgs.screenYScale;
 		}
 	}
-	/*
 	else // scale to clearly visible portion of VR screen
 	{
-		float screenXScale = cgs.screenXScale / 2.75f;
-		float screenYScale = cgs.screenYScale / 2.25f;
+		float screenXScale = cgs.screenXScale / 2.8f;
+		float screenYScale = cgs.screenYScale / 2.3f;
 
 		*x *= screenXScale;
 		*y *= screenYScale;
@@ -90,7 +89,6 @@ void CG_AdjustFrom640( float *x, float *y, float *w, float *h )
 		*y += (cg.refdef.height - (480 * screenYScale)) / 2.0f -
 			  trap_Cvar_VariableValue("vr_hudYOffset");
 	}
-	 */
 }
 
 /*
