@@ -14,6 +14,7 @@ cp -a external/q3a_missionpack_pak1/. pak
 cp -a external/q3a_missionpack_pak2/. pak
 cp -a external/q3a_missionpack_pak3/. pak
 cd pak
+rm BUILD.bazel WORKSPACE
 rm *.cfg
 rm *.config
 rm vm/cgame.qvm
