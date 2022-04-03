@@ -2902,15 +2902,29 @@ void CG_DrawActive( void ) {
 		refEntity_t ent;
 		trace_t trace;
 		vec3_t viewaxis[3];
-		vec3_t weaponangles;
-		vec3_t origin, endpos;
+		vec3_t origin, endpos, angles;
+        vec3_t forward, right, up;
 
 		float scale = trap_Cvar_VariableValue("vr_worldscaleScaler");
-        float dist = (trap_Cvar_VariableValue("vr_hudDepth")+1) * 6 * scale;
+        float dist = (trap_Cvar_VariableValue("vr_hudDepth")+2) * 6 * scale;
         float radius = dist / 3.0f;
 
-		VectorMA(cg.refdef.vieworg, dist, cg.refdef.viewaxis[0], endpos);
-		VectorMA(endpos, trap_Cvar_VariableValue("vr_hudYOffset") / 20, cg.refdef.viewaxis[2], endpos);
+        float viewYaw = SHORT2ANGLE(cg.predictedPlayerState.delta_angles[YAW]) + (vr->clientviewangles[YAW] - vr->hmdorientation[YAW]);
+
+        static float hmd_yaw_x = 0.0f;
+        static float hmd_yaw_y = 1.0f;
+        {
+            hmd_yaw_x = 0.95f * hmd_yaw_x + 0.05f * cosf(DEG2RAD(vr->hmdorientation[YAW]));
+            hmd_yaw_y = 0.95f * hmd_yaw_y + 0.05f * sinf(DEG2RAD(vr->hmdorientation[YAW]));
+        }
+
+		angles[YAW] = viewYaw + RAD2DEG(atan2(hmd_yaw_y, hmd_yaw_x));
+        angles[PITCH] = 0;
+        angles[ROLL] = 0;
+        AngleVectors(angles, forward, right, up);
+
+		VectorMA(cg.refdef.vieworg, dist, forward, endpos);
+		VectorMA(endpos, trap_Cvar_VariableValue("vr_hudYOffset") / 20, up, endpos);
 
 		memset(&ent, 0, sizeof(ent));
 		ent.reType = RT_SPRITE;
