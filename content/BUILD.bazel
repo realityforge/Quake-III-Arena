@@ -1,4 +1,46 @@
 genrule(
+    name = "baseq3",
+    srcs = [
+        "@q3a_baseq3_pak0//:files",
+        "@q3a_baseq3_pak1//:files",
+        "@q3a_baseq3_pak2//:files",
+        "@q3a_baseq3_pak3//:files",
+        "@q3a_baseq3_pak4//:files",
+        "@q3a_baseq3_pak5//:files",
+        "@q3a_baseq3_pak6//:files",
+        "@q3a_baseq3_pak7//:files",
+        "@q3a_baseq3_pak8//:files",
+    ],
+    outs = ["baseq3_pak0.pk3"],
+    cmd = """
+rm -rf pak
+cp -r external/q3a_baseq3_pak0 pak
+cp -a external/q3a_baseq3_pak1/. pak
+cp -a external/q3a_baseq3_pak2/. pak
+cp -a external/q3a_baseq3_pak3/. pak
+cp -a external/q3a_baseq3_pak4/. pak
+cp -a external/q3a_baseq3_pak5/. pak
+cp -a external/q3a_baseq3_pak6/. pak
+cp -a external/q3a_baseq3_pak7/. pak
+cp -a external/q3a_baseq3_pak8/. pak
+cd pak
+rm BUILD.bazel WORKSPACE
+rm "!slug.cfg" ares.cfg atari.cfg bg_hunter.cfg bunchy.cfg capt.cfg cash.cfg cracky.cfg danh.cfg diehard.cfg djweaponx.cfg elusive.cfg eric.cfg fido.cfg fredo2.cfg hammerhead.cfg hondopres.cfg jiggleypeff.cfg johnc.cfg keeper.cfg kornelia.cfg lurker.cfg mikes.cfg milehi.cfg nabeo.cfg patOFnbk.cfg paulj.cfg phils.cfg protofiend.cfg psteed.cfg q3atari.cfg q3atariteam.cfg redwood.cfg resdog.cfg scary.cfg scroft.cfg sliderpimp.cfg stryder.cfg thumperx.cfg tim.cfg toddh.cfg z.cfg zaphod.cfg zen.cfg zero_discipline.cfg zoid.cfg
+rm games.log
+rm xian.config
+rm vm/cgame.qvm
+rm vm/qagame.qvm
+rm vm/ui.qvm
+# Test map can be removed
+rm maps/test_bigbox.bsp
+# Source Code Control File ..
+rm botfiles/vssver.scc botfiles/mssccprj.scc
+find .  ! -type d |  sed -e "s/^\\.\\///" | awk '{print "\\"" $$0 "\\"" }' | sort | xargs ../$(location @bazel_tools//tools/zip:zipper) c ../$@
+    """,
+    tools = ["@bazel_tools//tools/zip:zipper"],
+)
+
+genrule(
     name = "missionpack",
     srcs = [
         "@q3a_missionpack_pak0//:files",
