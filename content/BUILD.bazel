@@ -15,8 +15,7 @@ cp -a external/q3a_missionpack_pak2/. pak
 cp -a external/q3a_missionpack_pak3/. pak
 cd pak
 rm BUILD.bazel WORKSPACE
-rm *.cfg
-rm *.config
+rm dpf.cfg duffy.cfg elusive.cfg eric.cfg fredo.cfg hellchick.cfg jim.cfg marty.cfg paulj.cfg phook.cfg rickster.cfg seneca.cfg senecaedit.cfg tim.cfg toddh.cfg totoro.cfg widgeon.cfg xian.cfg zaphod.cfg xian.config
 rm vm/cgame.qvm
 rm vm/qagame.qvm
 rm vm/ui.qvm
