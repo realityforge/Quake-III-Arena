@@ -3262,6 +3262,15 @@ static void UI_Update(const char *name) {
 				trap_Cvar_SetValue( "cg_megagibs", 1);
 				break;
 		}
+	} else if (Q_stricmp(name, "vr_hudDrawStatus") == 0) {
+		switch (val) {
+			case 2:
+				trap_Cvar_SetValue("cg_draw3dIcons", 0);
+				break;
+			default:
+				trap_Cvar_SetValue("cg_draw3dIcons", 1);
+				break;
+		}
 	}
 }
 
