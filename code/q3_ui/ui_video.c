@@ -849,13 +849,6 @@ static void GraphicsOptions_SetMenuItems( void )
 
 void GraphicsOptions_MenuInit( void )
 {
-	static const char *s_driver_names[] =
-	{
-		"Default",
-		"Voodoo",
-		NULL
-	};
-
 	static const char *tq_names[] =
 	{
 		"Default",
