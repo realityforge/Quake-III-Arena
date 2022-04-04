@@ -75,7 +75,7 @@ typedef struct {
 	void	(*AddLightToScene)( const vec3_t org, float intensity, float r, float g, float b );
 	void	(*AddAdditiveLightToScene)( const vec3_t org, float intensity, float r, float g, float b );
 	void	(*RenderScene)( const refdef_t *fd );
-	void	(*HUDBufferStart)( void );
+	void	(*HUDBufferStart)( qboolean clear );
 	void	(*HUDBufferEnd)( void );
 
 	void	(*SetColor)( const float *rgba );	// NULL = 1,1,1,1

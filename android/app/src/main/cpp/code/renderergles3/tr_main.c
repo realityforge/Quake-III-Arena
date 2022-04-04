@@ -1717,7 +1717,8 @@ void R_RenderView (viewParms_t *parms) {
 	// set viewParms.world
 	R_RotateForViewer ();
 
-    GLSL_PrepareUniformBuffers();
+	//can we get away without this?!
+    //GLSL_PrepareUniformBuffers();
 
     R_SetupProjection(&tr.viewParms, r_zproj->value, tr.viewParms.zFar, qtrue);
 

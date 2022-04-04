@@ -474,7 +474,7 @@ void RE_EndFrame( int *frontEndMsec, int *backEndMsec ) {
 	backEnd.pc.msec = 0;
 }
 
-void RE_HUDBufferStart( void )
+void RE_HUDBufferStart( qboolean clear )
 {
     hudBufferCommand_t	*cmd;
 
@@ -486,6 +486,7 @@ void RE_HUDBufferStart( void )
         return;
     }
     cmd->start = qtrue;
+    cmd->clear = clear;
     cmd->commandId = RC_HUD_BUFFER;
 }
 

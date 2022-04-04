@@ -305,11 +305,19 @@ static void RB_Hyperspace( void ) {
 static void SetViewportAndScissor( void ) {
 	GL_SetProjectionMatrix( backEnd.viewParms.projectionMatrix );
 
-	// set the window clipping
-	qglViewport( backEnd.viewParms.viewportX, backEnd.viewParms.viewportY, 
-		backEnd.viewParms.viewportWidth, backEnd.viewParms.viewportHeight );
-	qglScissor( backEnd.viewParms.viewportX, backEnd.viewParms.viewportY, 
-		backEnd.viewParms.viewportWidth, backEnd.viewParms.viewportHeight );
+    if (glState.isDrawingHUD && vr_hudDrawStatus->integer == 1)
+    {
+        qglViewport(0, 0, tr.hudImage->width, tr.hudImage->height);
+        qglScissor(0, 0, tr.hudImage->width, tr.hudImage->height);
+    }
+    else
+    {
+        // set the window clipping
+        qglViewport(backEnd.viewParms.viewportX, backEnd.viewParms.viewportY,
+                    backEnd.viewParms.viewportWidth, backEnd.viewParms.viewportHeight);
+        qglScissor(backEnd.viewParms.viewportX, backEnd.viewParms.viewportY,
+                   backEnd.viewParms.viewportWidth, backEnd.viewParms.viewportHeight);
+    }
 }
 
 /*
@@ -628,8 +636,16 @@ void	RB_SetGL2D (void) {
 	}
 
 	// set 2D virtual screen size
-	qglViewport( 0, 0, width, height );
-	qglScissor( 0, 0, width, height );
+	if (glState.isDrawingHUD && vr_hudDrawStatus->integer == 1)
+    {
+        qglViewport(0, 0, tr.hudImage->width, tr.hudImage->height);
+        qglScissor(0, 0, tr.hudImage->width, tr.hudImage->height);
+    }
+    else
+    {
+        qglViewport(0, 0, width, height);
+        qglScissor(0, 0, width, height);
+    }
 
 	Mat4Ortho(0, width, height, 0, 0, 1, matrix);
 	GL_SetProjectionMatrix(matrix);
@@ -1770,7 +1786,7 @@ const void* RB_HUDBuffer( const void* data ) {
     if(tess.numIndexes)
         RB_EndSurface();
 
-    if (cmd->start && tr.renderFbo->frameBuffer != tr.hudFbo->frameBuffer)
+    if (cmd->start && !glState.isDrawingHUD)
     {
         glState.isDrawingHUD = qtrue;
 
@@ -1800,8 +1816,11 @@ const void* RB_HUDBuffer( const void* data ) {
 				ri.Error("Error binding Framebuffer: %i\n", result);
 			}
 
-			qglClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-			qglClear(GL_COLOR_BUFFER_BIT);
+			if (cmd->clear)
+			{
+				qglClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+				qglClear(GL_COLOR_BUFFER_BIT);
+			}
 		}
     }
     else if (glState.isDrawingHUD)

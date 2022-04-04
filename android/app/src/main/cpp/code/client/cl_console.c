@@ -580,6 +580,8 @@ void Con_DrawNotify (void)
 	currentColor = 7;
 	re.SetColor( g_color_table[currentColor] );
 
+	re.HUDBufferStart(qfalse);
+
 	v = 0;
 	for (i= con.current-NUM_CON_TIMES+1 ; i<=con.current ; i++)
 	{
@@ -612,6 +614,8 @@ void Con_DrawNotify (void)
 	}
 
 	re.SetColor( NULL );
+
+	re.HUDBufferEnd();
 
 	if (Key_GetCatcher( ) & (KEYCATCH_UI | KEYCATCH_CGAME) ) {
 		return;

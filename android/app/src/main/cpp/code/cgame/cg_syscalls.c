@@ -288,8 +288,8 @@ void	trap_R_RenderScene( const refdef_t *fd ) {
 	syscall( CG_R_RENDERSCENE, fd );
 }
 
-void	trap_R_HUDBufferStart( void ) {
-	syscall( CG_R_HUDBUFFER_START );
+void	trap_R_HUDBufferStart( qboolean clear ) {
+	syscall( CG_R_HUDBUFFER_START, clear );
 }
 
 void	trap_R_HUDBufferEnd( void ) {

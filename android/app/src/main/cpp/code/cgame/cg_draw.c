@@ -2912,12 +2912,12 @@ void CG_DrawActive( void ) {
             static float hmd_yaw_y = 1.0f;
             static float prevPitch = 0.0f;
             {
-                hmd_yaw_x = 0.98f * hmd_yaw_x + 0.02f * cosf(DEG2RAD(vr->hmdorientation[YAW]));
-                hmd_yaw_y = 0.98f * hmd_yaw_y + 0.02f * sinf(DEG2RAD(vr->hmdorientation[YAW]));
+                hmd_yaw_x = 0.97f * hmd_yaw_x + 0.03f * cosf(DEG2RAD(vr->hmdorientation[YAW]));
+                hmd_yaw_y = 0.97f * hmd_yaw_y + 0.03f * sinf(DEG2RAD(vr->hmdorientation[YAW]));
             }
 
             angles[YAW] = viewYaw + RAD2DEG(atan2(hmd_yaw_y, hmd_yaw_x));
-            angles[PITCH] = 0.98f * prevPitch + 0.02f * vr->hmdorientation[PITCH];
+            angles[PITCH] = 0.97f * prevPitch + 0.03f * vr->hmdorientation[PITCH];
             prevPitch = angles[PITCH];
             angles[ROLL] = 0;
             AngleVectors(angles, forward, right, up);
@@ -2953,7 +2953,7 @@ void CG_DrawActive( void ) {
 		cg.drawingHUD = qtrue;
 
 		//Tell renderer we want to draw to the HUD buffer
-		trap_R_HUDBufferStart();
+		trap_R_HUDBufferStart(qtrue);
 
 		// draw status bar and other floating elements
         CG_DrawHUD2D();

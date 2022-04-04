@@ -2,7 +2,7 @@
 
 setlocal
 
-set BUILD_TYPE=release
+set BUILD_TYPE=debug
 set VERSION=0.29.3-multiview
 
 @REM Define the following environment variables to sign a release build

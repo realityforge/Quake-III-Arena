@@ -2467,6 +2467,7 @@ typedef struct {
 typedef struct {
 	int commandId;
 	qboolean start;
+	qboolean clear; // Clear the buffer?
 } hudBufferCommand_t;
 
 typedef enum {
@@ -2530,7 +2531,7 @@ void RE_EndFrame( int *frontEndMsec, int *backEndMsec );
 void RE_SetVRHeadsetParms( const ovrMatrix4f *projectionMatrix,
         int renderBuffer );
 #endif
-void RE_HUDBufferStart( void );
+void RE_HUDBufferStart( qboolean clear );
 void RE_HUDBufferEnd( void );
 
 void RE_SaveJPG(char * filename, int quality, int image_width, int image_height,
