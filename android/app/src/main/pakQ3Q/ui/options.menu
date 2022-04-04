@@ -38,7 +38,7 @@ itemDef {
       		name options				
 		group grpOptions
 		text "Crosshair:"
-		rect 227 15 20 20
+		rect 227 35 20 20
 		ownerdraw UI_CROSSHAIR
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 0 
@@ -54,7 +54,7 @@ itemDef {
       		type ITEM_TYPE_YESNO
 		text "Laser Sight:"
 		cvar "vr_lasersight"
-		rect 99 35 256 20
+		rect 99 55 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
       		textaligny 20
@@ -69,7 +69,7 @@ itemDef {
       		type ITEM_TYPE_YESNO
 		text "Simple Items (World):"
 		cvar "cg_simpleItems"
-		rect 99 55 256 20
+		rect 99 75 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
       		textaligny 20
@@ -84,7 +84,7 @@ itemDef {
       		type ITEM_TYPE_YESNO
 		text "Simple Items (Weapon Wheel):"
 		cvar "cg_weaponSelectorSimple2DIcons"
-		rect 99 75 256 20
+		rect 99 95 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
       		textaligny 20
@@ -99,7 +99,7 @@ itemDef {
       		type ITEM_TYPE_YESNO
 		text "Show Item In Hand:"
 		cvar "vr_showItemInHand"
-		rect 99 95 256 20
+		rect 99 115 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
       		textaligny 20
@@ -114,7 +114,7 @@ itemDef {
       		type ITEM_TYPE_YESNO
 		text "Marks On Walls:"
 		cvar "cg_marks"
-		rect 99 115 256 20
+		rect 99 135 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
       		textaligny 20
@@ -129,7 +129,7 @@ itemDef {
       		type ITEM_TYPE_YESNO
 		text "Show Floating Scores:"
 		cvar "cg_scorePlums"
-		rect 99 135 256 20
+		rect 99 155 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
       		textaligny 20
@@ -145,7 +145,7 @@ itemDef {
 		type ITEM_TYPE_MULTI	
 		cvar "cg_brassTime"
 		cvarFloatList { "High" 2500 "Med" 1250 "Off" 0 }
-		rect 99 155 256 20
+		rect 99 175 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
       		textaligny 20
@@ -160,21 +160,6 @@ itemDef {
       		type ITEM_TYPE_YESNO
 		text "Identify Target:"
 		cvar "cg_drawCrosshairNames"
-		rect 99 175 256 20
-      		textalign ITEM_ALIGN_RIGHT
-      		textalignx 128
-      		textaligny 20
-		textscale .3
-      		forecolor 1 1 1 1
-      		visible 1 
-    		}
-
-	itemDef {
-      		name options
-		group grpOptions
-      		type ITEM_TYPE_YESNO
-		text "Low Quality Sky:"
-		cvar "r_fastsky"
 		rect 99 195 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
@@ -278,9 +263,10 @@ itemDef {
 itemDef {
       		name options
 		group grpOptions
-      		type ITEM_TYPE_YESNO
-		text "Draw HUD:"
-		cvar "cg_drawStatus"
+      		type ITEM_TYPE_MULTI
+		text "HUD Mode:"
+		cvar "vr_hudDrawStatus"
+		cvarFloatList { "Off" 0 "Floating" 1 "Simple" 2 }
 		rect 99 335 256 20
       		textalign ITEM_ALIGN_RIGHT
       		textalignx 128
@@ -288,6 +274,7 @@ itemDef {
 		textscale .3
       		forecolor 1 1 1 1
       		visible 1
+      		action { uiScript update "vr_hudDrawStatus" }
 	}
 
 itemDef {
