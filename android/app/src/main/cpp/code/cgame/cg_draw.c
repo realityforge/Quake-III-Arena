@@ -304,6 +304,8 @@ void CG_Draw3DModel( float x, float y, float w, float h, qhandle_t model, qhandl
 
 	refdef.time = cg.time;
 
+	refdef.isHUD = qtrue;
+
 	trap_R_ClearScene();
 	trap_R_AddRefEntityToScene( &ent );
 	trap_R_RenderScene( &refdef );
@@ -2890,7 +2892,7 @@ void CG_DrawActive( void ) {
 	}
 
 	//Now draw the HUD shader in the world
-    if (trap_Cvar_VariableValue("vr_hudDrawStatus") == 1.0f)
+    if (trap_Cvar_VariableValue("vr_hudDrawStatus") != 2.0f)
 	{
 		refEntity_t ent;
 		trace_t trace;

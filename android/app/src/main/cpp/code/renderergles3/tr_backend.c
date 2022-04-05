@@ -26,8 +26,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 backEndData_t	*backEndData;
 backEndState_t	backEnd;
 
-extern cvar_t *vr_hudDrawStatus;
-
 static float	s_flipMatrix[16] = {
 	// convert from our coordinate system (looking down X)
 	// to OpenGL's coordinate system (looking down -Z)
@@ -305,19 +303,11 @@ static void RB_Hyperspace( void ) {
 static void SetViewportAndScissor( void ) {
 	GL_SetProjectionMatrix( backEnd.viewParms.projectionMatrix );
 
-    if (glState.isDrawingHUD && vr_hudDrawStatus->integer == 1)
-    {
-        qglViewport(0, 0, tr.hudImage->width, tr.hudImage->height);
-        qglScissor(0, 0, tr.hudImage->width, tr.hudImage->height);
-    }
-    else
-    {
-        // set the window clipping
-        qglViewport(backEnd.viewParms.viewportX, backEnd.viewParms.viewportY,
-                    backEnd.viewParms.viewportWidth, backEnd.viewParms.viewportHeight);
-        qglScissor(backEnd.viewParms.viewportX, backEnd.viewParms.viewportY,
-                   backEnd.viewParms.viewportWidth, backEnd.viewParms.viewportHeight);
-    }
+	// set the window clipping
+	qglViewport(backEnd.viewParms.viewportX, backEnd.viewParms.viewportY,
+				backEnd.viewParms.viewportWidth, backEnd.viewParms.viewportHeight);
+	qglScissor(backEnd.viewParms.viewportX, backEnd.viewParms.viewportY,
+			   backEnd.viewParms.viewportWidth, backEnd.viewParms.viewportHeight);
 }
 
 /*
@@ -636,7 +626,7 @@ void	RB_SetGL2D (void) {
 	}
 
 	// set 2D virtual screen size
-	if (glState.isDrawingHUD && vr_hudDrawStatus->integer == 1)
+	if (glState.isDrawingHUD && vr_hudDrawStatus->integer != 2)
     {
         qglViewport(0, 0, tr.hudImage->width, tr.hudImage->height);
         qglScissor(0, 0, tr.hudImage->width, tr.hudImage->height);
@@ -1768,8 +1758,6 @@ const void* RB_SwitchEye( const void* data ) {
 		glState.currentFBO = tr.renderFbo;
 	}
 
-	tr.refdef.stereoFrame = cmd->stereoFrame;
-
 	return (const void*)(cmd + 1);
 }
 
@@ -1790,9 +1778,7 @@ const void* RB_HUDBuffer( const void* data ) {
     {
         glState.isDrawingHUD = qtrue;
 
-        //Only set the HUD buffer if we are using the in-world HUD otherwise
-        //just flag we are drawing the hud
-        if (vr_hudDrawStatus->integer == 1)
+        if (vr_hudDrawStatus->integer != 2)
 		{
 			//keep record of current render fbo and switch to the hud buffer
 			tr.backupFrameBuffer = tr.renderFbo->frameBuffer;
@@ -1827,7 +1813,7 @@ const void* RB_HUDBuffer( const void* data ) {
     {
         glState.isDrawingHUD = qfalse;
 
-		if (vr_hudDrawStatus->integer == 1)
+		if (vr_hudDrawStatus->integer != 2)
 		{
 			//restore the true render fbo
 			tr.renderFbo->frameBuffer = tr.backupFrameBuffer;

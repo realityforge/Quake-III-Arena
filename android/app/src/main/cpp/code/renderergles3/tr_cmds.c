@@ -429,8 +429,6 @@ void RE_BeginFrame( stereoFrame_t stereoFrame ) {
 		}
 	}
 	
-	tr.refdef.stereoFrame = stereoFrame;
-
 	GLSL_PrepareUniformBuffers();
 }
 
@@ -516,9 +514,10 @@ void R_Mat4Transpose( const float in[4][4], float* out ) {
 }
 
 
-void RE_SetVRHeadsetParms( const ovrMatrix4f *projectionMatrix,
+void RE_SetVRHeadsetParms( const ovrMatrix4f *projectionMatrix,  const ovrMatrix4f *nonVRProjectionMatrix,
         int renderBuffer ) {
 	R_Mat4Transpose(projectionMatrix->M, tr.vrParms.projection);
+	R_Mat4Transpose(nonVRProjectionMatrix->M, tr.vrParms.monoVRProjection);
 	tr.vrParms.renderBuffer = renderBuffer;
 	tr.vrParms.valid = qtrue;
 }

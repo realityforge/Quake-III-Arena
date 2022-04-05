@@ -46,19 +46,17 @@ Adjusted for resolution and screen aspect ratio
 */
 void CG_AdjustFrom640( float *x, float *y, float *w, float *h )
 {
+	int hudDrawStatus = (int)trap_Cvar_VariableValue("vr_hudDrawStatus");
     //If using floating HUD and we are drawing it, then no need to scale as the HUD
     //buffer is 640x480
     float screenXScale = cgs.screenXScale;
     float screenYScale = cgs.screenYScale;
-    if ( trap_Cvar_VariableValue("vr_hudDrawStatus") == 1.0f &&
-         cg.drawingHUD)
+    if ( hudDrawStatus == 1 && cg.drawingHUD)
     {
-        screenXScale = 1.0f;
-        screenYScale = 1.0f;
+        return;
     }
 
-    if ( trap_Cvar_VariableValue("vr_hudDrawStatus") != 2.0f ||
-			!cg.drawingHUD)
+    if (!cg.drawingHUD)
 	{
 		*x *= screenXScale;
 		*y *= screenYScale;

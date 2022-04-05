@@ -75,7 +75,7 @@ void SCR_AdjustFrom640( float *x, float *y, float *w, float *h ) {
 	xscale = cls.glconfig.vidWidth / 640.0;
 	yscale = cls.glconfig.vidHeight / 480.0;
 
-	if (vr.virtual_screen || vr_hudDrawStatus->integer == 1) {
+	if (vr.virtual_screen || vr_hudDrawStatus->integer != 2) {
 		if (x) {
 			*x *= xscale;
 		}

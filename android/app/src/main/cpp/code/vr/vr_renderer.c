@@ -308,6 +308,10 @@ void VR_DrawFrame( engine_t* engine ) {
 	const ovrMatrix4f projectionMatrix = ovrMatrix4f_CreateProjectionFov(
 			fov_x / vr.weapon_zoomLevel, fov_y / vr.weapon_zoomLevel, 0.0f, 0.0f, 1.0f, 0.0f );
 
+	//Projection used for drawing HUD models etc
+	const ovrMatrix4f monoVRMatrix = ovrMatrix4f_CreateProjectionFov(
+			30.0f, 30.0f, 0.0f, 0.0f, 1.0f, 0.0f );
+
     int eyeW, eyeH;
     VR_GetResolution(engine, &eyeW, &eyeH);
 
@@ -334,7 +338,7 @@ void VR_DrawFrame( engine_t* engine ) {
 		frameDesc.LayerCount = 1;
 		frameDesc.Layers = layers;
 
-        re.SetVRHeadsetParms(&projectionMatrix,
+        re.SetVRHeadsetParms(&projectionMatrix, &monoVRMatrix,
                              engine->framebuffers.framebuffers[engine->framebuffers.swapchainIndex]);
 
 		Com_Frame();
@@ -365,7 +369,7 @@ void VR_DrawFrame( engine_t* engine ) {
 
         VR_ClearFrameBuffer(engine->framebuffers.framebuffers[engine->framebuffers.swapchainIndex], eyeW, eyeH);
 
-		re.SetVRHeadsetParms(&projectionMatrix,
+		re.SetVRHeadsetParms(&projectionMatrix, &monoVRMatrix,
 							 engine->framebuffers.framebuffers[engine->framebuffers.swapchainIndex]);
 
 		Com_Frame();

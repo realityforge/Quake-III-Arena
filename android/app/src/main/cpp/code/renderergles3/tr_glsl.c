@@ -56,10 +56,6 @@ extern const char *fallbackShader_texturecolor_fp;
 extern const char *fallbackShader_tonemap_vp;
 extern const char *fallbackShader_tonemap_fp;
 
-extern cvar_t *vr_hudDepth;
-extern cvar_t *vr_hudDrawStatus;
-extern vr_clientinfo_t vr;
-
 typedef struct uniformInfo_s
 {
 	char *name;
@@ -1704,8 +1700,9 @@ void GLSL_PrepareUniformBuffers(void)
     GLSL_ProjectionMatricesUniformBuffer(projectionMatricesBuffer[VR_PROJECTION],
             tr.vrParms.projection);
 
+    //Used for drawing models
     GLSL_ProjectionMatricesUniformBuffer(projectionMatricesBuffer[MONO_VR_PROJECTION],
-                                         tr.vrParms.projection);
+                                         tr.vrParms.monoVRProjection);
 
     //Set all view matrices
 	GLSL_ViewMatricesUniformBuffer(tr.viewParms.world.eyeViewMatrix, tr.viewParms.world.modelView);
@@ -1733,7 +1730,7 @@ static GLuint GLSL_CalculateProjection() {
     {
         if (glState.isDrawingHUD)
         {
-            if (vr_hudDrawStatus->integer == 1)
+            if (vr_hudDrawStatus->integer != 2)
             {
                 result = HUDBUFFER_ORTHO_PROJECTION;
             }

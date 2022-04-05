@@ -131,6 +131,8 @@ typedef struct {
 	vec3_t		vieworg;
 	vec3_t		viewaxis[3];		// transformation matrix
 
+	qboolean	isHUD;
+
 	// time in milliseconds for shader effects and other time dependent rendering issues
 	int			time;
 

@@ -35,6 +35,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "tr_postprocess.h"
 #include "../renderercommon/iqm.h"
 #include "../renderercommon/qgl.h"
+#include "../vr/vr_clientinfo.h"
+
+extern cvar_t *vr_hudDepth;
+extern cvar_t *vr_hudDrawStatus;
+extern vr_clientinfo_t vr;
 
 #define GLE(ret, name, ...) extern name##proc * qgl##name;
 QGL_1_1_PROCS;
@@ -732,7 +737,7 @@ typedef struct {
 	vec3_t		vieworg;
 	vec3_t		viewaxis[3];		// transformation matrix
 
-	stereoFrame_t	stereoFrame;
+	qboolean    isHUD;
 
 	int			time;				// time in milliseconds for shader effects and other time dependent rendering issues
 	int			rdflags;			// RDF_NOWORLDMODEL, etc
@@ -846,6 +851,7 @@ typedef struct {
 typedef struct {
 	qboolean	valid;
 	float		projection[16];
+	float		monoVRProjection[16];
 	int			renderBuffer;
 	int			renderBufferOriginal;
 } vrParms_t;
@@ -2528,7 +2534,7 @@ void RE_StretchPic ( float x, float y, float w, float h,
 void RE_BeginFrame( stereoFrame_t stereoFrame );
 void RE_EndFrame( int *frontEndMsec, int *backEndMsec );
 #if __ANDROID__
-void RE_SetVRHeadsetParms( const ovrMatrix4f *projectionMatrix,
+void RE_SetVRHeadsetParms( const ovrMatrix4f *projectionMatrix,  const ovrMatrix4f *nonVRProjectionMatrix,
         int renderBuffer );
 #endif
 void RE_HUDBufferStart( qboolean clear );

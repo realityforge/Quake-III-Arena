@@ -85,7 +85,7 @@ void VR_InitCvars( void )
 	vr_weaponSelectorMode = Cvar_Get ("vr_weaponSelectorMode", "0", CVAR_ARCHIVE);
 	vr_weaponSelectorWithHud = Cvar_Get ("vr_weaponSelectorWithHud", "0", CVAR_ARCHIVE);
 	vr_goreLevel = Cvar_Get ("vr_goreLevel", "2", CVAR_ARCHIVE);
-	vr_hudDrawStatus = Cvar_Get ("vr_hudDrawStatus", "2", CVAR_ARCHIVE); // 0 - no hud, 1 - in-world hud, 2 - performance (static HUD)
+	vr_hudDrawStatus = Cvar_Get ("vr_hudDrawStatus", "1", CVAR_ARCHIVE); // 0 - no hud, 1 - in-world hud, 2 - performance (static HUD)
 
 	// Values are:  scale,right,up,forward,pitch,yaw,roll
 	// VALUES PROVIDED BY SkillFur - Thank-you!
