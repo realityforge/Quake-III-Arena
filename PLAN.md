@@ -26,6 +26,10 @@ These tasks are intended to be undertaken in the future but have not been priori
     - https://lvlworld.com/
     - https://www.moddb.com/games/quake-iii-arena/addons/dreamcast-mappack-mpsp-music-repack
 
+* Incorporate unlagged mod code either directly or via reimplementation
+  * https://openarena.fandom.com/wiki/ModCompat/Unlagged
+  * https://www.ra.is/unlagged/intro.html
+
 * Add semi-automated performance profiling by being able to process demos and record the statistics.
 * Translate PAK files into a more modern format with explicit dependencies.
 * Change the maps and other media to use content based addressing when cross-referencing between maps, shaders, materials etc.
