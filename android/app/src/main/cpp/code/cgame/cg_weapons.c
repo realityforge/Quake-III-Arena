@@ -1822,7 +1822,7 @@ void CG_AddViewWeapon( playerState_t *ps ) {
 	}
 
 	hand.hModel = weapon->handsModel;
-	hand.renderfx = RF_DEPTHHACK | RF_FIRST_PERSON | RF_MINLIGHT;
+	hand.renderfx = /*RF_DEPTHHACK |*/ RF_FIRST_PERSON | RF_MINLIGHT;
 
 	//scale the whole model
 	for ( int i = 0; i < 3; i++ ) {

@@ -29,6 +29,7 @@ int g_console_field_width = 78;
 
 extern vr_clientinfo_t vr;
 extern cvar_t *vr_hudDrawStatus;
+extern cvar_t *vr_showConsoleMessages;
 
 #define	NUM_CON_TIMES 4
 
@@ -606,7 +607,7 @@ void Con_DrawNotify (void)
 				re.SetColor( g_color_table[currentColor] );
 			}
 
-			if (vr.show_console)
+			if (vr_showConsoleMessages->integer)
 			{
 				SCR_DrawSmallChar(
 						cl_conXOffset->integer + con.xadjust + (x + 1) * SMALLCHAR_WIDTH + xadjust,

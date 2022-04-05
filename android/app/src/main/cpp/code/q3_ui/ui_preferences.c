@@ -52,7 +52,8 @@ GAME OPTIONS MENU
 #define ID_GORE 			    137
 #define ID_SHOWINHAND		    138
 #define ID_SELECTORWITHHUD		139
-#define ID_BACK					140
+#define ID_SHOWCONSOLE			140
+#define ID_BACK					141
 
 #define	NUM_CROSSHAIRS			10
 #define	NUM_GORE    			4
@@ -78,6 +79,7 @@ typedef struct {
 	menulist_s 			gore;
 	menuradiobutton_s	showinhand;
 	menuradiobutton_s	selectorwithhud;
+	menuradiobutton_s	showconsole;
 	menubitmap_s		back;
 
 	qhandle_t			crosshairShader[NUM_CROSSHAIRS];
@@ -125,6 +127,7 @@ static void Preferences_SetMenuItems( void ) {
 	s_preferences.gore.curvalue				= trap_Cvar_VariableValue( "vr_goreLevel" );
 	s_preferences.showinhand.curvalue		= trap_Cvar_VariableValue( "vr_showItemInHand" ) != 0;
 	s_preferences.selectorwithhud.curvalue	= trap_Cvar_VariableValue( "vr_weaponSelectorWithHud" ) != 0;
+	s_preferences.showconsole.curvalue		= trap_Cvar_VariableValue( "vr_showConsoleMessages" ) != 0;
 }
 
 
@@ -210,6 +213,10 @@ static void Preferences_Event( void* ptr, int notification ) {
 
 	case ID_SELECTORWITHHUD:
 		trap_Cvar_SetValue( "vr_weaponSelectorWithHud", s_preferences.selectorwithhud.curvalue);
+        break;
+
+	case ID_SHOWCONSOLE:
+		trap_Cvar_SetValue( "vr_showConsoleMessages", s_preferences.showconsole.curvalue);
         break;
 
 	case ID_BACK:
@@ -417,6 +424,15 @@ static void Preferences_MenuInit( void ) {
     s_preferences.selectorwithhud.generic.x	          = PREFERENCES_X_POS;
     s_preferences.selectorwithhud.generic.y	          = y;
 
+	y += BIGCHAR_HEIGHT+2;
+    s_preferences.showconsole.generic.type        = MTYPE_RADIOBUTTON;
+    s_preferences.showconsole.generic.name	      = "Show Console Messages:";
+    s_preferences.showconsole.generic.flags	      = QMF_PULSEIFFOCUS|QMF_SMALLFONT;
+    s_preferences.showconsole.generic.callback    = Preferences_Event;
+    s_preferences.showconsole.generic.id          = ID_SHOWCONSOLE;
+    s_preferences.showconsole.generic.x	          = PREFERENCES_X_POS;
+    s_preferences.showconsole.generic.y	          = y;
+
 	y += BIGCHAR_HEIGHT+16;
 	s_preferences.gore.generic.type		= MTYPE_SPINCONTROL;
 	s_preferences.gore.generic.flags		= QMF_PULSEIFFOCUS|QMF_SMALLFONT;
@@ -456,6 +472,7 @@ static void Preferences_MenuInit( void ) {
 	Menu_AddItem( &s_preferences.menu, &s_preferences.gore );
 	Menu_AddItem( &s_preferences.menu, &s_preferences.showinhand );
 	Menu_AddItem( &s_preferences.menu, &s_preferences.selectorwithhud );
+	Menu_AddItem( &s_preferences.menu, &s_preferences.showconsole );
 
 	Menu_AddItem( &s_preferences.menu, &s_preferences.back );
 

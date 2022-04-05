@@ -2914,12 +2914,12 @@ void CG_DrawActive( void ) {
             static float hmd_yaw_y = 1.0f;
             static float prevPitch = 0.0f;
             {
-                hmd_yaw_x = 0.97f * hmd_yaw_x + 0.03f * cosf(DEG2RAD(vr->hmdorientation[YAW]));
-                hmd_yaw_y = 0.97f * hmd_yaw_y + 0.03f * sinf(DEG2RAD(vr->hmdorientation[YAW]));
+                hmd_yaw_x = 0.95f * hmd_yaw_x + 0.05f * cosf(DEG2RAD(vr->hmdorientation[YAW]));
+                hmd_yaw_y = 0.95f * hmd_yaw_y + 0.05f * sinf(DEG2RAD(vr->hmdorientation[YAW]));
             }
 
             angles[YAW] = viewYaw + RAD2DEG(atan2(hmd_yaw_y, hmd_yaw_x));
-            angles[PITCH] = 0.97f * prevPitch + 0.03f * vr->hmdorientation[PITCH];
+            angles[PITCH] = 0.95f * prevPitch + 0.05f * vr->hmdorientation[PITCH];
             prevPitch = angles[PITCH];
             angles[ROLL] = 0;
             AngleVectors(angles, forward, right, up);
@@ -2952,20 +2952,23 @@ void CG_DrawActive( void ) {
 	VectorCopy( baseOrg, cg.refdef.vieworg );
 
 	{
-		cg.drawingHUD = qtrue;
-
-		//Tell renderer we want to draw to the HUD buffer
-		trap_R_HUDBufferStart(qtrue);
-
-		// draw status bar and other floating elements
-        CG_DrawHUD2D();
-
-		trap_R_HUDBufferEnd();
-
-		cg.drawingHUD = qfalse;
-
-		//Now draw the screen 2D stuff
+        //Now draw the screen 2D stuff
         CG_DrawScreen2D();
+
+        if (!vr->weapon_zoomed)
+		{
+			cg.drawingHUD = qtrue;
+
+			//Tell renderer we want to draw to the HUD buffer
+			trap_R_HUDBufferStart(qtrue);
+
+			// draw status bar and other floating elements
+			CG_DrawHUD2D();
+
+			trap_R_HUDBufferEnd();
+
+			cg.drawingHUD = qfalse;
+		}
 	}
 
 	CG_EmptySceneHackHackHack();

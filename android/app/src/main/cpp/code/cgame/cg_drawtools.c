@@ -49,21 +49,19 @@ void CG_AdjustFrom640( float *x, float *y, float *w, float *h )
 	int hudDrawStatus = (int)trap_Cvar_VariableValue("vr_hudDrawStatus");
     //If using floating HUD and we are drawing it, then no need to scale as the HUD
     //buffer is 640x480
-    float screenXScale = cgs.screenXScale;
-    float screenYScale = cgs.screenYScale;
     if ( hudDrawStatus == 1 && cg.drawingHUD)
     {
         return;
     }
 
-    if (!cg.drawingHUD)
+   if (!cg.drawingHUD)
 	{
-		*x *= screenXScale;
-		*y *= screenYScale;
-		*w *= screenXScale;
-		*h *= screenYScale;
+		*x *= cgs.screenXScale;
+		*y *= cgs.screenYScale;
+		*w *= cgs.screenXScale;
+		*h *= cgs.screenYScale;
 	}
-	else // scale to clearly visible portion of VR screen
+	else  // scale to clearly visible portion of VR screen
 	{
 		float screenXScale = cgs.screenXScale / 2.8f;
 		float screenYScale = cgs.screenYScale / 2.3f;
