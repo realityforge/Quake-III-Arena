@@ -672,7 +672,7 @@ static int CG_CalcViewValues( ) {
 
 	// intermission view
 	static float hmdYaw = 0;
-	if ( ps->pm_type == PM_INTERMISSION ) {
+	if ( (ps->pm_type == PM_INTERMISSION || ps->pm_type == PM_SPECTATOR) && !vr->virtual_screen ) {
 		VectorCopy( ps->origin, cg.refdef.vieworg );
 
 		static vec3_t	mins = { -1, -1, -1 };
