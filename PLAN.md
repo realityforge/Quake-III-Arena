@@ -25,6 +25,10 @@ These tasks are intended to be undertaken in the future but have not been priori
     - https://discord.com/channels/641218476198985728/942433811218714664/945439823190184007
     - https://lvlworld.com/
     - https://www.moddb.com/games/quake-iii-arena/addons/dreamcast-mappack-mpsp-music-repack
+  + Incorporate other media packs like "High Quality 2D elements"
+    - https://discord.com/channels/641218476198985728/943585642942709810/959453464293949540
+    - https://www.moddb.com/mods/high-quality-quake/downloads/hqq-v37 (Is this it with more stuff?)
+  - Incorporate various other high quality media packs like "Neural Upscale" @ https://www.moddb.com/mods/quake-3-neural-upscale (Not great for Quest variant but good for desktop?)
 
 * Incorporate unlagged mod code either directly or via reimplementation
   * https://openarena.fandom.com/wiki/ModCompat/Unlagged
