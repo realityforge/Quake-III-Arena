@@ -1,9 +1,7 @@
 # TODO: Separate out headers for cvars to here? Actually lets create a much better console var library that is probably inspired by the work in q2java modernized
 cc_library(
     name = "cvar",
-    srcs = [
-        "cvar.c",
-    ],
+    srcs = ["cvar.c"],
     visibility = [
         "//code/client:__pkg__",
         "//code/server:__pkg__",
@@ -20,9 +18,7 @@ cc_library(
         "vm.c",
         "vm_interpreted.c",
     ],
-    hdrs = [
-        "vm_local.h",
-    ],
+    hdrs = ["vm_local.h"],
     visibility = [
         "//code/client:__pkg__",
         "//code/server:__pkg__",
@@ -35,9 +31,7 @@ cc_library(
 
 cc_library(
     name = "files",
-    srcs = [
-        "files.c",
-    ],
+    srcs = ["files.c"],
     visibility = ["//code/client:__pkg__"],
     deps = [
         ":qcommon",
@@ -48,9 +42,7 @@ cc_library(
 
 cc_library(
     name = "files-dedicated",
-    srcs = [
-        "files.c",
-    ],
+    srcs = ["files.c"],
     defines = ["DEDICATED"],
     visibility = ["//code/server:__pkg__"],
     deps = [
