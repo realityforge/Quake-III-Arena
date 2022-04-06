@@ -38,14 +38,6 @@ void MD4Init (MD4_CTX *);
 void MD4Update (MD4_CTX *, const unsigned char *, unsigned int);
 void MD4Final (unsigned char [16], MD4_CTX *);
 
-#ifndef __VECTORC  
-void memset (void* dest, const int val, const size_t count);
-void memcpy (void* dest, const void* src, const size_t count);
-#else
-#define memset memset
-#define memcpy memcpy
-#endif
-
 /* MD4C.C - RSA Data Security, Inc., MD4 message-digest algorithm */
 /* Copyright (C) 1990-2, RSA Data Security, Inc. All rights reserved.
   
