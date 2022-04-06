@@ -80,7 +80,7 @@ cvar_t	*com_cameraMode;
 #if defined(_WIN32) && defined(_DEBUG)
 cvar_t	*com_noErrorInterrupt;
 #endif
-#ifdef DEDICATED
+#ifndef DEDICATED
 cvar_t	*com_maxfps;
 #endif
 
