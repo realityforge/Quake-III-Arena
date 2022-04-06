@@ -11,6 +11,10 @@
 .DS_Store
 Icon?
 
+# Bazel Build dirs
+############################
+/bazel-*
+/*.bazelrc
 
 # JetBrains IDEs
 ############################
