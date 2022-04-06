@@ -819,7 +819,10 @@ void *Z_TagMallocDebug( int size, int tag, char *label, char *file, int line ) {
 #else
 void *Z_TagMalloc( int size, int tag ) {
 #endif
-	int		extra, allocSize;
+	int		extra;
+#ifdef ZONE_DEBUG
+    int		allocSize;
+#endif
 	memblock_t	*start, *rover, *new, *base;
 	memzone_t *zone;
 
@@ -834,7 +837,9 @@ void *Z_TagMalloc( int size, int tag ) {
 		zone = mainzone;
 	}
 
+#ifdef ZONE_DEBUG
 	allocSize = size;
+#endif
 	//
 	// scan through the block list looking for the first free block
 	// of sufficient size
