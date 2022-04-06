@@ -1,0 +1,87 @@
+#
+# Bazel adds additional config if the relevant config is specified. A config named X can be specified
+# via --config=X and multiple config are valid. The config options supported by this build are as follows:
+#
+# Macosx options
+#     darwin_arm64:
+#
+# Other build options:
+#     dbg:              Build with debug info
+#
+# Note that the inspiration from this comes from the https://github.com/tensorflow/tensorflow/blob/master/.bazelrc
+# and that .bazelrc should be used as a source of future configuration and maybe also https://github.com/envoyproxy/envoy/blob/main/.bazelrc
+
+#
+# Default build options. These are applied first and unconditionally.
+#
+
+# Make Bazel print out all options from rc files.
+build --announce_rc
+
+# Use an environment with a static value for PATH and does not inherit LD_LIBRARY_PATH or TMPDIR
+# The goal is to enable cross-user caching when a shared cache is used
+build --incompatible_strict_action_env
+
+# Lock down some runtime versions
+build --host_force_python=PY3
+build --java_runtime_version=remotejdk_11
+build --tool_java_runtime_version=remotejdk_11
+
+# Picks up host-OS-specific config lines from bazelrc files. Supported OS identifiers are linux, macos, windows, freebsd, and openbsd.
+# Enabling this flag is equivalent to using --config=linux on Linux, --config=windows on Windows, etc.
+build --enable_platform_specific_config
+
+# default to optimizing compilation
+build --compilation_mode=opt
+
+# If a command fails, print out the full command line.
+build --verbose_failures
+
+#
+# Enable some warnings.
+#
+# See https://embeddedartistry.com/blog/2017/06/07/warnings-weverything-and-the-kitchen-sink/ for descriptions on what these entail.
+#
+build --copt -Wall
+build --copt -Wpedantic
+
+# The following warnings produce too many positives and will only be enabled after the code has been moved to bazel
+# and we are reasonably sure we have a stable build environment
+# build --copt -Wextra
+# build --copt -Weverything
+
+#
+# Config specific build options.
+#
+
+# Use debug compilation mode which includes the debug symbols
+build:dbg --compilation_mode=dbg
+
+# Define DEBUG which turns on debugging in some parts of the library
+build:dbg --copt -DDEBUG
+
+# Tell the compiler to perform more aggressive floating-point optimizations that are not fully compliant
+# with the ISO C or C++ standard. Numerically robust floating-point programs are expected to behave correctly.
+build:linux --copt -ffast-math
+build:macos --copt -ffast-math
+
+# Sets the default Apple platform to macOS.
+build:macos --apple_platform_type=macos
+
+# Settings for MacOS on ARM CPUs.
+build:macos_arm64 --cpu=darwin_arm64
+
+# When printing the location part of messages, attempt to use a path relative to the workspace directory
+common:ci --attempt_to_print_relative_paths
+
+# prints extra debugging information on execution
+build:ci --sandbox_debug
+build:ci --spawn_strategy=standalone
+build:ci --genrule_strategy=standalone
+
+test:ci --test_strategy=standalone
+# Print test logs for failed tests
+test:ci --test_output=errors
+
+# Try and import a user specific configuration
+try-import %workspace%/user.bazelrc
