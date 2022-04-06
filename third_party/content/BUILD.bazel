@@ -1,0 +1,6 @@
+exports_files([
+    "q3a_baseq3_pak0.BUILD.bazel",
+    "q3a_missionpack_pak0.BUILD.bazel",
+    "q3a_missionpack_pak1.BUILD.bazel",
+    "q3a_missionpack_pak3.BUILD.bazel",
+])

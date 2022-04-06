@@ -1,0 +1,48 @@
+filegroup(
+    name = "files",
+    srcs = glob(
+        ["**/*"],
+        exclude = [
+            # Bazel files that are auto-added
+            "WORKSPACE",
+            "BUILD.bazel",
+
+            # Files present in pak1 update
+            "teaminfo.txt",
+
+            # Files present in pak3 update
+            "scripts/models2.shader",
+            "ui/createserver.menu",
+            "ui/joinserver.menu",
+            "ui/filter.menu",
+            "ui/punkbuster.menu",
+            "ui/menus.txt",
+
+            # qvm code that is no longer compatible
+            "vm/*",
+
+            # Personal configs of various q3a developers
+            "dpf.cfg",
+            "duffy.cfg",
+            "elusive.cfg",
+            "eric.cfg",
+            "fredo.cfg",
+            "hellchick.cfg",
+            "jim.cfg",
+            "marty.cfg",
+            "paulj.cfg",
+            "phook.cfg",
+            "rickster.cfg",
+            "seneca.cfg",
+            "senecaedit.cfg",
+            "tim.cfg",
+            "toddh.cfg",
+            "totoro.cfg",
+            "widgeon.cfg",
+            "xian.cfg",
+            "zaphod.cfg",
+            "xian.config",
+        ],
+    ),
+    visibility = ["//visibility:public"],
+)

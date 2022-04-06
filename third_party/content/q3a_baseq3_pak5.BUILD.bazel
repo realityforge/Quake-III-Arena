@@ -1,0 +1,9 @@
+filegroup(
+    name = "files",
+    srcs = [
+        "demos/demo127.dm_48",
+        "menu/medals/medal_capture.tga",
+        "scripts/gfx.shader",
+    ],
+    visibility = ["//visibility:public"],
+)
