@@ -2068,19 +2068,21 @@ void CG_DrawWeaponSelector( void )
     }
 
     const int selectorMode = (int)trap_Cvar_VariableValue("vr_weaponSelectorMode");
-    float DEPTH = 5.0f;
-    float RAD = 4.0f;
-	float SCALE = 0.05f;
+    float dist = 10.0f;
+    float radius = 4.0f;
+	float scale = 0.05f;
 
     if (selectorMode == WS_HMD) // HMD locked
     {
         VectorCopy(vr->hmdorientation, cg.weaponSelectorAngles);
         VectorCopy(vr->hmdposition, cg.weaponSelectorOrigin);
         VectorClear(cg.weaponSelectorOffset);
-        DEPTH = 7.5f; // push a bit further away from the HMD origin
+		dist = (trap_Cvar_VariableValue("vr_hudDepth")+2) * 5;
+		radius = dist / 3.0f;
+		scale = 0.04f + 0.02f * (trap_Cvar_VariableValue("vr_hudDepth")+1);
     }
 
-	float frac = (cg.time - cg.weaponSelectorTime) / (20 * DEPTH);
+	float frac = (cg.time - cg.weaponSelectorTime) / 100.0f;
 	if (frac > 1.0f) frac = 1.0f;
 
 	vec3_t controllerOrigin, controllerAngles, controllerOffset, selectorOrigin;
@@ -2103,7 +2105,7 @@ void CG_DrawWeaponSelector( void )
 	}
 
 	VectorCopy(wheelOrigin, beamOrigin);
-	VectorMA(wheelOrigin, ((DEPTH*2.0f)*((selectorMode == WS_CONTROLLER) ? frac : 1.0f)), wheelForward, wheelOrigin);
+	VectorMA(wheelOrigin, (dist * ((selectorMode == WS_CONTROLLER) ? frac : 1.0f)), wheelForward, wheelOrigin);
     VectorCopy(wheelOrigin, selectorOrigin);
 
     const int switchThumbsticks = (int)trap_Cvar_VariableValue("vr_switchThumbsticks");
@@ -2138,17 +2140,17 @@ void CG_DrawWeaponSelector( void )
         y = thumbstickAxisY;
     }
 
-	VectorMA(selectorOrigin, RAD * x, wheelRight, selectorOrigin);
-    VectorMA(selectorOrigin, RAD * y, wheelUp, selectorOrigin);
+	VectorMA(selectorOrigin, radius * x, wheelRight, selectorOrigin);
+    VectorMA(selectorOrigin, radius * y, wheelUp, selectorOrigin);
 
 	{
         refEntity_t		blob;
         memset( &blob, 0, sizeof( blob ) );
         VectorCopy( selectorOrigin, blob.origin );
         AnglesToAxis(vec3_origin, blob.axis);
-        VectorScale( blob.axis[0], SCALE - 0.01f, blob.axis[0] );
-        VectorScale( blob.axis[1], SCALE - 0.01f, blob.axis[1] );
-        VectorScale( blob.axis[2], SCALE - 0.01f, blob.axis[2] );
+        VectorScale( blob.axis[0], scale - 0.01f, blob.axis[0] );
+        VectorScale( blob.axis[1], scale - 0.01f, blob.axis[1] );
+        VectorScale( blob.axis[2], scale - 0.01f, blob.axis[2] );
         blob.nonNormalizedAxes = qtrue;
         blob.hModel = cgs.media.smallSphereModel;
         trap_R_AddRefEntityToScene( &blob );
@@ -2197,7 +2199,7 @@ void CG_DrawWeaponSelector( void )
             vec3_t forward, up;
             AngleVectors(angles, forward, NULL, up);
 
-            VectorMA(wheelOrigin, (RAD*frac), up, iconOrigin);
+            VectorMA(wheelOrigin, (radius*frac), up, iconOrigin);
             VectorMA(iconOrigin, 0.2f, forward, iconBackground);
             VectorMA(iconOrigin, -0.2f, forward, iconForeground);
 
@@ -2280,7 +2282,7 @@ void CG_DrawWeaponSelector( void )
 					iconAngles[ROLL] -= 90.0f;
 				}
 
-                float weaponScale = ((SCALE+0.02f)*frac) +
+                float weaponScale = ((scale+0.02f)*frac) +
 				        (cg.weaponSelectorSelection == weaponId ? 0.04f : 0);
 
 				AnglesToAxis(iconAngles, ent.axis);
