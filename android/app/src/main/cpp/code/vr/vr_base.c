@@ -124,27 +124,15 @@ void VR_InitCvars( void )
         Cvar_Get ("vr_button_map_PRIMARYGRIP", "+weapon_select", CVAR_ARCHIVE); // weapon selector
         Cvar_Get ("vr_button_map_PRIMARYTHUMBSTICK", "", CVAR_ARCHIVE); // unmapped
        	Cvar_Get ("vr_button_map_RTHUMBFORWARD_ALT", "", CVAR_ARCHIVE); // unmapped
-       	Cvar_Get ("vr_button_map_RTHUMBFORWARDRIGHT", "", CVAR_ARCHIVE); // unmapped
-       	Cvar_Get ("vr_button_map_RTHUMBFORWARDRIGHT_ALT", "", CVAR_ARCHIVE); // unmapped
        	Cvar_Get ("vr_button_map_RTHUMBRIGHT_ALT", "", CVAR_ARCHIVE); // unmapped
-       	Cvar_Get ("vr_button_map_RTHUMBBACKRIGHT", "", CVAR_ARCHIVE); // unmapped
-       	Cvar_Get ("vr_button_map_RTHUMBBACKRIGHT_ALT", "", CVAR_ARCHIVE); // unmapped
        	Cvar_Get ("vr_button_map_RTHUMBBACK_ALT", "", CVAR_ARCHIVE); // unmapped
-       	Cvar_Get ("vr_button_map_RTHUMBBACKLEFT", "", CVAR_ARCHIVE); // unmapped
-       	Cvar_Get ("vr_button_map_RTHUMBBACKLEFT_ALT", "", CVAR_ARCHIVE); // unmapped
        	Cvar_Get ("vr_button_map_RTHUMBLEFT_ALT", "", CVAR_ARCHIVE); // unmapped
-       	Cvar_Get ("vr_button_map_RTHUMBFORWARDLEFT", "", CVAR_ARCHIVE); // unmapped
-       	Cvar_Get ("vr_button_map_RTHUMBFORWARDLEFT_ALT", "", CVAR_ARCHIVE); // unmapped
     } else if (controlSchema == 1) {
 	    // Weapon wheel on thumbstick - all directions as weapon select (useful for HMD wheel)
 		Cvar_Get ("vr_button_map_RTHUMBFORWARD", "+weapon_select", CVAR_ARCHIVE);
-    	Cvar_Get ("vr_button_map_RTHUMBFORWARDRIGHT", "+weapon_select", CVAR_ARCHIVE);
     	Cvar_Get ("vr_button_map_RTHUMBRIGHT", "+weapon_select", CVAR_ARCHIVE);
-    	Cvar_Get ("vr_button_map_RTHUMBBACKRIGHT", "+weapon_select", CVAR_ARCHIVE);
     	Cvar_Get ("vr_button_map_RTHUMBBACK", "+weapon_select", CVAR_ARCHIVE);
-    	Cvar_Get ("vr_button_map_RTHUMBBACKLEFT", "+weapon_select", CVAR_ARCHIVE);
     	Cvar_Get ("vr_button_map_RTHUMBLEFT", "+weapon_select", CVAR_ARCHIVE);
-    	Cvar_Get ("vr_button_map_RTHUMBFORWARDLEFT", "+weapon_select", CVAR_ARCHIVE);
     	Cvar_Get ("vr_button_map_PRIMARYTHUMBSTICK", "+weapon_select", CVAR_ARCHIVE);
     	Cvar_Get ("vr_button_map_PRIMARYGRIP", "+alt", CVAR_ARCHIVE); // switch to alt layout
         Cvar_Get ("vr_button_map_RTHUMBLEFT_ALT", "turnleft", CVAR_ARCHIVE); // turn left
@@ -155,10 +143,6 @@ void VR_InitCvars( void )
         } else {
             Cvar_Get ("vr_button_map_RTHUMBBACK_ALT", "weapprev", CVAR_ARCHIVE);
         }
-        Cvar_Get ("vr_button_map_RTHUMBFORWARDRIGHT_ALT", "blank", CVAR_ARCHIVE); // unmapped
-        Cvar_Get ("vr_button_map_RTHUMBBACKRIGHT_ALT", "blank", CVAR_ARCHIVE); // unmapped
-        Cvar_Get ("vr_button_map_RTHUMBBACKLEFT_ALT", "blank", CVAR_ARCHIVE); // unmapped
-        Cvar_Get ("vr_button_map_RTHUMBFORWARDLEFT_ALT", "blank", CVAR_ARCHIVE); // unmapped
 	} else {
 		// Weapon wheel disabled - only prev/next weapon switch is active
 		Cvar_Get ("vr_button_map_RTHUMBLEFT", "turnleft", CVAR_ARCHIVE); // turn left
@@ -172,17 +156,9 @@ void VR_InitCvars( void )
 		Cvar_Get ("vr_button_map_PRIMARYGRIP", "", CVAR_ARCHIVE); // unmapped
 		Cvar_Get ("vr_button_map_PRIMARYTHUMBSTICK", "", CVAR_ARCHIVE); // unmapped
 		Cvar_Get ("vr_button_map_RTHUMBFORWARD_ALT", "", CVAR_ARCHIVE); // unmapped
-		Cvar_Get ("vr_button_map_RTHUMBFORWARDRIGHT", "", CVAR_ARCHIVE); // unmapped
-		Cvar_Get ("vr_button_map_RTHUMBFORWARDRIGHT_ALT", "", CVAR_ARCHIVE); // unmapped
 		Cvar_Get ("vr_button_map_RTHUMBRIGHT_ALT", "", CVAR_ARCHIVE); // unmapped
-		Cvar_Get ("vr_button_map_RTHUMBBACKRIGHT", "", CVAR_ARCHIVE); // unmapped
-		Cvar_Get ("vr_button_map_RTHUMBBACKRIGHT_ALT", "", CVAR_ARCHIVE); // unmapped
 		Cvar_Get ("vr_button_map_RTHUMBBACK_ALT", "", CVAR_ARCHIVE); // unmapped
-		Cvar_Get ("vr_button_map_RTHUMBBACKLEFT", "", CVAR_ARCHIVE); // unmapped
-		Cvar_Get ("vr_button_map_RTHUMBBACKLEFT_ALT", "", CVAR_ARCHIVE); // unmapped
 		Cvar_Get ("vr_button_map_RTHUMBLEFT_ALT", "", CVAR_ARCHIVE); // unmapped
-		Cvar_Get ("vr_button_map_RTHUMBFORWARDLEFT", "", CVAR_ARCHIVE); // unmapped
-		Cvar_Get ("vr_button_map_RTHUMBFORWARDLEFT_ALT", "", CVAR_ARCHIVE); // unmapped
 	}
 
 	//Remaining button mapping (buttons not affected by schemas)
