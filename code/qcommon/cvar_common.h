@@ -29,10 +29,25 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 CVARS (console variables)
 
+cvar variables are used to hold scalar or string variables that can be changed
+or displayed at the console or prog code as well as accessed directly
+in C code.
+
+The user can access cvars from the console in three ways:
+r_draworder			prints the current value
+r_draworder 0		sets the current value to 0
+set r_draworder 0	as above, but creates the cvar if not present
+
+Cvars are restricted from having the same names as commands to keep this
+interface from being ambiguous.
+
+They are also occasionally used to communicated information between different
+modules of the program.
+
 Many variables can be used for cheating purposes, so when
 cheats is zero, force all unspecified variables to their
 default values.
-==========================================================
+
 */
 
 #define	CVAR_ARCHIVE		0x0001	// set to cause it to be saved to vars.rc
@@ -61,44 +76,18 @@ default values.
 #define CVAR_MODIFIED		0x40000000	// Cvar was modified
 #define CVAR_NONEXISTENT	0x80000000	// Cvar doesn't exist.
 
-// nothing outside the Cvar_*() functions should modify these fields!
-typedef struct cvar_s cvar_t;
-
-struct cvar_s {
-    char			*name;
-	char			*string;
-	char			*resetString;		// cvar_restart will reset to this value
-	char			*latchedString;		// for CVAR_LATCH vars
-	int				flags;
-	qboolean	modified;			// set each time the cvar is changed
-	int				modificationCount;	// incremented each time the cvar is changed
-	float			value;				// atof( string )
-	int				integer;			// atoi( string )
-    qboolean	validate;
-    qboolean	integral;
-	float			min;
-	float			max;
-	char			*description;
-
-	cvar_t *next;
-	cvar_t *prev;
-	cvar_t *hashNext;
-	cvar_t *hashPrev;
-	int			hashIndex;
-};
-
 #define	MAX_CVAR_VALUE_STRING	256
 
 typedef int	cvarHandle_t;
 
 // the modules that run in the virtual machine can't access the cvar_t directly,
 // so they must ask for structured updates
-typedef struct {
-	cvarHandle_t	handle;
-	int			modificationCount;
-	float		value;
-	int			integer;
-	char		string[MAX_CVAR_VALUE_STRING];
+typedef struct vmCvar_s {
+    cvarHandle_t	handle;
+    int			modificationCount;
+    float		value;
+    int			integer;
+    char		string[MAX_CVAR_VALUE_STRING];
 } vmCvar_t;
 
-#endif	// CVAR_H
+#endif

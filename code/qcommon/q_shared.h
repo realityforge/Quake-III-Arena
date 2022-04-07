@@ -183,7 +183,6 @@ typedef int intptr_t;
 
 #include "q_platform.h"
 #include "qboolean.h"
-#include "cvar.h"
 
 //=============================================================
 

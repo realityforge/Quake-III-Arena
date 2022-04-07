@@ -135,10 +135,12 @@ cc_library(
 cc_library(
     name = "shared_api",
     hdrs = [
-        "cvar.h",
+        "cvar_common.h",
+        "cvar_engine.h",
         "q_platform.h",
         "q_shared.h",
         "qboolean.h",
+        "qengine.h",
         "surfaceflags.h",
     ],
     visibility = [

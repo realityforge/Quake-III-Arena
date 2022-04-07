@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define TR_PUBLIC_H
 
 #include "tr_types.h"
+#include "../qcommon/cvar_engine.h"
 
 #define	REF_API_VERSION		8
 

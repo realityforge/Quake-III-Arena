@@ -30,6 +30,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #else
 #include <winsock.h>
 #endif
+#include "cvar_engine.h"
 
 int demo_protocols[] =
 { 67, 66, 0 };
