@@ -182,12 +182,11 @@ typedef int intptr_t;
 
 
 #include "q_platform.h"
+#include "qboolean.h"
 
 //=============================================================
 
 typedef unsigned char 		byte;
-
-typedef enum {qfalse, qtrue}	qboolean;
 
 typedef union {
 	float f;
