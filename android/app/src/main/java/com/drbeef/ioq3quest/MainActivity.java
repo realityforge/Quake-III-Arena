@@ -102,7 +102,6 @@ public class MainActivity extends SDLActivity // implements KeyEvent.Callback
 
 		//our special pak files
 		copy_asset("/sdcard/ioquake3Quest/baseq3", "pakQ3Q.pk3", true);
-		copy_asset("/sdcard/ioquake3Quest/baseq3", "pak66.pk3", true);
 		copy_asset("/sdcard/ioquake3Quest/missionpack", "pakQ3Q.pk3", true);
 
 		//If open arena is installed then copy necessary stuff
