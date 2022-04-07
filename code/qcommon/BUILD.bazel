@@ -135,6 +135,7 @@ cc_library(
 cc_library(
     name = "shared_api",
     hdrs = [
+        "cvar.h",
         "q_platform.h",
         "q_shared.h",
         "qboolean.h",
