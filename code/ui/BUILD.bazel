@@ -47,7 +47,7 @@ cc_library(
         "//code/client:api",
         "//code/qcommon:shared_api",
         "//code/renderercommon:api",
-        "//ui",
+        "//content/teamarena:ui",
     ],
 )
 
@@ -65,7 +65,6 @@ cc_library(
         "//code/client:api",
         "//code/qcommon:shared_api",
         "//code/renderercommon:api",
-        "//ui",
     ],
 )
 
@@ -94,6 +93,6 @@ cc_binary(
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
         "//code/renderercommon:api",
-        "//ui",
+        "//content/teamarena:ui",
     ],
 )

@@ -190,7 +190,7 @@ cc_binary(
         "//code/botlib:api",
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
-        "//ui",
+        "//content/teamarena:ui",
     ],
 )
 
@@ -211,6 +211,6 @@ cc_binary(
         "//code/botlib:api",
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
-        "//ui",
+        "//content/teamarena:ui",
     ],
 )

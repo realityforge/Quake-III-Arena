@@ -32,6 +32,7 @@ genrule(
         "@q3a_missionpack_pak0//:files",
         "@q3a_missionpack_pak1//:files",
         "@q3a_missionpack_pak3//:files",
+        "//content/teamarena:ui_assets",
     ],
     outs = ["missionpack_pak0.pk3"],
     cmd = """
@@ -39,6 +40,7 @@ rm -rf pak
 $(location :copy_files.sh) external/q3a_missionpack_pak0/ pak $(locations @q3a_missionpack_pak0//:files)
 $(location :copy_files.sh) external/q3a_missionpack_pak1/ pak $(locations @q3a_missionpack_pak1//:files)
 $(location :copy_files.sh) external/q3a_missionpack_pak3/ pak $(locations @q3a_missionpack_pak3//:files)
+$(location :copy_files.sh) content/teamarena/ pak $(locations //content/teamarena:ui_assets)
 cd pak
 find .  ! -type d |  sed -e "s/^\\.\\///" | awk '{print "\\"" $$0 "\\"" }' | sort | xargs ../$(location @bazel_tools//tools/zip:zipper) c ../$@
     """,

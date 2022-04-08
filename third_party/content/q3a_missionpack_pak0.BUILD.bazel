@@ -12,10 +12,13 @@ filegroup(
 
             # Files present in pak3 update
             "scripts/models2.shader",
-            "ui/createserver.menu",
-            "ui/joinserver.menu",
-            "ui/filter.menu",
-            "ui/punkbuster.menu",
+
+            # Menus that are are now programaticaly added to archive
+            "ui/**/*.menu",
+            "ui/hud.txt",
+            "ui/hud2.txt",
+            "ui/ingame.txt",
+            "ui/menudef.h",
             "ui/menus.txt",
 
             # qvm code that is no longer compatible

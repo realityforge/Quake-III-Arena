@@ -70,7 +70,7 @@ cc_library(
         "//code/qcommon:shared_api",
         "//code/renderercommon:api",
         "//code/ui:shared",
-        "//ui",
+        "//content/teamarena:ui",
     ],
 )
 

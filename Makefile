@@ -111,6 +111,7 @@ ifndef TEMPDIR
 TEMPDIR=/tmp
 endif
 
+CFLAGS+=-Icontent/teamarena
 SERVER_CFLAGS+= -DQ3_ENGINE
 CLIENT_CFLAGS+= -DQ3_ENGINE
 
