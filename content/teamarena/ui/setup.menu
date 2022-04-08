@@ -64,8 +64,7 @@ itemDef {
 	close control_menu ; 
 	close system_menu ;
 	close options_menu ; 
-	close cdkey_menu ;
-	close default_menu ;   
+	close default_menu ;
 	close resetscore_menu ;   
 	open control_menu }
 	mouseenter { show message_controls }
@@ -99,8 +98,7 @@ itemDef {
 	close control_menu ; 
 	close system_menu ;
 	close options_menu ; 
-	close cdkey_menu ;
-	close default_menu ;   
+	close default_menu ;
 	close resetscore_menu ;  
 	open system_menu }	
 	mouseenter { show message_system }
@@ -131,47 +129,12 @@ itemDef {
 	close control_menu ; 
 	close system_menu ;
 	close options_menu ; 
-	close cdkey_menu ;
-	close default_menu ;   
+	close default_menu ;
 	close resetscore_menu ;   
 	open options_menu }	
 	mouseenter { show message_gameoptions }
 	mouseexit { hide message_gameoptions }
 	}
-
-	
-
-
-// CD Key	//
-
-itemDef {
-      	name cdkey
-      	text "Enter CD Key"
-      	style 0	
-	type 1
-      	textscale .5
-	textstyle 6
-      	rect 0 225 200 40 
-      	textalign 3		// center
-      	textalignx 20  		// x alignment point for text
-          			// use it to offset left/right text from the edge 
-                   		// or to center the text on a different point
-	textaligny 32        
-	forecolor 1 1 1 1
-	visible 1 
-	mouseenter { show message_cdkey }
-	mouseexit { hide message_cdkey }
-	action { play "sound/misc/kcaction.wav" ; 
-	close control_menu ; 
-	close system_menu ;
-	close options_menu ; 
-	close cdkey_menu ;
-	close default_menu ;   
-	close resetscore_menu ;   
-	open cdkey_menu }
-	}
-
-
 
 // Reset Defaults	//
 
@@ -182,7 +145,7 @@ itemDef {
 	type 1
 	textstyle 6
       	textscale .5
-      	rect 0 275 200 40 
+      	rect 0 225 200 40
       	textalign 3		// center
       	textalignx 20  		// x alignment point for text
           			// use it to offset left/right text from the edge 
@@ -196,8 +159,7 @@ itemDef {
 	close control_menu ; 
 	close system_menu ;
 	close options_menu ; 
-	close cdkey_menu ;
-	close default_menu ;   
+	close default_menu ;
 	close resetscore_menu ;    
 	open default_menu }
 	}
@@ -212,7 +174,7 @@ itemDef {
 	type 1
 	textstyle 6
       	textscale .5
-      	rect 0 325 200 40 
+      	rect 0 275 200 40
       	textalign 3		// center
       	textalignx 20  		// x alignment point for text
           			// use it to offset left/right text from the edge 
@@ -226,8 +188,7 @@ itemDef {
 	close control_menu ; 
 	close system_menu ;
 	close options_menu ; 
-	close cdkey_menu ;
-	close default_menu ;   
+	close default_menu ;
 	close resetscore_menu ; 
 	open resetscore_menu }
 	}
@@ -282,8 +243,7 @@ itemDef {
 	close setup_menu ; 
 	close system_menu ;
 	close options_menu ; 
-	close cdkey_menu ; 
-	close default_menu ; 
+	close default_menu ;
 	close resetscore_menu ;  
 	open main }  
       	mouseExit { hide back_alt ; show back ; hide message_back }	  
@@ -444,21 +404,6 @@ itemDef {
 	textaligny 25
 	textscale .4
 	text "Edit Game Options"
-	forecolor 1 1 1 1
-	decoration 
-	visible 0
-	}
-itemDef {
-	name message_cdkey
-	group grpmessage
-	style 0 
-	rect 320 430 128 30
-	textalign 1
-	textstyle 1
-	textalignx 0
-	textaligny 25
-	textscale .4
-	text "Enter Encryption Key"
 	forecolor 1 1 1 1
 	decoration 
 	visible 0

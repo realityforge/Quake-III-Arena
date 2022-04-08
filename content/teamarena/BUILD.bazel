@@ -13,7 +13,6 @@ filegroup(
     name = "ui_assets",
     srcs = [
         "ui/addfilter.menu",
-        "ui/cdkey.menu",
         "ui/cinematicmenu.menu",
         "ui/connect.menu",
         "ui/controls.menu",
