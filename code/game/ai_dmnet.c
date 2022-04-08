@@ -50,8 +50,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 int numnodeswitches;
 char nodeswitch[MAX_NODESWITCHES+1][144];
 
-#define LOOKAHEAD_DISTANCE			300
-
 void BotResetNodeSwitches(void) {
 	numnodeswitches = 0;
 }
