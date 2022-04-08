@@ -1,3 +1,5 @@
+load("//build_defs:rules.bzl", "ENGINE_DEFINES")
+
 cc_library(
     name = "client",
     srcs = [
@@ -57,7 +59,7 @@ cc_library(
         "client.h",
         "keycodes.h",
     ],
-    defines = ["USE_VOIP"],
+    defines = ["USE_VOIP"] + ENGINE_DEFINES,
     visibility = [
         "//code/q3_ui:__pkg__",
         "//code/sdl:__pkg__",

@@ -1,3 +1,5 @@
+load("//build_defs:rules.bzl", "ENGINE_DEFINES", "SERVER_ONLY_ENGINE_DEFINES")
+
 _SERVER_SRC = [
     "server.h",
     "sv_bot.c",
@@ -14,6 +16,7 @@ _SERVER_SRC = [
 cc_library(
     name = "server",
     srcs = _SERVER_SRC,
+    defines = ENGINE_DEFINES,
     visibility = ["//code/client:__pkg__"],
     deps = [
         "//code/botlib:api",
@@ -27,7 +30,7 @@ cc_library(
 cc_library(
     name = "server-dedicated",
     srcs = _SERVER_SRC,
-    defines = ["DEDICATED"],
+    defines = SERVER_ONLY_ENGINE_DEFINES,
     deps = [
         "//code/botlib:api",
         "//code/game:bg_api",

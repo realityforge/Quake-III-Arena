@@ -1,6 +1,9 @@
+load("//build_defs:rules.bzl", "ENGINE_DEFINES", "SERVER_ONLY_ENGINE_DEFINES")
+
 cc_library(
     name = "sys_local",
     srcs = ["sys_local.h"],
+    defines = ENGINE_DEFINES,
     visibility = [
         "//code/client:__pkg__",
         "//code/sdl:__pkg__",
@@ -14,7 +17,7 @@ cc_library(
 cc_library(
     name = "sys_local-dedicated",
     srcs = ["sys_local.h"],
-    defines = ["DEDICATED"],
+    defines = SERVER_ONLY_ENGINE_DEFINES,
     visibility = [
         "//code/client:__pkg__",
         "//code/sdl:__pkg__",
@@ -26,7 +29,7 @@ cc_library(
 cc_library(
     name = "sys_unix-dedicated",
     srcs = ["sys_unix.c"],
-    defines = ["DEDICATED"],
+    defines = SERVER_ONLY_ENGINE_DEFINES,
     visibility = ["//code/server:__pkg__"],
     deps = [
         ":sys_local-dedicated",
@@ -37,6 +40,7 @@ cc_library(
 cc_library(
     name = "sys_unix",
     srcs = ["sys_unix.c"],
+    defines = ENGINE_DEFINES,
     visibility = ["//code/client:__pkg__"],
     deps = [
         ":sys_local",
@@ -46,6 +50,7 @@ cc_library(
 
 objc_library(
     name = "sys_osx",
+    defines = ENGINE_DEFINES,
     linkopts = ["-framework Cocoa"],
     non_arc_srcs = ["sys_osx.m"],
     visibility = ["//code/client:__pkg__"],
@@ -58,7 +63,7 @@ objc_library(
 
 objc_library(
     name = "sys_osx-dedicated",
-    defines = ["DEDICATED"],
+    defines = SERVER_ONLY_ENGINE_DEFINES,
     non_arc_srcs = ["sys_osx.m"],
     visibility = ["//code/server:__pkg__"],
     deps = [
@@ -74,9 +79,8 @@ cc_library(
         "con_log.c",
         "sys_main.c",
     ],
-    hdrs = [
-        "sys_loadlib.h",
-    ],
+    hdrs = ["sys_loadlib.h"],
+    defines = ENGINE_DEFINES,
     visibility = ["//code:__subpackages__"],
     deps = [
         ":sys_local",
@@ -93,7 +97,7 @@ cc_library(
         "sys_main.c",
     ],
     hdrs = ["sys_loadlib.h"],
-    defines = ["DEDICATED"],
+    defines = SERVER_ONLY_ENGINE_DEFINES,
     visibility = ["//code/server:__pkg__"],
     deps = [
         ":sys_local-dedicated",

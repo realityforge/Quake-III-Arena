@@ -1,7 +1,10 @@
+load("//build_defs:rules.bzl", "ENGINE_DEFINES", "SERVER_ONLY_ENGINE_DEFINES")
+
 # TODO: Separate out headers for cvars to here? Actually lets create a much better console var library that is probably inspired by the work in q2java modernized
 cc_library(
     name = "cvar",
     srcs = ["cvar.c"],
+    defines = ENGINE_DEFINES,
     visibility = [
         "//code/client:__pkg__",
         "//code/server:__pkg__",
@@ -19,6 +22,7 @@ cc_library(
         "vm_interpreted.c",
     ],
     hdrs = ["vm_local.h"],
+    defines = ENGINE_DEFINES,
     visibility = [
         "//code/client:__pkg__",
         "//code/server:__pkg__",
@@ -32,6 +36,7 @@ cc_library(
 cc_library(
     name = "files",
     srcs = ["files.c"],
+    defines = ENGINE_DEFINES,
     visibility = ["//code/client:__pkg__"],
     deps = [
         ":qcommon",
@@ -43,7 +48,7 @@ cc_library(
 cc_library(
     name = "files-dedicated",
     srcs = ["files.c"],
-    defines = ["DEDICATED"],
+    defines = SERVER_ONLY_ENGINE_DEFINES,
     visibility = ["//code/server:__pkg__"],
     deps = [
         ":qcommon",
@@ -61,6 +66,7 @@ cc_library(
         "net_chan.c",
         "net_ip.c",
     ],
+    defines = ENGINE_DEFINES,
     visibility = [
         "//code/client:__pkg__",
         "//code/server:__pkg__",
@@ -81,7 +87,7 @@ cc_library(
         "net_chan.c",
         "net_ip.c",
     ],
-    defines = ["DEDICATED"],
+    defines = SERVER_ONLY_ENGINE_DEFINES,
     visibility = ["//code/server:__pkg__"],
     deps = [
         ":qcommon",
@@ -95,6 +101,7 @@ cc_library(
     srcs = [
         "common.c",
     ],
+    defines = ENGINE_DEFINES,
     visibility = ["//code/client:__pkg__"],
     deps = [
         ":qcommon",
@@ -104,10 +111,8 @@ cc_library(
 
 cc_library(
     name = "common-dedicated",
-    srcs = [
-        "common.c",
-    ],
-    defines = ["DEDICATED"],
+    srcs = ["common.c"],
+    defines = SERVER_ONLY_ENGINE_DEFINES,
     visibility = ["//code/server:__pkg__"],
     deps = [
         ":qcommon",
@@ -180,6 +185,7 @@ cc_library(
         "cm_trace.c",
     ],
     hdrs = ["cm_local.h"],
+    defines = ENGINE_DEFINES,
     visibility = [
         "//code/client:__pkg__",
         "//code/server:__pkg__",
@@ -219,6 +225,7 @@ _CMD_SRC = ["cmd.c"]
 cc_library(
     name = "cmd",
     srcs = _CMD_SRC,
+    defines = ENGINE_DEFINES,
     visibility = ["//code/client:__pkg__"],
     deps = [
         ":qcommon",
@@ -229,7 +236,7 @@ cc_library(
 cc_library(
     name = "cmd-dedicated",
     srcs = _CMD_SRC,
-    defines = ["DEDICATED"],
+    defines = SERVER_ONLY_ENGINE_DEFINES,
     visibility = ["//code/server:__pkg__"],
     deps = [
         ":qcommon",

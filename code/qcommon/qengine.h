@@ -23,6 +23,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef QENGINE_H
 #define QENGINE_H
 
+#ifndef Q3_ENGINE
+#  error "Header file should not be included in non-engine components"
+#endif
+
 #include "cvar_engine.h"
 
 extern	cvar_t	*com_developer;
