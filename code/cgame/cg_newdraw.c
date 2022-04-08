@@ -30,16 +30,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 extern displayContextDef_t cgDC;
 #include "voicechat.h"
 
-
-// set in CG_ParseTeamInfo
-
-//static int sortedTeamPlayers[TEAM_MAXOVERLAY];
-//static int numSortedTeamPlayers;
 int drawTeamOverlayModificationCount = -1;
-
-//static char systemChat[256];
-//static char teamChat1[256];
-//static char teamChat2[256];
 
 void CG_InitTeamChat(void) {
   memset(teamChat1, 0, sizeof(teamChat1));
@@ -52,7 +43,6 @@ void CG_CheckOrderPending(void) {
 		return;
 	}
 	if (cgs.orderPending) {
-		//clientInfo_t *ci = cgs.clientinfo + sortedTeamPlayers[cg_currentSelectedPlayer.integer];
 		const char *p1, *p2, *b;
 		p1 = p2 = b = NULL;
 		switch (cgs.currentOrder) {
@@ -97,10 +87,8 @@ void CG_CheckOrderPending(void) {
 			// for the player self
 			if (sortedTeamPlayers[cg_currentSelectedPlayer.integer] == cg.snap->ps.clientNum && p1) {
 				trap_SendConsoleCommand(va("teamtask %i\n", cgs.currentOrder));
-				//trap_SendConsoleCommand(va("cmd say_team %s\n", p2));
 				trap_SendConsoleCommand(va("cmd vsay_team %s\n", p1));
 			} else if (p2) {
-				//trap_SendConsoleCommand(va("cmd say_team %s, %s\n", ci->name,p));
 				trap_SendConsoleCommand(va("cmd vtell %d %s\n", sortedTeamPlayers[cg_currentSelectedPlayer.integer], p2));
 			}
 		}
