@@ -15,9 +15,7 @@ cc_library(
         "zutil.c",
         "zutil.h",
     ],
-    hdrs = [
-        "zlib.h",
-    ],
+    hdrs = ["zlib.h"],
     defines = ["NO_GZIP"],
     includes = ["."],
     visibility = [
