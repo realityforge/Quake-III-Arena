@@ -2,17 +2,17 @@ attribute vec3 attr_Position;
 attribute vec4 attr_TexCoord0;
 
 // Uniforms
-uniform highp mat4 u_ModelMatrix;
+uniform mat4 u_ModelMatrix;
 
 uniform vec3   u_ToneMinAvgMaxLinear;
 
 layout(shared) uniform ViewMatrices
 {
-    uniform highp mat4 u_ViewMatrices[NUM_VIEWS];
+    uniform mat4 u_ViewMatrices[NUM_VIEWS];
 };
 layout(shared) uniform ProjectionMatrix
 {
-    uniform highp mat4 u_ProjectionMatrix;
+    uniform mat4 u_ProjectionMatrix;
 };
 
 

@@ -2077,9 +2077,9 @@ void CG_DrawWeaponSelector( void )
         VectorCopy(vr->hmdorientation, cg.weaponSelectorAngles);
         VectorCopy(vr->hmdposition, cg.weaponSelectorOrigin);
         VectorClear(cg.weaponSelectorOffset);
-		dist = (trap_Cvar_VariableValue("vr_hudDepth")+2) * 5;
+		dist = (trap_Cvar_VariableValue("vr_hudDepth")+3) * 3;
 		radius = dist / 3.0f;
-		scale = 0.04f + 0.02f * (trap_Cvar_VariableValue("vr_hudDepth")+1);
+		scale = 0.04f + 0.01f * (trap_Cvar_VariableValue("vr_hudDepth")+1);
     }
 
 	float frac = (cg.time - cg.weaponSelectorTime) / 100.0f;
@@ -2336,10 +2336,13 @@ void CG_DrawWeaponSelector( void )
 				refEntity_t		sprite;
 				memset( &sprite, 0, sizeof( sprite ) );
 
+				float sRadius = 0.7f
+						+ (0.2f * (trap_Cvar_VariableValue("vr_hudDepth")-1));
+
                 VectorCopy(iconOrigin, sprite.origin);
                 sprite.reType = RT_SPRITE;
                 sprite.customShader = cg_weapons[weaponId].weaponIcon;
-                sprite.radius = 0.6f + (cg.weaponSelectorSelection == weaponId ? 0.1f : 0);
+                sprite.radius = sRadius * 0.9f * (cg.weaponSelectorSelection == weaponId ? 1.1f : 1.0);
                 sprite.shaderRGBA[0] = 255;
                 sprite.shaderRGBA[1] = 255;
                 sprite.shaderRGBA[2] = 255;
@@ -2351,7 +2354,7 @@ void CG_DrawWeaponSelector( void )
 				VectorCopy( iconBackground, sprite.origin );
                 sprite.reType = RT_SPRITE;
 				sprite.customShader = cgs.media.selectShader;
-				sprite.radius = 0.7f + (cg.weaponSelectorSelection == weaponId ? 0.1f : 0);
+				sprite.radius = sRadius * (cg.weaponSelectorSelection == weaponId ? 1.1f : 1.0);
 				sprite.shaderRGBA[0] = 255;
 				sprite.shaderRGBA[1] = 255;
 				sprite.shaderRGBA[2] = 255;
@@ -2364,7 +2367,7 @@ void CG_DrawWeaponSelector( void )
 					VectorCopy(iconForeground, sprite.origin);
                     sprite.reType = RT_SPRITE;
 					sprite.customShader = cgs.media.noammoShader;
-					sprite.radius = 0.7f;
+					sprite.radius = sRadius;
 					sprite.shaderRGBA[0] = 255;
 					sprite.shaderRGBA[1] = 255;
 					sprite.shaderRGBA[2] = 255;

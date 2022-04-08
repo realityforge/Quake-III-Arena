@@ -2901,7 +2901,7 @@ void CG_DrawActive( void ) {
         vec3_t forward, right, up;
 
 		float scale = trap_Cvar_VariableValue("vr_worldscaleScaler");
-        float dist = (trap_Cvar_VariableValue("vr_hudDepth")+2) * 5 * scale;
+        float dist = (trap_Cvar_VariableValue("vr_hudDepth")+3) * 3 * scale;
         float radius = dist / 3.0f;
 
         if (cg.snap->ps.stats[STAT_HEALTH] > 0 &&

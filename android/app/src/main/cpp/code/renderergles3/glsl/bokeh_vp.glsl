@@ -4,13 +4,13 @@ attribute vec4 attr_TexCoord0;
 // Uniforms
 layout(shared) uniform ViewMatrices
 {
-    uniform highp mat4 u_ViewMatrices[NUM_VIEWS];
+    uniform mat4 u_ViewMatrices[NUM_VIEWS];
 };
 layout(shared) uniform ProjectionMatrix
 {
-    uniform highp mat4 u_ProjectionMatrix;
+    uniform mat4 u_ProjectionMatrix;
 };
-uniform highp mat4 u_ModelMatrix;
+uniform mat4 u_ModelMatrix;
 
 varying vec2   var_TexCoords;
 

@@ -213,12 +213,16 @@ static void GLSL_ViewMatricesUniformBuffer(const float eyeView[32], const float 
             break;
             case STEREO_ORTHO_PROJECTION:
             {
-				const auto depth = (6-vr_hudDepth->integer) * 16;
+            	//This is a bit of a fiddle this calc.. it is just done like this to
+            	//make the HUD depths line up with the weapon wheel depth. I _know_ there
+            	//would be a proper calculation to do this exactly, but this is good enough
+            	//and I've just had enough messing about with this
+				const auto depthOffset = (5-powf(vr_hudDepth->integer, 0.7f)) * 16;
                 vec3_t translate;
-                VectorSet(translate, depth, 0, 0);
+                VectorSet(translate, depthOffset, 0, 0);
                 Mat4Translation( translate, viewMatrices );
 
-                VectorSet(translate, -depth, 0, 0);
+                VectorSet(translate, -depthOffset, 0, 0);
                 Mat4Translation( translate, viewMatrices + 16 );
             }
             break;
