@@ -163,6 +163,16 @@ cc_library(
 )
 
 cc_library(
+    name = "voicechat",
+    hdrs = ["voicechat.h"],
+    includes = ["."],
+    visibility = [
+        "//code/cgame:__pkg__",
+        "//code/game:__pkg__",
+    ],
+)
+
+cc_library(
     name = "qfiles",
     hdrs = ["qfiles.h"],
     visibility = [

@@ -70,7 +70,6 @@ cc_library(
         "//code/qcommon:shared_api",
         "//code/renderercommon:api",
         "//code/ui:shared",
-        "//content/teamarena:ui",
     ],
 )
 
@@ -90,6 +89,7 @@ cc_binary(
         "//code/qcommon",
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
+        "//code/qcommon:voicechat",
         "//code/renderercommon:api",
         "//code/ui:shared",
     ],
@@ -105,6 +105,7 @@ cc_library(
         "//code/game:bg_lib-qvm",
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
+        "//code/qcommon:voicechat",
         "//code/renderercommon:api",
         "//code/ui:shared",
     ],

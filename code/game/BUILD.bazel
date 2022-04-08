@@ -190,7 +190,7 @@ cc_binary(
         "//code/botlib:api",
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
-        "//content/teamarena:ui",
+        "//code/qcommon:voicechat",
     ],
 )
 
@@ -211,6 +211,6 @@ cc_binary(
         "//code/botlib:api",
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
-        "//content/teamarena:ui",
+        "//code/qcommon:voicechat",
     ],
 )

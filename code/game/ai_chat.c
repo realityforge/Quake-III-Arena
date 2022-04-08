@@ -42,9 +42,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "syn.h"				//synonyms
 #include "match.h"				//string matching types and vars
 
-// for the voice chats
 #ifdef MISSIONPACK
-#include "ui/menudef.h"
+#include "voicechat.h"
 #endif
 
 #define TIME_BETWEENCHATTING	25

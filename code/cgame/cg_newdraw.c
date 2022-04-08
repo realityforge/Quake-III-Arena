@@ -28,6 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../ui/ui_shared.h"
 
 extern displayContextDef_t cgDC;
+#include "voicechat.h"
 
 
 // set in CG_ParseTeamInfo
