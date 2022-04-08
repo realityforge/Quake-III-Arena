@@ -1,0 +1,10 @@
+cc_library(
+    name = "ui",
+    hdrs = ["ui/menudef.h"],
+    includes = ["."],
+    visibility = [
+        "//code/cgame:__pkg__",
+        "//code/game:__pkg__",
+        "//code/ui:__pkg__",
+    ],
+)
