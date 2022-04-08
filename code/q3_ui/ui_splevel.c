@@ -73,7 +73,7 @@ SINGLE PLAYER LEVEL SELECT MENU
 
 
 typedef struct {
-	menuframework_s	menu;
+	menuframework_t	menu;
 	menutext_s		item_banner;
 	menubitmap_s	item_leftarrow;
 	menubitmap_s	item_maps[4];

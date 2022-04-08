@@ -58,7 +58,7 @@ ADD BOTS MENU
 
 
 typedef struct {
-	menuframework_s	menu;
+	menuframework_t	menu;
 	menubitmap_s	arrows;
 	menubitmap_s	up;
 	menubitmap_s	down;

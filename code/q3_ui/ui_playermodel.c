@@ -78,7 +78,7 @@ static char* playermodel_artlist[] =
 
 typedef struct
 {
-	menuframework_s	menu;
+	menuframework_t	menu;
 	menubitmap_s	pics[MAX_MODELSPERPAGE];
 	menubitmap_s	picbuttons[MAX_MODELSPERPAGE];
 	menubitmap_s	framel;

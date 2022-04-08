@@ -52,7 +52,7 @@ SINGLE PLAYER SKILL MENU
 
 
 typedef struct {
-	menuframework_s	menu;
+	menuframework_t	menu;
 
 	menubitmap_s	art_frame;
 	menutext_s		art_banner;

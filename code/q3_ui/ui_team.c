@@ -37,7 +37,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 typedef struct
 {
-	menuframework_s	menu;
+	menuframework_t	menu;
 	menubitmap_s	frame;
 	menutext_s		joinred;
 	menutext_s		joinblue;
@@ -48,7 +48,7 @@ typedef struct
 static teammain_t	s_teammain;
 
 // bk001204 - unused
-//static menuframework_s	s_teammain_menu;
+//static menuframework_t	s_teammain_menu;
 //static menuaction_s		s_teammain_orders;
 //static menuaction_s		s_teammain_voice;
 //static menuaction_s		s_teammain_joinred;

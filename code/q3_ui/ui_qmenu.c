@@ -1074,7 +1074,7 @@ void ScrollList_Draw( menulist_s *l )
 	}
 }
 
-void Menu_AddItem( menuframework_s *menu, void *item )
+void Menu_AddItem( menuframework_t *menu, void *item )
 {
 	menucommon_s	*itemptr;
 
@@ -1140,7 +1140,7 @@ void Menu_AddItem( menuframework_s *menu, void *item )
 	menu->nitems++;
 }
 
-void Menu_CursorMoved( menuframework_s *m )
+void Menu_CursorMoved( menuframework_t *m )
 {
 	void (*callback)( void *self, int notification );
 	
@@ -1162,7 +1162,7 @@ void Menu_CursorMoved( menuframework_s *m )
 	}
 }
 
-void Menu_SetCursor( menuframework_s *m, int cursor )
+void Menu_SetCursor( menuframework_t *m, int cursor )
 {
 	if (((menucommon_s*)(m->items[cursor]))->flags & (QMF_GRAYED|QMF_INACTIVE))
 	{
@@ -1176,7 +1176,7 @@ void Menu_SetCursor( menuframework_s *m, int cursor )
 	Menu_CursorMoved( m );
 }
 
-void Menu_SetCursorToItem( menuframework_s *m, void* ptr )
+void Menu_SetCursorToItem( menuframework_t *m, void* ptr )
 {
 	int	i;
 
@@ -1197,7 +1197,7 @@ void Menu_SetCursorToItem( menuframework_s *m, void* ptr )
 ** to adjust the menu's cursor so that it's at the next available
 ** slot.
 */
-void Menu_AdjustCursor( menuframework_s *m, int dir ) {
+void Menu_AdjustCursor( menuframework_t *m, int dir ) {
 	menucommon_s	*item = NULL;
 	qboolean		wrapped = qfalse;
 
@@ -1242,7 +1242,7 @@ wrap:
 	}
 }
 
-void Menu_Draw( menuframework_s *menu )
+void Menu_Draw( menuframework_t *menu )
 {
 	int				i;
 	menucommon_s	*itemptr;
@@ -1337,7 +1337,7 @@ void Menu_Draw( menuframework_s *menu )
 		itemptr->statusbar( ( void * ) itemptr );
 }
 
-void *Menu_ItemAtCursor( menuframework_s *m )
+void *Menu_ItemAtCursor( menuframework_t *m )
 {
 	if ( m->cursor < 0 || m->cursor >= m->nitems )
 		return 0;
@@ -1345,7 +1345,7 @@ void *Menu_ItemAtCursor( menuframework_s *m )
 	return m->items[m->cursor];
 }
 
-sfxHandle_t Menu_ActivateItem( menuframework_s *s, menucommon_s* item ) {
+sfxHandle_t Menu_ActivateItem( menuframework_t *s, menucommon_s* item ) {
 	if ( item->callback ) {
 		item->callback( item, QM_ACTIVATED );
 		if( !( item->flags & QMF_SILENT ) ) {
@@ -1356,7 +1356,7 @@ sfxHandle_t Menu_ActivateItem( menuframework_s *s, menucommon_s* item ) {
 	return 0;
 }
 
-sfxHandle_t Menu_DefaultKey( menuframework_s *m, int key )
+sfxHandle_t Menu_DefaultKey( menuframework_t *m, int key )
 {
 	sfxHandle_t		sound = 0;
 	menucommon_s	*item;

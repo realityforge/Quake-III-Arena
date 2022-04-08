@@ -49,7 +49,7 @@ INGAME MENU
 
 
 typedef struct {
-	menuframework_s	menu;
+	menuframework_t	menu;
 
 	menubitmap_s	frame;
 	menutext_s		team;

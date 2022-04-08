@@ -137,7 +137,7 @@ extern vmCvar_t	ui_server16;
 #define QM_LOSTFOCUS			2
 #define QM_ACTIVATED			3
 
-typedef struct _tag_menuframework
+typedef struct menuframework_s
 {
 	int	cursor;
 	int cursor_prev;
@@ -151,7 +151,7 @@ typedef struct _tag_menuframework
 	qboolean	wrapAround;
 	qboolean	fullscreen;
 	qboolean	showlogo;
-} menuframework_s;
+} menuframework_t;
 
 typedef struct
 {
@@ -163,7 +163,7 @@ typedef struct
 	int	top;
 	int	right;
 	int	bottom;
-	menuframework_s *parent;
+	menuframework_t *parent;
 	int menuPosition;
 	unsigned flags;
 
@@ -246,13 +246,13 @@ typedef struct
 } menutext_s;
 
 extern void			Menu_Cache( void );
-extern void			Menu_AddItem( menuframework_s *menu, void *item );
-extern void			Menu_AdjustCursor( menuframework_s *menu, int dir );
-extern void			Menu_Draw( menuframework_s *menu );
-extern void			*Menu_ItemAtCursor( menuframework_s *m );
-extern void			Menu_SetCursor( menuframework_s *s, int cursor );
-extern void			Menu_SetCursorToItem( menuframework_s *m, void* ptr );
-extern sfxHandle_t	Menu_DefaultKey( menuframework_s *s, int key );
+extern void			Menu_AddItem( menuframework_t *menu, void *item );
+extern void			Menu_AdjustCursor( menuframework_t *menu, int dir );
+extern void			Menu_Draw( menuframework_t *menu );
+extern void			*Menu_ItemAtCursor( menuframework_t *m );
+extern void			Menu_SetCursor( menuframework_t *s, int cursor );
+extern void			Menu_SetCursorToItem( menuframework_t *m, void* ptr );
+extern sfxHandle_t	Menu_DefaultKey( menuframework_t *s, int key );
 extern void			Bitmap_Init( menubitmap_s *b );
 extern void			Bitmap_Draw( menubitmap_s *b );
 extern void			ScrollList_Draw( menulist_s *l );
@@ -499,8 +499,8 @@ typedef struct {
 	int					cursorx;
 	int					cursory;
 	int					menusp;
-	menuframework_s*	activemenu;
-	menuframework_s*	stack[MAX_MENUDEPTH];
+	menuframework_t*	activemenu;
+	menuframework_t*	stack[MAX_MENUDEPTH];
 	glconfig_t			glconfig;
 	qboolean			debug;
 	qhandle_t			whiteShader;
@@ -542,7 +542,7 @@ extern qboolean 	UI_CursorInRect (int x, int y, int width, int height);
 extern void			UI_AdjustFrom640( float *x, float *y, float *w, float *h );
 extern qboolean		UI_IsFullscreen( void );
 extern void			UI_SetActiveMenu( uiMenuCommand_t menu );
-extern void			UI_PushMenu ( menuframework_s *menu );
+extern void			UI_PushMenu ( menuframework_t *menu );
 extern void			UI_PopMenu (void);
 extern void			UI_ForceMenuOff (void);
 extern char			*UI_Argv( int arg );
