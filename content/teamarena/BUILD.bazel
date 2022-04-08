@@ -55,7 +55,6 @@ filegroup(
         "ui/password.menu",
         "ui/player.menu",
         "ui/powerup.menu",
-        "ui/punkbuster.menu",
         "ui/quake3.menu",
         "ui/quit.menu",
         "ui/quitcredit.menu",

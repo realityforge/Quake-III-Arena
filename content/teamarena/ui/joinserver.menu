@@ -470,34 +470,6 @@ itemDef {
       	mouseExit { hide message_sort ; setitemcolor pingColumn bordercolor .5 .5 .5 1 }	  
     }
 
-itemDef {
-	name Punkbuster
-	group grpTabs
-	text "PB"
-	type ITEM_TYPE_BUTTON
-	textscale .25
-	style WINDOW_STYLE_FILLED
-	background "ui/assets/sorttab.tga"
-	rect 580 103 32 26
-	textalign 1
-	textalignx 16		// center
-	textaligny 21
-	backcolor .1 .1 .37 1
-	forecolor 1 1 1 1
-	visible 1 
-	action { play "sound/misc/nomenu.wav" ; 
-		uiScript ServerSort 5 ;
-		setitemcolor grpTabs backcolor .1 .1 .37 1 ; 
-		setitemcolor Punkbuster backcolor .1 .37 .1 1 ;  
-		setitemcolor grpColumn backcolor 0 0 0 0 ;
-		setitemcolor pbColumn backcolor 0 1 0 .25 }
-			mouseEnter { show message_sort ; setitemcolor pbColumn bordercolor 1 0 0 1 }
-			mouseExit { hide message_sort ; setitemcolor pbColumn bordercolor .5 .5 .5 1 }	  
-	}
-
-
-
-
 // 	BUTTONS		//
 
 itemDef {
@@ -952,49 +924,6 @@ itemDef {
 	decoration  	  
     	}
 
-// PunkBuster //
-
-
-itemDef {
-	name			PunkBusterInfo
-	group			pbgrp
-	text			"PunkBuster"
-	type			ITEM_TYPE_BUTTON
-	textscale .25
-	style			WINDOW_STYLE_FILLED
-	rect			392 71 140 15
-	textalign		1
-	textalignx		28		// center
-	textaligny		11
-	forecolor		1 1 1 1
-	visible			1
-	action {
-		play "sound/misc/kcaction.wav" ; 
-		conditionalopen cl_punkbuster pbdisable_popmenu pbenable_popmenu
-		}
-}
-
-itemDef {
-	name			pbstatus
-	group			pbgrp
-	type			ITEM_TYPE_MULTI
-	text			""
-	cvar			"cl_punkbuster"
-	cvarFloatList	{ "Off" 0 "On" 1 }
-	rect			437 71 100 15
-	textalign		ITEM_ALIGN_CENTER
-	textalignx		21
-	textaligny		13
-	textscale		.25 		 
-	forecolor		1 1 1 1
-	style			WINDOW_STYLE_FILLED
-	backcolor		0 0 0 0
-	visible			1
-	decoration
-	}
- 
-
-
 // BACK BAR	//
 
 
@@ -1317,21 +1246,6 @@ itemDef {
 	textaligny 25
 	textscale .416
 	text "Search Current Server List for Friends"
-	forecolor 1 1 1 1
-	decoration 
-	visible 0
-	}
-itemDef {
-	name message_punkbuster
-	group grpmessage
-	style 0 
-	rect 320 430 128 30
-	textalign 1
-	textstyle 1
-	textalignx 0
-	textaligny 25
-	textscale .416
-	text "Enable or Disable PunkBuster client"
 	forecolor 1 1 1 1
 	decoration 
 	visible 0
