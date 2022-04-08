@@ -46,8 +46,11 @@ static vrController_t rightController;
 static int in_vrEventTime = 0;
 static double lastframetime = 0;
 
-static float pressedThreshold = 0.75f;
-static float releasedThreshold = 0.5f;
+static float triggerPressedThreshold = 0.75f;
+static float triggerReleasedThreshold = 0.5f;
+
+static float thumbstickPressedThreshold = 0.5f;
+static float thumbstickReleasedThreshold = 0.4f;
 
 extern cvar_t *cl_sensitivity;
 extern cvar_t *m_pitch;
@@ -313,9 +316,13 @@ static qboolean IN_SendInputAction(const char* action, qboolean inputActive, flo
         else if (strcmp(action, "+weapon_select") == 0)
         {
             vr.weapon_select = inputActive;
-            vr.weapon_select_autoclose = thumbstickAxis;
-            if (!inputActive)
-            {
+            if (inputActive) {
+                int selectorType = (int) Cvar_VariableValue("vr_weaponSelectorMode");
+                vr.weapon_select_using_thumbstick = (selectorType == WS_HMD);
+                vr.weapon_select_autoclose = vr.weapon_select_using_thumbstick && thumbstickAxis;
+            } else {
+                vr.weapon_select_using_thumbstick = qfalse;
+                vr.weapon_select_autoclose = qfalse;
                 Cbuf_AddText("weapon_select");
             }
         }
@@ -728,12 +735,11 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
             Com_QueueEvent(in_vrEventTime, SE_JOYSTICK_AXIS, 1, joystick[1] * 127.0f + positional[1] * 127.0f, 0, NULL);
         }
 
-        // In case weapon wheel is opened, and is in HMD/thumbstick mode or was opened by thumbstick, ignore standard thumbstick inputs
-        // In case weapon wheel is in controller mode and is opened by grip, allow use use of thumbstick e.g. to not block turning while wheel is open
-        else if (!vr.weapon_select || ((int)Cvar_VariableValue("vr_weaponSelectorMode") == WS_CONTROLLER && !vr.weapon_select_autoclose))
+        // In case thumbstick is used by weapon wheel (is in HMD/thumbstick mode), ignore standard thumbstick inputs
+        else if (!vr.weapon_select_using_thumbstick)
         {
             float joystickValue = length(joystickX, joystickY);
-            if (joystickValue < releasedThreshold) {
+            if (joystickValue < thumbstickReleasedThreshold) {
                 // Joystick within threshold -> disable all inputs
                 IN_HandleInactiveInput(&controller->axisButtons, VR_TOUCH_AXIS_UP, "RTHUMBFORWARD", joystickValue, qtrue);
                 IN_HandleInactiveInput(&controller->axisButtons, VR_TOUCH_AXIS_UPRIGHT, "RTHUMBFORWARDRIGHT", joystickValue, qtrue);
@@ -743,7 +749,7 @@ static void IN_VRJoystick( qboolean isRightController, float joystickX, float jo
                 IN_HandleInactiveInput(&controller->axisButtons, VR_TOUCH_AXIS_DOWNLEFT, "RTHUMBBACKLEFT", joystickValue, qtrue);
                 IN_HandleInactiveInput(&controller->axisButtons, VR_TOUCH_AXIS_LEFT, "RTHUMBLEFT", joystickValue, qtrue);
                 IN_HandleInactiveInput(&controller->axisButtons, VR_TOUCH_AXIS_UPLEFT, "RTHUMBFORWARDLEFT", joystickValue, qtrue);
-            } else {
+            } else if (joystickValue > thumbstickPressedThreshold) {
                 float joystickAngle = AngleNormalize360(RAD2DEG(atan2(joystickX, joystickY)));
                 if (IN_VRJoystickUse8WayMapping()) {
                     IN_VRJoystickHandle8WayMapping(&controller->axisButtons, joystickAngle, joystickValue);
@@ -762,7 +768,7 @@ static void IN_VRTriggers( qboolean isRightController, float triggerValue ) {
 	if (VR_useScreenLayer() || cl.snap.ps.pm_type == PM_INTERMISSION) {
 
     	// Triggers are used for menu navigation in screen mode or in intermission
-        if (triggerValue > pressedThreshold && !IN_InputActivated(&controller->axisButtons, VR_TOUCH_AXIS_TRIGGER_INDEX))
+        if (triggerValue > triggerPressedThreshold && !IN_InputActivated(&controller->axisButtons, VR_TOUCH_AXIS_TRIGGER_INDEX))
         {
             IN_ActivateInput(&controller->axisButtons, VR_TOUCH_AXIS_TRIGGER_INDEX);
             if ((isRightController && !vr.menuLeftHanded) || (!isRightController && vr.menuLeftHanded)) {
@@ -774,7 +780,7 @@ static void IN_VRTriggers( qboolean isRightController, float triggerValue ) {
                 vr.menuLeftHanded = !vr.menuLeftHanded;
             }
         }
-        else if (triggerValue < releasedThreshold && IN_InputActivated(&controller->axisButtons, VR_TOUCH_AXIS_TRIGGER_INDEX))
+        else if (triggerValue < triggerReleasedThreshold && IN_InputActivated(&controller->axisButtons, VR_TOUCH_AXIS_TRIGGER_INDEX))
         {
             IN_DeactivateInput(&controller->axisButtons, VR_TOUCH_AXIS_TRIGGER_INDEX);
             if ((isRightController && !vr.menuLeftHanded) || (!isRightController && vr.menuLeftHanded)) {
@@ -787,9 +793,9 @@ static void IN_VRTriggers( qboolean isRightController, float triggerValue ) {
         // Primary trigger
         if (isRightController == (vr_righthanded->integer != 0))
         {
-            if (triggerValue > pressedThreshold) {
+            if (triggerValue > triggerPressedThreshold) {
                 IN_HandleActiveInput(&controller->axisButtons, VR_TOUCH_AXIS_TRIGGER_INDEX, "PRIMARYTRIGGER", triggerValue, qfalse);
-            } else if (triggerValue < releasedThreshold) {
+            } else if (triggerValue < triggerReleasedThreshold) {
                 IN_HandleInactiveInput(&controller->axisButtons, VR_TOUCH_AXIS_TRIGGER_INDEX, "PRIMARYTRIGGER", triggerValue, qfalse);
             }
         }
@@ -797,9 +803,9 @@ static void IN_VRTriggers( qboolean isRightController, float triggerValue ) {
         // Off hand trigger
         if (isRightController != (vr_righthanded->integer != 0))
         {
-            if (triggerValue > pressedThreshold) {
+            if (triggerValue > triggerPressedThreshold) {
                 IN_HandleActiveInput(&controller->axisButtons, VR_TOUCH_AXIS_TRIGGER_INDEX, "SECONDARYTRIGGER", triggerValue, qfalse);
-            } else if (triggerValue < releasedThreshold) {
+            } else if (triggerValue < triggerReleasedThreshold) {
                 IN_HandleInactiveInput(&controller->axisButtons, VR_TOUCH_AXIS_TRIGGER_INDEX, "SECONDARYTRIGGER", triggerValue, qfalse);
             }
         }
