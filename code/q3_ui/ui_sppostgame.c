@@ -46,7 +46,7 @@ SINGLE PLAYER POSTGAME MENU
 #define ID_MENU			12
 
 typedef struct {
-	menuframework_s	menu;
+	menuframework_t	menu;
 	menubitmap_s	item_again;
 	menubitmap_s	item_next;
 	menubitmap_s	item_menu;

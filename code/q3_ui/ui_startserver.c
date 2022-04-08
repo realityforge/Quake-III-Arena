@@ -60,7 +60,7 @@ START SERVER MENU *****
 #define ID_STARTSERVERNEXT		18
 
 typedef struct {
-	menuframework_s	menu;
+	menuframework_t	menu;
 
 	menutext_s		banner;
 	menubitmap_s	framel;
@@ -565,7 +565,7 @@ void UI_StartServerMenu( qboolean multiplayer ) {
 
 
 typedef struct {
-	menuframework_s		menu;
+	menuframework_t		menu;
 
 	menutext_s			banner;
 
@@ -1394,7 +1394,7 @@ static void UI_ServerOptionsMenu( qboolean multiplayer ) {
 
 
 typedef struct {
-	menuframework_s	menu;
+	menuframework_t	menu;
 
 	menutext_s		banner;
 

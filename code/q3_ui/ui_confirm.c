@@ -39,7 +39,7 @@ CONFIRMATION MENU
 
 
 typedef struct {
-	menuframework_s menu;
+	menuframework_t menu;
 
 	menutext_s		no;
 	menutext_s		yes;

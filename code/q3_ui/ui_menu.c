@@ -46,7 +46,7 @@ MAIN MENU
 
 
 typedef struct {
-	menuframework_s	menu;
+	menuframework_t	menu;
 
 	menutext_s		singleplayer;
 	menutext_s		multiplayer;
@@ -64,7 +64,7 @@ typedef struct {
 static mainmenu_t s_main;
 
 typedef struct {
-	menuframework_s menu;	
+	menuframework_t menu;
 	char errorMessage[4096];
 } errorMessage_t;
 

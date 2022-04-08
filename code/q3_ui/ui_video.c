@@ -51,7 +51,7 @@ static char* driverinfo_artlist[] =
 
 typedef struct
 {
-	menuframework_s	menu;
+	menuframework_t	menu;
 	menutext_s		banner;
 	menubitmap_s	back;
 	menubitmap_s	framel;
@@ -230,7 +230,7 @@ GRAPHICS OPTIONS MENU
 #define ID_RATIO		110
 
 typedef struct {
-	menuframework_s	menu;
+	menuframework_t	menu;
 
 	menutext_s		banner;
 	menubitmap_s	framel;

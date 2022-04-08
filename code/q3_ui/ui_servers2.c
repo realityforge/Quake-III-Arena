@@ -184,7 +184,7 @@ typedef struct {
 } table_t;
 
 typedef struct {
-	menuframework_s		menu;
+	menuframework_t		menu;
 
 	menutext_s			banner;
 

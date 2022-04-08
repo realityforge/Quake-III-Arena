@@ -59,7 +59,7 @@ float UI_ClampCvar( float min, float max, float value )
 	return value;
 }
 
-void UI_PushMenu( menuframework_s *menu )
+void UI_PushMenu( menuframework_t *menu )
 {
 	int				i;
 	menucommon_s*	item;

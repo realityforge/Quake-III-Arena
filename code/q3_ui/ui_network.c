@@ -54,7 +54,7 @@ static const char *rate_items[] = {
 };
 
 typedef struct {
-	menuframework_s	menu;
+	menuframework_t	menu;
 
 	menutext_s		banner;
 	menubitmap_s	framel;
