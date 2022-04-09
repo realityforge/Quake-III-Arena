@@ -1945,9 +1945,6 @@ toolsclean2:
 distclean: clean toolsclean
 	@rm -rf $(BUILD_DIR)
 
-dist:
-	git archive --format zip --output $(CLIENTBIN)-$(VERSION).zip HEAD
-
 #############################################################################
 # DEPENDENCIES
 #############################################################################
