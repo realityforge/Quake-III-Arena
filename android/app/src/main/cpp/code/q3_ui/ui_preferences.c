@@ -91,7 +91,7 @@ static const char *hud_names[] =
 {
 	"Off",
 	"Floating",
-	"Simple",
+	"Fixed to View",
 	NULL
 };
 
