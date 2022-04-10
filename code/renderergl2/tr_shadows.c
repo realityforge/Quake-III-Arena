@@ -21,7 +21,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "tr_local.h"
 
-
 /*
 
   for a projection shadow:
@@ -35,11 +34,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 typedef struct {
-	int		i2;
-	int		facing;
+    int i2;
+    int facing;
 } edgeDef_t;
 
-#define	MAX_EDGE_DEFS	32
+#define MAX_EDGE_DEFS 32
 
 /*
 =================
@@ -53,10 +52,10 @@ triangleFromEdge[ v1 ][ v2 ]
   }
 =================
 */
-void RB_ShadowTessEnd( void ) {
-	// FIXME: implement this
+void RB_ShadowTessEnd(void)
+{
+    // FIXME: implement this
 }
-
 
 /*
 =================
@@ -68,47 +67,48 @@ because otherwise shadows from different body parts would
 overlap and double darken.
 =================
 */
-void RB_ShadowFinish( void ) {
-	// FIXME: implement this
+void RB_ShadowFinish(void)
+{
+    // FIXME: implement this
 }
 
+void RB_ProjectionShadowDeform(void)
+{
+    float* xyz;
+    int i;
+    float h;
+    vec3_t ground;
+    vec3_t light;
+    float groundDist;
+    float d;
+    vec3_t lightDir;
 
-void RB_ProjectionShadowDeform( void ) {
-	float	*xyz;
-	int		i;
-	float	h;
-	vec3_t	ground;
-	vec3_t	light;
-	float	groundDist;
-	float	d;
-	vec3_t	lightDir;
+    xyz = (float*)tess.xyz;
 
-	xyz = ( float * ) tess.xyz;
+    ground[0] = backEnd.or.axis[0][2];
+    ground[1] = backEnd.or.axis[1][2];
+    ground[2] = backEnd.or.axis[2][2];
 
-	ground[0] = backEnd.or.axis[0][2];
-	ground[1] = backEnd.or.axis[1][2];
-	ground[2] = backEnd.or.axis[2][2];
+    groundDist = backEnd.or.origin[2] - backEnd.currentEntity->e.shadowPlane;
 
-	groundDist = backEnd.or.origin[2] - backEnd.currentEntity->e.shadowPlane;
+    VectorCopy(backEnd.currentEntity->modelLightDir, lightDir);
+    d = DotProduct(lightDir, ground);
+    // don't let the shadows get too long or go negative
+    if (d < 0.5) {
+        VectorMA(lightDir, (0.5 - d), ground, lightDir);
+        d = DotProduct(lightDir, ground);
+    }
+    d = 1.0 / d;
 
-	VectorCopy( backEnd.currentEntity->modelLightDir, lightDir );
-	d = DotProduct( lightDir, ground );
-	// don't let the shadows get too long or go negative
-	if ( d < 0.5 ) {
-		VectorMA( lightDir, (0.5 - d), ground, lightDir );
-		d = DotProduct( lightDir, ground );
-	}
-	d = 1.0 / d;
+    light[0] = lightDir[0] * d;
+    light[1] = lightDir[1] * d;
+    light[2] = lightDir[2] * d;
 
-	light[0] = lightDir[0] * d;
-	light[1] = lightDir[1] * d;
-	light[2] = lightDir[2] * d;
+    for (i = 0; i < tess.numVertexes; i++, xyz += 4) {
+        h = DotProduct(xyz, ground) + groundDist;
 
-	for ( i = 0; i < tess.numVertexes; i++, xyz += 4 ) {
-		h = DotProduct( xyz, ground ) + groundDist;
-
-		xyz[0] -= light[0] * h;
-		xyz[1] -= light[1] * h;
-		xyz[2] -= light[2] * h;
-	}
+        xyz[0] -= light[0] * h;
+        xyz[1] -= light[1] * h;
+        xyz[2] -= light[2] * h;
+    }
 }

@@ -24,43 +24,43 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define QENGINE_H
 
 #ifndef Q3_ENGINE
-#  error "Header file should not be included in non-engine components"
+#error "Header file should not be included in non-engine components"
 #endif
 
 #include "cvar_engine.h"
 
-extern	cvar_t	*com_developer;
-extern	cvar_t	*com_speeds;
-extern	cvar_t	*com_timescale;
-extern	cvar_t	*com_sv_running;
-extern	cvar_t	*com_cl_running;
-extern	cvar_t	*com_version;
-extern	cvar_t	*com_blood;
-extern	cvar_t	*com_buildScript;		// for building release pak files
-extern	cvar_t	*com_journal;
-extern	cvar_t	*com_cameraMode;
-extern	cvar_t	*com_ansiColor;
-extern	cvar_t	*com_basegame;
-extern	cvar_t	*com_homepath;
+extern cvar_t* com_developer;
+extern cvar_t* com_speeds;
+extern cvar_t* com_timescale;
+extern cvar_t* com_sv_running;
+extern cvar_t* com_cl_running;
+extern cvar_t* com_version;
+extern cvar_t* com_blood;
+extern cvar_t* com_buildScript; // for building release pak files
+extern cvar_t* com_journal;
+extern cvar_t* com_cameraMode;
+extern cvar_t* com_ansiColor;
+extern cvar_t* com_basegame;
+extern cvar_t* com_homepath;
 
 // both client and server must agree to pause
-extern	cvar_t	*cl_paused;
-extern	cvar_t	*sv_paused;
+extern cvar_t* cl_paused;
+extern cvar_t* sv_paused;
 
-extern	cvar_t	*cl_packetdelay;
-extern	cvar_t	*sv_packetdelay;
+extern cvar_t* cl_packetdelay;
+extern cvar_t* sv_packetdelay;
 
-extern	cvar_t	*com_gamename;
-extern	cvar_t	*com_protocol;
+extern cvar_t* com_gamename;
+extern cvar_t* com_protocol;
 #ifdef LEGACY_PROTOCOL
-extern	cvar_t	*com_legacyprotocol;
+extern cvar_t* com_legacyprotocol;
 #endif
 #ifndef DEDICATED
-extern	cvar_t	*com_maxfpsUnfocused;
-extern	cvar_t	*com_maxfpsMinimized;
-extern	cvar_t	*com_unfocused;
-extern	cvar_t	*com_minimized;
-extern  cvar_t  *con_autochat;
+extern cvar_t* com_maxfpsUnfocused;
+extern cvar_t* com_maxfpsMinimized;
+extern cvar_t* com_unfocused;
+extern cvar_t* com_minimized;
+extern cvar_t* con_autochat;
 #endif
 
 #endif // QCOMMON_H

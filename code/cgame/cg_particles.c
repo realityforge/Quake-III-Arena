@@ -20,988 +20,919 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 // Rafael particles
-// cg_particles.c  
+// cg_particles.c
 
 #include "cg_local.h"
 
 //#define WOLF_PARTICLES
 
-#define BLOODRED	2
-#define EMISIVEFADE	3
-#define GREY75		4
+#define BLOODRED 2
+#define EMISIVEFADE 3
+#define GREY75 4
 
-typedef struct particle_s
-{
-	struct particle_s	*next;
+typedef struct particle_s {
+    struct particle_s* next;
 
-	float		time;
-	float		endtime;
+    float time;
+    float endtime;
 
-	vec3_t		org;
-	vec3_t		vel;
-	vec3_t		accel;
-	int			color;
-	float		alpha;
-	float		alphavel;
-	int			type;
-	qhandle_t	pshader;
-	
-	float		height;
-	float		width;
-				
-	float		endheight;
-	float		endwidth;
-	
-	float		start;
-	float		end;
+    vec3_t org;
+    vec3_t vel;
+    vec3_t accel;
+    int color;
+    float alpha;
+    float alphavel;
+    int type;
+    qhandle_t pshader;
 
-	float		startfade;
-	qboolean	rotate;
+    float height;
+    float width;
 
-	qboolean	link;
+    float endheight;
+    float endwidth;
 
-	// Ridah
-	int			shaderAnim;
-	int			roll;
+    float start;
+    float end;
 
-	int			accumroll;
+    float startfade;
+    qboolean rotate;
+
+    qboolean link;
+
+    // Ridah
+    int shaderAnim;
+    int roll;
+
+    int accumroll;
 
 } cparticle_t;
 
-typedef enum
-{
-	P_NONE,
-	P_WEATHER,
-	P_FLAT,
-	P_SMOKE,
-	P_ROTATE,
-	P_WEATHER_TURBULENT,
-	P_ANIM,	// Ridah
-	P_BAT,
-	P_BLEED,
-	P_FLAT_SCALEUP,
-	P_FLAT_SCALEUP_FADE,
-	P_WEATHER_FLURRY,
-	P_SMOKE_IMPACT,
-	P_BUBBLE,
-	P_BUBBLE_TURBULENT,
-	P_SPRITE
+typedef enum {
+    P_NONE,
+    P_WEATHER,
+    P_FLAT,
+    P_SMOKE,
+    P_ROTATE,
+    P_WEATHER_TURBULENT,
+    P_ANIM, // Ridah
+    P_BAT,
+    P_BLEED,
+    P_FLAT_SCALEUP,
+    P_FLAT_SCALEUP_FADE,
+    P_WEATHER_FLURRY,
+    P_SMOKE_IMPACT,
+    P_BUBBLE,
+    P_BUBBLE_TURBULENT,
+    P_SPRITE
 } particle_type_t;
 
-#define	MAX_SHADER_ANIMS		32
-#define	MAX_SHADER_ANIM_FRAMES	64
+#define MAX_SHADER_ANIMS 32
+#define MAX_SHADER_ANIM_FRAMES 64
 
 #ifndef WOLF_PARTICLES
-static char *shaderAnimNames[MAX_SHADER_ANIMS] = {
-	"explode1",
-	NULL
+static char* shaderAnimNames[MAX_SHADER_ANIMS] = {
+    "explode1",
+    NULL
 };
 static qhandle_t shaderAnims[MAX_SHADER_ANIMS][MAX_SHADER_ANIM_FRAMES];
-static int	shaderAnimCounts[MAX_SHADER_ANIMS] = {
-	23
+static int shaderAnimCounts[MAX_SHADER_ANIMS] = {
+    23
 };
-static float	shaderAnimSTRatio[MAX_SHADER_ANIMS] = {
-	1.0f
+static float shaderAnimSTRatio[MAX_SHADER_ANIMS] = {
+    1.0f
 };
 // done.
 #else
-static char *shaderAnimNames[MAX_SHADER_ANIMS] = {
-	"explode1",
-	"blacksmokeanim",
-	"twiltb2",
-	"expblue",
-	"blacksmokeanimb",	// uses 'explode1' sequence
-	"blood",
-	NULL
+static char* shaderAnimNames[MAX_SHADER_ANIMS] = {
+    "explode1",
+    "blacksmokeanim",
+    "twiltb2",
+    "expblue",
+    "blacksmokeanimb", // uses 'explode1' sequence
+    "blood",
+    NULL
 };
 static qhandle_t shaderAnims[MAX_SHADER_ANIMS][MAX_SHADER_ANIM_FRAMES];
-static int	shaderAnimCounts[MAX_SHADER_ANIMS] = {
-	23,
-	25,
-	45,
-	25,
-	23,
-	5,
+static int shaderAnimCounts[MAX_SHADER_ANIMS] = {
+    23,
+    25,
+    45,
+    25,
+    23,
+    5,
 };
-static float	shaderAnimSTRatio[MAX_SHADER_ANIMS] = {
-	1.405f,
-	1.0f,
-	1.0f,
-	1.0f,
-	1.0f,
-	1.0f,
+static float shaderAnimSTRatio[MAX_SHADER_ANIMS] = {
+    1.405f,
+    1.0f,
+    1.0f,
+    1.0f,
+    1.0f,
+    1.0f,
 };
 #endif
 
-#define		PARTICLE_GRAVITY	40
+#define PARTICLE_GRAVITY 40
 
 #ifdef WOLF_PARTICLES
-#define		MAX_PARTICLES	1024 * 8
+#define MAX_PARTICLES 1024 * 8
 #else
-#define		MAX_PARTICLES 1024
+#define MAX_PARTICLES 1024
 #endif
 
-cparticle_t	*active_particles, *free_particles;
-cparticle_t	particles[MAX_PARTICLES];
-int		cl_numparticles = MAX_PARTICLES;
+cparticle_t *active_particles, *free_particles;
+cparticle_t particles[MAX_PARTICLES];
+int cl_numparticles = MAX_PARTICLES;
 
-qboolean		initparticles = qfalse;
-vec3_t			vforward, vright, vup;
-vec3_t			rforward, rright, rup;
+qboolean initparticles = qfalse;
+vec3_t vforward, vright, vup;
+vec3_t rforward, rright, rup;
 
-float			oldtime;
+float oldtime;
 
-void CG_ClearParticles (void)
+void CG_ClearParticles(void)
 {
-	int		i;
+    int i;
 
-	memset( particles, 0, sizeof(particles) );
+    memset(particles, 0, sizeof(particles));
 
-	free_particles = &particles[0];
-	active_particles = NULL;
+    free_particles = &particles[0];
+    active_particles = NULL;
 
-	for (i=0 ;i<cl_numparticles ; i++)
-	{
-		particles[i].next = &particles[i+1];
-		particles[i].type = 0;
-	}
-	particles[cl_numparticles-1].next = NULL;
+    for (i = 0; i < cl_numparticles; i++) {
+        particles[i].next = &particles[i + 1];
+        particles[i].type = 0;
+    }
+    particles[cl_numparticles - 1].next = NULL;
 
-	oldtime = cg.time;
+    oldtime = cg.time;
 
-	// Ridah, init the shaderAnims
-	for (i=0; shaderAnimNames[i]; i++) {
-		int j;
+    // Ridah, init the shaderAnims
+    for (i = 0; shaderAnimNames[i]; i++) {
+        int j;
 
-		for (j=0; j<shaderAnimCounts[i]; j++) {
-			shaderAnims[i][j] = trap_R_RegisterShader( va("%s%i", shaderAnimNames[i], j+1) );
-		}
-	}
-	// done.
+        for (j = 0; j < shaderAnimCounts[i]; j++) {
+            shaderAnims[i][j] = trap_R_RegisterShader(va("%s%i", shaderAnimNames[i], j + 1));
+        }
+    }
+    // done.
 
-	initparticles = qtrue;
+    initparticles = qtrue;
 }
 
-
-void CG_AddParticleToScene (cparticle_t *p, vec3_t org, float alpha)
+void CG_AddParticleToScene(cparticle_t* p, vec3_t org, float alpha)
 {
 
-	vec3_t		point;
-	polyVert_t	verts[4];
-	float		width;
-	float		height;
-	float		time, time2;
-	float		ratio;
-	float		invratio;
-	vec3_t		color;
-	polyVert_t	TRIverts[3];
-	vec3_t		rright2, rup2;
+    vec3_t point;
+    polyVert_t verts[4];
+    float width;
+    float height;
+    float time, time2;
+    float ratio;
+    float invratio;
+    vec3_t color;
+    polyVert_t TRIverts[3];
+    vec3_t rright2, rup2;
 
-	if (p->type == P_WEATHER || p->type == P_WEATHER_TURBULENT || p->type == P_WEATHER_FLURRY
-		|| p->type == P_BUBBLE || p->type == P_BUBBLE_TURBULENT)
-	{// create a front facing polygon
-			
-		if (p->type != P_WEATHER_FLURRY)
-		{
-			if (p->type == P_BUBBLE || p->type == P_BUBBLE_TURBULENT)
-			{
-				if (org[2] > p->end)			
-				{	
-					p->time = cg.time;	
-					VectorCopy (org, p->org); // Ridah, fixes rare snow flakes that flicker on the ground
-									
-					p->org[2] = ( p->start + crandom () * 4 );
-					
-					
-					if (p->type == P_BUBBLE_TURBULENT)
-					{
-						p->vel[0] = crandom() * 4;
-						p->vel[1] = crandom() * 4;
-					}
-				
-				}
-			}
-			else
-			{
-				if (org[2] < p->end)			
-				{	
-					p->time = cg.time;	
-					VectorCopy (org, p->org); // Ridah, fixes rare snow flakes that flicker on the ground
-									
-					while (p->org[2] < p->end) 
-					{
-						p->org[2] += (p->start - p->end); 
-					}
-					
-					
-					if (p->type == P_WEATHER_TURBULENT)
-					{
-						p->vel[0] = crandom() * 16;
-						p->vel[1] = crandom() * 16;
-					}
-				
-				}
-			}
-			
+    if (p->type == P_WEATHER || p->type == P_WEATHER_TURBULENT || p->type == P_WEATHER_FLURRY
+        || p->type == P_BUBBLE || p->type == P_BUBBLE_TURBULENT) { // create a front facing polygon
 
-			// Rafael snow pvs check
-			if (!p->link)
-				return;
+        if (p->type != P_WEATHER_FLURRY) {
+            if (p->type == P_BUBBLE || p->type == P_BUBBLE_TURBULENT) {
+                if (org[2] > p->end) {
+                    p->time = cg.time;
+                    VectorCopy(org, p->org); // Ridah, fixes rare snow flakes that flicker on the ground
 
-			p->alpha = 1;
-		}
-		
-		// Ridah, had to do this or MAX_POLYS is being exceeded in village1.bsp
-		if (Distance( cg.snap->ps.origin, org ) > 1024) {
-			return;
-		}
-		// done.
-	
-		if (p->type == P_BUBBLE || p->type == P_BUBBLE_TURBULENT)
-		{
-			VectorMA (org, -p->height, vup, point);	
-			VectorMA (point, -p->width, vright, point);	
-			VectorCopy (point, verts[0].xyz);	
-			verts[0].st[0] = 0;	
-			verts[0].st[1] = 0;	
-			verts[0].modulate[0] = 255;	
-			verts[0].modulate[1] = 255;	
-			verts[0].modulate[2] = 255;	
-			verts[0].modulate[3] = 255 * p->alpha;	
+                    p->org[2] = (p->start + crandom() * 4);
 
-			VectorMA (org, -p->height, vup, point);	
-			VectorMA (point, p->width, vright, point);	
-			VectorCopy (point, verts[1].xyz);	
-			verts[1].st[0] = 0;	
-			verts[1].st[1] = 1;	
-			verts[1].modulate[0] = 255;	
-			verts[1].modulate[1] = 255;	
-			verts[1].modulate[2] = 255;	
-			verts[1].modulate[3] = 255 * p->alpha;	
+                    if (p->type == P_BUBBLE_TURBULENT) {
+                        p->vel[0] = crandom() * 4;
+                        p->vel[1] = crandom() * 4;
+                    }
+                }
+            } else {
+                if (org[2] < p->end) {
+                    p->time = cg.time;
+                    VectorCopy(org, p->org); // Ridah, fixes rare snow flakes that flicker on the ground
 
-			VectorMA (org, p->height, vup, point);	
-			VectorMA (point, p->width, vright, point);	
-			VectorCopy (point, verts[2].xyz);	
-			verts[2].st[0] = 1;	
-			verts[2].st[1] = 1;	
-			verts[2].modulate[0] = 255;	
-			verts[2].modulate[1] = 255;	
-			verts[2].modulate[2] = 255;	
-			verts[2].modulate[3] = 255 * p->alpha;	
+                    while (p->org[2] < p->end) {
+                        p->org[2] += (p->start - p->end);
+                    }
 
-			VectorMA (org, p->height, vup, point);	
-			VectorMA (point, -p->width, vright, point);	
-			VectorCopy (point, verts[3].xyz);	
-			verts[3].st[0] = 1;	
-			verts[3].st[1] = 0;	
-			verts[3].modulate[0] = 255;	
-			verts[3].modulate[1] = 255;	
-			verts[3].modulate[2] = 255;	
-			verts[3].modulate[3] = 255 * p->alpha;	
-		}
-		else
-		{
-			VectorMA (org, -p->height, vup, point);	
-			VectorMA (point, -p->width, vright, point);	
-			VectorCopy( point, TRIverts[0].xyz );
-			TRIverts[0].st[0] = 1;
-			TRIverts[0].st[1] = 0;
-			TRIverts[0].modulate[0] = 255;
-			TRIverts[0].modulate[1] = 255;
-			TRIverts[0].modulate[2] = 255;
-			TRIverts[0].modulate[3] = 255 * p->alpha;	
+                    if (p->type == P_WEATHER_TURBULENT) {
+                        p->vel[0] = crandom() * 16;
+                        p->vel[1] = crandom() * 16;
+                    }
+                }
+            }
 
-			VectorMA (org, p->height, vup, point);	
-			VectorMA (point, -p->width, vright, point);	
-			VectorCopy (point, TRIverts[1].xyz);	
-			TRIverts[1].st[0] = 0;
-			TRIverts[1].st[1] = 0;
-			TRIverts[1].modulate[0] = 255;
-			TRIverts[1].modulate[1] = 255;
-			TRIverts[1].modulate[2] = 255;
-			TRIverts[1].modulate[3] = 255 * p->alpha;	
+            // Rafael snow pvs check
+            if (!p->link)
+                return;
 
-			VectorMA (org, p->height, vup, point);	
-			VectorMA (point, p->width, vright, point);	
-			VectorCopy (point, TRIverts[2].xyz);	
-			TRIverts[2].st[0] = 0;
-			TRIverts[2].st[1] = 1;
-			TRIverts[2].modulate[0] = 255;
-			TRIverts[2].modulate[1] = 255;
-			TRIverts[2].modulate[2] = 255;
-			TRIverts[2].modulate[3] = 255 * p->alpha;	
-		}
-	
-	}
-	else if (p->type == P_SPRITE)
-	{
-		vec3_t	rr, ru;
-		vec3_t	rotate_ang;
+            p->alpha = 1;
+        }
+
+        // Ridah, had to do this or MAX_POLYS is being exceeded in village1.bsp
+        if (Distance(cg.snap->ps.origin, org) > 1024) {
+            return;
+        }
+        // done.
+
+        if (p->type == P_BUBBLE || p->type == P_BUBBLE_TURBULENT) {
+            VectorMA(org, -p->height, vup, point);
+            VectorMA(point, -p->width, vright, point);
+            VectorCopy(point, verts[0].xyz);
+            verts[0].st[0] = 0;
+            verts[0].st[1] = 0;
+            verts[0].modulate[0] = 255;
+            verts[0].modulate[1] = 255;
+            verts[0].modulate[2] = 255;
+            verts[0].modulate[3] = 255 * p->alpha;
+
+            VectorMA(org, -p->height, vup, point);
+            VectorMA(point, p->width, vright, point);
+            VectorCopy(point, verts[1].xyz);
+            verts[1].st[0] = 0;
+            verts[1].st[1] = 1;
+            verts[1].modulate[0] = 255;
+            verts[1].modulate[1] = 255;
+            verts[1].modulate[2] = 255;
+            verts[1].modulate[3] = 255 * p->alpha;
+
+            VectorMA(org, p->height, vup, point);
+            VectorMA(point, p->width, vright, point);
+            VectorCopy(point, verts[2].xyz);
+            verts[2].st[0] = 1;
+            verts[2].st[1] = 1;
+            verts[2].modulate[0] = 255;
+            verts[2].modulate[1] = 255;
+            verts[2].modulate[2] = 255;
+            verts[2].modulate[3] = 255 * p->alpha;
+
+            VectorMA(org, p->height, vup, point);
+            VectorMA(point, -p->width, vright, point);
+            VectorCopy(point, verts[3].xyz);
+            verts[3].st[0] = 1;
+            verts[3].st[1] = 0;
+            verts[3].modulate[0] = 255;
+            verts[3].modulate[1] = 255;
+            verts[3].modulate[2] = 255;
+            verts[3].modulate[3] = 255 * p->alpha;
+        } else {
+            VectorMA(org, -p->height, vup, point);
+            VectorMA(point, -p->width, vright, point);
+            VectorCopy(point, TRIverts[0].xyz);
+            TRIverts[0].st[0] = 1;
+            TRIverts[0].st[1] = 0;
+            TRIverts[0].modulate[0] = 255;
+            TRIverts[0].modulate[1] = 255;
+            TRIverts[0].modulate[2] = 255;
+            TRIverts[0].modulate[3] = 255 * p->alpha;
+
+            VectorMA(org, p->height, vup, point);
+            VectorMA(point, -p->width, vright, point);
+            VectorCopy(point, TRIverts[1].xyz);
+            TRIverts[1].st[0] = 0;
+            TRIverts[1].st[1] = 0;
+            TRIverts[1].modulate[0] = 255;
+            TRIverts[1].modulate[1] = 255;
+            TRIverts[1].modulate[2] = 255;
+            TRIverts[1].modulate[3] = 255 * p->alpha;
+
+            VectorMA(org, p->height, vup, point);
+            VectorMA(point, p->width, vright, point);
+            VectorCopy(point, TRIverts[2].xyz);
+            TRIverts[2].st[0] = 0;
+            TRIverts[2].st[1] = 1;
+            TRIverts[2].modulate[0] = 255;
+            TRIverts[2].modulate[1] = 255;
+            TRIverts[2].modulate[2] = 255;
+            TRIverts[2].modulate[3] = 255 * p->alpha;
+        }
+
+    } else if (p->type == P_SPRITE) {
+        vec3_t rr, ru;
+        vec3_t rotate_ang;
 
 #ifdef WOLF_PARTICLES
-		VectorSet (color, 1.0, 1.0, 1.0);
+        VectorSet(color, 1.0, 1.0, 1.0);
 #else
-		VectorSet (color, 1.0, 1.0, 0.5);
+        VectorSet(color, 1.0, 1.0, 0.5);
 #endif
-		time = cg.time - p->time;
-		time2 = p->endtime - p->time;
-		ratio = time / time2;
+        time = cg.time - p->time;
+        time2 = p->endtime - p->time;
+        ratio = time / time2;
 
-		width = p->width + ( ratio * ( p->endwidth - p->width) );
-		height = p->height + ( ratio * ( p->endheight - p->height) );
+        width = p->width + (ratio * (p->endwidth - p->width));
+        height = p->height + (ratio * (p->endheight - p->height));
 
-		if (p->roll) {
-			vectoangles( cg.refdef.viewaxis[0], rotate_ang );
-			rotate_ang[ROLL] += p->roll;
-			AngleVectors ( rotate_ang, NULL, rr, ru);
-		}
+        if (p->roll) {
+            vectoangles(cg.refdef.viewaxis[0], rotate_ang);
+            rotate_ang[ROLL] += p->roll;
+            AngleVectors(rotate_ang, NULL, rr, ru);
+        }
 
-		if (p->roll) {
-			VectorMA (org, -height, ru, point);	
-			VectorMA (point, -width, rr, point);	
-		} else {
-			VectorMA (org, -height, vup, point);	
-			VectorMA (point, -width, vright, point);	
-		}
-		VectorCopy (point, verts[0].xyz);	
-		verts[0].st[0] = 0;	
-		verts[0].st[1] = 0;	
-		verts[0].modulate[0] = 255;	
-		verts[0].modulate[1] = 255;	
-		verts[0].modulate[2] = 255;	
-		verts[0].modulate[3] = 255;
+        if (p->roll) {
+            VectorMA(org, -height, ru, point);
+            VectorMA(point, -width, rr, point);
+        } else {
+            VectorMA(org, -height, vup, point);
+            VectorMA(point, -width, vright, point);
+        }
+        VectorCopy(point, verts[0].xyz);
+        verts[0].st[0] = 0;
+        verts[0].st[1] = 0;
+        verts[0].modulate[0] = 255;
+        verts[0].modulate[1] = 255;
+        verts[0].modulate[2] = 255;
+        verts[0].modulate[3] = 255;
 
-		if (p->roll) {
-			VectorMA (point, 2*height, ru, point);	
-		} else {
-			VectorMA (point, 2*height, vup, point);	
-		}
-		VectorCopy (point, verts[1].xyz);	
-		verts[1].st[0] = 0;	
-		verts[1].st[1] = 1;	
-		verts[1].modulate[0] = 255;	
-		verts[1].modulate[1] = 255;	
-		verts[1].modulate[2] = 255;	
-		verts[1].modulate[3] = 255;	
+        if (p->roll) {
+            VectorMA(point, 2 * height, ru, point);
+        } else {
+            VectorMA(point, 2 * height, vup, point);
+        }
+        VectorCopy(point, verts[1].xyz);
+        verts[1].st[0] = 0;
+        verts[1].st[1] = 1;
+        verts[1].modulate[0] = 255;
+        verts[1].modulate[1] = 255;
+        verts[1].modulate[2] = 255;
+        verts[1].modulate[3] = 255;
 
-		if (p->roll) {
-			VectorMA (point, 2*width, rr, point);	
-		} else {
-			VectorMA (point, 2*width, vright, point);	
-		}
-		VectorCopy (point, verts[2].xyz);	
-		verts[2].st[0] = 1;	
-		verts[2].st[1] = 1;	
-		verts[2].modulate[0] = 255;	
-		verts[2].modulate[1] = 255;	
-		verts[2].modulate[2] = 255;	
-		verts[2].modulate[3] = 255;	
+        if (p->roll) {
+            VectorMA(point, 2 * width, rr, point);
+        } else {
+            VectorMA(point, 2 * width, vright, point);
+        }
+        VectorCopy(point, verts[2].xyz);
+        verts[2].st[0] = 1;
+        verts[2].st[1] = 1;
+        verts[2].modulate[0] = 255;
+        verts[2].modulate[1] = 255;
+        verts[2].modulate[2] = 255;
+        verts[2].modulate[3] = 255;
 
-		if (p->roll) {
-			VectorMA (point, -2*height, ru, point);	
-		} else {
-			VectorMA (point, -2*height, vup, point);	
-		}
-		VectorCopy (point, verts[3].xyz);	
-		verts[3].st[0] = 1;	
-		verts[3].st[1] = 0;	
-		verts[3].modulate[0] = 255;	
-		verts[3].modulate[1] = 255;	
-		verts[3].modulate[2] = 255;	
-		verts[3].modulate[3] = 255;	
-	}
-	else if (p->type == P_SMOKE || p->type == P_SMOKE_IMPACT)
-	{// create a front rotating facing polygon
+        if (p->roll) {
+            VectorMA(point, -2 * height, ru, point);
+        } else {
+            VectorMA(point, -2 * height, vup, point);
+        }
+        VectorCopy(point, verts[3].xyz);
+        verts[3].st[0] = 1;
+        verts[3].st[1] = 0;
+        verts[3].modulate[0] = 255;
+        verts[3].modulate[1] = 255;
+        verts[3].modulate[2] = 255;
+        verts[3].modulate[3] = 255;
+    } else if (p->type == P_SMOKE || p->type == P_SMOKE_IMPACT) { // create a front rotating facing polygon
 
-		if ( p->type == P_SMOKE_IMPACT && Distance( cg.snap->ps.origin, org ) > 1024) {
-			return;
-		}
+        if (p->type == P_SMOKE_IMPACT && Distance(cg.snap->ps.origin, org) > 1024) {
+            return;
+        }
 
-		if (p->color == BLOODRED)
-			VectorSet (color, 0.22f, 0.0f, 0.0f);
-		else if (p->color == GREY75)
-		{
-			float	len;
-			float	greyit;
-			float	val;
-			len = Distance (cg.snap->ps.origin, org);
-			if (!len)
-				len = 1;
+        if (p->color == BLOODRED)
+            VectorSet(color, 0.22f, 0.0f, 0.0f);
+        else if (p->color == GREY75) {
+            float len;
+            float greyit;
+            float val;
+            len = Distance(cg.snap->ps.origin, org);
+            if (!len)
+                len = 1;
 
-			val = 4096/len;
-			greyit = 0.25 * val;
-			if (greyit > 0.5)
-				greyit = 0.5;
+            val = 4096 / len;
+            greyit = 0.25 * val;
+            if (greyit > 0.5)
+                greyit = 0.5;
 
-			VectorSet (color, greyit, greyit, greyit);
-		}
-		else
-			VectorSet (color, 1.0, 1.0, 1.0);
+            VectorSet(color, greyit, greyit, greyit);
+        } else
+            VectorSet(color, 1.0, 1.0, 1.0);
 
-		time = cg.time - p->time;
-		time2 = p->endtime - p->time;
-		ratio = time / time2;
-		
-		if (cg.time > p->startfade)
-		{
-			invratio = 1 - ( (cg.time - p->startfade) / (p->endtime - p->startfade) );
+        time = cg.time - p->time;
+        time2 = p->endtime - p->time;
+        ratio = time / time2;
 
-			if (p->color == EMISIVEFADE)
-			{
-				float fval;
-				fval = (invratio * invratio);
-				if (fval < 0)
-					fval = 0;
-				VectorSet (color, fval , fval , fval );
-			}
-			invratio *= p->alpha;
-		}
-		else 
-			invratio = 1 * p->alpha;
+        if (cg.time > p->startfade) {
+            invratio = 1 - ((cg.time - p->startfade) / (p->endtime - p->startfade));
 
-		if (invratio > 1)
-			invratio = 1;
-	
-		width = p->width + ( ratio * ( p->endwidth - p->width) );
-		height = p->height + ( ratio * ( p->endheight - p->height) );
+            if (p->color == EMISIVEFADE) {
+                float fval;
+                fval = (invratio * invratio);
+                if (fval < 0)
+                    fval = 0;
+                VectorSet(color, fval, fval, fval);
+            }
+            invratio *= p->alpha;
+        } else
+            invratio = 1 * p->alpha;
 
-		if (p->type != P_SMOKE_IMPACT)
-		{
-			vec3_t temp;
+        if (invratio > 1)
+            invratio = 1;
 
-			vectoangles (rforward, temp);
-			p->accumroll += p->roll;
-			temp[ROLL] += p->accumroll * 0.1;
-			AngleVectors ( temp, NULL, rright2, rup2);
-		}
-		else
-		{
-			VectorCopy (rright, rright2);
-			VectorCopy (rup, rup2);
-		}
-		
-		if (p->rotate)
-		{
-			VectorMA (org, -height, rup2, point);	
-			VectorMA (point, -width, rright2, point);	
-		}
-		else
-		{
-			VectorMA (org, -p->height, vup, point);	
-			VectorMA (point, -p->width, vright, point);	
-		}
-		VectorCopy (point, verts[0].xyz);	
-		verts[0].st[0] = 0;	
-		verts[0].st[1] = 0;	
-		verts[0].modulate[0] = 255 * color[0];	
-		verts[0].modulate[1] = 255 * color[1];	
-		verts[0].modulate[2] = 255 * color[2];	
-		verts[0].modulate[3] = 255 * invratio;	
+        width = p->width + (ratio * (p->endwidth - p->width));
+        height = p->height + (ratio * (p->endheight - p->height));
 
-		if (p->rotate)
-		{
-			VectorMA (org, -height, rup2, point);	
-			VectorMA (point, width, rright2, point);	
-		}
-		else
-		{
-			VectorMA (org, -p->height, vup, point);	
-			VectorMA (point, p->width, vright, point);	
-		}
-		VectorCopy (point, verts[1].xyz);	
-		verts[1].st[0] = 0;	
-		verts[1].st[1] = 1;	
-		verts[1].modulate[0] = 255 * color[0];	
-		verts[1].modulate[1] = 255 * color[1];	
-		verts[1].modulate[2] = 255 * color[2];	
-		verts[1].modulate[3] = 255 * invratio;	
+        if (p->type != P_SMOKE_IMPACT) {
+            vec3_t temp;
 
-		if (p->rotate)
-		{
-			VectorMA (org, height, rup2, point);	
-			VectorMA (point, width, rright2, point);	
-		}
-		else
-		{
-			VectorMA (org, p->height, vup, point);	
-			VectorMA (point, p->width, vright, point);	
-		}
-		VectorCopy (point, verts[2].xyz);	
-		verts[2].st[0] = 1;	
-		verts[2].st[1] = 1;	
-		verts[2].modulate[0] = 255 * color[0];	
-		verts[2].modulate[1] = 255 * color[1];	
-		verts[2].modulate[2] = 255 * color[2];	
-		verts[2].modulate[3] = 255 * invratio;	
+            vectoangles(rforward, temp);
+            p->accumroll += p->roll;
+            temp[ROLL] += p->accumroll * 0.1;
+            AngleVectors(temp, NULL, rright2, rup2);
+        } else {
+            VectorCopy(rright, rright2);
+            VectorCopy(rup, rup2);
+        }
 
-		if (p->rotate)
-		{
-			VectorMA (org, height, rup2, point);	
-			VectorMA (point, -width, rright2, point);	
-		}
-		else
-		{
-			VectorMA (org, p->height, vup, point);	
-			VectorMA (point, -p->width, vright, point);	
-		}
-		VectorCopy (point, verts[3].xyz);	
-		verts[3].st[0] = 1;	
-		verts[3].st[1] = 0;	
-		verts[3].modulate[0] = 255 * color[0];	
-		verts[3].modulate[1] = 255 * color[1];	
-		verts[3].modulate[2] = 255 * color[2];	
-		verts[3].modulate[3] = 255  * invratio;	
-		
-	}
-	else if (p->type == P_BLEED)
-	{
-		vec3_t	rr, ru;
-		vec3_t	rotate_ang;
-		float	alpha;
+        if (p->rotate) {
+            VectorMA(org, -height, rup2, point);
+            VectorMA(point, -width, rright2, point);
+        } else {
+            VectorMA(org, -p->height, vup, point);
+            VectorMA(point, -p->width, vright, point);
+        }
+        VectorCopy(point, verts[0].xyz);
+        verts[0].st[0] = 0;
+        verts[0].st[1] = 0;
+        verts[0].modulate[0] = 255 * color[0];
+        verts[0].modulate[1] = 255 * color[1];
+        verts[0].modulate[2] = 255 * color[2];
+        verts[0].modulate[3] = 255 * invratio;
 
-		alpha = p->alpha;
-		
-		if (p->roll) 
-		{
-			vectoangles( cg.refdef.viewaxis[0], rotate_ang );
-			rotate_ang[ROLL] += p->roll;
-			AngleVectors ( rotate_ang, NULL, rr, ru);
-		}
-		else
-		{
-			VectorCopy (vup, ru);
-			VectorCopy (vright, rr);
-		}
+        if (p->rotate) {
+            VectorMA(org, -height, rup2, point);
+            VectorMA(point, width, rright2, point);
+        } else {
+            VectorMA(org, -p->height, vup, point);
+            VectorMA(point, p->width, vright, point);
+        }
+        VectorCopy(point, verts[1].xyz);
+        verts[1].st[0] = 0;
+        verts[1].st[1] = 1;
+        verts[1].modulate[0] = 255 * color[0];
+        verts[1].modulate[1] = 255 * color[1];
+        verts[1].modulate[2] = 255 * color[2];
+        verts[1].modulate[3] = 255 * invratio;
 
-		VectorMA (org, -p->height, ru, point);	
-		VectorMA (point, -p->width, rr, point);	
-		VectorCopy (point, verts[0].xyz);	
-		verts[0].st[0] = 0;	
-		verts[0].st[1] = 0;	
-		verts[0].modulate[0] = 111;	
-		verts[0].modulate[1] = 19;	
-		verts[0].modulate[2] = 9;	
-		verts[0].modulate[3] = 255 * alpha;	
+        if (p->rotate) {
+            VectorMA(org, height, rup2, point);
+            VectorMA(point, width, rright2, point);
+        } else {
+            VectorMA(org, p->height, vup, point);
+            VectorMA(point, p->width, vright, point);
+        }
+        VectorCopy(point, verts[2].xyz);
+        verts[2].st[0] = 1;
+        verts[2].st[1] = 1;
+        verts[2].modulate[0] = 255 * color[0];
+        verts[2].modulate[1] = 255 * color[1];
+        verts[2].modulate[2] = 255 * color[2];
+        verts[2].modulate[3] = 255 * invratio;
 
-		VectorMA (org, -p->height, ru, point);	
-		VectorMA (point, p->width, rr, point);	
-		VectorCopy (point, verts[1].xyz);	
-		verts[1].st[0] = 0;	
-		verts[1].st[1] = 1;	
-		verts[1].modulate[0] = 111;	
-		verts[1].modulate[1] = 19;	
-		verts[1].modulate[2] = 9;	
-		verts[1].modulate[3] = 255 * alpha;	
+        if (p->rotate) {
+            VectorMA(org, height, rup2, point);
+            VectorMA(point, -width, rright2, point);
+        } else {
+            VectorMA(org, p->height, vup, point);
+            VectorMA(point, -p->width, vright, point);
+        }
+        VectorCopy(point, verts[3].xyz);
+        verts[3].st[0] = 1;
+        verts[3].st[1] = 0;
+        verts[3].modulate[0] = 255 * color[0];
+        verts[3].modulate[1] = 255 * color[1];
+        verts[3].modulate[2] = 255 * color[2];
+        verts[3].modulate[3] = 255 * invratio;
 
-		VectorMA (org, p->height, ru, point);	
-		VectorMA (point, p->width, rr, point);	
-		VectorCopy (point, verts[2].xyz);	
-		verts[2].st[0] = 1;	
-		verts[2].st[1] = 1;	
-		verts[2].modulate[0] = 111;	
-		verts[2].modulate[1] = 19;	
-		verts[2].modulate[2] = 9;	
-		verts[2].modulate[3] = 255 * alpha;	
+    } else if (p->type == P_BLEED) {
+        vec3_t rr, ru;
+        vec3_t rotate_ang;
+        float alpha;
 
-		VectorMA (org, p->height, ru, point);	
-		VectorMA (point, -p->width, rr, point);	
-		VectorCopy (point, verts[3].xyz);	
-		verts[3].st[0] = 1;	
-		verts[3].st[1] = 0;	
-		verts[3].modulate[0] = 111;	
-		verts[3].modulate[1] = 19;	
-		verts[3].modulate[2] = 9;	
-		verts[3].modulate[3] = 255 * alpha;	
+        alpha = p->alpha;
 
-	}
-	else if (p->type == P_FLAT_SCALEUP)
-	{
-		float sinR, cosR;
+        if (p->roll) {
+            vectoangles(cg.refdef.viewaxis[0], rotate_ang);
+            rotate_ang[ROLL] += p->roll;
+            AngleVectors(rotate_ang, NULL, rr, ru);
+        } else {
+            VectorCopy(vup, ru);
+            VectorCopy(vright, rr);
+        }
 
-		if (p->color == BLOODRED)
-			VectorSet (color, 1, 1, 1);
-		else
-			VectorSet (color, 0.5, 0.5, 0.5);
-		
-		time = cg.time - p->time;
-		time2 = p->endtime - p->time;
-		ratio = time / time2;
+        VectorMA(org, -p->height, ru, point);
+        VectorMA(point, -p->width, rr, point);
+        VectorCopy(point, verts[0].xyz);
+        verts[0].st[0] = 0;
+        verts[0].st[1] = 0;
+        verts[0].modulate[0] = 111;
+        verts[0].modulate[1] = 19;
+        verts[0].modulate[2] = 9;
+        verts[0].modulate[3] = 255 * alpha;
 
-		width = p->width + ( ratio * ( p->endwidth - p->width) );
-		height = p->height + ( ratio * ( p->endheight - p->height) );
+        VectorMA(org, -p->height, ru, point);
+        VectorMA(point, p->width, rr, point);
+        VectorCopy(point, verts[1].xyz);
+        verts[1].st[0] = 0;
+        verts[1].st[1] = 1;
+        verts[1].modulate[0] = 111;
+        verts[1].modulate[1] = 19;
+        verts[1].modulate[2] = 9;
+        verts[1].modulate[3] = 255 * alpha;
 
-		if (width > p->endwidth)
-			width = p->endwidth;
+        VectorMA(org, p->height, ru, point);
+        VectorMA(point, p->width, rr, point);
+        VectorCopy(point, verts[2].xyz);
+        verts[2].st[0] = 1;
+        verts[2].st[1] = 1;
+        verts[2].modulate[0] = 111;
+        verts[2].modulate[1] = 19;
+        verts[2].modulate[2] = 9;
+        verts[2].modulate[3] = 255 * alpha;
 
-		if (height > p->endheight)
-			height = p->endheight;
+        VectorMA(org, p->height, ru, point);
+        VectorMA(point, -p->width, rr, point);
+        VectorCopy(point, verts[3].xyz);
+        verts[3].st[0] = 1;
+        verts[3].st[1] = 0;
+        verts[3].modulate[0] = 111;
+        verts[3].modulate[1] = 19;
+        verts[3].modulate[2] = 9;
+        verts[3].modulate[3] = 255 * alpha;
 
-		sinR = height * sin(DEG2RAD(p->roll)) * sqrt(2);
-		cosR = width * cos(DEG2RAD(p->roll)) * sqrt(2);
+    } else if (p->type == P_FLAT_SCALEUP) {
+        float sinR, cosR;
 
-		VectorCopy (org, verts[0].xyz);	
-		verts[0].xyz[0] -= sinR;
-		verts[0].xyz[1] -= cosR;
-		verts[0].st[0] = 0;	
-		verts[0].st[1] = 0;	
-		verts[0].modulate[0] = 255 * color[0];	
-		verts[0].modulate[1] = 255 * color[1];	
-		verts[0].modulate[2] = 255 * color[2];	
-		verts[0].modulate[3] = 255;	
+        if (p->color == BLOODRED)
+            VectorSet(color, 1, 1, 1);
+        else
+            VectorSet(color, 0.5, 0.5, 0.5);
 
-		VectorCopy (org, verts[1].xyz);	
-		verts[1].xyz[0] -= cosR;	
-		verts[1].xyz[1] += sinR;	
-		verts[1].st[0] = 0;	
-		verts[1].st[1] = 1;	
-		verts[1].modulate[0] = 255 * color[0];	
-		verts[1].modulate[1] = 255 * color[1];	
-		verts[1].modulate[2] = 255 * color[2];	
-		verts[1].modulate[3] = 255;	
+        time = cg.time - p->time;
+        time2 = p->endtime - p->time;
+        ratio = time / time2;
 
-		VectorCopy (org, verts[2].xyz);	
-		verts[2].xyz[0] += sinR;	
-		verts[2].xyz[1] += cosR;	
-		verts[2].st[0] = 1;	
-		verts[2].st[1] = 1;	
-		verts[2].modulate[0] = 255 * color[0];	
-		verts[2].modulate[1] = 255 * color[1];	
-		verts[2].modulate[2] = 255 * color[2];	
-		verts[2].modulate[3] = 255;	
+        width = p->width + (ratio * (p->endwidth - p->width));
+        height = p->height + (ratio * (p->endheight - p->height));
 
-		VectorCopy (org, verts[3].xyz);	
-		verts[3].xyz[0] += cosR;	
-		verts[3].xyz[1] -= sinR;	
-		verts[3].st[0] = 1;	
-		verts[3].st[1] = 0;	
-		verts[3].modulate[0] = 255 * color[0];	
-		verts[3].modulate[1] = 255 * color[1];	
-		verts[3].modulate[2] = 255 * color[2];	
-		verts[3].modulate[3] = 255;		
-	}
-	else if (p->type == P_FLAT)
-	{
+        if (width > p->endwidth)
+            width = p->endwidth;
 
-		VectorCopy (org, verts[0].xyz);	
-		verts[0].xyz[0] -= p->height;	
-		verts[0].xyz[1] -= p->width;	
-		verts[0].st[0] = 0;	
-		verts[0].st[1] = 0;	
-		verts[0].modulate[0] = 255;	
-		verts[0].modulate[1] = 255;	
-		verts[0].modulate[2] = 255;	
-		verts[0].modulate[3] = 255;	
+        if (height > p->endheight)
+            height = p->endheight;
 
-		VectorCopy (org, verts[1].xyz);	
-		verts[1].xyz[0] -= p->height;	
-		verts[1].xyz[1] += p->width;	
-		verts[1].st[0] = 0;	
-		verts[1].st[1] = 1;	
-		verts[1].modulate[0] = 255;	
-		verts[1].modulate[1] = 255;	
-		verts[1].modulate[2] = 255;	
-		verts[1].modulate[3] = 255;	
+        sinR = height * sin(DEG2RAD(p->roll)) * sqrt(2);
+        cosR = width * cos(DEG2RAD(p->roll)) * sqrt(2);
 
-		VectorCopy (org, verts[2].xyz);	
-		verts[2].xyz[0] += p->height;	
-		verts[2].xyz[1] += p->width;	
-		verts[2].st[0] = 1;	
-		verts[2].st[1] = 1;	
-		verts[2].modulate[0] = 255;	
-		verts[2].modulate[1] = 255;	
-		verts[2].modulate[2] = 255;	
-		verts[2].modulate[3] = 255;	
+        VectorCopy(org, verts[0].xyz);
+        verts[0].xyz[0] -= sinR;
+        verts[0].xyz[1] -= cosR;
+        verts[0].st[0] = 0;
+        verts[0].st[1] = 0;
+        verts[0].modulate[0] = 255 * color[0];
+        verts[0].modulate[1] = 255 * color[1];
+        verts[0].modulate[2] = 255 * color[2];
+        verts[0].modulate[3] = 255;
 
-		VectorCopy (org, verts[3].xyz);	
-		verts[3].xyz[0] += p->height;	
-		verts[3].xyz[1] -= p->width;	
-		verts[3].st[0] = 1;	
-		verts[3].st[1] = 0;	
-		verts[3].modulate[0] = 255;	
-		verts[3].modulate[1] = 255;	
-		verts[3].modulate[2] = 255;	
-		verts[3].modulate[3] = 255;	
+        VectorCopy(org, verts[1].xyz);
+        verts[1].xyz[0] -= cosR;
+        verts[1].xyz[1] += sinR;
+        verts[1].st[0] = 0;
+        verts[1].st[1] = 1;
+        verts[1].modulate[0] = 255 * color[0];
+        verts[1].modulate[1] = 255 * color[1];
+        verts[1].modulate[2] = 255 * color[2];
+        verts[1].modulate[3] = 255;
 
-	}
-	// Ridah
-	else if (p->type == P_ANIM) {
-		vec3_t	rr, ru;
-		vec3_t	rotate_ang;
-		int i, j;
+        VectorCopy(org, verts[2].xyz);
+        verts[2].xyz[0] += sinR;
+        verts[2].xyz[1] += cosR;
+        verts[2].st[0] = 1;
+        verts[2].st[1] = 1;
+        verts[2].modulate[0] = 255 * color[0];
+        verts[2].modulate[1] = 255 * color[1];
+        verts[2].modulate[2] = 255 * color[2];
+        verts[2].modulate[3] = 255;
 
-		time = cg.time - p->time;
-		time2 = p->endtime - p->time;
-		ratio = time / time2;
-		if (ratio >= 1.0f) {
-			ratio = 0.9999f;
-		}
+        VectorCopy(org, verts[3].xyz);
+        verts[3].xyz[0] += cosR;
+        verts[3].xyz[1] -= sinR;
+        verts[3].st[0] = 1;
+        verts[3].st[1] = 0;
+        verts[3].modulate[0] = 255 * color[0];
+        verts[3].modulate[1] = 255 * color[1];
+        verts[3].modulate[2] = 255 * color[2];
+        verts[3].modulate[3] = 255;
+    } else if (p->type == P_FLAT) {
 
-		width = p->width + ( ratio * ( p->endwidth - p->width) );
-		height = p->height + ( ratio * ( p->endheight - p->height) );
+        VectorCopy(org, verts[0].xyz);
+        verts[0].xyz[0] -= p->height;
+        verts[0].xyz[1] -= p->width;
+        verts[0].st[0] = 0;
+        verts[0].st[1] = 0;
+        verts[0].modulate[0] = 255;
+        verts[0].modulate[1] = 255;
+        verts[0].modulate[2] = 255;
+        verts[0].modulate[3] = 255;
 
-		// if we are "inside" this sprite, don't draw
-		if (Distance( cg.snap->ps.origin, org ) < width/1.5) {
-			return;
-		}
+        VectorCopy(org, verts[1].xyz);
+        verts[1].xyz[0] -= p->height;
+        verts[1].xyz[1] += p->width;
+        verts[1].st[0] = 0;
+        verts[1].st[1] = 1;
+        verts[1].modulate[0] = 255;
+        verts[1].modulate[1] = 255;
+        verts[1].modulate[2] = 255;
+        verts[1].modulate[3] = 255;
 
-		i = p->shaderAnim;
-		j = (int)floor(ratio * shaderAnimCounts[p->shaderAnim]);
-		p->pshader = shaderAnims[i][j];
+        VectorCopy(org, verts[2].xyz);
+        verts[2].xyz[0] += p->height;
+        verts[2].xyz[1] += p->width;
+        verts[2].st[0] = 1;
+        verts[2].st[1] = 1;
+        verts[2].modulate[0] = 255;
+        verts[2].modulate[1] = 255;
+        verts[2].modulate[2] = 255;
+        verts[2].modulate[3] = 255;
 
-		if (p->roll) {
-			vectoangles( cg.refdef.viewaxis[0], rotate_ang );
-			rotate_ang[ROLL] += p->roll;
-			AngleVectors ( rotate_ang, NULL, rr, ru);
-		}
+        VectorCopy(org, verts[3].xyz);
+        verts[3].xyz[0] += p->height;
+        verts[3].xyz[1] -= p->width;
+        verts[3].st[0] = 1;
+        verts[3].st[1] = 0;
+        verts[3].modulate[0] = 255;
+        verts[3].modulate[1] = 255;
+        verts[3].modulate[2] = 255;
+        verts[3].modulate[3] = 255;
 
-		if (p->roll) {
-			VectorMA (org, -height, ru, point);	
-			VectorMA (point, -width, rr, point);	
-		} else {
-			VectorMA (org, -height, vup, point);	
-			VectorMA (point, -width, vright, point);	
-		}
-		VectorCopy (point, verts[0].xyz);	
-		verts[0].st[0] = 0;	
-		verts[0].st[1] = 0;	
-		verts[0].modulate[0] = 255;	
-		verts[0].modulate[1] = 255;	
-		verts[0].modulate[2] = 255;	
-		verts[0].modulate[3] = 255;
+    }
+    // Ridah
+    else if (p->type == P_ANIM) {
+        vec3_t rr, ru;
+        vec3_t rotate_ang;
+        int i, j;
 
-		if (p->roll) {
-			VectorMA (point, 2*height, ru, point);	
-		} else {
-			VectorMA (point, 2*height, vup, point);	
-		}
-		VectorCopy (point, verts[1].xyz);	
-		verts[1].st[0] = 0;	
-		verts[1].st[1] = 1;	
-		verts[1].modulate[0] = 255;	
-		verts[1].modulate[1] = 255;	
-		verts[1].modulate[2] = 255;	
-		verts[1].modulate[3] = 255;	
+        time = cg.time - p->time;
+        time2 = p->endtime - p->time;
+        ratio = time / time2;
+        if (ratio >= 1.0f) {
+            ratio = 0.9999f;
+        }
 
-		if (p->roll) {
-			VectorMA (point, 2*width, rr, point);	
-		} else {
-			VectorMA (point, 2*width, vright, point);	
-		}
-		VectorCopy (point, verts[2].xyz);	
-		verts[2].st[0] = 1;	
-		verts[2].st[1] = 1;	
-		verts[2].modulate[0] = 255;	
-		verts[2].modulate[1] = 255;	
-		verts[2].modulate[2] = 255;	
-		verts[2].modulate[3] = 255;	
+        width = p->width + (ratio * (p->endwidth - p->width));
+        height = p->height + (ratio * (p->endheight - p->height));
 
-		if (p->roll) {
-			VectorMA (point, -2*height, ru, point);	
-		} else {
-			VectorMA (point, -2*height, vup, point);	
-		}
-		VectorCopy (point, verts[3].xyz);	
-		verts[3].st[0] = 1;	
-		verts[3].st[1] = 0;	
-		verts[3].modulate[0] = 255;	
-		verts[3].modulate[1] = 255;	
-		verts[3].modulate[2] = 255;	
-		verts[3].modulate[3] = 255;	
-	}
-	// done.
-	
-	if (!p->pshader) {
-// (SA) temp commented out for DM
-//		CG_Printf ("CG_AddParticleToScene type %d p->pshader == ZERO\n", p->type);
-		return;
-	}
+        // if we are "inside" this sprite, don't draw
+        if (Distance(cg.snap->ps.origin, org) < width / 1.5) {
+            return;
+        }
 
-	if (p->type == P_WEATHER || p->type == P_WEATHER_TURBULENT || p->type == P_WEATHER_FLURRY)
-		trap_R_AddPolyToScene( p->pshader, 3, TRIverts );
-	else
-		trap_R_AddPolyToScene( p->pshader, 4, verts );
+        i = p->shaderAnim;
+        j = (int)floor(ratio * shaderAnimCounts[p->shaderAnim]);
+        p->pshader = shaderAnims[i][j];
 
+        if (p->roll) {
+            vectoangles(cg.refdef.viewaxis[0], rotate_ang);
+            rotate_ang[ROLL] += p->roll;
+            AngleVectors(rotate_ang, NULL, rr, ru);
+        }
+
+        if (p->roll) {
+            VectorMA(org, -height, ru, point);
+            VectorMA(point, -width, rr, point);
+        } else {
+            VectorMA(org, -height, vup, point);
+            VectorMA(point, -width, vright, point);
+        }
+        VectorCopy(point, verts[0].xyz);
+        verts[0].st[0] = 0;
+        verts[0].st[1] = 0;
+        verts[0].modulate[0] = 255;
+        verts[0].modulate[1] = 255;
+        verts[0].modulate[2] = 255;
+        verts[0].modulate[3] = 255;
+
+        if (p->roll) {
+            VectorMA(point, 2 * height, ru, point);
+        } else {
+            VectorMA(point, 2 * height, vup, point);
+        }
+        VectorCopy(point, verts[1].xyz);
+        verts[1].st[0] = 0;
+        verts[1].st[1] = 1;
+        verts[1].modulate[0] = 255;
+        verts[1].modulate[1] = 255;
+        verts[1].modulate[2] = 255;
+        verts[1].modulate[3] = 255;
+
+        if (p->roll) {
+            VectorMA(point, 2 * width, rr, point);
+        } else {
+            VectorMA(point, 2 * width, vright, point);
+        }
+        VectorCopy(point, verts[2].xyz);
+        verts[2].st[0] = 1;
+        verts[2].st[1] = 1;
+        verts[2].modulate[0] = 255;
+        verts[2].modulate[1] = 255;
+        verts[2].modulate[2] = 255;
+        verts[2].modulate[3] = 255;
+
+        if (p->roll) {
+            VectorMA(point, -2 * height, ru, point);
+        } else {
+            VectorMA(point, -2 * height, vup, point);
+        }
+        VectorCopy(point, verts[3].xyz);
+        verts[3].st[0] = 1;
+        verts[3].st[1] = 0;
+        verts[3].modulate[0] = 255;
+        verts[3].modulate[1] = 255;
+        verts[3].modulate[2] = 255;
+        verts[3].modulate[3] = 255;
+    }
+    // done.
+
+    if (!p->pshader) {
+        // (SA) temp commented out for DM
+        //		CG_Printf ("CG_AddParticleToScene type %d p->pshader == ZERO\n", p->type);
+        return;
+    }
+
+    if (p->type == P_WEATHER || p->type == P_WEATHER_TURBULENT || p->type == P_WEATHER_FLURRY)
+        trap_R_AddPolyToScene(p->pshader, 3, TRIverts);
+    else
+        trap_R_AddPolyToScene(p->pshader, 4, verts);
 }
 
 // Ridah, made this static so it doesn't interfere with other files
 static float roll = 0.0;
 
-void CG_AddParticles (void)
+void CG_AddParticles(void)
 {
-	cparticle_t		*p, *next;
-	float			alpha;
-	float			time, time2;
-	vec3_t			org;
-	cparticle_t		*active, *tail;
-	vec3_t			rotate_ang;
+    cparticle_t *p, *next;
+    float alpha;
+    float time, time2;
+    vec3_t org;
+    cparticle_t *active, *tail;
+    vec3_t rotate_ang;
 
-	if (!initparticles)
-		CG_ClearParticles ();
+    if (!initparticles)
+        CG_ClearParticles();
 
-	VectorCopy( cg.refdef.viewaxis[0], vforward );
-	VectorCopy( cg.refdef.viewaxis[1], vright );
-	VectorCopy( cg.refdef.viewaxis[2], vup );
+    VectorCopy(cg.refdef.viewaxis[0], vforward);
+    VectorCopy(cg.refdef.viewaxis[1], vright);
+    VectorCopy(cg.refdef.viewaxis[2], vup);
 
-	vectoangles( cg.refdef.viewaxis[0], rotate_ang );
-	roll += ((cg.time - oldtime) * 0.1) ;
-	rotate_ang[ROLL] += (roll*0.9);
-	AngleVectors ( rotate_ang, rforward, rright, rup);
-	
-	oldtime = cg.time;
+    vectoangles(cg.refdef.viewaxis[0], rotate_ang);
+    roll += ((cg.time - oldtime) * 0.1);
+    rotate_ang[ROLL] += (roll * 0.9);
+    AngleVectors(rotate_ang, rforward, rright, rup);
 
-	active = NULL;
-	tail = NULL;
+    oldtime = cg.time;
 
-	for (p=active_particles ; p ; p=next)
-	{
+    active = NULL;
+    tail = NULL;
 
-		next = p->next;
+    for (p = active_particles; p; p = next) {
 
-		time = (cg.time - p->time)*0.001;
+        next = p->next;
 
-		alpha = p->alpha + time*p->alphavel;
-		if (alpha <= 0)
-		{	// faded out
-			p->next = free_particles;
-			free_particles = p;
-			p->type = 0;
-			p->color = 0;
-			p->alpha = 0;
-			continue;
-		}
+        time = (cg.time - p->time) * 0.001;
 
-		if (p->type == P_SMOKE || p->type == P_ANIM || p->type == P_BLEED || p->type == P_SMOKE_IMPACT)
-		{
-			if (cg.time > p->endtime)
-			{
-				p->next = free_particles;
-				free_particles = p;
-				p->type = 0;
-				p->color = 0;
-				p->alpha = 0;
-			
-				continue;
-			}
+        alpha = p->alpha + time * p->alphavel;
+        if (alpha <= 0) { // faded out
+            p->next = free_particles;
+            free_particles = p;
+            p->type = 0;
+            p->color = 0;
+            p->alpha = 0;
+            continue;
+        }
 
-		}
+        if (p->type == P_SMOKE || p->type == P_ANIM || p->type == P_BLEED || p->type == P_SMOKE_IMPACT) {
+            if (cg.time > p->endtime) {
+                p->next = free_particles;
+                free_particles = p;
+                p->type = 0;
+                p->color = 0;
+                p->alpha = 0;
 
-		if (p->type == P_WEATHER_FLURRY)
-		{
-			if (cg.time > p->endtime)
-			{
-				p->next = free_particles;
-				free_particles = p;
-				p->type = 0;
-				p->color = 0;
-				p->alpha = 0;
-			
-				continue;
-			}
-		}
+                continue;
+            }
+        }
 
+        if (p->type == P_WEATHER_FLURRY) {
+            if (cg.time > p->endtime) {
+                p->next = free_particles;
+                free_particles = p;
+                p->type = 0;
+                p->color = 0;
+                p->alpha = 0;
 
-		if (p->type == P_FLAT_SCALEUP_FADE)
-		{
-			if (cg.time > p->endtime)
-			{
-				p->next = free_particles;
-				free_particles = p;
-				p->type = 0;
-				p->color = 0;
-				p->alpha = 0;
-				continue;
-			}
+                continue;
+            }
+        }
 
-		}
+        if (p->type == P_FLAT_SCALEUP_FADE) {
+            if (cg.time > p->endtime) {
+                p->next = free_particles;
+                free_particles = p;
+                p->type = 0;
+                p->color = 0;
+                p->alpha = 0;
+                continue;
+            }
+        }
 
-		if ((p->type == P_BAT || p->type == P_SPRITE) && p->endtime < 0) {
-			// temporary sprite
-			CG_AddParticleToScene (p, p->org, alpha);
-			p->next = free_particles;
-			free_particles = p;
-			p->type = 0;
-			p->color = 0;
-			p->alpha = 0;
-			continue;
-		}
+        if ((p->type == P_BAT || p->type == P_SPRITE) && p->endtime < 0) {
+            // temporary sprite
+            CG_AddParticleToScene(p, p->org, alpha);
+            p->next = free_particles;
+            free_particles = p;
+            p->type = 0;
+            p->color = 0;
+            p->alpha = 0;
+            continue;
+        }
 
-		p->next = NULL;
-		if (!tail)
-			active = tail = p;
-		else
-		{
-			tail->next = p;
-			tail = p;
-		}
+        p->next = NULL;
+        if (!tail)
+            active = tail = p;
+        else {
+            tail->next = p;
+            tail = p;
+        }
 
-		if (alpha > 1.0)
-			alpha = 1;
+        if (alpha > 1.0)
+            alpha = 1;
 
-		time2 = time*time;
+        time2 = time * time;
 
-		org[0] = p->org[0] + p->vel[0]*time + p->accel[0]*time2;
-		org[1] = p->org[1] + p->vel[1]*time + p->accel[1]*time2;
-		org[2] = p->org[2] + p->vel[2]*time + p->accel[2]*time2;
+        org[0] = p->org[0] + p->vel[0] * time + p->accel[0] * time2;
+        org[1] = p->org[1] + p->vel[1] * time + p->accel[1] * time2;
+        org[2] = p->org[2] + p->vel[2] * time + p->accel[2] * time2;
 
-		CG_AddParticleToScene (p, org, alpha);
-	}
+        CG_AddParticleToScene(p, org, alpha);
+    }
 
-	active_particles = active;
+    active_particles = active;
 }
 
-void CG_ParticleExplosion (char *animStr, vec3_t origin, vec3_t vel, int duration, int sizeStart, int sizeEnd)
+void CG_ParticleExplosion(char* animStr, vec3_t origin, vec3_t vel, int duration, int sizeStart, int sizeEnd)
 {
-	cparticle_t	*p;
-	int anim;
+    cparticle_t* p;
+    int anim;
 
-	if (animStr < (char *)10)
-		CG_Error( "CG_ParticleExplosion: animStr is probably an index rather than a string" );
+    if (animStr < (char*)10)
+        CG_Error("CG_ParticleExplosion: animStr is probably an index rather than a string");
 
-	// find the animation string
-	for (anim=0; shaderAnimNames[anim]; anim++) {
-		if (!Q_stricmp( animStr, shaderAnimNames[anim] ))
-			break;
-	}
-	if (!shaderAnimNames[anim]) {
-		CG_Error("CG_ParticleExplosion: unknown animation string: %s", animStr);
-		return;
-	}
+    // find the animation string
+    for (anim = 0; shaderAnimNames[anim]; anim++) {
+        if (!Q_stricmp(animStr, shaderAnimNames[anim]))
+            break;
+    }
+    if (!shaderAnimNames[anim]) {
+        CG_Error("CG_ParticleExplosion: unknown animation string: %s", animStr);
+        return;
+    }
 
-	if (!free_particles)
-		return;
-	p = free_particles;
-	free_particles = p->next;
-	p->next = active_particles;
-	active_particles = p;
-	p->time = cg.time;
+    if (!free_particles)
+        return;
+    p = free_particles;
+    free_particles = p->next;
+    p->next = active_particles;
+    active_particles = p;
+    p->time = cg.time;
 #ifdef WOLF_PARTICLES
-	p->alpha = 1.0;
+    p->alpha = 1.0;
 #else
-	p->alpha = 0.5;
+    p->alpha = 0.5;
 #endif
-	p->alphavel = 0;
+    p->alphavel = 0;
 
-	if (duration < 0) {
-		duration *= -1;
-		p->roll = 0;
-	} else {
-		p->roll = crandom()*179;
-	}
+    if (duration < 0) {
+        duration *= -1;
+        p->roll = 0;
+    } else {
+        p->roll = crandom() * 179;
+    }
 
-	p->shaderAnim = anim;
+    p->shaderAnim = anim;
 
-	p->width = sizeStart;
-	p->height = sizeStart*shaderAnimSTRatio[anim];	// for sprites that are stretch in either direction
+    p->width = sizeStart;
+    p->height = sizeStart * shaderAnimSTRatio[anim]; // for sprites that are stretch in either direction
 
-	p->endheight = sizeEnd;
-	p->endwidth = sizeEnd*shaderAnimSTRatio[anim];
+    p->endheight = sizeEnd;
+    p->endwidth = sizeEnd * shaderAnimSTRatio[anim];
 
-	p->endtime = cg.time + duration;
+    p->endtime = cg.time + duration;
 
-	p->type = P_ANIM;
+    p->type = P_ANIM;
 
-	VectorCopy( origin, p->org );
-	VectorCopy( vel, p->vel );
-	VectorClear( p->accel );
-
+    VectorCopy(origin, p->org);
+    VectorCopy(vel, p->vel);
+    VectorClear(p->accel);
 }

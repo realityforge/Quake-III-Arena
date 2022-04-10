@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef Q_BOOLEAN_H
 #define Q_BOOLEAN_H
 
-typedef enum {qfalse, qtrue}	qboolean;
+typedef enum { qfalse,
+               qtrue } qboolean;
 
-#endif	// Q_BOOLEAN_H
+#endif // Q_BOOLEAN_H

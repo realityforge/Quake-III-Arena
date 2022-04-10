@@ -51,7 +51,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #undef QCALL
 #define QCALL __stdcall
 
-#if defined( _MSC_VER )
+#if defined(_MSC_VER)
 #define OS_STRING "win_msvc64"
 #elif defined __MINGW64__
 #define OS_STRING "win_mingw64"
@@ -60,7 +60,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define ID_INLINE __inline
 #define PATH_SEP '\\'
 
-#if defined( __WIN64__ ) 
+#if defined(__WIN64__)
 #define ARCH_STRING "x86_64"
 #elif defined _M_ALPHA
 #define ARCH_STRING "AXP"
@@ -71,7 +71,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define DLL_EXT ".dll"
 
 #endif
-
 
 //============================================================== MAC OS X ===
 
@@ -118,7 +117,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define PATH_SEP '/'
 
 #if !defined(ARCH_STRING)
-# error ARCH_STRING should be defined by the Makefile
+#error ARCH_STRING should be defined by the Makefile
 #endif
 
 #if defined __x86_64__
@@ -152,12 +151,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 //===========================================================================
 
-//catch missing defines in above blocks
-#if !defined( OS_STRING )
+// catch missing defines in above blocks
+#if !defined(OS_STRING)
 #error "Operating system not supported"
 #endif
 
-#if !defined( ARCH_STRING )
+#if !defined(ARCH_STRING)
 #error "Architecture not supported"
 #endif
 
@@ -173,17 +172,16 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #error "DLL_EXT not defined"
 #endif
 
+// endianness
+void CopyShortSwap(void* dest, void* src);
+void CopyLongSwap(void* dest, void* src);
+short ShortSwap(short l);
+int LongSwap(int l);
+float FloatSwap(const float* f);
 
-//endianness
-void CopyShortSwap (void *dest, void *src);
-void CopyLongSwap (void *dest, void *src);
-short ShortSwap (short l);
-int LongSwap (int l);
-float FloatSwap (const float *f);
-
-#if defined( Q3_BIG_ENDIAN ) && defined( Q3_LITTLE_ENDIAN )
+#if defined(Q3_BIG_ENDIAN) && defined(Q3_LITTLE_ENDIAN)
 #error "Endianness defined as both big and little"
-#elif defined( Q3_BIG_ENDIAN )
+#elif defined(Q3_BIG_ENDIAN)
 
 #define CopyLittleShort(dest, src) CopyShortSwap(dest, src)
 #define CopyLittleLong(dest, src) CopyLongSwap(dest, src)
@@ -194,7 +192,7 @@ float FloatSwap (const float *f);
 #define BigLong
 #define BigFloat
 
-#elif defined( Q3_LITTLE_ENDIAN )
+#elif defined(Q3_LITTLE_ENDIAN)
 
 #define CopyLittleShort(dest, src) memcpy(dest, src, 2)
 #define CopyLittleLong(dest, src) memcpy(dest, src, 4)
@@ -205,7 +203,7 @@ float FloatSwap (const float *f);
 #define BigLong(x) LongSwap(x)
 #define BigFloat(x) FloatSwap(&x)
 
-#elif defined( Q3_VM )
+#elif defined(Q3_VM)
 
 #define LittleShort
 #define LittleLong
@@ -218,8 +216,7 @@ float FloatSwap (const float *f);
 #error "Endianness not defined"
 #endif
 
-
-//platform string
+// platform string
 #ifdef NDEBUG
 #define PLATFORM_STRING OS_STRING "-" ARCH_STRING
 #else

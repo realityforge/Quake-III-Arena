@@ -24,4 +24,4 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * genetic selection
  *****************************************************************************/
 
-int GeneticParentsAndChildSelection(int numranks, float *ranks, int *parent1, int *parent2, int *child);
+int GeneticParentsAndChildSelection(int numranks, float* ranks, int* parent1, int* parent2, int* child);
