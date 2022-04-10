@@ -19,7 +19,7 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-#if !( defined __linux__ )
+#if !(defined __linux__)
 #error You should include this file only on Linux platforms
 #endif
 
@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 typedef struct
 {
-	void *OpenGLLib; // instance of OpenGL library
+    void* OpenGLLib; // instance of OpenGL library
 } glwstate_t;
 
 extern glwstate_t glw_state;

@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 #ifndef _WIN32
-#  error You should not be including this file on this platform
+#error You should not be including this file on this platform
 #endif
 
 #ifndef GLW_WIN_H
@@ -28,20 +28,20 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 typedef struct
 {
-	WNDPROC		wndproc;
+    WNDPROC wndproc;
 
-	HDC     hDC;			// handle to device context
-	HGLRC   hGLRC;			// handle to GL rendering context
+    HDC hDC; // handle to device context
+    HGLRC hGLRC; // handle to GL rendering context
 
-	HINSTANCE hinstOpenGL;	// HINSTANCE for the OpenGL library
+    HINSTANCE hinstOpenGL; // HINSTANCE for the OpenGL library
 
-	qboolean allowdisplaydepthchange;
-	qboolean pixelFormatSet;
+    qboolean allowdisplaydepthchange;
+    qboolean pixelFormatSet;
 
-	int		 desktopBitsPixel;
-	int		 desktopWidth, desktopHeight;
+    int desktopBitsPixel;
+    int desktopWidth, desktopHeight;
 
-	qboolean	cdsFullscreen;
+    qboolean cdsFullscreen;
 } glwstate_t;
 
 extern glwstate_t glw_state;

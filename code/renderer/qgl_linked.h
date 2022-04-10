@@ -308,10 +308,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define qglTexCoord4s glTexCoord4s
 #define qglTexCoord4sv glTexCoord4sv
 #define qglTexCoordPointer glTexCoordPointer
-#define	qglTexEnvf glTexEnvf
-#define	qglTexEnvfv glTexEnvfv
-#define	qglTexEnvi glTexEnvi
-#define	qglTexEnviv glTexEnviv
+#define qglTexEnvf glTexEnvf
+#define qglTexEnvfv glTexEnvfv
+#define qglTexEnvi glTexEnvi
+#define qglTexEnviv glTexEnviv
 #define qglTexGend glTexGend
 #define qglTexGendv glTexGendv
 #define qglTexGenf glTexGenf
@@ -354,4 +354,3 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define qglVertex4sv glVertex4sv
 #define qglVertexPointer glVertexPointer
 #define qglViewport glViewport
-

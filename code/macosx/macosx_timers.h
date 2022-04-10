@@ -24,26 +24,26 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #import <OmniTimer/OmniTimer.h>
 
 #define OTSTART(node) OTStackPush(node)
-#define OTSTOP(node)  OTStackPop()
+#define OTSTOP(node) OTStackPop()
 
-extern OTStackNode *rootNode;
-extern OTStackNode *markFragmentsNode1;
-extern OTStackNode *markFragmentsNode2;
-extern OTStackNode *markFragmentsGrid;
-extern OTStackNode *markFragmentsNode4;
-extern OTStackNode *addMarkFragmentsNode;
-extern OTStackNode *chopPolyNode;
-extern OTStackNode *boxTraceNode;
-extern OTStackNode *boxOnPlaneSideNode;
-extern OTStackNode *recursiveWorldNode;
-extern OTStackNode *surfaceAnimNode;
-extern OTStackNode *surfaceFaceNode;
-extern OTStackNode *surfaceMeshNode;
-extern OTStackNode *surfaceEndNode;
-extern OTStackNode *shadowEndNode;
-extern OTStackNode *stageIteratorGenericNode;
-extern OTStackNode *computeColorAndTexNode;
-extern OTStackNode *mp3DecodeNode;
+extern OTStackNode* rootNode;
+extern OTStackNode* markFragmentsNode1;
+extern OTStackNode* markFragmentsNode2;
+extern OTStackNode* markFragmentsGrid;
+extern OTStackNode* markFragmentsNode4;
+extern OTStackNode* addMarkFragmentsNode;
+extern OTStackNode* chopPolyNode;
+extern OTStackNode* boxTraceNode;
+extern OTStackNode* boxOnPlaneSideNode;
+extern OTStackNode* recursiveWorldNode;
+extern OTStackNode* surfaceAnimNode;
+extern OTStackNode* surfaceFaceNode;
+extern OTStackNode* surfaceMeshNode;
+extern OTStackNode* surfaceEndNode;
+extern OTStackNode* shadowEndNode;
+extern OTStackNode* stageIteratorGenericNode;
+extern OTStackNode* computeColorAndTexNode;
+extern OTStackNode* mp3DecodeNode;
 
 extern void InitializeTimers();
 
@@ -53,4 +53,3 @@ extern void InitializeTimers();
 #define OTSTOP(node)
 
 #endif
-

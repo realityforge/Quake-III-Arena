@@ -33,196 +33,190 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <io.h>
 #include <conio.h>
 
-int			sys_timeBase;
-int Sys_Milliseconds (void)
+int sys_timeBase;
+int Sys_Milliseconds(void)
 {
-	int			sys_curtime;
-	static qboolean	initialized = qfalse;
+    int sys_curtime;
+    static qboolean initialized = qfalse;
 
-	if (!initialized) {
-		sys_timeBase = timeGetTime();
-		initialized = qtrue;
-	}
-	sys_curtime = timeGetTime() - sys_timeBase;
+    if (!initialized) {
+        sys_timeBase = timeGetTime();
+        initialized = qtrue;
+    }
+    sys_curtime = timeGetTime() - sys_timeBase;
 
-	return sys_curtime;
+    return sys_curtime;
 }
 
-long fastftol( float f ) {
-	static int tmp;
-	__asm fld f
-	__asm fistp tmp
-	__asm mov eax, tmp
-}
-
-void Sys_SnapVector( float *v )
+long fastftol(float f)
 {
-	int i;
-	float f;
-
-	f = *v;
-	__asm	fld		f;
-	__asm	fistp	i;
-	*v = i;
-	v++;
-	f = *v;
-	__asm	fld		f;
-	__asm	fistp	i;
-	*v = i;
-	v++;
-	f = *v;
-	__asm	fld		f;
-	__asm	fistp	i;
-	*v = i;
-	/*
-	*v = fastftol(*v);
-	v++;
-	*v = fastftol(*v);
-	v++;
-	*v = fastftol(*v);
-	*/
+    static int tmp;
+    __asm fld f __asm fistp tmp __asm mov eax, tmp
 }
 
+void Sys_SnapVector(float* v)
+{
+    int i;
+    float f;
+
+    f = *v;
+    __asm fld f;
+    __asm fistp i;
+    *v = i;
+    v++;
+    f = *v;
+    __asm fld f;
+    __asm fistp i;
+    *v = i;
+    v++;
+    f = *v;
+    __asm fld f;
+    __asm fistp i;
+    *v = i;
+    /*
+    *v = fastftol(*v);
+    v++;
+    *v = fastftol(*v);
+    v++;
+    *v = fastftol(*v);
+    */
+}
 
 /*
 **
 ** Disable all optimizations temporarily so this code works correctly!
 **
 */
-#pragma optimize( "", off )
+#pragma optimize("", off)
 
-static int IsPentium( void )
+static int IsPentium(void)
 {
-	__asm 
-	{
-		pushfd						// save eflags
+    __asm {
+		pushfd // save eflags
 		pop		eax
-		test	eax, 0x00200000		// check ID bit
-		jz		set21				// bit 21 is not set, so jump to set_21
-		and		eax, 0xffdfffff		// clear bit 21
-		push	eax					// save new value in register
-		popfd						// store new value in flags
+		test	eax, 0x00200000 // check ID bit
+		jz		set21 // bit 21 is not set, so jump to set_21
+		and		eax, 0xffdfffff // clear bit 21
+		push	eax // save new value in register
+		popfd // store new value in flags
 		pushfd
 		pop		eax
-		test	eax, 0x00200000		// check ID bit
+		test	eax, 0x00200000 // check ID bit
 		jz		good
-		jmp		err					// cpuid not supported
+		jmp		err // cpuid not supported
 set21:
-		or		eax, 0x00200000		// set ID bit
-		push	eax					// store new value
-		popfd						// store new value in EFLAGS
+		or		eax, 0x00200000 // set ID bit
+		push	eax // store new value
+		popfd // store new value in EFLAGS
 		pushfd
 		pop		eax
-		test	eax, 0x00200000		// if bit 21 is on
+		test	eax, 0x00200000 // if bit 21 is on
 		jnz		good
 		jmp		err
-	}
+    }
 
 err:
-	return qfalse;
+    return qfalse;
 good:
-	return qtrue;
+    return qtrue;
 }
 
-static int Is3DNOW( void )
+static int Is3DNOW(void)
 {
-	unsigned regs[4];
-	char pstring[16];
-	char processorString[13];
+    unsigned regs[4];
+    char pstring[16];
+    char processorString[13];
 
-	// get name of processor
-	CPUID( 0, ( unsigned int * ) pstring );
-	processorString[0] = pstring[4];
-	processorString[1] = pstring[5];
-	processorString[2] = pstring[6];
-	processorString[3] = pstring[7];
-	processorString[4] = pstring[12];
-	processorString[5] = pstring[13];
-	processorString[6] = pstring[14];
-	processorString[7] = pstring[15];
-	processorString[8] = pstring[8];
-	processorString[9] = pstring[9];
-	processorString[10] = pstring[10];
-	processorString[11] = pstring[11];
-	processorString[12] = 0;
+    // get name of processor
+    CPUID(0, (unsigned int*)pstring);
+    processorString[0] = pstring[4];
+    processorString[1] = pstring[5];
+    processorString[2] = pstring[6];
+    processorString[3] = pstring[7];
+    processorString[4] = pstring[12];
+    processorString[5] = pstring[13];
+    processorString[6] = pstring[14];
+    processorString[7] = pstring[15];
+    processorString[8] = pstring[8];
+    processorString[9] = pstring[9];
+    processorString[10] = pstring[10];
+    processorString[11] = pstring[11];
+    processorString[12] = 0;
 
-//  REMOVED because you can have 3DNow! on non-AMD systems
-//	if ( strcmp( processorString, "AuthenticAMD" ) )
-//		return qfalse;
+    //  REMOVED because you can have 3DNow! on non-AMD systems
+    //	if ( strcmp( processorString, "AuthenticAMD" ) )
+    //		return qfalse;
 
-	// check AMD-specific functions
-	CPUID( 0x80000000, regs );
-	if ( regs[0] < 0x80000000 )
-		return qfalse;
+    // check AMD-specific functions
+    CPUID(0x80000000, regs);
+    if (regs[0] < 0x80000000)
+        return qfalse;
 
-	// bit 31 of EDX denotes 3DNOW! support
-	CPUID( 0x80000001, regs );
-	if ( regs[3] & ( 1 << 31 ) )
-		return qtrue;
+    // bit 31 of EDX denotes 3DNOW! support
+    CPUID(0x80000001, regs);
+    if (regs[3] & (1 << 31))
+        return qtrue;
 
-	return qfalse;
+    return qfalse;
 }
 
-static int IsKNI( void )
+static int IsKNI(void)
 {
-	unsigned regs[4];
+    unsigned regs[4];
 
-	// get CPU feature bits
-	CPUID( 1, regs );
+    // get CPU feature bits
+    CPUID(1, regs);
 
-	// bit 25 of EDX denotes KNI existence
-	if ( regs[3] & ( 1 << 25 ) )
-		return qtrue;
+    // bit 25 of EDX denotes KNI existence
+    if (regs[3] & (1 << 25))
+        return qtrue;
 
-	return qfalse;
+    return qfalse;
 }
 
-static int IsMMX( void )
+static int IsMMX(void)
 {
-	unsigned regs[4];
+    unsigned regs[4];
 
-	// get CPU feature bits
-	CPUID( 1, regs );
+    // get CPU feature bits
+    CPUID(1, regs);
 
-	// bit 23 of EDX denotes MMX existence
-	if ( regs[3] & ( 1 << 23 ) )
-		return qtrue;
-	return qfalse;
+    // bit 23 of EDX denotes MMX existence
+    if (regs[3] & (1 << 23))
+        return qtrue;
+    return qfalse;
 }
 
-int Sys_GetProcessorId( void )
+int Sys_GetProcessorId(void)
 {
 #if defined _M_ALPHA
-	return CPUID_AXP;
+    return CPUID_AXP;
 #elif !defined _M_IX86
-	return CPUID_GENERIC;
+    return CPUID_GENERIC;
 #else
 
-	// verify we're at least a Pentium or 486 w/ CPUID support
-	if ( !IsPentium() )
-		return CPUID_INTEL_UNSUPPORTED;
+    // verify we're at least a Pentium or 486 w/ CPUID support
+    if (!IsPentium())
+        return CPUID_INTEL_UNSUPPORTED;
 
-	// check for MMX
-	if ( !IsMMX() )
-	{
-		// Pentium or PPro
-		return CPUID_INTEL_PENTIUM;
-	}
+    // check for MMX
+    if (!IsMMX()) {
+        // Pentium or PPro
+        return CPUID_INTEL_PENTIUM;
+    }
 
-	// see if we're an AMD 3DNOW! processor
-	if ( Is3DNOW() )
-	{
-		return CPUID_AMD_3DNOW;
-	}
+    // see if we're an AMD 3DNOW! processor
+    if (Is3DNOW()) {
+        return CPUID_AMD_3DNOW;
+    }
 
-	// see if we're an Intel Katmai
-	if ( IsKNI() )
-	{
-		return CPUID_INTEL_KATMAI;
-	}
+    // see if we're an Intel Katmai
+    if (IsKNI()) {
+        return CPUID_INTEL_KATMAI;
+    }
 
-	// by default we're functionally a vanilla Pentium/MMX or P2/MMX
-	return CPUID_INTEL_MMX;
+    // by default we're functionally a vanilla Pentium/MMX or P2/MMX
+    return CPUID_INTEL_MMX;
 
 #endif
 }
@@ -232,14 +226,14 @@ int Sys_GetProcessorId( void )
 ** Re-enable optimizations back to what they were
 **
 */
-#pragma optimize( "", on )
+#pragma optimize("", on)
 
-char	*Sys_DefaultHomePath(void) {
-	return NULL;
-}
-
-char *Sys_DefaultInstallPath(void)
+char* Sys_DefaultHomePath(void)
 {
-	return Sys_Cwd();
+    return NULL;
 }
 
+char* Sys_DefaultInstallPath(void)
+{
+    return Sys_Cwd();
+}

@@ -23,5 +23,4 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 extern void CGFix_Initialize();
 
-extern void CGFix_GetLastMouseDelta(CGMouseDelta *dx, CGMouseDelta *dy);
-
+extern void CGFix_GetLastMouseDelta(CGMouseDelta* dx, CGMouseDelta* dy);
