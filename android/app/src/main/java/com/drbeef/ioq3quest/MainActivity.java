@@ -106,7 +106,7 @@ public class MainActivity extends SDLActivity // implements KeyEvent.Callback
 
 		//If open arena is installed then copy necessary stuff
 		if (new File("/sdcard/ioquake3Quest/baseoa").exists()) {
-			copy_asset("/sdcard/ioquake3Quest/baseoa", "autoexec.cfg", false);
+			copy_asset("/sdcard/ioquake3Quest/baseoa", "autoexec_oa.cfg", "autoexec.cfg", false);
 			copy_asset("/sdcard/ioquake3Quest/baseoa", "pakQ3Q.pk3", true);
 		}
 
@@ -152,14 +152,18 @@ public class MainActivity extends SDLActivity // implements KeyEvent.Callback
 	}
 
 	public void copy_asset(String path, String name, boolean force) {
-		File f = new File(path + "/" + name);
+		copy_asset(path, name, name, force);
+	}
+
+	public void copy_asset(String path, String name, String newName, boolean force) {
+		File f = new File(path + "/" + newName);
 		if (!f.exists() || force) {
 
 			//Ensure we have an appropriate folder
 			String fullname = path + "/" + name;
 			String directory = fullname.substring(0, fullname.lastIndexOf("/"));
 			new File(directory).mkdirs();
-			_copy_asset(name, path + "/" + name);
+			_copy_asset(name, path + "/" + newName);
 		}
 	}
 
