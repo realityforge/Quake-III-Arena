@@ -240,8 +240,8 @@ static void Controls3_MenuInit( void ) {
 
 	static const char *s_weaponselectormode[] =
 			{
-					"Controller Based",
-					"HMD/Thumbstick Based",
+					"VR Style / Pointing",
+					"Classic / Thumbstick",
 					NULL
 			};
 
