@@ -1,4 +1,16 @@
 ---
+# A style format created via "clang-format -style=WebKit -dump-config > .clang-format" with minor
+# changes;
+# - setting "SortIncludes: Never" (as the headers are not well defined and enabling this would lead to compilation errors)
+# - setting "AlignAfterOpenBracket: Align" (personal preference)
+#
+# For documentation on how to edit this file see https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+# and to experiment you can use https://zed0.co.uk/clang-format-configurator/
+#
+# To configure the CLion IDE to use this format see https://www.jetbrains.com/help/clion/clangformat-as-alternative-formatter.html
+#
+# TODO: When clang-format version 15 is available the source code format should be updated with the setting "InsertBraces: true".
+#
 Language:        Cpp
 # BasedOnStyle:  WebKit
 AccessModifierOffset: -4
