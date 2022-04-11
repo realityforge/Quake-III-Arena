@@ -12,7 +12,8 @@ shift
 echo "Copying ${FILE_COUNT} files from base $PREFIX to $TARGET"
 
 for file in "$@"; do
-  mkdir -p "pak/$(dirname "${file#$PREFIX}")" || (echo "Failed to make directory ${file#$PREFIX}" && exit 3)
-  [ -e "pak/${file#$PREFIX}" ] && echo "File exists when copying from $PREFIX - ${file#$PREFIX}" && exit 4
-  cp "${file}" "pak/${file#$PREFIX}" || (echo "Failed to copy file ${file} to pak/${file#$PREFIX}" && exit 2)
+  target="$(tr '[:upper:]' '[:lower:]' <<< "${file#$PREFIX}")"
+  mkdir -p "pak/$(dirname "${target}")" || (echo "Failed to make directory for ${target}" && exit 3)
+  [ -e "pak/${target}" ] && echo "File exists when copying from $PREFIX - ${target}" && exit 4
+  cp "${file}" "pak/${target}" || (echo "Failed to copy file ${file} to pak/${target}" && exit 2)
 done
