@@ -1,12 +1,5 @@
 # The list of files from the pak that are of interest.
 _FILES = [
-    "icons/iconf_blu1.tga",
-    "icons/iconf_blu2.tga",
-    "icons/iconf_blu3.tga",
-    "icons/iconf_red1.tga",
-    "icons/iconf_red2.tga",
-    "icons/iconf_red3.tga",
-    "levelshots/q3tourney6_ctf.tga",
     "maps/q3dm9.bsp",
     "maps/q3tourney6_ctf.aas",
     "maps/q3tourney6_ctf.bsp",

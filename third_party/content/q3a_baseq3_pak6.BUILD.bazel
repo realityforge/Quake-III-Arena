@@ -8,8 +8,6 @@ _FILES = [
     "levelshots/pro_q3tourney4.jpg",
     "scripts/lightningnew.shader",
     "scripts/promaps.arena",
-    "levelshots/pro-q3dm13.jpg",
-    "levelshots/pro-q3dm6.jpg",
     "levelshots/pro-q3tourney2.jpg",
     "levelshots/pro-q3tourney4.jpg",
     "maps/pro-q3dm13.aas",

@@ -82,8 +82,6 @@ _FILES = [
     "icons/portal.tga",
     "icons/proxmine.tga",
     "icons/scout.tga",
-    "icons/skull_blue.tga",
-    "icons/skull_red.tga",
     "large_maps.cfg",
     "levelshots/mpq3ctf1.tga",
     "levelshots/mpq3ctf1_small.tga",
@@ -3037,6 +3035,10 @@ filegroup(
 
             # Files present in pak3 update
             "scripts/models2.shader",
+
+            # Files present in pak8hqq36.pk3
+            "icons/skull_blue.tga",
+            "icons/skull_red.tga",
 
             # Menus that are are now programmatically added to archive
             "ui/**/*.menu",

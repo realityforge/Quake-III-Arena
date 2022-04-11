@@ -49,3 +49,21 @@ find .  ! -type d |  sed -e "s/^\\.\\///" | awk '{print "\\"" $$0 "\\"" }' | sor
         "@bazel_tools//tools/zip:zipper",
     ],
 )
+
+genrule(
+    name = "pak9hqq36",
+    srcs = [
+        "@pak9hqq36//:files",
+    ],
+    outs = ["pak9hqq36.pk3"],
+    cmd = """
+rm -rf pak
+$(location :copy_files.sh) external/pak9hqq36/ pak $(locations @pak9hqq36//:files)
+cd pak
+find .  ! -type d |  sed -e "s/^\\.\\///" | awk '{print "\\"" $$0 "\\"" }' | sort | xargs ../$(location @bazel_tools//tools/zip:zipper) c ../$@
+    """,
+    tools = [
+        ":copy_files.sh",
+        "@bazel_tools//tools/zip:zipper",
+    ],
+)

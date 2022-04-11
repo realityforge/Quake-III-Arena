@@ -3,6 +3,7 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_archive = "http_archive")
 
 _BASE_URL = "file:///Users/peter/Steam/quake3teamarena"
+_LOCAL_ASSETS_BASE_URL = "file:///Users/peter/Code/GameDev/Assets"
 
 def _local_pak(game, index, sha256 = None):
     name = "q3a_%s_pak%d" % (game, index)
@@ -12,6 +13,18 @@ def _local_pak(game, index, sha256 = None):
     _http_archive(
         name = name,
         urls = ["%s/%s/pak%d.pk3" % (_BASE_URL, game, index)],
+        type = "zip",
+        sha256 = sha256,
+        build_file = "//third_party/content:%s.BUILD.bazel" % (name),
+    )
+
+def _local_assets(name, path, sha256 = None):
+    if native.existing_rule(name):
+        return
+
+    _http_archive(
+        name = name,
+        urls = ["%s/%s" % (_LOCAL_ASSETS_BASE_URL, path)],
         type = "zip",
         sha256 = sha256,
         build_file = "//third_party/content:%s.BUILD.bazel" % (name),
@@ -30,3 +43,7 @@ def load_pak_repos():
     _local_pak("missionpack", 0, "fdb5fe4f15f22bd270628d9b3153b733ca4548207722e768051c08c9dbff9135")
     _local_pak("missionpack", 1, "9818e99ba58d91f231a650a3c42559d1c5661cb3c0dfd033ef4225ba8ecdfd60")
     _local_pak("missionpack", 3, "77c0bcbb61be81a389d8959b76969a801a5e589d97ab8aeb2cb7ced54f187fc7")
+
+    # HQQ (HD 2D Elements) repacked for Q3Quest
+    # Sourced from https://www.moddb.com/games/quake-iii-arena/addons/pak9hqq36-q3q
+    _local_assets("pak9hqq36", "baseq3/pak9hqq36.pk3", "05ebdf270a7baf1b68dc5c4bb17557b1d8b0a6825b8d9570b341500e0324843e")
