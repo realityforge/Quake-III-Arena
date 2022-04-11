@@ -21,6 +21,18 @@ git config branch.upstream/idSoftware.merge refs/heads/master
 git config branch.upstream/idSoftware.pushRemote origin
 git push
 
+git remote rm ioq3quest 2> /dev/null > /dev/null || (echo "ioq3quest remote not present")
+git remote add --no-tags --track master ioq3quest https://github.com/DrBeef/ioq3quest.git
+git fetch ioq3quest
+
+git checkout ioq3quest/master
+git branch -D upstream/ioq3quest 2> /dev/null > /dev/null || (echo "ioq3quest upstream branch not present")
+git checkout -B upstream/ioq3quest
+git config branch.upstream/ioq3quest.remote ioq3quest
+git config branch.upstream/ioq3quest.merge refs/heads/master
+git config branch.upstream/ioq3quest.pushRemote origin
+git push
+
 git remote rm ioq3 2> /dev/null > /dev/null || (echo "ioq3 remote not present")
 git remote add --no-tags --track main ioq3 https://github.com/ioquake/ioq3.git
 git fetch ioq3
