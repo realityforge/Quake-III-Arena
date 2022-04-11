@@ -56,3 +56,5 @@ git config branch.upstream/vkQuake3.remote vkQuake3
 git config branch.upstream/vkQuake3.merge refs/heads/master
 git config branch.upstream/vkQuake3.pushRemote origin
 git push
+
+git checkout master
