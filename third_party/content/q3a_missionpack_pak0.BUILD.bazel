@@ -3038,7 +3038,7 @@ filegroup(
             # Files present in pak3 update
             "scripts/models2.shader",
 
-            # Menus that are are now programaticaly added to archive
+            # Menus that are are now programmatically added to archive
             "ui/**/*.menu",
             "ui/hud.txt",
             "ui/hud2.txt",
