@@ -1,5 +1,10 @@
+# The list of files from the pak that are of interest.
+_FILES = [
+    "teaminfo.txt",
+]
+
 filegroup(
     name = "files",
-    srcs = ["teaminfo.txt"],
+    srcs = _FILES,
     visibility = ["//visibility:public"],
 )

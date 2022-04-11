@@ -1,9 +1,12 @@
+# The list of files from the pak that are of interest.
+_FILES = [
+    "demos/demo127.dm_48",
+    "menu/medals/medal_capture.tga",
+    "scripts/gfx.shader",
+]
+
 filegroup(
     name = "files",
-    srcs = [
-        "demos/demo127.dm_48",
-        "menu/medals/medal_capture.tga",
-        "scripts/gfx.shader",
-    ],
+    srcs = _FILES,
     visibility = ["//visibility:public"],
 )

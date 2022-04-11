@@ -1,7 +1,10 @@
+# The list of files from the pak that are of interest.
+_FILES = [
+    "scripts/models2.shader",
+]
+
 filegroup(
     name = "files",
-    srcs = [
-        "scripts/models2.shader",
-    ],
+    srcs = _FILES,
     visibility = ["//visibility:public"],
 )

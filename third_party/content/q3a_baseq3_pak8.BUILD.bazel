@@ -1,8 +1,11 @@
+# The list of files from the pak that are of interest.
+_FILES = [
+    "demos/four.dm_68",
+    "menu/art/pblogo.tga",
+]
+
 filegroup(
     name = "files",
-    srcs = [
-        "demos/four.dm_68",
-        "menu/art/pblogo.tga",
-    ],
+    srcs = _FILES,
     visibility = ["//visibility:public"],
 )
