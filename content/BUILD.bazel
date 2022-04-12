@@ -56,6 +56,7 @@ find .  ! -type d |  sed -e "s/^\\.\\///" | awk '{print "\\"" $$0 "\\"" }' | sor
     ],
 )
 
+# TODO: Merge this into the "base" paks?
 genrule(
     name = "pak9hqq36",
     srcs = [
