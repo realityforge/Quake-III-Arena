@@ -1,0 +1,8 @@
+# The list of files from the pak that are of interest.
+_FILES = ["scripts/q3a-1.32.shader"]
+
+filegroup(
+    name = "files",
+    srcs = _FILES,
+    visibility = ["//visibility:public"],
+)

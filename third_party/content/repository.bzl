@@ -47,3 +47,10 @@ def load_pak_repos():
     # HQQ (HD 2D Elements) repacked for Q3Quest
     # Sourced from https://www.moddb.com/games/quake-iii-arena/addons/pak9hqq36-q3q
     _local_assets("pak9hqq36", "baseq3/pak9hqq36.pk3", "05ebdf270a7baf1b68dc5c4bb17557b1d8b0a6825b8d9570b341500e0324843e")
+
+    # License: id Software and Pi Studios for Quake Arena Arcade on Xbox 360.
+    # Luigi Auriemma for QuickBMS and the Quake Arena Arcade script.
+    # Sourced from https://www.moddb.com/mods/quake-arena-arcade-assets/downloads/quake-arena-arcade-assets
+    _local_assets("QuakeArenaArcade_baseq3", "baseq3/QuakeArenaArcade.pk3", "0b34447617641c915dcc28ae2fab30d86df41f297e6b30f7ce678f942cf76a45")
+    _local_assets("a_QuakeArenaArcade_baseq3", "baseq3/a_QuakeArenaArcade.pk3", "d7911a9b115ae5e996ee784a2014c249b5d95d812e1e172030e8c9dfcb913cdc")
+    _local_assets("QuakeArenaArcade_missionpack", "missionpack/QuakeArenaArcade.pk3", "4ac1e97e9e989709a101dfe19035ed3af535feedb3acd7477f2b078a9af5fe9a")
