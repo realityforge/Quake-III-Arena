@@ -31,7 +31,9 @@ git checkout -B upstream/ioq3quest
 git config branch.upstream/ioq3quest.remote ioq3quest
 git config branch.upstream/ioq3quest.merge refs/heads/master
 git config branch.upstream/ioq3quest.pushRemote origin
-git push
+git rm --force -r .github/workflows
+git commit -m "Remove workflows from upstream branch to avoid executing actions unnecessarily"
+git push -f
 
 git remote rm ioq3 2> /dev/null > /dev/null || (echo "ioq3 remote not present")
 git remote add --no-tags --track main ioq3 https://github.com/ioquake/ioq3.git
@@ -43,7 +45,9 @@ git checkout -B upstream/ioq3
 git config branch.upstream/ioq3.remote ioq3
 git config branch.upstream/ioq3.merge refs/heads/main
 git config branch.upstream/ioq3.pushRemote origin
-git push
+git rm --force -r .github/workflows
+git commit -m "Remove workflows from upstream branch to avoid executing actions unnecessarily"
+git push -f
 
 git remote rm quake3e 2> /dev/null > /dev/null || (echo "quake3e remote not present")
 git remote add --no-tags --track master quake3e https://github.com/ec-/Quake3e.git
@@ -55,7 +59,9 @@ git checkout -B upstream/quake3e
 git config branch.upstream/quake3e.remote quake3e
 git config branch.upstream/quake3e.merge refs/heads/master
 git config branch.upstream/quake3e.pushRemote origin
-git push
+git rm --force -r .github/workflows
+git commit -m "Remove workflows from upstream branch to avoid executing actions unnecessarily"
+git push -f
 
 git remote rm vkQuake3 2> /dev/null > /dev/null || (echo "vkQuake3 remote not present")
 git remote add --no-tags --track master vkQuake3 https://github.com/suijingfeng/vkQuake3.git
