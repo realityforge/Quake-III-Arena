@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#
+# A simple pre commit hook that formats any c files that are in the staging area.
+# It should be installed via:
+#
+#   > cp bin/git-pre-commit .git/hooks/pre-commit
+#   > chmod u+x .git/hooks/pre-commit
+#
+
+set -e
+
+if [ -f .clang-format ]; then
+  git diff --name-only --cached | sed -ne  '/^code\\/.*\\.[ch]$/p' | xargs clang-format -i
+fi
