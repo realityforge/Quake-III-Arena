@@ -2100,7 +2100,6 @@ static imageExtToLoaderMap_t imageLoaders[] = {
     { "tga", R_LoadTGA },
     { "jpg", R_LoadJPG },
     { "jpeg", R_LoadJPG },
-    { "pcx", R_LoadPCX },
     { "bmp", R_LoadBMP }
 };
 
