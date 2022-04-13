@@ -22,6 +22,10 @@ The ideal solution will limit the number of times that a user has to manually ru
 
 Several source code formatters were assessed but the final two contenders were [ClangFormat](https://clang.llvm.org/docs/ClangFormat.html) and [Artistic Style or "Astyle"](http://astyle.sourceforge.net/). The `ClangFormat` tool was selected as it has better integration with the CLion IDE and seem to have broader community support.
 
+The tool is simple to setup and install and most development platforms have it integrated into the package manager. Under OSX, at the time of writing, the following command will install version `14` of `ClangFormat`. (Similar one liners exist for other platforms)
+
+> $ brew install clang-format
+
 The solution consisted of the following actions:
 
 #### Select a code style
