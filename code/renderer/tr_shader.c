@@ -2139,7 +2139,7 @@ shader_t* R_FindShader(const char* name, int lightmapIndex, qboolean mipRawImage
 
     //
     // if not defined in the in-memory shader descriptions,
-    // look for a single TGA, BMP, or PCX
+    // look for a single TGA, BMP
     //
     Q_strncpyz(fileName, name, sizeof(fileName));
     COM_DefaultExtension(fileName, sizeof(fileName), ".tga");
