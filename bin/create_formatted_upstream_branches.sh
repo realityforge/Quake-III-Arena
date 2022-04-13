@@ -11,7 +11,7 @@ git fetch --all
 git fetch origin
 
 git checkout upstream/ioq3quest
-git pull
+git reset --hard ioq3quest/master
 git branch -D upstream/ioq3quest_formatted 2> /dev/null > /dev/null || echo "No Local branch, creating local branch and formatting"
 git checkout -B upstream/ioq3quest_formatted
 git show ${BRANCH_WITH_CLANG_FORMAT}:.clang-format > .clang-format
@@ -36,7 +36,7 @@ git push origin :upstream/ioq3quest_formatted 2> /dev/null > /dev/null || echo "
 git push -f --set-upstream origin upstream/ioq3quest_formatted
 
 git checkout upstream/ioq3
-git pull
+git reset --hard ioq3/main
 git branch -D upstream/ioq3_formatted 2> /dev/null > /dev/null || echo "No Local branch, creating local branch and formatting"
 git checkout -B upstream/ioq3_formatted
 pwd
@@ -62,7 +62,7 @@ git push origin :upstream/ioq3_formatted 2> /dev/null > /dev/null || echo "No up
 git push -f --set-upstream origin upstream/ioq3_formatted
 
 git checkout upstream/quake3e
-git pull
+git reset --hard quake3e/master
 git branch -D upstream/quake3e_formatted 2> /dev/null > /dev/null || echo "No Local branch, creating local branch and formatting"
 git checkout -B upstream/quake3e_formatted
 git show ${BRANCH_WITH_CLANG_FORMAT}:.clang-format > .clang-format
@@ -81,7 +81,7 @@ git push origin :upstream/quake3e_formatted || echo "No upstream/quake3e_formatt
 git push --set-upstream origin upstream/quake3e_formatted
 
 git checkout upstream/vkQuake3
-git pull
+git reset --hard vkQuake3/master
 git branch -D upstream/vkQuake3_formatted 2> /dev/null > /dev/null || echo "No Local branch, creating local branch and formatting"
 git checkout -B upstream/vkQuake3_formatted
 git show ${BRANCH_WITH_CLANG_FORMAT}:.clang-format > .clang-format
