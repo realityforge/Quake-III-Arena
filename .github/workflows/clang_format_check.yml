@@ -6,6 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      # This Action is horribly inefficient as it downloads a docker image to perform the check
+      # and this download can take longer than it takes for the product to build. In the future
+      # we should just integrate style checking into bazel
       - name: Run clang-format style check.
         uses: jidicula/clang-format-action@v4.5.0
         with:
