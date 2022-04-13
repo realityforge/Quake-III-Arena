@@ -4,6 +4,9 @@ set -e
 
 export BRANCH_WITH_CLANG_FORMAT=origin/BazelBuild
 
+# Fetch all the remotes
+git fetch --all
+
 # Fetch origin to ensure the .clang-format is present and updated
 git fetch origin
 
@@ -36,6 +39,7 @@ git checkout upstream/ioq3
 git pull
 git branch -D upstream/ioq3_formatted 2> /dev/null > /dev/null || echo "No Local branch, creating local branch and formatting"
 git checkout -B upstream/ioq3_formatted
+pwd
 git show ${BRANCH_WITH_CLANG_FORMAT}:.clang-format > .clang-format
 # shellcheck disable=SC2038
 find code \
