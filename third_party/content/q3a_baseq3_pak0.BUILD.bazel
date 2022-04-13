@@ -3219,7 +3219,6 @@ filegroup(
 
             # Files present in pak8 update
             "demos/four.dm_68",
-            "menu/art/pblogo.tga",
 
             # Files present in pak8hqq36.pk3
             "gfx/2d/backtile.jpg",
@@ -3381,7 +3380,6 @@ filegroup(
             "menu/art/next_0.tga",
             "menu/art/next_1.tga",
             "menu/art/opponents_select.tga",
-            "menu/art/pblogo.tga",
             "menu/art/play_0.tga",
             "menu/art/play_1.tga",
             "menu/art/player_models_ports.tga",
@@ -3586,6 +3584,9 @@ filegroup(
             "models/weapons2/shotgun/shotgun.md3",
             "models/weapons2/shotgun/shotgun.jpg",
             "scripts/q3a-1.32e.shader",
+
+            # PunkBuster files that are no longer required
+            "menu/art/pblogo.tga",
 
             # qvm code that is no longer compatible
             "vm/*",

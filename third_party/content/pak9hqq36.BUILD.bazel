@@ -168,7 +168,6 @@ _FILES = [
     "menu/art/next_0.tga",
     "menu/art/next_1.tga",
     "menu/art/opponents_select.tga",
-    "menu/art/pblogo.tga",
     "menu/art/play_0.tga",
     "menu/art/play_1.tga",
     "menu/art/player_models_ports.tga",
