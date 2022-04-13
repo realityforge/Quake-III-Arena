@@ -2,3 +2,4 @@
 * -text
 *.md text
 *.yml text
+.gitattributes text
