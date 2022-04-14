@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'master'
+      - 'BazelBuild'
   # Always run the "Build" action when a pull request is opened, synchronized (aka pushed to) or reopened
   pull_request:
 
