@@ -19,6 +19,7 @@ git checkout -B upstream/idSoftware
 git config branch.upstream/idSoftware.remote idSoftware
 git config branch.upstream/idSoftware.merge refs/heads/master
 git config branch.upstream/idSoftware.pushRemote origin
+git gc --prune=now --aggressive
 git push
 
 git remote rm ioq3quest 2> /dev/null > /dev/null || (echo "ioq3quest remote not present")
@@ -33,6 +34,7 @@ git config branch.upstream/ioq3quest.merge refs/heads/master
 git config branch.upstream/ioq3quest.pushRemote origin
 git rm --force -r .github/workflows
 git commit -m "Remove workflows from upstream branch to avoid executing actions unnecessarily"
+git gc --prune=now --aggressive
 git push -f
 
 git remote rm ioq3 2> /dev/null > /dev/null || (echo "ioq3 remote not present")
