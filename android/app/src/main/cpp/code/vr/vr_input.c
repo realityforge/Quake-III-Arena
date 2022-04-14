@@ -259,13 +259,8 @@ static qboolean IN_GetInputAction(const char* inputName, char* action)
     char * val = Cvar_VariableString(cvarname);
     if (val && strlen(val) > 0)
     {
-        if (strcmp(val, "blank") == 0) {
-            // Empty function to block alt fallback on unmapped alt inputs
-            return qfalse;
-        } else {
-            Com_sprintf(action, 256, "%s", val);
-            return qtrue;
-        }
+        Com_sprintf(action, 256, "%s", val);
+        return qtrue;
     }
 
     //If we didn't find something for this input and the alt key is active, then see if the un-alt key has a function
@@ -289,7 +284,11 @@ static qboolean IN_SendInputAction(const char* action, qboolean inputActive, flo
     if (action)
     {
         //handle our special actions first
-        if (strcmp(action, "+alt") == 0)
+        if (strcmp(action, "blank") == 0) {
+            // Empty function used to block alt fallback on unmapped alt buttons or
+            // force 8-way mapping mode of thumbstick without assigning actual action
+        }
+        else if (strcmp(action, "+alt") == 0)
         {
             alt_key_mode_active = inputActive;
         }
