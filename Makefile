@@ -400,7 +400,7 @@ ifeq ($(PLATFORM),darwin)
   RENDERER_LIBS += -framework SDL2 -F/Library/Frameworks
 
   ifeq ($(USE_LOCAL_HEADERS),1)
-    # TODO: Alreayd require framework so maybe use include from there ... but this would involve changing code
+    # TODO: Already require framework so maybe use include from there ... but this would involve changing code
     BASE_CFLAGS += -I$(SDLHDIR)/include
   else
     BASE_CFLAGS += -I/Library/Frameworks/SDL2.framework/Headers
