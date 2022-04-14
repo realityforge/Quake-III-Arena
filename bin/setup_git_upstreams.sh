@@ -47,6 +47,7 @@ git config branch.upstream/ioq3.merge refs/heads/main
 git config branch.upstream/ioq3.pushRemote origin
 git rm --force -r .github/workflows
 git commit -m "Remove workflows from upstream branch to avoid executing actions unnecessarily"
+git gc --prune=now --aggressive
 git push -f
 
 git remote rm quake3e 2> /dev/null > /dev/null || (echo "quake3e remote not present")
@@ -61,6 +62,7 @@ git config branch.upstream/quake3e.merge refs/heads/master
 git config branch.upstream/quake3e.pushRemote origin
 git rm --force -r .github/workflows
 git commit -m "Remove workflows from upstream branch to avoid executing actions unnecessarily"
+git gc --prune=now --aggressive
 git push -f
 
 git remote rm vkQuake3 2> /dev/null > /dev/null || (echo "vkQuake3 remote not present")
@@ -73,6 +75,7 @@ git checkout -B upstream/vkQuake3
 git config branch.upstream/vkQuake3.remote vkQuake3
 git config branch.upstream/vkQuake3.merge refs/heads/master
 git config branch.upstream/vkQuake3.pushRemote origin
+git gc --prune=now --aggressive
 git push
 
 git checkout master
