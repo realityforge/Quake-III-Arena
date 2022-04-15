@@ -33,13 +33,13 @@ After reviewing the ecosystem it seemed like the only automation system that cou
 
 For all the benefits that Bazel offers, the most significant negative is an extremely steep initial learning curve. There is limited documentation on how to get started beyond toy examples.
 
-<a name="phase1" ></a>
+<a name="phase_1" ></a>
 
 #### Phase 1 - Replace the Makefile build with Bazel based build
 
 TODO
 
-<a name="phase2" ></a>
+<a name="phase_2" ></a>
 
 #### Phase 2 - Cross compile from Macos to produce Dedicated Server Images
 
