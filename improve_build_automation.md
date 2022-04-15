@@ -35,12 +35,19 @@ For all the benefits that Bazel offers, the most significant negative is an extr
 
 <a name="phase_1" ></a>
 
-#### Phase 1 - Replace the Makefile build with Bazel based build
+#### Phase 1 - Build the code using Bazel
 
-TODO
+Phase 1 is to build the major components on the local workstation. The qvm code need not be built and instead the game libraries will be "native" libraries.
+
+* The main executable that includes both the client and the server code.
+* The dedicated server that includes just the server component.
+* The base game libraries (the cgame, game and ui shared libraries)
+* The team arena (a.k.a. missionpack) game libraries (the cgame, game and ui shared libraries)
+
+This may require running Bazel on different host systems to build for different targets.
 
 <a name="phase_2" ></a>
 
-#### Phase 2 - Cross compile from Macos to produce Dedicated Server Images
+#### Phase 2 - Cross compile where cross compile tools are available
 
-TODO
+Add support for cross compiling where possible. At a minimum it should be possible to compile to both `macos-x86_64` and `macos-arm64` on a host `macos` and probably support the compilation to `linux-x86_64` on a host environment of `macos`.
