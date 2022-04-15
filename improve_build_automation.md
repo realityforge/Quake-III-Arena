@@ -51,3 +51,9 @@ This may require running Bazel on different host systems to build for different 
 #### Phase 2 - Cross compile where cross compile tools are available
 
 Add support for cross compiling where possible. At a minimum it should be possible to compile to both `macos-x86_64` and `macos-arm64` on a host `macos` and probably support the compilation to `linux-x86_64` on a host environment of `macos`.
+
+<a name="phase_3" ></a>
+
+#### Phase 3 - Cached, Remote, Distributed Build infrastructure
+
+Add support for performing builds on remote hosts using distributed build cache. It is unclear whether the benefit will outweigh the cost when there is a single developer, performing limited content generation.
