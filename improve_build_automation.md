@@ -10,6 +10,8 @@ The other source forks primarily focus on transforming the code into output exec
 
 In a similar vein, there is limited support for automating the release and deployment of services into operation. There are isolated examples that specify docker images, kubernetes clusters, cloud formation templates etc. An ideal solution would automate the entire stack from a single location. The entire stack would include a server browser, a master server, a global statistics server etc.
 
+Build automation should also integrate with CLion (which is the current IDE of choice) but not require the IDE. Builds should be possible without the presence of an IDE on all targeted platforms.
+
 Automating the build and deployment of the code has substantial advantages as it improves the velocity of feature development. However, it can also expose quality issues, so it usually needs to be paired with a continuous integration, continuous deployment and application monitoring.
 
 As builds get bigger and more complex, it is often desirable to support distribution of builds to a cluster and caching of intermediate results.
