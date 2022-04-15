@@ -10,11 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef USE_LOCAL_HEADERS
 #include "zlib.h"
-#else
-#include <zlib.h>
-#endif
 
 #include "ioapi.h"
 
