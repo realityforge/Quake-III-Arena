@@ -7,6 +7,19 @@ export BRANCH_WITH_CLANG_FORMAT=origin/master
 # Fetch origin to ensure the .clang-format is present and updated
 git fetch origin
 
+git remote rm vkQuake3 2> /dev/null > /dev/null || (echo "vkQuake3 remote not present")
+git remote add --no-tags --track master vkQuake3 https://github.com/suijingfeng/vkQuake3.git
+git fetch vkQuake3
+
+git checkout vkQuake3/master
+git branch -D upstream/vkQuake3 2> /dev/null > /dev/null || (echo "vkQuake3 upstream branch not present")
+git checkout -B upstream/vkQuake3
+git config branch.upstream/vkQuake3.remote vkQuake3
+git config branch.upstream/vkQuake3.merge refs/heads/master
+git config branch.upstream/vkQuake3.pushRemote origin
+git gc --prune=now --aggressive
+git push
+
 git checkout upstream/vkQuake3
 git reset --hard vkQuake3/master
 git branch -D upstream/vkQuake3_formatted 2> /dev/null > /dev/null || echo "No Local branch, creating local branch and formatting"
