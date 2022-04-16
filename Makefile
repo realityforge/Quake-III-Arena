@@ -244,6 +244,14 @@ ifeq ($(SDL_CFLAGS),)
   endif
 endif
 
+# If we are on Apple and still can't find SDL then assume it is a public Framework
+ifeq ($(PLATFORM),darwin)
+	ifeq ($(SDL_CFLAGS),)
+		SDL_CFLAGS = -I/Library/Frameworks/SDL2.framework/Headers
+		SDL_LIBS = -framework SDL2 -F/Library/Frameworks
+	endif
+endif
+
 #############################################################################
 # SETUP AND BUILD -- LINUX
 #############################################################################
