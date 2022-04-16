@@ -1,4 +1,3 @@
-load("@build_bazel_rules_apple//apple:macos.bzl", "macos_application")
 load("//build_defs:rules.bzl", "ENGINE_DEFINES")
 
 # Visible to all the packages that produce distributions
