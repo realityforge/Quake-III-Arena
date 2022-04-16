@@ -113,6 +113,8 @@ The scenarios under test were:
 
 Bazel builds are faster than the original builds in every scenario. The broader the change, the faster Bazel is. While the `Makefile` build tracks changes on a per-file basis, the unoptimised Bazel build is still substantially faster. This is an encouraging result. As the project evolves and the build automation gets more complex, there is opportunity to return to re-optimise Bazel build actions.
 
+These numbers were generated on a fast computer dedicated to build automation. These numbers would be more impressive on a less powerful developer laptop, if multiple platform builds were added or if the tools that have been removed (i.e. `q3asm`, `q3map`, `q3radiant`, `lcc`, `bspc` etc), were re-added to the builds. It is expected that Bazel would look significantly more impressive as most of that code could have been built in parallel.
+
 <a name="phase_2" ></a>
 
 #### Phase 2 - Cross compile where cross compile tools are available
