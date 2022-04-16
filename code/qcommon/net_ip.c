@@ -59,11 +59,6 @@ static qboolean winsockInitialized = qfalse;
 
 #else
 
-#if MAC_OS_X_VERSION_MIN_REQUIRED == 1020
-// needed for socklen_t on OSX 10.2
-#define _BSD_SOCKLEN_T_
-#endif
-
 #include <sys/socket.h>
 #include <errno.h>
 #include <netdb.h>
