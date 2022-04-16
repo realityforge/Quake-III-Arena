@@ -3,3 +3,8 @@ cc_binary(
     name = "Quake3Arena",
     deps = ["//code/client:clientexe"],
 )
+
+cc_binary(
+    name = "Quake3ArenaServer",
+    deps = ["//code/server:ded"],
+)
