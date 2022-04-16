@@ -4,9 +4,6 @@ set -e
 
 export BRANCH_WITH_CLANG_FORMAT=origin/master
 
-# Fetch all the remotes
-git fetch --all
-
 # Fetch origin to ensure the .clang-format is present and updated
 git fetch origin
 
