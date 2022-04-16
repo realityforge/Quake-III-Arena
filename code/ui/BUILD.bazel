@@ -1,4 +1,4 @@
-load("//build_defs:rules.bzl", "TEAM_ARENA_DEFINES", "UI_COPTS", "UI_DEFINES", "UI_LINKOPTS")
+load("//build_defs:rules.bzl", "TEAM_ARENA_DEFINES", "UI_COPTS", "UI_DEFINES")
 
 cc_library(
     name = "api",
@@ -68,8 +68,7 @@ cc_library(
     ],
 )
 
-# See //code/renderergl2:librenderergl2 for an explanation why we create a .so rather than a .dylib under OSX.
-cc_binary(
+cc_library(
     name = "ui",
     srcs = [
         "ui_atoms.c",
@@ -78,15 +77,13 @@ cc_binary(
         "ui_players.c",
     ],
     copts = UI_COPTS,
-    defines = ["MAC_OS_X_VERSION_MIN_REQUIRED=1100"] + TEAM_ARENA_DEFINES + UI_DEFINES,
-    linkopts = UI_LINKOPTS,
-    linkshared = 1,
+    defines = TEAM_ARENA_DEFINES + UI_DEFINES,
+    visibility = ["//game/missionpack:__pkg__"],
     deps = [
         ":api",
         ":local_api",
         ":shared",
         ":ui_syscalls",
-        "//build_defs:exported_symbols.lds",
         "//code/client:api",
         "//code/game:bg_api",
         "//code/game:bg_misc-client-teamarena",

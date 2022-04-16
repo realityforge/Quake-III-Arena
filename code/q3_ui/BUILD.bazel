@@ -1,6 +1,6 @@
-load("//build_defs:rules.bzl", "UI_COPTS", "UI_DEFINES", "UI_LINKOPTS")
+load("//build_defs:rules.bzl", "UI_COPTS", "UI_DEFINES")
 
-cc_binary(
+cc_library(
     name = "ui",
     srcs = [
         "ui_addbots.c",
@@ -41,11 +41,9 @@ cc_binary(
         "ui_video.c",
     ],
     copts = UI_COPTS,
-    defines = ["MAC_OS_X_VERSION_MIN_REQUIRED=1100"] + UI_DEFINES,
-    linkopts = UI_LINKOPTS,
-    linkshared = 1,
+    defines = UI_DEFINES,
+    visibility = ["//game/baseq3:__pkg__"],
     deps = [
-        "//build_defs:exported_symbols.lds",
         "//code/client:api",
         "//code/game:bg_api",
         "//code/game:bg_misc-client-baseq3",

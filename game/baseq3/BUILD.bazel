@@ -1,4 +1,4 @@
-load("//build_defs:rules.bzl", "CLIENT_GAME_LINKOPTS", "SERVER_GAME_LINKOPTS")
+load("//build_defs:rules.bzl", "CLIENT_GAME_LINKOPTS", "SERVER_GAME_LINKOPTS", "UI_LINKOPTS")
 
 cc_binary(
     name = "cgame.so",
@@ -19,6 +19,16 @@ cc_binary(
     deps = [
         "//build_defs:exported_symbols.lds",
         "//code/game:baseq3",
+    ],
+)
+
+cc_binary(
+    name = "ui.so",
+    linkopts = UI_LINKOPTS,
+    linkshared = 1,
+    deps = [
+        "//build_defs:exported_symbols.lds",
+        "//code/q3_ui:ui",
     ],
 )
 
