@@ -7,25 +7,6 @@ export BRANCH_WITH_CLANG_FORMAT=origin/master
 # Fetch origin to ensure the .clang-format is present and updated
 git fetch origin
 
-git checkout upstream/quake3e
-git reset --hard quake3e/master
-git branch -D upstream/quake3e_formatted 2> /dev/null > /dev/null || echo "No Local branch, creating local branch and formatting"
-git checkout -B upstream/quake3e_formatted
-git show ${BRANCH_WITH_CLANG_FORMAT}:.clang-format > .clang-format
-# shellcheck disable=SC2038
-find code \
-     \( -name '*.h' -or -name '*.c' \)  \
-     ! -path 'code/libcurl/*' -and \
-     ! -path 'code/libjpeg/*' -and \
-     ! -path 'code/libsdl/*' -and \
-     ! -path 'code/renderercommon/vulkan/*' \
-     | xargs clang-format -i
-git add code/
-rm .clang-format
-git commit -m "Format the source code with clang-format to simplify cross-branch comparisons"
-git push origin :upstream/quake3e_formatted || echo "No upstream/quake3e_formatted branch to delete"
-git push --set-upstream origin upstream/quake3e_formatted
-
 git checkout upstream/vkQuake3
 git reset --hard vkQuake3/master
 git branch -D upstream/vkQuake3_formatted 2> /dev/null > /dev/null || echo "No Local branch, creating local branch and formatting"
