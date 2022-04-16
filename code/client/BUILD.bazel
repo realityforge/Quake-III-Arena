@@ -1,6 +1,12 @@
 load("@build_bazel_rules_apple//apple:macos.bzl", "macos_application")
 load("//build_defs:rules.bzl", "ENGINE_DEFINES")
 
+# Visible to all the packages that produce distributions
+_DIST_VISIBILITY = [
+    "//game:__pkg__",
+    "//game/mac:__pkg__",
+]
+
 cc_library(
     name = "client",
     srcs = [
@@ -206,28 +212,6 @@ _CLIENT_EXE_DEPS = [
 
 cc_library(
     name = "clientexe",
-    deps = _CLIENT_EXE_DEPS,
-)
-
-macos_application(
-    name = "Quake3Arena",
-    additional_contents = {
-        "//game/baseq3:cgame.so": "MacOS/baseq3",
-        "//game/baseq3:qagame.so": "MacOS/baseq3",
-        "//game/baseq3:ui.so": "MacOS/baseq3",
-        "//game/missionpack:cgame.so": "MacOS/missionpack",
-        "//game/missionpack:qagame.so": "MacOS/missionpack",
-        "//game/missionpack:ui.so": "MacOS/missionpack",
-
-        # Data files can not be below MacOS directory as the code signing process will expect it to be
-        # code and thus must have a signature. Which it obviously does not. This places it at a different
-        # location in which arbitrary resources can be stored.
-        "//game/baseq3:pak0.pk3": "Resources/baseq3",
-        "//game/baseq3:pak9hqq36.pk3": "Resources/baseq3",
-        "//game/missionpack:pak0.pk3": "Resources/missionpack",
-    },
-    bundle_id = "org.ioquake.ioquake3",
-    infoplists = [":Info.plist"],
-    minimum_os_version = "10.11",
+    visibility = _DIST_VISIBILITY,
     deps = _CLIENT_EXE_DEPS,
 )
