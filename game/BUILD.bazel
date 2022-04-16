@@ -1,0 +1,8 @@
+load("@build_bazel_rules_apple//apple:macos.bzl", "macos_application")
+load("//build_defs:rules.bzl", "ENGINE_DEFINES")
+
+# TODO: Extract product name into var somewhere ... also use that product name to generate product.h somewhere
+cc_binary(
+    name = "Quake3Arena",
+    deps = ["//code/client:clientexe"],
+)
