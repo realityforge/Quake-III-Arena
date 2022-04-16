@@ -1,0 +1,54 @@
+genrule(
+    name = "pak0",
+    srcs = [
+        "@q3a_baseq3_pak0//:files",
+        "@q3a_baseq3_pak2//:files",
+        "@q3a_baseq3_pak4//:files",
+        "@q3a_baseq3_pak5//:files",
+        "@q3a_baseq3_pak6//:files",
+        "@q3a_baseq3_pak8//:files",
+        "@QuakeArenaArcade_baseq3//:files",
+        "@a_QuakeArenaArcade_baseq3//:files",
+    ],
+    outs = ["pak0.pk3"],
+    cmd = """
+rm -rf pak
+$(location //build_defs:copy_files.sh) external/QuakeArenaArcade_baseq3/ pak $(locations @QuakeArenaArcade_baseq3//:files)
+$(location //build_defs:copy_files.sh) external/a_QuakeArenaArcade_baseq3/ pak $(locations @a_QuakeArenaArcade_baseq3//:files)
+$(location //build_defs:copy_files.sh) external/q3a_baseq3_pak0/ pak $(locations @q3a_baseq3_pak0//:files)
+$(location //build_defs:copy_files.sh) external/q3a_baseq3_pak2/ pak $(locations @q3a_baseq3_pak2//:files)
+$(location //build_defs:copy_files.sh) external/q3a_baseq3_pak4/ pak $(locations @q3a_baseq3_pak4//:files)
+$(location //build_defs:copy_files.sh) external/q3a_baseq3_pak5/ pak $(locations @q3a_baseq3_pak5//:files)
+$(location //build_defs:copy_files.sh) external/q3a_baseq3_pak6/ pak $(locations @q3a_baseq3_pak6//:files)
+$(location //build_defs:copy_files.sh) external/q3a_baseq3_pak8/ pak $(locations @q3a_baseq3_pak8//:files)
+cd pak
+find .  ! -type d |  sed -e "s/^\\.\\///" | awk '{print "\\"" $$0 "\\"" }' | sort | xargs ../$(location @bazel_tools//tools/zip:zipper) c ../$@
+    """,
+    tools = [
+        "//build_defs:copy_files.sh",
+        "@bazel_tools//tools/zip:zipper",
+    ],
+    # TODO: Move building of directory to somewhere better than this!
+    visibility = ["//code/client:__pkg__"],
+)
+
+# TODO: Merge this into the "base" paks?
+genrule(
+    name = "pak9hqq36",
+    srcs = [
+        "@pak9hqq36//:files",
+    ],
+    outs = ["pak9hqq36.pk3"],
+    cmd = """
+rm -rf pak
+$(location //build_defs:copy_files.sh) external/pak9hqq36/ pak $(locations @pak9hqq36//:files)
+cd pak
+find .  ! -type d |  sed -e "s/^\\.\\///" | awk '{print "\\"" $$0 "\\"" }' | sort | xargs ../$(location @bazel_tools//tools/zip:zipper) c ../$@
+    """,
+    tools = [
+        "//build_defs:copy_files.sh",
+        "@bazel_tools//tools/zip:zipper",
+    ],
+    # TODO: Move building of directory to somewhere better than this!
+    visibility = ["//code/client:__pkg__"],
+)
