@@ -1,10 +1,9 @@
 #!/bin/bash
 
 #
-# A bash script that configures the git to make it easy to track remote
-# repositories. For an upstream repository named "foo" a branch named
-# "upstream/foo" will be created that pulls from the remote repository
-# and pushes to origin.
+# A bash script that sets up a remote to the idSoftware repository and a branch
+# named "upstream/idSoftware" that pulls from "idSoftware/master" and pushes to
+# the origin repository.
 #
 
 set -e

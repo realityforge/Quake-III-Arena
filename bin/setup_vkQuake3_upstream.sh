@@ -1,5 +1,13 @@
 #!/bin/bash
 
+#
+# A bash script that sets up a remote to the vkQuake3 repository and a branch
+# named "upstream/vkQuake3" that pulls from "vkQuake3/master" and pushes to
+# the origin repository. A branch named "upstream/vkQuake3_formatted" is also
+# setup that is the code from the vkQuake3 repository formatted by the current
+# projects code style (to make code comparisons easier)
+#
+
 set -e
 
 export BRANCH_WITH_CLANG_FORMAT=origin/master
