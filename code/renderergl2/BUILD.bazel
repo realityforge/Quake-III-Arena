@@ -87,7 +87,7 @@ cc_library(
 # module anyway, it makes sense to not create dylibs
 #
 cc_binary(
-    name = "librenderergl2",
+    name = "renderer_opengl2.so",
     linkshared = 1,
     deps = [
         ":renderergl2",
