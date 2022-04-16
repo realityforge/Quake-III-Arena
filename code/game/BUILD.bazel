@@ -1,4 +1,4 @@
-load("//build_defs:rules.bzl", "CLIENT_GAME_DEFINES", "SERVER_GAME_COPTS", "SERVER_GAME_DEFINES", "SERVER_GAME_LINKOPTS", "TEAM_ARENA_DEFINES")
+load("//build_defs:rules.bzl", "CLIENT_GAME_DEFINES", "SERVER_GAME_COPTS", "SERVER_GAME_DEFINES", "TEAM_ARENA_DEFINES")
 
 cc_library(
     name = "bg_api",
@@ -175,17 +175,15 @@ _BASEQ3_SRC = _COMMON_SRC
 # should not be required when building qvm library
 _NATIVE_LIB_SRC = ["g_syscalls.c"]
 
-cc_binary(
+cc_library(
     name = "baseq3",
     srcs = _BASEQ3_SRC + _NATIVE_LIB_SRC,
     copts = SERVER_GAME_COPTS,
-    defines = ["MAC_OS_X_VERSION_MIN_REQUIRED=1100"] + SERVER_GAME_DEFINES,
-    linkopts = SERVER_GAME_LINKOPTS,
-    linkshared = 1,
+    defines = SERVER_GAME_DEFINES,
+    visibility = ["//game/baseq3:__pkg__"],
     deps = [
         ":bg-baseq3",
         ":server_api",
-        "//build_defs:exported_symbols.lds",
         "//code/botlib",
         "//code/botlib:api",
         "//code/qcommon:shared",
@@ -196,17 +194,15 @@ cc_binary(
 
 _TEAM_ARENA_SRC = _COMMON_SRC
 
-cc_binary(
+cc_library(
     name = "teamarena",
     srcs = _TEAM_ARENA_SRC + _NATIVE_LIB_SRC,
     copts = SERVER_GAME_COPTS,
-    defines = ["MAC_OS_X_VERSION_MIN_REQUIRED=1100"] + TEAM_ARENA_DEFINES + SERVER_GAME_DEFINES,
-    linkopts = SERVER_GAME_LINKOPTS,
-    linkshared = 1,
+    defines = TEAM_ARENA_DEFINES + SERVER_GAME_DEFINES,
+    visibility = ["//game/missionpack:__pkg__"],
     deps = [
         ":bg-teamarena",
         ":server_api",
-        "//build_defs:exported_symbols.lds",
         "//code/botlib",
         "//code/botlib:api",
         "//code/qcommon:shared",
