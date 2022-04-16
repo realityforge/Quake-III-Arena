@@ -181,11 +181,6 @@ cc_library(
 
 cc_binary(
     name = "clientexe",
-    linkopts = [
-        "-F/Library/Frameworks",
-        "-framework SDL2",
-        "-framework OpenAL",
-    ],
     deps = [
         ":client",
         ":openal_support",
