@@ -4,6 +4,7 @@ cc_binary(
     name = "cgame.so",
     linkopts = CLIENT_GAME_LINKOPTS,
     linkshared = 1,
+    # TODO: Fix visibility so that used elsewhere
     visibility = ["//code/client:__pkg__"],
     deps = [
         "//build_defs:exported_symbols.lds",
@@ -15,6 +16,8 @@ cc_binary(
     name = "qagame.so",
     linkopts = SERVER_GAME_LINKOPTS,
     linkshared = 1,
+    # TODO: Fix visibility so that used elsewhere
+    visibility = ["//code/client:__pkg__"],
     deps = [
         "//build_defs:exported_symbols.lds",
         "//code/game:teamarena",
@@ -25,6 +28,8 @@ cc_binary(
     name = "ui.so",
     linkopts = UI_LINKOPTS,
     linkshared = 1,
+    # TODO: Fix visibility so that used elsewhere
+    visibility = ["//code/client:__pkg__"],
     deps = [
         "//build_defs:exported_symbols.lds",
         "//code/ui",
@@ -55,4 +60,6 @@ find .  ! -type d |  sed -e "s/^\\.\\///" | awk '{print "\\"" $$0 "\\"" }' | sor
         "//build_defs:copy_files.sh",
         "@bazel_tools//tools/zip:zipper",
     ],
+    # TODO: Fix visibility so that used elsewhere
+    visibility = ["//code/client:__pkg__"],
 )

@@ -16,6 +16,8 @@ cc_binary(
     name = "qagame.so",
     linkopts = SERVER_GAME_LINKOPTS,
     linkshared = 1,
+    # TODO: Fix visibility so that used elsewhere
+    visibility = ["//code/client:__pkg__"],
     deps = [
         "//build_defs:exported_symbols.lds",
         "//code/game:baseq3",
@@ -26,6 +28,8 @@ cc_binary(
     name = "ui.so",
     linkopts = UI_LINKOPTS,
     linkshared = 1,
+    # TODO: Fix visibility so that used elsewhere
+    visibility = ["//code/client:__pkg__"],
     deps = [
         "//build_defs:exported_symbols.lds",
         "//code/q3_ui:ui",
