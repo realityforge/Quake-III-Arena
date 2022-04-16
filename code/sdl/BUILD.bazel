@@ -25,8 +25,8 @@ cc_library(
     srcs = [
         "sdl_input.c",
     ],
-    visibility = ["//code/client:__pkg__"],
     linkopts = _SDL_LINK_OPTS,
+    visibility = ["//code/client:__pkg__"],
     deps = [
         "//code/client:api",
         "//code/client:snd_api",
@@ -43,6 +43,7 @@ cc_library(
         "sdl_glimp.c",
         "sdl_icon.h",
     ],
+    linkopts = _SDL_LINK_OPTS,
     visibility = ["//code/client:__pkg__"],
     deps = [
         "//code/qcommon",
@@ -50,5 +51,4 @@ cc_library(
         "//code/sys:sys_local",
         "//third_party/sdl",
     ],
-    linkopts = _SDL_LINK_OPTS,
 )
