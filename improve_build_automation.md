@@ -48,6 +48,71 @@ Phase 1 is to build the major components on the local workstation. The qvm code 
 
 This may require running Bazel on different host systems to build for different targets.
 
+### Phase 1 - Evaluation
+
+The initial build conversion to Bazel is taking longer than initially estimated. Rather than starting from the original idSoftware release, the `Makefile` build system in `ioq3` fork was used as a baseline as it is actively maintained and modernized to a degree and thus offered a fairer comparison.
+
+The conversion is producing tangible benefits even at this early stage. Some benefits of the conversion come purely as it has forced an understanding of the build system and a re-assessment of decisions. Others are probably attributable to the change in build system.
+
+As the build conversion change has been co-occurring with other changes, it is difficult isolate where some improvements have come from. i.e. The build speed has improved, even when using the original build system. The speed of the build could have improved due to the elimination of unused code, adjustment of compiler options or improving the structure of the include files.
+
+To quantify the difference in build speed between the two build systems, we measured build time in a few scenarios. The performance test used a warmed up filesystem and performed an optimised build.
+
+The Bazel build involved running `bazel build //code/...` while the original build was executed `make`.
+
+The scenarios under test were:
+
+* **Full Build**: A complete rebuild of the product. Under the make based system this involved running `make distclean` before the test. Under the bazel based build system this involved running `bazel clean` before the test.
+* **Noop Build**: After a **Full Build**, the build is run again without making any changes to the source code.
+* **Internal Header Change**: After a **Full Build**, the build is run again after making a change to <code>inffast.h</code>. This header is only included by one c file, modifies a single object file and modifies two output executables.
+* **Implementation Change**: After a **Full Build**, the build is run again after making a change to <code>tr_image_tga.c</code>. This modifies a single object file and modifies a single output library.
+* **Interface Header Change**: After a **Full Build**, the build is run again after making a change to <code>tr_public.h</code>. This header is transitively included in many implementation files, modifies many object files and modifies multiple output executables and libraries.
+
+<table>
+<thead>
+  <tr>
+    <th>Scenario</th>
+    <th>Original Build</th>
+    <th>Bazel Build</th>
+    <th>Improvement</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Full Build</td>
+    <td><code>0m51.749s</code></td>
+    <td><code>0m9.581s</code></td>
+    <td>5.4</td>
+  </tr>
+  <tr>
+    <td>Noop Build</td>
+    <td><code>0m0.352s</code></td>
+    <td><code>0m0.140s</code></td>
+    <td>2.5</td>
+  </tr>
+  <tr>
+    <td>Internal Header Change (<code>inffast.h</code>)</td>
+    <td><code>0m0.920s</code></td>
+    <td><code>0m0.305s</code></td>
+    <td>3.0</td>
+  </tr>
+  <tr>
+    <td>Implementation Change (<code>tr_image_tga.c</code>)</td>
+    <td><code>0m0.492s</code></td>
+    <td><code>0m0.219s</code></td>
+    <td>2.3</td>
+  </tr>
+ <tr>
+    <td>Interface Header Change (<code>tr_public.h</code>)</td>
+    <td><code>0m7.797s</code></td>
+    <td><code>0m1.603s</code></td>
+    <td>4.9</td>
+  </tr>
+</tbody>
+</table>
+
+Bazel builds are faster than the original builds in every scenario. The broader the change, the faster Bazel is. While the `Makefile` build tracks changes on a per-file basis, the unoptimised Bazel build is still substantially faster. This is an encouraging result. As the project evolves and the build automation gets more complex, there is opportunity to return to re-optimise Bazel build actions.
+
 <a name="phase_2" ></a>
 
 #### Phase 2 - Cross compile where cross compile tools are available

@@ -8,7 +8,7 @@ This page exists purely as a mechanism for the author to document plans and trac
 
 The major changes of the project are tracked in this table.
 
-| Change                                                                    | Cost (1-10) | Benefit (1-10) | Game Impact (0-10) | Status   | Started On | Completed On |
-|---------------------------------------------------------------------------|-------------|----------------|--------------------|----------|------------|--------------|
-| [Automate Source Code Formatting](automate_source_code_formatting.md)     | 1           | 3              | 0                  | Complete | 2022-04-10 | 2022-04-13   |
-| [Improve Build Automation - Phase 1](improve_build_automation.md#phase_1) | 4?          | 8?             | 0                  | 10%?     | 2022-03-01 |              |
+| Change                                                                    | Cost<br>(1-10) | Benefit<br>(1-10) | Game Impact<br>(0-10) | Status   | Started<br>On | Completed<br>On |
+|---------------------------------------------------------------------------|-------------|-------------------|--------------------|----------|------------|--------------|
+| [Automate Source Code Formatting](automate_source_code_formatting.md)     | 1           | 3                 | 0                  | Complete | 2022-04-10 | 2022-04-13   |
+| [Improve Build Automation - Phase 1](improve_build_automation.md#phase_1) | 4?          | 8?                | 0                  | 10%?     | 2022-03-01 |              |
