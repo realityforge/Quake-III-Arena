@@ -1,4 +1,4 @@
-load("//build_defs:rules.bzl", "CLIENT_GAME_COPTS", "CLIENT_GAME_DEFINES", "CLIENT_GAME_LINKOPTS", "QVM_DEFINES", "TEAM_ARENA_DEFINES")
+load("//build_defs:rules.bzl", "CLIENT_GAME_COPTS", "CLIENT_GAME_DEFINES", "QVM_DEFINES", "TEAM_ARENA_DEFINES")
 
 cc_library(
     name = "api",
@@ -38,16 +38,14 @@ _TEAM_ARENA_SRC = _COMMON_SRC + ["cg_newdraw.c"]
 # should not be required when building qvm library
 _NATIVE_LIB_SRC = ["cg_syscalls.c"]
 
-cc_binary(
+cc_library(
     name = "baseq3",
     srcs = _BASEQ3_SRC + _NATIVE_LIB_SRC,
     copts = CLIENT_GAME_COPTS,
-    defines = ["MAC_OS_X_VERSION_MIN_REQUIRED=1100"] + CLIENT_GAME_DEFINES,
-    linkopts = CLIENT_GAME_LINKOPTS,
-    linkshared = 1,
+    defines = CLIENT_GAME_DEFINES,
+    visibility = ["//game/baseq3:__pkg__"],
     deps = [
         ":api",
-        "//build_defs:exported_symbols.lds",
         "//code/game:bg-baseq3",
         "//code/game:bg_api",
         "//code/game:bg_misc-client-baseq3",
@@ -73,13 +71,12 @@ cc_library(
     ],
 )
 
-cc_binary(
+cc_library(
     name = "teamarena",
     srcs = _TEAM_ARENA_SRC + _NATIVE_LIB_SRC,
     copts = CLIENT_GAME_COPTS,
-    defines = ["MAC_OS_X_VERSION_MIN_REQUIRED=1100"] + TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
-    linkopts = CLIENT_GAME_LINKOPTS,
-    linkshared = 1,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    visibility = ["//game/missionpack:__pkg__"],
     deps = [
         ":api",
         "//build_defs:exported_symbols.lds",

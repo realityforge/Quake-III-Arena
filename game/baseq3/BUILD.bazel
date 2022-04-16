@@ -1,3 +1,16 @@
+load("//build_defs:rules.bzl", "CLIENT_GAME_LINKOPTS")
+
+cc_binary(
+    name = "cgame.so",
+    linkopts = CLIENT_GAME_LINKOPTS,
+    linkshared = 1,
+    visibility = ["//code/client:__pkg__"],
+    deps = [
+        "//build_defs:exported_symbols.lds",
+        "//code/cgame:baseq3",
+    ],
+)
+
 genrule(
     name = "pak0",
     srcs = [
