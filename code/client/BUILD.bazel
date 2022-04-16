@@ -175,33 +175,36 @@ cc_library(
     ],
 )
 
-cc_binary(
+_CLIENT_EXE_DEPS = [
+    ":client",
+    ":openal_support",
+    ":snd",
+    ":snd_codec",
+    "//code/server",
+    "//code/qcommon:cm",
+    "//code/qcommon:cmd",
+    "//code/qcommon:common",
+    "//code/botlib",
+    "//code/sys:main",
+    # This next two should be conditional on operating system
+    "//code/sys:sys_osx",
+    "//code/sys:sys_unix",
+    "//code/sys:sys_local",
+    "//code/qcommon:cvar",
+    "//code/qcommon:files",
+    "//code/qcommon:net",
+    "//third_party/unzip",
+    "//code/qcommon:vm",
+    "//code/sdl:sdl_input",
+    "//code/sdl:sdl_renderer",
+    "//code/sdl:sdl_snd",
+    "//third_party/opus",
+    "//third_party/sdl",
+    "//code/renderergl2",
+]
+
+cc_library(
     name = "clientexe",
-    deps = [
-        ":client",
-        ":openal_support",
-        ":snd",
-        ":snd_codec",
-        "//code/server",
-        "//code/qcommon:cm",
-        "//code/qcommon:cmd",
-        "//code/qcommon:common",
-        "//code/botlib",
-        "//code/sys:main",
-        # This next two should be conditional on operating system
-        "//code/sys:sys_osx",
-        "//code/sys:sys_unix",
-        "//code/sys:sys_local",
-        "//code/qcommon:cvar",
-        "//code/qcommon:files",
-        "//code/qcommon:net",
-        "//third_party/unzip",
-        "//code/qcommon:vm",
-        "//code/sdl:sdl_input",
-        "//code/sdl:sdl_renderer",
-        "//code/sdl:sdl_snd",
-        "//third_party/opus",
-        "//third_party/sdl",
-        "//code/renderergl2",
-    ],
+    deps = _CLIENT_EXE_DEPS,
+)
 )
