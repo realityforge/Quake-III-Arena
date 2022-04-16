@@ -3,6 +3,7 @@ load("@build_bazel_rules_apple//apple:macos.bzl", "macos_application")
 macos_application(
     name = "Quake3Arena",
     additional_contents = {
+        "//game:Quake3ArenaServer": "MacOS",
         "//code/renderergl2:renderer_opengl2.so": "MacOS",
         "//game/baseq3:cgame.so": "MacOS/baseq3",
         "//game/baseq3:qagame.so": "MacOS/baseq3",
@@ -10,7 +11,6 @@ macos_application(
         "//game/missionpack:cgame.so": "MacOS/missionpack",
         "//game/missionpack:qagame.so": "MacOS/missionpack",
         "//game/missionpack:ui.so": "MacOS/missionpack",
-        # TODO: Add dedicated server here too!
 
         # Data files can not be below MacOS directory as the code signing process will expect it to be
         # code and thus must have a signature. Which it obviously does not. This places it at a different

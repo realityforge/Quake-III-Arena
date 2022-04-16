@@ -6,5 +6,6 @@ cc_binary(
 
 cc_binary(
     name = "Quake3ArenaServer",
+    visibility = ["//game/mac:__pkg__"],
     deps = ["//code/server:ded"],
 )
