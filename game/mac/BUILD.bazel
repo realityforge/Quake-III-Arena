@@ -5,6 +5,7 @@ macos_application(
     additional_contents = {
         "//game:Quake3ArenaServer": "MacOS",
         "//code/renderergl2:renderer_opengl2.so": "MacOS",
+        # TODO: All these libraries should be suffixed with the arch...i.e "arm64"
         "//game/baseq3:cgame.so": "MacOS/baseq3",
         "//game/baseq3:qagame.so": "MacOS/baseq3",
         "//game/baseq3:ui.so": "MacOS/baseq3",
