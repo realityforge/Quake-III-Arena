@@ -1,8 +1,15 @@
+# TODO: Should we turn this into a library that ends up as dependency?
+_SDL_LINK_OPTS = [
+    "-F/Library/Frameworks",
+    "-framework SDL2",
+]
+
 cc_library(
     name = "sdl_snd",
     srcs = [
         "sdl_snd.c",
     ],
+    linkopts = _SDL_LINK_OPTS,
     visibility = ["//code/client:__pkg__"],
     deps = [
         "//code/client:api",
@@ -19,6 +26,7 @@ cc_library(
         "sdl_input.c",
     ],
     visibility = ["//code/client:__pkg__"],
+    linkopts = _SDL_LINK_OPTS,
     deps = [
         "//code/client:api",
         "//code/client:snd_api",
@@ -42,4 +50,5 @@ cc_library(
         "//code/sys:sys_local",
         "//third_party/sdl",
     ],
+    linkopts = _SDL_LINK_OPTS,
 )

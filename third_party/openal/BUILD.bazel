@@ -11,5 +11,6 @@ cc_library(
         "include/alc.h",
     ],
     includes = ["include"],
+    linkopts = ["-framework OpenAL"],
     visibility = ["//code/client:__pkg__"],
 )
