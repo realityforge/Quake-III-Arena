@@ -2,7 +2,7 @@
 
 set -e
 
-export BRANCH_WITH_CLANG_FORMAT=origin/BazelBuild
+export BRANCH_WITH_CLANG_FORMAT=origin/master
 
 # Fetch all the remotes
 git fetch --all
