@@ -14,6 +14,7 @@ macos_application(
         # Data files can not be below MacOS directory as the code signing process will expect it to be
         # code and thus must have a signature. Which it obviously does not. This places it at a different
         # location in which arbitrary resources can be stored.
+        # See https://developer.apple.com/library/archive/technotes/tn2206/_index.html for further details.
         "//game/baseq3:pak0.pk3": "Resources/baseq3",
         "//game/baseq3:pak9hqq36.pk3": "Resources/baseq3",
         "//game/missionpack:pak0.pk3": "Resources/missionpack",
