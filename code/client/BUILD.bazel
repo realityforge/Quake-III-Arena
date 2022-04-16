@@ -1,10 +1,4 @@
-load("//build_defs:rules.bzl", "ENGINE_DEFINES")
-
-# Visible to all the packages that produce distributions
-_DIST_VISIBILITY = [
-    "//game:__pkg__",
-    "//game/mac:__pkg__",
-]
+load("//build_defs:rules.bzl", "DIST_VISIBILITY", "ENGINE_DEFINES")
 
 cc_library(
     name = "client",
@@ -211,6 +205,6 @@ _CLIENT_EXE_DEPS = [
 
 cc_library(
     name = "clientexe",
-    visibility = _DIST_VISIBILITY,
+    visibility = DIST_VISIBILITY,
     deps = _CLIENT_EXE_DEPS,
 )

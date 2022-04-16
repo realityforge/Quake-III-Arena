@@ -37,3 +37,9 @@ QVM_DEFINES = []
 ENGINE_DEFINES = ["Q3_ENGINE"]
 
 SERVER_ONLY_ENGINE_DEFINES = ["DEDICATED"] + ENGINE_DEFINES
+
+# Visible for binaries and assets that are part of a final distribution
+DIST_VISIBILITY = [
+    "//game:__pkg__",
+    "//game/mac:__pkg__",
+]

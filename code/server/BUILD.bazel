@@ -1,4 +1,4 @@
-load("//build_defs:rules.bzl", "ENGINE_DEFINES", "SERVER_ONLY_ENGINE_DEFINES")
+load("//build_defs:rules.bzl", "DIST_VISIBILITY", "ENGINE_DEFINES", "SERVER_ONLY_ENGINE_DEFINES")
 
 _SERVER_SRC = [
     "server.h",
@@ -31,6 +31,7 @@ cc_library(
     name = "server-dedicated",
     srcs = _SERVER_SRC,
     defines = SERVER_ONLY_ENGINE_DEFINES,
+    visibility = DIST_VISIBILITY,
     deps = [
         "//code/botlib:api",
         "//code/game:bg_api",

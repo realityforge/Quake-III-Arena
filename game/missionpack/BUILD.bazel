@@ -1,16 +1,10 @@
-load("//build_defs:rules.bzl", "CLIENT_GAME_LINKOPTS", "SERVER_GAME_LINKOPTS", "UI_LINKOPTS")
-
-# Visible to all the packages that produce distributions
-_DIST_VISIBILITY = [
-    "//game:__pkg__",
-    "//game/mac:__pkg__",
-]
+load("//build_defs:rules.bzl", "CLIENT_GAME_LINKOPTS", "DIST_VISIBILITY", "SERVER_GAME_LINKOPTS", "UI_LINKOPTS")
 
 cc_binary(
     name = "cgame.so",
     linkopts = CLIENT_GAME_LINKOPTS,
     linkshared = 1,
-    visibility = _DIST_VISIBILITY,
+    visibility = DIST_VISIBILITY,
     deps = [
         "//build_defs:exported_symbols.lds",
         "//code/cgame:teamarena",
@@ -21,7 +15,7 @@ cc_binary(
     name = "qagame.so",
     linkopts = SERVER_GAME_LINKOPTS,
     linkshared = 1,
-    visibility = _DIST_VISIBILITY,
+    visibility = DIST_VISIBILITY,
     deps = [
         "//build_defs:exported_symbols.lds",
         "//code/game:teamarena",
@@ -32,7 +26,7 @@ cc_binary(
     name = "ui.so",
     linkopts = UI_LINKOPTS,
     linkshared = 1,
-    visibility = _DIST_VISIBILITY,
+    visibility = DIST_VISIBILITY,
     deps = [
         "//build_defs:exported_symbols.lds",
         "//code/ui",
@@ -63,5 +57,5 @@ find .  ! -type d |  sed -e "s/^\\.\\///" | awk '{print "\\"" $$0 "\\"" }' | sor
         "//build_defs:copy_files.sh",
         "@bazel_tools//tools/zip:zipper",
     ],
-    visibility = _DIST_VISIBILITY,
+    visibility = DIST_VISIBILITY,
 )
