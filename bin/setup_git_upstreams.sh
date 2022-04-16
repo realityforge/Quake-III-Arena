@@ -22,21 +22,6 @@ git config branch.upstream/idSoftware.pushRemote origin
 git gc --prune=now --aggressive
 git push
 
-git remote rm ioq3 2> /dev/null > /dev/null || (echo "ioq3 remote not present")
-git remote add --no-tags --track main ioq3 https://github.com/ioquake/ioq3.git
-git fetch ioq3
-
-git checkout ioq3/main
-git branch -D upstream/ioq3 2> /dev/null > /dev/null || (echo "ioq3 upstream branch not present")
-git checkout -B upstream/ioq3
-git config branch.upstream/ioq3.remote ioq3
-git config branch.upstream/ioq3.merge refs/heads/main
-git config branch.upstream/ioq3.pushRemote origin
-git rm --force -r .github/workflows
-git commit -m "Remove workflows from upstream branch to avoid executing actions unnecessarily"
-git gc --prune=now --aggressive
-git push -f
-
 git remote rm quake3e 2> /dev/null > /dev/null || (echo "quake3e remote not present")
 git remote add --no-tags --track master quake3e https://github.com/ec-/Quake3e.git
 git fetch quake3e
