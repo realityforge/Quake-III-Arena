@@ -3,6 +3,7 @@ load("@build_bazel_rules_apple//apple:macos.bzl", "macos_application")
 macos_application(
     name = "Quake3Arena",
     additional_contents = {
+        "//code/renderergl2:renderer_opengl2.so": "MacOS",
         "//game/baseq3:cgame.so": "MacOS/baseq3",
         "//game/baseq3:qagame.so": "MacOS/baseq3",
         "//game/baseq3:ui.so": "MacOS/baseq3",
