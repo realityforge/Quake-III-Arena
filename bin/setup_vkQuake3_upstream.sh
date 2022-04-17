@@ -28,8 +28,6 @@ git config branch.upstream/vkQuake3.pushRemote origin
 git gc --prune=now --aggressive
 git push
 
-git checkout upstream/vkQuake3
-git reset --hard vkQuake3/master
 git branch -D upstream/vkQuake3_formatted 2> /dev/null > /dev/null || echo "No Local branch, creating local branch and formatting"
 git checkout -B upstream/vkQuake3_formatted
 git show ${BRANCH_WITH_CLANG_FORMAT}:.clang-format > .clang-format

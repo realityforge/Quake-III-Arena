@@ -30,8 +30,6 @@ git commit -m "Remove workflows from upstream branch to avoid executing actions 
 git gc --prune=now --aggressive
 git push -f
 
-git checkout upstream/ioq3quest
-git reset --hard ioq3quest/master
 git branch -D upstream/ioq3quest_formatted 2> /dev/null > /dev/null || echo "No Local branch, creating local branch and formatting"
 git checkout -B upstream/ioq3quest_formatted
 git show ${BRANCH_WITH_CLANG_FORMAT}:.clang-format > .clang-format

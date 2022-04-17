@@ -30,8 +30,6 @@ git commit -m "Remove workflows from upstream branch to avoid executing actions 
 git gc --prune=now --aggressive
 git push -f
 
-git checkout upstream/quake3e
-git reset --hard quake3e/master
 git branch -D upstream/quake3e_formatted 2> /dev/null > /dev/null || echo "No Local branch, creating local branch and formatting"
 git checkout -B upstream/quake3e_formatted
 git show ${BRANCH_WITH_CLANG_FORMAT}:.clang-format > .clang-format

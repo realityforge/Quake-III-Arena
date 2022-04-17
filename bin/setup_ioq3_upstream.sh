@@ -30,8 +30,6 @@ git commit -m "Remove workflows from upstream branch to avoid executing actions 
 git gc --prune=now --aggressive
 git push -f
 
-git checkout upstream/ioq3
-git reset --hard ioq3/main
 git branch -D upstream/ioq3_formatted 2> /dev/null > /dev/null || echo "No Local branch, creating local branch and formatting"
 git checkout -B upstream/ioq3_formatted
 pwd
