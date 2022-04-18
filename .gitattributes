@@ -12,5 +12,6 @@
 *.yml text
 .bazelrc text
 .bazelversion text
+.gitattributes text
 .gitignore text
 BUILD.bazel text allow_empty
