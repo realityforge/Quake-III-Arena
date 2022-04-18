@@ -1,0 +1,24 @@
+cc_library(
+    name = "opusfile",
+    srcs = [
+        "src/http.c",
+        "src/info.c",
+        "src/internal.c",
+        "src/internal.h",
+        "src/opusfile.c",
+        "src/stream.c",
+        "src/wincerts.c",
+        "src/winerrno.h",
+    ],
+    hdrs = ["include/opusfile.h"],
+    copts = select({
+        "@org_realityforge_ioq3//build_defs:macos": [],
+        "//conditions:default": ["-Wno-maybe-uninitialized"],
+    }),
+    includes = ["include"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@org_realityforge_ioq3//third_party/ogg",
+        "@org_realityforge_ioq3//third_party/opus",
+    ],
+)

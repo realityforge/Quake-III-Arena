@@ -10,8 +10,5 @@ cc_library(
         "include/ogg/ogg.h",
     ],
     includes = ["include"],
-    visibility = [
-        "//third_party/opusfile:__pkg__",
-        "//third_party/vorbis:__pkg__",
-    ],
+    visibility = ["//visibility:public"],
 )

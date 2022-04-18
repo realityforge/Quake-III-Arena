@@ -51,3 +51,7 @@ _http_archive(
     strip_prefix = "nasm-2.14.02",
     urls = ["http://www.nasm.us/pub/nasm/releasebuilds/2.14.02/nasm-2.14.02.tar.bz2"],
 )
+
+load("//third_party/opusfile:repository.bzl", _load_opusfile_repository = "load_repository")
+
+_load_opusfile_repository()

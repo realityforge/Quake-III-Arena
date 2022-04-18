@@ -133,8 +133,8 @@ cc_library(
         "//code/qcommon",
         "//code/qcommon:shared_api",
         "//third_party/opus",
-        "//third_party/opusfile",
         "//third_party/vorbis",
+        "@opusfile",
     ],
 )
 

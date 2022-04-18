@@ -246,8 +246,5 @@ cc_library(
         "silk",
         "silk/float",
     ],
-    visibility = [
-        "//code/client:__pkg__",
-        "//third_party/opusfile:__pkg__",
-    ],
+    visibility = ["//visibility:public"],
 )
