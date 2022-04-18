@@ -372,7 +372,6 @@ cc_library(
             "-Wno-string-plus-int",
         ],
     }) + select({
-
         "@org_realityforge_ioq3//build_defs:macos": [
             "-fno-constant-cfstrings",
             "-Wno-pointer-bool-conversion",
