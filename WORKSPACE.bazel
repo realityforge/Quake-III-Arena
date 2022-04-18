@@ -15,10 +15,6 @@ load("@build_bazel_rules_apple//apple:repositories.bzl", "apple_rules_dependenci
 
 apple_rules_dependencies()
 
-load("//third_party/content:repository.bzl", "load_pak_repos")
-
-load_pak_repos()
-
 _http_archive(
     name = "zlib",
     build_file = "//third_party:zlib.BUILD.bazel",
@@ -27,10 +23,13 @@ _http_archive(
     urls = ["https://zlib.net/zlib-1.2.12.tar.gz"],
 )
 
+load("//third_party/content:repository.bzl", _load_pak_repositories = "load_pak_repositories")
 load("//third_party/curl:repository.bzl", _load_curl_repository = "load_repository")
 load("//third_party/libjpeg_turbo:repository.bzl", _load_libjpeg_turbo_repository = "load_repository")
 load("//third_party/nasm:repository.bzl", _load_nasm_repository = "load_repository")
 load("//third_party/opusfile:repository.bzl", _load_opusfile_repository = "load_repository")
+
+_load_pak_repositories()
 
 _load_curl_repository()
 

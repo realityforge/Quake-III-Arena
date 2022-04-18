@@ -30,7 +30,7 @@ def _local_assets(name, path, sha256 = None):
         build_file = "//third_party/content:%s.BUILD.bazel" % (name),
     )
 
-def load_pak_repos():
+def load_pak_repositories():
     # Quake 3 Arena
     _local_pak("baseq3", 0, "7ce8b3910620cd50a09e4f1100f426e8c6180f68895d589f80e6bd95af54bcae")
     _local_pak("baseq3", 2, "ccae938a2f13a03b24902d675181d516a431699701ed88023a307f34b5bcd58c")
