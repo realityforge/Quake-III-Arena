@@ -63,6 +63,8 @@ macos_application(
     },
     # TODO: Name this bundle id according to final product name
     bundle_id = "org.realityforge.Quake3Arena",
+    # allows for unsigned executable memory in hardened runtime
+    entitlements = ":Quake3Arena.entitlements",
     infoplists = [":Info.plist"],
     minimum_os_version = "10.11",
     tags = ["manual"],
