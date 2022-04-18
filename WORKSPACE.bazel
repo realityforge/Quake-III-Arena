@@ -35,16 +35,11 @@ _http_archive(
     urls = ["https://zlib.net/zlib-1.2.12.tar.gz"],
 )
 
-_http_archive(
-    name = "libjpeg_turbo",
-    build_file = "//third_party/libjpeg_turbo:libjpeg_turbo.BUILD.bazel",
-    sha256 = "d6b7790927d658108dfd3bee2f0c66a2924c51ee7f9dc930f62c452f4a638c52",
-    strip_prefix = "libjpeg-turbo-2.1.0",
-    urls = ["https://github.com/libjpeg-turbo/libjpeg-turbo/archive/2.1.0.tar.gz"],
-)
-
+load("//third_party/libjpeg_turbo:repository.bzl", _load_libjpeg_turbo_repository = "load_repository")
 load("//third_party/nasm:repository.bzl", _load_nasm_repository = "load_repository")
 load("//third_party/opusfile:repository.bzl", _load_opusfile_repository = "load_repository")
+
+_load_libjpeg_turbo_repository()
 
 _load_nasm_repository()
 
