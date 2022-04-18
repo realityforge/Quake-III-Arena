@@ -1,10 +1,36 @@
 load("@build_bazel_rules_apple//apple:macos.bzl", "macos_application")
 load("@build_bazel_rules_apple//apple:versioning.bzl", "apple_bundle_version")
 
+# A version scheme that parses version information out of the build
+# label and uses a fallback for developers' builds. For example, the
+# following command
+#
+#    bazel build //game/mac:Quake3Arena.zip --embed_label=Quake3Arena_1.2_build_345
+#
+# would yield the Info.plist values:
+#
+#    CFBundleVersion = "1.2.345"
+#    CFBundleShortVersionString = "1.2"
+#
+# and the development builds using the command:
+#
+#    bazel build //game/mac:Quake3Arena.zip
+#
+# would yield the values:
+#
+#    CFBundleVersion = "99.99.99"
+#    CFBundleShortVersionString = "99.99"
+#
 apple_bundle_version(
     name = "build_label_version",
-    build_version = "1.0.134",
-    short_version_string = "1.0",
+    build_label_pattern = "Quake3Arena_{version}_build_{build}",
+    build_version = "{version}.{build}",
+    capture_groups = {
+        "version": "\\d+\\.\\d+",
+        "build": "\\d+",
+    },
+    fallback_build_label = "Quake3Arena_99.99_build_99",
+    short_version_string = "{version}",
 )
 
 macos_application(
