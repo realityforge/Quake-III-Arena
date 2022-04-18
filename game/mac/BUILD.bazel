@@ -1,4 +1,11 @@
 load("@build_bazel_rules_apple//apple:macos.bzl", "macos_application")
+load("@build_bazel_rules_apple//apple:versioning.bzl", "apple_bundle_version")
+
+apple_bundle_version(
+    name = "build_label_version",
+    build_version = "1.0.134",
+    short_version_string = "1.0",
+)
 
 macos_application(
     name = "Quake3Arena",
@@ -24,5 +31,6 @@ macos_application(
     bundle_id = "org.ioquake.ioquake3",
     infoplists = [":Info.plist"],
     minimum_os_version = "10.11",
+    version = ":build_label_version",
     deps = ["//code/client:clientexe"],
 )
