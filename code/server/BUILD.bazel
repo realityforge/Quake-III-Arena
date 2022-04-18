@@ -16,7 +16,7 @@ _SERVER_SRC = [
 cc_library(
     name = "server",
     srcs = _SERVER_SRC,
-    defines = ENGINE_DEFINES,
+    defines = ["USE_VOIP"] + ENGINE_DEFINES,
     visibility = ["//code/client:__pkg__"],
     deps = [
         "//code/botlib:api",

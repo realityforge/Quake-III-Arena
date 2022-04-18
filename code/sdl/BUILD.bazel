@@ -7,6 +7,7 @@ _SDL_LINK_OPTS = [
 cc_library(
     name = "sdl_snd",
     srcs = ["sdl_snd.c"],
+    defines = ["USE_VOIP"],
     linkopts = _SDL_LINK_OPTS,
     visibility = ["//code/client:__pkg__"],
     deps = [
