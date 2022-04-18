@@ -10,54 +10,40 @@ on:
 
 # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
 jobs:
-  linux:
-    name: Linux
-    runs-on: ubuntu-18.04
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ macos-latest, ubuntu-latest ]
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Install Dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install libsdl2-dev
-    - name: Compile
-      run: make release
-      env:
-        ARCHIVE: 1
-#    Re-enable archives when there is someone other than me using the product
-#    - uses: actions/upload-artifact@v2
-#      with:
-#        name: Linux
-#        path: build/*.zip
-  windows:
-    name: Windows
-    runs-on: windows-2019
-    steps:
-    - uses: actions/checkout@v2
-    - name: Compile
-      run: |
-        choco install zip
-        make release
-      env:
-        ARCHIVE: 1
-#    Re-enable archives when there is someone other than me using the product
-#    - uses: actions/upload-artifact@v2
-#      with:
-#        name: Windows
-#        path: build/*.zip
-  macos:
-    name: macOS
-    runs-on: macos-11
-    steps:
-    - uses: actions/checkout@v2
-    - name: install_dependencies
-      run: |
-        brew install SDL2
-    - name: Compile
-      run: make release
-      env:
-        ARCHIVE: 1
-#    Re-enable archives when there is someone other than me using the product
-#    - uses: actions/upload-artifact@v2
-#      with:
-#        name: macOS
-#        path: build/*.zip
+      - name: Checkout current commit
+        uses: actions/checkout@v3
+
+      - name: Mount bazel cache
+        uses: actions/cache@v3
+        with:
+          path: "${HOME}/.cache/bazel"
+          key: ${{ runner.os }}-bazel
+
+      - name: Install Linux Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install libsdl2-dev
+        if: matrix.os == 'ubuntu-latest'
+
+      - name: Install MacOS Dependencies
+        run: brew install SDL2
+        if: matrix.os == 'macos-latest'
+
+      - name: Configure Bazel Cache
+        run: echo "startup --output_base=$HOME/.cache/bazel" >> user.bazelrc
+
+      - name: Build Code
+        # In the future we should also run "bazel build //game/mac:Quake3Arena.zip" but this requires that either
+        # the id assets become optional or we find a way to securely store the assets so as not to violate licenses
+        run: bazel build //code/...
+      - name: Run Tests
+        run: bazel test //code/...
