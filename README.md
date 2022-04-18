@@ -122,7 +122,6 @@ Makefile.local:
   MISSIONPACK_CFLAGS   - custom CFLAGS for missionpack (default '-DMISSIONPACK')
   USE_OPENAL           - use OpenAL where available
   USE_OPENAL_DLOPEN    - link with OpenAL at runtime
-  USE_CURL             - use libcurl for http/ftp download support
   USE_CODEC_VORBIS     - enable Ogg Vorbis support
   USE_CODEC_OPUS       - enable Ogg Opus support
   USE_VOIP             - enable built-in VoIP support
