@@ -127,10 +127,6 @@ ifndef USE_OPENAL_DLOPEN
 USE_OPENAL_DLOPEN=1
 endif
 
-ifndef USE_CURL
-USE_CURL=1
-endif
-
 ifndef USE_CODEC_VORBIS
 USE_CODEC_VORBIS=1
 endif
@@ -184,7 +180,6 @@ BLIBDIR=$(MOUNT_DIR)/botlib
 NDIR=$(MOUNT_DIR)/null
 UIDIR=$(MOUNT_DIR)/ui
 Q3UIDIR=$(MOUNT_DIR)/q3_ui
-CURLLIBSDIR=third_party/curl/libs
 JPDIR=third_party/jpeg
 JSONDIR=third_party/json
 PUFFDIR=third_party/puff
@@ -216,15 +211,12 @@ endif
 endif
 
 ifneq ($(call bin_path, $(PKG_CONFIG)),)
-  CURL_CFLAGS ?= $(shell $(PKG_CONFIG) --silence-errors --cflags libcurl)
-  CURL_LIBS ?= $(shell $(PKG_CONFIG) --silence-errors --libs libcurl)
   OPENAL_CFLAGS ?= $(shell $(PKG_CONFIG) --silence-errors --cflags openal)
   OPENAL_LIBS ?= $(shell $(PKG_CONFIG) --silence-errors --libs openal)
   SDL_CFLAGS ?= $(shell $(PKG_CONFIG) --silence-errors --cflags sdl2|sed 's/-Dmain=SDL_main//')
   SDL_LIBS ?= $(shell $(PKG_CONFIG) --silence-errors --libs sdl2)
 else
   # assume they're in the system default paths (no -I or -L needed)
-  CURL_LIBS ?= -lcurl
   OPENAL_LIBS ?= -lopenal
 endif
 
@@ -284,11 +276,6 @@ ifneq (,$(findstring "$(PLATFORM)", "linux" "gnu"))
     ifneq ($(USE_OPENAL_DLOPEN),1)
       CLIENT_LIBS += $(THREAD_LIBS) $(OPENAL_LIBS)
     endif
-  endif
-
-  ifeq ($(USE_CURL),1)
-    CLIENT_CFLAGS += $(CURL_CFLAGS)
-      CLIENT_LIBS += $(CURL_LIBS)
   endif
 else # ifeq Linux
 
@@ -382,11 +369,6 @@ ifeq ($(PLATFORM),darwin)
     ifneq ($(USE_OPENAL_DLOPEN),1)
       CLIENT_LIBS += -framework OpenAL
     endif
-  endif
-
-  ifeq ($(USE_CURL),1)
-    CLIENT_CFLAGS += $(CURL_CFLAGS)
-      CLIENT_LIBS += $(CURL_LIBS)
   endif
 
   BASE_CFLAGS += -D_THREAD_SAFE=1
@@ -509,16 +491,6 @@ ifdef MINGW
     FREETYPE_CFLAGS = -Ifreetype2
   endif
 
-  ifeq ($(USE_CURL),1)
-    CLIENT_CFLAGS += $(CURL_CFLAGS)
-      ifeq ($(USE_LOCAL_HEADERS),1)
-        CLIENT_CFLAGS += -DCURL_STATICLIB
-        CLIENT_LIBS += $(CURLLIBSDIR)/win64/libcurl.a -lcrypt32
-      else
-        CLIENT_LIBS += $(CURL_LIBS)
-      endif
-  endif
-
   BASE_CFLAGS += -m64
 
   # libmingw32 must be linked before libSDLmain
@@ -594,10 +566,6 @@ ifeq ($(USE_OPENAL),1)
   ifeq ($(USE_OPENAL_DLOPEN),1)
     CLIENT_CFLAGS += -DUSE_OPENAL_DLOPEN
   endif
-endif
-
-ifeq ($(USE_CURL),1)
-  CLIENT_CFLAGS += -DUSE_CURL -Ithird_party/curl/include
 endif
 
 ifeq ($(USE_VOIP),1)

@@ -42,6 +42,7 @@ cc_library(
     defines = ["USE_CURL"],
     deps = [
         ":api",
+        "@curl//:curl",
         "//code/cgame:api",
         "//code/game:bg_api",
         "//code/qcommon",
