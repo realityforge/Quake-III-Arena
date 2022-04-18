@@ -114,8 +114,8 @@ cc_library(
     deps = [
         "//code/qcommon",
         "//code/qcommon:shared_api",
-        "//third_party/vorbis",
         "@opus",
+        "@vorbis",
     ],
 )
 
@@ -132,9 +132,9 @@ cc_library(
         ":snd_codec_api",
         "//code/qcommon",
         "//code/qcommon:shared_api",
-        "//third_party/vorbis",
         "@opus",
         "@opusfile",
+        "@vorbis",
     ],
 )
 

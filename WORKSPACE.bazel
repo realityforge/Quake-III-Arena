@@ -22,6 +22,7 @@ load("//third_party/nasm:repository.bzl", _load_nasm_repository = "load_reposito
 load("//third_party/ogg:repository.bzl", _load_ogg_repository = "load_repository")
 load("//third_party/opus:repository.bzl", _load_opus_repository = "load_repository")
 load("//third_party/opusfile:repository.bzl", _load_opusfile_repository = "load_repository")
+load("//third_party/vorbis:repository.bzl", _load_vorbis_repository = "load_repository")
 load("//third_party/zlib:repository.bzl", _load_zlib_repository = "load_repository")
 
 _load_pak_repositories()
@@ -37,5 +38,7 @@ _load_ogg_repository()
 _load_opus_repository()
 
 _load_opusfile_repository()
+
+_load_vorbis_repository()
 
 _load_zlib_repository()
