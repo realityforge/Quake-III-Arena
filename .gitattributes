@@ -1,5 +1,6 @@
 # DO NOT EDIT: File is auto-generated
 * -text
+*.bazel text allow_empty
 *.bzl text
 *.c text
 *.dll binary
@@ -14,4 +15,3 @@
 .bazelversion text
 .gitattributes text
 .gitignore text
-BUILD.bazel text allow_empty
