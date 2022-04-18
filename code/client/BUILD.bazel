@@ -18,9 +18,9 @@ cc_library(
     defines = ["USE_VOIP"],
     deps = [
         ":api",
+        ":curl",
         ":snd_api",
         ":snd_internal_api",
-        ":curl",
         "//code/botlib:api",
         "//code/cgame:api",
         "//code/game:bg_api",
@@ -42,12 +42,12 @@ cc_library(
     ],
     deps = [
         ":api",
-        "@curl//:curl",
         "//code/cgame:api",
         "//code/game:bg_api",
         "//code/qcommon",
         "//code/renderercommon:api",
         "//code/ui:api",
+        "@curl",
     ],
 )
 
