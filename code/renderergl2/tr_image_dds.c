@@ -81,6 +81,9 @@ typedef struct ddsHeaderDxt10_s {
     ui32_t miscFlags2;
 } ddsHeaderDxt10_t;
 
+#pragma clang diagnostic push
+// Disable warning about "DXGI_FORMAT_FORCE_UINT" (ISO C restricts enumerator values to range of 'int' (4294967295 is too large))
+#pragma clang diagnostic ignored "-Wpedantic"
 // dxgiFormat
 // from http://msdn.microsoft.com/en-us/library/windows/desktop/bb173059%28v=vs.85%29.aspx
 typedef enum DXGI_FORMAT {
@@ -202,6 +205,7 @@ typedef enum DXGI_FORMAT {
     DXGI_FORMAT_B4G4R4A4_UNORM = 115,
     DXGI_FORMAT_FORCE_UINT = 0xffffffffUL
 } DXGI_FORMAT;
+#pragma clang diagnostic pop
 
 #define EncodeFourCC(x) ((((ui32_t)((x)[0]))) | (((ui32_t)((x)[1])) << 8) | (((ui32_t)((x)[2])) << 16) | (((ui32_t)((x)[3])) << 24))
 
