@@ -1,3 +1,8 @@
+# Workspace named so that BUILD.bazel files in other workspaces can reference this
+# namespace with a fixed name.
+# TODO: Figure out what we are naming this project and rename as appropriate
+workspace(name = "org_realityforge_ioq3")
+
 load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_archive = "http_archive")
 
 _http_archive(
