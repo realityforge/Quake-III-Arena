@@ -20,6 +20,6 @@ cc_library(
     deps = [
         "//code/qcommon",
         "//code/qcommon:shared_api",
-        "//third_party/zlib",
+        "@zlib//:zlib",
     ],
 )
