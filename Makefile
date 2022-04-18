@@ -131,14 +131,6 @@ ifndef USE_CURL
 USE_CURL=1
 endif
 
-ifndef USE_CURL_DLOPEN
-  ifdef MINGW
-    USE_CURL_DLOPEN=0
-  else
-    USE_CURL_DLOPEN=1
-  endif
-endif
-
 ifndef USE_CODEC_VORBIS
 USE_CODEC_VORBIS=1
 endif
@@ -296,9 +288,7 @@ ifneq (,$(findstring "$(PLATFORM)", "linux" "gnu"))
 
   ifeq ($(USE_CURL),1)
     CLIENT_CFLAGS += $(CURL_CFLAGS)
-    ifneq ($(USE_CURL_DLOPEN),1)
       CLIENT_LIBS += $(CURL_LIBS)
-    endif
   endif
 else # ifeq Linux
 
@@ -396,9 +386,7 @@ ifeq ($(PLATFORM),darwin)
 
   ifeq ($(USE_CURL),1)
     CLIENT_CFLAGS += $(CURL_CFLAGS)
-    ifneq ($(USE_CURL_DLOPEN),1)
       CLIENT_LIBS += $(CURL_LIBS)
-    endif
   endif
 
   BASE_CFLAGS += -D_THREAD_SAFE=1
@@ -523,14 +511,12 @@ ifdef MINGW
 
   ifeq ($(USE_CURL),1)
     CLIENT_CFLAGS += $(CURL_CFLAGS)
-    ifneq ($(USE_CURL_DLOPEN),1)
       ifeq ($(USE_LOCAL_HEADERS),1)
         CLIENT_CFLAGS += -DCURL_STATICLIB
         CLIENT_LIBS += $(CURLLIBSDIR)/win64/libcurl.a -lcrypt32
       else
         CLIENT_LIBS += $(CURL_LIBS)
       endif
-    endif
   endif
 
   BASE_CFLAGS += -m64
@@ -612,9 +598,6 @@ endif
 
 ifeq ($(USE_CURL),1)
   CLIENT_CFLAGS += -DUSE_CURL -Ithird_party/curl/include
-  ifeq ($(USE_CURL_DLOPEN),1)
-    CLIENT_CFLAGS += -DUSE_CURL_DLOPEN
-  endif
 endif
 
 ifeq ($(USE_VOIP),1)
