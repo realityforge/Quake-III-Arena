@@ -1,0 +1,16 @@
+# DO NOT EDIT: File is auto-generated
+* -text
+*.bzl text
+*.c text
+*.dll binary
+*.ico binary
+*.md text
+*.sh text
+*.sh text eol=lf
+*.txt text
+*.xml text
+*.yml text
+.bazelrc text
+.bazelversion text
+.gitignore text
+BUILD.bazel text allow_empty
