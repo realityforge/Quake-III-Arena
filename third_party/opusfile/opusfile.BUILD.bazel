@@ -19,6 +19,6 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         "@org_realityforge_ioq3//third_party/ogg",
-        "@org_realityforge_ioq3//third_party/opus",
+        "@opus",
     ],
 )

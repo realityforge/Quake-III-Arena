@@ -74,7 +74,7 @@ cc_library(
         "//code/qcommon",
         "//code/renderercommon:api",
         "//code/ui:api",
-        "//third_party/opus",
+        "@opus",
     ],
 )
 
@@ -114,8 +114,8 @@ cc_library(
     deps = [
         "//code/qcommon",
         "//code/qcommon:shared_api",
-        "//third_party/opus",
         "//third_party/vorbis",
+        "@opus",
     ],
 )
 
@@ -132,8 +132,8 @@ cc_library(
         ":snd_codec_api",
         "//code/qcommon",
         "//code/qcommon:shared_api",
-        "//third_party/opus",
         "//third_party/vorbis",
+        "@opus",
         "@opusfile",
     ],
 )
@@ -199,7 +199,7 @@ _CLIENT_EXE_DEPS = [
     "//code/sdl:sdl_input",
     "//code/sdl:sdl_renderer",
     "//code/sdl:sdl_snd",
-    "//third_party/opus",
+    "@opus//:opus",
     "//third_party/sdl",
     "//code/renderergl2",
 ]
