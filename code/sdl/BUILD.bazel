@@ -6,9 +6,7 @@ _SDL_LINK_OPTS = [
 
 cc_library(
     name = "sdl_snd",
-    srcs = [
-        "sdl_snd.c",
-    ],
+    srcs = ["sdl_snd.c"],
     linkopts = _SDL_LINK_OPTS,
     visibility = ["//code/client:__pkg__"],
     deps = [
