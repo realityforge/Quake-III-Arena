@@ -42,6 +42,7 @@ cc_library(
 
 cc_library(
     name = "ded",
+    visibility = DIST_VISIBILITY,
     deps = [
         ":server-dedicated",
         "//code/qcommon:cm",
@@ -59,5 +60,4 @@ cc_library(
         "//third_party/unzip",
         "//code/qcommon:vm",
     ],
-    visibility = DIST_VISIBILITY,
 )
