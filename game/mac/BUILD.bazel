@@ -61,7 +61,8 @@ macos_application(
         "//game/baseq3:pak9hqq36.pk3": "Resources/baseq3",
         "//game/missionpack:pak0.pk3": "Resources/missionpack",
     },
-    bundle_id = "org.ioquake.ioquake3",
+    # TODO: Name this bundle id according to final product name
+    bundle_id = "org.realityforge.Quake3Arena",
     infoplists = [":Info.plist"],
     minimum_os_version = "10.11",
     tags = ["manual"],
