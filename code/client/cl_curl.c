@@ -41,7 +41,7 @@ void CL_cURL_Cleanup(void)
 
         if (clc.downloadCURL) {
             result = curl_multi_remove_handle(clc.downloadCURLM,
-                                               clc.downloadCURL);
+                                              clc.downloadCURL);
             if (result != CURLM_OK) {
                 Com_DPrintf("url_multi_remove_handle failed: %s\n", curl_multi_strerror(result));
             }
