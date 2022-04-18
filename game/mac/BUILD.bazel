@@ -51,6 +51,7 @@ macos_application(
         "//game/missionpack:qagame.so": "MacOS/missionpack",
         "//game/missionpack:ui.so": "MacOS/missionpack",
 
+        # Application Icons
         ":quake3_flat.icns": "Resources",
 
         # Data files can not be below MacOS directory as the code signing process will expect it to be
