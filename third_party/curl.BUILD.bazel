@@ -393,12 +393,12 @@ cc_library(
             "-pie",
         ],
         "@org_realityforge_ioq3//build_defs:macos": [
-            "-Wl,-framework",
-            "-Wl,Network",
-            "-Wl,-framework",
-            "-Wl,SystemConfiguration",
-            "-Wl,-framework",
-            "-Wl,Security",
+            "-framework",
+            "Network",
+            "-framework",
+            "SystemConfiguration",
+            "-framework",
+            "Security",
         ],
         "@org_realityforge_ioq3//build_defs:ios": [],
         "@org_realityforge_ioq3//build_defs:windows": [
