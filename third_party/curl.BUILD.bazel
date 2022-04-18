@@ -396,8 +396,6 @@ cc_library(
             "-Wl,-framework",
             "-Wl,Network",
             "-Wl,-framework",
-            "-Wl,CoreFoundation",
-            "-Wl,-framework",
             "-Wl,SystemConfiguration",
             "-Wl,-framework",
             "-Wl,Security",
