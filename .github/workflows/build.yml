@@ -8,6 +8,7 @@ on:
   # Always run the "Build" action when a pull request is opened, synchronized (aka pushed to) or reopened
   pull_request:
 
+# https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
 jobs:
   linux:
     name: Linux
