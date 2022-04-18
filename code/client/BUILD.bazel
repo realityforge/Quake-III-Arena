@@ -20,6 +20,7 @@ cc_library(
         ":api",
         ":snd_api",
         ":snd_internal_api",
+        ":curl",
         "//code/botlib:api",
         "//code/cgame:api",
         "//code/game:bg_api",
@@ -39,7 +40,6 @@ cc_library(
     hdrs = [
         "cl_curl.h",
     ],
-    defines = ["USE_CURL"],
     deps = [
         ":api",
         "@curl//:curl",

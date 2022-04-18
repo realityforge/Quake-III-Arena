@@ -23,12 +23,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef QCURL_H
 #define QCURL_H
 
-#ifdef USE_LOCAL_HEADERS
-#include "curl/curl.h"
-#else
-#include <curl/curl.h>
-#endif
-
 qboolean CL_cURL_Init(void);
 void CL_cURL_Shutdown(void);
 void CL_cURL_BeginDownload(const char* localName, const char* remoteURL);
