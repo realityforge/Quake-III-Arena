@@ -1,6 +1,6 @@
 // menu defs
-// 
-{	
+//
+{
 	loadMenu { "ui/main.menu" }
  	loadMenu { "ui/joinserver.menu" }
  	loadMenu { "ui/filter.menu" }
@@ -20,7 +20,7 @@
 	loadMenu { "ui/credit.menu" }
 	loadMenu { "ui/demo_quit.menu" }
 	loadMenu { "ui/connect.menu" }
-	loadMenu { "ui/powerup.menu" } 
+	loadMenu { "ui/powerup.menu" }
 	loadMenu { "ui/password.menu" }
 	loadMenu { "ui/quake3.menu" }
 	loadMenu { "ui/quit.menu" }
