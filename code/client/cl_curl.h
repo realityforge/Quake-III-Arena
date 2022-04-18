@@ -29,26 +29,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <curl/curl.h>
 #endif
 
-#define qcurl_version curl_version
-
-#define qcurl_easy_init curl_easy_init
-#define qcurl_easy_setopt curl_easy_setopt
-#define qcurl_easy_perform curl_easy_perform
-#define qcurl_easy_cleanup curl_easy_cleanup
-#define qcurl_easy_getinfo curl_easy_getinfo
-#define qcurl_easy_duphandle curl_easy_duphandle
-#define qcurl_easy_reset curl_easy_reset
-#define qcurl_easy_strerror curl_easy_strerror
-
-#define qcurl_multi_init curl_multi_init
-#define qcurl_multi_add_handle curl_multi_add_handle
-#define qcurl_multi_remove_handle curl_multi_remove_handle
-#define qcurl_multi_fdset curl_multi_fdset
-#define qcurl_multi_perform curl_multi_perform
-#define qcurl_multi_cleanup curl_multi_cleanup
-#define qcurl_multi_info_read curl_multi_info_read
-#define qcurl_multi_strerror curl_multi_strerror
-
 qboolean CL_cURL_Init(void);
 void CL_cURL_Shutdown(void);
 void CL_cURL_BeginDownload(const char* localName, const char* remoteURL);
