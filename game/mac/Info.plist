@@ -4,16 +4,10 @@
 <dict>
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
-    <key>CFBundleExecutable</key>
-    <string>ioquake3</string>
     <key>CFBundleIconFile</key>
     <string>quake3_flat</string>
-    <key>CFBundleIdentifier</key>
-    <string>org.ioquake.ioquake3</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
-    <key>CFBundleName</key>
-    <string>ioquake3</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleSignature</key>
