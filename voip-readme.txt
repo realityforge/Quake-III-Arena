@@ -180,6 +180,3 @@ The initial VoIP work was done by Ryan C. Gordon <icculus@icculus.org>, and
  forums aren't helpful.
 
 // end of voip-README.txt ...
-
-
-
