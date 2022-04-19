@@ -45,6 +45,16 @@ library or library version to upgrade to.
 </thead>
 <tbody>
   <tr valign="top">
+    <td><a href="https://curl.se/">curl</a></td>
+    <td><code>7.54.0</code></td>
+    <td><a href="https://curl.se/">curl</a></td>
+    <td><code>7.81.0</code></td>
+    <td>Complete</td>
+    <td>
+        A library for transferring data with URLs. It is used to download supporting assets.
+    </td>
+  </tr>
+  <tr valign="top">
     <td><a href="https://xiph.org/ogg/">ogg</a></td>
     <td><code>1.3.3</code></td>
     <td><a href="https://xiph.org/ogg/">ogg</a></td>
