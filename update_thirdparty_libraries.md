@@ -57,7 +57,7 @@ library or library version to upgrade to. The final step is to remove the source
     <td><a href="https://www.ijg.org/files/jpegsr8c.zip">libjpeg</a></td>
     <td><code>8c</code></td>
     <td><a href="https://libjpeg-turbo.org/">libjpeg-turbo</a></td>
-    <td><code>2.1.0</code></td>
+    <td><code>2.1.3</code></td>
     <td>Complete</td>
     <td>
         A jpeg image codec. The libjpeg-turbo library is 2-6 times faster when decoding images on platforms where SIMD instructions are available (which is all the current target platforms).
