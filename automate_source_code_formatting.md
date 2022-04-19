@@ -66,4 +66,4 @@ As these separate branches can be tricky to setup initially or update when the u
 
 ### Evaluation
 
-The change worked out surprisingly well and it is a joy to never have to expend any mental effort aligning code during development.
+The change worked out surprisingly well, and it is a joy to never have to expend any mental effort aligning code during development.
