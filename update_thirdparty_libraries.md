@@ -74,6 +74,16 @@ library or library version to upgrade to.
     </td>
   </tr>
   <tr valign="top">
+    <td><a href="https://openal-soft.org/">openal-soft</a></td>
+    <td><code>1.15.1</code></td>
+    <td><a href="https://openal-soft.org/">openal-soft</a></td>
+    <td><code>1.21.1</code></td>
+    <td>0%</td>
+    <td>
+        OpenAL is a cross-platform 3D audio API appropriate for use with gaming applications and many other types of audio applications. <a href="https://openal-soft.org/">openal-soft</a> is a software implementation. The current codebase includes the headers from openal but relies on the system to provide the implementation. We can probably continue to do the same but with more modern OpenAL headers.
+    </td>
+  </tr>
+  <tr valign="top">
     <td><a href="https://opus-codec.org/">opus</a></td>
     <td><code>1.2.1</code></td>
     <td><a href="https://opus-codec.org/">opus</a></td>
