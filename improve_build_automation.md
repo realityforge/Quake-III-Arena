@@ -33,7 +33,8 @@ After reviewing the ecosystem it seemed like the only automation system that cou
 * **Scalable**: Scale your organization, codebase, and Continuous Integration systems. Bazel handles codebases of any size, whether in multiple repositories or a huge monorepo.
 * **Extensible to your needs**: Add support for new languages and platforms with Bazel's extension language. Share and re-use language rules written by the growing Bazel community.
 
-For all the benefits that Bazel offers, the most significant negative is an extremely steep initial learning curve. There is limited documentation on how to get started beyond toy examples.
+For all the benefits that Bazel offers, the most significant negative is an extremely steep initial learning curve. There is limited documentation on how to get started beyond toy examples. Once understood, Bazel seems to be (relatively) easy to maintain for large projects which is in stark contrast
+to other build tools.
 
 <a name="phase_1" ></a>
 
