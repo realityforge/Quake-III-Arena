@@ -9,8 +9,7 @@ party libraries is laborious and rarely as interesting for open source game deve
 
 The most up-to-date fork is (arguably) [ioquake3](https://ioquake3.org/) and many of the third party libraries used by
 that fork are out of date and contain known security vulnerabilities. i.e. The `curl` version is `7.54.1` released
-on `Jun 14 2017` and has 38 known security problems. (
-See [Vulnerabilities in curl 7.54.1](https://curl.se/docs/vuln-7.54.1.html)
+on `Jun 14 2017` and has 38 known security problems. (See [Vulnerabilities in curl 7.54.1](https://curl.se/docs/vuln-7.54.1.html)
 for further details.) Likewise, the `jpeg` version is `8c` released on `Jan 16 2011` and has several known security
 problems.
 
