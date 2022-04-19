@@ -138,9 +138,7 @@ cc_binary(
     copts = COPTS,
     includes = INCLUDES,
     visibility = ["@libjpeg_turbo//:__pkg__"],
-    deps = [
-        ":nasm_2_14_02",
-    ],
+    deps = [":nasm_2_14_02"],
 )
 
 config_setting(
