@@ -62,7 +62,7 @@ i.e. The following command compares the `code/ui/ui_atoms.c` file between the cu
 
 > $ git diff HEAD:code/ui/ui_atoms.c upstream/ioq3_formatted:code/ui/ui_atoms.c
 
-As these separate branches can be tricky to setup initially or update when the upstream changes, scripts have been added to the `bin/` directory to automate the setup.
+As these separate branches can be tricky to set up initially or update when the upstream changes, scripts have been added to the `bin/` directory to automate the setup.
 
 ### Evaluation
 
