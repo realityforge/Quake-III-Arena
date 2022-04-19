@@ -114,6 +114,16 @@ library or library version to upgrade to. The final step is to remove the source
     </td>
   </tr>
   <tr valign="top">
+    <td><a href="https://www.libsdl.org/">sdl</a></td>
+    <td><code>2.0.0</code> and <code>2.0.16</code></td>
+    <td><a href="https://www.libsdl.org/">sdl</a></td>
+    <td><code>2.0.20</code></td>
+    <td>0%</td>
+    <td>
+        Simple DirectMedia Layer is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware. It was added after the source was open-sourced and is relatively lightly used. It also is one of the more complex integrations with some platforms historically relying on static libraries, dynamic libraries and headers checked into the project source or provided by the system. The versions of the libraries and headers are not consistent across checked in artifacts. It is unclear what the best strategy is moving forward but improving the mechanisms for managing this library is desirable.
+    </td>
+  </tr>
+  <tr valign="top">
     <td><a href="https://www.zlib.net/">zlib</a></td>
     <td><code>1.2.3</code></td>
     <td><a href="https://www.zlib.net/">zlib</a></td>
