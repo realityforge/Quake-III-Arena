@@ -124,6 +124,16 @@ library or library version to upgrade to. The final step is to remove the source
     </td>
   </tr>
   <tr valign="top">
+    <td>unzip from <a href="https://www.zlib.net/">zlib</a></td>
+    <td><code>?</code></td>
+    <td><a href="https://github.com/zlib-ng/minizip-ng">minizip-ng</a> or <a href="https://www.zlib.net/">zlib</a></td>
+    <td><code>3.0.5</code> or <code>1.2.12</code></td>
+    <td>0%</td>
+    <td>
+        unzip was extracted and patched from zlib. It is used to open files from zip. It is unclear whether it should continue to be used as is or the project should move to the modern version of the code packaged in modern zlib or move to a different product.
+    </td>
+  </tr>
+  <tr valign="top">
     <td><a href="https://www.zlib.net/">zlib</a></td>
     <td><code>1.2.3</code></td>
     <td><a href="https://www.zlib.net/">zlib</a></td>
