@@ -41,6 +41,10 @@ jobs:
       - name: Configure Bazel Cache
         run: echo "startup --output_base=$HOME/.cache/bazel" >> user.bazelrc
 
+      - name: Verify Build file format
+        # Verify that the build files are correctly formatted
+        run: bazel run //:buildifier
+
       - name: Build Code
         # In the future we should also run "bazel build //game/mac:Quake3Arena.zip" but this requires that either
         # the id assets become optional or we find a way to securely store the assets so as not to violate licenses

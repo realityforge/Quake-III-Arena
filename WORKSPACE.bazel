@@ -15,19 +15,26 @@ load("@build_bazel_rules_apple//apple:repositories.bzl", "apple_rules_dependenci
 
 apple_rules_dependencies()
 
+load("//third_party/buildifier:repository.bzl", _load_buildifier_repository = "load_repository")
 load("//third_party/content:repository.bzl", _load_pak_repositories = "load_pak_repositories")
 load("//third_party/curl:repository.bzl", _load_curl_repository = "load_repository")
+load("//third_party/go:repository.bzl", _load_go_repository = "load_repository")
 load("//third_party/libjpeg_turbo:repository.bzl", _load_libjpeg_turbo_repository = "load_repository")
 load("//third_party/nasm:repository.bzl", _load_nasm_repository = "load_repository")
 load("//third_party/ogg:repository.bzl", _load_ogg_repository = "load_repository")
 load("//third_party/opus:repository.bzl", _load_opus_repository = "load_repository")
 load("//third_party/opusfile:repository.bzl", _load_opusfile_repository = "load_repository")
+load("//third_party/protobuf:repository.bzl", _load_protobuf_repository = "load_repository")
 load("//third_party/vorbis:repository.bzl", _load_vorbis_repository = "load_repository")
 load("//third_party/zlib:repository.bzl", _load_zlib_repository = "load_repository")
+
+_load_buildifier_repository()
 
 _load_pak_repositories()
 
 _load_curl_repository()
+
+_load_go_repository()
 
 _load_libjpeg_turbo_repository()
 
@@ -39,6 +46,15 @@ _load_opus_repository()
 
 _load_opusfile_repository()
 
+_load_protobuf_repository()
+
 _load_vorbis_repository()
 
 _load_zlib_repository()
+
+load("//third_party/go:repository2.bzl", _configure_go_repository = "configure_repository")
+load("@com_google_protobuf//:protobuf_deps.bzl", _protobuf_deps = "protobuf_deps")
+
+_configure_go_repository()
+
+_protobuf_deps()
