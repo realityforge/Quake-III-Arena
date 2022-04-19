@@ -74,6 +74,16 @@ library or library version to upgrade to.
         Opus is a open, royalty-free, versatile audio codec. Opus is unmatched for interactive speech and music transmission over the Internet. It is part of the VOIP solution.
     </td>
   </tr>
+  <tr valign="top">
+    <td><a href="https://www.zlib.net/">zlib</a></td>
+    <td><code>1.2.3</code></td>
+    <td><a href="https://www.zlib.net/">zlib</a></td>
+    <td><code>1.2.12</code></td>
+    <td>Complete</td>
+    <td>
+        zlib is a software library used for data compression. It is used by various modules including curl, png decoding and potentially decoding zip archives used implementing the VFS. In the future it is possible that this will be replaced by <a href="https://github.com/zlib-ng/zlib-ng">zlib-ng</a>.
+    </td>
+  </tr>
 </tbody>
 </table>
 
