@@ -46,6 +46,15 @@ libjpegturbo_copts = select({
     "//conditions:default": [],
 })
 
+template_rule(
+    name = "jversion.h_gen",
+    src = "jversion.h.in",
+    out = "jversion.h",
+    substitutions = {
+        "@COPYRIGHT_YEAR@": "2022",
+    },
+)
+
 cc_library(
     name = "jpeg",
     srcs = [
