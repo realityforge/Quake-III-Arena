@@ -60,7 +60,7 @@ library or library version to upgrade to. The final step is to remove the source
     <td><code>2.1.0</code></td>
     <td>Complete</td>
     <td>
-        A jpeg image codec. The libjpeg-turbo library is 2-6 times faster when decoding images on platforms where SIMD instructions are available (which is all of the current target platforms).
+        A jpeg image codec. The libjpeg-turbo library is 2-6 times faster when decoding images on platforms where SIMD instructions are available (which is all the current target platforms).
     </td>
   </tr>
   <tr valign="top">
