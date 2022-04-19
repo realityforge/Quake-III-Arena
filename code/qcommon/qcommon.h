@@ -361,7 +361,7 @@ void Cmd_ArgsBuffer(char* buffer, int bufferLength);
 char* Cmd_Cmd(void);
 // The functions that execute commands get their parameters with these
 // functions. Cmd_Argv () will return an empty string, not a NULL
-// if arg > argc, so string operations are allways safe.
+// if arg > argc, so string operations are always safe.
 
 void Cmd_TokenizeString(const char* text);
 // Takes a null terminated string.  Does not need to be /n terminated.
@@ -843,7 +843,7 @@ typedef enum {
     SE_NONE = 0, // evTime is still valid
     SE_KEY, // evValue is a key code, evValue2 is the down flag
     SE_CHAR, // evValue is an ascii char
-    SE_MOUSE, // evValue and evValue2 are reletive signed x / y moves
+    SE_MOUSE, // evValue and evValue2 are relative signed x / y moves
     SE_JOYSTICK_AXIS, // evValue is an axis number and evValue2 is the current state (-127 to 127)
     SE_PACKET // evPtr is a netadr_t followed by data bytes to evPtrLength
 } sysEventType_t;

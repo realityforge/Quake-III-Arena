@@ -1010,7 +1010,7 @@ void SV_UserinfoChanged(client_t* cl)
 
     // TTimo
     // maintain the IP information
-    // this is set in SV_DirectConnect (directly on the server, not transmitted), may be lost when client updates it's userinfo
+    // this is set in SV_DirectConnect (directly on the server, not transmitted), may be lost when client updates its userinfo
     // the banning code relies on this being consistently present
     val = Info_ValueForKey(cl->userinfo, "ip");
     if (!val[0]) {

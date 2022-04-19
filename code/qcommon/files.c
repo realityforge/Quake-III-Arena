@@ -43,7 +43,7 @@ The "base path" is the path to the directory holding all the game directories an
 the executable.  It defaults to ".", but can be overridden with a "+set fs_basepath c:\quake3"
 command line to allow code debugging in a different directory.  Basepath cannot
 be modified at all after startup.  Any files that are created (demos, screenshots,
-etc) will be created reletive to the base path, so base path should usually be writable.
+etc) will be created relative to the base path, so base path should usually be writable.
 
 The "cd path" is the path to an alternate hierarchy that will be searched if a file
 is not located in the base path.  A user can do a partial install that copies some
@@ -281,9 +281,9 @@ qboolean FS_PakIsPure(pack_t* pack)
         for (i = 0; i < fs_numServerPaks; i++) {
             // FIXME: also use hashed file names
             // NOTE TTimo: a pk3 with same checksum but different name would be validated too
-            //   I don't see this as allowing for any exploit, it would only happen if the client does manips of it's file names 'not a bug'
+            //   I don't see this as allowing for any exploit, it would only happen if the client does manips of its file names 'not a bug'
             if (pack->checksum == fs_serverPaks[i]) {
-                return qtrue; // on the aproved list
+                return qtrue; // on the approved list
             }
         }
         return qfalse; // not on the pure server pak list
@@ -798,7 +798,7 @@ fileHandle_t FS_FOpenFileAppend(const char* filename)
 ===========
 FS_FilenameCompare
 
-Ignore case and seprator char distinctions
+Ignore case and separator char distinctions
 ===========
 */
 qboolean FS_FilenameCompare(const char* s1, const char* s2)
@@ -1460,7 +1460,7 @@ void FS_FreeFile(void* buffer)
 ============
 FS_WriteFile
 
-Filename are reletive to the quake search path
+Filename are relative to the quake search path
 ============
 */
 void FS_WriteFile(const char* qpath, const void* buffer, int size)
@@ -2051,7 +2051,7 @@ void FS_ConvertPath(char* s)
 ===========
 FS_PathCmp
 
-Ignore case and seprator char distinctions
+Ignore case and separator char distinctions
 ===========
 */
 int FS_PathCmp(const char* s1, const char* s2)

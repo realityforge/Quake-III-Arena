@@ -46,8 +46,8 @@ void S_AddLoopingSound(int entityNum, const vec3_t origin, const vec3_t velocity
 void S_AddRealLoopingSound(int entityNum, const vec3_t origin, const vec3_t velocity, sfxHandle_t sfx);
 void S_StopLoopingSound(int entityNum);
 
-// recompute the reletive volumes for all running sounds
-// reletive to the given entityNum / orientation
+// recompute the relative volumes for all running sounds
+// relative to the given entityNum / orientation
 void S_Respatialize(int entityNum, const vec3_t origin, vec3_t axis[3], int inwater);
 
 // let the sound system know where an entity currently is
@@ -59,7 +59,7 @@ void S_DisableSounds(void);
 
 void S_BeginRegistration(void);
 
-// RegisterSound will allways return a valid sample, even if it
+// RegisterSound will always return a valid sample, even if it
 // has to create a placeholder.  This prevents continuous filesystem
 // checks for missing files
 sfxHandle_t S_RegisterSound(const char* sample, qboolean compressed);

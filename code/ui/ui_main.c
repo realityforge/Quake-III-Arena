@@ -4810,7 +4810,7 @@ void _UI_Init()
     UI_RegisterCvars();
     UI_InitMemory();
 
-    // cache redundant calulations
+    // cache redundant calculations
     trap_GetGlconfig(&uiInfo.uiDC.glconfig);
 
     // for 640x480 virtualized screen

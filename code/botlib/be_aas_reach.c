@@ -589,7 +589,7 @@ int AAS_Reachability_Swim(int area1num, int area2num)
     area1 = &aasworld.areas[area1num];
     area2 = &aasworld.areas[area2num];
 
-    // if the areas are not near anough
+    // if the areas are not near enough
     for (i = 0; i < 3; i++) {
         if (area1->mins[i] > area2->maxs[i] + 10)
             return qfalse;
@@ -660,7 +660,7 @@ int AAS_Reachability_EqualFloorHeight(int area1num, int area2num)
 
     area1 = &aasworld.areas[area1num];
     area2 = &aasworld.areas[area2num];
-    // if the areas are not near anough in the x-y direction
+    // if the areas are not near enough in the x-y direction
     for (i = 0; i < 2; i++) {
         if (area1->mins[i] > area2->maxs[i] + 10)
             return qfalse;
@@ -800,7 +800,7 @@ int AAS_Reachability_Step_Barrier_WaterJump_WalkOffLedge(int area1num, int area2
     area2 = &aasworld.areas[area2num];
     // if the first area contains a liquid
     area1swim = AAS_AreaSwim(area1num);
-    // if the areas are not near anough in the x-y direction
+    // if the areas are not near enough in the x-y direction
     for (i = 0; i < 2; i++) {
         if (area1->mins[i] > area2->maxs[i] + 10)
             return qfalse;
@@ -1754,7 +1754,7 @@ int AAS_Reachability_Jump(int area1num, int area2num)
     // maximum height a player can jump with the given initial z velocity
     maxjumpheight = AAS_MaxJumpHeight(phys_jumpvel);
 
-    // if the areas are not near anough in the x-y direction
+    // if the areas are not near enough in the x-y direction
     for (i = 0; i < 2; i++) {
         if (area1->mins[i] > area2->maxs[i] + maxjumpdistance)
             return qfalse;

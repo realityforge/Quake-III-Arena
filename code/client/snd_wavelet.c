@@ -32,7 +32,7 @@ long myftol(float f);
 void daub4(float b[], unsigned long n, int isign)
 {
     float wksp[4097];
-    float* a = b - 1; // numerical recipies so a[1] = b[0]
+    float* a = b - 1; // numerical recipes so a[1] = b[0]
 
     unsigned long nh, nh1, i, j;
 

@@ -811,7 +811,7 @@ sysEvent_t Sys_GetEvent( void )
     // Check for mouse and keyboard events
     Sys_SendKeyEvents(currentTime);
 
-    // During debugging it is sometimes usefull to be able to start/stop mouse input.
+    // During debugging it is sometimes useful to be able to start/stop mouse input.
     // Don't turn on the input when we've disabled it because we're hidden, however.
     if (in_nomouse->integer == mouseactive && !Sys_IsHidden) {
         if (in_nomouse->integer)

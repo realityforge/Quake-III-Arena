@@ -175,7 +175,7 @@ static void UI_LoadArenas(void)
     }
     trap_Print(va("%i arenas parsed\n", ui_numArenas));
     if (outOfMemory)
-        trap_Print(S_COLOR_YELLOW "WARNING: not anough memory in pool to load all arenas\n");
+        trap_Print(S_COLOR_YELLOW "WARNING: not enough memory in pool to load all arenas\n");
 
     // set initial numbers
     for (n = 0; n < ui_numArenas; n++) {
@@ -308,7 +308,7 @@ static void UI_LoadBotsFromFile(char* filename)
 
     ui_numBots += UI_ParseInfos(buf, MAX_BOTS - ui_numBots, &ui_botInfos[ui_numBots]);
     if (outOfMemory)
-        trap_Print(S_COLOR_YELLOW "WARNING: not anough memory in pool to load all bots\n");
+        trap_Print(S_COLOR_YELLOW "WARNING: not enough memory in pool to load all bots\n");
 }
 
 static void UI_LoadBots(void)

@@ -376,7 +376,7 @@ int PS_ReadEscapeCharacter(script_t* script, char* ch)
     script->script_p++;
     // store the escape character
     *ch = c;
-    // succesfully read escape character
+    // successfully read escape character
     return 1;
 }
 //============================================================================
@@ -386,7 +386,7 @@ int PS_ReadEscapeCharacter(script_t* script, char* ch)
 //
 // Parameter:				script		: script to read from
 //								token			: buffer to store the string
-// Returns:					qtrue when a string was read succesfully
+// Returns:					qtrue when a string was read successfully
 //============================================================================
 int PS_ReadString(script_t* script, token_t* token, int quote)
 {
@@ -427,7 +427,7 @@ int PS_ReadString(script_t* script, token_t* token, int quote)
             //
             tmpscript_p = script->script_p;
             tmpline = script->line;
-            // read unusefull stuff between possible two following strings
+            // read unuseful stuff between possible two following strings
             if (!PS_ReadWhiteSpace(script)) {
                 script->script_p = tmpscript_p;
                 script->line = tmpline;
@@ -698,7 +698,7 @@ int PS_ReadToken(script_t* script, token_t* token)
     // start of the white space
     script->whitespace_p = script->script_p;
     token->whitespace_p = script->script_p;
-    // read unusefull stuff
+    // read unuseful stuff
     if (!PS_ReadWhiteSpace(script))
         return 0;
     // end of the white space
@@ -739,7 +739,7 @@ int PS_ReadToken(script_t* script, token_t* token)
     }
     // copy the token into the script structure
     memcpy(&script->token, token, sizeof(token_t));
-    // succesfully read a token
+    // successfully read a token
     return 1;
 }
 int PS_ExpectTokenString(script_t* script, char* string)

@@ -1608,7 +1608,7 @@ static void FixRenderCommandList(int newShader)
 SortNewShader
 
 Positions the most recently created shader in the tr.sortedShaders[]
-array so that the shader->sort key is sorted reletive to the other
+array so that the shader->sort key is sorted relative to the other
 shaders.
 
 Sets shader->sortedIndex
@@ -1830,7 +1830,7 @@ static shader_t* FinishShader(void)
         }
 
         //
-        // ditch this stage if it's detail and detail textures are disabled
+        // ditch this stage if its detail and detail textures are disabled
         //
         if (pStage->isDetail && !r_detailTextures->integer) {
             if (stage < (MAX_SHADER_STAGES - 1)) {
@@ -2115,7 +2115,7 @@ shader_t* R_FindShader(const char* name, int lightmapIndex, qboolean mipRawImage
         stages[i].bundle[0].texMods = texMods[i];
     }
 
-    // FIXME: set these "need" values apropriately
+    // FIXME: set these "need" values appropriately
     shader.needsNormal = qtrue;
 
     //
@@ -2234,7 +2234,7 @@ qhandle_t RE_RegisterShaderFromImage(const char* name, int lightmapIndex, image_
         stages[i].bundle[0].texMods = texMods[i];
     }
 
-    // FIXME: set these "need" values apropriately
+    // FIXME: set these "need" values appropriately
     shader.needsNormal = qtrue;
 
     //

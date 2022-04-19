@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define MAX_ENTITIES 1023 // can't be increased without changing drawsurf bit packing
 
 // renderfx flags
-#define RF_MINLIGHT 1 // allways have some light (viewmodel, some items)
+#define RF_MINLIGHT 1 // always have some light (viewmodel, some items)
 #define RF_THIRD_PERSON 2 // don't draw through eyes, only mirrors (player bodies, chat sprites)
 #define RF_FIRST_PERSON 4 // only draw through eyes (view weapon, damage blood blob)
 #define RF_DEPTHHACK 8 // for view weapon Z crunching

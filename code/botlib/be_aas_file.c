@@ -251,7 +251,7 @@ void AAS_FileInfo(void)
 }
 #endif // AASFILEDEBUG
 //===========================================================================
-// allocate memory and read a lump of a AAS file
+// allocate memory and read a lump of an AAS file
 //===========================================================================
 char* AAS_LoadAASLump(fileHandle_t fp, int offset, int length, int* lastoffset, int size)
 {

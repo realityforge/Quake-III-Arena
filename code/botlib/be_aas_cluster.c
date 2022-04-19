@@ -90,7 +90,7 @@ int AAS_UpdatePortal(int areanum, int clusternum)
     } else {
         // remove the cluster portal flag contents
         aasworld.areasettings[areanum].contents &= ~AREACONTENTS_CLUSTERPORTAL;
-        Log_Write("portal area %d is seperating more than two clusters\r\n", areanum);
+        Log_Write("portal area %d is separating more than two clusters\r\n", areanum);
         return qfalse;
     }
     if (aasworld.portalindexsize >= AAS_MAX_PORTALINDEXSIZE) {

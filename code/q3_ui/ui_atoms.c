@@ -939,7 +939,7 @@ void UI_Init(void)
 
     UI_InitGameinfo();
 
-    // cache redundant calulations
+    // cache redundant calculations
     trap_GetGlconfig(&uis.glconfig);
 
     // for 640x480 virtualized screen

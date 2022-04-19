@@ -595,7 +595,7 @@ int MSG_ReadDeltaKey(msg_t* msg, int key, int oldV, int bits)
     return oldV;
 }
 
-// ms is allways sent, the others are optional
+// ms is always sent, the others are optional
 #define CM_ANGLE1 (1 << 0)
 #define CM_ANGLE2 (1 << 1)
 #define CM_ANGLE3 (1 << 2)

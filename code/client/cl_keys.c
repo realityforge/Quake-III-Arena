@@ -410,7 +410,7 @@ void Field_CharEvent(field_t* edit, int ch)
     }
 
     //
-    // ignore any other non printable chars
+    // ignore any other non-printable chars
     //
     if (ch < 32) {
         return;

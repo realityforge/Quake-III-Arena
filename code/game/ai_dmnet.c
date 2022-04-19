@@ -748,7 +748,7 @@ int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t* goal)
             // quit rushing after 2 minutes
             if (bs->teamgoal_time < FloatTime())
                 bs->ltgtype = 0;
-            // if touching the base flag the bot should loose the enemy flag
+            // if touching the base flag the bot should lose the enemy flag
             if (trap_BotTouchingGoal(bs->origin, goal)) {
                 // if the bot is still carrying the enemy flag then the
                 // base flag is gone, now just walk near the base a bit
@@ -838,7 +838,7 @@ int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t* goal)
             if (bs->teamgoal_time < FloatTime()) {
                 bs->ltgtype = 0;
             }
-            // if touching the base flag the bot should loose the enemy flag
+            // if touching the base flag the bot should lose the enemy flag
             if (trap_BotTouchingGoal(bs->origin, goal)) {
                 bs->ltgtype = 0;
             }
@@ -869,7 +869,7 @@ int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t* goal)
             if (bs->teamgoal_time < FloatTime()) {
                 bs->ltgtype = 0;
             }
-            // if touching the base flag the bot should loose the enemy flag
+            // if touching the base flag the bot should lose the enemy flag
             if (trap_BotTouchingGoal(bs->origin, goal)) {
                 bs->attackaway_time = FloatTime() + 2 + 5 * random();
             }
@@ -957,7 +957,7 @@ int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t* goal)
                 BotGoHarvest(bs);
                 return qfalse;
             }
-            // if touching the base flag the bot should loose the enemy flag
+            // if touching the base flag the bot should lose the enemy flag
             if (trap_BotTouchingGoal(bs->origin, goal)) {
                 BotGoHarvest(bs);
                 return qfalse;
@@ -989,7 +989,7 @@ int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t* goal)
             if (bs->teamgoal_time < FloatTime()) {
                 bs->ltgtype = 0;
             }
-            // if touching the base flag the bot should loose the enemy flag
+            // if touching the base flag the bot should lose the enemy flag
             if (trap_BotTouchingGoal(bs->origin, goal)) {
                 bs->attackaway_time = FloatTime() + 2 + 5 * random();
             }
@@ -1295,7 +1295,7 @@ void BotClearPath(bot_state_t* bs, bot_moveresult_t* moveresult)
                 moveresult->flags |= MOVERESULT_MOVEMENTWEAPON | MOVERESULT_MOVEMENTVIEW;
                 // if holding the right weapon
                 if (bs->cur_ps.weapon == moveresult->weapon) {
-                    // if the bot is pretty close with it's aim
+                    // if the bot is pretty close with its aim
                     if (InFieldOfVision(bs->viewangles, 20, moveresult->ideal_viewangles)) {
                         //
                         BotAI_Trace(&bsptrace, bs->eye, NULL, NULL, target, bs->entitynum, MASK_SHOT);
@@ -1351,7 +1351,7 @@ void BotClearPath(bot_state_t* bs, bot_moveresult_t* moveresult)
                 moveresult->flags |= MOVERESULT_MOVEMENTWEAPON | MOVERESULT_MOVEMENTVIEW;
                 // if holding the right weapon
                 if (bs->cur_ps.weapon == moveresult->weapon) {
-                    // if the bot is pretty close with it's aim
+                    // if the bot is pretty close with its aim
                     if (InFieldOfVision(bs->viewangles, 20, moveresult->ideal_viewangles)) {
                         //
                         BotAI_Trace(&bsptrace, bs->eye, NULL, NULL, target, bs->entitynum, MASK_SHOT);
@@ -1431,7 +1431,7 @@ int AINode_Seek_ActivateEntity(bot_state_t* bs)
             if (bs->cur_ps.weapon == bs->activatestack->weapon) {
                 VectorSubtract(bs->activatestack->target, bs->eye, dir);
                 vectoangles(dir, ideal_viewangles);
-                // if the bot is pretty close with it's aim
+                // if the bot is pretty close with its aim
                 if (InFieldOfVision(bs->viewangles, 20, ideal_viewangles)) {
                     trap_EA_Attack(bs->client);
                 }
@@ -1944,7 +1944,7 @@ int AINode_Battle_Fight(bot_state_t* bs)
             bs->enemydeath_time = FloatTime();
         }
     }
-    // if the enemy is invisible and not shooting the bot looses track easily
+    // if the enemy is invisible and not shooting the bot loses track easily
     if (EntityIsInvisible(&entinfo) && !EntityIsShooting(&entinfo)) {
         if (random() < 0.2) {
             AIEnter_Seek_LTG(bs, "battle fight: invisible");
@@ -2326,7 +2326,7 @@ int AINode_Battle_Retreat(bot_state_t* bs)
     } else if (!(moveresult.flags & MOVERESULT_MOVEMENTVIEWSET)
                && !(bs->flags & BFL_IDEALVIEWSET)) {
         attack_skill = trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_ATTACK_SKILL, 0, 1);
-        // if the bot is skilled anough
+        // if the bot is skilled enough
         if (attack_skill > 0.3) {
             BotAimAtEnemy(bs);
         } else {
@@ -2462,7 +2462,7 @@ int AINode_Battle_NBG(bot_state_t* bs)
     } else if (!(moveresult.flags & MOVERESULT_MOVEMENTVIEWSET)
                && !(bs->flags & BFL_IDEALVIEWSET)) {
         attack_skill = trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_ATTACK_SKILL, 0, 1);
-        // if the bot is skilled anough and the enemy is visible
+        // if the bot is skilled enough and the enemy is visible
         if (attack_skill > 0.3) {
             //&& BotEntityVisible(bs->entitynum, bs->eye, bs->viewangles, 360, bs->enemy)
             BotAimAtEnemy(bs);

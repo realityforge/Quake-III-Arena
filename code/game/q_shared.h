@@ -910,7 +910,7 @@ typedef struct {
 
 // sound channels
 // channel 0 never willingly overrides
-// other channels will allways override a playing sound on that channel
+// other channels will always override a playing sound on that channel
 typedef enum {
     CHAN_AUTO,
     CHAN_LOCAL, // menu sounds, etc
@@ -1009,7 +1009,7 @@ typedef struct playerState_s {
     int torsoTimer; // don't change low priority animations until this runs out
     int torsoAnim; // mask off ANIM_TOGGLEBIT
 
-    int movementDir; // a number 0 to 7 that represents the reletive angle
+    int movementDir; // a number 0 to 7 that represents the relative angle
                      // of movement to the view angle (axial and diagonals)
                      // when at rest, the value will remain unchanged
                      // used to twist the legs during strafing

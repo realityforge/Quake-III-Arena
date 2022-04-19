@@ -32,7 +32,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
   Respawnable items don't actually go away when picked up, they are
   just made invisible and untouchable.  This allows them to ride
-  movers and respawn apropriately.
+  movers and respawn appropriately.
 */
 
 #define RESPAWN_ARMOR 25
@@ -554,7 +554,7 @@ gentity_t* LaunchItem(gitem_t* item, vec3_t origin, vec3_t velocity)
 
     dropped->s.eType = ET_ITEM;
     dropped->s.modelindex = item - bg_itemlist; // store item number in modelindex
-    dropped->s.modelindex2 = 1; // This is non-zero is it's a dropped item
+    dropped->s.modelindex2 = 1; // This is non-zero if it's a dropped item
 
     dropped->classname = item->classname;
     dropped->item = item;
@@ -649,7 +649,7 @@ void FinishSpawningItem(gentity_t* ent)
 
     ent->r.contents = CONTENTS_TRIGGER;
     ent->touch = Touch_Item;
-    // useing an item causes it to respawn
+    // using an item causes it to respawn
     ent->use = Use_Item;
 
     if (ent->spawnflags & 1) {
