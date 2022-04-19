@@ -29,7 +29,7 @@ would ideally be compatible with all the platforms that the project targets or i
 ### Solution
 
 The first step is to catalog the versions of the libraries used by the project. The next stage is to identify the
-library or library version to upgrade to.
+library or library version to upgrade to. The final step is to remove the source files or binary artifacts from the project and define an external Bazel repository that is responsible for downloading and compiling the library with appropriate customization for the project.
 
 <table>
 <thead>
