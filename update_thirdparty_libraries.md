@@ -31,7 +31,6 @@ would ideally be compatible with all the platforms that the project targets or i
 The first step is to catalog the versions of the libraries used by the project. The next stage is to identify the
 library or library version to upgrade to.
 
-
 <table>
 <thead>
   <tr valign="top" align="left">
