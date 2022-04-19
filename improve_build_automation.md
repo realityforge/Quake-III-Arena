@@ -26,7 +26,7 @@ The second challenge is that this work is often detail oriented, high risk and i
 
 The initial investigation seemed to suggest that different types of automation could occur using different tools. The automation could be completed using domain specific tools such as CMake, Dockerfiles etc. The individual steps could be chained together using shell scripts and pipelines could be orchestrated using third party tools. Experiments started using this approach but the complexity was too high to sustain in a project of this type.
 
-After reviewing the ecosystem it seemed like the only automation system that could potentially fulfill all of our requirements was [Bazel](https://bazel.build/). Bazel is an open-source build and test tool that supports multi-language and multi-platform projects. The key features highlighted on the Bazel home page that sold the project on the move are:
+After reviewing the ecosystem it seemed like the only automation system that could potentially fulfill all of our requirements was [Bazel](https://bazel.build/). Bazel is an open-source build and test tool that supports multi-language and multi-platform projects. Configured correctly, Bazel builds can be done incrementally and in a distributed fashion. The key features highlighted on the Bazel home page that sold the project on the move are:
 
 * **Speed up your builds and tests**: Rebuild only what is necessary. Get fast, incremental builds with Bazel's advanced local and distributed caching, optimized dependency analysis, and parallel execution.
 * **One tool, multiple languages**: Build and test using Java, C++, Go, Android, iOS and many other languages and platforms. Bazel runs on Windows, macOS, and Linux.
