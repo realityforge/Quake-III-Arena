@@ -104,7 +104,7 @@ library or library version to upgrade to. The final step is to remove the source
     </td>
   </tr>
   <tr valign="top">
-    <td>puff</td>
+    <td>puff from <a href="https://www.zlib.net/">zlib</a></td>
     <td><code>?</code></td>
     <td>-</td>
     <td>-</td>
