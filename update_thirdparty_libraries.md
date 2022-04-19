@@ -134,6 +134,16 @@ library or library version to upgrade to. The final step is to remove the source
     </td>
   </tr>
   <tr valign="top">
+    <td><a href="https://xiph.org/vorbis/">vorbis</a></td>
+    <td><code>1.3.6</code></td>
+    <td><a href="https://xiph.org/vorbis/">vorbis</a></td>
+    <td><code>1.3.7</code></td>
+    <td>Complete</td>
+    <td>
+        Ogg Vorbis is a general-purpose compressed audio format for mid to high quality. It is part of the VOIP solution.
+    </td>
+  </tr>
+  <tr valign="top">
     <td><a href="https://www.zlib.net/">zlib</a></td>
     <td><code>1.2.3</code></td>
     <td><a href="https://www.zlib.net/">zlib</a></td>
