@@ -8,8 +8,45 @@ This page exists purely as a mechanism for the author to document plans and trac
 
 The major changes of the project are tracked in this table.
 
-| Change                                                                    | Cost<br>(1-10) | Benefit<br>(1-10) | Game Impact<br>(0-10) | Status   | Started<br>On | Completed<br>On |
-|---------------------------------------------------------------------------|----------------|-------------------|--------------------|----------|---------------|--------------|
-| [Update Third Party Libraries](update_thirdparty_libraries.md)     | 2              | 2                 | 0                  | 60%      | 2022-04-18    |    |
-| [Automate Source Code Formatting](automate_source_code_formatting.md)     | 1              | 3                 | 0                  | Complete | 2022-04-10    | 2022-04-13   |
-| [Improve Build Automation - Phase 1](improve_build_automation.md#phase_1) | 4?             | 8?                | 0                  | 10%?     | 2022-03-01    |              |
+<table>
+  <thead>
+    <tr valign="top">
+      <th>Change</th>
+      <th>Cost<br>(1-10)</th>
+      <th>Benefit<br>(1-10)</th>
+      <th>Game Impact<br>(0-10)</th>
+      <th>Status</th>
+      <th>Started<br>On</th>
+      <th>Completed<br>On</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr valign="top">
+      <td><a href="update_thirdparty_libraries.html">Update Third Party Libraries</a></td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>60%</td>
+      <td>2022-04-18</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr valign="top">
+      <td><a href="automate_source_code_formatting.html">Automate Source Code Formatting</a></td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>Complete</td>
+      <td>2022-04-10</td>
+      <td>2022-04-13</td>
+    </tr>
+    <tr valign="top">
+      <td><a href="improve_build_automation.html.html#phase_1">Improve Build Automation - Phase 1</a></td>
+      <td>4?</td>
+      <td>8?</td>
+      <td>0</td>
+      <td>10%?</td>
+      <td>2022-03-01</td>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
