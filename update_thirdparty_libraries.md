@@ -75,6 +75,16 @@ library or library version to upgrade to.
     </td>
   </tr>
   <tr valign="top">
+    <td><a href="https://github.com/xiph/opusfile">opusfile</a></td>
+    <td><code>0.9</code></td>
+    <td><a href="https://github.com/xiph/opusfile">opusfile</a></td>
+    <td><code>0.12</code></td>
+    <td>Complete</td>
+    <td>
+        Stand-alone decoder library for .opus streams. It is part of the VOIP solution.
+    </td>
+  </tr>
+  <tr valign="top">
     <td><a href="https://www.zlib.net/">zlib</a></td>
     <td><code>1.2.3</code></td>
     <td><a href="https://www.zlib.net/">zlib</a></td>
