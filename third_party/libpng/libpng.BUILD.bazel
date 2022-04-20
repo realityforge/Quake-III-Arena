@@ -65,5 +65,8 @@ template_rule(
     name = "pnglibconf.h_gen",
     src = "scripts/pnglibconf.h.prebuilt",
     out = "pnglibconf.h",
-    substitutions = {},
+    substitutions = {
+        "#define PNG_WRITE_SUPPORTED": "",
+        "#define PNG_WRITE_FILLER_SUPPORTED": "",
+    },
 )
