@@ -2022,7 +2022,7 @@ qboolean Item_TextField_HandleKey(itemDef_t* item, int key)
             }
 
             //
-            // ignore any non printable chars
+            // ignore any non-printable chars
             //
             if (key < 32 || !item->cvar) {
                 return qtrue;
@@ -5280,7 +5280,7 @@ qboolean Item_Parse(int handle, itemDef_t* item)
 }
 
 // Item_InitControls
-// init's special control types
+// inits special control types
 void Item_InitControls(itemDef_t* item)
 {
     if (item == NULL) {

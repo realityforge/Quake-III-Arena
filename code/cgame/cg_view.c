@@ -42,7 +42,7 @@ position, directly facing the viewer.  It will remain immobile, so you can
 move around it to view it from different angles.
 
 Testgun will cause the model to follow the player around and suppress the real
-view weapon model.  The default frame 0 of most guns is completely off screen,
+view weapon model.  The default frame 0 of most guns is completely off-screen,
 so you will probably have to cycle a couple frames to see it.
 
 "nextframe", "prevframe", "nextskin", and "prevskin" commands will change the
@@ -190,7 +190,7 @@ static void CG_CalcVrect(void)
 {
     int size;
 
-    // the intermission should allways be full screen
+    // the intermission should always be full screen
     if (cg.snap->ps.pm_type == PM_INTERMISSION) {
         size = 100;
     } else {

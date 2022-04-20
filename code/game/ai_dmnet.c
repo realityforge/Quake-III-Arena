@@ -749,7 +749,7 @@ int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t* goal)
             // quit rushing after 2 minutes
             if (bs->teamgoal_time < FloatTime())
                 bs->ltgtype = 0;
-            // if touching the base flag the bot should loose the enemy flag
+            // if touching the base flag the bot should lose the enemy flag
             if (trap_BotTouchingGoal(bs->origin, goal)) {
                 // if the bot is still carrying the enemy flag then the
                 // base flag is gone, now just walk near the base a bit
@@ -839,7 +839,7 @@ int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t* goal)
             if (bs->teamgoal_time < FloatTime()) {
                 bs->ltgtype = 0;
             }
-            // if touching the base flag the bot should loose the enemy flag
+            // if touching the base flag the bot should lose the enemy flag
             if (trap_BotTouchingGoal(bs->origin, goal)) {
                 bs->ltgtype = 0;
             }
@@ -870,7 +870,7 @@ int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t* goal)
             if (bs->teamgoal_time < FloatTime()) {
                 bs->ltgtype = 0;
             }
-            // if touching the base flag the bot should loose the enemy flag
+            // if touching the base flag the bot should lose the enemy flag
             if (trap_BotTouchingGoal(bs->origin, goal)) {
                 bs->attackaway_time = FloatTime() + 2 + 5 * random();
             }
@@ -958,7 +958,7 @@ int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t* goal)
                 BotGoHarvest(bs);
                 return qfalse;
             }
-            // if touching the base flag the bot should loose the enemy flag
+            // if touching the base flag the bot should lose the enemy flag
             if (trap_BotTouchingGoal(bs->origin, goal)) {
                 BotGoHarvest(bs);
                 return qfalse;
@@ -990,7 +990,7 @@ int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t* goal)
             if (bs->teamgoal_time < FloatTime()) {
                 bs->ltgtype = 0;
             }
-            // if touching the base flag the bot should loose the enemy flag
+            // if touching the base flag the bot should lose the enemy flag
             if (trap_BotTouchingGoal(bs->origin, goal)) {
                 bs->attackaway_time = FloatTime() + 2 + 5 * random();
             }
@@ -1950,7 +1950,7 @@ int AINode_Battle_Fight(bot_state_t* bs)
             bs->enemydeath_time = FloatTime();
         }
     }
-    // if the enemy is invisible and not shooting the bot looses track easily
+    // if the enemy is invisible and not shooting the bot loses track easily
     if (EntityIsInvisible(&entinfo) && !EntityIsShooting(&entinfo)) {
         if (random() < 0.2) {
             AIEnter_Seek_LTG(bs, "battle fight: invisible");

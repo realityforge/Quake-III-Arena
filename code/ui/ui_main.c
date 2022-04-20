@@ -4849,7 +4849,7 @@ void _UI_Init(void)
     UI_RegisterCvars();
     UI_InitMemory();
 
-    // cache redundant calulations
+    // cache redundant calculations
     trap_GetGlconfig(&uiInfo.uiDC.glconfig);
 
     trap_Cvar_Set("ui_videomode", va("%dx%d", uiInfo.uiDC.glconfig.vidWidth, uiInfo.uiDC.glconfig.vidHeight));

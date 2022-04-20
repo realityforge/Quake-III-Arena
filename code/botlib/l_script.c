@@ -425,7 +425,7 @@ int PS_ReadString(script_t* script, token_t* token, int quote)
             //
             tmpscript_p = script->script_p;
             tmpline = script->line;
-            // read unusefull stuff between possible two following strings
+            // read unuseful stuff between possible two following strings
             if (!PS_ReadWhiteSpace(script)) {
                 script->script_p = tmpscript_p;
                 script->line = tmpline;
@@ -693,7 +693,7 @@ int PS_ReadToken(script_t* script, token_t* token)
     memset(token, 0, sizeof(token_t));
     // start of the white space
     token->whitespace_p = script->script_p;
-    // read unusefull stuff
+    // read unuseful stuff
     if (!PS_ReadWhiteSpace(script))
         return 0;
     // end of the white space

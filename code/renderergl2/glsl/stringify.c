@@ -38,7 +38,7 @@ int main(int argc, char** argv)
 
         end[1] = '\0';
 
-        // Write line enquoted, with a newline
+        // Write line quoted, with a newline
         fprintf(ofp, "\"%s\\n\"\n", buffer);
     }
 

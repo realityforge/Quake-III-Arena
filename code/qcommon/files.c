@@ -293,7 +293,7 @@ qboolean FS_PakIsPure(pack_t* pack)
             // NOTE TTimo: a pk3 with same checksum but different name would be validated too
             //   I don't see this as allowing for any exploit, it would only happen if the client does manips of its file names 'not a bug'
             if (pack->checksum == fs_serverPaks[i]) {
-                return qtrue; // on the aproved list
+                return qtrue; // on the approved list
             }
         }
         return qfalse; // not on the pure server pak list
@@ -832,7 +832,7 @@ fileHandle_t FS_FOpenFileAppend(const char* filename)
 ===========
 FS_FilenameCompare
 
-Ignore case and seprator char distinctions
+Ignore case and separator char distinctions
 ===========
 */
 qboolean FS_FilenameCompare(const char* s1, const char* s2)
@@ -2361,7 +2361,7 @@ void FS_ConvertPath(char* s)
 ===========
 FS_PathCmp
 
-Ignore case and seprator char distinctions
+Ignore case and separator char distinctions
 ===========
 */
 int FS_PathCmp(const char* s1, const char* s2)
