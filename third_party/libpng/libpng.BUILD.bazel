@@ -6,37 +6,64 @@ cc_library(
     name = "libpng",
     srcs = [
         "png.c",
+        "pngdebug.h",
         "pngerror.c",
         "pngget.c",
+        "pnginfo.h",
+        "pnglibconf.h",
         "pngmem.c",
         "pngpread.c",
+        "pngpriv.h",
         "pngread.c",
         "pngrio.c",
         "pngrtran.c",
         "pngrutil.c",
         "pngset.c",
+        "pngstruct.h",
         "pngtrans.c",
         "pngwio.c",
         "pngwrite.c",
         "pngwtran.c",
         "pngwutil.c",
-    ],
+    ] + select({
+        # We are using x86 as a proxy for SSE2 capability present
+        "@org_realityforge_ioq3//build_defs:x86": [
+            "intel/intel_init.c",
+            "intel/filter_sse2_intrinsics.c",
+        ],
+        # We are using arm as a proxy for NEON capability present
+        "@org_realityforge_ioq3//build_defs:arm": [
+            "arm/arm_init.c",
+            "arm/filter_neon.S",
+            "arm/filter_neon_intrinsics.c",
+        ],
+        "//conditions:default": [],
+    }),
     hdrs = [
         "png.h",
         "pngconf.h",
     ],
+    # TODO: Probably can also define PNG_NO_STDIO which will remove all stdio ... which should be fine as we don't use it?
+    defines = select({
+        # Windows does not need math library
+        "@org_realityforge_ioq3//build_defs:x86": ["PNG_INTEL_SSE_OPT=1", "PNG_POWERPC_VSX_OPT=0", "PNG_ARM_NEON_OPT=0", "PNG_MIPS_MSA_OPT=0"],
+        "@org_realityforge_ioq3//build_defs:arm": ["PNG_INTEL_SSE_OPT=0", "PNG_POWERPC_VSX_OPT=0", "PNG_ARM_NEON_OPT=2", "PNG_MIPS_MSA_OPT=0"],
+        "//conditions:default": ["PNG_INTEL_SSE_OPT=0", "PNG_POWERPC_VSX_OPT=0", "PNG_ARM_NEON_OPT=0", "PNG_MIPS_MSA_OPT=0"],
+    }) + ["PNG_NO_CONSOLE_IO"],
+    copts = ["-Wno-unused-but-set-variable"],
     includes = ["."],
-    defines = [
-        "PNG_STATIC",
-        "PNG_NO_CONSOLE_IO",
-        "PNG_CONSOLE_IO_SUPPORTED",
-    ],
     visibility = ["//visibility:public"],
-    deps =
-        ["@zlib"] +
-        select({
-            # Windows does not need math library
-            "@org_realityforge_ioq3//build_defs:windows": [],
-            "//conditions:default": ["@org_realityforge_ioq3//third_party:math"],
-        }),
+    deps = ["@zlib"] +
+           select({
+               # Windows does not need math library
+               "@org_realityforge_ioq3//build_defs:windows": [],
+               "//conditions:default": ["@org_realityforge_ioq3//third_party:math"],
+           }),
+)
+
+template_rule(
+    name = "pnglibconf.h_gen",
+    src = "scripts/pnglibconf.h.prebuilt",
+    out = "pnglibconf.h",
+    substitutions = {},
 )
