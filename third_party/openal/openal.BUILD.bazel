@@ -1,0 +1,14 @@
+cc_library(
+    name = "openal",
+    hdrs = [
+        "include/AL/al.h",
+        "include/AL/alc.h",
+        "include/AL/alext.h",
+        "include/AL/efx.h",
+        "include/AL/efx-creative.h",
+        "include/AL/efx-presets.h",
+    ],
+    includes = ["include"],
+    linkopts = ["-framework OpenAL"],
+    visibility = ["//visibility:public"],
+)

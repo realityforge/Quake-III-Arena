@@ -172,7 +172,7 @@ cc_library(
         ":snd_internal_api",
         "//code/qcommon",
         "//code/qcommon:shared_api",
-        "//third_party/openal",
+        "@openal",
     ],
 )
 
