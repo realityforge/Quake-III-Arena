@@ -1,0 +1,42 @@
+load("@org_realityforge_ioq3//third_party:common.bzl", "template_rule")
+
+licenses(["notice"])  # BSD/MIT-like license
+
+cc_library(
+    name = "libpng",
+    srcs = [
+        "png.c",
+        "pngerror.c",
+        "pngget.c",
+        "pngmem.c",
+        "pngpread.c",
+        "pngread.c",
+        "pngrio.c",
+        "pngrtran.c",
+        "pngrutil.c",
+        "pngset.c",
+        "pngtrans.c",
+        "pngwio.c",
+        "pngwrite.c",
+        "pngwtran.c",
+        "pngwutil.c",
+    ],
+    hdrs = [
+        "png.h",
+        "pngconf.h",
+    ],
+    includes = ["."],
+    defines = [
+        "PNG_STATIC",
+        "PNG_NO_CONSOLE_IO",
+        "PNG_CONSOLE_IO_SUPPORTED",
+    ],
+    visibility = ["//visibility:public"],
+    deps =
+        ["@zlib"] +
+        select({
+            # Windows does not need math library
+            "@org_realityforge_ioq3//build_defs:windows": [],
+            "//conditions:default": ["@org_realityforge_ioq3//third_party:math"],
+        }),
+)
