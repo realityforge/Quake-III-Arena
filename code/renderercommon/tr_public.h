@@ -153,6 +153,16 @@ typedef struct {
     // a -1 return means the file does not exist
     // NULL can be passed for buf to just determine existence
     int (*FS_FileIsInPAK)(const char* name, int* pCheckSum);
+    /**
+     * Find the file with the specified name, if data parameter is non-null then allocate a buffer to
+     * contain the content of the file and make the data pointer point at the new buffer. Return the size
+     * of the file in bytes. The buffer MUST be released by passing it to the FS_FreeFile(void *) function.
+     * The return value is 0 if no such file exists.
+     *
+     * @param name the name of the file.
+     * @param buf the pointer to update with the location of the created buffer or NULL
+     * @return the number of bytes in the file or 0 if no bytes.
+     */
     long (*FS_ReadFile)(const char* name, void** buf);
     void (*FS_FreeFile)(void* buf);
     char** (*FS_ListFiles)(const char* name, const char* extension, int* numfilesfound);
