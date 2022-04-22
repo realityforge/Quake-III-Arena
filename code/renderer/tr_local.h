@@ -944,7 +944,7 @@ extern cvar_t* r_measureOverdraw; // enables stencil buffer overdraw measurement
 extern cvar_t* r_lodbias; // push/pull LOD transitions
 extern cvar_t* r_lodscale;
 
-extern cvar_t* r_primitives; // "0" = based on compiled vertex array existance
+extern cvar_t* r_primitives; // "0" = based on compiled vertex array existence
                              // "1" = glDrawElemet tristrips
                              // "2" = glDrawElements triangles
                              // "-1" = no drawing
