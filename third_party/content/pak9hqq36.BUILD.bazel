@@ -1,11 +1,5 @@
 # The list of files from the pak that are of interest.
 _FILES = [
-    #"full_bk.tga",
-    #"full_dn.tga",
-    #"full_ft.tga",
-    #"full_lf.tga",
-    #"full_rt.tga",
-    #"full_up.tga",
     "gfx/2d/backtile.jpg",
     "gfx/2d/bigchars.tga",
     "gfx/2d/colorbar.jpg",
