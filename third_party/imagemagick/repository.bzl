@@ -1,12 +1,30 @@
-load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_archive = "http_archive")
+def _imagemagick_repository_impl(rctx):
+    bin_ext = ""
+    if rctx.os.name.lower().startswith("windows"):
+        bin_ext = ".exe"
+
+    magick = rctx.which("magick" + bin_ext)
+    if not magick:
+        fail("""
+from imagemagick_repository():
+    ImageMagick must be installed and 'magick{bin_ext}' available in your PATH.
+    Download ImageMagick here: https://imagemagick.org/script/download.php
+             """.format(bin_ext = bin_ext))
+    rctx.symlink(magick, "_magick" + bin_ext)
+    rctx.file(
+        "BUILD.bazel",
+        content = """
+package(default_visibility = ["//visibility:public"])
+
+alias(name = "magick", actual = "_magick{bin_ext}")
+                  """.format(bin_ext = bin_ext),
+        executable = False,
+    )
+
+_imagemagick_repository = repository_rule(
+    implementation = _imagemagick_repository_impl,
+    attrs = {},
+)
 
 def load_repository():
-    if native.existing_rule("rules_imagemagick"):
-        return
-
-    _http_archive(
-        name = "rules_imagemagick",
-        strip_prefix = "rules_imagemagick-35903509e561bde7b9081e5682a732d2f4d91f85",
-        urls = ["https://github.com/zaucy/rules_imagemagick/archive/35903509e561bde7b9081e5682a732d2f4d91f85.zip"],
-        sha256 = "20ce414b1243c28e388d7f56aaedebb2a0d5cf510fcd91bb5ceae77005b478fa",
-    )
+    _imagemagick_repository(name = "imagemagick")

@@ -62,11 +62,8 @@ _load_vorbis_repository()
 _load_zlib_repository()
 
 load("//third_party/go:repository2.bzl", _configure_go_repository = "configure_repository")
-load("//third_party/imagemagick:repository2.bzl", _configure_imagemagick_repository = "configure_repository")
 load("//third_party/protobuf:repository2.bzl", _configure_protobuf_repository = "configure_repository")
 
 _configure_go_repository()
-
-_configure_imagemagick_repository()
 
 _configure_protobuf_repository()
