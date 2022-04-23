@@ -86,6 +86,8 @@ cvar_t* r_facePlaneCull;
 cvar_t* r_showcluster;
 cvar_t* r_nocurves;
 
+cvar_t* r_developer;
+
 cvar_t* r_allowExtensions;
 
 cvar_t* r_ext_compressed_textures;
@@ -1079,6 +1081,7 @@ void GfxMemInfo_f(void)
 
 void R_Register(void)
 {
+    r_developer = ri.Cvar_Get("developer", "0", CVAR_TEMP);
     //
     // latched and archived variables
     //
