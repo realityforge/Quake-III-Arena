@@ -63,10 +63,10 @@ _load_zlib_repository()
 
 load("//third_party/go:repository2.bzl", _configure_go_repository = "configure_repository")
 load("//third_party/imagemagick:repository2.bzl", _configure_imagemagick_repository = "configure_repository")
-load("@com_google_protobuf//:protobuf_deps.bzl", _protobuf_deps = "protobuf_deps")
+load("//third_party/protobuf:repository2.bzl", _configure_protobuf_repository = "configure_repository")
 
 _configure_go_repository()
 
 _configure_imagemagick_repository()
 
-_protobuf_deps()
+_configure_protobuf_repository()
