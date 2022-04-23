@@ -221,7 +221,7 @@ static void BotImport_BSPModelMinsMaxsOrigin(int modelnum, vec3_t angles, vec3_t
         VectorClear(origin);
 }
 
-static void* BotImport_GetMemory(int size)
+static void* BotImport_GetMemory(const size_t size)
 {
     void* ptr;
 

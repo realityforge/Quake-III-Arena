@@ -2732,7 +2732,7 @@ void CL_StartHunkUsers(qboolean rendererOnly)
     }
 }
 
-void* CL_RefMalloc(int size)
+void* CL_RefMalloc(const size_t size)
 {
     return Z_TagMalloc(size, TAG_RENDERER);
 }

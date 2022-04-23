@@ -74,9 +74,9 @@ void UnlinkMemoryBlock(memoryblock_t* block)
         block->next->prev = block->prev;
 }
 #ifdef MEMDEBUG
-void* GetMemoryDebug(unsigned long size, char* label, char* file, int line)
+void* GetMemoryDebug(size_t size, char* label, char* file, int line)
 #else
-void* GetMemory(unsigned long size)
+void* GetMemory(size_t size)
 #endif // MEMDEBUG
 {
     void* ptr;
@@ -99,9 +99,9 @@ void* GetMemory(unsigned long size)
     return block->ptr;
 }
 #ifdef MEMDEBUG
-void* GetClearedMemoryDebug(unsigned long size, char* label, char* file, int line)
+void* GetClearedMemoryDebug(size_t size, char* label, char* file, int line)
 #else
-void* GetClearedMemory(unsigned long size)
+void* GetClearedMemory(size_t size)
 #endif // MEMDEBUG
 {
     void* ptr;
@@ -245,9 +245,9 @@ void DumpMemory(void)
 #else
 
 #ifdef MEMDEBUG
-void* GetMemoryDebug(unsigned long size, char* label, char* file, int line)
+void* GetMemoryDebug(size_t size, char* label, char* file, int line)
 #else
-void* GetMemory(unsigned long size)
+void* GetMemory(size_t size)
 #endif // MEMDEBUG
 {
     void* ptr;
@@ -261,9 +261,9 @@ void* GetMemory(unsigned long size)
     return (unsigned long int*)((char*)ptr + sizeof(unsigned long int));
 }
 #ifdef MEMDEBUG
-void* GetClearedMemoryDebug(unsigned long size, char* label, char* file, int line)
+void* GetClearedMemoryDebug(size_t size, char* label, char* file, int line)
 #else
-void* GetClearedMemory(unsigned long size)
+void* GetClearedMemory(size_t size)
 #endif // MEMDEBUG
 {
     void* ptr;

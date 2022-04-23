@@ -175,7 +175,7 @@ typedef struct botlib_import_s {
     // send a bot client command
     void (*BotClientCommand)(int client, char* command);
     // memory allocation
-    void* (*GetMemory)(int size); // allocate from Zone
+    void* (*GetMemory)(const size_t size); // allocate from Zone
     void (*FreeMemory)(void* ptr); // free memory from Zone
     int (*AvailableMemory)(void); // available Zone memory
     void* (*HunkAlloc)(int size); // allocate from hunk
