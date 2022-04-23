@@ -123,7 +123,7 @@ typedef struct {
     void (*Hunk_FreeTempMemory)(void* block);
 
     // dynamic memory allocator for things that need to be freed
-    void* (*Malloc)(int bytes);
+    void* (*Malloc)(const size_t bytes);
     void (*Free)(void* buf);
 
     cvar_t* (*Cvar_Get)(const char* name, const char* value, int flags);

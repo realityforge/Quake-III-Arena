@@ -813,10 +813,10 @@ void Z_Free(void* ptr)
 }
 
 #ifdef ZONE_DEBUG
-void* Z_TagMallocDebug(int size, int tag, char* label, char* file, int line)
+void* Z_TagMallocDebug(size_t size, int tag, char* label, char* file, int line)
 {
 #else
-void* Z_TagMalloc(int size, int tag)
+void* Z_TagMalloc(size_t size, int tag)
 {
 #endif
     int extra;
@@ -856,7 +856,7 @@ void* Z_TagMalloc(int size, int tag)
             Z_LogHeap();
 #endif
             // scaned all the way around the list
-            Com_Error(ERR_FATAL, "Z_Malloc: failed on allocation of %i bytes from the %s zone",
+            Com_Error(ERR_FATAL, "Z_Malloc: failed on allocation of %lu bytes from the %s zone",
                       size, zone == smallzone ? "small" : "main");
             return NULL;
         }
@@ -905,10 +905,10 @@ void* Z_TagMalloc(int size, int tag)
 }
 
 #ifdef ZONE_DEBUG
-void* Z_MallocDebug(int size, char* label, char* file, int line)
+void* Z_MallocDebug(size_t size, char* label, char* file, int line)
 {
 #else
-void* Z_Malloc(int size)
+void* Z_Malloc(size_t size)
 {
 #endif
     void* buf;
@@ -926,12 +926,12 @@ void* Z_Malloc(int size)
 }
 
 #ifdef ZONE_DEBUG
-void* S_MallocDebug(int size, char* label, char* file, int line)
+void* S_MallocDebug(size_t size, char* label, char* file, int line)
 {
     return Z_TagMallocDebug(size, TAG_SMALL, label, file, line);
 }
 #else
-void* S_Malloc(int size)
+void* S_Malloc(size_t size)
 {
     return Z_TagMalloc(size, TAG_SMALL);
 }

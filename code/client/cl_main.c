@@ -1892,7 +1892,7 @@ void CL_StartHunkUsers(void)
     }
 }
 
-void* CL_RefMalloc(int size)
+void* CL_RefMalloc(const size_t size)
 {
     return Z_TagMalloc(size, TAG_RENDERER);
 }
