@@ -14,7 +14,7 @@ It should be noted that the screenshot function currently emits screenshots in t
 
 The names of the tga files are directly referenced from other assets or game code. The code that needs to be changes includes code in the renderer and the client game modules for `baseq3` and the `missionpack` games. The assets that will need to be updated include the materials definitions (a.k.a. `*.shader` files), the `*.menu` files (in the `missionpack` game) and the `*.skin` files.
 
-The project must ensure that the load times are not significantly more in any of the target platforms. It is expected that for many of the platforms, the decrease in file size will result in an overall reduction in load time even if it increases the load on the CPU as the load bottle neck is more likely to be IO rather than decoding.
+The project must ensure that the load times are not significantly more in any of the target platforms. It is expected that for many of the platforms, the decrease in file size will result in an overall reduction in load time even if it increases the load on the CPU as the load bottleneck is more likely to be IO rather than decoding.
 
 ### Solution
 
