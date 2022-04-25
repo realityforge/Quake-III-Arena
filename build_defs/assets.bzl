@@ -10,15 +10,8 @@ def convert_tga_to_png(package_label, files, fileset):
             name = "%s.png_gen" % _file_sans_extension,
             srcs = [_input_label],
             outs = [_output_file],
-            # Previously also checked Channels=%[channels] = srgba but some of the assets from wider community do not comply with this
             cmd = """
 export INPUT=$(location %s)
-export PROPERTIES=`$(location @imagemagick//:magick) identify -format "BitDepth=%%[bit-depth] ColorSpace=%%[colorspace]" $${INPUT}`
-export EXPECTED_PROPERTIES="BitDepth=8 ColorSpace=sRGB"
-if [ "$${PROPERTIES}" != "$${EXPECTED_PROPERTIES}" ]; then
-    echo "File $${INPUT} has properties $${PROPERTIES} and not expected properties $${EXPECTED_PROPERTIES}"
-    exit 1
-fi
 $(location @imagemagick//:magick) convert "$${INPUT}" "$@" && $(location @imagemagick//:magick) compare -metric RMSE "$${INPUT}" "png32:$@" null: 2>/dev/null
 """ % (_input_label),
             tools = ["@imagemagick//:magick"],
