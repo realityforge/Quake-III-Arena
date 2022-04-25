@@ -19,7 +19,7 @@ if [ "$${PROPERTIES}" != "$${EXPECTED_PROPERTIES}" ]; then
     echo "File $${INPUT} has properties $${PROPERTIES} and not expected properties $${EXPECTED_PROPERTIES}"
     exit 1
 fi
-$(location @imagemagick//:magick) convert $${INPUT} $@ && $(location @imagemagick//:magick) compare -metric RMSE $${INPUT} png32:$@ null: 2>/dev/null
+$(location @imagemagick//:magick) convert "$${INPUT}" "$@" && $(location @imagemagick//:magick) compare -metric RMSE "$${INPUT}" "png32:$@" null: 2>/dev/null
 """ % (_input_label),
             tools = ["@imagemagick//:magick"],
         )
