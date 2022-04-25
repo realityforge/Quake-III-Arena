@@ -3,7 +3,7 @@
 # defines a fileset that contains all the converted images.
 def convert_tga_to_png(package_label, files, fileset):
     for file in files:
-        _file_sans_extension = file.removesuffix(".tga")
+        _file_sans_extension = file.removesuffix(".tga").removesuffix(".TGA")
         _input_label = "%s:%s" % (package_label, file)
         _output_file = "%s.png" % _file_sans_extension
         native.genrule(
