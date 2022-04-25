@@ -40,7 +40,7 @@ The major changes of the project are tracked in this table.
       <td>2022-04-13</td>
     </tr>
     <tr valign="top">
-      <td><a href="improve_build_automation.html.html#phase_1">Improve Build Automation - Phase 1</a></td>
+      <td><a href="improve_build_automation.html#phase_1">Improve Build Automation - Phase 1</a></td>
       <td>4?</td>
       <td>8?</td>
       <td>0</td>
