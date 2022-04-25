@@ -20,5 +20,5 @@ $(location @imagemagick//:magick) convert "$${INPUT}" "$@" && $(location @imagem
     native.filegroup(
         name = fileset,
         srcs = ["%s.png" % file.removesuffix(".tga").removesuffix(".TGA") for file in files],
-        visibility = ["//game/baseq3:__pkg__"],
+        visibility = ["//game/baseq3:__pkg__", "//game/teamarena:__pkg__"],
     )
