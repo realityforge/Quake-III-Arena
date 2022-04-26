@@ -1325,7 +1325,6 @@ PAK_DATA = {
             "music/sonic5.wav",
             "music/sonic6.wav",
             "music/win.wav",
-            "productid.txt",
             "scripts/arenas.txt",
             "scripts/bots.txt",
             "sound/feedback/1_frag.wav",
