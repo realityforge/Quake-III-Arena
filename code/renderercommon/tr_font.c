@@ -51,13 +51,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // rendered three sizes in Team Arena, 12, 16, and 20.
 //
 // To generate new font data you need to go through the following steps.
-// 1. delete the fontImage_x_xx.tga files and fontImage_xx.dat files from the fonts path.
+// 1. delete the fontImage_x_xx.png files and fontImage_xx.dat files from the fonts path.
 // 2. in a ui script, specificy a font, smallFont, and bigFont keyword with font name and
 //    point size. the original TrueType fonts must exist in fonts at this point.
 // 3. run the game, you should see things normally.
-// 4. Exit the game and there will be three dat files and at least three tga files. The
-//    tga's are in 256x256 pages so if it takes three images to render a 24 point font you
-//    will end up with fontImage_0_24.tga through fontImage_2_24.tga
+// 4. Exit the game and there will be three dat files and at least three png files. The
+//    png's are in 256x256 pages so if it takes three images to render a 24 point font you
+//    will end up with fontImage_0_24.png through fontImage_2_24.png
 // 5. In future runs of the game, the system looks for these images and data files when a s
 //    specific point sized font is rendered and loads them for use.
 // 6. Because of the original beta nature of the FreeType code you will probably want to hand
@@ -492,7 +492,7 @@ void RE_RegisterFont(const char* fontName, int pointSize, fontInfo_t* font)
                 imageBuff[left++] = ((float)out[k] * max);
             }
 
-            Com_sprintf(name, sizeof(name), "fonts/fontImage_%i_%i.tga", imageNumber++, pointSize);
+            Com_sprintf(name, sizeof(name), "fonts/fontImage_%i_%i.png", imageNumber++, pointSize);
             if (r_saveFontData->integer) {
                 WriteTGA(name, imageBuff, 256, 256);
             }
