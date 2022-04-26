@@ -27,6 +27,7 @@ load("//third_party/ogg:repository.bzl", _load_ogg_repository = "load_repository
 load("//third_party/openal:repository.bzl", _load_openal_repository = "load_repository")
 load("//third_party/opus:repository.bzl", _load_opus_repository = "load_repository")
 load("//third_party/opusfile:repository.bzl", _load_opusfile_repository = "load_repository")
+load("//third_party/pngcrush:repository.bzl", _load_pngcrush_repository = "load_repository")
 load("//third_party/protobuf:repository.bzl", _load_protobuf_repository = "load_repository")
 load("//third_party/vorbis:repository.bzl", _load_vorbis_repository = "load_repository")
 load("//third_party/zlib:repository.bzl", _load_zlib_repository = "load_repository")
@@ -54,6 +55,8 @@ _load_openal_repository()
 _load_opus_repository()
 
 _load_opusfile_repository()
+
+_load_pngcrush_repository()
 
 _load_protobuf_repository()
 
