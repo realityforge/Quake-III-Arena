@@ -6497,7 +6497,6 @@ PAK_DATA = {
             "models/powerups/ammo/railammo2.jpg",
             "models/powerups/ammo/rockammo2.jpg",
             "models/powerups/ammo/shotammo2.jpg",
-            "pak9hqq.txt",
             "textures/base_trim/proto_comp2.jpg",
             "textures/base_wall/medal_excellent.jpg",
             "textures/base_wall/medal_gauntlet.jpg",
