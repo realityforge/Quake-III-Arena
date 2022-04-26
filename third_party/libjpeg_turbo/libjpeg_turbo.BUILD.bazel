@@ -4,7 +4,7 @@
 # NOTE: This Build file was copied from https://github.com/tensorflow/tensorflow/blob/7a99ce11636fb7e0c974d4d9b8b5dbff7f259c87/third_party/jpeg/jpeg.BUILD
 #       and is under the Apache 2 license as specified by https://github.com/tensorflow/tensorflow/blob/7a99ce11636fb7e0c974d4d9b8b5dbff7f259c87/LICENSE
 
-load("@org_realityforge_ioq3//third_party:common.bzl", "template_rule")
+load("@org_realityforge_ioq3//third_party:common.bzl", "expand_template")
 
 licenses(["notice"])  # custom notice-style license, see LICENSE.md
 
@@ -46,9 +46,9 @@ libjpegturbo_copts = select({
     "//conditions:default": [],
 })
 
-template_rule(
+expand_template(
     name = "jversion.h_gen",
-    src = "jversion.h.in",
+    template = "jversion.h.in",
     out = "jversion.h",
     substitutions = {
         "@COPYRIGHT_YEAR@": "2022",
@@ -324,9 +324,9 @@ genrule(
     tools = ["@nasm"],
 )
 
-template_rule(
+expand_template(
     name = "neon-compat_gen",
-    src = "simd/arm/neon-compat.h.in",
+    template = "simd/arm/neon-compat.h.in",
     out = "simd/arm/neon-compat.h",
     substitutions = {
         "#cmakedefine HAVE_VLD1_S16_X3": "#define HAVE_VLD1_S16_X3",
@@ -543,9 +543,9 @@ cc_library(
     copts = libjpegturbo_copts,
 )
 
-template_rule(
+expand_template(
     name = "jconfig_win",
-    src = "win/jconfig.h.in",
+    template = "win/jconfig.h.in",
     out = "jconfig_win.h",
     substitutions = {
         "@JPEG_LIB_VERSION@": "62",
@@ -593,16 +593,16 @@ JCONFIG_NOWIN_SIMD_SUBSTITUTIONS.update(JCONFIG_NOWIN_COMMON_SUBSTITUTIONS)
 
 JCONFIG_NOWIN_NOSIMD_SUBSTITUTIONS.update(JCONFIG_NOWIN_COMMON_SUBSTITUTIONS)
 
-template_rule(
+expand_template(
     name = "jconfig_nowin_nosimd",
-    src = "jconfig.h.in",
+    template = "jconfig.h.in",
     out = "jconfig_nowin_nosimd.h",
     substitutions = JCONFIG_NOWIN_NOSIMD_SUBSTITUTIONS,
 )
 
-template_rule(
+expand_template(
     name = "jconfig_nowin_simd",
-    src = "jconfig.h.in",
+    template = "jconfig.h.in",
     out = "jconfig_nowin_simd.h",
     substitutions = JCONFIG_NOWIN_SIMD_SUBSTITUTIONS,
 )
@@ -645,16 +645,16 @@ JCONFIGINT_NOWIN_SUBSTITUTIONS.update(JCONFIGINT_COMMON_SUBSTITUTIONS)
 
 JCONFIGINT_WIN_SUBSTITUTIONS.update(JCONFIGINT_COMMON_SUBSTITUTIONS)
 
-template_rule(
+expand_template(
     name = "jconfigint_nowin",
-    src = "jconfigint.h.in",
+    template = "jconfigint.h.in",
     out = "jconfigint_nowin.h",
     substitutions = JCONFIGINT_NOWIN_SUBSTITUTIONS,
 )
 
-template_rule(
+expand_template(
     name = "jconfigint_win",
-    src = "jconfigint.h.in",
+    template = "jconfigint.h.in",
     out = "jconfigint_win.h",
     substitutions = JCONFIGINT_WIN_SUBSTITUTIONS,
 )

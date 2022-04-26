@@ -7,9 +7,9 @@
 #
 # Typical usage:
 #   load("@org_realityforge_ioq3//third_party:common.bzl", "template_rule")
-#   template_rule(
+#   expand_template(
 #       name = "ExpandMyTemplate",
-#       src = "my.template",
+#       template = "my.template",
 #       out = "my.txt",
 #       substitutions = {
 #         "$VAR1": "foo",
@@ -22,17 +22,19 @@
 #   template: The template file to expand
 #   out: The destination of the expanded file
 #   substitutions: A dictionary mapping strings to their substitutions
-
-def template_rule_impl(ctx):
+#
+# TODO: The next release of Bazel should support this rule directly via load("@bazel_skylib//rules:expand_template.bzl", "expand_template") and this file should be removed
+#
+def expand_template_impl(ctx):
     ctx.actions.expand_template(
-        template = ctx.file.src,
+        template = ctx.file.template,
         output = ctx.outputs.out,
         substitutions = ctx.attr.substitutions,
     )
 
-template_rule = rule(
+expand_template = rule(
     attrs = {
-        "src": attr.label(
+        "template": attr.label(
             mandatory = True,
             allow_single_file = True,
         ),
@@ -41,5 +43,5 @@ template_rule = rule(
     },
     # output_to_genfiles is required for header files.
     output_to_genfiles = True,
-    implementation = template_rule_impl,
+    implementation = expand_template_impl,
 )

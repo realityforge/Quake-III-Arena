@@ -1,8 +1,8 @@
-load("@org_realityforge_ioq3//third_party:common.bzl", "template_rule")
+load("@org_realityforge_ioq3//third_party:common.bzl", "expand_template")
 
-template_rule(
+expand_template(
     name = "config_types.h_gen",
-    src = "include/ogg/config_types.h.in",
+    template = "include/ogg/config_types.h.in",
     out = "include/ogg/config_types.h",
     substitutions = {
         "@INCLUDE_INTTYPES_H@": "1",

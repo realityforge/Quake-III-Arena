@@ -1,4 +1,4 @@
-load("@org_realityforge_ioq3//third_party:common.bzl", "template_rule")
+load("@org_realityforge_ioq3//third_party:common.bzl", "expand_template")
 
 licenses(["notice"])  # BSD/MIT-like license
 
@@ -65,9 +65,9 @@ cc_library(
            }),
 )
 
-template_rule(
+expand_template(
     name = "pnglibconf.h_gen",
-    src = "scripts/pnglibconf.h.prebuilt",
+    template = "scripts/pnglibconf.h.prebuilt",
     out = "pnglibconf.h",
     substitutions = {
         "#define PNG_SAVE_INT_32_SUPPORTED": "",
