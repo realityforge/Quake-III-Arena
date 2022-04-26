@@ -30,3 +30,9 @@ _convert_tga_to_png(
     _PAK_DATA["QuakeArenaArcade_baseq3"]["tga_files"],
     "QuakeArenaArcade_baseq3_images",
 )
+
+_convert_tga_to_png(
+    "@pak9hqq36//",
+    _PAK_DATA["pak9hqq36"]["tga_files"],
+    "pak9hqq36_images",
+)
