@@ -62,3 +62,9 @@ The actual conversion of assets from TGA to PNG is done as part of the Bazel bui
 Running pngcrush on an image takes a substantial amount of time, so it is imerative that the Bazel rules be developed in such a way that the inputs and outputs are easy to cache and thus there should rarely be a need to re-process and pngcrush the PNGs once the cache is established.
 
 ### Evaluation
+
+The conversion of the TGA images to PNG and subsequent pngcrush process reduced the size of the image assets required by the game without impacting image quality or negatively impacting load times. The project repacks the assets for the `baseq3` game and the `missionpack` game. The assets repackaged for the `baseq3` game included the assets from the original `baseq3` game, the `QuakeArenaArcade` mod (which contains the assets from the Xbox Live Arcade port) and the `High Quality Quake` mod. The assets repackaged for the `missionpack` game included the assets from the original `missionpack` game and the `QuakeArenaArcade` mod.
+
+The size of the lossless images in the `baseq3` game changed from 211M to 51M. The PNG assets are approximately 24% of the size of the TGA assets. In the `missionpack` game the PNG images were 38% the size of the TGA assets with the size reduced from 211M to 81M.
+
+The impact on load time was not as easy to determine but the load time seemed to be reduced in the limited number of cases investigated. The hypothesis that this will be true on platforms where I/O devices are slow relative to processors.
