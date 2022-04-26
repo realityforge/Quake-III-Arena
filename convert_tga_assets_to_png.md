@@ -59,4 +59,6 @@ Libspng was the next project evaluated but was abandoned after a road block occu
 
 The actual conversion of assets from TGA to PNG is done as part of the Bazel build process using the [imagemagick](https://www.imagemagick.org/) tool. A macro was created that converts the TGA to a PNG, runs [pngcrush](https://pmt.sourceforge.io/pngcrush/) on the PNG and then verifies that the pixels produced by the TGA and the pngcrush-ed PNG are identical.
 
+Running pngcrush on an image takes a substantial amount of time, so it is imerative that the Bazel rules be developed in such a way that the inputs and outputs are easy to cache and thus there should rarely be a need to re-process and pngcrush the PNGs once the cache is established.
+
 ### Evaluation
