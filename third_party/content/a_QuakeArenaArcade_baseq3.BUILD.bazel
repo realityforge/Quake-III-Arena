@@ -1,8 +1,7 @@
-# The list of files from the pak that are of interest.
-_FILES = ["scripts/q3a-1.32.shader"]
+load("@org_realityforge_ioq3//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
 
 filegroup(
     name = "files",
-    srcs = _FILES,
+    srcs = _PAK_DATA["a_QuakeArenaArcade_baseq3"]["other_files"],
     visibility = ["//visibility:public"],
 )
