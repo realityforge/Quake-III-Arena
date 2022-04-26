@@ -8,6 +8,7 @@
 *.md text
 *.sh text
 *.sh text eol=lf
+*.shader text
 *.txt text
 *.xml text
 *.yml text
