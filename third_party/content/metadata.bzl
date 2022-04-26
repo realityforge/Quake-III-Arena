@@ -2879,9 +2879,7 @@ PAK_DATA = {
         ],
     },
     "q3a_baseq3_pak4": {
-        "tga_files": [
-            "menu/art/gr/grlogo.tga",
-        ],
+        "tga_files": ["menu/art/gr/grlogo.tga"],
         "other_files": [
             "botfiles/bots/anarki_c.c",
             "botfiles/bots/anarki_i.c",
@@ -3137,9 +3135,7 @@ PAK_DATA = {
         "other_files": ["demos/demo127.dm_48"],
     },
     "q3a_baseq3_pak6": {
-        "tga_files": [
-            "textures/base_floor/clangdarkspot.tga",
-        ],
+        "tga_files": ["textures/base_floor/clangdarkspot.tga"],
         "other_files": [
             "gfx/misc/lightning3new.jpg",
             "gfx/misc/lightning3newnpm.jpg",
