@@ -53,4 +53,4 @@ def load_pak_repositories():
     # Sourced from https://www.moddb.com/mods/quake-arena-arcade-assets/downloads/quake-arena-arcade-assets
     _local_assets("QuakeArenaArcade_baseq3", "baseq3/QuakeArenaArcade.pk3", "0b34447617641c915dcc28ae2fab30d86df41f297e6b30f7ce678f942cf76a45")
     _local_assets("a_QuakeArenaArcade_baseq3", "baseq3/a_QuakeArenaArcade.pk3", "d7911a9b115ae5e996ee784a2014c249b5d95d812e1e172030e8c9dfcb913cdc")
-    _local_assets("QuakeArenaArcade_missionpack", "missionpack/QuakeArenaArcade.pk3", "4ac1e97e9e989709a101dfe19035ed3af535feedb3acd7477f2b078a9af5fe9a")
+    _local_assets("QuakeArenaArcade_teamarena", "missionpack/QuakeArenaArcade.pk3", "4ac1e97e9e989709a101dfe19035ed3af535feedb3acd7477f2b078a9af5fe9a")

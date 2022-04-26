@@ -7,6 +7,12 @@ _convert_tga_to_png(
     "q3a_teamarena_pak0_images",
 )
 
+_convert_tga_to_png(
+    "@QuakeArenaArcade_teamarena//",
+    _PAK_DATA["QuakeArenaArcade_teamarena"]["tga_files"],
+    "QuakeArenaArcade_teamarena_images",
+)
+
 cc_library(
     name = "ui",
     hdrs = ["ui/menudef.h"],
