@@ -20,4 +20,43 @@ The project must ensure that the load times are not significantly more in any of
 
 ### Solution
 
+#### Analysis
+
+The first step was to analyze the usage of the TGA format within the game, the missionpack and popular mods. The analysis was done using the identify sub-command of [imagemagick](https://www.imagemagick.org/). The majority of TGA files used a ColorSpace of sRGB with a bit depth per component of 8 and include an alpha component. The analysis determined the following exceptions:
+
+* In `missionpack/pak0.pk3` the `textures/skies2/clouds2.tga`, `textures/skies2/clouds.tga` and `models/flag/pole.tga` files used a ColorSpace of `Gray`
+* 8 files in `missionpack/pak0.pk3` and 5 files in `baseq3/pak0.pk3` used a bit depth of 1. These are:
+  * In `baseq3/pak0.pk3`:
+    * `menu/art/opponents_selected.tga`
+    * `models/players/orbb/orbb_light.tga`
+    * `textures/common/mirror1.tga`
+    * `models/players/uriel/null.tga`
+    * `models/players/sarge/null.tga`
+  * In `missionpack/pak0.pk3`:
+    * `ui/assets/redchip.tga`
+    * `ui/assets/red_box.tga`
+    * `textures/skies/blacksky.tga`
+    * `textures/sfx/launchpad_arrow2.tga`
+    * `textures/sfx/compscreen/letters5.tga`
+    * `models/players/fritzkrieg/beam.tga`
+    * `ui/assets/statusbar/team_leader.tga`
+    * `gfx/colors/black.tga`
+* Many files within the `missionpack/pak0.pk3` or community addons did not include the alpha component.
+
+#### Engine Enhancement
+
+Several alternatives exist for reading and writing PNG files. The alternatives assessed include:
+
+* [libpng](http://www.libpng.org/): "the free reference library for reading and writing PNGs"
+* [libspng](https://libspng.org/): This library has a focus on security, speed and ease of use when compared to libpng.
+* [wuffs](https://github.com/google/wuffs): Wrangling Untrusted File Formats Safely.
+
+Wuffs is a memory-safe programming language for wrangling untrusted file formats safely. The standard library includes parsing, decoding and encoding for file formats such as images, audio, video, fonts and compressed archives. It outputs normal c code and is very fast, very small and very safe. It is often a third of the size of equivalent functionality and can be 2-7 times faster. It could potentially be used to replace several parts of the project including zlib, libjpeg, png, etc code. Wuffs is however a "beta" project, subject to API changes and missing documentation and was thus discounted on those grounds. Once wuffs has been released in non-beta version, this decision should be re-assessed.
+
+Libspng was the next project evaluated but was abandoned after a road block occurred and no obvious solution was presented in the documentation. Libpng was selected by "default" as it has a book dedicated to the library and it is the "standard" implementation that other implementations are compared to.
+
+#### Asset Conversion
+
+The actual conversion of assets from TGA to PNG is done as part of the Bazel build process using the [imagemagick](https://www.imagemagick.org/) tool. A macro was created that converts the TGA to a PNG, runs [pngcrush](https://pmt.sourceforge.io/pngcrush/) on the PNG and then verifies that the pixels produced by the TGA and the pngcrush-ed PNG are identical.
+
 ### Evaluation
