@@ -1,11 +1,7 @@
-# The list of files from the pak that are of interest.
-_FILES = [
-    "demos/demo127.dm_48",
-    "scripts/gfx.shader",
-]
+load("@org_realityforge_ioq3//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
 
 filegroup(
     name = "files",
-    srcs = _FILES,
+    srcs = _PAK_DATA["q3a_baseq3_pak5"]["other_files"],
     visibility = ["//visibility:public"],
 )

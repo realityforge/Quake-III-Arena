@@ -1,42 +1,9 @@
-# The list of files from the pak that are of interest.
-_FILES = [
-    "models/powerups/armor/newred.tga",
-    "models/powerups/armor/newyellow.tga",
-    "models/weapons2/bfg/bfg.md3",
-    "models/weapons2/bfg/bfg.tga",
-    "models/weapons2/bfg/bfg_barrel.md3",
-    "models/weapons2/bfg/bfg_glow.tga",
-    "models/weapons2/bfg/bfg_k.tga",
-    "models/weapons2/bfg/envmapbfg.tga",
-    "models/weapons2/gauntlet/gauntlet.md3",
-    "models/weapons2/gauntlet/gauntlet1.tga",
-    "models/weapons2/gauntlet/gauntlet2.tga",
-    "models/weapons2/gauntlet/gauntlet_barrel.md3",
-    "models/weapons2/grenadel/grenadel.md3",
-    "models/weapons2/grenadel/grenadel.tga",
-    "models/weapons2/lightning/lightning.md3",
-    "models/weapons2/lightning/lightning2.tga",
-    "models/weapons2/lightning/lightningarc.tga",
-    "models/weapons2/lightning/lightningspark.tga",
-    "models/weapons2/machinegun/machinegun.md3",
-    "models/weapons2/machinegun/machinegun.tga",
-    "models/weapons2/machinegun/machinegun_barrel.md3",
-    "models/weapons2/plasma/f_plasma.tga",
-    "models/weapons2/plasma/plasma.md3",
-    "models/weapons2/plasma/plasma.tga",
-    "models/weapons2/railgun/railgun.md3",
-    "models/weapons2/railgun/railgun1.tga",
-    "models/weapons2/railgun/railgun3.tga",
-    "models/weapons2/rocketl/rocketl.md3",
-    "models/weapons2/rocketl/rocketl.tga",
-    "models/weapons2/rocketl/rocketl2.tga",
-    "models/weapons2/shotgun/shotgun.md3",
-    "models/weapons2/shotgun/shotgun.tga",
-    "scripts/q3a-1.32e.shader",
-]
+load("@org_realityforge_ioq3//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
 
 filegroup(
     name = "files",
-    srcs = _FILES,
+    srcs = _PAK_DATA["QuakeArenaArcade_baseq3"]["other_files"],
     visibility = ["//visibility:public"],
 )
+
+exports_files(_PAK_DATA["QuakeArenaArcade_baseq3"]["tga_files"])

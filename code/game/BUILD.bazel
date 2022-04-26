@@ -199,7 +199,7 @@ cc_library(
     srcs = _TEAM_ARENA_SRC + _NATIVE_LIB_SRC,
     copts = SERVER_GAME_COPTS,
     defines = TEAM_ARENA_DEFINES + SERVER_GAME_DEFINES,
-    visibility = ["//game/missionpack:__pkg__"],
+    visibility = ["//game/teamarena:__pkg__"],
     deps = [
         ":bg-teamarena",
         ":server_api",

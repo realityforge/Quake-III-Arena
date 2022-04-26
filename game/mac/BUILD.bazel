@@ -47,9 +47,9 @@ macos_application(
         "//game/baseq3:cgame.so": "MacOS/baseq3",
         "//game/baseq3:qagame.so": "MacOS/baseq3",
         "//game/baseq3:ui.so": "MacOS/baseq3",
-        "//game/missionpack:cgame.so": "MacOS/missionpack",
-        "//game/missionpack:qagame.so": "MacOS/missionpack",
-        "//game/missionpack:ui.so": "MacOS/missionpack",
+        "//game/teamarena:cgame.so": "MacOS/missionpack",
+        "//game/teamarena:qagame.so": "MacOS/missionpack",
+        "//game/teamarena:ui.so": "MacOS/missionpack",
 
         # Application Icons
         ":quake3_flat.icns": "Resources",
@@ -60,7 +60,7 @@ macos_application(
         # See https://developer.apple.com/library/archive/technotes/tn2206/_index.html for further details.
         "//game/baseq3:pak0.pk3": "Resources/baseq3",
         "//game/baseq3:pak9hqq36.pk3": "Resources/baseq3",
-        "//game/missionpack:pak0.pk3": "Resources/missionpack",
+        "//game/teamarena:pak0.pk3": "Resources/missionpack",
     },
     # TODO: Name this bundle id according to final product name
     bundle_id = "org.realityforge.Quake3Arena",

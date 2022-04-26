@@ -1,4 +1,5 @@
 load("//build_defs:rules.bzl", "CLIENT_GAME_LINKOPTS", "DIST_VISIBILITY", "SERVER_GAME_LINKOPTS", "UI_LINKOPTS")
+load("//build_defs:copy_to_directory.bzl", _copy_to_directory = "copy_to_directory")
 
 cc_binary(
     name = "cgame.so",
@@ -33,29 +34,29 @@ cc_binary(
     ],
 )
 
-genrule(
-    name = "pak0",
+_copy_to_directory(
+    name = "teamarena",
     srcs = [
+        "//content/teamarena:q3a_teamarena_pak0_images",
+        "//content/teamarena:ui_assets",
+        "@QuakeArenaArcade_missionpack//:files",
         "@q3a_missionpack_pak0//:files",
         "@q3a_missionpack_pak1//:files",
         "@q3a_missionpack_pak3//:files",
-        "//content/teamarena:ui_assets",
-        "@QuakeArenaArcade_missionpack//:files",
     ],
+    downcase = True,
+)
+
+genrule(
+    name = "pak0",
+    srcs = [":teamarena"],
     outs = ["pak0.pk3"],
     cmd = """
-rm -rf pak
-$(location //build_defs:copy_files.sh) external/QuakeArenaArcade_missionpack/ pak $(locations @QuakeArenaArcade_missionpack//:files)
-$(location //build_defs:copy_files.sh) external/q3a_missionpack_pak0/ pak $(locations @q3a_missionpack_pak0//:files)
-$(location //build_defs:copy_files.sh) external/q3a_missionpack_pak1/ pak $(locations @q3a_missionpack_pak1//:files)
-$(location //build_defs:copy_files.sh) external/q3a_missionpack_pak3/ pak $(locations @q3a_missionpack_pak3//:files)
-$(location //build_defs:copy_files.sh) content/teamarena/ pak $(locations //content/teamarena:ui_assets)
-cd pak
-find .  ! -type d |  sed -e "s/^\\.\\///" | awk '{print "\\"" $$0 "\\"" }' | sort | xargs ../$(location @bazel_tools//tools/zip:zipper) c ../$@
+export ZIPPER=`pwd`/$(location @bazel_tools//tools/zip:zipper)
+export TARGET=`pwd`/$@
+cd $(location :teamarena)
+find .  ! -type d |  sed -e "s/^\\.\\///" | awk '{print "\\"" $$0 "\\"" }' | sort | xargs $${ZIPPER} c $${TARGET}
     """,
-    tools = [
-        "//build_defs:copy_files.sh",
-        "@bazel_tools//tools/zip:zipper",
-    ],
+    tools = ["@bazel_tools//tools/zip:zipper"],
     visibility = DIST_VISIBILITY,
 )
