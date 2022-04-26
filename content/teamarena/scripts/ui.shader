@@ -36,7 +36,7 @@ uibackground5
     map ui/assets/background3.tga
     rgbgen identity
   }
-	
+
 
 
 
@@ -66,7 +66,7 @@ uiBackgroundMulti
 
 textures/base_wall2/icon_stroggs
 {
-  	
+
 	surfaceparm trans
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -83,7 +83,7 @@ textures/base_wall2/icon_stroggs
 
 
 textures/redteam1
-{      
+{
   qer_editorimage textures/base_wall2/redteam1.tga
   {
     map textures/base_wall2/redteam1.tga
@@ -92,7 +92,7 @@ textures/redteam1
 }
 
 textures/blueteam1
-{      
+{
   qer_editorimage textures/base_wall2/blueteam1.tga
   {
     map textures/base_wall2/blueteam1.tga
@@ -130,5 +130,3 @@ menuflare
 		rgbgen wave triangle 1 .05 0 .1
 	}
 }
-
-

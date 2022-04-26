@@ -13,7 +13,7 @@ textures/gothic_block/largerblock3blood
                 blendFunc GL_ONE GL_ONE
                 tcGen environment
         }
-       
+
 	{
 	        map textures/gothic_block/largerblock3blood.tga
 		blendFunc blend
@@ -40,7 +40,7 @@ textures/gothic_block/blocks17bloody
                 blendFunc GL_ONE GL_ONE
                 tcGen environment
         }
-       
+
 	{
 	        map textures/gothic_block/blocks17bloody.tga
 		blendFunc blend
@@ -63,7 +63,7 @@ textures/gothic_block/blocks17g_ow
                 blendFunc GL_ONE GL_ZERO
                 rgbGen identity
 	}
-       
+
 	{
 	        map textures/gothic_block/blocks17g_ow.tga
 		blendFunc blend
@@ -86,7 +86,7 @@ textures/gothic_block/blocks18b_ow
                 blendFunc GL_ONE GL_ZERO
                 rgbGen identity
 	}
-       
+
 	{
 	        map textures/gothic_block/blocks18b_ow.tga
 		blendFunc blend
@@ -109,7 +109,7 @@ textures/gothic_door/skullarch_b
                 blendFunc GL_ONE GL_ZERO
                 rgbGen identity
 	}
-       
+
 	{
 	        map textures/gothic_door/skullarch_b.tga
 		blendFunc blend
@@ -132,7 +132,7 @@ textures/gothic_block/blocks17_ow
                 blendFunc GL_ONE GL_ZERO
                 rgbGen identity
 	}
-       
+
 	{
 	        map textures/gothic_block/blocks17_ow.tga
 		blendFunc blend
@@ -245,7 +245,7 @@ textures/gothic_block/blocks18cgeomtrn2
                 tcMod stretch sin .8 0.2 0 .1
 	        rgbGen identity
 	}
-       
+
         {
 		map $lightmap
 		rgbGen identity
@@ -379,9 +379,9 @@ textures/gothic_block/xblocks17i_shiney
 	qer_editorimage textures/gothic_block/xblocks17i_alpha.tga
 	{
 		map $lightmap
-		rgbgen identity      
+		rgbgen identity
 	}
-	
+
 	{
 		map textures/gothic_block/xblocks17i_alpha.tga
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
@@ -391,7 +391,7 @@ textures/gothic_block/xblocks17i_shiney
 }
 
 //***************************************************************
-//  This texture has a detail layer that is used to apply a 
+//  This texture has a detail layer that is used to apply a
 //  grainy overlay to the blocks17 texture
 //***************************************************************
 textures/gothic_block/blocks17_sandy
@@ -407,7 +407,7 @@ textures/gothic_block/blocks17_sandy
                 blendfunc GL_DST_COLOR GL_SRC_COLOR
 		rgbGen identity
                 detail
-                tcMod scale 2.90 2.234        
+                tcMod scale 2.90 2.234
 	}
 	{
 		map textures/gothic_block/blocks17.tga
@@ -442,7 +442,7 @@ textures/gothic_block/wetwall
 	}
 }
 //***************************************************************
-//  This texture has a detail layer that is used to apply a 
+//  This texture has a detail layer that is used to apply a
 //  grainy overlay to the blocks15 texture
 //***************************************************************
 textures/gothic_block/blocks15_sandy
@@ -458,7 +458,7 @@ textures/gothic_block/blocks15_sandy
                 blendfunc GL_DST_COLOR GL_SRC_COLOR
 		rgbGen identity
                 detail
-                tcMod scale 2.90 2.234        
+                tcMod scale 2.90 2.234
 	}
 	{
 		map textures/gothic_block/blocks15.tga
@@ -544,14 +544,14 @@ textures/gothic_block/blocks17gwater
 		alphafunc GT0
 		depthwrite
 	}
-	
+
 
 	{	map $lightmap
 		blendfunc gl_dst_color gl_one
 		tcgen environment
 		depthfunc equal
 	}
-	
+
 }
 
 
@@ -654,12 +654,12 @@ textures/gothic_block/gkcspinemove
 		rgbGen identity
 		alphaGen lightingSpecular
 	}
-	
+
 }
-textures/gothic_block/electrohell	
+textures/gothic_block/electrohell
 {
 	qer_editorimage textures/gothic_block/gkc14c.tga
-	//light 1	
+	//light 1
 	q3map_surfacelight 400
 
 	{
@@ -671,7 +671,7 @@ textures/gothic_block/electrohell
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
-		
+
 	{
 		map textures/gothic_block/gkc14c.tga
 		blendFunc GL_ONE GL_ONE
@@ -715,7 +715,7 @@ textures/gothic_block/blocks18d_trans
 	{
 		map $lightmap
 		rgbGen identity
-	
+
 	}
 	{
 		map textures/gothic_block/blocks18d.tga

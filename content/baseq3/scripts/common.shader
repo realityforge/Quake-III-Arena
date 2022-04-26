@@ -11,7 +11,7 @@ textures/common/nodrawnonsolid
 
 textures/common/invisible
 {
-	surfaceparm nolightmap			
+	surfaceparm nolightmap
         {
                 map textures/common/invisible.tga
                 alphaFunc GE128
@@ -24,7 +24,7 @@ textures/common/teleporter
 {
 	surfaceparm nolightmap
 	surfaceparm noimpact
-	q3map_lightimage textures/sfx/powerupshit.tga	
+	q3map_lightimage textures/sfx/powerupshit.tga
 	q3map_surfacelight 800
 	{
 		map textures/sfx/powerupshit.tga
@@ -207,14 +207,14 @@ textures/common/mirror1
 	qer_editorimage textures/common/qer_mirror.tga
 	surfaceparm nolightmap
 	portal
-  
+
 	{
 		map textures/common/mirror1.tga
 		blendfunc GL_ONE GL_ONE_MINUS_SRC_ALPHA
 		depthWrite
 	}
-       
-        
+
+
 
 }
 
@@ -281,7 +281,7 @@ textures/sfx/portal_sfx
 
 	//	*************************************************
 	//	*      	Portal Inside Effect 			*
-	//	*      	April 29				*	
+	//	*      	April 29				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 
@@ -315,7 +315,7 @@ textures/sfx/portal_sfx
 		map textures/sfx/portalfog.tga
 		blendfunc gl_src_alpha gl_one_minus_src_alpha
 		alphagen portal 256
-		rgbGen identityLighting	
+		rgbGen identityLighting
 		tcmod turb sin 0 .5 0 1
 		tcmod rotate .1 .1
 		tcmod scroll .01 .03
@@ -326,7 +326,7 @@ textures/sfx/portal2_sfx
 
 	//	*************************************************
 	//	*      	Portal Inside Effect 			*
-	//	*      	April 29				*	
+	//	*      	April 29				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 
@@ -360,7 +360,7 @@ textures/sfx/portal2_sfx
 		map textures/sfx/portalfog.tga
 		blendfunc gl_src_alpha gl_one_minus_src_alpha
 		//alphagen portal 128
-		rgbGen identityLighting	
+		rgbGen identityLighting
 		tcmod turb sin 0 .5 0 1
 		tcmod rotate .1 .1
 		tcmod scroll .01 .03

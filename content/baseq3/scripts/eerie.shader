@@ -405,7 +405,7 @@ textures/eerie/tesla_cable
 		tcMod scroll 0 15
 		tcMod scale .1 .1
 		blendfunc GL_DST_COLOR GL_ONE
-	
+
 //		map textures/eerie/electricslime.tga
 //		tcMod turb 1 1 1 .01
 //		tcMod scroll 1 5
@@ -573,7 +573,7 @@ textures/eerie/q1metal7_98d_pent_256
 
 textures/eerie/border11light
 {
-	q3map_surfacelight 1000	
+	q3map_surfacelight 1000
 	{
 		map $lightmap
 		rgbGen identity
@@ -758,7 +758,7 @@ textures/eerie/light1
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-	{	
+	{
 		map textures/eerie/light1.blend.tga
 		blendfunc GL_ONE GL_ONE
 	}
@@ -779,7 +779,7 @@ textures/eerie/light1_5000
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-	{	
+	{
 		map textures/eerie/light1.blend.tga
 		blendfunc GL_ONE GL_ONE
 	}

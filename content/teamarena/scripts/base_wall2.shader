@@ -19,12 +19,12 @@ textures/base_wall2/blue_warning_light
 
 
 textures/base_wall2/ntrl_techfloor_kc
-{    
+{
      	surfaceparm	metalsteps
 	surfaceparm 	alphashadow
-	surfaceparm	nomarks	 
+	surfaceparm	nomarks
         qer_editorimage textures/base_wall2/techfloor_kc.tga
-        
+
         {
 		clampmap textures/base_wall2/zzztntrl_kc.tga
                	alphaFunc GE128
@@ -40,14 +40,14 @@ textures/base_wall2/ntrl_techfloor_kc
                 tcMod stretch sin .8 0.1 0 .4
 	        rgbGen identity
 	}
-        
+
 	{
 		map textures/base_wall2/techfloor_kc.tga
                 blendFunc blend
 		depthFunc equal
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		blendfunc filter
@@ -60,7 +60,7 @@ textures/base_wall2/ntrl_techfloor_kc
 	        rgbGen identity
 	}
 
-        
+
 }
 textures/base_wall2/respawn_effect1_ntrl
 {
@@ -94,7 +94,7 @@ textures/base_wall2/respawn_effect1_ntrl
                 rgbGen wave inversesawtooth -.3 1.3 0 .25
 	}
 
-	
+
 }
 
 textures/base_wall2/blue_metal
@@ -106,10 +106,10 @@ textures/base_wall2/blue_metal
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall2/blue_metal.tga
-		blendFunc blend	
+		blendFunc blend
 		rgbGen identity
 	}
 	{
@@ -134,33 +134,33 @@ textures/base_wall2/scuffs1
 
 textures/base_wall2/space_panel
 {
-	
+
 
 	{
 		map textures/base_wall2/space_panel.tga
 		rgbgen identity
 		tcmod scale .5 .5
-	}	
+	}
 
 	{
 		map textures/base_wall2/space_panel_alt.tga
 		blendFunc filter
-		rgbgen wave sin .5 0 0 0 
+		rgbgen wave sin .5 0 0 0
 	}
-	
-	
+
+
 	{
 		map textures/base_wall2/lensflare.tga
 		blendFunc add
 		tcgen environment
 	}
 
-        
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc filter
-	}	
+	}
 }
 
 
@@ -173,15 +173,15 @@ textures/base_wall2/space_concrete
 	{
 		map textures/base_wall/concrete1.tga
 		rgbgen identity
-	}	
+	}
 
 	{
 		map textures/base_wall2/space_panel_alt.tga
 		blendFunc filter
 		tcmod scale .25 .25
 	}
-	
-	
+
+
 	{
 		map textures/base_wall2/space_panel_alt2.tga
 		blendFunc filter
@@ -190,20 +190,20 @@ textures/base_wall2/space_concrete
 	{
 		map textures/base_wall2/lensflare.tga
 		blendFunc add
-		rgbgen wave sin .5 0 0 0 
+		rgbgen wave sin .5 0 0 0
 		tcgen environment
 	}
-        
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc filter
-	}	
+	}
 }
 
 
 textures/base_wall2/jumppad_red_kc
-{      
+{
      	surfaceparm trans
 	surfaceparm nomarks
         {
@@ -257,7 +257,7 @@ textures/base_wall2/jumppad_red_kc
 }
 
 textures/base_wall2/jumppad_blue_kc
-{      
+{
      	surfaceparm trans
 	surfaceparm nomarks
         {
@@ -311,7 +311,7 @@ textures/base_wall2/jumppad_blue_kc
 }
 
 textures/base_wall2/jumppad_ntrl_kc
-{      
+{
 	qer_editorimage textures/base_wall2/jumppad_blue_kc.tga
      	surfaceparm trans
 	surfaceparm nomarks
@@ -401,8 +401,8 @@ textures/base_wall2/respawn_effect1
 
 
 
-	
-	
+
+
 }
 
 textures/base_wall2/respawn_effect1_blue
@@ -437,7 +437,7 @@ textures/base_wall2/respawn_effect1_blue
                 rgbGen wave inversesawtooth -.3 1.3 0 .25
 	}
 
-	
+
 }
 
 
@@ -451,14 +451,14 @@ textures/base_wall2/runway_red
 		tcmod scale 1 .25
 		rgbgen wave square -1 2 .5 8
 		tcmod scroll 0 .5
-	}	
+	}
 
 	{
 		map textures/base_wall2/runway_red.tga
 		blendFunc blend
 		rgbGen identity
 	}
-        
+
 	{
 		map $lightmap
 		rgbGen identity
@@ -469,7 +469,7 @@ textures/base_wall2/runway_red
 		map textures/base_wall2/runwayb_red.tga
 		blendFunc add
 		rgbGen identity
-	}	
+	}
 }
 
 textures/base_wall2/runway_blue
@@ -482,14 +482,14 @@ textures/base_wall2/runway_blue
 		tcmod scale 1 .25
 		rgbgen wave square -1 2 .5 8
 		tcmod scroll 0 .5
-	}	
+	}
 
 	{
 		map textures/base_wall2/runway_blue.tga
 		blendFunc blend
 		rgbGen identity
 	}
-        
+
 	{
 		map $lightmap
 		rgbGen identity
@@ -500,7 +500,7 @@ textures/base_wall2/runway_blue
 		map textures/base_wall2/runwayb_blue.tga
 		blendFunc add
 		rgbGen identity
-	}	
+	}
 }
 
 
@@ -513,10 +513,10 @@ textures/base_wall2/red_metal
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall2/red_metal.tga
-		blendFunc blend	
+		blendFunc blend
 		rgbGen identity
 	}
 	{
@@ -537,10 +537,10 @@ textures/base_wall2/blue_line
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall2/blue_line.tga
-		blendFunc blend	
+		blendFunc blend
 		rgbGen identity
 	}
 	{
@@ -551,8 +551,8 @@ textures/base_wall2/blue_line
 
 	{
 		map textures/base_wall2/blue_line_glow.tga
-		blendFunc add	
-	//	rgbGen wave sin .5 .5 0 1	
+		blendFunc add
+	//	rgbGen wave sin .5 .5 0 1
 	}
 
 
@@ -569,10 +569,10 @@ textures/base_wall2/red_line
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall2/red_line.tga
-		blendFunc blend	
+		blendFunc blend
 		rgbGen identity
 	}
 	{
@@ -583,8 +583,8 @@ textures/base_wall2/red_line
 
 	{
 		map textures/base_wall2/red_line_glow.tga
-		blendFunc add	
-	//	rgbGen wave sin .5 .5 0 1	
+		blendFunc add
+	//	rgbGen wave sin .5 .5 0 1
 	}
 }
 
@@ -622,11 +622,11 @@ textures/base_wall2/double_line_red
 }
 
 textures/base_wall2/techfloor_kc_blue
-{    
+{
      	surfaceparm	metalsteps
 	surfaceparm 	alphashadow
-	surfaceparm	nomarks	   
-        
+	surfaceparm	nomarks
+
         {
 		clampmap textures/base_wall2/zzztblue_kc.tga
                	alphaFunc GE128
@@ -642,14 +642,14 @@ textures/base_wall2/techfloor_kc_blue
                 tcMod stretch sin .8 0.1 0 .4
 	        rgbGen identity
 	}
-        
+
 	{
 		map textures/base_wall2/techfloor_kc.tga
                 blendFunc blend
 		depthFunc equal
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		blendfunc filter
@@ -662,16 +662,16 @@ textures/base_wall2/techfloor_kc_blue
 	        rgbGen identity
 	}
 
-        
+
 }
 
 
 textures/base_wall2/techfloor_kc
-{    
+{
      	surfaceparm	metalsteps
 	surfaceparm 	alphashadow
-	surfaceparm	nomarks	   
-        
+	surfaceparm	nomarks
+
         {
 		clampmap textures/base_wall2/zzztred_kc.tga
                	alphaFunc GE128
@@ -687,14 +687,14 @@ textures/base_wall2/techfloor_kc
                 tcMod stretch sin .8 0.1 0 .4
 	        rgbGen identity
 	}
-        
+
 	{
 		map textures/base_wall2/techfloor_kc.tga
                 blendFunc blend
 		depthFunc equal
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		blendfunc filter
@@ -707,12 +707,12 @@ textures/base_wall2/techfloor_kc
 	        rgbGen identity
 	}
 
-        
+
 }
 
 textures/base_wall2/floorvent01_kc
 {
-  	
+
 	surfaceparm nomipmap
 	surfaceparm alphashadow
 
@@ -721,14 +721,14 @@ textures/base_wall2/floorvent01_kc
 		map textures/base_wall2/floorvent01_kc.tga
 		blendfunc blend
 		rgbGen identity
-                  
+
 	}
 
 }
 
 textures/base_wall2/icon_pagans
 {
-  	
+
 	surfaceparm trans
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -745,7 +745,7 @@ textures/base_wall2/icon_pagans
 }
 textures/base_wall2/redrust
 {
-  	
+
 	surfaceparm trans
 	surfaceparm nolightmap
 
@@ -762,7 +762,7 @@ textures/base_wall2/redrust
 
 textures/base_wall2/blue_arrow_small
 {
-  	
+
 	surfaceparm trans
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -779,7 +779,7 @@ textures/base_wall2/blue_arrow_small
 }
 textures/base_wall2/red_arrow_small
 {
-  	
+
 	surfaceparm trans
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -799,7 +799,7 @@ textures/base_wall2/red_arrow_small
 
 textures/base_wall2/yellow_arrow
 {
-  	
+
 	surfaceparm trans
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -818,7 +818,7 @@ textures/base_wall2/yellow_arrow
 
 textures/base_wall2/yellow_circle
 {
-  	
+
 	surfaceparm trans
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -836,7 +836,7 @@ textures/base_wall2/yellow_circle
 
 textures/base_wall2/red_circle
 {
-  	
+
 	surfaceparm trans
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -854,7 +854,7 @@ textures/base_wall2/red_circle
 
 textures/base_wall2/blue_circle
 {
-  	
+
 	surfaceparm trans
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -873,7 +873,7 @@ textures/base_wall2/blue_circle
 
 textures/base_wall2/name_vortex
 {
-  	
+
 	surfaceparm trans
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -881,7 +881,7 @@ textures/base_wall2/name_vortex
 	{
 		map textures/base_wall2/name_vortex.tga
 		blendfunc blend
-		rgbGen identity      
+		rgbGen identity
 	}
 
 }
@@ -889,7 +889,7 @@ textures/base_wall2/name_vortex
 
 textures/base_wall2/bluearrows
 {
-  	
+
 	surfaceparm trans
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -907,7 +907,7 @@ textures/base_wall2/bluearrows
 
 textures/base_wall2/redarrows
 {
-  	
+
 	surfaceparm trans
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -925,7 +925,7 @@ textures/base_wall2/redarrows
 
 textures/base_wall2/cautionstripe
 {
-  	
+
 	surfaceparm trans
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -954,10 +954,10 @@ textures/base_wall2/blue_red_stripe
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall2/blue_red_stripe.tga
-		blendFunc filter	
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -968,8 +968,8 @@ textures/base_wall2/blue_red_stripe
 
 	{
 		map textures/base_wall2/blue_red_stripe.tga
-		blendFunc add	
-		rgbGen wave sin .25 .25 0 1	
+		blendFunc add
+		rgbGen wave sin .25 .25 0 1
 	}
 
 
@@ -986,10 +986,10 @@ textures/base_wall2/red_solid
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall2/red_solid.tga
-		blendFunc filter	
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -1000,8 +1000,8 @@ textures/base_wall2/red_solid
 
 	{
 		map textures/base_wall2/red_solid.tga
-		blendFunc add	
-		rgbGen wave sin .25 .25 0 1	
+		blendFunc add
+		rgbGen wave sin .25 .25 0 1
 	}
 
 
@@ -1018,10 +1018,10 @@ textures/base_wall2/blue_solid
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall2/blue_solid.tga
-		blendFunc filter	
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -1032,15 +1032,9 @@ textures/base_wall2/blue_solid
 
 	{
 		map textures/base_wall2/blue_solid.tga
-		blendFunc add	
-		rgbGen wave sin .25 .25 0 1	
+		blendFunc add
+		rgbGen wave sin .25 .25 0 1
 	}
 
 
 }
-
-
-
-
-
-

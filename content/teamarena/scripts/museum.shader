@@ -9,7 +9,7 @@ textures/base_floor/concfloor_rain
 	deformVertexes normal 1 15
         {
 		map textures/base_floor/concfloor_rain.tga
-                rgbGen identity    
+                rgbGen identity
         }
         {
 		map textures/liquids/pj_e3_reflection2b.tga
@@ -25,4 +25,3 @@ textures/base_floor/concfloor_rain
 		rgbGen identity
 	}
 }
-

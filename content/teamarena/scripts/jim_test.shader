@@ -12,7 +12,7 @@ textures/skies/terrain1
 	qer_editorimage textures/skies/toxicbluesky.tga
 
 	skyparms - 512 -
-	
+
 	{
 		map textures/skies/bluedimclouds.tga
 		tcMod scale 3 2

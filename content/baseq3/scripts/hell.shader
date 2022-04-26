@@ -54,7 +54,7 @@ textures/hell/hellredclouds
 		tcMod scroll .2 .2
 	}
 
-	
+
 	{
 		map env/redcloudsa.tga
 		blendFunc GL_ONE GL_ONE
@@ -66,7 +66,7 @@ textures/hell/hellredclouds
 }
 textures/hell/hellbutt01
 {
-	{	
+	{
 		map $lightmap
 		rgbGen identity
 	}
@@ -90,8 +90,8 @@ textures/hell/xfiretest1
 	surfaceparm nolightmap
 	q3map_surfacelight 1000
 	tesssize 64
-	
-	
+
+
 	{
 	map textures/hell/firetestb.tga
 	blendfunc gl_one gl_zero
@@ -107,7 +107,7 @@ textures/hell/xfiretest1
 	tcMod scale .1 .1
 	tcMod scroll 0 1.0
 	}
-	
+
 	{
 	map textures/hell/firetest2.tga
 	blendFunc GL_DST_COLOR GL_ONE
@@ -143,7 +143,7 @@ textures/hell/xfiretest2
 	tcMod scale .1 .1
 	tcMod scroll 0 1.0
 	}
-	
+
 	{
 
 	map textures/hell/firetestb.tga
@@ -190,7 +190,7 @@ textures/hell/ironcrosslt1
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-	
+
 }
 textures/hell/killblock_b
 {
@@ -237,7 +237,7 @@ textures/hell/bluepad
 	}
 	{
 		map textures/hell/bluepad.tga
-		blendFunc GL_DST_COLOR GL_ZERO		
+		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
@@ -304,11 +304,11 @@ textures/hell/light1blue
 		rgbGen wave sin 0.5 0.1 0 .2
 	}
 }
-textures/hell/lava2z	
+textures/hell/lava2z
 {
-	surfaceparm nonsolid	
-	surfaceparm lava	
-	surfaceparm nolightmap	
+	surfaceparm nonsolid
+	surfaceparm lava
+	surfaceparm nolightmap
 	q3map_surfacelight 150
 }
 

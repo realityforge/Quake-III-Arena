@@ -9,12 +9,12 @@ textures/gallery/gallery_sky
 	surfaceparm nolightmap
 	surfaceparm sky
 	q3map_globaltexture
-	q3map_lightsubdivide 512 
+	q3map_lightsubdivide 512
 	q3map_sun	0.266383 0.274632 0.358662 250 90 65
 	q3map_surfacelight 100
 
 	skyparms full 128 -
-	
+
 	{
 		map textures/skies/bluedimclouds.tga
 		tcMod scroll 0.015 0.016

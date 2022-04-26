@@ -1,6 +1,6 @@
-textures/organics/wire02a_f	
+textures/organics/wire02a_f
 {
-	light 1	
+	light 1
 q3map_surfacelight 200
 	{
 		map $lightmap
@@ -12,9 +12,9 @@ q3map_surfacelight 200
 		rgbGen identity
 	}
 }
-textures/organics/wire02_f2	
+textures/organics/wire02_f2
 {
-	light 1	
+	light 1
 q3map_surfacelight 400
 	{
 		map $lightmap

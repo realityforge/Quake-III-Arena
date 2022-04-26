@@ -1,6 +1,6 @@
 models/mapobjects/xlamp/xlamp_grate
 {
-     
+
      cull disable
      surfaceParm Trans
 
@@ -14,7 +14,7 @@ models/mapobjects/xlamp/xlamp_grate
 
 models/mapobjects/xlamp/xlamp
 {
-     
+
      cull disable
      surfaceParm Trans
         {
@@ -35,12 +35,12 @@ models/mapobjects/xlamp/xlamp_red
    	surfaceparm	trans
 	surfaceparm nomarks
 	cull none
-    
+
         {
                 map models/mapobjects/xlamp/xlamp_red.tga
                 blendFunc add
                 rgbGen identity
-                
+
         }
 
 
@@ -51,12 +51,12 @@ models/mapobjects/xlamp/xlamp_ntrl
    	surfaceparm	trans
 	surfaceparm nomarks
 	cull none
-    
+
         {
                 map models/mapobjects/xlamp/xlamp_ntrl.tga
                 blendFunc add
                 rgbGen identity
-                
+
         }
 
 
@@ -67,7 +67,7 @@ models/mapobjects/xlamp/xlamp_blue
    	surfaceparm	trans
 	surfaceparm nomarks
 	cull none
-    
+
         {
                 map models/mapobjects/xlamp/xlamp_blue.tga
                 blendFunc add
@@ -189,13 +189,13 @@ models/powerups/harvester/blue_h
 
 }
 
-models/weaphits/rlboom/rlboom_1  
+models/weaphits/rlboom/rlboom_1
 {
 	cull disable
-        
+
 	{
 		animmap 8 models/weaphits/rlboom/rlboom_1.tga  models/weaphits/rlboom/rlboom_2.tga models/weaphits/rlboom/rlboom_3.tga models/weaphits/rlboom/rlboom_4.tga models/weaphits/rlboom/rlboom_5.tga models/weaphits/rlboom/rlboom_6.tga models/weaphits/rlboom/rlboom_7.tga models/weaphits/rlboom/rlboom_8.tga
-                //tcmod rotate 30 
+                //tcmod rotate 30
 		rgbGen wave inversesawtooth 0 1 0 8
 		blendfunc add
 	}
@@ -212,7 +212,7 @@ models/powerups/shield/juicer
  deformVertexes wave 80 sin 0 1 0 .6
 	{
 		map models/powerups/shield/juicer.tga
-                tcmod scale 2 2 
+                tcmod scale 2 2
                 tcmod scroll 0 -.1
 		blendfunc GL_one GL_ZERO
                 rgbGen lightingdiffuse
@@ -287,4 +287,3 @@ models/mapobjects/misc/bellcone
                 rgbGen identity
 	}
 }
-

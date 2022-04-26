@@ -8,14 +8,14 @@ textures/base_light/runway
 		tcmod scale 1 .25
 		rgbgen wave square -1 2 .5 8
 		tcmod scroll 0 .5
-	}	
+	}
 
 	{
 		map textures/base_light/runway.tga
 		blendFunc blend
 		rgbGen identity
 	}
-        
+
 	{
 		map $lightmap
 		rgbGen identity
@@ -28,7 +28,7 @@ textures/base_light/runway
 		rgbGen identity
 	}
 
-	
+
 }
 textures/base_light/geolight
 {
@@ -51,7 +51,7 @@ textures/base_light/geolight
 		blendFunc add
 		rgbgen wave sin .575 .025 0 10
 	}
-	
+
 }
 
 
@@ -77,7 +77,7 @@ textures/base_light/dm18twr
 		blendFunc add
 		rgbgen wave sin .575 .025 0 10
 	}
-	
+
 }
 
 textures/base_light/dm18twr_2k
@@ -102,7 +102,7 @@ textures/base_light/dm18twr_2k
 		blendFunc add
 		rgbgen wave sin .575 .025 0 10
 	}
-	
+
 }
 
 textures/base_light/dm18twr_1k
@@ -151,7 +151,7 @@ textures/base_light/dm18twr_3k
 		blendFunc add
 		rgbgen wave sin .575 .025 0 10
 	}
-	
+
 }
 
 
@@ -175,7 +175,7 @@ textures/base_light/proto_lightgreen
 		map textures/base_light/proto_lightgreen.tga
 		blendFunc add
 	}
-	
+
 }
 textures/base_light/cornerlight
 {
@@ -193,12 +193,12 @@ textures/base_light/cornerlight
 		rgbGen identity
 	}
 
-		
-	{	
+
+	{
 		map textures/base_light/cornerlight.glow.tga
 		blendfunc GL_one gl_one
 		rgbgen wave sawtooth .6 .1 0 7
-	}		
+	}
 }
 
 
@@ -218,14 +218,14 @@ textures/base_light/trianglelight
 		rgbGen identity
 	}
 
-		
-	{	
+
+	{
 		map textures/base_light/trianglelight.blend.tga
 		blendfunc GL_one gl_one
 		rgbgen wave sawtooth .6 .1 0 7
 	}
 
-		
+
 }
 
 textures/base_light/proto_bulb
@@ -235,11 +235,11 @@ textures/base_light/proto_bulb
 	surfaceparm nomarks
 	surfaceparm nolightmap
 	cull none
-    
+
         {
                 map textures/base_light/proto_bulb.tga
                 blendFunc GL_ONE GL_ONE
-                
+
         }
 
 
@@ -256,8 +256,8 @@ textures/base_light/shi
                 tcmod scale .5 .5
 		rgbgen wave triangle 1 5.1 1 3
 	}
-	
-        {	
+
+        {
 		map textures/base_light/shi.tga
 		blendfunc GL_ONE GL_ONE
                 tcmod scale .5 .5
@@ -279,17 +279,17 @@ textures/base_light/proto_light
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-	{	
+	{
 		map textures/base_light/proto_lightmap.tga
 		blendfunc GL_ONE GL_ONE
                 rgbGen wave sin .5 0.5 1 .1
 	}
-        {	
+        {
 		map textures/base_light/proto_light2.tga
 		blendfunc GL_ONE GL_ONE
                 rgbgen wave triangle 1 5 1 3
 	}
-        {	
+        {
 		map textures/base_light/proto_light2.tga
 		blendfunc GL_ONE GL_ONE
                 tcmod scale -1 -1
@@ -317,7 +317,7 @@ textures/base_light/proto_lightred
 		map textures/base_light/proto_lightred.tga
 		blendFunc add
 	}
-	
+
 }
 
 textures/base_light/proto_lightred2
@@ -341,7 +341,7 @@ textures/base_light/proto_lightred2
 		blendFunc add
 		rgbGen wave square .5 .5 0 1
 	}
-	
+
 }
 
 textures/base_light/proto_lightblue
@@ -365,7 +365,7 @@ textures/base_light/proto_lightblue
 		blendFunc add
 		rgbGen wave square .5 .5 0 1
 	}
-	
+
 }
 
 textures/base_light/proto_light_2k
@@ -384,17 +384,17 @@ textures/base_light/proto_light_2k
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-	{	
+	{
 		map textures/base_light/proto_lightmap.tga
 		blendfunc GL_ONE GL_ONE
                 rgbGen wave sin .5 0.5 1 .1
 	}
-        {	
+        {
 		map textures/base_light/proto_light2.tga
 		blendfunc GL_ONE GL_ONE
                 rgbgen wave triangle 1 5 1 3
 	}
-        {	
+        {
 		map textures/base_light/proto_light2.tga
 		blendfunc GL_ONE GL_ONE
                 tcmod scale -1 -1
@@ -418,17 +418,17 @@ textures/base_light/s_proto_light
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-	{	
+	{
 		map textures/base_light/proto_lightmap.tga
 		blendfunc GL_ONE GL_ONE
                 rgbGen wave sin .5 0.5 1 .1
 	}
-        {	
+        {
 		map textures/base_light/proto_light2.tga
 		blendfunc GL_ONE GL_ONE
                 rgbgen wave triangle 1 5 1 3
 	}
-        {	
+        {
 		map textures/base_light/proto_light2.tga
 		blendfunc GL_ONE GL_ONE
                 tcmod scale -1 -1
@@ -439,7 +439,7 @@ textures/base_light/scrolllight
 {
 	q3map_lightimage textures/sfx/scrolllight2.tga
 	q3map_surfacelight 100
-	
+
         {
 		map $lightmap
 		rgbGen identity
@@ -448,36 +448,36 @@ textures/base_light/scrolllight
 		Map textures/base_light/scrolllight.tga
 		blendfunc gl_dst_color gl_zero
                 rgbGen identity
-	}	
-        {    
+	}
+        {
 		Map textures/base_light/scrolllight2.tga
 		blendFunc GL_ONE GL_ONE
                 tcmod scroll -1 0
-	}	
-        {    
+	}
+        {
       	        Map textures/base_light/scrolllight2.tga
       	        blendFunc GL_ONE GL_ONE
                 tcmod scroll -2 0
-        }	
-    
-	
+        }
+
+
 }
 textures/base_light/lightflare_wht500
 {
 	qer_editorimage textures/base_light/light_flare.tga
-	q3map_lightimage textures/base_light/light1.blend.tga 
+	q3map_lightimage textures/base_light/light1.blend.tga
 	deformVertexes autoSprite
 	q3map_surfacelight	500
 	surfaceparm	trans
 	surfaceparm nomarks
 	surfaceparm nolightmap
 	cull none
-	
+
 	{
 		Map textures/base_light/light_flare.tga
 		blendFunc GL_ONE GL_ONE
-	}	
-	
+	}
+
 }
 textures/base_light/lightflare_500
 {
@@ -488,12 +488,12 @@ textures/base_light/lightflare_500
 	surfaceparm nomarks
 	surfaceparm nolightmap
 	cull none
-	
+
 	{
 		Map textures/base_light/light_flare.tga
 		blendFunc GL_ONE GL_ONE
-	}	
-	
+	}
+
 }
 textures/base_light/border7_ceil50
 {
@@ -687,7 +687,7 @@ textures/base_light/light1dark
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-	{	
+	{
 		map textures/base_light/light1.blend.tga
 		blendfunc GL_ONE GL_ONE
 	}
@@ -708,7 +708,7 @@ textures/base_light/light1red_2000
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-	{	
+	{
 		map textures/base_light/light1red.blend.tga
 		blendfunc GL_ONE GL_ONE
 	}
@@ -730,7 +730,7 @@ textures/base_light/light1red_5000
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-	{	
+	{
 		map textures/base_light/light1red.blend.tga
 		blendfunc GL_ONE GL_ONE
 	}
@@ -752,7 +752,7 @@ textures/base_light/light1blue_5000
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-	{	
+	{
 		map textures/base_light/light1blue.blend.tga
 		blendfunc GL_ONE GL_ONE
 	}
@@ -773,7 +773,7 @@ textures/base_light/light1blue_2000
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-	{	
+	{
 		map textures/base_light/light1blue.blend.tga
 		blendfunc GL_ONE GL_ONE
 	}
@@ -794,7 +794,7 @@ textures/base_light/light2blue_2500
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-	{	
+	{
 		map textures/base_light/light1blue1.blend.tga
 		blendfunc GL_ONE GL_ONE
 	}
@@ -815,7 +815,7 @@ textures/base_light/light1blue_800
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-	{	
+	{
 		map textures/base_light/light1blue.blend.tga
 		blendfunc GL_ONE GL_ONE
 	}
@@ -837,7 +837,7 @@ textures/base_light/light1blue_1500
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-	{	
+	{
 		map textures/base_light/light1blue.blend.tga
 		blendfunc GL_ONE GL_ONE
 	}
@@ -859,7 +859,7 @@ textures/base_light/light1_5000
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-	{	
+	{
 		map textures/base_light/light1.blend.tga
 		blendfunc GL_ONE GL_ONE
 	}
@@ -1263,7 +1263,7 @@ textures/base_light/patch10_pj_lite2_1000
 
 textures/base_light/steedmetallight
 {
-	q3map_surfacelight 2000	
+	q3map_surfacelight 2000
 	light 1
 	{
 		map $lightmap
@@ -1282,7 +1282,7 @@ textures/base_light/steedmetallight
 }
 textures/base_light/border11light
 {
-	q3map_surfacelight 500	
+	q3map_surfacelight 500
 	{
 		map $lightmap
 		rgbGen identity
@@ -1303,7 +1303,7 @@ textures/base_light/border11light_300
 	qer_editorimage textures/base_light/border11light.tga
 	q3map_lightimage textures/base_light/border11light.blend.tga
 
-	q3map_surfacelight 235	
+	q3map_surfacelight 235
 	{
 		map $lightmap
 		rgbGen identity
@@ -2523,7 +2523,7 @@ textures/base_light/invisi_light1
 	q3map_surfacelight 50000
 	light 1
 	// Square blue light
-	
+
 }
 
 textures/base_light/x_proto_light

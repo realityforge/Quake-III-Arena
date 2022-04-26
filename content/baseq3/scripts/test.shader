@@ -17,7 +17,7 @@ textures/vector
 
 
 textures/sfx/kenelectric
-{    
+{
          {
                 map textures/sfx/kenelectric.tga
                 blendFunc GL_ONE GL_ZERO
@@ -29,9 +29,9 @@ textures/sfx/kenelectric
         {
 		map textures/effects/tinfx2.tga
                 tcGen environment
-                blendFunc GL_ONE GL_ONE              
+                blendFunc GL_ONE GL_ONE
                 //rgbGen lightingDiffuse
-	}   
+	}
         //{
 		//map models/players/doom/phobos.tga
              //   blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
@@ -47,8 +47,8 @@ textures/test/rnd_ledm1
         surfaceparm trans
         qer_trans 0.5
         qer_editorimage textures/test/rnd_ledm1.tga
-        
-        { 
+
+        {
                 map textures/test/rnd_ledm1.tga
                 blendFunc GL_ONE GL_ONE
                 rgbGen identity
@@ -56,13 +56,13 @@ textures/test/rnd_ledm1
         {
                 map textures/test/rnd_ledm2.tga
                 blendFunc GL_ZERO GL_SRC_COLOR
-                rgbGen identity 
+                rgbGen identity
         }
 }
 
 
 
-	
+
 
 textures/test/electricity3
 	{
@@ -72,7 +72,7 @@ textures/test/electricity3
 		//	*************************************************
 
 		qer_trans .5
-	
+
 		surfaceparm trans
 		surfaceparm nonsolid
 		surfaceparm water
@@ -81,7 +81,7 @@ textures/test/electricity3
 		cull disable
 		tesssize 64
 		deformVertexes wave 100 triangle 2 2 1 0.1
-		
+
 
 
 		{
@@ -96,18 +96,18 @@ textures/test/electricity3
 		}
 		{
 			map textures/liquids/pool2.tga
-			blendfunc GL_ONE GL_SRC_COLOR	
+			blendfunc GL_ONE GL_SRC_COLOR
 			tcMod scale .03 .03
 			tcMod scroll .001 .001
 		}
-	
 
-		
+
+
 		{
 			map textures/test/electricity9.tga
 			blendfunc GL_DST_COLOR GL_ONE
 			tcmod turb 0 .01 .3 10
-			tcMod scale .5 .5	
+			tcMod scale .5 .5
 			tcMod rotate 1
 			depthfunc equal
 			tcMod scroll -.01 -.05
@@ -117,15 +117,15 @@ textures/test/electricity3
 			map textures/test/electricity9.tga
 			blendfunc GL_DST_COLOR GL_ONE
 			tcmod turb 0 .01 .3 10
-			tcMod scale .5 .5	
+			tcMod scale .5 .5
 			tcMod rotate 1
 			depthfunc equal
 			tcMod scroll -.01 -.05
 		}
 
-		
 
-			
+
+
 
 		//	END
 	}
@@ -136,11 +136,11 @@ textures/gothic_trim/hellodolly
 
 	//	*************************************************
 	//	*      	TEST BORDER WALL			*
-	//	*      	Feb 24 1999				*	
+	//	*      	Feb 24 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 
-		qer_editorimage	textures/gothic_trim/metalbase13_d.tga	
+		qer_editorimage	textures/gothic_trim/metalbase13_d.tga
 
 		{
 			map textures/gothic_block/blocks10.tga
@@ -149,20 +149,20 @@ textures/gothic_trim/hellodolly
 		}
 
 
-		{	
+		{
 			map textures/gothic_trim/metalbase13_d.tga
 			// Name of border wall
 			blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		}
 
-		{	
+		{
 			rgbGen identity
 			map $lightmap
 			blendfunc GL_DST_COLOR GL_ZERO
-		}	
+		}
 
-		
-			
+
+
 
 	//	END
 }
@@ -172,30 +172,30 @@ textures/test/blocks10pent
 
 	//	*************************************************
 	//	*      	TEST BORDER WALL			*
-	//	*      	Feb 24 1999				*	
+	//	*      	Feb 24 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 
 		q3map_surfacelight 1000
 		surfaceparm nodamage
-		qer_lightimage textures/test/jumpadsmall.tga	
+		qer_lightimage textures/test/jumpadsmall.tga
 
-	
+
 	{
 		map textures/sfx/bouncepad01block18b.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -206,8 +206,8 @@ textures/test/blocks10pent
 	}
 
 
-		
-			
+
+
 
 	//	END
 }
@@ -231,7 +231,7 @@ textures/dont_use/foggentest_shader
 	cull backsided
 
 
-	
+
 //	END
 }
 
@@ -240,14 +240,14 @@ textures/dont_use/sign_test_glow
 	surfaceparm trans
 	surfaceparm nolightmap
 	q3map_surfacelight 100
-	
+
 	{
 		map textures/dont_use/sign_test.tga
 		alphaMap $fromBlack
 		blendFunc GL_ONE GL_ONE
 	}
-	
-	{	
+
+	{
 		map textures/dont_use/sign_test_glow.tga
 		alphaMap $fromBlack
 		blendFunc GL_ONE GL_ONE
@@ -256,7 +256,7 @@ textures/dont_use/sign_test_glow
 
 //	END
 }
-	
+
 
 textures/dont_use/nightsky_kc
 {
@@ -271,10 +271,10 @@ textures/dont_use/nightsky_kc
 
 	cloudparms 256 half
 
-	
 
 
-	
+
+
 	{
 		map textures/dont_use/strangesky3_kc.tga
 		tcMod scroll  .03 .03
@@ -284,17 +284,17 @@ textures/dont_use/nightsky_kc
 	{
 		map textures/dont_use/strangesky.tga
 		blendfunc GL_ONE GL_SRC_COLOR
-		tcMod scroll  .05 .05	
+		tcMod scroll  .05 .05
 	}
 
-	
+
 	{
 		map textures/dont_use/strangesky2_kc.tga
 		blendFunc GL_DST_COLOR GL_SRC_COLOR
 		tcMod scroll 0.01 0.01
 		tcMod scale .5 .5
 	}
-	
+
 //END
 }
 
@@ -313,14 +313,14 @@ textures/dont_use/nightsky_kcold
 	lightning
 
 
-	
+
 	{
 		map textures/dont_use/tileclouds3_kc.tga
 		tcMod scroll 0.01 0.01
 		tcMod scale 2 2
 	}
 
-	
+
 	{
 		map textures/dont_use/tileclouds4_kc.tga
 		blendFunc GL_ONE GL_ONE
@@ -341,9 +341,9 @@ textures/dont_use/nightsky_kcold
 		tcMod scroll  0.01 .02
 	}
 
-	
 
-	
+
+
 //END
 }
 
@@ -367,7 +367,7 @@ textures/dont_use/foglightshader
 	tcMod turb .1 .1 .1 .1
 	}
 
-	
+
 //	END
 }
 
@@ -384,25 +384,25 @@ textures/dont_use/train1kc_shader
 	map $lightmap
 		rgbGen identity
 	}
-	
+
 	{
 	map textures/common/pjrock5b.tga
-	blendFunc GL_DST_COLOR GL_SRC_COLOR 
+	blendFunc GL_DST_COLOR GL_SRC_COLOR
 		rgbGen identity
 	detail
 	tcmod scale 9.1  9.2
 	}
-	
+
 	{
 	map textures/common/pjrock5.tga
 	blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 
-	
 
 
-		
+
+
 //	END
 }
 
@@ -420,16 +420,16 @@ textures/dont_use/flameshader
 	fogparms .3 .1 .1 0 32
 	tesssize 16
 	deformVertexes wave 100 sin 2.5 5 10 .1
-		
+
 //	END
 }
 
 textures/dont_use/openwindow
-{	
-	
+{
+
 	surfaceparm nolightmap
 	cull none
-	
+
 	{
 	map textures/dont_use/openwindow.tga
 	alphaMap openwindow.tga
@@ -439,8 +439,8 @@ textures/dont_use/openwindow
 }
 
 textures/dont_use/web
-{	
-	
+{
+
 	surfaceparm nolightmap
 	cull twosided
 	{
@@ -452,8 +452,8 @@ textures/dont_use/web
 }
 
 textures/dont_use/metal2_2kc
-{	
-	
+{
+
 	surfaceparm nolightmap
 	cull none
 	{
@@ -465,8 +465,8 @@ textures/dont_use/metal2_2kc
 }
 
 textures/dont_use/rustysupport
-{	
-	
+{
+
 	surfaceparm nolightmap
 	cull none
 	{
@@ -514,10 +514,10 @@ textures/dont_use/shader3
 	surfaceparm trans
 	surfaceparm nonsolid
 	surfaceparm nolightmap
-	
+
 	tesssize 64
 	deformVertexes wave 100 sin 2 2 10 .01
-	
+
 	{
 	map textures/dont_use/blood2.tga
 	tcMod turb .1 .1 0 0.02
@@ -541,7 +541,7 @@ textures/dont_use/shader4
 	deformVertexes wave 100 sin 1 1 1 .1
 
 	q3map_surfacelight 100
-	
+
 	{
 	map textures/dont_use/slimetest7c.tga
 	blendfunc GL_ONE_MINUS_DST_COLOR GL_ZERO
@@ -555,10 +555,10 @@ textures/dont_use/shader4
 	tcMod scroll .2 .2
 	tcMod scale .1 .1
 	}
-	
-	
-	
-	
+
+
+
+
 //	END
 }
 
@@ -572,7 +572,7 @@ textures/dont_use/shader5
 	surfaceparm nonsolid
 	surfaceparm nolightmap
 	tesssize 64
-	
+
 	{
 	map textures/dont_use/firetestb.tga
 	blendfunc gl_one gl_one
@@ -589,7 +589,7 @@ textures/dont_use/shader5
 	tcMod turb .2 .1 .1 1
 	rgbGen wave SIN .5 .5 1 .1
 	}
-	
+
 	{
 	map textures/dont_use/firetest2.tga
 	blendFunc GL_dst_color gl_one
@@ -597,8 +597,8 @@ textures/dont_use/shader5
 	tcMod turb .1 .1 .5 .5
 	rgbGen wave SIN .5 .5 1 .1
 	}
-	
-		
+
+
 //	END
 }
 
@@ -612,8 +612,8 @@ textures/dont_use/shader5old
 	surfaceparm nonsolid
 	surfaceparm nolightmap
 	tesssize 64
-	
-	
+
+
 	{
 	map textures/dont_use/firetestb.tga
 	blendfunc gl_one gl_one
@@ -629,7 +629,7 @@ textures/dont_use/shader5old
 	tcMod scale .1 .1
 	tcMod turb .2 .1 .1 1
 	}
-	
+
 	{
 	map textures/dont_use/firetest2.tga
 	blendFunc GL_dst_color gl_one
@@ -685,7 +685,7 @@ textures/test/slimeshader
 	tcMod turb .2 .1 5 .01
 	tcMod scroll  -.01 -.01
 	}
-	
+
 //	FOG
 	surfaceparm fog
 	fogparms .2 1 .25 0 256
@@ -709,7 +709,7 @@ textures/test/fogtestshader
 	cull disable
 	fogparms .2 .225 .25 0 0
 	tesssize 64
-	
+
 	{
 	map textures/test/cloud2.tga
 	blendFunc GL_DST_COLOR GL_ONE
@@ -718,7 +718,7 @@ textures/test/fogtestshader
 	tcMod scroll .25 .25
 	tcMod scale .5 .5
 	}
-	
+
 //	END
 }
 
@@ -737,11 +737,11 @@ textures/test/lavacrustshader
 	surfaceparm lava
 	surfaceparm nolightmap
 
-	
-	
+
+
 	light 1
 	q3map_surfacelight 100
-	
+
 	tesssize 64
 	deformVertexes wave 100 sin 1 1 0 .03
 	cull disable
@@ -765,8 +765,8 @@ textures/test/lavacrustshader
 	tcMod turb .2 .01 5 .01
 	tcMod scroll  -.01 -.01
 	}
-	
-	
+
+
 //	END
 }
 
@@ -786,15 +786,15 @@ textures/test/water_trans
 	cull disable
 	tesssize 64
 	deformVertexes wave 100 sin 1 1 1 .1
-	
-	
+
+
 	{
 	map textures/test/watertest8d.tga
-	blendfunc GL_ONE GL_SRC_COLOR	
+	blendfunc GL_ONE GL_SRC_COLOR
 	tcMod scale .03 .03
 	tcMod scroll .001 .001
 	}
-	
+
 	{
 	map textures/test/watertest12e.tga
 	blendfunc GL_DST_COLOR GL_ONE
@@ -803,7 +803,7 @@ textures/test/water_trans
 	rgbGen wave sin .8 .2 .02 .05
 	tcMod scroll -.001 .001
 	}
-	
+
 	{
 	map textures/test/watertest12e7.tga
 	blendfunc GL_DST_COLOR GL_ONE
@@ -811,7 +811,7 @@ textures/test/water_trans
 	tcMod scale .5 .5
 	tcMod scroll -.025 .02
 	}
-	
+
 	{
 	map textures/test/watertest12e6.tga
 	blendfunc GL_DST_COLOR GL_ONE
@@ -822,17 +822,17 @@ textures/test/water_trans
 	tcMod scroll .001 -.001
 	}
 
-	
 
 
 
-	
 
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
 
 //	END
 }
@@ -840,13 +840,13 @@ textures/test/water_trans
 
 
 textures/test/watertile
-{	
+{
 //	*************************************************
 //	* Kevin's test water tile with shader		*
 //	*************************************************
-	
+
 	cull disable
-	
+
 	{
 	map textures/paulbase/tilefloor2.tga
 	}
@@ -862,17 +862,17 @@ textures/test/watertile
 	//tcMod turb .01 .03 0 0.05
 	//tcMod scroll -.01 -.01
 	//}
-	
+
 //	END
 }
 
 
 textures/test/river
-{	
+{
 //	*************************************************
 //	* Kevin's test river shader 			*
 //	*************************************************
-	
+
 	surfaceparm trans
 	surfaceparm nonsolid
 	surfaceparm water
@@ -893,7 +893,7 @@ textures/test/river
 	map textures/test/watertest10f.tga
 	blendfunc GL_DST_COLOR GL_SRC_COLOR
 	tcMod turb .01 .01 0 0.1
-	rgbGen wave sin .8 .01 1 1	
+	rgbGen wave sin .8 .01 1 1
 	tcMod scroll -6 0
 	tcMod scale .5 .5
 	}
@@ -903,16 +903,16 @@ textures/test/river
 	tcMod turb .01 .01 .1 .1
 	tcMod scroll  -10 0
 	}
-	
+
 //	END
 }
 
 textures/test/waterfall
-{	
+{
 //	*************************************************
 //	* Kevin's test waterfall shader			*
 //	*************************************************
-	
+
 	surfaceparm trans
 	surfaceparm nonsolid
 	surfaceparm water
@@ -921,7 +921,7 @@ textures/test/waterfall
 	cull disable
 	tesssize 16
 	deformVertexes wave 100 sin 0 2 1 .1
-	
+
 
 	{
 	map textures/test/watertest8e.tga
@@ -933,7 +933,7 @@ textures/test/waterfall
 	map textures/test/watertest10f.tga
 	blendfunc GL_DST_COLOR GL_SRC_COLOR
 	tcMod turb .01 .01 0 0.1
-	rgbGen wave sin .8 .01 1 1	
+	rgbGen wave sin .8 .01 1 1
 	tcMod scroll  20 0
 	}
 	{
@@ -943,8 +943,8 @@ textures/test/waterfall
 	tcMod scroll 17 1
 	tcMod scale .5 .5
 	}
-	
-	
+
+
 //	END
 }
 
@@ -959,20 +959,20 @@ textures/test/lavatest
 	surfaceparm noimpact
 	surfaceparm lava
 	surfaceparm nolightmap
-	
+
 	light 1
 	q3map_surfacelight 100
-	
+
 	tesssize 128
 	cull disable
 	deformVertexes wave 100 sin 5 5 .5 0.02
-	
+
 	{
 	map textures/test/lavatest.tga
 	tcMod turb .25 0.2 1 0.02
 	tcMod scroll  .25 .25
 	}
-	
+
 //	END
 }
 
@@ -987,9 +987,9 @@ textures/test/densewaterfog
 }
 
 
-textures/test/fire2	
+textures/test/fire2
 {
-	
+
 	{
 	map textures/test/fire2.tga
 	}
@@ -1001,7 +1001,7 @@ textures/test/fire2
 	}
 	{
 	map textures/test/fire3.blend.tga
-	blendfunc GL_ONE GL_ONE 	
+	blendfunc GL_ONE GL_ONE
 	tcMod scroll  0 10
 	}
 }
@@ -1052,7 +1052,7 @@ textures/test/wispy
 	tcMod scale 0.1 0.1
 	tcMod turb 0 0.3 0 0.1
 	}
-	
+
 }
 
 textures/common/transwater
@@ -1063,7 +1063,7 @@ textures/common/transwater
 	surfaceparm nolightmap
 
 	cull disable
-	
+
 	tesssize 34
 	deformVertexes wave 100 sin 0 2 0 0.1
 	{
@@ -1082,7 +1082,7 @@ textures/skies/mkc_sky
 	q3map_surfacelight 700
 
 	skyparms half 256 -
-	
+
 	{
 		map textures/skies/dimclouds.tga
 		tcMod scroll 0.01 0.01

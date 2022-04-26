@@ -540,14 +540,14 @@ textures/gothic_light/pentagram_light1_1K
 		rgbGen identity
 	}
 
-	
+
 	{
 		map textures/gothic_light/pentagram_light1_blend.tga
 		blendfunc GL_ONE GL_ONE
 		rgbGen wave sin .8 .2 0 1
 	}
 
-	
+
 }
 
 textures/gothic_light/pentagram_light1_2K
@@ -566,7 +566,7 @@ textures/gothic_light/pentagram_light1_2K
 		rgbGen identity
 	}
 
-	
+
 	{
 		map textures/gothic_light/pentagram_light1_blend.tga
 		blendfunc GL_ONE GL_ONE
@@ -590,7 +590,7 @@ textures/gothic_light/pentagram_light1_3K
 		rgbGen identity
 	}
 
-	
+
 	{
 		map textures/gothic_light/pentagram_light1_blend.tga
 		blendfunc GL_ONE GL_ONE
@@ -614,7 +614,7 @@ textures/gothic_light/pentagram_light1_4K
 		rgbGen identity
 	}
 
-	
+
 	{
 		map textures/gothic_light/pentagram_light1_blend.tga
 		blendfunc GL_ONE GL_ONE
@@ -638,14 +638,14 @@ textures/gothic_light/pentagram_light1_5K
 		rgbGen identity
 	}
 
-	
+
 	{
 		map textures/gothic_light/pentagram_light1_blend.tga
 		blendfunc GL_ONE GL_ONE
 		rgbGen wave sin .8 .2 0 1
 	}
 
-	
+
 }
 
 textures/gothic_light/pentagram_light1_10K
@@ -664,14 +664,14 @@ textures/gothic_light/pentagram_light1_10K
 		rgbGen identity
 	}
 
-	
+
 	{
 		map textures/gothic_light/pentagram_light1_blend.tga
 		blendfunc GL_ONE GL_ONE
 		rgbGen wave sin .8 .2 0 1
 	}
 
-	
+
 }
 
 textures/gothic_light/pentagram_light1_15K
@@ -690,14 +690,14 @@ textures/gothic_light/pentagram_light1_15K
 		rgbGen identity
 	}
 
-	
+
 	{
 		map textures/gothic_light/pentagram_light1_blend.tga
 		blendfunc GL_ONE GL_ONE
 		rgbGen wave sin .8 .2 0 1
 	}
 
-	
+
 }
 
 

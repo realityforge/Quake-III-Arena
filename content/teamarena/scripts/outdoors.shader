@@ -25,11 +25,10 @@ textures/outdoors/groundtest_1
 	{
 		map textures/organics/grass3.tga
 		blendFunc filter
-	//	tcMod scale 4 4	
+	//	tcMod scale 4 4
 		rgbgen identity
 
 	}
 
 
 }
-

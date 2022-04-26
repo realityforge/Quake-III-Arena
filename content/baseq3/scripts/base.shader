@@ -56,7 +56,7 @@ textures/base/comp_panel
 
 textures/base/ceil1_8
 {
-	light 1	
+	light 1
 	q3map_surfacelight 500
 	{
 		map $lightmap
@@ -71,7 +71,7 @@ textures/base/ceil1_8
 
 textures/base/ceil1_3
 {
-	light 1	
+	light 1
 	q3map_surfacelight 5000
 	{
 		map $lightmap
@@ -86,7 +86,7 @@ textures/base/ceil1_3
 
 textures/base/ceil1_4
 {
-	light 1	
+	light 1
 	q3map_surfacelight 5000
 	{
 		map $lightmap
@@ -100,7 +100,7 @@ textures/base/ceil1_4
 }
 textures/base/border11light
 {
-	q3map_surfacelight 1000	
+	q3map_surfacelight 1000
 	light 1
 	{
 		map $lightmap
@@ -117,9 +117,9 @@ textures/base/border11light
 		blendfunc GL_ONE GL_ONE
 	}
 }
-textures/base/electricwall	
+textures/base/electricwall
 {
-	light 1	
+	light 1
 	q3map_surfacelight 400
 
 	{
@@ -142,4 +142,3 @@ textures/base/electricwall
 		blendfunc GL_ONE GL_ONE
 	}
 }
-

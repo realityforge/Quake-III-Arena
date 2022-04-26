@@ -8,14 +8,14 @@ textures/jk_dm1/runway_dblue
 		tcmod scale 1 .25
 		rgbgen wave square -1 2 .5 8
 		tcmod scroll 0 .5
-	}	
+	}
 
 	{
 		map textures/jk_dm1/runway_dblue.tga
 		blendFunc blend
 		rgbGen identity
 	}
-        
+
 	{
 		map $lightmap
 		rgbGen identity
@@ -28,7 +28,7 @@ textures/jk_dm1/runway_dblue
 		rgbGen identity
 	}
 
-	
+
 }
 
 
@@ -37,11 +37,11 @@ textures/jk_dm1/jk_toxicsky_dm1
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
-        
+
         //q3map_lightsubdivide 512
 	q3map_surfacelight 220
 	q3map_sun  1 1 0.5 100 90 70
-        
+
 	qer_editorimage textures/jk_dm1/jk_toxicsky_dm1.tga
 	skyparms - 512 -
 	{
@@ -63,12 +63,12 @@ textures/jk_dm1/jk_q3redflag
 {
      cull disable
      surfaceparm alphashadow
-     surfaceparm trans	
+     surfaceparm trans
      surfaceparm nomarks
      tessSize 64
      deformVertexes wave 30 sin 0 3 0 .2
      deformVertexes wave 100 sin 0 3 0 .7
-     
+
         {
                 map textures/jk_dm1/jk_q3redflag.tga
                 alphaFunc GE128
@@ -90,25 +90,25 @@ textures/jk_dm1/jk_bouncepad_floor1
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/jk_dm1/jk_jumppadsmall.tga	
+	q3map_lightimage textures/jk_dm1/jk_jumppadsmall.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/jk_dm1/jk_bouncepad_floor1.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/jk_dm1/jk_bouncepad_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -162,14 +162,14 @@ textures/jk_dm1/jkt1_q3abanner
 		tcmod scale .5 .5
 	        rgbGen wave sin .25 0 0 0
 		blendfunc add
-	}	          		
-}  
+	}
+}
 
 
-   
+
 textures/jk_dm1/jk_t1fog_test
 {
-  
+
      qer_editorimage textures/jk_dm1/jk_t1fog_test.tga
      surfaceparm     trans
      surfaceparm     nonsolid
@@ -177,7 +177,7 @@ textures/jk_dm1/jk_t1fog_test
      surfaceparm     nodrop
      surfaceparm     nolightmap
 
-     fogparms ( .85 .10 .01 ) 980 
+     fogparms ( .85 .10 .01 ) 980
 
         {
 		map textures/jk_dm1/jkt1_fogcloud3_test.tga

@@ -3,7 +3,7 @@
 // intensity falls off with angle but not distance 100 is a fairly bright sun
 // degree of 0 = from the east, 90 = north, etc.  altitude of 0 = sunrise/set, 90 = noon
 
-// skyparms work like this: 
+// skyparms work like this:
 
 textures/skies/xtoxicsky_q3ctf3
 {
@@ -30,7 +30,7 @@ textures/skies/xtoxicsky_q3ctf3
 
 
 //*******************************************************
-//*              Protoskyboxattempt  
+//*              Protoskyboxattempt
 //*******************************************************
 textures/skies/skybox
 {
@@ -283,7 +283,7 @@ textures/skies/tim_dm14
 	surfaceparm sky
 
 	q3map_sun 3 2 2 90 314 60
-	q3map_surfacelight  80 
+	q3map_surfacelight  80
 	skyparms - 512 -
 
 	//cloudparms 512 full
@@ -734,7 +734,7 @@ textures/skies/hellredclouds
 	surfaceparm nolightmap
 	surfaceparm sky
 	q3map_globaltexture
-	q3map_lightsubdivide 512 
+	q3map_lightsubdivide 512
 
 	q3map_sun 5 2 2 60 135 90
 	q3map_surfacelight 80
@@ -751,7 +751,7 @@ textures/skies/hellredclouds
 		blendfunc GL_ONE GL_ONE
 		tcMod scale 10 10
 		tcMod scroll .2 .2
-	}	
+	}
 	{
 		map textures/skies/redcloudsa.tga
 		blendFunc GL_ONE GL_ONE
@@ -903,11 +903,11 @@ textures/hell/newhell
 
 //	sky env/q3envtest
 
-	
+
 
 	//{
 		//map textures/skies/dimclouds.tga
-		
+
 		//tcMod turb 0 0.001 0.5 0.001
 		//tcMod scale 3 3
 		//tcMod scroll 0.01 0.01
@@ -938,11 +938,11 @@ textures/hell/newhell
 //
 //	cloudparms 1024 full
 //	sky env/q3env2
-	
+
 
 	//{
 		//map textures/test/spacerocks.tga
-		
+
 		//tcMod turb 0 0.001 0.5 0.0001
 		//tcMod scale 0.5 0.5
 		//tcMod scroll 0.001 0.01
@@ -963,7 +963,7 @@ textures/hell/newhell
 textures/skies/pj_dm10sky
 {
 	qer_editorimage textures/skies/pjbasesky.tga
-	q3map_lightsubdivide 512 
+	q3map_lightsubdivide 512
 	q3map_globaltexture
 	surfaceparm noimpact
 	surfaceparm nolightmap
@@ -996,11 +996,11 @@ textures/skies/pj_dm10sky
 textures/skies/kc_dm10sky
 {
 	qer_editorimage textures/skies/pjbasesky.tga
-	q3map_lightsubdivide 512 
+	q3map_lightsubdivide 512
 	q3map_globaltexture
 	surfaceparm noimpact
 	surfaceparm nolightmap
-	
+
 	q3map_sun	.5 .6 .8 90 225 55
 	q3map_surfacelight 150
 
@@ -1042,12 +1042,12 @@ textures/skies/kcbasesky_arena1_sky
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	q3map_globaltexture
-	q3map_lightsubdivide 256 
+	q3map_lightsubdivide 256
 	q3map_sun	0.266383 0.274632 0.358662 150 60 85
 	q3map_surfacelight 500
 
 	skyparms - 512 -
-	
+
 	{
 		map textures/skies/dimclouds.tga
 		tcMod scroll 0.01 0.01
@@ -1071,12 +1071,12 @@ textures/skies/pjbasesky_arena1_sky
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	q3map_globaltexture
-	q3map_lightsubdivide 256 
+	q3map_lightsubdivide 256
 	q3map_sun	0.266383 0.274632 0.358662 150 60 85
 	q3map_surfacelight 100
 
 	skyparms - 512 -
-	
+
 	{
 		map textures/skies/dimclouds.tga
 		tcMod scroll 0.01 0.01
@@ -1101,12 +1101,12 @@ textures/skies/pj_ctf2_sky
 	surfaceparm nolightmap
 	surfaceparm sky
 	q3map_globaltexture
-	q3map_lightsubdivide 512 
+	q3map_lightsubdivide 512
 	q3map_sun	0.266383 0.274632 0.358662 250 90 45
 	q3map_surfacelight 100
 
 	skyparms full 128 -
-	
+
 	{
 		map textures/skies/bluedimclouds.tga
 		tcMod scroll 0.015 0.016
@@ -1131,12 +1131,12 @@ textures/skies/pj_arena4_sky
 	surfaceparm nolightmap
 	surfaceparm sky
 	q3map_globaltexture
-	q3map_lightsubdivide 512 
+	q3map_lightsubdivide 512
 	q3map_sun	0.266383 0.274632 0.358662 200 165 45
 	q3map_surfacelight 100
 
 	skyparms full 128 -
-	
+
 	{
 		map textures/skies/dimclouds.tga
 		tcMod scroll 0.015 0.016
@@ -1160,12 +1160,12 @@ textures/skies/pj_ctf1sky
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	q3map_globaltexture
-	q3map_lightsubdivide 512 
+	q3map_lightsubdivide 512
 	q3map_sun	0.266383 0.274632 0.358662 100 350 75
 	q3map_surfacelight 150
 
 	skyparms full 200 -
-	
+
 	{
 		map textures/skies/dimclouds.tga
 		tcMod scroll 0.015 0.016
@@ -1189,12 +1189,12 @@ textures/skies/pj_arena2sky
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	q3map_globaltexture
-	q3map_lightsubdivide 512 
+	q3map_lightsubdivide 512
 	q3map_sun	0.266383 0.274632 0.358662 100 350 55
 	q3map_surfacelight 100
 
 	skyparms full 200 -
-	
+
 	{
 		map textures/skies/dimclouds.tga
 		tcMod scroll 0.015 0.016
@@ -1219,7 +1219,7 @@ textures/skies/pj_dm9sky
 	surfaceparm nomarks
 	surfaceparm nolightmap
 	q3map_globaltexture
-	q3map_lightsubdivide 512 
+	q3map_lightsubdivide 512
 
 	q3map_sun	.5 .6 .8 140 165 60
 	q3map_surfacelight 80
@@ -1714,7 +1714,7 @@ textures/skies/toxicskytim_dm7
 		tcMod scroll 0.05 0.05
 	}
 }
-	
+
 textures/hell/hellsky2goo
 {
 	surfaceparm sky
@@ -1923,8 +1923,6 @@ textures/skies/proto_sky
                 //rgbgen wave triangle 1 2 0 7
 		tcMod scale 3 3
 	}
-        
-     
+
+
 }
-
-

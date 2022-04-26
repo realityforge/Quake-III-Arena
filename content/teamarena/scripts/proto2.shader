@@ -39,7 +39,7 @@ textures/proto2/mpintro
                 rgbGen identity
 	}
 
-       
+
 }
 textures/proto2/mpteam1
 {
@@ -61,7 +61,7 @@ textures/proto2/mpteam1
                 rgbGen identity
 	}
 
-       
+
 }
 
 textures/proto2/mpteam3_movie
@@ -84,7 +84,7 @@ textures/proto2/mpteam3_movie
                 rgbGen identity
 	}
 
-       
+
 }
 
 
@@ -107,7 +107,7 @@ textures/proto2/mpteam5_mv
 		blendFunc add
                 rgbGen identity
 	}
-       
+
 }
 
 textures/proto2/mpterra2_mv
@@ -129,7 +129,7 @@ textures/proto2/mpterra2_mv
 		blendFunc add
                 rgbGen identity
 	}
-       
+
 }
 
 
@@ -166,7 +166,7 @@ textures/proto2/blueflag
 
 textures/proto2/oneflag
 {
- 
+
     surfaceparm trans
     surfaceparm nolightmap
     nopicmip
@@ -181,7 +181,7 @@ textures/proto2/oneflag
 
 textures/proto2/harvest
 {
- 
+
     surfaceparm trans
     surfaceparm nolightmap
     nopicmip
@@ -196,7 +196,7 @@ textures/proto2/harvest
 
 textures/proto2/redob
 {
-   
+
     surfaceparm trans
     surfaceparm nolightmap
     nopicmip
@@ -210,7 +210,7 @@ textures/proto2/redob
 }
 textures/proto2/blueob
 {
-  
+
     surfaceparm trans
     surfaceparm nolightmap
     nopicmip
@@ -303,9 +303,9 @@ textures/proto2/pagans_name
 	{
 		map textures/proto2/pagans_name.tga
 		alphaFunc GE128
-		rgbgen wave sin .5 0 0 0 
+		rgbgen wave sin .5 0 0 0
 		depthwrite
-                  
+
 	}
 	 {
 		map textures/sfx2/jumpadr2.tga
@@ -315,23 +315,23 @@ textures/proto2/pagans_name
 		depthfunc equal
 
 	}
- 
+
 }
 
 
 textures/proto2/xflag01
-{       	
+{
 	surfaceparm alphashadow
 	cull none
-       
+
 	{
 		map textures/proto2/xflag01.tga
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
-                  
+
 	}
-        
+
 	{
 		map $lightmap
 		rgbGen identity
@@ -343,18 +343,18 @@ textures/proto2/xflag01
 
 textures/proto2/grill03b
 {
-	
-       	
+
+
 	surfaceparm alphashadow
         surfaceparm nomarks
 	cull none
-       
+
 	{
 		map textures/proto2/grill03b.tga
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
-                  
+
 	}
 	{
 		map $lightmap
@@ -365,11 +365,11 @@ textures/proto2/grill03b
 }
 
 textures/proto2/screw01
-{    
-     surfaceparm	metalsteps	
+{
+     surfaceparm	metalsteps
      surfaceparm	nomarks
-     surfaceparm 	alphashadow  
-        
+     surfaceparm 	alphashadow
+
         {
 		map textures/proto2/screw01.tga
                 alphaFunc GE128
@@ -386,24 +386,24 @@ textures/proto2/screw01
 }
 
 textures/proto2/vertex_greenstone
-{   
+{
 	qer_editorimage textures/gothic_block/blocks17i.tga
  	surfaceparm pointlight
-	
+
         {
-		map textures/gothic_block/blocks17i.tga 
+		map textures/gothic_block/blocks17i.tga
 		rgbGen vertex
 	}
 
 }
 
 textures/proto2/vertex_cavestone
-{   
+{
 	qer_editorimage textures/stone/pjrock5.tga
 	surfaceparm pointlight
-	
+
     {
-		map textures/stone/pjrock5.tga 
+		map textures/stone/pjrock5.tga
 		rgbGen vertex
 	}
 
@@ -411,12 +411,12 @@ textures/proto2/vertex_cavestone
 textures/proto2/vertex_cavestone_mru
 //The image of Mr. Ugly is copyright 2000 by Kevin Hendryx
 //It is used here with his permission (but keep it quiet ... it's a secret)
-{   
+{
 	qer_editorimage textures/stone/pjrock5_mru.tga
 	surfaceparm pointlight
-	
+
     {
-		map textures/stone/pjrock5_mru.tga 
+		map textures/stone/pjrock5_mru.tga
 		rgbGen vertex
 	}
 
@@ -426,7 +426,7 @@ textures/proto2/vertex_cavestone_mru
 textures/proto2/x_smallpipe
 {
 	deformVertexes autoSprite2
-        surfaceparm trans	
+        surfaceparm trans
 	surfaceparm alphashadow
 	cull none
 	{
@@ -444,9 +444,9 @@ textures/proto2/x_smallpipe
 }
 
 textures/proto2/marbledoor_blue
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/effects/tinfx2.tga
                 tcGen environment
@@ -465,9 +465,9 @@ textures/proto2/marbledoor_blue
 	}
 }
 textures/proto2/marbledoor_red
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/effects/tinfx2.tga
                 tcGen environment
@@ -488,46 +488,46 @@ textures/proto2/marbledoor_red
 
 
 textures/proto2/black
-{    
-       
-     qer_editorimage textures/effects2/black.tga 
-     surfaceParm nolightmap  
+{
+
+     qer_editorimage textures/effects2/black.tga
+     surfaceParm nolightmap
 
         {
-		map textures/effects2/black.tga  
+		map textures/effects2/black.tga
 		rgbGen vertex
 	}
 
 }
 
 textures/proto2/vertex_con
-{    
-       
-     qer_editorimage textures/proto2/concrete03c.tga  
-     surfaceparm pointlight 
+{
+
+     qer_editorimage textures/proto2/concrete03c.tga
+     surfaceparm pointlight
 
         {
-		map textures/proto2/concrete03c.tga 
+		map textures/proto2/concrete03c.tga
 		rgbGen vertex
 	}
 
 }
 
 textures/proto2/concrete03c_aqua
-{   
+{
 	surfaceparm pointlight
 
         {
-		map textures/proto2/concrete03c_aqua.tga 
+		map textures/proto2/concrete03c_aqua.tga
 		rgbGen vertex
 	}
 
 }
 
 textures/proto2/pulsebeam
-{    
-     surfaceparm	metalsteps	   
-   
+{
+     surfaceparm	metalsteps
+
 
         {
 		map textures/proto2/pulsebeam.tga
@@ -546,9 +546,9 @@ textures/proto2/pulsebeam
 }
 
 textures/proto2/concrete_rednfx
-{    
-     surfaceparm	metalsteps	   
-     qer_editorimage textures/proto2/concrete_red.tga 
+{
+     surfaceparm	metalsteps
+     qer_editorimage textures/proto2/concrete_red.tga
 
         {
 		map textures/proto2/concrete_red.tga
@@ -561,9 +561,9 @@ textures/proto2/concrete_rednfx
 	}
 }
 textures/proto2/concrete_bluenfx
-{    
-     surfaceparm	metalsteps	   
-     qer_editorimage textures/proto2/concrete_blue.tga   
+{
+     surfaceparm	metalsteps
+     qer_editorimage textures/proto2/concrete_blue.tga
 
         {
 		map textures/proto2/concrete_blue.tga
@@ -586,7 +586,7 @@ textures/proto2/cheapfloor
                 //tcmod scale .5 .5
                 tcGen environment
                 rgbGen identity
-		
+
 	}
         {
                map textures/proto2/marble02b_floor.tga
@@ -609,7 +609,7 @@ textures/proto2/redlight_on
 		map textures/proto2/redlight_on.tga
 		rgbGen identity
 	}
-       
+
 
 }
 
@@ -621,7 +621,7 @@ textures/proto2/bluelight_on
 		map textures/proto2/bluelight_on.tga
 		rgbGen identity
 	}
-       
+
 
 }
 
@@ -635,7 +635,7 @@ textures/proto2/bsredlight_on
 	{
 		map textures/proto2/redlight_on.tga
 		rgbGen identity
-	}      
+	}
 }
 
 textures/proto2/bsbluelight_on
@@ -658,7 +658,7 @@ textures/proto2/rsredlight_off
        {
 		map textures/proto2/redlight_off.tga
 		rgbGen identity
-	}    
+	}
 }
 
 textures/proto2/rsbluelight_off
@@ -692,7 +692,7 @@ textures/proto2/bsbluelight_off
 	{
 		map textures/proto2/bluelight_off.tga
 		rgbGen identity
-	}   
+	}
 }
 
 textures/proto2/rsbluelight_on
@@ -744,13 +744,13 @@ textures/proto2/mirrorfloor
 textures/proto2/bluetrim01
 {
 
-       
+
 	{
 		map textures/effects2/envmap_blu.tga
                 blendFunc GL_ONE GL_ZERO
                 tcmod scale .025 .05
                 tcmod Scroll  .005 .04
-                
+
                 rgbGen identity
 	}
         {
@@ -768,13 +768,13 @@ textures/proto2/bluetrim01
 textures/proto2/redtrim01
 {
     qer_editorimage  textures/proto2/bluetrim01
-       
+
 	{
 		map textures/effects2/envmap_red.tga
                 blendFunc GL_ONE GL_ZERO
                 tcmod scale .025 .05
                 tcmod Scroll  .005 .04
-                
+
                 rgbGen identity
 	}
         {
@@ -796,7 +796,7 @@ textures/proto2/torchstone_trans
 	{
 		map $lightmap
 		rgbGen identity
-	
+
 	}
 	{
 		map textures/proto2/marble02btrim.tga
@@ -812,7 +812,7 @@ textures/proto2/torchstone02_trans
 	{
 		map $lightmap
 		rgbGen identity
-	
+
 	}
 	{
 		map textures/proto2/marbledge01.tga
@@ -827,7 +827,7 @@ textures/proto2/torchstone03_trans
 	{
 		map $lightmap
 		rgbGen identity
-	
+
 	}
 	{
 		map textures/proto2/marble02b.tga
@@ -838,9 +838,9 @@ textures/proto2/torchstone03_trans
 
 
 textures/proto2/shiny_black
-{    
-     surfaceparm	nolightmap   
-        
+{
+     surfaceparm	nolightmap
+
         {
 		map textures/proto2/shiny_black.tga
                 tcGen environment
@@ -855,14 +855,14 @@ textures/proto2/shiny_black
 }
 
 textures/proto2/light_nv
-{    
-     surfaceparm	nolightmap  
+{
+     surfaceparm	nolightmap
 
         {
 		map textures/proto2/light_nv.tga
 		rgbGen identity
-	} 
-        
+	}
+
         {
 		map textures/effects/tinfx2b.tga
                 tcGen environment
@@ -874,7 +874,7 @@ textures/proto2/light_nv
 }
 textures/proto2/marble02btrim03
 {
-	
+
 	{
 		map textures/proto2/marble02btrim03.tga
                 rgbGen identity
@@ -889,11 +889,11 @@ textures/proto2/marble02btrim03
                 blendFunc add
                 rgbGen wave sin .9 .5 0 .2
         }
-	
+
 }
 textures/proto2/marble02rtrim03
 {
-	
+
 	{
 		map textures/proto2/marble02rtrim03.tga
                 rgbGen identity
@@ -908,7 +908,7 @@ textures/proto2/marble02rtrim03
                 blendFunc add
                 rgbGen wave sin .9 .5 0 .2
         }
-	
+
 }
 
 
@@ -993,9 +993,9 @@ textures/proto2/blue_zot2
 
 
 textures/proto2/door_right
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/effects2/envmap_sky.tga
                 tcGen environment
@@ -1014,12 +1014,12 @@ textures/proto2/door_right
 	}
 }
 textures/proto2/reda_dcl
-{    
-     surfaceparm	nomarks 
-     surfaceparm	trans  
+{
+     surfaceparm	nomarks
+     surfaceparm	trans
      //nomipmaps
      surfaceparm pointlight
-        
+
         {
 		map textures/proto2/reda_dcl.tga
                 blendFunc add
@@ -1027,12 +1027,12 @@ textures/proto2/reda_dcl
 	}
 }
 textures/proto2/bluea_dcl
-{    
-     surfaceparm	nomarks   
+{
+     surfaceparm	nomarks
      surfaceparm	trans
      //nomipmaps
      surfaceparm pointlight
-   
+
         {
 		map textures/proto2/bluea_dcl.tga
                 blendFunc add
@@ -1041,12 +1041,12 @@ textures/proto2/bluea_dcl
 }
 
 textures/proto2/blueat_dcl
-{    
-     surfaceparm	nomarks   
+{
+     surfaceparm	nomarks
      surfaceparm	trans
      //nomipmaps
      surfaceparm pointlight
-   
+
         {
 		map textures/proto2/blueat_dcl.tga
                 blendFunc add
@@ -1056,13 +1056,13 @@ textures/proto2/blueat_dcl
 
 
 textures/proto2/skull_red_dcl
-{   
+{
 	qer_editorimage  textures/proto2/pjdecal_red.tga
-     surfaceparm	nomarks 
-     surfaceparm	trans  
+     surfaceparm	nomarks
+     surfaceparm	trans
      nomipmaps
      surfaceparm pointlight
-        
+
         {
 		map textures/proto2/pjdecal_red.tga
                 blendFunc add
@@ -1071,13 +1071,13 @@ textures/proto2/skull_red_dcl
 }
 
 textures/proto2/skull_blue_dcl
-{    
+{
 	qer_editorimage  textures/proto2/pjdecal_blue.tga
-     surfaceparm	nomarks 
-     surfaceparm	trans  
+     surfaceparm	nomarks
+     surfaceparm	trans
      nomipmaps
      surfaceparm pointlight
-        
+
         {
 		map textures/proto2/pjdecal_blue.tga
                 blendFunc add
@@ -1086,9 +1086,9 @@ textures/proto2/skull_blue_dcl
 }
 
 textures/proto2/concrete_red
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/effects2/redfx.tga
                 tcGen environment
@@ -1107,9 +1107,9 @@ textures/proto2/concrete_red
 	}
 }
 textures/proto2/concrete_blue
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/effects2/bluefx.tga
                 tcGen environment
@@ -1144,7 +1144,7 @@ textures/proto2/teamwerkz_red1
                 tcMod scroll -.2 0
 		rgbgen wave sin 0 1 0 .19
 	}
-        
+
 
 
 }
@@ -1165,24 +1165,24 @@ textures/proto2/teamwerkz_blue1
                 tcMod scroll -.2 0
 		rgbgen wave sin 0 1 0 .19
 	}
-        
+
 
 
 }
 textures/proto2/gothic_light
 {
-	
-       	
+
+
 	surfaceparm alphashadow
-        surfaceparm nomarks	
+        surfaceparm nomarks
 	cull none
-       
+
 	{
 		map textures/proto2/gothic_light.tga
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
-                  
+
 	}
 	{
 		map $lightmap
@@ -1194,50 +1194,50 @@ textures/proto2/gothic_light
 
 textures/proto2/gothic_lightfx
 {
-	
+
        	q3map_surfacelight 2000
 	surfaceparm alphashadow
-        surfaceparm nomarks	
-       
+        surfaceparm nomarks
+
 	{
 		map textures/proto2/gothic_lightfx.tga
 		blendfunc add
 		rgbGen identity
-                  
+
 	}
 }
 textures/proto2/5_dcl
 {
-	
+
        	surfaceparm pointlight
 	surfaceparm alphashadow
         surfaceparm nomarks
 	cull none
-       
+
 	{
 		map textures/proto2/5_dcl.tga
 		blendFunc add
 		depthWrite
 		rgbGen vertex
-                  
+
 	}
 
 }
 
 textures/proto2/grill02
 {
-	
-       	
+
+
 	surfaceparm alphashadow
         surfaceparm nomarks
 	cull none
-       
+
 	{
 		map textures/proto2/grill02.tga
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
-                  
+
 	}
 	{
 		map $lightmap
@@ -1248,18 +1248,18 @@ textures/proto2/grill02
 }
 textures/proto2/wirepipe
 {
-	
-       	
+
+
 	surfaceparm alphashadow
         surfaceparm nomarks
 	cull none
-       
+
 	{
 		map textures/proto2/wirepipe.tga
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
-                  
+
 	}
 	{
 		map $lightmap
@@ -1270,18 +1270,18 @@ textures/proto2/wirepipe
 }
 textures/proto2/wheel01
 {
-	
-       	
+
+
 	surfaceparm alphashadow
         surfaceparm nomarks
 	cull none
-       
+
 	{
 		map textures/proto2/wheel01.tga
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
-                  
+
 	}
 	{
 		map $lightmap
@@ -1291,19 +1291,19 @@ textures/proto2/wheel01
 	}
 }
 textures/proto2/c_zinc_shiny
-{   
+{
     qer_editorimage textures/gothic_trim/zinc_shiny.tga
     cull none
         {
-                map textures/effects/tinfx.tga       
+                map textures/effects/tinfx.tga
                 tcGen environment
                 rgbGen identity
-	}   
+	}
         {
 		map textures/gothic_trim/zinc_shiny.tga
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
-	} 
+	}
         {
 		map $lightmap
                 blendFunc GL_DST_COLOR GL_ONE_MINUS_DST_ALPHA
@@ -1312,18 +1312,18 @@ textures/proto2/c_zinc_shiny
 }
 textures/proto2/stadlight01
 {
-	
-       	
+
+
 	surfaceparm alphashadow
-        surfaceparm nomarks	
+        surfaceparm nomarks
 	cull none
-       
+
 	{
 		map textures/proto2/stadlight01.tga
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
-                  
+
 	}
 	{
 		map $lightmap
@@ -1335,14 +1335,14 @@ textures/proto2/stadlight01
 		map textures/proto2/stadlight01fx.tga
 		blendfunc add
 		rgbGen wave sin .5 .5 0 2
-                  
+
 	}
 }
 
 textures/proto2/v_support02
 {
-	
-       	
+
+
 	surfaceparm alphashadow
 	cull none
         nomipmaps
@@ -1351,7 +1351,7 @@ textures/proto2/v_support02
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
-                  
+
 	}
 	{
 		map $lightmap
@@ -1362,17 +1362,17 @@ textures/proto2/v_support02
 }
 textures/proto2/pipes01
 {
-	
-       	
+
+
 	surfaceparm alphashadow
 	cull none
-       
+
 	{
 		map textures/proto2/pipes01.tga
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
-                  
+
 	}
 	{
 		map $lightmap
@@ -1383,17 +1383,17 @@ textures/proto2/pipes01
 }
 textures/proto2/floorvent01
 {
-	
+
        	surfaceparm pointlight
 	surfaceparm alphashadow
 	cull none
-       
+
 	{
 		map textures/proto2/floorvent01.tga
 		blendFunc blend
 		depthWrite
 		rgbGen vertex
-                  
+
 	}
 
 }
@@ -1409,13 +1409,13 @@ textures/proto2/sign01
 textures/proto2/supportctfblu
 {
 
-       
+
 	{
 		map textures/effects2/envmap_blu.tga
                 blendFunc GL_ONE GL_ZERO
                 tcmod scale .025 .05
                 tcmod Scroll  .005 .02
-                
+
                 rgbGen identity
 	}
         {
@@ -1433,13 +1433,13 @@ textures/proto2/supportctfblu
 textures/proto2/supportctfred
 {
 
-       
+
 	{
 		map textures/effects2/envmap_red.tga
                 blendFunc GL_ONE GL_ZERO
                 tcmod scale .025 .05
                 tcmod Scroll  .005 .02
-                
+
                 rgbGen identity
 	}
         {
@@ -1455,17 +1455,17 @@ textures/proto2/supportctfred
 }
 textures/proto2/marbletrim02
 {
-	
-       	
+
+
 	surfaceparm alphashadow
 	cull none
-       
+
 	{
 		map textures/proto2/marbletrim02.tga
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
-                  
+
 	}
 	{
 		map $lightmap
@@ -1477,17 +1477,17 @@ textures/proto2/marbletrim02
 
 textures/proto2/marbletrim01
 {
-	
-       	
+
+
 	surfaceparm alphashadow
 	cull none
-       
+
 	{
 		map textures/proto2/marbletrim01.tga
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
-                  
+
 	}
 	{
 		map $lightmap
@@ -1497,9 +1497,9 @@ textures/proto2/marbletrim01
 	}
 }
 textures/proto2/marble02b_s
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/effects/tinfx2.tga
                 tcGen environment
@@ -1520,17 +1520,17 @@ textures/proto2/marble02b_s
 
 textures/proto2/ceiling_pipe01
 {
-	
-       	
+
+
 	surfaceparm alphashadow
 	cull none
-       
+
 	{
 		map textures/proto2/ceiling_pipe01.tga
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
-                  
+
 	}
 	{
 		map $lightmap
@@ -1540,9 +1540,9 @@ textures/proto2/ceiling_pipe01
 	}
 }
 textures/proto2/duct01
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/effects/tinfx.tga
                 tcGen environment
@@ -1561,9 +1561,9 @@ textures/proto2/duct01
 	}
 }
 textures/proto2/grate_trim
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/sfx/specular.tga
                 tcGen environment
@@ -1582,9 +1582,9 @@ textures/proto2/grate_trim
 	}
 }
 textures/proto2/techtrim02
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/sfx/specular.tga
                 tcGen environment
@@ -1620,7 +1620,7 @@ textures/proto2/steam01
 		blendFunc blend
 		rgbGen vertex
 	}
-        
+
 
 
 }
@@ -1746,17 +1746,17 @@ textures/proto2/blueflare
 }
 textures/proto2/pipewall01
 {
-	
-       	
+
+
 	surfaceparm alphashadow
 	cull none
-       
+
 	{
 		map textures/proto2/pipewall01.tga
 		alphaFunc GE128
-		
+
 		rgbGen identity
-                  
+
 	}
 	{
 		map $lightmap
@@ -1768,12 +1768,12 @@ textures/proto2/pipewall01
 textures/proto2/barbedwire
 {
 	surfaceparm pointlight
-        surfaceparm trans	
+        surfaceparm trans
 	surfaceparm alphashadow
         deformVertexes autoSprite2
 	cull twosided
         //nopicmip
-       
+
 	{
 		map textures/proto2/barbedwire.tga
                 blendFunc Blend
@@ -1792,8 +1792,8 @@ textures/proto2/barbedwire
 textures/proto2/rail01
 
 {
-	
-        surfaceparm trans	
+
+        surfaceparm trans
 	surfaceparm alphashadow
 	cull none
         //nopicmip
@@ -1812,8 +1812,8 @@ textures/proto2/rail01
 }
 textures/proto2/grill01
 {
-	
-        surfaceparm trans	
+
+        surfaceparm trans
 	surfaceparm alphashadow
 	cull none
         //nopicmip
@@ -1832,8 +1832,8 @@ textures/proto2/grill01
 }
 textures/proto2/vent01
 {
-	
-        surfaceparm trans	
+
+        surfaceparm trans
 	surfaceparm alphashadow
 	cull none
         //nopicmip
@@ -1852,8 +1852,8 @@ textures/proto2/vent01
 }
 textures/proto2/girder05
 {
-	
-        surfaceparm trans	
+
+        surfaceparm trans
 	surfaceparm alphashadow
 	cull none
         //nopicmip
@@ -1872,8 +1872,8 @@ textures/proto2/girder05
 }
 textures/proto2/girder04
 {
-	
-        surfaceparm trans	
+
+        surfaceparm trans
 	surfaceparm alphashadow
 	cull none
         //nopicmip
@@ -1892,8 +1892,8 @@ textures/proto2/girder04
 }
 textures/proto2/gear02
 {
-	
-        surfaceparm trans	
+
+        surfaceparm trans
 	surfaceparm alphashadow
 	cull none
         //nopicmip
@@ -1917,8 +1917,8 @@ textures/proto2/gear02
 	}
 }
 textures/proto2/dirt01
-{       
-        
+{
+
         {
 		map textures/proto2/dirt01.tga
                 rgbGen identity
@@ -1965,9 +1965,9 @@ textures/proto2/lightbulb2
 
 }
 textures/proto2/tin_panel
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/effects/tinfx.tga
                 tcGen environment
@@ -1986,9 +1986,9 @@ textures/proto2/tin_panel
 	}
 }
 textures/proto2/yellow
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/effects/tinfx.tga
                 tcGen environment
@@ -2008,8 +2008,8 @@ textures/proto2/yellow
 }
 textures/proto2/girder03
 {
-	
-        surfaceparm trans	
+
+        surfaceparm trans
 	surfaceparm alphashadow
 	cull none
         nopicmip
@@ -2086,7 +2086,7 @@ textures/proto2/concrete01wetfloor
 		        rgbGen identity
 	        }
 
-	
+
         }
 
 
@@ -2094,17 +2094,17 @@ textures/proto2/concrete01wetfloorkc
 
 	{
 
-		
+
                 {
 		        map $lightmap
-     
+
 	        }
 
 		{
 			map textures/proto2/basewall01test.tga
 			blendFunc GL_DST_COLOR GL_src_color
 			rgbGen identity
-		}	        	
+		}
 }
 
 
@@ -2129,7 +2129,7 @@ textures/proto2/concrete01wetwall
 		        rgbGen identity
 	        }
 
-	
+
         }
 
 

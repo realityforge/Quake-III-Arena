@@ -1,5 +1,5 @@
 // GFX.SHADER
-// 
+//
 // this file contains shaders that are used by the programmers to
 // generate special effects not attached to specific geometry.  This
 // also has 2D shaders such as fonts, etc.
@@ -43,7 +43,7 @@ console
 {
 	nopicmip
 	nomipmaps
-    
+
         {
 		map gfx/misc/console01.tga
                 blendFunc GL_ONE GL_ZERO
@@ -57,7 +57,7 @@ console
                 tcMod turb 0 .1 0 .1
                 tcMod scale 2 1
                 tcmod scroll 0.2  .1
-	} 
+	}
 
 }
 
@@ -74,7 +74,7 @@ menuback
          //       //blendfunc add
         //        tcMod turb 0 .8 0 .2
         //        tcmod scroll -.1  -.2
-	//} 
+	//}
          {
                 map textures/sfx/logo512.tga
                 // blendFunc blend
@@ -87,22 +87,22 @@ menuback
         //         tcmod scale .2 .2
         //         tcMod scroll .02  0.7
         //         rgbgen identity
-	//} 
-        
+	//}
+
 }
 menubacknologo
 {
 	nopicmip
 	nomipmaps
-       
+
         {
                map gfx/colors/black.tga
 	       //map textures/sfx/proto_zzzdrk.tga
                // tcMod turb 0 .1 0 .9
                // tcmod scale .2 .2
                // tcMod scroll .02  0.7
-	} 
-        
+	}
+
 }
 
 menubackRagePro	// blends turn to shit on rage pro, so skip it
@@ -112,7 +112,7 @@ menubackRagePro	// blends turn to shit on rage pro, so skip it
         {
                 map textures/sfx/logo512.tga
         }
-        
+
 }
 
 
@@ -775,12 +775,12 @@ textures/animationTest
 	qer_editorimage	textures/liquids/bloodwater1.tga
 	{
 		animMap 0.5 textures/liquids/bloodwater1.tga textures/liquids/pool.tga textures/liquids/slime7.tga
-	}	
+	}
 	{
 		animMap 0.5 textures/liquids/pool.tga textures/liquids/slime7.tga textures/liquids/bloodwater1.tga
 		blendFunc	GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		alphaGen	wave sawtooth 0 1 0 0.5
-	}	
+	}
 	{
 		map $lightmap
 		blendFunc GL_DST_COLOR GL_ZERO
@@ -807,7 +807,7 @@ markShadow
 		map gfx/damage/shadow.tga
 		blendFunc GL_ZERO GL_ONE_MINUS_SRC_COLOR
 		rgbGen exactVertex
-	}	
+	}
 }
 
 // projectionShadow is used for cheap squashed model shadows
@@ -819,7 +819,7 @@ projectionShadow
 		map			*white
 		blendFunc GL_ONE GL_ZERO
 		rgbGen wave square 0 0 0 0				// just solid black
-	}	
+	}
 }
 
 
@@ -833,7 +833,7 @@ wake
                 tcmod rotate 250
                 tcMod stretch sin .9 0.1 0 0.7
 		rgbGen wave sin .7 .3 .25 .5
-	}	
+	}
         {
 		clampmap sprites/splash.tga
 		blendFunc GL_ONE GL_ONE
@@ -841,7 +841,7 @@ wake
                 tcmod rotate -230
                 tcMod stretch sin .9 0.05 0 0.9
 		rgbGen wave sin .7 .3 .25 .4
-	}	
+	}
 }
 
 
@@ -912,7 +912,7 @@ shotgunSmokePuff
 	{
 		map gfx/misc/smokepuff2b.tga
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
-		alphaGen entity		
+		alphaGen entity
 		rgbGen entity
 	}
 }
@@ -941,7 +941,7 @@ railDisc
 	cull none
         deformVertexes wave 100 sin 0 .5 0 2.4
 	{
-		clampmap gfx/misc/raildisc_mono2.tga 
+		clampmap gfx/misc/raildisc_mono2.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen vertex
                  tcMod rotate -30
@@ -1011,7 +1011,7 @@ bloodMark
 
 bloodTrail
 {
-        
+
 	nopicmip			// make sure a border remains
 	entityMergable		// allow all the sprites to be merged together
 	{
@@ -1112,8 +1112,8 @@ gfx/2d/crosshair
 {
 	nopicmip
 	{
-		map gfx/2d/crosshair.tga          
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA                
+		map gfx/2d/crosshair.tga
+		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
         rgbGen identity
 	}
 }
@@ -1202,7 +1202,7 @@ gfx/2d/crosshairj
 {
 	nopicmip
 	{
-		map gfx/2d/crosshairj.tga       
+		map gfx/2d/crosshairj.tga
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -1211,7 +1211,7 @@ gfx/2d/crosshairk
 {
 	nopicmip
 	{
-		map gfx/2d/crosshairk.tga       
+		map gfx/2d/crosshairk.tga
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -1492,6 +1492,3 @@ bloodExplosion		// spurt of blood at point of impact
 		blendfunc blend
 	}
 }
-
-
-

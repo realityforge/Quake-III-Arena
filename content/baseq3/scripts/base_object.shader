@@ -80,7 +80,7 @@ textures/base_object/boxQ3_1
 textures/base_object/boxQ3_2
 {
 	// A silver box with a specular and a lightglow map on it
-	
+
 	q3map_surfacelight 200
 	{
 		map $lightmap

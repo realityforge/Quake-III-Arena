@@ -1,5 +1,5 @@
 models\mapobjects\multiplant\fern
-{	
+{
     surfaceparm alphashadow
     cull none
     nopicmip
@@ -19,7 +19,7 @@ models\mapobjects\multiplant\fern
 }
 
 models\mapobjects\multiplant\bannanaleaf
-{	
+{
     surfaceparm alphashadow
     cull none
     nopicmip
@@ -39,10 +39,10 @@ models\mapobjects\multiplant\bannanaleaf
 }
 
 models\mapobjects\multiplant\batleaf
-{	
+{
     surfaceparm alphashadow
     cull none
-    	
+
 	{
 		map models\mapobjects\multiplant\batleaf.tga
 		blendFunc GL_ONE GL_ZERO
@@ -61,7 +61,7 @@ models\mapobjects\multiplant\batleaf
 }
 
 models\mapobjects\multiplant\batleaf2
-{	
+{
     surfaceparm alphashadow
     cull none
 //    nopicmip
@@ -82,7 +82,7 @@ models\mapobjects\multiplant\batleaf2
 //               blendFunc GL_ONE GL_ONE
                blendFunc blend
                rgbGen wave sin 0 1 0 .33
-//		rgbGen identity             
+//		rgbGen identity
        }
 
 
@@ -95,7 +95,7 @@ models\mapobjects\multiplant\batleaf2
 }
 
 models\mapobjects\multiplant\leaf1
-{	
+{
     surfaceparm alphashadow
     cull none
 
@@ -117,7 +117,7 @@ models\mapobjects\multiplant\leaf1
 }
 
 models\mapobjects\multiplant\leaf2
-{	
+{
     surfaceparm alphashadow
     cull none
 
@@ -139,7 +139,7 @@ models\mapobjects\multiplant\leaf2
 }
 
 models\mapobjects\multiplant\leaf3
-{	
+{
     surfaceparm alphashadow
     cull none
 
@@ -161,7 +161,7 @@ models\mapobjects\multiplant\leaf3
 }
 
 models\mapobjects\multiplant\pleaf1
-{	
+{
     surfaceparm alphashadow
     cull none
 
@@ -183,7 +183,7 @@ models\mapobjects\multiplant\pleaf1
 }
 
 models\mapobjects\multiplant\pleaf2
-{	
+{
     surfaceparm alphashadow
     cull none
 
@@ -205,7 +205,7 @@ models\mapobjects\multiplant\pleaf2
 }
 
 models\mapobjects\multiplant\pleaf3
-{	
+{
     surfaceparm alphashadow
     cull none
 
@@ -227,7 +227,7 @@ models\mapobjects\multiplant\pleaf3
 }
 
 models\mapobjects\multiplant\palmfrond
-{	
+{
     surfaceparm alphashadow
     cull none
     nopicmip
@@ -248,7 +248,7 @@ models\mapobjects\multiplant\palmfrond
 models\mapobjects\multiplant\invisible
 {
     surfaceparm alphashadow
-	surfaceparm nolightmap			
+	surfaceparm nolightmap
         {
                 map models\mapobjects\multiplant\invisible.tga
                 alphaFunc GE128

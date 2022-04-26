@@ -5,7 +5,7 @@ textures/natestah/nateweb
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull disable	
+	cull disable
 	{
 		map textures/natestah/nateweb.tga
 		blendfunc add

@@ -14,7 +14,7 @@ textures/gothic_floor/q1metal7_99spot
                 blendFunc GL_ONE GL_ONE
                 tcGen environment
         }
-       
+
 	{
 	        map textures/gothic_floor/q1metal7_99spot.tga
 		blendFunc blend
@@ -178,24 +178,24 @@ textures/gothic_floor/largerblock3b_ow
 textures/gothic_floor/metalbridge06brokeb
 {
         {
-                map textures/sfx/kenelectric.tga  
+                map textures/sfx/kenelectric.tga
                 tcmod scale 2 2
                 tcMod turb 0 .2 0 .3
                 tcmod scroll 3 5
                 rgbGen identity
-	}  
+	}
         {
 		map textures/gothic_floor/metalbridge06brokeb.tga
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
-	} 
+	}
         {
 		map $lightmap
                 blendFunc GL_DST_COLOR GL_ONE_MINUS_DST_ALPHA
 		rgbGen identity
 	}
-   
-         
+
+
 }
 
 textures/gothic_floor/xstepborder3_shiney
@@ -203,9 +203,9 @@ textures/gothic_floor/xstepborder3_shiney
 	qer_editorimage textures/gothic_floor/xstepborder3_alpha.tga
 	{
 		map $lightmap
-		rgbgen identity      
+		rgbgen identity
 	}
-	
+
 	{
 		map textures/gothic_floor/xstepborder3_alpha.tga
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
@@ -213,7 +213,7 @@ textures/gothic_floor/xstepborder3_shiney
 		alphaGen lightingSpecular
 	}
 
-			
+
 }
 
 
@@ -231,7 +231,7 @@ textures/gothic_floor/xlargeblockfloor5_pent
 	{
 		map textures/sfx/pentfloor_256_glow.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .5 .5 0 .5	
+		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
 }
@@ -250,7 +250,7 @@ textures/gothic_floor/xlargeblockfloor5_pent_offset
 	{
 		map textures/sfx/pentfloor_256_glow.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .5 .5 0 .5	
+		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
 }
@@ -339,4 +339,3 @@ textures/gothic_floor/pent_metalbridge06b
 		rgbGen wave sin .5 .5 0 0.5
 	}
 }
-

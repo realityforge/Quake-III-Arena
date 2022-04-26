@@ -1,13 +1,13 @@
 textures/base_floor/concfloor_rain
 
 	{
-		
+
 		tessSize 32
 		deformVertexes normal 1 15
 
 		{
 			map textures/base_floor/concfloor_rain.tga
-                        rgbGen identity    
+                        rgbGen identity
                 }
                 {
 			map textures/liquids/pj_e3_reflection2b.tga
@@ -24,16 +24,16 @@ textures/base_floor/concfloor_rain
 		        rgbGen identity
 	        }
 
-	
+
         }
 
 
 
 textures/base_floor/techfloor2
-{ 
+{
         cull disable
         surfaceparm alphashadow
-        surfaceparm nomarks	
+        surfaceparm nomarks
         //nomipmaps
 
         {
@@ -66,9 +66,9 @@ textures/base_floor/techfloor2
 
 }
 textures/base_floor/techfloor
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/sfx/proto_zzztpink.tga
                 tcMod turb 0 .5 0 9.6
@@ -90,7 +90,7 @@ textures/base_floor/techfloor
                 blendFunc blend
 		rgbGen identity
 	}
-        
+
         {
 		map $lightmap
 		rgbGen identity
@@ -99,9 +99,9 @@ textures/base_floor/techfloor
        }
 }
 textures/base_floor/metalbridge04dbroke
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/sfx/proto_zzztblu2.tga
                 tcMod turb 0 .5 0 9.6
@@ -123,9 +123,9 @@ textures/base_floor/metalbridge04dbroke
 }
 
 textures/base_floor/clang_floor_ow3
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/sfx/proto_zzztblu2.tga
                 tcMod turb 0 .5 0 9.6
@@ -156,7 +156,7 @@ textures/base_floor/floor3_3dark_ow
                 blendFunc GL_ONE GL_ZERO
                 rgbGen identity
 	}
-       
+
 	{
 	        map textures/base_floor/floor3_3dark_ow.tga
 		blendFunc blend
@@ -170,8 +170,8 @@ textures/base_floor/floor3_3dark_ow
 }
 textures/base_floor/proto_rustygrate2
 {
-	surfaceparm	metalsteps	
-        surfaceparm trans	
+	surfaceparm	metalsteps
+        surfaceparm trans
 	surfaceparm alphashadow
 	cull none
         nopicmip
@@ -195,14 +195,14 @@ textures/base_floor/cybergrate3
 {
     cull disable
     surfaceparm alphashadow
-    surfaceparm	metalsteps	
+    surfaceparm	metalsteps
     surfaceparm nomarks
         {
                 map textures/sfx/hologirl.tga
                 blendFunc add
                 tcmod scale  1.2 .5
                 tcmod scroll 3.1 1.1
-		
+
         }
         {
                 map textures/base_floor/cybergrate3.tga
@@ -222,7 +222,7 @@ textures/base_floor/cybergrate2
 {
     cull disable
     surfaceparm alphashadow
-    surfaceparm	metalsteps	
+    surfaceparm	metalsteps
     surfaceparm nomarks
         {
                 map textures/base_floor/cybergrate2.tga
@@ -240,9 +240,9 @@ textures/base_floor/cybergrate2
 
 }
 textures/base_floor/clang_floor_ow
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/sfx/proto_zzztblu2.tga
                 tcMod turb 0 .5 0 9.6
@@ -264,9 +264,9 @@ textures/base_floor/clang_floor_ow
 }
 
 textures/base_floor/clangdark_ow3
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/sfx/proto_zzztblu2.tga
                 tcMod turb 0 .5 0 9.6
@@ -290,7 +290,7 @@ textures/base_floor/cybergrate
 {
     cull disable
     surfaceparm alphashadow
-    surfaceparm	metalsteps	
+    surfaceparm	metalsteps
     surfaceparm nomarks
         {
                 map textures/base_floor/cybergrate.tga
@@ -308,9 +308,9 @@ textures/base_floor/cybergrate
 
 }
 textures/base_floor/diamond2c_ow
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/sfx/proto_zzztblu2.tga
                 tcMod turb 0 .5 0 9.6
@@ -331,9 +331,9 @@ textures/base_floor/diamond2c_ow
 	}
 }
 textures/base_floor/diamond2cspot
-{    
-     surfaceparm	metalsteps	   
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/liquids/proto_grueldark2.tga
                 blendFunc GL_ONE GL_ZERO
@@ -341,13 +341,13 @@ textures/base_floor/diamond2cspot
                 tcMod scroll .01 .03
                 tcMod turb 0 0.05 0 .05
 	}
-        
+
         {
 		map textures/effects/tinfx3.tga
                 blendFunc GL_ONE GL_ONE
                 tcGen environment
         }
-       
+
         {
 		map textures/base_floor/diamond2cspot.tga
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
@@ -373,21 +373,21 @@ textures/base_floor/clang_floor3blava
 	{
 		map textures/base_floor/clang_floor3blava.tga
                 blendfunc blend
-		
+
 	}
-      
+
 }
 textures/base_floor/pool_side2
 {
 
-	
+
        	{
 		map textures/liquids/pool3d_5e.tga
 		tcmod scale -.5 -.25
 		tcmod scroll .025 .025
 		rgbgen wave sin .75 0 0 0
 	}
-       
+
 	{
 		map textures/liquids/pool3d_6e.tga
 		blendFunc GL_one GL_ONE
@@ -409,20 +409,20 @@ textures/base_floor/pool_side2
 		map $lightmap
 		blendfunc gl_dst_color gl_zero
 	}
-       
-              
+
+
 }
 textures/base_floor/pool_side3
 {
 	qer_editorimage textures/base_wall/patch10rusty5.tga
-	
+
        	{
 		map textures/liquids/pool3d_5e.tga
 		tcmod scale -.5 -.25
 		tcmod scroll .025 .025
 		rgbgen wave sin .75 0 0 0
 	}
-       
+
 	{
 		map textures/liquids/pool3d_6e.tga
 		blendFunc GL_one GL_ONE
@@ -444,21 +444,21 @@ textures/base_floor/pool_side3
 		map $lightmap
 		blendfunc gl_dst_color gl_zero
 	}
-       
-              
+
+
 }
 textures/base_floor/pool_floor2
 {
-	
-	
+
+
         	{
 		map textures/liquids/pool3d_5e.tga
 		tcmod scale -.25 -.25
 		tcmod scroll .025 .025
 		rgbgen wave sin .75 0 0 0
-	
+
 	}
-       
+
 	{
 		map textures/liquids/pool3d_6e.tga
 		blendFunc GL_one GL_ONE
@@ -479,21 +479,21 @@ textures/base_floor/pool_floor2
 		map $lightmap
 		blendfunc gl_dst_color gl_zero
 	}
-       
-              
+
+
 }
 textures/base_floor/pool_floor3
 {
 	qer_editorimage textures/base_wall/patch10rusty5.tga
-	
+
         	{
 		map textures/liquids/pool3d_5e.tga
 		tcmod scale -.25 -.25
 		tcmod scroll .025 .025
 		rgbgen wave sin .75 0 0 0
-	
+
 	}
-       
+
 	{
 		map textures/liquids/pool3d_6e.tga
 		blendFunc GL_one GL_ONE
@@ -514,8 +514,8 @@ textures/base_floor/pool_floor3
 		map $lightmap
 		blendfunc gl_dst_color gl_zero
 	}
-       
-              
+
+
 }
 
 
@@ -538,36 +538,36 @@ textures/base_floor/hfloor3
 		blendFunc GL_ONE GL_ONE
 		rgbGen identity
 	}
-       
+
         {
 		map textures/base_floor/hfloor3.tga
 		//blendFunc GL_ONE GL_ONE
                 blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-       
-              
+
+
 }
 textures/base_floor/clangspot
-{    
-     surfaceparm	metalsteps	
-     qer_editorimage textures/base_floor/clangdarkspot.tga 
+{
+     surfaceparm	metalsteps
+     qer_editorimage textures/base_floor/clangdarkspot.tga
         //{
 	//	map textures/base_floor/clangspot.tga
 	//	rgbGen identity
 	//}
-        
+
         {
 		map textures/liquids/proto_grueldark.tga
                 //tcGen environment
                 blendFunc GL_ONE GL_ZERO
                 tcmod scale 2 2
                 tcMod scroll .01 .03
-                
+
 		tcMod turb 0 0.05 0 .05
                 rgbGen identity
 	}
-        
+
         {
 		map textures/effects/tinfx3.tga
                 //tcGen environment
@@ -576,7 +576,7 @@ textures/base_floor/clangspot
 		//tcMod turb 0 0.01 0 9
                 rgbGen identity
 	}
-       
+
         {
 		map textures/base_floor/clangspot.tga
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
@@ -589,20 +589,20 @@ textures/base_floor/clangspot
 	}
 }
 textures/base_floor/clangspot2
-{    
-     surfaceparm	metalsteps	
-        
+{
+     surfaceparm	metalsteps
+
         {
 		map textures/liquids/proto_grueldark.tga
                 //tcGen environment
                 blendFunc GL_ONE GL_ZERO
                 tcmod scale 2 2
                 tcMod scroll .01 .03
-                
+
 		tcMod turb 0 0.05 0 .05
                 //rgbGen identity
 	}
-        
+
         {
 		map textures/effects/tinfx3.tga
                 //tcGen environment
@@ -611,7 +611,7 @@ textures/base_floor/clangspot2
 		//tcMod turb 0 0.01 0 9
                 //rgbGen identity
 	}
-       
+
         {
 		map textures/base_floor/clangspot2.tga
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
@@ -624,24 +624,24 @@ textures/base_floor/clangspot2
 	}
 }
 textures/base_floor/clangdarkspot
-{    
-     surfaceparm	metalsteps	   
+{
+     surfaceparm	metalsteps
         //{
 	//	map textures/base_floor/clangdarkspot.tga
 	//	rgbGen identity
 	//}
-        
+
         {
 		map textures/liquids/proto_grueldark.tga
                 //tcGen environment
                 blendFunc GL_ONE GL_ZERO
                 tcmod scale 2 2
                 tcMod scroll .01 .03
-                
+
 		tcMod turb 0 0.05 0 .05
                 //rgbGen identity
 	}
-        
+
         {
 		map textures/effects/tinfx3.tga
                 //tcGen environment
@@ -650,7 +650,7 @@ textures/base_floor/clangdarkspot
 		//tcMod turb 0 0.01 0 9
                 //rgbGen identity
 	}
-       
+
         {
 		map textures/base_floor/clangdarkspot.tga
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
@@ -704,21 +704,21 @@ textures/base_floor/concretefloor1
 		map textures/base_floor/concretefloor1.tga
 		blendFunc GL_ZERO GL_SRC_ALPHA
 		tcmod scale .1 .1
-		rgbgen identity	
+		rgbgen identity
 	}
 
 	{
 		map textures/base_floor/concretefloor1.tga
 		blendFunc GL_ONE GL_SRC_ALPHA
 		tcmod turb sin .5 1 0 1
-		rgbgen identity	
+		rgbgen identity
 	}
 
 
 	{
 		map $lightmap
         	blendfunc gl_dst_color gl_zero
-		rgbgen identity 
+		rgbgen identity
 	}
 
 
@@ -729,12 +729,12 @@ textures/base_floor/concretefloor1
 textures/base_floor/pjgrate1kc
 {
 	qer_editorimage textures/base_floor/proto_grate5.tga
-	surfaceparm	metalsteps		
+	surfaceparm	metalsteps
 	cull none
 
 	// A GRATE OR GRILL THAT CAN BE SEEN FROM BOTH SIDES
-	
-	
+
+
 	{
 		map textures/base_floor/proto_grate5.tga
 		blendFunc GL_ONE GL_ZERO
@@ -777,8 +777,8 @@ textures/base_floor/clang_floorshiny2
 	{
 		map $lightmap
                	tcGen environment
-		tcmod scale .25 .25 
-		rgbgen identity 
+		tcmod scale .25 .25
+		rgbgen identity
 	}
 
 
@@ -802,8 +802,8 @@ textures/base_floor/clang_floorwet
 	{
 		map textures/effects/tinfx3.tga
                	tcGen environment
-		//tcmod scale .25 .25 
-		rgbgen identity 
+		//tcmod scale .25 .25
+		rgbgen identity
 	}
 
 
@@ -829,7 +829,7 @@ textures/base_floor/clang_floorshiny
 	{
 		map $lightmap
                	tcGen environment
-		tcmod scale .25 .25  
+		tcmod scale .25 .25
 	}
 
 
@@ -851,7 +851,7 @@ textures/base_floor/tilefloor7_ow
 {
 	q3map_lightimage textures/base_floor/tilefloor7_owfx.tga
 	q3map_surfacelight 100
-	
+
         {
 		map $lightmap
 		rgbGen identity
@@ -860,7 +860,7 @@ textures/base_floor/tilefloor7_ow
 		map textures/base_floor/tilefloor7_ow.tga
 		blendfunc gl_dst_color gl_zero
                 rgbGen identity
-	}	
+	}
         {
 		map textures/base_floor/tilefloor7_owfx.tga
 		blendfunc GL_ONE GL_ONE
@@ -871,13 +871,13 @@ textures/base_floor/tilefloor7_ow
 		blendfunc GL_ONE GL_ONE
                 rgbgen wave triangle 1 5 1 3
 	}
-    	
+
 }
 textures/base_floor/skylight1
 {
 	q3map_lightimage textures/base_floor/skylight1_lm.tga
 	q3map_surfacelight 100
-	
+
         {
 		map $lightmap
 		rgbGen identity
@@ -886,7 +886,7 @@ textures/base_floor/skylight1
 		map textures/base_floor/skylight1.tga
 		blendfunc gl_dst_color gl_zero
                 rgbGen identity
-	}	
+	}
         {
 		map textures/base_floor/skylight1_lm.tga
 		blendfunc GL_ONE GL_ONE
@@ -897,12 +897,12 @@ textures/base_floor/skylight1
 		blendfunc GL_ONE GL_ONE
                 rgbgen wave triangle .2 5 1 5.1
 	}
-    	
+
 }
 /////////////////////////////
 //     Shiny Skylight      //
 /////////////////////////////
- 
+
 textures/base_floor/skylight_spec
 {
 	{
@@ -918,7 +918,7 @@ textures/base_floor/skylight_spec
 }
 //
 //***************************************************************
-//  This texture has a detail layer that is used to apply a 
+//  This texture has a detail layer that is used to apply a
 //  smeary, dirty overlay to the diamond metal floor texture
 //***************************************************************
 textures/base_floor/diamond_dirty
@@ -947,7 +947,7 @@ textures/base_floor/diamond_dirty
 }
 textures/base_floor/clangdark
 {
-	surfaceparm	metalsteps		
+	surfaceparm	metalsteps
 
 	// metal that makes metalsteps sound
 	{
@@ -964,7 +964,7 @@ textures/base_floor/clangdark
 }
 textures/base_floor/clangdark_ow
 {
-	surfaceparm	metalsteps		
+	surfaceparm	metalsteps
 
 	// metal that makes metalsteps sound
 	{
@@ -981,7 +981,7 @@ textures/base_floor/clangdark_ow
 }
 textures/base_floor/diamond_noisy
 {
-	surfaceparm	metalsteps		
+	surfaceparm	metalsteps
 
 	// metal that makes metalsteps sound
 	{
@@ -996,8 +996,8 @@ textures/base_floor/diamond_noisy
 }
 textures/base_floor/proto_grate
 {
-	surfaceparm	metalsteps	
-        surfaceparm trans		
+	surfaceparm	metalsteps
+        surfaceparm trans
 	cull none
         nopicmip
 
@@ -1019,8 +1019,8 @@ textures/base_floor/proto_grate
 }
 textures/base_floor/proto_grate2
 {
-	surfaceparm	metalsteps	
-        surfaceparm trans		
+	surfaceparm	metalsteps
+        surfaceparm trans
 	cull none
         nopicmip
 
@@ -1042,8 +1042,8 @@ textures/base_floor/proto_grate2
 }
 textures/base_floor/proto_grate3
 {
-	surfaceparm	metalsteps	
-        surfaceparm trans		
+	surfaceparm	metalsteps
+        surfaceparm trans
 	cull none
         nopicmip
 	// A GRATE OR GRILL THAT CAN BE SEEN FROM BOTH SIDES
@@ -1064,8 +1064,8 @@ textures/base_floor/proto_grate3
 }
 textures/base_floor/proto_grate4
 {
-	surfaceparm	metalsteps	
-        surfaceparm trans		
+	surfaceparm	metalsteps
+        surfaceparm trans
 	surfaceparm nonsolid  //Tim's fuckage
 	cull none
         nopicmip
@@ -1090,8 +1090,8 @@ textures/base_floor/proto_grate4
 textures/base_floor/kc_grate4b
 {
 	surfaceparm	metalsteps
-	surfaceparm alphashadow	
-        surfaceparm trans		
+	surfaceparm alphashadow
+        surfaceparm trans
 	surfaceparm nonsolid
 	cull none
        // nopicmip
@@ -1114,8 +1114,8 @@ textures/base_floor/kc_grate4b
 
 textures/base_floor/proto_grate5
 {
-	surfaceparm	metalsteps	
-        surfaceparm trans		
+	surfaceparm	metalsteps
+        surfaceparm trans
 	cull none
         nopicmip
 	// A GRATE OR GRILL THAT CAN BE SEEN FROM BOTH SIDES
@@ -1136,8 +1136,8 @@ textures/base_floor/proto_grate5
 }
 textures/base_floor/proto_skullgrate
 {
-	surfaceparm	metalsteps	
-        surfaceparm trans		
+	surfaceparm	metalsteps
+        surfaceparm trans
 	cull none
         nopicmip
 	// A GRATE OR GRILL THAT CAN BE SEEN FROM BOTH SIDES
@@ -1158,8 +1158,8 @@ textures/base_floor/proto_skullgrate
 }
 textures/base_floor/proto_rustygrate
 {
-	surfaceparm	metalsteps	
-    surfaceparm trans	
+	surfaceparm	metalsteps
+    surfaceparm trans
 	surfaceparm alphashadow
 	cull none
         nopicmip
@@ -1181,8 +1181,8 @@ textures/base_floor/proto_rustygrate
 }
 textures/base_floor/rusty_pentagrate
 {
-	surfaceparm	metalsteps	
-    surfaceparm trans		
+	surfaceparm	metalsteps
+    surfaceparm trans
     surfaceparm alphashadow
 
 	cull none
@@ -1205,8 +1205,8 @@ textures/base_floor/rusty_pentagrate
 }
 textures/base_floor/rusty_baphograte
 {
-	surfaceparm	metalsteps	
-        surfaceparm trans		
+	surfaceparm	metalsteps
+        surfaceparm trans
 	cull none
         nopicmip
 	// A RUSTY and Eeevil grate THAT CAN BE SEEN FROM BOTH SIDES
@@ -1234,11 +1234,11 @@ textures/base_floor/rusty_baphograte
 		blendFunc GL_ONE GL_ONE
 		rgbgen wave inversesawtooth 0 1 .4 .5
 	}
-    
+
 }
 textures/base_floor/pjgrate1
 {
-	surfaceparm	metalsteps		
+	surfaceparm	metalsteps
 	cull none
 
 	// A GRATE OR GRILL THAT CAN BE SEEN FROM BOTH SIDES
@@ -1259,7 +1259,7 @@ textures/base_floor/pjgrate1
 }
 textures/base_floor/pjgrate2
 {
-	surfaceparm	metalsteps		
+	surfaceparm	metalsteps
 	cull none
 
 	// A RUSTED GRATE THAT CAN BE SEEN FROM BOTH SIDES

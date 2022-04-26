@@ -1,7 +1,7 @@
 
 textures/liquids/protolava
 {
-	
+
 	q3map_globaltexture
 	surfaceparm trans
 	//surfaceparm nonsolid
@@ -10,11 +10,11 @@ textures/liquids/protolava
 	surfaceparm nolightmap
 	q3map_surfacelight 600
 	cull disable
-	
+
 	tesssize 128
 	cull disable
 	deformVertexes wave 100 sin 3 2 .1 0.1
-	
+
         {
 		map textures/liquids/protolava2.tga
                 tcmod scale .2 .2
@@ -33,10 +33,10 @@ textures/liquids/protolava
 
 textures/liquids/slime2
 	{
-	//	*************************************************		
+	//	*************************************************
 	//	* SLIME Feb 11 1999 				*
 	//	* IF YOU CHANGE THIS PLEASE COMMENT THE CHANGE	*
-	//	*************************************************	
+	//	*************************************************
 
 		// Added to g3map_global texture on May 11, 1999
 		qer_editorimage textures/liquids/slime7e.tga
@@ -46,19 +46,19 @@ textures/liquids/slime2
 
 		surfaceparm noimpact
 		surfaceparm lava
-		surfaceparm trans		
+		surfaceparm trans
 
 		q3map_surfacelight 2000
 		tessSize 64
 		cull disable
 		deformVertexes wave 100 sin 2 4 0 .5
-		
-		
-		{	
+
+
+		{
 			map $lightmap
 			rgbgen identity
 		}
-		
+
 
 		{
 			map textures/liquids/slime7e.tga
@@ -70,7 +70,7 @@ textures/liquids/slime2
 		}
 
 
-		
+
 		{
 			map textures/liquids/slime7e4.tga
 			blendfunc add
@@ -89,7 +89,7 @@ textures/liquids/watertest
 //	************************************************************
 //	*      Water test with environmentmap. Created September 21*
 //	************************************************************
-	
+
 	{
 		qer_editorimage textures/liquids/pool3d_3b.tga
 		qer_trans .5
@@ -111,7 +111,7 @@ textures/liquids/watertest
 			tcMod scroll .05 .05
 		}
 
-		
+
 
 
 
@@ -132,11 +132,11 @@ textures/liquids/flatripplewater_1500
 	surfaceparm nolightmap
 	q3map_surfacelight 500
 	cull disable
-	
+
 //	tesssize 128
 //	cull disable
 	deformVertexes wave 100 sin 3 2 .1 0.1
-	
+
 	{
 		map textures/liquids/pool2.tga
 		tcMod turb 0 .2 0 .1
@@ -160,7 +160,7 @@ textures/liquids/xctf_painwater
 		deformVertexes wave 100 sin 1 1 1 .1
 		{
 			map textures/liquids/pool2.tga
-			blendfunc GL_ONE GL_SRC_COLOR	
+			blendfunc GL_ONE GL_SRC_COLOR
 			tcMod scale .03 .03
 			tcMod scroll .001 .001
 		}
@@ -186,7 +186,7 @@ textures/liquids/clear_calm1
 //	*********************************************************
 //	*      Medium clear calm water. Created September 9	*
 //	*********************************************************
-		
+
 	{
 		qer_editorimage textures/liquids/pool3d_3e.tga
 		qer_trans .5
@@ -194,32 +194,32 @@ textures/liquids/clear_calm1
 		surfaceparm trans
 		surfaceparm nonsolid
 		surfaceparm water
-	
+
 		cull disable
-		deformVertexes wave 64 sin .25 .25 0 .5	
-		{ 
+		deformVertexes wave 64 sin .25 .25 0 .5
+		{
 			map textures/liquids/pool3d_5e.tga
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
 			tcmod scale .5 .5
 			tcmod scroll .025 .01
 		}
-	
-		{ 
+
+		{
 			map textures/liquids/pool3d_3e.tga
 			blendFunc GL_dst_color GL_one
 			tcmod scale -.5 -.5
 			tcmod scroll .025 .025
 		}
 
-	
+
 		{
 			map $lightmap
 			blendFunc GL_dst_color GL_zero
-			rgbgen identity		
+			rgbgen identity
 		}
-	
-	
+
+
 
 //	END
 	}
@@ -229,7 +229,7 @@ textures/liquids/clear_ripple3
 //	*********************************************************
 //	*      Medium clear ripple water. Created September 9	*
 //	*********************************************************
-		
+
 	{
 		qer_editorimage textures/liquids/pool3d_3c.tga
 		qer_trans .5
@@ -237,11 +237,11 @@ textures/liquids/clear_ripple3
 		surfaceparm trans
 		surfaceparm nonsolid
 		surfaceparm water
-	
+
 		cull disable
-		deformVertexes wave 64 sin .5 .5 0 .5	
-		
-		{ 
+		deformVertexes wave 64 sin .5 .5 0 .5
+
+		{
 			map textures/liquids/pool3d_5c.tga
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
@@ -249,8 +249,8 @@ textures/liquids/clear_ripple3
 			tcmod transform 1.5 0 1.5 1 1 2
 			tcmod scroll -.05 .001
 		}
-	
-		{ 
+
+		{
 			map textures/liquids/pool3d_6c.tga
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
@@ -259,20 +259,20 @@ textures/liquids/clear_ripple3
 			tcmod scroll .025 -.001
 		}
 
-		{ 
+		{
 			map textures/liquids/pool3d_3c.tga
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
 			tcmod scale .25 .5
 			tcmod scroll .001 .025
 		}
-	
+
 		{
 			map $lightmap
 			blendFunc GL_dst_color GL_zero
-			rgbgen identity		
+			rgbgen identity
 		}
-	
+
 
 //	END
 	}
@@ -283,7 +283,7 @@ textures/liquids/clear_ripple2
 //	*********************************************************
 //	*      Small clear ripple water. Created September 9	*
 //	*********************************************************
-	
+
 	{
 		qer_editorimage textures/liquids/pool3d_3b.tga
 		qer_trans .5
@@ -293,9 +293,9 @@ textures/liquids/clear_ripple2
 		surfaceparm water
 
 		cull disable
-		deformVertexes wave 64 sin .5 .5 0 .5	
+		deformVertexes wave 64 sin .5 .5 0 .5
 
-		{ 
+		{
 			map textures/liquids/pool3d_5b.tga
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
@@ -303,8 +303,8 @@ textures/liquids/clear_ripple2
 			tcmod transform 1.5 0 1.5 1 1 2
 			tcmod scroll -.05 .001
 		}
-	
-		{ 
+
+		{
 			map textures/liquids/pool3d_6b.tga
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
@@ -313,7 +313,7 @@ textures/liquids/clear_ripple2
 			tcmod scroll .025 -.001
 		}
 
-		{ 
+		{
 			map textures/liquids/pool3d_3b.tga
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
@@ -324,9 +324,9 @@ textures/liquids/clear_ripple2
 		{
 			map $lightmap
 			blendFunc GL_dst_color GL_zero
-			rgbgen identity		
+			rgbgen identity
 		}
-	
+
 
 //	END
 	}
@@ -337,7 +337,7 @@ textures/liquids/clear_ripple1
 //	*********************************************************
 //	*      Large clear ripple water. Created September 9	*
 //	*********************************************************
-	
+
 	{
 		qer_editorimage textures/liquids/pool3d_3.tga
 		qer_trans .5
@@ -347,10 +347,10 @@ textures/liquids/clear_ripple1
 		surfaceparm water
 
 		cull disable
-		deformVertexes wave 64 sin .5 .5 0 .5	
-	
-		
-		{ 
+		deformVertexes wave 64 sin .5 .5 0 .5
+
+
+		{
 			map textures/liquids/pool3d_5.tga
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
@@ -358,8 +358,8 @@ textures/liquids/clear_ripple1
 			tcmod transform 1.5 0 1.5 1 1 2
 			tcmod scroll -.05 .001
 		}
-	
-		{ 
+
+		{
 			map textures/liquids/pool3d_6.tga
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
@@ -368,18 +368,18 @@ textures/liquids/clear_ripple1
 			tcmod scroll .025 -.001
 		}
 
-		{ 
+		{
 			map textures/liquids/pool3d_3.tga
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
 			tcmod scale .25 .5
 			tcmod scroll .001 .025
-		}	
+		}
 
 		{
 			map $lightmap
 			blendFunc GL_dst_color GL_zero
-			rgbgen identity		
+			rgbgen identity
 		}
 //	END
 	}
@@ -389,7 +389,7 @@ textures/liquids/clear_ripple1_q3dm1
 //	*********************************************************
 //	*      Large clear ripple water. Created September 9	*
 //	*********************************************************
-	
+
 	{
 		qer_editorimage textures/liquids/pool3d_3.tga
 		qer_trans .5
@@ -399,10 +399,10 @@ textures/liquids/clear_ripple1_q3dm1
 		surfaceparm water
 
 		cull disable
-		deformVertexes wave 64 sin .5 .5 0 .5	
-	
-		
-		{ 
+		deformVertexes wave 64 sin .5 .5 0 .5
+
+
+		{
 			map textures/liquids/pool3d_5.tga
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
@@ -410,8 +410,8 @@ textures/liquids/clear_ripple1_q3dm1
 			tcmod transform 1.5 0 1.5 1 1 2
 			tcmod scroll -.05 .001
 		}
-	
-		{ 
+
+		{
 			map textures/liquids/pool3d_6.tga
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
@@ -420,18 +420,18 @@ textures/liquids/clear_ripple1_q3dm1
 			tcmod scroll .025 -.001
 		}
 
-		{ 
+		{
 			map textures/liquids/pool3d_3.tga
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
 			tcmod scale .25 .5
 			tcmod scroll .001 .025
-		}	
+		}
 
 		{
 			map $lightmap
 			blendFunc GL_dst_color GL_zero
-			rgbgen identity		
+			rgbgen identity
 		}
 //	END
 	}
@@ -458,20 +458,20 @@ textures/liquids/mercury
 		blendFunc GL_ONE GL_ONE
 		rgbGen identity
 	}
-       
+
         {
 		map textures/liquids/mercury.tga
 		//blendFunc GL_ONE GL_ONE
                 blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
-	}       
+	}
 }
 textures/liquids/proto_spec
 {
        // tesssize 128
 	cull disable
 	//deformVertexes wave 100 sin 3 2 .1 2
-         
+
 
 	{
                 map $lightmap
@@ -480,7 +480,7 @@ textures/liquids/proto_spec
 		tcgen environment
 		 tcmod scale .25 .25
                 //tcmod scroll -.05 -.5
-		rgbgen identity      
+		rgbgen identity
 	}
         // {
 	//	map textures/liquids/proto_gruel2.tga
@@ -497,8 +497,8 @@ textures/liquids/proto_spec
 	//	rgbGen identity
 	//	alphaGen lightingSpecular
 	//}
-		
-	
+
+
 	{
 		map textures/liquids/proto_spec.tga
                 tcmod scroll .01 .02
@@ -511,17 +511,17 @@ textures/liquids/proto_spec
 			tcMod scale .2 .2
 			tcMod scroll .01 .02
         }
-       
+
 
 	{
 		map $lightmap
                 //blendFunc GL_ONE GL_ONE
     		rgbgen identity
 	        blendFunc GL_DST_COLOR GL_ZERO
-               
+
 	}
 
-			
+
 }
 
 textures/liquids/lavahell
@@ -535,18 +535,18 @@ textures/liquids/lavahell
 	surfaceparm nolightmap
 	q3map_surfacelight 600
 	cull disable
-	
+
 	tesssize 128
 	cull disable
 	deformVertexes wave 100 sin 3 2 .1 0.1
-	
+
 	{
 		map textures/liquids/lavahell.tga
 		tcMod turb 0 .2 0 .1
 	}
 
 
-	
+
 //	END
 }
 
@@ -563,16 +563,16 @@ textures/liquids/lavahell_xdm1
 	surfaceparm nolightmap
 	q3map_surfacelight 600
 	cull disable
-	
+
 	tesssize 128
 	cull disable
 	deformVertexes wave 100 sin 3 2 .1 0.1
-	
+
 	{
 		map textures/liquids/lavahell.tga
 		tcMod turb 0 .2 0 .1
 	}
-	
+
 //	END
 }
 
@@ -588,11 +588,11 @@ textures/liquids/lavahell_1000
 	surfaceparm nolightmap
 	q3map_surfacelight 1000
 	cull disable
-	
+
 	tesssize 128
 	cull disable
 	deformVertexes wave 100 sin 3 2 .1 0.1
-	
+
 	{
 		map textures/liquids/lavahell.tga
 		tcMod turb 0 .2 0 .1
@@ -611,11 +611,11 @@ textures/liquids/lavahell_2000
 	surfaceparm nolightmap
 	q3map_surfacelight 2000
 	cull disable
-	
+
 	tesssize 128
 	cull disable
 	deformVertexes wave 100 sin 3 2 .1 0.1
-	
+
 	{
 		map textures/liquids/lavahell.tga
 		tcMod turb 0 .2 0 .1
@@ -634,11 +634,11 @@ textures/liquids/lavahell_750
 	surfaceparm nolightmap
 	q3map_surfacelight 500
 	cull disable
-	
+
 	tesssize 128
 	cull disable
 	deformVertexes wave 100 sin 3 2 .1 0.1
-	
+
 	{
 		map textures/liquids/lavahell.tga
 		tcMod turb 0 .2 0 .1
@@ -658,16 +658,16 @@ textures/liquids/flatlavahell_1500
 	surfaceparm nolightmap
 	q3map_surfacelight 1500
 	cull disable
-	
+
 //	tesssize 128
 //	cull disable
 	deformVertexes wave 100 sin 3 2 .1 0.1
-	
+
 	{
 		map textures/liquids/lavahell.tga
 		tcMod turb 0 .2 0 .1
 	}
-       
+
 }
 
 
@@ -683,11 +683,11 @@ textures/liquids/lavahell_2500
 	surfaceparm nolightmap
 	q3map_surfacelight 2500
 	cull disable
-	
+
 	tesssize 128
 	cull disable
 	deformVertexes wave 100 sin 3 2 .1 0.1
-	
+
 	{
 		map textures/liquids/lavahell.tga
 		tcMod turb 0 .2 0 .1
@@ -706,16 +706,16 @@ textures/liquids/lavahelldark
 	surfaceparm nolightmap
 	q3map_surfacelight 150
 	cull disable
-	
+
 	tesssize 128
 	cull disable
 	deformVertexes wave 100 sin 3 2 .1 0.1
-	
+
 	{
 		map textures/liquids/lavahell.tga
 		tcMod turb 0 .2 0 .1
 	}
-	
+
 //	END
 }
 
@@ -731,16 +731,16 @@ textures/liquids/lavahellflat_400
 	surfaceparm nolightmap
 	q3map_surfacelight 400
 	cull disable
-	
+
 	tesssize 128
 	cull disable
 	//deformVertexes wave 100 sin 3 2 .1 0.1
-	
+
 	{
 		map textures/liquids/lavahell.tga
 		tcMod turb 0 .2 0 .1
 	}
-	
+
 //	END
 }
 
@@ -786,16 +786,16 @@ textures/liquids/calm_pool
 		cull disable
 		tesssize 64
 		deformVertexes wave 100 sin 1 1 1 .1
-		
-	
-	
+
+
+
 		{
 			map textures/liquids/pool2.tga
-			blendfunc GL_ONE GL_SRC_COLOR	
+			blendfunc GL_ONE GL_SRC_COLOR
 			tcMod scale .03 .03
 			tcMod scroll .001 .001
 		}
-	
+
 		{
 			map textures/liquids/pool3.tga
 			blendfunc GL_DST_COLOR GL_ONE
@@ -828,16 +828,16 @@ textures/liquids/ps_bloodwater1
 		cull disable
 		tesssize 64
 		deformVertexes wave 100 sin 1 1 1 .1
-		
-	
-	
+
+
+
 		{
 			map textures/liquids/ps_bloodwater1.tga
-			blendfunc GL_ONE GL_SRC_COLOR	
+			blendfunc GL_ONE GL_SRC_COLOR
 			tcMod scale .03 .03
 			tcMod scroll .001 .001
 		}
-	
+
 		{
 			map textures/liquids/ps_bloodwater1.tga
 			blendfunc GL_DST_COLOR GL_ONE
@@ -859,7 +859,7 @@ textures/liquids/calm_poollight
 		//	* IF YOU CHANGE THIS PLEASE COMMENT THE CHANGE	*
 		//	*************************************************
 
-	
+
 		qer_editorimage textures/liquids/pool3d_4b.tga
 		q3map_globaltexture
 		qer_trans .75
@@ -873,10 +873,10 @@ textures/liquids/calm_poollight
 		cull disable
 		tesssize 64
 		deformVertexes wave 100 sin 1 1 1 .1
-		
-	
-	
-		{ 
+
+
+
+		{
 			map textures/liquids/pool3d_5c2.tga
 			blendFunc GL_dst_color GL_zero
 			rgbgen identity
@@ -884,8 +884,8 @@ textures/liquids/calm_poollight
 			tcmod transform 1.5 0 1.5 1 1 2
 			tcmod scroll -.05 .001
 		}
-	
-		{ 
+
+		{
 			map textures/liquids/pool3d_6c2.tga
 			blendFunc GL_dst_color GL_zero
 			rgbgen identity
@@ -894,7 +894,7 @@ textures/liquids/calm_poollight
 			tcmod scroll .025 -.001
 		}
 
-		{ 
+		{
 			map textures/liquids/pool3d_3c2.tga
 			blendFunc GL_dst_color GL_zero
 			rgbgen identity
@@ -904,7 +904,7 @@ textures/liquids/calm_poollight
 		{
 			map textures/liquids/pool3d_4b2.tga
 			blendfunc add
-			tcmod scale .125 .125	
+			tcmod scale .125 .125
 			rgbgen identity
 		}
 
@@ -932,10 +932,10 @@ textures/liquids/calm_pool2
 		cull disable
 		tesssize 64
 		deformVertexes wave 100 sin 1 1 1 .1
-		
-	
-	
-			
+
+
+
+
 
 		{
 			map textures/liquids/pool2.tga
@@ -943,9 +943,9 @@ textures/liquids/calm_pool2
 			tcMod scale .03 .03
 			tcMod scroll .001 .001
 		}
-	
+
 		{
-			map textures/liquids/pool3.tga 
+			map textures/liquids/pool3.tga
 			blendfunc GL_DST_COLOR GL_one
 			tcMod scale .5 .5
 			tcMod scroll -.025 .02
@@ -955,7 +955,7 @@ textures/liquids/calm_pool2
 			map $lightmap
 			blendfunc GL_dst_color GL_one
 			tcmod turb 0 .001 0 1
-		}	
+		}
 
 		{
 			map textures/liquids/pj_e3_reflection.tga
@@ -963,7 +963,7 @@ textures/liquids/calm_pool2
 			tcgen environment
 		}
 
-			
+
 
 
 
@@ -986,22 +986,22 @@ textures/liquids/pool
 		surfaceparm water
 		surfaceparm nolightmap
 
-		q3map_globaltexture		
+		q3map_globaltexture
 		// so the scMod scales work properly 5/11/99
 
 		cull disable
 		tesssize 64
 		deformVertexes wave 100 sin 1 1 1 .1
-		
-	
-	
+
+
+
 		{
 			map textures/liquids/pool2.tga
-			blendfunc GL_ONE GL_SRC_COLOR	
+			blendfunc GL_ONE GL_SRC_COLOR
 			tcMod scale .03 .03
 			tcMod scroll .001 .001
 		}
-	
+
 		{
 			map textures/liquids/pool.tga
 			blendfunc GL_DST_COLOR GL_ONE
@@ -1010,7 +1010,7 @@ textures/liquids/pool
 			rgbGen wave sin .5 .5 0 .05
 			tcMod scroll -.001 .001
 		}
-	
+
 		{
 			map textures/liquids/pool3.tga
 			blendfunc GL_DST_COLOR GL_ONE
@@ -1018,7 +1018,7 @@ textures/liquids/pool
 			tcMod scale .5 .5
 			tcMod scroll -.025 .02
 		}
-	
+
 		{
 			map textures/liquids/pool4.tga
 			blendfunc GL_DST_COLOR GL_ONE
@@ -1031,7 +1031,7 @@ textures/liquids/pool
 
 		//	END
 	}
-	
+
 textures/liquids/calm_pool_bgtess
 	{
 		//	*************************************************
@@ -1053,16 +1053,16 @@ textures/liquids/calm_pool_bgtess
 		cull disable
 		tesssize 256
 		deformVertexes wave 256 sin 1 1 1 .1
-		
-	
-	
+
+
+
 		{
 			map textures/liquids/pool2.tga
-			blendfunc GL_ONE GL_SRC_COLOR	
+			blendfunc GL_ONE GL_SRC_COLOR
 			tcMod scale .03 .03
 			tcMod scroll .001 .001
 		}
-	
+
 		{
 			map textures/liquids/pool3.tga
 			blendfunc GL_DST_COLOR GL_ONE
@@ -1085,7 +1085,7 @@ textures/liquids/ripplewater2
 		// Added to g3map_global texture on May 11, 1999
 		q3map_globaltexture
 		qer_trans .5
-	
+
 		surfaceparm trans
 		surfaceparm nonsolid
 		surfaceparm water
@@ -1097,15 +1097,15 @@ textures/liquids/ripplewater2
 
 		tesssize 64
 		deformVertexes wave 100 triangle 2 2 1 0.1
-		
+
 		{
 			map textures/liquids/ripplewater3.tga
-			blendfunc GL_ONE GL_SRC_COLOR	
+			blendfunc GL_ONE GL_SRC_COLOR
 			tcMod scale .05 .05
 			tcGen environment
 			tcMod scroll .001 .001
 		}
-	
+
 		{
 			map textures/liquids/ripplewater2.tga
 			blendfunc GL_DST_COLOR GL_ONE
@@ -1121,9 +1121,9 @@ textures/liquids/ripplewater2
 			tcMod scale .5 .5
 			tcMod stretch sin 1 .1 0 .01
 			tcMod scroll 0 .025
-		}	
+		}
 
-		
+
 
 		//	END
 	}
@@ -1133,7 +1133,7 @@ textures/liquids/proto_pool3
 		///////////////////////////////////////////
 		//   Water Fuckage June 18 99 Kenneth	 //
 		///////////////////////////////////////////
-                
+
 		q3map_globaltexture
 	    	qer_trans .80
                 surfaceparm trans
@@ -1143,14 +1143,14 @@ textures/liquids/proto_pool3
 		cull disable
                 // tesssize 256
 	        //deformVertexes wave 100 sin 1 5 .1 .5
-	        
-		
+
+
 		{
 			map textures/liquids/proto_pool3.tga
 			blendfunc GL_ONE GL_ONE //SRC_COLOR
 			tcMod scale 1 1
 			tcMod scroll .02 .02
-                       
+
 		}
 	        {
 			map textures/liquids/proto_poolpass2.tga
@@ -1169,8 +1169,8 @@ textures/liquids/proto_pool3
 			rgbgen identity
 			blendfunc GL_DST_COLOR GL_ZERO
                 }
-               
-		
+
+
 
 		//	END
 	}
@@ -1179,23 +1179,23 @@ textures/liquids/proto_pool3
 		///////////////////////////////////////////
 	        //Electric Slime. FOUR passes of FURY ---//
 		///////////////////////////////////////////
-                
+
 		q3map_globaltexture
 	    	//qer_editorimage textures/liquids/proto_pool3.tga
                  q3map_lightimage textures/liquids/proto_pool3.tga
-	        q3map_globaltexture	
+	        q3map_globaltexture
 	        q3map_surfacelight 240
 		// tesssize 256
 	        //deformVertexes wave 100 sin 1 5 .1 .5
 	        surfaceparm slime
-		
+
 		{
 	        	map textures/liquids/proto_gruel2.tga
 		        //tcMod scale 1 1
                          tcMod scale .5 .6
 			//tcMod scroll .4 .01
                         tcMod turb .1 .25 0 -.1
-                       
+
 		}
 	       //{
 		//	map textures/liquids/proto_poolpass2.tga
@@ -1225,7 +1225,7 @@ textures/liquids/proto_pool3
                         tcmod rotate 290
                         //rgbgen wave sin .1 1 5 .1
 		}
-		
+
 
 		//	END
 	}
@@ -1234,23 +1234,23 @@ textures/liquids/jello
 		///////////////////////////////////////////
 	        //DANGER JELLO! FOUR passes of FURY ---  //
 		///////////////////////////////////////////
-                
+
 		q3map_globaltexture
 	    	//qer_editorimage textures/liquids/proto_pool3.tga
                  q3map_lightimage textures/liquids/proto_pool3.tga
-	        q3map_globaltexture	
+	        q3map_globaltexture
 	        q3map_surfacelight 240
 		// tesssize 256
 	        //deformVertexes wave 100 sin 1 5 .1 .5
 	        surfaceparm slime
-		
+
 		{
 	        	map textures/liquids/jello.tga
 		        //tcMod scale 1 1
                          tcMod scale .5 .6
 			//tcMod scroll .4 .01
                         tcMod turb .1 .25 0 -.1
-                       
+
 		}
 	        {
 			map textures/liquids/jello2.tga
@@ -1273,7 +1273,7 @@ textures/liquids/jello
                         tcmod rotate 296
                         //rgbgen wave sin .1 1 5 .1
 		}
-		
+
 
 		//	END
 	}
@@ -1282,15 +1282,15 @@ textures/liquids/jello
 		///////////////////////////////////////////
 		//   Slimage June 22 99 Kenneth	         //
 		///////////////////////////////////////////
-                
+
 		q3map_globaltexture
 	     // qer_trans .001
                 surfaceparm trans
 		surfaceparm nonsolid
 		surfaceparm water
                 cull disable
-	        
-		
+
+
 		{
 			map textures/liquids/proto_slime.tga
 		        alphaFunc GE128
@@ -1298,14 +1298,14 @@ textures/liquids/jello
 		        //rgbGen vertex
 			tcMod scale 1 1
 			tcMod scroll .02 .02
-                       
+
 		}
 	        {
 		        map $lightmap
 			rgbgen identity
 			blendfunc GL_DST_COLOR GL_ZERO
                 }
-		
+
 
 		//	END
 	}
@@ -1323,14 +1323,14 @@ textures/liquids/proto_gruel
 		cull disable
                 //tesssize 256
 	        //deformVertexes wave 100 sin 1 5 .1 .5
-	        
-		
+
+
 		{
 			map textures/liquids/proto_gruel.tga
 			// blendfunc GL_ONE GL_ONE
 			tcMod scale 1 1
 			tcMod scroll .02 .02
-                       
+
 		}
 	        {
 			map textures/liquids/proto_gruel.tga
@@ -1349,7 +1349,7 @@ textures/liquids/proto_gruel
 			rgbgen identity
 			blendfunc GL_DST_COLOR GL_ZERO
                 }
-		
+
         }
 textures/liquids/xripplewater2
 	{
@@ -1363,7 +1363,7 @@ textures/liquids/xripplewater2
 		q3map_surfacelight 600
 		q3map_globaltexture
 		qer_trans .5
-	
+
 		surfaceparm trans
 		surfaceparm nonsolid
 		surfaceparm water
@@ -1372,18 +1372,18 @@ textures/liquids/xripplewater2
 		// JDC, testing backshader cull disable
 		tesssize 64
 		deformVertexes wave 100 triangle 2 2 1 0.1
-		
+
 		surfaceparm fog
 		fogparms ( 0.3 0.3 1.0 ) 512
 
 		{
 			map textures/liquids/ripplewater3.tga
-			blendfunc GL_ONE GL_SRC_COLOR	
+			blendfunc GL_ONE GL_SRC_COLOR
 			tcMod scale .05 .05
 			tcGen environment
 			tcMod scroll .001 .001
 		}
-	
+
 		{
 			map textures/liquids/ripplewater2.tga
 			blendfunc GL_DST_COLOR GL_ONE
@@ -1399,9 +1399,9 @@ textures/liquids/xripplewater2
 			tcMod scale .5 .5
 			tcMod stretch sin 1 .1 0 .01
 			tcMod scroll 0 .025
-		}	
+		}
 
-		
+
 
 		//	END
 	}
@@ -1447,16 +1447,16 @@ textures/liquids/ripplewater2a
 		cull disable
 		tesssize 128
 		deformVertexes wave 100 triangle 2 2 1 0.1
-		
+
 
 		{
 			map textures/liquids/ripplewater3.tga
-			blendfunc GL_ONE GL_SRC_COLOR	
+			blendfunc GL_ONE GL_SRC_COLOR
 			tcMod scale .05 .05
 			tcGen environment
 			tcMod scroll .001 .001
 		}
-	
+
 		{
 			map textures/liquids/ripplewater2.tga
 			blendfunc GL_DST_COLOR GL_ONE
@@ -1472,16 +1472,16 @@ textures/liquids/ripplewater2a
 			tcMod scale .5 .5
 			tcMod stretch sin 1 .1 0 .01
 			tcMod scroll 0 .025
-		}	
+		}
 		//	END
 	}
 
 textures/liquids/slime1
 	{
-	//	*************************************************		
+	//	*************************************************
 	//	* SLIME Feb 11 1999 				*
 	//	* IF YOU CHANGE THIS PLEASE COMMENT THE CHANGE	*
-	//	*************************************************	
+	//	*************************************************
 
 		// Added to g3map_global texture on May 11, 1999
 		qer_editorimage textures/liquids/slime7.tga
@@ -1492,7 +1492,7 @@ textures/liquids/slime1
 		surfaceparm noimpact
 		surfaceparm slime
 		surfaceparm nolightmap
-		surfaceparm trans		
+		surfaceparm trans
 
 		q3map_surfacelight 100
 		tessSize 32
@@ -1505,7 +1505,7 @@ textures/liquids/slime1
 			tcMod turb .3 .2 1 .05
 			tcMod scroll .01 .01
 		}
-	
+
 		{
 			map textures/liquids/slime7.tga
 			blendfunc GL_ONE GL_ONE
@@ -1520,17 +1520,17 @@ textures/liquids/slime1
 			tcMod turb .2 .1 .1 .2
 			tcMod scale .05 .05
 			tcMod scroll .001 .001
-		}		
+		}
 
 		// 	END
 	}
 
 textures/liquids/slime1_2000
 	{
-	//	*************************************************		
+	//	*************************************************
 	//	* SLIME Feb 11 1999 				*
 	//	* IF YOU CHANGE THIS PLEASE COMMENT THE CHANGE	*
-	//	*************************************************	
+	//	*************************************************
 
 		// Added to g3map_global texture on May 11, 1999
 		qer_editorimage textures/liquids/slime7.tga
@@ -1541,7 +1541,7 @@ textures/liquids/slime1_2000
 		surfaceparm noimpact
 		surfaceparm slime
 		surfaceparm nolightmap
-		surfaceparm trans		
+		surfaceparm trans
 
 		q3map_surfacelight 2000
 		tessSize 32
@@ -1554,7 +1554,7 @@ textures/liquids/slime1_2000
 			tcMod turb .3 .2 1 .05
 			tcMod scroll .01 .01
 		}
-	
+
 		{
 			map textures/liquids/slime7.tga
 			blendfunc GL_ONE GL_ONE
@@ -1569,7 +1569,7 @@ textures/liquids/slime1_2000
 			tcMod turb .2 .1 .1 .2
 			tcMod scale .05 .05
 			tcMod scroll .001 .001
-		}		
+		}
 
 		// 	END
 	}
@@ -1582,14 +1582,14 @@ textures/liquids/lavacrust
 	//	* CRUSTY LAVA Feb 11 1999			*
 	//	* IF YOU CHANGE THIS PLEASE COMMENT THE CHANGE	*
 	//	*************************************************
-	// change 5/3 - lighting changed from 300 to 50	
+	// change 5/3 - lighting changed from 300 to 50
 	// change 5/5 - made lavacrust solid
 	// Added to g3map_global texture on May 11, 1999
 		q3map_globaltexture
 		surfaceparm trans
 		//surfaceparm lava
 
-		
+
 		q3map_surfacelight 50
 		q3map_lightimage textures/liquids/lava.tga
 
@@ -1617,7 +1617,7 @@ textures/liquids/lavacrust
 			rgbgen identity
 		}
 
-			
+
 		//	END
 	}
 
@@ -1631,7 +1631,7 @@ textures/liquids/bloodwater_pj
 	qer_editorimage textures/liquids/bloodwater.tga
 	q3map_globaltexture
 	qer_trans .5
-	
+
 	surfaceparm trans
 	surfaceparm nonsolid
 	surfaceparm water
@@ -1641,8 +1641,8 @@ textures/liquids/bloodwater_pj
 	tesssize 128
 	cull disable
 	deformVertexes wave 128 sin 1 1 .5 .5
-	
-	
+
+
 		{
 			map textures/liquids/bloodwater1.tga
 			blendFunc GL_ONE GL_ONE
@@ -1664,7 +1664,7 @@ textures/liquids/bloodwater_pj
 			tcMod scale .25 .25
 			tcMod scroll 0 .007
 		}
-	
+
 		//	END
 	}
 
@@ -1688,8 +1688,8 @@ textures/liquids/bloodwater
 	tesssize 64
 	cull disable
 	deformVertexes wave 100 sin 1 1 .5 .5
-	
-	
+
+
 		{
 			map textures/liquids/bloodwater1.tga
 			blendFunc GL_ONE GL_ONE
@@ -1711,7 +1711,7 @@ textures/liquids/bloodwater
 			tcMod scale .25 .25
 			tcMod scroll 0 .007
 		}
-	
+
 		//	END
 	}
 

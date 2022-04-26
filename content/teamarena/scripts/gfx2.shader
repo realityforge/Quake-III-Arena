@@ -4,7 +4,7 @@ console
 {
 	nopicmip
 	nomipmaps
-    
+
         {
 		map textures/sfx2/screen01.tga
                 blendFunc GL_ONE GL_ZERO
@@ -14,7 +14,7 @@ console
         {
 		map textures/effects2/console01.tga
                 blendFunc Add
-                tcMod scroll -.01  -.02 
+                tcMod scroll -.01  -.02
                 tcmod scale .02 .01
                 tcmod rotate 3
 	}
@@ -40,7 +40,7 @@ nailtrail
 	sort nearest
 	cull none
 	{
-		clampmap models/weaphits/nailtrail.tga 
+		clampmap models/weaphits/nailtrail.tga
 		blendFunc Add
 		rgbGen vertex
                 tcMod rotate -30

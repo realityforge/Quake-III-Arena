@@ -4,22 +4,22 @@ textures/sfx/blocks17g_jumpad
 	surfaceparm nodamage
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/blocks17g_jumpad.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -37,7 +37,7 @@ textures/sfx/dclogo
 	qer_editorimage textures/gothic_floor/largerblock3b.tga
 	nomipmaps
 
-	
+
 	{
 		map textures/base_floor/clangdark.tga
 		rgbGen identity
@@ -49,8 +49,8 @@ textures/sfx/dclogo
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
-	
+
+
 	{
 		clampmap textures/effects/dreamcast-logo2.tga
 		blendfunc gl_one gl_one
@@ -63,11 +63,11 @@ textures/sfx/dclogo
 
 
 textures/sfx/bullseye
-{ 
+{
         cull disable
-        //surfaceparm trans	
-        surfaceparm nomarks	
-        surfaceparm nolightmap 
+        //surfaceparm trans
+        surfaceparm nomarks
+        surfaceparm nolightmap
         deformVertexes autosprite
         //nomipmaps
 
@@ -82,7 +82,7 @@ textures/sfx/bullseye
 	        clampmap textures/gothic_block/blocks18cgeomtrn2.tga
 	        tcMod stretch sin .8 0.2 0 .3
                 tcmod rotate 70
-                alphaFunc GE128 
+                alphaFunc GE128
                 rgbGen identity
 	}
         {
@@ -103,11 +103,11 @@ textures/sfx/bullseye
 
 }
 textures/sfx/omm
-{ 
-    
-        surfaceparm trans	
+{
+
+        surfaceparm trans
 	surfaceparm alphashadow
-        surfaceparm nomarks	
+        surfaceparm nomarks
 	cull none
 
        {
@@ -125,11 +125,11 @@ textures/sfx/omm
        }
 }
 textures/sfx/dust_puppy2
-{ 
-    
-        surfaceparm trans	
+{
+
+        surfaceparm trans
 	surfaceparm alphashadow
-        surfaceparm nomarks	
+        surfaceparm nomarks
 	cull none
 
        {
@@ -260,7 +260,7 @@ textures/sfx/spawn_floor
 textures/sfx/fan3blade
 {
       cull disable
-      surfaceparm trans	
+      surfaceparm trans
 
         {
 	        clampmap textures/sfx/fan3blade.tga
@@ -278,7 +278,7 @@ textures/sfx/fan3blade
 textures/sfx/fan3bladeb
 {
       cull disable
-      surfaceparm trans	
+      surfaceparm trans
       surfaceparm nolightmap
       sort 5
         {
@@ -287,19 +287,19 @@ textures/sfx/fan3bladeb
                 tcmod rotate 999
 	        rgbGen identity
 	}
-        
+
 }
 textures/sfx/fan3
 {
        cull disable
-       surfaceparm alphashadow	
+       surfaceparm alphashadow
        sort 6
         {
 	        map textures/sfx/fan3.tga
 		blendFunc blend
 	        rgbGen identity
 	}
-        
+
         {
 		map $lightmap
 		rgbGen identity
@@ -309,8 +309,8 @@ textures/sfx/fan3
 
 textures/sfx/lavabeam
 {
-        surfaceparm trans	
-        surfaceparm nomarks	
+        surfaceparm trans
+        surfaceparm nomarks
         surfaceparm nonsolid
 	surfaceparm nolightmap
 	cull none
@@ -320,7 +320,7 @@ textures/sfx/lavabeam
                 tcMod Scroll 999 0
                 blendFunc add
         }
-     
+
 }
 textures/sfx/healthfloor
 {
@@ -375,8 +375,8 @@ textures/sfx/proto_zzztblu3
 textures/sfx/flametest
 {
         deformVertexes autoSprite2
-        surfaceparm trans	
-        surfaceparm nomarks	
+        surfaceparm trans
+        surfaceparm nomarks
 	surfaceparm nolightmap
         q3map_surfacelight 150
         cull none
@@ -386,33 +386,33 @@ textures/sfx/flametest
                 blendFunc GL_ONE GL_ONE
                 rgbgen identity
 	}
-       
-       
+
+
 }
 textures/sfx/bouncepad01_xarch
 {
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/bouncepad01_xarch.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -428,8 +428,8 @@ textures/sfx/bouncepad01_xarch
 
 textures/sfx/rain
 {
-        surfaceparm trans	
-        surfaceparm nomarks	
+        surfaceparm trans
+        surfaceparm nomarks
         surfaceparm nonsolid
 	surfaceparm nolightmap
         qer_trans .5
@@ -438,7 +438,7 @@ textures/sfx/rain
         deformVertexes wave 30 sin 0 10 0 .2
 	cull none
         //nopicmip
-       
+
 	{
 		map textures/sfx/rain.tga
                 tcMod Scroll .5 -8
@@ -448,11 +448,11 @@ textures/sfx/rain
         {
 		map textures/sfx/rain.tga
                 tcMod Scroll .01 -6.3
-               
+
                 blendFunc GL_ONE GL_ONE
         }
-       
-     
+
+
 }
 textures/sfx/largerblock3b3x128_pentred
 {
@@ -482,7 +482,7 @@ textures/sfx/largerblock3b3x128_pent
 	q3map_lightimage textures/sfx/pentagramfloor_blue3glowtest.tga
 	q3map_surfacelight 100
 	surfaceparm nomarks
-	
+
 	{
 		map $lightmap
 		rgbgen identity
@@ -518,7 +518,7 @@ textures/sfx/smallerblock3b3dim_pent
 	{
 		map textures/sfx/pentagramfloor_red_glow.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .5 .5 0 .5	
+		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
 }
@@ -526,17 +526,17 @@ textures/sfx/smallerblock3b3dim_pent
 textures/sfx/fishy
 {
     tesssize 32
-    deformVertexes wave 10 sin 0 3 0 .5  
+    deformVertexes wave 10 sin 0 3 0 .5
     cull disable
     surfaceparm nolightmap
-    surfaceparm nomarks	
-    
+    surfaceparm nomarks
+
         {
                 clampmap textures/sfx/fishy.tga
                 alphaFunc GE128
                 tcMod stretch sin .8 0.10 0 .07
 		depthWrite
-		
+
         }
 
 
@@ -553,18 +553,18 @@ textures/sfx/lightmap
 	surfaceparm	fog
 	fogparms ( .7 .1 .1 ) 64
 
-	
-	
+
+
 		{
 			map $lightmap
 			blendFunc GL_dst_color GL_one
 			tcmod scale 1 .01
-			tcMod scroll 1 -2		
+			tcMod scroll 1 -2
 		}
 
-	
 
-	
+
+
 }
 
 
@@ -583,8 +583,8 @@ textures/sfx/hellfog_pj_dm10
 	q3map_surfacelight 50
 	fogparms ( .5 .12 .1 ) 392
 
-	
-	
+
+
 	{
 		map textures/liquids/kc_fogcloud3.tga
 		blendfunc gl_dst_color gl_zero
@@ -621,8 +621,8 @@ textures/sfx/hellfog_mini_dm10
 	q3map_surfacelight 50
 	fogparms ( .5 .12 .1 ) 16
 
-	
-	
+
+
 	{
 		map textures/liquids/kc_fogcloud3.tga
 		blendfunc gl_dst_color gl_zero
@@ -673,8 +673,8 @@ textures/sfx/metalfloor_wall_15b_glow
 	q3map_lightimage textures/sfx/metalfloor_wall_15bglow.tga
 	q3map_surfacelight 100
 
-	
-	
+
+
 	{
 		map $lightmap
 		rgbgen identity
@@ -692,7 +692,7 @@ textures/sfx/metalfloor_wall_15b_glow
 		rgbgen wave sin .1 .05 1 1
 		blendfunc gl_one gl_one
 	}
-	
+
 }
 
 
@@ -740,7 +740,7 @@ textures/sfx/xbluefog
 	qer_editorimage textures/sfx/xdensegreyfog.tga
 	q3map_surfacelight 300
 	q3map_lightsubdivide 64
-	q3map_lightimage textures/sfx/xbluelightimage.tga	
+	q3map_lightimage textures/sfx/xbluelightimage.tga
 
 	surfaceparm	trans
 	surfaceparm	nonsolid
@@ -756,7 +756,7 @@ textures/sfx/xredfog
 	qer_editorimage textures/sfx/xdensegreyfog.tga
 	q3map_surfacelight 300
 	q3map_lightsubdivide 64
-	q3map_lightimage textures/sfx/xredlightimage.tga	
+	q3map_lightimage textures/sfx/xredlightimage.tga
 
 	surfaceparm	trans
 	surfaceparm	nonsolid
@@ -784,8 +784,8 @@ textures/sfx/xbluefogx128
 
 textures/sfx/beam
 {
-        surfaceparm trans	
-        surfaceparm nomarks	
+        surfaceparm trans
+        surfaceparm nomarks
         surfaceparm nonsolid
 	surfaceparm nolightmap
 	cull none
@@ -801,14 +801,14 @@ textures/sfx/beam
         //        tcMod Scroll -.3 0
         //        blendFunc GL_ONE GL_ONE
         // }
-     
+
 }
 
 textures/sfx/beam_dusty2
 {
 	qer_editorimage textures/sfx/beam.tga
-        surfaceparm trans	
-        surfaceparm nomarks	
+        surfaceparm trans
+        surfaceparm nomarks
         surfaceparm nonsolid
 	surfaceparm nolightmap
 	cull none
@@ -828,15 +828,15 @@ textures/sfx/beam_dusty2
    //      }
      	//{
 	//	map textures/sfx/beam_mask.tga
-        //        blendFunc GL_DST_COLOR GL_ONE_MINUS_SRC_COLOR  
+        //        blendFunc GL_DST_COLOR GL_ONE_MINUS_SRC_COLOR
       //	}
 }
 
 
 textures/sfx/beam_red
 {
-        surfaceparm trans	
-        surfaceparm nomarks	
+        surfaceparm trans
+        surfaceparm nomarks
         surfaceparm nonsolid
 	surfaceparm nolightmap
         qer_trans .5
@@ -848,15 +848,15 @@ textures/sfx/beam_red
                 tcMod Scroll .3 0
                 blendFunc add
         }
-     
+
 }
 
 textures/sfx/beam_blue
 	{
         qer_editorimage textures/sfx/beam_blue4.tga
 	//q3map_globaltexture
-	surfaceparm trans	
-        surfaceparm nomarks	
+	surfaceparm trans
+        surfaceparm nomarks
         surfaceparm nonsolid
 	surfaceparm nolightmap
         qer_trans .6
@@ -870,15 +870,15 @@ textures/sfx/beam_blue
 		tcMod Scroll .3 0
                 blendFunc add
         }
-     
+
 }
 
 textures/sfx/beam_waterlight1
 	{
         qer_editorimage textures/sfx/beam_waterlight.tga
 	q3map_globaltexture
-	surfaceparm trans	
-        surfaceparm nomarks	
+	surfaceparm trans
+        surfaceparm nomarks
         surfaceparm nonsolid
 	surfaceparm nolightmap
 	q3map_surfacelight 50
@@ -906,8 +906,8 @@ textures/sfx/beam_waterlight1
 	{
         qer_editorimage textures/sfx/beam_waterlight.tga
 	q3map_globaltexture
-	surfaceparm trans	
-        surfaceparm nomarks	
+	surfaceparm trans
+        surfaceparm nomarks
         surfaceparm nonsolid
 	surfaceparm nolightmap
 	q3map_surfacelight 50
@@ -935,8 +935,8 @@ textures/sfx/beam_waterlight2
 	{
         qer_editorimage textures/sfx/beam_waterlight.tga
 	q3map_globaltexture
-	surfaceparm trans	
-        surfaceparm nomarks	
+	surfaceparm trans
+        surfaceparm nomarks
         surfaceparm nonsolid
 	surfaceparm nolightmap
 	q3map_surfacelight 50
@@ -956,8 +956,8 @@ textures/sfx/beam_waterlight2
 textures/sfx/beam_dusty
 	{
         qer_editorimage textures/sfx/beam_3.tga
-	surfaceparm trans	
-        surfaceparm nomarks	
+	surfaceparm trans
+        surfaceparm nomarks
         surfaceparm nonsolid
 	surfaceparm nolightmap
         qer_trans .3
@@ -977,8 +977,8 @@ textures/sfx/beam_water
 	{
         qer_editorimage textures/sfx/beam_cyan4.tga
 	q3map_surfacelight 20
-	surfaceparm trans	
-        surfaceparm nomarks	
+	surfaceparm trans
+        surfaceparm nomarks
         surfaceparm nonsolid
 	surfaceparm nolightmap
         qer_trans .3
@@ -1004,8 +1004,8 @@ textures/sfx/beam_water2
 	{
         qer_editorimage textures/sfx/beam_cyan5.tga
 	q3map_surfacelight 10
-	surfaceparm trans	
-        surfaceparm nomarks	
+	surfaceparm trans
+        surfaceparm nomarks
         surfaceparm nonsolid
 	surfaceparm nolightmap
         qer_trans .3
@@ -1017,13 +1017,13 @@ textures/sfx/beam_water2
 		tcMod turb 0 0.045 0.5 0.03
 		tcMod Scroll .15 .015
                 blendFunc add
-        }  
+        }
 }
 
 textures/sfx/console01
 {
-        surfaceparm trans	
-        surfaceparm nomarks	
+        surfaceparm trans
+        surfaceparm nomarks
 	surfaceparm nolightmap
         qer_trans .5
         q3map_surfacelight 150
@@ -1032,22 +1032,22 @@ textures/sfx/console01
         //nopicmip
 	{
 		clampmap textures/sfx/console01.tga
-               
+
 		tcMod rotate 20
 		blendFunc GL_ONE GL_ONE
 	}
         {
 		clampmap textures/sfx/console02.tga
-                
+
 		tcMod rotate -200
 		blendFunc GL_ONE GL_ONE
 	}
-       
+
 }
 textures/sfx/console03
 {
-        surfaceparm trans	
-        surfaceparm nomarks	
+        surfaceparm trans
+        surfaceparm nomarks
 	surfaceparm nolightmap
         q3map_surfacelight 150
         q3map_lightimage textures/sfx/console03.tga
@@ -1055,19 +1055,19 @@ textures/sfx/console03
         //nopicmip
 	{
 		clampmap textures/sfx/console01.tga
-               
+
 		tcMod rotate 20
 		blendFunc GL_ONE GL_ONE
 	}
         {
 		clampmap textures/sfx/console02.tga
-                
+
 		tcMod rotate -400
 		blendFunc GL_ONE GL_ONE
 	}
           {
 		clampmap textures/sfx/console03.tga
-                
+
 		tcMod rotate 40
 		blendFunc GL_ONE GL_ONE
 	}
@@ -1076,7 +1076,7 @@ textures/sfx/glass
 {
 	qer_editorimage textures/base_wall/oldwindow.tga
 	surfaceparm	trans
-	cull none			
+	cull none
 
 	{
 		map $lightmap
@@ -1094,19 +1094,19 @@ textures/sfx/glass
 	{
 		map $lightmap
 		blendfunc gl_dst_color gl_zero
-	}		
+	}
 }
 
 
 textures/sfx/fan
 {
-        surfaceparm trans	
-        surfaceparm nomarks	
+        surfaceparm trans
+        surfaceparm nomarks
 	cull none
         nopicmip
 	{
 		clampmap textures/sfx/fan.tga
-		tcMod rotate 256 
+		tcMod rotate 256
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -1122,13 +1122,13 @@ textures/sfx/fan
 
 textures/sfx/fan2
 {
-        surfaceparm trans	
-        surfaceparm nomarks	
+        surfaceparm trans
+        surfaceparm nomarks
 	cull disable
         nopicmip
 	{
 		clampmap textures/sfx/fan2.tga
-		tcMod rotate 256 
+		tcMod rotate 256
 		//blendFunc GL_ONE GL_ZERO
 		//alphaFunc GE128
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
@@ -1145,9 +1145,9 @@ textures/sfx/fan2
 }
 textures/sfx/fan_grate
 {
-        surfaceparm trans	
-        surfaceparm nomarks	
-        surfaceparm	metalsteps	
+        surfaceparm trans
+        surfaceparm nomarks
+        surfaceparm	metalsteps
 	cull none
         nopicmip
 	{
@@ -1166,9 +1166,9 @@ textures/sfx/fan_grate
 }
 textures/sfx/fan_grate2
 {
-        surfaceparm trans	
-        surfaceparm nomarks	
-        surfaceparm	metalsteps	
+        surfaceparm trans
+        surfaceparm nomarks
+        surfaceparm	metalsteps
 	cull none
         nopicmip
 	{
@@ -1190,14 +1190,14 @@ textures/sfx/fanfx
 {
 	qer_editorimage textures/sfx/fanfx.tga
         surfaceparm nolightmap
-        surfaceparm trans	
-        surfaceparm nomarks	
+        surfaceparm trans
+        surfaceparm nomarks
 	cull none
         nopicmip
 
 	{
 		clampmap textures/sfx/fanfx.tga
-		tcMod rotate 256 
+		tcMod rotate 256
 		blendFunc GL_ZERO GL_ONE_MINUS_SRC_COLOR
 		rgbGen exactVertex
                 depthWrite
@@ -1264,33 +1264,33 @@ textures/sfx/zap_scroll1000
 	surfaceparm nolightmap
 	qer_editorimage textures/sfx/zap_scroll.tga
 	cull none
-	
+
 	{
 		map textures/sfx/zap_scroll.tga
 		blendFunc GL_ONE GL_ONE
                 rgbgen wave triangle .8 2 0 7
                 tcMod scroll 0 1
-	}	
+	}
         {
 		map textures/sfx/zap_scroll.tga
 		blendFunc GL_ONE GL_ONE
                 rgbgen wave triangle 1 1.4 0 5
                 tcMod scale  -1 1
                 tcMod scroll 0 1
-	}	
+	}
         {
 		map textures/sfx/zap_scroll2.tga
 		blendFunc GL_ONE GL_ONE
                 rgbgen wave triangle 1 1.4 0 6.3
                 tcMod scale  -1 1
                 tcMod scroll 2 1
-	}	
+	}
         {
 		map textures/sfx/zap_scroll2.tga
 		blendFunc GL_ONE GL_ONE
                 rgbgen wave triangle 1 1.4 0 7.7
                 tcMod scroll -1.3 1
-	}	
+	}
 }
 
 
@@ -1300,11 +1300,11 @@ textures/gothic_block/killblock_i4b
 	q3map_lightimage textures/gothic_block/killblock_i4glow.tga
 	qer_editorimage textures/gothic_block/killblock_i4.tga
 
-	
+
 	{
 		map textures/gothic_block/killblock_i4.tga
-		rgbgen identity		
-	}	
+		rgbgen identity
+	}
 
 	{
 		map $lightmap
@@ -1316,7 +1316,7 @@ textures/gothic_block/killblock_i4b
 		blendFunc GL_ONE GL_ONE
                 rgbgen wave sin .9 .1 0 .1
 	}
-	
+
 }
 
 
@@ -1329,18 +1329,18 @@ textures/sfx/donna
 	surfaceparm nomarks
 	surfaceparm nolightmap
 	cull none
-	
+
 	{
 		Map textures/sfx/donna.tga
 		blendFunc GL_ONE GL_ONE
                 rgbgen wave triangle 1 2 0 7
-	}	
+	}
 {
 		Map textures/sfx/donna.tga
 		blendFunc GL_ONE GL_ONE
                 rgbgen wave sin 1 2 0 8
 	}
-	
+
 }
 
 textures/sfx/xian_dm3padwall
@@ -1348,12 +1348,12 @@ textures/sfx/xian_dm3padwall
 	q3map_surfacelight 100
 	q3map_lightimage textures/sfx/xian_dm3padwallglow.tga
 	qer_editorimage textures/sfx/xian_dm3padwall.tga
-	
+
 	{
 		map textures/sfx/xian_dm3padwall.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
@@ -1368,7 +1368,7 @@ textures/sfx/xian_dm3padwall
 		tcmod scale 1 .05
 		tcmod scroll 0 1
 	}
-	
+
 }
 
 textures/sfx/xian_dm3padwall_light
@@ -1377,12 +1377,12 @@ textures/sfx/xian_dm3padwall_light
 	q3map_lightsubdivide 64
 	q3map_lightimage textures/sfx/xian_dm3padwallglow.tga
 	qer_editorimage textures/sfx/xian_dm3padwall.tga
-	
+
 	{
 		map textures/sfx/xian_dm3padwall.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
@@ -1397,7 +1397,7 @@ textures/sfx/xian_dm3padwall_light
 		tcmod scale 1 .05
 		tcmod scroll 0 1
 	}
-	
+
 }
 
 textures/sfx/xmetalfloor_wall_5b
@@ -1416,7 +1416,7 @@ textures/sfx/xmetalfloor_wall_5b
 	{
 		map textures/sfx/metalfloor_wall_5bglowblu.tga
 		blendfunc gl_one gl_one
-		rgbgen wave sin .5 .2 0 .1	
+		rgbgen wave sin .5 .2 0 .1
 	}
 }
 
@@ -1425,12 +1425,12 @@ textures/sfx/border11c
 	q3map_surfacelight 300
 	q3map_lightimage textures/base_trim/border11c_pulse1.tga
 	qer_editorimage textures/base_trim/border11c.tga
-	
+
 	{
 		map textures/base_trim/border11c.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
@@ -1455,7 +1455,7 @@ textures/sfx/border11c
 
 	}
 
-	
+
 }
 
 
@@ -1467,33 +1467,33 @@ textures/sfx/zap_scroll
 	surfaceparm nomarks
 	surfaceparm nolightmap
 	cull none
-	
+
 	{
 		Map textures/sfx/zap_scroll.tga
 		blendFunc GL_ONE GL_ONE
                 rgbgen wave triangle .8 2 0 7
                 tcMod scroll 0 1
-	}	
+	}
         {
 		Map textures/sfx/zap_scroll.tga
 		blendFunc GL_ONE GL_ONE
                 rgbgen wave triangle 1 1.4 0 5
                 tcMod scale  -1 1
                 tcMod scroll 0 1
-	}	
+	}
         {
 		Map textures/sfx/zap_scroll2.tga
 		blendFunc GL_ONE GL_ONE
                 rgbgen wave triangle 1 1.4 0 6.3
                 tcMod scale  -1 1
                 tcMod scroll 2 1
-	}	
+	}
         {
 		Map textures/sfx/zap_scroll2.tga
 		blendFunc GL_ONE GL_ONE
                 rgbgen wave triangle 1 1.4 0 7.7
                 tcMod scroll -1.3 1
-	}	
+	}
 }
 textures/sfx/x_conduit
 {
@@ -1511,29 +1511,29 @@ textures/sfx/x_conduit
 		rgbGen identity
 	}
 
-	{	animMap 10 textures/sfx/x_conduit2.tga textures/sfx/x_conduit3.tga 
+	{	animMap 10 textures/sfx/x_conduit2.tga textures/sfx/x_conduit3.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
 	}
 
-	//{	
+	//{
 	//	map textures/sfx/x_conduit2.tga
 	//	blendfunc GL_ONE GL_ONE
        //         rgbGen wave sin .5 0.5 0 5
 	//}
-        {	
+        {
 		map textures/sfx/x_conduit2.tga
 		blendfunc GL_ONE GL_ONE
                  tcmod scale -1 1
                 rgbGen wave sin .5 0.5 0 7
 	}
-        {	
+        {
 		map textures/sfx/x_conduit3.tga
 		blendfunc GL_ONE GL_ONE
                 tcmod scale -1 1
                  rgbgen wave triangle .2 1 0 9
 	}
-        //{	
+        //{
 	//	map textures/sfx/x_conduit3.tga
 	//	blendfunc GL_ONE GL_ONE
        //         rgbGen wave sin .5 1 0 3
@@ -1550,13 +1550,13 @@ textures/sfx/swirl_r1
 	surfaceparm nolightmap
 	cull none
 
-               
-	
+
+
 	{
 		clampmap textures/sfx/swirl_r1.tga
 		blendFunc GL_ONE GL_ONE
                 tcMod rotate -188
-	}	
+	}
         {
 		clampmap textures/sfx/swirl_r2.tga
 		blendFunc GL_ONE GL_ONE
@@ -1567,7 +1567,7 @@ textures/sfx/swirl_r1
 	//	blendFunc GL_ONE GL_ONE
       //          tcMod rotate 20
 	//}
-	
+
 }
 textures/sfx/swirl_b1
 {
@@ -1579,12 +1579,12 @@ textures/sfx/swirl_b1
 	surfaceparm nolightmap
         surfaceparm nonsolid
 	cull none
-	
+
 	{
 		clampmap textures/sfx/swirl_b1.tga
 		blendFunc GL_ONE GL_ONE
                 tcMod rotate -188
-	}	
+	}
         {
 		clampmap textures/sfx/swirl_b2.tga
 		blendFunc GL_ONE GL_ONE
@@ -1595,7 +1595,7 @@ textures/sfx/swirl_b1
 	//	blendFunc GL_ONE GL_ONE
         //        tcMod rotate 20
 	//}
-	
+
 }
 textures/sfx/steam_01
 {
@@ -1604,20 +1604,20 @@ textures/sfx/steam_01
 	surfaceparm nomarks
 	surfaceparm nolightmap
 	cull disable
-       
+
 	{
 		Map textures/sfx/steam_01.tga
 		blendFunc GL_ONE GL_ONE
                 tcMod scale 1 .4
 	        tcMod scroll 0 .3
-	}	
+	}
 {
                 Map textures/sfx/steam_01.tga
 		blendFunc GL_ONE GL_ONE
                 tcMod scale -1 .2
 	        tcMod scroll 0 .3
 	}
-	
+
 }
 textures/sfx/zap_ball
 {
@@ -1628,20 +1628,20 @@ textures/sfx/zap_ball
 	surfaceparm nomarks
 	surfaceparm nolightmap
 	cull none
-	
+
 	{
 		clampmap textures/sfx/zap_ball.tga
 		blendFunc GL_ONE GL_ONE
                 rgbgen wave triangle 1 2 0 7
                 tcMod rotate 103
-	}	
+	}
 {
 		clampmap textures/sfx/zap_ball2.tga
 		blendFunc GL_ONE GL_ONE
                 rgbgen wave sin 1 2 0 8
                 tcMod rotate -180
 	}
-	
+
 }
 textures/sfx/jacobs_x
 {
@@ -1652,20 +1652,20 @@ textures/sfx/jacobs_x
 	surfaceparm nomarks
 	surfaceparm nolightmap
 	cull none
-	
+
 	{
 		Map textures/sfx/jacobs_x.tga
 		blendFunc GL_ONE GL_ONE
                 rgbgen wave triangle 1 2 0 7
                 //tcMod rotate 103
-	}	
+	}
 }
 textures/sfx/xlargeblockfloor3_pent
 {
 	q3map_lightimage textures/sfx/pentagramfloor_blue3glowtest.tga
 	q3map_surfacelight 100
 	surfaceparm nomarks
-	
+
 	{
 		map $lightmap
 		rgbgen identity
@@ -1690,25 +1690,25 @@ textures/sfx/xclang_floor2_bouncy
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/xclang_floor2_bouncy.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -1726,25 +1726,25 @@ textures/sfx/clangdark_bounce
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/clangdark_bounce.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -1763,25 +1763,25 @@ textures/sfx/metalbridge06_bounce
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/metalbridge06_bounce.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -1799,25 +1799,25 @@ textures/sfx/metaltechfloor02final_bounce
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/metaltechfloor02final_bounce.tga	
+	q3map_lightimage textures/sfx/metaltechfloor02final_bounce.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/metaltechfloor02final_bounce.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -1836,26 +1836,26 @@ textures/sfx/metaltech12final_bounce
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-//	q3map_lightimage textures/sfx/metaltech12final_bounce.tga	
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+//	q3map_lightimage textures/sfx/metaltech12final_bounce.tga
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/metaltech12final_bounce.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -1874,26 +1874,26 @@ textures/sfx/metaltech12darkfinal_bounce
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-//	q3map_lightimage textures/sfx/metaltech12darkfinal_bounce.tga	
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+//	q3map_lightimage textures/sfx/metaltech12darkfinal_bounce.tga
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/metaltech12darkfinal_bounce.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -1912,25 +1912,25 @@ textures/sfx/metaltechfloor01final_bounce
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/metaltechfloor01final_bounce.tga	
+	q3map_lightimage textures/sfx/metaltechfloor01final_bounce.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/metaltechfloor01final_bounce.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -1950,7 +1950,7 @@ textures/sfx/demonltblackfinal
 	q3map_lightimage textures/sfx/demonltblackfinal_glow2.tga
 	q3map_surfacelight 100
 	surfaceparm nomarks
-	
+
 	{
 		map $lightmap
 		rgbgen identity
@@ -1976,14 +1976,14 @@ textures/base_wall/c_met5_2_trans
 	{
 		map $lightmap
 		rgbGen identity
-	
+
 	}
 	{
 		map textures/base_wall/c_met5_2.tga
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 
-	
+
 	}
 }
 
@@ -2055,7 +2055,7 @@ models/mapobjects/portal_2/portal_3
 {
 	//	*************************************************
 	//	*      	Portal Sides				*
-	//	*      	April 30 1999				*	
+	//	*      	April 30 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 
@@ -2079,21 +2079,21 @@ textures/sfx/portal_sfx_ring
 
 	//	*************************************************
 	//	*      	Portal Ring				*
-	//	*      	April 30 1999				*	
+	//	*      	April 30 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
-		
+
 		deformVertexes wave 100 sin 0 2 0 .5
 		cull none
-	
+
 	{
-		map textures/sfx/portal_sfx_ring_blue1.tga 
+		map textures/sfx/portal_sfx_ring_blue1.tga
 		blendfunc gl_src_alpha gl_one_minus_src_alpha
 	}
 
-	
-	{	
-		map textures/sfx/portal_sfx_ring_electric.tga 
+
+	{
+		map textures/sfx/portal_sfx_ring_electric.tga
 		blendfunc gl_one gl_one
 		rgbgen wave inversesawtooth 0 1 .2 .5
 		tcmod scroll 0 .5
@@ -2112,9 +2112,9 @@ textures/sfx/portal_sfx_ring
 		rgbgen wave inversesawtooth 0 .5 .2 .5
 	}
 
-	
 
-	
+
+
 
 }
 
@@ -2123,27 +2123,27 @@ textures/sfx/small_smoke1_1
 
 	//	*************************************************
 	//	*      	Smoke					*
-	//	*      	June 18 1999				*	
+	//	*      	June 18 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
-	
+
 	deformVertexes autoSprite
 	surfaceparm nomarks
 	surfaceparm nolightmap
 	cull none
-	
+
 
 	{
-		animMap 10 textures/sfx/small_smoke1_1.tga textures/sfx/small_smoke1_2.tga textures/sfx/small_smoke1_3.tga textures/sfx/small_smoke1_4.tga textures/sfx/small_smoke1_5.tga textures/sfx/small_smoke1_6.tga 
+		animMap 10 textures/sfx/small_smoke1_1.tga textures/sfx/small_smoke1_2.tga textures/sfx/small_smoke1_3.tga textures/sfx/small_smoke1_4.tga textures/sfx/small_smoke1_5.tga textures/sfx/small_smoke1_6.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave inverseSawtooth 0 1 0 10	
+		rgbGen wave inverseSawtooth 0 1 0 10
 	}
-	
+
 	{
-		animMap 10 textures/sfx/small_smoke1_2.tga textures/sfx/small_smoke1_3.tga textures/sfx/small_smoke1_4.tga textures/sfx/small_smoke1_5.tga textures/sfx/small_smoke1_6.tga textures/sfx/small_smoke1_1.tga 
+		animMap 10 textures/sfx/small_smoke1_2.tga textures/sfx/small_smoke1_3.tga textures/sfx/small_smoke1_4.tga textures/sfx/small_smoke1_5.tga textures/sfx/small_smoke1_6.tga textures/sfx/small_smoke1_1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 }
 
@@ -2154,34 +2154,34 @@ textures/sfx/xflame2
 
 	//	*************************************************
 	//	*      	Yellow Flame Surface Light 5500		*
-	//	*      	April 30 1999				*	
+	//	*      	April 30 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
-	
+
 	surfaceparm nomarks
 	surfaceparm nolightmap
 	cull none
 	q3map_surfacelight 5500
 	qer_editorimage textures/sfx/flame1.tga
-	
+
 
 	{
 		animMap 10 textures/sfx/flame1.tga textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga textures/sfx/flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -2193,25 +2193,25 @@ textures/sfx/xflame2_2250
 	cull none
 	q3map_surfacelight 2250
 	qer_editorimage textures/sfx/flame1.tga
-	
+
 
 	{
 		animMap 10 textures/sfx/flame1.tga textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga textures/sfx/flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -2223,25 +2223,25 @@ textures/sfx/xflame2_1800
 	cull none
 	q3map_surfacelight 1800
 	qer_editorimage textures/sfx/flame1.tga
-	
+
 
 	{
 		animMap 10 textures/sfx/flame1.tga textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga textures/sfx/flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -2252,25 +2252,25 @@ textures/sfx/xflame2_nolight
 	surfaceparm nolightmap
 	cull none
 	qer_editorimage textures/sfx/flame1.tga
-	
+
 
 	{
 		animMap 10 textures/sfx/flame1.tga textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga textures/sfx/flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -2284,8 +2284,8 @@ textures/sfx/grid
 	surfaceparm trans
 	qer_editorimage	textures/sfx/grid.tga
 
-	
-	
+
+
 
 	{
 		map textures/sfx/grid.tga
@@ -2300,38 +2300,38 @@ textures/sfx/launchpad_diamond
 {
 	//	*************************************************
 	//	*      	Launchpad on Diamond			*
-	//	*      	April 30 1999				*	
+	//	*      	April 30 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 	}
 
-	{ 
+	{
 		map textures/sfx/launchpad_diamond.tga
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
 
-	{	
+	{
 		map textures/sfx/launchpad_dot.tga
-		blendfunc gl_one gl_one	
-		rgbgen wave inversesawtooth 0 1 0 1	
+		blendfunc gl_one gl_one
+		rgbgen wave inversesawtooth 0 1 0 1
 	}
 
 	// 	CHANGED BECAUSE OF RAGE PRO PROBLEM
-	//	{	
-	//		map textures/sfx/launchpad_arrow.tga		
-	//		blendfunc gl_src_alpha gl_one	
+	//	{
+	//		map textures/sfx/launchpad_arrow.tga
+	//		blendfunc gl_src_alpha gl_one
 	//		tcmod scroll 0 2
 	//		rgbgen wave square 0 1 0 2
 	//		alphagen wave square 0 1 .1 2
 	//	}
 
 	// 	TEMPORARY FIX TO GET AROUND ALPHA BLEND IN RAGE PRO
-	{ 
+	{
 		animmap 4 textures/sfx/launchpad_arrow.tga textures/sfx/launchpad_arrow2.tga textures/sfx/launchpad_arrow2.tga textures/sfx/launchpad_arrow2.tga
 		blendfunc gl_one gl_one
 		tcmod scroll 0 2
@@ -2342,38 +2342,38 @@ textures/sfx/launchpad_blocks18d
 {
 	//	*************************************************
 	//	*      	Launchpad on Blocks18d			*
-	//	*      	October 09 1999				*	
+	//	*      	October 09 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 	}
 
-	{ 
+	{
 		map textures/sfx/launchpad_blocks18d.tga
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
 
-	{	
+	{
 		map textures/sfx/launchpad_dot.tga
-		blendfunc gl_one gl_one	
-		rgbgen wave inversesawtooth 0 1 0 1	
+		blendfunc gl_one gl_one
+		rgbgen wave inversesawtooth 0 1 0 1
 	}
 
 	// 	CHANGED BECAUSE OF RAGE PRO PROBLEM
-	//	{	
-	//		map textures/sfx/launchpad_arrow.tga		
-	//		blendfunc gl_src_alpha gl_one	
+	//	{
+	//		map textures/sfx/launchpad_arrow.tga
+	//		blendfunc gl_src_alpha gl_one
 	//		tcmod scroll 0 2
 	//		rgbgen wave square 0 1 0 2
 	//		alphagen wave square 0 1 .1 2
 	//	}
 
 	// 	TEMPORARY FIX TO GET AROUND ALPHA BLEND IN RAGE PRO
-	{ 
+	{
 		animmap 4 textures/sfx/launchpad_arrow.tga textures/sfx/launchpad_arrow2.tga textures/sfx/launchpad_arrow2.tga textures/sfx/launchpad_arrow2.tga
 		blendfunc gl_one gl_one
 		tcmod scroll 0 2
@@ -2384,38 +2384,38 @@ textures/sfx/launchpad_blocks17
 {
 	//	*************************************************
 	//	*      	Launchpad on Blocks17			*
-	//	*      	November 08 1999			*	
+	//	*      	November 08 1999			*
 	//	*	Please Comment Changes			*
 	//	*************************************************
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 	}
 
-	{ 
+	{
 		map textures/sfx/launchpad_blocks17.tga
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
 
-	{	
+	{
 		map textures/sfx/launchpad_dot.tga
-		blendfunc gl_one gl_one	
-		rgbgen wave inversesawtooth 0 1 0 1	
+		blendfunc gl_one gl_one
+		rgbgen wave inversesawtooth 0 1 0 1
 	}
 
 	// 	CHANGED BECAUSE OF RAGE PRO PROBLEM
-	//	{	
-	//		map textures/sfx/launchpad_arrow.tga		
-	//		blendfunc gl_src_alpha gl_one	
+	//	{
+	//		map textures/sfx/launchpad_arrow.tga
+	//		blendfunc gl_src_alpha gl_one
 	//		tcmod scroll 0 2
 	//		rgbgen wave square 0 1 0 2
 	//		alphagen wave square 0 1 .1 2
 	//	}
 
 	// 	TEMPORARY FIX TO GET AROUND ALPHA BLEND IN RAGE PRO
-	{ 
+	{
 		animmap 4 textures/sfx/launchpad_arrow.tga textures/sfx/launchpad_arrow2.tga textures/sfx/launchpad_arrow2.tga textures/sfx/launchpad_arrow2.tga
 		blendfunc gl_one gl_one
 		tcmod scroll 0 2
@@ -2426,38 +2426,38 @@ textures/sfx/launchpad_metalbridge04d
 {
 	//	*************************************************
 	//	*      	Launchpad on metalbridge04d	        *
-	//	*      	June 15 1999				*	
+	//	*      	June 15 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 	}
 
-	{ 
+	{
 		map textures/sfx/launchpad_metalbridge04d.tga
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
 
-	{	
+	{
 		map textures/sfx/launchpad_dot.tga
-		blendfunc gl_one gl_one	
-		rgbgen wave inversesawtooth 0 1 0 1	
+		blendfunc gl_one gl_one
+		rgbgen wave inversesawtooth 0 1 0 1
 	}
 
 	// 	CHANGED BECAUSE OF RAGE PRO PROBLEM
-	//	{	
-	//		map textures/sfx/launchpad_arrow.tga		
-	//		blendfunc gl_src_alpha gl_one	
+	//	{
+	//		map textures/sfx/launchpad_arrow.tga
+	//		blendfunc gl_src_alpha gl_one
 	//		tcmod scroll 0 2
 	//		rgbgen wave square 0 1 0 2
 	//		alphagen wave square 0 1 .1 2
 	//	}
 
 	// 	TEMPORARY FIX TO GET AROUND ALPHA BLEND IN RAGE PRO
-	{ 
+	{
 		animmap 4 textures/sfx/launchpad_arrow.tga textures/sfx/launchpad_arrow2.tga textures/sfx/launchpad_arrow2.tga textures/sfx/launchpad_arrow2.tga
 		blendfunc gl_one gl_one
 		tcmod scroll 0 2
@@ -2470,34 +2470,34 @@ textures/sfx/flame1km
 
 	//	*************************************************
 	//	*      	Yellow Flame 				*
-	//	*      	May 20 1999 Surface Light 4000	*	
+	//	*      	May 20 1999 Surface Light 4000	*
 	//	*	Please Comment Changes			*
 	//	*************************************************
-	
+
 	surfaceparm nomarks
 	surfaceparm nolightmap
 	surfaceparm trans
 	cull none
 	q3map_surfacelight 4000
-	
+
 
 	{
 		animMap 10 textures/sfx/flame1.tga textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga textures/sfx/flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -2506,34 +2506,34 @@ textures/sfx/flame1
 
 	//	*************************************************
 	//	*      	Yellow Flame 				*
-	//	*      	April 30 1999 Surface Light 7500	*	
+	//	*      	April 30 1999 Surface Light 7500	*
 	//	*	Please Comment Changes			*
 	//	*************************************************
-	
+
 	surfaceparm nomarks
 	surfaceparm nolightmap
 	surfaceparm trans
 	cull none
 	q3map_surfacelight 7500
-	
+
 
 	{
 		animMap 10 textures/sfx/flame1.tga textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga textures/sfx/flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -2542,7 +2542,7 @@ textures/sfx/flameanim_dimmer
 
 	//	*************************************************
 	//	*      	Yellow Flame 				*
-	//	*      	May 2, 199 Surface Light 2500    	*	
+	//	*      	May 2, 199 Surface Light 2500    	*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 	qer_editorimage textures/sfx/flame6.tga
@@ -2559,19 +2559,19 @@ textures/sfx/flameanim_dimmer
 		animMap 10 textures/sfx/flame1.tga textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga textures/sfx/flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -2580,7 +2580,7 @@ textures/sfx/flameanim_blue
 
 	//	*************************************************
 	//	*      	Blue Flame 				*
-	//	*      	July 20, 1999 Surface Light 1800    	*	
+	//	*      	July 20, 1999 Surface Light 1800    	*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 	qer_editorimage textures/sfx/b_flame7.tga
@@ -2597,19 +2597,19 @@ textures/sfx/flameanim_blue
 		animMap 10 textures/sfx/b_flame1.tga textures/sfx/b_flame2.tga textures/sfx/b_flame3.tga textures/sfx/b_flame4.tga textures/sfx/b_flame5.tga textures/sfx/b_flame6.tga textures/sfx/b_flame7.tga textures/sfx/b_flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/b_flame2.tga textures/sfx/b_flame3.tga textures/sfx/b_flame4.tga textures/sfx/b_flame5.tga textures/sfx/b_flame6.tga textures/sfx/b_flame7.tga textures/sfx/b_flame8.tga textures/sfx/b_flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/b_flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -2619,7 +2619,7 @@ textures/sfx/flameanim_blue_nolight
 
 	//	*************************************************
 	//	*      	Blue Flame 				*
-	//	*      	July 20, 1999 Surface Light 1800    	*	
+	//	*      	July 20, 1999 Surface Light 1800    	*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 	qer_editorimage textures/sfx/b_flame7.tga
@@ -2633,19 +2633,19 @@ textures/sfx/flameanim_blue_nolight
 		animMap 10 textures/sfx/b_flame1.tga textures/sfx/b_flame2.tga textures/sfx/b_flame3.tga textures/sfx/b_flame4.tga textures/sfx/b_flame5.tga textures/sfx/b_flame6.tga textures/sfx/b_flame7.tga textures/sfx/b_flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/b_flame2.tga textures/sfx/b_flame3.tga textures/sfx/b_flame4.tga textures/sfx/b_flame5.tga textures/sfx/b_flame6.tga textures/sfx/b_flame7.tga textures/sfx/b_flame8.tga textures/sfx/b_flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/b_flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -2656,7 +2656,7 @@ textures/sfx/flameanim_blue_pj
 
 	//	*************************************************
 	//	*      	Blue Flame 				*
-	//	*      	July 20, 1999 Surface Light 2500    	*	
+	//	*      	July 20, 1999 Surface Light 2500    	*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 	qer_editorimage textures/sfx/b_flame7.tga
@@ -2667,25 +2667,25 @@ textures/sfx/flameanim_blue_pj
 	cull none
 	q3map_surfacelight 2500
 	// texture changed to blue flame.... PAJ
-	
+
 
 	{
 		animMap 10 textures/sfx/b_flame1.tga textures/sfx/b_flame2.tga textures/sfx/b_flame3.tga textures/sfx/b_flame4.tga textures/sfx/b_flame5.tga textures/sfx/b_flame6.tga textures/sfx/b_flame7.tga textures/sfx/b_flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/b_flame2.tga textures/sfx/b_flame3.tga textures/sfx/b_flame4.tga textures/sfx/b_flame5.tga textures/sfx/b_flame6.tga textures/sfx/b_flame7.tga textures/sfx/b_flame8.tga textures/sfx/b_flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/b_flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -2695,7 +2695,7 @@ textures/sfx/flameanim_blue_nolight
 
 	//	*************************************************
 	//	*      	Blue Flame 				*
-	//	*      	aug 18, 1999 Surface Light 2500    	*	
+	//	*      	aug 18, 1999 Surface Light 2500    	*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 	qer_editorimage textures/sfx/b_flame7.tga
@@ -2711,19 +2711,19 @@ textures/sfx/flameanim_blue_nolight
 		animMap 10 textures/sfx/b_flame1.tga textures/sfx/b_flame2.tga textures/sfx/b_flame3.tga textures/sfx/b_flame4.tga textures/sfx/b_flame5.tga textures/sfx/b_flame6.tga textures/sfx/b_flame7.tga textures/sfx/b_flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/b_flame2.tga textures/sfx/b_flame3.tga textures/sfx/b_flame4.tga textures/sfx/b_flame5.tga textures/sfx/b_flame6.tga textures/sfx/b_flame7.tga textures/sfx/b_flame8.tga textures/sfx/b_flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/b_flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -2733,7 +2733,7 @@ textures/sfx/flameanim_red
 
 	//	*************************************************
 	//	*      	Red Flame 				*
-	//	*      	July 20, 1999 Surface Light  1800    	*	
+	//	*      	July 20, 1999 Surface Light  1800    	*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 	qer_editorimage textures/sfx/r_flame3.tga
@@ -2750,19 +2750,19 @@ textures/sfx/flameanim_red
 		animMap 10 textures/sfx/r_flame1.tga textures/sfx/r_flame2.tga textures/sfx/r_flame3.tga textures/sfx/r_flame4.tga textures/sfx/r_flame5.tga textures/sfx/r_flame6.tga textures/sfx/r_flame7.tga textures/sfx/r_flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/r_flame2.tga textures/sfx/r_flame3.tga textures/sfx/r_flame4.tga textures/sfx/r_flame5.tga textures/sfx/r_flame6.tga textures/sfx/r_flame7.tga textures/sfx/r_flame8.tga textures/sfx/r_flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/r_flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -2772,7 +2772,7 @@ textures/sfx/flameanim_red_pj
 
 	//	*************************************************
 	//	*      	Red Flame 				*
-	//	*      	July 20, 1999 Surface Light 2500    	*	
+	//	*      	July 20, 1999 Surface Light 2500    	*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 	qer_editorimage textures/sfx/r_flame3.tga
@@ -2788,19 +2788,19 @@ textures/sfx/flameanim_red_pj
 		animMap 10 textures/sfx/r_flame1.tga textures/sfx/r_flame2.tga textures/sfx/r_flame3.tga textures/sfx/r_flame4.tga textures/sfx/r_flame5.tga textures/sfx/r_flame6.tga textures/sfx/r_flame7.tga textures/sfx/r_flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/r_flame2.tga textures/sfx/r_flame3.tga textures/sfx/r_flame4.tga textures/sfx/r_flame5.tga textures/sfx/r_flame6.tga textures/sfx/r_flame7.tga textures/sfx/r_flame8.tga textures/sfx/r_flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/r_flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -2810,7 +2810,7 @@ textures/sfx/flameanim_red_nolight
 
 	//	*************************************************
 	//	*      	Red Flame (no light)			*
-	//	*      	Sept. 5, 1999 No Surface Light	    	*	
+	//	*      	Sept. 5, 1999 No Surface Light	    	*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 	qer_editorimage textures/sfx/r_flame3.tga
@@ -2820,25 +2820,25 @@ textures/sfx/flameanim_red_nolight
 	surfaceparm nolightmap
 	cull none
 	// texture changed to red flame.... PAJ
-	
+
 
 	{
 		animMap 10 textures/sfx/r_flame1.tga textures/sfx/r_flame2.tga textures/sfx/r_flame3.tga textures/sfx/r_flame4.tga textures/sfx/r_flame5.tga textures/sfx/r_flame6.tga textures/sfx/r_flame7.tga textures/sfx/r_flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/r_flame2.tga textures/sfx/r_flame3.tga textures/sfx/r_flame4.tga textures/sfx/r_flame5.tga textures/sfx/r_flame6.tga textures/sfx/r_flame7.tga textures/sfx/r_flame8.tga textures/sfx/r_flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/r_flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -2847,7 +2847,7 @@ textures/sfx/flameanim_green_pj
 {
 	//	*************************************************
 	//	*      	Green Flame 				*
-	//	*      October 2, 1999 Surface Light 2500    	*	
+	//	*      October 2, 1999 Surface Light 2500    	*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 	qer_editorimage textures/sfx/g_flame6.tga
@@ -2861,17 +2861,17 @@ textures/sfx/flameanim_green_pj
 	{
 		animMap 10 textures/sfx/g_flame1.tga textures/sfx/g_flame2.tga textures/sfx/g_flame3.tga textures/sfx/g_flame4.tga textures/sfx/g_flame5.tga textures/sfx/g_flame6.tga textures/sfx/g_flame7.tga textures/sfx/g_flame8.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave inverseSawtooth 0 1 0 10	
-	}	
+		rgbGen wave inverseSawtooth 0 1 0 10
+	}
 	{
 		animMap 10 textures/sfx/g_flame2.tga textures/sfx/g_flame3.tga textures/sfx/g_flame4.tga textures/sfx/g_flame5.tga textures/sfx/g_flame6.tga textures/sfx/g_flame7.tga textures/sfx/g_flame8.tga textures/sfx/g_flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 	{
 		map textures/sfx/g_flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 }
 
@@ -2881,10 +2881,10 @@ textures/sfx/xflame1side
 
 	//	*************************************************
 	//	*      	Yellow Flame Side			*
-	//	*      	April 30 1999				*	
+	//	*      	April 30 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
-	
+
 		//q3map_surfacelight 500
 		//q3map_lightimage textures/sfx/flame1.tga
 		surfaceparm trans
@@ -2897,19 +2897,19 @@ textures/sfx/xflame1side
 		animMap 10 textures/sfx/flame1.tga textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga textures/sfx/flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -2920,14 +2920,14 @@ textures/sfx/flame1side
 
 	//	*************************************************
 	//	*      	Yellow Flame Side			*
-	//	*      	April 30 1999				*	
+	//	*      	April 30 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
-	
+
 		surfaceparm trans
 		surfaceparm nomarks
 		surfaceparm nonsolid
-	
+
 		surfaceparm nolightmap
 		cull none
 
@@ -2935,19 +2935,19 @@ textures/sfx/flame1side
 		animMap 10 textures/sfx/flame1.tga textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga textures/sfx/flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -2959,10 +2959,10 @@ textures/sfx/flame2
 
 	//	*************************************************
 	//	*      	Yellow Flame Surface Light 5500		*
-	//	*      	April 30 1999				*	
+	//	*      	April 30 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
-	
+
 		surfaceparm nomarks
 		surfaceparm nolightmap
 		cull none
@@ -2973,18 +2973,18 @@ textures/sfx/flame2
 		animMap 10 textures/sfx/flame1.tga textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga textures/sfx/flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 	{
 		map textures/sfx/flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -2995,34 +2995,34 @@ textures/sfx/xflame1
 
 	//	*************************************************
 	//	*      	Yellow Flame Surface Light 7500		*
-	//	*      	March 30 1999 				*	
+	//	*      	March 30 1999 				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
-	
+
 	surfaceparm nomarks
 	surfaceparm nolightmap
 	cull none
 	q3map_surfacelight 7500
 	qer_editorimage textures/sfx/flame1.tga
-	
+
 
 	{
 		animMap 10 textures/sfx/flame1.tga textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga textures/sfx/flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -3030,7 +3030,7 @@ textures/sfx/xflame1
 
 textures/sfx/xflamebright
 {
-	deformVertexes autoSprite2 
+	deformVertexes autoSprite2
 	surfaceparm trans
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -3041,16 +3041,16 @@ textures/sfx/xflamebright
 		animMap 10 textures/sfx/flame1.tga textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-	}	
+	}
 	{
 		animMap 10 textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga textures/sfx/flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 	{
 		map textures/sfx/flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 }
 
@@ -3060,35 +3060,35 @@ textures/sfx/flame1dark
 
 	//	*************************************************
 	//	*      	Yellow Flame used in q3test1				*
-	//	*      	April 30 1999 Surface Light 7500	*	
+	//	*      	April 30 1999 Surface Light 7500	*
 	//	*	Please Comment Changes			*
 	//	*************************************************
-	
+
 	qer_editorimage textures/sfx/flame1.tga
 	surfaceparm nomarks
 	surfaceparm nolightmap
 	surfaceparm trans
 	cull none
 	q3map_surfacelight 2000
-	
+
 
 	{
 		animMap 10 textures/sfx/flame1.tga textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga textures/sfx/flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -3098,35 +3098,35 @@ textures/sfx/flame1_hell
 
 	//	*************************************************
 	//	*      	Yellow Flame used in q3test1				*
-	//	*      	April 30 1999 Surface Light 7500	*	
+	//	*      	April 30 1999 Surface Light 7500	*
 	//	*	Please Comment Changes			*
 	//	*************************************************
-	
+
 	qer_editorimage textures/sfx/flame1.tga
 	surfaceparm nomarks
 	surfaceparm nolightmap
 	surfaceparm trans
 	cull none
 	q3map_surfacelight 600
-	
+
 
 	{
 		animMap 10 textures/sfx/flame1.tga textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga textures/sfx/flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -3145,7 +3145,7 @@ textures/sfx/pentagramfloor_red3test
 	{
 		map textures/sfx/pentagramfloor_red3glowtest.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .5 .5 0 .5	
+		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
 }
@@ -3164,7 +3164,7 @@ textures/sfx/goopq1metal7_98dhuge_pent
 	{
 		map textures/sfx/pentagramfloor_red3.glow.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .5 .5 0 .5	
+		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
 }
@@ -3184,7 +3184,7 @@ textures/sfx/metaltechfloor02final_pent
 	{
 		map textures/sfx/pentagramfloor_red_glow.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .5 .5 0 .5	
+		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
 }
@@ -3204,7 +3204,7 @@ textures/sfx/blocks17final_pent
 	{
 		map textures/sfx/pentagramfloor_red_glow.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .5 .5 0 .5	
+		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
 }
@@ -3224,7 +3224,7 @@ textures/sfx/pentfloor_diamond2c
 	{
 		map textures/sfx/pentagramfloor_red_glow.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .5 .5 0 .5	
+		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
 }
@@ -3245,7 +3245,7 @@ textures/sfx/metalbridge06c_big_pentagram
 	{
 		map textures/sfx/pentagramfloor_red_glow.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .5 .5 0 .5	
+		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
 }
@@ -3265,7 +3265,7 @@ textures/sfx/largerblock3_pent
 	{
 		map textures/sfx/pentagramfloor_red_glow.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .5 .5 0 .5	
+		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
 }
@@ -3285,7 +3285,7 @@ textures/sfx/largerblock3b3_pent
 	{
 		map textures/sfx/pentagramfloor_red_glow.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .5 .5 0 .5	
+		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
 }
@@ -3293,7 +3293,7 @@ textures/sfx/largerblock3b3_pent
 
 textures/sfx/gothgrate1
 {
-	surfaceparm	metalsteps		
+	surfaceparm	metalsteps
 	cull none
 
 	// A GRATE OR GRILL THAT CAN BE SEEN FROM BOTH SIDES
@@ -3317,7 +3317,7 @@ textures/sfx/blocks18ccomputer_offset
 
 	//	*************************************************
 	//	*      	Computer 8 on Blocks18c			*
-	//	*      	March 18 1999				*	
+	//	*      	March 18 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 	// Created Mar.17.1999 (Xian)
@@ -3327,25 +3327,25 @@ textures/sfx/blocks18ccomputer_offset
 
 
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/computer8.tga	
+	q3map_lightimage textures/sfx/computer8.tga
 	q3map_surfacelight 200
 
-	
+
 	{
 		map textures/sfx/blocks18ccomputer_offset.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/computer8.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .3 0 3	
+		rgbGen wave sin .5 .3 0 3
 	}
 
 	//	END
@@ -3359,31 +3359,31 @@ textures/sfx/computerblocks11b
 	surfaceparm nodamage
 	q3map_surfacelight 200
 
-	
+
 	{
 		map textures/sfx/computerblocks11b.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		blendfunc gl_dst_color gl_zero
 		rgbGen identity
 	}
-	
+
 	{
 		animMap 2 textures/sfx/compscreen/letters1.tga textures/sfx/compscreen/letters2.tga textures/sfx/compscreen/letters3.tga textures/sfx/compscreen/letters5.tga  textures/sfx/compscreen/letters4.tga textures/sfx/compscreen/letters5.tga textures/sfx/compscreen/letters5.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 2
 	}
-	
+
 	//{
 	//	animMap 9 textures/sfx/compscreen/rotate0002.tga textures/sfx/compscreen/rotate0003.tga textures/sfx/compscreen/rotate0004.tga textures/sfx/compscreen/rotate0005.tga textures/sfx/compscreen/rotate0006.tga textures/sfx/compscreen/rotate0007.tga textures/sfx/compscreen/rotate0008.tga textures/sfx/compscreen/rotate0001.tga
 	//	blendFunc GL_ONE GL_ONE
 	//	rgbGen wave Sawtooth 0 1 0 9
 	//}
 
-	
+
 }
 
 
@@ -3392,39 +3392,39 @@ textures/sfx/blocks18ccomputer
 
 	//	*************************************************
 	//	*      	Computer 8 on Blocks18c			*
-	//	*      	March 18 1999				*	
+	//	*      	March 18 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 
-	
+
 	surfaceparm nodamage
 	q3map_surfacelight 200
 
-	
+
 	{
 		map textures/sfx/blocks18ccomputer.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		blendfunc gl_dst_color gl_zero
 		rgbGen identity
 	}
-	
+
 	{
 		animMap 2 textures/sfx/compscreen/letters1.tga textures/sfx/compscreen/letters2.tga textures/sfx/compscreen/letters3.tga textures/sfx/compscreen/letters5.tga  textures/sfx/compscreen/letters4.tga textures/sfx/compscreen/letters5.tga textures/sfx/compscreen/letters5.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 2
 	}
-	
+
 	//{
 	//	animMap 9 textures/sfx/compscreen/rotate0002.tga textures/sfx/compscreen/rotate0003.tga textures/sfx/compscreen/rotate0004.tga textures/sfx/compscreen/rotate0005.tga textures/sfx/compscreen/rotate0006.tga textures/sfx/compscreen/rotate0007.tga textures/sfx/compscreen/rotate0008.tga textures/sfx/compscreen/rotate0001.tga
 	//	blendFunc GL_ONE GL_ONE
 	//	rgbGen wave Sawtooth 0 1 0 9
 	//}
 
-	
+
 }
 
 
@@ -3433,37 +3433,37 @@ textures/sfx/computerblocks15
 
 	//	*************************************************
 	//	*      	Computer 8 on Blocks15			*
-	//	*      	May 11 1999				*	
+	//	*      	May 11 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 
-	
+
 	surfaceparm nodamage
 	q3map_surfacelight 200
 
-	
+
 	{
 		map textures/sfx/computerblocks15.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		blendfunc gl_dst_color gl_zero
 		rgbGen identity
 	}
-	
+
 	{
 		animMap 2 textures/sfx/compscreen/letters1.tga textures/sfx/compscreen/letters2.tga textures/sfx/compscreen/letters3.tga textures/sfx/compscreen/letters5.tga  textures/sfx/compscreen/letters4.tga textures/sfx/compscreen/letters5.tga textures/sfx/compscreen/letters5.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 2
 	}
-	
+
 	//{
 	//	animMap 9 textures/sfx/compscreen/rotate0002.tga textures/sfx/compscreen/rotate0003.tga textures/sfx/compscreen/rotate0004.tga textures/sfx/compscreen/rotate0005.tga textures/sfx/compscreen/rotate0006.tga textures/sfx/compscreen/rotate0007.tga textures/sfx/compscreen/rotate0008.tga textures/sfx/compscreen/rotate0001.tga
 	//	blendFunc GL_ONE GL_ONE
 	//	rgbGen wave Sawtooth 0 1 0 9
-	//}	
+	//}
 }
 
 
@@ -3472,32 +3472,32 @@ textures/sfx/computer_blocks17
 
 	//	*************************************************
 	//	*      	Computer on Blocks17			*
-	//	*      	May 28 1999				*	
+	//	*      	May 28 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 
-	
+
 	surfaceparm nodamage
 	q3map_surfacelight 200
 
-	
+
 	{
 		map textures/sfx/computer_blocks17.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		blendfunc gl_dst_color gl_zero
 		rgbGen identity
 	}
-	
+
 	{
 		animMap 2 textures/sfx/compscreen/letters1.tga textures/sfx/compscreen/letters2.tga textures/sfx/compscreen/letters3.tga textures/sfx/compscreen/letters5.tga  textures/sfx/compscreen/letters4.tga textures/sfx/compscreen/letters5.tga textures/sfx/compscreen/letters5.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 2
 	}
-	
+
 }
 
 
@@ -3506,41 +3506,41 @@ textures/sfx/computerpurptileb
 
 	//	*************************************************
 	//	*      	Computer 8 on computerpurptileb		*
-	//	*      	March 18 1999				*	
+	//	*      	March 18 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	//q3map_lightimage textures/sfx/compscreen/morph0020.tga 
+	//q3map_lightimage textures/sfx/compscreen/morph0020.tga
 	q3map_surfacelight 200
 
-	
+
 	{
 		map textures/sfx/computerpurptileb.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		blendfunc gl_dst_color gl_zero
 		rgbGen identity
 	}
-	
+
 
 	{
 		animMap 2 textures/sfx/compscreen/letters1.tga textures/sfx/compscreen/letters2.tga textures/sfx/compscreen/letters3.tga textures/sfx/compscreen/letters5.tga  textures/sfx/compscreen/letters4.tga textures/sfx/compscreen/letters5.tga textures/sfx/compscreen/letters5.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 2
 	}
-	
+
 	//{
 	//	animMap 9 textures/sfx/compscreen/rotate0002.tga textures/sfx/compscreen/rotate0003.tga textures/sfx/compscreen/rotate0004.tga textures/sfx/compscreen/rotate0005.tga textures/sfx/compscreen/rotate0006.tga textures/sfx/compscreen/rotate0007.tga textures/sfx/compscreen/rotate0008.tga textures/sfx/compscreen/rotate0001.tga
 	//	blendFunc GL_ONE GL_ONE
 	//	rgbGen wave Sawtooth 0 1 0 9
 	//}
 
-	
+
 }
 
 textures/sfx/diamond2cjumppad
@@ -3548,25 +3548,25 @@ textures/sfx/diamond2cjumppad
 	qer_editorimage textures/sfx/bouncepad01_diamond2cTGA.tga
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 500
 
-	
+
 	{
 		map textures/sfx/bouncepad01_diamond2cTGA.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -3583,25 +3583,25 @@ textures/sfx/blocks11bjumppad
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/blocks11bjumppad.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -3619,25 +3619,25 @@ textures/sfx/bounce_metalbridge04
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/bounce_metalbridge04.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -3655,25 +3655,25 @@ textures/sfx/bounce_largeblock3
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/bounce_largeblock3.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -3691,25 +3691,25 @@ textures/sfx/bounce_largeblock3b
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/bounce_largeblock3b.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -3726,25 +3726,25 @@ textures/sfx/bounce_dirt
 {
 
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/bounce_dirt.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc filter
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc add
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -3762,25 +3762,25 @@ textures/sfx/bounce_concrete
 {
 
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/bounce_concrete.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc filter
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc add
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -3800,25 +3800,25 @@ textures/sfx/bouncepad01_metalbridge06b
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/bouncepad01_metalbridge06b.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -3837,25 +3837,25 @@ textures/sfx/bouncepad01bgoopy7_98d
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/bouncepad01bgoopy7_98d.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -3872,25 +3872,25 @@ textures/sfx/bouncepad01b_metalbridge06c
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/bouncepad01b_metalbridge06c.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -3908,25 +3908,25 @@ textures/sfx/bounce_xq1metalbig
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 400
 
-	
+
 	{
 		map textures/sfx/bounce_xq1metalbig.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -3944,31 +3944,31 @@ textures/sfx/bouncepad01block18b
 
 	//	*************************************************
 	//	*      	Bounce Pad on Blocks18b			*
-	//	*      	March 10 1999				*	
+	//	*      	March 10 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 2000
 
-	
+
 	{
 		map textures/sfx/bouncepad01block18b.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -3986,31 +3986,31 @@ textures/sfx/bouncepad01_block17
 
 	//	*************************************************
 	//	*      	Bounce Pad on Blocks17			*
-	//	*      	March 10 1999				*	
+	//	*      	March 10 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 1000
 
-	
+
 	{
 		map textures/sfx/bouncepad01_block17.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -4029,31 +4029,31 @@ textures/sfx/bouncepad1q1metal7_99
 
 	//	*************************************************
 	//	*      	Bounce Pad on q1metal97			*
-	//	*      	March 10 1999				*	
+	//	*      	March 10 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga	
+	q3map_lightimage textures/sfx/jumppadsmall.tga
 	q3map_surfacelight 2000
 
-	
+
 	{
 		map textures/sfx/bouncepad1q1metal7_99.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
-	
+
 	{
 		map textures/sfx/bouncepad01b_layer1.tga
 		blendfunc gl_one gl_one
-		rgbGen wave sin .5 .5 0 1.5	
+		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
@@ -4198,7 +4198,7 @@ textures/sfx/9
 
 
 textures/sfx/goopq1metal7_98d_pent_256
-{	
+{
 	{
 		map textures/gothic_floor/goopq1metal7_98d.tga
 	}
@@ -4214,7 +4214,7 @@ textures/sfx/goopq1metal7_98d_pent_256
 	//{
 	//	map textures/sfx/pentfloor.glow.tga
 	//	blendfunc gl_one gl_one
-	//	rgbGen wave sin .5 .5 0 .5	
+	//	rgbGen wave sin .5 .5 0 .5
 	//}
 }
 
@@ -4223,18 +4223,18 @@ textures/sfx/pentagramfloor_red
 
 	//	*************************************************
 	//	*      	PENTAGRAM EFFECT			*
-	//	*      	March 1 1999				*	
+	//	*      	March 1 1999				*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 
 	polygonOffset
-			
+
 		{
 			map textures/sfx/pentagramfloor_red.tga
 			alphafunc GT0
 			depthWrite
 		}
-		
+
 		{
 			map $lightmap
 			rgbGen identity
@@ -4245,7 +4245,7 @@ textures/sfx/pentagramfloor_red
 		{
 			map textures/sfx/pentagramfloor_red_glow.tga
 			blendFunc GL_ONE GL_ONE
-			rgbGen wave sin .5 .5 0 .5	
+			rgbGen wave sin .5 .5 0 .5
 //			tcMod rotate 40
 			depthfunc equal
 		}
@@ -4554,8 +4554,8 @@ textures/sfx/xfiretest1
 	surfaceparm nolightmap
 	q3map_surfacelight 1000
 	tesssize 64
-	
-	
+
+
 	{
 	map textures/sfx/firetestb.tga
 	blendfunc gl_one gl_zero
@@ -4571,7 +4571,7 @@ textures/sfx/xfiretest1
 	tcMod scale .1 .1
 	tcMod scroll 0 1.0
 	}
-	
+
 	{
 	map textures/sfx/firetest2.tga
 	blendFunc GL_DST_COLOR GL_ONE
@@ -4602,7 +4602,7 @@ textures/sfx/xfiretest2
 	tcMod scale .1 .1
 	tcMod scroll 0 1.0
 	}
-	
+
 	{
 
 	map textures/sfx/firetestb.tga
@@ -4613,7 +4613,7 @@ textures/sfx/xfiretest2
 }
 
 textures/sfx/blackness
-{	
+{
 	surfaceparm nolightmap
 	surfaceparm noimpact
 	surfaceparm nomarks
@@ -4659,7 +4659,7 @@ textures/sfx/powerupshit
 
 textures/sfx/redstripe
 {
-	surfaceparm nolightmap	
+	surfaceparm nolightmap
 	{
 		map textures/sfx/redstripe.tga
 		blendFunc GL_ONE GL_ZERO
@@ -4668,7 +4668,7 @@ textures/sfx/redstripe
 }
 textures/sfx/yellowstripe
 {
-	surfaceparm nolightmap	
+	surfaceparm nolightmap
 	{
 		map textures/sfx/yellowstripe.tga
 		blendFunc GL_ONE GL_ZERO
@@ -4731,8 +4731,8 @@ textures/sfx/firetestnolight
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	tesssize 64
-	
-	
+
+
 	{
 	map textures/sfx/firetestb.tga
 	blendfunc GL_ONE GL_ZERO
@@ -4748,7 +4748,7 @@ textures/sfx/firetestnolight
 	tcMod scale .1 .1
 	tcMod scroll 0 1.0
 	}
-	
+
 	{
 	map textures/sfx/firetest2.tga
 	blendFunc GL_DST_COLOR GL_ONE
@@ -4764,8 +4764,8 @@ textures/sfx/firetest2
 	surfaceparm nolightmap
 	q3map_surfacelight 1000
 	tesssize 64
-	
-	
+
+
 	{
 	map textures/sfx/firetestb.tga
 	blendfunc GL_ONE GL_ZERO
@@ -4781,7 +4781,7 @@ textures/sfx/firetest2
 	tcMod scale .1 .1
 	tcMod scroll 0 1.0
 	}
-	
+
 	{
 	map textures/sfx/firetest2.tga
 	blendFunc GL_DST_COLOR GL_ONE
@@ -4797,7 +4797,7 @@ textures/sfx/firewall
 
 	//	*************************************************
 	//	*      	Solid Fire Wall				*
-	//	*      	Feb					*	
+	//	*      	Feb					*
 	//	*	Please Comment Changes			*
 	//	*************************************************
 
@@ -4820,7 +4820,7 @@ textures/sfx/firewall
 	tcMod scale .1 .1
 	tcMod scroll 0 1.0
 	}
-	
+
 	{
 	map textures/sfx/firetest2.tga
 	blendFunc GL_DST_COLOR GL_ONE
@@ -4874,7 +4874,7 @@ textures/sfx/blocks11b_jumppad
 textures/sfx/teslacoil
 {
 	cull none
-	q3map_lightimage textures/sfx/tesla1.tga	
+	q3map_lightimage textures/sfx/tesla1.tga
 	q3map_surfacelight 100
 
 	{
@@ -4882,7 +4882,7 @@ textures/sfx/teslacoil
 		tcgen environment
 		blendfunc filter
 	}
-	
+
 	{
 		map textures/sfx/tesla1.tga
 		blendfunc add
@@ -4891,9 +4891,9 @@ textures/sfx/teslacoil
 		tcmod turb 0 .1 0 1
 		tcMod scroll -1 -1
 	}
- 
-	
-	
+
+
+
 	{
 		map textures/sfx/electricslime.tga
 		blendfunc add
@@ -4909,7 +4909,7 @@ textures/sfx/teslacoil
 		blendfunc blend
 	}
 
-	
+
 }
 
 textures/sfx/teslacoil2
@@ -4924,27 +4924,27 @@ textures/sfx/teslacoil2
 		blendfunc GL_ONE GL_ONE
 		rgbGen wave sin .5 0 0 0
 		tcMod scroll 5 5
-		
+
 	}
-	
+
 }
 
 textures/sfx/teslacoil3
 {
 	cull none
-	q3map_lightimage textures/sfx/tesla1b.tga	
+	q3map_lightimage textures/sfx/tesla1b.tga
 	q3map_surfacelight 100
 	qer_editorimage textures/sfx/teslacoil.tga
 	surfaceparm nolightmap
-	
-	
+
+
 
 	{
 		map textures/sfx/cabletest2.tga
 		blendfunc blend
 	}
 
-	
+
 	{
 		map textures/sfx/electricslime2.tga
 		blendfunc add
@@ -4962,25 +4962,25 @@ textures/sfx/teslacoil3
 		tcmod scale 1 1
 		tcMod scroll -2 1
 	}
-	
+
 }
 
 textures/sfx/teslacoil3blue
 {
 	cull none
-	q3map_lightimage textures/sfx/tesla1blue.tga	
+	q3map_lightimage textures/sfx/tesla1blue.tga
 	q3map_surfacelight 100
 	qer_editorimage textures/sfx/teslacoil.tga
 	surfaceparm nolightmap
-	
-	
+
+
 
 	{
 		map textures/sfx/cabletest2.tga
 		blendfunc blend
 	}
 
-	
+
 	{
 		map textures/sfx/electricslimeblue.tga
 		blendfunc add
@@ -4998,7 +4998,7 @@ textures/sfx/teslacoil3blue
 		tcmod scale 1 1
 		tcMod scroll -2 1
 	}
-	
+
 }
 
 
@@ -5017,9 +5017,9 @@ textures/sfx/teslacoiltrans
 		blendfunc GL_ONE GL_ONE
 		rgbGen wave sin .5 0 0 0
 		tcMod scroll 5 5
-		
+
 	}
-	
+
 }
 
 
@@ -5242,7 +5242,7 @@ textures/sfx/hellfog_tim_dm14
 	q3map_globaltexture
 	q3map_surfacelight 50
 	fogparms ( .55 .11 .1 ) 128
-	
+
 	{
 		map textures/liquids/kc_fogcloud3.tga
 		blendfunc gl_dst_color gl_zero
@@ -5278,8 +5278,8 @@ textures/sfx/kc_hellfog_1k
 	q3map_lightsubdivide 32
 	fogparms ( .5 .12 .1 ) 225
 
-	
-	
+
+
 	{
 		map textures/liquids/kc_fogcloud3.tga
 		blendfunc gl_dst_color gl_zero
@@ -5315,8 +5315,8 @@ textures/sfx/hellfog_1k
 	q3map_surfacelight 200
 	fogparms ( .5 .12 .1 ) 300
 
-	
-	
+
+
 	{
 		map textures/liquids/kc_fogcloud3.tga
 		blendfunc gl_dst_color gl_zero
@@ -5352,7 +5352,7 @@ textures/sfx/hellfog
 	q3map_surfacelight 100
 	fogparms ( .55 .11 .1 ) 300
 
-	
+
 	{
 		map textures/liquids/kc_fogcloud3.tga
 		blendfunc gl_dst_color gl_zero
@@ -5410,10 +5410,10 @@ textures/sfx/q3tourney3fog
 	q3map_globaltexture
 	q3map_surfacelight 100
 	fogparms ( .55 .11 .1 ) 384
-	
-	
 
-	
+
+
+
 	{
 		map textures/liquids/kc_fogcloud3.tga
 		blendfunc gl_dst_color gl_zero
@@ -5429,7 +5429,7 @@ textures/sfx/q3tourney3fog
 		tcmod scroll .01 -.01
 		rgbgen identity
 	}
-		
+
 }
 
 textures/sfx/q3dm14fog
@@ -5446,10 +5446,10 @@ textures/sfx/q3dm14fog
 	q3map_globaltexture
 	q3map_surfacelight 100
 	fogparms ( .55 .11 .1 ) 256
-	
-	
 
-	
+
+
+
 	{
 		map textures/liquids/kc_fogcloud3.tga
 		blendfunc gl_dst_color gl_zero
@@ -5465,7 +5465,7 @@ textures/sfx/q3dm14fog
 		tcmod scroll .01 -.01
 		rgbgen identity
 	}
-		
+
 }
 
 
@@ -5483,10 +5483,10 @@ textures/sfx/q3dm9fog
 	q3map_globaltexture
 	q3map_surfacelight 100
 	fogparms ( .55 .11 .1 ) 256
-	
-	
 
-	
+
+
+
 	{
 		map textures/liquids/kc_fogcloud3.tga
 		blendfunc gl_dst_color gl_zero
@@ -5502,7 +5502,7 @@ textures/sfx/q3dm9fog
 		tcmod scroll .01 -.01
 		rgbgen identity
 	}
-		
+
 }
 
 
@@ -5520,10 +5520,10 @@ textures/sfx/hellfogdense
 	q3map_globaltexture
 	q3map_surfacelight 100
 	fogparms ( .55 .11 .1 ) 128
-	
-	
 
-	
+
+
+
 	{
 		map textures/liquids/kc_fogcloud3.tga
 		blendfunc gl_dst_color gl_zero
@@ -5539,7 +5539,7 @@ textures/sfx/hellfogdense
 		tcmod scroll .01 -.01
 		rgbgen identity
 	}
-		
+
 }
 
 //textures/sfx/pj_dm9_fog2
@@ -5619,12 +5619,12 @@ textures/sfx/q1teleporter
 	tesssize 128
 	cull disable
 	deformVertexes wave 100 sin 3 2 .1 0.1
-	
+
 	{
 		map textures/sfx/q1teleporter.tga
 		tcMod turb 0 .3 0 .2
 	}
-	
+
 }
 
 //fog for map mkc_dm4
@@ -5655,19 +5655,19 @@ textures/sfx/mkc_bigflame
 		animMap 10 textures/sfx/flame1.tga textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
-		
-	}	
+
+	}
 	{
 		animMap 10 textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga textures/sfx/flame1.tga
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
-	}	
+	}
 
 
 	{
 		map textures/sfx/flameball.tga
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin .6 .2 0 .6	
+		rgbGen wave sin .6 .2 0 .6
 	}
 
 }
@@ -5682,8 +5682,8 @@ textures/sfx/mkc_fog_tdm3
 	surfaceparm 	nolightmap
 	q3map_globaltexture
 	fogparms ( 0.3 0.2 0.2 ) 320
-	
-	
+
+
 	{
 		map textures/liquids/kc_fogcloud3.tga
 		blendfunc gl_dst_color gl_zero
@@ -5740,7 +5740,7 @@ textures/sfx/mkc_fog_ctfblue
 	q3map_surfacelight 12
 	q3map_globaltexture
 	fogparms ( 0.2 0.2 0.25 ) 320
-	
+
 	{
 		map textures/liquids/kc_fogcloud3.tga
 		blendfunc gl_dst_color gl_zero
@@ -5770,7 +5770,7 @@ textures/sfx/mkc_fog_ctfblue2
 	fogparms ( 0.1 0.1 0.3 ) 320
 
 	q3map_surfacelight 40
-	
+
 	{
 		map textures/liquids/kc_fogcloud3.tga
 		blendfunc gl_dst_color gl_zero
@@ -5801,7 +5801,7 @@ textures/sfx/bugmirror
 	}
 	{
 		map textures/sfx/mirrorkc.tga
-		blendFunc add	
+		blendFunc add
 		depthfunc equal
 	}
 }
@@ -5825,14 +5825,14 @@ textures/stone/pjrock1_trans
 	{
 		map $lightmap
 		rgbGen identity
-	
+
 	}
 	{
 		map textures/stone/pjrock1.tga
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 
-	
+
 	}
 }
 
@@ -5843,13 +5843,13 @@ textures/stone/pjrock7_trans
 	{
 		map $lightmap
 		rgbGen identity
-	
+
 	}
 	{
 		map textures/stone/pjrock7.tga
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 
-	
+
 	}
 }

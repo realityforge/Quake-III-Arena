@@ -7,7 +7,7 @@ models/mapobjects/terrastone/magicstone01
 		map textures/stone/pjrock9b_2.tga
 		 rgbGen vertex
 	}
-        
+
 }
 models/mapobjects/terrastone/magicstone02
 {
@@ -18,7 +18,7 @@ models/mapobjects/terrastone/magicstone02
 		map textures/stone/pjrock9b_2.tga
 		 rgbGen vertex
 	}
-        
+
 }
 models/mapobjects/terrastone/magicstone03
 {
@@ -29,7 +29,7 @@ models/mapobjects/terrastone/magicstone03
 		map textures/stone/pjrock9b_2.tga
 		 rgbGen vertex
 	}
-        
+
 }
 models/mapobjects/terrastone/magicstone04
 {
@@ -40,15 +40,15 @@ models/mapobjects/terrastone/magicstone04
 		map textures/stone/pjrock9b_2.tga
 		 rgbGen vertex
 	}
-        
+
 }
 
 models/mapobjects/tree2/branch2
 {
-	
+
         surfaceparm nolightmap
-        surfaceparm trans	
-        surfaceparm nomarks	
+        surfaceparm trans
+        surfaceparm nomarks
 	cull none
         sort 10
 
@@ -57,13 +57,13 @@ models/mapobjects/tree2/branch2
 	{
 		clampmap models/mapobjects/tree2/branch2.tga
 		blendFunc GL_ZERO GL_ONE_MINUS_SRC_COLOR
-        
+
 	}
 }
 
 models/mapobjects/weeds2/weeds2
 {
-     
+
      cull disable
      surfaceParm Trans
 
@@ -107,7 +107,7 @@ models/players/heads/james/james_e_blu
 }
 models/players/heads/janet/janet_blu
 {
-     
+
      //cull disable
 
         {
@@ -124,7 +124,7 @@ models/players/heads/janet/janet_blu
 }
 models/players/heads/james/james_red
 {
-     
+
      //cull disable
 
         {
@@ -141,7 +141,7 @@ models/players/heads/james/james_red
 }
 models/players/heads/janet/janet_red
 {
-     
+
      //cull disable
 
         {
@@ -158,7 +158,7 @@ models/players/heads/janet/janet_red
 }
 models/players/heads/james/james_blu
 {
-     
+
      //cull disable
 
         {
@@ -237,7 +237,7 @@ models/powerups/shield_3
 
 models/powerups/shield_2
 {
-   	
+
         {
 	        map models/powerups/shield_fx.tga
 		blendfunc Add
@@ -259,7 +259,7 @@ models/powerups/porter1
 
 models/powerups/porter2
 {
-   	
+
         {
 	        map models/powerups/porter_fx.tga
 		blendfunc Add
@@ -272,7 +272,7 @@ models/powerups/porter2
 models/mapobjects/statues/flagbits_stat
 {
                cull none
-	      
+
 	 {
                 map models/mapobjects/statues/flagbits_stat.tga
                 alphaFunc GE128
@@ -314,17 +314,17 @@ models/powerups/shield/shield2
 
 models/players/heads/callisto/callisto
 {
-        
+
         {
 		AnimMap 5 models/players/heads/callisto/callisto.tga models/players/heads/callisto/callisto.tga models/players/heads/callisto/callisto.tga models/players/heads/callisto/callisto.tga models/players/heads/callisto/callisto.tga models/players/heads/callisto/callisto2.tga models/players/heads/callisto/callisto.tga models/players/heads/callisto/callisto2.tga
 		rgbGen lightingdiffuse
 	}
-        
-        
+
+
 }
 
 models/players/heads/ursula/ursula_e
-{       	
+{
         surfaceparm trans
 	{
 		map models/players/heads/ursula/ursula_e.tga
@@ -336,7 +336,7 @@ models/players/heads/ursula/ursula_e
 
 
 models/players/heads/gaunt/gaunt_e
-{       	
+{
         surfaceparm trans
 	{
 		map models/players/heads/gaunt/gaunt_e.tga
@@ -348,102 +348,102 @@ models/players/heads/gaunt/gaunt_e
 models/powerups/ob2_target
 {
 	cull none
-             
+
         {
 		map models/powerups/ob2_target.tga
 		//rgbGen identity
-		rgbGen entity		
+		rgbGen entity
 	}
-                
+
 }
 
 models/powerups/ob2_energy
 {
 	cull none
-             
+
         {
 		map models/powerups/ob2_energy.tga
 		//rgbGen identity
 		rgbGen entity
 		blendfunc add
 	}
-                
+
 }
 
 models/powerups/ob2_energy2
 {
-	cull none    
-        
+	cull none
+
 	{
 		map models/powerups/ob2_energy2.tga
 		//rgbGen identity
 		rgbGen entity
-		
+
 	}
-                
+
 }
 
 models/powerups/ob2_lightning1
 {
-      
+
 	deformVertexes wave 100 sin 4 3 0 0.3
         deformVertexes wave 30 sin 0 3 0 .8
         deformVertexes normal .3 .2
         cull none
-        
+
         {
-		AnimMap 15 models/powerups/ob2_lightn1.tga models/powerups/ob2_lightn2.tga models/powerups/ob2_lightn3.tga models/powerups/ob2_lightn4.tga models/powerups/ob2_lightn5.tga models/powerups/ob2_lightn6.tga models/powerups/ob2_lightn7.tga models/powerups/ob2_lightn8.tga  
+		AnimMap 15 models/powerups/ob2_lightn1.tga models/powerups/ob2_lightn2.tga models/powerups/ob2_lightn3.tga models/powerups/ob2_lightn4.tga models/powerups/ob2_lightn5.tga models/powerups/ob2_lightn6.tga models/powerups/ob2_lightn7.tga models/powerups/ob2_lightn8.tga
 		rgbGen identity
 		blendfunc add
 	}
-        
-        
+
+
 }
 
 models/powerups/ob2_lightning2
 {
-      
+
 	deformVertexes wave 30 sin 0 3 0 .1
         cull none
-        
+
         {
-		AnimMap 15 models/powerups/ob2_lightn3.tga models/powerups/ob2_lightn1.tga models/powerups/ob2_lightn4.tga models/powerups/ob2_lightn2.tga models/powerups/ob2_lightn6.tga models/powerups/ob2_lightn5.tga models/powerups/ob2_lightn8.tga models/powerups/ob2_lightn7.tga  
+		AnimMap 15 models/powerups/ob2_lightn3.tga models/powerups/ob2_lightn1.tga models/powerups/ob2_lightn4.tga models/powerups/ob2_lightn2.tga models/powerups/ob2_lightn6.tga models/powerups/ob2_lightn5.tga models/powerups/ob2_lightn8.tga models/powerups/ob2_lightn7.tga
 		rgbGen identity
 		blendfunc add
 	}
-        
-        
+
+
 }
 
 models/powerups/ob2_lightning3
 {
-      
+
 	deformVertexes wave 100 sin 4 3 0 0.3
         cull none
-        
+
         {
-		AnimMap 15 models/powerups/ob2_lightn4.tga models/powerups/ob2_lightn6.tga models/powerups/ob2_lightn1.tga models/powerups/ob2_lightn3.tga models/powerups/ob2_lightn8.tga models/powerups/ob2_lightn4.tga models/powerups/ob2_lightn5.tga models/powerups/ob2_lightn3.tga  
+		AnimMap 15 models/powerups/ob2_lightn4.tga models/powerups/ob2_lightn6.tga models/powerups/ob2_lightn1.tga models/powerups/ob2_lightn3.tga models/powerups/ob2_lightn8.tga models/powerups/ob2_lightn4.tga models/powerups/ob2_lightn5.tga models/powerups/ob2_lightn3.tga
 		rgbGen identity
 		blendfunc add
 	}
-        
-        
+
+
 }
 
 models/weaphits/kamiwave01
 {
-	
-        surfaceparm trans	
+
+        surfaceparm trans
 	cull disable
         nomipmaps
 	{
-	        clampmap models/weaphits/kamiwave01.tga 
+	        clampmap models/weaphits/kamiwave01.tga
 		blendFunc Add
                 tcmod rotate 20
 		rgbGen entity
 	}
 	{
-	        clampmap models/weaphits/kamiwave01.tga 
+	        clampmap models/weaphits/kamiwave01.tga
 		blendFunc Add
   		tcmod rotate -20
 		rgbGen entity
@@ -451,11 +451,11 @@ models/weaphits/kamiwave01
 }
 models/weaphits/kamiwave02
 {
-	
-        surfaceparm trans	
+
+        surfaceparm trans
 	cull disable
 	{
-	        map models/weaphits/kamiwave02.tga 
+	        map models/weaphits/kamiwave02.tga
 		blendFunc Add
                 tcmod scroll 1 0
 		rgbGen entity
@@ -465,19 +465,19 @@ models/weaphits/kamiwave02
 
 models/powerups/kamitrail
 {
-	
-        surfaceparm trans	
+
+        surfaceparm trans
 	cull disable
         nomipmaps
 	{
-	        map models/powerups/kamitrail.tga 
+	        map models/powerups/kamitrail.tga
 		blendFunc Add
 		rgbGen identity
 	}
 }
 models/weaphits/proxminet
 {
-        cull disable  
+        cull disable
         {
                 map models/weaphits/proxmine.tga
                 rgbGen lightingdiffuse
@@ -492,7 +492,7 @@ models/weaphits/proxminet
 
 models/weaphits/proxmine2t
 {
-        cull disable  
+        cull disable
         nomipmaps
         {
                 clampmap models/weaphits/proxmine2t.tga
@@ -526,7 +526,7 @@ models/weaphits/kamikred
                 tcmod scale .5 .5
                 tcmod rotate 166
                 tcmod Scroll 1.3 .8
-                
+
                 rgbGen identity
        }
 
@@ -547,7 +547,7 @@ models/weaphits/kamikblu
                 tcmod scale .5 .5
                 tcmod rotate 166
                 tcmod Scroll 1.3 .8
-                
+
                 rgbGen identity
         }
 }
@@ -599,7 +599,7 @@ models/players/heads/gammy/gammy3
 
 models/players/heads/morgan/morgan_blu
 {
-     
+
 
         {
                 map models/players/james/blue.tga
@@ -616,7 +616,7 @@ models/players/heads/morgan/morgan_blu
 }
 models/players/heads/morgan/morgan_red
 {
-     
+
 
         {
                 map models/players/james/red.tga
@@ -634,7 +634,7 @@ models/players/heads/morgan/morgan_red
 
 models/players/heads/megan/megan1_blu
 {
-     
+
 
         {
                 map models/players/james/blue.tga
@@ -651,7 +651,7 @@ models/players/heads/megan/megan1_blu
 }
 models/players/heads/megan/megan1_red
 {
-     
+
 
 
         {
@@ -671,7 +671,7 @@ models/players/heads/megan/megan1_red
 
 models/players/heads/megan/megan3
 {
-     
+
      //cull disable
 
        // {
@@ -689,7 +689,7 @@ models/players/heads/megan/megan3
 }
 models/players/heads/megan/megan2
 {
-     
+
 
         {
                 map textures/effects/tinfx2c.tga
@@ -707,7 +707,7 @@ models/players/heads/megan/megan2
 
 models/powerups/teleporter/tele_enter
 {
-     
+
      cull disable
 
         {
@@ -719,7 +719,7 @@ models/powerups/teleporter/tele_enter
 }
 models/powerups/teleporter/tele_enter2
 {
-     
+
      cull disable
 
         {
@@ -731,7 +731,7 @@ models/powerups/teleporter/tele_enter2
 }
 models/powerups/teleporter/tele_exit2
 {
-     
+
      cull disable
 
         {
@@ -743,7 +743,7 @@ models/powerups/teleporter/tele_exit2
 }
 models/powerups/teleporter/tele_exit
 {
-     
+
      cull disable
 
         {
@@ -758,7 +758,7 @@ models/powerups/teleporter/tele_exit
 
 models/players/heads/neptune/neptune2
 {
-     
+
      //cull disable
 
         {
@@ -771,7 +771,7 @@ models/players/heads/neptune/neptune2
 
 models/mapobjects/techlamp/techlamp02trn
 {
-     
+
      cull disable
      surfaceparm alphashadow
 
@@ -784,7 +784,7 @@ models/mapobjects/techlamp/techlamp02trn
 }
 models/mapobjects/techlamp/techlamp02lt
 {
-     
+
      cull disable
      surfaceparm alphashadow
 
@@ -796,7 +796,7 @@ models/mapobjects/techlamp/techlamp02lt
 }
 models/mapobjects/techlamp/techlamp_rail
 {
-     
+
      cull disable
      surfaceparm alphashadow
 
@@ -843,13 +843,13 @@ models/mapobjects/techlamp/techlamp_pole
                 tcGen environment
                 tcmod scroll 0 .3
                 rgbGen identity
-                
+
         }
         {
                 map models/mapobjects/techlamp/techlamp_pole.tga
                 blendFunc blend
                 rgbGen Vertex
-                
+
         }
 
 
@@ -863,11 +863,11 @@ models/mapobjects/slamp/slamp3x
 	surfaceparm nolightmap
 	cull none
    //q3map_surfacelight	100
-    
+
         {
                 map models/mapobjects/slamp/slamp3x.tga
                 blendFunc GL_ONE GL_ONE
-                
+
         }
 
 
@@ -875,12 +875,12 @@ models/mapobjects/slamp/slamp3x
 
 models/flags/pole
 {
-	  
+
         {
              map textures/effects/tinfx.tga
 		tcGen environment
-		rgbGen lightingDiffuse	
-                
+		rgbGen lightingDiffuse
+
         }
 
 
@@ -914,12 +914,12 @@ models/flag/flagbits
 }
 models/flag2/w_flag2
 {
-      
+
 	deformVertexes wave 100 sin 4 3 0 0.3
         deformVertexes wave 30 sin 0 3 0 .8
         deformVertexes normal .3 .2
         cull none
-        
+
         {
 		map models/flag2/w_flag2.tga
 		 rgbGen identity
@@ -929,7 +929,7 @@ models/flag2/w_flag2
                 tcGen environment
                 //tcmod scale 9 3
                 //tcmod scroll .1 .7
-                
+
                 blendFunc GL_ONE GL_ONE
                  rgbGen identity
 	}
@@ -940,20 +940,20 @@ models/flag2/w_flag2
 	}
         {
 		map textures/sfx/shadow.tga
-                tcGen environment 
-                //blendFunc GL_ONE GL_ONE            
+                tcGen environment
+                //blendFunc GL_ONE GL_ONE
                 blendFunc GL_DST_COLOR GL_ZERO
                rgbGen identity
 	}
 }
 models/flag2/r_flag2
 {
-      
+
 	deformVertexes wave 100 sin 4 3 0 0.3
         deformVertexes wave 30 sin 0 3 0 .8
         deformVertexes normal .3 .2
         cull none
-        
+
         {
 		map models/flag2/r_flag2.tga
 		 rgbGen identity
@@ -963,7 +963,7 @@ models/flag2/r_flag2
                 tcGen environment
                 //tcmod scale 9 3
                 //tcmod scroll .1 .7
-                
+
                 blendFunc GL_ONE GL_ONE
                  rgbGen identity
 	}
@@ -974,20 +974,20 @@ models/flag2/r_flag2
 	}
         {
 		map textures/sfx/shadow.tga
-                tcGen environment 
-                //blendFunc GL_ONE GL_ONE            
+                tcGen environment
+                //blendFunc GL_ONE GL_ONE
                 blendFunc GL_DST_COLOR GL_ZERO
                rgbGen identity
 	}
 }
 models/flag2/b_flag2
 {
-      
+
 	deformVertexes wave 100 sin 4 3 0 0.3
         deformVertexes wave 30 sin 0 3 0 .8
         deformVertexes normal .3 .2
         cull none
-        
+
         {
 		map models/flag2/b_flag2.tga
 		 rgbGen identity
@@ -1007,8 +1007,8 @@ models/flag2/b_flag2
 	}
         {
 		map textures/sfx/shadow.tga
-                tcGen environment 
-                //blendFunc GL_ONE GL_ONE            
+                tcGen environment
+                //blendFunc GL_ONE GL_ONE
                 blendFunc GL_DST_COLOR GL_ZERO
                 rgbGen identity
 	}
@@ -1034,7 +1034,7 @@ models/powerups/kamikazi2
 
 models/powerups/kamikazi_f
 {
-   	
+
         {
 	        map models/powerups/kamikazi_f.tga
 		blendfunc Add
@@ -1138,7 +1138,7 @@ models/powerups/doubler2
 }
 models/mapobjects/spawn/spawn3
 {
-     
+
      cull disable
 
         {
@@ -1154,7 +1154,7 @@ models/mapobjects/spawn/spawn3
 }
 models/mapobjects/spawn/spawn3_r
 {
-     
+
      cull disable
 
         {
@@ -1171,7 +1171,7 @@ models/mapobjects/spawn/spawn3_r
 
 models/powerups/obelisk/ob_trns
 {
-     
+
      cull disable
 
         {
@@ -1196,7 +1196,7 @@ models/powerups/obelisk/ob_sft
                 blendfunc blend
                 rgbGen lightingdiffuse
         }
-       
+
 }
 
 models/powerups/obelisk/ob_twirl
@@ -1210,7 +1210,7 @@ models/powerups/obelisk/ob_twirl
                 Blendfunc Add
                 rgbGen identity
         }
-       
+
 }
 models/powerups/obelisk/ob_twirl2
 {
@@ -1223,7 +1223,7 @@ models/powerups/obelisk/ob_twirl2
                 Blendfunc Add
                 rgbGen identity
         }
-       
+
 }
 models/powerups/obelisk/ob_flare
 {
@@ -1235,7 +1235,7 @@ models/powerups/obelisk/ob_flare
                 Blendfunc Add
                 rgbGen identity
         }
-       
+
 }
 
 models/powerups/obelisk/ob_flare2
@@ -1248,7 +1248,7 @@ models/powerups/obelisk/ob_flare2
                 Blendfunc Add
                 rgbGen identity
         }
-       
+
 }
 models/powerups/obelisk/ob_cyl
 {
@@ -1260,7 +1260,7 @@ models/powerups/obelisk/ob_cyl
                 tcmod scroll .2 0
                 rgbGen identity
         }
-       
+
         {
                 map models/powerups/obelisk/ob_cyl.tga
                 Blendfunc Add
@@ -1322,7 +1322,7 @@ models/weaphits/kamik01
                 tcmod scale .5 .5
                 tcmod rotate 66
                 tcmod Scroll 1.3 .8
-                
+
                 rgbGen identity
         }
        {
@@ -1332,7 +1332,7 @@ models/weaphits/kamik01
                 tcmod scale .5 .5
                 tcmod rotate -116
                 tcmod Scroll -1 .3
-                
+
                 rgbGen identity
         }
 }
@@ -1407,7 +1407,7 @@ models/powerups/ammo/nailgammo2
 
 models/weapons/proxmine/f_proxmine
 {
-        cull disable  
+        cull disable
         {
                 map models/weapons/proxmine/f_proxmine.tga
                 blendFunc add
@@ -1419,7 +1419,7 @@ models/weapons/proxmine/f_proxmine
 
 models/weapons/proxmine/proxmine2
 {
-        cull disable  
+        cull disable
         {
                 map models/weapons/proxmine/proxmine2.tga
                 rgbGen lightingdiffuse
@@ -1434,7 +1434,7 @@ models/weapons/proxmine/proxmine2
 
 models/weapons/proxmine/proxmine1
 {
-        cull disable  
+        cull disable
         {
                 map models/weapons/proxmine/proxmine1b.tga
                 tcmod scroll 0 2
@@ -1449,7 +1449,7 @@ models/weapons/proxmine/proxmine1
 }
 models/weaphits/kam01
 {
-        cull disable  
+        cull disable
         {
                 map models/weaphits/kam01.tga
                 blendFunc add
@@ -1466,7 +1466,7 @@ models/weaphits/kam01
 }
 models/weaphits/kam02
 {
-        cull disable  
+        cull disable
         {
                 map models/weaphits/kam01.tga
                 blendFunc add
@@ -1483,7 +1483,7 @@ models/weaphits/kam02
 }
 models/weaphits/kam03
 {
-        cull disable  
+        cull disable
         deformVertexes autoSprite
         {
                 clampmap models/weaphits/kam03.tga
@@ -1501,7 +1501,7 @@ models/weaphits/kam03
 }
 models/weaphits/kam04
 {
-        cull disable  
+        cull disable
         deformVertexes autoSprite
         {
                 clampmap models/weaphits/kam04.tga
@@ -1514,7 +1514,7 @@ models/weaphits/kam04
 }
 models/weaphits/proxmine
 {
-        cull disable  
+        cull disable
         {
                 map models/weaphits/proxmine.tga
                 rgbGen lightingdiffuse
@@ -1529,7 +1529,7 @@ models/weaphits/proxmine
 
 models/weaphits/proxmine2
 {
-        cull disable  
+        cull disable
         nomipmaps
         {
                 clampmap models/weaphits/proxmine2.tga
@@ -1550,7 +1550,7 @@ models/weaphits/proxmine2
 
 models/weapons/nailgun/nail
 {
-     
+
      cull disable
 
         {
@@ -1603,7 +1603,7 @@ models/weapons/nailgun/nailgun
 }
 models/players/fritzkrieg/fritz_fx
 {
-     
+
      cull disable
 
         {
@@ -1620,7 +1620,7 @@ models/players/fritzkrieg/fritz_fx
 }
 models/players/fritzkrieg/fritz_c
 {
-	
+
 	cull none
         //nopicmip
 	{
@@ -1629,7 +1629,7 @@ models/players/fritzkrieg/fritz_c
 		depthWrite
 		rgbGen lightingdiffuse
 	}
-        
+
 }
 models/players/fritzkrieg/beam
 {
@@ -1655,7 +1655,7 @@ models/players/fritzkrieg/beam2
 }
 models/players/heads/khan/khan_f
 {
-	
+
 	cull twosided
         //nopicmip
 	{
@@ -1664,7 +1664,7 @@ models/players/heads/khan/khan_f
 		//depthWrite
 		rgbGen lightingdiffuse
 	}
-        
+
 }
 models/players/pi/piston
 {
@@ -1677,11 +1677,11 @@ models/players/pi/piston
 		depthWrite
 		rgbGen lightingdiffuse
 	}
-        
+
 }
 models/players/pi/pi_t
 {
-	
+
 	cull none
         //nopicmip
 	{
@@ -1690,11 +1690,11 @@ models/players/pi/pi_t
 		depthWrite
 		rgbGen lightingdiffuse
 	}
-        
+
 }
 models/players/pi/ntrl_t
 {
-	
+
 	cull none
         //nopicmip
 	{
@@ -1703,11 +1703,11 @@ models/players/pi/ntrl_t
 		depthWrite
 		rgbGen lightingdiffuse
 	}
-        
+
 }
 models/players/pi/pi_t2
 {
-	
+
 	cull none
         //nopicmip
 	{
@@ -1716,11 +1716,11 @@ models/players/pi/pi_t2
 		depthWrite
 		rgbGen lightingdiffuse
 	}
-        
+
 }
 models/players/pi/hair
 {
-	
+
 	surfaceparm	nodraw
         //nopicmip
 	//{
@@ -1729,16 +1729,16 @@ models/players/pi/hair
 		//depthWrite
 	//	rgbGen lightingdiffuse
 	//}
-        
+
 }
 models/players/pi/null
 {
-	
+
 	surfaceparm	nodraw
-        
+
 }
 
-models/players/pi/pi 
+models/players/pi/pi
 {
         {
 		map $whiteimage
@@ -1784,7 +1784,7 @@ models/players/pi/endcap
 		depthWrite
 		rgbGen lightingdiffuse
 	}
-        
+
 }
 models/players/pi/redendcap
 {
@@ -1796,7 +1796,7 @@ models/players/pi/redendcap
 		depthWrite
 		rgbGen lightingdiffuse
 	}
-        
+
 }
 models/players/pi/bluendcap
 {
@@ -1808,7 +1808,7 @@ models/players/pi/bluendcap
 		depthWrite
 		rgbGen lightingdiffuse
 	}
-        
+
 }
 models/players/pi/gear01
 {
@@ -1821,16 +1821,16 @@ models/players/pi/gear01
 		depthWrite
 		rgbGen lightingdiffuse
 	}
-        
+
 }
 ////////////////////////////////
 // FEMALE TEAM MODEL SHADERS  //
-////////////////////////////////  
+////////////////////////////////
 
 
 models/players/janet/thefallen/thefallen_red
 {
-    
+
     \\ cull disable
         {
                 map models/players/james/red.tga
@@ -1845,7 +1845,7 @@ models/players/janet/thefallen/thefallen_red
 }
 models/players/janet/thefallen/thefallen_blu
 {
-    
+
      //cull disable
         {
                 map models/players/james/blue.tga
@@ -1863,7 +1863,7 @@ models/players/janet/thefallen/thefallen_blu
 
 models/players/janet/intruders/intruders_red
 {
-     
+
      //cull disable
         {
                 map models/players/james/red.tga
@@ -1878,7 +1878,7 @@ models/players/janet/intruders/intruders_red
 }
 models/players/janet/intruders/intruders_blu
 {
-     
+
      //cull disable
         {
                 map models/players/james/blue.tga
@@ -1895,7 +1895,7 @@ models/players/janet/intruders/intruders_blu
 
 models/players/janet/stroggs/stroggs_red
 {
-     
+
      //cull disable
         {
                 map models/players/james/red.tga
@@ -1910,7 +1910,7 @@ models/players/janet/stroggs/stroggs_red
 }
 models/players/janet/stroggs/stroggs_blu
 {
-     
+
      //cull disable
         {
                 map models/players/james/blue.tga
@@ -1926,7 +1926,7 @@ models/players/janet/stroggs/stroggs_blu
 
 models/players/janet/crusaders/crusaders_red
 {
-     
+
     // cull disable
         {
                 map models/players/james/red.tga
@@ -1941,7 +1941,7 @@ models/players/janet/crusaders/crusaders_red
 }
 models/players/janet/crusaders/crusaders_blu
 {
-     
+
      //cull disable
         {
                 map models/players/james/blue.tga
@@ -1957,7 +1957,7 @@ models/players/janet/crusaders/crusaders_blu
 
 models/players/janet/pagans/pagans_h_blu
 {
-     
+
 
         {
                 map models/players/james/blue.tga
@@ -1973,7 +1973,7 @@ models/players/janet/pagans/pagans_h_blu
 
 models/players/janet/pagans/pagans_blu
 {
-     
+
      //cull disable
         {
                 map models/players/james/blue.tga
@@ -1989,7 +1989,7 @@ models/players/janet/pagans/pagans_blu
 
 models/players/janet/pagans/pagans_h_red
 {
-     
+
 
         {
                 map models/players/james/red.tga
@@ -2005,7 +2005,7 @@ models/players/janet/pagans/pagans_h_red
 
 models/players/janet/pagans/pagans_red
 {
-     
+
      //cull disable
         {
                 map models/players/james/red.tga
@@ -2020,10 +2020,10 @@ models/players/janet/pagans/pagans_red
 }
 ////////////////////////////////
 //  MALE TEAM MODEL SHADERS   //
-//////////////////////////////// 
+////////////////////////////////
 models/players/james/intruders/intruders_red
 {
-     
+
      //cull disable
 
         {
@@ -2037,10 +2037,10 @@ models/players/james/intruders/intruders_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
-} 
+}
 models/players/james/intruders/intruders_blu
 {
-     
+
      //cull disable
 
         {
@@ -2057,7 +2057,7 @@ models/players/james/intruders/intruders_blu
 }
 models/players/james/thefallen/thefallen_red
 {
-     
+
      //cull disable
 
         {
@@ -2071,10 +2071,10 @@ models/players/james/thefallen/thefallen_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
-} 
+}
 models/players/james/thefallen/thefallen_blu
 {
-     
+
      //cull disable
 
         {
@@ -2091,7 +2091,7 @@ models/players/james/thefallen/thefallen_blu
 }
 models/players/james/intruders/intruders_h_red
 {
-     
+
      //cull disable
 
         {
@@ -2105,10 +2105,10 @@ models/players/james/intruders/intruders_h_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
-} 
+}
 models/players/james/intruders/intruders_h_blu
 {
-     
+
      //cull disable
 
         {
@@ -2122,10 +2122,10 @@ models/players/james/intruders/intruders_h_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
-} 
+}
 models/players/james/crusaders/crusaders_h_blu
 {
-     
+
      //cull disable
 
         {
@@ -2139,10 +2139,10 @@ models/players/james/crusaders/crusaders_h_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
-} 
+}
 models/players/james/crusaders/crusaders_h_red
 {
-     
+
      //cull disable
 
         {
@@ -2156,10 +2156,10 @@ models/players/james/crusaders/crusaders_h_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
-} 
+}
 models/players/james/thefallen/thefallen_h_red
 {
-     
+
      //cull disable
 
         {
@@ -2173,10 +2173,10 @@ models/players/james/thefallen/thefallen_h_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
-} 
+}
 models/players/james/thefallen/thefallen_h_blu
 {
-     
+
      //cull disable
 
         {
@@ -2193,7 +2193,7 @@ models/players/james/thefallen/thefallen_h_blu
 }
 models/players/james/crusaders/crusaders_red
 {
-     
+
      //cull disable
 
         {
@@ -2207,10 +2207,10 @@ models/players/james/crusaders/crusaders_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
-}                  
+}
 models/players/james/crusaders/crusaders_blu
 {
-     
+
      //cull disable
 
         {
@@ -2225,10 +2225,10 @@ models/players/james/crusaders/crusaders_blu
                 rgbGen lightingdiffuse
         }
 }
-                   
+
 models/players/james/stroggs/stroggs_h_red
 {
-     
+
      //cull disable
 
         {
@@ -2245,7 +2245,7 @@ models/players/james/stroggs/stroggs_h_red
 }
 models/players/james/stroggs/stroggs_h_blu
 {
-     
+
      //cull disable
 
         {
@@ -2262,7 +2262,7 @@ models/players/james/stroggs/stroggs_h_blu
 }
 models/players/james/stroggs/stroggs_red
 {
-     
+
      //cull disable
 
         {
@@ -2279,7 +2279,7 @@ models/players/james/stroggs/stroggs_red
 }
 models/players/james/stroggs/stroggs_blu
 {
-     
+
      //cull disable
 
         {
@@ -2296,7 +2296,7 @@ models/players/james/stroggs/stroggs_blu
 }
 models/players/james/pagans/pagans_h_blu
 {
-     
+
 
         {
                 map models/players/james/blue.tga
@@ -2311,7 +2311,7 @@ models/players/james/pagans/pagans_h_blu
 }
 models/players/james/pagans/pagans_h_red
 {
-     
+
 
         {
                 map models/players/james/red.tga
@@ -2356,7 +2356,7 @@ models/players/james/pagans/pagans_e_red
 }
 models/players/james/pagans/pagans_blu
 {
-     
+
      //cull disable
 
         {
@@ -2373,7 +2373,7 @@ models/players/james/pagans/pagans_blu
 }
 models/players/james/pagans/pagans_red
 {
-     
+
      //cull disable
 
         {
@@ -2405,7 +2405,7 @@ models/mapobjects/gratelamp/gratelight
     cull disable
     surfaceparm	trans
     nopicmip
-    
+
         {
                 map models/mapobjects/gratelamp/gratelight.tga
                 alphaFunc GE128
@@ -2422,43 +2422,43 @@ models/mapobjects/gratelamp/gratelight_flare
 	surfaceparm nomarks
 	surfaceparm nolightmap
 	cull none
-	
+
 	{
 		Map models/mapobjects/gratelamp/gratelight_flare.tga
 		blendFunc Add
                 rgbGen wave sin .5 .2 0 0
-	}	
-	
+	}
+
 }
 models/mapobjects/wallhead2/demonhead1
-{      
+{
         {
                 map textures/sfx/firegorre.tga
                 blendFunc GL_ONE GL_ZERO
                 tcmod scroll 0.1 1
                 rgbGen identity
-	}  
+	}
         {
 		map models/mapobjects/wallhead2/demonhead1.tga
                 blendFunc blend
 		rgbGen vertex
 	}
-       
+
 }
 models/mapobjects/wallhead2/wallhead2_1
-{      
+{
         {
                 map textures/sfx/firegorre.tga
                 blendFunc GL_ONE GL_ZERO
                 tcmod scroll 0.1 1
                 rgbGen vertex
-	}  
+	}
         {
 		map models/mapobjects/wallhead2/wallhead2_1.tga
                 blendFunc blend
 		rgbGen vertex
 	}
-       
+
 }
 models/mapobjects/wallhead2/wallhead2_eye
 
@@ -2472,7 +2472,7 @@ models/mapobjects/wallhead2/wallhead2_eye
                 tcmod rotate 160
 		//rgbGen wave sin .5 .5 0 .01
                 rgbGen wave sin .5 .2 0 0
-                
+
 
 	}
 
@@ -2487,7 +2487,7 @@ models/mapobjects/wallhead2/wallhead2_h1
 		alphaFunc GE128
                 depthWrite
 		rgbGen vertex
-                
+
 	}
 }
 models/mapobjects/wallhead2/wallhead2_h2
@@ -2500,7 +2500,7 @@ models/mapobjects/wallhead2/wallhead2_h2
 		alphaFunc GE128
                 depthWrite
 		rgbGen vertex
-                
+
 	}
 }
 models/mapobjects/wallhead2/wallhead2_h3
@@ -2513,31 +2513,31 @@ models/mapobjects/wallhead2/wallhead2_h3
 		alphaFunc GE128
                 depthWrite
 		rgbGen vertex
-                
+
 	}
 }
 models/mapobjects/horned/horned_blu
-{      
+{
 
         {
                 map textures/sfx2/blufirewall.tga
                 tcmod scroll 0.1 1
-	}  
+	}
         {
 		map models/mapobjects/horned/horned_blu.tga
                 blendFunc blend
 		rgbGen vertex
 	}
-       
+
 }
 models/flags/n_flag2
 {
-      
+
 	deformVertexes wave 100 sin 4 3 0 0.3
         deformVertexes wave 30 sin 0 3 0 .8
         deformVertexes normal .3 .2
         cull none
-        
+
         {
 		map models/flags/n_flag2.tga
 		 rgbGen identity
@@ -2555,12 +2555,12 @@ models/flags/n_flag2
 	}
         {
 		map textures/sfx/shadow.tga
-                tcGen environment             
+                tcGen environment
                 blendFunc GL_DST_COLOR GL_ZERO
                 rgbGen identity
 	}
 }
-models/players/meep/meep 
+models/players/meep/meep
 {
         {
 		map $whiteimage
@@ -2575,7 +2575,7 @@ models/players/meep/meep
 }
 models/players/meep/meep_h
 {
-        cull disable  
+        cull disable
         {
                 map models/players/meep/meep_h.tga
                 rgbGen lightingdiffuse
@@ -2589,7 +2589,7 @@ models/players/meep/meep_h
 }
 models/players/meep/meep_f
 {
-        cull disable  
+        cull disable
         {
                 map models/players/meep/meep_f.tga
                 rgbGen lightingdiffuse
@@ -2598,7 +2598,7 @@ models/players/meep/meep_f
 }
 models/players/meep/meep_g
 {
-        cull disable  
+        cull disable
         {
                 map models/players/meep/meep_g.tga
                 blendFunc Add
@@ -2617,7 +2617,7 @@ models/players/meep/meep_w
 		alphaFunc GE128
                 depthWrite
 		rgbGen lightingdiffuse
-                
+
 	}
 }
 

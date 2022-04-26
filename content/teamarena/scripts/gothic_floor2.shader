@@ -1,6 +1,6 @@
 
 textures/gothic_floor2/largerblock3bwet
-{       
+{
         {
 		map textures/gothic_floor2/largerblock3bwet.tga
                 rgbGen identity

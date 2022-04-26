@@ -1,9 +1,9 @@
 //Bwahahahahhaha
 
 textures/tim/red_flagbase
-{      
-      qer_editorimage textures/tim/flagbase.tga 
-        
+{
+      qer_editorimage textures/tim/flagbase.tga
+
         {
 	        map textures/tim/swirl_red.tga
                 blendFunc GL_ONE GL_ZERO
@@ -31,9 +31,9 @@ textures/tim/red_flagbase
 }
 
 textures/tim/blue_flagbase
-{      
-      qer_editorimage textures/tim/flagbase.tga 
-        
+{
+      qer_editorimage textures/tim/flagbase.tga
+
         {
 	        map textures/tim/swirl_blue.tga
                 blendFunc GL_ONE GL_ZERO
@@ -64,12 +64,12 @@ textures/tim/timborder11c
 	q3map_surfacelight 300
 	q3map_lightimage textures/tim/tim11c_pulse1.tga
 	qer_editorimage textures/base_trim/border11c.tga
-	
+
 	{
 		map textures/base_trim/border11c.tga
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		rgbGen identity
@@ -92,7 +92,7 @@ textures/tim/timborder11c
 
 	}
 
-	
+
 }
 
 textures/tim/rmetaltechgeomtrn
@@ -144,10 +144,10 @@ textures/tim/redmetalsupport2fline
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/tim/redmetalsupport2fline.tga
-		blendFunc blend	
+		blendFunc blend
 		rgbGen identity
 	}
 	{
@@ -158,13 +158,13 @@ textures/tim/redmetalsupport2fline
 
 	{
 		map textures/tim/redmetalsupport2fline_glow.tga
-		blendFunc add	
-		rgbGen wave sin .5 .5 0 1	
+		blendFunc add
+		rgbGen wave sin .5 .5 0 1
 	}
 
 
 }
-textures/tim/symbol_redlt1   
+textures/tim/symbol_redlt1
 {
 	q3map_lightimage textures/tim/symbol_redlt1_mask.tga
 	q3map_surfacelight 100
@@ -175,13 +175,13 @@ textures/tim/symbol_redlt1
 		rgbGen identity
 	}
 
-	
+
 	{
 		map textures/tim/symbol_redlt1.tga
 		blendfunc filter
 		rgbgen identity
 	}
-	
+
 	{
 		map textures/tim/symbol_redlt1_mask.tga
 		blendfunc add
@@ -190,8 +190,8 @@ textures/tim/symbol_redlt1
 }
 
 textures/tim/rconcrete_ow
-{       
-        
+{
+
         {
 		map textures/tim/proto_zzztred.tga
                 tcMod turb 0 .5 0 9.6

@@ -1,7 +1,7 @@
 
 textures/base_wall/bluemetalsupport2eye
 {
-	
+
         surfaceparm nomarks
 	q3map_surfacelight 300
 	q3map_lightimage textures/base_wall/bluemetalsupport2eyel.tga
@@ -11,10 +11,10 @@ textures/base_wall/bluemetalsupport2eye
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/bluemetalsupport2eye.tga
-		blendFunc blend	
+		blendFunc blend
 		rgbGen identity
 	}
 
@@ -30,9 +30,9 @@ textures/base_wall/bluemetalsupport2eye
 	}
 }
 textures/base_wall/atechengine_ax
-{       
+{
       q3map_lightimage textures/base_wall/atechengine_ax2.tga
-      q3map_surfacelight 300  
+      q3map_surfacelight 300
         {
 		map textures/sfx/proto_zzztpink.tga
                 tcmod rotate 60
@@ -54,8 +54,8 @@ textures/base_wall/atechengine_ax
 	}
 }
 textures/base_wall/concrete_ow
-{       
-        
+{
+
         {
 		map textures/sfx/proto_zzztblu2.tga
                 tcMod turb 0 .5 0 9.6
@@ -75,7 +75,7 @@ textures/base_wall/concrete_ow
 		rgbGen identity
 	}
 }
-textures/base_wall/symbol_bluelt1   
+textures/base_wall/symbol_bluelt1
 {
 	q3map_lightimage textures/base_wall/symbol_bluelt1_mask.tga
 	q3map_surfacelight 100
@@ -86,20 +86,20 @@ textures/base_wall/symbol_bluelt1
 		rgbGen identity
 	}
 
-	
+
 	{
 		map textures/base_wall/symbol_bluelt1.tga
 		blendfunc filter
 		rgbgen identity
 	}
-	
+
 	{
 		map textures/base_wall/symbol_bluelt1_mask.tga
 		blendfunc add
 		rgbgen wave sawtooth .2 .05 0 7
 	}
 }
-	
+
 textures/base_wall/metaltechgeomtrn
 {
 	qer_editorimage textures/base_wall/metaltechgeomtrn.tga
@@ -198,7 +198,7 @@ textures/base_wall/green_con04
 	}
 	//{
 	//	map $lightmap
-	//	rgbgen identity      
+	//	rgbgen identity
 	//}
 	//
 	//{
@@ -241,7 +241,7 @@ textures/base_wall/metalfloor_wall_15ow
                 blendFunc GL_ONE GL_ZERO
                 rgbGen identity
         }
-	
+
         {
 		map textures/sfx/hologirl.tga
                 tcmod scale 2 .4
@@ -249,7 +249,7 @@ textures/base_wall/metalfloor_wall_15ow
                 //tcMod turb 0 .1 0 .01
                 blendFunc GL_ONE GL_ONE
                 rgbGen identity
-                
+
 	}
 	{
 		map textures/base_wall/metalfloor_wall_15ow.tga
@@ -259,14 +259,14 @@ textures/base_wall/metalfloor_wall_15ow
         {
 		map $lightmap
 		blendFunc filter
-                //blendfunc dst_color gl_zero                                             
+                //blendfunc dst_color gl_zero
 	}
 
 }
 
 textures/base_wall/atech1_alpha
 {
-	
+
         {
 		map textures/sfx/hologirl.tga
                 tcmod scale 2 .4
@@ -289,7 +289,7 @@ textures/base_wall/atech1_alpha
 }
 textures/base_wall/concrete4
 {
-	
+
         {
 		map textures/liquids/protolava2.tga
                 tcmod scale .2 .2
@@ -302,7 +302,7 @@ textures/base_wall/concrete4
 		map textures/base_wall/concrete4.tga
                 blendfunc blend
                 rgbGen identity
-		
+
 	}
         {
 		map $lightmap
@@ -315,11 +315,11 @@ textures/base_wall/protobanner_ow
 {
      cull disable
      surfaceparm alphashadow
-     surfaceparm trans	
+     surfaceparm trans
      surfaceparm nomarks
      deformVertexes wave 100 sin 0 1 0 .1
      deformVertexes wave 100 sin 0 1 0 .2
-     
+
         {
                 map textures/base_wall/protobanner_ow.tga
                 alphaFunc GE128
@@ -338,12 +338,12 @@ textures/base_wall/protobanner_ow
 
 textures/base_wall/girders1i_yellofin
 {
-	surfaceparm	metalsteps	
-    	surfaceparm trans	
+	surfaceparm	metalsteps
+    	surfaceparm trans
 	surfaceparm alphashadow
 	surfaceparm playerclip
    	surfaceparm nonsolid
-	surfaceparm nomarks	
+	surfaceparm nomarks
 	cull none
         nopicmip
 	{
@@ -365,12 +365,12 @@ textures/base_wall/protobanner
 {
      cull disable
      surfaceparm alphashadow
-     surfaceparm trans	
+     surfaceparm trans
      surfaceparm nomarks
      tessSize 64
      deformVertexes wave 30 sin 0 3 0 .2
      deformVertexes wave 100 sin 0 3 0 .7
-     
+
         {
                 map textures/base_wall/protobanner.tga
                 alphaFunc GE128
@@ -392,12 +392,12 @@ textures/base_wall/protobanner_still
      qer_editorimage textures/base_wall/protobanner.tga
      cull disable
      surfaceparm alphashadow
-     surfaceparm trans	
+     surfaceparm trans
      surfaceparm nomarks
      tessSize 64
      //deformVertexes wave 30 sin 0 3 0 .2
      //deformVertexes wave 100 sin 0 3 0 .7
-     
+
         {
                 map textures/base_wall/protobanner.tga
                 alphaFunc GE128
@@ -418,12 +418,12 @@ textures/base_wall/medal_impressive
 {
 	qer_editorimage textures/base_wall/medal_impressive.tga
         q3map_surfacelight 100
-	
-	
+
+
 	{
 		animMap .25 textures/base_wall/medal_impressive.tga textures/base_wall/medal_gauntlet.tga textures/base_wall/medal_excellent.tga textures/base_wall/medal_accuracy.tga textures/base_wall/medal_victory.tga textures/base_wall/medal_frags.tga
 		rgbGen wave sawtooth 0 1 0 .25
-	
+
 	}
 
 	{
@@ -453,27 +453,27 @@ textures/base_wall/medal_impressive
 		blendfunc gl_dst_color gl_zero
 	}
 
-	          		
-} 
+
+}
 
 textures/base_wall/q3tourneyscreen
 {
 	qer_editorimage textures/base_wall/q3tourney1.tga
         q3map_surfacelight 100
-	
-	
+
+
 
 	{
 		animMap .25 textures/base_wall/q3tourney1.tga textures/base_wall/q3tourney2.tga textures/base_wall/q3tourney3.tga textures/base_wall/q3tourney4.tga textures/base_wall/q3tourney5.tga
 		rgbGen wave sawtooth 0 1 0 .25
-	
+
 	}
 
 	{
 		map textures/base_wall/comp3textd.tga
 		blendfunc add
 		rgbGen wave inversesawtooth 0 1 0 .25
-		tcmod scroll 5 .25 
+		tcmod scroll 5 .25
 	}
 
 	{
@@ -495,8 +495,8 @@ textures/base_wall/q3tourneyscreen
 	        blendfunc gl_dst_color gl_zero
 		rgbgen identity
 	}
-	          		
-}     
+
+}
 
 
 
@@ -539,19 +539,19 @@ textures/base_wall/main_q3abanner
 		tcmod scale .5 .5
 	        rgbGen wave sin .25 0 0 0
 		blendfunc add
-	}	          		
-}     
+	}
+}
 
-  
+
 
 textures/base_wall/metalfloor_wall_14_specular
 {
 	qer_editorimage textures/base_wall/metalfloor_wall_14_specular.tga
 	{
 		map $lightmap
-		rgbgen identity      
+		rgbgen identity
 	}
-	
+
 	{
 		map textures/base_wall/metalfloor_wall_14_specular.tga
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
@@ -565,16 +565,16 @@ textures/base_wall/shinygrate1_4_glow
 {
 	q3map_lightimage textures/base_wall/shinygrate1_4_glow_light2.tga
 	q3map_surfacelight 100
-	q3map_lightsubdivide 32 
-	
+	q3map_lightsubdivide 32
+
 	{
 		map textures/sfx/electricslime.tga
 		rgbGen wave sin .5 .5 0 1
 		tcmod scale .25 .25
 		tcMod scroll -10 -1
 	}
-	
-	
+
+
 	{
 		map textures/base_wall/shinygrate1_4_glow.tga
 		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
@@ -594,7 +594,7 @@ textures/base_wall/shinygrate1_4_glow
 		rgbGen wave triangle .2 .01 0 10
 	}
 
-			
+
 }
 
 textures/base_wall/bluemetal1b_chrome
@@ -607,10 +607,10 @@ textures/base_wall/bluemetal1b_chrome
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/bluemetal1b_shiny.tga
-		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA	
+		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
 		rgbGen identity
 	}
 	{
@@ -624,7 +624,7 @@ textures/base_wall/bluemetal1b_chrome
 
 textures/base_wall/bluemetal1c
 {
-	
+
 
 	{
 		map textures/base_wall/chrome_env2.tga
@@ -632,10 +632,10 @@ textures/base_wall/bluemetal1c
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/bluemetal1c.tga
-		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA	
+		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
 		rgbGen identity
 	}
 	{
@@ -647,7 +647,7 @@ textures/base_wall/bluemetal1c
 
 textures/base_wall/bluemetalsupport_shiny
 {
-	
+
 
 	{
 		map textures/base_wall/chrome_env2.tga
@@ -655,10 +655,10 @@ textures/base_wall/bluemetalsupport_shiny
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/bluemetalsupport_shiny.tga
-		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA	
+		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
 		rgbGen identity
 	}
 	{
@@ -671,7 +671,7 @@ textures/base_wall/bluemetalsupport_shiny
 
 textures/base_wall/grill
 {
-	
+
 
 	{
 		map textures/base_wall/chrome_env.tga
@@ -679,10 +679,10 @@ textures/base_wall/grill
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/grill.tga
-		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA	
+		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
 		rgbGen identity
 	}
 	{
@@ -710,18 +710,18 @@ textures/base_wall/grill2
 		blendFunc GL_ONE GL_ONE
 		rgbGen identity
 	}
-       
+
         {
 		map textures/base_wall/grill2.tga
 		//blendFunc GL_ONE GL_ONE
                 blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-}       
+}
 
 textures/base_wall/bluemetalsupport2
 {
-	
+
 
 	{
 		map textures/base_wall/chrome_env2.tga
@@ -729,10 +729,10 @@ textures/base_wall/bluemetalsupport2
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/bluemetalsupport2.tga
-		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA	
+		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
 		rgbGen identity
 	}
 	{
@@ -746,7 +746,7 @@ textures/base_wall/bluemetalsupport2
 
 textures/base_wall/bluemetalsupport2c_1
 {
-	
+
 
 	{
 		map textures/base_wall/chrome_env.tga
@@ -754,10 +754,10 @@ textures/base_wall/bluemetalsupport2c_1
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/bluemetalsupport2c_1.tga
-		blendFunc blend	
+		blendFunc blend
 		rgbGen identity
 	}
 	{
@@ -768,7 +768,7 @@ textures/base_wall/bluemetalsupport2c_1
 }
 textures/base_wall/bluemetalsupport2c_1vent
 {
-	
+
 
 	{
 		map textures/base_wall/chrome_env.tga
@@ -776,10 +776,10 @@ textures/base_wall/bluemetalsupport2c_1vent
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/bluemetalsupport2c_1vent.tga
-		blendFunc blend	
+		blendFunc blend
 		rgbGen identity
 	}
 	{
@@ -791,7 +791,7 @@ textures/base_wall/bluemetalsupport2c_1vent
 
 textures/base_wall/bluemetalsupport2c
 {
-	
+
 
 	{
 		map textures/base_wall/chrome_env2.tga
@@ -799,10 +799,10 @@ textures/base_wall/bluemetalsupport2c
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/bluemetalsupport2c.tga
-		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA	
+		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
 		rgbGen identity
 	}
 	{
@@ -817,7 +817,7 @@ textures/base_wall/bluemetalsupport2clight
 	surfaceparm nomarks
 	q3map_surfacelight 500
 
-	
+
 
 	{
 		map textures/base_wall/chrome_env.tga
@@ -825,13 +825,13 @@ textures/base_wall/bluemetalsupport2clight
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/bluemetalsupport2clight.tga
-		blendFunc blend	
+		blendFunc blend
 		rgbGen identity
 	}
-	
+
 	{
 		map $lightmap
 		blendfunc filter
@@ -848,7 +848,7 @@ textures/base_wall/bluemetalsupport2clight
 
 textures/base_wall/bluemetalsupport2f
 {
-	
+
 
 	{
 		map textures/base_wall/chrome_env.tga
@@ -856,10 +856,10 @@ textures/base_wall/bluemetalsupport2f
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/bluemetalsupport2f.tga
-		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA	
+		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
 	}
 	{
 		map $lightmap
@@ -873,7 +873,7 @@ textures/base_wall/bluemetalsupport2f
 
 textures/base_wall/bluemetalsupport2e
 {
-	
+
 
 	{
 		map textures/base_wall/chrome_env.tga
@@ -881,10 +881,10 @@ textures/base_wall/bluemetalsupport2e
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/bluemetalsupport2e.tga
-		blendFunc blend	
+		blendFunc blend
 		rgbGen identity
 	}
 
@@ -897,7 +897,7 @@ textures/base_wall/bluemetalsupport2e
 
 textures/base_wall/bluemetalsupport2e2
 {
-	
+
 
 	{
 		map textures/base_wall/chrome_env.tga
@@ -905,10 +905,10 @@ textures/base_wall/bluemetalsupport2e2
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/bluemetalsupport2e2.tga
-		blendFunc blend	
+		blendFunc blend
 		rgbGen identity
 	}
 
@@ -929,10 +929,10 @@ textures/base_wall/bluemetalsupport2fline
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/bluemetalsupport2fline.tga
-		blendFunc blend	
+		blendFunc blend
 		rgbGen identity
 	}
 	{
@@ -943,8 +943,8 @@ textures/base_wall/bluemetalsupport2fline
 
 	{
 		map textures/base_wall/bluemetalsupport2fline_glow.tga
-		blendFunc add	
-		rgbGen wave sin .5 .5 0 1	
+		blendFunc add
+		rgbGen wave sin .5 .5 0 1
 	}
 
 
@@ -963,10 +963,10 @@ textures/base_wall/bluemetalsupport2ftv
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/bluemetalsupport2ftv.tga
-		blendFunc blend	
+		blendFunc blend
 		rgbGen identity
 	}
 	{
@@ -977,7 +977,7 @@ textures/base_wall/bluemetalsupport2ftv
 
 	{
 		map textures/base_wall/bluemetalsupport2ftv_glow.tga
-		blendFunc add	
+		blendFunc add
 		rgbGen wave sawtooth .4 .05 0 10
 	}
 
@@ -987,7 +987,7 @@ textures/base_wall/bluemetalsupport2ftv
 
 textures/base_wall/bluemetalsupport2d_1
 {
-	
+
 
 	{
 		map textures/base_wall/chrome_env.tga
@@ -995,10 +995,10 @@ textures/base_wall/bluemetalsupport2d_1
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/bluemetalsupport2d_1.tga
-		blendFunc blend	
+		blendFunc blend
 		rgbGen identity
 	}
 	{
@@ -1014,11 +1014,11 @@ textures/base_door/shinymetaldoor_outside3a2
 	{
 		map textures/base_wall/chrome_env.tga
                 tcGen environment
-		tcmod scale .25 .25 
-		rgbGen identity   
+		tcmod scale .25 .25
+		rgbGen identity
 	}
 
-		
+
 	{
 		map textures/base_door/shinymetaldoor_outside3a2.tga
 		blendFunc blend
@@ -1037,8 +1037,8 @@ textures/base_door/shinymetaldoor_outside3a2
 		blendFunc add
 		rgbGen wave sin .9 .1 0 5
 	}
-		
-} 
+
+}
 
 textures/base_door/shinymetaldoor_outside3a
 {
@@ -1046,11 +1046,11 @@ textures/base_door/shinymetaldoor_outside3a
 	{
 		map textures/base_wall/chrome_env.tga
                 tcGen environment
-		tcmod scale .25 .25 
-		rgbGen identity   
+		tcmod scale .25 .25
+		rgbGen identity
 	}
 
-		
+
 	{
 		map textures/base_door/shinymetaldoor_outside3a.tga
 		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
@@ -1062,9 +1062,9 @@ textures/base_door/shinymetaldoor_outside3a
 		map $lightmap
 		rgbgen identity
 		blendFunc GL_DST_COLOR GL_ZERO
-	}	
-		
-} 
+	}
+
+}
 
 
 textures/base_door/shinymetaldoor_outside3b
@@ -1073,11 +1073,11 @@ textures/base_door/shinymetaldoor_outside3b
 	{
 		map textures/base_wall/chrome_env.tga
                 tcGen environment
-		tcmod scale .25 .25 
-		rgbGen identity   
+		tcmod scale .25 .25
+		rgbGen identity
 	}
 
-		
+
 	{
 		map textures/base_door/shinymetaldoor_outside3b.tga
 		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
@@ -1089,9 +1089,9 @@ textures/base_door/shinymetaldoor_outside3b
 		map $lightmap
 		rgbgen identity
 		blendFunc GL_DST_COLOR GL_ZERO
-	}	
-		
-} 
+	}
+
+}
 
 
 
@@ -1101,11 +1101,11 @@ textures/base_door/shinymetaldoor_outside
 	{
 		map textures/base_wall/chrome_env.tga
                 tcGen environment
-		tcmod scale .25 .25 
-		rgbGen identity   
+		tcmod scale .25 .25
+		rgbGen identity
 	}
 
-		
+
 	{
 		map textures/base_door/shinymetaldoor_outside.tga
 		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
@@ -1123,9 +1123,9 @@ textures/base_door/shinymetaldoor_outside
 		map $lightmap
 		rgbgen identity
 		blendFunc GL_DST_COLOR GL_ZERO
-	}	
-		
-} 
+	}
+
+}
 
 textures/base_wall/steedmetal2
 {
@@ -1136,10 +1136,10 @@ textures/base_wall/steedmetal2
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/steedmetal2.tga
-		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA	
+		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
 		rgbGen identity
 	}
 	{
@@ -1148,16 +1148,16 @@ textures/base_wall/steedmetal2
 		rgbGen identity
 	}
 
-			
+
 }
 
 textures/base_wall/steed1gf
 {
 	{
 		map $lightmap
-		rgbgen identity      
+		rgbgen identity
 	}
-	
+
 	{
 		map textures/base_wall/steed1gf.tga
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
@@ -1165,7 +1165,7 @@ textures/base_wall/steed1gf
 		alphaGen lightingSpecular
 	}
 
-			
+
 }
 textures/base_wall/steed1gd
 {
@@ -1175,10 +1175,10 @@ textures/base_wall/steed1gd
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/steed1gd.tga
-		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA	
+		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
 		rgbGen identity
 	}
 	{
@@ -1187,16 +1187,16 @@ textures/base_wall/steed1gd
 		rgbGen identity
 	}
 
-			
+
 }
 
 textures/base_wall/bluemetal1b_shiny
 {
 	{
 		map $lightmap
-		rgbgen identity      
+		rgbgen identity
 	}
-	
+
 	{
 		map textures/base_wall/bluemetal1b_shiny.tga
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
@@ -1204,22 +1204,22 @@ textures/base_wall/bluemetal1b_shiny
 		alphaGen lightingSpecular
 	}
 
-			
+
 }
 
 textures/base_wall/bluemetal2_shiny
 {
 	{
 		map $lightmap
-		rgbgen identity      
+		rgbgen identity
 	}
-	
+
 	{
 		map textures/base_wall/bluemetal2_shiny.tga
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
-	}		
+	}
 }
 
 textures/base_wall/bluemetal2_shiny_trans
@@ -1228,15 +1228,15 @@ textures/base_wall/bluemetal2_shiny_trans
 	surfaceparm nonsolid
 	{
 		map $lightmap
-		rgbgen identity      
+		rgbgen identity
 	}
-	
+
 	{
 		map textures/base_wall/bluemetal2_shiny.tga
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
-	}		
+	}
 }
 
 textures/base_wall/bluemetal2_noisy
@@ -1245,15 +1245,15 @@ textures/base_wall/bluemetal2_noisy
 	surfaceparm metalsteps
 	{
 		map $lightmap
-		rgbgen identity      
+		rgbgen identity
 	}
-	
+
 	{
 		map textures/base_wall/bluemetal2_shiny.tga
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
-	}			
+	}
 }
 
 textures/base_wall/train1
@@ -1262,11 +1262,11 @@ textures/base_wall/train1
 	{
 		map textures/base_wall/chrome_env.tga
                 tcGen environment
-		tcmod scale .25 .1 
-		rgbGen identity   
+		tcmod scale .25 .1
+		rgbGen identity
 	}
 
-		
+
 	{
 		map textures/base_wall/train1.tga
 		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
@@ -1277,24 +1277,24 @@ textures/base_wall/train1
 		map $lightmap
 		rgbgen identity
 		blendFunc GL_DST_COLOR GL_ZERO
-	}	
-		
-} 
+	}
+
+}
 
 textures/base_wall/bloodstain
 {
 	{
 		map $lightmap
-		rgbgen identity      
+		rgbgen identity
 	}
-	
+
 	{
 		map textures/base_wall/bloodstain.tga
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
 	}
-			
+
 }
 
 
@@ -1305,11 +1305,11 @@ textures/base_door/shinymetaldoor
 		//map $lightmap
 		map textures/base_wall/chrome_env.tga
                 tcGen environment
-		tcmod scale .25 .25 
-		rgbGen identity   
+		tcmod scale .25 .25
+		rgbGen identity
 	}
 
-		
+
 	{
 		map textures/base_door/shinymetaldoor.tga
 		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
@@ -1327,16 +1327,16 @@ textures/base_door/shinymetaldoor
 		map $lightmap
 		rgbgen identity
 		blendFunc GL_DST_COLOR GL_ZERO
-	}	
-		
-} 
+	}
+
+}
 textures/base_wall/dooreye
 {
 	surfaceparm nomarks
 	q3map_surfacelight 300
 	q3map_lightimage textures/base_wall/dooreyelight.tga
 
-	
+
 	{
 		map $lightmap
 		rgbGen identity
@@ -1362,7 +1362,7 @@ textures/base_wall/dooreye2
 	q3map_surfacelight 300
 	q3map_lightimage textures/base_wall/dooreyelight.tga
 
-	
+
 	{
 		map $lightmap
 		rgbGen identity
@@ -1390,7 +1390,7 @@ textures/base_wall/dooreye3
 	q3map_surfacelight 300
 	q3map_lightimage textures/base_wall/dooreyelight.tga
 
-	
+
 	{
 		map $lightmap
 		rgbGen identity
@@ -1414,10 +1414,10 @@ textures/base_wall/dooreye3
 
 textures/base_wall/glass01
 {
-        surfaceparm trans	
+        surfaceparm trans
 	cull none
 	qer_trans 	0.5
-     
+
         {
 		map textures/effects/tinfx.tga
                 tcgen environment
@@ -1429,17 +1429,17 @@ textures/base_wall/glass01
 		rgbGen identity
 		blendFunc filter
 	}
-           
+
 }
 textures/base_wall/patch10_beat4_drip
 {
 	qer_editorimage textures/base_wall/patch10_beatup4_stain.tga
-	
+
 	{
 		map $lightmap
-		rgbgen identity      
+		rgbgen identity
 	}
-	
+
 	{
 		map textures/base_wall/waterdrip.tga
 		blendFunc GL_ONE gl_src_alpha
@@ -1454,23 +1454,23 @@ textures/base_wall/patch10_beat4_drip
 
 	{
 		map $lightmap
-		rgbgen identity 
-		blendfunc gl_dst_color gl_zero     
+		rgbgen identity
+		blendfunc gl_dst_color gl_zero
 	}
 
 
-	
 
-			
+
+
 }
 textures/base_wall/patch10_beatup4_shiny2
 {
-	
+
 	{
 		map $lightmap
-		rgbgen identity      
+		rgbgen identity
 	}
-	
+
 	{
 		map textures/base_wall/patch10_beatup4_shiny2.tga
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
@@ -1478,7 +1478,7 @@ textures/base_wall/patch10_beatup4_shiny2
 		alphaGen lightingSpecular
 	}
 
-			
+
 }
 
 textures/base_wall/patch10shiny
@@ -1486,9 +1486,9 @@ textures/base_wall/patch10shiny
 	qer_editorimage textures/base_wall/patch10_beatup4_alpha.tga
 	{
 		map $lightmap
-		rgbgen identity      
+		rgbgen identity
 	}
-	
+
 	{
 		map textures/base_wall/patch10_beatup4_alpha.tga
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
@@ -1496,7 +1496,7 @@ textures/base_wall/patch10shiny
 		alphaGen lightingSpecular
 	}
 
-			
+
 }
 
 textures/base_wall/patch10shiny_trans
@@ -1505,9 +1505,9 @@ textures/base_wall/patch10shiny_trans
 	surfaceparm nonsolid
 	{
 		map $lightmap
-		rgbgen identity      
+		rgbgen identity
 	}
-	
+
 	{
 		map textures/base_wall/patch10_beatup4_alpha.tga
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
@@ -1515,7 +1515,7 @@ textures/base_wall/patch10shiny_trans
 		alphaGen lightingSpecular
 	}
 
-			
+
 }
 
 textures/base_wall/patch11_shiny
@@ -1523,9 +1523,9 @@ textures/base_wall/patch11_shiny
 	qer_editorimage textures/base_wall/patch11_shiny.tga
 	{
 		map $lightmap
-		rgbgen identity      
+		rgbgen identity
 	}
-	
+
 	{
 		map textures/base_wall/patch11_shiny.tga
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
@@ -1533,20 +1533,20 @@ textures/base_wall/patch11_shiny
 		alphaGen lightingSpecular
 	}
 
-			
+
 }
 
 textures/base_wall/bluecover
 	{
 
 	{
-		map $lightmap	
+		map $lightmap
 		tcgen environment
-		tcmod scale .25 .25 
-		rgbgen identity      
+		tcmod scale .25 .25
+		rgbgen identity
 	}
 
-		
+
 	{
 		map textures/base_wall/bluecover.tga
 		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
@@ -1557,22 +1557,22 @@ textures/base_wall/bluecover
 	{
 		map $lightmap
 		blendfunc gl_dst_color gl_zero
-		rgbgen identity      
+		rgbgen identity
 	}
 
-			
+
 }
 
 
 textures/base_wall/shinybluemetal1b
 {
 
-	
+
 	{
 		map textures/base_wall/chrome_env.tga
 		tcgen environment
-		tcmod scale .25 .25 
-		rgbgen identity      
+		tcmod scale .25 .25
+		rgbgen identity
 	}
 
 	{
@@ -1581,15 +1581,15 @@ textures/base_wall/shinybluemetal1b
 		rgbGen identity
 		//alphaGen lightingSpecular
 	}
-	
-	{	
+
+	{
 		map $lightmap
 		blendfunc gl_dst_color gl_zero
-		rgbgen identity      
+		rgbgen identity
 	}
 
 
-				
+
 }
 
 textures/base_wall/pjrock18
@@ -1599,10 +1599,10 @@ textures/base_wall/pjrock18
 		map $lightmap
 		tcgen environment
 		tcmod scale .25 .25
-		rgbgen identity      
+		rgbgen identity
 	}
-		
-	
+
+
 	{
 		map textures/stone/pjrock18.tga
 		blendFunc GL_ONE GL_SRC_ALPHA
@@ -1617,7 +1617,7 @@ textures/base_wall/pjrock18
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 
-			
+
 }
 
 textures/base_wall/shinybluemetal1
@@ -1625,9 +1625,9 @@ textures/base_wall/shinybluemetal1
 
 	{
 		map $lightmap
-		rgbgen identity      
+		rgbgen identity
 	}
-	
+
 	{
 		map textures/base_wall/shinybluemetal1.tga
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
@@ -1635,7 +1635,7 @@ textures/base_wall/shinybluemetal1
 		alphaGen lightingSpecular
 	}
 
-			
+
 }
 
 
@@ -1646,10 +1646,10 @@ textures/base_wall/shinygrate1_4
 		map $lightmap
 		tcgen environment
 		tcmod scale .25 .25
-		rgbgen identity      
+		rgbgen identity
 	}
-		
-	
+
+
 	{
 		map textures/base_wall/shinygrate1_4.tga
 		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
@@ -1663,7 +1663,7 @@ textures/base_wall/shinygrate1_4
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 
-			
+
 }
 
 
@@ -1672,8 +1672,8 @@ textures/base_wall/chrome_metal
 	{
 		map textures/base_wall/chrome_env.tga
 		tcGen environment
-		tcmod scale .25 .25 
-		
+		tcmod scale .25 .25
+
 	}
 
 	{
@@ -1689,11 +1689,11 @@ textures/base_wall/chrome_metal
 		map $lightmap
                 rgbgen identity
 		blendFunc GL_DST_COLOR GL_ZERO
-	   
+
 	}
 
-	
-			
+
+
 }
 
 textures/base_wall/blupaintedmetalcomp
@@ -1702,9 +1702,9 @@ textures/base_wall/blupaintedmetalcomp
 	{
 		map $lightmap
                 tcGen environment
-		tcmod scale .25 .25    
+		tcmod scale .25 .25
 	}
-		
+
 	{
 		map textures/base_wall/blupaintedmetalcomp.tga
 		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
@@ -1715,7 +1715,7 @@ textures/base_wall/blupaintedmetalcomp
 		map $lightmap
 		rgbgen identity
 		blendFunc GL_DST_COLOR GL_ZERO
-	}		
+	}
 }
 
 textures/base_wall/blupaintedmetal
@@ -1724,9 +1724,9 @@ textures/base_wall/blupaintedmetal
 	{
 		map $lightmap
                 tcGen environment
-		tcmod scale .25 .25    
+		tcmod scale .25 .25
 	}
-		
+
 	{
 		map textures/base_wall/blupaintedmetal.tga
 		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
@@ -1737,17 +1737,17 @@ textures/base_wall/blupaintedmetal
 		map $lightmap
 		rgbgen identity
 		blendFunc GL_DST_COLOR GL_ZERO
-	}		
+	}
 }
 
-       
+
 textures/base_wall/shinymetal2
 {
 
 	{
 		map $lightmap
                 tcGen environment
-		tcmod scale .25 .25    
+		tcmod scale .25 .25
 	}
 
 	{
@@ -1756,19 +1756,19 @@ textures/base_wall/shinymetal2
 		blendFunc GL_ONE GL_SRC_COLOR
 	}
 
-		
+
 	{
 		map textures/base_wall/shinymetal2.tga
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-	
-	
 
-	
-	
-		
-} 
+
+
+
+
+
+}
 
 textures/base_wall/comp3c
 {
@@ -1777,7 +1777,7 @@ textures/base_wall/comp3c
 	        rgbGen identity
 		tcGen environment
 	}
-	      
+
         {
 		map $lightmap
                 tcGen environment
@@ -1797,7 +1797,7 @@ textures/base_wall/comp3c
 	}
 
 }
-      
+
 
 textures/base_wall/comp3b
 {
@@ -1808,14 +1808,14 @@ textures/base_wall/comp3b
 	        rgbGen identity
 		tcmod scroll 3 3
 	}
-	      
+
         {
 		map textures/base_wall/comp3env.tga
                 tcGen environment
                 blendFunc GL_ONE GL_ONE
                 rgbGen wave sin .98 .02 0 5
 	}
-	
+
 	{
 		map $lightmap
                 tcGen environment
@@ -1828,7 +1828,7 @@ textures/base_wall/comp3b
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
-       
+
 	{
 		map $lightmap
                 blendFunc GL_DST_COLOR GL_ONE_MINUS_DST_ALPHA
@@ -1836,7 +1836,7 @@ textures/base_wall/comp3b
 	}
 
 }
- 
+
 textures/base_wall/comp3b_dark
 {
 	q3map_lightimage textures/base_wall/comp3textb.tga
@@ -1846,14 +1846,14 @@ textures/base_wall/comp3b_dark
 	        rgbGen identity
 		tcmod scroll 3 3
 	}
-	      
+
         {
 		map textures/base_wall/comp3env.tga
                 tcGen environment
                 blendFunc GL_ONE GL_ONE
                 rgbGen wave sin .98 .02 0 5
 	}
-	
+
 	{
 		map $lightmap
                 tcGen environment
@@ -1866,7 +1866,7 @@ textures/base_wall/comp3b_dark
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
-       
+
 	{
 		map $lightmap
                 blendFunc GL_DST_COLOR GL_ONE_MINUS_DST_ALPHA
@@ -1875,7 +1875,7 @@ textures/base_wall/comp3b_dark
 
 }
 
-      
+
 textures/base_wall/comp3
 {
 	q3map_lightimage textures/base_wall/comp3env.tga
@@ -1885,14 +1885,14 @@ textures/base_wall/comp3
 	        rgbGen identity
 		tcmod scroll 3 1
 	}
-	      
+
         {
 		map textures/base_wall/comp3env.tga
                 tcGen environment
                 blendFunc GL_ONE GL_ONE
                 rgbGen wave sin .98 .02 0 5
 	}
-	
+
 	{
 		map $lightmap
                 tcGen environment
@@ -1905,14 +1905,14 @@ textures/base_wall/comp3
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
-       
+
 	{
 		map $lightmap
                 blendFunc GL_DST_COLOR GL_ONE_MINUS_DST_ALPHA
 		rgbGen identity
 	}
-	
-}       
+
+}
 
 
 textures/base_wall/basewall01bit
@@ -1923,7 +1923,7 @@ textures/base_wall/basewall01bit
 		map textures/base_wall/basewall01bit.tga
 	        rgbGen identity
 	}
-	      
+
 	{
 		map textures/base_wall/basewall01bitfx.tga
 		blendfunc GL_ONE GL_ONE
@@ -1942,19 +1942,19 @@ textures/base_wall/basewall01bit
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	        rgbGen identity
 	}
-       
+
 	{
 		map $lightmap
                 blendFunc GL_DST_COLOR GL_ONE_MINUS_DST_ALPHA
 		rgbGen identity
 	}
-	
-       
+
+
 }
 textures/base_wall/basewall01_ow
 {
 	q3map_lightimage textures/base_wall/basewall01_owfx.tga
-	
+
 	{
 		map $lightmap
 		rgbGen identity
@@ -1964,16 +1964,16 @@ textures/base_wall/basewall01_ow
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
-	{	
+	{
 		map textures/base_wall/basewall01_owfx.tga
 		blendfunc GL_ONE GL_ONE
                 rgbGen wave sin .5 0.5 0 .5
 	}
-       
+
 }
 textures/base_wall/blumtlspt2b
 {
-	
+
 	q3map_surfacelight 100
 	q3map_lightimage textures/base_wall/blumtlspt2bglow.tga
 
@@ -1984,10 +1984,10 @@ textures/base_wall/blumtlspt2b
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/blumtlspt2b.tga
-		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA	
+		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
 		rgbGen identity
 	}
 	{
@@ -2006,7 +2006,7 @@ textures/base_wall/blumtlspt2b
 
 textures/base_wall/bluemetalsupport2b
 {
-	
+
 	q3map_surfacelight 100
 	q3map_lightimage textures/base_wall/bluemetalsupport2bglow.tga
 
@@ -2017,10 +2017,10 @@ textures/base_wall/bluemetalsupport2b
 		tcGen environment
 		tcmod scale .25 .25
 	}
-	
+
 	{
 		map textures/base_wall/bluemetalsupport2b.tga
-		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA	
+		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
 		rgbGen identity
 	}
 	{
@@ -2038,7 +2038,7 @@ textures/base_wall/bluemetalsupport2b
 }
 
 textures/base_wall/kcgrate1
-{		
+{
 	cull disable
 
 	// A GRATE OR GRILL THAT CAN BE SEEN FROM BOTH SIDES
@@ -2063,7 +2063,7 @@ textures/base_wall/kcgrate1
 textures/base_wall/future9light
 {
 	q3map_lightimage textures/base_wall/future9light.color.tga
-	q3map_surfacelight 400	
+	q3map_surfacelight 400
 	light 1
 	{
 		map $lightmap
@@ -2107,7 +2107,7 @@ textures/base_wall/green_contrim_noisey
 //Paul Jaquays uses this on the tops of metal frameworks
 {
 	qer_editorimage textures/base_wall/green_contrim.tga
-	surfaceparm	metalsteps		
+	surfaceparm	metalsteps
 
 	// metal that makes metalsteps sound
 	{
