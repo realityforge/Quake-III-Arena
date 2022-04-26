@@ -3216,9 +3216,7 @@ PAK_DATA = {
             "demos/four.dm_66",
         ],
     },
-    "q3a_baseq3_pak8": {
-        "other_files": ["demos/four.dm_68"],
-    },
+    "q3a_baseq3_pak8": {"other_files": ["demos/four.dm_68"]},
     "QuakeArenaArcade_baseq3": {
         "tga_files": [
             "models/powerups/armor/newred.tga",
