@@ -10,6 +10,8 @@ This change involves converting the files in TGA format to PNG format and adding
 
 It should be noted that the screenshot function currently emits screenshots in the TGA format and should be changed to emit screenshots in the PNG format.
 
+At this stage it is expected that the load process will continue to convert the pixel data into a 32-bit RGBA format but longer term the renderer could be modified to support other image formats.
+
 ### Challenges
 
 The names of the tga files are directly referenced from other assets or game code. The code that needs to be changes includes code in the renderer and the client game modules for `baseq3` and the `missionpack` games. The assets that will need to be updated include the materials definitions (a.k.a. `*.shader` files), the `*.menu` files (in the `missionpack` game) and the `*.skin` files.
