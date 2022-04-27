@@ -341,6 +341,8 @@ void VR_DrawFrame( engine_t* engine ) {
         re.SetVRHeadsetParms(&projectionMatrix, &monoVRMatrix,
                              engine->framebuffers.framebuffers[engine->framebuffers.swapchainIndex]);
 
+		VR_ClearFrameBuffer(engine->framebuffers.framebuffers[engine->framebuffers.swapchainIndex], eyeW, eyeH);
+
 		Com_Frame();
 
 		engine->framebuffers.swapchainIndex = (engine->framebuffers.swapchainIndex + 1) %
