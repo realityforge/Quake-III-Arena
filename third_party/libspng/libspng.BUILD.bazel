@@ -1,0 +1,18 @@
+licenses(["notice"])  # BSD/MIT-like license
+
+cc_library(
+    name = "libspng",
+    hdrs = ["spng/spng.h"],
+    defines = ["SPNG_STATIC"],
+    includes = ["spng"],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "libspng_impl",
+    srcs = ["spng/spng.c"],
+    #    copts = ["-Wno-unused-but-set-variable"],
+    #    includes = ["."],
+    visibility = ["//visibility:public"],
+    deps = [":libspng", "@zlib"],
+)

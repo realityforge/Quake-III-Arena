@@ -10,6 +10,7 @@ load("//third_party/go:repository.bzl", _load_go_repository = "load_repository")
 load("//third_party/imagemagick:repository.bzl", _load_imagemagick_repository = "load_repository")
 load("//third_party/libjpeg_turbo:repository.bzl", _load_libjpeg_turbo_repository = "load_repository")
 load("//third_party/libpng:repository.bzl", _load_libpng_repository = "load_repository")
+load("//third_party/libspng:repository.bzl", _load_libspng_repository = "load_repository")
 load("//third_party/nasm:repository.bzl", _load_nasm_repository = "load_repository")
 load("//third_party/ogg:repository.bzl", _load_ogg_repository = "load_repository")
 load("//third_party/openal:repository.bzl", _load_openal_repository = "load_repository")
@@ -34,6 +35,8 @@ _load_imagemagick_repository()
 _load_libjpeg_turbo_repository()
 
 _load_libpng_repository()
+
+_load_libspng_repository()
 
 _load_nasm_repository()
 
