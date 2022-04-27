@@ -42,7 +42,6 @@ def load_pak_repositories():
     # Quake 3 Team Arena
     _local_pak("missionpack", 0, "fdb5fe4f15f22bd270628d9b3153b733ca4548207722e768051c08c9dbff9135")
     _local_pak("missionpack", 1, "9818e99ba58d91f231a650a3c42559d1c5661cb3c0dfd033ef4225ba8ecdfd60")
-    _local_pak("missionpack", 3, "77c0bcbb61be81a389d8959b76969a801a5e589d97ab8aeb2cb7ced54f187fc7")
 
     # HQQ (HD 2D Elements) repacked for Q3Quest
     # Sourced from https://www.moddb.com/games/quake-iii-arena/addons/pak9hqq36-q3q
