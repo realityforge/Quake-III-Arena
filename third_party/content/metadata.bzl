@@ -1,5 +1,9 @@
 PAK_DATA = {
     "q3a_baseq3_pak0": {
+        "info": {
+            "game": "baseq3",
+            "sha256": "7ce8b3910620cd50a09e4f1100f426e8c6180f68895d589f80e6bd95af54bcae",
+        },
         "tga_files": [
             "gfx/damage/blood_screen.tga",
             "gfx/damage/blood_spurt.tga",
@@ -2770,6 +2774,10 @@ PAK_DATA = {
         ],
     },
     "q3a_baseq3_pak2": {
+        "info": {
+            "game": "baseq3",
+            "sha256": "ccae938a2f13a03b24902d675181d516a431699701ed88023a307f34b5bcd58c",
+        },
         "tga_files": [
             "models/players/brandon/branarm.TGA",
             "models/players/brandon/braneye.TGA",
@@ -2878,6 +2886,10 @@ PAK_DATA = {
         ],
     },
     "q3a_baseq3_pak4": {
+        "info": {
+            "game": "baseq3",
+            "sha256": "af5f6d5c82fe4440ae0bb660f0648d1fa1731a9e8305a9eb652aa243428697f1",
+        },
         "tga_files": ["menu/art/gr/grlogo.tga"],
         "other_files": [
             "botfiles/bots/anarki_c.c",
@@ -3129,9 +3141,17 @@ PAK_DATA = {
         ],
     },
     "q3a_baseq3_pak5": {
+        "info": {
+            "game": "baseq3",
+            "sha256": "69f87070ca7719e252a3ba97e6483f6663939c987ede550d1268d4d9a07b45bc",
+        },
         "other_files": ["demos/demo127.dm_48"],
     },
     "q3a_baseq3_pak6": {
+        "info": {
+            "game": "baseq3",
+            "sha256": "bb4f0ae2bf603b050fb665436d3178ce7c1c20360e67bacf7c14d93daff38daf",
+        },
         "tga_files": ["textures/base_floor/clangdarkspot.tga"],
         "other_files": [
             "gfx/misc/lightning3new.jpg",
@@ -3177,7 +3197,13 @@ PAK_DATA = {
             "demos/four.dm_66",
         ],
     },
-    "q3a_baseq3_pak8": {"other_files": ["demos/four.dm_68"]},
+    "q3a_baseq3_pak8": {
+        "info": {
+            "game": "baseq3",
+            "sha256": "812c9e97f231e89cefede3848c6110b7bd34245093af6f22c2cacde3e6b15663",
+        },
+        "other_files": ["demos/four.dm_68"],
+    },
     "QuakeArenaArcade_baseq3": {
         "tga_files": [
             "models/powerups/armor/newred.tga",
@@ -3217,6 +3243,10 @@ PAK_DATA = {
         ],
     },
     "q3a_missionpack_pak0": {
+        "info": {
+            "game": "missionpack",
+            "sha256": "fdb5fe4f15f22bd270628d9b3153b733ca4548207722e768051c08c9dbff9135",
+        },
         "tga_files": [
             "fonts/fontImage_0_12.tga",
             "fonts/fontImage_0_16.tga",
@@ -6176,7 +6206,13 @@ PAK_DATA = {
             "video/stroggs.RoQ",
         ],
     },
-    "q3a_missionpack_pak1": {"other_files": ["teaminfo.txt"]},
+    "q3a_missionpack_pak1": {
+        "info": {
+            "game": "missionpack",
+            "sha256": "9818e99ba58d91f231a650a3c42559d1c5661cb3c0dfd033ef4225ba8ecdfd60",
+        },
+        "other_files": ["teaminfo.txt"],
+    },
     "pak9hqq36": {
         "tga_files": [
             "gfx/2d/bigchars.tga",
