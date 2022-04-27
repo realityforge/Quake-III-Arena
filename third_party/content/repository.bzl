@@ -8,6 +8,7 @@ _LOCAL_ASSETS_BASE_URL = "file:///Users/peter/Code/GameDev/Assets"
 
 def _local_pak(game, index, sha256 = None):
     name = "q3a_%s_pak%d" % (game, index)
+
     if native.existing_rule(name):
         return
 
