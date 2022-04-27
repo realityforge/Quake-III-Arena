@@ -1,9 +1,0 @@
-load("@org_realityforge_ioq3//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
-
-filegroup(
-    name = "files",
-    srcs = _PAK_DATA["q3a_baseq3_pak0"]["other_files"],
-    visibility = ["//visibility:public"],
-)
-
-exports_files(_PAK_DATA["q3a_baseq3_pak0"]["tga_files"])

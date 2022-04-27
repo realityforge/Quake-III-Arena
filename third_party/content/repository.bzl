@@ -1,6 +1,7 @@
 """Bazel repository rules for loading content from original games."""
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_archive = "http_archive")
+load("@org_realityforge_ioq3//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
 
 _BASE_URL = "file:///Users/peter/Steam/quake3teamarena"
 _LOCAL_ASSETS_BASE_URL = "file:///Users/peter/Code/GameDev/Assets"
@@ -10,12 +11,32 @@ def _local_pak(game, index, sha256 = None):
     if native.existing_rule(name):
         return
 
+    build_content = """
+load("@org_realityforge_ioq3//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
+"""
+
+    if None != _PAK_DATA[name].get("other_files"):
+        build_content += """
+
+filegroup(
+    name = "files",
+    srcs = _PAK_DATA["%s"]["other_files"],
+    visibility = ["//visibility:public"],
+)
+""" % (name)
+
+    if None != _PAK_DATA[name].get("tga_files"):
+        build_content += """
+
+exports_files(_PAK_DATA["%s"]["tga_files"])
+""" % (name, name)
+
     _http_archive(
         name = name,
         urls = ["%s/%s/pak%d.pk3" % (_BASE_URL, game, index)],
         type = "zip",
-        sha256 = sha256,
-        build_file = "//third_party/content:%s.BUILD.bazel" % (name),
+        sha256 = _sha256,
+        build_file_content = build_content,
     )
 
 def _local_assets(name, path, sha256 = None):

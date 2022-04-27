@@ -1,7 +1,0 @@
-load("@org_realityforge_ioq3//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
-
-filegroup(
-    name = "files",
-    srcs = _PAK_DATA["q3a_missionpack_pak1"]["other_files"],
-    visibility = ["//visibility:public"],
-)
