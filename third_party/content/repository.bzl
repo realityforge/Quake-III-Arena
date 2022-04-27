@@ -27,6 +27,12 @@ filegroup(
     if None != _PAK_DATA[name].get("tga_files"):
         build_content += """
 
+filegroup(
+    name = "tga_files",
+    srcs = _PAK_DATA["%s"]["tga_files"],
+    visibility = ["//visibility:public"],
+)
+
 exports_files(_PAK_DATA["%s"]["tga_files"])
 """ % (name, name)
 
