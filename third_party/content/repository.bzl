@@ -6,9 +6,7 @@ load("@org_realityforge_ioq3//third_party/content:metadata.bzl", _PAK_DATA = "PA
 _BASE_URL = "file:///Users/peter/Steam/quake3teamarena"
 _LOCAL_ASSETS_BASE_URL = "file:///Users/peter/Code/GameDev/Assets"
 
-def _local_pak(game, index):
-    name = "q3a_%s_pak%d" % (game, index)
-
+def _pak(name, url):
     if native.existing_rule(name):
         return
 
@@ -32,27 +30,29 @@ filegroup(
 exports_files(_PAK_DATA["%s"]["tga_files"])
 """ % (name, name)
 
-    _sha256 = _PAK_DATA[name]["info"]["sha256"]
+    if None != _PAK_DATA[name].get("shader_files"):
+        build_content += """
 
-    _http_archive(
-        name = name,
-        urls = ["%s/%s/pak%d.pk3" % (_BASE_URL, game, index)],
-        type = "zip",
-        sha256 = _sha256,
-        build_file_content = build_content,
-    )
+filegroup(
+    name = "shader_files",
+    srcs = _PAK_DATA["%s"]["shader_files"],
+    visibility = ["//visibility:public"],
+)
 
-def _local_assets(name, path, sha256 = None):
-    if native.existing_rule(name):
-        return
+exports_files(_PAK_DATA["%s"]["shader_files"])
+""" % (name, name)
 
-    _http_archive(
-        name = name,
-        urls = ["%s/%s" % (_LOCAL_ASSETS_BASE_URL, path)],
-        type = "zip",
-        sha256 = sha256,
-        build_file = "//third_party/content:%s.BUILD.bazel" % (name),
-    )
+    _sha256 = None
+    if None != _PAK_DATA[name].get("info") and None != _PAK_DATA[name]["info"].get("sha256"):
+        _sha256 = _PAK_DATA[name]["info"]["sha256"]
+
+    _http_archive(name = name, urls = [url], type = "zip", sha256 = _sha256, build_file_content = build_content)
+
+def _local_pak(game, index):
+    _pak("q3a_%s_pak%d" % (game, index), "%s/%s/pak%d.pk3" % (_BASE_URL, game, index))
+
+def _local_assets(name, path):
+    _pak(name, "%s/%s" % (_LOCAL_ASSETS_BASE_URL, path))
 
 def load_pak_repositories():
     # Quake 3 Arena
@@ -66,13 +66,15 @@ def load_pak_repositories():
     # Quake 3 Team Arena
     _local_pak("missionpack", 0)
     _local_pak("missionpack", 1)
+    _local_pak("missionpack", 3)
 
     # HQQ (HD 2D Elements) repacked for Q3Quest
     # Sourced from https://www.moddb.com/games/quake-iii-arena/addons/pak9hqq36-q3q
-    _local_assets("pak9hqq36", "baseq3/pak9hqq36.pk3", "05ebdf270a7baf1b68dc5c4bb17557b1d8b0a6825b8d9570b341500e0324843e")
+    _local_assets("pak9hqq36", "baseq3/pak9hqq36.pk3")
 
     # License: id Software and Pi Studios for Quake Arena Arcade on Xbox 360.
     # Luigi Auriemma for QuickBMS and the Quake Arena Arcade script.
     # Sourced from https://www.moddb.com/mods/quake-arena-arcade-assets/downloads/quake-arena-arcade-assets
-    _local_assets("QuakeArenaArcade_baseq3", "baseq3/QuakeArenaArcade.pk3", "0b34447617641c915dcc28ae2fab30d86df41f297e6b30f7ce678f942cf76a45")
-    _local_assets("QuakeArenaArcade_teamarena", "missionpack/QuakeArenaArcade.pk3", "4ac1e97e9e989709a101dfe19035ed3af535feedb3acd7477f2b078a9af5fe9a")
+    _local_assets("a_QuakeArenaArcade_baseq3", "baseq3/a_QuakeArenaArcade.pk3")
+    _local_assets("QuakeArenaArcade_baseq3", "baseq3/QuakeArenaArcade.pk3")
+    _local_assets("QuakeArenaArcade_teamarena", "missionpack/QuakeArenaArcade.pk3")
