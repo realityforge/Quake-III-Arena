@@ -1,6 +1,5 @@
 """Bazel repository rules for loading content from original games."""
 
-load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_archive = "http_archive")
 load(":metadata.bzl", _PAK_DATA = "PAK_DATA")
 load("//build_defs:http_repository_from_env.bzl", _http_repository_from_env = "http_repository_from_env")
 
