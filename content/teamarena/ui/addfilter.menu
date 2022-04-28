@@ -46,7 +46,7 @@ itemDef {
 	textscale .25
 	group grpFilterbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/button_red.tga"
+	background "ui/assets/button_red.png"
 	rect 10 5 75 20
 	textalign 1
 	textalignx 37
@@ -63,7 +63,7 @@ itemDef {
 	textscale .25
 	group grpFilterbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/button_red.tga"
+	background "ui/assets/button_red.png"
 	rect 90 5 75 20
 	textalign 1
 	textalignx 37
@@ -80,7 +80,7 @@ itemDef {
 	textscale .25
 	group grpFilterbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/button_red.tga"
+	background "ui/assets/button_red.png"
 	rect 170 5 75 20
 	textalign 1
 	textalignx 37
@@ -153,7 +153,7 @@ itemDef {
 	type 1
 	textscale .25
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/button_red.tga"
+	background "ui/assets/button_red.png"
 	rect 103 190 50 20
 	textalign 1
 	textalignx 25
@@ -227,7 +227,7 @@ itemDef {
 	type 1
 	textscale .25
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/button_red.tga"
+	background "ui/assets/button_red.png"
 	rect 103 190 50 20
 	textalign 1
 	textalignx 25
@@ -282,7 +282,7 @@ itemDef {
 	type 1
 	textscale .25
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/button_red.tga"
+	background "ui/assets/button_red.png"
 	rect 103 190 50 20
 	textalign 1
 	textalignx 25
@@ -305,7 +305,7 @@ itemDef {
 	type 1
 	group grpFilterbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/button_red.tga"
+	background "ui/assets/button_red.png"
 	rect 103 230 50 20
 	textalign 1
 	textalignx 25

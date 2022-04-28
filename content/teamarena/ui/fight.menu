@@ -26,7 +26,7 @@
   itemDef {
       	name leftgrad
       	style WINDOW_STYLE_SHADER
-      	background "ui/assets/halfgradleft.tga"
+      	background "ui/assets/halfgradleft.png"
       	rect 64 249 256 102
 	forecolor .75 0 0 0.5 
       	visible 1 
@@ -36,7 +36,7 @@
 itemDef {
       	name rightgrad
       	style WINDOW_STYLE_SHADER
-      	background "ui/assets/halfgradright.tga"
+      	background "ui/assets/halfgradright.png"
       	rect 320 249 256 102 
 	forecolor 0 0 .75 0.5
       	visible 1 
@@ -47,7 +47,7 @@ itemDef {
   itemDef {
       name leftvertgrad
       style WINDOW_STYLE_SHADER
-      background "ui/assets/verticalgradient.tga"
+      background "ui/assets/verticalgradient.png"
       rect 16 249 128 102 
       forecolor .75 0 0 0.5
       visible 1 
@@ -57,7 +57,7 @@ itemDef {
   itemDef {
       	name rightvertgrad
       	style WINDOW_STYLE_SHADER
-      	background "ui/assets/verticalgradient.tga"
+      	background "ui/assets/verticalgradient.png"
       	rect 496 249 128 102
 	forecolor 0 0 .75 0.5 
       	textscale 0.4
@@ -390,7 +390,7 @@ itemdef {
 	name medal_accuracy
 	style WINDOW_STYLE_SHADER
       	rect 48 394 32 32
-      	background "ui/assets/medal_accuracy.tga"
+      	background "ui/assets/medal_accuracy.png"
 	forecolor 1 1 1 .25
       	visible 1 
 	decoration
@@ -400,7 +400,7 @@ itemdef {
 	name medal_assist
 	style WINDOW_STYLE_SHADER
       	rect 112 394 32 32
-      	background "ui/assets/medal_assist.tga"
+      	background "ui/assets/medal_assist.png"
 	forecolor 1 1 1 .25
       	visible 1 
       	decoration 
@@ -411,7 +411,7 @@ itemdef {
 	name medal_accuracy
 	style WINDOW_STYLE_SHADER
       	rect 176 394 32 32
-      	background "ui/assets/medal_accuracy.tga"
+      	background "ui/assets/medal_accuracy.png"
 	forecolor 1 1 1 .25
       	visible 1 
       	decoration 
@@ -422,7 +422,7 @@ itemdef {
 	name medal_defend
 	style WINDOW_STYLE_SHADER
       	rect 240 394 32 32
-      	background "ui/assets/medal_defend.tga"
+      	background "ui/assets/medal_defend.png"
 	forecolor 1 1 1 .25
       	visible 1 
       	decoration 
@@ -433,7 +433,7 @@ itemdef {
 	name medal_excellent
 	style WINDOW_STYLE_SHADER
       	rect 304 394 32 32
-      	background "ui/assets/medal_excellent.tga"
+      	background "ui/assets/medal_excellent.png"
 	forecolor 1 1 1 .25
       	visible 1 
       	decoration 
@@ -444,7 +444,7 @@ itemdef {
 	name medal_frags
 	style WINDOW_STYLE_SHADER
       	rect 368 394 32 32
-      	background "ui/assets/medal_frags.tga"
+      	background "ui/assets/medal_frags.png"
 	forecolor 1 1 1 .25
       	visible 1 
       	decoration 
@@ -455,7 +455,7 @@ itemdef {
 	name medal_gauntlet
 	style WINDOW_STYLE_SHADER
       	rect 432 394 32 32
-      	background "ui/assets/medal_gauntlet.tga"
+      	background "ui/assets/medal_gauntlet.png"
 	forecolor 1 1 1 .25
       	visible 1 
       	decoration 
@@ -466,7 +466,7 @@ itemdef {
 	name medal_impressive
 	style WINDOW_STYLE_SHADER
       	rect 496 394 32 32
-      	background "ui/assets/medal_impressive.tga"
+      	background "ui/assets/medal_impressive.png"
 	forecolor 1 1 1 .25
       	visible 1 
       	decoration 
@@ -477,7 +477,7 @@ itemdef {
 	name medal_victory
 	style WINDOW_STYLE_SHADER
       	rect 560 394 32 32
-      	background "ui/assets/medal_victory.tga"
+      	background "ui/assets/medal_victory.png"
 	forecolor 1 1 1 .25
       	visible 1 
       	decoration 
@@ -611,7 +611,7 @@ itemdef {
     itemDef {
       	name back
 	style 3
-      	background "ui/assets/backarrow.tga"
+      	background "ui/assets/backarrow.png"
 	rect 16 424 50 50 
       	visible 1 
       	action { close fight ; open main }
@@ -621,7 +621,7 @@ itemdef {
 itemDef {
       	name back_alt
       	style WINDOW_STYLE_SHADER
-	background "ui/assets/backarrow_alt.tga"
+	background "ui/assets/backarrow_alt.png"
 	rect 16 424 50 50 
       	backcolor 0 0 0 0
       	forecolor 1 1 1 1
@@ -638,7 +638,7 @@ itemDef {
       	name accept
       	style 3	
      	rect 574 424 50 50 
-     	background "ui/assets/forwardarrow.tga"
+     	background "ui/assets/forwardarrow.png"
       	backcolor 0 0 0 0
       	forecolor 1 1 1 1
       	visible 1 
@@ -650,7 +650,7 @@ itemDef {
       	name accept_alt
       	style 3	
      	rect 574 424 50 50 
-     	background "ui/assets/forwardarrow_alt.tga"
+     	background "ui/assets/forwardarrow_alt.png"
       	backcolor 0 0 0 0
       	forecolor 1 1 1 1
       	visible 0

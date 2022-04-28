@@ -27,7 +27,7 @@ itemDef {
       	rect 32 2 32 32 
       	visible 1
 	type ITEM_TYPE_BUTTON
-      	background "icons/scout.tga"
+      	background "icons/scout.png"
 	}
 itemDef {
       	name scoutIconAlt
@@ -36,7 +36,7 @@ itemDef {
       	rect 30 0 34 34 
       	visible 1
 	type ITEM_TYPE_BUTTON
-      	background "icons/scout.tga"
+      	background "icons/scout.png"
 	}
 itemDef {
       	name scout
@@ -45,7 +45,7 @@ itemDef {
 	text "Scout"
 	type 1
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	textalign 1   	
 	textscale .3
 	textalignx 35
@@ -61,7 +61,7 @@ itemDef {
       	name scout
 	group grpScout
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.tga"
+	background "ui/assets/framebutton.png"
  	rect 15 37 70 26
       	visible 1 
 	decoration  	  
@@ -71,7 +71,7 @@ itemDef {
       	name scout
 	group grpScout
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.tga"
+	background "ui/assets/leftbutton.png"
       	rect 8 37 8 26
       	visible 1 
 	decoration  	  
@@ -81,7 +81,7 @@ itemDef {
       	name scout
 	group grpScout
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.tga"
+	background "ui/assets/rightbutton.png"
       	rect 84 37 8 26
       	visible 1 
 	decoration  	  
@@ -94,7 +94,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 128 2 32 32  
       	visible 1
-      	background "icons/guard.tga"
+      	background "icons/guard.png"
       	decoration 
 	}
 itemDef {
@@ -103,7 +103,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 126 0 34 34  
       	visible 1
-      	background "icons/guard.tga"
+      	background "icons/guard.png"
       	decoration 
 	}
 itemDef {
@@ -112,7 +112,7 @@ itemDef {
 	type 1
   	text "Guard"
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	textalign 1   	
 	textscale .3
 	textalignx 35
@@ -129,7 +129,7 @@ itemDef {
       	name guard
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.tga"
+	background "ui/assets/framebutton.png"
  	rect 111 37 70 26
       	visible 1 
 	decoration  	  
@@ -139,7 +139,7 @@ itemDef {
       	name guard
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.tga"
+	background "ui/assets/leftbutton.png"
       	rect 104 37 8 26
       	visible 1 
 	decoration  	  
@@ -149,7 +149,7 @@ itemDef {
       	name guard
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.tga"
+	background "ui/assets/rightbutton.png"
       	rect 180 37 8 26
       	visible 1 
 	decoration  	  
@@ -162,7 +162,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 222 2 32 32 
       	visible 1
-      	background "icons/doubler.tga"
+      	background "icons/doubler.png"
       	decoration 
 	}
 itemDef {
@@ -171,7 +171,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 220 0 34 34 
       	visible 1
-      	background "icons/doubler.tga"
+      	background "icons/doubler.png"
       	decoration 
 	}
 itemDef {
@@ -180,7 +180,7 @@ itemDef {
 	type 1
   	text "Doubler"
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	textalign 1   	
 	textscale .3
 	textalignx 35
@@ -196,7 +196,7 @@ itemDef {
       	name doubler
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.tga"
+	background "ui/assets/framebutton.png"
  	rect 207 37 70 26
       	visible 1 
 	decoration  	  
@@ -206,7 +206,7 @@ itemDef {
       	name doubler
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.tga"
+	background "ui/assets/leftbutton.png"
       	rect 200 37 8 26
       	visible 1 
 	decoration  	  
@@ -216,7 +216,7 @@ itemDef {
       	name doubler
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.tga"
+	background "ui/assets/rightbutton.png"
       	rect 276 37 8 26
       	visible 1 
 	decoration  	  
@@ -229,7 +229,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 331 2 32 32 
       	visible 1
-      	background "icons/ammo_regen.tga"
+      	background "icons/ammo_regen.png"
       	decoration 
 	}
 itemDef {
@@ -238,7 +238,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 329 0 34 34 
       	visible 1
-      	background "icons/ammo_regen.tga"
+      	background "icons/ammo_regen.png"
       	decoration 
 	}
 itemDef {
@@ -247,7 +247,7 @@ itemDef {
 	type 1
   	text "Ammo-Regen"
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	textalign 1   	
 	textscale .3
 	textalignx 43
@@ -263,7 +263,7 @@ itemDef {
       	name ammo_regen
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.tga"
+	background "ui/assets/framebutton.png"
  	rect 302 37 87 26
       	visible 1 
 	decoration  	  
@@ -273,7 +273,7 @@ itemDef {
       	name ammo_regen
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.tga"
+	background "ui/assets/leftbutton.png"
       	rect 295 37 8 26
       	visible 1 
 	decoration  	  
@@ -283,7 +283,7 @@ itemDef {
       	name ammo_regen
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.tga"
+	background "ui/assets/rightbutton.png"
       	rect 388 37 8 26
       	visible 1 
 	decoration  	  
@@ -296,7 +296,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 439 2 32 32 
       	visible 1
-      	background "icons/kamikaze.tga"
+      	background "icons/kamikaze.png"
       	decoration 
 	}
 itemDef {
@@ -305,7 +305,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 437 0 34 34 
       	visible 1
-      	background "icons/kamikaze.tga"
+      	background "icons/kamikaze.png"
       	decoration 
 	}
 itemDef {
@@ -314,7 +314,7 @@ itemDef {
 	type 1
   	text "Kamikaze"
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	textalign 1   	
 	textscale .3
 	textalignx 43
@@ -330,7 +330,7 @@ itemDef {
       	name kamikaze
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.tga"
+	background "ui/assets/framebutton.png"
  	rect 415 37 87 26
       	visible 1 
 	decoration  	  
@@ -340,7 +340,7 @@ itemDef {
       	name kamikaze
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.tga"
+	background "ui/assets/leftbutton.png"
       	rect 408 37 8 26
       	visible 1 
 	decoration  	  
@@ -350,7 +350,7 @@ itemDef {
       	name kamikaze
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.tga"
+	background "ui/assets/rightbutton.png"
       	rect 501 37 8 26
       	visible 1 
 	decoration  	  
@@ -364,7 +364,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 561 2 32 32 
       	visible 1
-      	background "icons/invulnerability.tga"
+      	background "icons/invulnerability.png"
       	decoration 
 	}
 itemDef {
@@ -373,7 +373,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 559 0 34 34 
       	visible 1
-      	background "icons/invulnerability.tga"
+      	background "icons/invulnerability.png"
       	decoration 
 	}
 itemDef {
@@ -382,7 +382,7 @@ itemDef {
 	type 1
   	text "Invulnerability"
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	textalign 1   	
 	textscale .29
 	textalignx 49
@@ -398,7 +398,7 @@ itemDef {
       	name invulnerability
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.tga"
+	background "ui/assets/framebutton.png"
  	rect 526 37 102 26
       	visible 1 
 	decoration  	  
@@ -408,7 +408,7 @@ itemDef {
       	name invulnerability
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.tga"
+	background "ui/assets/leftbutton.png"
       	rect 519 37 8 26
       	visible 1 
 	decoration  	  
@@ -418,7 +418,7 @@ itemDef {
       	name invulnerability
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.tga"
+	background "ui/assets/rightbutton.png"
       	rect 626 37 8 26
       	visible 1 
 	decoration  	  
@@ -743,7 +743,7 @@ itemDef {
 itemDef {
       	name fadebox
       	style WINDOW_STYLE_FILLED
- 	background "ui/assets/fadebox.tga"
+ 	background "ui/assets/fadebox.png"
 	forecolor 0 0 0 1
 	backcolor 0 0 0 1
 	rect 0 0 640 480

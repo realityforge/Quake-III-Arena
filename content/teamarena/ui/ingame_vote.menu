@@ -32,7 +32,7 @@ itemDef {
 	name window
 	rect 0 10 64 64
 	style 3
-	background "ui/assets/ingameleftcorner.tga"
+	background "ui/assets/ingameleftcorner.png"
 	visible 1
 	decoration
 	}
@@ -40,7 +40,7 @@ itemDef {
 	name window
 	rect 64 10 64 64
 	style 3
-	background "ui/assets/ingamerightcorner.tga"
+	background "ui/assets/ingamerightcorner.png"
 	visible 1
 	decoration
 	}
@@ -48,7 +48,7 @@ itemDef {
 	name window
 	rect 30 0 65 16
 	style 3
-	background "ui/assets/ingameconnection.tga"
+	background "ui/assets/ingameconnection.png"
 	visible 1
 	decoration
 	}
@@ -56,7 +56,7 @@ itemDef {
 	name window
 	rect 0 64 64 64
 	style 3
-	background "ui/assets/ingameleftcornerb.tga"
+	background "ui/assets/ingameleftcornerb.png"
 	visible 1
 	decoration
 	}
@@ -64,7 +64,7 @@ itemDef {
 	name window
 	rect 64 64 64 64
 	style 3
-	background "ui/assets/ingamerightcornerb.tga"
+	background "ui/assets/ingamerightcornerb.png"
 	visible 1
 	decoration
 	}

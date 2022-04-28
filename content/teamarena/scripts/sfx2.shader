@@ -2,11 +2,11 @@ textures/sfx2/senbouncenolit
 {
 	surfaceparm nodamage
 	surfaceparm nomarks
-	q3map_lightimage textures/sfx/jumppadsmall.tga
-	qer_editorimage textures/sfx/bouncepad01block18b.tga
+	q3map_lightimage textures/sfx/jumppadsmall.png
+	qer_editorimage textures/sfx/bouncepad01block18b.png
 
 	{
-		map textures/sfx/bouncepad01block18b.tga
+		map textures/sfx/bouncepad01block18b.png
 		rgbGen identity
 	}
 
@@ -17,13 +17,13 @@ textures/sfx2/senbouncenolit
 	}
 
 	{
-		map textures/sfx/bouncepad01b_layer1.tga
+		map textures/sfx/bouncepad01b_layer1.png
 		blendfunc gl_one gl_one
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
-		clampmap textures/sfx/jumppadsmall.tga
+		clampmap textures/sfx/jumppadsmall.png
 		blendfunc gl_one gl_one
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
@@ -37,11 +37,11 @@ textures/sfx2/flame_nolit_noshad
 	surfaceparm nolightmap
 	surfaceparm trans
 	cull none
-	qer_editorimage textures/sfx/flame1.tga
+	qer_editorimage textures/sfx/flame1.png
 
 
 	{
-		animMap 10 textures/sfx/flame1.tga textures/sfx/flame2.tga textures/sfx/flame3.tga textures/sfx/flame4.tga textures/sfx/flame5.tga textures/sfx/flame6.tga textures/sfx/flame7.tga textures/sfx/flame8.tga
+		animMap 10 textures/sfx/flame1.png textures/sfx/flame2.png textures/sfx/flame3.png textures/sfx/flame4.png textures/sfx/flame5.png textures/sfx/flame6.png textures/sfx/flame7.png textures/sfx/flame8.png
 		blendFunc GL_ONE GL_ONE
 	}
 
@@ -49,9 +49,9 @@ textures/sfx2/flame_nolit_noshad
 
 textures/sfx2/demonltblacknolight
 {
-	q3map_lightimage textures/sfx/demonltblackfinal_glow2.tga
+	q3map_lightimage textures/sfx/demonltblackfinal_glow2.png
 	surfaceparm nomarks
-	qer_editorimage textures/sfx/demonltblackfinal.tga
+	qer_editorimage textures/sfx/demonltblackfinal.png
 
 	{
 		map $lightmap
@@ -59,13 +59,13 @@ textures/sfx2/demonltblacknolight
 	}
 
 	{
-		map textures/sfx/demonltblackfinal.tga
+		map textures/sfx/demonltblackfinal.png
 		blendfunc gl_dst_color gl_zero
 		rgbgen identity
 	}
 
 	{
-		map textures/sfx/demonltblackfinal_glow2.tga
+		map textures/sfx/demonltblackfinal_glow2.png
 		blendfunc gl_one gl_one
 		rgbgen wave sin .9 .1 0 5
 	}
@@ -77,27 +77,27 @@ textures/sfx2/jumpadx
 
 
         {
-	        map textures/sfx2/jumpadn.tga
+	        map textures/sfx2/jumpadn.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod rotate 130
                 //tcMod stretch sin .7 0.5 0 .2
 	        rgbGen identity
 	}
         {
-	        map textures/sfx2/fan01.tga
+	        map textures/sfx2/fan01.png
 		  blendFunc blend
                 tcmod rotate -311
 	        rgbGen identity
 	}
         {
-		clampmap textures/sfx2/jumpadn2.tga
+		clampmap textures/sfx2/jumpadn2.png
 		blendfunc Add
                 tcmod rotate 130
 		tcMod stretch sin 1.2 .8 0 1.4
 		rgbGen wave square .5 .5 .25 1.4
 	}
         {
-		map textures/sfx2/jumpadx.tga
+		map textures/sfx2/jumpadx.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -117,7 +117,7 @@ textures/sfx2/beam01
 	cull none
         nomipmaps
 	{
-		map textures/sfx2/beam01.tga
+		map textures/sfx2/beam01.png
                 tcMod Scroll .1 0
                 blendFunc add
         }
@@ -126,7 +126,7 @@ textures/sfx2/beam01
 
 textures/sfx2/ouchfog
 {
-        qer_editorimage textures/sfx/hellfog.tga
+        qer_editorimage textures/sfx/hellfog.png
 	surfaceparm	trans
 	surfaceparm	nonsolid
 	surfaceparm	fog
@@ -139,7 +139,7 @@ textures/sfx2/ouchfog
 
 
 	{
-		map textures/sfx2/ouchfog.tga
+		map textures/sfx2/ouchfog.png
 		blendfunc gl_dst_color gl_zero
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
@@ -147,7 +147,7 @@ textures/sfx2/ouchfog
 	}
 
 	{
-		map textures/sfx2/ouchfog.tga
+		map textures/sfx2/ouchfog.png
 		blendfunc gl_dst_color gl_zero
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
@@ -171,13 +171,13 @@ textures/sfx2/autorain
         //nopicmip
 
 	{
-		map textures/sfx2/autorain.tga
+		map textures/sfx2/autorain.png
                 tcMod Scroll .5 -8
                 tcMod turb .1 .25 0 -.1
                 blendFunc GL_ONE GL_ONE
         }
         //{
-	//	map textures/sfx/rain.tga
+	//	map textures/sfx/rain.png
         //        tcMod Scroll .01 -6.3
         //
         //        blendFunc GL_ONE GL_ONE
@@ -194,8 +194,8 @@ textures/sfx2/flameanim_red_lowlite
 	//	*      	April 24, 2000 Surface Light 1000    	*
 	//	*	Please Comment Changes			*
 	//	*************************************************
-	qer_editorimage textures/sfx/r_flame3.tga
-	q3map_lightimage textures/sfx/r_flame3.tga
+	qer_editorimage textures/sfx/r_flame3.png
+	q3map_lightimage textures/sfx/r_flame3.png
 	surfaceparm trans
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -204,20 +204,20 @@ textures/sfx2/flameanim_red_lowlite
 	// surfacelight changed to 1000 on 04/24/00.... PAJ
 
 	{
-		animMap 10 textures/sfx/r_flame1.tga textures/sfx/r_flame2.tga textures/sfx/r_flame3.tga textures/sfx/r_flame4.tga textures/sfx/r_flame5.tga textures/sfx/r_flame6.tga textures/sfx/r_flame7.tga textures/sfx/r_flame8.tga
+		animMap 10 textures/sfx/r_flame1.png textures/sfx/r_flame2.png textures/sfx/r_flame3.png textures/sfx/r_flame4.png textures/sfx/r_flame5.png textures/sfx/r_flame6.png textures/sfx/r_flame7.png textures/sfx/r_flame8.png
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
-		animMap 10 textures/sfx/r_flame2.tga textures/sfx/r_flame3.tga textures/sfx/r_flame4.tga textures/sfx/r_flame5.tga textures/sfx/r_flame6.tga textures/sfx/r_flame7.tga textures/sfx/r_flame8.tga textures/sfx/r_flame1.tga
+		animMap 10 textures/sfx/r_flame2.png textures/sfx/r_flame3.png textures/sfx/r_flame4.png textures/sfx/r_flame5.png textures/sfx/r_flame6.png textures/sfx/r_flame7.png textures/sfx/r_flame8.png textures/sfx/r_flame1.png
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
-		map textures/sfx/r_flameball.tga
+		map textures/sfx/r_flameball.png
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin .6 .2 0 .6
 	}
@@ -231,8 +231,8 @@ textures/sfx2/flameanim_blue_lowlite
 	//	*      	April 24, 2000 Surface Light 1000    	*
 	//	*	Please Comment Changes			*
 	//	*************************************************
-	qer_editorimage textures/sfx/b_flame7.tga
-	q3map_lightimage textures/sfx/b_flame7.tga
+	qer_editorimage textures/sfx/b_flame7.png
+	q3map_lightimage textures/sfx/b_flame7.png
 	surfaceparm trans
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -242,20 +242,20 @@ textures/sfx2/flameanim_blue_lowlite
 
 
 	{
-		animMap 10 textures/sfx/b_flame1.tga textures/sfx/b_flame2.tga textures/sfx/b_flame3.tga textures/sfx/b_flame4.tga textures/sfx/b_flame5.tga textures/sfx/b_flame6.tga textures/sfx/b_flame7.tga textures/sfx/b_flame8.tga
+		animMap 10 textures/sfx/b_flame1.png textures/sfx/b_flame2.png textures/sfx/b_flame3.png textures/sfx/b_flame4.png textures/sfx/b_flame5.png textures/sfx/b_flame6.png textures/sfx/b_flame7.png textures/sfx/b_flame8.png
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
-		animMap 10 textures/sfx/b_flame2.tga textures/sfx/b_flame3.tga textures/sfx/b_flame4.tga textures/sfx/b_flame5.tga textures/sfx/b_flame6.tga textures/sfx/b_flame7.tga textures/sfx/b_flame8.tga textures/sfx/b_flame1.tga
+		animMap 10 textures/sfx/b_flame2.png textures/sfx/b_flame3.png textures/sfx/b_flame4.png textures/sfx/b_flame5.png textures/sfx/b_flame6.png textures/sfx/b_flame7.png textures/sfx/b_flame8.png textures/sfx/b_flame1.png
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
-		map textures/sfx/b_flameball.tga
+		map textures/sfx/b_flameball.png
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin .6 .2 0 .6
 	}
@@ -265,7 +265,7 @@ textures/sfx2/flameanim_blue_lowlite
 textures/sfx2/menuflare
 {
 	{
-		clampmap textures/sfx2/menuflare.tga
+		clampmap textures/sfx2/menuflare.png
 		blendfunc add
 		tcmod rotate 30
 	}
@@ -274,7 +274,7 @@ textures/sfx2/menuflare
 textures/sfx2/pagans
 {
 	{
-		clampmap ui/assets/pagans.tga
+		clampmap ui/assets/pagans.png
 		blendfunc add
 		rgbgen wave sin .25 0 0 0
 	}
@@ -283,7 +283,7 @@ textures/sfx2/pagans
 textures/sfx2/mainbanner
 {
 	{
-		map textures/sfx2/mainbanner.tga
+		map textures/sfx2/mainbanner.png
 		blendfunc add
 		tcmod scroll .02 0
 	}
@@ -291,30 +291,30 @@ textures/sfx2/mainbanner
 
 textures/sfx2/blue_jumpad05
 {
-      qer_editorimage textures/sfx2/jumpad05.tga
+      qer_editorimage textures/sfx2/jumpad05.png
 
         {
-	        map textures/sfx2/jumpadb.tga
+	        map textures/sfx2/jumpadb.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod rotate 130
                 //tcMod stretch sin .7 0.5 0 .2
 	        rgbGen identity
 	}
         {
-	        map textures/sfx2/fan01.tga
+	        map textures/sfx2/fan01.png
 		  blendFunc blend
                 tcmod rotate -311
 	        rgbGen identity
 	}
         {
-		clampmap textures/sfx2/jumpadb2.tga
+		clampmap textures/sfx2/jumpadb2.png
 		blendfunc Add
                 tcmod rotate 130
 		tcMod stretch sin 1.2 .8 0 1.4
 		rgbGen wave square .5 .5 .25 1.4
 	}
         {
-		map textures/sfx2/jumpad05.tga
+		map textures/sfx2/jumpad05.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -327,30 +327,30 @@ textures/sfx2/blue_jumpad05
 
 textures/sfx2/red_jumpad05
 {
-      qer_editorimage textures/sfx2/jumpad05.tga
+      qer_editorimage textures/sfx2/jumpad05.png
 
         {
-	        map textures/sfx2/jumpadr.tga
+	        map textures/sfx2/jumpadr.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod rotate 130
                 //tcMod stretch sin .7 0.5 0 .2
 	        rgbGen identity
 	}
         {
-	        map textures/sfx2/fan01.tga
+	        map textures/sfx2/fan01.png
 		  blendFunc blend
                 tcmod rotate -311
 	        rgbGen identity
 	}
         {
-		clampmap textures/sfx2/jumpadr2.tga
+		clampmap textures/sfx2/jumpadr2.png
 		blendfunc Add
                 tcmod rotate 130
 		tcMod stretch sin 1.2 .8 0 1.4
 		rgbGen wave square .5 .5 .25 1.4
 	}
         {
-		map textures/sfx2/jumpad05.tga
+		map textures/sfx2/jumpad05.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -366,12 +366,12 @@ textures/sfx2/screen01
     surfaceparm nomarks
 
 	{
-		map textures/sfx2/screen01.tga
+		map textures/sfx2/screen01.png
                 tcMod scroll 9 .1
                	rgbGen identity
 	}
         {
-		map textures/effects2/tinfx_scr.tga
+		map textures/effects2/tinfx_scr.png
                 blendfunc add
                 tcGen environment
                	rgbGen identity
@@ -392,7 +392,7 @@ textures/sfx2/red_edge
     surfaceparm nolightmap
 
 	{
-		map textures/sfx2/red_edge.tga
+		map textures/sfx2/red_edge.png
 		blendFunc add
                 tcMod scale .2 .2
                 tcMod scroll .2 .2
@@ -409,7 +409,7 @@ textures/sfx2/blue_edge
     surfaceparm nolightmap
 
 	{
-		map textures/sfx2/blue_edge.tga
+		map textures/sfx2/blue_edge.png
 		blendFunc add
                 tcMod scale .2 .2
                 tcMod scroll .2 .2
@@ -425,19 +425,19 @@ textures/sfx2/b_smack01
     surfaceparm trans
     surfaceparm nolightmap
 	{
-		map textures/sfx2/b_smack01.tga
+		map textures/sfx2/b_smack01.png
 		blendFunc add
                 tcMod turb 0 .05 .06 .25
 		rgbgen wave sin 0 1 0 .19
 	}
         {
-		map textures/sfx2/b_smack03.tga
+		map textures/sfx2/b_smack03.png
 		blendFunc add
                 tcMod turb 0 .05 .07 .33
 		rgbgen wave sin 0 1 0 7
 	}
         {
-		map textures/sfx2/b_smack02.tga
+		map textures/sfx2/b_smack02.png
 		blendFunc add
                 tcMod turb 0 .07 .05 .4
 		rgbgen wave sin 0 1 0 .5
@@ -452,19 +452,19 @@ textures/sfx2/r_fight01
     surfaceparm trans
     surfaceparm nolightmap
 	{
-		map textures/sfx2/r_fight01.tga
+		map textures/sfx2/r_fight01.png
 		blendFunc add
                 tcMod turb 0 .05 .06 .25
 		rgbgen wave sin 0 1 0 .19
 	}
         {
-		map textures/sfx2/r_fight02.tga
+		map textures/sfx2/r_fight02.png
 		blendFunc add
                 tcMod turb 0 .05 .07 .33
 		rgbgen wave sin 0 1 0 7
 	}
         {
-		map textures/sfx2/r_fight03.tga
+		map textures/sfx2/r_fight03.png
 		blendFunc add
                 tcMod turb 0 .07 .05 .4
 		rgbgen wave sin 0 1 0 .5
@@ -475,12 +475,12 @@ textures/sfx2/r_fight01
 }
 textures/sfx2/ven_beam
 {
-    qer_editorimage textures/sfx2/ven_beam_img.tga
+    qer_editorimage textures/sfx2/ven_beam_img.png
     cull disable
     surfaceparm trans
 
 	{
-		map textures/sfx2/ven_beam.tga
+		map textures/sfx2/ven_beam.png
 		blendFunc add
 		rgbGen identity
 	}
@@ -498,7 +498,7 @@ textures/sfx2/kamikaze
         deformVertexes autoSprite
 
 	{
-		map textures/sfx2/kamikaze.tga
+		map textures/sfx2/kamikaze.png
 		blendfunc Add
 		rgbGen identity
 	}
@@ -513,7 +513,7 @@ textures/sfx2/doubler
         deformVertexes autoSprite
 
 	{
-		map textures/sfx2/doubler.tga
+		map textures/sfx2/doubler.png
 		blendfunc Add
 		rgbGen identity
 	}
@@ -528,7 +528,7 @@ textures/sfx2/guard
         deformVertexes autoSprite
 
 	{
-		map textures/sfx2/guard.tga
+		map textures/sfx2/guard.png
 		blendfunc Add
 		rgbGen identity
 	}
@@ -542,7 +542,7 @@ textures/sfx2/scout
         deformVertexes autoSprite
 
 	{
-		map textures/sfx2/scout.tga
+		map textures/sfx2/scout.png
 		blendfunc Add
 		rgbGen identity
 	}
@@ -550,11 +550,11 @@ textures/sfx2/scout
 textures/sfx2/padwall_red
 	{
 
-	q3map_lightimage textures/sfx2/dm3padwallglow_red.tga
-	qer_editorimage textures/sfx2/dm3padwall_red.tga
+	q3map_lightimage textures/sfx2/dm3padwallglow_red.png
+	qer_editorimage textures/sfx2/dm3padwall_red.png
 
 	{
-		map textures/sfx2/dm3padwall_red.tga
+		map textures/sfx2/dm3padwall_red.png
 		rgbGen identity
 	}
 
@@ -566,7 +566,7 @@ textures/sfx2/padwall_red
 
 
 	{
-		map textures/sfx2/dm3padwallglow_red.tga
+		map textures/sfx2/dm3padwallglow_red.png
 		blendfunc gl_one gl_one
 		rgbgen wave sin 0 1 0 .5
 		tcmod scale 1 .05
@@ -578,12 +578,12 @@ textures/sfx2/padwall_red
 textures/sfx2/padwall_red_light
 	{
 
-	q3map_lightimage textures/sfx2/dm3padwallglow_red.tga
-	qer_editorimage textures/sfx2/dm3padwall_red.tga
+	q3map_lightimage textures/sfx2/dm3padwallglow_red.png
+	qer_editorimage textures/sfx2/dm3padwall_red.png
 	q3map_surfacelight 100
 	q3map_lightsubdivide 64
 	{
-		map textures/sfx2/dm3padwall_red.tga
+		map textures/sfx2/dm3padwall_red.png
 		rgbGen identity
 	}
 
@@ -595,7 +595,7 @@ textures/sfx2/padwall_red_light
 
 
 	{
-		map textures/sfx2/dm3padwallglow_red.tga
+		map textures/sfx2/dm3padwallglow_red.png
 		blendfunc gl_one gl_one
 		rgbgen wave sin 0 1 0 .5
 		tcmod scale 1 .05
@@ -609,11 +609,11 @@ textures/sfx2/padwall_red_light
 textures/sfx2/padwall_ntl
 	{
 
-	q3map_lightimage textures/sfx2/dm3padwallglow_ntl.tga
-	qer_editorimage textures/sfx2/dm3padwall_red.tga
+	q3map_lightimage textures/sfx2/dm3padwallglow_ntl.png
+	qer_editorimage textures/sfx2/dm3padwall_red.png
 
 	{
-		map textures/sfx2/dm3padwall_red.tga
+		map textures/sfx2/dm3padwall_red.png
 		rgbGen identity
 	}
 
@@ -625,7 +625,7 @@ textures/sfx2/padwall_ntl
 
 
 	{
-		map textures/sfx2/dm3padwallglow_ntl.tga
+		map textures/sfx2/dm3padwallglow_ntl.png
 		blendfunc gl_one gl_one
 		rgbgen wave sin 0 1 0 .5
 		tcmod scale 1 .05
@@ -644,14 +644,14 @@ textures/sfx2/nebula
     //deformVertexes move .3 .1 0  sin 0 .5 0 0.2
    //deformVertexes move .6 .3 0  sin 0 .5 0 0.4
 	{
-		map textures/sfx2/nebula.tga
+		map textures/sfx2/nebula.png
 
                 tcmod scroll .008 .012
 		blendFunc add
 		rgbGen vertex
 	}
         {
-		map textures/sfx2/nebula.tga
+		map textures/sfx2/nebula.png
 
                 tcmod scroll -.01 .012
                 tcMod stretch sin .8 0.10 0 .01
@@ -665,17 +665,17 @@ textures/sfx2/nebula
 }
 textures/sfx2/ntrl_launchpad
 {
-      qer_editorimage textures/sfx2/launchpad03.tga
+      qer_editorimage textures/sfx2/launchpad03.png
 
         {
-	        map textures/sfx2/tread.tga
+	        map textures/sfx2/tread.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod scroll 0 .7
                 tcmod scale  1 2
 	        rgbGen identity
 	}
         {
-	        map textures/sfx2/nlaunch.tga
+	        map textures/sfx2/nlaunch.png
                 blendFunc Add
                 tcmod scale  1 .5
                 tcmod scroll 0 2
@@ -684,7 +684,7 @@ textures/sfx2/ntrl_launchpad
 	}
 
         {
-		map textures/sfx2/launchpad03.tga
+		map textures/sfx2/launchpad03.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -694,7 +694,7 @@ textures/sfx2/ntrl_launchpad
 		rgbGen identity
 	}
         {
-	        map textures/sfx2/nlaunch2.tga
+	        map textures/sfx2/nlaunch2.png
                 blendFunc Add
 	        rgbgen wave square 0 1 0 1
                 alphagen wave square 0 1 .1 1
@@ -704,17 +704,17 @@ textures/sfx2/ntrl_launchpad
 }
 textures/sfx2/blue_launchpad
 {
-      qer_editorimage textures/sfx2/launchpad03.tga
+      qer_editorimage textures/sfx2/launchpad03.png
 
         {
-	        map textures/sfx2/tread.tga
+	        map textures/sfx2/tread.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod scroll 0 .7
                 tcmod scale  1 2
 	        rgbGen identity
 	}
         {
-	        map textures/sfx2/blaunch.tga
+	        map textures/sfx2/blaunch.png
                 blendFunc Add
                 tcmod scale  1 .5
                 tcmod scroll 0 2
@@ -723,7 +723,7 @@ textures/sfx2/blue_launchpad
 	}
 
         {
-		map textures/sfx2/launchpad03.tga
+		map textures/sfx2/launchpad03.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -733,7 +733,7 @@ textures/sfx2/blue_launchpad
 		rgbGen identity
 	}
         {
-	        map textures/sfx2/blaunch2.tga
+	        map textures/sfx2/blaunch2.png
                 blendFunc Add
 	        rgbgen wave square 0 1 0 1
                 alphagen wave square 0 1 .1 1
@@ -743,17 +743,17 @@ textures/sfx2/blue_launchpad
 }
 textures/sfx2/red_launchpad
 {
-      qer_editorimage textures/sfx2/launchpad03.tga
+      qer_editorimage textures/sfx2/launchpad03.png
 
         {
-	        map textures/sfx2/tread.tga
+	        map textures/sfx2/tread.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod scroll 0 .7
                 tcmod scale  1 2
 	        rgbGen identity
 	}
         {
-	        map textures/sfx2/rlaunch.tga
+	        map textures/sfx2/rlaunch.png
                 blendFunc Add
                 tcmod scale  1 .5
                 tcmod scroll 0 2
@@ -762,7 +762,7 @@ textures/sfx2/red_launchpad
 	}
 
         {
-		map textures/sfx2/launchpad03.tga
+		map textures/sfx2/launchpad03.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -772,7 +772,7 @@ textures/sfx2/red_launchpad
 		rgbGen identity
 	}
         {
-	        map textures/sfx2/rlaunch2.tga
+	        map textures/sfx2/rlaunch2.png
                 blendFunc Add
 	        rgbgen wave square 0 1 0 1
                 alphagen wave square 0 1 .1 1
@@ -786,7 +786,7 @@ textures/sfx2/tread2
 {
 
         {
-	        map textures/sfx2/tread2.tga
+	        map textures/sfx2/tread2.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod scroll 0 1
 	        rgbGen identity
@@ -799,30 +799,30 @@ textures/sfx2/tread2
 }
 textures/sfx2/ntrl_jumpad
 {
-      qer_editorimage textures/sfx2/jumpad02.tga
+      qer_editorimage textures/sfx2/jumpad02.png
 
         {
-	        map textures/sfx2/jumpadn.tga
+	        map textures/sfx2/jumpadn.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod rotate 130
                 //tcMod stretch sin .7 0.5 0 .2
 	        rgbGen identity
 	}
         {
-	        map textures/sfx2/fan01.tga
+	        map textures/sfx2/fan01.png
 		  blendFunc blend
                 tcmod rotate -311
 	        rgbGen identity
 	}
         {
-		clampmap textures/sfx2/jumpadn2.tga
+		clampmap textures/sfx2/jumpadn2.png
 		blendfunc Add
                 tcmod rotate 130
 		tcMod stretch sin 1.2 .8 0 1.4
 		rgbGen wave square .5 .5 .25 1.4
 	}
         {
-		map textures/sfx2/jumpad02.tga
+		map textures/sfx2/jumpad02.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -834,30 +834,30 @@ textures/sfx2/ntrl_jumpad
 }
 textures/sfx2/blue_jumpad
 {
-      qer_editorimage textures/sfx2/jumpad02.tga
+      qer_editorimage textures/sfx2/jumpad02.png
 
         {
-	        map textures/sfx2/jumpadb.tga
+	        map textures/sfx2/jumpadb.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod rotate 130
                 //tcMod stretch sin .7 0.5 0 .2
 	        rgbGen identity
 	}
         {
-	        map textures/sfx2/fan01.tga
+	        map textures/sfx2/fan01.png
 		  blendFunc blend
                 tcmod rotate -311
 	        rgbGen identity
 	}
         {
-		clampmap textures/sfx2/jumpadb2.tga
+		clampmap textures/sfx2/jumpadb2.png
 		blendfunc Add
                 tcmod rotate 130
 		tcMod stretch sin 1.2 .8 0 1.4
 		rgbGen wave square .5 .5 .25 1.4
 	}
         {
-		map textures/sfx2/jumpad02.tga
+		map textures/sfx2/jumpad02.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -870,30 +870,30 @@ textures/sfx2/blue_jumpad
 
 textures/sfx2/red_jumpad
 {
-      qer_editorimage textures/sfx2/jumpad02.tga
+      qer_editorimage textures/sfx2/jumpad02.png
 
         {
-	        map textures/sfx2/jumpadr.tga
+	        map textures/sfx2/jumpadr.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod rotate 130
                 //tcMod stretch sin .7 0.5 0 .2
 	        rgbGen identity
 	}
         {
-	        map textures/sfx2/fan01.tga
+	        map textures/sfx2/fan01.png
 		  blendFunc blend
                 tcmod rotate -311
 	        rgbGen identity
 	}
         {
-		clampmap textures/sfx2/jumpadr2.tga
+		clampmap textures/sfx2/jumpadr2.png
 		blendfunc Add
                 tcmod rotate 130
 		tcMod stretch sin 1.2 .8 0 1.4
 		rgbGen wave square .5 .5 .25 1.4
 	}
         {
-		map textures/sfx2/jumpad02.tga
+		map textures/sfx2/jumpad02.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -905,30 +905,30 @@ textures/sfx2/red_jumpad
 }
 textures/sfx2/ntrl_jumpad2
 {
-      qer_editorimage textures/sfx2/jumpad01.tga
+      qer_editorimage textures/sfx2/jumpad01.png
 
         {
-	        map textures/sfx2/jumpadn.tga
+	        map textures/sfx2/jumpadn.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod rotate 130
                 //tcMod stretch sin .7 0.5 0 .2
 	        rgbGen identity
 	}
         {
-	        map textures/sfx2/fan01.tga
+	        map textures/sfx2/fan01.png
 		  blendFunc blend
                 tcmod rotate -311
 	        rgbGen identity
 	}
         {
-		clampmap textures/sfx2/jumpadn2.tga
+		clampmap textures/sfx2/jumpadn2.png
 		blendfunc Add
                 tcmod rotate 130
 		tcMod stretch sin 1.2 .8 0 1.4
 		rgbGen wave square .5 .5 .25 1.4
 	}
         {
-		map textures/sfx2/jumpad01.tga
+		map textures/sfx2/jumpad01.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -940,30 +940,30 @@ textures/sfx2/ntrl_jumpad2
 }
 textures/sfx2/blue_jumpad2
 {
-      qer_editorimage textures/sfx2/jumpad01.tga
+      qer_editorimage textures/sfx2/jumpad01.png
 
         {
-	        map textures/sfx2/jumpadb.tga
+	        map textures/sfx2/jumpadb.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod rotate 130
                 //tcMod stretch sin .7 0.5 0 .2
 	        rgbGen identity
 	}
         {
-	        map textures/sfx2/fan01.tga
+	        map textures/sfx2/fan01.png
 		  blendFunc blend
                 tcmod rotate -311
 	        rgbGen identity
 	}
         {
-		clampmap textures/sfx2/jumpadb2.tga
+		clampmap textures/sfx2/jumpadb2.png
 		blendfunc Add
                 tcmod rotate 130
 		tcMod stretch sin 1.2 .8 0 1.4
 		rgbGen wave square .5 .5 .25 1.4
 	}
         {
-		map textures/sfx2/jumpad01.tga
+		map textures/sfx2/jumpad01.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -976,30 +976,30 @@ textures/sfx2/blue_jumpad2
 
 textures/sfx2/red_jumpad2
 {
-      qer_editorimage textures/sfx2/jumpad01.tga
+      qer_editorimage textures/sfx2/jumpad01.png
 
         {
-	        map textures/sfx2/jumpadr.tga
+	        map textures/sfx2/jumpadr.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod rotate 130
                 //tcMod stretch sin .7 0.5 0 .2
 	        rgbGen identity
 	}
         {
-	        map textures/sfx2/fan01.tga
+	        map textures/sfx2/fan01.png
 		  blendFunc blend
                 tcmod rotate -311
 	        rgbGen identity
 	}
         {
-		clampmap textures/sfx2/jumpadr2.tga
+		clampmap textures/sfx2/jumpadr2.png
 		blendfunc Add
                 tcmod rotate 130
 		tcMod stretch sin 1.2 .8 0 1.4
 		rgbGen wave square .5 .5 .25 1.4
 	}
         {
-		map textures/sfx2/jumpad01.tga
+		map textures/sfx2/jumpad01.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -1013,30 +1013,30 @@ textures/sfx2/red_jumpad2
 /////
 textures/sfx2/ntrl_jumpad3
 {
-      qer_editorimage textures/sfx2/jumpad03.tga
+      qer_editorimage textures/sfx2/jumpad03.png
 
         {
-	        map textures/sfx2/jumpadn.tga
+	        map textures/sfx2/jumpadn.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod rotate 130
                 //tcMod stretch sin .7 0.5 0 .2
 	        rgbGen identity
 	}
         {
-	        map textures/sfx2/fan01.tga
+	        map textures/sfx2/fan01.png
 		  blendFunc blend
                 tcmod rotate -311
 	        rgbGen identity
 	}
         {
-		clampmap textures/sfx2/jumpadn2.tga
+		clampmap textures/sfx2/jumpadn2.png
 		blendfunc Add
                 tcmod rotate 130
 		tcMod stretch sin 1.2 .8 0 1.4
 		rgbGen wave square .5 .5 .25 1.4
 	}
         {
-		map textures/sfx2/jumpad03.tga
+		map textures/sfx2/jumpad03.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -1048,30 +1048,30 @@ textures/sfx2/ntrl_jumpad3
 }
 textures/sfx2/blue_jumpad3
 {
-      qer_editorimage textures/sfx2/jumpad03.tga
+      qer_editorimage textures/sfx2/jumpad03.png
 
         {
-	        map textures/sfx2/jumpadb.tga
+	        map textures/sfx2/jumpadb.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod rotate 130
                 //tcMod stretch sin .7 0.5 0 .2
 	        rgbGen identity
 	}
         {
-	        map textures/sfx2/fan01.tga
+	        map textures/sfx2/fan01.png
 		  blendFunc blend
                 tcmod rotate -311
 	        rgbGen identity
 	}
         {
-		clampmap textures/sfx2/jumpadb2.tga
+		clampmap textures/sfx2/jumpadb2.png
 		blendfunc Add
                 tcmod rotate 130
 		tcMod stretch sin 1.2 .8 0 1.4
 		rgbGen wave square .5 .5 .25 1.4
 	}
         {
-		map textures/sfx2/jumpad03.tga
+		map textures/sfx2/jumpad03.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -1084,30 +1084,30 @@ textures/sfx2/blue_jumpad3
 
 textures/sfx2/red_jumpad3
 {
-      qer_editorimage textures/sfx2/jumpad03.tga
+      qer_editorimage textures/sfx2/jumpad03.png
 
         {
-	        map textures/sfx2/jumpadr.tga
+	        map textures/sfx2/jumpadr.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod rotate 130
                 //tcMod stretch sin .7 0.5 0 .2
 	        rgbGen identity
 	}
         {
-	        map textures/sfx2/fan01.tga
+	        map textures/sfx2/fan01.png
 		  blendFunc blend
                 tcmod rotate -311
 	        rgbGen identity
 	}
         {
-		clampmap textures/sfx2/jumpadr2.tga
+		clampmap textures/sfx2/jumpadr2.png
 		blendfunc Add
                 tcmod rotate 130
 		tcMod stretch sin 1.2 .8 0 1.4
 		rgbGen wave square .5 .5 .25 1.4
 	}
         {
-		map textures/sfx2/jumpad03.tga
+		map textures/sfx2/jumpad03.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -1120,32 +1120,32 @@ textures/sfx2/red_jumpad3
 
 textures/sfx2/blue_jumpad6
 {
-      qer_editorimage textures/sfx2/jumpad_tile01.tga
+      qer_editorimage textures/sfx2/jumpad_tile01.png
 	q3mapsurfacelight 500
-	qer_lightimage textures/sfx2/jumpadb2.tga
+	qer_lightimage textures/sfx2/jumpadb2.png
 
         {
-	        map textures/sfx2/jumpadb.tga
+	        map textures/sfx2/jumpadb.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod rotate 130
                 //tcMod stretch sin .7 0.5 0 .2
 	        rgbGen identity
 	}
         {
-	        map textures/sfx2/fan01.tga
+	        map textures/sfx2/fan01.png
 		  blendFunc blend
                 tcmod rotate -311
 	        rgbGen identity
 	}
         {
-		clampmap textures/sfx2/jumpadb2.tga
+		clampmap textures/sfx2/jumpadb2.png
 		blendfunc Add
                 tcmod rotate 130
 		tcMod stretch sin 1.2 .8 0 1.4
 		rgbGen wave square .5 .5 .25 1.4
 	}
         {
-		map textures/sfx2/jumpad_tile01.tga
+		map textures/sfx2/jumpad_tile01.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -1159,31 +1159,31 @@ textures/sfx2/blue_jumpad6
 textures/sfx2/red_jumpad6
 
 {
-      qer_editorimage textures/sfx2/jumpad_tile01.tga
+      qer_editorimage textures/sfx2/jumpad_tile01.png
         q3mapsurfacelight 500
-qer_lightimage textures/sfx2/jumpadr2.tga
+qer_lightimage textures/sfx2/jumpadr2.png
         {
-	        map textures/sfx2/jumpadr.tga
+	        map textures/sfx2/jumpadr.png
                 blendFunc GL_ONE GL_ZERO
                 tcmod rotate 130
                 //tcMod stretch sin .7 0.5 0 .2
 	        rgbGen identity
 	}
         {
-	        map textures/sfx2/fan01.tga
+	        map textures/sfx2/fan01.png
 		  blendFunc blend
                 tcmod rotate -311
 	        rgbGen identity
 	}
         {
-		clampmap textures/sfx2/jumpadr2.tga
+		clampmap textures/sfx2/jumpadr2.png
 		blendfunc Add
                 tcmod rotate 130
 		tcMod stretch sin 1.2 .8 0 1.4
 		rgbGen wave square .5 .5 .25 1.4
 	}
         {
-		map textures/sfx2/jumpad_tile01.tga
+		map textures/sfx2/jumpad_tile01.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -1201,7 +1201,7 @@ textures/sfx2/redgoal2
 	surfaceparm trans
 	cull twosided
 	{
-		map textures/sfx2/redgoal2.tga
+		map textures/sfx2/redgoal2.png
 		tcGen environment
                 tcmod scale 2 2
 		blendfunc GL_ONE GL_ONE
@@ -1217,7 +1217,7 @@ textures/sfx2/bluegoal2
 	surfaceparm trans
 	cull twosided
 	{
-		map textures/sfx2/bluegoal2.tga
+		map textures/sfx2/bluegoal2.png
 		tcGen environment
                 tcmod scale 2 2
 		blendfunc GL_ONE GL_ONE
@@ -1236,12 +1236,12 @@ textures/sfx2/swirl_b1
 	cull none
 
 	{
-		clampmap textures/sfx2/swirl_b1.tga
+		clampmap textures/sfx2/swirl_b1.png
 		blendFunc GL_ONE GL_ONE
                 tcMod rotate -188
 	}
         {
-		clampmap textures/sfx2/swirl_b2.tga
+		clampmap textures/sfx2/swirl_b2.png
 		blendFunc GL_ONE GL_ONE
                 tcMod rotate 333
 	}
@@ -1259,12 +1259,12 @@ textures/sfx2/swirl_r1
 	cull none
 
 	{
-		clampmap textures/sfx2/swirl_r1.tga
+		clampmap textures/sfx2/swirl_r1.png
 		blendFunc GL_ONE GL_ONE
                 tcMod rotate -188
 	}
         {
-		clampmap textures/sfx2/swirl_r2.tga
+		clampmap textures/sfx2/swirl_r2.png
 		blendFunc GL_ONE GL_ONE
                 tcMod rotate 333
 	}
@@ -1278,7 +1278,7 @@ textures/sfx2/jumportal01
 	cull none
 
 	{
-		map textures/sfx2/jumportal01.tga
+		map textures/sfx2/jumportal01.png
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
@@ -1299,7 +1299,7 @@ textures/sfx2/jumportal02
 	cull none
 
 	{
-		map textures/sfx2/jumportal02.tga
+		map textures/sfx2/jumportal02.png
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
@@ -1314,22 +1314,22 @@ textures/sfx2/jumportal02
 }
 textures/sfx2/scrolling_red
 {
-	qer_editorimage textures/base_light/jaildr1_3.tga
+	qer_editorimage textures/base_light/jaildr1_3.png
 	surfaceparm nomarks
-	q3map_lightimage textures/base_light/jaildr1_3.blend.tga
+	q3map_lightimage textures/base_light/jaildr1_3.blend.png
 	q3map_surfacelight 1000
 	{
 		map $lightmap
 		rgbGen identity
 	}
 	{
-		map textures/base_light/jaildr1_3.tga
+		map textures/base_light/jaildr1_3.png
 		blendFunc GL_DST_COLOR GL_ZERO
 		tcMod scroll 0 -.25
 		rgbGen identity
 	}
 	{
-		map textures/base_light/jaildr1_3.blend.tga
+		map textures/base_light/jaildr1_3.blend.png
 		rgbGen wave sin 0.5 0.5 1 1
 		tcMod scroll 0 -.25
 		blendfunc GL_ONE GL_ONE
@@ -1338,7 +1338,7 @@ textures/sfx2/scrolling_red
 textures/sfx2/dist_fog
 
 {
-	qer_editorimage textures/sfx2/dist_fog.tga
+	qer_editorimage textures/sfx2/dist_fog.png
 	surfaceparm	trans
 	surfaceparm	nonsolid
 	surfaceparm	fog
@@ -1355,20 +1355,20 @@ textures/sfx2/b_flame1
 	surfaceparm nolightmap
 	cull none
         {
-		animMap 10 textures/sfx/b_flame1.tga textures/sfx/b_flame2.tga textures/sfx/b_flame3.tga textures/sfx/b_flame4.tga textures/sfx/b_flame5.tga textures/sfx/b_flame6.tga textures/sfx/b_flame7.tga textures/sfx/b_flame8.tga
+		animMap 10 textures/sfx/b_flame1.png textures/sfx/b_flame2.png textures/sfx/b_flame3.png textures/sfx/b_flame4.png textures/sfx/b_flame5.png textures/sfx/b_flame6.png textures/sfx/b_flame7.png textures/sfx/b_flame8.png
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
-		animMap 10 textures/sfx/b_flame2.tga textures/sfx/b_flame3.tga textures/sfx/b_flame4.tga textures/sfx/b_flame5.tga textures/sfx/b_flame6.tga textures/sfx/b_flame7.tga textures/sfx/b_flame8.tga textures/sfx/b_flame1.tga
+		animMap 10 textures/sfx/b_flame2.png textures/sfx/b_flame3.png textures/sfx/b_flame4.png textures/sfx/b_flame5.png textures/sfx/b_flame6.png textures/sfx/b_flame7.png textures/sfx/b_flame8.png textures/sfx/b_flame1.png
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
-		map textures/sfx/b_flameball.tga
+		map textures/sfx/b_flameball.png
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin .6 .2 0 .6
 	}
@@ -1386,13 +1386,13 @@ textures/sfx2/drizzle
         deformVertexes wave 30 sin 0 10 0 .2
 	cull none
 	{
-		map textures/sfx2/drizzle.tga
+		map textures/sfx2/drizzle.png
                 tcMod Scroll .5 -8
                 //tcMod turb .1 .25 0 -.1
                 blendFunc GL_ONE GL_ONE
         }
         {
-		map textures/sfx2/drizzle.tga
+		map textures/sfx2/drizzle.png
                 tcMod Scroll .01 -6.3
                 blendFunc GL_ONE GL_ONE
         }
@@ -1410,14 +1410,14 @@ textures/sfx2/drizzle
 textures/sfx2/jumppad_q1metal7_97
 //Red side bounce pad
 {
-	qer_editorimage textures/sfx2/bouncepad_q1metal7_97.tga
+	qer_editorimage textures/sfx2/bouncepad_q1metal7_97.png
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga
+	q3map_lightimage textures/sfx/jumppadsmall.png
 	q3map_surfacelight 1000
 
 
 	{
-		map textures/sfx2/bouncepad_q1metal7_97.tga
+		map textures/sfx2/bouncepad_q1metal7_97.png
 		rgbGen identity
 	}
 
@@ -1428,13 +1428,13 @@ textures/sfx2/jumppad_q1metal7_97
 	}
 
 	{
-		map textures/sfx/bouncepad01b_layer1.tga
+		map textures/sfx/bouncepad01b_layer1.png
 		blendfunc gl_one gl_one
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
-		clampmap textures/sfx/jumppadsmall.tga
+		clampmap textures/sfx/jumppadsmall.png
 		blendfunc gl_one gl_one
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
@@ -1453,13 +1453,13 @@ textures/sfx2/jumppad_q1metal7_97
 textures/sfx2/jumppad_q1metal7_98
 //Blue side bounce pad
 {
-	qer_editorimage textures/sfx2/bouncepad_q1metal7_98.tga
+	qer_editorimage textures/sfx2/bouncepad_q1metal7_98.png
 	surfaceparm nodamage
-	q3map_lightimage textures/sfx/jumppadsmall.tga
+	q3map_lightimage textures/sfx/jumppadsmall.png
 	q3map_surfacelight 1000
 
 	{
-		map textures/sfx2/bouncepad_q1metal7_98.tga
+		map textures/sfx2/bouncepad_q1metal7_98.png
 		rgbGen identity
 	}
 
@@ -1470,13 +1470,13 @@ textures/sfx2/jumppad_q1metal7_98
 	}
 
 	{
-		map textures/sfx/bouncepad01b_layer1.tga
+		map textures/sfx/bouncepad01b_layer1.png
 		blendfunc gl_one gl_one
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
-		clampmap textures/sfx/jumppadsmall.tga
+		clampmap textures/sfx/jumppadsmall.png
 		blendfunc gl_one gl_one
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5

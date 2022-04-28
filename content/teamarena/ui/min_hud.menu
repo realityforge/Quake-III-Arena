@@ -7,7 +7,7 @@
 {
   assetGlobalDef {
     	cursor "ui/assets/3_cursor2"			// cursor	
-    	gradientBar "ui/assets/gradientbar2.tga"	// gradient bar
+    	gradientBar "ui/assets/gradientbar2.png"	// gradient bar
     	fadeClamp 1.0					// sets the fadeup alpha
 	fadeCycle 1					// how often fade happens in milliseconds
 	fadeAmount 0.1					// amount to adjust alpha per cycle
@@ -434,7 +434,7 @@ itemDef {
 	bordercolor 1 1 1 .75
 	decoration	
 	style 3
-	background "ui/assets/bluechip.tga"
+	background "ui/assets/bluechip.png"
 	}
 itemDef {
 	name "f"
@@ -444,7 +444,7 @@ itemDef {
 	decoration	
 	style 3
 	ownerdrawflag CG_SHOW_HARVESTER                 
-	background "icons/skull_blue.tga"
+	background "icons/skull_blue.png"
 	}
 
 	itemDef {
@@ -493,7 +493,7 @@ itemDef {
 	bordercolor 1 1 1 1
 	decoration	
 	style 3
-	background "ui/assets/redchip.tga"
+	background "ui/assets/redchip.png"
 	}
 
 	itemDef {
@@ -504,7 +504,7 @@ itemDef {
 	decoration	
 	style 3
 	ownerdrawflag CG_SHOW_HARVESTER                 
-	background "icons/skull_red.tga"
+	background "icons/skull_red.png"
 	}
 
 	itemDef {

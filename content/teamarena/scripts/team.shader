@@ -5,7 +5,7 @@
         surfaceparm trans
         surfaceparm nomarks
 	{
-		map team_icon/thefallen_red.tga
+		map team_icon/thefallen_red.png
 		blendFunc Add
 		rgbgen wave triangle 0.2 0.5 0 0.2
 
@@ -19,7 +19,7 @@
         surfaceparm trans
         surfaceparm nomarks
 	{
-		map team_icon/thefallen_blue.tga
+		map team_icon/thefallen_blue.png
 		blendFunc Add
 		rgbgen wave triangle 0.2 0.5 0 0.2
 
@@ -33,7 +33,7 @@ team_icon/intruders_red
         surfaceparm trans
         surfaceparm nomarks
 	{
-		map team_icon/intruders_red.tga
+		map team_icon/intruders_red.png
 		blendFunc Add
 		rgbgen wave triangle 0.2 0.5 0 0.2
 
@@ -47,7 +47,7 @@ team_icon/intruders_blue
         surfaceparm trans
         surfaceparm nomarks
 	{
-		map team_icon/intruders_blue.tga
+		map team_icon/intruders_blue.png
 		blendFunc Add
 		rgbgen wave triangle 0.2 0.5 0 0.2
 
@@ -61,7 +61,7 @@ team_icon/crusaders_red
         surfaceparm trans
         surfaceparm nomarks
 	{
-		map team_icon/crusaders_red.tga
+		map team_icon/crusaders_red.png
 		blendFunc Add
 		rgbgen wave triangle 0.2 0.5 0 0.2
 
@@ -75,7 +75,7 @@ team_icon/crusaders_blue
         surfaceparm trans
         surfaceparm nomarks
 	{
-		map team_icon/crusaders_blue.tga
+		map team_icon/crusaders_blue.png
 		blendFunc Add
 		rgbgen wave triangle 0.2 0.5 0 0.2
 
@@ -89,7 +89,7 @@ team_icon/pagans_red
         surfaceparm trans
         surfaceparm nomarks
 	{
-		map team_icon/pagans_red.tga
+		map team_icon/pagans_red.png
 		blendFunc Add
 		rgbgen wave triangle 0.2 0.5 0 0.2
 
@@ -103,7 +103,7 @@ team_icon/pagans_blue
         surfaceparm trans
         surfaceparm nomarks
 	{
-		map team_icon/pagans_blue.tga
+		map team_icon/pagans_blue.png
 		blendFunc Add
 		rgbgen wave triangle 0.2 0.5 0 0.2
 
@@ -117,7 +117,7 @@ team_icon/stroggs_red
         surfaceparm trans
         surfaceparm nomarks
 	{
-		map team_icon/stroggs_red.tga
+		map team_icon/stroggs_red.png
 		blendFunc Add
 		rgbgen wave triangle 0.2 0.5 0 0.2
 
@@ -131,7 +131,7 @@ team_icon/stroggs_blue
         surfaceparm trans
         surfaceparm nomarks
 	{
-		map team_icon/stroggs_blue.tga
+		map team_icon/stroggs_blue.png
 		blendFunc Add
 		rgbgen wave triangle 0.2 0.5 0 0.2
 

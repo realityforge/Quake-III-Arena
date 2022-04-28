@@ -650,7 +650,7 @@ void R_LevelShot(void)
     float xScale, yScale;
     int xx, yy;
 
-    Com_sprintf(checkname, sizeof(checkname), "levelshots/%s.tga", tr.world->baseName);
+    Com_sprintf(checkname, sizeof(checkname), "levelshots/%s.png", tr.world->baseName);
 
     allsource = RB_ReadPixels(0, 0, glConfig.vidWidth, glConfig.vidHeight, &offset, &padlen);
     source = allsource + offset;

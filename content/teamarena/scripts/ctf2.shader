@@ -1,34 +1,34 @@
 textures/ctf2/test2_trans_vert
 {
-	qer_editorimage textures/ctf/test2.tga
+	qer_editorimage textures/ctf/test2.png
 	surfaceparm nonsolid
 	surfaceparm pointlight
 
   	{
-		map textures/ctf/test2.tga
+		map textures/ctf/test2.png
 		rgbGen vertex
 	}
 }
 
 textures/ctf2/test2_r_trans_vert
 {
-	qer_editorimage textures/ctf/test2_r.tga
+	qer_editorimage textures/ctf/test2_r.png
 	surfaceparm nonsolid
 	surfaceparm pointlight
   	{
-		map textures/ctf/test2_r.tga
+		map textures/ctf/test2_r.png
 		rgbGen vertex
 	}
 }
 
 textures/ctf2/redteam02
 {
-        qer_editorimage textures/ctf2/redteam01.tga
+        qer_editorimage textures/ctf2/redteam01.png
 	cull none
         surfaceparm alphashadow
         surfaceparm nomarks
 	{
-		map textures/ctf2/redteam01.tga
+		map textures/ctf2/redteam01.png
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
@@ -44,12 +44,12 @@ textures/ctf2/redteam02
 }
 textures/ctf2/blueteam02
 {
-        qer_editorimage textures/ctf2/blueteam01.tga
+        qer_editorimage textures/ctf2/blueteam01.png
 	cull none
         surfaceparm alphashadow
         surfaceparm nomarks
 	{
-		map textures/ctf2/blueteam01.tga
+		map textures/ctf2/blueteam01.png
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
@@ -70,7 +70,7 @@ textures/ctf2/redteam01
         surfaceparm trans
         surfaceparm nomarks
 	{
-		map textures/ctf2/redteam01.tga
+		map textures/ctf2/redteam01.png
 		blendFunc Add
 		//rgbgen wave triangle 0.2 0.5 0 0.2
                 rgbGen wave sin 1 .5 0 .2
@@ -85,7 +85,7 @@ textures/ctf2/redteamscore
         surfaceparm trans
         surfaceparm nomarks
 	{
-		map textures/ctf2/redteam01.tga
+		map textures/ctf2/redteam01.png
 		blendFunc Add
 
 	}
@@ -99,7 +99,7 @@ textures/ctf2/blueteamscore
         surfaceparm trans
         surfaceparm nomarks
 	{
-		map textures/ctf2/blueteam01.tga
+		map textures/ctf2/blueteam01.png
 		blendFunc Add
 
 	}
@@ -110,13 +110,13 @@ textures/ctf2/blueteamscore
 textures/ctf2/xredteam01x
 // Non Flashy version
 {
-	qer_editorimage textures/ctf2/redteam01.tga
+	qer_editorimage textures/ctf2/redteam01.png
 	cull none
         surfaceparm nolightmap
         surfaceparm trans
         surfaceparm nomarks
 	{
-		map textures/ctf2/redteam01.tga
+		map textures/ctf2/redteam01.png
 		blendFunc Add
 		rgbgen identity
 
@@ -128,13 +128,13 @@ textures/ctf2/xredteam01x
 textures/ctf2/xblueteam01
 // non flashy version
 {
-	qer_editorimage textures/ctf2/blueteam01.tga
+	qer_editorimage textures/ctf2/blueteam01.png
 	cull none
         surfaceparm nolightmap
         surfaceparm trans
         surfaceparm nomarks
 	{
-		map textures/ctf2/blueteam01.tga
+		map textures/ctf2/blueteam01.png
 		blendFunc Add
 		rgbgen identity
 	}
@@ -149,7 +149,7 @@ textures/ctf2/blueteam01
         surfaceparm trans
         surfaceparm nomarks
 	{
-		map textures/ctf2/blueteam01.tga
+		map textures/ctf2/blueteam01.png
 		blendFunc Add
 		//rgbgen wave triangle 0.2 0.5 0 0.2
                 rgbGen wave sin 1 .8 0 .2
@@ -165,7 +165,7 @@ textures/ctf2/red_banner02
 	cull none
 
 	{
-		map textures/ctf2/red_banner02.tga
+		map textures/ctf2/red_banner02.png
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
@@ -187,7 +187,7 @@ textures/ctf2/blue_banner02
 	cull none
 
 	{
-		map textures/ctf2/blue_banner02.tga
+		map textures/ctf2/blue_banner02.png
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
@@ -205,16 +205,16 @@ textures/ctf2/blue_banner02
 textures/ctf2/tin_redpanel
 {
      surfaceparm	metalsteps
-     qer_editorimage textures/proto2/tin_panel.tga
+     qer_editorimage textures/proto2/tin_panel.png
 
         {
-		map textures/effects/envmapred.tga
+		map textures/effects/envmapred.png
                 tcGen environment
                 blendFunc GL_ONE GL_ZERO
                 rgbGen identity
 	}
         {
-		map textures/proto2/tin_panel.tga
+		map textures/proto2/tin_panel.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -227,16 +227,16 @@ textures/ctf2/tin_redpanel
 textures/ctf2/tin_blupanel
 {
      surfaceparm	metalsteps
-     qer_editorimage textures/proto2/tin_panel.tga
+     qer_editorimage textures/proto2/tin_panel.png
 
         {
-		map textures/effects/envmapblue.tga
+		map textures/effects/envmapblue.png
                 tcGen environment
                 blendFunc GL_ONE GL_ZERO
                 rgbGen identity
 	}
         {
-		map textures/proto2/tin_panel.tga
+		map textures/proto2/tin_panel.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -252,7 +252,7 @@ textures/ctf2/blue_banner01
 	cull none
 
 	{
-		map textures/ctf2/blue_banner01.tga
+		map textures/ctf2/blue_banner01.png
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
@@ -267,7 +267,7 @@ textures/ctf2/blue_banner01
 	}
 
         {
-		map textures/ctf2/b_dummy.tga
+		map textures/ctf2/b_dummy.png
 		blendFunc Add
 		rgbGen wave sin 1 .5 0 .5
 
@@ -280,7 +280,7 @@ textures/ctf2/blue_techsign01
 	cull none
 
 	{
-		map textures/ctf2/blue_techsign01.tga
+		map textures/ctf2/blue_techsign01.png
 		alphaFunc GE128
 		depthWrite
 		rgbGen identity
@@ -295,7 +295,7 @@ textures/ctf2/blue_techsign01
 	}
 
         {
-		map textures/ctf2/b_dummy.tga
+		map textures/ctf2/b_dummy.png
 		blendFunc Add
 		rgbGen wave sin 1 .5 0 .5
 
@@ -305,11 +305,11 @@ textures/ctf2/blue_techsign01
 
 textures/ctf2/pj_baseboardr
 {
-	//q3map_lightimage textures/ctf2/pj_baseboardr_l.tga
+	//q3map_lightimage textures/ctf2/pj_baseboardr_l.png
 	//q3map_surfacelight 300
 
 	{
-		map textures/ctf2/pj_baseboardr.tga
+		map textures/ctf2/pj_baseboardr.png
                 rgbGen identity
         }
         {
@@ -318,7 +318,7 @@ textures/ctf2/pj_baseboardr
 	        rgbGen identity
 	}
         {
-		map textures/ctf2/pj_baseboardr_l.tga
+		map textures/ctf2/pj_baseboardr_l.png
                 blendFunc add
                rgbGen wave sin .9 .5 0 .1
         }
@@ -326,11 +326,11 @@ textures/ctf2/pj_baseboardr
 }
 textures/ctf2/pj_baseboardb
 {
-	//q3map_lightimage textures/ctf2/pj_baseboardb_l.tga
+	//q3map_lightimage textures/ctf2/pj_baseboardb_l.png
 	//q3map_surfacelight 300
 
 	{
-		map textures/ctf2/pj_baseboardb.tga
+		map textures/ctf2/pj_baseboardb.png
                 rgbGen identity
         }
         {
@@ -339,7 +339,7 @@ textures/ctf2/pj_baseboardb
 	        rgbGen identity
 	}
         {
-		map textures/ctf2/pj_baseboardb_l.tga
+		map textures/ctf2/pj_baseboardb_l.png
                 blendFunc add
                 rgbGen wave sin .9 .5 0 .1
         }
@@ -348,8 +348,8 @@ textures/ctf2/pj_baseboardb
 
 textures/ctf2/jaildr_bluescroll
 {
-	qer_editorimage textures/ctf2/jaildr_blue.tga
-	q3map_lightimage textures/ctf2/jaildr_blue.tga
+	qer_editorimage textures/ctf2/jaildr_blue.png
+	q3map_lightimage textures/ctf2/jaildr_blue.png
 	surfaceparm nomarks
 	q3map_surfacelight 1000
 	{
@@ -357,13 +357,13 @@ textures/ctf2/jaildr_bluescroll
 		rgbGen identity
 	}
 	{
-		map textures/ctf2/jaildr_blue.tga
+		map textures/ctf2/jaildr_blue.png
 		blendFunc GL_DST_COLOR GL_ZERO
 		tcMod scroll 0 -.25
 		rgbGen identity
 	}
 	{
-		map textures/ctf2/jaildr_blue.blend.tga
+		map textures/ctf2/jaildr_blue.blend.png
 		rgbGen wave sin 0.5 0.5 1 1
 		tcMod scroll 0 -.25
 		blendfunc GL_ONE GL_ONE
@@ -381,18 +381,18 @@ textures/ctf2/blue_pennant
         //cull none
 
         {
-		map textures/ctf2/blue_pennant.tga
+		map textures/ctf2/blue_pennant.png
 		rgbGen identity
 	}
 
         {
-		map textures/ctf2/blue_pennant.tga
+		map textures/ctf2/blue_pennant.png
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
 
        // {
-        //	map textures/sfx/shadow.tga
+        //	map textures/sfx/shadow.png
        //         tcGen environment
        //         //blendFunc GL_ONE GL_ONE
        //         blendFunc GL_DST_COLOR GL_ZERO

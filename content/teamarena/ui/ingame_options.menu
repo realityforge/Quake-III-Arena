@@ -30,7 +30,7 @@ itemDef {
 	name window
 	rect 0 10 64 64
 	style 3
-	background "ui/assets/ingameleftcorner.tga"
+	background "ui/assets/ingameleftcorner.png"
 	visible 1
 	decoration
 	}
@@ -38,7 +38,7 @@ itemDef {
 	name window
 	rect 64 10 32 8
 	style 3
-	background "ui/assets/ingametop.tga"
+	background "ui/assets/ingametop.png"
 	visible 1
 	decoration
 	}
@@ -46,7 +46,7 @@ itemDef {
 	name window
 	rect 144 10 32 8
 	style 3
-	background "ui/assets/ingametop.tga"
+	background "ui/assets/ingametop.png"
 	visible 1
 	decoration
 	}
@@ -55,7 +55,7 @@ itemDef {
 	name window
 	rect 157 10 64 64
 	style 3
-	background "ui/assets/ingamerightcorner.tga"
+	background "ui/assets/ingamerightcorner.png"
 	visible 1
 	decoration
 	}
@@ -63,7 +63,7 @@ itemDef {
 	name window
 	rect 74 0 73 16
 	style 3
-	background "ui/assets/ingameconnection.tga"
+	background "ui/assets/ingameconnection.png"
 	visible 1
 	decoration
 	}
@@ -71,7 +71,7 @@ itemDef {
 	name window
 	rect 0 314 64 64
 	style 3
-	background "ui/assets/ingameleftcornerb.tga"
+	background "ui/assets/ingameleftcornerb.png"
 	visible 1
 	decoration
 	}
@@ -79,7 +79,7 @@ itemDef {
 	name window
 	rect 157 314 64 64
 	style 3
-	background "ui/assets/ingamerightcornerb.tga"
+	background "ui/assets/ingamerightcornerb.png"
 	visible 1
 	decoration
 	}
@@ -88,7 +88,7 @@ itemDef {
 	name window
 	rect 0 64 16 84
 	style 3
-	background "ui/assets/ingameleft.tga"
+	background "ui/assets/ingameleft.png"
 	visible 1
 	decoration
 	}
@@ -98,7 +98,7 @@ itemDef {
 	name window
 	rect 0 148 16 84
 	style 3
-	background "ui/assets/ingameleft.tga"
+	background "ui/assets/ingameleft.png"
 	visible 1
 	decoration
 	}
@@ -107,7 +107,7 @@ itemDef {
 	name window
 	rect 0 232 16 84
 	style 3
-	background "ui/assets/ingameleft.tga"
+	background "ui/assets/ingameleft.png"
 	visible 1
 	decoration
 	}
@@ -116,7 +116,7 @@ itemDef {
 	name window
 	rect 205 64 16 84
 	style 3
-	background "ui/assets/ingameright.tga"
+	background "ui/assets/ingameright.png"
 	visible 1
 	decoration
 	}
@@ -126,7 +126,7 @@ itemDef {
 	name window
 	rect 205 148 16 84
 	style 3
-	background "ui/assets/ingameright.tga"
+	background "ui/assets/ingameright.png"
 	visible 1
 	decoration
 	}
@@ -134,7 +134,7 @@ itemDef {
 	name window
 	rect 205 232 16 84
 	style 3
-	background "ui/assets/ingameright.tga"
+	background "ui/assets/ingameright.png"
 	visible 1
 	decoration
 	}
@@ -144,7 +144,7 @@ itemDef {
 	name window
 	rect 64 370 64 8
 	style 3
-	background "ui/assets/ingamebottom.tga"
+	background "ui/assets/ingamebottom.png"
 	visible 1
 	decoration
 	}
@@ -152,7 +152,7 @@ itemDef {
 	name window
 	rect 128 370 64 8
 	style 3
-	background "ui/assets/ingamebottom.tga"
+	background "ui/assets/ingamebottom.png"
 	visible 1
 	decoration
 	}

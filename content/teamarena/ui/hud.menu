@@ -7,7 +7,7 @@
 {
   assetGlobalDef {
     	cursor "ui/assets/3_cursor2"			// cursor	
-    	gradientBar "ui/assets/gradientbar2.tga"	// gradient bar
+    	gradientBar "ui/assets/gradientbar2.png"	// gradient bar
     	fadeClamp 1.0					// sets the fadeup alpha
 	fadeCycle 1					// how often fade happens in milliseconds
 	fadeAmount 0.1					// amount to adjust alpha per cycle
@@ -105,7 +105,7 @@ itemDef {
 	visible 1
 	style 3
 	decoration
-	background "ui/assets/statusbar/selectedarmor.tga"
+	background "ui/assets/statusbar/selectedarmor.png"
 	addColorRange -999 25 1 0 0 1
 	addColorRange 26 100 1 .75 0 1
 	addColorRange 101 999 1 1 1 1
@@ -196,7 +196,7 @@ itemDef {
 	visible 1
 	style 3
 	decoration
-	background "ui/assets/selectedstatus.tga"
+	background "ui/assets/selectedstatus.png"
 	} 
 
 	}
@@ -478,7 +478,7 @@ itemDef {
 	bordercolor 1 1 1 .75
 	decoration	
 	style 3
-	background "ui/assets/bluechip.tga"
+	background "ui/assets/bluechip.png"
 	}
 itemDef {
 	name "f"
@@ -488,7 +488,7 @@ itemDef {
 	decoration	
 	style 3
 	ownerdrawflag CG_SHOW_HARVESTER                 
-	background "icons/skull_blue.tga"
+	background "icons/skull_blue.png"
 	}
 
 	itemDef {
@@ -528,7 +528,7 @@ itemDef {
 	bordercolor 1 1 1 1
 	decoration	
 	style 3
-	background "ui/assets/redchip.tga"
+	background "ui/assets/redchip.png"
 	}
 
 	itemDef {
@@ -539,7 +539,7 @@ itemDef {
 	decoration	
 	style 3
 	ownerdrawflag CG_SHOW_HARVESTER                 
-	background "icons/skull_red.tga"
+	background "icons/skull_red.png"
 	}
 
 	itemDef {
@@ -713,7 +713,7 @@ itemDef {
 	visible 1
 	style 3
 	decoration
-	background "ui/assets/locationstatus.tga"
+	background "ui/assets/locationstatus.png"
 	} 
 	}
 
@@ -732,7 +732,7 @@ itemDef {
       	name "statusbar"
         rect 0 0 640 64
 	style 3
-	background "ui/assets/statusbar_full.tga"
+	background "ui/assets/statusbar_full.png"
 	visible 1
 	decoration
 	forecolor 1 1 1 1
@@ -780,7 +780,7 @@ itemDef {
 		name "voiceWindow"
 		visible 1
 		style 3
-		background "ui/assets/voice_window.tga"
+		background "ui/assets/voice_window.png"
 		rect 0 0 54 54
 		}
 

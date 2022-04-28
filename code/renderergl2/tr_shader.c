@@ -1287,7 +1287,7 @@ static void ParseSkyParms(char** text)
     }
     if (strcmp(token, "-")) {
         for (i = 0; i < 6; i++) {
-            Com_sprintf(pathname, sizeof(pathname), "%s_%s.tga", token, suf[i]);
+            Com_sprintf(pathname, sizeof(pathname), "%s_%s.png", token, suf[i]);
             shader.sky.outerbox[i] = R_FindImageFile((char*)pathname, IMGTYPE_COLORALPHA, imgFlags | IMGFLAG_CLAMPTOEDGE);
 
             if (!shader.sky.outerbox[i]) {
@@ -1316,7 +1316,7 @@ static void ParseSkyParms(char** text)
     }
     if (strcmp(token, "-")) {
         for (i = 0; i < 6; i++) {
-            Com_sprintf(pathname, sizeof(pathname), "%s_%s.tga", token, suf[i]);
+            Com_sprintf(pathname, sizeof(pathname), "%s_%s.png", token, suf[i]);
             shader.sky.innerbox[i] = R_FindImageFile((char*)pathname, IMGTYPE_COLORALPHA, imgFlags);
             if (!shader.sky.innerbox[i]) {
                 shader.sky.innerbox[i] = tr.defaultImage;

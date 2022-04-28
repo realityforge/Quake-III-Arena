@@ -24,7 +24,7 @@ itemDef {
 	name window
 	rect 0 0 235 235
 	style 3
-	background "ui/assets/mainpop.tga"
+	background "ui/assets/mainpop.png"
 	visible 1
 	decoration
 	}
@@ -92,7 +92,7 @@ itemDef {
 	type 1
 	textscale .25
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	rect 75 140 30 26
 	textalign 1
 	textalignx 15
@@ -110,7 +110,7 @@ itemDef {
 	itemDef {
       		name yes
 		style WINDOW_STYLE_SHADER
-		background "ui/assets/framebutton.tga"
+		background "ui/assets/framebutton.png"
  		rect 75 140 30 26
       		visible 1 
 		decoration  	  
@@ -119,7 +119,7 @@ itemDef {
 	itemDef {
       		name yes
 		style WINDOW_STYLE_SHADER
-		background "ui/assets/leftbutton.tga"
+		background "ui/assets/leftbutton.png"
    	   	rect 69 140 7 26
    	   	visible 1 
 		decoration  	  
@@ -128,7 +128,7 @@ itemDef {
 	itemDef {
 	      	name yes
 		style WINDOW_STYLE_SHADER
-		background "ui/assets/rightbutton.tga"
+		background "ui/assets/rightbutton.png"
       		rect 104 140 7 26
      	 	visible 1 
 		decoration  	  
@@ -144,7 +144,7 @@ itemDef {
 	type 1
 	textscale .25
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	rect 128 140 30 26
 	textalign 1
 	textalignx 15
@@ -162,7 +162,7 @@ itemDef {
 	itemDef {
       		name no
 		style WINDOW_STYLE_SHADER
-		background "ui/assets/framebutton.tga"
+		background "ui/assets/framebutton.png"
  		rect 128 140 30 26
       		visible 1 
 		decoration  	  
@@ -171,7 +171,7 @@ itemDef {
 	itemDef {
       		name no
 		style WINDOW_STYLE_SHADER
-		background "ui/assets/leftbutton.tga"
+		background "ui/assets/leftbutton.png"
    	   	rect 122 140 7 26
    	   	visible 1 
 		decoration  	  
@@ -180,7 +180,7 @@ itemDef {
 	itemDef {
 	      	name no
 		style WINDOW_STYLE_SHADER
-		background "ui/assets/rightbutton.tga"
+		background "ui/assets/rightbutton.png"
       		rect 157 140 7 26
      	 	visible 1 
 		decoration  	  

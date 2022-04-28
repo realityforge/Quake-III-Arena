@@ -34,7 +34,7 @@ itemDef {
       	name teamarenaart
 	group grpidcredit
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/teamarenaimage2.tga"
+	background "ui/assets/teamarenaimage2.png"
       	rect 64 0 512 150
       	visible 1 
 	decoration  	  
@@ -173,7 +173,7 @@ itemDef {
 	type 1
   	text "Click to Exit"
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	textalign 1   	
 	textscale .25
 	textalignx 65
@@ -190,7 +190,7 @@ itemDef {
       	name exitbttn
 	group grpidcredit
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.tga"
+	background "ui/assets/framebutton.png"
 	rect 255 420 130 26
       	visible 1 
 	decoration  	  
@@ -200,7 +200,7 @@ itemDef {
       	name exitbttn
 	group grpidcredit
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.tga"
+	background "ui/assets/leftbutton.png"
       	rect 243 420 13 26
       	visible 1 
 	decoration  	  
@@ -210,7 +210,7 @@ itemDef {
       	name exitbttn
 	group grpidcredit
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.tga"
+	background "ui/assets/rightbutton.png"
       	rect 384 420 13 26
       	visible 1
 	decoration  	  
@@ -234,7 +234,7 @@ itemDef {
 itemDef {
       	name fadebox
       	style WINDOW_STYLE_FILLED
- 	background "ui/assets/fadebox.tga"
+ 	background "ui/assets/fadebox.png"
 	forecolor 0 0 0 1
 	backcolor 0 0 0 1
 	rect 0 0 640 480

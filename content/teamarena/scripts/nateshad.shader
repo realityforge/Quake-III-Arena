@@ -3,7 +3,7 @@ textures/natestah/leaf2
 	surfaceparm alphashadow
 	cull disable
 	{
-		map textures/natestah/leaf2.tga
+		map textures/natestah/leaf2.png
 		rgbGen Vertex
 		depthWrite
 		alphaFunc GE128
@@ -17,7 +17,7 @@ textures/natestah/leaf2
 
 textures/natestah/nateswater
 {
-	qer_editorimage textures/natestah/nateswater.tga
+	qer_editorimage textures/natestah/nateswater.png
 	surfaceparm nonsolid
 	surfaceparm trans
 	surfaceparm water
@@ -26,14 +26,14 @@ textures/natestah/nateswater
 	qer_trans 0.5
 	q3map_globaltexture
 	{
-		map textures/natestah/nateswater.tga
+		map textures/natestah/nateswater.png
 		blendfunc add
 		rgbGen identity
 		tcMod scale 0.5 0.5
 		tcMod scroll 0.025 0.01
 	}
 		{
-			map textures/liquids/pool3d_3e.tga
+			map textures/liquids/pool3d_3e.png
 			blendFunc GL_dst_color GL_one
 			tcmod scale -.5 -.5
 			tcmod scroll .025 .025

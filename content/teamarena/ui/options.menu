@@ -335,7 +335,7 @@ itemDef {
 itemDef {
       	name fadebox
       	style WINDOW_STYLE_FILLED
- 	background "ui/assets/fadebox.tga"
+ 	background "ui/assets/fadebox.png"
 	forecolor 0 0 0 1
 	backcolor 0 0 0 1
 	rect 0 0 640 480

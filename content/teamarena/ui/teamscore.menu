@@ -201,7 +201,7 @@ itemDef {
 itemDef {
       	name redlogo
       	style WINDOW_STYLE_SHADER
-      	background "textures/ctf2/redteam01.tga"
+      	background "textures/ctf2/redteam01.png"
       	rect 110 189 128 128 
 	forecolor .75 0 0 0.5
       	visible 1 
@@ -220,7 +220,7 @@ itemDef {
 itemDef {
       	name leftgrad
       	style WINDOW_STYLE_SHADER
-      	background "ui/assets/halfgradleft.tga"
+      	background "ui/assets/halfgradleft.png"
       	rect 14 142 306 222 
 	forecolor .75 0 0 0.5
       	visible 1 
@@ -230,7 +230,7 @@ itemDef {
 itemDef {
       	name rightgrad
       	style WINDOW_STYLE_SHADER
-      	background "ui/assets/halfgradright.tga"
+      	background "ui/assets/halfgradright.png"
       	rect 320 142 306 222 
 	forecolor 0 0 .75 0.5
       	visible 1 
@@ -362,7 +362,7 @@ itemdef {
 	name medal_accuracy
 	ownerdraw CG_ACCURACY
    	rect 43 368 32 32
-   	background "ui/assets/medal_accuracy.tga"
+   	background "ui/assets/medal_accuracy.png"
 	forecolor 1 1 1 .5
    	visible 1 
 	decoration
@@ -373,7 +373,7 @@ itemdef {
 	name medal_assist
 	ownerdraw CG_ASSISTS
       	rect 130 368 32 32
-      	background "ui/assets/medal_assist.tga"
+      	background "ui/assets/medal_assist.png"
 	forecolor 1 1 1 .5
       	visible 1 
       	decoration 
@@ -384,7 +384,7 @@ itemdef {
 	name medal_defend
 	ownerdraw CG_DEFEND
       	rect 227 368 32 32
-      	background "ui/assets/medal_defend.tga"
+      	background "ui/assets/medal_defend.png"
 	forecolor 1 1 1 .5
       	visible 1 
       	decoration 
@@ -395,7 +395,7 @@ itemdef {
 	name medal_excellent
 	ownerdraw CG_EXCELLENT
       	rect 314 368 32 32
-      	background "ui/assets/medal_excellent.tga"
+      	background "ui/assets/medal_excellent.png"
 	forecolor 1 1 1 .5
       	visible 1 
       	decoration 
@@ -406,7 +406,7 @@ itemdef {
 	name medal_gauntlet
 	ownerdraw CG_GAUNTLET
       	rect 391 368 32 32
-      	background "ui/assets/medal_gauntlet.tga"
+      	background "ui/assets/medal_gauntlet.png"
 	forecolor 1 1 1 .5
       	visible 1 
       	decoration 
@@ -417,7 +417,7 @@ itemdef {
 	name medal_impressive
 	ownerdraw CG_IMPRESSIVE
    	rect 478 368 32 32
-   	background "ui/assets/medal_impressive.tga"
+   	background "ui/assets/medal_impressive.png"
 	forecolor 1 1 1 .5
    	visible 1
    	decoration 
@@ -428,7 +428,7 @@ itemdef {
 	name medal_capture_team
 	ownerdraw CG_CAPTURES
    	rect 565 368 32 32
-   	background "ui/assets/medal_capture.tga"
+   	background "ui/assets/medal_capture.png"
 	forecolor 1 1 1 .5
    	visible 1
    	decoration 

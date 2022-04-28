@@ -9,18 +9,18 @@ textures/skies/terrain1
 	q3map_sun	.8 .8 .6 80 190 80
 	q3map_surfacelight 65
 
-	qer_editorimage textures/skies/toxicbluesky.tga
+	qer_editorimage textures/skies/toxicbluesky.png
 
 	skyparms - 512 -
 
 	{
-		map textures/skies/bluedimclouds.tga
+		map textures/skies/bluedimclouds.png
 		tcMod scale 3 2
 		tcMod scroll 0.15 0.15
 		depthWrite
 	}
 	{
-		map textures/skies/topclouds.tga
+		map textures/skies/topclouds.png
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
@@ -39,29 +39,29 @@ textures/skies/jimsky
 	q3map_surfacelight 20
 
 	qer_editorimage textures/skies/pjbasesky
-	//qer_editorimage textures/skies/toxicsky.tga
+	//qer_editorimage textures/skies/toxicsky.png
 
 	skyparms - 4096 -
 	{
-		map textures/skies/dimclouds.tga
+		map textures/skies/dimclouds.png
 		tcMod scroll 0.015 0.016
 		tcMod scale 3 3
 		depthWrite
 	}
 	{
-		map textures/skies/pjbasesky.tga
+		map textures/skies/pjbasesky.png
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll -0.01 -0.012
 		tcMod scale 5 5
 	}
 	//{
-	//	map textures/skies/inteldimclouds.tga
+	//	map textures/skies/inteldimclouds.png
 	//	tcMod scale 3 2
 	//	tcMod scroll 0.15 0.15
 	//	depthWrite
 	//}
 	//{
-	//	map textures/skies/intelredclouds.tga
+	//	map textures/skies/intelredclouds.png
 	//	blendFunc GL_ONE GL_ONE
 	//	tcMod scale 3 3
 	//	tcMod scroll 0.05 0.05
@@ -72,7 +72,7 @@ textures/proto2/jimtest_0
 {
 	surfaceparm nolightmap
 	{
-		map textures/proto2/jim/image1.tga
+		map textures/proto2/jim/image1.png
 		tcmod scale 1 1
 		rgbGen vertex
 	}
@@ -82,7 +82,7 @@ textures/proto2/jimtest_1
 {
 	surfaceparm nolightmap
 	{
-		map textures/proto2/jim/image2.tga
+		map textures/proto2/jim/image2.png
 		rgbGen vertex
 		tcmod scale 1 1
 	}
@@ -92,7 +92,7 @@ textures/proto2/jimtest_2
 {
 	surfaceparm nolightmap
 	{
-		map textures/proto2/jim/image3.tga
+		map textures/proto2/jim/image3.png
 		rgbGen vertex
 		tcmod scale 1 1
 	}
@@ -102,7 +102,7 @@ textures/proto2/jimtest_3
 {
 	surfaceparm nolightmap
 	{
-		map textures/proto2/jim/image4.tga
+		map textures/proto2/jim/image4.png
 		tcmod scale 2 2
 		rgbGen vertex
 	}
@@ -112,13 +112,13 @@ textures/proto2/jimtest_0to1
 {
 	surfaceparm nolightmap
 	{
-		map textures/proto2/jim/image1.tga
+		map textures/proto2/jim/image1.png
 		tcmod scale 1 1
 		rgbGen vertex
 		alphaGen vertex
 	}
 	{
-		map textures/proto2/jim/image2.tga
+		map textures/proto2/jim/image2.png
 		rgbGen vertex
 		alphaGen vertex
 		tcmod scale 1 1
@@ -130,13 +130,13 @@ textures/proto2/jimtest_0to2
 {
 	surfaceparm nolightmap
 	{
-		map textures/proto2/jim/image1.tga
+		map textures/proto2/jim/image1.png
 		tcmod scale 1 1
 		rgbGen vertex
 		alphaGen vertex
 	}
 	{
-		map textures/proto2/jim/image3.tga
+		map textures/proto2/jim/image3.png
 		rgbGen vertex
 		alphaGen vertex
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
@@ -148,13 +148,13 @@ textures/proto2/jimtest_0to3
 {
 	surfaceparm nolightmap
 	{
-		map textures/proto2/jim/image1.tga
+		map textures/proto2/jim/image1.png
 		tcmod scale 1 1
 		rgbGen vertex
 		alphaGen vertex
 	}
 	{
-		map textures/proto2/jim/image4.tga
+		map textures/proto2/jim/image4.png
 		tcmod scale 2 2
 		rgbGen vertex
 		alphaGen vertex
@@ -166,13 +166,13 @@ textures/proto2/jimtest_1to2
 {
 	surfaceparm nolightmap
 	{
-		map textures/proto2/jim/image2.tga
+		map textures/proto2/jim/image2.png
 		rgbGen vertex
 		alphaGen vertex
 		tcmod scale 1 1
 	}
 	{
-		map textures/proto2/jim/image3.tga
+		map textures/proto2/jim/image3.png
 		tcmod scale 1 1
 		rgbGen vertex
 		alphaGen vertex
@@ -184,13 +184,13 @@ textures/proto2/jimtest_1to3
 {
 	surfaceparm nolightmap
 	{
-		map textures/proto2/jim/image2.tga
+		map textures/proto2/jim/image2.png
 		rgbGen vertex
 		alphaGen vertex
 		tcmod scale 1 1
 	}
 	{
-		map textures/proto2/jim/image4.tga
+		map textures/proto2/jim/image4.png
 		tcmod scale 2 2
 		rgbGen vertex
 		alphaGen vertex
@@ -202,13 +202,13 @@ textures/proto2/jimtest_2to3
 {
 	surfaceparm nolightmap
 	{
-		map textures/proto2/jim/image3.tga
+		map textures/proto2/jim/image3.png
 		rgbGen vertex
 		alphaGen vertex
 		tcmod scale 1 1
 	}
 	{
-		map textures/proto2/jim/image4.tga
+		map textures/proto2/jim/image4.png
 		tcmod scale 2 2
 		rgbGen vertex
 		alphaGen vertex
@@ -236,7 +236,7 @@ textures/proto2/grassy_0
 {
 	surfaceparm nolightmap
 	{
-		map textures/proto2/jim/image2.tga
+		map textures/proto2/jim/image2.png
 		rgbGen vertex
 		tcmod scale 0.5 0.5
 	}
@@ -246,7 +246,7 @@ textures/proto2/grassy_1
 {
 	surfaceparm nolightmap
 	{
-		map textures/proto2/jim/image3.tga
+		map textures/proto2/jim/image3.png
 		rgbGen vertex
 		tcmod scale 0.5 0.5
 	}
@@ -256,7 +256,7 @@ textures/proto2/grassy_2
 {
 	surfaceparm nolightmap
 	{
-		map textures/proto2/jim/image4.tga
+		map textures/proto2/jim/image4.png
 		tcmod scale 0.5 0.5
 		rgbGen vertex
 	}
@@ -266,13 +266,13 @@ textures/proto2/grassy_0to1
 {
 	surfaceparm nolightmap
 	{
-		map textures/proto2/jim/image2.tga
+		map textures/proto2/jim/image2.png
 		rgbGen vertex
 		alphaGen vertex
 		tcmod scale 0.5 0.5
 	}
 	{
-		map textures/proto2/jim/image3.tga
+		map textures/proto2/jim/image3.png
 		tcmod scale 0.5 0.5
 		rgbGen vertex
 		alphaGen vertex
@@ -284,13 +284,13 @@ textures/proto2/grassy_0to2
 {
 	surfaceparm nolightmap
 	{
-		map textures/proto2/jim/image2.tga
+		map textures/proto2/jim/image2.png
 		rgbGen vertex
 		alphaGen vertex
 		tcmod scale 0.5 0.5
 	}
 	{
-		map textures/proto2/jim/image4.tga
+		map textures/proto2/jim/image4.png
 		tcmod scale 0.5 0.5
 		rgbGen vertex
 		alphaGen vertex
@@ -302,13 +302,13 @@ textures/proto2/grassy_1to2
 {
 	surfaceparm nolightmap
 	{
-		map textures/proto2/jim/image3.tga
+		map textures/proto2/jim/image3.png
 		rgbGen vertex
 		alphaGen vertex
 		tcmod scale 0.5 0.5
 	}
 	{
-		map textures/proto2/jim/image4.tga
+		map textures/proto2/jim/image4.png
 		tcmod scale 0.5 0.5
 		rgbGen vertex
 		alphaGen vertex

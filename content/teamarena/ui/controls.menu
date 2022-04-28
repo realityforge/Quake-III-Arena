@@ -68,7 +68,7 @@ itemDef {
 	group grpControlbutton
 	type ITEM_TYPE_BUTTON
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	rect 17 395 45 26
 	textalign 1
 	textalignx 22
@@ -85,7 +85,7 @@ itemDef {
       	name ctr_look
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.tga"
+	background "ui/assets/framebutton.png"
  	rect 17 395 45 26
       	visible 1 
 	decoration  	  
@@ -95,7 +95,7 @@ itemDef {
       	name ctr_look
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.tga"
+	background "ui/assets/leftbutton.png"
       	rect 5 395 13 26
       	visible 1 
 	decoration  	  
@@ -105,7 +105,7 @@ itemDef {
       	name ctr_look
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.tga"
+	background "ui/assets/rightbutton.png"
       	rect 61 395 13 26
       	visible 1 
 	decoration  	  
@@ -220,7 +220,7 @@ itemDef {
 	group grpControlbutton
 	type ITEM_TYPE_BUTTON
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	rect 90 395 45 26
 	textalign 1
 	textalignx 22
@@ -237,7 +237,7 @@ itemDef {
       	name ctr_move
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.tga"
+	background "ui/assets/framebutton.png"
  	rect 90 395 45 26
       	visible 1 
 	decoration  	  
@@ -247,7 +247,7 @@ itemDef {
       	name ctr_move
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.tga"
+	background "ui/assets/leftbutton.png"
       	rect 78 395 13 26
       	visible 1 
 	decoration  	  
@@ -257,7 +257,7 @@ itemDef {
       	name ctr_move
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.tga"
+	background "ui/assets/rightbutton.png"
       	rect 134 395 13 26
       	visible 1 
 	decoration  	  
@@ -458,7 +458,7 @@ itemDef {
 	group grpControlbutton
 	type ITEM_TYPE_BUTTON
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	rect 163 395 45 26
 	textalign 1
 	textalignx 22
@@ -476,7 +476,7 @@ itemDef {
    	name ctr_shoot
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.tga"
+	background "ui/assets/framebutton.png"
  	rect 163 395 45 26
    	visible 1 
 	decoration  	  
@@ -486,7 +486,7 @@ itemDef {
       	name ctr_shoot
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.tga"
+	background "ui/assets/leftbutton.png"
       	rect 151 395 13 26
       	visible 1 
 	decoration  	  
@@ -496,7 +496,7 @@ itemDef {
       	name ctr_shoot
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.tga"
+	background "ui/assets/rightbutton.png"
       	rect 207 395 13 26
       	visible 1 
 	decoration  	  
@@ -777,7 +777,7 @@ itemDef {
 	textscale .3
 	group grpControlbutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	rect 236 395 45 26
 	textalign 1
 	textalignx 22
@@ -795,7 +795,7 @@ itemDef {
       	name ctr_miscellaneous
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.tga"
+	background "ui/assets/framebutton.png"
  	rect 236 395 45 26
       	visible 1 
 	decoration  	  
@@ -805,7 +805,7 @@ itemDef {
       	name ctr_miscellaneous
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.tga"
+	background "ui/assets/leftbutton.png"
       	rect 224 395 13 26
       	visible 1 
 	decoration  	  
@@ -815,7 +815,7 @@ itemDef {
       	name ctr_miscellaneous
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.tga"
+	background "ui/assets/rightbutton.png"
       	rect 280 395 13 26
       	visible 1 
 	decoration  	  
@@ -949,7 +949,7 @@ itemDef {
 	textscale .3
 	group grpControlbutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	rect 309 395 47 26
 	textalign 1
 	textalignx 23
@@ -967,7 +967,7 @@ itemDef {
       	name ctr_orders
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.tga"
+	background "ui/assets/framebutton.png"
  	rect 309 395 47 26
       	visible 1 
 	decoration  	  
@@ -977,7 +977,7 @@ itemDef {
       	name ctr_orders
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.tga"
+	background "ui/assets/leftbutton.png"
       	rect 297 395 13 26
       	visible 1 
 	decoration  	  
@@ -987,7 +987,7 @@ itemDef {
       	name ctr_orders
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.tga"
+	background "ui/assets/rightbutton.png"
       	rect 355 395 13 26
       	visible 1 
 	decoration  	  
@@ -1214,7 +1214,7 @@ itemDef {
 	textscale .3
 	group grpControlbutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	rect 382 395 45 26
 	textalign 1
 	textalignx 23
@@ -1232,7 +1232,7 @@ itemDef {
       	name ctr_chat
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.tga"
+	background "ui/assets/framebutton.png"
  	rect 382 395 45 26
       	visible 1 
 	decoration  	  
@@ -1242,7 +1242,7 @@ itemDef {
       	name ctr_chat
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.tga"
+	background "ui/assets/leftbutton.png"
       	rect 370 395 13 26
       	visible 1 
 	decoration  	  
@@ -1251,7 +1251,7 @@ itemDef {
       	name ctr_chat
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.tga"
+	background "ui/assets/rightbutton.png"
       	rect 426 395 13 26
       	visible 1 
 	decoration  	  
@@ -1390,7 +1390,7 @@ itemDef {
 itemDef {
       	name fadebox
       	style WINDOW_STYLE_FILLED
- 	background "ui/assets/fadebox.tga"
+ 	background "ui/assets/fadebox.png"
 	forecolor 0 0 0 1
 	backcolor 0 0 0 1
 	rect 0 0 640 480

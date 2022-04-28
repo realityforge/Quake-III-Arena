@@ -388,7 +388,7 @@ itemdef {
 	name medal_accuracy
 	ownerdraw CG_ACCURACY
    	rect 276 388 32 32
-   	background "ui/assets/medal_accuracy.tga"
+   	background "ui/assets/medal_accuracy.png"
 	forecolor 1 1 1 .5
    	visible 1 
 	decoration
@@ -400,7 +400,7 @@ itemdef {
 	name medal_excellent
 	ownerdraw CG_EXCELLENT
       	rect 376 388 32 32
-      	background "ui/assets/medal_excellent.tga"
+      	background "ui/assets/medal_excellent.png"
 	forecolor 1 1 1 .5
       	visible 1 
       	decoration 
@@ -411,7 +411,7 @@ itemdef {
 	name medal_gauntlet
 	ownerdraw CG_GAUNTLET
       	rect 476 388 32 32
-      	background "ui/assets/medal_gauntlet.tga"
+      	background "ui/assets/medal_gauntlet.png"
 	forecolor 1 1 1 .5
       	visible 1 
       	decoration 
@@ -422,7 +422,7 @@ itemdef {
 	name medal_impressive
 	ownerdraw CG_IMPRESSIVE
    	rect 576 388 32 32
-   	background "ui/assets/medal_impressive.tga"
+   	background "ui/assets/medal_impressive.png"
 	forecolor 1 1 1 .5
    	visible 1
    	decoration 

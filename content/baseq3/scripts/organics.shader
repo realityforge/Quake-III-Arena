@@ -7,7 +7,7 @@ q3map_surfacelight 200
 		rgbGen identity
 	}
 	{
-		map textures/organics/wire02a_f.tga
+		map textures/organics/wire02a_f.png
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
@@ -21,7 +21,7 @@ q3map_surfacelight 400
 		rgbGen identity
 	}
 	{
-		map textures/organics/wire02_f2.tga
+		map textures/organics/wire02_f2.png
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}

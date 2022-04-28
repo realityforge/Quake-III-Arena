@@ -31,7 +31,7 @@ itemDef {
 	name window
 	rect 0 10 64 64
 	style 3
-	background "ui/assets/ingameleftcorner.tga"
+	background "ui/assets/ingameleftcorner.png"
 	visible 1
 	decoration
 	}
@@ -40,7 +40,7 @@ itemDef {
 	name window
 	rect 64 0 65 16
 	style 3
-	background "ui/assets/ingameconnection.tga"
+	background "ui/assets/ingameconnection.png"
 	visible 1
 	decoration
 	}
@@ -48,7 +48,7 @@ itemDef {
 	name window
 	rect 129 10 64 64
 	style 3
-	background "ui/assets/ingamerightcorner.tga"
+	background "ui/assets/ingamerightcorner.png"
 	visible 1
 	decoration
 	}
@@ -57,7 +57,7 @@ itemDef {
 	name window
 	rect 0 64 64 64
 	style 3
-	background "ui/assets/ingameleftcornerb.tga"
+	background "ui/assets/ingameleftcornerb.png"
 	visible 1
 	decoration
 	}
@@ -65,7 +65,7 @@ itemDef {
 	name window
 	rect 129 64 64 64
 	style 3
-	background "ui/assets/ingamerightcornerb.tga"
+	background "ui/assets/ingamerightcornerb.png"
 	visible 1
 	decoration
 	}
@@ -73,7 +73,7 @@ itemDef {
 	name window
 	rect 64 120 66 8
 	style 3
-	background "ui/assets/ingamebottom.tga"
+	background "ui/assets/ingamebottom.png"
 	visible 1
 	decoration
 	}
@@ -137,7 +137,7 @@ itemDef {
 	type 1
 	textscale .25
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	rect 65 95 50 20
 	textalign 1
 	textalignx 25

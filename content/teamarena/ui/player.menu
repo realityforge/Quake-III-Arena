@@ -77,7 +77,7 @@ itemDef {
 	group grpquaketype
 	cvarTest "ui_q3model"
 	showCVar { "1" }	
- 	background "ui/assets/playerpatriot.tga"
+ 	background "ui/assets/playerpatriot.png"
  	rect 60 24 128 256
       	forecolor .25 .25 .25 1
 	decoration
@@ -89,7 +89,7 @@ itemDef {
 	cvarTest "ui_q3model"
 	showCVar { "1" }	
       	style WINDOW_STYLE_SHADER	
- 	background "ui/assets/playerpi.tga"
+ 	background "ui/assets/playerpi.png"
  	rect 100 24 128 256
       	visible 1 
 	decoration
@@ -100,7 +100,7 @@ itemDef {
 	cvarTest "ui_q3model"
 	showCVar { "1" }		
       	style WINDOW_STYLE_SHADER	
- 	background "ui/assets/playerklesk.tga"
+ 	background "ui/assets/playerklesk.png"
  	rect 440 24 128 256
       	forecolor .5 .5 .5 1
       	visible 1 
@@ -114,7 +114,7 @@ itemDef {
 	cvarTest "ui_q3model"
 	showCVar { "1" }	
       	style WINDOW_STYLE_SHADER	
- 	background "ui/assets/playerbiker.tga"
+ 	background "ui/assets/playerbiker.png"
  	rect 384 24 128 256
       	visible 1 
 	decoration
@@ -128,7 +128,7 @@ itemDef {
 	group grparenatype
 	cvarTest "ui_q3model"
 	showCVar { "0" }		
- 	background "ui/assets/pagans.tga"
+ 	background "ui/assets/pagans.png"
  	rect 0 150 128 128
       	forecolor .5 .5 .5 .25
       	visible 1 
@@ -141,7 +141,7 @@ itemDef {
 	cvarTest "ui_q3model"
 	showCVar { "0" }		
       	style WINDOW_STYLE_SHADER	
- 	background "ui/assets/crusaders.tga"
+ 	background "ui/assets/crusaders.png"
  	rect 128 150 128 128
       	forecolor .5 .5 .5 .25
       	visible 1 
@@ -155,7 +155,7 @@ itemDef {
 	cvarTest "ui_q3model"
 	showCVar { "0" }	
       	style WINDOW_STYLE_SHADER	
- 	background "ui/assets/stroggs.tga"
+ 	background "ui/assets/stroggs.png"
  	rect 384 150 128 128
       	forecolor .5 .5 .5 .25
       	visible 1 
@@ -169,7 +169,7 @@ itemDef {
 	cvarTest "ui_q3model"
 	showCVar { "0" }	
       	style WINDOW_STYLE_SHADER	
- 	background "ui/assets/intruders.tga"
+ 	background "ui/assets/intruders.png"
  	rect 512 150 128 128
       	forecolor .5 .5 .5 .25
       	visible 1 
@@ -421,7 +421,7 @@ itemDef {
 itemDef {
       	name back
 	style 3
-      	background "ui/assets/backarrow.tga"
+      	background "ui/assets/backarrow.png"
 	rect 16 424 50 50 
       	visible 1 
       	action { close player_menu ; open main }
@@ -431,7 +431,7 @@ itemDef {
 itemDef {
       	name back_alt
       	style WINDOW_STYLE_SHADER
-	background "ui/assets/backarrow_alt.tga"
+	background "ui/assets/backarrow_alt.png"
 	rect 14 422 54 54 
       	backcolor 0 0 0 0
       	forecolor 1 1 1 1
@@ -569,7 +569,7 @@ itemDef {
 	cvarTest "ui_q3model"
 	showCVar { "1" }	
       	style 3	
- 	background "ui/assets/q3imagepage.tga"
+ 	background "ui/assets/q3imagepage.png"
 	rect 238 157 170 133
       	visible 1 
 	decoration
@@ -596,7 +596,7 @@ itemDef {
 itemDef {
       	name fadebox
       	style WINDOW_STYLE_FILLED
- 	background "ui/assets/fadebox.tga"
+ 	background "ui/assets/fadebox.png"
 	forecolor 0 0 0 1
 	backcolor 0 0 0 1
 	rect 0 0 640 480

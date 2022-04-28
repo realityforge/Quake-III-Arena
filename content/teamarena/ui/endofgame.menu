@@ -164,7 +164,7 @@ itemdef {
 	name medal_assist_team_shadow
     	rect 187 362 30 30
 	style WINDOW_STYLE_SHADER
-    	background "ui/assets/medal_assist.tga"
+    	background "ui/assets/medal_assist.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME
 	forecolor 0 0 0 .5
 	visible 1 
@@ -177,7 +177,7 @@ itemdef {
     	rect 185 360 30 30
 	type ITEM_TYPE_EDITFIELD
 	style WINDOW_STYLE_SHADER
-    	background "ui/assets/medal_assist.tga"
+    	background "ui/assets/medal_assist.png"
 	cvar "ui_scoreAssists2"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME
    	textscale .22
@@ -198,7 +198,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
       	rect 227 362 30 30
 	forecolor 0 0 0 .5
-      	background "ui/assets/medal_accuracy.tga"
+      	background "ui/assets/medal_accuracy.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME
       	visible 1 
       	decoration 
@@ -209,7 +209,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
 	cvar "ui_scoreAccuracy2"
       	rect 225 360 30 30
-      	background "ui/assets/medal_accuracy.tga"
+      	background "ui/assets/medal_accuracy.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME
       	visible 1 
       	decoration 
@@ -230,7 +230,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
       	rect 267 362 30 30
 	forecolor 0 0 0 .5
-      	background "ui/assets/medal_excellent.tga"
+      	background "ui/assets/medal_excellent.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME
       	visible 1 
       	decoration 
@@ -241,7 +241,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
 	cvar "ui_scoreExcellents2"
       	rect 265 360 30 30
-      	background "ui/assets/medal_excellent.tga"
+      	background "ui/assets/medal_excellent.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME
       	visible 1 
       	decoration 
@@ -265,7 +265,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
        	rect 307 362 30 30
 	forecolor 0 0 0 .5
-      	background "ui/assets/medal_gauntlet.tga"
+      	background "ui/assets/medal_gauntlet.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME
       	visible 1 
       	decoration 
@@ -276,7 +276,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
 	cvar "ui_scoreGauntlets2"
        	rect 305 360 30 30
-      	background "ui/assets/medal_gauntlet.tga"
+      	background "ui/assets/medal_gauntlet.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME
       	visible 1 
       	decoration 
@@ -299,7 +299,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
    	rect 347 362 30 30
 	forecolor 0 0 0 .5
-  	background "ui/assets/medal_impressive.tga"
+  	background "ui/assets/medal_impressive.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME
   	visible 1 
    	decoration 
@@ -311,7 +311,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
 	cvar "ui_scoreImpressives2"
    	rect 345 360 30 30
-  	background "ui/assets/medal_impressive.tga"
+  	background "ui/assets/medal_impressive.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME
   	visible 1 
    	decoration 
@@ -335,7 +335,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
       	rect 387 362 30 30
 	forecolor 0 0 0 .5
-      	background "ui/assets/medal_defend.tga"
+      	background "ui/assets/medal_defend.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME
       	visible 1 
       	decoration 
@@ -347,7 +347,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
 	cvar "ui_scoreDefends2"
       	rect 385 360 30 30
-      	background "ui/assets/medal_defend.tga"
+      	background "ui/assets/medal_defend.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME
       	visible 1 
       	decoration 
@@ -370,7 +370,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
       	rect 427 362 30 30
 	forecolor 0 0 0 .5
-      	background "ui/assets/medal_capture.tga"
+      	background "ui/assets/medal_capture.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME
       	visible 1 
       	decoration 
@@ -383,7 +383,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
 	cvar "ui_scoreCaptures2"
       	rect 425 360 30 30
-      	background "ui/assets/medal_capture.tga"
+      	background "ui/assets/medal_capture.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME
       	visible 1 
       	decoration 
@@ -411,7 +411,7 @@ itemdef {
     	rect 232 362 30 30
 	forecolor 0 0 0 .5
 	style WINDOW_STYLE_SHADER
-    	background "ui/assets/medal_perfect.tga"
+    	background "ui/assets/medal_perfect.png"
 	ownerdrawflag UI_SHOW_ANYNONTEAMGAME
     	visible 1 
     	decoration 
@@ -424,7 +424,7 @@ itemdef {
     	rect 230 360 30 30
 	type ITEM_TYPE_EDITFIELD
 	style WINDOW_STYLE_SHADER
-    	background "ui/assets/medal_perfect.tga"
+    	background "ui/assets/medal_perfect.png"
 	cvar "ui_scorePerfect2"
 	ownerdrawflag UI_SHOW_ANYNONTEAMGAME
    	textscale .22
@@ -446,7 +446,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
       	rect 272 362 30 30
 	forecolor 0 0 0 .5
-      	background "ui/assets/medal_accuracy.tga"
+      	background "ui/assets/medal_accuracy.png"
 	ownerdrawflag UI_SHOW_ANYNONTEAMGAME
       	visible 1 
       	decoration 
@@ -457,7 +457,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
 	cvar "ui_scoreAccuracy2"
       	rect 270 360 30 30
-      	background "ui/assets/medal_accuracy.tga"
+      	background "ui/assets/medal_accuracy.png"
 	ownerdrawflag UI_SHOW_ANYNONTEAMGAME
       	visible 1 
       	decoration 
@@ -480,7 +480,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
       	rect 312 362 30 30
 	forecolor 0 0 0 .5
-      	background "ui/assets/medal_excellent.tga"
+      	background "ui/assets/medal_excellent.png"
 	ownerdrawflag UI_SHOW_ANYNONTEAMGAME
       	visible 1 
       	decoration 
@@ -493,7 +493,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
 	cvar "ui_scoreExcellents2"
       	rect 310 360 30 30
-      	background "ui/assets/medal_excellent.tga"
+      	background "ui/assets/medal_excellent.png"
 	ownerdrawflag UI_SHOW_ANYNONTEAMGAME
       	visible 1 
       	decoration 
@@ -515,7 +515,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
        	rect 352 362 30 30
 	forecolor 0 0 0 .5
-      	background "ui/assets/medal_gauntlet.tga"
+      	background "ui/assets/medal_gauntlet.png"
 	ownerdrawflag UI_SHOW_ANYNONTEAMGAME
       	visible 1 
       	decoration 
@@ -527,7 +527,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
 	cvar "ui_scoreGauntlets2"
        	rect 350 360 30 30
-      	background "ui/assets/medal_gauntlet.tga"
+      	background "ui/assets/medal_gauntlet.png"
 	ownerdrawflag UI_SHOW_ANYNONTEAMGAME
       	visible 1 
       	decoration 
@@ -551,7 +551,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
    	rect 392 362 30 30
 	forecolor 0 0 0 .5
-  	background "ui/assets/medal_impressive.tga"
+  	background "ui/assets/medal_impressive.png"
 	ownerdrawflag UI_SHOW_ANYNONTEAMGAME
   	visible 1 
    	decoration 
@@ -563,7 +563,7 @@ itemdef {
 	style WINDOW_STYLE_SHADER
 	cvar "ui_scoreImpressives2"
    	rect 390 360 30 30
-  	background "ui/assets/medal_impressive.tga"
+  	background "ui/assets/medal_impressive.png"
 	ownerdrawflag UI_SHOW_ANYNONTEAMGAME
   	visible 1 
    	decoration 
@@ -589,7 +589,7 @@ itemdef {
 	name medal_assist_window
     	rect 183 358 34 34
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/medal_assist.tga"
+	background "ui/assets/medal_assist.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME 
 	type 1  	
 	border 1
@@ -606,7 +606,7 @@ itemdef {
 	name medal_accuracy_window
     	rect 223 358 34 34
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/medal_accuracy.tga"
+	background "ui/assets/medal_accuracy.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME 
 	type 1    	
 	border 1
@@ -623,7 +623,7 @@ itemdef {
     	rect 263 358 34 34
 	type 1  
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/medal_excellent.tga"
+	background "ui/assets/medal_excellent.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME   	
 	border 1
 	bordercolor .5 .5 .5 0
@@ -639,7 +639,7 @@ itemdef {
     	rect 303 358 34 34
 	type 1  
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/medal_gauntlet.tga"
+	background "ui/assets/medal_gauntlet.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME   	
 	border 1
 	bordercolor .5 .5 .5 0
@@ -655,7 +655,7 @@ itemdef {
     	rect 343 358 34 34
 	type 1  
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/medal_impressive.tga"
+	background "ui/assets/medal_impressive.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME   	
 	border 1
 	bordercolor .5 .5 .5 0
@@ -671,7 +671,7 @@ itemdef {
     	rect 383 358 34 34
 	type 1  
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/medal_defend.tga"
+	background "ui/assets/medal_defend.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME   	
 	border 1
 	bordercolor .5 .5 .5 0
@@ -687,7 +687,7 @@ itemdef {
     	rect 423 358 34 34
 	type 1  
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/medal_capture.tga"
+	background "ui/assets/medal_capture.png"
 	ownerdrawflag UI_SHOW_ANYTEAMGAME   	
 	border 1
 	bordercolor .5 .5 .5 0
@@ -711,7 +711,7 @@ itemdef {
     	rect 228 358 34 34
 	type 1  
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/medal_perfect.tga"
+	background "ui/assets/medal_perfect.png"
 	ownerdrawflag UI_SHOW_ANYNONTEAMGAME   	
 	border 1
 	bordercolor .5 .5 .5 0
@@ -728,7 +728,7 @@ itemdef {
       	rect 268 358 34 34
 	type 1  
       	style WINDOW_STYLE_SHADER
-	background "ui/assets/medal_accuracy.tga"
+	background "ui/assets/medal_accuracy.png"
 	ownerdrawflag UI_SHOW_ANYNONTEAMGAME   	
 	border 1
 	bordercolor .5 .5 .5 0
@@ -748,7 +748,7 @@ itemdef {
 	type 1  
       	ownerdrawflag UI_SHOW_ANYNONTEAMGAME   	
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/medal_excellent.tga"	
+	background "ui/assets/medal_excellent.png"
 	border 1
 	bordercolor .5 .5 .5 0
 	forecolor 1 1 1 0
@@ -765,7 +765,7 @@ itemdef {
        	rect 348 358 34 34
 	type 1  
       	style WINDOW_STYLE_SHADER
-	background "ui/assets/medal_gauntlet.tga"
+	background "ui/assets/medal_gauntlet.png"
 	ownerdrawflag UI_SHOW_ANYNONTEAMGAME   	
 	border 1
 	bordercolor .5 .5 .5 0
@@ -783,7 +783,7 @@ itemdef {
    	rect 388 358 34 34
 	type 1  
   	style WINDOW_STYLE_SHADER
-	background "ui/assets/medal_impressive.tga"
+	background "ui/assets/medal_impressive.png"
 	ownerdrawflag UI_SHOW_ANYNONTEAMGAME   	
 	border 1
 	bordercolor .5 .5 .5 0
@@ -1073,7 +1073,7 @@ itemDef {
 	group grpControlbutton
 	type ITEM_TYPE_BUTTON
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	rect 178 430 45 26
 	textalign 1
 	textalignx 23
@@ -1092,7 +1092,7 @@ itemDef {
       	name replay
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.tga"
+	background "ui/assets/framebutton.png"
  	rect 178 430 45 26
       	visible 1 
 	forecolor 1 1 1 1
@@ -1103,7 +1103,7 @@ itemDef {
       	name replay
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.tga"
+	background "ui/assets/leftbutton.png"
       	rect 166 430 13 26
       	visible 1
 	forecolor 1 1 1 1
@@ -1114,7 +1114,7 @@ itemDef {
       	name replay
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.tga"
+	background "ui/assets/rightbutton.png"
       	rect 221 430 13 26
       	visible 1 
 	forecolor 1 1 1 1
@@ -1128,7 +1128,7 @@ itemDef {
 	group grpControlbutton
 	type ITEM_TYPE_BUTTON
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	rect 257 430 45 26
 	textalign 1
 	textalignx 23
@@ -1147,7 +1147,7 @@ itemDef {
 	group grpControlbutton
 	type ITEM_TYPE_BUTTON
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	rect 257 430 45 26
 	textalign 1
 	textalignx 23
@@ -1166,7 +1166,7 @@ itemDef {
       	name demo
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.tga"
+	background "ui/assets/framebutton.png"
  	rect 257 430 45 26
       	visible 1 
 	forecolor 1 1 1 1
@@ -1177,7 +1177,7 @@ itemDef {
       	name demo
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.tga"
+	background "ui/assets/leftbutton.png"
       	rect 245 430 13 26
       	visible 1 
 	forecolor 1 1 1 1
@@ -1188,7 +1188,7 @@ itemDef {
       	name demo
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.tga"
+	background "ui/assets/rightbutton.png"
       	rect 301 430 13 26
 	forecolor 1 1 1 1
       	visible 1 
@@ -1204,7 +1204,7 @@ itemDef {
 	group grpControlbutton
 	type ITEM_TYPE_BUTTON
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	rect 338 430 45 26
 	textalign 1
 	textalignx 23
@@ -1223,7 +1223,7 @@ itemDef {
    	name main
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.tga"
+	background "ui/assets/framebutton.png"
  	rect 338 430 45 26
    	visible 1 
 	forecolor 1 1 1 1
@@ -1234,7 +1234,7 @@ itemDef {
       	name main
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.tga"
+	background "ui/assets/leftbutton.png"
       	rect 326 430 13 26
 	forecolor 1 1 1 1
       	visible 1 
@@ -1245,7 +1245,7 @@ itemDef {
       	name main
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.tga"
+	background "ui/assets/rightbutton.png"
       	rect 382 430 13 26
 	forecolor 1 1 1 1
       	visible 1 
@@ -1260,7 +1260,7 @@ itemDef {
 	group grpControlbutton
 	type ITEM_TYPE_BUTTON
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	rect 419 430 45 26
 	textalign 1
 	textalignx 23
@@ -1279,7 +1279,7 @@ itemDef {
    	name next
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.tga"
+	background "ui/assets/framebutton.png"
  	rect 419 430 45 26
    	visible 1 
 	forecolor 1 1 1 1
@@ -1290,7 +1290,7 @@ itemDef {
       	name next
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.tga"
+	background "ui/assets/leftbutton.png"
       	rect 407 430 13 26
 	forecolor 1 1 1 1
       	visible 1 
@@ -1301,7 +1301,7 @@ itemDef {
       	name next
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.tga"
+	background "ui/assets/rightbutton.png"
       	rect 463 430 13 26
 	forecolor 1 1 1 1
       	visible 1 
@@ -1311,7 +1311,7 @@ itemDef {
 itemDef {
       	name fadebox
       	style WINDOW_STYLE_FILLED
- 	background "ui/assets/fadebox.tga"
+ 	background "ui/assets/fadebox.png"
 	forecolor 0 0 0 1
 	backcolor 0 0 0 .5
 	rect 0 0 640 480

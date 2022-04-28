@@ -4,7 +4,7 @@ textures/skin/teeth
 {
 
 	{
-		map textures/skin/teeth.tga
+		map textures/skin/teeth.png
                 rgbGen identity
         }
 
@@ -14,7 +14,7 @@ textures/skin/teeth
 		rgbGen identity
 	}
         {
-		map textures/sfx/specular4.tga
+		map textures/sfx/specular4.png
                 blendFunc GL_ONE GL_ONE
                 tcGen environment
                 rgbGen identity
@@ -25,13 +25,13 @@ textures/skin/chapthroatooz
 
     surfaceparm nonsolid
 	{
-                map textures/liquids/proto_gruel3.tga
+                map textures/liquids/proto_gruel3.png
                 tcMod scroll 0 .2
                 tcMod scale 2 2
                 rgbGen vertex
 	}
 	{
-		map textures/skin/chapthroatooz.tga
+		map textures/skin/chapthroatooz.png
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -43,7 +43,7 @@ textures/skin/chapthroatooz
 }
 textures/organics/dirt_trans
 {
-	qer_editorimage textures/organics/dirt.tga
+	qer_editorimage textures/organics/dirt.png
 	surfaceparm nonsolid
 	{
 		map $lightmap
@@ -51,7 +51,7 @@ textures/organics/dirt_trans
 
 	}
 	{
-		map textures/organics/dirt.tga
+		map textures/organics/dirt.png
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 
@@ -62,7 +62,7 @@ textures/organics/dirt_trans
 
 textures/skin/chapthroat2
 {
-	qer_editorimage textures/skin/chapthroat2.tga
+	qer_editorimage textures/skin/chapthroat2.png
 	surfaceparm nonsolid
 	{
 		map $lightmap
@@ -70,7 +70,7 @@ textures/skin/chapthroat2
 
 	}
 	{
-		map textures/skin/chapthroat2.tga
+		map textures/skin/chapthroat2.png
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 
@@ -81,7 +81,7 @@ textures/skin/chapthroat2
 
 textures/skin/skin6_trans
 {
-	qer_editorimage textures/skin/skin6.tga
+	qer_editorimage textures/skin/skin6.png
 	surfaceparm nonsolid
 	{
 		map $lightmap
@@ -89,7 +89,7 @@ textures/skin/skin6_trans
 
 	}
 	{
-		map textures/skin/skin6.tga
+		map textures/skin/skin6.png
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 
@@ -99,7 +99,7 @@ textures/skin/skin6_trans
 
 textures/skin/skin5_trans
 {
-	qer_editorimage textures/skin/skin5.tga
+	qer_editorimage textures/skin/skin5.png
 	surfaceparm nonsolid
 	{
 		map $lightmap
@@ -107,7 +107,7 @@ textures/skin/skin5_trans
 
 	}
 	{
-		map textures/skin/skin5.tga
+		map textures/skin/skin5.png
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 
@@ -117,7 +117,7 @@ textures/skin/skin5_trans
 
 textures/skin/skin1_trans
 {
-	qer_editorimage textures/skin/skin1.tga
+	qer_editorimage textures/skin/skin1.png
 	surfaceparm nonsolid
 	{
 		map $lightmap
@@ -125,7 +125,7 @@ textures/skin/skin1_trans
 
 	}
 	{
-		map textures/skin/skin1.tga
+		map textures/skin/skin1.png
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 
@@ -135,7 +135,7 @@ textures/skin/skin1_trans
 
 textures/skin/surface8_trans
 {
-	qer_editorimage textures/skin/surface8.tga
+	qer_editorimage textures/skin/surface8.png
 	surfaceparm nonsolid
 	{
 		map $lightmap
@@ -143,7 +143,7 @@ textures/skin/surface8_trans
 
 	}
 	{
-		map textures/skin/surface8.tga
+		map textures/skin/surface8.png
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 
@@ -153,7 +153,7 @@ textures/skin/surface8_trans
 
 textures/skin/tongue_trans
 {
-	qer_editorimage textures/skin/tongue.tga
+	qer_editorimage textures/skin/tongue.png
 	surfaceparm nomarks
 	surfaceparm nonsolid
 	{
@@ -162,7 +162,7 @@ textures/skin/tongue_trans
 
 	}
 	{
-		map textures/skin/tongue.tga
+		map textures/skin/tongue.png
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 
@@ -179,7 +179,7 @@ textures/skin/nibbles
 		map $lightmap
 	}
 	{
-		map textures/skin/nibbles.tga
+		map textures/skin/nibbles.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -194,7 +194,7 @@ textures/skin/soylent
 		map $lightmap
 	}
         {
-		map textures/skin/soylent.tga
+		map textures/skin/soylent.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -210,7 +210,7 @@ textures/skin/snake
 		rgbGen identity
 	}
 	{
-		map textures/skin/snake.tga
+		map textures/skin/snake.png
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
@@ -222,13 +222,13 @@ textures/skin/proto_skin2
         deformVertexes normal .1 .1
 
 	{
-                map textures/liquids/proto_gruel3.tga
+                map textures/liquids/proto_gruel3.png
                 tcMod turb 0 .2 0 .1
                 tcMod scale 2 2
                 rgbGen identity
 	}
 	{
-		map textures/skin/proto_skin2.tga
+		map textures/skin/proto_skin2.png
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -243,13 +243,13 @@ textures/skin/proto_skin2b
         //tessSize 64
 	//deformVertexes wave 100 sin 4 3 0 0.3
 	{
-                map textures/liquids/proto_gruel3.tga
+                map textures/liquids/proto_gruel3.png
                 tcMod turb 0 .2 0 .1
                 tcMod scale 2 2
                 rgbGen identity
 	}
 	{
-		map textures/skin/proto_skin2b.tga
+		map textures/skin/proto_skin2b.png
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -268,7 +268,7 @@ textures/skin/skin6move
 		rgbGen identity
 	}
 	{
-		map textures/skin/skin6move.tga
+		map textures/skin/skin6move.png
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
@@ -284,7 +284,7 @@ textures/skin/proto_skin
 		rgbGen identity
 	}
 	{
-		map textures/skin/proto_skin.tga
+		map textures/skin/proto_skin.png
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
@@ -299,7 +299,7 @@ textures/skin/skin1move
 		rgbGen identity
 	}
 	{
-		map textures/skin/skin1move.tga
+		map textures/skin/skin1move.png
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
@@ -316,7 +316,7 @@ textures/skin/skin4_side
 		rgbGen identity
 	}
 	{
-		map textures/skin/skin4_side.tga
+		map textures/skin/skin4_side.png
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	//	alphaGen lightingSpecular
@@ -333,7 +333,7 @@ textures/skin/spikemove
 		rgbGen identity
 	}
 	{
-		map textures/skin/spikemove.tga
+		map textures/skin/spikemove.png
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
@@ -347,7 +347,7 @@ textures/skin/pjwal2f
 		rgbGen identity
 	}
 	{
-		map textures/skin/pjwal2f.tga
+		map textures/skin/pjwal2f.png
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}

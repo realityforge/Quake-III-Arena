@@ -2,7 +2,7 @@ textures/shrine/stained15d
 {
 	surfaceparm trans
 	{
-		map textures/shrine/stained15d.blend.tga
+		map textures/shrine/stained15d.blend.png
 
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}

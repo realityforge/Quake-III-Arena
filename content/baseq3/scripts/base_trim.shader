@@ -1,12 +1,12 @@
 textures/base_trim/pj_launcher
 {
         {
-        	 map textures/base_trim/pj_launcher2.tga
+        	 map textures/base_trim/pj_launcher2.png
         	 tcmod scroll 0 2
                  rgbGen identity
         }
         {
-        	 map textures/base_trim/pj_launcher.tga
+        	 map textures/base_trim/pj_launcher.png
         	 blendfunc blend
                  rgbGen identity
         }
@@ -18,7 +18,7 @@ textures/base_trim/pj_launcher
 }
 textures/base_trim/pewter_nonsolid
 {
-	qer_editorimage textures/base_trim/dirty_pewter.tga
+	qer_editorimage textures/base_trim/dirty_pewter.png
 	surfaceparm nonsolid
 	{
 		map $lightmap
@@ -26,7 +26,7 @@ textures/base_trim/pewter_nonsolid
 
 	}
 	{
-		map textures/base_trim/dirty_pewter.tga
+		map textures/base_trim/dirty_pewter.png
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 
@@ -37,33 +37,33 @@ textures/base_trim/pewter_nonsolid
 textures/base_trim/proto_comp
 {
         {
-        	 map textures/base_trim/proto_comp2.tga
+        	 map textures/base_trim/proto_comp2.png
         	 tcmod scroll 0 -.2
         	 rgbGen wave sin .5 .5 0 3
                  rgbGen identity
         }
         {
-        	 clampmap textures/sfx/console03.tga
+        	 clampmap textures/sfx/console03.png
         	 tcmod rotate -33
                  tcMod stretch sin .8 0 0 0
                  blendfunc add
                  rgbGen wave sin .6 0 0 0
         }
         {
-        	 clampmap textures/sfx/console02.tga
+        	 clampmap textures/sfx/console02.png
         	 tcmod rotate -333
                  tcMod stretch sin .8 0 0 0
                  blendfunc add
                  rgbGen wave sin .3 0 0 0
         }
         {
-        	 map textures/effects/tinfx2c.tga
+        	 map textures/effects/tinfx2c.png
         	 tcGen environment
                  blendfunc add
                  rgbGen identity
         }
         {
-        	 map textures/base_trim/proto_comp.tga
+        	 map textures/base_trim/proto_comp.png
         	 blendfunc blend
         }
         {
@@ -77,12 +77,12 @@ textures/base_trim/pewter_shiney
 {
 
         {
-                map textures/effects/tinfx.tga
+                map textures/effects/tinfx.png
                 tcGen environment
                 rgbGen identity
 	}
         {
-		map textures/base_trim/pewter_shiney.tga
+		map textures/base_trim/pewter_shiney.png
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -97,7 +97,7 @@ textures/base_trim/panel_glo
 {
 
         {
-                map textures/sfx/firegorre2.tga
+                map textures/sfx/firegorre2.png
 
                 tcMod turb 0 .6 0 0.06
                 tcmod scale .53 .61
@@ -106,7 +106,7 @@ textures/base_trim/panel_glo
                 rgbGen wave sin 1 1 0 .1
 	}
         {
-		map textures/base_trim/panel_glo.tga
+		map textures/base_trim/panel_glo.png
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -120,12 +120,12 @@ textures/base_trim/spidertrim4
 {
 
         {
-                map textures/effects/tinfx.tga
+                map textures/effects/tinfx.png
                 tcGen environment
                 rgbGen identity
 	}
         {
-		map textures/base_trim/spidertrim4.tga
+		map textures/base_trim/spidertrim4.png
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -139,12 +139,12 @@ textures/base_trim/panel_shiny
 {
 
         {
-                map textures/effects/tinfx.tga
+                map textures/effects/tinfx.png
                 tcGen environment
                 rgbGen identity
 	}
         {
-		map textures/base_trim/panel_shiny.tga
+		map textures/base_trim/panel_shiny.png
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -158,12 +158,12 @@ textures/base_trim/spidertrim3
 {
 
         {
-                map textures/effects/tinfx.tga
+                map textures/effects/tinfx.png
                 tcGen environment
                 rgbGen identity
 	}
         {
-		map textures/base_trim/spidertrim3.tga
+		map textures/base_trim/spidertrim3.png
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -179,7 +179,7 @@ textures/base_trim/wires02
     surfaceparm alphashadow
     surfaceparm trans
         {
-                map textures/base_trim/wires02.tga
+                map textures/base_trim/wires02.png
                 alphaFunc GE128
 		depthWrite
 		rgbGen vertex
@@ -200,7 +200,7 @@ textures/base_trim/wires01
     deformVertexes autoSprite2
     surfaceparm trans
         {
-                map textures/base_trim/wires01.tga
+                map textures/base_trim/wires01.png
                 alphaFunc GE128
 		depthWrite
 		rgbGen vertex
@@ -220,7 +220,7 @@ textures/base_trim/wires01_ass
     surfaceparm alphashadow
     deformVertexes autoSprite2
         {
-                map textures/base_trim/wires01_ass.tga
+                map textures/base_trim/wires01_ass.png
                 alphaFunc GE128
 		depthWrite
 		rgbGen vertex
@@ -238,7 +238,7 @@ textures/base_trim/spiderbite
 {
 
         {
-		map textures/sfx/proto_zzztblu2.tga
+		map textures/sfx/proto_zzztblu2.png
                 tcMod turb 0 .3 0 .2
                 tcmod scroll 6 .7
                 tcmod scale .4 1
@@ -246,21 +246,21 @@ textures/base_trim/spiderbite
                 rgbGen identity
 	}
         {
-	        map textures/base_trim/spiderbite.tga
+	        map textures/base_trim/spiderbite.png
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
                 tcMod stretch sin .8 0.4 0 .2
                 tcmod scroll .3 0
 	        rgbGen identity
 	}
         {
-	        map textures/base_trim/spiderbite.tga
+	        map textures/base_trim/spiderbite.png
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
                 tcMod stretch sin .8 0.2 0 .1
                 tcmod scroll -.5 0
 	        rgbGen identity
 	}
 	{
-	        map textures/base_trim/spiderbite.tga
+	        map textures/base_trim/spiderbite.png
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	        rgbGen identity
 	}
@@ -274,12 +274,12 @@ textures/base_trim/dark_tin2
 {
 
         {
-                map textures/effects/tinfx.tga
+                map textures/effects/tinfx.png
                 tcGen environment
                 rgbGen vertex
 	}
         {
-		map textures/base_trim/dark_tin2.tga
+		map textures/base_trim/dark_tin2.png
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -296,12 +296,12 @@ textures/base_trim/dark_tin2_trans
 	surfaceparm nonsolid
 
         {
-                map textures/effects/tinfx.tga
+                map textures/effects/tinfx.png
                 tcGen environment
                 rgbGen vertex
 	}
         {
-		map textures/base_trim/dark_tin2.tga
+		map textures/base_trim/dark_tin2.png
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -317,18 +317,18 @@ textures/base_trim/skull_monitor
 {
 
         {
-                map textures/base_trim/skull_monitor.tga
+                map textures/base_trim/skull_monitor.png
                 tcMod turb 0 .05 0 .2
                 rgbGen identity
 	}
         {
-                 map textures/sfx/text.tga
+                 map textures/sfx/text.png
                  blendFunc GL_ONE GL_ONE
                  tcmod scroll 1 0
                  rgbGen identity
 	}
         {
-                 map textures/effects/tinfx2.tga
+                 map textures/effects/tinfx2.png
                  blendFunc GL_ONE GL_ONE
                  tcGen environment
                  rgbGen identity
@@ -342,7 +342,7 @@ textures/base_trim/skull_monitor
 }
 textures/base_trim/deeprust_trans
 {
-	qer_editorimage textures/base_trim/deeprust.tga
+	qer_editorimage textures/base_trim/deeprust.png
 	surfaceparm nonsolid
 	{
 		map $lightmap
@@ -350,7 +350,7 @@ textures/base_trim/deeprust_trans
 
 	}
 	{
-		map textures/base_trim/deeprust.tga
+		map textures/base_trim/deeprust.png
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 
@@ -362,13 +362,13 @@ textures/base_trim/yellow_rustc
 {
 
 	{
-		map textures/base_wall/chrome_env.tga
+		map textures/base_wall/chrome_env.png
 		tcgen environment
 		tcmod scale .25 .25
 		rgbGen identity
 	}
 	{
-		map textures/base_trim/yellow_rustc.tga
+		map textures/base_trim/yellow_rustc.png
 		blendFunc gl_one_minus_src_alpha gl_src_alpha
 	//	alphagen lightingspecular
 		rgbGen identity
@@ -387,21 +387,21 @@ textures/base_trim/yellow_rustc
 
 textures/base_trim/panelbrn010w
 {
-	q3map_lightimage textures/base_trim/panelbrn010wfx.tga
+	q3map_lightimage textures/base_trim/panelbrn010wfx.png
 
         {
-		map textures/base_trim/panelbrn010w.tga
+		map textures/base_trim/panelbrn010w.png
         }
 
         {
-		map textures/sfx/hologirl2.tga
+		map textures/sfx/hologirl2.png
                 tcmod scale .4 .4
                 tcmod scroll 6 2
                 blendFunc GL_ONE GL_ONE
                 rgbGen identity
 	}
 	{
-		map textures/base_trim/panelbrn010w.tga
+		map textures/base_trim/panelbrn010w.png
                 blendfunc blend
 
 	}
@@ -419,7 +419,7 @@ textures/base_trim/pewter_spec
 		map $lightmap
 	}
 	{
-		map textures/base_trim/pewter_spec.tga
+		map textures/base_trim/pewter_spec.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -434,20 +434,20 @@ textures/base_trim/tin
 		map $lightmap
 	}
 	{
-		map textures/base_trim/tin.tga
+		map textures/base_trim/tin.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
 	}
         {
-		map textures/base_trim/tinfx.tga
+		map textures/base_trim/tinfx.png
                 tcgen environment
 		blendFunc GL_ONE GL_ONE
 		rgbGen identity
 	}
 
         {
-		map textures/base_trim/tin.tga
+		map textures/base_trim/tin.png
 		//blendFunc GL_ONE GL_ONE
                 blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
@@ -461,20 +461,20 @@ textures/base_trim/dark_tin
 		map $lightmap
 	}
 	{
-		map textures/base_trim/dark_tin.tga
+		map textures/base_trim/dark_tin.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
 	}
         {
-		map textures/base_trim/tinfx.tga
+		map textures/base_trim/tinfx.png
                 tcgen environment
 		blendFunc GL_ONE GL_ONE
 		rgbGen identity
 	}
 
         {
-		map textures/base_trim/dark_tin.tga
+		map textures/base_trim/dark_tin.png
 		//blendFunc GL_ONE GL_ONE
                 blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
@@ -485,25 +485,25 @@ textures/base_trim/dark_tin
 textures/base_trim/techborder
 {
 	q3map_surfacelight 300
-        q3map_lightimage textures/base_trim/techborder_fx.tga
+        q3map_lightimage textures/base_trim/techborder_fx.png
 	{
 		map $lightmap
 		rgbGen identity
 	}
 	{
-		map textures/base_trim/techborder.tga
+		map textures/base_trim/techborder.png
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/base_trim/techborder_fx.tga
+		map textures/base_trim/techborder_fx.png
                 //tcmod scale  .1 1
                 tcmod scroll .1 0
 
 		blendfunc GL_ONE GL_ONE
 	}
         {
-		map textures/base_trim/techborder_fx.tga
+		map textures/base_trim/techborder_fx.png
                 tcmod scale  .1 1
                 tcmod scroll .1 0
 
@@ -512,7 +512,7 @@ textures/base_trim/techborder
 }
 textures/base_trim/spiderbit
 {
-	q3map_lightimage textures/base_trim/spiderbit_fx.tga
+	q3map_lightimage textures/base_trim/spiderbit_fx.png
 	q3map_surfacelight 100
 
         {
@@ -520,12 +520,12 @@ textures/base_trim/spiderbit
 		rgbGen identity
 	}
         {
-		map textures/base_trim/spiderbit.tga
+		map textures/base_trim/spiderbit.png
 		blendfunc gl_dst_color gl_zero
                 rgbGen identity
 	}
         {
-		map textures/base_trim/spiderbit_fx.tga
+		map textures/base_trim/spiderbit_fx.png
 		blendfunc GL_ONE GL_ONE
                 rgbgen wave triangle .1 .5 0 7
 	}
@@ -538,7 +538,7 @@ textures/base_trim/proto_fence
         nopicmip
 
 	{
-		map textures/base_trim/proto_fence.tga
+		map textures/base_trim/proto_fence.png
 		tcMod scale 3 3
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
@@ -555,18 +555,18 @@ textures/base_trim/proto_fence
 textures/base_trim/border11light
 {
 	q3map_surfacelight 500
-	Q3map_lightimage textures/base_trim/border11light.glow.tga
+	Q3map_lightimage textures/base_trim/border11light.glow.png
 	{
 		map $lightmap
 		rgbGen identity
 	}
 	{
-		map textures/base_trim/border11light.tga
+		map textures/base_trim/border11light.png
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/base_trim/border11light.glow.tga
+		map textures/base_trim/border11light.glow.png
 		blendfunc GL_ONE GL_ONE
 		rgbgen wave sin .9 .1 0 10
 	}
@@ -574,20 +574,20 @@ textures/base_trim/border11light
 
 textures/base_trim/border11_250
 {
-	qer_editorimage textures/base_trim/border11light.tga
+	qer_editorimage textures/base_trim/border11light.png
 	q3map_surfacelight 250
-	q3map_lightimage textures/base_trim/border11light.glow.tga
+	q3map_lightimage textures/base_trim/border11light.glow.png
 	{
 		map $lightmap
 		rgbGen identity
 	}
 	{
-		map textures/base_trim/border11light.tga
+		map textures/base_trim/border11light.png
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/base_trim/border11light.glow.tga
+		map textures/base_trim/border11light.glow.png
 		blendfunc GL_ONE GL_ONE
 		rgbgen wave sin .9 .1 0 10
 	}
@@ -601,52 +601,52 @@ textures/base_trim/border12b
 		rgbGen identity
 	}
 	{
-		map textures/base_trim/border12b.tga
+		map textures/base_trim/border12b.png
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/base_trim/border12bfx.tga
+		map textures/base_trim/border12bfx.png
 		blendfunc GL_ONE GL_ONE
 	}
 }
 
 textures/base_trim/border12b_pj
 {
-	qer_editorimage textures/base_trim/border12b.tga
+	qer_editorimage textures/base_trim/border12b.png
 	q3map_surfacelight 150
-	q3map_lightimage textures/base_trim/border12bfx.tga
+	q3map_lightimage textures/base_trim/border12bfx.png
 	{
 		map $lightmap
 		rgbGen identity
 	}
 	{
-		map textures/base_trim/border12b.tga
+		map textures/base_trim/border12b.png
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/base_trim/border12bfx.tga
+		map textures/base_trim/border12bfx.png
 		blendfunc GL_ONE GL_ONE
 	}
 }
 
 textures/base_trim/xborder12b
 {
-	qer_editorimage textures/base_trim/border12b.tga
+	qer_editorimage textures/base_trim/border12b.png
 	q3map_surfacelight 100
-	q3map_lightimage textures/base_trim/border12bfx.tga
+	q3map_lightimage textures/base_trim/border12bfx.png
 	{
 		map $lightmap
 		rgbGen identity
 	}
 	{
-		map textures/base_trim/border12b.tga
+		map textures/base_trim/border12b.png
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/base_trim/border12bfx.tga
+		map textures/base_trim/border12bfx.png
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -660,18 +660,18 @@ textures/base_trim/drag_glass1
 	surfaceparm trans
 	surfaceparm nolightmap
 	{
-		map textures/base_trim/drag_glass1.tga
+		map textures/base_trim/drag_glass1.png
 		blendFunc GL_ONE_MINUS_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/base_trim/drag_glass1.tga
+		map textures/base_trim/drag_glass1.png
 		alphaFunc LT128
 		blendfunc GL_DST_COLOR GL_ONE
 	}
 }
 textures/base_trim/electricwall
 {
-	qer_editorimage textures/organics/wire02a_f.tga
+	qer_editorimage textures/organics/wire02a_f.png
 	light 1
 q3map_surfacelight 400
 
@@ -680,16 +680,16 @@ q3map_surfacelight 400
 		rgbGen identity
 	}
 	{
-		map textures/organics/wire02a_f.tga
+		map textures/organics/wire02a_f.png
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/organics/wire02a_f.tga
+		map textures/organics/wire02a_f.png
 		blendFunc GL_ONE GL_ONE
 	}
 	{
-		map textures/sfx/electric2.blend.tga
+		map textures/sfx/electric2.blend.png
 		rgbGen wave sin 0.6 1 0 2
 	//	tcMod rotate 54
 		tcMod scroll 0.53 0.43
@@ -703,8 +703,8 @@ q3map_surfacelight 400
 //**********************************************************
 textures/base_trim/electric_blue
 {
-	qer_editorimage textures/base_trim/electricwall_blue.tga
-	q3map_lightimage textures/sfx/electric2.blend.tga
+	qer_editorimage textures/base_trim/electricwall_blue.png
+	q3map_lightimage textures/sfx/electric2.blend.png
 	q3map_globaltexture
 	q3map_surfacelight 200
 
@@ -713,17 +713,17 @@ textures/base_trim/electric_blue
 		rgbGen identity
 	}
 	{
-		map textures/base_trim/electricwall_blue.tga
+		map textures/base_trim/electricwall_blue.png
 		tcMod scale 0.5 0.5
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/base_trim/electricwall_blue.tga
+		map textures/base_trim/electricwall_blue.png
 		blendFunc GL_ONE GL_ONE
 	}
 	{
-		map textures/sfx/electric2.blend.tga
+		map textures/sfx/electric2.blend.png
 		rgbGen wave sin 0.6 1 0 2
 		tcMod scale 0.5 0.5
 		tcMod rotate 54

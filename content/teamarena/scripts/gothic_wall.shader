@@ -1,14 +1,14 @@
 
 textures/gothic_wall/iron01_f
 {
-	qer_editorimage textures/gothic_wall/iron01_f.tga
+	qer_editorimage textures/gothic_wall/iron01_f.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/iron01_f.tga
+		map textures/gothic_wall/iron01_f.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -17,14 +17,14 @@ textures/gothic_wall/iron01_f
 
 textures/gothic_wall/iron01_f2
 {
-	qer_editorimage textures/gothic_wall/iron01_f2.tga
+	qer_editorimage textures/gothic_wall/iron01_f2.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/iron01_f2.tga
+		map textures/gothic_wall/iron01_f2.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -33,14 +33,14 @@ textures/gothic_wall/iron01_f2
 
 textures/gothic_wall/iron01_k
 {
-	qer_editorimage textures/gothic_wall/iron01_k.tga
+	qer_editorimage textures/gothic_wall/iron01_k.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/iron01_k.tga
+		map textures/gothic_wall/iron01_k.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -49,14 +49,14 @@ textures/gothic_wall/iron01_k
 
 textures/gothic_wall/iron01_l
 {
-	qer_editorimage textures/gothic_wall/iron01_l.tga
+	qer_editorimage textures/gothic_wall/iron01_l.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/iron01_l.tga
+		map textures/gothic_wall/iron01_l.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -65,14 +65,14 @@ textures/gothic_wall/iron01_l
 
 textures/gothic_wall/iron01_l2
 {
-	qer_editorimage textures/gothic_wall/iron01_l2.tga
+	qer_editorimage textures/gothic_wall/iron01_l2.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/iron01_l2.tga
+		map textures/gothic_wall/iron01_l2.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -81,14 +81,14 @@ textures/gothic_wall/iron01_l2
 
 textures/gothic_wall/iron01_l4
 {
-	qer_editorimage textures/gothic_wall/iron01_l4.tga
+	qer_editorimage textures/gothic_wall/iron01_l4.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/iron01_l4.tga
+		map textures/gothic_wall/iron01_l4.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -97,14 +97,14 @@ textures/gothic_wall/iron01_l4
 
 textures/gothic_wall/iron01_m
 {
-	qer_editorimage textures/gothic_wall/iron01_m.tga
+	qer_editorimage textures/gothic_wall/iron01_m.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/iron01_m.tga
+		map textures/gothic_wall/iron01_m.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -113,14 +113,14 @@ textures/gothic_wall/iron01_m
 
 textures/gothic_wall/iron01_m_circles
 {
-	qer_editorimage textures/gothic_wall/iron01_m_circles.tga
+	qer_editorimage textures/gothic_wall/iron01_m_circles.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/iron01_m_circles.tga
+		map textures/gothic_wall/iron01_m_circles.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -129,14 +129,14 @@ textures/gothic_wall/iron01_m_circles
 
 textures/gothic_wall/iron01_m2
 {
-	qer_editorimage textures/gothic_wall/iron01_m2.tga
+	qer_editorimage textures/gothic_wall/iron01_m2.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/iron01_m2.tga
+		map textures/gothic_wall/iron01_m2.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -145,14 +145,14 @@ textures/gothic_wall/iron01_m2
 
 textures/gothic_wall/iron01_m3
 {
-	qer_editorimage textures/gothic_wall/iron01_m3.tga
+	qer_editorimage textures/gothic_wall/iron01_m3.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/iron01_m3.tga
+		map textures/gothic_wall/iron01_m3.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -161,14 +161,14 @@ textures/gothic_wall/iron01_m3
 
 textures/gothic_wall/iron01_mtech2
 {
-	qer_editorimage textures/gothic_wall/iron01_mtech2.tga
+	qer_editorimage textures/gothic_wall/iron01_mtech2.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/iron01_mtech2.tga
+		map textures/gothic_wall/iron01_mtech2.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -177,14 +177,14 @@ textures/gothic_wall/iron01_mtech2
 
 textures/gothic_wall/iron01_mthin
 {
-	qer_editorimage textures/gothic_wall/iron01_mthin.tga
+	qer_editorimage textures/gothic_wall/iron01_mthin.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map ttextures/gothic_wall/iron01_mthin.tga
+		map ttextures/gothic_wall/iron01_mthin.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -193,14 +193,14 @@ textures/gothic_wall/iron01_mthin
 
 textures/gothic_wall/iron01_n
 {
-	qer_editorimage textures/gothic_wall/iron01_n.tga
+	qer_editorimage textures/gothic_wall/iron01_n.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/iron01_n.tga
+		map textures/gothic_wall/iron01_n.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -209,14 +209,14 @@ textures/gothic_wall/iron01_n
 
 textures/gothic_wall/iron01_n_circles
 {
-	qer_editorimage textures/gothic_wall/iron01_n_circles.tga
+	qer_editorimage textures/gothic_wall/iron01_n_circles.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/iron01_n_circles.tga
+		map textures/gothic_wall/iron01_n_circles.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -225,14 +225,14 @@ textures/gothic_wall/iron01_n_circles
 
 textures/gothic_wall/iron01_ndark
 {
-	qer_editorimage textures/gothic_wall/iron01_ndark.tga
+	qer_editorimage textures/gothic_wall/iron01_ndark.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/iron01_ndark.tga
+		map textures/gothic_wall/iron01_ndark.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -241,14 +241,14 @@ textures/gothic_wall/iron01_ndark
 
 textures/gothic_wall/iron01_ndark_circles
 {
-	qer_editorimage textures/gothic_wall/iron01_ndark_circles.tga
+	qer_editorimage textures/gothic_wall/iron01_ndark_circles.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/iron01_ndark_circles.tga
+		map textures/gothic_wall/iron01_ndark_circles.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -257,14 +257,14 @@ textures/gothic_wall/iron01_ndark_circles
 
 textures/gothic_wall/iron01_ntech
 {
-	qer_editorimage textures/gothic_wall/iron01_ntech.tga
+	qer_editorimage textures/gothic_wall/iron01_ntech.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/iron01_ntech.tga
+		map textures/gothic_wall/iron01_ntech.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -273,14 +273,14 @@ textures/gothic_wall/iron01_ntech
 
 textures/gothic_wall/iron01_ntech2
 {
-	qer_editorimage textures/gothic_wall/iron01_ntech2.tga
+	qer_editorimage textures/gothic_wall/iron01_ntech2.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/iron01_ntech2.tga
+		map textures/gothic_wall/iron01_ntech2.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -294,14 +294,14 @@ textures/gothic_wall/iron01_ntech2
 
 textures/gothic_door/door02_i_ornate5_fin
 {
-	qer_editorimage textures/gothic_door/door02_i_ornate5_fin.tga
+	qer_editorimage textures/gothic_door/door02_i_ornate5_fin.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_door/door02_i_ornate5_fin.tga
+		map textures/gothic_door/door02_i_ornate5_fin.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -313,12 +313,12 @@ textures/gothic_wall/xpipecolumn_gray_shiny
 {
 
         {
-                map textures/effects/tinfx.tga
+                map textures/effects/tinfx.png
                 tcGen environment
                 rgbGen identity
 	}
         {
-		map textures/gothic_wall/xpipecolumn_gray_shiny.tga
+		map textures/gothic_wall/xpipecolumn_gray_shiny.png
                 blendFunc blend
 		rgbGen identity
 	}
@@ -341,7 +341,7 @@ textures/gothic_wall/streetbricks10_shiny
 	}
 
 	{
-		map textures/gothic_wall/streetbricks11.tga
+		map textures/gothic_wall/streetbricks11.png
 		rgbGen identity
 		blendfunc gl_one gl_src_color
 	}
@@ -358,14 +358,14 @@ textures/gothic_wall/streetbricks10_shiny
 
 textures/gothic_wall/xoct20c_shiney
 {
-	qer_editorimage textures/gothic_wall/xoct20c_shiney.tga
+	qer_editorimage textures/gothic_wall/xoct20c_shiney.png
 	{
 		map $lightmap
 		rgbgen identity
 	}
 
 	{
-		map textures/gothic_wall/xoct20c_shiney.tga
+		map textures/gothic_wall/xoct20c_shiney.png
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular

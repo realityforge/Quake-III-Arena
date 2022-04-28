@@ -3,8 +3,8 @@
 //*******************************************************
 textures/gallery/gallery_sky
 {
-	qer_editorimage textures/skies/pjbasesky.tga
-	q3map_lightimage textures/skies/topclouds.tga
+	qer_editorimage textures/skies/pjbasesky.png
+	q3map_lightimage textures/skies/topclouds.png
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
@@ -16,13 +16,13 @@ textures/gallery/gallery_sky
 	skyparms full 128 -
 
 	{
-		map textures/skies/bluedimclouds.tga
+		map textures/skies/bluedimclouds.png
 		tcMod scroll 0.015 0.016
 		tcMod scale 3 3
 		depthWrite
 	}
 	{
-		map textures/skies/topclouds.tga
+		map textures/skies/topclouds.png
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll -0.01 -0.012
 		tcMod scale 5 5

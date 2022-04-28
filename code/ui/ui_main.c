@@ -4431,7 +4431,7 @@ static qboolean Character_Parse(char** p)
             }
 
             uiInfo.characterList[uiInfo.characterCount].headImage = -1;
-            uiInfo.characterList[uiInfo.characterCount].imageName = String_Alloc(va("models/players/heads/%s/icon_default.tga", uiInfo.characterList[uiInfo.characterCount].name));
+            uiInfo.characterList[uiInfo.characterCount].imageName = String_Alloc(va("models/players/heads/%s/icon_default.png", uiInfo.characterList[uiInfo.characterCount].name));
 
             if (tempStr && (!Q_stricmp(tempStr, "female"))) {
                 uiInfo.characterList[uiInfo.characterCount].base = String_Alloc("Janet");

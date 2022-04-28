@@ -2,7 +2,7 @@ explode11
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0000.tga
+		map sprites/explode1/fs2-0000.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -10,7 +10,7 @@ explode12
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0001.tga
+		map sprites/explode1/fs2-0001.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -18,7 +18,7 @@ explode13
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0002.tga
+		map sprites/explode1/fs2-0002.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -26,7 +26,7 @@ explode14
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0003.tga
+		map sprites/explode1/fs2-0003.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -34,7 +34,7 @@ explode15
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0004.tga
+		map sprites/explode1/fs2-0004.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -42,7 +42,7 @@ explode16
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0005.tga
+		map sprites/explode1/fs2-0005.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -50,7 +50,7 @@ explode17
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0006.tga
+		map sprites/explode1/fs2-0006.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -58,7 +58,7 @@ explode18
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0007.tga
+		map sprites/explode1/fs2-0007.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -66,7 +66,7 @@ explode19
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0008.tga
+		map sprites/explode1/fs2-0008.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -74,7 +74,7 @@ explode110
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0009.tga
+		map sprites/explode1/fs2-0009.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -82,7 +82,7 @@ explode111
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0010.tga
+		map sprites/explode1/fs2-0010.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -90,7 +90,7 @@ explode112
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0011.tga
+		map sprites/explode1/fs2-0011.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -98,7 +98,7 @@ explode113
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0012.tga
+		map sprites/explode1/fs2-0012.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -106,7 +106,7 @@ explode114
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0013.tga
+		map sprites/explode1/fs2-0013.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -114,7 +114,7 @@ explode115
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0014.tga
+		map sprites/explode1/fs2-0014.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -122,7 +122,7 @@ explode116
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0015.tga
+		map sprites/explode1/fs2-0015.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -130,7 +130,7 @@ explode117
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0016.tga
+		map sprites/explode1/fs2-0016.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -138,7 +138,7 @@ explode118
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0017.tga
+		map sprites/explode1/fs2-0017.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -146,7 +146,7 @@ explode119
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0018.tga
+		map sprites/explode1/fs2-0018.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -154,7 +154,7 @@ explode120
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0019.tga
+		map sprites/explode1/fs2-0019.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -162,7 +162,7 @@ explode121
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0020.tga
+		map sprites/explode1/fs2-0020.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -170,7 +170,7 @@ explode122
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0021.tga
+		map sprites/explode1/fs2-0021.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }
@@ -178,7 +178,7 @@ explode123
 {
 	cull none
 	{
-		map sprites/explode1/fs2-0022.tga
+		map sprites/explode1/fs2-0022.png
 		blendFunc GL_ONE GL_ONE_MINUS_SRC_COLOR
 	}
 }

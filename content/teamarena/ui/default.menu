@@ -103,7 +103,7 @@ itemDef {
 	type 1
 	textscale .3
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	rect 135 250 70 26
 	textalign 1
 	textalignx 35
@@ -123,7 +123,7 @@ itemDef {
       		name yes
 		group grpdefault
 		style WINDOW_STYLE_SHADER
-		background "ui/assets/framebutton.tga"
+		background "ui/assets/framebutton.png"
  		rect 135 250 70 26
       		visible 1 
 		decoration  	  
@@ -133,7 +133,7 @@ itemDef {
       		name yes
 		group grpdefault
 		style WINDOW_STYLE_SHADER
-		background "ui/assets/leftbutton.tga"
+		background "ui/assets/leftbutton.png"
    	   	rect 123 250 13 26
    	   	visible 1 
 		decoration  	  
@@ -143,7 +143,7 @@ itemDef {
 	      	name yes
 		group grpdefault
 		style WINDOW_STYLE_SHADER
-		background "ui/assets/rightbutton.tga"
+		background "ui/assets/rightbutton.png"
       		rect 204 250 13 26
      	 	visible 1 
 		decoration  	  
@@ -156,7 +156,7 @@ itemDef {
 	type 1
 	textscale .3
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.tga"
+	background "ui/assets/button_back.png"
 	rect 235 250 70 26
 	textalign 1
 	textalignx 35
@@ -174,7 +174,7 @@ itemDef {
       		name no
 		group grpdefault
 		style WINDOW_STYLE_SHADER
-		background "ui/assets/framebutton.tga"
+		background "ui/assets/framebutton.png"
  		rect 235 250 70 26
       		visible 1 
 		decoration  	  
@@ -184,7 +184,7 @@ itemDef {
       		name no
 		group grpdefault
 		style WINDOW_STYLE_SHADER
-		background "ui/assets/leftbutton.tga"
+		background "ui/assets/leftbutton.png"
    	   	rect 223 250 13 26
    	   	visible 1 
 		decoration  	  
@@ -194,7 +194,7 @@ itemDef {
 	      	name no
 		group grpdefault
 		style WINDOW_STYLE_SHADER
-		background "ui/assets/rightbutton.tga"
+		background "ui/assets/rightbutton.png"
       		rect 304 250 13 26
      	 	visible 1 
 		decoration  	  
@@ -233,7 +233,7 @@ itemDef {
 itemDef {
       	name fadebox
       	style WINDOW_STYLE_FILLED
- 	background "ui/assets/fadebox.tga"
+ 	background "ui/assets/fadebox.png"
 	forecolor 0 0 0 1
 	backcolor 0 0 0 1
 	rect 0 0 640 480
