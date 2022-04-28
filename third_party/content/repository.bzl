@@ -5,11 +5,12 @@ load(":metadata.bzl", _PAK_DATA = "PAK_DATA")
 load("//build_defs:http_repository_from_env.bzl", _http_repository_from_env = "http_repository_from_env")
 
 def _create_repository_data_from_metadata(name):
+    data = _PAK_DATA[name]
     build_content = """
 load("@org_realityforge_ioq3//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
 """
 
-    if None != _PAK_DATA[name].get("other_files"):
+    if None != data.get("other_files"):
         build_content += """
 
 filegroup(
@@ -19,7 +20,7 @@ filegroup(
 )
 """ % (name)
 
-    if None != _PAK_DATA[name].get("tga_files"):
+    if None != data.get("tga_files"):
         build_content += """
 
 filegroup(
@@ -31,7 +32,7 @@ filegroup(
 exports_files(_PAK_DATA["%s"]["tga_files"])
 """ % (name, name)
 
-    if None != _PAK_DATA[name].get("shader_files"):
+    if None != data.get("shader_files"):
         build_content += """
 
 filegroup(
@@ -43,9 +44,9 @@ filegroup(
 exports_files(_PAK_DATA["%s"]["shader_files"])
 """ % (name, name)
 
-    _sha256 = None
-    if None != _PAK_DATA[name].get("info") and None != _PAK_DATA[name]["info"].get("sha256"):
-        _sha256 = _PAK_DATA[name]["info"]["sha256"]
+    sha256 = None
+    if None != data["info"].get("sha256"):
+        sha256 = data["info"]["sha256"]
 
     return struct(sha256 = _sha256, build_content = build_content)
 
