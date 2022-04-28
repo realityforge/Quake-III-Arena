@@ -3,6 +3,8 @@ PAK_DATA = {
         "info": {
             "game": "baseq3",
             "sha256": "7ce8b3910620cd50a09e4f1100f426e8c6180f68895d589f80e6bd95af54bcae",
+            "base_url_env": "Q3TA_DIR",
+            "local_path": "baseq3/pak0.pk3",
         },
         "shader_files": [
             "scripts/base_wall.shader",
@@ -2805,6 +2807,8 @@ PAK_DATA = {
         "info": {
             "game": "baseq3",
             "sha256": "ccae938a2f13a03b24902d675181d516a431699701ed88023a307f34b5bcd58c",
+            "base_url_env": "Q3TA_DIR",
+            "local_path": "baseq3/pak2.pk3",
         },
         "shader_files": [
             "scripts/tim.shader",
@@ -2920,6 +2924,8 @@ PAK_DATA = {
         "info": {
             "game": "baseq3",
             "sha256": "af5f6d5c82fe4440ae0bb660f0648d1fa1731a9e8305a9eb652aa243428697f1",
+            "base_url_env": "Q3TA_DIR",
+            "local_path": "baseq3/pak4.pk3",
         },
         "tga_files": ["menu/art/gr/grlogo.tga"],
         "other_files": [
@@ -3175,6 +3181,8 @@ PAK_DATA = {
         "info": {
             "game": "baseq3",
             "sha256": "69f87070ca7719e252a3ba97e6483f6663939c987ede550d1268d4d9a07b45bc",
+            "base_url_env": "Q3TA_DIR",
+            "local_path": "baseq3/pak5.pk3",
         },
         "shader_files": ["scripts/gfx.shader"],
         "other_files": ["demos/demo127.dm_48"],
@@ -3183,6 +3191,8 @@ PAK_DATA = {
         "info": {
             "game": "baseq3",
             "sha256": "bb4f0ae2bf603b050fb665436d3178ce7c1c20360e67bacf7c14d93daff38daf",
+            "base_url_env": "Q3TA_DIR",
+            "local_path": "baseq3/pak6.pk3",
         },
         "shader_files": [
             "scripts/lightningnew.shader",
@@ -3237,20 +3247,30 @@ PAK_DATA = {
         "info": {
             "game": "baseq3",
             "sha256": "812c9e97f231e89cefede3848c6110b7bd34245093af6f22c2cacde3e6b15663",
+            "base_url_env": "Q3TA_DIR",
+            "local_path": "baseq3/pak8.pk3",
         },
         "other_files": ["demos/four.dm_68"],
     },
+    # See comment for QuakeArenaArcade_baseq3 for providence of this pak
     "a_QuakeArenaArcade_baseq3": {
         "info": {
             "game": "baseq3",
             "sha256": "d7911a9b115ae5e996ee784a2014c249b5d95d812e1e172030e8c9dfcb913cdc",
+            "base_url_env": "ASSETS_DIR",
+            "local_path": "baseq3/a_QuakeArenaArcade.pk3",
         },
         "shader_files": ["scripts/q3a-1.32.shader"],
     },
+    # License: id Software and Pi Studios for Quake Arena Arcade on Xbox 360.
+    # Luigi Auriemma for QuickBMS and the Quake Arena Arcade script.
+    # Sourced from https://www.moddb.com/mods/quake-arena-arcade-assets/downloads/quake-arena-arcade-assets
     "QuakeArenaArcade_baseq3": {
         "info": {
             "game": "baseq3",
             "sha256": "0b34447617641c915dcc28ae2fab30d86df41f297e6b30f7ce678f942cf76a45",
+            "base_url_env": "ASSETS_DIR",
+            "local_path": "baseq3/QuakeArenaArcade.pk3",
         },
         "shader_files": ["scripts/q3a-1.32e.shader"],
         "tga_files": [
@@ -3294,6 +3314,8 @@ PAK_DATA = {
         "info": {
             "game": "missionpack",
             "sha256": "fdb5fe4f15f22bd270628d9b3153b733ca4548207722e768051c08c9dbff9135",
+            "base_url_env": "Q3TA_DIR",
+            "local_path": "missionpack/pak0.pk3",
         },
         "shader_files": [
             "scripts/base_wall.shader",
@@ -6302,6 +6324,8 @@ PAK_DATA = {
         "info": {
             "game": "missionpack",
             "sha256": "9818e99ba58d91f231a650a3c42559d1c5661cb3c0dfd033ef4225ba8ecdfd60",
+            "base_url_env": "Q3TA_DIR",
+            "local_path": "missionpack/pak1.pk3",
         },
         "other_files": ["teaminfo.txt"],
     },
@@ -6309,13 +6333,19 @@ PAK_DATA = {
         "info": {
             "game": "missionpack",
             "sha256": "77c0bcbb61be81a389d8959b76969a801a5e589d97ab8aeb2cb7ced54f187fc7",
+            "base_url_env": "Q3TA_DIR",
+            "local_path": "missionpack/pak3.pk3",
         },
         "shader_files": ["scripts/models2.shader"],
     },
+    # HQQ (HD 2D Elements) repacked for Q3Quest
+    # Sourced from https://www.moddb.com/games/quake-iii-arena/addons/pak9hqq36-q3q
     "pak9hqq36": {
         "info": {
             "game": "baseq3",
             "sha256": "05ebdf270a7baf1b68dc5c4bb17557b1d8b0a6825b8d9570b341500e0324843e",
+            "base_url_env": "ASSETS_DIR",
+            "local_path": "baseq3/pak9hqq36.pk3",
         },
         "tga_files": [
             "gfx/2d/bigchars.tga",
@@ -6658,10 +6688,13 @@ PAK_DATA = {
             "textures/sfx/smallerblock3b3dim_pent.jpg",
         ],
     },
+    # See comment for QuakeArenaArcade_baseq3 for providence of this pak
     "QuakeArenaArcade_teamarena": {
         "info": {
             "game": "missionpack",
             "sha256": "4ac1e97e9e989709a101dfe19035ed3af535feedb3acd7477f2b078a9af5fe9a",
+            "base_url_env": "ASSETS_DIR",
+            "local_path": "missionpack/QuakeArenaArcade.pk3",
         },
         "tga_files": [
             "models/weapons2/gauntlet/gauntlet1.tga",
