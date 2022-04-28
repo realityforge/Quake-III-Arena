@@ -1,17 +1,9 @@
 load("//build_defs:assets.bzl", _convert_tga_to_png = "convert_tga_to_png")
 load("//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
 
-_convert_tga_to_png(
-    "@q3a_missionpack_pak0//",
-    _PAK_DATA["q3a_missionpack_pak0"]["tga_files"],
-    "q3a_teamarena_pak0_images",
-)
+_convert_tga_to_png(name = "q3a_missionpack_pak0")
 
-_convert_tga_to_png(
-    "@QuakeArenaArcade_teamarena//",
-    _PAK_DATA["QuakeArenaArcade_teamarena"]["tga_files"],
-    "QuakeArenaArcade_teamarena_images",
-)
+_convert_tga_to_png(name = "QuakeArenaArcade_teamarena")
 
 cc_library(
     name = "ui",

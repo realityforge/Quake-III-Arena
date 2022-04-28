@@ -1,41 +1,17 @@
 load("//build_defs:assets.bzl", _convert_tga_to_png = "convert_tga_to_png")
 load("//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
 
-_convert_tga_to_png(
-    "@q3a_baseq3_pak0//",
-    _PAK_DATA["q3a_baseq3_pak0"]["tga_files"],
-    "q3a_baseq3_pak0_images",
-)
+_convert_tga_to_png(name = "q3a_baseq3_pak0")
 
-_convert_tga_to_png(
-    "@q3a_baseq3_pak2//",
-    _PAK_DATA["q3a_baseq3_pak2"]["tga_files"],
-    "q3a_baseq3_pak2_images",
-)
+_convert_tga_to_png(name = "q3a_baseq3_pak2")
 
-_convert_tga_to_png(
-    "@q3a_baseq3_pak4//",
-    _PAK_DATA["q3a_baseq3_pak4"]["tga_files"],
-    "q3a_baseq3_pak4_images",
-)
+_convert_tga_to_png(name = "q3a_baseq3_pak4")
 
-_convert_tga_to_png(
-    "@q3a_baseq3_pak6//",
-    _PAK_DATA["q3a_baseq3_pak6"]["tga_files"],
-    "q3a_baseq3_pak6_images",
-)
+_convert_tga_to_png(name = "q3a_baseq3_pak6")
 
-_convert_tga_to_png(
-    "@QuakeArenaArcade_baseq3//",
-    _PAK_DATA["QuakeArenaArcade_baseq3"]["tga_files"],
-    "QuakeArenaArcade_baseq3_images",
-)
+_convert_tga_to_png(name = "QuakeArenaArcade_baseq3")
 
-_convert_tga_to_png(
-    "@pak9hqq36//",
-    _PAK_DATA["pak9hqq36"]["tga_files"],
-    "pak9hqq36_images",
-)
+_convert_tga_to_png(name = "pak9hqq36")
 
 filegroup(
     name = "material_assets",
