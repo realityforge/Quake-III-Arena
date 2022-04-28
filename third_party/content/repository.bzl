@@ -1,15 +1,10 @@
 """Bazel repository rules for loading content from original games."""
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_archive = "http_archive")
-load("@org_realityforge_ioq3//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
+load(":metadata.bzl", _PAK_DATA = "PAK_DATA")
+load("//build_defs:http_repository_from_env.bzl", _http_repository_from_env = "http_repository_from_env")
 
-_BASE_URL = "file:///Users/peter/Steam/quake3teamarena"
-_LOCAL_ASSETS_BASE_URL = "file:///Users/peter/Code/GameDev/Assets"
-
-def _pak(name, url):
-    if native.existing_rule(name):
-        return
-
+def _create_repository_data_from_metadata(name):
     build_content = """
 load("@org_realityforge_ioq3//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
 """
@@ -52,13 +47,28 @@ exports_files(_PAK_DATA["%s"]["shader_files"])
     if None != _PAK_DATA[name].get("info") and None != _PAK_DATA[name]["info"].get("sha256"):
         _sha256 = _PAK_DATA[name]["info"]["sha256"]
 
-    _http_archive(name = name, urls = [url], type = "zip", sha256 = _sha256, build_file_content = build_content)
+    return struct(sha256 = _sha256, build_content = build_content)
 
 def _local_pak(game, index):
-    _pak("q3a_%s_pak%d" % (game, index), "%s/%s/pak%d.pk3" % (_BASE_URL, game, index))
+    name = "q3a_%s_pak%d" % (game, index)
+    data = _create_repository_data_from_metadata(name)
+    _http_repository_from_env(
+        name = name,
+        base_url_env = "Q3TA_DIR",
+        local_path = "%s/pak%s.pk3" % (game, index),
+        sha256 = data.sha256,
+        build_file_content = data.build_content,
+    )
 
 def _local_assets(name, path):
-    _pak(name, "%s/%s" % (_LOCAL_ASSETS_BASE_URL, path))
+    data = _create_repository_data_from_metadata(name)
+    _http_repository_from_env(
+        name = name,
+        base_url_env = "ASSETS_DIR",
+        local_path = path,
+        sha256 = data.sha256,
+        build_file_content = data.build_content,
+    )
 
 def load_repository():
     # Quake 3 Arena
