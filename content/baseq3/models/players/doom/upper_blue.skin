@@ -1,6 +1,6 @@
-u_torso,models/players/doom/blue.tga
+u_torso,models/players/doom/blue.png
 tag_head,
 tag_torso,
 tag_weapon,
-u_larm,models/players/doom/blue.tga
-u_rarm,models/players/doom/blue.tga
+u_larm,models/players/doom/blue.png
+u_rarm,models/players/doom/blue.png

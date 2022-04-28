@@ -1,7 +1,7 @@
 tag_head,
-u_knife,models/players/fritzkrieg/Fritz_c.tga
+u_knife,models/players/fritzkrieg/Fritz_c.png
 tag_weapon,
-u_torso,models/players/fritzkrieg/fritz.tga
-u_larm,models/players/fritzkrieg/fritz.tga
+u_torso,models/players/fritzkrieg/fritz.png
+u_larm,models/players/fritzkrieg/fritz.png
 tag_torso,
-u_rarm,models/players/fritzkrieg/fritz_fx.tga
+u_rarm,models/players/fritzkrieg/fritz_fx.png

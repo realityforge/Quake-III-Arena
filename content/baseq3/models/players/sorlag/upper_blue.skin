@@ -1,8 +1,8 @@
 tag_weapon,
-u_arms,models/players/sorlag/blue.tga
-u_lten,models/players/sorlag/blue.tga
-u_neck,models/players/sorlag/blue.tga
-u_rten,models/players/sorlag/blue.tga
-u_torso,models/players/sorlag/blue_t.tga
+u_arms,models/players/sorlag/blue.png
+u_lten,models/players/sorlag/blue.png
+u_neck,models/players/sorlag/blue.png
+u_rten,models/players/sorlag/blue.png
+u_torso,models/players/sorlag/blue_t.png
 tag_head,
 tag_torso,
