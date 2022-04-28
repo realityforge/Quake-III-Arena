@@ -14,7 +14,7 @@ At this stage it is expected that the load process will continue to convert the 
 
 ### Challenges
 
-The names of the tga files are directly referenced from other assets or game code. These references need to be updated. The code that needs to be changed includes code in the renderer and the client game modules for `baseq3` and the `missionpack` games. The assets that will need to be updated include the material definitions (a.k.a. `*.shader` files), the `*.menu` files (in the `missionpack` game) and the `*.skin` files.
+The names of the tga files are directly referenced from other assets or game code. These references need to be updated. The code that needs to be changed includes code in the renderer and the client game modules for `baseq3` and the `missionpack` games. The assets that will need to be updated include the material definitions (a.k.a. `*.shader` files), the `*.menu` files (in the `missionpack` game) and the `*.skin` files. There is also material references from within the `*.md3` files but these are not as easy to update without writing a converter for the `.md3` file format. Rather than writing a converter a simpler and easier to implement solution would be to redirect requests for images ending in `*.tga` to an image ending with the extension `.png`.
 
 The project must ensure that the load times are not significantly more in any of the target platforms. It is expected that for many of the platforms, the decrease in file size will result in an overall reduction in load time even if it increases the load on the CPU as the load bottleneck is more likely to be IO rather than decoding.
 
