@@ -37,5 +37,7 @@ cc_library(
         "//third_party/puff",
         "//third_party/sdl",
         "@libjpeg_turbo//:jpeg",
+        "@libspng",
+        "@libspng//:libspng_impl",
     ],
 )
