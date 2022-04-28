@@ -38,6 +38,7 @@ _copy_to_directory(
     name = "baseq3",
     srcs = [
         "//content/baseq3:material_assets",
+        "//content/baseq3:skin_assets",
         "@QuakeArenaArcade_baseq3//:files",
         "@QuakeArenaArcade_baseq3//:png_files",
         "@pak9hqq36//:files",

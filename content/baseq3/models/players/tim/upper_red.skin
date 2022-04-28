@@ -1,0 +1,6 @@
+tag_weapon,
+u_rarm_t,models/players/medium/tim/timarm.TGA
+tag_head,
+tag_torso,
+u_larm_t,models/players/medium/tim/timarm.TGA
+u_torso_t,models/players/medium/tim/r_timtors.TGA

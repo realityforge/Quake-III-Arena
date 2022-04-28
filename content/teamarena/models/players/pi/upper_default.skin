@@ -1,0 +1,10 @@
+u_torso,models/players/pi/pi.tga
+u_arm01,models/players/pi/pi_t.tga
+u_armgearbox01,models/players/pi/pi.tga
+u_armgears01,models/players/pi/gear01.tga
+u_armgeart01,models/players/pi/endcap.tga
+u_armrod01,models/players/pi/piston.tga
+u_armwire01,models/players/pi/pi_t2.tga
+tag_head,
+tag_torso,
+tag_weapon,

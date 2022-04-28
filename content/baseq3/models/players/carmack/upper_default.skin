@@ -1,0 +1,9 @@
+tag_weapon,
+u_rarm,models/players/carmack/john03.TGA
+u_larm,models/players/carmack/john03.TGA
+tag_head,
+tag_torso,
+u_neck,models/players/carmack/john07.TGA
+u_torso1,models/players/carmack/john01.TGA
+u_torso2,models/players/carmack/john02.TGA
+u_torso3,models/players/carmack/john01.TGA

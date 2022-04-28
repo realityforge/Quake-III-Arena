@@ -1,0 +1,7 @@
+tag_head,
+tag_weapon,
+u_neck,models/players/cash/cashface.TGA
+u_torso,models/players/cash/cashtors.TGA
+u_larm,models/players/cash/casharm.TGA
+u_rarm,models/players/cash/casharm.TGA
+tag_torso,

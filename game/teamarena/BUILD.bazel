@@ -38,6 +38,7 @@ _copy_to_directory(
     name = "teamarena",
     srcs = [
         "//content/teamarena:material_assets",
+        "//content/teamarena:skin_assets",
         "//content/teamarena:ui_assets",
         "@QuakeArenaArcade_teamarena//:files",
         "@QuakeArenaArcade_teamarena//:png_files",
