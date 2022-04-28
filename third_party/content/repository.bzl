@@ -60,7 +60,7 @@ def _local_pak(game, index):
 def _local_assets(name, path):
     _pak(name, "%s/%s" % (_LOCAL_ASSETS_BASE_URL, path))
 
-def load_pak_repositories():
+def load_repository():
     # Quake 3 Arena
     _local_pak("baseq3", 0)
     _local_pak("baseq3", 2)
