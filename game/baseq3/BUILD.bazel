@@ -41,6 +41,7 @@ _copy_to_directory(
         "@QuakeArenaArcade_baseq3//:files",
         "@QuakeArenaArcade_baseq3//:png_files",
         "@pak9hqq36//:files",
+        "@pak9hqq36//:png_files",
         "@q3a_baseq3_pak0//:files",
         "@q3a_baseq3_pak0//:png_files",
         "@q3a_baseq3_pak2//:files",
