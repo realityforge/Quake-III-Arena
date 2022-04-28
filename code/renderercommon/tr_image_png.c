@@ -66,6 +66,7 @@ void R_LoadPNG(const char* name, byte** pImage, int* pWidth, int* pHeight)
         .calloc_fn = r_spng_calloc,
         .free_fn = r_spng_free
     };
+    char localName[MAX_QPATH];
 
     assert(NULL != name);
     assert(NULL != pImage);
@@ -76,7 +77,20 @@ void R_LoadPNG(const char* name, byte** pImage, int* pWidth, int* pHeight)
     *pWidth = 0;
     *pHeight = 0;
 
-    pAssetSize = ri.FS_ReadFile((char*)name, &pAssetData);
+    Q_strncpyz(localName, name, MAX_QPATH);
+
+    const char* ext = COM_GetExtension(localName);
+
+    // The MD3 files have embedded references to .tga textures which have
+    // all been converted to .png files. So we have to identify a request
+    // for a file with a .tga and treat it as a .png file. It is an ugly hack
+    // but is required until we convert the md3 files into a different format
+    if (!Q_stricmpn(ext, ".tga", MAX_QPATH)) {
+        COM_StripExtension(name, localName, MAX_QPATH);
+        Q_strcat(localName, MAX_QPATH, ".png");
+    }
+
+    pAssetSize = ri.FS_ReadFile((char*)localName, &pAssetData);
     if (NULL == pAssetData || -1 == pAssetSize) {
         goto resourceCleanup;
     } else {
@@ -84,21 +98,21 @@ void R_LoadPNG(const char* name, byte** pImage, int* pWidth, int* pHeight)
         if (NULL == ctx) {
             return;
         } else if (SPNG_OK != (result = spng_set_png_buffer(ctx, pAssetData, pAssetSize))) {
-            r_spng_error(name, result, "spng_set_png_buffer");
+            r_spng_error(localName, result, "spng_set_png_buffer");
             goto resourceCleanup;
         } else if (SPNG_OK != (result = spng_get_ihdr(ctx, &ihdr))) {
-            r_spng_error(name, result, "spng_get_ihdr");
+            r_spng_error(localName, result, "spng_get_ihdr");
             goto resourceCleanup;
         } else if (SPNG_OK != spng_decoded_image_size(ctx, SPNG_FMT_RGBA8, &size)) {
-            r_spng_error(name, result, "spng_decoded_image_size");
+            r_spng_error(localName, result, "spng_decoded_image_size");
             goto resourceCleanup;
         } else {
             image = ri.Malloc(size);
             if (NULL == image) {
-                r_spng_error(name, result, "ri.Malloc");
+                r_spng_error(localName, result, "ri.Malloc");
                 goto resourceCleanup;
             } else if (SPNG_OK != spng_decode_image(ctx, image, size, SPNG_FMT_RGBA8, SPNG_DECODE_TRNS | SPNG_DECODE_GAMMA)) {
-                r_spng_error(name, result, "spng_decode_image");
+                r_spng_error(localName, result, "spng_decode_image");
                 goto resourceCleanup;
             } else {
                 *pWidth = ihdr.width;

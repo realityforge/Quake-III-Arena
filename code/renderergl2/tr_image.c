@@ -2097,7 +2097,10 @@ typedef struct
 // when there are multiple images of different formats available
 static imageExtToLoaderMap_t imageLoaders[] = {
     { "png", R_LoadPNG },
-    { "tga", R_LoadTGA },
+    // The tga file extension is present because .md3 files embed these names sometimes but the
+    // actual texture has been converted to .png format. So we just route request for files of
+    // type ".tga" to png load and then look for the png file in the loaderw
+    { "tga", R_LoadPNG },
     { "jpg", R_LoadJPG },
     { "jpeg", R_LoadJPG }
 };
