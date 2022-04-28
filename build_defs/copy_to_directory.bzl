@@ -261,8 +261,9 @@ _copy_to_directory = rule(
     provides = [DefaultInfo],
 )
 
-def copy_to_directory(name, **kwargs):
+def copy_to_directory(name, srcs, exclude_prefixes = [], replace_prefixes = {}, downcase = False, **kwargs):
     """Copies files and directories to an output directory.
+
     Files and directories can be arranged as needed in the output directory using
     the `exclude_prefixes` and `replace_prefixes` attributes.
     Args:
@@ -290,4 +291,4 @@ def copy_to_directory(name, **kwargs):
         "//conditions:default": False,
     })
 
-    _copy_to_directory(name = name, is_windows = _is_windows, **kwargs)
+    _copy_to_directory(name = name, srcs = srcs, exclude_prefixes = exclude_prefixes, replace_prefixes = replace_prefixes, downcase = downcase, is_windows = _is_windows, **kwargs)
