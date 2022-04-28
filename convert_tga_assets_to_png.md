@@ -53,7 +53,9 @@ Several alternatives exist for reading and writing PNG files. The alternatives a
 
 Wuffs is a memory-safe programming language for wrangling untrusted file formats safely. The standard library includes parsing, decoding and encoding for file formats such as images, audio, video, fonts and compressed archives. It outputs normal c code and is very fast, very small and very safe. It is often a third of the size of equivalent functionality and can be 2-7 times faster. It could potentially be used to replace several parts of the project including the zlib, libjpeg, png, etc. support code. Wuff was not selected as it is a "beta" project that is subject to API changes and lacks adequate documentation. Once Wuffs has been released in non-beta version, this decision should be re-assessed.
 
-Libspng was the next project evaluated but was abandoned after a road block occurred and no obvious solution was presented in the documentation. Libpng was selected by "default" as it has a book dedicated to the library and it is the "standard" implementation that other implementations are compared to.
+Libpng is the broadly used reference library and has a comprehensive reference manual. It also has an extremely complex API and a history of security vulnerabilities. Despite these limitations, the initial implementation used libpng but it was later rejected due to the significant complexity associated with the implementation.
+
+Libspng was selected as it has a simple API, is substantially smaller and faster than libpng and was built with a focus on security. This includes following secure coding standards, having a comprehensive test suite and fuzz testing aand static analysis.
 
 #### Asset Conversion
 
