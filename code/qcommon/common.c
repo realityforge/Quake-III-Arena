@@ -1381,7 +1381,7 @@ void Com_InitHunkMemory(void)
 
     // make sure the file system has allocated and "not" freed any temp blocks
     // this allows the config and product id files ( journal files too ) to be loaded
-    // by the file system without redunant routines in the file system utilizing different
+    // by the file system without redundant routines in the file system utilizing different
     // memory systems
     if (FS_LoadStack() != 0) {
         Com_Error(ERR_FATAL, "Hunk initialization failed. File system load stack not zero");
@@ -1616,7 +1616,7 @@ void* Hunk_AllocateTempMemory(int size)
 
     // return a Z_Malloc'd block if the hunk has not been initialized
     // this allows the config and product id files ( journal files too ) to be loaded
-    // by the file system without redunant routines in the file system utilizing different
+    // by the file system without redundant routines in the file system utilizing different
     // memory systems
     if (s_hunkData == NULL) {
         return Z_Malloc(size);
@@ -1658,7 +1658,7 @@ void Hunk_FreeTempMemory(void* buf)
 
     // free with Z_Free if the hunk has not been initialized
     // this allows the config and product id files ( journal files too ) to be loaded
-    // by the file system without redunant routines in the file system utilizing different
+    // by the file system without redundant routines in the file system utilizing different
     // memory systems
     if (s_hunkData == NULL) {
         Z_Free(buf);
