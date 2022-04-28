@@ -105,17 +105,6 @@ menubacknologo
 
 }
 
-menubackRagePro	// blends turn to shit on rage pro, so skip it
-{
-	nopicmip
-	nomipmaps
-        {
-                map textures/sfx/logo512.png
-        }
-
-}
-
-
 levelShotDetail
 // used to break up the blur on levelshots
 {
