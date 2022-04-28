@@ -49,7 +49,7 @@ The major changes of the project are tracked in this table.
       <td>&nbsp;</td>
     </tr>
     <tr valign="top">
-      <td><a href="convert_tga_assets_to_png.html#phase_1">Convert TGA Assets to PNG</a></td>
+      <td><a href="convert_tga_assets_to_png.html">Convert TGA Assets to PNG</a></td>
       <td>2</td>
       <td>2</td>
       <td>0</td>
