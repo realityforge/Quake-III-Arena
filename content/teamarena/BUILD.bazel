@@ -1,5 +1,4 @@
 load("//build_defs:assets.bzl", _convert_tga_to_png = "convert_tga_to_png")
-load("//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
 
 _convert_tga_to_png(name = "q3a_missionpack_pak0")
 
