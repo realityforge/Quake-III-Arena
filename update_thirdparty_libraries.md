@@ -108,9 +108,9 @@ library or library version to upgrade to. The final step is to remove the source
     <td><code>?</code></td>
     <td>-</td>
     <td>-</td>
-    <td>0%</td>
+    <td>Complete</td>
     <td>
-        The puff code was extract from a version of zlib and used as to support png loading. This code is extremely inefficient and should be removed and an optimized png library adopted.
+        The puff code was extract from a version of zlib and used as to support png loading. The library `Libspng` has been adopted to load .png assets and thus this library was removed.
     </td>
   </tr>
   <tr valign="top">
