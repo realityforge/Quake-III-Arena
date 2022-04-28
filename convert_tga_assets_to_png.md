@@ -43,6 +43,8 @@ The first step was to analyze the usage of the TGA format within the game, the m
     * `gfx/colors/black.tga`
 * Many files within the `missionpack/pak0.pk3` or community addons did not include the alpha component.
 
+TGA images have "Orientation" data which indicates the order the the pixel data is stored in. So an image with "upside-down" pixel data can be flipped to be "right-side-up" when rendering the data by changing the orientation metadata. PNG has two metadata "chunks" that server a similar function (one standard and one in use prior to standardisation) but these are not widely supported. As a result we will need to store the data in the PNG without a metadata chunk which may involve transforming the data. See the article [Exif orientation in different formats](https://zpl.fi/exif-orientation-in-different-formats/) for further discussion on the topic.
+
 #### Engine Enhancement
 
 Several alternatives exist for reading and writing PNG files. The alternatives assessed include:
