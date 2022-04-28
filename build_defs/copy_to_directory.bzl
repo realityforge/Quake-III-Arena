@@ -255,7 +255,7 @@ _copy_to_directory = rule(
         "exclude_prefixes": attr.string_list(default = []),
         "replace_prefixes": attr.string_dict(default = {}),
         "is_windows": attr.bool(mandatory = True),
-        "downcase": attr.bool(mandatory = False, default = False),
+        "downcase": attr.bool(default = False),
     },
     implementation = _copy_to_directory_impl,
     provides = [DefaultInfo],
