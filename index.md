@@ -53,7 +53,7 @@ The major changes of the project are tracked in this table.
       <td>2</td>
       <td>2</td>
       <td>0</td>
-      <td>25%</td>
+      <td>75%</td>
       <td>2022-04-24</td>
       <td>&nbsp;</td>
     </tr>
