@@ -37,12 +37,12 @@ cc_binary(
 _copy_to_directory(
     name = "teamarena",
     srcs = [
-        "//content/teamarena:QuakeArenaArcade_teamarena_images",
         "//content/teamarena:material_assets",
-        "//content/teamarena:q3a_teamarena_pak0_images",
         "//content/teamarena:ui_assets",
         "@QuakeArenaArcade_teamarena//:files",
+        "@QuakeArenaArcade_teamarena//:png_files",
         "@q3a_missionpack_pak0//:files",
+        "@q3a_missionpack_pak0//:png_files",
         "@q3a_missionpack_pak1//:files",
     ],
     downcase = True,

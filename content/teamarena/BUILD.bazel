@@ -1,9 +1,3 @@
-load("//build_defs:assets.bzl", _convert_tga_to_png = "convert_tga_to_png")
-
-_convert_tga_to_png(name = "q3a_missionpack_pak0")
-
-_convert_tga_to_png(name = "QuakeArenaArcade_teamarena")
-
 cc_library(
     name = "ui",
     hdrs = ["ui/menudef.h"],

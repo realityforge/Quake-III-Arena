@@ -22,7 +22,7 @@ $(location @imagemagick//:magick) convert "$${INPUT}" "$@" && $(location @pngcru
         )
 
     native.filegroup(
-        name = "%s_images" % name,
+        name = "png_files",
         srcs = ["%s.png" % file.removesuffix(".tga").removesuffix(".TGA") for file in files],
-        visibility = ["//game/baseq3:__pkg__", "//game/teamarena:__pkg__"],
+        visibility = ["//visibility:public"],
     )

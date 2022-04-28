@@ -1,17 +1,3 @@
-load("//build_defs:assets.bzl", _convert_tga_to_png = "convert_tga_to_png")
-
-_convert_tga_to_png(name = "q3a_baseq3_pak0")
-
-_convert_tga_to_png(name = "q3a_baseq3_pak2")
-
-_convert_tga_to_png(name = "q3a_baseq3_pak4")
-
-_convert_tga_to_png(name = "q3a_baseq3_pak6")
-
-_convert_tga_to_png(name = "QuakeArenaArcade_baseq3")
-
-_convert_tga_to_png(name = "pak9hqq36")
-
 filegroup(
     name = "material_assets",
     srcs = [

@@ -8,6 +8,10 @@ def _create_repository_data_from_metadata(name):
     build_content = """
 load("@org_realityforge_ioq3//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
 """
+    if None != data.get("tga_files"):
+        build_content += """
+load("@org_realityforge_ioq3//build_defs:assets.bzl", _convert_tga_to_png = "convert_tga_to_png")
+"""
 
     if None != data.get("other_files"):
         build_content += """
@@ -28,8 +32,10 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+_convert_tga_to_png(name = "%s")
+
 exports_files(_PAK_DATA["%s"]["tga_files"])
-""" % (name, name)
+""" % (name, name, name)
 
     if None != data.get("shader_files"):
         build_content += """
