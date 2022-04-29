@@ -22,5 +22,6 @@ cc_binary(
         "@org_realityforge_ioq3//third_party:math",
         "@libpng",
         "@libpng//:libpng_impl",
+        "@zlib//:zlib_impl",
     ],
 )

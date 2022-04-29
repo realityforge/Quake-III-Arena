@@ -1,11 +1,17 @@
 # TODO: Extract product name into var somewhere ... also use that product name to generate product.h somewhere
 cc_binary(
     name = "Quake3Arena",
-    deps = ["//code/client:clientexe"],
+    deps = [
+        "//code/client:clientexe",
+        "@zlib//:zlib_impl",
+    ],
 )
 
 cc_binary(
     name = "Quake3ArenaServer",
     visibility = ["//game/mac:__pkg__"],
-    deps = ["//code/server:ded"],
+    deps = [
+        "//code/server:ded",
+        "@zlib//:zlib_impl",
+    ],
 )

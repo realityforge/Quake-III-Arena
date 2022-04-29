@@ -7,6 +7,20 @@ licenses(["notice"])  # BSD/MIT-like license (for zlib)
 
 cc_library(
     name = "zlib",
+    hdrs = ["zlib.h"],
+    copts = select({
+        "@org_realityforge_ioq3//build_defs:windows": [],
+        "//conditions:default": [
+            "-Wno-shift-negative-value",
+            "-DZ_HAVE_UNISTD_H",
+        ],
+    }),
+    includes = ["."],
+)
+
+
+cc_library(
+    name = "zlib_impl",
     srcs = [
         "adler32.c",
         "compress.c",
@@ -34,7 +48,6 @@ cc_library(
         "zutil.c",
         "zutil.h",
     ],
-    hdrs = ["zlib.h"],
     copts = select({
         "@org_realityforge_ioq3//build_defs:windows": [],
         "//conditions:default": [
@@ -43,4 +56,5 @@ cc_library(
         ],
     }),
     includes = ["."],
+    deps=[":zlib"]
 )
