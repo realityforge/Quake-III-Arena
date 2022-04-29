@@ -15,6 +15,81 @@
 # Default build options. These are applied first and unconditionally.
 #
 
+# makes cache management consistent across machines
+build --repository_cache=~/.cache/bazel-repo
+fetch --repository_cache=~/.cache/bazel-repo
+query --repository_cache=~/.cache/bazel-repo
+build --disk_cache=~/.cache/bazel-disk
+
+# To ensure Bazel builds consistently on windows.
+# See https://docs.bazel.build/versions/main/windows.html#enable-symlink-support
+startup --windows_enable_symlinks
+build --enable_runfiles
+
+# Ensures tests don't depend upon remote services
+# use tags=["requires-network"] on the test target
+# to enable network services for a specific test.
+build --sandbox_default_allow_network=false
+
+# Fix a bug where Bazel didn't enable sandboxing
+# for tests with tags=["exclusive"].
+test --incompatible_exclusive_test_sandboxed
+
+# Improve performance of sandbox by skipping the
+# older my_repo/external/other_repo symlinks.
+build --nolegacy_external_runfiles
+
+# Ensure that the Bazel server notices when a directory
+# changes, if you have a directory listed in the srcs of
+# some target.
+startup --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1
+
+# Improve remote cache checking speed by memorizing merkle
+# tree calculations, and tweak the amount of memory allocated to it.
+build --experimental_remote_merkle_tree_cache
+#build --experimental_remote_merkle_tree_cache_size=XX
+
+# If the grpc remote cache connection fails, it will fail
+# the build, add this so it falls back to the local cache.
+build --remote_local_fallback
+
+# Helps you debug when Bazel runs out of memory.
+build --heap_dump_on_oom
+
+# Do not stop at first error in build or analysis phase but keep going as long as prerequisties are successful
+common --keep_going
+
+# Do not embed build information in binaries. This reduces input volatility and maximizes build caching.
+build --nostamp
+
+# If you have both --noremote_upload_local_results and --disk_cache,
+# then this fixes a bug where Bazel doesn't write to the local
+# disk cache as it treats as a remote cache.
+build --incompatible_remote_results_ignore_disk
+
+# Speed up all builds by not checking if output files have been modified.
+build --noexperimental_check_output_files
+fetch --noexperimental_check_output_files
+query --noexperimental_check_output_files
+build --experimental_remote_merkle_tree_cache
+query --experimental_remote_merkle_tree_cache
+
+# TODO: This next one should be enabled when the Bazel version is later than 5.1.1
+# build --noexperimental_check_external_repository_files
+# fetch --noexperimental_check_external_repository_files
+# query --noexperimental_check_external_repository_files
+
+# Bazel's default for test_timeout is medium (5 min),
+# but most tests should instead be short (1 min).
+test --test_verbose_timeout_warnings
+
+# Don't upload artifacts referenced in the BEP if the action can't be cached remotely.
+build --incompatible_remote_build_event_upload_respect_no_cache
+
+# Change the behavior of bazel test to not bother building targets
+# which aren't dependencies of the tests.
+test --build_tests_only
+
 # Make Bazel print out all options from rc files.
 build --announce_rc
 
