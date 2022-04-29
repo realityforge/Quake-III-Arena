@@ -4,6 +4,7 @@ def load_repository():
     if native.existing_rule("libpng"):
         return
 
+    # libpng is no longer used in the main application but continues to be used in pngcrush
     _http_archive(
         name = "libpng",
         build_file = "//third_party/libpng:libpng.BUILD.bazel",
