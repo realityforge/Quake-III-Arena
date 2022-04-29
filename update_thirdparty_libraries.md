@@ -110,7 +110,7 @@ library or library version to upgrade to. The final step is to remove the source
     <td>-</td>
     <td>Complete</td>
     <td>
-        The puff code was extract from a version of zlib and used as to support png loading. The library `Libspng` has been adopted to load .png assets and thus this library was removed.
+        The puff code was extracted from an (unknown) version of zlib and used as part of the custom png loading code. The third party library `Libspng` has been adopted to load .png assets, the custom png loading code has been removed and thus the puff library has been removed.
     </td>
   </tr>
   <tr valign="top">
