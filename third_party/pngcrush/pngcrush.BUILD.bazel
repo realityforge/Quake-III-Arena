@@ -9,7 +9,14 @@ cc_binary(
     srcs = ["cexcept.h", ":pngcrush_h_generator", "pngcrush.c"],
     includes = ["generated"],
     copts = ["-std=c90", "-O3", "-funroll-loops", "-fomit-frame-pointer", "-Wno-self-assign", "-Wno-format-pedantic", "-Wno-overlength-strings", "-Wno-declaration-after-statement"],
-    defines = ["PNGCRUSH_TIMERS=11", "PNGCRUSH_USE_CLOCK_GETTIME=1"],
+    defines = [
+        "PNGCRUSH_TIMERS=11",
+        "PNGCRUSH_USE_CLOCK_GETTIME=1",
+        "PNGCRUSH_USE_ARM_NEON",
+        "PNGCRUSH_USE_MPS_MSA",
+        "PNGCRUSH_USE_INTEL_SSE",
+        "PNGCRUSH_USE_POWERPC_VSX",
+    ],
     visibility = ["//visibility:public"],
     deps = [
         "@org_realityforge_ioq3//third_party:math",
