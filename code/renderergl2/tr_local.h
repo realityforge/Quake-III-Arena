@@ -2285,7 +2285,7 @@ typedef struct {
     int numDrawSurfs;
 } drawSurfsCommand_t;
 
-typedef struct {
+typedef struct screenshotCommand_s {
     int commandId;
     int x;
     int y;
