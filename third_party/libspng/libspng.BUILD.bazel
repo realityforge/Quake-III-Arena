@@ -11,8 +11,6 @@ cc_library(
 cc_library(
     name = "libspng_impl",
     srcs = ["spng/spng.c"],
-    #    copts = ["-Wno-unused-but-set-variable"],
-    #    includes = ["."],
     visibility = ["//visibility:public"],
     deps = [":libspng", "@zlib"],
 )
