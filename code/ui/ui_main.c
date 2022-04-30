@@ -4812,7 +4812,7 @@ static void UI_BuildQ3Model_List(void)
             continue;
 
         // iterate all skin files in directory
-        numfiles = trap_FS_GetFileList(va("models/players/%s", dirptr), "tga", filelist, 2048);
+        numfiles = trap_FS_GetFileList(va("models/players/%s", dirptr), "png", filelist, 2048);
         fileptr = filelist;
         for (j = 0; j < numfiles && uiInfo.q3HeadCount < MAX_PLAYERMODELS; j++, fileptr += filelen + 1) {
             filelen = strlen(fileptr);
