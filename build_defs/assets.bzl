@@ -7,7 +7,7 @@ def convert_tga_to_png(name):
     package_label = "@%s//" % name
     files = _PAK_DATA[name]["tga_files"]
     for file in files:
-        _file_sans_extension = file.removesuffix(".tga").removesuffix(".TGA")
+        _file_sans_extension = file.removesuffix(".tga").removesuffix(".TGA").lower()
         _input_label = "%s:%s" % (package_label, file)
         _output_file = "%s.png" % _file_sans_extension
         native.genrule(
@@ -23,6 +23,6 @@ $(location @imagemagick//:magick) convert -auto-orient "$${INPUT}" "$@" && $(loc
 
     native.filegroup(
         name = "png_files",
-        srcs = ["%s.png" % file.removesuffix(".tga").removesuffix(".TGA") for file in files],
+        srcs = ["%s.png" % file.removesuffix(".tga").removesuffix(".TGA").lower() for file in files],
         visibility = ["//visibility:public"],
     )
