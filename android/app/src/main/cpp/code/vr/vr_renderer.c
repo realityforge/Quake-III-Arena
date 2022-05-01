@@ -345,6 +345,12 @@ void VR_DrawFrame( engine_t* engine ) {
 
 		Com_Frame();
 
+		// Clear the alpha channel, other way VR API would not transfer the framebuffer fully
+		glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
+		glClearColor(0.0, 0.0, 0.0, 1.0);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+
 		engine->framebuffers.swapchainIndex = (engine->framebuffers.swapchainIndex + 1) %
 			engine->framebuffers.swapchainLength;
 
