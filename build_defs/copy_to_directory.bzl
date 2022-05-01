@@ -225,8 +225,7 @@ if exist "{src}\\*" (
 
 def _copy_to_directory_impl(ctx):
     if not ctx.attr.srcs:
-        msg = "srcs must not be empty in copy_to_directory %s" % ctx.label
-        fail(msg)
+        fail("srcs must not be empty in copy_to_directory %s" % ctx.label)
 
     output = ctx.actions.declare_directory(ctx.attr.name)
 
