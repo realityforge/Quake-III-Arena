@@ -1640,7 +1640,7 @@ Multiple files can be loaded in temporary memory.
 When the files-in-use count reaches zero, all temp memory will be deleted
 =================
 */
-void* Hunk_AllocateTempMemory(int size)
+void* Hunk_AllocateTempMemory(const size_t size)
 {
     void* buf;
     hunkHeader_t* hdr;
