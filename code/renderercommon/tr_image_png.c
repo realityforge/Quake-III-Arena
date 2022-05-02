@@ -52,6 +52,10 @@ static void* r_spng_calloc(size_t count, size_t size)
     return pPtr;
 }
 
+// The alloc structure that is used to allocate/release memory by PNG that is expected to persist over time
+// (i.e. This is used by the read functions as the pixel data will persist for the duration of a scene)
+static struct spng_alloc long_term_spng_alloc = { .malloc_fn = r_spng_malloc, .realloc_fn = r_spng_realloc, .calloc_fn = r_spng_calloc, .free_fn = r_spng_free };
+
 static void r_spng_load_error(const char* name, const int result, const char* functionName)
 {
     ri.Printf(PRINT_WARNING, "R_LoadPNG: Failed to load png file named %s due to %s error calling %s.\n", name, spng_strerror(result), functionName);
@@ -66,12 +70,6 @@ void R_LoadPNG(const char* name, byte** pImage, int* pWidth, int* pHeight)
     void* pAssetData = NULL;
     long pAssetSize;
     int result;
-    struct spng_alloc alloc = {
-        .malloc_fn = r_spng_malloc,
-        .realloc_fn = r_spng_realloc,
-        .calloc_fn = r_spng_calloc,
-        .free_fn = r_spng_free
-    };
     char localName[MAX_QPATH];
 
     assert(NULL != name);
@@ -100,7 +98,7 @@ void R_LoadPNG(const char* name, byte** pImage, int* pWidth, int* pHeight)
     if (NULL == pAssetData || -1 == pAssetSize) {
         goto resourceCleanup;
     } else {
-        ctx = spng_ctx_new2(&alloc, 0);
+        ctx = spng_ctx_new2(&long_term_spng_alloc, 0);
         if (NULL == ctx) {
             return;
         } else if (SPNG_OK != (result = spng_set_image_limits(ctx, MAX_PNG_WIDTH, MAX_PNG_HEIGHT))) {
