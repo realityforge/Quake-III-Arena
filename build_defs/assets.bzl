@@ -6,11 +6,13 @@ load("//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
 def convert_tga_to_png(name):
     package_label = "@%s//" % name
     files = _PAK_DATA[name]["tga_files"]
+    output_files = []
     for file in files:
         _file_sans_extension = file.removesuffix(".tga").removesuffix(".TGA").lower()
         _input_label = "%s:%s" % (package_label, file)
         _output_file = "%s.png" % _file_sans_extension
         _target_name = "%s.png_gen" % _file_sans_extension
+        output_files.append(_target_name)
         native.genrule(
             name = _target_name,
             srcs = [_input_label],
@@ -22,8 +24,4 @@ $(location @imagemagick//:magick) convert -auto-orient "$${INPUT}" "$@" && $(loc
             tools = ["@imagemagick//:magick", "@pngcrush"],
         )
 
-    native.filegroup(
-        name = "png_files",
-        srcs = ["%s.png" % file.removesuffix(".tga").removesuffix(".TGA").lower() for file in files],
-        visibility = ["//visibility:public"],
-    )
+    native.filegroup(name = "png_files", srcs = output_files, visibility = ["//visibility:public"])
