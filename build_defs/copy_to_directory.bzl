@@ -136,6 +136,7 @@ def _copy_to_dir_bash(ctx, copy_paths, dst_dir):
     for src_path, dst_path, src_file in copy_paths:
         inputs.append(src_file)
 
+        dst_path_dir = _paths.dirname(dst_path)
         cmds.append("""
 if [[ ! -e "{src}" ]]; then echo "file '{src}' does not exist"; exit 1; fi
 if [[ -e "{dst}" ]]; then echo "file '{dst}' already exists. Duplicate files present"; exit 1; fi
@@ -146,7 +147,7 @@ else
     mkdir -p "{dst}"
     cp -fR "{src}"/* "{dst}"
 fi
-""".format(src = src_path, dst_dir = _paths.dirname(dst_path), dst = dst_path))
+""".format(src = src_path, dst_dir = dst_path_dir, dst = dst_path))
 
     ctx.actions.run_shell(
         inputs = inputs,
