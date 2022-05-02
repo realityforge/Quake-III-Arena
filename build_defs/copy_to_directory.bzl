@@ -124,7 +124,7 @@ def _copy_paths(ctx, src):
 
     return src_path, output_path, src_file
 
-def _copy_to_dir_bash(ctx, copy_paths, dst_dir):
+def _copy_to_dir_bash(ctx, copy_paths, dst_dir, allow_symlink):
     cmds = [
         "set -o errexit -o nounset -o pipefail",
         "rm -rf \"%s\"" % dst_dir.path,
@@ -140,12 +140,24 @@ def _copy_to_dir_bash(ctx, copy_paths, dst_dir):
         cmds.append("""
 if [[ ! -e "{src}" ]]; then echo "file '{src}' does not exist"; exit 1; fi
 if [[ -e "{dst}" ]]; then echo "file '{dst}' already exists. Duplicate files present in srcs"; exit 1; fi
+""".format(src = src_path, dst = dst_path))
+        if allow_symlink == False:
+            cmds.append("""
 if [[ -f "{src}" ]]; then
     mkdir -p "{dst_dir}"
     cp -f "{src}" "{dst}"
 else
     mkdir -p "{dst}"
     cp -fR "{src}"/* "{dst}"
+fi
+""".format(src = src_path, dst_dir = dst_path_dir, dst = dst_path))
+        else:
+            cmds.append("""
+if [[ -f "{src}" ]]; then
+    mkdir -p "{dst_dir}"
+    ln -w -s `pwd`/"{src}" `pwd`/"{dst}"
+else
+    ln -w -s `pwd`/"{src}" `pwd`/"{dst}"
 fi
 """.format(src = src_path, dst_dir = dst_path_dir, dst = dst_path))
 
@@ -243,7 +255,7 @@ def _copy_to_directory_impl(ctx):
     if ctx.attr.is_windows:
         _copy_to_dir_cmd(ctx, copy_paths, output)
     else:
-        _copy_to_dir_bash(ctx, copy_paths, output)
+        _copy_to_dir_bash(ctx, copy_paths, output, ctx.attr.allow_symlink)
     return [
         DefaultInfo(
             files = depset([output]),
@@ -258,12 +270,13 @@ _copy_to_directory = rule(
         "replace_prefixes": attr.string_dict(default = {}),
         "is_windows": attr.bool(mandatory = True),
         "downcase": attr.bool(default = False),
+        "allow_symlink": attr.bool(default = False),
     },
     implementation = _copy_to_directory_impl,
     provides = [DefaultInfo],
 )
 
-def copy_to_directory(name, srcs, exclude_prefixes = [], replace_prefixes = {}, downcase = False, **kwargs):
+def copy_to_directory(name, srcs, exclude_prefixes = [], replace_prefixes = {}, downcase = False, allow_symlink = False, **kwargs):
     """Copies files and directories to an output directory.
 
     Files and directories can be arranged as needed in the output directory using
@@ -285,6 +298,12 @@ def copy_to_directory(name, srcs, exclude_prefixes = [], replace_prefixes = {}, 
             If there are multiple keys that match, the longest match wins.
         downcase: True to convert the filename to lowercase when copying from source to destination location.
             Defaults to False.
+        allow_symlink: A boolean. Whether to allow symlinking instead of copying.
+            When False, the output is always a hard copy. When True, the output
+            *can* be a symlink, but there is no guarantee that a symlink is
+            created (i.e., at the time of writing, we don't create symlinks on
+            Windows). Set this to True if you need fast copying and your tools can
+            handle symlinks (which most UNIX tools can).
         **kwargs: Other common named parameters such as `tags` or `visibility`
     """
 
@@ -293,4 +312,4 @@ def copy_to_directory(name, srcs, exclude_prefixes = [], replace_prefixes = {}, 
         "//conditions:default": False,
     })
 
-    _copy_to_directory(name = name, srcs = srcs, exclude_prefixes = exclude_prefixes, replace_prefixes = replace_prefixes, downcase = downcase, is_windows = _is_windows, **kwargs)
+    _copy_to_directory(name = name, srcs = srcs, exclude_prefixes = exclude_prefixes, replace_prefixes = replace_prefixes, downcase = downcase, allow_symlink = allow_symlink, is_windows = _is_windows, **kwargs)
