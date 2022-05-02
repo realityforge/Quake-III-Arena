@@ -10,8 +10,9 @@ def convert_tga_to_png(name):
         _file_sans_extension = file.removesuffix(".tga").removesuffix(".TGA").lower()
         _input_label = "%s:%s" % (package_label, file)
         _output_file = "%s.png" % _file_sans_extension
+        _target_name = "%s.png_gen" % _file_sans_extension
         native.genrule(
-            name = "%s.png_gen" % _file_sans_extension,
+            name = _target_name,
             srcs = [_input_label],
             outs = [_output_file],
             cmd = """
