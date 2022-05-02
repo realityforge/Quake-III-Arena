@@ -96,31 +96,31 @@ void R_LoadPNG(const char* name, byte** pImage, int* pWidth, int* pHeight)
 
     pAssetSize = ri.FS_ReadFile((char*)localName, &pAssetData);
     if (NULL == pAssetData || -1 == pAssetSize) {
-        goto resourceCleanup;
+        goto cleanup;
     } else {
         ctx = spng_ctx_new2(&long_term_spng_alloc, 0);
         if (NULL == ctx) {
             return;
         } else if (SPNG_OK != (result = spng_set_image_limits(ctx, MAX_PNG_WIDTH, MAX_PNG_HEIGHT))) {
             r_spng_load_error(localName, result, "spng_set_image_limits");
-            goto resourceCleanup;
+            goto cleanup;
         } else if (SPNG_OK != (result = spng_set_png_buffer(ctx, pAssetData, pAssetSize))) {
             r_spng_load_error(localName, result, "spng_set_png_buffer");
-            goto resourceCleanup;
+            goto cleanup;
         } else if (SPNG_OK != (result = spng_get_ihdr(ctx, &ihdr))) {
             r_spng_load_error(localName, result, "spng_get_ihdr");
-            goto resourceCleanup;
+            goto cleanup;
         } else if (SPNG_OK != spng_decoded_image_size(ctx, SPNG_FMT_RGBA8, &size)) {
             r_spng_load_error(localName, result, "spng_decoded_image_size");
-            goto resourceCleanup;
+            goto cleanup;
         } else {
             image = ri.Malloc(size);
             if (NULL == image) {
                 r_spng_load_error(localName, result, "ri.Malloc");
-                goto resourceCleanup;
+                goto cleanup;
             } else if (SPNG_OK != spng_decode_image(ctx, image, size, SPNG_FMT_RGBA8, SPNG_DECODE_TRNS | SPNG_DECODE_GAMMA)) {
                 r_spng_load_error(localName, result, "spng_decode_image");
-                goto resourceCleanup;
+                goto cleanup;
             } else {
                 *pWidth = ihdr.width;
                 *pHeight = ihdr.height;
@@ -130,7 +130,7 @@ void R_LoadPNG(const char* name, byte** pImage, int* pWidth, int* pHeight)
             }
         }
     }
-resourceCleanup:
+cleanup:
     if (NULL != image) {
         free(image);
     }
