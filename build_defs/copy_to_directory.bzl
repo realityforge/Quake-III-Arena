@@ -127,6 +127,7 @@ def _copy_paths(ctx, src):
 def _copy_to_dir_bash(ctx, copy_paths, dst_dir):
     cmds = [
         "set -o errexit -o nounset -o pipefail",
+        "rm -rf \"%s\"" % dst_dir.path,
         "mkdir -p \"%s\"" % dst_dir.path,
     ]
 
@@ -137,6 +138,7 @@ def _copy_to_dir_bash(ctx, copy_paths, dst_dir):
 
         cmds.append("""
 if [[ ! -e "{src}" ]]; then echo "file '{src}' does not exist"; exit 1; fi
+if [[ -e "{dst}" ]]; then echo "file '{dst}' already exists. Duplicate files present"; exit 1; fi
 if [[ -f "{src}" ]]; then
     mkdir -p "{dst_dir}"
     cp -f "{src}" "{dst}"
