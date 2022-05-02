@@ -52,7 +52,7 @@ static void* r_spng_calloc(size_t count, size_t size)
     return pPtr;
 }
 
-static void r_spng_error(const char* name, const int result, const char* functionName)
+static void r_spng_load_error(const char* name, const int result, const char* functionName)
 {
     ri.Printf(PRINT_WARNING, "R_LoadPNG: Failed to load png file named %s due to %s error calling %s.\n", name, spng_strerror(result), functionName);
 }
@@ -104,24 +104,24 @@ void R_LoadPNG(const char* name, byte** pImage, int* pWidth, int* pHeight)
         if (NULL == ctx) {
             return;
         } else if (SPNG_OK != (result = spng_set_image_limits(ctx, MAX_PNG_WIDTH, MAX_PNG_HEIGHT))) {
-            r_spng_error(localName, result, "spng_set_image_limits");
+            r_spng_load_error(localName, result, "spng_set_image_limits");
             goto resourceCleanup;
         } else if (SPNG_OK != (result = spng_set_png_buffer(ctx, pAssetData, pAssetSize))) {
-            r_spng_error(localName, result, "spng_set_png_buffer");
+            r_spng_load_error(localName, result, "spng_set_png_buffer");
             goto resourceCleanup;
         } else if (SPNG_OK != (result = spng_get_ihdr(ctx, &ihdr))) {
-            r_spng_error(localName, result, "spng_get_ihdr");
+            r_spng_load_error(localName, result, "spng_get_ihdr");
             goto resourceCleanup;
         } else if (SPNG_OK != spng_decoded_image_size(ctx, SPNG_FMT_RGBA8, &size)) {
-            r_spng_error(localName, result, "spng_decoded_image_size");
+            r_spng_load_error(localName, result, "spng_decoded_image_size");
             goto resourceCleanup;
         } else {
             image = ri.Malloc(size);
             if (NULL == image) {
-                r_spng_error(localName, result, "ri.Malloc");
+                r_spng_load_error(localName, result, "ri.Malloc");
                 goto resourceCleanup;
             } else if (SPNG_OK != spng_decode_image(ctx, image, size, SPNG_FMT_RGBA8, SPNG_DECODE_TRNS | SPNG_DECODE_GAMMA)) {
-                r_spng_error(localName, result, "spng_decode_image");
+                r_spng_load_error(localName, result, "spng_decode_image");
                 goto resourceCleanup;
             } else {
                 *pWidth = ihdr.width;
