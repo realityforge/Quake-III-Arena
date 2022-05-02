@@ -40,6 +40,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <sys/wait.h>
 #endif
 
+#if defined(WIN32) || defined(_WIN32)
+#define PATH_SEPARATOR "\\"
+#else
+#define PATH_SEPARATOR "/"
+#endif
+
 // Used to determine where to store user-specific files
 static char homePath[MAX_OSPATH] = { 0 };
 
@@ -691,14 +697,17 @@ qboolean Sys_DllExtension(const char* name)
 #ifdef __APPLE__
 /*
 =================
-Sys_StripAppBundle
+Sys_ExtractBasedir
 
-Discovers if passed dir is suffixed with the directory structure of a Mac OS X
-.app bundle. If it is, the .app directory structure is stripped off the end and
-the result is returned. If not, dir is returned untouched.
+If the passed in dir is the MacOS (executable) dir in an MacOS Application Bundle
+then the base directory for assets can not be the same as the base directory for
+the executables as the MacOS operating system will expect all files within the MacOS
+directory to be signed executable files. Thus we look for the assets in the "standard"
+location for assets in an application bundle which is "Contents/Resources". If the
+passed in directory is not an .app bundle then the passed in directory is returned.
 =================
 */
-char* Sys_StripAppBundle(char* dir)
+char* Sys_ExtractBasedir(char* dir)
 {
     static char cwd[MAX_OSPATH];
 
@@ -712,6 +721,7 @@ char* Sys_StripAppBundle(char* dir)
     if (!strstr(Sys_Basename(cwd), ".app"))
         return dir;
     Q_strncpyz(cwd, Sys_Dirname(cwd), sizeof(cwd));
+    Q_strncpyz(cwd, "Contents" PATH_SEPARATOR "Resources", sizeof(cwd));
     return cwd;
 }
 #endif // __APPLE__

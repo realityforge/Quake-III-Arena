@@ -46,7 +46,7 @@ unsigned int CON_LogWrite(const char* in);
 unsigned int CON_LogRead(char* out, unsigned int outSize);
 
 #ifdef __APPLE__
-char* Sys_StripAppBundle(char* pwd);
+char* Sys_ExtractBasedir(char* pwd);
 #endif
 
 void Sys_PlatformInit(void);
