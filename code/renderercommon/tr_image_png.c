@@ -17,6 +17,12 @@ limitations under the License.
 #include "tr_common.h"
 #include <spng.h>
 
+// Some guesses at reasonable PNG limits. As we are potentially decoding untrusted files, we should
+// protect against failures due to excessive memory consumption. If a PNG exceeds these limits then it
+// will simply fail to be loaded. Each image will take at most (MAX_PNG_WIDTH x MAX_PNG_HEIGHT
+#define MAX_PNG_WIDTH 2048
+#define MAX_PNG_HEIGHT 2048
+
 static void* r_spng_malloc(const size_t size)
 {
     return ri.Malloc(size);
@@ -97,6 +103,9 @@ void R_LoadPNG(const char* name, byte** pImage, int* pWidth, int* pHeight)
         ctx = spng_ctx_new2(&alloc, 0);
         if (NULL == ctx) {
             return;
+        } else if (SPNG_OK != (result = spng_set_image_limits(ctx, MAX_PNG_WIDTH, MAX_PNG_HEIGHT))) {
+            r_spng_error(localName, result, "spng_set_image_limits");
+            goto resourceCleanup;
         } else if (SPNG_OK != (result = spng_set_png_buffer(ctx, pAssetData, pAssetSize))) {
             r_spng_error(localName, result, "spng_set_png_buffer");
             goto resourceCleanup;
