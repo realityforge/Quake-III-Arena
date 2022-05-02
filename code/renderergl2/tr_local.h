@@ -1890,7 +1890,7 @@ void R_Init(void);
 void R_UpdateSubImage(image_t* image, byte* pic, int x, int y, int width, int height, GLenum picFormat);
 
 void R_SetColorMappings(void);
-void R_GammaCorrect(byte* buffer, int bufSize);
+void R_GammaCorrect(byte* buffer, const size_t bufSize);
 
 void R_ImageList_f(void);
 void R_SkinList_f(void);

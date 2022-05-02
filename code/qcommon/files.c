@@ -1713,7 +1713,7 @@ FS_WriteFile
 Filename are relative to the quake search path
 ============
 */
-void FS_WriteFile(const char* qpath, const void* buffer, int size)
+void FS_WriteFile(const char* qpath, const void* buffer, const size_t size)
 {
     fileHandle_t f;
 

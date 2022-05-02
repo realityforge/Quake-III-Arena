@@ -559,7 +559,7 @@ void FS_ForceFlush(fileHandle_t f);
 void FS_FreeFile(void* buffer);
 // frees the memory returned by FS_ReadFile
 
-void FS_WriteFile(const char* qpath, const void* buffer, int size);
+void FS_WriteFile(const char* qpath, const void* buffer, const size_t size);
 // writes a complete file, creating any subdirectories needed
 
 long FS_filelength(fileHandle_t f);

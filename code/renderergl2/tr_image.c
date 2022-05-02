@@ -36,7 +36,7 @@ static image_t* hashTable[FILE_HASH_SIZE];
 /*
 ** R_GammaCorrect
 */
-void R_GammaCorrect(byte* buffer, int bufSize)
+void R_GammaCorrect(byte* buffer, const size_t bufSize)
 {
     int i;
 

@@ -167,7 +167,7 @@ typedef struct {
     void (*FS_FreeFile)(void* buf);
     char** (*FS_ListFiles)(const char* name, const char* extension, int* numfilesfound);
     void (*FS_FreeFileList)(char** filelist);
-    void (*FS_WriteFile)(const char* qpath, const void* buffer, int size);
+    void (*FS_WriteFile)(const char* qpath, const void* buffer, const size_t size);
     qboolean (*FS_FileExists)(const char* file);
 
     // cinematic stuff
