@@ -267,7 +267,7 @@ def copy_to_directory(name, srcs, exclude_prefixes = [], replace_prefixes = {}, 
     the `exclude_prefixes` and `replace_prefixes` attributes.
     Args:
         name: A unique name for this target.
-        srcs: Files and/or directories or targets that provide DirectoryPathInfo to copy into the output directory.
+        srcs: Files to copy into the output directory.
         exclude_prefixes: List of path prefixes to exclude from output directory.
             If the output directory path for a file or directory starts with or is equal to
             a path in the list then that file is not copied to the output directory.
