@@ -475,7 +475,7 @@ void RB_TakeScreenshot(int x, int y, int width, int height, char* fileName, qboo
     if (qtrue == jpeg) {
         RE_SaveJPG(fileName, r_screenshotJpegQuality->integer, width, height, buffer + offset, padlen);
     } else {
-        RE_SavePNG(fileName, width, height, buffer + offset, memcount, padlen);
+        RE_SavePNG(fileName, width, height, buffer + offset, padlen);
     }
     ri.Hunk_FreeTempMemory(buffer);
 }

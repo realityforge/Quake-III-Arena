@@ -196,12 +196,7 @@ static void r_spng_save_error(const char* name, const int result, const char* fu
  * Save the specified image data in PNG format to specified filename.
  * Input data is in RGB form with a possible padding at the end of each row.
  */
-void RE_SavePNG(const char* filename,
-                const uint32_t image_width,
-                const uint32_t image_height,
-                const byte* image_buffer,
-                const size_t image_buffer_size,
-                const int padding)
+void RE_SavePNG(const char* filename, const uint32_t image_width, const uint32_t image_height, const byte* image_buffer, const int padding)
 {
     // Set image properties, this determines the destination image format
     struct spng_ihdr ihdr = {
