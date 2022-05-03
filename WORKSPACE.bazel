@@ -12,8 +12,7 @@
 
 # Workspace named so that BUILD.bazel files in other workspaces can reference this
 # namespace with a fixed name.
-# TODO: Figure out what we are naming this project and rename as appropriate
-workspace(name = "org_realityforge_ioq3")
+workspace(name = "org_realityforge_q3a")
 
 load("//third_party/buildifier:repository.bzl", _load_buildifier_repository = "load_repository")
 load("//third_party/content:repository.bzl", _load_content_repository = "load_repository")

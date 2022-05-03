@@ -18,7 +18,7 @@
 # and replaces them with the corresponding values.
 #
 # Typical usage:
-#   load("@org_realityforge_ioq3//third_party:common.bzl", "template_rule")
+#   load("@org_realityforge_q3a//third_party:common.bzl", "template_rule")
 #   expand_template(
 #       name = "ExpandMyTemplate",
 #       template = "my.template",

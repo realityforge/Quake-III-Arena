@@ -30,7 +30,7 @@ cc_binary(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "@org_realityforge_ioq3//third_party:math",
+        "@org_realityforge_q3a//third_party:math",
         "@libpng",
         "@libpng//:libpng_impl",
         "@zlib//:zlib_impl",

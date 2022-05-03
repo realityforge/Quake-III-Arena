@@ -9,7 +9,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-load("@org_realityforge_ioq3//third_party:common.bzl", "expand_template")
+load("@org_realityforge_q3a//third_party:common.bzl", "expand_template")
 
 expand_template(
     name = "config_types.h_gen",

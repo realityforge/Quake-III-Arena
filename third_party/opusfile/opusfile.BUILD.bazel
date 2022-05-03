@@ -23,7 +23,7 @@ cc_library(
     ],
     hdrs = ["include/opusfile.h"],
     copts = select({
-        "@org_realityforge_ioq3//build_defs:macos": [],
+        "@org_realityforge_q3a//build_defs:macos": [],
         "//conditions:default": ["-Wno-maybe-uninitialized"],
     }),
     includes = ["include"],

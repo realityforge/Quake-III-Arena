@@ -21,7 +21,7 @@ cc_library(
     name = "zlib",
     hdrs = ["zlib.h"],
     copts = select({
-        "@org_realityforge_ioq3//build_defs:windows": [],
+        "@org_realityforge_q3a//build_defs:windows": [],
         "//conditions:default": [
             "-Wno-shift-negative-value",
             "-DZ_HAVE_UNISTD_H",
@@ -60,7 +60,7 @@ cc_library(
         "zutil.h",
     ],
     copts = select({
-        "@org_realityforge_ioq3//build_defs:windows": [],
+        "@org_realityforge_q3a//build_defs:windows": [],
         "//conditions:default": [
             "-Wno-shift-negative-value",
             "-DZ_HAVE_UNISTD_H",

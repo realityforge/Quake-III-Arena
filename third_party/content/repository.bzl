@@ -18,11 +18,11 @@ load("//build_defs:http_repository_from_env.bzl", _http_repository_from_env = "h
 def _create_repository_data_from_metadata(name):
     data = _PAK_DATA[name]
     build_content = """
-load("@org_realityforge_ioq3//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
+load("@org_realityforge_q3a//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
 """
     if None != data.get("tga_files"):
         build_content += """
-load("@org_realityforge_ioq3//build_defs:assets.bzl", _convert_tga_to_png = "convert_tga_to_png")
+load("@org_realityforge_q3a//build_defs:assets.bzl", _convert_tga_to_png = "convert_tga_to_png")
 """
 
     if None != data.get("other_files"):
