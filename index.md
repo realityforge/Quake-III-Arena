@@ -53,9 +53,9 @@ The major changes of the project are tracked in this table.
       <td>2</td>
       <td>2</td>
       <td>0</td>
-      <td>75%</td>
+      <td>Complete</td>
       <td>2022-04-24</td>
-      <td>&nbsp;</td>
+      <td>2022-05-03</td>
     </tr>
   </tbody>
 </table>
