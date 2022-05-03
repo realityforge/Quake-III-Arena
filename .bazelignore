@@ -10,10 +10,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Build directory used by the Makefile build system
-############################
-/build
-
 # Temp dirs and local notes
 ############################
 /tmp

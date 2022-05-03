@@ -1,6 +1,3 @@
-build
-Makefile.local
-
 # *nix tool files
 ############################
 *.swp
