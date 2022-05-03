@@ -816,7 +816,7 @@ char* ClientConnect(int clientNum, qboolean firstTime, qboolean isBot)
         }
     }
 
-    // get and distribute relevent paramters
+    // get and distribute relevent parameters
     G_LogPrintf("ClientConnect: %i\n", clientNum);
     ClientUserinfoChanged(clientNum);
 
