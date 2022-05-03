@@ -515,54 +515,21 @@ void R_TakeScreenshot(int x, int y, int width, int height, char* name, qboolean 
     cmd->jpeg = jpeg;
 }
 
-/*
-==================
-R_ScreenshotFilename
-==================
-*/
-void R_ScreenshotFilename(int lastNumber, char* fileName)
+static void R_ScreenshotFilename(int lastNumber, char* fileName, const char* extension)
 {
-    int a, b, c, d;
-
     if (lastNumber < 0 || lastNumber > 9999) {
-        Com_sprintf(fileName, MAX_OSPATH, "screenshots/shot9999.png");
+        Com_sprintf(fileName, MAX_OSPATH, "screenshots/shot9999.%s", extension);
         return;
+    } else {
+        const int a = lastNumber / 1000;
+        lastNumber -= a * 1000;
+        const int b = lastNumber / 100;
+        lastNumber -= b * 100;
+        const int c = lastNumber / 10;
+        lastNumber -= c * 10;
+        const int d = lastNumber;
+        Com_sprintf(fileName, MAX_OSPATH, "screenshots/shot%i%i%i%i.%s", a, b, c, d, extension);
     }
-
-    a = lastNumber / 1000;
-    lastNumber -= a * 1000;
-    b = lastNumber / 100;
-    lastNumber -= b * 100;
-    c = lastNumber / 10;
-    lastNumber -= c * 10;
-    d = lastNumber;
-
-    Com_sprintf(fileName, MAX_OSPATH, "screenshots/shot%i%i%i%i.png", a, b, c, d);
-}
-
-/*
-==================
-R_ScreenshotFilename
-==================
-*/
-void R_ScreenshotFilenameJPEG(int lastNumber, char* fileName)
-{
-    int a, b, c, d;
-
-    if (lastNumber < 0 || lastNumber > 9999) {
-        Com_sprintf(fileName, MAX_OSPATH, "screenshots/shot9999.jpg");
-        return;
-    }
-
-    a = lastNumber / 1000;
-    lastNumber -= a * 1000;
-    b = lastNumber / 100;
-    lastNumber -= b * 100;
-    c = lastNumber / 10;
-    lastNumber -= c * 10;
-    d = lastNumber;
-
-    Com_sprintf(fileName, MAX_OSPATH, "screenshots/shot%i%i%i%i.jpg", a, b, c, d);
 }
 
 /*
@@ -579,19 +546,31 @@ Doesn't print the pacifier message if there is a second arg
 */
 void R_ScreenShot_f(void)
 {
-    char checkname[MAX_OSPATH];
+    char checkname[MAX_OSPATH] = { 0 };
     static int lastNumber = -1;
-    qboolean silent;
+    qboolean silent = qfalse;
+    qboolean jpeg = qfalse;
+    const char* explicitName = NULL;
 
-    if (!strcmp(ri.Cmd_Argv(1), "silent")) {
-        silent = qtrue;
-    } else {
-        silent = qfalse;
+    const int argc = ri.Cmd_Argc();
+    for (int i = 1; i < argc; i++) {
+        const char* arg = ri.Cmd_Argv(i);
+        if (!strcmp(arg, "-silent")) {
+            silent = qtrue;
+        } else if (!strcmp(arg, "-jpg")) {
+            jpeg = qtrue;
+        } else if (NULL == explicitName) {
+            explicitName = arg;
+        } else {
+            ri.Printf(PRINT_ERROR, "Unexpected argument to screenshot command %s\n", arg);
+            return;
+        }
     }
+    const char* extension = jpeg ? "jpg" : "png";
 
-    if (ri.Cmd_Argc() == 2 && !silent) {
+    if (NULL != explicitName) {
         // explicit filename
-        Com_sprintf(checkname, MAX_OSPATH, "screenshots/%s.png", ri.Cmd_Argv(1));
+        Com_sprintf(checkname, MAX_OSPATH, "screenshots/%s.%s", explicitName, extension);
     } else {
         // scan for a free filename
 
@@ -603,7 +582,7 @@ void R_ScreenShot_f(void)
         }
         // scan for a free number
         for (; lastNumber <= 9999; lastNumber++) {
-            R_ScreenshotFilename(lastNumber, checkname);
+            R_ScreenshotFilename(lastNumber, checkname, extension);
 
             if (!ri.FS_FileExists(checkname)) {
                 break; // file doesn't exist
@@ -618,55 +597,7 @@ void R_ScreenShot_f(void)
         lastNumber++;
     }
 
-    R_TakeScreenshot(0, 0, glConfig.vidWidth, glConfig.vidHeight, checkname, qfalse);
-
-    if (!silent) {
-        ri.Printf(PRINT_ALL, "Wrote %s\n", checkname);
-    }
-}
-
-void R_ScreenShotJPEG_f(void)
-{
-    char checkname[MAX_OSPATH];
-    static int lastNumber = -1;
-    qboolean silent;
-
-    if (!strcmp(ri.Cmd_Argv(1), "silent")) {
-        silent = qtrue;
-    } else {
-        silent = qfalse;
-    }
-
-    if (ri.Cmd_Argc() == 2 && !silent) {
-        // explicit filename
-        Com_sprintf(checkname, MAX_OSPATH, "screenshots/%s.jpg", ri.Cmd_Argv(1));
-    } else {
-        // scan for a free filename
-
-        // if we have saved a previous screenshot, don't scan
-        // again, because recording demo avis can involve
-        // thousands of shots
-        if (lastNumber == -1) {
-            lastNumber = 0;
-        }
-        // scan for a free number
-        for (; lastNumber <= 9999; lastNumber++) {
-            R_ScreenshotFilenameJPEG(lastNumber, checkname);
-
-            if (!ri.FS_FileExists(checkname)) {
-                break; // file doesn't exist
-            }
-        }
-
-        if (lastNumber == 10000) {
-            ri.Printf(PRINT_ALL, "ScreenShot: Couldn't create a file\n");
-            return;
-        }
-
-        lastNumber++;
-    }
-
-    R_TakeScreenshot(0, 0, glConfig.vidWidth, glConfig.vidHeight, checkname, qtrue);
+    R_TakeScreenshot(0, 0, glConfig.vidWidth, glConfig.vidHeight, checkname, jpeg);
 
     if (!silent) {
         ri.Printf(PRINT_ALL, "Wrote %s\n", checkname);
@@ -1151,7 +1082,6 @@ void R_Register(void)
     ri.Cmd_AddCommand("modellist", R_Modellist_f);
     ri.Cmd_AddCommand("modelist", R_ModeList_f);
     ri.Cmd_AddCommand("screenshot", R_ScreenShot_f);
-    ri.Cmd_AddCommand("screenshotJPEG", R_ScreenShotJPEG_f);
     ri.Cmd_AddCommand("gfxinfo", GfxInfo_f);
     ri.Cmd_AddCommand("minimize", GLimp_Minimize);
     ri.Cmd_AddCommand("gfxmeminfo", GfxMemInfo_f);
