@@ -133,7 +133,6 @@ void AAS_ShowAreaPolygons(int areanum, int color, int groundfacesonly)
     aas_area_t* area;
     aas_face_t* face;
 
-    //
     if (areanum < 0 || areanum >= aasworld.numareas) {
         botimport.Print(PRT_ERROR, "area %d out of range [0, %d]\n",
                         areanum, aasworld.numareas);
@@ -174,7 +173,6 @@ void AAS_PrintTravelType(int traveltype)
 {
 #ifdef DEBUG
     char* str;
-    //
     switch (traveltype & TRAVELTYPE_MASK) {
     case TRAVEL_INVALID:
         str = "TRAVEL_INVALID";
@@ -261,10 +259,8 @@ void AAS_ShowReachability(aas_reachability_t* reach)
 
     AAS_ShowAreaPolygons(reach->areanum, 5, qtrue);
     AAS_DrawArrow(reach->start, reach->end, LINECOLOR_BLUE, LINECOLOR_YELLOW);
-    //
     if ((reach->traveltype & TRAVELTYPE_MASK) == TRAVEL_JUMP || (reach->traveltype & TRAVELTYPE_MASK) == TRAVEL_WALKOFFLEDGE) {
         AAS_HorizontalVelocityForJump(aassettings.phys_jumpvel, reach->start, reach->end, &speed);
-        //
         VectorSubtract(reach->end, reach->start, dir);
         dir[2] = 0;
         VectorNormalize(dir);
@@ -273,11 +269,9 @@ void AAS_ShowReachability(aas_reachability_t* reach)
         // set the command movement
         VectorClear(cmdmove);
         cmdmove[2] = aassettings.phys_jumpvel;
-        //
         AAS_PredictClientMovement(&move, -1, reach->start, PRESENCE_NORMAL, qtrue,
                                   velocity, cmdmove, 3, 30, 0.1f,
                                   SE_HITGROUND | SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE, 0, qtrue);
-        //
         if ((reach->traveltype & TRAVELTYPE_MASK) == TRAVEL_JUMP) {
             AAS_JumpReachRunStart(reach, dir);
             AAS_DrawCross(dir, 4, LINECOLOR_BLUE);
@@ -285,20 +279,17 @@ void AAS_ShowReachability(aas_reachability_t* reach)
     } else if ((reach->traveltype & TRAVELTYPE_MASK) == TRAVEL_ROCKETJUMP) {
         zvel = AAS_RocketJumpZVelocity(reach->start);
         AAS_HorizontalVelocityForJump(zvel, reach->start, reach->end, &speed);
-        //
         VectorSubtract(reach->end, reach->start, dir);
         dir[2] = 0;
         VectorNormalize(dir);
         // get command movement
         VectorScale(dir, speed, cmdmove);
         VectorSet(velocity, 0, 0, zvel);
-        //
         AAS_PredictClientMovement(&move, -1, reach->start, PRESENCE_NORMAL, qtrue,
                                   velocity, cmdmove, 30, 30, 0.1f,
                                   SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE | SE_TOUCHJUMPPAD | SE_HITGROUNDAREA, reach->areanum, qtrue);
     } else if ((reach->traveltype & TRAVELTYPE_MASK) == TRAVEL_JUMPPAD) {
         VectorSet(cmdmove, 0, 0, 0);
-        //
         VectorSubtract(reach->end, reach->start, dir);
         dir[2] = 0;
         VectorNormalize(dir);
@@ -307,7 +298,6 @@ void AAS_ShowReachability(aas_reachability_t* reach)
         VectorScale(dir, reach->edgenum, velocity);
         // NOTE: the facenum is the Z velocity
         velocity[2] = reach->facenum;
-        //
         AAS_PredictClientMovement(&move, -1, reach->start, PRESENCE_NORMAL, qtrue,
                                   velocity, cmdmove, 30, 30, 0.1f,
                                   SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE | SE_TOUCHJUMPPAD | SE_HITGROUNDAREA, reach->areanum, qtrue);
@@ -344,7 +334,6 @@ void AAS_FloodAreas_r(int areanum, int cluster, int* done)
             continue;
         AAS_FloodAreas_r(nextareanum, cluster, done);
     }
-    //
     for (i = 0; i < settings->numreachableareas; i++) {
         reach = &aasworld.reachability[settings->firstreachablearea + i];
         nextareanum = reach->areanum;
