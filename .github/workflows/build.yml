@@ -1,0 +1,63 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: Build
+on:
+  # Always run "Build" action for any commit on master branch
+  push:
+    branches:
+      - 'master'
+  # Always run the "Build" action when a pull request is opened, synchronized (aka pushed to) or reopened
+  pull_request:
+
+# https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ macos-latest ]
+
+    steps:
+      - name: Checkout current commit
+        uses: actions/checkout@v3
+
+      - name: Mount bazel cache
+        uses: actions/cache@v3
+        with:
+          path: "${HOME}/.cache/bazel"
+          key: ${{ runner.os }}-bazel
+
+      - name: Install Linux Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install libsdl2-dev
+        if: matrix.os == 'ubuntu-latest'
+
+      - name: Install MacOS Dependencies
+        run: brew install SDL2
+        if: matrix.os == 'macos-latest'
+
+      - name: Configure Bazel Cache
+        run: echo "startup --output_base=$HOME/.cache/bazel" >> user.bazelrc
+
+      - name: Verify Build file format
+        # Verify that the build files are correctly formatted
+        run: bazel run //:buildifier
+
+      - name: Build Code
+        # In the future we should also run "bazel build //game/mac:Quake3Arena.zip" but this requires that either
+        # the id assets become optional or we find a way to securely store the assets so as not to violate licenses
+        # TODO: run: bazel build //code/...
+        run: bazel build //content/...
