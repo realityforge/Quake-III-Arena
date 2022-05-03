@@ -141,7 +141,7 @@ void R_LoadPNG(const char* name, byte** pImage, int* pWidth, int* pHeight)
     }
 cleanup:
     if (NULL != image) {
-        free(image);
+        hunk_alloc.free_fn(image);
     }
     if (NULL != ctx) {
         spng_ctx_free(ctx);
