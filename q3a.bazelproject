@@ -11,8 +11,8 @@
 # limitations under the License.
 directories:
   .
-  # Exclude the directory that was used by the existing Makefile build
-  -build
+  # Exclude the temp directory
+  -tmp
 
 # Automatically includes all relevant targets under the 'directories' above
 derive_targets_from_directories: true
