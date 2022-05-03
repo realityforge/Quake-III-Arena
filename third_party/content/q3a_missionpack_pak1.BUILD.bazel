@@ -1,5 +1,0 @@
-filegroup(
-    name = "files",
-    srcs = ["teaminfo.txt"],
-    visibility = ["//visibility:public"],
-)

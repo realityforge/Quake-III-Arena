@@ -1,32 +1,82 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 """Bazel repository rules for loading content from original games."""
 
-load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_archive = "http_archive")
+load(":metadata.bzl", _PAK_DATA = "PAK_DATA")
+load("//build_defs:http_repository_from_env.bzl", _http_repository_from_env = "http_repository_from_env")
 
-_BASE_URL = "file:///Users/peter/Steam/quake3teamarena"
+def _create_repository_data_from_metadata(name):
+    data = _PAK_DATA[name]
+    build_content = """
+load("@org_realityforge_q3a//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
+"""
+    if None != data.get("tga_files"):
+        build_content += """
+load("@org_realityforge_q3a//build_defs:assets.bzl", _convert_tga_to_png = "convert_tga_to_png")
+"""
 
-def _local_pak(game, index, sha256 = None):
-    name = "q3a_%s_pak%d" % (game, index)
-    if native.existing_rule(name):
-        return
+    if None != data.get("other_files"):
+        build_content += """
 
-    _http_archive(
-        name = name,
-        urls = ["%s/%s/pak%d.pk3" % (_BASE_URL, game, index)],
-        type = "zip",
-        sha256 = sha256,
-        build_file = "//third_party/content:%s.BUILD.bazel" % (name),
-    )
+filegroup(
+    name = "files",
+    srcs = _PAK_DATA["%s"]["other_files"],
+    visibility = ["//visibility:public"],
+)
+""" % (name)
 
-def load_pak_repos():
-    # Quake 3 Arena
-    _local_pak("baseq3", 0, "7ce8b3910620cd50a09e4f1100f426e8c6180f68895d589f80e6bd95af54bcae")
-    _local_pak("baseq3", 2, "ccae938a2f13a03b24902d675181d516a431699701ed88023a307f34b5bcd58c")
-    _local_pak("baseq3", 4, "af5f6d5c82fe4440ae0bb660f0648d1fa1731a9e8305a9eb652aa243428697f1")
-    _local_pak("baseq3", 5, "69f87070ca7719e252a3ba97e6483f6663939c987ede550d1268d4d9a07b45bc")
-    _local_pak("baseq3", 6, "bb4f0ae2bf603b050fb665436d3178ce7c1c20360e67bacf7c14d93daff38daf")
-    _local_pak("baseq3", 8, "812c9e97f231e89cefede3848c6110b7bd34245093af6f22c2cacde3e6b15663")
+    if None != data.get("tga_files"):
+        build_content += """
 
-    # Quake 3 Team Arena
-    _local_pak("missionpack", 0, "fdb5fe4f15f22bd270628d9b3153b733ca4548207722e768051c08c9dbff9135")
-    _local_pak("missionpack", 1, "9818e99ba58d91f231a650a3c42559d1c5661cb3c0dfd033ef4225ba8ecdfd60")
-    _local_pak("missionpack", 3, "77c0bcbb61be81a389d8959b76969a801a5e589d97ab8aeb2cb7ced54f187fc7")
+filegroup(
+    name = "tga_files",
+    srcs = _PAK_DATA["%s"]["tga_files"],
+    visibility = ["//visibility:public"],
+)
+
+_convert_tga_to_png(name = "%s")
+
+exports_files(_PAK_DATA["%s"]["tga_files"])
+""" % (name, name, name)
+
+    if None != data.get("shader_files"):
+        build_content += """
+
+filegroup(
+    name = "shader_files",
+    srcs = _PAK_DATA["%s"]["shader_files"],
+    visibility = ["//visibility:public"],
+)
+
+exports_files(_PAK_DATA["%s"]["shader_files"])
+""" % (name, name)
+
+    sha256 = None
+    if None != data["info"].get("sha256"):
+        sha256 = data["info"]["sha256"]
+
+    base_url_env = data["info"]["base_url_env"]
+    local_path = data["info"]["local_path"]
+
+    return struct(sha256 = sha256, build_content = build_content, base_url_env = base_url_env, local_path = local_path)
+
+def load_repository():
+    for name in _PAK_DATA.keys():
+        data = _create_repository_data_from_metadata(name)
+        _http_repository_from_env(
+            name = name,
+            base_url_env = data.base_url_env,
+            local_path = data.local_path,
+            sha256 = data.sha256,
+            build_file_content = data.build_content,
+        )

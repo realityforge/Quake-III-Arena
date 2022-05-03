@@ -1,8 +1,0 @@
-filegroup(
-    name = "files",
-    srcs = [
-        "demos/four.dm_68",
-        "menu/art/pblogo.tga",
-    ],
-    visibility = ["//visibility:public"],
-)
