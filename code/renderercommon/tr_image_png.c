@@ -23,6 +23,12 @@ limitations under the License.
 #define MAX_READ_PNG_WIDTH 2048
 #define MAX_READ_PNG_HEIGHT 2048
 
+// Set memory usage limits for storing standard and unknown chunks, this is important when reading untrusted files!
+// No real thought has gone into what these should be set to so taking some (reasonable?) values from the upstream
+// library's documentation/examples.
+#define MAX_CHUNK_SIZE (4 * 1000 * 1000)
+#define MAX_CACHE_SIZE (8 * 1000 * 1000)
+
 static void* r_spng_malloc(const size_t size)
 {
     return ri.Malloc(size);
@@ -104,6 +110,9 @@ void R_LoadPNG(const char* name, byte** pImage, int* pWidth, int* pHeight)
             return;
         } else if (SPNG_OK != (result = spng_set_image_limits(ctx, MAX_READ_PNG_WIDTH, MAX_READ_PNG_HEIGHT))) {
             r_spng_load_error(localName, result, "spng_set_image_limits");
+            goto cleanup;
+        } else if (SPNG_OK != (result = spng_set_chunk_limits(ctx, MAX_CHUNK_SIZE, MAX_CACHE_SIZE))) {
+            r_spng_load_error(localName, result, "spng_set_chunk_limits");
             goto cleanup;
         } else if (SPNG_OK != (result = spng_set_png_buffer(ctx, pAssetData, pAssetSize))) {
             r_spng_load_error(localName, result, "spng_set_png_buffer");
