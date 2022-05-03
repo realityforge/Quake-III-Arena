@@ -63,7 +63,6 @@ void MSG_WriteChar(msg_t* sb, int c);
 void MSG_WriteByte(msg_t* sb, int c);
 void MSG_WriteShort(msg_t* sb, int c);
 void MSG_WriteLong(msg_t* sb, int c);
-void MSG_WriteFloat(msg_t* sb, float f);
 void MSG_WriteString(msg_t* sb, const char* s);
 void MSG_WriteBigString(msg_t* sb, const char* s);
 

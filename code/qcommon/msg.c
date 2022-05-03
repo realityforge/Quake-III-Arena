@@ -287,17 +287,6 @@ void MSG_WriteLong(msg_t* sb, int c)
     MSG_WriteBits(sb, c, 32);
 }
 
-void MSG_WriteFloat(msg_t* sb, float f)
-{
-    union {
-        float f;
-        int l;
-    } dat;
-
-    dat.f = f;
-    MSG_WriteBits(sb, dat.l, 32);
-}
-
 void MSG_WriteString(msg_t* sb, const char* s)
 {
     if (!s) {
