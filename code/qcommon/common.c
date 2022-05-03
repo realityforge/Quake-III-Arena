@@ -2056,7 +2056,6 @@ int Com_Milliseconds(void)
 
     // get events and push them until we get a null event with the current time
     do {
-
         ev = Com_GetRealEvent();
         if (ev.evType != SE_NONE) {
             Com_PushEvent(&ev);
