@@ -29,11 +29,11 @@ limitations under the License.
 #define MAX_CHUNK_SIZE (4 * 1000 * 1000)
 #define MAX_CACHE_SIZE (8 * 1000 * 1000)
 
-static void* r_spng_malloc(const size_t size)
+static void* spng_hunk_malloc(const size_t size)
 {
     return ri.Malloc(size);
 }
-static void r_spng_free(void* ptr)
+static void spng_hunk_free(void* ptr)
 {
     // The library frequently calls this with a NULL pointer so we need to guard against freeing a NULL
     if (NULL != ptr) {
@@ -41,7 +41,7 @@ static void r_spng_free(void* ptr)
     }
 }
 
-static void* r_spng_realloc(void* ptr, size_t size)
+static void* spng_hunk_realloc(UNUSED_VAR void* ptr, UNUSED_VAR size_t size)
 {
     // This does not seem to be actually invoked but it is implemented for completeness ... in a very inefficient way
     // Generate a warning for a developer to notify a developer so that it can be reimplemented more efficiently
@@ -50,17 +50,17 @@ static void* r_spng_realloc(void* ptr, size_t size)
     return r_spng_malloc(size);
 }
 
-static void* r_spng_calloc(size_t count, size_t size)
+static void* spng_hunk_calloc(size_t count, size_t size)
 {
     size_t actualSize = count * size;
-    void* pPtr = r_spng_malloc(actualSize);
+    void* pPtr = spng_hunk_malloc(actualSize);
     memset(pPtr, 0, actualSize);
     return pPtr;
 }
 
 // The alloc structure that is used to allocate/release memory by PNG that is expected to persist over time
 // (i.e. This is used by the read functions as the pixel data will persist for the duration of a scene)
-static struct spng_alloc long_term_spng_alloc = { .malloc_fn = r_spng_malloc, .realloc_fn = r_spng_realloc, .calloc_fn = r_spng_calloc, .free_fn = r_spng_free };
+static struct spng_alloc hunk_alloc = { .malloc_fn = spng_hunk_malloc, .realloc_fn = spng_hunk_realloc, .calloc_fn = spng_hunk_calloc, .free_fn = spng_hunk_free };
 
 static void r_spng_load_error(const char* name, const int result, const char* functionName)
 {
@@ -104,7 +104,7 @@ void R_LoadPNG(const char* name, byte** pImage, int* pWidth, int* pHeight)
     if (NULL == pAssetData || -1 == pAssetSize) {
         goto cleanup;
     } else {
-        ctx = spng_ctx_new2(&long_term_spng_alloc, 0);
+        ctx = spng_ctx_new2(&hunk_alloc, 0);
         if (NULL == ctx) {
             r_spng_load_error(localName, SPNG_EMEM, "spng_ctx_new2");
             return;
