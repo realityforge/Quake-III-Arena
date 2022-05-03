@@ -47,7 +47,7 @@ lines	file(s)
 277		common/md4.c
 Copyright (C) 1991-2, RSA Data Security, Inc. Created 1991. All rights reserved.
 
-License to copy and use this software is granted provided that it is identified 
+License to copy and use this software is granted provided that it is identified
 as the <93>RSA Data Security, Inc. MD4 Message-Digest Algorithm<94> in all mater
 ial mentioning or referencing this software or this function.
 License is also granted to make and use derivative works provided that such work
@@ -55,7 +55,7 @@ s are identified as <93>derived from the RSA Data Security, Inc. MD4 Message-Dig
 est Algorithm<94> in all material mentioning or referencing the derived work.
 RSA Data Security, Inc. makes no representations concerning either the merchanta
 bility of this software or the suitability of this software for any particular p
-urpose. It is provided <93>as is<94> without express or implied warranty of any 
+urpose. It is provided <93>as is<94> without express or implied warranty of any
 kind.
 
 checksums are used to validate pak files
@@ -104,10 +104,10 @@ Netherlands.
 
                         All Rights Reserved
 
-Permission to use, copy, modify, and distribute this software and its 
-documentation for any purpose and without fee is hereby granted, 
+Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee is hereby granted,
 provided that the above copyright notice appear in all copies and that
-both that copyright notice and this permission notice appear in 
+both that copyright notice and this permission notice appear in
 supporting documentation, and that the names of Stichting Mathematisch
 Centrum or CWI not be used in advertising or publicity pertaining to
 distribution of the software without specific, written prior permission.
