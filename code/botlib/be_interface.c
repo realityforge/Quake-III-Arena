@@ -221,8 +221,6 @@ int BotFuzzyPointReachabilityArea(vec3_t origin);
 
 float BotGapDistance(vec3_t origin, vec3_t hordir, int entnum);
 
-void AAS_FloodAreas(vec3_t origin);
-
 static void Init_AAS_Export(aas_export_t* aas)
 {
     //--------------------------------------------

@@ -367,13 +367,3 @@ void AAS_FloodAreas_r(int areanum, int cluster, int* done)
         AAS_FloodAreas_r(nextareanum, cluster, done);
     }
 }
-
-void AAS_FloodAreas(vec3_t origin)
-{
-    int areanum, cluster, *done;
-
-    done = (int*)GetClearedMemory(aasworld.numareas * sizeof(int));
-    areanum = AAS_PointAreaNum(origin);
-    cluster = AAS_AreaCluster(areanum);
-    AAS_FloodAreas_r(areanum, cluster, done);
-}
