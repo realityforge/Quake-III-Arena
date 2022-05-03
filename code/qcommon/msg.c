@@ -595,16 +595,6 @@ int MSG_ReadDeltaKey(msg_t* msg, int key, int oldV, int bits)
     return oldV;
 }
 
-// ms is always sent, the others are optional
-#define CM_ANGLE1 (1 << 0)
-#define CM_ANGLE2 (1 << 1)
-#define CM_ANGLE3 (1 << 2)
-#define CM_FORWARD (1 << 3)
-#define CM_SIDE (1 << 4)
-#define CM_UP (1 << 5)
-#define CM_BUTTONS (1 << 6)
-#define CM_WEAPON (1 << 7)
-
 void MSG_WriteDeltaUsercmdKey(msg_t* msg, int key, usercmd_t* from, usercmd_t* to)
 {
     if (to->serverTime - from->serverTime < 256) {
