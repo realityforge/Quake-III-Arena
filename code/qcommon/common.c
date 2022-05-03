@@ -1655,17 +1655,17 @@ void* Hunk_AllocateTempMemory(const size_t size)
 
     Hunk_SwapBanks();
 
-    size = PAD(size, sizeof(intptr_t)) + sizeof(hunkHeader_t);
+    const size_t actual_size = PAD(size, sizeof(intptr_t)) + sizeof(hunkHeader_t);
 
-    if (hunk_temp->temp + hunk_permanent->permanent + size > s_hunkTotal) {
-        Com_Error(ERR_DROP, "Hunk_AllocateTempMemory: failed on %i", size);
+    if (hunk_temp->temp + hunk_permanent->permanent + actual_size > s_hunkTotal) {
+        Com_Error(ERR_DROP, "Hunk_AllocateTempMemory: failed on %zu", actual_size);
     }
 
     if (hunk_temp == &hunk_low) {
         buf = (void*)(s_hunkData + hunk_temp->temp);
-        hunk_temp->temp += size;
+        hunk_temp->temp += actual_size;
     } else {
-        hunk_temp->temp += size;
+        hunk_temp->temp += actual_size;
         buf = (void*)(s_hunkData + s_hunkTotal - hunk_temp->temp);
     }
 
@@ -1677,7 +1677,7 @@ void* Hunk_AllocateTempMemory(const size_t size)
     buf = (void*)(hdr + 1);
 
     hdr->magic = HUNK_MAGIC;
-    hdr->size = size;
+    hdr->size = actual_size;
 
     // don't bother clearing, because we are going to load a file over it
     return buf;
