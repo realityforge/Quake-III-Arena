@@ -1,3 +1,15 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 # NOTE: This Build file was copied from https://github.com/tensorflow/tensorflow/blob/7a99ce11636fb7e0c974d4d9b8b5dbff7f259c87/third_party/common.bzl
 #       and is under the Apache 2 license as specified by https://github.com/tensorflow/tensorflow/blob/7a99ce11636fb7e0c974d4d9b8b5dbff7f259c87/LICENSE
 
