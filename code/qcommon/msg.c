@@ -105,7 +105,6 @@ int overflows;
 void MSG_WriteBits(msg_t* msg, int value, int bits)
 {
     int i;
-    //	FILE*	fp;
 
     oldsize += bits;
 
@@ -170,13 +169,11 @@ void MSG_WriteBits(msg_t* msg, int value, int bits)
         }
         if (bits) {
             for (i = 0; i < bits; i += 8) {
-                //				fwrite(bp, 1, 1, fp);
                 Huff_offsetTransmit(&msgHuff.compressor, (value & 0xff), msg->data, &msg->bit);
                 value = (value >> 8);
             }
         }
         msg->cursize = (msg->bit >> 3) + 1;
-        //		fclose(fp);
     }
 }
 
@@ -225,13 +222,10 @@ int MSG_ReadBits(msg_t* msg, int bits)
             bits = bits - nbits;
         }
         if (bits) {
-            //			fp = fopen("c:\\netchan.bin", "a");
             for (i = 0; i < bits; i += 8) {
                 Huff_offsetReceive(msgHuff.decompressor.tree, &get, msg->data, &msg->bit);
-                //				fwrite(&get, 1, 1, fp);
                 value |= (get << (i + nbits));
             }
-            //			fclose(fp);
         }
         msg->readcount = (msg->bit >> 3) + 1;
     }
