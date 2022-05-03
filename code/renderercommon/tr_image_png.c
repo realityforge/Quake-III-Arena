@@ -43,11 +43,10 @@ static void spng_hunk_free(void* ptr)
 
 static void* spng_hunk_realloc(UNUSED_VAR void* ptr, UNUSED_VAR size_t size)
 {
-    // This does not seem to be actually invoked but it is implemented for completeness ... in a very inefficient way
-    // Generate a warning for a developer to notify a developer so that it can be reimplemented more efficiently
-    ri.Printf(PRINT_DEVELOPER, "r_spng_realloc: Function invoked but usage pattern is unexpected and un-optimised.\n");
-    r_spng_free(ptr);
-    return r_spng_malloc(size);
+    // This does not seem to be actually invoked during PNG read operations.
+    // This is used during writes and if we were to use this for writes then we would need to implement.
+    ri.Printf(PRINT_WARNING, "spng_hunk_realloc: Function invoked but usage pattern is unexpected and unimplemented.\n");
+    return NULL;
 }
 
 static void* spng_hunk_calloc(size_t count, size_t size)
