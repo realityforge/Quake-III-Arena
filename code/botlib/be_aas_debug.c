@@ -273,7 +273,6 @@ void AAS_ShowReachability(aas_reachability_t* reach)
         // set the command movement
         VectorClear(cmdmove);
         cmdmove[2] = aassettings.phys_jumpvel;
-        //
         AAS_PredictClientMovement(&move, -1, reach->start, PRESENCE_NORMAL, qtrue,
                                   velocity, cmdmove, 3, 30, 0.1f,
                                   SE_HITGROUND | SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE, 0, qtrue);
@@ -345,7 +344,6 @@ void AAS_FloodAreas_r(int areanum, int cluster, int* done)
             continue;
         AAS_FloodAreas_r(nextareanum, cluster, done);
     }
-    //
     for (i = 0; i < settings->numreachableareas; i++) {
         reach = &aasworld.reachability[settings->firstreachablearea + i];
         nextareanum = reach->areanum;
@@ -358,12 +356,6 @@ void AAS_FloodAreas_r(int areanum, int cluster, int* done)
             continue;
         if (AAS_AreaCluster(nextareanum) != cluster)
             continue;
-        /*
-        if ((reach->traveltype & TRAVELTYPE_MASK) == TRAVEL_WALKOFFLEDGE)
-        {
-                AAS_DebugLine(reach->start, reach->end, 1);
-        }
-        */
         AAS_FloodAreas_r(nextareanum, cluster, done);
     }
 }
