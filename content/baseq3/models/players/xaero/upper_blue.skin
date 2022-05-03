@@ -1,0 +1,14 @@
+u_armbase,models/players/xaero/xaero_a.png
+u_quill01,models/players/xaero/xaero_q.png
+u_quill02,models/players/xaero/xaero_q.png
+u_quill03,models/players/xaero/xaero_q.png
+u_quill04,models/players/xaero/xaero_q.png
+u_quill05,models/players/xaero/xaero_q.png
+u_quill06,models/players/xaero/xaero_q.png
+u_quill07,models/players/xaero/xaero_q.png
+u_quill08,models/players/xaero/xaero_q.png
+u_torso,models/players/xaero/blue.png
+u_arm,models/players/xaero/xaero_a.png
+tag_weapon,
+tag_torso,
+tag_head,
