@@ -1,7 +1,6 @@
 load("@bazel_skylib//lib:selects.bzl", "selects")
 
 exports_files([
-    "copy_files.sh",
     "exported_symbols.lds",
     "exported_symbols.def",
 ])
