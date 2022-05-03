@@ -566,73 +566,6 @@ void R_ScreenshotFilenameJPEG(int lastNumber, char* fileName)
 }
 
 /*
-====================
-R_LevelShot
-
-levelshots are specialized 128*128 thumbnails for
-the menu system, sampled down from full screen distorted images
-====================
-*/
-void R_LevelShot(void)
-{
-    char checkname[MAX_OSPATH];
-    byte* buffer;
-    byte *source, *allsource;
-    byte *src, *dst;
-    size_t offset = 0;
-    int padlen;
-    int x, y;
-    int r, g, b;
-    float xScale, yScale;
-    int xx, yy;
-
-    Com_sprintf(checkname, sizeof(checkname), "levelshots/%s.png", tr.world->baseName);
-
-    allsource = RB_ReadPixels(0, 0, glConfig.vidWidth, glConfig.vidHeight, &offset, &padlen);
-    source = allsource + offset;
-
-    buffer = ri.Hunk_AllocateTempMemory(128 * 128 * 3 + 18);
-    memset(buffer, 0, 18);
-    buffer[2] = 2; // uncompressed type
-    buffer[12] = 128;
-    buffer[14] = 128;
-    buffer[16] = 24; // pixel size
-
-    // resample from source
-    xScale = glConfig.vidWidth / 512.0f;
-    yScale = glConfig.vidHeight / 384.0f;
-    for (y = 0; y < 128; y++) {
-        for (x = 0; x < 128; x++) {
-            r = g = b = 0;
-            for (yy = 0; yy < 3; yy++) {
-                for (xx = 0; xx < 4; xx++) {
-                    src = source + (3 * glConfig.vidWidth + padlen) * (int)((y * 3 + yy) * yScale) + 3 * (int)((x * 4 + xx) * xScale);
-                    r += src[0];
-                    g += src[1];
-                    b += src[2];
-                }
-            }
-            dst = buffer + 18 + 3 * (y * 128 + x);
-            dst[0] = b / 12;
-            dst[1] = g / 12;
-            dst[2] = r / 12;
-        }
-    }
-
-    // gamma correct
-    if (glConfig.deviceSupportsGamma) {
-        R_GammaCorrect(buffer + 18, 128 * 128 * 3);
-    }
-
-    ri.FS_WriteFile(checkname, buffer, 128 * 128 * 3 + 18);
-
-    ri.Hunk_FreeTempMemory(buffer);
-    ri.Hunk_FreeTempMemory(allsource);
-
-    ri.Printf(PRINT_ALL, "Wrote %s\n", checkname);
-}
-
-/*
 ==================
 R_ScreenShot_f
 
@@ -649,11 +582,6 @@ void R_ScreenShot_f(void)
     char checkname[MAX_OSPATH];
     static int lastNumber = -1;
     qboolean silent;
-
-    if (!strcmp(ri.Cmd_Argv(1), "levelshot")) {
-        R_LevelShot();
-        return;
-    }
 
     if (!strcmp(ri.Cmd_Argv(1), "silent")) {
         silent = qtrue;
@@ -702,11 +630,6 @@ void R_ScreenShotJPEG_f(void)
     char checkname[MAX_OSPATH];
     static int lastNumber = -1;
     qboolean silent;
-
-    if (!strcmp(ri.Cmd_Argv(1), "levelshot")) {
-        R_LevelShot();
-        return;
-    }
 
     if (!strcmp(ri.Cmd_Argv(1), "silent")) {
         silent = qtrue;
