@@ -289,7 +289,7 @@ void AAS_DData(unsigned char* data, int size)
     }
 }
 //===========================================================================
-// load an aas file
+// load a aas file
 //===========================================================================
 int AAS_LoadAASFile(char* filename)
 {

@@ -325,7 +325,7 @@ void AAS_DumpBSPData(void)
     memset(&bspworld, 0, sizeof(bspworld));
 }
 //===========================================================================
-// load an bsp file
+// load a bsp file
 //===========================================================================
 int AAS_LoadBSPFile(void)
 {
