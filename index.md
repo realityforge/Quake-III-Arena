@@ -59,3 +59,9 @@ The major changes of the project are tracked in this table.
     </tr>
   </tbody>
 </table>
+
+## References
+
+A set of notes and references that were collected to help work on this project:
+
+* [idTech](idTech/)
