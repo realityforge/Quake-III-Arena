@@ -100,6 +100,7 @@ void R_LoadPNG(const char* name, byte** pImage, int* pWidth, int* pHeight)
     } else {
         ctx = spng_ctx_new2(&long_term_spng_alloc, 0);
         if (NULL == ctx) {
+            r_spng_load_error(localName, SPNG_EMEM, "spng_ctx_new2");
             return;
         } else if (SPNG_OK != (result = spng_set_image_limits(ctx, MAX_READ_PNG_WIDTH, MAX_READ_PNG_HEIGHT))) {
             r_spng_load_error(localName, result, "spng_set_image_limits");
