@@ -72,3 +72,5 @@ The conversion of the TGA images to PNG and subsequent pngcrush process reduced 
 The size of the lossless images in the `baseq3` game changed from 211M to 51M. The PNG assets are approximately 24% of the size of the TGA assets. In the `missionpack` game the PNG images were 38% the size of the TGA assets with the size reduced from 211M to 81M.
 
 The impact on load time was not as easy to determine but the load time seemed to be reduced in the limited number of cases investigated. The hypothesis that this will be true on platforms where I/O devices are slow relative to processors.
+
+A nice side-effect of moving all the lossless images to PNG was that it is vastly easier to manipulate the images using standard tooling compared to the prio TGA format.
