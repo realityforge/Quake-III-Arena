@@ -527,7 +527,7 @@ sysEvent_t Sys_GetEvent(void)
         netadr_t* buf;
         int len;
 
-        // copy out to a seperate buffer for qeueing
+        // copy out to a separate buffer for qeueing
         // the readcount stepahead is for SOCKS support
         len = sizeof(netadr_t) + netmsg.cursize - netmsg.readcount;
         buf = Z_Malloc(len);

@@ -1018,7 +1018,7 @@ static void CM_PatchCollideFromGrid(cGrid_t* grid, patchCollide_t* pf)
                     numFacets++;
                 }
             } else {
-                // two seperate triangles
+                // two separate triangles
                 facet->surfacePlane = gridPlanes[i][j][0];
                 facet->numBorders = 3;
                 facet->borderPlanes[0] = borders[EN_TOP];

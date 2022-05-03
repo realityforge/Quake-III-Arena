@@ -169,7 +169,7 @@ keyname_t keynames[] = {
 
     { "PAUSE", K_PAUSE },
 
-    { "SEMICOLON", ';' }, // because a raw semicolon seperates commands
+    { "SEMICOLON", ';' }, // because a raw semicolon separates commands
 
     { NULL, 0 }
 };

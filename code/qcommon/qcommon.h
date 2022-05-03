@@ -500,7 +500,7 @@ int FS_GetFileList(const char* path, const char* extension, char* listbuf, int b
 int FS_GetModList(char* listbuf, int bufsize);
 
 fileHandle_t FS_FOpenFileWrite(const char* qpath);
-// will properly create any needed paths and deal with seperater character issues
+// will properly create any needed paths and deal with separater character issues
 
 int FS_filelength(fileHandle_t f);
 fileHandle_t FS_SV_FOpenFileWrite(const char* filename);
