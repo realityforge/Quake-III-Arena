@@ -1,0 +1,84 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+load("@org_realityforge_q3a//third_party:common.bzl", "expand_template")
+
+licenses(["notice"])  # BSD/MIT-like license
+
+_PNG_DEFINES = select({
+    # Windows does not need math library
+    "@org_realityforge_q3a//build_defs:x86": ["PNG_INTEL_SSE_OPT=1", "PNG_POWERPC_VSX_OPT=0", "PNG_ARM_NEON_OPT=0", "PNG_MIPS_MSA_OPT=0"],
+    "@org_realityforge_q3a//build_defs:arm": ["PNG_INTEL_SSE_OPT=0", "PNG_POWERPC_VSX_OPT=0", "PNG_ARM_NEON_OPT=2", "PNG_MIPS_MSA_OPT=0"],
+    "//conditions:default": ["PNG_INTEL_SSE_OPT=0", "PNG_POWERPC_VSX_OPT=0", "PNG_ARM_NEON_OPT=0", "PNG_MIPS_MSA_OPT=0"],
+})
+
+cc_library(
+    name = "libpng",
+    srcs = ["pnglibconf.h"],
+    hdrs = ["png.h", "pngconf.h"],
+    defines = _PNG_DEFINES,
+    includes = ["."],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "libpng_impl",
+    srcs = [
+        "png.c",
+        "pngdebug.h",
+        "pngerror.c",
+        "pngget.c",
+        "pnginfo.h",
+        "pngmem.c",
+        "pngpread.c",
+        "pngpriv.h",
+        "pngread.c",
+        "pngrio.c",
+        "pngrtran.c",
+        "pngrutil.c",
+        "pngset.c",
+        "pngstruct.h",
+        "pngtrans.c",
+        "pngwio.c",
+        "pngwrite.c",
+        "pngwtran.c",
+        "pngwutil.c",
+    ] + select({
+        # We are using x86 as a proxy for SSE2 capability present
+        "@org_realityforge_q3a//build_defs:x86": [
+            "intel/intel_init.c",
+            "intel/filter_sse2_intrinsics.c",
+        ],
+        # We are using arm as a proxy for NEON capability present
+        "@org_realityforge_q3a//build_defs:arm": [
+            "arm/arm_init.c",
+            "arm/filter_neon.S",
+            "arm/filter_neon_intrinsics.c",
+        ],
+        "//conditions:default": [],
+    }),
+    copts = ["-Wno-unused-but-set-variable"],
+    includes = ["."],
+    visibility = ["//visibility:public"],
+    deps = [":libpng", "@zlib"] +
+           select({
+               # Windows does not need math library
+               "@org_realityforge_q3a//build_defs:windows": [],
+               "//conditions:default": ["@org_realityforge_q3a//third_party:math"],
+           }),
+)
+
+expand_template(
+    name = "pnglibconf.h_gen",
+    template = "scripts/pnglibconf.h.prebuilt",
+    out = "pnglibconf.h",
+    substitutions = {},
+)

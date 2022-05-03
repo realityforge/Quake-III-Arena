@@ -1,0 +1,38 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+genrule(
+    name = "pngcrush_h_generator",
+    outs = ["generated/pngcrush.h"],
+    cmd = "touch $@",
+)
+
+cc_binary(
+    name = "pngcrush",
+    srcs = ["cexcept.h", ":pngcrush_h_generator", "pngcrush.c"],
+    includes = ["generated"],
+    copts = ["-std=c90", "-O3", "-funroll-loops", "-fomit-frame-pointer", "-Wno-self-assign", "-Wno-format-pedantic", "-Wno-overlength-strings", "-Wno-declaration-after-statement"],
+    defines = [
+        "PNGCRUSH_TIMERS=11",
+        "PNGCRUSH_USE_CLOCK_GETTIME=1",
+        "PNGCRUSH_USE_ARM_NEON",
+        "PNGCRUSH_USE_MPS_MSA",
+        "PNGCRUSH_USE_INTEL_SSE",
+        "PNGCRUSH_USE_POWERPC_VSX",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@org_realityforge_q3a//third_party:math",
+        "@libpng",
+        "@libpng//:libpng_impl",
+        "@zlib//:zlib_impl",
+    ],
+)
