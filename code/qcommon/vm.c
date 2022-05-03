@@ -581,11 +581,9 @@ vm_t* VM_Create(const char* module, intptr_t (*systemCalls)(intptr_t*),
 
 void VM_Free(vm_t* vm)
 {
-
     if (!vm) {
         return;
     }
-
     if (vm->callLevel) {
         if (!forced_unload) {
             Com_Error(ERR_FATAL, "VM_Free(%s) on running vm", vm->name);
