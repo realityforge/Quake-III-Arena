@@ -282,12 +282,11 @@ inline static float LittleFloat(const float* l)
 
 #endif
 
+#include "qboolean.h"
+
 //=============================================================
 
 typedef unsigned char byte;
-
-typedef enum { qfalse,
-               qtrue } qboolean;
 
 typedef int qhandle_t;
 typedef int sfxHandle_t;
