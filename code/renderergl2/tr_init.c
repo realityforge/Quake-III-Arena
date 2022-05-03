@@ -407,11 +407,11 @@ static void R_ModeList_f(void)
 NOTE TTimo
 some thoughts about the screenshots system:
 screenshots get written in fs_homepath + fs_gamedir
-vanilla q3 .. baseq3/screenshots/ *.tga
-team arena .. missionpack/screenshots/ *.tga
+vanilla q3 .. baseq3/screenshots/ *.png
+team arena .. missionpack/screenshots/ *.png
 
 two commands: "screenshot" and "screenshotJPEG"
-we use statics to store a count and start writing the first screenshot/screenshot????.tga (.jpg) available
+we use statics to store a count and start writing the first screenshot/screenshot????.png (.jpg) available
 (with FS_FileExists / FS_FOpenFileWrite calls)
 FIXME: the statics don't get a reinit between fs_game changes
 
@@ -459,86 +459,24 @@ byte* RB_ReadPixels(int x, int y, int width, int height, size_t* offset, int* pa
     return buffer;
 }
 
-/*
-==================
-RB_TakeScreenshot
-==================
-*/
-void RB_TakeScreenshot(int x, int y, int width, int height, char* fileName)
+void RB_TakeScreenshot(int x, int y, int width, int height, char* fileName, qboolean jpeg)
 {
-    byte *allbuf, *buffer;
-    byte *srcptr, *destptr;
-    byte *endline, *endmem;
-    byte temp;
-
-    int linelen, padlen;
-    size_t offset = 18, memcount;
-
-    allbuf = RB_ReadPixels(x, y, width, height, &offset, &padlen);
-    buffer = allbuf + offset - 18;
-
-    memset(buffer, 0, 18);
-    buffer[2] = 2; // uncompressed type
-    buffer[12] = width & 255;
-    buffer[13] = width >> 8;
-    buffer[14] = height & 255;
-    buffer[15] = height >> 8;
-    buffer[16] = 24; // pixel size
-
-    // swap rgb to bgr and remove padding from line endings
-    linelen = width * 3;
-
-    srcptr = destptr = allbuf + offset;
-    endmem = srcptr + (linelen + padlen) * height;
-
-    while (srcptr < endmem) {
-        endline = srcptr + linelen;
-
-        while (srcptr < endline) {
-            temp = srcptr[0];
-            *destptr++ = srcptr[2];
-            *destptr++ = srcptr[1];
-            *destptr++ = temp;
-
-            srcptr += 3;
-        }
-
-        // Skip the pad
-        srcptr += padlen;
-    }
-
-    memcount = linelen * height;
-
-    // gamma correct
-    if (glConfig.deviceSupportsGamma)
-        R_GammaCorrect(allbuf + offset, memcount);
-
-    ri.FS_WriteFile(fileName, buffer, memcount + 18);
-
-    ri.Hunk_FreeTempMemory(allbuf);
-}
-
-/*
-==================
-RB_TakeScreenshotJPEG
-==================
-*/
-
-void RB_TakeScreenshotJPEG(int x, int y, int width, int height, char* fileName)
-{
-    byte* buffer;
-    size_t offset = 0, memcount;
+    size_t offset = 0;
     int padlen;
 
-    buffer = RB_ReadPixels(x, y, width, height, &offset, &padlen);
-    memcount = (width * 3 + padlen) * height;
+    byte* buffer = RB_ReadPixels(x, y, width, height, &offset, &padlen);
+    const size_t memcount = (width * 3 + padlen) * height;
 
     // gamma correct
     if (qtrue == glConfig.deviceSupportsGamma) {
         R_GammaCorrect(buffer + offset, memcount);
     }
 
-    RE_SaveJPG(fileName, r_screenshotJpegQuality->integer, width, height, buffer + offset, padlen);
+    if (qtrue == jpeg) {
+        RE_SaveJPG(fileName, r_screenshotJpegQuality->integer, width, height, buffer + offset, padlen);
+    } else {
+        RE_SavePNG(fileName, width, height, buffer + offset, memcount, padlen);
+    }
     ri.Hunk_FreeTempMemory(buffer);
 }
 
@@ -552,10 +490,7 @@ const void* RB_TakeScreenshotCmd(const void* data)
     if (tess.numIndexes)
         RB_EndSurface();
 
-    if (cmd->jpeg)
-        RB_TakeScreenshotJPEG(cmd->x, cmd->y, cmd->width, cmd->height, cmd->fileName);
-    else
-        RB_TakeScreenshot(cmd->x, cmd->y, cmd->width, cmd->height, cmd->fileName);
+    RB_TakeScreenshot(cmd->x, cmd->y, cmd->width, cmd->height, cmd->fileName, cmd->jpeg);
 
     return (const void*)(cmd + 1);
 }
@@ -590,7 +525,7 @@ void R_ScreenshotFilename(int lastNumber, char* fileName)
     int a, b, c, d;
 
     if (lastNumber < 0 || lastNumber > 9999) {
-        Com_sprintf(fileName, MAX_OSPATH, "screenshots/shot9999.tga");
+        Com_sprintf(fileName, MAX_OSPATH, "screenshots/shot9999.png");
         return;
     }
 
@@ -602,7 +537,7 @@ void R_ScreenshotFilename(int lastNumber, char* fileName)
     lastNumber -= c * 10;
     d = lastNumber;
 
-    Com_sprintf(fileName, MAX_OSPATH, "screenshots/shot%i%i%i%i.tga", a, b, c, d);
+    Com_sprintf(fileName, MAX_OSPATH, "screenshots/shot%i%i%i%i.png", a, b, c, d);
 }
 
 /*
@@ -728,7 +663,7 @@ void R_ScreenShot_f(void)
 
     if (ri.Cmd_Argc() == 2 && !silent) {
         // explicit filename
-        Com_sprintf(checkname, MAX_OSPATH, "screenshots/%s.tga", ri.Cmd_Argv(1));
+        Com_sprintf(checkname, MAX_OSPATH, "screenshots/%s.png", ri.Cmd_Argv(1));
     } else {
         // scan for a free filename
 

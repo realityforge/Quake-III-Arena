@@ -23,6 +23,12 @@ limitations under the License.
 #define MAX_READ_PNG_WIDTH 2048
 #define MAX_READ_PNG_HEIGHT 2048
 
+// These are controlled by the size of the users screen resolution so we allow larger values. We could
+// probably use defaults that are extracted from max screen resolution in the future but hard coding
+// works for now
+#define MAX_WRITE_PNG_WIDTH 4096
+#define MAX_WRITE_PNG_HEIGHT 4096
+
 // Set memory usage limits for storing standard and unknown chunks, this is important when reading untrusted files!
 // No real thought has gone into what these should be set to so taking some (reasonable?) values from the upstream
 // library's documentation/examples.
@@ -57,9 +63,42 @@ static void* spng_hunk_calloc(size_t count, size_t size)
     return pPtr;
 }
 
+static void* spng_temp_hunk_malloc(const size_t size)
+{
+    return ri.Hunk_AllocateTempMemory(size);
+}
+static void spng_temp_hunk_free(void* ptr)
+{
+    // The library frequently calls this with a NULL pointer so we need to guard against freeing a NULL
+    if (NULL != ptr) {
+        ri.Hunk_FreeTempMemory(ptr);
+    }
+}
+
+static void* spng_temp_hunk_realloc(UNUSED_VAR void* ptr, UNUSED_VAR size_t size)
+{
+    // TODO: This will need to be implemented if we start to use temp_hunk space during writes
+    //       however this would require that the hunk system be reworked so that we could always
+    //       grow the "temp" hunk. Then we would need to expose this functionality.
+    return NULL;
+}
+
+static void* spng_temp_hunk_calloc(size_t count, size_t size)
+{
+    size_t actualSize = count * size;
+    void* pPtr = spng_temp_hunk_malloc(actualSize);
+    memset(pPtr, 0, actualSize);
+    return pPtr;
+}
+
 // The alloc structure that is used to allocate/release memory by PNG that is expected to persist over time
 // (i.e. This is used by the read functions as the pixel data will persist for the duration of a scene)
 static struct spng_alloc hunk_alloc = { .malloc_fn = spng_hunk_malloc, .realloc_fn = spng_hunk_realloc, .calloc_fn = spng_hunk_calloc, .free_fn = spng_hunk_free };
+
+// The alloc structure that is used to allocate/release temporary memory by PNG where the allocation does
+// not escape a boundary function. (i.e. This is used by the write functions as the pixel data will not
+// persist after the image has been written)
+UNUSED_VAR static struct spng_alloc temp_hunk_alloc = { .malloc_fn = spng_temp_hunk_malloc, .realloc_fn = spng_temp_hunk_realloc, .calloc_fn = spng_temp_hunk_calloc, .free_fn = spng_temp_hunk_free };
 
 static void r_spng_load_error(const char* name, const int result, const char* functionName)
 {
@@ -146,4 +185,98 @@ cleanup:
     if (NULL != ctx) {
         spng_ctx_free(ctx);
     }
+}
+
+static void r_spng_save_error(const char* name, const int result, const char* functionName)
+{
+    ri.Printf(PRINT_WARNING, "RE_SavePNG: Failed to save screenshot to png file named %s due to %s error calling %s.\n", name, spng_strerror(result), functionName);
+}
+
+/*
+ * Save the specified image data in PNG format to specified filename.
+ * Input data is in RGB form with a possible padding at the end of each row.
+ */
+void RE_SavePNG(const char* filename,
+                const uint32_t image_width,
+                const uint32_t image_height,
+                const byte* image_buffer,
+                const size_t image_buffer_size,
+                const int padding)
+{
+    // Set image properties, this determines the destination image format
+    struct spng_ihdr ihdr = {
+        .width = image_width,
+        .height = image_height,
+        .color_type = SPNG_COLOR_TYPE_TRUECOLOR,
+        .bit_depth = 8,
+        .compression_method = 0,
+        .filter_method = SPNG_FILTER_NONE,
+        .interlace_method = SPNG_INTERLACE_NONE
+    };
+    void* image = NULL;
+    int result;
+
+    // TODO: In the future we should use the temp hunk rather than the operating system allocator but until
+    //  we get around to rewriting the temp hunk allocator we will not be able to use the following line.
+    //  spng_ctx* ctx = spng_ctx_new2(&temp_hunk_alloc, SPNG_CTX_ENCODER);
+    spng_ctx* ctx = spng_ctx_new(SPNG_CTX_ENCODER);
+    if (NULL == ctx) {
+        r_spng_load_error(filename, SPNG_EMEM, "spng_ctx_new2");
+        return;
+    } else if (SPNG_OK != (result = spng_set_image_limits(ctx, MAX_WRITE_PNG_WIDTH, MAX_WRITE_PNG_HEIGHT))) {
+        r_spng_load_error(filename, result, "spng_set_image_limits");
+        goto cleanup;
+    } else if (SPNG_OK != (result = spng_set_chunk_limits(ctx, MAX_CHUNK_SIZE, MAX_CACHE_SIZE))) {
+        r_spng_load_error(filename, result, "spng_set_chunk_limits");
+        goto cleanup;
+    } else if (SPNG_OK != (result = spng_set_option(ctx, SPNG_ENCODE_TO_BUFFER, 1))) {
+        r_spng_save_error(filename, result, "spng_set_option");
+        goto cleanup;
+    } else if (SPNG_OK != (result = spng_set_ihdr(ctx, &ihdr))) {
+        r_spng_save_error(filename, result, "spng_set_ihdr");
+        goto cleanup;
+    } else if (SPNG_OK != (result = spng_encode_chunks(ctx))) {
+        r_spng_save_error(filename, result, "spng_encode_chunks");
+        goto cleanup;
+    } else if (SPNG_OK != (result = spng_encode_image(ctx, NULL, 0, SPNG_FMT_PNG, SPNG_ENCODE_PROGRESSIVE | SPNG_ENCODE_FINALIZE))) {
+        r_spng_save_error(filename, result, "spng_encode_image");
+        goto cleanup;
+    } else {
+        // PNG is encoded from top to bottom while the pixel data is supplied the inverse way so we need to save a row at a time.
+        const size_t row_size = image_width * 3;
+        const size_t padded_row_size = row_size + padding;
+        for (int i = (int)image_height - 1; i >= 0; i--) {
+            const void* row = image_buffer + (padded_row_size * i);
+            result = spng_encode_row(ctx, row, row_size);
+            if (0 == i) {
+                // The SPNG_EOI (end-of-image) return code is expected when you supply the
+                // last row of data, otherwise an error has occurred
+                if (SPNG_EOI != result) {
+                    r_spng_save_error(filename, result, "last spng_encode_row");
+                    goto cleanup;
+                }
+            } else if (SPNG_OK != result) {
+                r_spng_save_error(filename, result, "spng_encode_row");
+                goto cleanup;
+            }
+        }
+
+        size_t png_size;
+
+        // Get the internal buffer of the finished PNG
+        image = spng_get_png_buffer(ctx, &png_size, &result);
+        if (NULL == image) {
+            r_spng_save_error(filename, result, "spng_get_png_buffer");
+            goto cleanup;
+        } else {
+            ri.FS_WriteFile(filename, image, png_size);
+        }
+    }
+cleanup:
+    if (NULL != image) {
+        // TODO: See note above regarding use of temp hunk allocator. When this occurs we should uncomment the next line:
+        // hunk_alloc.free_fn(image);
+        free(image);
+    }
+    spng_ctx_free(ctx);
 }
