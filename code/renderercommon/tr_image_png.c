@@ -237,7 +237,8 @@ void RE_SavePNG(const char* filename, const uint32_t image_width, const uint32_t
         r_spng_save_error(filename, result, "spng_encode_image");
         goto cleanup;
     } else {
-        // PNG is encoded from top to bottom while the pixel data is supplied the inverse way so we need to save a row at a time.
+        // PNG is encoded from top to bottom while the pixel data is supplied in the other order
+        // so we save a row at a time in reverse order.
         const size_t row_size = image_width * 3;
         const size_t padded_row_size = row_size + padding;
         for (int i = (int)image_height - 1; i >= 0; i--) {
