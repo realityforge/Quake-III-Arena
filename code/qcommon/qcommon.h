@@ -770,7 +770,7 @@ void Hunk_ClearToMark(void);
 void Hunk_SetMark(void);
 qboolean Hunk_CheckMark(void);
 void Hunk_ClearTempMemory(void);
-void* Hunk_AllocateTempMemory(const size_t size);
+void* Hunk_AllocateTempMemory(size_t size);
 void Hunk_FreeTempMemory(void* buf);
 int Hunk_MemoryRemaining(void);
 void Hunk_Log(void);
