@@ -534,8 +534,9 @@ void RB_TakeScreenshotJPEG(int x, int y, int width, int height, char* fileName)
     memcount = (width * 3 + padlen) * height;
 
     // gamma correct
-    if (glConfig.deviceSupportsGamma)
+    if (qtrue == glConfig.deviceSupportsGamma) {
         R_GammaCorrect(buffer + offset, memcount);
+    }
 
     RE_SaveJPG(fileName, r_screenshotJpegQuality->integer, width, height, buffer + offset, padlen);
     ri.Hunk_FreeTempMemory(buffer);
