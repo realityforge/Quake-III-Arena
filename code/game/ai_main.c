@@ -21,7 +21,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "g_local.h"
-#include "../qcommon/q_shared.h"
 #include "../botlib/botlib.h" //bot lib interface
 #include "../botlib/be_aas.h"
 #include "../botlib/be_ea.h"

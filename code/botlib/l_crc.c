@@ -24,11 +24,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * CRC calculation
  *****************************************************************************/
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
-#include "../qcommon/q_shared.h"
 #include "botlib.h"
 #include "be_interface.h" //for botimport.Print
 #include "l_crc.h"

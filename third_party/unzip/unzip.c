@@ -41,7 +41,6 @@ woven in by Terry Thorsen 1/2003.
  */
 
 
-#include "q_shared.h"
 #include "qcommon.h"
 #include "unzip.h"
 #include <string.h>
