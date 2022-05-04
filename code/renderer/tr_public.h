@@ -140,9 +140,6 @@ typedef struct {
     // visualization for debugging collision detection
     void (*CM_DrawDebugSurface)(void (*drawPoly)(int color, int numPoints, float* points));
 
-    // a -1 return means the file does not exist
-    // NULL can be passed for buf to just determine existence
-    int (*FS_FileIsInPAK)(const char* name, int* pCheckSum);
     /**
      * Find the file with the specified name, if data parameter is non-null then allocate a buffer to
      * contain the content of the file and make the data pointer point at the new buffer. Return the size
