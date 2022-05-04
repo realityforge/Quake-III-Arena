@@ -22,19 +22,17 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #import <AppKit/AppKit.h>
 
-@interface Q3Controller : NSObject
-{
-    IBOutlet NSPanel *bannerPanel;
+@interface Q3Controller : NSObject {
+    IBOutlet NSPanel* bannerPanel;
 }
 
 #ifndef DEDICATED
 - (IBAction)paste:(id)sender;
 - (IBAction)requestTerminate:(id)sender;
 
-- (void) showBanner;
+- (void)showBanner;
 #endif
 
 - (void)quakeMain;
 
 @end
-
