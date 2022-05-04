@@ -17,10 +17,12 @@
 #
 # TODO: When clang-format version 15 is available the source code format should be updated with the setting "InsertBraces: true".
 #
+BasedOnStyle:    'WebKit'
 ---
 Language:        Cpp
-BasedOnStyle:    'WebKit'
 # SortIncludes is set to never as sorting them leads to compilation errors because of questionably constructed headers
 SortIncludes:    Never
 # A personal preference
 AlignAfterOpenBracket: Align
+---
+Language: ObjC
