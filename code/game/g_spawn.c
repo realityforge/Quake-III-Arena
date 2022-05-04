@@ -79,7 +79,7 @@ qboolean G_SpawnVector(const char* key, const char* defaultString, float* out)
 typedef enum {
     F_INT,
     F_FLOAT,
-    F_LSTRING, // string on disk, pointer in memory, TAG_LEVEL
+    F_STRING,
     F_VECTOR,
     F_ANGLEHACK,
     F_IGNORE
@@ -94,16 +94,16 @@ typedef struct
 } field_t;
 
 field_t fields[] = {
-    { "classname", FOFS(classname), F_LSTRING },
+    { "classname", FOFS(classname), F_STRING },
     { "origin", FOFS(s.origin), F_VECTOR },
-    { "model", FOFS(model), F_LSTRING },
-    { "model2", FOFS(model2), F_LSTRING },
+    { "model", FOFS(model), F_STRING },
+    { "model2", FOFS(model2), F_STRING },
     { "spawnflags", FOFS(spawnflags), F_INT },
     { "speed", FOFS(speed), F_FLOAT },
-    { "target", FOFS(target), F_LSTRING },
-    { "targetname", FOFS(targetname), F_LSTRING },
-    { "message", FOFS(message), F_LSTRING },
-    { "team", FOFS(team), F_LSTRING },
+    { "target", FOFS(target), F_STRING },
+    { "targetname", FOFS(targetname), F_STRING },
+    { "message", FOFS(message), F_STRING },
+    { "team", FOFS(team), F_STRING },
     { "wait", FOFS(wait), F_FLOAT },
     { "random", FOFS(random), F_FLOAT },
     { "count", FOFS(count), F_INT },
@@ -112,8 +112,8 @@ field_t fields[] = {
     { "dmg", FOFS(damage), F_INT },
     { "angles", FOFS(s.angles), F_VECTOR },
     { "angle", FOFS(s.angles), F_ANGLEHACK },
-    { "targetShaderName", FOFS(targetShaderName), F_LSTRING },
-    { "targetShaderNewName", FOFS(targetShaderNewName), F_LSTRING },
+    { "targetShaderName", FOFS(targetShaderName), F_STRING },
+    { "targetShaderNewName", FOFS(targetShaderNewName), F_STRING },
 
     { NULL }
 };
@@ -358,7 +358,7 @@ void G_ParseField(const char* key, const char* value, gentity_t* ent)
             b = (byte*)ent;
 
             switch (f->type) {
-            case F_LSTRING:
+            case F_STRING:
                 *(char**)(b + f->ofs) = G_NewString(value);
                 break;
             case F_VECTOR:
