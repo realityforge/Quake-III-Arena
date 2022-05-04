@@ -26,3 +26,4 @@ jobs:
         with:
           clang-format-version: '14'
           check-path: 'code'
+          exclude-regex: 'code/macosx/(macosx_local|CGPrivateAPI|Q3Controller|macosx_display).h'
