@@ -416,8 +416,6 @@ int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
     float phys_maxwalkvelocity, phys_maxcrouchvelocity, phys_maxswimvelocity;
     float phys_maxstep, phys_maxsteepness, phys_jumpvel, friction;
     float gravity, delta, maxvel, wishspeed, accelerate;
-    // float velchange, newvel;
-    // int ax;
     int n, i, j, pc, step, swimming, crouch, event, jump_frame, areanum;
     int areas[20], numareas;
     vec3_t points[20];
@@ -429,7 +427,6 @@ int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
 
     if (frametime <= 0)
         frametime = 0.1f;
-    //
     phys_friction = aassettings.phys_friction;
     phys_stopspeed = aassettings.phys_stopspeed;
     phys_gravity = aassettings.phys_gravity;
