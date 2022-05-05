@@ -19,6 +19,7 @@ Icon?
 # JetBrains IDEs
 ############################
 /.clwb
+/.ijwb
 /.idea
 
 # Local scripts
