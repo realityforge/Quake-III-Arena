@@ -69,3 +69,29 @@ cc_library(
     includes = ["."],
     deps = [":zlib"],
 )
+
+genrule(
+    name = "unzip_c_generator",
+    srcs = ["contrib/minizip/unzip.c"],
+    outs = ["generated/contrib/minizip/unzip.c"],
+    cmd = """
+    echo \"#include \\\"qcommon.h\\\"\n\" > $@ &&
+    echo \"#define ALLOC(size) (Z_Malloc(size))\n\" >> $@ &&
+    echo \"#define TRYFREE(p) {if (p) Z_Free(p);}\n\" >> $@ &&
+    cat $(location :contrib/minizip/unzip.c) >> $@
+    """,
+    visibility = ["//visibility:private"],
+)
+
+cc_library(
+    name = "unzip_impl",
+    srcs = ["contrib/minizip/ioapi.c", ":unzip_c_generator"],
+    deps = ["@org_realityforge_q3a//code/qcommon", ":unzip", ":zlib"],
+)
+
+cc_library(
+    name = "unzip",
+    hdrs = ["contrib/minizip/ioapi.h", "contrib/minizip/unzip.h"],
+    includes = ["contrib/minizip"],
+    deps = [":zlib"],
+)

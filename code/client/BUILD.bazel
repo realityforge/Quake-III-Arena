@@ -214,9 +214,8 @@ cc_library(
         "//code/sys:sys_osx",
         "//code/sys:sys_unix",
         "//third_party/sdl",
-        "//third_party/unzip",
-        "//third_party/unzip:unzip_impl",
         "@opus",
+        "@zlib//:unzip_impl",
         "@zlib//:zlib_impl",
     ],
 )

@@ -53,7 +53,7 @@ cc_library(
     deps = [
         ":qcommon",
         ":shared_api",
-        "//third_party/unzip",
+        "@zlib//:unzip",
     ],
 )
 
@@ -65,7 +65,7 @@ cc_library(
     deps = [
         ":qcommon",
         ":shared_api",
-        "//third_party/unzip",
+        "@zlib//:unzip",
     ],
 )
 
@@ -234,7 +234,7 @@ cc_library(
         "//code/sdl:__pkg__",
         "//code/server:__pkg__",
         "//code/sys:__pkg__",
-        "//third_party/unzip:__pkg__",
+        "@zlib//:__pkg__",
     ],
     deps = [
         ":qfiles",
