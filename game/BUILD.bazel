@@ -30,7 +30,7 @@ cc_binary(
 )
 
 _copy_to_directory(
-    name = "release",
+    name = "package_dir",
     srcs = [
         ":Quake3Arena",
         ":Quake3ArenaServer",
