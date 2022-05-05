@@ -107,12 +107,6 @@ def _copy_paths(ctx, src):
     else:
         fail("Unsupported type passed as src: %s" % type(src))
 
-    # check if this file matches an exclude_prefix
-    match = _longest_match(output_path, ctx.attr.exclude_prefixes)
-    if match:
-        # file is excluded due to match in exclude_prefix
-        return None, None, None
-
     # apply a replacement if one is found
     match = _longest_match(output_path, ctx.attr.replace_prefixes.keys())
     if match:
@@ -265,7 +259,6 @@ def _copy_to_directory_impl(ctx):
 _copy_to_directory = rule(
     attrs = {
         "srcs": attr.label_list(allow_files = True),
-        "exclude_prefixes": attr.string_list(default = []),
         "replace_prefixes": attr.string_dict(default = {}),
         "is_windows": attr.bool(mandatory = True),
         "downcase": attr.bool(default = False),
@@ -275,18 +268,14 @@ _copy_to_directory = rule(
     provides = [DefaultInfo],
 )
 
-def copy_to_directory(name, srcs, exclude_prefixes = [], replace_prefixes = {}, downcase = False, allow_symlink = False, **kwargs):
+def copy_to_directory(name, srcs, replace_prefixes = {}, downcase = False, allow_symlink = False, **kwargs):
     """Copies files and directories to an output directory.
 
     Files and directories can be arranged as needed in the output directory using
-    the `exclude_prefixes` and `replace_prefixes` attributes.
+    the `replace_prefixes` attribute.
     Args:
         name: A unique name for this target.
         srcs: Files to copy into the output directory.
-        exclude_prefixes: List of path prefixes to exclude from output directory.
-            If the output directory path for a file or directory starts with or is equal to
-            a path in the list then that file is not copied to the output directory.
-            Exclude prefixes are matched *before* replace_prefixes are applied.
         replace_prefixes: Map of paths prefixes to replace in the output directory path when copying files.
             If the output directory path for a file or directory starts with or is equal to
             a key in the dict then the matching portion of the output directory path is
@@ -311,4 +300,4 @@ def copy_to_directory(name, srcs, exclude_prefixes = [], replace_prefixes = {}, 
         "//conditions:default": False,
     })
 
-    _copy_to_directory(name = name, srcs = srcs, exclude_prefixes = exclude_prefixes, replace_prefixes = replace_prefixes, downcase = downcase, allow_symlink = allow_symlink, is_windows = _is_windows, **kwargs)
+    _copy_to_directory(name = name, srcs = srcs, replace_prefixes = replace_prefixes, downcase = downcase, allow_symlink = allow_symlink, is_windows = _is_windows, **kwargs)
