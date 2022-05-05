@@ -241,7 +241,7 @@ def _copy_to_directory_impl(ctx):
     copy_paths = []
     for src_file in ctx.files.srcs:
         src_path, output_path, src_file = _copy_paths(ctx, src_file)
-        if src_path != None:
+        if None != src_path:
             dst_path = _paths.normalize("/".join([output.path, output_path]))
             copy_paths.append((src_path, dst_path, src_file))
 
