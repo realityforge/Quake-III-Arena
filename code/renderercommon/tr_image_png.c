@@ -180,6 +180,9 @@ cleanup:
     if (NULL != image) {
         hunk_alloc.free_fn(image);
     }
+    if (NULL != pAssetData) {
+        ri.FS_FreeFile(pAssetData);
+    }
     if (NULL != ctx) {
         spng_ctx_free(ctx);
     }
