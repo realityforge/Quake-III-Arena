@@ -71,7 +71,6 @@ macos_application(
         # location in which arbitrary resources can be stored.
         # See https://developer.apple.com/library/archive/technotes/tn2206/_index.html for further details.
         "//game/baseq3:pak0.pk3": "Resources/baseq3",
-        "//game/baseq3:pak9hqq36.pk3": "Resources/baseq3",
         "//game/teamarena:pak0.pk3": "Resources/missionpack",
     },
     # TODO: Name this bundle id according to final product name
