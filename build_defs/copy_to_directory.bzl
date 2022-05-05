@@ -250,10 +250,7 @@ def _copy_to_directory_impl(ctx):
     else:
         _copy_to_dir_bash(ctx, copy_paths, output, ctx.attr.allow_symlink)
     return [
-        DefaultInfo(
-            files = depset([output]),
-            runfiles = ctx.runfiles([output]),
-        ),
+        DefaultInfo(files = depset([output]), runfiles = ctx.runfiles([output])),
     ]
 
 _copy_to_directory = rule(
