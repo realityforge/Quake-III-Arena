@@ -44,7 +44,7 @@ The major changes of the project are tracked in this table.
       <td>4?</td>
       <td>8?</td>
       <td>0</td>
-      <td>10%?</td>
+      <td>90%</td>
       <td>2022-03-01</td>
       <td>&nbsp;</td>
     </tr>
