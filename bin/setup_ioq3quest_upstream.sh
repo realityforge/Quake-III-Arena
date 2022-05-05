@@ -46,7 +46,7 @@ git checkout -B upstream/ioq3quest_formatted
 git show ${BRANCH_WITH_CLANG_FORMAT}:.clang-format > .clang-format
 # shellcheck disable=SC2038
 find android/app/src/main/cpp/code \
-     \( -name '*.h' -or -name '*.c' \)  \
+     \( -name '*.h' -or -name '*.c' -or -name '*.m' \)  \
      ! -path 'android/app/src/main/cpp/code/AL/*' -and \
      ! -path 'android/app/src/main/cpp/code/curl-7.54.0/*' -and \
      ! -path 'android/app/src/main/cpp/code/jpeg-8c/*' -and \
