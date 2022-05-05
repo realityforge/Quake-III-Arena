@@ -12,6 +12,7 @@
 
 load("@build_bazel_rules_apple//apple:macos.bzl", "macos_application")
 load("@build_bazel_rules_apple//apple:versioning.bzl", "apple_bundle_version")
+load("//build_defs:copy_to_directory.bzl", _copy_to_directory = "copy_to_directory")
 
 # A version scheme that parses version information out of the build
 # label and uses a fallback for developers' builds. For example, the
@@ -45,6 +46,36 @@ apple_bundle_version(
     short_version_string = "{version}",
 )
 
+_copy_to_directory(
+    name = "baseq3_code",
+    srcs = [
+        "//game/baseq3:cgame.so",
+        "//game/baseq3:qagame.so",
+        "//game/baseq3:ui.so",
+    ],
+    allow_symlink = True,
+    replace_prefixes = {
+        "cgame": "baseq3/cgamearm64",
+        "qagame": "baseq3/qagamearm64",
+        "ui": "baseq3/uiarm64",
+    },
+)
+
+_copy_to_directory(
+    name = "teamarena_code",
+    srcs = [
+        "//game/teamarena:cgame.so",
+        "//game/teamarena:qagame.so",
+        "//game/teamarena:ui.so",
+    ],
+    allow_symlink = True,
+    replace_prefixes = {
+        "cgame": "missionpack/cgamearm64",
+        "qagame": "missionpack/qagamearm64",
+        "ui": "missionpack/uiarm64",
+    },
+)
+
 # This target is a WIP and as we do not currently use it, the work has stopped on it
 # The application *should* bundle the SDL framework or maybe we should inline the SDL
 # source into our build. Then when building it we would need to run
@@ -55,13 +86,8 @@ macos_application(
     additional_contents = {
         "//game:Quake3ArenaServer": "MacOS",
         "//code/renderergl2:renderer_opengl2.so": "MacOS",
-        # TODO: All these libraries should be suffixed with the arch...i.e "arm64"
-        "//game/baseq3:cgame.so": "MacOS/baseq3",
-        "//game/baseq3:qagame.so": "MacOS/baseq3",
-        "//game/baseq3:ui.so": "MacOS/baseq3",
-        "//game/teamarena:cgame.so": "MacOS/missionpack",
-        "//game/teamarena:qagame.so": "MacOS/missionpack",
-        "//game/teamarena:ui.so": "MacOS/missionpack",
+        ":baseq3_code": "MacOS",
+        ":teamarena_code": "MacOS",
 
         # Application Icons
         ":quake3_flat.icns": "Resources",
