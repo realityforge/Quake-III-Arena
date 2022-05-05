@@ -34,7 +34,7 @@ After reviewing the ecosystem it seemed like the only automation system that cou
 * **Extensible to your needs**: Add support for new languages and platforms with Bazel's extension language. Share and re-use language rules written by the growing Bazel community.
 
 For all the benefits that Bazel offers, the most significant negative is an extremely steep initial learning curve. There is limited documentation on how to get started beyond toy examples. Once understood, Bazel seems to be (relatively) easy to maintain for large projects which is in stark contrast
-to other build tools.
+to other build tools. The challenge seems to be learning enough to move from a toy project to large projects.
 
 <a name="phase_1" ></a>
 
