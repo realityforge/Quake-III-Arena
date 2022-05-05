@@ -303,6 +303,7 @@ void AAS_ShowReachability(aas_reachability_t* reach)
                                   SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE | SE_TOUCHJUMPPAD | SE_HITGROUNDAREA, reach->areanum, qtrue);
     }
 }
+
 void AAS_FloodAreas_r(int areanum, int cluster, int* done)
 {
     int nextareanum, i, facenum;
