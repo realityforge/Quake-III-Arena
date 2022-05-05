@@ -22,8 +22,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #import "Q3Controller.h"
 
-#import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+#import <Foundation/Foundation.h>
 
 #include "client.h"
 #include "macosx_local.h"
@@ -35,7 +35,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define MAX_ARGC 1024
 
 static qboolean Sys_IsProcessingTerminationRequest = qfalse;
-static void Sys_CreatePathToFile(NSString *path, NSDictionary *attributes);
+static void Sys_CreatePathToFile(NSString* path, NSDictionary* attributes);
 
 @interface Q3Controller (Private)
 - (void)quakeMain;
@@ -45,28 +45,32 @@ static void Sys_CreatePathToFile(NSString *path, NSDictionary *attributes);
 
 #ifndef DEDICATED
 
-- (void)applicationDidFinishLaunching:(NSNotification *)notification;
+- (void)applicationDidFinishLaunching:(NSNotification*)notification;
 {
-    NS_DURING {
+    NS_DURING
+    {
         [self quakeMain];
-    } NS_HANDLER {
+    }
+    NS_HANDLER
+    {
         Sys_Error("%@", [localException reason]);
-    } NS_ENDHANDLER;
+    }
+    NS_ENDHANDLER;
     Sys_Quit();
 }
 
-- (void)applicationDidUnhide:(NSNotification *)notification;
+- (void)applicationDidUnhide:(NSNotification*)notification;
 {
     // Don't reactivate the game if we are asking whether to quit
     if (Sys_IsProcessingTerminationRequest)
         return;
-        
+
     if (!Sys_Unhide())
         // Didn't work -- hide again so we should get another chance to unhide later
-        [NSApp hide: nil];
+        [NSApp hide:nil];
 }
 
-- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication*)sender;
 {
     int choice;
 
@@ -74,7 +78,7 @@ static void Sys_CreatePathToFile(NSString *path, NSDictionary *attributes);
         // We're terminating via -terminate:
         return NSTerminateNow;
     }
-    
+
     // Avoid reactivating GL when we unhide due to this panel
     Sys_IsProcessingTerminationRequest = qtrue;
     choice = NSRunAlertPanel(nil, @"Quit without saving?", @"Don't Quit", @"Quit", nil);
@@ -82,10 +86,10 @@ static void Sys_CreatePathToFile(NSString *path, NSDictionary *attributes);
 
     if (choice == NSAlertAlternateReturn)
         return NSTerminateNow;
-        
+
     // Make sure we get re-hidden
     [NSApp hide:nil];
-    
+
     return NSTerminateCancel;
 }
 
@@ -111,7 +115,6 @@ static void Sys_CreatePathToFile(NSString *path, NSDictionary *attributes);
 
 extern void CL_Quit_f(void);
 
-
 - (IBAction)requestTerminate:(id)sender;
 {
     Com_Quit_f();
@@ -123,32 +126,32 @@ extern void CL_Quit_f(void);
     static BOOL hasShownBanner = NO;
 
     if (!hasShownBanner) {
-        cvar_t *showBanner;
+        cvar_t* showBanner;
 
         hasShownBanner = YES;
         showBanner = Cvar_Get("cl_showBanner", "1", 0);
         if (showBanner->integer != 0) {
-            NSPanel *splashPanel;
-            NSImage *bannerImage;
+            NSPanel* splashPanel;
+            NSImage* bannerImage;
             NSRect bannerRect;
-            NSImageView *bannerImageView;
-            
+            NSImageView* bannerImageView;
+
             bannerImage = [[NSImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForImageResource:@"banner.jpg"]];
             bannerRect = NSMakeRect(0.0, 0.0, [bannerImage size].width, [bannerImage size].height);
-            
+
             splashPanel = [[NSPanel alloc] initWithContentRect:bannerRect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
-            
+
             bannerImageView = [[NSImageView alloc] initWithFrame:bannerRect];
             [bannerImageView setImage:bannerImage];
             [splashPanel setContentView:bannerImageView];
             [bannerImageView release];
-            
+
             [splashPanel center];
             [splashPanel setHasShadow:YES];
-            [splashPanel orderFront: nil];
+            [splashPanel orderFront:nil];
             [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:2.5]];
             [splashPanel close];
-            
+
             [bannerImage release];
         }
     }
@@ -156,13 +159,13 @@ extern void CL_Quit_f(void);
 
 // Services
 
-- (void)connectToServer:(NSPasteboard *)pasteboard userData:(NSString *)data error:(NSString **)error;
+- (void)connectToServer:(NSPasteboard*)pasteboard userData:(NSString*)data error:(NSString**)error;
 {
-    NSArray *pasteboardTypes;
+    NSArray* pasteboardTypes;
 
     pasteboardTypes = [pasteboard types];
     if ([pasteboardTypes containsObject:NSStringPboardType]) {
-        NSString *requestedServer;
+        NSString* requestedServer;
 
         requestedServer = [pasteboard stringForType:NSStringPboardType];
         if (requestedServer) {
@@ -173,13 +176,13 @@ extern void CL_Quit_f(void);
     *error = @"Unable to connect to server:  could not find string on pasteboard";
 }
 
-- (void)performCommand:(NSPasteboard *)pasteboard userData:(NSString *)data error:(NSString **)error;
+- (void)performCommand:(NSPasteboard*)pasteboard userData:(NSString*)data error:(NSString**)error;
 {
-    NSArray *pasteboardTypes;
+    NSArray* pasteboardTypes;
 
     pasteboardTypes = [pasteboard types];
     if ([pasteboardTypes containsObject:NSStringPboardType]) {
-        NSString *requestedCommand;
+        NSString* requestedCommand;
 
         requestedCommand = [pasteboard stringForType:NSStringPboardType];
         if (requestedCommand) {
@@ -194,16 +197,16 @@ extern void CL_Quit_f(void);
 
 - (void)quakeMain;
 {
-    NSAutoreleasePool *pool;
+    NSAutoreleasePool* pool;
     int argc = 0;
-    const char *argv[MAX_ARGC];
-    NSProcessInfo *processInfo;
-    NSArray *arguments;
+    const char* argv[MAX_ARGC];
+    NSProcessInfo* processInfo;
+    NSArray* arguments;
     unsigned int argumentIndex, argumentCount;
-    NSFileManager *defaultManager;
+    NSFileManager* defaultManager;
     unsigned int commandLineLength;
     NSString *installationPathKey, *installationPath;
-    char *cmdline;
+    char* cmdline;
     BOOL foundDirectory;
     NSString *appName, *demoAppName, *selectButton;
     int count = 0;
@@ -215,16 +218,16 @@ extern void CL_Quit_f(void);
     arguments = [processInfo arguments];
     argumentCount = [arguments count];
     for (argumentIndex = 0; argumentIndex < argumentCount; argumentIndex++) {
-        NSString *arg;
-        
+        NSString* arg;
+
         arg = [arguments objectAtIndex:argumentIndex];
         // Don't pass the Process Serial Number command line arg that the Window Server/Finder invokes us with
-        if ([arg hasPrefix: @"-psn_"])
+        if ([arg hasPrefix:@"-psn_"])
             continue;
-            
+
         argv[argc++] = strdup([arg cString]);
     }
-    
+
     // Figure out where the level data is stored.
     installationPathKey = @"RetailInstallationPath";
 
@@ -234,45 +237,45 @@ extern void CL_Quit_f(void);
         installationPath = [[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent];
     }
 
-#if !defined(DEDICATED)    
-    appName = [[[NSBundle mainBundle] infoDictionary] objectForKey: @"CFBundleName"];
+#if !defined(DEDICATED)
+    appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
 #else
-	// We are hard coding the app name here since the dedicated server is a tool, not a app bundle and does not have access to the Info.plist that the client app does.  Suck.
+    // We are hard coding the app name here since the dedicated server is a tool, not a app bundle and does not have access to the Info.plist that the client app does.  Suck.
     appName = @"Quake3";
 #endif
     demoAppName = appName;
 
     while (YES) {
-        NSString *dataPath;
-        NSOpenPanel *openPanel;
+        NSString* dataPath;
+        NSOpenPanel* openPanel;
         int result;
-        
+
         foundDirectory = NO;
         defaultManager = [NSFileManager defaultManager];
-        //NSLog(@"Candidate installation path = %@", installationPath);
-        dataPath = [installationPath stringByAppendingPathComponent: @"baseq3"];
-        
-        if ([defaultManager fileExistsAtPath: dataPath]) {
+        // NSLog(@"Candidate installation path = %@", installationPath);
+        dataPath = [installationPath stringByAppendingPathComponent:@"baseq3"];
+
+        if ([defaultManager fileExistsAtPath:dataPath]) {
             // Check that the data directory contains at least one .pk3 file.  We don't know what it will be named, so don't hard code a name (for example it might be named 'french.pk3' for a French release
-            NSArray *files;
+            NSArray* files;
             unsigned int fileIndex;
-            
-            files = [defaultManager directoryContentsAtPath: dataPath];
+
+            files = [defaultManager directoryContentsAtPath:dataPath];
             fileIndex = [files count];
             while (fileIndex--) {
-                if ([[files objectAtIndex: fileIndex] hasSuffix: @"pk3"]) {
-                    //NSLog(@"Found %@.", [files objectAtIndex: fileIndex]);
+                if ([[files objectAtIndex:fileIndex] hasSuffix:@"pk3"]) {
+                    // NSLog(@"Found %@.", [files objectAtIndex: fileIndex]);
                     foundDirectory = YES;
                     break;
                 }
             }
         }
-        
+
         if (foundDirectory)
             break;
 
 #ifdef DEDICATED
-            break;
+        break;
 #warning TJW: We are hard coding the app name and default domain here since the dedicated server is a tool, not a app bundle and does not have access to the Info.plist that the client app does.  Suck.
         NSLog(@"Unable to determine installation directory.  Please move the executable into the '%@' installation directory or add a '%@' key in the 'Q3DedicatedServer' defaults domain.", appName, installationPathKey, [[NSBundle mainBundle] bundleIdentifier]);
         Sys_Quit();
@@ -282,20 +285,20 @@ extern void CL_Quit_f(void);
 
         result = NSRunAlertPanel(demoAppName, @"You need to select the installation directory for %@ (not any directory inside of it -- the installation directory itself).", selectButton, @"Quit", nil, appName);
         switch (result) {
-            case NSAlertDefaultReturn:
-                break;
-            default:
-                Sys_Quit();
-                break;
+        case NSAlertDefaultReturn:
+            break;
+        default:
+            Sys_Quit();
+            break;
         }
-        
+
         openPanel = [NSOpenPanel openPanel];
         [openPanel setAllowsMultipleSelection:NO];
         [openPanel setCanChooseDirectories:YES];
         [openPanel setCanChooseFiles:NO];
         result = [openPanel runModalForDirectory:nil file:nil];
         if (result == NSOKButton) {
-            NSArray *filenames;
+            NSArray* filenames;
 
             filenames = [openPanel filenames];
             if ([filenames count] == 1) {
@@ -306,41 +309,45 @@ extern void CL_Quit_f(void);
         }
 #endif
     }
-    
+
     // Create the application support directory if it doesn't exist already
     do {
-        NSArray *results;
+        NSArray* results;
         NSString *libraryPath, *homePath, *filePath;
-        NSDictionary *attributes;
-        
+        NSDictionary* attributes;
+
         results = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
         if (![results count])
             break;
-        
-        libraryPath = [results objectAtIndex: 0];
-        homePath = [libraryPath stringByAppendingPathComponent: @"Application Support"];
-        homePath = [homePath stringByAppendingPathComponent: appName];
-        filePath = [homePath stringByAppendingPathComponent: @"foo"];
-        
-        attributes = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithUnsignedInt: 0750], NSFilePosixPermissions, nil];
-        NS_DURING {
+
+        libraryPath = [results objectAtIndex:0];
+        homePath = [libraryPath stringByAppendingPathComponent:@"Application Support"];
+        homePath = [homePath stringByAppendingPathComponent:appName];
+        filePath = [homePath stringByAppendingPathComponent:@"foo"];
+
+        attributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInt:0750], NSFilePosixPermissions, nil];
+        NS_DURING
+        {
             Sys_CreatePathToFile(filePath, attributes);
             Sys_SetDefaultHomePath([homePath fileSystemRepresentation]);
-        } NS_HANDLER {
+        }
+        NS_HANDLER
+        {
             NSLog(@"Exception: %@", localException);
 #ifndef DEDICATED
             NSRunAlertPanel(nil, @"Unable to create '%@'.  Please make sure that you have permission to write to this folder and re-run the game.", @"OK", nil, nil, homePath);
 #endif
             Sys_Quit();
-        } NS_ENDHANDLER;
-    } while(0);
-    
+        }
+        NS_ENDHANDLER;
+    } while (0);
+
     // Let the filesystem know where our local install is
     Sys_SetDefaultInstallPath([installationPath cString]);
 
     cmdline = NULL;
     if (!cmdline) {
-        // merge the command line, this is kinda silly	
+        // merge the command line, this is kinda silly
         for (commandLineLength = 1, argumentIndex = 1; argumentIndex < argc; argumentIndex++)
             commandLineLength += strlen(argv[argumentIndex]) + 1;
         cmdline = malloc(commandLineLength);
@@ -352,7 +359,7 @@ extern void CL_Quit_f(void);
         }
     }
     Com_Printf("command line: %s\n", cmdline);
-    
+
     Com_Init(cmdline);
 
 #ifndef DEDICATED
@@ -362,7 +369,7 @@ extern void CL_Quit_f(void);
     while (1) {
         Com_Frame();
 
-        if ((count & 15)==0) {
+        if ((count & 15) == 0) {
             // We should think about doing this less frequently than every frame
             [pool release];
             pool = [[NSAutoreleasePool alloc] init];
@@ -374,27 +381,25 @@ extern void CL_Quit_f(void);
 
 @end
 
-
-
 // Creates any directories needed to be able to create a file at the specified path.  Raises an exception on failure.
-static void Sys_CreatePathToFile(NSString *path, NSDictionary *attributes)
+static void Sys_CreatePathToFile(NSString* path, NSDictionary* attributes)
 {
-    NSArray *pathComponents;
+    NSArray* pathComponents;
     unsigned int dirIndex, dirCount;
     unsigned int startingIndex;
-    NSFileManager *manager;
-    
+    NSFileManager* manager;
+
     manager = [NSFileManager defaultManager];
     pathComponents = [path pathComponents];
     dirCount = [pathComponents count] - 1;
 
     startingIndex = 0;
     for (dirIndex = startingIndex; dirIndex < dirCount; dirIndex++) {
-        NSString *partialPath;
+        NSString* partialPath;
         BOOL fileExists;
 
         partialPath = [NSString pathWithComponents:[pathComponents subarrayWithRange:NSMakeRange(0, dirIndex + 1)]];
-        
+
         // Don't use the 'fileExistsAtPath:isDirectory:' version since it doesn't traverse symlinks
         fileExists = [manager fileExistsAtPath:partialPath];
         if (!fileExists) {
@@ -402,18 +407,20 @@ static void Sys_CreatePathToFile(NSString *path, NSDictionary *attributes)
                 [NSException raise:NSGenericException format:@"Unable to create a directory at path: %@", partialPath];
             }
         } else {
-            NSDictionary *attributes;
+            NSDictionary* attributes;
 
             attributes = [manager fileAttributesAtPath:partialPath traverseLink:YES];
-            if (![[attributes objectForKey:NSFileType] isEqualToString: NSFileTypeDirectory]) {
-                [NSException raise:NSGenericException format:@"Unable to write to path \"%@\" because \"%@\" is not a directory",
-                    path, partialPath];
+            if (![[attributes objectForKey:NSFileType] isEqualToString:NSFileTypeDirectory]) {
+                [NSException raise:NSGenericException
+                            format:@"Unable to write to path \"%@\" because \"%@\" is not a directory",
+                            path, partialPath];
             }
         }
     }
 }
 
 #ifdef DEDICATED
-void S_ClearSoundBuffer( void ) {
+void S_ClearSoundBuffer(void)
+{
 }
 #endif

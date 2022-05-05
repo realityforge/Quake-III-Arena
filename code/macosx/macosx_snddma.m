@@ -39,28 +39,27 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 // Original MacOS 9 sizes
 //#define	MAX_MIXED_SAMPLES	0x8000
-//#define	SUBMISSION_CHUNK	 0x100 
-
+//#define	SUBMISSION_CHUNK	 0x100
 
 static unsigned int submissionChunk;
 static unsigned int maxMixedSamples;
 
-static	short		*s_mixedSamples;
-static	int				 s_chunkCount;		// number of chunks submitted
-static	SndChannel		*s_sndChan;
-static	ExtSoundHeader	s_sndHeader;
+static short* s_mixedSamples;
+static int s_chunkCount; // number of chunks submitted
+static SndChannel* s_sndChan;
+static ExtSoundHeader s_sndHeader;
 
-void S_Callback( SndChannel *sc, SndCommand *cmd )
+void S_Callback(SndChannel* sc, SndCommand* cmd)
 {
-    SndCommand		mySndCmd;
-    SndCommand		mySndCmd2;
-    int				offset;
+    SndCommand mySndCmd;
+    SndCommand mySndCmd2;
+    int offset;
 
-    offset = ( s_chunkCount * submissionChunk ) & (maxMixedSamples-1);
+    offset = (s_chunkCount * submissionChunk) & (maxMixedSamples - 1);
 
     // queue up another sound buffer
-    memset( &s_sndHeader, 0, sizeof( s_sndHeader ) );
-    s_sndHeader.samplePtr = (void *)(s_mixedSamples + offset);
+    memset(&s_sndHeader, 0, sizeof(s_sndHeader));
+    s_sndHeader.samplePtr = (void*)(s_mixedSamples + offset);
     s_sndHeader.numChannels = 2;
     s_sndHeader.sampleRate = rate22khz;
     s_sndHeader.loopStart = 0;
@@ -76,38 +75,39 @@ void S_Callback( SndChannel *sc, SndCommand *cmd )
     mySndCmd.cmd = bufferCmd;
     mySndCmd.param1 = 0;
     mySndCmd.param2 = (int)&s_sndHeader;
-    SndDoCommand( sc, &mySndCmd, true );
+    SndDoCommand(sc, &mySndCmd, true);
 
     // and another callback
     mySndCmd2.cmd = callBackCmd;
     mySndCmd2.param1 = 0;
     mySndCmd2.param2 = 0;
-    SndDoCommand( sc, &mySndCmd2, true );
+    SndDoCommand(sc, &mySndCmd2, true);
 
-    s_chunkCount++;		// this is the next buffer we will submit
+    s_chunkCount++; // this is the next buffer we will submit
 }
 
-void S_MakeTestPattern( void ) {
-	int		i;
-	float	v;
-	int		sample;
-	
-	for ( i = 0 ; i < dma.samples / 2 ; i ++ ) {
-		v = sin( M_PI * 2 * i / 64 );
-		sample = v * 0x4000;
-		((short *)dma.buffer)[i*2] = sample;	
-		((short *)dma.buffer)[i*2+1] = sample;	
-	}
+void S_MakeTestPattern(void)
+{
+    int i;
+    float v;
+    int sample;
+
+    for (i = 0; i < dma.samples / 2; i++) {
+        v = sin(M_PI * 2 * i / 64);
+        sample = v * 0x4000;
+        ((short*)dma.buffer)[i * 2] = sample;
+        ((short*)dma.buffer)[i * 2 + 1] = sample;
+    }
 }
 
 qboolean SNDDMA_Init(void)
 {
-    int		err;
-    cvar_t *bufferSize;
-    cvar_t *chunkSize;
+    int err;
+    cvar_t* bufferSize;
+    cvar_t* chunkSize;
 
-    chunkSize = ri.Cvar_Get( "s_chunksize", "8192", CVAR_ARCHIVE );
-    bufferSize = ri.Cvar_Get( "s_buffersize", "65536", CVAR_ARCHIVE );
+    chunkSize = ri.Cvar_Get("s_chunksize", "8192", CVAR_ARCHIVE);
+    bufferSize = ri.Cvar_Get("s_buffersize", "65536", CVAR_ARCHIVE);
 
     if (!chunkSize->integer) {
         ri.Error(ERR_FATAL, "snd_chunkSize must be non-zero\n");
@@ -127,8 +127,8 @@ qboolean SNDDMA_Init(void)
 
     // create a sound channel
     s_sndChan = NULL;
-    err = SndNewChannel( &s_sndChan, sampledSynth, initStereo, NewSndCallBackProc(S_Callback) );
-    if ( err ) {
+    err = SndNewChannel(&s_sndChan, sampledSynth, initStereo, NewSndCallBackProc(S_Callback));
+    if (err) {
         return false;
     }
 
@@ -136,35 +136,39 @@ qboolean SNDDMA_Init(void)
     maxMixedSamples = bufferSize->integer;
 
     s_mixedSamples = NSZoneMalloc(NULL, sizeof(*s_mixedSamples) * maxMixedSamples);
-    
+
     dma.channels = 2;
     dma.samples = maxMixedSamples;
     dma.submission_chunk = submissionChunk;
     dma.samplebits = 16;
     dma.speed = 22050;
-    dma.buffer = (byte *)s_mixedSamples;
+    dma.buffer = (byte*)s_mixedSamples;
 
     // que up the first submission-chunk sized buffer
     s_chunkCount = 0;
 
-    S_Callback( s_sndChan, NULL );
+    S_Callback(s_sndChan, NULL);
 
     return qtrue;
 }
 
-int	SNDDMA_GetDMAPos(void) {
+int SNDDMA_GetDMAPos(void)
+{
     return s_chunkCount * submissionChunk;
 }
 
-void SNDDMA_Shutdown(void) {
-	if ( s_sndChan ) {
-		SndDisposeChannel( s_sndChan, true );
-		s_sndChan = NULL;
-	}
+void SNDDMA_Shutdown(void)
+{
+    if (s_sndChan) {
+        SndDisposeChannel(s_sndChan, true);
+        s_sndChan = NULL;
+    }
 }
 
-void SNDDMA_BeginPainting(void) {
+void SNDDMA_BeginPainting(void)
+{
 }
 
-void SNDDMA_Submit(void) {
+void SNDDMA_Submit(void)
+{
 }

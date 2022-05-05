@@ -19,4 +19,4 @@
 #
 
 # shellcheck disable=SC2038
-find code -name '*.h' -o -name '*.c' | xargs clang-format -i
+find code -name '*.h' -o -name '*.c' -o -name '*.m' | xargs clang-format -i

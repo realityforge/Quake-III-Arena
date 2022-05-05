@@ -26,31 +26,31 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #import <Foundation/NSString.h>
 #import <stdio.h>
 
-OTStackNode *rootNode;
-OTStackNode *markFragmentsNode1;
-OTStackNode *markFragmentsNode2;
-OTStackNode *markFragmentsGrid;
-OTStackNode *markFragmentsNode4;
-OTStackNode *addMarkFragmentsNode;
-OTStackNode *chopPolyNode;
-OTStackNode *boxTraceNode;
-OTStackNode *boxOnPlaneSideNode;
-OTStackNode *recursiveWorldNode;
-OTStackNode *surfaceAnimNode;
-OTStackNode *surfaceFaceNode;
-OTStackNode *surfaceMeshNode;
-OTStackNode *surfaceEndNode;
-OTStackNode *shadowEndNode;
-OTStackNode *stageIteratorGenericNode;
-OTStackNode *computeColorAndTexNode;
-OTStackNode *mp3DecodeNode;
+OTStackNode* rootNode;
+OTStackNode* markFragmentsNode1;
+OTStackNode* markFragmentsNode2;
+OTStackNode* markFragmentsGrid;
+OTStackNode* markFragmentsNode4;
+OTStackNode* addMarkFragmentsNode;
+OTStackNode* chopPolyNode;
+OTStackNode* boxTraceNode;
+OTStackNode* boxOnPlaneSideNode;
+OTStackNode* recursiveWorldNode;
+OTStackNode* surfaceAnimNode;
+OTStackNode* surfaceFaceNode;
+OTStackNode* surfaceMeshNode;
+OTStackNode* surfaceEndNode;
+OTStackNode* shadowEndNode;
+OTStackNode* stageIteratorGenericNode;
+OTStackNode* computeColorAndTexNode;
+OTStackNode* mp3DecodeNode;
 
 void InitializeTimers()
 {
-    const char *env;
-    
+    const char* env;
+
     OTSetup();
-    
+
     rootNode = OTStackNodeCreate("root");
     markFragmentsNode1 = OTStackNodeCreate("R_MarkFragments 1");
     markFragmentsNode2 = OTStackNodeCreate("R_MarkFragments 2");
@@ -72,4 +72,3 @@ void InitializeTimers()
 }
 
 #endif // OMNI_TIMER
-
