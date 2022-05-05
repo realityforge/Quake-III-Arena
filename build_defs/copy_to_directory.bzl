@@ -73,12 +73,11 @@ _COPY_EXECUTION_REQUIREMENTS = {
     "local": "1",
 }
 
-def _longest_match(subject, tests, allow_partial = False):
+def _longest_match(subject, tests):
     match = None
     high_score = 0
     for test in tests:
-        starts_with_test = test if allow_partial else test + "/"
-        if subject == test or subject.startswith(starts_with_test):
+        if subject == test or subject.startswith(test):
             score = len(test)
             if score > high_score:
                 match = test
@@ -109,13 +108,13 @@ def _copy_paths(ctx, src):
         fail("Unsupported type passed as src: %s" % type(src))
 
     # check if this file matches an exclude_prefix
-    match = _longest_match(output_path, ctx.attr.exclude_prefixes, True)
+    match = _longest_match(output_path, ctx.attr.exclude_prefixes)
     if match:
         # file is excluded due to match in exclude_prefix
         return None, None, None
 
     # apply a replacement if one is found
-    match = _longest_match(output_path, ctx.attr.replace_prefixes.keys(), True)
+    match = _longest_match(output_path, ctx.attr.replace_prefixes.keys())
     if match:
         output_path = ctx.attr.replace_prefixes[match] + output_path[len(match):]
 
