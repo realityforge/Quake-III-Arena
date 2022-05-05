@@ -106,7 +106,7 @@ def _copy_paths(ctx, src):
         #  - Single file label "//content/baseq3:models/weapons2/shotgun/shotgun.png" => output_path = "models/weapons2/shotgun/shotgun.png"
 
     else:
-        fail("Unsupported type")
+        fail("Unsupported type passed as src: %s" % type(src))
 
     # check if this file matches an exclude_prefix
     match = _longest_match(output_path, ctx.attr.exclude_prefixes, True)
