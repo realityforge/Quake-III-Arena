@@ -10,6 +10,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+genrule(
+    name = "unzip_c_generator",
+    srcs = ["unzip.c"],
+    outs = ["generated/unzip.c"],
+    cmd = """
+    echo \"#include \\\"qcommon.h\\\"\n\" > $@ &&
+    echo \"#define ALLOC(size) (Z_Malloc(size))\n\" >> $@ &&
+    echo \"#define TRYFREE(p) {if (p) Z_Free(p);}\n\" >> $@ &&
+    cat $(location :unzip.c) >> $@
+    """,
+)
+
 # unzip is (probably) legacy code to unzip which should switch to zlib
 # It is also not "third_party" as such as it uses Z_Malloc and Z_Free
 # However if we switch to zlib and pass in allocators/deallocators then we should be fine
@@ -17,7 +29,7 @@ cc_library(
     name = "unzip_impl",
     srcs = [
         "ioapi.c",
-        "unzip.c",
+        ":unzip_c_generator",
     ],
     visibility = [
         "//code/client:__pkg__",
