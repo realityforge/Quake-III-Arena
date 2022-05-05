@@ -711,17 +711,21 @@ char* Sys_ExtractBasedir(char* dir)
 {
     static char cwd[MAX_OSPATH];
 
-    Q_strncpyz(cwd, dir, sizeof(cwd));
-    if (strcmp(Sys_Basename(cwd), "MacOS"))
+    if (0 != strcmp(Sys_Basename(dir), "MacOS")) {
         return dir;
-    Q_strncpyz(cwd, Sys_Dirname(cwd), sizeof(cwd));
-    if (strcmp(Sys_Basename(cwd), "Contents"))
-        return dir;
-    Q_strncpyz(cwd, Sys_Dirname(cwd), sizeof(cwd));
-    if (!strstr(Sys_Basename(cwd), ".app"))
-        return dir;
-    Q_strncpyz(cwd, Sys_Dirname(cwd), sizeof(cwd));
-    Q_strncpyz(cwd, "Contents" PATH_SEPARATOR "Resources", sizeof(cwd));
-    return cwd;
+    } else {
+        Q_strncpyz(cwd, Sys_Dirname(dir), MAX_OSPATH);
+        if (0 != strcmp(Sys_Basename(cwd), "Contents")) {
+            return dir;
+        } else {
+            Q_strncpyz(cwd, Sys_Dirname(cwd), MAX_OSPATH);
+            if (NULL != strstr(Sys_Basename(cwd), ".app")) {
+                strncat(cwd, PATH_SEPARATOR "Contents" PATH_SEPARATOR "Resources", MAX_OSPATH - 1);
+                return cwd;
+            } else {
+                return dir;
+            }
+        }
+    }
 }
 #endif // __APPLE__
