@@ -19,6 +19,7 @@ Icon?
 # JetBrains IDEs
 ############################
 /.clwb
+/.ijwb
 /.idea
 
 # Temp dirs and local notes
