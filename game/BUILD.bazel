@@ -14,10 +14,7 @@ load("//build_defs:copy_to_directory.bzl", _copy_to_directory = "copy_to_directo
 # TODO: Extract product name into var somewhere ... also use that product name to generate product.h somewhere
 cc_binary(
     name = "Quake3Arena",
-    deps = [
-        "//code/client:clientexe",
-        "@zlib//:zlib_impl",
-    ],
+    deps = ["//code/client:clientexe"],
 )
 
 cc_binary(
