@@ -82,10 +82,6 @@ int AAS_IndexFromString(char* indexname, char* stringindex[], int numindexes, ch
     }
     return 0;
 }
-char* AAS_ModelFromIndex(int index)
-{
-    return AAS_StringFromIndex("ModelFromIndex", &aasworld.configstrings[CS_MODELS], MAX_MODELS, index);
-}
 int AAS_IndexFromModel(char* modelname)
 {
     return AAS_IndexFromString("IndexFromModel", &aasworld.configstrings[CS_MODELS], MAX_MODELS, modelname);
