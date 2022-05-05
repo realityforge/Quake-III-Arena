@@ -73,12 +73,11 @@ _COPY_EXECUTION_REQUIREMENTS = {
     "local": "1",
 }
 
-def _longest_match(subject, tests, allow_partial = False):
+def _longest_match(subject, tests):
     match = None
     high_score = 0
     for test in tests:
-        starts_with_test = test if allow_partial else test + "/"
-        if subject == test or subject.startswith(starts_with_test):
+        if subject == test or subject.startswith(test):
             score = len(test)
             if score > high_score:
                 match = test
@@ -86,7 +85,7 @@ def _longest_match(subject, tests, allow_partial = False):
     return match
 
 # src can be a File
-def _copy_paths(ctx, src):
+def _copy_paths(ctx, src, input_prefix = None, output_prefix = None):
     if type(src) == "File":
         src_file = src
 
@@ -106,16 +105,13 @@ def _copy_paths(ctx, src):
         #  - Single file label "//content/baseq3:models/weapons2/shotgun/shotgun.png" => output_path = "models/weapons2/shotgun/shotgun.png"
 
     else:
-        fail("Unsupported type")
+        fail("Unsupported type passed as src: %s" % type(src))
 
-    # check if this file matches an exclude_prefix
-    match = _longest_match(output_path, ctx.attr.exclude_prefixes, True)
-    if match:
-        # file is excluded due to match in exclude_prefix
-        return None, None, None
+    if output_prefix != None and input_prefix != None and (input_prefix == output_path or output_path.startswith(input_prefix)):
+        output_path = output_prefix + output_path[len(input_prefix):]
 
     # apply a replacement if one is found
-    match = _longest_match(output_path, ctx.attr.replace_prefixes.keys(), True)
+    match = _longest_match(output_path, ctx.attr.replace_prefixes.keys())
     if match:
         output_path = ctx.attr.replace_prefixes[match] + output_path[len(match):]
 
@@ -239,16 +235,27 @@ if exist "{src}\\*" (
     )
 
 def _copy_to_directory_impl(ctx):
-    if not ctx.attr.srcs:
-        fail("srcs must not be empty in copy_to_directory %s" % ctx.label)
+    if not ctx.attr.srcs and not ctx.attr.prefix_mapped_src:
+        fail("srcs and prefix_mapped_src must not be empty in copy_to_directory %s" % ctx.label)
 
     output = ctx.actions.declare_directory(ctx.attr.name)
 
     # Gather a list of src_path, dst_path pairs
     copy_paths = []
+    for target, prefix_map in ctx.attr.prefix_mapped_src.items():
+        parts = prefix_map.split(":")
+        if 2 != len(parts):
+            fail("prefix_map %s for label %s is malformed" % (prefix_map, target))
+        files = target[DefaultInfo].files.to_list()
+        for src_file in files:
+            src_path, output_path, src_file = _copy_paths(ctx, src_file, parts[0], parts[1])
+            if None != src_path:
+                dst_path = _paths.normalize("/".join([output.path, output_path]))
+                copy_paths.append((src_path, dst_path, src_file))
+
     for src_file in ctx.files.srcs:
         src_path, output_path, src_file = _copy_paths(ctx, src_file)
-        if src_path != None:
+        if None != src_path:
             dst_path = _paths.normalize("/".join([output.path, output_path]))
             copy_paths.append((src_path, dst_path, src_file))
 
@@ -257,37 +264,34 @@ def _copy_to_directory_impl(ctx):
     else:
         _copy_to_dir_bash(ctx, copy_paths, output, ctx.attr.allow_symlink)
     return [
-        DefaultInfo(
-            files = depset([output]),
-            runfiles = ctx.runfiles([output]),
-        ),
+        DefaultInfo(files = depset([output]), runfiles = ctx.runfiles([output])),
     ]
 
 _copy_to_directory = rule(
     attrs = {
         "srcs": attr.label_list(allow_files = True),
-        "exclude_prefixes": attr.string_list(default = []),
         "replace_prefixes": attr.string_dict(default = {}),
         "is_windows": attr.bool(mandatory = True),
         "downcase": attr.bool(default = False),
         "allow_symlink": attr.bool(default = False),
+        "prefix_mapped_src": attr.label_keyed_string_dict(allow_files = True),
     },
     implementation = _copy_to_directory_impl,
     provides = [DefaultInfo],
 )
 
-def copy_to_directory(name, srcs, exclude_prefixes = [], replace_prefixes = {}, downcase = False, allow_symlink = False, **kwargs):
+def copy_to_directory(name, srcs, prefix_mapped_src = {}, replace_prefixes = {}, downcase = False, allow_symlink = False, **kwargs):
     """Copies files and directories to an output directory.
 
     Files and directories can be arranged as needed in the output directory using
-    the `exclude_prefixes` and `replace_prefixes` attributes.
+    the `replace_prefixes` attribute.
     Args:
         name: A unique name for this target.
         srcs: Files to copy into the output directory.
-        exclude_prefixes: List of path prefixes to exclude from output directory.
-            If the output directory path for a file or directory starts with or is equal to
-            a path in the list then that file is not copied to the output directory.
-            Exclude prefixes are matched *before* replace_prefixes are applied.
+        prefix_mapped_src: Map of File labels to prefix replacement rules. The prefix replacement rules
+            contain "src_prefix:target_prefix". If an input file or directory starts with the src_prefix
+            then the output file has the src_prefix replaced by the target_prefix. Forward slashes (`/`)
+            should be used as path separators This rule is applied before the replace_prefixes rule is applied.
         replace_prefixes: Map of paths prefixes to replace in the output directory path when copying files.
             If the output directory path for a file or directory starts with or is equal to
             a key in the dict then the matching portion of the output directory path is
@@ -312,4 +316,4 @@ def copy_to_directory(name, srcs, exclude_prefixes = [], replace_prefixes = {}, 
         "//conditions:default": False,
     })
 
-    _copy_to_directory(name = name, srcs = srcs, exclude_prefixes = exclude_prefixes, replace_prefixes = replace_prefixes, downcase = downcase, allow_symlink = allow_symlink, is_windows = _is_windows, **kwargs)
+    _copy_to_directory(name = name, srcs = srcs, prefix_mapped_src = prefix_mapped_src, replace_prefixes = replace_prefixes, downcase = downcase, allow_symlink = allow_symlink, is_windows = _is_windows, **kwargs)
