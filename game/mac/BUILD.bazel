@@ -81,5 +81,8 @@ macos_application(
     minimum_os_version = "10.11",
     tags = ["manual"],
     version = ":build_label_version",
-    deps = ["//code/client:clientexe"],
+    deps = [
+        "//code/client:clientexe",
+        "@zlib//:zlib_impl",
+    ],
 )
