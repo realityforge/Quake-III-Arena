@@ -14,13 +14,27 @@
 # It is also not "third_party" as such as it uses Z_Malloc and Z_Free
 # However if we switch to zlib and pass in allocators/deallocators then we should be fine
 cc_library(
-    name = "unzip",
+    name = "unzip_impl",
     srcs = [
         "ioapi.c",
-        "ioapi.h",
         "unzip.c",
     ],
+    visibility = [
+        "//code/client:__pkg__",
+        "//code/qcommon:__pkg__",
+        "//code/server:__pkg__",
+    ],
+    deps = [
+        "//code/qcommon",
+        ":unzip",
+        "@zlib",
+    ],
+)
+
+cc_library(
+    name = "unzip",
     hdrs = [
+        "ioapi.h",
         "unzip.h",
     ],
     includes = ["."],
@@ -29,9 +43,5 @@ cc_library(
         "//code/qcommon:__pkg__",
         "//code/server:__pkg__",
     ],
-    deps = [
-        "//code/qcommon",
-        "//code/qcommon:shared_api",
-        "@zlib",
-    ],
+    deps = ["@zlib"],
 )
