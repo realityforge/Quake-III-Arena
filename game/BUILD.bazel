@@ -9,6 +9,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+load("//build_defs:copy_to_directory.bzl", _copy_to_directory = "copy_to_directory")
 
 # TODO: Extract product name into var somewhere ... also use that product name to generate product.h somewhere
 cc_binary(
@@ -26,4 +27,27 @@ cc_binary(
         "//code/server:ded",
         "@zlib//:zlib_impl",
     ],
+)
+
+_copy_to_directory(
+    name = "release",
+    srcs = [
+        ":Quake3Arena",
+        ":Quake3ArenaServer",
+        "//code/renderergl2:renderer_opengl2.so",
+    ],
+    allow_symlink = True,
+    prefix_mapped_src = {
+        # Base game
+        "//game/baseq3:pak0": "pak0:baseq3/pak0",
+        "//game/baseq3:cgame.so": "cgame:baseq3/cgamearm64",
+        "//game/baseq3:qagame.so": "qagame:baseq3/qagamearm64",
+        "//game/baseq3:ui.so": "ui:baseq3/uiarm64",
+
+        # TeamArena game
+        "//game/teamarena:pak0": "pak0:missionpack/pak0",
+        "//game/teamarena:cgame.so": "cgame:missionpack/cgamearm64",
+        "//game/teamarena:qagame.so": "qagame:missionpack/qagamearm64",
+        "//game/teamarena:ui.so": "ui:missionpack/uiarm64",
+    },
 )
