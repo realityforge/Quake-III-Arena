@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 /*****************************************************************************
  * decreases the .aas file size after the reachabilities have
- *been calculated, just dumps all the faces, edges and vertexes
+ * been calculated, just dumps all the faces, edges and vertexes
  *****************************************************************************/
 
 #include "../qcommon/q_shared.h"
