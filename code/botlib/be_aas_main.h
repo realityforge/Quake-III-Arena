@@ -42,8 +42,6 @@ int AAS_StartFrame(float time);
 int AAS_Initialized(void);
 // returns true if the AAS file is loaded
 int AAS_Loaded(void);
-// returns the index from the given model name
-int AAS_IndexFromModel(char* modelname);
 // returns the current time
 float AAS_Time(void);
 //
