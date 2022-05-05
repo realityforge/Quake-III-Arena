@@ -213,7 +213,6 @@ cc_library(
         "//code/sys:sys_local",
         "//code/sys:sys_osx",
         "//code/sys:sys_unix",
-        "//third_party/sdl",
         "@opus",
         "@zlib//:unzip_impl",
         "@zlib//:zlib_impl",
