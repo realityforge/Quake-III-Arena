@@ -829,7 +829,7 @@ void G_Say(gentity_t* ent, gentity_t* target, int mode, const char* chatText)
         G_Printf("%s%s\n", name, text);
     }
 
-    // send it to all the apropriate clients
+    // send it to all the appropriate clients
     for (j = 0; j < level.maxclients; j++) {
         other = &g_entities[j];
         G_SayTo(ent, other, mode, color, name, text);
@@ -941,7 +941,7 @@ void G_Voice(gentity_t* ent, gentity_t* target, int mode, const char* id, qboole
         G_Printf("voice: %s %s\n", ent->client->pers.netname, id);
     }
 
-    // send it to all the apropriate clients
+    // send it to all the appropriate clients
     for (j = 0; j < level.maxclients; j++) {
         other = &g_entities[j];
         G_VoiceTo(ent, other, mode, id, voiceonly);

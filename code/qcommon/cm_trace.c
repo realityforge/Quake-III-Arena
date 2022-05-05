@@ -1094,7 +1094,7 @@ void CM_Trace(trace_t* results, const vec3_t start, const vec3_t end, vec3_t min
 
     tw.maxOffset = tw.size[1][0] + tw.size[1][1] + tw.size[1][2];
 
-    // tw.offsets[signbits] = vector to apropriate corner from origin
+    // tw.offsets[signbits] = vector to appropriate corner from origin
     tw.offsets[0][0] = tw.size[0][0];
     tw.offsets[0][1] = tw.size[0][1];
     tw.offsets[0][2] = tw.size[0][2];

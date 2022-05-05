@@ -1054,7 +1054,7 @@ void CL_KeyEvent(int key, qboolean down, unsigned time)
         return;
     }
 
-    // distribute the key down event to the apropriate handler
+    // distribute the key down event to the appropriate handler
     if (cls.keyCatchers & KEYCATCH_CONSOLE) {
         Console_Key(key);
     } else if (cls.keyCatchers & KEYCATCH_UI) {
@@ -1125,7 +1125,7 @@ void CL_CharEvent(int key)
         return;
     }
 
-    // distribute the key down event to the apropriate handler
+    // distribute the key down event to the appropriate handler
     if (cls.keyCatchers & KEYCATCH_CONSOLE) {
         Field_CharEvent(&g_consoleField, key);
     } else if (cls.keyCatchers & KEYCATCH_UI) {
