@@ -47,7 +47,7 @@ apple_bundle_version(
 
 # This target is a WIP and as we do not currently use it, the work has stopped on it
 # The application *should* bundle the SDL framework or maybe we should inline the SDL
-# source into our build (and perhaps curl?). Then when building it we would need to run
+# source into our build. Then when building it we would need to run
 #
 #   $ bazel build //game/mac:Quake3Arena.zip --embed_label=Quake3Arena_1.2_build_345
 macos_application(
