@@ -116,6 +116,8 @@ Bazel builds are faster than the original builds in every scenario. The broader 
 
 These numbers were generated on a fast computer dedicated to build automation. These numbers would be more impressive on a less powerful developer laptop, if multiple platform builds were added or if the tools that have been removed (i.e. `q3asm`, `q3map`, `q3radiant`, `lcc`, `bspc` etc), were re-added to the builds. It is expected that Bazel would look significantly more impressive as most of that code could have been built in parallel.
 
+One unexpected benefit was the ease of upgrading third party dependencies. There was an existing change plan to [Update Third Party Libraries](update_thirdparty_libraries.md), but it was expected that this task would involve some heavy lifting. However, upgrading these third party libraries became a relatively trivial exercise after moving to Bazel. If the library had a stable API, then the dependency upgrade mostly involved testing the updated library.
+
 <a name="phase_2" ></a>
 
 #### Phase 2 - Cross compile where cross compile tools are available
