@@ -134,7 +134,7 @@ void SV_Netchan_TransmitNextFragment(client_t* client)
         if (!client->netchan_end_queue) {
             Com_Error(ERR_DROP, "netchan queue is not properly initialized in SV_Netchan_TransmitNextFragment\n");
         }
-        // the last fragment was transmitted, check wether we have queued messages
+        // the last fragment was transmitted, check whether we have queued messages
         if (client->netchan_start_queue) {
             netchan_buffer_t* netbuf;
             Com_DPrintf("#462 Netchan_TransmitNextFragment: popping a queued message for transmit\n");
