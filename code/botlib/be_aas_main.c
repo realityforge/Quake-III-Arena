@@ -82,19 +82,6 @@ int AAS_IndexFromString(char* indexname, char* stringindex[], int numindexes, ch
     }
     return 0;
 }
-void AAS_UpdateStringIndexes(int numconfigstrings, char* configstrings[])
-{
-    int i;
-    // set string pointers and copy the strings
-    for (i = 0; i < numconfigstrings; i++) {
-        if (configstrings[i]) {
-            // if (aasworld.configstrings[i]) FreeMemory(aasworld.configstrings[i]);
-            aasworld.configstrings[i] = (char*)GetMemory(strlen(configstrings[i]) + 1);
-            strcpy(aasworld.configstrings[i], configstrings[i]);
-        }
-    }
-    aasworld.indexessetup = qtrue;
-}
 int AAS_Loaded(void)
 {
     return aasworld.loaded;
