@@ -9,6 +9,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+load("//build_defs:rules.bzl", "FULL_WARNINGS")
 
 cc_library(
     name = "api",
@@ -26,14 +27,36 @@ cc_library(
 )
 
 cc_library(
-    name = "renderercommon",
-    srcs = [
+    name = "internal_api",
+    hdrs = [
         "iqm.h",
         "qgl.h",
         "tr_common.h",
+    ],
+    deps = [
+        ":api",
+        "//third_party/sdl",
+    ],
+)
+
+cc_library(
+    name = "imagelib",
+    srcs = ["tr_image_png.c"],
+    copts = FULL_WARNINGS,
+    deps = [
+        ":api",
+        ":internal_api",
+        "//code/qcommon:shared_api",
+        "@libspng",
+        "@libspng//:libspng_impl",
+    ],
+)
+
+cc_library(
+    name = "renderercommon",
+    srcs = [
         "tr_font.c",
         "tr_image_jpg.c",
-        "tr_image_png.c",
         "tr_noise.c",
     ],
     visibility = [
@@ -42,10 +65,10 @@ cc_library(
     ],
     deps = [
         ":api",
+        ":imagelib",
+        ":internal_api",
         "//code/qcommon:shared_api",
         "//third_party/sdl",
         "@libjpeg_turbo//:jpeg",
-        "@libspng",
-        "@libspng//:libspng_impl",
     ],
 )
