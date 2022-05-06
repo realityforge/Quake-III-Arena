@@ -33,6 +33,10 @@ struct cvar_s {
     char* string;
     char* resetString; // cvar_restart will reset to this value
     char* latchedString; // for CVAR_LATCH vars
+    cvar_t* next;
+    cvar_t* prev;
+    cvar_t* hashNext;
+    cvar_t* hashPrev;
     int flags;
     qboolean modified; // set each time the cvar is changed
     int modificationCount; // incremented each time the cvar is changed
@@ -43,10 +47,6 @@ struct cvar_s {
     float min;
     float max;
 
-    cvar_t* next;
-    cvar_t* prev;
-    cvar_t* hashNext;
-    cvar_t* hashPrev;
     int hashIndex;
 };
 
