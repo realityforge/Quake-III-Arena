@@ -48,7 +48,6 @@ cc_library(
         ":internal_api",
         "//code/qcommon:shared_api",
         "@libspng",
-        "@libspng//:libspng_impl",
     ],
 )
 
