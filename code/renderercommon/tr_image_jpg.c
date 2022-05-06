@@ -35,7 +35,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // We need to include this before including jpeg library
 #define JPEG_INTERNALS
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wpadded"
 #include "jpeglib.h"
+#pragma clang diagnostic push
 
 /* Catching errors, as done in libjpeg's example.c */
 typedef struct q_jpeg_error_mgr_s {
