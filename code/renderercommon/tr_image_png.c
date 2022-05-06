@@ -150,7 +150,7 @@ void R_LoadPNG(const char* name, byte** pImage, uint32_t* pWidth, uint32_t* pHei
         } else if (SPNG_OK != (result = spng_set_chunk_limits(ctx, MAX_CHUNK_SIZE, MAX_CACHE_SIZE))) {
             r_spng_load_error(localName, result, "spng_set_chunk_limits");
             goto cleanup;
-        } else if (SPNG_OK != (result = spng_set_png_buffer(ctx, pAssetData, pAssetSize))) {
+        } else if (SPNG_OK != (result = spng_set_png_buffer(ctx, pAssetData, (size_t)pAssetSize))) {
             r_spng_load_error(localName, result, "spng_set_png_buffer");
             goto cleanup;
         } else if (SPNG_OK != (result = spng_get_ihdr(ctx, &ihdr))) {
