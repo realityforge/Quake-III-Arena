@@ -20,7 +20,6 @@ cc_library(
         "//code/cgame:__pkg__",
         "//code/client:__pkg__",
         "//code/q3_ui:__pkg__",
-        "//code/renderergl1:__pkg__",
         "//code/sdl:__pkg__",
         "//code/ui:__pkg__",
     ],
@@ -38,7 +37,6 @@ cc_library(
         "tr_noise.c",
     ],
     visibility = [
-        "//code/renderergl1:__pkg__",
         "//code/renderergl2:__pkg__",
         "//code/sdl:__pkg__",
     ],
