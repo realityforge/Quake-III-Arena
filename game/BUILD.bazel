@@ -20,10 +20,7 @@ cc_binary(
 cc_binary(
     name = "Quake3ArenaServer",
     visibility = ["//game/mac:__pkg__"],
-    deps = [
-        "//code/server:ded",
-        "@zlib//:zlib_impl",
-    ],
+    deps = ["//code/server:ded"],
 )
 
 _copy_to_directory(
