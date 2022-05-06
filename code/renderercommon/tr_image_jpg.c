@@ -70,7 +70,7 @@ static void R_JPGOutputMessage(j_common_ptr cinfo)
     ri.Printf(PRINT_ALL, "%s\n", buffer);
 }
 
-void R_LoadJPG(const char* filename, unsigned char** pic, int* width, int* height)
+void R_LoadJPG(const char* filename, byte** pic, uint32_t* width, uint32_t* height)
 {
     /* This struct contains the JPEG decompression parameters and pointers to
      * working space (which is allocated as needed by the JPEG library).
@@ -260,7 +260,7 @@ typedef struct {
     struct jpeg_destination_mgr pub; /* public fields */
 
     byte* outfile; /* target stream */
-    int size;
+    size_t size;
 } my_destination_mgr;
 
 typedef my_destination_mgr* my_dest_ptr;
@@ -310,8 +310,7 @@ empty_output_buffer(j_compress_ptr cinfo)
     jpeg_destroy_compress(cinfo);
 
     // Make crash fatal or we would probably leak memory.
-    ri.Error(ERR_FATAL, "Output buffer for encoded JPEG image has insufficient size of %d bytes",
-             dest->size);
+    ri.Error(ERR_FATAL, "Output buffer for encoded JPEG image has insufficient size of %zu bytes", dest->size);
 
     return FALSE;
 }
@@ -335,8 +334,7 @@ static void term_destination(j_compress_ptr cinfo)
  * for closing it after finishing compression.
  */
 
-static void
-jpegDest(j_compress_ptr cinfo, byte* outfile, int size)
+static void jpegDest(j_compress_ptr cinfo, byte* outfile, size_t size)
 {
     my_dest_ptr dest;
 
@@ -367,8 +365,7 @@ Encodes JPEG from image in image_buffer and writes to buffer.
 Expects RGB input data
 =================
 */
-size_t RE_SaveJPGToBuffer(byte* buffer, size_t bufSize, int quality,
-                          int image_width, int image_height, byte* image_buffer, int padding)
+size_t RE_SaveJPGToBuffer(byte* buffer, size_t bufSize, int quality, const uint32_t image_width, const uint32_t image_height, byte* image_buffer, uint16_t padding)
 {
     struct jpeg_compress_struct cinfo;
     q_jpeg_error_mgr_t jerr;
@@ -419,7 +416,7 @@ size_t RE_SaveJPGToBuffer(byte* buffer, size_t bufSize, int quality,
 
     /* Step 5: while (scan lines remain to be written) */
     /*           jpeg_write_scanlines(...); */
-    row_stride = image_width * cinfo.input_components + padding; /* JSAMPLEs per row in image_buffer */
+    row_stride = (int)image_width * cinfo.input_components + padding; /* JSAMPLEs per row in image_buffer */
 
     while (cinfo.next_scanline < cinfo.image_height) {
         /* jpeg_write_scanlines expects an array of pointers to scanlines.
@@ -443,7 +440,7 @@ size_t RE_SaveJPGToBuffer(byte* buffer, size_t bufSize, int quality,
     return outcount;
 }
 
-void RE_SaveJPG(char* filename, int quality, int image_width, int image_height, byte* image_buffer, int padding)
+void RE_SaveJPG(const char* filename, int quality, const uint32_t image_width, const uint32_t image_height, byte* image_buffer, const uint16_t padding)
 {
     byte* out;
     size_t bufSize;

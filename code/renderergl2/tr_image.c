@@ -2083,12 +2083,12 @@ void R_UpdateSubImage(image_t* image, byte* pic, int x, int y, int width, int he
 //===================================================================
 
 // Prototype for dds loader function which isn't common to both renderers
-void R_LoadDDS(const char* filename, byte** pic, int* width, int* height, GLenum* picFormat, int* numMips);
+void R_LoadDDS(const char* filename, byte** pic, uint32_t* width, uint32_t* height, GLenum* picFormat, int* numMips);
 
 typedef struct
 {
-    char* ext;
-    void (*ImageLoader)(const char*, unsigned char**, int*, int*);
+    const char* ext;
+    void (*ImageLoader)(const char*, byte**, uint32_t*, uint32_t*);
 } imageExtToLoaderMap_t;
 
 // Note that the ordering indicates the order of preference used
@@ -2113,7 +2113,7 @@ Loads any of the supported image types into a canonical
 32 bit format.
 =================
 */
-void R_LoadImage(const char* name, byte** pic, int* width, int* height, GLenum* picFormat, int* numMips)
+void R_LoadImage(const char* name, byte** pic, uint32_t* width, uint32_t* height, GLenum* picFormat, int* numMips)
 {
     qboolean orgNameFailed = qfalse;
     int orgLoader = -1;
@@ -2204,7 +2204,7 @@ Returns NULL if it fails, not a default image.
 image_t* R_FindImageFile(const char* name, imgType_t type, imgFlags_t flags)
 {
     image_t* image;
-    int width, height;
+    uint32_t width, height;
     byte* pic;
     GLenum picFormat;
     int picNumMips;

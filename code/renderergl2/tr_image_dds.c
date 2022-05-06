@@ -209,7 +209,7 @@ typedef enum DXGI_FORMAT {
 
 #define EncodeFourCC(x) ((((ui32_t)((x)[0]))) | (((ui32_t)((x)[1])) << 8) | (((ui32_t)((x)[2])) << 16) | (((ui32_t)((x)[3])) << 24))
 
-void R_LoadDDS(const char* filename, byte** pic, int* width, int* height, GLenum* picFormat, int* numMips)
+void R_LoadDDS(const char* filename, byte** pic, uint32_t* width, uint32_t* height, GLenum* picFormat, int* numMips)
 {
     union {
         byte* b;

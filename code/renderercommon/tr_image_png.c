@@ -103,7 +103,7 @@ static void r_spng_load_error(const char* name, const int result, const char* fu
     ri.Printf(PRINT_WARNING, "R_LoadPNG: Failed to load png file named %s due to %s error calling %s.\n", name, spng_strerror(result), functionName);
 }
 
-void R_LoadPNG(const char* name, byte** pImage, int* pWidth, int* pHeight)
+void R_LoadPNG(const char* name, byte** pImage, uint32_t* pWidth, uint32_t* pHeight)
 {
     spng_ctx* ctx = NULL;
     struct spng_ihdr ihdr;
@@ -197,7 +197,7 @@ static void r_spng_save_error(const char* name, const int result, const char* fu
  * Save the specified image data in PNG format to specified filename.
  * Input data is in RGB form with a possible padding at the end of each row.
  */
-void RE_SavePNG(const char* filename, const uint32_t image_width, const uint32_t image_height, const byte* image_buffer, const int padding)
+void RE_SavePNG(const char* filename, const uint32_t image_width, const uint32_t image_height, byte* image_buffer, const uint16_t padding)
 {
     // Set image properties, this determines the destination image format
     struct spng_ihdr ihdr = {
@@ -243,7 +243,8 @@ void RE_SavePNG(const char* filename, const uint32_t image_width, const uint32_t
         const size_t row_size = image_width * 3;
         const size_t padded_row_size = row_size + padding;
         for (int i = (int)image_height - 1; i >= 0; i--) {
-            const void* row = image_buffer + (padded_row_size * i);
+            unsigned int row_number = (unsigned int)i;
+            const void* row = image_buffer + (padded_row_size * row_number);
             result = spng_encode_row(ctx, row, row_size);
             if (0 == i) {
                 // The SPNG_EOI (end-of-image) return code is expected when you supply the
