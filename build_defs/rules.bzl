@@ -10,7 +10,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PLUGIN_COPTS = [
+BASE_WARNINGS = [
+    "-Wall",
+    "-Wpedantic",
+]
+
+FULL_WARNINGS = BASE_WARNINGS + [
+    "-Wextra",
+    "-Weverything",
+]
+
+BASE_COPTS = BASE_WARNINGS
+
+PLUGIN_COPTS = BASE_COPTS + [
     "-fPIC",
     "-fvisibility=hidden",
     "-fno-common",
