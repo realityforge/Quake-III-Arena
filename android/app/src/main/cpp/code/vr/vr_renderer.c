@@ -409,14 +409,17 @@ void VR_DrawFrame( engine_t* engine ) {
             projections));
     //
 
-    XrFovf fov;
+    XrFovf fov = {};
     XrPosef viewTransform[2];
     for (int eye = 0; eye < ovrMaxNumEyes; eye++) {
         XrPosef xfHeadFromEye = projections[eye].pose;
         XrPosef xfStageFromEye = XrPosef_Multiply(xfStageFromHead, xfHeadFromEye);
         viewTransform[eye] = XrPosef_Inverse(xfStageFromEye);
 
-        fov = projections[eye].fov;
+        fov.angleLeft += projections[eye].fov.angleLeft / 2.0f;
+        fov.angleRight += projections[eye].fov.angleRight / 2.0f;
+        fov.angleUp += projections[eye].fov.angleUp / 2.0f;
+        fov.angleDown += projections[eye].fov.angleDown / 2.0f;
     }
     vr.fov_x = (fabs(fov.angleLeft) + fabs(fov.angleRight)) * 180.0f / M_PI;
     vr.fov_y = (fabs(fov.angleUp) + fabs(fov.angleDown)) * 180.0f / M_PI;
