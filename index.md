@@ -57,6 +57,15 @@ The major changes of the project are tracked in this table.
       <td>2022-04-24</td>
       <td>2022-05-03</td>
     </tr>
+    <tr valign="top">
+      <td><a href="modernize_codebase.html">Modernize Codebase</a></td>
+      <td>5</td>
+      <td>3</td>
+      <td>0</td>
+      <td>Ongoing</td>
+      <td>N/A</td>
+      <td>N/A</td>
+    </tr>
   </tbody>
 </table>
 
