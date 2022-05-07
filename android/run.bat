@@ -3,7 +3,7 @@
 setlocal
 
 set BUILD_TYPE=release
-set VERSION=0.32.1-openxr
+set VERSION=1.0.0-rc1
 
 @REM Define the following environment variables to sign a release build
 @REM set KEYSTORE=
