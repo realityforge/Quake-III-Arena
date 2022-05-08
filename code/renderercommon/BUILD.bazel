@@ -41,12 +41,16 @@ cc_library(
 
 cc_library(
     name = "imagelib",
-    srcs = ["tr_image_png.c"],
+    srcs = [
+        "tr_image_jpg.c",
+        "tr_image_png.c",
+    ],
     copts = FULL_WARNINGS,
     deps = [
         ":api",
         ":internal_api",
         "//code/qcommon:shared_api",
+        "@libjpeg_turbo//:jpeg",
         "@libspng",
     ],
 )
@@ -68,6 +72,5 @@ cc_library(
         ":internal_api",
         "//code/qcommon:shared_api",
         "//third_party/sdl",
-        "@libjpeg_turbo//:jpeg",
     ],
 )
