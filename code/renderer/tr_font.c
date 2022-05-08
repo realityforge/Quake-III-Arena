@@ -547,7 +547,6 @@ void R_InitFreeType(void)
     registeredFontCount = 0;
 }
 
-
 void R_DoneFreeType(void)
 {
 #ifdef BUILD_FREETYPE
