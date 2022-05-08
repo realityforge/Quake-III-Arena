@@ -453,8 +453,6 @@ void BotMatch_HelpAccompany(bot_state_t* bs, bot_match_t* match)
             // get the match variable
             trap_BotMatchVariable(match, ITEM, itemname, sizeof(itemname));
             if (!BotGetMessageTeamGoal(bs, itemname, &bs->teamgoal)) {
-                // BotAI_BotInitialChat(bs, "cannotfind", itemname, NULL);
-                // trap_BotEnterChat(bs->cs, bs->client, CHAT_TEAM);
                 return;
             }
         }
@@ -516,8 +514,6 @@ void BotMatch_DefendKeyArea(bot_state_t* bs, bot_match_t* match)
     // get the match variable
     trap_BotMatchVariable(match, KEYAREA, itemname, sizeof(itemname));
     if (!BotGetMessageTeamGoal(bs, itemname, &bs->teamgoal)) {
-        // BotAI_BotInitialChat(bs, "cannotfind", itemname, NULL);
-        // trap_BotEnterChat(bs->cs, bs->client, CHAT_TEAM);
         return;
     }
     trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
@@ -559,8 +555,6 @@ void BotMatch_GetItem(bot_state_t* bs, bot_match_t* match)
     // get the match variable
     trap_BotMatchVariable(match, ITEM, itemname, sizeof(itemname));
     if (!BotGetMessageTeamGoal(bs, itemname, &bs->teamgoal)) {
-        // BotAI_BotInitialChat(bs, "cannotfind", itemname, NULL);
-        // trap_BotEnterChat(bs->cs, bs->client, CHAT_TEAM);
         return;
     }
     trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
@@ -639,9 +633,6 @@ void BotMatch_Camp(bot_state_t* bs, bot_match_t* match)
             return;
         }
     } else if (!BotGetMessageTeamGoal(bs, itemname, &bs->teamgoal)) {
-        // BotAI_BotInitialChat(bs, "cannotfind", itemname, NULL);
-        // client = ClientFromName(netname);
-        // trap_BotEnterChat(bs->cs, client, CHAT_TELL);
         return;
     }
     bs->decisionmaker = client;
