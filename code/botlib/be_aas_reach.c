@@ -2308,18 +2308,12 @@ void AAS_Reachability_Elevator(void)
             VectorMA(pos2, 0.5, mids, plattop);
             plattop[2] = maxs[2] + 2;
             //
-            /*if (!area1num)
-            {
-                    Log_Write("no grounded area near plat bottom\r\n");
-                    continue;
-            }*/
             // get the mins and maxs a little larger
             for (i = 0; i < 3; i++) {
                 mins[i] -= 1;
                 maxs[i] += 1;
             }
             //
-            // botimport.Print(PRT_MESSAGE, "platbottom[2] = %1.1f plattop[2] = %1.1f\n", platbottom[2], plattop[2]);
             //
             VectorAdd(mins, maxs, mids);
             VectorScale(mids, 0.5, mids);
