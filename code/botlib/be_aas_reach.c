@@ -3165,13 +3165,10 @@ void AAS_SetWeaponJumpAreaFlags(void)
                                         classname, origin[0], origin[1], origin[2]);
                     }
                 }
-                // areanum = AAS_PointAreaNum(origin);
                 areanum = AAS_BestReachableArea(origin, mins, maxs, origin);
                 // the bot may rocket jump towards this area
                 aasworld.areasettings[areanum].areaflags |= AREA_WEAPONJUMP;
                 //
-                // if (!AAS_AreaGrounded(areanum))
-                //	botimport.Print(PRT_MESSAGE, "area not grounded\n");
                 //
                 weaponjumpareas++;
             }
