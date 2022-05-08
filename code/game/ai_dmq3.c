@@ -4058,20 +4058,9 @@ void BotAIBlocked(bot_state_t* bs, bot_moveresult_t* moveresult, int activate)
         VectorSet(angles, 0, 360 * random(), 0);
         AngleVectors(angles, hordir, NULL, NULL);
     }
-    //
-    // if (moveresult->flags & MOVERESULT_ONTOPOFOBSTACLE) movetype = MOVE_JUMP;
-    // else
     movetype = MOVE_WALK;
     // if there's an obstacle at the bot's feet and head then
     // the bot might be able to crouch through
-    // VectorCopy(bs->origin, start);
-    // start[2] += 18;
-    // VectorMA(start, 5, hordir, end);
-    // VectorSet(mins, -16, -16, -24);
-    // VectorSet(maxs, 16, 16, 4);
-    //
-    // bsptrace = AAS_Trace(start, mins, maxs, end, bs->entitynum, MASK_PLAYERSOLID);
-    // if (bsptrace.fraction >= 1) movetype = MOVE_CROUCH;
     // get the sideward vector
     CrossProduct(hordir, up, sideward);
     //
@@ -4151,7 +4140,6 @@ int BotAIPredictObstacles(bot_state_t* bs, bot_goal_t* goal)
                         // if not already trying to activate this entity
                         if (!BotIsGoingToActivateEntity(bs, activategoal.goal.entitynum)) {
                             //
-                            // BotAI_Print(PRT_MESSAGE, "blocked by mover model %d, entity %d ?\n", modelnum, entitynum);
                             //
                             BotGoForActivateGoal(bs, &activategoal);
                             return qtrue;
