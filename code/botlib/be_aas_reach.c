@@ -2182,41 +2182,25 @@ void AAS_Reachability_Teleport(void)
                 botimport.Print(PRT_ERROR, "teleporter destination (%s) in solid\n", target);
                 continue;
             }
-            /*
-            area2num = AAS_PointAreaNum(trace.endpos);
-            //
-            if (!AAS_AreaTeleporter(area2num) &&
-                    !AAS_AreaJumpPad(area2num) &&
-                    !AAS_AreaGrounded(area2num))
-            {
-                    VectorCopy(trace.endpos, destorigin);
+            // predict where you'll end up
+            AAS_FloatForBSPEpairKey(dest, "angle", &angle);
+            if (angle) {
+                VectorSet(angles, 0, angle, 0);
+                AngleVectors(angles, velocity, NULL, NULL);
+                VectorScale(velocity, 400, velocity);
+            } else {
+                VectorClear(velocity);
             }
-            else*/
-            {
-                // predict where you'll end up
-                AAS_FloatForBSPEpairKey(dest, "angle", &angle);
-                if (angle) {
-                    VectorSet(angles, 0, angle, 0);
-                    AngleVectors(angles, velocity, NULL, NULL);
-                    VectorScale(velocity, 400, velocity);
-                } else {
-                    VectorClear(velocity);
-                }
-                VectorClear(cmdmove);
-                AAS_PredictClientMovement(&move, -1, destorigin, PRESENCE_NORMAL, qfalse,
-                                          velocity, cmdmove, 0, 30, 0.1f,
-                                          SE_HITGROUND | SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE | SE_TOUCHJUMPPAD | SE_TOUCHTELEPORTER, 0, qfalse); // qtrue);
-                area2num = AAS_PointAreaNum(move.endpos);
-                if (move.stopevent & (SE_ENTERSLIME | SE_ENTERLAVA)) {
-                    botimport.Print(PRT_WARNING, "teleported into slime or lava at dest %s\n", target);
-                }
-                VectorCopy(move.endpos, destorigin);
+            VectorClear(cmdmove);
+            AAS_PredictClientMovement(&move, -1, destorigin, PRESENCE_NORMAL, qfalse,
+                                      velocity, cmdmove, 0, 30, 0.1f,
+                                      SE_HITGROUND | SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE | SE_TOUCHJUMPPAD | SE_TOUCHTELEPORTER, 0, qfalse); // qtrue);
+            area2num = AAS_PointAreaNum(move.endpos);
+            if (move.stopevent & (SE_ENTERSLIME | SE_ENTERLAVA)) {
+                botimport.Print(PRT_WARNING, "teleported into slime or lava at dest %s\n", target);
             }
+            VectorCopy(move.endpos, destorigin);
         }
-        //
-        // botimport.Print(PRT_MESSAGE, "teleporter brush origin at %f %f %f\n", origin[0], origin[1], origin[2]);
-        // botimport.Print(PRT_MESSAGE, "teleporter brush mins = %f %f %f\n", mins[0], mins[1], mins[2]);
-        // botimport.Print(PRT_MESSAGE, "teleporter brush maxs = %f %f %f\n", maxs[0], maxs[1], maxs[2]);
         VectorAdd(origin, mins, mins);
         VectorAdd(origin, maxs, maxs);
         //
