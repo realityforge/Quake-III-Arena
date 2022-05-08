@@ -91,22 +91,3 @@ cc_library(
         "//code/renderercommon",
     ],
 )
-
-# The Makefile variant actually creates .dylib under OSX. The Mach-O object file format used
-# by Mac OS X for executables and libraries distinguishes between shared libraries and dynamically
-# loaded modules. See https://stackoverflow.com/questions/2339679/what-are-the-differences-between-so-and-dylib-on-macos
-#
-# We could maintain this by using rules_apple ala https://github.com/bazelbuild/rules_apple/blob/master/doc/rules-macos.md#macos_dylib
-# but given that the renderer will eventually be inlined into main application AND is a dynamically loaded
-# module anyway, it makes sense to not create dylibs
-#
-cc_binary(
-    name = "renderer_opengl2.so",
-    linkshared = 1,
-    visibility = DIST_VISIBILITY,
-    deps = [
-        ":renderergl2",
-        ":tr_subs",
-        "//code/renderergl2/glsl",
-    ],
-)

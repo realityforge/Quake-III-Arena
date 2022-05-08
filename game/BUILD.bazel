@@ -28,7 +28,6 @@ _copy_to_directory(
     srcs = [
         ":Quake3Arena",
         ":Quake3ArenaServer",
-        "//code/renderergl2:renderer_opengl2.so",
     ],
     allow_symlink = True,
     prefix_mapped_src = {
