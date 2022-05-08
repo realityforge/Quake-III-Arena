@@ -3203,10 +3203,6 @@ int AAS_Reachability_WeaponJump(int area1num, int area2num)
     aas_trace_t trace;
 
     visualize = qfalse;
-    //	if (area1num == 4436 && area2num == 4318)
-    //	{
-    //		visualize = qtrue;
-    //	}
     if (!AAS_AreaGrounded(area1num) || AAS_AreaSwim(area1num))
         return qfalse;
     if (!AAS_AreaGrounded(area2num))
