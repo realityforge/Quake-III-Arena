@@ -467,7 +467,6 @@ void RE_RegisterFont(const char* fontName, int pointSize, fontInfo_t* font)
         if (xOut == -1 || yOut == -1) {
             // ran out of room
             // we need to create an image from the bitmap, set all the handles in the glyphs to this point
-            //
 
             scaledSize = 256 * 256;
             newSize = scaledSize * 4;

@@ -123,11 +123,9 @@ qboolean PM_SlideMove(qboolean gravity)
             return qtrue;
         }
 
-        //
         // if this is the same plane we hit before, nudge velocity
         // out along it, which fixes some epsilon issues with
         // non-axial planes
-        //
         for (i = 0; i < numplanes; i++) {
             if (DotProduct(trace.plane.normal, planes[i]) > 0.99) {
                 VectorAdd(trace.plane.normal, pm->ps->velocity, pm->ps->velocity);
@@ -140,9 +138,7 @@ qboolean PM_SlideMove(qboolean gravity)
         VectorCopy(trace.plane.normal, planes[numplanes]);
         numplanes++;
 
-        //
         // modify velocity so it parallels all of the clip planes
-        //
 
         // find a plane that it enters
         for (i = 0; i < numplanes; i++) {

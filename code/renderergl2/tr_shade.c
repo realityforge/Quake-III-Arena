@@ -393,9 +393,7 @@ static void ComputeShaderColors(shaderStage_t* pStage, vec4_t baseColor, vec4_t 
 
     vertColor[0] = vertColor[1] = vertColor[2] = vertColor[3] = 0.0f;
 
-    //
     // rgbGen
-    //
     switch (pStage->rgbGen) {
     case CGEN_EXACT_VERTEX:
     case CGEN_EXACT_VERTEX_LIT:
@@ -457,9 +455,7 @@ static void ComputeShaderColors(shaderStage_t* pStage, vec4_t baseColor, vec4_t 
         break;
     }
 
-    //
     // alphaGen
-    //
     switch (pStage->alphaGen) {
     case AGEN_SKIP:
         break;
@@ -681,7 +677,6 @@ static void ForwardDlight(void)
         //     -> costs more to sample a higher res texture then throw out the result
         //  - disable texture sampling in glsl shader with #ifdefs, as before
         //     -> increases the number of shaders that must be compiled
-        //
 
         if (pStage->bundle[TB_NORMALMAP].image[0]) {
             R_BindAnimatedImageToTMU(&pStage->bundle[TB_NORMALMAP], TB_NORMALMAP);
@@ -709,9 +704,7 @@ static void ForwardDlight(void)
 
         GLSL_SetUniformInt(sp, UNIFORM_TCGEN0, pStage->bundle[0].tcGen);
 
-        //
         // draw
-        //
 
         R_DrawElements(input->numIndexes, input->firstIndex);
 
@@ -779,9 +772,7 @@ static void ProjectPshadowVBOGLSL(void)
 
         GL_BindToTMU(tr.pshadowMaps[l], TB_DIFFUSEMAP);
 
-        //
         // draw
-        //
 
         R_DrawElements(input->numIndexes, input->firstIndex);
 
@@ -1091,9 +1082,7 @@ static void RB_IterateStagesGeneric(shaderCommands_t* input)
 
         // GLSL_SetUniformFloat(sp, UNIFORM_MAPLIGHTSCALE, backEnd.refdef.mapLightScale);
 
-        //
         // do multitexture
-        //
         if (backEnd.depthFill) {
             if (!(pStage->stateBits & GLS_ATEST_BITS))
                 GL_BindToTMU(tr.whiteImage, TB_COLORMAP);
@@ -1154,7 +1143,6 @@ static void RB_IterateStagesGeneric(shaderCommands_t* input)
                 //     -> costs more to sample a higher res texture then throw out the result
                 //  - disable texture sampling in glsl shader with #ifdefs, as before
                 //     -> increases the number of shaders that must be compiled
-                //
                 if (light && !fastLight) {
                     if (pStage->bundle[TB_NORMALMAP].image[0]) {
                         R_BindAnimatedImageToTMU(&pStage->bundle[TB_NORMALMAP], TB_NORMALMAP);
@@ -1183,15 +1171,11 @@ static void RB_IterateStagesGeneric(shaderCommands_t* input)
             R_BindAnimatedImageToTMU(&pStage->bundle[0], 0);
             R_BindAnimatedImageToTMU(&pStage->bundle[1], 1);
         } else {
-            //
             // set state
-            //
             R_BindAnimatedImageToTMU(&pStage->bundle[0], 0);
         }
 
-        //
         // testing cube map
-        //
         if (!(tr.viewParms.flags & VPF_NOCUBEMAPS) && input->cubemapIndex && r_cubeMapping->integer) {
             vec4_t vec;
             cubemap_t* cubemap = &tr.cubemaps[input->cubemapIndex - 1];
@@ -1208,9 +1192,7 @@ static void RB_IterateStagesGeneric(shaderCommands_t* input)
             GLSL_SetUniformVec4(sp, UNIFORM_CUBEMAPINFO, vec);
         }
 
-        //
         // draw
-        //
         R_DrawElements(input->numIndexes, input->firstIndex);
 
         // allow skipping out to show just lightmaps during development
@@ -1267,17 +1249,7 @@ static void RB_RenderShadowmap(shaderCommands_t* input)
         GL_State(0);
         GLSL_SetUniformInt(sp, UNIFORM_ALPHATEST, 0);
 
-        //
-        // do multitexture
-        //
-        // if ( pStage->glslShaderGroup )
-        {
-            //
-            // draw
-            //
-
-            R_DrawElements(input->numIndexes, input->firstIndex);
-        }
+        R_DrawElements(input->numIndexes, input->firstIndex);
     }
 }
 
@@ -1307,9 +1279,7 @@ void RB_StageIteratorGeneric(void)
         backEnd.pc.c_staticVaoDraws++;
     }
 
-    //
     // set face culling appropriately
-    //
     if (input->shader->cullType == CT_TWO_SIDED) {
         GL_Cull(CT_TWO_SIDED);
     } else {
@@ -1335,15 +1305,11 @@ void RB_StageIteratorGeneric(void)
         qglEnable(GL_POLYGON_OFFSET_FILL);
     }
 
-    //
     // render depth if in depthfill mode
-    //
     if (backEnd.depthFill) {
         RB_IterateStagesGeneric(input);
 
-        //
         // reset polygon offset
-        //
         if (input->shader->polygonOffset) {
             qglDisable(GL_POLYGON_OFFSET_FILL);
         }
@@ -1351,16 +1317,12 @@ void RB_StageIteratorGeneric(void)
         return;
     }
 
-    //
     // render shadowmap if in shadowmap mode
-    //
     if (backEnd.viewParms.flags & VPF_SHADOWMAP) {
         if (input->shader->sort == SS_OPAQUE) {
             RB_RenderShadowmap(input);
         }
-        //
         // reset polygon offset
-        //
         if (input->shader->polygonOffset) {
             qglDisable(GL_POLYGON_OFFSET_FILL);
         }
@@ -1368,23 +1330,16 @@ void RB_StageIteratorGeneric(void)
         return;
     }
 
-    //
-    //
     // call shader function
-    //
     RB_IterateStagesGeneric(input);
 
-    //
     // pshadows!
-    //
     if (glRefConfig.framebufferObject && r_shadows->integer == 4 && tess.pshadowBits
         && tess.shader->sort <= SS_OPAQUE && !(tess.shader->surfaceFlags & (SURF_NODLIGHT | SURF_SKY))) {
         ProjectPshadowVBOGLSL();
     }
 
-    //
     // now do any dynamic lighting needed
-    //
     if (tess.dlightBits && tess.shader->sort <= SS_OPAQUE && r_lightmap->integer == 0
         && !(tess.shader->surfaceFlags & (SURF_NODLIGHT | SURF_SKY))) {
         if (tess.shader->numUnfoggedPasses == 1 && tess.xstages[0]->glslShaderGroup == tr.lightallShader
@@ -1395,16 +1350,12 @@ void RB_StageIteratorGeneric(void)
         }
     }
 
-    //
     // now do fog
-    //
     if (tess.fogNum && tess.shader->fogPass != FP_NONE) {
         RB_FogPass();
     }
 
-    //
     // reset polygon offset
-    //
     if (input->shader->polygonOffset) {
         qglDisable(GL_POLYGON_OFFSET_FILL);
     }
@@ -1445,22 +1396,16 @@ void RB_EndSurface(void)
         VaoCache_Commit();
     }
 
-    //
     // update performance counters
-    //
     backEnd.pc.c_shaders++;
     backEnd.pc.c_vertexes += tess.numVertexes;
     backEnd.pc.c_indexes += tess.numIndexes;
     backEnd.pc.c_totalIndexes += tess.numIndexes * tess.numPasses;
 
-    //
     // call off to shader specific tess end function
-    //
     tess.currentStageIteratorFunc();
 
-    //
     // draw debugging stuff
-    //
     if (r_showtris->integer) {
         DrawTris(input);
     }

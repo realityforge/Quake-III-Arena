@@ -96,9 +96,7 @@ void GL_State(unsigned long stateBits)
         return;
     }
 
-    //
     // check depthFunc bits
-    //
     if (diff & GLS_DEPTHFUNC_BITS) {
         if (stateBits & GLS_DEPTHFUNC_EQUAL) {
             qglDepthFunc(GL_EQUAL);
@@ -109,9 +107,7 @@ void GL_State(unsigned long stateBits)
         }
     }
 
-    //
     // check blend bits
-    //
     if (diff & (GLS_SRCBLEND_BITS | GLS_DSTBLEND_BITS)) {
         uint32_t oldState = glState.glStateBits & (GLS_SRCBLEND_BITS | GLS_DSTBLEND_BITS);
         uint32_t newState = stateBits & (GLS_SRCBLEND_BITS | GLS_DSTBLEND_BITS);
@@ -196,9 +192,7 @@ void GL_State(unsigned long stateBits)
         }
     }
 
-    //
     // check depthmask
-    //
     if (diff & GLS_DEPTHMASK_TRUE) {
         if (stateBits & GLS_DEPTHMASK_TRUE) {
             qglDepthMask(GL_TRUE);
@@ -207,9 +201,7 @@ void GL_State(unsigned long stateBits)
         }
     }
 
-    //
     // fill/line mode
-    //
     if (diff & GLS_POLYMODE_LINE) {
         if (stateBits & GLS_POLYMODE_LINE) {
             qglPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -218,9 +210,7 @@ void GL_State(unsigned long stateBits)
         }
     }
 
-    //
     // depthtest
-    //
     if (diff & GLS_DEPTHTEST_DISABLE) {
         if (stateBits & GLS_DEPTHTEST_DISABLE) {
             qglDisable(GL_DEPTH_TEST);
@@ -319,9 +309,7 @@ void RB_BeginDrawingView(void)
         FBO_Bind(fbo);
     }
 
-    //
     // set the modelview matrix for the viewer
-    //
     SetViewportAndScissor();
 
     // ensures that depth writes are enabled for the depth clear
@@ -406,7 +394,6 @@ void RB_RenderDrawSurfList(drawSurf_t* drawSurfs, int numDrawSurfs)
         R_DecomposeSort(drawSurf->sort, &entityNum, &shader, &fogNum, &dlighted, &pshadowed);
         cubemapIndex = drawSurf->cubemapIndex;
 
-        //
         // change the tess parameters if needed
         // a "entityMergable" shader is a shader that can have surfaces from separate
         // entities merged into a single batch, like smoke and blood puff sprites
@@ -426,9 +413,7 @@ void RB_RenderDrawSurfList(drawSurf_t* drawSurfs, int numDrawSurfs)
         if (backEnd.depthFill && shader && shader->sort != SS_OPAQUE)
             continue;
 
-        //
         // change the modelview matrix if needed
-        //
         if (entityNum != oldEntityNum) {
             depthRange = isCrosshair = qfalse;
 
@@ -469,10 +454,8 @@ void RB_RenderDrawSurfList(drawSurf_t* drawSurfs, int numDrawSurfs)
 
             GL_SetModelviewMatrix(backEnd.or.modelMatrix);
 
-            //
             // change depthrange. Also change projection matrix so first person weapon does not look like coming
             // out of the screen.
-            //
             if (oldDepthRange != depthRange || wasCrosshair != isCrosshair) {
                 if (depthRange) {
                     if (backEnd.viewParms.stereoFrame != STEREO_CENTER) {

@@ -401,7 +401,6 @@ void weapon_railgun_fire(gentity_t* ent)
                     VectorMA(tent->s.origin2, 4, right, tent->s.origin2);
                     VectorMA(tent->s.origin2, -1, up, tent->s.origin2);
                     tent->s.eventParm = 255; // don't make the explosion at the end
-                    //
                     VectorCopy(impactpoint, muzzle);
                     // the player can hit him/herself with the bounced rail
                     passent = ENTITYNUM_NONE;
@@ -539,7 +538,6 @@ void Weapon_LightningFire(gentity_t* ent)
         if (i) {
             // add bounced off lightning bolt temp entity
             // the first lightning bolt is a cgame only visual
-            //
             tent = G_TempEntity(muzzle, EV_LIGHTNINGBOLT);
             VectorCopy(tr.endpos, end);
             SnapVector(end);
@@ -881,7 +879,6 @@ static void KamikazeShockWave(vec3_t origin, gentity_t* attacker, float damage, 
         VectorSubtract(ent->r.currentOrigin, origin, dir);
         dir[2] += 24;
         G_Damage(ent, NULL, attacker, dir, origin, damage, DAMAGE_RADIUS | DAMAGE_NO_TEAM_PROTECTION, MOD_KAMIKAZE);
-        //
         dir[2] = 0;
         VectorNormalize(dir);
         if (ent->client) {
@@ -908,7 +905,6 @@ static void KamikazeDamage(gentity_t* self)
         t = self->count - KAMI_SHOCKWAVE_STARTTIME;
         KamikazeShockWave(self->s.pos.trBase, self->activator, 25, 400, (int)(float)t * KAMI_SHOCKWAVE_MAXRADIUS / (KAMI_SHOCKWAVE_ENDTIME - KAMI_SHOCKWAVE_STARTTIME));
     }
-    //
     if (self->count >= KAMI_EXPLODE_STARTTIME) {
         // do our damage
         t = self->count - KAMI_EXPLODE_STARTTIME;
@@ -979,9 +975,7 @@ void G_StartKamikaze(gentity_t* ent)
     trap_LinkEntity(explosion);
 
     if (ent->client) {
-        //
         explosion->activator = ent;
-        //
         ent->s.eFlags &= ~EF_KAMIKAZE;
         // nuke the guy that used it
         G_Damage(ent, ent, ent, NULL, NULL, 100000, DAMAGE_NO_PROTECTION, MOD_KAMIKAZE);

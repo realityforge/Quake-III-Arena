@@ -55,7 +55,6 @@ punctuation_t default_punctuations[] = {
     // binary operators
     { ">>=", P_RSHIFT_ASSIGN, NULL },
     { "<<=", P_LSHIFT_ASSIGN, NULL },
-    //
     { "...", P_PARMS, NULL },
     // define merge operator
     { "##", P_PRECOMPMERGE, NULL },
@@ -117,7 +116,6 @@ punctuation_t default_punctuations[] = {
     { "}", P_BRACECLOSE, NULL },
     { "[", P_SQBRACKETOPEN, NULL },
     { "]", P_SQBRACKETCLOSE, NULL },
-    //
     { "\\", P_BACKSLASH, NULL },
     // precompiler operator
     { "#", P_PRECOMP, NULL },
@@ -399,7 +397,6 @@ int PS_ReadString(script_t* script, token_t* token, int quote)
     len = 0;
     // leading quote
     token->string[len++] = *script->script_p++;
-    //
     while (1) {
         // minus 2 because trailing double quote and zero have to be appended
         if (len >= MAX_TOKEN - 2) {
@@ -422,7 +419,6 @@ int PS_ReadString(script_t* script, token_t* token, int quote)
             // if white spaces in a string are not allowed
             if (script->flags & SCFL_NOSTRINGWHITESPACES)
                 break;
-            //
             tmpscript_p = script->script_p;
             tmpline = script->line;
             // read unuseful stuff between possible two following strings
@@ -880,12 +876,9 @@ script_t* LoadScriptFile(const char* filename)
     script->end_p = &script->buffer[length];
     // set if there's a token available in script->token
     script->tokenavailable = 0;
-    //
     script->line = 1;
     script->lastline = 1;
-    //
     SetScriptPunctuations(script, NULL);
-    //
 #ifdef BOTLIB
     botimport.FS_Read(script->buffer, length, fp);
     botimport.FS_FCloseFile(fp);
@@ -917,14 +910,10 @@ script_t* LoadScriptMemory(char* ptr, int length, char* name)
     script->end_p = &script->buffer[length];
     // set if there's a token available in script->token
     script->tokenavailable = 0;
-    //
     script->line = 1;
     script->lastline = 1;
-    //
     SetScriptPunctuations(script, NULL);
-    //
     memcpy(script->buffer, ptr, length);
-    //
     return script;
 }
 void FreeScript(script_t* script)

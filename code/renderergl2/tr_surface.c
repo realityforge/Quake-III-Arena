@@ -725,9 +725,7 @@ static void LerpMeshVertexes(mdvSurface_t* surf, float backlerp)
     outTangent = tess.tangent[tess.numVertexes];
 
     if (backlerp == 0) {
-        //
         // just copy the vertexes
-        //
 
         for (vertNum = 0; vertNum < surf->numVerts; vertNum++) {
             VectorCopy(newVerts->xyz, outXyz);
@@ -740,9 +738,7 @@ static void LerpMeshVertexes(mdvSurface_t* surf, float backlerp)
             outTangent += 4;
         }
     } else {
-        //
         // interpolate and copy the vertex and normal
-        //
 
         mdvVertex_t* oldVerts;
 

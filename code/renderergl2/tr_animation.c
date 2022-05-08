@@ -170,12 +170,10 @@ void R_MDRAddAnimSurfaces(trRefEntity_t* ent)
         ent->e.oldframe %= header->numFrames;
     }
 
-    //
     // Validate the frames so there is no chance of a crash.
     // This will write directly into the entity structure, so
     // when the surfaces are rendered, they don't need to be
     // range checked again.
-    //
     if ((ent->e.frame >= header->numFrames)
         || (ent->e.frame < 0)
         || (ent->e.oldframe >= header->numFrames)
@@ -186,10 +184,8 @@ void R_MDRAddAnimSurfaces(trRefEntity_t* ent)
         ent->e.oldframe = 0;
     }
 
-    //
     // cull the entire model if merged bounding box of both frames
     // is outside the view frustum.
-    //
     cull = R_MDRCullModel(header, ent);
     if (cull == CULL_OUT) {
         return;
@@ -282,7 +278,6 @@ void RB_MDRSurfaceAnim(mdrSurface_t* surface)
     int frameSize;
 
     // don't lerp if lerping off, or this is the only frame, or the last frame...
-    //
     if (backEnd.currentEntity->e.oldframe == backEnd.currentEntity->e.frame) {
         backlerp = 0; // if backlerp is 0, lerping is off and frontlerp is never used
         frontlerp = 1;
@@ -311,9 +306,7 @@ void RB_MDRSurfaceAnim(mdrSurface_t* surface)
     }
     tess.numIndexes += indexes;
 
-    //
     // lerp all the needed bones
-    //
     if (!backlerp) {
         // no lerping needed
         bonePtr = frame->bones;
@@ -325,9 +318,7 @@ void RB_MDRSurfaceAnim(mdrSurface_t* surface)
         }
     }
 
-    //
     // deform the vertexes by the lerped bones
-    //
     numVerts = surface->numVerts;
     v = (mdrVertex_t*)((byte*)surface + surface->ofsVerts);
     for (j = 0; j < numVerts; j++) {

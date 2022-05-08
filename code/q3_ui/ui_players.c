@@ -689,9 +689,7 @@ void UI_DrawPlayer(float x, float y, float w, float h, playerInfo_t* pi, int tim
 
     renderfx = RF_LIGHTING_ORIGIN | RF_NOSHADOW;
 
-    //
     // add the legs
-    //
     legs.hModel = pi->legsModel;
     legs.customSkin = pi->legsSkin;
 
@@ -707,9 +705,7 @@ void UI_DrawPlayer(float x, float y, float w, float h, playerInfo_t* pi, int tim
         return;
     }
 
-    //
     // add the torso
-    //
     torso.hModel = pi->torsoModel;
     if (!torso.hModel) {
         return;
@@ -725,9 +721,7 @@ void UI_DrawPlayer(float x, float y, float w, float h, playerInfo_t* pi, int tim
 
     trap_R_AddRefEntityToScene(&torso);
 
-    //
     // add the head
-    //
     head.hModel = pi->headModel;
     if (!head.hModel) {
         return;
@@ -742,9 +736,7 @@ void UI_DrawPlayer(float x, float y, float w, float h, playerInfo_t* pi, int tim
 
     trap_R_AddRefEntityToScene(&head);
 
-    //
     // add the gun
-    //
     if (pi->currentWeapon != WP_NONE) {
         memset(&gun, 0, sizeof(gun));
         gun.hModel = pi->weaponModel;
@@ -759,9 +751,7 @@ void UI_DrawPlayer(float x, float y, float w, float h, playerInfo_t* pi, int tim
         trap_R_AddRefEntityToScene(&gun);
     }
 
-    //
     // add the spinning barrel
-    //
     if (pi->realWeapon == WP_MACHINEGUN || pi->realWeapon == WP_GAUNTLET || pi->realWeapon == WP_BFG) {
         vec3_t angles;
 
@@ -780,9 +770,7 @@ void UI_DrawPlayer(float x, float y, float w, float h, playerInfo_t* pi, int tim
         trap_R_AddRefEntityToScene(&barrel);
     }
 
-    //
     // add muzzle flash
-    //
     if (dp_realtime <= pi->muzzleFlashTime) {
         if (pi->flashModel) {
             memset(&flash, 0, sizeof(flash));
@@ -805,16 +793,12 @@ void UI_DrawPlayer(float x, float y, float w, float h, playerInfo_t* pi, int tim
         }
     }
 
-    //
     // add the chat icon
-    //
     if (pi->chat) {
         UI_PlayerFloatSprite(pi, origin, trap_R_RegisterShaderNoMip("sprites/balloon3"));
     }
 
-    //
     // add an accent light
-    //
     origin[0] -= 100; // + = behind, - = in front
     origin[1] += 100; // + = left, - = right
     origin[2] += 100; // + = above, - = below

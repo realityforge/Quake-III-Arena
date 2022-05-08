@@ -540,9 +540,7 @@ void Field_CharEvent(field_t* edit, int ch)
         return;
     }
 
-    //
     // ignore any other non-printable chars
-    //
     if (ch < 32) {
         return;
     }
@@ -1248,12 +1246,10 @@ void CL_KeyUpEvent(int key, unsigned time)
     if (key == K_CONSOLE || (key == K_ESCAPE && keys[K_SHIFT].down))
         return;
 
-    //
     // key up events only perform actions if the game key binding is
     // a button command (leading + sign).  These will be processed even in
     // console mode and menu mode, to keep the character from continuing
     // an action started before a mode switch.
-    //
     CL_ParseBinding(key, qfalse, time);
 
     if (Key_GetCatcher() & KEYCATCH_UI && uivm) {

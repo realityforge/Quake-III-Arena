@@ -558,9 +558,7 @@ static void CG_DrawStatusBar(void)
         CG_Draw3DModel(370 + CHAR_WIDTH * 3 + TEXT_ICON_SPACE, 432, ICON_SIZE, ICON_SIZE,
                        cgs.media.armorModel, 0, origin, angles);
     }
-    //
     // ammo
-    //
     if (cent->currentState.weapon) {
         value = ps->ammo[cent->currentState.weapon];
         if (value > -1) {
@@ -592,9 +590,7 @@ static void CG_DrawStatusBar(void)
         }
     }
 
-    //
     // health
-    //
     value = ps->stats[STAT_HEALTH];
     if (value > 100) {
         trap_R_SetColor(colors[3]); // white
@@ -612,9 +608,7 @@ static void CG_DrawStatusBar(void)
     CG_ColorForHealth(hcolor);
     trap_R_SetColor(hcolor);
 
-    //
     // armor
-    //
     value = ps->stats[STAT_ARMOR];
     if (value > 0) {
         trap_R_SetColor(colors[0]);
@@ -1528,9 +1522,7 @@ static void CG_DrawLagometer(void)
         return;
     }
 
-    //
     // draw the graph
-    //
 #ifdef MISSIONPACK
     x = 640 - 48;
     y = 480 - 144;

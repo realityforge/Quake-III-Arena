@@ -650,7 +650,6 @@ void* VM_ExplicitArgPtr(vm_t* vm, intptr_t intValue)
     if (currentVM == NULL)
         return NULL;
 
-    //
     if (vm->entryPoint) {
         return (void*)(vm->dataBase + intValue);
     } else {

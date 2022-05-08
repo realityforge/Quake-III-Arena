@@ -55,9 +55,7 @@ gitem_t bg_itemlist[] = {
       /* precache */ "",
       /* sounds */ "" }, // leave index 0 alone
 
-    //
     // ARMOR
-    //
 
     /*QUAKED item_armor_shard (.3 .3 1) (-16 -16 -16) (16 16 16) suspended
      */
@@ -105,9 +103,7 @@ gitem_t bg_itemlist[] = {
         /* precache */ "",
         /* sounds */ "" },
 
-    //
     // health
-    //
     /*QUAKED item_health_small (.3 .3 1) (-16 -16 -16) (16 16 16) suspended
      */
     {
@@ -172,9 +168,7 @@ gitem_t bg_itemlist[] = {
         /* precache */ "",
         /* sounds */ "" },
 
-    //
     // WEAPONS
-    //
 
     /*QUAKED weapon_gauntlet (.3 .3 1) (-16 -16 -16) (16 16 16) suspended
      */
@@ -326,9 +320,7 @@ gitem_t bg_itemlist[] = {
         /* precache */ "",
         /* sounds */ "" },
 
-    //
     // AMMO ITEMS
-    //
 
     /*QUAKED ammo_shells (.3 .3 1) (-16 -16 -16) (16 16 16) suspended
      */
@@ -450,9 +442,7 @@ gitem_t bg_itemlist[] = {
         /* precache */ "",
         /* sounds */ "" },
 
-    //
     // HOLDABLE ITEMS
-    //
     /*QUAKED holdable_teleporter (.3 .3 1) (-16 -16 -16) (16 16 16) suspended
      */
     {
@@ -483,9 +473,7 @@ gitem_t bg_itemlist[] = {
         /* precache */ "",
         /* sounds */ "sound/items/use_medkit.wav" },
 
-    //
     // POWERUP ITEMS
-    //
     /*QUAKED item_quad (.3 .3 1) (-16 -16 -16) (16 16 16) suspended
      */
     {
@@ -705,9 +693,7 @@ gitem_t bg_itemlist[] = {
         /* precache */ "",
         /* sounds */ "" },
 
-    //
     // PERSISTANT POWERUP ITEMS
-    //
     /*QUAKED item_scout (.3 .3 1) (-16 -16 -16) (16 16 16) suspended redTeam blueTeam
      */
     {

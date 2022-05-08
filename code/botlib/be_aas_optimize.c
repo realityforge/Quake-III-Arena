@@ -57,7 +57,6 @@ typedef struct optimized_s {
     // convex areas
     int numareas;
     aas_area_t* areas;
-    //
     int* vertexoptimizeindex;
     int* edgeoptimizeindex;
     int* faceoptimizeindex;
@@ -189,7 +188,6 @@ void AAS_OptimizeAlloc(optimized_t* optimized)
     optimized->faceindexsize = 0;
     optimized->areas = (aas_area_t*)GetClearedMemory(aasworld.numareas * sizeof(aas_area_t));
     optimized->numareas = aasworld.numareas;
-    //
     optimized->vertexoptimizeindex = (int*)GetClearedMemory(aasworld.numvertexes * sizeof(int));
     optimized->edgeoptimizeindex = (int*)GetClearedMemory(aasworld.numedges * sizeof(int));
     optimized->faceoptimizeindex = (int*)GetClearedMemory(aasworld.numfaces * sizeof(int));
@@ -252,7 +250,6 @@ void AAS_Optimize(void)
         // NOTE: for TRAVEL_FUNCBOB the facenum and edgenum contain other coded information
         if ((aasworld.reachability[i].traveltype & TRAVELTYPE_MASK) == TRAVEL_FUNCBOB)
             continue;
-        //
         sign = aasworld.reachability[i].facenum;
         aasworld.reachability[i].facenum = optimized.faceoptimizeindex[abs(aasworld.reachability[i].facenum)];
         if (sign < 0)

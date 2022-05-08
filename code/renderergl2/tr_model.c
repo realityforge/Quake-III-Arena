@@ -251,9 +251,7 @@ qhandle_t RE_RegisterModel(const char* name)
         return 0;
     }
 
-    //
     // search the currently loaded models
-    //
     for (hModel = 1; hModel < tr.numModels; hModel++) {
         mod = tr.models[hModel];
         if (!strcmp(mod->name, name)) {
@@ -279,9 +277,7 @@ qhandle_t RE_RegisterModel(const char* name)
     mod->type = MOD_BAD;
     mod->numLods = 0;
 
-    //
     // load the files
-    //
     Q_strncpyz(localName, name, MAX_QPATH);
 
     ext = COM_GetExtension(localName);
@@ -862,7 +858,6 @@ static qboolean R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* 
         mdrFrame_t* curframe;
 
         // uncompressed model...
-        //
 
         curframe = (mdrFrame_t*)((byte*)pinmodel + pinmodel->ofsFrames);
 
@@ -1163,7 +1158,6 @@ mdvTag_t* R_GetAnimTag(mdrHeader_t* mod, int framenum, const char* tagName, mdvT
     for (i = 0; i < mod->numTags; i++, tag++) {
         if (!strcmp(tag->name, tagName)) {
             // uncompressed model...
-            //
             frameSize = (intptr_t)(&((mdrFrame_t*)0)->bones[mod->numBones]);
             frame = (mdrFrame_t*)((byte*)mod + mod->ofsFrames + framenum * frameSize);
 

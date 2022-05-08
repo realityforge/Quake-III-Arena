@@ -234,7 +234,6 @@ void BotSetInfoConfigString(bot_state_t* bs)
     char action[MAX_MESSAGE_SIZE];
     char *leader, carrying[32], *cs;
     bot_goal_t goal;
-    //
     ClientName(bs->client, netname, sizeof(netname));
     if (Q_stricmp(netname, bs->teamleader) == 0)
         leader = "L";
@@ -337,10 +336,8 @@ void BotUpdateInfoConfigStrings(void)
     char buf[MAX_INFO_STRING];
 
     for (i = 0; i < level.maxclients; i++) {
-        //
         if (!botstates[i] || !botstates[i]->inuse)
             continue;
-        //
         trap_GetConfigstring(CS_PLAYERS + i, buf, sizeof(buf));
         // if no config string or no name
         if (!strlen(buf) || !strlen(Info_ValueForKey(buf, "n")))
@@ -417,7 +414,6 @@ void BotInterbreedEndMatch(void)
     bot_interbreedmatchcount++;
     if (bot_interbreedmatchcount >= bot_interbreedcycle.integer) {
         bot_interbreedmatchcount = 0;
-        //
         trap_Cvar_Update(&bot_interbreedwrite);
         if (strlen(bot_interbreedwrite.string)) {
             BotWriteInterbreeded(bot_interbreedwrite.string);
@@ -452,7 +448,6 @@ void BotInterbreeding(void)
     for (i = 0; i < bot_interbreedbots.integer; i++) {
         trap_SendConsoleCommand(EXEC_INSERT, va("addbot %s 4 free %i %s%d\n", bot_interbreedchar.string, i * 50, bot_interbreedchar.string, i));
     }
-    //
     trap_Cvar_Set("bot_interbreedchar", "");
     bot_interbreed = qtrue;
 }
@@ -527,7 +522,6 @@ void BotChangeViewAngles(bot_state_t* bs, float thinktime)
 
     if (bs->ideal_viewangles[PITCH] > 180)
         bs->ideal_viewangles[PITCH] -= 360;
-    //
     if (bs->enemy >= 0) {
         factor = trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_VIEW_FACTOR, 0.01f, 1);
         maxchange = trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_VIEW_MAXCHANGE, 1, 1800);
@@ -539,7 +533,6 @@ void BotChangeViewAngles(bot_state_t* bs, float thinktime)
         maxchange = 240;
     maxchange *= thinktime;
     for (i = 0; i < 2; i++) {
-        //
         if (bot_challenge.integer) {
             // smooth slowdown view model
             diff = fabs(AngleDifference(bs->viewangles[i], bs->ideal_viewangles[i]));
@@ -590,7 +583,6 @@ void BotInputToUserCommand(bot_input_t* bi, usercmd_t* ucmd, int delta_angles[3]
     memset(ucmd, 0, sizeof(usercmd_t));
     // the duration for the user command in milli seconds
     ucmd->serverTime = time;
-    //
     if (bi->actionflags & ACTION_DELAYEDJUMP) {
         bi->actionflags |= ACTION_JUMP;
         bi->actionflags &= ~ACTION_DELAYEDJUMP;
@@ -620,7 +612,6 @@ void BotInputToUserCommand(bot_input_t* bi, usercmd_t* ucmd, int delta_angles[3]
         ucmd->buttons |= BUTTON_PATROL;
     if (bi->actionflags & ACTION_FOLLOWME)
         ucmd->buttons |= BUTTON_FOLLOWME;
-    //
     ucmd->weapon = bi->weapon;
     // set the view angles
     // NOTE: the ucmd->angles are the angles WITHOUT the delta angles
@@ -749,7 +740,6 @@ int BotAI(int client, float thinktime)
     int j;
 
     trap_EA_ResetInput(client);
-    //
     bs = botstates[client];
     if (!bs || !bs->inuse) {
         BotAI_Print(PRT_FATAL, "BotAI: client %d is not setup\n", client);
@@ -809,7 +799,6 @@ int BotAI(int client, float thinktime)
     }
     // increase the local time of the bot
     bs->ltime += thinktime;
-    //
     bs->thinktime = thinktime;
     // origin of the bot
     VectorCopy(bs->cur_ps.origin, bs->origin);
@@ -1042,7 +1031,6 @@ int BotAIShutdownClient(int client, qboolean restart)
     trap_BotFreeWeaponState(bs->ws);
     // free the bot character
     trap_BotFreeCharacter(bs->character);
-    //
     BotFreeWaypoints(bs->checkpoints);
     BotFreeWaypoints(bs->patrolpoints);
     // clear activate goal stack
@@ -1261,9 +1249,7 @@ int BotAIStartFrame(int time)
                 }
             }
 #endif
-            //
             memset(&state, 0, sizeof(bot_entitystate_t));
-            //
             VectorCopy(ent->r.currentOrigin, state.origin);
             if (i < MAX_CLIENTS) {
                 VectorCopy(ent->s.apos.trBase, state.angles);
@@ -1289,7 +1275,6 @@ int BotAIStartFrame(int time)
             state.legsAnim = ent->s.legsAnim;
             state.torsoAnim = ent->s.torsoAnim;
             state.weapon = ent->s.weapon;
-            //
             trap_BotLibUpdateEntity(i, &state);
         }
 
@@ -1303,9 +1288,7 @@ int BotAIStartFrame(int time)
         if (!botstates[i] || !botstates[i]->inuse) {
             continue;
         }
-        //
         botstates[i]->botthink_residual += elapsed_time;
-        //
         if (botstates[i]->botthink_residual >= thinktime) {
             botstates[i]->botthink_residual -= thinktime;
 
@@ -1388,7 +1371,6 @@ int BotInitLibrary(void)
     trap_Cvar_VariableStringBuffer("bot_aasoptimize", buf, sizeof(buf));
     if (strlen(buf))
         trap_BotLibVarSet("aasoptimize", buf);
-    //
     trap_Cvar_VariableStringBuffer("bot_saveroutingcache", buf, sizeof(buf));
     if (strlen(buf))
         trap_BotLibVarSet("saveroutingcache", buf);
@@ -1409,7 +1391,6 @@ int BotInitLibrary(void)
     trap_Cvar_VariableStringBuffer("fs_homepath", buf, sizeof(buf));
     if (strlen(buf))
         trap_BotLibVarSet("homedir", buf);
-        //
 #ifdef MISSIONPACK
     trap_BotLibDefine("MISSIONPACK");
 #endif

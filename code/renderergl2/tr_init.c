@@ -243,7 +243,6 @@ int max_polyverts;
 */
 static void InitOpenGL(void)
 {
-    //
     // initialize OS specific portions of the renderer
     //
     // GLimp_Init directly or indirectly references the following cvars:
@@ -252,7 +251,6 @@ static void InitOpenGL(void)
     //		- r_(color|depth|stencil)bits
     //		- r_ignorehwgamma
     //		- r_gamma
-    //
 
     if (glConfig.vidWidth == 0) {
         GLint temp;
@@ -716,9 +714,7 @@ void GL_SetDefaultState(void)
     // qglShadeModel( GL_SMOOTH );
     qglDepthFunc(GL_LEQUAL);
 
-    //
     // make sure our GL state vector is set correctly
-    //
     glState.glStateBits = GLS_DEPTHTEST_DISABLE | GLS_DEPTHMASK_TRUE;
     glState.storedGlState = 0;
     glState.faceCulling = CT_TWO_SIDED;
@@ -872,9 +868,7 @@ void GfxMemInfo_f(void)
 void R_Register(void)
 {
     r_developer = ri.Cvar_Get("developer", "0", CVAR_TEMP);
-    //
     // latched and archived variables
-    //
     r_allowExtensions = ri.Cvar_Get("r_allowExtensions", "1", CVAR_ARCHIVE | CVAR_LATCH);
     r_ext_compressed_textures = ri.Cvar_Get("r_ext_compressed_textures", "0", CVAR_ARCHIVE | CVAR_LATCH);
     r_ext_multitexture = ri.Cvar_Get("r_ext_multitexture", "1", CVAR_ARCHIVE | CVAR_LATCH);
@@ -980,9 +974,7 @@ void R_Register(void)
     r_shadowCascadeZBias = ri.Cvar_Get("r_shadowCascadeZBias", "0", CVAR_ARCHIVE | CVAR_LATCH);
     r_ignoreDstAlpha = ri.Cvar_Get("r_ignoreDstAlpha", "1", CVAR_ARCHIVE | CVAR_LATCH);
 
-    //
     // temporary latched variables that can only change over a restart
-    //
     r_displayRefresh = ri.Cvar_Get("r_displayRefresh", "0", CVAR_LATCH);
     ri.Cvar_CheckRange(r_displayRefresh, 0, 200, qtrue);
     r_fullbright = ri.Cvar_Get("r_fullbright", "0", CVAR_LATCH | CVAR_CHEAT);
@@ -990,9 +982,7 @@ void R_Register(void)
     r_intensity = ri.Cvar_Get("r_intensity", "1", CVAR_LATCH);
     r_singleShader = ri.Cvar_Get("r_singleShader", "0", CVAR_CHEAT | CVAR_LATCH);
 
-    //
     // archived variables that can change at any time
-    //
     r_lodCurveError = ri.Cvar_Get("r_lodCurveError", "250", CVAR_ARCHIVE | CVAR_CHEAT);
     r_lodbias = ri.Cvar_Get("r_lodbias", "0", CVAR_ARCHIVE);
     r_flares = ri.Cvar_Get("r_flares", "0", CVAR_ARCHIVE);
@@ -1022,9 +1012,7 @@ void R_Register(void)
 
     r_anaglyphMode = ri.Cvar_Get("r_anaglyphMode", "0", CVAR_ARCHIVE);
 
-    //
     // temporary variables that can change at any time
-    //
     r_showImages = ri.Cvar_Get("r_showImages", "0", CVAR_TEMP);
 
     r_debugLight = ri.Cvar_Get("r_debuglight", "0", CVAR_TEMP);
@@ -1123,9 +1111,7 @@ void R_Init(void)
         ri.Printf(PRINT_WARNING, "tess.xyz not 16 byte aligned\n");
     }
 
-    //
     // init function tables
-    //
     for (i = 0; i < FUNCTABLE_SIZE; i++) {
         tr.sinTable[i] = sin(DEG2RAD(i * 360.0f / ((float)(FUNCTABLE_SIZE - 1))));
         tr.squareTable[i] = (i < FUNCTABLE_SIZE / 2) ? 1.0f : -1.0f;

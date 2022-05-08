@@ -1512,12 +1512,9 @@ int FS_FileIsInPAK(const char* filename, int* pChecksum)
         return -1;
     }
 
-    //
     // search through the path, one element at a time
-    //
 
     for (search = fs_searchpaths; search; search = search->next) {
-        //
         if (search->pack) {
             hash = FS_HashFileName(filename, search->pack->hashSize);
         }
@@ -1978,9 +1975,7 @@ char** FS_ListFilteredFiles(const char* path, const char* extension, char* filte
     nfiles = 0;
     FS_ReturnPath(path, zpath, &pathDepth);
 
-    //
     // search through the path, one element at a time, adding to list
-    //
     for (search = fs_searchpaths; search; search = search->next) {
         // is the element a pak file?
         if (search->pack) {
@@ -2000,7 +1995,6 @@ char** FS_ListFilteredFiles(const char* path, const char* extension, char* filte
 
                 // check for directory match
                 name = buildBuffer[i].name;
-                //
                 if (filter) {
                     // case insensitive
                     if (!Com_FilterPath(filter, name, qfalse))
@@ -2661,9 +2655,7 @@ void FS_AddGameDirectory(const char* path, const char* dir)
     Sys_FreeFileList(pakfiles);
     Sys_FreeFileList(pakdirs);
 
-    //
     // add the directory to the search path
-    //
     search = Z_Malloc(sizeof(searchpath_t));
     search->dir = Z_Malloc(sizeof(*search->dir));
 

@@ -324,7 +324,6 @@ void SV_DirectConnect(netadr_t from)
             //			// disconnect the client from the game first so any flags the
             //			// player might have are dropped
             //			VM_Call( gvm, GAME_CLIENT_DISCONNECT, newcl - svs.clients );
-            //
             goto gotnewcl;
         }
     }
@@ -1060,7 +1059,6 @@ static void SV_VerifyPaks_f(client_t* cl)
     // if we are pure, we "expect" the client to load certain things from
     // certain pk3 files, namely we want the client to have loaded the
     // ui and cgame that we think should be loaded based on the pure setting
-    //
     if (sv_pure->integer != 0) {
 
         nChkSum1 = nChkSum2 = 0;

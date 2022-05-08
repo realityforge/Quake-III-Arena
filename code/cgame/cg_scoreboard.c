@@ -346,9 +346,7 @@ qboolean CG_DrawOldScoreboard(void)
     localClient = qfalse;
 
     if (cgs.gametype >= GT_TEAM) {
-        //
         // teamplay scoreboard
-        //
         y += lineHeight / 2;
 
         if (cg.teamScores[0] >= cg.teamScores[1]) {
@@ -374,9 +372,7 @@ qboolean CG_DrawOldScoreboard(void)
         y += (n1 * lineHeight) + BIGCHAR_HEIGHT;
 
     } else {
-        //
         // free for all scoreboard
-        //
         n1 = CG_TeamScoreboard(y, TEAM_FREE, fade, maxClients, lineHeight);
         y += (n1 * lineHeight) + BIGCHAR_HEIGHT;
         n2 = CG_TeamScoreboard(y, TEAM_SPECTATOR, fade, maxClients - n1, lineHeight);
@@ -473,9 +469,7 @@ void CG_DrawTourneyScoreboard(void)
 
     y = 160;
     if (cgs.gametype >= GT_TEAM) {
-        //
         // teamplay scoreboard
-        //
         CG_DrawStringExt(8, y, "Red Team", color, qtrue, qtrue, GIANT_WIDTH, GIANT_HEIGHT, 0);
         s = va("%i", cg.teamScores[0]);
         CG_DrawStringExt(632 - GIANT_WIDTH * strlen(s), y, s, color, qtrue, qtrue, GIANT_WIDTH, GIANT_HEIGHT, 0);
@@ -486,9 +480,7 @@ void CG_DrawTourneyScoreboard(void)
         s = va("%i", cg.teamScores[1]);
         CG_DrawStringExt(632 - GIANT_WIDTH * strlen(s), y, s, color, qtrue, qtrue, GIANT_WIDTH, GIANT_HEIGHT, 0);
     } else {
-        //
         // free for all scoreboard
-        //
         for (i = 0; i < MAX_CLIENTS; i++) {
             ci = &cgs.clientinfo[i];
             if (!ci->infoValid) {

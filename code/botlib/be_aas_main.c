@@ -64,7 +64,6 @@ void AAS_SetInitialized(void)
 #ifdef DEBUG
     // create all the routing cache
     // AAS_CreateAllRoutingCache();
-    //
     // AAS_RoutingInfo();
 #endif
 }
@@ -111,9 +110,7 @@ int AAS_StartFrame(float time)
     AAS_InvalidateEntities();
     // initialize AAS
     AAS_ContinueInit(time);
-    //
     aasworld.frameroutingupdates = 0;
-    //
     if (botDeveloper) {
         if (LibVarGetValue("showcacheupdates")) {
             AAS_RoutingInfo();
@@ -128,12 +125,10 @@ int AAS_StartFrame(float time)
             LibVarSet("memorydump", "0");
         }
     }
-    //
     if (saveroutingcache->value) {
         AAS_WriteRouteCache();
         LibVarSet("saveroutingcache", "0");
     }
-    //
     aasworld.numframes++;
     return BLERR_NOERROR;
 }
@@ -185,7 +180,6 @@ int AAS_LoadMap(const char* mapname)
     if (!mapname) {
         return 0;
     }
-    //
     aasworld.initialized = qfalse;
     // NOTE: free the routing caches before loading a new map because
     //  to free the caches the old number of areas, number of clusters
@@ -197,7 +191,6 @@ int AAS_LoadMap(const char* mapname)
         aasworld.loaded = qfalse;
         return errnum;
     }
-    //
     AAS_InitSettings();
     // initialize the AAS link heap for the new map
     AAS_InitAASLinkHeap();
@@ -234,7 +227,6 @@ int AAS_Setup(void)
 void AAS_Shutdown(void)
 {
     AAS_ShutdownAlternativeRouting();
-    //
     AAS_DumpBSPData();
     // free routing caches
     AAS_FreeRoutingCaches();

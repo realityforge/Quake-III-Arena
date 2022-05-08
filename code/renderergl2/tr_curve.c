@@ -383,7 +383,6 @@ void R_CreateSurfaceGridMesh(srfBspSurface_t* grid, int width, int height,
 
     VectorCopy(grid->cullOrigin, grid->lodOrigin);
     grid->lodRadius = grid->cullRadius;
-    //
 }
 
 static void R_FreeSurfaceGridMeshData(srfBspSurface_t* grid)

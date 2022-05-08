@@ -1202,12 +1202,10 @@ void R_AddIQMSurfaces(trRefEntity_t* ent)
         ent->e.oldframe %= data->num_frames;
     }
 
-    //
     // Validate the frames so there is no chance of a crash.
     // This will write directly into the entity structure, so
     // when the surfaces are rendered, they don't need to be
     // range checked again.
-    //
     if ((ent->e.frame >= data->num_frames)
         || (ent->e.frame < 0)
         || (ent->e.oldframe >= data->num_frames)
@@ -1219,25 +1217,19 @@ void R_AddIQMSurfaces(trRefEntity_t* ent)
         ent->e.oldframe = 0;
     }
 
-    //
     // cull the entire model if merged bounding box of both frames
     // is outside the view frustum.
-    //
     cull = R_CullIQM(data, ent);
     if (cull == CULL_OUT) {
         return;
     }
 
-    //
     // set up lighting now that we know we aren't culled
-    //
     if (!personalModel || r_shadows->integer > 1) {
         R_SetupEntityLighting(&tr.refdef, ent);
     }
 
-    //
     // see if we are in a fog volume
-    //
     fogNum = R_ComputeIQMFogNum(data, ent);
 
     cubemapIndex = R_CubemapForPoint(ent->e.origin);

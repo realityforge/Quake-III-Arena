@@ -1104,9 +1104,7 @@ void MSG_WriteDeltaPlayerstate(msg_t* msg, struct playerState_s* from, struct pl
         }
     }
 
-    //
     // send the arrays
-    //
     statsbits = 0;
     for (i = 0; i < MAX_STATS; i++) {
         if (to->stats[i] != from->stats[i]) {

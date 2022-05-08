@@ -105,7 +105,6 @@ qboolean ReadNumber(source_t* source, fielddef_t* fd, void* p)
         *(float*)p = (float)floatval;
         return 1;
     }
-    //
     intval = token.intvalue;
     if (negative)
         intval = -intval;

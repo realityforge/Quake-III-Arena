@@ -249,12 +249,10 @@ void R_AddMD3Surfaces(trRefEntity_t* ent)
         ent->e.oldframe %= tr.currentModel->mdv[0]->numFrames;
     }
 
-    //
     // Validate the frames so there is no chance of a crash.
     // This will write directly into the entity structure, so
     // when the surfaces are rendered, they don't need to be
     // range checked again.
-    //
     if ((ent->e.frame >= tr.currentModel->mdv[0]->numFrames)
         || (ent->e.frame < 0)
         || (ent->e.oldframe >= tr.currentModel->mdv[0]->numFrames)
@@ -266,39 +264,29 @@ void R_AddMD3Surfaces(trRefEntity_t* ent)
         ent->e.oldframe = 0;
     }
 
-    //
     // compute LOD
-    //
     lod = R_ComputeLOD(ent);
 
     model = tr.currentModel->mdv[lod];
 
-    //
     // cull the entire model if merged bounding box of both frames
     // is outside the view frustum.
-    //
     cull = R_CullModel(model, ent);
     if (cull == CULL_OUT) {
         return;
     }
 
-    //
     // set up lighting now that we know we aren't culled
-    //
     if (!personalModel || r_shadows->integer > 1) {
         R_SetupEntityLighting(&tr.refdef, ent);
     }
 
-    //
     // see if we are in a fog volume
-    //
     fogNum = R_ComputeFogNum(model, ent);
 
     cubemapIndex = R_CubemapForPoint(ent->e.origin);
 
-    //
     // draw all surfaces
-    //
     surface = model->surfaces;
     for (i = 0; i < model->numSurfaces; i++) {
 

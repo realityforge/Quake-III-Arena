@@ -133,7 +133,6 @@ libvar_t* LibVar(const char* var_name, const char* value)
     v->value = LibVarStringValue(v->string);
     // variable is modified
     v->modified = qtrue;
-    //
     return v;
 }
 char* LibVarString(const char* var_name, const char* value)

@@ -1510,9 +1510,7 @@ typedef struct {
     int shiftedEntityNum; // currentEntityNum << QSORT_REFENTITYNUM_SHIFT
     model_t* currentModel;
 
-    //
     // GPU shader programs
-    //
     shaderProgram_t genericShader[GENERICDEF_COUNT];
     shaderProgram_t textureColorShader;
     shaderProgram_t fogShader[FOGDEF_COUNT];
@@ -1554,10 +1552,8 @@ typedef struct {
     frontEndCounters_t pc;
     int frontEndMsec; // not in pc due to clearing issue
 
-    //
     // put large tables at the end, so most elements will be
     // within the +/32K indexed range on risc processors
-    //
     model_t* models[MAX_MOD_KNOWN];
     int numModels;
 

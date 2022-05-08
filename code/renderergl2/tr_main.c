@@ -480,9 +480,7 @@ static void R_SetFarClip(void)
         return;
     }
 
-    //
     // set far clipping planes dynamically
-    //
     farthestCornerDistance = 0;
     for (i = 0; i < 8; i++) {
         vec3_t v;
@@ -1348,11 +1346,9 @@ static void R_AddEntitySurface(int entityNum)
     // preshift the value we are going to OR into the drawsurf sort
     tr.shiftedEntityNum = tr.currentEntityNum << QSORT_REFENTITYNUM_SHIFT;
 
-    //
     // the weapon model must be handled special --
     // we don't want the hacked weapon position showing in
     // mirrors, because the true body position will already be drawn
-    //
     if ((ent->e.renderfx & RF_FIRST_PERSON) && (tr.viewParms.flags & VPF_NOVIEWMODEL)) {
         return;
     }
@@ -2141,7 +2137,6 @@ void R_RenderSunShadowMaps(const refdef_t* fd, int level)
 
         // Moving the Light in Texel-Sized Increments
         // from http://msdn.microsoft.com/en-us/library/windows/desktop/ee416324%28v=vs.85%29.aspx
-        //
         if (lightViewIndependentOfCameraView) {
             float cascadeBound, worldUnitsPerTexel, invWorldUnitsPerTexel;
 

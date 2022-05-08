@@ -798,7 +798,6 @@ static void CG_TeamBase(centity_t* cent)
             model.shaderRGBA[1] = c;
             model.shaderRGBA[2] = c;
             model.shaderRGBA[3] = 0xff;
-            //
             model.hModel = cgs.media.overloadEnergyModel;
             trap_R_AddRefEntityToScene(&model);
         }
@@ -809,7 +808,6 @@ static void CG_TeamBase(centity_t* cent)
             }
             t = cg.time - cent->miscTime;
             h = (cg_obeliskRespawnDelay.integer - 5) * 1000;
-            //
             if (t > h) {
                 c = (float)(t - h) / h;
                 if (c > 1)
@@ -819,7 +817,6 @@ static void CG_TeamBase(centity_t* cent)
             }
             // show the lights
             AnglesToAxis(cent->currentState.angles, model.axis);
-            //
             model.shaderRGBA[0] = c * 0xff;
             model.shaderRGBA[1] = c * 0xff;
             model.shaderRGBA[2] = c * 0xff;
@@ -845,7 +842,6 @@ static void CG_TeamBase(centity_t* cent)
                 model.shaderRGBA[1] = 0xff;
                 model.shaderRGBA[2] = 0xff;
                 model.shaderRGBA[3] = 0xff;
-                //
                 model.origin[2] += 56;
                 model.hModel = cgs.media.overloadTargetModel;
                 trap_R_AddRefEntityToScene(&model);

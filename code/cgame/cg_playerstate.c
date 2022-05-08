@@ -367,7 +367,6 @@ void CG_CheckLocalSounds(playerState_t* ps, playerState_t* ops)
 
     // lead changes
     if (!reward) {
-        //
         if (!cg.warmup) {
             // never play lead changes during warmup
             if (ps->persistant[PERS_RANK] != ops->persistant[PERS_RANK]) {

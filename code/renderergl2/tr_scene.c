@@ -457,7 +457,6 @@ void RE_RenderScene(const refdef_t* fd)
     // set up viewport
     // The refdef takes 0-at-the-top y coordinates, so
     // convert to GL's 0-at-the-bottom space
-    //
     memset(&parms, 0, sizeof(parms));
     parms.viewportX = tr.refdef.x;
     parms.viewportY = glConfig.vidHeight - (tr.refdef.y + tr.refdef.height);

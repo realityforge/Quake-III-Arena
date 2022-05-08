@@ -71,7 +71,6 @@ void AAS_AltRoutingFloodCluster_r(int areanum)
         // if the other area is not a midrange area
         if (!midrangeareas[otherareanum].valid)
             continue;
-        //
         AAS_AltRoutingFloodCluster_r(otherareanum);
     }
 }
@@ -97,11 +96,8 @@ int AAS_AlternativeRouteGoals(vec3_t start, int startareanum, vec3_t goal, int g
     // clear the midrange areas
     memset(midrangeareas, 0, aasworld.numareas * sizeof(midrangearea_t));
     numaltroutegoals = 0;
-    //
     nummidrangeareas = 0;
-    //
     for (i = 1; i < aasworld.numareas; i++) {
-        //
         if (!(type & ALTROUTEGOAL_ALL)) {
             if (!(type & ALTROUTEGOAL_CLUSTERPORTALS && (aasworld.areasettings[i].contents & AREACONTENTS_CLUSTERPORTAL))) {
                 if (!(type & ALTROUTEGOAL_VIEWPORTALS && (aasworld.areasettings[i].contents & AREACONTENTS_VIEWPORTAL))) {
@@ -132,7 +128,6 @@ int AAS_AlternativeRouteGoals(vec3_t start, int startareanum, vec3_t goal, int g
         Log_Write("%d midrange area %d", nummidrangeareas, i);
         nummidrangeareas++;
     }
-    //
     for (i = 1; i < aasworld.numareas; i++) {
         if (!midrangeareas[i].valid)
             continue;
@@ -162,7 +157,6 @@ int AAS_AlternativeRouteGoals(vec3_t start, int startareanum, vec3_t goal, int g
         VectorCopy(aasworld.areas[bestareanum].center, altroutegoals[numaltroutegoals].origin);
         altroutegoals[numaltroutegoals].areanum = bestareanum;
         numaltroutegoals++;
-        //
 #ifdef ALTROUTE_DEBUG
         AAS_ShowAreaPolygons(bestareanum, 1, qtrue);
 #endif

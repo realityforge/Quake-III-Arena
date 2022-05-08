@@ -293,7 +293,6 @@ int BotLoadWeaponWeights(int weaponstate, char* filename)
     if (!ws)
         return BLERR_CANNOTLOADWEAPONWEIGHTS;
     BotFreeWeaponWeights(weaponstate);
-    //
     ws->weaponweightconfig = ReadWeightConfig(filename);
     if (!ws->weaponweightconfig) {
         botimport.Print(PRT_FATAL, "couldn't load weapon config %s\n", filename);
@@ -394,7 +393,6 @@ int BotSetupWeaponAI(void)
 #ifdef DEBUG_AI_WEAP
     DumpWeaponConfig(weaponconfig);
 #endif // DEBUG_AI_WEAP
-       //
     return BLERR_NOERROR;
 }
 void BotShutdownWeaponAI(void)

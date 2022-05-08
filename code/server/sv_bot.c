@@ -89,7 +89,6 @@ void BotDrawDebugPolygons(void (*drawPoly)(int color, int numPoints, float* poin
     // bot debugging
     if (!bot_debug)
         bot_debug = Cvar_Get("bot_debug", "0", 0);
-    //
     // draw all debug polys
     for (i = 0; i < bot_maxdebugpolys; i++) {
         poly = &debugpolygons[i];
@@ -261,7 +260,6 @@ int BotImport_DebugPolygonCreate(int color, int numPoints, vec3_t* points)
     poly->color = color;
     poly->numPoints = numPoints;
     memcpy(poly->points, points, numPoints * sizeof(vec3_t));
-    //
     return i;
 }
 

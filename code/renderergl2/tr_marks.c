@@ -151,10 +151,8 @@ void R_BoxSurfaces_r(mnode_t* node, vec3_t mins, vec3_t maxs, surfaceType_t** li
     c = node->nummarksurfaces;
     while (c--) {
         int* surfViewCount;
-        //
         if (*listlength >= listsize)
             break;
-        //
         surfViewCount = &tr.world->surfacesViewCount[*mark];
         surf = tr.world->surfaces + *mark;
         // check if the surface has NOIMPACT or NOMARKS set
@@ -267,7 +265,6 @@ int R_MarkFragments(int numPoints, const vec3_t* points, const vec3_t projection
     // increment view count for double check prevention
     tr.viewCount++;
 
-    //
     VectorNormalize2(projection, projectionDir);
     // find all the brushes that are to be considered
     ClearBounds(mins, maxs);

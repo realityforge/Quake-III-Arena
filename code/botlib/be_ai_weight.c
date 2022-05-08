@@ -211,7 +211,6 @@ fuzzyseperator_t* ReadFuzzySeperators_r(source_t* source)
             return NULL;
         }
     } while (strcmp(token.string, "}"));
-    //
     if (!founddefault) {
         SourceWarning(source, "switch without default");
         fs = (fuzzyseperator_t*)GetClearedMemory(sizeof(fuzzyseperator_t));
@@ -225,7 +224,6 @@ fuzzyseperator_t* ReadFuzzySeperators_r(source_t* source)
         else
             firstfs = fs;
     }
-    //
     return firstfs;
 }
 weightconfig_t* ReadWeightConfig(char* filename)
@@ -269,7 +267,6 @@ weightconfig_t* ReadWeightConfig(char* filename)
         botimport.Print(PRT_ERROR, "counldn't load %s\n", filename);
         return NULL;
     }
-    //
     config = (weightconfig_t*)GetClearedMemory(sizeof(weightconfig_t));
     config->numweights = 0;
     Q_strncpyz(config->filename, filename, sizeof(config->filename));
@@ -353,11 +350,9 @@ weightconfig_t* ReadWeightConfig(char* filename)
         botimport.Print(PRT_MESSAGE, "weights loaded in %d msec\n", Sys_MilliSeconds() - starttime);
     }
 #endif // DEBUG
-       //
     if (!LibVarGetValue("bot_reloadcharacters")) {
         weightFileList[avail] = config;
     }
-    //
     return config;
 }
 int FindFuzzyWeight(weightconfig_t* wc, char* name)
@@ -521,7 +516,6 @@ void ScaleFuzzySeperator_r(fuzzyseperator_t* fs, float scale)
     if (fs->child) {
         ScaleFuzzySeperator_r(fs->child, scale);
     } else if (fs->type == WT_BALANCE) {
-        //
         fs->weight = (float)(fs->maxweight + fs->minweight) * scale;
         // get the weight between bounds
         if (fs->weight < fs->minweight)

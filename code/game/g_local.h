@@ -282,7 +282,6 @@ struct gclient_s {
     int accuracy_shots; // total number of shots
     int accuracy_hits; // total number of hits
 
-    //
     int lastkilled_client; // last client that this client killed
     int lasthurt_client; // last client that damaged this client
     int lasthurt_mod; // type of damage the client did

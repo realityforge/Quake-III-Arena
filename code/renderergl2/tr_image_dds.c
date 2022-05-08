@@ -236,35 +236,27 @@ void R_LoadDDS(const char* filename, byte** pic, uint32_t* width, uint32_t* heig
 
     *pic = NULL;
 
-    //
     // load the file
-    //
     len = ri.FS_ReadFile((char*)filename, &buffer.v);
     if (!buffer.b || len < 0) {
         return;
     }
 
-    //
     // reject files that are too small to hold even a header
-    //
     if (len < 4 + sizeof(*ddsHeader)) {
         ri.Printf(PRINT_ALL, "File %s is too small to be a DDS file.\n", filename);
         ri.FS_FreeFile(buffer.v);
         return;
     }
 
-    //
     // reject files that don't start with "DDS "
-    //
     if (*((ui32_t*)(buffer.b)) != EncodeFourCC("DDS ")) {
         ri.Printf(PRINT_ALL, "File %s is not a DDS file.\n", filename);
         ri.FS_FreeFile(buffer.v);
         return;
     }
 
-    //
     // parse header and dx10 header if available
-    //
     ddsHeader = (ddsHeader_t*)(buffer.b + 4);
     if ((ddsHeader->pixelFormatFlags & DDSPF_FOURCC) && ddsHeader->fourCC == EncodeFourCC("DX10")) {
         if (len < 4 + sizeof(*ddsHeader) + sizeof(*ddsHeaderDxt10)) {
@@ -296,9 +288,7 @@ void R_LoadDDS(const char* filename, byte** pic, uint32_t* width, uint32_t* heig
     // FIXME: handle cube map
     // if ((ddsHeader->caps2 & DDSCAPS2_CUBEMAP) == DDSCAPS2_CUBEMAP)
 
-    //
     // Convert DXGI format/FourCC into OpenGL format
-    //
     if (ddsHeaderDxt10) {
         switch (ddsHeaderDxt10->dxgiFormat) {
         case DXGI_FORMAT_BC1_TYPELESS:

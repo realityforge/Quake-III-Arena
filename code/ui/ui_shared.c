@@ -2021,9 +2021,7 @@ qboolean Item_TextField_HandleKey(itemDef_t* item, int key)
                 return qtrue;
             }
 
-            //
             // ignore any non-printable chars
-            //
             if (key < 32 || !item->cvar) {
                 return qtrue;
             }
@@ -2166,7 +2164,6 @@ static void Scroll_ListBox_ThumbFunc(void* p)
         r.h = SCROLLBAR_SIZE;
         r.w = si->item->window.rect.w - (SCROLLBAR_SIZE * 2) - 2;
         max = Item_ListBox_MaxScroll(si->item);
-        //
         pos = (DC->cursorx - r.x - SCROLLBAR_SIZE / 2) * max / (r.w - SCROLLBAR_SIZE);
         if (pos < 0) {
             pos = 0;
@@ -2182,7 +2179,6 @@ static void Scroll_ListBox_ThumbFunc(void* p)
         r.h = si->item->window.rect.h - (SCROLLBAR_SIZE * 2) - 2;
         r.w = SCROLLBAR_SIZE;
         max = Item_ListBox_MaxScroll(si->item);
-        //
         pos = (DC->cursory - r.y - SCROLLBAR_SIZE / 2) * max / (r.h - SCROLLBAR_SIZE);
         if (pos < 0) {
             pos = 0;
@@ -2872,14 +2868,12 @@ void Item_Text_AutoWrapped_Paint(itemDef_t* item)
                 }
                 item->textRect.y = y;
                 ToWindowCoords(&item->textRect.x, &item->textRect.y, &item->window);
-                //
                 buff[newLine] = '\0';
                 DC->drawText(item->textRect.x, item->textRect.y, item->textscale, color, buff, 0, 0, item->textStyle);
             }
             if (*p == '\0') {
                 break;
             }
-            //
             y += height + 5;
             p = newLinePtr;
             len = 0;
@@ -3576,7 +3570,6 @@ void Item_ListBox_Paint(itemDef_t* item)
             thumb = x - SCROLLBAR_SIZE - 1;
         }
         DC->drawHandlePic(thumb, y, SCROLLBAR_SIZE, SCROLLBAR_SIZE, DC->Assets.scrollBarThumb);
-        //
         listPtr->endPos = listPtr->startPos;
         size = item->window.rect.w - 2;
         // items
@@ -3607,7 +3600,6 @@ void Item_ListBox_Paint(itemDef_t* item)
                 // fit++;
             }
         } else {
-            //
         }
     } else {
         // draw scrollbar to right side of the window

@@ -503,10 +503,8 @@ void CG_InitConsoleCommands(void)
         trap_AddCommand(commands[i].cmd);
     }
 
-    //
     // the game server will interpret these commands, which will be automatically
     // forwarded to the server after they are not recognized locally
-    //
     trap_AddCommand("kill");
     trap_AddCommand("say");
     trap_AddCommand("say_team");

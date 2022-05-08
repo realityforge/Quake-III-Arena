@@ -138,7 +138,6 @@ void BotDefaultCharacteristics(bot_character_t* ch, bot_character_t* defaultch)
     for (i = 0; i < MAX_CHARACTERISTICS; i++) {
         if (ch->c[i].type)
             continue;
-        //
         if (defaultch->c[i].type == CT_FLOAT) {
             ch->c[i].type = CT_FLOAT;
             ch->c[i].value._float = defaultch->c[i].value._float;
@@ -264,7 +263,6 @@ bot_character_t* BotLoadCharacterFromFile(char* charfile, int skill)
         }
     }
     FreeSource(source);
-    //
     if (!foundcharacter) {
         BotFreeCharacterStrings(ch);
         FreeMemory(ch);
@@ -310,13 +308,11 @@ int BotLoadCachedCharacter(char* charfile, float skill, int reload)
             return cachedhandle;
         }
     }
-    //
     intskill = (int)(skill + 0.5);
     // try to load the character with the given skill
     ch = BotLoadCharacterFromFile(charfile, intskill);
     if (ch) {
         botcharacters[handle] = ch;
-        //
         botimport.Print(PRT_MESSAGE, "loaded skill %d from %s\n", intskill, charfile);
 #ifdef DEBUG
         if (botDeveloper) {
@@ -325,9 +321,7 @@ int BotLoadCachedCharacter(char* charfile, float skill, int reload)
 #endif // DEBUG
         return handle;
     }
-    //
     botimport.Print(PRT_WARNING, "couldn't find skill %d in %s\n", intskill, charfile);
-    //
     if (!reload) {
         // try to load a cached default character with the given skill
         cachedhandle = BotFindCachedCharacter(DEFAULT_CHARACTER, skill);
@@ -343,7 +337,6 @@ int BotLoadCachedCharacter(char* charfile, float skill, int reload)
         botimport.Print(PRT_MESSAGE, "loaded default skill %d from %s\n", intskill, charfile);
         return handle;
     }
-    //
     if (!reload) {
         // try to load a cached character with any skill
         cachedhandle = BotFindCachedCharacter(charfile, -1);
@@ -359,7 +352,6 @@ int BotLoadCachedCharacter(char* charfile, float skill, int reload)
         botimport.Print(PRT_MESSAGE, "loaded skill %f from %s\n", ch->skill, charfile);
         return handle;
     }
-    //
     if (!reload) {
         // try to load a cached character with any skill
         cachedhandle = BotFindCachedCharacter(DEFAULT_CHARACTER, -1);
@@ -375,7 +367,6 @@ int BotLoadCachedCharacter(char* charfile, float skill, int reload)
         botimport.Print(PRT_MESSAGE, "loaded default skill %f from %s\n", ch->skill, charfile);
         return handle;
     }
-    //
     botimport.Print(PRT_WARNING, "couldn't load any skill from %s\n", charfile);
     // couldn't load any character
     return 0;
@@ -417,7 +408,6 @@ int BotInterpolateCharacters(int handle1, int handle2, float desiredskill)
 
     scale = (float)(desiredskill - ch1->skill) / (ch2->skill - ch1->skill);
     for (i = 0; i < MAX_CHARACTERISTICS; i++) {
-        //
         if (ch1->c[i].type == CT_FLOAT && ch2->c[i].type == CT_FLOAT) {
             out->c[i].type = CT_FLOAT;
             out->c[i].value._float = ch1->c[i].value._float + (ch2->c[i].value._float - ch1->c[i].value._float) * scale;
@@ -474,7 +464,6 @@ int BotLoadCharacter(char* charfile, float skill)
         return 0;
     // write the character to the log file
     BotDumpCharacter(botcharacters[handle]);
-    //
     return handle;
 }
 int CheckCharacteristicIndex(int character, int index)

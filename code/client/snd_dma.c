@@ -1148,9 +1148,7 @@ void S_Base_Update(void)
         return;
     }
 
-    //
     // debugging output
-    //
     if (s_show->integer == 2) {
         total = 0;
         ch = s_channels;

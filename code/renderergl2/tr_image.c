@@ -1428,9 +1428,7 @@ static qboolean RawImage_ScaleToPower2(byte** data, int* inout_width, int* inout
     qboolean clampToEdge = flags & IMGFLAG_CLAMPTOEDGE;
     qboolean scaled;
 
-    //
     // convert to exact power of 2 sizes
-    //
     if (!mipmap) {
         scaled_width = width;
         scaled_height = height;
@@ -1503,36 +1501,28 @@ static qboolean RawImage_ScaleToPower2(byte** data, int* inout_width, int* inout
     width = scaled_width;
     height = scaled_height;
 
-    //
     // perform optional picmip operation
-    //
     if (picmip) {
         scaled_width >>= r_picmip->integer;
         scaled_height >>= r_picmip->integer;
     }
 
-    //
     // clamp to the current upper OpenGL limit
     // scale both axis down equally so we don't have to
     // deal with a half mip resampling
-    //
     while (scaled_width > glConfig.maxTextureSize
            || scaled_height > glConfig.maxTextureSize) {
         scaled_width >>= 1;
         scaled_height >>= 1;
     }
 
-    //
     // clamp to minimum size
-    //
     scaled_width = MAX(1, scaled_width);
     scaled_height = MAX(1, scaled_height);
 
     scaled = (width != scaled_width) || (height != scaled_height);
 
-    //
     // rescale texture to new size using existing mipmap functions
-    //
     if (data) {
         while (width > scaled_width || height > scaled_height) {
             if (type == IMGTYPE_NORMAL || type == IMGTYPE_NORMALHEIGHT)
@@ -2217,9 +2207,7 @@ image_t* R_FindImageFile(const char* name, imgType_t type, imgFlags_t flags)
 
     hash = generateHashValue(name);
 
-    //
     // see if the image is already loaded
-    //
     for (image = hashTable[hash]; image; image = image->next) {
         if (!strcmp(name, image->imgName)) {
             // the white image can be used with any set of parms, but other mismatches are errors
@@ -2232,9 +2220,7 @@ image_t* R_FindImageFile(const char* name, imgType_t type, imgFlags_t flags)
         }
     }
 
-    //
     // load the pic from disk
-    //
     R_LoadImage(name, &pic, &width, &height, &picFormat, &picNumMips);
     if (pic == NULL) {
         return NULL;
