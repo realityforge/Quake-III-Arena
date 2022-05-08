@@ -345,7 +345,8 @@ void RE_RegisterFont(const char* fontName, int pointSize, fontInfo_t* font)
     float glyphScale;
 #endif
     void* faceData;
-    int i, len;
+    int i;
+    long len;
     char name[1024];
 
     if (!fontName) {
