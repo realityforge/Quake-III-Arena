@@ -283,9 +283,7 @@ static void CM_SubdivideGridColumns(cGrid_t* grid)
         // grid->points[i+1][x] is an aproximating control point
         // grid->points[i+2][x] is an interpolating control point
 
-        //
         // first see if we can collapse the aproximating collumn away
-        //
         for (j = 0; j < grid->height; j++) {
             if (CM_NeedsSubdivision(grid->points[i][j], grid->points[i + 1][j], grid->points[i + 2][j])) {
                 break;
@@ -308,9 +306,7 @@ static void CM_SubdivideGridColumns(cGrid_t* grid)
             continue;
         }
 
-        //
         // we need to subdivide the curve
-        //
         for (j = 0; j < grid->height; j++) {
             vec3_t prev, mid, next;
 
@@ -816,9 +812,7 @@ void CM_AddFacetBevels(facet_t* facet)
             }
         }
     }
-    //
     // add the edge bevels
-    //
     // test the non-axial plane edges
     for (j = 0; j < w->numpoints; j++) {
         k = (j + 1) % w->numpoints;
@@ -877,7 +871,6 @@ void CM_AddFacetBevels(facet_t* facet)
 
                     facet->borderNoAdjust[facet->numBorders] = 0;
                     facet->borderInward[facet->numBorders] = flipped;
-                    //
                     w2 = CopyWinding(w);
                     Vector4Copy(planes[facet->borderPlanes[facet->numBorders]].plane, newplane);
                     if (!facet->borderInward[facet->numBorders]) {
@@ -891,7 +884,6 @@ void CM_AddFacetBevels(facet_t* facet)
                     } else {
                         FreeWinding(w2);
                     }
-                    //
                     facet->numBorders++;
                     // already got a bevel
                     //					break;
@@ -1328,7 +1320,6 @@ void CM_TraceThroughPatchCollide(traceWork_t* tw, const struct patchCollide_s* p
         enterFrac = -1.0;
         leaveFrac = 1.0;
         hitnum = -1;
-        //
         planes = &pc->planes[facet->surfacePlane];
         VectorCopy(planes->plane, plane);
         plane[3] = planes->plane[3];
@@ -1438,7 +1429,6 @@ qboolean CM_PositionTestInPatchCollide(traceWork_t* tw, const struct patchCollid
     if (tw->isPoint) {
         return qfalse;
     }
-    //
     facet = pc->facets;
     for (i = 0; i < pc->numFacets; i++, facet++) {
         planes = &pc->planes[facet->surfacePlane];
@@ -1557,7 +1547,6 @@ void CM_DrawDebugSurface(void (*drawPoly)(int color, int numPoints, float* point
     for (i = 0, facet = pc->facets; i < pc->numFacets; i++, facet++) {
 
         for (k = 0; k < facet->numBorders + 1; k++) {
-            //
             if (k < facet->numBorders) {
                 planenum = facet->borderPlanes[k];
                 inward = facet->borderInward[k];
@@ -1589,7 +1578,6 @@ void CM_DrawDebugSurface(void (*drawPoly)(int color, int numPoints, float* point
 
             w = BaseWindingForPlane(plane, plane[3]);
             for (j = 0; j < facet->numBorders + 1 && w; j++) {
-                //
                 if (j < facet->numBorders) {
                     curplanenum = facet->borderPlanes[j];
                     curinward = facet->borderInward[j];
@@ -1598,7 +1586,6 @@ void CM_DrawDebugSurface(void (*drawPoly)(int color, int numPoints, float* point
                     curinward = qfalse;
                     // continue;
                 }
-                //
                 if (curplanenum == planenum)
                     continue;
 

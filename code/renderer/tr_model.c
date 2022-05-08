@@ -100,9 +100,7 @@ qhandle_t RE_RegisterModel(const char* name)
         return 0;
     }
 
-    //
     // search the currently loaded models
-    //
     for (hModel = 1; hModel < tr.numModels; hModel++) {
         mod = tr.models[hModel];
         if (!strcmp(mod->name, name)) {
@@ -127,9 +125,7 @@ qhandle_t RE_RegisterModel(const char* name)
 
     mod->numLods = 0;
 
-    //
     // load the files
-    //
     numLoaded = 0;
 
     for (lod = MD3_MAX_LODS - 1; lod >= 0; lod--) {

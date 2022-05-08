@@ -664,9 +664,7 @@ static void decodeCodeBook(byte* input, unsigned short roq_flags)
 
     if (!cinTable[currentHandle].half) {
         if (!cinTable[currentHandle].smootheddouble) {
-            //
             // normal height
-            //
             if (cinTable[currentHandle].samplesPerPixel == 2) {
                 for (i = 0; i < two; i++) {
                     y0 = (long)*input++;
@@ -735,9 +733,7 @@ static void decodeCodeBook(byte* input, unsigned short roq_flags)
                 }
             }
         } else {
-            //
             // double height, smoothed
-            //
             if (cinTable[currentHandle].samplesPerPixel == 2) {
                 for (i = 0; i < two; i++) {
                     y0 = (long)*input++;
@@ -829,9 +825,7 @@ static void decodeCodeBook(byte* input, unsigned short roq_flags)
             }
         }
     } else {
-        //
         // 1/4 screen
-        //
         if (cinTable[currentHandle].samplesPerPixel == 2) {
             for (i = 0; i < two; i++) {
                 y0 = (long)*input;
@@ -1151,9 +1145,7 @@ redump:
         cinTable[currentHandle].status = FMV_EOF;
         break;
     }
-    //
     // read in next frame data
-    //
     if (cinTable[currentHandle].RoQPlayed >= cinTable[currentHandle].ROQSize) {
         if (cinTable[currentHandle].holdAtEnd == qfalse) {
             if (cinTable[currentHandle].looping) {

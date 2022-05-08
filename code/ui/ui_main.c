@@ -3507,7 +3507,6 @@ static void UI_InsertServerIntoDisplayList(int num, int position)
     if (position < 0 || position > uiInfo.serverStatus.numDisplayServers) {
         return;
     }
-    //
     uiInfo.serverStatus.numDisplayServers++;
     for (i = uiInfo.serverStatus.numDisplayServers; i > position; i--) {
         uiInfo.serverStatus.displayServers[i] = uiInfo.serverStatus.displayServers[i - 1];
@@ -3541,7 +3540,6 @@ static void UI_BinaryServerInsertion(int num)
     res = 0;
     while (mid > 0) {
         mid = len >> 1;
-        //
         res = trap_LAN_CompareServers(ui_netSource.integer, uiInfo.serverStatus.sortKey,
                                       uiInfo.serverStatus.sortDir, num, uiInfo.serverStatus.displayServers[offset + mid]);
         // if equal
@@ -3705,7 +3703,6 @@ static void UI_SortServerStatusInfo(serverStatusInfo_t* info)
 
     // FIXME: if "gamename" == "baseq3" or "missionpack" then
     // replace the gametype number by FFA, CTF etc.
-    //
     index = 0;
     for (i = 0; serverStatusCvars[i].name; i++) {
         for (j = 0; j < info->numLines; j++) {
@@ -3720,7 +3717,6 @@ static void UI_SortServerStatusInfo(serverStatusInfo_t* info)
                 info->lines[index][3] = info->lines[j][3];
                 info->lines[j][0] = tmp1;
                 info->lines[j][3] = tmp2;
-                //
                 if (strlen(serverStatusCvars[i].altName)) {
                     info->lines[index][0] = serverStatusCvars[i].altName;
                 }
@@ -3816,7 +3812,6 @@ static int UI_GetServerStatusInfo(const char* serverAddress, serverStatusInfo_t*
                 if (!p)
                     break;
                 *p++ = '\0';
-                //
                 i++;
             }
         }
@@ -3873,7 +3868,6 @@ static void UI_BuildFindPlayerList(qboolean force)
         trap_Cvar_Set("cl_serverStatusResendTime", va("%d", resend));
         // reset all server status requests
         trap_LAN_ServerStatus(NULL, NULL, 0);
-        //
         uiInfo.numFoundPlayerServers = 1;
         Com_sprintf(uiInfo.foundPlayerServerNames[uiInfo.numFoundPlayerServers - 1],
                     sizeof(uiInfo.foundPlayerServerNames[uiInfo.numFoundPlayerServers - 1]),
@@ -3886,7 +3880,6 @@ static void UI_BuildFindPlayerList(qboolean force)
         if (uiInfo.pendingServerStatus.server[i].valid) {
             // try to get the server status for this server
             if (UI_GetServerStatusInfo(uiInfo.pendingServerStatus.server[i].adrstr, &info)) {
-                //
                 numFound++;
                 // parse through the server status lines
                 for (j = 0; j < info.numLines; j++) {
@@ -3901,7 +3894,6 @@ static void UI_BuildFindPlayerList(qboolean force)
                     if (stristr(name, uiInfo.findPlayerName)) {
                         // add to found server list if we have space (always leave space for a line with the number found)
                         if (uiInfo.numFoundPlayerServers < MAX_FOUNDPLAYER_SERVERS - 1) {
-                            //
                             Q_strncpyz(uiInfo.foundPlayerServerAddresses[uiInfo.numFoundPlayerServers - 1],
                                        uiInfo.pendingServerStatus.server[i].adrstr,
                                        sizeof(uiInfo.foundPlayerServerAddresses[0]));
@@ -4281,10 +4273,8 @@ static void UI_FeederSelection(float feederID, int index)
             uiInfo.serverStatus.currentServerCinematic = trap_CIN_PlayCinematic(va("%s.roq", mapName), 0, 0, 0, 0, (CIN_loop | CIN_silent));
         }
     } else if (feederID == FEEDER_SERVERSTATUS) {
-        //
     } else if (feederID == FEEDER_FINDPLAYER) {
         uiInfo.currentFoundPlayerServer = index;
-        //
         if (index < uiInfo.numFoundPlayerServers - 1) {
             // build a new server status for this server
             Q_strncpyz(uiInfo.serverStatusAddress, uiInfo.foundPlayerServerAddresses[uiInfo.currentFoundPlayerServer], sizeof(uiInfo.serverStatusAddress));
@@ -5602,7 +5592,6 @@ static void UI_DoServerRefresh(void)
         // stop the refresh
         UI_StopServerRefresh();
     }
-    //
     UI_BuildServerDisplayList(qfalse);
 }
 
@@ -5629,7 +5618,6 @@ static void UI_StartServerRefresh(qboolean full)
     trap_LAN_MarkServerVisible(ui_netSource.integer, -1, qtrue);
     // reset all the pings
     trap_LAN_ResetPings(ui_netSource.integer);
-    //
     if (ui_netSource.integer == AS_LOCAL) {
         trap_Cmd_ExecuteText(EXEC_NOW, "localservers\n");
         uiInfo.serverStatus.refreshtime = uiInfo.uiDC.realTime + 1000;

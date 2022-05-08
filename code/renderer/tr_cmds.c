@@ -227,9 +227,7 @@ void RE_BeginFrame(stereoFrame_t stereoFrame)
     tr.frameCount++;
     tr.frameSceneNum = 0;
 
-    //
     // do overdraw measurement
-    //
     if (r_measureOverdraw->integer) {
         if (glConfig.stencilBits < 4) {
             ri.Printf(PRINT_ALL, "Warning: not enough stencil bits to measure overdraw: %d\n", glConfig.stencilBits);
@@ -257,18 +255,14 @@ void RE_BeginFrame(stereoFrame_t stereoFrame)
         r_measureOverdraw->modified = qfalse;
     }
 
-    //
     // texturemode stuff
-    //
     if (r_textureMode->modified) {
         R_IssuePendingRenderCommands();
         GL_TextureMode(r_textureMode->string);
         r_textureMode->modified = qfalse;
     }
 
-    //
     // gamma stuff
-    //
     if (r_gamma->modified) {
         r_gamma->modified = qfalse;
 
@@ -286,9 +280,7 @@ void RE_BeginFrame(stereoFrame_t stereoFrame)
         }
     }
 
-    //
     // draw buffer stuff
-    //
     cmd = R_GetCommandBuffer(sizeof(*cmd));
     if (!cmd) {
         return;

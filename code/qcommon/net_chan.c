@@ -246,9 +246,7 @@ qboolean Netchan_Process(netchan_t* chan, msg_t* msg)
         }
     }
 
-    //
     // discard out of order or duplicated packets
-    //
     if (sequence <= chan->incomingSequence) {
         if (showdrop->integer || showpackets->integer) {
             Com_Printf("%s:Out of order packet %i at %i\n", NET_AdrToString(chan->remoteAddress), sequence, chan->incomingSequence);
@@ -256,9 +254,7 @@ qboolean Netchan_Process(netchan_t* chan, msg_t* msg)
         return qfalse;
     }
 
-    //
     // dropped packets don't keep the message from being used
-    //
     chan->dropped = sequence - (chan->incomingSequence + 1);
     if (chan->dropped > 0) {
         if (showdrop->integer || showpackets->integer) {
@@ -266,10 +262,8 @@ qboolean Netchan_Process(netchan_t* chan, msg_t* msg)
         }
     }
 
-    //
     // if this is the final framgent of a reliable message,
     // bump incoming_reliable_sequence
-    //
     if (fragmented) {
         // TTimo
         // make sure we add the fragments in correct order
@@ -333,9 +327,7 @@ qboolean Netchan_Process(netchan_t* chan, msg_t* msg)
         return qtrue;
     }
 
-    //
     // the message can now be read from the current message pointer
-    //
     chan->incomingSequence = sequence;
 
     return qtrue;

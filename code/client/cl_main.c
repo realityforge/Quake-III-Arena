@@ -1665,9 +1665,7 @@ void CL_PacketEvent(netadr_t from, msg_t* msg)
         return;
     }
 
-    //
     // packet from server
-    //
     if (!NET_CompareAdr(from, clc.netchan.remoteAddress)) {
         Com_DPrintf("%s:sequenced packet without connection\n", NET_AdrToString(from));
         // FIXME: send a client disconnect?
@@ -1689,10 +1687,8 @@ void CL_PacketEvent(netadr_t from, msg_t* msg)
     clc.lastPacketTime = cls.realtime;
     CL_ParseServerMessage(msg);
 
-    //
     // we don't know if it is ok to save a demo message until
     // after we have parsed the frame
-    //
     if (clc.demorecording && !clc.demowaiting) {
         CL_WriteDemoMessage(msg, headerBytes);
     }
@@ -1700,9 +1696,7 @@ void CL_PacketEvent(netadr_t from, msg_t* msg)
 
 void CL_CheckTimeout(void)
 {
-    //
     // check timeout
-    //
     if ((!cl_paused->integer || !sv_paused->integer)
         && cls.state >= CA_CONNECTED && cls.state != CA_CINEMATIC
         && cls.realtime - clc.lastPacketTime > cl_timeout->value * 1000) {
@@ -1991,9 +1985,7 @@ void CL_Init(void)
 
     CL_InitInput();
 
-    //
     // register our variables
-    //
     cl_noprint = Cvar_Get("cl_noprint", "0", 0);
     cl_motd = Cvar_Get("cl_motd", "1", 0);
 
@@ -2080,9 +2072,7 @@ void CL_Init(void)
     // cgame might not be initialized before menu is used
     Cvar_Get("cg_viewsize", "100", CVAR_ARCHIVE);
 
-    //
     // register our commands
-    //
     Cmd_AddCommand("cmd", CL_ForwardToServer_f);
     Cmd_AddCommand("configstrings", CL_Configstrings_f);
     Cmd_AddCommand("clientinfo", CL_Clientinfo_f);
@@ -2799,7 +2789,6 @@ qboolean CL_UpdateVisiblePings_f(int source)
                 else if (server[i].ping == 0) {
                     // if we are updating global servers
                     if (source == AS_GLOBAL) {
-                        //
                         if (cls.numGlobalServerAddresses > 0) {
                             // overwrite this server with one from the additional global servers
                             cls.numGlobalServerAddresses--;

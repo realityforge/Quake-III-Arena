@@ -63,9 +63,7 @@ int AAS_UpdateEntity(int entnum, bot_entitystate_t* state)
         AAS_UnlinkFromAreas(ent->areas);
         // unlink the entity from the BSP leaves
         AAS_UnlinkFromBSPLeaves(ent->leaves);
-        //
         ent->areas = NULL;
-        //
         ent->leaves = NULL;
         return BLERR_NOERROR;
     }
@@ -96,7 +94,6 @@ int AAS_UpdateEntity(int entnum, bot_entitystate_t* state)
         relink = qtrue;
     else
         relink = qfalse;
-    //
     if (ent->i.solid == SOLID_BSP) {
         // if the angles of the model changed
         if (!VectorCompare(state->angles, ent->i.angles)) {

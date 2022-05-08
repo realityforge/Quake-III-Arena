@@ -409,9 +409,7 @@ void Field_CharEvent(field_t* edit, int ch)
         return;
     }
 
-    //
     // ignore any other non-printable chars
-    //
     if (ch < 32) {
         return;
     }
@@ -1034,12 +1032,10 @@ void CL_KeyEvent(int key, qboolean down, unsigned time)
         return;
     }
 
-    //
     // key up events only perform actions if the game key binding is
     // a button command (leading + sign).  These will be processed even in
     // console mode and menu mode, to keep the character from continuing
     // an action started before a mode switch.
-    //
     if (!down) {
         kb = keys[key].binding;
 

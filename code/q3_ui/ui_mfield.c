@@ -227,9 +227,7 @@ void MField_CharEvent(mfield_t* edit, int ch)
         return;
     }
 
-    //
     // ignore any other non-printable chars
-    //
     if (ch < 32) {
         return;
     }

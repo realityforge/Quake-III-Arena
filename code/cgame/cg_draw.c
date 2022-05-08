@@ -580,9 +580,7 @@ static void CG_DrawStatusBar(void)
         CG_Draw3DModel(640 - (TEXT_ICON_SPACE + ICON_SIZE), 416, ICON_SIZE, ICON_SIZE, handle, 0, origin, angles);
     }
 #endif
-    //
     // ammo
-    //
     if (cent->currentState.weapon) {
         value = ps->ammo[cent->currentState.weapon];
         if (value > -1) {
@@ -614,9 +612,7 @@ static void CG_DrawStatusBar(void)
         }
     }
 
-    //
     // health
-    //
     value = ps->stats[STAT_HEALTH];
     if (value > 100) {
         trap_R_SetColor(colors[3]); // white
@@ -634,9 +630,7 @@ static void CG_DrawStatusBar(void)
     CG_ColorForHealth(hcolor);
     trap_R_SetColor(hcolor);
 
-    //
     // armor
-    //
     value = ps->stats[STAT_ARMOR];
     if (value > 0) {
         trap_R_SetColor(colors[0]);
@@ -648,9 +642,7 @@ static void CG_DrawStatusBar(void)
         }
     }
 #ifdef MISSIONPACK
-    //
     // cubes
-    //
     if (cgs.gametype == GT_HARVESTER) {
         value = ps->generic1;
         if (value > 99) {
@@ -1581,9 +1573,7 @@ static void CG_DrawLagometer(void)
         return;
     }
 
-    //
     // draw the graph
-    //
 #ifdef MISSIONPACK
     x = 640 - 48;
     y = 480 - 144;

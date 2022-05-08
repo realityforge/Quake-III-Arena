@@ -304,11 +304,9 @@ void CL_KeyMove(usercmd_t* cmd)
     int movespeed;
     int forward, side, up;
 
-    //
     // adjust for speed key / running
     // the walking flag is to keep animations consistant
     // even during acceleration and develeration
-    //
     if (in_speed.active ^ cl_run->integer) {
         movespeed = 127;
         cmd->buttons &= ~BUTTON_WALKING;
@@ -452,11 +450,9 @@ void CL_CmdButtons(usercmd_t* cmd)
 {
     int i;
 
-    //
     // figure button bits
     // send a button bit even if the key was pressed and released in
     // less than a frame
-    //
     for (i = 0; i < 15; i++) {
         if (in_buttons[i].active || in_buttons[i].wasPressed) {
             cmd->buttons |= 1 << i;
@@ -736,9 +732,7 @@ void CL_WritePacket(void)
         }
     }
 
-    //
     // deliver the message
-    //
     packetNum = clc.netchan.outgoingSequence & PACKET_MASK;
     cl.outPackets[packetNum].p_realtime = cls.realtime;
     cl.outPackets[packetNum].p_serverTime = oldcmd->serverTime;

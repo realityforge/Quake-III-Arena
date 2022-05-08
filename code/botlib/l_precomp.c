@@ -241,12 +241,10 @@ int PC_ReadDefineParms(source_t* source, define_t* define, token_t** parms, int 
         SourceError(source, "define %s missing parms", define->name);
         return qfalse;
     }
-    //
     if (define->numparms > maxparms) {
         SourceError(source, "define with more than %d parameters", maxparms);
         return qfalse;
     }
-    //
     for (i = 0; i < define->numparms; i++)
         parms[i] = NULL;
     // if no leading "("
@@ -269,12 +267,10 @@ int PC_ReadDefineParms(source_t* source, define_t* define, token_t** parms, int 
         lastcomma = 1;
         last = NULL;
         while (!done) {
-            //
             if (!PC_ReadSourceToken(source, &token)) {
                 SourceError(source, "define %s incomplete", define->name);
                 return qfalse;
             }
-            //
             if (!strcmp(token.string, ",")) {
                 if (indent <= 0) {
                     if (lastcomma)
@@ -284,7 +280,6 @@ int PC_ReadDefineParms(source_t* source, define_t* define, token_t** parms, int 
                 }
             }
             lastcomma = 0;
-            //
             if (!strcmp(token.string, "(")) {
                 indent++;
                 continue;
@@ -297,9 +292,7 @@ int PC_ReadDefineParms(source_t* source, define_t* define, token_t** parms, int 
                     break;
                 }
             }
-            //
             if (numparms < define->numparms) {
-                //
                 t = PC_CopyToken(&token);
                 t->next = NULL;
                 if (last)
@@ -530,7 +523,6 @@ int PC_ExpandDefine(source_t* source, token_t* deftoken, define_t* define,
                     parmnum = PC_FindDefineParm(define, dt->next->string);
                 else
                     parmnum = -1;
-                //
                 if (parmnum >= 0) {
                     // step over the stringizing operator
                     dt = dt->next;
@@ -589,7 +581,6 @@ int PC_ExpandDefine(source_t* source, token_t* deftoken, define_t* define,
             PC_FreeToken(pt);
         }
     }
-    //
     return qtrue;
 }
 int PC_ExpandDefineIntoSource(source_t* source, token_t* deftoken, define_t* define)
@@ -633,7 +624,6 @@ int PC_Directive_include(source_t* source)
 
     if (source->skip > 0)
         return qtrue;
-    //
     if (!PC_ReadSourceToken(source, &token)) {
         SourceError(source, "#include without file name");
         return qfalse;
@@ -722,7 +712,6 @@ int PC_Directive_undef(source_t* source)
 
     if (source->skip > 0)
         return qtrue;
-    //
     if (!PC_ReadLine(source, &token)) {
         SourceError(source, "undef without name");
         return qfalse;
@@ -758,7 +747,6 @@ int PC_Directive_define(source_t* source)
 
     if (source->skip > 0)
         return qtrue;
-    //
     if (!PC_ReadLine(source, &token)) {
         SourceError(source, "#define without name");
         return qfalse;
@@ -808,7 +796,6 @@ int PC_Directive_define(source_t* source)
                     SourceError(source, "invalid define parameter");
                     return qfalse;
                 }
-                //
                 if (PC_FindDefineParm(define, token.string) >= 0) {
                     SourceError(source, "two the same define parameters");
                     return qfalse;
@@ -828,7 +815,6 @@ int PC_Directive_define(source_t* source)
                     SourceError(source, "define parameters not terminated");
                     return qfalse;
                 }
-                //
                 if (!strcmp(token.string, ")"))
                     break;
                 // then it must be a comma
@@ -857,7 +843,6 @@ int PC_Directive_define(source_t* source)
             define->tokens = t;
         last = t;
     } while (PC_ReadLine(source, &token));
-    //
     if (last) {
         // check for merge operators at the beginning or end
         if (!strcmp(define->tokens->string, "##") || !strcmp(last->string, "##")) {
@@ -905,7 +890,6 @@ define_t* PC_DefineFromString(char* string)
     // free the define is created
     if (src.defines)
         PC_FreeDefine(def);
-    //
     return NULL;
 }
 //============================================================================
@@ -1142,7 +1126,6 @@ int PC_EvaluateTokens(source_t* source, token_t* tokens, signed long int* intval
     double questmarkfloatvalue = 0;
     int gotquestmarkvalue = qfalse;
     int lastoperatortype = 0;
-    //
     operator_t operator_heap[MAX_OPERATORS];
     int numoperators = 0;
     value_t value_heap[MAX_VALUES];
@@ -1352,7 +1335,6 @@ int PC_EvaluateTokens(source_t* source, token_t* tokens, signed long int* intval
             error = 1;
         }
     }
-    //
     gotquestmarkvalue = qfalse;
     questmarkintvalue = 0;
     questmarkfloatvalue = 0;
@@ -1522,7 +1504,6 @@ int PC_EvaluateTokens(source_t* source, token_t* tokens, signed long int* intval
             // remove the second value if not question mark operator
             if (o->operator!= P_QUESTIONMARK)
                 v = v->next;
-            //
             if (v->prev)
                 v->prev->next = v->next;
             else
@@ -1582,7 +1563,6 @@ int PC_Evaluate(source_t* source, signed long int* intvalue,
         *intvalue = 0;
     if (floatvalue)
         *floatvalue = 0;
-    //
     if (!PC_ReadLine(source, &token)) {
         SourceError(source, "no value after #if/#elif");
         return qfalse;
@@ -1636,10 +1616,8 @@ int PC_Evaluate(source_t* source, signed long int* intvalue,
             return qfalse;
         }
     } while (PC_ReadLine(source, &token));
-    //
     if (!PC_EvaluateTokens(source, firsttoken, intvalue, floatvalue, integer))
         return qfalse;
-        //
 #ifdef DEBUG_EVAL
     Log_Write("eval:");
 #endif // DEBUG_EVAL
@@ -1656,7 +1634,6 @@ int PC_Evaluate(source_t* source, signed long int* intvalue,
     else
         Log_Write("eval result: %f", *floatvalue);
 #endif // DEBUG_EVAL
-       //
     return qtrue;
 }
 int PC_DollarEvaluate(source_t* source, signed long int* intvalue,
@@ -1671,7 +1648,6 @@ int PC_DollarEvaluate(source_t* source, signed long int* intvalue,
         *intvalue = 0;
     if (floatvalue)
         *floatvalue = 0;
-    //
     if (!PC_ReadSourceToken(source, &token)) {
         SourceError(source, "no leading ( after $evalint/$evalfloat");
         return qfalse;
@@ -1736,10 +1712,8 @@ int PC_DollarEvaluate(source_t* source, signed long int* intvalue,
             return qfalse;
         }
     } while (PC_ReadSourceToken(source, &token));
-    //
     if (!PC_EvaluateTokens(source, firsttoken, intvalue, floatvalue, integer))
         return qfalse;
-        //
 #ifdef DEBUG_EVAL
     Log_Write("$eval:");
 #endif // DEBUG_EVAL
@@ -1756,7 +1730,6 @@ int PC_DollarEvaluate(source_t* source, signed long int* intvalue,
     else
         Log_Write("$eval result: %f", *floatvalue);
 #endif // DEBUG_EVAL
-       //
     return qtrue;
 }
 int PC_Directive_elif(source_t* source)
@@ -1829,7 +1802,6 @@ int PC_Directive_eval(source_t* source)
 
     if (!PC_Evaluate(source, &value, NULL, qtrue))
         return qfalse;
-    //
     token.line = source->scriptstack->line;
     token.whitespace_p = source->scriptstack->script_p;
     token.endwhitespace_p = source->scriptstack->script_p;
@@ -1914,7 +1886,6 @@ int PC_DollarDirective_evalint(source_t* source)
 
     if (!PC_DollarEvaluate(source, &value, NULL, qtrue))
         return qfalse;
-    //
     token.line = source->scriptstack->line;
     token.whitespace_p = source->scriptstack->script_p;
     token.endwhitespace_p = source->scriptstack->script_p;
@@ -2133,7 +2104,6 @@ int PC_CheckTokenString(source_t* source, char* string)
     // if the token is available
     if (!strcmp(tok.string, string))
         return qtrue;
-    //
     PC_UnreadSourceToken(source, &tok);
     return qfalse;
 }

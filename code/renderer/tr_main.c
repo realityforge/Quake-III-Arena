@@ -338,9 +338,7 @@ static void SetFarClip(void)
         return;
     }
 
-    //
     // set far clipping planes dynamically
-    //
     farthestCornerDistance = 0;
     for (i = 0; i < 8; i++) {
         vec3_t v;
@@ -385,9 +383,7 @@ void R_SetupProjection(void)
     // dynamically compute far clip plane distance
     SetFarClip();
 
-    //
     // set up projection matrix
-    //
     zNear = r_znear->value;
     zFar = tr.viewParms.zFar;
 
@@ -1186,11 +1182,9 @@ void R_AddEntitySurfaces(void)
         // preshift the value we are going to OR into the drawsurf sort
         tr.shiftedEntityNum = tr.currentEntityNum << QSORT_ENTITYNUM_SHIFT;
 
-        //
         // the weapon model must be handled special --
         // we don't want the hacked weapon position showing in
         // mirrors, because the true body position will already be drawn
-        //
         if ((ent->e.renderfx & RF_FIRST_PERSON) && tr.viewParms.isPortal) {
             continue;
         }

@@ -1101,9 +1101,7 @@ void S_Update(void)
         return;
     }
 
-    //
     // debugging output
-    //
     if (s_show->integer == 2) {
         total = 0;
         ch = s_channels;
@@ -1371,9 +1369,7 @@ void S_StartBackgroundTrack(const char* intro, const char* loop)
         s_backgroundFile = 0;
     }
 
-    //
     // open up a wav file and get all the info
-    //
     FS_FOpenFileRead(name, &s_backgroundFile, qtrue);
     if (!s_backgroundFile) {
         Com_Printf(S_COLOR_YELLOW "WARNING: couldn't open music file %s\n", name);

@@ -64,12 +64,10 @@ int AAS_UpdatePortal(int areanum, int clusternum)
         if (aasworld.portals[portalnum].areanum == areanum)
             break;
     }
-    //
     if (portalnum == aasworld.numportals) {
         AAS_Error("no portal of area %d", areanum);
         return qtrue;
     }
-    //
     portal = &aasworld.portals[portalnum];
     // if the portal is already fully updated
     if (portal->frontcluster == clusternum)
@@ -108,7 +106,6 @@ int AAS_FloodClusterAreas_r(int areanum, int clusternum)
     aas_face_t* face;
     int facenum, i;
 
-    //
     if (areanum <= 0 || areanum >= aasworld.numareas) {
         AAS_Error("AAS_FloodClusterAreas_r: areanum out of range");
         return qfalse;
@@ -117,9 +114,7 @@ int AAS_FloodClusterAreas_r(int areanum, int clusternum)
     if (aasworld.areasettings[areanum].cluster > 0) {
         if (aasworld.areasettings[areanum].cluster == clusternum)
             return qtrue;
-        //
         // there's a reachability going from one cluster to another only in one direction
-        //
         AAS_Error("cluster %d touched cluster %d at area %d\r\n",
                   clusternum, aasworld.areasettings[areanum].cluster, areanum);
         return qfalse;
@@ -203,13 +198,10 @@ void AAS_NumberClusterAreas(int clusternum)
     aasworld.clusters[clusternum].numreachabilityareas = 0;
     // number all areas in this cluster WITH reachabilities
     for (i = 1; i < aasworld.numareas; i++) {
-        //
         if (aasworld.areasettings[i].cluster != clusternum)
             continue;
-        //
         if (!AAS_AreaReachability(i))
             continue;
-        //
         aasworld.areasettings[i].clusterareanum = aasworld.clusters[clusternum].numareas;
         // the cluster has an extra area
         aasworld.clusters[clusternum].numareas++;
@@ -232,13 +224,10 @@ void AAS_NumberClusterAreas(int clusternum)
     }
     // number all areas in this cluster WITHOUT reachabilities
     for (i = 1; i < aasworld.numareas; i++) {
-        //
         if (aasworld.areasettings[i].cluster != clusternum)
             continue;
-        //
         if (AAS_AreaReachability(i))
             continue;
-        //
         aasworld.areasettings[i].clusterareanum = aasworld.clusters[clusternum].numareas;
         // the cluster has an extra area
         aasworld.clusters[clusternum].numareas++;
@@ -263,7 +252,6 @@ int AAS_FindClusters(void)
     aas_cluster_t* cluster;
 
     AAS_RemoveClusterAreas();
-    //
     for (i = 1; i < aasworld.numareas; i++) {
         // if the area is already part of a cluster
         if (aasworld.areasettings[i].cluster)
@@ -316,195 +304,6 @@ void AAS_CreatePortals(void)
         }
     }
 }
-/*
-int AAS_MapContainsTeleporters(void)
-{
-        bsp_entity_t *entities, *ent;
-        char *classname;
-
-        entities = AAS_ParseBSPEntities();
-
-        for (ent = entities; ent; ent = ent->next)
-        {
-                classname = AAS_ValueForBSPEpairKey(ent, "classname");
-                if (classname && !strcmp(classname, "misc_teleporter"))
-                {
-                        AAS_FreeBSPEntities(entities);
-                        return qtrue;
-                }
-        }
-        return qfalse;
-}
-int AAS_NonConvexFaces(aas_face_t *face1, aas_face_t *face2, int side1, int side2)
-{
-        int i, j, edgenum;
-        aas_plane_t *plane1, *plane2;
-        aas_edge_t *edge;
-
-
-        plane1 = &aasworld.planes[face1->planenum ^ side1];
-        plane2 = &aasworld.planes[face2->planenum ^ side2];
-
-        //check if one of the points of face1 is at the back of the plane of face2
-        for (i = 0; i < face1->numedges; i++)
-        {
-                edgenum = abs(aasworld.edgeindex[face1->firstedge + i]);
-                edge = &aasworld.edges[edgenum];
-                for (j = 0; j < 2; j++)
-                {
-                        if (DotProduct(plane2->normal, aasworld.vertexes[edge->v[j]]) -
-                                                        plane2->dist < -0.01) return qtrue;
-                }
-        }
-        for (i = 0; i < face2->numedges; i++)
-        {
-                edgenum = abs(aasworld.edgeindex[face2->firstedge + i]);
-                edge = &aasworld.edges[edgenum];
-                for (j = 0; j < 2; j++)
-                {
-                        if (DotProduct(plane1->normal, aasworld.vertexes[edge->v[j]]) -
-                                                        plane1->dist < -0.01) return qtrue;
-                }
-        }
-
-        return qfalse;
-}
-qboolean AAS_CanMergeAreas(int *areanums, int numareas)
-{
-        int i, j, s, face1num, face2num, side1, side2, fn1, fn2;
-        aas_face_t *face1, *face2;
-        aas_area_t *area1, *area2;
-
-        for (i = 0; i < numareas; i++)
-        {
-                area1 = &aasworld.areas[areanums[i]];
-                for (fn1 = 0; fn1 < area1->numfaces; fn1++)
-                {
-                        face1num = abs(aasworld.faceindex[area1->firstface + fn1]);
-                        face1 = &aasworld.faces[face1num];
-                        side1 = face1->frontarea != areanums[i];
-                        //check if the face isn't a shared one with one of the other areas
-                        for (s = 0; s < numareas; s++)
-                        {
-                                if (s == i) continue;
-                                if (face1->frontarea == s || face1->backarea == s) break;
-                        }
-                        //if the face was a shared one
-                        if (s != numareas) continue;
-                        //
-                        for (j = 0; j < numareas; j++)
-                        {
-                                if (j == i) continue;
-                                area2 = &aasworld.areas[areanums[j]];
-                                for (fn2 = 0; fn2 < area2->numfaces; fn2++)
-                                {
-                                        face2num = abs(aasworld.faceindex[area2->firstface + fn2]);
-                                        face2 = &aasworld.faces[face2num];
-                                        side2 = face2->frontarea != areanums[j];
-                                        //check if the face isn't a shared one with one of the other areas
-                                        for (s = 0; s < numareas; s++)
-                                        {
-                                                if (s == j) continue;
-                                                if (face2->frontarea == s || face2->backarea == s) break;
-                                        }
-                                        //if the face was a shared one
-                                        if (s != numareas) continue;
-                                        //
-                                        if (AAS_NonConvexFaces(face1, face2, side1, side2)) return qfalse;
-                                }
-                        }
-                }
-        }
-        return qtrue;
-}
-qboolean AAS_NonConvexEdges(aas_edge_t *edge1, aas_edge_t *edge2, int side1, int side2, int planenum)
-{
-        int i;
-        vec3_t edgevec1, edgevec2, normal1, normal2;
-        float dist1, dist2;
-        aas_plane_t *plane;
-
-        plane = &aasworld.planes[planenum];
-        VectorSubtract(aasworld.vertexes[edge1->v[1]], aasworld.vertexes[edge1->v[0]], edgevec1);
-        VectorSubtract(aasworld.vertexes[edge2->v[1]], aasworld.vertexes[edge2->v[0]], edgevec2);
-        if (side1) VectorInverse(edgevec1);
-        if (side2) VectorInverse(edgevec2);
-        //
-        CrossProduct(edgevec1, plane->normal, normal1);
-        dist1 = DotProduct(normal1, aasworld.vertexes[edge1->v[0]]);
-        CrossProduct(edgevec2, plane->normal, normal2);
-        dist2 = DotProduct(normal2, aasworld.vertexes[edge2->v[0]]);
-
-        for (i = 0; i < 2; i++)
-        {
-                if (DotProduct(aasworld.vertexes[edge1->v[i]], normal2) - dist2 < -0.01) return qfalse;
-        }
-        for (i = 0; i < 2; i++)
-        {
-                if (DotProduct(aasworld.vertexes[edge2->v[i]], normal1) - dist1 < -0.01) return qfalse;
-        }
-        return qtrue;
-}
-qboolean AAS_CanMergeFaces(int *facenums, int numfaces, int planenum)
-{
-        int i, j, s, edgenum1, edgenum2, side1, side2, en1, en2, ens;
-        aas_face_t *face1, *face2, *otherface;
-        aas_edge_t *edge1, *edge2;
-
-        for (i = 0; i < numfaces; i++)
-        {
-                face1 = &aasworld.faces[facenums[i]];
-                for (en1 = 0; en1 < face1->numedges; en1++)
-                {
-                        edgenum1 = aasworld.edgeindex[face1->firstedge + en1];
-                        side1 = (edgenum1 < 0) ^ (face1->planenum != planenum);
-                        edgenum1 = abs(edgenum1);
-                        edge1 = &aasworld.edges[edgenum1];
-                        //check if the edge is shared with another face
-                        for (s = 0; s < numfaces; s++)
-                        {
-                                if (s == i) continue;
-                                otherface = &aasworld.faces[facenums[s]];
-                                for (ens = 0; ens < otherface->numedges; ens++)
-                                {
-                                        if (edgenum1 == abs(aasworld.edgeindex[otherface->firstedge + ens])) break;
-                                }
-                                if (ens != otherface->numedges) break;
-                        }
-                        //if the edge was shared
-                        if (s != numfaces) continue;
-                        //
-                        for (j = 0; j < numfaces; j++)
-                        {
-                                if (j == i) continue;
-                                face2 = &aasworld.faces[facenums[j]];
-                                for (en2 = 0; en2 < face2->numedges; en2++)
-                                {
-                                        edgenum2 = aasworld.edgeindex[face2->firstedge + en2];
-                                        side2 = (edgenum2 < 0) ^ (face2->planenum != planenum);
-                                        edgenum2 = abs(edgenum2);
-                                        edge2 = &aasworld.edges[edgenum2];
-                                        //check if the edge is shared with another face
-                                        for (s = 0; s < numfaces; s++)
-                                        {
-                                                if (s == i) continue;
-                                                otherface = &aasworld.faces[facenums[s]];
-                                                for (ens = 0; ens < otherface->numedges; ens++)
-                                                {
-                                                        if (edgenum2 == abs(aasworld.edgeindex[otherface->firstedge + ens])) break;
-                                                }
-                                                if (ens != otherface->numedges) break;
-                                        }
-                                        //if the edge was shared
-                                        if (s != numfaces) continue;
-                                        //
-                                        if (AAS_NonConvexEdges(edge1, edge2, side1, side2, planenum)) return qfalse;
-                                }
-                        }
-                }
-        }
-        return qtrue;
-}*/
 void AAS_ConnectedAreas_r(int* areanums, int numareas, int* connectedareas, int curarea)
 {
     int i, j, otherareanum, facenum;
@@ -578,7 +377,6 @@ int AAS_GetAdjacentAreasWithLessPresenceTypes_r(int* areanums, int numareas, int
             otherareanum = face->frontarea;
         else
             otherareanum = face->backarea;
-        //
         otherpresencetype = aasworld.areasettings[otherareanum].presencetype;
         // if the other area has less presence types
         if ((presencetype & ~otherpresencetype) && !(otherpresencetype & ~presencetype)) {
@@ -618,7 +416,6 @@ int AAS_CheckAreaForPossiblePortals(int areanum)
     // it must be a grounded area
     if (!(aasworld.areasettings[areanum].areaflags & AREA_GROUNDED))
         return 0;
-    //
     memset(numareafrontfaces, 0, sizeof(numareafrontfaces));
     memset(numareabackfaces, 0, sizeof(numareabackfaces));
     numareas = numfrontfaces = numbackfaces = 0;
@@ -626,7 +423,6 @@ int AAS_CheckAreaForPossiblePortals(int areanum)
     frontplanenum = backplanenum = -1;
     // add any adjacent areas with less presence types
     numareas = AAS_GetAdjacentAreasWithLessPresenceTypes_r(areanums, 0, areanum);
-    //
     for (i = 0; i < numareas; i++) {
         area = &aasworld.areas[areanums[i]];
         for (j = 0; j < area->numfaces; j++) {
@@ -655,7 +451,6 @@ int AAS_CheckAreaForPossiblePortals(int areanum)
                 return 0;
             // number of the plane of the area
             faceplanenum = face->planenum & ~1;
-            //
             if (frontplanenum < 0 || faceplanenum == frontplanenum) {
                 frontplanenum = faceplanenum;
                 frontfacenums[numfrontfaces++] = facenum;
@@ -722,7 +517,6 @@ int AAS_CheckAreaForPossiblePortals(int areanum)
         aasworld.areasettings[areanums[i]].contents |= AREACONTENTS_ROUTEPORTAL;
         Log_Write("possible portal: %d\r\n", areanums[i]);
     }
-    //
     return numareas;
 }
 void AAS_FindPossiblePortals(void)
@@ -827,7 +621,6 @@ void AAS_InitClustering(void)
     if (aasworld.clusters)
         FreeMemory(aasworld.clusters);
     aasworld.clusters = (aas_cluster_t*)GetClearedMemory(AAS_MAX_CLUSTERS * sizeof(aas_cluster_t));
-    //
     removedPortalAreas = 0;
     botimport.Print(PRT_MESSAGE, "\r%6d removed portal areas", removedPortalAreas);
     while (1) {
@@ -838,7 +631,6 @@ void AAS_InitClustering(void)
         aasworld.numclusters = 1; // cluster 0 is a dummy
         // create the portals from the portal areas
         AAS_CreatePortals();
-        //
         removedPortalAreas++;
         // find the clusters
         if (!AAS_FindClusters())
@@ -846,7 +638,6 @@ void AAS_InitClustering(void)
         // test the portals
         if (!AAS_TestPortals())
             continue;
-        //
         break;
     }
     botimport.Print(PRT_MESSAGE, "\n");
@@ -872,7 +663,6 @@ void AAS_InitClustering(void)
         total += n * n;
     }
     total += numreachabilityareas * aasworld.numportals;
-    //
     botimport.Print(PRT_MESSAGE, "%6i total reachability areas\n", numreachabilityareas);
     botimport.Print(PRT_MESSAGE, "%6i AAS memory/CPU usage (the lower the better)\n", total * 3);
 }

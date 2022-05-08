@@ -185,18 +185,14 @@ void Conbuf_AppendText(const char* pMsg)
     int i = 0;
     static unsigned long s_totalChars;
 
-    //
     // if the message is REALLY long, use just the last portion of it
-    //
     if (strlen(pMsg) > CONSOLE_BUFFER_SIZE - 1) {
         msg = pMsg + strlen(pMsg) - CONSOLE_BUFFER_SIZE + 1;
     } else {
         msg = pMsg;
     }
 
-    //
     // copy into an intermediate buffer
-    //
     while (msg[i] && ((b - buffer) < sizeof(buffer) - 1)) {
         if (msg[i] == '\n' && msg[i + 1] == '\r') {
             b[0] = '\r';
@@ -224,17 +220,13 @@ void Conbuf_AppendText(const char* pMsg)
 
     s_totalChars += bufLen;
 
-    //
     // replace selection instead of appending if we're overflowing
-    //
     if (s_totalChars > 0x7fff) {
         SendMessage(s_wcd.hwndBuffer, EM_SETSEL, 0, -1);
         s_totalChars = bufLen;
     }
 
-    //
     // put this text into the windows console
-    //
     SendMessage(s_wcd.hwndBuffer, EM_LINESCROLL, 0, 0xffff);
     SendMessage(s_wcd.hwndBuffer, EM_SCROLLCARET, 0, 0);
     SendMessage(s_wcd.hwndBuffer, EM_REPLACESEL, 0, (LPARAM)buffer);

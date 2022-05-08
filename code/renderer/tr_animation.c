@@ -93,9 +93,7 @@ void RB_SurfaceAnim(md4Surface_t* surface)
     }
     tess.numIndexes += indexes;
 
-    //
     // lerp all the needed bones
-    //
     if (!backlerp) {
         // no lerping needed
         bonePtr = frame->bones;
@@ -107,9 +105,7 @@ void RB_SurfaceAnim(md4Surface_t* surface)
         }
     }
 
-    //
     // deform the vertexes by the lerped bones
-    //
     numVerts = surface->numVerts;
     // FIXME
     // This makes TFC's skeletons work.  Shouldn't be necessary anymore, but left

@@ -261,9 +261,7 @@ void R_SetupEntityLighting(const trRefdef_t* refdef, trRefEntity_t* ent)
     }
     ent->lightingCalculated = qtrue;
 
-    //
     // trace a sample point down to find ambient light
-    //
     if (ent->e.renderfx & RF_LIGHTING_ORIGIN) {
         // separate lightOrigins are needed so an object that is
         // sinking into the ground can still be lit, and so
@@ -291,9 +289,7 @@ void R_SetupEntityLighting(const trRefdef_t* refdef, trRefEntity_t* ent)
         ent->ambientLight[2] += tr.identityLight * 32;
     }
 
-    //
     // modify the light by dynamic lights
-    //
     d = VectorLength(ent->directedLight);
     VectorScale(ent->lightDir, d, lightDir);
 

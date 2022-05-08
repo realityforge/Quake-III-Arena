@@ -262,15 +262,6 @@ static qboolean CG_ParseAnimationFile(const char* filename, clientInfo_t* ci)
     animations[FLAG_STAND2RUN].frameLerp = 1000 / 15;
     animations[FLAG_STAND2RUN].initialLerp = 1000 / 15;
     animations[FLAG_STAND2RUN].reversed = qtrue;
-    //
-    // new anims changes
-    //
-    //	animations[TORSO_GETFLAG].flipflop = qtrue;
-    //	animations[TORSO_GUARDBASE].flipflop = qtrue;
-    //	animations[TORSO_PATROL].flipflop = qtrue;
-    //	animations[TORSO_AFFIRMATIVE].flipflop = qtrue;
-    //	animations[TORSO_NEGATIVE].flipflop = qtrue;
-    //
     return qtrue;
 }
 
@@ -1341,7 +1332,6 @@ static void CG_PlayerAngles(centity_t* cent, vec3_t legs[3], vec3_t torso[3], ve
     CG_SwingAngles(dest, 15, 30, 0.1f, &cent->pe.torso.pitchAngle, &cent->pe.torso.pitching);
     torsoAngles[PITCH] = cent->pe.torso.pitchAngle;
 
-    //
     clientNum = cent->currentState.clientNum;
     if (clientNum >= 0 && clientNum < MAX_CLIENTS) {
         ci = &cgs.clientinfo[clientNum];
@@ -1369,7 +1359,6 @@ static void CG_PlayerAngles(centity_t* cent, vec3_t legs[3], vec3_t torso[3], ve
         legsAngles[PITCH] += side;
     }
 
-    //
     clientNum = cent->currentState.clientNum;
     if (clientNum >= 0 && clientNum < MAX_CLIENTS) {
         ci = &cgs.clientinfo[clientNum];
@@ -1578,7 +1567,6 @@ static void CG_PlayerFlag(centity_t* cent, qhandle_t hSkin, refEntity_t* torso)
         d = DotProduct(pole.axis[2], dir);
         // if there is enough movement orthogonal to the flag pole
         if (fabs(d) < 0.9) {
-            //
             d = DotProduct(pole.axis[0], dir);
             if (d > 1.0f) {
                 d = 1.0f;
@@ -2119,9 +2107,7 @@ void CG_Player(centity_t* cent)
         CG_PlayerTokens(cent, renderfx);
     }
 #endif
-    //
     // add the legs
-    //
     legs.hModel = ci->legsModel;
     legs.customSkin = ci->legsSkin;
 
@@ -2139,9 +2125,7 @@ void CG_Player(centity_t* cent)
         return;
     }
 
-    //
     // add the torso
-    //
     torso.hModel = ci->torsoModel;
     if (!torso.hModel) {
         return;
@@ -2356,9 +2340,7 @@ void CG_Player(centity_t* cent)
     }
 #endif // MISSIONPACK
 
-    //
     // add the head
-    //
     head.hModel = ci->headModel;
     if (!head.hModel) {
         return;
@@ -2380,9 +2362,7 @@ void CG_Player(centity_t* cent)
     CG_DustTrail(cent);
 #endif
 
-    //
     // add the gun / barrel / flash
-    //
     CG_AddPlayerWeapon(&torso, NULL, cent, ci->team);
 
     // add powerups floating behind the player

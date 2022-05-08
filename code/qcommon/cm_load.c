@@ -494,9 +494,7 @@ void CM_LoadMap(const char* name, qboolean clientload, int* checksum)
         return;
     }
 
-    //
     // load the file
-    //
 #ifndef BSPC
     length = FS_ReadFile(name, (void**)&buf);
 #else

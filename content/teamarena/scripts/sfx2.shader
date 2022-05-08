@@ -179,7 +179,6 @@ textures/sfx2/autorain
         //{
 	//	map textures/sfx/rain.png
         //        tcMod Scroll .01 -6.3
-        //
         //        blendFunc GL_ONE GL_ONE
         //}
 

@@ -186,7 +186,6 @@ void FreeMemory(void* ptr)
     allocatedmemory -= block->size;
     totalmemorysize -= block->size + sizeof(memoryblock_t);
     numblocks--;
-    //
     if (block->id == MEM_ID) {
         botimport.FreeMemory(block);
     }

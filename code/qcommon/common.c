@@ -839,10 +839,8 @@ void* Z_TagMalloc(size_t size, int tag)
 #ifdef ZONE_DEBUG
     allocSize = size;
 #endif
-    //
     // scan through the block list looking for the first free block
     // of sufficient size
-    //
     size += sizeof(memblock_t); // account for size of block header
     size += 4; // space for memory trash tester
     size = (size + 3) & ~3; // align to 32 bit boundary
@@ -867,9 +865,7 @@ void* Z_TagMalloc(size_t size, int tag)
         }
     } while (base->tag || base->size < size);
 
-    //
     // found a block big enough
-    //
     extra = base->size - size;
     if (extra > MINFRAGMENT) {
         // there will be a free fragment after the allocated block
@@ -2147,9 +2143,7 @@ void Com_Init(char* commandLine)
     // of the config file
     cvar_modifiedFlags &= ~CVAR_ARCHIVE;
 
-    //
     // init commands and vars
-    //
     com_blood = Cvar_Get("com_blood", "1", CVAR_ARCHIVE);
 
     com_developer = Cvar_Get("developer", "0", CVAR_TEMP);
@@ -2300,9 +2294,7 @@ int Com_ModifyMsec(int msec)
 {
     int clampTime;
 
-    //
     // modify time for debugging values
-    //
     if (com_fixedtime->integer) {
         msec = com_fixedtime->integer;
     } else if (com_timescale->value) {
@@ -2375,9 +2367,7 @@ void Com_Frame(void)
     // write config file if anything changed
     Com_WriteConfiguration();
 
-    //
     // main event loop
-    //
     if (com_speeds->integer) {
         timeBeforeFirstEvents = Sys_Milliseconds();
     }
@@ -2408,9 +2398,7 @@ void Com_Frame(void)
     com_frameMsec = msec;
     msec = Com_ModifyMsec(msec);
 
-    //
     // server side
-    //
     if (com_speeds->integer) {
         timeBeforeServer = Sys_Milliseconds();
     }
@@ -2418,22 +2406,17 @@ void Com_Frame(void)
     SV_Frame(msec);
 
 #ifndef DEDICATED
-    //
     // client system
-    //
     //
     // run event loop a second time to get server to client packets
     // without a frame of latency
-    //
     if (com_speeds->integer) {
         timeBeforeEvents = Sys_Milliseconds();
     }
     Com_EventLoop();
     Cbuf_Execute();
 
-    //
     // client side
-    //
     if (com_speeds->integer) {
         timeBeforeClient = Sys_Milliseconds();
     }
@@ -2445,9 +2428,7 @@ void Com_Frame(void)
     }
 #endif
 
-    //
     // report timing information
-    //
     if (com_speeds->integer) {
         int all, sv, ev, cl;
 
@@ -2462,9 +2443,7 @@ void Com_Frame(void)
                    com_frameNumber, all, sv, ev, cl, time_game, time_frontend, time_backend);
     }
 
-    //
     // trace optimization tracking
-    //
     if (com_showtrace->integer) {
 
         extern int c_traces, c_brush_traces, c_patch_traces;

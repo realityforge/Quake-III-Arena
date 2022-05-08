@@ -439,9 +439,7 @@ static void PM_WaterMove(void)
     PM_Friction();
 
     scale = PM_CmdScale(&pm->cmd);
-    //
     // user intentions
-    //
     if (!scale) {
         wishvel[0] = 0;
         wishvel[1] = 0;
@@ -512,9 +510,7 @@ static void PM_FlyMove(void)
     PM_Friction();
 
     scale = PM_CmdScale(&pm->cmd);
-    //
     // user intentions
-    //
     if (!scale) {
         wishvel[0] = 0;
         wishvel[1] = 0;
@@ -652,7 +648,6 @@ static void PM_WalkMove(void)
     // project the forward and right directions onto the ground plane
     PM_ClipVelocity(pml.forward, pml.groundTrace.plane.normal, pml.forward, OVERCLIP);
     PM_ClipVelocity(pml.right, pml.groundTrace.plane.normal, pml.right, OVERCLIP);
-    //
     VectorNormalize(pml.forward);
     VectorNormalize(pml.right);
 
@@ -1097,9 +1092,7 @@ static void PM_SetWaterLevel(void)
     int sample1;
     int sample2;
 
-    //
     // get waterlevel, accounting for ducking
-    //
     pm->waterlevel = 0;
     pm->watertype = 0;
 
@@ -1196,10 +1189,8 @@ static void PM_Footsteps(void)
     int old;
     qboolean footstep;
 
-    //
     // calculate speed and cycle to be used for
     // all cyclic walking effects
-    //
     pm->xyspeed = sqrt(pm->ps->velocity[0] * pm->ps->velocity[0]
                        + pm->ps->velocity[1] * pm->ps->velocity[1]);
 
@@ -1299,30 +1290,22 @@ Generate sound events for entering and leaving water
 */
 static void PM_WaterEvents(void)
 { // FIXME?
-    //
     // if just entered a water volume, play a sound
-    //
     if (!pml.previous_waterlevel && pm->waterlevel) {
         PM_AddEvent(EV_WATER_TOUCH);
     }
 
-    //
     // if just completely exited a water volume, play a sound
-    //
     if (pml.previous_waterlevel && !pm->waterlevel) {
         PM_AddEvent(EV_WATER_LEAVE);
     }
 
-    //
     // check for head just going under water
-    //
     if (pml.previous_waterlevel != 3 && pm->waterlevel == 3) {
         PM_AddEvent(EV_WATER_UNDER);
     }
 
-    //
     // check for head just coming out of water
-    //
     if (pml.previous_waterlevel == 3 && pm->waterlevel != 3) {
         PM_AddEvent(EV_WATER_CLEAR);
     }

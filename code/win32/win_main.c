@@ -631,9 +631,7 @@ void Sys_Init(void)
     Cvar_Get("win_hinstance", va("%i", (int)g_wv.hInstance), CVAR_ROM);
     Cvar_Get("win_wndproc", va("%i", (int)MainWndProc), CVAR_ROM);
 
-    //
     // figure out our CPU
-    //
     Cvar_Get("sys_cpustring", "detect", 0);
     if (!Q_stricmp(Cvar_VariableString("sys_cpustring"), "detect")) {
         Com_Printf("...detecting CPU, found ");

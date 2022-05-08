@@ -104,7 +104,6 @@ void AAS_InitAASLinkHeap(void)
     aasworld.linkheap[max_aaslinks - 1].next_ent = NULL;
     // pointer to the first free link
     aasworld.freelinks = &aasworld.linkheap[0];
-    //
     numaaslinks = max_aaslinks;
 }
 void AAS_FreeAASLinkHeap(void)
@@ -294,7 +293,6 @@ qboolean AAS_AreaEntityCollision(int areanum, vec3_t start, vec3_t end,
         // ignore the pass entity
         if (link->entnum == passent)
             continue;
-        //
         if (AAS_EntityCollision(link->entnum, start, boxmins, boxmaxs, end,
                                 CONTENTS_SOLID | CONTENTS_PLAYERCLIP, &bsptrace)) {
             collision = qtrue;
@@ -518,13 +516,11 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
                 frac = (front + TRACEPLANE_EPSILON) / (front - back);
             else
                 frac = (front - TRACEPLANE_EPSILON) / (front - back); // bk010221
-            //
             if (frac < 0)
                 frac = 0.001f; // 0
             else if (frac > 1)
                 frac = 0.999f; // 1
             // frac = front / (front-back);
-            //
             cur_mid[0] = cur_start[0] + (cur_end[0] - cur_start[0]) * frac;
             cur_mid[1] = cur_start[1] + (cur_end[1] - cur_start[1]) * frac;
             cur_mid[2] = cur_start[2] + (cur_end[2] - cur_start[2]) * frac;
@@ -698,7 +694,6 @@ int AAS_TraceAreas(vec3_t start, vec3_t end, int* areas, vec3_t* points, int max
             else if (frac > 1)
                 frac = 1;
             // frac = front / (front-back);
-            //
             cur_mid[0] = cur_start[0] + (cur_end[0] - cur_start[0]) * frac;
             cur_mid[1] = cur_start[1] + (cur_end[1] - cur_start[1]) * frac;
             cur_mid[2] = cur_start[2] + (cur_end[2] - cur_start[2]) * frac;
@@ -769,7 +764,6 @@ qboolean AAS_InsideFace(aas_face_t* face, vec3_t pnormal, vec3_t point, float ep
         VectorCopy(aasworld.vertexes[edge->v[firstvertex]], v0);
         // edge vector
         VectorSubtract(aasworld.vertexes[edge->v[!firstvertex]], v0, edgevec);
-        //
 #ifdef AAS_SAMPLE_DEBUG
         if (lastvertex && lastvertex != edge->v[firstvertex]) {
             botimport.Print(PRT_MESSAGE, "winding not counter clockwise\n");
@@ -808,7 +802,6 @@ qboolean AAS_PointInsideFace(int facenum, vec3_t point, float epsilon)
 
     face = &aasworld.faces[facenum];
     plane = &aasworld.planes[face->planenum];
-    //
     for (i = 0; i < face->numedges; i++) {
         edgenum = aasworld.edgeindex[face->firstedge + i];
         edge = &aasworld.edges[abs(edgenum)];
@@ -820,9 +813,7 @@ qboolean AAS_PointInsideFace(int facenum, vec3_t point, float epsilon)
         VectorSubtract(v2, v1, edgevec);
         // vector from first edge point to point possible in face
         VectorSubtract(point, v1, pointvec);
-        //
         CrossProduct(edgevec, plane->normal, sepnormal);
-        //
         if (DotProduct(pointvec, sepnormal) < -epsilon)
             return qfalse;
     }
@@ -1002,7 +993,6 @@ aas_link_t* AAS_AASLinkEntity(vec3_t absmins, vec3_t absmaxs, int entnum)
     }
 
     areas = NULL;
-    //
     lstack_p = linkstack;
     // we start with the whole line on the stack
     // start with node 1 because node zero is a dummy used for solid leafs
@@ -1028,7 +1018,6 @@ aas_link_t* AAS_AASLinkEntity(vec3_t absmins, vec3_t absmaxs, int entnum)
             }
             if (link)
                 continue;
-            //
             link = AAS_AllocAASLink();
             if (!link)
                 return areas;
@@ -1046,7 +1035,6 @@ aas_link_t* AAS_AASLinkEntity(vec3_t absmins, vec3_t absmaxs, int entnum)
             if (aasworld.arealinkedentities[-nodenum])
                 aasworld.arealinkedentities[-nodenum]->prev_ent = link;
             aasworld.arealinkedentities[-nodenum] = link;
-            //
             continue;
         }
         // if solid leaf

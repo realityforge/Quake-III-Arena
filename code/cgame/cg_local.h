@@ -1005,9 +1005,7 @@ typedef struct {
 
     qboolean newHud;
 
-    //
     // locally derived information from gamestate
-    //
     qhandle_t gameModels[MAX_MODELS];
     sfxHandle_t gameSounds[MAX_SOUNDS];
 

@@ -302,9 +302,7 @@ void SCR_DrawDebugGraph(void)
     int a, x, y, w, i, h;
     float v;
 
-    //
     // draw the graph
-    //
     w = cls.glconfig.vidWidth;
     x = 0;
     y = cls.glconfig.vidHeight;

@@ -1361,17 +1361,13 @@ void GLimp_Init(void)
     Q_strncpyz(glConfig.version_string, qglGetString(GL_VERSION), sizeof(glConfig.version_string));
     Q_strncpyz(glConfig.extensions_string, qglGetString(GL_EXTENSIONS), sizeof(glConfig.extensions_string));
 
-    //
     // chipset specific configuration
-    //
     strcpy(buf, glConfig.renderer_string);
     strlwr(buf);
 
-    //
     // NOTE: if changing cvars, do it within this block.  This allows them
     // to be overridden when testing driver fixes, etc. but only sets
     // them to their default state when the hardware is first installed/run.
-    //
     if (Q_stricmp(lastValidRenderer->string, glConfig.renderer_string)) {
         ri.Cvar_Set("r_textureMode", "GL_LINEAR_MIPMAP_NEAREST");
         ri.Cvar_Set("r_picmip", "1");

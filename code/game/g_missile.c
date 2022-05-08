@@ -248,7 +248,6 @@ void G_MissileImpact(gentity_t* ent, trace_t* trace)
     if (other->takedamage) {
         if (ent->s.weapon != WP_PROX_LAUNCHER) {
             if (other->client && other->client->invulnerabilityTime > level.time) {
-                //
                 VectorCopy(ent->s.pos.trDelta, forward);
                 VectorNormalize(forward);
                 if (G_InvulnerabilityEffect(other, forward, ent->s.pos.trBase, impactpoint, bouncedir)) {

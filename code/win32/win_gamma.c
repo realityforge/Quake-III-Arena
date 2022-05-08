@@ -57,18 +57,14 @@ void WG_CheckHardwareGamma(void)
         ReleaseDC(GetDesktopWindow(), hDC);
 
         if (glConfig.deviceSupportsGamma) {
-            //
             // do a sanity check on the gamma values
-            //
             if ((HIBYTE(s_oldHardwareGamma[0][255]) <= HIBYTE(s_oldHardwareGamma[0][0])) || (HIBYTE(s_oldHardwareGamma[1][255]) <= HIBYTE(s_oldHardwareGamma[1][0])) || (HIBYTE(s_oldHardwareGamma[2][255]) <= HIBYTE(s_oldHardwareGamma[2][0]))) {
                 glConfig.deviceSupportsGamma = qfalse;
                 ri.Printf(PRINT_WARNING, "WARNING: device has broken gamma support, generated gamma.dat\n");
             }
 
-            //
             // make sure that we didn't have a prior crash in the game, and if so we need to
             // restore the gamma values to at least a linear value
-            //
             if ((HIBYTE(s_oldHardwareGamma[0][181]) == 255)) {
                 int g;
 

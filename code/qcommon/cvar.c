@@ -202,9 +202,7 @@ cvar_t* Cvar_Get(const char* var_name, const char* var_value, int flags)
         return var;
     }
 
-    //
     // allocate a new cvar
-    //
     if (cvar_numIndexes >= MAX_CVARS) {
         Com_Error(ERR_FATAL, "MAX_CVARS");
     }

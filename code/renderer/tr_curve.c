@@ -306,7 +306,6 @@ srfGridMesh_t* R_CreateSurfaceGridMesh(int width, int height,
 
     VectorCopy(grid->localOrigin, grid->lodOrigin);
     grid->lodRadius = grid->meshRadius;
-    //
     return grid;
 }
 

@@ -1528,7 +1528,6 @@ void CheckTeamVote(int team)
         if (level.teamVoteYes[cs_offset] > level.numteamVotingClients[cs_offset] / 2) {
             // execute the command, then remove the vote
             trap_SendServerCommand(-1, "print \"Team vote passed.\n\"");
-            //
             if (!Q_strncmp("leader", level.teamVoteString[cs_offset], 6)) {
                 // set the team leader
                 SetLeader(team, atoi(level.teamVoteString[cs_offset] + 7));
@@ -1612,9 +1611,7 @@ void G_RunFrame(int levelTime)
     // get any cvar changes
     G_UpdateCvars();
 
-    //
     // go through all allocated objects
-    //
     start = trap_Milliseconds();
     ent = &g_entities[0];
     for (i = 0; i < level.num_entities; i++, ent++) {

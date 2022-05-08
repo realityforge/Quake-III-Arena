@@ -473,9 +473,7 @@ void SetTeam(gentity_t* ent, char* s)
     int specClient;
     int teamLeader;
 
-    //
     // see what change is requested
-    //
     client = ent->client;
 
     clientNum = client - level.clients;
@@ -541,17 +539,13 @@ void SetTeam(gentity_t* ent, char* s)
         team = TEAM_SPECTATOR;
     }
 
-    //
     // decide if we will allow the change
-    //
     oldTeam = client->sess.sessionTeam;
     if (team == oldTeam && team != TEAM_SPECTATOR) {
         return;
     }
 
-    //
     // execute the team change
-    //
 
     // if the player was dead leave the body
     if (client->ps.stats[STAT_HEALTH] <= 0) {

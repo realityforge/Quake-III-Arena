@@ -482,9 +482,7 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
     ci = &cgs.clientinfo[clientNum];
 
     switch (event) {
-    //
     // movement generated events
-    //
     case EV_FOOTSTEP:
         DEBUGNAME("EV_FOOTSTEP");
         if (cg_footsteps.integer) {
@@ -727,9 +725,7 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
         }
         break;
 
-    //
     // weapon events
-    //
     case EV_NOAMMO:
         DEBUGNAME("EV_NOAMMO");
         //		trap_S_StartSound (NULL, es->number, CHAN_AUTO, cgs.media.noAmmoSound );
@@ -809,9 +805,7 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
 
     //=================================================================
 
-    //
     // other events
-    //
     case EV_PLAYER_TELEPORT_IN:
         DEBUGNAME("EV_PLAYER_TELEPORT_IN");
         trap_S_StartSound(NULL, es->number, CHAN_AUTO, cgs.media.teleInSound);
@@ -889,9 +883,7 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
         CG_ScorePlum(cent->currentState.otherEntityNum, cent->lerpOrigin, cent->currentState.time);
         break;
 
-    //
     // missile impacts
-    //
     case EV_MISSILE_HIT:
         DEBUGNAME("EV_MISSILE_HIT");
         ByteToDir(es->eventParm, dir);
@@ -978,7 +970,6 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
                 CG_AddBufferedSound(cgs.media.returnYourTeamSound);
             else
                 CG_AddBufferedSound(cgs.media.returnOpponentSound);
-            //
             CG_AddBufferedSound(cgs.media.blueFlagReturnedSound);
             break;
         case GTS_BLUE_RETURN: // CTF red flag returned, 1FCTF: neutral flag returned
@@ -986,7 +977,6 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
                 CG_AddBufferedSound(cgs.media.returnYourTeamSound);
             else
                 CG_AddBufferedSound(cgs.media.returnOpponentSound);
-            //
             CG_AddBufferedSound(cgs.media.redFlagReturnedSound);
             break;
 
@@ -1091,9 +1081,7 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
         CG_Obituary(es);
         break;
 
-    //
     // powerup events
-    //
     case EV_POWERUP_QUAD:
         DEBUGNAME("EV_POWERUP_QUAD");
         if (es->number == cg.snap->ps.clientNum) {

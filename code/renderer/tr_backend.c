@@ -184,9 +184,7 @@ void GL_State(unsigned long stateBits)
         return;
     }
 
-    //
     // check depthFunc bits
-    //
     if (diff & GLS_DEPTHFUNC_EQUAL) {
         if (stateBits & GLS_DEPTHFUNC_EQUAL) {
             qglDepthFunc(GL_EQUAL);
@@ -195,9 +193,7 @@ void GL_State(unsigned long stateBits)
         }
     }
 
-    //
     // check blend bits
-    //
     if (diff & (GLS_SRCBLEND_BITS | GLS_DSTBLEND_BITS)) {
         GLenum srcFactor, dstFactor;
 
@@ -274,9 +270,7 @@ void GL_State(unsigned long stateBits)
         }
     }
 
-    //
     // check depthmask
-    //
     if (diff & GLS_DEPTHMASK_TRUE) {
         if (stateBits & GLS_DEPTHMASK_TRUE) {
             qglDepthMask(GL_TRUE);
@@ -285,9 +279,7 @@ void GL_State(unsigned long stateBits)
         }
     }
 
-    //
     // fill/line mode
-    //
     if (diff & GLS_POLYMODE_LINE) {
         if (stateBits & GLS_POLYMODE_LINE) {
             qglPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -296,9 +288,7 @@ void GL_State(unsigned long stateBits)
         }
     }
 
-    //
     // depthtest
-    //
     if (diff & GLS_DEPTHTEST_DISABLE) {
         if (stateBits & GLS_DEPTHTEST_DISABLE) {
             qglDisable(GL_DEPTH_TEST);
@@ -307,9 +297,7 @@ void GL_State(unsigned long stateBits)
         }
     }
 
-    //
     // alpha test
-    //
     if (diff & GLS_ATEST_BITS) {
         switch (stateBits & GLS_ATEST_BITS) {
         case 0:
@@ -396,9 +384,7 @@ void RB_BeginDrawingView(void)
     // 2D images again
     backEnd.projection2D = qfalse;
 
-    //
     // set the modelview matrix for the viewer
-    //
     SetViewportAndScissor();
 
     // ensures that depth writes are enabled for the depth clear
@@ -504,7 +490,6 @@ void RB_RenderDrawSurfList(drawSurf_t* drawSurfs, int numDrawSurfs)
         oldSort = drawSurf->sort;
         R_DecomposeSort(drawSurf->sort, &entityNum, &shader, &fogNum, &dlighted);
 
-        //
         // change the tess parameters if needed
         // a "entityMergable" shader is a shader that can have surfaces from separate
         // entities merged into a single batch, like smoke and blood puff sprites
@@ -528,9 +513,7 @@ void RB_RenderDrawSurfList(drawSurf_t* drawSurfs, int numDrawSurfs)
             oldDlighted = dlighted;
         }
 
-        //
         // change the modelview matrix if needed
-        //
         if (entityNum != oldEntityNum) {
             depthRange = qfalse;
 
@@ -565,9 +548,7 @@ void RB_RenderDrawSurfList(drawSurf_t* drawSurfs, int numDrawSurfs)
 
             qglLoadMatrixf(backEnd.or.modelMatrix);
 
-            //
             // change depthrange if needed
-            //
             if (oldDepthRange != depthRange) {
                 if (depthRange) {
                     qglDepthRange(0, 0.3);

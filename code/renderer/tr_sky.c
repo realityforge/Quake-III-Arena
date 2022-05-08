@@ -374,9 +374,7 @@ static void DrawSkyBox(shader_t* shader)
         else if (sky_maxs_subd[1] > HALF_SKY_SUBDIVISIONS)
             sky_maxs_subd[1] = HALF_SKY_SUBDIVISIONS;
 
-        //
         // iterate through the subdivisions
-        //
         for (t = sky_mins_subd[1] + HALF_SKY_SUBDIVISIONS; t <= sky_maxs_subd[1] + HALF_SKY_SUBDIVISIONS; t++) {
             for (s = sky_mins_subd[0] + HALF_SKY_SUBDIVISIONS; s <= sky_maxs_subd[0] + HALF_SKY_SUBDIVISIONS; s++) {
                 MakeSkyVec((s - HALF_SKY_SUBDIVISIONS) / (float)HALF_SKY_SUBDIVISIONS,
@@ -504,9 +502,7 @@ static void FillCloudBox(const shader_t* shader, int stage)
         else if (sky_maxs_subd[1] > HALF_SKY_SUBDIVISIONS)
             sky_maxs_subd[1] = HALF_SKY_SUBDIVISIONS;
 
-        //
         // iterate through the subdivisions
-        //
         for (t = sky_mins_subd[1] + HALF_SKY_SUBDIVISIONS; t <= sky_maxs_subd[1] + HALF_SKY_SUBDIVISIONS; t++) {
             for (s = sky_mins_subd[0] + HALF_SKY_SUBDIVISIONS; s <= sky_maxs_subd[0] + HALF_SKY_SUBDIVISIONS; s++) {
                 MakeSkyVec((s - HALF_SKY_SUBDIVISIONS) / (float)HALF_SKY_SUBDIVISIONS,

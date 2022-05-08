@@ -472,9 +472,7 @@ void GLimp_Init(void)
     Q_strncpyz(glConfig.version_string, (const char*)qglGetString(GL_VERSION), sizeof(glConfig.version_string));
     Q_strncpyz(glConfig.extensions_string, (const char*)qglGetString(GL_EXTENSIONS), sizeof(glConfig.extensions_string));
 
-    //
     // chipset specific configuration
-    //
     buf = malloc(strlen(glConfig.renderer_string) + 1);
     strcpy(buf, glConfig.renderer_string);
     Q_strlwr(buf);
@@ -501,9 +499,7 @@ void GLimp_EndFrame(void)
 {
     GLSTAMP("GLimp_EndFrame start", 0);
 
-    //
     // swapinterval stuff
-    //
     if (r_swapInterval->modified) {
         r_swapInterval->modified = qfalse;
 

@@ -158,14 +158,12 @@ static int GLW_ChoosePFD(HDC hDC, PIXELFORMATDESCRIPTOR* pPFD)
             continue;
         }
 
-        //
         // selection criteria (in order of priority):
         //
         //  PFD_STEREO
         //  colorBits
         //  depthBits
         //  stencilBits
-        //
         if (bestMatch) {
             // check stereo
             if ((pfds[i].dwFlags & PFD_STEREO) && (!(pfds[bestMatch].dwFlags & PFD_STEREO)) && (pPFD->dwFlags & PFD_STEREO)) {
@@ -288,16 +286,12 @@ static int GLW_MakeContext(PIXELFORMATDESCRIPTOR* pPFD)
 {
     int pixelformat;
 
-    //
     // don't putz around with pixelformat if it's already set (e.g. this is a soft
     // reset of the graphics system)
-    //
     if (!glw_state.pixelFormatSet) {
-        //
         // choose, set, and describe our desired pixel format.  If we're
         // using a minidriver then we need to bypass the GDI functions,
         // otherwise use the GDI functions.
-        //
         if ((pixelformat = GLW_ChoosePFD(glw_state.hDC, pPFD)) == 0) {
             ri.Printf(PRINT_ALL, "...GLW_ChoosePFD failed\n");
             return TRY_PFD_FAIL_SOFT;
@@ -313,9 +307,7 @@ static int GLW_MakeContext(PIXELFORMATDESCRIPTOR* pPFD)
         glw_state.pixelFormatSet = qtrue;
     }
 
-    //
     // startup the OpenGL subsystem by creating a context and making it current
-    //
     if (!glw_state.hGLRC) {
         ri.Printf(PRINT_ALL, "...creating GL context: ");
         if ((glw_state.hGLRC = qwglCreateContext(glw_state.hDC)) == 0) {
@@ -352,9 +344,7 @@ static qboolean GLW_InitDriver(const char* drivername, int colorbits)
 
     ri.Printf(PRINT_ALL, "Initializing OpenGL driver\n");
 
-    //
     // get a DC for our window if we don't already have one allocated
-    //
     if (glw_state.hDC == NULL) {
         ri.Printf(PRINT_ALL, "...getting DC: ");
 
@@ -369,9 +359,7 @@ static qboolean GLW_InitDriver(const char* drivername, int colorbits)
         colorbits = glw_state.desktopBitsPixel;
     }
 
-    //
     // implicitly assume Z-buffer depth == desktop color depth
-    //
     if (r_depthbits->integer == 0) {
         if (colorbits > 16) {
             depthbits = 24;
@@ -382,21 +370,15 @@ static qboolean GLW_InitDriver(const char* drivername, int colorbits)
         depthbits = r_depthbits->integer;
     }
 
-    //
     // do not allow stencil if Z-buffer depth likely won't contain it
-    //
     stencilbits = r_stencilbits->integer;
     if (depthbits < 24) {
         stencilbits = 0;
     }
 
-    //
     // make two attempts to set the PIXELFORMAT
-    //
 
-    //
     // first attempt: r_colorbits, depthbits, and r_stencilbits
-    //
     if (!glw_state.pixelFormatSet) {
         GLW_CreatePFD(&pfd, colorbits, depthbits, stencilbits, r_stereo->integer);
         if ((tpfd = GLW_MakeContext(&pfd)) != TRY_PFD_SUCCESS) {
@@ -405,9 +387,7 @@ static qboolean GLW_InitDriver(const char* drivername, int colorbits)
                 return qfalse;
             }
 
-            //
             // punt if we've already tried the desktop bit depth and no stencil bits
-            //
             if ((r_colorbits->integer == glw_state.desktopBitsPixel) && (stencilbits == 0)) {
                 ReleaseDC(g_wv.hWnd, glw_state.hDC);
                 glw_state.hDC = NULL;
@@ -417,9 +397,7 @@ static qboolean GLW_InitDriver(const char* drivername, int colorbits)
                 return qfalse;
             }
 
-            //
             // second attempt: desktop's color bits and no stencil
-            //
             if (colorbits > glw_state.desktopBitsPixel) {
                 colorbits = glw_state.desktopBitsPixel;
             }
@@ -469,9 +447,7 @@ static qboolean GLW_CreateWindow(const char* drivername, int width, int height, 
     int x, y, w, h;
     int exstyle;
 
-    //
     // register the window class if necessary
-    //
     if (!s_classRegistered) {
         WNDCLASS wc;
 
@@ -495,13 +471,9 @@ static qboolean GLW_CreateWindow(const char* drivername, int width, int height, 
         ri.Printf(PRINT_ALL, "...registered window class\n");
     }
 
-    //
     // create the HWND if one does not already exist
-    //
     if (!g_wv.hWnd) {
-        //
         // compute width and height
-        //
         r.left = 0;
         r.top = 0;
         r.right = width;
@@ -619,9 +591,7 @@ static rserr_t GLW_SetMode(const char* drivername,
     int cdsRet;
     DEVMODE dm;
 
-    //
     // print out informational messages
-    //
     ri.Printf(PRINT_ALL, "...setting mode %d:", mode);
     if (!R_GetModeInfo(&glConfig.vidWidth, &glConfig.vidHeight, &glConfig.windowAspect, mode)) {
         ri.Printf(PRINT_ALL, " invalid mode\n");
@@ -629,18 +599,14 @@ static rserr_t GLW_SetMode(const char* drivername,
     }
     ri.Printf(PRINT_ALL, " %d %d %s\n", glConfig.vidWidth, glConfig.vidHeight, win_fs[cdsFullscreen]);
 
-    //
     // check our desktop attributes
-    //
     hDC = GetDC(GetDesktopWindow());
     glw_state.desktopBitsPixel = GetDeviceCaps(hDC, BITSPIXEL);
     glw_state.desktopWidth = GetDeviceCaps(hDC, HORZRES);
     glw_state.desktopHeight = GetDeviceCaps(hDC, VERTRES);
     ReleaseDC(GetDesktopWindow(), hDC);
 
-    //
     // verify desktop bit depth
-    //
     if (glw_state.desktopBitsPixel < 15 || glw_state.desktopBitsPixel == 24) {
         if (colorbits == 0 || (!cdsFullscreen && colorbits >= 15)) {
             if (MessageBox(NULL,
@@ -687,9 +653,7 @@ static rserr_t GLW_SetMode(const char* drivername,
             ri.Printf(PRINT_ALL, "...using desktop display depth of %d\n", glw_state.desktopBitsPixel);
         }
 
-        //
         // if we're already in fullscreen then just create the window
-        //
         if (glw_state.cdsFullscreen) {
             ri.Printf(PRINT_ALL, "...already fullscreen, avoiding redundant CDS\n");
 
@@ -699,9 +663,7 @@ static rserr_t GLW_SetMode(const char* drivername,
                 return RSERR_INVALID_MODE;
             }
         }
-        //
         // need to call CDS
-        //
         else {
             ri.Printf(PRINT_ALL, "...calling CDS: ");
 
@@ -718,9 +680,7 @@ static rserr_t GLW_SetMode(const char* drivername,
 
                 glw_state.cdsFullscreen = qtrue;
             } else {
-                //
                 // the exact mode failed, so scan EnumDisplaySettings for the next largest mode
-                //
                 DEVMODE devmode;
                 int modeNum;
 
@@ -780,9 +740,7 @@ static rserr_t GLW_SetMode(const char* drivername,
         }
     }
 
-    //
     // success, now check display frequency, although this won't be valid on Voodoo(2)
-    //
     memset(&dm, 0, sizeof(dm));
     dm.dmSize = sizeof(dm);
     if (EnumDisplaySettings(NULL, ENUM_CURRENT_SETTINGS, &dm)) {
@@ -961,9 +919,7 @@ static qboolean GLW_LoadOpenGL(const char* drivername)
     Q_strncpyz(buffer, drivername, sizeof(buffer));
     Q_strlwr(buffer);
 
-    //
     // load the driver and bind our function pointers to it
-    //
     if (QGL_Init(buffer)) {
         cdsFullscreen = r_fullscreen->integer;
 
@@ -986,9 +942,7 @@ fail:
 */
 void GLimp_EndFrame(void)
 {
-    //
     // swapinterval stuff
-    //
     if (r_swapInterval->modified) {
         r_swapInterval->modified = qfalse;
 
@@ -1032,9 +986,7 @@ void GLimp_Init(void)
 
     ri.Printf(PRINT_ALL, "Initializing OpenGL subsystem\n");
 
-    //
     // check OS version to see if we can do fullscreen display changes
-    //
     if (!GLW_CheckOSVersion()) {
         ri.Error(ERR_FATAL, "GLimp_Init() - incorrect operating system\n");
     }
@@ -1057,17 +1009,13 @@ void GLimp_Init(void)
     Q_strncpyz(glConfig.version_string, qglGetString(GL_VERSION), sizeof(glConfig.version_string));
     Q_strncpyz(glConfig.extensions_string, qglGetString(GL_EXTENSIONS), sizeof(glConfig.extensions_string));
 
-    //
     // chipset specific configuration
-    //
     Q_strncpyz(buf, glConfig.renderer_string, sizeof(buf));
     Q_strlwr(buf);
 
-    //
     // NOTE: if changing cvars, do it within this block.  This allows them
     // to be overridden when testing driver fixes, etc. but only sets
     // them to their default state when the hardware is first installed/run.
-    //
     if (Q_stricmp(lastValidRenderer->string, glConfig.renderer_string)) {
         ri.Cvar_Set("r_textureMode", "GL_LINEAR_MIPMAP_NEAREST");
         ri.Cvar_Set("r_picmip", "1");

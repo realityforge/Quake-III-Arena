@@ -1019,18 +1019,14 @@ static void IN_StartupMIDI(void)
     if (!Cvar_VariableValue("in_midi"))
         return;
 
-    //
     // enumerate MIDI IN devices
-    //
     s_midiInfo.numDevices = midiInGetNumDevs();
 
     for (i = 0; i < s_midiInfo.numDevices; i++) {
         midiInGetDevCaps(i, &s_midiInfo.caps[i], sizeof(s_midiInfo.caps[i]));
     }
 
-    //
     // open the MIDI IN port
-    //
     if (midiInOpen(&s_midiInfo.hMidiIn,
                    in_mididevice->integer,
                    (unsigned long)MidiInProc,

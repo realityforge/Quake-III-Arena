@@ -60,10 +60,8 @@ void COM_DefaultExtension(char* path, int maxSize, const char* extension)
     char oldPath[MAX_QPATH];
     char* src;
 
-    //
     // if path doesn't have a .EXT, append extension
     // (extension should include the .)
-    //
     src = path + strlen(path) - 1;
 
     while (*src != '/' && src != path) {

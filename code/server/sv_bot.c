@@ -258,7 +258,6 @@ int BotImport_DebugPolygonCreate(int color, int numPoints, vec3_t* points)
     poly->color = color;
     poly->numPoints = numPoints;
     memcpy(poly->points, points, numPoints * sizeof(vec3_t));
-    //
     return i;
 }
 

@@ -470,9 +470,7 @@ static void Upload32(unsigned* data,
     GLenum internalFormat = GL_RGB;
     float rMax = 0, gMax = 0, bMax = 0;
 
-    //
     // convert to exact power of 2 sizes
-    //
     for (scaled_width = 1; scaled_width < width; scaled_width <<= 1)
         ;
     for (scaled_height = 1; scaled_height < height; scaled_height <<= 1)
@@ -490,17 +488,13 @@ static void Upload32(unsigned* data,
         height = scaled_height;
     }
 
-    //
     // perform optional picmip operation
-    //
     if (picmip) {
         scaled_width >>= r_picmip->integer;
         scaled_height >>= r_picmip->integer;
     }
 
-    //
     // clamp to minimum size
-    //
     if (scaled_width < 1) {
         scaled_width = 1;
     }
@@ -508,11 +502,9 @@ static void Upload32(unsigned* data,
         scaled_height = 1;
     }
 
-    //
     // clamp to the current upper OpenGL limit
     // scale both axis down equally so we don't have to
     // deal with a half mip resampling
-    //
     while (scaled_width > glConfig.maxTextureSize
            || scaled_height > glConfig.maxTextureSize) {
         scaled_width >>= 1;
@@ -521,10 +513,8 @@ static void Upload32(unsigned* data,
 
     scaledBuffer = ri.Hunk_AllocateTempMemory(sizeof(unsigned) * scaled_width * scaled_height);
 
-    //
     // scan the texture for each channel's max values
     // and verify if the alpha channel is being used or not
-    //
     c = width * height;
     scan = ((byte*)data);
     samples = 3;
@@ -736,9 +726,7 @@ static void LoadTGA(const char* name, byte** pic, int* width, int* height)
 
     *pic = NULL;
 
-    //
     // load the file
-    //
     ri.FS_ReadFile((char*)name, (void**)&buffer);
     if (!buffer) {
         return;
@@ -1435,9 +1423,7 @@ image_t* R_FindImageFile(const char* name, qboolean mipmap, qboolean allowPicmip
 
     hash = generateHashValue(name);
 
-    //
     // see if the image is already loaded
-    //
     for (image = hashTable[hash]; image; image = image->next) {
         if (!strcmp(name, image->imgName)) {
             // the white image can be used with any set of parms, but other mismatches are errors
@@ -1456,9 +1442,7 @@ image_t* R_FindImageFile(const char* name, qboolean mipmap, qboolean allowPicmip
         }
     }
 
-    //
     // load the pic from disk
-    //
     R_LoadImage(name, &pic, &width, &height);
     if (pic == NULL) { // if we dont get a successful load
         char altname[MAX_QPATH]; // copy the name

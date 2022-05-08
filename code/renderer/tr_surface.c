@@ -545,9 +545,7 @@ static void LerpMeshVertexes(md3Surface_t* surf, float backlerp)
     numVerts = surf->numVerts;
 
     if (backlerp == 0) {
-        //
         // just copy the vertexes
-        //
         for (vertNum = 0; vertNum < numVerts; vertNum++,
             newXyz += 4, newNormals += 4,
             outXyz += 4, outNormal += 4) {
@@ -570,9 +568,7 @@ static void LerpMeshVertexes(md3Surface_t* surf, float backlerp)
             outNormal[2] = tr.sinTable[(lng + (FUNCTABLE_SIZE / 4)) & FUNCTABLE_MASK];
         }
     } else {
-        //
         // interpolate and copy the vertex and normal
-        //
         oldXyz = (short*)((byte*)surf + surf->ofsXyzNormals)
             + (backEnd.currentEntity->e.oldframe * surf->numVerts * 4);
         oldNormals = oldXyz + 3;

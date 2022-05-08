@@ -203,7 +203,6 @@ void SV_DirectConnect(netadr_t from)
             //			// disconnect the client from the game first so any flags the
             //			// player might have are dropped
             //			VM_Call( gvm, GAME_CLIENT_DISCONNECT, newcl - svs.clients );
-            //
             goto gotnewcl;
         }
     }
@@ -808,7 +807,6 @@ static void SV_VerifyPaks_f(client_t* cl)
     // if we are pure, we "expect" the client to load certain things from
     // certain pk3 files, namely we want the client to have loaded the
     // ui and cgame that we think should be loaded based on the pure setting
-    //
     if (sv_pure->integer != 0) {
 
         bGood = qtrue;
@@ -1305,7 +1303,6 @@ void SV_ExecuteClientMessage(client_t* cl, msg_t* msg)
     // gamestate it was at.  This allows it to keep downloading even when
     // the gamestate changes.  After the download is finished, we'll
     // notice and send it a new game state
-    //
     // https://zerowing.idsoftware.com/bugzilla/show_bug.cgi?id=536
     // don't drop as long as previous command was a nextdl, after a dl is done, downloadName is set back to ""
     // but we still need to read the next message to move to next download or send gamestate
