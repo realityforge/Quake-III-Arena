@@ -2580,12 +2580,8 @@ void AAS_Reachability_FuncBobbing(void)
             // create reachabilities from start to end
             for (startreach = firststartreach; startreach; startreach = nextstartreach) {
                 nextstartreach = startreach->next;
-                // trace = AAS_TraceClientBBox(startreach->start, move_start_top, PRESENCE_NORMAL, -1);
-                // if (trace.fraction < 1) continue;
                 for (endreach = firstendreach; endreach; endreach = nextendreach) {
                     nextendreach = endreach->next;
-                    // trace = AAS_TraceClientBBox(endreach->end, move_end_top, PRESENCE_NORMAL, -1);
-                    // if (trace.fraction < 1) continue;
                     Log_Write("funcbob reach from area %d to %d\n", startreach->areanum, endreach->areanum);
                     if (i == 0)
                         VectorCopy(move_start_top, org);
