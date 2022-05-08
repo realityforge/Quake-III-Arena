@@ -2384,7 +2384,6 @@ void RE_StretchPic(float x, float y, float w, float h,
                    float s1, float t1, float s2, float t2, qhandle_t hShader);
 void RE_EndFrame(int* frontEndMsec, int* backEndMsec);
 
-size_t RE_SaveJPGToBuffer(byte* buffer, size_t bufSize, int quality, uint32_t image_width, uint32_t image_height, const byte* image_buffer, uint16_t padding);
 void RE_TakeVideoFrame(int width, int height, byte* captureBuffer, byte* encodeBuffer, qboolean motionJpeg);
 
 #endif // TR_LOCAL_H

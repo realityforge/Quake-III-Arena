@@ -149,6 +149,7 @@ void R_LoadPNG(const char* name, byte** image_buffer, uint32_t* width, uint32_t*
 
 void RE_SavePNG(const char* filename, uint32_t image_width, uint32_t image_height, byte* image_buffer, uint16_t padding);
 void RE_SaveJPG(const char* filename, int quality, uint32_t image_width, uint32_t image_height, byte* image_buffer, uint16_t padding);
+size_t RE_SaveJPGToBuffer(byte* buffer, size_t bufSize, int quality, uint32_t image_width, uint32_t image_height, byte* image_buffer, uint16_t padding);
 
 /*
 ====================================================================
