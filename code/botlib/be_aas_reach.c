@@ -2058,51 +2058,6 @@ int AAS_Reachability_Ladder(int area1num, int area2num)
                     Log_Write("jump too high between area %d and %d\r\n", area2num, area1num);
 #endif // REACH_DEBUG
             }
-            /*//if slime or lava below the ladder
-            //try jump reachability from far towards the ladder
-            if (aasworld.areasettings[area2num].contents & (AREACONTENTS_SLIME
-                                                                                            | AREACONTENTS_LAVA))
-            {
-                    for (i = 20; i <= 120; i += 20)
-                    {
-                            //trace down in the middle of this edge
-                            VectorMA(lowestpoint, i, plane1->normal, start);
-                            VectorCopy(start, end);
-                            start[2] += 5;
-                            end[2] -= 100;
-                            //trace without entity collision
-                            trace = AAS_TraceClientBBox(start, end, PRESENCE_NORMAL, -1);
-                            //
-                            if (trace.startsolid) break;
-                            trace.endpos[2] += 1;
-                            area2num = AAS_PointAreaNum(trace.endpos);
-                            if (area2num == area1num) continue;
-                            //
-                            if (start[2] - trace.endpos[2] > maxjumpheight) continue;
-                            if (aasworld.areasettings[area2num].contents & (AREACONTENTS_SLIME
-                                                                                    | AREACONTENTS_LAVA)) continue;
-                            //
-                            //create a new reachability link
-                            lreach = AAS_AllocReachability();
-                            if (!lreach) return qfalse;
-                            lreach->areanum = area1num;
-                            lreach->facenum = ladderface1num;
-                            lreach->edgenum = lowestedgenum;
-                            VectorCopy(trace.endpos, lreach->start);
-                            VectorCopy(lowestpoint, lreach->end);
-                            lreach->end[2] += 5;
-                            lreach->traveltype = TRAVEL_JUMP;
-                            lreach->traveltime = 10;
-                            lreach->next = areareachability[area2num];
-                            areareachability[area2num] = lreach;
-                            //
-                            reach_jump++;
-                            //
-                            Log_Write("jump far to ladder reach between %d and %d\r\n", area2num, area1num);
-                            //
-                            break;
-                    }
-            }*/
         }
     }
     return qfalse;
