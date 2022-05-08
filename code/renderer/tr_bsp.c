@@ -745,7 +745,7 @@ int R_StitchPatches(int grid1num, int grid2num)
                     v2 = grid2->verts[l + 1 + offset2].xyz;
                     if (fabs(v1[0] - v2[0]) < .01 && fabs(v1[1] - v2[1]) < .01 && fabs(v1[2] - v2[2]) < .01)
                         continue;
-                    // insert column into grid2 right after after column l
+                    // insert column into grid2 right after column l
                     if (m)
                         row = grid2->height - 1;
                     else
@@ -787,7 +787,7 @@ int R_StitchPatches(int grid1num, int grid2num)
                     v2 = grid2->verts[grid2->width * (l + 1) + offset2].xyz;
                     if (fabs(v1[0] - v2[0]) < .01 && fabs(v1[1] - v2[1]) < .01 && fabs(v1[2] - v2[2]) < .01)
                         continue;
-                    // insert row into grid2 right after after row l
+                    // insert row into grid2 right after row l
                     if (m)
                         column = grid2->width - 1;
                     else
@@ -839,7 +839,7 @@ int R_StitchPatches(int grid1num, int grid2num)
                     v2 = grid2->verts[(l + 1) + offset2].xyz;
                     if (fabs(v1[0] - v2[0]) < .01 && fabs(v1[1] - v2[1]) < .01 && fabs(v1[2] - v2[2]) < .01)
                         continue;
-                    // insert column into grid2 right after after column l
+                    // insert column into grid2 right after column l
                     if (m)
                         row = grid2->height - 1;
                     else
@@ -881,7 +881,7 @@ int R_StitchPatches(int grid1num, int grid2num)
                     v2 = grid2->verts[grid2->width * (l + 1) + offset2].xyz;
                     if (fabs(v1[0] - v2[0]) < .01 && fabs(v1[1] - v2[1]) < .01 && fabs(v1[2] - v2[2]) < .01)
                         continue;
-                    // insert row into grid2 right after after row l
+                    // insert row into grid2 right after row l
                     if (m)
                         column = grid2->width - 1;
                     else
@@ -934,7 +934,7 @@ int R_StitchPatches(int grid1num, int grid2num)
                     v2 = grid2->verts[(l + 1) + offset2].xyz;
                     if (fabs(v1[0] - v2[0]) < .01 && fabs(v1[1] - v2[1]) < .01 && fabs(v1[2] - v2[2]) < .01)
                         continue;
-                    // insert column into grid2 right after after column l
+                    // insert column into grid2 right after column l
                     if (m)
                         row = grid2->height - 1;
                     else
@@ -976,7 +976,7 @@ int R_StitchPatches(int grid1num, int grid2num)
                     v2 = grid2->verts[grid2->width * (l + 1) + offset2].xyz;
                     if (fabs(v1[0] - v2[0]) < .01 && fabs(v1[1] - v2[1]) < .01 && fabs(v1[2] - v2[2]) < .01)
                         continue;
-                    // insert row into grid2 right after after row l
+                    // insert row into grid2 right after row l
                     if (m)
                         column = grid2->width - 1;
                     else
@@ -1030,7 +1030,7 @@ int R_StitchPatches(int grid1num, int grid2num)
                     v2 = grid2->verts[(l + 1) + offset2].xyz;
                     if (fabs(v1[0] - v2[0]) < .01 && fabs(v1[1] - v2[1]) < .01 && fabs(v1[2] - v2[2]) < .01)
                         continue;
-                    // insert column into grid2 right after after column l
+                    // insert column into grid2 right after column l
                     if (m)
                         row = grid2->height - 1;
                     else
