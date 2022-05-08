@@ -49,7 +49,6 @@ void R_NoiseInit(void)
 
 float R_NoiseGet4f(float x, float y, float z, double t)
 {
-    int i;
     int ix, iy, iz, it;
     float fx, fy, fz, ft;
     float front[4];
@@ -65,7 +64,7 @@ float R_NoiseGet4f(float x, float y, float z, double t)
     it = (int)floor(t);
     ft = t - it;
 
-    for (i = 0; i < 2; i++) {
+    for (int i = 0; i < 2; i++) {
         front[0] = GetNoiseValue(ix, iy, iz, it + i);
         front[1] = GetNoiseValue(ix + 1, iy, iz, it + i);
         front[2] = GetNoiseValue(ix, iy + 1, iz, it + i);
