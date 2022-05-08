@@ -98,7 +98,7 @@ void R_LoadJPG(const char* filename, byte** pic, uint32_t* width, uint32_t* heig
     unsigned int pixelcount, memcount;
     unsigned int sindex, dindex;
     byte* out;
-    int len;
+    long len;
     union {
         byte* b;
         void* v;
@@ -111,7 +111,7 @@ void R_LoadJPG(const char* filename, byte** pic, uint32_t* width, uint32_t* heig
      * requires it in order to read binary files.
      */
 
-    len = ri.FS_ReadFile((char*)filename, &fbuffer.v);
+    len = ri.FS_ReadFile(filename, &fbuffer.v);
     if (!fbuffer.b || len < 0) {
         return;
     }
@@ -145,7 +145,7 @@ void R_LoadJPG(const char* filename, byte** pic, uint32_t* width, uint32_t* heig
 
     /* Step 2: specify data source (eg, a file) */
 
-    jpeg_mem_src(&cinfo, fbuffer.b, len);
+    jpeg_mem_src(&cinfo, fbuffer.b, (unsigned long)len);
 
     /* Step 3: read file parameters with jpeg_read_header() */
 
@@ -193,7 +193,8 @@ void R_LoadJPG(const char* filename, byte** pic, uint32_t* width, uint32_t* heig
     }
 
     memcount = pixelcount * 4;
-    row_stride = cinfo.output_width * cinfo.output_components;
+    unsigned int output_components = (unsigned int)cinfo.output_components;
+    row_stride = cinfo.output_width * output_components;
 
     out = ri.Malloc(memcount);
 
@@ -219,7 +220,7 @@ void R_LoadJPG(const char* filename, byte** pic, uint32_t* width, uint32_t* heig
     buf = out;
 
     // Expand from RGB to RGBA
-    sindex = pixelcount * cinfo.output_components;
+    sindex = pixelcount * output_components;
     dindex = memcount;
 
     do {
@@ -374,7 +375,7 @@ size_t RE_SaveJPGToBuffer(byte* buffer, size_t bufSize, int quality, const uint3
     q_jpeg_error_mgr_t jerr;
     JSAMPROW row_pointer[1]; /* pointer to JSAMPLE row[s] */
     my_dest_ptr dest;
-    int row_stride; /* physical row width in image buffer */
+    size_t row_stride; /* physical row width in image buffer */
     size_t outcount;
 
     /* Step 1: allocate and initialize JPEG compression object */
@@ -419,7 +420,7 @@ size_t RE_SaveJPGToBuffer(byte* buffer, size_t bufSize, int quality, const uint3
 
     /* Step 5: while (scan lines remain to be written) */
     /*           jpeg_write_scanlines(...); */
-    row_stride = (int)image_width * cinfo.input_components + padding; /* JSAMPLEs per row in image_buffer */
+    row_stride = image_width * (unsigned int)cinfo.input_components + padding; /* JSAMPLEs per row in image_buffer */
 
     while (cinfo.next_scanline < cinfo.image_height) {
         /* jpeg_write_scanlines expects an array of pointers to scanlines.
