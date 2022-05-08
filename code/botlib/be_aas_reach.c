@@ -3007,7 +3007,6 @@ void AAS_SetWeaponJumpAreaFlags(void)
                                         classname, origin[0], origin[1], origin[2]);
                     }
                 }
-                // areanum = AAS_PointAreaNum(origin);
                 areanum = AAS_BestReachableArea(origin, mins, maxs, origin);
                 // the bot may rocket jump towards this area
                 aasworld.areasettings[areanum].areaflags |= AREA_WEAPONJUMP;
@@ -3097,39 +3096,36 @@ int AAS_Reachability_WeaponJump(int area1num, int area2num)
                 VectorSubtract(facecenter, areastart, dir);
                 dir[2] = 0;
                 hordist = VectorNormalize(dir);
-                // if (hordist < 1.6 * (facecenter[2] - areastart[2]))
-                {
-                    // get command movement
-                    VectorScale(dir, speed, cmdmove);
-                    VectorSet(velocity, 0, 0, zvel);
-                    AAS_PredictClientMovement(&move, -1, areastart, PRESENCE_NORMAL, qtrue,
-                                              velocity, cmdmove, 30, 30, 0.1f,
-                                              SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE | SE_TOUCHJUMPPAD | SE_HITGROUND | SE_HITGROUNDAREA, area2num, visualize);
-                    // if prediction time wasn't enough to fully predict the movement
-                    // don't enter slime or lava and don't fall from too high
-                    if (move.frames < 30 && !(move.stopevent & (SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE))
-                        && (move.stopevent & (SE_HITGROUNDAREA | SE_TOUCHJUMPPAD))) {
-                        // create a rocket or bfg jump reachability from area1 to area2
-                        lreach = AAS_AllocReachability();
-                        if (!lreach)
-                            return qfalse;
-                        lreach->areanum = area2num;
-                        lreach->facenum = 0;
-                        lreach->edgenum = 0;
-                        VectorCopy(areastart, lreach->start);
-                        VectorCopy(facecenter, lreach->end);
-                        if (n) {
-                            lreach->traveltype = TRAVEL_BFGJUMP;
-                            lreach->traveltime = aassettings.rs_bfgjump;
-                        } else {
-                            lreach->traveltype = TRAVEL_ROCKETJUMP;
-                            lreach->traveltime = aassettings.rs_rocketjump;
-                        }
-                        lreach->next = areareachability[area1num];
-                        areareachability[area1num] = lreach;
-                        reach_rocketjump++;
-                        return qtrue;
+                // get command movement
+                VectorScale(dir, speed, cmdmove);
+                VectorSet(velocity, 0, 0, zvel);
+                AAS_PredictClientMovement(&move, -1, areastart, PRESENCE_NORMAL, qtrue,
+                                          velocity, cmdmove, 30, 30, 0.1f,
+                                          SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE | SE_TOUCHJUMPPAD | SE_HITGROUND | SE_HITGROUNDAREA, area2num, visualize);
+                // if prediction time wasn't enough to fully predict the movement
+                // don't enter slime or lava and don't fall from too high
+                if (move.frames < 30 && !(move.stopevent & (SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE))
+                    && (move.stopevent & (SE_HITGROUNDAREA | SE_TOUCHJUMPPAD))) {
+                    // create a rocket or bfg jump reachability from area1 to area2
+                    lreach = AAS_AllocReachability();
+                    if (!lreach)
+                        return qfalse;
+                    lreach->areanum = area2num;
+                    lreach->facenum = 0;
+                    lreach->edgenum = 0;
+                    VectorCopy(areastart, lreach->start);
+                    VectorCopy(facecenter, lreach->end);
+                    if (n) {
+                        lreach->traveltype = TRAVEL_BFGJUMP;
+                        lreach->traveltime = aassettings.rs_bfgjump;
+                    } else {
+                        lreach->traveltype = TRAVEL_ROCKETJUMP;
+                        lreach->traveltime = aassettings.rs_rocketjump;
                     }
+                    lreach->next = areareachability[area1num];
+                    areareachability[area1num] = lreach;
+                    reach_rocketjump++;
+                    return qtrue;
                 }
             }
         }
