@@ -24,11 +24,6 @@ cc_library(
         "tr_local.h",
     ],
     includes = ["."],
-    deps = [
-        "//code/qcommon",
-        "//code/qcommon:qfiles",
-        "//code/renderercommon",
-    ],
 )
 
 cc_library(
