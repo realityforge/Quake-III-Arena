@@ -699,9 +699,6 @@ typedef struct routecacheheader_s {
 #define RCID (('C' << 24) + ('R' << 16) + ('E' << 8) + 'M')
 #define RCVERSION 2
 
-// void AAS_DecompressVis(byte *in, int numareas, byte *decompressed);
-// int AAS_CompressVis(byte *vis, int numareas, byte *dest);
-
 void AAS_WriteRouteCache(void)
 {
     int i, j, numportalcache, numareacache, totalsize;
@@ -761,21 +758,6 @@ void AAS_WriteRouteCache(void)
             }
         }
     }
-    // write the visareas
-    /*
-    for (i = 0; i < aasworld.numareas; i++)
-    {
-            if (!aasworld.areavisibility[i]) {
-                    size = 0;
-                    botimport.FS_Write(&size, sizeof(int), fp);
-                    continue;
-            }
-            AAS_DecompressVis( aasworld.areavisibility[i], aasworld.numareas, aasworld.decompressedvis );
-            size = AAS_CompressVis( aasworld.decompressedvis, aasworld.numareas, aasworld.decompressedvis );
-            botimport.FS_Write(&size, sizeof(int), fp);
-            botimport.FS_Write(aasworld.decompressedvis, size, fp);
-    }
-    */
     botimport.FS_FCloseFile(fp);
     botimport.Print(PRT_MESSAGE, "\nroute cache written to %s\n", filename);
     botimport.Print(PRT_MESSAGE, "written %d bytes of routing cache\n", totalsize);
@@ -794,7 +776,7 @@ aas_routingcache_t* AAS_ReadCache(fileHandle_t fp)
 }
 int AAS_ReadRouteCache(void)
 {
-    int i, clusterareanum; //, size;
+    int i, clusterareanum;
     fileHandle_t fp;
     char filename[MAX_QPATH];
     routecacheheader_t routecacheheader;
@@ -815,19 +797,15 @@ int AAS_ReadRouteCache(void)
         return qfalse;
     }
     if (routecacheheader.numareas != aasworld.numareas) {
-        // AAS_Error("route cache dump has wrong number of areas\n");
         return qfalse;
     }
     if (routecacheheader.numclusters != aasworld.numclusters) {
-        // AAS_Error("route cache dump has wrong number of clusters\n");
         return qfalse;
     }
     if (routecacheheader.areacrc != CRC_ProcessString((unsigned char*)aasworld.areas, sizeof(aas_area_t) * aasworld.numareas)) {
-        // AAS_Error("route cache dump area CRC incorrect\n");
         return qfalse;
     }
     if (routecacheheader.clustercrc != CRC_ProcessString((unsigned char*)aasworld.clusters, sizeof(aas_cluster_t) * aasworld.numclusters)) {
-        // AAS_Error("route cache dump cluster CRC incorrect\n");
         return qfalse;
     }
     // read all the portal cache
@@ -849,19 +827,6 @@ int AAS_ReadRouteCache(void)
             aasworld.clusterareacache[cache->cluster][clusterareanum]->prev = cache;
         aasworld.clusterareacache[cache->cluster][clusterareanum] = cache;
     }
-    // read the visareas
-    /*
-    aasworld.areavisibility = (byte **) GetClearedMemory(aasworld.numareas * sizeof(byte *));
-    aasworld.decompressedvis = (byte *) GetClearedMemory(aasworld.numareas * sizeof(byte));
-    for (i = 0; i < aasworld.numareas; i++)
-    {
-            botimport.FS_Read(&size, sizeof(size), fp );
-            if (size) {
-                    aasworld.areavisibility[i] = (byte *) GetMemory(size);
-                    botimport.FS_Read(aasworld.areavisibility[i], size, fp );
-            }
-    }
-    */
     botimport.FS_FCloseFile(fp);
     return qtrue;
 }
