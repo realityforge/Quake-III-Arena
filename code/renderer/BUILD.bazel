@@ -60,7 +60,6 @@ cc_library(
     name = "renderer_common",
     srcs = [
         "tr_font.c",
-        "tr_image_jpg.c",
         "tr_noise.c",
     ],
     visibility = ["//code/sdl:__pkg__"],
