@@ -2155,7 +2155,6 @@ bot_moveresult_t BotTravel_RocketJump(bot_movestate_t* ms, aas_reachability_t* r
     float dist, speed;
     bot_moveresult_t_cleared(result);
 
-    // botimport.Print(PRT_MESSAGE, "BotTravel_RocketJump: bah\n");
     //
     hordir[0] = reach->start[0] - ms->origin[0];
     hordir[1] = reach->start[1] - ms->origin[1];
@@ -2168,7 +2167,6 @@ bot_moveresult_t BotTravel_RocketJump(bot_movestate_t* ms, aas_reachability_t* r
     result.ideal_viewangles[PITCH] = 90;
     //
     if (dist < 5 && fabs(AngleDiff(result.ideal_viewangles[0], ms->viewangles[0])) < 5 && fabs(AngleDiff(result.ideal_viewangles[1], ms->viewangles[1])) < 5) {
-        // botimport.Print(PRT_MESSAGE, "between jump start and run start point\n");
         hordir[0] = reach->end[0] - ms->origin[0];
         hordir[1] = reach->end[1] - ms->origin[1];
         hordir[2] = 0;
@@ -2209,7 +2207,6 @@ bot_moveresult_t BotTravel_BFGJump(bot_movestate_t* ms, aas_reachability_t* reac
     float dist, speed;
     bot_moveresult_t_cleared(result);
 
-    // botimport.Print(PRT_MESSAGE, "BotTravel_BFGJump: bah\n");
     //
     hordir[0] = reach->start[0] - ms->origin[0];
     hordir[1] = reach->start[1] - ms->origin[1];
@@ -2218,7 +2215,6 @@ bot_moveresult_t BotTravel_BFGJump(bot_movestate_t* ms, aas_reachability_t* reac
     dist = VectorNormalize(hordir);
     //
     if (dist < 5 && fabs(AngleDiff(result.ideal_viewangles[0], ms->viewangles[0])) < 5 && fabs(AngleDiff(result.ideal_viewangles[1], ms->viewangles[1])) < 5) {
-        // botimport.Print(PRT_MESSAGE, "between jump start and run start point\n");
         hordir[0] = reach->end[0] - ms->origin[0];
         hordir[1] = reach->end[1] - ms->origin[1];
         hordir[2] = 0;
