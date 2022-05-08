@@ -1122,7 +1122,6 @@ void R_Init(void)
     if ((intptr_t)tess.xyz & 15) {
         ri.Printf(PRINT_WARNING, "tess.xyz not 16 byte aligned\n");
     }
-    // memset( tess.constantColor255, 255, sizeof( tess.constantColor255 ) );
 
     //
     // init function tables
