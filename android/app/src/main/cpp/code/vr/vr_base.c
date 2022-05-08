@@ -1,7 +1,8 @@
-#include "vr_base.h"
 #include "../qcommon/q_shared.h"
 #include "../qcommon/qcommon.h"
 #include "../client/client.h"
+#include "vr_base.h"
+#include "vr_clientinfo.h"
 
 //#if __ANDROID__
 
@@ -10,6 +11,7 @@
 
 static engine_t vr_engine;
 qboolean vr_initialized = qfalse;
+extern vr_clientinfo_t vr;
 
 const char* const requiredExtensionNames[] = {
         XR_KHR_OPENGL_ES_ENABLE_EXTENSION_NAME,
@@ -256,6 +258,9 @@ void VR_InitCvars( void )
 	Cvar_Get ("vr_button_map_SECONDARYGRIP", "+weapon_stabilise", CVAR_ARCHIVE); // Weapon stabilisation
 	Cvar_Get ("vr_button_map_SECONDARYGRIP_ALT", "", CVAR_ARCHIVE); // unmapped
 	Cvar_Get ("vr_button_map_PRIMARYGRIP_ALT", "", CVAR_ARCHIVE); // unmapped
+
+    vr.menuYaw = 0;
+    vr.recenterYaw = 0;
 }
 
 void VR_Destroy( engine_t* engine )

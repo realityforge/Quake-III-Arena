@@ -77,8 +77,10 @@ public class MainActivity extends SDLActivity // implements KeyEvent.Callback
 	@Override
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
 		if (requestCode == WRITE_EXTERNAL_STORAGE_PERMISSION_ID) {
-			finish();
-			System.exit(0);
+			try {
+				create();
+			} catch (Exception e) {
+			}
 		}
 	}
 
