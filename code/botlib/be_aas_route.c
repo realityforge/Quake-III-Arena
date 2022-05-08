@@ -1083,7 +1083,6 @@ void AAS_UpdateAreaRoutingCache(aas_routingcache_t* areacache)
             // time already travelled plus the traveltime through
             // the current area plus the travel time from the reachability
             t = curupdate->tmptraveltime +
-                // AAS_AreaTravelTime(curupdate->areanum, curupdate->start, reach->end) +
                 curupdate->areatraveltimes[i] + reach->traveltime;
             //
             if (!areacache->traveltimes[clusterareanum] || areacache->traveltimes[clusterareanum] > t) {
@@ -1092,7 +1091,6 @@ void AAS_UpdateAreaRoutingCache(aas_routingcache_t* areacache)
                 nextupdate = &aasworld.areaupdate[clusterareanum];
                 nextupdate->areanum = nextareanum;
                 nextupdate->tmptraveltime = t;
-                // VectorCopy(reach->start, nextupdate->start);
                 nextupdate->areatraveltimes = aasworld.areatraveltimes[nextareanum][linknum - aasworld.areasettings[nextareanum].firstreachablearea];
                 if (!nextupdate->inlist) {
                     // we add the update to the end of the list
