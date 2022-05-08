@@ -504,19 +504,6 @@ int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
             VectorScale(frame_test_vel, 1 / frametime, frame_test_vel);
             AAS_Accelerate(frame_test_vel, frametime, wishdir, wishspeed, accelerate);
             VectorScale(frame_test_vel, frametime, frame_test_vel);
-            /*
-            for (i = 0; i < ax; i++)
-            {
-                    velchange = (cmdmove[i] * frametime) - frame_test_vel[i];
-                    if (velchange > phys_maxacceleration) velchange = phys_maxacceleration;
-                    else if (velchange < -phys_maxacceleration) velchange = -phys_maxacceleration;
-                    newvel = frame_test_vel[i] + velchange;
-                    //
-                    if (frame_test_vel[i] <= maxvel && newvel > maxvel) frame_test_vel[i] = maxvel;
-                    else if (frame_test_vel[i] >= -maxvel && newvel < -maxvel) frame_test_vel[i] = -maxvel;
-                    else frame_test_vel[i] = newvel;
-            }
-            */
         }
         if (crouch) {
             presencetype = PRESENCE_CROUCH;
