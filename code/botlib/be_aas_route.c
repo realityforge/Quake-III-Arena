@@ -1023,7 +1023,6 @@ void AAS_UpdateAreaRoutingCache(aas_routingcache_t* areacache)
     //
     aasworld.frameroutingupdates++;
     // clear the routing update fields
-    //	memset(aasworld.areaupdate, 0, aasworld.numareas * sizeof(aas_routingupdate_t));
     //
     badtravelflags = ~areacache->travelflags;
     //
@@ -1035,7 +1034,6 @@ void AAS_UpdateAreaRoutingCache(aas_routingcache_t* areacache)
     //
     curupdate = &aasworld.areaupdate[clusterareanum];
     curupdate->areanum = areacache->areanum;
-    // VectorCopy(areacache->origin, curupdate->start);
     curupdate->areatraveltimes = startareatraveltimes;
     curupdate->tmptraveltime = areacache->starttraveltime;
     //
