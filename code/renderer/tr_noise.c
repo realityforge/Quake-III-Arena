@@ -49,20 +49,18 @@ void R_NoiseInit(void)
 
 float R_NoiseGet4f(float x, float y, float z, double t)
 {
-    int ix, iy, iz, it;
-    float fx, fy, fz, ft;
     float front[4];
     float back[4];
     float fvalue, bvalue, value[2], finalvalue;
 
-    ix = (int)floor(x);
-    fx = x - ix;
-    iy = (int)floor(y);
-    fy = y - iy;
-    iz = (int)floor(z);
-    fz = z - iz;
-    it = (int)floor(t);
-    ft = t - it;
+    const int ix = (int)floorf(x);
+    const float fx = x - (float)ix;
+    const int iy = (int)floorf(y);
+    const float fy = y - (float)iy;
+    const int iz = (int)floorf(z);
+    const float fz = z - (float)iz;
+    const int it = (int)floor(t);
+    const float ft = (float)(t - (double)it);
 
     for (int i = 0; i < 2; i++) {
         front[0] = GetNoiseValue(ix, iy, iz, it + i);
