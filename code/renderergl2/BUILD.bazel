@@ -80,9 +80,7 @@ cc_library(
 
 cc_library(
     name = "tr_subs",
-    srcs = [
-        "tr_subs.c",
-    ],
+    srcs = ["tr_subs.c"],
     includes = ["."],
     deps = [
         ":local",
