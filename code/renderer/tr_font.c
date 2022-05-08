@@ -302,9 +302,9 @@ static byte* fdFile;
 
 static int readInt(void)
 {
-    int i = ((unsigned int)fdFile[fdOffset] | ((unsigned int)fdFile[fdOffset + 1] << 8) | ((unsigned int)fdFile[fdOffset + 2] << 16) | ((unsigned int)fdFile[fdOffset + 3] << 24));
+    unsigned int i = ((unsigned int)fdFile[fdOffset] | ((unsigned int)fdFile[fdOffset + 1] << 8) | ((unsigned int)fdFile[fdOffset + 2] << 16) | ((unsigned int)fdFile[fdOffset + 3] << 24));
     fdOffset += 4;
-    return i;
+    return (int)i;
 }
 
 typedef union {
@@ -546,6 +546,7 @@ void R_InitFreeType(void)
 #endif
     registeredFontCount = 0;
 }
+
 
 void R_DoneFreeType(void)
 {
