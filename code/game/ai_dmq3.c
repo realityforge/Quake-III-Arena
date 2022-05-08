@@ -2876,7 +2876,6 @@ void BotAimAtEnemy(bot_state_t* bs)
         VectorCopy(target, bs->aimtarget);
         return;
     }
-    // BotAI_Print(PRT_MESSAGE, "client %d: aiming at client %d\n", bs->entitynum, bs->enemy);
     aim_skill = trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_AIM_SKILL, 0, 1);
     aim_accuracy = trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_AIM_ACCURACY, 0, 1);
     if (aim_skill > 0.95) {
