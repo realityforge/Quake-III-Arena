@@ -36,7 +36,7 @@ cc_library(
         ":shared",
         "//code/client:api",
         "//code/qcommon:shared_api",
-        "//code/renderercommon:api",
+        "//code/renderer:api",
     ],
 )
 
@@ -58,7 +58,7 @@ cc_library(
         ":api",
         "//code/client:api",
         "//code/qcommon:shared_api",
-        "//code/renderercommon:api",
+        "//code/renderer:api",
         "//content/teamarena:ui",
     ],
 )
@@ -76,7 +76,7 @@ cc_library(
         ":local_api",
         "//code/client:api",
         "//code/qcommon:shared_api",
-        "//code/renderercommon:api",
+        "//code/renderer:api",
     ],
 )
 
@@ -101,7 +101,7 @@ cc_library(
         "//code/game:bg_misc-client-teamarena",
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
-        "//code/renderercommon:api",
+        "//code/renderer:api",
         "//content/teamarena:ui",
     ],
 )

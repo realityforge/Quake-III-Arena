@@ -125,7 +125,7 @@ cc_library(
     strip_include_prefix = "include",
     visibility = [
         "//code/client:__pkg__",
-        "//code/renderercommon:__pkg__",
+        "//code/renderer:__pkg__",
         "//code/sdl:__pkg__",
         "//code/sys:__pkg__",
     ],

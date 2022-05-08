@@ -64,7 +64,7 @@ cc_library(
         "//code/qcommon",
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
-        "//code/renderercommon:api",
+        "//code/renderer:api",
     ],
 )
 
@@ -78,7 +78,7 @@ cc_library(
         "//code/game:bg_lib-qvm",
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
-        "//code/renderercommon:api",
+        "//code/renderer:api",
         "//code/ui:shared",
     ],
 )
@@ -99,7 +99,7 @@ cc_library(
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
         "//code/qcommon:voicechat",
-        "//code/renderercommon:api",
+        "//code/renderer:api",
         "//code/ui:shared",
     ],
 )
@@ -115,7 +115,7 @@ cc_library(
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
         "//code/qcommon:voicechat",
-        "//code/renderercommon:api",
+        "//code/renderer:api",
         "//code/ui:shared",
     ],
 )

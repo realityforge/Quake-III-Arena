@@ -85,7 +85,6 @@ macos_application(
     name = "Quake3Arena",
     additional_contents = {
         "//game:Quake3ArenaServer": "MacOS",
-        "//code/renderergl2:renderer_opengl2.so": "MacOS",
         ":baseq3_code": "MacOS",
         ":teamarena_code": "MacOS",
 

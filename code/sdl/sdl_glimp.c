@@ -30,7 +30,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../renderercommon/tr_common.h"
+#include "../renderer/tr_common.h"
 #include "../sys/sys_local.h"
 #include "cvar_engine.h"
 #include "sdl_icon.h"

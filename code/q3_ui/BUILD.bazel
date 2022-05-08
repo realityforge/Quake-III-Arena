@@ -61,7 +61,7 @@ cc_library(
         "//code/game:bg_misc-client-baseq3",
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
-        "//code/renderercommon:api",
+        "//code/renderer:api",
         "//code/ui:api",
         "//code/ui:shared",
         "//code/ui:ui_syscalls",

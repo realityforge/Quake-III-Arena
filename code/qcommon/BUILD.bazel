@@ -166,7 +166,7 @@ cc_library(
         "//code/client:__pkg__",
         "//code/game:__pkg__",
         "//code/q3_ui:__pkg__",
-        "//code/renderercommon:__pkg__",
+        "//code/renderer:__pkg__",
         "//code/server:__pkg__",
         "//code/sys:__pkg__",
         "//code/ui:__pkg__",
@@ -187,7 +187,7 @@ cc_library(
 cc_library(
     name = "qfiles",
     hdrs = ["qfiles.h"],
-    visibility = ["//code/renderergl2:__pkg__"],
+    visibility = ["//code/renderer:__pkg__"],
 )
 
 # collision map library
@@ -226,7 +226,7 @@ cc_library(
         "//code/botlib:__pkg__",
         "//code/cgame:__pkg__",
         "//code/client:__pkg__",
-        "//code/renderergl2:__pkg__",
+        "//code/renderer:__pkg__",
         "//code/sdl:__pkg__",
         "//code/server:__pkg__",
         "//code/sys:__pkg__",

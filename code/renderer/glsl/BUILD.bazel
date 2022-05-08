@@ -70,7 +70,7 @@ glsl_to_c(name = "tonemap_vp")
 
 cc_library(
     name = "glsl",
-    visibility = ["//code/renderergl2:__pkg__"],
+    visibility = ["//code/renderer:__pkg__"],
     deps = [
         ":bokeh_fp",
         ":bokeh_vp",

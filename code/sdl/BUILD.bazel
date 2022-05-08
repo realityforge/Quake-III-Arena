@@ -58,7 +58,7 @@ cc_library(
     visibility = ["//code/client:__pkg__"],
     deps = [
         "//code/qcommon",
-        "//code/renderercommon",
+        "//code/renderer:renderer_common",
         "//code/sys:sys_local",
         "//third_party/sdl",
     ],

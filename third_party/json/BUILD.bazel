@@ -15,7 +15,5 @@ cc_library(
         "json.h",
     ],
     includes = ["."],
-    visibility = [
-        "//code/renderergl2:__pkg__",
-    ],
+    visibility = ["//code/renderer:__pkg__"],
 )

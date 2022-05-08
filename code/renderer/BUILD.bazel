@@ -9,6 +9,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 load("//build_defs:rules.bzl", "FULL_WARNINGS")
 
 cc_library(
@@ -56,21 +57,91 @@ cc_library(
 )
 
 cc_library(
-    name = "renderercommon",
+    name = "renderer_common",
     srcs = [
         "tr_font.c",
         "tr_image_jpg.c",
         "tr_noise.c",
     ],
-    visibility = [
-        "//code/renderergl2:__pkg__",
-        "//code/sdl:__pkg__",
-    ],
+    visibility = ["//code/sdl:__pkg__"],
     deps = [
         ":api",
         ":imagelib",
         ":internal_api",
         "//code/qcommon:shared_api",
         "//third_party/sdl",
+    ],
+)
+
+cc_library(
+    name = "local",
+    srcs = [
+        "tr_extramath.h",
+        "tr_extratypes.h",
+        "tr_postprocess.h",
+    ],
+    hdrs = [
+        "tr_fbo.h",
+        "tr_local.h",
+    ],
+    includes = ["."],
+)
+
+cc_library(
+    name = "renderer",
+    srcs = [
+        "tr_animation.c",
+        "tr_backend.c",
+        "tr_bsp.c",
+        "tr_cmds.c",
+        "tr_curve.c",
+        "tr_dsa.c",
+        "tr_dsa.h",
+        "tr_extensions.c",
+        "tr_extramath.c",
+        "tr_fbo.c",
+        "tr_flares.c",
+        "tr_glsl.c",
+        "tr_image.c",
+        "tr_image_dds.c",
+        "tr_init.c",
+        "tr_light.c",
+        "tr_main.c",
+        "tr_marks.c",
+        "tr_mesh.c",
+        "tr_model.c",
+        "tr_model_iqm.c",
+        "tr_postprocess.c",
+        "tr_scene.c",
+        "tr_shade.c",
+        "tr_shade_calc.c",
+        "tr_shader.c",
+        "tr_shadows.c",
+        "tr_sky.c",
+        "tr_surface.c",
+        "tr_vbo.c",
+        "tr_world.c",
+    ],
+    includes = ["."],
+    visibility = ["//code/client:__pkg__"],
+    deps = [
+        ":local",
+        ":renderer_common",
+        "//code/qcommon",
+        "//code/qcommon:qfiles",
+        "//code/renderer/glsl",
+        "//third_party/json",
+    ],
+)
+
+cc_library(
+    name = "tr_subs",
+    srcs = ["tr_subs.c"],
+    includes = ["."],
+    deps = [
+        ":local",
+        ":renderer",
+        "//code/qcommon",
+        "//code/qcommon:qfiles",
     ],
 )

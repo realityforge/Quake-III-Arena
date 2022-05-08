@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef TR_DSA_H
 #define TR_DSA_H
 
-#include "../renderercommon/qgl.h"
+#include "qgl.h"
 
 void GL_BindNullTextures(void);
 int GL_BindMultiTexture(GLenum texunit, GLenum target, GLuint texture);
