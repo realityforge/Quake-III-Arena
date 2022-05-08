@@ -271,7 +271,6 @@ int AAS_BestReachableFromJumpPadArea(vec3_t origin, vec3_t mins, vec3_t maxs)
             AAS_UnlinkFromAreas(areas);
             continue;
         }
-        // botimport.Print(PRT_MESSAGE, "found a trigger_push with velocity %f %f %f\n", velocity[0], velocity[1], velocity[2]);
         VectorSet(cmdmove, 0, 0, 0);
         memset(&move, 0, sizeof(aas_clientmove_t));
         area2num = 0;
