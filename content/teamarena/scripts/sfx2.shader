@@ -176,14 +176,6 @@ textures/sfx2/autorain
                 tcMod turb .1 .25 0 -.1
                 blendFunc GL_ONE GL_ONE
         }
-        //{
-	//	map textures/sfx/rain.png
-        //        tcMod Scroll .01 -6.3
-        //
-        //        blendFunc GL_ONE GL_ONE
-        //}
-
-
 }
 
 textures/sfx2/flameanim_red_lowlite
