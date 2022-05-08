@@ -385,7 +385,7 @@ static void ProjectDlightTexture(void)
         dlight_t* dl;
 
         if (!(tess.dlightBits & (1 << l))) {
-            continue; // this surface definately doesn't have any of this light
+            continue; // this surface definitely doesn't have any of this light
         }
         texCoords = texCoordsArray[0];
         colors = colorArray[0];
