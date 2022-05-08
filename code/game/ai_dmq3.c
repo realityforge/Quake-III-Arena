@@ -4002,7 +4002,6 @@ int BotAIPredictObstacles(bot_state_t* bs, bot_goal_t* goal)
                             bs->activatestack = NULL;
                         // if not already trying to activate this entity
                         if (!BotIsGoingToActivateEntity(bs, activategoal.goal.entitynum)) {
-                            // BotAI_Print(PRT_MESSAGE, "blocked by mover model %d, entity %d ?\n", modelnum, entitynum);
                             BotGoForActivateGoal(bs, &activategoal);
                             return qtrue;
                         } else {
