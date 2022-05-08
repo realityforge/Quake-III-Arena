@@ -993,7 +993,6 @@ void AAS_UpdateAreaRoutingCache(aas_routingcache_t* areacache)
     numreachabilityareas = aasworld.clusters[areacache->cluster].numreachabilityareas;
     aasworld.frameroutingupdates++;
     // clear the routing update fields
-    //	memset(aasworld.areaupdate, 0, aasworld.numareas * sizeof(aas_routingupdate_t));
     badtravelflags = ~areacache->travelflags;
     clusterareanum = AAS_ClusterAreaNum(areacache->cluster, areacache->areanum);
     if (clusterareanum >= numreachabilityareas)
@@ -1001,7 +1000,6 @@ void AAS_UpdateAreaRoutingCache(aas_routingcache_t* areacache)
     memset(startareatraveltimes, 0, sizeof(startareatraveltimes));
     curupdate = &aasworld.areaupdate[clusterareanum];
     curupdate->areanum = areacache->areanum;
-    // VectorCopy(areacache->origin, curupdate->start);
     curupdate->areatraveltimes = startareatraveltimes;
     curupdate->tmptraveltime = areacache->starttraveltime;
     areacache->traveltimes[clusterareanum] = areacache->starttraveltime;
