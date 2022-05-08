@@ -1047,8 +1047,7 @@ void AAS_UpdateAreaRoutingCache(aas_routingcache_t* areacache)
                 continue;
             // time already travelled plus the traveltime through
             // the current area plus the travel time from the reachability
-            t = curupdate->tmptraveltime +
-                curupdate->areatraveltimes[i] + reach->traveltime;
+            t = curupdate->tmptraveltime + curupdate->areatraveltimes[i] + reach->traveltime;
             if (!areacache->traveltimes[clusterareanum] || areacache->traveltimes[clusterareanum] > t) {
                 areacache->traveltimes[clusterareanum] = t;
                 areacache->reachabilities[clusterareanum] = linknum - aasworld.areasettings[nextareanum].firstreachablearea;
