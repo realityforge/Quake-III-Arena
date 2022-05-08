@@ -3921,7 +3921,7 @@ void BotAIBlocked(bot_state_t* bs, bot_moveresult_t* moveresult, int activate)
         AngleVectors(angles, hordir, NULL, NULL);
     }
     movetype = MOVE_WALK;
-    // if there's an obstacle at the bot's feet and head then
+    // if there's an obstacle at the bots feet and head then
     // the bot might be able to crouch through
     VectorCopy(bs->origin, start);
     start[2] += 18;
