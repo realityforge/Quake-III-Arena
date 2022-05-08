@@ -3262,12 +3262,6 @@ int AAS_Reachability_WeaponJump(int area1num, int area2num)
                     // get command movement
                     VectorScale(dir, speed, cmdmove);
                     VectorSet(velocity, 0, 0, zvel);
-                    /*
-                    //get command movement
-                    VectorScale(dir, speed, velocity);
-                    velocity[2] = zvel;
-                    VectorSet(cmdmove, 0, 0, 0);
-                    */
                     //
                     AAS_PredictClientMovement(&move, -1, areastart, PRESENCE_NORMAL, qtrue,
                                               velocity, cmdmove, 30, 30, 0.1f,
