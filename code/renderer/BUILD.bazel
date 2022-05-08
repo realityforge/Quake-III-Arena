@@ -64,6 +64,7 @@ cc_library(
         "tr_font.c",
         "tr_noise.c",
     ],
+    copts = FULL_WARNINGS,
     visibility = ["//code/sdl:__pkg__"],
     deps = [
         ":api",
