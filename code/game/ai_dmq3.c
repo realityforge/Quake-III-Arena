@@ -3928,8 +3928,6 @@ void BotAIBlocked(bot_state_t* bs, bot_moveresult_t* moveresult, int activate)
     VectorMA(start, 5, hordir, end);
     VectorSet(mins, -16, -16, -24);
     VectorSet(maxs, 16, 16, 4);
-    // bsptrace = AAS_Trace(start, mins, maxs, end, bs->entitynum, MASK_PLAYERSOLID);
-    // if (bsptrace.fraction >= 1) movetype = MOVE_CROUCH;
     // get the sideward vector
     CrossProduct(hordir, up, sideward);
     if (bs->flags & BFL_AVOIDRIGHT)
