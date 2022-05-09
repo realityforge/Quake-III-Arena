@@ -117,7 +117,7 @@ static void r_spng_load_error(const char* name, const int result, const char* fu
  * @param image_load_result the
  * @return qtrue if image was successfully decoded, qfalse if the image failed to be decoded.
  */
-static qboolean R_DecodePNGinBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* image_load_result)
+static qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* image_load_result)
 {
     struct spng_ihdr ihdr;
     void* image = NULL;
@@ -210,7 +210,7 @@ void R_LoadPNG(const char* name, byte** pixel_data, uint32_t* image_width, uint3
         goto cleanup;
     } else {
         image_load_result_t image_load_result;
-        if (qtrue == R_DecodePNGinBuffer(name_to_request, asset_data, asset_size, &image_load_result)) {
+        if (qtrue == R_DecodePngInBuffer(name_to_request, asset_data, asset_size, &image_load_result)) {
             *image_width = image_load_result.image_width;
             *image_height = image_load_result.image_height;
             *pixel_data = image_load_result.pixel_data;
