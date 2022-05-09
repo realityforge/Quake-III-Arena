@@ -220,13 +220,13 @@ void RE_SavePNG(const char* filename, const uint32_t image_width, const uint32_t
     //  spng_ctx* ctx = spng_ctx_new2(&temp_hunk_alloc, SPNG_CTX_ENCODER);
     spng_ctx* ctx = spng_ctx_new(SPNG_CTX_ENCODER);
     if (NULL == ctx) {
-        r_spng_load_error(filename, SPNG_EMEM, "spng_ctx_new2");
+        spng_save_error(filename, SPNG_EMEM, "spng_ctx_new2");
         return;
     } else if (SPNG_OK != (result = spng_set_image_limits(ctx, MAX_WRITE_PNG_WIDTH, MAX_WRITE_PNG_HEIGHT))) {
-        r_spng_load_error(filename, result, "spng_set_image_limits");
+        spng_save_error(filename, result, "spng_set_image_limits");
         goto cleanup;
     } else if (SPNG_OK != (result = spng_set_chunk_limits(ctx, MAX_CHUNK_SIZE, MAX_CACHE_SIZE))) {
-        r_spng_load_error(filename, result, "spng_set_chunk_limits");
+        spng_save_error(filename, result, "spng_set_chunk_limits");
         goto cleanup;
     } else if (SPNG_OK != (result = spng_set_option(ctx, SPNG_ENCODE_TO_BUFFER, 1))) {
         spng_save_error(filename, result, "spng_set_option");
