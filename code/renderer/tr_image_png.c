@@ -155,9 +155,9 @@ qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long bu
             r_spng_load_error(name, result, "spng_decode_image");
             goto cleanup;
         } else {
-            image_load_result->image_width = ihdr.width;
-            image_load_result->image_height = ihdr.height;
-            image_load_result->pixel_data = image;
+            image_load_result->width = ihdr.width;
+            image_load_result->height = ihdr.height;
+            image_load_result->data = image;
 
             // Clear image so it does not deallocated in cleanup phase
             image = NULL;
@@ -211,9 +211,9 @@ void R_LoadPNG(const char* name, byte** pixel_data, uint32_t* image_width, uint3
     } else {
         image_load_result_t image_load_result;
         if (qtrue == R_DecodePngInBuffer(name_to_request, asset_data, asset_size, &image_load_result)) {
-            *image_width = image_load_result.image_width;
-            *image_height = image_load_result.image_height;
-            *pixel_data = image_load_result.pixel_data;
+            *image_width = image_load_result.width;
+            *image_height = image_load_result.height;
+            *pixel_data = image_load_result.data;
         }
     }
 cleanup:
