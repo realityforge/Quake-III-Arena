@@ -101,7 +101,7 @@ UNUSED_VAR static struct spng_alloc temp_hunk_alloc = { .malloc_fn = spng_temp_h
 
 static void spng_load_error(const char* name, const int result, const char* functionName)
 {
-    ri.Printf(PRINT_WARNING, "R_LoadPNG: Failed to load png file named %s due to %s error calling %s.\n", name, spng_strerror(result), functionName);
+    ri.Printf(PRINT_WARNING, "Failed to load png file named %s due to %s error calling %s.\n", name, spng_strerror(result), functionName);
 }
 
 /**
@@ -193,7 +193,7 @@ void R_LoadPNG(const char* name, byte** pixel_data, uint32_t* image_width, uint3
 
 static void spng_save_error(const char* name, const int result, const char* functionName)
 {
-    ri.Printf(PRINT_WARNING, "RE_SavePNG: Failed to save screenshot to png file named %s due to %s error calling %s.\n", name, spng_strerror(result), functionName);
+    ri.Printf(PRINT_WARNING, "Failed to save png file named %s due to %s error calling %s.\n", name, spng_strerror(result), functionName);
 }
 
 /*
