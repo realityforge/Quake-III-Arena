@@ -1379,61 +1379,6 @@ const void* RB_PostProcess(const void* data)
     return (const void*)(cmd + 1);
 }
 
-// FIXME: put this function declaration elsewhere
-void R_SaveDDS(const char* filename, byte* pic, int width, int height, int depth);
-
-const void* RB_ExportCubemaps(const void* data)
-{
-    const exportCubemapsCommand_t* cmd = data;
-
-    // finish any 2D drawing if needed
-    if (tess.numIndexes)
-        RB_EndSurface();
-
-    if (!glRefConfig.framebufferObject || !tr.world || tr.numCubemaps == 0) {
-        // do nothing
-        ri.Printf(PRINT_ALL, "Nothing to export!\n");
-        return (const void*)(cmd + 1);
-    }
-
-    if (cmd) {
-        FBO_t* oldFbo = glState.currentFBO;
-        int sideSize = r_cubemapSize->integer * r_cubemapSize->integer * 4;
-        byte* cubemapPixels = ri.Malloc(sideSize * 6);
-        int i, j;
-
-        FBO_Bind(tr.renderCubeFbo);
-
-        for (i = 0; i < tr.numCubemaps; i++) {
-            char filename[MAX_QPATH];
-            cubemap_t* cubemap = &tr.cubemaps[i];
-            byte* p = cubemapPixels;
-
-            for (j = 0; j < 6; j++) {
-                FBO_AttachImage(tr.renderCubeFbo, cubemap->image, GL_COLOR_ATTACHMENT0_EXT, j);
-                qglReadPixels(0, 0, r_cubemapSize->integer, r_cubemapSize->integer, GL_RGBA, GL_UNSIGNED_BYTE, p);
-                p += sideSize;
-            }
-
-            if (cubemap->name[0]) {
-                COM_StripExtension(cubemap->name, filename, MAX_QPATH);
-                Q_strcat(filename, MAX_QPATH, ".dds");
-            } else {
-                Com_sprintf(filename, MAX_QPATH, "cubemaps/%s/%03d.dds", tr.world->baseName, i);
-            }
-
-            R_SaveDDS(filename, cubemapPixels, r_cubemapSize->integer, r_cubemapSize->integer, 6);
-            ri.Printf(PRINT_ALL, "Saved cubemap %d as %s\n", i, filename);
-        }
-
-        FBO_Bind(oldFbo);
-
-        ri.Free(cubemapPixels);
-    }
-
-    return (const void*)(cmd + 1);
-}
-
 void RB_ExecuteRenderCommands(const void* data)
 {
     int t1, t2;
@@ -1476,9 +1421,6 @@ void RB_ExecuteRenderCommands(const void* data)
             break;
         case RC_POSTPROCESS:
             data = RB_PostProcess(data);
-            break;
-        case RC_EXPORT_CUBEMAPS:
-            data = RB_ExportCubemaps(data);
             break;
         case RC_END_OF_LIST:
         default:

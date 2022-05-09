@@ -2340,8 +2340,7 @@ typedef enum {
     RC_COLORMASK,
     RC_CLEARDEPTH,
     RC_CAPSHADOWMAP,
-    RC_POSTPROCESS,
-    RC_EXPORT_CUBEMAPS
+    RC_POSTPROCESS
 } renderCommand_t;
 
 // these are sort of arbitrary limits.

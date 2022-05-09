@@ -604,24 +604,6 @@ void R_ScreenShot_f(void)
 
 //============================================================================
 
-void R_ExportCubemaps(void)
-{
-    exportCubemapsCommand_t* cmd;
-
-    cmd = R_GetCommandBuffer(sizeof(*cmd));
-    if (!cmd) {
-        return;
-    }
-    cmd->commandId = RC_EXPORT_CUBEMAPS;
-}
-
-void R_ExportCubemaps_f(void)
-{
-    R_ExportCubemaps();
-}
-
-//============================================================================
-
 const void* RB_TakeVideoFrameCmd(const void* data)
 {
     const videoFrameCommand_t* cmd;
@@ -1073,7 +1055,6 @@ void R_Register(void)
     ri.Cmd_AddCommand("gfxinfo", GfxInfo_f);
     ri.Cmd_AddCommand("minimize", GLimp_Minimize);
     ri.Cmd_AddCommand("gfxmeminfo", GfxMemInfo_f);
-    ri.Cmd_AddCommand("exportCubemaps", R_ExportCubemaps_f);
 }
 
 void R_InitQueries(void)
