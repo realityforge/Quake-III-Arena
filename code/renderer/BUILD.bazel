@@ -46,6 +46,7 @@ cc_library(
     name = "imagelib",
     srcs = [
         "tr_image.h",
+        "tr_image_2.c",
         "tr_image_jpg.c",
         "tr_image_png.c",
     ],

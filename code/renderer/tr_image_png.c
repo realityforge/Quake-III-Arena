@@ -34,9 +34,6 @@
 #define MAX_CHUNK_SIZE (4 * 1000 * 1000)
 #define MAX_CACHE_SIZE (8 * 1000 * 1000)
 
-#define TGA_EXTENSION ".tga"
-#define PNG_EXTENSION ".png"
-
 static void* spng_hunk_malloc(const size_t size)
 {
     return ri.Malloc(size);
@@ -177,48 +174,20 @@ cleanup:
 
 void R_LoadPNG(const char* name, byte** pixel_data, uint32_t* image_width, uint32_t* image_height)
 {
-    void* asset_data = NULL;
-    long asset_size;
-
     assert(NULL != name);
     assert(NULL != pixel_data);
     assert(NULL != image_width);
     assert(NULL != image_height);
 
-    *pixel_data = NULL;
-    *image_width = 0;
-    *image_height = 0;
-
-    const char* original_extension = COM_GetExtension(name);
-
-    // The MD3 files have embedded references to .tga textures which have
-    // all been converted to .png files. So we have to identify a request
-    // for a file with a .tga extension and treat it as a .png file. It is an ugly hack
-    // but is required until we convert the md3 files into a different format
-    char local_name[MAX_QPATH];
-    const char* name_to_request;
-    if (!Q_stricmpn(original_extension, TGA_EXTENSION, MAX_QPATH)) {
-        COM_StripExtension(name, local_name, MAX_QPATH);
-        Q_strcat(local_name, MAX_QPATH, PNG_EXTENSION);
-        name_to_request = local_name;
-    } else  {
-        name_to_request = name;
-    }
-
-    asset_size = ri.FS_ReadFile(name_to_request, &asset_data);
-    if (NULL == asset_data || -1 == asset_size) {
-        goto cleanup;
+    image_load_result_t result;
+    if (qtrue == R_LoadImageNew(name, &result)) {
+        *image_width = result.width;
+        *image_height = result.height;
+        *pixel_data = result.data;
     } else {
-        image_load_result_t image_load_result;
-        if (qtrue == R_DecodePngInBuffer(name_to_request, asset_data, asset_size, &image_load_result)) {
-            *image_width = image_load_result.width;
-            *image_height = image_load_result.height;
-            *pixel_data = image_load_result.data;
-        }
-    }
-cleanup:
-    if (NULL != asset_data) {
-        ri.FS_FreeFile(asset_data);
+        *pixel_data = NULL;
+        *image_width = 0;
+        *image_height = 0;
     }
 }
 
