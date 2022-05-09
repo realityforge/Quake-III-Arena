@@ -107,6 +107,16 @@ static void r_spng_load_error(const char* name, const int result, const char* fu
     ri.Printf(PRINT_WARNING, "R_LoadPNG: Failed to load png file named %s due to %s error calling %s.\n", name, spng_strerror(result), functionName);
 }
 
+/**
+ * Attempt to decode an image in PNG format from the specified buffer and return the results of encoding in image_load_result.
+ * If the image was successfully decoded then the caller is responsible for releasing image data referenced by image_load_result.
+ *
+ * @param name the name of the file that the buffer was loaded from. Used in Error reporting.
+ * @param buffer the reference to the buffer.
+ * @param buffer_size the size of the buffer in bytes.
+ * @param image_load_result the
+ * @return qtrue if image was successfully decoded, qfalse if the image failed to be decoded.
+ */
 static qboolean R_DecodePNGinBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* image_load_result)
 {
     struct spng_ihdr ihdr;
