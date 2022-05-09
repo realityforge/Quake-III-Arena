@@ -107,7 +107,7 @@ static void r_spng_load_error(const char* name, const int result, const char* fu
     ri.Printf(PRINT_WARNING, "R_LoadPNG: Failed to load png file named %s due to %s error calling %s.\n", name, spng_strerror(result), functionName);
 }
 
-static qboolean R_LoadPNGFromBuffer(const char* name, const void* asset_data, const long asset_size, image_load_result_t* image_load_result)
+static qboolean R_LoadPNGFromBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* image_load_result)
 {
     struct spng_ihdr ihdr;
     void* image = NULL;
@@ -127,7 +127,7 @@ static qboolean R_LoadPNGFromBuffer(const char* name, const void* asset_data, co
     } else if (SPNG_OK != (result = spng_set_chunk_limits(ctx, MAX_CHUNK_SIZE, MAX_CACHE_SIZE))) {
         r_spng_load_error(name, result, "spng_set_chunk_limits");
         goto cleanup;
-    } else if (SPNG_OK != (result = spng_set_png_buffer(ctx, asset_data, (size_t)asset_size))) {
+    } else if (SPNG_OK != (result = spng_set_png_buffer(ctx, buffer, (size_t)buffer_size))) {
         r_spng_load_error(name, result, "spng_set_png_buffer");
         goto cleanup;
     } else if (SPNG_OK != (result = spng_get_ihdr(ctx, &ihdr))) {
