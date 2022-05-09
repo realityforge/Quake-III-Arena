@@ -191,7 +191,7 @@ void R_LoadPNG(const char* name, byte** pixel_data, uint32_t* image_width, uint3
     }
 }
 
-static void r_spng_save_error(const char* name, const int result, const char* functionName)
+static void spng_save_error(const char* name, const int result, const char* functionName)
 {
     ri.Printf(PRINT_WARNING, "RE_SavePNG: Failed to save screenshot to png file named %s due to %s error calling %s.\n", name, spng_strerror(result), functionName);
 }
@@ -229,16 +229,16 @@ void RE_SavePNG(const char* filename, const uint32_t image_width, const uint32_t
         r_spng_load_error(filename, result, "spng_set_chunk_limits");
         goto cleanup;
     } else if (SPNG_OK != (result = spng_set_option(ctx, SPNG_ENCODE_TO_BUFFER, 1))) {
-        r_spng_save_error(filename, result, "spng_set_option");
+        spng_save_error(filename, result, "spng_set_option");
         goto cleanup;
     } else if (SPNG_OK != (result = spng_set_ihdr(ctx, &ihdr))) {
-        r_spng_save_error(filename, result, "spng_set_ihdr");
+        spng_save_error(filename, result, "spng_set_ihdr");
         goto cleanup;
     } else if (SPNG_OK != (result = spng_encode_chunks(ctx))) {
-        r_spng_save_error(filename, result, "spng_encode_chunks");
+        spng_save_error(filename, result, "spng_encode_chunks");
         goto cleanup;
     } else if (SPNG_OK != (result = spng_encode_image(ctx, NULL, 0, SPNG_FMT_PNG, SPNG_ENCODE_PROGRESSIVE | SPNG_ENCODE_FINALIZE))) {
-        r_spng_save_error(filename, result, "spng_encode_image");
+        spng_save_error(filename, result, "spng_encode_image");
         goto cleanup;
     } else {
         // PNG is encoded from top to bottom while the pixel data is supplied in the other order,
@@ -253,11 +253,11 @@ void RE_SavePNG(const char* filename, const uint32_t image_width, const uint32_t
                 // The SPNG_EOI (end-of-image) return code is expected when you supply the
                 // last row of data, otherwise an error has occurred
                 if (SPNG_EOI != result) {
-                    r_spng_save_error(filename, result, "last spng_encode_row");
+                    spng_save_error(filename, result, "last spng_encode_row");
                     goto cleanup;
                 }
             } else if (SPNG_OK != result) {
-                r_spng_save_error(filename, result, "spng_encode_row");
+                spng_save_error(filename, result, "spng_encode_row");
                 goto cleanup;
             }
         }
@@ -267,7 +267,7 @@ void RE_SavePNG(const char* filename, const uint32_t image_width, const uint32_t
         // Get the internal buffer of the finished PNG
         image = spng_get_png_buffer(ctx, &png_size, &result);
         if (NULL == image) {
-            r_spng_save_error(filename, result, "spng_get_png_buffer");
+            spng_save_error(filename, result, "spng_get_png_buffer");
             goto cleanup;
         } else {
             ri.FS_WriteFile(filename, image, png_size);
