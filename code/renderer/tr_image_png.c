@@ -109,10 +109,10 @@ void R_LoadPNG(const char* name, byte** pixel_data, uint32_t* image_width, uint3
     struct spng_ihdr ihdr;
     void* image = NULL;
     size_t size;
-    void* pAssetData = NULL;
-    long pAssetSize;
+    void* asset_data = NULL;
+    long asset_size;
     int result;
-    char localName[MAX_QPATH];
+    char local_name[MAX_QPATH];
 
     assert(NULL != name);
     assert(NULL != pixel_data);
@@ -123,49 +123,49 @@ void R_LoadPNG(const char* name, byte** pixel_data, uint32_t* image_width, uint3
     *image_width = 0;
     *image_height = 0;
 
-    Q_strncpyz(localName, name, MAX_QPATH);
+    Q_strncpyz(local_name, name, MAX_QPATH);
 
-    const char* ext = COM_GetExtension(localName);
+    const char* ext = COM_GetExtension(local_name);
 
     // The MD3 files have embedded references to .tga textures which have
     // all been converted to .png files. So we have to identify a request
     // for a file with a .tga and treat it as a .png file. It is an ugly hack
     // but is required until we convert the md3 files into a different format
     if (!Q_stricmpn(ext, ".tga", MAX_QPATH)) {
-        COM_StripExtension(name, localName, MAX_QPATH);
-        Q_strcat(localName, MAX_QPATH, ".png");
+        COM_StripExtension(name, local_name, MAX_QPATH);
+        Q_strcat(local_name, MAX_QPATH, ".png");
     }
 
-    pAssetSize = ri.FS_ReadFile((char*)localName, &pAssetData);
-    if (NULL == pAssetData || -1 == pAssetSize) {
+    asset_size = ri.FS_ReadFile((char*)local_name, &asset_data);
+    if (NULL == asset_data || -1 == asset_size) {
         goto cleanup;
     } else {
         ctx = spng_ctx_new2(&hunk_alloc, 0);
         if (NULL == ctx) {
-            r_spng_load_error(localName, SPNG_EMEM, "spng_ctx_new2");
+            r_spng_load_error(local_name, SPNG_EMEM, "spng_ctx_new2");
             return;
         } else if (SPNG_OK != (result = spng_set_image_limits(ctx, MAX_READ_PNG_WIDTH, MAX_READ_PNG_HEIGHT))) {
-            r_spng_load_error(localName, result, "spng_set_image_limits");
+            r_spng_load_error(local_name, result, "spng_set_image_limits");
             goto cleanup;
         } else if (SPNG_OK != (result = spng_set_chunk_limits(ctx, MAX_CHUNK_SIZE, MAX_CACHE_SIZE))) {
-            r_spng_load_error(localName, result, "spng_set_chunk_limits");
+            r_spng_load_error(local_name, result, "spng_set_chunk_limits");
             goto cleanup;
-        } else if (SPNG_OK != (result = spng_set_png_buffer(ctx, pAssetData, (size_t)pAssetSize))) {
-            r_spng_load_error(localName, result, "spng_set_png_buffer");
+        } else if (SPNG_OK != (result = spng_set_png_buffer(ctx, asset_data, (size_t)asset_size))) {
+            r_spng_load_error(local_name, result, "spng_set_png_buffer");
             goto cleanup;
         } else if (SPNG_OK != (result = spng_get_ihdr(ctx, &ihdr))) {
-            r_spng_load_error(localName, result, "spng_get_ihdr");
+            r_spng_load_error(local_name, result, "spng_get_ihdr");
             goto cleanup;
         } else if (SPNG_OK != spng_decoded_image_size(ctx, SPNG_FMT_RGBA8, &size)) {
-            r_spng_load_error(localName, result, "spng_decoded_image_size");
+            r_spng_load_error(local_name, result, "spng_decoded_image_size");
             goto cleanup;
         } else {
             image = ri.Malloc(size);
             if (NULL == image) {
-                r_spng_load_error(localName, result, "ri.Malloc");
+                r_spng_load_error(local_name, result, "ri.Malloc");
                 goto cleanup;
             } else if (SPNG_OK != spng_decode_image(ctx, image, size, SPNG_FMT_RGBA8, SPNG_DECODE_TRNS | SPNG_DECODE_GAMMA)) {
-                r_spng_load_error(localName, result, "spng_decode_image");
+                r_spng_load_error(local_name, result, "spng_decode_image");
                 goto cleanup;
             } else {
                 *image_width = ihdr.width;
@@ -180,8 +180,8 @@ cleanup:
     if (NULL != image) {
         hunk_alloc.free_fn(image);
     }
-    if (NULL != pAssetData) {
-        ri.FS_FreeFile(pAssetData);
+    if (NULL != asset_data) {
+        ri.FS_FreeFile(asset_data);
     }
     if (NULL != ctx) {
         spng_ctx_free(ctx);
