@@ -23,4 +23,6 @@ typedef struct image_load_result_s {
     uint32_t image_height;
 } image_load_result_t;
 
+qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* image_load_result);
+
 #endif

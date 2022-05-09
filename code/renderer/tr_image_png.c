@@ -117,7 +117,7 @@ static void r_spng_load_error(const char* name, const int result, const char* fu
  * @param image_load_result the
  * @return qtrue if image was successfully decoded, qfalse if the image failed to be decoded.
  */
-static qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* image_load_result)
+qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* image_load_result)
 {
     struct spng_ihdr ihdr;
     void* image = NULL;
