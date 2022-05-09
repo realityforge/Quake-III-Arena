@@ -103,7 +103,7 @@ static void r_spng_load_error(const char* name, const int result, const char* fu
     ri.Printf(PRINT_WARNING, "R_LoadPNG: Failed to load png file named %s due to %s error calling %s.\n", name, spng_strerror(result), functionName);
 }
 
-void R_LoadPNG(const char* name, byte** pImage, uint32_t* pWidth, uint32_t* pHeight)
+void R_LoadPNG(const char* name, byte** pixel_data, uint32_t* image_width, uint32_t* image_height)
 {
     spng_ctx* ctx = NULL;
     struct spng_ihdr ihdr;
@@ -115,13 +115,13 @@ void R_LoadPNG(const char* name, byte** pImage, uint32_t* pWidth, uint32_t* pHei
     char localName[MAX_QPATH];
 
     assert(NULL != name);
-    assert(NULL != pImage);
-    assert(NULL != pWidth);
-    assert(NULL != pHeight);
+    assert(NULL != pixel_data);
+    assert(NULL != image_width);
+    assert(NULL != image_height);
 
-    *pImage = NULL;
-    *pWidth = 0;
-    *pHeight = 0;
+    *pixel_data = NULL;
+    *image_width = 0;
+    *image_height = 0;
 
     Q_strncpyz(localName, name, MAX_QPATH);
 
@@ -168,9 +168,9 @@ void R_LoadPNG(const char* name, byte** pImage, uint32_t* pWidth, uint32_t* pHei
                 r_spng_load_error(localName, result, "spng_decode_image");
                 goto cleanup;
             } else {
-                *pWidth = ihdr.width;
-                *pHeight = ihdr.height;
-                *pImage = image;
+                *image_width = ihdr.width;
+                *image_height = ihdr.height;
+                *pixel_data = image;
                 // Clear image so it does not deallocated in cleanup phase
                 image = NULL;
             }
