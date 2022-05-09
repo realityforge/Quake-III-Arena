@@ -172,22 +172,22 @@ cleanup:
     return success;
 }
 
-void R_LoadPNG(const char* name, byte** pixel_data, uint32_t* image_width, uint32_t* image_height)
+void R_LoadPNG(const char* name, byte** pixel_data, uint32_t* width, uint32_t* height)
 {
     assert(NULL != name);
     assert(NULL != pixel_data);
-    assert(NULL != image_width);
-    assert(NULL != image_height);
+    assert(NULL != width);
+    assert(NULL != height);
 
     image_load_result_t result;
     if (qtrue == R_LoadImageNew(name, &result)) {
-        *image_width = result.width;
-        *image_height = result.height;
+        *width = result.width;
+        *height = result.height;
         *pixel_data = result.data;
     } else {
         *pixel_data = NULL;
-        *image_width = 0;
-        *image_height = 0;
+        *width = 0;
+        *height = 0;
     }
 }
 
