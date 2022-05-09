@@ -191,7 +191,7 @@ void R_LoadPNG(const char* name, byte** pixel_data, uint32_t* image_width, uint3
         COM_StripExtension(name, local_name, MAX_QPATH);
         Q_strcat(local_name, MAX_QPATH, PNG_EXTENSION);
         name_to_request = local_name;
-    } else {
+    } else  {
         name_to_request = name;
     }
 
