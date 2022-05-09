@@ -67,7 +67,7 @@ static void* spng_temp_hunk_malloc(const size_t size)
 }
 static void spng_temp_hunk_free(void* ptr)
 {
-    // The library frequently calls this with a NULL pointer so we need to guard against freeing a NULL
+    // The library frequently calls this with a NULL pointer, so we need to guard against freeing a NULL
     if (NULL != ptr) {
         ri.Hunk_FreeTempMemory(ptr);
     }
