@@ -99,7 +99,7 @@ static struct spng_alloc hunk_alloc = { .malloc_fn = spng_hunk_malloc, .realloc_
 // persist after the image has been written)
 UNUSED_VAR static struct spng_alloc temp_hunk_alloc = { .malloc_fn = spng_temp_hunk_malloc, .realloc_fn = spng_temp_hunk_realloc, .calloc_fn = spng_temp_hunk_calloc, .free_fn = spng_temp_hunk_free };
 
-static void r_spng_load_error(const char* name, const int result, const char* functionName)
+static void spng_load_error(const char* name, const int result, const char* functionName)
 {
     ri.Printf(PRINT_WARNING, "R_LoadPNG: Failed to load png file named %s due to %s error calling %s.\n", name, spng_strerror(result), functionName);
 }
@@ -126,30 +126,30 @@ qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long bu
 
     spng_ctx* ctx = spng_ctx_new2(&hunk_alloc, 0);
     if (NULL == ctx) {
-        r_spng_load_error(name, SPNG_EMEM, "spng_ctx_new2");
+        spng_load_error(name, SPNG_EMEM, "spng_ctx_new2");
         goto cleanup;
     } else if (SPNG_OK != (result = spng_set_image_limits(ctx, MAX_READ_PNG_WIDTH, MAX_READ_PNG_HEIGHT))) {
-        r_spng_load_error(name, result, "spng_set_image_limits");
+        spng_load_error(name, result, "spng_set_image_limits");
         goto cleanup;
     } else if (SPNG_OK != (result = spng_set_chunk_limits(ctx, MAX_CHUNK_SIZE, MAX_CACHE_SIZE))) {
-        r_spng_load_error(name, result, "spng_set_chunk_limits");
+        spng_load_error(name, result, "spng_set_chunk_limits");
         goto cleanup;
     } else if (SPNG_OK != (result = spng_set_png_buffer(ctx, buffer, (size_t)buffer_size))) {
-        r_spng_load_error(name, result, "spng_set_png_buffer");
+        spng_load_error(name, result, "spng_set_png_buffer");
         goto cleanup;
     } else if (SPNG_OK != (result = spng_get_ihdr(ctx, &ihdr))) {
-        r_spng_load_error(name, result, "spng_get_ihdr");
+        spng_load_error(name, result, "spng_get_ihdr");
         goto cleanup;
     } else if (SPNG_OK != spng_decoded_image_size(ctx, SPNG_FMT_RGBA8, &size)) {
-        r_spng_load_error(name, result, "spng_decoded_image_size");
+        spng_load_error(name, result, "spng_decoded_image_size");
         goto cleanup;
     } else {
         image = ri.Malloc(size);
         if (NULL == image) {
-            r_spng_load_error(name, result, "ri.Malloc");
+            spng_load_error(name, result, "ri.Malloc");
             goto cleanup;
         } else if (SPNG_OK != spng_decode_image(ctx, image, size, SPNG_FMT_RGBA8, SPNG_DECODE_TRNS | SPNG_DECODE_GAMMA)) {
-            r_spng_load_error(name, result, "spng_decode_image");
+            spng_load_error(name, result, "spng_decode_image");
             goto cleanup;
         } else {
             image_load_result->width = ihdr.width;
