@@ -173,7 +173,7 @@ void Sys_Shutdown(void)
     Com_Printf("------------------------\n");
 }
 
-void Sys_Error(const char* error, ...)
+NORETURN void Sys_Error(const char* error, ...)
 {
     va_list argptr;
     NSString* formattedString;
@@ -190,7 +190,7 @@ void Sys_Error(const char* error, ...)
     Sys_Quit();
 }
 
-void Sys_Quit(void)
+NORETURN void Sys_Quit(void)
 {
     Sys_Shutdown();
     [NSApp terminate:nil];

@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef QCOMMON_H
 #define QCOMMON_H
 
+#include "attributes.h"
 #include "q_shared.h"
 #include "cm_public.h"
 
@@ -638,8 +639,8 @@ void Com_BeginRedirect(char* buffer, int buffersize, void (*flush)(char*));
 void Com_EndRedirect(void);
 void QDECL Com_Printf(const char* fmt, ...);
 void QDECL Com_DPrintf(const char* fmt, ...);
-void QDECL Com_Error(int code, const char* fmt, ...);
-void Com_Quit_f(void);
+void QDECL Com_Error(int code, const char* fmt, ...) NORETURN;
+void Com_Quit_f(void) NORETURN;
 int Com_EventLoop(void);
 int Com_Milliseconds(void); // will be journaled properly
 unsigned Com_BlockChecksum(const void* buffer, int length);
@@ -875,8 +876,8 @@ void* Sys_GetUIAPI(void);
 void Sys_UnloadBotLib(void);
 void* Sys_GetBotLibAPI(void* parms);
 
-void QDECL Sys_Error(const char* error, ...);
-void Sys_Quit(void);
+void QDECL Sys_Error(const char* error, ...) NORETURN;
+void Sys_Quit(void) NORETURN;
 #ifndef DEDICATED
 char* Sys_GetClipboardData(void); // note that this isn't journaled...
 #endif

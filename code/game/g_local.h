@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
 // g_local.h -- local definitions for game module
 
+#include "../qcommon/attributes.h"
 #include "q_shared.h"
 #include "bg_public.h"
 #include "g_public.h"
@@ -746,7 +747,7 @@ extern vmCvar_t g_singlePlayer;
 extern vmCvar_t g_proxMineTimeout;
 
 void trap_Printf(const char* fmt);
-void trap_Error(const char* fmt);
+void trap_Error(const char* fmt) NORETURN;
 int trap_Milliseconds(void);
 int trap_Argc(void);
 void trap_Argv(int n, char* buffer, int bufferLength);

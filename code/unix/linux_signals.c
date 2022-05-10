@@ -29,9 +29,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 static qboolean signalcaught = qfalse;
 
-void Sys_Exit(int); // bk010104 - abstraction
+void Sys_Exit(int) NORETURN; // bk010104 - abstraction
 
-static void signal_handler(int sig) // bk010104 - replace this... (NOTE TTimo huh?)
+static NORETURN void signal_handler(int sig) // bk010104 - replace this... (NOTE TTimo huh?)
 {
     if (signalcaught) {
         printf("DOUBLE SIGNAL FAULT: Received signal %d, exiting...\n", sig);

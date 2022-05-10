@@ -48,7 +48,7 @@ Sys_Error
 Show the early console as an error dialog
 =============
 */
-void QDECL Sys_Error(const char* error, ...)
+NORETURN void QDECL Sys_Error(const char* error, ...)
 {
     va_list argptr;
     char text[4096];
@@ -78,7 +78,7 @@ void QDECL Sys_Error(const char* error, ...)
     exit(1);
 }
 
-void Sys_Quit(void)
+NORETURN void Sys_Quit(void)
 {
     timeEndPeriod(1);
     IN_Shutdown();

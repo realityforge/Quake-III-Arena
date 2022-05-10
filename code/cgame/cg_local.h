@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 //
+#include "../qcommon/attributes.h"
 #include "../game/q_shared.h"
 #include "tr_types.h"
 #include "../game/bg_public.h"
@@ -1165,7 +1166,7 @@ const char* CG_ConfigString(int index);
 const char* CG_Argv(int arg);
 
 void QDECL CG_Printf(const char* msg, ...);
-void QDECL CG_Error(const char* msg, ...);
+void QDECL CG_Error(const char* msg, ...) NORETURN;
 
 void CG_StartMusic(void);
 
@@ -1429,7 +1430,7 @@ void CG_TransitionPlayerState(playerState_t* ps, playerState_t* ops);
 void trap_Print(const char* fmt);
 
 // abort the game
-void trap_Error(const char* fmt);
+void trap_Error(const char* fmt) NORETURN;
 
 // milliseconds should only be used for performance tuning, never
 // for anything game related.  Get time from the CG_DrawActiveFrame parameter
