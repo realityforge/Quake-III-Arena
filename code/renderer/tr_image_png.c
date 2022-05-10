@@ -18,7 +18,7 @@
 
 // Some guesses at reasonable PNG limits. As we are potentially decoding untrusted files, we should
 // protect against failures due to excessive memory consumption. If a PNG exceeds these limits then it
-// will simply fail to be loaded. Each image will take at most (MAX_READ_PNG_WIDTH x MAX_READ_PNG_HEIGHT
+// will simply fail to be loaded. Each image will take at most (MAX_READ_PNG_WIDTH x MAX_READ_PNG_HEIGHT x 4 bytes)
 #define MAX_READ_PNG_WIDTH 2048
 #define MAX_READ_PNG_HEIGHT 2048
 
