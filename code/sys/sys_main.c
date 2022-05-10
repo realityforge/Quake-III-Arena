@@ -116,7 +116,7 @@ Sys_Exit
 Single exit point (regular exit or in case of error)
 =================
 */
-static __attribute__((noreturn)) void Sys_Exit(int exitCode)
+static NORETURN void Sys_Exit(int exitCode)
 {
 #ifndef DEDICATED
     SDL_Quit();
@@ -129,7 +129,7 @@ static __attribute__((noreturn)) void Sys_Exit(int exitCode)
     exit(exitCode);
 }
 
-void Sys_Quit(void)
+NORETURN void Sys_Quit(void)
 {
     Sys_Exit(0);
 }
@@ -210,7 +210,7 @@ void Sys_Print(const char* msg)
         fputs(msg, stderr);
 }
 
-void Sys_Error(const char* error, ...)
+NORETURN void Sys_Error(const char* error, ...)
 {
     va_list argptr;
     char string[1024];
@@ -366,7 +366,7 @@ void Sys_ParseArgs(int argc, char** argv)
 #endif
 #endif
 
-void Sys_SigHandler(int signal)
+NORETURN void Sys_SigHandler(int signal)
 {
     static qboolean signalcaught = qfalse;
 

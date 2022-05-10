@@ -51,6 +51,6 @@ char* Sys_ExtractBasedir(char* pwd);
 
 void Sys_PlatformInit(void);
 void Sys_PlatformExit(void);
-void Sys_SigHandler(int signal) __attribute__((noreturn));
+void Sys_SigHandler(int signal) NORETURN;
 void Sys_ErrorDialog(const char* error);
 void Sys_AnsiColorPrint(const char* msg);

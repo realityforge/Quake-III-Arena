@@ -60,7 +60,7 @@ void trap_Print(const char* string)
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-noreturn"
-void trap_Error(const char* string)
+NORETURN void trap_Error(const char* string)
 {
     VMTRACE(UI_ERROR, "string=%s", string);
     syscall(UI_ERROR, string);

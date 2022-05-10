@@ -48,12 +48,13 @@ void trap_Print(const char* text)
     syscall(G_PRINT, text);
 }
 
-void trap_Error(const char* text)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-noreturn"
+NORETURN void trap_Error(const char* text)
 {
     syscall(G_ERROR, text);
-    // shut up GCC warning about returning functions, because we know better
-    exit(1);
 }
+#pragma clang diagnostic pop
 
 int trap_Milliseconds(void)
 {

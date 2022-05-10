@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef QCOMMON_H
 #define QCOMMON_H
 
+#include "attributes.h"
 #include "q_shared.h"
 #include "cm_public.h"
 
@@ -681,8 +682,8 @@ void Com_BeginRedirect(char* buffer, int buffersize, void (*flush)(char*));
 void Com_EndRedirect(void);
 void QDECL Com_Printf(const char* fmt, ...) __attribute__((format(printf, 1, 2)));
 void QDECL Com_DPrintf(const char* fmt, ...) __attribute__((format(printf, 1, 2)));
-void QDECL Com_Error(int code, const char* fmt, ...) __attribute__((noreturn, format(printf, 2, 3)));
-void Com_Quit_f(void) __attribute__((noreturn));
+void QDECL Com_Error(int code, const char* fmt, ...) NORETURN __attribute__((format(printf, 2, 3)));
+void Com_Quit_f(void) NORETURN;
 void Com_GameRestart(int checksumFeed, qboolean disconnect);
 
 int Com_Milliseconds(void); // will be journaled properly
@@ -886,8 +887,8 @@ void Sys_UnloadDll(void* dllHandle);
 
 qboolean Sys_DllExtension(const char* name);
 
-void QDECL Sys_Error(const char* error, ...) __attribute__((noreturn, format(printf, 1, 2)));
-void Sys_Quit(void) __attribute__((noreturn));
+void QDECL Sys_Error(const char* error, ...) NORETURN __attribute__((format(printf, 1, 2)));
+void Sys_Quit(void) NORETURN;
 #ifndef DEDICATED
 char* Sys_GetClipboardData(void); // note that this isn't journaled...
 #endif

@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef UI_LOCAL_H
 #define UI_LOCAL_H
 
+#include "../qcommon/attributes.h"
 #include "../qcommon/q_shared.h"
 #include "../qcommon/cvar_common.h"
 #include "../renderer/tr_types.h"
@@ -840,7 +841,7 @@ void UI_SPSkillMenu_Cache(void);
 // ui_syscalls.c
 //
 void trap_Print(const char* string);
-void trap_Error(const char* string) __attribute__((noreturn));
+void trap_Error(const char* string) NORETURN;
 int trap_Milliseconds(void);
 void trap_Cvar_Register(vmCvar_t* vmCvar, const char* varName, const char* defaultValue, int flags);
 void trap_Cvar_Update(vmCvar_t* vmCvar);

@@ -10,7 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("//build_defs:rules.bzl", "ENGINE_DEFINES", "SERVER_ONLY_ENGINE_DEFINES")
+load("//build_defs:rules.bzl", "ENGINE_DEFINES", "FULL_WARNINGS", "SERVER_ONLY_ENGINE_DEFINES")
 
 # TODO: Separate out headers for cvars to here? Actually lets create a much better console var library that is probably inspired by the work in q2java modernized
 cc_library(
@@ -216,6 +216,13 @@ cc_library(
 )
 
 cc_library(
+    name = "base",
+    hdrs = ["attributes.h"],
+    copts = FULL_WARNINGS,
+    visibility = ["//code/renderer:__pkg__"],
+)
+
+cc_library(
     name = "qcommon",
     hdrs = [
         "cm_public.h",
@@ -233,6 +240,7 @@ cc_library(
         "@zlib//:__pkg__",
     ],
     deps = [
+        ":base",
         ":qfiles",
         ":shared_api",
     ],

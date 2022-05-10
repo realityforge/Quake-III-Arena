@@ -19,7 +19,7 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-//
+#include "../qcommon/attributes.h"
 #include "../qcommon/q_shared.h"
 #include "../qcommon/cvar_common.h"
 #include "../renderer/tr_types.h"
@@ -1173,7 +1173,7 @@ const char* CG_ConfigString(int index);
 const char* CG_Argv(int arg);
 
 void QDECL CG_Printf(const char* msg, ...) __attribute__((format(printf, 1, 2)));
-void QDECL CG_Error(const char* msg, ...) __attribute__((noreturn, format(printf, 1, 2)));
+void QDECL CG_Error(const char* msg, ...) NORETURN __attribute__((format(printf, 1, 2)));
 
 void CG_StartMusic(void);
 
@@ -1438,7 +1438,7 @@ void CG_TransitionPlayerState(playerState_t* ps, playerState_t* ops);
 void trap_Print(const char* fmt);
 
 // abort the game
-void trap_Error(const char* fmt) __attribute__((noreturn));
+void trap_Error(const char* fmt) NORETURN;
 
 // milliseconds should only be used for performance tuning, never
 // for anything game related.  Get time from the CG_DrawActiveFrame parameter
