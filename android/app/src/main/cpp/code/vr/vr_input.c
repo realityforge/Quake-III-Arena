@@ -228,7 +228,6 @@ void QuatToYawPitchRoll(XrQuaternionf q, vec3_t rotation, vec3_t out) {
 //0 = left, 1 = right
 float vibration_channel_duration[2] = {0.0f, 0.0f};
 float vibration_channel_intensity[2] = {0.0f, 0.0f};
-qboolean vibration_stopped[2] = {qtrue, qtrue};
 
 void VR_Vibrate( int duration, int chan, float intensity )
 {
@@ -272,7 +271,6 @@ static void VR_processHaptics() {
             hapticActionInfo.next = NULL;
             hapticActionInfo.action = i == 0 ? vibrateLeftFeedback : vibrateRightFeedback;
             OXR(xrApplyHapticFeedback(VR_GetEngine()->appState.Session, &hapticActionInfo, (const XrHapticBaseHeader*)&vibration));
-            vibration_stopped[i] = qfalse;
 
             if (vibration_channel_duration[i] != -1.0f) {
                 vibration_channel_duration[i] -= frametime;
@@ -282,14 +280,13 @@ static void VR_processHaptics() {
                     vibration_channel_intensity[i] = 0.0f;
                 }
             }
-        } else if (!vibration_stopped[i]) {
+        } else {
             // Stop haptics
             XrHapticActionInfo hapticActionInfo = {};
             hapticActionInfo.type = XR_TYPE_HAPTIC_ACTION_INFO;
             hapticActionInfo.next = NULL;
             hapticActionInfo.action = i == 0 ? vibrateLeftFeedback : vibrateRightFeedback;
             OXR(xrStopHapticFeedback(VR_GetEngine()->appState.Session, &hapticActionInfo));
-            vibration_stopped[i] = qtrue;
         }
     }
 }
