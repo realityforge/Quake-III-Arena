@@ -128,8 +128,6 @@ Makefile.local:
   USE_INTERNAL_LIBS    - build internal libraries instead of dynamically
                          linking against system libraries; this just sets
                          the default for USE_INTERNAL_* etc.
-                         and USE_LOCAL_HEADERS
-  USE_LOCAL_HEADERS    - use headers local to ioq3 instead of system ones
   DEBUG_CFLAGS         - C compiler flags to use for building debug version
   TEMPDIR              - specify user defined directory for temp files
 ```

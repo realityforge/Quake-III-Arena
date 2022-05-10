@@ -121,11 +121,6 @@ build --enable_platform_specific_config
 # default to optimizing compilation
 build --compilation_mode=opt
 
-# Use local headers for build in Bazel
-# In the future when the Makefile build has been removed, then this define can be removed from the source
-# and here
-build --copt -DUSE_LOCAL_HEADERS
-
 # If a command fails, print out the full command line.
 build --verbose_failures
 
