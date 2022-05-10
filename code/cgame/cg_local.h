@@ -19,7 +19,6 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-//
 #include "../qcommon/attributes.h"
 #include "../game/q_shared.h"
 #include "tr_types.h"
