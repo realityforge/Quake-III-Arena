@@ -211,7 +211,7 @@ static void UI_SPLevelMenu_SetMenuArena(int n, int level, const char* arenaInfo)
         levelMenuInfo.levelScores[n] = 8;
     }
 
-    Com_sprintf(levelMenuInfo.levelPicNames[n], sizeof(levelMenuInfo.levelPicNames[n]), "levelshots/%s.png", map);
+    Com_sprintf(levelMenuInfo.levelPicNames[n], sizeof(levelMenuInfo.levelPicNames[n]), "levelshots/%s", map);
     if (!trap_R_RegisterShaderNoMip(levelMenuInfo.levelPicNames[n])) {
         strcpy(levelMenuInfo.levelPicNames[n], ART_MAP_UNKNOWN);
     }
