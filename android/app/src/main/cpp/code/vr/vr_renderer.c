@@ -393,7 +393,7 @@ void VR_DrawFrame( engine_t* engine ) {
     projectionInfo.type = XR_TYPE_VIEW_LOCATE_INFO;
     projectionInfo.viewConfigurationType = engine->appState.ViewportConfig.viewConfigurationType;
     projectionInfo.displayTime = frameState.predictedDisplayTime;
-    projectionInfo.space = engine->appState.HeadSpace;
+    projectionInfo.space = engine->appState.CurrentSpace;
 
     XrViewState viewState = {XR_TYPE_VIEW_STATE, NULL};
 
@@ -410,11 +410,9 @@ void VR_DrawFrame( engine_t* engine ) {
     //
 
     XrFovf fov = {};
-    XrPosef viewTransform[2];
+    XrPosef invViewTransform[2];
     for (int eye = 0; eye < ovrMaxNumEyes; eye++) {
-        XrPosef xfHeadFromEye = projections[eye].pose;
-        XrPosef xfStageFromEye = XrPosef_Multiply(xfStageFromHead, xfHeadFromEye);
-        viewTransform[eye] = XrPosef_Inverse(xfStageFromEye);
+        invViewTransform[eye] = projections[eye].pose;
 
         fov.angleLeft += projections[eye].fov.angleLeft / 2.0f;
         fov.angleRight += projections[eye].fov.angleRight / 2.0f;
@@ -467,7 +465,7 @@ void VR_DrawFrame( engine_t* engine ) {
 
             memset(&projection_layer_elements[eye], 0, sizeof(XrCompositionLayerProjectionView));
             projection_layer_elements[eye].type = XR_TYPE_COMPOSITION_LAYER_PROJECTION_VIEW;
-            projection_layer_elements[eye].pose = XrPosef_Inverse(viewTransform[eye]);
+            projection_layer_elements[eye].pose = invViewTransform[eye];
             projection_layer_elements[eye].fov = fov;
 
             memset(&projection_layer_elements[eye].subImage, 0, sizeof(XrSwapchainSubImage));
