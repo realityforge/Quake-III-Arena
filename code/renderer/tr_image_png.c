@@ -105,16 +105,16 @@ static void spng_load_error(const char* name, const int result, const char* func
 }
 
 /**
- * Attempt to decode an image in PNG format from the specified buffer and return the results of encoding in image_load_result.
- * If the image was successfully decoded then the caller is responsible for releasing image data referenced by image_load_result.
+ * Attempt to decode an image in PNG format from the specified buffer and return the results of encoding in output struct.
+ * If the image was successfully decoded then the caller is responsible for releasing image data referenced by output struct.
  *
  * @param name the name of the file that the buffer was loaded from. Used in Error reporting.
  * @param buffer the reference to the buffer.
  * @param buffer_size the size of the buffer in bytes.
- * @param image_load_result the
+ * @param output the structure to populate with decided image details
  * @return qtrue if image was successfully decoded, qfalse if the image failed to be decoded.
  */
-qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* image_load_result)
+qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* output)
 {
     struct spng_ihdr ihdr;
     void* image = NULL;
@@ -122,7 +122,7 @@ qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long bu
     int result;
     qboolean success = qfalse;
 
-    assert(NULL != image_load_result);
+    assert(NULL != output);
 
     spng_ctx* ctx = spng_ctx_new2(&hunk_alloc, 0);
     if (NULL == ctx) {
@@ -152,9 +152,9 @@ qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long bu
             spng_load_error(name, result, "spng_decode_image");
             goto cleanup;
         } else {
-            image_load_result->width = ihdr.width;
-            image_load_result->height = ihdr.height;
-            image_load_result->data = image;
+            output->width = ihdr.width;
+            output->height = ihdr.height;
+            output->data = image;
 
             // Clear image so it does not deallocated in cleanup phase
             image = NULL;
