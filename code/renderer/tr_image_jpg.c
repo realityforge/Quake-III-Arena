@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include <setjmp.h>
 
+#include "../qcommon/attributes.h"
 #include "tr_common.h"
 
 /*
@@ -47,7 +48,7 @@ typedef struct q_jpeg_error_mgr_s {
     jmp_buf setjmp_buffer; /* for return to caller */
 } q_jpeg_error_mgr_t;
 
-__attribute__((noreturn)) static void R_JPGErrorExit(j_common_ptr cinfo)
+static NORETURN void R_JPGErrorExit(j_common_ptr cinfo)
 {
     char buffer[JMSG_LENGTH_MAX];
 
