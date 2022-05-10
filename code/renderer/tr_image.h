@@ -24,6 +24,6 @@ typedef struct image_load_result_s {
 } image_load_result_t;
 
 qboolean R_LoadImageNew(const char* name, image_load_result_t* result);
-qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* image_load_result);
+qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* output);
 
 #endif
