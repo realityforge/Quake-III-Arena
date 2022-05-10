@@ -384,11 +384,6 @@ void VR_DrawFrame( engine_t* engine ) {
     beginFrameDesc.next = NULL;
     OXR(xrBeginFrame(engine->appState.Session, &beginFrameDesc));
 
-    // Update HMD and controllers
-    XrPosef xfStageFromHead = IN_VRUpdateHMD( frameState.predictedDisplayTime );
-    IN_VRSyncActions();
-    IN_VRUpdateControllers( frameState.predictedDisplayTime );
-
     XrViewLocateInfo projectionInfo = {};
     projectionInfo.type = XR_TYPE_VIEW_LOCATE_INFO;
     projectionInfo.viewConfigurationType = engine->appState.ViewportConfig.viewConfigurationType;
@@ -421,6 +416,11 @@ void VR_DrawFrame( engine_t* engine ) {
     }
     vr.fov_x = (fabs(fov.angleLeft) + fabs(fov.angleRight)) * 180.0f / M_PI;
     vr.fov_y = (fabs(fov.angleUp) + fabs(fov.angleDown)) * 180.0f / M_PI;
+
+    // Update HMD and controllers
+    IN_VRUpdateHMD( invViewTransform[0] );
+    IN_VRSyncActions();
+    IN_VRUpdateControllers( frameState.predictedDisplayTime );
 
     //Projection used for drawing HUD models etc
     float hudScale = M_PI * 15.0f / 180.0f;
@@ -505,9 +505,9 @@ void VR_DrawFrame( engine_t* engine ) {
         cylinder_layer.subImage.imageArrayIndex = 0;
         const XrVector3f axis = {0.0f, 1.0f, 0.0f};
         XrVector3f pos = {
-                xfStageFromHead.position.x - sin(radians(vr.menuYaw)) * 4.0f,
+                invViewTransform[0].position.x - sin(radians(vr.menuYaw)) * 4.0f,
                 -0.25f,
-                xfStageFromHead.position.z - cos(radians(vr.menuYaw)) * 4.0f
+                invViewTransform[0].position.z - cos(radians(vr.menuYaw)) * 4.0f
         };
         cylinder_layer.pose.orientation = XrQuaternionf_CreateFromVectorAngle(axis, radians(vr.menuYaw));
         cylinder_layer.pose.position = pos;
