@@ -6,11 +6,11 @@ textures/base_floor/concfloor_rain
 		deformVertexes normal 1 15
 
 		{
-			map textures/base_floor/concfloor_rain.png
+			map textures/base_floor/concfloor_rain
                         rgbGen identity
                 }
                 {
-			map textures/liquids/pj_e3_reflection2b.png
+			map textures/liquids/pj_e3_reflection2b
                         Blendfunc add
 			tcgen environment
 			rgbgen wave sin .3 0 0 0

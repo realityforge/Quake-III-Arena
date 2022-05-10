@@ -8,7 +8,7 @@ textures/base_support/x_support4
 	cull none
         nopicmip
 	{
-		map textures/base_support/x_support4.png
+		map textures/base_support/x_support4
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -30,7 +30,7 @@ textures/base_support/x_support3
 	cull none
         nopicmip
 	{
-		map textures/base_support/x_support3.png
+		map textures/base_support/x_support3
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -48,12 +48,12 @@ textures/base_support/support1shiny
 {
 
         {
-                map textures/effects/tinfx.png
+                map textures/effects/tinfx
                 tcGen environment
                 rgbGen identity
 	}
         {
-		map textures/base_support/support1shiny.png
+		map textures/base_support/support1shiny
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -71,20 +71,20 @@ textures/base_support/support1rust
 		map $lightmap
 	}
 	{
-		map textures/base_support/support1rust.png
+		map textures/base_support/support1rust
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
 	}
         {
-		map textures/base_trim/tinfx.png
+		map textures/base_trim/tinfx
                 tcgen environment
 		blendFunc GL_ONE GL_ONE
 		rgbGen identity
 	}
 
         {
-		map textures/base_support/support1rust.png
+		map textures/base_support/support1rust
 		//blendFunc GL_ONE GL_ONE
                 blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
@@ -93,13 +93,13 @@ textures/base_support/support1rust
 
 textures/base_support/support2rust
 {
-	qer_editorimage textures/base_support/support1rust.png
+	qer_editorimage textures/base_support/support1rust
         {
 		rgbGen identity
 		map $lightmap
 	}
 	{
-		map textures/base_support/support1rust.png
+		map textures/base_support/support1rust
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
@@ -114,7 +114,7 @@ textures/base_support/grate1_3
 	}
 
 	{
-		map textures/base_support/grate1_3.png
+		map textures/base_support/grate1_3
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		alphaGen lightingSpecular
 		rgbGen identity
@@ -127,12 +127,12 @@ textures/base_support/shinysupport2
 {
 
 	{
-		map textures/base_wall/chrome_env.png
+		map textures/base_wall/chrome_env
 		rgbgen identity
 	}
 
 	{
-		map textures/base_support/shinysupport2.png
+		map textures/base_support/shinysupport2
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		alphaGen lightingSpecular
 		rgbGen identity
@@ -159,7 +159,7 @@ textures/base_support/shinysupport1
 
 
 	{
-		map textures/base_support/shinysupport1.png
+		map textures/base_support/shinysupport1
 		blendFunc GL_ONE_MINUS_SRC_ALPHA GL_SRC_ALPHA
 		rgbGen identity
 	}
@@ -183,7 +183,7 @@ textures/base_support/x_support
 	cull none
         nopicmip
 	{
-		map textures/base_support/x_support.png
+		map textures/base_support/x_support
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -206,7 +206,7 @@ textures/base_support/z_support
 	cull none
         nopicmip
 	{
-		map textures/base_support/z_support.png
+		map textures/base_support/z_support
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -230,7 +230,7 @@ textures/base_support/x_support2
 	cull none
         nopicmip
 	{
-		map textures/base_support/x_support2.png
+		map textures/base_support/x_support2
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -259,7 +259,7 @@ textures/base_support/pj_metal14_1
 		rgbGen identity
 	}
 	{
-		map textures/base_support/metal14_1.png
+		map textures/base_support/metal14_1
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
@@ -275,7 +275,7 @@ textures/base_support/cable_trans
 
 	}
 	{
-		map textures/base_support/cable_trans.png
+		map textures/base_support/cable_trans
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 

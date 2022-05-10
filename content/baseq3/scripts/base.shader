@@ -6,12 +6,12 @@ textures/base/q1met_redpad
 		rgbGen identity
 	}
 	{
-		map textures/base/q1met_redpad.png
+		map textures/base/q1met_redpad
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/base/q1met_redpad.blend.png
+		map textures/base/q1met_redpad.blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
@@ -20,7 +20,7 @@ textures/base/q1met_redpad
 textures/base/bluegoal
 {
 	{
-		map textures/base/bluegoal.png
+		map textures/base/bluegoal
 		tcGen environment
 		blendfunc GL_ONE GL_ONE
 		tcMod turb 0 0.25 0 0.05
@@ -29,7 +29,7 @@ textures/base/bluegoal
 textures/base/redgoal
 {
 	{
-		map textures/base/redgoal.png
+		map textures/base/redgoal
 		tcGen environment
 		blendfunc GL_ONE GL_ONE
 		tcMod turb 0 0.25 0 0.05
@@ -44,12 +44,12 @@ textures/base/comp_panel
 	q3map_surfacelight 500
 
 	{
-		map textures/base/comp_panel.png
+		map textures/base/comp_panel
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 
 	{
-		map textures/base/comp_panel.blend.png
+		map textures/base/comp_panel.blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -63,7 +63,7 @@ textures/base/ceil1_8
 		rgbGen identity
 	}
 	{
-		map textures/base/ceil1_8.png
+		map textures/base/ceil1_8
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
@@ -78,7 +78,7 @@ textures/base/ceil1_3
 		rgbGen identity
 	}
 	{
-		map textures/base/ceil1_3.png
+		map textures/base/ceil1_3
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
@@ -93,7 +93,7 @@ textures/base/ceil1_4
 		rgbGen identity
 	}
 	{
-		map textures/base/ceil1_4.png
+		map textures/base/ceil1_4
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
@@ -107,12 +107,12 @@ textures/base/border11light
 		rgbGen identity
 	}
 	{
-		map textures/base/border11light.png
+		map textures/base/border11light
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/base/border11light.blend.png
+		map textures/base/border11light.blend
 		rgbGen wave sin 0.5 0.5 0 .2
 		blendfunc GL_ONE GL_ONE
 	}
@@ -127,16 +127,16 @@ textures/base/electricwall
 		rgbGen identity
 	}
 	{
-		map textures/organics/wire02a_f.png
+		map textures/organics/wire02a_f
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/organics/wire02a_f.blend.png
+		map textures/organics/wire02a_f.blend
 		blendFunc GL_ONE GL_ONE
 	}
 	{
-		map textures/base/electric.blend.png
+		map textures/base/electric.blend
 		tcMod scroll 1 1 10 20
 		rgbGen wave sin 1 2 0 1
 		blendfunc GL_ONE GL_ONE

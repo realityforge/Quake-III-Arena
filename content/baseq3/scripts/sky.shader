@@ -10,18 +10,18 @@ textures/skies/xtoxicsky_q3ctf3
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
-	qer_editorimage textures/skies/toxicbluesky.png
+	qer_editorimage textures/skies/toxicbluesky
 	q3map_surfacelight 500
 	q3map_sun	1 1 0.5 150	30 60
 	skyparms - 512 -
 	{
-		map textures/skies/bluedimclouds.png
+		map textures/skies/bluedimclouds
 		tcMod scale 3 2
 		tcMod scroll 0.15 0.15
 		depthWrite
 	}
 	{
-		map textures/skies/topclouds.png
+		map textures/skies/topclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
@@ -37,13 +37,13 @@ textures/skies/skybox
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
-        q3map_lightimage textures/skies/stars.png
+        q3map_lightimage textures/skies/stars
 	q3map_sun	1 1 1 100 -58 58
 	q3map_surfacelight 400
 
         skyparms env/space1 - -
        {
-		map textures/skies/killsky_2.png
+		map textures/skies/killsky_2
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.06
 		tcMod scale 3 2
@@ -66,20 +66,20 @@ textures/skies/xtoxicskytim_q3dm5
 	q3map_sun	.5 .6 .8 150 30 60
 
 
-	qer_editorimage textures/skies/toxicbluesky.png
+	qer_editorimage textures/skies/toxicbluesky
 
 	skyparms - 512 -
 //	skyparms - 512 full
 
 	//cloudparms 512 full
 	{
-		map textures/skies/bluedimclouds.png
+		map textures/skies/bluedimclouds
 		tcMod scale 3 2
 		tcMod scroll 0.15 0.15
 		depthWrite
 	}
 	{
-		map textures/skies/topclouds.png
+		map textures/skies/topclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
@@ -88,7 +88,7 @@ textures/skies/xtoxicskytim_q3dm5
 
 textures/skies/blacksky
 {
-	qer_editorimage textures/skies/blacksky.png
+	qer_editorimage textures/skies/blacksky
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
@@ -99,13 +99,13 @@ textures/skies/blacksky
 	q3map_lightsubdivide 512
 	q3map_sun	1 1 1 32	90 90
 	{
-		map	gfx/colors/black.png
+		map	gfx/colors/black
 	}
 }
 
 textures/skies/xblacksky
 {
-	qer_editorimage textures/skies/blacksky.png
+	qer_editorimage textures/skies/blacksky
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
@@ -116,14 +116,14 @@ textures/skies/xblacksky
 	q3map_lightsubdivide 512
 	q3map_sun	1 1 1 32	45 90
 	{
-		map	gfx/colors/black.png
+		map	gfx/colors/black
 	}
 }
 
 
 textures/skies/xblacksky_dm7
 {
-	qer_editorimage textures/skies/blacksky.png
+	qer_editorimage textures/skies/blacksky
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
@@ -134,13 +134,13 @@ textures/skies/xblacksky_dm7
 //	q3map_lightsubdivide 512
 //	q3map_sun	1 1 1 32	45 90
 	{
-		map	gfx/colors/black.png
+		map	gfx/colors/black
 	}
 }
 
 textures/skies/stars_arena7
 {
-	qer_editorimage textures/skies/stars.png
+	qer_editorimage textures/skies/stars
 
 	surfaceparm sky
 	surfaceparm noimpact
@@ -154,7 +154,7 @@ textures/skies/stars_arena7
 
 textures/skies/killsky
 {
-	qer_editorimage textures/skies/stars.png
+	qer_editorimage textures/skies/stars
 	surfaceparm noimpact
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -168,12 +168,12 @@ textures/skies/killsky
 	//lightning
 
 	{
-		map textures/skies/killsky_1.png
+		map textures/skies/killsky_1
 		tcMod scroll 0.05 .1
 		tcMod scale 2 2
 	}
 	{
-		map textures/skies/killsky_2.png
+		map textures/skies/killsky_2
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.06
 		tcMod scale 3 2
@@ -182,7 +182,7 @@ textures/skies/killsky
 
 textures/skies/tim_km2
 {
-	qer_editorimage textures/skies/stars_red.png
+	qer_editorimage textures/skies/stars_red
 	surfaceparm noimpact
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -198,13 +198,13 @@ textures/skies/tim_km2
 	//lightning
 
 	{
-		map textures/skies/killsky_1.png
+		map textures/skies/killsky_1
 		tcMod scroll 0.05 .1
 		tcMod scale 2 2
 		depthWrite
 	}
 	{
-		map textures/skies/killsky_2.png
+		map textures/skies/killsky_2
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.06
 		tcMod scale 3 2
@@ -213,7 +213,7 @@ textures/skies/tim_km2
 
 textures/skies/tim_hell
 {
-	qer_editorimage textures/skies/stars_red.png
+	qer_editorimage textures/skies/stars_red
 	surfaceparm noimpact
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -230,13 +230,13 @@ textures/skies/tim_hell
 	//lightning
 
 	{
-		map textures/skies/killsky_1.png
+		map textures/skies/killsky_1
 		tcMod scroll 0.05 .1
 		tcMod scale 2 2
 		depthWrite
 	}
 	{
-		map textures/skies/killsky_2.png
+		map textures/skies/killsky_2
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.06
 		tcMod scale 3 2
@@ -245,7 +245,7 @@ textures/skies/tim_hell
 
 textures/skies/tim_dm3_red
 {
-	qer_editorimage textures/skies/stars_red.png
+	qer_editorimage textures/skies/stars_red
 	surfaceparm noimpact
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -261,13 +261,13 @@ textures/skies/tim_dm3_red
 	//lightning
 
 	{
-		map textures/skies/killsky_1.png
+		map textures/skies/killsky_1
 		tcMod scroll 0.05 .1
 		tcMod scale 2 2
 		depthWrite
 	}
 	{
-		map textures/skies/killsky_2.png
+		map textures/skies/killsky_2
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.06
 		tcMod scale 3 2
@@ -276,7 +276,7 @@ textures/skies/tim_dm3_red
 
 textures/skies/tim_dm14
 {
-	qer_editorimage textures/skies/stars.png
+	qer_editorimage textures/skies/stars
 	surfaceparm noimpact
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -290,13 +290,13 @@ textures/skies/tim_dm14
 	//lightning
 
 	{
-		map textures/skies/killsky_1.png
+		map textures/skies/killsky_1
 		tcMod scroll 0.05 .1
 		tcMod scale 2 2
 		depthWrite
 	}
 	{
-		map textures/skies/killsky_2.png
+		map textures/skies/killsky_2
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.06
 		tcMod scale 3 2
@@ -306,7 +306,7 @@ textures/skies/tim_dm14
 textures/skies/tim_dm14red
 // test sky for q3dm15b
 {
-	qer_editorimage textures/skies/stars_red.png
+	qer_editorimage textures/skies/stars_red
 	surfaceparm noimpact
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -319,13 +319,13 @@ textures/skies/tim_dm14red
 	skyparms - 512 -
 
 	{
-		map textures/skies/killsky_1.png
+		map textures/skies/killsky_1
 		tcMod scroll 0.05 .1
 		tcMod scale 2 2
 		depthWrite
 	}
 	{
-		map textures/skies/killsky_2.png
+		map textures/skies/killsky_2
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.06
 		tcMod scale 3 2
@@ -344,13 +344,13 @@ textures/skies/hellsky
 	skyparms - 512 -
 
 	{
-		map textures/skies/dimclouds.png
+		map textures/skies/dimclouds
 		tcMod scroll 0.05 0
 		tcMod scale 2 2
 		depthWrite
 	}
 	//{
-	//	map textures/skies/dimclouds.png
+	//	map textures/skies/dimclouds
 	//	blendfunc GL_ONE GL_ONE
 	//	tcMod scroll 0.05 0.06
 		//tcMod scale 1 1
@@ -371,13 +371,13 @@ textures/skies/toxicsky
 	skyparms - 512 -
 
 	{
-		map textures/skies/inteldimclouds.png
+		map textures/skies/inteldimclouds
 		tcMod scroll 0.1 0.1
 		tcMod scale 3 2
 		depthWrite
 	}
 	{
-		map textures/skies/intelredclouds.png
+		map textures/skies/intelredclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
@@ -390,7 +390,7 @@ textures/skies/xtoxicsky_dm3
 	surfaceparm nolightmap
 	surfaceparm sky
 
-	qer_editorimage textures/skies/toxicsky.png
+	qer_editorimage textures/skies/toxicsky
 
 	q3map_surfacelight 400
 	q3map_sun	1 1 0.5 150	30 60
@@ -398,13 +398,13 @@ textures/skies/xtoxicsky_dm3
 	skyparms - 512 -
 
 	{
-		map textures/skies/inteldimclouds.png
+		map textures/skies/inteldimclouds
 		tcMod scroll 0.1 0.1
 		tcMod scale 3 2
 		depthWrite
 	}
 	{
-		map textures/skies/intelredclouds.png
+		map textures/skies/intelredclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
@@ -419,20 +419,20 @@ textures/skies/xtoxicsky_dm9
 	surfaceparm nolightmap
 	surfaceparm sky
 
-	qer_editorimage textures/skies/toxicsky.png
+	qer_editorimage textures/skies/toxicsky
 
 	q3map_surfacelight 400
 	q3map_sun	1 1 0.5 150	30 60
 	skyparms - 512 -
 
 	{
-		map textures/skies/inteldimclouds.png
+		map textures/skies/inteldimclouds
 		tcMod scroll 0.1 0.1
 		tcMod scale 3 2
 		depthWrite
 	}
 	{
-		map textures/skies/intelredclouds.png
+		map textures/skies/intelredclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
@@ -445,20 +445,20 @@ textures/skies/xtoxicsky_ctf
 	surfaceparm nolightmap
 	surfaceparm sky
 
-	qer_editorimage textures/skies/toxicsky.png
+	qer_editorimage textures/skies/toxicsky
 
 	q3map_surfacelight 500
 	q3map_sun	1 1 0.5 150	30 60
 	skyparms - 512 -
 
 	{
-		map textures/skies/inteldimclouds.png
+		map textures/skies/inteldimclouds
 		tcMod scroll 0.1 0.1
 		tcMod scale 3 2
 		depthWrite
 	}
 	{
-		map textures/skies/intelredclouds.png
+		map textures/skies/intelredclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
@@ -471,7 +471,7 @@ textures/skies/xtoxicsky_tourney
 	surfaceparm nolightmap
 	surfaceparm sky
 
-	qer_editorimage textures/skies/toxicsky.png
+	qer_editorimage textures/skies/toxicsky
 
 	q3map_surfacelight 495
 //	q3map_sun	1 1 0.5 150	55 60
@@ -479,13 +479,13 @@ textures/skies/xtoxicsky_tourney
 	skyparms - 512 -
 
 	{
-		map textures/skies/inteldimclouds.png
+		map textures/skies/inteldimclouds
 		tcMod scroll 0.1 0.1
 		tcMod scale 3 2
 		depthWrite
 	}
 	{
-		map textures/skies/intelredclouds.png
+		map textures/skies/intelredclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
@@ -501,7 +501,7 @@ textures/skies/nightsky_xian_dm1
 	q3map_surfacelight 300
 	q3map_sun 1 1 1 100 -41 58
 
-	qer_editorimage textures/skies/nightsky_nocloud.png
+	qer_editorimage textures/skies/nightsky_nocloud
 //        skyparms env/space1 - -
 
 
@@ -517,7 +517,7 @@ textures/skies/nightsky_xian_dm2
 	q3map_surfacelight 200
 	q3map_sun 1 1 1 100 -41 58
 
-	qer_editorimage textures/skies/nightsky_nocloud.png
+	qer_editorimage textures/skies/nightsky_nocloud
 
 	sky	env/xnight2
 }
@@ -531,14 +531,14 @@ textures/skies/nightsky_xian_dm3
 	q3map_surfacelight 500
 	q3map_sun 1 1 1 100 -41 58
 
-	qer_editorimage textures/skies/nightsky_nocloud.png
+	qer_editorimage textures/skies/nightsky_nocloud
 
 	sky	env/xnight2
 }
 
 textures/skies/nightsky_xian_dm15
 {
-	qer_editorimage textures/skies/nightsky_nocloud.png
+	qer_editorimage textures/skies/nightsky_nocloud
 	surfaceparm nolightmap
 	surfaceparm sky
 	surfaceparm noimpact
@@ -556,7 +556,7 @@ textures/skies/nightsky_xian_dm15
 
 textures/skies/xblacksky
 {
-	qer_editorimage textures/skies/blacksky.png
+	qer_editorimage textures/skies/blacksky
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
@@ -575,19 +575,19 @@ textures/skies/xtoxicsky_dm4
 	q3map_surfacelight 80
 	q3map_sun	1 1 0.95 50 40 90
 
-	qer_editorimage textures/skies/toxicsky.png
+	qer_editorimage textures/skies/toxicsky
 
 	//sky env/hell2
 	cloudparms 512 full
 	//lightning
 	{
-		map textures/skies/inteldimclouds.png
+		map textures/skies/inteldimclouds
 		tcMod scroll 0.1 0.1
 		tcMod scale 3 2
 		depthWrite
 	}
 	{
-		map textures/skies/intelredclouds.png
+		map textures/skies/intelredclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
@@ -607,17 +607,17 @@ textures/skies/xtoxicsky_dm14
 	q3map_sun	1 1 0.85 100	90 90
 
 
-	qer_editorimage textures/skies/toxicsky.png
+	qer_editorimage textures/skies/toxicsky
 
 	skyparms - 512 -
 	{
-		map textures/skies/inteldimclouds.png
+		map textures/skies/inteldimclouds
 		tcMod scroll 0.1 0.1
 		tcMod scale 3 2
 		depthWrite
 	}
 	{
-		map textures/skies/intelredclouds.png
+		map textures/skies/intelredclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
@@ -634,19 +634,19 @@ textures/skies/xtoxicsky_90_60
 	q3map_surfacelight 80
 //	q3map_sun	1 1 0.5 100	75 45
 	q3map_sun	1 1 0.5 200	160 70
-	qer_editorimage textures/skies/toxicsky.png
+	qer_editorimage textures/skies/toxicsky
 
 	//sky env/hell2
 	cloudparms 512 full
 	//lightning
 	{
-		map textures/skies/inteldimclouds.png
+		map textures/skies/inteldimclouds
 		tcMod scroll 0.1 0.1
 		tcMod scale 3 2
 		depthWrite
 	}
 	{
-		map textures/skies/intelredclouds.png
+		map textures/skies/intelredclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
@@ -655,7 +655,7 @@ textures/skies/xtoxicsky_90_60
 
 textures/skies/space_holder
 {
-	qer_editorimage textures/skies/space_holder.png
+	qer_editorimage textures/skies/space_holder
 	//surfaceparm sky
 	surfaceparm noimpact
 	//q3map_surfacelight 300
@@ -664,7 +664,7 @@ textures/skies/space_holder
 }
 textures/skies/nightsky_nocloud_600
 {
-	qer_editorimage textures/skies/nightsky_nocloud.png
+	qer_editorimage textures/skies/nightsky_nocloud
 	surfaceparm sky
 	surfaceparm noimpact
 	q3map_surfacelight 600
@@ -673,7 +673,7 @@ textures/skies/nightsky_nocloud_600
 }
 textures/skies/nightsky_nocloud_100
 {
-	qer_editorimage textures/skies/nightsky_nocloud.png
+	qer_editorimage textures/skies/nightsky_nocloud
 	surfaceparm sky
 	surfaceparm noimpact
 	//q3map_surfacelight 100
@@ -684,7 +684,7 @@ textures/skies/nightsky_nocloud_100
 }
 textures/skies/nightsky_nocloud_200
 {
-	qer_editorimage textures/skies/nightsky_nocloud.png
+	qer_editorimage textures/skies/nightsky_nocloud
 	surfaceparm sky
 	surfaceparm noimpact
 	q3map_surfacelight 200
@@ -694,7 +694,7 @@ textures/skies/nightsky_nocloud_200
 
 textures/skies/nightsky_nocloud_1000
 {
-	qer_editorimage textures/skies/nightsky_nocloud.png
+	qer_editorimage textures/skies/nightsky_nocloud
 	surfaceparm sky
 	surfaceparm noimpact
 	q3map_surfacelight 1000
@@ -704,7 +704,7 @@ textures/skies/nightsky_nocloud_1000
 
 textures/skies/nightsky_nocloud_500
 {
-	qer_editorimage textures/skies/nightsky_nocloud.png
+	qer_editorimage textures/skies/nightsky_nocloud
 	surfaceparm sky
 	surfaceparm noimpact
 	q3map_surfacelight 500
@@ -713,7 +713,7 @@ textures/skies/nightsky_nocloud_500
 }
 textures/skies/nightsky_nocloud_400
 {
-	qer_editorimage textures/skies/nightsky_nocloud.png
+	qer_editorimage textures/skies/nightsky_nocloud
 	surfaceparm sky
 	surfaceparm noimpact
 	q3map_surfacelight 400
@@ -742,18 +742,18 @@ textures/skies/hellredclouds
 	skyparms - 512 -
 
 	{
-		map textures/skies/redclouds.png
+		map textures/skies/redclouds
 		tcMod scroll 0.02 0
 		tcMod scale 2 2
 	}
 	{
-		map textures/skies/lightningsky8_kc.png
+		map textures/skies/lightningsky8_kc
 		blendfunc GL_ONE GL_ONE
 		tcMod scale 10 10
 		tcMod scroll .2 .2
 	}
 	{
-		map textures/skies/redcloudsa.png
+		map textures/skies/redcloudsa
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.02 0.01
@@ -772,7 +772,7 @@ textures/skies/hellskybright
 
 	skyparms - 512 -
 	{
-		map textures/skies/dimclouds.png
+		map textures/skies/dimclouds
 		//blendFunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0
 		//tcMod scroll 0 0
@@ -780,7 +780,7 @@ textures/skies/hellskybright
 		depthWrite
 	}
 	{
-		map textures/skies/redclouds.png
+		map textures/skies/redclouds
 		//blendFunc GL_DST_COLOR GL_ZERO
 		blendFunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.06
@@ -798,13 +798,13 @@ textures/skies/hellsky2
 	q3map_surfacelight 60
 	skyparms - 512 -
 	{
-		map textures/skies/dimclouds.png
+		map textures/skies/dimclouds
 		tcMod scroll 0.02 0
 		tcMod scale 1 1
 		depthWrite
 	}
 	{
-		map textures/skies/dimclouds.png
+		map textures/skies/dimclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scroll 0.02 0.01
 		tcMod scale 3 3
@@ -820,17 +820,17 @@ textures/skies/hellsky2bright
 	q3map_sun	1 1 1 100 220 50
 	q3map_surfacelight 120
 
-	qer_editorimage textures/skies/toxicsky.png
+	qer_editorimage textures/skies/toxicsky
 
 	skyparms - 512 -
 	{
-		map textures/skies/inteldimclouds.png
+		map textures/skies/inteldimclouds
 		tcMod scale 3 2
 		tcMod scroll 0.15 0.15
 		depthWrite
 	}
 	{
-		map textures/skies/intelredclouds.png
+		map textures/skies/intelredclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
@@ -850,13 +850,13 @@ textures/skies/hellsky
 	lightning
 
 	{
-		map textures/skies/redclouds.png
+		map textures/skies/redclouds
 		tcMod scroll 0.05 0
 		tcMod scale 2 2
 		depthWrite
 	}
 	{
-		map textures/skies/dimclouds.png
+		map textures/skies/dimclouds
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.06
 		tcMod scale 1 1
@@ -874,13 +874,13 @@ textures/hell/newhell
 	lightning
 
 	{
-		map env/redcloudsa.png
+		map env/redcloudsa
 		blendFunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0
 		tcMod scale 2 2
 	}
 	{
-		map env/redclouds.png
+		map env/redclouds
 		blendFunc GL_DST_COLOR GL_ZERO
 		tcMod scroll 0.05 0.06
 		tcMod scale 1 1
@@ -892,7 +892,7 @@ textures/hell/newhell
 //*******************************************************
 //textures/skies/red_enviro1
 //{
-//	qer_editorimage textures/test/q3envtest.png
+//	qer_editorimage textures/test/q3envtest
 
 //	surfaceparm noimpact
 //	surfaceparm nolightmap
@@ -906,7 +906,7 @@ textures/hell/newhell
 
 
 	//{
-		//map textures/skies/dimclouds.png
+		//map textures/skies/dimclouds
 
 		//tcMod turb 0 0.001 0.5 0.001
 		//tcMod scale 3 3
@@ -915,7 +915,7 @@ textures/hell/newhell
 		//depthWrite
 	//}
 	//{
-		//map textures/skies/pjbasesky.png
+		//map textures/skies/pjbasesky
 		//blendfunc GL_ONE GL_ONE
 		//tcMod scroll -0.01 -0.01
 		//tcMod scale 5 5
@@ -927,7 +927,7 @@ textures/hell/newhell
 //*******************************************************
 //textures/skies/blue_enviro2
 //{
-//	qer_editorimage textures/test/q3env2.png
+//	qer_editorimage textures/test/q3env2
 
 //	surfaceparm noimpact
 //	surfaceparm nolightmap
@@ -941,7 +941,7 @@ textures/hell/newhell
 
 
 	//{
-		//map textures/test/spacerocks.png
+		//map textures/test/spacerocks
 
 		//tcMod turb 0 0.001 0.5 0.0001
 		//tcMod scale 0.5 0.5
@@ -950,7 +950,7 @@ textures/hell/newhell
 		//depthWrite
 	//}
 	//{
-		//map textures/skies/pjbasesky.png
+		//map textures/skies/pjbasesky
 		//blendfunc GL_ONE GL_ONE
 		//tcMod scroll -0.01 -0.01
 		//tcMod scale 5 5
@@ -962,7 +962,7 @@ textures/hell/newhell
 //*******************************************************
 textures/skies/pj_dm10sky
 {
-	qer_editorimage textures/skies/pjbasesky.png
+	qer_editorimage textures/skies/pjbasesky
 	q3map_lightsubdivide 512
 	q3map_globaltexture
 	surfaceparm noimpact
@@ -971,18 +971,18 @@ textures/skies/pj_dm10sky
 	q3map_sun	.5 .6 .8 90 225 55
 	q3map_surfacelight 150
 
-	qer_editorimage textures/skies/toxicbluesky.png
+	qer_editorimage textures/skies/toxicbluesky
 
 	skyparms - 512 -
 
 	{
-		map textures/skies/bluedimclouds.png
+		map textures/skies/bluedimclouds
 		tcMod scale 3 2
 		tcMod scroll 0.15 0.15
 		depthWrite
 	}
 	{
-		map textures/skies/topclouds.png
+		map textures/skies/topclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
@@ -995,7 +995,7 @@ textures/skies/pj_dm10sky
 //*******************************************************
 textures/skies/kc_dm10sky
 {
-	qer_editorimage textures/skies/pjbasesky.png
+	qer_editorimage textures/skies/pjbasesky
 	q3map_lightsubdivide 512
 	q3map_globaltexture
 	surfaceparm noimpact
@@ -1004,24 +1004,24 @@ textures/skies/kc_dm10sky
 	q3map_sun	.5 .6 .8 90 225 55
 	q3map_surfacelight 150
 
-	qer_editorimage textures/skies/toxicbluesky.png
+	qer_editorimage textures/skies/toxicbluesky
 
 	skyparms - 512 -
 
 	{
-		map textures/skies/bluedimclouds.png
+		map textures/skies/bluedimclouds
 		tcMod scale 3 2
 		tcMod scroll 0.15 0.15
 	}
 	{
-		map textures/skies/topclouds.png
+		map textures/skies/topclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
 
 	//{
-	//	map textures/liquids/electric_fog.png
+	//	map textures/liquids/electric_fog
 	//	blendfunc gl_dst_color gl_one
 	//	rgbgen wave triangle .8 .2 0 5
 	//	tcmod scale -.02 -.02
@@ -1038,7 +1038,7 @@ textures/skies/kc_dm10sky
 //*******************************************************
 textures/skies/kcbasesky_arena1_sky
 {
-	qer_editorimage textures/skies/pjbasesky.png
+	qer_editorimage textures/skies/pjbasesky
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	q3map_globaltexture
@@ -1049,13 +1049,13 @@ textures/skies/kcbasesky_arena1_sky
 	skyparms - 512 -
 
 	{
-		map textures/skies/dimclouds.png
+		map textures/skies/dimclouds
 		tcMod scroll 0.01 0.01
 		tcMod scale 3 3
 		depthWrite
 	}
 	{
-		map textures/skies/pjbasesky.png
+		map textures/skies/pjbasesky
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll -0.01 -0.01
 		tcMod scale 5 5
@@ -1067,7 +1067,7 @@ textures/skies/kcbasesky_arena1_sky
 //*******************************************************
 textures/skies/pjbasesky_arena1_sky
 {
-	qer_editorimage textures/skies/pjbasesky.png
+	qer_editorimage textures/skies/pjbasesky
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	q3map_globaltexture
@@ -1078,13 +1078,13 @@ textures/skies/pjbasesky_arena1_sky
 	skyparms - 512 -
 
 	{
-		map textures/skies/dimclouds.png
+		map textures/skies/dimclouds
 		tcMod scroll 0.01 0.01
 		tcMod scale 3 3
 		depthWrite
 	}
 	{
-		map textures/skies/pjbasesky.png
+		map textures/skies/pjbasesky
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll -0.01 -0.01
 		tcMod scale 5 5
@@ -1095,8 +1095,8 @@ textures/skies/pjbasesky_arena1_sky
 //*******************************************************
 textures/skies/pj_ctf2_sky
 {
-	qer_editorimage textures/skies/pjbasesky.png
-	q3map_lightimage textures/skies/topclouds.png
+	qer_editorimage textures/skies/pjbasesky
+	q3map_lightimage textures/skies/topclouds
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
@@ -1108,13 +1108,13 @@ textures/skies/pj_ctf2_sky
 	skyparms full 128 -
 
 	{
-		map textures/skies/bluedimclouds.png
+		map textures/skies/bluedimclouds
 		tcMod scroll 0.015 0.016
 		tcMod scale 3 3
 		depthWrite
 	}
 	{
-		map textures/skies/topclouds.png
+		map textures/skies/topclouds
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll -0.01 -0.012
 		tcMod scale 5 5
@@ -1126,7 +1126,7 @@ textures/skies/pj_ctf2_sky
 //*******************************************************
 textures/skies/pj_arena4_sky
 {
-	qer_editorimage textures/skies/pjbasesky.png
+	qer_editorimage textures/skies/pjbasesky
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
@@ -1138,13 +1138,13 @@ textures/skies/pj_arena4_sky
 	skyparms full 128 -
 
 	{
-		map textures/skies/dimclouds.png
+		map textures/skies/dimclouds
 		tcMod scroll 0.015 0.016
 		tcMod scale 3 3
 		depthWrite
 	}
 	{
-		map textures/skies/pjbasesky.png
+		map textures/skies/pjbasesky
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll -0.01 -0.012
 		tcMod scale 5 5
@@ -1167,13 +1167,13 @@ textures/skies/pj_ctf1sky
 	skyparms full 200 -
 
 	{
-		map textures/skies/dimclouds.png
+		map textures/skies/dimclouds
 		tcMod scroll 0.015 0.016
 		tcMod scale 3 3
 		depthWrite
 	}
 	{
-		map textures/skies/pjbasesky.png
+		map textures/skies/pjbasesky
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll -0.01 -0.012
 		tcMod scale 5 5
@@ -1196,13 +1196,13 @@ textures/skies/pj_arena2sky
 	skyparms full 200 -
 
 	{
-		map textures/skies/dimclouds.png
+		map textures/skies/dimclouds
 		tcMod scroll 0.015 0.016
 		tcMod scale 3 3
 		depthWrite
 	}
 	{
-		map textures/skies/pjbasesky.png
+		map textures/skies/pjbasesky
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll -0.01 -0.012
 		tcMod scale 5 5
@@ -1213,8 +1213,8 @@ textures/skies/pj_arena2sky
 //*******************************************************
 textures/skies/pj_dm9sky
 {
-	qer_editorimage textures/skies/toxicbluesky.png
-	q3map_lightimage textures/skies/topclouds.png
+	qer_editorimage textures/skies/toxicbluesky
+	q3map_lightimage textures/skies/topclouds
 	surfaceparm noimpact
 	surfaceparm nomarks
 	surfaceparm nolightmap
@@ -1226,13 +1226,13 @@ textures/skies/pj_dm9sky
 
 	skyparms - 512 -
 	{
-		map textures/skies/bluedimclouds.png
+		map textures/skies/bluedimclouds
 		tcMod scale 3 2
 		tcMod scroll 0.15 0.15
 		depthWrite
 	}
 	{
-		map textures/skies/topclouds.png
+		map textures/skies/topclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
@@ -1248,7 +1248,7 @@ textures/common/nightsky
 	cloudparms 192 full
 
 	{
-		map textures/bwhtest/tileclouds.png
+		map textures/bwhtest/tileclouds
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll 0.02 0.02
 		tcMod scale 2 2
@@ -1265,14 +1265,14 @@ textures/common/nightsky2
 	cloudparms 192
 
 	{
-		map env/purpleclouds.png
+		map env/purpleclouds
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll 0.01 0.01
 		tcMod scale 2 2
 	}
 
 	{
-		map env/clouds.png
+		map env/clouds
 		blendfunc GL_DST_COLOR GL_ZERO
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
@@ -1281,7 +1281,7 @@ textures/common/nightsky2
 
 textures/skies/nightsky_xian_dm4
 {
-	qer_editorimage textures/skies/nightsky_nocloud.png
+	qer_editorimage textures/skies/nightsky_nocloud
 	surfaceparm sky
 	surfaceparm noimpact
 	surfaceparm nolightmap
@@ -1304,14 +1304,14 @@ textures/skies/xnightsky
 	cloudparms 512 half
 
 	{
-		map env/xnightsky4.png
+		map env/xnightsky4
 		tcMod scroll 0.005 0.002
 		tcMod scale 12 18
 		blendfunc GL_ONE GL_ONE
 	}
 
 	{
-		map env/xnightsky3.png
+		map env/xnightsky3
 		tcMod scroll 0.001 0.003
 		tcMod scale 6 10
 		blendfunc GL_DST_COLOR GL_ZERO
@@ -1325,20 +1325,20 @@ textures/skies/xnightsky_600
 
 	q3map_surfacelight 600
 
-	qer_editorimage textures/skies/xnightsky.png
+	qer_editorimage textures/skies/xnightsky
 
 	sky env/xnight2
 	cloudparms 256 half
 
 	{
-		map env/xnightsky.png
+		map env/xnightsky
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll 0.010 0.010
 		tcMod scale 10 10
 	}
 
 	{
-		map env/xnightsky1.png
+		map env/xnightsky1
 		blendfunc GL_DST_COLOR GL_ZERO
 		tcMod scroll 0.010 0.007
 		tcMod scale 10 10
@@ -1358,20 +1358,20 @@ textures/skies/hellskyteam
 	//cloudparms 512 full
 	//lightning
 	{
-		map textures/skies/dimclouds.png
+		map textures/skies/dimclouds
 		tcMod scroll 0.1 0.1
 		tcMod scale 3 2
 		depthWrite
 	}
 	{
-		map textures/skies/redcloudsa.png
+		map textures/skies/redcloudsa
 		blendFunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
 	}
 }
 	//{
-		//map env/redcloudsa.png
+		//map env/redcloudsa
 		//blendfunc GL_ONE GL_ONE
 		//tcMod scroll 0.05 0
 		//tcMod scale 2 2
@@ -1379,7 +1379,7 @@ textures/skies/hellskyteam
 	//}
 //
 	//{
-		//map env/redclouds.png
+		//map env/redclouds
 		//blendfunc GL_ONE GL_SRC_COLOR
 		//tcMod scroll 0.05 0.05
 		//tcMod scale 1 1
@@ -1399,17 +1399,17 @@ textures/skies/toxicskydim
 	q3map_surfacelight 100
 	q3map_sun	1 1 0.5 80 30 70
 
-	qer_editorimage textures/skies/toxicsky.png
+	qer_editorimage textures/skies/toxicsky
 	skyparms - 512 -
 	//cloudparms 512 full
 	{
-		map textures/skies/inteldimclouds.png
+		map textures/skies/inteldimclouds
 		tcMod scroll 0.1 0.1
 		tcMod scale 3 2
 		depthWrite
 	}
 	{
-		map textures/skies/intelredclouds.png
+		map textures/skies/intelredclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
@@ -1425,18 +1425,18 @@ textures/skies/toxicskytim_dm4
 	q3map_sun	1 1 0.5 90 120 75
 	q3map_surfacelight 80
 
-	qer_editorimage textures/skies/toxicsky.png
+	qer_editorimage textures/skies/toxicsky
 
 	skyparms - 512 -
 	//cloudparms 512 full
 	{
-		map textures/skies/inteldimclouds.png
+		map textures/skies/inteldimclouds
 		tcMod scale 3 2
 		tcMod scroll 0.15 0.15
 		depthWrite
 	}
 	{
-		map textures/skies/intelredclouds.png
+		map textures/skies/intelredclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
@@ -1454,18 +1454,18 @@ textures/skies/toxicskytim_ctf1
 	q3map_sun	1 1 0.5 90 70 40
 	q3map_surfacelight 120
 
-	qer_editorimage textures/skies/toxicsky.png
+	qer_editorimage textures/skies/toxicsky
 
 	skyparms - 512 -
 	//cloudparms 512 full
 	{
-		map textures/skies/inteldimclouds.png
+		map textures/skies/inteldimclouds
 		tcMod scale 3 2
 		tcMod scroll 0.15 0.15
 		depthWrite
 	}
 	{
-		map textures/skies/intelredclouds.png
+		map textures/skies/intelredclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
@@ -1482,18 +1482,18 @@ textures/skies/toxicskytim_blue
 	q3map_sun	.5 .6 .8 100 70 60
 	q3map_surfacelight 120
 
-	qer_editorimage textures/skies/toxicbluesky.png
+	qer_editorimage textures/skies/toxicbluesky
 
 	skyparms - 512 -
 	//cloudparms 512 full
 	{
-		map textures/skies/bluedimclouds.png
+		map textures/skies/bluedimclouds
 		tcMod scale 3 2
 		tcMod scroll 0.15 0.15
 		depthWrite
 	}
 	{
-		map textures/skies/topclouds.png
+		map textures/skies/topclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
@@ -1514,18 +1514,18 @@ textures/skies/toxicskytim_dm5
 	// old q3map_sun	.5 .6 .8 90 225 55
 	q3map_surfacelight 120
 
-	qer_editorimage textures/skies/toxicbluesky.png
+	qer_editorimage textures/skies/toxicbluesky
 
 	skyparms - 512 -
 	//cloudparms 512 full
 	{
-		map textures/skies/bluedimclouds.png
+		map textures/skies/bluedimclouds
 		tcMod scale 3 2
 		tcMod scroll 0.15 0.15
 		depthWrite
 	}
 	{
-		map textures/skies/topclouds.png
+		map textures/skies/topclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
@@ -1536,7 +1536,7 @@ textures/skies/toxicskytim_dm3
 //used in tim_dm3
 
 {
-	qer_editorimage textures/skies/toxicsky.png
+	qer_editorimage textures/skies/toxicsky
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
@@ -1550,13 +1550,13 @@ textures/skies/toxicskytim_dm3
 	skyparms - 512 -
 
 	{
-		map textures/skies/inteldimclouds.png
+		map textures/skies/inteldimclouds
 		tcMod scroll 0.1 0.1
 		tcMod scale 3 2
 		depthWrite
 	}
 	{
-		map textures/skies/intelredclouds.png
+		map textures/skies/intelredclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
@@ -1575,18 +1575,18 @@ textures/skies/toxicskytim_dm8
 	q3map_sun	1 1 0.5 85 220 40
 	q3map_surfacelight 120
 
-	qer_editorimage textures/skies/toxicsky.png
+	qer_editorimage textures/skies/toxicsky
 
 	skyparms - 512 -
 	//cloudparms 512 full
 	{
-		map textures/skies/inteldimclouds.png
+		map textures/skies/inteldimclouds
 		tcMod scale 3 2
 		tcMod scroll 0.15 0.15
 		depthWrite
 	}
 	{
-		map textures/skies/intelredclouds.png
+		map textures/skies/intelredclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
@@ -1604,18 +1604,18 @@ textures/skies/toxicskytim_dm9
 	q3map_sun	.980 .835 .3 100 25 65
 	q3map_surfacelight 80
 
-	qer_editorimage textures/skies/toxicsky.png
+	qer_editorimage textures/skies/toxicsky
 
 	skyparms - 512 -
 	//cloudparms 512 full
 	{
-		map textures/skies/inteldimclouds.png
+		map textures/skies/inteldimclouds
 		tcMod scale 3 2
 		tcMod scroll 0.15 0.15
 		depthWrite
 	}
 	{
-		map textures/skies/intelredclouds.png
+		map textures/skies/intelredclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
@@ -1635,18 +1635,18 @@ textures/skies/toxicskytim_dm2
 	q3map_sun	.5 .6 .8 100 190 75
 	q3map_surfacelight 120
 
-	qer_editorimage textures/skies/toxicbluesky.png
+	qer_editorimage textures/skies/toxicbluesky
 
 	skyparms - 512 -
 	//cloudparms 512 full
 	{
-		map textures/skies/bluedimclouds.png
+		map textures/skies/bluedimclouds
 		tcMod scale 3 2
 		tcMod scroll 0.15 0.15
 		depthWrite
 	}
 	{
-		map textures/skies/topclouds.png
+		map textures/skies/topclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
@@ -1664,18 +1664,18 @@ textures/skies/q3dm0
 	q3map_sun	.5 .6 .8 60 80 75
 	q3map_surfacelight 80
 
-	qer_editorimage textures/skies/toxicbluesky.png
+	qer_editorimage textures/skies/toxicbluesky
 
 	skyparms - 512 -
 	//cloudparms 512 full
 	{
-		map textures/skies/bluedimclouds.png
+		map textures/skies/bluedimclouds
 		tcMod scale 3 2
 		tcMod scroll 0.15 0.15
 		depthWrite
 	}
 	{
-		map textures/skies/topclouds.png
+		map textures/skies/topclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
@@ -1697,18 +1697,18 @@ textures/skies/toxicskytim_dm7
 	q3map_sun	.5 .6 .8 100 260 50
 	q3map_surfacelight 120
 
-	qer_editorimage textures/skies/toxicbluesky.png
+	qer_editorimage textures/skies/toxicbluesky
 
 	skyparms - 512 -
 	//cloudparms 512 full
 	{
-		map textures/skies/bluedimclouds.png
+		map textures/skies/bluedimclouds
 		tcMod scale 3 2
 		tcMod scroll 0.15 0.15
 		depthWrite
 	}
 	{
-		map textures/skies/topclouds.png
+		map textures/skies/topclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
@@ -1727,14 +1727,14 @@ textures/hell/hellsky2goo
 	cloudparms 256
 
 	{
-		map env/redcloudsa.png
+		map env/redcloudsa
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0
 		tcMod scale 2 2
 	}
 
 	{
-		map env/redclouds.png
+		map env/redclouds
 		blendfunc GL_ONE GL_SRC_COLOR
 		tcMod scroll 0.05 0.05
 		tcMod scale 1 1
@@ -1750,14 +1750,14 @@ textures/castle/sky_castle1
 	cloudparms 256
 
 	{
-		map env/redcloudsa.png
+		map env/redcloudsa
 		blendfunc GL_ONE GL_ONE
 		tcMod scroll 0.05 0
 		tcMod scale 2 2
 	}
 
 	{
-		map env/redclouds.png
+		map env/redclouds
 		blendfunc GL_DST_COLOR GL_ZERO
 		tcMod scroll 0.05 0.05
 		tcMod scale 1 1
@@ -1849,18 +1849,18 @@ textures/skies/mkc_dm4sky
 	q3map_sun	0.9 0.8 1 25 135 60
 	q3map_surfacelight 80
 
-	qer_editorimage textures/skies/dimclouds.png
+	qer_editorimage textures/skies/dimclouds
 
 	skyparms - 512 -
 	//cloudparms 512 full
 	{
-		map textures/skies/nightsky.png
+		map textures/skies/nightsky
 		tcMod scale 5 8
 		tcMod scroll 0.7 0.1
 		depthWrite
 	}
 	{
-		map textures/skies/redclouds.png
+		map textures/skies/redclouds
 		blendFunc GL_DST_COLOR GL_ZERO
 		tcMod scale 3 5
 		tcMod scroll 0.3 0.1
@@ -1877,18 +1877,18 @@ textures/skies/mkc_ctf5sky
 	q3map_sun	0.9 0.8 1.0 70 45 60
 	q3map_surfacelight 50
 
-	qer_editorimage textures/skies/dimclouds.png
+	qer_editorimage textures/skies/dimclouds
 
 	skyparms - 512 -
 	//cloudparms 512 full
 	{
-		map textures/skies/nightsky.png
+		map textures/skies/nightsky
 		tcMod scale 5 8
 		tcMod scroll 0.7 0.1
 		depthWrite
 	}
 	{
-		map textures/skies/nightsky_nocloud.png
+		map textures/skies/nightsky_nocloud
 		blendFunc GL_DST_COLOR GL_ZERO
 		tcMod scale 3 5
 		tcMod scroll 0.3 0.1
@@ -1911,13 +1911,13 @@ textures/skies/proto_sky
 	skyparms - 512 -
 
 	{
-		map textures/skies/proto_sky.png
+		map textures/skies/proto_sky
 		tcMod scroll .02 .04
 		tcMod scale 3 4
 		depthWrite
 	}
 	{
-		map textures/skies/proto_sky2.png
+		map textures/skies/proto_sky2
 		blendFunc GL_ONE GL_ONE
 		tcMod scroll 0.005 0.005
                 //rgbgen wave triangle 1 2 0 7

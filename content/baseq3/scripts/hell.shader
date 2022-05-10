@@ -1,7 +1,7 @@
 textures/hell/ironcrosslt1_5000
 {
-	qer_editorimage textures/hell/ironcrosslt1.png
-	q3map_lightimage textures/hell/ironcrosslt1.blend.png
+	qer_editorimage textures/hell/ironcrosslt1
+	q3map_lightimage textures/hell/ironcrosslt1.blend
 	q3map_surfacelight 5000
 	light 1
 	{
@@ -9,12 +9,12 @@ textures/hell/ironcrosslt1_5000
 		rgbGen identity
 	}
 	{
-		map textures/hell/ironcrosslt1.png
+		map textures/hell/ironcrosslt1
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/hell/ironcrosslt1.blend.png
+		map textures/hell/ironcrosslt1.blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -26,7 +26,7 @@ textures/hell/skin7_teeth2
 		rgbGen identity
 	}
 	{
-		map textures/hell/skin7_teeth2.png
+		map textures/hell/skin7_teeth2
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
@@ -41,14 +41,14 @@ textures/hell/hellredclouds
 	lightning
 
 	{
-		map env/redclouds.png
+		map env/redclouds
 		tcMod scroll 0.02 0
 		tcMod scale 2 2
 	}
 
 
 	{
-		map textures/dont_use/lightningsky8_kc.png
+		map textures/dont_use/lightningsky8_kc
 		blendfunc GL_ONE GL_ONE
 		tcMod scale 10 10
 		tcMod scroll .2 .2
@@ -56,7 +56,7 @@ textures/hell/hellredclouds
 
 
 	{
-		map env/redcloudsa.png
+		map env/redcloudsa
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.02 0.01
@@ -71,19 +71,19 @@ textures/hell/hellbutt01
 		rgbGen identity
 	}
 	{
-		map textures/hell/hellbutt01.png
+		map textures/hell/hellbutt01
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/hell/hellbutt01.blend.png
+		map textures/hell/hellbutt01.blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 0.2
 	}
 }
 textures/hell/xfiretest1
 {
-	qer_editorimage textures/hell/firetestb.png
+	qer_editorimage textures/hell/firetestb
 	//surfaceparm trans
 	surfaceparm noimpact
 	//surfaceparm nonsolid
@@ -93,7 +93,7 @@ textures/hell/xfiretest1
 
 
 	{
-	map textures/hell/firetestb.png
+	map textures/hell/firetestb
 	blendfunc gl_one gl_zero
 	tcMod turb .2 .2 .1 1
 	tcMod scale .25 .25
@@ -101,7 +101,7 @@ textures/hell/xfiretest1
 	}
 
 	{
-	map textures/hell/firetest.png
+	map textures/hell/firetest
 	blendFunc GL_DST_COLOR GL_SRC_ALPHA
 	tcMod turb .2 .1 .1 1
 	tcMod scale .1 .1
@@ -109,7 +109,7 @@ textures/hell/xfiretest1
 	}
 
 	{
-	map textures/hell/firetest2.png
+	map textures/hell/firetest2
 	blendFunc GL_DST_COLOR GL_ONE
 	tcMod turb .1 .1 .5 .5
 	tcMod scroll 1 5.0
@@ -119,7 +119,7 @@ textures/hell/xfiretest1
 }
 textures/hell/xfiretest2
 {
-	qer_editorimage textures/hell/firetestb.png
+	qer_editorimage textures/hell/firetestb
 	//surfaceparm trans
 	surfaceparm noimpact
 	//surfaceparm nonsolid
@@ -127,7 +127,7 @@ textures/hell/xfiretest2
 	q3map_surfacelight 1000
 	tesssize 64
 	{
-	map textures/hell/firetest2.png
+	map textures/hell/firetest2
 	blendfunc gl_one gl_zero
 	tcMod turb .2 .2 .1 1
 	tcMod scale .25 .25
@@ -135,7 +135,7 @@ textures/hell/xfiretest2
 	}
 
 	{
-	map textures/hell/firetest.png
+	map textures/hell/firetest
 
 //	blendFunc GL_DST_COLOR GL_ONE
 	blendFunc GL_DST_COLOR GL_SRC_ALPHA
@@ -146,7 +146,7 @@ textures/hell/xfiretest2
 
 	{
 
-	map textures/hell/firetestb.png
+	map textures/hell/firetestb
 	blendFunc GL_DST_COLOR GL_ONE
 //	blendFunc GL_DST_COLOR GL_SRC_ALPHA
 	tcMod turb .1 .1 .5 .5
@@ -162,7 +162,7 @@ textures/hell/metal2_2
 	cull twosided
 	surfaceparm trans
 	{
-		map textures/hell/metal2_2.png
+		map textures/hell/metal2_2
 		rgbGen identity
 		alphaFunc GE128
 		//blendFunc GL_ONE GL_ZERO
@@ -186,7 +186,7 @@ textures/hell/ironcrosslt1
 	}
 
 	{
-		map textures/hell/ironcrosslt1.png
+		map textures/hell/ironcrosslt1
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
@@ -200,12 +200,12 @@ textures/hell/killblock_b
 		rgbGen identity
 	}
 	{
-		map textures/hell/killblock_b.png
+		map textures/hell/killblock_b
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/hell/killblock_b.blend.png
+		map textures/hell/killblock_b.blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -218,12 +218,12 @@ textures/hell/killblock_c
 		rgbGen identity
 	}
 	{
-		map textures/hell/killblock_c.png
+		map textures/hell/killblock_c
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/hell/killblock_c.blend.png
+		map textures/hell/killblock_c.blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.1 0 0.2
 	}
@@ -236,12 +236,12 @@ textures/hell/bluepad
 		rgbGen identity
 	}
 	{
-		map textures/hell/bluepad.png
+		map textures/hell/bluepad
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/hell/bluepad.blend.png
+		map textures/hell/bluepad.blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
@@ -256,12 +256,12 @@ textures/hell/light1dark
 		rgbGen identity
 	}
 	{
-		map textures/hell/light1dark.png
+		map textures/hell/light1dark
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/hell/light1dark.png
+		map textures/hell/light1dark
 		blendFunc GL_ONE GL_ONE
 //		rgbGen wave sin 0.5 0.1 0 .2
 	}
@@ -275,12 +275,12 @@ textures/hell/light1red
 		rgbGen identity
 	}
 	{
-		map textures/hell/light1red.png
+		map textures/hell/light1red
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/hell/light1red.blend.png
+		map textures/hell/light1red.blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.1 0 .2
 	}
@@ -294,12 +294,12 @@ textures/hell/light1blue
 		rgbGen identity
 	}
 	{
-		map textures/hell/light1blue.png
+		map textures/hell/light1blue
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/hell/light1blue.blend.png
+		map textures/hell/light1blue.blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.1 0 .2
 	}

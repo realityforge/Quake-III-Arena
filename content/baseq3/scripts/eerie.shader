@@ -6,18 +6,18 @@ textures/eerie/floor3_3dark
 
 textures/eerie/xblocks11be
 {
-	qer_editorimage textures/eerie/blocks11b.png
+	qer_editorimage textures/eerie/blocks11b
 	{
 		map $lightmap
 		rgbGen identity
 	}
 	{
-		map textures/eerie/blocks11b.png
+		map textures/eerie/blocks11b
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/eerie/electricgrade3.png
+		map textures/eerie/electricgrade3
 		rgbGen wave sin .25 .25 0.25 .25
 		tcMod turb .2 .2 .1 1
 		tcMod scale .25 .25
@@ -31,7 +31,7 @@ textures/eerie/blackness
 	surfaceparm nolightmap
 	surfaceparm noimpact
 	{
-		map gfx/colors/black.png
+		map gfx/colors/black
 	}
 }
 textures/eerie/surface6jumppad
@@ -42,11 +42,11 @@ textures/eerie/surface6jumppad
 	}
 	{
 		rgbGen identity
-		map textures/eerie/surface6.png
+		map textures/eerie/surface6
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/eerie/surface6jumppad.blend.png
+		map textures/eerie/surface6jumppad.blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .2
 //		blendFunc GL_ONE GL_ONE
@@ -57,18 +57,18 @@ textures/eerie/surface6jumppad
 textures/eerie/xgoopjumpypad
 {
 	q3map_surfacelight 100
-	q3map_lightimage textures/eerie/surface6jumppad.blend.png
+	q3map_lightimage textures/eerie/surface6jumppad.blend
 	{
 		rgbGen identity
 		map $lightmap
 	}
 	{
 		rgbGen identity
-		map textures/eerie/xgoopq1metal.png
+		map textures/eerie/xgoopq1metal
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		clampmap textures/eerie/surface6jumppad.blend.png
+		clampmap textures/eerie/surface6jumppad.blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 .2
 //		tcMod stretch sin 0.80 0.20 0 1
@@ -76,20 +76,20 @@ textures/eerie/xgoopjumpypad
 }
 textures/eerie/xgoopy_pentagram
 {
-//	qer_editorimage textures/eerie/xgoopy_pentagram.png
+//	qer_editorimage textures/eerie/xgoopy_pentagram
 	q3map_surfacelight 250
-//	q3map_lightimage textures/eerie/pentagramfloor.red.blend.png
+//	q3map_lightimage textures/eerie/pentagramfloor.red.blend
 	{
 		map $lightmap
 		rgbGen identity
 	}
 	{
-		map textures/eerie/xgoopq1metal.png
+		map textures/eerie/xgoopq1metal
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		clampmap textures/eerie/pentagramfloor.red.blend.png
+		clampmap textures/eerie/pentagramfloor.red.blend
 		blendFunc GL_ONE GL_ONE
 //		rgbGen wave sin 0.5 0.5 0.3 .5
 		tcMod rotate -60
@@ -109,7 +109,7 @@ textures/eerie/gkcspine
 		rgbGen identity
 	}
 	{
-		map textures/eerie/gkcspine.png
+		map textures/eerie/gkcspine
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
@@ -126,7 +126,7 @@ textures/eerie/lavafogshader
 
 textures/eerie/lavahell
 {
-	qer_editorimage textures/eerie/lavahell.png
+	qer_editorimage textures/eerie/lavahell
 	qer_nocarve
 	surfaceparm noimpact
 	surfaceparm lava
@@ -139,13 +139,13 @@ textures/eerie/lavahell
 	fogparms 0.8519142 0.309723 0.0 128 128
 
 	{
-		map textures/eerie/lavahell.png
+		map textures/eerie/lavahell
 		tcMod turb .25 0.4 0 0.09
 	}
 }
 textures/eerie/lavahell2
 {
-	qer_editorimage textures/eerie/lavahell.png
+	qer_editorimage textures/eerie/lavahell
 	qer_nocarve
 	surfaceparm noimpact
 	surfaceparm lava
@@ -157,14 +157,14 @@ textures/eerie/lavahell2
 	fogparms 0.8519142 0.309723 0.0 128 128
 
 	{
-		map textures/eerie/lavahell.png
+		map textures/eerie/lavahell
 		tcMod turb .25 0.2 1 0.02
 		tcMod scroll 0.1 0.1
 	}
 }
 textures/eerie/lavahell_goddamnbright
 {
-	qer_editorimage textures/eerie/lavahell.png
+	qer_editorimage textures/eerie/lavahell
 	qer_nocarve
 	surfaceparm noimpact
 	surfaceparm lava
@@ -176,7 +176,7 @@ textures/eerie/lavahell_goddamnbright
 	fogparms 0.8519142 0.309723 0.0 128 128
 
 	{
-		map textures/eerie/lavahell.png
+		map textures/eerie/lavahell
 		tcMod turb .25 0.2 1 0.02
 		tcMod scroll 0.1 0.1
 	}
@@ -190,12 +190,12 @@ textures/eerie/uberiron
 		rgbGen identity
 	}
 	{
-		map textures/eerie/uberiron.png
+		map textures/eerie/uberiron
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/firewall_light.png
+		map textures/eerie/firewall_light
 		blendfunc gl_dst_color gl_zero
 		tcMod scroll 5 15
 		tcMod scale 0.25 0.25
@@ -210,19 +210,19 @@ textures/eerie/iron01_e_flicker
 		rgbGen identity
 	}
 	{
-		map textures/eerie/iron01_e_flicker.png
+		map textures/eerie/iron01_e_flicker
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/firewalla.png
+		map textures/eerie/firewalla
 		blendfunc gl_dst_color gl_zero
 		tcMod scale 0.25 0.25
 		tcMod turb .2 .2 .1 1
 		tcMod scroll -15 -5
 	}
 	{
-		map textures/eerie/firewallb.png
+		map textures/eerie/firewallb
 		blendFunc GL_dst_color gl_src_alpha
 		tcMod scale 0.1 0.1
 		tcMod turb .2 .1 .1 1
@@ -236,12 +236,12 @@ textures/eerie/q1metal7_98d_flicker
 		rgbGen identity
 	}
 	{
-		map textures/eerie/q1metal7_98d.png
+		map textures/eerie/q1metal7_98d
 		rgbGen identity
 		blendfunc gl_dst_color gl_zero
 	}
 	{
-		map textures/eerie/firewalla.png
+		map textures/eerie/firewalla
 		blendfunc gl_dst_color gl_zero
 		tcMod scroll -15 -5
 		tcMod scale 0.25 0.25
@@ -254,17 +254,17 @@ textures/eerie/iron01_d_flicker
 	tesssize 32
 	surfaceparm nolightmap
 	{
-		map textures/eerie/iron01_d_flicker.png
+		map textures/eerie/iron01_d_flicker
 	}
 	{
-		map textures/eerie/firewalla.png
+		map textures/eerie/firewalla
 		blendfunc gl_dst_color gl_zero
 		tcMod scroll 5 15
 		tcMod scale 0.25 0.25
 		tcMod turb .2 .2 .1 1
 	}
 	{
-		map textures/eerie/firewallb.png
+		map textures/eerie/firewallb
 		blendFunc GL_dst_color gl_src_alpha
 		tcMod scale .1 .1 0 10
 		tcMod turb .2 .1 .1 1
@@ -276,17 +276,17 @@ textures/eerie/iron01_g_flicker
 	tesssize 32
 	surfaceparm nolightmap
 	{
-		map textures/eerie/iron01_g_flicker.png
+		map textures/eerie/iron01_g_flicker
 	}
 	{
-		map textures/eerie/firewalla.png
+		map textures/eerie/firewalla
 		blendfunc gl_dst_color gl_zero
 		tcMod scale 0.25 0.25
 		tcMod turb .2 .2 .1 1
 		tcMod scroll 5 15
 	}
 	{
-		map textures/eerie/firewallb.png
+		map textures/eerie/firewallb
 		blendFunc GL_dst_color gl_src_alpha
 		tcMod scale 0.1 0.1
 		tcMod turb .2 .1 .1 1
@@ -302,21 +302,21 @@ textures/eerie/firewall
 	q3map_surfacelight 6000
 	tesssize 64
 	{
-		map textures/eerie/firewalla.png
+		map textures/eerie/firewalla
 		blendfunc gl_one gl_zero
 		tcMod scale 0.25 0.25
 		tcMod turb .2 .2 .1 1
 		tcMod scroll 5 15
 	}
 	{
-		map textures/eerie/firewallb.png
+		map textures/eerie/firewallb
 		blendFunc GL_dst_color gl_src_alpha
 		tcMod scale .1 .1
 		tcMod turb .2 .1 .1 1
 		tcMod scroll 0 10
 	}
 	{
-		map textures/eerie/firewall.png
+		map textures/eerie/firewall
 		blendFunc GL_dst_color gl_one
 		tcMod turb .1 .1 .5 .5
 		tcMod scroll 10 40
@@ -332,11 +332,11 @@ textures/eerie/xq1metalbig_nojumppad
 	}
 	{
 		rgbGen identity
-		map textures/eerie/xq1metalbig_nojumppad.png
+		map textures/eerie/xq1metalbig_nojumppad
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/eerie/xq1metalbig_nojumppad.blend.png
+		map textures/eerie/xq1metalbig_nojumppad.blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
@@ -350,7 +350,7 @@ textures/eerie/metal3_3
 		rgbGen identity
 	}
 	{
-		map textures/eerie/metal3_3.png
+		map textures/eerie/metal3_3
 		rgbGen identity
 		blendfunc GL_DST_COLOR GL_ZERO
 	}
@@ -364,12 +364,12 @@ textures/eerie/teslacoil
 		rgbGen identity
 	}
 	{
-		map textures/eerie/cabletest2.png
+		map textures/eerie/cabletest2
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/electricgrade3.png
+		map textures/eerie/electricgrade3
 
 		rgbGen wave sin .25 .25 0.25 .25
 
@@ -380,7 +380,7 @@ textures/eerie/teslacoil
 		blendfunc GL_ONE GL_ONE
 	}
 	{
-		map textures/eerie/electricslime.png
+		map textures/eerie/electricslime
 		tcMod turb .2 .2 .1 1
 		tcMod scale .25 .25
 		tcMod scroll .5 1.5
@@ -395,18 +395,18 @@ textures/eerie/tesla_cable
 		rgbGen identity
 	}
 	{
-		map textures/eerie/tesla_cable.png
+		map textures/eerie/tesla_cable
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/electricslime.png
+		map textures/eerie/electricslime
 		tcMod turb .2 .2 1 .1
 		tcMod scroll 0 15
 		tcMod scale .1 .1
 		blendfunc GL_DST_COLOR GL_ONE
 
-//		map textures/eerie/electricslime.png
+//		map textures/eerie/electricslime
 //		tcMod turb 1 1 1 .01
 //		tcMod scroll 1 5
 //		tcMod scale .5 .5
@@ -420,12 +420,12 @@ textures/eerie/jesus
 		map $lightmap
 	}
 	{
-		map textures/eerie/jesus.png
+		map textures/eerie/jesus
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/jesus_mask3.blend.png
+		map textures/eerie/jesus_mask3.blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -438,16 +438,16 @@ textures/eerie/xq1metalbig_jumppad
 		rgbGen identity
 	}
 	{
-		map textures/eerie/q1metal7_98d_256x256.png
+		map textures/eerie/q1metal7_98d_256x256
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		clampmap textures/eerie/surface6jumppad.blend.png
+		clampmap textures/eerie/surface6jumppad.blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 .2
 //		tcMod stretch sin 0.80 0.20 0 1
-//		map textures/eerie/jumppad.png
+//		map textures/eerie/jumppad
 //		blendFunc GL_ONE GL_ONE
 //		rgbGen wave sin 0.5 0.5 0 .2
 	}
@@ -460,12 +460,12 @@ textures/eerie/blocks15b_jumppad
 		rgbGen identity
 	}
 	{
-		map textures/eerie/blocks15b_jumppad.png
+		map textures/eerie/blocks15b_jumppad
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/jumppad.png
+		map textures/eerie/jumppad
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
@@ -479,12 +479,12 @@ textures/eerie/blocks11b_jumppad
 		rgbGen identity
 	}
 	{
-		map textures/castle/blocks11b.png
+		map textures/castle/blocks11b
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		clampmap textures/eerie/jumppad.png
+		clampmap textures/eerie/jumppad
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 .2
 //		tcMod stretch sin 0.80 0.20 0 1
@@ -499,12 +499,12 @@ textures/eerie/blocks11b_jumppad_smaller
 		rgbGen identity
 	}
 	{
-		map textures/eerie/blocks11b_jumppad_smaller.png
+		map textures/eerie/blocks11b_jumppad_smaller
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/jumppad_smaller.png
+		map textures/eerie/jumppad_smaller
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
@@ -519,31 +519,31 @@ textures/eerie/pentagramfloor
 		rgbGen identity
 	}
 	{
-		map textures/eerie/pentagramfloor.png
+		map textures/eerie/pentagramfloor
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/pentagramfloor.red.blend.png
+		map textures/eerie/pentagramfloor.red.blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .5
 	}
 }
 textures/eerie/pentagramfloor_rotating
 {
-	qer_editorimage textures/eerie/pentagramfloor.png
+	qer_editorimage textures/eerie/pentagramfloor
 //	q3map_surfacelight 250
 	{
 		map $lightmap
 		rgbGen identity
 	}
 	{
-		map textures/eerie/xhugefloor2.png
+		map textures/eerie/xhugefloor2
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		clampmap textures/eerie/pentagramfloor.red.blend.png
+		clampmap textures/eerie/pentagramfloor.red.blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 0.5
 		tcMod rotate -60
@@ -559,12 +559,12 @@ textures/eerie/q1metal7_98d_pent_256
 		rgbGen identity
 	}
 	{
-		map textures/eerie/q1metal7_98d_pent_256.png
+		map textures/eerie/q1metal7_98d_pent_256
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/pentagramfloor_256x256.png
+		map textures/eerie/pentagramfloor_256x256
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .5
 	}
@@ -579,12 +579,12 @@ textures/eerie/border11light
 		rgbGen identity
 	}
 	{
-		map textures/eerie/border11light.png
+		map textures/eerie/border11light
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/border11light.blend.png
+		map textures/eerie/border11light.blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -596,12 +596,12 @@ textures/eerie/borderlight_500
 		rgbGen identity
 	}
 	{
-		map textures/eerie/border11light.png
+		map textures/eerie/border11light
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/border11light.blend.png
+		map textures/eerie/border11light.blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -622,7 +622,7 @@ textures/eerie/redgoal
 	q3map_surfacelight 200
 
 	{
-		map textures/eerie/redgoal.png
+		map textures/eerie/redgoal
 		tcGen environment
 		blendfunc GL_ONE GL_ONE
 		tcMod turb 0 0.25 0 0.05
@@ -632,7 +632,7 @@ textures/eerie/bluegoal
 {
 	q3map_surfacelight 200
 	{
-		map textures/eerie/bluegoal.png
+		map textures/eerie/bluegoal
 		tcGen environment
 		blendfunc GL_ONE GL_ONE
 		tcMod turb 0 0.25 0 0.05
@@ -644,7 +644,7 @@ textures/eerie/powerupshit
 	surfaceparm nonsolid
 	cull twosided
 	{
-		map textures/eerie/powerupshit.png
+		map textures/eerie/powerupshit
 		tcGen environment
 		blendfunc GL_ONE GL_ONE
 		tcMod turb 0 0.25 0 0.5
@@ -659,12 +659,12 @@ textures/eerie/xian_rune11
 		rgbGen identity
 	}
 	{
-		map textures/eerie/xian_rune11.png
+		map textures/eerie/xian_rune11
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/xian_rune11.blend.png
+		map textures/eerie/xian_rune11.blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -678,20 +678,20 @@ textures/eerie/xian_rune21
 		rgbGen identity
 	}
 	{
-		map textures/eerie/xian_rune21.png
-		//map textures/eerie/xian_rune21.specular.png
+		map textures/eerie/xian_rune21
+		//map textures/eerie/xian_rune21.specular
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/eerie/xian_rune21.blend.png
+		map textures/eerie/xian_rune21.blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
 textures/eerie/lightcone
 {
 	{
-		map textures/eerie/lightcone.png
+		map textures/eerie/lightcone
 		tcGen environment
 		blendfunc GL_ONE GL_ONE
 	}
@@ -702,7 +702,7 @@ textures/eerie/q1metal7_97b_mirror
 	surfaceparm nolightmap
 	portal
 	{
-		map textures/eerie/q1metal7_97b_mirror.png
+		map textures/eerie/q1metal7_97b_mirror
 		blendfunc GL_ONE GL_SRC_ALPHA
 		depthWrite
 	}
@@ -716,12 +716,12 @@ textures/eerie/cross_1000
 		rgbGen identity
 	}
 	{
-		map textures/eerie/cross_1000.png
+		map textures/eerie/cross_1000
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/cross_1000.blend.png
+		map textures/eerie/cross_1000.blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -734,12 +734,12 @@ textures/eerie/cross_2500
 		rgbGen identity
 	}
 	{
-		map textures/eerie/cross_2500.png
+		map textures/eerie/cross_2500
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/cross_2500.blend.png
+		map textures/eerie/cross_2500.blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -747,27 +747,27 @@ textures/eerie/cross_2500
 textures/eerie/light1
 {
 	q3map_surfacelight 2000
-	q3map_lightimage textures/eerie/light1.blend.png
+	q3map_lightimage textures/eerie/light1.blend
 	light 1
 	{
 		map $lightmap
 		rgbGen identity
 	}
 	{
-		map textures/eerie/light1.png
+		map textures/eerie/light1
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/light1.blend.png
+		map textures/eerie/light1.blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
 
 textures/eerie/light1_5000
 {
-	qer_editorimage textures/eerie/light1.png
-	q3map_lightimage textures/eerie/light1.blend.png
+	qer_editorimage textures/eerie/light1
+	q3map_lightimage textures/eerie/light1.blend
 	q3map_surfacelight 5000
 	light 1
 	{
@@ -775,12 +775,12 @@ textures/eerie/light1_5000
 		rgbGen identity
 	}
 	{
-		map textures/eerie/light1.png
+		map textures/eerie/light1
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/light1.blend.png
+		map textures/eerie/light1.blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -794,12 +794,12 @@ textures/eerie/light2
 		rgbGen identity
 	}
 	{
-		map textures/eerie/light2.png
+		map textures/eerie/light2
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/light2.blend.png
+		map textures/eerie/light2.blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -813,12 +813,12 @@ textures/eerie/light3_8
 		rgbGen identity
 	}
 	{
-		map textures/eerie/light3_8.png
+		map textures/eerie/light3_8
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/eerie/light3_8.blend.png
+		map textures/eerie/light3_8.blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -831,12 +831,12 @@ textures/eerie/xian_light3_7
 		rgbGen identity
 	}
 	{
-		map textures/eerie/xian_light3_7.png
+		map textures/eerie/xian_light3_7
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/eerie/xian_light3_7.blend.png
+		map textures/eerie/xian_light3_7.blend
 		blendfunc GL_ONE GL_ONE
 	}
 }

@@ -13,7 +13,7 @@ textures/common/invisible
 {
 	surfaceparm nolightmap
         {
-                map textures/common/invisible.png
+                map textures/common/invisible
                 alphaFunc GE128
 		depthWrite
 		rgbGen vertex
@@ -24,10 +24,10 @@ textures/common/teleporter
 {
 	surfaceparm nolightmap
 	surfaceparm noimpact
-	q3map_lightimage textures/sfx/powerupshit.png
+	q3map_lightimage textures/sfx/powerupshit
 	q3map_surfacelight 800
 	{
-		map textures/sfx/powerupshit.png
+		map textures/sfx/powerupshit
 		tcGen environment
 //		tcMod scale 5 5
 		tcMod turb 0 0.015 0 0.3
@@ -214,7 +214,7 @@ textures/common/terrain
 
 textures/common/terrain2
 {
-	qer_editorimage textures/common/terrain.png
+	qer_editorimage textures/common/terrain
 	surfaceparm dust
 	surfaceparm nodraw
 	surfaceparm nomarks
@@ -231,12 +231,12 @@ textures/common/nodraw
 
 textures/common/mirror1
 {
-	qer_editorimage textures/common/qer_mirror.png
+	qer_editorimage textures/common/qer_mirror
 	surfaceparm nolightmap
 	portal
 
 	{
-		map textures/common/mirror1.png
+		map textures/common/mirror1
 		blendfunc GL_ONE GL_ONE_MINUS_SRC_ALPHA
 		depthWrite
 	}
@@ -247,27 +247,27 @@ textures/common/mirror1
 
 textures/common/mirror2
 {
-	qer_editorimage textures/common/qer_mirror.png
+	qer_editorimage textures/common/qer_mirror
 	surfaceparm nolightmap
 	portal
 	{
-		map textures/common/mirror1.png
+		map textures/common/mirror1
 		blendfunc GL_ONE GL_ONE_MINUS_SRC_ALPHA
 		depthWrite
 	}
         {
-               map textures/sfx/mirror.png
+               map textures/sfx/mirror
 	       blendFunc GL_ZERO GL_ONE_MINUS_SRC_COLOR
         }
 
 }
 textures/common/energypad
 {
-	qer_editorimage textures/common/bluegoal.png
+	qer_editorimage textures/common/bluegoal
 	surfaceparm nolightmap
 	cull twosided
 	{
-		map textures/common/bluegoal.png
+		map textures/common/bluegoal
 		blendFunc GL_ONE GL_SRC_ALPHA
 		tcGen environment
 		tcMod turb 0 0.25 0 0.05
@@ -276,12 +276,12 @@ textures/common/energypad
 
 textures/common/portal
 {
-	qer_editorimage textures/common/qer_portal.png
+	qer_editorimage textures/common/qer_portal
 	surfaceparm nolightmap
 	portal
 	{
-		map textures/common/mirror1.png
-//		map textures/common/portal.png
+		map textures/common/mirror1
+//		map textures/common/portal
 		tcMod turb 0 0.25 0 0.05
 //		blendFunc GL_ONE GL_SRC_ALPHA
 		blendfunc GL_ONE GL_ONE_MINUS_SRC_ALPHA
@@ -292,11 +292,11 @@ textures/common/portal
 
 textures/common/timportal
 {
-	qer_editorimage textures/common/qer_portal.png
+	qer_editorimage textures/common/qer_portal
 	portal
 	surfaceparm nolightmap
 	{
-		map textures/common/portal.png
+		map textures/common/portal
 		tcMod turb 0 0.25 0 0.05
 		blendFunc GL_ONE GL_SRC_ALPHA
 		depthWrite
@@ -318,7 +318,7 @@ textures/sfx/portal_sfx
 
 
 	{
-		map textures/sfx/portal_sfx3.png
+		map textures/sfx/portal_sfx3
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	//	This blend function is not working on RagePro drivers Mac only
 	//	when it is used on top of portals
@@ -327,19 +327,19 @@ textures/sfx/portal_sfx
 
 
 	{
-		map textures/sfx/portal_sfx1.png
+		map textures/sfx/portal_sfx1
 		blendfunc gl_dst_color gl_zero
 		tcMod rotate 360
 	}
 
 	{
-		map textures/sfx/portal_sfx.png
+		map textures/sfx/portal_sfx
 		blendfunc gl_one gl_one
 		rgbgen wave inversesawtooth 0 .5 .2 .5
 	}
 
 	{
-		map textures/sfx/portalfog.png
+		map textures/sfx/portalfog
 		blendfunc gl_src_alpha gl_one_minus_src_alpha
 		alphagen portal 256
 		rgbGen identityLighting
@@ -363,7 +363,7 @@ textures/sfx/portal2_sfx
 
 
 	{
-		map textures/sfx/portal_sfx3.png
+		map textures/sfx/portal_sfx3
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	//	This blend function is not working on RagePro drivers Mac only
 	//	when it is used on top of portals
@@ -372,19 +372,19 @@ textures/sfx/portal2_sfx
 
 
 	{
-		map textures/sfx/portal_sfx1.png
+		map textures/sfx/portal_sfx1
 		blendfunc gl_dst_color gl_zero
 		tcMod rotate 360
 	}
 
 	{
-		map textures/sfx/portal_sfx.png
+		map textures/sfx/portal_sfx
 		blendfunc gl_one gl_one
 		rgbgen wave inversesawtooth 0 .5 .2 .5
 	}
 
 	{
-		map textures/sfx/portalfog.png
+		map textures/sfx/portalfog
 		blendfunc gl_src_alpha gl_one_minus_src_alpha
 		//alphagen portal 128
 		rgbGen identityLighting

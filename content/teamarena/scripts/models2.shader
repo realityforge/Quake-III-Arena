@@ -4,7 +4,7 @@ models/mapobjects/terrastone/magicstone01
 	//cull none
         //nopicmip
 	{
-		map textures/stone/pjrock9b_2.png
+		map textures/stone/pjrock9b_2
 		 rgbGen vertex
 	}
 
@@ -15,7 +15,7 @@ models/mapobjects/terrastone/magicstone02
 	//cull none
         //nopicmip
 	{
-		map textures/stone/pjrock9b_2.png
+		map textures/stone/pjrock9b_2
 		 rgbGen vertex
 	}
 
@@ -26,7 +26,7 @@ models/mapobjects/terrastone/magicstone03
 	//cull none
         //nopicmip
 	{
-		map textures/stone/pjrock9b_2.png
+		map textures/stone/pjrock9b_2
 		 rgbGen vertex
 	}
 
@@ -37,7 +37,7 @@ models/mapobjects/terrastone/magicstone04
 	//cull none
         //nopicmip
 	{
-		map textures/stone/pjrock9b_2.png
+		map textures/stone/pjrock9b_2
 		 rgbGen vertex
 	}
 
@@ -55,7 +55,7 @@ models/mapobjects/tree2/branch2
         //nopicmip
 
 	{
-		clampmap models/mapobjects/tree2/branch2.png
+		clampmap models/mapobjects/tree2/branch2
 		blendFunc GL_ZERO GL_ONE_MINUS_SRC_COLOR
 
 	}
@@ -68,7 +68,7 @@ models/mapobjects/weeds2/weeds2
      surfaceParm Trans
 
         {
-                map models/mapobjects/weeds2/weeds2.png
+                map models/mapobjects/weeds2/weeds2
                 alphaFunc GE128
 		depthWrite
                 rgbGen vertex
@@ -79,13 +79,13 @@ models/players/heads/james/james_e_red
 {
 
         {
-                map models/players/james/red2.png
+                map models/players/james/red2
                 tcmod scale   1 .3
                 tcMod scroll  0.1 2
                 rgbGen identity
         }
         {
-                map models/players/heads/james/james_e_red.png
+                map models/players/heads/james/james_e_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -94,13 +94,13 @@ models/players/heads/james/james_e_blu
 {
 
         {
-                map models/players/james/blue2.png
+                map models/players/james/blue2
                 tcmod scale   1 .3
                 tcMod scroll  0.1 2
                 rgbGen identity
         }
         {
-                map models/players/heads/james/james_e_blu.png
+                map models/players/heads/james/james_e_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -111,13 +111,13 @@ models/players/heads/janet/janet_blu
      //cull disable
 
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/heads/janet/janet_blu.png
+                map models/players/heads/janet/janet_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -128,13 +128,13 @@ models/players/heads/james/james_red
      //cull disable
 
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/heads/james/james_red.png
+                map models/players/heads/james/james_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -145,13 +145,13 @@ models/players/heads/janet/janet_red
      //cull disable
 
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/heads/janet/janet_red.png
+                map models/players/heads/janet/janet_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -162,13 +162,13 @@ models/players/heads/james/james_blu
      //cull disable
 
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/heads/james/james_blu.png
+                map models/players/heads/james/james_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -176,7 +176,7 @@ models/players/heads/james/james_blu
 models/powerups/ob2_1
 {
         {
-	        map models/powerups/overload_map.png
+	        map models/powerups/overload_map
                 blendFunc GL_ONE GL_ZERO
 		tcGen environment
 		rgbGen identity
@@ -186,7 +186,7 @@ models/powerups/ob2_1
 models/powerups/ob2_2
 {
         {
-	        map models/powerups/overload_mapbw.png
+	        map models/powerups/overload_mapbw
                 blendFunc GL_ONE GL_ZERO
 		tcGen environment
 		rgbGen entity
@@ -196,7 +196,7 @@ models/powerups/ob2_2
 models/powerups/ob2_3
 {
         {
-		map models/powerups/overload_lights.png
+		map models/powerups/overload_lights
 		tcmod scroll 1 1
 	        rgbGen entity
         }
@@ -206,7 +206,7 @@ models/powerups/ob2_4
 {
  cull disable
 	{
-		map models/powerups/pop_bw.png
+		map models/powerups/pop_bw
 		tcMod turb 0 0.1 0 0.1
                 tcmod rotate 311
                 tcmod scroll 1 1
@@ -219,7 +219,7 @@ models/powerups/ob2_4
 models/powerups/shield_1
 {
         {
-	        map models/powerups/shield_map.png
+	        map models/powerups/shield_map
 		tcGen environment
 		rgbGen identity
         }
@@ -228,7 +228,7 @@ models/powerups/shield_1
 models/powerups/shield_3
 {
         {
-	        map models/powerups/shield_map.png
+	        map models/powerups/shield_map
 		tcGen environment
 		blendfunc add
                 rgbGen identity
@@ -239,7 +239,7 @@ models/powerups/shield_2
 {
 
         {
-	        map models/powerups/shield_fx.png
+	        map models/powerups/shield_fx
 		blendfunc Add
                 tcmod Scroll 0 1
                 rgbGen identity
@@ -250,7 +250,7 @@ models/powerups/shield_2
 models/powerups/porter1
 {
         {
-	        map models/powerups/porter_map.png
+	        map models/powerups/porter_map
                 blendFunc GL_ONE GL_ZERO
 		tcGen environment
 		rgbGen identity
@@ -261,7 +261,7 @@ models/powerups/porter2
 {
 
         {
-	        map models/powerups/porter_fx.png
+	        map models/powerups/porter_fx
 		blendfunc Add
                 tcmod Scroll 0 1
                 rgbGen identity
@@ -274,7 +274,7 @@ models/mapobjects/statues/flagbits_stat
                cull none
 
 	 {
-                map models/mapobjects/statues/flagbits_stat.png
+                map models/mapobjects/statues/flagbits_stat
                 alphaFunc GE128
                 rgbGen lightingDiffuse
                 depthWrite
@@ -286,7 +286,7 @@ models/powerups/shield/shield
 {
  cull disable
 	{
-		map models/powerups/shield/shield.png
+		map models/powerups/shield/shield
 		tcGen environment
                 tcmod scale .5 .5
 		tcMod turb 0 0.3 0 0.3
@@ -300,12 +300,12 @@ models/powerups/shield/shield2
 {
  cull disable
 	{
-		map models/powerups/shield/shield2.png
+		map models/powerups/shield/shield2
                 tcmod rotate 313
 		blendfunc Add
 	}
         {
-		map models/powerups/shield/shield2.png
+		map models/powerups/shield/shield2
                 tcmod rotate -483
 		blendfunc Add
 	}
@@ -316,7 +316,7 @@ models/players/heads/callisto/callisto
 {
 
         {
-		AnimMap 5 models/players/heads/callisto/callisto.png models/players/heads/callisto/callisto.png models/players/heads/callisto/callisto.png models/players/heads/callisto/callisto.png models/players/heads/callisto/callisto.png models/players/heads/callisto/callisto2.png models/players/heads/callisto/callisto.png models/players/heads/callisto/callisto2.png
+		AnimMap 5 models/players/heads/callisto/callisto models/players/heads/callisto/callisto models/players/heads/callisto/callisto models/players/heads/callisto/callisto models/players/heads/callisto/callisto models/players/heads/callisto/callisto2 models/players/heads/callisto/callisto models/players/heads/callisto/callisto2
 		rgbGen lightingdiffuse
 	}
 
@@ -327,7 +327,7 @@ models/players/heads/ursula/ursula_e
 {
         surfaceparm trans
 	{
-		map models/players/heads/ursula/ursula_e.png
+		map models/players/heads/ursula/ursula_e
 		blendFunc Add
 		rgbgen wave triangle 0.2 0.5 0 0.2
        	}
@@ -339,7 +339,7 @@ models/players/heads/gaunt/gaunt_e
 {
         surfaceparm trans
 	{
-		map models/players/heads/gaunt/gaunt_e.png
+		map models/players/heads/gaunt/gaunt_e
 		blendFunc Add
 		rgbgen wave triangle 0.2 0.5 0 0.2
        	}
@@ -350,7 +350,7 @@ models/powerups/ob2_target
 	cull none
 
         {
-		map models/powerups/ob2_target.png
+		map models/powerups/ob2_target
 		//rgbGen identity
 		rgbGen entity
 	}
@@ -362,7 +362,7 @@ models/powerups/ob2_energy
 	cull none
 
         {
-		map models/powerups/ob2_energy.png
+		map models/powerups/ob2_energy
 		//rgbGen identity
 		rgbGen entity
 		blendfunc add
@@ -375,7 +375,7 @@ models/powerups/ob2_energy2
 	cull none
 
 	{
-		map models/powerups/ob2_energy2.png
+		map models/powerups/ob2_energy2
 		//rgbGen identity
 		rgbGen entity
 
@@ -392,7 +392,7 @@ models/powerups/ob2_lightning1
         cull none
 
         {
-		AnimMap 15 models/powerups/ob2_lightn1.png models/powerups/ob2_lightn2.png models/powerups/ob2_lightn3.png models/powerups/ob2_lightn4.png models/powerups/ob2_lightn5.png models/powerups/ob2_lightn6.png models/powerups/ob2_lightn7.png models/powerups/ob2_lightn8.png
+		AnimMap 15 models/powerups/ob2_lightn1 models/powerups/ob2_lightn2 models/powerups/ob2_lightn3 models/powerups/ob2_lightn4 models/powerups/ob2_lightn5 models/powerups/ob2_lightn6 models/powerups/ob2_lightn7 models/powerups/ob2_lightn8
 		rgbGen identity
 		blendfunc add
 	}
@@ -407,7 +407,7 @@ models/powerups/ob2_lightning2
         cull none
 
         {
-		AnimMap 15 models/powerups/ob2_lightn3.png models/powerups/ob2_lightn1.png models/powerups/ob2_lightn4.png models/powerups/ob2_lightn2.png models/powerups/ob2_lightn6.png models/powerups/ob2_lightn5.png models/powerups/ob2_lightn8.png models/powerups/ob2_lightn7.png
+		AnimMap 15 models/powerups/ob2_lightn3 models/powerups/ob2_lightn1 models/powerups/ob2_lightn4 models/powerups/ob2_lightn2 models/powerups/ob2_lightn6 models/powerups/ob2_lightn5 models/powerups/ob2_lightn8 models/powerups/ob2_lightn7
 		rgbGen identity
 		blendfunc add
 	}
@@ -422,7 +422,7 @@ models/powerups/ob2_lightning3
         cull none
 
         {
-		AnimMap 15 models/powerups/ob2_lightn4.png models/powerups/ob2_lightn6.png models/powerups/ob2_lightn1.png models/powerups/ob2_lightn3.png models/powerups/ob2_lightn8.png models/powerups/ob2_lightn4.png models/powerups/ob2_lightn5.png models/powerups/ob2_lightn3.png
+		AnimMap 15 models/powerups/ob2_lightn4 models/powerups/ob2_lightn6 models/powerups/ob2_lightn1 models/powerups/ob2_lightn3 models/powerups/ob2_lightn8 models/powerups/ob2_lightn4 models/powerups/ob2_lightn5 models/powerups/ob2_lightn3
 		rgbGen identity
 		blendfunc add
 	}
@@ -437,13 +437,13 @@ models/weaphits/kamiwave01
 	cull disable
         nomipmaps
 	{
-	        clampmap models/weaphits/kamiwave01.png
+	        clampmap models/weaphits/kamiwave01
 		blendFunc Add
                 tcmod rotate 20
 		rgbGen entity
 	}
 	{
-	        clampmap models/weaphits/kamiwave01.png
+	        clampmap models/weaphits/kamiwave01
 		blendFunc Add
   		tcmod rotate -20
 		rgbGen entity
@@ -455,7 +455,7 @@ models/weaphits/kamiwave02
         surfaceparm trans
 	cull disable
 	{
-	        map models/weaphits/kamiwave02.png
+	        map models/weaphits/kamiwave02
 		blendFunc Add
                 tcmod scroll 1 0
 		rgbGen entity
@@ -470,7 +470,7 @@ models/powerups/kamitrail
 	cull disable
         nomipmaps
 	{
-	        map models/powerups/kamitrail.png
+	        map models/powerups/kamitrail
 		blendFunc Add
 		rgbGen identity
 	}
@@ -479,11 +479,11 @@ models/weaphits/proxminet
 {
         cull disable
         {
-                map models/weaphits/proxmine.png
+                map models/weaphits/proxmine
                 rgbGen lightingdiffuse
         }
         {
-                map models/weaphits/proxminebt.png
+                map models/weaphits/proxminebt
                 blendFunc add
                 rgbGen wave sin .5 .5 0 2
         }
@@ -495,14 +495,14 @@ models/weaphits/proxmine2t
         cull disable
         nomipmaps
         {
-                clampmap models/weaphits/proxmine2t.png
+                clampmap models/weaphits/proxmine2t
                 blendFunc add
                 tcmod rotate 200
                 tcMod stretch sin .6 0.2 0 .11
                 rgbGen identity
         }
         {
-                clampmap models/weaphits/proxmine2t.png
+                clampmap models/weaphits/proxmine2t
                 blendFunc add
                 tcmod rotate -200
                 tcMod stretch sin .6 0.2 0 .2
@@ -514,13 +514,13 @@ models/weaphits/kamikred
 {
   cull disable
        {
-	        map textures/effects/tinfx2d.png
+	        map textures/effects/tinfx2d
                 tcGen environment
 		blendfunc GL_ONE GL_ZERO
                 rgbgen identity
        }
        {
-                map models/weaphits/kamik02r.png
+                map models/weaphits/kamik02r
                 tcGen environment
                 blendFunc add
                 tcmod scale .5 .5
@@ -535,13 +535,13 @@ models/weaphits/kamikblu
 {
   cull disable
        {
-	        map textures/effects/tinfx2d.png
+	        map textures/effects/tinfx2d
                 tcGen environment
 		blendfunc GL_ONE GL_ZERO
                 rgbgen identity
        }
        {
-                map models/weaphits/kamik02b.png
+                map models/weaphits/kamik02b
                 tcGen environment
                 blendFunc add
                 tcmod scale .5 .5
@@ -558,7 +558,7 @@ models/players/heads/gammy/gammy_blu
      deformVertexes wave 100 sin 0 .08 0 .23
 
         {
-                map models/players/heads/gammy/gammy_blu.png
+                map models/players/heads/gammy/gammy_blu
                 rgbGen lightingdiffuse
         }
 }
@@ -567,7 +567,7 @@ models/players/heads/gammy/gammy_red
      deformVertexes wave 100 sin 0 .08 0 .23
 
         {
-                map models/players/heads/gammy/gammy_blu.png
+                map models/players/heads/gammy/gammy_blu
                 rgbGen lightingdiffuse
         }
 }
@@ -577,7 +577,7 @@ models/players/heads/gammy/gammy2
      cull disable
 
         {
-                map models/players/heads/gammy/gammy2.png
+                map models/players/heads/gammy/gammy2
                 alphaFunc GE128
 		depthWrite
                 rgbGen lightingdiffuse
@@ -589,7 +589,7 @@ models/players/heads/gammy/gammy3
      cull disable
 
         {
-                map models/players/heads/gammy/gammy3.png
+                map models/players/heads/gammy/gammy3
                 alphaFunc GE128
 		depthWrite
                 rgbGen lightingdiffuse
@@ -602,13 +602,13 @@ models/players/heads/morgan/morgan_blu
 
 
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcGen environment
                 rgbGen lightingdiffuse
         }
 
         {
-                map models/players/heads/morgan/morgan_blu.png
+                map models/players/heads/morgan/morgan_blu
                 blendfunc Blend
                 rgbGen lightingdiffuse
         }
@@ -619,13 +619,13 @@ models/players/heads/morgan/morgan_red
 
 
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcGen environment
                 rgbGen lightingdiffuse
         }
 
         {
-                map models/players/heads/morgan/morgan_red.png
+                map models/players/heads/morgan/morgan_red
                 blendfunc Blend
                 rgbGen lightingdiffuse
         }
@@ -637,13 +637,13 @@ models/players/heads/megan/megan1_blu
 
 
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcGen environment
                 rgbGen lightingdiffuse
         }
 
         {
-                map models/players/heads/megan/megan1_blu.png
+                map models/players/heads/megan/megan1_blu
                 blendfunc Blend
                 rgbGen lightingdiffuse
         }
@@ -655,13 +655,13 @@ models/players/heads/megan/megan1_red
 
 
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcGen environment
                 rgbGen lightingdiffuse
         }
 
         {
-                map models/players/heads/megan/megan1_red.png
+                map models/players/heads/megan/megan1_red
                 blendfunc Blend
                 rgbGen lightingdiffuse
         }
@@ -675,12 +675,12 @@ models/players/heads/megan/megan3
      //cull disable
 
        // {
-       //         map models/players/heads/megan/megan3.png
+       //         map models/players/heads/megan/megan3
        //         blendFunc Add
        //         rgbGen lightingdiffuse
        // }
         {
-                map textures/effects/tinfx2c.png
+                map textures/effects/tinfx2c
                 blendFunc Add
                 tcGen environment
                 rgbGen lightingdiffuse
@@ -692,13 +692,13 @@ models/players/heads/megan/megan2
 
 
         {
-                map textures/effects/tinfx2c.png
+                map textures/effects/tinfx2c
                 tcGen environment
                 rgbGen lightingdiffuse
         }
 
         {
-                map models/players/heads/megan/megan2.png
+                map models/players/heads/megan/megan2
                 blendfunc Blend
                 rgbGen lightingdiffuse
         }
@@ -711,7 +711,7 @@ models/powerups/teleporter/tele_enter
      cull disable
 
         {
-                clampmap models/powerups/teleporter/tele_enter.png
+                clampmap models/powerups/teleporter/tele_enter
                 alphaFunc GE128
 		depthWrite
                 rgbGen lightingdiffuse
@@ -723,7 +723,7 @@ models/powerups/teleporter/tele_enter2
      cull disable
 
         {
-                clampmap models/powerups/teleporter/tele_enter2.png
+                clampmap models/powerups/teleporter/tele_enter2
                 blendfunc Add
                 tcmod rotate 120
                 rgbGen lightingdiffuse
@@ -735,7 +735,7 @@ models/powerups/teleporter/tele_exit2
      cull disable
 
         {
-                clampmap models/powerups/teleporter/tele_exit2.png
+                clampmap models/powerups/teleporter/tele_exit2
                 blendfunc Add
                 tcmod rotate 120
                 rgbGen lightingdiffuse
@@ -747,7 +747,7 @@ models/powerups/teleporter/tele_exit
      cull disable
 
         {
-                clampmap models/powerups/teleporter/tele_exit.png
+                clampmap models/powerups/teleporter/tele_exit
                 alphaFunc GE128
 		depthWrite
                 rgbGen lightingdiffuse
@@ -762,7 +762,7 @@ models/players/heads/neptune/neptune2
      //cull disable
 
         {
-                map models/players/heads/neptune/neptune2.png
+                map models/players/heads/neptune/neptune2
                 alphaFunc GE128
 		depthWrite
                 rgbGen lightingdiffuse
@@ -776,7 +776,7 @@ models/mapobjects/techlamp/techlamp02trn
      surfaceparm alphashadow
 
         {
-                map models/mapobjects/techlamp/techlamp02trn.png
+                map models/mapobjects/techlamp/techlamp02trn
                 alphaFunc GE128
 		depthWrite
                 rgbGen vertex
@@ -789,7 +789,7 @@ models/mapobjects/techlamp/techlamp02lt
      surfaceparm alphashadow
 
         {
-                map models/mapobjects/techlamp/techlamp02lt.png
+                map models/mapobjects/techlamp/techlamp02lt
                 BlendFunc Add
                 rgbGen wave sin 0 1 0 .5
         }
@@ -801,7 +801,7 @@ models/mapobjects/techlamp/techlamp_rail
      surfaceparm alphashadow
 
         {
-                map models/mapobjects/techlamp/techlamp_rail.png
+                map models/mapobjects/techlamp/techlamp_rail
                 alphaFunc GE128
 		depthWrite
                 rgbGen vertex
@@ -814,7 +814,7 @@ models/mapobjects/techlamp/techlamp_rail2
      cull disable
 
         {
-                map models/mapobjects/techlamp/techlamp_rail2.png
+                map models/mapobjects/techlamp/techlamp_rail2
                 alphaFunc GE128
 		depthWrite
                 rgbGen vertex
@@ -827,7 +827,7 @@ models/mapobjects/techlamp/techlamp_rail2b
      cull disable
 
         {
-                map models/mapobjects/techlamp/techlamp_rail2b.png
+                map models/mapobjects/techlamp/techlamp_rail2b
                 alphaFunc GE128
 		depthWrite
                 rgbGen vertex
@@ -838,7 +838,7 @@ models/mapobjects/techlamp/techlamp_pole
 {
  deformVertexes normal .1 .03
         {
-                map models/mapobjects/techlamp/techlamp_pole2.png
+                map models/mapobjects/techlamp/techlamp_pole2
                 tcmod Scale 1 2
                 tcGen environment
                 tcmod scroll 0 .3
@@ -846,7 +846,7 @@ models/mapobjects/techlamp/techlamp_pole
 
         }
         {
-                map models/mapobjects/techlamp/techlamp_pole.png
+                map models/mapobjects/techlamp/techlamp_pole
                 blendFunc blend
                 rgbGen Vertex
 
@@ -865,7 +865,7 @@ models/mapobjects/slamp/slamp3x
    //q3map_surfacelight	100
 
         {
-                map models/mapobjects/slamp/slamp3x.png
+                map models/mapobjects/slamp/slamp3x
                 blendFunc GL_ONE GL_ONE
 
         }
@@ -877,7 +877,7 @@ models/flags/pole
 {
 
         {
-             map textures/effects/tinfx.png
+             map textures/effects/tinfx
 		tcGen environment
 		rgbGen lightingDiffuse
 
@@ -890,7 +890,7 @@ models/flag/flagbits2
 {
                cull none
 	{
-                map models/mapobjects/statues/flagbits_stat.png
+                map models/mapobjects/statues/flagbits_stat
                 alphaFunc GE128
                 rgbGen lightingDiffuse
                 depthWrite
@@ -903,7 +903,7 @@ models/flag/flagbits
                cull none
 	      // deformVertexes wave 100 sin 0 5 0 .7
 	 {
-                map models/flags/flagbits.png
+                map models/flags/flagbits
                 //blendfunc gl_src_alpha gl_one_minus_src_alpha
                 alphaFunc GE128
                 rgbGen lightingDiffuse
@@ -921,11 +921,11 @@ models/flag2/w_flag2
         cull none
 
         {
-		map models/flag2/w_flag2.png
+		map models/flag2/w_flag2
 		 rgbGen identity
 	}
         {
-		map models/flag2/neutral_fx.png
+		map models/flag2/neutral_fx
                 tcGen environment
                 //tcmod scale 9 3
                 //tcmod scroll .1 .7
@@ -934,12 +934,12 @@ models/flag2/w_flag2
                  rgbGen identity
 	}
         {
-		map models/flag2/w_flag2.png
+		map models/flag2/w_flag2
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	        rgbGen identity
 	}
         {
-		map textures/sfx/shadow.png
+		map textures/sfx/shadow
                 tcGen environment
                 //blendFunc GL_ONE GL_ONE
                 blendFunc GL_DST_COLOR GL_ZERO
@@ -955,11 +955,11 @@ models/flag2/r_flag2
         cull none
 
         {
-		map models/flag2/r_flag2.png
+		map models/flag2/r_flag2
 		 rgbGen identity
 	}
         {
-		map models/flag2/red_fx.png
+		map models/flag2/red_fx
                 tcGen environment
                 //tcmod scale 9 3
                 //tcmod scroll .1 .7
@@ -968,12 +968,12 @@ models/flag2/r_flag2
                  rgbGen identity
 	}
         {
-		map models/flag2/r_flag2.png
+		map models/flag2/r_flag2
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	        rgbGen identity
 	}
         {
-		map textures/sfx/shadow.png
+		map textures/sfx/shadow
                 tcGen environment
                 //blendFunc GL_ONE GL_ONE
                 blendFunc GL_DST_COLOR GL_ZERO
@@ -989,11 +989,11 @@ models/flag2/b_flag2
         cull none
 
         {
-		map models/flag2/b_flag2.png
+		map models/flag2/b_flag2
 		 rgbGen identity
 	}
         {
-		map models/flag2/blue_fx.png
+		map models/flag2/blue_fx
                 tcGen environment
                 //tcmod scale 9 3
                 //tcmod scroll .1 .7
@@ -1001,12 +1001,12 @@ models/flag2/b_flag2
                 rgbGen identity
 	}
         {
-		map models/flag2/b_flag2.png
+		map models/flag2/b_flag2
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	        rgbGen identity
 	}
         {
-		map textures/sfx/shadow.png
+		map textures/sfx/shadow
                 tcGen environment
                 //blendFunc GL_ONE GL_ONE
                 blendFunc GL_DST_COLOR GL_ZERO
@@ -1016,7 +1016,7 @@ models/flag2/b_flag2
 models/powerups/kamikazi1
 {
         {
-	        map textures/effects/tinfx2d.png
+	        map textures/effects/tinfx2d
 		tcGen environment
 		rgbGen identity
         }
@@ -1025,7 +1025,7 @@ models/powerups/kamikazi1
 models/powerups/kamikazi2
 {
         {
-	        map textures/effects/tinfx2d.png
+	        map textures/effects/tinfx2d
 		tcGen environment
 		blendfunc add
                 rgbGen identity
@@ -1036,7 +1036,7 @@ models/powerups/kamikazi_f
 {
 
         {
-	        map models/powerups/kamikazi_f.png
+	        map models/powerups/kamikazi_f
 		blendfunc Add
                 tcmod Scroll 0 1
                 rgbGen identity
@@ -1048,7 +1048,7 @@ models/players/xscout/scout2x
 {
     cull disable
         {
-	        map models/players/xscout/scout2.png
+	        map models/players/xscout/scout2
 		blendfunc Add
                 tcmod Scroll 1.3 0
                 rgbGen identity
@@ -1058,7 +1058,7 @@ models/players/xscout/scout2x
 models/powerups/ammo1
 {
         {
-	        map textures/effects/envmapmach.png
+	        map textures/effects/envmapmach
 		tcGen environment
 		blendfunc GL_ONE GL_ZERO
                 rgbGen lightingDiffuse
@@ -1069,7 +1069,7 @@ models/powerups/ammo2
 {
     cull disable
         {
-	        map models/powerups/ammo2.png
+	        map models/powerups/ammo2
 		blendfunc Add
                 tcmod Scroll 1.3 0
                 rgbGen identity
@@ -1080,7 +1080,7 @@ models/powerups/ammo2
 models/powerups/scout1
 {
         {
-	        map textures/effects/envmapgreen.png
+	        map textures/effects/envmapgreen
 		tcGen environment
 		blendfunc GL_ONE GL_ZERO
                 rgbGen lightingDiffuse
@@ -1091,7 +1091,7 @@ models/powerups/scout2
 {
     cull disable
         {
-	        map models/powerups/scout2.png
+	        map models/powerups/scout2
 		blendfunc Add
                 tcmod Scroll .9 0
                 rgbGen identity
@@ -1101,7 +1101,7 @@ models/powerups/scout2
 models/powerups/guard1
 {
         {
-	        map textures/effects/envmapblue.png
+	        map textures/effects/envmapblue
 		tcGen environment
 		blendfunc GL_ONE GL_ZERO
                 rgbGen lightingDiffuse
@@ -1111,7 +1111,7 @@ models/powerups/guard2
 {
     cull disable
         {
-	        map models/powerups/guard2.png
+	        map models/powerups/guard2
 		blendfunc Add
                 tcmod Scroll .9 0
                 rgbGen identity
@@ -1120,7 +1120,7 @@ models/powerups/guard2
 models/powerups/doubler1
 {
         {
-	        map textures/effects/envmaproc.png
+	        map textures/effects/envmaproc
 		tcGen environment
 		blendfunc GL_ONE GL_ZERO
                 rgbGen lightingDiffuse
@@ -1130,7 +1130,7 @@ models/powerups/doubler2
 {
     cull disable
         {
-	        map models/powerups/doubler2.png
+	        map models/powerups/doubler2
 		blendfunc Add
                 tcmod Scroll .9 0
                 rgbGen identity
@@ -1142,12 +1142,12 @@ models/mapobjects/spawn/spawn3
      cull disable
 
         {
-                clampmap models/mapobjects/spawn/spawn3_b.png
+                clampmap models/mapobjects/spawn/spawn3_b
                 tcmod rotate 222
                 rgbGen identity
         }
         {
-                clampmap models/mapobjects/spawn/spawn3.png
+                clampmap models/mapobjects/spawn/spawn3
                 blendfunc Blend
                 rgbGen vertex
         }
@@ -1158,12 +1158,12 @@ models/mapobjects/spawn/spawn3_r
      cull disable
 
         {
-                clampmap models/mapobjects/spawn/spawn3_r.png
+                clampmap models/mapobjects/spawn/spawn3_r
                 tcmod rotate 222
                 rgbGen identity
         }
         {
-                clampmap models/mapobjects/spawn/spawn3.png
+                clampmap models/mapobjects/spawn/spawn3
                 blendfunc Blend
                 rgbGen vertex
         }
@@ -1175,7 +1175,7 @@ models/powerups/obelisk/ob_trns
      cull disable
 
         {
-                map models/powerups/obelisk/ob_trns.png
+                map models/powerups/obelisk/ob_trns
                 alphaFunc GE128
 		depthWrite
                 rgbGen lightingdiffuse
@@ -1185,14 +1185,14 @@ models/powerups/obelisk/ob_trns
 models/powerups/obelisk/ob_sft
 {
         {
-	        map models/powerups/obelisk/ob_sft2.png
+	        map models/powerups/obelisk/ob_sft2
 		tcmod scroll 0 .05
 		blendfunc GL_ONE GL_ZERO
                 rgbGen identity
         }
 
         {
-                map models/powerups/obelisk/ob_sft.png
+                map models/powerups/obelisk/ob_sft
                 blendfunc blend
                 rgbGen lightingdiffuse
         }
@@ -1205,7 +1205,7 @@ models/powerups/obelisk/ob_twirl
      nomipmaps
      deformVertexes move 0 0 2  sin 0 5 0 0.33
         {
-                clampmap models/powerups/obelisk/ob_twirl.png
+                clampmap models/powerups/obelisk/ob_twirl
                 tcmod rotate 103
                 Blendfunc Add
                 rgbGen identity
@@ -1218,7 +1218,7 @@ models/powerups/obelisk/ob_twirl2
      nomipmaps
      deformVertexes move 0 0 3  sin 0 5 0 0.2
         {
-                clampmap models/powerups/obelisk/ob_twirl2.png
+                clampmap models/powerups/obelisk/ob_twirl2
                 tcmod rotate -73
                 Blendfunc Add
                 rgbGen identity
@@ -1231,7 +1231,7 @@ models/powerups/obelisk/ob_flare
      nomipmaps
       deformVertexes autoSprite2
         {
-                map models/powerups/obelisk/ob_flare.png
+                map models/powerups/obelisk/ob_flare
                 Blendfunc Add
                 rgbGen identity
         }
@@ -1244,7 +1244,7 @@ models/powerups/obelisk/ob_flare2
      nomipmaps
       deformVertexes autoSprite
         {
-                map models/powerups/obelisk/ob_flare2.png
+                map models/powerups/obelisk/ob_flare2
                 Blendfunc Add
                 rgbGen identity
         }
@@ -1255,14 +1255,14 @@ models/powerups/obelisk/ob_cyl
      cull disable
 
         {
-                map models/powerups/obelisk/ob_cyl.png
+                map models/powerups/obelisk/ob_cyl
                 Blendfunc Add
                 tcmod scroll .2 0
                 rgbGen identity
         }
 
         {
-                map models/powerups/obelisk/ob_cyl.png
+                map models/powerups/obelisk/ob_cyl
                 Blendfunc Add
                 tcmod scroll -.33 0
                 rgbGen identity
@@ -1274,12 +1274,12 @@ models/powerups/orb/red
      cull disable
 
         {
-                map models/powerups/orb/red.png
+                map models/powerups/orb/red
                 Blendfunc Add
                 rgbGen identity
         }
         {
-                map models/powerups/orb/redfx.png
+                map models/powerups/orb/redfx
                 //tcGen environment
                 tcmod scroll 0 0.2
                 Blendfunc Add
@@ -1291,12 +1291,12 @@ models/powerups/orb/blue
      cull disable
 
         {
-                map models/powerups/orb/blue.png
+                map models/powerups/orb/blue
                 Blendfunc Add
                 rgbGen identity
         }
         {
-                map models/powerups/orb/bluefx.png
+                map models/powerups/orb/bluefx
                 //tcGen environment
                 tcmod scroll 0 0.2
                 Blendfunc Add
@@ -1308,7 +1308,7 @@ models/weaphits/kamik01
 {
   cull disable
        {
-	        map models/weaphits/kamik01.png
+	        map models/weaphits/kamik01
                 tcGen environment
                 blendfunc GL_ONE GL_ZERO
 		//blendfunc   	blend
@@ -1316,7 +1316,7 @@ models/weaphits/kamik01
                 rgbGen identity
        }
        {
-                map models/weaphits/kamik02.png
+                map models/weaphits/kamik02
                 tcGen environment
                 blendFunc add
                 tcmod scale .5 .5
@@ -1326,7 +1326,7 @@ models/weaphits/kamik01
                 rgbGen identity
         }
        {
-                map models/weaphits/kamik02.png
+                map models/weaphits/kamik02
                 tcGen environment
                 blendFunc add
                 tcmod scale .5 .5
@@ -1339,13 +1339,13 @@ models/weaphits/kamik01
 models/powerups/ammo/proxammo
 {
        {
-	        map textures/effects/tinfx2d.png
+	        map textures/effects/tinfx2d
 		tcGen environment
 		blendfunc GL_ONE GL_ZERO
                 rgbGen identity
        }
        {
-	        map models/powerups/ammo/proxammo.png
+	        map models/powerups/ammo/proxammo
 		blendfunc blend
                 rgbGen lightingDiffuse
        }
@@ -1353,7 +1353,7 @@ models/powerups/ammo/proxammo
 models/powerups/ammo/proxammo2
 {
        {
-	        map models/powerups/ammo/proxammo2.png
+	        map models/powerups/ammo/proxammo2
 		blendfunc GL_ONE GL_ZERO
                 rgbGen identity
        }
@@ -1362,13 +1362,13 @@ models/powerups/ammo/proxammo2
 models/powerups/ammo/chaingammo
 {
        {
-	        map textures/effects/tinfx2d.png
+	        map textures/effects/tinfx2d
 		tcGen environment
 		blendfunc GL_ONE GL_ZERO
                 rgbGen identity
        }
        {
-	        map models/powerups/ammo/chaingammo.png
+	        map models/powerups/ammo/chaingammo
 		blendfunc blend
                 rgbGen lightingDiffuse
        }
@@ -1376,7 +1376,7 @@ models/powerups/ammo/chaingammo
 models/powerups/ammo/chaingammo2
 {
        {
-	        map models/powerups/ammo/chaingammo2.png
+	        map models/powerups/ammo/chaingammo2
 		blendfunc GL_ONE GL_ZERO
                 rgbGen identity
        }
@@ -1385,13 +1385,13 @@ models/powerups/ammo/chaingammo2
 models/powerups/ammo/nailgammo
 {
        {
-	        map textures/effects/tinfx2d.png
+	        map textures/effects/tinfx2d
 		tcGen environment
 		blendfunc GL_ONE GL_ZERO
                 rgbGen identity
        }
        {
-	        map models/powerups/ammo/nailgammo.png
+	        map models/powerups/ammo/nailgammo
 		blendfunc blend
                 rgbGen lightingDiffuse
        }
@@ -1399,7 +1399,7 @@ models/powerups/ammo/nailgammo
 models/powerups/ammo/nailgammo2
 {
        {
-	        map models/powerups/ammo/nailgammo2.png
+	        map models/powerups/ammo/nailgammo2
 		blendfunc GL_ONE GL_ZERO
                 rgbGen identity
        }
@@ -1409,7 +1409,7 @@ models/weapons/proxmine/f_proxmine
 {
         cull disable
         {
-                map models/weapons/proxmine/f_proxmine.png
+                map models/weapons/proxmine/f_proxmine
                 blendFunc add
                 rgbGen identity
         }
@@ -1421,11 +1421,11 @@ models/weapons/proxmine/proxmine2
 {
         cull disable
         {
-                map models/weapons/proxmine/proxmine2.png
+                map models/weapons/proxmine/proxmine2
                 rgbGen lightingdiffuse
         }
         {
-                map models/weapons/proxmine/proxmine2b.png
+                map models/weapons/proxmine/proxmine2b
                 blendFunc add
                 rgbGen wave sin .5 .5 0 2
         }
@@ -1436,12 +1436,12 @@ models/weapons/proxmine/proxmine1
 {
         cull disable
         {
-                map models/weapons/proxmine/proxmine1b.png
+                map models/weapons/proxmine/proxmine1b
                 tcmod scroll 0 2
                 rgbGen lightingdiffuse
         }
         {
-                map models/weapons/proxmine/proxmine1.png
+                map models/weapons/proxmine/proxmine1
                 blendFunc Blend
                 rgbGen lightingdiffuse
         }
@@ -1451,13 +1451,13 @@ models/weaphits/kam01
 {
         cull disable
         {
-                map models/weaphits/kam01.png
+                map models/weaphits/kam01
                 blendFunc add
                 tcmod Scroll 1.4 0
                 rgbGen identity
         }
         {
-                map models/weaphits/kam02.png
+                map models/weaphits/kam02
                 blendFunc add
                 tcmod Scroll -1.9 0
                 rgbGen identity
@@ -1468,13 +1468,13 @@ models/weaphits/kam02
 {
         cull disable
         {
-                map models/weaphits/kam01.png
+                map models/weaphits/kam01
                 blendFunc add
                 tcmod Scroll -2 0
                 rgbGen identity
         }
         {
-                map models/weaphits/kam02.png
+                map models/weaphits/kam02
                 blendFunc add
                 tcmod Scroll 1 0
                 rgbGen identity
@@ -1486,13 +1486,13 @@ models/weaphits/kam03
         cull disable
         deformVertexes autoSprite
         {
-                clampmap models/weaphits/kam03.png
+                clampmap models/weaphits/kam03
                 blendFunc add
                 tcmod rotate 133
                 rgbGen identity
         }
         {
-                clampmap models/weaphits/kam03b.png
+                clampmap models/weaphits/kam03b
                 blendFunc add
                 tcmod rotate -113
                 rgbGen identity
@@ -1504,7 +1504,7 @@ models/weaphits/kam04
         cull disable
         deformVertexes autoSprite
         {
-                clampmap models/weaphits/kam04.png
+                clampmap models/weaphits/kam04
                 blendFunc add
                 tcmod rotate 999
                 rgbGen identity
@@ -1516,11 +1516,11 @@ models/weaphits/proxmine
 {
         cull disable
         {
-                map models/weaphits/proxmine.png
+                map models/weaphits/proxmine
                 rgbGen lightingdiffuse
         }
         {
-                map models/weaphits/proxmineb.png
+                map models/weaphits/proxmineb
                 blendFunc add
                 rgbGen wave sin .5 .5 0 2
         }
@@ -1532,14 +1532,14 @@ models/weaphits/proxmine2
         cull disable
         nomipmaps
         {
-                clampmap models/weaphits/proxmine2.png
+                clampmap models/weaphits/proxmine2
                 blendFunc add
                 tcmod rotate 200
                 tcMod stretch sin .6 0.2 0 .11
                 rgbGen identity
         }
         {
-                clampmap models/weaphits/proxmine2.png
+                clampmap models/weaphits/proxmine2
                 blendFunc add
                 tcmod rotate -200
                 tcMod stretch sin .6 0.2 0 .2
@@ -1554,7 +1554,7 @@ models/weapons/nailgun/nail
      cull disable
 
         {
-                map models/weapons/nailgun/nail.png
+                map models/weapons/nailgun/nail
                 alphaFunc GE128
 		depthWrite
                 rgbGen identity
@@ -1566,7 +1566,7 @@ models/weapons/nailgun/nail2
      cull disable
 
         {
-                map models/weapons/nailgun/nail2.png
+                map models/weapons/nailgun/nail2
                 alphaFunc GE128
 		depthWrite
                 rgbGen identity
@@ -1578,7 +1578,7 @@ models/weapons/nailgun/f_nailgun
      cull disable
 
         {
-                map models/weapons/nailgun/f_nailgun.png
+                map models/weapons/nailgun/f_nailgun
                 Blendfunc Add
                 rgbGen identity
         }
@@ -1590,13 +1590,13 @@ models/weapons/nailgun/nailgun
      cull disable
 
         {
-                map models/weapons/nailgun/nailgun_env.png
+                map models/weapons/nailgun/nailgun_env
                 //tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/weapons/nailgun/nailgun.png
+                map models/weapons/nailgun/nailgun
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -1607,13 +1607,13 @@ models/players/fritzkrieg/fritz_fx
      cull disable
 
         {
-                map models/players/fritzkrieg/fritz_fx2.png
+                map models/players/fritzkrieg/fritz_fx2
                 //tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/fritzkrieg/fritz_fx.png
+                map models/players/fritzkrieg/fritz_fx
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -1624,7 +1624,7 @@ models/players/fritzkrieg/fritz_c
 	cull none
         //nopicmip
 	{
-		map models/players/fritzkrieg/fritz_c.png
+		map models/players/fritzkrieg/fritz_c
 		alphaFunc GE128
 		depthWrite
 		rgbGen lightingdiffuse
@@ -1637,7 +1637,7 @@ models/players/fritzkrieg/beam
      cull disable
 
         {
-                map models/players/fritzkrieg/beam.png
+                map models/players/fritzkrieg/beam
                 Blendfunc Add
                 rgbGen identity
         }
@@ -1648,7 +1648,7 @@ models/players/fritzkrieg/beam2
      cull disable
 
         {
-                map models/players/fritzkrieg/beam2.png
+                map models/players/fritzkrieg/beam2
                 Blendfunc Add
                 rgbGen identity
         }
@@ -1659,7 +1659,7 @@ models/players/heads/khan/khan_f
 	cull twosided
         //nopicmip
 	{
-		map models/players/heads/khan/khan_f.png
+		map models/players/heads/khan/khan_f
 		blendFunc Blend
 		//depthWrite
 		rgbGen lightingdiffuse
@@ -1672,7 +1672,7 @@ models/players/pi/piston
 	cull none
         //nopicmip
 	{
-		map models/players/pi/piston.png
+		map models/players/pi/piston
 		alphaFunc GE128
 		depthWrite
 		rgbGen lightingdiffuse
@@ -1685,7 +1685,7 @@ models/players/pi/pi_t
 	cull none
         //nopicmip
 	{
-		map models/players/pi/pi_t.png
+		map models/players/pi/pi_t
 		alphaFunc GE128
 		depthWrite
 		rgbGen lightingdiffuse
@@ -1698,7 +1698,7 @@ models/players/pi/ntrl_t
 	cull none
         //nopicmip
 	{
-		map models/players/pi/ntrl_t.png
+		map models/players/pi/ntrl_t
 		alphaFunc GE128
 		depthWrite
 		rgbGen lightingdiffuse
@@ -1711,7 +1711,7 @@ models/players/pi/pi_t2
 	cull none
         //nopicmip
 	{
-		map models/players/pi/pi_t2.png
+		map models/players/pi/pi_t2
 		alphaFunc GE128
 		depthWrite
 		rgbGen lightingdiffuse
@@ -1724,7 +1724,7 @@ models/players/pi/hair
 	surfaceparm	nodraw
         //nopicmip
 	//{
-	//	map models/players/pi/hair.png
+	//	map models/players/pi/hair
 	//	blendFunc Blend
 		//depthWrite
 	//	rgbGen lightingdiffuse
@@ -1745,7 +1745,7 @@ models/players/pi/pi
 		rgbGen lightingDiffuse
 	}
 	{
-        	map models/players/pi/pi.png
+        	map models/players/pi/pi
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -1758,7 +1758,7 @@ models/players/pi/beam
      cull disable
 
         {
-                map models/players/pi/beam.png
+                map models/players/pi/beam
                 Blendfunc Add
                 rgbGen identity
         }
@@ -1769,7 +1769,7 @@ models/players/pi/beam2
      cull disable
 
         {
-                map models/players/pi/beam2.png
+                map models/players/pi/beam2
                 Blendfunc Add
                 rgbGen identity
         }
@@ -1778,7 +1778,7 @@ models/players/pi/endcap
 {
 	cull none
 	{
-		clampmap models/players/pi/endcap.png
+		clampmap models/players/pi/endcap
 		alphaFunc GE128
                 tcmod rotate 12
 		depthWrite
@@ -1790,7 +1790,7 @@ models/players/pi/redendcap
 {
 	cull none
 	{
-		clampmap models/players/pi/redendcap.png
+		clampmap models/players/pi/redendcap
 		alphaFunc GE128
                 tcmod rotate 12
 		depthWrite
@@ -1802,7 +1802,7 @@ models/players/pi/bluendcap
 {
 	cull none
 	{
-		clampmap models/players/pi/bluendcap.png
+		clampmap models/players/pi/bluendcap
 		alphaFunc GE128
                 tcmod rotate 12
 		depthWrite
@@ -1815,7 +1815,7 @@ models/players/pi/gear01
 	cull none
         //nopicmip
 	{
-		clampmap models/players/pi/gear01.png
+		clampmap models/players/pi/gear01
 		alphaFunc GE128
                 tcmod rotate -102
 		depthWrite
@@ -1833,12 +1833,12 @@ models/players/janet/thefallen/thefallen_red
 
     \\ cull disable
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/janet/thefallen/thefallen_red.png
+                map models/players/janet/thefallen/thefallen_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -1848,12 +1848,12 @@ models/players/janet/thefallen/thefallen_blu
 
      //cull disable
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/janet/thefallen/thefallen_blu.png
+                map models/players/janet/thefallen/thefallen_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -1866,12 +1866,12 @@ models/players/janet/intruders/intruders_red
 
      //cull disable
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/janet/intruders/intruders_red.png
+                map models/players/janet/intruders/intruders_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -1881,12 +1881,12 @@ models/players/janet/intruders/intruders_blu
 
      //cull disable
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/janet/intruders/intruders_blu.png
+                map models/players/janet/intruders/intruders_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -1898,12 +1898,12 @@ models/players/janet/stroggs/stroggs_red
 
      //cull disable
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/janet/stroggs/stroggs_red.png
+                map models/players/janet/stroggs/stroggs_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -1913,12 +1913,12 @@ models/players/janet/stroggs/stroggs_blu
 
      //cull disable
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/janet/stroggs/stroggs_blu.png
+                map models/players/janet/stroggs/stroggs_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -1929,12 +1929,12 @@ models/players/janet/crusaders/crusaders_red
 
     // cull disable
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/janet/crusaders/crusaders_red.png
+                map models/players/janet/crusaders/crusaders_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -1944,12 +1944,12 @@ models/players/janet/crusaders/crusaders_blu
 
      //cull disable
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/janet/crusaders/crusaders_blu.png
+                map models/players/janet/crusaders/crusaders_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -1960,12 +1960,12 @@ models/players/janet/pagans/pagans_h_blu
 
 
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/janet/pagans/pagans_h_blu.png
+                map models/players/janet/pagans/pagans_h_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -1976,12 +1976,12 @@ models/players/janet/pagans/pagans_blu
 
      //cull disable
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/janet/pagans/pagans_blu.png
+                map models/players/janet/pagans/pagans_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -1992,12 +1992,12 @@ models/players/janet/pagans/pagans_h_red
 
 
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/janet/pagans/pagans_h_red.png
+                map models/players/janet/pagans/pagans_h_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2008,12 +2008,12 @@ models/players/janet/pagans/pagans_red
 
      //cull disable
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/janet/pagans/pagans_red.png
+                map models/players/janet/pagans/pagans_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2027,13 +2027,13 @@ models/players/james/intruders/intruders_red
      //cull disable
 
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/intruders/intruders_red.png
+                map models/players/james/intruders/intruders_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2044,13 +2044,13 @@ models/players/james/intruders/intruders_blu
      //cull disable
 
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/intruders/intruders_blu.png
+                map models/players/james/intruders/intruders_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2061,13 +2061,13 @@ models/players/james/thefallen/thefallen_red
      //cull disable
 
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/thefallen/thefallen_red.png
+                map models/players/james/thefallen/thefallen_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2078,13 +2078,13 @@ models/players/james/thefallen/thefallen_blu
      //cull disable
 
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/thefallen/thefallen_blu.png
+                map models/players/james/thefallen/thefallen_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2095,13 +2095,13 @@ models/players/james/intruders/intruders_h_red
      //cull disable
 
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/intruders/intruders_h_red.png
+                map models/players/james/intruders/intruders_h_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2112,13 +2112,13 @@ models/players/james/intruders/intruders_h_blu
      //cull disable
 
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/intruders/intruders_h_blu.png
+                map models/players/james/intruders/intruders_h_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2129,13 +2129,13 @@ models/players/james/crusaders/crusaders_h_blu
      //cull disable
 
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/crusaders/crusaders_h_blu.png
+                map models/players/james/crusaders/crusaders_h_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2146,13 +2146,13 @@ models/players/james/crusaders/crusaders_h_red
      //cull disable
 
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/crusaders/crusaders_h_red.png
+                map models/players/james/crusaders/crusaders_h_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2163,13 +2163,13 @@ models/players/james/thefallen/thefallen_h_red
      //cull disable
 
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/thefallen/thefallen_h_red.png
+                map models/players/james/thefallen/thefallen_h_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2180,13 +2180,13 @@ models/players/james/thefallen/thefallen_h_blu
      //cull disable
 
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/thefallen/thefallen_h_blu.png
+                map models/players/james/thefallen/thefallen_h_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2197,13 +2197,13 @@ models/players/james/crusaders/crusaders_red
      //cull disable
 
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/crusaders/crusaders_red.png
+                map models/players/james/crusaders/crusaders_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2214,13 +2214,13 @@ models/players/james/crusaders/crusaders_blu
      //cull disable
 
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/crusaders/crusaders_blu.png
+                map models/players/james/crusaders/crusaders_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2232,13 +2232,13 @@ models/players/james/stroggs/stroggs_h_red
      //cull disable
 
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/stroggs/stroggs_h_red.png
+                map models/players/james/stroggs/stroggs_h_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2249,13 +2249,13 @@ models/players/james/stroggs/stroggs_h_blu
      //cull disable
 
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/stroggs/stroggs_h_blu.png
+                map models/players/james/stroggs/stroggs_h_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2266,13 +2266,13 @@ models/players/james/stroggs/stroggs_red
      //cull disable
 
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/stroggs/stroggs_red.png
+                map models/players/james/stroggs/stroggs_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2283,13 +2283,13 @@ models/players/james/stroggs/stroggs_blu
      //cull disable
 
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/stroggs/stroggs_blu.png
+                map models/players/james/stroggs/stroggs_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2299,12 +2299,12 @@ models/players/james/pagans/pagans_h_blu
 
 
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/pagans/pagans_h_blu.png
+                map models/players/james/pagans/pagans_h_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2314,12 +2314,12 @@ models/players/james/pagans/pagans_h_red
 
 
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/pagans/pagans_h_red.png
+                map models/players/james/pagans/pagans_h_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2328,13 +2328,13 @@ models/players/james/pagans/pagans_e_blu
 {
 
         {
-                map models/players/james/blue2.png
+                map models/players/james/blue2
                 tcmod scale   1 .3
                 tcMod scroll  0.1 2
                 rgbGen identity
         }
         {
-                map models/players/james/pagans/pagans_e_blu.png
+                map models/players/james/pagans/pagans_e_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2343,13 +2343,13 @@ models/players/james/pagans/pagans_e_red
 {
 
         {
-                map models/players/james/red2.png
+                map models/players/james/red2
                 tcmod scale   1 .3
                 tcMod scroll  0.1 2
                 rgbGen identity
         }
         {
-                map models/players/james/pagans/pagans_e_red.png
+                map models/players/james/pagans/pagans_e_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2360,13 +2360,13 @@ models/players/james/pagans/pagans_blu
      //cull disable
 
         {
-                map models/players/james/blue.png
+                map models/players/james/blue
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/pagans/pagans_blu.png
+                map models/players/james/pagans/pagans_blu
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2377,13 +2377,13 @@ models/players/james/pagans/pagans_red
      //cull disable
 
         {
-                map models/players/james/red.png
+                map models/players/james/red
                 tcMod scale 2 2
                 tcGen environment
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/james/pagans/pagans_red.png
+                map models/players/james/pagans/pagans_red
                 blendFunc blend
                 rgbGen lightingdiffuse
         }
@@ -2393,7 +2393,7 @@ models/mapobjects/gratelamp/lightbulb
     surfaceparm	trans
 
 	{
-		map models/mapobjects/gratelamp/lightbulb.png
+		map models/mapobjects/gratelamp/lightbulb
 		tcGen environment
                 blendFunc Add
                 rgbGen identity
@@ -2407,7 +2407,7 @@ models/mapobjects/gratelamp/gratelight
     nopicmip
 
         {
-                map models/mapobjects/gratelamp/gratelight.png
+                map models/mapobjects/gratelamp/gratelight
                 alphaFunc GE128
 		depthWrite
 		rgbGen vertex
@@ -2424,7 +2424,7 @@ models/mapobjects/gratelamp/gratelight_flare
 	cull none
 
 	{
-		Map models/mapobjects/gratelamp/gratelight_flare.png
+		Map models/mapobjects/gratelamp/gratelight_flare
 		blendFunc Add
                 rgbGen wave sin .5 .2 0 0
 	}
@@ -2433,13 +2433,13 @@ models/mapobjects/gratelamp/gratelight_flare
 models/mapobjects/wallhead2/demonhead1
 {
         {
-                map textures/sfx/firegorre.png
+                map textures/sfx/firegorre
                 blendFunc GL_ONE GL_ZERO
                 tcmod scroll 0.1 1
                 rgbGen identity
 	}
         {
-		map models/mapobjects/wallhead2/demonhead1.png
+		map models/mapobjects/wallhead2/demonhead1
                 blendFunc blend
 		rgbGen vertex
 	}
@@ -2448,13 +2448,13 @@ models/mapobjects/wallhead2/demonhead1
 models/mapobjects/wallhead2/wallhead2_1
 {
         {
-                map textures/sfx/firegorre.png
+                map textures/sfx/firegorre
                 blendFunc GL_ONE GL_ZERO
                 tcmod scroll 0.1 1
                 rgbGen vertex
 	}
         {
-		map models/mapobjects/wallhead2/wallhead2_1.png
+		map models/mapobjects/wallhead2/wallhead2_1
                 blendFunc blend
 		rgbGen vertex
 	}
@@ -2467,7 +2467,7 @@ models/mapobjects/wallhead2/wallhead2_eye
         surfaceparm trans
         deformVertexes autoSprite
         {
-		clampmap models/mapobjects/wallhead2/wallhead2_eye.png
+		clampmap models/mapobjects/wallhead2/wallhead2_eye
 		blendFunc add
                 tcmod rotate 160
 		//rgbGen wave sin .5 .5 0 .01
@@ -2483,7 +2483,7 @@ models/mapobjects/wallhead2/wallhead2_h1
 	cull disable
         surfaceparm trans
         {
-		map models/mapobjects/wallhead2/wallhead2_h1.png
+		map models/mapobjects/wallhead2/wallhead2_h1
 		alphaFunc GE128
                 depthWrite
 		rgbGen vertex
@@ -2496,7 +2496,7 @@ models/mapobjects/wallhead2/wallhead2_h2
 	cull disable
         surfaceparm alphashadow
         {
-		map models/mapobjects/wallhead2/wallhead2_h2.png
+		map models/mapobjects/wallhead2/wallhead2_h2
 		alphaFunc GE128
                 depthWrite
 		rgbGen vertex
@@ -2509,7 +2509,7 @@ models/mapobjects/wallhead2/wallhead2_h3
 	cull disable
         surfaceparm alphashadow
         {
-		map models/mapobjects/wallhead2/wallhead2_h3.png
+		map models/mapobjects/wallhead2/wallhead2_h3
 		alphaFunc GE128
                 depthWrite
 		rgbGen vertex
@@ -2520,11 +2520,11 @@ models/mapobjects/horned/horned_blu
 {
 
         {
-                map textures/sfx2/blufirewall.png
+                map textures/sfx2/blufirewall
                 tcmod scroll 0.1 1
 	}
         {
-		map models/mapobjects/horned/horned_blu.png
+		map models/mapobjects/horned/horned_blu
                 blendFunc blend
 		rgbGen vertex
 	}
@@ -2539,22 +2539,22 @@ models/flags/n_flag2
         cull none
 
         {
-		map models/flags/n_flag2.png
+		map models/flags/n_flag2
 		 rgbGen identity
 	}
         {
-		map models/flags/neutral_fx.png
+		map models/flags/neutral_fx
                 tcGen environment
                 blendFunc GL_ONE GL_ONE
                 rgbGen identity
 	}
         {
-		map models/flags/n_flag2.png
+		map models/flags/n_flag2
                 blendFunc blend
 	        rgbGen identity
 	}
         {
-		map textures/sfx/shadow.png
+		map textures/sfx/shadow
                 tcGen environment
                 blendFunc GL_DST_COLOR GL_ZERO
                 rgbGen identity
@@ -2567,7 +2567,7 @@ models/players/meep/meep
 		rgbGen lightingDiffuse
 	}
 	{
-        	map models/players/meep/meep.png
+        	map models/players/meep/meep
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -2577,11 +2577,11 @@ models/players/meep/meep_h
 {
         cull disable
         {
-                map models/players/meep/meep_h.png
+                map models/players/meep/meep_h
                 rgbGen lightingdiffuse
         }
         {
-                map models/players/meep/meep_h2.png
+                map models/players/meep/meep_h2
                 blendFunc add
                 rgbGen wave sin .5 .5 0 .5
         }
@@ -2591,7 +2591,7 @@ models/players/meep/meep_f
 {
         cull disable
         {
-                map models/players/meep/meep_f.png
+                map models/players/meep/meep_f
                 rgbGen lightingdiffuse
         }
 
@@ -2600,7 +2600,7 @@ models/players/meep/meep_g
 {
         cull disable
         {
-                map models/players/meep/meep_g.png
+                map models/players/meep/meep_g
                 blendFunc Add
                 tcGen environment
                 rgbGen lightingdiffuse
@@ -2613,7 +2613,7 @@ models/players/meep/meep_w
 {
 	cull disable
         {
-		map models/players/meep/meep_w.png
+		map models/players/meep/meep_w
 		alphaFunc GE128
                 depthWrite
 		rgbGen lightingdiffuse
@@ -2633,7 +2633,7 @@ models/mapobjects/flagbase/beam_blue
      nomipmaps
      cull disable
         {
-		map models/mapobjects/flagbase/beam_blue.png
+		map models/mapobjects/flagbase/beam_blue
                 blendFunc add
                 tcmod scroll -.5 0
                 rgbGen wave sin .5 .5 0.5 0.09
@@ -2645,7 +2645,7 @@ models/mapobjects/flagbase/beam_ntrl
      nomipmaps
      cull disable
         {
-		map models/mapobjects/flagbase/beam_ntrl.png
+		map models/mapobjects/flagbase/beam_ntrl
                 blendFunc add
                 tcmod scroll -.5 0
                 rgbGen wave sin .5 .5 0.5 0.09
@@ -2657,7 +2657,7 @@ models/mapobjects/flagbase/beam_red
      nomipmaps
      cull disable
         {
-		map models/mapobjects/flagbase/beam_red.png
+		map models/mapobjects/flagbase/beam_red
                 blendFunc add
                 tcmod scroll -.5 0
                 rgbGen wave sin .5 .5 0.5 0.09
@@ -2666,21 +2666,21 @@ models/mapobjects/flagbase/beam_red
 models/mapobjects/flagbase/swirl_ntrl
 {
         {
-	        map models/mapobjects/flagbase/swirl_ntrl.png
+	        map models/mapobjects/flagbase/swirl_ntrl
                 blendFunc GL_ONE GL_ZERO
                 tcmod rotate 130
                 tcMod stretch sin .8 0.2 0 .2
 	        rgbGen identity
 	}
         {
-	        map models/mapobjects/flagbase/swirl_ntrl.png
+	        map models/mapobjects/flagbase/swirl_ntrl
 		blendFunc Add
                 tcmod rotate 80
                 tcMod stretch sin .8 0.2 0 .1
 	        rgbGen identity
 	}
 	{
-	        map models/mapobjects/flagbase/base_r.png
+	        map models/mapobjects/flagbase/base_r
 		blendFunc blend
 	        rgbGen lightingdiffuse
 	}
@@ -2689,21 +2689,21 @@ models/mapobjects/flagbase/swirl_ntrl
 models/mapobjects/flagbase/swirl_red
 {
         {
-	        map models/mapobjects/flagbase/swirl_red.png
+	        map models/mapobjects/flagbase/swirl_red
                 blendFunc GL_ONE GL_ZERO
                 tcmod rotate 130
                 tcMod stretch sin .8 0.2 0 .2
 	        rgbGen identity
 	}
         {
-	        map models/mapobjects/flagbase/swirl_red.png
+	        map models/mapobjects/flagbase/swirl_red
 		blendFunc Add
                 tcmod rotate 80
                 tcMod stretch sin .8 0.2 0 .1
 	        rgbGen identity
 	}
 	{
-	        map models/mapobjects/flagbase/base_r.png
+	        map models/mapobjects/flagbase/base_r
 		blendFunc blend
 	        rgbGen lightingdiffuse
 	}
@@ -2712,21 +2712,21 @@ models/mapobjects/flagbase/swirl_red
 models/mapobjects/flagbase/swirl_blue
 {
         {
-	        map models/mapobjects/flagbase/swirl_blue.png
+	        map models/mapobjects/flagbase/swirl_blue
                 blendFunc GL_ONE GL_ZERO
                 tcmod rotate 130
                 tcMod stretch sin .8 0.2 0 .2
 	        rgbGen identity
 	}
         {
-	        map models/mapobjects/flagbase/swirl_blue.png
+	        map models/mapobjects/flagbase/swirl_blue
 		blendFunc Add
                 tcmod rotate 80
                 tcMod stretch sin .8 0.2 0 .1
 	        rgbGen identity
 	}
 	{
-	        map models/mapobjects/flagbase/base_r.png
+	        map models/mapobjects/flagbase/base_r
 		blendFunc blend
 	        rgbGen lightingdiffuse
 	}
@@ -2735,13 +2735,13 @@ models/mapobjects/flagbase/swirl_blue
 models/mapobjects/flagbase/env_red
 {
        {
-	        map models/mapobjects/flagbase/env_red.png
+	        map models/mapobjects/flagbase/env_red
 		tcGen environment
 		blendfunc GL_ONE GL_ZERO
                 rgbGen identity
        }
        {
-	        map models/mapobjects/flagbase/base_e.png
+	        map models/mapobjects/flagbase/base_e
 		blendfunc blend
                 rgbGen lightingdiffuse
        }
@@ -2749,13 +2749,13 @@ models/mapobjects/flagbase/env_red
 models/mapobjects/flagbase/env_ntrl
 {
        {
-	        map models/mapobjects/flagbase/env_ntrl.png
+	        map models/mapobjects/flagbase/env_ntrl
 		tcGen environment
 		blendfunc GL_ONE GL_ZERO
                 rgbGen identity
        }
        {
-	        map models/mapobjects/flagbase/base_e.png
+	        map models/mapobjects/flagbase/base_e
 		blendfunc blend
                 rgbGen lightingdiffuse
        }
@@ -2763,13 +2763,13 @@ models/mapobjects/flagbase/env_ntrl
 models/mapobjects/flagbase/env_blue
 {
        {
-	        map models/mapobjects/flagbase/env_blue.png
+	        map models/mapobjects/flagbase/env_blue
 		tcGen environment
 		blendfunc GL_ONE GL_ZERO
                 rgbGen identity
        }
        {
-	        map models/mapobjects/flagbase/base_e.png
+	        map models/mapobjects/flagbase/base_e
 		blendfunc blend
                 rgbGen lightingdiffuse
        }

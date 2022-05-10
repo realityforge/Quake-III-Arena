@@ -17,7 +17,7 @@ lagometer
 {
 	nopicmip
 	{
-		map gfx/2d/lag.png
+		map gfx/2d/lag
 	}
 }
 
@@ -26,7 +26,7 @@ disconnected
 {
 	nopicmip
 	{
-		map gfx/2d/net.png
+		map gfx/2d/net
 	}
 }
 
@@ -45,14 +45,14 @@ console
 	nomipmaps
 
         {
-		map gfx/misc/console01.png
+		map gfx/misc/console01
                 blendFunc GL_ONE GL_ZERO
                 tcMod scroll .02  0
                 tcmod scale 2 1
 	}
         {
-                map gfx/misc/console02.png
-                //map textures/sfx/firegorre3.png
+                map gfx/misc/console02
+                //map textures/sfx/firegorre3
                 blendFunc add
                 tcMod turb 0 .1 0 .1
                 tcMod scale 2 1
@@ -66,22 +66,22 @@ menuback
 	nopicmip
 	nomipmaps
         //{
-        //        map textures/sfx/logo512.png
+        //        map textures/sfx/logo512
         //}
 
         //{
-        //        map textures/sfx/specular.png
+        //        map textures/sfx/specular
          //       //blendfunc add
         //        tcMod turb 0 .8 0 .2
         //        tcmod scroll -.1  -.2
 	//}
          {
-                map textures/sfx/logo512.png
+                map textures/sfx/logo512
                 // blendFunc blend
                 rgbgen identity
         }
         //{
-	//	map textures/sfx/proto_zzzdrk.png
+	//	map textures/sfx/proto_zzzdrk
         //        blendFunc add
         //        tcMod turb 0 .1 0 .9
         //         tcmod scale .2 .2
@@ -96,8 +96,8 @@ menubacknologo
 	nomipmaps
 
         {
-               map gfx/colors/black.png
-	       //map textures/sfx/proto_zzzdrk.png
+               map gfx/colors/black
+	       //map textures/sfx/proto_zzzdrk
                // tcMod turb 0 .1 0 .9
                // tcmod scale .2 .2
                // tcMod scroll .02  0.7
@@ -110,7 +110,7 @@ levelShotDetail
 {
 	nopicmip
 	{
-		map textures/sfx2/detail2.png
+		map textures/sfx2/detail2
         blendFunc GL_DST_COLOR GL_SRC_COLOR
 		rgbgen identity
 	}
@@ -123,8 +123,8 @@ powerups/battleSuit
 {
 	deformVertexes wave 100 sin 1 0 0 0
 	{
-		map textures/effects/envmapgold2.png
-                //map textures/sfx/specular.png
+		map textures/effects/envmapgold2
+                //map textures/sfx/specular
 		tcGen environment
 		tcMod turb 0 0.15 0 0.3
                 tcmod rotate 333
@@ -136,8 +136,8 @@ powerups/battleWeapon
 {
 	deformVertexes wave 100 sin 0.5 0 0 0
 	{
-		map textures/effects/envmapgold2.png
-                //map textures/sfx/specular.png
+		map textures/effects/envmapgold2
+                //map textures/sfx/specular
 		tcGen environment
 		tcMod turb 0 0.15 0 0.3
                 tcmod rotate 333
@@ -149,8 +149,8 @@ powerups/battleWeapon
 powerups/invisibility
 {
 	{
-		map textures/effects/invismap.png
-                //map textures/sfx/specular.png
+		map textures/effects/invismap
+                //map textures/sfx/specular
 		blendfunc GL_ONE GL_ONE
 		tcMod turb 0 0.15 0 0.25
 		tcGen environment
@@ -160,7 +160,7 @@ powerups/quad
 {
 	deformVertexes wave 100 sin 3 0 0 0
 	{
-		map textures/effects/quadmap2.png
+		map textures/effects/quadmap2
 		blendfunc GL_ONE GL_ONE
 		tcGen environment
                 tcmod rotate 30
@@ -172,7 +172,7 @@ powerups/quadWeapon
 {
 	deformVertexes wave 100 sin 0.5 0 0 0
 	{
-		map textures/effects/quadmap2.png
+		map textures/effects/quadmap2
 		blendfunc GL_ONE GL_ONE
 		tcGen environment
                 tcmod rotate 30
@@ -184,7 +184,7 @@ powerups/regen
 {
 	deformVertexes wave 100 sin 3 0 0 0
 	{
-		map textures/effects/regenmap2.png
+		map textures/effects/regenmap2
 		blendfunc GL_ONE GL_ONE
 		tcGen environment
                 tcmod rotate 30
@@ -203,7 +203,7 @@ icons/teleporter
 {
 	nopicmip
 	{
-		map icons/teleporter.png
+		map icons/teleporter
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -211,7 +211,7 @@ icons/medkit
 {
 	nopicmip
 	{
-		map icons/medkit.png
+		map icons/medkit
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -219,7 +219,7 @@ icons/kamikaze
 {
 	nopicmip
 	{
-		map icons/kamikaze.png
+		map icons/kamikaze
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -227,7 +227,7 @@ icons/portal
 {
 	nopicmip
 	{
-		map icons/portal.png
+		map icons/portal
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -239,7 +239,7 @@ icons/envirosuit
 {
 	nopicmip
 	{
-		map icons/envirosuit.png
+		map icons/envirosuit
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -247,7 +247,7 @@ icons/quad
 {
 	nopicmip
 	{
-		map icons/quad.png
+		map icons/quad
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -255,7 +255,7 @@ icons/haste
 {
 	nopicmip
 	{
-		map icons/haste.png
+		map icons/haste
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -263,7 +263,7 @@ icons/invis
 {
 	nopicmip
 	{
-		map icons/invis.png
+		map icons/invis
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -271,7 +271,7 @@ icons/regen
 {
 	nopicmip
 	{
-		map icons/regen.png
+		map icons/regen
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -279,7 +279,7 @@ icons/flight
 {
 	nopicmip
 	{
-		map icons/flight.png
+		map icons/flight
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -291,7 +291,7 @@ icons/scout
 {
 	nopicmip
 	{
-		map icons/scout.png
+		map icons/scout
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -299,7 +299,7 @@ icons/guard
 {
 	nopicmip
 	{
-		map icons/guard.png
+		map icons/guard
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -307,7 +307,7 @@ icons/doubler
 {
 	nopicmip
 	{
-		map icons/doubler.png
+		map icons/doubler
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -315,7 +315,7 @@ icons/radar
 {
 	nopicmip
 	{
-		map icons/radar.png
+		map icons/radar
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -323,7 +323,7 @@ icons/ammo_regen
 {
 	nopicmip
 	{
-		map icons/ammo_regen.png
+		map icons/ammo_regen
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -331,7 +331,7 @@ icons/invulnerability
 {
 	nopicmip
 	{
-		map icons/invulnerability.png
+		map icons/invulnerability
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -342,7 +342,7 @@ medal_impressive
 {
 	nopicmip
 	{
-		clampmap menu/medals/medal_impressive.png
+		clampmap menu/medals/medal_impressive
 		blendFunc blend
 	}
 }
@@ -351,7 +351,7 @@ medal_excellent
 {
 	nopicmip
 	{
-		clampmap menu/medals/medal_excellent.png
+		clampmap menu/medals/medal_excellent
 		blendFunc blend
 	}
 }
@@ -360,7 +360,7 @@ medal_gauntlet
 {
 	nopicmip
 	{
-		clampmap menu/medals/medal_gauntlet.png
+		clampmap menu/medals/medal_gauntlet
 		blendFunc blend
 	}
 }
@@ -369,7 +369,7 @@ medal_assist
 {
 	nopicmip
 	{
-		clampmap menu/medals/medal_assist.png
+		clampmap menu/medals/medal_assist
 		blendFunc blend
 	}
 }
@@ -378,7 +378,7 @@ medal_defend
 {
 	nopicmip
 	{
-		clampmap menu/medals/medal_defend.png
+		clampmap menu/medals/medal_defend
 		blendFunc blend
 	}
 }
@@ -387,7 +387,7 @@ medal_capture
 {
 	nopicmip
 	{
-		clampmap menu/medals/medal_capture.png
+		clampmap menu/medals/medal_capture
 		blendFunc blend
 	}
 }
@@ -400,7 +400,7 @@ icons/iconw_gauntlet
 {
 	nopicmip
 	{
-		map icons/iconw_gauntlet.png
+		map icons/iconw_gauntlet
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -408,7 +408,7 @@ icons/iconw_machinegun
 {
 	nopicmip
 	{
-		map icons/iconw_machinegun.png
+		map icons/iconw_machinegun
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -416,7 +416,7 @@ icons/iconw_rocket
 {
 	nopicmip
 	{
-		map icons/iconw_rocket.png
+		map icons/iconw_rocket
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -425,7 +425,7 @@ icons/iconw_shotgun
 {
 	nopicmip
 	{
-		map icons/iconw_shotgun.png
+		map icons/iconw_shotgun
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbgen identitylighting
 	}
@@ -435,7 +435,7 @@ icons/iconw_grenade
 {
 	nopicmip
 	{
-		map icons/iconw_grenade.png
+		map icons/iconw_grenade
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -444,7 +444,7 @@ icons/iconw_lightning
 {
 	nopicmip
 	{
-		map icons/iconw_lightning.png
+		map icons/iconw_lightning
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -453,7 +453,7 @@ icons/iconw_plasma
 {
 	nopicmip
 	{
-		map icons/iconw_plasma.png
+		map icons/iconw_plasma
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -462,7 +462,7 @@ icons/iconw_railgun
 {
 	nopicmip
 	{
-		map icons/iconw_railgun.png
+		map icons/iconw_railgun
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -471,7 +471,7 @@ icons/iconw_bfg
 {
 	nopicmip
 	{
-		map icons/iconw_bfg.png
+		map icons/iconw_bfg
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -480,7 +480,7 @@ icons/iconw_grapple
 {
 	nopicmip
 	{
-		map icons/iconw_grapple.png
+		map icons/iconw_grapple
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -489,7 +489,7 @@ icons/iconw_nailgun
 {
 	nopicmip
 	{
-		map icons/nailgun128.png
+		map icons/nailgun128
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -498,7 +498,7 @@ icons/iconw_chaingun
 {
 	nopicmip
 	{
-		map icons/chaingun128.png
+		map icons/chaingun128
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -507,7 +507,7 @@ icons/iconw_proxlauncher
 {
 	nopicmip
 	{
-		map icons/proxmine.png
+		map icons/proxmine
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -519,7 +519,7 @@ icons/icona_machinegun
 {
 	nopicmip
 	{
-		map icons/icona_machinegun.png
+		map icons/icona_machinegun
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -527,7 +527,7 @@ icons/icona_rocket
 {
 	nopicmip
 	{
-		map icons/icona_rocket.png
+		map icons/icona_rocket
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -536,7 +536,7 @@ icons/icona_shotgun
 {
 	nopicmip
 	{
-		map icons/icona_shotgun.png
+		map icons/icona_shotgun
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbgen identitylighting
 	}
@@ -546,7 +546,7 @@ icons/icona_grenade
 {
 	nopicmip
 	{
-		map icons/icona_grenade.png
+		map icons/icona_grenade
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -555,7 +555,7 @@ icons/icona_lightning
 {
 	nopicmip
 	{
-		map icons/icona_lightning.png
+		map icons/icona_lightning
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -564,7 +564,7 @@ icons/icona_plasma
 {
 	nopicmip
 	{
-		map icons/icona_plasma.png
+		map icons/icona_plasma
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -573,7 +573,7 @@ icons/icona_railgun
 {
 	nopicmip
 	{
-		map icons/icona_railgun.png
+		map icons/icona_railgun
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -582,7 +582,7 @@ icons/icona_bfg
 {
 	nopicmip
 	{
-		map icons/icona_bfg.png
+		map icons/icona_bfg
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -591,7 +591,7 @@ icons/icona_nailgun
 {
 	nopicmip
 	{
-		map icons/ammo_nailgun.png
+		map icons/ammo_nailgun
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -600,7 +600,7 @@ icons/icona_chaingun
 {
 	nopicmip
 	{
-		map icons/ammo_chaingun.png
+		map icons/ammo_chaingun
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -609,7 +609,7 @@ icons/icona_proxlauncher
 {
 	nopicmip
 	{
-		map icons/ammo_proxmine.png
+		map icons/ammo_proxmine
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -622,7 +622,7 @@ icons/iconr_shard
 {
 	nopicmip
 	{
-		map icons/iconr_shard.png
+		map icons/iconr_shard
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -631,7 +631,7 @@ icons/iconr_yellow
 {
 	nopicmip
 	{
-		map icons/iconr_yellow.png
+		map icons/iconr_yellow
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -640,7 +640,7 @@ icons/iconr_red
 {
 	nopicmip
 	{
-		map icons/iconr_red.png
+		map icons/iconr_red
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -652,7 +652,7 @@ icons/iconh_green
 {
 	nopicmip
 	{
-		map icons/iconh_green.png
+		map icons/iconh_green
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -661,7 +661,7 @@ icons/iconh_yellow
 {
 	nopicmip
 	{
-		map icons/iconh_yellow.png
+		map icons/iconh_yellow
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -670,11 +670,11 @@ icons/iconh_red
 {
 	nopicmip
 	{
-		map icons/iconh_red.png
+		map icons/iconh_red
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
         //{
-	//	clampmap icons/iconh_red2.png
+	//	clampmap icons/iconh_red2
 	//	blendFunc blend
         //        tcMod stretch sin .04 1 0 1
 	//}
@@ -684,7 +684,7 @@ icons/iconh_mega
 {
 	nopicmip
 	{
-		map icons/iconh_mega.png
+		map icons/iconh_mega
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -696,7 +696,7 @@ icons/iconf_red
 {
 	nopicmip
 	{
-		map icons/iconf_red.png
+		map icons/iconf_red
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -705,7 +705,7 @@ icons/iconf_blu
 {
 	nopicmip
 	{
-		map icons/iconf_blu.png
+		map icons/iconf_blu
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -717,7 +717,7 @@ gfx/2d/menuinfo
 {
 	nopicmip
 	{
-		map gfx/2d/menuinfo.png
+		map gfx/2d/menuinfo
 	}
 }
 
@@ -725,7 +725,7 @@ gfx/2d/menuinfo2
 {
 	nopicmip
 	{
-		map gfx/2d/menuinfo2.png
+		map gfx/2d/menuinfo2
 	}
 }
 
@@ -734,7 +734,7 @@ gfx/2d/quit
 	nopicmip
 	nomipmaps
 	{
-		map gfx/2d/quit.png
+		map gfx/2d/quit
 	}
 }
 
@@ -743,7 +743,7 @@ gfx/2d/cursor
     nopicmip
 	nomipmaps
     {
-        map gfx/2d/cursor.png
+        map gfx/2d/cursor
     }
 }
 
@@ -753,7 +753,7 @@ gfx/2d/cursor
 sprites/balloon3
 {
 	{
-		map sprites/balloon4.png
+		map sprites/balloon4
 		blendfunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -761,12 +761,12 @@ sprites/balloon3
 // this is an example of a crossfaded animation cycle
 textures/animationTest
 {
-	qer_editorimage	textures/liquids/bloodwater1.png
+	qer_editorimage	textures/liquids/bloodwater1
 	{
-		animMap 0.5 textures/liquids/bloodwater1.png textures/liquids/pool.png textures/liquids/slime7.png
+		animMap 0.5 textures/liquids/bloodwater1 textures/liquids/pool textures/liquids/slime7
 	}
 	{
-		animMap 0.5 textures/liquids/pool.png textures/liquids/slime7.png textures/liquids/bloodwater1.png
+		animMap 0.5 textures/liquids/pool textures/liquids/slime7 textures/liquids/bloodwater1
 		blendFunc	GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		alphaGen	wave sawtooth 0 1 0 0.5
 	}
@@ -780,7 +780,7 @@ teleportEffect
 {
 	cull none
 	{
-		map gfx/misc/teleportEffect2.png
+		map gfx/misc/teleportEffect2
                 blendFunc GL_ONE GL_ONE
 		rgbGen entity
 		tcMod scale 1 4
@@ -793,7 +793,7 @@ markShadow
 {
 	polygonOffset
 	{
-		map gfx/damage/shadow.png
+		map gfx/damage/shadow
 		blendFunc GL_ZERO GL_ONE_MINUS_SRC_COLOR
 		rgbGen exactVertex
 	}
@@ -816,7 +816,7 @@ projectionShadow
 wake
 {
 	{
-		clampmap sprites/splash.png
+		clampmap sprites/splash
 		blendFunc GL_ONE GL_ONE
 		rgbGen vertex
                 tcmod rotate 250
@@ -824,7 +824,7 @@ wake
 		rgbGen wave sin .7 .3 .25 .5
 	}
         {
-		clampmap sprites/splash.png
+		clampmap sprites/splash
 		blendFunc GL_ONE GL_ONE
 		rgbGen vertex
                 tcmod rotate -230
@@ -839,8 +839,8 @@ viewBloodBlend
 {
 	sort	nearest
 	{
-		//map models/weaphits/blood201.png
-                map gfx/damage/blood_screen.png
+		//map models/weaphits/blood201
+                map gfx/damage/blood_screen
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identityLighting
 		alphaGen vertex
@@ -853,7 +853,7 @@ waterBubble
 	cull none
 	entityMergable		// allow all the sprites to be merged together
 	{
-		map sprites/bubble.png
+		map sprites/bubble
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen		vertex
 		alphaGen	vertex
@@ -865,7 +865,7 @@ smokePuff
 	cull none
 	entityMergable		// allow all the sprites to be merged together
 	{
-		map gfx/misc/smokepuff3.png
+		map gfx/misc/smokepuff3
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen		vertex
 		alphaGen	vertex
@@ -877,7 +877,7 @@ hasteSmokePuff			// drops behind player's feet when speeded
 	cull none
 	entityMergable		// allow all the sprites to be merged together
 	{
-		map gfx/misc/smokepuff3.png
+		map gfx/misc/smokepuff3
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
                 //blendfunc GL_ONE GL_ONE
 		rgbGen		vertex
@@ -890,7 +890,7 @@ smokePuffRagePro
 	cull none
 	entityMergable		// allow all the sprites to be merged together
 	{
-		map gfx/misc/smokepuffragepro.png
+		map gfx/misc/smokepuffragepro
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -899,7 +899,7 @@ shotgunSmokePuff
 {
 	cull none
 	{
-		map gfx/misc/smokepuff2b.png
+		map gfx/misc/smokepuff2b
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		alphaGen entity
 		rgbGen entity
@@ -910,7 +910,7 @@ flareShader
 {
 	cull none
 	{
-		map gfx/misc/flare.png
+		map gfx/misc/flare
 		blendFunc GL_ONE GL_ONE
 		rgbGen vertex
 	}
@@ -919,7 +919,7 @@ sun
 {
 	cull none
 	{
-		map gfx/misc/sun.png
+		map gfx/misc/sun
 		blendFunc GL_ONE GL_ONE
 		rgbGen vertex
 	}
@@ -930,7 +930,7 @@ railDisc
 	cull none
         deformVertexes wave 100 sin 0 .5 0 2.4
 	{
-		clampmap gfx/misc/raildisc_mono2.png
+		clampmap gfx/misc/raildisc_mono2
 		blendFunc GL_ONE GL_ONE
 		rgbGen vertex
                  tcMod rotate -30
@@ -942,7 +942,7 @@ railCore
 	sort nearest
 	cull none
 	{
-		map gfx/misc/railcorethin_mono.png
+		map gfx/misc/railcorethin_mono
 		blendFunc GL_ONE GL_ONE
 		rgbGen vertex
 		tcMod scroll -1 0
@@ -954,7 +954,7 @@ lightningBolt
 	sort nearest
 	cull none
 	{
-		map gfx/misc/lightning3.png
+		map gfx/misc/lightning3
 		blendFunc GL_ONE GL_ONE
 //                rgbgen wave sin 1 5.1 0 7.1
                 rgbgen wave sin 1 0.5 0 7.1
@@ -962,7 +962,7 @@ lightningBolt
 		tcMod scroll -5 0
 	}
     {
-		map gfx/misc/lightning3.png
+		map gfx/misc/lightning3
 		blendFunc GL_ONE GL_ONE
 //                rgbgen wave sin 1 8.3 0 8.1
                 rgbgen wave sin 1 0.8 0 8.1
@@ -976,7 +976,7 @@ gfx/misc/tracer
 {
 	cull none
 	{
-		map	gfx/misc/tracer2.png
+		map	gfx/misc/tracer2
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -991,7 +991,7 @@ bloodMark
 	nopicmip			// make sure a border remains
 	polygonOffset
 	{
-		clampmap gfx/damage/blood_stain.png
+		clampmap gfx/damage/blood_stain
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identityLighting
 		alphaGen vertex
@@ -1004,8 +1004,8 @@ bloodTrail
 	nopicmip			// make sure a border remains
 	entityMergable		// allow all the sprites to be merged together
 	{
-		//clampmap gfx/misc/blood.png
-                clampmap gfx/damage/blood_spurt.png
+		//clampmap gfx/misc/blood
+                clampmap gfx/damage/blood_spurt
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen		vertex
 		alphaGen	vertex
@@ -1016,7 +1016,7 @@ gfx/damage/bullet_mrk
 {
 	polygonOffset
 	{
-		map gfx/damage/bullet_mrk.png
+		map gfx/damage/bullet_mrk
 		blendFunc GL_ZERO GL_ONE_MINUS_SRC_COLOR
 		rgbGen exactVertex
 	}
@@ -1025,7 +1025,7 @@ gfx/damage/burn_med_mrk
 {
 	polygonOffset
 	{
-		map gfx/damage/burn_med_mrk.png
+		map gfx/damage/burn_med_mrk
 		blendFunc GL_ZERO GL_ONE_MINUS_SRC_COLOR
 		rgbGen exactVertex
 	}
@@ -1034,7 +1034,7 @@ gfx/damage/hole_lg_mrk
 {
 	polygonOffset
 	{
-		map gfx/damage/hole_lg_mrk.png
+		map gfx/damage/hole_lg_mrk
 		blendFunc GL_ZERO GL_ONE_MINUS_SRC_COLOR
 		rgbGen exactVertex
 	}
@@ -1043,7 +1043,7 @@ gfx/damage/plasma_mrk
 {
 	polygonOffset
 	{
-		map gfx/damage/plasma_mrk.png
+		map gfx/damage/plasma_mrk
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen vertex
 		alphaGen vertex
@@ -1060,7 +1060,7 @@ scoreboardName
 	nopicmip
 	nomipmaps
 	{
-		clampmap menu/tab/name.png
+		clampmap menu/tab/name
 		blendfunc blend
 	}
 }
@@ -1070,7 +1070,7 @@ scoreboardScore
 	nopicmip
 	nomipmaps
 	{
-		clampmap menu/tab/score.png
+		clampmap menu/tab/score
 		blendfunc blend
 	}
 }
@@ -1080,7 +1080,7 @@ scoreboardTime
 	nopicmip
 	nomipmaps
 	{
-		clampmap menu/tab/time.png
+		clampmap menu/tab/time
 		blendfunc blend
 	}
 }
@@ -1090,7 +1090,7 @@ scoreboardPing
 	nopicmip
 	nomipmaps
 	{
-		clampmap menu/tab/ping.png
+		clampmap menu/tab/ping
 		blendfunc blend
 	}
 }
@@ -1101,7 +1101,7 @@ gfx/2d/crosshair
 {
 	nopicmip
 	{
-		map gfx/2d/crosshair.png
+		map gfx/2d/crosshair
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
         rgbGen identity
 	}
@@ -1111,7 +1111,7 @@ gfx/2d/crosshairb
 {
 	nopicmip
 	{
-		map gfx/2d/crosshairb.png
+		map gfx/2d/crosshairb
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -1121,7 +1121,7 @@ gfx/2d/crosshairc
 {
 	nopicmip
 	{
-		map gfx/2d/crosshairc.png
+		map gfx/2d/crosshairc
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -1131,7 +1131,7 @@ gfx/2d/crosshaird
 {
 	nopicmip
 	{
-		map gfx/2d/crosshaird.png
+		map gfx/2d/crosshaird
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -1141,7 +1141,7 @@ gfx/2d/crosshaire
 {
 	nopicmip
 	{
-		map gfx/2d/crosshaire.png
+		map gfx/2d/crosshaire
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -1151,7 +1151,7 @@ gfx/2d/crosshairf
 {
 	nopicmip
 	{
-		map gfx/2d/crosshairf.png
+		map gfx/2d/crosshairf
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -1161,7 +1161,7 @@ gfx/2d/crosshairg
 {
 	nopicmip
 	{
-		map gfx/2d/crosshairg.png
+		map gfx/2d/crosshairg
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -1171,7 +1171,7 @@ gfx/2d/crosshairh
 {
 	nopicmip
 	{
-		map gfx/2d/crosshairh.png
+		map gfx/2d/crosshairh
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -1181,7 +1181,7 @@ gfx/2d/crosshairi
 {
 	nopicmip
 	{
-		map gfx/2d/crosshairi.png
+		map gfx/2d/crosshairi
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -1191,7 +1191,7 @@ gfx/2d/crosshairj
 {
 	nopicmip
 	{
-		map gfx/2d/crosshairj.png
+		map gfx/2d/crosshairj
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -1200,7 +1200,7 @@ gfx/2d/crosshairk
 {
 	nopicmip
 	{
-		map gfx/2d/crosshairk.png
+		map gfx/2d/crosshairk
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -1214,7 +1214,7 @@ gfx/2d/bigchars
 	nopicmip
 	nomipmaps
 	{
-		map gfx/2d/bigchars.png
+		map gfx/2d/bigchars
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbgen vertex
 	}
@@ -1223,7 +1223,7 @@ gfx/2d/select
 {
 	nopicmip
 	{
-		map gfx/2d/select.png
+		map gfx/2d/select
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 		rgbgen vertex
@@ -1235,7 +1235,7 @@ gfx/2d/assault1d
 {
 	nopicmip
 	{
-		map gfx/2d/assault1d.png
+		map gfx/2d/assault1d
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -1243,7 +1243,7 @@ gfx/2d/armor1h
 {
 	nopicmip
 	{
-		map gfx/2d/armor1h.png
+		map gfx/2d/armor1h
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -1251,7 +1251,7 @@ gfx/2d/health
 {
 	nopicmip
 	{
-		map gfx/2d/health.png
+		map gfx/2d/health
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -1259,7 +1259,7 @@ gfx/2d/blank
 {
 	nopicmip
 	{
-		map gfx/2d/blank.png
+		map gfx/2d/blank
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -1267,7 +1267,7 @@ gfx/2d/numbers/zero_32b
 {
 	nopicmip
 	{
-		map gfx/2d/numbers/zero_32b.png
+		map gfx/2d/numbers/zero_32b
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbgen vertex
 	}
@@ -1276,7 +1276,7 @@ gfx/2d/numbers/one_32b
 {
 	nopicmip
 	{
-		map gfx/2d/numbers/one_32b.png
+		map gfx/2d/numbers/one_32b
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbgen vertex
 	}
@@ -1285,7 +1285,7 @@ gfx/2d/numbers/two_32b
 {
 	nopicmip
 	{
-		map gfx/2d/numbers/two_32b.png
+		map gfx/2d/numbers/two_32b
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbgen vertex
 	}
@@ -1294,7 +1294,7 @@ gfx/2d/numbers/three_32b
 {
 	nopicmip
 	{
-		map gfx/2d/numbers/three_32b.png
+		map gfx/2d/numbers/three_32b
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbgen vertex
 	}
@@ -1303,7 +1303,7 @@ gfx/2d/numbers/four_32b
 {
 	nopicmip
 	{
-		map gfx/2d/numbers/four_32b.png
+		map gfx/2d/numbers/four_32b
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbgen vertex
 	}
@@ -1312,7 +1312,7 @@ gfx/2d/numbers/five_32b
 {
 	nopicmip
 	{
-		map gfx/2d/numbers/five_32b.png
+		map gfx/2d/numbers/five_32b
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbgen vertex
 	}
@@ -1321,7 +1321,7 @@ gfx/2d/numbers/six_32b
 {
 	nopicmip
 	{
-		map gfx/2d/numbers/six_32b.png
+		map gfx/2d/numbers/six_32b
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbgen vertex
 	}
@@ -1330,7 +1330,7 @@ gfx/2d/numbers/seven_32b
 {
 	nopicmip
 	{
-		map gfx/2d/numbers/seven_32b.png
+		map gfx/2d/numbers/seven_32b
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbgen vertex
 	}
@@ -1339,7 +1339,7 @@ gfx/2d/numbers/eight_32b
 {
 	nopicmip
 	{
-		map gfx/2d/numbers/eight_32b.png
+		map gfx/2d/numbers/eight_32b
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbgen vertex
 	}
@@ -1348,7 +1348,7 @@ gfx/2d/numbers/nine_32b
 {
 	nopicmip
 	{
-		map gfx/2d/numbers/nine_32b.png
+		map gfx/2d/numbers/nine_32b
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbgen vertex
 	}
@@ -1357,7 +1357,7 @@ gfx/2d/numbers/minus_32b
 {
 	nopicmip
 	{
-		map gfx/2d/numbers/minus_32b.png
+		map gfx/2d/numbers/minus_32b
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbgen vertex
 	}
@@ -1375,7 +1375,7 @@ plasmaExplosion
 {
 	cull disable
 	{
-		clampmap models/weaphits/plasmaboom.png
+		clampmap models/weaphits/plasmaboom
 		blendfunc add
                 tcMod stretch triangle .6 0.1 0 8
                 tcmod rotate 999
@@ -1387,12 +1387,12 @@ railExplosion
 {
 	cull disable
       {
-		animmap 5 models/weaphits/ring02_1.png  models/weaphits/ring02_2.png  models/weaphits/ring02_3.png models/weaphits/ring02_4.png gfx/colors/black.png
+		animmap 5 models/weaphits/ring02_1  models/weaphits/ring02_2  models/weaphits/ring02_3 models/weaphits/ring02_4 gfx/colors/black
 		alphaGen wave inversesawtooth 0 1 0 5
 		blendfunc blend
 	}
 	{
-		animmap 5 models/weaphits/ring02_2.png  models/weaphits/ring02_3.png models/weaphits/ring02_4.png gfx/colors/black.png gfx/colors/black.png
+		animmap 5 models/weaphits/ring02_2  models/weaphits/ring02_3 models/weaphits/ring02_4 gfx/colors/black gfx/colors/black
 		alphaGen wave sawtooth 0 1 0 5
 		blendfunc blend
 	}
@@ -1402,12 +1402,12 @@ lightningExplosion
 {
 	cull disable
 	{
-		animmap 5 models/weaphits/ring02_1.png  models/weaphits/ring02_3.png  models/weaphits/ring02_3.png gfx/colors/black.png
+		animmap 5 models/weaphits/ring02_1  models/weaphits/ring02_3  models/weaphits/ring02_3 gfx/colors/black
 		rgbGen wave inversesawtooth 0 1 0 5
 		blendfunc add
 	}
 	{
-		animmap 5 models/weaphits/ring02_2.png  models/weaphits/ring02_3.png  gfx/colors/black.png gfx/colors/black.png
+		animmap 5 models/weaphits/ring02_2  models/weaphits/ring02_3  gfx/colors/black gfx/colors/black
 		rgbGen wave sawtooth 0 1 0 5
 		blendfunc add
 	}
@@ -1417,12 +1417,12 @@ bulletExplosion
 {
 	cull disable
 	{
-		animmap 5 models/weaphits/bullet1.png  models/weaphits/bullet2.png  models/weaphits/bullet3.png gfx/colors/black.png
+		animmap 5 models/weaphits/bullet1  models/weaphits/bullet2  models/weaphits/bullet3 gfx/colors/black
 		rgbGen wave inversesawtooth 0 1 0 5
 		blendfunc add
 	}
 	{
-		animmap 5 models/weaphits/bullet2.png  models/weaphits/bullet3.png  gfx/colors/black.png gfx/colors/black.png
+		animmap 5 models/weaphits/bullet2  models/weaphits/bullet3  gfx/colors/black gfx/colors/black
 		rgbGen wave sawtooth 0 1 0 5
 		blendfunc add
 	}
@@ -1432,12 +1432,12 @@ rocketExplosion
 {
 	cull disable
 	{
-		animmap 8 models/weaphits/rlboom/rlboom_1.png  models/weaphits/rlboom/rlboom_2.png models/weaphits/rlboom/rlboom_3.png models/weaphits/rlboom/rlboom_4.png models/weaphits/rlboom/rlboom_5.png models/weaphits/rlboom/rlboom_6.png models/weaphits/rlboom/rlboom_7.png models/weaphits/rlboom/rlboom_8.png
+		animmap 8 models/weaphits/rlboom/rlboom_1  models/weaphits/rlboom/rlboom_2 models/weaphits/rlboom/rlboom_3 models/weaphits/rlboom/rlboom_4 models/weaphits/rlboom/rlboom_5 models/weaphits/rlboom/rlboom_6 models/weaphits/rlboom/rlboom_7 models/weaphits/rlboom/rlboom_8
 		rgbGen wave inversesawtooth 0 1 0 8
 		blendfunc add
 	}
 	{
-		animmap 8 models/weaphits/rlboom/rlboom_2.png models/weaphits/rlboom/rlboom_3.png models/weaphits/rlboom/rlboom_4.png models/weaphits/rlboom/rlboom_5.png models/weaphits/rlboom/rlboom_6.png models/weaphits/rlboom/rlboom_7.png models/weaphits/rlboom/rlboom_8.png gfx/colors/black.png
+		animmap 8 models/weaphits/rlboom/rlboom_2 models/weaphits/rlboom/rlboom_3 models/weaphits/rlboom/rlboom_4 models/weaphits/rlboom/rlboom_5 models/weaphits/rlboom/rlboom_6 models/weaphits/rlboom/rlboom_7 models/weaphits/rlboom/rlboom_8 gfx/colors/black
 		rgbGen wave sawtooth 0 1 0 8
 		blendfunc add
 	}
@@ -1447,12 +1447,12 @@ grenadeExplosion
 {
 	cull disable
 	{
-		animmap 5 models/weaphits/glboom/glboom_1.png  models/weaphits/glboom/glboom_2.png models/weaphits/glboom/glboom_3.png
+		animmap 5 models/weaphits/glboom/glboom_1  models/weaphits/glboom/glboom_2 models/weaphits/glboom/glboom_3
 		rgbGen wave inversesawtooth 0 1 0 5
 		blendfunc add
 	}
 	{
-		animmap 5 models/weaphits/glboom/glboom_2.png  models/weaphits/glboom/glboom_3.png gfx/colors/black.png
+		animmap 5 models/weaphits/glboom/glboom_2  models/weaphits/glboom/glboom_3 gfx/colors/black
 		rgbGen wave sawtooth 0 1 0 5
 		blendfunc add
 	}
@@ -1462,12 +1462,12 @@ bfgExplosion
 {
 	cull disable
 	{
-		animmap 5 models/weaphits/bfgboom/bfgboom_1.png  models/weaphits/bfgboom/bfgboom_2.png models/weaphits/bfgboom/bfgboom_3.png
+		animmap 5 models/weaphits/bfgboom/bfgboom_1  models/weaphits/bfgboom/bfgboom_2 models/weaphits/bfgboom/bfgboom_3
 		rgbGen wave inversesawtooth 0 1 0 5
 		blendfunc add
 	}
 	{
-		animmap 5 models/weaphits/bfgboom/bfgboom_2.png models/weaphits/bfgboom/bfgboom_3.png gfx/colors/black.png
+		animmap 5 models/weaphits/bfgboom/bfgboom_2 models/weaphits/bfgboom/bfgboom_3 gfx/colors/black
 		rgbGen wave sawtooth 0 1 0 5
 		blendfunc add
 	}
@@ -1477,7 +1477,7 @@ bloodExplosion		// spurt of blood at point of impact
 {
 	cull disable
 	{
-		animmap 5 models/weaphits/blood201.png models/weaphits/blood202.png models/weaphits/blood203.png models/weaphits/blood204.png models/weaphits/blood205.png
+		animmap 5 models/weaphits/blood201 models/weaphits/blood202 models/weaphits/blood203 models/weaphits/blood204 models/weaphits/blood205
 		blendfunc blend
 	}
 }
