@@ -1,6 +1,6 @@
 tag_head,
 tag_weapon,
 tag_torso,
-u_body,models/players/bitterman/bitterman.png
-u_vestl,models/players/bitterman/bitterman.png
-u_vestr,models/players/bitterman/bitterman.png
+u_body,models/players/bitterman/bitterman
+u_vestl,models/players/bitterman/bitterman
+u_vestr,models/players/bitterman/bitterman

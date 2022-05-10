@@ -1,6 +1,6 @@
-h_mike01,models/players/pi/pi_t.png
-h_flare,models/players/pi/beam2.png
-h_hair01,models/players/pi/hair.png
-h_head01,models/players/pi/pi_h.png
-h_laser01,models/players/pi/beam.png
+h_mike01,models/players/pi/pi_t
+h_flare,models/players/pi/beam2
+h_hair01,models/players/pi/hair
+h_head01,models/players/pi/pi_h
+h_laser01,models/players/pi/beam
 tag_head,

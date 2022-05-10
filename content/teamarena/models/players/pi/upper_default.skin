@@ -1,10 +1,10 @@
-u_torso,models/players/pi/pi.png
-u_arm01,models/players/pi/pi_t.png
-u_armgearbox01,models/players/pi/pi.png
-u_armgears01,models/players/pi/gear01.png
-u_armgeart01,models/players/pi/endcap.png
-u_armrod01,models/players/pi/piston.png
-u_armwire01,models/players/pi/pi_t2.png
+u_torso,models/players/pi/pi
+u_arm01,models/players/pi/pi_t
+u_armgearbox01,models/players/pi/pi
+u_armgears01,models/players/pi/gear01
+u_armgeart01,models/players/pi/endcap
+u_armrod01,models/players/pi/piston
+u_armwire01,models/players/pi/pi_t2
 tag_head,
 tag_torso,
 tag_weapon,

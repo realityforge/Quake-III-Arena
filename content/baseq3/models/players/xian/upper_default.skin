@@ -1,6 +1,6 @@
 tag_weapon,
-u_rarm,models/players/xian/xianarm2.png
-u_torso,models/players/xian/xiantors.png
-u_larm,models/players/xian/xianarm2.png
+u_rarm,models/players/xian/xianarm2
+u_torso,models/players/xian/xiantors
+u_larm,models/players/xian/xianarm2
 tag_head,
 tag_torso,

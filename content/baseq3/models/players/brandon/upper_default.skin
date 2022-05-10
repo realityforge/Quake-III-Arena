@@ -1,6 +1,6 @@
-u_larm,models/players/brandon/branarm.png
-u_rarm,models/players/brandon/branarm.png
-u_torso,models/players/brandon/brantors.png
+u_larm,models/players/brandon/branarm
+u_rarm,models/players/brandon/branarm
+u_torso,models/players/brandon/brantors
 tag_head,
 tag_weapon,
 tag_torso,

@@ -1,6 +1,6 @@
 tag_head,
-u_larm,models/players/ranger/red.png
+u_larm,models/players/ranger/red
 tag_weapon,
-u_rarm,models/players/ranger/red.png
-u_torso,models/players/ranger/red.png
+u_rarm,models/players/ranger/red
+u_torso,models/players/ranger/red
 tag_torso,

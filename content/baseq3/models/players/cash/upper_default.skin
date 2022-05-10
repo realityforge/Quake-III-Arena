@@ -1,7 +1,7 @@
 tag_head,
 tag_weapon,
-u_neck,models/players/cash/cashface.png
-u_torso,models/players/cash/cashtors.png
-u_larm,models/players/cash/casharm.png
-u_rarm,models/players/cash/casharm.png
+u_neck,models/players/cash/cashface
+u_torso,models/players/cash/cashtors
+u_larm,models/players/cash/casharm
+u_rarm,models/players/cash/casharm
 tag_torso,

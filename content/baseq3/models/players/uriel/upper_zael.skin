@@ -1,6 +1,6 @@
-u_rwing,models/players/uriel/null.png
-u_lwing,models/players/uriel/null.png
-u_torso,models/players/uriel/zael.png
+u_rwing,models/players/uriel/null
+u_lwing,models/players/uriel/null
+u_torso,models/players/uriel/zael
 tag_head,
 tag_torso,
 tag_weapon,

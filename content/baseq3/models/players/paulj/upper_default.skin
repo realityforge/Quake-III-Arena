@@ -1,6 +1,6 @@
 tag_weapon,
-u_larm,models/players/paulj/pjarm.png
-u_rarm,models/players/paulj/pjarm.png
-u_torso,models/players/paulj/pjtorso.png
+u_larm,models/players/paulj/pjarm
+u_rarm,models/players/paulj/pjarm
+u_torso,models/players/paulj/pjtorso
 tag_head,
 tag_torso,

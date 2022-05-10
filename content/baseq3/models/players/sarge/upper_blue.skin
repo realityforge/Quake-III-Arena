@@ -1,5 +1,5 @@
 tag_head,
 tag_weapon,
-u_rshoulder,models/players/sarge/blue.png
-u_torso,models/players/sarge/blue.png
+u_rshoulder,models/players/sarge/blue
+u_torso,models/players/sarge/blue
 tag_torso,
