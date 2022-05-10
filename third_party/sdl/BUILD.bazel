@@ -9,27 +9,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-config_setting(
-    name = "windows_x86_64",
-    constraint_values = [
-        "@platforms//os:windows",
-        "@platforms//cpu:x86_64",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-cc_import(
-    name = "sdl_library",
-    shared_library = select({
-        "@platforms//os:macos": "libs/macosx/libSDL2-2.0.0.dylib",
-        ":windows_x86_64": "libs/win64/SDL264.dll",
-    }),
-    static_library = select({
-        "@platforms//os:macos": "libs/macosx/libSDL2main.a",
-        ":windows_x86_64": "libs/win64/libSDL264main.a",
-    }),
-    visibility = ["//code/client:__pkg__"],
-)
 
 cc_library(
     name = "sdl",
