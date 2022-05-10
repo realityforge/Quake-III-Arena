@@ -40,7 +40,7 @@ itemDef {
 	textscale .3
 	group grpSystembutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 56 395 100 26
 	textalign 1
 	textalignx 50
@@ -57,7 +57,7 @@ itemDef {
 itemDef {
       	name ctr_graphics
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
  	rect 56 395 100 26
       	visible 1 
 	decoration  	  
@@ -66,7 +66,7 @@ itemDef {
 itemDef {
       	name ctr_graphics
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 44 395 13 26
       	visible 1 
 	decoration  	  
@@ -75,7 +75,7 @@ itemDef {
 itemDef {
       	name ctr_graphics
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 155 395 13 26
       	visible 1 
 	decoration  	  
@@ -287,7 +287,7 @@ itemDef {
 	group grpSystem
 	textscale .3
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 181 357 100 26
 	textalign 1
 	textalignx 50
@@ -305,7 +305,7 @@ itemDef {
       		name graphics
 		group grpSystem
 		style WINDOW_STYLE_SHADER
-		background "ui/assets/framebutton.png"
+		background "ui/assets/framebutton"
  		rect 181 357 100 26
       		visible 1 
 		decoration  	  
@@ -315,7 +315,7 @@ itemDef {
       		name graphics
 		group grpSystem
 		style WINDOW_STYLE_SHADER
-		background "ui/assets/leftbutton.png"
+		background "ui/assets/leftbutton"
    	   	rect 169 357 13 26
    	   	visible 1 
 		decoration  	  
@@ -325,7 +325,7 @@ itemDef {
 	      	name graphics
 		group grpSystem
 		style WINDOW_STYLE_SHADER
-		background "ui/assets/rightbutton.png"
+		background "ui/assets/rightbutton"
       		rect 280 357 13 26
      	 	visible 1 
 		decoration  	  
@@ -342,7 +342,7 @@ itemDef {
 	textscale .3
 	group grpSystembutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 181 395 100 26
 	textalign 1
 	textalignx 50
@@ -359,7 +359,7 @@ itemDef {
 itemDef {
       	name ctr_driver
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
  	rect 181 395 100 26
       	visible 1 
 	decoration  	  
@@ -368,7 +368,7 @@ itemDef {
 itemDef {
       	name ctr_driver
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 169 395 13 26
       	visible 1 
 	decoration  	  
@@ -377,7 +377,7 @@ itemDef {
 itemDef {
       	name ctr_driver
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 280 395 13 26
       	visible 1 
 	decoration  	  
@@ -422,7 +422,7 @@ itemDef {
 	textscale .3
 	group grpSystembutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 306 395 100 26
 	textalign 1
 	textalignx 50
@@ -439,7 +439,7 @@ itemDef {
 itemDef {
       	name ctr_other
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
  	rect 306 395 100 26
       	visible 1 
 	decoration  	  
@@ -448,7 +448,7 @@ itemDef {
 itemDef {
       	name ctr_other
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 294 395 13 26
       	visible 1 
 	decoration  	  
@@ -457,7 +457,7 @@ itemDef {
 itemDef {
       	name ctr_other
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 405 395 13 26
       	visible 1 
 	decoration  	  
@@ -659,7 +659,7 @@ itemDef {
 itemDef {
       	name fadebox
       	style WINDOW_STYLE_FILLED
- 	background "ui/assets/fadebox.png"
+ 	background "ui/assets/fadebox"
 	forecolor 0 0 0 1
 	backcolor 0 0 0 1
 	rect 0 0 640 480

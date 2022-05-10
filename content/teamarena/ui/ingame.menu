@@ -6,7 +6,7 @@
     	smallFont "fonts/smallfont" 12				// font
     	bigFont "fonts/bigfont" 20				// font
 	cursor "ui/assets/3_cursor3"			// cursor	
-	gradientBar "ui/assets/gradientbar2.png"	// gradient bar
+	gradientBar "ui/assets/gradientbar2"	// gradient bar
 	itemFocusSound "sound/misc/menu2.wav"		// sound for item getting focus (via keyboard or mouse )
 	
     	fadeClamp 1.0					// sets the fadeup alpha
@@ -47,7 +47,7 @@ itemdef
 	rect 5 0 53 30
 	type 1
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	textalign 1
 	textalignx 27
 	textaligny 22
@@ -64,7 +64,7 @@ itemdef
 	name aboutframe
 	style 3
 	rect 0 0 58 32
-	background "ui/assets/ingameframea.png"
+	background "ui/assets/ingameframea"
 	visible 1
 	decoration
 	}
@@ -74,7 +74,7 @@ itemdef
       	text "Join"
 	type 1
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	cvarTest "ui_singleplayeractive"
 	disableCvar { "1" }
       	rect 58 0 58 30   
@@ -95,7 +95,7 @@ itemdef
 	name joinframe
 	style 3
 	rect 58 0 58 32   
-	background "ui/assets/ingameframe.png"
+	background "ui/assets/ingameframe"
 	visible 1
 	decoration
 	}
@@ -106,7 +106,7 @@ itemdef
       	text "Orders"
 	type 1
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
       	rect 116 0 58 30
       	textalign 1	
       	textalignx 29      
@@ -127,7 +127,7 @@ itemdef
 	name ordersframe
 	style 3
 	rect 116 0 58 32   
-	background "ui/assets/ingameframe.png"
+	background "ui/assets/ingameframe"
 	visible 1
 	decoration
 	}
@@ -137,7 +137,7 @@ itemdef
       	text "Add Bot"
 	type 1
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
       	rect 174 0 58 30
       	textalign 1	
       	textalignx 29      
@@ -158,7 +158,7 @@ itemdef
 	name addBotframe
 	style 3
 	rect 174 0 58 32
-	background "ui/assets/ingameframe.png"
+	background "ui/assets/ingameframe"
 	visible 1
 	decoration
 	}
@@ -168,7 +168,7 @@ itemDef {
       	text "Player"
 	type 1
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
       	rect 232 0 58 30
       	textalign 1	
       	textalignx 29      
@@ -187,7 +187,7 @@ itemdef
 	style 3
 	rect 232 0 58 32
       	textalign 1	
-	background "ui/assets/ingameframe.png"
+	background "ui/assets/ingameframe"
 	visible 1
 	decoration
 	}
@@ -197,7 +197,7 @@ itemDef {
       	text "Controls"
 	type 1
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
       	rect 290 0 58 30
       	textalign 1	
       	textalignx 29      
@@ -217,7 +217,7 @@ itemdef
 	style 3
 	rect 290 0 58 32
       	textalign 1	
-	background "ui/assets/ingameframe.png"
+	background "ui/assets/ingameframe"
 	visible 1
 	decoration
 	}
@@ -227,7 +227,7 @@ itemDef {
       	text "Options"
 	type 1
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
       	rect 348 0 58 30
       	textalign 1	
       	textalignx 29      
@@ -247,7 +247,7 @@ itemdef
 	style 3
 	rect 348 0 58 32
       	textalign 1	
-	background "ui/assets/ingameframe.png"
+	background "ui/assets/ingameframe"
 	visible 1
 	decoration
 	}
@@ -257,7 +257,7 @@ itemDef {
       	text "System"
 	type 1
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
       	rect 406 0 58 30
       	textalign 1	
       	textalignx 29      
@@ -277,7 +277,7 @@ itemdef
 	style 3
 	rect 406 0 58 32
       	textalign 1	
-	background "ui/assets/ingameframe.png"
+	background "ui/assets/ingameframe"
 	visible 1
 	decoration
 	}
@@ -287,7 +287,7 @@ itemDef {
       	text "Vote"
 	type 1
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	cvarTest "ui_singleplayeractive"
 	disableCvar { "1" }
 
@@ -309,7 +309,7 @@ itemdef
 	style 3
 	rect 464 0 58 32
       	textalign 1	
-	background "ui/assets/ingameframe.png"
+	background "ui/assets/ingameframe"
 	visible 1
 	decoration
 	}
@@ -319,7 +319,7 @@ itemDef {
       	text "CallVote"
 	type 1
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	cvarTest "ui_singleplayeractive"
 	disableCvar { "1" }
 
@@ -341,7 +341,7 @@ itemdef
 	style 3
 	rect 522 0 58 32
       	textalign 1	
-	background "ui/assets/ingameframe.png"
+	background "ui/assets/ingameframe"
 	visible 1
 	decoration
 	}
@@ -350,7 +350,7 @@ itemDef {
       	text "Exit"
 	type 1
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
       	rect 580 0 58 30
       	textalign 1	
       	textalignx 29      
@@ -370,7 +370,7 @@ itemdef
 	style 3
 	rect 580 0 58 32
       	textalign 1	
-	background "ui/assets/ingameframe.png"
+	background "ui/assets/ingameframe"
 	visible 1
 	decoration
 	}

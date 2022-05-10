@@ -32,7 +32,7 @@ itemDef {
 	name window
 	rect 0 10 16 128
 	style 3
-	background "ui/assets/ingameleft.png"
+	background "ui/assets/ingameleft"
 	visible 1
 	decoration
 	}
@@ -41,7 +41,7 @@ itemDef {
 	name window
 	rect 3 0 65 16
 	style 3
-	background "ui/assets/ingameconnection.png"
+	background "ui/assets/ingameconnection"
 	visible 1
 	decoration
 	}
@@ -49,7 +49,7 @@ itemDef {
 	name window
 	rect 67 10 64 8
 	style 3
-	background "ui/assets/ingametop.png"
+	background "ui/assets/ingametop"
 	visible 1
 	decoration
 	}
@@ -57,7 +57,7 @@ itemDef {
 	name window
 	rect 131 10 96 8
 	style 3
-	background "ui/assets/ingametop.png"
+	background "ui/assets/ingametop"
 	visible 1
 	decoration
 	}
@@ -67,7 +67,7 @@ itemDef {
 	name window
 	rect 0 138 16 64
 	style 3
-	background "ui/assets/ingameleft.png"
+	background "ui/assets/ingameleft"
 	visible 1
 	decoration
 	}
@@ -76,7 +76,7 @@ itemDef {
 	name window
 	rect 0 202 16 64
 	style 3
-	background "ui/assets/ingameleft.png"
+	background "ui/assets/ingameleft"
 	visible 1
 	decoration
 	}
@@ -85,7 +85,7 @@ itemDef {
 	name window
 	rect 0 233 64 64
 	style 3
-	background "ui/assets/ingameleftcornerb.png"
+	background "ui/assets/ingameleftcornerb"
 	visible 1
 	decoration
 	}
@@ -94,7 +94,7 @@ itemDef {
 	name window
 	rect 212 10 64 64
 	style 3
-	background "ui/assets/ingamerightcorner.png"
+	background "ui/assets/ingamerightcorner"
 	visible 1
 	decoration
 	}
@@ -103,7 +103,7 @@ itemDef {
 	name window
 	rect 212 233 64 64
 	style 3
-	background "ui/assets/ingamerightcornerb.png"
+	background "ui/assets/ingamerightcornerb"
 	visible 1
 	decoration
 	}
@@ -112,7 +112,7 @@ itemDef {
 	name window
 	rect 64 289 66 8
 	style 3
-	background "ui/assets/ingamebottom.png"
+	background "ui/assets/ingamebottom"
 	visible 1
 	decoration
 	}
@@ -120,7 +120,7 @@ itemDef {
 	name window
 	rect 128 289 96 8
 	style 3
-	background "ui/assets/ingamebottom.png"
+	background "ui/assets/ingamebottom"
 	visible 1
 	decoration
 	}
@@ -128,7 +128,7 @@ itemDef {
 	name window
 	rect 260 74 16 64
 	style 3
-	background "ui/assets/ingameright.png"
+	background "ui/assets/ingameright"
 	visible 1
 	decoration
 	}
@@ -136,7 +136,7 @@ itemDef {
 	name window
 	rect 260 138 16 64
 	style 3
-	background "ui/assets/ingameright.png"
+	background "ui/assets/ingameright"
 	visible 1
 	decoration
 	}
@@ -144,7 +144,7 @@ itemDef {
 	name window
 	rect 260 202 16 64
 	style 3
-	background "ui/assets/ingameright.png"
+	background "ui/assets/ingameright"
 	visible 1
 	decoration
 	}

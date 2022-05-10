@@ -6,7 +6,7 @@
     	smallFont "fonts/smallfont" 12				// font
     	bigFont "fonts/bigfont" 20				// font
 	cursor "ui/assets/3_cursor3"			// cursor	
-	gradientBar "ui/assets/gradientbar2.png"	// gradient bar
+	gradientBar "ui/assets/gradientbar2"	// gradient bar
 	itemFocusSound "sound/misc/menu2.wav"		// sound for item getting focus (via keyboard or mouse )
 	
     	fadeClamp 1.0					// sets the fadeup alpha
@@ -531,7 +531,7 @@ itemDef {
 itemDef {
       	name fadebox					// Box for fading in menus
       	style WINDOW_STYLE_FILLED
- 	background "ui/assets/fadebox.png"
+ 	background "ui/assets/fadebox"
 	forecolor 0 0 0 1
 	backcolor 0 0 0 1
 	rect 0 0 640 480

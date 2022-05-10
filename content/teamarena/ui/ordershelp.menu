@@ -30,7 +30,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 37 2 32 32 
       	visible 1
-      	background "ui/assets/help.png"
+      	background "ui/assets/help"
 	decoration
 	}
 
@@ -39,7 +39,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 113 2 32 32 
       	visible 1
-      	background "ui/assets/assault.png"
+      	background "ui/assets/assault"
       	decoration 
 	}
 
@@ -48,7 +48,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 189 2 32 32 
       	visible 1
-      	background "ui/assets/camp.png"
+      	background "ui/assets/camp"
       	decoration 
 	}
 
@@ -58,7 +58,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 265 2 32 32 
       	visible 1
-      	background "ui/assets/defend.png"
+      	background "ui/assets/defend"
       	decoration 
 	}
 
@@ -68,7 +68,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 341 2 32 32 
       	visible 1
-      	background "ui/assets/follow.png"
+      	background "ui/assets/follow"
       	decoration 
 	}
 
@@ -78,7 +78,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 415 2 32 32 
       	visible 1
-      	background "ui/assets/patrol.png"
+      	background "ui/assets/patrol"
       	decoration 
 	}
 
@@ -87,7 +87,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 489 2 32 32 
       	visible 1
-      	background "ui/assets/retrieve.png"
+      	background "ui/assets/retrieve"
       	decoration 
 	}
 
@@ -96,7 +96,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 563 2 32 32 
       	visible 1
-      	background "ui/assets/escort.png"
+      	background "ui/assets/escort"
       	decoration 
 	}
 
@@ -111,7 +111,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 35 0 34 34 
       	visible 1
-      	background "ui/assets/help.png"
+      	background "ui/assets/help"
 	decoration
 	}
 
@@ -121,7 +121,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 111 0 34 34 
       	visible 1
-      	background "ui/assets/assault.png"
+      	background "ui/assets/assault"
       	decoration 
 	}
 
@@ -131,7 +131,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 187 0 34 34 
       	visible 1
-      	background "ui/assets/camp.png"
+      	background "ui/assets/camp"
       	decoration 
 	}
 
@@ -142,7 +142,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 263 0 34 34 
       	visible 1
-      	background "ui/assets/defend.png"
+      	background "ui/assets/defend"
       	decoration 
 	}
 
@@ -153,7 +153,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 339 0 34 34 
       	visible 1
-      	background "ui/assets/follow.png"
+      	background "ui/assets/follow"
       	decoration 
 	}
 
@@ -164,7 +164,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 413 0 34 34 
       	visible 1
-      	background "ui/assets/patrol.png"
+      	background "ui/assets/patrol"
       	decoration 
 	}
 
@@ -174,7 +174,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 487 0 34 34 
       	visible 1
-      	background "ui/assets/retrieve.png"
+      	background "ui/assets/retrieve"
       	decoration 
 	}
 
@@ -184,7 +184,7 @@ itemDef {
       	style WINDOW_STYLE_SHADER
       	rect 561 0 34 34 
       	visible 1
-      	background "ui/assets/escort.png"
+      	background "ui/assets/escort"
       	decoration 
 	}
 
@@ -201,7 +201,7 @@ itemDef {
 	type 1
 	text "Help"
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	textalign 1   	
 	textscale .25
 	textalignx 25
@@ -217,7 +217,7 @@ itemDef {
       	name help 
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
  	rect 28 37 50 26
       	visible 1 
 	decoration  	  
@@ -227,7 +227,7 @@ itemDef {
       	name help 
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 22 37 7 26
       	visible 1 
 	decoration  	  
@@ -237,7 +237,7 @@ itemDef {
       	name help 
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 77 37 7 26
       	visible 1 
 	decoration  	  
@@ -257,7 +257,7 @@ itemDef {
   	text "Attack"
 	style WINDOW_STYLE_FILLED
 	type 1
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	textalign 1   	
 	textscale .25
 	textalignx 25
@@ -273,7 +273,7 @@ itemDef {
       	name attack
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
  	rect 104 37 50 26 
       	visible 1 
 	decoration  	  
@@ -283,7 +283,7 @@ itemDef {
       	name attack
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 98 37 7 26 
       	visible 1 
 	decoration  	  
@@ -293,7 +293,7 @@ itemDef {
       	name attack
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 153 37 7 26 
       	visible 1 
 	decoration  	  
@@ -312,7 +312,7 @@ itemDef {
 	type 1
   	text "Camp"
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	textalign 1   	
 	textscale .25
 	textalignx 25
@@ -328,7 +328,7 @@ itemDef {
       	name camp
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
  	rect 180 37 50 26
       	visible 1 
 	decoration  	  
@@ -338,7 +338,7 @@ itemDef {
       	name camp
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 174 37 7 26
       	visible 1 
 	decoration  	  
@@ -348,7 +348,7 @@ itemDef {
       	name camp
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 229 37 7 26
       	visible 1 
 	decoration  	  
@@ -367,7 +367,7 @@ itemDef {
 	type 1
   	text "Defend"
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	textalign 1   	
 	textscale .25
 	textalignx 25
@@ -383,7 +383,7 @@ itemDef {
       	name defend
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
  	rect 256 37 50 26
       	visible 1 
 	decoration  	  
@@ -393,7 +393,7 @@ itemDef {
       	name defend
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 250 37 7 26
       	visible 1 
 	decoration  	  
@@ -403,7 +403,7 @@ itemDef {
       	name defend
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 305 37 7 26
       	visible 1 
 	decoration  	  
@@ -421,7 +421,7 @@ itemDef {
       	rect 332 37 50 26
   	text "Follow"
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	textalign 1   	
 	textscale .25
 	textalignx 25
@@ -438,7 +438,7 @@ itemDef {
       	name follow
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
  	rect 332 37 50 26
       	visible 1 
 	decoration  	  
@@ -448,7 +448,7 @@ itemDef {
       	name follow
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 326 37 7 26
       	visible 1 
 	decoration  	  
@@ -458,7 +458,7 @@ itemDef {
       	name follow
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 381 37 7 26
       	visible 1 
 	decoration  	  
@@ -476,7 +476,7 @@ itemDef {
 	type 1
   	text "Patrol"
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	textalign 1   	
 	textscale .25
 	textalignx 25
@@ -492,7 +492,7 @@ itemDef {
       	name patrol
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
  	rect 406 37 50 26
       	visible 1 
 	decoration  	  
@@ -502,7 +502,7 @@ itemDef {
       	name patrol
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 400 37 7 26
       	visible 1 
 	decoration  	  
@@ -512,7 +512,7 @@ itemDef {
       	name patrol
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 455 37 7 26
       	visible 1 
 	decoration  	  
@@ -530,7 +530,7 @@ itemDef {
 	type 1
   	text "Retrieve"
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	textalign 1   	
 	textscale .25
 	textalignx 25
@@ -546,7 +546,7 @@ itemDef {
       	name retrieve
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
  	rect 480 37 50 26
       	visible 1 
 	decoration  	  
@@ -556,7 +556,7 @@ itemDef {
       	name retrieve
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 474 37 7 26
       	visible 1 
 	decoration  	  
@@ -566,7 +566,7 @@ itemDef {
       	name retrieve
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 529 37 7 26
       	visible 1 
 	decoration  	  
@@ -582,7 +582,7 @@ itemDef {
 	type 1
   	text "Escort"
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	textalign 1   	
 	textscale .25
 	textalignx 25
@@ -598,7 +598,7 @@ itemDef {
       	name escort
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
  	rect 554 37 50 26
       	visible 1 
 	decoration  	  
@@ -608,7 +608,7 @@ itemDef {
       	name escort
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 548 37 7 26
       	visible 1 
 	decoration  	  
@@ -618,7 +618,7 @@ itemDef {
       	name escort
 	group grpControlbutton
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 603 37 7 26
       	visible 1 
 	decoration  	  
@@ -635,7 +635,7 @@ itemDef {
 		rect 40 102 50 50
     		visible 1
 		style WINDOW_STYLE_SHADER
-		background "ui/assets/head5.png"
+		background "ui/assets/head5"
 		decoration
 		}
 	
@@ -654,7 +654,7 @@ itemDef {
 		group grpVoiceHead
 		visible 1
 		style 3
-		background "ui/assets/voice_window.png"
+		background "ui/assets/voice_window"
 		rect 38 100 54 54
 		}
 
@@ -997,7 +997,7 @@ itemDef {
 itemDef {
       	name fadebox
       	style WINDOW_STYLE_FILLED
- 	background "ui/assets/fadebox.png"
+ 	background "ui/assets/fadebox"
 	forecolor 0 0 0 1
 	backcolor 0 0 0 1
 	rect 0 0 640 480
