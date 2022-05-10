@@ -40,6 +40,7 @@ XrAction vibrateRightFeedback;
 XrActionSet runningActionSet;
 XrSpace leftControllerAimSpace = XR_NULL_HANDLE;
 XrSpace rightControllerAimSpace = XR_NULL_HANDLE;
+qboolean actionsAttached = qfalse;
 qboolean inputInitialized = qfalse;
 qboolean useSimpleProfile = qfalse;
 
@@ -1364,12 +1365,15 @@ void IN_VRSyncActions( void )
     engine_t* engine = VR_GetEngine();
 
     // Attach to session
-    XrSessionActionSetsAttachInfo attachInfo = {};
-    attachInfo.type = XR_TYPE_SESSION_ACTION_SETS_ATTACH_INFO;
-    attachInfo.next = NULL;
-    attachInfo.countActionSets = 1;
-    attachInfo.actionSets = &runningActionSet;
-    OXR(xrAttachSessionActionSets(engine->appState.Session, &attachInfo));
+    if (!actionsAttached) {
+        XrSessionActionSetsAttachInfo attachInfo = {};
+        attachInfo.type = XR_TYPE_SESSION_ACTION_SETS_ATTACH_INFO;
+        attachInfo.next = NULL;
+        attachInfo.countActionSets = 1;
+        attachInfo.actionSets = &runningActionSet;
+        OXR(xrAttachSessionActionSets(engine->appState.Session, &attachInfo));
+        actionsAttached = qtrue;
+    }
 
     // sync action data
     XrActiveActionSet activeActionSet = {};
