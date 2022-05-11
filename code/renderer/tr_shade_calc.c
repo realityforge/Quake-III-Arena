@@ -237,7 +237,7 @@ void DeformText(const char* text)
     vec3_t origin, width, height;
     int len;
     int ch;
-    byte color[4];
+    uint8_t color[4];
     float bottom, top;
     vec3_t mid;
 
@@ -631,7 +631,7 @@ void RB_CalcWaveColor(const waveForm_t* wf, unsigned char* dstColors)
     int v;
     float glow;
     int* colors = (int*)dstColors;
-    byte color[4];
+    uint8_t color[4];
 
     if (wf->func == GF_NOISE) {
         glow = wf->base + R_NoiseGet4f(0, 0, 0, (tess.shaderTime + wf->phase) * wf->frequency) * wf->amplitude;

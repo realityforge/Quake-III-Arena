@@ -114,7 +114,7 @@ static void R_SetupEntityLightingGrid(trRefEntity_t* ent)
     vec3_t lightOrigin;
     int pos[3];
     int i, j;
-    byte* gridData;
+    uint8_t* gridData;
     float frac[3];
     int gridStep[3];
     vec3_t direction;
@@ -159,7 +159,7 @@ static void R_SetupEntityLightingGrid(trRefEntity_t* ent)
     totalFactor = 0;
     for (i = 0; i < 8; i++) {
         float factor;
-        byte* data;
+        uint8_t* data;
         int lat, lng;
         vec3_t normal;
         factor = 1.0;
@@ -320,10 +320,10 @@ void R_SetupEntityLighting(const trRefdef_t* refdef, trRefEntity_t* ent)
     }
 
     // save out the byte packet version
-    ((byte*)&ent->ambientLightInt)[0] = myftol(ent->ambientLight[0]);
-    ((byte*)&ent->ambientLightInt)[1] = myftol(ent->ambientLight[1]);
-    ((byte*)&ent->ambientLightInt)[2] = myftol(ent->ambientLight[2]);
-    ((byte*)&ent->ambientLightInt)[3] = 0xff;
+    ((uint8_t*)&ent->ambientLightInt)[0] = myftol(ent->ambientLight[0]);
+    ((uint8_t*)&ent->ambientLightInt)[1] = myftol(ent->ambientLight[1]);
+    ((uint8_t*)&ent->ambientLightInt)[2] = myftol(ent->ambientLight[2]);
+    ((uint8_t*)&ent->ambientLightInt)[3] = 0xff;
 
     // transform the direction to local space
     VectorNormalize(lightDir);

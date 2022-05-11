@@ -33,10 +33,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define JPEG_INTERNALS
 #include "../jpeg-6/jpeglib.h"
 
-static void LoadTGA(const char* name, byte** pic, int* width, int* height);
-static void LoadJPG(const char* name, byte** pic, int* width, int* height);
+static void LoadTGA(const char* name, uint8_t** pic, int* width, int* height);
+static void LoadJPG(const char* name, uint8_t** pic, int* width, int* height);
 
-static byte s_intensitytable[256];
+static uint8_t s_intensitytable[256];
 static unsigned char s_gammatable[256];
 
 int gl_filter_min = GL_LINEAR_MIPMAP_NEAREST;
@@ -48,7 +48,7 @@ static image_t* hashTable[FILE_HASH_SIZE];
 /*
 ** R_GammaCorrect
 */
-void R_GammaCorrect(byte* buffer, int bufSize)
+void R_GammaCorrect(uint8_t* buffer, int bufSize)
 {
     int i;
 
@@ -233,7 +233,7 @@ static void ResampleTexture(unsigned* in, int inwidth, int inheight, unsigned* o
     unsigned *inrow, *inrow2;
     unsigned frac, fracstep;
     unsigned p1[2048], p2[2048];
-    byte *pix1, *pix2, *pix3, *pix4;
+    uint8_t *pix1, *pix2, *pix3, *pix4;
 
     if (outwidth > 2048)
         ri.Error(ERR_DROP, "ResampleTexture: max width");
@@ -256,14 +256,14 @@ static void ResampleTexture(unsigned* in, int inwidth, int inheight, unsigned* o
         inrow2 = in + inwidth * (int)((i + 0.75) * inheight / outheight);
         frac = fracstep >> 1;
         for (j = 0; j < outwidth; j++) {
-            pix1 = (byte*)inrow + p1[j];
-            pix2 = (byte*)inrow + p2[j];
-            pix3 = (byte*)inrow2 + p1[j];
-            pix4 = (byte*)inrow2 + p2[j];
-            ((byte*)(out + j))[0] = (pix1[0] + pix2[0] + pix3[0] + pix4[0]) >> 2;
-            ((byte*)(out + j))[1] = (pix1[1] + pix2[1] + pix3[1] + pix4[1]) >> 2;
-            ((byte*)(out + j))[2] = (pix1[2] + pix2[2] + pix3[2] + pix4[2]) >> 2;
-            ((byte*)(out + j))[3] = (pix1[3] + pix2[3] + pix3[3] + pix4[3]) >> 2;
+            pix1 = (uint8_t*)inrow + p1[j];
+            pix2 = (uint8_t*)inrow + p2[j];
+            pix3 = (uint8_t*)inrow2 + p1[j];
+            pix4 = (uint8_t*)inrow2 + p2[j];
+            ((uint8_t*)(out + j))[0] = (pix1[0] + pix2[0] + pix3[0] + pix4[0]) >> 2;
+            ((uint8_t*)(out + j))[1] = (pix1[1] + pix2[1] + pix3[1] + pix4[1]) >> 2;
+            ((uint8_t*)(out + j))[2] = (pix1[2] + pix2[2] + pix3[2] + pix4[2]) >> 2;
+            ((uint8_t*)(out + j))[3] = (pix1[3] + pix2[3] + pix3[3] + pix4[3]) >> 2;
         }
     }
 }
@@ -281,9 +281,9 @@ void R_LightScaleTexture(unsigned* in, int inwidth, int inheight, bool only_gamm
     if (only_gamma) {
         if (!glConfig.deviceSupportsGamma) {
             int i, c;
-            byte* p;
+            uint8_t* p;
 
-            p = (byte*)in;
+            p = (uint8_t*)in;
 
             c = inwidth * inheight;
             for (i = 0; i < c; i++, p += 4) {
@@ -294,9 +294,9 @@ void R_LightScaleTexture(unsigned* in, int inwidth, int inheight, bool only_gamm
         }
     } else {
         int i, c;
-        byte* p;
+        uint8_t* p;
 
-        p = (byte*)in;
+        p = (uint8_t*)in;
 
         c = inwidth * inheight;
 
@@ -327,7 +327,7 @@ Proper linear filter
 static void R_MipMap2(unsigned* in, int inWidth, int inHeight)
 {
     int i, j, k;
-    byte* outpix;
+    uint8_t* outpix;
     int inWidthMask, inHeightMask;
     int total;
     int outWidth, outHeight;
@@ -342,15 +342,15 @@ static void R_MipMap2(unsigned* in, int inWidth, int inHeight)
 
     for (i = 0; i < outHeight; i++) {
         for (j = 0; j < outWidth; j++) {
-            outpix = (byte*)(temp + i * outWidth + j);
+            outpix = (uint8_t*)(temp + i * outWidth + j);
             for (k = 0; k < 4; k++) {
-                total = 1 * ((byte*)&in[((i * 2 - 1) & inHeightMask) * inWidth + ((j * 2 - 1) & inWidthMask)])[k] + 2 * ((byte*)&in[((i * 2 - 1) & inHeightMask) * inWidth + ((j * 2) & inWidthMask)])[k] + 2 * ((byte*)&in[((i * 2 - 1) & inHeightMask) * inWidth + ((j * 2 + 1) & inWidthMask)])[k] + 1 * ((byte*)&in[((i * 2 - 1) & inHeightMask) * inWidth + ((j * 2 + 2) & inWidthMask)])[k] +
+                total = 1 * ((uint8_t*)&in[((i * 2 - 1) & inHeightMask) * inWidth + ((j * 2 - 1) & inWidthMask)])[k] + 2 * ((uint8_t*)&in[((i * 2 - 1) & inHeightMask) * inWidth + ((j * 2) & inWidthMask)])[k] + 2 * ((uint8_t*)&in[((i * 2 - 1) & inHeightMask) * inWidth + ((j * 2 + 1) & inWidthMask)])[k] + 1 * ((uint8_t*)&in[((i * 2 - 1) & inHeightMask) * inWidth + ((j * 2 + 2) & inWidthMask)])[k] +
 
-                    2 * ((byte*)&in[((i * 2) & inHeightMask) * inWidth + ((j * 2 - 1) & inWidthMask)])[k] + 4 * ((byte*)&in[((i * 2) & inHeightMask) * inWidth + ((j * 2) & inWidthMask)])[k] + 4 * ((byte*)&in[((i * 2) & inHeightMask) * inWidth + ((j * 2 + 1) & inWidthMask)])[k] + 2 * ((byte*)&in[((i * 2) & inHeightMask) * inWidth + ((j * 2 + 2) & inWidthMask)])[k] +
+                    2 * ((uint8_t*)&in[((i * 2) & inHeightMask) * inWidth + ((j * 2 - 1) & inWidthMask)])[k] + 4 * ((uint8_t*)&in[((i * 2) & inHeightMask) * inWidth + ((j * 2) & inWidthMask)])[k] + 4 * ((uint8_t*)&in[((i * 2) & inHeightMask) * inWidth + ((j * 2 + 1) & inWidthMask)])[k] + 2 * ((uint8_t*)&in[((i * 2) & inHeightMask) * inWidth + ((j * 2 + 2) & inWidthMask)])[k] +
 
-                    2 * ((byte*)&in[((i * 2 + 1) & inHeightMask) * inWidth + ((j * 2 - 1) & inWidthMask)])[k] + 4 * ((byte*)&in[((i * 2 + 1) & inHeightMask) * inWidth + ((j * 2) & inWidthMask)])[k] + 4 * ((byte*)&in[((i * 2 + 1) & inHeightMask) * inWidth + ((j * 2 + 1) & inWidthMask)])[k] + 2 * ((byte*)&in[((i * 2 + 1) & inHeightMask) * inWidth + ((j * 2 + 2) & inWidthMask)])[k] +
+                    2 * ((uint8_t*)&in[((i * 2 + 1) & inHeightMask) * inWidth + ((j * 2 - 1) & inWidthMask)])[k] + 4 * ((uint8_t*)&in[((i * 2 + 1) & inHeightMask) * inWidth + ((j * 2) & inWidthMask)])[k] + 4 * ((uint8_t*)&in[((i * 2 + 1) & inHeightMask) * inWidth + ((j * 2 + 1) & inWidthMask)])[k] + 2 * ((uint8_t*)&in[((i * 2 + 1) & inHeightMask) * inWidth + ((j * 2 + 2) & inWidthMask)])[k] +
 
-                    1 * ((byte*)&in[((i * 2 + 2) & inHeightMask) * inWidth + ((j * 2 - 1) & inWidthMask)])[k] + 2 * ((byte*)&in[((i * 2 + 2) & inHeightMask) * inWidth + ((j * 2) & inWidthMask)])[k] + 2 * ((byte*)&in[((i * 2 + 2) & inHeightMask) * inWidth + ((j * 2 + 1) & inWidthMask)])[k] + 1 * ((byte*)&in[((i * 2 + 2) & inHeightMask) * inWidth + ((j * 2 + 2) & inWidthMask)])[k];
+                    1 * ((uint8_t*)&in[((i * 2 + 2) & inHeightMask) * inWidth + ((j * 2 - 1) & inWidthMask)])[k] + 2 * ((uint8_t*)&in[((i * 2 + 2) & inHeightMask) * inWidth + ((j * 2) & inWidthMask)])[k] + 2 * ((uint8_t*)&in[((i * 2 + 2) & inHeightMask) * inWidth + ((j * 2 + 1) & inWidthMask)])[k] + 1 * ((uint8_t*)&in[((i * 2 + 2) & inHeightMask) * inWidth + ((j * 2 + 2) & inWidthMask)])[k];
                 outpix[k] = total / 36;
             }
         }
@@ -367,10 +367,10 @@ R_MipMap
 Operates in place, quartering the size of the texture
 ================
 */
-static void R_MipMap(byte* in, int width, int height)
+static void R_MipMap(uint8_t* in, int width, int height)
 {
     int i, j;
-    byte* out;
+    uint8_t* out;
     int row;
 
     if (!r_simpleMipMaps->integer) {
@@ -415,7 +415,7 @@ R_BlendOverTexture
 Apply a color blend over a set of pixels
 ==================
 */
-static void R_BlendOverTexture(byte* data, int pixelCount, byte blend[4])
+static void R_BlendOverTexture(uint8_t* data, int pixelCount, uint8_t blend[4])
 {
     int i;
     int inverseAlpha;
@@ -433,7 +433,7 @@ static void R_BlendOverTexture(byte* data, int pixelCount, byte blend[4])
     }
 }
 
-byte mipBlendColors[16][4] = {
+uint8_t mipBlendColors[16][4] = {
     { 0, 0, 0, 0 },
     { 255, 0, 0, 128 },
     { 0, 255, 0, 128 },
@@ -466,7 +466,7 @@ static void Upload32(unsigned* data,
     unsigned* resampledBuffer = NULL;
     int scaled_width, scaled_height;
     int i, c;
-    byte* scan;
+    uint8_t* scan;
     GLenum internalFormat = GL_RGB;
     float rMax = 0, gMax = 0, bMax = 0;
 
@@ -516,7 +516,7 @@ static void Upload32(unsigned* data,
     // scan the texture for each channel's max values
     // and verify if the alpha channel is being used or not
     c = width * height;
-    scan = ((byte*)data);
+    scan = ((uint8_t*)data);
     samples = 3;
     if (!lightMap) {
         for (i = 0; i < c; i++) {
@@ -571,7 +571,7 @@ static void Upload32(unsigned* data,
     } else {
         // use the normal mip-mapping function to go down from here
         while (width > scaled_width || height > scaled_height) {
-            R_MipMap((byte*)data, width, height);
+            R_MipMap((uint8_t*)data, width, height);
             width >>= 1;
             height >>= 1;
             if (width < 1) {
@@ -597,7 +597,7 @@ static void Upload32(unsigned* data,
 
         miplevel = 0;
         while (scaled_width > 1 || scaled_height > 1) {
-            R_MipMap((byte*)scaledBuffer, scaled_width, scaled_height);
+            R_MipMap((uint8_t*)scaledBuffer, scaled_width, scaled_height);
             scaled_width >>= 1;
             scaled_height >>= 1;
             if (scaled_width < 1)
@@ -607,7 +607,7 @@ static void Upload32(unsigned* data,
             miplevel++;
 
             if (r_colorMipLevels->integer) {
-                R_BlendOverTexture((byte*)scaledBuffer, scaled_width * scaled_height, mipBlendColors[miplevel]);
+                R_BlendOverTexture((uint8_t*)scaledBuffer, scaled_width * scaled_height, mipBlendColors[miplevel]);
             }
 
             qglTexImage2D(GL_TEXTURE_2D, miplevel, internalFormat, scaled_width, scaled_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, scaledBuffer);
@@ -638,7 +638,7 @@ R_CreateImage
 This is the only way any image_t are created
 ================
 */
-image_t* R_CreateImage(const char* name, const byte* pic, int width, int height,
+image_t* R_CreateImage(const char* name, const uint8_t* pic, int width, int height,
                        bool mipmap, bool allowPicmip, int glWrapClampMode)
 {
     image_t* image;
@@ -714,15 +714,15 @@ TARGA LOADING
 =========================================================
 */
 
-static void LoadTGA(const char* name, byte** pic, int* width, int* height)
+static void LoadTGA(const char* name, uint8_t** pic, int* width, int* height)
 {
     int columns, rows, numPixels;
-    byte* pixbuf;
+    uint8_t* pixbuf;
     int row, column;
-    byte* buf_p;
-    byte* buffer;
+    uint8_t* buf_p;
+    uint8_t* buffer;
     TargaHeader targa_header;
-    byte* targa_rgba;
+    uint8_t* targa_rgba;
 
     *pic = NULL;
 
@@ -946,8 +946,8 @@ static void LoadJPG(const char* filename, unsigned char** pic, int* width, int* 
     JSAMPARRAY buffer; /* Output row buffer */
     int row_stride; /* physical row width in output buffer */
     unsigned char* out;
-    byte* fbuffer;
-    byte* bbuf;
+    uint8_t* fbuffer;
+    uint8_t* bbuf;
 
     /* In this example we want to open the input file before doing anything else,
      * so that the setjmp() error recovery below can assume the file is open.
@@ -1032,7 +1032,7 @@ static void LoadJPG(const char* filename, unsigned char** pic, int* width, int* 
     // clear all the alphas to 255
     {
         int i, j;
-        byte* buf;
+        uint8_t* buf;
 
         buf = *pic;
 
@@ -1073,7 +1073,7 @@ static void LoadJPG(const char* filename, unsigned char** pic, int* width, int* 
 typedef struct {
     struct jpeg_destination_mgr pub; /* public fields */
 
-    byte* outfile; /* target stream */
+    uint8_t* outfile; /* target stream */
     int size;
 } my_destination_mgr;
 
@@ -1234,7 +1234,7 @@ void term_destination(j_compress_ptr cinfo)
  * for closing it after finishing compression.
  */
 
-void jpegDest(j_compress_ptr cinfo, byte* outfile, int size)
+void jpegDest(j_compress_ptr cinfo, uint8_t* outfile, int size)
 {
     my_dest_ptr dest;
 
@@ -1373,7 +1373,7 @@ Loads any of the supported image types into a canonical
 32 bit format.
 =================
 */
-void R_LoadImage(const char* name, byte** pic, int* width, int* height)
+void R_LoadImage(const char* name, uint8_t** pic, int* width, int* height)
 {
     int len;
 
@@ -1414,7 +1414,7 @@ image_t* R_FindImageFile(const char* name, bool mipmap, bool allowPicmip, int gl
 {
     image_t* image;
     int width, height;
-    byte* pic;
+    uint8_t* pic;
     long hash;
 
     if (!name) {
@@ -1468,7 +1468,7 @@ image_t* R_FindImageFile(const char* name, bool mipmap, bool allowPicmip, int gl
 static void R_CreateDlightImage(void)
 {
     int x, y;
-    byte data[DLIGHT_SIZE][DLIGHT_SIZE][4];
+    uint8_t data[DLIGHT_SIZE][DLIGHT_SIZE][4];
     int b;
 
     // make a centered inverse-square falloff blob for dynamic lighting
@@ -1487,7 +1487,7 @@ static void R_CreateDlightImage(void)
             data[y][x][3] = 255;
         }
     }
-    tr.dlightImage = R_CreateImage("*dlight", (byte*)data, DLIGHT_SIZE, DLIGHT_SIZE, false, false, GL_CLAMP);
+    tr.dlightImage = R_CreateImage("*dlight", (uint8_t*)data, DLIGHT_SIZE, DLIGHT_SIZE, false, false, GL_CLAMP);
 }
 
 void R_InitFogTable(void)
@@ -1546,7 +1546,7 @@ float R_FogFactor(float s, float t)
 static void R_CreateFogImage(void)
 {
     int x, y;
-    byte* data;
+    uint8_t* data;
     float g;
     float d;
     float borderColor[4];
@@ -1567,7 +1567,7 @@ static void R_CreateFogImage(void)
     // standard openGL clamping doesn't really do what we want -- it includes
     // the border color at the edges.  OpenGL 1.2 has clamp-to-edge, which does
     // what we want.
-    tr.fogImage = R_CreateImage("*fog", (byte*)data, FOG_S, FOG_T, false, false, GL_CLAMP);
+    tr.fogImage = R_CreateImage("*fog", (uint8_t*)data, FOG_S, FOG_T, false, false, GL_CLAMP);
     ri.Hunk_FreeTempMemory(data);
 
     borderColor[0] = 1.0;
@@ -1582,7 +1582,7 @@ static void R_CreateFogImage(void)
 static void R_CreateDefaultImage(void)
 {
     int x;
-    byte data[DEFAULT_SIZE][DEFAULT_SIZE][4];
+    uint8_t data[DEFAULT_SIZE][DEFAULT_SIZE][4];
 
     // the default image will be a box, to allow you to see the mapping coordinates
     memset(data, 32, sizeof(data));
@@ -1595,19 +1595,19 @@ static void R_CreateDefaultImage(void)
 
         data[x][DEFAULT_SIZE - 1][0] = data[x][DEFAULT_SIZE - 1][1] = data[x][DEFAULT_SIZE - 1][2] = data[x][DEFAULT_SIZE - 1][3] = 255;
     }
-    tr.defaultImage = R_CreateImage("*default", (byte*)data, DEFAULT_SIZE, DEFAULT_SIZE, true, false, GL_REPEAT);
+    tr.defaultImage = R_CreateImage("*default", (uint8_t*)data, DEFAULT_SIZE, DEFAULT_SIZE, true, false, GL_REPEAT);
 }
 
 void R_CreateBuiltinImages(void)
 {
     int x, y;
-    byte data[DEFAULT_SIZE][DEFAULT_SIZE][4];
+    uint8_t data[DEFAULT_SIZE][DEFAULT_SIZE][4];
 
     R_CreateDefaultImage();
 
     // we use a solid white image instead of disabling texturing
     memset(data, 255, sizeof(data));
-    tr.whiteImage = R_CreateImage("*white", (byte*)data, 8, 8, false, false, GL_REPEAT);
+    tr.whiteImage = R_CreateImage("*white", (uint8_t*)data, 8, 8, false, false, GL_REPEAT);
 
     // with overbright bits active, we need an image which is some fraction of full color,
     // for default lightmaps, etc
@@ -1618,11 +1618,11 @@ void R_CreateBuiltinImages(void)
         }
     }
 
-    tr.identityLightImage = R_CreateImage("*identityLight", (byte*)data, 8, 8, false, false, GL_REPEAT);
+    tr.identityLightImage = R_CreateImage("*identityLight", (uint8_t*)data, 8, 8, false, false, GL_REPEAT);
 
     for (x = 0; x < 32; x++) {
         // scratchimage is usually used for cinematic drawing
-        tr.scratchImage[x] = R_CreateImage("*scratch", (byte*)data, DEFAULT_SIZE, DEFAULT_SIZE, false, true, GL_CLAMP);
+        tr.scratchImage[x] = R_CreateImage("*scratch", (uint8_t*)data, DEFAULT_SIZE, DEFAULT_SIZE, false, true, GL_CLAMP);
     }
 
     R_CreateDlightImage();

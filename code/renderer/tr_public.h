@@ -53,7 +53,7 @@ typedef struct {
 
     // the vis data is a large enough block of data that we go to the trouble
     // of sharing it with the clipmodel subsystem
-    void (*SetWorldVisData)(const byte* vis);
+    void (*SetWorldVisData)(const uint8_t* vis);
 
     // EndRegistration will draw a tiny polygon with each texture, forcing
     // them to be loaded into card memory
@@ -74,8 +74,8 @@ typedef struct {
                            float s1, float t1, float s2, float t2, qhandle_t hShader); // 0 = white
 
     // Draw images for cinematic rendering, pass as 32 bit rgba
-    void (*DrawStretchRaw)(int x, int y, int w, int h, int cols, int rows, const byte* data, int client, bool dirty);
-    void (*UploadCinematic)(int w, int h, int cols, int rows, const byte* data, int client, bool dirty);
+    void (*DrawStretchRaw)(int x, int y, int w, int h, int cols, int rows, const uint8_t* data, int client, bool dirty);
+    void (*UploadCinematic)(int w, int h, int cols, int rows, const uint8_t* data, int client, bool dirty);
 
     void (*BeginFrame)(stereoFrame_t stereoFrame);
 

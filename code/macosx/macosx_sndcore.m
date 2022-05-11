@@ -222,7 +222,7 @@ bool SNDDMA_Init(void)
     dma.samples = maxMixedSamples;
     dma.submission_chunk = submissionChunk;
     dma.samplebits = 16;
-    dma.buffer = (byte*)s_mixedSamples;
+    dma.buffer = (uint8_t*)s_mixedSamples;
     dma.channels = outputStreamBasicDescription.mChannelsPerFrame;
     dma.speed = 22050; //(unsigned long)outputStreamBasicDescription.mSampleRate;
 

@@ -396,7 +396,7 @@ int R_MarkFragments(int numPoints, const vec3_t* points, const vec3_t projection
             VectorNormalize(normal);
             if (DotProduct(normal, projectionDir) > -0.5) continue;
             */
-            indexes = (int*)((byte*)surf + surf->ofsIndices);
+            indexes = (int*)((uint8_t*)surf + surf->ofsIndices);
             for (k = 0; k < surf->numIndices; k += 3) {
                 for (j = 0; j < 3; j++) {
                     v = surf->points[0] + VERTEXSIZE * indexes[k + j];

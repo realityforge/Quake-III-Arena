@@ -42,13 +42,13 @@ void R_AddAnimSurfaces(trRefEntity_t* ent)
     int i;
 
     header = tr.currentModel->md4;
-    lod = (md4LOD_t*)((byte*)header + header->ofsLODs);
+    lod = (md4LOD_t*)((uint8_t*)header + header->ofsLODs);
 
-    surface = (md4Surface_t*)((byte*)lod + lod->ofsSurfaces);
+    surface = (md4Surface_t*)((uint8_t*)lod + lod->ofsSurfaces);
     for (i = 0; i < lod->numSurfaces; i++) {
         shader = R_GetShaderByHandle(surface->shaderIndex);
         R_AddDrawSurf((void*)surface, shader, 0 /*fogNum*/, false);
-        surface = (md4Surface_t*)((byte*)surface + surface->ofsEnd);
+        surface = (md4Surface_t*)((uint8_t*)surface + surface->ofsEnd);
     }
 }
 
@@ -75,16 +75,16 @@ void RB_SurfaceAnim(md4Surface_t* surface)
         backlerp = backEnd.currentEntity->e.backlerp;
         frontlerp = 1.0f - backlerp;
     }
-    header = (md4Header_t*)((byte*)surface + surface->ofsHeader);
+    header = (md4Header_t*)((uint8_t*)surface + surface->ofsHeader);
 
     frameSize = (int)(&((md4Frame_t*)0)->bones[header->numBones]);
 
-    frame = (md4Frame_t*)((byte*)header + header->ofsFrames + backEnd.currentEntity->e.frame * frameSize);
-    oldFrame = (md4Frame_t*)((byte*)header + header->ofsFrames + backEnd.currentEntity->e.oldframe * frameSize);
+    frame = (md4Frame_t*)((uint8_t*)header + header->ofsFrames + backEnd.currentEntity->e.frame * frameSize);
+    oldFrame = (md4Frame_t*)((uint8_t*)header + header->ofsFrames + backEnd.currentEntity->e.oldframe * frameSize);
 
     RB_CheckOverflow(surface->numVerts, surface->numTriangles * 3);
 
-    triangles = (int*)((byte*)surface + surface->ofsTriangles);
+    triangles = (int*)((uint8_t*)surface + surface->ofsTriangles);
     indexes = surface->numTriangles * 3;
     baseIndex = tess.numIndexes;
     baseVertex = tess.numVertexes;
@@ -110,8 +110,8 @@ void RB_SurfaceAnim(md4Surface_t* surface)
     // FIXME
     // This makes TFC's skeletons work.  Shouldn't be necessary anymore, but left
     // in for reference.
-    // v = (md4Vertex_t *) ((byte *)surface + surface->ofsVerts + 12);
-    v = (md4Vertex_t*)((byte*)surface + surface->ofsVerts);
+    // v = (md4Vertex_t *) ((uint8_t *)surface + surface->ofsVerts + 12);
+    v = (md4Vertex_t*)((uint8_t*)surface + surface->ofsVerts);
     for (j = 0; j < numVerts; j++) {
         vec3_t tempVert, tempNormal;
         md4Weight_t* w;
@@ -145,7 +145,7 @@ void RB_SurfaceAnim(md4Surface_t* surface)
         // FIXME
         // This makes TFC's skeletons work.  Shouldn't be necessary anymore, but left
         // in for reference.
-        // v = (md4Vertex_t *)( ( byte * )&v->weights[v->numWeights] + 12 );
+        // v = (md4Vertex_t *)( ( uint8_t * )&v->weights[v->numWeights] + 12 );
         v = (md4Vertex_t*)&v->weights[v->numWeights];
     }
 

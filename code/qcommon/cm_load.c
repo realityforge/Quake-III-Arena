@@ -55,7 +55,7 @@ clipMap_t cm;
 int c_pointcontents;
 int c_traces, c_brush_traces, c_patch_traces;
 
-byte* cmod_base;
+uint8_t* cmod_base;
 
 #ifndef BSPC
 cvar_t* cm_noAreas;
@@ -373,7 +373,7 @@ void CMod_LoadEntityString(lump_t* l)
 void CMod_LoadVisibility(lump_t* l)
 {
     int len;
-    byte* buf;
+    uint8_t* buf;
 
     len = l->filelen;
     if (!len) {
@@ -517,7 +517,7 @@ void CM_LoadMap(const char* name, bool clientload, int* checksum)
         Com_Error(ERR_DROP, "CM_LoadMap: %s has wrong version number (%i should be %i)", name, header.version, BSP_VERSION);
     }
 
-    cmod_base = (byte*)buf;
+    cmod_base = (uint8_t*)buf;
 
     // load into heap
     CMod_LoadShaders(&header.lumps[LUMP_SHADERS]);

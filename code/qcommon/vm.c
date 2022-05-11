@@ -304,7 +304,7 @@ vm_t* VM_Restart(vm_t* vm)
     memset(vm->dataBase, 0, dataLength);
 
     // copy the intialized data
-    memcpy(vm->dataBase, (byte*)header + header->dataOffset, header->dataLength + header->litLength);
+    memcpy(vm->dataBase, (uint8_t*)header + header->dataOffset, header->dataLength + header->litLength);
 
     // byte swap the longs
     for (i = 0; i < header->dataLength; i += 4) {
@@ -417,7 +417,7 @@ vm_t* VM_Create(const char* module, int (*systemCalls)(int*),
     vm->dataMask = dataLength - 1;
 
     // copy the intialized data
-    memcpy(vm->dataBase, (byte*)header + header->dataOffset, header->dataLength + header->litLength);
+    memcpy(vm->dataBase, (uint8_t*)header + header->dataOffset, header->dataLength + header->litLength);
 
     // byte swap the longs
     for (i = 0; i < header->dataLength; i += 4) {

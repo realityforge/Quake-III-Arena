@@ -36,15 +36,15 @@ typedef struct {
     bool allowoverflow; // if false, do a Com_Error
     bool overflowed; // set to true if the buffer size failed (with allowoverflow set)
     bool oob; // set to true if the buffer size failed (with allowoverflow set)
-    byte* data;
+    uint8_t* data;
     int maxsize;
     int cursize;
     int readcount;
     int bit; // for bitwise reads and writes
 } msg_t;
 
-void MSG_Init(msg_t* buf, byte* data, int length);
-void MSG_InitOOB(msg_t* buf, byte* data, int length);
+void MSG_Init(msg_t* buf, uint8_t* data, int length);
+void MSG_InitOOB(msg_t* buf, uint8_t* data, int length);
 void MSG_Clear(msg_t* buf);
 void MSG_WriteData(msg_t* buf, const void* data, int length);
 void MSG_Bitstream(msg_t* buf);
@@ -53,7 +53,7 @@ void MSG_Bitstream(msg_t* buf);
 // copy a msg_t in case we need to store it as is for a bit
 // (as I needed this to keep an msg_t from a static var for later use)
 // sets data buffer as MSG_Init does prior to do the copy
-void MSG_Copy(msg_t* buf, byte* data, int length, msg_t* src);
+void MSG_Copy(msg_t* buf, uint8_t* data, int length, msg_t* src);
 
 struct entityState_s;
 struct playerState_s;
@@ -123,8 +123,8 @@ typedef enum {
 typedef struct {
     netadrtype_t type;
 
-    byte ip[4];
-    byte ipx[10];
+    uint8_t ip[4];
+    uint8_t ipx[10];
 
     unsigned short port;
 } netadr_t;
@@ -136,7 +136,7 @@ void NET_Config(bool enableNetworking);
 
 void NET_SendPacket(netsrc_t sock, int length, const void* data, netadr_t to);
 void QDECL NET_OutOfBandPrint(netsrc_t net_socket, netadr_t adr, const char* format, ...);
-void QDECL NET_OutOfBandData(netsrc_t sock, netadr_t adr, byte* format, int len);
+void QDECL NET_OutOfBandData(netsrc_t sock, netadr_t adr, uint8_t* format, int len);
 
 bool NET_CompareAdr(netadr_t a, netadr_t b);
 bool NET_CompareBaseAdr(netadr_t a, netadr_t b);
@@ -171,20 +171,20 @@ typedef struct {
     // incoming fragment assembly buffer
     int fragmentSequence;
     int fragmentLength;
-    byte fragmentBuffer[MAX_MSGLEN];
+    uint8_t fragmentBuffer[MAX_MSGLEN];
 
     // outgoing fragment buffer
     // we need to space out the sending of large fragmented messages
     bool unsentFragments;
     int unsentFragmentStart;
     int unsentLength;
-    byte unsentBuffer[MAX_MSGLEN];
+    uint8_t unsentBuffer[MAX_MSGLEN];
 } netchan_t;
 
 void Netchan_Init(int qport);
 void Netchan_Setup(netsrc_t sock, netchan_t* chan, netadr_t adr, int qport);
 
-void Netchan_Transmit(netchan_t* chan, int length, const byte* data);
+void Netchan_Transmit(netchan_t* chan, int length, const uint8_t* data);
 void Netchan_TransmitNextFragment(netchan_t* chan);
 
 bool Netchan_Process(netchan_t* chan, msg_t* msg);
@@ -951,13 +951,13 @@ typedef struct {
 void Huff_Compress(msg_t* buf, int offset);
 void Huff_Decompress(msg_t* buf, int offset);
 void Huff_Init(huffman_t* huff);
-void Huff_addRef(huff_t* huff, byte ch);
-int Huff_Receive(node_t* node, int* ch, byte* fin);
-void Huff_transmit(huff_t* huff, int ch, byte* fout);
-void Huff_offsetReceive(node_t* node, int* ch, byte* fin, int* offset);
-void Huff_offsetTransmit(huff_t* huff, int ch, byte* fout, int* offset);
-void Huff_putBit(int bit, byte* fout, int* offset);
-int Huff_getBit(byte* fout, int* offset);
+void Huff_addRef(huff_t* huff, uint8_t ch);
+int Huff_Receive(node_t* node, int* ch, uint8_t* fin);
+void Huff_transmit(huff_t* huff, int ch, uint8_t* fout);
+void Huff_offsetReceive(node_t* node, int* ch, uint8_t* fin, int* offset);
+void Huff_offsetTransmit(huff_t* huff, int ch, uint8_t* fout, int* offset);
+void Huff_putBit(int bit, uint8_t* fout, int* offset);
+int Huff_getBit(uint8_t* fout, int* offset);
 
 #define SV_ENCODE_START 4
 #define SV_DECODE_START 12

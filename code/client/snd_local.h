@@ -66,7 +66,7 @@ typedef struct {
     int submission_chunk; // don't mix less than this #
     int samplebits;
     int speed;
-    byte* buffer;
+    uint8_t* buffer;
 } dma_t;
 
 #define START_SAMPLE_IMMEDIATE 0x7fffffff

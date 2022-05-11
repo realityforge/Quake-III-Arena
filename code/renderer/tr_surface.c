@@ -57,7 +57,7 @@ void RB_CheckOverflow(int verts, int indexes)
     RB_BeginSurface(tess.shader, tess.fogNum);
 }
 
-void RB_AddQuadStampExt(vec3_t origin, vec3_t left, vec3_t up, byte* color, float s1, float t1, float s2, float t2)
+void RB_AddQuadStampExt(vec3_t origin, vec3_t left, vec3_t up, uint8_t* color, float s1, float t1, float s2, float t2)
 {
     vec3_t normal;
     int ndx;
@@ -119,7 +119,7 @@ void RB_AddQuadStampExt(vec3_t origin, vec3_t left, vec3_t up, byte* color, floa
     tess.numIndexes += 6;
 }
 
-void RB_AddQuadStamp(vec3_t origin, vec3_t left, vec3_t up, byte* color)
+void RB_AddQuadStamp(vec3_t origin, vec3_t left, vec3_t up, uint8_t* color)
 {
     RB_AddQuadStampExt(origin, left, up, color, 0, 0, 1, 1);
 }
@@ -189,7 +189,7 @@ void RB_SurfaceTriangles(srfTriangles_t* srf)
     int i;
     drawVert_t* dv;
     float *xyz, *normal, *texCoords;
-    byte* color;
+    uint8_t* color;
     int dlightBits;
     bool needsNormal;
 
@@ -535,7 +535,7 @@ static void LerpMeshVertexes(md3Surface_t* surf, float backlerp)
     outXyz = tess.xyz[tess.numVertexes];
     outNormal = tess.normal[tess.numVertexes];
 
-    newXyz = (short*)((byte*)surf + surf->ofsXyzNormals)
+    newXyz = (short*)((uint8_t*)surf + surf->ofsXyzNormals)
         + (backEnd.currentEntity->e.frame * surf->numVerts * 4);
     newNormals = newXyz + 3;
 
@@ -569,7 +569,7 @@ static void LerpMeshVertexes(md3Surface_t* surf, float backlerp)
         }
     } else {
         // interpolate and copy the vertex and normal
-        oldXyz = (short*)((byte*)surf + surf->ofsXyzNormals)
+        oldXyz = (short*)((uint8_t*)surf + surf->ofsXyzNormals)
             + (backEnd.currentEntity->e.oldframe * surf->numVerts * 4);
         oldNormals = oldXyz + 3;
 
@@ -634,7 +634,7 @@ void RB_SurfaceMesh(md3Surface_t* surface)
 
     LerpMeshVertexes(surface, backlerp);
 
-    triangles = (int*)((byte*)surface + surface->ofsTriangles);
+    triangles = (int*)((uint8_t*)surface + surface->ofsTriangles);
     indexes = surface->numTriangles * 3;
     Bob = tess.numIndexes;
     Doug = tess.numVertexes;
@@ -643,7 +643,7 @@ void RB_SurfaceMesh(md3Surface_t* surface)
     }
     tess.numIndexes += indexes;
 
-    texCoords = (float*)((byte*)surface + surface->ofsSt);
+    texCoords = (float*)((uint8_t*)surface + surface->ofsSt);
 
     numVerts = surface->numVerts;
     for (j = 0; j < numVerts; j++) {

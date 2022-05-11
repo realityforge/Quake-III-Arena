@@ -288,7 +288,7 @@ sysEvent_t eventQue[MAX_QUED_EVENTS];
 // bk000306: initialize
 int eventHead = 0;
 int eventTail = 0;
-byte sys_packetReceived[MAX_MSGLEN];
+uint8_t sys_packetReceived[MAX_MSGLEN];
 
 /*
 ================
@@ -463,7 +463,7 @@ int main(int argc, char* argv[])
 
     // bk000306 - clear queues
     memset(&eventQue[0], 0, MAX_QUED_EVENTS * sizeof(sysEvent_t));
-    memset(&sys_packetReceived[0], 0, MAX_MSGLEN * sizeof(byte));
+    memset(&sys_packetReceived[0], 0, MAX_MSGLEN * sizeof(uint8_t));
 
     Com_Init(cmdline);
     NET_Init();

@@ -85,10 +85,10 @@ void SND_setup()
     Com_Printf("Sound memory manager started\n");
 }
 
-static byte* data_p;
-static byte* iff_end;
-static byte* last_chunk;
-static byte* iff_data;
+static uint8_t* data_p;
+static uint8_t* iff_end;
+static uint8_t* last_chunk;
+static uint8_t* iff_data;
 static int iff_chunk_len;
 
 static short GetLittleShort(void)
@@ -140,7 +140,7 @@ static void FindChunk(char* name)
     FindNextChunk(name);
 }
 
-static wavinfo_t GetWavinfo(char* name, byte* wav, int wavlength)
+static wavinfo_t GetWavinfo(char* name, uint8_t* wav, int wavlength)
 {
     wavinfo_t info;
 
@@ -201,7 +201,7 @@ ResampleSfx
 resample / decimate to the current source rate
 ================
 */
-static void ResampleSfx(sfx_t* sfx, int inrate, int inwidth, byte* data, bool compressed)
+static void ResampleSfx(sfx_t* sfx, int inrate, int inwidth, uint8_t* data, bool compressed)
 {
     int outcount;
     int srcsample;
@@ -251,7 +251,7 @@ ResampleSfx
 resample / decimate to the current source rate
 ================
 */
-static int ResampleSfxRaw(short* sfx, int inrate, int inwidth, int samples, byte* data)
+static int ResampleSfxRaw(short* sfx, int inrate, int inwidth, int samples, uint8_t* data)
 {
     int outcount;
     int srcsample;
@@ -291,7 +291,7 @@ of a forced fallback of a player specific sound
 */
 bool S_LoadSound(sfx_t* sfx)
 {
-    byte* data;
+    uint8_t* data;
     short* samples;
     wavinfo_t info;
     int size;

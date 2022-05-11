@@ -44,7 +44,7 @@ void CM_TransformedBoxTrace(trace_t* results, const vec3_t start, const vec3_t e
                             clipHandle_t model, int brushmask,
                             const vec3_t origin, const vec3_t angles, int capsule);
 
-byte* CM_ClusterPVS(int cluster);
+uint8_t* CM_ClusterPVS(int cluster);
 
 int CM_PointLeafnum(const vec3_t p);
 
@@ -59,7 +59,7 @@ int CM_LeafArea(int leafnum);
 void CM_AdjustAreaPortalState(int area1, int area2, bool open);
 bool CM_AreasConnected(int area1, int area2);
 
-int CM_WriteAreaBits(byte* buffer, int area);
+int CM_WriteAreaBits(uint8_t* buffer, int area);
 
 // cm_tag.c
 int CM_LerpTag(orientation_t* tag, clipHandle_t model, int startFrame, int endFrame,

@@ -42,7 +42,7 @@ typedef struct {
     int messageNum; // copied from netchan->incoming_sequence
     int deltaNum; // messageNum the delta is from
     int ping; // time from when cmdNum-1 was sent to time packet was reeceived
-    byte areamask[MAX_MAP_AREA_BYTES]; // portalarea visibility bits
+    uint8_t areamask[MAX_MAP_AREA_BYTES]; // portalarea visibility bits
 
     int cmdNum; // the next cmdNum the server is expecting
     playerState_t ps; // complete information about the current player at this time
@@ -237,7 +237,7 @@ typedef struct {
 } serverInfo_t;
 
 typedef struct {
-    byte ip[4];
+    uint8_t ip[4];
     unsigned short port;
 } serverAddress_t;
 
@@ -489,6 +489,6 @@ void LAN_SaveServersToCache();
 //
 // cl_net_chan.c
 //
-void CL_Netchan_Transmit(netchan_t* chan, msg_t* msg); // int length, const byte *data );
+void CL_Netchan_Transmit(netchan_t* chan, msg_t* msg); // int length, const uint8_t *data );
 void CL_Netchan_TransmitNextFragment(netchan_t* chan);
 bool CL_Netchan_Process(netchan_t* chan, msg_t* msg);

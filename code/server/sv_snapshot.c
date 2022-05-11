@@ -270,8 +270,8 @@ static void SV_AddEntitiesVisibleFromPoint(vec3_t origin, clientSnapshot_t* fram
     int clientarea, clientcluster;
     int leafnum;
     int c_fullsend;
-    byte* clientpvs;
-    byte* bitvector;
+    uint8_t* clientpvs;
+    uint8_t* bitvector;
 
     // during an error shutdown message we may need to transmit
     // the shutdown message after the server has shutdown, so
@@ -590,7 +590,7 @@ Also called by SV_FinalMessage
 */
 void SV_SendClientSnapshot(client_t* client)
 {
-    byte msg_buf[MAX_MSGLEN];
+    uint8_t msg_buf[MAX_MSGLEN];
     msg_t msg;
 
     // build the snapshot

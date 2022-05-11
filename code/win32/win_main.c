@@ -455,7 +455,7 @@ EVENT LOOP
 
 sysEvent_t eventQue[MAX_QUED_EVENTS];
 int eventHead, eventTail;
-byte sys_packetReceived[MAX_MSGLEN];
+uint8_t sys_packetReceived[MAX_MSGLEN];
 
 /*
 ================

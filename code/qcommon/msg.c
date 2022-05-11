@@ -41,7 +41,7 @@ int oldsize = 0;
 
 void MSG_initHuffman();
 
-void MSG_Init(msg_t* buf, byte* data, int length)
+void MSG_Init(msg_t* buf, uint8_t* data, int length)
 {
     if (!msgInit) {
         MSG_initHuffman();
@@ -51,7 +51,7 @@ void MSG_Init(msg_t* buf, byte* data, int length)
     buf->maxsize = length;
 }
 
-void MSG_InitOOB(msg_t* buf, byte* data, int length)
+void MSG_InitOOB(msg_t* buf, uint8_t* data, int length)
 {
     if (!msgInit) {
         MSG_initHuffman();
@@ -81,7 +81,7 @@ void MSG_BeginReadingOOB(msg_t* msg)
     msg->oob = true;
 }
 
-void MSG_Copy(msg_t* buf, byte* data, int length, msg_t* src)
+void MSG_Copy(msg_t* buf, uint8_t* data, int length, msg_t* src)
 {
     if (length < src->cursize) {
         Com_Error(ERR_DROP, "MSG_Copy: can't copy into a smaller msg_t buffer");
@@ -268,7 +268,7 @@ void MSG_WriteData(msg_t* buf, const void* data, int length)
 {
     int i;
     for (i = 0; i < length; i++) {
-        MSG_WriteByte(buf, ((byte*)data)[i]);
+        MSG_WriteByte(buf, ((uint8_t*)data)[i]);
     }
 }
 
@@ -305,7 +305,7 @@ void MSG_WriteString(msg_t* sb, const char* s)
 
         // get rid of 0xff chars, because old clients don't like them
         for (i = 0; i < l; i++) {
-            if (((byte*)string)[i] > 127) {
+            if (((uint8_t*)string)[i] > 127) {
                 string[i] = '.';
             }
         }
@@ -332,7 +332,7 @@ void MSG_WriteBigString(msg_t* sb, const char* s)
 
         // get rid of 0xff chars, because old clients don't like them
         for (i = 0; i < l; i++) {
-            if (((byte*)string)[i] > 127) {
+            if (((uint8_t*)string)[i] > 127) {
                 string[i] = '.';
             }
         }
@@ -463,7 +463,7 @@ void MSG_ReadData(msg_t* msg, void* data, int len)
     int i;
 
     for (i = 0; i < len; i++) {
-        ((byte*)data)[i] = MSG_ReadByte(msg);
+        ((uint8_t*)data)[i] = MSG_ReadByte(msg);
     }
 }
 
@@ -733,8 +733,8 @@ void MSG_WriteDeltaEntity(msg_t* msg, struct entityState_s* from, struct entityS
     lc = 0;
     // build the change vector as bytes so it is endien independent
     for (i = 0, field = entityStateFields; i < numFields; i++, field++) {
-        fromF = (int*)((byte*)from + field->offset);
-        toF = (int*)((byte*)to + field->offset);
+        fromF = (int*)((uint8_t*)from + field->offset);
+        toF = (int*)((uint8_t*)to + field->offset);
         if (*fromF != *toF) {
             lc = i + 1;
         }
@@ -761,8 +761,8 @@ void MSG_WriteDeltaEntity(msg_t* msg, struct entityState_s* from, struct entityS
     oldsize += numFields;
 
     for (i = 0, field = entityStateFields; i < lc; i++, field++) {
-        fromF = (int*)((byte*)from + field->offset);
-        toF = (int*)((byte*)to + field->offset);
+        fromF = (int*)((uint8_t*)from + field->offset);
+        toF = (int*)((uint8_t*)to + field->offset);
 
         if (*fromF == *toF) {
             MSG_WriteBits(msg, 0, 1); // no change
@@ -875,8 +875,8 @@ void MSG_ReadDeltaEntity(msg_t* msg, entityState_t* from, entityState_t* to,
     to->number = number;
 
     for (i = 0, field = entityStateFields; i < lc; i++, field++) {
-        fromF = (int*)((byte*)from + field->offset);
-        toF = (int*)((byte*)to + field->offset);
+        fromF = (int*)((uint8_t*)from + field->offset);
+        toF = (int*)((uint8_t*)to + field->offset);
 
         if (!MSG_ReadBits(msg, 1)) {
             // no change
@@ -919,8 +919,8 @@ void MSG_ReadDeltaEntity(msg_t* msg, entityState_t* from, entityState_t* to,
         }
     }
     for (i = lc, field = &entityStateFields[lc]; i < numFields; i++, field++) {
-        fromF = (int*)((byte*)from + field->offset);
-        toF = (int*)((byte*)to + field->offset);
+        fromF = (int*)((uint8_t*)from + field->offset);
+        toF = (int*)((uint8_t*)to + field->offset);
         // no change
         *toF = *fromF;
     }
@@ -1015,8 +1015,8 @@ void MSG_WriteDeltaPlayerstate(msg_t* msg, struct playerState_s* from, struct pl
 
     lc = 0;
     for (i = 0, field = playerStateFields; i < numFields; i++, field++) {
-        fromF = (int*)((byte*)from + field->offset);
-        toF = (int*)((byte*)to + field->offset);
+        fromF = (int*)((uint8_t*)from + field->offset);
+        toF = (int*)((uint8_t*)to + field->offset);
         if (*fromF != *toF) {
             lc = i + 1;
         }
@@ -1027,8 +1027,8 @@ void MSG_WriteDeltaPlayerstate(msg_t* msg, struct playerState_s* from, struct pl
     oldsize += numFields - lc;
 
     for (i = 0, field = playerStateFields; i < lc; i++, field++) {
-        fromF = (int*)((byte*)from + field->offset);
-        toF = (int*)((byte*)to + field->offset);
+        fromF = (int*)((uint8_t*)from + field->offset);
+        toF = (int*)((uint8_t*)to + field->offset);
 
         if (*fromF == *toF) {
             MSG_WriteBits(msg, 0, 1); // no change
@@ -1174,8 +1174,8 @@ void MSG_ReadDeltaPlayerstate(msg_t* msg, playerState_t* from, playerState_t* to
     lc = MSG_ReadByte(msg);
 
     for (i = 0, field = playerStateFields; i < lc; i++, field++) {
-        fromF = (int*)((byte*)from + field->offset);
-        toF = (int*)((byte*)to + field->offset);
+        fromF = (int*)((uint8_t*)from + field->offset);
+        toF = (int*)((uint8_t*)to + field->offset);
 
         if (!MSG_ReadBits(msg, 1)) {
             // no change
@@ -1209,8 +1209,8 @@ void MSG_ReadDeltaPlayerstate(msg_t* msg, playerState_t* from, playerState_t* to
         }
     }
     for (i = lc, field = &playerStateFields[lc]; i < numFields; i++, field++) {
-        fromF = (int*)((byte*)from + field->offset);
-        toF = (int*)((byte*)to + field->offset);
+        fromF = (int*)((uint8_t*)from + field->offset);
+        toF = (int*)((uint8_t*)to + field->offset);
         // no change
         *toF = *fromF;
     }
@@ -1539,8 +1539,8 @@ void MSG_initHuffman()
     Huff_Init(&msgHuff);
     for (i = 0; i < 256; i++) {
         for (j = 0; j < msg_hData[i]; j++) {
-            Huff_addRef(&msgHuff.compressor, (byte)i); // Do update
-            Huff_addRef(&msgHuff.decompressor, (byte)i); // Do update
+            Huff_addRef(&msgHuff.compressor, (uint8_t)i); // Do update
+            Huff_addRef(&msgHuff.decompressor, (uint8_t)i); // Do update
         }
     }
 }

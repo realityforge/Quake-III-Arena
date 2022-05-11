@@ -731,7 +731,7 @@ extern bool Sys_GetPacket(netadr_t* net_from, msg_t* net_message);
 
 static sysEvent_t eventQue[MAX_QUED_EVENTS];
 static int eventHead, eventTail;
-static byte sys_packetReceived[MAX_MSGLEN];
+static uint8_t sys_packetReceived[MAX_MSGLEN];
 
 /*
 ================

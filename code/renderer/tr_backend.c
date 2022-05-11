@@ -635,7 +635,7 @@ Stretches a raw 32 bit power of 2 bitmap image over the given screen rectangle.
 Used for cinematics.
 =============
 */
-void RE_StretchRaw(int x, int y, int w, int h, int cols, int rows, const byte* data, int client, bool dirty)
+void RE_StretchRaw(int x, int y, int w, int h, int cols, int rows, const uint8_t* data, int client, bool dirty)
 {
     int i, j;
     int start, end;
@@ -702,7 +702,7 @@ void RE_StretchRaw(int x, int y, int w, int h, int cols, int rows, const byte* d
     qglEnd();
 }
 
-void RE_UploadCinematic(int w, int h, int cols, int rows, const byte* data, int client, bool dirty)
+void RE_UploadCinematic(int w, int h, int cols, int rows, const uint8_t* data, int client, bool dirty)
 {
 
     GL_Bind(tr.scratchImage[client]);

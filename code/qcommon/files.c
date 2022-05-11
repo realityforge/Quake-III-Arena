@@ -475,7 +475,7 @@ static void FS_CopyFile(char* fromOSPath, char* toOSPath)
 {
     FILE* f;
     int len;
-    byte* buf;
+    uint8_t* buf;
 
     Com_Printf("copy %s to %s\n", fromOSPath, toOSPath);
 
@@ -1098,7 +1098,7 @@ int FS_Read(void* buffer, int len, fileHandle_t f)
 {
     int block, remaining;
     int read;
-    byte* buf;
+    uint8_t* buf;
     int tries;
 
     if (!fs_searchpaths) {
@@ -1109,7 +1109,7 @@ int FS_Read(void* buffer, int len, fileHandle_t f)
         return 0;
     }
 
-    buf = (byte*)buffer;
+    buf = (uint8_t*)buffer;
     fs_readCount += len;
 
     if (fsh[f].zipFile == false) {
@@ -1152,7 +1152,7 @@ int FS_Write(const void* buffer, int len, fileHandle_t h)
 {
     int block, remaining;
     int written;
-    byte* buf;
+    uint8_t* buf;
     int tries;
     FILE* f;
 
@@ -1165,7 +1165,7 @@ int FS_Write(const void* buffer, int len, fileHandle_t h)
     }
 
     f = FS_FileForHandle(h);
-    buf = (byte*)buffer;
+    buf = (uint8_t*)buffer;
 
     remaining = len;
     tries = 0;
@@ -1323,7 +1323,7 @@ a null buffer will just return the file length without loading
 int FS_ReadFile(const char* qpath, void** buffer)
 {
     fileHandle_t h;
-    byte* buf;
+    uint8_t* buf;
     bool isConfig;
     int len;
 

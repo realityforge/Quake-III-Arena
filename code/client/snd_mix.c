@@ -309,7 +309,7 @@ void S_PaintChannelFromMuLaw(channel_t* ch, sfx_t* sc, int count, int sampleOffs
     int i;
     portable_samplepair_t* samp;
     sndBuffer* chunk;
-    byte* samples;
+    uint8_t* samples;
     float ooff;
 
     leftvol = ch->leftvol * snd_vol;
@@ -326,20 +326,20 @@ void S_PaintChannelFromMuLaw(channel_t* ch, sfx_t* sc, int count, int sampleOffs
     }
 
     if (!ch->doppler) {
-        samples = (byte*)chunk->sndChunk + sampleOffset;
+        samples = (uint8_t*)chunk->sndChunk + sampleOffset;
         for (i = 0; i < count; i++) {
             data = mulawToShort[*samples];
             samp[i].left += (data * leftvol) >> 8;
             samp[i].right += (data * rightvol) >> 8;
             samples++;
-            if (samples == (byte*)chunk->sndChunk + (SND_CHUNK_SIZE * 2)) {
+            if (samples == (uint8_t*)chunk->sndChunk + (SND_CHUNK_SIZE * 2)) {
                 chunk = chunk->next;
-                samples = (byte*)chunk->sndChunk;
+                samples = (uint8_t*)chunk->sndChunk;
             }
         }
     } else {
         ooff = sampleOffset;
-        samples = (byte*)chunk->sndChunk;
+        samples = (uint8_t*)chunk->sndChunk;
         for (i = 0; i < count; i++) {
             data = mulawToShort[samples[(int)(ooff)]];
             ooff = ooff + ch->dopplerScale;
@@ -350,7 +350,7 @@ void S_PaintChannelFromMuLaw(channel_t* ch, sfx_t* sc, int count, int sampleOffs
                 if (!chunk) {
                     chunk = sc->soundData;
                 }
-                samples = (byte*)chunk->sndChunk;
+                samples = (uint8_t*)chunk->sndChunk;
                 ooff = 0.0;
             }
         }

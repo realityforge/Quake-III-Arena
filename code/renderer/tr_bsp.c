@@ -34,7 +34,7 @@ void RE_LoadWorldMap( const char *name );
 */
 
 static world_t s_worldData;
-static byte* fileBase;
+static uint8_t* fileBase;
 
 int c_subdivisions;
 
@@ -89,7 +89,7 @@ static void HSVtoRGB(float h, float s, float v, float rgb[3])
     }
 }
 
-static void R_ColorShiftLightingBytes(byte in[4], byte out[4])
+static void R_ColorShiftLightingBytes(uint8_t in[4], uint8_t out[4])
 {
     int shift, r, g, b;
 
@@ -121,9 +121,9 @@ static void R_ColorShiftLightingBytes(byte in[4], byte out[4])
 #define LIGHTMAP_SIZE 128
 static void R_LoadLightmaps(lump_t* l)
 {
-    byte *buf, *buf_p;
+    uint8_t *buf, *buf_p;
     int len;
-    MAC_STATIC byte image[LIGHTMAP_SIZE * LIGHTMAP_SIZE * 4];
+    MAC_STATIC uint8_t image[LIGHTMAP_SIZE * LIGHTMAP_SIZE * 4];
     int i, j;
     float maxIntensity = 0;
 
@@ -201,7 +201,7 @@ This is called by the clipmodel subsystem so we can share the 1.8 megs of
 space in big maps...
 =================
 */
-void RE_SetWorldVisData(const byte* vis)
+void RE_SetWorldVisData(const uint8_t* vis)
 {
     tr.externalVisData = vis;
 }
@@ -209,7 +209,7 @@ void RE_SetWorldVisData(const byte* vis)
 static void R_LoadVisibility(lump_t* l)
 {
     int len;
-    byte* buf;
+    uint8_t* buf;
 
     len = (s_worldData.numClusters + 63) & ~63;
     s_worldData.novis = ri.Hunk_Alloc(len, h_low);
@@ -229,7 +229,7 @@ static void R_LoadVisibility(lump_t* l)
     if (tr.externalVisData) {
         s_worldData.vis = tr.externalVisData;
     } else {
-        byte* dest;
+        uint8_t* dest;
 
         dest = ri.Hunk_Alloc(len - 8, h_low);
         memcpy(dest, buf + 8, len - 8);
@@ -316,12 +316,12 @@ static void ParseFace(dsurface_t* ds, drawVert_t* verts, msurface_t* surf, int* 
             cv->points[i][3 + j] = LittleFloat(verts[i].st[j]);
             cv->points[i][5 + j] = LittleFloat(verts[i].lightmap[j]);
         }
-        R_ColorShiftLightingBytes(verts[i].color, (byte*)&cv->points[i][7]);
+        R_ColorShiftLightingBytes(verts[i].color, (uint8_t*)&cv->points[i][7]);
     }
 
     indexes += LittleLong(ds->firstIndex);
     for (i = 0; i < numIndexes; i++) {
-        ((int*)((byte*)cv + cv->ofsIndices))[i] = LittleLong(indexes[i]);
+        ((int*)((uint8_t*)cv + cv->ofsIndices))[i] = LittleLong(indexes[i]);
     }
 
     // take the plane information from the lightmap vector
@@ -1687,8 +1687,8 @@ void RE_LoadWorldMap(const char* name)
 {
     int i;
     dheader_t* header;
-    byte* buffer;
-    byte* startMarker;
+    uint8_t* buffer;
+    uint8_t* startMarker;
 
     if (tr.worldMapLoaded) {
         ri.Error(ERR_DROP, "ERROR: attempted to redundantly load world map\n");
@@ -1723,7 +1723,7 @@ void RE_LoadWorldMap(const char* name)
     startMarker = ri.Hunk_Alloc(0, h_low);
 
     header = (dheader_t*)buffer;
-    fileBase = (byte*)header;
+    fileBase = (uint8_t*)header;
 
     i = LittleLong(header->version);
     if (i != BSP_VERSION) {
@@ -1749,7 +1749,7 @@ void RE_LoadWorldMap(const char* name)
     R_LoadEntities(&header->lumps[LUMP_ENTITIES]);
     R_LoadLightGrid(&header->lumps[LUMP_LIGHTGRID]);
 
-    s_worldData.dataSize = (byte*)ri.Hunk_Alloc(0, h_low) - startMarker;
+    s_worldData.dataSize = (uint8_t*)ri.Hunk_Alloc(0, h_low) - startMarker;
 
     // only set tr.world now that we know the entire level has loaded properly
     tr.world = &s_worldData;

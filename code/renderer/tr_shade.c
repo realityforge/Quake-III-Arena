@@ -366,10 +366,10 @@ static void ProjectDlightTexture(void)
     int i, l;
     vec3_t origin;
     float* texCoords;
-    byte* colors;
-    byte clipBits[SHADER_MAX_VERTEXES];
+    uint8_t* colors;
+    uint8_t clipBits[SHADER_MAX_VERTEXES];
     MAC_STATIC float texCoordsArray[SHADER_MAX_VERTEXES][2];
-    byte colorArray[SHADER_MAX_VERTEXES][4];
+    uint8_t colorArray[SHADER_MAX_VERTEXES][4];
     unsigned hitIndexes[SHADER_MAX_INDEXES];
     int numIndexes;
     float scale;

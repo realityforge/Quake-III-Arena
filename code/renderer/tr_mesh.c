@@ -64,8 +64,8 @@ static int R_CullModel(md3Header_t* header, trRefEntity_t* ent)
     int i;
 
     // compute frame pointers
-    newFrame = (md3Frame_t*)((byte*)header + header->ofsFrames) + ent->e.frame;
-    oldFrame = (md3Frame_t*)((byte*)header + header->ofsFrames) + ent->e.oldframe;
+    newFrame = (md3Frame_t*)((uint8_t*)header + header->ofsFrames) + ent->e.frame;
+    oldFrame = (md3Frame_t*)((uint8_t*)header + header->ofsFrames) + ent->e.oldframe;
 
     // cull bounding sphere ONLY if this is not an upscaled entity
     if (!ent->e.nonNormalizedAxes) {
@@ -190,7 +190,7 @@ int R_ComputeFogNum(md3Header_t* header, trRefEntity_t* ent)
     }
 
     // FIXME: non-normalized axis issues
-    md3Frame = (md3Frame_t*)((byte*)header + header->ofsFrames) + ent->e.frame;
+    md3Frame = (md3Frame_t*)((uint8_t*)header + header->ofsFrames) + ent->e.frame;
     VectorAdd(ent->e.origin, md3Frame->localOrigin, localOrigin);
     for (i = 1; i < tr.world->numfogs; i++) {
         fog = &tr.world->fogs[i];
@@ -272,7 +272,7 @@ void R_AddMD3Surfaces(trRefEntity_t* ent)
     fogNum = R_ComputeFogNum(header, ent);
 
     // draw all surfaces
-    surface = (md3Surface_t*)((byte*)header + header->ofsSurfaces);
+    surface = (md3Surface_t*)((uint8_t*)header + header->ofsSurfaces);
     for (i = 0; i < header->numSurfaces; i++) {
 
         if (ent->e.customShader) {
@@ -300,7 +300,7 @@ void R_AddMD3Surfaces(trRefEntity_t* ent)
         } else if (surface->numShaders <= 0) {
             shader = tr.defaultShader;
         } else {
-            md3Shader = (md3Shader_t*)((byte*)surface + surface->ofsShaders);
+            md3Shader = (md3Shader_t*)((uint8_t*)surface + surface->ofsShaders);
             md3Shader += ent->e.skinNum % surface->numShaders;
             shader = tr.shaders[md3Shader->shaderIndex];
         }
@@ -329,6 +329,6 @@ void R_AddMD3Surfaces(trRefEntity_t* ent)
             R_AddDrawSurf((void*)surface, shader, fogNum, false);
         }
 
-        surface = (md3Surface_t*)((byte*)surface + surface->ofsEnd);
+        surface = (md3Surface_t*)((uint8_t*)surface + surface->ofsEnd);
     }
 }

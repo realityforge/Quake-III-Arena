@@ -142,7 +142,7 @@ bool SNDDMA_Init(void)
     dma.submission_chunk = submissionChunk;
     dma.samplebits = 16;
     dma.speed = 22050;
-    dma.buffer = (byte*)s_mixedSamples;
+    dma.buffer = (uint8_t*)s_mixedSamples;
 
     // que up the first submission-chunk sized buffer
     s_chunkCount = 0;

@@ -36,7 +36,7 @@ SV_Netchan_Encode
 static void SV_Netchan_Encode(client_t* client, msg_t* msg)
 {
     long reliableAcknowledge, i, index;
-    byte key, *string;
+    uint8_t key, *string;
     int srdc, sbit, soob;
 
     if (msg->cursize < SV_ENCODE_START) {
@@ -57,7 +57,7 @@ static void SV_Netchan_Encode(client_t* client, msg_t* msg)
     msg->bit = sbit;
     msg->readcount = srdc;
 
-    string = (byte*)client->lastClientCommandString;
+    string = (uint8_t*)client->lastClientCommandString;
     index = 0;
     // xor the client challenge with the netchan sequence number
     key = client->challenge ^ client->netchan.outgoingSequence;
@@ -91,7 +91,7 @@ static void SV_Netchan_Decode(client_t* client, msg_t* msg)
 {
     int serverId, messageAcknowledge, reliableAcknowledge;
     int i, index, srdc, sbit, soob;
-    byte key, *string;
+    uint8_t key, *string;
 
     srdc = msg->readcount;
     sbit = msg->bit;
@@ -107,7 +107,7 @@ static void SV_Netchan_Decode(client_t* client, msg_t* msg)
     msg->bit = sbit;
     msg->readcount = srdc;
 
-    string = (byte*)client->reliableCommands[reliableAcknowledge & (MAX_RELIABLE_COMMANDS - 1)];
+    string = (uint8_t*)client->reliableCommands[reliableAcknowledge & (MAX_RELIABLE_COMMANDS - 1)];
     index = 0;
     key = client->challenge ^ serverId ^ messageAcknowledge;
     for (i = msg->readcount + SV_DECODE_START; i < msg->cursize; i++) {
@@ -164,7 +164,7 @@ then buffer them and make sure they get sent in correct order
 */
 
 void SV_Netchan_Transmit(client_t* client, msg_t* msg)
-{ // int length, const byte *data ) {
+{ // int length, const uint8_t *data ) {
     MSG_WriteByte(msg, svc_EOF);
     if (client->netchan.unsentFragments) {
         netchan_buffer_t* netbuf;

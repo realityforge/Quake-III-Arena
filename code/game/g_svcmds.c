@@ -72,8 +72,8 @@ static bool StringToFilter(char* s, ipFilter_t* f)
 {
     char num[128];
     int i, j;
-    byte b[4];
-    byte m[4];
+    uint8_t b[4];
+    uint8_t m[4];
 
     for (i = 0; i < 4; i++) {
         b[i] = 0;
@@ -116,8 +116,8 @@ static bool StringToFilter(char* s, ipFilter_t* f)
 
 static void UpdateIPBans(void)
 {
-    byte b[4];
-    byte m[4];
+    uint8_t b[4];
+    uint8_t m[4];
     int i, j;
     char iplist_final[MAX_CVAR_VALUE_STRING];
     char ip[64];
@@ -152,7 +152,7 @@ bool G_FilterPacket(char* from)
 {
     int i;
     unsigned in;
-    byte m[4];
+    uint8_t m[4];
     char* p;
 
     i = 0;

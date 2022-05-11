@@ -345,7 +345,7 @@ RB_TakeScreenshot
 */
 void RB_TakeScreenshot(int x, int y, int width, int height, char* fileName)
 {
-    byte* buffer;
+    uint8_t* buffer;
     int i, c, temp;
 
     buffer = ri.Hunk_AllocateTempMemory(glConfig.vidWidth * glConfig.vidHeight * 3 + 18);
@@ -385,7 +385,7 @@ RB_TakeScreenshotJPEG
 */
 void RB_TakeScreenshotJPEG(int x, int y, int width, int height, char* fileName)
 {
-    byte* buffer;
+    uint8_t* buffer;
 
     buffer = ri.Hunk_AllocateTempMemory(glConfig.vidWidth * glConfig.vidHeight * 4);
 
@@ -851,7 +851,7 @@ void R_Init(void)
 {
     int err;
     int i;
-    byte* ptr;
+    uint8_t* ptr;
 
     ri.Printf(PRINT_ALL, "----- R_Init -----\n");
 

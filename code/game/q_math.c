@@ -179,10 +179,10 @@ unsigned ColorBytes4(float r, float g, float b, float a)
 {
     unsigned i;
 
-    ((byte*)&i)[0] = r * 255;
-    ((byte*)&i)[1] = g * 255;
-    ((byte*)&i)[2] = b * 255;
-    ((byte*)&i)[3] = a * 255;
+    ((uint8_t*)&i)[0] = r * 255;
+    ((uint8_t*)&i)[1] = g * 255;
+    ((uint8_t*)&i)[2] = b * 255;
+    ((uint8_t*)&i)[3] = a * 255;
 
     return i;
 }
@@ -697,7 +697,7 @@ initialized:
 		mov ecx,dword ptr[4+4+esp]
 		xor eax,eax
 		mov ebx,dword ptr[4+8+esp]
-		mov al,byte ptr[17+edx]
+		mov al,uint8_t ptr[17+edx]
 		cmp al,8
 		jge Lerror
 		fld dword ptr[0+edx]

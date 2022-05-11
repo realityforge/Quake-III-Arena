@@ -106,7 +106,7 @@ float	LittleFloat (const float *l) {return _LittleFloat(l);}
 
 short ShortSwap(short l)
 {
-    byte b1, b2;
+    uint8_t b1, b2;
 
     b1 = l & 255;
     b2 = (l >> 8) & 255;
@@ -116,7 +116,7 @@ short ShortSwap(short l)
 
 int LongSwap(int l)
 {
-    byte b1, b2, b3, b4;
+    uint8_t b1, b2, b3, b4;
 
     b1 = l & 255;
     b2 = (l >> 8) & 255;

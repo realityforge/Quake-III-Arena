@@ -54,7 +54,7 @@ int ipx_socket;
 
 #define MAX_IPS 16
 static int numIP;
-static byte localIP[MAX_IPS][4];
+static uint8_t localIP[MAX_IPS][4];
 
 int NET_Socket(char* net_interface, int port);
 char* NET_ErrorString(void);

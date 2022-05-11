@@ -138,18 +138,18 @@ void VM_PrepareInterpreter(vm_t* vm, vmHeader_t* header)
 {
     int op;
     int pc;
-    byte* code;
+    uint8_t* code;
     int instruction;
     int* codeBase;
 
     vm->codeBase = Hunk_Alloc(vm->codeLength * 4, h_high); // we're now int aligned
-    //	memcpy( vm->codeBase, (byte *)header + header->codeOffset, vm->codeLength );
+    //	memcpy( vm->codeBase, (uint8_t *)header + header->codeOffset, vm->codeLength );
 
     // we don't need to translate the instructions, but we still need
     // to find each instructions starting point for jumps
     pc = 0;
     instruction = 0;
-    code = (byte*)header + header->codeOffset;
+    code = (uint8_t*)header + header->codeOffset;
     codeBase = (int*)vm->codeBase;
 
     while (instruction < header->instructionCount) {
@@ -200,7 +200,7 @@ void VM_PrepareInterpreter(vm_t* vm, vmHeader_t* header)
     }
     pc = 0;
     instruction = 0;
-    code = (byte*)header + header->codeOffset;
+    code = (uint8_t*)header + header->codeOffset;
     codeBase = (int*)vm->codeBase;
 
     while (instruction < header->instructionCount) {
@@ -298,7 +298,7 @@ int VM_CallInterpreted(vm_t* vm, int* args)
     int programCounter;
     int programStack;
     int stackOnEntry;
-    byte* image;
+    uint8_t* image;
     int* codeImage;
     int v1;
     int dataMask;

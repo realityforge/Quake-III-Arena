@@ -82,7 +82,7 @@ typedef struct {
 
 typedef struct {
     int areabytes;
-    byte areabits[MAX_MAP_AREA_BYTES]; // portalarea visibility bits
+    uint8_t areabits[MAX_MAP_AREA_BYTES]; // portalarea visibility bits
     playerState_t ps;
     int num_entities;
     int first_entity; // into the circular sv_packet_entities[]
@@ -104,7 +104,7 @@ typedef enum {
 
 typedef struct netchan_buffer_s {
     msg_t msg;
-    byte msgBuffer[MAX_MSGLEN];
+    uint8_t msgBuffer[MAX_MSGLEN];
     struct netchan_buffer_s* next;
 } netchan_buffer_t;
 

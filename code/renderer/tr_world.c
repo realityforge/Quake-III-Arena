@@ -459,7 +459,7 @@ static mnode_t* R_PointInLeaf(const vec3_t p)
     return node;
 }
 
-static const byte* R_ClusterPVS(int cluster)
+static const uint8_t* R_ClusterPVS(int cluster)
 {
     if (!tr.world || !tr.world->vis || cluster < 0 || cluster >= tr.world->numClusters) {
         return tr.world->novis;
@@ -471,7 +471,7 @@ static const byte* R_ClusterPVS(int cluster)
 bool R_inPVS(const vec3_t p1, const vec3_t p2)
 {
     mnode_t* leaf;
-    byte* vis;
+    uint8_t* vis;
 
     leaf = R_PointInLeaf(p1);
     vis = CM_ClusterPVS(leaf->cluster);
@@ -493,7 +493,7 @@ cluster
 */
 static void R_MarkLeaves(void)
 {
-    const byte* vis;
+    const uint8_t* vis;
     mnode_t *leaf, *parent;
     int i;
     int cluster;

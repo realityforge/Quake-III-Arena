@@ -138,13 +138,13 @@ struct vm_s {
     // for interpreted modules
     bool currentlyInterpreting;
 
-    byte* codeBase;
+    uint8_t* codeBase;
     int codeLength;
 
     int* instructionPointers;
     int instructionPointersLength;
 
-    byte* dataBase;
+    uint8_t* dataBase;
     int dataMask;
 
     int stackBottom; // if programStack < stackBottom, error

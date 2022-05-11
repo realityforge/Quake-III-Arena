@@ -28,14 +28,14 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define MAX_CMD_LINE 1024
 
 typedef struct {
-    byte* data;
+    uint8_t* data;
     int maxsize;
     int cursize;
 } cmd_t;
 
 int cmd_wait;
 cmd_t cmd_text;
-byte cmd_text_buf[MAX_CMD_BUFFER];
+uint8_t cmd_text_buf[MAX_CMD_BUFFER];
 
 //=============================================================================
 

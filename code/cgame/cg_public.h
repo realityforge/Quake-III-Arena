@@ -42,7 +42,7 @@ typedef struct {
 
     int serverTime; // server time the message is valid for (in msec)
 
-    byte areamask[MAX_MAP_AREA_BYTES]; // portalarea visibility bits
+    uint8_t areamask[MAX_MAP_AREA_BYTES]; // portalarea visibility bits
 
     playerState_t ps; // complete information about the current player at this time
 

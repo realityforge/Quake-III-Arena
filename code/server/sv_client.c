@@ -416,7 +416,7 @@ void SV_SendClientGameState(client_t* client)
     int start;
     entityState_t *base, nullstate;
     msg_t msg;
-    byte msgBuffer[MAX_MSGLEN];
+    uint8_t msgBuffer[MAX_MSGLEN];
 
     Com_DPrintf("SV_SendClientGameState() for %s\n", client->name);
     Com_DPrintf("Going from CS_CONNECTED to CS_PRIMED for %s\n", client->name);

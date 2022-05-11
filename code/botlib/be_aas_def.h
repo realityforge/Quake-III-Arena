@@ -127,7 +127,7 @@ typedef struct aas_settings_s {
 
 // routing cache
 typedef struct aas_routingcache_s {
-    byte type; // portal or area cache
+    uint8_t type; // portal or area cache
     float time; // last time accessed or updated
     int size; // size of the routing cache
     int cluster; // cluster the cache is for

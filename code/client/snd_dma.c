@@ -868,7 +868,7 @@ If raw data has been loaded in little endien binary form, this must be done.
 If raw data was calculated, as with ADPCM, this should not be called.
 =================
 */
-void S_ByteSwapRawSamples(int samples, int width, int s_channels, const byte* data)
+void S_ByteSwapRawSamples(int samples, int width, int s_channels, const uint8_t* data)
 {
     int i;
 
@@ -899,7 +899,7 @@ S_RawSamples
 Music streaming
 ============
 */
-void S_RawSamples(int samples, int rate, int width, int s_channels, const byte* data, float volume)
+void S_RawSamples(int samples, int rate, int width, int s_channels, const uint8_t* data, float volume)
 {
     int i;
     int src, dst;
@@ -970,8 +970,8 @@ void S_RawSamples(int samples, int rate, int width, int s_channels, const byte* 
                 break;
             dst = s_rawend & (MAX_RAW_SAMPLES - 1);
             s_rawend++;
-            s_rawsamples[dst].left = (((byte*)data)[src] - 128) * intVolume;
-            s_rawsamples[dst].right = (((byte*)data)[src] - 128) * intVolume;
+            s_rawsamples[dst].left = (((uint8_t*)data)[src] - 128) * intVolume;
+            s_rawsamples[dst].right = (((uint8_t*)data)[src] - 128) * intVolume;
         }
     }
 
@@ -1422,7 +1422,7 @@ void S_UpdateBackgroundTrack(void)
 {
     int bufferSamples;
     int fileSamples;
-    byte raw[30000]; // just enough to fit in a mac stack frame
+    uint8_t raw[30000]; // just enough to fit in a mac stack frame
     int fileBytes;
     int r;
     static float musicVolume = 0.5f;
