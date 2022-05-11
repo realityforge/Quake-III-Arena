@@ -140,26 +140,31 @@ qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long bu
     } else if (SPNG_OK != (result = spng_get_ihdr(ctx, &ihdr))) {
         spng_load_error(name, result, "spng_get_ihdr");
         goto cleanup;
-    } else if (SPNG_OK != spng_decoded_image_size(ctx, SPNG_FMT_RGBA8, &size)) {
-        spng_load_error(name, result, "spng_decoded_image_size");
-        goto cleanup;
     } else {
-        image = ri.Malloc(size);
-        if (NULL == image) {
-            spng_load_error(name, result, "ri.Malloc");
-            goto cleanup;
-        } else if (SPNG_OK != spng_decode_image(ctx, image, size, SPNG_FMT_RGBA8, SPNG_DECODE_TRNS | SPNG_DECODE_GAMMA)) {
-            spng_load_error(name, result, "spng_decode_image");
+        const int target_format = SPNG_COLOR_TYPE_GRAYSCALE_ALPHA == ihdr.color_type || SPNG_COLOR_TYPE_TRUECOLOR_ALPHA == ihdr.color_type ? SPNG_FMT_RGBA8 : SPNG_FMT_RGB8;
+        if (SPNG_OK != spng_decoded_image_size(ctx, target_format, &size)) {
+            spng_load_error(name, result, "spng_decoded_image_size");
             goto cleanup;
         } else {
-            output->width = ihdr.width;
-            output->height = ihdr.height;
-            output->data = image;
+            image = ri.Malloc(size);
+            if (NULL == image) {
+                spng_load_error(name, result, "ri.Malloc");
+                goto cleanup;
+            } else if (SPNG_OK != spng_decode_image(ctx, image, size, target_format, SPNG_DECODE_TRNS | SPNG_DECODE_GAMMA)) {
+                spng_load_error(name, result, "spng_decode_image");
+                goto cleanup;
+            } else {
+                output->width = ihdr.width;
+                output->height = ihdr.height;
+                output->data = image;
+                output->pixel_format = SPNG_FMT_RGBA8 == target_format ? GL_RGBA : GL_RGB;
+                output->num_mips = 0;
 
-            // Clear image so it does not deallocated in cleanup phase
-            image = NULL;
+                // Clear image so it does not deallocated in cleanup phase
+                image = NULL;
 
-            success = qtrue;
+                success = qtrue;
+            }
         }
     }
 cleanup:

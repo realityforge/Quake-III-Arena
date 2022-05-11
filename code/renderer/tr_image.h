@@ -16,11 +16,16 @@
 
 // TODO: Move the required type "byte" and "uint32_t" to a separate header?
 #include "../qcommon/q_shared.h"
+#include "SDL_opengl.h"
+
+// TODO: Rather than using GLenum  for pixel_format use our own internal enum and then have a LUT in each renderer for constant in particular renderer
 
 typedef struct image_load_result_s {
     byte* data;
     uint32_t width;
     uint32_t height;
+    GLenum pixel_format;
+    int num_mips;
 } image_load_result_t;
 
 qboolean R_LoadImageNew(const char* name, image_load_result_t* result);
