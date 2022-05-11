@@ -137,7 +137,7 @@ int Sys_Milliseconds(void)
     return sys_curtime;
 }
 
-bool Sys_RandomBytes(byte* string, int len)
+bool Sys_RandomBytes(uint8_t* string, int len)
 {
     HCRYPTPROV prov;
 

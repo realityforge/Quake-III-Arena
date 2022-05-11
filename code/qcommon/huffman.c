@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 static int bloc = 0;
 
-void Huff_putBit(int bit, byte* fout, int* offset)
+void Huff_putBit(int bit, uint8_t* fout, int* offset)
 {
     bloc = *offset;
     if ((bloc & 7) == 0) {
@@ -40,7 +40,7 @@ void Huff_putBit(int bit, byte* fout, int* offset)
     *offset = bloc;
 }
 
-int Huff_getBit(byte* fin, int* offset)
+int Huff_getBit(uint8_t* fin, int* offset)
 {
     int t;
     bloc = *offset;
@@ -51,7 +51,7 @@ int Huff_getBit(byte* fin, int* offset)
 }
 
 /* Add a bit to the output file (buffered) */
-static void add_bit(char bit, byte* fout)
+static void add_bit(char bit, uint8_t* fout)
 {
     if ((bloc & 7) == 0) {
         fout[(bloc >> 3)] = 0;
@@ -61,7 +61,7 @@ static void add_bit(char bit, byte* fout)
 }
 
 /* Receive one bit from the input file (buffered) */
-static int get_bit(byte* fin)
+static int get_bit(uint8_t* fin)
 {
     int t;
     t = (fin[(bloc >> 3)] >> (bloc & 7)) & 0x1;
@@ -192,7 +192,7 @@ static void increment(huff_t* huff, node_t* node)
     }
 }
 
-void Huff_addRef(huff_t* huff, byte ch)
+void Huff_addRef(huff_t* huff, uint8_t ch)
 {
     node_t *tnode, *tnode2;
     if (huff->loc[ch] == NULL) { /* if this is the first transmission of this node */
@@ -263,7 +263,7 @@ void Huff_addRef(huff_t* huff, byte ch)
 }
 
 /* Get a symbol */
-int Huff_Receive(node_t* node, int* ch, byte* fin)
+int Huff_Receive(node_t* node, int* ch, uint8_t* fin)
 {
     while (node && node->symbol == INTERNAL_NODE) {
         if (get_bit(fin)) {
@@ -280,7 +280,7 @@ int Huff_Receive(node_t* node, int* ch, byte* fin)
 }
 
 /* Get a symbol */
-void Huff_offsetReceive(node_t* node, int* ch, byte* fin, int* offset, int maxoffset)
+void Huff_offsetReceive(node_t* node, int* ch, uint8_t* fin, int* offset, int maxoffset)
 {
     bloc = *offset;
     while (node && node->symbol == INTERNAL_NODE) {
@@ -305,7 +305,7 @@ void Huff_offsetReceive(node_t* node, int* ch, byte* fin, int* offset, int maxof
 }
 
 /* Send the prefix code for this node */
-static void send(node_t* node, node_t* child, byte* fout, int maxoffset)
+static void send(node_t* node, node_t* child, uint8_t* fout, int maxoffset)
 {
     if (node->parent) {
         send(node->parent, node, fout, maxoffset);
@@ -324,7 +324,7 @@ static void send(node_t* node, node_t* child, byte* fout, int maxoffset)
 }
 
 /* Send a symbol */
-void Huff_transmit(huff_t* huff, int ch, byte* fout, int maxoffset)
+void Huff_transmit(huff_t* huff, int ch, uint8_t* fout, int maxoffset)
 {
     int i;
     if (huff->loc[ch] == NULL) {
@@ -338,7 +338,7 @@ void Huff_transmit(huff_t* huff, int ch, byte* fout, int maxoffset)
     }
 }
 
-void Huff_offsetTransmit(huff_t* huff, int ch, byte* fout, int* offset, int maxoffset)
+void Huff_offsetTransmit(huff_t* huff, int ch, uint8_t* fout, int* offset, int maxoffset)
 {
     bloc = *offset;
     send(huff->loc[ch], NULL, fout, maxoffset);
@@ -348,8 +348,8 @@ void Huff_offsetTransmit(huff_t* huff, int ch, byte* fout, int* offset, int maxo
 void Huff_Decompress(msg_t* mbuf, int offset)
 {
     int ch, cch, i, j, size;
-    byte seq[65536];
-    byte* buffer;
+    uint8_t seq[65536];
+    uint8_t* buffer;
     huff_t huff;
 
     size = mbuf->cursize - offset;
@@ -392,7 +392,7 @@ void Huff_Decompress(msg_t* mbuf, int offset)
 
         seq[j] = ch; /* Write symbol */
 
-        Huff_addRef(&huff, (byte)ch); /* Increment node */
+        Huff_addRef(&huff, (uint8_t)ch); /* Increment node */
     }
     mbuf->cursize = cch + offset;
     memcpy(mbuf->data + offset, seq, cch);
@@ -403,8 +403,8 @@ extern int oldsize;
 void Huff_Compress(msg_t* mbuf, int offset)
 {
     int i, ch, size;
-    byte seq[65536];
-    byte* buffer;
+    uint8_t seq[65536];
+    uint8_t* buffer;
     huff_t huff;
 
     size = mbuf->cursize - offset;
@@ -430,7 +430,7 @@ void Huff_Compress(msg_t* mbuf, int offset)
     for (i = 0; i < size; i++) {
         ch = buffer[i];
         Huff_transmit(&huff, ch, seq, size << 3); /* Transmit symbol */
-        Huff_addRef(&huff, (byte)ch); /* Do update */
+        Huff_addRef(&huff, (uint8_t)ch); /* Do update */
     }
 
     bloc += 8; // next byte

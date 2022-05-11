@@ -386,7 +386,7 @@ Compare without port, and up to the bit number given in netmask.
 */
 bool NET_CompareBaseAdrMask(netadr_t a, netadr_t b, int netmask)
 {
-    byte cmpmask, *addra, *addrb;
+    uint8_t cmpmask, *addra, *addrb;
     int curbyte;
 
     if (a.type != b.type)
@@ -396,14 +396,14 @@ bool NET_CompareBaseAdrMask(netadr_t a, netadr_t b, int netmask)
         return true;
 
     if (a.type == NA_IP) {
-        addra = (byte*)&a.ip;
-        addrb = (byte*)&b.ip;
+        addra = (uint8_t*)&a.ip;
+        addrb = (uint8_t*)&b.ip;
 
         if (netmask < 0 || netmask > 32)
             netmask = 32;
     } else if (a.type == NA_IP6) {
-        addra = (byte*)&a.ip6;
-        addrb = (byte*)&b.ip6;
+        addra = (uint8_t*)&a.ip6;
+        addrb = (uint8_t*)&b.ip6;
 
         if (netmask < 0 || netmask > 128)
             netmask = 128;
@@ -668,7 +668,7 @@ bool Sys_IsLANAddress(netadr_t adr)
 {
     int index, run, addrsize;
     bool differed;
-    byte *compareadr, *comparemask, *compareip;
+    uint8_t *compareadr, *comparemask, *compareip;
 
     if (adr.type == NA_LOOPBACK) {
         return true;
@@ -699,16 +699,16 @@ bool Sys_IsLANAddress(netadr_t adr)
     for (index = 0; index < numIP; index++) {
         if (localIP[index].type == adr.type) {
             if (adr.type == NA_IP) {
-                compareip = (byte*)&((struct sockaddr_in*)&localIP[index].addr)->sin_addr.s_addr;
-                comparemask = (byte*)&((struct sockaddr_in*)&localIP[index].netmask)->sin_addr.s_addr;
+                compareip = (uint8_t*)&((struct sockaddr_in*)&localIP[index].addr)->sin_addr.s_addr;
+                comparemask = (uint8_t*)&((struct sockaddr_in*)&localIP[index].netmask)->sin_addr.s_addr;
                 compareadr = adr.ip;
 
                 addrsize = sizeof(adr.ip);
             } else {
                 // TODO? should we check the scope_id here?
 
-                compareip = (byte*)&((struct sockaddr_in6*)&localIP[index].addr)->sin6_addr;
-                comparemask = (byte*)&((struct sockaddr_in6*)&localIP[index].netmask)->sin6_addr;
+                compareip = (uint8_t*)&((struct sockaddr_in6*)&localIP[index].addr)->sin6_addr;
+                comparemask = (uint8_t*)&((struct sockaddr_in6*)&localIP[index].netmask)->sin6_addr;
                 compareadr = adr.ip6;
 
                 addrsize = sizeof(adr.ip6);
@@ -1474,7 +1474,7 @@ Called from NET_Sleep which uses select() to determine which sockets have seen a
 
 void NET_Event(fd_set* fdr)
 {
-    byte bufData[MAX_MSGLEN + 1];
+    uint8_t bufData[MAX_MSGLEN + 1];
     netadr_t from = { 0 };
     msg_t netmsg;
 

@@ -87,7 +87,7 @@ static int S_FindRIFFChunk(fileHandle_t f, char* chunk)
     return -1;
 }
 
-static void S_ByteSwapRawSamples(int samples, int width, int s_channels, const byte* data)
+static void S_ByteSwapRawSamples(int samples, int width, int s_channels, const uint8_t* data)
 {
     int i;
 
@@ -193,7 +193,7 @@ void* S_WAV_CodecLoad(const char* filename, snd_info_t* info)
 
     // Read, byteswap
     FS_Read(buffer, info->size, file);
-    S_ByteSwapRawSamples(info->samples, info->width, info->channels, (byte*)buffer);
+    S_ByteSwapRawSamples(info->samples, info->width, info->channels, (uint8_t*)buffer);
 
     // Close and return
     FS_FCloseFile(file);

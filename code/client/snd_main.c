@@ -124,7 +124,7 @@ void S_StopBackgroundTrack(void)
 }
 
 void S_RawSamples(int stream, int samples, int rate, int width, int channels,
-                  const byte* data, float volume, int entityNum)
+                  const uint8_t* data, float volume, int entityNum)
 {
     if (si.RawSamples)
         si.RawSamples(stream, samples, rate, width, channels, data, volume, entityNum);
@@ -261,7 +261,7 @@ int S_AvailableCaptureSamples(void)
     return 0;
 }
 
-void S_Capture(int samples, byte* data)
+void S_Capture(int samples, uint8_t* data)
 {
     if (si.Capture) {
         si.Capture(samples, data);

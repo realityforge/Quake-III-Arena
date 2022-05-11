@@ -45,7 +45,7 @@ typedef struct voipServerPacket_s {
     int len;
     int sender;
     int flags;
-    byte data[4000];
+    uint8_t data[4000];
 } voipServerPacket_t;
 #endif
 
@@ -98,7 +98,7 @@ typedef struct {
 
 typedef struct {
     int areabytes;
-    byte areabits[MAX_MAP_AREA_BYTES]; // portalarea visibility bits
+    uint8_t areabits[MAX_MAP_AREA_BYTES]; // portalarea visibility bits
     playerState_t ps;
     int num_entities;
     int first_entity; // into the circular sv_packet_entities[]
@@ -120,7 +120,7 @@ typedef enum {
 
 typedef struct netchan_buffer_s {
     msg_t msg;
-    byte msgBuffer[MAX_MSGLEN];
+    uint8_t msgBuffer[MAX_MSGLEN];
 #ifdef LEGACY_PROTOCOL
     char clientCommandString[MAX_STRING_CHARS]; // valid command string for SV_Netchan_Encode
 #endif
@@ -302,8 +302,8 @@ struct leakyBucket_s {
     netadrtype_t type;
 
     union {
-        byte _4[4];
-        byte _6[16];
+        uint8_t _4[4];
+        uint8_t _6[16];
     } ipv;
 
     int lastTime;

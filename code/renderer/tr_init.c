@@ -433,9 +433,9 @@ Return value must be freed with ri.Hunk_FreeTempMemory()
 ==================
 */
 
-byte* RB_ReadPixels(int x, int y, int width, int height, size_t* offset, int* padlen)
+uint8_t* RB_ReadPixels(int x, int y, int width, int height, size_t* offset, int* padlen)
 {
-    byte *buffer, *bufstart;
+    uint8_t *buffer, *bufstart;
     int padwidth, linelen;
     GLint packAlign;
 
@@ -462,7 +462,7 @@ void RB_TakeScreenshot(int x, int y, int width, int height, char* fileName, bool
     size_t offset = 0;
     int padlen;
 
-    byte* buffer = RB_ReadPixels(x, y, width, height, &offset, &padlen);
+    uint8_t* buffer = RB_ReadPixels(x, y, width, height, &offset, &padlen);
     const size_t memcount = (width * 3 + padlen) * height;
 
     // gamma correct
@@ -607,7 +607,7 @@ void R_ScreenShot_f(void)
 const void* RB_TakeVideoFrameCmd(const void* data)
 {
     const videoFrameCommand_t* cmd;
-    byte* cBuf;
+    uint8_t* cBuf;
     size_t memcount, linelen;
     int padwidth, avipadwidth, padlen, avipadlen;
     GLint packAlign;
@@ -646,8 +646,8 @@ const void* RB_TakeVideoFrameCmd(const void* data)
                                       cmd->width, cmd->height, cBuf, padlen);
         ri.CL_WriteAVIVideoFrame(cmd->encodeBuffer, memcount);
     } else {
-        byte *lineend, *memend;
-        byte *srcptr, *destptr;
+        uint8_t *lineend, *memend;
+        uint8_t *srcptr, *destptr;
 
         srcptr = cBuf;
         destptr = cmd->encodeBuffer;
@@ -1079,7 +1079,7 @@ void R_Init(void)
 {
     int err;
     int i;
-    byte* ptr;
+    uint8_t* ptr;
 
     ri.Printf(PRINT_ALL, "----- R_Init -----\n");
 

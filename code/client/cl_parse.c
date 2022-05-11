@@ -638,7 +638,7 @@ Play raw data
 =====================
 */
 
-static void CL_PlayVoip(int sender, int samplecnt, const byte* data, int flags)
+static void CL_PlayVoip(int sender, int samplecnt, const uint8_t* data, int flags)
 {
     if (flags & VOIP_DIRECT) {
         S_RawSamples(sender + 1, samplecnt, 48000, 2, 1,
@@ -766,7 +766,7 @@ static void CL_ParseVoip(msg_t* msg, bool ignoreData)
                 written * 2, written, frames);
 
     if (written > 0)
-        CL_PlayVoip(sender, written, (const byte*)decoded, flags);
+        CL_PlayVoip(sender, written, (const uint8_t*)decoded, flags);
 
     clc.voipIncomingSequence[sender] = sequence + frames;
 }

@@ -305,8 +305,8 @@ typedef struct {
     vec3_t color1;
     vec3_t color2;
 
-    byte c1RGBA[4];
-    byte c2RGBA[4];
+    uint8_t c1RGBA[4];
+    uint8_t c2RGBA[4];
 
     int score; // updated by score servercmds
     int location; // location index for team mode

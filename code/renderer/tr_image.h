@@ -34,7 +34,7 @@ bool R_DecodePngInBuffer(const char* name, const void* buffer, const long buffer
 bool R_DecodeJpgInBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* output);
 
 #ifdef ENABLE_DDS_TEXTURES
-void R_LoadDDS(const char* name, byte** pixel_data, uint32_t* width, uint32_t* height, GLenum* pixel_format, int* num_mips);
+void R_LoadDDS(const char* name, uint8_t** pixel_data, uint32_t* width, uint32_t* height, GLenum* pixel_format, int* num_mips);
 #endif
 
 #endif

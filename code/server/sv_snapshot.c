@@ -278,8 +278,8 @@ static void SV_AddEntitiesVisibleFromPoint(vec3_t origin, clientSnapshot_t* fram
     int l;
     int clientarea, clientcluster;
     int leafnum;
-    byte* clientpvs;
-    byte* bitvector;
+    uint8_t* clientpvs;
+    uint8_t* bitvector;
 
     // during an error shutdown message we may need to transmit
     // the shutdown message after the server has shutdown, so
@@ -527,7 +527,7 @@ static void SV_WriteVoipToClient(client_t* cl, msg_t* msg)
 
                 MSG_WriteByte(msg, svc_voipOpus);
                 MSG_WriteShort(msg, packet->sender);
-                MSG_WriteByte(msg, (byte)packet->generation);
+                MSG_WriteByte(msg, (uint8_t)packet->generation);
                 MSG_WriteLong(msg, packet->sequence);
                 MSG_WriteByte(msg, packet->frames);
                 MSG_WriteShort(msg, packet->len);
@@ -573,7 +573,7 @@ Also called by SV_FinalMessage
 */
 void SV_SendClientSnapshot(client_t* client)
 {
-    byte msg_buf[MAX_MSGLEN];
+    uint8_t msg_buf[MAX_MSGLEN];
     msg_t msg;
 
     // build the snapshot

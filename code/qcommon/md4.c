@@ -34,7 +34,7 @@
 typedef unsigned __int32 uint32_t;
 #endif
 
-typedef unsigned char byte;
+typedef unsigned char uint8_t;
 
 struct mdfour {
     uint32_t A, B, C, D;
@@ -142,7 +142,7 @@ static void mdfour64(uint32_t* M)
     m->D = D;
 }
 
-static void copy64(uint32_t* M, byte* in)
+static void copy64(uint32_t* M, uint8_t* in)
 {
     int i;
 
@@ -150,7 +150,7 @@ static void copy64(uint32_t* M, byte* in)
         M[i] = ((uint32_t)in[i * 4 + 3] << 24) | ((uint32_t)in[i * 4 + 2] << 16) | ((uint32_t)in[i * 4 + 1] << 8) | ((uint32_t)in[i * 4 + 0] << 0);
 }
 
-static void copy4(byte* out, uint32_t x)
+static void copy4(uint8_t* out, uint32_t x)
 {
     out[0] = x & 0xFF;
     out[1] = (x >> 8) & 0xFF;
@@ -167,9 +167,9 @@ void mdfour_begin(struct mdfour* md)
     md->totalN = 0;
 }
 
-static void mdfour_tail(byte* in, int n)
+static void mdfour_tail(uint8_t* in, int n)
 {
-    byte buf[128];
+    uint8_t buf[128];
     uint32_t M[16];
     uint32_t b;
 
@@ -195,7 +195,7 @@ static void mdfour_tail(byte* in, int n)
     }
 }
 
-static void mdfour_update(struct mdfour* md, byte* in, int n)
+static void mdfour_update(struct mdfour* md, uint8_t* in, int n)
 {
     uint32_t M[16];
 
@@ -215,7 +215,7 @@ static void mdfour_update(struct mdfour* md, byte* in, int n)
     mdfour_tail(in, n);
 }
 
-static void mdfour_result(struct mdfour* md, byte* out)
+static void mdfour_result(struct mdfour* md, uint8_t* out)
 {
     copy4(out, md->A);
     copy4(out + 4, md->B);
@@ -223,7 +223,7 @@ static void mdfour_result(struct mdfour* md, byte* out)
     copy4(out + 12, md->D);
 }
 
-static void mdfour(byte* out, byte* in, int n)
+static void mdfour(uint8_t* out, uint8_t* in, int n)
 {
     struct mdfour md;
     mdfour_begin(&md);
@@ -238,7 +238,7 @@ unsigned Com_BlockChecksum(const void* buffer, int length)
     int digest[4];
     unsigned val;
 
-    mdfour((byte*)digest, (byte*)buffer, length);
+    mdfour((uint8_t*)digest, (uint8_t*)buffer, length);
 
     val = digest[0] ^ digest[1] ^ digest[2] ^ digest[3];
 

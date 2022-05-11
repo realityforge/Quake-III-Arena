@@ -751,7 +751,7 @@ static void Z_ClearZone(memzone_t* zone, int size)
 
     // set the entire zone to one free block
 
-    zone->blocklist.next = zone->blocklist.prev = block = (memblock_t*)((byte*)zone + sizeof(memzone_t));
+    zone->blocklist.next = zone->blocklist.prev = block = (memblock_t*)((uint8_t*)zone + sizeof(memzone_t));
     zone->blocklist.tag = 1; // in use block
     zone->blocklist.id = 0;
     zone->blocklist.size = 0;
@@ -784,7 +784,7 @@ void Z_Free(void* ptr)
         Com_Error(ERR_DROP, "Z_Free: NULL pointer");
     }
 
-    block = (memblock_t*)((byte*)ptr - sizeof(memblock_t));
+    block = (memblock_t*)((uint8_t*)ptr - sizeof(memblock_t));
     if (block->id != ZONEID) {
         Com_Error(ERR_FATAL, "Z_Free: freed a pointer without ZONEID");
     }
@@ -797,7 +797,7 @@ void Z_Free(void* ptr)
     }
 
     // check the memory trash tester
-    if (*(int*)((byte*)block + block->size - 4) != ZONEID) {
+    if (*(int*)((uint8_t*)block + block->size - 4) != ZONEID) {
         Com_Error(ERR_FATAL, "Z_Free: memory block wrote past end");
     }
 
@@ -896,7 +896,7 @@ void* Z_TagMalloc(size_t size, int tag)
     extra = base->size - size;
     if (extra > MINFRAGMENT) {
         // there will be a free fragment after the allocated block
-        new = (memblock_t*)((byte*)base + size);
+        new = (memblock_t*)((uint8_t*)base + size);
         new->size = extra;
         new->tag = 0; // free block
         new->prev = base;
@@ -922,9 +922,9 @@ void* Z_TagMalloc(size_t size, int tag)
 #endif
 
     // marker for memory trash testing
-    *(int*)((byte*)base + base->size - 4) = ZONEID;
+    *(int*)((uint8_t*)base + base->size - 4) = ZONEID;
 
-    return (void*)((byte*)base + sizeof(memblock_t));
+    return (void*)((uint8_t*)base + sizeof(memblock_t));
 }
 
 #ifdef ZONE_DEBUG
@@ -968,7 +968,7 @@ static void Z_CheckHeap(void)
         if (block->next == &mainzone->blocklist) {
             break; // all blocks have been hit
         }
-        if ((byte*)block + block->size != (byte*)block->next)
+        if ((uint8_t*)block + block->size != (uint8_t*)block->next)
             Com_Error(ERR_FATAL, "Z_CheckHeap: block size does not touch the next block");
         if (block->next->prev != block) {
             Com_Error(ERR_FATAL, "Z_CheckHeap: next block doesn't have proper back link");
@@ -1039,7 +1039,7 @@ void Z_LogHeap(void)
 // static mem blocks to reduce a lot of small zone overhead
 typedef struct memstatic_s {
     memblock_t b;
-    byte mem[2];
+    uint8_t mem[2];
 } memstatic_t;
 
 memstatic_t emptystring = { { (sizeof(memblock_t) + 2 + 3) & ~3, TAG_STATIC, NULL, NULL, ZONEID }, { '\0', '\0' } };
@@ -1131,7 +1131,7 @@ typedef struct {
 
 typedef struct hunkblock_s {
     int size;
-    byte printed;
+    uint8_t printed;
     struct hunkblock_s* next;
     char* label;
     char* file;
@@ -1143,7 +1143,7 @@ static hunkblock_t* hunkblocks;
 static hunkUsed_t hunk_low, hunk_high;
 static hunkUsed_t *hunk_permanent, *hunk_temp;
 
-static byte* s_hunkData = NULL;
+static uint8_t* s_hunkData = NULL;
 static int s_hunkTotal;
 
 static int s_zoneTotal;
@@ -1179,7 +1179,7 @@ void Com_Meminfo_f(void)
         if (block->next == &mainzone->blocklist) {
             break; // all blocks have been hit
         }
-        if ((byte*)block + block->size != (byte*)block->next) {
+        if ((uint8_t*)block + block->size != (uint8_t*)block->next) {
             Com_Printf("ERROR: block size does not touch the next block\n");
         }
         if (block->next->prev != block) {
@@ -1432,7 +1432,7 @@ void Com_InitHunkMemory(void)
         Com_Error(ERR_FATAL, "Hunk data failed to allocate %i megs", s_hunkTotal / (1024 * 1024));
     }
     // cacheline align
-    s_hunkData = (byte*)(((intptr_t)s_hunkData + 31) & ~31);
+    s_hunkData = (uint8_t*)(((intptr_t)s_hunkData + 31) & ~31);
     Hunk_Clear();
 
     Cmd_AddCommand("meminfo", Com_Meminfo_f);
@@ -1621,7 +1621,7 @@ void* Hunk_Alloc(int size, ha_pref preference)
         block->line = line;
         block->next = hunkblocks;
         hunkblocks = block;
-        buf = ((byte*)buf) + sizeof(hunkblock_t);
+        buf = ((uint8_t*)buf) + sizeof(hunkblock_t);
     }
 #endif
     return buf;
@@ -1978,7 +1978,7 @@ int Com_EventLoop(void)
 {
     sysEvent_t ev;
     netadr_t evFrom;
-    byte bufData[MAX_MSGLEN];
+    uint8_t bufData[MAX_MSGLEN];
     msg_t buf;
 
     MSG_Init(&buf, bufData, sizeof(bufData));
@@ -2221,7 +2221,7 @@ static void Com_InitRand(void)
 {
     unsigned int seed;
 
-    if (Sys_RandomBytes((byte*)&seed, sizeof(seed)))
+    if (Sys_RandomBytes((uint8_t*)&seed, sizeof(seed)))
         srand(seed);
     else
         srand(time(NULL));
@@ -2355,7 +2355,7 @@ void Com_Init(char* commandLine)
     Sys_Init();
 
     // Pick a random port value
-    Com_RandomBytes((byte*)&qport, sizeof(int));
+    Com_RandomBytes((uint8_t*)&qport, sizeof(int));
     Netchan_Init(qport & 0xffff);
 
     VM_Init();
@@ -2929,7 +2929,7 @@ Com_RandomBytes
 fills string array with len random bytes, preferably from the OS randomizer
 ==================
 */
-void Com_RandomBytes(byte* string, int len)
+void Com_RandomBytes(uint8_t* string, int len)
 {
     int i;
 

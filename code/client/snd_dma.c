@@ -116,7 +116,7 @@ static int S_Base_AvailableCaptureSamples(void)
     return SNDDMA_AvailableCaptureSamples();
 }
 
-static void S_Base_Capture(int samples, byte* data)
+static void S_Base_Capture(int samples, uint8_t* data)
 {
     SNDDMA_Capture(samples, data);
 }
@@ -897,7 +897,7 @@ If raw data has been loaded in little endien binary form, this must be done.
 If raw data was calculated, as with ADPCM, this should not be called.
 =================
 */
-void S_ByteSwapRawSamples(int samples, int width, int s_channels, const byte* data)
+void S_ByteSwapRawSamples(int samples, int width, int s_channels, const uint8_t* data)
 {
     int i;
 
@@ -923,7 +923,7 @@ S_Base_RawSamples
 Music streaming
 ============
 */
-void S_Base_RawSamples(int stream, int samples, int rate, int width, int s_channels, const byte* data, float volume, int entityNum)
+void S_Base_RawSamples(int stream, int samples, int rate, int width, int s_channels, const uint8_t* data, float volume, int entityNum)
 {
     int i;
     int src, dst;
@@ -1017,8 +1017,8 @@ void S_Base_RawSamples(int stream, int samples, int rate, int width, int s_chann
                 break;
             dst = s_rawend[stream] & (MAX_RAW_SAMPLES - 1);
             s_rawend[stream]++;
-            rawsamples[dst].left = (((byte*)data)[src] - 128) * intVolumeLeft;
-            rawsamples[dst].right = (((byte*)data)[src] - 128) * intVolumeRight;
+            rawsamples[dst].left = (((uint8_t*)data)[src] - 128) * intVolumeLeft;
+            rawsamples[dst].right = (((uint8_t*)data)[src] - 128) * intVolumeRight;
         }
     }
 
@@ -1321,7 +1321,7 @@ void S_UpdateBackgroundTrack(void)
 {
     int bufferSamples;
     int fileSamples;
-    byte raw[30000]; // just enough to fit in a mac stack frame
+    uint8_t raw[30000]; // just enough to fit in a mac stack frame
     int fileBytes;
     int r;
 

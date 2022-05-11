@@ -1202,7 +1202,7 @@ DRAWSURF SORTING
 ==========================================================================================
 */
 
-static ID_INLINE void R_Radix(int byte, int size, drawSurf_t* source, drawSurf_t* dest)
+static ID_INLINE void R_Radix(int uint8_t, int size, drawSurf_t* source, drawSurf_t* dest)
 {
     int count[256] = { 0 };
     int index[256];
@@ -1210,7 +1210,7 @@ static ID_INLINE void R_Radix(int byte, int size, drawSurf_t* source, drawSurf_t
     unsigned char* sortKey = NULL;
     unsigned char* end = NULL;
 
-    sortKey = ((unsigned char*)&source[0].sort) + byte;
+    sortKey = ((unsigned char*)&source[0].sort) + uint8_t;
     end = sortKey + (size * sizeof(drawSurf_t));
     for (; sortKey < end; sortKey += sizeof(drawSurf_t))
         ++count[*sortKey];
@@ -1220,7 +1220,7 @@ static ID_INLINE void R_Radix(int byte, int size, drawSurf_t* source, drawSurf_t
     for (i = 1; i < 256; ++i)
         index[i] = index[i - 1] + count[i - 1];
 
-    sortKey = ((unsigned char*)&source[0].sort) + byte;
+    sortKey = ((unsigned char*)&source[0].sort) + uint8_t;
     for (i = 0; i < size; ++i, sortKey += sizeof(drawSurf_t))
         dest[index[*sortKey]++] = source[i];
 }
@@ -1637,7 +1637,7 @@ void R_RenderPshadowMaps(const refdef_t* fd)
                 // FIXME: never actually tested this
                 mdrHeader_t* header = model->modelData;
                 int frameSize = (size_t)(&((mdrFrame_t*)0)->bones[header->numBones]);
-                mdrFrame_t* frame = (mdrFrame_t*)((byte*)header + header->ofsFrames + frameSize * ent->e.frame);
+                mdrFrame_t* frame = (mdrFrame_t*)((uint8_t*)header + header->ofsFrames + frameSize * ent->e.frame);
 
                 radius = frame->radius;
             } break;

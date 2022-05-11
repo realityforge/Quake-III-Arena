@@ -70,7 +70,7 @@ typedef struct {
     int samplebits;
     int isfloat;
     int speed;
-    byte* buffer;
+    uint8_t* buffer;
 } dma_t;
 
 #define START_SAMPLE_IMMEDIATE 0x7fffffff
@@ -120,7 +120,7 @@ typedef struct
     void (*StartLocalSound)(sfxHandle_t sfx, int channelNum);
     void (*StartBackgroundTrack)(const char* intro, const char* loop);
     void (*StopBackgroundTrack)(void);
-    void (*RawSamples)(int stream, int samples, int rate, int width, int channels, const byte* data, float volume, int entityNum);
+    void (*RawSamples)(int stream, int samples, int rate, int width, int channels, const uint8_t* data, float volume, int entityNum);
     void (*StopAllSounds)(void);
     void (*ClearLoopingSounds)(bool killall);
     void (*AddLoopingSound)(int entityNum, const vec3_t origin, const vec3_t velocity, sfxHandle_t sfx);
@@ -138,7 +138,7 @@ typedef struct
 #ifdef USE_VOIP
     void (*StartCapture)(void);
     int (*AvailableCaptureSamples)(void);
-    void (*Capture)(int samples, byte* data);
+    void (*Capture)(int samples, uint8_t* data);
     void (*StopCapture)(void);
     void (*MasterGain)(float gain);
 #endif
@@ -168,7 +168,7 @@ void SNDDMA_Submit(void);
 #ifdef USE_VOIP
 void SNDDMA_StartCapture(void);
 int SNDDMA_AvailableCaptureSamples(void);
-void SNDDMA_Capture(int samples, byte* data);
+void SNDDMA_Capture(int samples, uint8_t* data);
 void SNDDMA_StopCapture(void);
 void SNDDMA_MasterGain(float val);
 #endif

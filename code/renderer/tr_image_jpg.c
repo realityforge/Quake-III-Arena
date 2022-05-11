@@ -76,7 +76,7 @@ static void R_JPGOutputMessage(j_common_ptr cinfo)
 typedef struct {
     struct jpeg_destination_mgr pub; /* public fields */
 
-    byte* outfile; /* target stream */
+    uint8_t* outfile; /* target stream */
     size_t size;
 } my_destination_mgr;
 
@@ -151,7 +151,7 @@ static void term_destination(UNUSED_VAR j_compress_ptr cinfo)
  * for closing it after finishing compression.
  */
 
-static void jpegDest(j_compress_ptr cinfo, byte* outfile, size_t size)
+static void jpegDest(j_compress_ptr cinfo, uint8_t* outfile, size_t size)
 {
     my_dest_ptr dest;
 
@@ -182,7 +182,7 @@ Encodes JPEG from image in image_buffer and writes to buffer.
 Expects RGB input data
 =================
 */
-size_t RE_SaveJPGToBuffer(byte* buffer, size_t bufSize, int quality, const uint32_t image_width, const uint32_t image_height, byte* image_buffer, uint16_t padding)
+size_t RE_SaveJPGToBuffer(uint8_t* buffer, size_t bufSize, int quality, const uint32_t image_width, const uint32_t image_height, uint8_t* image_buffer, uint16_t padding)
 {
     struct jpeg_compress_struct cinfo;
     q_jpeg_error_mgr_t jerr;
@@ -257,9 +257,9 @@ size_t RE_SaveJPGToBuffer(byte* buffer, size_t bufSize, int quality, const uint3
     return outcount;
 }
 
-void RE_SaveJPG(const char* filename, int quality, const uint32_t image_width, const uint32_t image_height, byte* image_buffer, const uint16_t padding)
+void RE_SaveJPG(const char* filename, int quality, const uint32_t image_width, const uint32_t image_height, uint8_t* image_buffer, const uint16_t padding)
 {
-    byte* out;
+    uint8_t* out;
     size_t bufSize;
 
     bufSize = image_width * image_height * 3;

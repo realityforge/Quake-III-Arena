@@ -151,13 +151,13 @@ struct vm_s {
     vmMainProc entryPoint;
     void (*destroy)(vm_t* self);
 
-    byte* codeBase;
+    uint8_t* codeBase;
     int codeLength;
 
     intptr_t* instructionPointers;
     int instructionCount;
 
-    byte* dataBase;
+    uint8_t* dataBase;
     int dataMask;
     int dataAlloc; // actually allocated
 
@@ -170,7 +170,7 @@ struct vm_s {
     int breakFunction; // increment breakCount on function entry to this
     int breakCount;
 
-    byte* jumpTableTargets;
+    uint8_t* jumpTableTargets;
     int numJumpTableTargets;
 };
 

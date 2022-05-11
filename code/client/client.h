@@ -49,7 +49,7 @@ typedef struct {
     int messageNum; // copied from netchan->incoming_sequence
     int deltaNum; // messageNum the delta is from
     int ping; // time from when cmdNum-1 was sent to time packet was reeceived
-    byte areamask[MAX_MAP_AREA_BYTES]; // portalarea visibility bits
+    uint8_t areamask[MAX_MAP_AREA_BYTES]; // portalarea visibility bits
 
     int cmdNum; // the next cmdNum the server is expecting
     playerState_t ps; // complete information about the current player at this time
@@ -233,7 +233,7 @@ typedef struct {
     // incoming data...
     // !!! FIXME: convert from parallel arrays to array of a struct.
     OpusDecoder* opusDecoder[MAX_CLIENTS];
-    byte voipIncomingGeneration[MAX_CLIENTS];
+    uint8_t voipIncomingGeneration[MAX_CLIENTS];
     int voipIncomingSequence[MAX_CLIENTS];
     float voipGain[MAX_CLIENTS];
     bool voipIgnore[MAX_CLIENTS];
@@ -248,8 +248,8 @@ typedef struct {
     int voipOutgoingDataSize;
     int voipOutgoingDataFrames;
     int voipOutgoingSequence;
-    byte voipOutgoingGeneration;
-    byte voipOutgoingData[1024];
+    uint8_t voipOutgoingGeneration;
+    uint8_t voipOutgoingData[1024];
     float voipPower;
 #endif
 
@@ -588,7 +588,7 @@ void LAN_SaveServersToCache(void);
 //
 // cl_net_chan.c
 //
-void CL_Netchan_Transmit(netchan_t* chan, msg_t* msg); // int length, const byte *data );
+void CL_Netchan_Transmit(netchan_t* chan, msg_t* msg); // int length, const uint8_t *data );
 bool CL_Netchan_Process(netchan_t* chan, msg_t* msg);
 
 //
@@ -596,8 +596,8 @@ bool CL_Netchan_Process(netchan_t* chan, msg_t* msg);
 //
 bool CL_OpenAVIForWriting(const char* filename);
 void CL_TakeVideoFrame(void);
-void CL_WriteAVIVideoFrame(const byte* imageBuffer, int size);
-void CL_WriteAVIAudioFrame(const byte* pcmBuffer, int size);
+void CL_WriteAVIVideoFrame(const uint8_t* imageBuffer, int size);
+void CL_WriteAVIAudioFrame(const uint8_t* pcmBuffer, int size);
 bool CL_CloseAVI(void);
 bool CL_VideoRecording(void);
 

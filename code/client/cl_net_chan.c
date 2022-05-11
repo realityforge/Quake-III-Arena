@@ -40,7 +40,7 @@ static void CL_Netchan_Encode(msg_t* msg)
 {
     int serverId, messageAcknowledge, reliableAcknowledge;
     int i, index, srdc, sbit, soob;
-    byte key, *string;
+    uint8_t key, *string;
 
     if (msg->cursize <= CL_ENCODE_START) {
         return;
@@ -62,7 +62,7 @@ static void CL_Netchan_Encode(msg_t* msg)
     msg->bit = sbit;
     msg->readcount = srdc;
 
-    string = (byte*)clc.serverCommands[reliableAcknowledge & (MAX_RELIABLE_COMMANDS - 1)];
+    string = (uint8_t*)clc.serverCommands[reliableAcknowledge & (MAX_RELIABLE_COMMANDS - 1)];
     index = 0;
     key = clc.challenge ^ serverId ^ messageAcknowledge;
     for (i = CL_ENCODE_START; i < msg->cursize; i++) {
@@ -92,7 +92,7 @@ CL_Netchan_Decode
 static void CL_Netchan_Decode(msg_t* msg)
 {
     long reliableAcknowledge, i, index;
-    byte key, *string;
+    uint8_t key, *string;
     int srdc, sbit, soob;
 
     srdc = msg->readcount;
@@ -107,7 +107,7 @@ static void CL_Netchan_Decode(msg_t* msg)
     msg->bit = sbit;
     msg->readcount = srdc;
 
-    string = (byte*)clc.reliableCommands[reliableAcknowledge & (MAX_RELIABLE_COMMANDS - 1)];
+    string = (uint8_t*)clc.reliableCommands[reliableAcknowledge & (MAX_RELIABLE_COMMANDS - 1)];
     index = 0;
     // xor the client challenge with the netchan sequence number (need something that changes every message)
     key = clc.challenge ^ LittleLong(*(unsigned*)msg->data);

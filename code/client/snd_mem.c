@@ -111,7 +111,7 @@ ResampleSfx
 resample / decimate to the current source rate
 ================
 */
-static int ResampleSfx(sfx_t* sfx, int channels, int inrate, int inwidth, int samples, byte* data, bool compressed)
+static int ResampleSfx(sfx_t* sfx, int channels, int inrate, int inwidth, int samples, uint8_t* data, bool compressed)
 {
     int outcount;
     int srcsample;
@@ -166,7 +166,7 @@ ResampleSfx
 resample / decimate to the current source rate
 ================
 */
-static int ResampleSfxRaw(short* sfx, int channels, int inrate, int inwidth, int samples, byte* data)
+static int ResampleSfxRaw(short* sfx, int channels, int inrate, int inwidth, int samples, uint8_t* data)
 {
     int outcount;
     int srcsample;
@@ -210,7 +210,7 @@ of a forced fallback of a player specific sound
 */
 bool S_LoadSound(sfx_t* sfx)
 {
-    byte* data;
+    uint8_t* data;
     short* samples;
     snd_info_t info;
     //	int		size;

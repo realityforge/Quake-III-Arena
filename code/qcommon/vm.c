@@ -393,7 +393,7 @@ vmHeader_t* VM_LoadQVM(vm_t* vm, bool alloc, bool unpure)
     }
 
     // copy the intialized data
-    memcpy(vm->dataBase, (byte*)header.h + header.h->dataOffset,
+    memcpy(vm->dataBase, (uint8_t*)header.h + header.h->dataOffset,
            header.h->dataLength + header.h->litLength);
 
     // byte swap the longs
@@ -425,7 +425,7 @@ vmHeader_t* VM_LoadQVM(vm_t* vm, bool alloc, bool unpure)
             memset(vm->jumpTableTargets, 0, header.h->jtrgLength);
         }
 
-        memcpy(vm->jumpTableTargets, (byte*)header.h + header.h->dataOffset + header.h->dataLength + header.h->litLength, header.h->jtrgLength);
+        memcpy(vm->jumpTableTargets, (uint8_t*)header.h + header.h->dataOffset + header.h->dataLength + header.h->litLength, header.h->jtrgLength);
 
         // byte swap the longs
         for (i = 0; i < header.h->jtrgLength; i += 4) {

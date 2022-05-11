@@ -62,14 +62,14 @@ typedef struct aviFileData_s {
     int chunkStack[MAX_RIFF_CHUNKS];
     int chunkStackTop;
 
-    byte *cBuffer, *eBuffer;
+    uint8_t *cBuffer, *eBuffer;
 } aviFileData_t;
 
 static aviFileData_t afd;
 
 #define MAX_AVI_BUFFER 2048
 
-static byte buffer[MAX_AVI_BUFFER];
+static uint8_t buffer[MAX_AVI_BUFFER];
 static int bufIndex;
 
 static ID_INLINE void SafeFS_Write(const void* buffer, int len, fileHandle_t f)
@@ -91,10 +91,10 @@ WRITE_4BYTES
 */
 static ID_INLINE void WRITE_4BYTES(int x)
 {
-    buffer[bufIndex + 0] = (byte)((x >> 0) & 0xFF);
-    buffer[bufIndex + 1] = (byte)((x >> 8) & 0xFF);
-    buffer[bufIndex + 2] = (byte)((x >> 16) & 0xFF);
-    buffer[bufIndex + 3] = (byte)((x >> 24) & 0xFF);
+    buffer[bufIndex + 0] = (uint8_t)((x >> 0) & 0xFF);
+    buffer[bufIndex + 1] = (uint8_t)((x >> 8) & 0xFF);
+    buffer[bufIndex + 2] = (uint8_t)((x >> 16) & 0xFF);
+    buffer[bufIndex + 3] = (uint8_t)((x >> 24) & 0xFF);
     bufIndex += 4;
 }
 
@@ -105,8 +105,8 @@ WRITE_2BYTES
 */
 static ID_INLINE void WRITE_2BYTES(int x)
 {
-    buffer[bufIndex + 0] = (byte)((x >> 0) & 0xFF);
-    buffer[bufIndex + 1] = (byte)((x >> 8) & 0xFF);
+    buffer[bufIndex + 0] = (uint8_t)((x >> 0) & 0xFF);
+    buffer[bufIndex + 1] = (uint8_t)((x >> 8) & 0xFF);
     bufIndex += 2;
 }
 
@@ -402,12 +402,12 @@ static bool CL_CheckFileSize(int bytesToAdd)
     return false;
 }
 
-void CL_WriteAVIVideoFrame(const byte* imageBuffer, int size)
+void CL_WriteAVIVideoFrame(const uint8_t* imageBuffer, int size)
 {
     int chunkOffset = afd.fileSize - afd.moviOffset - 8;
     int chunkSize = 8 + size;
     int paddingSize = PADLEN(size, 2);
-    byte padding[4] = { 0 };
+    uint8_t padding[4] = { 0 };
 
     if (!afd.fileOpen)
         return;
@@ -444,9 +444,9 @@ void CL_WriteAVIVideoFrame(const byte* imageBuffer, int size)
 
 #define PCM_BUFFER_SIZE 44100
 
-void CL_WriteAVIAudioFrame(const byte* pcmBuffer, int size)
+void CL_WriteAVIAudioFrame(const uint8_t* pcmBuffer, int size)
 {
-    static byte pcmCaptureBuffer[PCM_BUFFER_SIZE] = { 0 };
+    static uint8_t pcmCaptureBuffer[PCM_BUFFER_SIZE] = { 0 };
     static int bytesInBuffer = 0;
 
     if (!afd.audio)
@@ -473,7 +473,7 @@ void CL_WriteAVIAudioFrame(const byte* pcmBuffer, int size)
         int chunkOffset = afd.fileSize - afd.moviOffset - 8;
         int chunkSize = 8 + bytesInBuffer;
         int paddingSize = PADLEN(bytesInBuffer, 2);
-        byte padding[4] = { 0 };
+        uint8_t padding[4] = { 0 };
 
         bufIndex = 0;
         WRITE_STRING("01wb");

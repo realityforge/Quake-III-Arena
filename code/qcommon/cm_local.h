@@ -109,7 +109,7 @@ typedef struct {
 
     int numClusters;
     int clusterBytes;
-    byte* visibility;
+    uint8_t* visibility;
     bool vised; // if false, visibility is just a single cluster of ffs
 
     int numEntityChars;

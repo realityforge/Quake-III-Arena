@@ -50,7 +50,7 @@ void Mat4View(vec3_t axes[3], vec3_t origin, mat4_t out);
 #define VectorCopy5(a, b) ((b)[0] = (a)[0], (b)[1] = (a)[1], (b)[2] = (a)[2], (b)[3] = (a)[3], (b)[4] = (a)[4])
 
 #define OffsetByteToFloat(a) ((float)(a)*1.0f / 127.5f - 1.0f)
-#define FloatToOffsetByte(a) (byte)((a)*127.5f + 128.0f)
+#define FloatToOffsetByte(a) (uint8_t)((a)*127.5f + 128.0f)
 #define ByteToFloat(a) ((float)(a)*1.0f / 255.0f)
 
 static ID_INLINE int VectorCompare4(const vec4_t v1, const vec4_t v2)

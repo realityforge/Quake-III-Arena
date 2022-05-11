@@ -128,7 +128,7 @@ void CG_ImpactMark(qhandle_t markShader, const vec3_t origin, const vec3_t dir,
     vec3_t axis[3];
     float texCoordScale;
     vec3_t originalPoints[4];
-    byte colors[4];
+    uint8_t colors[4];
     int i, j;
     int numFragments;
     markFragment_t markFragments[MAX_MARK_FRAGMENTS], *mf;

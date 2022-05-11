@@ -123,10 +123,10 @@ unsigned ColorBytes4(float r, float g, float b, float a)
 {
     unsigned i;
 
-    ((byte*)&i)[0] = r * 255;
-    ((byte*)&i)[1] = g * 255;
-    ((byte*)&i)[2] = b * 255;
-    ((byte*)&i)[3] = a * 255;
+    ((uint8_t*)&i)[0] = r * 255;
+    ((uint8_t*)&i)[1] = g * 255;
+    ((uint8_t*)&i)[2] = b * 255;
+    ((uint8_t*)&i)[3] = a * 255;
 
     return i;
 }

@@ -149,7 +149,7 @@ int R_ComputeLOD(trRefEntity_t* ent)
             mdr = (mdrHeader_t*)tr.currentModel->modelData;
             frameSize = (size_t)(&((mdrFrame_t*)0)->bones[mdr->numBones]);
 
-            mdrframe = (mdrFrame_t*)((byte*)mdr + mdr->ofsFrames + frameSize * ent->e.frame);
+            mdrframe = (mdrFrame_t*)((uint8_t*)mdr + mdr->ofsFrames + frameSize * ent->e.frame);
 
             radius = RadiusFromBounds(mdrframe->bounds[0], mdrframe->bounds[1]);
         } else {

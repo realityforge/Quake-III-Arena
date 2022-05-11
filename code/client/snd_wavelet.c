@@ -80,11 +80,11 @@ void decodeWavelet(sndBuffer* chunk, short* to)
 {
     float wksp[4097] = { 0 };
     int i;
-    byte* out;
+    uint8_t* out;
 
     int size = chunk->size;
 
-    out = (byte*)chunk->sndChunk;
+    out = (uint8_t*)chunk->sndChunk;
     for (i = 0; i < size; i++) {
         wksp[i] = mulawToShort[out[i]];
     }

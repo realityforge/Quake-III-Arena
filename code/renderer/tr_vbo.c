@@ -81,7 +81,7 @@ void Vao_SetVertexPointers(vao_t* vao)
     }
 }
 
-vao_t* R_CreateVao(const char* name, byte* vertexes, int vertexesSize, byte* indexes, int indexesSize, vaoUsage_t usage)
+vao_t* R_CreateVao(const char* name, uint8_t* vertexes, int vertexesSize, uint8_t* indexes, int indexesSize, vaoUsage_t usage)
 {
     vao_t* vao;
     int glUsage;

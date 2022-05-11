@@ -139,9 +139,9 @@ FT_Bitmap* R_RenderGlyph(FT_GlyphSlot glyph, glyphInfo_t* glyphOut)
     return NULL;
 }
 
-void WriteTGA(char* filename, byte* data, int width, int height)
+void WriteTGA(char* filename, uint8_t* data, int width, int height)
 {
-    byte* buffer;
+    uint8_t* buffer;
     int i, c;
     int row;
     unsigned char* flip;
@@ -298,7 +298,7 @@ static glyphInfo_t* RE_ConstructGlyphInfo(unsigned char* imageOut, int* xOut, in
 #endif
 
 static int fdOffset;
-static byte* fdFile;
+static uint8_t* fdFile;
 
 static int readInt(void)
 {
@@ -308,7 +308,7 @@ static int readInt(void)
 }
 
 typedef union {
-    byte fred[4];
+    uint8_t fred[4];
     float ffred;
 } poor;
 

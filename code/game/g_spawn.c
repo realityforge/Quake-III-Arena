@@ -345,14 +345,14 @@ in a gentity
 void G_ParseField(const char* key, const char* value, gentity_t* ent)
 {
     field_t* f;
-    byte* b;
+    uint8_t* b;
     float v;
     vec3_t vec;
 
     for (f = fields; f->name; f++) {
         if (!Q_stricmp(f->name, key)) {
             // found it
-            b = (byte*)ent;
+            b = (uint8_t*)ent;
 
             switch (f->type) {
             case F_STRING:

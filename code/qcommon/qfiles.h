@@ -446,7 +446,7 @@ typedef struct {
     float st[2];
     float lightmap[2];
     vec3_t normal;
-    byte color[4];
+    uint8_t color[4];
 } drawVert_t;
 
 #define drawVert_t_cleared(x) drawVert_t(x) = { { 0, 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0, 0 }, { 0, 0, 0, 0 } }

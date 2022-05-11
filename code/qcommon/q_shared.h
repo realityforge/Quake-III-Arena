@@ -24,6 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define Q_SHARED_H
 
 #include <stdbool.h>
+#include <stdint.h>
 
 // q_shared.h -- included first by ALL program modules.
 // A user mod should never modify this file
@@ -183,10 +184,6 @@ int Q_vsnprintf(char* str, size_t size, const char* format, va_list ap);
 #endif
 
 #include "q_platform.h"
-
-//=============================================================
-
-typedef unsigned char byte;
 
 typedef union {
     float f;
@@ -675,7 +672,7 @@ int QDECL Com_sprintf(char* dest, int size, const char* fmt, ...) __attribute__(
 char* Com_SkipTokens(char* s, int numTokens, char* sep);
 char* Com_SkipCharset(char* s, char* sep);
 
-void Com_RandomBytes(byte* string, int len);
+void Com_RandomBytes(uint8_t* string, int len);
 
 // mode parm for FS_FOpenFile
 typedef enum {
@@ -724,14 +721,14 @@ int Q_CountChar(const char* string, char tocount);
 // implemented as a struct for qvm compatibility
 typedef struct
 {
-    byte b0;
-    byte b1;
-    byte b2;
-    byte b3;
-    byte b4;
-    byte b5;
-    byte b6;
-    byte b7;
+    uint8_t b0;
+    uint8_t b1;
+    uint8_t b2;
+    uint8_t b3;
+    uint8_t b4;
+    uint8_t b5;
+    uint8_t b6;
+    uint8_t b7;
 } qint64;
 
 //=============================================
@@ -807,9 +804,9 @@ COLLISION DETECTION
 typedef struct cplane_s {
     vec3_t normal;
     float dist;
-    byte type; // for fast side tests: 0,1,2 = axial, 3 = nonaxial
-    byte signbits; // signx + (signy<<1) + (signz<<2), used as lookup during collision
-    byte pad[2];
+    uint8_t type; // for fast side tests: 0,1,2 = axial, 3 = nonaxial
+    uint8_t signbits; // signx + (signy<<1) + (signz<<2), used as lookup during collision
+    uint8_t pad[2];
 } cplane_t;
 
 // a trace is returned when a box is swept through the world
@@ -1035,7 +1032,7 @@ typedef struct usercmd_s {
     int serverTime;
     int angles[3];
     int buttons;
-    byte weapon; // weapon
+    uint8_t weapon; // weapon
     signed char forwardmove, rightmove, upmove;
 } usercmd_t;
 

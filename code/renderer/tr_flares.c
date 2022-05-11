@@ -273,7 +273,7 @@ void RB_RenderFlare(flare_t* f)
     vec3_t color;
     int iColor[3];
     float distance, intensity, factor;
-    byte fogFactors[3] = { 255, 255, 255 };
+    uint8_t fogFactors[3] = { 255, 255, 255 };
 
     backEnd.pc.c_flareRenders++;
 

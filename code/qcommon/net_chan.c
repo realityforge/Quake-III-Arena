@@ -104,7 +104,7 @@ Send one fragment of the current message
 void Netchan_TransmitNextFragment(netchan_t* chan)
 {
     msg_t send;
-    byte send_buf[MAX_PACKETLEN];
+    uint8_t send_buf[MAX_PACKETLEN];
     int fragmentLength;
     int outgoingSequence;
 
@@ -167,10 +167,10 @@ Sends a message to a connection, fragmenting if necessary
 A 0 length will still generate a packet.
 ================
 */
-void Netchan_Transmit(netchan_t* chan, int length, const byte* data)
+void Netchan_Transmit(netchan_t* chan, int length, const uint8_t* data)
 {
     msg_t send;
-    byte send_buf[MAX_PACKETLEN];
+    uint8_t send_buf[MAX_PACKETLEN];
 
     if (length > MAX_MSGLEN) {
         Com_Error(ERR_DROP, "Netchan_Transmit: length = %i", length);
@@ -379,7 +379,7 @@ bool Netchan_Process(netchan_t* chan, msg_t* msg)
 #define MAX_LOOPBACK 16
 
 typedef struct {
-    byte data[MAX_PACKETLEN];
+    uint8_t data[MAX_PACKETLEN];
     int datalen;
 } loopmsg_t;
 
@@ -432,7 +432,7 @@ void NET_SendLoopPacket(netsrc_t sock, int length, const void* data, netadr_t to
 typedef struct packetQueue_s {
     struct packetQueue_s* next;
     int length;
-    byte* data;
+    uint8_t* data;
     netadr_t to;
     int release;
 } packetQueue_t;
@@ -550,9 +550,9 @@ NET_OutOfBandPrint
 Sends a data message in an out-of-band datagram (only used for "connect")
 ================
 */
-void QDECL NET_OutOfBandData(netsrc_t sock, netadr_t adr, byte* format, int len)
+void QDECL NET_OutOfBandData(netsrc_t sock, netadr_t adr, uint8_t* format, int len)
 {
-    byte string[MAX_MSGLEN * 2];
+    uint8_t string[MAX_MSGLEN * 2];
     int i;
     msg_t mbuf;
 

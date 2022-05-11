@@ -487,7 +487,7 @@ void RE_EndFrame(int* frontEndMsec, int* backEndMsec)
 }
 
 void RE_TakeVideoFrame(int width, int height,
-                       byte* captureBuffer, byte* encodeBuffer, bool motionJpeg)
+                       uint8_t* captureBuffer, uint8_t* encodeBuffer, bool motionJpeg)
 {
     videoFrameCommand_t* cmd;
 

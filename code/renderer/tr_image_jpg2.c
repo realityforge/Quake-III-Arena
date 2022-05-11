@@ -87,7 +87,7 @@ static void jpeg_load_output_message(const j_common_ptr info)
  */
 bool R_DecodeJpgInBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* output)
 {
-    byte* image = NULL;
+    uint8_t* image = NULL;
 
     assert(NULL != name);
     assert(NULL != pixel_data);
@@ -154,7 +154,7 @@ bool R_DecodeJpgInBuffer(const char* name, const void* buffer, const long buffer
 
     while (info.output_scanline < info.output_height) {
         // Read a scanline at a time
-        byte* row = ((image + (row_size * (unsigned int)info.output_scanline)));
+        uint8_t* row = ((image + (row_size * (unsigned int)info.output_scanline)));
         (void)jpeg_read_scanlines(&info, &row, 1);
     }
 

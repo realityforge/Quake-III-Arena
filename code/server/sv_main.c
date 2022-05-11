@@ -145,7 +145,7 @@ A NULL client will broadcast to all clients
 void QDECL SV_SendServerCommand(client_t* cl, const char* fmt, ...)
 {
     va_list argptr;
-    byte message[MAX_MSGLEN];
+    uint8_t message[MAX_MSGLEN];
     client_t* client;
     int j;
 
@@ -321,7 +321,7 @@ leakyBucket_t outboundLeakyBucket;
 
 static long SVC_HashForAddress(netadr_t address)
 {
-    byte* ip = NULL;
+    uint8_t* ip = NULL;
     size_t size = 0;
     int i;
     long hash = 0;

@@ -44,8 +44,8 @@ static int R_MDRCullModel(mdrHeader_t* header, trRefEntity_t* ent)
     frameSize = (size_t)(&((mdrFrame_t*)0)->bones[header->numBones]);
 
     // compute frame pointers
-    newFrame = (mdrFrame_t*)((byte*)header + header->ofsFrames + frameSize * ent->e.frame);
-    oldFrame = (mdrFrame_t*)((byte*)header + header->ofsFrames + frameSize * ent->e.oldframe);
+    newFrame = (mdrFrame_t*)((uint8_t*)header + header->ofsFrames + frameSize * ent->e.frame);
+    oldFrame = (mdrFrame_t*)((uint8_t*)header + header->ofsFrames + frameSize * ent->e.oldframe);
 
     // cull bounding sphere ONLY if this is not an upscaled entity
     if (!ent->e.nonNormalizedAxes) {
@@ -125,7 +125,7 @@ int R_MDRComputeFogNum(mdrHeader_t* header, trRefEntity_t* ent)
     frameSize = (size_t)(&((mdrFrame_t*)0)->bones[header->numBones]);
 
     // FIXME: non-normalized axis issues
-    mdrFrame = (mdrFrame_t*)((byte*)header + header->ofsFrames + frameSize * ent->e.frame);
+    mdrFrame = (mdrFrame_t*)((uint8_t*)header + header->ofsFrames + frameSize * ent->e.frame);
     VectorAdd(ent->e.origin, mdrFrame->localOrigin, localOrigin);
     for (i = 1; i < tr.world->numfogs; i++) {
         fog = &tr.world->fogs[i];
@@ -199,9 +199,9 @@ void R_MDRAddAnimSurfaces(trRefEntity_t* ent)
     if (header->numLODs <= lodnum)
         lodnum = header->numLODs - 1;
 
-    lod = (mdrLOD_t*)((byte*)header + header->ofsLODs);
+    lod = (mdrLOD_t*)((uint8_t*)header + header->ofsLODs);
     for (i = 0; i < lodnum; i++) {
-        lod = (mdrLOD_t*)((byte*)lod + lod->ofsEnd);
+        lod = (mdrLOD_t*)((uint8_t*)lod + lod->ofsEnd);
     }
 
     // set up lighting
@@ -214,7 +214,7 @@ void R_MDRAddAnimSurfaces(trRefEntity_t* ent)
 
     cubemapIndex = R_CubemapForPoint(ent->e.origin);
 
-    surface = (mdrSurface_t*)((byte*)lod + lod->ofsSurfaces);
+    surface = (mdrSurface_t*)((uint8_t*)lod + lod->ofsSurfaces);
 
     for (i = 0; i < lod->numSurfaces; i++) {
 
@@ -257,7 +257,7 @@ void R_MDRAddAnimSurfaces(trRefEntity_t* ent)
         if (!personalModel)
             R_AddDrawSurf((void*)surface, shader, fogNum, false, false, cubemapIndex);
 
-        surface = (mdrSurface_t*)((byte*)surface + surface->ofsEnd);
+        surface = (mdrSurface_t*)((uint8_t*)surface + surface->ofsEnd);
     }
 }
 
@@ -286,16 +286,16 @@ void RB_MDRSurfaceAnim(mdrSurface_t* surface)
         frontlerp = 1.0f - backlerp;
     }
 
-    header = (mdrHeader_t*)((byte*)surface + surface->ofsHeader);
+    header = (mdrHeader_t*)((uint8_t*)surface + surface->ofsHeader);
 
     frameSize = (size_t)(&((mdrFrame_t*)0)->bones[header->numBones]);
 
-    frame = (mdrFrame_t*)((byte*)header + header->ofsFrames + backEnd.currentEntity->e.frame * frameSize);
-    oldFrame = (mdrFrame_t*)((byte*)header + header->ofsFrames + backEnd.currentEntity->e.oldframe * frameSize);
+    frame = (mdrFrame_t*)((uint8_t*)header + header->ofsFrames + backEnd.currentEntity->e.frame * frameSize);
+    oldFrame = (mdrFrame_t*)((uint8_t*)header + header->ofsFrames + backEnd.currentEntity->e.oldframe * frameSize);
 
     RB_CHECKOVERFLOW(surface->numVerts, surface->numTriangles * 3);
 
-    triangles = (int*)((byte*)surface + surface->ofsTriangles);
+    triangles = (int*)((uint8_t*)surface + surface->ofsTriangles);
     indexes = surface->numTriangles * 3;
     baseIndex = tess.numIndexes;
     baseVertex = tess.numVertexes;
@@ -320,7 +320,7 @@ void RB_MDRSurfaceAnim(mdrSurface_t* surface)
 
     // deform the vertexes by the lerped bones
     numVerts = surface->numVerts;
-    v = (mdrVertex_t*)((byte*)surface + surface->ofsVerts);
+    v = (mdrVertex_t*)((uint8_t*)surface + surface->ofsVerts);
     for (j = 0; j < numVerts; j++) {
         vec3_t tempVert, tempNormal;
         mdrWeight_t* w;

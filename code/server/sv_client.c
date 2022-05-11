@@ -566,7 +566,7 @@ static void SV_SendClientGameState(client_t* client)
     int start;
     entityState_t *base, nullstate;
     msg_t msg;
-    byte msgBuffer[MAX_MSGLEN];
+    uint8_t msgBuffer[MAX_MSGLEN];
 
     Com_DPrintf("SV_SendClientGameState() for %s\n", client->name);
     Com_DPrintf("Going from CS_CONNECTED to CS_PRIMED for %s\n", client->name);
@@ -1001,7 +1001,7 @@ int SV_SendDownloadMessages(void)
     int i, numDLs = 0, retval;
     client_t* cl;
     msg_t msg;
-    byte msgBuffer[MAX_MSGLEN];
+    uint8_t msgBuffer[MAX_MSGLEN];
 
     for (i = 0; i < sv_maxclients->integer; i++) {
         cl = &svs.clients[i];
@@ -1590,7 +1590,7 @@ static void SV_UserVoip(client_t* cl, msg_t* msg, bool ignoreData)
     int sender, generation, sequence, frames, packetsize;
     uint8_t recips[(MAX_CLIENTS + 7) / 8];
     int flags;
-    byte encoded[sizeof(cl->voipPacket[0]->data)];
+    uint8_t encoded[sizeof(cl->voipPacket[0]->data)];
     client_t* client = NULL;
     voipServerPacket_t* packet = NULL;
     int i;

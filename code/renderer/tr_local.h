@@ -378,7 +378,7 @@ typedef struct {
     waveForm_t alphaWave;
     alphaGen_t alphaGen;
 
-    byte constantColor[4]; // for CGEN_CONST and AGEN_CONST
+    uint8_t constantColor[4]; // for CGEN_CONST and AGEN_CONST
 
     unsigned stateBits; // GLS_xxxx mask
 
@@ -689,7 +689,7 @@ typedef struct {
     int rdflags; // RDF_NOWORLDMODEL, etc
 
     // 1 bits will prevent the associated area from rendering at all
-    byte areamask[MAX_MAP_AREA_BYTES];
+    uint8_t areamask[MAX_MAP_AREA_BYTES];
     bool areamaskModified; // true if areamask changed since last scene
 
     double floatTime; // tr.refdef.time / 1000.0
@@ -799,7 +799,7 @@ SURFACES
 
 ==============================================================================
 */
-typedef byte color4ub_t[4];
+typedef uint8_t color4ub_t[4];
 
 // any changes in surfaceType must be mirrored in rb_surfaceTable[]
 typedef enum {
@@ -927,14 +927,14 @@ typedef struct {
     float* texcoords;
     float* normals;
     float* tangents;
-    byte* colors;
+    uint8_t* colors;
     int* influences; // [num_vertexes] indexes into influenceBlendVertexes
 
     // unique list of vertex blend indexes/weights for faster CPU vertex skinning
-    byte* influenceBlendIndexes; // [num_influences]
+    uint8_t* influenceBlendIndexes; // [num_influences]
     union {
         float* f;
-        byte* b;
+        uint8_t* b;
     } influenceBlendWeights; // [num_influences]
 
     // depending upon the exporter, blend indices and weights might be int/float
@@ -1121,12 +1121,12 @@ typedef struct {
     vec3_t lightGridSize;
     vec3_t lightGridInverseSize;
     int lightGridBounds[3];
-    byte* lightGridData;
+    uint8_t* lightGridData;
     uint16_t* lightGrid16;
 
     int numClusters;
     int clusterBytes;
-    const byte* vis; // may be passed in by CM_LoadMap to save space
+    const uint8_t* vis; // may be passed in by CM_LoadMap to save space
 
     char* entityString;
     char* entityParsePoint;
@@ -1401,7 +1401,7 @@ typedef struct {
     bool skyRenderedThisView; // flag for drawing sun
 
     bool projection2D; // if true, drawstretchpic doesn't need to change modes
-    byte color2D[4];
+    uint8_t color2D[4];
     bool vertexes2D; // shader needs to be finished
     trRefEntity_t entity2D; // currentEntity will point at this when doing 2D rendering
 
@@ -1439,7 +1439,7 @@ typedef struct {
     vec3_t toneMinAvgMaxLevel;
     world_t* world;
 
-    const byte* externalVisData; // from RE_SetWorldVisData, shared with CM_Load
+    const uint8_t* externalVisData; // from RE_SetWorldVisData, shared with CM_Load
 
     image_t* defaultImage;
     image_t* scratchImage[32];
@@ -1867,13 +1867,13 @@ void GL_Cull(int cullType);
 
 #define GLS_DEFAULT GLS_DEPTHMASK_TRUE
 
-void RE_StretchRaw(int x, int y, int w, int h, int cols, int rows, const byte* data, int client, bool dirty);
-void RE_UploadCinematic(int w, int h, int cols, int rows, const byte* data, int client, bool dirty);
+void RE_StretchRaw(int x, int y, int w, int h, int cols, int rows, const uint8_t* data, int client, bool dirty);
+void RE_UploadCinematic(int w, int h, int cols, int rows, const uint8_t* data, int client, bool dirty);
 
 void RE_BeginFrame(stereoFrame_t stereoFrame);
 void RE_BeginRegistration(glconfig_t* glconfig);
 void RE_LoadWorldMap(const char* mapname);
-void RE_SetWorldVisData(const byte* vis);
+void RE_SetWorldVisData(const uint8_t* vis);
 qhandle_t RE_RegisterModel(const char* name);
 qhandle_t RE_RegisterSkin(const char* name);
 void RE_Shutdown(bool destroyWindow);
@@ -1883,10 +1883,10 @@ bool R_GetEntityToken(char* buffer, int size);
 model_t* R_AllocModel(void);
 
 void R_Init(void);
-void R_UpdateSubImage(image_t* image, byte* pic, int x, int y, int width, int height, GLenum picFormat);
+void R_UpdateSubImage(image_t* image, uint8_t* pic, int x, int y, int width, int height, GLenum picFormat);
 
 void R_SetColorMappings(void);
-void R_GammaCorrect(byte* buffer, const size_t bufSize);
+void R_GammaCorrect(uint8_t* buffer, const size_t bufSize);
 
 void R_ImageList_f(void);
 void R_SkinList_f(void);
@@ -2102,7 +2102,7 @@ void R_VaoPackNormal(int16_t* out, vec3_t v);
 void R_VaoPackColor(uint16_t* out, vec4_t c);
 void R_VaoUnpackNormal(vec3_t v, int16_t* pack);
 
-vao_t* R_CreateVao(const char* name, byte* vertexes, int vertexesSize, byte* indexes, int indexesSize, vaoUsage_t usage);
+vao_t* R_CreateVao(const char* name, uint8_t* vertexes, int vertexesSize, uint8_t* indexes, int indexesSize, vaoUsage_t usage);
 
 void R_BindVao(vao_t* vao);
 void R_BindNullVao(void);
@@ -2246,7 +2246,7 @@ RENDERER BACK END COMMAND QUEUE
 #define MAX_RENDER_COMMANDS 0x40000
 
 typedef struct {
-    byte cmds[MAX_RENDER_COMMANDS];
+    uint8_t cmds[MAX_RENDER_COMMANDS];
     int used;
 } renderCommandList_t;
 
@@ -2295,8 +2295,8 @@ typedef struct {
     int commandId;
     int width;
     int height;
-    byte* captureBuffer;
-    byte* encodeBuffer;
+    uint8_t* captureBuffer;
+    uint8_t* encodeBuffer;
     bool motionJpeg;
 } videoFrameCommand_t;
 
@@ -2379,6 +2379,6 @@ void RE_StretchPic(float x, float y, float w, float h,
                    float s1, float t1, float s2, float t2, qhandle_t hShader);
 void RE_EndFrame(int* frontEndMsec, int* backEndMsec);
 
-void RE_TakeVideoFrame(int width, int height, byte* captureBuffer, byte* encodeBuffer, bool motionJpeg);
+void RE_TakeVideoFrame(int width, int height, uint8_t* captureBuffer, uint8_t* encodeBuffer, bool motionJpeg);
 
 #endif // TR_LOCAL_H

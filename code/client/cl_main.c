@@ -418,7 +418,7 @@ static void CL_CaptureVoip(void)
             }
             voipFrames = samples / VOIP_MAX_FRAME_SAMPLES;
 
-            S_Capture(samples, (byte*)sampbuffer); // grab from audio card.
+            S_Capture(samples, (uint8_t*)sampbuffer); // grab from audio card.
 
             // check the "power" of this packet...
             for (i = 0; i < samples; i++) {
@@ -582,7 +582,7 @@ static char demoName[MAX_QPATH]; // compiler bug workaround
 void CL_Record_f(void)
 {
     char name[MAX_OSPATH];
-    byte bufData[MAX_MSGLEN];
+    uint8_t bufData[MAX_MSGLEN];
     msg_t buf;
     int i;
     int len;
@@ -806,7 +806,7 @@ void CL_ReadDemoMessage(void)
 {
     int r;
     msg_t buf;
-    byte bufData[MAX_MSGLEN];
+    uint8_t bufData[MAX_MSGLEN];
     int s;
 
     if (!clc.demofile) {
@@ -2013,7 +2013,7 @@ void CL_CheckForResend(void)
         Info_SetValueForKey(info, "challenge", va("%i", clc.challenge));
 
         Com_sprintf(data, sizeof(data), "connect \"%s\"", info);
-        NET_OutOfBandData(NS_CLIENT, clc.serverAddress, (byte*)data, strlen(data));
+        NET_OutOfBandData(NS_CLIENT, clc.serverAddress, (uint8_t*)data, strlen(data));
         // the most current userinfo has been sent, so watch for any
         // newer changes to userinfo variables
         cvar_modifiedFlags &= ~CVAR_USERINFO;
@@ -2074,8 +2074,8 @@ void CL_ServersResponsePacket(const netadr_t* from, msg_t* msg, bool extended)
     int i, j, count, total;
     netadr_t addresses[MAX_SERVERSPERPACKET];
     int numservers;
-    byte* buffptr;
-    byte* buffend;
+    uint8_t* buffptr;
+    uint8_t* buffend;
 
     Com_Printf("CL_ServersResponsePacket from %s\n", NET_AdrToStringwPort(*from));
 

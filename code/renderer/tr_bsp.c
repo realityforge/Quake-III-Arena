@@ -38,7 +38,7 @@ void RE_LoadWorldMap( const char *name );
 */
 
 static world_t s_worldData;
-static byte* fileBase;
+static uint8_t* fileBase;
 
 int c_subdivisions;
 
@@ -93,7 +93,7 @@ static void HSVtoRGB(float h, float s, float v, float rgb[3])
     }
 }
 
-static void R_ColorShiftLightingBytes(byte in[4], byte out[4])
+static void R_ColorShiftLightingBytes(uint8_t in[4], uint8_t out[4])
 {
     int shift, r, g, b;
 
@@ -159,10 +159,10 @@ void ColorToRGB16(const vec3_t color, uint16_t rgb16[3])
 static void R_LoadLightmaps(lump_t* l, lump_t* surfs)
 {
     imgFlags_t imgFlags = IMGFLAG_NOLIGHTSCALE | IMGFLAG_NO_COMPRESSION | IMGFLAG_CLAMPTOEDGE;
-    byte *buf, *buf_p;
+    uint8_t *buf, *buf_p;
     dsurface_t* surf;
     int len;
-    byte* image;
+    uint8_t* image;
     int i, j, numLightmaps, textureInternalFormat = 0;
     int numLightmapsPerPage = 16;
     float maxIntensity = 0;
@@ -264,7 +264,7 @@ static void R_LoadLightmaps(lump_t* l, lump_t* surfs)
         // if (tr.worldLightmapping)
         {
             char filename[MAX_QPATH];
-            byte* hdrLightmap = NULL;
+            uint8_t* hdrLightmap = NULL;
             int size = 0;
 
             // look for hdr lightmaps
@@ -276,7 +276,7 @@ static void R_LoadLightmaps(lump_t* l, lump_t* surfs)
             }
 
             if (hdrLightmap) {
-                byte *p = hdrLightmap, *end = hdrLightmap + size;
+                uint8_t *p = hdrLightmap, *end = hdrLightmap + size;
                 // ri.Printf(PRINT_ALL, "found!\n");
 
                 /* FIXME: don't just skip over this header and actually parse it */
@@ -463,7 +463,7 @@ This is called by the clipmodel subsystem so we can share the 1.8 megs of
 space in big maps...
 =================
 */
-void RE_SetWorldVisData(const byte* vis)
+void RE_SetWorldVisData(const uint8_t* vis)
 {
     tr.externalVisData = vis;
 }
@@ -471,7 +471,7 @@ void RE_SetWorldVisData(const byte* vis)
 static void R_LoadVisibility(lump_t* l)
 {
     int len;
-    byte* buf;
+    uint8_t* buf;
 
     len = l->filelen;
     if (!len) {
@@ -487,7 +487,7 @@ static void R_LoadVisibility(lump_t* l)
     if (tr.externalVisData) {
         s_worldData.vis = tr.externalVisData;
     } else {
-        byte* dest;
+        uint8_t* dest;
 
         dest = ri.Hunk_Alloc(len - 8, h_low);
         memcpy(dest, buf + 8, len - 8);
@@ -2490,10 +2490,10 @@ void RE_LoadWorldMap(const char* name)
     int i;
     dheader_t* header;
     union {
-        byte* b;
+        uint8_t* b;
         void* v;
     } buffer;
-    byte* startMarker;
+    uint8_t* startMarker;
 
     if (tr.worldMapLoaded) {
         ri.Error(ERR_DROP, "ERROR: attempted to redundantly load world map");
@@ -2543,7 +2543,7 @@ void RE_LoadWorldMap(const char* name)
     startMarker = ri.Hunk_Alloc(0, h_low);
 
     header = (dheader_t*)buffer.b;
-    fileBase = (byte*)header;
+    fileBase = (uint8_t*)header;
 
     i = LittleLong(header->version);
     if (i != BSP_VERSION) {
@@ -2591,7 +2591,7 @@ void RE_LoadWorldMap(const char* name)
         }
     }
 
-    s_worldData.dataSize = (byte*)ri.Hunk_Alloc(0, h_low) - startMarker;
+    s_worldData.dataSize = (uint8_t*)ri.Hunk_Alloc(0, h_low) - startMarker;
 
     // only set tr.world now that we know the entire level has loaded properly
     tr.world = &s_worldData;

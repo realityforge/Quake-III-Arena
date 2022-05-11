@@ -123,7 +123,7 @@ float R_NoiseGet4f(float x, float y, float z, double t);
 void R_NoiseInit(void);
 
 image_t* R_FindImageFile(const char* name, imgType_t type, imgFlags_t flags);
-image_t* R_CreateImage(const char* name, byte* pic, int width, int height, imgType_t type, imgFlags_t flags, int internalFormat);
+image_t* R_CreateImage(const char* name, uint8_t* pic, int width, int height, imgType_t type, imgFlags_t flags, int internalFormat);
 
 void R_IssuePendingRenderCommands(void);
 qhandle_t RE_RegisterShaderLightMap(const char* name, int lightmapIndex);
@@ -144,9 +144,9 @@ IMAGE LOADERS
 =============================================================
 */
 
-void RE_SavePNG(const char* filename, uint32_t image_width, uint32_t image_height, byte* image_buffer, uint16_t padding);
-void RE_SaveJPG(const char* filename, int quality, uint32_t image_width, uint32_t image_height, byte* image_buffer, uint16_t padding);
-size_t RE_SaveJPGToBuffer(byte* buffer, size_t bufSize, int quality, uint32_t image_width, uint32_t image_height, byte* image_buffer, uint16_t padding);
+void RE_SavePNG(const char* filename, uint32_t image_width, uint32_t image_height, uint8_t* image_buffer, uint16_t padding);
+void RE_SaveJPG(const char* filename, int quality, uint32_t image_width, uint32_t image_height, uint8_t* image_buffer, uint16_t padding);
+size_t RE_SaveJPGToBuffer(uint8_t* buffer, size_t bufSize, int quality, uint32_t image_width, uint32_t image_height, uint8_t* image_buffer, uint16_t padding);
 
 /*
 ====================================================================

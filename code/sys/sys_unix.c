@@ -102,7 +102,7 @@ int Sys_Milliseconds(void)
     return curtime;
 }
 
-bool Sys_RandomBytes(byte* string, int len)
+bool Sys_RandomBytes(uint8_t* string, int len)
 {
     FILE* fp;
 
@@ -112,7 +112,7 @@ bool Sys_RandomBytes(byte* string, int len)
 
     setvbuf(fp, NULL, _IONBF, 0); // don't buffer reads from /dev/urandom
 
-    if (fread(string, sizeof(byte), len, fp) != len) {
+    if (fread(string, sizeof(uint8_t), len, fp) != len) {
         fclose(fp);
         return false;
     }

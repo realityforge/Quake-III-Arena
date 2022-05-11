@@ -341,7 +341,7 @@ int SNDDMA_AvailableCaptureSamples(void)
 #endif
 }
 
-void SNDDMA_Capture(int samples, byte* data)
+void SNDDMA_Capture(int samples, uint8_t* data)
 {
 #ifdef USE_SDL_AUDIO_CAPTURE
     // multiplied by 2 to convert from (mono16) samples to bytes.

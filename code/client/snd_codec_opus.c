@@ -350,7 +350,7 @@ where we read the whole stream at once.
 void* S_OggOpus_CodecLoad(const char* filename, snd_info_t* info)
 {
     snd_stream_t* stream;
-    byte* buffer;
+    uint8_t* buffer;
     int bytesRead;
 
     // check if input is valid

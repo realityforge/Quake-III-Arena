@@ -1284,7 +1284,7 @@ int FS_Read(void* buffer, int len, fileHandle_t f)
 {
     int block, remaining;
     int read;
-    byte* buf;
+    uint8_t* buf;
     int tries;
 
     if (!fs_searchpaths) {
@@ -1295,7 +1295,7 @@ int FS_Read(void* buffer, int len, fileHandle_t f)
         return 0;
     }
 
-    buf = (byte*)buffer;
+    buf = (uint8_t*)buffer;
     fs_readCount += len;
 
     if (fsh[f].zipFile == false) {
@@ -1338,7 +1338,7 @@ int FS_Write(const void* buffer, int len, fileHandle_t h)
 {
     int block, remaining;
     int written;
-    byte* buf;
+    uint8_t* buf;
     int tries;
     FILE* f;
 
@@ -1351,7 +1351,7 @@ int FS_Write(const void* buffer, int len, fileHandle_t h)
     }
 
     f = FS_FileForHandle(h);
-    buf = (byte*)buffer;
+    buf = (uint8_t*)buffer;
 
     remaining = len;
     tries = 0;
@@ -1407,7 +1407,7 @@ int FS_Seek(fileHandle_t f, long offset, int origin)
     if (fsh[f].zipFile == true) {
         // FIXME: this is really, really crappy
         //(but better than what was here before)
-        byte buffer[PK3_SEEK_BUFFER_SIZE];
+        uint8_t buffer[PK3_SEEK_BUFFER_SIZE];
         int remainder;
         int currentPosition = FS_FTell(f);
 
@@ -1556,7 +1556,7 @@ long FS_ReadFileDir(const char* qpath, void* searchPath, bool unpure, void** buf
 {
     fileHandle_t h;
     searchpath_t* search;
-    byte* buf;
+    uint8_t* buf;
     bool isConfig;
     long len;
 

@@ -337,7 +337,7 @@ static void S_AL_BufferLoad(sfxHandle_t sfx, bool cache)
     // Fill the buffer
     if (info.size == 0) {
         // We have no data to buffer, so buffer silence
-        byte dummyData[2] = { 0 };
+        uint8_t dummyData[2] = { 0 };
 
         qalBufferData(curSfx->buffer, AL_FORMAT_MONO16, (void*)dummyData, 2, 22050);
     } else
@@ -1426,7 +1426,7 @@ static void S_AL_FreeStreamChannel(int stream)
     streamSourceHandles[stream] = -1;
 }
 
-static void S_AL_RawSamples(int stream, int samples, int rate, int width, int channels, const byte* data, float volume, int entityNum)
+static void S_AL_RawSamples(int stream, int samples, int rate, int width, int channels, const uint8_t* data, float volume, int entityNum)
 {
     int numBuffers;
     ALuint buffer;
@@ -1561,7 +1561,7 @@ static snd_stream_t* mus_stream;
 static snd_stream_t* intro_stream;
 static char s_backgroundLoop[MAX_QPATH];
 
-static byte decode_buffer[MUSIC_BUFFER_SIZE];
+static uint8_t decode_buffer[MUSIC_BUFFER_SIZE];
 
 static void S_AL_MusicSourceGet(void)
 {
@@ -1675,7 +1675,7 @@ static void S_AL_MusicProcess(ALuint b)
 
     if (l == 0) {
         // We have no data to buffer, so buffer silence
-        byte dummyData[2] = { 0 };
+        uint8_t dummyData[2] = { 0 };
 
         qalBufferData(b, AL_FORMAT_MONO16, (void*)dummyData, 2, 22050);
     } else
@@ -1922,7 +1922,7 @@ static int S_AL_AvailableCaptureSamples(void)
     return retval;
 }
 
-static void S_AL_Capture(int samples, byte* data)
+static void S_AL_Capture(int samples, uint8_t* data)
 {
     if (alCaptureDevice != NULL)
         qalcCaptureSamples(alCaptureDevice, data, samples);
