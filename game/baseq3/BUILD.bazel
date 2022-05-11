@@ -1,0 +1,51 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+load("//build_defs:rules.bzl", "DIST_VISIBILITY")
+load("//build_defs:copy_to_directory.bzl", _copy_to_directory = "copy_to_directory")
+
+_copy_to_directory(
+    name = "baseq3",
+    srcs = [
+        "//content/baseq3:material_assets",
+        "//content/baseq3:skin_assets",
+        "@QuakeArenaArcade_baseq3//:files",
+        "@QuakeArenaArcade_baseq3//:png_files",
+        "@pak9hqq36//:files",
+        "@pak9hqq36//:png_files",
+        "@q3a_baseq3_pak0//:files",
+        "@q3a_baseq3_pak0//:png_files",
+        "@q3a_baseq3_pak2//:files",
+        "@q3a_baseq3_pak2//:png_files",
+        "@q3a_baseq3_pak4//:files",
+        "@q3a_baseq3_pak4//:png_files",
+        "@q3a_baseq3_pak5//:files",
+        "@q3a_baseq3_pak6//:files",
+        "@q3a_baseq3_pak6//:png_files",
+        "@q3a_baseq3_pak8//:files",
+    ],
+    downcase = True,
+)
+
+genrule(
+    name = "pak0",
+    srcs = [":baseq3"],
+    outs = ["pak0.pk3"],
+    cmd = """
+export ZIPPER=`pwd`/$(location @bazel_tools//tools/zip:zipper)
+export TARGET=`pwd`/$@
+cd $(location :baseq3)
+find .  ! -type d |  sed -e "s/^\\.\\///" | awk '{print "\\"" $$0 "\\"" }' | sort | xargs $${ZIPPER} c $${TARGET}
+    """,
+    tools = ["@bazel_tools//tools/zip:zipper"],
+    visibility = DIST_VISIBILITY,
+)

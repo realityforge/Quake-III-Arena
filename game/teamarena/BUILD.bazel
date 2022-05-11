@@ -1,0 +1,43 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+load("//build_defs:rules.bzl", "DIST_VISIBILITY")
+load("//build_defs:copy_to_directory.bzl", _copy_to_directory = "copy_to_directory")
+
+_copy_to_directory(
+    name = "teamarena",
+    srcs = [
+        "//content/teamarena:material_assets",
+        "//content/teamarena:skin_assets",
+        "//content/teamarena:ui_assets",
+        "@QuakeArenaArcade_teamarena//:files",
+        "@QuakeArenaArcade_teamarena//:png_files",
+        "@q3a_missionpack_pak0//:files",
+        "@q3a_missionpack_pak0//:png_files",
+        "@q3a_missionpack_pak1//:files",
+    ],
+    downcase = True,
+)
+
+genrule(
+    name = "pak0",
+    srcs = [":teamarena"],
+    outs = ["pak0.pk3"],
+    cmd = """
+export ZIPPER=`pwd`/$(location @bazel_tools//tools/zip:zipper)
+export TARGET=`pwd`/$@
+cd $(location :teamarena)
+find .  ! -type d |  sed -e "s/^\\.\\///" | awk '{print "\\"" $$0 "\\"" }' | sort | xargs $${ZIPPER} c $${TARGET}
+    """,
+    tools = ["@bazel_tools//tools/zip:zipper"],
+    visibility = DIST_VISIBILITY,
+)
