@@ -19,7 +19,6 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-//
 // q_math.c -- stateless support routines that are included in each code module
 
 // Some of the vector functions are static inline in q_shared.h. q3asm
