@@ -71,7 +71,7 @@ typedef enum {
 
 // a trace is returned when a box is swept through the AAS world
 typedef struct aas_trace_s {
-    qboolean startsolid; // if true, the initial point was in a solid area
+    bool startsolid; // if true, the initial point was in a solid area
     float fraction; // time completed, 1.0 = didn't hit anything
     vec3_t endpos; // final position
     int ent; // entity blocking the trace

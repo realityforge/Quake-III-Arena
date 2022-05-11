@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #import <Foundation/Foundation.h>
 #import <IOKit/graphics/IOGraphicsTypes.h> // for interpreting the kCGDisplayIOFlags element of the display mode
 
-NSDictionary* Sys_GetMatchingDisplayMode(qboolean allowStretchedModes)
+NSDictionary* Sys_GetMatchingDisplayMode(bool allowStretchedModes)
 {
     NSArray* displayModes;
     NSDictionary* mode;

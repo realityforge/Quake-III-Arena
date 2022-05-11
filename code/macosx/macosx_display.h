@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 @class NSDictionary;
 
-extern NSDictionary* Sys_GetMatchingDisplayMode(qboolean allowStretchedModes);
+extern NSDictionary* Sys_GetMatchingDisplayMode(bool allowStretchedModes);
 
 extern void Sys_StoreGammaTables();
 extern void Sys_GetGammaTable(glwgamma_t* table);

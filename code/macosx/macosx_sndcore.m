@@ -39,7 +39,7 @@ static unsigned int submissionChunk;
 static unsigned int maxMixedSamples;
 static short* s_mixedSamples;
 static int s_chunkCount; // number of chunks submitted
-static qboolean s_isRunning;
+static bool s_isRunning;
 
 static AudioDeviceID outputDeviceID;
 static AudioStreamBasicDescription outputStreamBasicDescription;
@@ -124,7 +124,7 @@ void S_MakeTestPattern(void)
     }
 }
 
-qboolean SNDDMA_Init(void)
+bool SNDDMA_Init(void)
 {
     cvar_t* bufferSize;
     cvar_t* chunkSize;
@@ -132,7 +132,7 @@ qboolean SNDDMA_Init(void)
     UInt32 propertySize, bufferByteCount;
 
     if (s_isRunning)
-        return qtrue;
+        return true;
 
     chunkSize = ri.Cvar_Get("s_chunksize", "2048", CVAR_ARCHIVE);
     bufferSize = ri.Cvar_Get("s_buffersize", "16384", CVAR_ARCHIVE);
@@ -153,12 +153,12 @@ qboolean SNDDMA_Init(void)
     status = AudioHardwareGetProperty(kAudioHardwarePropertyDefaultOutputDevice, &propertySize, &outputDeviceID);
     if (status) {
         Com_Printf("AudioHardwareGetProperty returned %d\n", status);
-        return qfalse;
+        return false;
     }
 
     if (outputDeviceID == kAudioDeviceUnknown) {
         Com_Printf("AudioHardwareGetProperty: outputDeviceID is kAudioDeviceUnknown\n");
-        return qfalse;
+        return false;
     }
 
     // Configure the output device
@@ -167,14 +167,14 @@ qboolean SNDDMA_Init(void)
     status = AudioDeviceSetProperty(outputDeviceID, NULL, 0, NO, kAudioDevicePropertyBufferSize, propertySize, &bufferByteCount);
     if (status) {
         Com_Printf("AudioDeviceSetProperty: returned %d when setting kAudioDevicePropertyBufferSize to %d\n", status, chunkSize->integer);
-        return qfalse;
+        return false;
     }
 
     propertySize = sizeof(bufferByteCount);
     status = AudioDeviceGetProperty(outputDeviceID, 0, NO, kAudioDevicePropertyBufferSize, &propertySize, &bufferByteCount);
     if (status) {
         Com_Printf("AudioDeviceGetProperty: returned %d when setting kAudioDevicePropertyBufferSize\n", status);
-        return qfalse;
+        return false;
     }
 
     // Print out the device status
@@ -182,7 +182,7 @@ qboolean SNDDMA_Init(void)
     status = AudioDeviceGetProperty(outputDeviceID, 0, NO, kAudioDevicePropertyStreamFormat, &propertySize, &outputStreamBasicDescription);
     if (status) {
         Com_Printf("AudioDeviceGetProperty: returned %d when getting kAudioDevicePropertyStreamFormat\n", status);
-        return qfalse;
+        return false;
     }
 
     Com_Printf("Hardware format:\n");
@@ -200,14 +200,14 @@ qboolean SNDDMA_Init(void)
 
     if (outputStreamBasicDescription.mFormatID != kAudioFormatLinearPCM) {
         Com_Printf("Default Audio Device doesn't support Linear PCM!");
-        return qfalse;
+        return false;
     }
 
     // Start sound running
     status = AudioDeviceAddIOProc(outputDeviceID, audioDeviceIOProc, NULL);
     if (status) {
         Com_Printf("AudioDeviceAddIOProc: returned %d\n", status);
-        return qfalse;
+        return false;
     }
 
     submissionChunk = chunkSize->integer;
@@ -232,12 +232,12 @@ qboolean SNDDMA_Init(void)
     status = AudioDeviceStart(outputDeviceID, audioDeviceIOProc);
     if (status) {
         Com_Printf("AudioDeviceStart: returned %d\n", status);
-        return qfalse;
+        return false;
     }
 
-    s_isRunning = qtrue;
+    s_isRunning = true;
 
-    return qtrue;
+    return true;
 }
 
 float SNDDMA_GetBufferDuration(void)
@@ -263,7 +263,7 @@ void SNDDMA_Shutdown(void)
         return;
     }
 
-    s_isRunning = qfalse;
+    s_isRunning = false;
 
     status = AudioDeviceRemoveIOProc(outputDeviceID, audioDeviceIOProc);
     if (status) {

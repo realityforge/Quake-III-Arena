@@ -53,9 +53,9 @@ typedef struct particle_s {
     float end;
 
     float startfade;
-    qboolean rotate;
+    bool rotate;
 
-    qboolean link;
+    bool link;
 
     // Ridah
     int shaderAnim;
@@ -122,7 +122,7 @@ cparticle_t *active_particles, *free_particles;
 cparticle_t particles[MAX_PARTICLES];
 int cl_numparticles = MAX_PARTICLES;
 
-qboolean initparticles = qfalse;
+bool initparticles = false;
 vec3_t vforward, vright, vup;
 vec3_t rforward, rright, rup;
 
@@ -155,7 +155,7 @@ void CG_ClearParticles(void)
     }
     // done.
 
-    initparticles = qtrue;
+    initparticles = true;
 }
 
 void CG_AddParticleToScene(cparticle_t* p, vec3_t org, float alpha)

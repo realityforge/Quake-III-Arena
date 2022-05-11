@@ -1142,7 +1142,7 @@ void* qwglGetProcAddress(char* symbol)
 **
 */
 
-qboolean QGL_Init(const char* dllname)
+bool QGL_Init(const char* dllname)
 {
     if ((glw_state.OpenGLLib = dlopen(dllname, RTLD_LAZY | RTLD_GLOBAL)) == 0) {
         char fn[1024];
@@ -1157,11 +1157,11 @@ qboolean QGL_Init(const char* dllname)
 
             if ((glw_state.OpenGLLib = dlopen(fn, RTLD_LAZY)) == 0) {
                 ri.Printf(PRINT_ALL, "QGL_Init: Can't load %s from /etc/ld.so.conf or current dir: %s\n", dllname, dlerror());
-                return qfalse;
+                return false;
             }
         } else {
             ri.Printf(PRINT_ALL, "QGL_Init: Can't load %s from /etc/ld.so.conf: %s\n", dllname, dlerror());
-            return qfalse;
+            return false;
         }
     }
 
@@ -1529,5 +1529,5 @@ qboolean QGL_Init(const char* dllname)
     qglClientActiveTextureARB = 0;
     qglMultiTexCoord2fARB = 0;
 
-    return qtrue;
+    return true;
 }

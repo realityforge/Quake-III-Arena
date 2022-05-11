@@ -139,8 +139,8 @@ static void UI_SoundOptionsMenu_Init(void)
     memset(&soundOptionsInfo, 0, sizeof(soundOptionsInfo));
 
     UI_SoundOptionsMenu_Cache();
-    soundOptionsInfo.menu.wrapAround = qtrue;
-    soundOptionsInfo.menu.fullscreen = qtrue;
+    soundOptionsInfo.menu.wrapAround = true;
+    soundOptionsInfo.menu.fullscreen = true;
 
     soundOptionsInfo.banner.generic.type = MTYPE_BTEXT;
     soundOptionsInfo.banner.generic.flags = QMF_CENTER_JUSTIFY;

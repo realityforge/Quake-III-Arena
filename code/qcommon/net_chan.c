@@ -135,7 +135,7 @@ void Netchan_TransmitNextFragment(netchan_t* chan)
     // can tell there aren't more to follow
     if (chan->unsentFragmentStart == chan->unsentLength && fragmentLength != FRAGMENT_SIZE) {
         chan->outgoingSequence++;
-        chan->unsentFragments = qfalse;
+        chan->unsentFragments = false;
     }
 }
 
@@ -159,7 +159,7 @@ void Netchan_Transmit(netchan_t* chan, int length, const byte* data)
 
     // fragment large reliable messages
     if (length >= FRAGMENT_SIZE) {
-        chan->unsentFragments = qtrue;
+        chan->unsentFragments = true;
         chan->unsentLength = length;
         memcpy(chan->unsentBuffer, data, length);
 
@@ -194,7 +194,7 @@ void Netchan_Transmit(netchan_t* chan, int length, const byte* data)
 =================
 Netchan_Process
 
-Returns qfalse if the message should not be processed due to being
+Returns false if the message should not be processed due to being
 out of order or a fragment.
 
 Msg must be large enough to hold MAX_MSGLEN, because if this is the
@@ -202,12 +202,12 @@ final fragment of a multi-part message, the entire thing will be
 copied out.
 =================
 */
-qboolean Netchan_Process(netchan_t* chan, msg_t* msg)
+bool Netchan_Process(netchan_t* chan, msg_t* msg)
 {
     int sequence;
     int qport;
     int fragmentStart, fragmentLength;
-    qboolean fragmented;
+    bool fragmented;
 
     // XOR unscramble all data in the packet after the header
     //	Netchan_UnScramblePacket( msg );
@@ -219,9 +219,9 @@ qboolean Netchan_Process(netchan_t* chan, msg_t* msg)
     // check for fragment information
     if (sequence & FRAGMENT_BIT) {
         sequence &= ~FRAGMENT_BIT;
-        fragmented = qtrue;
+        fragmented = true;
     } else {
-        fragmented = qfalse;
+        fragmented = false;
     }
 
     // read the qport if we are a server
@@ -251,7 +251,7 @@ qboolean Netchan_Process(netchan_t* chan, msg_t* msg)
         if (showdrop->integer || showpackets->integer) {
             Com_Printf("%s:Out of order packet %i at %i\n", NET_AdrToString(chan->remoteAddress), sequence, chan->incomingSequence);
         }
-        return qfalse;
+        return false;
     }
 
     // dropped packets don't keep the message from being used
@@ -282,7 +282,7 @@ qboolean Netchan_Process(netchan_t* chan, msg_t* msg)
             }
             // we can still keep the part that we have so far,
             // so we don't need to clear chan->fragmentLength
-            return qfalse;
+            return false;
         }
 
         // copy the fragment to the fragment buffer
@@ -290,7 +290,7 @@ qboolean Netchan_Process(netchan_t* chan, msg_t* msg)
             if (showdrop->integer || showpackets->integer) {
                 Com_Printf("%s:illegal fragment length\n", NET_AdrToString(chan->remoteAddress));
             }
-            return qfalse;
+            return false;
         }
 
         memcpy(chan->fragmentBuffer + chan->fragmentLength,
@@ -300,13 +300,13 @@ qboolean Netchan_Process(netchan_t* chan, msg_t* msg)
 
         // if this wasn't the last fragment, don't process anything
         if (fragmentLength == FRAGMENT_SIZE) {
-            return qfalse;
+            return false;
         }
 
         if (chan->fragmentLength > msg->maxsize) {
             Com_Printf("%s:fragmentLength %i > msg->maxsize\n", NET_AdrToString(chan->remoteAddress),
                        chan->fragmentLength);
-            return qfalse;
+            return false;
         }
 
         // copy the full message over the partial fragment
@@ -324,13 +324,13 @@ qboolean Netchan_Process(netchan_t* chan, msg_t* msg)
         // clients were not acking fragmented messages
         chan->incomingSequence = sequence;
 
-        return qtrue;
+        return true;
     }
 
     // the message can now be read from the current message pointer
     chan->incomingSequence = sequence;
 
-    return qtrue;
+    return true;
 }
 
 //==============================================================================
@@ -342,28 +342,28 @@ NET_CompareBaseAdr
 Compares without the port
 ===================
 */
-qboolean NET_CompareBaseAdr(netadr_t a, netadr_t b)
+bool NET_CompareBaseAdr(netadr_t a, netadr_t b)
 {
     if (a.type != b.type)
-        return qfalse;
+        return false;
 
     if (a.type == NA_LOOPBACK)
-        return qtrue;
+        return true;
 
     if (a.type == NA_IP) {
         if (a.ip[0] == b.ip[0] && a.ip[1] == b.ip[1] && a.ip[2] == b.ip[2] && a.ip[3] == b.ip[3])
-            return qtrue;
-        return qfalse;
+            return true;
+        return false;
     }
 
     if (a.type == NA_IPX) {
         if ((memcmp(a.ipx, b.ipx, 10) == 0))
-            return qtrue;
-        return qfalse;
+            return true;
+        return false;
     }
 
     Com_Printf("NET_CompareBaseAdr: bad address type\n");
-    return qfalse;
+    return false;
 }
 
 const char* NET_AdrToString(netadr_t a)
@@ -386,31 +386,31 @@ const char* NET_AdrToString(netadr_t a)
     return s;
 }
 
-qboolean NET_CompareAdr(netadr_t a, netadr_t b)
+bool NET_CompareAdr(netadr_t a, netadr_t b)
 {
     if (a.type != b.type)
-        return qfalse;
+        return false;
 
     if (a.type == NA_LOOPBACK)
-        return qtrue;
+        return true;
 
     if (a.type == NA_IP) {
         if (a.ip[0] == b.ip[0] && a.ip[1] == b.ip[1] && a.ip[2] == b.ip[2] && a.ip[3] == b.ip[3] && a.port == b.port)
-            return qtrue;
-        return qfalse;
+            return true;
+        return false;
     }
 
     if (a.type == NA_IPX) {
         if ((memcmp(a.ipx, b.ipx, 10) == 0) && a.port == b.port)
-            return qtrue;
-        return qfalse;
+            return true;
+        return false;
     }
 
     Com_Printf("NET_CompareAdr: bad address type\n");
-    return qfalse;
+    return false;
 }
 
-qboolean NET_IsLocalAddress(netadr_t adr)
+bool NET_IsLocalAddress(netadr_t adr)
 {
     return adr.type == NA_LOOPBACK;
 }
@@ -431,7 +431,7 @@ typedef struct {
 
 loopback_t loopbacks[2];
 
-qboolean NET_GetLoopPacket(netsrc_t sock, netadr_t* net_from, msg_t* net_message)
+bool NET_GetLoopPacket(netsrc_t sock, netadr_t* net_from, msg_t* net_message)
 {
     int i;
     loopback_t* loop;
@@ -442,7 +442,7 @@ qboolean NET_GetLoopPacket(netsrc_t sock, netadr_t* net_from, msg_t* net_message
         loop->get = loop->send - MAX_LOOPBACK;
 
     if (loop->get >= loop->send)
-        return qfalse;
+        return false;
 
     i = loop->get & (MAX_LOOPBACK - 1);
     loop->get++;
@@ -451,7 +451,7 @@ qboolean NET_GetLoopPacket(netsrc_t sock, netadr_t* net_from, msg_t* net_message
     net_message->cursize = loop->msgs[i].datalen;
     memset(net_from, 0, sizeof(*net_from));
     net_from->type = NA_LOOPBACK;
-    return qtrue;
+    return true;
 }
 
 void NET_SendLoopPacket(netsrc_t sock, int length, const void* data, netadr_t to)
@@ -555,16 +555,16 @@ NET_StringToAdr
 Traps "localhost" for loopback, passes everything else to system
 =============
 */
-qboolean NET_StringToAdr(const char* s, netadr_t* a)
+bool NET_StringToAdr(const char* s, netadr_t* a)
 {
-    qboolean r;
+    bool r;
     char base[MAX_STRING_CHARS];
     char* port;
 
     if (!strcmp(s, "localhost")) {
         memset(a, 0, sizeof(*a));
         a->type = NA_LOOPBACK;
-        return qtrue;
+        return true;
     }
 
     // look for a port number
@@ -579,13 +579,13 @@ qboolean NET_StringToAdr(const char* s, netadr_t* a)
 
     if (!r) {
         a->type = NA_BAD;
-        return qfalse;
+        return false;
     }
 
     // inet_addr returns this if out of range
     if (a->ip[0] == 255 && a->ip[1] == 255 && a->ip[2] == 255 && a->ip[3] == 255) {
         a->type = NA_BAD;
-        return qfalse;
+        return false;
     }
 
     if (port) {
@@ -594,5 +594,5 @@ qboolean NET_StringToAdr(const char* s, netadr_t* a)
         a->port = BigShort(PORT_SERVER);
     }
 
-    return qtrue;
+    return true;
 }

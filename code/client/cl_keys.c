@@ -35,13 +35,13 @@ int historyLine; // the line being displayed from history buffer
 
 field_t g_consoleField;
 field_t chatField;
-qboolean chat_team;
+bool chat_team;
 
 int chat_playerNum;
 
-qboolean key_overstrikeMode;
+bool key_overstrikeMode;
 
-qboolean anykeydown;
+bool anykeydown;
 qkey_t keys[MAX_KEYS];
 
 typedef struct {
@@ -190,7 +190,7 @@ Handles horizontal scrolling and cursor blinking
 x, y, amd width are in pixels
 ===================
 */
-void Field_VariableSizeDraw(field_t* edit, int x, int y, int width, int size, qboolean showCursor)
+void Field_VariableSizeDraw(field_t* edit, int x, int y, int width, int size, bool showCursor)
 {
     int len;
     int drawLen;
@@ -240,7 +240,7 @@ void Field_VariableSizeDraw(field_t* edit, int x, int y, int width, int size, qb
         float color[4];
 
         color[0] = color[1] = color[2] = color[3] = 1.0;
-        SCR_DrawSmallStringExt(x, y, str, color, qfalse);
+        SCR_DrawSmallStringExt(x, y, str, color, false);
     } else {
         // draw big string with drop shadow
         SCR_DrawBigString(x, y, str, 1.0);
@@ -272,12 +272,12 @@ void Field_VariableSizeDraw(field_t* edit, int x, int y, int width, int size, qb
     }
 }
 
-void Field_Draw(field_t* edit, int x, int y, int width, qboolean showCursor)
+void Field_Draw(field_t* edit, int x, int y, int width, bool showCursor)
 {
     Field_VariableSizeDraw(edit, x, y, width, SMALLCHAR_WIDTH, showCursor);
 }
 
-void Field_BigDraw(field_t* edit, int x, int y, int width, qboolean showCursor)
+void Field_BigDraw(field_t* edit, int x, int y, int width, bool showCursor)
 {
     Field_VariableSizeDraw(edit, x, y, width, BIGCHAR_WIDTH, showCursor);
 }
@@ -620,20 +620,20 @@ void Message_Key(int key)
 
 //============================================================================
 
-qboolean Key_GetOverstrikeMode(void)
+bool Key_GetOverstrikeMode(void)
 {
     return key_overstrikeMode;
 }
 
-void Key_SetOverstrikeMode(qboolean state)
+void Key_SetOverstrikeMode(bool state)
 {
     key_overstrikeMode = state;
 }
 
-qboolean Key_IsDown(int keynum)
+bool Key_IsDown(int keynum)
 {
     if (keynum == -1) {
-        return qfalse;
+        return false;
     }
 
     return keys[keynum].down;
@@ -902,12 +902,12 @@ void CL_AddKeyUpCommands(int key, char* kb)
     int i;
     char button[1024], *buttonPtr;
     char cmd[1024];
-    qboolean keyevent;
+    bool keyevent;
 
     if (!kb) {
         return;
     }
-    keyevent = qfalse;
+    keyevent = false;
     buttonPtr = button;
     for (i = 0;; i++) {
         if (kb[i] == ';' || !kb[i]) {
@@ -917,7 +917,7 @@ void CL_AddKeyUpCommands(int key, char* kb)
                 // sources can be discriminated and subframe corrected
                 Com_sprintf(cmd, sizeof(cmd), "-%s %i %i\n", button + 1, key, time);
                 Cbuf_AddText(cmd);
-                keyevent = qtrue;
+                keyevent = true;
             } else {
                 if (keyevent) {
                     // down-only command
@@ -944,7 +944,7 @@ CL_KeyEvent
 Called by the system for both key up and key down events
 ===================
 */
-void CL_KeyEvent(int key, qboolean down, unsigned time)
+void CL_KeyEvent(int key, bool down, unsigned time)
 {
     char* kb;
     char cmd[1024];
@@ -1125,7 +1125,7 @@ void CL_CharEvent(int key)
     if (cls.keyCatchers & KEYCATCH_CONSOLE) {
         Field_CharEvent(&g_consoleField, key);
     } else if (cls.keyCatchers & KEYCATCH_UI) {
-        VM_Call(uivm, UI_KEY_EVENT, key | K_CHAR_FLAG, qtrue);
+        VM_Call(uivm, UI_KEY_EVENT, key | K_CHAR_FLAG, true);
     } else if (cls.keyCatchers & KEYCATCH_MESSAGE) {
         Field_CharEvent(&chatField, key);
     } else if (cls.state == CA_DISCONNECTED) {
@@ -1137,11 +1137,11 @@ void Key_ClearStates(void)
 {
     int i;
 
-    anykeydown = qfalse;
+    anykeydown = false;
 
     for (i = 0; i < MAX_KEYS; i++) {
         if (keys[i].down) {
-            CL_KeyEvent(i, qfalse, 0);
+            CL_KeyEvent(i, false, 0);
         }
         keys[i].down = 0;
         keys[i].repeats = 0;

@@ -203,7 +203,7 @@ void SV_MasterHeartbeat(void)
         // resolving usually causes hitches on win95, so only
         // do it when needed
         if (sv_master[i]->modified) {
-            sv_master[i]->modified = qfalse;
+            sv_master[i]->modified = false;
 
             Com_Printf("Resolving %s\n", sv_master[i]->string);
             if (!NET_StringToAdr(sv_master[i]->string, &adr[i])) {
@@ -211,7 +211,7 @@ void SV_MasterHeartbeat(void)
                 // so we don't take repeated dns hits
                 Com_Printf("Couldn't resolve address: %s\n", sv_master[i]->string);
                 Cvar_Set(sv_master[i]->name, "");
-                sv_master[i]->modified = qfalse;
+                sv_master[i]->modified = false;
                 continue;
             }
             if (!strstr(":", sv_master[i]->string)) {
@@ -375,7 +375,7 @@ Redirect all printfs
 */
 void SVC_RemoteCommand(netadr_t from, msg_t* msg)
 {
-    qboolean valid;
+    bool valid;
     unsigned int time;
     char remaining[1024];
     // TTimo - scaled down to accumulate, but not overflow anything network wise, print wise etc.
@@ -393,10 +393,10 @@ void SVC_RemoteCommand(netadr_t from, msg_t* msg)
     lasttime = time;
 
     if (!strlen(sv_rconPassword->string) || strcmp(Cmd_Argv(1), sv_rconPassword->string)) {
-        valid = qfalse;
+        valid = false;
         Com_Printf("Bad rcon from %s:\n%s\n", NET_AdrToString(from), Cmd_Argv(2));
     } else {
-        valid = qtrue;
+        valid = true;
         Com_Printf("Rcon from %s:\n%s\n", NET_AdrToString(from), Cmd_Argv(2));
     }
 
@@ -643,14 +643,14 @@ void SV_CheckTimeouts(void)
     }
 }
 
-qboolean SV_CheckPaused(void)
+bool SV_CheckPaused(void)
 {
     int count;
     client_t* cl;
     int i;
 
     if (!cl_paused->integer) {
-        return qfalse;
+        return false;
     }
 
     // only pause if there is just a single client connected
@@ -665,12 +665,12 @@ qboolean SV_CheckPaused(void)
         // don't pause
         if (sv_paused->integer)
             Cvar_Set("sv_paused", "0");
-        return qfalse;
+        return false;
     }
 
     if (!sv_paused->integer)
         Cvar_Set("sv_paused", "1");
-    return qtrue;
+    return true;
 }
 
 /*

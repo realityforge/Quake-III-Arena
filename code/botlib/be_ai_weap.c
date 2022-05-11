@@ -117,9 +117,9 @@ int BotValidWeaponNumber(int weaponnum)
 {
     if (weaponnum <= 0 || weaponnum > weaponconfig->numweapons) {
         botimport.Print(PRT_ERROR, "weapon number out of range\n");
-        return qfalse;
+        return false;
     }
-    return qtrue;
+    return true;
 }
 bot_weaponstate_t* BotWeaponStateFromHandle(int handle)
 {
@@ -203,7 +203,7 @@ weaponconfig_t* LoadWeaponConfig(char* filename)
                 return NULL;
             }
             memcpy(&wc->weaponinfo[weaponinfo.number], &weaponinfo, sizeof(weaponinfo_t));
-            wc->weaponinfo[weaponinfo.number].valid = qtrue;
+            wc->weaponinfo[weaponinfo.number].valid = true;
         } else if (!strcmp(token.string, "projectileinfo")) {
             if (wc->numprojectiles >= max_projectileinfo) {
                 botimport.Print(PRT_ERROR, "more than %d projectiles defined in %s\n", max_projectileinfo, path);

@@ -194,7 +194,7 @@ void Sys_ListFilteredFiles(const char* basedir, char* subdirs, char* filter, cha
             break;
         }
         Com_sprintf(filename, sizeof(filename), "%s/%s", subdirs, d->d_name);
-        if (!Com_FilterPath(filter, filename, qfalse))
+        if (!Com_FilterPath(filter, filename, false))
             continue;
         list[*numfiles] = CopyString(filename);
         (*numfiles)++;
@@ -204,13 +204,13 @@ void Sys_ListFilteredFiles(const char* basedir, char* subdirs, char* filter, cha
 }
 
 // bk001129 - in 1.17 this used to be
-// char **Sys_ListFiles( const char *directory, const char *extension, int *numfiles, qboolean wantsubs )
-char** Sys_ListFiles(const char* directory, const char* extension, char* filter, int* numfiles, qboolean wantsubs)
+// char **Sys_ListFiles( const char *directory, const char *extension, int *numfiles, bool wantsubs )
+char** Sys_ListFiles(const char* directory, const char* extension, char* filter, int* numfiles, bool wantsubs)
 {
     struct dirent* d;
     // char *p; // bk001204 - unused
     DIR* fdir;
-    qboolean dironly = wantsubs;
+    bool dironly = wantsubs;
     char search[MAX_OSPATH];
     int nfiles;
     char** listCopy;
@@ -243,7 +243,7 @@ char** Sys_ListFiles(const char* directory, const char* extension, char* filter,
 
     if (extension[0] == '/' && extension[1] == 0) {
         extension = "";
-        dironly = qtrue;
+        dironly = true;
     }
 
     extLen = strlen(extension);

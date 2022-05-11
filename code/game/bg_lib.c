@@ -750,7 +750,7 @@ int vsprintf(char* buffer, const char* fmt, va_list argptr)
     buf_p = buffer;
     arg = (int*)argptr;
 
-    while (qtrue) {
+    while (true) {
         // run through the format string until we hit a '%' or '\0'
         for (ch = *fmt; (ch = *fmt) != '\0' && ch != '%'; fmt++) {
             *buf_p++ = ch;

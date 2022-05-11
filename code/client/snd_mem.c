@@ -201,7 +201,7 @@ ResampleSfx
 resample / decimate to the current source rate
 ================
 */
-static void ResampleSfx(sfx_t* sfx, int inrate, int inwidth, byte* data, qboolean compressed)
+static void ResampleSfx(sfx_t* sfx, int inrate, int inwidth, byte* data, bool compressed)
 {
     int outcount;
     int srcsample;
@@ -289,7 +289,7 @@ The filename may be different than sfx->name in the case
 of a forced fallback of a player specific sound
 ==============
 */
-qboolean S_LoadSound(sfx_t* sfx)
+bool S_LoadSound(sfx_t* sfx)
 {
     byte* data;
     short* samples;
@@ -298,20 +298,20 @@ qboolean S_LoadSound(sfx_t* sfx)
 
     // player specific sounds are never directly loaded
     if (sfx->soundName[0] == '*') {
-        return qfalse;
+        return false;
     }
 
     // load it in
     size = FS_ReadFile(sfx->soundName, (void**)&data);
     if (!data) {
-        return qfalse;
+        return false;
     }
 
     info = GetWavinfo(sfx->soundName, data, size);
     if (info.channels != 1) {
         Com_Printf("%s is a stereo wav file\n", sfx->soundName);
         FS_FreeFile(data);
-        return qfalse;
+        return false;
     }
 
     if (info.width == 1) {
@@ -332,7 +332,7 @@ qboolean S_LoadSound(sfx_t* sfx)
     // manager to do the right thing for us and page
     // sound in as needed
 
-    if (sfx->soundCompressed == qtrue) {
+    if (sfx->soundCompressed == true) {
         sfx->soundCompressionMethod = 1;
         sfx->soundData = NULL;
         sfx->soundLength = ResampleSfxRaw(samples, info.rate, info.width, info.samples, (data + info.dataofs));
@@ -341,13 +341,13 @@ qboolean S_LoadSound(sfx_t* sfx)
         sfx->soundCompressionMethod = 0;
         sfx->soundLength = info.samples;
         sfx->soundData = NULL;
-        ResampleSfx(sfx, info.rate, info.width, data + info.dataofs, qfalse);
+        ResampleSfx(sfx, info.rate, info.width, data + info.dataofs, false);
     }
 
     Hunk_FreeTempMemory(samples);
     FS_FreeFile(data);
 
-    return qtrue;
+    return true;
 }
 
 void S_DisplayFreeMemory()

@@ -151,7 +151,7 @@ void(APIENTRY* qglClientActiveTextureARB)(GLenum texture);
 void(APIENTRY* qglLockArraysEXT)(GLint, GLint);
 void(APIENTRY* qglUnlockArraysEXT)(void);
 
-static void AssertCvarRange(cvar_t* cv, float minVal, float maxVal, qboolean shouldBeIntegral)
+static void AssertCvarRange(cvar_t* cv, float minVal, float maxVal, bool shouldBeIntegral)
 {
     if (shouldBeIntegral) {
         if ((int)cv->value != cv->integer) {
@@ -278,22 +278,22 @@ vidmode_t r_vidModes[] = {
 };
 static int s_numVidModes = (sizeof(r_vidModes) / sizeof(r_vidModes[0]));
 
-qboolean R_GetModeInfo(int* width, int* height, float* windowAspect, int mode)
+bool R_GetModeInfo(int* width, int* height, float* windowAspect, int mode)
 {
     vidmode_t* vm;
 
     if (mode < -1) {
-        return qfalse;
+        return false;
     }
     if (mode >= s_numVidModes) {
-        return qfalse;
+        return false;
     }
 
     if (mode == -1) {
         *width = r_customwidth->integer;
         *height = r_customheight->integer;
         *windowAspect = r_customaspect->value;
-        return qtrue;
+        return true;
     }
 
     vm = &r_vidModes[mode];
@@ -302,7 +302,7 @@ qboolean R_GetModeInfo(int* width, int* height, float* windowAspect, int mode)
     *height = vm->height;
     *windowAspect = (float)vm->width / (vm->height * vm->pixelAspect);
 
-    return qtrue;
+    return true;
 }
 
 /*
@@ -416,7 +416,7 @@ const void* RB_TakeScreenshotCmd(const void* data)
     return (const void*)(cmd + 1);
 }
 
-void R_TakeScreenshot(int x, int y, int width, int height, char* name, qboolean jpeg)
+void R_TakeScreenshot(int x, int y, int width, int height, char* name, bool jpeg)
 {
     static char fileName[MAX_OSPATH]; // bad things if two screenshots per frame?
     screenshotCommand_t* cmd;
@@ -502,12 +502,12 @@ void R_ScreenShot_f(void)
 {
     char checkname[MAX_OSPATH];
     static int lastNumber = -1;
-    qboolean silent;
+    bool silent;
 
     if (!strcmp(ri.Cmd_Argv(1), "silent")) {
-        silent = qtrue;
+        silent = true;
     } else {
-        silent = qfalse;
+        silent = false;
     }
 
     if (ri.Cmd_Argc() == 2 && !silent) {
@@ -539,7 +539,7 @@ void R_ScreenShot_f(void)
         lastNumber++;
     }
 
-    R_TakeScreenshot(0, 0, glConfig.vidWidth, glConfig.vidHeight, checkname, qfalse);
+    R_TakeScreenshot(0, 0, glConfig.vidWidth, glConfig.vidHeight, checkname, false);
 
     if (!silent) {
         ri.Printf(PRINT_ALL, "Wrote %s\n", checkname);
@@ -550,12 +550,12 @@ void R_ScreenShotJPEG_f(void)
 {
     char checkname[MAX_OSPATH];
     static int lastNumber = -1;
-    qboolean silent;
+    bool silent;
 
     if (!strcmp(ri.Cmd_Argv(1), "silent")) {
-        silent = qtrue;
+        silent = true;
     } else {
-        silent = qfalse;
+        silent = false;
     }
 
     if (ri.Cmd_Argc() == 2 && !silent) {
@@ -587,7 +587,7 @@ void R_ScreenShotJPEG_f(void)
         lastNumber++;
     }
 
-    R_TakeScreenshot(0, 0, glConfig.vidWidth, glConfig.vidHeight, checkname, qtrue);
+    R_TakeScreenshot(0, 0, glConfig.vidWidth, glConfig.vidHeight, checkname, true);
 
     if (!silent) {
         ri.Printf(PRINT_ALL, "Wrote %s\n", checkname);
@@ -728,7 +728,7 @@ void R_Register(void)
     r_picmip = ri.Cvar_Get("r_picmip", "1", CVAR_ARCHIVE | CVAR_LATCH);
     r_roundImagesDown = ri.Cvar_Get("r_roundImagesDown", "1", CVAR_ARCHIVE | CVAR_LATCH);
     r_colorMipLevels = ri.Cvar_Get("r_colorMipLevels", "0", CVAR_LATCH);
-    AssertCvarRange(r_picmip, 0, 16, qtrue);
+    AssertCvarRange(r_picmip, 0, 16, true);
     r_detailTextures = ri.Cvar_Get("r_detailtextures", "1", CVAR_ARCHIVE | CVAR_LATCH);
     r_texturebits = ri.Cvar_Get("r_texturebits", "0", CVAR_ARCHIVE | CVAR_LATCH);
     r_colorbits = ri.Cvar_Get("r_colorbits", "0", CVAR_ARCHIVE | CVAR_LATCH);
@@ -754,7 +754,7 @@ void R_Register(void)
 
     // temporary latched variables that can only change over a restart
     r_displayRefresh = ri.Cvar_Get("r_displayRefresh", "0", CVAR_LATCH);
-    AssertCvarRange(r_displayRefresh, 0, 200, qtrue);
+    AssertCvarRange(r_displayRefresh, 0, 200, true);
     r_fullbright = ri.Cvar_Get("r_fullbright", "0", CVAR_LATCH | CVAR_CHEAT);
     r_mapOverBrightBits = ri.Cvar_Get("r_mapOverBrightBits", "2", CVAR_LATCH);
     r_intensity = ri.Cvar_Get("r_intensity", "1", CVAR_LATCH);
@@ -765,7 +765,7 @@ void R_Register(void)
     r_lodbias = ri.Cvar_Get("r_lodbias", "0", CVAR_ARCHIVE);
     r_flares = ri.Cvar_Get("r_flares", "0", CVAR_ARCHIVE);
     r_znear = ri.Cvar_Get("r_znear", "4", CVAR_CHEAT);
-    AssertCvarRange(r_znear, 0.001f, 200, qtrue);
+    AssertCvarRange(r_znear, 0.001f, 200, true);
     r_ignoreGLErrors = ri.Cvar_Get("r_ignoreGLErrors", "1", CVAR_ARCHIVE);
     r_fastsky = ri.Cvar_Get("r_fastsky", "0", CVAR_ARCHIVE);
     r_inGameVideo = ri.Cvar_Get("r_inGameVideo", "1", CVAR_ARCHIVE);
@@ -922,7 +922,7 @@ void R_Init(void)
     ri.Printf(PRINT_ALL, "----- finished R_Init -----\n");
 }
 
-void RE_Shutdown(qboolean destroyWindow)
+void RE_Shutdown(bool destroyWindow)
 {
 
     ri.Printf(PRINT_ALL, "RE_Shutdown( %i )\n", destroyWindow);
@@ -949,7 +949,7 @@ void RE_Shutdown(qboolean destroyWindow)
         GLimp_Shutdown();
     }
 
-    tr.registered = qfalse;
+    tr.registered = false;
 }
 
 /*

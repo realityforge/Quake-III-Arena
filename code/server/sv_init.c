@@ -168,7 +168,7 @@ void SV_BoundMaxClients(int minimum)
     // get the current maxclients value
     Cvar_Get("sv_maxclients", "8", 0);
 
-    sv_maxclients->modified = qfalse;
+    sv_maxclients->modified = false;
 
     if (sv_maxclients->integer < minimum) {
         Cvar_Set("sv_maxclients", va("%i", minimum));
@@ -196,7 +196,7 @@ void SV_Startup(void)
 
     svs.clients = Z_Malloc(sizeof(client_t) * sv_maxclients->integer);
     svs.numSnapshotEntities = sv_maxclients->integer * LOCAL_PACKET_BACKUP * 64;
-    svs.initialized = qtrue;
+    svs.initialized = true;
 
     Cvar_Set("sv_running", "1");
 }
@@ -282,7 +282,7 @@ void SV_TouchCGame(void)
     char filename[MAX_QPATH];
 
     Com_sprintf(filename, sizeof(filename), "vm/%s.qvm", "cgame");
-    FS_FOpenFileRead(filename, &f, qfalse);
+    FS_FOpenFileRead(filename, &f, false);
     if (f) {
         FS_FCloseFile(f);
     }
@@ -297,11 +297,11 @@ clients along with it.
 This is NOT called for map_restart
 ================
 */
-void SV_SpawnServer(char* server, qboolean killBots)
+void SV_SpawnServer(char* server, bool killBots)
 {
     int i;
     int checksum;
-    qboolean isBot;
+    bool isBot;
     char systemInfo[16384];
     const char* p;
 
@@ -366,7 +366,7 @@ void SV_SpawnServer(char* server, qboolean killBots)
     sv.checksumFeed = (((int)rand() << 16) ^ rand()) ^ Com_Milliseconds();
     FS_Restart(sv.checksumFeed);
 
-    CM_LoadMap(va("maps/%s.bsp", server), qfalse, &checksum);
+    CM_LoadMap(va("maps/%s.bsp", server), false, &checksum);
 
     // set serverinfo visible name
     Cvar_Set("mapname", server);
@@ -391,7 +391,7 @@ void SV_SpawnServer(char* server, qboolean killBots)
     SV_InitGameProgs();
 
     // don't allow a map_restart if game is modified
-    sv_gametype->modified = qfalse;
+    sv_gametype->modified = false;
 
     // run a few frames to allow everything to settle
     for (i = 0; i < 3; i++) {
@@ -413,13 +413,13 @@ void SV_SpawnServer(char* server, qboolean killBots)
                     SV_DropClient(&svs.clients[i], "");
                     continue;
                 }
-                isBot = qtrue;
+                isBot = true;
             } else {
-                isBot = qfalse;
+                isBot = false;
             }
 
             // connect the client again
-            denied = VM_ExplicitArgPtr(gvm, VM_Call(gvm, GAME_CLIENT_CONNECT, i, qfalse, isBot)); // firstTime = qfalse
+            denied = VM_ExplicitArgPtr(gvm, VM_Call(gvm, GAME_CLIENT_CONNECT, i, false, isBot)); // firstTime = false
             if (denied) {
                 // this generally shouldn't happen, because the client
                 // was connected before the level change
@@ -642,6 +642,6 @@ void SV_Shutdown(char* finalmsg)
 
 #ifndef DEDICATED
     // disconnect any local clients
-    CL_Disconnect(qfalse);
+    CL_Disconnect(false);
 #endif
 }

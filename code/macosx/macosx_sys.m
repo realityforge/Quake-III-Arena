@@ -41,7 +41,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #import "macosx_timers.h"
 #endif
 
-qboolean stdin_active = qfalse;
+bool stdin_active = false;
 
 //===========================================================================
 
@@ -50,7 +50,7 @@ int main(int argc, const char* argv[])
 #ifdef DEDICATED
     Q3Controller* controller;
 
-    stdin_active = qtrue;
+    stdin_active = true;
     controller = [[Q3Controller alloc] init];
     [controller quakeMain];
     return 0;

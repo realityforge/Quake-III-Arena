@@ -82,20 +82,20 @@ static void CG_ScoresDown_f(void)
         // leave the current scores up if they were already
         // displayed, but if this is the first hit, clear them out
         if (!cg.showScores) {
-            cg.showScores = qtrue;
+            cg.showScores = true;
             cg.numScores = 0;
         }
     } else {
         // show the cached contents even if they just pressed if it
         // is within two seconds
-        cg.showScores = qtrue;
+        cg.showScores = true;
     }
 }
 
 static void CG_ScoresUp_f(void)
 {
     if (cg.showScores) {
-        cg.showScores = qfalse;
+        cg.showScores = false;
         cg.scoreFadeTime = cg.time;
     }
 }
@@ -126,18 +126,18 @@ static void CG_LoadHud_f(void)
 static void CG_scrollScoresDown_f(void)
 {
     if (menuScoreboard && cg.scoreBoardShowing) {
-        Menu_ScrollFeeder(menuScoreboard, FEEDER_SCOREBOARD, qtrue);
-        Menu_ScrollFeeder(menuScoreboard, FEEDER_REDTEAM_LIST, qtrue);
-        Menu_ScrollFeeder(menuScoreboard, FEEDER_BLUETEAM_LIST, qtrue);
+        Menu_ScrollFeeder(menuScoreboard, FEEDER_SCOREBOARD, true);
+        Menu_ScrollFeeder(menuScoreboard, FEEDER_REDTEAM_LIST, true);
+        Menu_ScrollFeeder(menuScoreboard, FEEDER_BLUETEAM_LIST, true);
     }
 }
 
 static void CG_scrollScoresUp_f(void)
 {
     if (menuScoreboard && cg.scoreBoardShowing) {
-        Menu_ScrollFeeder(menuScoreboard, FEEDER_SCOREBOARD, qfalse);
-        Menu_ScrollFeeder(menuScoreboard, FEEDER_REDTEAM_LIST, qfalse);
-        Menu_ScrollFeeder(menuScoreboard, FEEDER_BLUETEAM_LIST, qfalse);
+        Menu_ScrollFeeder(menuScoreboard, FEEDER_SCOREBOARD, false);
+        Menu_ScrollFeeder(menuScoreboard, FEEDER_REDTEAM_LIST, false);
+        Menu_ScrollFeeder(menuScoreboard, FEEDER_BLUETEAM_LIST, false);
     }
 }
 
@@ -270,7 +270,7 @@ static void CG_NextOrder_f(void)
     } else {
         cgs.currentOrder = TEAMTASK_OFFENSE;
     }
-    cgs.orderPending = qtrue;
+    cgs.orderPending = true;
     cgs.orderTime = cg.time + 3000;
 }
 
@@ -470,7 +470,7 @@ The string has been tokenized and can be retrieved with
 Cmd_Argc() / Cmd_Argv()
 =================
 */
-qboolean CG_ConsoleCommand(void)
+bool CG_ConsoleCommand(void)
 {
     const char* cmd;
     int i;
@@ -480,11 +480,11 @@ qboolean CG_ConsoleCommand(void)
     for (i = 0; i < sizeof(commands) / sizeof(commands[0]); i++) {
         if (!Q_stricmp(cmd, commands[i].cmd)) {
             commands[i].function();
-            return qtrue;
+            return true;
         }
     }
 
-    return qfalse;
+    return false;
 }
 
 /*

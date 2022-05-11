@@ -37,12 +37,12 @@ cvar_t* r_enablerender; // Enable actual rendering
 cvar_t* r_appleTransformHint; // Enable Apple transform hint
 
 static void GLW_InitExtensions(void);
-static qboolean CreateGameWindow(qboolean isSecondTry);
+static bool CreateGameWindow(bool isSecondTry);
 static unsigned long Sys_QueryVideoMemory();
 static CGDisplayErr Sys_CaptureActiveDisplays(void);
 
 glwstate_t glw_state;
-qboolean Sys_IsHidden = qfalse;
+bool Sys_IsHidden = false;
 
 #ifdef OMNI_TIMER
 OTStampList glThreadStampList;
@@ -102,11 +102,11 @@ void QGLCheckError(const char* message)
 ** GLimp_SetMode
 */
 
-qboolean GLimp_SetMode(qboolean isSecondTry)
+bool GLimp_SetMode(bool isSecondTry)
 {
     if (!CreateGameWindow(isSecondTry)) {
         ri.Printf(PRINT_ALL, "GLimp_Init: window could not be created!\n");
-        return qfalse;
+        return false;
     }
 
     // draw something to show that GL is alive
@@ -124,7 +124,7 @@ qboolean GLimp_SetMode(qboolean isSecondTry)
 
     CheckErrors();
 
-    return qtrue;
+    return true;
 }
 
 #define ADD_ATTR(x)                                                                                           \
@@ -218,7 +218,7 @@ static void ReleaseAllDisplays()
     }
 }
 
-static qboolean CreateGameWindow(qboolean isSecondTry)
+static bool CreateGameWindow(bool isSecondTry)
 {
     const char* windowed[] = { "Windowed", "Fullscreen" };
     int current_mode;
@@ -238,7 +238,7 @@ static qboolean CreateGameWindow(qboolean isSecondTry)
     ri.Printf(PRINT_ALL, "...setting mode %d:\n", current_mode);
     if (!R_GetModeInfo(&glConfig.vidWidth, &glConfig.vidHeight, &glConfig.windowAspect, current_mode)) {
         ri.Printf(PRINT_ALL, " invalid mode\n");
-        return qfalse;
+        return false;
     }
     ri.Printf(PRINT_ALL, " %d %d %s\n", glConfig.vidWidth, glConfig.vidHeight, windowed[glConfig.isFullscreen]);
 
@@ -250,7 +250,7 @@ static qboolean CreateGameWindow(qboolean isSecondTry)
         glw_state.gameMode = Sys_GetMatchingDisplayMode(isSecondTry);
         if (!glw_state.gameMode) {
             ri.Printf(PRINT_ALL, "Unable to find requested display mode.\n");
-            return qfalse;
+            return false;
         }
 
         // Fade all screens to black
@@ -260,7 +260,7 @@ static qboolean CreateGameWindow(qboolean isSecondTry)
         if (err != CGDisplayNoErr) {
             CGDisplayRestoreColorSyncSettings();
             ri.Printf(PRINT_ALL, " Unable to capture displays err = %d\n", err);
-            return qfalse;
+            return false;
         }
 
         err = CGDisplaySwitchToMode(glw_state.display, (CFDictionaryRef)glw_state.gameMode);
@@ -268,7 +268,7 @@ static qboolean CreateGameWindow(qboolean isSecondTry)
             CGDisplayRestoreColorSyncSettings();
             ReleaseAllDisplays();
             ri.Printf(PRINT_ALL, " Unable to set display mode, err = %d\n", err);
-            return qfalse;
+            return false;
         }
     } else {
         glw_state.gameMode = glw_state.desktopMode;
@@ -284,7 +284,7 @@ static qboolean CreateGameWindow(qboolean isSecondTry)
         CGDisplaySwitchToMode(glw_state.display, (CFDictionaryRef)glw_state.desktopMode);
         ReleaseAllDisplays();
         ri.Printf(PRINT_ALL, " No pixel format found\n");
-        return qfalse;
+        return false;
     }
 
     // Create a context with the desired pixel attributes
@@ -294,7 +294,7 @@ static qboolean CreateGameWindow(qboolean isSecondTry)
         CGDisplaySwitchToMode(glw_state.display, (CFDictionaryRef)glw_state.desktopMode);
         ReleaseAllDisplays();
         ri.Printf(PRINT_ALL, "... +[NSOpenGLContext createWithFormat:share:] failed.\n");
-        return qfalse;
+        return false;
     }
 
     if (!glConfig.isFullscreen) {
@@ -338,7 +338,7 @@ static qboolean CreateGameWindow(qboolean isSecondTry)
             CGDisplaySwitchToMode(glw_state.display, (CFDictionaryRef)glw_state.desktopMode);
             ReleaseAllDisplays();
             Com_Printf("CGLSetFullScreen -> %d (%s)\n", err, CGLErrorString(err));
-            return qfalse;
+            return false;
         }
 
         Sys_SetMouseInputRect(CGDisplayBounds(glw_state.display));
@@ -358,7 +358,7 @@ static qboolean CreateGameWindow(qboolean isSecondTry)
 
     ri.Printf(PRINT_ALL, "ok\n");
 
-    return qtrue;
+    return true;
 }
 
 // This can be used to temporarily disassociate the GL context from the screen so that CoreGraphics can be used to draw to the screen.
@@ -447,7 +447,7 @@ void GLimp_Init(void)
         ri.Error(ERR_FATAL, "Could not initialize OpenGL.  There does not appear to be an OpenGL-supported video card in your system.\n");
     }
 
-    if (!GLimp_SetMode(qfalse)) {
+    if (!GLimp_SetMode(false)) {
         // fall back to the known-good mode
         ri.Cvar_Set("r_fullscreen", "1");
         ri.Cvar_Set("r_mode", "3");
@@ -455,7 +455,7 @@ void GLimp_Init(void)
         ri.Cvar_Set("r_depthBits", "16");
         ri.Cvar_Set("r_colorBits", "16");
         ri.Cvar_Set("r_stencilBits", "0");
-        if (GLimp_SetMode(qtrue)) {
+        if (GLimp_SetMode(true)) {
             ri.Printf(PRINT_ALL, "------------------\n");
             return;
         }
@@ -501,7 +501,7 @@ void GLimp_EndFrame(void)
 
     // swapinterval stuff
     if (r_swapInterval->modified) {
-        r_swapInterval->modified = qfalse;
+        r_swapInterval->modified = false;
 
         if (!glConfig.stereoEnabled) { // why?
             [[NSOpenGLContext currentContext] setValues:(long*)&r_swapInterval->integer
@@ -644,14 +644,14 @@ void GLimp_SetGamma(unsigned char red[256],
     Sys_GetGammaTable(&glw_state.inGameTable);
 }
 
-qboolean GLimp_ChangeMode(int mode)
+bool GLimp_ChangeMode(int mode)
 {
-    qboolean result;
+    bool result;
     int oldvalue = r_mode->integer;
 
     Com_Printf("*** GLimp_ChangeMode\n");
     r_mode->integer = mode;
-    if (!(result = GLimp_SetMode(qfalse)))
+    if (!(result = GLimp_SetMode(false)))
         r_mode->integer = oldvalue;
 
     return result;
@@ -712,13 +712,13 @@ static void GLW_InitExtensions(void)
 
 #ifdef GL_EXT_texture_env_add
     // GL_EXT_texture_env_add
-    glConfig.textureEnvAddAvailable = qfalse;
+    glConfig.textureEnvAddAvailable = false;
     if (strstr(glConfig.extensions_string, "GL_EXT_texture_env_add")) {
         if (r_ext_texture_env_add->integer) {
-            glConfig.textureEnvAddAvailable = qtrue;
+            glConfig.textureEnvAddAvailable = true;
             ri.Printf(PRINT_ALL, "...using GL_EXT_texture_env_add\n");
         } else {
-            glConfig.textureEnvAddAvailable = qfalse;
+            glConfig.textureEnvAddAvailable = false;
             ri.Printf(PRINT_ALL, "...ignoring GL_EXT_texture_env_add\n");
         }
     } else {
@@ -731,10 +731,10 @@ static void GLW_InitExtensions(void)
     if (!glConfig.textureEnvAddAvailable) {
         if (strstr(glConfig.extensions_string, "GL_ARB_texture_env_add")) {
             if (r_ext_texture_env_add->integer) {
-                glConfig.textureEnvAddAvailable = qtrue;
+                glConfig.textureEnvAddAvailable = true;
                 ri.Printf(PRINT_ALL, "...using GL_ARB_texture_env_add\n");
             } else {
-                glConfig.textureEnvAddAvailable = qfalse;
+                glConfig.textureEnvAddAvailable = false;
                 ri.Printf(PRINT_ALL, "...ignoring GL_ARB_texture_env_add\n");
             }
         } else {
@@ -745,7 +745,7 @@ static void GLW_InitExtensions(void)
 
     if (r_swapInterval) {
         ri.Printf(PRINT_ALL, "...using +[NSOpenGLContext setParameter:] for qwglSwapIntervalEXT\n");
-        r_swapInterval->modified = qtrue; // force a set next frame
+        r_swapInterval->modified = true; // force a set next frame
     }
 
     // GL_ARB_multitexture
@@ -883,17 +883,17 @@ static unsigned long Sys_QueryVideoMemory()
 }
 
 // We will set the Sys_IsHidden global to cause input to be handle differently (we'll just let NSApp handle events in this case).  We also will unbind the GL context and restore the video mode.
-qboolean Sys_Hide()
+bool Sys_Hide()
 {
     if (Sys_IsHidden)
         // Eh?
-        return qfalse;
+        return false;
 
     if (!r_fullscreen->integer)
         // We only support hiding in fullscreen mode right now
-        return qfalse;
+        return false;
 
-    Sys_IsHidden = qtrue;
+    Sys_IsHidden = true;
 
     // Don't need to store the current gamma since we always keep it around in glw_state.inGameTable.
 
@@ -923,7 +923,7 @@ qboolean Sys_Hide()
     // Hide the application so that when the user clicks on our app icon, we'll get an unhide notification
     [NSApp hide:nil];
 
-    return qtrue;
+    return true;
 }
 
 static CGDisplayErr Sys_CaptureActiveDisplays(void)
@@ -940,14 +940,14 @@ static CGDisplayErr Sys_CaptureActiveDisplays(void)
     return CGDisplayNoErr;
 }
 
-qboolean Sys_Unhide()
+bool Sys_Unhide()
 {
     CGDisplayErr err;
     CGLError glErr;
 
     if (!Sys_IsHidden)
         // Eh?
-        return qfalse;
+        return false;
 
     Sys_FadeScreens();
 
@@ -956,7 +956,7 @@ qboolean Sys_Unhide()
     if (err != CGDisplayNoErr) {
         Sys_UnfadeScreens();
         ri.Printf(PRINT_ALL, "Unhide failed -- cannot capture the display again.\n");
-        return qfalse;
+        return false;
     }
 
     // Restore the game mode
@@ -965,7 +965,7 @@ qboolean Sys_Unhide()
         ReleaseAllDisplays();
         Sys_UnfadeScreens();
         ri.Printf(PRINT_ALL, "Unhide failed -- Unable to set display mode\n");
-        return qfalse;
+        return false;
     }
 
     // Reassociate the GL context and the screen
@@ -974,7 +974,7 @@ qboolean Sys_Unhide()
         ReleaseAllDisplays();
         Sys_UnfadeScreens();
         ri.Printf(PRINT_ALL, "Unhide failed: CGLSetFullScreen -> %d (%s)\n", err, CGLErrorString(err));
-        return qfalse;
+        return false;
     }
 
     // Restore the current context
@@ -986,6 +986,6 @@ qboolean Sys_Unhide()
     // Restore the input system (last so if something goes wrong we don't eat the mouse)
     Sys_InitInput();
 
-    Sys_IsHidden = qfalse;
-    return qtrue;
+    Sys_IsHidden = false;
+    return true;
 }

@@ -219,7 +219,7 @@ void EA_EndRegular(int client, float thinktime)
 {
     /*
             bot_input_t *bi;
-            int jumped = qfalse;
+            int jumped = false;
 
             bi = &botinputs[client];
 
@@ -239,7 +239,7 @@ void EA_EndRegular(int client, float thinktime)
 void EA_GetInput(int client, float thinktime, bot_input_t* input)
 {
     bot_input_t* bi;
-    //	int jumped = qfalse;
+    //	int jumped = false;
 
     bi = &botinputs[client];
 
@@ -260,7 +260,7 @@ void EA_GetInput(int client, float thinktime, bot_input_t* input)
 void EA_ResetInput(int client)
 {
     bot_input_t* bi;
-    int jumped = qfalse;
+    int jumped = false;
 
     bi = &botinputs[client];
     bi->actionflags &= ~ACTION_JUMPEDLASTFRAME;

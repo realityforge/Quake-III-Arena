@@ -66,7 +66,7 @@ typedef struct {
 
 static errorMessage_t s_errorMessage;
 
-static void MainMenu_ExitAction(qboolean result)
+static void MainMenu_ExitAction(bool result)
 {
     if (!result) {
         return;
@@ -203,7 +203,7 @@ static void Main_MenuDraw(void)
     UI_DrawString(320, 450, "Quake III Arena(c) 1999-2000, Id Software, Inc.  All Rights Reserved", UI_CENTER | UI_SMALLFONT, color);
 }
 
-static qboolean UI_TeamArenaExists(void)
+static bool UI_TeamArenaExists(void)
 {
     int numdirs;
     char dirlist[2048];
@@ -218,11 +218,11 @@ static qboolean UI_TeamArenaExists(void)
         dirlen = strlen(dirptr) + 1;
         descptr = dirptr + dirlen;
         if (Q_stricmp(dirptr, "missionpack") == 0) {
-            return qtrue;
+            return true;
         }
         dirptr += dirlen + strlen(descptr) + 1;
     }
-    return qfalse;
+    return false;
 }
 
 /*
@@ -237,7 +237,7 @@ and that local cinematics are killed
 void UI_MainMenu(void)
 {
     int y;
-    qboolean teamArena = qfalse;
+    bool teamArena = false;
     int style = UI_CENTER | UI_DROPSHADOW;
 
     trap_Cvar_Set("sv_killserver", "1");
@@ -252,9 +252,9 @@ void UI_MainMenu(void)
     if (strlen(s_errorMessage.errorMessage)) {
         s_errorMessage.menu.draw = Main_MenuDraw;
         s_errorMessage.menu.key = ErrorMessage_Key;
-        s_errorMessage.menu.fullscreen = qtrue;
-        s_errorMessage.menu.wrapAround = qtrue;
-        s_errorMessage.menu.showlogo = qtrue;
+        s_errorMessage.menu.fullscreen = true;
+        s_errorMessage.menu.wrapAround = true;
+        s_errorMessage.menu.showlogo = true;
 
         trap_Key_SetCatcher(KEYCATCH_UI);
         uis.menusp = 0;
@@ -264,9 +264,9 @@ void UI_MainMenu(void)
     }
 
     s_main.menu.draw = Main_MenuDraw;
-    s_main.menu.fullscreen = qtrue;
-    s_main.menu.wrapAround = qtrue;
-    s_main.menu.showlogo = qtrue;
+    s_main.menu.fullscreen = true;
+    s_main.menu.wrapAround = true;
+    s_main.menu.showlogo = true;
 
     y = 134;
     s_main.singleplayer.generic.type = MTYPE_PTEXT;
@@ -324,7 +324,7 @@ void UI_MainMenu(void)
     s_main.cinematics.style = style;
 
     if (UI_TeamArenaExists()) {
-        teamArena = qtrue;
+        teamArena = true;
         y += MAIN_MENU_VERTICAL_SPACING;
         s_main.teamArena.generic.type = MTYPE_PTEXT;
         s_main.teamArena.generic.flags = QMF_CENTER_JUSTIFY | QMF_PULSEIFFOCUS;

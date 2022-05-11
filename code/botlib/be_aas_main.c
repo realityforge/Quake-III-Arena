@@ -92,7 +92,7 @@ int AAS_Initialized(void)
 }
 void AAS_SetInitialized(void)
 {
-    aasworld.initialized = qtrue;
+    aasworld.initialized = true;
     botimport.Print(PRT_MESSAGE, "AAS initialized.\n");
 #ifdef DEBUG
     // create all the routing cache
@@ -214,7 +214,7 @@ int AAS_LoadMap(const char* mapname)
     if (!mapname) {
         return 0;
     }
-    aasworld.initialized = qfalse;
+    aasworld.initialized = false;
     // NOTE: free the routing caches before loading a new map because
     //  to free the caches the old number of areas, number of clusters
     //  and number of areas in a clusters must be available
@@ -222,7 +222,7 @@ int AAS_LoadMap(const char* mapname)
     // load the map
     errnum = AAS_LoadFiles(mapname);
     if (errnum != BLERR_NOERROR) {
-        aasworld.loaded = qfalse;
+        aasworld.loaded = false;
         return errnum;
     }
     AAS_InitSettings();
@@ -276,7 +276,7 @@ void AAS_Shutdown(void)
     // clear the aasworld structure
     memset(&aasworld, 0, sizeof(aas_t));
     // aas has not been initialized
-    aasworld.initialized = qfalse;
+    aasworld.initialized = false;
     // NOTE: as soon as a new .bsp file is loaded the .bsp file memory is
     //  freed an reallocated, so there's no need to free that memory here
     // print shutdown

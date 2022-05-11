@@ -139,7 +139,7 @@ static void SV_Map_f(void)
 {
     char* cmd;
     char* map;
-    qboolean killBots, cheat;
+    bool killBots, cheat;
     char expanded[MAX_QPATH];
     char mapname[MAX_QPATH];
 
@@ -166,15 +166,15 @@ static void SV_Map_f(void)
         // may not set sv_maxclients directly, always set latched
         Cvar_SetLatched("sv_maxclients", "8");
         cmd += 2;
-        cheat = qfalse;
-        killBots = qtrue;
+        cheat = false;
+        killBots = true;
     } else {
         if (!Q_stricmp(cmd, "devmap") || !Q_stricmp(cmd, "spdevmap")) {
-            cheat = qtrue;
-            killBots = qtrue;
+            cheat = true;
+            killBots = true;
         } else {
-            cheat = qfalse;
-            killBots = qfalse;
+            cheat = false;
+            killBots = false;
         }
         if (sv_gametype->integer == GT_SINGLE_PLAYER) {
             Cvar_SetValue("g_gametype", GT_FFA);
@@ -212,7 +212,7 @@ static void SV_MapRestart_f(void)
     int i;
     client_t* client;
     char* denied;
-    qboolean isBot;
+    bool isBot;
     int delay;
 
     // make sure we aren't restarting twice in the same frame
@@ -250,7 +250,7 @@ static void SV_MapRestart_f(void)
         // restart the map the slow way
         Q_strncpyz(mapname, Cvar_VariableString("mapname"), sizeof(mapname));
 
-        SV_SpawnServer(mapname, qfalse);
+        SV_SpawnServer(mapname, false);
         return;
     }
 
@@ -267,7 +267,7 @@ static void SV_MapRestart_f(void)
     // note that we do NOT set sv.state = SS_LOADING, so configstrings that
     // had been changed from their default values will generate broadcast updates
     sv.state = SS_LOADING;
-    sv.restarting = qtrue;
+    sv.restarting = true;
 
     SV_RestartGameProgs();
 
@@ -278,7 +278,7 @@ static void SV_MapRestart_f(void)
     }
 
     sv.state = SS_GAME;
-    sv.restarting = qfalse;
+    sv.restarting = false;
 
     // connect and begin all the clients
     for (i = 0; i < sv_maxclients->integer; i++) {
@@ -290,16 +290,16 @@ static void SV_MapRestart_f(void)
         }
 
         if (client->netchan.remoteAddress.type == NA_BOT) {
-            isBot = qtrue;
+            isBot = true;
         } else {
-            isBot = qfalse;
+            isBot = false;
         }
 
         // add the map_restart command
         SV_AddServerCommand(client, "map_restart\n");
 
         // connect the client again, without the firstTime flag
-        denied = VM_ExplicitArgPtr(gvm, VM_Call(gvm, GAME_CLIENT_CONNECT, i, qfalse, isBot));
+        denied = VM_ExplicitArgPtr(gvm, VM_Call(gvm, GAME_CLIENT_CONNECT, i, false, isBot));
         if (denied) {
             // this generally shouldn't happen, because the client
             // was connected before the level change
@@ -582,12 +582,12 @@ static void SV_KillServer_f(void)
 
 void SV_AddOperatorCommands(void)
 {
-    static qboolean initialized;
+    static bool initialized;
 
     if (initialized) {
         return;
     }
-    initialized = qtrue;
+    initialized = true;
 
     Cmd_AddCommand("kick", SV_Kick_f);
     Cmd_AddCommand("clientkick", SV_KickNum_f);

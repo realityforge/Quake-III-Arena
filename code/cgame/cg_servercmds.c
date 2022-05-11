@@ -270,13 +270,13 @@ static void CG_ConfigStringModified(void)
         cgs.levelStartTime = atoi(str);
     } else if (num == CS_VOTE_TIME) {
         cgs.voteTime = atoi(str);
-        cgs.voteModified = qtrue;
+        cgs.voteModified = true;
     } else if (num == CS_VOTE_YES) {
         cgs.voteYes = atoi(str);
-        cgs.voteModified = qtrue;
+        cgs.voteModified = true;
     } else if (num == CS_VOTE_NO) {
         cgs.voteNo = atoi(str);
-        cgs.voteModified = qtrue;
+        cgs.voteModified = true;
     } else if (num == CS_VOTE_STRING) {
         Q_strncpyz(cgs.voteString, str, sizeof(cgs.voteString));
 #ifdef MISSIONPACK
@@ -284,13 +284,13 @@ static void CG_ConfigStringModified(void)
 #endif // MISSIONPACK
     } else if (num >= CS_TEAMVOTE_TIME && num <= CS_TEAMVOTE_TIME + 1) {
         cgs.teamVoteTime[num - CS_TEAMVOTE_TIME] = atoi(str);
-        cgs.teamVoteModified[num - CS_TEAMVOTE_TIME] = qtrue;
+        cgs.teamVoteModified[num - CS_TEAMVOTE_TIME] = true;
     } else if (num >= CS_TEAMVOTE_YES && num <= CS_TEAMVOTE_YES + 1) {
         cgs.teamVoteYes[num - CS_TEAMVOTE_YES] = atoi(str);
-        cgs.teamVoteModified[num - CS_TEAMVOTE_YES] = qtrue;
+        cgs.teamVoteModified[num - CS_TEAMVOTE_YES] = true;
     } else if (num >= CS_TEAMVOTE_NO && num <= CS_TEAMVOTE_NO + 1) {
         cgs.teamVoteNo[num - CS_TEAMVOTE_NO] = atoi(str);
-        cgs.teamVoteModified[num - CS_TEAMVOTE_NO] = qtrue;
+        cgs.teamVoteModified[num - CS_TEAMVOTE_NO] = true;
     } else if (num >= CS_TEAMVOTE_STRING && num <= CS_TEAMVOTE_STRING + 1) {
         Q_strncpyz(cgs.teamVoteString[num - CS_TEAMVOTE_STRING], str, sizeof(cgs.teamVoteString));
 #ifdef MISSIONPACK
@@ -302,7 +302,7 @@ static void CG_ConfigStringModified(void)
         cgs.gameModels[num - CS_MODELS] = trap_R_RegisterModel(str);
     } else if (num >= CS_SOUNDS && num < CS_SOUNDS + MAX_MODELS) {
         if (str[0] != '*') { // player specific sounds don't register here
-            cgs.gameSounds[num - CS_SOUNDS] = trap_S_RegisterSound(str, qfalse);
+            cgs.gameSounds[num - CS_SOUNDS] = trap_S_RegisterSound(str, false);
         }
     } else if (num >= CS_PLAYERS && num < CS_PLAYERS + MAX_CLIENTS) {
         CG_NewClientInfo(num - CS_PLAYERS);
@@ -417,15 +417,15 @@ static void CG_MapRestart(void)
 
     cg.timelimitWarnings = 0;
 
-    cg.intermissionStarted = qfalse;
+    cg.intermissionStarted = false;
 
     cgs.voteTime = 0;
 
-    cg.mapRestart = qtrue;
+    cg.mapRestart = true;
 
     CG_StartMusic();
 
-    trap_S_ClearLoopingSounds(qtrue);
+    trap_S_ClearLoopingSounds(true);
 
     // we really should clear more parts of cg here and stop sounds
 
@@ -482,23 +482,23 @@ int CG_ParseVoiceChats(const char* filename, voiceChatList_t* voiceChatList, int
     char **p, *ptr;
     char* token;
     voiceChat_t* voiceChats;
-    qboolean compress;
+    bool compress;
     sfxHandle_t sound;
 
-    compress = qtrue;
+    compress = true;
     if (cg_buildScript.integer) {
-        compress = qfalse;
+        compress = false;
     }
 
     len = trap_FS_FOpenFile(filename, &f, FS_READ);
     if (!f) {
         trap_Print(va(S_COLOR_RED "voice chat file not found: %s\n", filename));
-        return qfalse;
+        return false;
     }
     if (len >= MAX_VOICEFILESIZE) {
         trap_Print(va(S_COLOR_RED "voice chat file too large: %s is %i, max allowed is %i", filename, len, MAX_VOICEFILESIZE));
         trap_FS_FCloseFile(f);
-        return qfalse;
+        return false;
     }
 
     trap_FS_Read(buf, len, f);
@@ -513,9 +513,9 @@ int CG_ParseVoiceChats(const char* filename, voiceChatList_t* voiceChatList, int
     for (i = 0; i < maxVoiceChats; i++) {
         voiceChats[i].id[0] = 0;
     }
-    token = COM_ParseExt(p, qtrue);
+    token = COM_ParseExt(p, true);
     if (!token || token[0] == 0) {
-        return qtrue;
+        return true;
     }
     if (!Q_stricmp(token, "female")) {
         voiceChatList->gender = GENDER_FEMALE;
@@ -525,34 +525,34 @@ int CG_ParseVoiceChats(const char* filename, voiceChatList_t* voiceChatList, int
         voiceChatList->gender = GENDER_NEUTER;
     } else {
         trap_Print(va(S_COLOR_RED "expected gender not found in voice chat file: %s\n", filename));
-        return qfalse;
+        return false;
     }
 
     voiceChatList->numVoiceChats = 0;
     while (1) {
-        token = COM_ParseExt(p, qtrue);
+        token = COM_ParseExt(p, true);
         if (!token || token[0] == 0) {
-            return qtrue;
+            return true;
         }
         Com_sprintf(voiceChats[voiceChatList->numVoiceChats].id, sizeof(voiceChats[voiceChatList->numVoiceChats].id), "%s", token);
-        token = COM_ParseExt(p, qtrue);
+        token = COM_ParseExt(p, true);
         if (Q_stricmp(token, "{")) {
             trap_Print(va(S_COLOR_RED "expected { found %s in voice chat file: %s\n", token, filename));
-            return qfalse;
+            return false;
         }
         voiceChats[voiceChatList->numVoiceChats].numSounds = 0;
         while (1) {
-            token = COM_ParseExt(p, qtrue);
+            token = COM_ParseExt(p, true);
             if (!token || token[0] == 0) {
-                return qtrue;
+                return true;
             }
             if (!Q_stricmp(token, "}"))
                 break;
             sound = trap_S_RegisterSound(token, compress);
             voiceChats[voiceChatList->numVoiceChats].sounds[voiceChats[voiceChatList->numVoiceChats].numSounds] = sound;
-            token = COM_ParseExt(p, qtrue);
+            token = COM_ParseExt(p, true);
             if (!token || token[0] == 0) {
-                return qtrue;
+                return true;
             }
             Com_sprintf(voiceChats[voiceChatList->numVoiceChats].chats[voiceChats[voiceChatList->numVoiceChats].numSounds], MAX_CHATSIZE, "%s", token);
             if (sound)
@@ -562,9 +562,9 @@ int CG_ParseVoiceChats(const char* filename, voiceChatList_t* voiceChatList, int
         }
         voiceChatList->numVoiceChats++;
         if (voiceChatList->numVoiceChats >= maxVoiceChats)
-            return qtrue;
+            return true;
     }
-    return qtrue;
+    return true;
 }
 
 void CG_LoadVoiceChats(void)
@@ -609,7 +609,7 @@ int CG_HeadModelVoiceChats(char* filename)
     ptr = buf;
     p = &ptr;
 
-    token = COM_ParseExt(p, qtrue);
+    token = COM_ParseExt(p, true);
     if (!token || token[0] == 0) {
         return -1;
     }
@@ -634,10 +634,10 @@ int CG_GetVoiceChat(voiceChatList_t* voiceChatList, const char* id, sfxHandle_t*
             rnd = random() * voiceChatList->voiceChats[i].numSounds;
             *snd = voiceChatList->voiceChats[i].sounds[rnd];
             *chat = voiceChatList->voiceChats[i].chats[rnd];
-            return qtrue;
+            return true;
         }
     }
-    return qfalse;
+    return false;
 }
 
 voiceChatList_t* CG_VoiceChatListForClient(int clientNum)
@@ -797,7 +797,7 @@ void CG_AddBufferedVoiceChat(bufferedVoiceChat_t* vchat)
 #endif
 }
 
-void CG_VoiceChatLocal(int mode, qboolean voiceOnly, int clientNum, int color, const char* cmd)
+void CG_VoiceChatLocal(int mode, bool voiceOnly, int clientNum, int color, const char* cmd)
 {
 #ifdef MISSIONPACK
     char* chat;
@@ -844,7 +844,7 @@ void CG_VoiceChat(int mode)
 #ifdef MISSIONPACK
     const char* cmd;
     int clientNum, color;
-    qboolean voiceOnly;
+    bool voiceOnly;
 
     voiceOnly = atoi(CG_Argv(1));
     clientNum = atoi(CG_Argv(2));
@@ -981,7 +981,7 @@ static void CG_ServerCommand(void)
     // clientLevelShot is sent before taking a special screenshot for
     // the menu system during development
     if (!strcmp(cmd, "clientLevelShot")) {
-        cg.levelShot = qtrue;
+        cg.levelShot = true;
         return;
     }
 

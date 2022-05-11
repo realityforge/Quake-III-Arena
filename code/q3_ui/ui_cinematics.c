@@ -101,7 +101,7 @@ static void UI_CinematicsMenu_Init(void)
     UI_CinematicsMenu_Cache();
 
     memset(&cinematicsMenuInfo, 0, sizeof(cinematicsMenuInfo));
-    cinematicsMenuInfo.menu.fullscreen = qtrue;
+    cinematicsMenuInfo.menu.fullscreen = true;
 
     cinematicsMenuInfo.banner.generic.type = MTYPE_BTEXT;
     cinematicsMenuInfo.banner.generic.x = 320;

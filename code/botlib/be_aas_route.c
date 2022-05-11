@@ -457,7 +457,7 @@ int AAS_FreeOldestCache(void)
         float besttime;
         aas_routingcache_t *cache, *bestcache;
 
-        freed = qfalse;
+        freed = false;
         besttime = 999999999;
         bestcache = NULL;
         bestcluster = 0;
@@ -489,7 +489,7 @@ int AAS_FreeOldestCache(void)
                 else aasworld.clusterareacache[bestcluster][bestarea] = cache->next;
                 if (cache->next) cache->next->prev = cache->prev;
                 AAS_FreeRoutingCache(cache);
-                freed = qtrue;
+                freed = true;
         }
         besttime = 999999999;
         bestcache = NULL;
@@ -514,7 +514,7 @@ int AAS_FreeOldestCache(void)
                 else aasworld.portalcache[bestarea] = cache->next;
                 if (cache->next) cache->next->prev = cache->prev;
                 AAS_FreeRoutingCache(cache);
-                freed = qtrue;
+                freed = true;
         }
         return freed;
 }
@@ -553,9 +553,9 @@ int AAS_FreeOldestCache(void)
                 cache->next->prev = cache->prev;
         }
         AAS_FreeRoutingCache(cache);
-        return qtrue;
+        return true;
     }
-    return qfalse;
+    return false;
 }
 aas_routingcache_t* AAS_AllocRoutingCache(int numtraveltimes)
 {
@@ -665,7 +665,7 @@ void AAS_CreateAllRoutingCache(void)
 {
     int i, j, t;
 
-    aasworld.initialized = qtrue;
+    aasworld.initialized = true;
     botimport.Print(PRT_MESSAGE, "AAS_CreateAllRoutingCache\n");
     for (i = 1; i < aasworld.numareas; i++) {
         if (!AAS_AreaReachability(i))
@@ -679,7 +679,7 @@ void AAS_CreateAllRoutingCache(void)
             // Log_Write("traveltime from %d to %d is %d", i, j, t);
         }
     }
-    aasworld.initialized = qfalse;
+    aasworld.initialized = false;
 }
 
 // the route cache header
@@ -785,28 +785,28 @@ int AAS_ReadRouteCache(void)
     Com_sprintf(filename, MAX_QPATH, "maps/%s.rcd", aasworld.mapname);
     botimport.FS_FOpenFile(filename, &fp, FS_READ);
     if (!fp) {
-        return qfalse;
+        return false;
     }
     botimport.FS_Read(&routecacheheader, sizeof(routecacheheader_t), fp);
     if (routecacheheader.ident != RCID) {
         AAS_Error("%s is not a route cache dump\n");
-        return qfalse;
+        return false;
     }
     if (routecacheheader.version != RCVERSION) {
         AAS_Error("route cache dump has wrong version %d, should be %d", routecacheheader.version, RCVERSION);
-        return qfalse;
+        return false;
     }
     if (routecacheheader.numareas != aasworld.numareas) {
-        return qfalse;
+        return false;
     }
     if (routecacheheader.numclusters != aasworld.numclusters) {
-        return qfalse;
+        return false;
     }
     if (routecacheheader.areacrc != CRC_ProcessString((unsigned char*)aasworld.areas, sizeof(aas_area_t) * aasworld.numareas)) {
-        return qfalse;
+        return false;
     }
     if (routecacheheader.clustercrc != CRC_ProcessString((unsigned char*)aasworld.clusters, sizeof(aas_cluster_t) * aasworld.numclusters)) {
-        return qfalse;
+        return false;
     }
     // read all the portal cache
     for (i = 0; i < routecacheheader.numportalcache; i++) {
@@ -828,7 +828,7 @@ int AAS_ReadRouteCache(void)
         aasworld.clusterareacache[cache->cluster][clusterareanum] = cache;
     }
     botimport.FS_FCloseFile(fp);
-    return qtrue;
+    return true;
 }
 #define MAX_REACHABILITYPASSAREAS 32
 
@@ -1016,7 +1016,7 @@ void AAS_UpdateAreaRoutingCache(aas_routingcache_t* areacache)
         else
             updatelistend = NULL;
         updateliststart = curupdate->next;
-        curupdate->inlist = qfalse;
+        curupdate->inlist = false;
         // check all reversed reachability links
         revreach = &aasworld.reversedreachability[curupdate->areanum];
         for (i = 0, revlink = revreach->first; revlink; revlink = revlink->next, i++) {
@@ -1063,7 +1063,7 @@ void AAS_UpdateAreaRoutingCache(aas_routingcache_t* areacache)
                     else
                         updateliststart = nextupdate;
                     updatelistend = nextupdate;
-                    nextupdate->inlist = qtrue;
+                    nextupdate->inlist = true;
                 }
             }
         }
@@ -1145,7 +1145,7 @@ void AAS_UpdatePortalRoutingCache(aas_routingcache_t* portalcache)
             updatelistend = NULL;
         updateliststart = curupdate->next;
         // current update is removed from the list
-        curupdate->inlist = qfalse;
+        curupdate->inlist = false;
         cluster = &aasworld.clusters[curupdate->cluster];
         cache = AAS_GetAreaRoutingCache(curupdate->cluster,
                                         curupdate->areanum, portalcache->travelflags);
@@ -1185,7 +1185,7 @@ void AAS_UpdatePortalRoutingCache(aas_routingcache_t* portalcache)
                     else
                         updateliststart = nextupdate;
                     updatelistend = nextupdate;
-                    nextupdate->inlist = qtrue;
+                    nextupdate->inlist = true;
                 }
             }
         }
@@ -1235,24 +1235,24 @@ int AAS_AreaRouteToGoalArea(int areanum, vec3_t origin, int goalareanum, int tra
     aas_reachability_t* reach;
 
     if (!aasworld.initialized)
-        return qfalse;
+        return false;
 
     if (areanum == goalareanum) {
         *traveltime = 1;
         *reachnum = 0;
-        return qtrue;
+        return true;
     }
     if (areanum <= 0 || areanum >= aasworld.numareas) {
         if (bot_developer) {
             botimport.Print(PRT_ERROR, "AAS_AreaTravelTimeToGoalArea: areanum %d out of range\n", areanum);
         }
-        return qfalse;
+        return false;
     }
     if (goalareanum <= 0 || goalareanum >= aasworld.numareas) {
         if (bot_developer) {
             botimport.Print(PRT_ERROR, "AAS_AreaTravelTimeToGoalArea: goalareanum %d out of range\n", goalareanum);
         }
-        return qfalse;
+        return false;
     }
     // make sure the routing cache doesn't grow to large
     while (AvailableMemory() < 1 * 1024 * 1024) {
@@ -1294,11 +1294,11 @@ int AAS_AreaRouteToGoalArea(int areanum, vec3_t origin, int goalareanum, int tra
             *reachnum = aasworld.areasettings[areanum].firstreachablearea + areacache->reachabilities[clusterareanum];
             if (!origin) {
                 *traveltime = areacache->traveltimes[clusterareanum];
-                return qtrue;
+                return true;
             }
             reach = &aasworld.reachability[*reachnum];
             *traveltime = areacache->traveltimes[clusterareanum] + AAS_AreaTravelTime(areanum, origin, reach->start);
-            return qtrue;
+            return true;
         }
     }
     clusternum = aasworld.areasettings[areanum].cluster;
@@ -1315,7 +1315,7 @@ int AAS_AreaRouteToGoalArea(int areanum, vec3_t origin, int goalareanum, int tra
     if (clusternum < 0) {
         *traveltime = portalcache->traveltimes[-clusternum];
         *reachnum = aasworld.areasettings[areanum].firstreachablearea + portalcache->reachabilities[-clusternum];
-        return qtrue;
+        return true;
     }
     besttime = 0;
     bestreachnum = -1;
@@ -1359,11 +1359,11 @@ int AAS_AreaRouteToGoalArea(int areanum, vec3_t origin, int goalareanum, int tra
         }
     }
     if (bestreachnum < 0) {
-        return qfalse;
+        return false;
     }
     *reachnum = bestreachnum;
     *traveltime = besttime;
-    return qtrue;
+    return true;
 }
 int AAS_AreaTravelTimeToGoalArea(int areanum, vec3_t origin, int goalareanum, int travelflags)
 {
@@ -1409,7 +1409,7 @@ int AAS_PredictRoute(struct aas_predictroute_s* route, int areanum, vec3_t origi
         reachnum = AAS_AreaReachabilityToGoalArea(curareanum, curorigin, goalareanum, travelflags);
         if (!reachnum) {
             route->stopevent = RSE_NOROUTE;
-            return qfalse;
+            return false;
         }
         reach = &aasworld.reachability[reachnum];
         if (stopevent & RSE_USETRAVELTYPE) {
@@ -1418,7 +1418,7 @@ int AAS_PredictRoute(struct aas_predictroute_s* route, int areanum, vec3_t origi
                 route->endcontents = aasworld.areasettings[curareanum].contents;
                 route->endtravelflags = AAS_TravelFlagForType_inline(reach->traveltype);
                 VectorCopy(reach->start, route->endpos);
-                return qtrue;
+                return true;
             }
             if (AAS_AreaContentsTravelFlags_inline(reach->areanum) & stoptfl) {
                 route->stopevent = RSE_USETRAVELTYPE;
@@ -1427,7 +1427,7 @@ int AAS_PredictRoute(struct aas_predictroute_s* route, int areanum, vec3_t origi
                 VectorCopy(reach->end, route->endpos);
                 route->time += AAS_AreaTravelTime(areanum, origin, reach->start);
                 route->time += reach->traveltime;
-                return qtrue;
+                return true;
             }
         }
         reachareas = &aasworld.reachabilityareas[reachnum];
@@ -1443,7 +1443,7 @@ int AAS_PredictRoute(struct aas_predictroute_s* route, int areanum, vec3_t origi
                     VectorCopy(reach->end, route->endpos);
                     route->time += AAS_AreaTravelTime(areanum, origin, reach->start);
                     route->time += reach->traveltime;
-                    return qtrue;
+                    return true;
                 }
             }
             if (stopevent & RSE_ENTERAREA) {
@@ -1451,7 +1451,7 @@ int AAS_PredictRoute(struct aas_predictroute_s* route, int areanum, vec3_t origi
                     route->stopevent = RSE_ENTERAREA;
                     route->endcontents = aasworld.areasettings[testareanum].contents;
                     VectorCopy(reach->start, route->endpos);
-                    return qtrue;
+                    return true;
                 }
             }
         }
@@ -1467,8 +1467,8 @@ int AAS_PredictRoute(struct aas_predictroute_s* route, int areanum, vec3_t origi
             break;
     }
     if (curareanum != goalareanum)
-        return qfalse;
-    return qtrue;
+        return false;
+    return true;
 }
 void AAS_ReachabilityFromNum(int num, struct aas_reachability_s* reach)
 {

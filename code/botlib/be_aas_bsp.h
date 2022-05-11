@@ -34,7 +34,7 @@ bsp_link_t* AAS_BSPLinkEntity(vec3_t absmins,
                               int modelnum);
 
 // calculates collision with given entity
-qboolean AAS_EntityCollision(int entnum,
+bool AAS_EntityCollision(int entnum,
                              vec3_t start,
                              vec3_t boxmins,
                              vec3_t boxmaxs,

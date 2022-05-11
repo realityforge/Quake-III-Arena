@@ -100,7 +100,7 @@ void S_MakeTestPattern(void)
     }
 }
 
-qboolean SNDDMA_Init(void)
+bool SNDDMA_Init(void)
 {
     int err;
     cvar_t* bufferSize;
@@ -149,7 +149,7 @@ qboolean SNDDMA_Init(void)
 
     S_Callback(s_sndChan, NULL);
 
-    return qtrue;
+    return true;
 }
 
 int SNDDMA_GetDMAPos(void)

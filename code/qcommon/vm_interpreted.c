@@ -307,7 +307,7 @@ int VM_CallInterpreted(vm_t* vm, int* args)
 #endif
 
     // interpret the code
-    vm->currentlyInterpreting = qtrue;
+    vm->currentlyInterpreting = true;
 
     // we might be called recursively, so this might not be the very top
     programStack = stackOnEntry = vm->programStack;
@@ -855,7 +855,7 @@ int VM_CallInterpreted(vm_t* vm, int* args)
     }
 
 done:
-    vm->currentlyInterpreting = qfalse;
+    vm->currentlyInterpreting = false;
 
     if (opStack != &stack[1]) {
         Com_Error(ERR_DROP, "Interpreter error: opStack = %i", opStack - stack);

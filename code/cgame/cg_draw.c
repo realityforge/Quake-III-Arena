@@ -367,7 +367,7 @@ CG_DrawFlagModel
 Used for both the status bar and the scoreboard
 ================
 */
-void CG_DrawFlagModel(float x, float y, float w, float h, int team, qboolean force2D)
+void CG_DrawFlagModel(float x, float y, float w, float h, int team, bool force2D)
 {
     qhandle_t cm;
     float len;
@@ -480,7 +480,7 @@ static void CG_DrawStatusBarHead(float x)
 #ifndef MISSIONPACK
 static void CG_DrawStatusBarFlag(float x, int team)
 {
-    CG_DrawFlagModel(x, 480 - ICON_SIZE, ICON_SIZE, ICON_SIZE, team, qfalse);
+    CG_DrawFlagModel(x, 480 - ICON_SIZE, ICON_SIZE, ICON_SIZE, team, false);
 }
 #endif // MISSIONPACK
 
@@ -793,7 +793,7 @@ static float CG_DrawTimer(float y)
     return y + BIGCHAR_HEIGHT + 4;
 }
 
-static float CG_DrawTeamOverlay(float y, qboolean right, qboolean upper)
+static float CG_DrawTeamOverlay(float y, bool right, bool upper)
 {
     int x, w, h, xx;
     int i, j, len;
@@ -889,7 +889,7 @@ static float CG_DrawTeamOverlay(float y, qboolean right, qboolean upper)
             xx = x + TINYCHAR_WIDTH;
 
             CG_DrawStringExt(xx, y,
-                             ci->name, hcolor, qfalse, qfalse,
+                             ci->name, hcolor, false, false,
                              TINYCHAR_WIDTH, TINYCHAR_HEIGHT, TEAM_OVERLAY_MAXNAME_WIDTH);
 
             if (lwidth) {
@@ -904,7 +904,7 @@ static float CG_DrawTeamOverlay(float y, qboolean right, qboolean upper)
                 //					((lwidth/2 - len/2) * TINYCHAR_WIDTH);
                 xx = x + TINYCHAR_WIDTH * 2 + TINYCHAR_WIDTH * pwidth;
                 CG_DrawStringExt(xx, y,
-                                 p, hcolor, qfalse, qfalse, TINYCHAR_WIDTH, TINYCHAR_HEIGHT,
+                                 p, hcolor, false, false, TINYCHAR_WIDTH, TINYCHAR_HEIGHT,
                                  TEAM_OVERLAY_MAXLOCATION_WIDTH);
             }
 
@@ -915,7 +915,7 @@ static float CG_DrawTeamOverlay(float y, qboolean right, qboolean upper)
             xx = x + TINYCHAR_WIDTH * 3 + TINYCHAR_WIDTH * pwidth + TINYCHAR_WIDTH * lwidth;
 
             CG_DrawStringExt(xx, y,
-                             st, hcolor, qfalse, qfalse,
+                             st, hcolor, false, false,
                              TINYCHAR_WIDTH, TINYCHAR_HEIGHT, 0);
 
             // draw weapon icon
@@ -967,7 +967,7 @@ static void CG_DrawUpperRight(void)
     y = 0;
 
     if (cgs.gametype >= GT_TEAM && cg_drawTeamOverlay.integer == 1) {
-        y = CG_DrawTeamOverlay(y, qtrue, qtrue);
+        y = CG_DrawTeamOverlay(y, true, true);
     }
     if (cg_drawSnapshot.integer) {
         y = CG_DrawSnapshot(y);
@@ -1094,7 +1094,7 @@ static float CG_DrawScores(float y)
         }
 
     } else {
-        qboolean spectator;
+        bool spectator;
 
         x = 640;
         score = cg.snap->ps.persistant[PERS_SCORE];
@@ -1263,7 +1263,7 @@ static void CG_DrawLowerRight(void)
     y = 480 - ICON_SIZE;
 
     if (cgs.gametype >= GT_TEAM && cg_drawTeamOverlay.integer == 2) {
-        y = CG_DrawTeamOverlay(y, qtrue, qfalse);
+        y = CG_DrawTeamOverlay(y, true, false);
     }
 
     y = CG_DrawScores(y);
@@ -1307,7 +1307,7 @@ static void CG_DrawLowerLeft(void)
     y = 480 - ICON_SIZE;
 
     if (cgs.gametype >= GT_TEAM && cg_drawTeamOverlay.integer == 3) {
-        y = CG_DrawTeamOverlay(y, qfalse, qfalse);
+        y = CG_DrawTeamOverlay(y, false, false);
     }
 
     y = CG_DrawPickupItem(y);
@@ -1378,7 +1378,7 @@ static void CG_DrawTeamInfo(void)
         for (i = cgs.teamChatPos - 1; i >= cgs.teamLastChatPos; i--) {
             CG_DrawStringExt(CHATLOC_X + TINYCHAR_WIDTH,
                              CHATLOC_Y - (cgs.teamChatPos - i) * TINYCHAR_HEIGHT,
-                             cgs.teamChatMsgs[i % chatHeight], hcolor, qfalse, qfalse,
+                             cgs.teamChatMsgs[i % chatHeight], hcolor, false, false,
                              TINYCHAR_WIDTH, TINYCHAR_HEIGHT, 0);
         }
     }
@@ -1449,7 +1449,7 @@ static void CG_DrawReward(void)
         CG_DrawPic(x, y, ICON_SIZE - 4, ICON_SIZE - 4, cg.rewardShader[0]);
         Com_sprintf(buf, sizeof(buf), "%d", cg.rewardCount[0]);
         x = (SCREEN_WIDTH - SMALLCHAR_WIDTH * CG_DrawStrlen(buf)) / 2;
-        CG_DrawStringExt(x, y + ICON_SIZE, buf, color, qfalse, qtrue,
+        CG_DrawStringExt(x, y + ICON_SIZE, buf, color, false, true,
                          SMALLCHAR_WIDTH, SMALLCHAR_HEIGHT, 0);
     } else {
 
@@ -1741,7 +1741,7 @@ static void CG_DrawCenterString(void)
 
         x = (SCREEN_WIDTH - w) / 2;
 
-        CG_DrawStringExt(x, y, linebuffer, color, qfalse, qtrue,
+        CG_DrawStringExt(x, y, linebuffer, color, false, true,
                          cg.centerPrintCharWidth, (int)(cg.centerPrintCharWidth * 1.5), 0);
 
         y += cg.centerPrintCharWidth * 1.5;
@@ -1905,7 +1905,7 @@ static void CG_DrawVote(void)
 
     // play a talk beep whenever it is modified
     if (cgs.voteModified) {
-        cgs.voteModified = qfalse;
+        cgs.voteModified = false;
         trap_S_StartLocalSound(cgs.media.talkSound, CHAN_LOCAL_SOUND);
     }
 
@@ -1942,7 +1942,7 @@ static void CG_DrawTeamVote(void)
 
     // play a talk beep whenever it is modified
     if (cgs.teamVoteModified[cs_offset]) {
-        cgs.teamVoteModified[cs_offset] = qfalse;
+        cgs.teamVoteModified[cs_offset] = false;
         trap_S_StartLocalSound(cgs.media.talkSound, CHAN_LOCAL_SOUND);
     }
 
@@ -1955,10 +1955,10 @@ static void CG_DrawTeamVote(void)
     CG_DrawSmallString(0, 90, s, 1.0F);
 }
 
-static qboolean CG_DrawScoreboard()
+static bool CG_DrawScoreboard()
 {
 #ifdef MISSIONPACK
-    static qboolean firstTime = qtrue;
+    static bool firstTime = true;
     float fade, *fadeColor;
 
     if (menuScoreboard) {
@@ -1966,20 +1966,20 @@ static qboolean CG_DrawScoreboard()
     }
     if (cg_paused.integer) {
         cg.deferredPlayerLoading = 0;
-        firstTime = qtrue;
-        return qfalse;
+        firstTime = true;
+        return false;
     }
 
     // should never happen in Team Arena
     if (cgs.gametype == GT_SINGLE_PLAYER && cg.predictedPlayerState.pm_type == PM_INTERMISSION) {
         cg.deferredPlayerLoading = 0;
-        firstTime = qtrue;
-        return qfalse;
+        firstTime = true;
+        return false;
     }
 
     // don't draw scoreboard during death while warmup up
     if (cg.warmup && !cg.showScores) {
-        return qfalse;
+        return false;
     }
 
     if (cg.showScores || cg.predictedPlayerState.pm_type == PM_DEAD || cg.predictedPlayerState.pm_type == PM_INTERMISSION) {
@@ -1991,8 +1991,8 @@ static qboolean CG_DrawScoreboard()
             // next time scoreboard comes up, don't print killer
             cg.deferredPlayerLoading = 0;
             cg.killerName[0] = 0;
-            firstTime = qtrue;
-            return qfalse;
+            firstTime = true;
+            return false;
         }
         fade = *fadeColor;
     }
@@ -2008,9 +2008,9 @@ static qboolean CG_DrawScoreboard()
     if (menuScoreboard) {
         if (firstTime) {
             CG_SetScoreSelection(menuScoreboard);
-            firstTime = qfalse;
+            firstTime = false;
         }
-        Menu_Paint(menuScoreboard, qtrue);
+        Menu_Paint(menuScoreboard, true);
     }
 
     // load any models that have been deferred
@@ -2018,7 +2018,7 @@ static qboolean CG_DrawScoreboard()
         CG_LoadDeferredPlayers();
     }
 
-    return qtrue;
+    return true;
 #else
     return CG_DrawOldScoreboard();
 #endif
@@ -2042,14 +2042,14 @@ static void CG_DrawIntermission(void)
     cg.scoreBoardShowing = CG_DrawScoreboard();
 }
 
-static qboolean CG_DrawFollow(void)
+static bool CG_DrawFollow(void)
 {
     float x;
     vec4_t color;
     const char* name;
 
     if (!(cg.snap->ps.pm_flags & PMF_FOLLOW)) {
-        return qfalse;
+        return false;
     }
     color[0] = 1;
     color[1] = 1;
@@ -2062,9 +2062,9 @@ static qboolean CG_DrawFollow(void)
 
     x = 0.5 * (640 - GIANT_WIDTH * CG_DrawStrlen(name));
 
-    CG_DrawStringExt(x, 40, name, color, qtrue, qtrue, GIANT_WIDTH, GIANT_HEIGHT, 0);
+    CG_DrawStringExt(x, 40, name, color, true, true, GIANT_WIDTH, GIANT_HEIGHT, 0);
 
-    return qtrue;
+    return true;
 }
 
 static void CG_DrawAmmoWarning(void)
@@ -2175,7 +2175,7 @@ static void CG_DrawWarmup(void)
                 cw = GIANT_WIDTH;
             }
             CG_DrawStringExt(320 - w * cw / 2, 20, s, colorWhite,
-                             qfalse, qtrue, cw, (int)(cw * 1.5f), 0);
+                             false, true, cw, (int)(cw * 1.5f), 0);
 #endif
         }
     } else {
@@ -2207,7 +2207,7 @@ static void CG_DrawWarmup(void)
             cw = GIANT_WIDTH;
         }
         CG_DrawStringExt(320 - w * cw / 2, 25, s, colorWhite,
-                         qfalse, qtrue, cw, (int)(cw * 1.1f), 0);
+                         false, true, cw, (int)(cw * 1.1f), 0);
 #endif
     }
 
@@ -2259,7 +2259,7 @@ static void CG_DrawWarmup(void)
 #else
     w = CG_DrawStrlen(s);
     CG_DrawStringExt(320 - w * cw / 2, 70, s, colorWhite,
-                     qfalse, qtrue, cw, (int)(cw * 1.5), 0);
+                     false, true, cw, (int)(cw * 1.5), 0);
 #endif
 }
 

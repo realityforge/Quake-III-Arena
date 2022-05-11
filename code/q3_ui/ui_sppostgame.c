@@ -69,7 +69,7 @@ typedef struct {
     int numAwards;
     int awardsEarned[6];
     int awardsLevels[6];
-    qboolean playedSound[6];
+    bool playedSound[6];
     int lastTier;
     sfxHandle_t winnerSound;
 } postgameMenuInfo_t;
@@ -227,8 +227,8 @@ static void UI_SPPostgameMenu_DrawAwardsPresentation(int timer)
     UI_SPPostgameMenu_DrawAwardsMedals(awardNum + 1);
 
     if (!postgameMenuInfo.playedSound[awardNum]) {
-        postgameMenuInfo.playedSound[awardNum] = qtrue;
-        trap_S_StartLocalSound(trap_S_RegisterSound(ui_medalSounds[postgameMenuInfo.awardsEarned[awardNum]], qfalse), CHAN_ANNOUNCER);
+        postgameMenuInfo.playedSound[awardNum] = true;
+        trap_S_StartLocalSound(trap_S_RegisterSound(ui_medalSounds[postgameMenuInfo.awardsEarned[awardNum]], false), CHAN_ANNOUNCER);
     }
 }
 
@@ -353,7 +353,7 @@ static void UI_SPPostgameMenu_MenuDraw(void)
 void UI_SPPostgameMenu_Cache(void)
 {
     int n;
-    qboolean buildscript;
+    bool buildscript;
 
     buildscript = trap_Cvar_VariableValue("com_buildscript");
 
@@ -365,19 +365,19 @@ void UI_SPPostgameMenu_Cache(void)
     trap_R_RegisterShaderNoMip(ART_NEXT1);
     for (n = 0; n < 6; n++) {
         trap_R_RegisterShaderNoMip(ui_medalPicNames[n]);
-        trap_S_RegisterSound(ui_medalSounds[n], qfalse);
+        trap_S_RegisterSound(ui_medalSounds[n], false);
     }
 
     if (buildscript) {
-        trap_S_RegisterSound("music/loss.wav", qfalse);
-        trap_S_RegisterSound("music/win.wav", qfalse);
-        trap_S_RegisterSound("sound/player/announce/youwin.wav", qfalse);
+        trap_S_RegisterSound("music/loss.wav", false);
+        trap_S_RegisterSound("music/win.wav", false);
+        trap_S_RegisterSound("sound/player/announce/youwin.wav", false);
     }
 }
 
 static void UI_SPPostgameMenu_Init(void)
 {
-    postgameMenuInfo.menu.wrapAround = qtrue;
+    postgameMenuInfo.menu.wrapAround = true;
     postgameMenuInfo.menu.key = UI_SPPostgameMenu_MenuKey;
     postgameMenuInfo.menu.draw = UI_SPPostgameMenu_MenuDraw;
     postgameMenuInfo.ignoreKeysTime = uis.realtime + 1500;
@@ -567,10 +567,10 @@ void UI_SPPostgameMenu_f(void)
     Prepname(2);
 
     if (playerGameRank != 1) {
-        postgameMenuInfo.winnerSound = trap_S_RegisterSound(va("sound/player/announce/%s_wins.wav", postgameMenuInfo.placeNames[0]), qfalse);
+        postgameMenuInfo.winnerSound = trap_S_RegisterSound(va("sound/player/announce/%s_wins.wav", postgameMenuInfo.placeNames[0]), false);
         trap_Cmd_ExecuteText(EXEC_APPEND, "music music/loss\n");
     } else {
-        postgameMenuInfo.winnerSound = trap_S_RegisterSound("sound/player/announce/youwin.wav", qfalse);
+        postgameMenuInfo.winnerSound = trap_S_RegisterSound("sound/player/announce/youwin.wav", false);
         trap_Cmd_ExecuteText(EXEC_APPEND, "music music/win\n");
     }
 

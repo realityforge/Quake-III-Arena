@@ -100,6 +100,6 @@ void UI_CreditMenu(void)
 
     s_credits.menu.draw = UI_CreditMenu_Draw;
     s_credits.menu.key = UI_CreditMenu_Key;
-    s_credits.menu.fullscreen = qtrue;
+    s_credits.menu.fullscreen = true;
     UI_PushMenu(&s_credits.menu);
 }

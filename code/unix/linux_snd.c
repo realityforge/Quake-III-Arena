@@ -47,7 +47,7 @@ cvar_t* snddevice;
 /* Some devices may work only with 48000 */
 static int tryrates[] = { 22050, 11025, 44100, 48000, 8000 };
 
-qboolean SNDDMA_Init(void)
+bool SNDDMA_Init(void)
 {
     int rc;
     int fmt;

@@ -173,7 +173,7 @@ void CM_TestBoxInBrush(traceWork_t* tw, cbrush_t* brush)
     }
 
     // inside this brush
-    tw->trace.startsolid = tw->trace.allsolid = qtrue;
+    tw->trace.startsolid = tw->trace.allsolid = true;
     tw->trace.fraction = 0;
     tw->trace.contents = brush->contents;
 }
@@ -225,7 +225,7 @@ void CM_TestInLeaf(traceWork_t* tw, cLeaf_t* leaf)
             }
 
             if (CM_PositionTestInPatchCollide(tw, patch->pc)) {
-                tw->trace.startsolid = tw->trace.allsolid = qtrue;
+                tw->trace.startsolid = tw->trace.allsolid = true;
                 tw->trace.fraction = 0;
                 tw->trace.contents = patch->contents;
                 return;
@@ -270,24 +270,24 @@ void CM_TestCapsuleInCapsule(traceWork_t* tw, clipHandle_t model)
     p1[2] += offs;
     VectorSubtract(p1, top, tmp);
     if (VectorLengthSquared(tmp) < r) {
-        tw->trace.startsolid = tw->trace.allsolid = qtrue;
+        tw->trace.startsolid = tw->trace.allsolid = true;
         tw->trace.fraction = 0;
     }
     VectorSubtract(p1, bottom, tmp);
     if (VectorLengthSquared(tmp) < r) {
-        tw->trace.startsolid = tw->trace.allsolid = qtrue;
+        tw->trace.startsolid = tw->trace.allsolid = true;
         tw->trace.fraction = 0;
     }
     VectorCopy(offset, p2);
     p2[2] -= offs;
     VectorSubtract(p2, top, tmp);
     if (VectorLengthSquared(tmp) < r) {
-        tw->trace.startsolid = tw->trace.allsolid = qtrue;
+        tw->trace.startsolid = tw->trace.allsolid = true;
         tw->trace.fraction = 0;
     }
     VectorSubtract(p2, bottom, tmp);
     if (VectorLengthSquared(tmp) < r) {
-        tw->trace.startsolid = tw->trace.allsolid = qtrue;
+        tw->trace.startsolid = tw->trace.allsolid = true;
         tw->trace.fraction = 0;
     }
     // if between cylinder up and lower bounds
@@ -297,7 +297,7 @@ void CM_TestCapsuleInCapsule(traceWork_t* tw, clipHandle_t model)
         // if the cylinders overlap
         VectorSubtract(top, p1, tmp);
         if (VectorLengthSquared(tmp) < r) {
-            tw->trace.startsolid = tw->trace.allsolid = qtrue;
+            tw->trace.startsolid = tw->trace.allsolid = true;
             tw->trace.fraction = 0;
         }
     }
@@ -330,13 +330,13 @@ void CM_TestBoundingBoxInCapsule(traceWork_t* tw, clipHandle_t model)
     }
 
     // replace the bounding box with the capsule
-    tw->sphere.use = qtrue;
+    tw->sphere.use = true;
     tw->sphere.radius = (size[1][0] > size[1][2]) ? size[1][2] : size[1][0];
     tw->sphere.halfheight = size[1][2];
     VectorSet(tw->sphere.offset, 0, 0, size[1][2] - tw->sphere.radius);
 
     // replace the capsule with the bounding box
-    h = CM_TempBoxModel(tw->size[0], tw->size[1], qfalse);
+    h = CM_TempBoxModel(tw->size[0], tw->size[1], false);
     // calculate collision
     cmod = CM_ClipHandleToModel(h);
     CM_TestInLeaf(tw, &cmod->leaf);
@@ -363,7 +363,7 @@ void CM_PositionTest(traceWork_t* tw)
     ll.list = leafs;
     ll.storeLeafs = CM_StoreLeafs;
     ll.lastLeaf = 0;
-    ll.overflowed = qfalse;
+    ll.overflowed = false;
 
     cm.checkcount++;
 
@@ -403,7 +403,7 @@ void CM_TraceThroughBrush(traceWork_t* tw, cbrush_t* brush)
     float dist;
     float enterFrac, leaveFrac;
     float d1, d2;
-    qboolean getout, startout;
+    bool getout, startout;
     float f;
     cbrushside_t *side, *leadside;
     float t;
@@ -420,8 +420,8 @@ void CM_TraceThroughBrush(traceWork_t* tw, cbrush_t* brush)
 
     c_brush_traces++;
 
-    getout = qfalse;
-    startout = qfalse;
+    getout = false;
+    startout = false;
 
     leadside = NULL;
 
@@ -450,10 +450,10 @@ void CM_TraceThroughBrush(traceWork_t* tw, cbrush_t* brush)
             d2 = DotProduct(endp, plane->normal) - dist;
 
             if (d2 > 0) {
-                getout = qtrue; // endpoint is not in solid
+                getout = true; // endpoint is not in solid
             }
             if (d1 > 0) {
-                startout = qtrue;
+                startout = true;
             }
 
             // if completely in front of face, no intersection with the entire brush
@@ -502,10 +502,10 @@ void CM_TraceThroughBrush(traceWork_t* tw, cbrush_t* brush)
             d2 = DotProduct(tw->end, plane->normal) - dist;
 
             if (d2 > 0) {
-                getout = qtrue; // endpoint is not in solid
+                getout = true; // endpoint is not in solid
             }
             if (d1 > 0) {
-                startout = qtrue;
+                startout = true;
             }
 
             // if completely in front of face, no intersection with the entire brush
@@ -544,9 +544,9 @@ void CM_TraceThroughBrush(traceWork_t* tw, cbrush_t* brush)
     // all planes have been checked, and the trace was not
     // completely outside the brush
     if (!startout) { // original point was inside brush
-        tw->trace.startsolid = qtrue;
+        tw->trace.startsolid = true;
         if (!getout) {
-            tw->trace.allsolid = qtrue;
+            tw->trace.allsolid = true;
             tw->trace.fraction = 0;
             tw->trace.contents = brush->contents;
         }
@@ -641,12 +641,12 @@ void CM_TraceThroughSphere(traceWork_t* tw, vec3_t origin, float radius, vec3_t 
     l1 = VectorLengthSquared(dir);
     if (l1 < Square(radius)) {
         tw->trace.fraction = 0;
-        tw->trace.startsolid = qtrue;
+        tw->trace.startsolid = true;
         // test for allsolid
         VectorSubtract(end, origin, dir);
         l1 = VectorLengthSquared(dir);
         if (l1 < Square(radius)) {
-            tw->trace.allsolid = qtrue;
+            tw->trace.allsolid = true;
         }
         return;
     }
@@ -729,11 +729,11 @@ void CM_TraceThroughVerticalCylinder(traceWork_t* tw, vec3_t origin, float radiu
         l1 = VectorLengthSquared(dir);
         if (l1 < Square(radius)) {
             tw->trace.fraction = 0;
-            tw->trace.startsolid = qtrue;
+            tw->trace.startsolid = true;
             VectorSubtract(end2d, org2d, dir);
             l1 = VectorLengthSquared(dir);
             if (l1 < Square(radius)) {
-                tw->trace.allsolid = qtrue;
+                tw->trace.allsolid = true;
             }
             return;
         }
@@ -881,13 +881,13 @@ void CM_TraceBoundingBoxThroughCapsule(traceWork_t* tw, clipHandle_t model)
     }
 
     // replace the bounding box with the capsule
-    tw->sphere.use = qtrue;
+    tw->sphere.use = true;
     tw->sphere.radius = (size[1][0] > size[1][2]) ? size[1][2] : size[1][0];
     tw->sphere.halfheight = size[1][2];
     VectorSet(tw->sphere.offset, 0, 0, size[1][2] - tw->sphere.radius);
 
     // replace the capsule with the bounding box
-    h = CM_TempBoxModel(tw->size[0], tw->size[1], qfalse);
+    h = CM_TempBoxModel(tw->size[0], tw->size[1], false);
     // calculate collision
     cmod = CM_ClipHandleToModel(h);
     CM_TraceThroughLeaf(tw, &cmod->leaf);
@@ -1129,7 +1129,7 @@ void CM_Trace(trace_t* results, const vec3_t start, const vec3_t end, vec3_t min
         if (model) {
 #ifdef ALWAYS_BBOX_VS_BBOX // bk010201 - FIXME - compile time flag?
             if (model == BOX_MODEL_HANDLE || model == CAPSULE_MODEL_HANDLE) {
-                tw.sphere.use = qfalse;
+                tw.sphere.use = false;
                 CM_TestInLeaf(&tw, &cmod->leaf);
             } else
 #elif defined(ALWAYS_CAPSULE_VS_CAPSULE)
@@ -1152,10 +1152,10 @@ void CM_Trace(trace_t* results, const vec3_t start, const vec3_t end, vec3_t min
     } else {
         // check for point special case
         if (tw.size[0][0] == 0 && tw.size[0][1] == 0 && tw.size[0][2] == 0) {
-            tw.isPoint = qtrue;
+            tw.isPoint = true;
             VectorClear(tw.extents);
         } else {
-            tw.isPoint = qfalse;
+            tw.isPoint = false;
             tw.extents[0] = tw.size[1][0];
             tw.extents[1] = tw.size[1][1];
             tw.extents[2] = tw.size[1][2];
@@ -1165,7 +1165,7 @@ void CM_Trace(trace_t* results, const vec3_t start, const vec3_t end, vec3_t min
         if (model) {
 #ifdef ALWAYS_BBOX_VS_BBOX
             if (model == BOX_MODEL_HANDLE || model == CAPSULE_MODEL_HANDLE) {
-                tw.sphere.use = qfalse;
+                tw.sphere.use = false;
                 CM_TraceThroughLeaf(&tw, &cmod->leaf);
             } else
 #elif defined(ALWAYS_CAPSULE_VS_CAPSULE)
@@ -1225,7 +1225,7 @@ void CM_TransformedBoxTrace(trace_t* results, const vec3_t start, const vec3_t e
 {
     trace_t trace;
     vec3_t start_l, end_l;
-    qboolean rotated;
+    bool rotated;
     vec3_t offset;
     vec3_t symetricSize[2];
     vec3_t matrix[3], transpose[3];
@@ -1259,9 +1259,9 @@ void CM_TransformedBoxTrace(trace_t* results, const vec3_t start, const vec3_t e
 
     // rotate start and end into the models frame of reference
     if (model != BOX_MODEL_HANDLE && (angles[0] || angles[1] || angles[2])) {
-        rotated = qtrue;
+        rotated = true;
     } else {
-        rotated = qfalse;
+        rotated = false;
     }
 
     halfwidth = symetricSize[1][0];

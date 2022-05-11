@@ -616,27 +616,27 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
 #ifdef MISSIONPACK
     case EV_TAUNT_YES:
         DEBUGNAME("EV_TAUNT_YES");
-        CG_VoiceChatLocal(SAY_TEAM, qfalse, es->number, COLOR_CYAN, VOICECHAT_YES);
+        CG_VoiceChatLocal(SAY_TEAM, false, es->number, COLOR_CYAN, VOICECHAT_YES);
         break;
     case EV_TAUNT_NO:
         DEBUGNAME("EV_TAUNT_NO");
-        CG_VoiceChatLocal(SAY_TEAM, qfalse, es->number, COLOR_CYAN, VOICECHAT_NO);
+        CG_VoiceChatLocal(SAY_TEAM, false, es->number, COLOR_CYAN, VOICECHAT_NO);
         break;
     case EV_TAUNT_FOLLOWME:
         DEBUGNAME("EV_TAUNT_FOLLOWME");
-        CG_VoiceChatLocal(SAY_TEAM, qfalse, es->number, COLOR_CYAN, VOICECHAT_FOLLOWME);
+        CG_VoiceChatLocal(SAY_TEAM, false, es->number, COLOR_CYAN, VOICECHAT_FOLLOWME);
         break;
     case EV_TAUNT_GETFLAG:
         DEBUGNAME("EV_TAUNT_GETFLAG");
-        CG_VoiceChatLocal(SAY_TEAM, qfalse, es->number, COLOR_CYAN, VOICECHAT_ONGETFLAG);
+        CG_VoiceChatLocal(SAY_TEAM, false, es->number, COLOR_CYAN, VOICECHAT_ONGETFLAG);
         break;
     case EV_TAUNT_GUARDBASE:
         DEBUGNAME("EV_TAUNT_GUARDBASE");
-        CG_VoiceChatLocal(SAY_TEAM, qfalse, es->number, COLOR_CYAN, VOICECHAT_ONDEFENSE);
+        CG_VoiceChatLocal(SAY_TEAM, false, es->number, COLOR_CYAN, VOICECHAT_ONDEFENSE);
         break;
     case EV_TAUNT_PATROL:
         DEBUGNAME("EV_TAUNT_PATROL");
-        CG_VoiceChatLocal(SAY_TEAM, qfalse, es->number, COLOR_CYAN, VOICECHAT_ONPATROL);
+        CG_VoiceChatLocal(SAY_TEAM, false, es->number, COLOR_CYAN, VOICECHAT_ONPATROL);
         break;
 #endif
     case EV_WATER_TOUCH:
@@ -691,7 +691,7 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
                 }
 #endif
             } else {
-                trap_S_StartSound(NULL, es->number, CHAN_AUTO, trap_S_RegisterSound(item->pickup_sound, qfalse));
+                trap_S_StartSound(NULL, es->number, CHAN_AUTO, trap_S_RegisterSound(item->pickup_sound, false));
             }
 
             // show icon and name on status bar
@@ -715,7 +715,7 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
             item = &bg_itemlist[index];
             // powerup pickups are global
             if (item->pickup_sound) {
-                trap_S_StartSound(NULL, cg.snap->ps.clientNum, CHAN_AUTO, trap_S_RegisterSound(item->pickup_sound, qfalse));
+                trap_S_StartSound(NULL, cg.snap->ps.clientNum, CHAN_AUTO, trap_S_RegisterSound(item->pickup_sound, false));
             }
 
             // show icon and name on status bar
@@ -916,12 +916,12 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
     case EV_BULLET_HIT_WALL:
         DEBUGNAME("EV_BULLET_HIT_WALL");
         ByteToDir(es->eventParm, dir);
-        CG_Bullet(es->pos.trBase, es->otherEntityNum, dir, qfalse, ENTITYNUM_WORLD);
+        CG_Bullet(es->pos.trBase, es->otherEntityNum, dir, false, ENTITYNUM_WORLD);
         break;
 
     case EV_BULLET_HIT_FLESH:
         DEBUGNAME("EV_BULLET_HIT_FLESH");
-        CG_Bullet(es->pos.trBase, es->otherEntityNum, dir, qtrue, es->eventParm);
+        CG_Bullet(es->pos.trBase, es->otherEntityNum, dir, true, es->eventParm);
         break;
 
     case EV_SHOTGUN:

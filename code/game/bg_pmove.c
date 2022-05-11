@@ -320,26 +320,26 @@ static void PM_SetMovementDir(void)
     }
 }
 
-static qboolean PM_CheckJump(void)
+static bool PM_CheckJump(void)
 {
     if (pm->ps->pm_flags & PMF_RESPAWNED) {
-        return qfalse; // don't allow jump until all buttons are up
+        return false; // don't allow jump until all buttons are up
     }
 
     if (pm->cmd.upmove < 10) {
         // not holding jump
-        return qfalse;
+        return false;
     }
 
     // must wait for jump to be released
     if (pm->ps->pm_flags & PMF_JUMP_HELD) {
         // clear upmove so cmdscale doesn't lower running speed
         pm->cmd.upmove = 0;
-        return qfalse;
+        return false;
     }
 
-    pml.groundPlane = qfalse; // jumping away
-    pml.walking = qfalse;
+    pml.groundPlane = false; // jumping away
+    pml.walking = false;
     pm->ps->pm_flags |= PMF_JUMP_HELD;
 
     pm->ps->groundEntityNum = ENTITYNUM_NONE;
@@ -354,22 +354,22 @@ static qboolean PM_CheckJump(void)
         pm->ps->pm_flags |= PMF_BACKWARDS_JUMP;
     }
 
-    return qtrue;
+    return true;
 }
 
-static qboolean PM_CheckWaterJump(void)
+static bool PM_CheckWaterJump(void)
 {
     vec3_t spot;
     int cont;
     vec3_t flatforward;
 
     if (pm->ps->pm_time) {
-        return qfalse;
+        return false;
     }
 
     // check for water jump
     if (pm->waterlevel != 2) {
-        return qfalse;
+        return false;
     }
 
     flatforward[0] = pml.forward[0];
@@ -381,13 +381,13 @@ static qboolean PM_CheckWaterJump(void)
     spot[2] += 4;
     cont = pm->pointcontents(spot, pm->ps->clientNum);
     if (!(cont & CONTENTS_SOLID)) {
-        return qfalse;
+        return false;
     }
 
     spot[2] += 16;
     cont = pm->pointcontents(spot, pm->ps->clientNum);
     if (cont) {
-        return qfalse;
+        return false;
     }
 
     // jump out of water
@@ -397,7 +397,7 @@ static qboolean PM_CheckWaterJump(void)
     pm->ps->pm_flags |= PMF_TIME_WATERJUMP;
     pm->ps->pm_time = 2000;
 
-    return qtrue;
+    return true;
 }
 
 //============================================================================
@@ -413,7 +413,7 @@ static void PM_WaterJumpMove(void)
 {
     // waterjump has no control, but falls
 
-    PM_StepSlideMove(qtrue);
+    PM_StepSlideMove(true);
 
     pm->ps->velocity[2] -= pm->ps->gravity * pml.frametime;
     if (pm->ps->velocity[2] < 0) {
@@ -471,7 +471,7 @@ static void PM_WaterMove(void)
         VectorScale(pm->ps->velocity, vel, pm->ps->velocity);
     }
 
-    PM_SlideMove(qfalse);
+    PM_SlideMove(false);
 }
 
 #ifdef MISSIONPACK
@@ -528,7 +528,7 @@ static void PM_FlyMove(void)
 
     PM_Accelerate(wishdir, wishspeed, pm_flyaccelerate);
 
-    PM_StepSlideMove(qfalse);
+    PM_StepSlideMove(false);
 }
 
 static void PM_AirMove(void)
@@ -578,7 +578,7 @@ static void PM_AirMove(void)
                         pm->ps->velocity, OVERCLIP);
     }
 
-    PM_StepSlideMove(qtrue);
+    PM_StepSlideMove(true);
 }
 
 static void PM_GrappleMove(void)
@@ -599,7 +599,7 @@ static void PM_GrappleMove(void)
 
     VectorCopy(vel, pm->ps->velocity);
 
-    pml.groundPlane = qfalse;
+    pml.groundPlane = false;
 }
 
 static void PM_WalkMove(void)
@@ -714,7 +714,7 @@ static void PM_WalkMove(void)
         return;
     }
 
-    PM_StepSlideMove(qfalse);
+    PM_StepSlideMove(false);
 
     // Com_Printf("velocity2 = %1.1f\n", VectorLength(pm->ps->velocity));
 }
@@ -905,7 +905,7 @@ void PM_CheckStuck(void) {
 
         pm->trace (&trace, pm->ps->origin, pm->mins, pm->maxs, pm->ps->origin, pm->ps->clientNum, pm->tracemask);
         if (trace.allsolid) {
-                //int shit = qtrue;
+                //int shit = true;
         }
 }
 */
@@ -935,17 +935,17 @@ static int PM_CorrectAllSolid(trace_t* trace)
 
                     pm->trace(trace, pm->ps->origin, pm->mins, pm->maxs, point, pm->ps->clientNum, pm->tracemask);
                     pml.groundTrace = *trace;
-                    return qtrue;
+                    return true;
                 }
             }
         }
     }
 
     pm->ps->groundEntityNum = ENTITYNUM_NONE;
-    pml.groundPlane = qfalse;
-    pml.walking = qfalse;
+    pml.groundPlane = false;
+    pml.walking = false;
 
-    return qfalse;
+    return false;
 }
 
 /*
@@ -984,8 +984,8 @@ static void PM_GroundTraceMissed(void)
     }
 
     pm->ps->groundEntityNum = ENTITYNUM_NONE;
-    pml.groundPlane = qfalse;
-    pml.walking = qfalse;
+    pml.groundPlane = false;
+    pml.walking = false;
 }
 
 static void PM_GroundTrace(void)
@@ -1009,8 +1009,8 @@ static void PM_GroundTrace(void)
     // if the trace didn't hit anything, we are in free fall
     if (trace.fraction == 1.0) {
         PM_GroundTraceMissed();
-        pml.groundPlane = qfalse;
-        pml.walking = qfalse;
+        pml.groundPlane = false;
+        pml.walking = false;
         return;
     }
 
@@ -1029,8 +1029,8 @@ static void PM_GroundTrace(void)
         }
 
         pm->ps->groundEntityNum = ENTITYNUM_NONE;
-        pml.groundPlane = qfalse;
-        pml.walking = qfalse;
+        pml.groundPlane = false;
+        pml.walking = false;
         return;
     }
 
@@ -1042,13 +1042,13 @@ static void PM_GroundTrace(void)
         // FIXME: if they can't slide down the slope, let them
         // walk (sharp crevices)
         pm->ps->groundEntityNum = ENTITYNUM_NONE;
-        pml.groundPlane = qtrue;
-        pml.walking = qfalse;
+        pml.groundPlane = true;
+        pml.walking = false;
         return;
     }
 
-    pml.groundPlane = qtrue;
-    pml.walking = qtrue;
+    pml.groundPlane = true;
+    pml.walking = true;
 
     // hitting solid ground will end a waterjump
     if (pm->ps->pm_flags & PMF_TIME_WATERJUMP) {
@@ -1187,7 +1187,7 @@ static void PM_Footsteps(void)
 {
     float bobmove;
     int old;
-    qboolean footstep;
+    bool footstep;
 
     // calculate speed and cycle to be used for
     // all cyclic walking effects
@@ -1219,7 +1219,7 @@ static void PM_Footsteps(void)
         return;
     }
 
-    footstep = qfalse;
+    footstep = false;
 
     if (pm->ps->pm_flags & PMF_DUCKED) {
         bobmove = 0.5; // ducked characters bob much faster
@@ -1233,7 +1233,7 @@ static void PM_Footsteps(void)
         } else 	if ( pm->ps->pm_flags & PMF_BACKWARDS_RUN ) {
                 if ( !( pm->cmd.buttons & BUTTON_WALKING ) ) {
                         bobmove = 0.4;	// faster speeds bob faster
-                        footstep = qtrue;
+                        footstep = true;
                 } else {
                         bobmove = 0.3;
                 }
@@ -1247,7 +1247,7 @@ static void PM_Footsteps(void)
             } else {
                 PM_ContinueLegsAnim(LEGS_RUN);
             }
-            footstep = qtrue;
+            footstep = true;
         } else {
             bobmove = 0.3f; // walking bobs slow
             if (pm->ps->pm_flags & PMF_BACKWARDS_RUN) {

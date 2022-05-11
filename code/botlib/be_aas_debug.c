@@ -66,7 +66,7 @@ void AAS_ClearShownDebugLines(void)
         if (debuglines[i]) {
             botimport.DebugLineDelete(debuglines[i]);
             debuglines[i] = 0;
-            debuglinevisible[i] = qfalse;
+            debuglinevisible[i] = false;
         }
     }
 }
@@ -77,12 +77,12 @@ void AAS_DebugLine(vec3_t start, vec3_t end, int color)
     for (line = 0; line < MAX_DEBUGLINES; line++) {
         if (!debuglines[line]) {
             debuglines[line] = botimport.DebugLineCreate();
-            debuglinevisible[line] = qfalse;
+            debuglinevisible[line] = false;
             numdebuglines++;
         }
         if (!debuglinevisible[line]) {
             botimport.DebugLineShow(debuglines[line], start, end, color);
-            debuglinevisible[line] = qtrue;
+            debuglinevisible[line] = true;
             return;
         }
     }
@@ -257,7 +257,7 @@ void AAS_ShowReachability(aas_reachability_t* reach)
     float speed, zvel;
     aas_clientmove_t move;
 
-    AAS_ShowAreaPolygons(reach->areanum, 5, qtrue);
+    AAS_ShowAreaPolygons(reach->areanum, 5, true);
     AAS_DrawArrow(reach->start, reach->end, LINECOLOR_BLUE, LINECOLOR_YELLOW);
     if ((reach->traveltype & TRAVELTYPE_MASK) == TRAVEL_JUMP || (reach->traveltype & TRAVELTYPE_MASK) == TRAVEL_WALKOFFLEDGE) {
         AAS_HorizontalVelocityForJump(aassettings.phys_jumpvel, reach->start, reach->end, &speed);
@@ -269,9 +269,9 @@ void AAS_ShowReachability(aas_reachability_t* reach)
         // set the command movement
         VectorClear(cmdmove);
         cmdmove[2] = aassettings.phys_jumpvel;
-        AAS_PredictClientMovement(&move, -1, reach->start, PRESENCE_NORMAL, qtrue,
+        AAS_PredictClientMovement(&move, -1, reach->start, PRESENCE_NORMAL, true,
                                   velocity, cmdmove, 3, 30, 0.1f,
-                                  SE_HITGROUND | SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE, 0, qtrue);
+                                  SE_HITGROUND | SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE, 0, true);
         if ((reach->traveltype & TRAVELTYPE_MASK) == TRAVEL_JUMP) {
             AAS_JumpReachRunStart(reach, dir);
             AAS_DrawCross(dir, 4, LINECOLOR_BLUE);
@@ -285,9 +285,9 @@ void AAS_ShowReachability(aas_reachability_t* reach)
         // get command movement
         VectorScale(dir, speed, cmdmove);
         VectorSet(velocity, 0, 0, zvel);
-        AAS_PredictClientMovement(&move, -1, reach->start, PRESENCE_NORMAL, qtrue,
+        AAS_PredictClientMovement(&move, -1, reach->start, PRESENCE_NORMAL, true,
                                   velocity, cmdmove, 30, 30, 0.1f,
-                                  SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE | SE_TOUCHJUMPPAD | SE_HITGROUNDAREA, reach->areanum, qtrue);
+                                  SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE | SE_TOUCHJUMPPAD | SE_HITGROUNDAREA, reach->areanum, true);
     } else if ((reach->traveltype & TRAVELTYPE_MASK) == TRAVEL_JUMPPAD) {
         VectorSet(cmdmove, 0, 0, 0);
         VectorSubtract(reach->end, reach->start, dir);
@@ -298,9 +298,9 @@ void AAS_ShowReachability(aas_reachability_t* reach)
         VectorScale(dir, reach->edgenum, velocity);
         // NOTE: the facenum is the Z velocity
         velocity[2] = reach->facenum;
-        AAS_PredictClientMovement(&move, -1, reach->start, PRESENCE_NORMAL, qtrue,
+        AAS_PredictClientMovement(&move, -1, reach->start, PRESENCE_NORMAL, true,
                                   velocity, cmdmove, 30, 30, 0.1f,
-                                  SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE | SE_TOUCHJUMPPAD | SE_HITGROUNDAREA, reach->areanum, qtrue);
+                                  SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE | SE_TOUCHJUMPPAD | SE_HITGROUNDAREA, reach->areanum, true);
     }
 }
 
@@ -312,7 +312,7 @@ void AAS_FloodAreas_r(int areanum, int cluster, int* done)
     aas_areasettings_t* settings;
     aas_reachability_t* reach;
 
-    AAS_ShowAreaPolygons(areanum, 1, qtrue);
+    AAS_ShowAreaPolygons(areanum, 1, true);
     // pointer to the convex area
     area = &aasworld.areas[areanum];
     settings = &aasworld.areasettings[areanum];
@@ -328,7 +328,7 @@ void AAS_FloodAreas_r(int areanum, int cluster, int* done)
             continue;
         if (done[nextareanum])
             continue;
-        done[nextareanum] = qtrue;
+        done[nextareanum] = true;
         if (aasworld.areasettings[nextareanum].contents & AREACONTENTS_VIEWPORTAL)
             continue;
         if (AAS_AreaCluster(nextareanum) != cluster)
@@ -342,7 +342,7 @@ void AAS_FloodAreas_r(int areanum, int cluster, int* done)
             continue;
         if (done[nextareanum])
             continue;
-        done[nextareanum] = qtrue;
+        done[nextareanum] = true;
         if (aasworld.areasettings[nextareanum].contents & AREACONTENTS_VIEWPORTAL)
             continue;
         if (AAS_AreaCluster(nextareanum) != cluster)

@@ -109,8 +109,8 @@ static void UI_DisplayOptionsMenu_Init(void)
     memset(&displayOptionsInfo, 0, sizeof(displayOptionsInfo));
 
     UI_DisplayOptionsMenu_Cache();
-    displayOptionsInfo.menu.wrapAround = qtrue;
-    displayOptionsInfo.menu.fullscreen = qtrue;
+    displayOptionsInfo.menu.wrapAround = true;
+    displayOptionsInfo.menu.fullscreen = true;
 
     displayOptionsInfo.banner.generic.type = MTYPE_BTEXT;
     displayOptionsInfo.banner.generic.flags = QMF_CENTER_JUSTIFY;

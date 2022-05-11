@@ -96,7 +96,7 @@ void CG_TestModel_f(void)
     angles[ROLL] = 0;
 
     AnglesToAxis(angles, cg.testModelEntity.axis);
-    cg.testGun = qfalse;
+    cg.testGun = false;
 }
 
 /*
@@ -109,7 +109,7 @@ Replaces the current view weapon with the given model
 void CG_TestGun_f(void)
 {
     CG_TestModel_f();
-    cg.testGun = qtrue;
+    cg.testGun = true;
     cg.testModelEntity.renderfx = RF_MINLIGHT | RF_DEPTHHACK | RF_FIRST_PERSON;
 }
 
@@ -414,7 +414,7 @@ void CG_ZoomDown_f(void)
     if (cg.zoomed) {
         return;
     }
-    cg.zoomed = qtrue;
+    cg.zoomed = true;
     cg.zoomTime = cg.time;
 }
 
@@ -423,7 +423,7 @@ void CG_ZoomUp_f(void)
     if (!cg.zoomed) {
         return;
     }
-    cg.zoomed = qfalse;
+    cg.zoomed = false;
     cg.zoomTime = cg.time;
 }
 
@@ -501,9 +501,9 @@ static int CG_CalcFov(void)
         v = WAVE_AMPLITUDE * sin(phase);
         fov_x += v;
         fov_y -= v;
-        inwater = qtrue;
+        inwater = true;
     } else {
-        inwater = qfalse;
+        inwater = false;
     }
 
     // set it
@@ -583,7 +583,7 @@ static int CG_CalcViewValues(void)
                             AnglesToAxis( cg.refdefViewAngles, cg.refdef.viewaxis );
                             return CG_CalcFov();
                     } else {
-                            cg.cameraMode = qfalse;
+                            cg.cameraMode = false;
                     }
             }
     */
@@ -693,7 +693,7 @@ CG_DrawActiveFrame
 Generates and draws a game scene and status information at the given time.
 =================
 */
-void CG_DrawActiveFrame(int serverTime, stereoFrame_t stereoView, qboolean demoPlayback)
+void CG_DrawActiveFrame(int serverTime, stereoFrame_t stereoView, bool demoPlayback)
 {
     int inwater;
 
@@ -712,7 +712,7 @@ void CG_DrawActiveFrame(int serverTime, stereoFrame_t stereoView, qboolean demoP
 
     // any looped sounds will be respecified as entities
     // are added to the render list
-    trap_S_ClearLoopingSounds(qfalse);
+    trap_S_ClearLoopingSounds(false);
 
     // clear all the render lists
     trap_R_ClearScene();

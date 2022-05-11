@@ -79,7 +79,7 @@ static WinConData s_wcd;
 static LONG WINAPI ConWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     char* cmdString;
-    static qboolean s_timePolarity;
+    static bool s_timePolarity;
 
     switch (uMsg) {
     case WM_ACTIVATE:

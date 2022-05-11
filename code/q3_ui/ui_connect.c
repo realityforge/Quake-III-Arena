@@ -157,7 +157,7 @@ This will also be overlaid on the cgame info screen during loading
 to prevent it from blinking away too rapidly on local or lan games.
 ========================
 */
-void UI_DrawConnectScreen(qboolean overlay)
+void UI_DrawConnectScreen(bool overlay)
 {
     char* s;
     uiClientState_t cstate;

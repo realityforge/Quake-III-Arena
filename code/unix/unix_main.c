@@ -61,7 +61,7 @@ refexport_t re;
 unsigned sys_frame_time;
 
 uid_t saved_euid;
-qboolean stdin_active = qtrue;
+bool stdin_active = true;
 
 // =======================================================================
 // General routines

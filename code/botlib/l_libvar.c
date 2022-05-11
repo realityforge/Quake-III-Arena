@@ -131,7 +131,7 @@ libvar_t* LibVar(char* var_name, char* value)
     // the value
     v->value = LibVarStringValue(v->string);
     // variable is modified
-    v->modified = qtrue;
+    v->modified = true;
     return v;
 }
 char* LibVarString(char* var_name, char* value)
@@ -164,5 +164,5 @@ void LibVarSet(char* var_name, char* value)
     // the value
     v->value = LibVarStringValue(v->string);
     // variable is modified
-    v->modified = qtrue;
+    v->modified = true;
 }

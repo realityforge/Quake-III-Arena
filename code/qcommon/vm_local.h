@@ -136,7 +136,7 @@ struct vm_s {
     int(QDECL* entryPoint)(int callNum, ...);
 
     // for interpreted modules
-    qboolean currentlyInterpreting;
+    bool currentlyInterpreting;
 
     byte* codeBase;
     int codeLength;

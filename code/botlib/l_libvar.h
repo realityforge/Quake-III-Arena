@@ -29,7 +29,7 @@ typedef struct libvar_s {
     char* name;
     char* string;
     int flags;
-    qboolean modified; // set each time the cvar is changed
+    bool modified; // set each time the cvar is changed
     float value;
     struct libvar_s* next;
 } libvar_t;

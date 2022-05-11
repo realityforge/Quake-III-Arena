@@ -259,7 +259,7 @@ void R_SetupEntityLighting(const trRefdef_t* refdef, trRefEntity_t* ent)
     if (ent->lightingCalculated) {
         return;
     }
-    ent->lightingCalculated = qtrue;
+    ent->lightingCalculated = true;
 
     // trace a sample point down to find ambient light
     if (ent->e.renderfx & RF_LIGHTING_ORIGIN) {
@@ -338,7 +338,7 @@ int R_LightForPoint(vec3_t point, vec3_t ambientLight, vec3_t directedLight, vec
 
     // bk010103 - this segfaults with -nolight maps
     if (tr.world->lightGridData == NULL)
-        return qfalse;
+        return false;
 
     memset(&ent, 0, sizeof(ent));
     VectorCopy(point, ent.e.origin);
@@ -347,5 +347,5 @@ int R_LightForPoint(vec3_t point, vec3_t ambientLight, vec3_t directedLight, vec
     VectorCopy(ent.directedLight, directedLight);
     VectorCopy(ent.lightDir, lightDir);
 
-    return qtrue;
+    return true;
 }

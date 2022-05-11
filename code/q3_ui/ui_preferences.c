@@ -171,7 +171,7 @@ static void Crosshair_Draw(void* self)
     float* color;
     int x, y;
     int style;
-    qboolean focus;
+    bool focus;
 
     s = (menulist_s*)self;
     x = s->generic.x;
@@ -212,8 +212,8 @@ static void Preferences_MenuInit(void)
 
     Preferences_Cache();
 
-    s_preferences.menu.wrapAround = qtrue;
-    s_preferences.menu.fullscreen = qtrue;
+    s_preferences.menu.wrapAround = true;
+    s_preferences.menu.fullscreen = true;
 
     s_preferences.banner.generic.type = MTYPE_BTEXT;
     s_preferences.banner.generic.x = 320;

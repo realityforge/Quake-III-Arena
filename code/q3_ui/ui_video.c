@@ -124,7 +124,7 @@ static void UI_DriverInfo_Menu(void)
 
     DriverInfo_Cache();
 
-    s_driverinfo.menu.fullscreen = qtrue;
+    s_driverinfo.menu.fullscreen = true;
     s_driverinfo.menu.draw = DriverInfo_MenuDraw;
 
     s_driverinfo.banner.generic.type = MTYPE_BTEXT;
@@ -255,25 +255,25 @@ typedef struct {
 typedef struct
 {
     int mode;
-    qboolean fullscreen;
+    bool fullscreen;
     int tq;
     int lighting;
     int colordepth;
     int texturebits;
     int geometry;
     int filter;
-    qboolean extensions;
+    bool extensions;
 } InitialVideoOptions_s;
 
 static InitialVideoOptions_s s_ivo;
 static graphicsoptions_t s_graphicsoptions;
 
 static InitialVideoOptions_s s_ivo_templates[] = {
-    { 4, qtrue, 2, 0, 2, 2, 1, 1, 0, qtrue }, // JDC: this was tq 3
-    { 3, qtrue, 2, 0, 0, 0, 1, 0, 0, qtrue },
-    { 2, qtrue, 1, 0, 1, 0, 0, 0, 0, qtrue },
-    { 2, qtrue, 1, 1, 1, 0, 0, 0, 0, qtrue },
-    { 3, qtrue, 1, 0, 0, 0, 1, 0, 0, qtrue }
+    { 4, true, 2, 0, 2, 2, 1, 1, 0, true }, // JDC: this was tq 3
+    { 3, true, 2, 0, 0, 0, 1, 0, 0, true },
+    { 2, true, 1, 0, 1, 0, 0, 0, 0, true },
+    { 2, true, 1, 1, 1, 0, 0, 0, 0, true },
+    { 3, true, 1, 0, 0, 0, 1, 0, 0, true }
 };
 
 #define NUM_IVO_TEMPLATES (sizeof(s_ivo_templates) / sizeof(s_ivo_templates[0]))
@@ -627,8 +627,8 @@ void GraphicsOptions_MenuInit(void)
 
     GraphicsOptions_Cache();
 
-    s_graphicsoptions.menu.wrapAround = qtrue;
-    s_graphicsoptions.menu.fullscreen = qtrue;
+    s_graphicsoptions.menu.wrapAround = true;
+    s_graphicsoptions.menu.fullscreen = true;
     s_graphicsoptions.menu.draw = GraphicsOptions_MenuDraw;
 
     s_graphicsoptions.banner.generic.type = MTYPE_BTEXT;

@@ -123,8 +123,8 @@ static void UI_NetworkOptionsMenu_Init(void)
     memset(&networkOptionsInfo, 0, sizeof(networkOptionsInfo));
 
     UI_NetworkOptionsMenu_Cache();
-    networkOptionsInfo.menu.wrapAround = qtrue;
-    networkOptionsInfo.menu.fullscreen = qtrue;
+    networkOptionsInfo.menu.wrapAround = true;
+    networkOptionsInfo.menu.fullscreen = true;
 
     networkOptionsInfo.banner.generic.type = MTYPE_BTEXT;
     networkOptionsInfo.banner.generic.flags = QMF_CENTER_JUSTIFY;

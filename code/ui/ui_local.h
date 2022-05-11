@@ -186,9 +186,9 @@ typedef struct menuframework_s {
     void (*draw)(void);
     sfxHandle_t (*key)(int key);
 
-    qboolean wrapAround;
-    qboolean fullscreen;
-    qboolean showlogo;
+    bool wrapAround;
+    bool fullscreen;
+    bool showlogo;
 } menuframework_t;
 
 typedef struct
@@ -318,9 +318,9 @@ extern char* ui_medalSounds[];
 //
 void UI_Report();
 void UI_Load();
-void UI_LoadMenus(const char* menuFile, qboolean reset);
+void UI_LoadMenus(const char* menuFile, bool reset);
 void _UI_SetActiveMenu(uiMenuCommand_t menu);
-void UI_ShowPostGame(qboolean newHigh);
+void UI_ShowPostGame(bool newHigh);
 void UI_ClearScores();
 void UI_LoadArenas(void);
 
@@ -347,7 +347,7 @@ extern void UI_InGameMenu(void);
 // ui_confirm.c
 //
 extern void ConfirmMenu_Cache(void);
-extern void UI_ConfirmMenu(const char* question, void (*draw)(void), void (*action)(qboolean result));
+extern void UI_ConfirmMenu(const char* question, void (*draw)(void), void (*action)(bool result));
 
 //
 // ui_setup.c
@@ -364,7 +364,7 @@ extern void TeamMain_Cache(void);
 //
 // ui_connect.c
 //
-extern void UI_DrawConnectScreen(qboolean overlay);
+extern void UI_DrawConnectScreen(bool overlay);
 
 //
 // ui_controls2.c
@@ -426,7 +426,7 @@ extern void ArenaServers_Cache(void);
 //
 // ui_startserver.c
 //
-extern void UI_StartServerMenu(qboolean multiplayer);
+extern void UI_StartServerMenu(bool multiplayer);
 extern void StartServer_Cache(void);
 extern void ServerOptions_Cache(void);
 extern void UI_BotSelectMenu(char* bot);
@@ -460,9 +460,9 @@ typedef struct {
     float backlerp;
 
     float yawAngle;
-    qboolean yawing;
+    bool yawing;
     float pitchAngle;
-    qboolean pitching;
+    bool pitching;
 
     int animationNumber; // may include ANIM_TOGGLEBIT
     animation_t* animation;
@@ -508,10 +508,10 @@ typedef struct {
     int pendingTorsoAnim;
     int legsAnimationTimer;
 
-    qboolean chat;
-    qboolean newModel;
+    bool chat;
+    bool newModel;
 
-    qboolean barrelSpinning;
+    bool barrelSpinning;
     float barrelAngle;
     int barrelTime;
 
@@ -520,8 +520,8 @@ typedef struct {
 
 void UI_DrawPlayer(float x, float y, float w, float h, playerInfo_t* pi, int time);
 void UI_PlayerInfo_SetModel(playerInfo_t* pi, const char* model, const char* headmodel, char* teamName);
-void UI_PlayerInfo_SetInfo(playerInfo_t* pi, int legsAnim, int torsoAnim, vec3_t viewAngles, vec3_t moveAngles, weapon_t weaponNum, qboolean chat);
-qboolean UI_RegisterClientModelname(playerInfo_t* pi, const char* modelSkinName, const char* headName, const char* teamName);
+void UI_PlayerInfo_SetInfo(playerInfo_t* pi, int legsAnim, int torsoAnim, vec3_t viewAngles, vec3_t moveAngles, weapon_t weaponNum, bool chat);
+bool UI_RegisterClientModelname(playerInfo_t* pi, const char* modelSkinName, const char* headName, const char* teamName);
 
 //
 // ui_atoms.c
@@ -533,7 +533,7 @@ typedef struct {
     int cursorx;
     int cursory;
     glconfig_t glconfig;
-    qboolean debug;
+    bool debug;
     qhandle_t whiteShader;
     qhandle_t menuBackShader;
     qhandle_t menuBackShader2;
@@ -547,7 +547,7 @@ typedef struct {
     qhandle_t rb_off;
     float scale;
     float bias;
-    qboolean firstdraw;
+    bool firstdraw;
 } uiStatic_t;
 
 // new ui stuff
@@ -585,7 +585,7 @@ typedef struct {
     const char* imageName;
     qhandle_t headImage;
     const char* base;
-    qboolean active;
+    bool active;
     int reference;
 } characterInfo;
 
@@ -620,7 +620,7 @@ typedef struct {
     int cinematic;
     int timeToBeat[MAX_GAMETYPES];
     qhandle_t levelShot;
-    qboolean active;
+    bool active;
 } mapInfo;
 
 typedef struct {
@@ -646,7 +646,7 @@ typedef struct serverStatus_s {
     int numServers;
     int sortKey;
     int sortDir;
-    qboolean refreshActive;
+    bool refreshActive;
     int currentServer;
     int displayServers[MAX_DISPLAY_SERVERS];
     int numDisplayServers;
@@ -668,7 +668,7 @@ typedef struct {
     char name[MAX_ADDRESSLENGTH];
     int startTime;
     int serverNum;
-    qboolean valid;
+    bool valid;
 } pendingServer_t;
 
 typedef struct {
@@ -694,9 +694,9 @@ typedef struct {
     int newHighScoreTime;
     int newBestTime;
     int showPostGameTime;
-    qboolean newHighScore;
-    qboolean demoAvailable;
-    qboolean soundHighScore;
+    bool newHighScore;
+    bool demoAvailable;
+    bool soundHighScore;
 
     int characterCount;
     int botIndex;
@@ -721,7 +721,7 @@ typedef struct {
     int playerRefresh;
     int playerIndex;
     int playerNumber;
-    qboolean teamLeader;
+    bool teamLeader;
     char playerNames[MAX_CLIENTS][MAX_NAME_LENGTH];
     char teamNames[MAX_CLIENTS][MAX_NAME_LENGTH];
     int teamClientNums[MAX_CLIENTS];
@@ -780,7 +780,7 @@ extern uiInfo_t uiInfo;
 extern void UI_Init(void);
 extern void UI_Shutdown(void);
 extern void UI_MouseEvent(int dx, int dy);
-extern qboolean UI_ConsoleCommand(int realTime);
+extern bool UI_ConsoleCommand(int realTime);
 extern float UI_ClampCvar(float min, float max, float value);
 extern void UI_DrawNamedPic(float x, float y, float width, float height, const char* picname);
 extern void UI_DrawHandlePic(float x, float y, float w, float h, qhandle_t hShader);
@@ -796,16 +796,16 @@ extern void UI_DrawProportionalString(int x, int y, const char* str, int style, 
 extern int UI_ProportionalStringWidth(const char* str);
 extern void UI_DrawString(int x, int y, const char* str, int style, vec4_t color);
 extern void UI_DrawChar(int x, int y, int ch, int style, vec4_t color);
-extern qboolean UI_CursorInRect(int x, int y, int width, int height);
+extern bool UI_CursorInRect(int x, int y, int width, int height);
 extern void UI_AdjustFrom640(float* x, float* y, float* w, float* h);
-extern qboolean UI_IsFullscreen(void);
+extern bool UI_IsFullscreen(void);
 extern void UI_SetActiveMenu(uiMenuCommand_t menu);
 extern void UI_PushMenu(menuframework_t* menu);
 extern void UI_PopMenu(void);
 extern void UI_ForceMenuOff(void);
 extern char* UI_Argv(int arg);
 extern char* UI_Cvar_VariableString(const char* var_name);
-extern qboolean m_entersound;
+extern bool m_entersound;
 void UI_LoadBestScores(const char* map, int game);
 extern uiStatic_t uis;
 
@@ -870,13 +870,13 @@ void trap_R_ModelBounds(clipHandle_t model, vec3_t mins, vec3_t maxs);
 void trap_UpdateScreen(void);
 int trap_CM_LerpTag(orientation_t* tag, clipHandle_t mod, int startFrame, int endFrame, float frac, const char* tagName);
 void trap_S_StartLocalSound(sfxHandle_t sfx, int channelNum);
-sfxHandle_t trap_S_RegisterSound(const char* sample, qboolean compressed);
+sfxHandle_t trap_S_RegisterSound(const char* sample, bool compressed);
 void trap_Key_KeynumToStringBuf(int keynum, char* buf, int buflen);
 void trap_Key_GetBindingBuf(int keynum, char* buf, int buflen);
 void trap_Key_SetBinding(int keynum, const char* binding);
-qboolean trap_Key_IsDown(int keynum);
-qboolean trap_Key_GetOverstrikeMode(void);
-void trap_Key_SetOverstrikeMode(qboolean state);
+bool trap_Key_IsDown(int keynum);
+bool trap_Key_GetOverstrikeMode(void);
+void trap_Key_SetOverstrikeMode(bool state);
 void trap_Key_ClearStates(void);
 int trap_Key_GetCatcher(void);
 void trap_Key_SetCatcher(int catcher);
@@ -894,9 +894,9 @@ void trap_LAN_GetPing(int n, char* buf, int buflen, int* pingtime);
 void trap_LAN_GetPingInfo(int n, char* buf, int buflen);
 void trap_LAN_LoadCachedServers();
 void trap_LAN_SaveCachedServers();
-void trap_LAN_MarkServerVisible(int source, int n, qboolean visible);
+void trap_LAN_MarkServerVisible(int source, int n, bool visible);
 int trap_LAN_ServerIsVisible(int source, int n);
-qboolean trap_LAN_UpdateVisiblePings(int source);
+bool trap_LAN_UpdateVisiblePings(int source);
 int trap_LAN_AddServer(int source, const char* name, const char* addr);
 void trap_LAN_RemoveServer(int source, const char* addr);
 void trap_LAN_ResetPings(int n);
@@ -979,8 +979,8 @@ char* UI_GetBotNameByNumber(int num);
 void UI_GetBestScore(int level, int* score, int* skill);
 void UI_SetBestScore(int level, int score);
 int UI_TierCompleted(int levelWon);
-qboolean UI_ShowTierVideo(int tier);
-qboolean UI_CanShowTierVideo(int tier);
+bool UI_ShowTierVideo(int tier);
+bool UI_CanShowTierVideo(int tier);
 int UI_GetCurrentGame(void);
 void UI_NewGame(void);
 void UI_LogAwardData(int award, int data);

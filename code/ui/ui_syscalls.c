@@ -217,7 +217,7 @@ void trap_S_StartLocalSound(sfxHandle_t sfx, int channelNum)
     syscall(UI_S_STARTLOCALSOUND, sfx, channelNum);
 }
 
-sfxHandle_t trap_S_RegisterSound(const char* sample, qboolean compressed)
+sfxHandle_t trap_S_RegisterSound(const char* sample, bool compressed)
 {
     return syscall(UI_S_REGISTERSOUND, sample, compressed);
 }
@@ -237,17 +237,17 @@ void trap_Key_SetBinding(int keynum, const char* binding)
     syscall(UI_KEY_SETBINDING, keynum, binding);
 }
 
-qboolean trap_Key_IsDown(int keynum)
+bool trap_Key_IsDown(int keynum)
 {
     return syscall(UI_KEY_ISDOWN, keynum);
 }
 
-qboolean trap_Key_GetOverstrikeMode(void)
+bool trap_Key_GetOverstrikeMode(void)
 {
     return syscall(UI_KEY_GETOVERSTRIKEMODE);
 }
 
-void trap_Key_SetOverstrikeMode(qboolean state)
+void trap_Key_SetOverstrikeMode(bool state)
 {
     syscall(UI_KEY_SETOVERSTRIKEMODE, state);
 }
@@ -347,7 +347,7 @@ void trap_LAN_GetPingInfo(int n, char* buf, int buflen)
     syscall(UI_LAN_GETPINGINFO, n, buf, buflen);
 }
 
-void trap_LAN_MarkServerVisible(int source, int n, qboolean visible)
+void trap_LAN_MarkServerVisible(int source, int n, bool visible)
 {
     syscall(UI_LAN_MARKSERVERVISIBLE, source, n, visible);
 }
@@ -357,7 +357,7 @@ int trap_LAN_ServerIsVisible(int source, int n)
     return syscall(UI_LAN_SERVERISVISIBLE, source, n);
 }
 
-qboolean trap_LAN_UpdateVisiblePings(int source)
+bool trap_LAN_UpdateVisiblePings(int source)
 {
     return syscall(UI_LAN_UPDATEVISIBLEPINGS, source);
 }
@@ -417,7 +417,7 @@ int trap_RealTime(qtime_t* qtime)
     return syscall(UI_REAL_TIME, qtime);
 }
 
-// this returns a handle.  arg0 is the name in the format "idlogo.roq", set arg1 to NULL, alteredstates to qfalse (do not alter gamestate)
+// this returns a handle.  arg0 is the name in the format "idlogo.roq", set arg1 to NULL, alteredstates to false (do not alter gamestate)
 int trap_CIN_PlayCinematic(const char* arg0, int xpos, int ypos, int width, int height, int bits)
 {
     return syscall(UI_CIN_PLAYCINEMATIC, arg0, xpos, ypos, width, height, bits);

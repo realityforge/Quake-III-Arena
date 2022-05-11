@@ -123,7 +123,7 @@ passed to the renderer.
 
 void CG_ImpactMark(qhandle_t markShader, const vec3_t origin, const vec3_t dir,
                    float orientation, float red, float green, float blue, float alpha,
-                   qboolean alphaFade, float radius, qboolean temporary)
+                   bool alphaFade, float radius, bool temporary)
 {
     vec3_t axis[3];
     float texCoordScale;
@@ -312,9 +312,9 @@ typedef struct particle_s {
     float end;
 
     float startfade;
-    qboolean rotate;
+    bool rotate;
 
-    qboolean link;
+    bool link;
 
     // Ridah
     int shaderAnim;
@@ -366,7 +366,7 @@ cparticle_t *active_particles, *free_particles;
 cparticle_t particles[MAX_PARTICLES];
 int cl_numparticles = MAX_PARTICLES;
 
-qboolean initparticles = qfalse;
+bool initparticles = false;
 vec3_t pvforward, pvright, pvup;
 vec3_t rforward, rright, rup;
 
@@ -399,7 +399,7 @@ void CG_ClearParticles(void)
     }
     // done.
 
-    initparticles = qtrue;
+    initparticles = true;
 }
 
 void CG_AddParticleToScene(cparticle_t* p, vec3_t org, float alpha)

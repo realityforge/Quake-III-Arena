@@ -34,7 +34,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define MAX_ARGC 1024
 
-static qboolean Sys_IsProcessingTerminationRequest = qfalse;
+static bool Sys_IsProcessingTerminationRequest = false;
 static void Sys_CreatePathToFile(NSString* path, NSDictionary* attributes);
 
 @interface Q3Controller (Private)
@@ -80,9 +80,9 @@ static void Sys_CreatePathToFile(NSString* path, NSDictionary* attributes);
     }
 
     // Avoid reactivating GL when we unhide due to this panel
-    Sys_IsProcessingTerminationRequest = qtrue;
+    Sys_IsProcessingTerminationRequest = true;
     choice = NSRunAlertPanel(nil, @"Quit without saving?", @"Don't Quit", @"Quit", nil);
-    Sys_IsProcessingTerminationRequest = qfalse;
+    Sys_IsProcessingTerminationRequest = false;
 
     if (choice == NSAlertAlternateReturn)
         return NSTerminateNow;
@@ -105,9 +105,9 @@ static void Sys_CreatePathToFile(NSString* path, NSDictionary* attributes);
     shiftWasDown = keys[K_SHIFT].down;
     insertWasDown = keys[K_INS].down;
     // Fake a Shift-Insert keyboard event
-    keys[K_SHIFT].down = qtrue;
-    Sys_QueEvent(currentTime, SE_KEY, K_INS, qtrue, 0, NULL);
-    Sys_QueEvent(currentTime, SE_KEY, K_INS, qfalse, 0, NULL);
+    keys[K_SHIFT].down = true;
+    Sys_QueEvent(currentTime, SE_KEY, K_INS, true, 0, NULL);
+    Sys_QueEvent(currentTime, SE_KEY, K_INS, false, 0, NULL);
     // Restore the original keyboard state
     keys[K_SHIFT].down = shiftWasDown;
     keys[K_INS].down = insertWasDown;

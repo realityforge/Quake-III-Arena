@@ -40,7 +40,7 @@ cvar_t* r_fullscreen;
 
 LONG WINAPI MainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-static qboolean s_alttab_disabled;
+static bool s_alttab_disabled;
 
 static void WIN_DisableAltTab(void)
 {
@@ -54,7 +54,7 @@ static void WIN_DisableAltTab(void)
 
         SystemParametersInfo(SPI_SCREENSAVERRUNNING, 1, &old, 0);
     }
-    s_alttab_disabled = qtrue;
+    s_alttab_disabled = true;
 }
 
 static void WIN_EnableAltTab(void)
@@ -68,7 +68,7 @@ static void WIN_EnableAltTab(void)
             SystemParametersInfo(SPI_SCREENSAVERRUNNING, 0, &old, 0);
         }
 
-        s_alttab_disabled = qfalse;
+        s_alttab_disabled = false;
     }
 }
 
@@ -82,16 +82,16 @@ static void VID_AppActivate(BOOL fActive, BOOL minimize)
 
     // we don't want to act like we're active if we're minimized
     if (fActive && !g_wv.isMinimized) {
-        g_wv.activeApp = qtrue;
+        g_wv.activeApp = true;
     } else {
-        g_wv.activeApp = qfalse;
+        g_wv.activeApp = false;
     }
 
     // minimize/restore mouse-capture on demand
     if (!g_wv.activeApp) {
-        IN_Activate(qfalse);
+        IN_Activate(false);
     } else {
-        IN_Activate(qtrue);
+        IN_Activate(true);
     }
 }
 
@@ -129,7 +129,7 @@ static int MapKey(int key)
 {
     int result;
     int modified;
-    qboolean is_extended;
+    bool is_extended;
 
     //	Com_Printf( "0x%x\n", key);
 
@@ -139,9 +139,9 @@ static int MapKey(int key)
         return 0;
 
     if (key & (1 << 24)) {
-        is_extended = qtrue;
+        is_extended = true;
     } else {
-        is_extended = qfalse;
+        is_extended = false;
     }
 
     result = s_scantokey[modified];
@@ -201,7 +201,7 @@ LONG WINAPI MainWndProc(
     WPARAM wParam,
     LPARAM lParam)
 {
-    static qboolean flip = qtrue;
+    static bool flip = true;
     int zDelta, i;
 
     // http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/userinput/mouseinput/aboutmouseinput.asp
@@ -212,11 +212,11 @@ LONG WINAPI MainWndProc(
     if (in_mouse->integer != 1) {
         if (uMsg == MSH_MOUSEWHEEL) {
             if (((int)wParam) > 0) {
-                Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELUP, qtrue, 0, NULL);
-                Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELUP, qfalse, 0, NULL);
+                Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELUP, true, 0, NULL);
+                Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELUP, false, 0, NULL);
             } else {
-                Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELDOWN, qtrue, 0, NULL);
-                Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELDOWN, qfalse, 0, NULL);
+                Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELDOWN, true, 0, NULL);
+                Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELDOWN, false, 0, NULL);
             }
             return DefWindowProc(hWnd, uMsg, wParam, lParam);
         }
@@ -236,8 +236,8 @@ LONG WINAPI MainWndProc(
             if (zDelta > 0) {
                 for (i = 0; i < zDelta; i++) {
                     if (!in_logitechbug->integer) {
-                        Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELUP, qtrue, 0, NULL);
-                        Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELUP, qfalse, 0, NULL);
+                        Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELUP, true, 0, NULL);
+                        Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELUP, false, 0, NULL);
                     } else {
                         Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELUP, flip, 0, NULL);
                         flip = !flip;
@@ -246,8 +246,8 @@ LONG WINAPI MainWndProc(
             } else {
                 for (i = 0; i < -zDelta; i++) {
                     if (!in_logitechbug->integer) {
-                        Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELDOWN, qtrue, 0, NULL);
-                        Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELDOWN, qfalse, 0, NULL);
+                        Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELDOWN, true, 0, NULL);
+                        Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELDOWN, false, 0, NULL);
                     } else {
                         Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, K_MWHEELDOWN, flip, 0, NULL);
                         flip = !flip;
@@ -316,10 +316,10 @@ LONG WINAPI MainWndProc(
 
             Cvar_SetValue("vid_xpos", xPos + r.left);
             Cvar_SetValue("vid_ypos", yPos + r.top);
-            vid_xpos->modified = qfalse;
-            vid_ypos->modified = qfalse;
+            vid_xpos->modified = false;
+            vid_ypos->modified = false;
             if (g_wv.activeApp) {
-                IN_Activate(qtrue);
+                IN_Activate(true);
             }
         }
     } break;
@@ -364,12 +364,12 @@ LONG WINAPI MainWndProc(
         }
         // fall through
     case WM_KEYDOWN:
-        Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, MapKey(lParam), qtrue, 0, NULL);
+        Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, MapKey(lParam), true, 0, NULL);
         break;
 
     case WM_SYSKEYUP:
     case WM_KEYUP:
-        Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, MapKey(lParam), qfalse, 0, NULL);
+        Sys_QueEvent(g_wv.sysMsgTime, SE_KEY, MapKey(lParam), false, 0, NULL);
         break;
 
     case WM_CHAR:

@@ -276,7 +276,7 @@ Scale up the pixel values in a texture to increase the
 lighting range
 ================
 */
-void R_LightScaleTexture(unsigned* in, int inwidth, int inheight, qboolean only_gamma)
+void R_LightScaleTexture(unsigned* in, int inwidth, int inheight, bool only_gamma)
 {
     if (only_gamma) {
         if (!glConfig.deviceSupportsGamma) {
@@ -452,12 +452,12 @@ byte mipBlendColors[16][4] = {
     { 0, 0, 255, 128 },
 };
 
-extern qboolean charSet;
+extern bool charSet;
 static void Upload32(unsigned* data,
                      int width, int height,
-                     qboolean mipmap,
-                     qboolean picmip,
-                     qboolean lightMap,
+                     bool mipmap,
+                     bool picmip,
+                     bool lightMap,
                      int* format,
                      int* pUploadWidth, int* pUploadHeight)
 {
@@ -639,17 +639,17 @@ This is the only way any image_t are created
 ================
 */
 image_t* R_CreateImage(const char* name, const byte* pic, int width, int height,
-                       qboolean mipmap, qboolean allowPicmip, int glWrapClampMode)
+                       bool mipmap, bool allowPicmip, int glWrapClampMode)
 {
     image_t* image;
-    qboolean isLightmap = qfalse;
+    bool isLightmap = false;
     long hash;
 
     if (strlen(name) >= MAX_QPATH) {
         ri.Error(ERR_DROP, "R_CreateImage: \"%s\" is too long\n", name);
     }
     if (!strncmp(name, "*lightmap", 9)) {
-        isLightmap = qtrue;
+        isLightmap = true;
     }
 
     if (tr.numImages == MAX_DRAWIMAGES) {
@@ -1410,7 +1410,7 @@ Finds or loads the given image.
 Returns NULL if it fails, not a default image.
 ==============
 */
-image_t* R_FindImageFile(const char* name, qboolean mipmap, qboolean allowPicmip, int glWrapClampMode)
+image_t* R_FindImageFile(const char* name, bool mipmap, bool allowPicmip, int glWrapClampMode)
 {
     image_t* image;
     int width, height;
@@ -1487,7 +1487,7 @@ static void R_CreateDlightImage(void)
             data[y][x][3] = 255;
         }
     }
-    tr.dlightImage = R_CreateImage("*dlight", (byte*)data, DLIGHT_SIZE, DLIGHT_SIZE, qfalse, qfalse, GL_CLAMP);
+    tr.dlightImage = R_CreateImage("*dlight", (byte*)data, DLIGHT_SIZE, DLIGHT_SIZE, false, false, GL_CLAMP);
 }
 
 void R_InitFogTable(void)
@@ -1567,7 +1567,7 @@ static void R_CreateFogImage(void)
     // standard openGL clamping doesn't really do what we want -- it includes
     // the border color at the edges.  OpenGL 1.2 has clamp-to-edge, which does
     // what we want.
-    tr.fogImage = R_CreateImage("*fog", (byte*)data, FOG_S, FOG_T, qfalse, qfalse, GL_CLAMP);
+    tr.fogImage = R_CreateImage("*fog", (byte*)data, FOG_S, FOG_T, false, false, GL_CLAMP);
     ri.Hunk_FreeTempMemory(data);
 
     borderColor[0] = 1.0;
@@ -1595,7 +1595,7 @@ static void R_CreateDefaultImage(void)
 
         data[x][DEFAULT_SIZE - 1][0] = data[x][DEFAULT_SIZE - 1][1] = data[x][DEFAULT_SIZE - 1][2] = data[x][DEFAULT_SIZE - 1][3] = 255;
     }
-    tr.defaultImage = R_CreateImage("*default", (byte*)data, DEFAULT_SIZE, DEFAULT_SIZE, qtrue, qfalse, GL_REPEAT);
+    tr.defaultImage = R_CreateImage("*default", (byte*)data, DEFAULT_SIZE, DEFAULT_SIZE, true, false, GL_REPEAT);
 }
 
 void R_CreateBuiltinImages(void)
@@ -1607,7 +1607,7 @@ void R_CreateBuiltinImages(void)
 
     // we use a solid white image instead of disabling texturing
     memset(data, 255, sizeof(data));
-    tr.whiteImage = R_CreateImage("*white", (byte*)data, 8, 8, qfalse, qfalse, GL_REPEAT);
+    tr.whiteImage = R_CreateImage("*white", (byte*)data, 8, 8, false, false, GL_REPEAT);
 
     // with overbright bits active, we need an image which is some fraction of full color,
     // for default lightmaps, etc
@@ -1618,11 +1618,11 @@ void R_CreateBuiltinImages(void)
         }
     }
 
-    tr.identityLightImage = R_CreateImage("*identityLight", (byte*)data, 8, 8, qfalse, qfalse, GL_REPEAT);
+    tr.identityLightImage = R_CreateImage("*identityLight", (byte*)data, 8, 8, false, false, GL_REPEAT);
 
     for (x = 0; x < 32; x++) {
         // scratchimage is usually used for cinematic drawing
-        tr.scratchImage[x] = R_CreateImage("*scratch", (byte*)data, DEFAULT_SIZE, DEFAULT_SIZE, qfalse, qtrue, GL_CLAMP);
+        tr.scratchImage[x] = R_CreateImage("*scratch", (byte*)data, DEFAULT_SIZE, DEFAULT_SIZE, false, true, GL_CLAMP);
     }
 
     R_CreateDlightImage();
@@ -1882,7 +1882,7 @@ qhandle_t RE_RegisterSkin(const char* name)
     if (strcmp(name + strlen(name) - 5, ".skin")) {
         skin->numSurfaces = 1;
         skin->surfaces[0] = ri.Hunk_Alloc(sizeof(skin->surfaces[0]), h_low);
-        skin->surfaces[0]->shader = R_FindShader(name, LIGHTMAP_NONE, qtrue);
+        skin->surfaces[0]->shader = R_FindShader(name, LIGHTMAP_NONE, true);
         return hSkin;
     }
 
@@ -1917,7 +1917,7 @@ qhandle_t RE_RegisterSkin(const char* name)
 
         surf = skin->surfaces[skin->numSurfaces] = ri.Hunk_Alloc(sizeof(*skin->surfaces[0]), h_low);
         Q_strncpyz(surf->name, surfName, sizeof(surf->name));
-        surf->shader = R_FindShader(token, LIGHTMAP_NONE, qtrue);
+        surf->shader = R_FindShader(token, LIGHTMAP_NONE, true);
         skin->numSurfaces++;
     }
 

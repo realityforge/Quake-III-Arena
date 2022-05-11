@@ -102,7 +102,7 @@ idnewt
 192.246.40.70
 =============
 */
-qboolean Sys_StringToSockaddr(const char* s, struct sockaddr* sadr)
+bool Sys_StringToSockaddr(const char* s, struct sockaddr* sadr)
 {
     struct hostent* h;
     // char	*colon; // bk001204 - unused
@@ -116,11 +116,11 @@ qboolean Sys_StringToSockaddr(const char* s, struct sockaddr* sadr)
         *(int*)&((struct sockaddr_in*)sadr)->sin_addr = inet_addr(s);
     } else {
         if (!(h = gethostbyname(s)))
-            return qfalse;
+            return false;
         *(int*)&((struct sockaddr_in*)sadr)->sin_addr = *(int*)h->h_addr_list[0];
     }
 
-    return qtrue;
+    return true;
 }
 
 /*
@@ -134,21 +134,21 @@ idnewt:28000
 192.246.40.70:28000
 =============
 */
-qboolean Sys_StringToAdr(const char* s, netadr_t* a)
+bool Sys_StringToAdr(const char* s, netadr_t* a)
 {
     struct sockaddr_in sadr;
 
     if (!Sys_StringToSockaddr(s, (struct sockaddr*)&sadr))
-        return qfalse;
+        return false;
 
     SockadrToNetadr(&sadr, a);
 
-    return qtrue;
+    return true;
 }
 
 //=============================================================================
 
-qboolean Sys_GetPacket(netadr_t* net_from, msg_t* net_message)
+bool Sys_GetPacket(netadr_t* net_from, msg_t* net_message)
 {
     int ret;
     struct sockaddr_in from;
@@ -189,10 +189,10 @@ qboolean Sys_GetPacket(netadr_t* net_from, msg_t* net_message)
         }
 
         net_message->cursize = ret;
-        return qtrue;
+        return true;
     }
 
-    return qfalse;
+    return false;
 }
 
 //=============================================================================
@@ -237,20 +237,20 @@ Sys_IsLANAddress
 LAN clients will have their rate var ignored
 ==================
 */
-qboolean Sys_IsLANAddress(netadr_t adr)
+bool Sys_IsLANAddress(netadr_t adr)
 {
     int i;
 
     if (adr.type == NA_LOOPBACK) {
-        return qtrue;
+        return true;
     }
 
     if (adr.type == NA_IPX) {
-        return qtrue;
+        return true;
     }
 
     if (adr.type != NA_IP) {
-        return qfalse;
+        return false;
     }
 
     // choose which comparison to use based on the class of the address being tested
@@ -260,38 +260,38 @@ qboolean Sys_IsLANAddress(netadr_t adr)
     if ((adr.ip[0] & 0x80) == 0x00) {
         for (i = 0; i < numIP; i++) {
             if (adr.ip[0] == localIP[i][0]) {
-                return qtrue;
+                return true;
             }
         }
         // the RFC1918 class a block will pass the above test
-        return qfalse;
+        return false;
     }
 
     // Class B
     if ((adr.ip[0] & 0xc0) == 0x80) {
         for (i = 0; i < numIP; i++) {
             if (adr.ip[0] == localIP[i][0] && adr.ip[1] == localIP[i][1]) {
-                return qtrue;
+                return true;
             }
             // also check against the RFC1918 class b blocks
             if (adr.ip[0] == 172 && localIP[i][0] == 172 && (adr.ip[1] & 0xf0) == 16 && (localIP[i][1] & 0xf0) == 16) {
-                return qtrue;
+                return true;
             }
         }
-        return qfalse;
+        return false;
     }
 
     // Class C
     for (i = 0; i < numIP; i++) {
         if (adr.ip[0] == localIP[i][0] && adr.ip[1] == localIP[i][1] && adr.ip[2] == localIP[i][2]) {
-            return qtrue;
+            return true;
         }
         // also check against the RFC1918 class c blocks
         if (adr.ip[0] == 192 && localIP[i][0] == 192 && adr.ip[1] == 168 && localIP[i][1] == 168) {
-            return qtrue;
+            return true;
         }
     }
-    return qfalse;
+    return false;
 }
 
 void Sys_ShowIP(void)
@@ -470,7 +470,7 @@ int NET_IPSocket(char* net_interface, int port)
 {
     int newsocket;
     struct sockaddr_in address;
-    qboolean _qtrue = qtrue;
+    bool _true = true;
     int i = 1;
 
     if (net_interface) {
@@ -485,7 +485,7 @@ int NET_IPSocket(char* net_interface, int port)
     }
 
     // make it non-blocking
-    if (ioctl(newsocket, FIONBIO, &_qtrue) == -1) {
+    if (ioctl(newsocket, FIONBIO, &_true) == -1) {
         Com_Printf("ERROR: UDP_OpenSocket: ioctl FIONBIO:%s\n", NET_ErrorString());
         return 0;
     }
@@ -541,7 +541,7 @@ void NET_Sleep(int msec)
 #else
     struct timeval timeout;
     fd_set fdset;
-    extern qboolean stdin_active;
+    extern bool stdin_active;
 
     if (!ip_socket)
         return; // we're not a server, just run full speed

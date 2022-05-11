@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../renderer/tr_local.h"
 #endif
 
-static qboolean signalcaught = qfalse;
+static bool signalcaught = false;
 
 void Sys_Exit(int) NORETURN; // bk010104 - abstraction
 
@@ -38,7 +38,7 @@ static NORETURN void signal_handler(int sig) // bk010104 - replace this... (NOTE
         Sys_Exit(1); // bk010104 - abstraction
     }
 
-    signalcaught = qtrue;
+    signalcaught = true;
     printf("Received signal %d, exiting...\n", sig);
 #ifndef DEDICATED
     GLimp_Shutdown(); // bk010104 - shouldn't this be CL_Shutdown

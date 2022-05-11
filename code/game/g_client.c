@@ -64,7 +64,7 @@ void SP_info_player_intermission(gentity_t* ent)
 {
 }
 
-qboolean SpotWouldTelefrag(gentity_t* spot)
+bool SpotWouldTelefrag(gentity_t* spot)
 {
     int i, num;
     int touch[MAX_GENTITIES];
@@ -79,11 +79,11 @@ qboolean SpotWouldTelefrag(gentity_t* spot)
         hit = &g_entities[touch[i]];
         // if ( hit->client && hit->client->ps.stats[STAT_HEALTH] > 0 ) {
         if (hit->client) {
-            return qtrue;
+            return true;
         }
     }
 
-    return qfalse;
+    return false;
 }
 
 #define MAX_SPAWN_POINTS 128
@@ -216,7 +216,7 @@ void InitBodyQue(void)
     for (i = 0; i < BODY_QUEUE_SIZE; i++) {
         ent = G_Spawn();
         ent->classname = "bodyque";
-        ent->neverFree = qtrue;
+        ent->neverFree = true;
         level.bodyQue[i] = ent;
     }
 }
@@ -233,7 +233,7 @@ void BodySink(gentity_t* ent)
     if (level.time - ent->timestamp > 6500) {
         // the body ques are never actually freed, they are just unlinked
         trap_UnlinkEntity(ent);
-        ent->physicsObject = qfalse;
+        ent->physicsObject = false;
         return;
     }
     ent->nextthink = level.time + 100;
@@ -295,7 +295,7 @@ void CopyToBodyQue(gentity_t* ent)
     body->s.loopSound = 0; // clear lava burning
     body->s.number = body - g_entities;
     body->timestamp = level.time;
-    body->physicsObject = qtrue;
+    body->physicsObject = true;
     body->physicsBounce = 0; // don't bounce
     if (body->s.groundEntityNum == ENTITYNUM_NONE) {
         body->s.pos.trType = TR_GRAVITY;
@@ -341,9 +341,9 @@ void CopyToBodyQue(gentity_t* ent)
 
     // don't take more damage if already gibbed
     if (ent->health <= GIB_HEALTH) {
-        body->takedamage = qfalse;
+        body->takedamage = false;
     } else {
-        body->takedamage = qtrue;
+        body->takedamage = true;
     }
 
     VectorCopy(body->s.pos.trBase, body->r.currentOrigin);
@@ -586,15 +586,15 @@ void ClientUserinfoChanged(int clientNum)
     // check for local client
     s = Info_ValueForKey(userinfo, "ip");
     if (!strcmp(s, "localhost")) {
-        client->pers.localClient = qtrue;
+        client->pers.localClient = true;
     }
 
     // check the item prediction
     s = Info_ValueForKey(userinfo, "cg_predictItems");
     if (!atoi(s)) {
-        client->pers.predictItemPickup = qfalse;
+        client->pers.predictItemPickup = false;
     } else {
-        client->pers.predictItemPickup = qtrue;
+        client->pers.predictItemPickup = true;
     }
 
     // set name
@@ -681,31 +681,31 @@ void ClientUserinfoChanged(int clientNum)
 
 #ifdef MISSIONPACK
     if (g_gametype.integer >= GT_TEAM) {
-        client->pers.teamInfo = qtrue;
+        client->pers.teamInfo = true;
     } else {
         s = Info_ValueForKey(userinfo, "teamoverlay");
         if (!*s || atoi(s) != 0) {
-            client->pers.teamInfo = qtrue;
+            client->pers.teamInfo = true;
         } else {
-            client->pers.teamInfo = qfalse;
+            client->pers.teamInfo = false;
         }
     }
 #else
     // teamInfo
     s = Info_ValueForKey(userinfo, "teamoverlay");
     if (!*s || atoi(s) != 0) {
-        client->pers.teamInfo = qtrue;
+        client->pers.teamInfo = true;
     } else {
-        client->pers.teamInfo = qfalse;
+        client->pers.teamInfo = false;
     }
 #endif
     /*
     s = Info_ValueForKey( userinfo, "cg_pmove_fixed" );
     if ( !*s || atoi( s ) == 0 ) {
-            client->pers.pmoveFixed = qfalse;
+            client->pers.pmoveFixed = false;
     }
     else {
-            client->pers.pmoveFixed = qtrue;
+            client->pers.pmoveFixed = true;
     }
     */
 
@@ -755,12 +755,12 @@ a string with the reason for denial.
 Otherwise, the client will be sent the current gamestate
 and will eventually get to ClientBegin.
 
-firstTime will be qtrue the very first time a client connects
-to the server machine, but qfalse on map changes and tournement
+firstTime will be true the very first time a client connects
+to the server machine, but false on map changes and tournement
 restarts.
 ============
 */
-char* ClientConnect(int clientNum, qboolean firstTime, qboolean isBot)
+char* ClientConnect(int clientNum, bool firstTime, bool isBot)
 {
     char* value;
     //	char		*areabits;
@@ -810,7 +810,7 @@ char* ClientConnect(int clientNum, qboolean firstTime, qboolean isBot)
 
     if (isBot) {
         ent->r.svFlags |= SVF_BOT;
-        ent->inuse = qtrue;
+        ent->inuse = true;
         if (!G_BotConnect(clientNum, !firstTime)) {
             return "BotConnectfailed";
         }
@@ -939,7 +939,7 @@ void ClientSpawn(gentity_t* ent)
         do {
             // the first spawn should be at a good looking spot
             if (!client->pers.initialSpawn && client->pers.localClient) {
-                client->pers.initialSpawn = qtrue;
+                client->pers.initialSpawn = true;
                 spawnPoint = SelectInitialSpawnPoint(spawn_origin, spawn_angles);
             } else {
                 // don't spawn near existing origin if possible
@@ -1017,8 +1017,8 @@ void ClientSpawn(gentity_t* ent)
 
     ent->s.groundEntityNum = ENTITYNUM_NONE;
     ent->client = &level.clients[index];
-    ent->takedamage = qtrue;
-    ent->inuse = qtrue;
+    ent->takedamage = true;
+    ent->inuse = true;
     ent->classname = "player";
     ent->r.contents = CONTENTS_BODY;
     ent->clipmask = MASK_PLAYERSOLID;
@@ -1103,7 +1103,7 @@ void ClientSpawn(gentity_t* ent)
 
     // positively link the client, even if the command times are weird
     if (ent->client->sess.sessionTeam != TEAM_SPECTATOR) {
-        BG_PlayerStateToEntityState(&client->ps, &ent->s, qtrue);
+        BG_PlayerStateToEntityState(&client->ps, &ent->s, true);
         VectorCopy(ent->client->ps.origin, ent->r.currentOrigin);
         trap_LinkEntity(ent);
     }
@@ -1112,7 +1112,7 @@ void ClientSpawn(gentity_t* ent)
     ClientEndFrame(ent);
 
     // clear entity state values
-    BG_PlayerStateToEntityState(&client->ps, &ent->s, qtrue);
+    BG_PlayerStateToEntityState(&client->ps, &ent->s, true);
 }
 
 /*
@@ -1180,7 +1180,7 @@ void ClientDisconnect(int clientNum)
 
     trap_UnlinkEntity(ent);
     ent->s.modelindex = 0;
-    ent->inuse = qfalse;
+    ent->inuse = false;
     ent->classname = "disconnected";
     ent->client->pers.connected = CON_DISCONNECTED;
     ent->client->ps.persistant[PERS_TEAM] = TEAM_FREE;
@@ -1191,6 +1191,6 @@ void ClientDisconnect(int clientNum)
     CalculateRanks();
 
     if (ent->r.svFlags & SVF_BOT) {
-        BotAIShutdownClient(clientNum, qfalse);
+        BotAIShutdownClient(clientNum, false);
     }
 }

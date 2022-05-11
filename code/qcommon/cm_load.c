@@ -384,7 +384,7 @@ void CMod_LoadVisibility(lump_t* l)
     }
     buf = cmod_base + l->fileofs;
 
-    cm.vised = qtrue;
+    cm.vised = true;
     cm.visibility = Hunk_Alloc(len, h_high);
     cm.numClusters = LittleLong(((int*)buf)[0]);
     cm.clusterBytes = LittleLong(((int*)buf)[1]);
@@ -457,7 +457,7 @@ CM_LoadMap
 Loads in the map and all submodels
 ==================
 */
-void CM_LoadMap(const char* name, qboolean clientload, int* checksum)
+void CM_LoadMap(const char* name, bool clientload, int* checksum)
 {
     int* buf;
     int i;

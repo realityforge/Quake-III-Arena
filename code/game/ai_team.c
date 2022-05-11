@@ -54,10 +54,10 @@ bot_ctftaskpreference_t ctftaskpreferences[MAX_CLIENTS];
 int BotValidTeamLeader(bot_state_t* bs)
 {
     if (!strlen(bs->teamleader))
-        return qfalse;
+        return false;
     if (ClientFromName(bs->teamleader) == -1)
-        return qfalse;
-    return qtrue;
+        return false;
+    return true;
 }
 
 int BotNumTeamMates(bot_state_t* bs)
@@ -1768,13 +1768,13 @@ int FindHumanTeamLeader(bot_state_t* bs)
                             // go on defense by default
                             BotVoiceChat_Defend(bs, i, SAY_TELL);
                         }
-                        return qtrue;
+                        return true;
                     }
                 }
             }
         }
     }
-    return qfalse;
+    return false;
 }
 
 void BotTeamAI(bot_state_t* bs)
@@ -1827,7 +1827,7 @@ void BotTeamAI(bot_state_t* bs)
         if (bs->numteammates != numteammates || bs->forceorders) {
             bs->teamgiveorders_time = FloatTime();
             bs->numteammates = numteammates;
-            bs->forceorders = qfalse;
+            bs->forceorders = false;
         }
         // if it's time to give orders
         if (bs->teamgiveorders_time && bs->teamgiveorders_time < FloatTime() - 5) {
@@ -1843,8 +1843,8 @@ void BotTeamAI(bot_state_t* bs)
         if (bs->numteammates != numteammates || bs->flagstatuschanged || bs->forceorders) {
             bs->teamgiveorders_time = FloatTime();
             bs->numteammates = numteammates;
-            bs->flagstatuschanged = qfalse;
-            bs->forceorders = qfalse;
+            bs->flagstatuschanged = false;
+            bs->forceorders = false;
         }
         // if there were no flag captures the last 3 minutes
         if (bs->lastflagcapture_time < FloatTime() - 240) {
@@ -1867,8 +1867,8 @@ void BotTeamAI(bot_state_t* bs)
         if (bs->numteammates != numteammates || bs->flagstatuschanged || bs->forceorders) {
             bs->teamgiveorders_time = FloatTime();
             bs->numteammates = numteammates;
-            bs->flagstatuschanged = qfalse;
-            bs->forceorders = qfalse;
+            bs->flagstatuschanged = false;
+            bs->forceorders = false;
         }
         // if there were no flag captures the last 4 minutes
         if (bs->lastflagcapture_time < FloatTime() - 240) {
@@ -1890,7 +1890,7 @@ void BotTeamAI(bot_state_t* bs)
         if (bs->numteammates != numteammates || bs->forceorders) {
             bs->teamgiveorders_time = FloatTime();
             bs->numteammates = numteammates;
-            bs->forceorders = qfalse;
+            bs->forceorders = false;
         }
         // if it's time to give orders
         if (bs->teamgiveorders_time && bs->teamgiveorders_time < FloatTime() - 5) {
@@ -1904,7 +1904,7 @@ void BotTeamAI(bot_state_t* bs)
         if (bs->numteammates != numteammates || bs->forceorders) {
             bs->teamgiveorders_time = FloatTime();
             bs->numteammates = numteammates;
-            bs->forceorders = qfalse;
+            bs->forceorders = false;
         }
         // if it's time to give orders
         if (bs->teamgiveorders_time && bs->teamgiveorders_time < FloatTime() - 5) {

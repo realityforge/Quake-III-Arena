@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "ui_local.h"
 
 uiStatic_t uis;
-qboolean m_entersound; // after a frame, so caching won't disrupt the sound
+bool m_entersound; // after a frame, so caching won't disrupt the sound
 
 // these are here so the functions in q_shared.c can link
 #ifndef UI_HARD_LINKED
@@ -94,7 +94,7 @@ void UI_PushMenu(menuframework_t* menu)
     menu->cursor = 0;
     menu->cursor_prev = 0;
 
-    m_entersound = qtrue;
+    m_entersound = true;
 
     trap_Key_SetCatcher(KEYCATCH_UI);
 
@@ -108,7 +108,7 @@ void UI_PushMenu(menuframework_t* menu)
         }
     }
 
-    uis.firstdraw = qtrue;
+    uis.firstdraw = true;
 }
 
 void UI_PopMenu(void)
@@ -122,7 +122,7 @@ void UI_PopMenu(void)
 
     if (uis.menusp) {
         uis.activemenu = uis.stack[uis.menusp - 1];
-        uis.firstdraw = qtrue;
+        uis.firstdraw = true;
     } else {
         UI_ForceMenuOff();
     }
@@ -598,7 +598,7 @@ static void UI_DrawString2(int x, int y, const char* str, vec4_t color, int char
 {
     const char* s;
     char ch;
-    int forceColor = qfalse; // APSFIXME;
+    int forceColor = false; // APSFIXME;
     vec4_t tempcolor;
     float ax;
     float ay;
@@ -720,13 +720,13 @@ void UI_DrawChar(int x, int y, int ch, int style, vec4_t color)
     UI_DrawString(x, y, buff, style, color);
 }
 
-qboolean UI_IsFullscreen(void)
+bool UI_IsFullscreen(void)
 {
     if (uis.activemenu && (trap_Key_GetCatcher() & KEYCATCH_UI)) {
         return uis.activemenu->fullscreen;
     }
 
-    return qfalse;
+    return false;
 }
 
 void UI_SetActiveMenu(uiMenuCommand_t menu)
@@ -882,7 +882,7 @@ void UI_Cache_f(void)
     UI_ModsMenu_Cache();
 }
 
-qboolean UI_ConsoleCommand(int realTime)
+bool UI_ConsoleCommand(int realTime)
 {
     char* cmd;
 
@@ -893,40 +893,40 @@ qboolean UI_ConsoleCommand(int realTime)
 
     if (Q_stricmp(cmd, "levelselect") == 0) {
         UI_SPLevelMenu_f();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "postgame") == 0) {
         UI_SPPostgameMenu_f();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "ui_cache") == 0) {
         UI_Cache_f();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "ui_cinematics") == 0) {
         UI_CinematicsMenu_f();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "ui_teamOrders") == 0) {
         UI_TeamOrdersMenu_f();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "iamacheater") == 0) {
         UI_SPUnlock_f();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "iamamonkey") == 0) {
         UI_SPUnlockMedals_f();
-        return qtrue;
+        return true;
     }
 
-    return qfalse;
+    return false;
 }
 
 void UI_Shutdown(void)
@@ -1084,7 +1084,7 @@ void UI_Refresh(int realtime)
 
         if (uis.firstdraw) {
             UI_MouseEvent(0, 0);
-            uis.firstdraw = qfalse;
+            uis.firstdraw = false;
         }
     }
 
@@ -1104,14 +1104,14 @@ void UI_Refresh(int realtime)
     // caching images
     if (m_entersound) {
         trap_S_StartLocalSound(menu_in_sound, CHAN_LOCAL_SOUND);
-        m_entersound = qfalse;
+        m_entersound = false;
     }
 }
 
-qboolean UI_CursorInRect(int x, int y, int width, int height)
+bool UI_CursorInRect(int x, int y, int width, int height)
 {
     if (uis.cursorx < x || uis.cursory < y || uis.cursorx > x + width || uis.cursory > y + height)
-        return qfalse;
+        return false;
 
-    return qtrue;
+    return true;
 }

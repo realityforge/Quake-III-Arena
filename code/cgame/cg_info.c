@@ -112,7 +112,7 @@ void CG_LoadingClient(int clientNum)
     Q_CleanStr(personality);
 
     if (cgs.gametype == GT_SINGLE_PLAYER) {
-        trap_S_RegisterSound(va("sound/player/announce/%s.wav", personality), qtrue);
+        trap_S_RegisterSound(va("sound/player/announce/%s.wav", personality), true);
     }
 
     CG_LoadingString(personality);

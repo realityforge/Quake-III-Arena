@@ -163,7 +163,7 @@ void Sys_ListFilteredFiles(const char* basedir, char* subdirs, char* filter, cha
             break;
         }
         Com_sprintf(filename, sizeof(filename), "%s\\%s", subdirs, findinfo.name);
-        if (!Com_FilterPath(filter, filename, qfalse))
+        if (!Com_FilterPath(filter, filename, false))
             continue;
         list[*numfiles] = CopyString(filename);
         (*numfiles)++;
@@ -172,7 +172,7 @@ void Sys_ListFilteredFiles(const char* basedir, char* subdirs, char* filter, cha
     _findclose(findhandle);
 }
 
-static qboolean strgtr(const char* s0, const char* s1)
+static bool strgtr(const char* s0, const char* s1)
 {
     int l0, l1, i;
 
@@ -185,16 +185,16 @@ static qboolean strgtr(const char* s0, const char* s1)
 
     for (i = 0; i < l0; i++) {
         if (s1[i] > s0[i]) {
-            return qtrue;
+            return true;
         }
         if (s1[i] < s0[i]) {
-            return qfalse;
+            return false;
         }
     }
-    return qfalse;
+    return false;
 }
 
-char** Sys_ListFiles(const char* directory, const char* extension, char* filter, int* numfiles, qboolean wantsubs)
+char** Sys_ListFiles(const char* directory, const char* extension, char* filter, int* numfiles, bool wantsubs)
 {
     char search[MAX_OSPATH];
     int nfiles;

@@ -37,22 +37,22 @@ void BotUpdateBattleInventory(bot_state_t* bs, int enemy);
 // use holdable items during battle
 void BotBattleUseItems(bot_state_t* bs);
 // return true if the bot is dead
-qboolean BotIsDead(bot_state_t* bs);
+bool BotIsDead(bot_state_t* bs);
 // returns true if the bot is in observer mode
-qboolean BotIsObserver(bot_state_t* bs);
+bool BotIsObserver(bot_state_t* bs);
 // returns true if the bot is in the intermission
-qboolean BotIntermission(bot_state_t* bs);
+bool BotIntermission(bot_state_t* bs);
 // returns true if the bot is in lava or slime
-qboolean BotInLavaOrSlime(bot_state_t* bs);
+bool BotInLavaOrSlime(bot_state_t* bs);
 // returns true if the entity is dead
-qboolean EntityIsDead(aas_entityinfo_t* entinfo);
+bool EntityIsDead(aas_entityinfo_t* entinfo);
 // returns true if the entity is invisible
-qboolean EntityIsInvisible(aas_entityinfo_t* entinfo);
+bool EntityIsInvisible(aas_entityinfo_t* entinfo);
 // returns true if the entity is shooting
-qboolean EntityIsShooting(aas_entityinfo_t* entinfo);
+bool EntityIsShooting(aas_entityinfo_t* entinfo);
 #ifdef MISSIONPACK
 // returns true if this entity has the kamikaze
-qboolean EntityHasKamikaze(aas_entityinfo_t* entinfo);
+bool EntityHasKamikaze(aas_entityinfo_t* entinfo);
 #endif
 // set a user info key/value pair
 void BotSetUserInfo(bot_state_t* bs, char* key, char* value);
@@ -99,7 +99,7 @@ int BotEnemyFlagCarrierVisible(bot_state_t* bs);
 // get the number of visible teammates and enemies
 void BotVisibleTeamMatesAndEnemies(bot_state_t* bs, int* teammates, int* enemies, float range);
 // returns true if within the field of vision for the given angles
-qboolean InFieldOfVision(vec3_t viewangles, float fov, vec3_t angles);
+bool InFieldOfVision(vec3_t viewangles, float fov, vec3_t angles);
 // returns true and sets the .enemy field when an enemy is found
 int BotFindEnemy(bot_state_t* bs, int curenemy);
 // returns a roam goal

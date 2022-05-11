@@ -136,14 +136,14 @@ int BotAI_GetClientState(int clientNum, playerState_t* state)
 
     ent = &g_entities[clientNum];
     if (!ent->inuse) {
-        return qfalse;
+        return false;
     }
     if (!ent->client) {
-        return qfalse;
+        return false;
     }
 
     memcpy(state, &ent->client->ps, sizeof(playerState_t));
-    return qtrue;
+    return true;
 }
 
 int BotAI_GetEntityState(int entityNum, entityState_t* state)
@@ -153,13 +153,13 @@ int BotAI_GetEntityState(int entityNum, entityState_t* state)
     ent = &g_entities[entityNum];
     memset(state, 0, sizeof(entityState_t));
     if (!ent->inuse)
-        return qfalse;
+        return false;
     if (!ent->r.linked)
-        return qfalse;
+        return false;
     if (ent->r.svFlags & SVF_NOCLIENT)
-        return qfalse;
+        return false;
     memcpy(state, &ent->s, sizeof(entityState_t));
-    return qtrue;
+    return true;
 }
 
 int BotAI_GetSnapshotEntity(int clientNum, int sequence, entityState_t* state)
@@ -441,7 +441,7 @@ void BotInterbreeding(void)
     // shutdown all the bots
     for (i = 0; i < MAX_CLIENTS; i++) {
         if (botstates[i] && botstates[i]->inuse) {
-            BotAIShutdownClient(botstates[i]->client, qfalse);
+            BotAIShutdownClient(botstates[i]->client, false);
         }
     }
     // make sure all item weight configs are reloaded and Not shared
@@ -451,7 +451,7 @@ void BotInterbreeding(void)
         trap_SendConsoleCommand(EXEC_INSERT, va("addbot %s 4 free %i %s%d\n", bot_interbreedchar.string, i * 50, bot_interbreedchar.string, i));
     }
     trap_Cvar_Set("bot_interbreedchar", "");
-    bot_interbreed = qtrue;
+    bot_interbreed = true;
 }
 
 void BotEntityInfo(int entnum, aas_entityinfo_t* info)
@@ -470,10 +470,10 @@ int BotTeamLeader(bot_state_t* bs)
 
     leader = ClientFromName(bs->teamleader);
     if (leader < 0)
-        return qfalse;
+        return false;
     if (!botstates[leader] || !botstates[leader]->inuse)
-        return qfalse;
-    return qtrue;
+        return false;
+    return true;
 }
 
 float AngleDifference(float ang1, float ang2)
@@ -728,7 +728,7 @@ int BotAI(int client, float thinktime)
     bs = botstates[client];
     if (!bs || !bs->inuse) {
         BotAI_Print(PRT_FATAL, "BotAI: client %d is not setup\n", client);
-        return qfalse;
+        return false;
     }
 
     // retrieve the current client state
@@ -799,7 +799,7 @@ int BotAI(int client, float thinktime)
         bs->viewangles[j] = AngleMod(bs->viewangles[j] - SHORT2ANGLE(bs->cur_ps.delta_angles[j]));
     }
     // everything was ok
-    return qtrue;
+    return true;
 }
 
 void BotScheduleBotThink(void)
@@ -883,7 +883,7 @@ void BotReadSessionData(bot_state_t* bs)
            &bs->lastgoal_teamgoal.maxs[2]);
 }
 
-int BotAISetupClient(int client, struct bot_settings_s* settings, qboolean restart)
+int BotAISetupClient(int client, struct bot_settings_s* settings, bool restart)
 {
     char filename[MAX_PATH], name[MAX_PATH], gender[MAX_PATH];
     bot_state_t* bs;
@@ -895,19 +895,19 @@ int BotAISetupClient(int client, struct bot_settings_s* settings, qboolean resta
 
     if (bs && bs->inuse) {
         BotAI_Print(PRT_FATAL, "BotAISetupClient: client %d already setup\n", client);
-        return qfalse;
+        return false;
     }
 
     if (!trap_AAS_Initialized()) {
         BotAI_Print(PRT_FATAL, "AAS not initialized\n");
-        return qfalse;
+        return false;
     }
 
     // load the bot character
     bs->character = trap_BotLoadCharacter(settings->characterfile, settings->skill);
     if (!bs->character) {
         BotAI_Print(PRT_FATAL, "couldn't load skill %f from %s\n", settings->skill, settings->characterfile);
-        return qfalse;
+        return false;
     }
     // copy the settings
     memcpy(&bs->settings, settings, sizeof(bot_settings_t));
@@ -918,7 +918,7 @@ int BotAISetupClient(int client, struct bot_settings_s* settings, qboolean resta
     errnum = trap_BotLoadItemWeights(bs->gs, filename);
     if (errnum != BLERR_NOERROR) {
         trap_BotFreeGoalState(bs->gs);
-        return qfalse;
+        return false;
     }
     // allocate a weapon state
     bs->ws = trap_BotAllocWeaponState();
@@ -928,7 +928,7 @@ int BotAISetupClient(int client, struct bot_settings_s* settings, qboolean resta
     if (errnum != BLERR_NOERROR) {
         trap_BotFreeGoalState(bs->gs);
         trap_BotFreeWeaponState(bs->ws);
-        return qfalse;
+        return false;
     }
     // allocate a chat state
     bs->cs = trap_BotAllocChatState();
@@ -940,7 +940,7 @@ int BotAISetupClient(int client, struct bot_settings_s* settings, qboolean resta
         trap_BotFreeChatState(bs->cs);
         trap_BotFreeGoalState(bs->gs);
         trap_BotFreeWeaponState(bs->ws);
-        return qfalse;
+        return false;
     }
     // get the gender characteristic
     trap_Characteristic_String(bs->character, CHARACTERISTIC_GENDER, gender, MAX_PATH);
@@ -952,7 +952,7 @@ int BotAISetupClient(int client, struct bot_settings_s* settings, qboolean resta
     else
         trap_BotSetChatGender(bs->cs, CHAT_GENDERLESS);
 
-    bs->inuse = qtrue;
+    bs->inuse = true;
     bs->client = client;
     bs->entitynum = client;
     bs->setupcount = 4;
@@ -976,17 +976,17 @@ int BotAISetupClient(int client, struct bot_settings_s* settings, qboolean resta
         BotReadSessionData(bs);
     }
     // bot has been setup successfully
-    return qtrue;
+    return true;
 }
 
-int BotAIShutdownClient(int client, qboolean restart)
+int BotAIShutdownClient(int client, bool restart)
 {
     bot_state_t* bs;
 
     bs = botstates[client];
     if (!bs || !bs->inuse) {
         // BotAI_Print(PRT_ERROR, "BotAIShutdownClient: client %d already shutdown\n", client);
-        return qfalse;
+        return false;
     }
 
     if (restart) {
@@ -1012,12 +1012,12 @@ int BotAIShutdownClient(int client, qboolean restart)
     BotClearActivateGoalStack(bs);
     // clear the bot state
     memset(bs, 0, sizeof(bot_state_t));
-    // set the inuse flag to qfalse
-    bs->inuse = qfalse;
+    // set the inuse flag to false
+    bs->inuse = false;
     // there's one bot less
     numbots--;
     // everything went ok
-    return qtrue;
+    return true;
 }
 
 /*
@@ -1098,7 +1098,7 @@ int BotAILoadMap(int restart)
 
     BotSetupDeathmatchAI();
 
-    return qtrue;
+    return true;
 }
 
 #ifdef MISSIONPACK
@@ -1148,7 +1148,7 @@ int BotAIStartFrame(int time)
             botstates[i]->lastucmd.serverTime = time;
             trap_BotUserCommand(botstates[i]->client, &botstates[i]->lastucmd);
         }
-        return qtrue;
+        return true;
     }
 
     if (bot_memorydump.integer) {
@@ -1188,7 +1188,7 @@ int BotAIStartFrame(int time)
         trap_BotLibStartFrame((float)time / 1000);
 
         if (!trap_AAS_Initialized())
-            return qfalse;
+            return false;
 
         // update entities in the botlib
         for (i = 0; i < MAX_GENTITIES; i++) {
@@ -1268,7 +1268,7 @@ int BotAIStartFrame(int time)
             botstates[i]->botthink_residual -= thinktime;
 
             if (!trap_AAS_Initialized())
-                return qfalse;
+                return false;
 
             if (g_entities[i].client->pers.connected == CON_CONNECTED) {
                 BotAI(i, (float)thinktime / 1000);
@@ -1289,7 +1289,7 @@ int BotAIStartFrame(int time)
         trap_BotUserCommand(botstates[i]->client, &botstates[i]->lastucmd);
     }
 
-    return qtrue;
+    return true;
 }
 
 int BotInitLibrary(void)
@@ -1390,7 +1390,7 @@ int BotAISetup(int restart)
 
     // if the game is restarted for a tournament
     if (restart) {
-        return qtrue;
+        return true;
     }
 
     // initialize the bot states
@@ -1398,8 +1398,8 @@ int BotAISetup(int restart)
 
     errnum = BotInitLibrary();
     if (errnum != BLERR_NOERROR)
-        return qfalse;
-    return qtrue;
+        return false;
+    return true;
 }
 
 int BotAIShutdown(int restart)
@@ -1419,5 +1419,5 @@ int BotAIShutdown(int restart)
     } else {
         trap_BotLibShutdown();
     }
-    return qtrue;
+    return true;
 }

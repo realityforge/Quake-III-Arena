@@ -73,7 +73,7 @@ void G_ExplodeMissile(gentity_t* ent)
     ent->s.eType = ET_GENERAL;
     G_AddEvent(ent, EV_MISSILE_MISS, DirToByte(dir));
 
-    ent->freeAfterEvent = qtrue;
+    ent->freeAfterEvent = true;
 
     // splash damage
     if (ent->splashDamage) {
@@ -146,7 +146,7 @@ static void ProximityMine_Activate(gentity_t* ent)
     ent->think = ProximityMine_Explode;
     ent->nextthink = level.time + g_proxMineTimeout.integer;
 
-    ent->takedamage = qtrue;
+    ent->takedamage = true;
     ent->health = 1;
     ent->die = ProximityMine_Die;
 
@@ -230,7 +230,7 @@ static void ProximityMine_Player(gentity_t* mine, gentity_t* player)
 void G_MissileImpact(gentity_t* ent, trace_t* trace)
 {
     gentity_t* other;
-    qboolean hitClient = qfalse;
+    bool hitClient = false;
 #ifdef MISSIONPACK
     vec3_t forward, impactpoint, bouncedir;
     int eFlags;
@@ -271,7 +271,7 @@ void G_MissileImpact(gentity_t* ent, trace_t* trace)
 
             if (LogAccuracyHit(other, &g_entities[ent->r.ownerNum])) {
                 g_entities[ent->r.ownerNum].client->accuracy_hits++;
-                hitClient = qtrue;
+                hitClient = true;
             }
             BG_EvaluateTrajectoryDelta(&ent->s.pos, level.time, velocity);
             if (VectorLength(velocity) == 0) {
@@ -345,7 +345,7 @@ void G_MissileImpact(gentity_t* ent, trace_t* trace)
 
         SnapVectorTowards(v, ent->s.pos.trBase); // save net bandwidth
 
-        nent->freeAfterEvent = qtrue;
+        nent->freeAfterEvent = true;
         // change over to a normal entity right at the point of impact
         nent->s.eType = ET_GENERAL;
         ent->s.eType = ET_GRAPPLE;
@@ -377,7 +377,7 @@ void G_MissileImpact(gentity_t* ent, trace_t* trace)
         G_AddEvent(ent, EV_MISSILE_MISS, DirToByte(trace->plane.normal));
     }
 
-    ent->freeAfterEvent = qtrue;
+    ent->freeAfterEvent = true;
 
     // change over to a normal entity right at the point of impact
     ent->s.eType = ET_GENERAL;

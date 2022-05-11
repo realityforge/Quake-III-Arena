@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // linux_local.h: Linux-specific Quake3 header file
 
 void Sys_QueEvent(int time, sysEventType_t type, int value, int value2, int ptrLength, void* ptr);
-qboolean Sys_GetPacket(netadr_t* net_from, msg_t* net_message);
+bool Sys_GetPacket(netadr_t* net_from, msg_t* net_message);
 void Sys_SendKeyEvents(void);
 
 #ifndef DEDICATED
@@ -37,7 +37,7 @@ void IN_StartupJoystick(void);
 #endif
 
 // GL subsystem
-qboolean QGL_Init(const char* dllname);
+bool QGL_Init(const char* dllname);
 void QGL_Shutdown(void);
 
 char* strlwr(char* s);

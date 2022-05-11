@@ -37,7 +37,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #import <sys/types.h>
 #import <unistd.h>
 
-static qboolean inputActive;
+static bool inputActive;
 
 static NSDate* distantPast;
 
@@ -49,7 +49,7 @@ static cvar_t* in_disableOSMouseScaling;
 
 static void Sys_StartMouseInput();
 static void Sys_StopMouseInput();
-static qboolean mouseactive = qfalse;
+static bool mouseactive = false;
 static BOOL inputRectValid = NO;
 static CGRect inputRect;
 static NXMouseScaling originalScaling;
@@ -126,7 +126,7 @@ void Sys_InitInput(void)
 
     glw_state.display = Sys_DisplayToUse();
 
-    inputActive = qtrue;
+    inputActive = true;
 
     if (in_nomouse->integer == 0)
         Sys_StartMouseInput();
@@ -142,7 +142,7 @@ void Sys_ShutdownInput(void)
     if (!inputActive) {
         return;
     }
-    inputActive = qfalse;
+    inputActive = false;
 
     if (mouseactive)
         Sys_StopMouseInput();
@@ -177,7 +177,7 @@ static void Sys_StartMouseInput()
 
     Com_Printf("Starting mouse input\n");
 
-    mouseactive = qtrue;
+    mouseactive = true;
     if (inputRectValid && !glConfig.isFullscreen)
         // Make sure that if window moved we don't hose the user...
         Sys_UpdateWindowMouseInputRect();
@@ -218,7 +218,7 @@ static void Sys_StopMouseInput()
         NXCloseEventStatus(eventStatus);
     }
 
-    mouseactive = qfalse;
+    mouseactive = false;
     Sys_ReenableMouseMovement();
 
     [NSCursor unhide];
@@ -299,15 +299,15 @@ static void Sys_ProcessMouseMovedEvent(NSEvent* mouseMovedEvent, int currentTime
 }
 
 // If we are 'paused' (i.e., in any state that our normal key bindings aren't in effect), then interpret cmd-h and cmd-tab as hiding the application.
-static qboolean maybeHide()
+static bool maybeHide()
 {
     if ((currentModifierFlags & NSCommandKeyMask) == 0)
-        return qfalse;
+        return false;
 
     return Sys_Hide();
 }
 
-static inline void sendEventForCharacter(NSEvent* event, unichar character, qboolean keyDownFlag, int currentTime)
+static inline void sendEventForCharacter(NSEvent* event, unichar character, bool keyDownFlag, int currentTime)
 {
     if (in_showevents->integer)
         Com_Printf("CHARACTER: 0x%02x down=%d\n", character, keyDownFlag);
@@ -514,7 +514,7 @@ static inline void sendEventForCharacter(NSEvent* event, unichar character, qboo
     }
 }
 
-static inline void processKeyEvent(NSEvent* keyEvent, qboolean keyDownFlag, int currentTime)
+static inline void processKeyEvent(NSEvent* keyEvent, bool keyDownFlag, int currentTime)
 {
     NSEventType eventType;
     NSString* characters;
@@ -630,16 +630,16 @@ static inline void processEvent(NSEvent* event, int currentTime)
     switch (eventType) {
     // These six event types are ignored since we do all of our mouse down/up process via the uber-mouse system defined event.  We have to accept these events however since they get enqueued and the queue will fill up if we don't.
     case NSLeftMouseDown:
-        // Sys_QueEvent(currentTime, SE_KEY, K_MOUSE1, qtrue, 0, NULL);
+        // Sys_QueEvent(currentTime, SE_KEY, K_MOUSE1, true, 0, NULL);
         return;
     case NSLeftMouseUp:
-        // Sys_QueEvent(currentTime, SE_KEY, K_MOUSE1, qfalse, 0, NULL);
+        // Sys_QueEvent(currentTime, SE_KEY, K_MOUSE1, false, 0, NULL);
         return;
     case NSRightMouseDown:
-        // Sys_QueEvent(currentTime, SE_KEY, K_MOUSE2, qtrue, 0, NULL);
+        // Sys_QueEvent(currentTime, SE_KEY, K_MOUSE2, true, 0, NULL);
         return;
     case NSRightMouseUp:
-        // Sys_QueEvent(currentTime, SE_KEY, K_MOUSE2, qfalse, 0, NULL);
+        // Sys_QueEvent(currentTime, SE_KEY, K_MOUSE2, false, 0, NULL);
         return;
     case 25: // other mouse down
         return;
@@ -664,11 +664,11 @@ static inline void processEvent(NSEvent* event, int currentTime)
         return;
     case NSScrollWheel:
         if ([event deltaY] < 0.0) {
-            Sys_QueEvent(currentTime, SE_KEY, K_MWHEELDOWN, qtrue, 0, NULL);
-            Sys_QueEvent(currentTime, SE_KEY, K_MWHEELDOWN, qfalse, 0, NULL);
+            Sys_QueEvent(currentTime, SE_KEY, K_MWHEELDOWN, true, 0, NULL);
+            Sys_QueEvent(currentTime, SE_KEY, K_MWHEELDOWN, false, 0, NULL);
         } else {
-            Sys_QueEvent(currentTime, SE_KEY, K_MWHEELUP, qtrue, 0, NULL);
-            Sys_QueEvent(currentTime, SE_KEY, K_MWHEELUP, qfalse, 0, NULL);
+            Sys_QueEvent(currentTime, SE_KEY, K_MWHEELUP, true, 0, NULL);
+            Sys_QueEvent(currentTime, SE_KEY, K_MWHEELUP, false, 0, NULL);
         }
         return;
     default:
@@ -724,7 +724,7 @@ EVENT LOOP
 ========================================================================
 */
 
-extern qboolean Sys_GetPacket(netadr_t* net_from, msg_t* net_message);
+extern bool Sys_GetPacket(netadr_t* net_from, msg_t* net_message);
 
 #define MAX_QUED_EVENTS 256
 #define MASK_QUED_EVENTS (MAX_QUED_EVENTS - 1)

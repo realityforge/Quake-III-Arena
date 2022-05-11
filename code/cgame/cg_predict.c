@@ -124,7 +124,7 @@ static void CG_ClipMoveToEntities(const vec3_t start, const vec3_t mins, const v
             trace.entityNum = ent->number;
             *tr = trace;
         } else if (trace.startsolid) {
-            tr->startsolid = qtrue;
+            tr->startsolid = true;
         }
         if (tr->allsolid) {
             return;
@@ -187,7 +187,7 @@ Generates cg.predictedPlayerState by interpolating between
 cg.snap->player_state and cg.nextFrame->player_state
 ========================
 */
-static void CG_InterpolatePlayerState(qboolean grabAngles)
+static void CG_InterpolatePlayerState(bool grabAngles)
 {
     float f;
     int i;
@@ -310,7 +310,7 @@ static void CG_TouchTriggerPrediction(void)
     entityState_t* ent;
     clipHandle_t cmodel;
     centity_t* cent;
-    qboolean spectator;
+    bool spectator;
 
     // dead clients don't activate triggers
     if (cg.predictedPlayerState.stats[STAT_HEALTH] <= 0) {
@@ -349,7 +349,7 @@ static void CG_TouchTriggerPrediction(void)
         }
 
         if (ent->eType == ET_TELEPORT_TRIGGER) {
-            cg.hyperspace = qtrue;
+            cg.hyperspace = true;
         } else if (ent->eType == ET_PUSH_TRIGGER) {
             BG_TouchJumpPad(&cg.predictedPlayerState, ent);
         }
@@ -392,29 +392,29 @@ void CG_PredictPlayerState(void)
 {
     int cmdNum, current;
     playerState_t oldPlayerState;
-    qboolean moved;
+    bool moved;
     usercmd_t oldestCmd;
     usercmd_t latestCmd;
 
-    cg.hyperspace = qfalse; // will be set if touching a trigger_teleport
+    cg.hyperspace = false; // will be set if touching a trigger_teleport
 
     // if this is the first frame we must guarantee
     // predictedPlayerState is valid even if there is some
     // other error condition
     if (!cg.validPPS) {
-        cg.validPPS = qtrue;
+        cg.validPPS = true;
         cg.predictedPlayerState = cg.snap->ps;
     }
 
     // demo playback just copies the moves
     if (cg.demoPlayback || (cg.snap->ps.pm_flags & PMF_FOLLOW)) {
-        CG_InterpolatePlayerState(qfalse);
+        CG_InterpolatePlayerState(false);
         return;
     }
 
     // non-predicting local movement will grab the latest angles
     if (cg_nopredict.integer || cg_synchronousClients.integer) {
-        CG_InterpolatePlayerState(qtrue);
+        CG_InterpolatePlayerState(true);
         return;
     }
 
@@ -475,7 +475,7 @@ void CG_PredictPlayerState(void)
     cg_pmove.pmove_msec = pmove_msec.integer;
 
     // run cmds
-    moved = qfalse;
+    moved = false;
     for (cmdNum = current - CMD_BACKUP + 1; cmdNum <= current; cmdNum++) {
         // get the command
         trap_GetUserCmd(cmdNum, &cg_pmove.cmd);
@@ -509,7 +509,7 @@ void CG_PredictPlayerState(void)
                 if (cg_showmiss.integer) {
                     CG_Printf("PredictionTeleport\n");
                 }
-                cg.thisFrameTeleport = qfalse;
+                cg.thisFrameTeleport = false;
             } else {
                 vec3_t adjusted;
                 CG_AdjustPositionForMover(cg.predictedPlayerState.origin,
@@ -550,7 +550,7 @@ void CG_PredictPlayerState(void)
 
         // don't predict gauntlet firing, which is only supposed to happen
         // when it actually inflicts damage
-        cg_pmove.gauntletHit = qfalse;
+        cg_pmove.gauntletHit = false;
 
         if (cg_pmove.pmove_fixed) {
             cg_pmove.cmd.serverTime = ((cg_pmove.cmd.serverTime + pmove_msec.integer - 1) / pmove_msec.integer) * pmove_msec.integer;
@@ -558,7 +558,7 @@ void CG_PredictPlayerState(void)
 
         Pmove(&cg_pmove);
 
-        moved = qtrue;
+        moved = true;
 
         // add push trigger movement effects
         CG_TouchTriggerPrediction();

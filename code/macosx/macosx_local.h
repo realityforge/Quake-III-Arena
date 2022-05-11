@@ -49,9 +49,9 @@ extern void Sys_QueEvent(int time, sysEventType_t type, int value, int value2, i
 extern void Sys_AnnoyingBanner();
 
 // In macosx_glimp.m
-extern qboolean Sys_IsHidden;
-extern qboolean Sys_Hide();
-extern qboolean Sys_Unhide();
+extern bool Sys_IsHidden;
+extern bool Sys_Hide();
+extern bool Sys_Unhide();
 
 typedef struct {
     CGDirectDisplayID display;
@@ -74,7 +74,7 @@ typedef struct
 
     NSOpenGLContext* _ctx;
     CGLContextObj _cgl_ctx;
-    qboolean _ctx_is_current;
+    bool _ctx_is_current;
     NSWindow* window;
 
     unsigned int bufferSwapCount;

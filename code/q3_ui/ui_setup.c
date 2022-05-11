@@ -62,7 +62,7 @@ typedef struct {
 
 static setupMenuInfo_t setupMenuInfo;
 
-static void Setup_ResetDefaults_Action(qboolean result)
+static void Setup_ResetDefaults_Action(bool result)
 {
     if (!result) {
         return;
@@ -118,8 +118,8 @@ static void UI_SetupMenu_Init(void)
     UI_SetupMenu_Cache();
 
     memset(&setupMenuInfo, 0, sizeof(setupMenuInfo));
-    setupMenuInfo.menu.wrapAround = qtrue;
-    setupMenuInfo.menu.fullscreen = qtrue;
+    setupMenuInfo.menu.wrapAround = true;
+    setupMenuInfo.menu.fullscreen = true;
 
     setupMenuInfo.banner.generic.type = MTYPE_BTEXT;
     setupMenuInfo.banner.generic.x = 320;

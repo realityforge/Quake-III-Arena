@@ -50,47 +50,47 @@ int ReadValue(source_t* source, float* value)
     token_t token;
 
     if (!PC_ExpectAnyToken(source, &token))
-        return qfalse;
+        return false;
     if (!strcmp(token.string, "-")) {
         SourceWarning(source, "negative value set to zero\n");
         if (!PC_ExpectTokenType(source, TT_NUMBER, 0, &token))
-            return qfalse;
+            return false;
     }
     if (token.type != TT_NUMBER) {
         SourceError(source, "invalid return value %s\n", token.string);
-        return qfalse;
+        return false;
     }
     *value = token.floatvalue;
-    return qtrue;
+    return true;
 }
 int ReadFuzzyWeight(source_t* source, fuzzyseperator_t* fs)
 {
     if (PC_CheckTokenString(source, "balance")) {
         fs->type = WT_BALANCE;
         if (!PC_ExpectTokenString(source, "("))
-            return qfalse;
+            return false;
         if (!ReadValue(source, &fs->weight))
-            return qfalse;
+            return false;
         if (!PC_ExpectTokenString(source, ","))
-            return qfalse;
+            return false;
         if (!ReadValue(source, &fs->minweight))
-            return qfalse;
+            return false;
         if (!PC_ExpectTokenString(source, ","))
-            return qfalse;
+            return false;
         if (!ReadValue(source, &fs->maxweight))
-            return qfalse;
+            return false;
         if (!PC_ExpectTokenString(source, ")"))
-            return qfalse;
+            return false;
     } else {
         fs->type = 0;
         if (!ReadValue(source, &fs->weight))
-            return qfalse;
+            return false;
         fs->minweight = fs->weight;
         fs->maxweight = fs->weight;
     }
     if (!PC_ExpectTokenString(source, ";"))
-        return qfalse;
-    return qtrue;
+        return false;
+    return true;
 }
 void FreeFuzzySeperators_r(fuzzyseperator_t* fs)
 {
@@ -125,7 +125,7 @@ fuzzyseperator_t* ReadFuzzySeperators_r(source_t* source)
     token_t token;
     fuzzyseperator_t *fs, *lastfs, *firstfs;
 
-    founddefault = qfalse;
+    founddefault = false;
     firstfs = NULL;
     lastfs = NULL;
     if (!PC_ExpectTokenString(source, "("))
@@ -156,7 +156,7 @@ fuzzyseperator_t* ReadFuzzySeperators_r(source_t* source)
                     return NULL;
                 }
                 fs->value = MAX_INVENTORYVALUE;
-                founddefault = qtrue;
+                founddefault = true;
             } else {
                 if (!PC_ExpectTokenType(source, TT_NUMBER, TT_INTEGER, &token)) {
                     FreeFuzzySeperators_r(firstfs);
@@ -168,9 +168,9 @@ fuzzyseperator_t* ReadFuzzySeperators_r(source_t* source)
                 FreeFuzzySeperators_r(firstfs);
                 return NULL;
             }
-            newindent = qfalse;
+            newindent = false;
             if (!strcmp(token.string, "{")) {
-                newindent = qtrue;
+                newindent = true;
                 if (!PC_ExpectAnyToken(source, &token)) {
                     FreeFuzzySeperators_r(firstfs);
                     return NULL;
@@ -287,9 +287,9 @@ weightconfig_t* ReadWeightConfig(char* filename)
                 FreeSource(source);
                 return NULL;
             }
-            newindent = qfalse;
+            newindent = false;
             if (!strcmp(token.string, "{")) {
-                newindent = qtrue;
+                newindent = true;
                 if (!PC_ExpectAnyToken(source, &token)) {
                     FreeWeightConfig(config);
                     FreeSource(source);
@@ -540,15 +540,15 @@ int InterbreedFuzzySeperator_r(fuzzyseperator_t* fs1, fuzzyseperator_t* fs2,
     if (fs1->child) {
         if (!fs2->child || !fsout->child) {
             botimport.Print(PRT_ERROR, "cannot interbreed weight configs, unequal child\n");
-            return qfalse;
+            return false;
         }
         if (!InterbreedFuzzySeperator_r(fs2->child, fs2->child, fsout->child)) {
-            return qfalse;
+            return false;
         }
     } else if (fs1->type == WT_BALANCE) {
         if (fs2->type != WT_BALANCE || fsout->type != WT_BALANCE) {
             botimport.Print(PRT_ERROR, "cannot interbreed weight configs, unequal balance\n");
-            return qfalse;
+            return false;
         }
         fsout->weight = (fs1->weight + fs2->weight) / 2;
         if (fsout->weight > fsout->maxweight)
@@ -559,13 +559,13 @@ int InterbreedFuzzySeperator_r(fuzzyseperator_t* fs1, fuzzyseperator_t* fs2,
     if (fs1->next) {
         if (!fs2->next || !fsout->next) {
             botimport.Print(PRT_ERROR, "cannot interbreed weight configs, unequal next\n");
-            return qfalse;
+            return false;
         }
         if (!InterbreedFuzzySeperator_r(fs1->next, fs2->next, fsout->next)) {
-            return qfalse;
+            return false;
         }
     }
-    return qtrue;
+    return true;
 }
 //===========================================================================
 // config1 and config2 are interbreeded and stored in configout

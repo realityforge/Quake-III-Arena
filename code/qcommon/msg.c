@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 static huffman_t msgHuff;
 
-static qboolean msgInit = qfalse;
+static bool msgInit = false;
 
 int pcount[256];
 
@@ -59,26 +59,26 @@ void MSG_InitOOB(msg_t* buf, byte* data, int length)
     memset(buf, 0, sizeof(*buf));
     buf->data = data;
     buf->maxsize = length;
-    buf->oob = qtrue;
+    buf->oob = true;
 }
 
 void MSG_Clear(msg_t* buf)
 {
     buf->cursize = 0;
-    buf->overflowed = qfalse;
+    buf->overflowed = false;
     buf->bit = 0; //<- in bits
 }
 
 void MSG_Bitstream(msg_t* buf)
 {
-    buf->oob = qfalse;
+    buf->oob = false;
 }
 
 void MSG_BeginReadingOOB(msg_t* msg)
 {
     msg->readcount = 0;
     msg->bit = 0;
-    msg->oob = qtrue;
+    msg->oob = true;
 }
 
 void MSG_Copy(msg_t* buf, byte* data, int length, msg_t* src)
@@ -110,7 +110,7 @@ void MSG_WriteBits(msg_t* msg, int value, int bits)
 
     // this isn't an exact overflow check, but close enough
     if (msg->maxsize - msg->cursize < 4) {
-        msg->overflowed = qtrue;
+        msg->overflowed = true;
         return;
     }
 
@@ -181,7 +181,7 @@ int MSG_ReadBits(msg_t* msg, int bits)
 {
     int value;
     int get;
-    qboolean sgn;
+    bool sgn;
     int i, nbits;
     //	FILE*	fp;
 
@@ -189,9 +189,9 @@ int MSG_ReadBits(msg_t* msg, int bits)
 
     if (bits < 0) {
         bits = -bits;
-        sgn = qtrue;
+        sgn = true;
     } else {
-        sgn = qfalse;
+        sgn = false;
     }
 
     if (msg->oob) {
@@ -699,7 +699,7 @@ identical, under the assumption that the in-order delta code will catch it.
 ==================
 */
 void MSG_WriteDeltaEntity(msg_t* msg, struct entityState_s* from, struct entityState_s* to,
-                          qboolean force)
+                          bool force)
 {
     int i, lc;
     int numFields;
@@ -1535,7 +1535,7 @@ void MSG_initHuffman()
 {
     int i, j;
 
-    msgInit = qtrue;
+    msgInit = true;
     Huff_Init(&msgHuff);
     for (i = 0; i < 256; i++) {
         for (j = 0; j < msg_hData[i]; j++) {

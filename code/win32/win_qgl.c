@@ -1287,16 +1287,16 @@ void QGL_Shutdown(void)
 
 #define GR_NUM_BOARDS 0x0f
 
-static qboolean GlideIsValid(void)
+static bool GlideIsValid(void)
 {
     HMODULE hGlide;
 
     if ((hGlide = LoadLibrary("Glide3X")) != 0) {
         // FIXME: 3Dfx needs to fix this shit
-        return qtrue;
+        return true;
     }
 
-    return qfalse;
+    return false;
 }
 
 #pragma warning(disable : 4113 4133 4047)
@@ -1311,7 +1311,7 @@ static qboolean GlideIsValid(void)
 ** operating systems we need to do the right thing, whatever that
 ** might be.
 */
-qboolean QGL_Init(const char* dllname)
+bool QGL_Init(const char* dllname)
 {
     char systemDir[1024];
     char libName[1024];
@@ -1332,7 +1332,7 @@ qboolean QGL_Init(const char* dllname)
 
     if ((glw_state.hinstOpenGL = LoadLibrary(dllname)) == 0) {
         ri.Printf(PRINT_ALL, "failed\n");
-        return qfalse;
+        return false;
     }
     ri.Printf(PRINT_ALL, "succeeded\n");
 
@@ -1703,7 +1703,7 @@ qboolean QGL_Init(const char* dllname)
     qwglGetDeviceGammaRamp3DFX = NULL;
     qwglSetDeviceGammaRamp3DFX = NULL;
 
-    return qtrue;
+    return true;
 }
 
 #pragma warning(default : 4113 4133 4047)
