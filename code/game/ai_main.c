@@ -901,7 +901,7 @@ void BotReadSessionData(bot_state_t* bs)
            &bs->formation_dist);
 }
 
-int BotAISetupClient(int client, struct bot_settings_s* settings, bool restart)
+bool BotAISetupClient(int client, struct bot_settings_s* settings, bool restart)
 {
     char filename[144], name[144], gender[144];
     bot_state_t* bs;
@@ -1001,7 +1001,7 @@ int BotAISetupClient(int client, struct bot_settings_s* settings, bool restart)
     return true;
 }
 
-int BotAIShutdownClient(int client, bool restart)
+bool BotAIShutdownClient(int client, bool restart)
 {
     bot_state_t* bs;
 
