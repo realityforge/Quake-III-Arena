@@ -1026,7 +1026,7 @@ when the level is changed
 */
 void BotResetState(bot_state_t* bs)
 {
-    int client, entitynum, inuse;
+    int client, entitynum;
     int movestate, goalstate, chatstate, weaponstate;
     bot_settings_t settings;
     int character;
@@ -1036,7 +1036,7 @@ void BotResetState(bot_state_t* bs)
     // save some things that should not be reset here
     memcpy(&settings, &bs->settings, sizeof(bot_settings_t));
     memcpy(&ps, &bs->cur_ps, sizeof(playerState_t));
-    inuse = bs->inuse;
+    const bool inuse = bs->inuse;
     client = bs->client;
     entitynum = bs->entitynum;
     character = bs->character;
