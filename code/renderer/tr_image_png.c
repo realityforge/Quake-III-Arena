@@ -141,7 +141,13 @@ qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long bu
         spng_load_error(name, result, "spng_get_ihdr");
         goto cleanup;
     } else {
-        const int target_format = SPNG_COLOR_TYPE_GRAYSCALE_ALPHA == ihdr.color_type || SPNG_COLOR_TYPE_TRUECOLOR_ALPHA == ihdr.color_type ? SPNG_FMT_RGBA8 : SPNG_FMT_RGB8;
+        // TODO: Support RGB pixel format if there is no alpha. However to do this we need to
+        //  change the resampling and mip-ing code to support 3 component images. See tr_image_jpg.c for another
+        //  place where this feature is required
+        // const int target_format = SPNG_COLOR_TYPE_GRAYSCALE_ALPHA == ihdr.color_type || SPNG_COLOR_TYPE_TRUECOLOR_ALPHA == ihdr.color_type ? SPNG_FMT_RGBA8 : SPNG_FMT_RGB8;
+        // const GLenum pixel_format = SPNG_FMT_RGBA8 == target_format ? GL_RGBA8 : GL_RGB8;
+        const int target_format = SPNG_FMT_RGBA8;
+        const GLenum pixel_format = GL_RGBA8;
         if (SPNG_OK != spng_decoded_image_size(ctx, target_format, &size)) {
             spng_load_error(name, result, "spng_decoded_image_size");
             goto cleanup;
@@ -157,7 +163,7 @@ qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long bu
                 output->width = ihdr.width;
                 output->height = ihdr.height;
                 output->data = image;
-                output->pixel_format = SPNG_FMT_RGBA8 == target_format ? GL_RGBA8 : GL_RGB8;
+                output->pixel_format = pixel_format;
                 output->num_mips = 0;
 
                 // Clear image so it does not deallocated in cleanup phase
