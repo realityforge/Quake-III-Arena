@@ -54,9 +54,9 @@ jobs:
 
       - name: Verify Build file format
         # Verify that the build files are correctly formatted
-        run: bazel run //:buildifier
+        run: ./bazelw run //:buildifier
 
       - name: Build Code
         # In the future we should also run "bazel build //game/mac:Quake3Arena.zip" but this requires that either
         # the id assets become optional or we find a way to securely store the assets so as not to violate licenses
-        run: bazel build //code/...
+        run: ./bazelw build //code/...
