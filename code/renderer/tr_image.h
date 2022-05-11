@@ -29,7 +29,7 @@ typedef struct image_load_result_s {
     int num_mips;
 } image_load_result_t;
 
-qboolean R_LoadImage(const char* name, image_load_result_t *output);
+qboolean R_LoadImage(const char* name, image_load_result_t* output);
 qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* output);
 qboolean R_DecodeJpgInBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* output);
 

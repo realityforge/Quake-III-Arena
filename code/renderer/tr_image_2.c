@@ -115,7 +115,7 @@ qboolean R_LoadImage(const char* name, image_load_result_t* output)
     // Only attempt to load DDS compressed textures if enabled
     if (r_ext_compressed_textures->integer) {
         name_to_request = va("%s.%s", name_sans_extension, DDS_EXTENSION);
-        //TODO: Rewrite R_LoadDDS to our existing pattern
+        // TODO: Rewrite R_LoadDDS to our existing pattern
         R_LoadDDS(name_to_request, &output->data, &output->width, &output->height, &output->pixel_format, &output->num_mips);
         if (*output->data) {
             return qtrue;
