@@ -89,7 +89,7 @@ macos_application(
         ":teamarena_code": "MacOS",
 
         # Application Icons
-        ":quake3_flat.icns": "Resources",
+        ":Quake3Arena.icns": "Resources",
 
         # Data files can not be below MacOS directory as the code signing process will expect it to be
         # code and thus must have a signature. Which it obviously does not. This places it at a different
