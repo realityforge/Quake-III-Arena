@@ -35,12 +35,12 @@ bsp_link_t* AAS_BSPLinkEntity(vec3_t absmins,
 
 // calculates collision with given entity
 bool AAS_EntityCollision(int entnum,
-                             vec3_t start,
-                             vec3_t boxmins,
-                             vec3_t boxmaxs,
-                             vec3_t end,
-                             int contentmask,
-                             bsp_trace_t* trace);
+                         vec3_t start,
+                         vec3_t boxmins,
+                         vec3_t boxmaxs,
+                         vec3_t end,
+                         int contentmask,
+                         bsp_trace_t* trace);
 // for debugging
 void AAS_PrintFreeBSPLinks(char* str);
 //

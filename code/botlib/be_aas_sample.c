@@ -276,7 +276,7 @@ int AAS_PointPresenceType(vec3_t point)
     return aasworld.areasettings[areanum].presencetype;
 }
 bool AAS_AreaEntityCollision(int areanum, vec3_t start, vec3_t end,
-                                 int presencetype, int passent, aas_trace_t* trace)
+                             int presencetype, int passent, aas_trace_t* trace)
 {
     int collision;
     vec3_t boxmins, boxmaxs;

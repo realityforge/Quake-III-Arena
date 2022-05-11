@@ -88,7 +88,7 @@ typedef struct {
     int serverTimeDelta; // cl.serverTime = cls.realtime + cl.serverTimeDelta
                          // this value changes as net lag varies
     bool extrapolatedSnapshot; // set if any cgame frame has been forced to extrapolate
-                                   // cleared when CL_AdjustTimeDelta looks at it
+                               // cleared when CL_AdjustTimeDelta looks at it
     bool newSnapshots; // set on parse of any valid packet
 
     gameState_t gameState; // configstrings

@@ -1039,7 +1039,7 @@ bool CanDamage(gentity_t* targ, vec3_t origin)
 }
 
 bool G_RadiusDamage(vec3_t origin, gentity_t* attacker, float damage, float radius,
-                        gentity_t* ignore, int mod)
+                    gentity_t* ignore, int mod)
 {
     float points, dist;
     gentity_t* ent;

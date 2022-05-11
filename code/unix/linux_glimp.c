@@ -870,8 +870,8 @@ void GLimp_Shutdown(void)
 // bk001204 - prototype needed
 int GLW_SetMode(const char* drivername, int mode, bool fullscreen);
 static bool GLW_StartDriverAndSetMode(const char* drivername,
-                                          int mode,
-                                          bool fullscreen)
+                                      int mode,
+                                      bool fullscreen)
 {
     rserr_t err;
 
