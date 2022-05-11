@@ -421,8 +421,8 @@ void VR_DrawFrame( engine_t* engine ) {
 
     // Update HMD and controllers
     IN_VRUpdateHMD( invViewTransform[0] );
+    IN_VRUpdateControllers( invViewTransform[0], frameState.predictedDisplayTime );
     IN_VRSyncActions();
-    IN_VRUpdateControllers( frameState.predictedDisplayTime );
 
     //Projection used for drawing HUD models etc
     float hudScale = M_PI * 15.0f / 180.0f;

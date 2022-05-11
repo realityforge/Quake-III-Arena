@@ -1394,7 +1394,7 @@ void IN_VRSyncActions( void )
     getInfo.subactionPath = XR_NULL_PATH;
 }
 
-void IN_VRUpdateControllers( float predictedDisplayTime )
+void IN_VRUpdateControllers( XrPosef xfStageFromHead, float predictedDisplayTime )
 {
     engine_t* engine = VR_GetEngine();
 
@@ -1406,10 +1406,10 @@ void IN_VRUpdateControllers( float predictedDisplayTime )
         if (ActionPoseIsActive(controller[i], subactionPath[i])) {
             XrSpaceLocation loc = {};
             loc.type = XR_TYPE_SPACE_LOCATION;
-            OXR(xrLocateSpace(controllerSpace[i], engine->appState.CurrentSpace, predictedDisplayTime, &loc));
+            OXR(xrLocateSpace(controllerSpace[i], engine->appState.HeadSpace, predictedDisplayTime, &loc));
 
             engine->appState.TrackedController[i].Active = (loc.locationFlags & XR_SPACE_LOCATION_POSITION_VALID_BIT) != 0;
-            engine->appState.TrackedController[i].Pose = loc.pose;
+            engine->appState.TrackedController[i].Pose = XrPosef_Multiply(xfStageFromHead, loc.pose);
         } else {
             ovrTrackedController_Clear(&engine->appState.TrackedController[i]);
         }
