@@ -21,7 +21,7 @@
 // TODO: Rather than using GLenum  for pixel_format use our own internal enum and then have a LUT in each renderer for constant in particular renderer
 
 typedef struct image_load_result_s {
-    byte* data;
+    uint8_t* data;
     uint32_t width;
     uint32_t height;
     GLenum pixel_format;
