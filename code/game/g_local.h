@@ -85,7 +85,7 @@ struct gentity_s {
     int spawnflags; // set in QuakeEd
 
     bool neverFree; // if true, FreeEntity will only unlink
-                        // bodyque uses this
+                    // bodyque uses this
 
     int flags; // FL_* variables
 
@@ -98,7 +98,7 @@ struct gentity_s {
     bool unlinkAfterEvent;
 
     bool physicsObject; // if true, it can be pushed by movers and fall off edges
-                            // all game items are physicsObjects,
+                        // all game items are physicsObjects,
     float physicsBounce; // 1.0 = continuous bounce, 0.0 = no bounce
     int clipmask; // brushes with this content value will be collided against
                   // when moving.  items and corpses do not collide against
@@ -346,7 +346,7 @@ typedef struct {
     int lastTeamLocationTime; // last time of client team location update
 
     bool newSession; // don't use any old session data, because
-                         // we changed gametype
+                     // we changed gametype
 
     bool restarted; // waiting for a map_restart to fire
 

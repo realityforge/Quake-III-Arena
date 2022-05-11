@@ -429,10 +429,10 @@ typedef struct shader_s {
     float sort; // lower numbered shaders draw before higher numbered
 
     bool defaultShader; // we want to return index 0 if the shader failed to
-                            // load for some reason, but R_FindShader should
-                            // still keep a name allocated for it, so if
-                            // something calls RE_RegisterShader again with
-                            // the same name, we don't try looking for it again
+                        // load for some reason, but R_FindShader should
+                        // still keep a name allocated for it, so if
+                        // something calls RE_RegisterShader again with
+                        // the same name, we don't try looking for it again
 
     bool explicitlyDefined; // found in a .shader file
 

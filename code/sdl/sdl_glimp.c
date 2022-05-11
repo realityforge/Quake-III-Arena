@@ -207,7 +207,7 @@ static bool GLimp_GetProcAddresses(bool fixedFunction)
     qgl##name = (name##proc*)SDL_GL_GetProcAddress("gl" #name);                  \
     if (qgl##name == NULL) {                                                     \
         ri.Printf(PRINT_ALL, "ERROR: Missing OpenGL function %s\n", "gl" #name); \
-        success = false;                                                        \
+        success = false;                                                         \
     }
 #endif
 

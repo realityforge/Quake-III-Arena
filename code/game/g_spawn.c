@@ -382,9 +382,9 @@ void G_ParseField(const char* key, const char* value, gentity_t* ent)
     }
 }
 
-#define ADJUST_AREAPORTAL()                     \
-    if (ent->s.eType == ET_MOVER) {             \
-        trap_LinkEntity(ent);                   \
+#define ADJUST_AREAPORTAL()                    \
+    if (ent->s.eType == ET_MOVER) {            \
+        trap_LinkEntity(ent);                  \
         trap_AdjustAreaPortalState(ent, true); \
     }
 

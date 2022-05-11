@@ -34,7 +34,7 @@ static float identityMatrix[12] = {
 };
 
 static bool IQM_CheckRange(iqmHeader_t* header, int offset,
-                               int count, int size)
+                           int count, int size)
 {
     // return true if the range specified by offset, count and size
     // doesn't fit into the file
