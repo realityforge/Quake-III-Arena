@@ -84,11 +84,6 @@ static ID_INLINE void WRITE_STRING(const char* s)
     bufIndex += strlen(s);
 }
 
-/*
-===============
-WRITE_4BYTES
-===============
-*/
 static ID_INLINE void WRITE_4BYTES(int x)
 {
     buffer[bufIndex + 0] = (uint8_t)((x >> 0) & 0xFF);
@@ -98,11 +93,6 @@ static ID_INLINE void WRITE_4BYTES(int x)
     bufIndex += 4;
 }
 
-/*
-===============
-WRITE_2BYTES
-===============
-*/
 static ID_INLINE void WRITE_2BYTES(int x)
 {
     buffer[bufIndex + 0] = (uint8_t)((x >> 0) & 0xFF);
