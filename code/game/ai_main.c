@@ -31,7 +31,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_ai_goal.h"
 #include "be_ai_move.h"
 #include "be_ai_weap.h"
-//
 #include "ai_main.h"
 #include "ai_dmq3.h"
 #include "ai_chat.h"
@@ -39,7 +38,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "ai_dmnet.h"
 #include "ai_vcmd.h"
 
-//
 #include "chars.h"
 #include "inv.h"
 #include "syn.h"

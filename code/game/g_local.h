@@ -229,7 +229,6 @@ typedef struct {
     bool teamLeader; // true when this client is a team leader
 } clientSession_t;
 
-//
 #define MAX_NETNAME 36
 #define MAX_VOTE_COUNT 3
 
@@ -322,7 +321,6 @@ struct gclient_s {
 
 //
 // this structure is cleared as each map is entered
-//
 #define MAX_SPAWN_VARS 64
 #define MAX_SPAWN_VARS_CHARS 4096
 

@@ -54,7 +54,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define TFL_DONOTENTER 0x00800000 // travel through donotenter area
 #define TFL_FUNCBOB 0x01000000 // func bobbing
 #define TFL_BRIDGE 0x04000000 // move over a bridge
-//
 #define TFL_NOTTEAM1 0x08000000 // not team 1
 #define TFL_NOTTEAM2 0x10000000 // not team 2
 

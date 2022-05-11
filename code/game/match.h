@@ -67,7 +67,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define MSG_ATTACKENEMYBASE 31 // attack the enemy base
 #define MSG_HARVEST 32 // go harvest
 #define MSG_SUICIDE 33 // order to suicide
-//
 #define MSG_ME 100
 #define MSG_EVERYONE 101
 #define MSG_MULTIPLENAMES 102
@@ -78,11 +77,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define MSG_FOREVER 107
 #define MSG_FORALONGTIME 108
 #define MSG_FORAWHILE 109
-//
 #define MSG_CHATALL 200
 #define MSG_CHATTEAM 201
 #define MSG_CHATTELL 202
-//
 #define MSG_CTF 300 // ctf message
 
 // command sub types

@@ -52,7 +52,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define AVOID_DEFAULT_TIME 30
 // avoid dropped goal time
 #define AVOID_DROPPED_TIME 10
-//
 #define TRAVELTIME_SCALE 0.01
 // item flags
 #define IFL_NOTFREE 1 // not in free for all

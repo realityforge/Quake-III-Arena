@@ -60,7 +60,6 @@ static MidiInfo_t s_midiInfo;
 
 //
 // Joystick definitions
-//
 #define JOY_MAX_AXES 6 // X, Y, Z, R, U, V
 
 typedef struct {
