@@ -77,7 +77,7 @@ model / sound configstring indexes
 =========================================================================
 */
 
-int G_FindConfigstringIndex(char* name, int start, int max, qboolean create)
+int G_FindConfigstringIndex(char* name, int start, int max, bool create)
 {
     int i;
     char s[MAX_STRING_CHARS];
@@ -111,12 +111,12 @@ int G_FindConfigstringIndex(char* name, int start, int max, qboolean create)
 
 int G_ModelIndex(char* name)
 {
-    return G_FindConfigstringIndex(name, CS_MODELS, MAX_MODELS, qtrue);
+    return G_FindConfigstringIndex(name, CS_MODELS, MAX_MODELS, true);
 }
 
 int G_SoundIndex(char* name)
 {
-    return G_FindConfigstringIndex(name, CS_SOUNDS, MAX_SOUNDS, qtrue);
+    return G_FindConfigstringIndex(name, CS_SOUNDS, MAX_SOUNDS, true);
 }
 
 //=====================================================================
@@ -357,7 +357,7 @@ float vectoyaw(const vec3_t vec)
 
 void G_InitGentity(gentity_t* e)
 {
-    e->inuse = qtrue;
+    e->inuse = true;
     e->classname = "noclass";
     e->s.number = e - g_entities;
     e->r.ownerNum = ENTITYNUM_NONE;
@@ -425,14 +425,14 @@ gentity_t* G_Spawn(void)
     return e;
 }
 
-qboolean G_EntitiesFree(void)
+bool G_EntitiesFree(void)
 {
     int i;
     gentity_t* e;
 
     if (level.num_entities < ENTITYNUM_MAX_NORMAL) {
         // can open a new slot if needed
-        return qtrue;
+        return true;
     }
 
     e = &g_entities[MAX_CLIENTS];
@@ -441,9 +441,9 @@ qboolean G_EntitiesFree(void)
             continue;
         }
         // slot available
-        return qtrue;
+        return true;
     }
-    return qfalse;
+    return false;
 }
 
 /*
@@ -464,7 +464,7 @@ void G_FreeEntity(gentity_t* ed)
     memset(ed, 0, sizeof(*ed));
     ed->classname = "freed";
     ed->freetime = level.time;
-    ed->inuse = qfalse;
+    ed->inuse = false;
 }
 
 /*
@@ -486,7 +486,7 @@ gentity_t* G_TempEntity(vec3_t origin, int event)
 
     e->classname = "tempEntity";
     e->eventTime = level.time;
-    e->freeAfterEvent = qtrue;
+    e->freeAfterEvent = true;
 
     VectorCopy(origin, snapped);
     SnapVector(snapped); // save network bandwidth

@@ -77,7 +77,7 @@ int GeneticParentsAndChildSelection(int numranks, float* ranks, int* parent1, in
     if (numranks > 256) {
         botimport.Print(PRT_WARNING, "GeneticParentsAndChildSelection: too many bots\n");
         *parent1 = *parent2 = *child = 0;
-        return qfalse;
+        return false;
     }
     for (max = 0, i = 0; i < numranks; i++) {
         if (ranks[i] < 0)
@@ -87,7 +87,7 @@ int GeneticParentsAndChildSelection(int numranks, float* ranks, int* parent1, in
     if (max < 3) {
         botimport.Print(PRT_WARNING, "GeneticParentsAndChildSelection: too few valid bots\n");
         *parent1 = *parent2 = *child = 0;
-        return qfalse;
+        return false;
     }
     memcpy(rankings, ranks, sizeof(float) * numranks);
     // select first parent
@@ -111,5 +111,5 @@ int GeneticParentsAndChildSelection(int numranks, float* ranks, int* parent1, in
     }
     // select child
     *child = GeneticSelection(numranks, rankings);
-    return qtrue;
+    return true;
 }

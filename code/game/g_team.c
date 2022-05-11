@@ -142,21 +142,21 @@ void AddTeamScore(vec3_t origin, int team, int score)
     level.teamScores[team] += score;
 }
 
-qboolean OnSameTeam(gentity_t* ent1, gentity_t* ent2)
+bool OnSameTeam(gentity_t* ent1, gentity_t* ent2)
 {
     if (!ent1->client || !ent2->client) {
-        return qfalse;
+        return false;
     }
 
     if (g_gametype.integer < GT_TEAM) {
-        return qfalse;
+        return false;
     }
 
     if (ent1->client->sess.sessionTeam == ent2->client->sess.sessionTeam) {
-        return qtrue;
+        return true;
     }
 
-    return qfalse;
+    return false;
 }
 
 static char ctfFlagStatusRemap[] = { '0', '1', '*', '*', '2' };
@@ -164,27 +164,27 @@ static char oneFlagStatusRemap[] = { '0', '1', '2', '3', '4' };
 
 void Team_SetFlagStatus(int team, flagStatus_t status)
 {
-    qboolean modified = qfalse;
+    bool modified = false;
 
     switch (team) {
     case TEAM_RED: // CTF
         if (teamgame.redStatus != status) {
             teamgame.redStatus = status;
-            modified = qtrue;
+            modified = true;
         }
         break;
 
     case TEAM_BLUE: // CTF
         if (teamgame.blueStatus != status) {
             teamgame.blueStatus = status;
-            modified = qtrue;
+            modified = true;
         }
         break;
 
     case TEAM_FREE: // One Flag CTF
         if (teamgame.flagStatus != status) {
             teamgame.flagStatus = status;
-            modified = qtrue;
+            modified = true;
         }
         break;
     }
@@ -877,14 +877,14 @@ Team_GetLocation
 Report a location for the player. Uses placed nearby target_location entities
 ============
 */
-qboolean Team_GetLocationMsg(gentity_t* ent, char* loc, int loclen)
+bool Team_GetLocationMsg(gentity_t* ent, char* loc, int loclen)
 {
     gentity_t* best;
 
     best = Team_GetLocation(ent);
 
     if (!best)
-        return qfalse;
+        return false;
 
     if (best->count) {
         if (best->count < 0)
@@ -895,7 +895,7 @@ qboolean Team_GetLocationMsg(gentity_t* ent, char* loc, int loclen)
     } else
         Com_sprintf(loc, loclen, "%s", best->message);
 
-    return qtrue;
+    return true;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -952,7 +952,7 @@ gentity_t* SelectRandomTeamSpawnPoint(int teamstate, team_t team)
     return spots[selection];
 }
 
-gentity_t* SelectCTFSpawnPoint(team_t team, int teamstate, vec3_t origin, vec3_t angles, qboolean isbot)
+gentity_t* SelectCTFSpawnPoint(team_t team, int teamstate, vec3_t origin, vec3_t angles, bool isbot)
 {
     gentity_t* spot;
 
@@ -1152,7 +1152,7 @@ static void ObeliskRegen(gentity_t* self)
 
 static void ObeliskRespawn(gentity_t* self)
 {
-    self->takedamage = qtrue;
+    self->takedamage = true;
     self->health = g_obeliskHealth.integer;
 
     self->think = ObeliskRegen;
@@ -1171,7 +1171,7 @@ static void ObeliskDie(gentity_t* self, gentity_t* inflictor, gentity_t* attacke
 
     CalculateRanks();
 
-    self->takedamage = qfalse;
+    self->takedamage = false;
     self->think = ObeliskRespawn;
     self->nextthink = level.time + g_obeliskRespawnDelay.integer * 1000;
 
@@ -1262,7 +1262,7 @@ gentity_t* SpawnObelisk(vec3_t origin, vec3_t mins, vec3_t maxs, int team)
 
     if (g_gametype.integer == GT_OBELISK) {
         ent->r.contents = CONTENTS_SOLID;
-        ent->takedamage = qtrue;
+        ent->takedamage = true;
         ent->health = g_obeliskHealth.integer;
         ent->die = ObeliskDie;
         ent->pain = ObeliskPain;
@@ -1388,23 +1388,23 @@ void SP_team_neutralobelisk(gentity_t* ent)
     trap_LinkEntity(ent);
 }
 
-qboolean CheckObeliskAttack(gentity_t* obelisk, gentity_t* attacker)
+bool CheckObeliskAttack(gentity_t* obelisk, gentity_t* attacker)
 {
     gentity_t* te;
 
     // if this really is an obelisk
     if (obelisk->die != ObeliskDie) {
-        return qfalse;
+        return false;
     }
 
     // if the attacker is a client
     if (!attacker->client) {
-        return qfalse;
+        return false;
     }
 
     // if the obelisk is on the same team as the attacker then don't hurt it
     if (obelisk->spawnflags == attacker->client->sess.sessionTeam) {
-        return qtrue;
+        return true;
     }
 
     // obelisk may be hurt
@@ -1424,6 +1424,6 @@ qboolean CheckObeliskAttack(gentity_t* obelisk, gentity_t* attacker)
         te->r.svFlags |= SVF_BROADCAST;
     }
 
-    return qfalse;
+    return false;
 }
 #endif

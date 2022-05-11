@@ -27,6 +27,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // nothing outside the Cvar_*() functions should modify these fields!
 typedef struct cvar_s cvar_t;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wpadded"
 struct cvar_s {
     char* name;
     char* description;
@@ -38,17 +40,18 @@ struct cvar_s {
     cvar_t* hashNext;
     cvar_t* hashPrev;
     int flags;
-    qboolean modified; // set each time the cvar is changed
     int modificationCount; // incremented each time the cvar is changed
     float value; // atof( string )
     int integer; // atoi( string )
-    qboolean validate;
-    qboolean integral;
     float min;
     float max;
 
     int hashIndex;
+    bool modified; // set each time the cvar is changed
+    bool validate;
+    bool integral;
 };
+#pragma clang diagnostic pop
 
 cvar_t* Cvar_Get(const char* var_name, const char* value, int flags);
 // creates the variable if it doesn't exist, or returns the existing one
@@ -65,7 +68,7 @@ void Cvar_Update(vmCvar_t* vmCvar);
 void Cvar_Set(const char* var_name, const char* value);
 // will create the variable with no flags if it doesn't exist
 
-cvar_t* Cvar_Set2(const char* var_name, const char* value, qboolean force);
+cvar_t* Cvar_Set2(const char* var_name, const char* value, bool force);
 // same as Cvar_Set, but allows more control over setting of cvar
 
 void Cvar_SetSafe(const char* var_name, const char* value);
@@ -98,7 +101,7 @@ void Cvar_ForceReset(const char* var_name);
 void Cvar_SetCheatState(void);
 // reset all testing vars to a safe value
 
-qboolean Cvar_Command(void);
+bool Cvar_Command(void);
 // called by Cmd_ExecuteString when Cmd_Argv(0) doesn't match a known
 // command.  Returns true if the command was a variable reference that
 // was handled. (print or change)
@@ -114,10 +117,10 @@ char* Cvar_InfoString_Big(int bit);
 // returns an info string containing all the cvars that have the given bit set
 // in their flags ( CVAR_USERINFO, CVAR_SERVERINFO, CVAR_SYSTEMINFO, etc )
 void Cvar_InfoStringBuffer(int bit, char* buff, int buffsize);
-void Cvar_CheckRange(cvar_t* cv, float minVal, float maxVal, qboolean shouldBeIntegral);
+void Cvar_CheckRange(cvar_t* cv, float minVal, float maxVal, bool shouldBeIntegral);
 void Cvar_SetDescription(cvar_t* var, const char* var_description);
 
-void Cvar_Restart(qboolean unsetVM);
+void Cvar_Restart(bool unsetVM);
 void Cvar_Restart_f(void);
 
 void Cvar_CompleteCvarName(char* args, int argNum);

@@ -156,7 +156,6 @@ cc_library(
         "cvar_engine.h",
         "q_platform.h",
         "q_shared.h",
-        "qboolean.h",
         "qengine.h",
         "surfaceflags.h",
     ],

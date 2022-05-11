@@ -251,7 +251,7 @@ void CG_ObeliskExplode(vec3_t org, int entityNum)
     le = CG_MakeExplosion(origin, vec3_origin,
                           cgs.media.dishFlashModel,
                           cgs.media.rocketExplosionShader,
-                          600, qtrue);
+                          600, true);
     le->light = 300;
     le->lightColor[0] = 1;
     le->lightColor[1] = 0.75;
@@ -384,7 +384,7 @@ void CG_ScorePlum(int client, vec3_t org, int score)
 
 localEntity_t* CG_MakeExplosion(vec3_t origin, vec3_t dir,
                                 qhandle_t hModel, qhandle_t shader,
-                                int msec, qboolean isSprite)
+                                int msec, bool isSprite)
 {
     float ang;
     localEntity_t* ex;

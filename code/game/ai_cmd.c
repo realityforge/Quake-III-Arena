@@ -132,7 +132,7 @@ int BotGetItemTeamGoal(char* goalname, bot_goal_t* goal)
     int i;
 
     if (!strlen(goalname))
-        return qfalse;
+        return false;
     i = -1;
     do {
         i = trap_BotGetLevelItemGoal(i, goalname, goal);
@@ -140,10 +140,10 @@ int BotGetItemTeamGoal(char* goalname, bot_goal_t* goal)
             // do NOT defend dropped items
             if (goal->flags & GFL_DROPPED)
                 continue;
-            return qtrue;
+            return true;
         }
     } while (i > 0);
-    return qfalse;
+    return false;
 }
 
 int BotGetMessageTeamGoal(bot_state_t* bs, char* goalname, bot_goal_t* goal)
@@ -151,14 +151,14 @@ int BotGetMessageTeamGoal(bot_state_t* bs, char* goalname, bot_goal_t* goal)
     bot_waypoint_t* cp;
 
     if (BotGetItemTeamGoal(goalname, goal))
-        return qtrue;
+        return true;
 
     cp = BotFindWayPoint(bs->checkpoints, goalname);
     if (cp) {
         memcpy(goal, &cp->goal, sizeof(bot_goal_t));
-        return qtrue;
+        return true;
     }
-    return qfalse;
+    return false;
 }
 
 float BotGetTime(bot_match_t* match)
@@ -268,7 +268,7 @@ int BotGetPatrolWaypoints(bot_state_t* bs, bot_match_t* match)
             trap_EA_SayTeam(bs->client, "what do you say?");
             BotFreeWaypoints(newpatrolpoints);
             bs->patrolpoints = NULL;
-            return qfalse;
+            return false;
         }
         trap_BotMatchVariable(&keyareamatch, KEYAREA, keyarea, MAX_MESSAGE_SIZE);
         if (!BotGetMessageTeamGoal(bs, keyarea, &goal)) {
@@ -276,7 +276,7 @@ int BotGetPatrolWaypoints(bot_state_t* bs, bot_match_t* match)
             // trap_BotEnterChat(bs->cs, 0, CHAT_TEAM);
             BotFreeWaypoints(newpatrolpoints);
             bs->patrolpoints = NULL;
-            return qfalse;
+            return false;
         }
         // create a new waypoint
         newwp = BotCreateWayPoint(keyarea, goal.origin, goal.areanum);
@@ -309,13 +309,13 @@ int BotGetPatrolWaypoints(bot_state_t* bs, bot_match_t* match)
         trap_EA_SayTeam(bs->client, "I need more key points to patrol\n");
         BotFreeWaypoints(newpatrolpoints);
         newpatrolpoints = NULL;
-        return qfalse;
+        return false;
     }
     BotFreeWaypoints(bs->patrolpoints);
     bs->patrolpoints = newpatrolpoints;
     bs->curpatrolpoint = bs->patrolpoints;
     bs->patrolflags = patrolflags;
-    return qtrue;
+    return true;
 }
 
 int BotAddressedToBot(bot_state_t* bs, bot_match_t* match)
@@ -330,7 +330,7 @@ int BotAddressedToBot(bot_state_t* bs, bot_match_t* match)
     trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
     client = ClientOnSameTeamFromName(bs, netname);
     if (client < 0)
-        return qfalse;
+        return false;
     // if the message is addressed to someone
     if (match->subtype & ST_ADDRESSED) {
         trap_BotMatchVariable(match, ADDRESSEE, addressedto, sizeof(addressedto));
@@ -338,28 +338,28 @@ int BotAddressedToBot(bot_state_t* bs, bot_match_t* match)
         ClientName(bs->client, botname, 128);
         while (trap_BotFindMatch(addressedto, &addresseematch, MTCONTEXT_ADDRESSEE)) {
             if (addresseematch.type == MSG_EVERYONE) {
-                return qtrue;
+                return true;
             } else if (addresseematch.type == MSG_MULTIPLENAMES) {
                 trap_BotMatchVariable(&addresseematch, TEAMMATE, name, sizeof(name));
                 if (strlen(name)) {
                     if (stristr(botname, name))
-                        return qtrue;
+                        return true;
                     if (stristr(bs->subteam, name))
-                        return qtrue;
+                        return true;
                 }
                 trap_BotMatchVariable(&addresseematch, MORE, addressedto, MAX_MESSAGE_SIZE);
             } else {
                 trap_BotMatchVariable(&addresseematch, TEAMMATE, name, MAX_MESSAGE_SIZE);
                 if (strlen(name)) {
                     if (stristr(botname, name))
-                        return qtrue;
+                        return true;
                     if (stristr(bs->subteam, name))
-                        return qtrue;
+                        return true;
                 }
                 break;
             }
         }
-        return qfalse;
+        return false;
     } else {
         bot_match_t tellmatch;
 
@@ -368,10 +368,10 @@ int BotAddressedToBot(bot_state_t* bs, bot_match_t* match)
         if (!trap_BotFindMatch(match->string, &tellmatch, MTCONTEXT_REPLYCHAT) || tellmatch.type != MSG_CHATTELL) {
             // make sure not everyone reacts to this message
             if (random() > (float)1.0 / (NumPlayersOnSameTeam(bs) - 1))
-                return qfalse;
+                return false;
         }
     }
-    return qtrue;
+    return true;
 }
 
 void BotMatch_HelpAccompany(bot_state_t* bs, bot_match_t* match)
@@ -397,18 +397,18 @@ void BotMatch_HelpAccompany(bot_state_t* bs, bot_match_t* match)
         // get the netname
         trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
         client = ClientFromName(netname);
-        other = qfalse;
+        other = false;
     } else {
         // asked for someone else
         client = FindClientByName(teammate);
         // if this is the bot self
         if (client == bs->client) {
-            other = qfalse;
+            other = false;
         } else if (!BotSameTeam(bs, client)) {
             // FIXME: say "I don't help the enemy"
             return;
         } else {
-            other = qtrue;
+            other = true;
         }
     }
     // if the bot doesn't know who to help (FindClientByName returned -1)
@@ -464,7 +464,7 @@ void BotMatch_HelpAccompany(bot_state_t* bs, bot_match_t* match)
     client = ClientFromName(netname);
     // the team mate who ordered
     bs->decisionmaker = client;
-    bs->ordered = qtrue;
+    bs->ordered = true;
     bs->order_time = FloatTime();
     // last time the team mate was assumed visible
     bs->teammatevisible_time = FloatTime();
@@ -512,7 +512,7 @@ void BotMatch_DefendKeyArea(bot_state_t* bs, bot_match_t* match)
     client = ClientFromName(netname);
     // the team mate who ordered
     bs->decisionmaker = client;
-    bs->ordered = qtrue;
+    bs->ordered = true;
     bs->order_time = FloatTime();
     // set the time to send a message to the team mates
     bs->teammessage_time = FloatTime() + 2 * random();
@@ -552,7 +552,7 @@ void BotMatch_GetItem(bot_state_t* bs, bot_match_t* match)
     trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
     client = ClientOnSameTeamFromName(bs, netname);
     bs->decisionmaker = client;
-    bs->ordered = qtrue;
+    bs->ordered = true;
     bs->order_time = FloatTime();
     // set the time to send a message to the team mates
     bs->teammessage_time = FloatTime() + 2 * random();
@@ -628,7 +628,7 @@ void BotMatch_Camp(bot_state_t* bs, bot_match_t* match)
         return;
     }
     bs->decisionmaker = client;
-    bs->ordered = qtrue;
+    bs->ordered = true;
     bs->order_time = FloatTime();
     // set the time to send a message to the team mates
     bs->teammessage_time = FloatTime() + 2 * random();
@@ -665,7 +665,7 @@ void BotMatch_Patrol(bot_state_t* bs, bot_match_t* match)
     trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
     client = FindClientByName(netname);
     bs->decisionmaker = client;
-    bs->ordered = qtrue;
+    bs->ordered = true;
     bs->order_time = FloatTime();
     // set the time to send a message to the team mates
     bs->teammessage_time = FloatTime() + 2 * random();
@@ -708,7 +708,7 @@ void BotMatch_GetFlag(bot_state_t* bs, bot_match_t* match)
     trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
     client = FindClientByName(netname);
     bs->decisionmaker = client;
-    bs->ordered = qtrue;
+    bs->ordered = true;
     bs->order_time = FloatTime();
     // set the time to send a message to the team mates
     bs->teammessage_time = FloatTime() + 2 * random();
@@ -752,7 +752,7 @@ void BotMatch_AttackEnemyBase(bot_state_t* bs, bot_match_t* match)
     trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
     client = FindClientByName(netname);
     bs->decisionmaker = client;
-    bs->ordered = qtrue;
+    bs->ordered = true;
     bs->order_time = FloatTime();
     // set the time to send a message to the team mates
     bs->teammessage_time = FloatTime() + 2 * random();
@@ -787,7 +787,7 @@ void BotMatch_Harvest(bot_state_t* bs, bot_match_t* match)
     trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
     client = FindClientByName(netname);
     bs->decisionmaker = client;
-    bs->ordered = qtrue;
+    bs->ordered = true;
     bs->order_time = FloatTime();
     // set the time to send a message to the team mates
     bs->teammessage_time = FloatTime() + 2 * random();
@@ -829,7 +829,7 @@ void BotMatch_RushBase(bot_state_t* bs, bot_match_t* match)
     trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
     client = FindClientByName(netname);
     bs->decisionmaker = client;
-    bs->ordered = qtrue;
+    bs->ordered = true;
     bs->order_time = FloatTime();
     // set the time to send a message to the team mates
     bs->teammessage_time = FloatTime() + 2 * random();
@@ -903,7 +903,7 @@ void BotMatch_ReturnFlag(bot_state_t* bs, bot_match_t* match)
     trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
     client = FindClientByName(netname);
     bs->decisionmaker = client;
-    bs->ordered = qtrue;
+    bs->ordered = true;
     bs->order_time = FloatTime();
     // set the time to send a message to the team mates
     bs->teammessage_time = FloatTime() + 2 * random();
@@ -1008,7 +1008,7 @@ void BotMatch_CheckPoint(bot_state_t* bs, bot_match_t* match)
             cp->prev->next = cp->next;
         else
             bs->checkpoints = cp->next;
-        cp->inuse = qfalse;
+        cp->inuse = false;
     }
     // create a new check point
     cp = BotCreateWayPoint(buf, position, areanum);
@@ -1133,7 +1133,7 @@ void BotMatch_StopTeamLeaderShip(bot_state_t* bs, bot_match_t* match)
     if (client >= 0) {
         if (!Q_stricmp(bs->teamleader, ClientName(client, netname, sizeof(netname)))) {
             bs->teamleader[0] = '\0';
-            notleader[client] = qtrue;
+            notleader[client] = true;
         }
     }
 }
@@ -1236,7 +1236,7 @@ void BotMatch_WhatIsMyCommand(bot_state_t* bs, bot_match_t* match)
     ClientName(bs->client, netname, sizeof(netname));
     if (Q_stricmp(netname, bs->teamleader) != 0)
         return;
-    bs->forceorders = qtrue;
+    bs->forceorders = true;
 }
 
 float BotNearestVisibleItem(bot_state_t* bs, char* itemname, bot_goal_t* goal)
@@ -1379,18 +1379,18 @@ void BotMatch_LeadTheWay(bot_state_t* bs, bot_match_t* match)
         client = FindClientByName(teammate);
         // if this is the bot self
         if (client == bs->client) {
-            other = qfalse;
+            other = false;
         } else if (!BotSameTeam(bs, client)) {
             // FIXME: say "I don't help the enemy"
             return;
         } else {
-            other = qtrue;
+            other = true;
         }
     } else {
         // get the netname
         trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
         client = ClientFromName(netname);
-        other = qfalse;
+        other = false;
     }
     // if the bot doesn't know who to help (FindClientByName returned -1)
     if (client < 0) {
@@ -1514,7 +1514,7 @@ void BotMatch_EnterGame(bot_state_t* bs, bot_match_t* match)
     trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
     client = FindClientByName(netname);
     if (client >= 0) {
-        notleader[client] = qfalse;
+        notleader[client] = false;
     }
     // NOTE: eliza chats will catch this
     // Com_sprintf(buf, sizeof(buf), "heya %s", netname);
@@ -1540,7 +1540,7 @@ int BotMatchMessage(bot_state_t* bs, char* message)
     match.type = 0;
     // if it is an unknown message
     if (!trap_BotFindMatch(message, &match, MTCONTEXT_MISC | MTCONTEXT_INITIALTEAMCHAT | MTCONTEXT_CTF)) {
-        return qfalse;
+        return false;
     }
     // react to the found message
     switch (match.type) {
@@ -1707,5 +1707,5 @@ int BotMatchMessage(bot_state_t* bs, char* message)
         break;
     }
     }
-    return qtrue;
+    return true;
 }

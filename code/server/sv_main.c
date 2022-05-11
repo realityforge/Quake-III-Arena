@@ -231,7 +231,7 @@ void SV_MasterHeartbeat(const char* message)
         // see if we haven't already resolved the name or if it's been over 24 hours
         // resolving usually causes hitches on win95, so only do it when needed
         if (sv_master[i]->modified || svs.time > svs.masterResolveTime[i]) {
-            sv_master[i]->modified = qfalse;
+            sv_master[i]->modified = false;
             svs.masterResolveTime[i] = svs.time + MASTERDNS_MSEC;
 
             if (netenabled & NET_ENABLEV4) {
@@ -437,7 +437,7 @@ static leakyBucket_t* SVC_BucketForAddress(netadr_t address, int burst, int peri
     return NULL;
 }
 
-qboolean SVC_RateLimit(leakyBucket_t* bucket, int burst, int period)
+bool SVC_RateLimit(leakyBucket_t* bucket, int burst, int period)
 {
     if (bucket != NULL) {
         int now = Sys_Milliseconds();
@@ -456,11 +456,11 @@ qboolean SVC_RateLimit(leakyBucket_t* bucket, int burst, int period)
         if (bucket->burst < burst) {
             bucket->burst++;
 
-            return qfalse;
+            return false;
         }
     }
 
-    return qtrue;
+    return true;
 }
 
 /*
@@ -470,7 +470,7 @@ SVC_RateLimitAddress
 Rate limit for a particular address
 ================
 */
-qboolean SVC_RateLimitAddress(netadr_t from, int burst, int period)
+bool SVC_RateLimitAddress(netadr_t from, int burst, int period)
 {
     leakyBucket_t* bucket = SVC_BucketForAddress(from, burst, period);
 
@@ -661,7 +661,7 @@ Redirect all printfs
 */
 static void SVC_RemoteCommand(netadr_t from, msg_t* msg)
 {
-    qboolean valid;
+    bool valid;
     char remaining[1024];
     // TTimo - scaled down to accumulate, but not overflow anything network wise, print wise etc.
     // (OOB messages are the bottleneck here)
@@ -685,10 +685,10 @@ static void SVC_RemoteCommand(netadr_t from, msg_t* msg)
             return;
         }
 
-        valid = qfalse;
+        valid = false;
         Com_Printf("Bad rcon from %s: %s\n", NET_AdrToString(from), Cmd_ArgsFrom(2));
     } else {
-        valid = qtrue;
+        valid = true;
         Com_Printf("Rcon from %s: %s\n", NET_AdrToString(from), Cmd_ArgsFrom(2));
     }
 
@@ -932,14 +932,14 @@ static void SV_CheckTimeouts(void)
     }
 }
 
-static qboolean SV_CheckPaused(void)
+static bool SV_CheckPaused(void)
 {
     int count;
     client_t* cl;
     int i;
 
     if (!cl_paused->integer) {
-        return qfalse;
+        return false;
     }
 
     // only pause if there is just a single client connected
@@ -954,12 +954,12 @@ static qboolean SV_CheckPaused(void)
         // don't pause
         if (sv_paused->integer)
             Cvar_Set("sv_paused", "0");
-        return qfalse;
+        return false;
     }
 
     if (!sv_paused->integer)
         Cvar_Set("sv_paused", "1");
-    return qtrue;
+    return true;
 }
 
 /*

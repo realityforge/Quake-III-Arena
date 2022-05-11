@@ -67,9 +67,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
 //  wins/losses are drawn on bot icon now
 
-static qboolean localClient; // true if local client has been displayed
+static bool localClient; // true if local client has been displayed
 
-static void CG_DrawClientScore(int y, score_t* score, float* color, float fade, qboolean largeFormat)
+static void CG_DrawClientScore(int y, score_t* score, float* color, float fade, bool largeFormat)
 {
     char string[1024];
     vec3_t headAngles;
@@ -89,21 +89,21 @@ static void CG_DrawClientScore(int y, score_t* score, float* color, float fade, 
     // draw the handicap or bot skill marker (unless player has flag)
     if (ci->powerups & (1 << PW_NEUTRALFLAG)) {
         if (largeFormat) {
-            CG_DrawFlagModel(iconx, y - (32 - BIGCHAR_HEIGHT) / 2, 32, 32, TEAM_FREE, qfalse);
+            CG_DrawFlagModel(iconx, y - (32 - BIGCHAR_HEIGHT) / 2, 32, 32, TEAM_FREE, false);
         } else {
-            CG_DrawFlagModel(iconx, y, 16, 16, TEAM_FREE, qfalse);
+            CG_DrawFlagModel(iconx, y, 16, 16, TEAM_FREE, false);
         }
     } else if (ci->powerups & (1 << PW_REDFLAG)) {
         if (largeFormat) {
-            CG_DrawFlagModel(iconx, y - (32 - BIGCHAR_HEIGHT) / 2, 32, 32, TEAM_RED, qfalse);
+            CG_DrawFlagModel(iconx, y - (32 - BIGCHAR_HEIGHT) / 2, 32, 32, TEAM_RED, false);
         } else {
-            CG_DrawFlagModel(iconx, y, 16, 16, TEAM_RED, qfalse);
+            CG_DrawFlagModel(iconx, y, 16, 16, TEAM_RED, false);
         }
     } else if (ci->powerups & (1 << PW_BLUEFLAG)) {
         if (largeFormat) {
-            CG_DrawFlagModel(iconx, y - (32 - BIGCHAR_HEIGHT) / 2, 32, 32, TEAM_BLUE, qfalse);
+            CG_DrawFlagModel(iconx, y - (32 - BIGCHAR_HEIGHT) / 2, 32, 32, TEAM_BLUE, false);
         } else {
-            CG_DrawFlagModel(iconx, y, 16, 16, TEAM_BLUE, qfalse);
+            CG_DrawFlagModel(iconx, y, 16, 16, TEAM_BLUE, false);
         }
     } else {
         if (ci->botSkill > 0 && ci->botSkill <= 5) {
@@ -170,7 +170,7 @@ static void CG_DrawClientScore(int y, score_t* score, float* color, float fade, 
         float hcolor[4];
         int rank;
 
-        localClient = qtrue;
+        localClient = true;
 
         if (cg.snap->ps.persistant[PERS_TEAM] == TEAM_SPECTATOR
             || cgs.gametype >= GT_TEAM) {
@@ -244,7 +244,7 @@ CG_DrawScoreboard
 Draw the normal in-game scoreboard
 =================
 */
-qboolean CG_DrawOldScoreboard(void)
+bool CG_DrawOldScoreboard(void)
 {
     int x, y, w, i, n1, n2;
     float fade;
@@ -257,17 +257,17 @@ qboolean CG_DrawOldScoreboard(void)
     // don't draw amuthing if the menu or console is up
     if (cg_paused.integer) {
         cg.deferredPlayerLoading = 0;
-        return qfalse;
+        return false;
     }
 
     if (cgs.gametype == GT_SINGLE_PLAYER && cg.predictedPlayerState.pm_type == PM_INTERMISSION) {
         cg.deferredPlayerLoading = 0;
-        return qfalse;
+        return false;
     }
 
     // don't draw scoreboard during death while warmup up
     if (cg.warmup && !cg.showScores) {
-        return qfalse;
+        return false;
     }
 
     if (cg.showScores || cg.predictedPlayerState.pm_type == PM_DEAD || cg.predictedPlayerState.pm_type == PM_INTERMISSION) {
@@ -280,7 +280,7 @@ qboolean CG_DrawOldScoreboard(void)
             // next time scoreboard comes up, don't print killer
             cg.deferredPlayerLoading = 0;
             cg.killerName[0] = 0;
-            return qfalse;
+            return false;
         }
         fade = *fadeColor;
     }
@@ -343,7 +343,7 @@ qboolean CG_DrawOldScoreboard(void)
         bottomBorderSize = 16;
     }
 
-    localClient = qfalse;
+    localClient = false;
 
     if (cgs.gametype >= GT_TEAM) {
         // teamplay scoreboard
@@ -394,7 +394,7 @@ qboolean CG_DrawOldScoreboard(void)
         CG_LoadDeferredPlayers();
     }
 
-    return qtrue;
+    return true;
 }
 
 //================================================================================
@@ -411,7 +411,7 @@ static void CG_CenterGiantLine(float y, const char* string)
 
     x = 0.5 * (640 - GIANT_WIDTH * CG_DrawStrlen(string));
 
-    CG_DrawStringExt(x, y, string, color, qtrue, qtrue, GIANT_WIDTH, GIANT_HEIGHT, 0);
+    CG_DrawStringExt(x, y, string, color, true, true, GIANT_WIDTH, GIANT_HEIGHT, 0);
 }
 
 /*
@@ -470,15 +470,15 @@ void CG_DrawTourneyScoreboard(void)
     y = 160;
     if (cgs.gametype >= GT_TEAM) {
         // teamplay scoreboard
-        CG_DrawStringExt(8, y, "Red Team", color, qtrue, qtrue, GIANT_WIDTH, GIANT_HEIGHT, 0);
+        CG_DrawStringExt(8, y, "Red Team", color, true, true, GIANT_WIDTH, GIANT_HEIGHT, 0);
         s = va("%i", cg.teamScores[0]);
-        CG_DrawStringExt(632 - GIANT_WIDTH * strlen(s), y, s, color, qtrue, qtrue, GIANT_WIDTH, GIANT_HEIGHT, 0);
+        CG_DrawStringExt(632 - GIANT_WIDTH * strlen(s), y, s, color, true, true, GIANT_WIDTH, GIANT_HEIGHT, 0);
 
         y += 64;
 
-        CG_DrawStringExt(8, y, "Blue Team", color, qtrue, qtrue, GIANT_WIDTH, GIANT_HEIGHT, 0);
+        CG_DrawStringExt(8, y, "Blue Team", color, true, true, GIANT_WIDTH, GIANT_HEIGHT, 0);
         s = va("%i", cg.teamScores[1]);
-        CG_DrawStringExt(632 - GIANT_WIDTH * strlen(s), y, s, color, qtrue, qtrue, GIANT_WIDTH, GIANT_HEIGHT, 0);
+        CG_DrawStringExt(632 - GIANT_WIDTH * strlen(s), y, s, color, true, true, GIANT_WIDTH, GIANT_HEIGHT, 0);
     } else {
         // free for all scoreboard
         for (i = 0; i < MAX_CLIENTS; i++) {
@@ -490,9 +490,9 @@ void CG_DrawTourneyScoreboard(void)
                 continue;
             }
 
-            CG_DrawStringExt(8, y, ci->name, color, qtrue, qtrue, GIANT_WIDTH, GIANT_HEIGHT, 0);
+            CG_DrawStringExt(8, y, ci->name, color, true, true, GIANT_WIDTH, GIANT_HEIGHT, 0);
             s = va("%i", ci->score);
-            CG_DrawStringExt(632 - GIANT_WIDTH * strlen(s), y, s, color, qtrue, qtrue, GIANT_WIDTH, GIANT_HEIGHT, 0);
+            CG_DrawStringExt(632 - GIANT_WIDTH * strlen(s), y, s, color, true, true, GIANT_WIDTH, GIANT_HEIGHT, 0);
             y += 64;
         }
     }

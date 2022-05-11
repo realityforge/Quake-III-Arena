@@ -23,6 +23,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef Q_SHARED_H
 #define Q_SHARED_H
 
+#include <stdbool.h>
+
 // q_shared.h -- included first by ALL program modules.
 // A user mod should never modify this file
 
@@ -181,7 +183,6 @@ int Q_vsnprintf(char* str, size_t size, const char* format, va_list ap);
 #endif
 
 #include "q_platform.h"
-#include "qboolean.h"
 
 //=============================================================
 
@@ -375,7 +376,7 @@ extern vec4_t colorWhite;
 extern vec4_t colorMdGrey;
 
 #define Q_COLOR_ESCAPE '^'
-qboolean Q_IsColorString(const char* p); // ^[0-9a-zA-Z]
+bool Q_IsColorString(const char* p); // ^[0-9a-zA-Z]
 
 #define COLOR_BLACK '0'
 #define COLOR_RED '1'
@@ -601,7 +602,7 @@ void AnglesSubtract(vec3_t v1, vec3_t v2, vec3_t v3);
 float AngleNormalize360(float angle);
 float AngleNormalize180(float angle);
 
-qboolean PlaneFromPoints(vec4_t plane, const vec3_t a, const vec3_t b, const vec3_t c);
+bool PlaneFromPoints(vec4_t plane, const vec3_t a, const vec3_t b, const vec3_t c);
 void ProjectPointOnPlane(vec3_t dst, const vec3_t p, const vec3_t normal);
 void RotatePointAroundVector(vec3_t dst, const vec3_t dir, const vec3_t point, float degrees);
 void RotateAroundDirection(vec3_t axis[3], float yaw);
@@ -629,13 +630,13 @@ float Com_Clamp(float min, float max, float value);
 char* COM_SkipPath(char* pathname);
 const char* COM_GetExtension(const char* name);
 void COM_StripExtension(const char* in, char* out, int destsize);
-qboolean COM_CompareExtension(const char* in, const char* ext);
+bool COM_CompareExtension(const char* in, const char* ext);
 void COM_DefaultExtension(char* path, int maxSize, const char* extension);
 
 void COM_BeginParseSession(const char* name);
 int COM_GetCurrentParseLine(void);
 char* COM_Parse(char** data_p);
-char* COM_ParseExt(char** data_p, qboolean allowLineBreak);
+char* COM_ParseExt(char** data_p, bool allowLineBreak);
 int COM_Compress(char* data_p);
 
 #define MAX_TOKENLENGTH 1024
@@ -661,7 +662,7 @@ typedef struct pc_token_s {
 
 void COM_MatchToken(char** buf_p, char* match);
 
-qboolean SkipBracedSection(char** program, int depth);
+bool SkipBracedSection(char** program, int depth);
 void SkipRestOfLine(char** data);
 
 void Parse1DMatrix(char** buf_p, int x, float* m);
@@ -696,8 +697,8 @@ int Q_isprint(int c);
 int Q_islower(int c);
 int Q_isupper(int c);
 int Q_isalpha(int c);
-qboolean Q_isanumber(const char* s);
-qboolean Q_isintegral(float f);
+bool Q_isanumber(const char* s);
+bool Q_isintegral(float f);
 
 // portable case insensitive compare
 int Q_stricmp(const char* s1, const char* s2);
@@ -759,7 +760,7 @@ void Info_RemoveKey(char* s, const char* key);
 void Info_RemoveKey_Big(char* s, const char* key);
 void Info_SetValueForKey(char* s, const char* key, const char* value);
 void Info_SetValueForKey_Big(char* s, const char* key, const char* value);
-qboolean Info_Validate(const char* s);
+bool Info_Validate(const char* s);
 void Info_NextPair(const char** s, char* key, char* value);
 
 // this is only here so the functions in q_shared.c and bg_*.c can link
@@ -813,8 +814,8 @@ typedef struct cplane_s {
 
 // a trace is returned when a box is swept through the world
 typedef struct {
-    qboolean allsolid; // if true, plane is not valid
-    qboolean startsolid; // if true, the initial point was in a solid area
+    bool allsolid; // if true, plane is not valid
+    bool startsolid; // if true, the initial point was in a solid area
     float fraction; // time completed, 1.0 = didn't hit anything
     vec3_t endpos; // final position
     cplane_t plane; // surface normal at impact, transformed to world space

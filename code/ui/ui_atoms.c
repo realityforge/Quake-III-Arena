@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 **********************************************************************/
 #include "ui_local.h"
 
-qboolean m_entersound; // after a frame, so caching won't disrupt the sound
+bool m_entersound; // after a frame, so caching won't disrupt the sound
 
 void QDECL Com_Error(int level, const char* error, ...)
 {
@@ -80,7 +80,7 @@ char* UI_Cvar_VariableString(const char* var_name)
     return buffer;
 }
 
-void UI_SetBestScores(postGameInfo_t* newInfo, qboolean postGame)
+void UI_SetBestScores(postGameInfo_t* newInfo, bool postGame)
 {
     trap_Cvar_Set("ui_scoreAccuracy", va("%i%%", newInfo->accuracy));
     trap_Cvar_Set("ui_scoreImpressives", va("%i", newInfo->impressives));
@@ -133,9 +133,9 @@ void UI_LoadBestScores(const char* map, int game)
         }
         trap_FS_FCloseFile(f);
     }
-    UI_SetBestScores(&newInfo, qfalse);
+    UI_SetBestScores(&newInfo, false);
 
-    uiInfo.demoAvailable = qfalse;
+    uiInfo.demoAvailable = false;
 
     protocolLegacy = trap_Cvar_VariableValue("com_legacyprotocol");
     protocol = trap_Cvar_VariableValue("com_protocol");
@@ -147,12 +147,12 @@ void UI_LoadBestScores(const char* map, int game)
 
     Com_sprintf(fileName, MAX_QPATH, "demos/%s_%d.%s%d", map, game, DEMOEXT, protocol);
     if (trap_FS_FOpenFile(fileName, &f, FS_READ) >= 0) {
-        uiInfo.demoAvailable = qtrue;
+        uiInfo.demoAvailable = true;
         trap_FS_FCloseFile(f);
     } else if (protocolLegacy > 0) {
         Com_sprintf(fileName, MAX_QPATH, "demos/%s_%d.%s%d", map, game, DEMOEXT, protocolLegacy);
         if (trap_FS_FOpenFile(fileName, &f, FS_READ) >= 0) {
-            uiInfo.demoAvailable = qtrue;
+            uiInfo.demoAvailable = true;
             trap_FS_FCloseFile(f);
         }
     }
@@ -184,7 +184,7 @@ void UI_ClearScores(void)
         }
     }
 
-    UI_SetBestScores(&newInfo, qfalse);
+    UI_SetBestScores(&newInfo, false);
 }
 
 static void UI_Cache_f(void)
@@ -201,7 +201,7 @@ static void UI_CalcPostGameStats(void)
     int size, game, time, adjustedTime;
     postGameInfo_t oldInfo;
     postGameInfo_t newInfo;
-    qboolean newHigh = qfalse;
+    bool newHigh = false;
 
     trap_GetConfigString(CS_SERVERINFO, info, sizeof(info));
     Q_strncpyz(map, Info_ValueForKey(info, "mapname"), sizeof(map));
@@ -282,11 +282,11 @@ static void UI_CalcPostGameStats(void)
     trap_Cvar_Set("sv_pure", UI_Cvar_VariableString("ui_pure"));
     trap_Cvar_Set("g_friendlyFire", UI_Cvar_VariableString("ui_friendlyFire"));
 
-    UI_SetBestScores(&newInfo, qtrue);
+    UI_SetBestScores(&newInfo, true);
     UI_ShowPostGame(newHigh);
 }
 
-qboolean UI_ConsoleCommand(int realTime)
+bool UI_ConsoleCommand(int realTime)
 {
     char* cmd;
 
@@ -299,18 +299,18 @@ qboolean UI_ConsoleCommand(int realTime)
     // Menu_Cache();
 
     if (Q_stricmp(cmd, "ui_test") == 0) {
-        UI_ShowPostGame(qtrue);
-        return qtrue;
+        UI_ShowPostGame(true);
+        return true;
     }
 
     if (Q_stricmp(cmd, "ui_report") == 0) {
         UI_Report();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "ui_load") == 0) {
         UI_Load();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "remapShader") == 0) {
@@ -324,26 +324,26 @@ qboolean UI_ConsoleCommand(int realTime)
             Q_strncpyz(shader3, UI_Argv(3), sizeof(shader3));
 
             trap_R_RemapShader(shader1, shader2, shader3);
-            return qtrue;
+            return true;
         }
     }
 
     if (Q_stricmp(cmd, "postgame") == 0) {
         UI_CalcPostGameStats();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "ui_cache") == 0) {
         UI_Cache_f();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "ui_teamOrders") == 0) {
         // UI_TeamOrdersMenu_f();
-        return qtrue;
+        return true;
     }
 
-    return qfalse;
+    return false;
 }
 
 void UI_Shutdown(void)
@@ -456,10 +456,10 @@ void UI_SetColor(const float* rgba)
     trap_R_SetColor(rgba);
 }
 
-qboolean UI_CursorInRect(int x, int y, int width, int height)
+bool UI_CursorInRect(int x, int y, int width, int height)
 {
     if (uiInfo.uiDC.cursorx < x || uiInfo.uiDC.cursory < y || uiInfo.uiDC.cursorx > x + width || uiInfo.uiDC.cursory > y + height)
-        return qfalse;
+        return false;
 
-    return qtrue;
+    return true;
 }

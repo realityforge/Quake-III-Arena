@@ -100,7 +100,7 @@ static const char* handicap_items[] = {
 static void PlayerSettings_DrawName(void* self)
 {
     menufield_s* f;
-    qboolean focus;
+    bool focus;
     int style;
     char* txt;
     char c;
@@ -167,7 +167,7 @@ static void PlayerSettings_DrawName(void* self)
 static void PlayerSettings_DrawHandicap(void* self)
 {
     menulist_s* item;
-    qboolean focus;
+    bool focus;
     int style;
     float* color;
 
@@ -188,7 +188,7 @@ static void PlayerSettings_DrawHandicap(void* self)
 static void PlayerSettings_DrawEffects(void* self)
 {
     menulist_s* item;
-    qboolean focus;
+    bool focus;
     int style;
     float* color;
 
@@ -222,7 +222,7 @@ static void PlayerSettings_DrawPlayer(void* self)
         viewangles[YAW] = 180 - 30;
         viewangles[PITCH] = 0;
         viewangles[ROLL] = 0;
-        UI_PlayerInfo_SetInfo(&s_playersettings.playerinfo, LEGS_IDLE, TORSO_STAND, viewangles, vec3_origin, WP_MACHINEGUN, qfalse);
+        UI_PlayerInfo_SetInfo(&s_playersettings.playerinfo, LEGS_IDLE, TORSO_STAND, viewangles, vec3_origin, WP_MACHINEGUN, false);
     }
 
     b = (menubitmap_s*)self;
@@ -273,7 +273,7 @@ static void PlayerSettings_SetMenuItems(void)
     viewangles[ROLL] = 0;
 
     UI_PlayerInfo_SetModel(&s_playersettings.playerinfo, UI_Cvar_VariableString("model"));
-    UI_PlayerInfo_SetInfo(&s_playersettings.playerinfo, LEGS_IDLE, TORSO_STAND, viewangles, vec3_origin, WP_MACHINEGUN, qfalse);
+    UI_PlayerInfo_SetInfo(&s_playersettings.playerinfo, LEGS_IDLE, TORSO_STAND, viewangles, vec3_origin, WP_MACHINEGUN, false);
 
     // handicap
     h = Com_Clamp(5, 100, trap_Cvar_VariableValue("handicap"));
@@ -312,8 +312,8 @@ static void PlayerSettings_MenuInit(void)
     PlayerSettings_Cache();
 
     s_playersettings.menu.key = PlayerSettings_MenuKey;
-    s_playersettings.menu.wrapAround = qtrue;
-    s_playersettings.menu.fullscreen = qtrue;
+    s_playersettings.menu.wrapAround = true;
+    s_playersettings.menu.fullscreen = true;
 
     s_playersettings.banner.generic.type = MTYPE_BTEXT;
     s_playersettings.banner.generic.x = 320;

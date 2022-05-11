@@ -35,11 +35,11 @@ int historyLine; // the line being displayed from history buffer
 
 field_t g_consoleField;
 field_t chatField;
-qboolean chat_team;
+bool chat_team;
 
 int chat_playerNum;
 
-qboolean key_overstrikeMode;
+bool key_overstrikeMode;
 
 int anykeydown;
 qkey_t keys[MAX_KEYS];
@@ -330,8 +330,8 @@ Handles horizontal scrolling and cursor blinking
 x, y, and width are in pixels
 ===================
 */
-void Field_VariableSizeDraw(field_t* edit, int x, int y, int width, int size, qboolean showCursor,
-                            qboolean noColorEscape)
+void Field_VariableSizeDraw(field_t* edit, int x, int y, int width, int size, bool showCursor,
+                            bool noColorEscape)
 {
     int len;
     int drawLen;
@@ -373,7 +373,7 @@ void Field_VariableSizeDraw(field_t* edit, int x, int y, int width, int size, qb
         float color[4];
 
         color[0] = color[1] = color[2] = color[3] = 1.0;
-        SCR_DrawSmallStringExt(x, y, str, color, qfalse, noColorEscape);
+        SCR_DrawSmallStringExt(x, y, str, color, false, noColorEscape);
     } else {
         // draw big string with drop shadow
         SCR_DrawBigString(x, y, str, 1.0, noColorEscape);
@@ -398,17 +398,17 @@ void Field_VariableSizeDraw(field_t* edit, int x, int y, int width, int size, qb
         } else {
             str[0] = cursorChar;
             str[1] = 0;
-            SCR_DrawBigString(x + (edit->cursor - prestep - i) * size, y, str, 1.0, qfalse);
+            SCR_DrawBigString(x + (edit->cursor - prestep - i) * size, y, str, 1.0, false);
         }
     }
 }
 
-void Field_Draw(field_t* edit, int x, int y, int width, qboolean showCursor, qboolean noColorEscape)
+void Field_Draw(field_t* edit, int x, int y, int width, bool showCursor, bool noColorEscape)
 {
     Field_VariableSizeDraw(edit, x, y, width, SMALLCHAR_WIDTH, showCursor, noColorEscape);
 }
 
-void Field_BigDraw(field_t* edit, int x, int y, int width, qboolean showCursor, qboolean noColorEscape)
+void Field_BigDraw(field_t* edit, int x, int y, int width, bool showCursor, bool noColorEscape)
 {
     Field_VariableSizeDraw(edit, x, y, width, BIGCHAR_WIDTH, showCursor, noColorEscape);
 }
@@ -749,7 +749,7 @@ void Message_Key(int key)
             else
                 Com_sprintf(buffer, sizeof(buffer), "say \"%s\"\n", chatField.buffer);
 
-            CL_AddReliableCommand(buffer, qfalse);
+            CL_AddReliableCommand(buffer, false);
         }
         Key_SetCatcher(Key_GetCatcher() & ~KEYCATCH_MESSAGE);
         Field_Clear(&chatField);
@@ -761,20 +761,20 @@ void Message_Key(int key)
 
 //============================================================================
 
-qboolean Key_GetOverstrikeMode(void)
+bool Key_GetOverstrikeMode(void)
 {
     return key_overstrikeMode;
 }
 
-void Key_SetOverstrikeMode(qboolean state)
+void Key_SetOverstrikeMode(bool state)
 {
     key_overstrikeMode = state;
 }
 
-qboolean Key_IsDown(int keynum)
+bool Key_IsDown(int keynum)
 {
     if (keynum < 0 || keynum >= MAX_KEYS) {
-        return qfalse;
+        return false;
     }
 
     return keys[keynum].down;
@@ -1045,7 +1045,7 @@ static void Key_CompleteBind(char* args, int argNum)
         p = Com_SkipTokens(args, 2, " ");
 
         if (p > args)
-            Field_CompleteCommand(p, qtrue, qtrue);
+            Field_CompleteCommand(p, true, true);
     }
 }
 
@@ -1064,20 +1064,20 @@ void CL_InitKeyCommands(void)
 ===================
 CL_BindUICommand
 
-Returns qtrue if bind command should be executed while user interface is shown
+Returns true if bind command should be executed while user interface is shown
 ===================
 */
-static qboolean CL_BindUICommand(const char* cmd)
+static bool CL_BindUICommand(const char* cmd)
 {
     if (Key_GetCatcher() & KEYCATCH_CONSOLE)
-        return qfalse;
+        return false;
 
     if (!Q_stricmp(cmd, "toggleconsole"))
-        return qtrue;
+        return true;
     if (!Q_stricmp(cmd, "togglemenu"))
-        return qtrue;
+        return true;
 
-    return qfalse;
+    return false;
 }
 
 /*
@@ -1087,10 +1087,10 @@ CL_ParseBinding
 Execute the commands in the bind string
 ===================
 */
-void CL_ParseBinding(int key, qboolean down, unsigned time)
+void CL_ParseBinding(int key, bool down, unsigned time)
 {
     char buf[MAX_STRING_CHARS], *p = buf, *end;
-    qboolean allCommands, allowUpCmds;
+    bool allCommands, allowUpCmds;
 
     if (clc.state == CA_DISCONNECTED && Key_GetCatcher() == 0)
         return;
@@ -1142,7 +1142,7 @@ Called by CL_KeyEvent to handle a keypress
 */
 void CL_KeyDownEvent(int key, unsigned time)
 {
-    keys[key].down = qtrue;
+    keys[key].down = true;
     keys[key].repeats++;
     if (keys[key].repeats == 1)
         anykeydown++;
@@ -1200,23 +1200,23 @@ void CL_KeyDownEvent(int key, unsigned time)
             return;
         }
 
-        VM_Call(uivm, UI_KEY_EVENT, key, qtrue);
+        VM_Call(uivm, UI_KEY_EVENT, key, true);
         return;
     }
 
     // send the bound action
-    CL_ParseBinding(key, qtrue, time);
+    CL_ParseBinding(key, true, time);
 
     // distribute the key down event to the appropriate handler
     if (Key_GetCatcher() & KEYCATCH_CONSOLE) {
         Console_Key(key);
     } else if (Key_GetCatcher() & KEYCATCH_UI) {
         if (uivm) {
-            VM_Call(uivm, UI_KEY_EVENT, key, qtrue);
+            VM_Call(uivm, UI_KEY_EVENT, key, true);
         }
     } else if (Key_GetCatcher() & KEYCATCH_CGAME) {
         if (cgvm) {
-            VM_Call(cgvm, CG_KEY_EVENT, key, qtrue);
+            VM_Call(cgvm, CG_KEY_EVENT, key, true);
         }
     } else if (Key_GetCatcher() & KEYCATCH_MESSAGE) {
         Message_Key(key);
@@ -1235,7 +1235,7 @@ Called by CL_KeyEvent to handle a keyrelease
 void CL_KeyUpEvent(int key, unsigned time)
 {
     keys[key].repeats = 0;
-    keys[key].down = qfalse;
+    keys[key].down = false;
     anykeydown--;
 
     if (anykeydown < 0) {
@@ -1250,12 +1250,12 @@ void CL_KeyUpEvent(int key, unsigned time)
     // a button command (leading + sign).  These will be processed even in
     // console mode and menu mode, to keep the character from continuing
     // an action started before a mode switch.
-    CL_ParseBinding(key, qfalse, time);
+    CL_ParseBinding(key, false, time);
 
     if (Key_GetCatcher() & KEYCATCH_UI && uivm) {
-        VM_Call(uivm, UI_KEY_EVENT, key, qfalse);
+        VM_Call(uivm, UI_KEY_EVENT, key, false);
     } else if (Key_GetCatcher() & KEYCATCH_CGAME && cgvm) {
-        VM_Call(cgvm, CG_KEY_EVENT, key, qfalse);
+        VM_Call(cgvm, CG_KEY_EVENT, key, false);
     }
 }
 
@@ -1266,7 +1266,7 @@ CL_KeyEvent
 Called by the system for both key up and key down events
 ===================
 */
-void CL_KeyEvent(int key, qboolean down, unsigned time)
+void CL_KeyEvent(int key, bool down, unsigned time)
 {
     if (down)
         CL_KeyDownEvent(key, time);
@@ -1293,7 +1293,7 @@ void CL_CharEvent(int key)
     if (Key_GetCatcher() & KEYCATCH_CONSOLE) {
         Field_CharEvent(&g_consoleField, key);
     } else if (Key_GetCatcher() & KEYCATCH_UI) {
-        VM_Call(uivm, UI_KEY_EVENT, key | K_CHAR_FLAG, qtrue);
+        VM_Call(uivm, UI_KEY_EVENT, key | K_CHAR_FLAG, true);
     } else if (Key_GetCatcher() & KEYCATCH_MESSAGE) {
         Field_CharEvent(&chatField, key);
     } else if (clc.state == CA_DISCONNECTED) {
@@ -1309,7 +1309,7 @@ void Key_ClearStates(void)
 
     for (i = 0; i < MAX_KEYS; i++) {
         if (keys[i].down) {
-            CL_KeyEvent(i, qfalse, 0);
+            CL_KeyEvent(i, false, 0);
         }
         keys[i].down = 0;
         keys[i].repeats = 0;
@@ -1351,7 +1351,7 @@ void CL_LoadConsoleHistory(void)
     int i, numChars, numLines = 0;
     fileHandle_t f;
 
-    consoleSaveBufferSize = FS_FOpenFileRead(CONSOLE_HISTORY_FILE, &f, qfalse);
+    consoleSaveBufferSize = FS_FOpenFileRead(CONSOLE_HISTORY_FILE, &f, false);
     if (!f) {
         Com_Printf("Couldn't read %s.\n", CONSOLE_HISTORY_FILE);
         return;

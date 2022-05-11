@@ -229,7 +229,7 @@ void EA_GetInput(int client, float thinktime, bot_input_t* input)
 void EA_ResetInput(int client)
 {
     bot_input_t* bi;
-    int jumped = qfalse;
+    int jumped = false;
 
     bi = &botinputs[client];
 

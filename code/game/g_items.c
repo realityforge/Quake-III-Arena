@@ -412,7 +412,7 @@ void RespawnItem(gentity_t* ent)
 void Touch_Item(gentity_t* ent, gentity_t* other, trace_t* trace)
 {
     int respawn;
-    qboolean predict;
+    bool predict;
 
     if (!other->client)
         return;
@@ -432,11 +432,11 @@ void Touch_Item(gentity_t* ent, gentity_t* other, trace_t* trace)
     switch (ent->item->giType) {
     case IT_WEAPON:
         respawn = Pickup_Weapon(ent, other);
-        //		predict = qfalse;
+        //		predict = false;
         break;
     case IT_AMMO:
         respawn = Pickup_Ammo(ent, other);
-        //		predict = qfalse;
+        //		predict = false;
         break;
     case IT_ARMOR:
         respawn = Pickup_Armor(ent, other);
@@ -446,7 +446,7 @@ void Touch_Item(gentity_t* ent, gentity_t* other, trace_t* trace)
         break;
     case IT_POWERUP:
         respawn = Pickup_Powerup(ent, other);
-        predict = qfalse;
+        predict = false;
         break;
 #ifdef MISSIONPACK
     case IT_PERSISTANT_POWERUP:
@@ -502,7 +502,7 @@ void Touch_Item(gentity_t* ent, gentity_t* other, trace_t* trace)
         ent->r.svFlags |= SVF_NOCLIENT;
         ent->s.eFlags |= EF_NODRAW;
         ent->r.contents = 0;
-        ent->unlinkAfterEvent = qtrue;
+        ent->unlinkAfterEvent = true;
         return;
     }
 
@@ -521,7 +521,7 @@ void Touch_Item(gentity_t* ent, gentity_t* other, trace_t* trace)
 
     // dropped items will not respawn
     if (ent->flags & FL_DROPPED_ITEM) {
-        ent->freeAfterEvent = qtrue;
+        ent->freeAfterEvent = true;
     }
 
     // picked up items still stay around, they just don't
@@ -701,7 +701,7 @@ void FinishSpawningItem(gentity_t* ent)
     trap_LinkEntity(ent);
 }
 
-qboolean itemRegistered[MAX_ITEMS];
+bool itemRegistered[MAX_ITEMS];
 
 void G_CheckTeamItems(void)
 {
@@ -810,7 +810,7 @@ void RegisterItem(gitem_t* item)
     if (!item) {
         G_Error("RegisterItem: NULL");
     }
-    itemRegistered[item - bg_itemlist] = qtrue;
+    itemRegistered[item - bg_itemlist] = true;
 }
 
 /*

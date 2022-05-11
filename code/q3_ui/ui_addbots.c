@@ -214,8 +214,8 @@ static void UI_AddBotsMenu_Init(void)
     gametype = atoi(Info_ValueForKey(info, "g_gametype"));
 
     memset(&addBotsMenuInfo, 0, sizeof(addBotsMenuInfo));
-    addBotsMenuInfo.menu.fullscreen = qfalse;
-    addBotsMenuInfo.menu.wrapAround = qtrue;
+    addBotsMenuInfo.menu.fullscreen = false;
+    addBotsMenuInfo.menu.wrapAround = true;
     addBotsMenuInfo.delay = 1000;
 
     UI_AddBots_Cache();

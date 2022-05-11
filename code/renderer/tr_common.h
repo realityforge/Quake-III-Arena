@@ -75,10 +75,10 @@ extern glconfig_t glConfig; // outside of TR since it shouldn't be cleared durin
 // compatibility issues to the original ID vms.  If you release a stand-alone
 // game and your mod uses tr_types.h from this build you can safely move them
 // to the glconfig_t struct.
-extern qboolean textureFilterAnisotropic;
+extern bool textureFilterAnisotropic;
 extern int maxAnisotropy;
 extern float displayAspect;
-extern qboolean haveClampToEdge;
+extern bool haveClampToEdge;
 
 //
 // cvars
@@ -117,7 +117,7 @@ extern cvar_t* r_stereoEnabled;
 
 extern cvar_t* r_saveFontData;
 
-qboolean R_GetModeInfo(int* width, int* height, float* windowAspect, int mode);
+bool R_GetModeInfo(int* width, int* height, float* windowAspect, int mode);
 
 float R_NoiseGet4f(float x, float y, float z, double t);
 void R_NoiseInit(void);
@@ -129,7 +129,7 @@ void R_IssuePendingRenderCommands(void);
 qhandle_t RE_RegisterShaderLightMap(const char* name, int lightmapIndex);
 qhandle_t RE_RegisterShader(const char* name);
 qhandle_t RE_RegisterShaderNoMip(const char* name);
-qhandle_t RE_RegisterShaderFromImage(const char* name, int lightmapIndex, image_t* image, qboolean mipRawImage);
+qhandle_t RE_RegisterShaderFromImage(const char* name, int lightmapIndex, image_t* image, bool mipRawImage);
 
 // font stuff
 void R_InitFreeType(void);
@@ -156,7 +156,7 @@ IMPLEMENTATION SPECIFIC FUNCTIONS
 ====================================================================
 */
 
-void GLimp_Init(qboolean fixedFunction);
+void GLimp_Init(bool fixedFunction);
 void GLimp_Shutdown(void);
 void GLimp_EndFrame(void);
 

@@ -69,7 +69,7 @@ typedef enum {
 
 typedef struct {
     serverState_t state;
-    qboolean restarting; // if true, send configstring changes during SS_LOADING
+    bool restarting; // if true, send configstring changes during SS_LOADING
     int serverId; // changes each server start
     int restartedServerId; // serverId before a map_restart
     int checksumFeed; // the feed key that we use to compute the pure checksum strings
@@ -156,7 +156,7 @@ typedef struct client_s {
     int downloadXmitBlock; // last block we xmited
     unsigned char* downloadBlocks[MAX_DOWNLOAD_WINDOW]; // the buffers for the download blocks
     int downloadBlockSize[MAX_DOWNLOAD_WINDOW];
-    qboolean downloadEOF; // We have sent the EOF block
+    bool downloadEOF; // We have sent the EOF block
     int downloadSendTime; // time we last got an ack from the client
 
     int deltaMessage; // frame last client usercmd message
@@ -164,14 +164,14 @@ typedef struct client_s {
     int lastPacketTime; // svs.time when packet was last received
     int lastConnectTime; // svs.time when connection started
     int lastSnapshotTime; // svs.time of last sent snapshot
-    qboolean rateDelayed; // true if nextSnapshotTime was set based on rate instead of snapshotMsec
+    bool rateDelayed; // true if nextSnapshotTime was set based on rate instead of snapshotMsec
     int timeoutCount; // must timeout a few frames in a row so debugging doesn't break
     clientSnapshot_t frames[PACKET_BACKUP]; // updates can be delta'd from here
     int ping;
     int rate; // bytes / second
     int snapshotMsec; // requests a snapshot every snapshotMsec unless rate choked
     int pureAuthentic;
-    qboolean gotCP; // TTimo - additional flag to distinguish between a bad pure checksum, and no cp command at all
+    bool gotCP; // TTimo - additional flag to distinguish between a bad pure checksum, and no cp command at all
     netchan_t netchan;
     // TTimo
     // queuing outgoing fragmented messages to send them properly, without udp packet bursts
@@ -181,19 +181,19 @@ typedef struct client_s {
     netchan_buffer_t** netchan_end_queue;
 
 #ifdef USE_VOIP
-    qboolean hasVoip;
-    qboolean muteAllVoip;
-    qboolean ignoreVoipFromClient[MAX_CLIENTS];
+    bool hasVoip;
+    bool muteAllVoip;
+    bool ignoreVoipFromClient[MAX_CLIENTS];
     voipServerPacket_t* voipPacket[VOIP_QUEUE_LENGTH];
     int queuedVoipPackets;
     int queuedVoipIndex;
 #endif
 
     int oldServerTime;
-    qboolean csUpdated[MAX_CONFIGSTRINGS];
+    bool csUpdated[MAX_CONFIGSTRINGS];
 
 #ifdef LEGACY_PROTOCOL
-    qboolean compat;
+    bool compat;
 #endif
 } client_t;
 
@@ -215,13 +215,13 @@ typedef struct {
     int time; // time the last packet was sent to the autherize server
     int pingTime; // time the challenge response was sent to client
     int firstTime; // time the adr was first used, for authorize timeout checks
-    qboolean wasrefused;
-    qboolean connected;
+    bool wasrefused;
+    bool connected;
 } challenge_t;
 
 // this structure will be cleared only when the game dll changes
 typedef struct {
-    qboolean initialized; // sv_init has completed
+    bool initialized; // sv_init has completed
 
     int time; // will be strictly increasing across level changes
 
@@ -247,7 +247,7 @@ typedef struct
     // For a CIDR-Notation type suffix
     int subnet;
 
-    qboolean isexception;
+    bool isexception;
 } serverBan_t;
 
 //=============================================================================
@@ -316,8 +316,8 @@ struct leakyBucket_s {
 
 extern leakyBucket_t outboundLeakyBucket;
 
-qboolean SVC_RateLimit(leakyBucket_t* bucket, int burst, int period);
-qboolean SVC_RateLimitAddress(netadr_t from, int burst, int period);
+bool SVC_RateLimit(leakyBucket_t* bucket, int burst, int period);
+bool SVC_RateLimitAddress(netadr_t from, int burst, int period);
 
 void SV_FinalMessage(char* message);
 void QDECL SV_SendServerCommand(client_t* cl, const char* fmt, ...) __attribute__((format(printf, 2, 3)));
@@ -340,7 +340,7 @@ void SV_SetUserinfo(int index, const char* val);
 void SV_GetUserinfo(int index, char* buffer, int bufferSize);
 
 void SV_ChangeMaxClients(void);
-void SV_SpawnServer(char* server, qboolean killBots);
+void SV_SpawnServer(char* server, bool killBots);
 
 //
 // sv_client.c
@@ -356,7 +356,7 @@ void SV_ClientEnterWorld(client_t* client, usercmd_t* cmd);
 void SV_FreeClient(client_t* client);
 void SV_DropClient(client_t* drop, const char* reason);
 
-void SV_ExecuteClientCommand(client_t* cl, const char* s, qboolean clientOK);
+void SV_ExecuteClientCommand(client_t* cl, const char* s, bool clientOK);
 void SV_ClientThink(client_t* cl, usercmd_t* cmd);
 
 int SV_WriteDownloadToClient(client_t* cl, msg_t* msg);
@@ -389,7 +389,7 @@ sharedEntity_t* SV_GEntityForSvEntity(svEntity_t* svEnt);
 void SV_InitGameProgs(void);
 void SV_ShutdownGameProgs(void);
 void SV_RestartGameProgs(void);
-qboolean SV_inPVS(const vec3_t p1, const vec3_t p2);
+bool SV_inPVS(const vec3_t p1, const vec3_t p2);
 
 //
 // sv_bot.c
@@ -462,5 +462,5 @@ void SV_ClipToEntity(trace_t* trace, const vec3_t start, const vec3_t mins, cons
 //
 void SV_Netchan_Transmit(client_t* client, msg_t* msg);
 int SV_Netchan_TransmitNextFragment(client_t* client);
-qboolean SV_Netchan_Process(client_t* client, msg_t* msg);
+bool SV_Netchan_Process(client_t* client, msg_t* msg);
 void SV_Netchan_FreeQueue(client_t* client);

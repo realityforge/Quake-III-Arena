@@ -23,10 +23,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "client.h"
 #include "cl_curl.h"
 
-qboolean CL_cURL_Init()
+bool CL_cURL_Init()
 {
-    clc.cURLEnabled = qtrue;
-    return qtrue;
+    clc.cURLEnabled = true;
+    return true;
 }
 
 void CL_cURL_Shutdown(void)
@@ -106,7 +106,7 @@ void CL_cURL_BeginDownload(const char* localName, const char* remoteURL)
 {
     CURLMcode result;
 
-    clc.cURLUsed = qtrue;
+    clc.cURLUsed = true;
     Com_Printf("URL: %s\n", remoteURL);
     Com_DPrintf("***** CL_cURL_BeginDownload *****\n"
                 "Localname: %s\n"
@@ -178,11 +178,11 @@ void CL_cURL_BeginDownload(const char* localName, const char* remoteURL)
 
     if (!(clc.sv_allowDownload & DLF_NO_DISCONNECT) && !clc.cURLDisconnected) {
 
-        CL_AddReliableCommand("disconnect", qtrue);
+        CL_AddReliableCommand("disconnect", true);
         CL_WritePacket();
         CL_WritePacket();
         CL_WritePacket();
-        clc.cURLDisconnected = qtrue;
+        clc.cURLDisconnected = true;
     }
 }
 
@@ -206,8 +206,8 @@ void CL_cURL_PerformDownload(void)
     }
     FS_FCloseFile(clc.download);
     if (msg->msg == CURLMSG_DONE && msg->data.result == CURLE_OK) {
-        FS_SV_Rename(clc.downloadTempName, clc.downloadName, qfalse);
-        clc.downloadRestart = qtrue;
+        FS_SV_Rename(clc.downloadTempName, clc.downloadName, false);
+        clc.downloadRestart = true;
     } else {
         long code;
 

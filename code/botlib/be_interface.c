@@ -64,22 +64,22 @@ int Sys_MilliSeconds(void)
 {
     return clock() * 1000 / CLOCKS_PER_SEC;
 }
-qboolean ValidEntityNumber(int num, char* str)
+bool ValidEntityNumber(int num, char* str)
 {
     if (num < 0 || num > botlibglobals.maxentities) {
         botimport.Print(PRT_ERROR, "%s: invalid entity number %d, [0, %d]\n",
                         str, num, botlibglobals.maxentities);
-        return qfalse;
+        return false;
     }
-    return qtrue;
+    return true;
 }
-qboolean BotLibSetup(char* str)
+bool BotLibSetup(char* str)
 {
     if (!botlibglobals.botlibsetup) {
         botimport.Print(PRT_ERROR, "%s: bot library used before being setup\n", str);
-        return qfalse;
+        return false;
     }
-    return qtrue;
+    return true;
 }
 
 int Export_BotLibSetup(void)
@@ -117,7 +117,7 @@ int Export_BotLibSetup(void)
     if (errnum != BLERR_NOERROR)
         return errnum;
 
-    botlibglobals.botlibsetup = qtrue;
+    botlibglobals.botlibsetup = true;
 
     return BLERR_NOERROR;
 }
@@ -150,7 +150,7 @@ int Export_BotLibShutdown(void)
 #endif
     // shut down library log file
     Log_Shutdown();
-    botlibglobals.botlibsetup = qfalse;
+    botlibglobals.botlibsetup = false;
     // print any files still open
     PC_CheckOpenSourceHandles();
     return BLERR_NOERROR;

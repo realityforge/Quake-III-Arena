@@ -97,7 +97,7 @@ void CG_CheckOrderPending(void)
         if (b) {
             trap_SendConsoleCommand(b);
         }
-        cgs.orderPending = qfalse;
+        cgs.orderPending = false;
     }
 }
 
@@ -144,7 +144,7 @@ void CG_SelectPrevPlayer(void)
     CG_SetSelectedPlayerName();
 }
 
-static void CG_DrawPlayerArmorIcon(rectDef_t* rect, qboolean draw2D)
+static void CG_DrawPlayerArmorIcon(rectDef_t* rect, bool draw2D)
 {
     vec3_t angles;
     vec3_t origin;
@@ -186,7 +186,7 @@ static void CG_DrawPlayerArmorValue(rectDef_t* rect, float scale, vec4_t color, 
     }
 }
 
-static void CG_DrawPlayerAmmoIcon(rectDef_t* rect, qboolean draw2D)
+static void CG_DrawPlayerAmmoIcon(rectDef_t* rect, bool draw2D)
 {
     centity_t* cent;
     vec3_t angles;
@@ -238,7 +238,7 @@ static void CG_DrawPlayerAmmoValue(rectDef_t* rect, float scale, vec4_t color, q
     }
 }
 
-static void CG_DrawPlayerHead(rectDef_t* rect, qboolean draw2D)
+static void CG_DrawPlayerHead(rectDef_t* rect, bool draw2D)
 {
     vec3_t angles;
     float size, stretch;
@@ -388,7 +388,7 @@ static void CG_DrawPlayerStatus(rectDef_t* rect)
     }
 }
 
-static void CG_DrawSelectedPlayerName(rectDef_t* rect, float scale, vec4_t color, qboolean voice, int textStyle)
+static void CG_DrawSelectedPlayerName(rectDef_t* rect, float scale, vec4_t color, bool voice, int textStyle)
 {
     clientInfo_t* ci;
     ci = cgs.clientinfo + ((voice) ? cgs.currentVoiceClient : sortedTeamPlayers[CG_GetSelectedPlayer()]);
@@ -452,7 +452,7 @@ static void CG_DrawPlayerScore(rectDef_t* rect, float scale, vec4_t color, qhand
     }
 }
 
-static void CG_DrawPlayerItem(rectDef_t* rect, float scale, qboolean draw2D)
+static void CG_DrawPlayerItem(rectDef_t* rect, float scale, bool draw2D)
 {
     int value;
     vec3_t origin, angles;
@@ -461,7 +461,7 @@ static void CG_DrawPlayerItem(rectDef_t* rect, float scale, qboolean draw2D)
     if (value) {
         CG_RegisterItemVisuals(value);
 
-        if (qtrue) {
+        if (true) {
             CG_RegisterItemVisuals(value);
             CG_DrawPic(rect->x, rect->y, rect->w, rect->h, cg_items[value].icon);
         } else {
@@ -475,7 +475,7 @@ static void CG_DrawPlayerItem(rectDef_t* rect, float scale, qboolean draw2D)
     }
 }
 
-static void CG_DrawSelectedPlayerPowerup(rectDef_t* rect, qboolean draw2D)
+static void CG_DrawSelectedPlayerPowerup(rectDef_t* rect, bool draw2D)
 {
     clientInfo_t* ci;
     int j;
@@ -499,7 +499,7 @@ static void CG_DrawSelectedPlayerPowerup(rectDef_t* rect, qboolean draw2D)
     }
 }
 
-static void CG_DrawSelectedPlayerHead(rectDef_t* rect, qboolean draw2D, qboolean voice)
+static void CG_DrawSelectedPlayerHead(rectDef_t* rect, bool draw2D, bool voice)
 {
     clipHandle_t cm;
     clientInfo_t* ci;
@@ -711,7 +711,7 @@ static void CG_DrawRedFlagHead(rectDef_t* rect)
     }
 }
 
-static void CG_HarvesterSkulls(rectDef_t* rect, float scale, vec4_t color, qboolean force2D, int textStyle)
+static void CG_HarvesterSkulls(rectDef_t* rect, float scale, vec4_t color, bool force2D, int textStyle)
 {
     char num[16];
     vec3_t origin, angles;
@@ -929,59 +929,59 @@ float CG_GetValue(int ownerDraw)
     return -1;
 }
 
-qboolean CG_OtherTeamHasFlag(void)
+bool CG_OtherTeamHasFlag(void)
 {
     if (cgs.gametype == GT_CTF || cgs.gametype == GT_1FCTF) {
         int team = cg.snap->ps.persistant[PERS_TEAM];
         if (cgs.gametype == GT_1FCTF) {
             if (team == TEAM_RED && cgs.flagStatus == FLAG_TAKEN_BLUE) {
-                return qtrue;
+                return true;
             } else if (team == TEAM_BLUE && cgs.flagStatus == FLAG_TAKEN_RED) {
-                return qtrue;
+                return true;
             } else {
-                return qfalse;
+                return false;
             }
         } else {
             if (team == TEAM_RED && cgs.redflag == FLAG_TAKEN) {
-                return qtrue;
+                return true;
             } else if (team == TEAM_BLUE && cgs.blueflag == FLAG_TAKEN) {
-                return qtrue;
+                return true;
             } else {
-                return qfalse;
+                return false;
             }
         }
     }
-    return qfalse;
+    return false;
 }
 
-qboolean CG_YourTeamHasFlag(void)
+bool CG_YourTeamHasFlag(void)
 {
     if (cgs.gametype == GT_CTF || cgs.gametype == GT_1FCTF) {
         int team = cg.snap->ps.persistant[PERS_TEAM];
         if (cgs.gametype == GT_1FCTF) {
             if (team == TEAM_RED && cgs.flagStatus == FLAG_TAKEN_RED) {
-                return qtrue;
+                return true;
             } else if (team == TEAM_BLUE && cgs.flagStatus == FLAG_TAKEN_BLUE) {
-                return qtrue;
+                return true;
             } else {
-                return qfalse;
+                return false;
             }
         } else {
             if (team == TEAM_RED && cgs.blueflag == FLAG_TAKEN) {
-                return qtrue;
+                return true;
             } else if (team == TEAM_BLUE && cgs.redflag == FLAG_TAKEN) {
-                return qtrue;
+                return true;
             } else {
-                return qfalse;
+                return false;
             }
         }
     }
-    return qfalse;
+    return false;
 }
 
 // THINKABOUTME: should these be exclusive or inclusive..
 //
-qboolean CG_OwnerDrawVisible(int flags)
+bool CG_OwnerDrawVisible(int flags)
 {
 
     if (flags & CG_SHOW_TEAMINFO) {
@@ -1002,76 +1002,76 @@ qboolean CG_OwnerDrawVisible(int flags)
 
     if (flags & (CG_SHOW_BLUE_TEAM_HAS_REDFLAG | CG_SHOW_RED_TEAM_HAS_BLUEFLAG)) {
         if (flags & CG_SHOW_BLUE_TEAM_HAS_REDFLAG && (cgs.redflag == FLAG_TAKEN || cgs.flagStatus == FLAG_TAKEN_RED)) {
-            return qtrue;
+            return true;
         } else if (flags & CG_SHOW_RED_TEAM_HAS_BLUEFLAG && (cgs.blueflag == FLAG_TAKEN || cgs.flagStatus == FLAG_TAKEN_BLUE)) {
-            return qtrue;
+            return true;
         }
-        return qfalse;
+        return false;
     }
 
     if (flags & CG_SHOW_ANYTEAMGAME) {
         if (cgs.gametype >= GT_TEAM) {
-            return qtrue;
+            return true;
         }
     }
 
     if (flags & CG_SHOW_ANYNONTEAMGAME) {
         if (cgs.gametype < GT_TEAM) {
-            return qtrue;
+            return true;
         }
     }
 
     if (flags & CG_SHOW_HARVESTER) {
         if (cgs.gametype == GT_HARVESTER) {
-            return qtrue;
+            return true;
         } else {
-            return qfalse;
+            return false;
         }
     }
 
     if (flags & CG_SHOW_ONEFLAG) {
         if (cgs.gametype == GT_1FCTF) {
-            return qtrue;
+            return true;
         } else {
-            return qfalse;
+            return false;
         }
     }
 
     if (flags & CG_SHOW_CTF) {
         if (cgs.gametype == GT_CTF) {
-            return qtrue;
+            return true;
         }
     }
 
     if (flags & CG_SHOW_OBELISK) {
         if (cgs.gametype == GT_OBELISK) {
-            return qtrue;
+            return true;
         } else {
-            return qfalse;
+            return false;
         }
     }
 
     if (flags & CG_SHOW_HEALTHCRITICAL) {
         if (cg.snap->ps.stats[STAT_HEALTH] < 25) {
-            return qtrue;
+            return true;
         }
     }
 
     if (flags & CG_SHOW_HEALTHOK) {
         if (cg.snap->ps.stats[STAT_HEALTH] >= 25) {
-            return qtrue;
+            return true;
         }
     }
 
     if (flags & CG_SHOW_SINGLEPLAYER) {
         if (cgs.gametype == GT_SINGLE_PLAYER) {
-            return qtrue;
+            return true;
         }
     }
 
     if (flags & CG_SHOW_TOURNAMENT) {
         if (cgs.gametype == GT_TOURNAMENT) {
-            return qtrue;
+            return true;
         }
     }
 
@@ -1080,13 +1080,13 @@ qboolean CG_OwnerDrawVisible(int flags)
 
     if (flags & CG_SHOW_IF_PLAYER_HAS_FLAG) {
         if (cg.snap->ps.powerups[PW_REDFLAG] || cg.snap->ps.powerups[PW_BLUEFLAG] || cg.snap->ps.powerups[PW_NEUTRALFLAG]) {
-            return qtrue;
+            return true;
         }
     }
-    return qfalse;
+    return false;
 }
 
-static void CG_DrawPlayerHasFlag(rectDef_t* rect, qboolean force2D)
+static void CG_DrawPlayerHasFlag(rectDef_t* rect, bool force2D)
 {
     int adj = (force2D) ? 0 : 2;
     if (cg.predictedPlayerState.powerups[PW_REDFLAG]) {
@@ -1505,7 +1505,7 @@ void CG_OwnerDraw(float x, float y, float w, float h, float text_x, float text_y
         CG_DrawPlayerArmorIcon(&rect, ownerDrawFlags & CG_SHOW_2DONLY);
         break;
     case CG_PLAYER_ARMOR_ICON2D:
-        CG_DrawPlayerArmorIcon(&rect, qtrue);
+        CG_DrawPlayerArmorIcon(&rect, true);
         break;
     case CG_PLAYER_ARMOR_VALUE:
         CG_DrawPlayerArmorValue(&rect, scale, color, shader, textStyle);
@@ -1514,19 +1514,19 @@ void CG_OwnerDraw(float x, float y, float w, float h, float text_x, float text_y
         CG_DrawPlayerAmmoIcon(&rect, ownerDrawFlags & CG_SHOW_2DONLY);
         break;
     case CG_PLAYER_AMMO_ICON2D:
-        CG_DrawPlayerAmmoIcon(&rect, qtrue);
+        CG_DrawPlayerAmmoIcon(&rect, true);
         break;
     case CG_PLAYER_AMMO_VALUE:
         CG_DrawPlayerAmmoValue(&rect, scale, color, shader, textStyle);
         break;
     case CG_SELECTEDPLAYER_HEAD:
-        CG_DrawSelectedPlayerHead(&rect, ownerDrawFlags & CG_SHOW_2DONLY, qfalse);
+        CG_DrawSelectedPlayerHead(&rect, ownerDrawFlags & CG_SHOW_2DONLY, false);
         break;
     case CG_VOICE_HEAD:
-        CG_DrawSelectedPlayerHead(&rect, ownerDrawFlags & CG_SHOW_2DONLY, qtrue);
+        CG_DrawSelectedPlayerHead(&rect, ownerDrawFlags & CG_SHOW_2DONLY, true);
         break;
     case CG_VOICE_NAME:
-        CG_DrawSelectedPlayerName(&rect, scale, color, qtrue, textStyle);
+        CG_DrawSelectedPlayerName(&rect, scale, color, true, textStyle);
         break;
     case CG_SELECTEDPLAYER_STATUS:
         CG_DrawSelectedPlayerStatus(&rect);
@@ -1538,7 +1538,7 @@ void CG_OwnerDraw(float x, float y, float w, float h, float text_x, float text_y
         CG_DrawSelectedPlayerHealth(&rect, scale, color, shader, textStyle);
         break;
     case CG_SELECTEDPLAYER_NAME:
-        CG_DrawSelectedPlayerName(&rect, scale, color, qfalse, textStyle);
+        CG_DrawSelectedPlayerName(&rect, scale, color, false, textStyle);
         break;
     case CG_SELECTEDPLAYER_LOCATION:
         CG_DrawSelectedPlayerLocation(&rect, scale, color, textStyle);
@@ -1592,10 +1592,10 @@ void CG_OwnerDraw(float x, float y, float w, float h, float text_x, float text_y
         CG_DrawRedFlagName(&rect, scale, color, textStyle);
         break;
     case CG_HARVESTER_SKULLS:
-        CG_HarvesterSkulls(&rect, scale, color, qfalse, textStyle);
+        CG_HarvesterSkulls(&rect, scale, color, false, textStyle);
         break;
     case CG_HARVESTER_SKULLS2D:
-        CG_HarvesterSkulls(&rect, scale, color, qtrue, textStyle);
+        CG_HarvesterSkulls(&rect, scale, color, true, textStyle);
         break;
     case CG_ONEFLAG_STATUS:
         CG_OneFlagStatus(&rect);
@@ -1616,10 +1616,10 @@ void CG_OwnerDraw(float x, float y, float w, float h, float text_x, float text_y
         CG_DrawPlayerStatus(&rect);
         break;
     case CG_PLAYER_HASFLAG:
-        CG_DrawPlayerHasFlag(&rect, qfalse);
+        CG_DrawPlayerHasFlag(&rect, false);
         break;
     case CG_PLAYER_HASFLAG2D:
-        CG_DrawPlayerHasFlag(&rect, qtrue);
+        CG_DrawPlayerHasFlag(&rect, true);
         break;
     case CG_AREA_SYSTEMCHAT:
         CG_DrawAreaSystemChat(&rect, scale, color, shader);
@@ -1675,7 +1675,7 @@ void CG_MouseEvent(int x, int y)
 {
     int n;
 
-    if ((cg.predictedPlayerState.pm_type == PM_NORMAL || cg.predictedPlayerState.pm_type == PM_SPECTATOR) && cg.showScores == qfalse) {
+    if ((cg.predictedPlayerState.pm_type == PM_NORMAL || cg.predictedPlayerState.pm_type == PM_SPECTATOR) && cg.showScores == false) {
         trap_Key_SetCatcher(0);
         return;
     }
@@ -1721,14 +1721,14 @@ void CG_EventHandling(int type)
     }
 }
 
-void CG_KeyEvent(int key, qboolean down)
+void CG_KeyEvent(int key, bool down)
 {
 
     if (!down) {
         return;
     }
 
-    if (cg.predictedPlayerState.pm_type == PM_NORMAL || (cg.predictedPlayerState.pm_type == PM_SPECTATOR && cg.showScores == qfalse)) {
+    if (cg.predictedPlayerState.pm_type == PM_NORMAL || (cg.predictedPlayerState.pm_type == PM_SPECTATOR && cg.showScores == false)) {
         CG_EventHandling(CGAME_EVENT_NONE);
         trap_Key_SetCatcher(0);
         return;

@@ -214,7 +214,7 @@ typedef struct {
     int* numservers;
     servernode_t* serverlist;
     int currentping;
-    qboolean refreshservers;
+    bool refreshservers;
     int nextpingtime;
     int maxservers;
     int refreshtime;
@@ -649,9 +649,9 @@ void ArenaServers_LoadFavorites(void)
     int numtempitems;
     char adrstr[MAX_ADDRESSLENGTH];
     servernode_t templist[MAX_FAVORITESERVERS];
-    qboolean found;
+    bool found;
 
-    found = qfalse;
+    found = false;
 
     // copy the old
     memcpy(templist, g_favoriteserverlist, sizeof(servernode_t) * MAX_FAVORITESERVERS);
@@ -680,7 +680,7 @@ void ArenaServers_LoadFavorites(void)
         if (j < numtempitems) {
             // found server - add exisiting results
             memcpy(&g_favoriteserverlist[g_numfavoriteservers], &templist[j], sizeof(servernode_t));
-            found = qtrue;
+            found = true;
         } else {
             // add new server
             Q_strncpyz(g_favoriteserverlist[g_numfavoriteservers].adrstr, adrstr, MAX_ADDRESSLENGTH);
@@ -705,7 +705,7 @@ static void ArenaServers_StopRefresh(void)
         // not currently refreshing
         return;
 
-    g_arenaservers.refreshservers = qfalse;
+    g_arenaservers.refreshservers = false;
 
     // final tally
     if (g_arenaservers.numqueriedservers >= 0) {
@@ -873,7 +873,7 @@ static void ArenaServers_StartRefresh(void)
         trap_LAN_ClearPing(i);
     }
 
-    g_arenaservers.refreshservers = qtrue;
+    g_arenaservers.refreshservers = true;
     g_arenaservers.currentping = 0;
     g_arenaservers.nextpingtime = 0;
     *g_arenaservers.numservers = 0;
@@ -1090,7 +1090,7 @@ static void ArenaServers_Event(void* ptr, int event)
         break;
 
     case ID_CREATE:
-        UI_StartServerMenu(qtrue);
+        UI_StartServerMenu(true);
         break;
 
     case ID_CONNECT:
@@ -1144,8 +1144,8 @@ static void ArenaServers_MenuInit(void)
 
     ArenaServers_Cache();
 
-    g_arenaservers.menu.fullscreen = qtrue;
-    g_arenaservers.menu.wrapAround = qtrue;
+    g_arenaservers.menu.fullscreen = true;
+    g_arenaservers.menu.wrapAround = true;
     g_arenaservers.menu.draw = ArenaServers_MenuDraw;
     g_arenaservers.menu.key = ArenaServers_MenuKey;
 

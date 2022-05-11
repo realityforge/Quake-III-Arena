@@ -83,9 +83,9 @@ int BotIsFirstInRankings(bot_state_t* bs)
         if (atoi(Info_ValueForKey(buf, "t")) == TEAM_SPECTATOR)
             continue;
         if (BotAI_GetClientState(i, &ps) && score < ps.persistant[PERS_SCORE])
-            return qfalse;
+            return false;
     }
-    return qtrue;
+    return true;
 }
 
 int BotIsLastInRankings(bot_state_t* bs)
@@ -104,9 +104,9 @@ int BotIsLastInRankings(bot_state_t* bs)
         if (atoi(Info_ValueForKey(buf, "t")) == TEAM_SPECTATOR)
             continue;
         if (BotAI_GetClientState(i, &ps) && score > ps.persistant[PERS_SCORE])
-            return qfalse;
+            return false;
     }
-    return qtrue;
+    return true;
 }
 
 char* BotFirstClientInRankings(void)
@@ -320,9 +320,9 @@ int BotVisibleEnemies(bot_state_t* bs)
         // check if the enemy is visible
         vis = BotEntityVisible(bs->entitynum, bs->eye, bs->viewangles, 360, i);
         if (vis > 0)
-            return qtrue;
+            return true;
     }
-    return qfalse;
+    return false;
 }
 
 int BotValidChatPosition(bot_state_t* bs)
@@ -332,22 +332,22 @@ int BotValidChatPosition(bot_state_t* bs)
 
     // if the bot is dead all positions are valid
     if (BotIsDead(bs))
-        return qtrue;
+        return true;
     // never start chatting with a powerup
     if (bs->inventory[INVENTORY_QUAD] || bs->inventory[INVENTORY_ENVIRONMENTSUIT] || bs->inventory[INVENTORY_HASTE] || bs->inventory[INVENTORY_INVISIBILITY] || bs->inventory[INVENTORY_REGEN] || bs->inventory[INVENTORY_FLIGHT])
-        return qfalse;
+        return false;
     // must be on the ground
-    // if (bs->cur_ps.groundEntityNum != ENTITYNUM_NONE) return qfalse;
+    // if (bs->cur_ps.groundEntityNum != ENTITYNUM_NONE) return false;
     // do not chat if in lava or slime
     VectorCopy(bs->origin, point);
     point[2] -= 24;
     if (trap_PointContents(point, bs->entitynum) & (CONTENTS_LAVA | CONTENTS_SLIME))
-        return qfalse;
+        return false;
     // do not chat if under water
     VectorCopy(bs->origin, point);
     point[2] += 32;
     if (trap_PointContents(point, bs->entitynum) & MASK_WATER)
-        return qfalse;
+        return false;
     // must be standing on the world entity
     VectorCopy(bs->origin, start);
     VectorCopy(bs->origin, end);
@@ -356,9 +356,9 @@ int BotValidChatPosition(bot_state_t* bs)
     trap_AAS_PresenceTypeBoundingBox(PRESENCE_CROUCH, mins, maxs);
     BotAI_Trace(&trace, start, mins, maxs, end, bs->client, MASK_SOLID);
     if (trace.ent != ENTITYNUM_WORLD)
-        return qfalse;
+        return false;
     // the bot is in a position where it can chat
-    return qtrue;
+    return true;
 }
 
 int BotChat_EnterGame(bot_state_t* bs)
@@ -367,24 +367,24 @@ int BotChat_EnterGame(bot_state_t* bs)
     float rnd;
 
     if (bot_nochat.integer)
-        return qfalse;
+        return false;
     if (bs->lastchat_time > FloatTime() - TIME_BETWEENCHATTING)
-        return qfalse;
+        return false;
     // don't chat in teamplay
     if (TeamPlayIsOn())
-        return qfalse;
+        return false;
     // don't chat in tournament mode
     if (gametype == GT_TOURNAMENT)
-        return qfalse;
+        return false;
     rnd = trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_CHAT_ENTEREXITGAME, 0, 1);
     if (!bot_fastchat.integer) {
         if (random() > rnd)
-            return qfalse;
+            return false;
     }
     if (BotNumActivePlayers() <= 1)
-        return qfalse;
+        return false;
     if (!BotValidChatPosition(bs))
-        return qfalse;
+        return false;
     BotAI_BotInitialChat(bs, "game_enter",
                          EasyClientName(bs->client, name, 32), // 0
                          BotRandomOpponentName(bs), // 1
@@ -394,7 +394,7 @@ int BotChat_EnterGame(bot_state_t* bs)
                          NULL);
     bs->lastchat_time = FloatTime();
     bs->chatto = CHAT_ALL;
-    return qtrue;
+    return true;
 }
 
 int BotChat_ExitGame(bot_state_t* bs)
@@ -403,22 +403,22 @@ int BotChat_ExitGame(bot_state_t* bs)
     float rnd;
 
     if (bot_nochat.integer)
-        return qfalse;
+        return false;
     if (bs->lastchat_time > FloatTime() - TIME_BETWEENCHATTING)
-        return qfalse;
+        return false;
     // don't chat in teamplay
     if (TeamPlayIsOn())
-        return qfalse;
+        return false;
     // don't chat in tournament mode
     if (gametype == GT_TOURNAMENT)
-        return qfalse;
+        return false;
     rnd = trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_CHAT_ENTEREXITGAME, 0, 1);
     if (!bot_fastchat.integer) {
         if (random() > rnd)
-            return qfalse;
+            return false;
     }
     if (BotNumActivePlayers() <= 1)
-        return qfalse;
+        return false;
     BotAI_BotInitialChat(bs, "game_exit",
                          EasyClientName(bs->client, name, 32), // 0
                          BotRandomOpponentName(bs), // 1
@@ -428,7 +428,7 @@ int BotChat_ExitGame(bot_state_t* bs)
                          NULL);
     bs->lastchat_time = FloatTime();
     bs->chatto = CHAT_ALL;
-    return qtrue;
+    return true;
 }
 
 int BotChat_StartLevel(bot_state_t* bs)
@@ -437,34 +437,34 @@ int BotChat_StartLevel(bot_state_t* bs)
     float rnd;
 
     if (bot_nochat.integer)
-        return qfalse;
+        return false;
     if (BotIsObserver(bs))
-        return qfalse;
+        return false;
     if (bs->lastchat_time > FloatTime() - TIME_BETWEENCHATTING)
-        return qfalse;
+        return false;
     // don't chat in teamplay
     if (TeamPlayIsOn()) {
 #ifdef MISSIONPACK
         trap_EA_Command(bs->client, "vtaunt");
 #endif
-        return qfalse;
+        return false;
     }
     // don't chat in tournament mode
     if (gametype == GT_TOURNAMENT)
-        return qfalse;
+        return false;
     rnd = trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_CHAT_STARTENDLEVEL, 0, 1);
     if (!bot_fastchat.integer) {
         if (random() > rnd)
-            return qfalse;
+            return false;
     }
     if (BotNumActivePlayers() <= 1)
-        return qfalse;
+        return false;
     BotAI_BotInitialChat(bs, "level_start",
                          EasyClientName(bs->client, name, 32), // 0
                          NULL);
     bs->lastchat_time = FloatTime();
     bs->chatto = CHAT_ALL;
-    return qtrue;
+    return true;
 }
 
 int BotChat_EndLevel(bot_state_t* bs)
@@ -473,11 +473,11 @@ int BotChat_EndLevel(bot_state_t* bs)
     float rnd;
 
     if (bot_nochat.integer)
-        return qfalse;
+        return false;
     if (BotIsObserver(bs))
-        return qfalse;
+        return false;
     if (bs->lastchat_time > FloatTime() - TIME_BETWEENCHATTING)
-        return qfalse;
+        return false;
     // teamplay
     if (TeamPlayIsOn()) {
 #ifdef MISSIONPACK
@@ -485,18 +485,18 @@ int BotChat_EndLevel(bot_state_t* bs)
             trap_EA_Command(bs->client, "vtaunt");
         }
 #endif
-        return qtrue;
+        return true;
     }
     // don't chat in tournament mode
     if (gametype == GT_TOURNAMENT)
-        return qfalse;
+        return false;
     rnd = trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_CHAT_STARTENDLEVEL, 0, 1);
     if (!bot_fastchat.integer) {
         if (random() > rnd)
-            return qfalse;
+            return false;
     }
     if (BotNumActivePlayers() <= 1)
-        return qfalse;
+        return false;
     if (BotIsFirstInRankings(bs)) {
         BotAI_BotInitialChat(bs, "level_end_victory",
                              EasyClientName(bs->client, name, 32), // 0
@@ -524,7 +524,7 @@ int BotChat_EndLevel(bot_state_t* bs)
     }
     bs->lastchat_time = FloatTime();
     bs->chatto = CHAT_ALL;
-    return qtrue;
+    return true;
 }
 
 int BotChat_Death(bot_state_t* bs)
@@ -533,27 +533,27 @@ int BotChat_Death(bot_state_t* bs)
     float rnd;
 
     if (bot_nochat.integer)
-        return qfalse;
+        return false;
     if (bs->lastchat_time > FloatTime() - TIME_BETWEENCHATTING)
-        return qfalse;
+        return false;
     rnd = trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_CHAT_DEATH, 0, 1);
     // don't chat in tournament mode
     if (gametype == GT_TOURNAMENT)
-        return qfalse;
+        return false;
     // if fast chatting is off
     if (!bot_fastchat.integer) {
         if (random() > rnd)
-            return qfalse;
+            return false;
     }
     if (BotNumActivePlayers() <= 1)
-        return qfalse;
+        return false;
     if (bs->lastkilledby >= 0 && bs->lastkilledby < MAX_CLIENTS)
         EasyClientName(bs->lastkilledby, name, 32);
     else
         strcpy(name, "[world]");
     if (TeamPlayIsOn() && BotSameTeam(bs, bs->lastkilledby)) {
         if (bs->lastkilledby == bs->client)
-            return qfalse;
+            return false;
         BotAI_BotInitialChat(bs, "death_teammate", name, NULL);
         bs->chatto = CHAT_TEAM;
     } else {
@@ -562,7 +562,7 @@ int BotChat_Death(bot_state_t* bs)
 #ifdef MISSIONPACK
             trap_EA_Command(bs->client, "vtaunt");
 #endif
-            return qtrue;
+            return true;
         }
         if (bs->botdeathtype == MOD_WATER)
             BotAI_BotInitialChat(bs, "death_drown", BotRandomOpponentName(bs), NULL);
@@ -616,7 +616,7 @@ int BotChat_Death(bot_state_t* bs)
         bs->chatto = CHAT_ALL;
     }
     bs->lastchat_time = FloatTime();
-    return qtrue;
+    return true;
 }
 
 int BotChat_Kill(bot_state_t* bs)
@@ -625,26 +625,26 @@ int BotChat_Kill(bot_state_t* bs)
     float rnd;
 
     if (bot_nochat.integer)
-        return qfalse;
+        return false;
     if (bs->lastchat_time > FloatTime() - TIME_BETWEENCHATTING)
-        return qfalse;
+        return false;
     rnd = trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_CHAT_KILL, 0, 1);
     // don't chat in tournament mode
     if (gametype == GT_TOURNAMENT)
-        return qfalse;
+        return false;
     // if fast chat is off
     if (!bot_fastchat.integer) {
         if (random() > rnd)
-            return qfalse;
+            return false;
     }
     if (bs->lastkilledplayer == bs->client)
-        return qfalse;
+        return false;
     if (BotNumActivePlayers() <= 1)
-        return qfalse;
+        return false;
     if (!BotValidChatPosition(bs))
-        return qfalse;
+        return false;
     if (BotVisibleEnemies(bs))
-        return qfalse;
+        return false;
     EasyClientName(bs->lastkilledplayer, name, 32);
     bs->chatto = CHAT_ALL;
     if (TeamPlayIsOn() && BotSameTeam(bs, bs->lastkilledplayer)) {
@@ -656,7 +656,7 @@ int BotChat_Kill(bot_state_t* bs)
 #ifdef MISSIONPACK
             trap_EA_Command(bs->client, "vtaunt");
 #endif
-            return qfalse; // don't wait
+            return false; // don't wait
         }
         if (bs->enemydeathtype == MOD_GAUNTLET) {
             BotAI_BotInitialChat(bs, "kill_gauntlet", name, NULL);
@@ -677,7 +677,7 @@ int BotChat_Kill(bot_state_t* bs)
         }
     }
     bs->lastchat_time = FloatTime();
-    return qtrue;
+    return true;
 }
 
 int BotChat_EnemySuicide(bot_state_t* bs)
@@ -686,27 +686,27 @@ int BotChat_EnemySuicide(bot_state_t* bs)
     float rnd;
 
     if (bot_nochat.integer)
-        return qfalse;
+        return false;
     if (bs->lastchat_time > FloatTime() - TIME_BETWEENCHATTING)
-        return qfalse;
+        return false;
     if (BotNumActivePlayers() <= 1)
-        return qfalse;
+        return false;
     rnd = trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_CHAT_ENEMYSUICIDE, 0, 1);
     // don't chat in teamplay
     if (TeamPlayIsOn())
-        return qfalse;
+        return false;
     // don't chat in tournament mode
     if (gametype == GT_TOURNAMENT)
-        return qfalse;
+        return false;
     // if fast chat is off
     if (!bot_fastchat.integer) {
         if (random() > rnd)
-            return qfalse;
+            return false;
     }
     if (!BotValidChatPosition(bs))
-        return qfalse;
+        return false;
     if (BotVisibleEnemies(bs))
-        return qfalse;
+        return false;
     if (bs->enemy >= 0)
         EasyClientName(bs->enemy, name, 32);
     else
@@ -714,7 +714,7 @@ int BotChat_EnemySuicide(bot_state_t* bs)
     BotAI_BotInitialChat(bs, "enemy_suicide", name, NULL);
     bs->lastchat_time = FloatTime();
     bs->chatto = CHAT_ALL;
-    return qtrue;
+    return true;
 }
 
 int BotChat_HitTalking(bot_state_t* bs)
@@ -724,38 +724,38 @@ int BotChat_HitTalking(bot_state_t* bs)
     float rnd;
 
     if (bot_nochat.integer)
-        return qfalse;
+        return false;
     if (bs->lastchat_time > FloatTime() - TIME_BETWEENCHATTING)
-        return qfalse;
+        return false;
     if (BotNumActivePlayers() <= 1)
-        return qfalse;
+        return false;
     lasthurt_client = g_entities[bs->client].client->lasthurt_client;
     if (!lasthurt_client)
-        return qfalse;
+        return false;
     if (lasthurt_client == bs->client)
-        return qfalse;
+        return false;
     if (lasthurt_client < 0 || lasthurt_client >= MAX_CLIENTS)
-        return qfalse;
+        return false;
     rnd = trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_CHAT_HITTALKING, 0, 1);
     // don't chat in teamplay
     if (TeamPlayIsOn())
-        return qfalse;
+        return false;
     // don't chat in tournament mode
     if (gametype == GT_TOURNAMENT)
-        return qfalse;
+        return false;
     // if fast chat is off
     if (!bot_fastchat.integer) {
         if (random() > rnd * 0.5)
-            return qfalse;
+            return false;
     }
     if (!BotValidChatPosition(bs))
-        return qfalse;
+        return false;
     ClientName(g_entities[bs->client].client->lasthurt_client, name, sizeof(name));
     weap = BotWeaponNameForMeansOfDeath(g_entities[bs->client].client->lasthurt_mod);
     BotAI_BotInitialChat(bs, "hit_talking", name, weap, NULL);
     bs->lastchat_time = FloatTime();
     bs->chatto = CHAT_ALL;
-    return qtrue;
+    return true;
 }
 
 int BotChat_HitNoDeath(bot_state_t* bs)
@@ -767,42 +767,42 @@ int BotChat_HitNoDeath(bot_state_t* bs)
 
     lasthurt_client = g_entities[bs->client].client->lasthurt_client;
     if (!lasthurt_client)
-        return qfalse;
+        return false;
     if (lasthurt_client == bs->client)
-        return qfalse;
+        return false;
     if (lasthurt_client < 0 || lasthurt_client >= MAX_CLIENTS)
-        return qfalse;
+        return false;
     if (bot_nochat.integer)
-        return qfalse;
+        return false;
     if (bs->lastchat_time > FloatTime() - TIME_BETWEENCHATTING)
-        return qfalse;
+        return false;
     if (BotNumActivePlayers() <= 1)
-        return qfalse;
+        return false;
     rnd = trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_CHAT_HITNODEATH, 0, 1);
     // don't chat in teamplay
     if (TeamPlayIsOn())
-        return qfalse;
+        return false;
     // don't chat in tournament mode
     if (gametype == GT_TOURNAMENT)
-        return qfalse;
+        return false;
     // if fast chat is off
     if (!bot_fastchat.integer) {
         if (random() > rnd * 0.5)
-            return qfalse;
+            return false;
     }
     if (!BotValidChatPosition(bs))
-        return qfalse;
+        return false;
     if (BotVisibleEnemies(bs))
-        return qfalse;
+        return false;
     BotEntityInfo(bs->enemy, &entinfo);
     if (EntityIsShooting(&entinfo))
-        return qfalse;
+        return false;
     ClientName(lasthurt_client, name, sizeof(name));
     weap = BotWeaponNameForMeansOfDeath(g_entities[bs->client].client->lasthurt_mod);
     BotAI_BotInitialChat(bs, "hit_nodeath", name, weap, NULL);
     bs->lastchat_time = FloatTime();
     bs->chatto = CHAT_ALL;
-    return qtrue;
+    return true;
 }
 
 int BotChat_HitNoKill(bot_state_t* bs)
@@ -812,36 +812,36 @@ int BotChat_HitNoKill(bot_state_t* bs)
     aas_entityinfo_t entinfo;
 
     if (bot_nochat.integer)
-        return qfalse;
+        return false;
     if (bs->lastchat_time > FloatTime() - TIME_BETWEENCHATTING)
-        return qfalse;
+        return false;
     if (BotNumActivePlayers() <= 1)
-        return qfalse;
+        return false;
     rnd = trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_CHAT_HITNOKILL, 0, 1);
     // don't chat in teamplay
     if (TeamPlayIsOn())
-        return qfalse;
+        return false;
     // don't chat in tournament mode
     if (gametype == GT_TOURNAMENT)
-        return qfalse;
+        return false;
     // if fast chat is off
     if (!bot_fastchat.integer) {
         if (random() > rnd * 0.5)
-            return qfalse;
+            return false;
     }
     if (!BotValidChatPosition(bs))
-        return qfalse;
+        return false;
     if (BotVisibleEnemies(bs))
-        return qfalse;
+        return false;
     BotEntityInfo(bs->enemy, &entinfo);
     if (EntityIsShooting(&entinfo))
-        return qfalse;
+        return false;
     ClientName(bs->enemy, name, sizeof(name));
     weap = BotWeaponNameForMeansOfDeath(g_entities[bs->enemy].client->lasthurt_mod);
     BotAI_BotInitialChat(bs, "hit_nokill", name, weap, NULL);
     bs->lastchat_time = FloatTime();
     bs->chatto = CHAT_ALL;
-    return qtrue;
+    return true;
 }
 
 int BotChat_Random(bot_state_t* bs)
@@ -850,32 +850,32 @@ int BotChat_Random(bot_state_t* bs)
     char name[32];
 
     if (bot_nochat.integer)
-        return qfalse;
+        return false;
     if (BotIsObserver(bs))
-        return qfalse;
+        return false;
     if (bs->lastchat_time > FloatTime() - TIME_BETWEENCHATTING)
-        return qfalse;
+        return false;
     // don't chat in tournament mode
     if (gametype == GT_TOURNAMENT)
-        return qfalse;
+        return false;
     // don't chat when doing something important :)
     if (bs->ltgtype == LTG_TEAMHELP || bs->ltgtype == LTG_TEAMACCOMPANY || bs->ltgtype == LTG_RUSHBASE)
-        return qfalse;
+        return false;
     rnd = trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_CHAT_RANDOM, 0, 1);
     if (random() > bs->thinktime * 0.1)
-        return qfalse;
+        return false;
     if (!bot_fastchat.integer) {
         if (random() > rnd)
-            return qfalse;
+            return false;
         if (random() > 0.25)
-            return qfalse;
+            return false;
     }
     if (BotNumActivePlayers() <= 1)
-        return qfalse;
+        return false;
     if (!BotValidChatPosition(bs))
-        return qfalse;
+        return false;
     if (BotVisibleEnemies(bs))
-        return qfalse;
+        return false;
     if (bs->lastkilledplayer == bs->client) {
         strcpy(name, BotRandomOpponentName(bs));
     } else {
@@ -885,7 +885,7 @@ int BotChat_Random(bot_state_t* bs)
 #ifdef MISSIONPACK
         trap_EA_Command(bs->client, "vtaunt");
 #endif
-        return qfalse; // don't wait
+        return false; // don't wait
     }
     if (random() < trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_CHAT_MISC, 0, 1)) {
         BotAI_BotInitialChat(bs, "random_misc",
@@ -908,7 +908,7 @@ int BotChat_Random(bot_state_t* bs)
     }
     bs->lastchat_time = FloatTime();
     bs->chatto = CHAT_ALL;
-    return qtrue;
+    return true;
 }
 
 float BotChatTime(bot_state_t* bs)

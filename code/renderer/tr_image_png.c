@@ -112,15 +112,15 @@ static void spng_load_error(const char* name, const int result, const char* func
  * @param buffer the reference to the buffer.
  * @param buffer_size the size of the buffer in bytes.
  * @param output the structure to populate with decided image details
- * @return qtrue if image was successfully decoded, qfalse if the image failed to be decoded.
+ * @return true if image was successfully decoded, false if the image failed to be decoded.
  */
-qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* output)
+bool R_DecodePngInBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* output)
 {
     struct spng_ihdr ihdr;
     void* image = NULL;
     size_t size;
     int result;
-    qboolean success = qfalse;
+    bool success = false;
 
     assert(NULL != output);
 
@@ -169,7 +169,7 @@ qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long bu
                 // Clear image so it does not deallocated in cleanup phase
                 image = NULL;
 
-                success = qtrue;
+                success = true;
             }
         }
     }

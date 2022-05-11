@@ -33,7 +33,7 @@ static float identityMatrix[12] = {
     0, 0, 1, 0
 };
 
-static qboolean IQM_CheckRange(iqmHeader_t* header, int offset,
+static bool IQM_CheckRange(iqmHeader_t* header, int offset,
                                int count, int size)
 {
     // return true if the range specified by offset, count and size
@@ -182,7 +182,7 @@ R_LoadIQM
 Load an IQM model and compute the joint matrices for every frame.
 =================
 */
-qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_name)
+bool R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_name)
 {
     iqmHeader_t* header;
     iqmVertexArray_t* vertexarray;
@@ -210,24 +210,24 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
     } blendWeights;
 
     if (filesize < sizeof(iqmHeader_t)) {
-        return qfalse;
+        return false;
     }
 
     header = (iqmHeader_t*)buffer;
     if (Q_strncmp(header->magic, IQM_MAGIC, sizeof(header->magic))) {
-        return qfalse;
+        return false;
     }
 
     LL(header->version);
     if (header->version != IQM_VERSION) {
         ri.Printf(PRINT_WARNING, "R_LoadIQM: %s is a unsupported IQM version (%d), only version %d is supported.\n",
                   mod_name, header->version, IQM_VERSION);
-        return qfalse;
+        return false;
     }
 
     LL(header->filesize);
     if (header->filesize > filesize || header->filesize > 16 << 20) {
-        return qfalse;
+        return false;
     }
 
     LL(header->flags);
@@ -260,7 +260,7 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
     if (header->num_joints > IQM_MAX_JOINTS) {
         ri.Printf(PRINT_WARNING, "R_LoadIQM: %s has more than %d joints (%d).\n",
                   mod_name, IQM_MAX_JOINTS, header->num_joints);
-        return qfalse;
+        return false;
     }
 
     for (i = 0; i < ARRAY_LEN(vertexArrayFormat); i++) {
@@ -277,14 +277,14 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
         if (IQM_CheckRange(header, header->ofs_vertexarrays,
                            header->num_vertexarrays,
                            sizeof(iqmVertexArray_t))) {
-            return qfalse;
+            return false;
         }
         vertexarray = (iqmVertexArray_t*)((byte*)header + header->ofs_vertexarrays);
         for (i = 0; i < header->num_vertexarrays; i++, vertexarray++) {
             int n, *intPtr;
 
             if (vertexarray->size <= 0 || vertexarray->size > 4) {
-                return qfalse;
+                return false;
             }
 
             // total number of values
@@ -296,7 +296,7 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
                 // 1 byte, no swapping necessary
                 if (IQM_CheckRange(header, vertexarray->offset,
                                    n, sizeof(byte))) {
-                    return qfalse;
+                    return false;
                 }
                 break;
             case IQM_INT:
@@ -305,7 +305,7 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
                 // 4-byte swap
                 if (IQM_CheckRange(header, vertexarray->offset,
                                    n, sizeof(float))) {
-                    return qfalse;
+                    return false;
                 }
                 intPtr = (int*)((byte*)header + vertexarray->offset);
                 for (j = 0; j < n; j++, intPtr++) {
@@ -314,7 +314,7 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
                 break;
             default:
                 // not supported
-                return qfalse;
+                return false;
                 break;
             }
 
@@ -326,28 +326,28 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
             case IQM_POSITION:
             case IQM_NORMAL:
                 if (vertexarray->format != IQM_FLOAT || vertexarray->size != 3) {
-                    return qfalse;
+                    return false;
                 }
                 break;
             case IQM_TANGENT:
                 if (vertexarray->format != IQM_FLOAT || vertexarray->size != 4) {
-                    return qfalse;
+                    return false;
                 }
                 break;
             case IQM_TEXCOORD:
                 if (vertexarray->format != IQM_FLOAT || vertexarray->size != 2) {
-                    return qfalse;
+                    return false;
                 }
                 break;
             case IQM_BLENDINDEXES:
                 if ((vertexarray->format != IQM_INT && vertexarray->format != IQM_UBYTE) || vertexarray->size != 4) {
-                    return qfalse;
+                    return false;
                 }
                 blendIndexes = (byte*)header + vertexarray->offset;
                 break;
             case IQM_BLENDWEIGHTS:
                 if ((vertexarray->format != IQM_FLOAT && vertexarray->format != IQM_UBYTE) || vertexarray->size != 4) {
-                    return qfalse;
+                    return false;
                 }
                 if (vertexarray->format == IQM_FLOAT) {
                     blendWeights.f = (float*)((byte*)header + vertexarray->offset);
@@ -357,7 +357,7 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
                 break;
             case IQM_COLOR:
                 if (vertexarray->format != IQM_UBYTE || vertexarray->size != 4) {
-                    return qfalse;
+                    return false;
                 }
                 break;
             }
@@ -366,13 +366,13 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
         // check for required vertex arrays
         if (vertexArrayFormat[IQM_POSITION] == -1 || vertexArrayFormat[IQM_NORMAL] == -1 || vertexArrayFormat[IQM_TEXCOORD] == -1) {
             ri.Printf(PRINT_WARNING, "R_LoadIQM: %s is missing IQM_POSITION, IQM_NORMAL, and/or IQM_TEXCOORD array.\n", mod_name);
-            return qfalse;
+            return false;
         }
 
         if (header->num_joints) {
             if (vertexArrayFormat[IQM_BLENDINDEXES] == -1 || vertexArrayFormat[IQM_BLENDWEIGHTS] == -1) {
                 ri.Printf(PRINT_WARNING, "R_LoadIQM: %s is missing IQM_BLENDINDEXES and/or IQM_BLENDWEIGHTS array.\n", mod_name);
-                return qfalse;
+                return false;
             }
         } else {
             // ignore blend arrays if present
@@ -383,13 +383,13 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
         // opengl2 renderer requires tangents
         if (vertexArrayFormat[IQM_TANGENT] == -1) {
             ri.Printf(PRINT_WARNING, "R_LoadIQM: %s is missing IQM_TANGENT array.\n", mod_name);
-            return qfalse;
+            return false;
         }
 
         // check and swap triangles
         if (IQM_CheckRange(header, header->ofs_triangles,
                            header->num_triangles, sizeof(iqmTriangle_t))) {
-            return qfalse;
+            return false;
         }
         triangle = (iqmTriangle_t*)((byte*)header + header->ofs_triangles);
         for (i = 0; i < header->num_triangles; i++, triangle++) {
@@ -398,14 +398,14 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
             LL(triangle->vertex[2]);
 
             if (triangle->vertex[0] > header->num_vertexes || triangle->vertex[1] > header->num_vertexes || triangle->vertex[2] > header->num_vertexes) {
-                return qfalse;
+                return false;
             }
         }
 
         // check and swap meshes
         if (IQM_CheckRange(header, header->ofs_meshes,
                            header->num_meshes, sizeof(iqmMesh_t))) {
-            return qfalse;
+            return false;
         }
         mesh = (iqmMesh_t*)((byte*)header + header->ofs_meshes);
         for (i = 0; i < header->num_meshes; i++, mesh++) {
@@ -427,17 +427,17 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
                 ri.Printf(PRINT_WARNING, "R_LoadIQM: %s has more than %i verts on %s (%i).\n",
                           mod_name, SHADER_MAX_VERTEXES - 1, meshName[0] ? meshName : "a surface",
                           mesh->num_vertexes);
-                return qfalse;
+                return false;
             }
             if (mesh->num_triangles * 3 >= SHADER_MAX_INDEXES) {
                 ri.Printf(PRINT_WARNING, "R_LoadIQM: %s has more than %i triangles on %s (%i).\n",
                           mod_name, (SHADER_MAX_INDEXES / 3) - 1, meshName[0] ? meshName : "a surface",
                           mesh->num_triangles);
-                return qfalse;
+                return false;
             }
 
             if (mesh->first_vertex >= header->num_vertexes || mesh->first_vertex + mesh->num_vertexes > header->num_vertexes || mesh->first_triangle >= header->num_triangles || mesh->first_triangle + mesh->num_triangles > header->num_triangles || mesh->name >= header->num_text || mesh->material >= header->num_text) {
-                return qfalse;
+                return false;
             }
 
             // find number of unique blend influences per mesh
@@ -474,7 +474,7 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
     if (header->num_poses != header->num_joints && header->num_poses != 0) {
         ri.Printf(PRINT_WARNING, "R_LoadIQM: %s has %d poses and %d joints, must have the same number or 0 poses\n",
                   mod_name, header->num_poses, header->num_joints);
-        return qfalse;
+        return false;
     }
 
     joint_names = 0;
@@ -483,7 +483,7 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
         // check and swap joints
         if (IQM_CheckRange(header, header->ofs_joints,
                            header->num_joints, sizeof(iqmJoint_t))) {
-            return qfalse;
+            return false;
         }
         joint = (iqmJoint_t*)((byte*)header + header->ofs_joints);
         for (i = 0; i < header->num_joints; i++, joint++) {
@@ -501,7 +501,7 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
             LL(joint->scale[2]);
 
             if (joint->parent < -1 || joint->parent >= (int)header->num_joints || joint->name >= (int)header->num_text) {
-                return qfalse;
+                return false;
             }
             joint_names += strlen((char*)header + header->ofs_text + joint->name) + 1;
         }
@@ -511,7 +511,7 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
         // check and swap poses
         if (IQM_CheckRange(header, header->ofs_poses,
                            header->num_poses, sizeof(iqmPose_t))) {
-            return qfalse;
+            return false;
         }
         pose = (iqmPose_t*)((byte*)header + header->ofs_poses);
         for (i = 0; i < header->num_poses; i++, pose++) {
@@ -544,7 +544,7 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
         // check and swap model bounds
         if (IQM_CheckRange(header, header->ofs_bounds,
                            header->num_frames, sizeof(*bounds))) {
-            return qfalse;
+            return false;
         }
         bounds = (iqmBounds_t*)((byte*)header + header->ofs_bounds);
         for (i = 0; i < header->num_frames; i++) {
@@ -693,7 +693,7 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
             surface->surfaceType = SF_IQM;
             Q_strncpyz(surface->name, str + mesh->name, sizeof(surface->name));
             Q_strlwr(surface->name); // lowercase the surface name so skin compares are faster
-            surface->shader = R_FindShader(str + mesh->material, LIGHTMAP_NONE, qtrue);
+            surface->shader = R_FindShader(str + mesh->material, LIGHTMAP_NONE, true);
             if (surface->shader->defaultShader)
                 surface->shader = tr.defaultShader;
             surface->data = iqmData;
@@ -1090,7 +1090,7 @@ qboolean R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_nam
         }
     }
 
-    return qtrue;
+    return true;
 }
 
 static int R_CullIQM(iqmData_t* data, trRefEntity_t* ent)
@@ -1184,7 +1184,7 @@ void R_AddIQMSurfaces(trRefEntity_t* ent)
     srfIQModel_t* surface;
     void* drawSurf;
     int i, j;
-    qboolean personalModel;
+    bool personalModel;
     int cull;
     int fogNum;
     int cubemapIndex;
@@ -1605,7 +1605,7 @@ void RB_IQMSurfaceAnimVao(srfVaoIQModel_t* surface)
 
     R_BindVao(surface->vao);
 
-    tess.useInternalVao = qfalse;
+    tess.useInternalVao = false;
 
     tess.numIndexes = surface->numIndexes;
     tess.numVertexes = surface->numVerts;
@@ -1665,7 +1665,7 @@ int R_IQMLerpTag(orientation_t* tag, iqmData_t* data,
     if (joint >= data->num_joints) {
         AxisClear(tag->axis);
         VectorClear(tag->origin);
-        return qfalse;
+        return false;
     }
 
     ComputeJointMats(data, startFrame, endFrame, frac, jointMats);
@@ -1683,5 +1683,5 @@ int R_IQMLerpTag(orientation_t* tag, iqmData_t* data,
     tag->axis[2][2] = jointMats[12 * joint + 10];
     tag->origin[2] = jointMats[12 * joint + 11];
 
-    return qtrue;
+    return true;
 }

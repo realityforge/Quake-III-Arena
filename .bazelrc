@@ -124,6 +124,8 @@ build --compilation_mode=opt
 # If a command fails, print out the full command line.
 build --verbose_failures
 
+build --copt -std=c99
+
 #
 # Enable some warnings.
 #

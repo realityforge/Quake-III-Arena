@@ -36,63 +36,63 @@ cvar_t* s_muteWhenUnfocused;
 
 static soundInterface_t si;
 
-static qboolean S_ValidSoundInterface(soundInterface_t* si)
+static bool S_ValidSoundInterface(soundInterface_t* si)
 {
     if (!si->Shutdown)
-        return qfalse;
+        return false;
     if (!si->StartSound)
-        return qfalse;
+        return false;
     if (!si->StartLocalSound)
-        return qfalse;
+        return false;
     if (!si->StartBackgroundTrack)
-        return qfalse;
+        return false;
     if (!si->StopBackgroundTrack)
-        return qfalse;
+        return false;
     if (!si->RawSamples)
-        return qfalse;
+        return false;
     if (!si->StopAllSounds)
-        return qfalse;
+        return false;
     if (!si->ClearLoopingSounds)
-        return qfalse;
+        return false;
     if (!si->AddLoopingSound)
-        return qfalse;
+        return false;
     if (!si->AddRealLoopingSound)
-        return qfalse;
+        return false;
     if (!si->StopLoopingSound)
-        return qfalse;
+        return false;
     if (!si->Respatialize)
-        return qfalse;
+        return false;
     if (!si->UpdateEntityPosition)
-        return qfalse;
+        return false;
     if (!si->Update)
-        return qfalse;
+        return false;
     if (!si->DisableSounds)
-        return qfalse;
+        return false;
     if (!si->BeginRegistration)
-        return qfalse;
+        return false;
     if (!si->RegisterSound)
-        return qfalse;
+        return false;
     if (!si->ClearSoundBuffer)
-        return qfalse;
+        return false;
     if (!si->SoundInfo)
-        return qfalse;
+        return false;
     if (!si->SoundList)
-        return qfalse;
+        return false;
 
 #ifdef USE_VOIP
     if (!si->StartCapture)
-        return qfalse;
+        return false;
     if (!si->AvailableCaptureSamples)
-        return qfalse;
+        return false;
     if (!si->Capture)
-        return qfalse;
+        return false;
     if (!si->StopCapture)
-        return qfalse;
+        return false;
     if (!si->MasterGain)
-        return qfalse;
+        return false;
 #endif
 
-    return qtrue;
+    return true;
 }
 
 void S_StartSound(vec3_t origin, int entnum, int entchannel, sfxHandle_t sfx)
@@ -137,7 +137,7 @@ void S_StopAllSounds(void)
     }
 }
 
-void S_ClearLoopingSounds(qboolean killall)
+void S_ClearLoopingSounds(bool killall)
 {
     if (si.ClearLoopingSounds) {
         si.ClearLoopingSounds(killall);
@@ -186,13 +186,13 @@ void S_Update(void)
 {
     if (s_muted->integer) {
         if (!(s_muteWhenMinimized->integer && com_minimized->integer) && !(s_muteWhenUnfocused->integer && com_unfocused->integer)) {
-            s_muted->integer = qfalse;
-            s_muted->modified = qtrue;
+            s_muted->integer = false;
+            s_muted->modified = true;
         }
     } else {
         if ((s_muteWhenMinimized->integer && com_minimized->integer) || (s_muteWhenUnfocused->integer && com_unfocused->integer)) {
-            s_muted->integer = qtrue;
-            s_muted->modified = qtrue;
+            s_muted->integer = true;
+            s_muted->modified = true;
         }
     }
 
@@ -215,7 +215,7 @@ void S_BeginRegistration(void)
     }
 }
 
-sfxHandle_t S_RegisterSound(const char* sample, qboolean compressed)
+sfxHandle_t S_RegisterSound(const char* sample, bool compressed)
 {
     if (si.RegisterSound) {
         return si.RegisterSound(sample, compressed);
@@ -303,7 +303,7 @@ void S_Play_f(void)
     }
 
     for (i = 1; i < c; i++) {
-        h = si.RegisterSound(Cmd_Argv(i), qfalse);
+        h = si.RegisterSound(Cmd_Argv(i), false);
 
         if (h) {
             si.StartLocalSound(h, CHAN_LOCAL_SOUND);
@@ -344,7 +344,7 @@ void S_StopMusic_f(void)
 void S_Init(void)
 {
     cvar_t* cv;
-    qboolean started = qfalse;
+    bool started = false;
 
     Com_Printf("------ Initializing Sound ------\n");
 

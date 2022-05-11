@@ -67,7 +67,7 @@ void RB_CheckVao(vao_t* vao)
     }
 
     if (vao != tess.vao)
-        tess.useInternalVao = qfalse;
+        tess.useInternalVao = false;
 }
 
 void RB_AddQuadStampExt(vec3_t origin, vec3_t left, vec3_t up, float color[4], float s1, float t1, float s2, float t2)
@@ -359,17 +359,17 @@ static void RB_SurfaceVertsAndIndexes(int numVerts, srfVert_t* verts, int numInd
     tess.numVertexes += numVerts;
 }
 
-static qboolean RB_SurfaceVaoCached(int numVerts, srfVert_t* verts, int numIndexes, glIndex_t* indexes, int dlightBits, int pshadowBits)
+static bool RB_SurfaceVaoCached(int numVerts, srfVert_t* verts, int numIndexes, glIndex_t* indexes, int dlightBits, int pshadowBits)
 {
-    qboolean recycleVertexBuffer = qfalse;
-    qboolean recycleIndexBuffer = qfalse;
-    qboolean endSurface = qfalse;
+    bool recycleVertexBuffer = false;
+    bool recycleIndexBuffer = false;
+    bool endSurface = false;
 
     if (!(!ShaderRequiresCPUDeforms(tess.shader) && !tess.shader->isSky && !tess.shader->isPortal))
-        return qfalse;
+        return false;
 
     if (!numIndexes || !numVerts)
-        return qfalse;
+        return false;
 
     VaoCache_BindVao();
 
@@ -396,10 +396,10 @@ static qboolean RB_SurfaceVaoCached(int numVerts, srfVert_t* verts, int numIndex
 
     tess.numIndexes += numIndexes;
     tess.numVertexes += numVerts;
-    tess.useInternalVao = qfalse;
-    tess.useCacheVao = qtrue;
+    tess.useInternalVao = false;
+    tess.useCacheVao = true;
 
-    return qtrue;
+    return true;
 }
 
 static void RB_SurfaceTriangles(srfBspSurface_t* srf)
@@ -1108,7 +1108,7 @@ void RB_SurfaceVaoMdvMesh(srfVaoMdvMesh_t* surface)
 
     R_BindVao(surface->vao);
 
-    tess.useInternalVao = qfalse;
+    tess.useInternalVao = false;
 
     tess.numIndexes = surface->numIndexes;
     tess.numVertexes = surface->numVerts;
@@ -1124,7 +1124,7 @@ void RB_SurfaceVaoMdvMesh(srfVaoMdvMesh_t* surface)
         int frameOffset, attribIndex;
         vaoAttrib_t* vAtb;
 
-        glState.vertexAnimation = qtrue;
+        glState.vertexAnimation = true;
 
         if (glRefConfig.vertexArrayObject) {
             qglBindBuffer(GL_ARRAY_BUFFER, surface->vao->vertexesVBO);
@@ -1168,7 +1168,7 @@ void RB_SurfaceVaoMdvMesh(srfVaoMdvMesh_t* surface)
     RB_EndSurface();
 
     // So we don't lerp surfaces that shouldn't be lerped
-    glState.vertexAnimation = qfalse;
+    glState.vertexAnimation = false;
 }
 
 static void RB_SurfaceSkip(void* surf)

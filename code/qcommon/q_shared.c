@@ -24,26 +24,26 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "q_shared.h"
 
 // ^[0-9a-zA-Z]
-qboolean Q_IsColorString(const char* p)
+bool Q_IsColorString(const char* p)
 {
     if (!p)
-        return qfalse;
+        return false;
 
     if (p[0] != Q_COLOR_ESCAPE)
-        return qfalse;
+        return false;
 
     if (p[1] == 0)
-        return qfalse;
+        return false;
 
     // isalnum expects a signed integer in the range -1 (EOF) to 255, or it might assert on undefined behaviour
     // a dereferenced char pointer has the range -128 to 127, so we just need to rangecheck the negative part
     if (p[1] < 0)
-        return qfalse;
+        return false;
 
     if (isalnum(p[1]) == 0)
-        return qfalse;
+        return false;
 
-    return qtrue;
+    return true;
 }
 
 float Com_Clamp(float min, float max, float value)
@@ -96,10 +96,10 @@ void COM_StripExtension(const char* in, char* out, int destsize)
 ============
 COM_CompareExtension
 
-string compare the end of the strings and return qtrue if strings match
+string compare the end of the strings and return true if strings match
 ============
 */
-qboolean COM_CompareExtension(const char* in, const char* ext)
+bool COM_CompareExtension(const char* in, const char* ext)
 {
     int inlen, extlen;
 
@@ -110,10 +110,10 @@ qboolean COM_CompareExtension(const char* in, const char* ext)
         in += inlen - extlen;
 
         if (!Q_stricmp(in, ext))
-            return qtrue;
+            return true;
     }
 
-    return qfalse;
+    return false;
 }
 
 /*
@@ -235,7 +235,7 @@ int COM_GetCurrentParseLine(void)
 
 char* COM_Parse(char** data_p)
 {
-    return COM_ParseExt(data_p, qtrue);
+    return COM_ParseExt(data_p, true);
 }
 
 /*
@@ -245,12 +245,12 @@ COM_Parse
 Parse a token out of a string
 Will never return NULL, just empty strings
 
-If "allowLineBreaks" is qtrue then an empty
+If "allowLineBreaks" is true then an empty
 string will be returned if the next token is
 a newline.
 ==============
 */
-static char* SkipWhitespace(char* data, qboolean* hasNewLines)
+static char* SkipWhitespace(char* data, bool* hasNewLines)
 {
     int c;
 
@@ -260,7 +260,7 @@ static char* SkipWhitespace(char* data, qboolean* hasNewLines)
         }
         if (c == '\n') {
             com_lines++;
-            *hasNewLines = qtrue;
+            *hasNewLines = true;
         }
         data++;
     }
@@ -272,7 +272,7 @@ int COM_Compress(char* data_p)
 {
     char *in, *out;
     int c;
-    qboolean newline = qfalse, whitespace = qfalse;
+    bool newline = false, whitespace = false;
 
     in = out = data_p;
     if (in) {
@@ -290,23 +290,23 @@ int COM_Compress(char* data_p)
                     in += 2;
                 // record when we hit a newline
             } else if (c == '\n' || c == '\r') {
-                newline = qtrue;
+                newline = true;
                 in++;
                 // record when we hit whitespace
             } else if (c == ' ' || c == '\t') {
-                whitespace = qtrue;
+                whitespace = true;
                 in++;
                 // an actual token
             } else {
                 // if we have a pending newline, emit it (and it counts as whitespace)
                 if (newline) {
                     *out++ = '\n';
-                    newline = qfalse;
-                    whitespace = qfalse;
+                    newline = false;
+                    whitespace = false;
                 }
                 if (whitespace) {
                     *out++ = ' ';
-                    whitespace = qfalse;
+                    whitespace = false;
                 }
 
                 // copy quoted strings unmolested
@@ -339,10 +339,10 @@ int COM_Compress(char* data_p)
     return out - data_p;
 }
 
-char* COM_ParseExt(char** data_p, qboolean allowLineBreaks)
+char* COM_ParseExt(char** data_p, bool allowLineBreaks)
 {
     int c = 0, len;
-    qboolean hasNewLines = qfalse;
+    bool hasNewLines = false;
     char* data;
 
     data = *data_p;
@@ -452,12 +452,12 @@ Skips until a matching close brace is found.
 Internal brace depths are properly skipped.
 =================
 */
-qboolean SkipBracedSection(char** program, int depth)
+bool SkipBracedSection(char** program, int depth)
 {
     char* token;
 
     do {
-        token = COM_ParseExt(program, qtrue);
+        token = COM_ParseExt(program, true);
         if (token[1] == 0) {
             if (token[0] == '{') {
                 depth++;
@@ -591,20 +591,20 @@ int Q_isalpha(int c)
     return (0);
 }
 
-qboolean Q_isanumber(const char* s)
+bool Q_isanumber(const char* s)
 {
     char* p;
     double UNUSED_VAR d;
 
     if (*s == '\0')
-        return qfalse;
+        return false;
 
     d = strtod(s, &p);
 
     return *p == '\0';
 }
 
-qboolean Q_isintegral(float f)
+bool Q_isintegral(float f)
 {
     return (int)f == f;
 }
@@ -1075,15 +1075,15 @@ Some characters are illegal in info strings because they
 can mess up the server's parsing
 ==================
 */
-qboolean Info_Validate(const char* s)
+bool Info_Validate(const char* s)
 {
     if (strchr(s, '\"')) {
-        return qfalse;
+        return false;
     }
     if (strchr(s, ';')) {
-        return qfalse;
+        return false;
     }
-    return qtrue;
+    return true;
 }
 
 /*
@@ -1164,16 +1164,16 @@ void Info_SetValueForKey_Big(char* s, const char* key, const char* value)
 
 //====================================================================
 
-static qboolean Com_CharIsOneOfCharset(char c, char* set)
+static bool Com_CharIsOneOfCharset(char c, char* set)
 {
     int i;
 
     for (i = 0; i < strlen(set); i++) {
         if (set[i] == c)
-            return qtrue;
+            return true;
     }
 
-    return qfalse;
+    return false;
 }
 
 char* Com_SkipCharset(char* s, char* sep)

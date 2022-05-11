@@ -238,7 +238,7 @@ from executable path, then fs_basepath.
 =================
 */
 
-void* Sys_LoadDll(const char* name, qboolean useSystemLib)
+void* Sys_LoadDll(const char* name, bool useSystemLib)
 {
     void* dllhandle = NULL;
 
@@ -363,16 +363,16 @@ void Sys_ParseArgs(int argc, char** argv)
 
 NORETURN void Sys_SigHandler(int signal)
 {
-    static qboolean signalcaught = qfalse;
+    static bool signalcaught = false;
 
     if (signalcaught) {
         fprintf(stderr, "DOUBLE SIGNAL FAULT: Received signal %d, exiting...\n",
                 signal);
     } else {
-        signalcaught = qtrue;
+        signalcaught = true;
         VM_Forced_Unload_Start();
 #ifndef DEDICATED
-        CL_Shutdown(va("Received signal %d", signal), qtrue, qtrue);
+        CL_Shutdown(va("Received signal %d", signal), true, true);
 #endif
         SV_Shutdown(va("Received signal %d", signal));
         VM_Forced_Unload_Done();
@@ -433,7 +433,7 @@ int main(int argc, char** argv)
 
     // Concatenate the command line for passing to Com_Init
     for (i = 1; i < argc; i++) {
-        const qboolean containsSpaces = strchr(argv[i], ' ') != NULL;
+        const bool containsSpaces = strchr(argv[i], ' ') != NULL;
         if (containsSpaces)
             Q_strcat(commandLine, sizeof(commandLine), "\"");
 

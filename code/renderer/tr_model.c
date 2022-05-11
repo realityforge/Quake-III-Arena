@@ -25,8 +25,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define LL(x) x = LittleLong(x)
 
-static qboolean R_LoadMD3(model_t* mod, int lod, void* buffer, int bufferSize, const char* modName);
-static qboolean R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* name);
+static bool R_LoadMD3(model_t* mod, int lod, void* buffer, int bufferSize, const char* modName);
+static bool R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* name);
 
 /*
 ====================
@@ -42,7 +42,7 @@ qhandle_t R_RegisterMD3(const char* name, model_t* mod)
     int size;
     int lod;
     int ident;
-    qboolean loaded = qfalse;
+    bool loaded = false;
     int numLoaded;
     char filename[MAX_QPATH], namebuf[MAX_QPATH + 20];
     char *fext, defex[] = "md3";
@@ -110,7 +110,7 @@ qhandle_t R_RegisterMDR(const char* name, model_t* mod)
         void* v;
     } buf;
     int ident;
-    qboolean loaded = qfalse;
+    bool loaded = false;
     int filesize;
 
     filesize = ri.FS_ReadFile(name, (void**)&buf.v);
@@ -140,7 +140,7 @@ qhandle_t R_RegisterIQM(const char* name, model_t* mod)
         unsigned* u;
         void* v;
     } buf;
-    qboolean loaded = qfalse;
+    bool loaded = false;
     int filesize;
 
     filesize = ri.FS_ReadFile(name, (void**)&buf.v);
@@ -234,7 +234,7 @@ qhandle_t RE_RegisterModel(const char* name)
 {
     model_t* mod;
     qhandle_t hModel;
-    qboolean orgNameFailed = qfalse;
+    bool orgNameFailed = false;
     int orgLoader = -1;
     int i;
     char localName[MAX_QPATH];
@@ -297,7 +297,7 @@ qhandle_t RE_RegisterModel(const char* name)
             if (!hModel) {
                 // Loader failed, most likely because the file isn't there;
                 // try again without the extension
-                orgNameFailed = qtrue;
+                orgNameFailed = true;
                 orgLoader = i;
                 COM_StripExtension(name, localName, MAX_QPATH);
             } else {
@@ -336,7 +336,7 @@ qhandle_t RE_RegisterModel(const char* name)
 R_LoadMD3
 =================
 */
-static qboolean R_LoadMD3(model_t* mod, int lod, void* buffer, int bufferSize, const char* modName)
+static bool R_LoadMD3(model_t* mod, int lod, void* buffer, int bufferSize, const char* modName)
 {
     int f, i, j;
 
@@ -367,7 +367,7 @@ static qboolean R_LoadMD3(model_t* mod, int lod, void* buffer, int bufferSize, c
     version = LittleLong(md3Model->version);
     if (version != MD3_VERSION) {
         ri.Printf(PRINT_WARNING, "R_LoadMD3: %s has wrong version (%i should be %i)\n", modName, version, MD3_VERSION);
-        return qfalse;
+        return false;
     }
 
     mod->type = MOD_MESH;
@@ -389,7 +389,7 @@ static qboolean R_LoadMD3(model_t* mod, int lod, void* buffer, int bufferSize, c
 
     if (md3Model->numFrames < 1) {
         ri.Printf(PRINT_WARNING, "R_LoadMD3: %s has no frames\n", modName);
-        return qfalse;
+        return false;
     }
 
     // swap all the frames
@@ -449,13 +449,13 @@ static qboolean R_LoadMD3(model_t* mod, int lod, void* buffer, int bufferSize, c
             ri.Printf(PRINT_WARNING, "R_LoadMD3: %s has more than %i verts on %s (%i).\n",
                       modName, SHADER_MAX_VERTEXES - 1, md3Surf->name[0] ? md3Surf->name : "a surface",
                       md3Surf->numVerts);
-            return qfalse;
+            return false;
         }
         if (md3Surf->numTriangles * 3 >= SHADER_MAX_INDEXES) {
             ri.Printf(PRINT_WARNING, "R_LoadMD3: %s has more than %i triangles on %s (%i).\n",
                       modName, (SHADER_MAX_INDEXES / 3) - 1, md3Surf->name[0] ? md3Surf->name : "a surface",
                       md3Surf->numTriangles);
-            return qfalse;
+            return false;
         }
 
         // change to surface identifier
@@ -485,7 +485,7 @@ static qboolean R_LoadMD3(model_t* mod, int lod, void* buffer, int bufferSize, c
         for (j = 0; j < md3Surf->numShaders; j++, shaderIndex++, md3Shader++) {
             shader_t* sh;
 
-            sh = R_FindShader(md3Shader->name, LIGHTMAP_NONE, qtrue);
+            sh = R_FindShader(md3Shader->name, LIGHTMAP_NONE, true);
             if (sh->defaultShader) {
                 *shaderIndex = 0;
             } else {
@@ -743,10 +743,10 @@ static qboolean R_LoadMD3(model_t* mod, int lod, void* buffer, int bufferSize, c
         }
     }
 
-    return qtrue;
+    return true;
 }
 
-static qboolean R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* mod_name)
+static bool R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* mod_name)
 {
     int i, j, k, l;
     mdrHeader_t *pinmodel, *mdr;
@@ -765,14 +765,14 @@ static qboolean R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* 
     pinmodel->version = LittleLong(pinmodel->version);
     if (pinmodel->version != MDR_VERSION) {
         ri.Printf(PRINT_WARNING, "R_LoadMDR: %s has wrong version (%i should be %i)\n", mod_name, pinmodel->version, MDR_VERSION);
-        return qfalse;
+        return false;
     }
 
     size = LittleLong(pinmodel->ofsEnd);
 
     if (size > filesize) {
         ri.Printf(PRINT_WARNING, "R_LoadMDR: Header of %s is broken. Wrong filesize declared!\n", mod_name);
-        return qfalse;
+        return false;
     }
 
     mod->type = MOD_MDR;
@@ -793,7 +793,7 @@ static qboolean R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* 
     // simple bounds check
     if (pinmodel->numBones < 0 || sizeof(*mdr) + pinmodel->numFrames * (sizeof(*frame) + (pinmodel->numBones - 1) * sizeof(*frame->bones)) > size) {
         ri.Printf(PRINT_WARNING, "R_LoadMDR: %s has broken structure.\n", mod_name);
-        return qfalse;
+        return false;
     }
 
     mod->dataSize += size;
@@ -814,7 +814,7 @@ static qboolean R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* 
 
     if (mdr->numFrames < 1) {
         ri.Printf(PRINT_WARNING, "R_LoadMDR: %s has no frames\n", mod_name);
-        return qfalse;
+        return false;
     }
 
     /* The first frame will be put into the first free space after the header */
@@ -892,7 +892,7 @@ static qboolean R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* 
         // simple bounds check
         if ((byte*)(lod + 1) > (byte*)mdr + size) {
             ri.Printf(PRINT_WARNING, "R_LoadMDR: %s has broken structure.\n", mod_name);
-            return qfalse;
+            return false;
         }
 
         lod->numSurfaces = LittleLong(curlod->numSurfaces);
@@ -906,7 +906,7 @@ static qboolean R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* 
             // simple bounds check
             if ((byte*)(surf + 1) > (byte*)mdr + size) {
                 ri.Printf(PRINT_WARNING, "R_LoadMDR: %s has broken structure.\n", mod_name);
-                return qfalse;
+                return false;
             }
 
             // first do some copying stuff
@@ -926,19 +926,19 @@ static qboolean R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* 
                 ri.Printf(PRINT_WARNING, "R_LoadMDR: %s has more than %i verts on %s (%i).\n",
                           mod_name, SHADER_MAX_VERTEXES - 1, surf->name[0] ? surf->name : "a surface",
                           surf->numVerts);
-                return qfalse;
+                return false;
             }
             if (surf->numTriangles * 3 >= SHADER_MAX_INDEXES) {
                 ri.Printf(PRINT_WARNING, "R_LoadMDR: %s has more than %i triangles on %s (%i).\n",
                           mod_name, (SHADER_MAX_INDEXES / 3) - 1, surf->name[0] ? surf->name : "a surface",
                           surf->numTriangles);
-                return qfalse;
+                return false;
             }
             // lowercase the surface name so skin compares are faster
             Q_strlwr(surf->name);
 
             // register the shaders
-            sh = R_FindShader(surf->shader, LIGHTMAP_NONE, qtrue);
+            sh = R_FindShader(surf->shader, LIGHTMAP_NONE, true);
             if (sh->defaultShader) {
                 surf->shaderIndex = 0;
             } else {
@@ -956,7 +956,7 @@ static qboolean R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* 
                 // simple bounds check
                 if (curv->numWeights < 0 || (byte*)(v + 1) + (curv->numWeights - 1) * sizeof(*weight) > (byte*)mdr + size) {
                     ri.Printf(PRINT_WARNING, "R_LoadMDR: %s has broken structure.\n", mod_name);
-                    return qfalse;
+                    return false;
                 }
 
                 v->normal[0] = LittleFloat(curv->normal[0]);
@@ -995,7 +995,7 @@ static qboolean R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* 
             // simple bounds check
             if (surf->numTriangles < 0 || (byte*)(tri + surf->numTriangles) > (byte*)mdr + size) {
                 ri.Printf(PRINT_WARNING, "R_LoadMDR: %s has broken structure.\n", mod_name);
-                return qfalse;
+                return false;
             }
 
             for (j = 0; j < surf->numTriangles; j++) {
@@ -1031,7 +1031,7 @@ static qboolean R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* 
     // simple bounds check
     if (mdr->numTags < 0 || (byte*)(tag + mdr->numTags) > (byte*)mdr + size) {
         ri.Printf(PRINT_WARNING, "R_LoadMDR: %s has broken structure.\n", mod_name);
-        return qfalse;
+        return false;
     }
 
     for (i = 0; i < mdr->numTags; i++) {
@@ -1047,7 +1047,7 @@ static qboolean R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* 
 
     // phew! we're done.
 
-    return qtrue;
+    return true;
 }
 
 //=============================================================================
@@ -1074,7 +1074,7 @@ void RE_BeginRegistration(glconfig_t* glconfigOut)
     R_ClearFlares();
     RE_ClearScene();
 
-    tr.registered = qtrue;
+    tr.registered = true;
 }
 
 //=============================================================================
@@ -1206,7 +1206,7 @@ int R_LerpTag(orientation_t* tag, qhandle_t handle, int startFrame, int endFrame
     if (!start || !end) {
         AxisClear(tag->axis);
         VectorClear(tag->origin);
-        return qfalse;
+        return false;
     }
 
     frontLerp = frac;
@@ -1221,7 +1221,7 @@ int R_LerpTag(orientation_t* tag, qhandle_t handle, int startFrame, int endFrame
     VectorNormalize(tag->axis[0]);
     VectorNormalize(tag->axis[1]);
     VectorNormalize(tag->axis[2]);
-    return qtrue;
+    return true;
 }
 
 void R_ModelBounds(qhandle_t handle, vec3_t mins, vec3_t maxs)

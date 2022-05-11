@@ -30,12 +30,12 @@
  * @param output the output parameter where the function stores details about the image. This parameter will not be modified unless the function succeeds.
  * @return true if the image was successfully loaded and decoded, false otherwise. False may indicate that no such file was present or that it could not be successfully decoded.
  */
-static qboolean try_load_image(const char* name, image_load_result_t* output)
+static bool try_load_image(const char* name, image_load_result_t* output)
 {
     assert(NULL != name);
     assert(NULL != output);
 
-    qboolean success = qfalse;
+    bool success = false;
     void* buffer = NULL;
     const long buffer_size = ri.FS_ReadFile(name, &buffer);
     if (NULL == buffer || -1 == buffer_size) {
@@ -66,7 +66,7 @@ cleanup:
  * @param output the output parameter where the function stores details about the image. This parameter will not be modified unless the function succeeds.
  * @return true if the image was successfully loaded and decoded, false otherwise. False may indicate that no such file was present or that it could not be successfully decoded.
  */
-qboolean R_LoadImage(const char* name, image_load_result_t* output)
+bool R_LoadImage(const char* name, image_load_result_t* output)
 {
     assert(NULL != name);
     assert(NULL != pixel_data);
@@ -75,7 +75,7 @@ qboolean R_LoadImage(const char* name, image_load_result_t* output)
     assert(NULL != pixel_format);
     assert(NULL != num_mips);
 
-    qboolean ignored_incoming_extension = qfalse;
+    bool ignored_incoming_extension = false;
     const char* original_extension = COM_GetExtension(name);
 
     // The MD3 files have embedded references to .tga textures which have
@@ -97,7 +97,7 @@ qboolean R_LoadImage(const char* name, image_load_result_t* output)
 
     const char* name_sans_extension;
     if (*extension) {
-        if (qtrue == try_load_image(name_to_request, output)) {
+        if (true == try_load_image(name_to_request, output)) {
             goto load_complete;
         } else {
             // The engine was requested an image with an explicit extension but no such file is present
@@ -105,7 +105,7 @@ qboolean R_LoadImage(const char* name, image_load_result_t* output)
             // a warning below
             COM_StripExtension(name, local_name, MAX_QPATH);
             name_sans_extension = local_name;
-            ignored_incoming_extension = qtrue;
+            ignored_incoming_extension = true;
         }
     } else {
         name_sans_extension = name;
@@ -118,27 +118,27 @@ qboolean R_LoadImage(const char* name, image_load_result_t* output)
         // TODO: Rewrite R_LoadDDS to our existing pattern
         R_LoadDDS(name_to_request, &output->data, &output->width, &output->height, &output->pixel_format, &output->num_mips);
         if (*output->data) {
-            return qtrue;
+            return true;
         }
     }
 #endif
 
     name_to_request = va("%s.%s", name_sans_extension, PNG_EXTENSION);
-    if (qtrue == try_load_image(name_to_request, output)) {
+    if (true == try_load_image(name_to_request, output)) {
         goto load_complete;
     }
 
     name_to_request = va("%s.%s", name_sans_extension, JPG_EXTENSION);
-    if (qtrue == try_load_image(name_to_request, output)) {
+    if (true == try_load_image(name_to_request, output)) {
         goto load_complete;
     }
 
     // Return in "failed" state without image loaded
-    return qfalse;
+    return false;
 
 load_complete:
     if (ignored_incoming_extension) {
         ri.Printf(PRINT_WARNING, "WARNING: %s not present, using %s instead\n", name, name_to_request);
     }
-    return qtrue;
+    return true;
 }

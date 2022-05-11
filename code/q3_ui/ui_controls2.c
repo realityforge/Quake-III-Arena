@@ -199,7 +199,7 @@ typedef struct
     menuradiobutton_s autoswitch;
     menuaction_s useitem;
     playerInfo_t playerinfo;
-    qboolean changesmade;
+    bool changesmade;
     menuaction_s chat;
     menuaction_s chat2;
     menuaction_s chat3;
@@ -208,14 +208,14 @@ typedef struct
     menuradiobutton_s joyenable;
     menuslider_s joythreshold;
     int section;
-    qboolean waitingforkey;
+    bool waitingforkey;
     char playerModel[64];
     vec3_t playerViewangles;
     vec3_t playerMoveangles;
     int playerLegs;
     int playerTorso;
     weapon_t playerWeapon;
-    qboolean playerChat;
+    bool playerChat;
 
     menubitmap_s back;
     menutext_s name;
@@ -407,7 +407,7 @@ static void Controls_UpdateModel(int anim)
     s_controls.playerLegs = LEGS_IDLE;
     s_controls.playerTorso = TORSO_STAND;
     s_controls.playerWeapon = WP_NUM_WEAPONS;
-    s_controls.playerChat = qfalse;
+    s_controls.playerChat = false;
 
     switch (anim) {
     case ANIM_RUN:
@@ -511,7 +511,7 @@ static void Controls_UpdateModel(int anim)
         break;
 
     case ANIM_CHAT:
-        s_controls.playerChat = qtrue;
+        s_controls.playerChat = true;
         break;
 
     default:
@@ -617,7 +617,7 @@ static void Controls_DrawKeyBinding(void* self)
     int y;
     int b1;
     int b2;
-    qboolean c;
+    bool c;
     char name[32];
     char name2[32];
 
@@ -811,9 +811,9 @@ static sfxHandle_t Controls_MenuKey(int key)
 {
     int id;
     int i;
-    qboolean found;
+    bool found;
     bind_t* bindptr;
-    found = qfalse;
+    found = false;
 
     if (!s_controls.waitingforkey) {
         switch (key) {
@@ -838,7 +838,7 @@ static sfxHandle_t Controls_MenuKey(int key)
 
         switch (key) {
         case K_ESCAPE:
-            s_controls.waitingforkey = qfalse;
+            s_controls.waitingforkey = false;
             Controls_Update();
             return (menu_out_sound);
 
@@ -847,7 +847,7 @@ static sfxHandle_t Controls_MenuKey(int key)
         }
     }
 
-    s_controls.changesmade = qtrue;
+    s_controls.changesmade = true;
 
     if (key != -1) {
         // remove from any other bind
@@ -874,7 +874,7 @@ static sfxHandle_t Controls_MenuKey(int key)
             break;
 
         if (bindptr->id == id) {
-            found = qtrue;
+            found = true;
             if (key == -1) {
                 if (bindptr->bind1 != -1) {
                     trap_Key_SetBinding(bindptr->bind1, "");
@@ -898,7 +898,7 @@ static sfxHandle_t Controls_MenuKey(int key)
         }
     }
 
-    s_controls.waitingforkey = qfalse;
+    s_controls.waitingforkey = false;
 
     if (found) {
         Controls_Update();
@@ -909,13 +909,13 @@ ignorekey:
     return Menu_DefaultKey(&s_controls.menu, key);
 }
 
-static void Controls_ResetDefaults_Action(qboolean result)
+static void Controls_ResetDefaults_Action(bool result)
 {
     if (!result) {
         return;
     }
 
-    s_controls.changesmade = qtrue;
+    s_controls.changesmade = true;
     Controls_SetDefaults();
     Controls_Update();
 }
@@ -993,7 +993,7 @@ static void Controls_MenuEvent(void* ptr, int event)
     case ID_JOYENABLE:
     case ID_JOYTHRESHOLD:
         if (event == QM_ACTIVATED) {
-            s_controls.changesmade = qtrue;
+            s_controls.changesmade = true;
         }
         break;
     }
@@ -1042,8 +1042,8 @@ static void Controls_MenuInit(void)
     Controls_Cache();
 
     s_controls.menu.key = Controls_MenuKey;
-    s_controls.menu.wrapAround = qtrue;
-    s_controls.menu.fullscreen = qtrue;
+    s_controls.menu.wrapAround = true;
+    s_controls.menu.fullscreen = true;
 
     s_controls.banner.generic.type = MTYPE_BTEXT;
     s_controls.banner.generic.flags = QMF_CENTER_JUSTIFY;

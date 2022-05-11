@@ -106,7 +106,7 @@ static void S_ByteSwapRawSamples(int samples, int width, int s_channels, const b
     }
 }
 
-static qboolean S_ReadRIFFHeader(fileHandle_t file, snd_info_t* info)
+static bool S_ReadRIFFHeader(fileHandle_t file, snd_info_t* info)
 {
     char dump[16];
     int bits;
@@ -118,7 +118,7 @@ static qboolean S_ReadRIFFHeader(fileHandle_t file, snd_info_t* info)
     // Scan for the format chunk
     if ((fmtlen = S_FindRIFFChunk(file, "fmt ")) < 0) {
         Com_Printf(S_COLOR_RED "ERROR: Couldn't find \"fmt\" chunk\n");
-        return qfalse;
+        return false;
     }
 
     // Save the parameters
@@ -131,7 +131,7 @@ static qboolean S_ReadRIFFHeader(fileHandle_t file, snd_info_t* info)
 
     if (bits < 8) {
         Com_Printf(S_COLOR_RED "ERROR: Less than 8 bit sound is not supported\n");
-        return qfalse;
+        return false;
     }
 
     info->width = bits / 8;
@@ -146,11 +146,11 @@ static qboolean S_ReadRIFFHeader(fileHandle_t file, snd_info_t* info)
     // Scan for the data chunk
     if ((info->size = S_FindRIFFChunk(file, "data")) < 0) {
         Com_Printf(S_COLOR_RED "ERROR: Couldn't find \"data\" chunk\n");
-        return qfalse;
+        return false;
     }
     info->samples = (info->size / info->width) / info->channels;
 
-    return qtrue;
+    return true;
 }
 
 // WAV codec
@@ -169,7 +169,7 @@ void* S_WAV_CodecLoad(const char* filename, snd_info_t* info)
     void* buffer;
 
     // Try to open the file
-    FS_FOpenFileRead(filename, &file, qtrue);
+    FS_FOpenFileRead(filename, &file, true);
     if (!file) {
         return NULL;
     }

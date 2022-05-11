@@ -38,7 +38,7 @@ void UpdateTournamentInfo(void)
     int n, accuracy, perfect, msglen;
 #ifdef MISSIONPACK
     int score1, score2;
-    qboolean won;
+    bool won;
 #endif
     char buf[32];
     char msg[MAX_STRING_CHARS];
@@ -75,7 +75,7 @@ void UpdateTournamentInfo(void)
             accuracy = 0;
         }
 #ifdef MISSIONPACK
-        won = qfalse;
+        won = false;
         if (g_gametype.integer >= GT_CTF) {
             score1 = level.teamScores[TEAM_RED];
             score2 = level.teamScores[TEAM_BLUE];
@@ -86,7 +86,7 @@ void UpdateTournamentInfo(void)
             }
         } else {
             if (&level.clients[playerClientNum] == &level.clients[level.sortedClients[0]]) {
-                won = qtrue;
+                won = true;
                 score1 = level.clients[level.sortedClients[0]].ps.persistant[PERS_SCORE];
                 score2 = level.clients[level.sortedClients[1]].ps.persistant[PERS_SCORE];
             } else {
@@ -147,7 +147,7 @@ static gentity_t* SpawnModelOnVictoryPad(gentity_t* pad, vec3_t offset, gentity_
     body->s.loopSound = 0; // clear lava burning
     body->s.number = body - g_entities;
     body->timestamp = level.time;
-    body->physicsObject = qtrue;
+    body->physicsObject = true;
     body->physicsBounce = 0; // don't bounce
     body->s.event = 0;
     body->s.pos.trType = TR_STATIONARY;
@@ -169,7 +169,7 @@ static gentity_t* SpawnModelOnVictoryPad(gentity_t* pad, vec3_t offset, gentity_
     body->clipmask = CONTENTS_SOLID | CONTENTS_PLAYERCLIP;
     body->r.contents = CONTENTS_BODY;
     body->r.ownerNum = ent->r.ownerNum;
-    body->takedamage = qfalse;
+    body->takedamage = false;
 
     VectorSubtract(level.intermission_origin, pad->r.currentOrigin, vec);
     vectoangles(vec, body->s.apos.trBase);

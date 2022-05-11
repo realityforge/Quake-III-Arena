@@ -38,11 +38,11 @@ output: origin, velocity, impacts, stairup boolean
 ==================
 PM_SlideMove
 
-Returns qtrue if the velocity was clipped in some way
+Returns true if the velocity was clipped in some way
 ==================
 */
 #define MAX_CLIP_PLANES 5
-qboolean PM_SlideMove(qboolean gravity)
+bool PM_SlideMove(bool gravity)
 {
     int bumpcount, numbumps;
     vec3_t dir;
@@ -100,7 +100,7 @@ qboolean PM_SlideMove(qboolean gravity)
         if (trace.allsolid) {
             // entity is completely trapped in another solid
             pm->ps->velocity[2] = 0; // don't build up falling damage, but allow sideways acceleration
-            return qtrue;
+            return true;
         }
 
         if (trace.fraction > 0) {
@@ -120,7 +120,7 @@ qboolean PM_SlideMove(qboolean gravity)
         if (numplanes >= MAX_CLIP_PLANES) {
             // this shouldn't really happen
             VectorClear(pm->ps->velocity);
-            return qtrue;
+            return true;
         }
 
         // if this is the same plane we hit before, nudge velocity
@@ -205,7 +205,7 @@ qboolean PM_SlideMove(qboolean gravity)
 
                     // stop dead at a tripple plane interaction
                     VectorClear(pm->ps->velocity);
-                    return qtrue;
+                    return true;
                 }
             }
 
@@ -232,7 +232,7 @@ qboolean PM_SlideMove(qboolean gravity)
     return (bumpcount != 0);
 }
 
-void PM_StepSlideMove(qboolean gravity)
+void PM_StepSlideMove(bool gravity)
 {
     vec3_t start_o, start_v;
     //	vec3_t		down_o, down_v;

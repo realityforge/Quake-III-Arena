@@ -126,33 +126,33 @@ int sys_timeBase;
 int Sys_Milliseconds(void)
 {
     int sys_curtime;
-    static qboolean initialized = qfalse;
+    static bool initialized = false;
 
     if (!initialized) {
         sys_timeBase = timeGetTime();
-        initialized = qtrue;
+        initialized = true;
     }
     sys_curtime = timeGetTime() - sys_timeBase;
 
     return sys_curtime;
 }
 
-qboolean Sys_RandomBytes(byte* string, int len)
+bool Sys_RandomBytes(byte* string, int len)
 {
     HCRYPTPROV prov;
 
     if (!CryptAcquireContext(&prov, NULL, NULL,
                              PROV_RSA_FULL, CRYPT_VERIFYCONTEXT)) {
 
-        return qfalse;
+        return false;
     }
 
     if (!CryptGenRandom(prov, len, (BYTE*)string)) {
         CryptReleaseContext(prov, 0);
-        return qfalse;
+        return false;
     }
     CryptReleaseContext(prov, 0);
-    return qtrue;
+    return true;
 }
 
 const char* Sys_Basename(char* path)
@@ -209,14 +209,14 @@ FILE* Sys_FOpen(const char* ospath, const char* mode)
     return fopen(ospath, mode);
 }
 
-qboolean Sys_Mkdir(const char* path)
+bool Sys_Mkdir(const char* path)
 {
     if (!CreateDirectory(path, NULL)) {
         if (GetLastError() != ERROR_ALREADY_EXISTS)
-            return qfalse;
+            return false;
     }
 
-    return qtrue;
+    return true;
 }
 
 char* Sys_Cwd(void)
@@ -276,7 +276,7 @@ void Sys_ListFilteredFiles(const char* basedir, char* subdirs, char* filter, cha
             break;
         }
         Com_sprintf(filename, sizeof(filename), "%s\\%s", subdirs, findinfo.name);
-        if (!Com_FilterPath(filter, filename, qfalse))
+        if (!Com_FilterPath(filter, filename, false))
             continue;
         list[*numfiles] = CopyString(filename);
         (*numfiles)++;
@@ -285,7 +285,7 @@ void Sys_ListFilteredFiles(const char* basedir, char* subdirs, char* filter, cha
     _findclose(findhandle);
 }
 
-static qboolean strgtr(const char* s0, const char* s1)
+static bool strgtr(const char* s0, const char* s1)
 {
     int l0, l1, i;
 
@@ -298,16 +298,16 @@ static qboolean strgtr(const char* s0, const char* s1)
 
     for (i = 0; i < l0; i++) {
         if (s1[i] > s0[i]) {
-            return qtrue;
+            return true;
         }
         if (s1[i] < s0[i]) {
-            return qfalse;
+            return false;
         }
     }
-    return qfalse;
+    return false;
 }
 
-char** Sys_ListFiles(const char* directory, const char* extension, char* filter, int* numfiles, qboolean wantsubs)
+char** Sys_ListFiles(const char* directory, const char* extension, char* filter, int* numfiles, bool wantsubs)
 {
     char search[MAX_OSPATH];
     int nfiles;
@@ -577,7 +577,7 @@ Sys_DllExtension
 Check if filename should be allowed to be loaded as a DLL.
 =================
 */
-qboolean Sys_DllExtension(const char* name)
+bool Sys_DllExtension(const char* name)
 {
     return COM_CompareExtension(name, DLL_EXT);
 }

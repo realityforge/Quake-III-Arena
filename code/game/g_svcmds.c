@@ -68,7 +68,7 @@ typedef struct ipFilter_s {
 static ipFilter_t ipFilters[MAX_IPFILTERS];
 static int numIPFilters;
 
-static qboolean StringToFilter(char* s, ipFilter_t* f)
+static bool StringToFilter(char* s, ipFilter_t* f)
 {
     char num[128];
     int i, j;
@@ -92,7 +92,7 @@ static qboolean StringToFilter(char* s, ipFilter_t* f)
                 continue;
             }
             G_Printf("Bad filter address: %s\n", s);
-            return qfalse;
+            return false;
         }
 
         j = 0;
@@ -111,7 +111,7 @@ static qboolean StringToFilter(char* s, ipFilter_t* f)
     f->mask = *(unsigned*)m;
     f->compare = *(unsigned*)b;
 
-    return qtrue;
+    return true;
 }
 
 static void UpdateIPBans(void)
@@ -148,7 +148,7 @@ static void UpdateIPBans(void)
     trap_Cvar_Set("g_banIPs", iplist_final);
 }
 
-qboolean G_FilterPacket(char* from)
+bool G_FilterPacket(char* from)
 {
     int i;
     unsigned in;
@@ -389,7 +389,7 @@ void Svcmd_ForceTeam_f(void)
 
 char* ConcatArgs(int start);
 
-qboolean ConsoleCommand(void)
+bool ConsoleCommand(void)
 {
     char cmd[MAX_TOKEN_CHARS];
 
@@ -397,58 +397,58 @@ qboolean ConsoleCommand(void)
 
     if (Q_stricmp(cmd, "entitylist") == 0) {
         Svcmd_EntityList_f();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "forceteam") == 0) {
         Svcmd_ForceTeam_f();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "game_memory") == 0) {
         Svcmd_GameMem_f();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "addbot") == 0) {
         Svcmd_AddBot_f();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "botlist") == 0) {
         Svcmd_BotList_f();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "abort_podium") == 0) {
         Svcmd_AbortPodium_f();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "addip") == 0) {
         Svcmd_AddIP_f();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "removeip") == 0) {
         Svcmd_RemoveIP_f();
-        return qtrue;
+        return true;
     }
 
     if (Q_stricmp(cmd, "listip") == 0) {
         trap_SendConsoleCommand(EXEC_NOW, "g_banIPs\n");
-        return qtrue;
+        return true;
     }
 
     if (g_dedicated.integer) {
         if (Q_stricmp(cmd, "say") == 0) {
             trap_SendServerCommand(-1, va("print \"server: %s\n\"", ConcatArgs(1)));
-            return qtrue;
+            return true;
         }
         // everything else will also be printed as a say command
         trap_SendServerCommand(-1, va("print \"server: %s\n\"", ConcatArgs(0)));
-        return qtrue;
+        return true;
     }
 
-    return qfalse;
+    return false;
 }

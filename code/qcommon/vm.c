@@ -288,7 +288,7 @@ VM_LoadQVM
 Load a .qvm file
 =================
 */
-vmHeader_t* VM_LoadQVM(vm_t* vm, qboolean alloc, qboolean unpure)
+vmHeader_t* VM_LoadQVM(vm_t* vm, bool alloc, bool unpure)
 {
     int dataLength;
     int i;
@@ -447,7 +447,7 @@ We need to make sure that servers can access unpure QVMs (not contained in any p
 even if the client is pure, so take "unpure" as argument.
 =================
 */
-vm_t* VM_Restart(vm_t* vm, qboolean unpure)
+vm_t* VM_Restart(vm_t* vm, bool unpure)
 {
     vmHeader_t* header;
 
@@ -468,7 +468,7 @@ vm_t* VM_Restart(vm_t* vm, qboolean unpure)
     // load the image
     Com_Printf("VM_Restart()\n");
 
-    if (!(header = VM_LoadQVM(vm, qfalse, unpure))) {
+    if (!(header = VM_LoadQVM(vm, false, unpure))) {
         Com_Error(ERR_DROP, "VM_Restart failed");
         return NULL;
     }
@@ -541,7 +541,7 @@ vm_t* VM_Create(const char* module, intptr_t (*systemCalls)(intptr_t*),
             Com_Printf("Failed loading dll, trying next\n");
         } else if (retval == VMI_BYTECODE) {
             vm->searchPath = startSearch;
-            if ((header = VM_LoadQVM(vm, qtrue, qfalse)))
+            if ((header = VM_LoadQVM(vm, true, false)))
                 break;
 
             // VM_Free overwrites the name on failed load

@@ -44,8 +44,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../bspc/l_log.h"
 #include "../bspc/l_mem.h"
 
-#define qtrue true
-#define qfalse false
+#define true true
+#define false false
 #endif // BSPC
 
 #define PUNCTABLE
@@ -382,7 +382,7 @@ int PS_ReadEscapeCharacter(script_t* script, char* ch)
 //
 // Parameter:				script		: script to read from
 //								token			: buffer to store the string
-// Returns:					qtrue when a string was read successfully
+// Returns:					true when a string was read successfully
 //============================================================================
 int PS_ReadString(script_t* script, token_t* token, int quote)
 {
@@ -578,16 +578,16 @@ int PS_ReadNumber(script_t* script, token_t* token)
 #endif // BINARYNUMBERS
     else // decimal or octal integer or floating point number
     {
-        octal = qfalse;
-        dot = qfalse;
+        octal = false;
+        dot = false;
         if (*script->script_p == '0')
-            octal = qtrue;
+            octal = true;
         while (1) {
             c = *script->script_p;
             if (c == '.')
-                dot = qtrue;
+                dot = true;
             else if (c == '8' || c == '9')
-                octal = qfalse;
+                octal = false;
             else if (c < '0' || c > '9')
                 break;
             token->string[len++] = *script->script_p++;

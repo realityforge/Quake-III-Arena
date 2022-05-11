@@ -25,12 +25,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "tr_dsa.h"
 
-qboolean R_CheckFBO(const FBO_t* fbo)
+bool R_CheckFBO(const FBO_t* fbo)
 {
     GLenum code = qglCheckNamedFramebufferStatusEXT(fbo->frameBuffer, GL_FRAMEBUFFER);
 
     if (code == GL_FRAMEBUFFER_COMPLETE)
-        return qtrue;
+        return true;
 
     // an error occurred
     switch (code) {
@@ -63,7 +63,7 @@ qboolean R_CheckFBO(const FBO_t* fbo)
         break;
     }
 
-    return qfalse;
+    return false;
 }
 
 FBO_t* FBO_Create(const char* name, int width, int height)
@@ -101,7 +101,7 @@ void FBO_CreateBuffer(FBO_t* fbo, int format, int index, int multisample)
 {
     uint32_t* pRenderBuffer;
     GLenum attachment;
-    qboolean absent;
+    bool absent;
 
     switch (format) {
     case GL_RGB:

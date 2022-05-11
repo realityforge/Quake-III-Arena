@@ -66,7 +66,7 @@ void R_PerformanceCounters(void)
     memset(&backEnd.pc, 0, sizeof(backEnd.pc));
 }
 
-void R_IssueRenderCommands(qboolean runPerformanceCounters)
+void R_IssueRenderCommands(bool runPerformanceCounters)
 {
     renderCommandList_t* cmdList;
 
@@ -101,7 +101,7 @@ void R_IssuePendingRenderCommands(void)
     if (!tr.registered) {
         return;
     }
-    R_IssueRenderCommands(qfalse);
+    R_IssueRenderCommands(false);
 }
 
 /*
@@ -298,7 +298,7 @@ void RE_BeginFrame(stereoFrame_t stereoFrame)
     if (!tr.registered) {
         return;
     }
-    glState.finishCalled = qfalse;
+    glState.finishCalled = false;
 
     tr.frameCount++;
     tr.frameSceneNum = 0;
@@ -308,11 +308,11 @@ void RE_BeginFrame(stereoFrame_t stereoFrame)
         if (glConfig.stencilBits < 4) {
             ri.Printf(PRINT_ALL, "Warning: not enough stencil bits to measure overdraw: %d\n", glConfig.stencilBits);
             ri.Cvar_Set("r_measureOverdraw", "0");
-            r_measureOverdraw->modified = qfalse;
+            r_measureOverdraw->modified = false;
         } else if (r_shadows->integer == 2) {
             ri.Printf(PRINT_ALL, "Warning: stencil shadows and overdraw measurement are mutually exclusive\n");
             ri.Cvar_Set("r_measureOverdraw", "0");
-            r_measureOverdraw->modified = qfalse;
+            r_measureOverdraw->modified = false;
         } else {
             R_IssuePendingRenderCommands();
             qglEnable(GL_STENCIL_TEST);
@@ -321,26 +321,26 @@ void RE_BeginFrame(stereoFrame_t stereoFrame)
             qglStencilFunc(GL_ALWAYS, 0U, ~0U);
             qglStencilOp(GL_KEEP, GL_INCR, GL_INCR);
         }
-        r_measureOverdraw->modified = qfalse;
+        r_measureOverdraw->modified = false;
     } else {
         // this is only reached if it was on and is now off
         if (r_measureOverdraw->modified) {
             R_IssuePendingRenderCommands();
             qglDisable(GL_STENCIL_TEST);
         }
-        r_measureOverdraw->modified = qfalse;
+        r_measureOverdraw->modified = false;
     }
 
     // texturemode stuff
     if (r_textureMode->modified) {
         R_IssuePendingRenderCommands();
         GL_TextureMode(r_textureMode->string);
-        r_textureMode->modified = qfalse;
+        r_textureMode->modified = false;
     }
 
     // gamma stuff
     if (r_gamma->modified) {
-        r_gamma->modified = qfalse;
+        r_gamma->modified = false;
 
         R_IssuePendingRenderCommands();
         R_SetColorMappings();
@@ -398,7 +398,7 @@ void RE_BeginFrame(stereoFrame_t stereoFrame)
                 qglDrawBuffer(GL_BACK);
                 qglClear(GL_COLOR_BUFFER_BIT);
 
-                r_anaglyphMode->modified = qfalse;
+                r_anaglyphMode->modified = false;
             }
 
             if (stereoFrame == STEREO_LEFT) {
@@ -439,7 +439,7 @@ void RE_BeginFrame(stereoFrame_t stereoFrame)
                 backEnd.colorMask[1] = 0;
                 backEnd.colorMask[2] = 0;
                 backEnd.colorMask[3] = 0;
-                r_anaglyphMode->modified = qfalse;
+                r_anaglyphMode->modified = false;
             }
 
             if (!Q_stricmp(r_drawBuffer->string, "GL_FRONT"))
@@ -472,7 +472,7 @@ void RE_EndFrame(int* frontEndMsec, int* backEndMsec)
     }
     cmd->commandId = RC_SWAP_BUFFERS;
 
-    R_IssueRenderCommands(qtrue);
+    R_IssueRenderCommands(true);
 
     R_ResetFrameCounts();
 
@@ -487,7 +487,7 @@ void RE_EndFrame(int* frontEndMsec, int* backEndMsec)
 }
 
 void RE_TakeVideoFrame(int width, int height,
-                       byte* captureBuffer, byte* encodeBuffer, qboolean motionJpeg)
+                       byte* captureBuffer, byte* encodeBuffer, bool motionJpeg)
 {
     videoFrameCommand_t* cmd;
 

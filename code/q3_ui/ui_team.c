@@ -84,8 +84,8 @@ void TeamMain_MenuInit(void)
 
     TeamMain_Cache();
 
-    s_teammain.menu.wrapAround = qtrue;
-    s_teammain.menu.fullscreen = qfalse;
+    s_teammain.menu.wrapAround = true;
+    s_teammain.menu.fullscreen = false;
 
     s_teammain.frame.generic.type = MTYPE_BITMAP;
     s_teammain.frame.generic.flags = QMF_INACTIVE;

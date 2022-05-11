@@ -232,7 +232,7 @@ extern LPALCCAPTURESAMPLES qalcCaptureSamples;
 #define qalcCaptureSamples alcCaptureSamples
 #endif
 
-qboolean QAL_Init(const char* libname);
+bool QAL_Init(const char* libname);
 void QAL_Shutdown(void);
 
 #endif // QAL_H

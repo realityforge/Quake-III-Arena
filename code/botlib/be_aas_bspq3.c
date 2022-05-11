@@ -139,7 +139,7 @@ int AAS_PointContents(vec3_t point)
 {
     return botimport.PointContents(point);
 }
-qboolean AAS_EntityCollision(int entnum,
+bool AAS_EntityCollision(int entnum,
                              vec3_t start, vec3_t boxmins, vec3_t boxmaxs, vec3_t end,
                              int contentmask, bsp_trace_t* trace)
 {
@@ -148,9 +148,9 @@ qboolean AAS_EntityCollision(int entnum,
     botimport.EntityTrace(&enttrace, start, boxmins, boxmaxs, end, entnum, contentmask);
     if (enttrace.fraction < trace->fraction) {
         memcpy(trace, &enttrace, sizeof(bsp_trace_t));
-        return qtrue;
+        return true;
     }
-    return qfalse;
+    return false;
 }
 void AAS_BSPModelMinsMaxsOrigin(int modelnum, vec3_t angles, vec3_t mins, vec3_t maxs, vec3_t origin)
 {
@@ -177,9 +177,9 @@ int AAS_BSPEntityInRange(int ent)
 {
     if (ent <= 0 || ent >= bspworld.numentities) {
         botimport.Print(PRT_MESSAGE, "bsp entity out of range\n");
-        return qfalse;
+        return false;
     }
-    return qtrue;
+    return true;
 }
 int AAS_ValueForBSPEpairKey(int ent, char* key, char* value, int size)
 {
@@ -187,15 +187,15 @@ int AAS_ValueForBSPEpairKey(int ent, char* key, char* value, int size)
 
     value[0] = '\0';
     if (!AAS_BSPEntityInRange(ent))
-        return qfalse;
+        return false;
     for (epair = bspworld.entities[ent].epairs; epair; epair = epair->next) {
         if (!strcmp(epair->key, key)) {
             strncpy(value, epair->value, size - 1);
             value[size - 1] = '\0';
-            return qtrue;
+            return true;
         }
     }
-    return qfalse;
+    return false;
 }
 int AAS_VectorForBSPEpairKey(int ent, char* key, vec3_t v)
 {
@@ -204,14 +204,14 @@ int AAS_VectorForBSPEpairKey(int ent, char* key, vec3_t v)
 
     VectorClear(v);
     if (!AAS_ValueForBSPEpairKey(ent, key, buf, MAX_EPAIRKEY))
-        return qfalse;
+        return false;
     // scanf into doubles, then assign, so it is vec_t size independent
     v1 = v2 = v3 = 0;
     sscanf(buf, "%lf %lf %lf", &v1, &v2, &v3);
     v[0] = v1;
     v[1] = v2;
     v[2] = v3;
-    return qtrue;
+    return true;
 }
 int AAS_FloatForBSPEpairKey(int ent, char* key, float* value)
 {
@@ -219,9 +219,9 @@ int AAS_FloatForBSPEpairKey(int ent, char* key, float* value)
 
     *value = 0;
     if (!AAS_ValueForBSPEpairKey(ent, key, buf, MAX_EPAIRKEY))
-        return qfalse;
+        return false;
     *value = atof(buf);
-    return qtrue;
+    return true;
 }
 int AAS_IntForBSPEpairKey(int ent, char* key, int* value)
 {
@@ -229,9 +229,9 @@ int AAS_IntForBSPEpairKey(int ent, char* key, int* value)
 
     *value = 0;
     if (!AAS_ValueForBSPEpairKey(ent, key, buf, MAX_EPAIRKEY))
-        return qfalse;
+        return false;
     *value = atoi(buf);
-    return qtrue;
+    return true;
 }
 void AAS_FreeBSPEntities(void)
 {
@@ -319,7 +319,7 @@ void AAS_DumpBSPData(void)
         FreeMemory(bspworld.dentdata);
     bspworld.dentdata = NULL;
     bspworld.entdatasize = 0;
-    bspworld.loaded = qfalse;
+    bspworld.loaded = false;
     memset(&bspworld, 0, sizeof(bspworld));
 }
 //===========================================================================
@@ -332,6 +332,6 @@ int AAS_LoadBSPFile(void)
     bspworld.dentdata = (char*)GetClearedHunkMemory(bspworld.entdatasize);
     memcpy(bspworld.dentdata, botimport.BSPEntityData(), bspworld.entdatasize);
     AAS_ParseBSPEntities();
-    bspworld.loaded = qtrue;
+    bspworld.loaded = true;
     return BLERR_NOERROR;
 }

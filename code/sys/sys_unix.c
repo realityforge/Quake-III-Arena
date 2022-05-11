@@ -102,23 +102,23 @@ int Sys_Milliseconds(void)
     return curtime;
 }
 
-qboolean Sys_RandomBytes(byte* string, int len)
+bool Sys_RandomBytes(byte* string, int len)
 {
     FILE* fp;
 
     fp = fopen("/dev/urandom", "r");
     if (!fp)
-        return qfalse;
+        return false;
 
     setvbuf(fp, NULL, _IONBF, 0); // don't buffer reads from /dev/urandom
 
     if (fread(string, sizeof(byte), len, fp) != len) {
         fclose(fp);
-        return qfalse;
+        return false;
     }
 
     fclose(fp);
-    return qtrue;
+    return true;
 }
 
 const char* Sys_Basename(char* path)
@@ -142,14 +142,14 @@ FILE* Sys_FOpen(const char* ospath, const char* mode)
     return fopen(ospath, mode);
 }
 
-qboolean Sys_Mkdir(const char* path)
+bool Sys_Mkdir(const char* path)
 {
     int result = mkdir(path, 0750);
 
     if (result != 0)
         return errno == EEXIST;
 
-    return qtrue;
+    return true;
 }
 
 char* Sys_Cwd(void)
@@ -216,7 +216,7 @@ void Sys_ListFilteredFiles(const char* basedir, char* subdirs, char* filter, cha
             break;
         }
         Com_sprintf(filename, sizeof(filename), "%s/%s", subdirs, d->d_name);
-        if (!Com_FilterPath(filter, filename, qfalse))
+        if (!Com_FilterPath(filter, filename, false))
             continue;
         list[*numfiles] = CopyString(filename);
         (*numfiles)++;
@@ -225,11 +225,11 @@ void Sys_ListFilteredFiles(const char* basedir, char* subdirs, char* filter, cha
     closedir(fdir);
 }
 
-char** Sys_ListFiles(const char* directory, const char* extension, char* filter, int* numfiles, qboolean wantsubs)
+char** Sys_ListFiles(const char* directory, const char* extension, char* filter, int* numfiles, bool wantsubs)
 {
     struct dirent* d;
     DIR* fdir;
-    qboolean dironly = wantsubs;
+    bool dironly = wantsubs;
     char search[MAX_OSPATH];
     int nfiles;
     char** listCopy;
@@ -264,7 +264,7 @@ char** Sys_ListFiles(const char* directory, const char* extension, char* filter,
 
     if (extension[0] == '/' && extension[1] == 0) {
         extension = "";
-        dironly = qtrue;
+        dironly = true;
     }
 
     extLen = strlen(extension);
@@ -558,7 +558,7 @@ dialogResult_t Sys_Dialog(dialogType_t type, const char* message, const char* ti
     typedef void (*dialogCommandBuilder_t)(dialogType_t, const char*, const char*);
 
     const char* session = getenv("DESKTOP_SESSION");
-    qboolean tried[NUM_DIALOG_PROGRAMS] = { qfalse };
+    bool tried[NUM_DIALOG_PROGRAMS] = { false };
     dialogCommandBuilder_t commands[NUM_DIALOG_PROGRAMS] = { NULL };
     dialogCommandType_t preferredCommandType = NONE;
     int i;
@@ -594,7 +594,7 @@ dialogResult_t Sys_Dialog(dialogType_t type, const char* message, const char* ti
                 }
             }
 
-            tried[i] = qtrue;
+            tried[i] = true;
 
             // The preference failed, so start again in order
             if (preferredCommandType != NONE) {
@@ -651,20 +651,20 @@ Sys_DllExtension
 Check if filename should be allowed to be loaded as a DLL.
 =================
 */
-qboolean Sys_DllExtension(const char* name)
+bool Sys_DllExtension(const char* name)
 {
     const char* p;
     char c = 0;
 
     if (COM_CompareExtension(name, DLL_EXT)) {
-        return qtrue;
+        return true;
     }
 
 #ifdef __APPLE__
     // Allow system frameworks without dylib extensions
     // i.e., /System/Library/Frameworks/OpenAL.framework/OpenAL
     if (strncmp(name, "/System/Library/Frameworks/", 27) == 0) {
-        return qtrue;
+        return true;
     }
 #endif
 
@@ -679,7 +679,7 @@ qboolean Sys_DllExtension(const char* name)
             c = *p;
 
             if (!isdigit(c) && c != '.') {
-                return qfalse;
+                return false;
             }
 
             p++;
@@ -687,11 +687,11 @@ qboolean Sys_DllExtension(const char* name)
 
         // Don't allow filename to end in a period. file.so., file.so.0., etc
         if (c != '.') {
-            return qtrue;
+            return true;
         }
     }
 
-    return qfalse;
+    return false;
 }
 
 #ifdef __APPLE__

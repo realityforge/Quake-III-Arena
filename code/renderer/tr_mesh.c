@@ -239,7 +239,7 @@ void R_AddMD3Surfaces(trRefEntity_t* ent)
     int lod;
     int fogNum;
     int cubemapIndex;
-    qboolean personalModel;
+    bool personalModel;
 
     // don't add third_person objects if not in a portal
     personalModel = (ent->e.renderfx & RF_THIRD_PERSON) && !(tr.viewParms.isPortal || (tr.viewParms.flags & (VPF_SHADOWMAP | VPF_DEPTHSHADOW)));
@@ -326,7 +326,7 @@ void R_AddMD3Surfaces(trRefEntity_t* ent)
             && fogNum == 0
             && !(ent->e.renderfx & (RF_NOSHADOW | RF_DEPTHHACK))
             && shader->sort == SS_OPAQUE) {
-            R_AddDrawSurf((void*)&model->vaoSurfaces[i], tr.shadowShader, 0, qfalse, qfalse, 0);
+            R_AddDrawSurf((void*)&model->vaoSurfaces[i], tr.shadowShader, 0, false, false, 0);
         }
 
         // projection shadows work fine with personal models
@@ -334,12 +334,12 @@ void R_AddMD3Surfaces(trRefEntity_t* ent)
             && fogNum == 0
             && (ent->e.renderfx & RF_SHADOW_PLANE)
             && shader->sort == SS_OPAQUE) {
-            R_AddDrawSurf((void*)&model->vaoSurfaces[i], tr.projectionShadowShader, 0, qfalse, qfalse, 0);
+            R_AddDrawSurf((void*)&model->vaoSurfaces[i], tr.projectionShadowShader, 0, false, false, 0);
         }
 
         // don't add third_person objects if not viewing through a portal
         if (!personalModel) {
-            R_AddDrawSurf((void*)&model->vaoSurfaces[i], shader, fogNum, qfalse, qfalse, cubemapIndex);
+            R_AddDrawSurf((void*)&model->vaoSurfaces[i], shader, fogNum, false, false, cubemapIndex);
         }
 
         surface++;

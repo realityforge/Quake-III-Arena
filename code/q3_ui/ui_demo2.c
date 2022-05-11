@@ -112,8 +112,8 @@ static void Demos_MenuInit(void)
 
     Demos_Cache();
 
-    s_demos.menu.fullscreen = qtrue;
-    s_demos.menu.wrapAround = qtrue;
+    s_demos.menu.fullscreen = true;
+    s_demos.menu.wrapAround = true;
 
     s_demos.banner.generic.type = MTYPE_BTEXT;
     s_demos.banner.generic.x = 320;

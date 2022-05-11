@@ -109,14 +109,14 @@ static void MakeMeshNormals(int width, int height, srfVert_t ctrl[MAX_GRID_SIZE]
     int x, y;
     srfVert_t* dv;
     vec3_t around[8], temp;
-    qboolean good[8];
-    qboolean wrapWidth, wrapHeight;
+    bool good[8];
+    bool wrapWidth, wrapHeight;
     float len;
     static int neighbors[8][2] = {
         { 0, 1 }, { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, -1 }, { -1, -1 }, { -1, 0 }, { -1, 1 }
     };
 
-    wrapWidth = qfalse;
+    wrapWidth = false;
     for (i = 0; i < height; i++) {
         VectorSubtract(ctrl[i][0].xyz, ctrl[i][width - 1].xyz, delta);
         len = VectorLengthSquared(delta);
@@ -125,10 +125,10 @@ static void MakeMeshNormals(int width, int height, srfVert_t ctrl[MAX_GRID_SIZE]
         }
     }
     if (i == height) {
-        wrapWidth = qtrue;
+        wrapWidth = true;
     }
 
-    wrapHeight = qfalse;
+    wrapHeight = false;
     for (i = 0; i < width; i++) {
         VectorSubtract(ctrl[0][i].xyz, ctrl[height - 1][i].xyz, delta);
         len = VectorLengthSquared(delta);
@@ -137,7 +137,7 @@ static void MakeMeshNormals(int width, int height, srfVert_t ctrl[MAX_GRID_SIZE]
         }
     }
     if (i == width) {
-        wrapHeight = qtrue;
+        wrapHeight = true;
     }
 
     for (i = 0; i < width; i++) {
@@ -147,7 +147,7 @@ static void MakeMeshNormals(int width, int height, srfVert_t ctrl[MAX_GRID_SIZE]
             VectorCopy(dv->xyz, base);
             for (k = 0; k < 8; k++) {
                 VectorClear(around[k]);
-                good[k] = qfalse;
+                good[k] = false;
 
                 for (dist = 1; dist <= 3; dist++) {
                     x = i + neighbors[k][0] * dist;
@@ -174,7 +174,7 @@ static void MakeMeshNormals(int width, int height, srfVert_t ctrl[MAX_GRID_SIZE]
                     if (VectorNormalize2(temp, temp) == 0) {
                         continue; // degenerate edge, get more dist
                     } else {
-                        good[k] = qtrue;
+                        good[k] = true;
                         VectorCopy(temp, around[k]);
                         break; // good edge
                     }

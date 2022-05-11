@@ -49,7 +49,7 @@ void* UI_Alloc(int size)
     char* p;
 
     if (allocPoint + size > POOLSIZE) {
-        outOfMemory = qtrue;
+        outOfMemory = true;
         return NULL;
     }
 
@@ -63,7 +63,7 @@ void* UI_Alloc(int size)
 void UI_InitMemory(void)
 {
     allocPoint = 0;
-    outOfMemory = qfalse;
+    outOfMemory = false;
 }
 
 int UI_ParseInfos(char* buf, int max, char* infos[])
@@ -92,7 +92,7 @@ int UI_ParseInfos(char* buf, int max, char* infos[])
 
         info[0] = '\0';
         while (1) {
-            token = COM_ParseExt(&buf, qtrue);
+            token = COM_ParseExt(&buf, true);
             if (!token[0]) {
                 Com_Printf("Unexpected end of info file\n");
                 break;
@@ -102,7 +102,7 @@ int UI_ParseInfos(char* buf, int max, char* infos[])
             }
             Q_strncpyz(key, token, sizeof(key));
 
-            token = COM_ParseExt(&buf, qfalse);
+            token = COM_ParseExt(&buf, false);
             if (!token[0]) {
                 strcpy(token, "<NULL>");
             }
@@ -525,45 +525,45 @@ int UI_TierCompleted(int levelWon)
     return tier + 1;
 }
 
-qboolean UI_ShowTierVideo(int tier)
+bool UI_ShowTierVideo(int tier)
 {
     char key[16];
     char videos[MAX_INFO_VALUE];
 
     if (tier <= 0) {
-        return qfalse;
+        return false;
     }
 
     trap_Cvar_VariableStringBuffer("g_spVideos", videos, sizeof(videos));
 
     Com_sprintf(key, sizeof(key), "tier%i", tier);
     if (atoi(Info_ValueForKey(videos, key))) {
-        return qfalse;
+        return false;
     }
 
     Info_SetValueForKey(videos, key, va("%i", 1));
     trap_Cvar_Set("g_spVideos", videos);
 
-    return qtrue;
+    return true;
 }
 
-qboolean UI_CanShowTierVideo(int tier)
+bool UI_CanShowTierVideo(int tier)
 {
     char key[16];
     char videos[MAX_INFO_VALUE];
 
     if (!tier) {
-        return qfalse;
+        return false;
     }
 
     trap_Cvar_VariableStringBuffer("g_spVideos", videos, sizeof(videos));
 
     Com_sprintf(key, sizeof(key), "tier%i", tier);
     if (atoi(Info_ValueForKey(videos, key))) {
-        return qtrue;
+        return true;
     }
 
-    return qfalse;
+    return false;
 }
 
 /*

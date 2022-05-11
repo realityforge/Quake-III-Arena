@@ -124,7 +124,7 @@ static void UI_DriverInfo_Menu(void)
 
     DriverInfo_Cache();
 
-    s_driverinfo.menu.fullscreen = qtrue;
+    s_driverinfo.menu.fullscreen = true;
     s_driverinfo.menu.draw = DriverInfo_MenuDraw;
 
     s_driverinfo.banner.generic.type = MTYPE_BTEXT;
@@ -256,26 +256,26 @@ typedef struct {
 typedef struct
 {
     int mode;
-    qboolean fullscreen;
+    bool fullscreen;
     int tq;
     int lighting;
     int colordepth;
     int texturebits;
     int geometry;
     int filter;
-    qboolean extensions;
+    bool extensions;
 } InitialVideoOptions_s;
 
 static InitialVideoOptions_s s_ivo;
 static graphicsoptions_t s_graphicsoptions;
 
 static InitialVideoOptions_s s_ivo_templates[] = {
-    { 6, qtrue, 3, 0, 2, 2, 2, 1, qtrue },
-    { 4, qtrue, 2, 0, 2, 2, 1, 1, qtrue }, // JDC: this was tq 3
-    { 3, qtrue, 2, 0, 0, 0, 1, 0, qtrue },
-    { 2, qtrue, 1, 0, 1, 0, 0, 0, qtrue },
-    { 2, qtrue, 1, 1, 1, 0, 0, 0, qtrue },
-    { 3, qtrue, 1, 0, 0, 0, 1, 0, qtrue }
+    { 6, true, 3, 0, 2, 2, 2, 1, true },
+    { 4, true, 2, 0, 2, 2, 1, 1, true }, // JDC: this was tq 3
+    { 3, true, 2, 0, 0, 0, 1, 0, true },
+    { 2, true, 1, 0, 1, 0, 0, 0, true },
+    { 2, true, 1, 1, 1, 0, 0, 0, true },
+    { 3, true, 1, 0, 0, 0, 1, 0, true }
 };
 
 #define NUM_IVO_TEMPLATES (ARRAY_LEN(s_ivo_templates))
@@ -319,7 +319,7 @@ static const char* detectedResolutions[MAX_RESOLUTIONS];
 static char currentResolution[20];
 
 static const char** resolutions = builtinResolutions;
-static qboolean resolutionsDetected = qfalse;
+static bool resolutionsDetected = false;
 
 static int GraphicsOptions_FindBuiltinResolution(int mode)
 {
@@ -443,7 +443,7 @@ static void GraphicsOptions_GetResolutions(void)
         }
 
         resolutions = detectedResolutions;
-        resolutionsDetected = qtrue;
+        resolutionsDetected = true;
     }
 }
 
@@ -824,8 +824,8 @@ void GraphicsOptions_MenuInit(void)
 
     GraphicsOptions_Cache();
 
-    s_graphicsoptions.menu.wrapAround = qtrue;
-    s_graphicsoptions.menu.fullscreen = qtrue;
+    s_graphicsoptions.menu.wrapAround = true;
+    s_graphicsoptions.menu.fullscreen = true;
     s_graphicsoptions.menu.draw = GraphicsOptions_MenuDraw;
 
     s_graphicsoptions.banner.generic.type = MTYPE_BTEXT;

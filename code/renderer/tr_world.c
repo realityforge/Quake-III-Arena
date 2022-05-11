@@ -29,14 +29,14 @@ Tries to cull surfaces before they are lighted or
 added to the sorting list.
 ================
 */
-static qboolean R_CullSurface(msurface_t* surf)
+static bool R_CullSurface(msurface_t* surf)
 {
     if (r_nocull->integer || surf->cullinfo.type == CULLINFO_NONE) {
-        return qfalse;
+        return false;
     }
 
     if (r_nocurves->integer && *surf->data == SF_GRID) {
-        return qtrue;
+        return true;
     }
 
     if (surf->cullinfo.type & CULLINFO_PLANE) {
@@ -45,20 +45,20 @@ static qboolean R_CullSurface(msurface_t* surf)
         cullType_t ct;
 
         if (!r_facePlaneCull->integer) {
-            return qfalse;
+            return false;
         }
 
         ct = surf->shader->cullType;
 
         if (ct == CT_TWO_SIDED) {
-            return qfalse;
+            return false;
         }
 
         // don't cull for depth shadow
         /*
         if ( tr.viewParms.flags & VPF_DEPTHSHADOW )
         {
-                return qfalse;
+                return false;
         }
         */
 
@@ -76,12 +76,12 @@ static qboolean R_CullSurface(msurface_t* surf)
             d = DotProduct(tr.viewParms.or.axis[0], surf->cullinfo.plane.normal);
             if (ct == CT_FRONT_SIDED) {
                 if (d > 0)
-                    return qtrue;
+                    return true;
             } else {
                 if (d < 0)
-                    return qtrue;
+                    return true;
             }
-            return qfalse;
+            return false;
         }
 
         d = DotProduct(tr.or.viewOrigin, surf->cullinfo.plane.normal);
@@ -91,15 +91,15 @@ static qboolean R_CullSurface(msurface_t* surf)
         // epsilon isn't allowed here
         if (ct == CT_FRONT_SIDED) {
             if (d < surf->cullinfo.plane.dist - 8) {
-                return qtrue;
+                return true;
             }
         } else {
             if (d > surf->cullinfo.plane.dist + 8) {
-                return qtrue;
+                return true;
             }
         }
 
-        return qfalse;
+        return false;
     }
 
     if (surf->cullinfo.type & CULLINFO_SPHERE) {
@@ -112,7 +112,7 @@ static qboolean R_CullSurface(msurface_t* surf)
         }
 
         if (sphereCull == CULL_OUT) {
-            return qtrue;
+            return true;
         }
     }
 
@@ -126,11 +126,11 @@ static qboolean R_CullSurface(msurface_t* surf)
         }
 
         if (boxCull == CULL_OUT) {
-            return qtrue;
+            return true;
         }
     }
 
-    return qfalse;
+    return false;
 }
 
 /*
@@ -571,7 +571,7 @@ static const byte* R_ClusterPVS(int cluster)
     return tr.world->vis + cluster * tr.world->clusterBytes;
 }
 
-qboolean R_inPVS(const vec3_t p1, const vec3_t p2)
+bool R_inPVS(const vec3_t p1, const vec3_t p2)
 {
     mnode_t* leaf;
     byte* vis;
@@ -581,9 +581,9 @@ qboolean R_inPVS(const vec3_t p1, const vec3_t p2)
     leaf = R_PointInLeaf(p2);
 
     if (!(vis[leaf->cluster >> 3] & (1 << (leaf->cluster & 7)))) {
-        return qfalse;
+        return false;
     }
-    return qtrue;
+    return true;
 }
 
 /*
@@ -633,7 +633,7 @@ static void R_MarkLeaves(void)
     tr.visClusters[tr.visIndex] = cluster;
 
     if (r_showcluster->modified || r_showcluster->integer) {
-        r_showcluster->modified = qfalse;
+        r_showcluster->modified = false;
         if (r_showcluster->integer) {
             ri.Printf(PRINT_ALL, "cluster:%i  area:%i\n", cluster, leaf->area);
         }

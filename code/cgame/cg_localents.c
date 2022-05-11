@@ -152,12 +152,12 @@ void CG_FragmentBounceMark(localEntity_t* le, trace_t* trace)
 
         radius = 16 + (rand() & 31);
         CG_ImpactMark(cgs.media.bloodMarkShader, trace->endpos, trace->plane.normal, random() * 360,
-                      1, 1, 1, 1, qtrue, radius, qfalse);
+                      1, 1, 1, 1, true, radius, false);
     } else if (le->leMarkType == LEMT_BURN) {
 
         radius = 8 + (rand() & 15);
         CG_ImpactMark(cgs.media.burnMarkShader, trace->endpos, trace->plane.normal, random() * 360,
-                      1, 1, 1, 1, qtrue, radius, qfalse);
+                      1, 1, 1, 1, true, radius, false);
     }
 
     // don't allow a fragment to make multiple marks, or they
@@ -522,7 +522,7 @@ void CG_AddKamikaze(localEntity_t* le)
         VectorScale(axis[0], c * KAMI_SHOCKWAVE_MAXRADIUS / KAMI_SHOCKWAVEMODEL_RADIUS, shockwave.axis[0]);
         VectorScale(axis[1], c * KAMI_SHOCKWAVE_MAXRADIUS / KAMI_SHOCKWAVEMODEL_RADIUS, shockwave.axis[1]);
         VectorScale(axis[2], c * KAMI_SHOCKWAVE_MAXRADIUS / KAMI_SHOCKWAVEMODEL_RADIUS, shockwave.axis[2]);
-        shockwave.nonNormalizedAxes = qtrue;
+        shockwave.nonNormalizedAxes = true;
 
         if (t > KAMI_SHOCKWAVEFADE_STARTTIME) {
             c = (float)(t - KAMI_SHOCKWAVEFADE_STARTTIME) / (float)(KAMI_SHOCKWAVE_ENDTIME - KAMI_SHOCKWAVEFADE_STARTTIME);
@@ -560,7 +560,7 @@ void CG_AddKamikaze(localEntity_t* le)
         VectorScale(axis[0], c * KAMI_BOOMSPHERE_MAXRADIUS / KAMI_BOOMSPHEREMODEL_RADIUS, re->axis[0]);
         VectorScale(axis[1], c * KAMI_BOOMSPHERE_MAXRADIUS / KAMI_BOOMSPHEREMODEL_RADIUS, re->axis[1]);
         VectorScale(axis[2], c * KAMI_BOOMSPHERE_MAXRADIUS / KAMI_BOOMSPHEREMODEL_RADIUS, re->axis[2]);
-        re->nonNormalizedAxes = qtrue;
+        re->nonNormalizedAxes = true;
 
         trap_R_AddRefEntityToScene(re);
         // add the dlight
@@ -589,7 +589,7 @@ void CG_AddKamikaze(localEntity_t* le)
         VectorScale(axis[0], c * KAMI_SHOCKWAVE2_MAXRADIUS / KAMI_SHOCKWAVEMODEL_RADIUS, shockwave.axis[0]);
         VectorScale(axis[1], c * KAMI_SHOCKWAVE2_MAXRADIUS / KAMI_SHOCKWAVEMODEL_RADIUS, shockwave.axis[1]);
         VectorScale(axis[2], c * KAMI_SHOCKWAVE2_MAXRADIUS / KAMI_SHOCKWAVEMODEL_RADIUS, shockwave.axis[2]);
-        shockwave.nonNormalizedAxes = qtrue;
+        shockwave.nonNormalizedAxes = true;
 
         if (t > KAMI_SHOCKWAVE2FADE_STARTTIME) {
             c = (float)(t - KAMI_SHOCKWAVE2FADE_STARTTIME) / (float)(KAMI_SHOCKWAVE2_ENDTIME - KAMI_SHOCKWAVE2FADE_STARTTIME);
@@ -696,9 +696,9 @@ void CG_AddScorePlum(localEntity_t* le)
         return;
     }
 
-    negative = qfalse;
+    negative = false;
     if (score < 0) {
-        negative = qtrue;
+        negative = true;
         score = -score;
     }
 

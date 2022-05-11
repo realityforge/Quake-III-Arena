@@ -83,9 +83,9 @@ static void jpeg_load_output_message(const j_common_ptr info)
  * @param buffer the reference to the buffer.
  * @param buffer_size the size of the buffer in bytes.
  * @param output the structure to populate with decided image details
- * @return qtrue if image was successfully decoded, qfalse if the image failed to be decoded.
+ * @return true if image was successfully decoded, false if the image failed to be decoded.
  */
-qboolean R_DecodeJpgInBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* output)
+bool R_DecodeJpgInBuffer(const char* name, const void* buffer, const long buffer_size, image_load_result_t* output)
 {
     byte* image = NULL;
 
@@ -113,7 +113,7 @@ qboolean R_DecodeJpgInBuffer(const char* name, const void* buffer, const long bu
         }
 #pragma clang diagnostic pop
         jpeg_destroy_decompress(&info);
-        return qfalse;
+        return false;
     }
     // Initialize the JPEG decompression object
     jpeg_create_decompress(&info);
@@ -139,7 +139,7 @@ qboolean R_DecodeJpgInBuffer(const char* name, const void* buffer, const long bu
     if (0 == info.output_width || info.output_width > MAX_READ_JPG_WIDTH || 0 == info.output_height || info.output_height > MAX_READ_JPG_HEIGHT || expected_components != output_components) {
         ri.Printf(PRINT_WARNING, "Failed to load jpg image named %s due to invalid image dimensions %dx%dx%d.\n", name, info.output_width, info.output_height, info.out_color_components);
         jpeg_destroy_decompress(&info);
-        return qfalse;
+        return false;
     }
 
     const unsigned int row_size = info.output_width * output_components;
@@ -149,7 +149,7 @@ qboolean R_DecodeJpgInBuffer(const char* name, const void* buffer, const long bu
     if (NULL == image) {
         ri.Printf(PRINT_WARNING, "Failed to load jpg image named %s as unable to allocate %zu bytes of memory.\n", name, size);
         jpeg_destroy_decompress(&info);
-        return qfalse;
+        return false;
     }
 
     while (info.output_scanline < info.output_height) {
@@ -172,5 +172,5 @@ qboolean R_DecodeJpgInBuffer(const char* name, const void* buffer, const long bu
 
     jpeg_destroy_decompress(&info);
 
-    return qtrue;
+    return true;
 }

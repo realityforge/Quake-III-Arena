@@ -66,7 +66,7 @@ void CM_StoreLeafs(leafList_t* ll, int nodenum)
     }
 
     if (ll->count >= ll->maxcount) {
-        ll->overflowed = qtrue;
+        ll->overflowed = true;
         return;
     }
     ll->list[ll->count++] = leafNum;
@@ -119,7 +119,7 @@ int CM_BoxLeafnums(const vec3_t mins, const vec3_t maxs, int* list, int listsize
     ll.list = list;
     ll.storeLeafs = CM_StoreLeafs;
     ll.lastLeaf = 0;
-    ll.overflowed = qfalse;
+    ll.overflowed = false;
 
     CM_BoxLeafnums_r(&ll, 0);
 
@@ -260,7 +260,7 @@ void CM_FloodAreaConnections(void)
     }
 }
 
-void CM_AdjustAreaPortalState(int area1, int area2, qboolean open)
+void CM_AdjustAreaPortalState(int area1, int area2, bool open)
 {
     if (area1 < 0 || area2 < 0) {
         return;
@@ -284,16 +284,16 @@ void CM_AdjustAreaPortalState(int area1, int area2, qboolean open)
     CM_FloodAreaConnections();
 }
 
-qboolean CM_AreasConnected(int area1, int area2)
+bool CM_AreasConnected(int area1, int area2)
 {
 #ifndef BSPC
     if (cm_noAreas->integer) {
-        return qtrue;
+        return true;
     }
 #endif
 
     if (area1 < 0 || area2 < 0) {
-        return qfalse;
+        return false;
     }
 
     if (area1 >= cm.numAreas || area2 >= cm.numAreas) {
@@ -301,9 +301,9 @@ qboolean CM_AreasConnected(int area1, int area2)
     }
 
     if (cm.areas[area1].floodnum == cm.areas[area2].floodnum) {
-        return qtrue;
+        return true;
     }
-    return qfalse;
+    return false;
 }
 
 /*
@@ -346,20 +346,20 @@ int CM_WriteAreaBits(byte* buffer, int area)
     return bytes;
 }
 
-qboolean CM_BoundsIntersect(const vec3_t mins, const vec3_t maxs, const vec3_t mins2, const vec3_t maxs2)
+bool CM_BoundsIntersect(const vec3_t mins, const vec3_t maxs, const vec3_t mins2, const vec3_t maxs2)
 {
     if (maxs[0] < mins2[0] - SURFACE_CLIP_EPSILON || maxs[1] < mins2[1] - SURFACE_CLIP_EPSILON || maxs[2] < mins2[2] - SURFACE_CLIP_EPSILON || mins[0] > maxs2[0] + SURFACE_CLIP_EPSILON || mins[1] > maxs2[1] + SURFACE_CLIP_EPSILON || mins[2] > maxs2[2] + SURFACE_CLIP_EPSILON) {
-        return qfalse;
+        return false;
     }
 
-    return qtrue;
+    return true;
 }
 
-qboolean CM_BoundsIntersectPoint(const vec3_t mins, const vec3_t maxs, const vec3_t point)
+bool CM_BoundsIntersectPoint(const vec3_t mins, const vec3_t maxs, const vec3_t point)
 {
     if (maxs[0] < point[0] - SURFACE_CLIP_EPSILON || maxs[1] < point[1] - SURFACE_CLIP_EPSILON || maxs[2] < point[2] - SURFACE_CLIP_EPSILON || mins[0] > point[0] + SURFACE_CLIP_EPSILON || mins[1] > point[1] + SURFACE_CLIP_EPSILON || mins[2] > point[2] + SURFACE_CLIP_EPSILON) {
-        return qfalse;
+        return false;
     }
 
-    return qtrue;
+    return true;
 }
