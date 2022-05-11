@@ -880,7 +880,7 @@ void BotReadSessionData(bot_state_t* bs)
            &bs->lastgoal_teamgoal.maxs[2]);
 }
 
-int BotAISetupClient(int client, struct bot_settings_s* settings, bool restart)
+bool BotAISetupClient(int client, struct bot_settings_s* settings, bool restart)
 {
     char filename[MAX_PATH], name[MAX_PATH], gender[MAX_PATH];
     bot_state_t* bs;
@@ -972,11 +972,11 @@ int BotAISetupClient(int client, struct bot_settings_s* settings, bool restart)
     if (restart) {
         BotReadSessionData(bs);
     }
-    // bot has been setup successfully
+    // bot has been set up successfully
     return true;
 }
 
-int BotAIShutdownClient(int client, bool restart)
+bool BotAIShutdownClient(int client, bool restart)
 {
     bot_state_t* bs;
 
