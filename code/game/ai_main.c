@@ -982,7 +982,6 @@ bool BotAIShutdownClient(int client, bool restart)
 
     bs = botstates[client];
     if (!bs || !bs->inuse) {
-        // BotAI_Print(PRT_ERROR, "BotAIShutdownClient: client %d already shutdown\n", client);
         return false;
     }
 
