@@ -915,7 +915,7 @@ bool BotAISetupClient(int client, struct bot_settings_s* settings, bool restart)
         return false;
     }
 
-    if (bs->inuse != 0) {
+    if (false != bs->inuse) {
         BotAI_Print(PRT_FATAL, "BotAISetupClient: client %d already setup\n", client);
         return false;
     }
@@ -1051,7 +1051,7 @@ when the level is changed
 */
 void BotResetState(bot_state_t* bs)
 {
-    int client, entitynum, inuse;
+    int client, entitynum;
     int movestate, goalstate, chatstate, weaponstate;
     bot_settings_t settings;
     int character;
@@ -1061,7 +1061,7 @@ void BotResetState(bot_state_t* bs)
     // save some things that should not be reset here
     memcpy(&settings, &bs->settings, sizeof(bot_settings_t));
     memcpy(&ps, &bs->cur_ps, sizeof(playerState_t));
-    inuse = bs->inuse;
+    const bool inuse = bs->inuse;
     client = bs->client;
     entitynum = bs->entitynum;
     character = bs->character;
