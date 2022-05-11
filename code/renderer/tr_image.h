@@ -14,8 +14,7 @@
 #ifndef TR_IMAGE_H
 #define TR_IMAGE_H
 
-// TODO: Move the required type "byte" and "uint32_t" to a separate header?
-#include "../qcommon/q_shared.h"
+#include <stdint.h>
 #include "SDL_opengl.h"
 
 // TODO: Rather than using GLenum for pixel_format use our
