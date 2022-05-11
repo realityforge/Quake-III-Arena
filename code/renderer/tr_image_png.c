@@ -183,25 +183,6 @@ cleanup:
     return success;
 }
 
-void R_LoadPNG(const char* name, byte** pixel_data, uint32_t* width, uint32_t* height)
-{
-    assert(NULL != name);
-    assert(NULL != pixel_data);
-    assert(NULL != width);
-    assert(NULL != height);
-
-    image_load_result_t result;
-    if (qtrue == R_LoadImageNew(name, &result)) {
-        *width = result.width;
-        *height = result.height;
-        *pixel_data = result.data;
-    } else {
-        *pixel_data = NULL;
-        *width = 0;
-        *height = 0;
-    }
-}
-
 static void spng_save_error(const char* name, const int result, const char* functionName)
 {
     ri.Printf(PRINT_WARNING, "Failed to save png file named %s due to %s error calling %s.\n", name, spng_strerror(result), functionName);

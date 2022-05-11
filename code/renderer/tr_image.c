@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "tr_local.h"
 
 #include "tr_dsa.h"
+#include "tr_image.h"
 
 static byte s_intensitytable[256];
 static unsigned char s_gammatable[256];
@@ -2066,119 +2067,6 @@ void R_UpdateSubImage(image_t* image, byte* pic, int x, int y, int width, int he
     Upload32(pic, x, y, width, height, picFormat, 0, image, qfalse);
 }
 
-//===================================================================
-
-// Prototype for dds loader function which isn't common to both renderers
-void R_LoadDDS(const char* filename, byte** pic, uint32_t* width, uint32_t* height, GLenum* picFormat, int* numMips);
-
-typedef struct
-{
-    const char* ext;
-    void (*ImageLoader)(const char*, byte**, uint32_t*, uint32_t*);
-} imageExtToLoaderMap_t;
-
-// Note that the ordering indicates the order of preference used
-// when there are multiple images of different formats available
-static imageExtToLoaderMap_t imageLoaders[] = {
-    { "png", R_LoadPNG },
-    // The tga file extension is present because .md3 files embed these names sometimes but the
-    // actual texture has been converted to .png format. So we just route request for files of
-    // type ".tga" to png load and then look for the png file in the loaderw
-    { "tga", R_LoadPNG },
-    { "jpg", R_LoadJPG },
-    { "jpeg", R_LoadJPG }
-};
-
-static int numImageLoaders = ARRAY_LEN(imageLoaders);
-
-/*
-=================
-R_LoadImage
-
-Loads any of the supported image types into a canonical
-32 bit format.
-=================
-*/
-void R_LoadImage(const char* name, byte** pic, uint32_t* width, uint32_t* height, GLenum* picFormat, int* numMips)
-{
-    qboolean orgNameFailed = qfalse;
-    int orgLoader = -1;
-    int i;
-    char localName[MAX_QPATH];
-    const char* ext;
-    char* altName;
-
-    *pic = NULL;
-    *width = 0;
-    *height = 0;
-    *picFormat = GL_RGBA8;
-    *numMips = 0;
-
-    Q_strncpyz(localName, name, MAX_QPATH);
-
-    ext = COM_GetExtension(localName);
-
-    // If compressed textures are enabled, try loading a DDS first, it'll load fastest
-    if (r_ext_compressed_textures->integer) {
-        char ddsName[MAX_QPATH];
-
-        COM_StripExtension(name, ddsName, MAX_QPATH);
-        Q_strcat(ddsName, MAX_QPATH, ".dds");
-
-        R_LoadDDS(ddsName, pic, width, height, picFormat, numMips);
-
-        // If loaded, we're done.
-        if (*pic)
-            return;
-    }
-
-    if (*ext) {
-        // Look for the correct loader and use it
-        for (i = 0; i < numImageLoaders; i++) {
-            if (!Q_stricmp(ext, imageLoaders[i].ext)) {
-                // Load
-                imageLoaders[i].ImageLoader(localName, pic, width, height);
-                break;
-            }
-        }
-
-        // A loader was found
-        if (i < numImageLoaders) {
-            if (*pic == NULL) {
-                // Loader failed, most likely because the file isn't there;
-                // try again without the extension
-                orgNameFailed = qtrue;
-                orgLoader = i;
-                COM_StripExtension(name, localName, MAX_QPATH);
-            } else {
-                // Something loaded
-                return;
-            }
-        }
-    }
-
-    // Try and find a suitable match using all
-    // the image formats supported
-    for (i = 0; i < numImageLoaders; i++) {
-        if (i == orgLoader)
-            continue;
-
-        altName = va("%s.%s", localName, imageLoaders[i].ext);
-
-        // Load
-        imageLoaders[i].ImageLoader(altName, pic, width, height);
-
-        if (*pic) {
-            if (orgNameFailed) {
-                ri.Printf(PRINT_DEVELOPER, "WARNING: %s not present, using %s instead\n",
-                          name, altName);
-            }
-
-            break;
-        }
-    }
-}
-
 /*
 ===============
 R_FindImageFile
@@ -2217,10 +2105,15 @@ image_t* R_FindImageFile(const char* name, imgType_t type, imgFlags_t flags)
     }
 
     // load the pic from disk
-    R_LoadImage(name, &pic, &width, &height, &picFormat, &picNumMips);
-    if (pic == NULL) {
+    image_load_result_t image_load_result;
+    if (qtrue != R_LoadImage(name, &image_load_result)) {
         return NULL;
     }
+    pic = image_load_result.data;
+    width = image_load_result.width;
+    height = image_load_result.height;
+    picFormat = image_load_result.pixel_format;
+    picNumMips = image_load_result.num_mips;
 
     checkFlagsTrue = IMGFLAG_PICMIP | IMGFLAG_MIPMAP | IMGFLAG_GENNORMALMAP;
     checkFlagsFalse = IMGFLAG_CUBEMAP;
