@@ -68,8 +68,9 @@ build --remote_local_fallback
 # Helps you debug when Bazel runs out of memory.
 build --heap_dump_on_oom
 
-# Do not stop at first error in build or analysis phase but keep going as long as prerequisties are successful
-common --keep_going
+# Do not stop at first error in build or analysis phase but keep going as long as prerequisites are successful
+build --keep_going
+test --keep_going
 
 # Do not embed build information in binaries. This reduces input volatility and maximizes build caching.
 build --nostamp
