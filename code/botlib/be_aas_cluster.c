@@ -40,7 +40,6 @@ extern botlib_import_t botimport;
 #define AAS_MAX_PORTALS 65536
 #define AAS_MAX_PORTALINDEXSIZE 65536
 #define AAS_MAX_CLUSTERS 65536
-//
 #define MAX_PORTALAREAS 1024
 
 // do not flood through area faces, only use reachabilities

@@ -1099,7 +1099,6 @@ int PC_OperatorPriority(int op)
     } else                                         \
         val = &value_heap[numvalues++];
 #define FreeValue(val)
-//
 #define AllocOperator(op)                             \
     if (numoperators >= MAX_OPERATORS) {              \
         SourceError(source, "out of operator space"); \

@@ -154,7 +154,6 @@ typedef struct {
 // many of the vars are re-used for different item types, as such they are not always named appropriately
 // the benefits of c++ in DOOM will greatly help crap like this
 // FIXME: need to put a type ptr that points to specific type info per type
-//
 #define MAX_LB_COLUMNS 16
 
 typedef struct columnInfo_s {
