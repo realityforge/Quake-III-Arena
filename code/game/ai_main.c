@@ -915,7 +915,7 @@ bool BotAISetupClient(int client, struct bot_settings_s* settings, bool restart)
         return false;
     }
 
-    if (bs && bs->inuse) {
+    if (bs->inuse != 0) {
         BotAI_Print(PRT_FATAL, "BotAISetupClient: client %d already setup\n", client);
         return false;
     }
