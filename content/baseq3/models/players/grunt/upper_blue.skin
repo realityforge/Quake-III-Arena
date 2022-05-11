@@ -1,6 +1,6 @@
 tag_head,
 tag_weapon,
-u_torso,models/players/grunt/blue.png
+u_torso,models/players/grunt/blue
 tag_torso,
-u_larm,models/players/grunt/blue.png
-u_rarm,models/players/grunt/blue.png
+u_larm,models/players/grunt/blue
+u_rarm,models/players/grunt/blue

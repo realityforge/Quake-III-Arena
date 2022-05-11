@@ -7,7 +7,7 @@ textures/ctf/blue_telep
 
         {
 
-	        clampmap textures/ctf/blue_telep.png
+	        clampmap textures/ctf/blue_telep
 		blendFunc add
                 //depthWrite
                 //tcMod stretch sin .9 0.1 0 .5
@@ -15,7 +15,7 @@ textures/ctf/blue_telep
                 rgbGen identity
 	}
         {
-	        clampmap textures/ctf/blue_telep2.png
+	        clampmap textures/ctf/blue_telep2
 		blendFunc add
                 //depthWrite
                 //tcMod stretch sin .9 0.1 0 .1
@@ -23,14 +23,14 @@ textures/ctf/blue_telep
                 rgbGen identity
         }
         {
-	        clampmap textures/ctf/telep.png
+	        clampmap textures/ctf/telep
 		alphaFunc GE128
                 depthWrite
                 tcmod rotate 20
 	        rgbGen identity
 	}
         {
-	        clampmap textures/ctf/telep.png
+	        clampmap textures/ctf/telep
 		alphaFunc GE128
                 depthWrite
                 tcMod stretch sin .7 0 0 0
@@ -55,27 +55,27 @@ textures/ctf/red_telep
 
         {
 
-	        clampmap textures/ctf/red_telep.png
+	        clampmap textures/ctf/red_telep
 		blendFunc add
                 //tcMod stretch sin .9 0.1 0 .5
                 tcmod rotate 327
                 rgbGen identity
 	}
         {
-	        clampmap textures/ctf/red_telep2.png
+	        clampmap textures/ctf/red_telep2
 		blendFunc add
                 //tcMod stretch sin .9 0.1 0 .1
                 tcmod rotate -211
                 rgbGen identity
         }
         {
-	        clampmap textures/ctf/telep.png
+	        clampmap textures/ctf/telep
 		alphaFunc GE128
                 tcmod rotate 20
 	        rgbGen identity
 	}
         {
-	        clampmap textures/ctf/telep.png
+	        clampmap textures/ctf/telep
 		alphaFunc GE128
                 tcMod stretch sin .7 0 0 0
                 tcmod rotate -20
@@ -94,14 +94,14 @@ textures/ctf/red_telep
 
 textures/ctf/test2_trans
 {
-	qer_editorimage textures/ctf/test2.png
+	qer_editorimage textures/ctf/test2
 	surfaceparm nonsolid
 	{
 		map $lightmap
 		rgbGen identity
 	}
 	{
-		map textures/ctf/test2.png
+		map textures/ctf/test2
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
@@ -110,7 +110,7 @@ textures/ctf/test2_trans
 
 textures/ctf/test2_r_trans
 {
-	qer_editorimage textures/ctf/test2_r.png
+	qer_editorimage textures/ctf/test2_r
 	surfaceparm nonsolid
 	{
 		map $lightmap
@@ -118,7 +118,7 @@ textures/ctf/test2_r_trans
 
 	}
 	{
-		map textures/ctf/test2_r.png
+		map textures/ctf/test2_r
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
@@ -126,10 +126,10 @@ textures/ctf/test2_r_trans
 
 textures/ctf/killblockctf_r
 {
-   qer_editorimage   textures/gothic_block/blocks15cgeomtrn.png
+   qer_editorimage   textures/gothic_block/blocks15cgeomtrn
 
         {
-		map textures/sfx/fire_ctfred.png
+		map textures/sfx/fire_ctfred
                 tcmod scroll 0 1
                 tcMod turb 0 .25 0 1.6
                 tcmod scale 2 2
@@ -137,7 +137,7 @@ textures/ctf/killblockctf_r
                 rgbGen identity
 	}
         {
-	        map textures/gothic_block/blocks18cgeomtrn2.png
+	        map textures/gothic_block/blocks18cgeomtrn2
 		//blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
                 blendFunc blend
                 tcmod rotate 30
@@ -145,14 +145,14 @@ textures/ctf/killblockctf_r
 	        rgbGen identity
 	}
         {
-	        map textures/gothic_block/blocks18cgeomtrn2.png
+	        map textures/gothic_block/blocks18cgeomtrn2
 		blendFunc blend
                 tcmod rotate 20
                 tcMod stretch sin .8 0.2 0 .1
 	        rgbGen identity
 	}
 	{
-	        map textures/gothic_block/blocks15cgeomtrn.png
+	        map textures/gothic_block/blocks15cgeomtrn
 		blendFunc blend
 	        rgbGen identity
 	}
@@ -164,10 +164,10 @@ textures/ctf/killblockctf_r
 }
 textures/ctf/killblockctf_b
 {
-   qer_editorimage   textures/gothic_block/killblockgeomtrn.png
+   qer_editorimage   textures/gothic_block/killblockgeomtrn
 
         {
-		map textures/sfx/fire_ctfblue.png
+		map textures/sfx/fire_ctfblue
                 tcmod scroll 0 1
                 tcMod turb 0 .25 0 1.6
                 tcmod scale 2 2
@@ -175,7 +175,7 @@ textures/ctf/killblockctf_b
                 rgbGen identity
 	}
         {
-	        map textures/gothic_block/blocks18cgeomtrn2.png
+	        map textures/gothic_block/blocks18cgeomtrn2
 		//blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
                 blendFunc blend
                 tcmod rotate 30
@@ -183,14 +183,14 @@ textures/ctf/killblockctf_b
 	        rgbGen identity
 	}
         {
-	        map textures/gothic_block/blocks18cgeomtrn2.png
+	        map textures/gothic_block/blocks18cgeomtrn2
 		blendFunc blend
                 tcmod rotate 20
                 tcMod stretch sin .8 0.2 0 .1
 	        rgbGen identity
 	}
 	{
-	        map textures/gothic_block/killblockgeomtrn.png
+	        map textures/gothic_block/killblockgeomtrn
 		blendFunc blend
 	        rgbGen identity
 	}
@@ -202,21 +202,21 @@ textures/ctf/killblockctf_b
 }
 textures/ctf/ctf_arch_b_shiny
 {
-     qer_editorimage textures/ctf/ctf_arch_b.png
+     qer_editorimage textures/ctf/ctf_arch_b
 	   {
-		map textures/ctf/ctf_arch_b.png
+		map textures/ctf/ctf_arch_b
                 blendFunc GL_ONE GL_ZERO
 		rgbGen identity
 	}
         {
-                map textures/sfx/specular.png
+                map textures/sfx/specular
                 blendFunc GL_ONE GL_ONE
                 tcGen environment
                 tcmod scale 10 10
                 rgbGen identity
 	}
         {
-		map textures/ctf/ctf_arch_b.png
+		map textures/ctf/ctf_arch_b
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -230,21 +230,21 @@ textures/ctf/ctf_arch_b_shiny
 
 textures/ctf/ctf_arch_r_shiny
 {
-	qer_editorimage textures/ctf/ctf_arch_r.png
+	qer_editorimage textures/ctf/ctf_arch_r
         {
-		map textures/ctf/ctf_arch_r.png
+		map textures/ctf/ctf_arch_r
                 blendFunc GL_ONE GL_ZERO
 		rgbGen identity
 	}
         {
-                map textures/sfx/specular.png
+                map textures/sfx/specular
                 blendFunc GL_ONE GL_ONE
                 tcGen environment
                 tcmod scale 10 10
                 rgbGen identity
 	}
         {
-		map textures/ctf/ctf_arch_r.png
+		map textures/ctf/ctf_arch_r
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -258,7 +258,7 @@ textures/ctf/ctf_arch_r_shiny
 
 textures/gothic_door/door02_bred2_shiny
 {
-qer_editorimage textures/gothic_door/door02_bred2.png
+qer_editorimage textures/gothic_door/door02_bred2
 	{
 		map $lightmap
 		rgbGen identity
@@ -266,7 +266,7 @@ qer_editorimage textures/gothic_door/door02_bred2.png
 
 
         {
-		map textures/gothic_door/door02_bred2.png
+		map textures/gothic_door/door02_bred2
                 blendFunc GL_dst_color GL_SRC_ALPHA
 		alphagen lightingspecular
 		rgbGen identity
@@ -277,7 +277,7 @@ qer_editorimage textures/gothic_door/door02_bred2.png
 
 textures/gothic_door/door02_eblue2_shiny
 {
-qer_editorimage textures/gothic_door/door02_eblue2.png
+qer_editorimage textures/gothic_door/door02_eblue2
 
 	{
 		map $lightmap
@@ -286,7 +286,7 @@ qer_editorimage textures/gothic_door/door02_eblue2.png
 
 
         {
-		map textures/gothic_door/door02_eblue2.png
+		map textures/gothic_door/door02_eblue2
                 blendFunc GL_dst_color GL_SRC_ALPHA
 		alphagen lightingspecular
 		rgbGen identity
@@ -306,7 +306,7 @@ textures/ctf/red_scary4_d3fin
 
 
         {
-		map textures/ctf/red_scary4_d3fin.png
+		map textures/ctf/red_scary4_d3fin
                 blendFunc GL_dst_color GL_SRC_ALPHA
 		alphagen lightingspecular
 		rgbGen identity
@@ -316,7 +316,7 @@ textures/ctf/red_scary4_d3fin
 
 textures/ctf/ctf_tower_bluefin_shiny
 {
-qer_editorimage textures/ctf/ctf_tower_bluefin.png
+qer_editorimage textures/ctf/ctf_tower_bluefin
 	{
 		map $lightmap
 		rgbGen identity
@@ -324,7 +324,7 @@ qer_editorimage textures/ctf/ctf_tower_bluefin.png
 
 
         {
-		map textures/ctf/ctf_tower_bluefin.png
+		map textures/ctf/ctf_tower_bluefin
                 blendFunc GL_dst_color GL_SRC_ALPHA
 		alphagen lightingspecular
 		rgbGen identity
@@ -335,7 +335,7 @@ qer_editorimage textures/ctf/ctf_tower_bluefin.png
 
 textures/ctf/ctf_tower_redfin_shiny
 {
-qer_editorimage textures/ctf/ctf_tower_redfin.png
+qer_editorimage textures/ctf/ctf_tower_redfin
 	{
 		map $lightmap
 		rgbGen identity
@@ -343,7 +343,7 @@ qer_editorimage textures/ctf/ctf_tower_redfin.png
 
 
         {
-		map textures/ctf/ctf_tower_redfin.png
+		map textures/ctf/ctf_tower_redfin
                 blendFunc GL_dst_color GL_SRC_ALPHA
 		alphagen lightingspecular
 		rgbGen identity
@@ -354,7 +354,7 @@ qer_editorimage textures/ctf/ctf_tower_redfin.png
 
 textures/ctf/metalbase09_bluekillblock_shiny
 {
-qer_editorimage textures/ctf/metalbase09_bluekillblock.png
+qer_editorimage textures/ctf/metalbase09_bluekillblock
 	{
 		map $lightmap
 		rgbGen identity
@@ -362,7 +362,7 @@ qer_editorimage textures/ctf/metalbase09_bluekillblock.png
 
 
         {
-		map textures/ctf/metalbase09_bluekillblock.png
+		map textures/ctf/metalbase09_bluekillblock
                 blendFunc GL_dst_color GL_SRC_ALPHA
 		alphagen lightingspecular
 		rgbGen identity
@@ -380,7 +380,7 @@ textures/ctf/red_scary4_cfin
 
 
         {
-		map textures/ctf/red_scary4_cfin.png
+		map textures/ctf/red_scary4_cfin
                 blendFunc GL_dst_color GL_SRC_ALPHA
 		alphagen lightingspecular
 		rgbGen identity
@@ -399,7 +399,7 @@ textures/ctf/red_scary4_csansfacefin
 
 
         {
-		map textures/ctf/red_scary4_csansfacefin.png
+		map textures/ctf/red_scary4_csansfacefin
                 blendFunc GL_dst_color GL_SRC_ALPHA
 		alphagen lightingspecular
 		rgbGen identity
@@ -419,7 +419,7 @@ textures/ctf/tallblue_2_fin
 
 
         {
-		map textures/ctf/tallblue_2_fin.png
+		map textures/ctf/tallblue_2_fin
                 blendFunc GL_dst_color GL_SRC_ALPHA
 		alphagen lightingspecular
 		rgbGen identity
@@ -429,7 +429,7 @@ textures/ctf/tallblue_2_fin
 
 textures/ctf/tallblue_1L_fin_shiny
 {
-qer_editorimage textures/ctf/tallblue_1L_fin.png
+qer_editorimage textures/ctf/tallblue_1L_fin
 	{
 		map $lightmap
 		rgbGen identity
@@ -437,7 +437,7 @@ qer_editorimage textures/ctf/tallblue_1L_fin.png
 
 
         {
-		map textures/ctf/tallblue_1R_fin.png
+		map textures/ctf/tallblue_1R_fin
                 blendFunc GL_dst_color GL_SRC_ALPHA
 		alphagen lightingspecular
 		rgbGen identity
@@ -447,7 +447,7 @@ qer_editorimage textures/ctf/tallblue_1L_fin.png
 
 textures/ctf/tallblue_1R_fin_shiny
 {
-qer_editorimage textures/ctf/tallblue_1R_fin.png
+qer_editorimage textures/ctf/tallblue_1R_fin
 	{
 		map $lightmap
 		rgbGen identity
@@ -455,7 +455,7 @@ qer_editorimage textures/ctf/tallblue_1R_fin.png
 
 
         {
-		map textures/ctf/tallblue_1R_fin.png
+		map textures/ctf/tallblue_1R_fin
                 blendFunc GL_dst_color GL_SRC_ALPHA
 		alphagen lightingspecular
 		rgbGen identity
@@ -475,7 +475,7 @@ textures/ctf/tallblue_2b_fin
 
 
         {
-		map textures/ctf/tallblue_2b_fin.png
+		map textures/ctf/tallblue_2b_fin
                 blendFunc GL_dst_color GL_SRC_ALPHA
 		alphagen lightingspecular
 		rgbGen identity
@@ -485,7 +485,7 @@ textures/ctf/tallblue_2b_fin
 
 textures/ctf/tallblue_4c_fin_shiny
 {
-qer_editorimage textures/ctf/tallblue_4c_fin.png
+qer_editorimage textures/ctf/tallblue_4c_fin
 
 	{
 		map $lightmap
@@ -494,7 +494,7 @@ qer_editorimage textures/ctf/tallblue_4c_fin.png
 
 
         {
-		map textures/ctf/tallblue_4c_fin.png
+		map textures/ctf/tallblue_4c_fin
                 blendFunc GL_dst_color GL_SRC_ALPHA
 		alphagen lightingspecular
 		rgbGen identity
@@ -515,7 +515,7 @@ textures/ctf/tallblue_4bsmall_fin
 
 
         {
-		map textures/ctf/tallblue_4bsmall_fin.png
+		map textures/ctf/tallblue_4bsmall_fin
                 blendFunc GL_dst_color GL_SRC_ALPHA
 		alphagen lightingspecular
 		rgbGen identity
@@ -534,7 +534,7 @@ textures/ctf/tallblue_5esmallb_fin
 
 
         {
-		map textures/ctf/tallblue_5esmallb_fin.png
+		map textures/ctf/tallblue_5esmallb_fin
                 blendFunc GL_dst_color GL_SRC_ALPHA
 		alphagen lightingspecular
 		rgbGen identity
@@ -551,11 +551,11 @@ textures/ctf/ctf_blueflag
         cull none
 
         {
-		map textures/ctf/ctf_blueflag.png
+		map textures/ctf/ctf_blueflag
 		rgbGen identity
 	}
         {
-		map textures/effects/redflagmap.png
+		map textures/effects/redflagmap
                 tcGen environment
                 tcmod scale 9 3
                 tcmod scroll .1 .7
@@ -564,7 +564,7 @@ textures/ctf/ctf_blueflag
                 rgbGen identity
 	}
         {
-		map textures/ctf/ctf_blueflag.png
+		map textures/ctf/ctf_blueflag
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -574,7 +574,7 @@ textures/ctf/ctf_blueflag
 		rgbGen identity
 	}
         {
-        	map textures/sfx/shadow.png
+        	map textures/sfx/shadow
                 tcGen environment
                 //blendFunc GL_ONE GL_ONE
                 blendFunc GL_DST_COLOR GL_ZERO
@@ -590,11 +590,11 @@ textures/ctf/ctf_redflag
         cull none
 
         {
-		map textures/ctf/ctf_redflag.png
+		map textures/ctf/ctf_redflag
 		rgbGen identity
 	}
         {
-		map textures/effects/blueflagmap.png
+		map textures/effects/blueflagmap
                  tcGen environment
                 tcmod scale 9 3
                 tcmod scroll .1 .7
@@ -603,7 +603,7 @@ textures/ctf/ctf_redflag
                 rgbGen identity
 	}
         {
-		map textures/ctf/ctf_redflag.png
+		map textures/ctf/ctf_redflag
                 blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
 	}
@@ -614,7 +614,7 @@ textures/ctf/ctf_redflag
 	}
         {
 
-        	map textures/sfx/shadow.png
+        	map textures/sfx/shadow
                 tcGen environment
                 //blendFunc GL_ONE GL_ONE
                 blendFunc GL_DST_COLOR GL_ZERO
@@ -625,7 +625,7 @@ powerups/redflag
 {
 	deformVertexes wave 100 sin 3 0 0 0
 	{
-		map textures/effects/redflagmap.png
+		map textures/effects/redflagmap
 		blendfunc GL_ONE GL_ONE
 		tcGen environment
 		tcMod turb 0 0.2 0 1
@@ -636,7 +636,7 @@ powerups/blueflag
 {
 	deformVertexes wave 100 sin 3 0 0 0
 	{
-		map textures/effects/blueflagmap.png
+		map textures/effects/blueflagmap
 		blendfunc GL_ONE GL_ONE
 		tcGen environment
 		tcMod turb 0 0.2 0 1
@@ -648,7 +648,7 @@ sprites/friend
 	nomipmaps
 	nopicmip
 	{
-		map sprites/friend1.png
+		map sprites/friend1
 		blendfunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }
@@ -658,7 +658,7 @@ sprites/foe
 	nomipmaps
 	nopicmip
 	{
-		map sprites/foe2.png
+		map sprites/foe2
 		blendfunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 	}
 }

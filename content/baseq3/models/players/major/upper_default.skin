@@ -1,6 +1,6 @@
 tag_head,
-u_larm,models/players/major/major.png
+u_larm,models/players/major/major
 tag_weapon,
-u_rarm,models/players/major/major.png
-u_torso,models/players/major/major.png
+u_rarm,models/players/major/major
+u_torso,models/players/major/major
 tag_torso,

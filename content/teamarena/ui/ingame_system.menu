@@ -30,7 +30,7 @@ itemDef {
 	name window
 	rect 0 10 64 64
 	style 3
-	background "ui/assets/ingameleftcorner.png"
+	background "ui/assets/ingameleftcorner"
 	visible 1
 	decoration
 	}
@@ -39,7 +39,7 @@ itemDef {
 	name window
 	rect 64 10 64 8
 	style 3
-	background "ui/assets/ingametop.png"
+	background "ui/assets/ingametop"
 	visible 1
 	decoration
 	}
@@ -48,7 +48,7 @@ itemDef {
 	name window
 	rect 167 10 64 8
 	style 3
-	background "ui/assets/ingametop.png"
+	background "ui/assets/ingametop"
 	visible 1
 	decoration
 	}
@@ -57,7 +57,7 @@ itemDef {
 	name window
 	rect 213 10 64 64
 	style 3
-	background "ui/assets/ingamerightcorner.png"
+	background "ui/assets/ingamerightcorner"
 	visible 1
 	decoration
 	}
@@ -65,7 +65,7 @@ itemDef {
 	name window
 	rect 103 0 64 16
 	style 3
-	background "ui/assets/ingameconnection.png"
+	background "ui/assets/ingameconnection"
 	visible 1
 	decoration
 	}
@@ -73,7 +73,7 @@ itemDef {
 	name window
 	rect 0 264 64 64
 	style 3
-	background "ui/assets/ingameleftcornerb.png"
+	background "ui/assets/ingameleftcornerb"
 	visible 1
 	decoration
 	}
@@ -81,7 +81,7 @@ itemDef {
 	name window
 	rect 213 264 64 64
 	style 3
-	background "ui/assets/ingamerightcornerb.png"
+	background "ui/assets/ingamerightcornerb"
 	visible 1
 	decoration
 	}
@@ -90,7 +90,7 @@ itemDef {
 	name window
 	rect 0 64 16 64
 	style 3
-	background "ui/assets/ingameleft.png"
+	background "ui/assets/ingameleft"
 	visible 1
 	decoration
 	}
@@ -100,7 +100,7 @@ itemDef {
 	name window
 	rect 0 128 16 64
 	style 3
-	background "ui/assets/ingameleft.png"
+	background "ui/assets/ingameleft"
 	visible 1
 	decoration
 	}
@@ -109,7 +109,7 @@ itemDef {
 	name window
 	rect 0 192 16 74
 	style 3
-	background "ui/assets/ingameleft.png"
+	background "ui/assets/ingameleft"
 	visible 1
 	decoration
 	}
@@ -118,7 +118,7 @@ itemDef {
 	name window
 	rect 261 64 16 64
 	style 3
-	background "ui/assets/ingameright.png"
+	background "ui/assets/ingameright"
 	visible 1
 	decoration
 	}
@@ -128,7 +128,7 @@ itemDef {
 	name window
 	rect 261 128 16 64
 	style 3
-	background "ui/assets/ingameright.png"
+	background "ui/assets/ingameright"
 	visible 1
 	decoration
 	}
@@ -136,7 +136,7 @@ itemDef {
 	name window
 	rect 261 192 16 74
 	style 3
-	background "ui/assets/ingameright.png"
+	background "ui/assets/ingameright"
 	visible 1
 	decoration
 	}
@@ -145,7 +145,7 @@ itemDef {
 	name window
 	rect 64 320 74 8
 	style 3
-	background "ui/assets/ingamebottom.png"
+	background "ui/assets/ingamebottom"
 	visible 1
 	decoration
 	}
@@ -153,7 +153,7 @@ itemDef {
 	name window
 	rect 138 320 74 8
 	style 3
-	background "ui/assets/ingamebottom.png"
+	background "ui/assets/ingamebottom"
 	visible 1
 	decoration
 	}
@@ -165,7 +165,7 @@ itemDef {
 	textscale .25
 	group grpControlbutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 30 25 65 20
 	textalign 1
 	textalignx 32
@@ -388,7 +388,7 @@ itemDef {
 	textscale .25
 	group grpControlbutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 105 25 65 20
 	textalign 1
 	textalignx 32
@@ -424,7 +424,7 @@ itemDef {
 	textscale .25
 	group grpControlbutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 180 25 65 20
 	textalign 1
 	textalignx 32
@@ -599,7 +599,7 @@ itemDef {
 	textscale .25
 	group grpsystem
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 101 295 75 20
 	textalign 1
 	textalignx 37

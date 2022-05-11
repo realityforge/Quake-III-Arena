@@ -1,6 +1,6 @@
 textures/base_object/plasmalogo_1
 {
-	q3map_lightimage textures/base_object/plasmalogo.png
+	q3map_lightimage textures/base_object/plasmalogo
 	//surfaceparm nomarks
 	q3map_surfacelight 1000
 	{
@@ -8,12 +8,12 @@ textures/base_object/plasmalogo_1
 		rgbGen identity
 	}
 	{
-		map textures/base_object/plasmalogo_1.png
+		map textures/base_object/plasmalogo_1
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/base_object/plasmalogo.png
+		map textures/base_object/plasmalogo
 		rgbGen wave triangle 0.5 0.5 0.5 0.15
 		blendfunc GL_ONE GL_ONE
 	}
@@ -21,8 +21,8 @@ textures/base_object/plasmalogo_1
 }
 textures/base_object/quadsign_1
 {
-	qer_editorimage base_object/quadsign1.png
-	q3map_lightimage textures/base_object/quadsign1.blend.png
+	qer_editorimage base_object/quadsign1
+	q3map_lightimage textures/base_object/quadsign1.blend
 	//surfaceparm nomarks
 	q3map_surfacelight 1000
 	{
@@ -30,12 +30,12 @@ textures/base_object/quadsign_1
 		rgbGen identity
 	}
 	{
-		map textures/base_object/quadsign1.png
+		map textures/base_object/quadsign1
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/base_object/quadsign1.blend.png
+		map textures/base_object/quadsign1.blend
 		rgbGen wave triangle 0.5 0.5 0.5 0.15
 		blendfunc GL_ONE GL_ONE
 	}
@@ -43,8 +43,8 @@ textures/base_object/quadsign_1
 }
 textures/base_object/hastesign_1
 {
-	qer_editorimage base_object/hastesign1.png
-	q3map_lightimage textures/base_object/hastesign1.blend.png
+	qer_editorimage base_object/hastesign1
+	q3map_lightimage textures/base_object/hastesign1.blend
 	//surfaceparm nomarks
 	q3map_surfacelight 1000
 	{
@@ -52,12 +52,12 @@ textures/base_object/hastesign_1
 		rgbGen identity
 	}
 	{
-		map textures/base_object/hastesign1.png
+		map textures/base_object/hastesign1
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/base_object/hastesign1.blend.png
+		map textures/base_object/hastesign1.blend
 		rgbGen wave triangle 0.5 0.5 0.5 0.15
 		blendfunc GL_ONE GL_ONE
 	}
@@ -71,7 +71,7 @@ textures/base_object/boxQ3_1
 		rgbGen identity
 	}
 	{
-		map textures/base_object/boxQ3_1.png
+		map textures/base_object/boxQ3_1
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
@@ -87,13 +87,13 @@ textures/base_object/boxQ3_2
 		rgbGen identity
 	}
 	{
-		map textures/base_object/boxQ3_2.png
+		map textures/base_object/boxQ3_2
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 		rgbGen identity
 		alphaGen lightingSpecular
 	}
 	{
-		map textures/base_object/boxQ3_2.blend.png
+		map textures/base_object/boxQ3_2.blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
@@ -106,7 +106,7 @@ textures/base_object/boxQ3_3
 		rgbGen identity
 	}
 	{
-		map textures/base_object/boxQ3_3.png
+		map textures/base_object/boxQ3_3
 		rgbGen identity
 		alphaGen lightingSpecular
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
@@ -120,7 +120,7 @@ textures/base_object/boxq3_4
 		rgbGen identity
 	}
 	{
-		map textures/base_object/boxq3_4.png
+		map textures/base_object/boxq3_4
 		rgbGen identity
 		alphaGen lightingSpecular
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA

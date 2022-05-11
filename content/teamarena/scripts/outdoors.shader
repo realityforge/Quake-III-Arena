@@ -4,7 +4,7 @@
 
 textures/outdoors/groundtest_1
 {
-	qer_editorimage textures/organics/grass3.png
+	qer_editorimage textures/organics/grass3
 	tessSize 512
 	//cull front
 	deformVertexes wave 256 sin 5 10 0 .0000001
@@ -15,7 +15,7 @@ textures/outdoors/groundtest_1
 	}
 
 	//{
-	//	map textures/organics/grass3.png
+	//	map textures/organics/grass3
 	//	blendFunc GL_DST_COLOR GL_SRC_COLOR
 	//	detail
 	//	tcMod scale .25 .21
@@ -23,7 +23,7 @@ textures/outdoors/groundtest_1
 
 	//}
 	{
-		map textures/organics/grass3.png
+		map textures/organics/grass3
 		blendFunc filter
 	//	tcMod scale 4 4
 		rgbgen identity

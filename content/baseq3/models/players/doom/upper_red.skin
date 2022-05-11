@@ -1,6 +1,6 @@
-u_torso,models/players/doom/red.png
+u_torso,models/players/doom/red
 tag_head,
 tag_torso,
 tag_weapon,
-u_larm,models/players/doom/red.png
-u_rarm,models/players/doom/red.png
+u_larm,models/players/doom/red
+u_rarm,models/players/doom/red

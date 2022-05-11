@@ -1,6 +1,6 @@
 tag_head,
 tag_weapon,
-u_torso,models/players/lucy/red.png
-u_larm,models/players/lucy/red.png
-u_rarm,models/players/lucy/red.png
+u_torso,models/players/lucy/red
+u_larm,models/players/lucy/red
+u_rarm,models/players/lucy/red
 tag_torso,

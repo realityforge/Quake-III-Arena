@@ -32,7 +32,7 @@ itemDef {
 	name window
 	rect 0 10 64 64
 	style 3
-	background "ui/assets/ingameleftcorner.png"
+	background "ui/assets/ingameleftcorner"
 	visible 1
 	decoration
 	}
@@ -40,7 +40,7 @@ itemDef {
 	name window
 	rect 136 10 64 64
 	style 3
-	background "ui/assets/ingamerightcorner.png"
+	background "ui/assets/ingamerightcorner"
 	visible 1
 	decoration
 	}
@@ -48,7 +48,7 @@ itemDef {
 	name window
 	rect 64 0 72 16
 	style 3
-	background "ui/assets/ingameconnection.png"
+	background "ui/assets/ingameconnection"
 	visible 1
 	decoration
 	}
@@ -56,7 +56,7 @@ itemDef {
 	name window
 	rect 0 177 64 64
 	style 3
-	background "ui/assets/ingameleftcornerb.png"
+	background "ui/assets/ingameleftcornerb"
 	visible 1
 	decoration
 	}
@@ -64,7 +64,7 @@ itemDef {
 	name window
 	rect 136 177 64 64
 	style 3
-	background "ui/assets/ingamerightcornerb.png"
+	background "ui/assets/ingamerightcornerb"
 	visible 1
 	decoration
 	}
@@ -72,7 +72,7 @@ itemDef {
 	name window
 	rect 0 64 16 64
 	style 3
-	background "ui/assets/ingameleft.png"
+	background "ui/assets/ingameleft"
 	visible 1
 	decoration
 	}
@@ -80,7 +80,7 @@ itemDef {
 	name window
 	rect 0 128 16 64
 	style 3
-	background "ui/assets/ingameleft.png"
+	background "ui/assets/ingameleft"
 	visible 1
 	decoration
 	}
@@ -89,7 +89,7 @@ itemDef {
 	name window
 	rect 184 64 16 64
 	style 3
-	background "ui/assets/ingameright.png"
+	background "ui/assets/ingameright"
 	visible 1
 	decoration
 	}
@@ -97,7 +97,7 @@ itemDef {
 	name window
 	rect 184 128 16 64
 	style 3
-	background "ui/assets/ingameright.png"
+	background "ui/assets/ingameright"
 	visible 1
 	decoration
 	}
@@ -105,7 +105,7 @@ itemDef {
 	name window
 	rect 64 233 96 8
 	style 3
-	background "ui/assets/ingamebottom.png"
+	background "ui/assets/ingamebottom"
 	visible 1
 	decoration
 	}
@@ -135,7 +135,7 @@ itemDef {
 		group grpicon
 		style 3		
 		rect 84 45 32 32
-		background "ui/assets/statusbar/assault.png"
+		background "ui/assets/statusbar/assault"
       		visible 0 
     		}
 	itemDef {
@@ -143,7 +143,7 @@ itemDef {
 		group grpicon
 		style 3		
 		rect 84 45 32 32
-		background "ui/assets/statusbar/defend.png"
+		background "ui/assets/statusbar/defend"
       		visible 0 
     		}
 	itemDef {
@@ -151,7 +151,7 @@ itemDef {
 		group grpicon
 		style 3		
 		rect 84 45 32 32
-		background "ui/assets/statusbar/patrol.png"
+		background "ui/assets/statusbar/patrol"
       		visible 0 
     		}
 	itemDef {
@@ -159,7 +159,7 @@ itemDef {
 		group grpicon
 		style 3		
 		rect 84 45 32 32
-		background "ui/assets/statusbar/follow.png"
+		background "ui/assets/statusbar/follow"
       		visible 0 
     		}
 	itemDef {
@@ -167,7 +167,7 @@ itemDef {
 		group grpicon
 		style 3		
 		rect 84 45 32 32
-		background "ui/assets/statusbar/camp.png"
+		background "ui/assets/statusbar/camp"
       		visible 0 
     		}
 	itemDef {
@@ -175,7 +175,7 @@ itemDef {
 		group grpicon
 		style 3		
 		rect 84 45 32 32
-		background "ui/assets/statusbar/team_leader.png"
+		background "ui/assets/statusbar/team_leader"
       		visible 0 
     		}
 itemDef 	{
@@ -183,7 +183,7 @@ itemDef 	{
 		group grpicon
 		style 3		
 		rect 84 45 32 32
-		background "ui/assets/statusbar/retrieve.png"
+		background "ui/assets/statusbar/retrieve"
       		visible 0 
     		}
 itemDef 	{
@@ -191,7 +191,7 @@ itemDef 	{
 		group grpicon
 		style 3		
 		rect 84 45 32 32
-		background "ui/assets/statusbar/escort.png"
+		background "ui/assets/statusbar/escort"
       		visible 0 
     		}
 	

@@ -1,6 +1,6 @@
 tag_head,
-u_larm,models/players/ranger/wrack.png
+u_larm,models/players/ranger/wrack
 tag_weapon,
-u_rarm,models/players/ranger/wrack.png
-u_torso,models/players/ranger/wrack.png
+u_rarm,models/players/ranger/wrack
+u_torso,models/players/ranger/wrack
 tag_torso,

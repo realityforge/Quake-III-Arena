@@ -35,7 +35,7 @@ itemDef {
 	name window
 	rect 0 10 64 64
 	style 3
-	background "ui/assets/ingameleftcorner.png"
+	background "ui/assets/ingameleftcorner"
 	visible 1
 	decoration
 	}
@@ -43,7 +43,7 @@ itemDef {
 	name window
 	rect 64 10 96 8
 	style 3
-	background "ui/assets/ingametop.png"
+	background "ui/assets/ingametop"
 	visible 1
 	decoration
 	}
@@ -51,7 +51,7 @@ itemDef {
 	name window
 	rect 219 10 96 8
 	style 3
-	background "ui/assets/ingametop.png"
+	background "ui/assets/ingametop"
 	visible 1
 	decoration
 	}
@@ -59,7 +59,7 @@ itemDef {
 	name window
 	rect 311 10 64 64
 	style 3
-	background "ui/assets/ingamerightcorner.png"
+	background "ui/assets/ingamerightcorner"
 	visible 1
 	decoration
 	}
@@ -67,7 +67,7 @@ itemDef {
 	name window
 	rect 155 0 64 16
 	style 3
-	background "ui/assets/ingameconnection.png"
+	background "ui/assets/ingameconnection"
 	visible 1
 	decoration
 	}
@@ -75,7 +75,7 @@ itemDef {
 	name window
 	rect 0 274 64 64
 	style 3
-	background "ui/assets/ingameleftcornerb.png"
+	background "ui/assets/ingameleftcornerb"
 	visible 1
 	decoration
 	}
@@ -83,7 +83,7 @@ itemDef {
 	name window
 	rect 311 274 64 64
 	style 3
-	background "ui/assets/ingamerightcornerb.png"
+	background "ui/assets/ingamerightcornerb"
 	visible 1
 	decoration
 	}
@@ -92,7 +92,7 @@ itemDef {
 	name window
 	rect 0 64 16 64
 	style 3
-	background "ui/assets/ingameleft.png"
+	background "ui/assets/ingameleft"
 	visible 1
 	decoration
 	}
@@ -102,7 +102,7 @@ itemDef {
 	name window
 	rect 0 128 16 64
 	style 3
-	background "ui/assets/ingameleft.png"
+	background "ui/assets/ingameleft"
 	visible 1
 	decoration
 	}
@@ -111,7 +111,7 @@ itemDef {
 	name window
 	rect 0 192 16 96
 	style 3
-	background "ui/assets/ingameleft.png"
+	background "ui/assets/ingameleft"
 	visible 1
 	decoration
 	}
@@ -120,7 +120,7 @@ itemDef {
 	name window
 	rect 359 64 16 64
 	style 3
-	background "ui/assets/ingameright.png"
+	background "ui/assets/ingameright"
 	visible 1
 	decoration
 	}
@@ -130,7 +130,7 @@ itemDef {
 	name window
 	rect 359 128 16 64
 	style 3
-	background "ui/assets/ingameright.png"
+	background "ui/assets/ingameright"
 	visible 1
 	decoration
 	}
@@ -139,7 +139,7 @@ itemDef {
 	name window
 	rect 359 192 16 96
 	style 3
-	background "ui/assets/ingameright.png"
+	background "ui/assets/ingameright"
 	visible 1
 	decoration
 	}
@@ -150,7 +150,7 @@ itemDef {
 	name window
 	rect 64 330 96 8
 	style 3
-	background "ui/assets/ingamebottom.png"
+	background "ui/assets/ingamebottom"
 	visible 1
 	decoration
 	}
@@ -158,7 +158,7 @@ itemDef {
 	name window
 	rect 160 330 64 8
 	style 3
-	background "ui/assets/ingamebottom.png"
+	background "ui/assets/ingamebottom"
 	visible 1
 	decoration
 	}
@@ -166,7 +166,7 @@ itemDef {
 	name window
 	rect 224 330 87 8
 	style 3
-	background "ui/assets/ingamebottom.png"
+	background "ui/assets/ingamebottom"
 	visible 1
 	decoration
 	}
@@ -209,7 +209,7 @@ itemDef {
 	textscale .25
 	group grpControlbutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 25 25 50 20
 	textalign 1
 	textalignx 25
@@ -338,7 +338,7 @@ itemDef {
 	textscale .25
 	group grpControlbutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 80 25 50 20
 	textalign 1
 	textalignx 25
@@ -555,7 +555,7 @@ itemDef {
 	textscale .25
 	group grpControlbutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 135 25 50 20
 	textalign 1
 	textalignx 25
@@ -861,7 +861,7 @@ itemDef {
 	textscale .25
 	group grpControlbutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 190 25 50 20
 	textalign 1
 	textalignx 25
@@ -1009,7 +1009,7 @@ itemDef {
 	textscale .25
 	group grpControlbutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 245 25 50 20
 	textalign 1
 	textalignx 25
@@ -1258,7 +1258,7 @@ itemDef {
 	textscale .25
 	group grpControlbutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 300 25 50 20
 	textalign 1
 	textalignx 25

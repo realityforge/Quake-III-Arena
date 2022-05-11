@@ -346,7 +346,7 @@ itemDef {
 	type ITEM_TYPE_BUTTON
       	textscale .25
       	style WINDOW_STYLE_FILLED
-	background "ui/assets/sorttab.png"
+	background "ui/assets/sorttab"
       	rect 10 103 110 26 
 	textalign 1
       	textalignx 59		// center
@@ -373,7 +373,7 @@ itemDef {
       	text "Map Name"
       	textscale .25
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/sorttab.png"
+	background "ui/assets/sorttab"
       	rect 243 103 100 26
 	textalign 1
       	textalignx 50		// center
@@ -400,7 +400,7 @@ itemDef {
 	type ITEM_TYPE_BUTTON
 	textscale .25
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/sorttab.png"
+	background "ui/assets/sorttab"
 	rect 368 103 50 26
 	textalign 1
 	textalignx 25		// center
@@ -426,7 +426,7 @@ itemDef {
 	textscale .25
 	type ITEM_TYPE_BUTTON
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/sorttab.png"
+	background "ui/assets/sorttab"
 	rect 428 103 60 26
 	textalign 1
 	textalignx 30		// center
@@ -452,7 +452,7 @@ itemDef {
 	type ITEM_TYPE_BUTTON
 	textscale .25
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/sorttab.png"
+	background "ui/assets/sorttab"
 	rect 528 103 46 26
 	textalign 1
 	textalignx 23		// center
@@ -478,8 +478,8 @@ itemDef {
 	type ITEM_TYPE_BUTTON
       	textscale .3
 	style WINDOW_STYLE_FILLED
-	//background "ui/assets/button_red.png"
-	background "ui/assets/button_back.png"
+	//background "ui/assets/button_red"
+	background "ui/assets/button_back"
       	rect 16 67 105 26
 	textalign 1
       	textalignx 52		// center
@@ -498,7 +498,7 @@ itemDef {
 itemDef {
       	name refreshSource
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
  	rect 16 67 105 26
       	visible 1 
 	decoration  	  
@@ -507,7 +507,7 @@ itemDef {
 itemDef {
       	name refreshSource
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 4 67 13 26
       	visible 1 
 	decoration  	  
@@ -515,7 +515,7 @@ itemDef {
 itemDef {
       	name refreshSource
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 120 67 13 26
       	visible 1 
 	decoration  	  
@@ -529,7 +529,7 @@ itemDef {
       	textscale .3
 	style WINDOW_STYLE_FILLED
 	type ITEM_TYPE_BUTTON
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
       	rect 149 67 94 26
 	textalign 1
       	textalignx 46		// center
@@ -548,7 +548,7 @@ itemDef {
 itemDef {
       	name refreshFilter
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
       	rect 149 67 94 26
       	visible 1 
 	decoration  	  
@@ -558,7 +558,7 @@ itemDef {
 itemDef {
       	name refreshFilter
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 137 67 13 26
       	visible 1 
 	decoration  	  
@@ -567,7 +567,7 @@ itemDef {
 itemDef {
       	name refreshFilter
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 242 67 13 26
       	visible 1 
 	decoration  	  
@@ -581,7 +581,7 @@ itemDef {
 	textscale .3
 	style WINDOW_STYLE_FILLED
 	type ITEM_TYPE_BUTTON
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 271 67 94 26
 	textalign 1
 	textalignx 48		// center
@@ -598,7 +598,7 @@ itemDef {
 itemDef {
 	name viewSettings
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
 	rect 271 67 94 26
 	visible 1 
 	decoration  	  
@@ -607,7 +607,7 @@ itemDef {
 itemDef {
 	name viewSettings
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
 	rect 259 67 13 26
 	visible 1 
 	decoration  	  
@@ -616,7 +616,7 @@ itemDef {
 itemDef {
 	name viewSettings
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
 	rect 364 67 13 26
 	visible 1 
 	decoration  	  
@@ -636,7 +636,7 @@ itemDef {
 	type ITEM_TYPE_BUTTON
       	textscale .3
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
       	rect 20 395 92 26
 	textalign 1
       	textalignx 46		// center
@@ -653,7 +653,7 @@ itemDef {
 itemDef {
       	name password
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
 	rect 20 395 92 26
       	visible 1 
 	decoration  	  
@@ -662,7 +662,7 @@ itemDef {
 itemDef {
       	name password
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 14 395 7 26
       	visible 1 
 	decoration  	  
@@ -671,7 +671,7 @@ itemDef {
 itemDef {
       	name password
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 111 395 7 26
       	visible 1 
 	decoration  	  
@@ -684,7 +684,7 @@ itemDef {
 	type ITEM_TYPE_BUTTON
       	textscale .3
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
       	rect 148 395 92 26
 	textalign 1
       	textalignx 46		// center
@@ -700,7 +700,7 @@ itemDef {
 itemDef {
       	name createFavorite
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
 	rect 148 395 92 26
       	visible 1 
 	decoration  	  
@@ -709,7 +709,7 @@ itemDef {
 itemDef {
       	name createFavorite
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 142 395 7 26
       	visible 1 
 	decoration  	  
@@ -718,7 +718,7 @@ itemDef {
 itemDef {
       	name createFavorite
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 239 395 7 26
       	visible 1 
 	decoration  	  
@@ -734,7 +734,7 @@ itemDef {
 	type ITEM_TYPE_BUTTON
       	textscale .3
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	ownerdrawFlag UI_SHOW_NOTFAVORITESERVERS
       	rect 276 395 92 26
 	textalign 1
@@ -753,7 +753,7 @@ itemDef {
 itemDef {
       	name addFavorite
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
 	rect 276 395 92 26
       	visible 1 
 	decoration  	  
@@ -762,7 +762,7 @@ itemDef {
 itemDef {
       	name addFavorite
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 270 395 7 26
       	visible 1 
 	decoration  	  
@@ -771,7 +771,7 @@ itemDef {
 itemDef {
       	name addFavorite
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 367 395 7 26
       	visible 1 
 	decoration  	  
@@ -785,7 +785,7 @@ itemDef {
       	textscale .3
 	style WINDOW_STYLE_FILLED
 	ownerdrawFlag UI_SHOW_FAVORITESERVERS
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
       	rect 276 395 92 26
 	textalign 1
       	textalignx 46		// center
@@ -802,7 +802,7 @@ itemDef {
       	name delfavorite
 	style WINDOW_STYLE_SHADER
 	ownerdrawFlag UI_SHOW_FAVORITESERVERS
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
 	rect 276 395 92 26
       	visible 1 
 	decoration  	  
@@ -812,7 +812,7 @@ itemDef {
       	name delfavorite
 	style WINDOW_STYLE_SHADER
 	ownerdrawFlag UI_SHOW_FAVORITESERVERS
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 270 395 7 26
       	visible 1 
 	decoration  	  
@@ -822,7 +822,7 @@ itemDef {
       	name delfavorite
 	style WINDOW_STYLE_SHADER
 	ownerdrawFlag UI_SHOW_FAVORITESERVERS
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 367 395 7 26
       	visible 1 
 	decoration  	  
@@ -838,7 +838,7 @@ itemDef {
 	type ITEM_TYPE_BUTTON
       	textscale .3
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
       	rect 404 395 92 26
 	textalign 1
       	textalignx 46		// center
@@ -854,7 +854,7 @@ itemDef {
 itemDef {
       	name serverinfo
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
 	rect 404 395 92 26
       	visible 1 
 	decoration  	  
@@ -863,7 +863,7 @@ itemDef {
 itemDef {
       	name serverinfo
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 398 395 7 26
       	visible 1 
 	decoration  	  
@@ -872,7 +872,7 @@ itemDef {
 itemDef {
       	name serverinfo
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 495 395 7 26
       	visible 1 
 	decoration  	  
@@ -884,7 +884,7 @@ itemDef {
 	type ITEM_TYPE_BUTTON
       	textscale .3
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
       	rect 532 395 92 26
 	textalign 1
       	textalignx 46		// center
@@ -900,7 +900,7 @@ itemDef {
 itemDef {
       	name serverinfo
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/framebutton.png"
+	background "ui/assets/framebutton"
 	rect 532 395 92 26
       	visible 1 
 	decoration  	  
@@ -909,7 +909,7 @@ itemDef {
 itemDef {
       	name serverinfo
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/leftbutton.png"
+	background "ui/assets/leftbutton"
       	rect 526 395 7 26
       	visible 1 
 	decoration  	  
@@ -918,7 +918,7 @@ itemDef {
 itemDef {
       	name serverinfo
 	style WINDOW_STYLE_SHADER
-	background "ui/assets/rightbutton.png"
+	background "ui/assets/rightbutton"
       	rect 623 395 7 26
       	visible 1 
 	decoration  	  
@@ -951,7 +951,7 @@ itemDef {
     itemDef {
       	name back
 	style 3
-      	background "ui/assets/backarrow.png"
+      	background "ui/assets/backarrow"
 	rect 16 424 50 50 
       	visible 1 
       	action { close joinserver ; open main }
@@ -961,7 +961,7 @@ itemDef {
 itemDef {
       	name back_alt
       	style WINDOW_STYLE_SHADER
-	background "ui/assets/backarrow_alt.png"
+	background "ui/assets/backarrow_alt"
 	rect 14 422 54 54 
       	backcolor 0 0 0 0
       	forecolor 1 1 1 1
@@ -978,7 +978,7 @@ itemDef {
       	name accept
       	style 3	
      	rect 574 424 50 50 
-     	background "ui/assets/forwardarrow.png"
+     	background "ui/assets/forwardarrow"
       	backcolor 0 0 0 0
       	forecolor 1 1 1 1
       	visible 1 
@@ -990,7 +990,7 @@ itemDef {
       	name accept_alt
       	style WINDOW_STYLE_SHADER
      	rect 572 422 54 54 
-     	background "ui/assets/forwardarrow_alt.png"
+     	background "ui/assets/forwardarrow_alt"
       	backcolor 0 0 0 0
 		type ITEM_TYPE_BUTTON
       	forecolor 1 1 1 1
@@ -1270,7 +1270,7 @@ itemDef {
 itemDef {
       	name fadebox
       	style WINDOW_STYLE_FILLED
- 	background "ui/assets/fadebox.png"
+ 	background "ui/assets/fadebox"
 	forecolor 0 0 0 1
 	backcolor 0 0 0 1
 	rect 0 0 640 480

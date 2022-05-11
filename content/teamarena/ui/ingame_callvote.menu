@@ -30,7 +30,7 @@ itemDef {
 	name window
 	rect 0 10 64 64
 	style 3
-	background "ui/assets/ingameleftcorner.png"
+	background "ui/assets/ingameleftcorner"
 	visible 1
 	decoration
 	}
@@ -38,7 +38,7 @@ itemDef {
 	name window
 	rect 64 10 64 8
 	style 3
-	background "ui/assets/ingametop.png"
+	background "ui/assets/ingametop"
 	visible 1
 	decoration
 	}
@@ -46,7 +46,7 @@ itemDef {
 	name window
 	rect 128 10 64 8
 	style 3
-	background "ui/assets/ingametop.png"
+	background "ui/assets/ingametop"
 	visible 1
 	decoration
 	}
@@ -54,7 +54,7 @@ itemDef {
 	name window
 	rect 226 10 64 64
 	style 3
-	background "ui/assets/ingamerightcorner.png"
+	background "ui/assets/ingamerightcorner"
 	visible 1
 	decoration
 	}
@@ -62,7 +62,7 @@ itemDef {
 	name window
 	rect 168 0 64 16
 	style 3
-	background "ui/assets/ingameconnection.png"
+	background "ui/assets/ingameconnection"
 	visible 1
 	decoration
 	}
@@ -70,7 +70,7 @@ itemDef {
 	name window
 	rect 0 128 64 64
 	style 3
-	background "ui/assets/ingameleftcornerb.png"
+	background "ui/assets/ingameleftcornerb"
 	visible 1
 	decoration
 	}
@@ -78,7 +78,7 @@ itemDef {
 	name window
 	rect 226 128 64 64
 	style 3
-	background "ui/assets/ingamerightcornerb.png"
+	background "ui/assets/ingamerightcornerb"
 	visible 1
 	decoration
 	}
@@ -87,7 +87,7 @@ itemDef {
 	name window
 	rect 0 64 16 64
 	style 3
-	background "ui/assets/ingameleft.png"
+	background "ui/assets/ingameleft"
 	visible 1
 	decoration
 	}
@@ -96,7 +96,7 @@ itemDef {
 	name window
 	rect 274 64 16 64
 	style 3
-	background "ui/assets/ingameright.png"
+	background "ui/assets/ingameright"
 	visible 1
 	decoration
 	}
@@ -107,7 +107,7 @@ itemDef {
 	name window
 	rect 64 184 64 8
 	style 3
-	background "ui/assets/ingamebottom.png"
+	background "ui/assets/ingamebottom"
 	visible 1
 	decoration
 	}
@@ -115,7 +115,7 @@ itemDef {
 	name window
 	rect 128 184 98 8
 	style 3
-	background "ui/assets/ingamebottom.png"
+	background "ui/assets/ingamebottom"
 	visible 1
 	decoration
 	}
@@ -129,7 +129,7 @@ itemDef {
 	textscale .25
 	group grpbutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 20 25 45 20
 	type 1
 	textalign 1
@@ -148,7 +148,7 @@ itemDef {
 	textscale .25
 	group grpbutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 71 25 45 20
 	type 1
 	textalign 1
@@ -167,7 +167,7 @@ itemDef {
 	textscale .25
 	group grpbutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 122 25 45 20
 	type 1
 	textalign 1
@@ -186,7 +186,7 @@ itemDef {
 	textscale .25
 	group grpbutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 173 25 45 20
 	type 1
 	textalign 1
@@ -205,7 +205,7 @@ itemDef {
 	textscale .25
 	group grpbutton
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 225 25 45 20
 	type 1
 	textalign 1
@@ -292,7 +292,7 @@ itemDef {
 	textscale .25
 	group grpCallVote
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 123 160 50 20
 	textalign 1
 	textalignx 25
@@ -350,7 +350,7 @@ itemDef {
 	textscale .25
 	group grpCallVote
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 123 160 50 20
 	textalign 1
 	textalignx 25
@@ -409,7 +409,7 @@ itemDef {
 	textscale .25
 	group grpCallVote
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 123 160 50 20
 	textalign 1
 	textalignx 25
@@ -466,7 +466,7 @@ itemDef {
 	textscale .25
 	group grpCallVote
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 123 160 50 20
 	textalign 1
 	textalignx 25

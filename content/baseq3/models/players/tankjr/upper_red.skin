@@ -1,6 +1,6 @@
 tag_head,
 tag_weapon,
-u_abdomen,models/players/tankjr/red.png
-u_arms,models/players/tankjr/red.png
-u_torso,models/players/tankjr/red.png
+u_abdomen,models/players/tankjr/red
+u_arms,models/players/tankjr/red
+u_torso,models/players/tankjr/red
 tag_torso,

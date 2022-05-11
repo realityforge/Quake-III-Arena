@@ -1,6 +1,6 @@
 tag_weapon,
-u_rarm,models/players/tim/timarm.png
+u_rarm,models/players/tim/timarm
 tag_head,
-u_larm,models/players/tim/timarm.png
-u_torso,models/players/tim/timtors.png
+u_larm,models/players/tim/timarm
+u_torso,models/players/tim/timtors
 tag_torso,

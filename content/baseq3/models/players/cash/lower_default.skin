@@ -1,7 +1,7 @@
-l_lfoot,models/players/cash/cashleg.png
-l_rfoot,models/players/cash/cashleg.png
-l_lleg,models/players/cash/cashleg.png
-l_lknee,models/players/cash/cashleg.png
-l_rknee,models/players/cash/cashleg.png
-l_rleg,models/players/cash/cashleg.png
+l_lfoot,models/players/cash/cashleg
+l_rfoot,models/players/cash/cashleg
+l_lleg,models/players/cash/cashleg
+l_lknee,models/players/cash/cashleg
+l_rknee,models/players/cash/cashleg
+l_rleg,models/players/cash/cashleg
 tag_torso,

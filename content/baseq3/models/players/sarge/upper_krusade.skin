@@ -1,5 +1,5 @@
 tag_head,
 tag_weapon,
-u_rshoulder,models/players/sarge/krusade.png
-u_torso,models/players/sarge/krusade.png
+u_rshoulder,models/players/sarge/krusade
+u_torso,models/players/sarge/krusade
 tag_torso,

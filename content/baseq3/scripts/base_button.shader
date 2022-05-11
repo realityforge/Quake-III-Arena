@@ -7,20 +7,20 @@ textures/base_light/btactmach0
 		rgbGen identity
 	}
 	{
-		map textures/base_light/btactmach0.png
+		map textures/base_light/btactmach0
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/base_light/btactmach0.blend.png
+		map textures/base_light/btactmach0.blend
 		rgbGen wave sin 0.5 0.5 0 .2
 		blendFunc GL_ONE GL_ONE
 	}
 }
 textures/base_button/shootme2
 {
-	qer_editorimage textures/base_button/shootme1.png
-	q3map_lightimage textures/base_button/shootme_glow.png
+	qer_editorimage textures/base_button/shootme1
+	q3map_lightimage textures/base_button/shootme_glow
 	q3map_surfacelight 1000
 	light 1
 	{
@@ -28,12 +28,12 @@ textures/base_button/shootme2
 		rgbGen identity
 	}
 	{
-		map textures/base_support/metal3_3.png
+		map textures/base_support/metal3_3
 		blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
 	{
-		map textures/base_button/shootme_glow.png
+		map textures/base_button/shootme_glow
 		rgbGen wave sin 0.5 1.0 0 .3
 		blendFunc GL_ONE GL_ONE
 	}

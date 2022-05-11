@@ -32,7 +32,7 @@ itemDef {
 	name window
 	rect 0 10 64 64
 	style 3
-	background "ui/assets/ingameleftcorner.png"
+	background "ui/assets/ingameleftcorner"
 	visible 1
 	decoration
 	}
@@ -41,7 +41,7 @@ itemDef {
 	name window
 	rect 112 10 16 64
 	style 3
-	background "ui/assets/ingameright.png"
+	background "ui/assets/ingameright"
 	visible 1
 	decoration
 	}
@@ -49,7 +49,7 @@ itemDef {
 	name window
 	rect 64 0 63 16
 	style 3
-	background "ui/assets/ingameconnection.png"
+	background "ui/assets/ingameconnection"
 	visible 1
 	decoration
 	}
@@ -58,7 +58,7 @@ itemDef {
 	name window
 	rect 0 64 64 64
 	style 3
-	background "ui/assets/ingameleftcornerb.png"
+	background "ui/assets/ingameleftcornerb"
 	visible 1
 	decoration
 	}
@@ -66,7 +66,7 @@ itemDef {
 	name window
 	rect 64 64 64 64
 	style 3
-	background "ui/assets/ingamerightcornerb.png"
+	background "ui/assets/ingamerightcornerb"
 	visible 1
 	decoration
 	}
@@ -162,7 +162,7 @@ itemDef {
 	type 1
 	textscale .25
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 18 80 40 20
 	textalign 1
 	textalignx 20
@@ -182,7 +182,7 @@ itemDef {
 	type 1
 	textscale .25
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 70 80 40 20
 	textalign 1
 	textalignx 20
@@ -234,7 +234,7 @@ itemDef {
 	type 1
 	textscale .25
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 18 80 40 20
 	textalign 1
 	textalignx 20
@@ -254,7 +254,7 @@ itemDef {
 	type 1
 	textscale .25
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 70 80 40 20
 	textalign 1
 	textalignx 20
@@ -304,7 +304,7 @@ itemDef {
 	type 1
 	textscale .25
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 18 80 40 20
 	textalign 1
 	textalignx 20
@@ -324,7 +324,7 @@ itemDef {
 	type 1
 	textscale .25
 	style WINDOW_STYLE_FILLED
-	background "ui/assets/button_back.png"
+	background "ui/assets/button_back"
 	rect 70 80 40 20
 	textalign 1
 	textalignx 20

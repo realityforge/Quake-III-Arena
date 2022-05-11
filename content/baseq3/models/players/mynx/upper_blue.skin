@@ -1,5 +1,5 @@
 tag_weapon,
-u_arms,models/players/mynx/mynx.png
-u_torso,models/players/mynx/blue_s.png
+u_arms,models/players/mynx/mynx
+u_torso,models/players/mynx/blue_s
 tag_head,
 tag_torso,

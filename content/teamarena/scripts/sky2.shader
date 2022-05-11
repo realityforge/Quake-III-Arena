@@ -1,6 +1,6 @@
 textures/skies2/ctf6sky
 {
-	qer_editorimage textures/skies2/ctf6sky.png
+	qer_editorimage textures/skies2/ctf6sky
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	q3map_globaltexture
@@ -11,14 +11,14 @@ textures/skies2/ctf6sky
 	skyparms - 512 -
 
 	{
-		map textures/skies2/ctf6sky2.png
+		map textures/skies2/ctf6sky2
 
                 tcMod scale 3 3
 		tcMod scroll 0.01 0.01
 		depthWrite
 	}
 	{
-		map textures/skies2/ctf6sky.png
+		map textures/skies2/ctf6sky
 
 		blendfunc Add
                 tcMod scale 1.2 0.9
@@ -30,8 +30,8 @@ textures/skies2/ctf6sky
 textures/skies2/ctf6sky_ter
 //sky for mpterra2
 {
-	qer_editorimage textures/skies2/ctf6skyb.png
-	qer_lightimage textures/skies2/ctf6sky2b.png
+	qer_editorimage textures/skies2/ctf6skyb
+	qer_lightimage textures/skies2/ctf6sky2b
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	q3map_globaltexture
@@ -41,14 +41,14 @@ textures/skies2/ctf6sky_ter
 	skyparms - 512 -
 
 	{
-		map textures/skies2/ctf6sky2b.png
+		map textures/skies2/ctf6sky2b
 
                 tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 		depthWrite
 	}
 	{
-		map textures/skies2/ctf6skyb.png
+		map textures/skies2/ctf6skyb
 
 		blendfunc Add
                 tcMod scale 1.2 0.9
@@ -70,11 +70,11 @@ textures/skies2/nebulax
 
 textures/skies2/nebula3
 {
-        qer_editorimage textures/skies2/nebula3.png
+        qer_editorimage textures/skies2/nebula3
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
-        q3map_lightimage textures/skies/proto_sky.png
+        q3map_lightimage textures/skies/proto_sky
 	q3map_sun	.90 .90 .95 80 315 40
 	q3map_surfacelight 460
 
@@ -85,13 +85,13 @@ textures/skies2/nebula3
 
 textures/skies2/x_nebula3
 {
-        qer_editorimage textures/skies2/nebula3.png
+        qer_editorimage textures/skies2/nebula3
 	q3map_lightsubdivide 512
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
 
-      q3map_lightimage textures/skies/proto_sky.png
+      q3map_lightimage textures/skies/proto_sky
 	q3map_sun	.90 .90 .95 150 135 50
 	q3map_surfacelight 200
 
@@ -102,11 +102,11 @@ textures/skies2/x_nebula3
 
 textures/skies2/nebula3halflit
 {
-        qer_editorimage textures/skies2/nebula3.png
+        qer_editorimage textures/skies2/nebula3
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
-        q3map_lightimage textures/skies/proto_sky.png
+        q3map_lightimage textures/skies/proto_sky
 	q3map_sun	.90 .90 .95 80 315 40
 	q3map_surfacelight 190
 
@@ -117,7 +117,7 @@ textures/skies2/nebula3halflit
 
 textures/skies2/nebula3nolit
 {
-        qer_editorimage textures/skies2/nebula3.png
+        qer_editorimage textures/skies2/nebula3
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
@@ -132,7 +132,7 @@ textures/skies2/nebula2
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
-        q3map_lightimage textures/skies/stars.png
+        q3map_lightimage textures/skies/stars
 	q3map_sun	.90 .90 .95 80 315 40
 	q3map_surfacelight 60
 
@@ -145,7 +145,7 @@ textures/skies2/nebula
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
-        q3map_lightimage textures/skies/stars.png
+        q3map_lightimage textures/skies/stars
 	q3map_sun	.75 .37 .19 90 315 40
 	q3map_surfacelight 80
 
@@ -159,7 +159,7 @@ textures/skies2/hell1
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
-        q3map_lightimage textures/skies/stars.png
+        q3map_lightimage textures/skies/stars
 	q3map_sun	1 1 1 55 -58 58
 	q3map_surfacelight 400
 
@@ -169,11 +169,11 @@ textures/skies2/hell1
 
 textures/skies2/xhell1_nolight
 {
-	qer_editorimage textures/skies2/hell1.png
+	qer_editorimage textures/skies2/hell1
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
-        q3map_lightimage textures/skies/stars.png
+        q3map_lightimage textures/skies/stars
 	q3map_sun	1 1 1 55 -58 58
 
         skyparms textures/skies2/env/hell1 - -
@@ -186,7 +186,7 @@ textures/skies2/hell2
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
-        q3map_lightimage textures/skies/stars.png
+        q3map_lightimage textures/skies/stars
 	q3map_sun	.75 .37 .19 90 315 40
 	q3map_surfacelight 80
 
@@ -200,7 +200,7 @@ textures/skies2/hell3
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
-        q3map_lightimage textures/skies/stars.png
+        q3map_lightimage textures/skies/stars
 	q3map_sun	.75 .37 .19 90 315 40
 	q3map_surfacelight 80
 
@@ -220,18 +220,18 @@ textures/skies2/mpterra2
 	q3map_sun	1 1 1 200 180 85
 	q3map_surfacelight 90
 
-	qer_editorimage textures/skies/toxicbluesky.png
+	qer_editorimage textures/skies/toxicbluesky
 
 	skyparms - 1024 -
 
 	{
-		map textures/skies/bluedimclouds.png
+		map textures/skies/bluedimclouds
 		tcMod scale 3 2
 		tcMod scroll 0.0355 0.0355
 		depthWrite
 	}
 	{
-		map textures/skies/topclouds.png
+		map textures/skies/topclouds
 		blendFunc GL_ONE GL_ONE
 		tcMod scale 3 3
 		tcMod scroll 0.0125 0.0125

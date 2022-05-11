@@ -4,7 +4,7 @@ models\mapobjects\multiplant\fern
     cull none
     nopicmip
 	{
-		map models\mapobjects\multiplant\fern.png
+		map models\mapobjects\multiplant\fern
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -24,7 +24,7 @@ models\mapobjects\multiplant\bannanaleaf
     cull none
     nopicmip
 	{
-		map models\mapobjects\multiplant\bannanaleaf.png
+		map models\mapobjects\multiplant\bannanaleaf
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -44,7 +44,7 @@ models\mapobjects\multiplant\batleaf
     cull none
 
 	{
-		map models\mapobjects\multiplant\batleaf.png
+		map models\mapobjects\multiplant\batleaf
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -71,14 +71,14 @@ models\mapobjects\multiplant\batleaf2
 
 
 	{
-		map models\mapobjects\multiplant\batleaf2.png
+		map models\mapobjects\multiplant\batleaf2
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
 		rgbGen identitylight
 	}
        {
-               map models\mapobjects\multiplant\batleaf2veins.png
+               map models\mapobjects\multiplant\batleaf2veins
 //               blendFunc GL_ONE GL_ONE
                blendFunc blend
                rgbGen wave sin 0 1 0 .33
@@ -100,7 +100,7 @@ models\mapobjects\multiplant\leaf1
     cull none
 
 	{
-		map models\mapobjects\multiplant\leaf1.png
+		map models\mapobjects\multiplant\leaf1
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -122,7 +122,7 @@ models\mapobjects\multiplant\leaf2
     cull none
 
 	{
-		map models\mapobjects\multiplant\leaf2.png
+		map models\mapobjects\multiplant\leaf2
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -144,7 +144,7 @@ models\mapobjects\multiplant\leaf3
     cull none
 
 	{
-		map models\mapobjects\multiplant\leaf3.png
+		map models\mapobjects\multiplant\leaf3
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -166,7 +166,7 @@ models\mapobjects\multiplant\pleaf1
     cull none
 
 	{
-		map models\mapobjects\multiplant\pleaf1.png
+		map models\mapobjects\multiplant\pleaf1
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -188,7 +188,7 @@ models\mapobjects\multiplant\pleaf2
     cull none
 
 	{
-		map models\mapobjects\multiplant\pleaf2.png
+		map models\mapobjects\multiplant\pleaf2
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -210,7 +210,7 @@ models\mapobjects\multiplant\pleaf3
     cull none
 
 	{
-		map models\mapobjects\multiplant\pleaf3.png
+		map models\mapobjects\multiplant\pleaf3
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -232,7 +232,7 @@ models\mapobjects\multiplant\palmfrond
     cull none
     nopicmip
 	{
-		map models\mapobjects\multiplant\palmfrond.png
+		map models\mapobjects\multiplant\palmfrond
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -250,7 +250,7 @@ models\mapobjects\multiplant\invisible
     surfaceparm alphashadow
 	surfaceparm nolightmap
         {
-                map models\mapobjects\multiplant\invisible.png
+                map models\mapobjects\multiplant\invisible
                 alphaFunc GE128
 		depthWrite
 		rgbGen vertex

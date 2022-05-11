@@ -3,7 +3,7 @@ textures/liquids2/calm_poollight2nt
 
 
 
-		qer_editorimage textures/liquids/pool3d_4b.png
+		qer_editorimage textures/liquids/pool3d_4b
 		q3map_globaltexture
 		qer_trans .75
 
@@ -18,7 +18,7 @@ textures/liquids2/calm_poollight2nt
 
 
 		{
-			map textures/liquids/pool3d_5c2.png
+			map textures/liquids/pool3d_5c2
 			blendFunc GL_dst_color GL_zero
 			rgbgen identity
 			tcmod scale .5 .5
@@ -27,7 +27,7 @@ textures/liquids2/calm_poollight2nt
 		}
 
 		{
-			map textures/liquids/pool3d_6c2.png
+			map textures/liquids/pool3d_6c2
 			blendFunc GL_dst_color GL_zero
 			rgbgen identity
 			tcmod scale .5 .5
@@ -36,14 +36,14 @@ textures/liquids2/calm_poollight2nt
 		}
 
 		{
-			map textures/liquids/pool3d_3c2.png
+			map textures/liquids/pool3d_3c2
 			blendFunc GL_dst_color GL_zero
 			rgbgen identity
 			tcmod scale .25 .5
 			tcmod scroll .001 .025
 		}
 		{
-			map textures/liquids/pool3d_4b2.png
+			map textures/liquids/pool3d_4b2
 			blendfunc add
 			tcmod scale .125 .125
 			rgbgen identity
@@ -56,7 +56,7 @@ textures/liquids2/calm_poollight2nt
 textures/liquids2/water_volume
 
 	{
-		qer_editorimage textures/liquids/pool3d_3.png
+		qer_editorimage textures/liquids/pool3d_3
 		qer_trans .5
 		surfaceparm nodraw
 		surfaceparm trans
@@ -72,7 +72,7 @@ textures/liquids2/water_volume
 textures/liquids2/clear_ripple1v
 
 	{
-		qer_editorimage textures/liquids/pool3d_3.png
+		qer_editorimage textures/liquids/pool3d_3
 		qer_trans .5
 		q3map_globaltexture
 		surfaceparm trans
@@ -84,7 +84,7 @@ textures/liquids2/clear_ripple1v
 
 
 		{
-			map textures/liquids/pool3d_5.png
+			map textures/liquids/pool3d_5
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
 			tcmod scale .5 .5
@@ -93,7 +93,7 @@ textures/liquids2/clear_ripple1v
 		}
 
 		{
-			map textures/liquids/pool3d_6.png
+			map textures/liquids/pool3d_6
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
 			tcmod scale .5 .5
@@ -102,7 +102,7 @@ textures/liquids2/clear_ripple1v
 		}
 
 		{
-			map textures/liquids/pool3d_3.png
+			map textures/liquids/pool3d_3
 			blendFunc GL_dst_color GL_one
 			rgbgen vertex
 			tcmod scale .25 .5
@@ -115,7 +115,7 @@ textures/liquids2/clear_ripple1v
 textures/liquids2/clear_ripple1_q3dm1v
 
 	{
-		qer_editorimage textures/liquids/pool3d_3.png
+		qer_editorimage textures/liquids/pool3d_3
 		qer_trans .5
 		q3map_globaltexture
 		surfaceparm trans
@@ -127,7 +127,7 @@ textures/liquids2/clear_ripple1_q3dm1v
 
 
 		{
-			map textures/liquids/pool3d_5.png
+			map textures/liquids/pool3d_5
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
 			tcmod scale .5 .5
@@ -136,7 +136,7 @@ textures/liquids2/clear_ripple1_q3dm1v
 		}
 
 		{
-			map textures/liquids/pool3d_6.png
+			map textures/liquids/pool3d_6
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
 			tcmod scale .5 .5
@@ -145,7 +145,7 @@ textures/liquids2/clear_ripple1_q3dm1v
 		}
 
 		{
-			map textures/liquids/pool3d_3.png
+			map textures/liquids/pool3d_3
 			blendFunc GL_dst_color GL_one
 			rgbgen vertex
 			tcmod scale .25 .5
@@ -157,7 +157,7 @@ textures/liquids2/clear_ripple1_q3dm1v
 textures/liquids2/clear_calm1v
 
 	{
-		qer_editorimage textures/liquids/pool3d_3e.png
+		qer_editorimage textures/liquids/pool3d_3e
 		qer_trans .5
 		q3map_globaltexture
 		surfaceparm trans
@@ -167,7 +167,7 @@ textures/liquids2/clear_calm1v
 		cull disable
 		deformVertexes wave 64 sin .25 .25 0 .5
 		{
-			map textures/liquids/pool3d_5e.png
+			map textures/liquids/pool3d_5e
 			blendFunc GL_dst_color GL_one
 			rgbgen identity
 			tcmod scale .5 .5
@@ -176,7 +176,7 @@ textures/liquids2/clear_calm1v
 		}
 
 		{
-			map textures/liquids/pool3d_3e.png
+			map textures/liquids/pool3d_3e
 			blendFunc GL_dst_color GL_one
 			tcmod scale -.5 -.5
 			tcmod scroll .025 .025
@@ -198,7 +198,7 @@ textures/liquids2/pjslime
 	//	*************************************************
 		//Changed light value to 400 on May 17, 2000
 		// Added to g3map_global texture on May 11, 1999
-		q3map_lightimage textures/proto2/concrete_blue.png
+		q3map_lightimage textures/proto2/concrete_blue
 		q3map_globaltexture
 		qer_trans .5
 
@@ -219,7 +219,7 @@ textures/liquids2/pjslime
 
 
 		{
-			map textures/liquids2/pjslime.png
+			map textures/liquids2/pjslime
 			blendFunc GL_DST_COLOR GL_SRC_ALPHA
 			rgbGen identity
 			alphaGen lightingSpecular
@@ -230,7 +230,7 @@ textures/liquids2/pjslime
 
 
 		{
-			map textures/liquids2/pjslime2.png
+			map textures/liquids2/pjslime2
 			blendfunc add
 			rgbgen wave inversesawtooth 0 1 0 4
 			tcMod turb 0 .2 .5 .05
@@ -251,8 +251,8 @@ textures/liquids2/slime3
 	//	*************************************************
 		//Changed light value to 500 on Feb 18, 2000
 		// Added to g3map_global texture on May 11, 1999
-		qer_editorimage textures/liquids/slime7e.png
-		q3map_lightimage textures/liquids/slime7e4.png
+		qer_editorimage textures/liquids/slime7e
+		q3map_lightimage textures/liquids/slime7e4
 		q3map_globaltexture
 		qer_trans .5
 
@@ -273,7 +273,7 @@ textures/liquids2/slime3
 
 
 		{
-			map textures/liquids/slime7e.png
+			map textures/liquids/slime7e
 			blendFunc GL_DST_COLOR GL_SRC_ALPHA
 			rgbGen identity
 			alphaGen lightingSpecular
@@ -284,7 +284,7 @@ textures/liquids2/slime3
 
 
 		{
-			map textures/liquids/slime7e4.png
+			map textures/liquids/slime7e4
 			blendfunc add
 			rgbgen wave inversesawtooth 0 1 0 4
 			tcMod turb 0 .2 .5 .05
@@ -302,7 +302,7 @@ textures/liquids2/xproto_pool3
 		//   Water Fuckage June 18 99 Kenneth	 //
 		///////////////////////////////////////////
 
-		qer_editorimage textures/liquids2/proto_pool3.png
+		qer_editorimage textures/liquids2/proto_pool3
 		q3map_globaltexture
 	    	qer_trans .80
                 surfaceparm trans
@@ -316,20 +316,20 @@ textures/liquids2/xproto_pool3
 
 
 		{
-			map textures/liquids2/proto_pool3.png
+			map textures/liquids2/proto_pool3
 			blendfunc GL_ONE GL_ONE //SRC_COLOR
 			tcMod scale 1 1
 			tcMod scroll .02 .02
 
 		}
 	        {
-			map textures/liquids2/proto_poolpass2.png
+			map textures/liquids2/proto_poolpass2
 			blendfunc GL_ONE GL_ONE
 			tcMod scale .5 .6
 			tcMod scroll .06 .04
 		}
 	        {
-			map textures/liquids2/proto_poolpass.png
+			map textures/liquids2/proto_poolpass
 			blendfunc GL_ONE GL_ONE
 			tcMod scale .2 .2
 			tcMod scroll .05 .05

@@ -1,6 +1,6 @@
-u_torso,models/players/doom/phobos.png
+u_torso,models/players/doom/phobos
 tag_head,
 tag_torso,
 tag_weapon,
-u_larm,models/players/doom/phobos.png
-u_rarm,models/players/doom/phobos.png
+u_larm,models/players/doom/phobos
+u_rarm,models/players/doom/phobos

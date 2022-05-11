@@ -1,5 +1,5 @@
 tag_head,
 tag_weapon,
-u_neck,models/players/Keel/red_h.png
-u_torso,models/players/Keel/red.png
+u_neck,models/players/Keel/red_h
+u_torso,models/players/Keel/red
 tag_torso,

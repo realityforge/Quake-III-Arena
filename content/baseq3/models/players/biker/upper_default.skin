@@ -1,6 +1,6 @@
 tag_head,
 tag_weapon,
-u_larm,models/players/biker/biker.png
-u_rarm,models/players/biker/biker.png
-u_torso,models/players/biker/biker.png
+u_larm,models/players/biker/biker
+u_rarm,models/players/biker/biker
+u_torso,models/players/biker/biker
 tag_torso,
