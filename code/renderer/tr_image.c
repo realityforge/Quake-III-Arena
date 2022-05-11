@@ -303,8 +303,7 @@ If a larger shrinking is needed, use the mipmap function
 before or after.
 ================
 */
-static void ResampleTexture(byte* in, int inwidth, int inheight, byte* out,
-                            int outwidth, int outheight)
+static void ResampleTexture(const byte* in, const int inwidth, const int inheight, byte* out, int outwidth, int outheight)
 {
     int i, j;
     byte *inrow, *inrow2;
