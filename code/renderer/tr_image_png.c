@@ -157,7 +157,7 @@ qboolean R_DecodePngInBuffer(const char* name, const void* buffer, const long bu
                 output->width = ihdr.width;
                 output->height = ihdr.height;
                 output->data = image;
-                output->pixel_format = SPNG_FMT_RGBA8 == target_format ? GL_RGBA : GL_RGB;
+                output->pixel_format = SPNG_FMT_RGBA8 == target_format ? GL_RGBA8 : GL_RGB8;
                 output->num_mips = 0;
 
                 // Clear image so it does not deallocated in cleanup phase
