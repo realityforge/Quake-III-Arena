@@ -72,19 +72,19 @@ static aviFileData_t afd;
 static uint8_t buffer[MAX_AVI_BUFFER];
 static int bufIndex;
 
-static ID_INLINE void SafeFS_Write(const void* buffer, int len, fileHandle_t f)
+static inline void SafeFS_Write(const void* buffer, int len, fileHandle_t f)
 {
     if (FS_Write(buffer, len, f) < len)
         Com_Error(ERR_DROP, "Failed to write avi file");
 }
 
-static ID_INLINE void WRITE_STRING(const char* s)
+static inline void WRITE_STRING(const char* s)
 {
     memcpy(&buffer[bufIndex], s, strlen(s));
     bufIndex += strlen(s);
 }
 
-static ID_INLINE void WRITE_4BYTES(int x)
+static inline void WRITE_4BYTES(int x)
 {
     buffer[bufIndex + 0] = (uint8_t)((x >> 0) & 0xFF);
     buffer[bufIndex + 1] = (uint8_t)((x >> 8) & 0xFF);
@@ -93,14 +93,14 @@ static ID_INLINE void WRITE_4BYTES(int x)
     bufIndex += 4;
 }
 
-static ID_INLINE void WRITE_2BYTES(int x)
+static inline void WRITE_2BYTES(int x)
 {
     buffer[bufIndex + 0] = (uint8_t)((x >> 0) & 0xFF);
     buffer[bufIndex + 1] = (uint8_t)((x >> 8) & 0xFF);
     bufIndex += 2;
 }
 
-static ID_INLINE void START_CHUNK(const char* s)
+static inline void START_CHUNK(const char* s)
 {
     if (afd.chunkStackTop == MAX_RIFF_CHUNKS) {
         Com_Error(ERR_DROP, "ERROR: Top of chunkstack breached");
@@ -112,7 +112,7 @@ static ID_INLINE void START_CHUNK(const char* s)
     WRITE_4BYTES(0);
 }
 
-static ID_INLINE void END_CHUNK(void)
+static inline void END_CHUNK(void)
 {
     int endIndex = bufIndex;
 

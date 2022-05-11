@@ -53,7 +53,7 @@ void Mat4View(vec3_t axes[3], vec3_t origin, mat4_t out);
 #define FloatToOffsetByte(a) (uint8_t)((a)*127.5f + 128.0f)
 #define ByteToFloat(a) ((float)(a)*1.0f / 255.0f)
 
-static ID_INLINE int VectorCompare4(const vec4_t v1, const vec4_t v2)
+static inline int VectorCompare4(const vec4_t v1, const vec4_t v2)
 {
     if (v1[0] != v2[0] || v1[1] != v2[1] || v1[2] != v2[2] || v1[3] != v2[3]) {
         return 0;
@@ -61,7 +61,7 @@ static ID_INLINE int VectorCompare4(const vec4_t v1, const vec4_t v2)
     return 1;
 }
 
-static ID_INLINE int VectorCompare5(const vec5_t v1, const vec5_t v2)
+static inline int VectorCompare5(const vec5_t v1, const vec5_t v2)
 {
     if (v1[0] != v2[0] || v1[1] != v2[1] || v1[2] != v2[2] || v1[3] != v2[3] || v1[4] != v2[4]) {
         return 0;

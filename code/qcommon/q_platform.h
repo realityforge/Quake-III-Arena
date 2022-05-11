@@ -57,7 +57,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define OS_STRING "win_mingw64"
 #endif
 
-#define ID_INLINE __inline
 #define PATH_SEP '\\'
 
 #if defined(__WIN64__)
@@ -77,7 +76,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #if defined(__APPLE__) || defined(__APPLE_CC__)
 
 #define OS_STRING "macosx"
-#define ID_INLINE inline
 #define PATH_SEP '/'
 
 #ifdef __ppc__
@@ -112,8 +110,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define OS_STRING "GNU"
 #endif
 
-#define ID_INLINE inline
-
 #define PATH_SEP '/'
 
 #if !defined(ARCH_STRING)
@@ -140,7 +136,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifdef Q3_VM
 
 #define OS_STRING "q3vm"
-#define ID_INLINE
 #define PATH_SEP '/'
 
 #define ARCH_STRING "bytecode"
@@ -158,10 +153,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #if !defined(ARCH_STRING)
 #error "Architecture not supported"
-#endif
-
-#ifndef ID_INLINE
-#error "ID_INLINE not defined"
 #endif
 
 #ifndef PATH_SEP

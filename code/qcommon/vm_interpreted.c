@@ -112,7 +112,7 @@ static char* opnames[256] = {
 };
 #endif
 
-static ID_INLINE int loadWord(void* addr)
+static inline int loadWord(void* addr)
 {
     int word;
     memcpy(&word, addr, 4);

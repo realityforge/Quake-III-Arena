@@ -1758,7 +1758,7 @@ extern cvar_t* r_marksOnTriangleMeshes;
 
 //====================================================================
 
-static ID_INLINE bool ShaderRequiresCPUDeforms(const shader_t* shader)
+static inline bool ShaderRequiresCPUDeforms(const shader_t* shader)
 {
     if (shader->numDeforms) {
         const deformStage_t* ds = &shader->deforms[0];
