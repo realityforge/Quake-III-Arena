@@ -29,12 +29,6 @@
 
 #include <string.h>
 #include <stdint.h>
-#ifdef _MSC_VER
-#include <io.h>
-typedef unsigned __int32 uint32_t;
-#endif
-
-typedef unsigned char uint8_t;
 
 struct mdfour {
     uint32_t A, B, C, D;
