@@ -687,7 +687,7 @@ void Com_Quit_f(void) NORETURN;
 void Com_GameRestart(int checksumFeed, bool disconnect);
 
 int Com_Milliseconds(void); // will be journaled properly
-unsigned Com_BlockChecksum(const void* buffer, int length);
+uint32_t Com_BlockChecksum(const void* buffer, size_t length);
 int Com_Filter(char* filter, char* name, int casesensitive);
 int Com_FilterPath(char* filter, char* name, int casesensitive);
 int Com_RealTime(qtime_t* qtime);

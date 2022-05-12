@@ -70,10 +70,24 @@ cc_library(
 )
 
 cc_library(
+    name = "md4",
+    srcs = ["md4.c"],
+    copts = FULL_WARNINGS,
+    defines = ENGINE_DEFINES,
+    visibility = [
+        "//code/client:__pkg__",
+        "//code/server:__pkg__",
+    ],
+    deps = [
+        ":qcommon",
+        "//third_party/md4",
+    ],
+)
+
+cc_library(
     name = "net",
     srcs = [
         "huffman.c",
-        "md4.c",
         "msg.c",
         "net_chan.c",
         "net_ip.c",
@@ -94,7 +108,6 @@ cc_library(
     name = "net-dedicated",
     srcs = [
         "huffman.c",
-        "md4.c",
         "msg.c",
         "net_chan.c",
         "net_ip.c",
