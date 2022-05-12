@@ -1,0 +1,32 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+load("//build_defs:rules.bzl", "FULL_WARNINGS")
+
+cc_library(
+    name = "md4",
+    hdrs = ["md4.h"],
+    copts = FULL_WARNINGS,
+    includes = ["."],
+    visibility = ["//code/qcommon:__pkg__"],
+)
+
+cc_library(
+    name = "md4_impl",
+    srcs = ["md4.c"],
+    copts = FULL_WARNINGS,
+    visibility = [
+        "//code/client:__pkg__",
+        "//code/server:__pkg__",
+    ],
+    deps = [":md4"],
+)
