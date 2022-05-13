@@ -576,10 +576,7 @@ static int GLimp_SetMode(int mode, bool fullscreen, bool noborder, bool fixedFun
                     renderer = NULL;
                 }
 
-                if (!renderer || (strstr(renderer, "Software Renderer") || strstr(renderer, "Software Rasterizer"))) {
-                    if (renderer)
-                        ri.Printf(PRINT_ALL, "GL_RENDERER is %s, rejecting context\n", renderer);
-
+                if (!renderer) {
                     GLimp_ClearProcAddresses();
                     SDL_GL_DeleteContext(SDL_glContext);
                     SDL_glContext = NULL;
