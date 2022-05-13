@@ -71,8 +71,7 @@ QGL_ARB_occlusion_query_PROCS
             QGL_EXT_direct_state_access_PROCS
 #undef GLE
 
-    void
-    GLimp_Shutdown(void)
+void GLimp_Shutdown(void)
 {
     ri.IN_Shutdown();
 
