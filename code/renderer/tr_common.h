@@ -78,7 +78,6 @@ extern glconfig_t glConfig; // outside of TR since it shouldn't be cleared durin
 extern bool textureFilterAnisotropic;
 extern int maxAnisotropy;
 extern float displayAspect;
-extern bool haveClampToEdge;
 
 //
 // cvars

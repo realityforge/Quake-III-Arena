@@ -30,7 +30,6 @@ glRefConfig_t glRefConfig;
 bool textureFilterAnisotropic = false;
 int maxAnisotropy = 0;
 float displayAspect = 0.0f;
-bool haveClampToEdge = false;
 
 glstate_t glState;
 
@@ -1197,7 +1196,6 @@ void RE_Shutdown(bool destroyWindow)
         textureFilterAnisotropic = false;
         maxAnisotropy = 0;
         displayAspect = 0.0f;
-        haveClampToEdge = false;
 
         memset(&glState, 0, sizeof(glState));
     }

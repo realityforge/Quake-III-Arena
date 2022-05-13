@@ -787,14 +787,6 @@ static void GLimp_InitExtensions(bool fixedFunction)
     } else {
         ri.Printf(PRINT_ALL, "...GL_EXT_texture_filter_anisotropic not found\n");
     }
-
-    haveClampToEdge = false;
-    if (QGL_VERSION_ATLEAST(1, 2) || QGLES_VERSION_ATLEAST(1, 0) || SDL_GL_ExtensionSupported("GL_SGIS_texture_edge_clamp")) {
-        ri.Printf(PRINT_ALL, "...using GL_SGIS_texture_edge_clamp\n");
-        haveClampToEdge = true;
-    } else {
-        ri.Printf(PRINT_ALL, "...GL_SGIS_texture_edge_clamp not found\n");
-    }
 }
 
 #define R_MODE_FALLBACK 3 // 640 * 480
