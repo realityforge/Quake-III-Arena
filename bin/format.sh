@@ -21,3 +21,6 @@ find code content -name '*.h' -o -name '*.c' -o -name '*.m' | xargs clang-format
 
 # Format Shell Scripts
 find . -type f -name '*.sh' -print0 | xargs -0 "$SHFMT" -i=4 -s -w
+
+# Format Bazel files
+bazel run //:buildifier
