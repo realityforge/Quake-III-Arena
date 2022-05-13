@@ -104,8 +104,8 @@ void GL_TextureMode(const char* string)
     for (i = 0; i < tr.numImages; i++) {
         glt = tr.images[i];
         if (glt->flags & IMGFLAG_MIPMAP && !(glt->flags & IMGFLAG_CUBEMAP)) {
-            qglTextureParameterfEXT(glt->texnum, GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, gl_filter_min);
-            qglTextureParameterfEXT(glt->texnum, GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, gl_filter_max);
+            glTextureParameterfEXT(glt->texnum, GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, gl_filter_min);
+            glTextureParameterfEXT(glt->texnum, GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, gl_filter_max);
         }
     }
 }
@@ -1613,8 +1613,6 @@ static GLenum RawImage_GetFormat(const uint8_t* data, int numPixels, GLenum picF
                     internalFormat = GL_COMPRESSED_RGBA_BPTC_UNORM_ARB;
                 } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC_ARB) {
                     internalFormat = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
-                } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC) {
-                    internalFormat = GL_RGB4_S3TC;
                 } else if (r_texturebits->integer == 16) {
                     internalFormat = GL_RGB5;
                 } else if (r_texturebits->integer == 32) {
@@ -1727,7 +1725,7 @@ static void RawImage_UploadToRgtc2Texture(GLuint texture, int miplevel, int x, i
     }
 
     // FIXME: Won't work for x/y that aren't multiples of 4.
-    qglCompressedTextureSubImage2DEXT(texture, GL_TEXTURE_2D, miplevel, x, y, width, height, GL_COMPRESSED_RG_RGTC2, size, compressedData);
+    glCompressedTextureSubImage2DEXT(texture, GL_TEXTURE_2D, miplevel, x, y, width, height, GL_COMPRESSED_RG_RGTC2, size, compressedData);
 
     ri.Hunk_FreeTempMemory(compressedData);
 }
@@ -1806,7 +1804,7 @@ static void RawImage_UploadTexture(GLuint texture, uint8_t* data, int x, int y, 
         size = CalculateMipSize(width, height, picFormat);
 
         if (!rgba) {
-            qglCompressedTextureSubImage2DEXT(texture, target, miplevel, x, y, width, height, picFormat, size, data);
+            glCompressedTextureSubImage2DEXT(texture, target, miplevel, x, y, width, height, picFormat, size, data);
         } else {
             if (rgba8 && miplevel != 0 && r_colorMipLevels->integer)
                 R_BlendOverTexture((uint8_t*)data, width * height, mipBlendColors[miplevel]);
@@ -1814,12 +1812,12 @@ static void RawImage_UploadTexture(GLuint texture, uint8_t* data, int x, int y, 
             if (rgba8 && rgtc)
                 RawImage_UploadToRgtc2Texture(texture, miplevel, x, y, width, height, data);
             else
-                qglTextureSubImage2DEXT(texture, target, miplevel, x, y, width, height, dataFormat, dataType, data);
+                glTextureSubImage2DEXT(texture, target, miplevel, x, y, width, height, dataFormat, dataType, data);
         }
 
         if (!lastMip && numMips < 2) {
             if (glRefConfig.framebufferObject) {
-                qglGenerateTextureMipmapEXT(texture, target);
+                glGenerateTextureMipmapEXT(texture, target);
                 break;
             } else if (rgba8) {
                 if (type == IMGTYPE_NORMAL || type == IMGTYPE_NORMALHEIGHT)
@@ -1942,7 +1940,7 @@ image_t* R_CreateImage2(const char* name, uint8_t* pic, int width, int height, G
     }
 
     image = tr.images[tr.numImages] = ri.Hunk_Alloc(sizeof(image_t), h_low);
-    qglGenTextures(1, &image->texnum);
+    glGenTextures(1, &image->texnum);
     tr.numImages++;
 
     image->type = type;
@@ -1991,9 +1989,9 @@ image_t* R_CreateImage2(const char* name, uint8_t* pic, int width, int height, G
             int i;
 
             for (i = 0; i < 6; i++)
-                qglTextureImage2DEXT(image->texnum, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, miplevel, internalFormat, mipWidth, mipHeight, 0, dataFormat, GL_UNSIGNED_BYTE, NULL);
+                glTextureImage2DEXT(image->texnum, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, miplevel, internalFormat, mipWidth, mipHeight, 0, dataFormat, GL_UNSIGNED_BYTE, NULL);
         } else {
-            qglTextureImage2DEXT(image->texnum, GL_TEXTURE_2D, miplevel, internalFormat, mipWidth, mipHeight, 0, dataFormat, GL_UNSIGNED_BYTE, NULL);
+            glTextureImage2DEXT(image->texnum, GL_TEXTURE_2D, miplevel, internalFormat, mipWidth, mipHeight, 0, dataFormat, GL_UNSIGNED_BYTE, NULL);
         }
 
         mipWidth = MAX(1, mipWidth >> 1);
@@ -2009,14 +2007,14 @@ image_t* R_CreateImage2(const char* name, uint8_t* pic, int width, int height, G
         ri.Hunk_FreeTempMemory(resampledBuffer);
 
     // Set all necessary texture parameters.
-    qglTextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_WRAP_S, glWrapClampMode);
-    qglTextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_WRAP_T, glWrapClampMode);
+    glTextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_WRAP_S, glWrapClampMode);
+    glTextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_WRAP_T, glWrapClampMode);
 
     if (cubemap)
-        qglTextureParameteriEXT(image->texnum, textureTarget, GL_TEXTURE_WRAP_R, glWrapClampMode);
+        glTextureParameteriEXT(image->texnum, textureTarget, GL_TEXTURE_WRAP_R, glWrapClampMode);
 
     if (textureFilterAnisotropic && !cubemap)
-        qglTextureParameteriEXT(image->texnum, textureTarget, GL_TEXTURE_MAX_ANISOTROPY_EXT,
+        glTextureParameteriEXT(image->texnum, textureTarget, GL_TEXTURE_MAX_ANISOTROPY_EXT,
                                 mipmap ? (GLint)Com_Clamp(1, maxAnisotropy, r_ext_max_anisotropy->integer) : 1);
 
     switch (internalFormat) {
@@ -2027,14 +2025,14 @@ image_t* R_CreateImage2(const char* name, uint8_t* pic, int width, int height, G
         // Fix for sampling depth buffer on old nVidia cards.
         // from http://www.idevgames.com/forums/thread-4141-post-34844.html#pid34844
         if (!QGL_VERSION_ATLEAST(3, 0)) {
-            qglTextureParameterfEXT(image->texnum, textureTarget, GL_DEPTH_TEXTURE_MODE, GL_LUMINANCE);
+            glTextureParameterfEXT(image->texnum, textureTarget, GL_DEPTH_TEXTURE_MODE, GL_LUMINANCE);
         }
-        qglTextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        qglTextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         break;
     default:
-        qglTextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_MIN_FILTER, mipmap ? gl_filter_min : GL_LINEAR);
-        qglTextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_MAG_FILTER, mipmap ? gl_filter_max : GL_LINEAR);
+        glTextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_MIN_FILTER, mipmap ? gl_filter_min : GL_LINEAR);
+        glTextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_MAG_FILTER, mipmap ? gl_filter_max : GL_LINEAR);
         break;
     }
 
@@ -2383,15 +2381,15 @@ void R_CreateBuiltinImages(void)
 
         for (x = 0; x < MAX_DRAWN_PSHADOWS; x++) {
             tr.pshadowMaps[x] = R_CreateImage(va("*shadowmap%i", x), NULL, PSHADOW_MAP_SIZE, PSHADOW_MAP_SIZE, IMGTYPE_COLORALPHA, IMGFLAG_NO_COMPRESSION | IMGFLAG_CLAMPTOEDGE, GL_DEPTH_COMPONENT24);
-            // qglTextureParameterfEXT(tr.pshadowMaps[x]->texnum, GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
-            // qglTextureParameterfEXT(tr.pshadowMaps[x]->texnum, GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+            // glTextureParameterfEXT(tr.pshadowMaps[x]->texnum, GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
+            // glTextureParameterfEXT(tr.pshadowMaps[x]->texnum, GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
         }
 
         if (r_sunlightMode->integer) {
             for (x = 0; x < 4; x++) {
                 tr.sunShadowDepthImage[x] = R_CreateImage(va("*sunshadowdepth%i", x), NULL, r_shadowMapSize->integer, r_shadowMapSize->integer, IMGTYPE_COLORALPHA, IMGFLAG_NO_COMPRESSION | IMGFLAG_CLAMPTOEDGE, GL_DEPTH_COMPONENT24);
-                qglTextureParameterfEXT(tr.sunShadowDepthImage[x]->texnum, GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
-                qglTextureParameterfEXT(tr.sunShadowDepthImage[x]->texnum, GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+                glTextureParameterfEXT(tr.sunShadowDepthImage[x]->texnum, GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
+                glTextureParameterfEXT(tr.sunShadowDepthImage[x]->texnum, GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
             }
 
             tr.screenShadowImage = R_CreateImage("*screenShadow", NULL, width, height, IMGTYPE_COLORALPHA, IMGFLAG_NO_COMPRESSION | IMGFLAG_CLAMPTOEDGE, GL_RGBA8);
@@ -2483,7 +2481,7 @@ void R_DeleteTextures(void)
     int i;
 
     for (i = 0; i < tr.numImages; i++) {
-        qglDeleteTextures(1, &tr.images[i]->texnum);
+        glDeleteTextures(1, &tr.images[i]->texnum);
     }
     memset(tr.images, 0, sizeof(tr.images));
 

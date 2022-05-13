@@ -711,20 +711,6 @@ static void GLimp_InitExtensions(bool fixedFunction)
         ri.Printf(PRINT_ALL, "...GL_EXT_texture_compression_s3tc not found\n");
     }
 
-    // GL_S3_s3tc ... legacy extension before GL_EXT_texture_compression_s3tc.
-    if (glConfig.textureCompression == TC_NONE) {
-        if (SDL_GL_ExtensionSupported("GL_S3_s3tc")) {
-            if (r_ext_compressed_textures->value) {
-                glConfig.textureCompression = TC_S3TC;
-                ri.Printf(PRINT_ALL, "...using GL_S3_s3tc\n");
-            } else {
-                ri.Printf(PRINT_ALL, "...ignoring GL_S3_s3tc\n");
-            }
-        } else {
-            ri.Printf(PRINT_ALL, "...GL_S3_s3tc not found\n");
-        }
-    }
-
     // OpenGL 1 fixed function pipeline
     if (fixedFunction) {
         // GL_EXT_texture_env_add
