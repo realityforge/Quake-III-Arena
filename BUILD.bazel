@@ -17,7 +17,15 @@ WARNINGS = [
 ]
 
 buildifier(
-    name = "buildifier",
+    name = "buildifier_check",
+    diff_command = "diff -u",
     lint_mode = "warn",
+    lint_warnings = WARNINGS,
+    mode = "diff",
+)
+
+buildifier(
+    name = "buildifier",
+    lint_mode = "fix",
     lint_warnings = WARNINGS,
 )

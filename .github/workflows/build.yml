@@ -55,7 +55,7 @@ jobs:
 
       - name: Verify Build file format
         # Verify that the build files are correctly formatted
-        run: ./bazelw run //:buildifier
+        run: ./bazelw run //:buildifier_check
 
       - name: Build Code
         # In the future we should also run "bazel build //game/mac:Quake3Arena.zip" but this requires that either
