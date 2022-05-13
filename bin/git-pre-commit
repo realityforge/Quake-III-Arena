@@ -22,5 +22,5 @@
 set -e
 
 if [ -f .clang-format ]; then
-  git diff --name-only --cached | sed -ne  '/^code\\/.*\\.[chm]$/p' | xargs clang-format -i
+  git diff --name-only --cached | sed -ne  '/^(code|content)\/.*\\.[chm]$/p' | xargs clang-format -i
 fi
