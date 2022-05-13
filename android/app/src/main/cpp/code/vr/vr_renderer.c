@@ -24,7 +24,6 @@ extern cvar_t *vr_heightAdjust;
 
 XrView* projections;
 GLboolean stageSupported = GL_FALSE;
-GLboolean needRecenter = GL_FALSE;
 
 void VR_UpdateStageBounds(ovrApp* pappState) {
     XrExtent2Df stageBounds = {};
@@ -288,7 +287,6 @@ void VR_InitRenderer( engine_t* engine ) {
 
     if (engine->appState.CurrentSpace == XR_NULL_HANDLE) {
         VR_Recenter(engine);
-        needRecenter = GL_TRUE;
     }
 
     projections = (XrView*)(malloc(ovrMaxNumEyes * sizeof(XrView)));
@@ -536,9 +534,4 @@ void VR_DrawFrame( engine_t* engine ) {
     OXR(xrEndFrame(engine->appState.Session, &endFrameInfo));
     frameBuffer->TextureSwapChainIndex++;
     frameBuffer->TextureSwapChainIndex %= frameBuffer->TextureSwapChainLength;
-
-    if (needRecenter) {
-        VR_Recenter(engine);
-        needRecenter = GL_FALSE;
-    }
 }
