@@ -161,10 +161,10 @@ void GLimp_InitExtraExtensions(void)
     // GL_ARB_texture_compression_rgtc
     extension = "GL_ARB_texture_compression_rgtc";
     if (SDL_GL_ExtensionSupported(extension)) {
-        bool useRgtc = r_ext_compressed_textures->integer >= 1;
-
-        if (useRgtc)
+        const bool useRgtc = r_ext_compressed_textures->integer >= 1;
+        if (useRgtc) {
             glRefConfig.textureCompression |= TCR_RGTC;
+        }
 
         ri.Printf(PRINT_ALL, result[useRgtc], extension);
     } else {
@@ -176,8 +176,7 @@ void GLimp_InitExtraExtensions(void)
     // GL_ARB_texture_compression_bptc
     extension = "GL_ARB_texture_compression_bptc";
     if (SDL_GL_ExtensionSupported(extension)) {
-        bool useBptc = r_ext_compressed_textures->integer >= 2;
-
+        const bool useBptc = r_ext_compressed_textures->integer >= 2;
         if (useBptc)
             glRefConfig.textureCompression |= TCR_BPTC;
 
