@@ -3625,6 +3625,9 @@ void CL_Init( void ) {
 	char playerName[256];
 	Com_sprintf(playerName, 256, "[VR] Player#%i", rand() % (99999999 - 10000000) + 10000000);
 	Cvar_Get ("name", playerName, CVAR_USERINFO | CVAR_ARCHIVE );
+	if (strcmp(Cvar_VariableString("name"), "[VR] Player") == 0) {
+		Cvar_Set( "name", playerName);
+	}
 	cl_rate = Cvar_Get ("rate", "25000", CVAR_USERINFO | CVAR_ARCHIVE );
 	Cvar_Get ("snaps", "40", CVAR_USERINFO | CVAR_ARCHIVE );
 	Cvar_Get ("model", "sarge", CVAR_USERINFO | CVAR_ARCHIVE );
