@@ -2022,11 +2022,6 @@ static image_t* R_CreateImage2(const char* name, uint8_t* pic, int width, int he
     case GL_DEPTH_COMPONENT16_ARB:
     case GL_DEPTH_COMPONENT24_ARB:
     case GL_DEPTH_COMPONENT32_ARB:
-        // Fix for sampling depth buffer on old nVidia cards.
-        // from http://www.idevgames.com/forums/thread-4141-post-34844.html#pid34844
-        if (!QGL_VERSION_ATLEAST(3, 0)) {
-            glTextureParameterfEXT(image->texnum, textureTarget, GL_DEPTH_TEXTURE_MODE, GL_LUMINANCE);
-        }
         glTextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         break;
