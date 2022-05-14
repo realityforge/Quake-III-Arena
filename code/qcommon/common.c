@@ -877,7 +877,7 @@ void* Z_TagMalloc(size_t size, int tag)
 #ifdef ZONE_DEBUG
             Z_LogHeap();
 
-            Com_Error(ERR_FATAL, "Z_Malloc: failed on allocation of %i bytes from the %s zone: %s, line: %d (%s)",
+            Com_Error(ERR_FATAL, "Z_Malloc: failed on allocation of %zuz bytes from the %s zone: %s, line: %d (%s)",
                       size, zone == smallzone ? "small" : "main", file, line, label);
 #else
             Com_Error(ERR_FATAL, "Z_Malloc: failed on allocation of %lu bytes from the %s zone",
