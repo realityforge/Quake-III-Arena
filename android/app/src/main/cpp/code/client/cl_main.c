@@ -3622,7 +3622,9 @@ void CL_Init( void ) {
 	cl_consoleKeys = Cvar_Get( "cl_consoleKeys", "~ ` 0x7e 0x60", CVAR_ARCHIVE);
 
 	// userinfo
-	Cvar_Get ("name", "[VR] Player", CVAR_USERINFO | CVAR_ARCHIVE );
+	char playerName[256];
+	Com_sprintf(playerName, 256, "[VR] Player#%i", rand() % (99999999 - 10000000) + 10000000);
+	Cvar_Get ("name", playerName, CVAR_USERINFO | CVAR_ARCHIVE );
 	cl_rate = Cvar_Get ("rate", "25000", CVAR_USERINFO | CVAR_ARCHIVE );
 	Cvar_Get ("snaps", "40", CVAR_USERINFO | CVAR_ARCHIVE );
 	Cvar_Get ("model", "sarge", CVAR_USERINFO | CVAR_ARCHIVE );
