@@ -2015,7 +2015,7 @@ static image_t* R_CreateImage2(const char* name, uint8_t* pic, int width, int he
 
     if (textureFilterAnisotropic && !cubemap)
         glTextureParameteriEXT(image->texnum, textureTarget, GL_TEXTURE_MAX_ANISOTROPY_EXT,
-                                mipmap ? (GLint)Com_Clamp(1, maxAnisotropy, r_ext_max_anisotropy->integer) : 1);
+                               mipmap ? (GLint)Com_Clamp(1, maxAnisotropy, r_ext_max_anisotropy->integer) : 1);
 
     switch (internalFormat) {
     case GL_DEPTH_COMPONENT:
