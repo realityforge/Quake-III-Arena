@@ -1913,7 +1913,7 @@ R_CreateImage2
 This is the only way any image_t are created
 ================
 */
-image_t* R_CreateImage2(const char* name, uint8_t* pic, int width, int height, GLenum picFormat, int numMips, imgType_t type, imgFlags_t flags, int internalFormat)
+static image_t* R_CreateImage2(const char* name, uint8_t* pic, int width, int height, GLenum picFormat, int numMips, imgType_t type, imgFlags_t flags, int internalFormat)
 {
     uint8_t* resampledBuffer = NULL;
     image_t* image;
