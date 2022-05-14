@@ -90,9 +90,9 @@ bool R_DecodeJpgInBuffer(const char* name, const void* buffer, const long buffer
     uint8_t* image = NULL;
 
     assert(NULL != name);
-    assert(NULL != pixel_data);
-    assert(NULL != width);
-    assert(NULL != height);
+    assert(NULL != buffer);
+    assert(0 != buffer_size);
+    assert(NULL != output);
 
     struct jpeg_decompress_struct info = { 0 };
     error_mgr_t error_handler = { .name = name };
