@@ -200,6 +200,4 @@ void GLimp_InitExtraExtensions(void)
     } else {
         ri.Printf(PRINT_ALL, result[2], extension);
     }
-
-#undef GLE
 }
