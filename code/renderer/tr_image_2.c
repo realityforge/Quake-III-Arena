@@ -69,11 +69,7 @@ cleanup:
 bool R_LoadImage(const char* name, image_load_result_t* output)
 {
     assert(NULL != name);
-    assert(NULL != pixel_data);
-    assert(NULL != width);
-    assert(NULL != height);
-    assert(NULL != pixel_format);
-    assert(NULL != num_mips);
+    assert(NULL != output);
 
     bool ignored_incoming_extension = false;
     const char* original_extension = COM_GetExtension(name);
