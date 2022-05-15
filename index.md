@@ -66,6 +66,15 @@ The major changes of the project are tracked in this table.
       <td>N/A</td>
       <td>N/A</td>
     </tr>
+    <tr valign="top">
+      <td><a href="cleanup_opengl_wrapper.html">Cleanup OpenGL Wrapper code</a></td>
+      <td>5</td>
+      <td>3</td>
+      <td>0</td>
+      <td>Ongoing</td>
+      <td>N/A</td>
+      <td>N/A</td>
+    </tr>
   </tbody>
 </table>
 
