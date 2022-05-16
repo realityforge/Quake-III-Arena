@@ -35,7 +35,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "iqm.h"
 
 #define GL_INDEX_TYPE GL_UNSIGNED_INT
-    typedef unsigned int glIndex_t;
+typedef unsigned int glIndex_t;
 
 #define BUFFER_OFFSET(i) ((char*)NULL + (i))
 
