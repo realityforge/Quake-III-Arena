@@ -198,18 +198,6 @@ static GL3WglProc gl3w_get_proc(const char* proc)
 {
    GL3WglProc res;
    *(void**)(&res) = dlsym(gl3w_libgl_handle, proc);
-   if (NULL == res) {
-       const char* error_message = dlerror();
-       if (NULL != error_message) {
-           snprintf(gl3w_error_buffer, GL3W_MAX_ERROR_MESSAGE_LENGTH, "Error retrieving OpenGL symbol %s: %s\n", proc, error_message);
-           gl3w_error = gl3w_error_buffer;
-           printf(gl3w_error);
-       } else {
-           printf("Failed to lookup symbol %s\n", proc);
-       }
-   } else {
-       printf("Found symbol %s\n", proc);
-   }
    return res;
 }
 #else
