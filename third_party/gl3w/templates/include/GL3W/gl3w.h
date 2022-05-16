@@ -320,6 +320,7 @@ static void load_procs(const GL3WGetProcAddressProc proc)
 {
    for (size_t i = 0; i < COUNT_OF(gl3w_proc_names); i++) {
        gl3wProcs.ptr[i] = proc(gl3w_proc_names[i]);
+       // TODO: If gl3wProcs.ptr[i] IS NULL and it is part of required profile then this should generate an error
    }
 }
 
