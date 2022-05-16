@@ -64,8 +64,6 @@ extern "C" {
 // The OpenGL library does not meet the minimum version requirements specified when invoking gl3wInit
 #define GL3W_ERROR_OPENGL_VERSION (-4)
 
-typedef void (*GL3WglProc)();
-
 /**
 * Initializes the library. Should be called once after an OpenGL context has been created.
 *
@@ -96,6 +94,8 @@ GL3W_API const char* gl3wError(void);
 * @return a string describing the last ERROR or NULL if the last gl3w library call succeeded.
 */
 GL3W_API bool gl3wIsSupported(int min_major, int min_minor);
+
+typedef void (*GL3WglProc)();
 
 /**
 * Returns the address of an OpenGL extension function. Generally, you won't need to use it since gl3w loads all
