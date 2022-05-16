@@ -510,48 +510,6 @@ static bool GLimp_StartDriverAndSetMode(int mode, bool fullscreen, bool noborder
     return true;
 }
 
-static void GLimp_InitExtensions()
-{
-    if (!r_allowExtensions->integer) {
-        ri.Printf(PRINT_ALL, "* IGNORING OPENGL EXTENSIONS *\n");
-        return;
-    }
-
-    ri.Printf(PRINT_ALL, "Initializing OpenGL extensions\n");
-
-    glConfig.textureCompression = TC_NONE;
-
-    // GL_EXT_texture_compression_s3tc
-    if (SDL_GL_ExtensionSupported("GL_ARB_texture_compression") && SDL_GL_ExtensionSupported("GL_EXT_texture_compression_s3tc")) {
-        if (r_ext_compressed_textures->value) {
-            glConfig.textureCompression = TC_S3TC_ARB;
-            ri.Printf(PRINT_ALL, "...using GL_EXT_texture_compression_s3tc\n");
-        } else {
-            ri.Printf(PRINT_ALL, "...ignoring GL_EXT_texture_compression_s3tc\n");
-        }
-    } else {
-        ri.Printf(PRINT_ALL, "...GL_EXT_texture_compression_s3tc not found\n");
-    }
-
-    glConfig.textureFilterAnisotropic = false;
-    if (SDL_GL_ExtensionSupported("GL_EXT_texture_filter_anisotropic")) {
-        if (r_ext_texture_filter_anisotropic->integer) {
-            glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, (GLint*)&glConfig.maxAnisotropy);
-            if (glConfig.maxAnisotropy <= 0) {
-                ri.Printf(PRINT_ALL, "...GL_EXT_texture_filter_anisotropic not properly supported!\n");
-                glConfig.maxAnisotropy = 0;
-            } else {
-                ri.Printf(PRINT_ALL, "...using GL_EXT_texture_filter_anisotropic (max: %i)\n", glConfig.maxAnisotropy);
-                glConfig.textureFilterAnisotropic = true;
-            }
-        } else {
-            ri.Printf(PRINT_ALL, "...ignoring GL_EXT_texture_filter_anisotropic\n");
-        }
-    } else {
-        ri.Printf(PRINT_ALL, "...GL_EXT_texture_filter_anisotropic not found\n");
-    }
-}
-
 #define R_MODE_FALLBACK 3 // 640 * 480
 
 /*
@@ -623,9 +581,6 @@ success:
     } else {
         Q_strncpyz(glConfig.extensions_string, (char*)glGetString(GL_EXTENSIONS), sizeof(glConfig.extensions_string));
     }
-
-    // initialize extensions
-    GLimp_InitExtensions();
 
     ri.Cvar_Get("r_availableModes", "", CVAR_ROM);
 

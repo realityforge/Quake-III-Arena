@@ -83,4 +83,36 @@ void GLimp_InitExtraExtensions(void)
     } else {
         ri.Printf(PRINT_ALL, result[2], "GL_ARB_texture_compression_bptc");
     }
+
+    glConfig.textureCompression = TC_NONE;
+
+    // GL_EXT_texture_compression_s3tc
+    if (GL3W_EXT_texture_compression_s3tc) {
+        if (r_ext_compressed_textures->value) {
+            glConfig.textureCompression = TC_S3TC_ARB;
+            ri.Printf(PRINT_ALL, result[1], "GL_EXT_texture_compression_s3tc");
+        } else {
+            ri.Printf(PRINT_ALL, result[0], "GL_EXT_texture_compression_s3tc");
+        }
+    } else {
+        ri.Printf(PRINT_ALL, result[2], "GL_EXT_texture_compression_s3tc");
+    }
+
+    glConfig.textureFilterAnisotropic = false;
+    if (GL3W_EXT_texture_filter_anisotropic) {
+        if (r_ext_texture_filter_anisotropic->integer) {
+            glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, (GLint*)&glConfig.maxAnisotropy);
+            if (glConfig.maxAnisotropy <= 0) {
+                ri.Printf(PRINT_ALL, "...GL_EXT_texture_filter_anisotropic not properly supported!\n");
+                glConfig.maxAnisotropy = 0;
+            } else {
+                ri.Printf(PRINT_ALL, "...using GL_EXT_texture_filter_anisotropic (max: %i)\n", glConfig.maxAnisotropy);
+                glConfig.textureFilterAnisotropic = true;
+            }
+        } else {
+            ri.Printf(PRINT_ALL, result[0], "GL_EXT_texture_filter_anisotropic");
+        }
+    } else {
+        ri.Printf(PRINT_ALL, result[2], "GL_EXT_texture_filter_anisotropic");
+    }
 }
