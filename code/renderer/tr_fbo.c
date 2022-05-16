@@ -150,7 +150,7 @@ void FBO_CreateBuffer(FBO_t* fbo, int format, int index, int multisample)
     if (absent)
         glGenRenderbuffers(1, pRenderBuffer);
 
-    if (multisample && glRefConfig.framebufferMultisample)
+    if (multisample)
         GLDSA_NamedRenderbufferStorageMultisampleEXT(*pRenderBuffer, multisample, format, fbo->width, fbo->height);
     else
         GLDSA_NamedRenderbufferStorageEXT(*pRenderBuffer, format, fbo->width, fbo->height);
@@ -213,13 +213,12 @@ void FBO_Init(void)
     if (r_hdr->integer && glRefConfig.textureFloat)
         hdrFormat = GL_RGBA16F;
 
-    if (glRefConfig.framebufferMultisample)
-        glGetIntegerv(GL_MAX_SAMPLES, &multisample);
+    glGetIntegerv(GL_MAX_SAMPLES, &multisample);
 
     if (r_ext_framebuffer_multisample->integer < multisample)
         multisample = r_ext_framebuffer_multisample->integer;
 
-    if (multisample < 2 || !glRefConfig.framebufferBlit)
+    if (multisample < 2)
         multisample = 0;
 
     if (multisample != r_ext_framebuffer_multisample->integer)
@@ -227,7 +226,7 @@ void FBO_Init(void)
 
     // only create a render FBO if we need to resolve MSAA or do HDR
     // otherwise just render straight to the screen (tr.renderFbo = NULL)
-    if (multisample && glRefConfig.framebufferMultisample) {
+    if (multisample) {
         tr.renderFbo = FBO_Create("_render", tr.renderDepthImage->width, tr.renderDepthImage->height);
         FBO_CreateBuffer(tr.renderFbo, hdrFormat, 0, multisample);
         FBO_CreateBuffer(tr.renderFbo, GL_DEPTH_COMPONENT24, 0, multisample);
@@ -488,15 +487,10 @@ void FBO_Blit(FBO_t* src, ivec4_t inSrcBox, vec2_t srcTexScale, FBO_t* dst, ivec
     FBO_BlitFromTexture(src->colorImage[0], srcTexCorners, srcTexScale, dst, dstBox, shaderProgram, color, blend | GLS_DEPTHTEST_DISABLE);
 }
 
-void FBO_FastBlit(FBO_t* src, ivec4_t srcBox, FBO_t* dst, ivec4_t dstBox, int buffers, int filter)
+void FBO_FastBlit(FBO_t* src, const ivec4_t srcBox, FBO_t* dst, const ivec4_t dstBox, int buffers, int filter)
 {
     ivec4_t srcBoxFinal, dstBoxFinal;
     GLuint srcFb, dstFb;
-
-    if (!glRefConfig.framebufferBlit) {
-        FBO_Blit(src, srcBox, NULL, dst, dstBox, NULL, NULL, 0);
-        return;
-    }
 
     srcFb = src ? src->frameBuffer : 0;
     dstFb = dst ? dst->frameBuffer : 0;
