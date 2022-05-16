@@ -357,7 +357,7 @@ void R_LoadDDS(const char* filename, uint8_t** pic, uint32_t* width, uint32_t* h
             break;
 
         case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:
-            *picFormat = GL_SRGB8_ALPHA8_EXT;
+            *picFormat = GL_SRGB8_ALPHA8;
             break;
 
         case DXGI_FORMAT_R8G8B8A8_UNORM:

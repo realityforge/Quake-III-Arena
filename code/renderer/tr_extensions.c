@@ -30,77 +30,64 @@ void GLimp_InitExtraExtensions(void)
 {
     char* extension;
     const char* result[3] = { "...ignoring %s\n", "...using %s\n", "...%s not found\n" };
-    bool q_gl_version_at_least_3_0;
-    bool q_gl_version_at_least_3_2;
-
-    q_gl_version_at_least_3_0 = QGL_VERSION_ATLEAST(3, 0);
-    q_gl_version_at_least_3_2 = QGL_VERSION_ATLEAST(3, 2);
+    bool q_gl_version_at_least_3_2 = gl3wIsSupported(3, 2);
 
     // Check if we need Intel graphics specific fixes.
     glRefConfig.intelGraphics = false;
-    if (strstr((char*)qglGetString(GL_RENDERER), "Intel"))
+    if (NULL != strstr((char*)glGetString(GL_RENDERER), "Intel")) {
         glRefConfig.intelGraphics = true;
+    }
 
-        // set DSA fallbacks
-#define GLE(ret, name, ...) qgl##name = GLDSA_##name;
-    QGL_EXT_direct_state_access_PROCS;
-#undef GLE
-
-    // GL function loader, based on https://gist.github.com/rygorous/16796a0c876cf8a5f542caddb55bce8a
-#define GLE(ret, name, ...) qgl##name = (name##proc*)SDL_GL_GetProcAddress("gl" #name);
+    // set DSA fallbacks
+#define DSA_FALLBACK(name)       \
+    if (NULL == gl##name) {      \
+        gl##name = GLDSA_##name; \
+    }
+    DSA_FALLBACK(BindMultiTextureEXT)
+    DSA_FALLBACK(TextureParameterfEXT)
+    DSA_FALLBACK(TextureParameteriEXT)
+    DSA_FALLBACK(TextureImage2DEXT)
+    DSA_FALLBACK(TextureSubImage2DEXT)
+    DSA_FALLBACK(CopyTextureSubImage2DEXT)
+    DSA_FALLBACK(CompressedTextureImage2DEXT)
+    DSA_FALLBACK(CompressedTextureSubImage2DEXT)
+    DSA_FALLBACK(GenerateTextureMipmapEXT)
+    DSA_FALLBACK(ProgramUniform1iEXT)
+    DSA_FALLBACK(ProgramUniform1fEXT)
+    DSA_FALLBACK(ProgramUniform2fEXT)
+    DSA_FALLBACK(ProgramUniform3fEXT)
+    DSA_FALLBACK(ProgramUniform4fEXT)
+    DSA_FALLBACK(ProgramUniform1fvEXT)
+    DSA_FALLBACK(ProgramUniformMatrix4fvEXT)
+    DSA_FALLBACK(NamedRenderbufferStorageEXT)
+    DSA_FALLBACK(NamedRenderbufferStorageMultisampleEXT)
+    DSA_FALLBACK(CheckNamedFramebufferStatusEXT)
+    DSA_FALLBACK(NamedFramebufferTexture2DEXT)
+    DSA_FALLBACK(NamedFramebufferRenderbufferEXT)
 
     // OpenGL 1.5 - GL_ARB_occlusion_query
     glRefConfig.occlusionQuery = true;
-    QGL_ARB_occlusion_query_PROCS;
 
     // OpenGL 3.0 - GL_ARB_framebuffer_object
     extension = "GL_ARB_framebuffer_object";
     glRefConfig.framebufferObject = false;
     glRefConfig.framebufferBlit = false;
     glRefConfig.framebufferMultisample = false;
-    if (q_gl_version_at_least_3_0 || SDL_GL_ExtensionSupported(extension)) {
+    if (SDL_GL_ExtensionSupported(extension)) {
         glRefConfig.framebufferObject = !!r_ext_framebuffer_object->integer;
         glRefConfig.framebufferBlit = true;
         glRefConfig.framebufferMultisample = true;
 
-        qglGetIntegerv(GL_MAX_RENDERBUFFER_SIZE, &glRefConfig.maxRenderbufferSize);
-        qglGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &glRefConfig.maxColorAttachments);
-
-        QGL_ARB_framebuffer_object_PROCS;
+        glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE, &glRefConfig.maxRenderbufferSize);
+        glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &glRefConfig.maxColorAttachments);
 
         ri.Printf(PRINT_ALL, result[glRefConfig.framebufferObject], extension);
     } else {
         ri.Printf(PRINT_ALL, result[2], extension);
     }
 
-    // OpenGL 3.0 - GL_ARB_vertex_array_object
-    extension = "GL_ARB_vertex_array_object";
-    glRefConfig.vertexArrayObject = false;
-    if (q_gl_version_at_least_3_0 || SDL_GL_ExtensionSupported(extension)) {
-        if (q_gl_version_at_least_3_0) {
-            // force VAO, core context requires it
-            glRefConfig.vertexArrayObject = true;
-        } else {
-            glRefConfig.vertexArrayObject = !!r_arb_vertex_array_object->integer;
-        }
-
-        QGL_ARB_vertex_array_object_PROCS;
-
-        ri.Printf(PRINT_ALL, result[glRefConfig.vertexArrayObject], extension);
-    } else {
-        ri.Printf(PRINT_ALL, result[2], extension);
-    }
-
-    // OpenGL 3.0 - GL_ARB_texture_float
-    extension = "GL_ARB_texture_float";
-    glRefConfig.textureFloat = false;
-    if (q_gl_version_at_least_3_0 || SDL_GL_ExtensionSupported(extension)) {
-        glRefConfig.textureFloat = !!r_ext_texture_float->integer;
-
-        ri.Printf(PRINT_ALL, result[glRefConfig.textureFloat], extension);
-    } else {
-        ri.Printf(PRINT_ALL, result[2], extension);
-    }
+    glRefConfig.vertexArrayObject = true;
+    glRefConfig.textureFloat = !!r_ext_texture_float->integer;
 
     // OpenGL 3.2 - GL_ARB_depth_clamp
     extension = "GL_ARB_depth_clamp";
@@ -177,26 +164,10 @@ void GLimp_InitExtraExtensions(void)
     extension = "GL_ARB_texture_compression_bptc";
     if (SDL_GL_ExtensionSupported(extension)) {
         const bool useBptc = r_ext_compressed_textures->integer >= 2;
-        if (useBptc)
+        if (useBptc) {
             glRefConfig.textureCompression |= TCR_BPTC;
-
-        ri.Printf(PRINT_ALL, result[useBptc], extension);
-    } else {
-        ri.Printf(PRINT_ALL, result[2], extension);
-    }
-
-    // GL_EXT_direct_state_access
-    extension = "GL_EXT_direct_state_access";
-    glRefConfig.directStateAccess = false;
-    if (SDL_GL_ExtensionSupported(extension)) {
-        glRefConfig.directStateAccess = !!r_ext_direct_state_access->integer;
-
-        // QGL_*_PROCS becomes several functions, do not remove {}
-        if (glRefConfig.directStateAccess) {
-            QGL_EXT_direct_state_access_PROCS;
         }
-
-        ri.Printf(PRINT_ALL, result[glRefConfig.directStateAccess], extension);
+        ri.Printf(PRINT_ALL, result[useBptc], extension);
     } else {
         ri.Printf(PRINT_ALL, result[2], extension);
     }

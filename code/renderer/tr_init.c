@@ -21,6 +21,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 // tr_init.c -- functions that are not called every frame
 
+// Add define so we have the implementation inlined in this file
+#define GL3W_IMPLEMENTATION
 #include "tr_local.h"
 
 #include "tr_dsa.h"
@@ -254,13 +256,13 @@ static void InitOpenGL(void)
     if (glConfig.vidWidth == 0) {
         GLint temp;
 
-        GLimp_Init(false);
+        GLimp_Init();
         GLimp_InitExtraExtensions();
 
         glConfig.textureEnvAddAvailable = true;
 
         // OpenGL driver constants
-        qglGetIntegerv(GL_MAX_TEXTURE_SIZE, &temp);
+        glGetIntegerv(GL_MAX_TEXTURE_SIZE, &temp);
         glConfig.maxTextureSize = temp;
 
         // stubbed or broken drivers may have reported 0...
@@ -268,11 +270,11 @@ static void InitOpenGL(void)
             glConfig.maxTextureSize = 0;
         }
 
-        qglGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &temp);
+        glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &temp);
         glConfig.numTextureUnits = temp;
 
         // reserve 160 components for other uniforms
-        qglGetIntegerv(GL_MAX_VERTEX_UNIFORM_COMPONENTS, &temp);
+        glGetIntegerv(GL_MAX_VERTEX_UNIFORM_COMPONENTS, &temp);
         glRefConfig.glslMaxAnimatedBones = Com_Clamp(0, IQM_MAX_JOINTS, (temp - 160) / 16);
         if (glRefConfig.glslMaxAnimatedBones < 12) {
             glRefConfig.glslMaxAnimatedBones = 0;
@@ -280,7 +282,7 @@ static void InitOpenGL(void)
     }
 
     // check for GLSL function textureCubeLod()
-    if (r_cubeMapping->integer && !QGL_VERSION_ATLEAST(3, 0)) {
+    if (r_cubeMapping->integer && !gl3wIsSupported(3, 0)) {
         ri.Printf(PRINT_WARNING, "WARNING: Disabled r_cubeMapping because it requires OpenGL 3.0\n");
         ri.Cvar_Set("r_cubeMapping", "0");
     }
@@ -294,7 +296,7 @@ void GL_CheckErrs(char* file, int line)
     int err;
     char s[64];
 
-    err = qglGetError();
+    err = glGetError();
     if (err == GL_NO_ERROR) {
         return;
     }
@@ -438,7 +440,7 @@ uint8_t* RB_ReadPixels(int x, int y, int width, int height, size_t* offset, int*
     int padwidth, linelen;
     GLint packAlign;
 
-    qglGetIntegerv(GL_PACK_ALIGNMENT, &packAlign);
+    glGetIntegerv(GL_PACK_ALIGNMENT, &packAlign);
 
     linelen = width * 3;
     padwidth = PAD(linelen, packAlign);
@@ -448,7 +450,7 @@ uint8_t* RB_ReadPixels(int x, int y, int width, int height, size_t* offset, int*
 
     bufstart = PADP((intptr_t)buffer + *offset, packAlign);
 
-    qglReadPixels(x, y, width, height, GL_RGB, GL_UNSIGNED_BYTE, bufstart);
+    glReadPixels(x, y, width, height, GL_RGB, GL_UNSIGNED_BYTE, bufstart);
 
     *offset = bufstart - buffer;
     *padlen = padwidth - linelen;
@@ -617,7 +619,7 @@ const void* RB_TakeVideoFrameCmd(const void* data)
 
     cmd = (const videoFrameCommand_t*)data;
 
-    qglGetIntegerv(GL_PACK_ALIGNMENT, &packAlign);
+    glGetIntegerv(GL_PACK_ALIGNMENT, &packAlign);
 
     linelen = cmd->width * 3;
 
@@ -630,7 +632,7 @@ const void* RB_TakeVideoFrameCmd(const void* data)
 
     cBuf = PADP(cmd->captureBuffer, packAlign);
 
-    qglReadPixels(0, 0, cmd->width, cmd->height, GL_RGB,
+    glReadPixels(0, 0, cmd->width, cmd->height, GL_RGB,
                   GL_UNSIGNED_BYTE, cBuf);
 
     memcount = padwidth * cmd->height;
@@ -681,9 +683,9 @@ const void* RB_TakeVideoFrameCmd(const void* data)
 */
 void GL_SetDefaultState(void)
 {
-    qglClearDepth(1.0f);
+    glClearDepth(1.0f);
 
-    qglCullFace(GL_FRONT);
+    glCullFace(GL_FRONT);
 
     GL_BindNullTextures();
 
@@ -692,8 +694,8 @@ void GL_SetDefaultState(void)
 
     GL_TextureMode(r_textureMode->string);
 
-    // qglShadeModel( GL_SMOOTH );
-    qglDepthFunc(GL_LEQUAL);
+    // glShadeModel( GL_SMOOTH );
+    glDepthFunc(GL_LEQUAL);
 
     // make sure our GL state vector is set correctly
     glState.glStateBits = GLS_DEPTHTEST_DISABLE | GLS_DEPTHMASK_TRUE;
@@ -704,27 +706,27 @@ void GL_SetDefaultState(void)
     GL_BindNullProgram();
 
     if (glRefConfig.vertexArrayObject)
-        qglBindVertexArray(0);
+        glBindVertexArray(0);
 
-    qglBindBuffer(GL_ARRAY_BUFFER, 0);
-    qglBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glState.currentVao = NULL;
     glState.vertexAttribsEnabled = 0;
 
-    qglPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    qglDepthMask(GL_TRUE);
-    qglDisable(GL_DEPTH_TEST);
-    qglEnable(GL_SCISSOR_TEST);
-    qglDisable(GL_CULL_FACE);
-    qglDisable(GL_BLEND);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    glDepthMask(GL_TRUE);
+    glDisable(GL_DEPTH_TEST);
+    glEnable(GL_SCISSOR_TEST);
+    glDisable(GL_CULL_FACE);
+    glDisable(GL_BLEND);
 
     if (glRefConfig.seamlessCubeMap)
-        qglEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+        glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 
     // GL_POLYGON_OFFSET_FILL will be glEnable()d when this is used
-    qglPolygonOffset(r_offsetFactor->value, r_offsetUnits->value);
+    glPolygonOffset(r_offsetFactor->value, r_offsetUnits->value);
 
-    qglClearColor(0.0f, 0.0f, 0.0f, 1.0f); // FIXME: get color of sky
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // FIXME: get color of sky
 }
 
 /*
@@ -765,16 +767,16 @@ void GfxInfo_f(void)
     ri.Printf(PRINT_ALL, "GL_VERSION: %s\n", glConfig.version_string);
     ri.Printf(PRINT_ALL, "GL_EXTENSIONS: ");
     // glConfig.extensions_string is a limited length so get the full list directly
-    if (qglGetStringi) {
+    if (glGetStringi) {
         GLint numExtensions;
         int i;
 
-        qglGetIntegerv(GL_NUM_EXTENSIONS, &numExtensions);
+        glGetIntegerv(GL_NUM_EXTENSIONS, &numExtensions);
         for (i = 0; i < numExtensions; i++) {
-            ri.Printf(PRINT_ALL, "%s ", qglGetStringi(GL_EXTENSIONS, i));
+            ri.Printf(PRINT_ALL, "%s ", glGetStringi(GL_EXTENSIONS, i));
         }
     } else {
-        R_PrintLongString((char*)qglGetString(GL_EXTENSIONS));
+        R_PrintLongString((char*)glGetString(GL_EXTENSIONS));
     }
     ri.Printf(PRINT_ALL, "\n");
     ri.Printf(PRINT_ALL, "GL_MAX_TEXTURE_SIZE: %d\n", glConfig.maxTextureSize);
@@ -815,32 +817,32 @@ void GfxMemInfo_f(void)
     case MI_NVX: {
         int value;
 
-        qglGetIntegerv(GL_GPU_MEMORY_INFO_DEDICATED_VIDMEM_NVX, &value);
+        glGetIntegerv(GL_GPU_MEMORY_INFO_DEDICATED_VIDMEM_NVX, &value);
         ri.Printf(PRINT_ALL, "GPU_MEMORY_INFO_DEDICATED_VIDMEM_NVX: %ikb\n", value);
 
-        qglGetIntegerv(GL_GPU_MEMORY_INFO_TOTAL_AVAILABLE_MEMORY_NVX, &value);
+        glGetIntegerv(GL_GPU_MEMORY_INFO_TOTAL_AVAILABLE_MEMORY_NVX, &value);
         ri.Printf(PRINT_ALL, "GPU_MEMORY_INFO_TOTAL_AVAILABLE_MEMORY_NVX: %ikb\n", value);
 
-        qglGetIntegerv(GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX, &value);
+        glGetIntegerv(GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX, &value);
         ri.Printf(PRINT_ALL, "GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX: %ikb\n", value);
 
-        qglGetIntegerv(GL_GPU_MEMORY_INFO_EVICTION_COUNT_NVX, &value);
+        glGetIntegerv(GL_GPU_MEMORY_INFO_EVICTION_COUNT_NVX, &value);
         ri.Printf(PRINT_ALL, "GPU_MEMORY_INFO_EVICTION_COUNT_NVX: %i\n", value);
 
-        qglGetIntegerv(GL_GPU_MEMORY_INFO_EVICTED_MEMORY_NVX, &value);
+        glGetIntegerv(GL_GPU_MEMORY_INFO_EVICTED_MEMORY_NVX, &value);
         ri.Printf(PRINT_ALL, "GPU_MEMORY_INFO_EVICTED_MEMORY_NVX: %ikb\n", value);
     } break;
     case MI_ATI: {
         // GL_ATI_meminfo
         int value[4];
 
-        qglGetIntegerv(GL_VBO_FREE_MEMORY_ATI, &value[0]);
+        glGetIntegerv(GL_VBO_FREE_MEMORY_ATI, &value[0]);
         ri.Printf(PRINT_ALL, "VBO_FREE_MEMORY_ATI: %ikb total %ikb largest aux: %ikb total %ikb largest\n", value[0], value[1], value[2], value[3]);
 
-        qglGetIntegerv(GL_TEXTURE_FREE_MEMORY_ATI, &value[0]);
+        glGetIntegerv(GL_TEXTURE_FREE_MEMORY_ATI, &value[0]);
         ri.Printf(PRINT_ALL, "TEXTURE_FREE_MEMORY_ATI: %ikb total %ikb largest aux: %ikb total %ikb largest\n", value[0], value[1], value[2], value[3]);
 
-        qglGetIntegerv(GL_RENDERBUFFER_FREE_MEMORY_ATI, &value[0]);
+        glGetIntegerv(GL_RENDERBUFFER_FREE_MEMORY_ATI, &value[0]);
         ri.Printf(PRINT_ALL, "RENDERBUFFER_FREE_MEMORY_ATI: %ikb total %ikb largest aux: %ikb total %ikb largest\n", value[0], value[1], value[2], value[3]);
     } break;
     }
@@ -1062,7 +1064,7 @@ void R_InitQueries(void)
         return;
 
     if (r_drawSunRays->integer)
-        qglGenQueries(ARRAY_LEN(tr.sunFlareQuery), tr.sunFlareQuery);
+        glGenQueries(ARRAY_LEN(tr.sunFlareQuery), tr.sunFlareQuery);
 }
 
 void R_ShutDownQueries(void)
@@ -1071,7 +1073,7 @@ void R_ShutDownQueries(void)
         return;
 
     if (r_drawSunRays->integer)
-        qglDeleteQueries(ARRAY_LEN(tr.sunFlareQuery), tr.sunFlareQuery);
+        glDeleteQueries(ARRAY_LEN(tr.sunFlareQuery), tr.sunFlareQuery);
 }
 
 void R_Init(void)
@@ -1150,7 +1152,7 @@ void R_Init(void)
 
     R_InitQueries();
 
-    err = qglGetError();
+    err = glGetError();
     if (err != GL_NO_ERROR)
         ri.Printf(PRINT_ALL, "glGetError() = 0x%x\n", err);
 

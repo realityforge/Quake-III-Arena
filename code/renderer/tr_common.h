@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../qcommon/q_shared.h"
 #include "../qcommon/cvar_engine.h"
 #include "tr_public.h"
-#include "qgl.h"
+#include "GL3W/gl3w.h"
 
 typedef enum {
     IMGTYPE_COLORALPHA, // for color, lightmap, diffuse, and specular
@@ -155,7 +155,7 @@ IMPLEMENTATION SPECIFIC FUNCTIONS
 ====================================================================
 */
 
-void GLimp_Init(bool fixedFunction);
+void GLimp_Init(void);
 void GLimp_Shutdown(void);
 void GLimp_EndFrame(void);
 

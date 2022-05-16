@@ -66,15 +66,15 @@ void GL_Cull(int cullType)
     }
 
     if (cullType == CT_TWO_SIDED) {
-        qglDisable(GL_CULL_FACE);
+        glDisable(GL_CULL_FACE);
     } else {
         bool cullFront = (cullType == CT_FRONT_SIDED);
 
         if (glState.faceCulling == CT_TWO_SIDED)
-            qglEnable(GL_CULL_FACE);
+            glEnable(GL_CULL_FACE);
 
         if (glState.faceCullFront != cullFront)
-            qglCullFace(cullFront ? GL_FRONT : GL_BACK);
+            glCullFace(cullFront ? GL_FRONT : GL_BACK);
 
         glState.faceCullFront = cullFront;
     }
@@ -99,11 +99,11 @@ void GL_State(unsigned long stateBits)
     // check depthFunc bits
     if (diff & GLS_DEPTHFUNC_BITS) {
         if (stateBits & GLS_DEPTHFUNC_EQUAL) {
-            qglDepthFunc(GL_EQUAL);
+            glDepthFunc(GL_EQUAL);
         } else if (stateBits & GLS_DEPTHFUNC_GREATER) {
-            qglDepthFunc(GL_GREATER);
+            glDepthFunc(GL_GREATER);
         } else {
-            qglDepthFunc(GL_LEQUAL);
+            glDepthFunc(GL_LEQUAL);
         }
     }
 
@@ -114,9 +114,9 @@ void GL_State(unsigned long stateBits)
         uint32_t storedState = glState.storedGlState & (GLS_SRCBLEND_BITS | GLS_DSTBLEND_BITS);
 
         if (oldState == 0) {
-            qglEnable(GL_BLEND);
+            glEnable(GL_BLEND);
         } else if (newState == 0) {
-            qglDisable(GL_BLEND);
+            glDisable(GL_BLEND);
         }
 
         if (newState != 0 && storedState != newState) {
@@ -188,34 +188,34 @@ void GL_State(unsigned long stateBits)
                 break;
             }
 
-            qglBlendFunc(srcFactor, dstFactor);
+            glBlendFunc(srcFactor, dstFactor);
         }
     }
 
     // check depthmask
     if (diff & GLS_DEPTHMASK_TRUE) {
         if (stateBits & GLS_DEPTHMASK_TRUE) {
-            qglDepthMask(GL_TRUE);
+            glDepthMask(GL_TRUE);
         } else {
-            qglDepthMask(GL_FALSE);
+            glDepthMask(GL_FALSE);
         }
     }
 
     // fill/line mode
     if (diff & GLS_POLYMODE_LINE) {
         if (stateBits & GLS_POLYMODE_LINE) {
-            qglPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         } else {
-            qglPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         }
     }
 
     // depthtest
     if (diff & GLS_DEPTHTEST_DISABLE) {
         if (stateBits & GLS_DEPTHTEST_DISABLE) {
-            qglDisable(GL_DEPTH_TEST);
+            glDisable(GL_DEPTH_TEST);
         } else {
-            qglEnable(GL_DEPTH_TEST);
+            glEnable(GL_DEPTH_TEST);
         }
     }
 
@@ -250,9 +250,9 @@ static void RB_Hyperspace(void)
     }
 
     c = (backEnd.refdef.time & 255) / 255.0f;
-    qglClearColor(c, c, c, 1);
-    qglClear(GL_COLOR_BUFFER_BIT);
-    qglClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(c, c, c, 1);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     backEnd.isHyperspace = true;
 }
@@ -262,10 +262,10 @@ static void SetViewportAndScissor(void)
     GL_SetProjectionMatrix(backEnd.viewParms.projectionMatrix);
 
     // set the window clipping
-    qglViewport(backEnd.viewParms.viewportX, backEnd.viewParms.viewportY,
-                backEnd.viewParms.viewportWidth, backEnd.viewParms.viewportHeight);
-    qglScissor(backEnd.viewParms.viewportX, backEnd.viewParms.viewportY,
+    glViewport(backEnd.viewParms.viewportX, backEnd.viewParms.viewportY,
                backEnd.viewParms.viewportWidth, backEnd.viewParms.viewportHeight);
+    glScissor(backEnd.viewParms.viewportX, backEnd.viewParms.viewportY,
+              backEnd.viewParms.viewportWidth, backEnd.viewParms.viewportHeight);
 }
 
 /*
@@ -282,7 +282,7 @@ void RB_BeginDrawingView(void)
 
     // sync with gl if needed
     if (r_finish->integer == 1 && !glState.finishCalled) {
-        qglFinish();
+        glFinish();
         glState.finishCalled = true;
     }
     if (r_finish->integer == 0) {
@@ -329,7 +329,7 @@ void RB_BeginDrawingView(void)
         clearBits |= GL_COLOR_BUFFER_BIT;
     }
 
-    qglClear(clearBits);
+    glClear(clearBits);
 
     if ((backEnd.refdef.rdflags & RDF_HYPERSPACE)) {
         RB_Hyperspace();
@@ -474,13 +474,13 @@ void RB_RenderDrawSurfList(drawSurf_t* drawSurfs, int numDrawSurfs)
                     }
 
                     if (!oldDepthRange)
-                        qglDepthRange(0, 0.3);
+                        glDepthRange(0, 0.3);
                 } else {
                     if (!wasCrosshair && backEnd.viewParms.stereoFrame != STEREO_CENTER) {
                         GL_SetProjectionMatrix(backEnd.viewParms.projectionMatrix);
                     }
 
-                    qglDepthRange(0, 1);
+                    glDepthRange(0, 1);
                 }
 
                 oldDepthRange = depthRange;
@@ -508,7 +508,7 @@ void RB_RenderDrawSurfList(drawSurf_t* drawSurfs, int numDrawSurfs)
 
     GL_SetModelviewMatrix(backEnd.viewParms.world.modelMatrix);
 
-    qglDepthRange(0, 1);
+    glDepthRange(0, 1);
 }
 
 /*
@@ -545,8 +545,8 @@ void RB_SetGL2D(void)
     }
 
     // set 2D virtual screen size
-    qglViewport(0, 0, width, height);
-    qglScissor(0, 0, width, height);
+    glViewport(0, 0, width, height);
+    glScissor(0, 0, width, height);
 
     Mat4Ortho(0, width, height, 0, 0, 1, matrix);
     GL_SetProjectionMatrix(matrix);
@@ -588,7 +588,7 @@ void RE_StretchRaw(int x, int y, int w, int h, int cols, int rows, const uint8_t
     }
 
     // we definitely want to sync every frame for the cinematics
-    qglFinish();
+    glFinish();
 
     start = 0;
     if (r_speeds->integer) {
@@ -652,16 +652,16 @@ void RE_UploadCinematic(int w, int h, int cols, int rows, const uint8_t* data, i
     if (cols != tr.scratchImage[client]->width || rows != tr.scratchImage[client]->height) {
         tr.scratchImage[client]->width = tr.scratchImage[client]->uploadWidth = cols;
         tr.scratchImage[client]->height = tr.scratchImage[client]->uploadHeight = rows;
-        qglTextureImage2DEXT(texture, GL_TEXTURE_2D, 0, GL_RGB8, cols, rows, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-        qglTextureParameterfEXT(texture, GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        qglTextureParameterfEXT(texture, GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        qglTextureParameterfEXT(texture, GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        qglTextureParameterfEXT(texture, GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTextureImage2DEXT(texture, GL_TEXTURE_2D, 0, GL_RGB8, cols, rows, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        glTextureParameterfEXT(texture, GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTextureParameterfEXT(texture, GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTextureParameterfEXT(texture, GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTextureParameterfEXT(texture, GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     } else {
         if (dirty) {
             // otherwise, just subimage upload it so that drivers can tell we are going to be changing
             // it and don't try and do a texture compression
-            qglTextureSubImage2DEXT(texture, GL_TEXTURE_2D, 0, 0, 0, cols, rows, GL_RGBA, GL_UNSIGNED_BYTE, data);
+            glTextureSubImage2DEXT(texture, GL_TEXTURE_2D, 0, 0, 0, cols, rows, GL_RGBA, GL_UNSIGNED_BYTE, data);
         }
     }
 }
@@ -780,7 +780,7 @@ const void* RB_DrawSurfs(const void* data)
     RB_BeginDrawingView();
 
     if (glRefConfig.framebufferObject && (backEnd.viewParms.flags & VPF_DEPTHCLAMP) && glRefConfig.depthClamp) {
-        qglEnable(GL_DEPTH_CLAMP);
+        glEnable(GL_DEPTH_CLAMP);
     }
 
     if (glRefConfig.framebufferObject && !(backEnd.refdef.rdflags & RDF_NOWORLDMODEL) && (r_depthPrepass->integer || isShadowView)) {
@@ -790,9 +790,9 @@ const void* RB_DrawSurfs(const void* data)
         VectorSet4(viewInfo, backEnd.viewParms.zFar / r_znear->value, backEnd.viewParms.zFar, 0.0, 0.0);
 
         backEnd.depthFill = true;
-        qglColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+        glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
         RB_RenderDrawSurfList(cmd->drawSurfs, cmd->numDrawSurfs);
-        qglColorMask(!backEnd.colorMask[0], !backEnd.colorMask[1], !backEnd.colorMask[2], !backEnd.colorMask[3]);
+        glColorMask(!backEnd.colorMask[0], !backEnd.colorMask[1], !backEnd.colorMask[2], !backEnd.colorMask[3]);
         backEnd.depthFill = false;
 
         if (!isShadowView) {
@@ -803,7 +803,7 @@ const void* RB_DrawSurfs(const void* data)
                 // If we're rendering directly to the screen, copy the depth to a texture
                 // This is incredibly slow on Intel Graphics, so just skip it on there
                 if (!glRefConfig.intelGraphics)
-                    qglCopyTextureSubImage2DEXT(tr.renderDepthImage->texnum, GL_TEXTURE_2D, 0, 0, 0, 0, 0, glConfig.vidWidth, glConfig.vidHeight);
+                    glCopyTextureSubImage2DEXT(tr.renderDepthImage->texnum, GL_TEXTURE_2D, 0, 0, 0, 0, 0, glConfig.vidWidth, glConfig.vidHeight);
             }
 
             if (tr.hdrDepthFbo) {
@@ -827,8 +827,8 @@ const void* RB_DrawSurfs(const void* data)
                 box[2] = backEnd.viewParms.viewportWidth * tr.screenShadowFbo->width / (float)glConfig.vidWidth;
                 box[3] = backEnd.viewParms.viewportHeight * tr.screenShadowFbo->height / (float)glConfig.vidHeight;
 
-                qglViewport(box[0], box[1], box[2], box[3]);
-                qglScissor(box[0], box[1], box[2], box[3]);
+                glViewport(box[0], box[1], box[2], box[3]);
+                glScissor(box[0], box[1], box[2], box[3]);
 
                 box[0] = backEnd.viewParms.viewportX / (float)glConfig.vidWidth;
                 box[1] = backEnd.viewParms.viewportY / (float)glConfig.vidHeight;
@@ -933,8 +933,8 @@ const void* RB_DrawSurfs(const void* data)
 
                 FBO_Bind(tr.quarterFbo[0]);
 
-                qglViewport(0, 0, tr.quarterFbo[0]->width, tr.quarterFbo[0]->height);
-                qglScissor(0, 0, tr.quarterFbo[0]->width, tr.quarterFbo[0]->height);
+                glViewport(0, 0, tr.quarterFbo[0]->width, tr.quarterFbo[0]->height);
+                glScissor(0, 0, tr.quarterFbo[0]->width, tr.quarterFbo[0]->height);
 
                 VectorSet4(quadVerts[0], -1, 1, 0, 1);
                 VectorSet4(quadVerts[1], 1, 1, 0, 1);
@@ -965,8 +965,8 @@ const void* RB_DrawSurfs(const void* data)
 
                 FBO_Bind(tr.quarterFbo[1]);
 
-                qglViewport(0, 0, tr.quarterFbo[1]->width, tr.quarterFbo[1]->height);
-                qglScissor(0, 0, tr.quarterFbo[1]->width, tr.quarterFbo[1]->height);
+                glViewport(0, 0, tr.quarterFbo[1]->width, tr.quarterFbo[1]->height);
+                glScissor(0, 0, tr.quarterFbo[1]->width, tr.quarterFbo[1]->height);
 
                 GLSL_BindProgram(&tr.depthBlurShader[0]);
 
@@ -979,8 +979,8 @@ const void* RB_DrawSurfs(const void* data)
 
                 FBO_Bind(tr.screenSsaoFbo);
 
-                qglViewport(0, 0, tr.screenSsaoFbo->width, tr.screenSsaoFbo->height);
-                qglScissor(0, 0, tr.screenSsaoFbo->width, tr.screenSsaoFbo->height);
+                glViewport(0, 0, tr.screenSsaoFbo->width, tr.screenSsaoFbo->height);
+                glScissor(0, 0, tr.screenSsaoFbo->width, tr.screenSsaoFbo->height);
 
                 GLSL_BindProgram(&tr.depthBlurShader[1]);
 
@@ -999,7 +999,7 @@ const void* RB_DrawSurfs(const void* data)
     }
 
     if (glRefConfig.framebufferObject && (backEnd.viewParms.flags & VPF_DEPTHCLAMP) && glRefConfig.depthClamp) {
-        qglDisable(GL_DEPTH_CLAMP);
+        glDisable(GL_DEPTH_CLAMP);
     }
 
     if (!isShadowView) {
@@ -1013,18 +1013,18 @@ const void* RB_DrawSurfs(const void* data)
             FBO_t* oldFbo = glState.currentFBO;
             FBO_Bind(tr.sunRaysFbo);
 
-            qglClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-            qglClear(GL_COLOR_BUFFER_BIT);
+            glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT);
 
             if (glRefConfig.occlusionQuery) {
                 tr.sunFlareQueryActive[tr.sunFlareQueryIndex] = true;
-                qglBeginQuery(GL_SAMPLES_PASSED, tr.sunFlareQuery[tr.sunFlareQueryIndex]);
+                glBeginQuery(GL_SAMPLES_PASSED, tr.sunFlareQuery[tr.sunFlareQueryIndex]);
             }
 
             RB_DrawSun(0.3, tr.sunFlareShader);
 
             if (glRefConfig.occlusionQuery) {
-                qglEndQuery(GL_SAMPLES_PASSED);
+                glEndQuery(GL_SAMPLES_PASSED);
             }
 
             FBO_Bind(oldFbo);
@@ -1042,7 +1042,7 @@ const void* RB_DrawSurfs(const void* data)
 
         FBO_Bind(NULL);
         if (cubemap && cubemap->image)
-            qglGenerateTextureMipmapEXT(cubemap->image->texnum, GL_TEXTURE_CUBE_MAP);
+            glGenerateTextureMipmapEXT(cubemap->image->texnum, GL_TEXTURE_CUBE_MAP);
     }
 
     return (const void*)(cmd + 1);
@@ -1061,12 +1061,12 @@ const void* RB_DrawBuffer(const void* data)
     if (glRefConfig.framebufferObject)
         FBO_Bind(NULL);
 
-    qglDrawBuffer(cmd->buffer);
+    glDrawBuffer(cmd->buffer);
 
     // clear screen for debugging
     if (r_clear->integer) {
-        qglClearColor(1, 0, 0.5, 1);
-        qglClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClearColor(1, 0, 0.5, 1);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
     return (const void*)(cmd + 1);
@@ -1091,9 +1091,9 @@ void RB_ShowImages(void)
 
     RB_SetGL2D();
 
-    qglClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
 
-    qglFinish();
+    glFinish();
 
     start = ri.Milliseconds();
 
@@ -1125,7 +1125,7 @@ void RB_ShowImages(void)
         }
     }
 
-    qglFinish();
+    glFinish();
 
     end = ri.Milliseconds();
     ri.Printf(PRINT_ALL, "%i msec to draw all images\n", end - start);
@@ -1147,7 +1147,7 @@ const void* RB_ColorMask(const void* data)
         backEnd.colorMask[3] = !cmd->rgba[3];
     }
 
-    qglColorMask(cmd->rgba[0], cmd->rgba[1], cmd->rgba[2], cmd->rgba[3]);
+    glColorMask(cmd->rgba[0], cmd->rgba[1], cmd->rgba[2], cmd->rgba[3]);
 
     return (const void*)(cmd + 1);
 }
@@ -1172,12 +1172,12 @@ const void* RB_ClearDepth(const void* data)
         }
     }
 
-    qglClear(GL_DEPTH_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
 
     // if we're doing MSAA, clear the depth texture for the resolve buffer
     if (tr.msaaResolveFbo) {
         FBO_Bind(tr.msaaResolveFbo);
-        qglClear(GL_DEPTH_BUFFER_BIT);
+        glClear(GL_DEPTH_BUFFER_BIT);
     }
 
     return (const void*)(cmd + 1);
@@ -1207,7 +1207,7 @@ const void* RB_SwapBuffers(const void* data)
         unsigned char* stencilReadback;
 
         stencilReadback = ri.Hunk_AllocateTempMemory(glConfig.vidWidth * glConfig.vidHeight);
-        qglReadPixels(0, 0, glConfig.vidWidth, glConfig.vidHeight, GL_STENCIL_INDEX, GL_UNSIGNED_BYTE, stencilReadback);
+        glReadPixels(0, 0, glConfig.vidWidth, glConfig.vidHeight, GL_STENCIL_INDEX, GL_UNSIGNED_BYTE, stencilReadback);
 
         for (i = 0; i < glConfig.vidWidth * glConfig.vidHeight; i++) {
             sum += stencilReadback[i];
@@ -1230,7 +1230,7 @@ const void* RB_SwapBuffers(const void* data)
     }
 
     if (!glState.finishCalled) {
-        qglFinish();
+        glFinish();
     }
 
     GLimp_EndFrame();
@@ -1252,11 +1252,11 @@ const void* RB_CapShadowMap(const void* data)
     if (cmd->map != -1) {
         if (cmd->cubeSide != -1) {
             if (tr.shadowCubemaps[cmd->map]) {
-                qglCopyTextureSubImage2DEXT(tr.shadowCubemaps[cmd->map]->texnum, GL_TEXTURE_CUBE_MAP_POSITIVE_X + cmd->cubeSide, 0, 0, 0, backEnd.refdef.x, glConfig.vidHeight - (backEnd.refdef.y + PSHADOW_MAP_SIZE), PSHADOW_MAP_SIZE, PSHADOW_MAP_SIZE);
+                glCopyTextureSubImage2DEXT(tr.shadowCubemaps[cmd->map]->texnum, GL_TEXTURE_CUBE_MAP_POSITIVE_X + cmd->cubeSide, 0, 0, 0, backEnd.refdef.x, glConfig.vidHeight - (backEnd.refdef.y + PSHADOW_MAP_SIZE), PSHADOW_MAP_SIZE, PSHADOW_MAP_SIZE);
             }
         } else {
             if (tr.pshadowMaps[cmd->map]) {
-                qglCopyTextureSubImage2DEXT(tr.pshadowMaps[cmd->map]->texnum, GL_TEXTURE_2D, 0, 0, 0, backEnd.refdef.x, glConfig.vidHeight - (backEnd.refdef.y + PSHADOW_MAP_SIZE), PSHADOW_MAP_SIZE, PSHADOW_MAP_SIZE);
+                glCopyTextureSubImage2DEXT(tr.pshadowMaps[cmd->map]->texnum, GL_TEXTURE_2D, 0, 0, 0, backEnd.refdef.x, glConfig.vidHeight - (backEnd.refdef.y + PSHADOW_MAP_SIZE), PSHADOW_MAP_SIZE, PSHADOW_MAP_SIZE);
             }
         }
     }

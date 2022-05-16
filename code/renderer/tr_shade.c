@@ -32,7 +32,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 void R_DrawElements(int numIndexes, int firstIndex)
 {
-    qglDrawElements(GL_TRIANGLES, numIndexes, GL_INDEX_TYPE, BUFFER_OFFSET(firstIndex * sizeof(glIndex_t)));
+    glDrawElements(GL_TRIANGLES, numIndexes, GL_INDEX_TYPE, BUFFER_OFFSET(firstIndex * sizeof(glIndex_t)));
 }
 
 shaderCommands_t tess;
@@ -83,7 +83,7 @@ static void DrawTris(shaderCommands_t* input)
     GL_BindToTMU(tr.whiteImage, TB_COLORMAP);
 
     GL_State(GLS_POLYMODE_LINE | GLS_DEPTHMASK_TRUE);
-    qglDepthRange(0, 0);
+    glDepthRange(0, 0);
 
     {
         shaderProgram_t* sp = &tr.textureColorShader;
@@ -99,7 +99,7 @@ static void DrawTris(shaderCommands_t* input)
         R_DrawElements(input->numIndexes, input->firstIndex);
     }
 
-    qglDepthRange(0, 1);
+    glDepthRange(0, 1);
 }
 
 /*
@@ -1302,7 +1302,7 @@ void RB_StageIteratorGeneric(void)
 
     // set polygon offset if necessary
     if (input->shader->polygonOffset) {
-        qglEnable(GL_POLYGON_OFFSET_FILL);
+        glEnable(GL_POLYGON_OFFSET_FILL);
     }
 
     // render depth if in depthfill mode
@@ -1311,7 +1311,7 @@ void RB_StageIteratorGeneric(void)
 
         // reset polygon offset
         if (input->shader->polygonOffset) {
-            qglDisable(GL_POLYGON_OFFSET_FILL);
+            glDisable(GL_POLYGON_OFFSET_FILL);
         }
 
         return;
@@ -1324,7 +1324,7 @@ void RB_StageIteratorGeneric(void)
         }
         // reset polygon offset
         if (input->shader->polygonOffset) {
-            qglDisable(GL_POLYGON_OFFSET_FILL);
+            glDisable(GL_POLYGON_OFFSET_FILL);
         }
 
         return;
@@ -1357,7 +1357,7 @@ void RB_StageIteratorGeneric(void)
 
     // reset polygon offset
     if (input->shader->polygonOffset) {
-        qglDisable(GL_POLYGON_OFFSET_FILL);
+        glDisable(GL_POLYGON_OFFSET_FILL);
     }
 }
 

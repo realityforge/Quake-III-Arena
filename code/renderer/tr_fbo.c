@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 bool R_CheckFBO(const FBO_t* fbo)
 {
-    GLenum code = qglCheckNamedFramebufferStatusEXT(fbo->frameBuffer, GL_FRAMEBUFFER);
+    GLenum code = glCheckNamedFramebufferStatusEXT(fbo->frameBuffer, GL_FRAMEBUFFER);
 
     if (code == GL_FRAMEBUFFER_COMPLETE)
         return true;
@@ -92,7 +92,7 @@ FBO_t* FBO_Create(const char* name, int width, int height)
     fbo->width = width;
     fbo->height = height;
 
-    qglGenFramebuffers(1, &fbo->frameBuffer);
+    glGenFramebuffers(1, &fbo->frameBuffer);
 
     return fbo;
 }
@@ -108,19 +108,19 @@ void FBO_CreateBuffer(FBO_t* fbo, int format, int index, int multisample)
     case GL_RGBA:
     case GL_RGB8:
     case GL_RGBA8:
-    case GL_RGB16F_ARB:
-    case GL_RGBA16F_ARB:
-    case GL_RGB32F_ARB:
-    case GL_RGBA32F_ARB:
+    case GL_RGB16F:
+    case GL_RGBA16F:
+    case GL_RGB32F:
+    case GL_RGBA32F:
         fbo->colorFormat = format;
         pRenderBuffer = &fbo->colorBuffers[index];
         attachment = GL_COLOR_ATTACHMENT0 + index;
         break;
 
     case GL_DEPTH_COMPONENT:
-    case GL_DEPTH_COMPONENT16_ARB:
-    case GL_DEPTH_COMPONENT24_ARB:
-    case GL_DEPTH_COMPONENT32_ARB:
+    case GL_DEPTH_COMPONENT16:
+    case GL_DEPTH_COMPONENT24:
+    case GL_DEPTH_COMPONENT32:
         fbo->depthFormat = format;
         pRenderBuffer = &fbo->depthBuffer;
         attachment = GL_DEPTH_ATTACHMENT;
@@ -148,19 +148,19 @@ void FBO_CreateBuffer(FBO_t* fbo, int format, int index, int multisample)
 
     absent = *pRenderBuffer == 0;
     if (absent)
-        qglGenRenderbuffers(1, pRenderBuffer);
+        glGenRenderbuffers(1, pRenderBuffer);
 
     if (multisample && glRefConfig.framebufferMultisample)
-        qglNamedRenderbufferStorageMultisampleEXT(*pRenderBuffer, multisample, format, fbo->width, fbo->height);
+        glNamedRenderbufferStorageMultisampleEXT(*pRenderBuffer, multisample, format, fbo->width, fbo->height);
     else
-        qglNamedRenderbufferStorageEXT(*pRenderBuffer, format, fbo->width, fbo->height);
+        glNamedRenderbufferStorageEXT(*pRenderBuffer, format, fbo->width, fbo->height);
 
     if (absent) {
         if (attachment == 0) {
-            qglNamedFramebufferRenderbufferEXT(fbo->frameBuffer, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, *pRenderBuffer);
-            qglNamedFramebufferRenderbufferEXT(fbo->frameBuffer, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, *pRenderBuffer);
+            glNamedFramebufferRenderbufferEXT(fbo->frameBuffer, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, *pRenderBuffer);
+            glNamedFramebufferRenderbufferEXT(fbo->frameBuffer, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, *pRenderBuffer);
         } else {
-            qglNamedFramebufferRenderbufferEXT(fbo->frameBuffer, attachment, GL_RENDERBUFFER, *pRenderBuffer);
+            glNamedFramebufferRenderbufferEXT(fbo->frameBuffer, attachment, GL_RENDERBUFFER, *pRenderBuffer);
         }
     }
 }
@@ -171,9 +171,9 @@ void FBO_AttachImage(FBO_t* fbo, image_t* image, GLenum attachment, GLuint cubem
     int index;
 
     if (image->flags & IMGFLAG_CUBEMAP)
-        target = GL_TEXTURE_CUBE_MAP_POSITIVE_X_ARB + cubemapside;
+        target = GL_TEXTURE_CUBE_MAP_POSITIVE_X + cubemapside;
 
-    qglNamedFramebufferTexture2DEXT(fbo->frameBuffer, attachment, target, image->texnum, 0);
+    glNamedFramebufferTexture2DEXT(fbo->frameBuffer, attachment, target, image->texnum, 0);
     index = attachment - GL_COLOR_ATTACHMENT0;
     if (index >= 0 && index <= 15)
         fbo->colorImage[index] = image;
@@ -211,10 +211,10 @@ void FBO_Init(void)
 
     hdrFormat = GL_RGBA8;
     if (r_hdr->integer && glRefConfig.textureFloat)
-        hdrFormat = GL_RGBA16F_ARB;
+        hdrFormat = GL_RGBA16F;
 
     if (glRefConfig.framebufferMultisample)
-        qglGetIntegerv(GL_MAX_SAMPLES, &multisample);
+        glGetIntegerv(GL_MAX_SAMPLES, &multisample);
 
     if (r_ext_framebuffer_multisample->integer < multisample)
         multisample = r_ext_framebuffer_multisample->integer;
@@ -248,7 +248,7 @@ void FBO_Init(void)
     // this fixes the corrupt screen bug with r_hdr 1 on older hardware
     if (tr.renderFbo) {
         GL_BindFramebuffer(GL_FRAMEBUFFER, tr.renderFbo->frameBuffer);
-        qglClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
     if (tr.screenScratchImage) {
@@ -335,7 +335,7 @@ void FBO_Init(void)
     if (tr.renderCubeImage) {
         tr.renderCubeFbo = FBO_Create("_renderCubeFbo", tr.renderCubeImage->width, tr.renderCubeImage->height);
         FBO_AttachImage(tr.renderCubeFbo, tr.renderCubeImage, GL_COLOR_ATTACHMENT0, 0);
-        FBO_CreateBuffer(tr.renderCubeFbo, GL_DEPTH_COMPONENT24_ARB, 0, 0);
+        FBO_CreateBuffer(tr.renderCubeFbo, GL_DEPTH_COMPONENT24, 0, 0);
         R_CheckFBO(tr.renderCubeFbo);
     }
 
@@ -362,17 +362,17 @@ void FBO_Shutdown(void)
 
         for (j = 0; j < glRefConfig.maxColorAttachments; j++) {
             if (fbo->colorBuffers[j])
-                qglDeleteRenderbuffers(1, &fbo->colorBuffers[j]);
+                glDeleteRenderbuffers(1, &fbo->colorBuffers[j]);
         }
 
         if (fbo->depthBuffer)
-            qglDeleteRenderbuffers(1, &fbo->depthBuffer);
+            glDeleteRenderbuffers(1, &fbo->depthBuffer);
 
         if (fbo->stencilBuffer)
-            qglDeleteRenderbuffers(1, &fbo->stencilBuffer);
+            glDeleteRenderbuffers(1, &fbo->stencilBuffer);
 
         if (fbo->frameBuffer)
-            qglDeleteFramebuffers(1, &fbo->frameBuffer);
+            glDeleteFramebuffers(1, &fbo->frameBuffer);
     }
 }
 
@@ -435,8 +435,8 @@ void FBO_BlitFromTexture(struct image_s* src, vec4_t inSrcTexCorners, vec2_t inS
 
     FBO_Bind(dst);
 
-    qglViewport(0, 0, width, height);
-    qglScissor(0, 0, width, height);
+    glViewport(0, 0, width, height);
+    glScissor(0, 0, width, height);
 
     Mat4Ortho(0, width, height, 0, 0, 1, projection);
 
@@ -521,9 +521,9 @@ void FBO_FastBlit(FBO_t* src, ivec4_t srcBox, FBO_t* dst, ivec4_t dstBox, int bu
 
     GL_BindFramebuffer(GL_READ_FRAMEBUFFER, srcFb);
     GL_BindFramebuffer(GL_DRAW_FRAMEBUFFER, dstFb);
-    qglBlitFramebuffer(srcBoxFinal[0], srcBoxFinal[1], srcBoxFinal[2], srcBoxFinal[3],
-                       dstBoxFinal[0], dstBoxFinal[1], dstBoxFinal[2], dstBoxFinal[3],
-                       buffers, filter);
+    glBlitFramebuffer(srcBoxFinal[0], srcBoxFinal[1], srcBoxFinal[2], srcBoxFinal[3],
+                      dstBoxFinal[0], dstBoxFinal[1], dstBoxFinal[2], dstBoxFinal[3],
+                      buffers, filter);
 
     GL_BindFramebuffer(GL_FRAMEBUFFER, 0);
     glState.currentFBO = NULL;

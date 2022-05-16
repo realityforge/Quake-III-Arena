@@ -1,0 +1,56 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+load("//build_defs:rules.bzl", "FULL_WARNINGS")
+
+filegroup(
+    name = "specification_files",
+    srcs = [
+        # Downloaded from https://www.khronos.org/registry/OpenGL/api/GL/glcorearb.h on Ma 13, 2022
+        "include/GL/glcorearb.h",
+        # Downloaded from https://www.khronos.org/registry/OpenGL/api/GL/glext.h on Ma 13, 2022
+        "include/GL/glext.h",
+        # https://www.khronos.org/registry/EGL/api/KHR/khrplatform.h on Ma 13, 2022
+        "include/KHR/khrplatform.h",
+    ],
+)
+
+# gl3w_gen is a rewritten version that was heavily inspired by
+# https://github.com/skaslev/gl3w/blob/5f8d7fd191ba22ff2b60c1106d7135bb9a335533/gl3w_gen.py
+py_binary(
+    name = "gl3w_gen",
+    srcs = ["gl3w_gen.py"],
+)
+
+genrule(
+    name = "gl3w_gen_generator",
+    srcs = [
+        ":specification_files",
+        "templates/include/GL3W/gl3w.h",
+    ],
+    outs = ["include/GL3W/gl3w.h"],
+    cmd = "$(location :gl3w_gen) --input_dir third_party/gl3w --output_directory $(RULEDIR)",
+    tools = [":gl3w_gen"],
+)
+
+cc_library(
+    name = "gl3w",
+    hdrs = [
+        "include/GL/glcorearb.h",
+        "include/GL/glext.h",
+        "include/GL3W/gl3w.h",
+        "include/KHR/khrplatform.h",
+    ],
+    copts = FULL_WARNINGS,
+    includes = ["include"],
+    visibility = ["//code/renderer:__pkg__"],
+)

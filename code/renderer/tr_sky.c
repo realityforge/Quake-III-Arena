@@ -399,7 +399,7 @@ static void DrawSkySide(struct image_s* image, const int mins[2], const int maxs
 
     R_DrawElements(tess.numIndexes - tess.firstIndex, tess.firstIndex);
 
-    // qglDrawElements(GL_TRIANGLES, tess.numIndexes - tess.firstIndex, GL_INDEX_TYPE, BUFFER_OFFSET(tess.firstIndex * sizeof(glIndex_t)));
+    // glDrawElements(GL_TRIANGLES, tess.numIndexes - tess.firstIndex, GL_INDEX_TYPE, BUFFER_OFFSET(tess.firstIndex * sizeof(glIndex_t)));
 
     // R_BindNullVBO();
     // R_BindNullIBO();
@@ -696,8 +696,8 @@ void RB_DrawSun(float scale, shader_t* shader)
         return;
     }
 
-    // qglLoadMatrixf( backEnd.viewParms.world.modelMatrix );
-    // qglTranslatef (backEnd.viewParms.or.origin[0], backEnd.viewParms.or.origin[1], backEnd.viewParms.or.origin[2]);
+    // glLoadMatrixf( backEnd.viewParms.world.modelMatrix );
+    // glTranslatef (backEnd.viewParms.or.origin[0], backEnd.viewParms.or.origin[1], backEnd.viewParms.or.origin[2]);
     {
         // FIXME: this could be a lot cleaner
         mat4_t translation, modelview;
@@ -718,7 +718,7 @@ void RB_DrawSun(float scale, shader_t* shader)
     VectorScale(vec2, size, vec2);
 
     // farthest depth range
-    qglDepthRange(1.0, 1.0);
+    glDepthRange(1.0, 1.0);
 
     RB_BeginSurface(shader, 0, 0);
 
@@ -727,7 +727,7 @@ void RB_DrawSun(float scale, shader_t* shader)
     RB_EndSurface();
 
     // back to normal depth range
-    qglDepthRange(0.0, 1.0);
+    glDepthRange(0.0, 1.0);
 }
 
 /*
@@ -754,9 +754,9 @@ void RB_StageIteratorSky(void)
     // front of everything to allow developers to see how
     // much sky is getting sucked in
     if (r_showsky->integer) {
-        qglDepthRange(0.0, 0.0);
+        glDepthRange(0.0, 0.0);
     } else {
-        qglDepthRange(1.0, 1.0);
+        glDepthRange(1.0, 1.0);
     }
 
     // draw the outer skybox
@@ -765,7 +765,7 @@ void RB_StageIteratorSky(void)
 
         GL_State(0);
         GL_Cull(CT_FRONT_SIDED);
-        // qglTranslatef (backEnd.viewParms.or.origin[0], backEnd.viewParms.or.origin[1], backEnd.viewParms.or.origin[2]);
+        // glTranslatef (backEnd.viewParms.or.origin[0], backEnd.viewParms.or.origin[1], backEnd.viewParms.or.origin[2]);
 
         {
             // FIXME: this could be a lot cleaner
@@ -791,7 +791,7 @@ void RB_StageIteratorSky(void)
     // draw the inner skybox
 
     // back to normal depth range
-    qglDepthRange(0.0, 1.0);
+    glDepthRange(0.0, 1.0);
 
     // note that sky was drawn so we will draw a sun later
     backEnd.skyRenderedThisView = true;

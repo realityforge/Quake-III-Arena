@@ -32,12 +32,12 @@ cc_library(
     name = "internal_api",
     hdrs = [
         "iqm.h",
-        "qgl.h",
         "tr_common.h",
     ],
     copts = FULL_WARNINGS,
     deps = [
         ":api",
+        "//third_party/gl3w",
         "//third_party/sdl",
     ],
 )

@@ -199,23 +199,12 @@ void R_ImageList_f(void)
             // 4 bytes per pixel
             estSize *= 4;
             break;
-        case GL_LUMINANCE8:
-        case GL_LUMINANCE:
-            format = "L      ";
-            // 1 byte per pixel?
-            break;
         case GL_RGB5:
         case GL_RGB8:
         case GL_RGB:
             format = "RGB    ";
             // 3 bytes per pixel?
             estSize *= 3;
-            break;
-        case GL_LUMINANCE8_ALPHA8:
-        case GL_LUMINANCE_ALPHA:
-            format = "LA     ";
-            // 2 bytes per pixel?
-            estSize *= 2;
             break;
         case GL_SRGB_EXT:
         case GL_SRGB8_EXT:
@@ -1590,12 +1579,7 @@ static GLenum RawImage_GetFormat(const uint8_t* data, int numPixels, GLenum picF
             }
         }
     } else if (lightMap) {
-        // GL_LUMINANCE is not valid for OpenGL 3.2 Core context and
-        // everything becomes solid black
-        if (0 && r_greyscale->integer)
-            internalFormat = GL_LUMINANCE;
-        else
-            internalFormat = GL_RGBA;
+        internalFormat = GL_RGBA;
     } else {
         if (RawImage_HasAlpha(data, numPixels)) {
             samples = 4;
@@ -1603,42 +1587,28 @@ static GLenum RawImage_GetFormat(const uint8_t* data, int numPixels, GLenum picF
 
         // select proper internal format
         if (samples == 3) {
-            if (0 && r_greyscale->integer) {
-                if (r_texturebits->integer == 16 || r_texturebits->integer == 32)
-                    internalFormat = GL_LUMINANCE8;
-                else
-                    internalFormat = GL_LUMINANCE;
+            if (!forceNoCompression && (glRefConfig.textureCompression & TCR_BPTC)) {
+                internalFormat = GL_COMPRESSED_RGBA_BPTC_UNORM_ARB;
+            } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC_ARB) {
+                internalFormat = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
+            } else if (r_texturebits->integer == 16) {
+                internalFormat = GL_RGB5;
+            } else if (r_texturebits->integer == 32) {
+                internalFormat = GL_RGB8;
             } else {
-                if (!forceNoCompression && (glRefConfig.textureCompression & TCR_BPTC)) {
-                    internalFormat = GL_COMPRESSED_RGBA_BPTC_UNORM_ARB;
-                } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC_ARB) {
-                    internalFormat = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
-                } else if (r_texturebits->integer == 16) {
-                    internalFormat = GL_RGB5;
-                } else if (r_texturebits->integer == 32) {
-                    internalFormat = GL_RGB8;
-                } else {
-                    internalFormat = GL_RGB;
-                }
+                internalFormat = GL_RGB;
             }
         } else if (samples == 4) {
-            if (0 && r_greyscale->integer) {
-                if (r_texturebits->integer == 16 || r_texturebits->integer == 32)
-                    internalFormat = GL_LUMINANCE8_ALPHA8;
-                else
-                    internalFormat = GL_LUMINANCE_ALPHA;
+            if (!forceNoCompression && (glRefConfig.textureCompression & TCR_BPTC)) {
+                internalFormat = GL_COMPRESSED_RGBA_BPTC_UNORM_ARB;
+            } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC_ARB) {
+                internalFormat = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
+            } else if (r_texturebits->integer == 16) {
+                internalFormat = GL_RGBA4;
+            } else if (r_texturebits->integer == 32) {
+                internalFormat = GL_RGBA8;
             } else {
-                if (!forceNoCompression && (glRefConfig.textureCompression & TCR_BPTC)) {
-                    internalFormat = GL_COMPRESSED_RGBA_BPTC_UNORM_ARB;
-                } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC_ARB) {
-                    internalFormat = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
-                } else if (r_texturebits->integer == 16) {
-                    internalFormat = GL_RGBA4;
-                } else if (r_texturebits->integer == 32) {
-                    internalFormat = GL_RGBA8;
-                } else {
-                    internalFormat = GL_RGBA;
-                }
+                internalFormat = GL_RGBA;
             }
         }
     }
@@ -2383,7 +2353,7 @@ void R_CreateBuiltinImages(void)
         if (r_sunlightMode->integer) {
             for (x = 0; x < 4; x++) {
                 tr.sunShadowDepthImage[x] = R_CreateImage(va("*sunshadowdepth%i", x), NULL, r_shadowMapSize->integer, r_shadowMapSize->integer, IMGTYPE_COLORALPHA, IMGFLAG_NO_COMPRESSION | IMGFLAG_CLAMPTOEDGE, GL_DEPTH_COMPONENT24);
-                glTextureParameterfEXT(tr.sunShadowDepthImage[x]->texnum, GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
+                glTextureParameterfEXT(tr.sunShadowDepthImage[x]->texnum, GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
                 glTextureParameterfEXT(tr.sunShadowDepthImage[x]->texnum, GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
             }
 
