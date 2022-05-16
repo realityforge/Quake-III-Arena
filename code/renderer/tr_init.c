@@ -847,7 +847,6 @@ void GfxMemInfo_f(void)
 
 void R_Register(void)
 {
-    r_developer = ri.Cvar_Get("developer", "0", CVAR_TEMP);
     // latched and archived variables
     r_allowExtensions = ri.Cvar_Get("r_allowExtensions", "1", CVAR_ARCHIVE | CVAR_LATCH);
     r_ext_compressed_textures = ri.Cvar_Get("r_ext_compressed_textures", "0", CVAR_ARCHIVE | CVAR_LATCH);
