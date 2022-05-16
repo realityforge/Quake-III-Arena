@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 bool R_CheckFBO(const FBO_t* fbo)
 {
-    GLenum code = glCheckNamedFramebufferStatusEXT(fbo->frameBuffer, GL_FRAMEBUFFER);
+    GLenum code = GLDSA_CheckNamedFramebufferStatusEXT(fbo->frameBuffer, GL_FRAMEBUFFER);
 
     if (code == GL_FRAMEBUFFER_COMPLETE)
         return true;
@@ -151,16 +151,16 @@ void FBO_CreateBuffer(FBO_t* fbo, int format, int index, int multisample)
         glGenRenderbuffers(1, pRenderBuffer);
 
     if (multisample && glRefConfig.framebufferMultisample)
-        glNamedRenderbufferStorageMultisampleEXT(*pRenderBuffer, multisample, format, fbo->width, fbo->height);
+        GLDSA_NamedRenderbufferStorageMultisampleEXT(*pRenderBuffer, multisample, format, fbo->width, fbo->height);
     else
-        glNamedRenderbufferStorageEXT(*pRenderBuffer, format, fbo->width, fbo->height);
+        GLDSA_NamedRenderbufferStorageEXT(*pRenderBuffer, format, fbo->width, fbo->height);
 
     if (absent) {
         if (attachment == 0) {
-            glNamedFramebufferRenderbufferEXT(fbo->frameBuffer, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, *pRenderBuffer);
-            glNamedFramebufferRenderbufferEXT(fbo->frameBuffer, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, *pRenderBuffer);
+            GLDSA_NamedFramebufferRenderbufferEXT(fbo->frameBuffer, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, *pRenderBuffer);
+            GLDSA_NamedFramebufferRenderbufferEXT(fbo->frameBuffer, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, *pRenderBuffer);
         } else {
-            glNamedFramebufferRenderbufferEXT(fbo->frameBuffer, attachment, GL_RENDERBUFFER, *pRenderBuffer);
+            GLDSA_NamedFramebufferRenderbufferEXT(fbo->frameBuffer, attachment, GL_RENDERBUFFER, *pRenderBuffer);
         }
     }
 }
@@ -173,7 +173,7 @@ void FBO_AttachImage(FBO_t* fbo, image_t* image, GLenum attachment, GLuint cubem
     if (image->flags & IMGFLAG_CUBEMAP)
         target = GL_TEXTURE_CUBE_MAP_POSITIVE_X + cubemapside;
 
-    glNamedFramebufferTexture2DEXT(fbo->frameBuffer, attachment, target, image->texnum, 0);
+    GLDSA_NamedFramebufferTexture2DEXT(fbo->frameBuffer, attachment, target, image->texnum, 0);
     index = attachment - GL_COLOR_ATTACHMENT0;
     if (index >= 0 && index <= 15)
         fbo->colorImage[index] = image;

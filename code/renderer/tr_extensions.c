@@ -24,7 +24,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "SDL.h"
 
 #include "tr_local.h"
-#include "tr_dsa.h"
 
 void GLimp_InitExtraExtensions(void)
 {
@@ -37,33 +36,6 @@ void GLimp_InitExtraExtensions(void)
     if (NULL != strstr((char*)glGetString(GL_RENDERER), "Intel")) {
         glRefConfig.intelGraphics = true;
     }
-
-    // set DSA fallbacks
-#define DSA_FALLBACK(name)       \
-    if (NULL == gl##name) {      \
-        gl##name = GLDSA_##name; \
-    }
-    DSA_FALLBACK(BindMultiTextureEXT)
-    DSA_FALLBACK(TextureParameterfEXT)
-    DSA_FALLBACK(TextureParameteriEXT)
-    DSA_FALLBACK(TextureImage2DEXT)
-    DSA_FALLBACK(TextureSubImage2DEXT)
-    DSA_FALLBACK(CopyTextureSubImage2DEXT)
-    DSA_FALLBACK(CompressedTextureImage2DEXT)
-    DSA_FALLBACK(CompressedTextureSubImage2DEXT)
-    DSA_FALLBACK(GenerateTextureMipmapEXT)
-    DSA_FALLBACK(ProgramUniform1iEXT)
-    DSA_FALLBACK(ProgramUniform1fEXT)
-    DSA_FALLBACK(ProgramUniform2fEXT)
-    DSA_FALLBACK(ProgramUniform3fEXT)
-    DSA_FALLBACK(ProgramUniform4fEXT)
-    DSA_FALLBACK(ProgramUniform1fvEXT)
-    DSA_FALLBACK(ProgramUniformMatrix4fvEXT)
-    DSA_FALLBACK(NamedRenderbufferStorageEXT)
-    DSA_FALLBACK(NamedRenderbufferStorageMultisampleEXT)
-    DSA_FALLBACK(CheckNamedFramebufferStatusEXT)
-    DSA_FALLBACK(NamedFramebufferTexture2DEXT)
-    DSA_FALLBACK(NamedFramebufferRenderbufferEXT)
 
     // OpenGL 1.5 - GL_ARB_occlusion_query
     glRefConfig.occlusionQuery = true;

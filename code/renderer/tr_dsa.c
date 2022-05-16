@@ -56,7 +56,7 @@ int GL_BindMultiTexture(GLenum texunit, GLenum target, GLuint texture)
     if (target >= GL_TEXTURE_CUBE_MAP_POSITIVE_X && target <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z)
         target = GL_TEXTURE_CUBE_MAP;
 
-    glBindMultiTextureEXT(texunit, target, texture);
+    GLDSA_BindMultiTextureEXT(texunit, target, texture);
     glDsaState.textures[tmu] = texture;
     return 1;
 }
