@@ -33,8 +33,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 typedef enum {
     RSERR_OK,
-
-    RSERR_INVALID_FULLSCREEN,
     RSERR_INVALID_MODE
 } rserr_t;
 
@@ -502,9 +500,6 @@ static bool GLimp_StartDriverAndSetMode(int mode, bool fullscreen, bool noborder
 
     rserr_t err = GLimp_SetMode(mode, fullscreen, noborder);
     switch (err) {
-    case RSERR_INVALID_FULLSCREEN:
-        ri.Printf(PRINT_ALL, "...WARNING: fullscreen unavailable in this mode\n");
-        return false;
     case RSERR_INVALID_MODE:
         ri.Printf(PRINT_ALL, "...WARNING: could not set the given mode (%d)\n", mode);
         return false;
