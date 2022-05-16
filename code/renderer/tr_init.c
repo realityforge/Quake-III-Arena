@@ -630,7 +630,7 @@ const void* RB_TakeVideoFrameCmd(const void* data)
     cBuf = PADP(cmd->captureBuffer, packAlign);
 
     glReadPixels(0, 0, cmd->width, cmd->height, GL_RGB,
-                  GL_UNSIGNED_BYTE, cBuf);
+                 GL_UNSIGNED_BYTE, cBuf);
 
     memcount = padwidth * cmd->height;
 
