@@ -83,9 +83,6 @@ extern float displayAspect;
 // cvars
 //
 
-// Is the developer flag enabled
-extern cvar_t* r_developer;
-
 extern cvar_t* r_stencilbits; // number of desired stencil bits
 extern cvar_t* r_depthbits; // number of desired depth bits
 extern cvar_t* r_colorbits; // number of desired color bits, only relevant for fullscreen
