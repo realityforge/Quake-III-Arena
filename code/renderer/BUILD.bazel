@@ -38,7 +38,6 @@ cc_library(
     deps = [
         ":api",
         "//third_party/gl3w",
-        "//third_party/sdl",
     ],
 )
 
@@ -58,7 +57,6 @@ cc_library(
         ":internal_api",
         "//code/qcommon:base",
         "//code/qcommon:shared_api",
-        "//third_party/sdl",
         "@libjpeg_turbo//:jpeg",
         "@libspng",
     ],
@@ -77,7 +75,6 @@ cc_library(
         ":imagelib",
         ":internal_api",
         "//code/qcommon:shared_api",
-        "//third_party/sdl",
     ],
 )
 

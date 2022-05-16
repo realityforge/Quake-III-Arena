@@ -15,7 +15,6 @@
 #define TR_IMAGE_H
 
 #include <stdint.h>
-#include "SDL_opengl.h"
 
 // TODO: Rather than using GLenum for pixel_format use our
 //  own internal enum and then have a LUT in each renderer for
