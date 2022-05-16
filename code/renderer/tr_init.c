@@ -836,8 +836,7 @@ void R_Register(void)
     r_ext_framebuffer_multisample = ri.Cvar_Get("r_ext_framebuffer_multisample", "0", CVAR_ARCHIVE | CVAR_LATCH);
     r_arb_seamless_cube_map = ri.Cvar_Get("r_arb_seamless_cube_map", "0", CVAR_ARCHIVE | CVAR_LATCH);
 
-    r_ext_texture_filter_anisotropic = ri.Cvar_Get("r_ext_texture_filter_anisotropic",
-                                                   "0", CVAR_ARCHIVE | CVAR_LATCH);
+    r_ext_texture_filter_anisotropic = ri.Cvar_Get("r_ext_texture_filter_anisotropic", "0", CVAR_ARCHIVE | CVAR_LATCH);
     r_ext_max_anisotropy = ri.Cvar_Get("r_ext_max_anisotropy", "2", CVAR_ARCHIVE | CVAR_LATCH);
 
     r_picmip = ri.Cvar_Get("r_picmip", "1", CVAR_ARCHIVE | CVAR_LATCH);
