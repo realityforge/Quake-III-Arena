@@ -1344,7 +1344,6 @@ typedef struct {
     bool seamlessCubeMap;
 
     bool vertexArrayObject;
-    bool directStateAccess;
 } glRefConfig_t;
 
 typedef struct {
