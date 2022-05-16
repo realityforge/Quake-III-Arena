@@ -35,6 +35,10 @@ import re
 parser = argparse.ArgumentParser(description='gl3w generator script')
 parser.add_argument('--input_dir', type=str, default='', help='Input directory')
 parser.add_argument('--output_directory', type=str, default='', help='Output directory')
+parser.add_argument('--minimum_profile',
+                    type=str,
+                    default='1.0',
+                    help='The lowest OpenGL profile that the generated code will support')
 args = parser.parse_args()
 
 print('Loading API Headers  to scan')
@@ -82,6 +86,9 @@ for proc in procs:
     procs_def_content.append('#define {0: <48} gl3wProcs.gl.{1}\n'.format(proc, proc[2:]))
 
 procs_table_content = []
+procs_table_content.append(r'#define GL3W_MIN_MAJOR_VERSION ' + args.minimum_profile.split('.')[0] + "\n")
+procs_table_content.append(r'#define GL3W_MIN_MINOR_VERSION ' + args.minimum_profile.split('.')[1] + "\n")
+
 procs_table_content.append(r'''
 
 static const char* gl3w_proc_names[] = {

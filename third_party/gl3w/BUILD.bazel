@@ -38,7 +38,7 @@ genrule(
         "templates/include/GL3W/gl3w.h",
     ],
     outs = ["include/GL3W/gl3w.h"],
-    cmd = "$(location :gl3w_gen) --input_dir third_party/gl3w --output_directory $(RULEDIR)",
+    cmd = "$(location :gl3w_gen) --input_dir third_party/gl3w --minimum_profile 3.0 --output_directory $(RULEDIR)",
     tools = [":gl3w_gen"],
 )
 

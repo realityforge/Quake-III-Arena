@@ -404,7 +404,7 @@ static int GLimp_SetMode(int mode, bool fullscreen, bool noborder)
 
             ri.Printf(PRINT_ALL, "SDL_GL_CreateContext succeeded.\n");
 
-            if (GL3W_OK == gl3wInit(3, 0)) {
+            if (GL3W_OK == gl3wInit()) {
                 renderer = (const char*)glGetString(GL_RENDERER);
             } else {
                 ri.Printf(PRINT_ALL, "Failed to initialize OpenGL context\n");
@@ -430,7 +430,7 @@ static int GLimp_SetMode(int mode, bool fullscreen, bool noborder)
                 continue;
             }
 
-            if (GL3W_OK != gl3wInit(3, 0)) {
+            if (GL3W_OK != gl3wInit()) {
                 ri.Printf(PRINT_ALL, "gl3wInit() failed\n");
                 gl3wDispose();
                 SDL_GL_DeleteContext(SDL_glContext);

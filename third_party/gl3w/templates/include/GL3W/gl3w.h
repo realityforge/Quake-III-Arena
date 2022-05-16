@@ -70,11 +70,9 @@ typedef GL3WglProc (*GL3WGetProcAddressProc)(const char* proc);
 /**
 * Initializes the library. Should be called once after an OpenGL context has been created.
 *
-* @param min_major the minimum major version required.
-* @param min_minor the minimum minor version required.
-* @return GL3W_OK on success, GL3W_ERROR_OPENGL_VERSION if minimum versions failed to be met, GL3W_ERROR_LIBRARY_CLOSE if the wrapper was already initialized and failed to be disposed, GL3W_ERROR_INIT if the library is missing critical symbols
+* @return GL3W_OK on success, GL3W_ERROR_OPENGL_VERSION if minimum version (specified at build time) failed to be met, GL3W_ERROR_LIBRARY_CLOSE if the wrapper was already initialized and failed to be disposed, GL3W_ERROR_INIT if the library is missing critical symbols
 */
-GL3W_API int gl3wInit(int min_major, int min_minor);
+GL3W_API int gl3wInit(void);
 
 /**
 * Dispose the wrapper.
@@ -358,7 +356,7 @@ static bool gl3w_is_version(const int min_major, const int min_minor)
 
 static bool gl3w_close_libgl_atexit_registered = false;
 
-int gl3wInit(const int min_major, const int min_minor)
+int gl3wInit()
 {
    gl3w_error = NULL;
    const int dispose_result = gl3wDispose();
@@ -378,7 +376,7 @@ int gl3wInit(const int min_major, const int min_minor)
            if (!glGetIntegerv) {
                gl3wDispose();
                return GL3W_ERROR_INIT;
-           } else if (gl3w_is_version(min_major, min_minor)) {
+           } else if (gl3w_is_version(GL3W_MIN_MAJOR_VERSION, GL3W_MIN_MINOR_VERSION)) {
                gl3wDispose();
                return GL3W_ERROR_OPENGL_VERSION;
            } else {
