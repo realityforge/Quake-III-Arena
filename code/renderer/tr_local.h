@@ -973,7 +973,6 @@ extern cvar_t* r_ignorehwgamma; // overrides hardware gamma capabilities
 extern cvar_t* r_allowExtensions; // global enable/disable of OpenGL extensions
 extern cvar_t* r_ext_compressed_textures; // these control use of specific extensions
 extern cvar_t* r_ext_gamma_control;
-extern cvar_t* r_ext_texenv_op;
 extern cvar_t* r_ext_compiled_vertex_array;
 
 extern cvar_t* r_nobind; // turns off binding to appropriate textures
