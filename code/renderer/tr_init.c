@@ -91,7 +91,6 @@ cvar_t* r_allowExtensions;
 
 cvar_t* r_ext_compressed_textures;
 cvar_t* r_ext_multitexture;
-cvar_t* r_ext_compiled_vertex_array;
 cvar_t* r_ext_texture_filter_anisotropic;
 cvar_t* r_ext_max_anisotropy;
 
@@ -794,7 +793,6 @@ void GfxInfo_f(void)
     ri.Printf(PRINT_ALL, "texturemode: %s\n", r_textureMode->string);
     ri.Printf(PRINT_ALL, "picmip: %d\n", r_picmip->integer);
     ri.Printf(PRINT_ALL, "texture bits: %d\n", r_texturebits->integer);
-    ri.Printf(PRINT_ALL, "compiled vertex arrays: %s\n", enablestrings[qglLockArraysEXT != 0]);
     ri.Printf(PRINT_ALL, "texenv add: %s\n", enablestrings[glConfig.textureEnvAddAvailable != 0]);
     ri.Printf(PRINT_ALL, "compressed textures: %s\n", enablestrings[glConfig.textureCompression != TC_NONE]);
     if (r_vertexLight->integer) {
@@ -851,7 +849,6 @@ void R_Register(void)
     r_allowExtensions = ri.Cvar_Get("r_allowExtensions", "1", CVAR_ARCHIVE | CVAR_LATCH);
     r_ext_compressed_textures = ri.Cvar_Get("r_ext_compressed_textures", "0", CVAR_ARCHIVE | CVAR_LATCH);
     r_ext_multitexture = ri.Cvar_Get("r_ext_multitexture", "1", CVAR_ARCHIVE | CVAR_LATCH);
-    r_ext_compiled_vertex_array = ri.Cvar_Get("r_ext_compiled_vertex_array", "1", CVAR_ARCHIVE | CVAR_LATCH);
 
     r_ext_framebuffer_object = ri.Cvar_Get("r_ext_framebuffer_object", "1", CVAR_ARCHIVE | CVAR_LATCH);
     r_ext_texture_float = ri.Cvar_Get("r_ext_texture_float", "1", CVAR_ARCHIVE | CVAR_LATCH);
