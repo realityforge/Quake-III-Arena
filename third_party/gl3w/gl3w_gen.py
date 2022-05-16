@@ -72,6 +72,8 @@ if verbose:
 
 # Maps name of header filename => spec
 header_specs = {}
+# Maps name of header filename => specs that have been skipped
+header_suppressed_specs = {}
 # Maps name of spec => list of procs
 specs = {}
 procs = []
@@ -82,16 +84,16 @@ proc_pattern = re.compile(r'GLAPI.*APIENTRY\s+(\w+)')
 spec = None
 skip_current_spec = True
 
-spec_header_files = ['include/GL/glcorearb.h', 'include/GL/glext.h']
+spec_header_files = ['GL/glcorearb.h', 'GL/glext.h']
 
 for filename in spec_header_files:
-    with open(os.path.join(args.input_dir, filename), 'r') as f:
+    with open(os.path.join(args.input_dir, 'include/' + filename), 'r') as f:
+        header_specs[filename] = []
+        header_suppressed_specs[filename] = []
         for line in f:
             m = spec_pattern.match(line)
             if m:
                 spec = m.group(1)
-                if not header_specs.get(spec):
-                    header_specs[spec] = []
                 v = profile_spec_name_pattern.match(spec)
                 if v:
                     v = v.group(1).replace('_', '.')
@@ -108,12 +110,15 @@ for filename in spec_header_files:
                             'Skipping spec ' + spec + ' as extensions specified and this is not a supported extension')
                 else:
                     skip_current_spec = False
+                if skip_current_spec:
+                    header_suppressed_specs[filename].append(spec)
+                else:
+                    header_specs[filename].append(spec)
             if not skip_current_spec:
                 m = proc_pattern.match(line)
                 if not m:
                     continue
                 proc = m.group(1)
-                header_specs[spec].append(proc)
                 if proc in procs:
                     continue
                 if not specs.get(spec):
@@ -131,6 +136,25 @@ if not quiet:
 print('Loading template')
 header_template = open(os.path.join(args.input_dir, 'templates/include/GL3W/gl3w.h'), 'r')
 
+specs_present = []
+includes_lines = []
+for filename in spec_header_files:
+    # We define all the specs we do not want so that they do not get defined and nor do their constants
+    for spec in header_suppressed_specs[filename]:
+        includes_lines.append("#define " + spec + "\n")
+    for spec in header_specs[filename]:
+        if spec in specs_present:
+            # We have to undef guard that was defined in previous header as this header includes a similar section
+            includes_lines.append("#undef " + spec + "\n")
+    includes_lines.append("#include \"" + filename + "\"\n")
+    # Any spec we did define then we add them to a list of all specs defined
+    for spec in header_specs[filename]:
+        if not spec in specs_present:
+            specs_present.append(spec)
+    # We undefine the specs we do not want so not to leave incorrect defines present in context
+    for spec in header_suppressed_specs[filename]:
+        includes_lines.append("#undef " + spec + "\n")
+
 procs_def_content = []
 
 if extensions:
@@ -146,7 +170,8 @@ GL3W_API extern union GL3WExtensions gl3wExtensions;
 
 ''')
     for extension in extensions:
-        procs_def_content.append('#define {0: <48} gl3wExtensions.ext.{1}\n'.format('GL3W_' + extension[3:], extension[3:]))
+        procs_def_content.append(
+            '#define {0: <48} gl3wExtensions.ext.{1}\n'.format('GL3W_' + extension[3:], extension[3:]))
     procs_def_content.append('\n')
 
 procs_def_content.append('union GL3WProcs {\n')
@@ -187,6 +212,7 @@ for proc in procs:
 procs_table_content.append(r'''};
 ''')
 
+includes_content = ''.join(includes_lines)
 procs_def = ''.join(procs_def_content)
 procs_table = ''.join(procs_table_content)
 
@@ -199,4 +225,5 @@ print('Generating {0}...'.format(output_filename))
 with open(output_filename, 'wb') as f:
     for line in header_template:
         f.write(
-            line.replace('GL3W_PROCS_DEFINITION;', procs_def).replace('GL3W_PROC_NAMES;', procs_table).encode('utf-8'))
+            line.replace('GL3W_SPEC_INCLUDES;', includes_content).replace('GL3W_PROCS_DEFINITION;', procs_def).replace(
+                'GL3W_PROC_NAMES;', procs_table).encode('utf-8'))

@@ -34,16 +34,8 @@
 #define __gl_h_ // NOLINT(bugprone-reserved-identifier)
 #endif
 
-#include "GL/glcorearb.h"
-#undef GL_VERSION_1_3
-#undef GL_VERSION_1_4
-#undef GL_VERSION_3_1
-#undef GL_VERSION_3_3
-#undef GL_ARB_imaging
-#undef GL_ARB_robustness
-#undef GL_NV_path_rendering
-#undef GL_VERSION_4_5
-#include "GL/glext.h"
+GL3W_SPEC_INCLUDES;
+
 #include <stdbool.h>
 
 #ifndef GL3W_API
