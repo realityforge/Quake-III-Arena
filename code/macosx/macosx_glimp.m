@@ -715,34 +715,9 @@ static void GLW_InitExtensions(void)
         r_swapInterval->modified = true; // force a set next frame
     }
 
-    // GL_ARB_multitexture
-    qglMultiTexCoord2fARB = NULL;
-    qglActiveTextureARB = NULL;
-    qglClientActiveTextureARB = NULL;
-    if (strstr(glConfig.extensions_string, "GL_ARB_multitexture")) {
-        if (r_ext_multitexture->integer) {
-            qglMultiTexCoord2fARB = (PFNGLMULTITEXCOORD2FARBPROC)qwglGetProcAddress("glMultiTexCoord2fARB");
-            qglActiveTextureARB = (PFNGLACTIVETEXTUREARBPROC)qwglGetProcAddress("glActiveTextureARB");
-            qglClientActiveTextureARB = (PFNGLCLIENTACTIVETEXTUREARBPROC)qwglGetProcAddress("glClientActiveTextureARB");
-
-            if (qglActiveTextureARB) {
-                qglGetIntegerv(GL_MAX_ACTIVE_TEXTURES_ARB, (GLint*)&glConfig.maxActiveTextures);
-
-                if (glConfig.maxActiveTextures > 1) {
-                    ri.Printf(PRINT_ALL, "...using GL_ARB_multitexture\n");
-                } else {
-                    qglMultiTexCoord2fARB = NULL;
-                    qglActiveTextureARB = NULL;
-                    qglClientActiveTextureARB = NULL;
-                    ri.Printf(PRINT_ALL, "...not using GL_ARB_multitexture, < 2 texture units\n");
-                }
-            }
-        } else {
-            ri.Printf(PRINT_ALL, "...ignoring GL_ARB_multitexture\n");
-        }
-    } else {
-        ri.Printf(PRINT_ALL, "...GL_ARB_multitexture not found\n");
-    }
+    qglMultiTexCoord2fARB = (PFNGLMULTITEXCOORD2FARBPROC)qwglGetProcAddress("glMultiTexCoord2fARB");
+    qglActiveTextureARB = (PFNGLACTIVETEXTUREARBPROC)qwglGetProcAddress("glActiveTextureARB");
+    qglClientActiveTextureARB = (PFNGLCLIENTACTIVETEXTUREARBPROC)qwglGetProcAddress("glClientActiveTextureARB");
 
     // GL_EXT_compiled_vertex_array
     qglLockArraysEXT = NULL;

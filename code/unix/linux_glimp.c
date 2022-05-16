@@ -1189,34 +1189,9 @@ static void GLW_InitExtensions(void)
         ri.Printf(PRINT_ALL, "...GL_S3_s3tc not found\n");
     }
 
-    // GL_ARB_multitexture
-    qglMultiTexCoord2fARB = NULL;
-    qglActiveTextureARB = NULL;
-    qglClientActiveTextureARB = NULL;
-    if (Q_stristr(glConfig.extensions_string, "GL_ARB_multitexture")) {
-        if (r_ext_multitexture->value) {
-            qglMultiTexCoord2fARB = (PFNGLMULTITEXCOORD2FARBPROC)dlsym(glw_state.OpenGLLib, "glMultiTexCoord2fARB");
-            qglActiveTextureARB = (PFNGLACTIVETEXTUREARBPROC)dlsym(glw_state.OpenGLLib, "glActiveTextureARB");
-            qglClientActiveTextureARB = (PFNGLCLIENTACTIVETEXTUREARBPROC)dlsym(glw_state.OpenGLLib, "glClientActiveTextureARB");
-
-            if (qglActiveTextureARB) {
-                qglGetIntegerv(GL_MAX_ACTIVE_TEXTURES_ARB, &glConfig.maxActiveTextures);
-
-                if (glConfig.maxActiveTextures > 1) {
-                    ri.Printf(PRINT_ALL, "...using GL_ARB_multitexture\n");
-                } else {
-                    qglMultiTexCoord2fARB = NULL;
-                    qglActiveTextureARB = NULL;
-                    qglClientActiveTextureARB = NULL;
-                    ri.Printf(PRINT_ALL, "...not using GL_ARB_multitexture, < 2 texture units\n");
-                }
-            }
-        } else {
-            ri.Printf(PRINT_ALL, "...ignoring GL_ARB_multitexture\n");
-        }
-    } else {
-        ri.Printf(PRINT_ALL, "...GL_ARB_multitexture not found\n");
-    }
+    qglMultiTexCoord2fARB = (PFNGLMULTITEXCOORD2FARBPROC)dlsym(glw_state.OpenGLLib, "glMultiTexCoord2fARB");
+    qglActiveTextureARB = (PFNGLACTIVETEXTUREARBPROC)dlsym(glw_state.OpenGLLib, "glActiveTextureARB");
+    qglClientActiveTextureARB = (PFNGLCLIENTACTIVETEXTUREARBPROC)dlsym(glw_state.OpenGLLib, "glClientActiveTextureARB");
 
     // GL_EXT_compiled_vertex_array
     if (Q_stristr(glConfig.extensions_string, "GL_EXT_compiled_vertex_array")) {
