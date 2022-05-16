@@ -1625,7 +1625,6 @@ extern cvar_t* r_ext_framebuffer_multisample;
 extern cvar_t* r_arb_seamless_cube_map;
 extern cvar_t* r_ext_direct_state_access;
 
-extern cvar_t* r_nobind; // turns off binding to appropriate textures
 extern cvar_t* r_singleShader; // make most world faces use default shader
 extern cvar_t* r_roundImagesDown;
 extern cvar_t* r_colorMipLevels; // development aid to see texture mip usage
