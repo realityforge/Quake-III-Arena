@@ -1429,11 +1429,6 @@ static bool CollapseMultitexture(void)
         return false;
     }
 
-    // GL_ADD is a separate extension
-    if (collapse[i].multitextureEnv == GL_ADD && !glConfig.textureEnvAddAvailable) {
-        return false;
-    }
-
     // make sure waveforms have identical parameters
     if ((stages[0].rgbGen != stages[1].rgbGen) || (stages[0].alphaGen != stages[1].alphaGen)) {
         return false;

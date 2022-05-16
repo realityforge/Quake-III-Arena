@@ -1189,20 +1189,6 @@ static void GLW_InitExtensions(void)
         ri.Printf(PRINT_ALL, "...GL_S3_s3tc not found\n");
     }
 
-    // GL_EXT_texture_env_add
-    glConfig.textureEnvAddAvailable = false;
-    if (Q_stristr(glConfig.extensions_string, "EXT_texture_env_add")) {
-        if (r_ext_texture_env_add->integer) {
-            glConfig.textureEnvAddAvailable = true;
-            ri.Printf(PRINT_ALL, "...using GL_EXT_texture_env_add\n");
-        } else {
-            glConfig.textureEnvAddAvailable = false;
-            ri.Printf(PRINT_ALL, "...ignoring GL_EXT_texture_env_add\n");
-        }
-    } else {
-        ri.Printf(PRINT_ALL, "...GL_EXT_texture_env_add not found\n");
-    }
-
     // GL_ARB_multitexture
     qglMultiTexCoord2fARB = NULL;
     qglActiveTextureARB = NULL;

@@ -710,39 +710,6 @@ static void GLW_InitExtensions(void)
         ri.Printf(PRINT_ALL, "...GL_S3_s3tc not found\n");
     }
 
-#ifdef GL_EXT_texture_env_add
-    // GL_EXT_texture_env_add
-    glConfig.textureEnvAddAvailable = false;
-    if (strstr(glConfig.extensions_string, "GL_EXT_texture_env_add")) {
-        if (r_ext_texture_env_add->integer) {
-            glConfig.textureEnvAddAvailable = true;
-            ri.Printf(PRINT_ALL, "...using GL_EXT_texture_env_add\n");
-        } else {
-            glConfig.textureEnvAddAvailable = false;
-            ri.Printf(PRINT_ALL, "...ignoring GL_EXT_texture_env_add\n");
-        }
-    } else {
-        ri.Printf(PRINT_ALL, "...GL_EXT_texture_env_add not found\n");
-    }
-#endif
-
-#ifdef GL_ARB_texture_env_add
-    // GL_ARB_texture_env_add -- only if we didn't find GL_EXT_texture_env_add
-    if (!glConfig.textureEnvAddAvailable) {
-        if (strstr(glConfig.extensions_string, "GL_ARB_texture_env_add")) {
-            if (r_ext_texture_env_add->integer) {
-                glConfig.textureEnvAddAvailable = true;
-                ri.Printf(PRINT_ALL, "...using GL_ARB_texture_env_add\n");
-            } else {
-                glConfig.textureEnvAddAvailable = false;
-                ri.Printf(PRINT_ALL, "...ignoring GL_ARB_texture_env_add\n");
-            }
-        } else {
-            ri.Printf(PRINT_ALL, "...GL_ARB_texture_env_add not found\n");
-        }
-    }
-#endif
-
     if (r_swapInterval) {
         ri.Printf(PRINT_ALL, "...using +[NSOpenGLContext setParameter:] for qwglSwapIntervalEXT\n");
         r_swapInterval->modified = true; // force a set next frame

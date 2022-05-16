@@ -156,7 +156,6 @@ typedef struct {
 
     bool deviceSupportsGamma;
     textureCompression_t textureCompression;
-    bool textureEnvAddAvailable;
 
     int vidWidth, vidHeight;
     // aspect is the screen's physical width / height, which may be different
