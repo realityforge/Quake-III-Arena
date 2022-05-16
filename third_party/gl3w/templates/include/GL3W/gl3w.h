@@ -65,7 +65,6 @@ extern "C" {
 #define GL3W_ERROR_OPENGL_VERSION (-4)
 
 typedef void (*GL3WglProc)();
-typedef GL3WglProc (*GL3WGetProcAddressProc)(const char* proc);
 
 /**
 * Initializes the library. Should be called once after an OpenGL context has been created.
@@ -212,6 +211,7 @@ static GL3WglProc gl3w_get_proc(const char* proc)
 }
 #else
 #include <dlfcn.h>
+typedef GL3WglProc (*GL3WGetProcAddressProc)(const char* proc);
 
 // OpenGL library
 static void* gl3w_libgl_handle = NULL;
