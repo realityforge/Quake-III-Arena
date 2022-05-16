@@ -29,7 +29,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #ifndef DEDICATED
 #include "SDL.h"
-#include "SDL_cpuinfo.h"
 #endif
 
 #include "sys_local.h"
