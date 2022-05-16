@@ -127,7 +127,6 @@ if not quiet:
     for spec in specs.keys():
         print('  ' + spec + ': ' + str(len(specs[spec])))
 
-
 print('Loading template')
 header_template = open(os.path.join(args.input_dir, 'templates/include/GL3W/gl3w.h'), 'r')
 
