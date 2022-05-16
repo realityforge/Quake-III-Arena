@@ -29,7 +29,6 @@ void GLimp_InitExtraExtensions(void)
 {
     char* extension;
     const char* result[3] = { "...ignoring %s\n", "...using %s\n", "...%s not found\n" };
-    bool q_gl_version_at_least_3_2 = gl3wIsSupported(3, 2);
 
     // Check if we need Intel graphics specific fixes.
     glRefConfig.intelGraphics = false;
@@ -61,27 +60,11 @@ void GLimp_InitExtraExtensions(void)
     glRefConfig.vertexArrayObject = true;
     glRefConfig.textureFloat = !!r_ext_texture_float->integer;
 
-    // OpenGL 3.2 - GL_ARB_depth_clamp
-    extension = "GL_ARB_depth_clamp";
-    glRefConfig.depthClamp = false;
-    if (q_gl_version_at_least_3_2 || SDL_GL_ExtensionSupported(extension)) {
-        glRefConfig.depthClamp = true;
+    glRefConfig.depthClamp = GL3W_ARB_depth_clamp;
+    ri.Printf(PRINT_ALL, result[glRefConfig.depthClamp ? 1 : 2], "GL_ARB_depth_clamp");
 
-        ri.Printf(PRINT_ALL, result[glRefConfig.depthClamp], extension);
-    } else {
-        ri.Printf(PRINT_ALL, result[2], extension);
-    }
-
-    // OpenGL 3.2 - GL_ARB_seamless_cube_map
-    extension = "GL_ARB_seamless_cube_map";
-    glRefConfig.seamlessCubeMap = false;
-    if (q_gl_version_at_least_3_2 || SDL_GL_ExtensionSupported(extension)) {
-        glRefConfig.seamlessCubeMap = !!r_arb_seamless_cube_map->integer;
-
-        ri.Printf(PRINT_ALL, result[glRefConfig.seamlessCubeMap], extension);
-    } else {
-        ri.Printf(PRINT_ALL, result[2], extension);
-    }
+    glRefConfig.seamlessCubeMap = GL3W_ARB_seamless_cube_map;
+    ri.Printf(PRINT_ALL, result[glRefConfig.seamlessCubeMap ? 1 : 2], "GL_ARB_seamless_cube_map");
 
     // Determine GLSL version
     char shading_language_version[256];
@@ -89,58 +72,32 @@ void GLimp_InitExtraExtensions(void)
     sscanf(shading_language_version, "%d.%d", &glRefConfig.glslMajorVersion, &glRefConfig.glslMinorVersion);
     ri.Printf(PRINT_ALL, "...using GLSL shading_language_version %s\n", shading_language_version);
 
-    glRefConfig.memInfo = MI_NONE;
+    glRefConfig.memInfo = GL3W_NVX_gpu_memory_info ? MI_NVX : GL3W_ATI_meminfo ? MI_ATI : MI_NONE;
 
-    // GL_NVX_gpu_memory_info
-    extension = "GL_NVX_gpu_memory_info";
-    if (SDL_GL_ExtensionSupported(extension)) {
-        glRefConfig.memInfo = MI_NVX;
-
-        ri.Printf(PRINT_ALL, result[1], extension);
-    } else {
-        ri.Printf(PRINT_ALL, result[2], extension);
-    }
-
-    // GL_ATI_meminfo
-    extension = "GL_ATI_meminfo";
-    if (SDL_GL_ExtensionSupported(extension)) {
-        if (glRefConfig.memInfo == MI_NONE) {
-            glRefConfig.memInfo = MI_ATI;
-
-            ri.Printf(PRINT_ALL, result[1], extension);
-        } else {
-            ri.Printf(PRINT_ALL, result[0], extension);
-        }
-    } else {
-        ri.Printf(PRINT_ALL, result[2], extension);
-    }
+    ri.Printf(PRINT_ALL, result[glRefConfig.memInfo == MI_NVX ? 1 : 2], "GL_NVX_gpu_memory_info");
+    ri.Printf(PRINT_ALL, result[glRefConfig.memInfo == MI_ATI ? 1 : 2], "GL_ATI_meminfo");
 
     glRefConfig.textureCompression = TCR_NONE;
 
-    // GL_ARB_texture_compression_rgtc
-    extension = "GL_ARB_texture_compression_rgtc";
-    if (SDL_GL_ExtensionSupported(extension)) {
+    if (GL3W_ARB_texture_compression_rgtc) {
         const bool useRgtc = r_ext_compressed_textures->integer >= 1;
         if (useRgtc) {
             glRefConfig.textureCompression |= TCR_RGTC;
         }
-
-        ri.Printf(PRINT_ALL, result[useRgtc], extension);
+        ri.Printf(PRINT_ALL, result[useRgtc], "GL_ARB_texture_compression_rgtc");
     } else {
-        ri.Printf(PRINT_ALL, result[2], extension);
+        ri.Printf(PRINT_ALL, result[2], "GL_ARB_texture_compression_rgtc");
     }
 
     glRefConfig.swizzleNormalmap = r_ext_compressed_textures->integer && !(glRefConfig.textureCompression & TCR_RGTC);
 
-    // GL_ARB_texture_compression_bptc
-    extension = "GL_ARB_texture_compression_bptc";
-    if (SDL_GL_ExtensionSupported(extension)) {
+    if (GL3W_ARB_texture_compression_bptc) {
         const bool useBptc = r_ext_compressed_textures->integer >= 2;
         if (useBptc) {
             glRefConfig.textureCompression |= TCR_BPTC;
         }
-        ri.Printf(PRINT_ALL, result[useBptc], extension);
+        ri.Printf(PRINT_ALL, result[useBptc], "GL_ARB_texture_compression_bptc");
     } else {
-        ri.Printf(PRINT_ALL, result[2], extension);
+        ri.Printf(PRINT_ALL, result[2], "GL_ARB_texture_compression_bptc");
     }
 }

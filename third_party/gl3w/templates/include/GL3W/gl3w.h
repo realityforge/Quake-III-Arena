@@ -44,6 +44,7 @@
 #undef GL_NV_path_rendering
 #undef GL_VERSION_4_5
 #include "GL/glext.h"
+#include <stdbool.h>
 
 #ifndef GL3W_API
 #define GL3W_API
@@ -112,12 +113,12 @@ GL3W_PROCS_DEFINITION;
 #ifdef GL3W_IMPLEMENTATION
 #include <stdlib.h>
 
-#include <stdbool.h>
 typedef GL3WglProc (*GL3WGetProcAddressProc)(const char* proc);
 
 #define GL3W_MAX_ERROR_MESSAGE_LENGTH 1024
 static char gl3w_error_buffer[GL3W_MAX_ERROR_MESSAGE_LENGTH] = { 0 };
 static char* gl3w_error = NULL;
+union GL3WExtensions gl3wExtensions;
 
 #define COUNT_OF(x) (sizeof(x) / sizeof((x)[0]))
 
@@ -334,6 +335,29 @@ static void load_procs(const GL3WGetProcAddressProc proc)
    }
 }
 
+static void reset_extensions()
+{
+    for(int j = 0; j < COUNT_OF(gl3w_extension_names); j++) {
+        gl3wExtensions.extension[j] = false;
+    }
+}
+
+static void detect_extensions()
+{
+    reset_extensions();
+
+    int extension_count = 0;
+    glGetIntegerv(GL_NUM_EXTENSIONS, &extension_count);
+    for(int i = 0; i < extension_count; i++) {
+        const GLubyte *extension_name = glGetStringi(GL_EXTENSIONS, i);
+        for(int j = 0; j < COUNT_OF(gl3w_extension_names); j++) {
+          if ( 0 == strcmp(gl3w_extension_names[j], extension_name) ){
+              gl3wExtensions.extension[j] = true;
+          }
+        }
+    }
+}
+
 static void reset_procs()
 {
    for (size_t i = 0; i < COUNT_OF(gl3w_proc_names); i++) {
@@ -377,11 +401,14 @@ int gl3wInit()
            if (!glGetIntegerv) {
                gl3wDispose();
                return GL3W_ERROR_INIT;
-           } else if (gl3w_is_version(GL3W_MIN_MAJOR_VERSION, GL3W_MIN_MINOR_VERSION)) {
-               gl3wDispose();
-               return GL3W_ERROR_OPENGL_VERSION;
            } else {
-               return GL3W_OK;
+               if (gl3w_is_version(GL3W_MIN_MAJOR_VERSION, GL3W_MIN_MINOR_VERSION)) {
+                   gl3wDispose();
+                   return GL3W_ERROR_OPENGL_VERSION;
+               } else {
+                   detect_extensions();
+                   return GL3W_OK;
+               }
            }
        }
    }
@@ -391,6 +418,7 @@ int gl3wDispose()
 {
    gl3w_error = NULL;
    reset_procs();
+   reset_extensions();
    gl3w_close_libgl();
    return NULL == gl3w_error ? GL3W_OK : GL3W_ERROR_LIBRARY_CLOSE;
 }

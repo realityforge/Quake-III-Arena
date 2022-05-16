@@ -132,6 +132,22 @@ header_template = open(os.path.join(args.input_dir, 'templates/include/GL3W/gl3w
 
 procs_def_content = []
 
+if extensions:
+    procs_def_content.append('union GL3WExtensions {\n')
+    procs_def_content.append('    bool extension[{0}];\n'.format(len(extensions)))
+    procs_def_content.append('    struct {\n')
+    for extension in extensions:
+        procs_def_content.append('        bool {0};\n'.format(extension[3:]))
+    procs_def_content.append(r'''  } ext;
+};
+
+GL3W_API extern union GL3WExtensions gl3wExtensions;
+
+''')
+    for extension in extensions:
+        procs_def_content.append('#define {0: <48} gl3wExtensions.ext.{1}\n'.format('GL3W_' + extension[3:], extension[3:]))
+    procs_def_content.append('\n')
+
 procs_def_content.append('union GL3WProcs {\n')
 procs_def_content.append('    GL3WglProc ptr[{0}];\n'.format(len(procs)))
 procs_def_content.append('    struct {\n')
@@ -150,6 +166,16 @@ for proc in procs:
 procs_table_content = []
 procs_table_content.append(r'#define GL3W_MIN_MAJOR_VERSION ' + args.minimum_profile.split('.')[0] + "\n")
 procs_table_content.append(r'#define GL3W_MIN_MINOR_VERSION ' + args.minimum_profile.split('.')[1] + "\n")
+
+if extensions:
+    procs_table_content.append(r'''
+
+static const char* gl3w_extension_names[] = {
+''')
+    for extension in extensions:
+        procs_table_content.append('    "{0}",\n'.format(extension))
+    procs_table_content.append(r'''};
+''')
 
 procs_table_content.append(r'''
 
