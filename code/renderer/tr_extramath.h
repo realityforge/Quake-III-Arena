@@ -49,7 +49,6 @@ void Mat4View(vec3_t axes[3], vec3_t origin, mat4_t out);
 
 #define OffsetByteToFloat(a) ((float)(a)*1.0f / 127.5f - 1.0f)
 #define FloatToOffsetByte(a) (uint8_t)((a)*127.5f + 128.0f)
-#define ByteToFloat(a) ((float)(a)*1.0f / 255.0f)
 
 static inline int VectorCompare4(const vec4_t v1, const vec4_t v2)
 {
