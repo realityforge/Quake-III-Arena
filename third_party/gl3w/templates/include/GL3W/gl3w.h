@@ -120,7 +120,7 @@ GL3W_PROCS_DEFINITION;
 static char gl3w_error_buffer[GL3W_MAX_ERROR_MESSAGE_LENGTH] = { 0 };
 static char* gl3w_error = NULL;
 
-#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
+#define COUNT_OF(x) (sizeof(x) / sizeof((x)[0]))
 
 #if defined(_WIN32)
 #ifndef WIN32_LEAN_AND_MEAN
@@ -330,14 +330,14 @@ union GL3WProcs gl3wProcs;
 
 static void load_procs(const GL3WGetProcAddressProc proc)
 {
-   for (size_t i = 0; i < ARRAY_SIZE(gl3w_proc_names); i++) {
+   for (size_t i = 0; i < COUNT_OF(gl3w_proc_names); i++) {
        gl3wProcs.ptr[i] = proc(gl3w_proc_names[i]);
    }
 }
 
 static void unload_procs()
 {
-   for (size_t i = 0; i < ARRAY_SIZE(gl3w_proc_names); i++) {
+   for (size_t i = 0; i < COUNT_OF(gl3w_proc_names); i++) {
        gl3wProcs.ptr[i] = NULL;
    }
 }
