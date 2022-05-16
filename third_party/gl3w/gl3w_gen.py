@@ -53,6 +53,7 @@ parser.add_argument('--extension',
 args = parser.parse_args()
 
 extensions = args.extensions
+extensions.sort
 
 quiet = args.quiet is not None and args.quiet
 verbose = not quiet and args.verbose
