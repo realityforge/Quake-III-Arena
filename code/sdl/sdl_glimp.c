@@ -536,7 +536,7 @@ static void GLimp_InitExtensions()
     textureFilterAnisotropic = false;
     if (SDL_GL_ExtensionSupported("GL_EXT_texture_filter_anisotropic")) {
         if (r_ext_texture_filter_anisotropic->integer) {
-            glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY, (GLint*)&maxAnisotropy);
+            glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, (GLint*)&glConfig.maxAnisotropy);
             if (maxAnisotropy <= 0) {
                 ri.Printf(PRINT_ALL, "...GL_EXT_texture_filter_anisotropic not properly supported!\n");
                 maxAnisotropy = 0;

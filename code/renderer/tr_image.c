@@ -1745,9 +1745,9 @@ static GLenum PixelDataFormatFromInternalFormat(GLenum internalFormat)
 {
     switch (internalFormat) {
     case GL_DEPTH_COMPONENT:
-    case GL_DEPTH_COMPONENT16_ARB:
-    case GL_DEPTH_COMPONENT24_ARB:
-    case GL_DEPTH_COMPONENT32_ARB:
+    case GL_DEPTH_COMPONENT16:
+    case GL_DEPTH_COMPONENT24:
+    case GL_DEPTH_COMPONENT32:
         return GL_DEPTH_COMPONENT;
     default:
         return GL_RGBA;
@@ -1759,7 +1759,7 @@ static void RawImage_UploadTexture(GLuint texture, uint8_t* data, int x, int y, 
 {
     GLenum dataFormat, dataType;
     bool rgtc = internalFormat == GL_COMPRESSED_RG_RGTC2;
-    bool rgba8 = picFormat == GL_RGBA8 || picFormat == GL_SRGB8_ALPHA8_EXT;
+    bool rgba8 = picFormat == GL_RGBA8 || picFormat == GL_SRGB8_ALPHA8;
     bool rgba = rgba8 || picFormat == GL_RGBA16;
     bool mipmap = !!(flags & IMGFLAG_MIPMAP);
     int size, miplevel;
@@ -1989,9 +1989,9 @@ static image_t* R_CreateImage2(const char* name, uint8_t* pic, int width, int he
 
     switch (internalFormat) {
     case GL_DEPTH_COMPONENT:
-    case GL_DEPTH_COMPONENT16_ARB:
-    case GL_DEPTH_COMPONENT24_ARB:
-    case GL_DEPTH_COMPONENT32_ARB:
+    case GL_DEPTH_COMPONENT16:
+    case GL_DEPTH_COMPONENT24:
+    case GL_DEPTH_COMPONENT32:
         GLDSA_TextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         GLDSA_TextureParameterfEXT(image->texnum, textureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         break;
@@ -2301,7 +2301,7 @@ void R_CreateBuiltinImages(void)
 
         hdrFormat = GL_RGBA8;
         if (r_hdr->integer && glRefConfig.textureFloat)
-            hdrFormat = GL_RGBA16F_ARB;
+            hdrFormat = GL_RGBA16F;
 
         rgbFormat = GL_RGBA8;
 

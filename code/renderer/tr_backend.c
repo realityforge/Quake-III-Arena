@@ -303,7 +303,7 @@ void RB_BeginDrawingView(void)
 
         if (tr.renderCubeFbo && fbo == tr.renderCubeFbo) {
             cubemap_t* cubemap = &tr.cubemaps[backEnd.viewParms.targetFboCubemapIndex];
-            FBO_AttachImage(fbo, cubemap->image, GL_COLOR_ATTACHMENT0_EXT, backEnd.viewParms.targetFboLayer);
+            FBO_AttachImage(fbo, cubemap->image, GL_COLOR_ATTACHMENT0, backEnd.viewParms.targetFboLayer);
         }
 
         FBO_Bind(fbo);
