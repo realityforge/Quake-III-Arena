@@ -111,7 +111,9 @@ GL3W_PROCS_DEFINITION;
 
 #ifdef GL3W_IMPLEMENTATION
 #include <stdlib.h>
+
 #include <stdbool.h>
+typedef GL3WglProc (*GL3WGetProcAddressProc)(const char* proc);
 
 #define GL3W_MAX_ERROR_MESSAGE_LENGTH 1024
 static char gl3w_error_buffer[GL3W_MAX_ERROR_MESSAGE_LENGTH] = { 0 };
@@ -211,7 +213,6 @@ static GL3WglProc gl3w_get_proc(const char* proc)
 }
 #else
 #include <dlfcn.h>
-typedef GL3WglProc (*GL3WGetProcAddressProc)(const char* proc);
 
 // OpenGL library
 static void* gl3w_libgl_handle = NULL;
