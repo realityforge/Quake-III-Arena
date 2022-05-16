@@ -334,7 +334,7 @@ static void load_procs(const GL3WGetProcAddressProc proc)
    }
 }
 
-static void unload_procs()
+static void reset_procs()
 {
    for (size_t i = 0; i < COUNT_OF(gl3w_proc_names); i++) {
        gl3wProcs.ptr[i] = NULL;
@@ -390,7 +390,7 @@ int gl3wInit()
 int gl3wDispose()
 {
    gl3w_error = NULL;
-   unload_procs();
+   reset_procs();
    gl3w_close_libgl();
    return NULL == gl3w_error ? GL3W_OK : GL3W_ERROR_LIBRARY_CLOSE;
 }
