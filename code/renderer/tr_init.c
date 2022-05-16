@@ -80,8 +80,6 @@ cvar_t* r_facePlaneCull;
 cvar_t* r_showcluster;
 cvar_t* r_nocurves;
 
-cvar_t* r_allowExtensions;
-
 cvar_t* r_ext_compressed_textures;
 cvar_t* r_ext_texture_filter_anisotropic;
 cvar_t* r_ext_max_anisotropy;
@@ -89,7 +87,6 @@ cvar_t* r_ext_max_anisotropy;
 cvar_t* r_ext_framebuffer_object;
 cvar_t* r_ext_texture_float;
 cvar_t* r_ext_framebuffer_multisample;
-cvar_t* r_arb_seamless_cube_map;
 
 cvar_t* r_cameraExposure;
 
@@ -828,13 +825,11 @@ void GfxMemInfo_f(void)
 void R_Register(void)
 {
     // latched and archived variables
-    r_allowExtensions = ri.Cvar_Get("r_allowExtensions", "1", CVAR_ARCHIVE | CVAR_LATCH);
     r_ext_compressed_textures = ri.Cvar_Get("r_ext_compressed_textures", "0", CVAR_ARCHIVE | CVAR_LATCH);
 
     r_ext_framebuffer_object = ri.Cvar_Get("r_ext_framebuffer_object", "1", CVAR_ARCHIVE | CVAR_LATCH);
     r_ext_texture_float = ri.Cvar_Get("r_ext_texture_float", "1", CVAR_ARCHIVE | CVAR_LATCH);
     r_ext_framebuffer_multisample = ri.Cvar_Get("r_ext_framebuffer_multisample", "0", CVAR_ARCHIVE | CVAR_LATCH);
-    r_arb_seamless_cube_map = ri.Cvar_Get("r_arb_seamless_cube_map", "0", CVAR_ARCHIVE | CVAR_LATCH);
 
     r_ext_texture_filter_anisotropic = ri.Cvar_Get("r_ext_texture_filter_anisotropic", "0", CVAR_ARCHIVE | CVAR_LATCH);
     r_ext_max_anisotropy = ri.Cvar_Get("r_ext_max_anisotropy", "2", CVAR_ARCHIVE | CVAR_LATCH);
