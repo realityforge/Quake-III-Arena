@@ -249,19 +249,6 @@ static bool RB_UpdateSunFlareVis(void)
     if (!tr.sunFlareQueryActive[tr.sunFlareQueryIndex])
         return true;
 
-    /* debug code */
-    if (0) {
-        int iter;
-        for (iter = 0;; ++iter) {
-            GLint available = 0;
-            glGetQueryObjectiv(tr.sunFlareQuery[tr.sunFlareQueryIndex], GL_QUERY_RESULT_AVAILABLE, &available);
-            if (available)
-                break;
-        }
-
-        ri.Printf(PRINT_DEVELOPER, "Waited %d iterations\n", iter);
-    }
-
     glGetQueryObjectuiv(tr.sunFlareQuery[tr.sunFlareQueryIndex], GL_QUERY_RESULT, &sampleCount);
     return sampleCount > 0;
 }
