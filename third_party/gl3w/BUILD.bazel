@@ -47,8 +47,8 @@ cc_library(
     hdrs = [
         "include/GL/glcorearb.h",
         "include/GL/glext.h",
-        "include/GL3W/gl3w.h",
         "include/KHR/khrplatform.h",
+        ":gl3w_gen_generator",
     ],
     copts = FULL_WARNINGS,
     includes = ["include"],
