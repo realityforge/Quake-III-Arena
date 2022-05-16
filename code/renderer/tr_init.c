@@ -29,8 +29,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 glconfig_t glConfig;
 glRefConfig_t glRefConfig;
-bool textureFilterAnisotropic = false;
-int maxAnisotropy = 0;
 float displayAspect = 0.0f;
 
 glstate_t glState;
@@ -1156,8 +1154,6 @@ void RE_Shutdown(bool destroyWindow)
 
         memset(&glConfig, 0, sizeof(glConfig));
         memset(&glRefConfig, 0, sizeof(glRefConfig));
-        textureFilterAnisotropic = false;
-        maxAnisotropy = 0;
         displayAspect = 0.0f;
 
         memset(&glState, 0, sizeof(glState));

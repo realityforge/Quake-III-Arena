@@ -184,6 +184,10 @@ typedef struct {
     // used CDS.
     bool isFullscreen;
     bool stereoEnabled;
+
+    bool textureFilterAnisotropic;
+    int maxAnisotropy;
+
 } glconfig_t;
 
 #endif // TR_TYPES_H

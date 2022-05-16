@@ -533,16 +533,16 @@ static void GLimp_InitExtensions()
         ri.Printf(PRINT_ALL, "...GL_EXT_texture_compression_s3tc not found\n");
     }
 
-    textureFilterAnisotropic = false;
+    glConfig.textureFilterAnisotropic = false;
     if (SDL_GL_ExtensionSupported("GL_EXT_texture_filter_anisotropic")) {
         if (r_ext_texture_filter_anisotropic->integer) {
             glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, (GLint*)&glConfig.maxAnisotropy);
-            if (maxAnisotropy <= 0) {
+            if (glConfig.maxAnisotropy <= 0) {
                 ri.Printf(PRINT_ALL, "...GL_EXT_texture_filter_anisotropic not properly supported!\n");
-                maxAnisotropy = 0;
+                glConfig.maxAnisotropy = 0;
             } else {
-                ri.Printf(PRINT_ALL, "...using GL_EXT_texture_filter_anisotropic (max: %i)\n", maxAnisotropy);
-                textureFilterAnisotropic = true;
+                ri.Printf(PRINT_ALL, "...using GL_EXT_texture_filter_anisotropic (max: %i)\n", glConfig.maxAnisotropy);
+                glConfig.textureFilterAnisotropic = true;
             }
         } else {
             ri.Printf(PRINT_ALL, "...ignoring GL_EXT_texture_filter_anisotropic\n");
