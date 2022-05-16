@@ -33,6 +33,8 @@ import os
 import re
 
 parser = argparse.ArgumentParser(description='gl3w generator script')
+parser.add_argument('--quiet', action='store_true', help='Verbose output')
+parser.add_argument('--verbose', action='store_true', help='Verbose output')
 parser.add_argument('--input_dir', type=str, default='', help='Input directory')
 parser.add_argument('--output_directory', type=str, default='', help='Output directory')
 parser.add_argument('--minimum_profile',
@@ -41,7 +43,16 @@ parser.add_argument('--minimum_profile',
                     help='The lowest OpenGL profile that the generated code will support')
 args = parser.parse_args()
 
-print('Loading API Headers  to scan')
+
+quiet = args.quiet is not None and args.quiet
+verbose = not quiet and args.verbose
+
+if not quiet:
+    print('Configuration:')
+    print('  Minimum OpenGL Profile: ' + args.minimum_profile)
+
+if verbose:
+    print('Loading API Headers to scan')
 
 procs = []
 p = re.compile(r'GLAPI.*APIENTRY\s+(\w+)')
