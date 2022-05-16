@@ -25,8 +25,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define TR_EXTRAMATH_H
 
 typedef vec_t mat4_t[16];
-typedef int ivec2_t[2];
-typedef int ivec3_t[3];
 typedef int ivec4_t[4];
 
 void Mat4Zero(mat4_t out);
