@@ -27,7 +27,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 void GLimp_InitExtraExtensions(void)
 {
-    char* extension;
     const char* result[3] = { "...ignoring %s\n", "...using %s\n", "...%s not found\n" };
 
     // Check if we need Intel graphics specific fixes.
@@ -36,23 +35,12 @@ void GLimp_InitExtraExtensions(void)
         glRefConfig.intelGraphics = true;
     }
 
-    // OpenGL 3.0 - GL_ARB_framebuffer_object
-    extension = "GL_ARB_framebuffer_object";
-    glRefConfig.framebufferObject = false;
-    glRefConfig.framebufferBlit = false;
-    glRefConfig.framebufferMultisample = false;
-    if (SDL_GL_ExtensionSupported(extension)) {
-        glRefConfig.framebufferObject = !!r_ext_framebuffer_object->integer;
-        glRefConfig.framebufferBlit = true;
-        glRefConfig.framebufferMultisample = true;
+    glRefConfig.framebufferObject = !!r_ext_framebuffer_object->integer;
 
-        glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE, &glRefConfig.maxRenderbufferSize);
-        glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &glRefConfig.maxColorAttachments);
+    glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE, &glRefConfig.maxRenderbufferSize);
+    glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &glRefConfig.maxColorAttachments);
 
-        ri.Printf(PRINT_ALL, result[glRefConfig.framebufferObject], extension);
-    } else {
-        ri.Printf(PRINT_ALL, result[2], extension);
-    }
+    ri.Printf(PRINT_ALL, result[glRefConfig.framebufferObject], "GL_ARB_framebuffer_object");
 
     glRefConfig.vertexArrayObject = true;
     glRefConfig.textureFloat = !!r_ext_texture_float->integer;
