@@ -41,8 +41,18 @@ parser.add_argument('--minimum_profile',
                     type=str,
                     default='1.0',
                     help='The lowest OpenGL profile that the generated code will support')
+parser.add_argument('--maximum_profile',
+                    type=str,
+                    default='99.99',
+                    help='The highest OpenGL profile that this tool will support')
+parser.add_argument('--extension',
+                    action='append',
+                    type=str,
+                    dest='extensions',
+                    help='An extension that will be supported by wrapper')
 args = parser.parse_args()
 
+extensions = args.extensions
 
 quiet = args.quiet is not None and args.quiet
 verbose = not quiet and args.verbose
@@ -50,31 +60,73 @@ verbose = not quiet and args.verbose
 if not quiet:
     print('Configuration:')
     print('  Minimum OpenGL Profile: ' + args.minimum_profile)
+    print('  Maximum OpenGL Profile: ' + (args.maximum_profile if '99.99' != args.maximum_profile else '-'))
+    if extensions:
+        print('  Supported Extensions:')
+        for extension in extensions:
+            print('    * ' + extension)
 
 if verbose:
     print('Loading API Headers to scan')
 
+# Maps name of header filename => spec
+header_specs = {}
+# Maps name of spec => list of procs
+specs = {}
 procs = []
-p = re.compile(r'GLAPI.*APIENTRY\s+(\w+)')
-with open(os.path.join(args.input_dir, 'include/GL/glcorearb.h'), 'r') as f:
-    for line in f:
-        m = p.match(line)
-        if not m:
-            continue
-        proc = m.group(1)
-        procs.append(proc)
+spec_pattern = re.compile(r'#ifndef (GL_\w+)')
+profile_spec_name_pattern = re.compile(r'GL_VERSION_(\d_\d)')
+proc_pattern = re.compile(r'GLAPI.*APIENTRY\s+(\w+)')
 
-with open(os.path.join(args.input_dir, 'include/GL/glext.h'), 'r') as f:
-    for line in f:
-        m = p.match(line)
-        if not m:
-            continue
-        proc = m.group(1)
-        if proc in procs:
-            continue
-        procs.append(proc)
+spec = None
+skip_current_spec = True
+
+spec_header_files = ['include/GL/glcorearb.h', 'include/GL/glext.h']
+
+for filename in spec_header_files:
+    with open(os.path.join(args.input_dir, filename), 'r') as f:
+        for line in f:
+            m = spec_pattern.match(line)
+            if m:
+                spec = m.group(1)
+                if not header_specs.get(spec):
+                    header_specs[spec] = []
+                v = profile_spec_name_pattern.match(spec)
+                if v:
+                    v = v.group(1).replace('_', '.')
+                    if v > args.maximum_profile:
+                        if verbose:
+                            print('Skipping profile ' + spec + ' as it exceeds maximum supported profile')
+                        skip_current_spec = True
+                    else:
+                        skip_current_spec = False
+                elif extensions:
+                    skip_current_spec = not (spec in extensions)
+                    if skip_current_spec and verbose:
+                        print(
+                            'Skipping spec ' + spec + ' as extensions specified and this is not a supported extension')
+                else:
+                    skip_current_spec = False
+            if not skip_current_spec:
+                m = proc_pattern.match(line)
+                if not m:
+                    continue
+                proc = m.group(1)
+                header_specs[spec].append(proc)
+                if proc in procs:
+                    continue
+                if not specs.get(spec):
+                    specs[spec] = []
+                specs[spec].append(proc)
+                procs.append(proc)
 
 procs.sort()
+
+if not quiet:
+    print('Wrapper methods by Specification:')
+    for spec in specs.keys():
+        print('  ' + spec + ': ' + str(len(specs[spec])))
+
 
 print('Loading template')
 header_template = open(os.path.join(args.input_dir, 'templates/include/GL3W/gl3w.h'), 'r')

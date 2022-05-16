@@ -38,7 +38,7 @@ genrule(
         "templates/include/GL3W/gl3w.h",
     ],
     outs = ["include/GL3W/gl3w.h"],
-    cmd = "$(location :gl3w_gen) --input_dir third_party/gl3w --minimum_profile 3.0 --output_directory $(RULEDIR)",
+    cmd = "$(location :gl3w_gen) --input_dir third_party/gl3w --minimum_profile 3.0 --maximum_profile 3.2 --output_directory $(RULEDIR) --extension GL_ARB_framebuffer_object --extension GL_ARB_depth_clamp --extension GL_ARB_seamless_cube_map --extension GL_ARB_depth_clamp --extension GL_ARB_seamless_cube_map --extension GL_NVX_gpu_memory_info --extension GL_ATI_meminfo --extension GL_ARB_texture_compression_rgtc --extension GL_ARB_texture_compression_bptc",
     tools = [":gl3w_gen"],
 )
 
