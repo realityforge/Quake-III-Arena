@@ -1016,16 +1016,12 @@ const void* RB_DrawSurfs(const void* data)
             glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            if (glRefConfig.occlusionQuery) {
-                tr.sunFlareQueryActive[tr.sunFlareQueryIndex] = true;
-                glBeginQuery(GL_SAMPLES_PASSED, tr.sunFlareQuery[tr.sunFlareQueryIndex]);
-            }
+            tr.sunFlareQueryActive[tr.sunFlareQueryIndex] = true;
+            glBeginQuery(GL_SAMPLES_PASSED, tr.sunFlareQuery[tr.sunFlareQueryIndex]);
 
             RB_DrawSun(0.3, tr.sunFlareShader);
 
-            if (glRefConfig.occlusionQuery) {
-                glEndQuery(GL_SAMPLES_PASSED);
-            }
+            glEndQuery(GL_SAMPLES_PASSED);
 
             FBO_Bind(oldFbo);
         }

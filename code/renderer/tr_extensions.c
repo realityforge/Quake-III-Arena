@@ -36,9 +36,6 @@ void GLimp_InitExtraExtensions(void)
         glRefConfig.intelGraphics = true;
     }
 
-    // OpenGL 1.5 - GL_ARB_occlusion_query
-    glRefConfig.occlusionQuery = true;
-
     // OpenGL 3.0 - GL_ARB_framebuffer_object
     extension = "GL_ARB_framebuffer_object";
     glRefConfig.framebufferObject = false;

@@ -242,8 +242,6 @@ static void RB_RadialBlur(FBO_t* srcFbo, FBO_t* dstFbo, int passes, float stretc
 static bool RB_UpdateSunFlareVis(void)
 {
     GLuint sampleCount = 0;
-    if (!glRefConfig.occlusionQuery)
-        return true;
 
     tr.sunFlareQueryIndex ^= 1;
     if (!tr.sunFlareQueryActive[tr.sunFlareQueryIndex])

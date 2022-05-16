@@ -1027,18 +1027,12 @@ void R_Register(void)
 
 void R_InitQueries(void)
 {
-    if (!glRefConfig.occlusionQuery)
-        return;
-
     if (r_drawSunRays->integer)
         glGenQueries(ARRAY_LEN(tr.sunFlareQuery), tr.sunFlareQuery);
 }
 
 void R_ShutDownQueries(void)
 {
-    if (!glRefConfig.occlusionQuery)
-        return;
-
     if (r_drawSunRays->integer)
         glDeleteQueries(ARRAY_LEN(tr.sunFlareQuery), tr.sunFlareQuery);
 }

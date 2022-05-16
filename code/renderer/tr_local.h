@@ -1321,8 +1321,6 @@ typedef enum {
 typedef struct {
     bool intelGraphics;
 
-    bool occlusionQuery;
-
     int glslMajorVersion;
     int glslMinorVersion;
     int glslMaxAnimatedBones;
