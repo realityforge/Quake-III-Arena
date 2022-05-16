@@ -46,8 +46,6 @@ cvar_t* r_railWidth;
 cvar_t* r_railCoreWidth;
 cvar_t* r_railSegmentLength;
 
-cvar_t* r_ignore;
-
 cvar_t* r_displayRefresh;
 
 cvar_t* r_detailTextures;
@@ -1009,7 +1007,6 @@ void R_Register(void)
     r_lodscale = ri.Cvar_Get("r_lodscale", "5", CVAR_CHEAT);
     r_norefresh = ri.Cvar_Get("r_norefresh", "0", CVAR_CHEAT);
     r_drawentities = ri.Cvar_Get("r_drawentities", "1", CVAR_CHEAT);
-    r_ignore = ri.Cvar_Get("r_ignore", "1", CVAR_CHEAT);
     r_nocull = ri.Cvar_Get("r_nocull", "0", CVAR_CHEAT);
     r_novis = ri.Cvar_Get("r_novis", "0", CVAR_CHEAT);
     r_showcluster = ri.Cvar_Get("r_showcluster", "0", CVAR_CHEAT);
