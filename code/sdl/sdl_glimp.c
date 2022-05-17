@@ -259,17 +259,17 @@ static int GLimp_SetMode(int mode, bool fullscreen, bool noborder)
         glConfig.isFullscreen = false;
     }
 
-    colorBits = r_colorbits->value;
+    colorBits = r_colorbits->integer;
     if ((!colorBits) || (colorBits >= 32))
         colorBits = 24;
 
     if (!r_depthbits->value)
         depthBits = 24;
     else
-        depthBits = r_depthbits->value;
+        depthBits = r_depthbits->integer;
 
-    stencilBits = r_stencilbits->value;
-    samples = r_ext_multisample->value;
+    stencilBits = r_stencilbits->integer;
+    samples = r_ext_multisample->integer;
 
     for (i = 0; i < 16; i++) {
         int testColorBits, testDepthBits, testStencilBits;
