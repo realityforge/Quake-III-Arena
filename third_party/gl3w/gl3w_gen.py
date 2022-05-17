@@ -139,7 +139,8 @@ if verbose:
     for header in header_groups.keys():
         print('  ' + header + ': ' + str(len(header_groups[header])) + ' included, ' + str(len(header_suppressed_groups[header])) + ' excluded')
 
-print('Loading template')
+if verbose:
+    print('Loading template')
 header_template = open(os.path.join(args.input_dir, 'templates/include/GL3W/gl3w.h'), 'r')
 
 groups_present = []
@@ -252,7 +253,8 @@ if not os.path.exists(dir):
     os.makedirs(dir)
 output_filename = os.path.join(dir, 'gl3w.h')
 
-print('Generating {0}...'.format(output_filename))
+if not quiet:
+    print('Generating {0}...'.format(output_filename))
 with open(output_filename, 'wb') as f:
     for line in header_template:
         f.write(line.
