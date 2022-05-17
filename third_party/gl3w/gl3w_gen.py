@@ -62,10 +62,9 @@ if not quiet:
     print('Configuration:')
     print('  Minimum OpenGL Profile: ' + args.minimum_profile)
     print('  Maximum OpenGL Profile: ' + (args.maximum_profile if '99.99' != args.maximum_profile else '-'))
-    if extensions:
-        print('  Supported Extensions:')
-        for extension in extensions:
-            print('    * ' + extension)
+    print('  Supported Extensions:')
+    for extension in extensions:
+        print('    * ' + extension)
 
 if verbose:
     print('Loading API Headers to scan')
@@ -103,13 +102,10 @@ for filename in spec_header_files:
                         skip_current_spec = True
                     else:
                         skip_current_spec = False
-                elif extensions:
+                else:
                     skip_current_spec = not (spec in extensions)
                     if skip_current_spec and verbose:
-                        print(
-                            'Skipping spec ' + spec + ' as extensions specified and this is not a supported extension')
-                else:
-                    skip_current_spec = False
+                        print('Skipping spec ' + spec + ' as this is not a supported extension')
                 if skip_current_spec:
                     header_suppressed_specs[filename].append(spec)
                 else:
@@ -157,20 +153,19 @@ for filename in spec_header_files:
 
 procs_def_content = []
 
-if extensions:
-    procs_def_content.append('union GL3WExtensions {\n')
-    procs_def_content.append('    bool extension[{0}];\n'.format(len(extensions)))
-    procs_def_content.append('    struct {\n')
-    for extension in extensions:
-        procs_def_content.append('        bool {0};\n'.format(extension[3:]))
-    procs_def_content.append(r'''  } ext;
+procs_def_content.append('union GL3WExtensions {\n')
+procs_def_content.append('    bool extension[{0}];\n'.format(len(extensions)))
+procs_def_content.append('    struct {\n')
+for extension in extensions:
+    procs_def_content.append('        bool {0};\n'.format(extension[3:]))
+procs_def_content.append(r'''  } ext;
 };
 
 ''')
-    for extension in extensions:
-        procs_def_content.append(
-            '#define {0: <48} gl3wExtensions.ext.{1}\n'.format('GL3W_' + extension[3:], extension[3:]))
-    procs_def_content.append('\n')
+for extension in extensions:
+    procs_def_content.append(
+        '#define {0: <48} gl3wExtensions.ext.{1}\n'.format('GL3W_' + extension[3:], extension[3:]))
+procs_def_content.append('\n')
 
 procs_def_content.append('union GL3WProcs {\n')
 procs_def_content.append('    GL3WglProc ptr[{0}];\n'.format(len(procs)))
@@ -188,14 +183,13 @@ procs_table_content = []
 procs_table_content.append(r'#define GL3W_MIN_MAJOR_VERSION ' + args.minimum_profile.split('.')[0] + "\n")
 procs_table_content.append(r'#define GL3W_MIN_MINOR_VERSION ' + args.minimum_profile.split('.')[1] + "\n")
 
-if extensions:
-    procs_table_content.append(r'''
+procs_table_content.append(r'''
 
 static const char* gl3w_extension_names[] = {
 ''')
-    for extension in extensions:
-        procs_table_content.append('    "{0}",\n'.format(extension))
-    procs_table_content.append(r'''};
+for extension in extensions:
+    procs_table_content.append('    "{0}",\n'.format(extension))
+procs_table_content.append(r'''};
 ''')
 
 procs_table_content.append(r'''
