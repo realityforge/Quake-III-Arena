@@ -131,10 +131,13 @@ for filename in header_files:
 optional_versions.sort()
 functions.sort()
 
-if not quiet:
-    print('Wrapper methods by Specification:')
+if verbose:
+    print('Wrapper methods by version:')
     for group in groups.keys():
         print('  ' + group + ': ' + str(len(groups[group])))
+    print('Group Count by Header:')
+    for header in header_groups.keys():
+        print('  ' + header + ': ' + str(len(header_groups[header])) + ' included, ' + str(len(header_suppressed_groups[header])) + ' excluded')
 
 print('Loading template')
 header_template = open(os.path.join(args.input_dir, 'templates/include/GL3W/gl3w.h'), 'r')
