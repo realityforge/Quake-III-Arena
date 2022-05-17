@@ -384,14 +384,29 @@ static void detect_versions()
 
 #endif
 
+
+static void gla_dispose()
+{
+    gla_major_version = 0;
+    gla_minor_version = 0;
+    reset_functions();
+#ifdef GLFW_SUPPORT_EXTENSIONS
+    reset_extensions();
+#endif
+#ifdef GLFW_SUPPORT_OPTIONAL_VERSIONS
+    reset_versions();
+#endif
+    gla_close_libgl();
+}
+
 static bool gla_close_libgl_atexit_registered = false;
 
 int glaInit()
 {
     gla_error = NULL;
-    const int dispose_result = glaDispose();
-    if (GLA_OK != dispose_result) {
-        return dispose_result;
+    gla_dispose();
+    if (NULL != gla_error) {
+        return GLA_ERROR_LIBRARY_CLOSE;
     } else {
         const int open_result = gla_open_libgl();
         if (GLA_OK != open_result) {
@@ -402,16 +417,18 @@ int glaInit()
                     gla_close_libgl_atexit_registered = true;
                 }
             }
-            load_functions(gla_get_function);
-            if (NULL == glaFunctions.function.GetIntegerv) {
-                glaDispose();
+            if (false == load_functions(gla_get_function)) {
+                gla_dispose();
+                return GLA_ERROR_INIT;
+            } else if (NULL == glaFunctions.function.GetIntegerv) {
+                gla_dispose();
                 return GLA_ERROR_INIT;
             } else {
                 glGetIntegerv(GL_MAJOR_VERSION, &gla_major_version);
                 glGetIntegerv(GL_MINOR_VERSION, &gla_minor_version);
 
                 if (gla_is_version(GLA_MIN_MAJOR_VERSION, GLA_MIN_MINOR_VERSION)) {
-                    glaDispose();
+                    gla_dispose();
                     return GLA_ERROR_OPENGL_VERSION;
                 } else {
 #ifdef GLFW_SUPPORT_EXTENSIONS
@@ -429,17 +446,8 @@ int glaInit()
 
 int glaDispose()
 {
-    gla_major_version = 0;
-    gla_minor_version = 0;
     gla_error = NULL;
-    reset_functions();
-#ifdef GLFW_SUPPORT_EXTENSIONS
-    reset_extensions();
-#endif
-#ifdef GLFW_SUPPORT_OPTIONAL_VERSIONS
-    reset_versions();
-#endif
-    gla_close_libgl();
+    gla_dispose();
     return NULL == gla_error ? GLA_OK : GLA_ERROR_LIBRARY_CLOSE;
 }
 
