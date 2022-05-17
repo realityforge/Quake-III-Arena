@@ -166,8 +166,6 @@ if extensions:
     procs_def_content.append(r'''  } ext;
 };
 
-GL3W_API extern union GL3WExtensions gl3wExtensions;
-
 ''')
     for extension in extensions:
         procs_def_content.append(
@@ -181,8 +179,6 @@ for proc in procs:
     procs_def_content.append('        {0: <55} {1};\n'.format('PFN{0}PROC'.format(proc.upper()), proc[2:]))
 procs_def_content.append(r'''  } gl;
 };
-
-GL3W_API extern union GL3WProcs gl3wProcs;
 
 // OpenGL functions
 ''')
