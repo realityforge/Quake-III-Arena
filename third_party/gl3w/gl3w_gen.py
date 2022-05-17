@@ -227,13 +227,15 @@ static const gl3w_version_t gl3w_versions[] = {
     impl_lines.append(r'''};
 ''')
 
-impl_lines.append(r'''
+if extensions:
+    impl_lines.append(r'''
+#define GLFW_SUPPORT_EXTENSIONS
 
 static const char* gl3w_extension_names[] = {
 ''')
-for extension in extensions:
-    impl_lines.append('    "{0}",\n'.format(extension))
-impl_lines.append(r'''};
+    for extension in extensions:
+        impl_lines.append('    "{0}",\n'.format(extension))
+    impl_lines.append(r'''};
 ''')
 
 impl_lines.append(r'''

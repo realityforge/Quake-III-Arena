@@ -98,7 +98,6 @@ static char* gl3w_error = NULL;
 static int gl3w_major_version = 0;
 static int gl3w_minor_version = 0;
 
-union GL3WExtensions gl3wExtensions;
 union GL3WFunctions gl3wFunctions;
 
 #define COUNT_OF(x) (sizeof(x) / sizeof((x)[0]))
@@ -293,6 +292,10 @@ static GL3WglFunction gl3w_get_function(const char* function_name)
 
 GL3W_PROC_NAMES;
 
+#ifdef GLFW_SUPPORT_EXTENSIONS
+
+union GL3WExtensions gl3wExtensions;
+
 static void reset_extensions()
 {
     for (int j = 0; j < COUNT_OF(gl3w_extension_names); j++) {
@@ -315,6 +318,8 @@ static void detect_extensions()
         }
     }
 }
+
+#endif
 
 static void reset_functions()
 {
@@ -391,7 +396,9 @@ int gl3wInit()
 #ifdef GLFW_SUPPORT_OPTIONAL_VERSIONS
                     detect_versions();
 #endif
+#ifdef GLFW_SUPPORT_EXTENSIONS
                     detect_extensions();
+#endif
                     return GL3W_OK;
                 }
             }
@@ -408,7 +415,9 @@ int gl3wDispose()
 #ifdef GLFW_SUPPORT_OPTIONAL_VERSIONS
     reset_versions();
 #endif
+#ifdef GLFW_SUPPORT_EXTENSIONS
     reset_extensions();
+#endif
     gl3w_close_libgl();
     return NULL == gl3w_error ? GL3W_OK : GL3W_ERROR_LIBRARY_CLOSE;
 }
