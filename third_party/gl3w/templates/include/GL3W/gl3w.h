@@ -292,6 +292,21 @@ static GL3WglFunction gl3w_get_function(const char* function_name)
 
 GL3W_PROC_NAMES;
 
+static void reset_functions()
+{
+    for (size_t i = 0; i < COUNT_OF(gl3w_function_names); i++) {
+        gl3wFunctions.functions[i] = NULL;
+    }
+}
+
+static void load_functions(const GL3WGetProcAddressProc proc)
+{
+    for (size_t i = 0; i < COUNT_OF(gl3w_function_names); i++) {
+        gl3wFunctions.functions[i] = proc(gl3w_function_names[i]);
+        // TODO: If gl3wFunctions.functions[i] IS NULL and it is part of required profile then this should generate an error
+    }
+}
+
 #ifdef GLFW_SUPPORT_EXTENSIONS
 
 union GL3WExtensions gl3wExtensions;
@@ -320,21 +335,6 @@ static void detect_extensions()
 }
 
 #endif
-
-static void reset_functions()
-{
-    for (size_t i = 0; i < COUNT_OF(gl3w_function_names); i++) {
-        gl3wFunctions.functions[i] = NULL;
-    }
-}
-
-static void load_functions(const GL3WGetProcAddressProc proc)
-{
-    for (size_t i = 0; i < COUNT_OF(gl3w_function_names); i++) {
-        gl3wFunctions.functions[i] = proc(gl3w_function_names[i]);
-        // TODO: If gl3wFunctions.functions[i] IS NULL and it is part of required profile then this should generate an error
-    }
-}
 
 static bool gl3w_is_version(const int min_major, const int min_minor)
 {
