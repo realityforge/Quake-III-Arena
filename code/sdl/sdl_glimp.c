@@ -407,7 +407,8 @@ static int GLimp_SetMode(int mode, bool fullscreen, bool noborder)
             if (GLA_OK == glaInit()) {
                 renderer = (const char*)glGetString(GL_RENDERER);
             } else {
-                ri.Printf(PRINT_ALL, "Failed to initialize OpenGL context\n");
+                const char* error_message = glaError();
+                ri.Printf(PRINT_ALL, "glaInit() failed due to %s\n", NULL == error_message ? "unknown reason" : error_message);
                 renderer = NULL;
             }
 
@@ -431,7 +432,8 @@ static int GLimp_SetMode(int mode, bool fullscreen, bool noborder)
             }
 
             if (GLA_OK != glaInit()) {
-                ri.Printf(PRINT_ALL, "glaInit() failed\n");
+                const char* error_message = glaError();
+                ri.Printf(PRINT_ALL, "glaInit() failed due to %s\n", NULL == error_message ? "unknown reason" : error_message);
                 glaDispose();
                 SDL_GL_DeleteContext(SDL_glContext);
                 SDL_glContext = NULL;
