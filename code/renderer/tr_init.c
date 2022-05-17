@@ -266,43 +266,20 @@ static void InitOpenGL(void)
     GL_SetDefaultState();
 }
 
-void GL_CheckErrs(char* file, int line)
+void GL_CheckErrs(const char* filename, const int line)
 {
-    int err;
-    char s[64];
-
-    err = glGetError();
-    if (err == GL_NO_ERROR) {
+    const int error_code = glGetError();
+    if (GL_NO_ERROR == error_code || r_ignoreGLErrors->integer) {
         return;
+    } else {
+        const char* error_code_description = gl3wErrorCodeToMessage(error_code);
+        char buffer[64];
+        if (NULL == error_code_description) {
+            snprintf(buffer, 64, "%08x", error_code);
+            error_code_description = buffer;
+        }
+        ri.Error(ERR_FATAL, "GL_CheckErrors: %s in %s at line %d", error_code_description, filename, line);
     }
-    if (r_ignoreGLErrors->integer) {
-        return;
-    }
-    switch (err) {
-    case GL_INVALID_ENUM:
-        strcpy(s, "GL_INVALID_ENUM");
-        break;
-    case GL_INVALID_VALUE:
-        strcpy(s, "GL_INVALID_VALUE");
-        break;
-    case GL_INVALID_OPERATION:
-        strcpy(s, "GL_INVALID_OPERATION");
-        break;
-    case GL_STACK_OVERFLOW:
-        strcpy(s, "GL_STACK_OVERFLOW");
-        break;
-    case GL_STACK_UNDERFLOW:
-        strcpy(s, "GL_STACK_UNDERFLOW");
-        break;
-    case GL_OUT_OF_MEMORY:
-        strcpy(s, "GL_OUT_OF_MEMORY");
-        break;
-    default:
-        Com_sprintf(s, sizeof(s), "%i", err);
-        break;
-    }
-
-    ri.Error(ERR_FATAL, "GL_CheckErrors: %s in %s at line %d", s, file, line);
 }
 
 /*
