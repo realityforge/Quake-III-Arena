@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // tr_init.c -- functions that are not called every frame
 
 // Add define so we have the implementation inlined in this file
-#define GL3W_IMPLEMENTATION
+#define GLA_IMPLEMENTATION
 #include "tr_local.h"
 
 #include "tr_dsa.h"
@@ -278,7 +278,7 @@ void GL_CheckErrs(const char* filename, const int line)
     if (GL_NO_ERROR == error_code || r_ignoreGLErrors->integer) {
         return;
     } else {
-        const char* error_code_description = gl3wErrorCodeToMessage(error_code);
+        const char* error_code_description = glaErrorCodeToMessage(error_code);
         char buffer[64];
         if (NULL == error_code_description) {
             snprintf(buffer, 64, "%08x", error_code);
@@ -725,7 +725,7 @@ void GfxInfo_f(void)
     ri.Printf(PRINT_ALL, "GL_VERSION: %s\n", glConfig.version_string);
     ri.Printf(PRINT_ALL, "GL_EXTENSIONS: ");
     // glConfig.extensions_string is a limited length so get the full list directly
-    if (gl3wFunctions.function.GetStringi) {
+    if (glaFunctions.function.GetStringi) {
         GLint numExtensions;
         int i;
 

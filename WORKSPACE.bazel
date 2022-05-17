@@ -84,6 +84,6 @@ load("//third_party/com_github_mvdan_sh:repository.bzl", _setup_com_github_mvdan
 _setup_com_github_mvdan_sh_repository()
 
 local_repository(
-    name = "gl3w",
-    path = "third_party/gl3w",
+    name = "gla",
+    path = "third_party/gla",
 )

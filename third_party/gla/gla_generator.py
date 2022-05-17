@@ -1,29 +1,20 @@
 #!/usr/bin/env python
 
-#   This file is part of gl3w, hosted at https://github.com/skaslev/gl3w
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 #
-#   This is free and unencumbered software released into the public domain.
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
-#   Anyone is free to copy, modify, publish, use, compile, sell, or
-#   distribute this software, either in source code form or as a compiled
-#   binary, for any purpose, commercial or non-commercial, and by any
-#   means.
-#
-#   In jurisdictions that recognize copyright laws, the author or authors
-#   of this software dedicate any and all copyright interest in the
-#   software to the public domain. We make this dedication for the benefit
-#   of the public at large and to the detriment of our heirs and
-#   successors. We intend this dedication to be an overt act of
-#   relinquishment in perpetuity of all present and future rights to this
-#   software under copyright law.
-#
-#   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-#   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-#   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-#   IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-#   OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-#   ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-#   OTHER DEALINGS IN THE SOFTWARE.
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Note: This code was initially a refactoring of gl3w retrieved from the url below. It was gradually
+# rewritten until little if any remained from the upstream code.
+# https://github.com/skaslev/gl3w/blob/5f8d7fd191ba22ff2b60c1106d7135bb9a335533/gl3w_gen.py
 
 # Allow Python 2.6+ to use the print() function
 from __future__ import print_function
@@ -32,7 +23,7 @@ import argparse
 import os
 import re
 
-parser = argparse.ArgumentParser(description='gl3w generator script')
+parser = argparse.ArgumentParser(description='gla generator script')
 parser.add_argument('--quiet', action='store_true', help='Verbose output')
 parser.add_argument('--verbose', action='store_true', help='Verbose output')
 parser.add_argument('--input_dir',
@@ -149,7 +140,7 @@ if verbose:
 
 if verbose:
     print('Loading template')
-header_template = open(os.path.join(args.input_dir, 'templates/include/GL3W/gl3w.h'), 'r')
+header_template = open(os.path.join(args.input_dir, 'templates/include/GLA/gla.h'), 'r')
 
 groups_present = []
 includes_lines = []
@@ -173,7 +164,7 @@ for filename in header_files:
 interface_lines = []
 
 if optional_versions:
-    interface_lines.append('union GL3WVersions {\n')
+    interface_lines.append('union GLAVersions {\n')
     interface_lines.append('    bool versions[{0}];\n'.format(len(optional_versions)))
     interface_lines.append('    struct {\n')
     for version in optional_versions:
@@ -181,16 +172,16 @@ if optional_versions:
     interface_lines.append(r'''  } version;
 };
 
-GL3W_API extern union GL3WVersions gl3wVersions;
+GLA_API extern union GLAVersions glaVersions;
 
 ''')
     for version in optional_versions:
         interface_lines.append(
-            '#define {0: <48} gl3wVersions.version.{1}\n'.format('GL3W_' + version[3:], version[3:]))
+            '#define {0: <48} glaVersions.version.{1}\n'.format('GLA_' + version[3:], version[3:]))
     interface_lines.append('\n')
 
 if extensions:
-    interface_lines.append('union GL3WExtensions {\n')
+    interface_lines.append('union GLAExtensions {\n')
     interface_lines.append('    bool extensions[{0}];\n'.format(len(extensions)))
     interface_lines.append('    struct {\n')
     for extension in extensions:
@@ -198,38 +189,38 @@ if extensions:
     interface_lines.append(r'''  } extension;
 };
 
-GL3W_API extern union GL3WExtensions gl3wExtensions;
+GLA_API extern union GLAExtensions glaExtensions;
 
 ''')
     for extension in extensions:
         interface_lines.append(
-            '#define {0: <48} gl3wExtensions.extension.{1}\n'.format('GL3W_' + extension[3:], extension[3:]))
+            '#define {0: <48} glaExtensions.extension.{1}\n'.format('GLA_' + extension[3:], extension[3:]))
     interface_lines.append('\n')
 
-interface_lines.append('union GL3WFunctions {\n')
-interface_lines.append('    GL3WglFunction functions[{0}];\n'.format(len(functions)))
+interface_lines.append('union GLAFunctions {\n')
+interface_lines.append('    GLAglFunction functions[{0}];\n'.format(len(functions)))
 interface_lines.append('    struct {\n')
 for function in functions:
     interface_lines.append('        {0: <55} {1};\n'.format('PFN{0}PROC'.format(function.upper()), function[2:]))
 interface_lines.append(r'''  } function;
 };
 
-GL3W_API extern union GL3WFunctions gl3wFunctions;
+GLA_API extern union GLAFunctions glaFunctions;
 
 ''')
 for function in functions:
-    interface_lines.append('#define {0: <48} {1}(gl3wFunctions.function.{2}(__VA_ARGS__))\n'.
-                           format(function + '(...)', 'GL3W_CHECK' if function in void_functions else '', function[2:]))
+    interface_lines.append('#define {0: <48} {1}(glaFunctions.function.{2}(__VA_ARGS__))\n'.
+                           format(function + '(...)', 'GLA_CHECK' if function in void_functions else '', function[2:]))
 
 impl_lines = []
-impl_lines.append(r'#define GL3W_MIN_MAJOR_VERSION ' + args.minimum_profile.split('.')[0] + "\n")
-impl_lines.append(r'#define GL3W_MIN_MINOR_VERSION ' + args.minimum_profile.split('.')[1] + "\n")
+impl_lines.append(r'#define GLA_MIN_MAJOR_VERSION ' + args.minimum_profile.split('.')[0] + "\n")
+impl_lines.append(r'#define GLA_MIN_MINOR_VERSION ' + args.minimum_profile.split('.')[1] + "\n")
 
 if optional_versions:
     impl_lines.append(r'''
 #define GLFW_SUPPORT_OPTIONAL_VERSIONS
 
-static const gl3w_version_t gl3w_versions[] = {
+static const gla_version_t gla_versions[] = {
 ''')
     for version in optional_versions:
         impl_lines.append('    { ' + version[11:12] + ', ' + version[13:14] + ' },\n')
@@ -239,14 +230,14 @@ if extensions:
     impl_lines.append(r'''
 #define GLFW_SUPPORT_EXTENSIONS
 
-static const char* gl3w_extension_names[] = {
+static const char* gla_extension_names[] = {
 ''')
     for extension in extensions:
         impl_lines.append('    "{0}",\n'.format(extension))
     impl_lines.append('};\n')
 
 impl_lines.append(r'''
-static const char* gl3w_function_names[] = {
+static const char* gla_function_names[] = {
 ''')
 for function in functions:
     impl_lines.append('    "{0}",\n'.format(function))
@@ -256,17 +247,17 @@ includes_content = ''.join(includes_lines)
 interface_content = ''.join(interface_lines)
 impl_content = ''.join(impl_lines)
 
-dir = os.path.join(args.output_directory, 'include/GL3W/')
+dir = os.path.join(args.output_directory, 'include/GLA/')
 if not os.path.exists(dir):
     os.makedirs(dir)
-output_filename = os.path.join(dir, 'gl3w.h')
+output_filename = os.path.join(dir, 'gla.h')
 
 if not quiet:
     print('Generating {0}...'.format(output_filename))
 with open(output_filename, 'wb') as f:
     for line in header_template:
         f.write(line.
-                replace('GL3W_SPEC_INCLUDES;\n', includes_content).
-                replace('GL3W_PROCS_DEFINITION;\n', interface_content).
-                replace('GL3W_PROC_NAMES;\n', impl_content).
+                replace('GLA_SPEC_INCLUDES;\n', includes_content).
+                replace('GLA_PROCS_DEFINITION;\n', interface_content).
+                replace('GLA_PROC_NAMES;\n', impl_content).
                 encode('utf-8'))

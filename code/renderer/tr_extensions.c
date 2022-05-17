@@ -33,7 +33,7 @@ void GLimp_InitExtraExtensions(void)
         glRefConfig.intelGraphics = true;
     }
 
-    glRefConfig.framebufferObject = GL3W_VERSION_3_2 && GL3W_ARB_framebuffer_object && !!r_ext_framebuffer_object->integer;
+    glRefConfig.framebufferObject = GLA_VERSION_3_2 && GLA_ARB_framebuffer_object && !!r_ext_framebuffer_object->integer;
 
     glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE, &glRefConfig.maxRenderbufferSize);
     glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &glRefConfig.maxColorAttachments);
@@ -43,10 +43,10 @@ void GLimp_InitExtraExtensions(void)
     glRefConfig.vertexArrayObject = true;
     glRefConfig.textureFloat = !!r_ext_texture_float->integer;
 
-    glRefConfig.depthClamp = GL3W_ARB_depth_clamp;
+    glRefConfig.depthClamp = GLA_ARB_depth_clamp;
     ri.Printf(PRINT_ALL, result[glRefConfig.depthClamp ? 1 : 2], "GL_ARB_depth_clamp");
 
-    glRefConfig.seamlessCubeMap = GL3W_ARB_seamless_cube_map;
+    glRefConfig.seamlessCubeMap = GLA_ARB_seamless_cube_map;
     ri.Printf(PRINT_ALL, result[glRefConfig.seamlessCubeMap ? 1 : 2], "GL_ARB_seamless_cube_map");
 
     // Determine GLSL version
@@ -55,14 +55,14 @@ void GLimp_InitExtraExtensions(void)
     sscanf(shading_language_version, "%d.%d", &glRefConfig.glslMajorVersion, &glRefConfig.glslMinorVersion);
     ri.Printf(PRINT_ALL, "...using GLSL shading_language_version %s\n", shading_language_version);
 
-    glRefConfig.memInfo = GL3W_NVX_gpu_memory_info ? MI_NVX : GL3W_ATI_meminfo ? MI_ATI : MI_NONE;
+    glRefConfig.memInfo = GLA_NVX_gpu_memory_info ? MI_NVX : GLA_ATI_meminfo ? MI_ATI : MI_NONE;
 
     ri.Printf(PRINT_ALL, result[glRefConfig.memInfo == MI_NVX ? 1 : 2], "GL_NVX_gpu_memory_info");
     ri.Printf(PRINT_ALL, result[glRefConfig.memInfo == MI_ATI ? 1 : 2], "GL_ATI_meminfo");
 
     glRefConfig.textureCompression = TCR_NONE;
 
-    if (GL3W_ARB_texture_compression_rgtc) {
+    if (GLA_ARB_texture_compression_rgtc) {
         const bool useRgtc = r_ext_compressed_textures->integer >= 1;
         if (useRgtc) {
             glRefConfig.textureCompression |= TCR_RGTC;
@@ -74,7 +74,7 @@ void GLimp_InitExtraExtensions(void)
 
     glRefConfig.swizzleNormalmap = r_ext_compressed_textures->integer && !(glRefConfig.textureCompression & TCR_RGTC);
 
-    if (GL3W_ARB_texture_compression_bptc) {
+    if (GLA_ARB_texture_compression_bptc) {
         const bool useBptc = r_ext_compressed_textures->integer >= 2;
         if (useBptc) {
             glRefConfig.textureCompression |= TCR_BPTC;
@@ -87,7 +87,7 @@ void GLimp_InitExtraExtensions(void)
     glConfig.textureCompression = TC_NONE;
 
     // GL_EXT_texture_compression_s3tc
-    if (GL3W_EXT_texture_compression_s3tc) {
+    if (GLA_EXT_texture_compression_s3tc) {
         if (r_ext_compressed_textures->value) {
             glConfig.textureCompression = TC_S3TC_ARB;
             ri.Printf(PRINT_ALL, result[1], "GL_EXT_texture_compression_s3tc");
@@ -99,7 +99,7 @@ void GLimp_InitExtraExtensions(void)
     }
 
     glConfig.textureFilterAnisotropic = false;
-    if (GL3W_EXT_texture_filter_anisotropic) {
+    if (GLA_EXT_texture_filter_anisotropic) {
         if (r_ext_texture_filter_anisotropic->integer) {
             glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, (GLint*)&glConfig.maxAnisotropy);
             if (glConfig.maxAnisotropy <= 0) {

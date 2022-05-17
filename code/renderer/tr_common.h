@@ -27,9 +27,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "tr_public.h"
 #ifdef DEBUG
 void R_PrintGLError(const char* error_message);
-#define GL3W_AUTO_CHECK_ERROR_HANDLER R_PrintGLError
+#define GLA_AUTO_CHECK_ERROR_HANDLER R_PrintGLError
 #endif
-#include "GL3W/gl3w.h"
+#include "GLA/gla.h"
 
 typedef enum {
     IMGTYPE_COLORALPHA, // for color, lightmap, diffuse, and specular

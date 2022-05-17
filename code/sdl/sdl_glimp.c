@@ -237,7 +237,7 @@ static int GLimp_SetMode(int mode, bool fullscreen, bool noborder)
 
     // Destroy existing state if it exists
     if (SDL_glContext != NULL) {
-        gl3wDispose();
+        glaDispose();
         SDL_GL_DeleteContext(SDL_glContext);
         SDL_glContext = NULL;
     }
@@ -404,7 +404,7 @@ static int GLimp_SetMode(int mode, bool fullscreen, bool noborder)
 
             ri.Printf(PRINT_ALL, "SDL_GL_CreateContext succeeded.\n");
 
-            if (GL3W_OK == gl3wInit()) {
+            if (GLA_OK == glaInit()) {
                 renderer = (const char*)glGetString(GL_RENDERER);
             } else {
                 ri.Printf(PRINT_ALL, "Failed to initialize OpenGL context\n");
@@ -412,7 +412,7 @@ static int GLimp_SetMode(int mode, bool fullscreen, bool noborder)
             }
 
             if (!renderer) {
-                gl3wDispose();
+                glaDispose();
                 SDL_GL_DeleteContext(SDL_glContext);
                 SDL_glContext = NULL;
 
@@ -430,9 +430,9 @@ static int GLimp_SetMode(int mode, bool fullscreen, bool noborder)
                 continue;
             }
 
-            if (GL3W_OK != gl3wInit()) {
-                ri.Printf(PRINT_ALL, "gl3wInit() failed\n");
-                gl3wDispose();
+            if (GLA_OK != glaInit()) {
+                ri.Printf(PRINT_ALL, "glaInit() failed\n");
+                glaDispose();
                 SDL_GL_DeleteContext(SDL_glContext);
                 SDL_glContext = NULL;
                 SDL_DestroyWindow(SDL_window);
@@ -553,7 +553,7 @@ success:
     Q_strncpyz(glConfig.version_string, (char*)glGetString(GL_VERSION), sizeof(glConfig.version_string));
 
     // manually create extension list if using OpenGL 3
-    if (gl3wFunctions.function.GetStringi) {
+    if (glaFunctions.function.GetStringi) {
         int i, numExtensions, extensionLength, listLength;
         const char* extension;
 
