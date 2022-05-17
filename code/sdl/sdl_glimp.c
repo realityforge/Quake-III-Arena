@@ -404,11 +404,12 @@ static int GLimp_SetMode(int mode, bool fullscreen, bool noborder)
 
             ri.Printf(PRINT_ALL, "SDL_GL_CreateContext succeeded.\n");
 
-            if (GLA_OK == glaInit()) {
+            const int result = glaInit();
+            if (GLA_OK == result) {
                 renderer = (const char*)glGetString(GL_RENDERER);
             } else {
                 const char* error_message = glaError();
-                ri.Printf(PRINT_ALL, "glaInit() failed due to %s\n", NULL == error_message ? "unknown reason" : error_message);
+                ri.Printf(PRINT_ALL, "glaInit() failed with error %d: %s\n", result, NULL == error_message ? "unknown reason" : error_message);
                 renderer = NULL;
             }
 
@@ -431,9 +432,10 @@ static int GLimp_SetMode(int mode, bool fullscreen, bool noborder)
                 continue;
             }
 
-            if (GLA_OK != glaInit()) {
+            const int result = glaInit();
+            if (GLA_OK != result) {
                 const char* error_message = glaError();
-                ri.Printf(PRINT_ALL, "glaInit() failed due to %s\n", NULL == error_message ? "unknown reason" : error_message);
+                ri.Printf(PRINT_ALL, "glaInit() failed with error %d: %s\n", result, NULL == error_message ? "unknown reason" : error_message);
                 glaDispose();
                 SDL_GL_DeleteContext(SDL_glContext);
                 SDL_glContext = NULL;
