@@ -174,7 +174,7 @@ GL3W_API extern union GL3WVersions gl3wVersions;
 ''')
     for version in optional_versions:
         interface_lines.append(
-            '#define {0: <48} gl3wVersions.ext.{1}\n'.format('GL3W_' + version[3:], version[3:]))
+            '#define {0: <48} gl3wVersions.version.{1}\n'.format('GL3W_' + version[3:], version[3:]))
     interface_lines.append('\n')
 
 interface_lines.append('union GL3WExtensions {\n')
