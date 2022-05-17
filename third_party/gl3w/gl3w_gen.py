@@ -224,8 +224,7 @@ static const gl3w_version_t gl3w_versions[] = {
 ''')
     for version in optional_versions:
         impl_lines.append('    { ' + version[11:12] + ', ' + version[13:14] + ' },\n')
-    impl_lines.append(r'''};
-''')
+    impl_lines.append('};\n')
 
 if extensions:
     impl_lines.append(r'''
@@ -235,8 +234,7 @@ static const char* gl3w_extension_names[] = {
 ''')
     for extension in extensions:
         impl_lines.append('    "{0}",\n'.format(extension))
-    impl_lines.append(r'''};
-''')
+    impl_lines.append('};\n')
 
 impl_lines.append(r'''
 static const char* gl3w_function_names[] = {
