@@ -180,7 +180,6 @@ for proc in procs:
 procs_def_content.append(r'''  } gl;
 };
 
-// OpenGL functions
 ''')
 for proc in procs:
     procs_def_content.append('#define {0: <48} gl3wProcs.gl.{1}\n'.format(proc, proc[2:]))
