@@ -44,4 +44,6 @@ The final decision was to take the work done by the `gl3w` project and refactor 
 
 ### Evaluation
 
-The implementation solved the initial problems in such a way that it could be used in future products.
+The change was a technical success. The solution solved all the immediate requirements and gave a path forward for solving future requirements. The solution was extracted and can be used in future projects. The solution provided a significant improvement over the existing code. Developing the solution also facilitated learning about OpenGL, python, Bazel and other useful skills.
+
+Despite this "success" there is a concern that the time could have been better spent elsewhere. The Khronos wiki has a page ["OpenGL Loading Library"](https://www.khronos.org/opengl/wiki/OpenGL_Loading_Library) that has several other products that solve exactly the same problem and seem to have some of the same features. The features are such that solution and some of these other libraries have near equivalent APIs conceptually. It is possible that these other libraries would have had the same issues as `gl3w` (which is listed on this page). But a review of the existing code may have been useful prior to jumping in and developing a custom solution.
