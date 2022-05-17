@@ -380,7 +380,7 @@ int gl3wInit()
                }
            }
            load_functions(gl3w_get_function);
-           if (!glGetIntegerv) {
+           if (NULL == gl3wFunctions.function.GetIntegerv) {
                gl3wDispose();
                return GL3W_ERROR_INIT;
            } else {
