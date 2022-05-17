@@ -157,88 +157,88 @@ for filename in spec_header_files:
     for spec in header_suppressed_specs[filename]:
         includes_lines.append("#undef " + spec + "\n")
 
-procs_def_content = []
+interface_lines = []
 
 if optional_versions:
-    procs_def_content.append('union GL3WVersions {\n')
-    procs_def_content.append('    bool versions[{0}];\n'.format(len(optional_versions)))
-    procs_def_content.append('    struct {\n')
+    interface_lines.append('union GL3WVersions {\n')
+    interface_lines.append('    bool versions[{0}];\n'.format(len(optional_versions)))
+    interface_lines.append('    struct {\n')
     for version in optional_versions:
-        procs_def_content.append('        bool {0};\n'.format(version[3:]))
-    procs_def_content.append(r'''  } version;
+        interface_lines.append('        bool {0};\n'.format(version[3:]))
+    interface_lines.append(r'''  } version;
 };
 
 GL3W_API extern union GL3WVersions gl3wVersions;
 
 ''')
     for version in optional_versions:
-        procs_def_content.append(
+        interface_lines.append(
             '#define {0: <48} gl3wVersions.ext.{1}\n'.format('GL3W_' + version[3:], version[3:]))
-    procs_def_content.append('\n')
+    interface_lines.append('\n')
 
-procs_def_content.append('union GL3WExtensions {\n')
-procs_def_content.append('    bool extension[{0}];\n'.format(len(extensions)))
-procs_def_content.append('    struct {\n')
+interface_lines.append('union GL3WExtensions {\n')
+interface_lines.append('    bool extension[{0}];\n'.format(len(extensions)))
+interface_lines.append('    struct {\n')
 for extension in extensions:
-    procs_def_content.append('        bool {0};\n'.format(extension[3:]))
-procs_def_content.append(r'''  } ext;
+    interface_lines.append('        bool {0};\n'.format(extension[3:]))
+interface_lines.append(r'''  } ext;
 };
 
 ''')
 for extension in extensions:
-    procs_def_content.append(
+    interface_lines.append(
         '#define {0: <48} gl3wExtensions.ext.{1}\n'.format('GL3W_' + extension[3:], extension[3:]))
-procs_def_content.append('\n')
+interface_lines.append('\n')
 
-procs_def_content.append('union GL3WProcs {\n')
-procs_def_content.append('    GL3WglProc ptr[{0}];\n'.format(len(procs)))
-procs_def_content.append('    struct {\n')
+interface_lines.append('union GL3WProcs {\n')
+interface_lines.append('    GL3WglProc ptr[{0}];\n'.format(len(procs)))
+interface_lines.append('    struct {\n')
 for proc in procs:
-    procs_def_content.append('        {0: <55} {1};\n'.format('PFN{0}PROC'.format(proc.upper()), proc[2:]))
-procs_def_content.append(r'''  } gl;
+    interface_lines.append('        {0: <55} {1};\n'.format('PFN{0}PROC'.format(proc.upper()), proc[2:]))
+interface_lines.append(r'''  } gl;
 };
 
 ''')
 for proc in procs:
-    procs_def_content.append('#define {0: <48} gl3wProcs.gl.{1}\n'.format(proc, proc[2:]))
+    interface_lines.append('#define {0: <48} gl3wProcs.gl.{1}\n'.format(proc, proc[2:]))
 
-procs_table_content = []
-procs_table_content.append(r'#define GL3W_MIN_MAJOR_VERSION ' + args.minimum_profile.split('.')[0] + "\n")
-procs_table_content.append(r'#define GL3W_MIN_MINOR_VERSION ' + args.minimum_profile.split('.')[1] + "\n")
+impl_lines = []
+impl_lines.append(r'#define GL3W_MIN_MAJOR_VERSION ' + args.minimum_profile.split('.')[0] + "\n")
+impl_lines.append(r'#define GL3W_MIN_MINOR_VERSION ' + args.minimum_profile.split('.')[1] + "\n")
 
 if optional_versions:
-    procs_table_content.append(r'''
+    impl_lines.append(r'''
 
 #define GLFW_SUPPORT_OPTIONAL_VERSIONS
 
 static const gl3w_version_t gl3w_versions[] = {
 ''')
     for version in optional_versions:
-        procs_table_content.append('    { ' + version[11:12] + ', ' + version[13:14] + ' },\n')
-    procs_table_content.append(r'''};
+        impl_lines.append('    { ' + version[11:12] + ', ' + version[13:14] + ' },\n')
+    impl_lines.append(r'''};
 ''')
 
-procs_table_content.append(r'''
+impl_lines.append(r'''
 
 static const char* gl3w_extension_names[] = {
 ''')
 for extension in extensions:
-    procs_table_content.append('    "{0}",\n'.format(extension))
-procs_table_content.append(r'''};
+    impl_lines.append('    "{0}",\n'.format(extension))
+impl_lines.append(r'''};
 ''')
 
-procs_table_content.append(r'''
+impl_lines.append(r'''
 
 static const char* gl3w_proc_names[] = {
 ''')
 for proc in procs:
-    procs_table_content.append('    "{0}",\n'.format(proc))
-procs_table_content.append(r'''};
+    impl_lines.append('    "{0}",\n'.format(proc))
+impl_lines.append(r'''};
 ''')
 
 includes_content = ''.join(includes_lines)
-procs_def = ''.join(procs_def_content)
-procs_table = ''.join(procs_table_content)
+interface_content = ''.join(interface_lines)
+impl_content = ''.join(impl_lines)
 
 dir = os.path.join(args.output_directory, 'include/GL3W/')
 if not os.path.exists(dir):
@@ -249,5 +249,7 @@ print('Generating {0}...'.format(output_filename))
 with open(output_filename, 'wb') as f:
     for line in header_template:
         f.write(
-            line.replace('GL3W_SPEC_INCLUDES;', includes_content).replace('GL3W_PROCS_DEFINITION;', procs_def).replace(
-                'GL3W_PROC_NAMES;', procs_table).encode('utf-8'))
+            line.
+                replace('GL3W_SPEC_INCLUDES;', includes_content).
+                replace('GL3W_PROCS_DEFINITION;', interface_content).
+                replace('GL3W_PROC_NAMES;', impl_content).encode('utf-8'))
