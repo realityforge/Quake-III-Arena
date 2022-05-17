@@ -94,7 +94,7 @@ GL3W_API GL3WglProc gl3wGetProcAddress(const char* proc);
 GL3W_PROCS_DEFINITION;
 
 GL3W_API extern union GL3WExtensions gl3wExtensions;
-GL3W_API extern union GL3WProcs gl3wProcs;
+GL3W_API extern union GL3WFunctions gl3wFunctions;
 
 #ifdef GL3W_IMPLEMENTATION
 #include <stdlib.h>
@@ -112,7 +112,7 @@ static int gl3w_major_version = 0;
 static int gl3w_minor_version = 0;
 
 union GL3WExtensions gl3wExtensions;
-union GL3WProcs gl3wProcs;
+union GL3WFunctions gl3wFunctions;
 
 #define COUNT_OF(x) (sizeof(x) / sizeof((x)[0]))
 
@@ -311,8 +311,8 @@ GL3W_PROC_NAMES;
 static void load_procs(const GL3WGetProcAddressProc proc)
 {
    for (size_t i = 0; i < COUNT_OF(gl3w_proc_names); i++) {
-       gl3wProcs.ptr[i] = proc(gl3w_proc_names[i]);
-       // TODO: If gl3wProcs.ptr[i] IS NULL and it is part of required profile then this should generate an error
+       gl3wFunctions.functions[i] = proc(gl3w_proc_names[i]);
+       // TODO: If gl3wFunctions.functions[i] IS NULL and it is part of required profile then this should generate an error
    }
 }
 
@@ -342,7 +342,7 @@ static void detect_extensions()
 static void reset_procs()
 {
    for (size_t i = 0; i < COUNT_OF(gl3w_proc_names); i++) {
-       gl3wProcs.ptr[i] = NULL;
+       gl3wFunctions.functions[i] = NULL;
    }
 }
 

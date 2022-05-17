@@ -69,93 +69,93 @@ if not quiet:
 if verbose:
     print('Loading API Headers to scan')
 
-# Maps name of header filename => spec
-header_specs = {}
-# Maps name of header filename => specs that have been skipped
-header_suppressed_specs = {}
-# Maps name of spec => list of procs
-specs = {}
-# list of spec versions that are above minimum but below or equal to maximum.
+# Maps name of header filename => group
+header_groups = {}
+# Maps name of header filename => [group] that have been skipped
+header_suppressed_groups = {}
+# Maps name of group => list of functions
+groups = {}
+# list of versions that are above minimum but below or equal to maximum.
 # Used to generate guards in code.
 optional_versions = []
-procs = []
-spec_pattern = re.compile(r'#ifndef (GL_\w+)')
-profile_spec_name_pattern = re.compile(r'GL_VERSION_(\d)_(\d)')
-proc_pattern = re.compile(r'GLAPI.*APIENTRY\s+(\w+)')
+functions = []
+group_pattern = re.compile(r'#ifndef (GL_\w+)')
+version_group_pattern = re.compile(r'GL_VERSION_(\d)_(\d)')
+function_pattern = re.compile(r'GLAPI.*APIENTRY\s+(\w+)')
 
-spec = None
-skip_current_spec = True
+group = None
+skip_current_group = True
 
-spec_header_files = ['GL/glcorearb.h', 'GL/glext.h']
+header_files = ['GL/glcorearb.h', 'GL/glext.h']
 
-for filename in spec_header_files:
+for filename in header_files:
     with open(os.path.join(args.input_dir, 'include/' + filename), 'r') as f:
-        header_specs[filename] = []
-        header_suppressed_specs[filename] = []
+        header_groups[filename] = []
+        header_suppressed_groups[filename] = []
         for line in f:
-            m = spec_pattern.match(line)
+            m = group_pattern.match(line)
             if m:
-                spec = m.group(1)
-                v = profile_spec_name_pattern.match(spec)
+                group = m.group(1)
+                v = version_group_pattern.match(group)
                 if v:
                     v = v.group(1) + '.' + v.group(2)
-                    if args.minimum_profile < v <= args.maximum_profile and not spec in optional_versions:
-                        optional_versions.append(spec)
+                    if args.minimum_profile < v <= args.maximum_profile and not group in optional_versions:
+                        optional_versions.append(group)
                     if v > args.maximum_profile:
                         if verbose:
-                            print('Skipping profile ' + spec + ' as it exceeds maximum supported profile')
-                        skip_current_spec = True
+                            print('Skipping group ' + group + ' as it exceeds maximum supported profile version')
+                        skip_current_group = True
                     else:
-                        skip_current_spec = False
+                        skip_current_group = False
                 else:
-                    skip_current_spec = not (spec in extensions)
-                    if skip_current_spec and verbose:
-                        print('Skipping spec ' + spec + ' as this is not a supported extension')
-                if skip_current_spec:
-                    header_suppressed_specs[filename].append(spec)
+                    skip_current_group = not (group in extensions)
+                    if skip_current_group and verbose:
+                        print('Skipping group ' + group + ' as this is not a supported extension')
+                if skip_current_group:
+                    header_suppressed_groups[filename].append(group)
                 else:
-                    header_specs[filename].append(spec)
-            if not skip_current_spec:
-                m = proc_pattern.match(line)
+                    header_groups[filename].append(group)
+            if not skip_current_group:
+                m = function_pattern.match(line)
                 if not m:
                     continue
-                proc = m.group(1)
-                if proc in procs:
+                function = m.group(1)
+                if function in functions:
                     continue
-                if not specs.get(spec):
-                    specs[spec] = []
-                specs[spec].append(proc)
-                procs.append(proc)
+                if not groups.get(group):
+                    groups[group] = []
+                groups[group].append(function)
+                functions.append(function)
 
 optional_versions.sort()
-procs.sort()
+functions.sort()
 
 if not quiet:
     print('Wrapper methods by Specification:')
-    for spec in specs.keys():
-        print('  ' + spec + ': ' + str(len(specs[spec])))
+    for group in groups.keys():
+        print('  ' + group + ': ' + str(len(groups[group])))
 
 print('Loading template')
 header_template = open(os.path.join(args.input_dir, 'templates/include/GL3W/gl3w.h'), 'r')
 
-specs_present = []
+groups_present = []
 includes_lines = []
-for filename in spec_header_files:
-    # We define all the specs we do not want so that they do not get defined and nor do their constants
-    for spec in header_suppressed_specs[filename]:
-        includes_lines.append("#define " + spec + "\n")
-    for spec in header_specs[filename]:
-        if spec in specs_present:
+for filename in header_files:
+    # We define all the groups we do not want so that they do not get defined and nor do their constants
+    for group in header_suppressed_groups[filename]:
+        includes_lines.append("#define " + group + "\n")
+    for group in header_groups[filename]:
+        if group in groups_present:
             # We have to undef guard that was defined in previous header as this header includes a similar section
-            includes_lines.append("#undef " + spec + "\n")
+            includes_lines.append("#undef " + group + "\n")
     includes_lines.append("#include \"" + filename + "\"\n")
-    # Any spec we did define then we add them to a list of all specs defined
-    for spec in header_specs[filename]:
-        if not spec in specs_present:
-            specs_present.append(spec)
-    # We undefine the specs we do not want so not to leave incorrect defines present in context
-    for spec in header_suppressed_specs[filename]:
-        includes_lines.append("#undef " + spec + "\n")
+    # We add any group that was defined in header to a list
+    for group in header_groups[filename]:
+        if not group in groups_present:
+            groups_present.append(group)
+    # We undefine the groups we do not want so not to leave incorrect defines present in context
+    for group in header_suppressed_groups[filename]:
+        includes_lines.append("#undef " + group + "\n")
 
 interface_lines = []
 
@@ -190,17 +190,17 @@ for extension in extensions:
         '#define {0: <48} gl3wExtensions.ext.{1}\n'.format('GL3W_' + extension[3:], extension[3:]))
 interface_lines.append('\n')
 
-interface_lines.append('union GL3WProcs {\n')
-interface_lines.append('    GL3WglProc ptr[{0}];\n'.format(len(procs)))
+interface_lines.append('union GL3WFunctions {\n')
+interface_lines.append('    GL3WglProc functions[{0}];\n'.format(len(functions)))
 interface_lines.append('    struct {\n')
-for proc in procs:
-    interface_lines.append('        {0: <55} {1};\n'.format('PFN{0}PROC'.format(proc.upper()), proc[2:]))
+for function in functions:
+    interface_lines.append('        {0: <55} {1};\n'.format('PFN{0}PROC'.format(function.upper()), function[2:]))
 interface_lines.append(r'''  } gl;
 };
 
 ''')
-for proc in procs:
-    interface_lines.append('#define {0: <48} gl3wProcs.gl.{1}\n'.format(proc, proc[2:]))
+for function in functions:
+    interface_lines.append('#define {0: <48} gl3wFunctions.gl.{1}\n'.format(function, function[2:]))
 
 impl_lines = []
 impl_lines.append(r'#define GL3W_MIN_MAJOR_VERSION ' + args.minimum_profile.split('.')[0] + "\n")
@@ -231,8 +231,8 @@ impl_lines.append(r'''
 
 static const char* gl3w_proc_names[] = {
 ''')
-for proc in procs:
-    impl_lines.append('    "{0}",\n'.format(proc))
+for function in functions:
+    impl_lines.append('    "{0}",\n'.format(function))
 impl_lines.append(r'''};
 ''')
 
