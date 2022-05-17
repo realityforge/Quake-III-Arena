@@ -310,17 +310,22 @@ GLA_IMPL_CONTENT;
 
 static void reset_functions()
 {
-    for (size_t i = 0; i < COUNT_OF(gla_function_names); i++) {
+    for (size_t i = 0; i < COUNT_OF(gla_functions); i++) {
         glaFunctions.functions[i] = NULL;
     }
 }
 
-static void load_functions(const GLAGetProcAddressProc proc)
+static bool load_functions(const GLAGetProcAddressProc proc)
 {
-    for (size_t i = 0; i < COUNT_OF(gla_function_names); i++) {
-        glaFunctions.functions[i] = proc(gla_function_names[i]);
-        // TODO: If glaFunctions.functions[i] IS NULL and it is part of required profile then this should generate an error
+    for (size_t i = 0; i < COUNT_OF(gla_functions); i++) {
+        glaFunctions.functions[i] = proc(gla_functions[i].name);
+        if (NULL == glaFunctions.functions[i] /*&& gla_functions[i].required*/) {
+            snprintf(gla_error_buffer, GLA_MAX_ERROR_MESSAGE_LENGTH, "Failed to load required OpenGL function: %s", gla_functions[i].name);
+            gla_error = gla_error_buffer;
+            return false;
+        }
     }
+    return true;
 }
 
 #ifdef GLFW_SUPPORT_EXTENSIONS

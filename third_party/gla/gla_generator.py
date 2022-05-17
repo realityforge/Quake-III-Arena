@@ -74,6 +74,8 @@ groups = {}
 # Used to generate guards in code.
 optional_versions = []
 functions = []
+# list of versions that are in groups that are at or below minimum version.
+required_functions = []
 void_functions = []
 group_pattern = re.compile(r'#ifndef (GL_\w+)')
 version_group_pattern = re.compile(r'GL_VERSION_(\d)_(\d)')
@@ -81,6 +83,7 @@ function_pattern = re.compile(r'GLAPI(.*)APIENTRY\s+(\w+)')
 
 group = None
 skip_current_group = True
+required_group = False
 
 header_files = ['GL/glcorearb.h', 'GL/glext.h']
 
@@ -92,10 +95,12 @@ for filename in header_files:
             m = group_pattern.match(line)
             if m:
                 group = m.group(1)
+                required_group = False
                 v = version_group_pattern.match(group)
                 if v:
                     v = v.group(1) + '.' + v.group(2)
-                    if args.minimum_profile < v <= args.maximum_profile and not group in optional_versions:
+                    required_group = args.minimum_profile >= group
+                    if args.minimum_profile < v <= args.maximum_profile and group not in optional_versions:
                         optional_versions.append(group)
                     if v > args.maximum_profile:
                         if verbose:
@@ -121,10 +126,13 @@ for filename in header_files:
                 if not groups.get(group):
                     groups[group] = []
                 groups[group].append(function)
+                if required_group and function not in required_functions:
+                    required_functions.append(function)
                 functions.append(function)
                 if ' void ' == m.group(1):
                     void_functions.append(function)
 
+required_functions.sort()
 optional_versions.sort()
 functions.sort()
 
@@ -242,10 +250,16 @@ static const char* gla_extension_names[] = {
     impl_lines.append('};\n')
 
 impl_lines.append(r'''
-static const char* gla_function_names[] = {
+
+typedef struct gla_function_s {
+    const char* name;
+    bool required;
+} gla_function_t;
+
+static const gla_function_t gla_functions[] = {
 ''')
 for function in functions:
-    impl_lines.append('    "{0}",\n'.format(function))
+    impl_lines.append('    { \"' + function + '\", ' + ('true' if function in required_functions else 'false') + ' },\n')
 impl_lines.append('};\n')
 
 includes_content = ''.join(includes_lines)
