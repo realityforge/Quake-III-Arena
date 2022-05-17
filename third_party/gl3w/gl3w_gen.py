@@ -143,7 +143,9 @@ if verbose:
         print('  ' + group + ': ' + str(len(groups[group])))
     print('Group Count by Header:')
     for header in header_groups.keys():
-        print('  ' + header + ': ' + str(len(header_groups[header])) + ' included, ' + str(len(header_suppressed_groups[header])) + ' excluded')
+        print('  ' + header + ': ' +
+              str(len(header_groups[header])) + ' included, ' +
+              str(len(header_suppressed_groups[header])) + ' excluded')
 
 if verbose:
     print('Loading template')
