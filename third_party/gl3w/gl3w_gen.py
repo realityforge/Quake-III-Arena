@@ -243,8 +243,7 @@ static const char* gl3w_function_names[] = {
 ''')
 for function in functions:
     impl_lines.append('    "{0}",\n'.format(function))
-impl_lines.append(r'''};
-''')
+impl_lines.append('};\n')
 
 includes_content = ''.join(includes_lines)
 interface_content = ''.join(interface_lines)
