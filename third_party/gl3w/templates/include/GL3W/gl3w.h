@@ -318,7 +318,7 @@ static void load_procs(const GL3WGetProcAddressProc proc)
 static void reset_extensions()
 {
     for(int j = 0; j < COUNT_OF(gl3w_extension_names); j++) {
-        gl3wExtensions.extension[j] = false;
+        gl3wExtensions.extensions[j] = false;
     }
 }
 
@@ -332,7 +332,7 @@ static void detect_extensions()
         const GLubyte *extension_name = glGetStringi(GL_EXTENSIONS, i);
         for(int j = 0; j < COUNT_OF(gl3w_extension_names); j++) {
           if ( 0 == strcmp(gl3w_extension_names[j], extension_name) ){
-              gl3wExtensions.extension[j] = true;
+              gl3wExtensions.extensions[j] = true;
           }
         }
     }

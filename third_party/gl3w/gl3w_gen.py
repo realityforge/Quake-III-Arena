@@ -179,11 +179,11 @@ GL3W_API extern union GL3WVersions gl3wVersions;
 
 if extensions:
     interface_lines.append('union GL3WExtensions {\n')
-    interface_lines.append('    bool extension[{0}];\n'.format(len(extensions)))
+    interface_lines.append('    bool extensions[{0}];\n'.format(len(extensions)))
     interface_lines.append('    struct {\n')
     for extension in extensions:
         interface_lines.append('        bool {0};\n'.format(extension[3:]))
-    interface_lines.append(r'''  } ext;
+    interface_lines.append(r'''  } extension;
 };
 
 GL3W_API extern union GL3WExtensions gl3wExtensions;
@@ -191,7 +191,7 @@ GL3W_API extern union GL3WExtensions gl3wExtensions;
 ''')
     for extension in extensions:
         interface_lines.append(
-            '#define {0: <48} gl3wExtensions.ext.{1}\n'.format('GL3W_' + extension[3:], extension[3:]))
+            '#define {0: <48} gl3wExtensions.extension.{1}\n'.format('GL3W_' + extension[3:], extension[3:]))
     interface_lines.append('\n')
 
 interface_lines.append('union GL3WFunctions {\n')
@@ -199,12 +199,12 @@ interface_lines.append('    GL3WglProc functions[{0}];\n'.format(len(functions))
 interface_lines.append('    struct {\n')
 for function in functions:
     interface_lines.append('        {0: <55} {1};\n'.format('PFN{0}PROC'.format(function.upper()), function[2:]))
-interface_lines.append(r'''  } gl;
+interface_lines.append(r'''  } function;
 };
 
 ''')
 for function in functions:
-    interface_lines.append('#define {0: <48} gl3wFunctions.gl.{1}\n'.format(function, function[2:]))
+    interface_lines.append('#define {0: <48} gl3wFunctions.function.{1}\n'.format(function, function[2:]))
 
 impl_lines = []
 impl_lines.append(r'#define GL3W_MIN_MAJOR_VERSION ' + args.minimum_profile.split('.')[0] + "\n")
