@@ -10,8 +10,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("//build_defs:rules.bzl", "FULL_WARNINGS")
-
 filegroup(
     name = "specification_files",
     srcs = [
@@ -38,7 +36,7 @@ genrule(
         "templates/include/GL3W/gl3w.h",
     ],
     outs = ["include/GL3W/gl3w.h"],
-    cmd = "$(location :gl3w_gen) --input_dir third_party/gl3w --minimum_profile 3.0 --maximum_profile 3.2 --output_directory $(RULEDIR) --extension GL_ARB_framebuffer_object --extension GL_ARB_depth_clamp --extension GL_ARB_seamless_cube_map --extension GL_NVX_gpu_memory_info --extension GL_ATI_meminfo --extension GL_ARB_texture_compression_rgtc --extension GL_ARB_texture_compression_bptc --extension GL_EXT_texture_compression_s3tc --extension GL_EXT_texture_filter_anisotropic --extension GL_EXT_texture_sRGB --extension GL_S3_s3tc",
+    cmd = "$(location :gl3w_gen) --minimum_profile 3.0 --maximum_profile 3.2 --output_directory $(RULEDIR) --extension GL_ARB_framebuffer_object --extension GL_ARB_depth_clamp --extension GL_ARB_seamless_cube_map --extension GL_NVX_gpu_memory_info --extension GL_ATI_meminfo --extension GL_ARB_texture_compression_rgtc --extension GL_ARB_texture_compression_bptc --extension GL_EXT_texture_compression_s3tc --extension GL_EXT_texture_filter_anisotropic --extension GL_EXT_texture_sRGB --extension GL_S3_s3tc",
     tools = [":gl3w_gen"],
 )
 
@@ -48,7 +46,6 @@ cc_library(
         ":gl3w_gen_generator",
         ":specification_files",
     ],
-    copts = FULL_WARNINGS,
     includes = ["include"],
-    visibility = ["//code/renderer:__pkg__"],
+    visibility = ["@org_realityforge_q3a//code/renderer:__pkg__"],
 )

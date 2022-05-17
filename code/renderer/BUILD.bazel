@@ -37,7 +37,7 @@ cc_library(
     copts = FULL_WARNINGS,
     deps = [
         ":api",
-        "//third_party/gl3w",
+        "@gl3w",
     ],
 )
 

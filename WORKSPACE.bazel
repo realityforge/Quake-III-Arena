@@ -82,3 +82,8 @@ _configure_rules_apple_repository()
 load("//third_party/com_github_mvdan_sh:repository.bzl", _setup_com_github_mvdan_sh_repository = "configure_repository")
 
 _setup_com_github_mvdan_sh_repository()
+
+local_repository(
+    name = "gl3w",
+    path = "third_party/gl3w",
+)
