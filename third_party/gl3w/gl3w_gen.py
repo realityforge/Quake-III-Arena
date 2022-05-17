@@ -259,7 +259,7 @@ if not quiet:
 with open(output_filename, 'wb') as f:
     for line in header_template:
         f.write(line.
-                replace('GL3W_SPEC_INCLUDES;', includes_content).
-                replace('GL3W_PROCS_DEFINITION;', interface_content).
-                replace('GL3W_PROC_NAMES;', impl_content).
+                replace('GL3W_SPEC_INCLUDES;\n', includes_content).
+                replace('GL3W_PROCS_DEFINITION;\n', interface_content).
+                replace('GL3W_PROC_NAMES;\n', impl_content).
                 encode('utf-8'))
