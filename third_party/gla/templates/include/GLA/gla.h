@@ -34,7 +34,7 @@
 #define __gl_h_ // NOLINT(bugprone-reserved-identifier)
 #endif
 
-GLA_SPEC_INCLUDES;
+GLA_INCLUDES_CONTENT;
 
 #include <stdbool.h>
 
@@ -101,7 +101,7 @@ const char* glaErrorCodeToMessage(GLenum error_code);
 
 typedef void (*GLAglFunction)();
 
-GLA_PROCS_DEFINITION;
+GLA_INTERFACE_CONTENT;
 
 #ifdef GLA_IMPLEMENTATION
 #include <stdlib.h>
@@ -310,7 +310,7 @@ static GLAglFunction gla_get_function(const char* function_name)
 }
 #endif
 
-GLA_PROC_NAMES;
+GLA_IMPL_CONTENT;
 
 static void reset_functions()
 {

@@ -257,7 +257,7 @@ if not quiet:
 with open(output_filename, 'wb') as f:
     for line in header_template:
         f.write(line.
-                replace('GLA_SPEC_INCLUDES;\n', includes_content).
-                replace('GLA_PROCS_DEFINITION;\n', interface_content).
-                replace('GLA_PROC_NAMES;\n', impl_content).
+                replace('GLA_INCLUDES_CONTENT;\n', includes_content).
+                replace('GLA_INTERFACE_CONTENT;\n', interface_content).
+                replace('GLA_IMPL_CONTENT;\n', impl_content).
                 encode('utf-8'))
