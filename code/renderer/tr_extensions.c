@@ -33,7 +33,7 @@ void GLimp_InitExtraExtensions(void)
         glRefConfig.intelGraphics = true;
     }
 
-    glRefConfig.framebufferObject = !!r_ext_framebuffer_object->integer;
+    glRefConfig.framebufferObject = GL3W_VERSION_3_2 && GL3W_ARB_framebuffer_object && !!r_ext_framebuffer_object->integer;
 
     glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE, &glRefConfig.maxRenderbufferSize);
     glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &glRefConfig.maxColorAttachments);
