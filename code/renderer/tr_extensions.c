@@ -55,7 +55,8 @@ void GLimp_InitExtraExtensions(void)
     sscanf(shading_language_version, "%d.%d", &glRefConfig.glslMajorVersion, &glRefConfig.glslMinorVersion);
     ri.Printf(PRINT_ALL, "...using GLSL shading_language_version %s\n", shading_language_version);
 
-    glRefConfig.memInfo = GLA_NVX_gpu_memory_info ? MI_NVX : GLA_ATI_meminfo ? MI_ATI : MI_NONE;
+    glRefConfig.memInfo = GLA_NVX_gpu_memory_info ? MI_NVX : GLA_ATI_meminfo ? MI_ATI
+                                                                             : MI_NONE;
 
     ri.Printf(PRINT_ALL, result[glRefConfig.memInfo == MI_NVX ? 1 : 2], "GL_NVX_gpu_memory_info");
     ri.Printf(PRINT_ALL, result[glRefConfig.memInfo == MI_ATI ? 1 : 2], "GL_ATI_meminfo");
