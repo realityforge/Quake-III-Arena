@@ -218,7 +218,6 @@ impl_lines.append(r'#define GL3W_MIN_MINOR_VERSION ' + args.minimum_profile.spli
 
 if optional_versions:
     impl_lines.append(r'''
-
 #define GLFW_SUPPORT_OPTIONAL_VERSIONS
 
 static const gl3w_version_t gl3w_versions[] = {
@@ -238,7 +237,6 @@ impl_lines.append(r'''};
 ''')
 
 impl_lines.append(r'''
-
 static const char* gl3w_function_names[] = {
 ''')
 for function in functions:
