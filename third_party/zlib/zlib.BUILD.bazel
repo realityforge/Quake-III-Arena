@@ -15,6 +15,9 @@
 
 package(default_visibility = ["//visibility:public"])
 
+# TODO: Replace zlib with https://github.com/zlib-ng/zlib-ng (as it is faster and "better" maintained?)
+# TODO: Replace unzip with https://github.com/zlib-ng/minizip-ng (as it is maintained?)
+
 licenses(["notice"])  # BSD/MIT-like license (for zlib)
 
 cc_library(
