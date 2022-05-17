@@ -35,7 +35,10 @@ import re
 parser = argparse.ArgumentParser(description='gl3w generator script')
 parser.add_argument('--quiet', action='store_true', help='Verbose output')
 parser.add_argument('--verbose', action='store_true', help='Verbose output')
-parser.add_argument('--input_dir', type=str, default=os.path.dirname(os.path.realpath(__file__)), help='Input directory')
+parser.add_argument('--input_dir',
+                    type=str,
+                    default=os.path.dirname(os.path.realpath(__file__)),
+                    help='Input directory')
 parser.add_argument('--output_directory', type=str, default='', help='Output directory')
 parser.add_argument('--minimum_profile',
                     type=str,
