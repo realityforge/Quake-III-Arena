@@ -277,7 +277,7 @@ static int gla_open_libgl()
             *(void**)(&gla_get_function_address) = dlsym(gla_libgl_handle, "glXGetProcAddressARB");
         }
 
-        if (!gla_get_function_address) {
+        if (NULL == gla_get_function_address) {
             gla_close_libgl();
             return GLA_ERROR_INIT;
         } else {
