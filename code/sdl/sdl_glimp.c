@@ -532,7 +532,7 @@ void GLimp_Init()
         goto success;
     } else if (GLimp_StartDriverAndSetMode(r_mode->integer, r_fullscreen->integer, false)) {
         goto success;
-    } else if (r_mode->integer != R_MODE_FALLBACK) {
+    } else if (R_MODE_FALLBACK != r_mode->integer) {
         // Finally, try the default screen resolution
         ri.Printf(PRINT_ALL, "Setting r_mode %d failed, falling back on r_mode %d\n", r_mode->integer, R_MODE_FALLBACK);
         if (GLimp_StartDriverAndSetMode(R_MODE_FALLBACK, false, false)) {
