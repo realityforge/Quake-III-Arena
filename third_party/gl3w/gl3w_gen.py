@@ -206,6 +206,8 @@ for function in functions:
 interface_lines.append(r'''  } function;
 };
 
+GL3W_API extern union GL3WFunctions gl3wFunctions;
+
 ''')
 for function in functions:
     interface_lines.append('#define {0: <48} gl3wFunctions.function.{1}\n'.format(function, function[2:]))

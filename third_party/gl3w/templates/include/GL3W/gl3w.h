@@ -83,8 +83,6 @@ typedef void (*GL3WglFunction)();
 
 GL3W_PROCS_DEFINITION;
 
-GL3W_API extern union GL3WFunctions gl3wFunctions;
-
 #ifdef GL3W_IMPLEMENTATION
 #include <stdlib.h>
 
