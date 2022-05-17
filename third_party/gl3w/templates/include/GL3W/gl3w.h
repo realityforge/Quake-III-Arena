@@ -79,15 +79,6 @@ GL3W_API int gl3wDispose(void);
 */
 GL3W_API const char* gl3wError(void);
 
-/**
-* Return true if the OpenGL library meets the versions specified.
-*
-* @param min_major the minimum major version required.
-* @param min_minor the minimum minor version required.
-* @return a string describing the last ERROR or NULL if the last gl3w library call succeeded.
-*/
-GL3W_API bool gl3wIsSupported(int min_major, int min_minor);
-
 typedef void (*GL3WglProc)();
 
 /**
@@ -109,10 +100,17 @@ GL3W_API extern union GL3WProcs gl3wProcs;
 #include <stdlib.h>
 
 typedef GL3WglProc (*GL3WGetProcAddressProc)(const char* proc);
+typedef struct gl3w_version_s {
+    int major;
+    int minor;
+} gl3w_version_t;
 
 #define GL3W_MAX_ERROR_MESSAGE_LENGTH 1024
 static char gl3w_error_buffer[GL3W_MAX_ERROR_MESSAGE_LENGTH] = { 0 };
 static char* gl3w_error = NULL;
+static int gl3w_major_version = 0;
+static int gl3w_minor_version = 0;
+
 union GL3WExtensions gl3wExtensions;
 union GL3WProcs gl3wProcs;
 
@@ -350,17 +348,30 @@ static void reset_procs()
 
 static bool gl3w_is_version(const int min_major, const int min_minor)
 {
-    int major;
-    int minor;
-    glGetIntegerv(GL_MAJOR_VERSION, &major);
-    glGetIntegerv(GL_MINOR_VERSION, &minor);
+    return min_major == gl3w_major_version ? min_minor >= gl3w_minor_version : min_major >= gl3w_major_version;
+}
 
-    if (min_major == major) {
-        return min_minor >= minor ? true : false;
-    } else {
-        return min_major >= major ? true : false;
+#ifdef GLFW_SUPPORT_OPTIONAL_VERSIONS
+
+union GL3WVersions gl3wVersions;
+
+static void reset_versions()
+{
+    for (size_t i = 0; i < COUNT_OF(gl3w_versions); i++) {
+        gl3wVersions.versions[i] = false;
     }
 }
+
+static void detect_versions()
+{
+    reset_versions();
+
+    for (size_t i = 0; i < COUNT_OF(gl3w_versions); i++) {
+        gl3wVersions.versions[i] = gl3w_is_version(gl3w_versions[i].major, gl3w_versions[i].minor);
+    }
+}
+
+#endif
 
 static bool gl3w_close_libgl_atexit_registered = false;
 
@@ -385,10 +396,16 @@ int gl3wInit()
                gl3wDispose();
                return GL3W_ERROR_INIT;
            } else {
+               glGetIntegerv(GL_MAJOR_VERSION, &gl3w_major_version);
+               glGetIntegerv(GL_MINOR_VERSION, &gl3w_minor_version);
+
                if (gl3w_is_version(GL3W_MIN_MAJOR_VERSION, GL3W_MIN_MINOR_VERSION)) {
                    gl3wDispose();
                    return GL3W_ERROR_OPENGL_VERSION;
                } else {
+#ifdef GLFW_SUPPORT_OPTIONAL_VERSIONS
+                   detect_versions();
+#endif
                    detect_extensions();
                    return GL3W_OK;
                }
@@ -399,8 +416,13 @@ int gl3wInit()
 
 int gl3wDispose()
 {
+   gl3w_major_version = 0;
+   gl3w_minor_version = 0;
    gl3w_error = NULL;
    reset_procs();
+#ifdef GLFW_SUPPORT_OPTIONAL_VERSIONS
+   reset_versions();
+#endif
    reset_extensions();
    gl3w_close_libgl();
    return NULL == gl3w_error ? GL3W_OK : GL3W_ERROR_LIBRARY_CLOSE;
@@ -409,16 +431,6 @@ int gl3wDispose()
 const char* gl3wError()
 {
    return gl3w_error;
-}
-
-bool gl3wIsSupported(const int min_major, const int min_minor)
-{
-   if (!glGetIntegerv) {
-       gl3w_error = "gl3wIsSupported(...) invoked without successfully invoking gl3wInit(...)";
-       return false;
-   } else {
-       return gl3w_is_version(min_major, min_minor);
-   }
 }
 
 GL3WglProc gl3wGetProcAddress(const char* proc)

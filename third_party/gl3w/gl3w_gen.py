@@ -75,9 +75,12 @@ header_specs = {}
 header_suppressed_specs = {}
 # Maps name of spec => list of procs
 specs = {}
+# list of spec versions that are above minimum but below or equal to maximum.
+# Used to generate guards in code.
+optional_versions = []
 procs = []
 spec_pattern = re.compile(r'#ifndef (GL_\w+)')
-profile_spec_name_pattern = re.compile(r'GL_VERSION_(\d_\d)')
+profile_spec_name_pattern = re.compile(r'GL_VERSION_(\d)_(\d)')
 proc_pattern = re.compile(r'GLAPI.*APIENTRY\s+(\w+)')
 
 spec = None
@@ -95,7 +98,9 @@ for filename in spec_header_files:
                 spec = m.group(1)
                 v = profile_spec_name_pattern.match(spec)
                 if v:
-                    v = v.group(1).replace('_', '.')
+                    v = v.group(1) + '.' + v.group(2)
+                    if args.minimum_profile < v <= args.maximum_profile and not spec in optional_versions:
+                        optional_versions.append(spec)
                     if v > args.maximum_profile:
                         if verbose:
                             print('Skipping profile ' + spec + ' as it exceeds maximum supported profile')
@@ -122,6 +127,7 @@ for filename in spec_header_files:
                 specs[spec].append(proc)
                 procs.append(proc)
 
+optional_versions.sort()
 procs.sort()
 
 if not quiet:
@@ -153,6 +159,23 @@ for filename in spec_header_files:
 
 procs_def_content = []
 
+if optional_versions:
+    procs_def_content.append('union GL3WVersions {\n')
+    procs_def_content.append('    bool versions[{0}];\n'.format(len(optional_versions)))
+    procs_def_content.append('    struct {\n')
+    for version in optional_versions:
+        procs_def_content.append('        bool {0};\n'.format(version[3:]))
+    procs_def_content.append(r'''  } version;
+};
+
+GL3W_API extern union GL3WVersions gl3wVersions;
+
+''')
+    for version in optional_versions:
+        procs_def_content.append(
+            '#define {0: <48} gl3wVersions.ext.{1}\n'.format('GL3W_' + version[3:], version[3:]))
+    procs_def_content.append('\n')
+
 procs_def_content.append('union GL3WExtensions {\n')
 procs_def_content.append('    bool extension[{0}];\n'.format(len(extensions)))
 procs_def_content.append('    struct {\n')
@@ -182,6 +205,18 @@ for proc in procs:
 procs_table_content = []
 procs_table_content.append(r'#define GL3W_MIN_MAJOR_VERSION ' + args.minimum_profile.split('.')[0] + "\n")
 procs_table_content.append(r'#define GL3W_MIN_MINOR_VERSION ' + args.minimum_profile.split('.')[1] + "\n")
+
+if optional_versions:
+    procs_table_content.append(r'''
+
+#define GLFW_SUPPORT_OPTIONAL_VERSIONS
+
+static const gl3w_version_t gl3w_versions[] = {
+''')
+    for version in optional_versions:
+        procs_table_content.append('    { ' + version[11:12] + ', ' + version[13:14] + ' },\n')
+    procs_table_content.append(r'''};
+''')
 
 procs_table_content.append(r'''
 
