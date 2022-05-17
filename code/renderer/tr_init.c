@@ -215,6 +215,13 @@ int max_polys;
 cvar_t* r_maxpolyverts;
 int max_polyverts;
 
+#ifdef DEBUG
+void R_PrintGLError(const char* error_message)
+{
+    ri.Printf(PRINT_ERROR, "%s\n", error_message);
+}
+#endif
+
 /*
 ** InitOpenGL
 **

@@ -25,6 +25,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../qcommon/q_shared.h"
 #include "../qcommon/cvar_engine.h"
 #include "tr_public.h"
+#ifdef DEBUG
+void R_PrintGLError(const char* error_message);
+#define GL3W_AUTO_CHECK_ERROR_HANDLER R_PrintGLError
+#endif
 #include "GL3W/gl3w.h"
 
 typedef enum {
