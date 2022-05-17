@@ -107,10 +107,6 @@ GLA_INTERFACE_CONTENT;
 #include <stdlib.h>
 
 typedef GLAglFunction (*GLAGetProcAddressProc)(const char* function_name);
-typedef struct gla_version_s {
-    int major;
-    int minor;
-} gla_version_t;
 
 #define GLA_MAX_ERROR_MESSAGE_LENGTH 1024
 static char gla_error_buffer[GLA_MAX_ERROR_MESSAGE_LENGTH] = { 0 };

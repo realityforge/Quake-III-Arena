@@ -220,6 +220,11 @@ if optional_versions:
     impl_lines.append(r'''
 #define GLFW_SUPPORT_OPTIONAL_VERSIONS
 
+typedef struct gla_version_s {
+    int major;
+    int minor;
+} gla_version_t;
+
 static const gla_version_t gla_versions[] = {
 ''')
     for version in optional_versions:
