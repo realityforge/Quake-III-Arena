@@ -498,16 +498,13 @@ static bool GLimp_StartDriverAndSetMode(int mode, bool fullscreen, bool noborder
         fullscreen = false;
     }
 
-    rserr_t err = GLimp_SetMode(mode, fullscreen, noborder);
-    switch (err) {
-    case RSERR_INVALID_MODE:
+    const rserr_t err = GLimp_SetMode(mode, fullscreen, noborder);
+    if (RSERR_INVALID_MODE == err) {
         ri.Printf(PRINT_ALL, "...WARNING: could not set the given mode (%d)\n", mode);
         return false;
-    default:
-        break;
+    } else {
+        return true;
     }
-
-    return true;
 }
 
 #define R_MODE_FALLBACK 3 // 640 * 480
