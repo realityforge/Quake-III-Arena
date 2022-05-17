@@ -81,16 +81,6 @@ GL3W_API const char* gl3wError(void);
 
 typedef void (*GL3WglFunction)();
 
-/**
-* Returns the address of an OpenGL extension function. Generally, you won't need to use it since gl3w loads all
-* functions defined in the OpenGL core profile on initialization. It allows you to load OpenGL extensions
-* outside of the core profile.
-
-* @param proc the name of the extension function.
-* @return the address of the extension function or NULL if no such extension method available. If NULL is returned the invoker should call gl3wError to ensure there was no actual error.
-*/
-GL3W_API GL3WglProc gl3wGetProcAddress(const char* proc);
-
 GL3W_PROCS_DEFINITION;
 
 GL3W_API extern union GL3WFunctions gl3wFunctions;
@@ -429,12 +419,6 @@ int gl3wDispose()
 const char* gl3wError()
 {
    return gl3w_error;
-}
-
-GL3WglProc gl3wGetProcAddress(const char* proc)
-{
-   gl3w_error = NULL;
-   return gl3w_get_proc(proc);
 }
 
 #endif // GL3W_IMPLEMENTATION
