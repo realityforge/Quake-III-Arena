@@ -393,11 +393,11 @@ int gl3wInit()
                     gl3wDispose();
                     return GL3W_ERROR_OPENGL_VERSION;
                 } else {
-#ifdef GLFW_SUPPORT_OPTIONAL_VERSIONS
-                    detect_versions();
-#endif
 #ifdef GLFW_SUPPORT_EXTENSIONS
                     detect_extensions();
+#endif
+#ifdef GLFW_SUPPORT_OPTIONAL_VERSIONS
+                    detect_versions();
 #endif
                     return GL3W_OK;
                 }
@@ -412,11 +412,11 @@ int gl3wDispose()
     gl3w_minor_version = 0;
     gl3w_error = NULL;
     reset_functions();
-#ifdef GLFW_SUPPORT_OPTIONAL_VERSIONS
-    reset_versions();
-#endif
 #ifdef GLFW_SUPPORT_EXTENSIONS
     reset_extensions();
+#endif
+#ifdef GLFW_SUPPORT_OPTIONAL_VERSIONS
+    reset_versions();
 #endif
     gl3w_close_libgl();
     return NULL == gl3w_error ? GL3W_OK : GL3W_ERROR_LIBRARY_CLOSE;
