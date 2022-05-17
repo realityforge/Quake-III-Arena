@@ -2,7 +2,7 @@
 
 ### Motivation
 
-When using OpenGL it is (or was?) common to dynamically load the OpenGL driver library and lookup the functions at runtime. This way a single compiled code base could load OpenGL drivers that support different profiles and OpenGL drivers that support different extensions using a unified mechanism.
+On most platforms, OpenGL core and extension functions must be loaded at runtime. Different platforms have different mechanisms for loading the OpenGL libraries and loading the functions. This way a single compiled code base could load OpenGL drivers that support different profiles and OpenGL drivers that support different extensions using a unified mechanism.
 
 The original project used a hand-crafted wrapper library and minimal extension loading mechanisms which seems labor-intensive to maintain and evolve. The `ioq3` fork included a more comprehensive wrapper library as it also supported OpenGL 2.x API, and it developed different wrapper library. The `ioq3` required that the developer declare each of the OpenGL functions that are used in the project using a specialized DSL. The `ioq3` fork then used preprocessor tricks to expand the DSL into code to declare the wrapper and to load the function on demand. The `ioq3` approach tends to confuse the IDE of choice (CLion) and thus the IDE fails to provide useful intellisense and code completion when interacting with the functions declared by the macro.
 
