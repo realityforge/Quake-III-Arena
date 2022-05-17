@@ -80,9 +80,10 @@ groups = {}
 # Used to generate guards in code.
 optional_versions = []
 functions = []
+void_functions = []
 group_pattern = re.compile(r'#ifndef (GL_\w+)')
 version_group_pattern = re.compile(r'GL_VERSION_(\d)_(\d)')
-function_pattern = re.compile(r'GLAPI.*APIENTRY\s+(\w+)')
+function_pattern = re.compile(r'GLAPI(.*)APIENTRY\s+(\w+)')
 
 group = None
 skip_current_group = True
@@ -120,13 +121,15 @@ for filename in header_files:
                 m = function_pattern.match(line)
                 if not m:
                     continue
-                function = m.group(1)
+                function = m.group(2)
                 if function in functions:
                     continue
                 if not groups.get(group):
                     groups[group] = []
                 groups[group].append(function)
                 functions.append(function)
+                if ' void ' == m.group(1):
+                    void_functions.append(function)
 
 optional_versions.sort()
 functions.sort()
@@ -210,7 +213,8 @@ GL3W_API extern union GL3WFunctions gl3wFunctions;
 
 ''')
 for function in functions:
-    interface_lines.append('#define {0: <48} gl3wFunctions.function.{1}\n'.format(function, function[2:]))
+    interface_lines.append('#define {0: <48} {1}(gl3wFunctions.function.{2}(__VA_ARGS__))\n'.
+                           format(function + '(...)', 'GL3W_CHECK' if function in void_functions else '', function[2:]))
 
 impl_lines = []
 impl_lines.append(r'#define GL3W_MIN_MAJOR_VERSION ' + args.minimum_profile.split('.')[0] + "\n")

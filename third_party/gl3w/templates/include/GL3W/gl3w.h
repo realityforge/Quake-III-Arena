@@ -79,6 +79,25 @@ GL3W_API int gl3wDispose(void);
  */
 GL3W_API const char* gl3wError(void);
 
+#ifdef GL3W_AUTO_CHECK_ERROR_HANDLER
+void gl3wCheckError(const char* statement, const char* filename, int line);
+
+#define GL3W_CHECK(statement) do { \
+            statement; \
+            gl3wCheckError(#statement, __FILE__, __LINE__); \
+        } while (0)
+#else
+#define GL3W_CHECK(statement) statement
+#endif
+
+/**
+ * Convert the specified error message
+ *
+ * @param error_code
+ * @return
+ */
+const char* gl3wErrorCodeToMessage(GLenum error_code);
+
 typedef void (*GL3WglFunction)();
 
 GL3W_PROCS_DEFINITION;
@@ -426,6 +445,47 @@ const char* gl3wError()
 {
     return gl3w_error;
 }
+
+const char* gl3wErrorCodeToMessage(const GLenum error_code)
+{
+    switch (error_code) {
+    case GL_INVALID_ENUM:
+        return "GL_INVALID_ENUM";
+    case GL_INVALID_VALUE:
+        return "GL_INVALID_VALUE";
+    case GL_INVALID_OPERATION:
+        return "GL_INVALID_OPERATION";
+    case GL_STACK_OVERFLOW:
+        return "GL_STACK_OVERFLOW";
+    case GL_STACK_UNDERFLOW:
+        return "GL_STACK_UNDERFLOW";
+    case GL_OUT_OF_MEMORY:
+        return "GL_OUT_OF_MEMORY";
+    default:
+        return NULL;
+    }
+}
+
+#ifdef GL3W_AUTO_CHECK_ERROR_HANDLER
+
+void gl3wCheckError(const char* statement, const char* filename, const int line)
+{
+    const GLenum error_code = glGetError();
+    if (GL_NO_ERROR != error_code) {
+        const char* error_code_description = gl3wErrorCodeToMessage(error_code);
+        if (NULL == error_code_description) {
+            char buffer[10];
+            snprintf(buffer, 10, "%08x", error_code);
+            error_code_description = buffer;
+        }
+
+        snprintf(gl3w_error_buffer, GL3W_MAX_ERROR_MESSAGE_LENGTH, "OpenGL error %s, at %s:%i - %s", error_code_description, filename, line, statement);
+        gl3w_error = gl3w_error_buffer;
+        GL3W_AUTO_CHECK_ERROR_HANDLER(gl3w_error);
+    }
+}
+
+#endif // GL3W_AUTO_CHECK_ERRORS
 
 #endif // GL3W_IMPLEMENTATION
 
