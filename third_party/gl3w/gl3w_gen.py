@@ -49,6 +49,7 @@ parser.add_argument('--extension',
                     action='append',
                     type=str,
                     dest='extensions',
+                    default=[],
                     help='An extension that will be supported by wrapper')
 args = parser.parse_args()
 
