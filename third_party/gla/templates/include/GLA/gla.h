@@ -270,11 +270,11 @@ static int gla_open_libgl()
         return open_result;
     } else {
         if (gla_libegl_handle) {
-            *(void**)(&gla_get_function_address) = dlsym(gla_libegl_handle, "eglGetProcAddress");
+            gla_get_function_address = (GLAGetProcAddressProc)dlsym(gla_libegl_handle, "eglGetProcAddress");
         } else if (gla_libglx_handle) {
-            *(void**)(&gla_get_function_address) = dlsym(gla_libglx_handle, "glXGetProcAddressARB");
+            gla_get_function_address = (GLAGetProcAddressProc)dlsym(gla_libglx_handle, "glXGetProcAddressARB");
         } else {
-            *(void**)(&gla_get_function_address) = dlsym(gla_libgl_handle, "glXGetProcAddressARB");
+            gla_get_function_address = (GLAGetProcAddressProc)dlsym(gla_libgl_handle, "glXGetProcAddressARB");
         }
 
         if (NULL == gla_get_function_address) {
@@ -292,17 +292,17 @@ static GLAglFunction gla_get_function(const char* function_name)
     // functions and may return a dummy function if we try, so try to load the
     // function from the GL library directly first.
 
-    GLAglFunction res = NULL;
+    GLAglFunction function = NULL;
     if (gla_libegl_handle) {
-        *(void**)(&res) = dlsym(gla_libgl_handle, function_name);
+        function = (GLAglFunction)dlsym(gla_libgl_handle, function_name);
     }
-    if (NULL == res) {
-        res = gla_get_function_address(function_name);
+    if (NULL == function) {
+        function = gla_get_function_address(function_name);
     }
-    if (!gla_libegl_handle && !res) {
-        *(void**)(&res) = dlsym(gla_libgl_handle, function_name);
+    if (!gla_libegl_handle && NULL == function) {
+        function = (GLAglFunction)dlsym(gla_libgl_handle, function_name);
     }
-    return res;
+    return function;
 }
 #endif
 
