@@ -93,7 +93,6 @@ GL3W_API GL3WglProc gl3wGetProcAddress(const char* proc);
 
 GL3W_PROCS_DEFINITION;
 
-GL3W_API extern union GL3WExtensions gl3wExtensions;
 GL3W_API extern union GL3WFunctions gl3wFunctions;
 
 #ifdef GL3W_IMPLEMENTATION

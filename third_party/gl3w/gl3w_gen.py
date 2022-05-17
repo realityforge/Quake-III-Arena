@@ -177,19 +177,22 @@ GL3W_API extern union GL3WVersions gl3wVersions;
             '#define {0: <48} gl3wVersions.version.{1}\n'.format('GL3W_' + version[3:], version[3:]))
     interface_lines.append('\n')
 
-interface_lines.append('union GL3WExtensions {\n')
-interface_lines.append('    bool extension[{0}];\n'.format(len(extensions)))
-interface_lines.append('    struct {\n')
-for extension in extensions:
-    interface_lines.append('        bool {0};\n'.format(extension[3:]))
-interface_lines.append(r'''  } ext;
+if extensions:
+    interface_lines.append('union GL3WExtensions {\n')
+    interface_lines.append('    bool extension[{0}];\n'.format(len(extensions)))
+    interface_lines.append('    struct {\n')
+    for extension in extensions:
+        interface_lines.append('        bool {0};\n'.format(extension[3:]))
+    interface_lines.append(r'''  } ext;
 };
 
+GL3W_API extern union GL3WExtensions gl3wExtensions;
+
 ''')
-for extension in extensions:
-    interface_lines.append(
-        '#define {0: <48} gl3wExtensions.ext.{1}\n'.format('GL3W_' + extension[3:], extension[3:]))
-interface_lines.append('\n')
+    for extension in extensions:
+        interface_lines.append(
+            '#define {0: <48} gl3wExtensions.ext.{1}\n'.format('GL3W_' + extension[3:], extension[3:]))
+    interface_lines.append('\n')
 
 interface_lines.append('union GL3WFunctions {\n')
 interface_lines.append('    GL3WglProc functions[{0}];\n'.format(len(functions)))
