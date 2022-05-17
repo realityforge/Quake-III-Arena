@@ -556,7 +556,7 @@ success:
     Q_strncpyz(glConfig.version_string, (char*)glGetString(GL_VERSION), sizeof(glConfig.version_string));
 
     // manually create extension list if using OpenGL 3
-    if (glGetStringi) {
+    if (gl3wFunctions.function.GetStringi) {
         int i, numExtensions, extensionLength, listLength;
         const char* extension;
 

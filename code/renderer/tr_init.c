@@ -742,7 +742,7 @@ void GfxInfo_f(void)
     ri.Printf(PRINT_ALL, "GL_VERSION: %s\n", glConfig.version_string);
     ri.Printf(PRINT_ALL, "GL_EXTENSIONS: ");
     // glConfig.extensions_string is a limited length so get the full list directly
-    if (glGetStringi) {
+    if (gl3wFunctions.function.GetStringi) {
         GLint numExtensions;
         int i;
 
