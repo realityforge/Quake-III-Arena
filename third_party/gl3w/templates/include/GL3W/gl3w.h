@@ -111,6 +111,7 @@ typedef GL3WglProc (*GL3WGetProcAddressProc)(const char* proc);
 static char gl3w_error_buffer[GL3W_MAX_ERROR_MESSAGE_LENGTH] = { 0 };
 static char* gl3w_error = NULL;
 union GL3WExtensions gl3wExtensions;
+union GL3WProcs gl3wProcs;
 
 #define COUNT_OF(x) (sizeof(x) / sizeof((x)[0]))
 
@@ -305,8 +306,6 @@ static GL3WglProc gl3w_get_proc(const char* proc)
 #endif
 
 GL3W_PROC_NAMES;
-
-union GL3WProcs gl3wProcs;
 
 static void load_procs(const GL3WGetProcAddressProc proc)
 {
