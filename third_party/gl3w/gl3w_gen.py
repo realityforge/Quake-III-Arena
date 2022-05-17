@@ -199,7 +199,7 @@ GL3W_API extern union GL3WExtensions gl3wExtensions;
     interface_lines.append('\n')
 
 interface_lines.append('union GL3WFunctions {\n')
-interface_lines.append('    GL3WglProc functions[{0}];\n'.format(len(functions)))
+interface_lines.append('    GL3WglFunction functions[{0}];\n'.format(len(functions)))
 interface_lines.append('    struct {\n')
 for function in functions:
     interface_lines.append('        {0: <55} {1};\n'.format('PFN{0}PROC'.format(function.upper()), function[2:]))
@@ -237,7 +237,7 @@ impl_lines.append(r'''};
 
 impl_lines.append(r'''
 
-static const char* gl3w_proc_names[] = {
+static const char* gl3w_function_names[] = {
 ''')
 for function in functions:
     impl_lines.append('    "{0}",\n'.format(function))

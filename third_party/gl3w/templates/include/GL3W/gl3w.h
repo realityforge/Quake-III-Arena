@@ -79,7 +79,7 @@ GL3W_API int gl3wDispose(void);
 */
 GL3W_API const char* gl3wError(void);
 
-typedef void (*GL3WglProc)();
+typedef void (*GL3WglFunction)();
 
 /**
 * Returns the address of an OpenGL extension function. Generally, you won't need to use it since gl3w loads all
@@ -98,7 +98,7 @@ GL3W_API extern union GL3WFunctions gl3wFunctions;
 #ifdef GL3W_IMPLEMENTATION
 #include <stdlib.h>
 
-typedef GL3WglProc (*GL3WGetProcAddressProc)(const char* proc);
+typedef GL3WglFunction (*GL3WGetProcAddressProc)(const char* function_name);
 typedef struct gl3w_version_s {
     int major;
     int minor;
@@ -145,13 +145,13 @@ static int gl3w_open_libgl()
    }
 }
 
-static GL3WglProc gl3w_get_proc(const char* proc)
+static GL3WglFunction gl3w_get_function(const char* function_name)
 {
-   GL3WglProc res = (GL3WglProc)wgl_get_proc_address(proc);
-   if (NULL == res) {
-       res = (GL3WglProc)GetProcAddress(gl3w_libgl_handle, proc);
+   GL3WglFunction function = (GL3WglFunction)wgl_get_proc_address(function_name);
+   if (NULL == function) {
+       return (GL3WglFunction)GetProcAddress(gl3w_libgl_handle, function_name);
    } else {
-       return res;
+       return function;
    }
 }
 #elif defined(__APPLE__)
@@ -187,11 +187,9 @@ static void gl3w_close_libgl()
    }
 }
 
-static GL3WglProc gl3w_get_proc(const char* proc)
+static GL3WglFunction gl3w_get_function(const char* function_name)
 {
-   GL3WglProc res;
-   *(void**)(&res) = dlsym(gl3w_libgl_handle, proc);
-   return res;
+   return (GL3WglFunction)dlsym(gl3w_libgl_handle, function_name);
 }
 #else
 #include <dlfcn.h>
@@ -202,7 +200,7 @@ static void* gl3w_libgl_handle = NULL;
 static void* gl3w_libglx_handle = NULL;
 // EGL library
 static void* gl3w_libegl_handle = NULL;
-static GL3WGetProcAddressProc gl3w_get_proc_address = NULL;
+static GL3WGetProcAddressProc gl3w_get_function_address = NULL;
 
 static void gl3w_close_libgl()
 {
@@ -269,14 +267,14 @@ static int gl3w_open_libgl()
        return open_result;
    } else {
        if (gl3w_libegl_handle) {
-           *(void**)(&gl3w_get_proc_address) = dlsym(gl3w_libegl_handle, "eglGetProcAddress");
+           *(void**)(&gl3w_get_function_address) = dlsym(gl3w_libegl_handle, "eglGetProcAddress");
        } else if (gl3w_libglx_handle) {
-           *(void**)(&gl3w_get_proc_address) = dlsym(gl3w_libglx_handle, "glXGetProcAddressARB");
+           *(void**)(&gl3w_get_function_address) = dlsym(gl3w_libglx_handle, "glXGetProcAddressARB");
        } else {
-           *(void**)(&gl3w_get_proc_address) = dlsym(gl3w_libgl_handle, "glXGetProcAddressARB");
+           *(void**)(&gl3w_get_function_address) = dlsym(gl3w_libgl_handle, "glXGetProcAddressARB");
        }
 
-       if (!gl3w_get_proc_address) {
+       if (!gl3w_get_function_address) {
            gl3w_close_libgl();
            return GL3W_ERROR_INIT;
        } else {
@@ -285,35 +283,27 @@ static int gl3w_open_libgl()
    }
 }
 
-static GL3WglProc gl3w_get_proc(const char* proc)
+static GL3WglFunction gl3w_get_function(const char* function_name)
 {
    // Before EGL version 1.5, eglGetProcAddress doesn't support querying core
    // functions and may return a dummy function if we try, so try to load the
    // function from the GL library directly first.
 
-   GL3WglProc res = NULL;
+   GL3WglFunction res = NULL;
    if (gl3w_libegl_handle) {
-       *(void**)(&res) = dlsym(gl3w_libgl_handle, proc);
+       *(void**)(&res) = dlsym(gl3w_libgl_handle, function_name);
    }
    if (NULL == res) {
-       res = gl3w_get_proc_address(proc);
+       res = gl3w_get_function_address(function_name);
    }
    if (!gl3w_libegl_handle && !res) {
-       *(void**)(&res) = dlsym(gl3w_libgl_handle, proc);
+       *(void**)(&res) = dlsym(gl3w_libgl_handle, function_name);
    }
    return res;
 }
 #endif
 
 GL3W_PROC_NAMES;
-
-static void load_procs(const GL3WGetProcAddressProc proc)
-{
-   for (size_t i = 0; i < COUNT_OF(gl3w_proc_names); i++) {
-       gl3wFunctions.functions[i] = proc(gl3w_proc_names[i]);
-       // TODO: If gl3wFunctions.functions[i] IS NULL and it is part of required profile then this should generate an error
-   }
-}
 
 static void reset_extensions()
 {
@@ -338,12 +328,21 @@ static void detect_extensions()
     }
 }
 
-static void reset_procs()
+static void reset_functions()
 {
-   for (size_t i = 0; i < COUNT_OF(gl3w_proc_names); i++) {
+   for (size_t i = 0; i < COUNT_OF(gl3w_function_names); i++) {
        gl3wFunctions.functions[i] = NULL;
    }
 }
+
+static void load_functions(const GL3WGetProcAddressProc proc)
+{
+    for (size_t i = 0; i < COUNT_OF(gl3w_function_names); i++) {
+        gl3wFunctions.functions[i] = proc(gl3w_function_names[i]);
+        // TODO: If gl3wFunctions.functions[i] IS NULL and it is part of required profile then this should generate an error
+    }
+}
+
 
 static bool gl3w_is_version(const int min_major, const int min_minor)
 {
@@ -390,7 +389,7 @@ int gl3wInit()
                    gl3w_close_libgl_atexit_registered = true;
                }
            }
-           load_procs(gl3w_get_proc);
+           load_functions(gl3w_get_function);
            if (!glGetIntegerv) {
                gl3wDispose();
                return GL3W_ERROR_INIT;
@@ -418,7 +417,7 @@ int gl3wDispose()
    gl3w_major_version = 0;
    gl3w_minor_version = 0;
    gl3w_error = NULL;
-   reset_procs();
+   reset_functions();
 #ifdef GLFW_SUPPORT_OPTIONAL_VERSIONS
    reset_versions();
 #endif
