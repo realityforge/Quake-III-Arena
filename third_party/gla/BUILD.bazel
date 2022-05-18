@@ -10,6 +10,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+exports_files([
+    "templates/include/GLA/gla.h",
+    "templates/src/GLA/gla.c",
+])
+
 filegroup(
     name = "specification_files",
     srcs = [
@@ -20,35 +25,18 @@ filegroup(
         # https://www.khronos.org/registry/EGL/api/KHR/khrplatform.h on Ma 13, 2022
         "include/KHR/khrplatform.h",
     ],
+    visibility = ["//visibility:public"],
 )
 
 py_binary(
     name = "gla_generator",
     srcs = ["gla_generator.py"],
-)
-
-genrule(
-    name = "source_generator",
-    srcs = [
-        ":specification_files",
-        "templates/include/GLA/gla.h",
-        "templates/src/GLA/gla.c",
-    ],
-    outs = [
-        "include/GLA/gla.h",
-        "src/GLA/gla.c",
-    ],
-    cmd = "$(location :gla_generator) --quiet --minimum_profile 3.0 --maximum_profile 3.2 --output_directory $(RULEDIR) --extension GL_ARB_framebuffer_object --extension GL_ARB_depth_clamp --extension GL_ARB_seamless_cube_map --extension GL_NVX_gpu_memory_info --extension GL_ATI_meminfo --extension GL_ARB_texture_compression_rgtc --extension GL_ARB_texture_compression_bptc --extension GL_EXT_texture_compression_s3tc --extension GL_EXT_texture_filter_anisotropic --extension GL_EXT_texture_sRGB --extension GL_S3_s3tc",
-    tools = [":gla_generator"],
+    visibility = ["//visibility:public"],
 )
 
 cc_library(
-    name = "gla",
-    srcs = ["src/GLA/gla.c"],
-    hdrs = [
-        "include/GLA/gla.h",
-        ":specification_files",
-    ],
+    name = "gl",
+    hdrs = [":specification_files"],
     includes = ["include"],
-    visibility = ["@org_realityforge_q3a//code/renderer:__pkg__"],
+    visibility = ["//visibility:public"],
 )

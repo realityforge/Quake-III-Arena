@@ -11,6 +11,7 @@
 # limitations under the License.
 
 load("//build_defs:rules.bzl", "CLIENT_GAME_DEFINES", "FULL_WARNINGS")
+load("@gla//:rules.bzl", "gla_lib")
 
 cc_library(
     name = "api",
@@ -37,7 +38,7 @@ cc_library(
     copts = FULL_WARNINGS,
     deps = [
         ":api",
-        "@gla",
+        ":gla",
     ],
 )
 
@@ -148,5 +149,25 @@ cc_library(
         ":renderer",
         "//code/qcommon",
         "//code/qcommon:qfiles",
+    ],
+)
+
+gla_lib(
+    "gla",
+    False,
+    "3.0",
+    "3.2",
+    [
+        "GL_ARB_framebuffer_object",
+        "GL_ARB_depth_clamp",
+        "GL_ARB_seamless_cube_map",
+        "GL_NVX_gpu_memory_info",
+        "GL_ATI_meminfo",
+        "GL_ARB_texture_compression_rgtc",
+        "GL_ARB_texture_compression_bptc",
+        "GL_EXT_texture_compression_s3tc",
+        "GL_EXT_texture_filter_anisotropic",
+        "GL_EXT_texture_sRGB",
+        "GL_S3_s3tc",
     ],
 )
