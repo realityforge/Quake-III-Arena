@@ -24,7 +24,7 @@ import os
 import re
 
 parser = argparse.ArgumentParser(description='gla generator script')
-parser.add_argument('--quiet', action='store_true', help='Verbose output')
+parser.add_argument('--quiet', action='store_true', help='Quiet output')
 parser.add_argument('--verbose', action='store_true', help='Verbose output')
 parser.add_argument('--input_dir',
                     type=str,
