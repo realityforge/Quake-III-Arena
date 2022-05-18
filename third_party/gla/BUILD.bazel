@@ -34,15 +34,19 @@ genrule(
         "templates/include/GLA/gla.h",
         "templates/src/GLA/gla.c",
     ],
-    outs = ["include/GLA/gla.h"],
-    cmd = "$(location :gla_generator) --quiet  --header_only --minimum_profile 3.0 --maximum_profile 3.2 --output_directory $(RULEDIR) --extension GL_ARB_framebuffer_object --extension GL_ARB_depth_clamp --extension GL_ARB_seamless_cube_map --extension GL_NVX_gpu_memory_info --extension GL_ATI_meminfo --extension GL_ARB_texture_compression_rgtc --extension GL_ARB_texture_compression_bptc --extension GL_EXT_texture_compression_s3tc --extension GL_EXT_texture_filter_anisotropic --extension GL_EXT_texture_sRGB --extension GL_S3_s3tc",
+    outs = [
+        "include/GLA/gla.h",
+        "src/GLA/gla.c",
+    ],
+    cmd = "$(location :gla_generator) --quiet --minimum_profile 3.0 --maximum_profile 3.2 --output_directory $(RULEDIR) --extension GL_ARB_framebuffer_object --extension GL_ARB_depth_clamp --extension GL_ARB_seamless_cube_map --extension GL_NVX_gpu_memory_info --extension GL_ATI_meminfo --extension GL_ARB_texture_compression_rgtc --extension GL_ARB_texture_compression_bptc --extension GL_EXT_texture_compression_s3tc --extension GL_EXT_texture_filter_anisotropic --extension GL_EXT_texture_sRGB --extension GL_S3_s3tc",
     tools = [":gla_generator"],
 )
 
 cc_library(
     name = "gla",
+    srcs = ["src/GLA/gla.c"],
     hdrs = [
-        ":source_generator",
+        "include/GLA/gla.h",
         ":specification_files",
     ],
     includes = ["include"],
