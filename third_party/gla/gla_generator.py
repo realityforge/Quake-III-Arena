@@ -26,6 +26,10 @@ import re
 parser = argparse.ArgumentParser(description='gla generator script')
 parser.add_argument('--quiet', action='store_true', help='Quiet output')
 parser.add_argument('--verbose', action='store_true', help='Verbose output')
+parser.add_argument('--header_only',
+                    action='store_true',
+                    help='Should the output be a src file and a header or just a header '
+                         'with a section guarded by GLA_IMPLEMENTATION')
 parser.add_argument('--input_dir',
                     type=str,
                     default=os.path.dirname(os.path.realpath(__file__)),
@@ -53,10 +57,13 @@ extensions.sort
 quiet = args.quiet is not None and args.quiet
 verbose = not quiet and args.verbose
 
+header_only = args.header_only is not None and args.header_only
+
 if not quiet:
     print('Configuration:')
     print('  Minimum OpenGL Profile: ' + args.minimum_profile)
     print('  Maximum OpenGL Profile: ' + (args.maximum_profile if '99.99' != args.maximum_profile else '-'))
+    print('  Header Only: ' + ('true' if header_only else 'false'))
     print('  Supported Extensions:')
     for extension in extensions:
         print('    * ' + extension)
@@ -147,8 +154,9 @@ if verbose:
               str(len(header_suppressed_groups[header])) + ' excluded')
 
 if verbose:
-    print('Loading template')
+    print('Loading templates')
 header_template = open(os.path.join(args.input_dir, 'templates/include/GLA/gla.h'), 'r')
+implementation_template = open(os.path.join(args.input_dir, 'templates/src/GLA/gla.c'), 'r')
 
 groups_present = []
 includes_lines = []
@@ -259,24 +267,42 @@ typedef struct gla_function_s {
 static const gla_function_t gla_functions[] = {
 ''')
 for function in functions:
-    impl_lines.append('    { \"' + function + '\", ' + ('true' if function in required_functions else 'false') + ' },\n')
+    impl_lines.append(
+        '    { \"' + function + '\", ' + ('true' if function in required_functions else 'false') + ' },\n')
 impl_lines.append('};\n')
 
 includes_content = ''.join(includes_lines)
 interface_content = ''.join(interface_lines)
 impl_content = ''.join(impl_lines)
 
-dir = os.path.join(args.output_directory, 'include/GLA/')
-if not os.path.exists(dir):
-    os.makedirs(dir)
-output_filename = os.path.join(dir, 'gla.h')
+if header_only:
+    interface_content = interface_content + "\n#ifdef GLA_IMPLEMENTATION\n"
+    for line in implementation_template:
+        interface_content = interface_content + line.replace('GLA_IMPL_CONTENT;\n', impl_content).replace("#include \"GLA/gla.h\"\n", "")
+    interface_content = interface_content + "\n#endif // GLA_IMPLEMENTATION\n"
+
+include_dir = os.path.join(args.output_directory, 'include/GLA/')
+if not os.path.exists(include_dir):
+    os.makedirs(include_dir)
+include_output_filename = os.path.join(include_dir, 'gla.h')
 
 if not quiet:
-    print('Generating {0}...'.format(output_filename))
-with open(output_filename, 'wb') as f:
+    print('Generating {0}...'.format(include_output_filename))
+with open(include_output_filename, 'wb') as f:
     for line in header_template:
         f.write(line.
                 replace('GLA_INCLUDES_CONTENT;\n', includes_content).
                 replace('GLA_INTERFACE_CONTENT;\n', interface_content).
-                replace('GLA_IMPL_CONTENT;\n', impl_content).
                 encode('utf-8'))
+if not header_only:
+    src_dir = os.path.join(args.output_directory, 'src/GLA/')
+    if not os.path.exists(src_dir):
+        os.makedirs(src_dir)
+
+    impl_output_filename = os.path.join(src_dir, 'gla.c')
+
+    if not quiet:
+        print('Generating {0}...'.format(impl_output_filename))
+    with open(impl_output_filename, 'wb') as f:
+        for line in implementation_template:
+            f.write(line.replace('GLA_IMPL_CONTENT;\n', impl_content).encode('utf-8'))
