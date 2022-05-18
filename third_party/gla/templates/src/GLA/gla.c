@@ -13,6 +13,7 @@
  */
 
 #include <stdlib.h>
+#include <string.h>
 #include "GLA/gla.h"
 
 typedef GLAglFunction (*GLAGetProcAddressProc)(const char* function_name);
@@ -257,7 +258,7 @@ static void detect_extensions()
     for (int i = 0; i < extension_count; i++) {
         const GLubyte* extension_name = glGetStringi(GL_EXTENSIONS, i);
         for (int j = 0; j < COUNT_OF(gla_extension_names); j++) {
-            if (0 == strcmp(gla_extension_names[j], extension_name)) {
+            if (0 == strcmp(gla_extension_names[j], (const char *)extension_name)) {
                 glaExtensions.extensions[j] = true;
             }
         }
