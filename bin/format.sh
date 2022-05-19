@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,12 +11,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#
-# A simple shell script to format the entire set of source code using a single command
-# This is probably not required when using the pre-commit hook and IDE integration
-# but is present in case we ever need to perform large scale source code format changes
-# again
-#
+set -euo pipefail
 
+SHFMT="$(bazel run --run_under=echo @com_github_mvdan_sh//cmd/shfmt)"
+
+# Format C and Objective-C Source code
 # shellcheck disable=SC2038
 find code content -name '*.h' -o -name '*.c' -o -name '*.m' | xargs clang-format -i
+
+# Format Shell Scripts
+find . -type f -name '*.sh' -print0 | xargs -0 "$SHFMT" -i=4 -s -w
+
+# Format Bazel files
+bazel run //:buildifier
