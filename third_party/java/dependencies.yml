@@ -9,10 +9,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-load(":dependencies.bzl", _generate_targets = "generate_targets")
-
-package(default_visibility = ["//visibility:public"])
-
-exports_files(["dependencies.yaml"])
-
-_generate_targets()
+repositories:
+  - name: central
+    url: https://repo.maven.apache.org/maven2
+options:
+  aliasStrategy: ArtifactId
+  verifyConfigSha256: false
+artifacts:
+  - coord: org.realityforge.javax.annotation:javax.annotation:1.0.1

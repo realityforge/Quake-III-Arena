@@ -1,0 +1,51 @@
+# DO NOT EDIT: File is auto-generated from dependencies.yml by https://github.com/realityforge/bazel-depgen version 0.14
+
+"""
+    Macro rules to load dependencies.
+
+    Invoke 'generate_workspace_rules' from a WORKSPACE file.
+    Invoke 'generate_targets' from a BUILD.bazel file.
+"""
+# Dependency Graph Generated from the input data
+# \- org.realityforge.javax.annotation:javax.annotation:jar:1.0.1 [compile]
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_file = "http_file")
+load("@rules_java//java:defs.bzl", _java_import = "java_import")
+
+def generate_workspace_rules():
+    """
+        Repository rules macro to load dependencies.
+
+        Must be run from a WORKSPACE file.
+    """
+
+    _http_file(
+        name = "org_realityforge_javax_annotation__javax_annotation__1_0_1",
+        downloaded_file_path = "org/realityforge/javax/annotation/javax.annotation/1.0.1/javax.annotation-1.0.1.jar",
+        sha256 = "6adb7bcd07bdfc2e28d815dc7e0ce594181fe8a5a74d336cbf7cd7cfb283bb8d",
+        urls = ["https://repo.maven.apache.org/maven2/org/realityforge/javax/annotation/javax.annotation/1.0.1/javax.annotation-1.0.1.jar"],
+    )
+
+    _http_file(
+        name = "org_realityforge_javax_annotation__javax_annotation__1_0_1__sources",
+        downloaded_file_path = "org/realityforge/javax/annotation/javax.annotation/1.0.1/javax.annotation-1.0.1-sources.jar",
+        sha256 = "049e2910100b7d27af24a821883f5ce94006955c7b08b9fb60cf57b67cd06061",
+        urls = ["https://repo.maven.apache.org/maven2/org/realityforge/javax/annotation/javax.annotation/1.0.1/javax.annotation-1.0.1-sources.jar"],
+    )
+
+def generate_targets():
+    """
+        Macro to define targets for dependencies.
+    """
+
+    native.alias(
+        name = "javax_annotation",
+        actual = ":org_realityforge_javax_annotation__javax_annotation__1_0_1",
+    )
+    _java_import(
+        name = "org_realityforge_javax_annotation__javax_annotation__1_0_1",
+        jars = ["@org_realityforge_javax_annotation__javax_annotation__1_0_1//file"],
+        srcjar = "@org_realityforge_javax_annotation__javax_annotation__1_0_1__sources//file",
+        tags = ["maven_coordinates=org.realityforge.javax.annotation:javax.annotation:1.0.1"],
+        visibility = ["//visibility:private"],
+    )

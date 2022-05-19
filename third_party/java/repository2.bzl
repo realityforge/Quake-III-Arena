@@ -10,7 +10,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 load("@rules_java//java:repositories.bzl", _rules_java_dependencies = "rules_java_dependencies", _rules_java_toolchains = "rules_java_toolchains")
+load(":dependencies.bzl", _generate_workspace_rules = "generate_workspace_rules")
 
 def configure_repository():
     _rules_java_dependencies()
     _rules_java_toolchains()
+    _generate_workspace_rules()
