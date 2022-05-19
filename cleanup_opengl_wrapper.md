@@ -40,7 +40,7 @@ A prototype that began exploring this approach seemed viable but was likely to t
 
 #### Implementation
 
-The final decision was to take the work done by the `gl3w` project and refactor it piece by piece until it fit the projects requirements. In the end there was little left of `gl3w` other than the conceptual design and a few lines for scraping the headers. The code was renamed and extracted into an external repository so that it could be used in future projects.
+The final decision was to take the work done by the `gl3w` project and refactor it piece by piece until it fit the projects requirements. In the end there was little left of `gl3w` other than the conceptual design and a few lines for scraping the headers. The code was renamed to `gla` and extracted into an external repository so that it could be used in future projects.
 
 ### Evaluation
 
