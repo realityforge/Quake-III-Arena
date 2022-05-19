@@ -544,7 +544,7 @@ void SV_SendMessageToClient(msg_t* msg, client_t* client)
     client->frames[client->netchan.outgoingSequence & PACKET_MASK].messageAcked = -1;
 
     // send the datagram
-    SV_Netchan_Transmit(client, msg); // msg->cursize, msg->data );
+    SV_Netchan_Transmit(client, msg);
 
     // set nextSnapshotTime based on rate and requested number of updates
 
