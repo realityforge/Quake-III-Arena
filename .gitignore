@@ -18,7 +18,7 @@ Icon?
 
 # JetBrains IDEs
 ############################
-/.clwb
+/.clwb/*
 /.ijwb
 /.idea
 *.iml
