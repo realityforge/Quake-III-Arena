@@ -18,10 +18,11 @@ Icon?
 
 # JetBrains IDEs
 ############################
-/.clwb
+/.clwb/*
 /.ijwb
 /.idea
 *.iml
+!**/*.bazelproject
 
 # Local scripts
 ############################
