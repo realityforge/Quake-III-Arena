@@ -78,3 +78,7 @@ _configure_go_repository()
 _configure_protobuf_repository()
 
 _configure_rules_apple_repository()
+
+load("//third_party/com_github_mvdan_sh:repository.bzl", _setup_com_github_mvdan_sh_repository = "configure_repository")
+
+_setup_com_github_mvdan_sh_repository()
