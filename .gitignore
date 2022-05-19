@@ -21,6 +21,7 @@ Icon?
 /.clwb
 /.ijwb
 /.idea
+*.iml
 
 # Local scripts
 ############################
