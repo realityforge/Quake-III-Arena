@@ -9,34 +9,3 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-exports_files([
-    "templates/include/GLA/gla.h",
-    "templates/src/GLA/gla.c",
-])
-
-filegroup(
-    name = "specification_files",
-    srcs = [
-        # Downloaded from https://www.khronos.org/registry/OpenGL/api/GL/glcorearb.h on Ma 13, 2022
-        "include/GL/glcorearb.h",
-        # Downloaded from https://www.khronos.org/registry/OpenGL/api/GL/glext.h on Ma 13, 2022
-        "include/GL/glext.h",
-        # https://www.khronos.org/registry/EGL/api/KHR/khrplatform.h on Ma 13, 2022
-        "include/KHR/khrplatform.h",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-py_binary(
-    name = "gla_generator",
-    srcs = ["gla_generator.py"],
-    visibility = ["//visibility:public"],
-)
-
-cc_library(
-    name = "gl",
-    hdrs = [":specification_files"],
-    includes = ["include"],
-    visibility = ["//visibility:public"],
-)

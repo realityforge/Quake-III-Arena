@@ -17,6 +17,7 @@ workspace(name = "org_realityforge_q3a")
 load("//third_party/buildifier:repository.bzl", _load_buildifier_repository = "load_repository")
 load("//third_party/content:repository.bzl", _load_content_repository = "load_repository")
 load("//third_party/curl:repository.bzl", _load_curl_repository = "load_repository")
+load("//third_party/gla:repository.bzl", _load_gla_repository = "load_repository")
 load("//third_party/go:repository.bzl", _load_go_repository = "load_repository")
 load("//third_party/imagemagick:repository.bzl", _load_imagemagick_repository = "load_repository")
 load("//third_party/libjpeg_turbo:repository.bzl", _load_libjpeg_turbo_repository = "load_repository")
@@ -38,6 +39,8 @@ _load_buildifier_repository()
 _load_content_repository()
 
 _load_curl_repository()
+
+_load_gla_repository()
 
 _load_go_repository()
 
@@ -82,8 +85,3 @@ _configure_rules_apple_repository()
 load("//third_party/com_github_mvdan_sh:repository.bzl", _setup_com_github_mvdan_sh_repository = "configure_repository")
 
 _setup_com_github_mvdan_sh_repository()
-
-local_repository(
-    name = "gla",
-    path = "third_party/gla",
-)
