@@ -18,4 +18,4 @@ def configure_repository():
 
     go_register_toolchains(version = "1.18")
 
-    gazelle_dependencies()
+    gazelle_dependencies(go_repository_default_config = "@//:WORKSPACE.bazel")
