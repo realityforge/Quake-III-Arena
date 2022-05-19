@@ -31,6 +31,7 @@ load("//third_party/opus:repository.bzl", _load_opus_repository = "load_reposito
 load("//third_party/opusfile:repository.bzl", _load_opusfile_repository = "load_repository")
 load("//third_party/pngcrush:repository.bzl", _load_pngcrush_repository = "load_repository")
 load("//third_party/protobuf:repository.bzl", _load_protobuf_repository = "load_repository")
+load("//third_party/rules_antlr:repository.bzl", _load_rules_antlr_repository = "load_repository")
 load("//third_party/rules_apple:repository.bzl", _load_rules_apple_repository = "load_repository")
 load("//third_party/vorbis:repository.bzl", _load_vorbis_repository = "load_repository")
 load("//third_party/zlib:repository.bzl", _load_zlib_repository = "load_repository")
@@ -48,6 +49,7 @@ _load_go_repository()
 _load_imagemagick_repository()
 
 _load_java_repository()
+
 _load_libjpeg_turbo_repository()
 
 _load_libpng_repository()
@@ -68,6 +70,8 @@ _load_pngcrush_repository()
 
 _load_protobuf_repository()
 
+_load_rules_antlr_repository()
+
 _load_rules_apple_repository()
 
 _load_vorbis_repository()
@@ -77,6 +81,7 @@ _load_zlib_repository()
 load("//third_party/go:repository2.bzl", _configure_go_repository = "configure_repository")
 load("//third_party/java:repository2.bzl", _configure_java_repository = "configure_repository")
 load("//third_party/protobuf:repository2.bzl", _configure_protobuf_repository = "configure_repository")
+load("//third_party/rules_antlr:repository2.bzl", _configure_rules_antlr_repository = "configure_repository")
 load("//third_party/rules_apple:repository2.bzl", _configure_rules_apple_repository = "configure_repository")
 
 _configure_go_repository()
@@ -84,6 +89,8 @@ _configure_go_repository()
 _configure_java_repository()
 
 _configure_protobuf_repository()
+
+_configure_rules_antlr_repository()
 
 _configure_rules_apple_repository()
 
