@@ -68,12 +68,12 @@ The major changes of the project are tracked in this table.
     </tr>
     <tr valign="top">
       <td><a href="cleanup_opengl_wrapper.html">Cleanup OpenGL Wrapper code</a></td>
-      <td>5</td>
-      <td>3</td>
+      <td>1</td>
+      <td>1</td>
       <td>0</td>
-      <td>Ongoing</td>
-      <td>N/A</td>
-      <td>N/A</td>
+      <td>Complete</td>
+      <td>2022-05-16</td>
+      <td>2022-05-19</td>
     </tr>
   </tbody>
 </table>
