@@ -11,11 +11,21 @@
 # limitations under the License.
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 
+WARNINGS = [
+    "-module-docstring",
+    "-function-docstring",
+]
+
+buildifier(
+    name = "buildifier_check",
+    diff_command = "diff -u",
+    lint_mode = "warn",
+    lint_warnings = WARNINGS,
+    mode = "diff",
+)
+
 buildifier(
     name = "buildifier",
-    lint_mode = "warn",
-    lint_warnings = [
-        "-module-docstring",
-        "-function-docstring",
-    ],
+    lint_mode = "fix",
+    lint_warnings = WARNINGS,
 )
