@@ -19,7 +19,7 @@ Icon?
 # JetBrains IDEs
 ############################
 /.clwb/*
-/.ijwb
+/.ijwb/*
 /.idea
 *.iml
 !**/*.bazelproject
