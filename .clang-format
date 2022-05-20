@@ -26,3 +26,5 @@ SortIncludes:    Never
 AlignAfterOpenBracket: Align
 ---
 Language: ObjC
+---
+Language: Java
