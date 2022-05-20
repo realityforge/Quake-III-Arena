@@ -33,6 +33,7 @@ load("//third_party/pngcrush:repository.bzl", _load_pngcrush_repository = "load_
 load("//third_party/protobuf:repository.bzl", _load_protobuf_repository = "load_repository")
 load("//third_party/rules_antlr:repository.bzl", _load_rules_antlr_repository = "load_repository")
 load("//third_party/rules_apple:repository.bzl", _load_rules_apple_repository = "load_repository")
+load("//third_party/rules_graal:repository.bzl", _load_rules_graal_repository = "load_repository")
 load("//third_party/vorbis:repository.bzl", _load_vorbis_repository = "load_repository")
 load("//third_party/zlib:repository.bzl", _load_zlib_repository = "load_repository")
 
@@ -74,6 +75,8 @@ _load_rules_antlr_repository()
 
 _load_rules_apple_repository()
 
+_load_rules_graal_repository()
+
 _load_vorbis_repository()
 
 _load_zlib_repository()
@@ -83,6 +86,7 @@ load("//third_party/java:repository2.bzl", _configure_java_repository = "configu
 load("//third_party/protobuf:repository2.bzl", _configure_protobuf_repository = "configure_repository")
 load("//third_party/rules_antlr:repository2.bzl", _configure_rules_antlr_repository = "configure_repository")
 load("//third_party/rules_apple:repository2.bzl", _configure_rules_apple_repository = "configure_repository")
+load("//third_party/rules_graal:repository2.bzl", _configure_rules_graal_repository = "configure_repository")
 
 _configure_go_repository()
 
@@ -93,6 +97,8 @@ _configure_protobuf_repository()
 _configure_rules_antlr_repository()
 
 _configure_rules_apple_repository()
+
+_configure_rules_graal_repository()
 
 load("//third_party/com_github_mvdan_sh:repository.bzl", _setup_com_github_mvdan_sh_repository = "configure_repository")
 
