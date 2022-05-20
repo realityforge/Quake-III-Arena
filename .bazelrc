@@ -115,6 +115,9 @@ build --host_force_python=PY3
 build --java_runtime_version=remotejdk_11
 build --tool_java_runtime_version=remotejdk_11
 
+# filesets crossing package boundaries are reported as errors
+build --strict_filesets
+
 # Picks up host-OS-specific config lines from bazelrc files. Supported OS identifiers are linux, macos, windows, freebsd, and openbsd.
 # Enabling this flag is equivalent to using --config=linux on Linux, --config=windows on Windows, etc.
 build --enable_platform_specific_config
