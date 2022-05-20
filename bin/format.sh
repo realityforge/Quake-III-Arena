@@ -13,7 +13,7 @@
 
 set -euo pipefail
 
-SHFMT="$(bazel run --run_under=echo @com_github_mvdan_sh//cmd/shfmt)"
+SHFMT="$(./bazelw run --run_under=echo @com_github_mvdan_sh//cmd/shfmt)"
 
 # Format C and Objective-C Source code
 # shellcheck disable=SC2038
@@ -23,4 +23,4 @@ find code content -name '*.h' -o -name '*.c' -o -name '*.m' | xargs clang-format
 find . -type f -name '*.sh' -print0 | xargs -0 "$SHFMT" -i=4 -s -w
 
 # Format Bazel files
-bazel run //:buildifier
+./bazelw run //:buildifier
