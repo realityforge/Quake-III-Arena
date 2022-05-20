@@ -14,6 +14,5 @@ repositories:
     url: https://repo.maven.apache.org/maven2
 options:
   aliasStrategy: ArtifactId
-  verifyConfigSha256: false
 artifacts:
   - coord: org.realityforge.javax.annotation:javax.annotation:1.0.1

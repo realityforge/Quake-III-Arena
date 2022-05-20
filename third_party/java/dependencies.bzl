@@ -12,12 +12,22 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_file = "http_file")
 load("@rules_java//java:defs.bzl", _java_import = "java_import")
 
+# SHA256 of the configuration content that generated this file
+_CONFIG_SHA256 = "C215B1301D9779562330AE497DFFD8BBA1559CF51BCE0BD7EF174D39EAFF362C"
+
 def generate_workspace_rules():
     """
         Repository rules macro to load dependencies.
 
         Must be run from a WORKSPACE file.
     """
+
+    _http_file(
+        name = "org_realityforge_bazel_depgen__bazel_depgen__0_14",
+        downloaded_file_path = "org/realityforge/bazel/depgen/bazel-depgen/0.14/bazel-depgen-0.14-all.jar",
+        sha256 = "8ec3ee929af3bc2a95bec3cde8c10bcdb5bb7eaee07b404727024a78f0dada9b",
+        urls = ["https://repo.maven.apache.org/maven2/org/realityforge/bazel/depgen/bazel-depgen/0.14/bazel-depgen-0.14-all.jar"],
+    )
 
     _http_file(
         name = "org_realityforge_javax_annotation__javax_annotation__1_0_1",
@@ -37,6 +47,48 @@ def generate_targets():
     """
         Macro to define targets for dependencies.
     """
+
+    native.genrule(
+        name = "regenerate_depgen_extension_script",
+        srcs = [
+            ":bazel_depgen",
+            "//third_party/java:dependencies.yml",
+            "@bazel_tools//tools/jdk:current_java_runtime",
+        ],
+        toolchains = ["@bazel_tools//tools/jdk:current_java_runtime"],
+        outs = ["regenerate_depgen_extension_script.sh"],
+        cmd = "echo \"$(JAVA) -jar $(location :bazel_depgen) --directory \\$$BUILD_WORKSPACE_DIRECTORY --config-file $(location //third_party/java:dependencies.yml) \\$$@ generate \" > \"$@\"",
+        visibility = ["//visibility:private"],
+    )
+
+    native.sh_binary(
+        name = "regenerate_depgen_extension",
+        srcs = ["regenerate_depgen_extension_script"],
+        tags = [
+            "local",
+            "manual",
+            "no-cache",
+            "no-remote",
+            "no-sandbox",
+        ],
+        data = [
+            ":bazel_depgen",
+            "//third_party/java:dependencies.yml",
+            "@bazel_tools//tools/jdk:current_java_runtime",
+        ],
+        visibility = ["//visibility:private"],
+    )
+
+    native.alias(
+        name = "bazel_depgen",
+        actual = ":org_realityforge_bazel_depgen__bazel_depgen__0_14",
+    )
+    _java_import(
+        name = "org_realityforge_bazel_depgen__bazel_depgen__0_14",
+        jars = ["@org_realityforge_bazel_depgen__bazel_depgen__0_14//file"],
+        tags = ["maven_coordinates=org.realityforge.bazel.depgen:bazel-depgen:0.14"],
+        visibility = ["//visibility:private"],
+    )
 
     native.alias(
         name = "javax_annotation",
