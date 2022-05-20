@@ -13,7 +13,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_file = "http_file")
 load("@rules_java//java:defs.bzl", _java_import = "java_import")
 
 # SHA256 of the configuration content that generated this file
-_CONFIG_SHA256 = "C215B1301D9779562330AE497DFFD8BBA1559CF51BCE0BD7EF174D39EAFF362C"
+_CONFIG_SHA256 = "1EDEC884951EBCF3A4229A589A00DE3FC4B62A8BB2B9CE96894FEAE7C91E8915"
 
 def generate_workspace_rules():
     """
@@ -47,6 +47,39 @@ def generate_targets():
     """
         Macro to define targets for dependencies.
     """
+
+    native.sh_test(
+        name = "verify_config_sha256",
+        size = "small",
+        args = [
+            "$(JAVA)",
+            "-jar",
+            "$(location :bazel_depgen)",
+            "--config-file",
+            "$(location //third_party/java:dependencies.yml)",
+            "--verbose",
+            "hash",
+            "--verify-sha256",
+            _CONFIG_SHA256,
+        ],
+        srcs = [":verify_config_sha256.sh"],
+        data = [
+            ":bazel_depgen",
+            "//third_party/java:dependencies.yml",
+            "@bazel_tools//tools/jdk:current_java_runtime",
+        ],
+        toolchains = ["@bazel_tools//tools/jdk:current_java_runtime"],
+        visibility = ["//visibility:private"],
+    )
+
+    native.genrule(
+        name = "verify_config_sha256_script",
+        toolchains = ["@bazel_tools//tools/jdk:current_java_runtime"],
+        outs = ["verify_config_sha256.sh"],
+        cmd = "echo 'java_exe=\"$$1\" && shift && \"$$(rlocation \"$${java_exe#external/}\")\" \"$$@\"' > \"$@\"",
+        visibility = ["//visibility:private"],
+        testonly = True,
+    )
 
     native.genrule(
         name = "regenerate_depgen_extension_script",
