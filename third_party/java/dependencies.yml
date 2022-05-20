@@ -13,6 +13,7 @@ repositories:
   - name: central
     url: https://repo.maven.apache.org/maven2
 options:
+  workspaceDirectory: ../..
   aliasStrategy: ArtifactId
 artifacts:
   - coord: org.realityforge.javax.annotation:javax.annotation:1.0.1
