@@ -2860,7 +2860,7 @@ void FS_PureServerSetReferencedPaks(const char* pakSums, const char* pakNames)
 ================
 FS_InitFilesystem
 
-Called only at inital startup, not when the filesystem
+Called only at initial startup, not when the filesystem
 is resetting due to a game change
 ================
 */
