@@ -882,10 +882,10 @@ define_t* PC_DefineFromString(char* string)
     }
     FreeMemory(src.definehash);
     FreeScript(script);
-    // if the define was created successfully
+    // return if the define was created successfully
     if (res > 0)
         return def;
-    // free the define is created
+    // free the define if it is created
     if (src.defines)
         PC_FreeDefine(def);
     return NULL;
