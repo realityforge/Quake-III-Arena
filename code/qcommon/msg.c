@@ -777,7 +777,7 @@ void MSG_WriteDeltaEntity(msg_t* msg, struct entityState_s* from, struct entityS
     }
 
     lc = 0;
-    // build the change vector as bytes so it is endien independent
+    // build the change vector as bytes so it is endian independent
     for (i = 0, field = entityStateFields; i < numFields; i++, field++) {
         fromF = (int*)((uint8_t*)from + field->offset);
         toF = (int*)((uint8_t*)to + field->offset);
