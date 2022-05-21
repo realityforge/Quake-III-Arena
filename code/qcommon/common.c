@@ -2254,7 +2254,7 @@ Writes key bindings and archived cvars to config file if modified
 */
 void Com_WriteConfiguration(void)
 {
-    // if we are quiting without fully initializing, make sure
+    // if we are quitting without fully initializing, make sure
     // we don't write out anything
     if (!com_fullyInitialized) {
         return;
