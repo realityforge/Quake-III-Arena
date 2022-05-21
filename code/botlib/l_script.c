@@ -427,7 +427,7 @@ int PS_ReadString(script_t* script, token_t* token, int quote)
                 script->line = tmpline;
                 break;
             }
-            // if there's no leading double qoute
+            // if there's no leading double quote
             if (*script->script_p != quote) {
                 script->script_p = tmpscript_p;
                 script->line = tmpline;
