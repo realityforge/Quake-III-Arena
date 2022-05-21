@@ -2935,7 +2935,7 @@ int AAS_Reachability_Grapple(int area1num, int area2num)
         if (aasworld.areasettings[areanum].contents & (AREACONTENTS_SLIME | AREACONTENTS_LAVA)) {
             continue;
         }
-        // do not go the the source area
+        // do not go to the source area
         if (areanum == area1num)
             continue;
         // don't create reachabilities if they already exist
