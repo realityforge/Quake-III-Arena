@@ -134,7 +134,7 @@ unsigned ColorBytes4(float r, float g, float b, float a)
 =====================
 PlaneFromPoints
 
-Returns false if the triangle is degenrate.
+Returns false if the triangle is degenerate.
 The normal will point out of the clock for clockwise ordered points
 =====================
 */
