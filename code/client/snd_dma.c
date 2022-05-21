@@ -1363,7 +1363,7 @@ void S_StartBackgroundTrack(const char* intro, const char* loop)
     Q_strncpyz(s_backgroundLoop, loop, sizeof(s_backgroundLoop));
 
     // close the background track, but DON'T reset s_rawend
-    // if restarting the same back ground track
+    // if restarting the same background track
     if (s_backgroundFile) {
         FS_FCloseFile(s_backgroundFile);
         s_backgroundFile = 0;
