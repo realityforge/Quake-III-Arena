@@ -192,7 +192,7 @@ void S_ChannelSetup()
 {
     channel_t *p, *q;
 
-    // clear all the sounds so they don't
+    // clear all the sounds
     memset(s_channels, 0, sizeof(s_channels));
 
     p = s_channels;
