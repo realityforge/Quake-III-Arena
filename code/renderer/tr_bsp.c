@@ -1095,7 +1095,7 @@ R_TryStitchPatch
 
 This function will try to stitch patches in the same LoD group together for the highest LoD.
 
-Only single missing vertice cracks will be fixed.
+Only single missing vertex cracks will be fixed.
 
 Vertices will be joined at the patch side a crack is first found, at the other side
 of the patch (on the same row or column) the vertices will not be joined and cracks
