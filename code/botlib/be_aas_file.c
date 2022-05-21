@@ -244,7 +244,7 @@ void AAS_FileInfo(void)
     botimport.Print(PRT_MESSAGE, "clusters size %d bytes\n", aasworld.numclusters * sizeof(aas_cluster_t));
 
     optimized = aasworld.numplanes * sizeof(aas_plane_t) + aasworld.numareas * sizeof(aas_area_t) + aasworld.numareasettings * sizeof(aas_areasettings_t) + aasworld.numnodes * sizeof(aas_node_t) + aasworld.reachabilitysize * sizeof(aas_reachability_t) + aasworld.numportals * sizeof(aas_portal_t) + aasworld.numclusters * sizeof(aas_cluster_t);
-    botimport.Print(PRT_MESSAGE, "optimzed size %d KB\n", optimized >> 10);
+    botimport.Print(PRT_MESSAGE, "optimized size %d KB\n", optimized >> 10);
 }
 #endif // AASFILEDEBUG
 //===========================================================================
