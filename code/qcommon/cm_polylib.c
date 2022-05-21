@@ -433,7 +433,7 @@ void ChopWindingInPlace(winding_t** inout, vec3_t normal, vec_t dist, vec_t epsi
 ChopWinding
 
 Returns the fragment of in that is on the front side
-of the cliping plane.  The original is freed.
+of the clipping plane.  The original is freed.
 =================
 */
 winding_t* ChopWinding(winding_t* in, vec3_t normal, vec_t dist)
