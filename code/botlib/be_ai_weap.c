@@ -178,7 +178,7 @@ weaponconfig_t* LoadWeaponConfig(char* filename)
     PC_SetBaseFolder(BOTFILESBASEFOLDER);
     source = LoadSourceFile(path);
     if (!source) {
-        botimport.Print(PRT_ERROR, "counldn't load %s\n", path);
+        botimport.Print(PRT_ERROR, "couldn't load %s\n", path);
         return NULL;
     }
     // initialize weapon config

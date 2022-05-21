@@ -261,7 +261,7 @@ weightconfig_t* ReadWeightConfig(char* filename)
     PC_SetBaseFolder(BOTFILESBASEFOLDER);
     source = LoadSourceFile(filename);
     if (!source) {
-        botimport.Print(PRT_ERROR, "counldn't load %s\n", filename);
+        botimport.Print(PRT_ERROR, "couldn't load %s\n", filename);
         return NULL;
     }
     config = (weightconfig_t*)GetClearedMemory(sizeof(weightconfig_t));
