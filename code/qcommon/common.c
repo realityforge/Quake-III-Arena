@@ -873,7 +873,7 @@ void* Z_TagMalloc(size_t size, int tag)
 
     do {
         if (rover == start) {
-            // scaned all the way around the list
+            // scanned all the way around the list
 #ifdef ZONE_DEBUG
             Z_LogHeap();
 
