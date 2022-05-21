@@ -1640,7 +1640,7 @@ static int FS_AddFileToList(char* name, char* list[MAX_FOUND_FILES], int nfiles)
 ===============
 FS_ListFilteredFiles
 
-Returns a uniqued list of files that match the given criteria
+Returns a unique list of files that match the given criteria
 from all search paths
 ===============
 */
