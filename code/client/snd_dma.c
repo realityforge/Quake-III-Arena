@@ -1279,7 +1279,7 @@ void S_Base_StopBackgroundTrack(void)
 static void S_OpenBackgroundStream(const char* filename)
 {
     // close the background track, but DON'T reset s_rawend
-    // if restarting the same back ground track
+    // if restarting the same background track
     if (s_backgroundStream) {
         S_CodecCloseStream(s_backgroundStream);
         s_backgroundStream = NULL;
