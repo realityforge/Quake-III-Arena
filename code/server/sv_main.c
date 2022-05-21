@@ -223,8 +223,7 @@ void SV_MasterHeartbeat(void)
         }
 
         Com_Printf("Sending heartbeat to %s\n", sv_master[i]->string);
-        // this command should be changed if the server info / status format
-        // ever incompatably changes
+        // this command should be changed if the server info / status format ever changes incompatible
         NET_OutOfBandPrint(NS_SERVER, adr[i], "heartbeat %s\n", HEARTBEAT_GAME);
     }
 }
