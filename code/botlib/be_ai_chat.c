@@ -494,7 +494,7 @@ bot_synonymlist_t* BotLoadSynonyms(char* filename)
         PC_SetBaseFolder(BOTFILESBASEFOLDER);
         source = LoadSourceFile(filename);
         if (!source) {
-            botimport.Print(PRT_ERROR, "counldn't load %s\n", filename);
+            botimport.Print(PRT_ERROR, "couldn't load %s\n", filename);
             return NULL;
         }
         context = 0;
@@ -779,7 +779,7 @@ bot_randomlist_t* BotLoadRandomStrings(char* filename)
         PC_SetBaseFolder(BOTFILESBASEFOLDER);
         source = LoadSourceFile(filename);
         if (!source) {
-            botimport.Print(PRT_ERROR, "counldn't load %s\n", filename);
+            botimport.Print(PRT_ERROR, "couldn't load %s\n", filename);
             return NULL;
         }
         randomlist = NULL; // list
@@ -985,7 +985,7 @@ bot_matchtemplate_t* BotLoadMatchTemplates(char* matchfile)
     PC_SetBaseFolder(BOTFILESBASEFOLDER);
     source = LoadSourceFile(matchfile);
     if (!source) {
-        botimport.Print(PRT_ERROR, "counldn't load %s\n", matchfile);
+        botimport.Print(PRT_ERROR, "couldn't load %s\n", matchfile);
         return NULL;
     }
     matches = NULL; // list with matches
@@ -1372,7 +1372,7 @@ bot_replychat_t* BotLoadReplyChat(char* filename)
     PC_SetBaseFolder(BOTFILESBASEFOLDER);
     source = LoadSourceFile(filename);
     if (!source) {
-        botimport.Print(PRT_ERROR, "counldn't load %s\n", filename);
+        botimport.Print(PRT_ERROR, "couldn't load %s\n", filename);
         return NULL;
     }
     replychatlist = NULL;
@@ -1521,7 +1521,7 @@ bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
         PC_SetBaseFolder(BOTFILESBASEFOLDER);
         source = LoadSourceFile(chatfile);
         if (!source) {
-            botimport.Print(PRT_ERROR, "counldn't load %s\n", chatfile);
+            botimport.Print(PRT_ERROR, "couldn't load %s\n", chatfile);
             return NULL;
         }
         // chat structure
