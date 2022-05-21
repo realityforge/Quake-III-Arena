@@ -872,7 +872,7 @@ aas_face_t* AAS_TraceEndFace(aas_trace_t* trace)
         face = &aasworld.faces[abs(facenum)];
         // if the face is in the same plane as the trace end point
         if ((face->planenum & ~1) == (trace->planenum & ~1)) {
-            // firstface is used for optimization, if theres only one
+            // firstface is used for optimization, if there's only one
             // face in the plane then it has to be the good one
             // if there are more faces in the same plane then always
             // check the one with the fewest edges first
