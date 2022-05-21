@@ -181,7 +181,7 @@ int CM_PointContents(const vec3_t p, clipHandle_t model)
 ==================
 CM_TransformedPointContents
 
-Handles offseting and rotation of the end points for moving and
+Handles offsetting and rotation of the end points for moving and
 rotating entities
 ==================
 */

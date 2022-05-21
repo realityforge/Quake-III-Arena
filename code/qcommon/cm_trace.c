@@ -1230,7 +1230,7 @@ void CM_BoxTrace(trace_t* results, const vec3_t start, const vec3_t end,
 ==================
 CM_TransformedBoxTrace
 
-Handles offseting and rotation of the end points for moving and
+Handles offsetting and rotation of the end points for moving and
 rotating entities
 ==================
 */
