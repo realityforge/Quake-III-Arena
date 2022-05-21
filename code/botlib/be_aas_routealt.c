@@ -122,7 +122,7 @@ int AAS_AlternativeRouteGoals(vec3_t start, int startareanum, vec3_t goal, int g
         // if the travel time from the area to the goal is greater than the shortest goal travel time
         if (goaltime > (float)0.8 * goaltraveltime)
             continue;
-        // this is a mid range area
+        // this is a mid-range area
         midrangeareas[i].valid = true;
         midrangeareas[i].starttime = starttime;
         Log_Write("%d midrange area %d", nummidrangeareas, i);
