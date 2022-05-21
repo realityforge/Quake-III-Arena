@@ -1016,7 +1016,7 @@ int BotWalkInDirection(bot_movestate_t* ms, vec3_t dir, float speed, int type)
         if (type & MOVE_CROUCH)
             EA_Crouch(ms->client);
         EA_Move(ms->client, hordir, speed);
-        // movement was succesfull
+        // movement was successful
         return true;
     } else {
         if (ms->moveflags & MFL_BARRIERJUMP) {
