@@ -40,7 +40,7 @@ When a key event issues a button command (+forward, +attack, etc), it appends
 its key number as argv(1) so it can be matched up with the release.
 
 argv(2) will be set to the time the event happened, which allows exact
-control even at low framerates when the down and up events may both get qued
+control even at low framerates when the down and up events may both get queued
 at the same time.
 
 ===============================================================================
