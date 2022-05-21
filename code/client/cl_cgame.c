@@ -912,7 +912,7 @@ void CL_SetCGameTime(void)
     }
 
     while (cl.serverTime >= cl.snap.serverTime) {
-        // feed another messag, which should change
+        // feed another message, which should change
         // the contents of cl.snap
         CL_ReadDemoMessage();
         if (cls.state != CA_ACTIVE) {
