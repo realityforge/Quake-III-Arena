@@ -247,7 +247,7 @@ void CM_TestCapsuleInCapsule(traceWork_t* tw, clipHandle_t model)
     vec3_t mins, maxs;
     vec3_t top, bottom;
     vec3_t p1, p2, tmp;
-    vec3_t offset, symetricSize[2];
+    vec3_t offset, symmetricSize[2];
     float radius, halfwidth, halfheight, offs, r;
 
     CM_ModelBounds(model, mins, maxs);
@@ -256,11 +256,11 @@ void CM_TestCapsuleInCapsule(traceWork_t* tw, clipHandle_t model)
     VectorSubtract(tw->start, tw->sphere.offset, bottom);
     for (i = 0; i < 3; i++) {
         offset[i] = (mins[i] + maxs[i]) * 0.5;
-        symetricSize[0][i] = mins[i] - offset[i];
-        symetricSize[1][i] = maxs[i] - offset[i];
+        symmetricSize[0][i] = mins[i] - offset[i];
+        symmetricSize[1][i] = maxs[i] - offset[i];
     }
-    halfwidth = symetricSize[1][0];
-    halfheight = symetricSize[1][2];
+    halfwidth = symmetricSize[1][0];
+    halfheight = symmetricSize[1][2];
     radius = (halfwidth > halfheight) ? halfheight : halfwidth;
     offs = halfheight - radius;
 
@@ -804,7 +804,7 @@ void CM_TraceCapsuleThroughCapsule(traceWork_t* tw, clipHandle_t model)
     int i;
     vec3_t mins, maxs;
     vec3_t top, bottom, starttop, startbottom, endtop, endbottom;
-    vec3_t offset, symetricSize[2];
+    vec3_t offset, symmetricSize[2];
     float radius, halfwidth, halfheight, offs, h;
 
     CM_ModelBounds(model, mins, maxs);
@@ -826,11 +826,11 @@ void CM_TraceCapsuleThroughCapsule(traceWork_t* tw, clipHandle_t model)
     // calculate top and bottom of the capsule spheres to collide with
     for (i = 0; i < 3; i++) {
         offset[i] = (mins[i] + maxs[i]) * 0.5;
-        symetricSize[0][i] = mins[i] - offset[i];
-        symetricSize[1][i] = maxs[i] - offset[i];
+        symmetricSize[0][i] = mins[i] - offset[i];
+        symmetricSize[1][i] = maxs[i] - offset[i];
     }
-    halfwidth = symetricSize[1][0];
-    halfheight = symetricSize[1][2];
+    halfwidth = symmetricSize[1][0];
+    halfheight = symmetricSize[1][2];
     radius = (halfwidth > halfheight) ? halfheight : halfwidth;
     offs = halfheight - radius;
     VectorCopy(offset, top);
@@ -1045,7 +1045,7 @@ void CM_Trace(trace_t* results, const vec3_t start, const vec3_t end, vec3_t min
     // set basic parms
     tw.contents = brushmask;
 
-    // adjust so that mins and maxs are always symetric, which
+    // adjust so that mins and maxs are always symmetric, which
     // avoids some complications with plane expanding of rotated
     // bmodels
     for (i = 0; i < 3; i++) {
@@ -1227,7 +1227,7 @@ void CM_TransformedBoxTrace(trace_t* results, const vec3_t start, const vec3_t e
     vec3_t start_l, end_l;
     bool rotated;
     vec3_t offset;
-    vec3_t symetricSize[2];
+    vec3_t symmetricSize[2];
     vec3_t matrix[3], transpose[3];
     int i;
     float halfwidth;
@@ -1242,13 +1242,13 @@ void CM_TransformedBoxTrace(trace_t* results, const vec3_t start, const vec3_t e
         maxs = vec3_origin;
     }
 
-    // adjust so that mins and maxs are always symetric, which
+    // adjust so that mins and maxs are always symmetric, which
     // avoids some complications with plane expanding of rotated
     // bmodels
     for (i = 0; i < 3; i++) {
         offset[i] = (mins[i] + maxs[i]) * 0.5;
-        symetricSize[0][i] = mins[i] - offset[i];
-        symetricSize[1][i] = maxs[i] - offset[i];
+        symmetricSize[0][i] = mins[i] - offset[i];
+        symmetricSize[1][i] = maxs[i] - offset[i];
         start_l[i] = start[i] + offset[i];
         end_l[i] = end[i] + offset[i];
     }
@@ -1264,8 +1264,8 @@ void CM_TransformedBoxTrace(trace_t* results, const vec3_t start, const vec3_t e
         rotated = false;
     }
 
-    halfwidth = symetricSize[1][0];
-    halfheight = symetricSize[1][2];
+    halfwidth = symmetricSize[1][0];
+    halfheight = symmetricSize[1][2];
 
     sphere.use = capsule;
     sphere.radius = (halfwidth > halfheight) ? halfheight : halfwidth;
@@ -1291,7 +1291,7 @@ void CM_TransformedBoxTrace(trace_t* results, const vec3_t start, const vec3_t e
     }
 
     // sweep the box through the model
-    CM_Trace(&trace, start_l, end_l, symetricSize[0], symetricSize[1], model, origin, brushmask, capsule, &sphere);
+    CM_Trace(&trace, start_l, end_l, symmetricSize[0], symmetricSize[1], model, origin, brushmask, capsule, &sphere);
 
     // if the bmodel was rotated and there was a collision
     if (rotated && trace.fraction != 1.0) {
