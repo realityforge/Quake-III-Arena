@@ -453,7 +453,7 @@ void StringReplaceWords(char* string, char* synonym, char* replacement)
         }
         if (!str2) {
             memmove(str + strlen(replacement), str + strlen(synonym), strlen(str + strlen(synonym)) + 1);
-            // append the synonum replacement
+            // append the synonym replacement
             memcpy(str, replacement, strlen(replacement));
         }
         // find the next synonym in the string
@@ -661,7 +661,7 @@ void BotReplaceReplySynonyms(char* string, unsigned long int context)
                     continue;
                 memmove(str1 + strlen(replacement), str1 + strlen(synonym->string),
                         strlen(str1 + strlen(synonym->string)) + 1);
-                // append the synonum replacement
+                // append the synonym replacement
                 memcpy(str1, replacement, strlen(replacement));
                 break;
             }
