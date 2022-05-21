@@ -1037,7 +1037,7 @@ infoParm_t infoParms[] = {
     { "origin", 1, 0, CONTENTS_ORIGIN }, // center of rotating brushes
     { "trans", 0, 0, CONTENTS_TRANSLUCENT }, // don't eat contained surfaces
     { "detail", 0, 0, CONTENTS_DETAIL }, // don't include in structural bsp
-    { "structural", 0, 0, CONTENTS_STRUCTURAL }, // force into structural bsp even if trnas
+    { "structural", 0, 0, CONTENTS_STRUCTURAL }, // force into structural bsp even if translucent
     { "areaportal", 1, 0, CONTENTS_AREAPORTAL }, // divides areas
     { "clusterportal", 1, 0, CONTENTS_CLUSTERPORTAL }, // for bots
     { "donotenter", 1, 0, CONTENTS_DONOTENTER }, // for bots
