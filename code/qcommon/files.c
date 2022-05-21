@@ -159,7 +159,7 @@ Casing
 
 Read / write config to floppy option.
 
-Different version coexistance?
+Different version coexistence?
 
 When building a pak file, make sure a q3config.cfg isn't present in it,
 or configs will never get loaded from disk!
