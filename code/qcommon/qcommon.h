@@ -455,7 +455,7 @@ extern int cvar_modifiedFlags;
 FILESYSTEM
 
 No stdio calls should be used by any part of the game, because
-we need to deal with all sorts of directory and seperator char
+we need to deal with all sorts of directory and separator char
 issues.
 ==============================================================
 */

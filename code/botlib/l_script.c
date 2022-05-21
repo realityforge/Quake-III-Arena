@@ -102,7 +102,7 @@ punctuation_t default_punctuations[] = {
     { "<", P_LOGIC_LESS, NULL },
     // reference operator
     { ".", P_REF, NULL },
-    // seperators
+    // separators
     { ",", P_COMMA, NULL },
     { ";", P_SEMICOLON, NULL },
     // label indication
