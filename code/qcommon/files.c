@@ -48,7 +48,7 @@ etc) will be created relative to the base path, so base path should usually be w
 The "cd path" is the path to an alternate hierarchy that will be searched if a file
 is not located in the base path.  A user can do a partial install that copies some
 data to a base path created on their hard drive and leave the rest on the cd.  Files
-are never writen to the cd path.  It defaults to a value set by the installer, like
+are never written to the cd path.  It defaults to a value set by the installer, like
 "e:\quake3", but it can be overridden with "+set ds_cdpath g:\quake3".
 
 If a user runs the game directly from a CD, the base path would be on the CD.  This
