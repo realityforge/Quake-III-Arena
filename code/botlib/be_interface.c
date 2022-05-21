@@ -134,7 +134,7 @@ int Export_BotLibShutdown(void)
     BotShutdownWeaponAI(); // be_ai_weap.c
     BotShutdownWeights(); // be_ai_weight.c
     BotShutdownCharacters(); // be_ai_char.c
-    // shud down aas
+    // shut down aas
     AAS_Shutdown();
     // shut down bot elementary actions
     EA_Shutdown();
