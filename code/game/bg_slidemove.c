@@ -186,7 +186,7 @@ bool PM_SlideMove(bool gravity)
                 d = DotProduct(dir, endVelocity);
                 VectorScale(dir, d, endClipVelocity);
 
-                // see if there is a third plane the the new move enters
+                // see if there is a third plane the new move enters
                 for (k = 0; k < numplanes; k++) {
                     if (k == i || k == j) {
                         continue;

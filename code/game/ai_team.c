@@ -311,7 +311,7 @@ void BotCTFOrders_BothFlagsNotAtBase(bot_state_t* bs)
             BotSayVoiceTeamOrder(bs, other, VOICECHAT_GETFLAG);
         }
         BotSayTeamOrder(bs, other);
-        // tell the one furthest from the the base not carrying the flag to get the enemy flag
+        // tell the one furthest from the base not carrying the flag to get the enemy flag
         if (teammates[2] != bs->flagcarrier)
             other = teammates[2];
         else
