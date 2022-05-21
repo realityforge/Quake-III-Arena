@@ -24,18 +24,18 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * pre compiler
  *****************************************************************************/
 
-#ifndef PATH_SEPERATORSTR
+#ifndef PATH_SEPARATORSTR
 #if defined(WIN32) | defined(_WIN32) | defined(__NT__) | defined(__WINDOWS__) | defined(__WINDOWS_386__)
-#define PATHSEPERATOR_STR "\\"
+#define PATHSEPARATOR_STR "\\"
 #else
-#define PATHSEPERATOR_STR "/"
+#define PATHSEPARATOR_STR "/"
 #endif
 #endif
-#ifndef PATH_SEPERATORCHAR
+#ifndef PATH_SEPARATORCHAR
 #if defined(WIN32) | defined(_WIN32) | defined(__NT__) | defined(__WINDOWS__) | defined(__WINDOWS_386__)
-#define PATHSEPERATOR_CHAR '\\'
+#define PATHSEPARATOR_CHAR '\\'
 #else
-#define PATHSEPERATOR_CHAR '/'
+#define PATHSEPARATOR_CHAR '/'
 #endif
 #endif
 

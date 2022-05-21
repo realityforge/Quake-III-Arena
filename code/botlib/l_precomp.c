@@ -601,7 +601,7 @@ void PC_ConvertPath(char* path)
 {
     char* ptr;
 
-    // remove double path seperators
+    // remove double path separators
     for (ptr = path; *ptr;) {
         if ((*ptr == '\\' || *ptr == '/') && (*(ptr + 1) == '\\' || *(ptr + 1) == '/')) {
             memmove(ptr, ptr + 1, strlen(ptr));
@@ -609,10 +609,10 @@ void PC_ConvertPath(char* path)
             ptr++;
         }
     }
-    // set OS dependent path seperators
+    // set OS dependent path separators
     for (ptr = path; *ptr;) {
         if (*ptr == '/' || *ptr == '\\')
-            *ptr = PATHSEPERATOR_CHAR;
+            *ptr = PATHSEPARATOR_CHAR;
         ptr++;
     }
 }
