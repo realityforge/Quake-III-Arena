@@ -7,7 +7,8 @@
     Invoke 'generate_targets' from a BUILD.bazel file.
 """
 # Dependency Graph Generated from the input data
-# \- org.realityforge.javax.annotation:javax.annotation:jar:1.0.1 [compile]
+# +- org.realityforge.javax.annotation:javax.annotation:jar:1.0.1 [compile]
+# \- info.picocli:picocli:jar:4.6.3 [compile]
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_file = "http_file")
 load("@rules_java//java:defs.bzl", _java_import = "java_import")
@@ -21,6 +22,20 @@ def generate_workspace_rules():
 
         Must be run from a WORKSPACE file.
     """
+
+    _http_file(
+        name = "info_picocli__picocli__4_6_3",
+        downloaded_file_path = "info/picocli/picocli/4.6.3/picocli-4.6.3.jar",
+        sha256 = "b0a5159e926de8084ff066025142270443533656bc599b8bb31d14d11fd138a4",
+        urls = ["https://repo.maven.apache.org/maven2/info/picocli/picocli/4.6.3/picocli-4.6.3.jar"],
+    )
+
+    _http_file(
+        name = "info_picocli__picocli__4_6_3__sources",
+        downloaded_file_path = "info/picocli/picocli/4.6.3/picocli-4.6.3-sources.jar",
+        sha256 = "c753c927a3070ee07f39da41165375d9fbc9033a7c072e82b8d74c66f1abe1bf",
+        urls = ["https://repo.maven.apache.org/maven2/info/picocli/picocli/4.6.3/picocli-4.6.3-sources.jar"],
+    )
 
     _http_file(
         name = "org_realityforge_bazel_depgen__bazel_depgen__0_15",
@@ -104,11 +119,18 @@ def generate_targets():
             "no-remote",
             "no-sandbox",
         ],
-        data = [
-            ":bazel_depgen",
-            "//third_party/java:dependencies.yml",
-            "@bazel_tools//tools/jdk:current_java_runtime",
-        ],
+        visibility = ["//visibility:private"],
+    )
+
+    native.alias(
+        name = "picocli",
+        actual = ":info_picocli__picocli__4_6_3",
+    )
+    _java_import(
+        name = "info_picocli__picocli__4_6_3",
+        jars = ["@info_picocli__picocli__4_6_3//file"],
+        srcjar = "@info_picocli__picocli__4_6_3__sources//file",
+        tags = ["maven_coordinates=info.picocli:picocli:4.6.3"],
         visibility = ["//visibility:private"],
     )
 

@@ -17,3 +17,5 @@ options:
   aliasStrategy: ArtifactId
 artifacts:
   - coord: org.realityforge.javax.annotation:javax.annotation:1.0.1
+  - coord: info.picocli:picocli:4.6.3
+  - coord: info.picocli:picocli-codegen:4.6.3
