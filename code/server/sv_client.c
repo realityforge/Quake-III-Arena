@@ -1529,7 +1529,7 @@ static void SV_UserMove(client_t* cl, msg_t* msg, bool delta)
     // this gamestate, put the client into the world
     if (cl->state == CS_PRIMED) {
         SV_ClientEnterWorld(cl, &cmds[0]);
-        // the moves can be processed normaly
+        // the moves can be processed normally
     }
 
     // a bad cp command was sent, drop the client
