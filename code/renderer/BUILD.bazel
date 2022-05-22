@@ -153,11 +153,8 @@ cc_library(
 )
 
 gla_lib(
-    "gla",
-    False,
-    "3.0",
-    "3.2",
-    [
+    name = "gla",
+    extensions = [
         "GL_ARB_framebuffer_object",
         "GL_ARB_depth_clamp",
         "GL_ARB_seamless_cube_map",
@@ -170,4 +167,7 @@ gla_lib(
         "GL_EXT_texture_sRGB",
         "GL_S3_s3tc",
     ],
+    header_only = False,
+    maximum_profile = "3.2",
+    minimum_profile = "3.0",
 )
