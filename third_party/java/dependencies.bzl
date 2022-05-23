@@ -14,7 +14,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_file = "http_file")
 load("@rules_java//java:defs.bzl", _java_import = "java_import")
 
 # SHA256 of the configuration content that generated this file
-_CONFIG_SHA256 = "E3926049E9AC68B72B8F02DF8F942033D14FB88A52528978B1C7B0291F950A38"
+_CONFIG_SHA256 = "8DF212B71FA984793F7D0243F71A861F5440C3FA4F9B8D6E918800B51728D193"
 
 def generate_workspace_rules():
     """
