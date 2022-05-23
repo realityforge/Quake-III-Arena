@@ -3,7 +3,7 @@ def glsl_to_c(name):
         name = name + "_generator",
         srcs = [name + ".glsl"],
         outs = [name + ".c"],
-        cmd = "$(location :stringify) $< $@",
+        cmd = "$(execpath :stringify) $< $@",
         tools = [":stringify"],
     )
 

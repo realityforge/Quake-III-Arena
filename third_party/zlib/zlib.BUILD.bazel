@@ -81,7 +81,7 @@ genrule(
     echo \"#include \\\"qcommon.h\\\"\n\" > $@ &&
     echo \"#define ALLOC(size) (Z_Malloc(size))\n\" >> $@ &&
     echo \"#define TRYFREE(p) {if (p) Z_Free(p);}\n\" >> $@ &&
-    cat $(location :contrib/minizip/unzip.c) >> $@
+    cat $(execpath :contrib/minizip/unzip.c) >> $@
     """,
     visibility = ["//visibility:private"],
 )

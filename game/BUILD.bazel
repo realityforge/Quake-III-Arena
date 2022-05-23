@@ -50,9 +50,9 @@ genrule(
     srcs = [":package_dir"],
     outs = ["Quake3Arena.zip"],
     cmd = """
-export ZIPPER=`pwd`/$(location @bazel_tools//tools/zip:zipper)
+export ZIPPER=`pwd`/$(execpath @bazel_tools//tools/zip:zipper)
 export TARGET=`pwd`/$@
-cd $(location :package_dir)
+cd $(rootpath :package_dir)
 find .  ! -type d |  sed -e "s/^\\.\\///" | awk '{print "\\"" $$0 "\\"" }' | sort | xargs $${ZIPPER} c $${TARGET}
     """,
     tags = ["manual"],
