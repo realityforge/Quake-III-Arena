@@ -63,62 +63,20 @@ def generate_targets():
         Macro to define targets for dependencies.
     """
 
-    native.sh_test(
+    native.java_test(
         name = "verify_config_sha256",
         size = "small",
+        runtime_deps = [":bazel_depgen"],
+        main_class = "org.realityforge.bazel.depgen.Main",
         args = [
-            "$(JAVA)",
-            "-jar",
-            "$(location :bazel_depgen)",
             "--config-file",
-            "$(location //third_party/java:dependencies.yml)",
+            "$(rootpath //third_party/java:dependencies.yml)",
             "--verbose",
             "hash",
             "--verify-sha256",
             _CONFIG_SHA256,
         ],
-        srcs = [":verify_config_sha256.sh"],
-        data = [
-            ":bazel_depgen",
-            "//third_party/java:dependencies.yml",
-            "@bazel_tools//tools/jdk:current_java_runtime",
-        ],
-        toolchains = ["@bazel_tools//tools/jdk:current_java_runtime"],
-        visibility = ["//visibility:private"],
-    )
-
-    native.genrule(
-        name = "verify_config_sha256_script",
-        toolchains = ["@bazel_tools//tools/jdk:current_java_runtime"],
-        outs = ["verify_config_sha256.sh"],
-        cmd = "echo 'java_exe=\"$$1\" && shift && \"$$(rlocation \"$${java_exe#external/}\")\" \"$$@\"' > \"$@\"",
-        visibility = ["//visibility:private"],
-        testonly = True,
-    )
-
-    native.genrule(
-        name = "regenerate_depgen_extension_script",
-        srcs = [
-            ":bazel_depgen",
-            "//third_party/java:dependencies.yml",
-            "@bazel_tools//tools/jdk:current_java_runtime",
-        ],
-        toolchains = ["@bazel_tools//tools/jdk:current_java_runtime"],
-        outs = ["regenerate_depgen_extension_script.sh"],
-        cmd = "echo \"$(JAVA) -jar $(location :bazel_depgen) --directory \\$$BUILD_WORKSPACE_DIRECTORY --config-file $(location //third_party/java:dependencies.yml) \\$$@ generate \" > \"$@\"",
-        visibility = ["//visibility:private"],
-    )
-
-    native.sh_binary(
-        name = "regenerate_depgen_extension",
-        srcs = ["regenerate_depgen_extension_script"],
-        tags = [
-            "local",
-            "manual",
-            "no-cache",
-            "no-remote",
-            "no-sandbox",
-        ],
+        data = ["//third_party/java:dependencies.yml"],
         visibility = ["//visibility:private"],
     )
 
