@@ -87,6 +87,7 @@ _load_zlib_repository()
 load("//third_party/bazel_skylib:repository2.bzl", _configure_bazel_skylib_repository = "configure_repository")
 load("//third_party/go:repository2.bzl", _configure_go_repository = "configure_repository")
 load("//third_party/java:repository2.bzl", _configure_java_repository = "configure_repository")
+load("//third_party/junit5:repository.bzl", _load_junit5_repository = "load_repository")
 load("//third_party/protobuf:repository2.bzl", _configure_protobuf_repository = "configure_repository")
 load("//third_party/rules_antlr:repository2.bzl", _configure_rules_antlr_repository = "configure_repository")
 load("//third_party/rules_apple:repository2.bzl", _configure_rules_apple_repository = "configure_repository")
@@ -97,6 +98,9 @@ _configure_bazel_skylib_repository()
 _configure_go_repository()
 
 _configure_java_repository()
+
+# Must appear after _configure_java_repository()
+_load_junit5_repository()
 
 _configure_protobuf_repository()
 
