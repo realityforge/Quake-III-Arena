@@ -32,6 +32,9 @@ public class Main implements Callable<Integer> {
 
     @CommandLine.Option(names = {"--optimize"}, description = "Optimize the unit for loading by the engine by stripping tooling data", arity = "0")
     private boolean _optimize;
+
+    @CommandLine.Option(names = {"--identity-transform"}, description = "Attempt to perform the identity transform and verify the pre-transform and post-transform match. This is done for every unit after loading and every unit prior to saving. This primarily used to verify the integrity of the tool.", arity = "0")
+    private boolean _identityTransform;
     @Override
     public Integer call() throws Exception {
         final List<MaterialsUnit> units = new ArrayList<>();
@@ -40,7 +43,9 @@ public class Main implements Callable<Integer> {
             if (null == unit) {
                 return 1;
             } else {
-                // Perform save/load/compare here
+                if (_identityTransform && !verifyIdentityTransform(input, unit)) {
+                    return 1;
+                }
                 units.add(unit);
             }
         }
@@ -51,6 +56,9 @@ public class Main implements Callable<Integer> {
             unit = units.get(0);
         }
         if (null != _output) {
+            if (_identityTransform && !verifyIdentityTransform(_output, unit)) {
+                return 1;
+            }
             final Path directory = _output.getParent();
             try {
                 if (!Files.exists(directory)) {
@@ -69,6 +77,24 @@ public class Main implements Callable<Integer> {
             System.out.print(unit);
         }
         return 0;
+    }
+
+    private boolean verifyIdentityTransform(@Nonnull final Path file, @Nonnull final MaterialsUnit unit) throws MaterialsReadException {
+        final MaterialsUnit transformedUnit = MaterialsUnitReader.readFromString(unit.toString());
+        if (!transformedUnit.equals(unit)) {
+            System.err.println("Identity transform for file " + file + " failed to produce identical output.");
+            System.err.println("Original unit source:");
+            System.err.println("--------------------------------------------------------------------------------");
+            System.err.print(unit);
+            System.err.println("--------------------------------------------------------------------------------");
+            System.err.println("Transformed unit source:");
+            System.err.println("--------------------------------------------------------------------------------");
+            System.err.print(transformedUnit);
+            System.err.println("--------------------------------------------------------------------------------");
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Nonnull
