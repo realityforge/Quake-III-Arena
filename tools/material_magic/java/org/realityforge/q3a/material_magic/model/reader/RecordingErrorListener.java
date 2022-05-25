@@ -5,7 +5,6 @@ import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Recognizer;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -39,14 +38,9 @@ final class RecordingErrorListener extends BaseErrorListener {
             return _message;
         }
 
-        @Nonnull
-        public String toString(@Nullable final String file) {
-            return "syntax error: " + (null == file ? "" : file + ":") + getLine() + ":" + getCharPositionInLine() + " " + getMessage();
-        }
-
         @Override
         public String toString() {
-            return toString(null);
+            return "syntax error: " + getLine() + ":" + getCharPositionInLine() + " " + getMessage();
         }
     }
 
