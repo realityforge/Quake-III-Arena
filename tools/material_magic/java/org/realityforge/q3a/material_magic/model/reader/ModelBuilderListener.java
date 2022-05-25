@@ -41,7 +41,7 @@ final class ModelBuilderListener extends MaterialsParserBaseListener {
     }
 
     @Override
-    public void exitQerMaterialProperty(MaterialsParser.QerMaterialPropertyContext ctx) {
+    public void exitQerMaterialProperty(@Nonnull final MaterialsParser.QerMaterialPropertyContext ctx) {
         QerProperties qer = _material.qer();
         if (null != ctx.QER_TRANS()) {
             qer.setTransparency(Float.parseFloat(ctx.POSITIVE_DECIMAL().getText()));
