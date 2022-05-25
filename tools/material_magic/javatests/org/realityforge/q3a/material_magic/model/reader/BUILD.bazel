@@ -24,7 +24,7 @@ junit5_test(
     name = "MaterialsParserToolTest",
     size = "small",
     srcs = ["MaterialsParserToolTest.java"],
-    test_package = "org.realityforge.q3a.material_magic",
+    test_package = "org.realityforge.q3a.material_magic.model.reader",
     deps = [
         ":BailErrorListener",
         "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader:parser",
