@@ -20,10 +20,15 @@ Q3MAP_GLOBALTEXTURE : 'q3map_globaltexture';
 Q3MAP_SURFACELIGHT : 'q3map_surfacelight';
 Q3MAP_NOVERTEXSHADOWS : 'q3map_novertexshadows';
 Q3MAP_FORCESUNLIGHT : 'q3map_forcesunlight';
+// light <value> determines flaring in q3map
+LIGHT : 'light';
 
 QER_EDITORIMAGE : 'qer_editorimage';
 QER_NOCARVE : 'qer_nocarve';
 QER_TRANS : 'qer_trans';
+
+// Used by light property
+ONE_INTEGER : '1';
 
 POSITIVE_INTEGER
 	: ([1-9][0-9]*)

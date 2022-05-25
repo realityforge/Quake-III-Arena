@@ -11,6 +11,7 @@ public final class Q3mapProperties {
     private boolean _globalTexture;
     private boolean _forceSunLight;
     private boolean _noVertexShadows;
+    private boolean _light;
     // A positive value
     private int _surfaceLight;
     @Nullable
@@ -38,6 +39,14 @@ public final class Q3mapProperties {
 
     public void setNoVertexShadows(final boolean noVertexShadows) {
         _noVertexShadows = noVertexShadows;
+    }
+
+    public boolean light() {
+        return _light;
+    }
+
+    public void setLight(final boolean light) {
+        _light = light;
     }
 
     public int getSurfaceLight() {
@@ -74,6 +83,9 @@ public final class Q3mapProperties {
             if (_forceSunLight) {
                 output.writeProperty("q3map_forcesunlight");
             }
+            if (_light) {
+                output.writeProperty("light", "1");
+            }
         }
     }
 
@@ -88,6 +100,7 @@ public final class Q3mapProperties {
             return _globalTexture == that._globalTexture &&
                     _forceSunLight == that._forceSunLight &&
                     _noVertexShadows == that._noVertexShadows &&
+                    _light == that._light &&
                     _surfaceLight == that._surfaceLight &&
                     Objects.equals(_lightImage, that._lightImage);
         }
@@ -95,6 +108,6 @@ public final class Q3mapProperties {
 
     @Override
     public int hashCode() {
-        return Objects.hash(_globalTexture, _forceSunLight, _noVertexShadows, _surfaceLight, _lightImage);
+        return Objects.hash(_globalTexture, _forceSunLight, _noVertexShadows, _light, _surfaceLight, _lightImage);
     }
 }

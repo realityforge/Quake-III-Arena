@@ -35,6 +35,8 @@ final class ModelBuilderListener extends MaterialsParserBaseListener {
             q3map.setGlobalTexture(true);
         } else if (null != ctx.Q3MAP_FORCESUNLIGHT()) {
             q3map.setForceSunLight(true);
+        } else if (null != ctx.LIGHT()) {
+            q3map.setLight(true);
         } else {
             throw new IllegalStateException("Unhandled q3map property " + ctx.getText());
         }

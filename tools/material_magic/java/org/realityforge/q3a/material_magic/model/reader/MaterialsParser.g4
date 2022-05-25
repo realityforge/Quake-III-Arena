@@ -41,6 +41,7 @@ q3mapMaterialProperty
     | Q3MAP_LIGHTIMAGE LABEL
     | Q3MAP_NOVERTEXSHADOWS
     | Q3MAP_FORCESUNLIGHT
+    | LIGHT ONE_INTEGER
     ;
 
 qerMaterialProperty
