@@ -16,3 +16,5 @@ _model_test("MaterialsUnitTest")
 _model_test("MaterialTest")
 
 _model_test("Q3mapPropertiesTest")
+
+_model_test("QerPropertiesTest")

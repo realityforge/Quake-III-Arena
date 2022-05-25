@@ -27,6 +27,7 @@ materialProperties
 
 materialProperty
     : q3mapMaterialProperty
+    | qerMaterialProperty
     ;
 
 q3mapMaterialProperty
@@ -35,4 +36,10 @@ q3mapMaterialProperty
     | Q3MAP_LIGHTIMAGE LABEL
     | Q3MAP_NOVERTEXSHADOWS
     | Q3MAP_FORCESUNLIGHT
+    ;
+
+qerMaterialProperty
+    : QER_EDITORIMAGE LABEL
+    | QER_NOCARVE
+    | QER_TRANS POSITIVE_DECIMAL
     ;

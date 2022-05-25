@@ -12,6 +12,8 @@ public final class Material {
     private String _name;
     @Nullable
     private Q3mapProperties _q3map;
+    @Nullable
+    private QerProperties _qer;
 
     public Material(@Nonnull final String name) {
         _name = Objects.requireNonNull(name);
@@ -38,6 +40,18 @@ public final class Material {
         return _q3map;
     }
 
+    public boolean hasQer() {
+        return null != _qer;
+    }
+
+    @Nonnull
+    public QerProperties qer() {
+        if (null == _qer) {
+            _qer = new QerProperties();
+        }
+        return _qer;
+    }
+
     /**
      * Write the material using the standard text serialization mechanisms to the specified output object.
      *
@@ -48,6 +62,9 @@ public final class Material {
         output.writeMaterial(getName(), o -> {
             if (hasQ3map()) {
                 q3map().write(o);
+            }
+            if (hasQer()) {
+                qer().write(o);
             }
         });
     }
@@ -60,13 +77,13 @@ public final class Material {
             return false;
         } else {
             final Material that = (Material) o;
-            return _name.equals(that._name) && Objects.equals(q3map(), that.q3map());
+            return _name.equals(that._name) && Objects.equals(q3map(), that.q3map()) && Objects.equals(qer(), that.qer());
         }
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_name, q3map());
+        return Objects.hash(_name, q3map(), qer());
     }
 
     @Nonnull

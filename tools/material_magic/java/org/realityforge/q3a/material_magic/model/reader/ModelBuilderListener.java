@@ -3,6 +3,7 @@ package org.realityforge.q3a.material_magic.model.reader;
 import org.realityforge.q3a.material_magic.model.Material;
 import org.realityforge.q3a.material_magic.model.MaterialsUnit;
 import org.realityforge.q3a.material_magic.model.Q3mapProperties;
+import org.realityforge.q3a.material_magic.model.QerProperties;
 
 import javax.annotation.Nonnull;
 
@@ -36,6 +37,20 @@ final class ModelBuilderListener extends MaterialsParserBaseListener {
             q3map.setForceSunLight(true);
         } else {
             throw new IllegalStateException("Unhandled q3map property " + ctx.getText());
+        }
+    }
+
+    @Override
+    public void exitQerMaterialProperty(MaterialsParser.QerMaterialPropertyContext ctx) {
+        QerProperties qer = _material.qer();
+        if (null != ctx.QER_TRANS()) {
+            qer.setTransparency(Float.parseFloat(ctx.POSITIVE_DECIMAL().getText()));
+        } else if (null != ctx.QER_EDITORIMAGE()) {
+            qer.setEditorImage(ctx.LABEL().getText());
+        } else if (null != ctx.QER_NOCARVE()) {
+            qer.setNoCarve(true);
+        } else {
+            throw new IllegalStateException("Unhandled qer property " + ctx.getText());
         }
     }
 

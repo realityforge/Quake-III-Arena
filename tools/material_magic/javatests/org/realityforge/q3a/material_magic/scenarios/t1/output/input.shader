@@ -5,4 +5,7 @@ textures/base/myBase
   q3map_globaltexture
   q3map_novertexshadows
   q3map_forcesunlight
+  qer_editorimage textures/sfx/xyz
+  qer_nocarve
+  qer_trans 0.3
 }
