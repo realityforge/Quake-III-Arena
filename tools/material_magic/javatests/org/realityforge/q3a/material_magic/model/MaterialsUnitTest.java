@@ -72,4 +72,24 @@ public final class MaterialsUnitTest {
                 "{\n" +
                 "}\n", MaterialOutput.outputAsString(unit::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
     }
+
+    @Test
+    public void testEqualsAndHash() {
+        final MaterialsUnit unit1 = new MaterialsUnit();
+        final MaterialsUnit unit2 = new MaterialsUnit();
+        final Material material1 = new Material("materials/my/MaterialZ");
+
+        assertEquals(unit1, unit2);
+        assertEquals(unit1.hashCode(), unit2.hashCode());
+
+        unit1.addMaterial(material1);
+
+        assertNotEquals(unit1, unit2);
+        assertNotEquals(unit1.hashCode(), unit2.hashCode());
+
+        unit2.addMaterial(material1);
+
+        assertEquals(unit1, unit2);
+        assertEquals(unit1.hashCode(), unit2.hashCode());
+    }
 }

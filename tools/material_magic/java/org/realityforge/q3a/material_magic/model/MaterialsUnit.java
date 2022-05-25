@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -52,6 +53,23 @@ public final class MaterialsUnit {
         for (final Material material : materials) {
             material.write(output);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o == null || getClass() != o.getClass()) {
+            return false;
+        } else {
+            final MaterialsUnit that = (MaterialsUnit) o;
+            return _materials.equals(that._materials);
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(_materials);
     }
 
     @Nonnull
