@@ -41,4 +41,33 @@ public final class MaterialTest {
                 "}\n", material.toString());
         assertEquals("materials/my/Material2\n{\n}\n", MaterialOutput.outputAsString(material::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
     }
+
+    @Test
+    public void testEqualsAndHash() {
+        final Material material1 = new Material("materials/my/Material1");
+        final Material material2 = new Material("materials/my/Material1");
+
+        assertEquals(material1, material2);
+        assertEquals(material1.hashCode(), material2.hashCode());
+
+        material1.setName("X");
+
+        assertNotEquals(material1, material2);
+        assertNotEquals(material1.hashCode(), material2.hashCode());
+
+        material2.setName("X");
+
+        assertEquals(material1, material2);
+        assertEquals(material1.hashCode(), material2.hashCode());
+
+        material1.q3map().setLightImage("X");
+
+        assertNotEquals(material1, material2);
+        assertNotEquals(material1.hashCode(), material2.hashCode());
+
+        material2.q3map().setLightImage("X");
+
+        assertEquals(material1, material2);
+        assertEquals(material1.hashCode(), material2.hashCode());
+    }
 }

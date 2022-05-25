@@ -52,6 +52,23 @@ public final class Material {
         });
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o == null || getClass() != o.getClass()) {
+            return false;
+        } else {
+            final Material that = (Material) o;
+            return _name.equals(that._name) && Objects.equals(q3map(), that.q3map());
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(_name, q3map());
+    }
+
     @Nonnull
     @Override
     public String toString() {
