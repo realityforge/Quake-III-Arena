@@ -41,7 +41,7 @@ public final class Material {
     /**
      * Write the material using the standard text serialization mechanisms to the specified output object.
      *
-     * @param output the output object to emit material to.
+     * @param output      the output object to emit material to.
      * @param runtimeOnly if true then properties that are not needed except at runtime are omitted.
      * @throws IOException if there is an error writing to MaterialOutput
      */
@@ -53,6 +53,7 @@ public final class Material {
         });
     }
 
+    @Nonnull
     @Override
     public String toString() {
         return MaterialOutput.outputAsString(o -> write(o, false));
