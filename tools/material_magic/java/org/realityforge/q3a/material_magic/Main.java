@@ -1,6 +1,8 @@
 package org.realityforge.q3a.material_magic;
 
 import org.realityforge.q3a.material_magic.model.MaterialsUnit;
+import org.realityforge.q3a.material_magic.model.reader.LoadError;
+import org.realityforge.q3a.material_magic.model.reader.MaterialsReadException;
 import org.realityforge.q3a.material_magic.model.reader.MaterialsUnitReader;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
@@ -24,7 +26,19 @@ public class Main implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        final MaterialsUnit unit = MaterialsUnitReader.fromPath(_input);
+        final MaterialsUnit unit;
+        try {
+            unit = MaterialsUnitReader.fromPath(_input);
+        } catch (final MaterialsReadException e) {
+            System.err.println("Error: Invalid input file " + _input);
+            for (final LoadError syntaxError : e.getSyntaxErrors()) {
+                System.err.println(syntaxError.toString(_input.toString()));
+            }
+            return 1;
+        } catch (IOException e) {
+            System.err.println("Error: Failed to read input file " + _input);
+            return 1;
+        }
         if (null != _output) {
             final Path directory = _output.getParent();
             try {
