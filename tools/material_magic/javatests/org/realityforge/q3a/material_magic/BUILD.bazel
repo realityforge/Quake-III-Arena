@@ -9,3 +9,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+load(":material_magic_golden_test.bzl", "material_magic_golden_test")
+
+material_magic_golden_test(
+    name = "t1",
+    inputs = ["input.shader"],
+    outputs = ["input.shader"],
+)

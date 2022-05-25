@@ -9,3 +9,21 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+load("@rules_java//java:defs.bzl", "java_binary")
+
+java_binary(
+    name = "Main",
+    srcs = [
+        "Main.java",
+    ],
+    visibility = ["//tools/material_magic/javatests/org/realityforge/q3a/material_magic:__pkg__"],
+    deps = [
+        "//third_party/java:javax_annotation",
+        "//third_party/java:picocli",
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model",
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader",
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader:parser",
+        "@antlr4_runtime//jar",
+    ],
+)
