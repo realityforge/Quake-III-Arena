@@ -46,4 +46,63 @@ public final class Q3mapPropertiesTest {
                 MaterialOutput.outputAsString(properties::write));
         assertEquals("", MaterialOutput.outputAsString(properties::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
     }
+
+    @Test
+    public void testEqualsAndHash() {
+        final Q3mapProperties properties1 = new Q3mapProperties();
+        final Q3mapProperties properties2 = new Q3mapProperties();
+
+        assertEquals(properties1, properties2);
+        assertEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties1.setSurfaceLight(2);
+
+        assertNotEquals(properties1, properties2);
+        assertNotEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties2.setSurfaceLight(2);
+
+        assertEquals(properties1, properties2);
+        assertEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties1.setLightImage("X");
+
+        assertNotEquals(properties1, properties2);
+        assertNotEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties2.setLightImage("X");
+
+        assertEquals(properties1, properties2);
+        assertEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties1.setNoVertexShadows(true);
+
+        assertNotEquals(properties1, properties2);
+        assertNotEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties2.setNoVertexShadows(true);
+
+        assertEquals(properties1, properties2);
+        assertEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties1.setGlobalTexture(true);
+
+        assertNotEquals(properties1, properties2);
+        assertNotEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties2.setGlobalTexture(true);
+
+        assertEquals(properties1, properties2);
+        assertEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties1.setForceSunLight(true);
+
+        assertNotEquals(properties1, properties2);
+        assertNotEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties2.setForceSunLight(true);
+
+        assertEquals(properties1, properties2);
+        assertEquals(properties1.hashCode(), properties2.hashCode());
+    }
 }

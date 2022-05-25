@@ -5,6 +5,7 @@ import org.realityforge.q3a.material_magic.util.MaterialOutput;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.IOException;
+import java.util.Objects;
 
 public final class Q3mapProperties {
     private boolean _globalTexture;
@@ -74,5 +75,26 @@ public final class Q3mapProperties {
                 output.writeProperty("q3map_forcesunlight");
             }
         }
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        } else if (o == null || getClass() != o.getClass()) {
+            return false;
+        } else {
+            final Q3mapProperties that = (Q3mapProperties) o;
+            return _globalTexture == that._globalTexture &&
+                    _forceSunLight == that._forceSunLight &&
+                    _noVertexShadows == that._noVertexShadows &&
+                    _surfaceLight == that._surfaceLight &&
+                    Objects.equals(_lightImage, that._lightImage);
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(_globalTexture, _forceSunLight, _noVertexShadows, _surfaceLight, _lightImage);
     }
 }
