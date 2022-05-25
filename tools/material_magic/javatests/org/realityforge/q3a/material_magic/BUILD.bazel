@@ -14,5 +14,5 @@ load(":material_magic_golden_test.bzl", "material_magic_golden_test")
 material_magic_golden_test(
     name = "t1",
     inputs = ["input.shader"],
-    outputs = ["input.shader"],
+    outputs = ["output.shader"],
 )
