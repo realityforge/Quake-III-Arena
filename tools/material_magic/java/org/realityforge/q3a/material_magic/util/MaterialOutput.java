@@ -1,6 +1,7 @@
 package org.realityforge.q3a.material_magic.util;
 
 import javax.annotation.Nonnull;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
@@ -19,6 +20,15 @@ public final class MaterialOutput
     @Nonnull
     private final OutputStream _outputStream;
     private int _indent;
+
+    @Nonnull
+    public static String outputAsString(@Nonnull final Block body) throws IOException {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final MaterialOutput output = new MaterialOutput(baos);
+        body.call(output);
+        final byte[] bytes = baos.toByteArray();
+        return new String(bytes, 0, bytes.length, StandardCharsets.US_ASCII);
+    }
 
     public MaterialOutput(@Nonnull final Path extensionFile)
             throws IOException {
