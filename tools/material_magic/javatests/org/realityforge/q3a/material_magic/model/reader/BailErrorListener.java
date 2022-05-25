@@ -1,4 +1,4 @@
-package org.realityforge.q3a.material_magic;
+package org.realityforge.q3a.material_magic.model.reader;
 
 import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.RecognitionException;
@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * An error listener that can be used within tests that will fail with an assertion error if there is a parsing error.
  */
-public final class BailErrorListener
+final class BailErrorListener
   extends BaseErrorListener
 {
   /**
@@ -19,7 +19,7 @@ public final class BailErrorListener
   @Nonnull
   private final String _sourceName;
 
-  public BailErrorListener(@Nonnull final String sourceName )
+  BailErrorListener(@Nonnull final String sourceName )
   {
     _sourceName = Objects.requireNonNull( sourceName );
   }
@@ -32,8 +32,6 @@ public final class BailErrorListener
                            final String msg,
                            final RecognitionException e )
   {
-    final String message = "syntax error: " + _sourceName + ":" + line + ":" + charPositionInLine + " " + msg;
-    System.err.println( message );
-    throw new AssertionError( message );
+    throw new AssertionError("syntax error: " + _sourceName + ":" + line + ":" + charPositionInLine + " " + msg);
   }
 }

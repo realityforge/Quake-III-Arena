@@ -11,7 +11,7 @@ derive_targets_from_directories: true
 
 targets:
   # If source code isn't resolving, add additional targets that compile it here
-  //tools/material_magic/java/org/realityforge/q3a/material_magic:generated_parser
+  //tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader:generated_parser
 
 additional_languages:
   # Uncomment any additional languages you want supported

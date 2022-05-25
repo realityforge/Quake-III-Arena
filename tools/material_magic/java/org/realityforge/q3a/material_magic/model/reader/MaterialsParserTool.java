@@ -1,4 +1,4 @@
-package org.realityforge.q3a.material_magic;
+package org.realityforge.q3a.material_magic.model.reader;
 
 import java.io.IOException;
 import java.nio.file.Path;

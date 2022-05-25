@@ -1,4 +1,4 @@
-package org.realityforge.q3a.material_magic;
+package org.realityforge.q3a.material_magic.model.reader;
 
 import org.antlr.v4.runtime.CharStreams;
 import org.junit.jupiter.api.DisplayName;

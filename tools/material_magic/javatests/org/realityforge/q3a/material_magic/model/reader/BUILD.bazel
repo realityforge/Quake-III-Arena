@@ -9,32 +9,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-load("@rules_java//java:defs.bzl", "java_library")
+load("//third_party/junit5:rules.bzl", _junit5_test = "junit5_test")
 
 java_library(
-    name = "model",
-    srcs = [
-        "Material.java",
-        "MaterialsUnit.java",
-        "Q3mapProperties.java",
-    ],
-    visibility = [
-        "//tools/material_magic/java/org/realityforge/q3a/material_magic:__pkg__",
-        "//tools/material_magic/javatests/org/realityforge/q3a/material_magic:__subpackages__",
-    ],
+    name = "BailErrorListener",
+    srcs = ["BailErrorListener.java"],
     deps = [
         "//third_party/java:javax_annotation",
-        "//tools/material_magic/java/org/realityforge/q3a/material_magic/util:MaterialOutput",
+        "@antlr4_runtime//jar",
     ],
 )
 
-java_library(
-    name = "model_builder",
-    srcs = ["ModelBuilderListener.java"],
-    visibility = ["//tools/material_magic/java/org/realityforge/q3a/material_magic:__pkg__"],
+_junit5_test(
+    name = "MaterialsParserToolTest",
+    size = "small",
+    srcs = ["MaterialsParserToolTest.java"],
+    test_package = "org.realityforge.q3a.material_magic",
     deps = [
-        ":model",
-        "//third_party/java:javax_annotation",
+        ":BailErrorListener",
         "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader:parser",
         "@antlr4_runtime//jar",
     ],

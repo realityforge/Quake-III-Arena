@@ -9,26 +9,3 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-load("//third_party/junit5:rules.bzl", _junit5_test = "junit5_test")
-
-java_library(
-    name = "BailErrorListener",
-    srcs = ["BailErrorListener.java"],
-    deps = [
-        "//third_party/java:javax_annotation",
-        "//tools/material_magic/java/org/realityforge/q3a/material_magic:parser",
-        "@antlr4_runtime//jar",
-    ],
-)
-
-_junit5_test(
-    name = "MaterialsParserToolTest",
-    size = "small",
-    srcs = ["MaterialsParserToolTest.java"],
-    test_package = "org.realityforge.q3a.material_magic",
-    deps = [
-        ":BailErrorListener",
-        "//tools/material_magic/java/org/realityforge/q3a/material_magic:parser",
-        "@antlr4_runtime//jar",
-    ],
-)
