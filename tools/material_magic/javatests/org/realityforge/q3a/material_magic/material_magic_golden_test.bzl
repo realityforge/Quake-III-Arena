@@ -13,7 +13,7 @@ load("@bazel_skylib//rules:diff_test.bzl", "diff_test")
 
 def material_magic_golden_test(name, inputs, outputs):
     actual_inputs = ["scenarios/%s/input/%s" % (name, o) for o in inputs]
-    actual_input_locations = ["$(location %s)" % i for i in actual_inputs]
+    actual_input_locations = ["$(execpath %s)" % i for i in actual_inputs]
     actual_outputs = ["output/%s/output/%s" % (name, o) for o in outputs]
     native.genrule(
         name = "%s_generator" % name,
