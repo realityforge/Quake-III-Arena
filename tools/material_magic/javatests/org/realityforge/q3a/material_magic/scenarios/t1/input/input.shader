@@ -1,5 +1,7 @@
+// some random comment
 textures/base/myBase
 {
+/* Another comment */
 q3map_surfacelight 1500
 q3map_lightimage textures/wall/glowglow
 q3map_novertexshadows
