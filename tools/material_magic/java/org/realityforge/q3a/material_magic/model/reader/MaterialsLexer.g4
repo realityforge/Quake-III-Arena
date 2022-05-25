@@ -38,5 +38,5 @@ WHITESPACE
 ;
 
 COMMENT
-	: ('//'~[\n\r]*)+
-;
+	: ('//'~[\n\r]*|'/*'~[*]+(.|'\n')*?'*/')+ -> channel(HIDDEN)
+; // Note: '/''/'~[\n\r]* instead of '/''/'.* (non-greedy because of wildcard).
