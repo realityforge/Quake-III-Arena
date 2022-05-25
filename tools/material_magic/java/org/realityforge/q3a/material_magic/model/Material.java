@@ -44,7 +44,7 @@ public final class Material {
      * @param output the output object to emit material to.
      * @throws IOException if there is an error writing to MaterialOutput
      */
-    public void write(@Nonnull final MaterialOutput output) throws IOException {
+    void write(@Nonnull final MaterialOutput output) throws IOException {
         output.writeMaterial(getName(), o -> {
             if (hasQ3map()) {
                 q3map().write(o);
