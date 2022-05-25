@@ -22,12 +22,16 @@ public final class MaterialOutput
     private int _indent;
 
     @Nonnull
-    public static String outputAsString(@Nonnull final Block body) throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final MaterialOutput output = new MaterialOutput(baos);
-        body.call(output);
-        final byte[] bytes = baos.toByteArray();
-        return new String(bytes, 0, bytes.length, StandardCharsets.US_ASCII);
+    public static String outputAsString(@Nonnull final Block body) {
+        try {
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            final MaterialOutput output = new MaterialOutput(baos);
+            body.call(output);
+            final byte[] bytes = baos.toByteArray();
+            return new String(bytes, 0, bytes.length, StandardCharsets.US_ASCII);
+        } catch (final IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public MaterialOutput(@Nonnull final Path extensionFile)
