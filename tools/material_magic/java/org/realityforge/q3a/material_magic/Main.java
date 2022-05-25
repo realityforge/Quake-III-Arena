@@ -4,13 +4,14 @@ import org.realityforge.q3a.material_magic.model.MaterialsUnit;
 import org.realityforge.q3a.material_magic.model.reader.LoadError;
 import org.realityforge.q3a.material_magic.model.reader.MaterialsReadException;
 import org.realityforge.q3a.material_magic.model.reader.MaterialsUnitReader;
+import org.realityforge.q3a.material_magic.util.MaterialOutput;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -28,6 +29,8 @@ public class Main implements Callable<Integer> {
     @CommandLine.Option(names = {"-o", "--output-file"}, description = "The file to save unit to", paramLabel = "O")
     private Path _output;
 
+    @CommandLine.Option(names = {"--optimize"}, description = "Optimize the unit for loading by the engine by stripping tooling data", arity = "0")
+    private boolean _optimize;
     @Override
     public Integer call() throws Exception {
         final List<MaterialsUnit> units = new ArrayList<>();
@@ -52,7 +55,11 @@ public class Main implements Callable<Integer> {
                 if (!Files.exists(directory)) {
                     Files.createDirectories(directory);
                 }
-                Files.writeString(_output, unit.toString(), StandardCharsets.US_ASCII);
+                final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                final MaterialOutput.Strategy strategy =
+                        _optimize ? MaterialOutput.Strategy.RUNTIME_OPTIMIZED : MaterialOutput.Strategy.PRETTY;
+                unit.write(new MaterialOutput(baos, strategy));
+                Files.write(_output, baos.toByteArray());
             } catch (final IOException ioe) {
                 System.err.println("Failed to write output file " + _output + " due to " + ioe);
                 return 1;

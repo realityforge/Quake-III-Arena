@@ -25,6 +25,7 @@ java_binary(
         "//tools/material_magic/java/org/realityforge/q3a/material_magic/model",
         "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader",
         "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader:parser",
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic/util:MaterialOutput",
         "@antlr4_runtime//jar",
     ],
 )
