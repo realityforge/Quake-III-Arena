@@ -3,7 +3,7 @@ package org.realityforge.q3a.material_magic.model;
 import org.junit.jupiter.api.Test;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public final class MaterialsUnitTest {
     @Test
@@ -49,8 +49,8 @@ public final class MaterialsUnitTest {
                 "{\n" +
                 "}\n", MaterialOutput.outputAsString(unit::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
 
-        unit.removeMaterial(material3);
-
+        assertTrue(unit.removeMaterial(material3));
+        assertFalse(unit.removeMaterial(material3));
 
         assertEquals("materials/my/MaterialA\n" +
                 "{\n" +
