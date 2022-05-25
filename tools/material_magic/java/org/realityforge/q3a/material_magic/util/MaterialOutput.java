@@ -34,6 +34,7 @@ public final class MaterialOutput
     @Nonnull
     private final OutputStream _outputStream;
     private int _indent;
+    private boolean _emittedMaterial = false;
 
     @Nonnull
     public static String outputAsString(@Nonnull final Block body) {
@@ -78,6 +79,13 @@ public final class MaterialOutput
 
     public void writeMaterial(@Nonnull final String label, @Nonnull final Block body)
             throws IOException {
+        if (_emittedMaterial) {
+            if (shouldPrettyPrint()) {
+                newLine();
+            }
+        } else {
+            _emittedMaterial = true;
+        }
         write(label);
         writeSection(body);
     }

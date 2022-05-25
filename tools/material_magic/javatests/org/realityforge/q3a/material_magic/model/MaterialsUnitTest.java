@@ -25,13 +25,16 @@ public final class MaterialsUnitTest {
         assertEquals("materials/my/MaterialA\n" +
                 "{\n" +
                 "}\n" +
+                "\n" +
                 "materials/my/MaterialB\n" +
                 "{\n" +
                 "  q3map_surfacelight 500\n" +
                 "}\n" +
+                "\n" +
                 "materials/my/MaterialY\n" +
                 "{\n" +
                 "}\n" +
+                "\n" +
                 "materials/my/MaterialZ\n" +
                 "{\n" +
                 "  q3map_forcesunlight\n" +
@@ -55,9 +58,11 @@ public final class MaterialsUnitTest {
         assertEquals("materials/my/MaterialA\n" +
                 "{\n" +
                 "}\n" +
+                "\n" +
                 "materials/my/MaterialY\n" +
                 "{\n" +
                 "}\n" +
+                "\n" +
                 "materials/my/MaterialZ\n" +
                 "{\n" +
                 "  q3map_forcesunlight\n" +

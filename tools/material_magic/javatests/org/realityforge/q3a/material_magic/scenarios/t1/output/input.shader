@@ -10,6 +10,7 @@ textures/base/myBase
   qer_trans 0.3
   cull disable
 }
+
 textures/base/myBase2
 {
   q3map_forcesunlight
