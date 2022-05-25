@@ -11,6 +11,7 @@
 # limitations under the License.
 
 load("@rules_java//java:defs.bzl", "java_binary")
+load("@rules_graal//graal:graal.bzl", "graal_binary")
 
 java_binary(
     name = "Main",
@@ -26,4 +27,11 @@ java_binary(
         "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader:parser",
         "@antlr4_runtime//jar",
     ],
+)
+
+graal_binary(
+    name = "main-native",
+    main_class = "org.realityforge.q3a.material_magic.Main",
+    tags = ["manual"],
+    deps = [":main"],
 )
