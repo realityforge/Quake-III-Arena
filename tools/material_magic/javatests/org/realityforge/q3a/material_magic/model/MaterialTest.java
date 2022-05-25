@@ -23,7 +23,7 @@ public final class MaterialTest {
         assertEquals("materials/my/Material2\n" +
                         "{\n" +
                         "}\n",
-                MaterialOutput.outputAsString(material::write));
+                material.toString());
 
         material.q3map().setForceSunLight(true);
 
@@ -34,6 +34,6 @@ public final class MaterialTest {
                         "{\n" +
                         "    q3map_forcesunlight\n" +
                         "}\n",
-                MaterialOutput.outputAsString(material::write));
+                material.toString());
     }
 }
