@@ -18,3 +18,13 @@ textures/base/myBase2
   q3map_flare whoosh
   cull back
 }
+
+textures/base/myBase_3
+{
+  cull disable
+}
+
+textures/base/myBase_3
+{
+  cull back
+}

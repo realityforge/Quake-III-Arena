@@ -25,3 +25,13 @@ q3map_globaltexture
             cull backsided
 q3map_flare whoosh
 }
+
+
+
+textures/base/myBase_3
+{
+// This is a non-normalized form of "cull disable"
+cull none
+}
+
+textures/base/myBase_3 { /* This is a non-normalized form of "cull back" */ cull backsided }
