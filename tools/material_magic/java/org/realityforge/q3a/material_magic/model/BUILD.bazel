@@ -14,6 +14,7 @@ load("@rules_java//java:defs.bzl", "java_library")
 java_library(
     name = "model",
     srcs = [
+        "Material.java",
         "Q3mapProperties.java",
     ],
     visibility = [
@@ -23,5 +24,17 @@ java_library(
     deps = [
         "//third_party/java:javax_annotation",
         "//tools/material_magic/java/org/realityforge/q3a/material_magic/util:MaterialOutput",
+    ],
+)
+
+java_library(
+    name = "model_builder",
+    srcs = ["ModelBuilderListener.java"],
+    visibility = ["//tools/material_magic/java/org/realityforge/q3a/material_magic:__pkg__"],
+    deps = [
+        ":model",
+        "//third_party/java:javax_annotation",
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic:parser",
+        "@antlr4_runtime//jar",
     ],
 )

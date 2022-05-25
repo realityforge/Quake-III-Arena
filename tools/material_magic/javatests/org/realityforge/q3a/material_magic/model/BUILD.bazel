@@ -22,3 +22,15 @@ _junit5_test(
         "//tools/material_magic/java/org/realityforge/q3a/material_magic/util:MaterialOutput",
     ],
 )
+
+_junit5_test(
+    name = "MaterialTest",
+    size = "small",
+    srcs = ["MaterialTest.java"],
+    test_package = "org.realityforge.q3a.material_magic.model",
+    deps = [
+        "//third_party/java:javax_annotation",
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model",
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic/util:MaterialOutput",
+    ],
+)
