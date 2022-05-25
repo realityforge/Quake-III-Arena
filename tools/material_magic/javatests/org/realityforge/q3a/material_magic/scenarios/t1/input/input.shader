@@ -21,4 +21,5 @@ q3map_globaltexture
 {
     q3map_forcesunlight
             cull backsided
+q3map_flare whoosh
 }

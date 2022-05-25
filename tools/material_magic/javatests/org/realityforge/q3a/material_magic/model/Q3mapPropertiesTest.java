@@ -13,7 +13,7 @@ public final class Q3mapPropertiesTest {
         assertFalse(properties.forceSunLight());
         assertFalse(properties.noVertexShadows());
         assertFalse(properties.globalTexture());
-        assertFalse(properties.light());
+        assertNull(properties.getFlare());
         assertNull(properties.getLightImage());
         assertEquals(0, properties.getSurfaceLight());
         assertEquals("", MaterialOutput.outputAsString(properties::write));
@@ -31,22 +31,22 @@ public final class Q3mapPropertiesTest {
 
         properties.setNoVertexShadows(true);
         properties.setGlobalTexture(true);
-        properties.setLight(true);
+        properties.setFlare("flareshader");
         properties.setLightImage("images/foo");
         properties.setSurfaceLight(500);
 
         assertTrue(properties.forceSunLight());
         assertTrue(properties.noVertexShadows());
         assertTrue(properties.globalTexture());
-        assertTrue(properties.light());
+        assertEquals("flareshader", properties.getFlare());
         assertEquals("images/foo", properties.getLightImage());
         assertEquals(500, properties.getSurfaceLight());
         assertEquals("q3map_surfacelight 500\n" +
                         "q3map_lightimage images/foo\n" +
                         "q3map_globaltexture\n" +
                         "q3map_novertexshadows\n" +
-                        "q3map_forcesunlight\n",
-                "light 1\n",
+                        "q3map_forcesunlight\n" +
+                        "q3map_flare flareshader\n",
                 MaterialOutput.outputAsString(properties::write));
         assertEquals("", MaterialOutput.outputAsString(properties::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
     }
@@ -109,12 +109,12 @@ public final class Q3mapPropertiesTest {
         assertEquals(properties1, properties2);
         assertEquals(properties1.hashCode(), properties2.hashCode());
 
-        properties1.setLight(true);
+        properties1.setFlare("flareshader");
 
         assertNotEquals(properties1, properties2);
         assertNotEquals(properties1.hashCode(), properties2.hashCode());
 
-        properties2.setLight(true);
+        properties2.setFlare("flareshader");
 
         assertEquals(properties1, properties2);
         assertEquals(properties1.hashCode(), properties2.hashCode());

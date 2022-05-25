@@ -20,7 +20,8 @@ Q3MAP_GLOBALTEXTURE : 'q3map_globaltexture';
 Q3MAP_SURFACELIGHT : 'q3map_surfacelight';
 Q3MAP_NOVERTEXSHADOWS : 'q3map_novertexshadows';
 Q3MAP_FORCESUNLIGHT : 'q3map_forcesunlight';
-// light <value> determines flaring in q3map
+Q3MAP_FLARE : 'q3map_flare';
+// light <value> is the old style flare specification which is equivalent to "q3map_flare flareshader"
 LIGHT : 'light';
 
 QER_EDITORIMAGE : 'qer_editorimage';

@@ -5,7 +5,7 @@ textures/base/myBase
   q3map_globaltexture
   q3map_novertexshadows
   q3map_forcesunlight
-  light 1
+  q3map_flare flareshader
   qer_editorimage textures/sfx/xyz
   qer_nocarve
   qer_trans 0.3
@@ -15,5 +15,6 @@ textures/base/myBase
 textures/base/myBase2
 {
   q3map_forcesunlight
+  q3map_flare whoosh
   cull back
 }

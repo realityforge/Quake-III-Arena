@@ -11,11 +11,12 @@ public final class Q3mapProperties {
     private boolean _globalTexture;
     private boolean _forceSunLight;
     private boolean _noVertexShadows;
-    private boolean _light;
     // A positive value
     private int _surfaceLight;
     @Nullable
     private String _lightImage;
+    @Nullable
+    private String _flare;
 
     public boolean globalTexture() {
         return _globalTexture;
@@ -41,14 +42,6 @@ public final class Q3mapProperties {
         _noVertexShadows = noVertexShadows;
     }
 
-    public boolean light() {
-        return _light;
-    }
-
-    public void setLight(final boolean light) {
-        _light = light;
-    }
-
     public int getSurfaceLight() {
         return _surfaceLight;
     }
@@ -64,6 +57,15 @@ public final class Q3mapProperties {
 
     public void setLightImage(@Nullable final String lightImage) {
         _lightImage = lightImage;
+    }
+
+    @Nullable
+    public String getFlare() {
+        return _flare;
+    }
+
+    public void setFlare(@Nullable final String flare) {
+        _flare = flare;
     }
 
     void write(@Nonnull final MaterialOutput output) throws IOException {
@@ -83,8 +85,8 @@ public final class Q3mapProperties {
             if (_forceSunLight) {
                 output.writeProperty("q3map_forcesunlight");
             }
-            if (_light) {
-                output.writeProperty("light", "1");
+            if (null != _flare) {
+                output.writeProperty("q3map_flare", _flare);
             }
         }
     }
@@ -100,14 +102,14 @@ public final class Q3mapProperties {
             return _globalTexture == that._globalTexture &&
                     _forceSunLight == that._forceSunLight &&
                     _noVertexShadows == that._noVertexShadows &&
-                    _light == that._light &&
                     _surfaceLight == that._surfaceLight &&
-                    Objects.equals(_lightImage, that._lightImage);
+                    Objects.equals(_lightImage, that._lightImage) &&
+                    Objects.equals(_flare, that._flare);
         }
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_globalTexture, _forceSunLight, _noVertexShadows, _light, _surfaceLight, _lightImage);
+        return Objects.hash(_globalTexture, _forceSunLight, _noVertexShadows, _surfaceLight, _lightImage, _flare);
     }
 }
