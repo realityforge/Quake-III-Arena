@@ -47,7 +47,7 @@ public final class Material {
      *
      * @param output the output object to emit material to.
      * @param runtimeOnly if true then properties that are not needed except at runtime are omitted.
-     * @throws IOException
+     * @throws IOException if there is an error writing to MaterialOutput
      */
     public void write(@Nonnull final MaterialOutput output, final boolean runtimeOnly) throws IOException {
         output.writeMaterial(getName(), o -> {
