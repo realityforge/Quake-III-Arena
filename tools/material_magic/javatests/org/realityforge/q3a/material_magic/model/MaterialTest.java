@@ -35,7 +35,7 @@ public final class MaterialTest {
                 "{\n" +
                 "  q3map_surfacelight 500\n" +
                 "  q3map_lightimage tex/img\n" +
-                "  q3map_lightimage\n" +
+                "  q3map_globaltexture\n" +
                 "  q3map_novertexshadows\n" +
                 "  q3map_forcesunlight\n" +
                 "}\n", material.toString());

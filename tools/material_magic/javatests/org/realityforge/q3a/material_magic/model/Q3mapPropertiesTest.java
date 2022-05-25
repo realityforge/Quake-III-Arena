@@ -40,7 +40,7 @@ public final class Q3mapPropertiesTest {
         assertEquals(500, properties.getSurfaceLight());
         assertEquals("q3map_surfacelight 500\n" +
                         "q3map_lightimage images/foo\n" +
-                        "q3map_lightimage\n" +
+                        "q3map_globaltexture\n" +
                         "q3map_novertexshadows\n" +
                         "q3map_forcesunlight\n",
                 MaterialOutput.outputAsString(properties::write));

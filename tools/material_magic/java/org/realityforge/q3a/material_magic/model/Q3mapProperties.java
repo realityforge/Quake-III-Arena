@@ -65,7 +65,7 @@ public final class Q3mapProperties {
                 output.writeProperty("q3map_lightimage", _lightImage);
             }
             if (_globalTexture) {
-                output.writeProperty("q3map_lightimage");
+                output.writeProperty("q3map_globaltexture");
             }
             if (_noVertexShadows) {
                 output.writeProperty("q3map_novertexshadows");
