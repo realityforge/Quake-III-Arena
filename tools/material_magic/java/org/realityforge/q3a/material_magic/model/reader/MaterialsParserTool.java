@@ -1,14 +1,14 @@
 package org.realityforge.q3a.material_magic.model.reader;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import javax.annotation.Nonnull;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.misc.ParseCancellationException;
 
-public final class MaterialsParserTool {
-    private MaterialsParserTool()
-    {
+import javax.annotation.Nonnull;
+import java.io.IOException;
+import java.nio.file.Path;
+
+final class MaterialsParserTool {
+    private MaterialsParserTool() {
     }
 
     /**
@@ -18,14 +18,11 @@ public final class MaterialsParserTool {
      * @param path the filename to read input from.
      * @return the configured parser instance.
      * @throws IOException if there is an error reading from reader.
-     * @see #createParser(CharStream,RecordingErrorListener)
+     * @see #createParser(CharStream, RecordingErrorListener)
      */
     @Nonnull
-    public static MaterialsParser createParser(@Nonnull final Path path,
-                                               @Nonnull final RecordingErrorListener errorListener)
-        throws IOException
-    {
-        return createParser(CharStreams.fromPath(path),errorListener);
+    static MaterialsParser createParser(@Nonnull final Path path, @Nonnull final RecordingErrorListener errorListener) throws IOException {
+        return createParser(CharStreams.fromPath(path), errorListener);
     }
 
     /**
@@ -36,30 +33,25 @@ public final class MaterialsParserTool {
      * @return the configured parser instance.
      */
     @Nonnull
-    public static MaterialsParser createParser(@Nonnull final CharStream input,
-                                               @Nonnull final RecordingErrorListener errorListener)
-    {
+    static MaterialsParser createParser(@Nonnull final CharStream input, @Nonnull final RecordingErrorListener errorListener) {
         final MaterialsParser parser = new MaterialsParser(new CommonTokenStream(new BailLexer(input)));
         parser.getErrorListeners().clear();
-        parser.addErrorListener( errorListener );
+        parser.addErrorListener(errorListener);
         return parser;
     }
 
     private static class BailLexer extends MaterialsLexer {
-        BailLexer(@Nonnull final CharStream input)
-        {
+        BailLexer(@Nonnull final CharStream input) {
             super(input);
         }
 
         @Override
-        public void recover(@Nonnull final RecognitionException re)
-        {
+        public void recover(@Nonnull final RecognitionException re) {
             throw new ParseCancellationException(re);
         }
 
         @Override
-        public void recover(@Nonnull final LexerNoViableAltException e)
-        {
+        public void recover(@Nonnull final LexerNoViableAltException e) {
             throw new ParseCancellationException(e);
         }
     }
