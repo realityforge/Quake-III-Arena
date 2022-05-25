@@ -28,6 +28,11 @@ materialProperties
 materialProperty
     : q3mapMaterialProperty
     | qerMaterialProperty
+    | cullMaterialProperty
+    ;
+
+cullMaterialProperty
+    : CULL (CULL_DISABLE|CULL_NONE|CULL_TWOSIDED|CULL_BACK|CULL_BACKSIDE|CULL_BACKSIDED)
     ;
 
 q3mapMaterialProperty

@@ -8,12 +8,16 @@ import java.io.IOException;
 import java.util.Objects;
 
 public final class Material {
+    public enum CullType {FRONT, BACK, DISABLE}
+
     @Nonnull
     private String _name;
     @Nullable
     private Q3mapProperties _q3map;
     @Nullable
     private QerProperties _qer;
+    @Nonnull
+    private CullType _cull = CullType.FRONT;
 
     public Material(@Nonnull final String name) {
         _name = Objects.requireNonNull(name);
@@ -52,6 +56,15 @@ public final class Material {
         return _qer;
     }
 
+    @Nonnull
+    public CullType getCull() {
+        return _cull;
+    }
+
+    public void setCull(@Nonnull final CullType cull) {
+        _cull = Objects.requireNonNull(cull);
+    }
+
     /**
      * Write the material using the standard text serialization mechanisms to the specified output object.
      *
@@ -66,6 +79,9 @@ public final class Material {
             if (hasQer()) {
                 qer().write(o);
             }
+            if (CullType.FRONT != _cull) {
+                o.writeProperty("cull", CullType.BACK == _cull ? "back" : "disable");
+            }
         });
     }
 
@@ -77,13 +93,16 @@ public final class Material {
             return false;
         } else {
             final Material that = (Material) o;
-            return _name.equals(that._name) && Objects.equals(q3map(), that.q3map()) && Objects.equals(qer(), that.qer());
+            return _name.equals(that._name) &&
+                    _cull.equals(that._cull) &&
+                    Objects.equals(q3map(), that.q3map()) &&
+                    Objects.equals(qer(), that.qer());
         }
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_name, q3map(), qer());
+        return Objects.hash(_name, _cull, q3map(), qer());
     }
 
     @Nonnull

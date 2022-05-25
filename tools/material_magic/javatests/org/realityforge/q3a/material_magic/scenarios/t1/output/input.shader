@@ -8,4 +8,10 @@ textures/base/myBase
   qer_editorimage textures/sfx/xyz
   qer_nocarve
   qer_trans 0.3
+  cull disable
+}
+textures/base/myBase2
+{
+  q3map_forcesunlight
+  cull back
 }

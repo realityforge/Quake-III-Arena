@@ -3,6 +3,18 @@ lexer grammar MaterialsLexer;
 OPEN_BRACE : '{';
 CLOSE_BRACE : '}';
 
+CULL : 'cull';
+
+CULL_DISABLE : 'disable';
+// These next two are "deprecated" synonyms of "disable"
+CULL_NONE : 'none';
+CULL_TWOSIDED : 'twosided';
+
+CULL_BACK : 'back';
+// These next two are "deprecated" synonyms of "back"
+CULL_BACKSIDE : 'backside';
+CULL_BACKSIDED : 'backsided';
+
 Q3MAP_LIGHTIMAGE : 'q3map_lightimage';
 Q3MAP_GLOBALTEXTURE : 'q3map_globaltexture';
 Q3MAP_SURFACELIGHT : 'q3map_surfacelight';

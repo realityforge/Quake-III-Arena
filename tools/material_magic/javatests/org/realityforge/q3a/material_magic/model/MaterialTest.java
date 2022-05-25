@@ -28,6 +28,7 @@ public final class MaterialTest {
         material.q3map().setGlobalTexture(true);
         material.q3map().setNoVertexShadows(true);
         material.q3map().setLightImage("tex/img");
+        material.setCull(Material.CullType.BACK);
 
         assertTrue(material.hasQ3map());
 
@@ -38,8 +39,9 @@ public final class MaterialTest {
                 "  q3map_globaltexture\n" +
                 "  q3map_novertexshadows\n" +
                 "  q3map_forcesunlight\n" +
+                "  cull back\n" +
                 "}\n", material.toString());
-        assertEquals("materials/my/Material2\n{\n}\n", MaterialOutput.outputAsString(material::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
+        assertEquals("materials/my/Material2\n{\ncull back\n}\n", MaterialOutput.outputAsString(material::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
     }
 
     @Test
@@ -56,6 +58,19 @@ public final class MaterialTest {
         assertNotEquals(material1.hashCode(), material2.hashCode());
 
         material2.setName("X");
+
+        assertEquals(material1, material2);
+        assertEquals(material1.hashCode(), material2.hashCode());
+
+        assertEquals(material1, material2);
+        assertEquals(material1.hashCode(), material2.hashCode());
+
+        material1.setCull(Material.CullType.BACK);
+
+        assertNotEquals(material1, material2);
+        assertNotEquals(material1.hashCode(), material2.hashCode());
+
+        material2.setCull(Material.CullType.BACK);
 
         assertEquals(material1, material2);
         assertEquals(material1.hashCode(), material2.hashCode());

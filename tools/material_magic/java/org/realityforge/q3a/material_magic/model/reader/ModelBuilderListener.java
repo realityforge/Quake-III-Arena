@@ -41,6 +41,17 @@ final class ModelBuilderListener extends MaterialsParserBaseListener {
     }
 
     @Override
+    public void exitCullMaterialProperty(MaterialsParser.CullMaterialPropertyContext ctx) {
+        if (null != ctx.CULL_BACK() || null != ctx.CULL_BACKSIDE() || null != ctx.CULL_BACKSIDED()) {
+            _material.setCull(Material.CullType.BACK);
+        } else if (null != ctx.CULL_DISABLE() || null != ctx.CULL_NONE() || null != ctx.CULL_TWOSIDED()) {
+            _material.setCull(Material.CullType.DISABLE);
+        } else {
+            throw new IllegalStateException("Unhandled cull value " + ctx.getText());
+        }
+    }
+
+    @Override
     public void exitQerMaterialProperty(@Nonnull final MaterialsParser.QerMaterialPropertyContext ctx) {
         QerProperties qer = _material.qer();
         if (null != ctx.QER_TRANS()) {
