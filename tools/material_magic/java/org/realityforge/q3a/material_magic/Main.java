@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 
+@SuppressWarnings("unused")
 @Command(name = "material_magick",
         mixinStandardHelpOptions = true,
         description = "Read and process shader/material files.")
