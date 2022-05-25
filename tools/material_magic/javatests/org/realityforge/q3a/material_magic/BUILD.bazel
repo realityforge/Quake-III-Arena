@@ -16,3 +16,12 @@ material_magic_golden_test(
     inputs = ["input.shader"],
     outputs = ["output.shader"],
 )
+
+material_magic_golden_test(
+    name = "t2",
+    inputs = [
+        "textures/base/myBase.shader",
+        "textures/base/myBase2.shader",
+    ],
+    outputs = ["output.shader"],
+)
