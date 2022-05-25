@@ -13,8 +13,7 @@ import java.util.Objects;
 /**
  * An error listener that can be used within tests that will fail with an assertion error if there is a parsing error.
  */
-final class RecordingErrorListener
-        extends BaseErrorListener {
+final class RecordingErrorListener extends BaseErrorListener {
     public static class Error {
         private final int _line;
         private final int _charPositionInLine;
