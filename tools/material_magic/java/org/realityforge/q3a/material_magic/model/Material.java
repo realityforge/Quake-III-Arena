@@ -38,10 +38,6 @@ public final class Material {
         return _q3map;
     }
 
-    public void setQ3map(@Nullable final Q3mapProperties q3map) {
-        _q3map = q3map;
-    }
-
     /**
      * Write the material using the standard text serialization mechanisms to the specified output object.
      *
