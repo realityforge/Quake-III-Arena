@@ -26,7 +26,8 @@ antlr(
 java_library(
     name = "parser",
     srcs = [
-        "MaterialsParserTool.java",
+        "Error.java",
+        "BailLexer.java",
         "RecordingErrorListener.java",
         ":generated_parser",
     ],
@@ -36,6 +37,26 @@ java_library(
     ],
     deps = [
         "//third_party/java:javax_annotation",
+        "@antlr4_runtime//jar",
+    ],
+)
+
+java_library(
+    name = "reader",
+    srcs = [
+        "MaterialsReadException.java",
+        "MaterialsUnitReader.java",
+        "ModelBuilderListener.java",
+        "LoadError.java",
+    ],
+    visibility = [
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic:__pkg__",
+        "//tools/material_magic/javatests/org/realityforge/q3a/material_magic/model/reader:__pkg__",
+    ],
+    deps = [
+        ":parser",
+        "//third_party/java:javax_annotation",
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model",
         "@antlr4_runtime//jar",
     ],
 )

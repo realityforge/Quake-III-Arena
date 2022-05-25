@@ -11,23 +11,25 @@
 # limitations under the License.
 load("//third_party/junit5:rules.bzl", "junit5_test")
 
-java_library(
-    name = "BailErrorListener",
-    srcs = ["BailErrorListener.java"],
+junit5_test(
+    name = "MaterialsParserToolTest",
+    size = "small",
+    srcs = ["MaterialsParserTest.java"],
+    test_package = "org.realityforge.q3a.material_magic.model.reader",
     deps = [
-        "//third_party/java:javax_annotation",
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader:parser",
         "@antlr4_runtime//jar",
     ],
 )
 
 junit5_test(
-    name = "MaterialsParserToolTest",
+    name = "MaterialsUnitReaderTest",
     size = "small",
-    srcs = ["MaterialsParserToolTest.java"],
+    srcs = ["MaterialsUnitReaderTest.java"],
     test_package = "org.realityforge.q3a.material_magic.model.reader",
     deps = [
-        ":BailErrorListener",
-        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader:parser",
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader",
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model",
         "@antlr4_runtime//jar",
     ],
 )
