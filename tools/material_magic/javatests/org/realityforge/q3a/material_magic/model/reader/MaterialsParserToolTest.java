@@ -4,6 +4,8 @@ import org.antlr.v4.runtime.CharStreams;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public final class MaterialsParserToolTest {
@@ -20,9 +22,12 @@ public final class MaterialsParserToolTest {
                         "  q3map_globaltexture\n" +
                         "\tq3map_forcesunlight\n" +
                         "}\n";
-        final MaterialsParser parser = MaterialsParserTool.createParser(CharStreams.fromString(materialText), new BailErrorListener("MyMaterial.material"));
+        RecordingErrorListener errorListener = new RecordingErrorListener();
+        final MaterialsParser parser = MaterialsParserTool.createParser(CharStreams.fromString(materialText), errorListener);
         final MaterialsParser.MaterialsContext materials = parser.materials();
         final MaterialsParser.MaterialContext material = materials.material();
+        final List<RecordingErrorListener.Error> errors = errorListener.getErrors();
+        assertEquals(0, errors.size(),"Unexpected errors: " + errors);
 
         final String label = material.LABEL().getText();
         assertEquals("textures/base/myBase", label);

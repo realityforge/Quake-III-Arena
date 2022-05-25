@@ -18,11 +18,11 @@ public final class MaterialsParserTool {
      * @param path the filename to read input from.
      * @return the configured parser instance.
      * @throws IOException if there is an error reading from reader.
-     * @see #createParser(CharStream,ANTLRErrorListener)
+     * @see #createParser(CharStream,RecordingErrorListener)
      */
     @Nonnull
     public static MaterialsParser createParser(@Nonnull final Path path,
-                                               @Nonnull final ANTLRErrorListener errorListener)
+                                               @Nonnull final RecordingErrorListener errorListener)
         throws IOException
     {
         return createParser(CharStreams.fromPath(path),errorListener);
@@ -37,7 +37,7 @@ public final class MaterialsParserTool {
      */
     @Nonnull
     public static MaterialsParser createParser(@Nonnull final CharStream input,
-                                               @Nonnull final ANTLRErrorListener errorListener)
+                                               @Nonnull final RecordingErrorListener errorListener)
     {
         final MaterialsParser parser = new MaterialsParser(new CommonTokenStream(new BailLexer(input)));
         parser.getErrorListeners().clear();

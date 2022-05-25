@@ -27,6 +27,7 @@ java_library(
     name = "parser",
     srcs = [
         "MaterialsParserTool.java",
+        "RecordingErrorListener.java",
         ":generated_parser",
     ],
     visibility = [
