@@ -42,9 +42,16 @@ public final class Material {
         _q3map = q3map;
     }
 
-    void write(@Nonnull final MaterialOutput output) throws IOException {
+    /**
+     * Write the material using the standard text serialization mechanisms to the specified output object.
+     *
+     * @param output the output object to emit material to.
+     * @param runtimeOnly if true then properties that are not needed except at runtime are omitted.
+     * @throws IOException
+     */
+    public void write(@Nonnull final MaterialOutput output, final boolean runtimeOnly) throws IOException {
         output.writeMaterial(getName(), o -> {
-            if (hasQ3map()) {
+            if (!runtimeOnly && hasQ3map()) {
                 q3map().write(o);
             }
         });
@@ -52,6 +59,6 @@ public final class Material {
 
     @Override
     public String toString() {
-        return MaterialOutput.outputAsString(this::write);
+        return MaterialOutput.outputAsString(o -> write(o, false));
     }
 }
