@@ -16,6 +16,7 @@ public final class Q3mapPropertiesTest {
         assertNull(properties.getLightImage());
         assertEquals(0, properties.getSurfaceLight());
         assertEquals("", MaterialOutput.outputAsString(properties::write));
+        assertEquals("", MaterialOutput.outputAsString(properties::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
 
         properties.setForceSunLight(true);
 
@@ -25,6 +26,7 @@ public final class Q3mapPropertiesTest {
         assertNull(properties.getLightImage());
         assertEquals(0, properties.getSurfaceLight());
         assertEquals("q3map_forcesunlight\n", MaterialOutput.outputAsString(properties::write));
+        assertEquals("", MaterialOutput.outputAsString(properties::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
 
         properties.setNoVertexShadows(true);
         properties.setGlobalTexture(true);
@@ -42,5 +44,6 @@ public final class Q3mapPropertiesTest {
                         "q3map_novertexshadows\n" +
                         "q3map_forcesunlight\n",
                 MaterialOutput.outputAsString(properties::write));
+        assertEquals("", MaterialOutput.outputAsString(properties::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
     }
 }

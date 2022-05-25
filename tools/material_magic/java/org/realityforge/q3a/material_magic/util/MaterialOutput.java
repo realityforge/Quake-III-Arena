@@ -11,6 +11,18 @@ import java.util.Objects;
 
 public final class MaterialOutput
         implements AutoCloseable {
+    public enum Strategy {
+        /**
+         * Optimise the output for consumption at runtime.
+         * Comments are removed, properties only used as part of the build process are omitted and whitespace is minimised.
+         */
+        RUNTIME_OPTIMIZED,
+        /**
+         * All non-default values are emitted in output regardless of whether they are only used by the build tools, the client or the engine..
+         */
+        PRETTY
+    }
+
     @FunctionalInterface
     public interface Block {
         void call(@Nonnull MaterialOutput output)
@@ -18,14 +30,21 @@ public final class MaterialOutput
     }
 
     @Nonnull
+    private final Strategy _strategy;
+    @Nonnull
     private final OutputStream _outputStream;
     private int _indent;
 
     @Nonnull
     public static String outputAsString(@Nonnull final Block body) {
+        return outputAsString(body, Strategy.PRETTY);
+    }
+
+    @Nonnull
+    public static String outputAsString(@Nonnull final Block body, @Nonnull final Strategy strategy) {
         try {
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            final MaterialOutput output = new MaterialOutput(baos);
+            final MaterialOutput output = new MaterialOutput(baos, strategy);
             body.call(output);
             final byte[] bytes = baos.toByteArray();
             return new String(bytes, 0, bytes.length, StandardCharsets.US_ASCII);
@@ -34,13 +53,27 @@ public final class MaterialOutput
         }
     }
 
-    public MaterialOutput(@Nonnull final Path extensionFile)
+    public MaterialOutput(@Nonnull final Path extensionFile, @Nonnull final Strategy strategy)
             throws IOException {
-        this(Files.newOutputStream(extensionFile.toFile().toPath()));
+        this(Files.newOutputStream(extensionFile.toFile().toPath()), strategy);
     }
 
-    public MaterialOutput(@Nonnull final OutputStream outputStream) {
+    public MaterialOutput(@Nonnull final OutputStream outputStream, @Nonnull final Strategy strategy) {
+        _strategy = Objects.requireNonNull(strategy);
         _outputStream = Objects.requireNonNull(outputStream);
+    }
+
+    @Nonnull
+    public Strategy getStrategy() {
+        return _strategy;
+    }
+
+    public boolean shouldOmitNonRuntimeProperties() {
+        return Strategy.RUNTIME_OPTIMIZED == getStrategy();
+    }
+
+    public boolean shouldPrettyPrint() {
+        return Strategy.PRETTY == getStrategy();
     }
 
     public void writeMaterial(@Nonnull final String label, @Nonnull final Block body)
@@ -70,8 +103,10 @@ public final class MaterialOutput
 
     private void write(@Nonnull final String line)
             throws IOException {
-        for (int i = 0; i < _indent; i++) {
-            emit("    ");
+        if (shouldPrettyPrint()) {
+            for (int i = 0; i < _indent; i++) {
+                emit("  ");
+            }
         }
         emit(line);
         newLine();

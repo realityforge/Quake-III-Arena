@@ -57,20 +57,22 @@ public final class Q3mapProperties {
     }
 
     void write(@Nonnull final MaterialOutput output) throws IOException {
-        if (0 != _surfaceLight) {
-            output.writeProperty("q3map_surfacelight", Integer.toString(_surfaceLight));
-        }
-        if (null != _lightImage) {
-            output.writeProperty("q3map_lightimage", _lightImage);
-        }
-        if (_globalTexture) {
-            output.writeProperty("q3map_lightimage");
-        }
-        if (_noVertexShadows) {
-            output.writeProperty("q3map_novertexshadows");
-        }
-        if (_forceSunLight) {
-            output.writeProperty("q3map_forcesunlight");
+        if (!output.shouldOmitNonRuntimeProperties()) {
+            if (0 != _surfaceLight) {
+                output.writeProperty("q3map_surfacelight", Integer.toString(_surfaceLight));
+            }
+            if (null != _lightImage) {
+                output.writeProperty("q3map_lightimage", _lightImage);
+            }
+            if (_globalTexture) {
+                output.writeProperty("q3map_lightimage");
+            }
+            if (_noVertexShadows) {
+                output.writeProperty("q3map_novertexshadows");
+            }
+            if (_forceSunLight) {
+                output.writeProperty("q3map_forcesunlight");
+            }
         }
     }
 }
