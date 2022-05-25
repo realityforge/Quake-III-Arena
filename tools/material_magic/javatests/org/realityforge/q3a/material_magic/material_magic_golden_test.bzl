@@ -13,13 +13,12 @@ load("@bazel_skylib//rules:diff_test.bzl", "diff_test")
 
 def material_magic_golden_test(name, inputs, outputs):
     actual_inputs = ["scenarios/%s/input/%s" % (name, o) for o in inputs]
-    actual_input_locations = ["$(execpath %s)" % i for i in actual_inputs]
     actual_outputs = ["output/%s/output/%s" % (name, o) for o in outputs]
     native.genrule(
         name = "%s_generator" % name,
         srcs = actual_inputs,
         outs = actual_outputs,
-        cmd = "$(execpath //tools/material_magic/java/org/realityforge/q3a/material_magic:Main) --input-file %s --output-file $@" % " ".join(actual_input_locations),
+        cmd = "$(execpath //tools/material_magic/java/org/realityforge/q3a/material_magic:Main) --output-file $@ " + " ".join(["--input-file $(execpath %s)" % i for i in actual_inputs]),
         tools = ["//tools/material_magic/java/org/realityforge/q3a/material_magic:Main"],
     )
 
