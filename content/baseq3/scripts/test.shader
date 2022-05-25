@@ -178,7 +178,6 @@ textures/test/blocks10pent
 
 		q3map_surfacelight 1000
 		surfaceparm nodamage
-		qer_lightimage textures/test/jumpadsmall
 
 
 	{
