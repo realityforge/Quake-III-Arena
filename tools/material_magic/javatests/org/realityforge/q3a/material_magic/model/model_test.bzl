@@ -9,8 +9,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-load(":model_test.bzl", _model_test = "model_test")
+load("//third_party/junit5:rules.bzl", _junit5_test = "junit5_test")
 
-_model_test("MaterialTest")
-
-_model_test("Q3mapPropertiesTest")
+def model_test(name):
+    _junit5_test(
+        name = name,
+        size = "small",
+        srcs = ["%s.java" % name],
+        test_package = "org.realityforge.q3a.material_magic.model",
+        deps = [
+            "//third_party/java:javax_annotation",
+            "//tools/material_magic/java/org/realityforge/q3a/material_magic/model",
+            "//tools/material_magic/java/org/realityforge/q3a/material_magic/util:MaterialOutput",
+        ],
+    )
