@@ -18,10 +18,10 @@ import java.util.concurrent.Callable;
         mixinStandardHelpOptions = true,
         description = "Read and process shader/material files.")
 public class Main implements Callable<Integer> {
-    @CommandLine.Option(names = {"-i", "--input-file"}, description = "The input file to load", required = true)
+    @CommandLine.Option(names = {"-i", "--input-file"}, description = "The input file to load", paramLabel = "I", required = true)
     private Path _input;
 
-    @CommandLine.Option(names = {"-o", "--output-file"}, description = "The file to save unit to", arity = "0..1")
+    @CommandLine.Option(names = {"-o", "--output-file"}, description = "The file to save unit to", paramLabel = "O")
     private Path _output;
 
     @Override
