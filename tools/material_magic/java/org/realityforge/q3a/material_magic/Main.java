@@ -57,7 +57,7 @@ public class Main implements Callable<Integer> {
     }
 
 
-    public static void main(final String... args) throws IOException {
+    public static void main(@Nonnull final String... args) {
         System.exit(new CommandLine(new Main()).execute(args));
     }
 }
