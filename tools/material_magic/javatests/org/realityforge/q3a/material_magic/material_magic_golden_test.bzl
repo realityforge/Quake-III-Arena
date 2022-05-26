@@ -11,10 +11,10 @@
 # limitations under the License.
 load("@bazel_skylib//rules:diff_test.bzl", "diff_test")
 
-def material_magic_golden_test(name, inputs, outputs):
+def material_magic_golden_test(name, inputs):
     actual_inputs = ["scenarios/%s/input/%s" % (name, o) for o in inputs]
-    actual_pretty_outputs = ["output/%s/output/pretty/%s" % (name, o) for o in outputs]
-    actual_optimized_outputs = ["output/%s/output/optimized/%s" % (name, o) for o in outputs]
+    actual_pretty_outputs = ["output/%s/output/pretty/output.shader" % name]
+    actual_optimized_outputs = ["output/%s/output/optimized/output.shader" % name]
     actual_outputs = actual_pretty_outputs + actual_optimized_outputs
     native.genrule(
         name = "%s_pretty_generator" % name,
@@ -38,8 +38,8 @@ def material_magic_golden_test(name, inputs, outputs):
         cmd = "\n".join(
             ["cat <<'EOF' >$@", "#!/bin/bash"] +
             ["mkdir -p $${BUILD_WORKSPACE_DIRECTORY}/tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/%s/output" % name] +
-            ["cp $(rootpath output/%s/output/pretty/%s) $${BUILD_WORKSPACE_DIRECTORY}/tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/%s/output/pretty/%s" % (name, o, name, o) for o in outputs] +
-            ["cp $(rootpath output/%s/output/optimized/%s) $${BUILD_WORKSPACE_DIRECTORY}/tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/%s/output/optimized/%s" % (name, o, name, o) for o in outputs] +
+            ["cp $(rootpath output/%s/output/pretty/output.shader) $${BUILD_WORKSPACE_DIRECTORY}/tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/%s/output/pretty/output.shader" % (name, name)] +
+            ["cp $(rootpath output/%s/output/optimized/output.shader) $${BUILD_WORKSPACE_DIRECTORY}/tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/%s/output/optimized/output.shader" % (name, name)] +
             ["EOF"],
         ),
         executable = True,
@@ -53,16 +53,15 @@ def material_magic_golden_test(name, inputs, outputs):
         tags = ["manual", "local"],
     )
 
-    for o in outputs:
-        diff_test(
-            name = "%s_pretty_output_%s_test" % (name, o),
-            size = "small",
-            file1 = "output/%s/output/pretty/%s" % (name, o),
-            file2 = "scenarios/%s/output/pretty/%s" % (name, o),
-        )
-        diff_test(
-            name = "%s_optimized_output_%s_test" % (name, o),
-            size = "small",
-            file1 = "output/%s/output/optimized/%s" % (name, o),
-            file2 = "scenarios/%s/output/optimized/%s" % (name, o),
-        )
+    diff_test(
+        name = "%s_pretty_output_test" % name,
+        size = "small",
+        file1 = "output/%s/output/pretty/output.shader" % name,
+        file2 = "scenarios/%s/output/pretty/output.shader" % name,
+    )
+    diff_test(
+        name = "%s_optimized_output_test" % name,
+        size = "small",
+        file1 = "output/%s/output/optimized/output.shader" % name,
+        file2 = "scenarios/%s/output/optimized/output.shader" % name,
+    )
