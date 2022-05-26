@@ -99,7 +99,8 @@ public final class Material {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(_name, _cull, q3map(), qer());
     }
 
