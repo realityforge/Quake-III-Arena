@@ -1,11 +1,10 @@
 package org.realityforge.q3a.material_magic.model;
 
-import org.realityforge.q3a.material_magic.util.MaterialOutput;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.Objects;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
 public final class Q3mapProperties {
     private boolean _globalTexture;
