@@ -65,7 +65,7 @@ models/mapobjects/weeds2/weeds2
 {
 
      cull disable
-     surfaceParm Trans
+     surfaceparm Trans
 
         {
                 map models/mapobjects/weeds2/weeds2

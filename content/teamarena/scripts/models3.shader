@@ -2,7 +2,7 @@ models/mapobjects/xlamp/xlamp_grate
 {
 
      cull disable
-     surfaceParm Trans
+     surfaceparm Trans
 
         {
                 map models/mapobjects/xlamp/xlamp_grate
@@ -16,7 +16,7 @@ models/mapobjects/xlamp/xlamp
 {
 
      cull disable
-     surfaceParm Trans
+     surfaceparm Trans
         {
 		map textures/effects2/envmap_sky
 		tcGen environment
