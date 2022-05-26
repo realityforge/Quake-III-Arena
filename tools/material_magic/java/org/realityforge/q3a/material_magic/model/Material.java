@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 public final class Material {
-    public enum CullType {FRONT, BACK, DISABLE}
-
     @Nonnull
     private String _name;
     @Nullable

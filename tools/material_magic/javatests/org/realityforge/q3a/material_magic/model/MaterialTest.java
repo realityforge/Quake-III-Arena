@@ -28,7 +28,7 @@ public final class MaterialTest {
         material.q3map().setGlobalTexture(true);
         material.q3map().setNoVertexShadows(true);
         material.q3map().setLightImage("tex/img");
-        material.setCull(Material.CullType.BACK);
+        material.setCull( CullType.BACK);
 
         assertTrue(material.hasQ3map());
 
@@ -65,12 +65,12 @@ public final class MaterialTest {
         assertEquals(material1, material2);
         assertEquals(material1.hashCode(), material2.hashCode());
 
-        material1.setCull(Material.CullType.BACK);
+        material1.setCull( CullType.BACK);
 
         assertNotEquals(material1, material2);
         assertNotEquals(material1.hashCode(), material2.hashCode());
 
-        material2.setCull(Material.CullType.BACK);
+        material2.setCull( CullType.BACK);
 
         assertEquals(material1, material2);
         assertEquals(material1.hashCode(), material2.hashCode());

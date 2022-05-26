@@ -53,9 +53,9 @@ final class ModelBuilderListener extends MaterialsParserBaseListener {
     @Override
     public void exitCullMaterialProperty(MaterialsParser.CullMaterialPropertyContext ctx) {
         if (null != ctx.CULL_BACK() || null != ctx.CULL_BACKSIDE() || null != ctx.CULL_BACKSIDED()) {
-            _material.setCull(Material.CullType.BACK);
+            _material.setCull( CullType.BACK);
         } else if (null != ctx.CULL_DISABLE() || null != ctx.CULL_NONE() || null != ctx.CULL_TWOSIDED()) {
-            _material.setCull(Material.CullType.DISABLE);
+            _material.setCull( CullType.DISABLE);
         } else {
             throw new IllegalStateException("Unhandled cull value " + ctx.getText());
         }
