@@ -26,13 +26,10 @@ import java.util.concurrent.Callable;
 public class Main implements Callable<Integer> {
     @CommandLine.Option(names = {"-i", "--input-file"}, description = "The input file to load", paramLabel = "I", required = true)
     private List<Path> _input;
-
     @CommandLine.Option(names = {"-o", "--output-file"}, description = "The file to save unit to", paramLabel = "O")
     private Path _output;
-
     @CommandLine.Option(names = {"--optimize"}, description = "Optimize the unit for loading by the engine by stripping tooling data", arity = "0")
     private boolean _optimize;
-
     @CommandLine.Option(names = {"--identity-transform"}, description = "Attempt to perform the identity transform and verify the pre-transform and post-transform match. This is done for every unit after loading and every unit prior to saving. This primarily used to verify the integrity of the tool.", arity = "0")
     private boolean _identityTransform;
     @Override
