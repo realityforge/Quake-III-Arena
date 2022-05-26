@@ -27,6 +27,8 @@ final class ModelBuilderListener extends MaterialsParserBaseListener {
         final Q3mapProperties q3map = _material.q3map();
         if (null != ctx.Q3MAP_SURFACELIGHT()) {
             q3map.setSurfaceLight(Integer.parseInt(ctx.POSITIVE_INTEGER().getText()));
+        } else if (null != ctx.Q3MAP_LIGHTSUBDIVIDE()) {
+            q3map.setLightSubDivide(Integer.parseInt(ctx.POSITIVE_INTEGER().getText()));
         } else if (null != ctx.Q3MAP_LIGHTIMAGE()) {
             q3map.setLightImage(ctx.LABEL().getText());
         } else if (null != ctx.Q3MAP_NOVERTEXSHADOWS()) {

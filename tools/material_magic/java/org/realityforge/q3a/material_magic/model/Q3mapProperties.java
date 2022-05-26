@@ -13,6 +13,8 @@ public final class Q3mapProperties {
     private boolean _noVertexShadows;
     // A positive value
     private int _surfaceLight;
+    // A positive value or 0 to omit
+    private int _lightSubDivide;
     @Nullable
     private String _lightImage;
     @Nullable
@@ -50,6 +52,16 @@ public final class Q3mapProperties {
         _surfaceLight = surfaceLight;
     }
 
+    public int getLightSubDivide()
+    {
+        return _lightSubDivide;
+    }
+
+    public void setLightSubDivide( final int lightSubDivide )
+    {
+        _lightSubDivide = lightSubDivide;
+    }
+
     @Nullable
     public String getLightImage() {
         return _lightImage;
@@ -72,6 +84,9 @@ public final class Q3mapProperties {
         if (!output.shouldOmitNonRuntimeProperties()) {
             if (0 != _surfaceLight) {
                 output.writeProperty("q3map_surfacelight", Integer.toString(_surfaceLight));
+            }
+            if (0 != _lightSubDivide) {
+                output.writeProperty("q3map_lightsubdivide", Integer.toString(_lightSubDivide));
             }
             if (null != _lightImage) {
                 output.writeProperty("q3map_lightimage", _lightImage);
@@ -103,6 +118,7 @@ public final class Q3mapProperties {
                     _forceSunLight == that._forceSunLight &&
                     _noVertexShadows == that._noVertexShadows &&
                     _surfaceLight == that._surfaceLight &&
+                   _lightSubDivide == that._lightSubDivide &&
                     Objects.equals(_lightImage, that._lightImage) &&
                     Objects.equals(_flare, that._flare);
         }
@@ -110,6 +126,6 @@ public final class Q3mapProperties {
 
     @Override
     public int hashCode() {
-        return Objects.hash(_globalTexture, _forceSunLight, _noVertexShadows, _surfaceLight, _lightImage, _flare);
+        return Objects.hash(_globalTexture, _forceSunLight, _noVertexShadows, _surfaceLight,_lightSubDivide, _lightImage, _flare);
     }
 }

@@ -16,6 +16,7 @@ public final class Q3mapPropertiesTest {
         assertNull(properties.getFlare());
         assertNull(properties.getLightImage());
         assertEquals(0, properties.getSurfaceLight());
+        assertEquals(0, properties.getLightSubDivide());
         assertEquals("", MaterialOutput.outputAsString(properties::write));
         assertEquals("", MaterialOutput.outputAsString(properties::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
 
@@ -26,6 +27,7 @@ public final class Q3mapPropertiesTest {
         assertFalse(properties.globalTexture());
         assertNull(properties.getLightImage());
         assertEquals(0, properties.getSurfaceLight());
+        assertEquals(0, properties.getLightSubDivide());
         assertEquals("q3map_forcesunlight\n", MaterialOutput.outputAsString(properties::write));
         assertEquals("", MaterialOutput.outputAsString(properties::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
 
@@ -34,6 +36,7 @@ public final class Q3mapPropertiesTest {
         properties.setFlare("flareshader");
         properties.setLightImage("images/foo");
         properties.setSurfaceLight(500);
+        properties.setLightSubDivide(200);
 
         assertTrue(properties.forceSunLight());
         assertTrue(properties.noVertexShadows());
@@ -41,7 +44,9 @@ public final class Q3mapPropertiesTest {
         assertEquals("flareshader", properties.getFlare());
         assertEquals("images/foo", properties.getLightImage());
         assertEquals(500, properties.getSurfaceLight());
+        assertEquals(200, properties.getLightSubDivide());
         assertEquals("q3map_surfacelight 500\n" +
+                     "q3map_lightsubdivide 200\n" +
                         "q3map_lightimage images/foo\n" +
                         "q3map_globaltexture\n" +
                         "q3map_novertexshadows\n" +
@@ -65,6 +70,16 @@ public final class Q3mapPropertiesTest {
         assertNotEquals(properties1.hashCode(), properties2.hashCode());
 
         properties2.setSurfaceLight(2);
+
+        assertEquals(properties1, properties2);
+        assertEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties1.setLightSubDivide(20);
+
+        assertNotEquals(properties1, properties2);
+        assertNotEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties2.setLightSubDivide(20);
 
         assertEquals(properties1, properties2);
         assertEquals(properties1.hashCode(), properties2.hashCode());

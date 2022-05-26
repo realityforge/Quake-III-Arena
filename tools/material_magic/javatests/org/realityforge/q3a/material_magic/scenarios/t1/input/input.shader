@@ -13,6 +13,7 @@ qer_trans 0.30
 cull twosided
 q3map_novertexshadows
 q3map_globaltexture
+q3map_lightsubdivide 22
 }
 
 
