@@ -72,7 +72,7 @@ public class Main implements Callable<Integer> {
     }
 
     @Nullable
-    private MaterialsUnit loadInputs() throws MaterialsReadException {
+    private MaterialsUnit loadInputs() {
         final List<MaterialsUnit> units = new ArrayList<>();
         for (final Path input : _input) {
             final MaterialsUnit unit = loadUnit(input);
@@ -93,8 +93,17 @@ public class Main implements Callable<Integer> {
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    private boolean verifyIdentityTransform(@Nonnull final Path file, @Nonnull final MaterialsUnit unit) throws MaterialsReadException {
-        final MaterialsUnit transformedUnit = MaterialsUnitReader.readFromString(unit.toString());
+    private boolean verifyIdentityTransform(@Nonnull final Path file, @Nonnull final MaterialsUnit unit) {
+        final MaterialsUnit transformedUnit;
+        try {
+            transformedUnit = MaterialsUnitReader.readFromString(unit.toString());
+        } catch (final MaterialsReadException e) {
+            System.err.println("Error: Invalid unit when checking identity transform of file " + file);
+            for (final LoadError syntaxError : e.getSyntaxErrors()) {
+                System.err.println(syntaxError.toString(file.toString()));
+            }
+            return false;
+        }
         if (!transformedUnit.equals(unit)) {
             System.err.println("Identity transform for file " + file + " failed to produce identical output.");
             System.err.println("Original unit source:");
