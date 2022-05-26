@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted"})
 @Command(name = "material_magick",
         mixinStandardHelpOptions = true,
         description = "Read and process shader/material files.")
@@ -107,7 +107,6 @@ public class Main implements Callable<Integer> {
         }
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean verifyIdentityTransform(@Nonnull final Path file, @Nonnull final MaterialsUnit unit) {
         final MaterialsUnit transformedUnit;
         try {
