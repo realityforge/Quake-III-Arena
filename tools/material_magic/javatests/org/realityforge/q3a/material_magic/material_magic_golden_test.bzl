@@ -23,6 +23,7 @@ def material_magic_golden_test(name, inputs, outputs):
         cmd = "$(execpath //tools/material_magic/java/org/realityforge/q3a/material_magic:Main) --identity-transform --output-file $@ " + " ".join(["--input-file $(execpath %s)" % i for i in actual_inputs]),
         tools = ["//tools/material_magic/java/org/realityforge/q3a/material_magic:Main"],
     )
+
     native.genrule(
         name = "%s_optimized_generator" % name,
         srcs = actual_inputs,
