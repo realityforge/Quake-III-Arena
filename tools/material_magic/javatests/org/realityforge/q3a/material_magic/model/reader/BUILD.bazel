@@ -28,8 +28,8 @@ junit5_test(
     srcs = ["MaterialsUnitReaderTest.java"],
     test_package = "org.realityforge.q3a.material_magic.model.reader",
     deps = [
-        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader",
         "//tools/material_magic/java/org/realityforge/q3a/material_magic/model",
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader",
         "@antlr4_runtime//jar",
     ],
 )
