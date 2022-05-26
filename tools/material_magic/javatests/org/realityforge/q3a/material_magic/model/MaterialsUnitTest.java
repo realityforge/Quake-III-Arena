@@ -82,7 +82,9 @@ public final class MaterialsUnitTest {
     public void testEqualsAndHash() {
         final MaterialsUnit unit1 = new MaterialsUnit();
         final MaterialsUnit unit2 = new MaterialsUnit();
-        final Material material1 = new Material("materials/my/MaterialZ");
+        final Material material1 = new Material("materials/my/Material1");
+        final Material material2 = new Material("materials/my/Material2");
+        final Material material3 = new Material("materials/my/Material3");
 
         assertEquals(unit1, unit2);
         assertEquals(unit1.hashCode(), unit2.hashCode());
@@ -93,6 +95,19 @@ public final class MaterialsUnitTest {
         assertNotEquals(unit1.hashCode(), unit2.hashCode());
 
         unit2.addMaterial(material1);
+
+        assertEquals(unit1, unit2);
+        assertEquals(unit1.hashCode(), unit2.hashCode());
+
+        // Units add them in different orders but units should be sorted during comparisons and hash verification
+        unit1.addMaterial(material2);
+        unit1.addMaterial(material3);
+
+        assertNotEquals(unit1, unit2);
+        assertNotEquals(unit1.hashCode(), unit2.hashCode());
+
+        unit2.addMaterial(material3);
+        unit2.addMaterial(material2);
 
         assertEquals(unit1, unit2);
         assertEquals(unit1.hashCode(), unit2.hashCode());

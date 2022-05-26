@@ -42,6 +42,10 @@ public final class MaterialsUnit {
     public List<Material> getMaterials() {
         return _materials;
     }
+    @Nonnull
+    public List<Material> getSortedMaterials() {
+        return getMaterials().stream().sorted(Comparator.comparing(Material::getName)).collect(Collectors.toList());
+    }
 
     /**
      * Write the unit using the standard text serialization mechanisms to the specified output object.
@@ -50,9 +54,7 @@ public final class MaterialsUnit {
      * @throws IOException if there is an error writing to MaterialOutput
      */
     public void write(@Nonnull final MaterialOutput output) throws IOException {
-        final List<Material> materials =
-                getMaterials().stream().sorted(Comparator.comparing(Material::getName)).collect(Collectors.toList());
-        for (final Material material : materials) {
+        for (final Material material : getSortedMaterials()) {
             material.write(output);
         }
     }
@@ -65,13 +67,13 @@ public final class MaterialsUnit {
             return false;
         } else {
             final MaterialsUnit that = (MaterialsUnit) o;
-            return _materials.equals(that._materials);
+            return getSortedMaterials().equals(that.getSortedMaterials());
         }
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_materials);
+        return Objects.hash(getSortedMaterials());
     }
 
     @Nonnull
