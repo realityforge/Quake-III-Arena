@@ -34,23 +34,9 @@ public class Main implements Callable<Integer> {
     private boolean _identityTransform;
     @Override
     public Integer call() throws Exception {
-        final List<MaterialsUnit> units = new ArrayList<>();
-        for (final Path input : _input) {
-            final MaterialsUnit unit = loadUnit(input);
-            if (null == unit) {
-                return 1;
-            } else {
-                if (_identityTransform && !verifyIdentityTransform(input, unit)) {
-                    return 1;
-                }
-                units.add(unit);
-            }
-        }
-        final MaterialsUnit unit;
-        if (1 != units.size()) {
-            unit = merge(units);
-        } else {
-            unit = units.get(0);
+        final MaterialsUnit unit = loadInputs();
+        if (null == unit) {
+            return 1;
         }
         if (null != _output) {
             if (_identityTransform && !verifyIdentityTransform(_output, unit)) {
@@ -74,6 +60,27 @@ public class Main implements Callable<Integer> {
             System.out.print(unit);
         }
         return 0;
+    }
+
+    @Nullable
+    private MaterialsUnit loadInputs() throws MaterialsReadException {
+        final List<MaterialsUnit> units = new ArrayList<>();
+        for (final Path input : _input) {
+            final MaterialsUnit unit = loadUnit(input);
+            if (null == unit) {
+                return null;
+            } else {
+                if (_identityTransform && !verifyIdentityTransform(input, unit)) {
+                    return null;
+                }
+                units.add(unit);
+            }
+        }
+        if (1 != units.size()) {
+            return merge(units);
+        } else {
+            return units.get(0);
+        }
     }
 
     private boolean verifyIdentityTransform(@Nonnull final Path file, @Nonnull final MaterialsUnit unit) throws MaterialsReadException {
