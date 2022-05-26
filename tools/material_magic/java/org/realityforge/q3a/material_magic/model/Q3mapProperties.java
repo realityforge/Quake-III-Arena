@@ -7,6 +7,8 @@ import javax.annotation.Nullable;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
 public final class Q3mapProperties {
+    public static final int DEFAULT_BACKSPLASH_PERCENT = 5;
+    public static final int DEFAULT_BACKSPLASH_DISTANCE = 16;
     private boolean _globalTexture;
     private boolean _forceSunLight;
     private boolean _noVertexShadows;
@@ -16,6 +18,8 @@ public final class Q3mapProperties {
     private int _lightSubDivide;
     // subdivisions
     private int _tessSize;
+    private int _backsplashPercent = DEFAULT_BACKSPLASH_PERCENT;
+    private int _backsplashDistance = DEFAULT_BACKSPLASH_DISTANCE;
     @Nullable
     private String _lightImage;
     @Nullable
@@ -73,6 +77,26 @@ public final class Q3mapProperties {
         _tessSize = tessSize;
     }
 
+    public int getBacksplashPercent()
+    {
+        return _backsplashPercent;
+    }
+
+    public void setBacksplashPercent( final int backsplashPercent )
+    {
+        _backsplashPercent = backsplashPercent;
+    }
+
+    public int getBacksplashDistance()
+    {
+        return _backsplashDistance;
+    }
+
+    public void setBacksplashDistance( final int backsplashDistance )
+    {
+        _backsplashDistance = backsplashDistance;
+    }
+
     @Nullable
     public String getLightImage() {
         return _lightImage;
@@ -114,6 +138,13 @@ public final class Q3mapProperties {
             if (null != _flare) {
                 output.writeProperty("q3map_flare", _flare);
             }
+            if ( DEFAULT_BACKSPLASH_PERCENT != _backsplashPercent ||
+                 DEFAULT_BACKSPLASH_DISTANCE != _backsplashDistance )
+            {
+                output.writeProperty( "q3map_backsplash",
+                                      Integer.toString( _backsplashPercent ),
+                                      Integer.toString( _backsplashDistance ) );
+            }
             if (0 != _tessSize) {
                 output.writeProperty("tesssize", Integer.toString(_tessSize));
             }
@@ -134,6 +165,8 @@ public final class Q3mapProperties {
                     _surfaceLight == that._surfaceLight &&
                    _lightSubDivide == that._lightSubDivide &&
                    _tessSize == that._tessSize &&
+                   _backsplashPercent == that._backsplashPercent &&
+                   _backsplashDistance == that._backsplashDistance &&
                     Objects.equals(_lightImage, that._lightImage) &&
                     Objects.equals(_flare, that._flare);
         }
@@ -147,6 +180,8 @@ public final class Q3mapProperties {
                              _surfaceLight,
                              _lightSubDivide,
                              _tessSize,
+                             _backsplashPercent,
+                             _backsplashDistance,
                              _lightImage,
                              _flare );
     }

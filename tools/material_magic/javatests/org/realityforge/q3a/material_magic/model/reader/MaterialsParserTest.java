@@ -43,7 +43,7 @@ public final class MaterialsParserTest {
         final MaterialsParser.Q3mapMaterialPropertyContext materialProperty4 = material.materialProperties().materialProperties().materialProperties().materialProperties().materialProperty().q3mapMaterialProperty();
         final MaterialsParser.Q3mapMaterialPropertyContext materialProperty5 = material.materialProperties().materialProperties().materialProperties().materialProperties().materialProperties().materialProperty().q3mapMaterialProperty();
         assertNotNull(materialProperty1.Q3MAP_SURFACELIGHT());
-        assertEquals("1500", materialProperty1.POSITIVE_INTEGER().getText());
+        assertEquals("1500", materialProperty1.POSITIVE_INTEGER().get(0).getText());
         assertNotNull(materialProperty2.Q3MAP_LIGHTIMAGE());
         assertEquals("textures/wall/glowglow", materialProperty2.LABEL().getText());
         assertNotNull(materialProperty3.Q3MAP_NOVERTEXSHADOWS());

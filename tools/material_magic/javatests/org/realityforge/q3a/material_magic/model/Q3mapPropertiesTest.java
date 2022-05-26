@@ -18,6 +18,8 @@ public final class Q3mapPropertiesTest {
         assertEquals(0, properties.getSurfaceLight());
         assertEquals(0, properties.getLightSubDivide());
         assertEquals(0, properties.getTessSize());
+        assertEquals(Q3mapProperties.DEFAULT_BACKSPLASH_PERCENT, properties.getBacksplashPercent());
+        assertEquals(Q3mapProperties.DEFAULT_BACKSPLASH_DISTANCE, properties.getBacksplashDistance());
         assertEquals("", MaterialOutput.outputAsString(properties::write));
         assertEquals("", MaterialOutput.outputAsString(properties::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
 
@@ -30,6 +32,8 @@ public final class Q3mapPropertiesTest {
         assertEquals(0, properties.getSurfaceLight());
         assertEquals(0, properties.getLightSubDivide());
         assertEquals(0, properties.getTessSize());
+        assertEquals(Q3mapProperties.DEFAULT_BACKSPLASH_PERCENT, properties.getBacksplashPercent());
+        assertEquals(Q3mapProperties.DEFAULT_BACKSPLASH_DISTANCE, properties.getBacksplashDistance());
         assertEquals("q3map_forcesunlight\n", MaterialOutput.outputAsString(properties::write));
         assertEquals("", MaterialOutput.outputAsString(properties::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
 
@@ -40,6 +44,8 @@ public final class Q3mapPropertiesTest {
         properties.setSurfaceLight(500);
         properties.setLightSubDivide(200);
         properties.setTessSize(64);
+        properties.setBacksplashPercent(0);
+        properties.setBacksplashDistance(0);
 
         assertTrue(properties.forceSunLight());
         assertTrue(properties.noVertexShadows());
@@ -49,6 +55,8 @@ public final class Q3mapPropertiesTest {
         assertEquals(500, properties.getSurfaceLight());
         assertEquals(200, properties.getLightSubDivide());
         assertEquals(64, properties.getTessSize());
+        assertEquals(0, properties.getBacksplashDistance());
+        assertEquals(0, properties.getBacksplashDistance());
         assertEquals("q3map_surfacelight 500\n" +
                      "q3map_lightsubdivide 200\n" +
                         "q3map_lightimage images/foo\n" +
@@ -56,6 +64,7 @@ public final class Q3mapPropertiesTest {
                         "q3map_novertexshadows\n" +
                         "q3map_forcesunlight\n" +
                         "q3map_flare flareshader\n"+
+                        "q3map_backsplash 0 0\n"+
                         "tesssize 64\n",
                 MaterialOutput.outputAsString(properties::write));
         assertEquals("", MaterialOutput.outputAsString(properties::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
@@ -75,6 +84,29 @@ public final class Q3mapPropertiesTest {
         assertNotEquals(properties1.hashCode(), properties2.hashCode());
 
         properties2.setTessSize(32);
+
+        assertEquals(properties1, properties2);
+        assertEquals(properties1.hashCode(), properties2.hashCode());
+
+        assertEquals(properties1, properties2);
+        assertEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties1.setBacksplashPercent(55);
+
+        assertNotEquals(properties1, properties2);
+        assertNotEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties2.setBacksplashPercent(55);
+
+        assertEquals(properties1, properties2);
+        assertEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties1.setBacksplashDistance(56);
+
+        assertNotEquals(properties1, properties2);
+        assertNotEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties2.setBacksplashDistance(56);
 
         assertEquals(properties1, properties2);
         assertEquals(properties1.hashCode(), properties2.hashCode());

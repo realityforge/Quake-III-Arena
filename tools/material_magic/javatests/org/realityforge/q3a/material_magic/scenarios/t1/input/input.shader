@@ -14,6 +14,7 @@ cull twosided
 q3map_novertexshadows
 q3map_globaltexture
 q3map_lightsubdivide 22
+q3map_backsplash 100 8
 }
 
 

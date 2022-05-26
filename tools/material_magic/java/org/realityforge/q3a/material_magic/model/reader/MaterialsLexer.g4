@@ -21,6 +21,7 @@ Q3MAP_SURFACELIGHT : 'q3map_surfacelight';
 Q3MAP_NOVERTEXSHADOWS : 'q3map_novertexshadows';
 Q3MAP_FORCESUNLIGHT : 'q3map_forcesunlight';
 Q3MAP_LIGHTSUBDIVIDE : 'q3map_lightsubdivide';
+Q3MAP_BACKSPLASH : 'q3map_backsplash';
 TESSSIZE : 'tesssize';
 Q3MAP_FLARE : 'q3map_flare';
 // light <value> is the old style flare specification which is equivalent to "q3map_flare flareshader"

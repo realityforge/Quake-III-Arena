@@ -26,9 +26,9 @@ final class ModelBuilderListener extends MaterialsParserBaseListener {
     public void exitQ3mapMaterialProperty(@Nonnull final MaterialsParser.Q3mapMaterialPropertyContext ctx) {
         final Q3mapProperties q3map = _material.q3map();
         if (null != ctx.Q3MAP_SURFACELIGHT()) {
-            q3map.setSurfaceLight(Integer.parseInt(ctx.POSITIVE_INTEGER().getText()));
+            q3map.setSurfaceLight(Integer.parseInt(ctx.POSITIVE_INTEGER().get( 0 ).getText()));
         } else if (null != ctx.Q3MAP_LIGHTSUBDIVIDE()) {
-            q3map.setLightSubDivide(Integer.parseInt(ctx.POSITIVE_INTEGER().getText()));
+            q3map.setLightSubDivide(Integer.parseInt(ctx.POSITIVE_INTEGER().get( 0 ).getText()));
         } else if (null != ctx.Q3MAP_LIGHTIMAGE()) {
             q3map.setLightImage(ctx.LABEL().getText());
         } else if (null != ctx.Q3MAP_NOVERTEXSHADOWS()) {
@@ -39,8 +39,11 @@ final class ModelBuilderListener extends MaterialsParserBaseListener {
             q3map.setForceSunLight(true);
         } else if (null != ctx.Q3MAP_FLARE()) {
             q3map.setFlare(ctx.LABEL().getText());
+        } else if (null != ctx.Q3MAP_BACKSPLASH()) {
+            q3map.setBacksplashPercent( Integer.parseInt( ctx.POSITIVE_INTEGER().get( 0 ).getText() ) );
+            q3map.setBacksplashDistance( Integer.parseInt( ctx.POSITIVE_INTEGER().get( 1 ).getText() ) );
         } else if (null != ctx.TESSSIZE()) {
-            q3map.setTessSize(Integer.parseInt(ctx.POSITIVE_INTEGER().getText()));
+            q3map.setTessSize(Integer.parseInt(ctx.POSITIVE_INTEGER().get( 0 ).getText()));
         } else if (null != ctx.LIGHT()) {
             q3map.setFlare("flareshader");
         } else {

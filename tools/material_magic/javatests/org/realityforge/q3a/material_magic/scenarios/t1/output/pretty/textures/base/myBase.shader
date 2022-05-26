@@ -7,6 +7,7 @@ textures/base/myBase
   q3map_novertexshadows
   q3map_forcesunlight
   q3map_flare flareshader
+  q3map_backsplash 100 8
   qer_editorimage textures/sfx/xyz
   qer_nocarve
   qer_trans 0.3
