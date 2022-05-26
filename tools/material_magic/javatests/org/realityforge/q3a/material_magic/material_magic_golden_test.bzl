@@ -54,16 +54,24 @@ def material_magic_golden_test(name, inputs, materials):
         tools = ["//tools/material_magic/java/org/realityforge/q3a/material_magic:Main"],
     )
 
+    _runfiles_path = "tools/material_magic/javatests/org/realityforge/q3a/material_magic/output/%s/output" % name
+    _workspace_path = "$${BUILD_WORKSPACE_DIRECTORY}/tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/%s/output" % name
     native.genrule(
         name = "%s_update_goldens_script" % name,
         outs = ["%s_update_goldens.sh" % name],
         cmd = "\n".join(
             ["cat <<'EOF' >$@", "#!/bin/bash"] +
-            ["mkdir -p $${BUILD_WORKSPACE_DIRECTORY}/tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/%s/output" % name] +
-            ["cp $(rootpath output/%s/output/pretty/output.shader) $${BUILD_WORKSPACE_DIRECTORY}/tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/%s/output/pretty/output.shader" % (name, name)] +
-            ["cp $(rootpath output/%s/output/pretty/%s.shader) $${BUILD_WORKSPACE_DIRECTORY}/tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/%s/output/pretty/%s.shader" % (name, m, name, m) for m in materials] +
-            ["cp $(rootpath output/%s/output/optimized/output.shader) $${BUILD_WORKSPACE_DIRECTORY}/tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/%s/output/optimized/output.shader" % (name, name)] +
-            ["cp $(rootpath output/%s/output/optimized/%s.shader) $${BUILD_WORKSPACE_DIRECTORY}/tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/%s/output/optimized/%s.shader" % (name, m, name, m) for m in materials] +
+            ["mkdir -p %s" % _workspace_path] +
+            ["mkdir -p $$(dirname %s/pretty/%s.shader)" % (_workspace_path, m) for m in materials] +
+            ["mkdir -p $$(dirname %s/optimized/%s.shader)" % (_workspace_path, m) for m in materials] +
+            ["cp -f %s/pretty/output.shader %s/pretty/output.shader" % (_runfiles_path, _workspace_path)] +
+            ["chmod u+w  %s/pretty/output.shader %s/pretty/output.shader" % (_runfiles_path, _workspace_path)] +
+            ["cp -f %s/pretty/%s.shader %s/pretty/%s.shader" % (_runfiles_path, m, _workspace_path, m) for m in materials] +
+            ["chmod u+w  %s/pretty/%s.shader %s/pretty/%s.shader" % (_runfiles_path, m, _workspace_path, m) for m in materials] +
+            ["cp -f %s/optimized/output.shader %s/optimized/output.shader" % (_runfiles_path, _workspace_path)] +
+            ["chmod u+w %s/optimized/output.shader %s/optimized/output.shader" % (_runfiles_path, _workspace_path)] +
+            ["cp -f %s/optimized/%s.shader %s/optimized/%s.shader" % (_runfiles_path, m, _workspace_path, m) for m in materials] +
+            ["chmod u+w %s/optimized/%s.shader %s/optimized/%s.shader" % (_runfiles_path, m, _workspace_path, m) for m in materials] +
             ["EOF"],
         ),
         executable = True,
@@ -89,3 +97,17 @@ def material_magic_golden_test(name, inputs, materials):
         file1 = "output/%s/output/optimized/output.shader" % name,
         file2 = "scenarios/%s/output/optimized/output.shader" % name,
     )
+
+    for m in materials:
+        diff_test(
+            name = "%s_pretty_output_%s_test" % (name, m.replace("/", "_")),
+            size = "small",
+            file1 = "output/%s/output/pretty/%s.shader" % (name, m),
+            file2 = "scenarios/%s/output/pretty/%s.shader" % (name, m),
+        )
+        diff_test(
+            name = "%s_optimized_output_%s_test" % (name, m.replace("/", "_")),
+            size = "small",
+            file1 = "output/%s/output/optimized/%s.shader" % (name, m),
+            file2 = "scenarios/%s/output/optimized/%s.shader" % (name, m),
+        )

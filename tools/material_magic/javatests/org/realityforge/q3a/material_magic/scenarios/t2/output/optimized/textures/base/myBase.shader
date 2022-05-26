@@ -1,0 +1,3 @@
+textures/base/myBase
+{
+}
