@@ -24,7 +24,7 @@ textures/base/myBase_3
   cull disable
 }
 
-textures/base/myBase_3
+textures/base/myBase_4
 {
   cull back
 }
