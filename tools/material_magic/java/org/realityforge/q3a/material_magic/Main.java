@@ -52,7 +52,7 @@ public class Main implements Callable<Integer> {
             for (final Material material : unit.getMaterials()) {
                 final MaterialsUnit newUnit = new MaterialsUnit();
                 newUnit.addMaterial(material);
-                if (!writeUnit(_output.resolve(material.getName()), newUnit)) {
+                if (!writeUnit(_output.resolve(material.getName() + MaterialsUnit.EXTENSION), newUnit)) {
                     return 1;
                 }
             }

@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
  */
 public final class MaterialsUnit {
     @Nonnull
+    public static final String EXTENSION = ".shader";
+    @Nonnull
     private final List<Material> _materials = new ArrayList<>();
 
     /**
