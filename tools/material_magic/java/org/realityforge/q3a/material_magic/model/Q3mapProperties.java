@@ -11,7 +11,7 @@ public final class Q3mapProperties {
     private boolean _globalTexture;
     private boolean _forceSunLight;
     private boolean _noVertexShadows;
-    // A positive value
+    // A positive value or 0 to omit
     private int _surfaceLight;
     // A positive value or 0 to omit
     private int _lightSubDivide;
