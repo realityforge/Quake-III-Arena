@@ -30,6 +30,5 @@ junit5_test(
     deps = [
         "//tools/material_magic/java/org/realityforge/q3a/material_magic/model",
         "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader",
-        "@antlr4_runtime//jar",
     ],
 )
