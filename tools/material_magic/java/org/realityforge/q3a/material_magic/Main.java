@@ -1,5 +1,6 @@
 package org.realityforge.q3a.material_magic;
 
+import org.realityforge.q3a.material_magic.model.Material;
 import org.realityforge.q3a.material_magic.model.MaterialsUnit;
 import org.realityforge.q3a.material_magic.model.reader.LoadError;
 import org.realityforge.q3a.material_magic.model.reader.MaterialsReadException;
@@ -29,6 +30,8 @@ public class Main implements Callable<Integer> {
     private List<Path> _input;
     @CommandLine.Option(names = {"-o", "--output-file"}, description = "The file to save unit to", paramLabel = "O")
     private Path _output;
+    @CommandLine.Option(names = {"-d", "--output-directory"}, description = "The directory in which to save shaders. One file per material", paramLabel = "D")
+    private Path _outputDirectory;
     @CommandLine.Option(names = {"--optimize"}, description = "Optimize the unit for loading by the engine by stripping tooling data", arity = "0")
     private boolean _optimize;
     @CommandLine.Option(names = {"--identity-transform"}, description = "Attempt to perform the identity transform and verify the pre-transform and post-transform match. This is done for every unit after loading and every unit prior to saving. This primarily used to verify the integrity of the tool.", arity = "0")
@@ -43,7 +46,19 @@ public class Main implements Callable<Integer> {
             if (!writeUnit(_output, unit)) {
                 return 1;
             }
-        } else {
+        }
+
+        if (null != _outputDirectory) {
+            for (final Material material : unit.getMaterials()) {
+                final MaterialsUnit newUnit = new MaterialsUnit();
+                newUnit.addMaterial(material);
+                if (!writeUnit(_output.resolve(material.getName()), newUnit)) {
+                    return 1;
+                }
+            }
+        }
+
+        if (null == _output && null == _outputDirectory) {
             System.out.print(unit);
         }
         return 0;
