@@ -11,24 +11,46 @@
 # limitations under the License.
 load("@bazel_skylib//rules:diff_test.bzl", "diff_test")
 
-def material_magic_golden_test(name, inputs):
+def material_magic_golden_test(name, inputs, materials):
     actual_inputs = ["scenarios/%s/input/%s" % (name, o) for o in inputs]
-    actual_pretty_outputs = ["output/%s/output/pretty/output.shader" % name]
-    actual_optimized_outputs = ["output/%s/output/optimized/output.shader" % name]
-    actual_outputs = actual_pretty_outputs + actual_optimized_outputs
+    pretty_output_dir = "output/%s/output/pretty" % name
+    optimized_output_dir = "output/%s/output/optimized" % name
+    actual_single_file_pretty_outputs = ["%s/output.shader" % pretty_output_dir]
+    actual_multi_file_pretty_outputs = ["%s/%s.shader" % (pretty_output_dir, m) for m in materials]
+    actual_single_file_optimized_outputs = ["%s/output.shader" % optimized_output_dir]
+    actual_multi_file_optimized_outputs = ["%s/%s.shader" % (optimized_output_dir, m) for m in materials]
+
+    actual_outputs = actual_single_file_pretty_outputs + actual_multi_file_pretty_outputs + actual_single_file_optimized_outputs + actual_multi_file_optimized_outputs
+
     native.genrule(
-        name = "%s_pretty_generator" % name,
+        name = "%s_single_file_pretty_generator" % name,
         srcs = actual_inputs,
-        outs = actual_pretty_outputs,
+        outs = actual_single_file_pretty_outputs,
         cmd = "$(execpath //tools/material_magic/java/org/realityforge/q3a/material_magic:Main) --identity-transform --output-file $@ " + " ".join(["--input-file $(execpath %s)" % i for i in actual_inputs]),
         tools = ["//tools/material_magic/java/org/realityforge/q3a/material_magic:Main"],
     )
 
     native.genrule(
-        name = "%s_optimized_generator" % name,
+        name = "%s_multi_file_pretty_generator" % name,
         srcs = actual_inputs,
-        outs = actual_optimized_outputs,
+        outs = actual_multi_file_pretty_outputs,
+        cmd = "$(execpath //tools/material_magic/java/org/realityforge/q3a/material_magic:Main) --identity-transform --output-directory $(rootpath %s) " % pretty_output_dir + " ".join(["--input-file $(execpath %s)" % i for i in actual_inputs]),
+        tools = ["//tools/material_magic/java/org/realityforge/q3a/material_magic:Main"],
+    )
+
+    native.genrule(
+        name = "%s_single_file_optimized_generator" % name,
+        srcs = actual_inputs,
+        outs = actual_single_file_optimized_outputs,
         cmd = "$(execpath //tools/material_magic/java/org/realityforge/q3a/material_magic:Main) --identity-transform --optimize --output-file $@ " + " ".join(["--input-file $(execpath %s)" % i for i in actual_inputs]),
+        tools = ["//tools/material_magic/java/org/realityforge/q3a/material_magic:Main"],
+    )
+
+    native.genrule(
+        name = "%s_multi_file_optimized_generator" % name,
+        srcs = actual_inputs,
+        outs = actual_multi_file_optimized_outputs,
+        cmd = "$(execpath //tools/material_magic/java/org/realityforge/q3a/material_magic:Main) --identity-transform --optimize --output-directory $(rootpath %s) " % optimized_output_dir + " ".join(["--input-file $(execpath %s)" % i for i in actual_inputs]),
         tools = ["//tools/material_magic/java/org/realityforge/q3a/material_magic:Main"],
     )
 
@@ -39,7 +61,9 @@ def material_magic_golden_test(name, inputs):
             ["cat <<'EOF' >$@", "#!/bin/bash"] +
             ["mkdir -p $${BUILD_WORKSPACE_DIRECTORY}/tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/%s/output" % name] +
             ["cp $(rootpath output/%s/output/pretty/output.shader) $${BUILD_WORKSPACE_DIRECTORY}/tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/%s/output/pretty/output.shader" % (name, name)] +
+            ["cp $(rootpath output/%s/output/pretty/%s.shader) $${BUILD_WORKSPACE_DIRECTORY}/tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/%s/output/pretty/%s.shader" % (name, m, name, m) for m in materials] +
             ["cp $(rootpath output/%s/output/optimized/output.shader) $${BUILD_WORKSPACE_DIRECTORY}/tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/%s/output/optimized/output.shader" % (name, name)] +
+            ["cp $(rootpath output/%s/output/optimized/%s.shader) $${BUILD_WORKSPACE_DIRECTORY}/tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/%s/output/optimized/%s.shader" % (name, m, name, m) for m in materials] +
             ["EOF"],
         ),
         executable = True,
