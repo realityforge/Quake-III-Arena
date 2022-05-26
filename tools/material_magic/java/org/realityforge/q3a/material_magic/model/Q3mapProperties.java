@@ -14,6 +14,8 @@ public final class Q3mapProperties {
     private int _surfaceLight;
     // A positive value or 0 to omit
     private int _lightSubDivide;
+    // subdivisions
+    private int _tessSize;
     @Nullable
     private String _lightImage;
     @Nullable
@@ -61,6 +63,16 @@ public final class Q3mapProperties {
         _lightSubDivide = lightSubDivide;
     }
 
+    public int getTessSize()
+    {
+        return _tessSize;
+    }
+
+    public void setTessSize( final int tessSize )
+    {
+        _tessSize = tessSize;
+    }
+
     @Nullable
     public String getLightImage() {
         return _lightImage;
@@ -102,6 +114,9 @@ public final class Q3mapProperties {
             if (null != _flare) {
                 output.writeProperty("q3map_flare", _flare);
             }
+            if (0 != _tessSize) {
+                output.writeProperty("tesssize", Integer.toString(_tessSize));
+            }
         }
     }
 
@@ -118,6 +133,7 @@ public final class Q3mapProperties {
                     _noVertexShadows == that._noVertexShadows &&
                     _surfaceLight == that._surfaceLight &&
                    _lightSubDivide == that._lightSubDivide &&
+                   _tessSize == that._tessSize &&
                     Objects.equals(_lightImage, that._lightImage) &&
                     Objects.equals(_flare, that._flare);
         }
@@ -125,6 +141,13 @@ public final class Q3mapProperties {
 
     @Override
     public int hashCode() {
-        return Objects.hash(_globalTexture, _forceSunLight, _noVertexShadows, _surfaceLight,_lightSubDivide, _lightImage, _flare);
+        return Objects.hash( _globalTexture,
+                             _forceSunLight,
+                             _noVertexShadows,
+                             _surfaceLight,
+                             _lightSubDivide,
+                             _tessSize,
+                             _lightImage,
+                             _flare );
     }
 }

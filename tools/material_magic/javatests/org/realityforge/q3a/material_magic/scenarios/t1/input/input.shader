@@ -25,6 +25,7 @@ q3map_lightsubdivide 22
             // This is a non-normalized form of "cull back"
             cull backsided
 q3map_flare whoosh
+tesssize 32
 }
 
 textures/base/myBase_4 { /* This is a non-normalized form of "cull back" */ cull backsided }

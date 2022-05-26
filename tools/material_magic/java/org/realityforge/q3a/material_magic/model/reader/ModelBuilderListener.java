@@ -39,6 +39,8 @@ final class ModelBuilderListener extends MaterialsParserBaseListener {
             q3map.setForceSunLight(true);
         } else if (null != ctx.Q3MAP_FLARE()) {
             q3map.setFlare(ctx.LABEL().getText());
+        } else if (null != ctx.TESSSIZE()) {
+            q3map.setTessSize(Integer.parseInt(ctx.POSITIVE_INTEGER().getText()));
         } else if (null != ctx.LIGHT()) {
             q3map.setFlare("flareshader");
         } else {

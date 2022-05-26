@@ -17,6 +17,7 @@ public final class Q3mapPropertiesTest {
         assertNull(properties.getLightImage());
         assertEquals(0, properties.getSurfaceLight());
         assertEquals(0, properties.getLightSubDivide());
+        assertEquals(0, properties.getTessSize());
         assertEquals("", MaterialOutput.outputAsString(properties::write));
         assertEquals("", MaterialOutput.outputAsString(properties::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
 
@@ -28,6 +29,7 @@ public final class Q3mapPropertiesTest {
         assertNull(properties.getLightImage());
         assertEquals(0, properties.getSurfaceLight());
         assertEquals(0, properties.getLightSubDivide());
+        assertEquals(0, properties.getTessSize());
         assertEquals("q3map_forcesunlight\n", MaterialOutput.outputAsString(properties::write));
         assertEquals("", MaterialOutput.outputAsString(properties::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
 
@@ -37,6 +39,7 @@ public final class Q3mapPropertiesTest {
         properties.setLightImage("images/foo");
         properties.setSurfaceLight(500);
         properties.setLightSubDivide(200);
+        properties.setTessSize(64);
 
         assertTrue(properties.forceSunLight());
         assertTrue(properties.noVertexShadows());
@@ -45,13 +48,15 @@ public final class Q3mapPropertiesTest {
         assertEquals("images/foo", properties.getLightImage());
         assertEquals(500, properties.getSurfaceLight());
         assertEquals(200, properties.getLightSubDivide());
+        assertEquals(64, properties.getTessSize());
         assertEquals("q3map_surfacelight 500\n" +
                      "q3map_lightsubdivide 200\n" +
                         "q3map_lightimage images/foo\n" +
                         "q3map_globaltexture\n" +
                         "q3map_novertexshadows\n" +
                         "q3map_forcesunlight\n" +
-                        "q3map_flare flareshader\n",
+                        "q3map_flare flareshader\n"+
+                        "tesssize 64\n",
                 MaterialOutput.outputAsString(properties::write));
         assertEquals("", MaterialOutput.outputAsString(properties::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
     }
@@ -60,6 +65,16 @@ public final class Q3mapPropertiesTest {
     public void testEqualsAndHash() {
         final Q3mapProperties properties1 = new Q3mapProperties();
         final Q3mapProperties properties2 = new Q3mapProperties();
+
+        assertEquals(properties1, properties2);
+        assertEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties1.setTessSize(32);
+
+        assertNotEquals(properties1, properties2);
+        assertNotEquals(properties1.hashCode(), properties2.hashCode());
+
+        properties2.setTessSize(32);
 
         assertEquals(properties1, properties2);
         assertEquals(properties1.hashCode(), properties2.hashCode());
