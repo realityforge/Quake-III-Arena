@@ -33,3 +33,16 @@ material_magic_golden_test(
         "textures/base/myBase2",
     ],
 )
+
+load("@com_github_ash2k_bazel_tools//multirun:def.bzl", "multirun")
+
+# Runs all the update_goldens targets
+multirun(
+    name = "update_goldens",
+    commands = [
+        ":t1_update_goldens",
+        ":t2_update_goldens",
+    ],
+    jobs = 0,
+    stop_on_error = False,
+)
