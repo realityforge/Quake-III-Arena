@@ -40,11 +40,21 @@ public class Main implements Callable<Integer> {
             return 1;
         }
         if (null != _output) {
-            if (_identityTransform && !verifyIdentityTransform(_output, unit)) {
+            if (!writeUnit(_output, unit)) {
                 return 1;
             }
-            final Path directory = _output.getParent();
+        } else {
+            System.out.print(unit);
+        }
+        return 0;
+    }
+
+    private boolean writeUnit(@Nonnull final Path path, @Nonnull final MaterialsUnit unit) {
+        if (_identityTransform && !verifyIdentityTransform(path, unit)) {
+            return false;
+        } else {
             try {
+                final Path directory = path.getParent();
                 if (!Files.exists(directory)) {
                     Files.createDirectories(directory);
                 }
@@ -52,15 +62,13 @@ public class Main implements Callable<Integer> {
                 final MaterialOutput.Strategy strategy =
                         _optimize ? MaterialOutput.Strategy.RUNTIME_OPTIMIZED : MaterialOutput.Strategy.PRETTY;
                 unit.write(new MaterialOutput(baos, strategy));
-                Files.write(_output, baos.toByteArray());
+                Files.write(path, baos.toByteArray());
             } catch (final IOException ioe) {
-                System.err.println("Failed to write output file " + _output + " due to " + ioe);
-                return 1;
+                System.err.println("Failed to write output file " + path + " due to " + ioe);
+                return false;
             }
-        } else {
-            System.out.print(unit);
         }
-        return 0;
+        return true;
     }
 
     @Nullable
