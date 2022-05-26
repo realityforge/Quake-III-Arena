@@ -34,7 +34,7 @@ def material_magic_golden_test(name, inputs, materials):
         name = "%s_multi_file_pretty_generator" % name,
         srcs = actual_inputs,
         outs = actual_multi_file_pretty_outputs,
-        cmd = "$(execpath //tools/material_magic/java/org/realityforge/q3a/material_magic:Main) --identity-transform --output-directory $(rootpath %s) " % pretty_output_dir + " ".join(["--input-file $(execpath %s)" % i for i in actual_inputs]),
+        cmd = "$(execpath //tools/material_magic/java/org/realityforge/q3a/material_magic:Main) --identity-transform --output-directory $(RULEDIR)/%s " % pretty_output_dir + " ".join(["--input-file $(execpath %s)" % i for i in actual_inputs]),
         tools = ["//tools/material_magic/java/org/realityforge/q3a/material_magic:Main"],
     )
 
@@ -50,7 +50,7 @@ def material_magic_golden_test(name, inputs, materials):
         name = "%s_multi_file_optimized_generator" % name,
         srcs = actual_inputs,
         outs = actual_multi_file_optimized_outputs,
-        cmd = "$(execpath //tools/material_magic/java/org/realityforge/q3a/material_magic:Main) --identity-transform --optimize --output-directory $(rootpath %s) " % optimized_output_dir + " ".join(["--input-file $(execpath %s)" % i for i in actual_inputs]),
+        cmd = "$(execpath //tools/material_magic/java/org/realityforge/q3a/material_magic:Main) --identity-transform --optimize --output-directory $(RULEDIR)/%s " % optimized_output_dir + " ".join(["--input-file $(execpath %s)" % i for i in actual_inputs]),
         tools = ["//tools/material_magic/java/org/realityforge/q3a/material_magic:Main"],
     )
 
