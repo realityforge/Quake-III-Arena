@@ -1,6 +1,7 @@
 package org.realityforge.q3a.material_magic.model.reader;
 
 import javax.annotation.Nonnull;
+import org.realityforge.q3a.material_magic.model.CullType;
 import org.realityforge.q3a.material_magic.model.Material;
 import org.realityforge.q3a.material_magic.model.MaterialsUnit;
 import org.realityforge.q3a.material_magic.model.Q3mapProperties;
