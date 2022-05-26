@@ -83,6 +83,7 @@ public class Main implements Callable<Integer> {
         }
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean verifyIdentityTransform(@Nonnull final Path file, @Nonnull final MaterialsUnit unit) throws MaterialsReadException {
         final MaterialsUnit transformedUnit = MaterialsUnitReader.readFromString(unit.toString());
         if (!transformedUnit.equals(unit)) {
