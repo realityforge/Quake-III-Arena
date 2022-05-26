@@ -41,12 +41,12 @@ The major changes of the project are tracked in this table.
     </tr>
     <tr valign="top">
       <td><a href="improve_build_automation.html#phase_1">Improve Build Automation - Phase 1</a></td>
-      <td>4?</td>
-      <td>8?</td>
+      <td>4</td>
+      <td>8</td>
       <td>0</td>
-      <td>90%</td>
+      <td>Complete</td>
       <td>2022-03-01</td>
-      <td>&nbsp;</td>
+      <td>2022-05-27</td>
     </tr>
     <tr valign="top">
       <td><a href="convert_tga_assets_to_png.html">Convert TGA Assets to PNG</a></td>
