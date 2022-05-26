@@ -31,6 +31,8 @@ QER_EDITORIMAGE : 'qer_editorimage';
 QER_NOCARVE : 'qer_nocarve';
 QER_TRANS : 'qer_trans';
 
+SURFACE_PARM : 'surfaceparm';
+
 // Used by light property
 ONE_INTEGER : '1';
 

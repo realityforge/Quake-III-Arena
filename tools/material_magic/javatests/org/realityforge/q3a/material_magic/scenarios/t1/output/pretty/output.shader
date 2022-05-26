@@ -12,6 +12,8 @@ textures/base/myBase
   qer_nocarve
   qer_trans 0.3
   cull disable
+  surfaceparm nomarks
+  surfaceparm trans
 }
 
 textures/base/myBase2
@@ -20,6 +22,9 @@ textures/base/myBase2
   q3map_flare whoosh
   tesssize 32
   cull back
+  surfaceparm noimpact
+  surfaceparm nolightmap
+  surfaceparm sky
 }
 
 textures/base/myBase_3

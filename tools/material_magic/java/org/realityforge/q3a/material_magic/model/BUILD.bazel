@@ -19,6 +19,7 @@ java_library(
         "MaterialsUnit.java",
         "Q3mapProperties.java",
         "QerProperties.java",
+        "SurfaceProperty.java",
     ],
     visibility = [
         "//tools/material_magic/java/org/realityforge/q3a/material_magic:__pkg__",

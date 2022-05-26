@@ -29,6 +29,9 @@ public final class MaterialTest {
         material.q3map().setNoVertexShadows(true);
         material.q3map().setLightImage("tex/img");
         material.setCull( CullType.BACK);
+        material.getSurfaceProperties().add( SurfaceProperty.botclip );
+        material.getSurfaceProperties().add( SurfaceProperty.slime );
+        material.getSurfaceProperties().add( SurfaceProperty.dust );
 
         assertTrue(material.hasQ3map());
 
@@ -40,8 +43,18 @@ public final class MaterialTest {
                 "  q3map_novertexshadows\n" +
                 "  q3map_forcesunlight\n" +
                 "  cull back\n" +
+                "  surfaceparm botclip\n" +
+                "  surfaceparm dust\n" +
+                "  surfaceparm slime\n" +
                 "}\n", material.toString());
-        assertEquals("materials/my/Material2\n{\ncull back\n}\n", MaterialOutput.outputAsString(material::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
+        assertEquals("materials/my/Material2\n" +
+                     "{\n" +
+                     "cull back\n" +
+                     "surfaceparm botclip\n" +
+                     "surfaceparm dust\n" +
+                     "surfaceparm slime\n" +
+                     "}\n",
+                     MaterialOutput.outputAsString(material::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
     }
 
     @Test
@@ -81,6 +94,19 @@ public final class MaterialTest {
         assertNotEquals(material1.hashCode(), material2.hashCode());
 
         material2.q3map().setLightImage("X");
+
+        assertEquals(material1, material2);
+        assertEquals(material1.hashCode(), material2.hashCode());
+
+        material1.getSurfaceProperties().add( SurfaceProperty.botclip );
+        material1.getSurfaceProperties().add( SurfaceProperty.slime );
+
+        assertNotEquals(material1, material2);
+        assertNotEquals(material1.hashCode(), material2.hashCode());
+
+        // Note: These are added in a different order to demonstrate hashing and equality uses sorted order
+        material2.getSurfaceProperties().add( SurfaceProperty.slime );
+        material2.getSurfaceProperties().add( SurfaceProperty.botclip );
 
         assertEquals(material1, material2);
         assertEquals(material1.hashCode(), material2.hashCode());

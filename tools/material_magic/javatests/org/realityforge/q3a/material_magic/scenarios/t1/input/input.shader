@@ -15,6 +15,14 @@ q3map_novertexshadows
 q3map_globaltexture
 q3map_lightsubdivide 22
 q3map_backsplash 100 8
+// This next one has an UPPERCASE T but will be normalize to lower case
+surfaceparm	Trans
+
+// Duplicate surfaceparm are ignored
+surfaceparm nomarks
+surfaceparm nomarks
+surfaceparm nomarks
+surfaceparm nomarks
 }
 
 
@@ -22,6 +30,9 @@ q3map_backsplash 100 8
 
   textures/base/myBase2
 {
+surfaceparm noimpact
+surfaceparm nolightmap
+surfaceparm sky
     q3map_forcesunlight
             // This is a non-normalized form of "cull back"
             cull backsided

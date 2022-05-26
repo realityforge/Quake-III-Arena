@@ -1,11 +1,14 @@
 package org.realityforge.q3a.material_magic.model;
 
-import org.realityforge.q3a.material_magic.util.MaterialOutput;
-
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.io.IOException;
-import java.util.Objects;
+import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
 public final class Material {
     @Nonnull
@@ -16,6 +19,8 @@ public final class Material {
     private QerProperties _qer;
     @Nonnull
     private CullType _cull = CullType.FRONT;
+    @Nonnull
+    private Set<SurfaceProperty> _surfaceProperties = new HashSet<>();
 
     public Material(@Nonnull final String name) {
         _name = Objects.requireNonNull(name);
@@ -63,6 +68,17 @@ public final class Material {
         _cull = Objects.requireNonNull(cull);
     }
 
+    @Nonnull
+    public Set<SurfaceProperty> getSurfaceProperties()
+    {
+        return _surfaceProperties;
+    }
+    @Nonnull
+    public List<SurfaceProperty> getSurfacePropertiesSorted()
+    {
+        return _surfaceProperties.stream().sorted().collect( Collectors.toUnmodifiableList() );
+    }
+
     /**
      * Write the material using the standard text serialization mechanisms to the specified output object.
      *
@@ -80,6 +96,10 @@ public final class Material {
             if (CullType.FRONT != _cull) {
                 o.writeProperty("cull", CullType.BACK == _cull ? "back" : "disable");
             }
+            for ( final SurfaceProperty surfaceProperty : getSurfacePropertiesSorted() )
+            {
+                o.writeProperty("surfaceparm", surfaceProperty.name());
+            }
         });
     }
 
@@ -93,6 +113,7 @@ public final class Material {
             final Material that = (Material) o;
             return _name.equals(that._name) &&
                     _cull.equals(that._cull) &&
+                    Objects.equals(getSurfacePropertiesSorted(), that.getSurfacePropertiesSorted()) &&
                     Objects.equals(q3map(), that.q3map()) &&
                     Objects.equals(qer(), that.qer());
         }
@@ -101,7 +122,7 @@ public final class Material {
     @Override
     public int hashCode()
     {
-        return Objects.hash(_name, _cull, q3map(), qer());
+        return Objects.hash( _name, _cull, getSurfacePropertiesSorted(), q3map(), qer() );
     }
 
     @Nonnull
