@@ -1,29 +1,28 @@
 package org.realityforge.q3a.material_magic.model.reader;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 public final class MaterialsParserTest {
     @DisplayName("MinimalMaterialParseTest")
     @Test
-    public void basicParse() {
+    public void basicParse()
+    {
         // Test just performs a parse of a fragment to verify that the basic parsing infrastructure works
-        final String materialText =
-                "textures/base/myBase\n" +
-                        "{\n" +
-                        "  q3map_surfacelight 1500\n" +
-                        "  q3map_lightimage textures/wall/glowglow\n" +
-                        "  q3map_novertexshadows\n" +
-                        "  q3map_globaltexture\n" +
-                        "\tq3map_forcesunlight\n" +
-                        "}\n";
+        final String materialText = "textures/base/myBase\n"
+            + "{\n"
+            + "  q3map_surfacelight 1500\n"
+            + "  q3map_lightimage textures/wall/glowglow\n"
+            + "  q3map_novertexshadows\n"
+            + "  q3map_globaltexture\n"
+            + "\tq3map_forcesunlight\n"
+            + "}\n";
         final RecordingErrorListener errorListener = new RecordingErrorListener();
         final CharStream input = CharStreams.fromString(materialText);
         final BailLexer lexer = new BailLexer(input);

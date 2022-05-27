@@ -1,7 +1,7 @@
 package org.realityforge.q3a.material_magic.model.reader;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
+import javax.annotation.Nonnull;
 
 final class Error {
     private final int _line;
@@ -9,28 +9,33 @@ final class Error {
     @Nonnull
     private final String _message;
 
-    Error(final boolean syntax, final int line, final int charPositionInLine, @Nonnull final String message) {
+    Error(final boolean syntax, final int line, final int charPositionInLine, @Nonnull final String message)
+    {
         _line = line;
         _charPositionInLine = charPositionInLine;
         _message = Objects.requireNonNull(message);
     }
 
-    int getLine() {
+    int getLine()
+    {
         return _line;
     }
 
-    int getCharPositionInLine() {
+    int getCharPositionInLine()
+    {
         return _charPositionInLine;
     }
 
     @Nonnull
-    String getMessage() {
+    String getMessage()
+    {
         return _message;
     }
 
     @Nonnull
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "syntax error: " + getLine() + ":" + getCharPositionInLine() + " " + getMessage();
     }
 }

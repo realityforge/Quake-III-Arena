@@ -10,6 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 load(":material_magic_golden_test.bzl", "material_magic_golden_test")
+load("@com_github_ash2k_bazel_tools//multirun:def.bzl", "multirun")
 
 material_magic_golden_test(
     name = "t1",
@@ -34,8 +35,6 @@ material_magic_golden_test(
         "textures/base/myBase2",
     ],
 )
-
-load("@com_github_ash2k_bazel_tools//multirun:def.bzl", "multirun")
 
 # Runs all the update_goldens targets
 multirun(

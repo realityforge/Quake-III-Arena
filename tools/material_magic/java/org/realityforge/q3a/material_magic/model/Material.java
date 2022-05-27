@@ -22,37 +22,44 @@ public final class Material {
     @Nonnull
     private Set<SurfaceProperty> _surfaceProperties = new HashSet<>();
 
-    public Material(@Nonnull final String name) {
+    public Material(@Nonnull final String name)
+    {
         _name = Objects.requireNonNull(name);
     }
 
     @Nonnull
-    public String getName() {
+    public String getName()
+    {
         return _name;
     }
 
-    public void setName(@Nonnull final String name) {
+    public void setName(@Nonnull final String name)
+    {
         _name = Objects.requireNonNull(name);
     }
 
-    public boolean hasQ3map() {
+    public boolean hasQ3map()
+    {
         return null != _q3map;
     }
 
     @Nonnull
-    public Q3mapProperties q3map() {
+    public Q3mapProperties q3map()
+    {
         if (null == _q3map) {
             _q3map = new Q3mapProperties();
         }
         return _q3map;
     }
 
-    public boolean hasQer() {
+    public boolean hasQer()
+    {
         return null != _qer;
     }
 
     @Nonnull
-    public QerProperties qer() {
+    public QerProperties qer()
+    {
         if (null == _qer) {
             _qer = new QerProperties();
         }
@@ -60,11 +67,13 @@ public final class Material {
     }
 
     @Nonnull
-    public CullType getCull() {
+    public CullType getCull()
+    {
         return _cull;
     }
 
-    public void setCull(@Nonnull final CullType cull) {
+    public void setCull(@Nonnull final CullType cull)
+    {
         _cull = Objects.requireNonNull(cull);
     }
 
@@ -76,7 +85,7 @@ public final class Material {
     @Nonnull
     public List<SurfaceProperty> getSurfacePropertiesSorted()
     {
-        return _surfaceProperties.stream().sorted().collect( Collectors.toUnmodifiableList() );
+        return _surfaceProperties.stream().sorted().collect(Collectors.toUnmodifiableList());
     }
 
     /**
@@ -85,7 +94,8 @@ public final class Material {
      * @param output the output object to emit material to.
      * @throws IOException if there is an error writing to MaterialOutput
      */
-    void write(@Nonnull final MaterialOutput output) throws IOException {
+    void write(@Nonnull final MaterialOutput output) throws IOException
+    {
         output.writeMaterial(getName(), o -> {
             if (hasQ3map()) {
                 q3map().write(o);
@@ -96,38 +106,35 @@ public final class Material {
             if (CullType.FRONT != _cull) {
                 o.writeProperty("cull", CullType.BACK == _cull ? "back" : "disable");
             }
-            for ( final SurfaceProperty surfaceProperty : getSurfacePropertiesSorted() )
-            {
+            for (final SurfaceProperty surfaceProperty : getSurfacePropertiesSorted()) {
                 o.writeProperty("surfaceparm", surfaceProperty.name());
             }
         });
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) {
             return true;
         } else if (o == null || getClass() != o.getClass()) {
             return false;
         } else {
-            final Material that = (Material) o;
-            return _name.equals(that._name) &&
-                    _cull.equals(that._cull) &&
-                    Objects.equals(getSurfacePropertiesSorted(), that.getSurfacePropertiesSorted()) &&
-                    Objects.equals(q3map(), that.q3map()) &&
-                    Objects.equals(qer(), that.qer());
+            final Material that = (Material)o;
+            return _name.equals(that._name) && _cull.equals(that._cull) && Objects.equals(getSurfacePropertiesSorted(), that.getSurfacePropertiesSorted()) && Objects.equals(q3map(), that.q3map()) && Objects.equals(qer(), that.qer());
         }
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash( _name, _cull, getSurfacePropertiesSorted(), q3map(), qer() );
+        return Objects.hash(_name, _cull, getSurfacePropertiesSorted(), q3map(), qer());
     }
 
     @Nonnull
     @Override
-    public String toString() {
+    public String toString()
+    {
         return MaterialOutput.outputAsString(this::write);
     }
 }

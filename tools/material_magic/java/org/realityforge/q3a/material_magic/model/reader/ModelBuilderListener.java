@@ -14,22 +14,25 @@ final class ModelBuilderListener extends MaterialsParserBaseListener {
     private Material _material;
 
     @Nonnull
-    MaterialsUnit getUnit() {
+    MaterialsUnit getUnit()
+    {
         return _unit;
     }
 
     @Override
-    public void enterMaterial(@Nonnull final MaterialsParser.MaterialContext ctx) {
+    public void enterMaterial(@Nonnull final MaterialsParser.MaterialContext ctx)
+    {
         _material = new Material("");
     }
 
     @Override
-    public void exitQ3mapMaterialProperty(@Nonnull final MaterialsParser.Q3mapMaterialPropertyContext ctx) {
+    public void exitQ3mapMaterialProperty(@Nonnull final MaterialsParser.Q3mapMaterialPropertyContext ctx)
+    {
         final Q3mapProperties q3map = _material.q3map();
         if (null != ctx.Q3MAP_SURFACELIGHT()) {
-            q3map.setSurfaceLight(Integer.parseInt(ctx.POSITIVE_INTEGER().get( 0 ).getText()));
+            q3map.setSurfaceLight(Integer.parseInt(ctx.POSITIVE_INTEGER().get(0).getText()));
         } else if (null != ctx.Q3MAP_LIGHTSUBDIVIDE()) {
-            q3map.setLightSubDivide(Integer.parseInt(ctx.POSITIVE_INTEGER().get( 0 ).getText()));
+            q3map.setLightSubDivide(Integer.parseInt(ctx.POSITIVE_INTEGER().get(0).getText()));
         } else if (null != ctx.Q3MAP_LIGHTIMAGE()) {
             q3map.setLightImage(ctx.LABEL().getText());
         } else if (null != ctx.Q3MAP_NOVERTEXSHADOWS()) {
@@ -41,10 +44,10 @@ final class ModelBuilderListener extends MaterialsParserBaseListener {
         } else if (null != ctx.Q3MAP_FLARE()) {
             q3map.setFlare(ctx.LABEL().getText());
         } else if (null != ctx.Q3MAP_BACKSPLASH()) {
-            q3map.setBacksplashPercent( Integer.parseInt( ctx.POSITIVE_INTEGER().get( 0 ).getText() ) );
-            q3map.setBacksplashDistance( Integer.parseInt( ctx.POSITIVE_INTEGER().get( 1 ).getText() ) );
+            q3map.setBacksplashPercent(Integer.parseInt(ctx.POSITIVE_INTEGER().get(0).getText()));
+            q3map.setBacksplashDistance(Integer.parseInt(ctx.POSITIVE_INTEGER().get(1).getText()));
         } else if (null != ctx.TESSSIZE()) {
-            q3map.setTessSize(Integer.parseInt(ctx.POSITIVE_INTEGER().get( 0 ).getText()));
+            q3map.setTessSize(Integer.parseInt(ctx.POSITIVE_INTEGER().get(0).getText()));
         } else if (null != ctx.LIGHT()) {
             q3map.setFlare("flareshader");
         } else {
@@ -53,38 +56,37 @@ final class ModelBuilderListener extends MaterialsParserBaseListener {
     }
 
     @Override
-    public void exitCullMaterialProperty(@Nonnull final MaterialsParser.CullMaterialPropertyContext ctx) {
+    public void exitCullMaterialProperty(@Nonnull final MaterialsParser.CullMaterialPropertyContext ctx)
+    {
         if (null != ctx.CULL_BACK() || null != ctx.CULL_BACKSIDE() || null != ctx.CULL_BACKSIDED()) {
-            _material.setCull( CullType.BACK);
+            _material.setCull(CullType.BACK);
         } else if (null != ctx.CULL_DISABLE() || null != ctx.CULL_NONE() || null != ctx.CULL_TWOSIDED()) {
-            _material.setCull( CullType.DISABLE);
+            _material.setCull(CullType.DISABLE);
         } else {
             throw new IllegalStateException("Unhandled cull value " + ctx.getText());
         }
     }
 
     @Override
-    public void exitSurfaceParameterMaterialProperty( @Nonnull final MaterialsParser.SurfaceParameterMaterialPropertyContext ctx )
+    public void exitSurfaceParameterMaterialProperty(@Nonnull final MaterialsParser.SurfaceParameterMaterialPropertyContext ctx)
     {
         final String text = ctx.LABEL().getText().toLowerCase();
         SurfaceProperty surfaceProperty = null;
-        for ( final SurfaceProperty value : SurfaceProperty.values() )
-        {
-            if ( value.name().equals( text ) )
-            {
+        for (final SurfaceProperty value : SurfaceProperty.values()) {
+            if (value.name().equals(text)) {
                 surfaceProperty = value;
                 break;
             }
         }
-        if ( null == surfaceProperty )
-        {
-            throw new IllegalStateException( "Unhandled surfaceParm value " + text );
+        if (null == surfaceProperty) {
+            throw new IllegalStateException("Unhandled surfaceParm value " + text);
         }
-        _material.getSurfaceProperties().add( surfaceProperty );
+        _material.getSurfaceProperties().add(surfaceProperty);
     }
 
     @Override
-    public void exitQerMaterialProperty(@Nonnull final MaterialsParser.QerMaterialPropertyContext ctx) {
+    public void exitQerMaterialProperty(@Nonnull final MaterialsParser.QerMaterialPropertyContext ctx)
+    {
         QerProperties qer = _material.qer();
         if (null != ctx.QER_TRANS()) {
             qer.setTransparency(Float.parseFloat(ctx.POSITIVE_DECIMAL().getText()));
@@ -98,7 +100,8 @@ final class ModelBuilderListener extends MaterialsParserBaseListener {
     }
 
     @Override
-    public void exitMaterial(@Nonnull final MaterialsParser.MaterialContext ctx) {
+    public void exitMaterial(@Nonnull final MaterialsParser.MaterialContext ctx)
+    {
         _material.setName(ctx.LABEL().getText());
         _unit.addMaterial(_material);
         _material = null;

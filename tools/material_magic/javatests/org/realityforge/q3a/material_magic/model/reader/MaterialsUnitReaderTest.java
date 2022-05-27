@@ -1,25 +1,24 @@
 package org.realityforge.q3a.material_magic.model.reader;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.realityforge.q3a.material_magic.model.Material;
 import org.realityforge.q3a.material_magic.model.MaterialsUnit;
 import org.realityforge.q3a.material_magic.model.Q3mapProperties;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 public final class MaterialsUnitReaderTest {
     @Test
-    public void readSingleMaterial() throws Exception {
-        final String materialText =
-                "textures/base/myBase\n" +
-                        "{\n" +
-                        "  q3map_surfacelight 1500\n" +
-                        "  q3map_lightimage textures/wall/glowglow\n" +
-                        "  q3map_novertexshadows\n" +
-                        "\t\t\t\t  q3map_globaltexture\n" +
-                        "}\n";
+    public void readSingleMaterial() throws Exception
+    {
+        final String materialText = "textures/base/myBase\n"
+            + "{\n"
+            + "  q3map_surfacelight 1500\n"
+            + "  q3map_lightimage textures/wall/glowglow\n"
+            + "  q3map_novertexshadows\n"
+            + "\t\t\t\t  q3map_globaltexture\n"
+            + "}\n";
         final MaterialsUnit unit = MaterialsUnitReader.readFromString(materialText);
         final List<Material> materials = unit.getMaterials();
         assertEquals(1, materials.size());
@@ -38,10 +37,10 @@ public final class MaterialsUnitReaderTest {
     }
 
     @Test
-    public void readMultipleMaterial() throws Exception {
-        final String materialText =
-                "textures/base/mat1\n{\nq3map_surfacelight 1500\n}\n" +
-                        "textures/base/mat2\n{\nq3map_lightimage textures/wall/glowglow\n}\n";
+    public void readMultipleMaterial() throws Exception
+    {
+        final String materialText = "textures/base/mat1\n{\nq3map_surfacelight 1500\n}\n"
+            + "textures/base/mat2\n{\nq3map_lightimage textures/wall/glowglow\n}\n";
         final MaterialsUnit unit = MaterialsUnitReader.readFromString(materialText);
         final List<Material> materials = unit.getMaterials();
         assertEquals(2, materials.size());
@@ -74,15 +73,15 @@ public final class MaterialsUnitReaderTest {
     }
 
     @Test
-    public void readProducesSyntaxError() {
-        final String materialText =
-                "textures/base/myBase\n" +
-                        "{\n" +
-                        "  q3map_surfacelight 1500\n" +
-                        "  q3map_lightimage textures/wall/glowglow\n" +
-                        "\t\t\t\t  q3map_globaltexture <>\n" +
-                        "}\n" +
-                        "}\n";
+    public void readProducesSyntaxError()
+    {
+        final String materialText = "textures/base/myBase\n"
+            + "{\n"
+            + "  q3map_surfacelight 1500\n"
+            + "  q3map_lightimage textures/wall/glowglow\n"
+            + "\t\t\t\t  q3map_globaltexture <>\n"
+            + "}\n"
+            + "}\n";
 
         try {
             MaterialsUnitReader.readFromString(materialText);

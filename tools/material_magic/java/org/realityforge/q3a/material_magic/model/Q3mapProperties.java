@@ -25,35 +25,43 @@ public final class Q3mapProperties {
     @Nullable
     private String _flare;
 
-    public boolean globalTexture() {
+    public boolean globalTexture()
+    {
         return _globalTexture;
     }
 
-    public void setGlobalTexture(final boolean globalTexture) {
+    public void setGlobalTexture(final boolean globalTexture)
+    {
         _globalTexture = globalTexture;
     }
 
-    public boolean forceSunLight() {
+    public boolean forceSunLight()
+    {
         return _forceSunLight;
     }
 
-    public void setForceSunLight(final boolean forceSunLight) {
+    public void setForceSunLight(final boolean forceSunLight)
+    {
         _forceSunLight = forceSunLight;
     }
 
-    public boolean noVertexShadows() {
+    public boolean noVertexShadows()
+    {
         return _noVertexShadows;
     }
 
-    public void setNoVertexShadows(final boolean noVertexShadows) {
+    public void setNoVertexShadows(final boolean noVertexShadows)
+    {
         _noVertexShadows = noVertexShadows;
     }
 
-    public int getSurfaceLight() {
+    public int getSurfaceLight()
+    {
         return _surfaceLight;
     }
 
-    public void setSurfaceLight(final int surfaceLight) {
+    public void setSurfaceLight(final int surfaceLight)
+    {
         _surfaceLight = surfaceLight;
     }
 
@@ -62,7 +70,7 @@ public final class Q3mapProperties {
         return _lightSubDivide;
     }
 
-    public void setLightSubDivide( final int lightSubDivide )
+    public void setLightSubDivide(final int lightSubDivide)
     {
         _lightSubDivide = lightSubDivide;
     }
@@ -72,7 +80,7 @@ public final class Q3mapProperties {
         return _tessSize;
     }
 
-    public void setTessSize( final int tessSize )
+    public void setTessSize(final int tessSize)
     {
         _tessSize = tessSize;
     }
@@ -82,7 +90,7 @@ public final class Q3mapProperties {
         return _backsplashPercent;
     }
 
-    public void setBacksplashPercent( final int backsplashPercent )
+    public void setBacksplashPercent(final int backsplashPercent)
     {
         _backsplashPercent = backsplashPercent;
     }
@@ -92,30 +100,35 @@ public final class Q3mapProperties {
         return _backsplashDistance;
     }
 
-    public void setBacksplashDistance( final int backsplashDistance )
+    public void setBacksplashDistance(final int backsplashDistance)
     {
         _backsplashDistance = backsplashDistance;
     }
 
     @Nullable
-    public String getLightImage() {
+    public String getLightImage()
+    {
         return _lightImage;
     }
 
-    public void setLightImage(@Nullable final String lightImage) {
+    public void setLightImage(@Nullable final String lightImage)
+    {
         _lightImage = lightImage;
     }
 
     @Nullable
-    public String getFlare() {
+    public String getFlare()
+    {
         return _flare;
     }
 
-    public void setFlare(@Nullable final String flare) {
+    public void setFlare(@Nullable final String flare)
+    {
         _flare = flare;
     }
 
-    void write(@Nonnull final MaterialOutput output) throws IOException {
+    void write(@Nonnull final MaterialOutput output) throws IOException
+    {
         if (!output.shouldOmitNonRuntimeProperties()) {
             if (0 != _surfaceLight) {
                 output.writeProperty("q3map_surfacelight", Integer.toString(_surfaceLight));
@@ -138,12 +151,10 @@ public final class Q3mapProperties {
             if (null != _flare) {
                 output.writeProperty("q3map_flare", _flare);
             }
-            if ( DEFAULT_BACKSPLASH_PERCENT != _backsplashPercent ||
-                 DEFAULT_BACKSPLASH_DISTANCE != _backsplashDistance )
-            {
-                output.writeProperty( "q3map_backsplash",
-                                      Integer.toString( _backsplashPercent ),
-                                      Integer.toString( _backsplashDistance ) );
+            if (DEFAULT_BACKSPLASH_PERCENT != _backsplashPercent || DEFAULT_BACKSPLASH_DISTANCE != _backsplashDistance) {
+                output.writeProperty("q3map_backsplash",
+                    Integer.toString(_backsplashPercent),
+                    Integer.toString(_backsplashDistance));
             }
             if (0 != _tessSize) {
                 output.writeProperty("tesssize", Integer.toString(_tessSize));
@@ -152,37 +163,30 @@ public final class Q3mapProperties {
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(final Object o)
+    {
         if (this == o) {
             return true;
         } else if (o == null || getClass() != o.getClass()) {
             return false;
         } else {
-            final Q3mapProperties that = (Q3mapProperties) o;
-            return _globalTexture == that._globalTexture &&
-                    _forceSunLight == that._forceSunLight &&
-                    _noVertexShadows == that._noVertexShadows &&
-                    _surfaceLight == that._surfaceLight &&
-                   _lightSubDivide == that._lightSubDivide &&
-                   _tessSize == that._tessSize &&
-                   _backsplashPercent == that._backsplashPercent &&
-                   _backsplashDistance == that._backsplashDistance &&
-                    Objects.equals(_lightImage, that._lightImage) &&
-                    Objects.equals(_flare, that._flare);
+            final Q3mapProperties that = (Q3mapProperties)o;
+            return _globalTexture == that._globalTexture && _forceSunLight == that._forceSunLight && _noVertexShadows == that._noVertexShadows && _surfaceLight == that._surfaceLight && _lightSubDivide == that._lightSubDivide && _tessSize == that._tessSize && _backsplashPercent == that._backsplashPercent && _backsplashDistance == that._backsplashDistance && Objects.equals(_lightImage, that._lightImage) && Objects.equals(_flare, that._flare);
         }
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash( _globalTexture,
-                             _forceSunLight,
-                             _noVertexShadows,
-                             _surfaceLight,
-                             _lightSubDivide,
-                             _tessSize,
-                             _backsplashPercent,
-                             _backsplashDistance,
-                             _lightImage,
-                             _flare );
+    public int hashCode()
+    {
+        return Objects.hash(_globalTexture,
+            _forceSunLight,
+            _noVertexShadows,
+            _surfaceLight,
+            _lightSubDivide,
+            _tessSize,
+            _backsplashPercent,
+            _backsplashDistance,
+            _lightImage,
+            _flare);
     }
 }

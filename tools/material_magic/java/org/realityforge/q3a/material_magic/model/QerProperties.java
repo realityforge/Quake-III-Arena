@@ -1,11 +1,10 @@
 package org.realityforge.q3a.material_magic.model;
 
-import org.realityforge.q3a.material_magic.util.MaterialOutput;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.Objects;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
 public final class QerProperties {
     private boolean _noCarve;
@@ -13,32 +12,39 @@ public final class QerProperties {
     @Nullable
     private String _editorImage;
 
-    public boolean noCarve() {
+    public boolean noCarve()
+    {
         return _noCarve;
     }
 
-    public void setNoCarve(final boolean noCarve) {
+    public void setNoCarve(final boolean noCarve)
+    {
         _noCarve = noCarve;
     }
 
-    public void setTransparency(final float transparency) {
+    public void setTransparency(final float transparency)
+    {
         _transparency = transparency;
     }
 
-    public float getTransparency() {
+    public float getTransparency()
+    {
         return _transparency;
     }
 
-    public void setEditorImage(@Nullable final String editorImage) {
+    public void setEditorImage(@Nullable final String editorImage)
+    {
         _editorImage = editorImage;
     }
 
     @Nullable
-    public String getEditorImage() {
+    public String getEditorImage()
+    {
         return _editorImage;
     }
 
-    void write(@Nonnull final MaterialOutput output) throws IOException {
+    void write(@Nonnull final MaterialOutput output) throws IOException
+    {
         if (!output.shouldOmitNonRuntimeProperties()) {
             if (null != _editorImage) {
                 output.writeProperty("qer_editorimage", _editorImage);
@@ -53,21 +59,21 @@ public final class QerProperties {
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(final Object o)
+    {
         if (this == o) {
             return true;
         } else if (o == null || getClass() != o.getClass()) {
             return false;
         } else {
-            final QerProperties that = (QerProperties) o;
-            return _transparency == that._transparency &&
-                    _noCarve == that._noCarve &&
-                    Objects.equals(_editorImage, that._editorImage);
+            final QerProperties that = (QerProperties)o;
+            return _transparency == that._transparency && _noCarve == that._noCarve && Objects.equals(_editorImage, that._editorImage);
         }
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(_transparency, _noCarve, _editorImage);
     }
 }

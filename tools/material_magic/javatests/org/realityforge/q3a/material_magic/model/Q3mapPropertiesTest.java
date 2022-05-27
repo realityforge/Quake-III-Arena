@@ -1,13 +1,14 @@
 package org.realityforge.q3a.material_magic.model;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public final class Q3mapPropertiesTest {
     @Test
-    public void basicOperation() {
+    public void basicOperation()
+    {
         final Q3mapProperties properties = new Q3mapProperties();
 
         assertFalse(properties.forceSunLight());
@@ -57,21 +58,22 @@ public final class Q3mapPropertiesTest {
         assertEquals(64, properties.getTessSize());
         assertEquals(0, properties.getBacksplashDistance());
         assertEquals(0, properties.getBacksplashDistance());
-        assertEquals("q3map_surfacelight 500\n" +
-                     "q3map_lightsubdivide 200\n" +
-                        "q3map_lightimage images/foo\n" +
-                        "q3map_globaltexture\n" +
-                        "q3map_novertexshadows\n" +
-                        "q3map_forcesunlight\n" +
-                        "q3map_flare flareshader\n"+
-                        "q3map_backsplash 0 0\n"+
-                        "tesssize 64\n",
-                MaterialOutput.outputAsString(properties::write));
+        assertEquals("q3map_surfacelight 500\n"
+                + "q3map_lightsubdivide 200\n"
+                + "q3map_lightimage images/foo\n"
+                + "q3map_globaltexture\n"
+                + "q3map_novertexshadows\n"
+                + "q3map_forcesunlight\n"
+                + "q3map_flare flareshader\n"
+                + "q3map_backsplash 0 0\n"
+                + "tesssize 64\n",
+            MaterialOutput.outputAsString(properties::write));
         assertEquals("", MaterialOutput.outputAsString(properties::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
     }
 
     @Test
-    public void testEqualsAndHash() {
+    public void testEqualsAndHash()
+    {
         final Q3mapProperties properties1 = new Q3mapProperties();
         final Q3mapProperties properties2 = new Q3mapProperties();
 

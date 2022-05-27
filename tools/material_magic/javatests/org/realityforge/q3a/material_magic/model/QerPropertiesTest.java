@@ -1,13 +1,14 @@
 package org.realityforge.q3a.material_magic.model;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public final class QerPropertiesTest {
     @Test
-    public void basicOperation() {
+    public void basicOperation()
+    {
         final QerProperties properties = new QerProperties();
 
         assertFalse(properties.noCarve());
@@ -30,14 +31,16 @@ public final class QerPropertiesTest {
         assertTrue(properties.noCarve());
         assertEquals("images/editor", properties.getEditorImage());
         assertEquals(0.3F, properties.getTransparency());
-        assertEquals("qer_editorimage images/editor\n" +
-                "qer_nocarve\n" +
-                "qer_trans 0.3\n", MaterialOutput.outputAsString(properties::write));
+        assertEquals("qer_editorimage images/editor\n"
+                + "qer_nocarve\n"
+                + "qer_trans 0.3\n",
+            MaterialOutput.outputAsString(properties::write));
         assertEquals("", MaterialOutput.outputAsString(properties::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
     }
 
     @Test
-    public void testEqualsAndHash() {
+    public void testEqualsAndHash()
+    {
         final QerProperties properties1 = new QerProperties();
         final QerProperties properties2 = new QerProperties();
 

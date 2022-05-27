@@ -20,40 +20,38 @@ import org.realityforge.q3a.material_magic.util.MaterialOutput;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
-
-@SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted"})
+@SuppressWarnings({ "unused", "BooleanMethodIsAlwaysInverted" })
 @Command(name = "material_magick",
-        mixinStandardHelpOptions = true,
-        description = "Read and process shader/material files.")
+    mixinStandardHelpOptions = true,
+    description = "Read and process shader/material files.")
 public class Main implements Callable<Integer> {
     @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
-    @CommandLine.Option(names = {"-i", "--input-file"}, description = "The input file to load", paramLabel = "I", required = true)
+    @CommandLine.Option(names = { "-i", "--input-file" }, description = "The input file to load", paramLabel = "I", required = true)
     private List<Path> _input;
-    @CommandLine.Option(names = {"-o", "--output-file"}, description = "The file to save unit to", paramLabel = "O")
+    @CommandLine.Option(names = { "-o", "--output-file" }, description = "The file to save unit to", paramLabel = "O")
     private Path _output;
-    @CommandLine.Option(names = {"-d", "--output-directory"}, description = "The directory in which to save shaders. One file per material", paramLabel = "D")
+    @CommandLine.Option(names = { "-d", "--output-directory" }, description = "The directory in which to save shaders. One file per material", paramLabel = "D")
     private Path _outputDirectory;
-    @CommandLine.Option(names = {"--optimize"}, description = "Optimize the unit for loading by the engine by stripping tooling data", arity = "0")
+    @CommandLine.Option(names = { "--optimize" }, description = "Optimize the unit for loading by the engine by stripping tooling data", arity = "0")
     private boolean _optimize;
-    @CommandLine.Option(names = {"--identity-transform"}, description = "Attempt to perform the identity transform and verify the pre-transform and post-transform match. This is done for every unit after loading and every unit prior to saving. This primarily used to verify the integrity of the tool.", arity = "0")
+    @CommandLine.Option(names = { "--identity-transform" }, description = "Attempt to perform the identity transform and verify the pre-transform and post-transform match. This is done for every unit after loading and every unit prior to saving. This primarily used to verify the integrity of the tool.", arity = "0")
     private boolean _identityTransform;
-    @CommandLine.Option(names = {"--no-verify"}, description = "Skip validation of input unit.", arity = "0")
+    @CommandLine.Option(names = { "--no-verify" }, description = "Skip validation of input unit.", arity = "0")
     private boolean _noVerify;
 
     @Override
-    public Integer call() throws Exception {
+    public Integer call() throws Exception
+    {
         final MaterialsUnit unit = loadInputs();
         if (null == unit) {
             return 1;
         }
 
-        if ( !_noVerify )
-        {
-            final Collection<String> errors = new Validator().validate( unit );
-            if ( !errors.isEmpty() )
-            {
-                System.err.println( "Unit failed to validate. Errors:" );
-                errors.forEach( System.err::println );
+        if (!_noVerify) {
+            final Collection<String> errors = new Validator().validate(unit);
+            if (!errors.isEmpty()) {
+                System.err.println("Unit failed to validate. Errors:");
+                errors.forEach(System.err::println);
                 return 1;
             }
         }
@@ -80,7 +78,8 @@ public class Main implements Callable<Integer> {
         return 0;
     }
 
-    private boolean writeUnit(@Nonnull final Path path, @Nonnull final MaterialsUnit unit) {
+    private boolean writeUnit(@Nonnull final Path path, @Nonnull final MaterialsUnit unit)
+    {
         if (_identityTransform && !verifyIdentityTransform(path, unit)) {
             return false;
         } else {
@@ -90,8 +89,7 @@ public class Main implements Callable<Integer> {
                     Files.createDirectories(directory);
                 }
                 final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                final MaterialOutput.Strategy strategy =
-                        _optimize ? MaterialOutput.Strategy.RUNTIME_OPTIMIZED : MaterialOutput.Strategy.PRETTY;
+                final MaterialOutput.Strategy strategy = _optimize ? MaterialOutput.Strategy.RUNTIME_OPTIMIZED : MaterialOutput.Strategy.PRETTY;
                 unit.write(new MaterialOutput(baos, strategy));
                 Files.write(path, baos.toByteArray());
             } catch (final IOException ioe) {
@@ -103,7 +101,8 @@ public class Main implements Callable<Integer> {
     }
 
     @Nullable
-    private MaterialsUnit loadInputs() {
+    private MaterialsUnit loadInputs()
+    {
         final List<MaterialsUnit> units = new ArrayList<>();
         for (final Path input : _input) {
             final MaterialsUnit unit = loadUnit(input);
@@ -123,7 +122,8 @@ public class Main implements Callable<Integer> {
         }
     }
 
-    private boolean verifyIdentityTransform(@Nonnull final Path file, @Nonnull final MaterialsUnit unit) {
+    private boolean verifyIdentityTransform(@Nonnull final Path file, @Nonnull final MaterialsUnit unit)
+    {
         final MaterialsUnit transformedUnit;
         try {
             transformedUnit = MaterialsUnitReader.readFromString(unit.toString());
@@ -151,7 +151,8 @@ public class Main implements Callable<Integer> {
     }
 
     @Nonnull
-    private MaterialsUnit merge(@Nonnull final List<MaterialsUnit> units) {
+    private MaterialsUnit merge(@Nonnull final List<MaterialsUnit> units)
+    {
         final MaterialsUnit unit = new MaterialsUnit();
         units.forEach(u -> u.getMaterials().forEach(unit::addMaterial));
         return unit;
@@ -165,7 +166,8 @@ public class Main implements Callable<Integer> {
      * @return the loaded unit or null if the load failed.
      */
     @Nullable
-    private MaterialsUnit loadUnit(@Nonnull final Path path) {
+    private MaterialsUnit loadUnit(@Nonnull final Path path)
+    {
         try {
             return MaterialsUnitReader.fromPath(path);
         } catch (final MaterialsReadException e) {
@@ -180,7 +182,8 @@ public class Main implements Callable<Integer> {
         }
     }
 
-    public static void main(@Nonnull final String... args) {
+    public static void main(@Nonnull final String... args)
+    {
         System.exit(new CommandLine(new Main()).execute(args));
     }
 }

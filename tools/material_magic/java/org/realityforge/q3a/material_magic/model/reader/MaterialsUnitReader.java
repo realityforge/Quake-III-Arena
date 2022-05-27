@@ -1,16 +1,15 @@
 package org.realityforge.q3a.material_magic.model.reader;
 
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.realityforge.q3a.material_magic.model.MaterialsUnit;
-
-import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.annotation.Nonnull;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.realityforge.q3a.material_magic.model.MaterialsUnit;
 
 public final class MaterialsUnitReader {
     /**
@@ -21,7 +20,8 @@ public final class MaterialsUnitReader {
      * @throws MaterialsReadException if there was an error parsing the material file.
      */
     @Nonnull
-    public static MaterialsUnit readFromString(@Nonnull final String text) throws MaterialsReadException {
+    public static MaterialsUnit readFromString(@Nonnull final String text) throws MaterialsReadException
+    {
         return read("<string>", CharStreams.fromString(text));
     }
 
@@ -34,12 +34,14 @@ public final class MaterialsUnitReader {
      * @throws IOException            if there was an error reading the file from the path.
      */
     @Nonnull
-    public static MaterialsUnit fromPath(@Nonnull final Path path) throws MaterialsReadException, IOException {
+    public static MaterialsUnit fromPath(@Nonnull final Path path) throws MaterialsReadException, IOException
+    {
         return read(path.toString(), CharStreams.fromPath(path));
     }
 
     @Nonnull
-    private static MaterialsUnit read(@Nonnull final String source, @Nonnull final CharStream input) throws MaterialsReadException {
+    private static MaterialsUnit read(@Nonnull final String source, @Nonnull final CharStream input) throws MaterialsReadException
+    {
         final RecordingErrorListener errorListener = new RecordingErrorListener();
         final BailLexer lexer = new BailLexer(input);
         lexer.removeErrorListeners();

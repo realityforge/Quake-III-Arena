@@ -1,6 +1,5 @@
 package org.realityforge.q3a.material_magic.util;
 
-import javax.annotation.Nonnull;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -8,9 +7,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
+import javax.annotation.Nonnull;
 
 public final class MaterialOutput
-        implements AutoCloseable {
+    implements AutoCloseable {
     public enum Strategy {
         /**
          * Optimise the output for consumption at runtime.
@@ -26,7 +26,7 @@ public final class MaterialOutput
     @FunctionalInterface
     public interface Block {
         void call(@Nonnull MaterialOutput output)
-                throws IOException;
+            throws IOException;
     }
 
     @Nonnull
@@ -37,12 +37,14 @@ public final class MaterialOutput
     private boolean _emittedMaterial = false;
 
     @Nonnull
-    public static String outputAsString(@Nonnull final Block body) {
+    public static String outputAsString(@Nonnull final Block body)
+    {
         return outputAsString(body, Strategy.PRETTY);
     }
 
     @Nonnull
-    public static String outputAsString(@Nonnull final Block body, @Nonnull final Strategy strategy) {
+    public static String outputAsString(@Nonnull final Block body, @Nonnull final Strategy strategy)
+    {
         try {
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
             final MaterialOutput output = new MaterialOutput(baos, strategy);
@@ -55,30 +57,36 @@ public final class MaterialOutput
     }
 
     public MaterialOutput(@Nonnull final Path extensionFile, @Nonnull final Strategy strategy)
-            throws IOException {
+        throws IOException
+    {
         this(Files.newOutputStream(extensionFile.toFile().toPath()), strategy);
     }
 
-    public MaterialOutput(@Nonnull final OutputStream outputStream, @Nonnull final Strategy strategy) {
+    public MaterialOutput(@Nonnull final OutputStream outputStream, @Nonnull final Strategy strategy)
+    {
         _strategy = Objects.requireNonNull(strategy);
         _outputStream = Objects.requireNonNull(outputStream);
     }
 
     @Nonnull
-    public Strategy getStrategy() {
+    public Strategy getStrategy()
+    {
         return _strategy;
     }
 
-    public boolean shouldOmitNonRuntimeProperties() {
+    public boolean shouldOmitNonRuntimeProperties()
+    {
         return Strategy.RUNTIME_OPTIMIZED == getStrategy();
     }
 
-    public boolean shouldPrettyPrint() {
+    public boolean shouldPrettyPrint()
+    {
         return Strategy.PRETTY == getStrategy();
     }
 
     public void writeMaterial(@Nonnull final String label, @Nonnull final Block body)
-            throws IOException {
+        throws IOException
+    {
         if (_emittedMaterial) {
             if (shouldPrettyPrint()) {
                 newLine();
@@ -91,17 +99,20 @@ public final class MaterialOutput
     }
 
     public void writeStage(@Nonnull final Block body)
-            throws IOException {
+        throws IOException
+    {
         writeSection(body);
     }
 
     public void writeProperty(@Nonnull final String name, @Nonnull final String... arguments)
-            throws IOException {
+        throws IOException
+    {
         write(name + (0 == arguments.length ? "" : " " + String.join(" ", arguments)));
     }
 
     private void writeSection(@Nonnull final Block body)
-            throws IOException {
+        throws IOException
+    {
         write("{");
         incIndent();
         body.call(this);
@@ -110,7 +121,8 @@ public final class MaterialOutput
     }
 
     private void write(@Nonnull final String line)
-            throws IOException {
+        throws IOException
+    {
         if (shouldPrettyPrint()) {
             for (int i = 0; i < _indent; i++) {
                 emit("  ");
@@ -121,27 +133,32 @@ public final class MaterialOutput
     }
 
     private void newLine()
-            throws IOException {
+        throws IOException
+    {
         emit("\n");
     }
 
-    private void incIndent() {
+    private void incIndent()
+    {
         _indent++;
     }
 
-    private void decIndent() {
+    private void decIndent()
+    {
         _indent--;
         assert _indent >= 0;
     }
 
     @Override
     public void close()
-            throws IOException {
+        throws IOException
+    {
         _outputStream.close();
     }
 
     private void emit(@Nonnull final String string)
-            throws IOException {
+        throws IOException
+    {
         _outputStream.write(string.getBytes(StandardCharsets.US_ASCII));
     }
 }
