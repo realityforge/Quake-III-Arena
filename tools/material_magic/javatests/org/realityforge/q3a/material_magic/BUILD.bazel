@@ -19,6 +19,7 @@ material_magic_golden_test(
         "textures/base/myBase2",
         "textures/base/myBase_3",
         "textures/base/myBase_4",
+        "textures/base/myBase_5",
     ],
 )
 

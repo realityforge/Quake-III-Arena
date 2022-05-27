@@ -42,6 +42,8 @@ tesssize 32
 
 textures/base/myBase_4 { /* This is a non-normalized form of "cull back" */ cull backsided }
 
+textures/base/myBase_5 { /* This is a non-normalized form of "cull back" with mixed case */ cull backSided }
+
 
 textures/base/myBase_3
 {

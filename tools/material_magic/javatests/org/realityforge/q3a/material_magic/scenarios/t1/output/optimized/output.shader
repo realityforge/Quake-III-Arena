@@ -19,3 +19,7 @@ textures/base/myBase_4
 {
 cull back
 }
+textures/base/myBase_5
+{
+cull back
+}
