@@ -36,12 +36,27 @@ public class Main implements Callable<Integer> {
     private boolean _optimize;
     @CommandLine.Option(names = {"--identity-transform"}, description = "Attempt to perform the identity transform and verify the pre-transform and post-transform match. This is done for every unit after loading and every unit prior to saving. This primarily used to verify the integrity of the tool.", arity = "0")
     private boolean _identityTransform;
+    @CommandLine.Option(names = {"--no-verify"}, description = "Skip validation of input unit.", arity = "0")
+    private boolean _noVerify;
+
     @Override
     public Integer call() throws Exception {
         final MaterialsUnit unit = loadInputs();
         if (null == unit) {
             return 1;
         }
+
+        if ( !_noVerify )
+        {
+            final Collection<String> errors = new Validator().validate( unit );
+            if ( !errors.isEmpty() )
+            {
+                System.err.println( "Unit failed to validate. Errors:" );
+                errors.forEach( System.err::println );
+                return 1;
+            }
+        }
+
         if (null != _output) {
             if (!writeUnit(_output, unit)) {
                 return 1;
