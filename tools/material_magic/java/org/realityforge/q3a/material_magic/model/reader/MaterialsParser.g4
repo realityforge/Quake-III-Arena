@@ -21,6 +21,7 @@ material
     ;
 
 // TODO: Rename "Properties" to "Directives" to match documentation
+// TODO: Use a separate rule for every different directive to make listener easy to implement
 materialProperties
     : materialProperty materialProperties
     | /* empty */
