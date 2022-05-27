@@ -18,8 +18,8 @@ public final class Q3mapProperties {
     private int _lightSubDivide;
     // subdivisions
     private int _tessSize;
-    private int _backsplashPercent = DEFAULT_BACKSPLASH_PERCENT;
-    private int _backsplashDistance = DEFAULT_BACKSPLASH_DISTANCE;
+    private int _backSplashPercent = DEFAULT_BACKSPLASH_PERCENT;
+    private int _backSplashDistance = DEFAULT_BACKSPLASH_DISTANCE;
     @Nullable
     private String _lightImage;
     @Nullable
@@ -85,24 +85,24 @@ public final class Q3mapProperties {
         _tessSize = tessSize;
     }
 
-    public int getBacksplashPercent()
+    public int getBackSplashPercent()
     {
-        return _backsplashPercent;
+        return _backSplashPercent;
     }
 
-    public void setBacksplashPercent(final int backsplashPercent)
+    public void setBackSplashPercent( final int backSplashPercent )
     {
-        _backsplashPercent = backsplashPercent;
+        _backSplashPercent = backSplashPercent;
     }
 
-    public int getBacksplashDistance()
+    public int getBackSplashDistance()
     {
-        return _backsplashDistance;
+        return _backSplashDistance;
     }
 
-    public void setBacksplashDistance(final int backsplashDistance)
+    public void setBackSplashDistance( final int backSplashDistance )
     {
-        _backsplashDistance = backsplashDistance;
+        _backSplashDistance = backSplashDistance;
     }
 
     @Nullable
@@ -151,10 +151,11 @@ public final class Q3mapProperties {
             if (null != _flare) {
                 output.writeProperty("q3map_flare", _flare);
             }
-            if (DEFAULT_BACKSPLASH_PERCENT != _backsplashPercent || DEFAULT_BACKSPLASH_DISTANCE != _backsplashDistance) {
+            if ( DEFAULT_BACKSPLASH_PERCENT != _backSplashPercent || DEFAULT_BACKSPLASH_DISTANCE !=
+                                                                     _backSplashDistance ) {
                 output.writeProperty("q3map_backsplash",
-                    Integer.toString(_backsplashPercent),
-                    Integer.toString(_backsplashDistance));
+                    Integer.toString( _backSplashPercent ),
+                    Integer.toString( _backSplashDistance ));
             }
             if (0 != _tessSize) {
                 output.writeProperty("tesssize", Integer.toString(_tessSize));
@@ -171,7 +172,7 @@ public final class Q3mapProperties {
             return false;
         } else {
             final Q3mapProperties that = (Q3mapProperties)o;
-            return _globalTexture == that._globalTexture && _forceSunLight == that._forceSunLight && _noVertexShadows == that._noVertexShadows && _surfaceLight == that._surfaceLight && _lightSubDivide == that._lightSubDivide && _tessSize == that._tessSize && _backsplashPercent == that._backsplashPercent && _backsplashDistance == that._backsplashDistance && Objects.equals(_lightImage, that._lightImage) && Objects.equals(_flare, that._flare);
+            return _globalTexture == that._globalTexture && _forceSunLight == that._forceSunLight && _noVertexShadows == that._noVertexShadows && _surfaceLight == that._surfaceLight && _lightSubDivide == that._lightSubDivide && _tessSize == that._tessSize && _backSplashPercent == that._backSplashPercent && _backSplashDistance == that._backSplashDistance && Objects.equals( _lightImage, that._lightImage) && Objects.equals( _flare, that._flare);
         }
     }
 
@@ -184,8 +185,8 @@ public final class Q3mapProperties {
             _surfaceLight,
             _lightSubDivide,
             _tessSize,
-            _backsplashPercent,
-            _backsplashDistance,
+                            _backSplashPercent,
+                            _backSplashDistance,
             _lightImage,
             _flare);
     }
