@@ -12,7 +12,7 @@
 load("//third_party/junit5:rules.bzl", "junit5_test")
 
 junit5_test(
-    name = "MaterialsParserToolTest",
+    name = "MaterialsParserTest",
     size = "small",
     srcs = ["MaterialsParserTest.java"],
     test_package = "org.realityforge.q3a.material_magic.model.reader",
