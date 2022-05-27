@@ -56,7 +56,7 @@ final class ModelBuilderListener extends MaterialsParserBaseListener {
     }
 
     @Override
-    public void exitCullMaterialProperty(@Nonnull final MaterialsParser.CullMaterialPropertyContext ctx)
+    public void exitCullDirective(@Nonnull final MaterialsParser.CullDirectiveContext ctx)
     {
         if (null != ctx.CULL_BACK() || null != ctx.CULL_BACKSIDE() || null != ctx.CULL_BACKSIDED()) {
             _material.setCull(CullType.BACK);

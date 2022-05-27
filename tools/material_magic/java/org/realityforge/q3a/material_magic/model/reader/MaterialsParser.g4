@@ -36,7 +36,7 @@ materialProperty
 
 //General Directives
 generalDirective
-    : cullMaterialProperty
+    : cullDirective
 //skyParms
 //deformVertexes
 //entityMergable
@@ -48,7 +48,7 @@ generalDirective
 //sort
     ;
 
-cullMaterialProperty : CULL (CULL_DISABLE|CULL_NONE|CULL_TWOSIDED|CULL_BACK|CULL_BACKSIDE|CULL_BACKSIDED);
+cullDirective : CULL (CULL_DISABLE|CULL_NONE|CULL_TWOSIDED|CULL_BACK|CULL_BACKSIDE|CULL_BACKSIDED);
 
 surfaceParameterMaterialProperty : SURFACE_PARM LABEL;
 
