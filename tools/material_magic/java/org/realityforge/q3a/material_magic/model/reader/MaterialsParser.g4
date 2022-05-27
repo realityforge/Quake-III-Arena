@@ -33,8 +33,6 @@ materialProperty
     | qerMaterialProperty
     ;
 
-//TODO: Figure out a way to support case insensitive directives - see list at https://stackoverflow.com/questions/1844562/how-to-match-a-string-but-case-insensitively
-
 //General Directives
 generalProperty
     : cullMaterialProperty
