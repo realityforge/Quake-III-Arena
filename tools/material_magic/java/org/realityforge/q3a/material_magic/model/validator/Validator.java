@@ -42,7 +42,9 @@ public final class Validator
             materialMap.put( name, material );
           }
         }
-        // We should validate that the material has stages or has a surfaceParm that does not need stages
+        // TODO: We should validate that the material has stages or has a surfaceParm that does not need stages
+        // TODO: Verify directives with POSITIVE_INTEGERS have positive values (or 0)
+        // TODO: Another verify step should ensure that referenced textures all present and of the expected format
       }
     }
     return errors;
