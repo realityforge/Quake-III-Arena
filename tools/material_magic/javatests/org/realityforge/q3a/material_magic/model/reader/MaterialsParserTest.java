@@ -36,18 +36,11 @@ public final class MaterialsParserTest {
 
         final String label = material.LABEL().getText();
         assertEquals("textures/base/myBase", label);
-        final MaterialsParser.Q3mapMaterialPropertyContext materialProperty1 = material.materialProperties().materialProperty().q3mapMaterialProperty();
-        final MaterialsParser.Q3mapMaterialPropertyContext materialProperty2 = material.materialProperties().materialProperties().materialProperty().q3mapMaterialProperty();
-        final MaterialsParser.Q3mapMaterialPropertyContext materialProperty3 = material.materialProperties().materialProperties().materialProperties().materialProperty().q3mapMaterialProperty();
-        final MaterialsParser.Q3mapMaterialPropertyContext materialProperty4 = material.materialProperties().materialProperties().materialProperties().materialProperties().materialProperty().q3mapMaterialProperty();
-        final MaterialsParser.Q3mapMaterialPropertyContext materialProperty5 = material.materialProperties().materialProperties().materialProperties().materialProperties().materialProperties().materialProperty().q3mapMaterialProperty();
-        assertNotNull(materialProperty1.Q3MAP_SURFACELIGHT());
-        assertEquals("1500", materialProperty1.POSITIVE_INTEGER().get(0).getText());
-        assertNotNull(materialProperty2.Q3MAP_LIGHTIMAGE());
-        assertEquals("textures/wall/glowglow", materialProperty2.LABEL().getText());
-        assertNotNull(materialProperty3.Q3MAP_NOVERTEXSHADOWS());
-        assertNotNull(materialProperty4.Q3MAP_GLOBALTEXTURE());
-        assertNotNull(materialProperty5.Q3MAP_FORCESUNLIGHT());
+        assertNotNull( material.directives().directive().q3mapDirective().q3mapSurfaceLightDirective() );
+        assertNotNull( material.directives().directives().directive().q3mapDirective().q3mapLightImageDirective() );
+        assertNotNull( material.directives().directives().directives().directive().q3mapDirective().q3mapNoVertexShadowsDirective() );
+        assertNotNull( material.directives().directives().directives().directives().directive().q3mapDirective().q3mapGlobalTextureDirective() );
+        assertNotNull( material.directives().directives().directives().directives().directives().directive().q3mapDirective().q3mapForceSunlightDirective() );
         assertNull(materials.materials().materials());
     }
 }

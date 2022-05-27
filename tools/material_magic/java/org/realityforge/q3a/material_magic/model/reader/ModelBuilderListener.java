@@ -4,108 +4,149 @@ import javax.annotation.Nonnull;
 import org.realityforge.q3a.material_magic.model.CullType;
 import org.realityforge.q3a.material_magic.model.Material;
 import org.realityforge.q3a.material_magic.model.MaterialsUnit;
-import org.realityforge.q3a.material_magic.model.Q3mapProperties;
 import org.realityforge.q3a.material_magic.model.SurfaceProperty;
 
-final class ModelBuilderListener extends MaterialsParserBaseListener {
-    @Nonnull
-    private final MaterialsUnit _unit = new MaterialsUnit();
-    private Material _material;
+final class ModelBuilderListener
+  extends MaterialsParserBaseListener
+{
+  @Nonnull
+  private final MaterialsUnit _unit = new MaterialsUnit();
+  private Material _material;
 
-    @Nonnull
-    MaterialsUnit getUnit()
-    {
-        return _unit;
-    }
+  @Nonnull
+  MaterialsUnit getUnit()
+  {
+    return _unit;
+  }
 
-    @Override
-    public void enterMaterial(@Nonnull final MaterialsParser.MaterialContext ctx)
-    {
-        _material = new Material("");
-    }
+  @Override
+  public void enterMaterial( @Nonnull final MaterialsParser.MaterialContext ctx )
+  {
+    _material = new Material( "" );
+  }
 
-    @Override
-    public void exitQ3mapMaterialProperty(@Nonnull final MaterialsParser.Q3mapMaterialPropertyContext ctx)
-    {
-        final Q3mapProperties q3map = _material.q3map();
-        if (null != ctx.Q3MAP_SURFACELIGHT()) {
-            q3map.setSurfaceLight(Integer.parseInt(ctx.POSITIVE_INTEGER().get(0).getText()));
-        } else if (null != ctx.Q3MAP_LIGHTSUBDIVIDE()) {
-            q3map.setLightSubDivide(Integer.parseInt(ctx.POSITIVE_INTEGER().get(0).getText()));
-        } else if (null != ctx.Q3MAP_LIGHTIMAGE()) {
-            q3map.setLightImage(ctx.LABEL().getText());
-        } else if (null != ctx.Q3MAP_NOVERTEXSHADOWS()) {
-            q3map.setNoVertexShadows(true);
-        } else if (null != ctx.Q3MAP_GLOBALTEXTURE()) {
-            q3map.setGlobalTexture(true);
-        } else if (null != ctx.Q3MAP_FORCESUNLIGHT()) {
-            q3map.setForceSunLight(true);
-        } else if (null != ctx.Q3MAP_FLARE()) {
-            q3map.setFlare(ctx.LABEL().getText());
-        } else if (null != ctx.Q3MAP_BACKSPLASH()) {
-            q3map.setBacksplashPercent(Integer.parseInt(ctx.POSITIVE_INTEGER().get(0).getText()));
-            q3map.setBacksplashDistance(Integer.parseInt(ctx.POSITIVE_INTEGER().get(1).getText()));
-        } else if (null != ctx.TESSSIZE()) {
-            q3map.setTessSize(Integer.parseInt(ctx.POSITIVE_INTEGER().get(0).getText()));
-        } else if (null != ctx.LIGHT()) {
-            q3map.setFlare("flareshader");
-        } else {
-            throw new IllegalStateException("Unhandled q3map property " + ctx.getText());
-        }
-    }
+  @Override
+  public void exitQ3mapSurfaceLightDirective( @Nonnull final MaterialsParser.Q3mapSurfaceLightDirectiveContext ctx )
+  {
+    _material.q3map().setSurfaceLight( Integer.parseInt( ctx.POSITIVE_INTEGER().getText() ) );
+  }
 
-    @Override
-    public void exitCullDirective(@Nonnull final MaterialsParser.CullDirectiveContext ctx)
-    {
-        if (null != ctx.CULL_BACK() || null != ctx.CULL_BACKSIDE() || null != ctx.CULL_BACKSIDED()) {
-            _material.setCull(CullType.BACK);
-        } else if (null != ctx.CULL_DISABLE() || null != ctx.CULL_NONE() || null != ctx.CULL_TWOSIDED()) {
-            _material.setCull(CullType.DISABLE);
-        } else {
-            throw new IllegalStateException("Unhandled cull value " + ctx.getText());
-        }
-    }
+  @Override
+  public void exitQ3mapGlobalTextureDirective( @Nonnull final MaterialsParser.Q3mapGlobalTextureDirectiveContext ctx )
+  {
+    _material.q3map().setGlobalTexture( true );
+  }
 
-    @Override
-    public void exitSurfaceParameterMaterialProperty(@Nonnull final MaterialsParser.SurfaceParameterMaterialPropertyContext ctx)
-    {
-        final String text = ctx.LABEL().getText().toLowerCase();
-        SurfaceProperty surfaceProperty = null;
-        for (final SurfaceProperty value : SurfaceProperty.values()) {
-            if (value.name().equals(text)) {
-                surfaceProperty = value;
-                break;
-            }
-        }
-        if (null == surfaceProperty) {
-            throw new IllegalStateException("Unhandled surfaceParm value " + text);
-        }
-        _material.getSurfaceProperties().add(surfaceProperty);
-    }
+  @Override
+  public void exitQ3mapLightImageDirective( @Nonnull final MaterialsParser.Q3mapLightImageDirectiveContext ctx )
+  {
+    _material.q3map().setLightImage( ctx.LABEL().getText() );
+  }
 
-    @Override
-    public void exitQerEditorImageDirective( @Nonnull final MaterialsParser.QerEditorImageDirectiveContext ctx )
-    {
-        _material.qer().setEditorImage( ctx.LABEL().getText() );
-    }
+  @Override
+  public void exitQ3mapNoVertexShadowsDirective( @Nonnull final MaterialsParser.Q3mapNoVertexShadowsDirectiveContext ctx )
+  {
+    _material.q3map().setNoVertexShadows( true );
+  }
 
-    @Override
-    public void exitQerNoCarveDirective( @Nonnull final MaterialsParser.QerNoCarveDirectiveContext ctx )
-    {
-        _material.qer().setNoCarve( true );
-    }
+  @Override
+  public void exitQ3mapForceSunlightDirective( @Nonnull final MaterialsParser.Q3mapForceSunlightDirectiveContext ctx )
+  {
+    _material.q3map().setForceSunLight( true );
+  }
 
-    @Override
-    public void exitQerTransDirective( @Nonnull final MaterialsParser.QerTransDirectiveContext ctx )
-    {
-        _material.qer().setTransparency( Float.parseFloat( ctx.POSITIVE_DECIMAL().getText() ) );
-    }
+  @Override
+  public void exitQ3mapFlareDirective( @Nonnull final MaterialsParser.Q3mapFlareDirectiveContext ctx )
+  {
+    _material.q3map().setFlare( ctx.LABEL().getText() );
+  }
 
-    @Override
-    public void exitMaterial(@Nonnull final MaterialsParser.MaterialContext ctx)
+  @Override
+  public void exitQ3mapLightSubdivideDirective( @Nonnull final MaterialsParser.Q3mapLightSubdivideDirectiveContext ctx )
+  {
+    _material.q3map().setLightSubDivide( Integer.parseInt( ctx.POSITIVE_INTEGER().getText() ) );
+  }
+
+  @Override
+  public void exitQ3mapTessSizeDirective( @Nonnull final MaterialsParser.Q3mapTessSizeDirectiveContext ctx )
+  {
+    _material.q3map().setTessSize( Integer.parseInt( ctx.POSITIVE_INTEGER().getText() ) );
+  }
+
+  @Override
+  public void exitQ3mapBackSplashDirective( @Nonnull final MaterialsParser.Q3mapBackSplashDirectiveContext ctx )
+  {
+    _material.q3map().setBackSplashPercent( Integer.parseInt( ctx.POSITIVE_INTEGER().get( 0 ).getText() ) );
+    _material.q3map().setBackSplashDistance( Integer.parseInt( ctx.POSITIVE_INTEGER().get( 1 ).getText() ) );
+
+  }
+
+  @Override
+  public void exitQ3mapLightDirective( @Nonnull final MaterialsParser.Q3mapLightDirectiveContext ctx )
+  {
+    _material.q3map().setFlare( "flareshader" );
+  }
+
+  @Override
+  public void exitCullDirective( @Nonnull final MaterialsParser.CullDirectiveContext ctx )
+  {
+    if ( null != ctx.CULL_BACK() || null != ctx.CULL_BACKSIDE() || null != ctx.CULL_BACKSIDED() )
     {
-        _material.setName(ctx.LABEL().getText());
-        _unit.addMaterial(_material);
-        _material = null;
+      _material.setCull( CullType.BACK );
     }
+    else if ( null != ctx.CULL_DISABLE() || null != ctx.CULL_NONE() || null != ctx.CULL_TWOSIDED() )
+    {
+      _material.setCull( CullType.DISABLE );
+    }
+    else
+    {
+      throw new IllegalStateException( "Unhandled cull value " + ctx.getText() );
+    }
+  }
+
+  @Override
+  public void exitSurfaceParameterDirective( @Nonnull final MaterialsParser.SurfaceParameterDirectiveContext ctx )
+  {
+    final String text = ctx.LABEL().getText().toLowerCase();
+    SurfaceProperty surfaceProperty = null;
+    for ( final SurfaceProperty value : SurfaceProperty.values() )
+    {
+      if ( value.name().equals( text ) )
+      {
+        surfaceProperty = value;
+        break;
+      }
+    }
+    if ( null == surfaceProperty )
+    {
+      throw new IllegalStateException( "Unhandled surfaceParm value " + text );
+    }
+    _material.getSurfaceProperties().add( surfaceProperty );
+  }
+
+  @Override
+  public void exitQerEditorImageDirective( @Nonnull final MaterialsParser.QerEditorImageDirectiveContext ctx )
+  {
+    _material.qer().setEditorImage( ctx.LABEL().getText() );
+  }
+
+  @Override
+  public void exitQerNoCarveDirective( @Nonnull final MaterialsParser.QerNoCarveDirectiveContext ctx )
+  {
+    _material.qer().setNoCarve( true );
+  }
+
+  @Override
+  public void exitQerTransDirective( @Nonnull final MaterialsParser.QerTransDirectiveContext ctx )
+  {
+    _material.qer().setTransparency( Float.parseFloat( ctx.POSITIVE_DECIMAL().getText() ) );
+  }
+
+  @Override
+  public void exitMaterial( @Nonnull final MaterialsParser.MaterialContext ctx )
+  {
+    _material.setName( ctx.LABEL().getText() );
+    _unit.addMaterial( _material );
+    _material = null;
+  }
 }
