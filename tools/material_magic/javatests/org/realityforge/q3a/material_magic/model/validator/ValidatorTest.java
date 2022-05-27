@@ -50,7 +50,7 @@ public final class ValidatorTest
     unit.addMaterial( material3 );
     unit.addMaterial( material4 );
     unit.addMaterial( material5 );
-    
+
     assertEquals( validate( unit ),
                   Arrays.asList( "Multiple materials exist with the name 'MyMaterial1'.",
                                  "Multiple materials exist with the name 'MyMaterial2'." ) );
