@@ -31,7 +31,7 @@ materialProperty
     : generalDirective
     | q3mapMaterialProperty
     | surfaceParameterMaterialProperty
-    | qerMaterialProperty
+    | qerDirective
     ;
 
 //General Directives
@@ -85,8 +85,12 @@ q3mapMaterialProperty
 // q3map_sun <red(float)> <green(float)> <blue(float)> <intensity(int)> <degrees(int)> <elevation(int)>
     ;
 
-qerMaterialProperty
-    : QER_EDITORIMAGE LABEL
-    | QER_NOCARVE
-    | QER_TRANS POSITIVE_DECIMAL
+qerDirective
+    : qerEditorImageDirective
+    | qerNoCarveDirective
+    | qerTransDirective
     ;
+
+qerEditorImageDirective : QER_EDITORIMAGE LABEL;
+qerNoCarveDirective : QER_NOCARVE;
+qerTransDirective : QER_TRANS POSITIVE_DECIMAL;

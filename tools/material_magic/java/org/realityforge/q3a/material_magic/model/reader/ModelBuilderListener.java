@@ -5,7 +5,6 @@ import org.realityforge.q3a.material_magic.model.CullType;
 import org.realityforge.q3a.material_magic.model.Material;
 import org.realityforge.q3a.material_magic.model.MaterialsUnit;
 import org.realityforge.q3a.material_magic.model.Q3mapProperties;
-import org.realityforge.q3a.material_magic.model.QerProperties;
 import org.realityforge.q3a.material_magic.model.SurfaceProperty;
 
 final class ModelBuilderListener extends MaterialsParserBaseListener {
@@ -85,18 +84,21 @@ final class ModelBuilderListener extends MaterialsParserBaseListener {
     }
 
     @Override
-    public void exitQerMaterialProperty(@Nonnull final MaterialsParser.QerMaterialPropertyContext ctx)
+    public void exitQerEditorImageDirective( @Nonnull final MaterialsParser.QerEditorImageDirectiveContext ctx )
     {
-        QerProperties qer = _material.qer();
-        if (null != ctx.QER_TRANS()) {
-            qer.setTransparency(Float.parseFloat(ctx.POSITIVE_DECIMAL().getText()));
-        } else if (null != ctx.QER_EDITORIMAGE()) {
-            qer.setEditorImage(ctx.LABEL().getText());
-        } else if (null != ctx.QER_NOCARVE()) {
-            qer.setNoCarve(true);
-        } else {
-            throw new IllegalStateException("Unhandled qer property " + ctx.getText());
-        }
+        _material.qer().setEditorImage( ctx.LABEL().getText() );
+    }
+
+    @Override
+    public void exitQerNoCarveDirective( @Nonnull final MaterialsParser.QerNoCarveDirectiveContext ctx )
+    {
+        _material.qer().setNoCarve( true );
+    }
+
+    @Override
+    public void exitQerTransDirective( @Nonnull final MaterialsParser.QerTransDirectiveContext ctx )
+    {
+        _material.qer().setTransparency( Float.parseFloat( ctx.POSITIVE_DECIMAL().getText() ) );
     }
 
     @Override
