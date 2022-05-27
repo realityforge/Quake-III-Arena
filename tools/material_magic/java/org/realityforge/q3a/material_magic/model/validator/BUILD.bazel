@@ -9,27 +9,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 load("@rules_java//java:defs.bzl", "java_library")
 
 java_library(
-    name = "model",
-    srcs = [
-        "CullType.java",
-        "Material.java",
-        "MaterialsUnit.java",
-        "Q3mapProperties.java",
-        "QerProperties.java",
-        "SurfaceProperty.java",
-    ],
+    name = "validator",
+    srcs = ["Validator.java"],
     visibility = [
         "//tools/material_magic/java/org/realityforge/q3a/material_magic:__pkg__",
-        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader:__pkg__",
-        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/validator:__pkg__",
-        "//tools/material_magic/javatests/org/realityforge/q3a/material_magic:__subpackages__",
         "//tools/material_magic/javatests/org/realityforge/q3a/material_magic/model/validator:__pkg__",
     ],
     deps = [
         "//third_party/java:javax_annotation",
-        "//tools/material_magic/java/org/realityforge/q3a/material_magic/util:MaterialOutput",
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model",
     ],
 )
