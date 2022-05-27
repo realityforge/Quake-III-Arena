@@ -1,23 +1,24 @@
 package org.realityforge.q3a.material_magic;
 
-import org.realityforge.q3a.material_magic.model.Material;
-import org.realityforge.q3a.material_magic.model.MaterialsUnit;
-import org.realityforge.q3a.material_magic.model.reader.LoadError;
-import org.realityforge.q3a.material_magic.model.reader.MaterialsReadException;
-import org.realityforge.q3a.material_magic.model.reader.MaterialsUnitReader;
-import org.realityforge.q3a.material_magic.util.MaterialOutput;
-import picocli.CommandLine;
-import picocli.CommandLine.Command;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Callable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import org.realityforge.q3a.material_magic.model.Material;
+import org.realityforge.q3a.material_magic.model.MaterialsUnit;
+import org.realityforge.q3a.material_magic.model.reader.LoadError;
+import org.realityforge.q3a.material_magic.model.reader.MaterialsReadException;
+import org.realityforge.q3a.material_magic.model.reader.MaterialsUnitReader;
+import org.realityforge.q3a.material_magic.model.validator.Validator;
+import org.realityforge.q3a.material_magic.util.MaterialOutput;
+import picocli.CommandLine;
+import picocli.CommandLine.Command;
 
 
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted"})
