@@ -28,14 +28,14 @@ materialProperties
     ;
 
 materialProperty
-    : generalProperty
+    : generalDirective
     | q3mapMaterialProperty
     | surfaceParameterMaterialProperty
     | qerMaterialProperty
     ;
 
 //General Directives
-generalProperty
+generalDirective
     : cullMaterialProperty
 //skyParms
 //deformVertexes
