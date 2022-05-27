@@ -82,7 +82,7 @@ q3mapMaterialProperty
     | Q3MAP_BACKSPLASH POSITIVE_INTEGER POSITIVE_INTEGER
     | LIGHT ONE_INTEGER
 // NOTE: "q3map_sun" is used at runtime ... unlike all the other q3map properties
-// q3map_sun <red(float)> <green(float)> <blue(float)> <intensity(float)> <degrees(float)> <elevation(float)>
+// q3map_sun <red(float)> <green(float)> <blue(float)> <intensity(int)> <degrees(int)> <elevation(int)>
     ;
 
 qerMaterialProperty
