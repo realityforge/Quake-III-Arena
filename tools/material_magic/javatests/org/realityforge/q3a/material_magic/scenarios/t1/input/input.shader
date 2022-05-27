@@ -35,7 +35,7 @@ surfaceparm nolightmap
 surfaceparm sky
     q3map_forcesunlight
             // This is a non-normalized form of "cull back"
-            cull backsided
+            cull backside
 q3map_flare whoosh
 tesssize 32
 }
