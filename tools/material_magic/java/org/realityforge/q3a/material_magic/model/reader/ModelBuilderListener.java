@@ -114,7 +114,7 @@ final class ModelBuilderListener
   }
 
   @Override
-  public void exitNoMipMapsDirective( final MaterialsParser.NoMipMapsDirectiveContext ctx )
+  public void exitNoMipMapsDirective( @Nonnull final MaterialsParser.NoMipMapsDirectiveContext ctx )
   {
     _material.setNoMipMaps( true );
   }
@@ -126,7 +126,7 @@ final class ModelBuilderListener
   }
 
   @Override
-  public void exitEntityMergableDirective( final MaterialsParser.EntityMergableDirectiveContext ctx )
+  public void exitEntityMergableDirective( @Nonnull final MaterialsParser.EntityMergableDirectiveContext ctx )
   {
     _material.setEntityMergable( true );
   }
