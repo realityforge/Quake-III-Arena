@@ -5,9 +5,9 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import org.realityforge.q3a.material_magic.model.CullType;
 import org.realityforge.q3a.material_magic.model.FogDirective;
 import org.realityforge.q3a.material_magic.model.Material;
-import org.realityforge.q3a.material_magic.model.Unit;
 import org.realityforge.q3a.material_magic.model.SunDirective;
 import org.realityforge.q3a.material_magic.model.SurfaceParameter;
+import org.realityforge.q3a.material_magic.model.Unit;
 
 final class ModelBuilderListener
   extends MaterialsParserBaseListener
