@@ -14,7 +14,7 @@ public final class MaterialOutput
     public enum Strategy {
         /**
          * Optimise the output for consumption at runtime.
-         * Comments are removed, properties only used as part of the build process are omitted and whitespace is minimised.
+         * Comments are removed, directives only used as part of the build process are omitted and whitespace is minimised.
          */
         RUNTIME_OPTIMIZED,
         /**

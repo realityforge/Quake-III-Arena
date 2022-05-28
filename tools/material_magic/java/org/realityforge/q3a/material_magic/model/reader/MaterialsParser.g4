@@ -50,7 +50,7 @@ cullDirective : CULL (CULL_DISABLE|CULL_NONE|CULL_TWOSIDED|CULL_BACK|CULL_BACKSI
 
 surfaceParameterDirective : SURFACE_PARM LABEL;
 
-// STAGE properties
+// TODO: STAGE directives
 // map ($whiteimage|$lightmap|image..)
 // clampmap (image..)
 // animMap <frequency> <image1> .... <imageN>
