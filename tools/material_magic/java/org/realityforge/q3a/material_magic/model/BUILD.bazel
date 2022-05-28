@@ -18,7 +18,7 @@ java_library(
         "Material.java",
         "MaterialsUnit.java",
         "Q3mapProperties.java",
-        "QerProperties.java",
+        "QerDirectives.java",
         "SunDirective.java",
         "SurfaceParameter.java",
     ],

@@ -6,7 +6,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
-public final class QerProperties {
+public final class QerDirectives
+{
     private boolean _noCarve;
     private float _transparency;
     @Nullable
@@ -66,7 +67,7 @@ public final class QerProperties {
         } else if (o == null || getClass() != o.getClass()) {
             return false;
         } else {
-            final QerProperties that = (QerProperties)o;
+            final QerDirectives that = (QerDirectives)o;
             return _transparency == that._transparency && _noCarve == that._noCarve && Objects.equals(_editorImage, that._editorImage);
         }
     }

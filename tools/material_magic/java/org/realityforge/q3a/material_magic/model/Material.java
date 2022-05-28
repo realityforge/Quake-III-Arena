@@ -16,7 +16,7 @@ public final class Material {
     @Nullable
     private Q3mapProperties _q3map;
     @Nullable
-    private QerProperties _qer;
+    private QerDirectives _qer;
     @Nonnull
     private CullType _cull = CullType.FRONT;
     @Nonnull
@@ -58,10 +58,10 @@ public final class Material {
     }
 
     @Nonnull
-    public QerProperties qer()
+    public QerDirectives qer()
     {
         if (null == _qer) {
-            _qer = new QerProperties();
+            _qer = new QerDirectives();
         }
         return _qer;
     }
