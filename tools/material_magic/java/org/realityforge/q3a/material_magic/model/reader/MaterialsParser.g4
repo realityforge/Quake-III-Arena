@@ -37,9 +37,9 @@ generalDirective
     | noMipMapsDirective
     | portalDirective
     | entityMergableDirective
+    | fogParmsDirective
 //skyParms
 //deformVertexes
-//fogParms
 //polygonOffset
 //sort
     ;
@@ -49,6 +49,7 @@ noPicMipDirective : NOPICMIP;
 noMipMapsDirective : NOMIPMAPS;
 portalDirective : PORTAL;
 entityMergableDirective : ENTITYMERGABLE;
+fogParmsDirective : FOGPARMS OPEN_BRACKET? number number number CLOSE_BRACKET? number number? number?;
 
 surfaceParameterDirective : SURFACE_PARM LABEL;
 

@@ -9,6 +9,7 @@ textures/base/myBase2
   nomipmaps
   portal
   entityMergable
+  fogparms 0.85 0.1 0.01 980
   surfaceparm noimpact
   surfaceparm nolightmap
   surfaceparm sky

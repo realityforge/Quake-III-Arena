@@ -34,6 +34,10 @@ public final class MaterialTest {
         material.setNoMipMaps(true);
         material.setPortal(true);
         material.setEntityMergable(true);
+        material.fog().setRed( 1.0F );
+        material.fog().setGreen( 0.1F );
+        material.fog().setBlue( 0.5F );
+        material.fog().setDepthForOpaque( 50 );
         material.getSurfaceParameters().add( SurfaceParameter.botclip);
         material.getSurfaceParameters().add( SurfaceParameter.slime);
         material.getSurfaceParameters().add( SurfaceParameter.dust);
@@ -52,6 +56,7 @@ public final class MaterialTest {
                 + "  nomipmaps\n"
                 + "  portal\n"
                 + "  entityMergable\n"
+                + "  fogparms 1.0 0.1 0.5 50\n"
                 + "  surfaceparm botclip\n"
                 + "  surfaceparm dust\n"
                 + "  surfaceparm slime\n"
@@ -64,6 +69,7 @@ public final class MaterialTest {
                 + "nomipmaps\n"
                 + "portal\n"
                 + "entityMergable\n"
+                + "fogparms 1.0 0.1 0.5 50\n"
                 + "surfaceparm botclip\n"
                 + "surfaceparm dust\n"
                 + "surfaceparm slime\n"
@@ -152,6 +158,22 @@ public final class MaterialTest {
         // Note: These are added in a different order to demonstrate hashing and equality uses sorted order
         material2.getSurfaceParameters().add( SurfaceParameter.slime);
         material2.getSurfaceParameters().add( SurfaceParameter.botclip);
+
+        assertEquals(material1, material2);
+        assertEquals(material1.hashCode(), material2.hashCode());
+
+        material1.fog().setRed( 1.0F );
+        material1.fog().setGreen( 0.1F );
+        material1.fog().setBlue( 0.5F );
+        material1.fog().setDepthForOpaque( 50 );
+
+        assertNotEquals(material1, material2);
+        assertNotEquals(material1.hashCode(), material2.hashCode());
+
+        material2.fog().setRed( 1.0F );
+        material2.fog().setGreen( 0.1F );
+        material2.fog().setBlue( 0.5F );
+        material2.fog().setDepthForOpaque( 50 );
 
         assertEquals(material1, material2);
         assertEquals(material1.hashCode(), material2.hashCode());

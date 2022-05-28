@@ -6,6 +6,7 @@ nopicmip
 nomipmaps
 portal
 entityMergable
+fogparms 0.85 0.1 0.01 980
 surfaceparm nomarks
 surfaceparm trans
 }
@@ -17,6 +18,7 @@ nopicmip
 nomipmaps
 portal
 entityMergable
+fogparms 0.85 0.1 0.01 980
 surfaceparm noimpact
 surfaceparm nolightmap
 surfaceparm sky
@@ -24,6 +26,7 @@ surfaceparm sky
 textures/base/myBase_3
 {
 cull disable
+fogparms 0.7 0.7 0.7 128
 }
 textures/base/myBase_4
 {

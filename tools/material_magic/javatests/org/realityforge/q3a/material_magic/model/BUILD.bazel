@@ -11,6 +11,8 @@
 # limitations under the License.
 load(":model_test.bzl", _model_test = "model_test")
 
+_model_test(name = "FogDirectiveTest")
+
 _model_test(name = "MaterialTest")
 
 _model_test(name = "Q3mapDirectivesTest")

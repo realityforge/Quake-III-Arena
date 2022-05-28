@@ -15,6 +15,7 @@ java_library(
     name = "model",
     srcs = [
         "CullType.java",
+        "FogDirective.java",
         "Material.java",
         "Q3mapDirectives.java",
         "QerDirectives.java",

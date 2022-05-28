@@ -29,6 +29,8 @@ surfaceparm nomarks
 surfaceparm nomarks
 nopicmip
 nomipmaps
+// This contains the "vertex" form
+fogParms ( .85 .10 .01 ) 980
 }
 
 
@@ -36,6 +38,8 @@ nomipmaps
 
   textures/base/myBase2
 {
+// This contains the natural form sans vector
+fogparms .85 .10 .01 980
 surfaceparm noimpact
 EntityMergAble
 surfaceparm nolightmap
@@ -60,4 +64,6 @@ textures/base/myBase_3
 {
 // This is a non-normalized form of "cull disable"
 cull none
+// This contains the natural form with the numbers that were historically supported buyt now ignored
+fogparms 0.7 0.7 0.7 128 64
 }

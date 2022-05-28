@@ -3,6 +3,7 @@ package org.realityforge.q3a.material_magic.model.reader;
 import javax.annotation.Nonnull;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.realityforge.q3a.material_magic.model.CullType;
+import org.realityforge.q3a.material_magic.model.FogDirective;
 import org.realityforge.q3a.material_magic.model.Material;
 import org.realityforge.q3a.material_magic.model.Unit;
 import org.realityforge.q3a.material_magic.model.SunDirective;
@@ -128,6 +129,16 @@ final class ModelBuilderListener
   public void exitEntityMergableDirective( final MaterialsParser.EntityMergableDirectiveContext ctx )
   {
     _material.setEntityMergable( true );
+  }
+
+  @Override
+  public void exitFogParmsDirective( @Nonnull final MaterialsParser.FogParmsDirectiveContext ctx )
+  {
+    final FogDirective fog = _material.fog();
+    fog.setRed( Float.parseFloat( ctx.number( 0 ).getText() ) );
+    fog.setGreen( Float.parseFloat( ctx.number( 1 ).getText() ) );
+    fog.setBlue( Float.parseFloat( ctx.number( 2 ).getText() ) );
+    fog.setDepthForOpaque( Integer.parseInt( ctx.number( 3 ).getText() ) );
   }
 
   @Override

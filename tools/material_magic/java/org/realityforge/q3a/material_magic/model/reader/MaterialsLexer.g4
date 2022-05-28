@@ -33,6 +33,9 @@ fragment Z:[zZ];
 OPEN_BRACE : '{';
 CLOSE_BRACE : '}';
 
+OPEN_BRACKET : '(';
+CLOSE_BRACKET : ')';
+
 CULL : 'cull';
 
 CULL_DISABLE : D I S A B L E;
@@ -49,6 +52,7 @@ NOPICMIP : N O P I C M I P;
 NOMIPMAPS : N O M I P M A P S;
 PORTAL : P O R T A L;
 ENTITYMERGABLE : E N T I T Y M E R G A B L E;
+FOGPARMS : F O G P A R M S;
 
 Q3MAP_LIGHTIMAGE : Q '3' M A P '_' L I G H T I M A G E;
 Q3MAP_GLOBALTEXTURE : Q '3' M A P '_' G L O B A L T E X T U R E;
