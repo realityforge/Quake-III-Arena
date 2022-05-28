@@ -30,9 +30,9 @@ public final class MaterialTest {
         material.q3map().setNoVertexShadows(true);
         material.q3map().setLightImage("tex/img");
         material.setCull(CullType.BACK);
-        material.getSurfaceProperties().add(SurfaceProperty.botclip);
-        material.getSurfaceProperties().add(SurfaceProperty.slime);
-        material.getSurfaceProperties().add(SurfaceProperty.dust);
+        material.getSurfaceProperties().add( SurfaceParameter.botclip);
+        material.getSurfaceProperties().add( SurfaceParameter.slime);
+        material.getSurfaceProperties().add( SurfaceParameter.dust);
 
         assertTrue(material.hasQ3map());
 
@@ -101,15 +101,15 @@ public final class MaterialTest {
         assertEquals(material1, material2);
         assertEquals(material1.hashCode(), material2.hashCode());
 
-        material1.getSurfaceProperties().add(SurfaceProperty.botclip);
-        material1.getSurfaceProperties().add(SurfaceProperty.slime);
+        material1.getSurfaceProperties().add( SurfaceParameter.botclip);
+        material1.getSurfaceProperties().add( SurfaceParameter.slime);
 
         assertNotEquals(material1, material2);
         assertNotEquals(material1.hashCode(), material2.hashCode());
 
         // Note: These are added in a different order to demonstrate hashing and equality uses sorted order
-        material2.getSurfaceProperties().add(SurfaceProperty.slime);
-        material2.getSurfaceProperties().add(SurfaceProperty.botclip);
+        material2.getSurfaceProperties().add( SurfaceParameter.slime);
+        material2.getSurfaceProperties().add( SurfaceParameter.botclip);
 
         assertEquals(material1, material2);
         assertEquals(material1.hashCode(), material2.hashCode());

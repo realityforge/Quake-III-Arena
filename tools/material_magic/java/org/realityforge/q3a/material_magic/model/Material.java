@@ -20,7 +20,7 @@ public final class Material {
     @Nonnull
     private CullType _cull = CullType.FRONT;
     @Nonnull
-    private Set<SurfaceProperty> _surfaceProperties = new HashSet<>();
+    private Set<SurfaceParameter> _surfaceProperties = new HashSet<>();
 
     public Material(@Nonnull final String name)
     {
@@ -78,12 +78,12 @@ public final class Material {
     }
 
     @Nonnull
-    public Set<SurfaceProperty> getSurfaceProperties()
+    public Set<SurfaceParameter> getSurfaceProperties()
     {
         return _surfaceProperties;
     }
     @Nonnull
-    public List<SurfaceProperty> getSurfacePropertiesSorted()
+    public List<SurfaceParameter> getSurfacePropertiesSorted()
     {
         return _surfaceProperties.stream().sorted().collect(Collectors.toUnmodifiableList());
     }
@@ -106,7 +106,7 @@ public final class Material {
             if (CullType.FRONT != _cull) {
                 o.writeProperty("cull", CullType.BACK == _cull ? "back" : "disable");
             }
-            for (final SurfaceProperty surfaceProperty : getSurfacePropertiesSorted()) {
+            for (final SurfaceParameter surfaceProperty : getSurfacePropertiesSorted()) {
                 o.writeProperty("surfaceparm", surfaceProperty.name());
             }
         });

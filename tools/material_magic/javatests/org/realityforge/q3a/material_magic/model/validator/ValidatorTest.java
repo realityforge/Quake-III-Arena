@@ -9,7 +9,7 @@ import javax.annotation.Nonnull;
 import org.junit.jupiter.api.Test;
 import org.realityforge.q3a.material_magic.model.Material;
 import org.realityforge.q3a.material_magic.model.MaterialsUnit;
-import org.realityforge.q3a.material_magic.model.SurfaceProperty;
+import org.realityforge.q3a.material_magic.model.SurfaceParameter;
 
 public final class ValidatorTest {
     @Test
@@ -23,7 +23,7 @@ public final class ValidatorTest {
     {
         // Add a single material ... it has no stages but it is one of the magic ones that need no stages
         final Material material = new Material("MyMaterial");
-        material.getSurfaceProperties().add(SurfaceProperty.nolightmap);
+        material.getSurfaceProperties().add( SurfaceParameter.nolightmap);
 
         final MaterialsUnit unit = new MaterialsUnit();
         unit.addMaterial(material);
@@ -34,15 +34,15 @@ public final class ValidatorTest {
     public void duplicateMaterials()
     {
         final Material material1 = new Material("MyMaterial1");
-        material1.getSurfaceProperties().add(SurfaceProperty.nolightmap);
+        material1.getSurfaceProperties().add( SurfaceParameter.nolightmap);
         final Material material2 = new Material("MyMaterial1");
-        material2.getSurfaceProperties().add(SurfaceProperty.nolightmap);
+        material2.getSurfaceProperties().add( SurfaceParameter.nolightmap);
         final Material material3 = new Material("MyMaterial2");
-        material3.getSurfaceProperties().add(SurfaceProperty.nolightmap);
+        material3.getSurfaceProperties().add( SurfaceParameter.nolightmap);
         final Material material4 = new Material("MyMaterial2");
-        material4.getSurfaceProperties().add(SurfaceProperty.nolightmap);
+        material4.getSurfaceProperties().add( SurfaceParameter.nolightmap);
         final Material material5 = new Material("MyMaterial3");
-        material5.getSurfaceProperties().add(SurfaceProperty.nolightmap);
+        material5.getSurfaceProperties().add( SurfaceParameter.nolightmap);
 
         final MaterialsUnit unit = new MaterialsUnit();
         unit.addMaterial(material1);

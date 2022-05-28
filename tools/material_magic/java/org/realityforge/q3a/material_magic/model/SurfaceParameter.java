@@ -1,6 +1,7 @@
 package org.realityforge.q3a.material_magic.model;
 
-public enum SurfaceProperty {
+public enum SurfaceParameter
+{
     alphashadow,
     areaportal,
     botclip,

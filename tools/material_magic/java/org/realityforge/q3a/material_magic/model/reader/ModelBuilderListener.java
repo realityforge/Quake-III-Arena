@@ -6,7 +6,7 @@ import org.realityforge.q3a.material_magic.model.CullType;
 import org.realityforge.q3a.material_magic.model.Material;
 import org.realityforge.q3a.material_magic.model.MaterialsUnit;
 import org.realityforge.q3a.material_magic.model.SunDirective;
-import org.realityforge.q3a.material_magic.model.SurfaceProperty;
+import org.realityforge.q3a.material_magic.model.SurfaceParameter;
 
 final class ModelBuilderListener
   extends MaterialsParserBaseListener
@@ -129,8 +129,8 @@ final class ModelBuilderListener
   public void exitSurfaceParameterDirective( @Nonnull final MaterialsParser.SurfaceParameterDirectiveContext ctx )
   {
     final String text = ctx.LABEL().getText().toLowerCase();
-    SurfaceProperty surfaceProperty = null;
-    for ( final SurfaceProperty value : SurfaceProperty.values() )
+    SurfaceParameter surfaceProperty = null;
+    for ( final SurfaceParameter value : SurfaceParameter.values() )
     {
       if ( value.name().equals( text ) )
       {
