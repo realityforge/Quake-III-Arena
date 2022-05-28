@@ -20,7 +20,7 @@ public final class Material {
     @Nonnull
     private CullType _cull = CullType.FRONT;
     @Nonnull
-    private Set<SurfaceParameter> _surfaceProperties = new HashSet<>();
+    private Set<SurfaceParameter> _surfaceParameters = new HashSet<>();
 
     public Material(@Nonnull final String name)
     {
@@ -78,14 +78,14 @@ public final class Material {
     }
 
     @Nonnull
-    public Set<SurfaceParameter> getSurfaceProperties()
+    public Set<SurfaceParameter> getSurfaceParameters()
     {
-        return _surfaceProperties;
+        return _surfaceParameters;
     }
     @Nonnull
     public List<SurfaceParameter> getSurfacePropertiesSorted()
     {
-        return _surfaceProperties.stream().sorted().collect(Collectors.toUnmodifiableList());
+        return _surfaceParameters.stream().sorted().collect( Collectors.toUnmodifiableList());
     }
 
     /**
