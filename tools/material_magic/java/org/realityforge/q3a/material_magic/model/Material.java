@@ -19,6 +19,7 @@ public final class Material {
     private QerDirectives _qer;
     @Nonnull
     private CullType _cull = CullType.FRONT;
+    private boolean _noPicMip;
     @Nonnull
     private Set<SurfaceParameter> _surfaceParameters = new HashSet<>();
 
@@ -77,6 +78,16 @@ public final class Material {
         _cull = Objects.requireNonNull(cull);
     }
 
+    public boolean isNoPicMip()
+    {
+        return _noPicMip;
+    }
+
+    public void setNoPicMip( final boolean noPicMip )
+    {
+        _noPicMip = noPicMip;
+    }
+
     @Nonnull
     public Set<SurfaceParameter> getSurfaceParameters()
     {
@@ -106,6 +117,9 @@ public final class Material {
             if (CullType.FRONT != _cull) {
                 o.writeDirective( "cull", CullType.BACK == _cull ? "back" : "disable");
             }
+            if( _noPicMip){
+                o.writeDirective( "nopicmip" );
+            }
             for (final SurfaceParameter parameter : getSurfaceParametersSorted()) {
                 o.writeDirective( "surfaceparm", parameter.name());
             }
@@ -121,14 +135,14 @@ public final class Material {
             return false;
         } else {
             final Material that = (Material)o;
-            return _name.equals(that._name) && _cull.equals(that._cull) && Objects.equals( getSurfaceParametersSorted(), that.getSurfaceParametersSorted()) && Objects.equals( q3map(), that.q3map()) && Objects.equals( qer(), that.qer());
+            return _name.equals(that._name) && _cull.equals(that._cull) && _noPicMip == that._noPicMip && Objects.equals( getSurfaceParametersSorted(), that.getSurfaceParametersSorted()) && Objects.equals( q3map(), that.q3map()) && Objects.equals( qer(), that.qer());
         }
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash( _name, _cull, getSurfaceParametersSorted(), q3map(), qer());
+        return Objects.hash( _name, _cull, _noPicMip, getSurfaceParametersSorted(), q3map(), qer());
     }
 
     @Nonnull

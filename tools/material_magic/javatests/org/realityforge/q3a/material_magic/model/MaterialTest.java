@@ -30,6 +30,7 @@ public final class MaterialTest {
         material.q3map().setNoVertexShadows(true);
         material.q3map().setLightImage("tex/img");
         material.setCull(CullType.BACK);
+        material.setNoPicMip(true);
         material.getSurfaceParameters().add( SurfaceParameter.botclip);
         material.getSurfaceParameters().add( SurfaceParameter.slime);
         material.getSurfaceParameters().add( SurfaceParameter.dust);
@@ -44,6 +45,7 @@ public final class MaterialTest {
                 + "  q3map_novertexshadows\n"
                 + "  q3map_forcesunlight\n"
                 + "  cull back\n"
+                + "  nopicmip\n"
                 + "  surfaceparm botclip\n"
                 + "  surfaceparm dust\n"
                 + "  surfaceparm slime\n"
@@ -52,6 +54,7 @@ public final class MaterialTest {
         assertEquals("materials/my/Material2\n"
                 + "{\n"
                 + "cull back\n"
+                + "nopicmip\n"
                 + "surfaceparm botclip\n"
                 + "surfaceparm dust\n"
                 + "surfaceparm slime\n"
@@ -87,6 +90,16 @@ public final class MaterialTest {
         assertNotEquals(material1.hashCode(), material2.hashCode());
 
         material2.setCull(CullType.BACK);
+
+        assertEquals(material1, material2);
+        assertEquals(material1.hashCode(), material2.hashCode());
+
+        material1.setNoPicMip( true );
+
+        assertNotEquals(material1, material2);
+        assertNotEquals(material1.hashCode(), material2.hashCode());
+
+        material2.setNoPicMip( true );
 
         assertEquals(material1, material2);
         assertEquals(material1.hashCode(), material2.hashCode());

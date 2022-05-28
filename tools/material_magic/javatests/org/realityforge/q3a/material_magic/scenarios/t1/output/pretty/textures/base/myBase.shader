@@ -13,6 +13,7 @@ textures/base/myBase
   qer_nocarve
   qer_trans 0.3
   cull disable
+  nopicmip
   surfaceparm nomarks
   surfaceparm trans
 }

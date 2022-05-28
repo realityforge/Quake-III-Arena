@@ -107,6 +107,12 @@ final class ModelBuilderListener
   }
 
   @Override
+  public void exitNoPicMipDirective( @Nonnull final MaterialsParser.NoPicMipDirectiveContext ctx )
+  {
+    _material.setNoPicMip( true );
+  }
+
+  @Override
   public void exitQ3mapSunDirective( @Nonnull final MaterialsParser.Q3mapSunDirectiveContext ctx )
   {
     final SunDirective sun = new SunDirective();

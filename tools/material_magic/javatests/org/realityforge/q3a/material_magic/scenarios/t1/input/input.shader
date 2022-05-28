@@ -24,6 +24,7 @@ surfaceparm nomarks
 surfaceparm nomarks
 surfaceparm nomarks
 surfaceparm nomarks
+nopicmip
 }
 
 
@@ -40,6 +41,7 @@ q3map_SUN .5 .37 .19 80 315 70
             cull backside
 q3map_flare whoosh
 tesssize 32
+noPicMip
 }
 
 textures/base/myBase_4 { /* This is a non-normalized form of "cull back" */ cull backsided }
