@@ -83,7 +83,7 @@ public final class Material {
         return _surfaceParameters;
     }
     @Nonnull
-    public List<SurfaceParameter> getSurfacePropertiesSorted()
+    public List<SurfaceParameter> getSurfaceParametersSorted()
     {
         return _surfaceParameters.stream().sorted().collect( Collectors.toUnmodifiableList());
     }
@@ -106,7 +106,7 @@ public final class Material {
             if (CullType.FRONT != _cull) {
                 o.writeProperty("cull", CullType.BACK == _cull ? "back" : "disable");
             }
-            for (final SurfaceParameter surfaceProperty : getSurfacePropertiesSorted()) {
+            for (final SurfaceParameter surfaceProperty : getSurfaceParametersSorted()) {
                 o.writeProperty("surfaceparm", surfaceProperty.name());
             }
         });
@@ -121,14 +121,14 @@ public final class Material {
             return false;
         } else {
             final Material that = (Material)o;
-            return _name.equals(that._name) && _cull.equals(that._cull) && Objects.equals(getSurfacePropertiesSorted(), that.getSurfacePropertiesSorted()) && Objects.equals(q3map(), that.q3map()) && Objects.equals(qer(), that.qer());
+            return _name.equals(that._name) && _cull.equals(that._cull) && Objects.equals( getSurfaceParametersSorted(), that.getSurfaceParametersSorted()) && Objects.equals( q3map(), that.q3map()) && Objects.equals( qer(), that.qer());
         }
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash(_name, _cull, getSurfacePropertiesSorted(), q3map(), qer());
+        return Objects.hash( _name, _cull, getSurfaceParametersSorted(), q3map(), qer());
     }
 
     @Nonnull
