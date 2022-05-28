@@ -19,6 +19,8 @@ q3map_sun	1 1 1 100 -58 58
 // This next one has an UPPERCASE T but will be normalize to lower case
 surfaceparm	Trans
 
+portal
+
 // Duplicate surfaceparm are ignored
 surfaceparm nomarks
 surfaceparm nomarks
@@ -44,6 +46,7 @@ q3map_flare whoosh
 tesssize 32
 noPicMip
 noMipMaps
+PoRtAl
 }
 
 textures/base/myBase_4 { /* This is a non-normalized form of "cull back" */ cull backsided }

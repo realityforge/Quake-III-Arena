@@ -32,6 +32,7 @@ public final class MaterialTest {
         material.setCull(CullType.BACK);
         material.setNoPicMip(true);
         material.setNoMipMaps(true);
+        material.setPortal(true);
         material.getSurfaceParameters().add( SurfaceParameter.botclip);
         material.getSurfaceParameters().add( SurfaceParameter.slime);
         material.getSurfaceParameters().add( SurfaceParameter.dust);
@@ -48,6 +49,7 @@ public final class MaterialTest {
                 + "  cull back\n"
                 + "  nopicmip\n"
                 + "  nomipmaps\n"
+                + "  portal\n"
                 + "  surfaceparm botclip\n"
                 + "  surfaceparm dust\n"
                 + "  surfaceparm slime\n"
@@ -58,6 +60,7 @@ public final class MaterialTest {
                 + "cull back\n"
                 + "nopicmip\n"
                 + "nomipmaps\n"
+                + "portal\n"
                 + "surfaceparm botclip\n"
                 + "surfaceparm dust\n"
                 + "surfaceparm slime\n"
@@ -103,6 +106,16 @@ public final class MaterialTest {
         assertNotEquals(material1.hashCode(), material2.hashCode());
 
         material2.setNoPicMip( true );
+
+        assertEquals(material1, material2);
+        assertEquals(material1.hashCode(), material2.hashCode());
+
+        material1.setPortal( true );
+
+        assertNotEquals(material1, material2);
+        assertNotEquals(material1.hashCode(), material2.hashCode());
+
+        material2.setPortal( true );
 
         assertEquals(material1, material2);
         assertEquals(material1.hashCode(), material2.hashCode());

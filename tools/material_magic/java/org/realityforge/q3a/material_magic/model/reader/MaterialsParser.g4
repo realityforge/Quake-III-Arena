@@ -35,18 +35,19 @@ generalDirective
     : cullDirective
     | noPicMipDirective
     | noMipMapsDirective
+    | portalDirective
 //skyParms
 //deformVertexes
 //entityMergable
 //fogParms
 //polygonOffset
-//portal
 //sort
     ;
 
 cullDirective : CULL (CULL_DISABLE|CULL_NONE|CULL_TWOSIDED|CULL_BACK|CULL_BACKSIDE|CULL_BACKSIDED);
 noPicMipDirective : NOPICMIP;
 noMipMapsDirective : NOMIPMAPS;
+portalDirective : PORTAL;
 
 surfaceParameterDirective : SURFACE_PARM LABEL;
 

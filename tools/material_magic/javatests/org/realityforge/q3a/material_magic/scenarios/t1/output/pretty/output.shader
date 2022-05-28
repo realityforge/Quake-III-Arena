@@ -15,6 +15,7 @@ textures/base/myBase
   cull disable
   nopicmip
   nomipmaps
+  portal
   surfaceparm nomarks
   surfaceparm trans
 }
@@ -28,6 +29,7 @@ textures/base/myBase2
   cull back
   nopicmip
   nomipmaps
+  portal
   surfaceparm noimpact
   surfaceparm nolightmap
   surfaceparm sky

@@ -119,6 +119,12 @@ final class ModelBuilderListener
   }
 
   @Override
+  public void exitPortalDirective( @Nonnull final MaterialsParser.PortalDirectiveContext ctx )
+  {
+    _material.setPortal( true );
+  }
+
+  @Override
   public void exitQ3mapSunDirective( @Nonnull final MaterialsParser.Q3mapSunDirectiveContext ctx )
   {
     final SunDirective sun = new SunDirective();

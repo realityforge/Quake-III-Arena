@@ -21,6 +21,7 @@ public final class Material {
     private CullType _cull = CullType.FRONT;
     private boolean _noPicMip;
     private boolean _noMipMaps;
+    private boolean _portal;
     @Nonnull
     private Set<SurfaceParameter> _surfaceParameters = new HashSet<>();
 
@@ -99,6 +100,16 @@ public final class Material {
         _noMipMaps = noMipMaps;
     }
 
+    public boolean isPortal()
+    {
+        return _portal;
+    }
+
+    public void setPortal( final boolean portal )
+    {
+        _portal = portal;
+    }
+
     @Nonnull
     public Set<SurfaceParameter> getSurfaceParameters()
     {
@@ -134,6 +145,9 @@ public final class Material {
             if(_noMipMaps){
                 o.writeDirective( "nomipmaps" );
             }
+            if(_portal){
+                o.writeDirective( "portal" );
+            }
             for (final SurfaceParameter parameter : getSurfaceParametersSorted()) {
                 o.writeDirective( "surfaceparm", parameter.name());
             }
@@ -149,14 +163,14 @@ public final class Material {
             return false;
         } else {
             final Material that = (Material)o;
-            return _name.equals(that._name) && _cull.equals(that._cull) && _noPicMip == that._noPicMip && _noMipMaps == that._noMipMaps && Objects.equals( getSurfaceParametersSorted(), that.getSurfaceParametersSorted()) && Objects.equals( q3map(), that.q3map()) && Objects.equals( qer(), that.qer());
+            return _name.equals(that._name) && _cull.equals(that._cull) && _noPicMip == that._noPicMip && _noMipMaps == that._noMipMaps && _portal == that._portal && Objects.equals( getSurfaceParametersSorted(), that.getSurfaceParametersSorted()) && Objects.equals( q3map(), that.q3map()) && Objects.equals( qer(), that.qer());
         }
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash( _name, _cull, _noPicMip, _noMipMaps, getSurfaceParametersSorted(), q3map(), qer());
+        return Objects.hash( _name, _cull, _noPicMip, _noMipMaps, _portal, getSurfaceParametersSorted(), q3map(), qer());
     }
 
     @Nonnull
