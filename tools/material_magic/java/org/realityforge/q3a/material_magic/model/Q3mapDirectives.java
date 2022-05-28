@@ -145,7 +145,7 @@ public final class Q3mapDirectives
         if (null != _sun) {
             _sun.write( output );
         }
-        if (!output.shouldOmitNonRuntimeProperties()) {
+        if (!output.shouldOmitNonRuntimeDirectives()) {
             if (0 != _surfaceLight) {
                 output.writeDirective( "q3map_surfacelight", Integer.toString( _surfaceLight));
             }

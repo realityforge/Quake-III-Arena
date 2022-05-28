@@ -12,7 +12,7 @@ public final class MaterialOutputTest {
     {
         final Path file = Files.createTempFile("m", ".material");
         try (final MaterialOutput output = new MaterialOutput(file, MaterialOutput.Strategy.PRETTY)) {
-            assertFalse(output.shouldOmitNonRuntimeProperties());
+            assertFalse(output.shouldOmitNonRuntimeDirectives());
             assertTrue(output.shouldPrettyPrint());
             assertEquals(MaterialOutput.Strategy.PRETTY, output.getStrategy());
         }
@@ -23,7 +23,7 @@ public final class MaterialOutputTest {
     {
         final Path file = Files.createTempFile("m", ".material");
         try (final MaterialOutput output = new MaterialOutput(file, MaterialOutput.Strategy.RUNTIME_OPTIMIZED)) {
-            assertTrue(output.shouldOmitNonRuntimeProperties());
+            assertTrue(output.shouldOmitNonRuntimeDirectives());
             assertFalse(output.shouldPrettyPrint());
             assertEquals(MaterialOutput.Strategy.RUNTIME_OPTIMIZED, output.getStrategy());
         }

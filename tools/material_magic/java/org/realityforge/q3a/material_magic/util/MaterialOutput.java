@@ -74,7 +74,7 @@ public final class MaterialOutput
         return _strategy;
     }
 
-    public boolean shouldOmitNonRuntimeProperties()
+    public boolean shouldOmitNonRuntimeDirectives()
     {
         return Strategy.RUNTIME_OPTIMIZED == getStrategy();
     }

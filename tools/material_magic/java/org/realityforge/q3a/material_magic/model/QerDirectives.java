@@ -46,7 +46,7 @@ public final class QerDirectives
 
     void write(@Nonnull final MaterialOutput output) throws IOException
     {
-        if (!output.shouldOmitNonRuntimeProperties()) {
+        if (!output.shouldOmitNonRuntimeDirectives()) {
             if (null != _editorImage) {
                 output.writeDirective( "qer_editorimage", _editorImage);
             }
