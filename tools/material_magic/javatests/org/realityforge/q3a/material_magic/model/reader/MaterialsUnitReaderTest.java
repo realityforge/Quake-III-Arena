@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.realityforge.q3a.material_magic.model.Material;
 import org.realityforge.q3a.material_magic.model.MaterialsUnit;
-import org.realityforge.q3a.material_magic.model.Q3mapProperties;
+import org.realityforge.q3a.material_magic.model.Q3mapDirectives;
 
 public final class MaterialsUnitReaderTest {
     @Test
@@ -25,7 +25,7 @@ public final class MaterialsUnitReaderTest {
         final Material material = materials.get(0);
         assertEquals("textures/base/myBase", material.getName());
         assertTrue(material.hasQ3map());
-        final Q3mapProperties q3map = material.q3map();
+        final Q3mapDirectives q3map = material.q3map();
         assertEquals("textures/wall/glowglow", q3map.getLightImage());
         assertEquals(1500, q3map.getSurfaceLight());
         assertTrue(q3map.noVertexShadows());
@@ -48,7 +48,7 @@ public final class MaterialsUnitReaderTest {
             final Material material = materials.get(0);
             assertEquals("textures/base/mat1", material.getName());
             assertTrue(material.hasQ3map());
-            final Q3mapProperties q3map = material.q3map();
+            final Q3mapDirectives q3map = material.q3map();
             assertNull(q3map.getLightImage());
             assertEquals(1500, q3map.getSurfaceLight());
             assertFalse(q3map.noVertexShadows());
@@ -60,7 +60,7 @@ public final class MaterialsUnitReaderTest {
 
             assertEquals("textures/base/mat2", material.getName());
             assertTrue(material.hasQ3map());
-            final Q3mapProperties q3map = material.q3map();
+            final Q3mapDirectives q3map = material.q3map();
             assertEquals("textures/wall/glowglow", q3map.getLightImage());
             assertEquals(0, q3map.getSurfaceLight());
             assertFalse(q3map.noVertexShadows());

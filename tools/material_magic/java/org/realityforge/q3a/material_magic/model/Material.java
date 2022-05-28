@@ -14,7 +14,7 @@ public final class Material {
     @Nonnull
     private String _name;
     @Nullable
-    private Q3mapProperties _q3map;
+    private Q3mapDirectives _q3map;
     @Nullable
     private QerDirectives _qer;
     @Nonnull
@@ -44,10 +44,10 @@ public final class Material {
     }
 
     @Nonnull
-    public Q3mapProperties q3map()
+    public Q3mapDirectives q3map()
     {
         if (null == _q3map) {
-            _q3map = new Q3mapProperties();
+            _q3map = new Q3mapDirectives();
         }
         return _q3map;
     }

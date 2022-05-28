@@ -15,7 +15,7 @@ _model_test(name = "MaterialsUnitTest")
 
 _model_test(name = "MaterialTest")
 
-_model_test(name = "Q3mapPropertiesTest")
+_model_test(name = "Q3mapDirectivesTest")
 
 _model_test(name = "QerDirectivesTest")
 

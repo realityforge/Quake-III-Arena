@@ -6,7 +6,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
-public final class Q3mapProperties {
+public final class Q3mapDirectives
+{
     public static final int DEFAULT_BACKSPLASH_PERCENT = 5;
     public static final int DEFAULT_BACKSPLASH_DISTANCE = 16;
     private boolean _globalTexture;
@@ -186,7 +187,7 @@ public final class Q3mapProperties {
         } else if (o == null || getClass() != o.getClass()) {
             return false;
         } else {
-            final Q3mapProperties that = (Q3mapProperties)o;
+            final Q3mapDirectives that = (Q3mapDirectives)o;
             return _globalTexture == that._globalTexture && _forceSunLight == that._forceSunLight && _noVertexShadows == that._noVertexShadows && _surfaceLight == that._surfaceLight && _lightSubDivide == that._lightSubDivide && _tessSize == that._tessSize && _backSplashPercent == that._backSplashPercent && _backSplashDistance == that._backSplashDistance && Objects.equals( _lightImage, that._lightImage) && Objects.equals( _flare, that._flare) && Objects.equals( _sun,that._sun );
         }
     }

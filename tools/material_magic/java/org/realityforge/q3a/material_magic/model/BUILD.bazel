@@ -17,7 +17,7 @@ java_library(
         "CullType.java",
         "Material.java",
         "MaterialsUnit.java",
-        "Q3mapProperties.java",
+        "Q3mapDirectives.java",
         "QerDirectives.java",
         "SunDirective.java",
         "SurfaceParameter.java",
