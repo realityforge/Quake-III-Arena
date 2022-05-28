@@ -106,8 +106,8 @@ public final class Material {
             if (CullType.FRONT != _cull) {
                 o.writeDirective( "cull", CullType.BACK == _cull ? "back" : "disable");
             }
-            for (final SurfaceParameter surfaceProperty : getSurfaceParametersSorted()) {
-                o.writeDirective( "surfaceparm", surfaceProperty.name());
+            for (final SurfaceParameter parameter : getSurfaceParametersSorted()) {
+                o.writeDirective( "surfaceparm", parameter.name());
             }
         });
     }

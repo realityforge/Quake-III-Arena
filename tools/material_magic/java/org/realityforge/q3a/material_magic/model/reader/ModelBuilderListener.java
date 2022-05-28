@@ -129,20 +129,20 @@ final class ModelBuilderListener
   public void exitSurfaceParameterDirective( @Nonnull final MaterialsParser.SurfaceParameterDirectiveContext ctx )
   {
     final String text = ctx.LABEL().getText().toLowerCase();
-    SurfaceParameter surfaceProperty = null;
+    SurfaceParameter parameter = null;
     for ( final SurfaceParameter value : SurfaceParameter.values() )
     {
       if ( value.name().equals( text ) )
       {
-        surfaceProperty = value;
+        parameter = value;
         break;
       }
     }
-    if ( null == surfaceProperty )
+    if ( null == parameter )
     {
       throw new IllegalStateException( "Unhandled surfaceParm value " + text );
     }
-    _material.getSurfaceParameters().add( surfaceProperty );
+    _material.getSurfaceParameters().add( parameter );
   }
 
   @Override
