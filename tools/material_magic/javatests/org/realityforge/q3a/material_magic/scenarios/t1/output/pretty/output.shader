@@ -14,6 +14,7 @@ textures/base/myBase
   qer_trans 0.3
   cull disable
   nopicmip
+  nomipmaps
   surfaceparm nomarks
   surfaceparm trans
 }
@@ -26,6 +27,7 @@ textures/base/myBase2
   tesssize 32
   cull back
   nopicmip
+  nomipmaps
   surfaceparm noimpact
   surfaceparm nolightmap
   surfaceparm sky

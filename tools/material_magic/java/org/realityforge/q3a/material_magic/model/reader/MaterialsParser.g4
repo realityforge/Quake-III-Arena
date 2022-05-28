@@ -34,11 +34,11 @@ directive
 generalDirective
     : cullDirective
     | noPicMipDirective
+    | noMipMapsDirective
 //skyParms
 //deformVertexes
 //entityMergable
 //fogParms
-//noMipMaps
 //polygonOffset
 //portal
 //sort
@@ -46,6 +46,7 @@ generalDirective
 
 cullDirective : CULL (CULL_DISABLE|CULL_NONE|CULL_TWOSIDED|CULL_BACK|CULL_BACKSIDE|CULL_BACKSIDED);
 noPicMipDirective : NOPICMIP;
+noMipMapsDirective : NOMIPMAPS;
 
 surfaceParameterDirective : SURFACE_PARM LABEL;
 

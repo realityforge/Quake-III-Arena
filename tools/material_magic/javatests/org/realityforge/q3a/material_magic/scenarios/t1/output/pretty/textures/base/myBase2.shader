@@ -6,6 +6,7 @@ textures/base/myBase2
   tesssize 32
   cull back
   nopicmip
+  nomipmaps
   surfaceparm noimpact
   surfaceparm nolightmap
   surfaceparm sky

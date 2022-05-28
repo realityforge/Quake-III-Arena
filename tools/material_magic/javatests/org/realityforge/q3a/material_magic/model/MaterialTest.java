@@ -31,6 +31,7 @@ public final class MaterialTest {
         material.q3map().setLightImage("tex/img");
         material.setCull(CullType.BACK);
         material.setNoPicMip(true);
+        material.setNoMipMaps(true);
         material.getSurfaceParameters().add( SurfaceParameter.botclip);
         material.getSurfaceParameters().add( SurfaceParameter.slime);
         material.getSurfaceParameters().add( SurfaceParameter.dust);
@@ -46,6 +47,7 @@ public final class MaterialTest {
                 + "  q3map_forcesunlight\n"
                 + "  cull back\n"
                 + "  nopicmip\n"
+                + "  nomipmaps\n"
                 + "  surfaceparm botclip\n"
                 + "  surfaceparm dust\n"
                 + "  surfaceparm slime\n"
@@ -55,6 +57,7 @@ public final class MaterialTest {
                 + "{\n"
                 + "cull back\n"
                 + "nopicmip\n"
+                + "nomipmaps\n"
                 + "surfaceparm botclip\n"
                 + "surfaceparm dust\n"
                 + "surfaceparm slime\n"

@@ -14,6 +14,7 @@ textures/base/myBase
   qer_trans 0.3
   cull disable
   nopicmip
+  nomipmaps
   surfaceparm nomarks
   surfaceparm trans
 }
