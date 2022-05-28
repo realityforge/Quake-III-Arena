@@ -11,12 +11,12 @@
 # limitations under the License.
 load(":model_test.bzl", _model_test = "model_test")
 
-_model_test("MaterialsUnitTest")
+_model_test(name = "MaterialsUnitTest")
 
-_model_test("MaterialTest")
+_model_test(name = "MaterialTest")
 
-_model_test("Q3mapPropertiesTest")
+_model_test(name = "Q3mapPropertiesTest")
 
-_model_test("QerDirectivesTest")
+_model_test(name = "QerDirectivesTest")
 
-_model_test("SunDirectiveTest")
+_model_test(name = "SunDirectiveTest")
