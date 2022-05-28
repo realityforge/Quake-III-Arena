@@ -35,6 +35,7 @@ public final class Validator {
                 // TODO: Verify directives with POSITIVE_INTEGERS have positive values (or 0)
                 // TODO: Another verify step should ensure that referenced textures all present and of the expected format
                 // TODO: Warn if we end up with a material name or texture name that contains uppercase characters
+                // TODO: Does FogDirective imply surfaceparm fog and vice versa?
             }
         }
         return errors;
