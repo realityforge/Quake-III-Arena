@@ -8,14 +8,14 @@ import java.util.Collections;
 import javax.annotation.Nonnull;
 import org.junit.jupiter.api.Test;
 import org.realityforge.q3a.material_magic.model.Material;
-import org.realityforge.q3a.material_magic.model.MaterialsUnit;
+import org.realityforge.q3a.material_magic.model.Unit;
 import org.realityforge.q3a.material_magic.model.SurfaceParameter;
 
 public final class ValidatorTest {
     @Test
     public void validateEmptyUnit()
     {
-        assertEquals(validate(new MaterialsUnit()), Collections.singletonList("Unit contains zero materials"));
+        assertEquals( validate(new Unit()), Collections.singletonList( "Unit contains zero materials"));
     }
 
     @Test
@@ -25,7 +25,7 @@ public final class ValidatorTest {
         final Material material = new Material("MyMaterial");
         material.getSurfaceParameters().add( SurfaceParameter.nolightmap);
 
-        final MaterialsUnit unit = new MaterialsUnit();
+        final Unit unit = new Unit();
         unit.addMaterial(material);
         assertEquals(validate(unit), Collections.emptyList());
     }
@@ -44,7 +44,7 @@ public final class ValidatorTest {
         final Material material5 = new Material("MyMaterial3");
         material5.getSurfaceParameters().add( SurfaceParameter.nolightmap);
 
-        final MaterialsUnit unit = new MaterialsUnit();
+        final Unit unit = new Unit();
         unit.addMaterial(material1);
         unit.addMaterial(material2);
         unit.addMaterial(material3);
@@ -57,7 +57,7 @@ public final class ValidatorTest {
     }
 
     @Nonnull
-    private Collection<String> validate(@Nonnull final MaterialsUnit unit)
+    private Collection<String> validate(@Nonnull final Unit unit)
     {
         return new Validator().validate(unit);
     }

@@ -2,9 +2,7 @@ parser grammar MaterialsParser;
 
 options { tokenVocab=MaterialsLexer; }
 
-materialsContainer
-	: materials EOF
-;
+unit : materials EOF;
 
 materials
 	: documentation material materials

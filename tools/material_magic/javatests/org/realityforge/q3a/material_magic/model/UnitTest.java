@@ -5,11 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
-public final class MaterialsUnitTest {
+public final class UnitTest
+{
     @Test
     public void basicOperation()
     {
-        final MaterialsUnit unit = new MaterialsUnit();
+        final Unit unit = new Unit();
         final Material material1 = new Material("materials/my/MaterialZ");
         final Material material2 = new Material("materials/my/MaterialA");
         final Material material3 = new Material("materials/my/MaterialB");
@@ -86,8 +87,8 @@ public final class MaterialsUnitTest {
     @Test
     public void testEqualsAndHash()
     {
-        final MaterialsUnit unit1 = new MaterialsUnit();
-        final MaterialsUnit unit2 = new MaterialsUnit();
+        final Unit unit1 = new Unit();
+        final Unit unit2 = new Unit();
         final Material material1 = new Material("materials/my/Material1");
         final Material material2 = new Material("materials/my/Material2");
         final Material material3 = new Material("materials/my/Material3");

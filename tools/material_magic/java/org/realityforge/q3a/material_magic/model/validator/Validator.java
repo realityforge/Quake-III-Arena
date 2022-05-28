@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Nonnull;
 import org.realityforge.q3a.material_magic.model.Material;
-import org.realityforge.q3a.material_magic.model.MaterialsUnit;
+import org.realityforge.q3a.material_magic.model.Unit;
 
 public final class Validator {
     @Nonnull
-    public Collection<String> validate(@Nonnull final MaterialsUnit unit)
+    public Collection<String> validate(@Nonnull final Unit unit)
     {
         final Collection<String> errors = new ArrayList<>();
         final List<Material> materials = unit.getMaterials();

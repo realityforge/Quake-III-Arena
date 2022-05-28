@@ -5,10 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.realityforge.q3a.material_magic.model.Material;
-import org.realityforge.q3a.material_magic.model.MaterialsUnit;
+import org.realityforge.q3a.material_magic.model.Unit;
 import org.realityforge.q3a.material_magic.model.Q3mapDirectives;
 
-public final class MaterialsUnitReaderTest {
+public final class UnitReaderTest
+{
     @Test
     public void readSingleMaterial() throws Exception
     {
@@ -19,7 +20,7 @@ public final class MaterialsUnitReaderTest {
             + "  q3map_novertexshadows\n"
             + "\t\t\t\t  q3map_globaltexture\n"
             + "}\n";
-        final MaterialsUnit unit = MaterialsUnitReader.readFromString(materialText);
+        final Unit unit = UnitReader.readFromString( materialText);
         final List<Material> materials = unit.getMaterials();
         assertEquals(1, materials.size());
         final Material material = materials.get(0);
@@ -32,7 +33,7 @@ public final class MaterialsUnitReaderTest {
         assertTrue(q3map.globalTexture());
         assertFalse(q3map.forceSunLight());
 
-        final MaterialsUnit unit2 = MaterialsUnitReader.readFromString(unit.toString());
+        final Unit unit2 = UnitReader.readFromString( unit.toString());
         assertEquals(unit2, unit, "Expected the unit that was read post writing to match");
     }
 
@@ -41,7 +42,7 @@ public final class MaterialsUnitReaderTest {
     {
         final String materialText = "textures/base/mat1\n{\nq3map_surfacelight 1500\n}\n"
             + "textures/base/mat2\n{\nq3map_lightimage textures/wall/glowglow\n}\n";
-        final MaterialsUnit unit = MaterialsUnitReader.readFromString(materialText);
+        final Unit unit = UnitReader.readFromString( materialText);
         final List<Material> materials = unit.getMaterials();
         assertEquals(2, materials.size());
         {
@@ -68,7 +69,7 @@ public final class MaterialsUnitReaderTest {
             assertFalse(q3map.forceSunLight());
         }
 
-        final MaterialsUnit unit2 = MaterialsUnitReader.readFromString(unit.toString());
+        final Unit unit2 = UnitReader.readFromString( unit.toString());
         assertEquals(unit2, unit, "Expected the unit that was read post writing to match");
     }
 
@@ -84,7 +85,7 @@ public final class MaterialsUnitReaderTest {
             + "}\n";
 
         try {
-            MaterialsUnitReader.readFromString(materialText);
+            UnitReader.readFromString( materialText);
             fail("Unexpectedly succeeded in parsing bad input without an error");
         } catch (final MaterialsReadException e) {
             final List<LoadError> errors = e.getSyntaxErrors();

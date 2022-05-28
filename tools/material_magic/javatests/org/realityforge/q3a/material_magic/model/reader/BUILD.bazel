@@ -25,7 +25,7 @@ junit5_test(
 junit5_test(
     name = "MaterialsUnitReaderTest",
     size = "small",
-    srcs = ["MaterialsUnitReaderTest.java"],
+    srcs = ["UnitReaderTest.java"],
     test_package = "org.realityforge.q3a.material_magic.model.reader",
     deps = [
         "//tools/material_magic/java/org/realityforge/q3a/material_magic/model",

@@ -16,11 +16,11 @@ java_library(
     srcs = [
         "CullType.java",
         "Material.java",
-        "MaterialsUnit.java",
         "Q3mapDirectives.java",
         "QerDirectives.java",
         "SunDirective.java",
         "SurfaceParameter.java",
+        "Unit.java",
     ],
     visibility = [
         "//tools/material_magic/java/org/realityforge/q3a/material_magic:__pkg__",

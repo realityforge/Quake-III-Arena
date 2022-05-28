@@ -46,8 +46,8 @@ java_library(
     srcs = [
         "LoadError.java",
         "MaterialsReadException.java",
-        "MaterialsUnitReader.java",
         "ModelBuilderListener.java",
+        "UnitReader.java",
     ],
     visibility = [
         "//tools/material_magic/java/org/realityforge/q3a/material_magic:__pkg__",

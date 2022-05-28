@@ -11,10 +11,10 @@ import java.util.concurrent.Callable;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import org.realityforge.q3a.material_magic.model.Material;
-import org.realityforge.q3a.material_magic.model.MaterialsUnit;
+import org.realityforge.q3a.material_magic.model.Unit;
 import org.realityforge.q3a.material_magic.model.reader.LoadError;
 import org.realityforge.q3a.material_magic.model.reader.MaterialsReadException;
-import org.realityforge.q3a.material_magic.model.reader.MaterialsUnitReader;
+import org.realityforge.q3a.material_magic.model.reader.UnitReader;
 import org.realityforge.q3a.material_magic.model.validator.Validator;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
 import picocli.CommandLine;
@@ -42,7 +42,7 @@ public class Main implements Callable<Integer> {
     @Override
     public Integer call() throws Exception
     {
-        final MaterialsUnit unit = loadInputs();
+        final Unit unit = loadInputs();
         if (null == unit) {
             return 1;
         }
@@ -64,9 +64,9 @@ public class Main implements Callable<Integer> {
 
         if (null != _outputDirectory) {
             for (final Material material : unit.getMaterials()) {
-                final MaterialsUnit newUnit = new MaterialsUnit();
+                final Unit newUnit = new Unit();
                 newUnit.addMaterial(material);
-                if (!writeUnit(_outputDirectory.resolve(material.getName() + MaterialsUnit.EXTENSION), newUnit)) {
+                if (!writeUnit( _outputDirectory.resolve( material.getName() + Unit.EXTENSION), newUnit)) {
                     return 1;
                 }
             }
@@ -78,7 +78,7 @@ public class Main implements Callable<Integer> {
         return 0;
     }
 
-    private boolean writeUnit(@Nonnull final Path path, @Nonnull final MaterialsUnit unit)
+    private boolean writeUnit(@Nonnull final Path path, @Nonnull final Unit unit)
     {
         if (_identityTransform && !verifyIdentityTransform(path, unit)) {
             return false;
@@ -101,11 +101,11 @@ public class Main implements Callable<Integer> {
     }
 
     @Nullable
-    private MaterialsUnit loadInputs()
+    private Unit loadInputs()
     {
-        final List<MaterialsUnit> units = new ArrayList<>();
+        final List<Unit> units = new ArrayList<>();
         for (final Path input : _input) {
-            final MaterialsUnit unit = loadUnit(input);
+            final Unit unit = loadUnit( input);
             if (null == unit) {
                 return null;
             } else {
@@ -122,11 +122,11 @@ public class Main implements Callable<Integer> {
         }
     }
 
-    private boolean verifyIdentityTransform(@Nonnull final Path file, @Nonnull final MaterialsUnit unit)
+    private boolean verifyIdentityTransform(@Nonnull final Path file, @Nonnull final Unit unit)
     {
-        final MaterialsUnit transformedUnit;
+        final Unit transformedUnit;
         try {
-            transformedUnit = MaterialsUnitReader.readFromString(unit.toString());
+            transformedUnit = UnitReader.readFromString( unit.toString());
         } catch (final MaterialsReadException e) {
             System.err.println("Error: Invalid unit when checking identity transform of file " + file);
             for (final LoadError syntaxError : e.getSyntaxErrors()) {
@@ -151,9 +151,9 @@ public class Main implements Callable<Integer> {
     }
 
     @Nonnull
-    private MaterialsUnit merge(@Nonnull final List<MaterialsUnit> units)
+    private Unit merge( @Nonnull final List<Unit> units)
     {
-        final MaterialsUnit unit = new MaterialsUnit();
+        final Unit unit = new Unit();
         units.forEach(u -> u.getMaterials().forEach(unit::addMaterial));
         return unit;
     }
@@ -166,10 +166,10 @@ public class Main implements Callable<Integer> {
      * @return the loaded unit or null if the load failed.
      */
     @Nullable
-    private MaterialsUnit loadUnit(@Nonnull final Path path)
+    private Unit loadUnit( @Nonnull final Path path)
     {
         try {
-            return MaterialsUnitReader.fromPath(path);
+            return UnitReader.fromPath( path);
         } catch (final MaterialsReadException e) {
             System.err.println("Error: Invalid input file " + path);
             for (final LoadError syntaxError : e.getSyntaxErrors()) {

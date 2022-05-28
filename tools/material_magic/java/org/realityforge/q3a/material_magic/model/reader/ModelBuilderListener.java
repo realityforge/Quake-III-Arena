@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.realityforge.q3a.material_magic.model.CullType;
 import org.realityforge.q3a.material_magic.model.Material;
-import org.realityforge.q3a.material_magic.model.MaterialsUnit;
+import org.realityforge.q3a.material_magic.model.Unit;
 import org.realityforge.q3a.material_magic.model.SunDirective;
 import org.realityforge.q3a.material_magic.model.SurfaceParameter;
 
@@ -12,11 +12,11 @@ final class ModelBuilderListener
   extends MaterialsParserBaseListener
 {
   @Nonnull
-  private final MaterialsUnit _unit = new MaterialsUnit();
+  private final Unit _unit = new Unit();
   private Material _material;
 
   @Nonnull
-  MaterialsUnit getUnit()
+  Unit getUnit()
   {
     return _unit;
   }

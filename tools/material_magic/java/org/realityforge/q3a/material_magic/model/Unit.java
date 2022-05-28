@@ -12,7 +12,8 @@ import org.realityforge.q3a.material_magic.util.MaterialOutput;
 /**
  * A single "materials" unit contains all the materials that are present in a single unit or file.
  */
-public final class MaterialsUnit {
+public final class Unit
+{
     @Nonnull
     public static final String EXTENSION = ".shader";
     @Nonnull
@@ -71,7 +72,7 @@ public final class MaterialsUnit {
         } else if (o == null || getClass() != o.getClass()) {
             return false;
         } else {
-            final MaterialsUnit that = (MaterialsUnit)o;
+            final Unit that = (Unit)o;
             return getSortedMaterials().equals(that.getSortedMaterials());
         }
     }
