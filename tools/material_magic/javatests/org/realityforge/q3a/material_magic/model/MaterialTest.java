@@ -33,6 +33,7 @@ public final class MaterialTest {
         material.setNoPicMip(true);
         material.setNoMipMaps(true);
         material.setPortal(true);
+        material.setEntityMergable(true);
         material.getSurfaceParameters().add( SurfaceParameter.botclip);
         material.getSurfaceParameters().add( SurfaceParameter.slime);
         material.getSurfaceParameters().add( SurfaceParameter.dust);
@@ -50,6 +51,7 @@ public final class MaterialTest {
                 + "  nopicmip\n"
                 + "  nomipmaps\n"
                 + "  portal\n"
+                + "  entityMergable\n"
                 + "  surfaceparm botclip\n"
                 + "  surfaceparm dust\n"
                 + "  surfaceparm slime\n"
@@ -61,6 +63,7 @@ public final class MaterialTest {
                 + "nopicmip\n"
                 + "nomipmaps\n"
                 + "portal\n"
+                + "entityMergable\n"
                 + "surfaceparm botclip\n"
                 + "surfaceparm dust\n"
                 + "surfaceparm slime\n"
@@ -116,6 +119,16 @@ public final class MaterialTest {
         assertNotEquals(material1.hashCode(), material2.hashCode());
 
         material2.setPortal( true );
+
+        assertEquals(material1, material2);
+        assertEquals(material1.hashCode(), material2.hashCode());
+
+        material1.setEntityMergable( true );
+
+        assertNotEquals(material1, material2);
+        assertNotEquals(material1.hashCode(), material2.hashCode());
+
+        material2.setEntityMergable( true );
 
         assertEquals(material1, material2);
         assertEquals(material1.hashCode(), material2.hashCode());

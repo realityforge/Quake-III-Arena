@@ -5,6 +5,7 @@ cull disable
 nopicmip
 nomipmaps
 portal
+entityMergable
 surfaceparm nomarks
 surfaceparm trans
 }
@@ -15,6 +16,7 @@ cull back
 nopicmip
 nomipmaps
 portal
+entityMergable
 surfaceparm noimpact
 surfaceparm nolightmap
 surfaceparm sky

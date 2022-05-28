@@ -125,6 +125,12 @@ final class ModelBuilderListener
   }
 
   @Override
+  public void exitEntityMergableDirective( final MaterialsParser.EntityMergableDirectiveContext ctx )
+  {
+    _material.setEntityMergable( true );
+  }
+
+  @Override
   public void exitQ3mapSunDirective( @Nonnull final MaterialsParser.Q3mapSunDirectiveContext ctx )
   {
     final SunDirective sun = new SunDirective();

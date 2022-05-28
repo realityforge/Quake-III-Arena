@@ -8,6 +8,7 @@ textures/base/myBase2
   nopicmip
   nomipmaps
   portal
+  entityMergable
   surfaceparm noimpact
   surfaceparm nolightmap
   surfaceparm sky

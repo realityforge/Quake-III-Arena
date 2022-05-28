@@ -5,6 +5,7 @@ cull disable
 nopicmip
 nomipmaps
 portal
+entityMergable
 surfaceparm nomarks
 surfaceparm trans
 }

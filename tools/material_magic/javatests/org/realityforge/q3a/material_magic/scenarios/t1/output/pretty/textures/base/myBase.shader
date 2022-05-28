@@ -16,6 +16,7 @@ textures/base/myBase
   nopicmip
   nomipmaps
   portal
+  entityMergable
   surfaceparm nomarks
   surfaceparm trans
 }

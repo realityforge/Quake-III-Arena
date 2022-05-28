@@ -5,6 +5,7 @@ cull back
 nopicmip
 nomipmaps
 portal
+entityMergable
 surfaceparm noimpact
 surfaceparm nolightmap
 surfaceparm sky

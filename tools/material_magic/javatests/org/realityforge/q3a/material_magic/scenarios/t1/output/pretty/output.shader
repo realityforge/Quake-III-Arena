@@ -16,6 +16,7 @@ textures/base/myBase
   nopicmip
   nomipmaps
   portal
+  entityMergable
   surfaceparm nomarks
   surfaceparm trans
 }
@@ -30,6 +31,7 @@ textures/base/myBase2
   nopicmip
   nomipmaps
   portal
+  entityMergable
   surfaceparm noimpact
   surfaceparm nolightmap
   surfaceparm sky

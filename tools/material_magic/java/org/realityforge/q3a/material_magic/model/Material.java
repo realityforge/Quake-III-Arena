@@ -22,6 +22,7 @@ public final class Material {
     private boolean _noPicMip;
     private boolean _noMipMaps;
     private boolean _portal;
+    private boolean _entityMergable;
     @Nonnull
     private Set<SurfaceParameter> _surfaceParameters = new HashSet<>();
 
@@ -110,6 +111,16 @@ public final class Material {
         _portal = portal;
     }
 
+    public boolean isEntityMergable()
+    {
+        return _entityMergable;
+    }
+
+    public void setEntityMergable( final boolean entityMergable )
+    {
+        _entityMergable = entityMergable;
+    }
+
     @Nonnull
     public Set<SurfaceParameter> getSurfaceParameters()
     {
@@ -148,6 +159,9 @@ public final class Material {
             if(_portal){
                 o.writeDirective( "portal" );
             }
+            if(_entityMergable){
+                o.writeDirective( "entityMergable" );
+            }
             for (final SurfaceParameter parameter : getSurfaceParametersSorted()) {
                 o.writeDirective( "surfaceparm", parameter.name());
             }
@@ -163,14 +177,14 @@ public final class Material {
             return false;
         } else {
             final Material that = (Material)o;
-            return _name.equals(that._name) && _cull.equals(that._cull) && _noPicMip == that._noPicMip && _noMipMaps == that._noMipMaps && _portal == that._portal && Objects.equals( getSurfaceParametersSorted(), that.getSurfaceParametersSorted()) && Objects.equals( q3map(), that.q3map()) && Objects.equals( qer(), that.qer());
+            return _name.equals(that._name) && _cull.equals(that._cull) && _noPicMip == that._noPicMip && _noMipMaps == that._noMipMaps && _portal == that._portal && _entityMergable == that._entityMergable && Objects.equals( getSurfaceParametersSorted(), that.getSurfaceParametersSorted()) && Objects.equals( q3map(), that.q3map()) && Objects.equals( qer(), that.qer());
         }
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash( _name, _cull, _noPicMip, _noMipMaps, _portal, getSurfaceParametersSorted(), q3map(), qer());
+        return Objects.hash( _name, _cull, _noPicMip, _noMipMaps, _portal, _entityMergable, getSurfaceParametersSorted(), q3map(), qer());
     }
 
     @Nonnull

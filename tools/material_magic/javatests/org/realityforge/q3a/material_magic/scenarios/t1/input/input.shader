@@ -19,6 +19,7 @@ q3map_sun	1 1 1 100 -58 58
 // This next one has an UPPERCASE T but will be normalize to lower case
 surfaceparm	Trans
 
+entityMergable
 portal
 
 // Duplicate surfaceparm are ignored
@@ -36,6 +37,7 @@ nomipmaps
   textures/base/myBase2
 {
 surfaceparm noimpact
+EntityMergAble
 surfaceparm nolightmap
 surfaceparm sky
 q3map_SUN .5 .37 .19 80 315 70
