@@ -81,16 +81,16 @@ q3mapDirective
 // q3map_sun <red(float)> <green(float)> <blue(float)> <intensity(int)> <degrees(int)> <elevation(int)>
     ;
 
-q3mapSurfaceLightDirective : Q3MAP_SURFACELIGHT POSITIVE_INTEGER;
+q3mapSurfaceLightDirective : Q3MAP_SURFACELIGHT INTEGER;
 q3mapGlobalTextureDirective : Q3MAP_GLOBALTEXTURE;
 q3mapLightImageDirective : Q3MAP_LIGHTIMAGE LABEL;
 q3mapNoVertexShadowsDirective : Q3MAP_NOVERTEXSHADOWS;
 q3mapForceSunlightDirective : Q3MAP_FORCESUNLIGHT;
 q3mapFlareDirective : Q3MAP_FLARE LABEL;
-q3mapLightSubdivideDirective : Q3MAP_LIGHTSUBDIVIDE POSITIVE_INTEGER;
-q3mapTessSizeDirective : TESSSIZE POSITIVE_INTEGER;
-q3mapBackSplashDirective : Q3MAP_BACKSPLASH POSITIVE_INTEGER POSITIVE_INTEGER;
-q3mapLightDirective : LIGHT ONE_INTEGER;
+q3mapLightSubdivideDirective : Q3MAP_LIGHTSUBDIVIDE INTEGER;
+q3mapTessSizeDirective : TESSSIZE INTEGER;
+q3mapBackSplashDirective : Q3MAP_BACKSPLASH INTEGER INTEGER;
+q3mapLightDirective : LIGHT number;
 
 qerDirective
     : qerEditorImageDirective
@@ -100,4 +100,4 @@ qerDirective
 
 qerEditorImageDirective : QER_EDITORIMAGE LABEL;
 qerNoCarveDirective : QER_NOCARVE;
-qerTransDirective : QER_TRANS POSITIVE_DECIMAL;
+qerTransDirective : QER_TRANS DECIMAL;

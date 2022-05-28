@@ -63,24 +63,9 @@ QER_TRANS : Q E R '_' T R A N S;
 
 SURFACE_PARM : S U R F A C E P A R M;
 
-// Used by light property
-ONE_INTEGER : '1';
+INTEGER : '-'?([1-9][0-9]*);
 
-POSITIVE_INTEGER
-	: ([1-9][0-9]*)
-;
-
-INTEGER
-	: '-'?([1-9][0-9]*)
-;
-
-POSITIVE_DECIMAL
-	: ([0-9]+(('.'[0-9])?[0-9]*)|[0-9]*'.'[0-9]+)
-;
-
-DECIMAL
-	: '-'?([0-9]+'.'[0-9]*|[0-9]*'.'[0-9]+)
-;
+DECIMAL : '-'?([0-9]+'.'[0-9]*|[0-9]*'.'[0-9]+);
 
 LABEL
 	: [A-Za-z0-9_\-./]+

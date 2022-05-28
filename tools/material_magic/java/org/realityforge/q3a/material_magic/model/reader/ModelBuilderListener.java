@@ -28,7 +28,7 @@ final class ModelBuilderListener
   @Override
   public void exitQ3mapSurfaceLightDirective( @Nonnull final MaterialsParser.Q3mapSurfaceLightDirectiveContext ctx )
   {
-    _material.q3map().setSurfaceLight( Integer.parseInt( ctx.POSITIVE_INTEGER().getText() ) );
+    _material.q3map().setSurfaceLight( Integer.parseInt( ctx.INTEGER().getText() ) );
   }
 
   @Override
@@ -64,20 +64,20 @@ final class ModelBuilderListener
   @Override
   public void exitQ3mapLightSubdivideDirective( @Nonnull final MaterialsParser.Q3mapLightSubdivideDirectiveContext ctx )
   {
-    _material.q3map().setLightSubDivide( Integer.parseInt( ctx.POSITIVE_INTEGER().getText() ) );
+    _material.q3map().setLightSubDivide( Integer.parseInt( ctx.INTEGER().getText() ) );
   }
 
   @Override
   public void exitQ3mapTessSizeDirective( @Nonnull final MaterialsParser.Q3mapTessSizeDirectiveContext ctx )
   {
-    _material.q3map().setTessSize( Integer.parseInt( ctx.POSITIVE_INTEGER().getText() ) );
+    _material.q3map().setTessSize( Integer.parseInt( ctx.INTEGER().getText() ) );
   }
 
   @Override
   public void exitQ3mapBackSplashDirective( @Nonnull final MaterialsParser.Q3mapBackSplashDirectiveContext ctx )
   {
-    _material.q3map().setBackSplashPercent( Integer.parseInt( ctx.POSITIVE_INTEGER().get( 0 ).getText() ) );
-    _material.q3map().setBackSplashDistance( Integer.parseInt( ctx.POSITIVE_INTEGER().get( 1 ).getText() ) );
+    _material.q3map().setBackSplashPercent( Integer.parseInt( ctx.INTEGER().get( 0 ).getText() ) );
+    _material.q3map().setBackSplashDistance( Integer.parseInt( ctx.INTEGER().get( 1 ).getText() ) );
 
   }
 
@@ -139,7 +139,7 @@ final class ModelBuilderListener
   @Override
   public void exitQerTransDirective( @Nonnull final MaterialsParser.QerTransDirectiveContext ctx )
   {
-    _material.qer().setTransparency( Float.parseFloat( ctx.POSITIVE_DECIMAL().getText() ) );
+    _material.qer().setTransparency( Float.parseFloat( ctx.DECIMAL().getText() ) );
   }
 
   @Override
