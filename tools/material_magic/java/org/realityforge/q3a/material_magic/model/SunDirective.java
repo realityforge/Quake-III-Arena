@@ -77,13 +77,13 @@ public class SunDirective
   void write( @Nonnull final MaterialOutput output )
     throws IOException
   {
-    output.writeProperty( "q3map_sun",
-                          Float.toString( _red ),
-                          Float.toString( _green ),
-                          Float.toString( _blue ),
-                          Integer.toString( _intensity ),
-                          Integer.toString( _degrees ),
-                          Integer.toString( _elevation ) );
+    output.writeDirective( "q3map_sun",
+                           Float.toString( _red ),
+                           Float.toString( _green ),
+                           Float.toString( _blue ),
+                           Integer.toString( _intensity ),
+                           Integer.toString( _degrees ),
+                           Integer.toString( _elevation ) );
   }
 
   @Override

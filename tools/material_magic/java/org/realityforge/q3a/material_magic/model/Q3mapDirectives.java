@@ -147,34 +147,34 @@ public final class Q3mapDirectives
         }
         if (!output.shouldOmitNonRuntimeProperties()) {
             if (0 != _surfaceLight) {
-                output.writeProperty("q3map_surfacelight", Integer.toString(_surfaceLight));
+                output.writeDirective( "q3map_surfacelight", Integer.toString( _surfaceLight));
             }
             if (0 != _lightSubDivide) {
-                output.writeProperty("q3map_lightsubdivide", Integer.toString(_lightSubDivide));
+                output.writeDirective( "q3map_lightsubdivide", Integer.toString( _lightSubDivide));
             }
             if (null != _lightImage) {
-                output.writeProperty("q3map_lightimage", _lightImage);
+                output.writeDirective( "q3map_lightimage", _lightImage);
             }
             if (_globalTexture) {
-                output.writeProperty("q3map_globaltexture");
+                output.writeDirective( "q3map_globaltexture");
             }
             if (_noVertexShadows) {
-                output.writeProperty("q3map_novertexshadows");
+                output.writeDirective( "q3map_novertexshadows");
             }
             if (_forceSunLight) {
-                output.writeProperty("q3map_forcesunlight");
+                output.writeDirective( "q3map_forcesunlight");
             }
             if (null != _flare) {
-                output.writeProperty("q3map_flare", _flare);
+                output.writeDirective( "q3map_flare", _flare);
             }
             if ( DEFAULT_BACKSPLASH_PERCENT != _backSplashPercent || DEFAULT_BACKSPLASH_DISTANCE !=
                                                                      _backSplashDistance ) {
-                output.writeProperty("q3map_backsplash",
-                    Integer.toString( _backSplashPercent ),
-                    Integer.toString( _backSplashDistance ));
+                output.writeDirective( "q3map_backsplash",
+                                       Integer.toString( _backSplashPercent ),
+                                       Integer.toString( _backSplashDistance ));
             }
             if (0 != _tessSize) {
-                output.writeProperty("tesssize", Integer.toString(_tessSize));
+                output.writeDirective( "tesssize", Integer.toString( _tessSize));
             }
         }
     }

@@ -33,14 +33,14 @@ public final class MaterialOutputTest {
     public void writeMaterialPretty()
     {
         final String text = MaterialOutput.outputAsString(o0 -> o0.writeMaterial("textures/super/mat", o1 -> {
-            o1.writeProperty("q3map_lightimage", "textures/super/mat_1");
-            o1.writeProperty("q3map_surfacelight", "37");
-            o1.writeProperty("q3map_globaltexture");
+            o1.writeDirective( "q3map_lightimage", "textures/super/mat_1");
+            o1.writeDirective( "q3map_surfacelight", "37");
+            o1.writeDirective( "q3map_globaltexture");
             o1.writeStage(o2 -> {
-                o2.writeProperty("map", "textures/common/mymat");
-                o2.writeProperty("alphaFunc", "GE128");
-                o2.writeProperty("depthWrite");
-                o2.writeProperty("rgbGen", "vertex");
+                o2.writeDirective( "map", "textures/common/mymat");
+                o2.writeDirective( "alphaFunc", "GE128");
+                o2.writeDirective( "depthWrite");
+                o2.writeDirective( "rgbGen", "vertex");
             });
         }));
         assertEquals("textures/super/mat\n"
@@ -62,14 +62,14 @@ public final class MaterialOutputTest {
     public void writeMaterialOptimised()
     {
         final String text = MaterialOutput.outputAsString(o0 -> o0.writeMaterial("textures/super/mat", o1 -> {
-            o1.writeProperty("q3map_lightimage", "textures/super/mat_1");
-            o1.writeProperty("q3map_surfacelight", "37");
-            o1.writeProperty("q3map_globaltexture");
+            o1.writeDirective( "q3map_lightimage", "textures/super/mat_1");
+            o1.writeDirective( "q3map_surfacelight", "37");
+            o1.writeDirective( "q3map_globaltexture");
             o1.writeStage(o2 -> {
-                o2.writeProperty("map", "textures/common/mymat");
-                o2.writeProperty("alphaFunc", "GE128");
-                o2.writeProperty("depthWrite");
-                o2.writeProperty("rgbGen", "vertex");
+                o2.writeDirective( "map", "textures/common/mymat");
+                o2.writeDirective( "alphaFunc", "GE128");
+                o2.writeDirective( "depthWrite");
+                o2.writeDirective( "rgbGen", "vertex");
             });
         }), MaterialOutput.Strategy.RUNTIME_OPTIMIZED);
         assertEquals("textures/super/mat\n"

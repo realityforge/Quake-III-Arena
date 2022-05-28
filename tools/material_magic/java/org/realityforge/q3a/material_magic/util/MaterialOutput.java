@@ -104,7 +104,7 @@ public final class MaterialOutput
         writeSection(body);
     }
 
-    public void writeProperty(@Nonnull final String name, @Nonnull final String... arguments)
+    public void writeDirective( @Nonnull final String name, @Nonnull final String... arguments)
         throws IOException
     {
         write(name + (0 == arguments.length ? "" : " " + String.join(" ", arguments)));

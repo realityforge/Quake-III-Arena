@@ -104,10 +104,10 @@ public final class Material {
                 qer().write(o);
             }
             if (CullType.FRONT != _cull) {
-                o.writeProperty("cull", CullType.BACK == _cull ? "back" : "disable");
+                o.writeDirective( "cull", CullType.BACK == _cull ? "back" : "disable");
             }
             for (final SurfaceParameter surfaceProperty : getSurfaceParametersSorted()) {
-                o.writeProperty("surfaceparm", surfaceProperty.name());
+                o.writeDirective( "surfaceparm", surfaceProperty.name());
             }
         });
     }

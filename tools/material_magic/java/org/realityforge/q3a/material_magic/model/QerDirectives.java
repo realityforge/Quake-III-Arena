@@ -48,13 +48,13 @@ public final class QerDirectives
     {
         if (!output.shouldOmitNonRuntimeProperties()) {
             if (null != _editorImage) {
-                output.writeProperty("qer_editorimage", _editorImage);
+                output.writeDirective( "qer_editorimage", _editorImage);
             }
             if (_noCarve) {
-                output.writeProperty("qer_nocarve");
+                output.writeDirective( "qer_nocarve");
             }
             if (0F != _transparency) {
-                output.writeProperty("qer_trans", Float.toString(_transparency));
+                output.writeDirective( "qer_trans", Float.toString( _transparency));
             }
         }
     }
