@@ -19,6 +19,7 @@ java_library(
         "MaterialsUnit.java",
         "Q3mapProperties.java",
         "QerProperties.java",
+        "SunDirective.java",
         "SurfaceProperty.java",
     ],
     visibility = [

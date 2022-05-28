@@ -1,5 +1,6 @@
 textures/base/myBase
 {
+  q3map_sun 1.0 1.0 1.0 100 -58 58
   q3map_surfacelight 1500
   q3map_lightsubdivide 22
   q3map_lightimage textures/wall/glowglow
@@ -18,6 +19,7 @@ textures/base/myBase
 
 textures/base/myBase2
 {
+  q3map_sun 0.5 0.37 0.19 80 315 70
   q3map_forcesunlight
   q3map_flare whoosh
   tesssize 32

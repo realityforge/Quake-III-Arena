@@ -1,9 +1,11 @@
 package org.realityforge.q3a.material_magic.model.reader;
 
 import javax.annotation.Nonnull;
+import org.antlr.v4.runtime.tree.TerminalNode;
 import org.realityforge.q3a.material_magic.model.CullType;
 import org.realityforge.q3a.material_magic.model.Material;
 import org.realityforge.q3a.material_magic.model.MaterialsUnit;
+import org.realityforge.q3a.material_magic.model.SunDirective;
 import org.realityforge.q3a.material_magic.model.SurfaceProperty;
 
 final class ModelBuilderListener
@@ -102,6 +104,25 @@ final class ModelBuilderListener
     {
       throw new IllegalStateException( "Unhandled cull value " + ctx.getText() );
     }
+  }
+
+  @Override
+  public void exitQ3mapSunDirective( @Nonnull final MaterialsParser.Q3mapSunDirectiveContext ctx )
+  {
+    final SunDirective sun = new SunDirective();
+    sun.setRed( parseNumber( ctx.number( 0 ) ) );
+    sun.setGreen( parseNumber( ctx.number( 1 ) ) );
+    sun.setBlue( parseNumber( ctx.number( 2 ) ) );
+    sun.setIntensity( Integer.parseInt( ctx.INTEGER( 0 ).getText() ) );
+    sun.setDegrees( Integer.parseInt( ctx.INTEGER( 1 ).getText() ) );
+    sun.setElevation( Integer.parseInt( ctx.INTEGER( 2 ).getText() ) );
+    _material.q3map().setSun( sun );
+  }
+
+  private float parseNumber( @Nonnull final MaterialsParser.NumberContext number )
+  {
+    final TerminalNode decimal = number.DECIMAL();
+    return null != decimal ? Float.parseFloat( decimal.getText() ) : Integer.parseInt( number.INTEGER().getText() );
   }
 
   @Override

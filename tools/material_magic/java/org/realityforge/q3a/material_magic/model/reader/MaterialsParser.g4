@@ -77,12 +77,14 @@ q3mapDirective
     | q3mapTessSizeDirective
     | q3mapBackSplashDirective
     | q3mapLightDirective
-// NOTE: "q3map_sun" is used at runtime ... unlike all the other q3map properties
-// q3map_sun <red(float)> <green(float)> <blue(float)> <intensity(int)> <degrees(int)> <elevation(int)>
+    | q3mapSunDirective
     ;
+
+number : (INTEGER|DECIMAL);
 
 q3mapSurfaceLightDirective : Q3MAP_SURFACELIGHT INTEGER;
 q3mapGlobalTextureDirective : Q3MAP_GLOBALTEXTURE;
+q3mapSunDirective : Q3MAP_SUN number number number INTEGER INTEGER INTEGER;
 q3mapLightImageDirective : Q3MAP_LIGHTIMAGE LABEL;
 q3mapNoVertexShadowsDirective : Q3MAP_NOVERTEXSHADOWS;
 q3mapForceSunlightDirective : Q3MAP_FORCESUNLIGHT;

@@ -15,6 +15,7 @@ q3map_novertexshadows
 q3map_globaltexture
 q3map_lightsubdivide 22
 q3map_backsplash 100 8
+q3map_sun	1 1 1 100 -58 58
 // This next one has an UPPERCASE T but will be normalize to lower case
 surfaceparm	Trans
 
@@ -33,6 +34,7 @@ surfaceparm nomarks
 surfaceparm noimpact
 surfaceparm nolightmap
 surfaceparm sky
+q3map_SUN .5 .37 .19 80 315 70
     q3map_forcesunlight
             // This is a non-normalized form of "cull back"
             cull backside

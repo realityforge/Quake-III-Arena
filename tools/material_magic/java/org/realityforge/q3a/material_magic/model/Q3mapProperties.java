@@ -24,6 +24,7 @@ public final class Q3mapProperties {
     private String _lightImage;
     @Nullable
     private String _flare;
+    @Nullable private SunDirective _sun;
 
     public boolean globalTexture()
     {
@@ -127,8 +128,22 @@ public final class Q3mapProperties {
         _flare = flare;
     }
 
-    void write(@Nonnull final MaterialOutput output) throws IOException
+    @Nullable
+    public SunDirective getSun()
     {
+        return _sun;
+    }
+
+    public void setSun( @Nullable final SunDirective sun )
+    {
+        _sun = sun;
+    }
+
+    void write( @Nonnull final MaterialOutput output) throws IOException
+    {
+        if (null != _sun) {
+            _sun.write( output );
+        }
         if (!output.shouldOmitNonRuntimeProperties()) {
             if (0 != _surfaceLight) {
                 output.writeProperty("q3map_surfacelight", Integer.toString(_surfaceLight));
@@ -172,7 +187,7 @@ public final class Q3mapProperties {
             return false;
         } else {
             final Q3mapProperties that = (Q3mapProperties)o;
-            return _globalTexture == that._globalTexture && _forceSunLight == that._forceSunLight && _noVertexShadows == that._noVertexShadows && _surfaceLight == that._surfaceLight && _lightSubDivide == that._lightSubDivide && _tessSize == that._tessSize && _backSplashPercent == that._backSplashPercent && _backSplashDistance == that._backSplashDistance && Objects.equals( _lightImage, that._lightImage) && Objects.equals( _flare, that._flare);
+            return _globalTexture == that._globalTexture && _forceSunLight == that._forceSunLight && _noVertexShadows == that._noVertexShadows && _surfaceLight == that._surfaceLight && _lightSubDivide == that._lightSubDivide && _tessSize == that._tessSize && _backSplashPercent == that._backSplashPercent && _backSplashDistance == that._backSplashDistance && Objects.equals( _lightImage, that._lightImage) && Objects.equals( _flare, that._flare) && Objects.equals( _sun,that._sun );
         }
     }
 
@@ -188,6 +203,7 @@ public final class Q3mapProperties {
                             _backSplashPercent,
                             _backSplashDistance,
             _lightImage,
-            _flare);
+            _flare,
+                            _sun);
     }
 }

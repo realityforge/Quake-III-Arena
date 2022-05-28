@@ -52,6 +52,7 @@ Q3MAP_NOVERTEXSHADOWS : Q '3' M A P '_' N O V E R T E X S H A D O W S;
 Q3MAP_FORCESUNLIGHT : Q '3' M A P '_' F O R C E S U N L I G H T;
 Q3MAP_LIGHTSUBDIVIDE : Q '3' M A P '_' L I G H T S U B D I V I D E;
 Q3MAP_BACKSPLASH : Q '3' M A P '_' B A C K S P L A S H;
+Q3MAP_SUN : Q '3' M A P '_' S U N;
 TESSSIZE : T E S S S I Z E;
 Q3MAP_FLARE : Q '3' M A P '_' F L A R E;
 // light <value> is the old style flare specification which is equivalent to "q3map_flare flareshader"
