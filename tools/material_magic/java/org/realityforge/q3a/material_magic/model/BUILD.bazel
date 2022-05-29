@@ -19,6 +19,7 @@ java_library(
         "Material.java",
         "Q3mapDirectives.java",
         "QerDirectives.java",
+        "SkyDirective.java",
         "SunDirective.java",
         "SurfaceParameter.java",
         "Unit.java",

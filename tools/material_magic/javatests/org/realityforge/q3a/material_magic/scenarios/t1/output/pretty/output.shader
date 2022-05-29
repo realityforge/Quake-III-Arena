@@ -34,6 +34,7 @@ textures/base/myBase2
   portal
   entityMergable
   fogparms 0.85 0.1 0.01 980
+  skyparms env/wildspace1 - -
   surfaceparm noimpact
   surfaceparm nolightmap
   surfaceparm sky
@@ -43,6 +44,7 @@ textures/base/myBase_3
 {
   cull disable
   fogparms 0.7 0.7 0.7 128
+  skyparms - 512 -
 }
 
 textures/base/myBase_4

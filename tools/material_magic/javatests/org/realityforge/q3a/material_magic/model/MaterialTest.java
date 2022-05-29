@@ -1,9 +1,8 @@
 package org.realityforge.q3a.material_magic.model;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
+import static org.junit.jupiter.api.Assertions.*;
 
 public final class MaterialTest {
     @Test
@@ -13,6 +12,7 @@ public final class MaterialTest {
 
         assertFalse(material.hasQ3map());
         assertFalse(material.hasFog());
+        assertFalse(material.hasSky());
         assertEquals("materials/my/Material1", material.getName());
         assertEquals("materials/my/Material1\n{\n}\n", material.toString());
         assertEquals("materials/my/Material1\n{\n}\n", MaterialOutput.outputAsString(material::write));
@@ -39,12 +39,16 @@ public final class MaterialTest {
         material.fog().setGreen( 0.1F );
         material.fog().setBlue( 0.5F );
         material.fog().setDepthForOpaque( 50 );
+        material.sky().setFarBox("myFarBox");
+        material.sky().setCloudHeight(512);
+        material.sky().setNearBox("myNearBox");
         material.getSurfaceParameters().add( SurfaceParameter.botclip);
         material.getSurfaceParameters().add( SurfaceParameter.slime);
         material.getSurfaceParameters().add( SurfaceParameter.dust);
 
         assertTrue(material.hasQ3map());
         assertTrue(material.hasFog());
+        assertTrue(material.hasSky());
 
         assertEquals("materials/my/Material2\n"
                 + "{\n"
@@ -59,6 +63,7 @@ public final class MaterialTest {
                 + "  portal\n"
                 + "  entityMergable\n"
                 + "  fogparms 1.0 0.1 0.5 50\n"
+                + "  skyparms myFarBox 512 myNearBox\n"
                 + "  surfaceparm botclip\n"
                 + "  surfaceparm dust\n"
                 + "  surfaceparm slime\n"
@@ -72,6 +77,7 @@ public final class MaterialTest {
                 + "portal\n"
                 + "entityMergable\n"
                 + "fogparms 1.0 0.1 0.5 50\n"
+                + "skyparms myFarBox 512 myNearBox\n"
                 + "surfaceparm botclip\n"
                 + "surfaceparm dust\n"
                 + "surfaceparm slime\n"
@@ -176,6 +182,38 @@ public final class MaterialTest {
         material2.fog().setGreen( 0.1F );
         material2.fog().setBlue( 0.5F );
         material2.fog().setDepthForOpaque( 50 );
+
+        assertEquals(material1, material2);
+        assertEquals(material1.hashCode(), material2.hashCode());
+
+        final SkyDirective sky1 = material1.sky();
+        sky1.setFarBox( "myFarBox" );
+        sky1.setCloudHeight( 112 );
+        sky1.setNearBox( "myNearBox" );
+
+        assertNotEquals(material1, material2);
+        assertNotEquals(material1.hashCode(), material2.hashCode());
+
+        final SkyDirective sky2 = material2.sky();
+        sky2.setFarBox( "myFarBox" );
+        sky2.setCloudHeight( 112 );
+        sky2.setNearBox( "myNearBox" );
+
+        assertEquals(material1, material2);
+        assertEquals(material1.hashCode(), material2.hashCode());
+
+        assertEquals(material1, material2);
+        assertEquals(material1.hashCode(), material2.hashCode());
+
+        // Reset
+        sky1.setFarBox( null );
+        sky1.setCloudHeight( SkyDirective.DEFAULT_CLOUD_HEIGHT );
+        sky1.setNearBox( null );
+
+        assertNotEquals(material1, material2);
+        assertNotEquals(material1.hashCode(), material2.hashCode());
+
+        material2.setSky( null );
 
         assertEquals(material1, material2);
         assertEquals(material1.hashCode(), material2.hashCode());

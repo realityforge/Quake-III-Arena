@@ -19,6 +19,8 @@ _model_test(name = "Q3mapDirectivesTest")
 
 _model_test(name = "QerDirectivesTest")
 
+_model_test(name = "SkyDirectiveTest")
+
 _model_test(name = "SunDirectiveTest")
 
 _model_test(name = "UnitTest")

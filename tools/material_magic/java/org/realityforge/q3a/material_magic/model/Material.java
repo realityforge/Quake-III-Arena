@@ -25,6 +25,8 @@ public final class Material {
     private boolean _entityMergable;
     @Nullable
     private FogDirective _fog;
+    @Nullable
+    private SkyDirective _sky;
     @Nonnull
     private Set<SurfaceParameter> _surfaceParameters = new HashSet<>();
 
@@ -143,6 +145,26 @@ public final class Material {
         _fog = fog;
     }
 
+    public boolean hasSky()
+    {
+        return null != _sky;
+    }
+
+    @Nonnull
+    public SkyDirective sky()
+    {
+        if ( null == _sky )
+        {
+            _sky = new SkyDirective();
+        }
+        return _sky;
+    }
+
+    public void setSky( @Nullable final SkyDirective sky )
+    {
+        _sky = sky;
+    }
+
     @Nonnull
     public Set<SurfaceParameter> getSurfaceParameters()
     {
@@ -187,6 +209,10 @@ public final class Material {
             if( null != _fog){
                 _fog.write( output );
             }
+            if( null != _sky)
+            {
+                _sky.write( output );
+            }
             for (final SurfaceParameter parameter : getSurfaceParametersSorted()) {
                 o.writeDirective( "surfaceparm", parameter.name());
             }
@@ -202,14 +228,25 @@ public final class Material {
             return false;
         } else {
             final Material that = (Material)o;
-            return _name.equals(that._name) && _cull.equals(that._cull) && _noPicMip == that._noPicMip && _noMipMaps == that._noMipMaps && _portal == that._portal && _entityMergable == that._entityMergable && Objects.equals( _fog, that._fog ) && Objects.equals( getSurfaceParametersSorted(), that.getSurfaceParametersSorted()) && Objects.equals( q3map(), that.q3map()) && Objects.equals( qer(), that.qer());
+            return _name.equals( that._name ) &&
+                   _cull.equals( that._cull ) &&
+                   _noPicMip == that._noPicMip &&
+                   _noMipMaps == that._noMipMaps &&
+                   _portal == that._portal &&
+                   _entityMergable == that._entityMergable &&
+                   Objects.equals( _fog, that._fog ) &&
+                   Objects.equals( null == _sky || _sky.isDefault() ? null : _sky,
+                                   null == that._sky || that._sky.isDefault() ? null : that._sky ) &&
+                   Objects.equals( getSurfaceParametersSorted(), that.getSurfaceParametersSorted() ) &&
+                   Objects.equals( q3map(), that.q3map() ) &&
+                   Objects.equals( qer(), that.qer() );
         }
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash( _name, _cull, _noPicMip, _noMipMaps, _portal, _entityMergable, _fog, getSurfaceParametersSorted(), q3map(), qer());
+        return Objects.hash( _name, _cull, _noPicMip, _noMipMaps, _portal, _entityMergable, _fog, null == _sky || _sky.isDefault() ? null : _sky, getSurfaceParametersSorted(), q3map(), qer());
     }
 
     @Nonnull

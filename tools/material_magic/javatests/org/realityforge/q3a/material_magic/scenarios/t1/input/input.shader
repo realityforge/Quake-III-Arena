@@ -53,11 +53,19 @@ tesssize 32
 noPicMip
 noMipMaps
 PoRtAl
+// Increases separation between layers but no near/far box
+skyParms env/wildspace1 - -
+
 }
 
 textures/base/myBase_4 { /* This is a non-normalized form of "cull back" */ cull backsided }
 
-textures/base/myBase_5 { /* This is a non-normalized form of "cull back" with mixed case */ cull backSided }
+textures/base/myBase_5 {
+/* This is a non-normalized form of "cull back" with mixed case */
+cull backSided
+// The provides just default so it weill be omitted
+skyParms - - -
+}
 
 
 textures/base/myBase_3
@@ -66,4 +74,6 @@ textures/base/myBase_3
 cull none
 // This contains the natural form with the numbers that were historically supported buyt now ignored
 fogparms 0.7 0.7 0.7 128 64
+// Increases separation between layers but no near/far box
+skyparms - 512 -
 }

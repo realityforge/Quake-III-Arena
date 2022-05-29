@@ -5,6 +5,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import org.realityforge.q3a.material_magic.model.CullType;
 import org.realityforge.q3a.material_magic.model.FogDirective;
 import org.realityforge.q3a.material_magic.model.Material;
+import org.realityforge.q3a.material_magic.model.SkyDirective;
 import org.realityforge.q3a.material_magic.model.SunDirective;
 import org.realityforge.q3a.material_magic.model.SurfaceParameter;
 import org.realityforge.q3a.material_magic.model.Unit;
@@ -139,6 +140,27 @@ final class ModelBuilderListener
     fog.setGreen( Float.parseFloat( ctx.number( 1 ).getText() ) );
     fog.setBlue( Float.parseFloat( ctx.number( 2 ).getText() ) );
     fog.setDepthForOpaque( Integer.parseInt( ctx.number( 3 ).getText() ) );
+  }
+
+  @Override
+  public void exitSkyParmsDirective( @Nonnull final MaterialsParser.SkyParmsDirectiveContext ctx )
+  {
+    final SkyDirective sky = _material.sky();
+    final TerminalNode label1 = ctx.LABEL( 0 );
+    if ( null != label1 )
+    {
+      sky.setFarBox( label1.getText() );
+    }
+    final TerminalNode integer = ctx.INTEGER();
+    if ( null != integer )
+    {
+      sky.setCloudHeight( Integer.parseInt( integer.getText() ) );
+    }
+    final TerminalNode label2 = ctx.LABEL( 1 );
+    if ( null != label2 )
+    {
+      sky.setNearBox( label2.getText() );
+    }
   }
 
   @Override
