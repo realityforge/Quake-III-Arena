@@ -123,6 +123,11 @@ public final class Material {
         _entityMergable = entityMergable;
     }
 
+    public boolean hasFog()
+    {
+        return null != _fog;
+    }
+
     @Nonnull
     public FogDirective fog()
     {

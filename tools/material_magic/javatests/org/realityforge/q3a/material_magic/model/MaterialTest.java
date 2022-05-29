@@ -12,6 +12,7 @@ public final class MaterialTest {
         final Material material = new Material("materials/my/Material1");
 
         assertFalse(material.hasQ3map());
+        assertFalse(material.hasFog());
         assertEquals("materials/my/Material1", material.getName());
         assertEquals("materials/my/Material1\n{\n}\n", material.toString());
         assertEquals("materials/my/Material1\n{\n}\n", MaterialOutput.outputAsString(material::write));
@@ -43,6 +44,7 @@ public final class MaterialTest {
         material.getSurfaceParameters().add( SurfaceParameter.dust);
 
         assertTrue(material.hasQ3map());
+        assertTrue(material.hasFog());
 
         assertEquals("materials/my/Material2\n"
                 + "{\n"
