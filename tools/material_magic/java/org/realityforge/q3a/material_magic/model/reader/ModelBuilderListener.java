@@ -164,6 +164,12 @@ final class ModelBuilderListener
   }
 
   @Override
+  public void exitPolygonOffsetDirective( final MaterialsParser.PolygonOffsetDirectiveContext ctx )
+  {
+    _material.setPolygonOffset( true );
+  }
+
+  @Override
   public void exitQ3mapSunDirective( @Nonnull final MaterialsParser.Q3mapSunDirectiveContext ctx )
   {
     final SunDirective sun = new SunDirective();

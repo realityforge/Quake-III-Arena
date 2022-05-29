@@ -35,6 +35,7 @@ public final class MaterialTest {
         material.setNoMipMaps(true);
         material.setPortal(true);
         material.setEntityMergable(true);
+        material.setPolygonOffset(true);
         material.fog().setRed( 1.0F );
         material.fog().setGreen( 0.1F );
         material.fog().setBlue( 0.5F );
@@ -62,6 +63,7 @@ public final class MaterialTest {
                 + "  nomipmaps\n"
                 + "  portal\n"
                 + "  entityMergable\n"
+                + "  polygonOffset\n"
                 + "  fogparms 1.0 0.1 0.5 50\n"
                 + "  skyparms myFarBox 512 myNearBox\n"
                 + "  surfaceparm botclip\n"
@@ -76,6 +78,7 @@ public final class MaterialTest {
                 + "nomipmaps\n"
                 + "portal\n"
                 + "entityMergable\n"
+                + "polygonOffset\n"
                 + "fogparms 1.0 0.1 0.5 50\n"
                 + "skyparms myFarBox 512 myNearBox\n"
                 + "surfaceparm botclip\n"
@@ -143,6 +146,16 @@ public final class MaterialTest {
         assertNotEquals(material1.hashCode(), material2.hashCode());
 
         material2.setEntityMergable( true );
+
+        assertEquals(material1, material2);
+        assertEquals(material1.hashCode(), material2.hashCode());
+
+        material1.setPolygonOffset( true );
+
+        assertNotEquals(material1, material2);
+        assertNotEquals(material1.hashCode(), material2.hashCode());
+
+        material2.setPolygonOffset( true );
 
         assertEquals(material1, material2);
         assertEquals(material1.hashCode(), material2.hashCode());

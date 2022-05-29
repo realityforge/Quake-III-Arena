@@ -6,6 +6,7 @@ nopicmip
 nomipmaps
 portal
 entityMergable
+polygonOffset
 fogparms 0.85 0.1 0.01 980
 surfaceparm nomarks
 surfaceparm trans
@@ -37,4 +38,5 @@ cull back
 textures/base/myBase_5
 {
 cull back
+polygonOffset
 }

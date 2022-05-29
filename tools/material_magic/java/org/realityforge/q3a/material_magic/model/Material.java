@@ -23,6 +23,7 @@ public final class Material {
     private boolean _noMipMaps;
     private boolean _portal;
     private boolean _entityMergable;
+    private boolean _polygonOffset;
     @Nullable
     private FogDirective _fog;
     @Nullable
@@ -125,6 +126,16 @@ public final class Material {
         _entityMergable = entityMergable;
     }
 
+    public boolean isPolygonOffset()
+    {
+        return _polygonOffset;
+    }
+
+    public void setPolygonOffset( final boolean polygonOffset )
+    {
+        _polygonOffset = polygonOffset;
+    }
+
     public boolean hasFog()
     {
         return null != _fog;
@@ -206,6 +217,9 @@ public final class Material {
             if(_entityMergable){
                 o.writeDirective( "entityMergable" );
             }
+            if(_polygonOffset){
+                o.writeDirective( "polygonOffset" );
+            }
             if( null != _fog){
                 _fog.write( output );
             }
@@ -234,6 +248,7 @@ public final class Material {
                    _noMipMaps == that._noMipMaps &&
                    _portal == that._portal &&
                    _entityMergable == that._entityMergable &&
+                   _polygonOffset == that._polygonOffset &&
                    Objects.equals( _fog, that._fog ) &&
                    Objects.equals( null == _sky || _sky.isDefault() ? null : _sky,
                                    null == that._sky || that._sky.isDefault() ? null : that._sky ) &&
@@ -246,7 +261,7 @@ public final class Material {
     @Override
     public int hashCode()
     {
-        return Objects.hash( _name, _cull, _noPicMip, _noMipMaps, _portal, _entityMergable, _fog, null == _sky || _sky.isDefault() ? null : _sky, getSurfaceParametersSorted(), q3map(), qer());
+        return Objects.hash( _name, _cull, _noPicMip, _noMipMaps, _portal, _entityMergable, _polygonOffset, _fog, null == _sky || _sky.isDefault() ? null : _sky, getSurfaceParametersSorted(), q3map(), qer());
     }
 
     @Nonnull

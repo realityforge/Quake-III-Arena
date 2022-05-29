@@ -28,6 +28,8 @@ surfaceparm nomarks
 surfaceparm nomarks
 surfaceparm nomarks
 nopicmip
+
+        polygonOffset
 nomipmaps
 // This contains the "vertex" form
 fogParms ( .85 .10 .01 ) 980
@@ -65,6 +67,7 @@ textures/base/myBase_5 {
 cull backSided
 // The provides just default so it weill be omitted
 skyParms - - -
+polygonoffset
 }
 
 

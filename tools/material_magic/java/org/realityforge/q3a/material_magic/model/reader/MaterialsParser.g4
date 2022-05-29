@@ -39,8 +39,8 @@ generalDirective
     | entityMergableDirective
     | fogParmsDirective
     | skyParmsDirective
+    | polygonOffsetDirective
 //deformVertexes
-//polygonOffset
 //sort
     ;
 
@@ -51,6 +51,7 @@ portalDirective : PORTAL;
 entityMergableDirective : ENTITYMERGABLE;
 fogParmsDirective : FOGPARMS OPEN_BRACKET? number number number CLOSE_BRACKET? number number? number?;
 skyParmsDirective : SKYPARMS (DASH|LABEL) (DASH|INTEGER) (DASH|LABEL);
+polygonOffsetDirective : POLYGONOFFSET;
 
 surfaceParameterDirective : SURFACE_PARM LABEL;
 
