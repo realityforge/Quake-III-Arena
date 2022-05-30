@@ -17,3 +17,15 @@ Examples of inter-asset dependencies:
 * A "menu file" references shaders and/or textures as well as symbol map shared by client side code.
 * A "bsp file" references shaders, textures, models, sounds etc.
 * The "game logic" references all of the above assets. Some of these references are dynamic references while some are static.
+
+### Challenges
+
+...
+
+### Solution
+
+...
+
+### Evaluation
+
+...
