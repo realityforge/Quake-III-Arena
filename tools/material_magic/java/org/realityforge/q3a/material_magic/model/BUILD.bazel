@@ -20,6 +20,8 @@ java_library(
         "Q3mapDirectives.java",
         "QerDirectives.java",
         "SkyDirective.java",
+        "SortDirective.java",
+        "SortKey.java",
         "SunDirective.java",
         "SurfaceParameter.java",
         "Unit.java",

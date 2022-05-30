@@ -6,6 +6,8 @@ import org.realityforge.q3a.material_magic.model.CullType;
 import org.realityforge.q3a.material_magic.model.FogDirective;
 import org.realityforge.q3a.material_magic.model.Material;
 import org.realityforge.q3a.material_magic.model.SkyDirective;
+import org.realityforge.q3a.material_magic.model.SortDirective;
+import org.realityforge.q3a.material_magic.model.SortKey;
 import org.realityforge.q3a.material_magic.model.SunDirective;
 import org.realityforge.q3a.material_magic.model.SurfaceParameter;
 import org.realityforge.q3a.material_magic.model.Unit;
@@ -167,6 +169,27 @@ final class ModelBuilderListener
   public void exitPolygonOffsetDirective( final MaterialsParser.PolygonOffsetDirectiveContext ctx )
   {
     _material.setPolygonOffset( true );
+  }
+
+  @Override
+  public void exitSortDirective( @Nonnull final MaterialsParser.SortDirectiveContext ctx )
+  {
+    final SortDirective sort = _material.sort();
+    final TerminalNode label = ctx.LABEL();
+    if ( null != label )
+    {
+      final String text = label.getText().toLowerCase();
+      final SortKey key = SortKey.findByName( text );
+      if ( null == key )
+      {
+        throw new IllegalStateException( "Unhandled sort value " + text );
+      }
+      sort.setKey( key );
+    }
+    else //if ( null != ctx.number() )
+    {
+      sort.setValue( parseNumber( ctx.number() ) );
+    }
   }
 
   @Override

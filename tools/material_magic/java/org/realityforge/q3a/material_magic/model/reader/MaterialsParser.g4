@@ -40,8 +40,8 @@ generalDirective
     | fogParmsDirective
     | skyParmsDirective
     | polygonOffsetDirective
+    | sortDirective
 //deformVertexes
-//sort
     ;
 
 cullDirective : CULL (CULL_DISABLE|CULL_NONE|CULL_TWOSIDED|CULL_BACK|CULL_BACKSIDE|CULL_BACKSIDED);
@@ -52,6 +52,7 @@ entityMergableDirective : ENTITYMERGABLE;
 fogParmsDirective : FOGPARMS OPEN_BRACKET? number number number CLOSE_BRACKET? number number? number?;
 skyParmsDirective : SKYPARMS (DASH|LABEL) (DASH|INTEGER) (DASH|LABEL);
 polygonOffsetDirective : POLYGONOFFSET;
+sortDirective : SORT (LABEL|number);
 
 surfaceParameterDirective : SURFACE_PARM LABEL;
 

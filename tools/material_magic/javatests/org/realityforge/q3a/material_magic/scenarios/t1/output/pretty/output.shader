@@ -36,6 +36,7 @@ textures/base/myBase2
   entityMergable
   fogparms 0.85 0.1 0.01 980
   skyparms env/wildspace1 - -
+  sort sky
   surfaceparm noimpact
   surfaceparm nolightmap
   surfaceparm sky
@@ -46,6 +47,7 @@ textures/base/myBase_3
   cull disable
   fogparms 0.7 0.7 0.7 128
   skyparms - 512 -
+  sort 2.3
 }
 
 textures/base/myBase_4
@@ -57,4 +59,5 @@ textures/base/myBase_5
 {
   cull back
   polygonOffset
+  sort 2
 }

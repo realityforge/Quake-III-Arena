@@ -13,6 +13,7 @@ public final class MaterialTest {
         assertFalse(material.hasQ3map());
         assertFalse(material.hasFog());
         assertFalse(material.hasSky());
+        assertFalse(material.hasSort());
         assertEquals("materials/my/Material1", material.getName());
         assertEquals("materials/my/Material1\n{\n}\n", material.toString());
         assertEquals("materials/my/Material1\n{\n}\n", MaterialOutput.outputAsString(material::write));
@@ -43,6 +44,7 @@ public final class MaterialTest {
         material.sky().setFarBox("myFarBox");
         material.sky().setCloudHeight(512);
         material.sky().setNearBox("myNearBox");
+        material.sort().setKey(SortKey.portal );
         material.getSurfaceParameters().add( SurfaceParameter.botclip);
         material.getSurfaceParameters().add( SurfaceParameter.slime);
         material.getSurfaceParameters().add( SurfaceParameter.dust);
@@ -50,6 +52,7 @@ public final class MaterialTest {
         assertTrue(material.hasQ3map());
         assertTrue(material.hasFog());
         assertTrue(material.hasSky());
+        assertTrue(material.hasSort());
 
         assertEquals("materials/my/Material2\n"
                 + "{\n"
@@ -66,6 +69,7 @@ public final class MaterialTest {
                 + "  polygonOffset\n"
                 + "  fogparms 1.0 0.1 0.5 50\n"
                 + "  skyparms myFarBox 512 myNearBox\n"
+                + "  sort portal\n"
                 + "  surfaceparm botclip\n"
                 + "  surfaceparm dust\n"
                 + "  surfaceparm slime\n"
@@ -81,6 +85,7 @@ public final class MaterialTest {
                 + "polygonOffset\n"
                 + "fogparms 1.0 0.1 0.5 50\n"
                 + "skyparms myFarBox 512 myNearBox\n"
+                + "sort portal\n"
                 + "surfaceparm botclip\n"
                 + "surfaceparm dust\n"
                 + "surfaceparm slime\n"
@@ -227,6 +232,32 @@ public final class MaterialTest {
         assertNotEquals(material1.hashCode(), material2.hashCode());
 
         material2.setSky( null );
+
+        assertEquals(material1, material2);
+        assertEquals(material1.hashCode(), material2.hashCode());
+
+        final SortDirective sort1 = material1.sort();
+        sort1.setKey( SortKey.sky );
+
+        assertNotEquals(material1, material2);
+        assertNotEquals(material1.hashCode(), material2.hashCode());
+
+        final SortDirective sort2 = material2.sort();
+        sort2.setKey( SortKey.sky );
+
+        assertEquals(material1, material2);
+        assertEquals(material1.hashCode(), material2.hashCode());
+
+        assertEquals(material1, material2);
+        assertEquals(material1.hashCode(), material2.hashCode());
+
+        // Reset
+        sort1.setKey( null );
+
+        assertNotEquals(material1, material2);
+        assertNotEquals(material1.hashCode(), material2.hashCode());
+
+        material2.setSort( null );
 
         assertEquals(material1, material2);
         assertEquals(material1.hashCode(), material2.hashCode());

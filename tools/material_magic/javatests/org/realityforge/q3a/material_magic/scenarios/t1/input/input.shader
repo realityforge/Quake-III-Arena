@@ -58,6 +58,7 @@ PoRtAl
 // Increases separation between layers but no near/far box
 skyParms env/wildspace1 - -
 
+Sort sky
 }
 
 textures/base/myBase_4 { /* This is a non-normalized form of "cull back" */ cull backsided }
@@ -68,6 +69,9 @@ cull backSided
 // The provides just default so it weill be omitted
 skyParms - - -
 polygonoffset
+
+// Numeric value that is integer-like so will have 0 dropped
+sort 2.0
 }
 
 
@@ -79,4 +83,6 @@ cull none
 fogparms 0.7 0.7 0.7 128 64
 // Increases separation between layers but no near/far box
 skyparms - 512 -
+// Numeric value that is float-like
+sort 2.3
 }

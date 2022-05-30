@@ -8,6 +8,7 @@ portal
 entityMergable
 fogparms 0.85 0.1 0.01 980
 skyparms env/wildspace1 - -
+sort sky
 surfaceparm noimpact
 surfaceparm nolightmap
 surfaceparm sky

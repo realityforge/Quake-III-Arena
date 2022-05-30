@@ -28,6 +28,8 @@ public final class Material {
     private FogDirective _fog;
     @Nullable
     private SkyDirective _sky;
+    @Nullable
+    private SortDirective _sort;
     @Nonnull
     private Set<SurfaceParameter> _surfaceParameters = new HashSet<>();
 
@@ -176,6 +178,26 @@ public final class Material {
         _sky = sky;
     }
 
+    public boolean hasSort()
+    {
+        return null != _sort;
+    }
+
+    @Nonnull
+    public SortDirective sort()
+    {
+        if ( null == _sort )
+        {
+            _sort = new SortDirective();
+        }
+        return _sort;
+    }
+
+    public void setSort( @Nullable final SortDirective sort )
+    {
+        _sort = sort;
+    }
+
     @Nonnull
     public Set<SurfaceParameter> getSurfaceParameters()
     {
@@ -227,6 +249,10 @@ public final class Material {
             {
                 _sky.write( output );
             }
+            if( null != _sort)
+            {
+                _sort.write( output );
+            }
             for (final SurfaceParameter parameter : getSurfaceParametersSorted()) {
                 o.writeDirective( "surfaceparm", parameter.name());
             }
@@ -252,6 +278,8 @@ public final class Material {
                    Objects.equals( _fog, that._fog ) &&
                    Objects.equals( null == _sky || _sky.isDefault() ? null : _sky,
                                    null == that._sky || that._sky.isDefault() ? null : that._sky ) &&
+                   Objects.equals( null == _sort || _sort.isDefault() ? null : _sort,
+                                   null == that._sort || that._sort.isDefault() ? null : that._sort ) &&
                    Objects.equals( getSurfaceParametersSorted(), that.getSurfaceParametersSorted() ) &&
                    Objects.equals( q3map(), that.q3map() ) &&
                    Objects.equals( qer(), that.qer() );
@@ -261,7 +289,19 @@ public final class Material {
     @Override
     public int hashCode()
     {
-        return Objects.hash( _name, _cull, _noPicMip, _noMipMaps, _portal, _entityMergable, _polygonOffset, _fog, null == _sky || _sky.isDefault() ? null : _sky, getSurfaceParametersSorted(), q3map(), qer());
+        return Objects.hash( _name,
+                             _cull,
+                             _noPicMip,
+                             _noMipMaps,
+                             _portal,
+                             _entityMergable,
+                             _polygonOffset,
+                             _fog,
+                             null == _sky || _sky.isDefault() ? null : _sky,
+                             null == _sort || _sort.isDefault() ? null : _sort,
+                             getSurfaceParametersSorted(),
+                             q3map(),
+                             qer() );
     }
 
     @Nonnull
