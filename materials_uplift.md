@@ -22,7 +22,7 @@ As part of this change, it is expected that the shaders present in the "Team Are
 
 The shader file format is poorly documented and the only real way to understand the behaviour is to read the source code. The [Q3Radiant Shader Manual](https://icculus.org/gtkradiant/documentation/Q3AShader_Manual/) provides Q3A specific shader documentation, while the [Q3Map2 Shader Manual](http://q3map2.robotrenegade.com/docs/shader_manual/) includes more up-to-date documentation for the file format. However, the Q3Map2 document includes documentation for many directives that are not supported by the original Q3A game or are only supported by q3map2 tool. The Q3Map2 document also focuses on the directives from the perspective of the tooling and less from the perspective of the runtime.
 
-There is also some variance in how the shaders are processed by the tools and the runtime, with some values being accepted by the engine but not the tooling or vice versa. (i.e. the `infoParm_t` reference structure varies between the two code bases and the values for the `cull` directive different between both tools.) 
+There is also some variance in how the shaders are processed by the tools and the runtime, with some values being accepted by the engine but not the tooling or vice versa. (i.e. the `infoParm_t` reference structure varies between the two code bases and the values for the `cull` directive different between both tools.)
 
 ### Solution
 
