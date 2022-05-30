@@ -1,39 +1,54 @@
 package org.realityforge.q3a.material_magic.model;
 
+import java.util.Arrays;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public enum SurfaceParameter
 {
-    alphashadow,
-    areaportal,
-    botclip,
-    clusterportal,
-    detail,
-    donotenter,
-    dust,
-    flesh,
-    fog,
-    hint,
-    ladder,
-    lava,
-    lightfilter,
-    metalsteps,
-    monsterclip,
-    nobotclip,
-    nodamage,
-    nodlight,
-    nodraw,
-    nodrop,
-    noimpact,
-    nolightmap,
-    nomarks,
-    nonsolid,
-    nosteps,
-    origin,
-    playerclip,
-    pointlight,
-    sky,
-    slick,
-    slime,
-    structural,
-    trans,
-    water
+  alphashadow,
+  areaportal,
+  botclip,
+  clusterportal,
+  detail,
+  donotenter,
+  dust,
+  flesh,
+  fog,
+  hint,
+  ladder,
+  lava,
+  lightfilter,
+  metalsteps,
+  monsterclip,
+  nobotclip,
+  nodamage,
+  nodlight,
+  nodraw,
+  nodrop,
+  noimpact,
+  nolightmap,
+  nomarks,
+  nonsolid,
+  nosteps,
+  origin,
+  playerclip,
+  pointlight,
+  sky,
+  slick,
+  slime,
+  structural,
+  trans,
+  water;
+
+  @Nullable
+  public static SurfaceParameter findByName( @Nonnull final String name )
+  {
+    return
+      Arrays
+        .stream( SurfaceParameter.values() )
+        .filter( value -> value.name().equals( name ) )
+        .findFirst()
+        .orElse( null );
+  }
 }
