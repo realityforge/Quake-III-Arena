@@ -28,6 +28,8 @@ There is also some more technology specific challenges that are associated with 
 
 ### Solution
 
+The final solution was developed in the Java language, using the Antlr parser generator. This toolkit was selected as the author was familiar with these tools but was unfamiliar with how to integrate it with Bazel. The solution also opted to use Junit version 5 rather than Junit version 3 or 4 as Junit 5 is not supported in Bazel by default and thus using Junit version 5 forced a deeper understanding of the Bazel test infrastructure.
+
 ...
 
 ### Evaluation
