@@ -24,6 +24,8 @@ The shader file format is poorly documented and the only real way to understand 
 
 There is also some variance in how the shaders are processed by the tools and the runtime, with some values being accepted by the engine but not the tooling or vice versa. (i.e. the `infoParm_t` reference structure varies between the two code bases and the values for the `cull` directive different between both tools.)
 
+There is also some more technology specific challenges that are associated with this change. It is expected that this change will result in a new library, and it will need relatively extensive testing and validation. It was also decided that this tool would be in a language other than C to force the author to understand the file format and not just copy-paste code from the tools or engine. Both of these requirements will add additional overhead to the development process as it will require learning how to add appropriate test targets in Bazel, integration of a new language into the IDE as well as enabling running of tests and related infrastructure from the IDE.
+
 ### Solution
 
 ### Evaluation
