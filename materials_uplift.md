@@ -10,6 +10,14 @@ The technology was ahead of it's time but is now somewhat outdated. The "shaders
 
 A single shader file could contain multiple different shaders. And a shader with the same name could appear multiple times with the "last" shader definition overriding earlier shader definitions. There existed some ad-hoc organisation and grouping of shaders into shader definition files, but it was not systematic or very easy to replace individual shader definitions. The "Team Arena" game mode chose to duplicate every shader present in the "BaseQ3" game mode rather than attempting to just specify the new shaders as a result of this complexity. (i.e. `textures/common/nolightmap` appears in both game modes). Even within a single game mode, the same shader definition can appear multiple times, and you have to know the order in which files will be included to determine which definition will win. (i.e. `textures/base_floor/concfloor_rain` appears three times in the `BaseQ3` game mode).
 
+The shader definitions include directives that are used at runtime, directives that improve the user interface in the editors, and directives that are used at build time by tools such as the map compiler or the area awareness compiler. The shader definitions should omit the non-runtime directives when consumed by the engine but retain the definitions when using the shaders as part of the build infrastructure. This will reduce the unnecessary processing when loading the shaders.
+
+If or when the renderer is rebuilt, it will be necessary to transform the Q3A shaders into actual shader languages such as GLSL or shader "target" languages such as SPIR-V or WSL. To achieve this an in-depth understanding of the existing shader infrastructure will be necessary. Some "multi-stage" Q3A shaders produce a single pass GL shader while some single stage Q3A shaders may result in substantial infrastructure including geometry shaders. Without having an indepth understanding of the shader definition format, these changes would be difficult.
+
+This change proposes the development of tooling to read, write and transform the shader files. The shader definitions should be optimised for the intended usage with the expectation that a single shader definition may appear in different forms; one for loading into the runtime and one for usage during build and development.
+
+As part of this change, it is expected that the shaders present in the "Team Arena" game will be deduplicated and only the new or varied shaders will be retained.
+
 ### Challenges
 
 ### Solution
