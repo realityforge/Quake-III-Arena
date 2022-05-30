@@ -28,4 +28,8 @@ There is also some more technology specific challenges that are associated with 
 
 ### Solution
 
+...
+
 ### Evaluation
+
+...
