@@ -26,7 +26,7 @@ Icon?
 
 # Created by IntellijJ Antlr plugin and unable to be located to a more sensible location so we just ignore
 /tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader/MaterialsLexer.tokens
-/tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader/gen/MaterialsLexer.*
+/tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader/gen/Materials*
 
 # Local scripts
 ############################
