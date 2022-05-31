@@ -18,6 +18,18 @@ Examples of inter-asset dependencies:
 * A "bsp file" references shaders, textures, models, sounds etc.
 * The "game logic" references all of the above assets. Some of these references are dynamic references while some are static.
 
+Q3A has the capability to download `*.pk3` files when the client is connecting to a server and both the client and server are configured to enable downloads. This makes it possible for a server to distribute maps and models incrementally, on-demand. The end-user can also download these assets using independent means and place the `*.pk3` files in the correct game directory.
+
+In an ideal system an asset bundle would be able to declare that all asset references are resolvable statically at build time rather than deferring detection of missing references until runtime. This would reduce the amount of QA processes that would need to be dedicated to ensuring that assets are valid. Other component systems have solved this problem through a number of mechanisms. Strategies that would translate a game engine include:
+
+* Each asset bundle consists of an identifier that may incorporate a name and/or a version specifier.
+* Each asset bundle declares the set of assets that are "provided" by the asset bundle and are thus available to reference from other asset bundles.
+* Each asset bundle declares the set of assets that are "consumed" by the asset bundle and are expected to be provided by other asset bundles.
+* Each asset bundle may declare the identifier of another asset bundle that the asset bundle depends upon.
+
+Tooling could then be developed that analyzed each asset and ensured that every asset within the bundle as all references either present in the bundle, declared as "consumed" by the asset bundle. The tooling could also analyze the dependencies between assets so that they can be packaged into asset bundles that group assets in a way that is fast to download on demand (or optimised for the developer requirements).
+
+Bundles could be signed by the distributing party to make it possible to determine the providence of the asset bundle and to verify it has not been modified by third parties. This would make it possible for clients to trust bundles signed by certain parties and not trust bundles signed by other parties.
 ### Challenges
 
 ...
