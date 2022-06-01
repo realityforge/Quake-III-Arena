@@ -57,7 +57,7 @@ Wuffs is a memory-safe programming language for wrangling untrusted file formats
 
 Libpng is the broadly used reference library and has a comprehensive reference manual. It also has an extremely complex API and a history of security vulnerabilities. Despite these limitations, the initial implementation used libpng but it was later rejected due to the significant complexity associated with the implementation.
 
-Libspng was selected as it has a simple API, is substantially smaller and faster than libpng and was built with a focus on security. This includes following secure coding standards, having a comprehensive test suite and fuzz testing aand static analysis.
+Libspng was selected as it has a simple API, is substantially smaller and faster than libpng and was built with a focus on security. This includes following secure coding standards, having a comprehensive test suite and fuzz testing and static analysis.
 
 #### Asset Conversion
 
