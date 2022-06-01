@@ -79,7 +79,7 @@ QER_TRANS : Q E R '_' T R A N S;
 
 SURFACE_PARM : S U R F A C E P A R M;
 
-INTEGER : '-'?([1-9][0-9]*);
+INTEGER : '-'?([0-9][0-9]*);
 
 DECIMAL : '-'?([0-9]+'.'[0-9]*|[0-9]*'.'[0-9]+);
 
