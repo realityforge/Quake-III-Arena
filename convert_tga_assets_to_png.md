@@ -73,4 +73,4 @@ The size of the lossless images in the `baseq3` game changed from 211M to 51M. T
 
 The impact on load time was not as easy to determine but the load time seemed to be reduced in the limited number of cases investigated. The hypothesis that this will be true on platforms where I/O devices are slow relative to processors.
 
-A nice side-effect of moving all the lossless images to PNG was that it is vastly easier to manipulate the images using standard tooling compared to the prio TGA format.
+A nice side-effect of moving all the lossless images to PNG was that it is vastly easier to manipulate the images using standard tooling compared to the prior TGA format.
