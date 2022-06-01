@@ -69,6 +69,9 @@ The building of the asset bundle should be **fast** and optional. Content develo
 ### Challenges
 
 ...
+* Probably requires a rebuild and/or rethinking of the VFS layer. Possibly the VFS mounts bundles as paths ala `/bundles/cbfb2dae51f384fc4dffe1965966fa562f9a51b0/...` and assets under the content hash ala `/assets/7dc48cd3a038568e100fdad842ee6d40fbee56bc` and then uses the equivalent of symlinks into `/maps/foo.bsp` for "published" resources. Then at least the rest of the game logic would not need to change, just the filesystem layer would need to detect references that use hash format and load assets from appropriate location.
+* Requires a substantial rethinking about how assets are processed for packaging into the engine.
+...
 
 ### Solution
 
