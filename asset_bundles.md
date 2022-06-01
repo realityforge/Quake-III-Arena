@@ -55,6 +55,22 @@ The bundle may optionally have a manifest file that maps the logical name `textu
 
 ...
 
+The design of the solution will likely evolve over time, but it is expected that the design will fit the following parameters:
+
+* Assets identified by a content hash.
+* Assets can have references to other assets determined statically at build time or dynamically at runtime.
+* An asset bundle includes a manifest that maps logical names to content hash.
+* Asset variants explicitly identified, potentially in the manifest.
+* An asset bundle is identified by a content hash.
+* An asset bundle can declare a static dependency on another asset bundle by content hash.
+* An asset bundle must declare which assets it "publishes" so that other asset bundles can reference these assets. The "publish" directive must include the supported variants, the logical name and the type of the asset.
+* An asset bundle must declare which assets it "consumes" or can dynamically reference. The engine is responsible for ensuring the references are resolvable at runtime. These references use the name label.
+* An asset bundle may declare that it dynamically consumes assets using a name pattern.
+* Static inter-asset references MUST be statically resolvable within the bundle, or its static dependencies.
+* The asset bundle MUST NOT declare that it "consumes" an asset reference if the referenced asset is present in the asset bundle or the reference is a static reference.
+
+...
+
 ### Evaluation
 
 ...
