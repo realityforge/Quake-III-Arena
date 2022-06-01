@@ -47,6 +47,10 @@ An alternative solution that is present in systems that need to guarantee integr
 
 The bundle may optionally have a manifest file that maps the logical name `textures/base/water` to the hash. (This is a very simplified version of how directories are stored in GIT). The manifest itself would also be another "asset" with its identity specified by a content hash.
 
+The advantage of this approach is that asset references that should be statically resolved at build time can use a content hash while references that are dynamically resolved at run time can use the names in the manifest to retrieve the content hash.
+
+The [Merkle tree](https://en.wikipedia.org/wiki/Merkle_tree) is a tree structure where internal nodes are just a list of child nodes and all nodes are identified by a content hash. A map/scene asset could be represented as a merkle tree. When a new version of the map asset is created then it would be possible for both versions to be present on the client and all the unchanged data would be shared between the versions (as the content has would be identical) and it would be possible for the client to play both versions of the map. (This is a common request in some gaming communities. In the HyperDash community, it is not un-common to hear a request to bring back an older version of a map. This may be for nostalgia reasons or because users want to compare and contrast the "new" and "old" version of a map.)
+
 ### Challenges
 
 ...
