@@ -59,6 +59,7 @@ It is common for a single asset to have multiple variants depending on the host 
 * S3TC/ETC/ASTC/PVRTC/Basis compressed textures versus uncompressed textures.
 * High detail versus low detail models.
 * High bitrate versus low bitrate sounds.
+* Language files (French versus Italian versus Japanese translations)
 
 An asset bundle should be able to declare which variants are available for a particular asset. i.e. There should be an explicit indication that the `textures/base/water` texture has the variants `textures/base/water.png` (base image data), `textures/base/water.tga` (raw uncompressed image data), `textures/base/water.ktx` (ASTC compressed image data in .ktx container) etc.
 
