@@ -75,6 +75,7 @@ The asset-specific metadata that is likely required at runtime:
 * content hash (i.e. `7dc48cd3a038568e100fdad842ee6d40fbee56bc`)
 * content type (i.e. `image/jpg`, `image/png`, `image/ktx2`, `sound/x-wav`, `model/bsp31`, `shader` etc.)
 * name if the asset is "published". (i.e. `maps/dm01.bsp`)
+* asset metrics (poly count / render cost). This is useful so that the user or application can choose to have "low quality" versus "high quality" assets based on their hardware capabilities.
 
 The asset-specific metadata that may be required on download:
 * signature and signer to verify providence of asset or asset bundle.
