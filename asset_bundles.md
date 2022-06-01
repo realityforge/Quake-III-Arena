@@ -72,6 +72,7 @@ The design of the solution will likely evolve over time, but it is expected that
 * An asset bundle may declare that it dynamically consumes assets using a name pattern.
 * Static inter-asset references MUST be statically resolvable within the bundle, or its static dependencies.
 * The asset bundle MUST NOT declare that it "consumes" an asset reference if the referenced asset is present in the asset bundle or the reference is a static reference.
+* An asset bundle should be signed by the distributor to ensure providence of the artifact has been maintained, and it has not been modified by third parties.
 
 ...
 
