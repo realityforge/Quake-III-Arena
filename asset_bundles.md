@@ -69,7 +69,7 @@ The building of the asset bundle should be **fast** and optional. Content develo
 
 #### Asset and Bundle Meta Data
 
-The asset bundle can potentially be augmented with metadata about both the assets and the bundle itself. Some metadata could be required by the runtime while other metadata may be optional and/or only used by content creators.
+The asset bundle can potentially be augmented with metadata about both the assets and the bundle itself. Some metadata could be required by the runtime while other metadata may be optional and/or only used by content creators. The metadata data (or extended attributes) would be stored separate from the asset itself and maybe in a separate manifest file.
 
 The asset-specific metadata that is likely required at runtime:
 * content hash (i.e. `7dc48cd3a038568e100fdad842ee6d40fbee56bc`)
