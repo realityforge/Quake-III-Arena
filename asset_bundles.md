@@ -62,6 +62,10 @@ It is common for a single asset to have multiple variants depending on the host 
 
 An asset bundle should be able to declare which variants are available for a particular asset. i.e. There should be an explicit indication that the `textures/base/water` texture has the variants `textures/base/water.png` (base image data), `textures/base/water.tga` (raw uncompressed image data), `textures/base/water.ktx` (ASTC compressed image data in .ktx container) etc.
 
+#### Fast Build Pipeline
+
+The building of the asset bundle should be **fast** and optional. Content developers should be able to make changes fast, in a directory, without having to package assets into a bundle. When a bundle is required then the build process should be fast and incremental. (This capability may be provided by Bazel). Bundle signing should be optional for local development. The build system should be responsible for generating the manifest, as well as the consumes and provides directives with minimal input from the content creator.
+
 ### Challenges
 
 ...
