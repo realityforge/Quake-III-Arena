@@ -67,6 +67,25 @@ An asset bundle should be able to declare which variants are available for a par
 
 The building of the asset bundle should be **fast** and optional. Content developers should be able to make changes fast, in a directory, without having to package assets into a bundle. When a bundle is required then the build process should be fast and incremental. (This capability may be provided by Bazel). Bundle signing should be optional for local development. The build system should be responsible for generating the manifest, as well as the consumes and provides directives with minimal input from the content creator.
 
+#### Asset and Bundle Meta Data
+
+The asset bundle can potentially be augmented with metadata about both the assets and the bundle itself. Some metadata could be required by the runtime while other metadata may be optional and/or only used by content creators.
+
+The asset-specific metadata that is likely required at runtime:
+* content hash (i.e. `7dc48cd3a038568e100fdad842ee6d40fbee56bc`)
+* content type (i.e. `image/jpg`, `image/png`, `image/ktx2`, `sound/x-wav`, `model/bsp31`, `shader` etc.)
+* name if the asset is "published". (i.e. `maps/dm01.bsp`)
+
+The asset-specific metadata that may be required on download:
+* signature and signer to verify providence of asset or asset bundle.
+
+The asset-specific metadata that is likely required by creators:
+* license (i.e. `CC` versus `Properietry`). License metadata can be on both the individual asset and the asset bundle and may impact capabilities like the ability to download the asset from a server.
+* build-time directives (i.e. "shader" files include a lot of information that is only relevant when creating new content or loading into editors)
+* the raw "un-compiled asset". Most file formats are derived from another format and then are exported. In some cases this format may be useful to distribute to support creators.
+
+If the "non-runtime" specific asset data ever grows "too" large then it could be split into a separate asset bundle that depends on the runtime bundle.
+
 ### Challenges
 
 ...
