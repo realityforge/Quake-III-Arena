@@ -11,18 +11,16 @@
 # limitations under the License.
 load(":model_test.bzl", _model_test = "model_test")
 
-_model_test(name = "FogDirectiveTest")
-
-_model_test(name = "MaterialTest")
-
-_model_test(name = "Q3mapDirectivesTest")
-
-_model_test(name = "QerDirectivesTest")
-
-_model_test(name = "SkyDirectiveTest")
-
-_model_test(name = "SortDirectiveTest")
-
-_model_test(name = "SunDirectiveTest")
-
-_model_test(name = "UnitTest")
+[
+    _model_test(name = "%sTest" % t)
+    for t in [
+        "FogDirective",
+        "Material",
+        "Q3mapDirectives",
+        "QerDirectives",
+        "SkyDirective",
+        "SortDirective",
+        "SunDirective",
+        "Unit",
+    ]
+]
