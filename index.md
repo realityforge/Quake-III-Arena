@@ -87,6 +87,25 @@ The major changes of the project are tracked in this table.
   </tbody>
 </table>
 
+These changes have not been started but are things that the project is considering doing.
+
+<table>
+  <thead>
+    <tr valign="top">
+      <th>Proposed Change</th>
+      <th>Status</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr valign="top">
+      <td><a href="asset_bundles.html">Asset Bundles</a></td>
+      <td>Ideation</td>
+      <td>Develop a more robust asset bundle format.</td>
+    </tr>
+  </tbody>
+</table>
+
 ## References
 
 A set of notes and references that were collected to help work on this project:
