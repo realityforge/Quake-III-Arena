@@ -34,6 +34,19 @@ Tooling could then be developed that analyzed each asset and ensured that every 
 Bundles could be signed by the distributing party to make it possible to determine the providence of the asset bundle and to verify it has not been modified by third parties. This would make it possible for clients to trust bundles signed by certain parties and not trust bundles signed by other parties.
 
 #### Asset Identity
+
+In Q3A, assets are identified by their file name. An asset can be "replaced" by creating an asset with the same name that appears later in the load path.
+
+This results in the following constraints:
+
+* It is impossible to know which asset will be loaded when a particular name is requested without reconstructing the virtual file system logic.
+* It is impossible to update an asset without updating all references to the asset. Consider the scenario where a map/scene was created using the texture `textures/base/water` and then the texture `textures/base/water` is updated. Should the map use the "new" `textures/base/water` texture or the "old" `textures/base/water` texture? (And what if this texture was used as part of baked in lighting processes?) Stated another way, is the reference to the texture static (and fixed at build time) or dynamic (and resolved at runtime). Depending on the reference and the scenario, static or dynamic references could be the "correct" answer.
+* It is impossible to have multiple assets with the same name. So if independent parties use the same names then these assets can not be loaded at the same time.
+
+An alternative solution that is present in systems that need to guarantee integrity of references is to derive the identity of the asset using a content hash. This approach is used in source control systems like Git and "cryptocurrency" platforms. So while the texture `textures/base/water` may be referenced by name during the build process, when it is placed in a bundle the name or identity is `7dc48cd3a038568e100fdad842ee6d40fbee56bc` (the SHA-256 hash of the file) and all references to the file are placed with this identifier.
+
+The bundle may optionally have a manifest file that maps the logical name `textures/base/water` to the hash. (This is a very simplified version of how directories are stored in GIT).
+
 ### Challenges
 
 ...
