@@ -79,11 +79,14 @@ The asset-specific metadata that is likely required at runtime:
 
 The asset-specific metadata that may be required on download:
 * signature and signer to verify providence of asset or asset bundle.
+* It may be that an asset bundle has multiple signatures and one may be from the original assemblers while others indicate the registry that distributed the bundle. (Potentially clients could restrict asset bundles to those loaded from particular locations)
 
 The asset-specific metadata that is likely required by creators:
 * license (i.e. `CC` versus `Properietry`). License metadata can be on both the individual asset and the asset bundle and may impact capabilities like the ability to download the asset from a server.
 * build-time directives (i.e. "shader" files include a lot of information that is only relevant when creating new content or loading into editors)
 * the raw "un-compiled asset". Most file formats are derived from another format and then are exported. In some cases this format may be useful to distribute to support creators.
+* A link to the registry that distributes the asset bundle. It may also indicate a mechanism by which a server can determine whether a user has a license for a particular bundle.
+* A link to a website (potentially restricted to the registry) that describes or reviews the asset. This could be a developer owned variant of lvlworld.
 
 If the "non-runtime" specific asset data ever grows "too" large then it could be split into a separate asset bundle that depends on the runtime bundle.
 
