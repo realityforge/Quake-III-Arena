@@ -204,12 +204,7 @@ public final class Material {
     }
 
     @Nonnull
-    public Set<SurfaceParameter> getSurfaceParameters()
-    {
-        return _surfaceParameters;
-    }
-    @Nonnull
-    public List<SurfaceParameter> getSurfaceParametersSorted()
+    public List<SurfaceParameter> getSurfaceParameters()
     {
         return _surfaceParameters.stream().sorted().collect( Collectors.toUnmodifiableList());
     }
@@ -258,7 +253,7 @@ public final class Material {
             {
                 _sort.write( output );
             }
-            for (final SurfaceParameter parameter : getSurfaceParametersSorted()) {
+            for (final SurfaceParameter parameter : getSurfaceParameters()) {
                 o.writeDirective( "surfaceparm", parameter.name());
             }
         });
@@ -285,7 +280,7 @@ public final class Material {
                                    null == that._sky || that._sky.isDefault() ? null : that._sky ) &&
                    Objects.equals( null == _sort || _sort.isDefault() ? null : _sort,
                                    null == that._sort || that._sort.isDefault() ? null : that._sort ) &&
-                   Objects.equals( getSurfaceParametersSorted(), that.getSurfaceParametersSorted() ) &&
+                   Objects.equals( getSurfaceParameters(), that.getSurfaceParameters() ) &&
                    Objects.equals( q3map(), that.q3map() ) &&
                    Objects.equals( qer(), that.qer() );
         }
@@ -304,7 +299,7 @@ public final class Material {
                              _fog,
                              null == _sky || _sky.isDefault() ? null : _sky,
                              null == _sort || _sort.isDefault() ? null : _sort,
-                             getSurfaceParametersSorted(),
+                             getSurfaceParameters(),
                              q3map(),
                              qer() );
     }
