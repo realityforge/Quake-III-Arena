@@ -243,15 +243,15 @@ public final class Material {
                 o.writeDirective( "polygonOffset" );
             }
             if( null != _fog){
-                _fog.write( output );
+                _fog.write( o );
             }
             if( null != _sky)
             {
-                _sky.write( output );
+                _sky.write( o );
             }
             if( null != _sort)
             {
-                _sort.write( output );
+                _sort.write( o );
             }
             for (final SurfaceParameter parameter : getSurfaceParameters()) {
                 o.writeDirective( "surfaceparm", parameter.name());
