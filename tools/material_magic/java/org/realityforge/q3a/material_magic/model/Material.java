@@ -254,7 +254,7 @@ public final class Material {
                 _sort.write( o );
             }
             for (final SurfaceParameter parameter : getSurfaceParameters()) {
-                o.writeDirective( "surfaceparm", parameter.name());
+                parameter.write( o );
             }
         });
     }

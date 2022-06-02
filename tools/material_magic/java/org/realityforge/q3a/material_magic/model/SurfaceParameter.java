@@ -1,8 +1,10 @@
 package org.realityforge.q3a.material_magic.model;
 
+import java.io.IOException;
 import java.util.Arrays;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
 public enum SurfaceParameter
 {
@@ -40,6 +42,12 @@ public enum SurfaceParameter
   structural,
   trans,
   water;
+
+  void write( @Nonnull final MaterialOutput output )
+    throws IOException
+  {
+    output.writeDirective( "surfaceparm", name());
+  }
 
   @Nullable
   public static SurfaceParameter findByName( @Nonnull final String name )
