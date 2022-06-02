@@ -2,6 +2,7 @@ package org.realityforge.q3a.material_magic.model;
 
 import org.junit.jupiter.api.Test;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public final class SunDirectiveTest
@@ -11,7 +12,6 @@ public final class SunDirectiveTest
   {
     final SunDirective directive = new SunDirective();
 
-    //q3map_sun 1 .77 .77 80 315 70
     directive.setRed( 1F );
     directive.setGreen( .77F );
     directive.setBlue( .76F );
