@@ -2,6 +2,7 @@ package org.realityforge.q3a.material_magic.model;
 
 import org.junit.jupiter.api.Test;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public final class WaveDeformStageDirectiveTest
@@ -18,8 +19,7 @@ public final class WaveDeformStageDirectiveTest
     directive.getWave().setPhase( 2 );
     directive.getWave().setFrequency( 0.1F );
 
-    assertEquals( "deformVertexes wave 100 sawtooth 0 5 2 .1\n",
-                  MaterialOutput.outputAsString( directive::write ) );
+    assertEquals( "deformVertexes wave 100 sawtooth 0 5 2 .1\n", MaterialOutput.outputAsString( directive::write ) );
     assertEquals( "deformVertexes wave 100 sawtooth 0 5 2 .1\n",
                   MaterialOutput.outputAsString( directive::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
 
@@ -27,8 +27,7 @@ public final class WaveDeformStageDirectiveTest
     directive.getWave().setGenerator( WaveForm.Generator.SIN );
     directive.getWave().setBase( 3 );
 
-    assertEquals( "deformVertexes wave 200 sin 3 5 2 .1\n",
-                  MaterialOutput.outputAsString( directive::write ) );
+    assertEquals( "deformVertexes wave 200 sin 3 5 2 .1\n", MaterialOutput.outputAsString( directive::write ) );
   }
 
   @Test
