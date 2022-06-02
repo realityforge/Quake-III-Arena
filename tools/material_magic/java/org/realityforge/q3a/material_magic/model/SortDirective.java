@@ -21,60 +21,42 @@ public final class SortDirective
 
   public void setKey( @Nullable final SortKey key )
   {
-    if ( null != key )
-    {
+    if ( null != key ) {
       _value = 0;
     }
     _key = key;
   }
 
-  public float getValue()
-  {
-    return _value;
-  }
+  public float getValue() { return _value; }
 
   public void setValue( final float value )
   {
-    if ( 0 != value )
-    {
+    if ( 0 != value ) {
       _key = null;
     }
     _value = value;
   }
 
-  void write( @Nonnull final MaterialOutput output )
-    throws IOException
+  void write( @Nonnull final MaterialOutput output ) throws IOException
   {
-    if ( isNonDefault() )
-    {
+    if ( isNonDefault() ) {
       output.writeDirective( "sort", null != _key ? _key.name() : EmitUtil.floatToString( _value ) );
     }
   }
 
-  public boolean isNonDefault()
-  {
-    return null != _key || 0F != _value;
-  }
+  public boolean isNonDefault() { return null != _key || 0F != _value; }
 
-  public boolean isDefault()
-  {
-    return !isNonDefault();
-  }
+  public boolean isDefault() { return !isNonDefault(); }
 
   @Override
   public boolean equals( final Object o )
   {
-    if ( this == o )
-    {
+    if ( this == o ) {
       return true;
-    }
-    else if ( o == null || getClass() != o.getClass() )
-    {
+    } else if ( o == null || getClass() != o.getClass() ) {
       return false;
-    }
-    else
-    {
-      final SortDirective that = (SortDirective) o;
+    } else {
+      final SortDirective that = (SortDirective)o;
       return Objects.equals( _key, that._key ) && _value == that._value;
     }
   }

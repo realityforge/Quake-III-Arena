@@ -7,25 +7,18 @@ import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
 public abstract class DeformStageDirective<T extends DeformStageDirective<T>>
 {
-  abstract void write( @Nonnull MaterialOutput output )
-    throws IOException;
+  abstract void write( @Nonnull MaterialOutput output ) throws IOException;
 
   @SuppressWarnings( "unchecked" )
   @Override
-
   public boolean equals( @Nullable final Object o )
   {
-    if ( this == o )
-    {
+    if ( this == o ) {
       return true;
-    }
-    else if ( null == o || getClass() != o.getClass() )
-    {
+    } else if ( null == o || getClass() != o.getClass() ) {
       return false;
-    }
-    else
-    {
-      return performEquals( (T) o );
+    } else {
+      return performEquals( (T)o );
     }
   }
 

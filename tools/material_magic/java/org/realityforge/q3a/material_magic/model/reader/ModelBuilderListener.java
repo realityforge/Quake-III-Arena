@@ -21,8 +21,7 @@ import org.realityforge.q3a.material_magic.model.Unit;
 import org.realityforge.q3a.material_magic.model.WaveDeformStageDirective;
 import org.realityforge.q3a.material_magic.model.WaveForm;
 
-final class ModelBuilderListener
-  extends MaterialsParserBaseListener
+final class ModelBuilderListener extends MaterialsParserBaseListener
 {
   @Nonnull
   private final Unit _unit = new Unit();
@@ -59,7 +58,8 @@ final class ModelBuilderListener
   }
 
   @Override
-  public void exitQ3mapNoVertexShadowsDirective( @Nonnull final MaterialsParser.Q3mapNoVertexShadowsDirectiveContext ctx )
+  public void exitQ3mapNoVertexShadowsDirective(
+    @Nonnull final MaterialsParser.Q3mapNoVertexShadowsDirectiveContext ctx )
   {
     _material.q3map().setNoVertexShadows( true );
   }
@@ -93,7 +93,6 @@ final class ModelBuilderListener
   {
     _material.q3map().setBackSplashPercent( Integer.parseInt( ctx.INTEGER().get( 0 ).getText() ) );
     _material.q3map().setBackSplashDistance( Integer.parseInt( ctx.INTEGER().get( 1 ).getText() ) );
-
   }
 
   @Override
@@ -105,16 +104,11 @@ final class ModelBuilderListener
   @Override
   public void exitCullDirective( @Nonnull final MaterialsParser.CullDirectiveContext ctx )
   {
-    if ( null != ctx.CULL_BACK() || null != ctx.CULL_BACKSIDE() || null != ctx.CULL_BACKSIDED() )
-    {
+    if ( null != ctx.CULL_BACK() || null != ctx.CULL_BACKSIDE() || null != ctx.CULL_BACKSIDED() ) {
       _material.setCull( CullType.BACK );
-    }
-    else if ( null != ctx.CULL_DISABLE() || null != ctx.CULL_NONE() || null != ctx.CULL_TWOSIDED() )
-    {
+    } else if ( null != ctx.CULL_DISABLE() || null != ctx.CULL_NONE() || null != ctx.CULL_TWOSIDED() ) {
       _material.setCull( CullType.DISABLE );
-    }
-    else
-    {
+    } else {
       throw new IllegalStateException( "Unhandled cull value " + ctx.getText() );
     }
   }
@@ -158,18 +152,15 @@ final class ModelBuilderListener
   {
     final SkyDirective sky = _material.sky();
     final TerminalNode label1 = ctx.LABEL( 0 );
-    if ( null != label1 )
-    {
+    if ( null != label1 ) {
       sky.setFarBox( label1.getText() );
     }
     final TerminalNode integer = ctx.INTEGER();
-    if ( null != integer )
-    {
+    if ( null != integer ) {
       sky.setCloudHeight( Integer.parseInt( integer.getText() ) );
     }
     final TerminalNode label2 = ctx.LABEL( 1 );
-    if ( null != label2 )
-    {
+    if ( null != label2 ) {
       sky.setNearBox( label2.getText() );
     }
   }
@@ -185,17 +176,14 @@ final class ModelBuilderListener
   {
     final SortDirective sort = _material.sort();
     final TerminalNode label = ctx.LABEL();
-    if ( null != label )
-    {
+    if ( null != label ) {
       final String text = label.getText().toLowerCase();
       final SortKey key = SortKey.findByName( text );
-      if ( null == key )
-      {
+      if ( null == key ) {
         throw new IllegalStateException( "Unhandled sort value " + text );
       }
       sort.setKey( key );
-    }
-    else //if ( null != ctx.number() )
+    } else // if ( null != ctx.number() )
     {
       sort.setValue( parseNumber( ctx.number() ) );
     }
@@ -225,8 +213,7 @@ final class ModelBuilderListener
   {
     final String text = ctx.LABEL().getText().toLowerCase();
     final SurfaceParameter parameter = SurfaceParameter.findByName( text );
-    if ( null == parameter )
-    {
+    if ( null == parameter ) {
       throw new IllegalStateException( "Unhandled surfaceParm value " + text );
     }
     _material.addSurfaceParameter( parameter );
@@ -287,8 +274,7 @@ final class ModelBuilderListener
     wave.setPhase( parseNumber( ctx.phase ) );
     final String generatorText = ctx.generator.getText().toUpperCase();
     final WaveForm.Generator generator = WaveForm.Generator.findByName( generatorText );
-    if ( null == generator )
-    {
+    if ( null == generator ) {
       throw new IllegalStateException( "Unhandled wave form generator: " + generatorText );
     }
     wave.setGenerator( generator );
@@ -305,19 +291,22 @@ final class ModelBuilderListener
   }
 
   @Override
-  public void exitProjectionShadowDeformStageDirective( @Nonnull final MaterialsParser.ProjectionShadowDeformStageDirectiveContext ctx )
+  public void exitProjectionShadowDeformStageDirective(
+    @Nonnull final MaterialsParser.ProjectionShadowDeformStageDirectiveContext ctx )
   {
     _material.addDeformStage( new ProjectionShadowDeformStageDirective() );
   }
 
   @Override
-  public void exitAutoSpriteDeformStageDirective( @Nonnull final MaterialsParser.AutoSpriteDeformStageDirectiveContext ctx )
+  public void exitAutoSpriteDeformStageDirective(
+    @Nonnull final MaterialsParser.AutoSpriteDeformStageDirectiveContext ctx )
   {
     _material.addDeformStage( new AutoSpriteDeformStageDirective() );
   }
 
   @Override
-  public void exitAutoSprite2DeformStageDirective( @Nonnull final MaterialsParser.AutoSprite2DeformStageDirectiveContext ctx )
+  public void exitAutoSprite2DeformStageDirective(
+    @Nonnull final MaterialsParser.AutoSprite2DeformStageDirectiveContext ctx )
   {
     _material.addDeformStage( new AutoSprite2DeformStageDirective() );
   }
@@ -326,36 +315,21 @@ final class ModelBuilderListener
   public void exitTextDeformStageDirective( @Nonnull final MaterialsParser.TextDeformStageDirectiveContext ctx )
   {
     final TextDeformStageDirective directive = new TextDeformStageDirective();
-    if ( null != ctx.TEXT0() )
-    {
+    if ( null != ctx.TEXT0() ) {
       directive.setLevel( 0 );
-    }
-    else if ( null != ctx.TEXT1() )
-    {
+    } else if ( null != ctx.TEXT1() ) {
       directive.setLevel( 1 );
-    }
-    else if ( null != ctx.TEXT2() )
-    {
+    } else if ( null != ctx.TEXT2() ) {
       directive.setLevel( 2 );
-    }
-    else if ( null != ctx.TEXT3() )
-    {
+    } else if ( null != ctx.TEXT3() ) {
       directive.setLevel( 3 );
-    }
-    else if ( null != ctx.TEXT4() )
-    {
+    } else if ( null != ctx.TEXT4() ) {
       directive.setLevel( 4 );
-    }
-    else if ( null != ctx.TEXT5() )
-    {
+    } else if ( null != ctx.TEXT5() ) {
       directive.setLevel( 5 );
-    }
-    else if ( null != ctx.TEXT6() )
-    {
+    } else if ( null != ctx.TEXT6() ) {
       directive.setLevel( 6 );
-    }
-    else if ( null != ctx.TEXT7() )
-    {
+    } else if ( null != ctx.TEXT7() ) {
       directive.setLevel( 7 );
     }
     _material.addDeformStage( directive );

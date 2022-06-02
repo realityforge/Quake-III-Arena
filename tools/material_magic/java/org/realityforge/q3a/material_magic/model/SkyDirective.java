@@ -21,20 +21,11 @@ public final class SkyDirective
     return _farBox;
   }
 
-  public void setFarBox( @Nullable final String farBox )
-  {
-    _farBox = farBox;
-  }
+  public void setFarBox( @Nullable final String farBox ) { _farBox = farBox; }
 
-  public int getCloudHeight()
-  {
-    return _cloudHeight;
-  }
+  public int getCloudHeight() { return _cloudHeight; }
 
-  public void setCloudHeight( final int cloudHeight )
-  {
-    _cloudHeight = cloudHeight;
-  }
+  public void setCloudHeight( final int cloudHeight ) { _cloudHeight = cloudHeight; }
 
   @Nullable
   public String getNearBox()
@@ -42,16 +33,11 @@ public final class SkyDirective
     return _nearBox;
   }
 
-  public void setNearBox( @Nullable final String nearBox )
-  {
-    _nearBox = nearBox;
-  }
+  public void setNearBox( @Nullable final String nearBox ) { _nearBox = nearBox; }
 
-  void write( @Nonnull final MaterialOutput output )
-    throws IOException
+  void write( @Nonnull final MaterialOutput output ) throws IOException
   {
-    if ( isNonDefault() )
-    {
+    if ( isNonDefault() ) {
       output.writeDirective( "skyparms",
                              null == _farBox ? "-" : _farBox,
                              DEFAULT_CLOUD_HEIGHT == _cloudHeight ? "-" : Integer.toString( _cloudHeight ),
@@ -59,33 +45,21 @@ public final class SkyDirective
     }
   }
 
-  public boolean isNonDefault()
-  {
-    return null != _farBox || DEFAULT_CLOUD_HEIGHT != _cloudHeight || null != _nearBox;
-  }
+  public boolean isNonDefault() { return null != _farBox || DEFAULT_CLOUD_HEIGHT != _cloudHeight || null != _nearBox; }
 
-  public boolean isDefault()
-  {
-    return !isNonDefault();
-  }
+  public boolean isDefault() { return !isNonDefault(); }
 
   @Override
   public boolean equals( final Object o )
   {
-    if ( this == o )
-    {
+    if ( this == o ) {
       return true;
-    }
-    else if ( o == null || getClass() != o.getClass() )
-    {
+    } else if ( o == null || getClass() != o.getClass() ) {
       return false;
-    }
-    else
-    {
-      final SkyDirective that = (SkyDirective) o;
-      return Objects.equals( _farBox, that._farBox ) &&
-             _cloudHeight == that._cloudHeight &&
-             Objects.equals( _nearBox, that._nearBox );
+    } else {
+      final SkyDirective that = (SkyDirective)o;
+      return Objects.equals( _farBox, that._farBox ) && _cloudHeight == that._cloudHeight &&
+        Objects.equals( _nearBox, that._nearBox );
     }
   }
 
@@ -99,6 +73,6 @@ public final class SkyDirective
   @Override
   public String toString()
   {
-    return MaterialOutput.outputAsString(this::write);
+    return MaterialOutput.outputAsString( this::write );
   }
 }

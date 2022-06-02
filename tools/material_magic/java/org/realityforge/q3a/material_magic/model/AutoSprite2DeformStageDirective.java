@@ -5,12 +5,10 @@ import java.util.Objects;
 import javax.annotation.Nonnull;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
-public final class AutoSprite2DeformStageDirective
-  extends DeformStageDirective<AutoSprite2DeformStageDirective>
+public final class AutoSprite2DeformStageDirective extends DeformStageDirective<AutoSprite2DeformStageDirective>
 {
   @Override
-  void write( @Nonnull final MaterialOutput output )
-    throws IOException
+  void write( @Nonnull final MaterialOutput output ) throws IOException
   {
     output.writeDirective( "deformVertexes", "autoSprite2" );
   }

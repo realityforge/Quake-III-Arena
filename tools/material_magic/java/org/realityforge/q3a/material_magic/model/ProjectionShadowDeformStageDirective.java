@@ -9,8 +9,7 @@ public final class ProjectionShadowDeformStageDirective
   extends DeformStageDirective<ProjectionShadowDeformStageDirective>
 {
   @Override
-  void write( @Nonnull final MaterialOutput output )
-    throws IOException
+  void write( @Nonnull final MaterialOutput output ) throws IOException
   {
     output.writeDirective( "deformVertexes", "projectionShadow" );
   }

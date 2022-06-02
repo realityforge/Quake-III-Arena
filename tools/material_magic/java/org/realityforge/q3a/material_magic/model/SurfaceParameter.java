@@ -43,20 +43,17 @@ public enum SurfaceParameter
   trans,
   water;
 
-  void write( @Nonnull final MaterialOutput output )
-    throws IOException
+  void write( @Nonnull final MaterialOutput output ) throws IOException
   {
-    output.writeDirective( "surfaceparm", name());
+    output.writeDirective( "surfaceparm", name() );
   }
 
   @Nullable
   public static SurfaceParameter findByName( @Nonnull final String name )
   {
-    return
-      Arrays
-        .stream( SurfaceParameter.values() )
-        .filter( value -> value.name().equals( name ) )
-        .findFirst()
-        .orElse( null );
+    return Arrays.stream( SurfaceParameter.values() )
+      .filter( value -> value.name().equals( name ) )
+      .findFirst()
+      .orElse( null );
   }
 }

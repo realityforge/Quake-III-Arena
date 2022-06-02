@@ -2,6 +2,7 @@ package org.realityforge.q3a.material_magic.model;
 
 import org.junit.jupiter.api.Test;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public final class NormalDeformStageDirectiveTest
@@ -17,7 +18,6 @@ public final class NormalDeformStageDirectiveTest
     assertEquals( "deformVertexes normal .5 .1\n", MaterialOutput.outputAsString( directive::write ) );
     assertEquals( "deformVertexes normal .5 .1\n",
                   MaterialOutput.outputAsString( directive::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
-
 
     directive.setFrequency( 0.3F );
     directive.setAmplitude( 0.2F );

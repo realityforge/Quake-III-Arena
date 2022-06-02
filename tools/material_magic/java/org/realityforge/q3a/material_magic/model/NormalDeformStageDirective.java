@@ -5,40 +5,24 @@ import java.util.Objects;
 import javax.annotation.Nonnull;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
-public final class NormalDeformStageDirective
-  extends DeformStageDirective<NormalDeformStageDirective>
+public final class NormalDeformStageDirective extends DeformStageDirective<NormalDeformStageDirective>
 {
   private float _frequency;
   private float _amplitude;
 
-  public float getFrequency()
-  {
-    return _frequency;
-  }
+  public float getFrequency() { return _frequency; }
 
-  public void setFrequency( final float frequency )
-  {
-    _frequency = frequency;
-  }
+  public void setFrequency( final float frequency ) { _frequency = frequency; }
 
-  public float getAmplitude()
-  {
-    return _amplitude;
-  }
+  public float getAmplitude() { return _amplitude; }
 
-  public void setAmplitude( final float amplitude )
-  {
-    _amplitude = amplitude;
-  }
+  public void setAmplitude( final float amplitude ) { _amplitude = amplitude; }
 
   @Override
-  void write( @Nonnull final MaterialOutput output )
-    throws IOException
+  void write( @Nonnull final MaterialOutput output ) throws IOException
   {
-    output.writeDirective( "deformVertexes",
-                           "normal",
-                           EmitUtil.floatToString( _frequency ),
-                           EmitUtil.floatToString( _amplitude ) );
+    output.writeDirective(
+      "deformVertexes", "normal", EmitUtil.floatToString( _frequency ), EmitUtil.floatToString( _amplitude ) );
   }
 
   @Override

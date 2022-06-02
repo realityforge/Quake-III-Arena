@@ -5,23 +5,15 @@ import java.util.Objects;
 import javax.annotation.Nonnull;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
-public final class WaveDeformStageDirective
-  extends DeformStageDirective<WaveDeformStageDirective>
+public final class WaveDeformStageDirective extends DeformStageDirective<WaveDeformStageDirective>
 {
-  //moveFunc : MOVE x=number y=number z=number waveForm;
   private float _spread;
   @Nonnull
   private WaveForm _wave = new WaveForm();
 
-  public float getSpread()
-  {
-    return _spread;
-  }
+  public float getSpread() { return _spread; }
 
-  public void setSpread( final float spread )
-  {
-    _spread = spread;
-  }
+  public void setSpread( final float spread ) { _spread = spread; }
 
   @Nonnull
   public WaveForm getWave()
@@ -29,19 +21,12 @@ public final class WaveDeformStageDirective
     return _wave;
   }
 
-  public void setWave( @Nonnull final WaveForm wave )
-  {
-    _wave = Objects.requireNonNull( wave );
-  }
+  public void setWave( @Nonnull final WaveForm wave ) { _wave = Objects.requireNonNull( wave ); }
 
   @Override
-  void write( @Nonnull final MaterialOutput output )
-    throws IOException
+  void write( @Nonnull final MaterialOutput output ) throws IOException
   {
-    output.writeDirective( "deformVertexes",
-                           "wave",
-                           EmitUtil.floatToString( _spread ),
-                           _wave.toString() );
+    output.writeDirective( "deformVertexes", "wave", EmitUtil.floatToString( _spread ), _wave.toString() );
   }
 
   @Override

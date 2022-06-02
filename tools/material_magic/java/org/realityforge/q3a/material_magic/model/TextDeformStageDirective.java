@@ -5,15 +5,11 @@ import java.util.Objects;
 import javax.annotation.Nonnull;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
-public final class TextDeformStageDirective
-  extends DeformStageDirective<TextDeformStageDirective>
+public final class TextDeformStageDirective extends DeformStageDirective<TextDeformStageDirective>
 {
   private int _level;
 
-  public int getLevel()
-  {
-    return _level;
-  }
+  public int getLevel() { return _level; }
 
   public void setLevel( final int level )
   {
@@ -22,8 +18,7 @@ public final class TextDeformStageDirective
   }
 
   @Override
-  void write( @Nonnull final MaterialOutput output )
-    throws IOException
+  void write( @Nonnull final MaterialOutput output ) throws IOException
   {
     output.writeDirective( "deformVertexes", "text" + _level );
   }

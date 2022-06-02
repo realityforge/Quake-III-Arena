@@ -19,11 +19,6 @@ public enum SortKey
   @Nullable
   public static SortKey findByName( @Nonnull final String name )
   {
-    return
-      Arrays
-        .stream( SortKey.values() )
-        .filter( value -> value.name().equals( name ) )
-        .findFirst()
-        .orElse( null );
+    return Arrays.stream( SortKey.values() ).filter( value -> value.name().equals( name ) ).findFirst().orElse( null );
   }
 }

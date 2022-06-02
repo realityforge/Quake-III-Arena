@@ -14,79 +14,74 @@ import org.realityforge.q3a.material_magic.util.MaterialOutput;
  */
 public final class Unit
 {
-    @Nonnull
-    public static final String EXTENSION = ".shader";
-    @Nonnull
-    private final List<Material> _materials = new ArrayList<>();
+  @Nonnull
+  public static final String EXTENSION = ".shader";
+  @Nonnull
+  private final List<Material> _materials = new ArrayList<>();
 
-    /**
-     * Add the specified material to the unit.
-     *
-     * @param material the material.
-     */
-    public void addMaterial(@Nonnull final Material material)
-    {
-        _materials.add(material);
-    }
+  /**
+   * Add the specified material to the unit.
+   *
+   * @param material the material.
+   */
+  public void addMaterial( @Nonnull final Material material ) { _materials.add( material ); }
 
-    /**
-     * Remove the specified material from the unit.
-     *
-     * @param material the material to remove
-     * @return true if it was present and removed, false otherwise.
-     */
-    public boolean removeMaterial(@Nonnull final Material material)
-    {
-        return _materials.remove(material);
-    }
+  /**
+   * Remove the specified material from the unit.
+   *
+   * @param material the material to remove
+   * @return true if it was present and removed, false otherwise.
+   */
+  public boolean removeMaterial( @Nonnull final Material material ) { return _materials.remove( material ); }
 
-    @Nonnull
-    public List<Material> getMaterials()
-    {
-        return _materials;
-    }
-    @Nonnull
-    public List<Material> getSortedMaterials()
-    {
-        return getMaterials().stream().sorted(Comparator.comparing(Material::getName)).collect(Collectors.toList());
-    }
+  @Nonnull
+  public List<Material> getMaterials()
+  {
+    return _materials;
+  }
 
-    /**
-     * Write the unit using the standard text serialization mechanisms to the specified output object.
-     *
-     * @param output the output object to emit unit to.
-     * @throws IOException if there is an error writing to MaterialOutput
-     */
-    public void write(@Nonnull final MaterialOutput output) throws IOException
-    {
-        for (final Material material : getSortedMaterials()) {
-            material.write(output);
-        }
-    }
+  @Nonnull
+  public List<Material> getSortedMaterials()
+  {
+    return getMaterials().stream().sorted( Comparator.comparing( Material::getName ) ).collect( Collectors.toList() );
+  }
 
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o) {
-            return true;
-        } else if (o == null || getClass() != o.getClass()) {
-            return false;
-        } else {
-            final Unit that = (Unit)o;
-            return getSortedMaterials().equals(that.getSortedMaterials());
-        }
+  /**
+   * Write the unit using the standard text serialization mechanisms to the specified output object.
+   *
+   * @param output the output object to emit unit to.
+   * @throws IOException if there is an error writing to MaterialOutput
+   */
+  public void write( @Nonnull final MaterialOutput output ) throws IOException
+  {
+    for ( final Material material : getSortedMaterials() ) {
+      material.write( output );
     }
+  }
 
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash(getSortedMaterials());
+  @Override
+  public boolean equals( Object o )
+  {
+    if ( this == o ) {
+      return true;
+    } else if ( o == null || getClass() != o.getClass() ) {
+      return false;
+    } else {
+      final Unit that = (Unit)o;
+      return getSortedMaterials().equals( that.getSortedMaterials() );
     }
+  }
 
-    @Nonnull
-    @Override
-    public String toString()
-    {
-        return MaterialOutput.outputAsString(this::write);
-    }
+  @Override
+  public int hashCode()
+  {
+    return Objects.hash( getSortedMaterials() );
+  }
+
+  @Nonnull
+  @Override
+  public String toString()
+  {
+    return MaterialOutput.outputAsString( this::write );
+  }
 }

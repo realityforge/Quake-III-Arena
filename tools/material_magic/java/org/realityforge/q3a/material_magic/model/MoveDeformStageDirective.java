@@ -5,8 +5,7 @@ import java.util.Objects;
 import javax.annotation.Nonnull;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
-public final class MoveDeformStageDirective
-  extends DeformStageDirective<MoveDeformStageDirective>
+public final class MoveDeformStageDirective extends DeformStageDirective<MoveDeformStageDirective>
 {
   private float _x;
   private float _y;
@@ -14,35 +13,17 @@ public final class MoveDeformStageDirective
   @Nonnull
   private WaveForm _wave = new WaveForm();
 
-  public float getX()
-  {
-    return _x;
-  }
+  public float getX() { return _x; }
 
-  public void setX( final float x )
-  {
-    _x = x;
-  }
+  public void setX( final float x ) { _x = x; }
 
-  public float getY()
-  {
-    return _y;
-  }
+  public float getY() { return _y; }
 
-  public void setY( final float y )
-  {
-    _y = y;
-  }
+  public void setY( final float y ) { _y = y; }
 
-  public float getZ()
-  {
-    return _z;
-  }
+  public float getZ() { return _z; }
 
-  public void setZ( final float z )
-  {
-    _z = z;
-  }
+  public void setZ( final float z ) { _z = z; }
 
   @Nonnull
   public WaveForm getWave()
@@ -50,14 +31,10 @@ public final class MoveDeformStageDirective
     return _wave;
   }
 
-  public void setWave( @Nonnull final WaveForm wave )
-  {
-    _wave = Objects.requireNonNull( wave );
-  }
+  public void setWave( @Nonnull final WaveForm wave ) { _wave = Objects.requireNonNull( wave ); }
 
   @Override
-  void write( @Nonnull final MaterialOutput output )
-    throws IOException
+  void write( @Nonnull final MaterialOutput output ) throws IOException
   {
     output.writeDirective( "deformVertexes",
                            "move",

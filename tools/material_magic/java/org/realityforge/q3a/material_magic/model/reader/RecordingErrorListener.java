@@ -9,27 +9,29 @@ import org.antlr.v4.runtime.Recognizer;
 import org.antlr.v4.runtime.misc.ParseCancellationException;
 
 /**
- * An error listener that can be used within tests that will fail with an assertion error if there is a parsing error.
+ * An error listener that can be used within tests that will fail with an assertion error if there
+ * is a parsing error.
  */
-final class RecordingErrorListener extends BaseErrorListener {
-    @Nonnull
-    private final List<Error> _errors = new ArrayList<>();
+final class RecordingErrorListener extends BaseErrorListener
+{
+  @Nonnull
+  private final List<Error> _errors = new ArrayList<>();
 
-    @Nonnull
-    List<Error> getErrors()
-    {
-        return _errors;
-    }
+  @Nonnull
+  List<Error> getErrors()
+  {
+    return _errors;
+  }
 
-    @Override
-    public void syntaxError(final Recognizer<?, ?> recognizer,
-        final Object offendingSymbol,
-        final int line,
-        final int charPositionInLine,
-        final String msg,
-        final RecognitionException e)
-    {
-        _errors.add(new Error(true, line, charPositionInLine, msg));
-        throw new ParseCancellationException();
-    }
+  @Override
+  public void syntaxError( final Recognizer<?, ?> recognizer,
+                           final Object offendingSymbol,
+                           final int line,
+                           final int charPositionInLine,
+                           final String msg,
+                           final RecognitionException e )
+  {
+    _errors.add( new Error( true, line, charPositionInLine, msg ) );
+    throw new ParseCancellationException();
+  }
 }

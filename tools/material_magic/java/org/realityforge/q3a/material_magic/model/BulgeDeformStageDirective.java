@@ -5,46 +5,26 @@ import java.util.Objects;
 import javax.annotation.Nonnull;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
-public final class BulgeDeformStageDirective
-  extends DeformStageDirective<BulgeDeformStageDirective>
+public final class BulgeDeformStageDirective extends DeformStageDirective<BulgeDeformStageDirective>
 {
   private float _width;
   private float _height;
   private float _speed;
 
-  public float getWidth()
-  {
-    return _width;
-  }
+  public float getWidth() { return _width; }
 
-  public void setWidth( final float width )
-  {
-    _width = width;
-  }
+  public void setWidth( final float width ) { _width = width; }
 
-  public float getHeight()
-  {
-    return _height;
-  }
+  public float getHeight() { return _height; }
 
-  public void setHeight( final float height )
-  {
-    _height = height;
-  }
+  public void setHeight( final float height ) { _height = height; }
 
-  public float getSpeed()
-  {
-    return _speed;
-  }
+  public float getSpeed() { return _speed; }
 
-  public void setSpeed( final float speed )
-  {
-    _speed = speed;
-  }
+  public void setSpeed( final float speed ) { _speed = speed; }
 
   @Override
-  void write( @Nonnull final MaterialOutput output )
-    throws IOException
+  void write( @Nonnull final MaterialOutput output ) throws IOException
   {
     output.writeDirective( "deformVertexes",
                            "bulge",

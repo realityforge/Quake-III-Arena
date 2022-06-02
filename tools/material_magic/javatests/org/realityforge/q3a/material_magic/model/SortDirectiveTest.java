@@ -2,6 +2,7 @@ package org.realityforge.q3a.material_magic.model;
 
 import org.junit.jupiter.api.Test;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public final class SortDirectiveTest
@@ -12,8 +13,7 @@ public final class SortDirectiveTest
     final SortDirective directive = new SortDirective();
 
     assertEquals( "", MaterialOutput.outputAsString( directive::write ) );
-    assertEquals( "",
-                  MaterialOutput.outputAsString( directive::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
+    assertEquals( "", MaterialOutput.outputAsString( directive::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
 
     assertTrue( directive.isDefault() );
     assertFalse( directive.isNonDefault() );

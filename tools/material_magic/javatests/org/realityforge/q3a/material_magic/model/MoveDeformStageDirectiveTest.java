@@ -2,6 +2,7 @@ package org.realityforge.q3a.material_magic.model;
 
 import org.junit.jupiter.api.Test;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public final class MoveDeformStageDirectiveTest
@@ -29,8 +30,7 @@ public final class MoveDeformStageDirectiveTest
     directive.getWave().setGenerator( WaveForm.Generator.SIN );
     directive.getWave().setBase( 3 );
 
-    assertEquals( "deformVertexes move 500 0 2 sin 3 5 2 .1\n",
-                  MaterialOutput.outputAsString( directive::write ) );
+    assertEquals( "deformVertexes move 500 0 2 sin 3 5 2 .1\n", MaterialOutput.outputAsString( directive::write ) );
   }
 
   @Test
