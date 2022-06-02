@@ -220,7 +220,7 @@ final class ModelBuilderListener
     {
       throw new IllegalStateException( "Unhandled surfaceParm value " + text );
     }
-    _material.getSurfaceParameters().add( parameter );
+    _material.addSurfaceParameter( parameter );
   }
 
   @Override

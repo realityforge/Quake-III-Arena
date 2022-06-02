@@ -23,7 +23,7 @@ public final class ValidatorTest {
     {
         // Add a single material ... it has no stages but it is one of the magic ones that need no stages
         final Material material = new Material("MyMaterial");
-        material.getSurfaceParameters().add( SurfaceParameter.nolightmap);
+        material.addSurfaceParameter( SurfaceParameter.nolightmap);
 
         final Unit unit = new Unit();
         unit.addMaterial(material);
@@ -34,15 +34,15 @@ public final class ValidatorTest {
     public void duplicateMaterials()
     {
         final Material material1 = new Material("MyMaterial1");
-        material1.getSurfaceParameters().add( SurfaceParameter.nolightmap);
+        material1.addSurfaceParameter( SurfaceParameter.nolightmap);
         final Material material2 = new Material("MyMaterial1");
-        material2.getSurfaceParameters().add( SurfaceParameter.nolightmap);
+        material2.addSurfaceParameter( SurfaceParameter.nolightmap);
         final Material material3 = new Material("MyMaterial2");
-        material3.getSurfaceParameters().add( SurfaceParameter.nolightmap);
+        material3.addSurfaceParameter( SurfaceParameter.nolightmap);
         final Material material4 = new Material("MyMaterial2");
-        material4.getSurfaceParameters().add( SurfaceParameter.nolightmap);
+        material4.addSurfaceParameter( SurfaceParameter.nolightmap);
         final Material material5 = new Material("MyMaterial3");
-        material5.getSurfaceParameters().add( SurfaceParameter.nolightmap);
+        material5.addSurfaceParameter( SurfaceParameter.nolightmap);
 
         final Unit unit = new Unit();
         unit.addMaterial(material1);

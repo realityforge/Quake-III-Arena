@@ -45,9 +45,9 @@ public final class MaterialTest {
         material.sky().setCloudHeight(512);
         material.sky().setNearBox("myNearBox");
         material.sort().setKey(SortKey.portal );
-        material.getSurfaceParameters().add( SurfaceParameter.botclip);
-        material.getSurfaceParameters().add( SurfaceParameter.slime);
-        material.getSurfaceParameters().add( SurfaceParameter.dust);
+        material.addSurfaceParameter( SurfaceParameter.botclip);
+        material.addSurfaceParameter( SurfaceParameter.slime);
+        material.addSurfaceParameter( SurfaceParameter.dust);
 
         assertTrue(material.hasQ3map());
         assertTrue(material.hasFog());
@@ -175,15 +175,15 @@ public final class MaterialTest {
         assertEquals(material1, material2);
         assertEquals(material1.hashCode(), material2.hashCode());
 
-        material1.getSurfaceParameters().add( SurfaceParameter.botclip);
-        material1.getSurfaceParameters().add( SurfaceParameter.slime);
+        material1.addSurfaceParameter( SurfaceParameter.botclip);
+        material1.addSurfaceParameter( SurfaceParameter.slime);
 
         assertNotEquals(material1, material2);
         assertNotEquals(material1.hashCode(), material2.hashCode());
 
         // Note: These are added in a different order to demonstrate hashing and equality uses sorted order
-        material2.getSurfaceParameters().add( SurfaceParameter.slime);
-        material2.getSurfaceParameters().add( SurfaceParameter.botclip);
+        material2.addSurfaceParameter( SurfaceParameter.slime);
+        material2.addSurfaceParameter( SurfaceParameter.botclip);
 
         assertEquals(material1, material2);
         assertEquals(material1.hashCode(), material2.hashCode());

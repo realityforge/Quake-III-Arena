@@ -198,6 +198,11 @@ public final class Material {
         _sort = sort;
     }
 
+    public void addSurfaceParameter(@Nonnull final SurfaceParameter parameter)
+    {
+        _surfaceParameters.add( parameter );
+    }
+
     @Nonnull
     public Set<SurfaceParameter> getSurfaceParameters()
     {
