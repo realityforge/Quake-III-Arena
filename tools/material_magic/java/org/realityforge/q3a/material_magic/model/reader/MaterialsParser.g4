@@ -41,7 +41,7 @@ generalDirective
     | skyParmsDirective
     | polygonOffsetDirective
     | sortDirective
-//deformVertexes
+    | deformVertexesDirective
     ;
 
 cullDirective : CULL (CULL_DISABLE|CULL_NONE|CULL_TWOSIDED|CULL_BACK|CULL_BACKSIDE|CULL_BACKSIDED);
@@ -53,6 +53,30 @@ fogParmsDirective : FOGPARMS OPEN_BRACKET? number number number CLOSE_BRACKET? n
 skyParmsDirective : SKYPARMS (DASH|LABEL) (DASH|INTEGER) (DASH|LABEL);
 polygonOffsetDirective : POLYGONOFFSET;
 sortDirective : SORT (LABEL|number);
+
+waveForm : generator=(SIN|SQUARE|TRIANGLE|SAWTOOTH|INVERSESAWTOOTH|NOISE) base=number amplitude=number phase=number frequency=number;
+
+waveDeformStageDirective : WAVE spread=number waveForm;
+normalDeformStageDirective : NORMAL frequency=number amplitude=number;
+moveDeformStageDirective : MOVE x=number y=number z=number waveForm;
+bulgeDeformStageDirective : BULGE bulgeWidth=number bulgeHeight=number bulgeSpeed=number;
+
+projectionShadowDeformStageDirective : PROJECTIONSHADOW;
+autoSpriteDeformStageDirective : AUTOSPRITE;
+autoSprite2DeformStageDirective : AUTOSPRITE2;
+textDeformStageDirective : (TEXT0|TEXT1|TEXT2|TEXT3|TEXT4|TEXT5|TEXT6|TEXT7);
+
+deformStageDirective : waveDeformStageDirective
+                     | normalDeformStageDirective
+                     | moveDeformStageDirective
+                     | bulgeDeformStageDirective
+                     | projectionShadowDeformStageDirective
+                     | autoSpriteDeformStageDirective
+                     | autoSprite2DeformStageDirective
+                     | textDeformStageDirective
+                     ;
+
+deformVertexesDirective : DEFORMVERTEXES deformStageDirective;
 
 surfaceParameterDirective : SURFACE_PARM LABEL;
 

@@ -2,15 +2,24 @@ package org.realityforge.q3a.material_magic.model.reader;
 
 import javax.annotation.Nonnull;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import org.realityforge.q3a.material_magic.model.AutoSprite2DeformStageDirective;
+import org.realityforge.q3a.material_magic.model.AutoSpriteDeformStageDirective;
+import org.realityforge.q3a.material_magic.model.BulgeDeformStageDirective;
 import org.realityforge.q3a.material_magic.model.CullType;
 import org.realityforge.q3a.material_magic.model.FogDirective;
 import org.realityforge.q3a.material_magic.model.Material;
+import org.realityforge.q3a.material_magic.model.MoveDeformStageDirective;
+import org.realityforge.q3a.material_magic.model.NormalDeformStageDirective;
+import org.realityforge.q3a.material_magic.model.ProjectionShadowDeformStageDirective;
 import org.realityforge.q3a.material_magic.model.SkyDirective;
 import org.realityforge.q3a.material_magic.model.SortDirective;
 import org.realityforge.q3a.material_magic.model.SortKey;
 import org.realityforge.q3a.material_magic.model.SunDirective;
 import org.realityforge.q3a.material_magic.model.SurfaceParameter;
+import org.realityforge.q3a.material_magic.model.TextDeformStageDirective;
 import org.realityforge.q3a.material_magic.model.Unit;
+import org.realityforge.q3a.material_magic.model.WaveDeformStageDirective;
+import org.realityforge.q3a.material_magic.model.WaveForm;
 
 final class ModelBuilderListener
   extends MaterialsParserBaseListener
@@ -166,7 +175,7 @@ final class ModelBuilderListener
   }
 
   @Override
-  public void exitPolygonOffsetDirective( final MaterialsParser.PolygonOffsetDirectiveContext ctx )
+  public void exitPolygonOffsetDirective( @Nonnull final MaterialsParser.PolygonOffsetDirectiveContext ctx )
   {
     _material.setPolygonOffset( true );
   }
@@ -239,6 +248,117 @@ final class ModelBuilderListener
   public void exitQerTransDirective( @Nonnull final MaterialsParser.QerTransDirectiveContext ctx )
   {
     _material.qer().setTransparency( Float.parseFloat( ctx.DECIMAL().getText() ) );
+  }
+
+  @Override
+  public void exitWaveDeformStageDirective( @Nonnull final MaterialsParser.WaveDeformStageDirectiveContext ctx )
+  {
+    final WaveDeformStageDirective directive = new WaveDeformStageDirective();
+    directive.setSpread( parseNumber( ctx.spread ) );
+    extractWaveForm( ctx.waveForm(), directive.getWave() );
+    _material.addDeformStage( directive );
+  }
+
+  @Override
+  public void exitNormalDeformStageDirective( @Nonnull final MaterialsParser.NormalDeformStageDirectiveContext ctx )
+  {
+    final NormalDeformStageDirective directive = new NormalDeformStageDirective();
+    directive.setAmplitude( parseNumber( ctx.amplitude ) );
+    directive.setFrequency( parseNumber( ctx.frequency ) );
+    _material.addDeformStage( directive );
+  }
+
+  @Override
+  public void exitMoveDeformStageDirective( @Nonnull final MaterialsParser.MoveDeformStageDirectiveContext ctx )
+  {
+    final MoveDeformStageDirective directive = new MoveDeformStageDirective();
+    directive.setX( parseNumber( ctx.x ) );
+    directive.setY( parseNumber( ctx.y ) );
+    directive.setZ( parseNumber( ctx.z ) );
+    extractWaveForm( ctx.waveForm(), directive.getWave() );
+    _material.addDeformStage( directive );
+  }
+
+  private void extractWaveForm( @Nonnull final MaterialsParser.WaveFormContext ctx, @Nonnull final WaveForm wave )
+  {
+    wave.setAmplitude( parseNumber( ctx.amplitude ) );
+    wave.setFrequency( parseNumber( ctx.frequency ) );
+    wave.setBase( parseNumber( ctx.base ) );
+    wave.setPhase( parseNumber( ctx.phase ) );
+    final String generatorText = ctx.generator.getText().toUpperCase();
+    final WaveForm.Generator generator = WaveForm.Generator.findByName( generatorText );
+    if ( null == generator )
+    {
+      throw new IllegalStateException( "Unhandled wave form generator: " + generatorText );
+    }
+    wave.setGenerator( generator );
+  }
+
+  @Override
+  public void exitBulgeDeformStageDirective( @Nonnull final MaterialsParser.BulgeDeformStageDirectiveContext ctx )
+  {
+    final BulgeDeformStageDirective directive = new BulgeDeformStageDirective();
+    directive.setWidth( parseNumber( ctx.bulgeWidth ) );
+    directive.setHeight( parseNumber( ctx.bulgeHeight ) );
+    directive.setSpeed( parseNumber( ctx.bulgeSpeed ) );
+    _material.addDeformStage( directive );
+  }
+
+  @Override
+  public void exitProjectionShadowDeformStageDirective( @Nonnull final MaterialsParser.ProjectionShadowDeformStageDirectiveContext ctx )
+  {
+    _material.addDeformStage( new ProjectionShadowDeformStageDirective() );
+  }
+
+  @Override
+  public void exitAutoSpriteDeformStageDirective( @Nonnull final MaterialsParser.AutoSpriteDeformStageDirectiveContext ctx )
+  {
+    _material.addDeformStage( new AutoSpriteDeformStageDirective() );
+  }
+
+  @Override
+  public void exitAutoSprite2DeformStageDirective( @Nonnull final MaterialsParser.AutoSprite2DeformStageDirectiveContext ctx )
+  {
+    _material.addDeformStage( new AutoSprite2DeformStageDirective() );
+  }
+
+  @Override
+  public void exitTextDeformStageDirective( @Nonnull final MaterialsParser.TextDeformStageDirectiveContext ctx )
+  {
+    final TextDeformStageDirective directive = new TextDeformStageDirective();
+    if ( null != ctx.TEXT0() )
+    {
+      directive.setLevel( 0 );
+    }
+    else if ( null != ctx.TEXT1() )
+    {
+      directive.setLevel( 1 );
+    }
+    else if ( null != ctx.TEXT2() )
+    {
+      directive.setLevel( 2 );
+    }
+    else if ( null != ctx.TEXT3() )
+    {
+      directive.setLevel( 3 );
+    }
+    else if ( null != ctx.TEXT4() )
+    {
+      directive.setLevel( 4 );
+    }
+    else if ( null != ctx.TEXT5() )
+    {
+      directive.setLevel( 5 );
+    }
+    else if ( null != ctx.TEXT6() )
+    {
+      directive.setLevel( 6 );
+    }
+    else if ( null != ctx.TEXT7() )
+    {
+      directive.setLevel( 7 );
+    }
+    _material.addDeformStage( directive );
   }
 
   @Override

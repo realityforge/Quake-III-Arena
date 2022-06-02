@@ -86,3 +86,54 @@ skyparms - 512 -
 // Numeric value that is float-like
 sort 2.3
 }
+
+textures/base/myBase6
+{
+deformVertexes wave 100 sin 3 2 .1 3
+deformVertexes normal .5 .1
+}
+
+textures/base/myBase7
+{
+deformVertexes autoSprite2
+surfaceparm	trans
+surfaceparm nomarks
+surfaceparm nolightmap
+cull none
+}
+
+textures/base/myBase8
+{
+deformVertexes autoSprite
+q3map_surfacelight	500
+surfaceparm	trans
+surfaceparm nomarks
+surfaceparm nolightmap
+cull none
+}
+
+textures/base/projectionShadow
+{
+    polygonOffset
+    deformVertexes projectionShadow
+}
+
+textures/base/moveypipe
+{
+tessSize 128
+deformVertexes bulge 3 10 1
+}
+
+textures/base/waveywater
+{
+deformVertexes wave 100 triangle 2 2 1 0.1
+}
+
+models/mapobjects/bat/bat
+{
+deformVertexes wave 10 sin 0 3 0 3
+deformVertexes move 500 0 0   sawtooth 0 5 0 .1
+
+deformVertexes move 0 0 7  sin 0 5 0 .5
+cull disable
+}

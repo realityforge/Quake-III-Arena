@@ -1,3 +1,14 @@
+models/mapobjects/bat/bat
+{
+cull disable
+deformVertexes wave 10.0 sin 0.0 3.0 0.0 3.0
+deformVertexes move 500.0 0.0 0.0 sawtooth 0.0 5.0 0.0 0.1
+deformVertexes move 0.0 0.0 7.0 sin 0.0 5.0 0.0 0.5
+}
+textures/base/moveypipe
+{
+deformVertexes bulge 3.0 10.0 1.0
+}
 textures/base/myBase
 {
 q3map_sun 1.0 1.0 1.0 100 -58 58
@@ -26,6 +37,27 @@ surfaceparm noimpact
 surfaceparm nolightmap
 surfaceparm sky
 }
+textures/base/myBase6
+{
+deformVertexes wave 100.0 sin 3.0 2.0 0.1 3.0
+deformVertexes normal 0.5 0.1
+}
+textures/base/myBase7
+{
+cull disable
+surfaceparm nolightmap
+surfaceparm nomarks
+surfaceparm trans
+deformVertexes autoSprite2
+}
+textures/base/myBase8
+{
+cull disable
+surfaceparm nolightmap
+surfaceparm nomarks
+surfaceparm trans
+deformVertexes autoSprite
+}
 textures/base/myBase_3
 {
 cull disable
@@ -42,4 +74,13 @@ textures/base/myBase_5
 cull back
 polygonOffset
 sort 2
+}
+textures/base/projectionShadow
+{
+polygonOffset
+deformVertexes projectionShadow
+}
+textures/base/waveywater
+{
+deformVertexes wave 100.0 triangle 2.0 2.0 1.0 0.1
 }

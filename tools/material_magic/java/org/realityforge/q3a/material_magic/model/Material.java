@@ -1,6 +1,7 @@
 package org.realityforge.q3a.material_magic.model;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -31,7 +32,9 @@ public final class Material {
     @Nullable
     private SortDirective _sort;
     @Nonnull
-    private Set<SurfaceParameter> _surfaceParameters = new HashSet<>();
+    private final Set<SurfaceParameter> _surfaceParameters = new HashSet<>();
+    @Nonnull
+    private final List<DeformStageDirective<?>> _deformStages = new ArrayList<>();
 
     public Material(@Nonnull final String name)
     {
@@ -198,6 +201,16 @@ public final class Material {
         _sort = sort;
     }
 
+    public void addDeformStage(@Nonnull final DeformStageDirective<?> deformStage)
+    {
+        _deformStages.add( deformStage );
+    }
+
+    @Nonnull
+    public List<DeformStageDirective<?>> getDeformStages()
+    {
+        return _deformStages;
+    }
     public void addSurfaceParameter(@Nonnull final SurfaceParameter parameter)
     {
         _surfaceParameters.add( parameter );
@@ -256,6 +269,10 @@ public final class Material {
             for (final SurfaceParameter parameter : getSurfaceParameters()) {
                 parameter.write( o );
             }
+            for ( final DeformStageDirective<?> stage : getDeformStages() )
+            {
+                stage.write( o );
+            }
         });
     }
 
@@ -281,6 +298,7 @@ public final class Material {
                    Objects.equals( null == _sort || _sort.isDefault() ? null : _sort,
                                    null == that._sort || that._sort.isDefault() ? null : that._sort ) &&
                    Objects.equals( getSurfaceParameters(), that.getSurfaceParameters() ) &&
+                   Objects.equals( getDeformStages(), that.getDeformStages() ) &&
                    Objects.equals( q3map(), that.q3map() ) &&
                    Objects.equals( qer(), that.qer() );
         }
@@ -300,6 +318,7 @@ public final class Material {
                              null == _sky || _sky.isDefault() ? null : _sky,
                              null == _sort || _sort.isDefault() ? null : _sort,
                              getSurfaceParameters(),
+                             getDeformStages(),
                              q3map(),
                              qer() );
     }
