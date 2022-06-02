@@ -14,9 +14,16 @@ load("@rules_java//java:defs.bzl", "java_library")
 java_library(
     name = "model",
     srcs = [
+        "AutoSprite2DeformStageDirective.java",
+        "AutoSpriteDeformStageDirective.java",
+        "BulgeDeformStageDirective.java",
         "CullType.java",
+        "DeformStageDirective.java",
         "FogDirective.java",
         "Material.java",
+        "MoveDeformStageDirective.java",
+        "NormalDeformStageDirective.java",
+        "ProjectionShadowDeformStageDirective.java",
         "Q3mapDirectives.java",
         "QerDirectives.java",
         "SkyDirective.java",
@@ -24,7 +31,10 @@ java_library(
         "SortKey.java",
         "SunDirective.java",
         "SurfaceParameter.java",
+        "TextDeformStageDirective.java",
         "Unit.java",
+        "WaveDeformStageDirective.java",
+        "WaveForm.java",
     ],
     visibility = [
         "//tools/material_magic/java/org/realityforge/q3a/material_magic:__pkg__",

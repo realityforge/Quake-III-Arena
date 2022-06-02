@@ -14,13 +14,22 @@ load(":model_test.bzl", _model_test = "model_test")
 [
     _model_test(name = "%sTest" % t)
     for t in [
+        "AutoSprite2DeformStageDirective",
+        "AutoSpriteDeformStageDirective",
+        "BulgeDeformStageDirective",
         "FogDirective",
         "Material",
+        "MoveDeformStageDirective",
+        "NormalDeformStageDirective",
+        "ProjectionShadowDeformStageDirective",
         "Q3mapDirectives",
         "QerDirectives",
         "SkyDirective",
         "SortDirective",
         "SunDirective",
+        "TextDeformStageDirective",
         "Unit",
+        "WaveDeformStageDirective",
+        "WaveForm",
     ]
 ]
