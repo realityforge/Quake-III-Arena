@@ -13,18 +13,18 @@ public final class BulgeDeformStageDirectiveTest
 
     directive.setWidth( 128 );
     directive.setHeight( 5 );
-    directive.setSpeed( 2 );
+    directive.setSpeed( 2.1F );
 
-    assertEquals( "deformVertexes bulge 128.0 5.0 2.0\n", MaterialOutput.outputAsString( directive::write ) );
-    assertEquals( "deformVertexes bulge 128.0 5.0 2.0\n",
+    assertEquals( "deformVertexes bulge 128 5 2.1\n", MaterialOutput.outputAsString( directive::write ) );
+    assertEquals( "deformVertexes bulge 128 5 2.1\n",
                   MaterialOutput.outputAsString( directive::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
 
     directive.setWidth( 0.6F );
     directive.setHeight( 0.7F );
     directive.setSpeed( 0.333F );
 
-    assertEquals( "deformVertexes bulge 0.6 0.7 0.333\n", MaterialOutput.outputAsString( directive::write ) );
-    assertEquals( "deformVertexes bulge 0.6 0.7 0.333\n",
+    assertEquals( "deformVertexes bulge .6 .7 .333\n", MaterialOutput.outputAsString( directive::write ) );
+    assertEquals( "deformVertexes bulge .6 .7 .333\n",
                   MaterialOutput.outputAsString( directive::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
   }
 

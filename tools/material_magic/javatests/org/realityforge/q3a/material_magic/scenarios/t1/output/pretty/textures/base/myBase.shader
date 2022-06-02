@@ -1,6 +1,6 @@
 textures/base/myBase
 {
-  q3map_sun 1.0 1.0 1.0 100 -58 58
+  q3map_sun 1 1 1 100 -58 58
   q3map_surfacelight 1500
   q3map_lightsubdivide 22
   q3map_lightimage textures/wall/glowglow
@@ -11,14 +11,14 @@ textures/base/myBase
   q3map_backsplash 100 8
   qer_editorimage textures/sfx/xyz
   qer_nocarve
-  qer_trans 0.3
+  qer_trans .3
   cull disable
   nopicmip
   nomipmaps
   portal
   entityMergable
   polygonOffset
-  fogparms 0.85 0.1 0.01 980
+  fogparms .85 .1 .01 980
   surfaceparm nomarks
   surfaceparm trans
 }

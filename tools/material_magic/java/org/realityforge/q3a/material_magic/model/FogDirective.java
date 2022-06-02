@@ -11,6 +11,7 @@ public class FogDirective
   private float _green;
   private float _blue;
   private int _depthForOpaque;
+
   public float getRed()
   {
     return _red;
@@ -55,9 +56,9 @@ public class FogDirective
     throws IOException
   {
     output.writeDirective( "fogparms",
-                           Float.toString( _red ),
-                           Float.toString( _green ),
-                           Float.toString( _blue ),
+                           EmitUtil.floatToString( _red ),
+                           EmitUtil.floatToString( _green ),
+                           EmitUtil.floatToString( _blue ),
                            Integer.toString( _depthForOpaque ) );
   }
 

@@ -20,16 +20,16 @@ public final class MoveDeformStageDirectiveTest
     directive.getWave().setPhase( 2 );
     directive.getWave().setFrequency( 0.1F );
 
-    assertEquals( "deformVertexes move 500.0 0.0 0.0 sawtooth 0.0 5.0 2.0 0.1\n",
+    assertEquals( "deformVertexes move 500 0 0 sawtooth 0 5 2 .1\n",
                   MaterialOutput.outputAsString( directive::write ) );
-    assertEquals( "deformVertexes move 500.0 0.0 0.0 sawtooth 0.0 5.0 2.0 0.1\n",
+    assertEquals( "deformVertexes move 500 0 0 sawtooth 0 5 2 .1\n",
                   MaterialOutput.outputAsString( directive::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
 
     directive.setZ( 2 );
     directive.getWave().setGenerator( WaveForm.Generator.SIN );
     directive.getWave().setBase( 3 );
 
-    assertEquals( "deformVertexes move 500.0 0.0 2.0 sin 3.0 5.0 2.0 0.1\n",
+    assertEquals( "deformVertexes move 500 0 2 sin 3 5 2 .1\n",
                   MaterialOutput.outputAsString( directive::write ) );
   }
 

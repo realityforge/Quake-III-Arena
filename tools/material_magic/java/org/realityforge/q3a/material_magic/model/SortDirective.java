@@ -47,9 +47,7 @@ public final class SortDirective
   {
     if ( isNonDefault() )
     {
-      output.writeDirective( "sort",
-                             null != _key ? _key.name() :
-                             ( (int) _value ) == _value ? Integer.toString( (int) _value ) : Float.toString( _value ) );
+      output.writeDirective( "sort", null != _key ? _key.name() : EmitUtil.floatToString( _value ) );
     }
   }
 

@@ -19,6 +19,7 @@ java_library(
         "BulgeDeformStageDirective.java",
         "CullType.java",
         "DeformStageDirective.java",
+        "EmitUtil.java",
         "FogDirective.java",
         "Material.java",
         "MoveDeformStageDirective.java",

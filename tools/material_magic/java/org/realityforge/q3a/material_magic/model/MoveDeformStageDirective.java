@@ -61,9 +61,9 @@ public final class MoveDeformStageDirective
   {
     output.writeDirective( "deformVertexes",
                            "move",
-                           Float.toString( _x ),
-                           Float.toString( _y ),
-                           Float.toString( _z ),
+                           EmitUtil.floatToString( _x ),
+                           EmitUtil.floatToString( _y ),
+                           EmitUtil.floatToString( _z ),
                            _wave.toString() );
   }
 

@@ -112,6 +112,10 @@ public final class WaveForm
   @Override
   public String toString()
   {
-    return _generator.name().toLowerCase() + " " + _base + " " + _amplitude + " " + _phase + " " + _frequency;
+    return _generator.name().toLowerCase() + " " +
+           EmitUtil.floatToString( _base ) + " " +
+           EmitUtil.floatToString( _amplitude ) + " " +
+           EmitUtil.floatToString( _phase ) + " " +
+           EmitUtil.floatToString( _frequency );
   }
 }

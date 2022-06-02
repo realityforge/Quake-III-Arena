@@ -18,16 +18,16 @@ public final class WaveDeformStageDirectiveTest
     directive.getWave().setPhase( 2 );
     directive.getWave().setFrequency( 0.1F );
 
-    assertEquals( "deformVertexes wave 100.0 sawtooth 0.0 5.0 2.0 0.1\n",
+    assertEquals( "deformVertexes wave 100 sawtooth 0 5 2 .1\n",
                   MaterialOutput.outputAsString( directive::write ) );
-    assertEquals( "deformVertexes wave 100.0 sawtooth 0.0 5.0 2.0 0.1\n",
+    assertEquals( "deformVertexes wave 100 sawtooth 0 5 2 .1\n",
                   MaterialOutput.outputAsString( directive::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
 
     directive.setSpread( 200 );
     directive.getWave().setGenerator( WaveForm.Generator.SIN );
     directive.getWave().setBase( 3 );
 
-    assertEquals( "deformVertexes wave 200.0 sin 3.0 5.0 2.0 0.1\n",
+    assertEquals( "deformVertexes wave 200 sin 3 5 2 .1\n",
                   MaterialOutput.outputAsString( directive::write ) );
   }
 

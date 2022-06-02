@@ -14,13 +14,13 @@ public final class SunDirectiveTest
     //q3map_sun 1 .77 .77 80 315 70
     directive.setRed( 1F );
     directive.setGreen( .77F );
-    directive.setBlue( .77F );
+    directive.setBlue( .76F );
     directive.setIntensity( 80 );
     directive.setDegrees( 315 );
     directive.setElevation( 70 );
 
-    assertEquals( "q3map_sun 1.0 0.77 0.77 80 315 70\n", MaterialOutput.outputAsString( directive::write ) );
-    assertEquals( "q3map_sun 1.0 0.77 0.77 80 315 70\n",
+    assertEquals( "q3map_sun 1 .77 .76 80 315 70\n", MaterialOutput.outputAsString( directive::write ) );
+    assertEquals( "q3map_sun 1 .77 .76 80 315 70\n",
                   MaterialOutput.outputAsString( directive::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
   }
 

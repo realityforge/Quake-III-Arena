@@ -40,7 +40,7 @@ public final class WaveDeformStageDirective
   {
     output.writeDirective( "deformVertexes",
                            "wave",
-                           Float.toString( _spread ),
+                           EmitUtil.floatToString( _spread ),
                            _wave.toString() );
   }
 

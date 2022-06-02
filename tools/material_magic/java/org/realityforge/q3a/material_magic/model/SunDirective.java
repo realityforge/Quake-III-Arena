@@ -78,9 +78,9 @@ public class SunDirective
     throws IOException
   {
     output.writeDirective( "q3map_sun",
-                           Float.toString( _red ),
-                           Float.toString( _green ),
-                           Float.toString( _blue ),
+                           EmitUtil.floatToString( _red ),
+                           EmitUtil.floatToString( _green ),
+                           EmitUtil.floatToString( _blue ),
                            Integer.toString( _intensity ),
                            Integer.toString( _degrees ),
                            Integer.toString( _elevation ) );

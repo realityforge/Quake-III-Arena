@@ -1,6 +1,6 @@
 textures/base/myBase2
 {
-  q3map_sun 0.5 0.37 0.19 80 315 70
+  q3map_sun .5 .37 .19 80 315 70
   q3map_forcesunlight
   q3map_flare whoosh
   tesssize 32
@@ -9,7 +9,7 @@ textures/base/myBase2
   nomipmaps
   portal
   entityMergable
-  fogparms 0.85 0.1 0.01 980
+  fogparms .85 .1 .01 980
   skyparms env/wildspace1 - -
   sort sky
   surfaceparm noimpact

@@ -34,7 +34,7 @@ public final class QerDirectivesTest
         assertEquals(0.3F, directives.getTransparency());
         assertEquals("qer_editorimage images/editor\n"
                 + "qer_nocarve\n"
-                + "qer_trans 0.3\n",
+                + "qer_trans .3\n",
             MaterialOutput.outputAsString(directives::write));
         assertEquals("", MaterialOutput.outputAsString(directives::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED));
     }

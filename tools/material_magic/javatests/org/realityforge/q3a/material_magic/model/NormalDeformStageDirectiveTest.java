@@ -14,16 +14,16 @@ public final class NormalDeformStageDirectiveTest
     directive.setFrequency( 0.5F );
     directive.setAmplitude( 0.1F );
 
-    assertEquals( "deformVertexes normal 0.5 0.1\n", MaterialOutput.outputAsString( directive::write ) );
-    assertEquals( "deformVertexes normal 0.5 0.1\n",
+    assertEquals( "deformVertexes normal .5 .1\n", MaterialOutput.outputAsString( directive::write ) );
+    assertEquals( "deformVertexes normal .5 .1\n",
                   MaterialOutput.outputAsString( directive::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
 
 
     directive.setFrequency( 0.3F );
     directive.setAmplitude( 0.2F );
 
-    assertEquals( "deformVertexes normal 0.3 0.2\n", MaterialOutput.outputAsString( directive::write ) );
-    assertEquals( "deformVertexes normal 0.3 0.2\n",
+    assertEquals( "deformVertexes normal .3 .2\n", MaterialOutput.outputAsString( directive::write ) );
+    assertEquals( "deformVertexes normal .3 .2\n",
                   MaterialOutput.outputAsString( directive::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
   }
 

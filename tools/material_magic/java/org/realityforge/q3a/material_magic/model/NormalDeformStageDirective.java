@@ -35,7 +35,10 @@ public final class NormalDeformStageDirective
   void write( @Nonnull final MaterialOutput output )
     throws IOException
   {
-    output.writeDirective( "deformVertexes", "normal", Float.toString( _frequency ), Float.toString( _amplitude ) );
+    output.writeDirective( "deformVertexes",
+                           "normal",
+                           EmitUtil.floatToString( _frequency ),
+                           EmitUtil.floatToString( _amplitude ) );
   }
 
   @Override

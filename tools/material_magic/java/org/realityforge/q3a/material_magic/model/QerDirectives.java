@@ -54,7 +54,7 @@ public final class QerDirectives
                 output.writeDirective( "qer_nocarve");
             }
             if (0F != _transparency) {
-                output.writeDirective( "qer_trans", Float.toString( _transparency));
+                output.writeDirective( "qer_trans", EmitUtil.floatToString( _transparency ) );
             }
         }
     }

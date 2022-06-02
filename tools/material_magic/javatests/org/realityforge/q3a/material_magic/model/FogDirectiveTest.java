@@ -11,14 +11,13 @@ public final class FogDirectiveTest
   {
     final FogDirective directive = new FogDirective();
 
-    //q3map_sun 1 .77 .77 80 315 70
     directive.setRed( 1F );
     directive.setGreen( .77F );
-    directive.setBlue( .77F );
+    directive.setBlue( .76F );
     directive.setDepthForOpaque( 70 );
 
-    assertEquals( "fogparms 1.0 0.77 0.77 70\n", MaterialOutput.outputAsString( directive::write ) );
-    assertEquals( "fogparms 1.0 0.77 0.77 70\n",
+    assertEquals( "fogparms 1 .77 .76 70\n", MaterialOutput.outputAsString( directive::write ) );
+    assertEquals( "fogparms 1 .77 .76 70\n",
                   MaterialOutput.outputAsString( directive::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
   }
 

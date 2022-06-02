@@ -48,9 +48,9 @@ public final class BulgeDeformStageDirective
   {
     output.writeDirective( "deformVertexes",
                            "bulge",
-                           Float.toString( _width ),
-                           Float.toString( _height ),
-                           Float.toString( _speed ) );
+                           EmitUtil.floatToString( _width ),
+                           EmitUtil.floatToString( _height ),
+                           EmitUtil.floatToString( _speed ) );
   }
 
   @Override

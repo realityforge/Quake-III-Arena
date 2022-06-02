@@ -17,7 +17,7 @@ public final class WaveFormTest
     form.setPhase( 0 );
     form.setFrequency( 0.1F );
 
-    assertEquals( "sin 0.7 0.5 0.0 0.1", form.toString() );
+    assertEquals( "sin .7 .5 0 .1", form.toString() );
 
     form.setGenerator( WaveForm.Generator.INVERSESAWTOOTH );
     form.setBase( 1 );
@@ -25,7 +25,7 @@ public final class WaveFormTest
     form.setPhase( 0 );
     form.setFrequency( 0.75F );
 
-    assertEquals( "inversesawtooth 1.0 0.2 0.0 0.75", form.toString() );
+    assertEquals( "inversesawtooth 1 .2 0 .75", form.toString() );
   }
 
   @Test
