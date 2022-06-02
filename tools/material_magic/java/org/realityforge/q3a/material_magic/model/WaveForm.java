@@ -1,5 +1,6 @@
 package org.realityforge.q3a.material_magic.model;
 
+import java.util.Arrays;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -8,7 +9,18 @@ public final class WaveForm
 {
   public enum Generator
   {
-    SIN, SQUARE, TRIANGLE, SAWTOOTH, INVERSESAWTOOTH, NOISE
+    SIN, SQUARE, TRIANGLE, SAWTOOTH, INVERSESAWTOOTH, NOISE;
+
+    @Nullable
+    public static Generator findByName( @Nonnull final String name )
+    {
+      return
+        Arrays
+          .stream( Generator.values() )
+          .filter( value -> value.name().equals( name ) )
+          .findFirst()
+          .orElse( null );
+    }
   }
 
   @Nonnull
