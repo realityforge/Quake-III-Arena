@@ -2501,12 +2501,6 @@ textures/base_light/ceil1_28
 	q3map_surfacelight 10000
 	light1
 }
-textures/base_light/ceil1_6
-{
-	surfaceparm nomarks
-	q3map_surfacelight 10000
-	light1
-}
 
 textures/base_light/invisi_light1
 {
