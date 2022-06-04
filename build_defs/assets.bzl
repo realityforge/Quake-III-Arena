@@ -30,8 +30,11 @@ def convert_tga_to_png(name):
             srcs = [_input_label],
             outs = [_output_file],
             cmd = """
-export INPUT=$(location %s)
-$(location @imagemagick//:magick) convert -auto-orient "$${INPUT}" "$@" && $(location @pngcrush) -brute -ow -warn "$@" && $(location @imagemagick//:magick) compare -auto-orient -metric RMSE "$${INPUT}" "png32:$@" null: 2>/dev/null
+set -euo pipefail
+export INPUT=$(execpath %s)
+$(execpath @imagemagick//:magick) convert -auto-orient "$${INPUT}" "$@"
+$(execpath @pngcrush) -brute -ow -warn "$@"
+$(execpath @imagemagick//:magick) compare -auto-orient -metric RMSE "$${INPUT}" "png32:$@" null: 2>/dev/null
 """ % (_input_label),
             tools = ["@imagemagick//:magick", "@pngcrush"],
         )
