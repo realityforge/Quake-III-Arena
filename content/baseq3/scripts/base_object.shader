@@ -22,7 +22,7 @@ textures/base_object/plasmalogo_1
 textures/base_object/quadsign_1
 {
 	qer_editorimage base_object/quadsign1
-	q3map_lightimage textures/base_object/quadsign1.blend
+	q3map_lightimage textures/base_object/quadsign1_blend
 	//surfaceparm nomarks
 	q3map_surfacelight 1000
 	{
@@ -35,7 +35,7 @@ textures/base_object/quadsign_1
 		rgbGen identity
 	}
 	{
-		map textures/base_object/quadsign1.blend
+		map textures/base_object/quadsign1_blend
 		rgbGen wave triangle 0.5 0.5 0.5 0.15
 		blendfunc GL_ONE GL_ONE
 	}
@@ -44,7 +44,7 @@ textures/base_object/quadsign_1
 textures/base_object/hastesign_1
 {
 	qer_editorimage base_object/hastesign1
-	q3map_lightimage textures/base_object/hastesign1.blend
+	q3map_lightimage textures/base_object/hastesign1_blend
 	//surfaceparm nomarks
 	q3map_surfacelight 1000
 	{
@@ -57,7 +57,7 @@ textures/base_object/hastesign_1
 		rgbGen identity
 	}
 	{
-		map textures/base_object/hastesign1.blend
+		map textures/base_object/hastesign1_blend
 		rgbGen wave triangle 0.5 0.5 0.5 0.15
 		blendfunc GL_ONE GL_ONE
 	}
@@ -93,7 +93,7 @@ textures/base_object/boxQ3_2
 		alphaGen lightingSpecular
 	}
 	{
-		map textures/base_object/boxQ3_2.blend
+		map textures/base_object/boxQ3_2_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .2
 	}

@@ -1308,7 +1308,7 @@ textures/sfx2/scrolling_red
 {
 	qer_editorimage textures/base_light/jaildr1_3
 	surfaceparm nomarks
-	q3map_lightimage textures/base_light/jaildr1_3.blend
+	q3map_lightimage textures/base_light/jaildr1_3_blend
 	q3map_surfacelight 1000
 	{
 		map $lightmap
@@ -1321,7 +1321,7 @@ textures/sfx2/scrolling_red
 		rgbGen identity
 	}
 	{
-		map textures/base_light/jaildr1_3.blend
+		map textures/base_light/jaildr1_3_blend
 		rgbGen wave sin 0.5 0.5 1 1
 		tcMod scroll 0 -.25
 		blendfunc GL_ONE GL_ONE

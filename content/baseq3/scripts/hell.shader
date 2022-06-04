@@ -1,7 +1,7 @@
 textures/hell/ironcrosslt1_5000
 {
 	qer_editorimage textures/hell/ironcrosslt1
-	q3map_lightimage textures/hell/ironcrosslt1.blend
+	q3map_lightimage textures/hell/ironcrosslt1_blend
 	q3map_surfacelight 5000
 	light 1
 	{
@@ -14,7 +14,7 @@ textures/hell/ironcrosslt1_5000
 		rgbGen identity
 	}
 	{
-		map textures/hell/ironcrosslt1.blend
+		map textures/hell/ironcrosslt1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -76,7 +76,7 @@ textures/hell/hellbutt01
 		rgbGen identity
 	}
 	{
-		map textures/hell/hellbutt01.blend
+		map textures/hell/hellbutt01_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 0.2
 	}
@@ -205,7 +205,7 @@ textures/hell/killblock_b
 		rgbGen identity
 	}
 	{
-		map textures/hell/killblock_b.blend
+		map textures/hell/killblock_b_blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -223,7 +223,7 @@ textures/hell/killblock_c
 		rgbGen identity
 	}
 	{
-		map textures/hell/killblock_c.blend
+		map textures/hell/killblock_c_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.1 0 0.2
 	}
@@ -241,7 +241,7 @@ textures/hell/bluepad
 		rgbGen identity
 	}
 	{
-		map textures/hell/bluepad.blend
+		map textures/hell/bluepad_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
@@ -280,7 +280,7 @@ textures/hell/light1red
 		rgbGen identity
 	}
 	{
-		map textures/hell/light1red.blend
+		map textures/hell/light1red_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.1 0 .2
 	}
@@ -299,7 +299,7 @@ textures/hell/light1blue
 		rgbGen identity
 	}
 	{
-		map textures/hell/light1blue.blend
+		map textures/hell/light1blue_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.1 0 .2
 	}

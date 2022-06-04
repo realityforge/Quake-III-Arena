@@ -12,6 +12,7 @@
 
 load("//build_defs:rules.bzl", "CLIENT_GAME_LINKOPTS", "DIST_VISIBILITY", "SERVER_GAME_LINKOPTS", "UI_LINKOPTS")
 load("//build_defs:copy_to_directory.bzl", _copy_to_directory = "copy_to_directory")
+load("//third_party/content:metadata.bzl", "REPLACE_RULES")
 
 cc_binary(
     name = "cgame.so",
@@ -59,6 +60,7 @@ _copy_to_directory(
         "@q3a_missionpack_pak1//:files",
     ],
     downcase = True,
+    replace_prefixes = REPLACE_RULES,
 )
 
 genrule(

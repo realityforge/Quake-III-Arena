@@ -10,6 +10,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+REPLACE_RULES = {
+    "textures/base_light/baslt4_1.blend.jpg": "textures/base_light/baslt4_1_blend.jpg",
+    "textures/base_light/border11light.blend.jpg": "textures/base_light/border11light_blend.jpg",
+    "textures/base_light/ceil1_22a.blend.jpg": "textures/base_light/ceil1_22a_blend.jpg",
+    "textures/base_light/ceil1_30.blend.jpg": "textures/base_light/ceil1_30_blend.jpg",
+    "textures/base_light/ceil1_34.blend.jpg": "textures/base_light/ceil1_34_blend.jpg",
+    "textures/base_light/ceil1_37.blend.jpg": "textures/base_light/ceil1_37_blend.jpg",
+    "textures/base_light/ceil1_38.blend.jpg": "textures/base_light/ceil1_38_blend.jpg",
+    "textures/base_light/ceil1_39.blend.jpg": "textures/base_light/ceil1_39_blend.jpg",
+    "textures/base_light/ceil1_4.blend.jpg": "textures/base_light/ceil1_4_blend.jpg",
+    "textures/base_light/jaildr03_2.blend.jpg": "textures/base_light/jaildr03_2_blend.jpg",
+    "textures/base_light/jaildr1_3.blend.jpg": "textures/base_light/jaildr1_3_blend.jpg",
+    "textures/base_light/light1.blend.jpg": "textures/base_light/light1_blend.jpg",
+    "textures/base_light/light1blue.blend.jpg": "textures/base_light/light1blue_blend.jpg",
+    "textures/base_light/light1red.blend.jpg": "textures/base_light/light1red_blend.jpg",
+    "textures/base_light/light2.blend.jpg": "textures/base_light/light2_blend.jpg",
+    "textures/base_light/patch10_pj_lite.blend.jpg": "textures/base_light/patch10_pj_lite_blend.jpg",
+    "textures/base_light/patch10_pj_lite2.blend.jpg": "textures/base_light/patch10_pj_lite2_blend.jpg",
+    "textures/base_light/wsupprt1_12.blend.jpg": "textures/base_light/wsupprt1_12_blend.jpg",
+    "textures/base_light/xlight5.blend.jpg": "textures/base_light/xlight5_blend.jpg",
+    "textures/gothic_light/border7_ceil39b.blend.jpg": "textures/gothic_light/border7_ceil39b_blend.jpg",
+    "textures/gothic_light/border_ceil39.blend.jpg": "textures/gothic_light/border_ceil39_blend.jpg",
+    "textures/gothic_light/ironcrosslt2.blend.jpg": "textures/gothic_light/ironcrosslt2_blend.jpg",
+    "textures/sfx/electric2.blend.jpg": "textures/sfx/electric2_blend.jpg",
+    "textures/sfx/surface6jumppad.blend.jpg": "textures/sfx/surface6jumppad_blend.jpg",
+    "models/weapons2/railgun/railgun2.glow.jpg": "models/weapons2/railgun/railgun2_glow.jpg",
+    "models/weapons2/railgun/railgun3.glow.jpg": "models/weapons2/railgun/railgun3_glow.jpg",
+    "textures/base_trim/border11light.glow.jpg": "textures/base_trim/border11light_glow.jpg",
+}
+
 PAK_DATA = {
     "q3a_baseq3_pak0": {
         "info": {

@@ -1295,7 +1295,7 @@ textures/base_floor/glowfloor2
 		rgbGen identity
 	}
 	{
-		map textures/base_floor/glowred1.blend
+		map textures/base_floor/glowred1_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.1 1 0.5
 	}
@@ -1315,7 +1315,7 @@ textures/base_floor/glowfloor3
 		rgbGen identity
 	}
 	{
-		map textures/base_floor/glowred1.blend
+		map textures/base_floor/glowred1_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.1 1 0.5
 	}

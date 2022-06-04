@@ -23,7 +23,7 @@ textures/gothic_light/border7_ceil39b_10k
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/border7_ceil39b.blend
+		map textures/gothic_light/border7_ceil39b_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -47,14 +47,14 @@ textures/gothic_light/border7_ceil39_6k
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/border_ceil39.blend
+		map textures/gothic_light/border_ceil39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
 textures/gothic_light/border7_ceil22a
 {
 	qer_editorimage textures/gothic_light/border7_ceil22a
-	q3map_lightimage textures/gothic_light/border_ceil22a.blend
+	q3map_lightimage textures/gothic_light/border_ceil22a_blend
 	q3map_surfacelight 200
 	//light 1
 	//surfaceparm nomarks
@@ -68,7 +68,7 @@ textures/gothic_light/border7_ceil22a
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/border_ceil22a.blend
+		map textures/gothic_light/border_ceil22a_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -76,7 +76,7 @@ textures/gothic_light/border7_ceil22a
 textures/gothic_light/border7_ceil30
 {
 	qer_editorimage textures/gothic_light/border7_ceil30
-	q3map_lightimage textures/gothic_light/border_ceil30.blend
+	q3map_lightimage textures/gothic_light/border_ceil30_blend
 	q3map_surfacelight 200
 	//	light 1
 	//surfaceparm nomarks
@@ -90,7 +90,7 @@ textures/gothic_light/border7_ceil30
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/border_ceil30.blend
+		map textures/gothic_light/border_ceil30_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -704,7 +704,7 @@ textures/gothic_light/pentagram_light1_15K
 textures/gothic_light/ironcrossltred_2000
 {
 	qer_editorimage textures/gothic_light/ironcrossltred
-	q3map_lightimage textures/gothic_light/ironcrossltred.blend
+	q3map_lightimage textures/gothic_light/ironcrossltred_blend
 	q3map_surfacelight 2000
 	light 1
 	surfaceparm nomarks
@@ -718,7 +718,7 @@ textures/gothic_light/ironcrossltred_2000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrossltred.blend
+		map textures/gothic_light/ironcrossltred_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -726,7 +726,7 @@ textures/gothic_light/ironcrossltred_2000
 textures/gothic_light/ironcrossltred_3000
 {
 	qer_editorimage textures/gothic_light/ironcrossltred
-	q3map_lightimage textures/gothic_light/ironcrossltred.blend
+	q3map_lightimage textures/gothic_light/ironcrossltred_blend
 	q3map_surfacelight 3000
 	light 1
 	surfaceparm nomarks
@@ -740,7 +740,7 @@ textures/gothic_light/ironcrossltred_3000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrossltred.blend
+		map textures/gothic_light/ironcrossltred_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -748,7 +748,7 @@ textures/gothic_light/ironcrossltred_3000
 textures/gothic_light/ironcrossltred_4000
 {
 	qer_editorimage textures/gothic_light/ironcrossltred
-	q3map_lightimage textures/gothic_light/ironcrossltred.blend
+	q3map_lightimage textures/gothic_light/ironcrossltred_blend
 	q3map_surfacelight 4000
 	light 1
 	surfaceparm nomarks
@@ -762,7 +762,7 @@ textures/gothic_light/ironcrossltred_4000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrossltred.blend
+		map textures/gothic_light/ironcrossltred_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -770,7 +770,7 @@ textures/gothic_light/ironcrossltred_4000
 textures/gothic_light/ironcrossltred_5000
 {
 	qer_editorimage textures/gothic_light/ironcrossltred
-	q3map_lightimage textures/gothic_light/ironcrossltred.blend
+	q3map_lightimage textures/gothic_light/ironcrossltred_blend
 	q3map_surfacelight 5000
 	light 1
 	surfaceparm nomarks
@@ -784,14 +784,14 @@ textures/gothic_light/ironcrossltred_5000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrossltred.blend
+		map textures/gothic_light/ironcrossltred_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
 textures/gothic_light/ironcrossltred_10000
 {
 	qer_editorimage textures/gothic_light/ironcrossltred
-	q3map_lightimage textures/gothic_light/ironcrossltred.blend
+	q3map_lightimage textures/gothic_light/ironcrossltred_blend
 	q3map_surfacelight 10000
 	light 1
 	surfaceparm nomarks
@@ -805,7 +805,7 @@ textures/gothic_light/ironcrossltred_10000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrossltred.blend
+		map textures/gothic_light/ironcrossltred_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -813,7 +813,7 @@ textures/gothic_light/ironcrossltred_10000
 textures/gothic_light/ironcrossltred_20000
 {
 	qer_editorimage textures/gothic_light/ironcrossltred
-	q3map_lightimage textures/gothic_light/ironcrossltred.blend
+	q3map_lightimage textures/gothic_light/ironcrossltred_blend
 	q3map_surfacelight 20000
 	light 1
 	surfaceparm nomarks
@@ -827,14 +827,14 @@ textures/gothic_light/ironcrossltred_20000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrossltred.blend
+		map textures/gothic_light/ironcrossltred_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
 textures/gothic_light/ironcrossltred_30000
 {
 	qer_editorimage textures/gothic_light/ironcrossltred
-	q3map_lightimage textures/gothic_light/ironcrossltred.blend
+	q3map_lightimage textures/gothic_light/ironcrossltred_blend
 	q3map_surfacelight 30000
 	light 1
 	surfaceparm nomarks
@@ -848,7 +848,7 @@ textures/gothic_light/ironcrossltred_30000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrossltred.blend
+		map textures/gothic_light/ironcrossltred_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -857,7 +857,7 @@ textures/gothic_light/ironcrossltred_30000
 textures/gothic_light/ironcrossltblue_2000
 {
 	qer_editorimage textures/gothic_light/ironcrossltblue
-	q3map_lightimage textures/gothic_light/ironcrossltblue.blend
+	q3map_lightimage textures/gothic_light/ironcrossltblue_blend
 	q3map_surfacelight 2000
 	light 1
 	surfaceparm nomarks
@@ -871,7 +871,7 @@ textures/gothic_light/ironcrossltblue_2000
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/gothic_light/ironcrossltblue.blend
+		map textures/gothic_light/ironcrossltblue_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -879,7 +879,7 @@ textures/gothic_light/ironcrossltblue_2000
 textures/gothic_light/ironcrossltblue_3000
 {
 	qer_editorimage textures/gothic_light/ironcrossltblue
-	q3map_lightimage textures/gothic_light/ironcrossltblue.blend
+	q3map_lightimage textures/gothic_light/ironcrossltblue_blend
 	q3map_surfacelight 3000
 	light 1
 	surfaceparm nomarks
@@ -893,7 +893,7 @@ textures/gothic_light/ironcrossltblue_3000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrossltblue.blend
+		map textures/gothic_light/ironcrossltblue_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -901,7 +901,7 @@ textures/gothic_light/ironcrossltblue_3000
 textures/gothic_light/ironcrossltblue_4000
 {
 	qer_editorimage textures/gothic_light/ironcrossltblue
-	q3map_lightimage textures/gothic_light/ironcrossltblue.blend
+	q3map_lightimage textures/gothic_light/ironcrossltblue_blend
 	q3map_surfacelight 4000
 	light 1
 	surfaceparm nomarks
@@ -915,7 +915,7 @@ textures/gothic_light/ironcrossltblue_4000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrossltblue.blend
+		map textures/gothic_light/ironcrossltblue_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -923,7 +923,7 @@ textures/gothic_light/ironcrossltblue_4000
 textures/gothic_light/ironcrossltblue_5000
 {
 	qer_editorimage textures/gothic_light/ironcrossltblue
-	q3map_lightimage textures/gothic_light/ironcrossltblue.blend
+	q3map_lightimage textures/gothic_light/ironcrossltblue_blend
 	q3map_surfacelight 5000
 	light 1
 	surfaceparm nomarks
@@ -937,7 +937,7 @@ textures/gothic_light/ironcrossltblue_5000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrossltblue.blend
+		map textures/gothic_light/ironcrossltblue_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -945,7 +945,7 @@ textures/gothic_light/ironcrossltblue_5000
 textures/gothic_light/ironcrossltblue_10000
 {
 	qer_editorimage textures/gothic_light/ironcrossltblue
-	q3map_lightimage textures/gothic_light/ironcrossltblue.blend
+	q3map_lightimage textures/gothic_light/ironcrossltblue_blend
 	q3map_surfacelight 10000
 	light 1
 	surfaceparm nomarks
@@ -959,7 +959,7 @@ textures/gothic_light/ironcrossltblue_10000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrossltblue.blend
+		map textures/gothic_light/ironcrossltblue_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -967,7 +967,7 @@ textures/gothic_light/ironcrossltblue_10000
 textures/gothic_light/ironcrossltblue_20000
 {
 	qer_editorimage textures/gothic_light/ironcrossltblue
-	q3map_lightimage textures/gothic_light/ironcrossltblue.blend
+	q3map_lightimage textures/gothic_light/ironcrossltblue_blend
 	q3map_surfacelight 20000
 	light 1
 	surfaceparm nomarks
@@ -981,7 +981,7 @@ textures/gothic_light/ironcrossltblue_20000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrossltblue.blend
+		map textures/gothic_light/ironcrossltblue_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -989,7 +989,7 @@ textures/gothic_light/ironcrossltblue_20000
 textures/gothic_light/ironcrossltblue_30000
 {
 	qer_editorimage textures/gothic_light/ironcrossltblue
-	q3map_lightimage textures/gothic_light/ironcrossltblue.blend
+	q3map_lightimage textures/gothic_light/ironcrossltblue_blend
 	q3map_surfacelight 30000
 	light 1
 	surfaceparm nomarks
@@ -1003,7 +1003,7 @@ textures/gothic_light/ironcrossltblue_30000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrossltblue.blend
+		map textures/gothic_light/ironcrossltblue_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1025,7 +1025,7 @@ textures/gothic_light/crosslt1
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/crosslt1.blend
+		map textures/gothic_light/crosslt1_blend
 		rgbGen wave sin 0.5 0.5 0 .2
 		blendFunc GL_ONE GL_ONE
 	}
@@ -1033,7 +1033,7 @@ textures/gothic_light/crosslt1
 textures/gothic_light/light1_6Kgothicred
 {
 	qer_editorimage textures/base_light/light1red
-	q3map_lightimage textures/base_light/light1red.blend
+	q3map_lightimage textures/base_light/light1red_blend
 	q3map_surfacelight 4000
 	light 1
 	surfaceparm nomarks
@@ -1048,7 +1048,7 @@ textures/gothic_light/light1_6Kgothicred
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light1red.blend
+		map textures/base_light/light1red_blend
 		rgbGen wave sin 0.25 0.25 0 .2
 		blendFunc GL_ONE GL_ONE
 	}
@@ -1056,7 +1056,7 @@ textures/gothic_light/light1_6Kgothicred
 textures/gothic_light/light1_4Kgothic
 {
 	qer_editorimage textures/base_light/light1
-	q3map_lightimage textures/base_light/light1.blend
+	q3map_lightimage textures/base_light/light1_blend
 	q3map_surfacelight 4000
 	light 1
 	surfaceparm nomarks
@@ -1071,7 +1071,7 @@ textures/gothic_light/light1_4Kgothic
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light1.blend
+		map textures/base_light/light1_blend
 		rgbGen wave sin 0.25 0.25 0 .2
 		blendFunc GL_ONE GL_ONE
 	}
@@ -1079,7 +1079,7 @@ textures/gothic_light/light1_4Kgothic
 textures/gothic_light/light1_6Kgothic
 {
 	qer_editorimage textures/base_light/light1
-	q3map_lightimage textures/base_light/light1.blend
+	q3map_lightimage textures/base_light/light1_blend
 	q3map_surfacelight 6000
 	light 1
 	surfaceparm nomarks
@@ -1094,7 +1094,7 @@ textures/gothic_light/light1_6Kgothic
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light1.blend
+		map textures/base_light/light1_blend
 		rgbGen wave sin 0.25 0.25 0 .2
 		blendFunc GL_ONE GL_ONE
 	}
@@ -1102,7 +1102,7 @@ textures/gothic_light/light1_6Kgothic
 textures/gothic_light/ironcrosslt1_2500
 {
 	qer_editorimage textures/gothic_light/ironcrosslt1
-	q3map_lightimage textures/gothic_light/ironcrosslt1.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt1_blend
 	q3map_surfacelight 3500
 	light 1
 	surfaceparm nomarks
@@ -1116,14 +1116,14 @@ textures/gothic_light/ironcrosslt1_2500
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt1.blend
+		map textures/gothic_light/ironcrosslt1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
 textures/gothic_light/ironcrosslt1_1000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt1
-	q3map_lightimage textures/gothic_light/ironcrosslt1.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt1_blend
 	q3map_surfacelight 1000
 	light 1
 	surfaceparm nomarks
@@ -1137,7 +1137,7 @@ textures/gothic_light/ironcrosslt1_1000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt1.blend
+		map textures/gothic_light/ironcrosslt1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1145,7 +1145,7 @@ textures/gothic_light/ironcrosslt1_1000
 textures/gothic_light/ironcrosslt1_2000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt1
-	q3map_lightimage textures/gothic_light/ironcrosslt1.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt1_blend
 	q3map_surfacelight 2000
 	light 1
 	surfaceparm nomarks
@@ -1159,7 +1159,7 @@ textures/gothic_light/ironcrosslt1_2000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt1.blend
+		map textures/gothic_light/ironcrosslt1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1167,7 +1167,7 @@ textures/gothic_light/ironcrosslt1_2000
 textures/gothic_light/ironcrosslt1_120000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt1
-	q3map_lightimage textures/gothic_light/ironcrosslt1.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt1_blend
 	q3map_surfacelight 120000
 	light 1
 	surfaceparm nomarks
@@ -1181,7 +1181,7 @@ textures/gothic_light/ironcrosslt1_120000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt1.blend
+		map textures/gothic_light/ironcrosslt1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1189,7 +1189,7 @@ textures/gothic_light/ironcrosslt1_120000
 textures/gothic_light/ironcrosslt1_500000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt1
-	q3map_lightimage textures/gothic_light/ironcrosslt1.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt1_blend
 	q3map_surfacelight 500000
 	light 1
 	surfaceparm nomarks
@@ -1203,7 +1203,7 @@ textures/gothic_light/ironcrosslt1_500000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt1.blend
+		map textures/gothic_light/ironcrosslt1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1211,7 +1211,7 @@ textures/gothic_light/ironcrosslt1_500000
 textures/gothic_light/ironcrosslt1_3000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt1
-	q3map_lightimage textures/gothic_light/ironcrosslt1.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt1_blend
 	q3map_surfacelight 3000
 	light 1
 	surfaceparm nomarks
@@ -1225,7 +1225,7 @@ textures/gothic_light/ironcrosslt1_3000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt1.blend
+		map textures/gothic_light/ironcrosslt1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1233,7 +1233,7 @@ textures/gothic_light/ironcrosslt1_3000
 textures/gothic_light/ironcrosslt1_4000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt1
-	q3map_lightimage textures/gothic_light/ironcrosslt1.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt1_blend
 	q3map_surfacelight 4000
 	light 1
 	surfaceparm nomarks
@@ -1247,7 +1247,7 @@ textures/gothic_light/ironcrosslt1_4000
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/gothic_light/ironcrosslt1.blend
+		map textures/gothic_light/ironcrosslt1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1255,7 +1255,7 @@ textures/gothic_light/ironcrosslt1_4000
 textures/gothic_light/ironcrosslt1_5000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt1
-	q3map_lightimage textures/gothic_light/ironcrosslt1.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt1_blend
 	q3map_surfacelight 5000
 	light 1
 	surfaceparm nomarks
@@ -1269,14 +1269,14 @@ textures/gothic_light/ironcrosslt1_5000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt1.blend
+		map textures/gothic_light/ironcrosslt1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
 textures/gothic_light/ironcrosslt1_10000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt1
-	q3map_lightimage textures/gothic_light/ironcrosslt1.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt1_blend
 	q3map_surfacelight 10000
 	light 1
 	surfaceparm nomarks
@@ -1290,14 +1290,14 @@ textures/gothic_light/ironcrosslt1_10000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt1.blend
+		map textures/gothic_light/ironcrosslt1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
 textures/gothic_light/ironcrosslt1_20000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt1
-	q3map_lightimage textures/gothic_light/ironcrosslt1.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt1_blend
 	q3map_surfacelight 20000
 	light 1
 	surfaceparm nomarks
@@ -1311,7 +1311,7 @@ textures/gothic_light/ironcrosslt1_20000
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/gothic_light/ironcrosslt1.blend
+		map textures/gothic_light/ironcrosslt1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1319,7 +1319,7 @@ textures/gothic_light/ironcrosslt1_20000
 textures/gothic_light/ironcrosslt1_30000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt1
-	q3map_lightimage textures/gothic_light/ironcrosslt1.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt1_blend
 	q3map_surfacelight 30000
 	light 1
 	surfaceparm nomarks
@@ -1333,7 +1333,7 @@ textures/gothic_light/ironcrosslt1_30000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt1.blend
+		map textures/gothic_light/ironcrosslt1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1341,7 +1341,7 @@ textures/gothic_light/ironcrosslt1_30000
 textures/gothic_light/ironcrosslt1_40000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt1
-	q3map_lightimage textures/gothic_light/ironcrosslt1.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt1_blend
 	q3map_surfacelight 40000
 	light 1
 	surfaceparm nomarks
@@ -1355,7 +1355,7 @@ textures/gothic_light/ironcrosslt1_40000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt1.blend
+		map textures/gothic_light/ironcrosslt1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1363,7 +1363,7 @@ textures/gothic_light/ironcrosslt1_40000
 textures/gothic_light/ironcrosslt2_2000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt2
-	q3map_lightimage textures/gothic_light/ironcrosslt2.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt2_blend
 	q3map_surfacelight 2000
 	//light 1
 	surfaceparm nomarks
@@ -1377,7 +1377,7 @@ textures/gothic_light/ironcrosslt2_2000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt2.blend
+		map textures/gothic_light/ironcrosslt2_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1386,7 +1386,7 @@ textures/gothic_light/ironcrosslt2_2000
 textures/gothic_light/ironcrosslt2_2500
 {
 	qer_editorimage textures/gothic_light/ironcrosslt2
-	q3map_lightimage textures/gothic_light/ironcrosslt2.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt2_blend
 	q3map_surfacelight 2500
 	light 1
 	surfaceparm nomarks
@@ -1400,14 +1400,14 @@ textures/gothic_light/ironcrosslt2_2500
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt2.blend
+		map textures/gothic_light/ironcrosslt2_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
 textures/gothic_light/ironcrosslt2_3000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt2
-	q3map_lightimage textures/gothic_light/ironcrosslt2.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt2_blend
 	q3map_surfacelight 3000
 	light 1
 	surfaceparm nomarks
@@ -1421,7 +1421,7 @@ textures/gothic_light/ironcrosslt2_3000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt2.blend
+		map textures/gothic_light/ironcrosslt2_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1429,7 +1429,7 @@ textures/gothic_light/ironcrosslt2_3000
 textures/gothic_light/ironcrosslt2_4000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt2
-	q3map_lightimage textures/gothic_light/ironcrosslt2.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt2_blend
 	q3map_surfacelight 4000
 	light 1
 	surfaceparm nomarks
@@ -1443,7 +1443,7 @@ textures/gothic_light/ironcrosslt2_4000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt2.blend
+		map textures/gothic_light/ironcrosslt2_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1451,7 +1451,7 @@ textures/gothic_light/ironcrosslt2_4000
 textures/gothic_light/ironcrosslt2_5000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt2
-	q3map_lightimage textures/gothic_light/ironcrosslt2.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt2_blend
 	q3map_surfacelight 5000
 	light 1
 	surfaceparm nomarks
@@ -1465,14 +1465,14 @@ textures/gothic_light/ironcrosslt2_5000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt2.blend
+		map textures/gothic_light/ironcrosslt2_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
 textures/gothic_light/ironcrosslt2_10000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt2
-	q3map_lightimage textures/gothic_light/ironcrosslt2.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt2_blend
 	q3map_surfacelight 10000
 	light 1
 	surfaceparm nomarks
@@ -1486,14 +1486,14 @@ textures/gothic_light/ironcrosslt2_10000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt2.blend
+		map textures/gothic_light/ironcrosslt2_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
 textures/gothic_light/ironcrosslt2_20000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt2
-	q3map_lightimage textures/gothic_light/ironcrosslt2.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt2_blend
 	q3map_surfacelight 20000
 	light 1
 	surfaceparm nomarks
@@ -1507,7 +1507,7 @@ textures/gothic_light/ironcrosslt2_20000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt2.blend
+		map textures/gothic_light/ironcrosslt2_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1515,7 +1515,7 @@ textures/gothic_light/ironcrosslt2_20000
 textures/gothic_light/ironcrosslt2_30000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt2
-	q3map_lightimage textures/gothic_light/ironcrosslt2.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt2_blend
 	q3map_surfacelight 30000
 	light 1
 	surfaceparm nomarks
@@ -1529,7 +1529,7 @@ textures/gothic_light/ironcrosslt2_30000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt2.blend
+		map textures/gothic_light/ironcrosslt2_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1537,7 +1537,7 @@ textures/gothic_light/ironcrosslt2_30000
 textures/gothic_light/ironcrosslt2_40000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt2
-	q3map_lightimage textures/gothic_light/ironcrosslt2.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt2_blend
 	q3map_surfacelight 40000
 	light 1
 	surfaceparm nomarks
@@ -1551,7 +1551,7 @@ textures/gothic_light/ironcrosslt2_40000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt2.blend
+		map textures/gothic_light/ironcrosslt2_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1560,7 +1560,7 @@ textures/gothic_light/ironcrosslt2_40000
 textures/gothic_light/ironcrosslt2_1000
 {
 	qer_editorimage textures/gothic_light/ironcrosslt2
-	q3map_lightimage textures/gothic_light/ironcrosslt2.blend
+	q3map_lightimage textures/gothic_light/ironcrosslt2_blend
 	q3map_surfacelight 1000
 	light 1
 	surfaceparm nomarks
@@ -1574,7 +1574,7 @@ textures/gothic_light/ironcrosslt2_1000
 		rgbGen identity
 	}
 	{
-		map textures/gothic_light/ironcrosslt2.blend
+		map textures/gothic_light/ironcrosslt2_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }

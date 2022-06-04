@@ -12,7 +12,7 @@ textures/base_light/btactmach0
 		rgbGen identity
 	}
 	{
-		map textures/base_light/btactmach0.blend
+		map textures/base_light/btactmach0_blend
 		rgbGen wave sin 0.5 0.5 0 .2
 		blendFunc GL_ONE GL_ONE
 	}

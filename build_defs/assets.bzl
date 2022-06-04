@@ -20,7 +20,7 @@ def convert_tga_to_png(name):
     files = _PAK_DATA[name]["tga_files"]
     output_files = []
     for file in files:
-        _file_sans_extension = file.removesuffix(".tga").removesuffix(".TGA").lower()
+        _file_sans_extension = file.removesuffix(".tga").removesuffix(".TGA").lower().replace(".", "_")
         _input_label = "%s:%s" % (package_label, file)
         _output_file = "%s.png" % _file_sans_extension
         _target_name = "%s.png_gen" % _file_sans_extension
