@@ -115,15 +115,6 @@ textures/eerie/gkcspine
 	}
 }
 
-textures/eerie/lavafogshader
-{
-	surfaceparm	trans
-	surfaceparm	nonsolid
-	surfaceparm	fog
-	surfaceparm	nolightmap
-	fogonly
-}
-
 textures/eerie/lavahell
 {
 	qer_editorimage textures/eerie/lavahell
