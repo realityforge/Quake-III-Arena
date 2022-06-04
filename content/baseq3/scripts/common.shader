@@ -317,7 +317,7 @@ textures/sfx/portal_sfx
 		blendfunc gl_src_alpha gl_one_minus_src_alpha
 		alphagen portal 256
 		rgbGen identityLighting
-		tcmod turb sin 0 .5 0 1
+		tcmod turb 0 .5 0 1
 		tcmod rotate .1
 		tcmod scroll .01 .03
 	}
