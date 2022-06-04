@@ -90,7 +90,7 @@ filegroup(
         "scripts/base_light.shader",
         "scripts/base_wall.shader",
         "scripts/base_wall2.shader",
-        "scripts/common.shader",
+        "scripts/common2.shader",
         "scripts/ctf.shader",
         "scripts/ctf2.shader",
         "scripts/flayer.shader",
