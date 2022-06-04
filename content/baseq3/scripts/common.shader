@@ -318,7 +318,7 @@ textures/sfx/portal_sfx
 		alphagen portal 256
 		rgbGen identityLighting
 		tcmod turb sin 0 .5 0 1
-		tcmod rotate .1 .1
+		tcmod rotate .1
 		tcmod scroll .01 .03
 	}
 }
