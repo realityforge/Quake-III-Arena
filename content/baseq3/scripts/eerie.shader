@@ -597,17 +597,6 @@ textures/eerie/borderlight_500
 	}
 }
 
-textures/eerie/darkness
-{
-	surfaceparm	trans
-	surfaceparm	nonsolid
-	surfaceparm	fog
-	surfaceparm	nolightmap
-	surfaceparm 	nodrop
-	cull back
-	fogonly
-	fogparms 0 0 0 128 128
-}
 textures/eerie/redgoal
 {
 	q3map_surfacelight 200
