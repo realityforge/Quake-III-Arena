@@ -111,6 +111,7 @@ surfaceparm nonsolid
 surfaceparm structural
 surfaceparm trans
 surfaceparm noimpact
+surfaceparm hint
 }
 
 textures/common/skip
