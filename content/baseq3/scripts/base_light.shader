@@ -2339,12 +2339,6 @@ textures/base_light/wsupprt1_12h
 		blendfunc GL_ONE GL_ONE
 	}
 }
-textures/base_light/ceil1_26
-{
-	surfaceparm nomarks
-	q3map_surfacelight 10000
-	light1
-}
 textures/base_light/invisi_light1
 {
 	qer_editorimage base_light/ceil1_30
