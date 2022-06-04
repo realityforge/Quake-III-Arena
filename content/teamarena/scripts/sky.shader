@@ -2259,9 +2259,9 @@ textures/skies/mkc_ctf1
 //used in mkc_ctf
 
 {
-	surfaceParm noimpact
-	surfaceParm nolightmap
-	surfaceParm sky
+	surfaceparm noimpact
+	surfaceparm nolightmap
+	surfaceparm sky
 
 	q3map_sun	0.9 0.8 1.0 90 45 60
 	q3map_surfacelight 140
