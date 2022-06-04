@@ -87,7 +87,6 @@ filegroup(
     srcs = [
         "scripts/base_floor.shader",
         "scripts/base_floor2.shader",
-        "scripts/base_light.shader",
         "scripts/base_wall2.shader",
         "scripts/common2.shader",
         "scripts/ctf.shader",
