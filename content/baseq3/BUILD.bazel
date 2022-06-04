@@ -43,7 +43,6 @@ filegroup(
         "scripts/shrine.shader",
         "scripts/skin.shader",
         "scripts/sky.shader",
-        "scripts/test.shader",
         "scripts/tim.shader",
     ],
     visibility = ["//visibility:public"],
