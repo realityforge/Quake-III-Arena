@@ -46,7 +46,7 @@ textures/eerie/surface6jumppad
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/eerie/surface6jumppad.blend
+		map textures/eerie/surface6jumppad_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .2
 //		blendFunc GL_ONE GL_ONE
@@ -57,7 +57,7 @@ textures/eerie/surface6jumppad
 textures/eerie/xgoopjumpypad
 {
 	q3map_surfacelight 100
-	q3map_lightimage textures/eerie/surface6jumppad.blend
+	q3map_lightimage textures/eerie/surface6jumppad_blend
 	{
 		rgbGen identity
 		map $lightmap
@@ -68,7 +68,7 @@ textures/eerie/xgoopjumpypad
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		clampmap textures/eerie/surface6jumppad.blend
+		clampmap textures/eerie/surface6jumppad_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 .2
 //		tcMod stretch sin 0.80 0.20 0 1
@@ -78,7 +78,7 @@ textures/eerie/xgoopy_pentagram
 {
 //	qer_editorimage textures/eerie/xgoopy_pentagram
 	q3map_surfacelight 250
-//	q3map_lightimage textures/eerie/pentagramfloor.red.blend
+//	q3map_lightimage textures/eerie/pentagramfloor_red_blend
 	{
 		map $lightmap
 		rgbGen identity
@@ -89,7 +89,7 @@ textures/eerie/xgoopy_pentagram
 		rgbGen identity
 	}
 	{
-		clampmap textures/eerie/pentagramfloor.red.blend
+		clampmap textures/eerie/pentagramfloor_red_blend
 		blendFunc GL_ONE GL_ONE
 //		rgbGen wave sin 0.5 0.5 0.3 .5
 		tcMod rotate -60
@@ -336,7 +336,7 @@ textures/eerie/xq1metalbig_nojumppad
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/eerie/xq1metalbig_nojumppad.blend
+		map textures/eerie/xq1metalbig_nojumppad_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
@@ -425,7 +425,7 @@ textures/eerie/jesus
 		rgbGen identity
 	}
 	{
-		map textures/eerie/jesus_mask3.blend
+		map textures/eerie/jesus_mask3_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -443,7 +443,7 @@ textures/eerie/xq1metalbig_jumppad
 		rgbGen identity
 	}
 	{
-		clampmap textures/eerie/surface6jumppad.blend
+		clampmap textures/eerie/surface6jumppad_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 .2
 //		tcMod stretch sin 0.80 0.20 0 1
@@ -524,7 +524,7 @@ textures/eerie/pentagramfloor
 		rgbGen identity
 	}
 	{
-		map textures/eerie/pentagramfloor.red.blend
+		map textures/eerie/pentagramfloor_red_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .5
 	}
@@ -543,7 +543,7 @@ textures/eerie/pentagramfloor_rotating
 		rgbGen identity
 	}
 	{
-		clampmap textures/eerie/pentagramfloor.red.blend
+		clampmap textures/eerie/pentagramfloor_red_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 0.5
 		tcMod rotate -60
@@ -584,7 +584,7 @@ textures/eerie/border11light
 		rgbGen identity
 	}
 	{
-		map textures/eerie/border11light.blend
+		map textures/eerie/border11light_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -601,7 +601,7 @@ textures/eerie/borderlight_500
 		rgbGen identity
 	}
 	{
-		map textures/eerie/border11light.blend
+		map textures/eerie/border11light_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -664,7 +664,7 @@ textures/eerie/xian_rune11
 		rgbGen identity
 	}
 	{
-		map textures/eerie/xian_rune11.blend
+		map textures/eerie/xian_rune11_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -679,12 +679,12 @@ textures/eerie/xian_rune21
 	}
 	{
 		map textures/eerie/xian_rune21
-		//map textures/eerie/xian_rune21.specular
+		//map textures/eerie/xian_rune21_specular
 		rgbGen identity
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/eerie/xian_rune21.blend
+		map textures/eerie/xian_rune21_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -721,7 +721,7 @@ textures/eerie/cross_1000
 		rgbGen identity
 	}
 	{
-		map textures/eerie/cross_1000.blend
+		map textures/eerie/cross_1000_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -739,7 +739,7 @@ textures/eerie/cross_2500
 		rgbGen identity
 	}
 	{
-		map textures/eerie/cross_2500.blend
+		map textures/eerie/cross_2500_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -747,7 +747,7 @@ textures/eerie/cross_2500
 textures/eerie/light1
 {
 	q3map_surfacelight 2000
-	q3map_lightimage textures/eerie/light1.blend
+	q3map_lightimage textures/eerie/light1_blend
 	light 1
 	{
 		map $lightmap
@@ -759,7 +759,7 @@ textures/eerie/light1
 		rgbGen identity
 	}
 	{
-		map textures/eerie/light1.blend
+		map textures/eerie/light1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -767,7 +767,7 @@ textures/eerie/light1
 textures/eerie/light1_5000
 {
 	qer_editorimage textures/eerie/light1
-	q3map_lightimage textures/eerie/light1.blend
+	q3map_lightimage textures/eerie/light1_blend
 	q3map_surfacelight 5000
 	light 1
 	{
@@ -780,7 +780,7 @@ textures/eerie/light1_5000
 		rgbGen identity
 	}
 	{
-		map textures/eerie/light1.blend
+		map textures/eerie/light1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -799,7 +799,7 @@ textures/eerie/light2
 		rgbGen identity
 	}
 	{
-		map textures/eerie/light2.blend
+		map textures/eerie/light2_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -818,7 +818,7 @@ textures/eerie/light3_8
 		rgbGen identity
 	}
 	{
-		map textures/eerie/light3_8.blend
+		map textures/eerie/light3_8_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -836,7 +836,7 @@ textures/eerie/xian_light3_7
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/eerie/xian_light3_7.blend
+		map textures/eerie/xian_light3_7_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }

@@ -803,7 +803,7 @@ textures/base_wall/bluemetalsupport2clight
 
 
 	{
-		map textures/base_wall/bluemetalsupport2clight.glow
+		map textures/base_wall/bluemetalsupport2clight_glow
 		blendFunc add
 		rgbgen wave sawtooth .6 .1 0 4
 	}
@@ -2025,7 +2025,7 @@ textures/base_wall/kcgrate1
 
 textures/base_wall/future9light
 {
-	q3map_lightimage textures/base_wall/future9light.color
+	q3map_lightimage textures/base_wall/future9light_color
 	q3map_surfacelight 400
 	light 1
 	{
@@ -2038,7 +2038,7 @@ textures/base_wall/future9light
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/base_wall/future9light.blend
+		map textures/base_wall/future9light_blend
 		rgbGen wave sin 0.5 0.1 1 0.5
 		blendFunc GL_ONE GL_ONE
 	}

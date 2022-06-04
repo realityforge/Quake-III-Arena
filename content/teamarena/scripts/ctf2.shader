@@ -363,7 +363,7 @@ textures/ctf2/jaildr_bluescroll
 		rgbGen identity
 	}
 	{
-		map textures/ctf2/jaildr_blue.blend
+		map textures/ctf2/jaildr_blue_blend
 		rgbGen wave sin 0.5 0.5 1 1
 		tcMod scroll 0 -.25
 		blendfunc GL_ONE GL_ONE

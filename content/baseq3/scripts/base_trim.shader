@@ -555,7 +555,7 @@ textures/base_trim/proto_fence
 textures/base_trim/border11light
 {
 	q3map_surfacelight 500
-	Q3map_lightimage textures/base_trim/border11light.glow
+	Q3map_lightimage textures/base_trim/border11light_glow
 	{
 		map $lightmap
 		rgbGen identity
@@ -566,7 +566,7 @@ textures/base_trim/border11light
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/base_trim/border11light.glow
+		map textures/base_trim/border11light_glow
 		blendfunc GL_ONE GL_ONE
 		rgbgen wave sin .9 .1 0 10
 	}
@@ -576,7 +576,7 @@ textures/base_trim/border11_250
 {
 	qer_editorimage textures/base_trim/border11light
 	q3map_surfacelight 250
-	q3map_lightimage textures/base_trim/border11light.glow
+	q3map_lightimage textures/base_trim/border11light_glow
 	{
 		map $lightmap
 		rgbGen identity
@@ -587,7 +587,7 @@ textures/base_trim/border11_250
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		map textures/base_trim/border11light.glow
+		map textures/base_trim/border11light_glow
 		blendfunc GL_ONE GL_ONE
 		rgbgen wave sin .9 .1 0 10
 	}
@@ -689,7 +689,7 @@ q3map_surfacelight 400
 		blendFunc GL_ONE GL_ONE
 	}
 	{
-		map textures/sfx/electric2.blend
+		map textures/sfx/electric2_blend
 		rgbGen wave sin 0.6 1 0 2
 	//	tcMod rotate 54
 		tcMod scroll 0.53 0.43
@@ -704,7 +704,7 @@ q3map_surfacelight 400
 textures/base_trim/electric_blue
 {
 	qer_editorimage textures/base_trim/electricwall_blue
-	q3map_lightimage textures/sfx/electric2.blend
+	q3map_lightimage textures/sfx/electric2_blend
 	q3map_globaltexture
 	q3map_surfacelight 200
 
@@ -723,7 +723,7 @@ textures/base_trim/electric_blue
 		blendFunc GL_ONE GL_ONE
 	}
 	{
-		map textures/sfx/electric2.blend
+		map textures/sfx/electric2_blend
 		rgbGen wave sin 0.6 1 0 2
 		tcMod scale 0.5 0.5
 		tcMod rotate 54

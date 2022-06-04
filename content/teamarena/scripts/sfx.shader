@@ -3162,7 +3162,7 @@ textures/sfx/goopq1metal7_98dhuge_pent
 		blendfunc gl_dst_color gl_zero
 	}
 	{
-		map textures/sfx/pentagramfloor_red3.glow
+		map textures/sfx/pentagramfloor_red3_glow
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
@@ -4069,7 +4069,7 @@ textures/sfx/bouncepad1q1metal7_99
 textures/sfx/redpadblocks17
 {
 	qer_editorimage textures/sfx/redpad
-	q3map_lightimage textures/sfx/redpad.blend
+	q3map_lightimage textures/sfx/redpad_blend
 	q3map_surfacelight 2000
 	//q3map_surfacelight 2000
 	surfaceparm nodamage
@@ -4083,7 +4083,7 @@ textures/sfx/redpadblocks17
 		blendFunc GL_DST_COLOR GL_ZERO
 	}
 	{
-		clampmap textures/sfx/redpad.blend
+		clampmap textures/sfx/redpad_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 1
 		tcMod stretch sin 0.80 0.20 0 1
@@ -4212,7 +4212,7 @@ textures/sfx/goopq1metal7_98d_pent_256
 //		rgbGen identity
 	//}
 	//{
-	//	map textures/sfx/pentfloor.glow
+	//	map textures/sfx/pentfloor_glow
 	//	blendfunc gl_one gl_one
 	//	rgbGen wave sin .5 .5 0 .5
 	//}
@@ -4262,7 +4262,7 @@ textures/sfx/goopq1metal7_98dnodamage
 textures/sfx/gimmickdiamondarrow
 {
 	qer_editorimage textures/sfx/goopq1metal7_98darrow
-	q3map_lightimage textures/sfx/pitted_rust3arrow.blend
+	q3map_lightimage textures/sfx/pitted_rust3arrow_blend
 	//q3map_surfacelight 2000
 	q3map_surfacelight 500
 	{
@@ -4275,7 +4275,7 @@ textures/sfx/gimmickdiamondarrow
 		rgbGen identity
 	}
 	{
-		map textures/sfx/pitted_rust3arrow.blend
+		map textures/sfx/pitted_rust3arrow_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 0.5
 		tcmod scroll 0 1
@@ -4284,7 +4284,7 @@ textures/sfx/gimmickdiamondarrow
 textures/sfx/goopq1metal7_98darrow
 {
 	qer_editorimage textures/sfx/goopq1metal7_98darrow
-	q3map_lightimage textures/sfx/pitted_rust3arrow.blend
+	q3map_lightimage textures/sfx/pitted_rust3arrow_blend
 	q3map_surfacelight 2000
 	q3map_surfacelight 500
 	{
@@ -4297,7 +4297,7 @@ textures/sfx/goopq1metal7_98darrow
 		rgbGen identity
 	}
 	{
-		map textures/sfx/pitted_rust3arrow.blend
+		map textures/sfx/pitted_rust3arrow_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 0.5
 		tcmod scroll 0 1
@@ -4391,8 +4391,8 @@ textures/sfx/pentagramfloor_rotating
 		rgbGen identity
 	}
 	{
-//		map textures/sfx/pentagramfloor.red.blend
-		clampmap textures/sfx/pentagramfloor.red
+//		map textures/sfx/pentagramfloor_red_blend
+		clampmap textures/sfx/pentagramfloor_red
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 0.5
 		tcMod rotate -60
@@ -4412,7 +4412,7 @@ textures/sfx/pentagramfloor_rotating2
 		rgbGen identity
 	}
 	{
-		clampmap textures/sfx/pentagramfloor.red.blend
+		clampmap textures/sfx/pentagramfloor_red_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 0.5
 		tcMod rotate -60
@@ -4432,7 +4432,7 @@ textures/sfx/pentagramfloor_q1metal7_99
 		rgbGen identity
 	}
 	{
-		clampmap textures/sfx/pentagramfloor.red.blend
+		clampmap textures/sfx/pentagramfloor_red_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 0.5
 		tcMod rotate -60
@@ -4452,7 +4452,7 @@ textures/sfx/pentagramfloor
 		rgbGen identity
 	}
 	{
-		clampmap textures/sfx/pentagramfloor.red.blend
+		clampmap textures/sfx/pentagramfloor_red_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 0.5
 		tcMod rotate -60
@@ -4472,7 +4472,7 @@ textures/sfx/q1met_redpad
 		rgbGen identity
 	}
 	{
-		map textures/sfx/q1met_redpad.blend
+		map textures/sfx/q1met_redpad_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
@@ -4634,7 +4634,7 @@ textures/sfx/surface6jumppad
 		rgbGen identity
 	}
 	{
-		map textures/sfx/surface6jumppad.blend
+		map textures/sfx/surface6jumppad_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .2
 //		blendFunc GL_ONE GL_ONE
@@ -4690,7 +4690,7 @@ textures/sfx/bluestripe
 textures/sfx/xgoopjumpypad
 {
 	q3map_surfacelight 100
-	q3map_lightimage textures/sfx/surface6jumppad.blend
+	q3map_lightimage textures/sfx/surface6jumppad_blend
 	{
 		map $lightmap
 		rgbGen identity
@@ -4701,7 +4701,7 @@ textures/sfx/xgoopjumpypad
 		rgbGen identity
 	}
 	{
-		clampmap textures/sfx/surface6jumppad.blend
+		clampmap textures/sfx/surface6jumppad_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 .2
 		tcMod stretch sin 0.80 0.20 0 1
@@ -4721,7 +4721,7 @@ textures/sfx/xgoopy_pentagram
 		rgbGen identity
 	}
 	{
-		clampmap textures/sfx/pentagramfloor.red.blend
+		clampmap textures/sfx/pentagramfloor_red_blend
 		blendFunc GL_ONE GL_ONE
 		tcMod rotate -60
 	}
@@ -4843,7 +4843,7 @@ textures/sfx/xq1metalbig_jumppad
 		rgbGen identity
 	}
 	{
-		clampmap textures/sfx/surface6jumppad.blend
+		clampmap textures/sfx/surface6jumppad_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 .2
 		tcMod stretch sin 0.80 0.20 0 1
@@ -5035,7 +5035,7 @@ textures/sfx/pentagramfloor
 		rgbGen identity
 	}
 	{
-		map textures/sfx/pentagramfloor.red.blend
+		map textures/sfx/pentagramfloor_red_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .5
 	}
@@ -5056,7 +5056,7 @@ textures/sfx/spawnpad
 		rgbGen identity
 	}
 	{
-		map textures/sfx/spawnpad.blend
+		map textures/sfx/spawnpad_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 .2
 //		tcMod stretch sin 0.80 0.20 0 1
@@ -5221,7 +5221,7 @@ textures/sfx/diamondredpad
 		rgbGen identity
 	}
 	{
-		clampmap textures/sfx/redpad.blend
+		clampmap textures/sfx/redpad_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 1
 		tcMod stretch sin 0.80 0.20 0 1
@@ -5569,7 +5569,7 @@ textures/sfx/pj_a1_fog1
 textures/sfx/pitted_rust3arrowbase
 {
 	qer_editorimage textures/sfx/pitted_rust3arrow
-	q3map_lightimage textures/sfx/pitted_rust3arrow.blend
+	q3map_lightimage textures/sfx/pitted_rust3arrow_blend
 	q3map_surfacelight 2000
 //	q3map_surfacelight 500
 	{
@@ -5582,7 +5582,7 @@ textures/sfx/pitted_rust3arrowbase
 		rgbGen identity
 	}
 	{
-		map textures/sfx/pitted_rust3arrow.blend
+		map textures/sfx/pitted_rust3arrow_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
@@ -5590,7 +5590,7 @@ textures/sfx/pitted_rust3arrowbase
 textures/sfx/pitted_rust3arrowblocks
 {
 	qer_editorimage textures/sfx/pitted_rust3arrow
-	q3map_lightimage textures/sfx/pitted_rust3arrow.blend
+	q3map_lightimage textures/sfx/pitted_rust3arrow_blend
 	q3map_surfacelight 2000
 //	q3map_surfacelight 500
 	{
@@ -5603,7 +5603,7 @@ textures/sfx/pitted_rust3arrowblocks
 		rgbGen identity
 	}
 	{
-		map textures/sfx/pitted_rust3arrow.blend
+		map textures/sfx/pitted_rust3arrow_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.75 0.25 0 1
 	}

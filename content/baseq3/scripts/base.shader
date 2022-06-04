@@ -11,7 +11,7 @@ textures/base/q1met_redpad
 		rgbGen identity
 	}
 	{
-		map textures/base/q1met_redpad.blend
+		map textures/base/q1met_redpad_blend
 		blendFunc GL_ONE GL_ONE
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
@@ -49,7 +49,7 @@ textures/base/comp_panel
 	}
 
 	{
-		map textures/base/comp_panel.blend
+		map textures/base/comp_panel_blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -112,7 +112,7 @@ textures/base/border11light
 		rgbGen identity
 	}
 	{
-		map textures/base/border11light.blend
+		map textures/base/border11light_blend
 		rgbGen wave sin 0.5 0.5 0 .2
 		blendfunc GL_ONE GL_ONE
 	}
@@ -132,11 +132,11 @@ textures/base/electricwall
 		rgbGen identity
 	}
 	{
-		map textures/organics/wire02a_f.blend
+		map textures/organics/wire02a_f_blend
 		blendFunc GL_ONE GL_ONE
 	}
 	{
-		map textures/base/electric.blend
+		map textures/base/electric_blend
 		tcMod scroll 1 1
 		rgbGen wave sin 1 2 0 1
 		blendfunc GL_ONE GL_ONE

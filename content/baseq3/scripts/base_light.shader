@@ -102,7 +102,7 @@ textures/base_light/proto_lightgreen
 }
 textures/base_light/cornerlight
 {
-	q3map_lightimage textures/base_light/cornerlight.glow
+	q3map_lightimage textures/base_light/cornerlight_glow
 	surfaceparm nomarks
 	q3map_surfacelight 2500
 	{
@@ -118,7 +118,7 @@ textures/base_light/cornerlight
 
 
 	{
-		map textures/base_light/cornerlight.glow
+		map textures/base_light/cornerlight_glow
 		blendfunc GL_one gl_one
 		rgbgen wave sawtooth .6 .1 0 7
 	}
@@ -127,7 +127,7 @@ textures/base_light/cornerlight
 
 textures/base_light/trianglelight
 {
-	q3map_lightimage textures/base_light/trianglelight.blend
+	q3map_lightimage textures/base_light/trianglelight_blend
 	surfaceparm nomarks
 	q3map_surfacelight 2500
 	{
@@ -143,7 +143,7 @@ textures/base_light/trianglelight
 
 
 	{
-		map textures/base_light/trianglelight.blend
+		map textures/base_light/trianglelight_blend
 		blendfunc GL_one gl_one
 		rgbgen wave sawtooth .6 .1 0 7
 	}
@@ -362,7 +362,7 @@ textures/base_light/scrolllight
 textures/base_light/lightflare_wht500
 {
 	qer_editorimage textures/base_light/light_flare
-	q3map_lightimage textures/base_light/light1.blend
+	q3map_lightimage textures/base_light/light1_blend
 	deformVertexes autoSprite
 	q3map_surfacelight	500
 	surfaceparm	trans
@@ -431,7 +431,7 @@ textures/base_light/ceil1_38_10k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_38.blend
+		map textures/base_light/ceil1_38_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -453,7 +453,7 @@ textures/base_light/ceil1_38_20k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_38.blend
+		map textures/base_light/ceil1_38_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -475,7 +475,7 @@ textures/base_light/ceil1_38_30k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_38.blend
+		map textures/base_light/ceil1_38_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -497,7 +497,7 @@ textures/base_light/ceil1_38_40k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_38.blend
+		map textures/base_light/ceil1_38_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -519,7 +519,7 @@ textures/base_light/ceil1_38_50k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_38.blend
+		map textures/base_light/ceil1_38_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -540,7 +540,7 @@ textures/base_light/ceil1_38_70k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_38.blend
+		map textures/base_light/ceil1_38_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -562,7 +562,7 @@ textures/base_light/ceil1_38_90k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_38.blend
+		map textures/base_light/ceil1_38_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -571,7 +571,7 @@ textures/base_light/ceil1_38_90k
 textures/base_light/light1dark
 {
 	qer_editorimage textures/base_light/light1
-	q3map_lightimage textures/base_light/light1.blend
+	q3map_lightimage textures/base_light/light1_blend
 	surfaceparm nomarks
 	q3map_surfacelight 6000
 	light 1
@@ -585,14 +585,14 @@ textures/base_light/light1dark
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light1.blend
+		map textures/base_light/light1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
 textures/base_light/light1red_2000
 {
 	qer_editorimage textures/base_light/light1red
-	q3map_lightimage textures/base_light/light1red.blend
+	q3map_lightimage textures/base_light/light1red_blend
 	surfaceparm nomarks
 	q3map_surfacelight 2000
 	light 1
@@ -606,7 +606,7 @@ textures/base_light/light1red_2000
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light1red.blend
+		map textures/base_light/light1red_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -614,7 +614,7 @@ textures/base_light/light1red_2000
 textures/base_light/light1red_5000
 {
 	qer_editorimage textures/base_light/light1red
-	q3map_lightimage textures/base_light/light1red.blend
+	q3map_lightimage textures/base_light/light1red_blend
 	surfaceparm nomarks
 	q3map_surfacelight 5000
 	light 1
@@ -628,7 +628,7 @@ textures/base_light/light1red_5000
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light1red.blend
+		map textures/base_light/light1red_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -636,7 +636,7 @@ textures/base_light/light1red_5000
 textures/base_light/light1blue_5000
 {
 	qer_editorimage textures/base_light/light1blue
-	q3map_lightimage textures/base_light/light1blue.blend
+	q3map_lightimage textures/base_light/light1blue_blend
 	surfaceparm nomarks
 	q3map_surfacelight 5000
 	light 1
@@ -650,14 +650,14 @@ textures/base_light/light1blue_5000
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light1blue.blend
+		map textures/base_light/light1blue_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
 textures/base_light/light1blue_2000
 {
 	qer_editorimage textures/base_light/light1blue
-	q3map_lightimage textures/base_light/light1blue.blend
+	q3map_lightimage textures/base_light/light1blue_blend
 	surfaceparm nomarks
 	q3map_surfacelight 2000
 	light 1
@@ -671,14 +671,14 @@ textures/base_light/light1blue_2000
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light1blue.blend
+		map textures/base_light/light1blue_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
 textures/base_light/light2blue_2500
 {
 	qer_editorimage textures/base_light/light1blue
-	q3map_lightimage textures/base_light/light1blue1.blend
+	q3map_lightimage textures/base_light/light1blue1_blend
 	surfaceparm nomarks
 	q3map_surfacelight 2500
 	light 1
@@ -692,14 +692,14 @@ textures/base_light/light2blue_2500
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light1blue1.blend
+		map textures/base_light/light1blue1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
 textures/base_light/light1blue_800
 {
 	qer_editorimage textures/base_light/light1blue
-	q3map_lightimage textures/base_light/light1blue.blend
+	q3map_lightimage textures/base_light/light1blue_blend
 	surfaceparm nomarks
 	q3map_surfacelight 800
 	light 1
@@ -713,7 +713,7 @@ textures/base_light/light1blue_800
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light1blue.blend
+		map textures/base_light/light1blue_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -721,7 +721,7 @@ textures/base_light/light1blue_800
 textures/base_light/light1blue_1500
 {
 	qer_editorimage textures/base_light/light1blue
-	q3map_lightimage textures/base_light/light1blue.blend
+	q3map_lightimage textures/base_light/light1blue_blend
 	surfaceparm nomarks
 	q3map_surfacelight 1500
 	light 1
@@ -735,7 +735,7 @@ textures/base_light/light1blue_1500
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light1blue.blend
+		map textures/base_light/light1blue_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -743,7 +743,7 @@ textures/base_light/light1blue_1500
 textures/base_light/light1_5000
 {
 	qer_editorimage textures/base_light/light1
-	q3map_lightimage textures/base_light/light1.blend
+	q3map_lightimage textures/base_light/light1_blend
 	surfaceparm nomarks
 	q3map_surfacelight 5000
 	light 1
@@ -757,7 +757,7 @@ textures/base_light/light1_5000
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light1.blend
+		map textures/base_light/light1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -778,7 +778,7 @@ textures/base_light/light1_3000
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light1.blend
+		map textures/base_light/light1_blend
 		//rgbGen wave sin 0.5 0.5 0 3
 		blendFunc GL_ONE GL_ONE
 	}
@@ -800,7 +800,7 @@ textures/base_light/light1_1500
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light1.blend
+		map textures/base_light/light1_blend
 		//rgbGen wave sin 0.5 0.5 0 3
 		blendFunc GL_ONE GL_ONE
 	}
@@ -821,7 +821,7 @@ textures/base_light/lt2_8000
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light2.blend
+		map textures/base_light/light2_blend
 		rgbGen wave sin .6 .1 .1 .1
 		blendFunc GL_ONE GL_ONE
 	}
@@ -842,7 +842,7 @@ textures/base_light/lt2_4000
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light2.blend
+		map textures/base_light/light2_blend
 		rgbGen wave sin .6 .1 .1 .1
 		blendFunc GL_ONE GL_ONE
 	}
@@ -863,7 +863,7 @@ textures/base_light/lt2_2000
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light2.blend
+		map textures/base_light/light2_blend
 		rgbGen wave sin 0.6 0.1 .1 .1
 		blendFunc GL_ONE GL_ONE
 	}
@@ -884,7 +884,7 @@ textures/base_light/light3b_2500
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light3b.blend
+		map textures/base_light/light3b_blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -904,7 +904,7 @@ textures/base_light/light4_2500
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light4.blend
+		map textures/base_light/light4_blend
 		rgbGen wave sin 0.5 0.5 0 3
 		blendFunc GL_ONE GL_ONE
 	}
@@ -925,7 +925,7 @@ textures/base_light/light5_3000
 		rgbGen identity
 	}
 	{
-		map textures/base_light/xlight5.blend
+		map textures/base_light/xlight5_blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -943,7 +943,7 @@ textures/base_light/light5_5k
 		rgbGen identity
 	}
 //	{
-//		map textures/base_light/light5.blend
+//		map textures/base_light/light5_blend
 //		blendFunc GL_ONE GL_ONE
 //	}
 }
@@ -951,7 +951,7 @@ textures/base_light/light5_5k
 textures/base_light/light5_10k
 {
 	qer_editorimage textures/base_light/light5
-	q3map_lightimage textures/base_light/xlight5.blend
+	q3map_lightimage textures/base_light/xlight5_blend
 	light 1
 	surfaceparm nomarks
 	q3map_surfacelight 10000
@@ -965,7 +965,7 @@ textures/base_light/light5_10k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/xlight5.blend
+		map textures/base_light/xlight5_blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -973,7 +973,7 @@ textures/base_light/light5_10k
 textures/base_light/light5_15k
 {
 	qer_editorimage textures/base_light/light5
-	q3map_lightimage textures/base_light/light5.blend
+	q3map_lightimage textures/base_light/light5_blend
 	light 1
 	surfaceparm nomarks
 	q3map_surfacelight 15000
@@ -1008,7 +1008,7 @@ textures/base_light/light5_20k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light5.blend
+		map textures/base_light/light5_blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -1030,7 +1030,7 @@ textures/base_light/lt6_2500
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light6.blend
+		map textures/base_light/light6_blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -1050,7 +1050,7 @@ textures/base_light/light6_2500
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light6.blend
+		map textures/base_light/light6_blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -1070,7 +1070,7 @@ textures/base_light/lt6_2p5k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/light6.blend
+		map textures/base_light/light6_blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -1089,7 +1089,7 @@ textures/base_light/patch10_pj_lite
 		rgbGen identity
 	}
 	{
-		map textures/base_light/patch10_pj_lite.blend
+		map textures/base_light/patch10_pj_lite_blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -1108,7 +1108,7 @@ textures/base_light/patch10_pj_lite2
 		rgbGen identity
 	}
 	{
-		map textures/base_light/patch10_pj_lite2.blend
+		map textures/base_light/patch10_pj_lite2_blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -1129,7 +1129,7 @@ textures/base_light/patch10_pj_lite2_1000
 		rgbGen identity
 	}
 	{
-		map textures/base_light/patch10_pj_lite2.blend
+		map textures/base_light/patch10_pj_lite2_blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -1148,7 +1148,7 @@ textures/base_light/steedmetallight
 		rgbGen identity
 	}
 	{
-		map textures/base_light/steedmetallight.blend
+		map textures/base_light/steedmetallight_blend
 		rgbGen wave sin 0.5 0.5 0 .2
 		blendFunc GL_ONE GL_ONE
 	}
@@ -1166,7 +1166,7 @@ textures/base_light/border11light
 		rgbGen identity
 	}
 	{
-		map textures/base_light/border11light.blend
+		map textures/base_light/border11light_blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -1174,7 +1174,7 @@ textures/base_light/border11light
 textures/base_light/border11light_300
 {
 	qer_editorimage textures/base_light/border11light
-	q3map_lightimage textures/base_light/border11light.blend
+	q3map_lightimage textures/base_light/border11light_blend
 
 	q3map_surfacelight 235
 	{
@@ -1187,7 +1187,7 @@ textures/base_light/border11light_300
 		rgbGen identity
 	}
 	{
-		map textures/base_light/border11light.blend
+		map textures/base_light/border11light_blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -1208,7 +1208,7 @@ textures/base_light/sm_light1red
 		rgbGen identity
 	}
 	{
-		map textures/base_light/sm_light1red.blend
+		map textures/base_light/sm_light1red_blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -1227,7 +1227,7 @@ textures/base_light/sm_light1blue
 		rgbGen identity
 	}
 	{
-		map textures/base_light/sm_light1blue.blend
+		map textures/base_light/sm_light1blue_blend
 		blendFunc GL_ONE GL_ONE
 	}
 }
@@ -1248,14 +1248,14 @@ textures/base_light/wstlt1_5
 		rgbGen identity
 	}
 	{
-		map textures/base_light/wstlt1_5.blend
+		map textures/base_light/wstlt1_5_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
 textures/base_light/pj_wstlt1_3k
 {
 	qer_editorimage textures/base_light/wstlt1_5
-	q3map_lightimage textures/base_light/wstlt1_5.blend
+	q3map_lightimage textures/base_light/wstlt1_5_blend
 	q3map_surfacelight 3000
 	surfaceparm nomarks
 	light 1
@@ -1271,7 +1271,7 @@ textures/base_light/pj_wstlt1_3k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/wstlt1_5.blend
+		map textures/base_light/wstlt1_5_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1293,7 +1293,7 @@ textures/base_light/baslt3_1_2K
 		rgbGen identity
 	}
 	{
-		map textures/base_light/baslt3_1.blend
+		map textures/base_light/baslt3_1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1316,7 +1316,7 @@ textures/base_light/baslt4_1_2k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/baslt4_1.blend
+		map textures/base_light/baslt4_1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1338,7 +1338,7 @@ textures/base_light/baslt4_1_4k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/baslt4_1.blend
+		map textures/base_light/baslt4_1_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1358,7 +1358,7 @@ textures/base_light/ceil1_37
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_37.blend
+		map textures/base_light/ceil1_37_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1377,7 +1377,7 @@ textures/base_light/ceil1_2
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_2.blend
+		map textures/base_light/ceil1_2_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1397,7 +1397,7 @@ textures/base_light/ceil1_22a
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_22a.blend
+		map textures/base_light/ceil1_22a_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1420,7 +1420,7 @@ textures/base_light/ceil1_22a_trans
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_22a.blend
+		map textures/base_light/ceil1_22a_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1442,7 +1442,7 @@ textures/base_light/ceil1_22a_8k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_22a.blend
+		map textures/base_light/ceil1_22a_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1462,7 +1462,7 @@ textures/base_light/ceil1_4
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_4.blend
+		map textures/base_light/ceil1_4_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1482,7 +1482,7 @@ textures/base_light/ceil1_3
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_3.blend
+		map textures/base_light/ceil1_3_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1503,7 +1503,7 @@ textures/base_light/ceil1_35
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_35.blend
+		map textures/base_light/ceil1_35_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1523,7 +1523,7 @@ textures/base_light/ceil1_30
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_30.blend
+		map textures/base_light/ceil1_30_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1546,7 +1546,7 @@ textures/base_light/ceil1_30_trans
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_30.blend
+		map textures/base_light/ceil1_30_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1569,7 +1569,7 @@ textures/base_light/ceil1_30_8k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_30.blend
+		map textures/base_light/ceil1_30_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1589,7 +1589,7 @@ textures/base_light/ceil1_31
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_31.blend
+		map textures/base_light/ceil1_31_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1609,7 +1609,7 @@ textures/base_light/ceil1_32
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_32.blend
+		map textures/base_light/ceil1_32_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1629,7 +1629,7 @@ textures/base_light/ceil1_33
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_33.blend
+		map textures/base_light/ceil1_33_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1649,7 +1649,7 @@ textures/base_light/ceil1_34
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_34.blend
+		map textures/base_light/ceil1_34_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1671,7 +1671,7 @@ textures/base_light/ceil1_34_5k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_34.blend
+		map textures/base_light/ceil1_34_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1693,7 +1693,7 @@ textures/base_light/ceil1_34_10k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_34.blend
+		map textures/base_light/ceil1_34_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1701,7 +1701,7 @@ textures/base_light/ceil1_34_10k
 textures/base_light/ceil1_34_2k
 {
 	qer_editorimage textures/base_light/ceil1_34
-	q3map_lightimage textures/base_light/ceil1_34.blend
+	q3map_lightimage textures/base_light/ceil1_34_blend
 	surfaceparm nomarks
 	q3map_surfacelight 2000
 	light 1
@@ -1716,7 +1716,7 @@ textures/base_light/ceil1_34_2k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_34.blend
+		map textures/base_light/ceil1_34_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1724,7 +1724,7 @@ textures/base_light/ceil1_34_2k
 textures/base_light/ceil1_34_1k
 {
 	qer_editorimage textures/base_light/ceil1_34
-	q3map_lightimage textures/base_light/ceil1_34.blend
+	q3map_lightimage textures/base_light/ceil1_34_blend
 	surfaceparm nomarks
 	q3map_surfacelight 1000
 	light 1
@@ -1739,7 +1739,7 @@ textures/base_light/ceil1_34_1k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_34.blend
+		map textures/base_light/ceil1_34_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1762,7 +1762,7 @@ textures/base_light/ceil_white5k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_38.blend
+		map textures/base_light/ceil1_38_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1782,7 +1782,7 @@ textures/base_light/ceil1_38
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_38.blend
+		map textures/base_light/ceil1_38_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1803,7 +1803,7 @@ textures/base_light/pjceil1_39_1K
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1824,7 +1824,7 @@ textures/base_light/ceil1_39
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1845,7 +1845,7 @@ textures/base_light/pjceil1_39_1p5k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1866,7 +1866,7 @@ textures/base_light/xceil1_39_2k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1888,7 +1888,7 @@ textures/base_light/xceil1_39_5k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1910,7 +1910,7 @@ textures/base_light/xceil1_39_10k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1932,7 +1932,7 @@ textures/base_light/xceil1_39_15k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1955,7 +1955,7 @@ textures/base_light/xceil1_39_20k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1977,7 +1977,7 @@ textures/base_light/xceil1_39_30k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -1999,7 +1999,7 @@ textures/base_light/xceil1_39_50k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -2021,7 +2021,7 @@ textures/base_light/xceil1_39_70k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -2043,7 +2043,7 @@ textures/base_light/xceil1_39_90k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -2065,7 +2065,7 @@ textures/base_light/xceil1_39_110k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -2087,7 +2087,7 @@ textures/base_light/xceil1_39_500k
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -2111,7 +2111,7 @@ textures/base_light/xceil1_39_1
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -2133,7 +2133,7 @@ textures/base_light/xceil1_39
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -2155,7 +2155,7 @@ textures/base_light/xceil1_39_a
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -2178,7 +2178,7 @@ textures/base_light/xceil1_39_b
 		rgbGen identity
 	}
 	{
-		map textures/base_light/ceil1_39.blend
+		map textures/base_light/ceil1_39_blend
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -2198,7 +2198,7 @@ textures/base_light/jaildr01_3
 		rgbGen identity
 	}
 	{
-		map textures/base_light/jaildr01_3.blend
+		map textures/base_light/jaildr01_3_blend
 		rgbGen wave sin 0.5 0.5 1 1
 		blendfunc GL_ONE GL_ONE
 	}
@@ -2217,7 +2217,7 @@ textures/base_light/jaildr02_3
 		rgbGen identity
 	}
 	{
-		map textures/base_light/jaildr02_3.blend
+		map textures/base_light/jaildr02_3_blend
 		rgbGen wave sin 0.5 0.5 1 1
 		blendfunc GL_ONE GL_ONE
 	}
@@ -2255,7 +2255,7 @@ textures/base_light/jaildr03_2
 		rgbGen identity
 	}
 	{
-		map textures/base_light/jaildr03_2.blend
+		map textures/base_light/jaildr03_2_blend
 		rgbGen wave sin 0.5 0.5 1 1
 		blendfunc GL_ONE GL_ONE
 	}
@@ -2275,7 +2275,7 @@ textures/base_light/jaildr1_3
 		rgbGen identity
 	}
 	{
-		map textures/base_light/jaildr1_3.blend
+		map textures/base_light/jaildr1_3_blend
 		rgbGen wave sin 0.5 0.5 1 1
 		blendfunc GL_ONE GL_ONE
 	}
@@ -2294,7 +2294,7 @@ textures/base_light/jaildr2_3
 		rgbGen identity
 	}
 	{
-		map textures/base_light/jaildr2_3.blend
+		map textures/base_light/jaildr2_3_blend
 //		rgbGen wave sin 0.5 0.5 1 1
 		blendfunc GL_ONE GL_ONE
 	}
@@ -2314,7 +2314,7 @@ textures/base_light/wsupprt1_12
 		rgbGen identity
 	}
 	{
-		map textures/base_light/wsupprt1_12.blend
+		map textures/base_light/wsupprt1_12_blend
 		rgbGen wave sin 0.5 0.5 1 1
 		blendfunc GL_ONE GL_ONE
 	}
@@ -2334,7 +2334,7 @@ textures/base_light/wsupprt1_12h
 		rgbGen identity
 	}
 	{
-		map textures/base_light/wsupprt1_12h.blend
+		map textures/base_light/wsupprt1_12h_blend
 		rgbGen wave sin 0.5 0.5 1 1
 		blendfunc GL_ONE GL_ONE
 	}

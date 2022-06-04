@@ -3192,7 +3192,7 @@ models/players/sarge/cigar
         }
 
 	{
-		map models/players/sarge/cigar.glow
+		map models/players/sarge/cigar_glow
 		blendfunc GL_ONE GL_ONE
 		rgbGen wave triangle .5 1 0 .2
 
@@ -3211,7 +3211,7 @@ models/players/sarge/cigar
 //		rgbGen lightingDiffuse
 //	}
 //	{
-//		map models/powerups/ammo/ammo_rail1.glow
+//		map models/powerups/ammo/ammo_rail1_glow
 //		blendfunc GL_ONE GL_ONE
 //		rgbGen wave sin 0.75 0.25 0 1
 //	}
@@ -3223,7 +3223,7 @@ models/players/sarge/cigar
 //		rgbGen lightingDiffuse
 //	}
 //	{
-//		map models/powerups/ammo/ammo_rail2.glow
+//		map models/powerups/ammo/ammo_rail2_glow
 //		blendfunc GL_ONE GL_ONE
 //	}
 //}
@@ -3282,7 +3282,7 @@ models/powerups/ammo/bfgammo2
 //		rgbGen lightingDiffuse
 //	}
 //	{
-//		map models/powerups/ammo/bounammo2.glow
+//		map models/powerups/ammo/bounammo2_glow
 //		blendfunc GL_ONE GL_ONE
 //		rgbGen lightingDiffuse
 //	}
@@ -3301,7 +3301,7 @@ models/powerups/ammo/bfgammo2
 //		rgbGen lightingDiffuse
 //	}
 //	{
-//		map models/powerups/ammo/flamammo2.glow
+//		map models/powerups/ammo/flamammo2_glow
 //		blendfunc GL_ONE GL_ONE
 //	}
 //}
@@ -3781,7 +3781,7 @@ models/weapons2/railgun/railgun2
 	sort additive
 	cull disable
 	{
-		map	models/weapons2/railgun/railgun2.glow
+		map	models/weapons2/railgun/railgun2_glow
 		blendfunc GL_ONE GL_ONE
 		rgbGen entity	// identity
 	}
@@ -3795,7 +3795,7 @@ models/weapons2/railgun/railgun3
 	}
 
 	{
-		map	models/weapons2/railgun/railgun3.glow
+		map	models/weapons2/railgun/railgun3_glow
 		blendfunc GL_ONE GL_ONE
 		rgbGen entity	// identity
 	}
@@ -4130,7 +4130,7 @@ models/brandon/braneye
 		blendFunc GL_DST_COLOR GL_SRC_ALPHA
 	}
 	{
-		map models/players/light/brandon/braneye.glow
+		map models/players/light/brandon/braneye_glow
 		blendfunc GL_ONE GL_ONE
 	}
 }
@@ -4140,7 +4140,7 @@ models/players/brandon/branhat
 		map models/players/light/brandon/branhat
 	}
 	{
-		map models/players/light/brandon/branhat.glow
+		map models/players/light/brandon/branhat_glow
 		blendfunc GL_ONE GL_ONE
 	}
 }
