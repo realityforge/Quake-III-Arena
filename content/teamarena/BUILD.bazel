@@ -94,7 +94,7 @@ filegroup(
         "scripts/gfx.shader",
         "scripts/gfx2.shader",
         "scripts/gothic_floor2.shader",
-        "scripts/gothic_trim.shader",
+        "scripts/gothic_trim2.shader",
         "scripts/jim_test.shader",
         "scripts/jk_dm1.shader",
         "scripts/jk_tourney1.shader",
