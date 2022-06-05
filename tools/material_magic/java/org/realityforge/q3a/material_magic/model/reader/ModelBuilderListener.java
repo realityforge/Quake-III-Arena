@@ -211,17 +211,12 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   @Override
   public void exitSurfaceParameterDirective( @Nonnull final MaterialsParser.SurfaceParameterDirectiveContext ctx )
   {
-    final TerminalNode label = ctx.LABEL();
-    if ( null != label ) {
-      final String text = label.getText().toLowerCase();
-      final SurfaceParameter parameter = SurfaceParameter.findByName( text );
-      if ( null == parameter ) {
-        throw new IllegalStateException( "Unhandled surfaceParm value " + text );
-      }
-      _material.addSurfaceParameter( parameter );
-    } else if ( null != ctx.DETAIL() ) {
-      _material.addSurfaceParameter( SurfaceParameter.detail );
+    final String text = ctx.paramName.getText().toLowerCase();
+    final SurfaceParameter parameter = SurfaceParameter.findByName( text );
+    if ( null == parameter ) {
+      throw new IllegalStateException( "Unhandled surfaceParm value " + text );
     }
+    _material.addSurfaceParameter( parameter );
   }
 
   @Override

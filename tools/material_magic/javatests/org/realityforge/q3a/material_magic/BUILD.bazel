@@ -43,12 +43,19 @@ material_magic_golden_test(
     ],
 )
 
+material_magic_golden_test(
+    name = "surfaceparm",
+    inputs = ["input.shader"],
+    materials = ["textures/surfaceparm"],
+)
+
 # Runs all the update_goldens targets
 multirun(
     name = "update_goldens",
     commands = [
         ":t1_update_goldens",
         ":t2_update_goldens",
+        ":surfaceparm_update_goldens",
     ],
     jobs = 0,
     stop_on_error = False,
