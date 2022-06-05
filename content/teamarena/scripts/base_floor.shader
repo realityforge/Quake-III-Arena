@@ -679,7 +679,7 @@ textures/base_floor/concretefloor1
 	{
 		map textures/base_floor/concretefloor1
 		blendFunc GL_ONE GL_SRC_ALPHA
-		tcmod turb sin .5 1 0 1
+		tcmod turb .5 1 0 1
 		rgbgen identity
 	}
 
