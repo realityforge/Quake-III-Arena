@@ -1386,7 +1386,7 @@ plasmaExplosion
 railExplosion
 {
 	cull disable
-      {
+        {
 		animmap 5 models/weaphits/ring02_1  models/weaphits/ring02_2  models/weaphits/ring02_3 models/weaphits/ring02_4 gfx/colors/black
 		alphaGen wave inversesawtooth 0 1 0 5
 		blendfunc blend
