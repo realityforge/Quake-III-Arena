@@ -18,30 +18,6 @@ models/weapons2/bfg/bfg
 		rgbGen wave sin .5 .3 0 .5
 	}
 }
-models/weapons2/bfg/bfg_e
-{
-	{
-		map models/weapons2/bfg/envmapbfg
-		rgbGen identity
-		tcMod turb 0 0.5 0 0.1
-		tcMod scale 0.4 0.4
-		tcMod scroll 0.2 -0.2
-	}
-	{
-		map models/weapons2/bfg/envmapbfg
-		blendfunc add
-		rgbGen identity
-		tcMod turb 0 0.5 0 0.1
-		tcMod scale 0.2 0.2
-		tcMod scroll 0.3 0.6
-	}
-	{
-		map textures/effects/tinfx
-		blendfunc add
-		rgbGen lightingDiffuse
-		tcGen environment
-	}
-}
 models/weapons2/bfg/bfg_k
 {
 	{

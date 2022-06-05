@@ -3882,29 +3882,25 @@ models/weapons2/bfg/f_bfg
 models/weapons2/bfg/bfg_e
 {
 	{
-		//map models/weapons2/bfg/bfg_e2
-                map textures/effects/envmapbfg
-		blendfunc GL_ONE GL_ZERO
-                tcMod turb 0 .5 0 .1
-                tcmod scale .4 .4
-                tcMod scroll .2 -.2
-                rgbGen identity
-        }
-        {
-                //map models/weapons2/bfg/bfg_e2
-		//map models/players/doom/phobos_fx
-                map textures/effects/envmapbfg
-		blendfunc GL_ONE GL_ONE
-                tcMod turb 0 .5 0 .1
-                tcmod scale .2 .2
-                tcMod scroll .3 .6
-                rgbGen identity
-        }
-        {
+		map models/weapons2/bfg/envmapbfg
+		rgbGen identity
+		tcMod turb 0 0.5 0 0.1
+		tcMod scale 0.4 0.4
+		tcMod scroll 0.2 -0.2
+	}
+	{
+		map models/weapons2/bfg/envmapbfg
+		blendfunc add
+		rgbGen identity
+		tcMod turb 0 0.5 0 0.1
+		tcMod scale 0.2 0.2
+		tcMod scroll 0.3 0.6
+	}
+	{
 		map textures/effects/tinfx
-                tcGen environment
-                blendFunc GL_ONE GL_ONE
-                rgbGen lightingDiffuse
+		blendfunc add
+		rgbGen lightingDiffuse
+		tcGen environment
 	}
 }
  models/weapons2/bfg/bfg
