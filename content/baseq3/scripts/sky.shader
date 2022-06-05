@@ -624,6 +624,7 @@ textures/skies/xtoxicsky_90_60
 		tcMod scale 3 3
 	}
 }
+
 textures/skies/hellredclouds
 {
 	surfaceparm noimpact
@@ -1120,7 +1121,6 @@ textures/skies/nightsky_xian_dm4
 	q3map_surfacelight 50
 	skyparms env/xnight2 - -
 }
-
 textures/skies/hellskyteam
 {
 	surfaceparm noimpact
