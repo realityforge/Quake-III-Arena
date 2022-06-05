@@ -1353,47 +1353,6 @@ textures/skies/pj_dm9sky
 		tcMod scroll 0.05 0.05
 	}
 }
-textures/common/nightsky
-{
-	surfaceparm sky
-	surfaceparm noimpact
-	surfaceparm nolightmap
-
-	sky env/blue
-	//cloudparms 192 full
-
-	{
-		map textures/bwhtest/tileclouds
-		blendfunc GL_ONE GL_ONE
-		tcMod scroll 0.02 0.02
-		tcMod scale 2 2
-	}
-}
-textures/common/nightsky2
-{
-	surfaceparm sky
-	surfaceparm noimpact
-	surfaceparm nolightmap
-
-	q3map_surfacelight 30
-	sky env/night
-	//cloudparms 192
-
-	{
-		map env/purpleclouds
-		blendfunc GL_ONE GL_ONE
-		tcMod scroll 0.01 0.01
-		tcMod scale 2 2
-	}
-
-	{
-		map env/clouds
-		blendfunc GL_DST_COLOR GL_ZERO
-		tcMod scroll 0.05 0.05
-		tcMod scale 3 3
-	}
-}
-
 textures/skies/nightsky_xian_dm4
 {
 	qer_editorimage textures/skies/nightsky_nocloud
