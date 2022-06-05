@@ -722,20 +722,6 @@ textures/skies/nightsky_xian_dm1
 	skyparms env/xnight2 - -
 }
 
-textures/skies/nightsky_xian_dm3
-{
-	surfaceparm sky
-	surfaceparm noimpact
-	surfaceparm nolightmap
-
-	q3map_surfacelight 500
-	q3map_sun 1 1 1 100 -41 58
-
-	qer_editorimage textures/skies/nightsky_nocloud
-
-	sky	env/xnight2
-}
-
 textures/skies/nightsky_xian_dm15
 {
 	qer_editorimage textures/skies/nightsky_nocloud
