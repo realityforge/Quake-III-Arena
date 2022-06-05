@@ -5,14 +5,9 @@ options { tokenVocab=MaterialsLexer; }
 unit : materials EOF;
 
 materials
-	: documentation material materials
+	: material materials
 	| /* empty */
 ;
-
-documentation
-	: COMMENT*
-	| /* empty */
-	;
 
 material
     : LABEL OPEN_BRACE directives CLOSE_BRACE
