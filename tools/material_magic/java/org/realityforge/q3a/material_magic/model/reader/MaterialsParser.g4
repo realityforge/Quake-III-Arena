@@ -13,6 +13,10 @@ material
     : name=(LABEL|PROJECTIONSHADOW) OPEN_BRACE directives CLOSE_BRACE
     ;
 
+stage
+    : OPEN_BRACE stageDirectives CLOSE_BRACE
+    ;
+
 directives
     : directive directives
     | /* empty */
@@ -23,6 +27,7 @@ directive
     | q3mapDirective
     | surfaceParameterDirective
     | qerDirective
+    | stage
     ;
 
 //General Directives
@@ -75,21 +80,55 @@ deformVertexesDirective : DEFORMVERTEXES deformStageDirective;
 
 surfaceParameterDirective : SURFACE_PARM paramName=(LABEL|DETAIL|NOMIPMAPS);
 
-// TODO: STAGE directives
-// map ($whiteimage|$lightmap|image..)
-// clampmap (image..)
-// animMap <frequency> <image1> .... <imageN>
-// videoMap
-// alphafunc <func>
-// depthFunc <func>
-// detail
-// blendfunc <srcFactor> <dstFactor>
-// or blendfunc <add|filter|blend>
-// rgbGen ....
-// alphaGen ....
-// (texgen|tcGen) ....
-// tcMod <type> <...>
-// depthwrite
+stageDirectives
+    : stageDirective stageDirectives
+    |  /* empty */
+    ;
+
+// TODO: None of the following directives have model representations or are tested.
+stageDirective
+    : mapStageDirective
+    | clampMapStageDirective
+    | animMapStageDirective
+    | videoMapStageDirective
+    | depthFuncStageDirective
+    | detailStageDirective
+    | blendFuncStageDirective
+    | rgbGenStageDirective
+    | alphaGenStageDirective
+    | alphaFuncStageDirective
+    | tcGenStageDirective
+    | tcModStageDirective
+    | depthWriteStageDirective
+    ;
+
+mapStageDirective : MAP texture=(LABEL|STAR_WHITE);
+clampMapStageDirective : CLAMPMAP texture=LABEL;
+animMapStageDirective : ANIMMAP frequency=number texture1=LABEL texture2=LABEL? texture3=LABEL? texture4=LABEL? texture5=LABEL? texture6=LABEL? texture7=LABEL? texture8=LABEL?;
+videoMapStageDirective : VIDEOMAP video=LABEL;
+depthFuncStageDirective : DEPTHFUNC (EQUAL|LEQUAL);
+detailStageDirective : DETAIL;
+blendFuncStageDirective : BLENDFUNC srcBlend=LABEL dstBlend=LABEL?;
+rgbGenStageDirective : RGBGEN (IDENTITY|IDENTITYLIGHTING|ENTITY|ONEMINUSENTITY|VERTEX|EXACTVERTEX|LIGHTINGDIFFUSE|WAVE waveForm);
+alphaFuncStageDirective : ALPHAFUNC (GT0|LT128|GE128);
+alphaGenStageDirective : ALPHAGEN (alphaGenLightingSpecularStageDirective|alphaGenWaveStageDirective|alphaGenVertexStageDirective|alphaGenEntityStageDirective|alphaGenPortalStageDirective);
+// Note: The tcGen "vector" coordinateSource is not currently supported as no media in the game used that capability
+tcGenStageDirective : TCGEN (BASE|LIGHTMAP|ENVIRONMENT);
+tcModStageDirective : TCMOD (tcModRotateStageDirective|tcModScaleStageDirective|tcModScrollStageDirective|tcModStretchStageDirective|tcModTransformStageDirective|tcModTurbStageDirective);
+depthWriteStageDirective : DEPTHWRITE ;
+
+alphaGenLightingSpecularStageDirective : LIGHTINGSPECULAR;
+alphaGenWaveStageDirective : WAVE waveForm;
+alphaGenVertexStageDirective : VERTEX;
+alphaGenEntityStageDirective : ENTITY;
+alphaGenPortalStageDirective : PORTAL portalRange=number;
+
+tcModRotateStageDirective : ROTATE degreesPerSecond=number;
+tcModScaleStageDirective : SCALE sScale=number tScale=number;
+tcModScrollStageDirective : SCROLL sSpeed=number tSpeed=number;
+tcModStretchStageDirective : STRETCH waveForm;
+tcModTransformStageDirective : TRANSFORM m00=number m01=number m10=number m11=number t0=number t1=number;
+tcModTurbStageDirective : TURB base=number amplitude=number phase=number frequency=number;
 
 q3mapDirective
     : q3mapSurfaceLightDirective
