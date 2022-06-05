@@ -88,7 +88,6 @@ filegroup(
         "scripts/base_floor.shader",
         "scripts/base_wall2.shader",
         "scripts/common2.shader",
-        "scripts/ctf.shader",
         "scripts/ctf2.shader",
         "scripts/flayer.shader",
         "scripts/gallery.shader",
