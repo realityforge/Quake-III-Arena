@@ -38,7 +38,7 @@ textures/hell/hellredclouds
 	q3map_surfacelight 280
 
 	//cloudparms 512 full
-	lightning
+	//lightning
 
 	{
 		map env/redclouds
@@ -319,6 +319,6 @@ textures/hell/darkness
 	surfaceparm	fog
 	surfaceparm	nolightmap
 	cull back
-	fogonly
+	//fogonly
 	fogparms 0 0 0 400 256
 }
