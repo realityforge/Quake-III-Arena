@@ -1121,60 +1121,6 @@ textures/skies/nightsky_xian_dm4
 	skyparms env/xnight2 - -
 }
 
-textures/skies/xnightsky
-{
-	surfaceparm sky
-	surfaceparm noimpact
-	surfaceparm nolightmap
-	surfaceparm sky
-
-	q3map_sun 1 1 1 100 -41 58
-	q3map_surfacelight 300
-
-	sky env/xnight2
-	//cloudparms 512 half
-
-	{
-		map env/xnightsky4
-		tcMod scroll 0.005 0.002
-		tcMod scale 12 18
-		blendfunc GL_ONE GL_ONE
-	}
-
-	{
-		map env/xnightsky3
-		tcMod scroll 0.001 0.003
-		tcMod scale 6 10
-		blendfunc GL_DST_COLOR GL_ZERO
-	}
-}
-textures/skies/xnightsky_600
-{
-	surfaceparm sky
-	surfaceparm noimpact
-	surfaceparm nolightmap
-
-	q3map_surfacelight 600
-
-	qer_editorimage textures/skies/xnightsky
-
-	sky env/xnight2
-	//cloudparms 256 half
-
-	{
-		map env/xnightsky
-		blendfunc GL_ONE GL_ONE
-		tcMod scroll 0.010 0.010
-		tcMod scale 10 10
-	}
-
-	{
-		map env/xnightsky1
-		blendfunc GL_DST_COLOR GL_ZERO
-		tcMod scroll 0.010 0.007
-		tcMod scale 10 10
-	}
-}
 textures/skies/hellskyteam
 {
 	surfaceparm noimpact
