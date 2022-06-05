@@ -554,7 +554,7 @@ textures/skies/toxicsky
 	q3map_surfacelight 80
 	q3map_sun	1 1 0.5 100	30 60
 
-//	cloudparms 512 full
+// 	//cloudparms 512 full
 
 	skyparms - 512 -
 
@@ -764,7 +764,7 @@ textures/skies/xtoxicsky_dm4
 	qer_editorimage textures/skies/toxicsky
 
 	//sky env/hell2
-	//cloudparms 512 full
+ 	//cloudparms 512 full
 	//lightning
 	{
 		map textures/skies/inteldimclouds
@@ -823,7 +823,7 @@ textures/skies/xtoxicsky_90_60
 	qer_editorimage textures/skies/toxicsky
 
 	//sky env/hell2
-	//cloudparms 512 full
+ 	//cloudparms 512 full
 	//lightning
 	{
 		map textures/skies/inteldimclouds
@@ -956,7 +956,7 @@ textures/skies/hellsky
 	q3map_sun 5 3 3 60 290 75
 	q3map_surfacelight 90
 
-	//cloudparms 512 full
+ 	//cloudparms 512 full
 	lightning
 
 	{
@@ -1854,7 +1854,7 @@ textures/skies/proto_sky
 	q3map_surfacelight 30
 	q3map_sun .473 .243 .314 30 35 78
 
-//	cloudparms 512 full
+// 	//cloudparms 512 full
 
 	skyparms - 512 -
 
