@@ -759,30 +759,6 @@ textures/skies/hellsky
 		tcMod scale 1 1
 	}
 }
-textures/hell/newhell
-{
-	surfaceparm noimpact
-	surfaceparm nolightmap
-	surfaceparm sky
-	q3map_surfacelight 200
-
-	sky env/hell2
-	//cloudparms 512 full
-	lightning
-
-	{
-		map env/redcloudsa
-		blendFunc GL_ONE GL_ONE
-		tcMod scroll 0.05 0
-		tcMod scale 2 2
-	}
-	{
-		map env/redclouds
-		blendFunc GL_DST_COLOR GL_ZERO
-		tcMod scroll 0.05 0.06
-		tcMod scale 1 1
-	}
-}
 
 //*******************************************************
 //*              Jaquays/steed  environment test 1
