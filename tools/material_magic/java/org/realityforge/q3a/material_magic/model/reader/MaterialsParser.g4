@@ -127,4 +127,4 @@ qerDirective
 
 qerEditorImageDirective : QER_EDITORIMAGE LABEL;
 qerNoCarveDirective : QER_NOCARVE;
-qerTransDirective : QER_TRANS DECIMAL;
+qerTransDirective : QER_TRANS number;

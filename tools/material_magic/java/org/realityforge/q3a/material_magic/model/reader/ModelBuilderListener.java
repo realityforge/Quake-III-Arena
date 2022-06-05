@@ -211,12 +211,17 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   @Override
   public void exitSurfaceParameterDirective( @Nonnull final MaterialsParser.SurfaceParameterDirectiveContext ctx )
   {
-    final String text = ctx.LABEL().getText().toLowerCase();
-    final SurfaceParameter parameter = SurfaceParameter.findByName( text );
-    if ( null == parameter ) {
-      throw new IllegalStateException( "Unhandled surfaceParm value " + text );
+    final TerminalNode label = ctx.LABEL();
+    if ( null != label ) {
+      final String text = label.getText().toLowerCase();
+      final SurfaceParameter parameter = SurfaceParameter.findByName( text );
+      if ( null == parameter ) {
+        throw new IllegalStateException( "Unhandled surfaceParm value " + text );
+      }
+      _material.addSurfaceParameter( parameter );
+    } else if ( null != ctx.DETAIL() ) {
+      _material.addSurfaceParameter( SurfaceParameter.detail );
     }
-    _material.addSurfaceParameter( parameter );
   }
 
   @Override
@@ -234,7 +239,7 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   @Override
   public void exitQerTransDirective( @Nonnull final MaterialsParser.QerTransDirectiveContext ctx )
   {
-    _material.qer().setTransparency( Float.parseFloat( ctx.DECIMAL().getText() ) );
+    _material.qer().setTransparency( parseNumber( ctx.number() ) );
   }
 
   @Override
@@ -338,7 +343,7 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   @Override
   public void exitMaterial( @Nonnull final MaterialsParser.MaterialContext ctx )
   {
-    _material.setName( ctx.LABEL().getText() );
+    _material.setName( ctx.name.getText() );
     _unit.addMaterial( _material );
     _material = null;
   }
