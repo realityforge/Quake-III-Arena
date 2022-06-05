@@ -1363,6 +1363,7 @@ textures/skies/nightsky_xian_dm4
 	q3map_surfacelight 50
 	skyparms env/xnight2 - -
 }
+
 textures/skies/hellskyteam
 {
 	surfaceparm noimpact
