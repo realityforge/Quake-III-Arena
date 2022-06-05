@@ -744,7 +744,7 @@ textures/skies/hellsky
 	q3map_surfacelight 90
 
 	//cloudparms 512 full
-	lightning
+	//lightning
 
 	{
 		map textures/skies/redclouds
