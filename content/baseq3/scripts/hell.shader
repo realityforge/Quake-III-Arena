@@ -37,7 +37,7 @@ textures/hell/hellredclouds
 	surfaceparm nolightmap
 	q3map_surfacelight 280
 
-	cloudparms 512 full
+	//cloudparms 512 full
 	lightning
 
 	{

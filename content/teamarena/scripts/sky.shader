@@ -554,7 +554,7 @@ textures/skies/toxicsky
 	q3map_surfacelight 80
 	q3map_sun	1 1 0.5 100	30 60
 
-//	cloudparms 512 full
+// 	//cloudparms 512 full
 
 	skyparms - 512 -
 
@@ -792,7 +792,7 @@ textures/skies/xtoxicsky_dm4
 	qer_editorimage textures/skies/toxicsky
 
 	//sky env/hell2
-	cloudparms 512 full
+ 	//cloudparms 512 full
 	//lightning
 	{
 		map textures/skies/inteldimclouds
@@ -851,7 +851,7 @@ textures/skies/xtoxicsky_90_60
 	qer_editorimage textures/skies/toxicsky
 
 	//sky env/hell2
-	cloudparms 512 full
+ 	//cloudparms 512 full
 	//lightning
 	{
 		map textures/skies/inteldimclouds
@@ -1060,7 +1060,7 @@ textures/skies/hellsky
 	q3map_sun 5 3 3 60 290 75
 	q3map_surfacelight 90
 
-	cloudparms 512 full
+ 	//cloudparms 512 full
 	lightning
 
 	{
@@ -1084,7 +1084,7 @@ textures/hell/newhell
 	q3map_surfacelight 200
 
 	sky env/hell2
-	cloudparms 512 full
+ 	//cloudparms 512 full
 	lightning
 
 	{
@@ -1488,7 +1488,7 @@ textures/common/nightsky
 	surfaceparm nolightmap
 
 	sky env/blue
-	cloudparms 192 full
+	//cloudparms 192 full
 
 	{
 		map textures/bwhtest/tileclouds
@@ -1505,7 +1505,7 @@ textures/common/nightsky2
 
 	q3map_surfacelight 30
 	sky env/night
-	cloudparms 192
+	//cloudparms 192
 
 	{
 		map env/purpleclouds
@@ -1544,7 +1544,7 @@ textures/skies/xnightsky
 	q3map_surfacelight 300
 
 	sky env/xnight2
-	cloudparms 512 half
+	//cloudparms 512 half
 
 	{
 		map env/xnightsky4
@@ -1571,7 +1571,7 @@ textures/skies/xnightsky_600
 	qer_editorimage textures/skies/xnightsky
 
 	sky env/xnight2
-	cloudparms 256 half
+	//cloudparms 256 half
 
 	{
 		map env/xnightsky
@@ -1788,7 +1788,7 @@ textures/skies/toxicskytim_dm3
 	q3map_surfacelight 80
 	q3map_sun	1 1 0.5 100	30 60
 
-//	cloudparms 512 full
+// 	//cloudparms 512 full
 
 	skyparms - 512 -
 
@@ -2022,7 +2022,7 @@ textures/hell/hellsky2goo
 	q3map_surfacelight 300
 
 	sky env/hell2
-	cloudparms 256
+	//cloudparms 256
 
 	{
 		map env/redcloudsa
@@ -2045,7 +2045,7 @@ textures/castle/sky_castle1
 	surfaceparm nolightmap
 
 	sky env/castle1
-	cloudparms 256
+	//cloudparms 256
 
 	{
 		map env/redcloudsa
@@ -2234,7 +2234,7 @@ textures/skies/proto_sky
 	q3map_surfacelight 30
 	q3map_sun .473 .243 .314 30 35 78
 
-//	cloudparms 512 full
+// 	//cloudparms 512 full
 
 	skyparms - 512 -
 
