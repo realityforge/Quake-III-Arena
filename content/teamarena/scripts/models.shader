@@ -372,10 +372,11 @@ models/mapobjects/skull/monkeyhead
                 rgbGen vertex
         }
 	{
-
+		//animMap 0.5 models/mapobjects/skull/monkeyhead //models/mapobjects/wallhead/femhead2
                 map models/mapobjects/skull/monkeyheadb
 		blendFunc	blend
 		alphaGen	wave sin 0 1 1 .1
+                // alphaGen	wave triangle 0 .7 0 .2
                 rgbGen vertex
 	}
 
@@ -2154,9 +2155,11 @@ models/mapobjects/wallhead/femhead
                 rgbGen vertex
         }
 	{
+		//animMap 0.5 models/mapobjects/wallhead/femhead4 //models/mapobjects/wallhead/femhead2
 	        map models/mapobjects/wallhead/femhead4
 		blendFunc	GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		alphaGen	wave sin 0 1 1 .1
+                // alphaGen	wave triangle 0 .7 0 .2
                 rgbGen vertex
 	}
 
