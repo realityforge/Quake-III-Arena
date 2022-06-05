@@ -10,7 +10,7 @@ materials
 ;
 
 material
-    : LABEL OPEN_BRACE directives CLOSE_BRACE
+    : name=(LABEL|PROJECTIONSHADOW) OPEN_BRACE directives CLOSE_BRACE
     ;
 
 directives
