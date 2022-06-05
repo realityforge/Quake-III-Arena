@@ -1552,38 +1552,6 @@ textures/skies/toxicskytim_dm5
 	}
 }
 
-textures/skies/toxicskytim_dm3
-//used in tim_dm3
-
-{
-	qer_editorimage textures/skies/toxicsky
-	surfaceparm noimpact
-	surfaceparm nolightmap
-	surfaceparm sky
-	skyparms 512 full -
-
-	q3map_surfacelight 80
-	q3map_sun	1 1 0.5 100	30 60
-
-// 	//cloudparms 512 full
-
-	skyparms - 512 -
-
-	{
-		map textures/skies/inteldimclouds
-		tcMod scroll 0.1 0.1
-		tcMod scale 3 2
-		depthWrite
-	}
-	{
-		map textures/skies/intelredclouds
-		blendFunc GL_ONE GL_ONE
-		tcMod scroll 0.05 0.05
-		tcMod scale 3 3
-	}
-}
-
-
 textures/skies/toxicskytim_dm8
 //used in tim_dm8
 
