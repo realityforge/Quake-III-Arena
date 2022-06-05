@@ -1,3 +1,63 @@
+
+textures/ctf/xctf_redflag_noenv
+{
+
+// Xian Hax0ring. Don't want the envmap to cut down the number of passes.
+// Kenneth is my hero.
+
+	qer_editorimage textures/ctf/ctf_redflag
+        tessSize 64
+        deformVertexes wave 194 sin 0 3 0 .4
+        deformVertexes normal .3 .2
+        surfaceparm nomarks
+        cull none
+
+        {
+		map textures/ctf/ctf_redflag
+		rgbGen identity
+	}
+        {
+		map $lightmap
+                blendFunc GL_DST_COLOR GL_ONE_MINUS_DST_ALPHA
+		rgbGen identity
+	}
+        {
+
+        	map textures/sfx/shadow
+                tcGen environment
+                //blendFunc GL_ONE GL_ONE
+                blendFunc GL_DST_COLOR GL_ZERO
+               rgbGen identity
+	}
+}
+
+textures/ctf/xctf_blueflag_noenv
+{
+	qer_editorimage textures/ctf/ctf_blueflag
+        tessSize 64
+        deformVertexes wave 194 sin 0 3 0 .4
+        deformVertexes normal .5 .1
+        surfaceparm nomarks
+        cull none
+
+        {
+		map textures/ctf/ctf_blueflag
+		rgbGen identity
+	}
+        {
+		map $lightmap
+                blendFunc GL_DST_COLOR GL_ONE_MINUS_DST_ALPHA
+		rgbGen identity
+	}
+        {
+        	map textures/sfx/shadow
+                tcGen environment
+                //blendFunc GL_ONE GL_ONE
+                blendFunc GL_DST_COLOR GL_ZERO
+               rgbGen identity
+	}
+}
+
 textures/ctf2/test2_trans_vert
 {
 	qer_editorimage textures/ctf/test2
