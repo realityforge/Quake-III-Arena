@@ -2,42 +2,6 @@
 // this file contains shaders attached models
 //
 
-//
-// holdable powerups
-//
-
-
-models/powerups/holdable/medkit_base
-{
-	{
-		map textures/effects/envmap
-		tcgen environment
-	}
-
-}
-
-models/powerups/holdable/medkit_sphere
-{
-	{
-		map textures/effects/envmapdim
-		tcgen environment
-		blendfunc GL_ONE GL_ONE
-	}
-
-}
-
-models/powerups/holdable/medkit_fluid
-{
-	sort additive
-	cull back
-	{
-		map models/powerups/holdable/medkit_fluid
-		tcMod scroll 0 2
-		blendfunc GL_ONE GL_ONE
-	}
-
-}
-
 models/mapobjects/console/under
 
 {
@@ -4276,7 +4240,40 @@ models/powerups/instant/regen
 	}
 }
 
+//
+// holdable powerups
+//
 
+models/powerups/holdable/medkit_base
+{
+	{
+		map textures/effects/envmap
+		tcgen environment
+	}
+
+}
+
+models/powerups/holdable/medkit_sphere
+{
+	{
+		map textures/effects/envmapdim
+		tcgen environment
+		blendfunc GL_ONE GL_ONE
+	}
+
+}
+
+models/powerups/holdable/medkit_fluid
+{
+	sort additive
+	cull back
+	{
+		map models/powerups/holdable/medkit_fluid
+		tcMod scroll 0 2
+		blendfunc GL_ONE GL_ONE
+	}
+
+}
 
 models/powerups/holdable/teleport_base
 {
