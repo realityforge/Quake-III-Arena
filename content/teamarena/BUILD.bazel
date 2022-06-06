@@ -100,7 +100,6 @@ filegroup(
         "scripts/jk_tourney1.shader",
         "scripts/liquid.shader",
         "scripts/liquid2.shader",
-        "scripts/models.shader",
         "scripts/models2.shader",
         "scripts/models3.shader",
         "scripts/multiplant.shader",
