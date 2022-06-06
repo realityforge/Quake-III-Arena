@@ -26,3 +26,11 @@ SortIncludes:    Never
 AlignAfterOpenBracket: Align
 ---
 Language: ObjC
+---
+Language: Java
+BasedOnStyle:    'Mozilla'
+AlignAfterOpenBracket: Align
+BreakAfterJavaFieldAnnotations: true
+SortJavaStaticImport: After
+ColumnLimit:     120
+SpacesInParentheses: true
