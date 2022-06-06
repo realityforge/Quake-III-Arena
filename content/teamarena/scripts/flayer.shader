@@ -12,20 +12,6 @@ models/players/heads/flayer/flayer_t_red
 
 }
 
-models/players/heads/flayer/flayereye
-{
-	deformVertexes autosprite
-	nomipmaps
-        {
-                map models/players/heads/flayer/flayereye
-                blendFunc blend
-                rgbGen lightingdiffuse
-        }
-
-}
-
-
-
 models/players/heads/flayer/flayer_t_blue
 {
 
