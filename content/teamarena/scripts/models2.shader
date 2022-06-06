@@ -1841,7 +1841,7 @@ models/players/pi/gear01
 models/players/janet/thefallen/thefallen_red
 {
 
-    \\ cull disable
+    // cull disable
         {
                 map models/players/james/red
                 tcGen environment
