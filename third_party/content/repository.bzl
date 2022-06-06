@@ -49,18 +49,6 @@ _convert_tga_to_png(name = "%s")
 exports_files(_PAK_DATA["%s"]["tga_files"])
 """ % (name, name, name)
 
-    if None != data.get("shader_files"):
-        build_content += """
-
-filegroup(
-    name = "shader_files",
-    srcs = _PAK_DATA["%s"]["shader_files"],
-    visibility = ["//visibility:public"],
-)
-
-exports_files(_PAK_DATA["%s"]["shader_files"])
-""" % (name, name)
-
     sha256 = None
     if None != data["info"].get("sha256"):
         sha256 = data["info"]["sha256"]
