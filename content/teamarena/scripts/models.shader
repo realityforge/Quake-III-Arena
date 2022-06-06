@@ -4026,16 +4026,6 @@ models/weapons2/rocketl/rocketl14
 	}
 }
 
-models/weapons/vulcan/f_vulcan
-{
-	sort additive
-	cull disable
-	{
-		map	models/weapons/vulcan/f_vulcan
-		blendfunc add
-	}
-}
-
 //
 // players
 //
