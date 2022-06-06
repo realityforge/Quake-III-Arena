@@ -19,8 +19,9 @@
 #   > chmod u+x .git/hooks/pre-commit
 #
 
-set -e
-
-if [ -f .clang-format ]; then
-  git diff --name-only --cached | sed -ne  '/^(code|content)\/.*\\.[chm]$/p' | xargs clang-format -i
-fi
+for file in `git diff-index --cached --name-only HEAD | grep -E '(code|content|tools)/.*\.(c|m|h)'` ; do
+  if [ -f $file ]; then
+    clang-format -i ${file}
+    git add ${file}
+  fi
+done
