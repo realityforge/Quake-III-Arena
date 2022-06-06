@@ -96,7 +96,6 @@ filegroup(
         "scripts/jim_test.shader",
         "scripts/jk_dm1.shader",
         "scripts/jk_tourney1.shader",
-        "scripts/liquid.shader",
         "scripts/liquid2.shader",
         "scripts/models2.shader",
         "scripts/models3.shader",
