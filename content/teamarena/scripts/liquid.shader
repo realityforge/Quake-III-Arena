@@ -650,8 +650,10 @@ textures/liquids/proto_spec
 
 textures/liquids/lavahell
 {
+	// Added to g3map_global texture on May 11, 1999
 	q3map_globaltexture
 	surfaceparm trans
+	//surfaceparm nonsolid
 	surfaceparm noimpact
 	surfaceparm lava
 	surfaceparm nolightmap
