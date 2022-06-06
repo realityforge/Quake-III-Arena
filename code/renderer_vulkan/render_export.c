@@ -21,45 +21,44 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "render_export.h"
 
-refexport_t* R_Export(void)
-{
-	static refexport_t re;
-	// memset(&re, 0, sizeof(re));
+refexport_t *R_Export(void) {
+  static refexport_t re;
+  // memset(&re, 0, sizeof(re));
 
-	// the RE_ functions are Renderer Entry points
-	re.Shutdown = RE_Shutdown;
-	re.BeginRegistration = RE_BeginRegistration;
-	re.RegisterModel = RE_RegisterModel;
-	re.RegisterSkin = RE_RegisterSkin;
-	re.RegisterShader = RE_RegisterShader;
-	re.RegisterShaderNoMip = RE_RegisterShaderNoMip;
-	re.LoadWorld = RE_LoadWorldMap;
-	re.SetWorldVisData = RE_SetWorldVisData;
-	re.EndRegistration = RE_EndRegistration;
-	re.ClearScene = RE_ClearScene;
-	re.AddRefEntityToScene = RE_AddRefEntityToScene;
-	re.AddPolyToScene = RE_AddPolyToScene;
-	re.LightForPoint = RE_LightForPoint;
-	re.AddLightToScene = RE_AddLightToScene;
-	re.AddAdditiveLightToScene = RE_AddAdditiveLightToScene;
+  // the RE_ functions are Renderer Entry points
+  re.Shutdown = RE_Shutdown;
+  re.BeginRegistration = RE_BeginRegistration;
+  re.RegisterModel = RE_RegisterModel;
+  re.RegisterSkin = RE_RegisterSkin;
+  re.RegisterShader = RE_RegisterShader;
+  re.RegisterShaderNoMip = RE_RegisterShaderNoMip;
+  re.LoadWorld = RE_LoadWorldMap;
+  re.SetWorldVisData = RE_SetWorldVisData;
+  re.EndRegistration = RE_EndRegistration;
+  re.ClearScene = RE_ClearScene;
+  re.AddRefEntityToScene = RE_AddRefEntityToScene;
+  re.AddPolyToScene = RE_AddPolyToScene;
+  re.LightForPoint = RE_LightForPoint;
+  re.AddLightToScene = RE_AddLightToScene;
+  re.AddAdditiveLightToScene = RE_AddAdditiveLightToScene;
 
-	re.RenderScene = RE_RenderScene;
-	re.SetColor = RE_SetColor;
-	re.DrawStretchPic = RE_StretchPic;
-	re.DrawStretchRaw = RE_StretchRaw;
-	re.UploadCinematic = RE_UploadCinematic;
-    
-	re.BeginFrame = RE_BeginFrame;
-	re.EndFrame = RE_EndFrame;
-	re.MarkFragments = RE_MarkFragments;
-	re.LerpTag = RE_LerpTag;
-	re.ModelBounds = RE_ModelBounds;
-	re.RegisterFont = RE_RegisterFont;
-	re.RemapShader = RE_RemapShader;
-	re.GetEntityToken = RE_GetEntityToken;
-	re.inPVS = RE_inPVS;
+  re.RenderScene = RE_RenderScene;
+  re.SetColor = RE_SetColor;
+  re.DrawStretchPic = RE_StretchPic;
+  re.DrawStretchRaw = RE_StretchRaw;
+  re.UploadCinematic = RE_UploadCinematic;
 
-	re.TakeVideoFrame = RE_TakeVideoFrame;
+  re.BeginFrame = RE_BeginFrame;
+  re.EndFrame = RE_EndFrame;
+  re.MarkFragments = RE_MarkFragments;
+  re.LerpTag = RE_LerpTag;
+  re.ModelBounds = RE_ModelBounds;
+  re.RegisterFont = RE_RegisterFont;
+  re.RemapShader = RE_RemapShader;
+  re.GetEntityToken = RE_GetEntityToken;
+  re.inPVS = RE_inPVS;
 
-    return &re;
+  re.TakeVideoFrame = RE_TakeVideoFrame;
+
+  return &re;
 }

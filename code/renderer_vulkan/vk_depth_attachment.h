@@ -4,5 +4,4 @@
 void vk_createDepthAttachment(int Width, int Height);
 void vk_destroyDepthAttachment(void);
 
-
 #endif
