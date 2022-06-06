@@ -228,24 +228,6 @@ textures/skies/blacksky
 	}
 }
 
-textures/skies/xblacksky
-{
-	qer_editorimage textures/skies/blacksky
-	surfaceparm noimpact
-	surfaceparm nolightmap
-	surfaceparm sky
-	//skyparms env/q3sky_red1 - -
-	//skyparms env/kmnight - -
-	//skyparms env/black - -
-	q3map_surfacelight 300
-	q3map_lightsubdivide 512
-	q3map_sun	1 1 1 32	45 90
-	{
-		map	gfx/colors/black
-	}
-}
-
-
 textures/skies/xblacksky_dm7
 {
 	qer_editorimage textures/skies/blacksky
