@@ -75,7 +75,7 @@ models/mapobjects/multiplant/batleaf2
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
-		rgbGen identitylight
+		rgbGen identitylighting
 	}
        {
                map models/mapobjects/multiplant/batleaf2veins
