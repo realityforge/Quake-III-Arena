@@ -314,31 +314,6 @@ textures/skies/tim_dm14red
 	}
 }
 
-textures/skies/hellsky
-{
-	surfaceparm noimpact
-	surfaceparm nomarks
-	surfaceparm nolightmap
-	surfaceparm sky
-
-	q3map_sun 4 3 3 65 290 75
-	q3map_surfacelight 50
-	skyparms - 512 -
-
-	{
-		map textures/skies/dimclouds
-		tcMod scroll 0.05 0
-		tcMod scale 2 2
-		depthWrite
-	}
-	//{
-	//	map textures/skies/dimclouds
-	//	blendfunc add
-	//	tcMod scroll 0.05 0.06
-		//tcMod scale 1 1
-	//}
-}
-
 textures/skies/toxicsky
 {
 	surfaceparm noimpact
