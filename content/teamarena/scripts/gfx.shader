@@ -215,22 +215,6 @@ icons/medkit
 		blendFunc blend
 	}
 }
-icons/kamikaze
-{
-	nopicmip
-	{
-		map icons/kamikaze
-		blendFunc blend
-	}
-}
-icons/portal
-{
-	nopicmip
-	{
-		map icons/portal
-		blendFunc blend
-	}
-}
 
 //
 // powerup icons
@@ -283,59 +267,6 @@ icons/flight
 		blendFunc blend
 	}
 }
-
-//
-// persistant powerup icons
-//
-icons/scout
-{
-	nopicmip
-	{
-		map icons/scout
-		blendFunc blend
-	}
-}
-icons/guard
-{
-	nopicmip
-	{
-		map icons/guard
-		blendFunc blend
-	}
-}
-icons/doubler
-{
-	nopicmip
-	{
-		map icons/doubler
-		blendFunc blend
-	}
-}
-icons/radar
-{
-	nopicmip
-	{
-		map icons/radar
-		blendFunc blend
-	}
-}
-icons/ammo_regen
-{
-	nopicmip
-	{
-		map icons/ammo_regen
-		blendFunc blend
-	}
-}
-icons/invulnerability
-{
-	nopicmip
-	{
-		map icons/invulnerability
-		blendFunc blend
-	}
-}
-
 
 // reward medals used in the game floating over client's heads
 medal_impressive
@@ -485,32 +416,6 @@ icons/iconw_grapple
 	}
 }
 
-icons/iconw_nailgun
-{
-	nopicmip
-	{
-		map icons/nailgun128
-		blendFunc blend
-	}
-}
-
-icons/iconw_chaingun
-{
-	nopicmip
-	{
-		map icons/chaingun128
-		blendFunc blend
-	}
-}
-
-icons/iconw_proxlauncher
-{
-	nopicmip
-	{
-		map icons/proxmine
-		blendFunc blend
-	}
-}
 
 //
 // ammo icons
