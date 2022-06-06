@@ -4110,6 +4110,46 @@ models/players/doom/doom_f
 
 }
 
+models/players/xian/xianfacf
+{
+	{
+		map $whiteimage
+		rgbGen lightingDiffuse
+	}
+	{
+		map models/players/medium/xian/xianfacf
+		rgbGen identity
+		alphaGen lightingSpecular
+		blendFunc GL_DST_COLOR GL_SRC_ALPHA
+	}
+}
+models/brandon/braneye
+{
+	{
+		map $whiteimage
+		rgbGen lightingDiffuse
+	}
+	{
+		map models/players/light/brandon/braneye
+		rgbGen identity
+		alphaGen lightingSpecular
+		blendFunc GL_DST_COLOR GL_SRC_ALPHA
+	}
+	{
+		map models/players/light/brandon/braneye_glow
+		blendfunc add
+	}
+}
+models/players/brandon/branhat
+{
+	{
+		map models/players/light/brandon/branhat
+	}
+	{
+		map models/players/light/brandon/branhat_glow
+		blendfunc add
+	}
+}
 
 //
 // weapons
