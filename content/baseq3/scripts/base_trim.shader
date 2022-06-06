@@ -323,13 +323,13 @@ textures/base_trim/skull_monitor
 	}
         {
                  map textures/sfx/text
-                 blendFunc GL_ONE GL_ONE
+                 blendFunc add
                  tcmod scroll 1 0
                  rgbGen identity
 	}
         {
                  map textures/effects/tinfx2
-                 blendFunc GL_ONE GL_ONE
+                 blendFunc add
                  tcGen environment
                  rgbGen identity
 	}
@@ -397,7 +397,7 @@ textures/base_trim/panelbrn010w
 		map textures/sfx/hologirl2
                 tcmod scale .4 .4
                 tcmod scroll 6 2
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen identity
 	}
 	{
@@ -442,13 +442,13 @@ textures/base_trim/tin
         {
 		map textures/base_trim/tinfx
                 tcgen environment
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen identity
 	}
 
         {
 		map textures/base_trim/tin
-		//blendFunc GL_ONE GL_ONE
+		//blendFunc add
                 blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
@@ -469,13 +469,13 @@ textures/base_trim/dark_tin
         {
 		map textures/base_trim/tinfx
                 tcgen environment
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen identity
 	}
 
         {
 		map textures/base_trim/dark_tin
-		//blendFunc GL_ONE GL_ONE
+		//blendFunc add
                 blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
@@ -500,14 +500,14 @@ textures/base_trim/techborder
                 //tcmod scale  .1 1
                 tcmod scroll .1 0
 
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
         {
 		map textures/base_trim/techborder_fx
                 tcmod scale  .1 1
                 tcmod scroll .1 0
 
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/base_trim/spiderbit
@@ -526,7 +526,7 @@ textures/base_trim/spiderbit
 	}
         {
 		map textures/base_trim/spiderbit_fx
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
                 rgbgen wave triangle .1 .5 0 7
 	}
 
@@ -567,7 +567,7 @@ textures/base_trim/border11light
 	}
 	{
 		map textures/base_trim/border11light_glow
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbgen wave sin .9 .1 0 10
 	}
 }
@@ -588,7 +588,7 @@ textures/base_trim/border11_250
 	}
 	{
 		map textures/base_trim/border11light_glow
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbgen wave sin .9 .1 0 10
 	}
 }
@@ -607,7 +607,7 @@ textures/base_trim/border12b
 	}
 	{
 		map textures/base_trim/border12bfx
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -627,7 +627,7 @@ textures/base_trim/border12b_pj
 	}
 	{
 		map textures/base_trim/border12bfx
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -647,7 +647,7 @@ textures/base_trim/xborder12b
 	}
 	{
 		map textures/base_trim/border12bfx
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -686,14 +686,14 @@ q3map_surfacelight 400
 	}
 	{
 		map textures/organics/wire02a_f
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 	{
 		map textures/sfx/electric2_blend
 		rgbGen wave sin 0.6 1 0 2
 	//	tcMod rotate 54
 		tcMod scroll 0.53 0.43
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 //**********************************************************
@@ -720,7 +720,7 @@ textures/base_trim/electric_blue
 	}
 	{
 		map textures/base_trim/electricwall_blue
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 	{
 		map textures/sfx/electric2_blend
@@ -728,6 +728,6 @@ textures/base_trim/electric_blue
 		tcMod scale 0.5 0.5
 		tcMod rotate 54
 		tcMod scroll 0.53 0.43
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }

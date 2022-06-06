@@ -210,7 +210,7 @@ textures/ctf/ctf_arch_b_shiny
 	}
         {
                 map textures/sfx/specular
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcGen environment
                 tcmod scale 10 10
                 rgbGen identity
@@ -238,7 +238,7 @@ textures/ctf/ctf_arch_r_shiny
 	}
         {
                 map textures/sfx/specular
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcGen environment
                 tcmod scale 10 10
                 rgbGen identity
@@ -560,7 +560,7 @@ textures/ctf/ctf_blueflag
                 tcmod scale 9 3
                 tcmod scroll .1 .7
 
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen identity
 	}
         {
@@ -576,7 +576,7 @@ textures/ctf/ctf_blueflag
         {
         	map textures/sfx/shadow
                 tcGen environment
-                //blendFunc GL_ONE GL_ONE
+                //blendFunc add
                 blendFunc GL_DST_COLOR GL_ZERO
                rgbGen identity
 	}
@@ -599,7 +599,7 @@ textures/ctf/ctf_redflag
                 tcmod scale 9 3
                 tcmod scroll .1 .7
 
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen identity
 	}
         {
@@ -616,7 +616,7 @@ textures/ctf/ctf_redflag
 
         	map textures/sfx/shadow
                 tcGen environment
-                //blendFunc GL_ONE GL_ONE
+                //blendFunc add
                 blendFunc GL_DST_COLOR GL_ZERO
                rgbGen identity
 	}
@@ -626,7 +626,7 @@ powerups/redflag
 	deformVertexes wave 100 sin 3 0 0 0
 	{
 		map textures/effects/redflagmap
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcGen environment
 		tcMod turb 0 0.2 0 1
 	}
@@ -637,7 +637,7 @@ powerups/blueflag
 	deformVertexes wave 100 sin 3 0 0 0
 	{
 		map textures/effects/blueflagmap
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcGen environment
 		tcMod turb 0 0.2 0 1
 	}

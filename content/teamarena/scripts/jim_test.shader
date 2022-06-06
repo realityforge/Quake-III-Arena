@@ -21,7 +21,7 @@ textures/skies/terrain1
 	}
 	{
 		map textures/skies/topclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -50,7 +50,7 @@ textures/skies/jimsky
 	}
 	{
 		map textures/skies/pjbasesky
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll -0.01 -0.012
 		tcMod scale 5 5
 	}
@@ -62,7 +62,7 @@ textures/skies/jimsky
 	//}
 	//{
 	//	map textures/skies/intelredclouds
-	//	blendFunc GL_ONE GL_ONE
+	//	blendFunc add
 	//	tcMod scale 3 3
 	//	tcMod scroll 0.05 0.05
 	//}

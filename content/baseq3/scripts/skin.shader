@@ -15,7 +15,7 @@ textures/skin/teeth
 	}
         {
 		map textures/sfx/specular4
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcGen environment
                 rgbGen identity
         }

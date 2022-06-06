@@ -398,7 +398,7 @@ textures/gothic_button/timbutton
 
 		{
 			map textures/gothic_button/timbutton2
-			blendfunc gl_one gl_one
+			blendfunc add
 			rgbgen wave sin .5 .5 0 1
 		}
 
@@ -426,7 +426,7 @@ textures/gothic_wall/window_evil6a
 
 	{
 		map textures/gothic_wall/window_evil6a_glow
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen identity
 	}
 
@@ -452,7 +452,7 @@ textures/gothic_wall/window_evil7
 
 	{
 		map textures/gothic_wall/window_evil7_glow
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen identity
 	}
 
@@ -532,7 +532,7 @@ textures/gothic_trim/tongue_bone
 	}
 	{
 		map textures/gothic_trim/tongue_bone_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.5 0 0.2
 //		rgbGen wave sin 0.5 0.5 0 0.2
 	}

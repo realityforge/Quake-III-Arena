@@ -10,7 +10,7 @@ textures/gothic_block/largerblock3blood
         }
         {
 		map textures/effects/tinfx3
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcGen environment
         }
 
@@ -37,7 +37,7 @@ textures/gothic_block/blocks17bloody
         }
         {
 		map textures/effects/tinfx3
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcGen environment
         }
 
@@ -360,7 +360,7 @@ textures/gothic_block/blocks15_ow
 		map textures/liquids/proto_grueldark
                 tcmod scroll 0.01 -.02
                 tcmod scale 4 4
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen identity
 	}
 	{
@@ -427,7 +427,7 @@ textures/gothic_block/wetwall
 		map textures/gothic_block/wetwallfx
                 tcmod scroll 0 -.1
                 tcmod scale 2 .6
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen identity
 	}
 	{
@@ -486,7 +486,7 @@ textures/gothic_block/evil_e3bwindow
 	}
 	{
 		map textures/gothic_block/evil2ckillblockglow
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -509,7 +509,7 @@ textures/gothic_block/evil_e3window
 	}
 	{
 		map textures/gothic_block/evil2cglow
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_block/evil_e3window_dark
@@ -530,7 +530,7 @@ textures/gothic_block/evil_e3window_dark
 	}
 	{
 		map textures/gothic_block/evil2cglow
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -573,7 +573,7 @@ textures/gothic_light/flicker_light15k
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen wave noise 0.75 0.25 0 10
 	}
 }
@@ -674,7 +674,7 @@ textures/gothic_block/electrohell
 
 	{
 		map textures/gothic_block/gkc14c
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 		{
 		map textures/sfx/electro2
@@ -684,7 +684,7 @@ textures/gothic_block/electrohell
 		tcMod stretch sin 1 .5 0 .1
 		tcMod scroll .2 .2
 
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_block/mkc_evil_e3window
@@ -705,7 +705,7 @@ textures/gothic_block/mkc_evil_e3window
 	}
 	{
 		map textures/gothic_block/evil2cglow
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_block/blocks18d_trans

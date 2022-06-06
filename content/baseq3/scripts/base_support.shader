@@ -79,13 +79,13 @@ textures/base_support/support1rust
         {
 		map textures/base_trim/tinfx
                 tcgen environment
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen identity
 	}
 
         {
 		map textures/base_support/support1rust
-		//blendFunc GL_ONE GL_ONE
+		//blendFunc add
                 blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}

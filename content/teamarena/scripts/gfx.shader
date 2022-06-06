@@ -129,7 +129,7 @@ powerups/battleSuit
 		tcMod turb 0 0.15 0 0.3
                 tcmod rotate 333
                 tcmod scroll .3 .3
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 powerups/battleWeapon
@@ -142,7 +142,7 @@ powerups/battleWeapon
 		tcMod turb 0 0.15 0 0.3
                 tcmod rotate 333
                 tcmod scroll .3 .3
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -151,7 +151,7 @@ powerups/invisibility
 	{
 		map textures/effects/invismap
                 //map textures/sfx/specular
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod turb 0 0.15 0 0.25
 		tcGen environment
 	}
@@ -161,7 +161,7 @@ powerups/quad
 	deformVertexes wave 100 sin 3 0 0 0
 	{
 		map textures/effects/quadmap2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcGen environment
                 tcmod rotate 30
 		//tcMod turb 0 0.2 0 .2
@@ -173,7 +173,7 @@ powerups/quadWeapon
 	deformVertexes wave 100 sin 0.5 0 0 0
 	{
 		map textures/effects/quadmap2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcGen environment
                 tcmod rotate 30
 		//tcMod turb 0 0.2 0 .2
@@ -185,7 +185,7 @@ powerups/regen
 	deformVertexes wave 100 sin 3 0 0 0
 	{
 		map textures/effects/regenmap2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcGen environment
                 tcmod rotate 30
 		//tcMod turb 0 0.2 0 .2
@@ -781,7 +781,7 @@ teleportEffect
 	cull none
 	{
 		map gfx/misc/teleportEffect2
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
 		rgbGen entity
 		tcMod scale 1 4
 		tcMod scroll 0 2
@@ -817,7 +817,7 @@ wake
 {
 	{
 		clampmap sprites/splash
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
                 tcmod rotate 250
                 tcMod stretch sin .9 0.1 0 0.7
@@ -825,7 +825,7 @@ wake
 	}
         {
 		clampmap sprites/splash
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
                 tcmod rotate -230
                 tcMod stretch sin .9 0.05 0 0.9
@@ -879,7 +879,7 @@ hasteSmokePuff			// drops behind player's feet when speeded
 	{
 		map gfx/misc/smokepuff3
 		blendFunc blend
-                //blendfunc GL_ONE GL_ONE
+                //blendfunc add
 		rgbGen		vertex
 		alphaGen	vertex
 	}
@@ -911,7 +911,7 @@ flareShader
 	cull none
 	{
 		map gfx/misc/flare
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
 	}
 }
@@ -920,7 +920,7 @@ sun
 	cull none
 	{
 		map gfx/misc/sun
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
 	}
 }
@@ -931,7 +931,7 @@ railDisc
         deformVertexes wave 100 sin 0 .5 0 2.4
 	{
 		clampmap gfx/misc/raildisc_mono2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
                  tcMod rotate -30
 	}
@@ -943,7 +943,7 @@ railCore
 	cull none
 	{
 		map gfx/misc/railcorethin_mono
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
 		tcMod scroll -1 0
 	}
@@ -955,7 +955,7 @@ lightningBolt
 	cull none
 	{
 		map gfx/misc/lightning3
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 //                rgbgen wave sin 1 5.1 0 7.1
                 rgbgen wave sin 1 0.5 0 7.1
                  tcmod scale  2 1
@@ -963,7 +963,7 @@ lightningBolt
 	}
     {
 		map gfx/misc/lightning3
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 //                rgbgen wave sin 1 8.3 0 8.1
                 rgbgen wave sin 1 0.8 0 8.1
                 tcmod scale  -1.3 -1
@@ -977,7 +977,7 @@ gfx/misc/tracer
 	cull none
 	{
 		map	gfx/misc/tracer2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 }
 

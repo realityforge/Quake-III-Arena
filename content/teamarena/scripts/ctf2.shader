@@ -25,7 +25,7 @@ textures/ctf/xctf_redflag_noenv
 
         	map textures/sfx/shadow
                 tcGen environment
-                //blendFunc GL_ONE GL_ONE
+                //blendFunc add
                 blendFunc GL_DST_COLOR GL_ZERO
                rgbGen identity
 	}
@@ -52,7 +52,7 @@ textures/ctf/xctf_blueflag_noenv
         {
         	map textures/sfx/shadow
                 tcGen environment
-                //blendFunc GL_ONE GL_ONE
+                //blendFunc add
                 blendFunc GL_DST_COLOR GL_ZERO
                rgbGen identity
 	}
@@ -426,7 +426,7 @@ textures/ctf2/jaildr_bluescroll
 		map textures/ctf2/jaildr_blue_blend
 		rgbGen wave sin 0.5 0.5 1 1
 		tcMod scroll 0 -.25
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -454,7 +454,7 @@ textures/ctf2/blue_pennant
        // {
         //	map textures/sfx/shadow
        //         tcGen environment
-       //         //blendFunc GL_ONE GL_ONE
+       //         //blendFunc add
        //         blendFunc GL_DST_COLOR GL_ZERO
       //         rgbGen identity
 	//}

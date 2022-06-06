@@ -15,7 +15,7 @@ textures/base_object/plasmalogo_1
 	{
 		map textures/base_object/plasmalogo
 		rgbGen wave triangle 0.5 0.5 0.5 0.15
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 
 }
@@ -37,7 +37,7 @@ textures/base_object/quadsign_1
 	{
 		map textures/base_object/quadsign1_blend
 		rgbGen wave triangle 0.5 0.5 0.5 0.15
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 
 }
@@ -59,7 +59,7 @@ textures/base_object/hastesign_1
 	{
 		map textures/base_object/hastesign1_blend
 		rgbGen wave triangle 0.5 0.5 0.5 0.15
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 
 }
@@ -94,7 +94,7 @@ textures/base_object/boxQ3_2
 	}
 	{
 		map textures/base_object/boxQ3_2_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
 }

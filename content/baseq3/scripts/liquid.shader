@@ -173,7 +173,7 @@ textures/liquids/xctf_painwater
 		}
                 {
 			map textures/sfx/bolts
-			blendfunc GL_ONE GL_ONE
+			blendfunc add
 			tcMod scale .2 .2
                         //tcGen environment
 			tcMod scroll .1 .1
@@ -444,7 +444,7 @@ textures/liquids/mercury
         {
 		rgbGen identity
 		map $lightmap
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
 	}
 	{
 		map textures/liquids/mercury
@@ -455,13 +455,13 @@ textures/liquids/mercury
         {
 		map textures/base_trim/tinfx
                 tcgen environment
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen identity
 	}
 
         {
 		map textures/liquids/mercury
-		//blendFunc GL_ONE GL_ONE
+		//blendFunc add
                 blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
@@ -476,7 +476,7 @@ textures/liquids/proto_spec
 	{
                 map $lightmap
 		//map textures/effects/envmapdim2
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
 		tcgen environment
 		 tcmod scale .25 .25
                 //tcmod scroll -.05 -.5
@@ -486,7 +486,7 @@ textures/liquids/proto_spec
 	//	map textures/liquids/proto_gruel2
         //        tcmod scroll .01 .02
         //        tcmod scale .03  .04
-	//	blendFunc GL_ONE GL_ONE
+	//	blendFunc add
 	//	rgbGen identity
 	//}
         //{
@@ -507,7 +507,7 @@ textures/liquids/proto_spec
 	}
         {
 			map textures/liquids/proto_gruel2
-			blendfunc GL_ONE GL_ONE
+			blendfunc add
 			tcMod scale .2 .2
 			tcMod scroll .01 .02
         }
@@ -515,7 +515,7 @@ textures/liquids/proto_spec
 
 	{
 		map $lightmap
-                //blendFunc GL_ONE GL_ONE
+                //blendFunc add
     		rgbgen identity
 	        blendFunc GL_DST_COLOR GL_ZERO
 
@@ -1147,20 +1147,20 @@ textures/liquids/proto_pool3
 
 		{
 			map textures/liquids/proto_pool3
-			blendfunc GL_ONE GL_ONE //SRC_COLOR
+			blendfunc add //SRC_COLOR
 			tcMod scale 1 1
 			tcMod scroll .02 .02
 
 		}
 	        {
 			map textures/liquids/proto_poolpass2
-			blendfunc GL_ONE GL_ONE
+			blendfunc add
 			tcMod scale .5 .6
 			tcMod scroll .06 .04
 		}
 	        {
 			map textures/liquids/proto_poolpass
-			blendfunc GL_ONE GL_ONE
+			blendfunc add
 			tcMod scale .2 .2
 			tcMod scroll .05 .05
 		}
@@ -1199,14 +1199,14 @@ textures/liquids/proto_pool3
 		}
 	       //{
 		//	map textures/liquids/proto_poolpass2
-		//	blendfunc GL_ONE GL_ONE
+		//	blendfunc add
 		//	tcMod scale .5 .6
 		//	//tcMod scroll .6 .04
                 //        tcMod turb .1 .25 0 .01
 		//}
 	        {
 			map textures/liquids/proto_poolpass
-			blendfunc GL_ONE GL_ONE
+			blendfunc add
 			tcMod scale .2 .2
 			//tcMod scroll .5 .05
                         tcMod turb .1 .25 0 .07
@@ -1218,7 +1218,7 @@ textures/liquids/proto_pool3
                 }
                 {
 			map textures/sfx/bolts
-			blendfunc GL_ONE GL_ONE
+			blendfunc add
 			tcMod scale .2 .2
                         //tcGen environment
 			tcMod scroll .1 .1
@@ -1254,7 +1254,7 @@ textures/liquids/jello
 		}
 	        {
 			map textures/liquids/jello2
-			blendfunc GL_ONE GL_ONE
+			blendfunc add
 			tcMod scale .2 .2
 			//tcMod scroll .5 .05
                         tcMod turb .1 .25 0 .07
@@ -1266,7 +1266,7 @@ textures/liquids/jello
                 }
                 {
 			map textures/sfx/bolts2
-			blendfunc GL_ONE GL_ONE
+			blendfunc add
 			tcMod scale .2 .2
                         //tcGen environment
 			tcMod scroll 5  5
@@ -1327,20 +1327,20 @@ textures/liquids/proto_gruel
 
 		{
 			map textures/liquids/proto_gruel
-			// blendfunc GL_ONE GL_ONE
+			// blendfunc add
 			tcMod scale 1 1
 			tcMod scroll .02 .02
 
 		}
 	        {
 			map textures/liquids/proto_gruel
-			blendfunc GL_ONE GL_ONE
+			blendfunc add
 			tcMod scale .5 .6
 			tcMod scroll .06 .04
 		}
 	        //{
 		//	map textures/liquids/proto_poolpass
-		//	blendfunc GL_ONE GL_ONE
+		//	blendfunc add
 		//	tcMod scale .2 .2
 		//	tcMod scroll .05 .05
 		//}
@@ -1508,7 +1508,7 @@ textures/liquids/slime1
 
 		{
 			map textures/liquids/slime7
-			blendfunc GL_ONE GL_ONE
+			blendfunc add
 			tcMod turb .2 .1 1 .05
 			tcMod scale .5 .5
 			tcMod scroll .01 .01
@@ -1557,7 +1557,7 @@ textures/liquids/slime1_2000
 
 		{
 			map textures/liquids/slime7
-			blendfunc GL_ONE GL_ONE
+			blendfunc add
 			tcMod turb .2 .1 1 .05
 			tcMod scale .5 .5
 			tcMod scroll .01 .01
@@ -1645,7 +1645,7 @@ textures/liquids/bloodwater_pj
 
 		{
 			map textures/liquids/bloodwater1
-			blendFunc GL_ONE GL_ONE
+			blendFunc add
 			tcGen environment
 			tcMod scroll 0 .01
 		}
@@ -1692,7 +1692,7 @@ textures/liquids/bloodwater
 
 		{
 			map textures/liquids/bloodwater1
-			blendFunc GL_ONE GL_ONE
+			blendFunc add
 			tcGen environment
 			tcMod scroll 0 .01
 		}
@@ -1735,7 +1735,7 @@ textures/hell/lavasolid
 
 	{
 		map textures/hell/lava2d
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod turb 0 0.25 0 0.05
 	}
 }

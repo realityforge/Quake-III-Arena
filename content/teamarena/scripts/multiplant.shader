@@ -79,7 +79,7 @@ models\mapobjects\multiplant\batleaf2
 	}
        {
                map models\mapobjects\multiplant\batleaf2veins
-//               blendFunc GL_ONE GL_ONE
+//               blendFunc add
                blendFunc blend
                rgbGen wave sin 0 1 0 .33
 //		rgbGen identity

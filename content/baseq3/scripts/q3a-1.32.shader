@@ -37,7 +37,7 @@ models/weapons2/lightning/button
 {
 	{
 		map models/weapons2/lightning/button
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 1 .2 0 1
 	}
 }

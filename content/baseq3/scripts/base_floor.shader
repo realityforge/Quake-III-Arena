@@ -313,7 +313,7 @@ textures/base_floor/diamond2cspot
 
         {
 		map textures/effects/tinfx3
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcGen environment
         }
 
@@ -359,7 +359,7 @@ textures/base_floor/pool_side2
 
 	{
 		map textures/liquids/pool3d_6e
-		blendFunc GL_one GL_ONE
+		blendFunc add
 		tcmod scale .5 .25
 		tcmod scroll .025 .025
 		rgbgen wave sin .75 0 0 0
@@ -394,7 +394,7 @@ textures/base_floor/pool_side3
 
 	{
 		map textures/liquids/pool3d_6e
-		blendFunc GL_one GL_ONE
+		blendFunc add
 		tcmod scale .5 .25
 		tcmod scroll .025 .025
 		rgbgen wave sin .75 0 0 0
@@ -430,7 +430,7 @@ textures/base_floor/pool_floor2
 
 	{
 		map textures/liquids/pool3d_6e
-		blendFunc GL_one GL_ONE
+		blendFunc add
 		tcmod scale .25 .25
 		tcmod scroll .025 .025
 		rgbgen wave sin .75 0 0 0
@@ -465,7 +465,7 @@ textures/base_floor/pool_floor3
 
 	{
 		map textures/liquids/pool3d_6e
-		blendFunc GL_one GL_ONE
+		blendFunc add
 		tcmod scale .25 .25
 		tcmod scroll .025 .025
 		rgbgen wave sin .75 0 0 0
@@ -504,13 +504,13 @@ textures/base_floor/hfloor3
         {
 		map textures/effects/tinfx
                 tcgen environment
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen identity
 	}
 
         {
 		map textures/base_floor/hfloor3
-		//blendFunc GL_ONE GL_ONE
+		//blendFunc add
                 blendFunc GL_DST_COLOR GL_ZERO
 		rgbGen identity
 	}
@@ -540,7 +540,7 @@ textures/base_floor/clangspot
         {
 		map textures/effects/tinfx3
                 //tcGen environment
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcGen environment
 		//tcMod turb 0 0.01 0 9
                 //rgbGen identity
@@ -575,7 +575,7 @@ textures/base_floor/clangspot2
         {
 		map textures/effects/tinfx3
                 //tcGen environment
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcGen environment
 		//tcMod turb 0 0.01 0 9
                 //rgbGen identity
@@ -614,7 +614,7 @@ textures/base_floor/clangdarkspot
         {
 		map textures/effects/tinfx3
                 //tcGen environment
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcGen environment
 		//tcMod turb 0 0.01 0 9
                 //rgbGen identity
@@ -832,12 +832,12 @@ textures/base_floor/tilefloor7_ow
 	}
         {
 		map textures/base_floor/tilefloor7_owfx
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
                 rgbgen wave triangle 1 2 0 7
 	}
         {
 		map textures/base_floor/tilefloor7_owfx
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
                 rgbgen wave triangle 1 5 1 3
 	}
 
@@ -858,12 +858,12 @@ textures/base_floor/skylight1
 	}
         {
 		map textures/base_floor/skylight1_lm
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
                 rgbgen wave triangle .2 2 0 7.7
 	}
         {
 		map textures/base_floor/skylight1_lm
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
                 rgbgen wave triangle .2 5 1 5.1
 	}
 
@@ -1195,12 +1195,12 @@ textures/base_floor/rusty_baphograte
 	}
         {
 		map textures/base_floor/rusty_baphograte2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbgen wave inversesawtooth 0 1 .2 .5
 	}
         {
 		map textures/base_floor/rusty_baphograte3
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbgen wave inversesawtooth 0 1 .4 .5
 	}
 
@@ -1265,7 +1265,7 @@ textures/base_floor/glowfloor2
 	}
 	{
 		map textures/base_floor/glowred1_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.1 1 0.5
 	}
 }
@@ -1285,7 +1285,7 @@ textures/base_floor/glowfloor3
 	}
 	{
 		map textures/base_floor/glowred1_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.1 1 0.5
 	}
 }

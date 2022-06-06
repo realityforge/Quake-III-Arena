@@ -12,7 +12,7 @@ textures/base/q1met_redpad
 	}
 	{
 		map textures/base/q1met_redpad_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
 }
@@ -22,7 +22,7 @@ textures/base/bluegoal
 	{
 		map textures/base/bluegoal
 		tcGen environment
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod turb 0 0.25 0 0.05
 	}
 }
@@ -31,7 +31,7 @@ textures/base/redgoal
 	{
 		map textures/base/redgoal
 		tcGen environment
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod turb 0 0.25 0 0.05
 	}
 }
@@ -50,7 +50,7 @@ textures/base/comp_panel
 
 	{
 		map textures/base/comp_panel_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 }
 
@@ -114,7 +114,7 @@ textures/base/border11light
 	{
 		map textures/base/border11light_blend
 		rgbGen wave sin 0.5 0.5 0 .2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/base/electricwall
@@ -133,12 +133,12 @@ textures/base/electricwall
 	}
 	{
 		map textures/organics/wire02a_f_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 	{
 		map textures/base/electric_blend
 		tcMod scroll 1 1
 		rgbGen wave sin 1 2 0 1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }

@@ -18,13 +18,13 @@ textures/sfx2/senbouncenolit
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -42,7 +42,7 @@ textures/sfx2/flame_nolit_noshad
 
 	{
 		animMap 10 textures/sfx/flame1 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 
 }
@@ -66,7 +66,7 @@ textures/sfx2/demonltblacknolight
 
 	{
 		map textures/sfx/demonltblackfinal_glow2
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave sin .9 .1 0 5
 	}
 
@@ -174,7 +174,7 @@ textures/sfx2/autorain
 		map textures/sfx2/autorain
                 tcMod Scroll .5 -8
                 tcMod turb .1 .25 0 -.1
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
         }
 }
 
@@ -197,20 +197,20 @@ textures/sfx2/flameanim_red_lowlite
 
 	{
 		animMap 10 textures/sfx/r_flame1 textures/sfx/r_flame2 textures/sfx/r_flame3 textures/sfx/r_flame4 textures/sfx/r_flame5 textures/sfx/r_flame6 textures/sfx/r_flame7 textures/sfx/r_flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/r_flame2 textures/sfx/r_flame3 textures/sfx/r_flame4 textures/sfx/r_flame5 textures/sfx/r_flame6 textures/sfx/r_flame7 textures/sfx/r_flame8 textures/sfx/r_flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/r_flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -235,20 +235,20 @@ textures/sfx2/flameanim_blue_lowlite
 
 	{
 		animMap 10 textures/sfx/b_flame1 textures/sfx/b_flame2 textures/sfx/b_flame3 textures/sfx/b_flame4 textures/sfx/b_flame5 textures/sfx/b_flame6 textures/sfx/b_flame7 textures/sfx/b_flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/b_flame2 textures/sfx/b_flame3 textures/sfx/b_flame4 textures/sfx/b_flame5 textures/sfx/b_flame6 textures/sfx/b_flame7 textures/sfx/b_flame8 textures/sfx/b_flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/b_flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -559,7 +559,7 @@ textures/sfx2/padwall_red
 
 	{
 		map textures/sfx2/dm3padwallglow_red
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave sin 0 1 0 .5
 		tcmod scale 1 .05
 		tcmod scroll 0 1
@@ -588,7 +588,7 @@ textures/sfx2/padwall_red_light
 
 	{
 		map textures/sfx2/dm3padwallglow_red
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave sin 0 1 0 .5
 		tcmod scale 1 .05
 		tcmod scroll 0 1
@@ -618,7 +618,7 @@ textures/sfx2/padwall_ntl
 
 	{
 		map textures/sfx2/dm3padwallglow_ntl
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave sin 0 1 0 .5
 		tcmod scale 1 .05
 		tcmod scroll 0 1
@@ -1196,7 +1196,7 @@ textures/sfx2/redgoal2
 		map textures/sfx2/redgoal2
 		tcGen environment
                 tcmod scale 2 2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod turb 0 0.25 0 0.5
 	}
 }
@@ -1212,7 +1212,7 @@ textures/sfx2/bluegoal2
 		map textures/sfx2/bluegoal2
 		tcGen environment
                 tcmod scale 2 2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod turb 0 0.25 0 0.5
 	}
 }
@@ -1229,12 +1229,12 @@ textures/sfx2/swirl_b1
 
 	{
 		clampmap textures/sfx2/swirl_b1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcMod rotate -188
 	}
         {
 		clampmap textures/sfx2/swirl_b2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcMod rotate 333
 	}
 
@@ -1252,12 +1252,12 @@ textures/sfx2/swirl_r1
 
 	{
 		clampmap textures/sfx2/swirl_r1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcMod rotate -188
 	}
         {
 		clampmap textures/sfx2/swirl_r2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcMod rotate 333
 	}
 
@@ -1324,7 +1324,7 @@ textures/sfx2/scrolling_red
 		map textures/base_light/jaildr1_3_blend
 		rgbGen wave sin 0.5 0.5 1 1
 		tcMod scroll 0 -.25
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/sfx2/dist_fog
@@ -1348,20 +1348,20 @@ textures/sfx2/b_flame1
 	cull none
         {
 		animMap 10 textures/sfx/b_flame1 textures/sfx/b_flame2 textures/sfx/b_flame3 textures/sfx/b_flame4 textures/sfx/b_flame5 textures/sfx/b_flame6 textures/sfx/b_flame7 textures/sfx/b_flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/b_flame2 textures/sfx/b_flame3 textures/sfx/b_flame4 textures/sfx/b_flame5 textures/sfx/b_flame6 textures/sfx/b_flame7 textures/sfx/b_flame8 textures/sfx/b_flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/b_flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -1381,12 +1381,12 @@ textures/sfx2/drizzle
 		map textures/sfx2/drizzle
                 tcMod Scroll .5 -8
                 //tcMod turb .1 .25 0 -.1
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
         }
         {
 		map textures/sfx2/drizzle
                 tcMod Scroll .01 -6.3
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
         }
 
 
@@ -1421,13 +1421,13 @@ textures/sfx2/jumppad_q1metal7_97
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -1463,13 +1463,13 @@ textures/sfx2/jumppad_q1metal7_98
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}

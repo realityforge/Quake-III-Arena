@@ -308,7 +308,7 @@ textures/sfx/portal_sfx
 
 	{
 		map textures/sfx/portal_sfx
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave inversesawtooth 0 .5 .2 .5
 	}
 

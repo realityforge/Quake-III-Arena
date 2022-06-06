@@ -317,20 +317,20 @@ textures/liquids2/xproto_pool3
 
 		{
 			map textures/liquids2/proto_pool3
-			blendfunc GL_ONE GL_ONE //SRC_COLOR
+			blendfunc add //SRC_COLOR
 			tcMod scale 1 1
 			tcMod scroll .02 .02
 
 		}
 	        {
 			map textures/liquids2/proto_poolpass2
-			blendfunc GL_ONE GL_ONE
+			blendfunc add
 			tcMod scale .5 .6
 			tcMod scroll .06 .04
 		}
 	        {
 			map textures/liquids2/proto_poolpass
-			blendfunc GL_ONE GL_ONE
+			blendfunc add
 			tcMod scale .2 .2
 			tcMod scroll .05 .05
 		}

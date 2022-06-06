@@ -232,7 +232,7 @@ textures/skies2/mpterra2
 	}
 	{
 		map textures/skies/topclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.0125 0.0125
 	}

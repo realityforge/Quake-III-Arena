@@ -15,7 +15,7 @@ textures/hell/ironcrosslt1_5000
 	}
 	{
 		map textures/hell/ironcrosslt1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/hell/skin7_teeth2
@@ -49,7 +49,7 @@ textures/hell/hellredclouds
 
 	{
 		map textures/dont_use/lightningsky8_kc
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scale 10 10
 		tcMod scroll .2 .2
 	}
@@ -57,7 +57,7 @@ textures/hell/hellredclouds
 
 	{
 		map env/redcloudsa
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.02 0.01
 	}
@@ -77,7 +77,7 @@ textures/hell/hellbutt01
 	}
 	{
 		map textures/hell/hellbutt01_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.5 0 0.2
 	}
 }
@@ -206,7 +206,7 @@ textures/hell/killblock_b
 	}
 	{
 		map textures/hell/killblock_b_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 }
 
@@ -224,7 +224,7 @@ textures/hell/killblock_c
 	}
 	{
 		map textures/hell/killblock_c_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.1 0 0.2
 	}
 }
@@ -242,7 +242,7 @@ textures/hell/bluepad
 	}
 	{
 		map textures/hell/bluepad_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
 }
@@ -262,7 +262,7 @@ textures/hell/light1dark
 	}
 	{
 		map textures/hell/light1dark
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 //		rgbGen wave sin 0.5 0.1 0 .2
 	}
 }
@@ -281,7 +281,7 @@ textures/hell/light1red
 	}
 	{
 		map textures/hell/light1red_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.1 0 .2
 	}
 }
@@ -300,7 +300,7 @@ textures/hell/light1blue
 	}
 	{
 		map textures/hell/light1blue_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.1 0 .2
 	}
 }
