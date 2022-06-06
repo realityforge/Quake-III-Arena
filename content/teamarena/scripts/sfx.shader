@@ -2573,43 +2573,6 @@ textures/sfx/flameanim_blue
 
 }
 
-textures/sfx/flameanim_blue_nolight
-{
-
-	//	*************************************************
-	//	*      	Blue Flame 				*
-	//	*      	July 20, 1999 Surface Light 1800    	*
-	//	*	Please Comment Changes			*
-	//	*************************************************
-	qer_editorimage textures/sfx/b_flame7
-	q3map_lightimage textures/sfx/b_flame7
-	surfaceparm trans
-	surfaceparm nomarks
-	surfaceparm nolightmap
-	cull none
-
-	{
-		animMap 10 textures/sfx/b_flame1 textures/sfx/b_flame2 textures/sfx/b_flame3 textures/sfx/b_flame4 textures/sfx/b_flame5 textures/sfx/b_flame6 textures/sfx/b_flame7 textures/sfx/b_flame8
-		blendFunc add
-		rgbGen wave inverseSawtooth 0 1 0 10
-
-	}
-	{
-		animMap 10 textures/sfx/b_flame2 textures/sfx/b_flame3 textures/sfx/b_flame4 textures/sfx/b_flame5 textures/sfx/b_flame6 textures/sfx/b_flame7 textures/sfx/b_flame8 textures/sfx/b_flame1
-		blendFunc add
-		rgbGen wave sawtooth 0 1 0 10
-	}
-
-
-	{
-		map textures/sfx/b_flameball
-		blendFunc add
-		rgbGen wave sin .6 .2 0 .6
-	}
-
-}
-
-
 textures/sfx/flameanim_blue_pj
 {
 
