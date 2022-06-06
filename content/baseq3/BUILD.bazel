@@ -37,8 +37,6 @@ filegroup(
         "scripts/menu.shader",
         "scripts/models.shader",
         "scripts/organics.shader",
-        "scripts/q3a-1.32.shader",
-        "scripts/q3a-1.32e.shader",
         "scripts/sfx.shader",
         "scripts/shrine.shader",
         "scripts/skin.shader",
