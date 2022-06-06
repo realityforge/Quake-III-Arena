@@ -593,7 +593,7 @@ textures/base_wall2/double_line_blue
 {
 
 	surfaceparm trans
-	surfaceparm nomipmap
+	//surfaceparm nomipmap
 	surfaceparm nolightmap
 
 	{
@@ -609,7 +609,7 @@ textures/base_wall2/double_line_red
 {
 
 	surfaceparm trans
-	surfaceparm nomipmap
+	//surfaceparm nomipmap
 	surfaceparm nolightmap
 
 	{
@@ -713,7 +713,7 @@ textures/base_wall2/techfloor_kc
 textures/base_wall2/floorvent01_kc
 {
 
-	surfaceparm nomipmap
+	//surfaceparm nomipmap
 	surfaceparm alphashadow
 
 
