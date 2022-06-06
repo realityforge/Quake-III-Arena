@@ -151,17 +151,14 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   public void exitSkyParmsDirective( @Nonnull final MaterialsParser.SkyParmsDirectiveContext ctx )
   {
     final SkyDirective sky = _material.sky();
-    final TerminalNode label1 = ctx.LABEL( 0 );
-    if ( null != label1 ) {
-      sky.setFarBox( label1.getText() );
+    if ( null != ctx.farBox ) {
+      sky.setFarBox( ctx.farBox.getText() );
     }
-    final TerminalNode integer = ctx.INTEGER();
-    if ( null != integer ) {
-      sky.setCloudHeight( Integer.parseInt( integer.getText() ) );
+    if ( null != ctx.cloudHeight ) {
+      sky.setCloudHeight( Integer.parseInt( ctx.cloudHeight.getText() ) );
     }
-    final TerminalNode label2 = ctx.LABEL( 1 );
-    if ( null != label2 ) {
-      sky.setNearBox( label2.getText() );
+    if ( null != ctx.nearBox ) {
+      sky.setNearBox( ctx.nearBox.getText() );
     }
   }
 

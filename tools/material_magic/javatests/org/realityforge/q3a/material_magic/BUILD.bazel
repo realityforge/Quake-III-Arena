@@ -44,6 +44,18 @@ material_magic_golden_test(
 )
 
 material_magic_golden_test(
+    name = "skyparms",
+    inputs = ["input.shader"],
+    materials = [
+        "textures/sky1",
+        "textures/sky2",
+        "textures/sky3",
+        "textures/sky4",
+        "textures/sky5",
+    ],
+)
+
+material_magic_golden_test(
     name = "surfaceparm",
     inputs = ["input.shader"],
     materials = ["textures/surfaceparm"],
@@ -55,6 +67,7 @@ multirun(
     commands = [
         ":t1_update_goldens",
         ":t2_update_goldens",
+        ":skyparms_update_goldens",
         ":surfaceparm_update_goldens",
     ],
     jobs = 0,

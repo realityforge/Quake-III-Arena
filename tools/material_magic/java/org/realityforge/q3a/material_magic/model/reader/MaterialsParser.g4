@@ -50,7 +50,7 @@ noMipMapsDirective : NOMIPMAPS;
 portalDirective : PORTAL;
 entityMergableDirective : ENTITYMERGABLE;
 fogParmsDirective : FOGPARMS OPEN_BRACKET? number number number CLOSE_BRACKET? number number? number?;
-skyParmsDirective : SKYPARMS (DASH|LABEL) (DASH|INTEGER) (DASH|LABEL);
+skyParmsDirective : SKYPARMS (DASH|farBox=LABEL) (DASH|cloudHeight=INTEGER) (DASH|nearBox=LABEL);
 polygonOffsetDirective : POLYGONOFFSET;
 sortDirective : SORT (LABEL|number);
 
