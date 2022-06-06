@@ -2266,12 +2266,11 @@ models/weapons2/lightning/crackle1
 
 models/weapons2/lightning/button
 {
-        {
+	{
 		map models/weapons2/lightning/button
 		blendFunc add
 		rgbGen wave sin 1 1 0 1
 	}
-
 }
 
 models/weapons2/lightning/glass
@@ -2863,6 +2862,7 @@ models/players/parkr/parkr_chest
 models/mapobjects/teleporter/energy
 {
    cull disable
+
    surfaceparm trans
 
        {
@@ -4109,7 +4109,6 @@ models/players/doom/doom_f
 	}
 
 }
-
 
 
 //
