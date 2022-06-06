@@ -2863,7 +2863,6 @@ models/mapobjects/teleporter/energy
 {
    cull disable
 
-   surfaceparm trans
 
        {
                map models/mapobjects/teleporter/energy
