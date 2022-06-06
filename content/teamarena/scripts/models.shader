@@ -579,7 +579,7 @@ models/mapobjects/banner/q3banner02
                 blendFunc add
                 tcmod scale  2  1
                 tcmod scroll .33 0
-                rgbGen wave sin 1 .1 0 .2
+                rgbGen wave sin .5 .5 0 .2
 	}
         {
 		map models/mapobjects/banner/q3banner02
