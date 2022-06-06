@@ -417,7 +417,7 @@ textures/skies2/ctf6sky_ter
 //sky for mpterra2
 {
 	qer_editorimage textures/skies2/ctf6skyb
-	qer_lightimage textures/skies2/ctf6sky2b
+	//qer_lightimage textures/skies2/ctf6sky2b
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	q3map_globaltexture
