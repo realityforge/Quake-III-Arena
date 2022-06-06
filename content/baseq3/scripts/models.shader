@@ -2266,12 +2266,11 @@ models/weapons2/lightning/crackle1
 
 models/weapons2/lightning/button
 {
-        {
+	{
 		map models/weapons2/lightning/button
 		blendFunc GL_ONE GL_ONE
-		rgbGen wave sin 1 1 0 1
+		rgbGen wave sin 1 .2 0 1
 	}
-
 }
 
 models/weapons2/lightning/glass
