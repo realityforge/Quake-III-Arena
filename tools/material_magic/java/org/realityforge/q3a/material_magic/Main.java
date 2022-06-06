@@ -81,7 +81,8 @@ public class Main implements Callable<Integer>
       for ( final Material material : unit.getMaterials() ) {
         final Unit newUnit = new Unit();
         newUnit.addMaterial( material );
-        if ( !writeUnit( _outputDirectory.resolve( material.getName() + Unit.EXTENSION ), newUnit ) ) {
+        if ( !writeUnit( _outputDirectory.resolve( material.getName().replace( " ", "_" ) + Unit.EXTENSION ),
+                         newUnit ) ) {
           return 1;
         }
       }

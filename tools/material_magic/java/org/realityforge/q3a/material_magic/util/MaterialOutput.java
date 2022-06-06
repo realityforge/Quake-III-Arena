@@ -87,7 +87,7 @@ public final class MaterialOutput implements AutoCloseable
     } else {
       _emittedMaterial = true;
     }
-    write( label );
+    write( label.contains( " " ) ? "\"" + label + "\"" : label );
     writeSection( body );
   }
 

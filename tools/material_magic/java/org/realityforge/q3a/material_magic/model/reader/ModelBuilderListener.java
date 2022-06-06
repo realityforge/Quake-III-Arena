@@ -335,7 +335,8 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   @Override
   public void exitMaterial( @Nonnull final MaterialsParser.MaterialContext ctx )
   {
-    _material.setName( ctx.name.getText() );
+    final String text = ctx.name.getText();
+    _material.setName( null == ctx.QUOTED_LABEL() ? text : text.substring( 1, text.length() - 1 ) );
     _unit.addMaterial( _material );
     _material = null;
   }
