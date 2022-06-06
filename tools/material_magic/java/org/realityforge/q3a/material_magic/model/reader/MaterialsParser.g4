@@ -78,7 +78,7 @@ deformStageDirective : waveDeformStageDirective
 
 deformVertexesDirective : DEFORMVERTEXES deformStageDirective;
 
-surfaceParameterDirective : SURFACE_PARM paramName=(LABEL|DETAIL|NOMIPMAPS);
+surfaceParameterDirective : SURFACE_PARM paramName=(LABEL|DETAIL);
 
 stageDirectives
     : stageDirective stageDirectives
