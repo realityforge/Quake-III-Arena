@@ -1113,8 +1113,8 @@ textures/sfx2/red_jumpad3
 textures/sfx2/blue_jumpad6
 {
       qer_editorimage textures/sfx2/jumpad_tile01
-	q3mapsurfacelight 500
-	qer_lightimage textures/sfx2/jumpadb2
+	//q3mapsurfacelight 500
+	//qer_lightimage textures/sfx2/jumpadb2
 
         {
 	        map textures/sfx2/jumpadb
@@ -1152,8 +1152,8 @@ textures/sfx2/red_jumpad6
 
 {
       qer_editorimage textures/sfx2/jumpad_tile01
-        q3mapsurfacelight 500
-qer_lightimage textures/sfx2/jumpadr2
+        //q3mapsurfacelight 500
+//qer_lightimage textures/sfx2/jumpadr2
         {
 	        map textures/sfx2/jumpadr
                 blendFunc GL_ONE GL_ZERO

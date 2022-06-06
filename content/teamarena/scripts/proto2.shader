@@ -951,7 +951,7 @@ textures/proto2/blue_zot
 textures/proto2/red_zot2
 {
     cull disable
-	qer_lightimage textures/proto2/red_zot2
+	//qer_lightimage textures/proto2/red_zot2
 	q3map_surfacelight 120
     deformVertexes move 0.2 0 .3  sin 0 5 0 10
     deformVertexes move 0 0.2 0  sin 0 5 0 13
@@ -972,7 +972,7 @@ textures/proto2/blue_zot2
 {
 	qer_editorimage textures/proto2/blue_zot
     cull disable
-	qer_lightimage textures/proto2/blue_zot
+	//qer_lightimage textures/proto2/blue_zot
 	q3map_surfacelight 120
     deformVertexes move 0.2 0 .3  sin 0 5 0 10
     deformVertexes move 0 0.2 0  sin 0 5 0 13
