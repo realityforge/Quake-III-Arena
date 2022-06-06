@@ -4410,26 +4410,6 @@ textures/sfx/pentagramfloor_q1metal7_99
 	}
 }
 
-textures/sfx/pentagramfloor
-{
-	q3map_surfacelight 250
-	{
-		map $lightmap
-		rgbGen identity
-	}
-	{
-		map textures/gothic_floor/xhugefloor2
-		blendFunc filter
-		rgbGen identity
-	}
-	{
-		clampmap textures/sfx/pentagramfloor_red_blend
-		blendFunc add
-		rgbGen wave sin 0.75 0.25 0 0.5
-		tcMod rotate -60
-	}
-}
-
 textures/sfx/q1met_redpad
 {
 	q3map_surfacelight 1000
