@@ -492,6 +492,7 @@ icons/icona_bfg
 	}
 }
 
+
 //
 // armor icons
 //
