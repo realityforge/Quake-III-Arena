@@ -1543,7 +1543,7 @@ models/mapobjects/corpse/torso
                 tcmod scale 4 4
                 tcMod scroll 0 -.09
                 tcMod turb 0 0.05 0 .05
-                rgbGen vertex
+                //rgbGen identity
 	}
         //{
 	//	map textures/liquids/proto_grueldark
