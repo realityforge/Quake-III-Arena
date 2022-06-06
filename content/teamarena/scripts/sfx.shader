@@ -709,18 +709,6 @@ fogparms ( 0 0 0 ) 128
 }
 
 
-textures/sfx/xfinalfog
-{
-qer_editorimage textures/sfx/xdensegreyfog
-qer_nocarve
-surfaceparm	trans
-surfaceparm	nonsolid
-surfaceparm	fog
-surfaceparm	nolightmap
-fogparms ( 0 0 0 ) 500
-
-}
-
 textures/sfx/xfinalfoginvert
 {
 qer_editorimage textures/sfx/xdensegreyfog
@@ -873,35 +861,6 @@ textures/sfx/beam_blue
 
 }
 
-textures/sfx/beam_waterlight1
-	{
-        qer_editorimage textures/sfx/beam_waterlight
-	q3map_globaltexture
-	surfaceparm trans
-        surfaceparm nomarks
-        surfaceparm nonsolid
-	surfaceparm nolightmap
-	q3map_surfacelight 50
-        //qer_trans .3
-	cull none
-	 //surfaceparm nomipmaps
-        //nopicmip
-	{
-		map textures/sfx/beam_waterlight
-		tcMod scale 0.35 0.35
-		tcMod turb 0 0.015 0.5 0.07
-		tcMod Scroll .15 0
-                blendFunc add
-        }
-     	{
-		map textures/sfx/beam_cyan5
-		tcMod scale 0.5 0.5
-		tcMod turb 0 0.025 0.5 0.03
-		tcMod Scroll .15 .15
-                blendFunc add
-        }
-
-}
 textures/sfx/beam_waterlight1
 	{
         qer_editorimage textures/sfx/beam_waterlight
@@ -4428,26 +4387,6 @@ textures/sfx/pentagramfloor_q1metal7_99
 	}
 	{
 		map textures/gothic_floor/q1metalhuge
-		blendFunc filter
-		rgbGen identity
-	}
-	{
-		clampmap textures/sfx/pentagramfloor_red_blend
-		blendFunc add
-		rgbGen wave sin 0.75 0.25 0 0.5
-		tcMod rotate -60
-	}
-}
-
-textures/sfx/pentagramfloor
-{
-	q3map_surfacelight 250
-	{
-		map $lightmap
-		rgbGen identity
-	}
-	{
-		map textures/gothic_floor/xhugefloor2
 		blendFunc filter
 		rgbGen identity
 	}
