@@ -829,7 +829,6 @@ railCore
 
 lightningBolt
 {
-	sort nearest
 	cull none
 	{
 		map gfx/misc/lightning3
