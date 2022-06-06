@@ -32,36 +32,6 @@ textures/sfx/blocks17g_jumpad
 	//	END
 }
 
-textures/sfx/dclogo
-{
-	qer_editorimage textures/gothic_floor/largerblock3b
-	nomipmaps
-
-
-	{
-		map textures/base_floor/clangdark
-		rgbGen identity
-		tcmod scale 4 4
-	}
-
-	{
-		map $lightmap
-		rgbGen identity
-		blendfunc filter
-	}
-
-
-	{
-		clampmap textures/effects/dreamcast-logo2
-		blendfunc add
-		tcmod rotate -75
-		rgbGen wave sin .75 .25 0 .5
-	}
-
-	//	END
-}
-
-
 textures/sfx/bullseye
 {
         cull disable
@@ -182,44 +152,6 @@ textures/sfx/spawn_floord2c
 		rgbGen identity
 	}
 }
-
-textures/sfx/spawn_floord2c_red
-{
-	qer_editorimage textures/sfx/spawn_floord2c
-        {
-		map textures/sfx/proto_zzzt
-                tcmod scroll 0 1
-                tcMod turb 0 .25 0 5.6
-                tcmod scale 2 2
-                blendFunc GL_ONE GL_ZERO
-                rgbGen identity
-	}
-        {
-	        clampmap textures/gothic_block/blocks18cgeomtrn2
-                blendFunc blend
-                tcmod rotate 130
-                tcMod stretch sin .8 0.2 0 .2
-	        rgbGen identity
-	}
-        {
-	        clampmap textures/gothic_block/blocks18cgeomtrn2
-		blendFunc blend
-                tcmod rotate 80
-                tcMod stretch sin .8 0.2 0 .1
-	        rgbGen identity
-	}
-	{
-	        map textures/sfx/spawn_floord2c
-		blendFunc blend
-	        rgbGen identity
-	}
-        {
-		map $lightmap
-                blendFunc GL_DST_COLOR GL_ONE_MINUS_DST_ALPHA
-		rgbGen identity
-	}
-}
-
 
 textures/sfx/spawn_floor
 {
@@ -1330,35 +1262,6 @@ textures/sfx/xian_dm3padwall
 
 }
 
-textures/sfx/xian_dm3padwall_light
-	{
-	q3map_surfacelight 100
-	q3map_lightsubdivide 64
-	q3map_lightimage textures/sfx/xian_dm3padwallglow
-	qer_editorimage textures/sfx/xian_dm3padwall
-
-	{
-		map textures/sfx/xian_dm3padwall
-		rgbGen identity
-	}
-
-	{
-		map $lightmap
-		rgbGen identity
-		blendfunc filter
-	}
-
-
-	{
-		map textures/sfx/xian_dm3padwallglow
-		blendfunc add
-		rgbgen wave sin 0 1 0 .5
-		tcmod scale 1 .05
-		tcmod scroll 0 1
-	}
-
-}
-
 textures/sfx/xmetalfloor_wall_5b
 {
 	qer_editorimage textures/sfx/metalfloor_wall_5b
@@ -2204,36 +2107,6 @@ textures/sfx/xflame2_1800
 	}
 
 }
-
-textures/sfx/xflame2_nolight
-{
-	surfaceparm nomarks
-	surfaceparm nolightmap
-	cull none
-	qer_editorimage textures/sfx/flame1
-
-
-	{
-		animMap 10 textures/sfx/flame1 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8
-		blendFunc add
-		rgbGen wave inverseSawtooth 0 1 0 10
-
-	}
-	{
-		animMap 10 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8 textures/sfx/flame1
-		blendFunc add
-		rgbGen wave sawtooth 0 1 0 10
-	}
-
-
-	{
-		map textures/sfx/flameball
-		blendFunc add
-		rgbGen wave sin .6 .2 0 .6
-	}
-
-}
-
 
 // Tim's goofy experiment
 textures/sfx/grid
@@ -4867,44 +4740,6 @@ textures/sfx/teslacoil3
 
 }
 
-textures/sfx/teslacoil3blue
-{
-	cull none
-	q3map_lightimage textures/sfx/tesla1blue
-	q3map_surfacelight 100
-	qer_editorimage textures/sfx/teslacoil
-	surfaceparm nolightmap
-
-
-
-	{
-		map textures/sfx/cabletest2
-		blendfunc blend
-	}
-
-
-	{
-		map textures/sfx/electricslimeblue
-		blendfunc add
-		rgbGen wave square .25 .25 0 2.5
-		tcmod scale 1 1
-		tcMod scroll 1 1
-	}
-
-
-
-	{
-		map textures/sfx/tesla1blue
-		blendfunc add
-		rgbgen wave square 0 1 0 3
-		tcmod scale 1 1
-		tcMod scroll -2 1
-	}
-
-}
-
-
-
 textures/sfx/teslacoiltrans
 {
 	qer_editorimage textures/sfx/tesla1
@@ -5030,33 +4865,6 @@ surfaceparm	nolightmap
 fogparms ( .729 .729 .780 ) 464
 
 }
-
-//Tim's fog for map mptim_ctf1
-textures/sfx/fog_mptimctf1
-{
-
-surfaceparm	trans
-surfaceparm	nonsolid
-surfaceparm	fog
-surfaceparm	nolightmap
-
-fogparms ( .729 .729 .780 ) 300
-
-}
-
-textures/sfx/xfog_1024
-{
-qer_editorimage textures/sfx/fog_grey
-qer_nocarve
-surfaceparm	trans
-surfaceparm	nonsolid
-surfaceparm	fog
-surfaceparm	nolightmap
-
-fogparms ( .729 .729 .780 ) 4000
-
-}
-
 
 //Paul's fog for map pj_dm4
 textures/sfx/fog_pjdm1
@@ -5716,42 +5524,5 @@ textures/sfx/pureblack
 	surfaceparm nolightmap
 	{
 		map textures/skies/blacksky
-	}
-}
-
-
-textures/stone/pjrock1_trans
-{
-	qer_editorimage textures/stone/pjrock1
-	surfaceparm nonsolid
-	{
-		map $lightmap
-		rgbGen identity
-
-	}
-	{
-		map textures/stone/pjrock1
-		rgbGen identity
-		blendFunc filter
-
-
-	}
-}
-
-textures/stone/pjrock7_trans
-{
-	qer_editorimage textures/stone/pjrock7
-	surfaceparm nonsolid
-	{
-		map $lightmap
-		rgbGen identity
-
-	}
-	{
-		map textures/stone/pjrock7
-		rgbGen identity
-		blendFunc filter
-
-
 	}
 }
