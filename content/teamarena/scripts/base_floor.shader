@@ -1,7 +1,7 @@
 textures/base_floor/techfloor2
 {
         cull disable
-        surfaceparm alphashadow
+        //surfaceparm trans
         surfaceparm nomarks
         //nomipmaps
 
