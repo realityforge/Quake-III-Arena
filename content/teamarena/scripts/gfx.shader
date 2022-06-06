@@ -268,6 +268,7 @@ icons/flight
 	}
 }
 
+
 // reward medals used in the game floating over client's heads
 medal_impressive
 {
@@ -415,7 +416,6 @@ icons/iconw_grapple
 		blendFunc blend
 	}
 }
-
 
 //
 // ammo icons
