@@ -651,8 +651,8 @@ textures/liquids/proto_spec
 textures/liquids/lavahell
 {
 	q3map_globaltexture
-	surfaceparm noimpact
 	surfaceparm trans
+	surfaceparm noimpact
 	surfaceparm lava
 	surfaceparm nolightmap
 	q3map_surfacelight 600
