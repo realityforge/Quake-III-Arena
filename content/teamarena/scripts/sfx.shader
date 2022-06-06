@@ -709,18 +709,6 @@ fogparms ( 0 0 0 ) 128
 }
 
 
-textures/sfx/xfinalfog
-{
-qer_editorimage textures/sfx/xdensegreyfog
-qer_nocarve
-surfaceparm	trans
-surfaceparm	nonsolid
-surfaceparm	fog
-surfaceparm	nolightmap
-fogparms ( 0 0 0 ) 500
-
-}
-
 textures/sfx/xfinalfoginvert
 {
 qer_editorimage textures/sfx/xdensegreyfog
