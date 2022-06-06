@@ -534,7 +534,7 @@ textures/base_floor/clangspot
                 tcMod scroll .01 .03
 
 		tcMod turb 0 0.05 0 .05
-                rgbGen identity
+                //rgbGen identity
 	}
 
         {
@@ -543,7 +543,7 @@ textures/base_floor/clangspot
                 blendFunc add
                 tcGen environment
 		//tcMod turb 0 0.01 0 9
-                rgbGen identity
+                //rgbGen identity
 	}
 
         {
