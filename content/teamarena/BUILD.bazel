@@ -113,7 +113,6 @@ filegroup(
         "scripts/stone2.shader",
         "scripts/team.shader",
         "scripts/terrain.shader",
-        "scripts/tim.shader",
         "scripts/ui.shader",
         "scripts/ui_hud.shader",
         "scripts/ui_kc.shader",
