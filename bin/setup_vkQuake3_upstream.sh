@@ -44,7 +44,7 @@ git checkout -B upstream/vkQuake3_formatted
 git show ${BRANCH_WITH_CLANG_FORMAT}:.clang-format >.clang-format
 # shellcheck disable=SC2038
 find code \
-    \( -name '*.h' -or -name '*.c' -or -name '*.m' \) \
+    \( -name '*.h' -or -name '*.c' -or -name '*.m' -or -name '*.hpp' -or -name '*.cpp' -or -name '*.H' -or -name '*.HPP' -or -name '*.CPP' -or -name '*.java' \) \
     ! -path 'code/AL/*' -and \
     ! -path 'code/curl-7.54.0/*' -and \
     ! -path 'code/jpeg-8c/*' -and \
