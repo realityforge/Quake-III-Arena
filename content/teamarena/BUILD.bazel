@@ -91,7 +91,6 @@ filegroup(
         "scripts/ctf2.shader",
         "scripts/flayer.shader",
         "scripts/gallery.shader",
-        "scripts/gfx.shader",
         "scripts/gfx2.shader",
         "scripts/gothic_floor2.shader",
         "scripts/gothic_trim2.shader",
