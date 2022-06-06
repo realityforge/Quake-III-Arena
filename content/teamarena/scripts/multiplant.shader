@@ -1,10 +1,10 @@
-models\mapobjects\multiplant\fern
+models/mapobjects/multiplant/fern
 {
     surfaceparm alphashadow
     cull none
     nopicmip
 	{
-		map models\mapobjects\multiplant\fern
+		map models/mapobjects/multiplant/fern
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -18,13 +18,13 @@ models\mapobjects\multiplant\fern
 	}
 }
 
-models\mapobjects\multiplant\bannanaleaf
+models/mapobjects/multiplant/bannanaleaf
 {
     surfaceparm alphashadow
     cull none
     nopicmip
 	{
-		map models\mapobjects\multiplant\bannanaleaf
+		map models/mapobjects/multiplant/bannanaleaf
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -38,13 +38,13 @@ models\mapobjects\multiplant\bannanaleaf
 	}
 }
 
-models\mapobjects\multiplant\batleaf
+models/mapobjects/multiplant/batleaf
 {
     surfaceparm alphashadow
     cull none
 
 	{
-		map models\mapobjects\multiplant\batleaf
+		map models/mapobjects/multiplant/batleaf
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -60,7 +60,7 @@ models\mapobjects\multiplant\batleaf
 	}
 }
 
-models\mapobjects\multiplant\batleaf2
+models/mapobjects/multiplant/batleaf2
 {
     surfaceparm alphashadow
     cull none
@@ -71,14 +71,14 @@ models\mapobjects\multiplant\batleaf2
 
 
 	{
-		map models\mapobjects\multiplant\batleaf2
+		map models/mapobjects/multiplant/batleaf2
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
 		rgbGen identitylighting
 	}
        {
-               map models\mapobjects\multiplant\batleaf2veins
+               map models/mapobjects/multiplant/batleaf2veins
 //               blendFunc add
                blendFunc blend
                rgbGen wave sin 0 1 0 .33
@@ -94,13 +94,13 @@ models\mapobjects\multiplant\batleaf2
 	}
 }
 
-models\mapobjects\multiplant\leaf1
+models/mapobjects/multiplant/leaf1
 {
     surfaceparm alphashadow
     cull none
 
 	{
-		map models\mapobjects\multiplant\leaf1
+		map models/mapobjects/multiplant/leaf1
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -116,13 +116,13 @@ models\mapobjects\multiplant\leaf1
 	}
 }
 
-models\mapobjects\multiplant\leaf2
+models/mapobjects/multiplant/leaf2
 {
     surfaceparm alphashadow
     cull none
 
 	{
-		map models\mapobjects\multiplant\leaf2
+		map models/mapobjects/multiplant/leaf2
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -138,13 +138,13 @@ models\mapobjects\multiplant\leaf2
 	}
 }
 
-models\mapobjects\multiplant\leaf3
+models/mapobjects/multiplant/leaf3
 {
     surfaceparm alphashadow
     cull none
 
 	{
-		map models\mapobjects\multiplant\leaf3
+		map models/mapobjects/multiplant/leaf3
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -160,13 +160,13 @@ models\mapobjects\multiplant\leaf3
 	}
 }
 
-models\mapobjects\multiplant\pleaf1
+models/mapobjects/multiplant/pleaf1
 {
     surfaceparm alphashadow
     cull none
 
 	{
-		map models\mapobjects\multiplant\pleaf1
+		map models/mapobjects/multiplant/pleaf1
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -182,13 +182,13 @@ models\mapobjects\multiplant\pleaf1
 	}
 }
 
-models\mapobjects\multiplant\pleaf2
+models/mapobjects/multiplant/pleaf2
 {
     surfaceparm alphashadow
     cull none
 
 	{
-		map models\mapobjects\multiplant\pleaf2
+		map models/mapobjects/multiplant/pleaf2
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -204,13 +204,13 @@ models\mapobjects\multiplant\pleaf2
 	}
 }
 
-models\mapobjects\multiplant\pleaf3
+models/mapobjects/multiplant/pleaf3
 {
     surfaceparm alphashadow
     cull none
 
 	{
-		map models\mapobjects\multiplant\pleaf3
+		map models/mapobjects/multiplant/pleaf3
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -226,13 +226,13 @@ models\mapobjects\multiplant\pleaf3
 	}
 }
 
-models\mapobjects\multiplant\palmfrond
+models/mapobjects/multiplant/palmfrond
 {
     surfaceparm alphashadow
     cull none
     nopicmip
 	{
-		map models\mapobjects\multiplant\palmfrond
+		map models/mapobjects/multiplant/palmfrond
 		blendFunc GL_ONE GL_ZERO
 		alphaFunc GE128
 		depthWrite
@@ -245,12 +245,12 @@ models\mapobjects\multiplant\palmfrond
 		depthFunc equal
 	}
 }
-models\mapobjects\multiplant\invisible
+models/mapobjects/multiplant/invisible
 {
     surfaceparm alphashadow
 	surfaceparm nolightmap
         {
-                map models\mapobjects\multiplant\invisible
+                map models/mapobjects/multiplant/invisible
                 alphaFunc GE128
 		depthWrite
 		rgbGen vertex
