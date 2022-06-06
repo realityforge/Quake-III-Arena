@@ -28,7 +28,7 @@ textures/base_trim/pewter_nonsolid
 	{
 		map textures/base_trim/dirty_pewter
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}
@@ -352,7 +352,7 @@ textures/base_trim/deeprust_trans
 	{
 		map textures/base_trim/deeprust
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}
@@ -376,7 +376,7 @@ textures/base_trim/yellow_rustc
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -449,7 +449,7 @@ textures/base_trim/tin
         {
 		map textures/base_trim/tin
 		//blendFunc add
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -476,7 +476,7 @@ textures/base_trim/dark_tin
         {
 		map textures/base_trim/dark_tin
 		//blendFunc add
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 
@@ -493,7 +493,7 @@ textures/base_trim/techborder
 	{
 		map textures/base_trim/techborder
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		map textures/base_trim/techborder_fx
@@ -521,7 +521,7 @@ textures/base_trim/spiderbit
 	}
         {
 		map textures/base_trim/spiderbit
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
                 rgbGen identity
 	}
         {
@@ -548,7 +548,7 @@ textures/base_trim/proto_fence
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -563,7 +563,7 @@ textures/base_trim/border11light
 	{
 		map textures/base_trim/border11light
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		map textures/base_trim/border11light_glow
@@ -584,7 +584,7 @@ textures/base_trim/border11_250
 	{
 		map textures/base_trim/border11light
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		map textures/base_trim/border11light_glow
@@ -603,7 +603,7 @@ textures/base_trim/border12b
 	{
 		map textures/base_trim/border12b
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		map textures/base_trim/border12bfx
@@ -623,7 +623,7 @@ textures/base_trim/border12b_pj
 	{
 		map textures/base_trim/border12b
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		map textures/base_trim/border12bfx
@@ -643,7 +643,7 @@ textures/base_trim/xborder12b
 	{
 		map textures/base_trim/border12b
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		map textures/base_trim/border12bfx
@@ -682,7 +682,7 @@ q3map_surfacelight 400
 	{
 		map textures/organics/wire02a_f
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		map textures/organics/wire02a_f
@@ -716,7 +716,7 @@ textures/base_trim/electric_blue
 		map textures/base_trim/electricwall_blue
 		tcMod scale 0.5 0.5
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		map textures/base_trim/electricwall_blue

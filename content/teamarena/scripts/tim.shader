@@ -73,7 +73,7 @@ textures/tim/timborder11c
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{

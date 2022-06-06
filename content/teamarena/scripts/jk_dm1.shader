@@ -102,7 +102,7 @@ textures/jk_dm1/jk_bouncepad_floor1
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -153,7 +153,7 @@ textures/jk_dm1/jkt1_q3abanner
 	{
 		map $lightmap
 	        rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -181,7 +181,7 @@ textures/jk_dm1/jk_t1fog_test
 
         {
 		map textures/jk_dm1/jkt1_fogcloud3_test
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -189,7 +189,7 @@ textures/jk_dm1/jk_t1fog_test
 
 	{
 		map textures/jk_dm1/jkt1_fogcloud3_test
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity

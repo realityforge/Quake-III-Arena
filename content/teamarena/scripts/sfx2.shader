@@ -13,7 +13,7 @@ textures/sfx2/senbouncenolit
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -60,7 +60,7 @@ textures/sfx2/demonltblacknolight
 
 	{
 		map textures/sfx/demonltblackfinal
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
@@ -140,7 +140,7 @@ textures/sfx2/ouchfog
 
 	{
 		map textures/sfx2/ouchfog
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -148,7 +148,7 @@ textures/sfx2/ouchfog
 
 	{
 		map textures/sfx2/ouchfog
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -553,7 +553,7 @@ textures/sfx2/padwall_red
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 
@@ -582,7 +582,7 @@ textures/sfx2/padwall_red_light
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 
@@ -612,7 +612,7 @@ textures/sfx2/padwall_ntl
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 
@@ -1279,7 +1279,7 @@ textures/sfx2/jumportal01
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1300,7 +1300,7 @@ textures/sfx2/jumportal02
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1316,7 +1316,7 @@ textures/sfx2/scrolling_red
 	}
 	{
 		map textures/base_light/jaildr1_3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		tcMod scroll 0 -.25
 		rgbGen identity
 	}
@@ -1416,7 +1416,7 @@ textures/sfx2/jumppad_q1metal7_97
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -1458,7 +1458,7 @@ textures/sfx2/jumppad_q1metal7_98
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{

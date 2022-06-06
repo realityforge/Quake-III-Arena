@@ -19,7 +19,7 @@ textures/liquids2/calm_poollight2nt
 
 		{
 			map textures/liquids/pool3d_5c2
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 			tcmod scale .5 .5
 			tcmod transform 1.5 0 1.5 1 1 2
@@ -28,7 +28,7 @@ textures/liquids2/calm_poollight2nt
 
 		{
 			map textures/liquids/pool3d_6c2
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 			tcmod scale .5 .5
 			tcmod transform 0 1.5 1 1.5 2 1
@@ -37,7 +37,7 @@ textures/liquids2/calm_poollight2nt
 
 		{
 			map textures/liquids/pool3d_3c2
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 			tcmod scale .25 .5
 			tcmod scroll .001 .025
@@ -337,7 +337,7 @@ textures/liquids2/xproto_pool3
 	        {
 		        map $lightmap
 			rgbgen identity
-			blendfunc GL_DST_COLOR GL_ZERO
+			blendfunc filter
                 }
 
 

@@ -40,7 +40,7 @@ textures/ctf/blue_telep
         {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 
@@ -84,7 +84,7 @@ textures/ctf/red_telep
         {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 
@@ -103,7 +103,7 @@ textures/ctf/test2_trans
 	{
 		map textures/ctf/test2
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 }
@@ -120,7 +120,7 @@ textures/ctf/test2_r_trans
 	{
 		map textures/ctf/test2_r
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }
 
@@ -222,7 +222,7 @@ textures/ctf/ctf_arch_b_shiny
 	}
         {
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -250,7 +250,7 @@ textures/ctf/ctf_arch_r_shiny
 	}
         {
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -577,7 +577,7 @@ textures/ctf/ctf_blueflag
         	map textures/sfx/shadow
                 tcGen environment
                 //blendFunc add
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
                rgbGen identity
 	}
 }
@@ -617,7 +617,7 @@ textures/ctf/ctf_redflag
         	map textures/sfx/shadow
                 tcGen environment
                 //blendFunc add
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
                rgbGen identity
 	}
 }

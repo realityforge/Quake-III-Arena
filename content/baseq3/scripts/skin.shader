@@ -53,7 +53,7 @@ textures/organics/dirt_trans
 	{
 		map textures/organics/dirt
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}
@@ -72,7 +72,7 @@ textures/skin/chapthroat2
 	{
 		map textures/skin/chapthroat2
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}
@@ -91,7 +91,7 @@ textures/skin/skin6_trans
 	{
 		map textures/skin/skin6
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}
@@ -109,7 +109,7 @@ textures/skin/skin5_trans
 	{
 		map textures/skin/skin5
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}
@@ -127,7 +127,7 @@ textures/skin/skin1_trans
 	{
 		map textures/skin/skin1
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}
@@ -145,7 +145,7 @@ textures/skin/surface8_trans
 	{
 		map textures/skin/surface8
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}
@@ -164,7 +164,7 @@ textures/skin/tongue_trans
 	{
 		map textures/skin/tongue
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}
@@ -211,7 +211,7 @@ textures/skin/snake
 	}
 	{
 		map textures/skin/snake
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 }
@@ -269,7 +269,7 @@ textures/skin/skin6move
 	}
 	{
 		map textures/skin/skin6move
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 }
@@ -285,7 +285,7 @@ textures/skin/proto_skin
 	}
 	{
 		map textures/skin/proto_skin
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
@@ -300,7 +300,7 @@ textures/skin/skin1move
 	}
 	{
 		map textures/skin/skin1move
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 }
@@ -317,7 +317,7 @@ textures/skin/skin4_side
 	}
 	{
 		map textures/skin/skin4_side
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	//	alphaGen lightingSpecular
 	}
@@ -334,7 +334,7 @@ textures/skin/spikemove
 	}
 	{
 		map textures/skin/spikemove
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 }
@@ -348,7 +348,7 @@ textures/skin/pjwal2f
 	}
 	{
 		map textures/skin/pjwal2f
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 }

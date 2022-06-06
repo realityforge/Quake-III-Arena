@@ -302,7 +302,7 @@ textures/sfx/portal_sfx
 
 	{
 		map textures/sfx/portal_sfx1
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcMod rotate 360
 	}
 

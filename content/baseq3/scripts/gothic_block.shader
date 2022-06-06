@@ -249,7 +249,7 @@ textures/gothic_block/blocks18cgeomtrn2
         {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -412,7 +412,7 @@ textures/gothic_block/blocks17_sandy
 	{
 		map textures/gothic_block/blocks17
 		tcMod scale 0.25 0.25
-		blendfunc GL_DST_COLOR GL_ZERO
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -463,7 +463,7 @@ textures/gothic_block/blocks15_sandy
 	{
 		map textures/gothic_block/blocks15
 		tcMod scale 0.25 0.25
-		blendfunc GL_DST_COLOR GL_ZERO
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -481,7 +481,7 @@ textures/gothic_block/evil_e3bwindow
 	}
 	{
 		map textures/gothic_block/windowevil2c_killblock
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -504,7 +504,7 @@ textures/gothic_block/evil_e3window
 	}
 	{
 		map textures/gothic_block/windowevil2c_block18c
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -525,7 +525,7 @@ textures/gothic_block/evil_e3window_dark
 	}
 	{
 		map textures/gothic_block/windowevil2c_block18c
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -568,7 +568,7 @@ textures/gothic_light/flicker_light15k
 	}
 	{
 		map textures/gothic_light/gothic_light3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -586,7 +586,7 @@ textures/gothic_block/flicker_blocks10
 	}
 	{
 		map textures/gothic_block/blocks10
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen wave noise 0.75 0.25 0 10
 	}
 }
@@ -617,7 +617,7 @@ textures/gothic_block/blocks11ct
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }
 //textures/gothic_block/blocks11ct
@@ -634,7 +634,7 @@ textures/gothic_block/blocks11ct
 //
 //	{
 //		map textures/hell/blocks11ct
-//		blendFunc GL_DST_COLOR GL_ZERO
+//		blendFunc filter
 //	}
 //}
 
@@ -669,7 +669,7 @@ textures/gothic_block/electrohell
 	{
 		map textures/gothic_block/gkc14c
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 	{
@@ -700,7 +700,7 @@ textures/gothic_block/mkc_evil_e3window
 	}
 	{
 		map textures/gothic_block/windowevil2c_block18c
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -720,6 +720,6 @@ textures/gothic_block/blocks18d_trans
 	{
 		map textures/gothic_block/blocks18d
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }

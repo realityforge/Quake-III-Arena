@@ -24,7 +24,7 @@ textures/liquids/x_calm_pool_nolight
 
 		{
 			map textures/liquids/pool3d_5c2
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 			tcmod scale .5 .5
 			tcmod transform 1.5 0 1.5 1 1 2
@@ -33,7 +33,7 @@ textures/liquids/x_calm_pool_nolight
 
 		{
 			map textures/liquids/pool3d_6c2
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 			tcmod scale .5 .5
 			tcmod transform 0 1.5 1 1.5 2 1
@@ -42,7 +42,7 @@ textures/liquids/x_calm_pool_nolight
 
 		{
 			map textures/liquids/pool3d_3c2
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 			tcmod scale .25 .5
 			tcmod scroll .001 .025
@@ -86,7 +86,7 @@ textures/liquids/calm_pool_nolight
 
 		{
 			map textures/liquids/pool3d_5c2
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 			tcmod scale .5 .5
 			tcmod transform 1.5 0 1.5 1 1 2
@@ -95,7 +95,7 @@ textures/liquids/calm_pool_nolight
 
 		{
 			map textures/liquids/pool3d_6c2
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 			tcmod scale .5 .5
 			tcmod transform 0 1.5 1 1.5 2 1
@@ -104,7 +104,7 @@ textures/liquids/calm_pool_nolight
 
 		{
 			map textures/liquids/pool3d_3c2
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 			tcmod scale .25 .5
 			tcmod scroll .001 .025
@@ -339,7 +339,7 @@ textures/liquids/clear_calm1
 
 		{
 			map $lightmap
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 		}
 
@@ -393,7 +393,7 @@ textures/liquids/clear_ripple3
 
 		{
 			map $lightmap
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 		}
 
@@ -447,7 +447,7 @@ textures/liquids/clear_ripple2
 
 		{
 			map $lightmap
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 		}
 
@@ -502,7 +502,7 @@ textures/liquids/clear_ripple1
 
 		{
 			map $lightmap
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 		}
 //	END
@@ -554,7 +554,7 @@ textures/liquids/clear_ripple1_q3dm1
 
 		{
 			map $lightmap
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 		}
 //	END
@@ -586,7 +586,7 @@ textures/liquids/mercury
         {
 		map textures/liquids/mercury
 		//blendFunc add
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -641,7 +641,7 @@ textures/liquids/proto_spec
 		map $lightmap
                 //blendFunc add
     		rgbgen identity
-	        blendFunc GL_DST_COLOR GL_ZERO
+	        blendFunc filter
 
 	}
 
@@ -1000,7 +1000,7 @@ textures/liquids/calm_poollight
 
 		{
 			map textures/liquids/pool3d_5c2
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 			tcmod scale .5 .5
 			tcmod transform 1.5 0 1.5 1 1 2
@@ -1009,7 +1009,7 @@ textures/liquids/calm_poollight
 
 		{
 			map textures/liquids/pool3d_6c2
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 			tcmod scale .5 .5
 			tcmod transform 0 1.5 1 1.5 2 1
@@ -1018,7 +1018,7 @@ textures/liquids/calm_poollight
 
 		{
 			map textures/liquids/pool3d_3c2
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 			tcmod scale .25 .5
 			tcmod scroll .001 .025
@@ -1063,7 +1063,7 @@ textures/liquids/calm_poollight2
 
 		{
 			map textures/liquids/pool3d_5c2
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 			tcmod scale .5 .5
 			tcmod transform 1.5 0 1.5 1 1 2
@@ -1072,7 +1072,7 @@ textures/liquids/calm_poollight2
 
 		{
 			map textures/liquids/pool3d_6c2
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 			tcmod scale .5 .5
 			tcmod transform 0 1.5 1 1.5 2 1
@@ -1081,7 +1081,7 @@ textures/liquids/calm_poollight2
 
 		{
 			map textures/liquids/pool3d_3c2
-			blendFunc GL_dst_color GL_zero
+			blendFunc filter
 			rgbgen identity
 			tcmod scale .25 .5
 			tcmod scroll .001 .025
@@ -1351,7 +1351,7 @@ textures/liquids/proto_pool3
 	        {
 		        map $lightmap
 			rgbgen identity
-			blendfunc GL_DST_COLOR GL_ZERO
+			blendfunc filter
                 }
 
 
@@ -1398,7 +1398,7 @@ textures/liquids/proto_pool3
 	        {
 		        map $lightmap
 			rgbgen identity
-			blendfunc GL_DST_COLOR GL_ZERO
+			blendfunc filter
                 }
                 {
 			map textures/sfx/bolts
@@ -1446,7 +1446,7 @@ textures/liquids/jello
 	        {
 		        map $lightmap
 			rgbgen identity
-			blendfunc GL_DST_COLOR GL_ZERO
+			blendfunc filter
                 }
                 {
 			map textures/sfx/bolts2
@@ -1487,7 +1487,7 @@ textures/liquids/jello
 	        {
 		        map $lightmap
 			rgbgen identity
-			blendfunc GL_DST_COLOR GL_ZERO
+			blendfunc filter
                 }
 
 
@@ -1531,7 +1531,7 @@ textures/liquids/proto_gruel
 	        {
 		        map $lightmap
 			rgbgen identity
-			blendfunc GL_DST_COLOR GL_ZERO
+			blendfunc filter
                 }
 
         }
@@ -1700,7 +1700,7 @@ textures/liquids/slime1
 
 		{
 			map textures/liquids/bubbles
-			blendfunc GL_ZERO GL_SRC_COLOR
+			blendfunc filter
 			tcMod turb .2 .1 .1 .2
 			tcMod scale .05 .05
 			tcMod scroll .001 .001
@@ -1749,7 +1749,7 @@ textures/liquids/slime1_2000
 
 		{
 			map textures/liquids/bubbles
-			blendfunc GL_ZERO GL_SRC_COLOR
+			blendfunc filter
 			tcMod turb .2 .1 .1 .2
 			tcMod scale .05 .05
 			tcMod scroll .001 .001
@@ -1797,7 +1797,7 @@ textures/liquids/lavacrust
 
 		{
 			map $lightmap
-			blendfunc gl_dst_color gl_zero
+			blendfunc filter
 			rgbgen identity
 		}
 

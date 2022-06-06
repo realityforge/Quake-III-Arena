@@ -10,7 +10,7 @@ textures/hell/ironcrosslt1_5000
 	}
 	{
 		map textures/hell/ironcrosslt1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -27,7 +27,7 @@ textures/hell/skin7_teeth2
 	}
 	{
 		map textures/hell/skin7_teeth2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 }
@@ -72,7 +72,7 @@ textures/hell/hellbutt01
 	}
 	{
 		map textures/hell/hellbutt01
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -171,7 +171,7 @@ textures/hell/metal2_2
 	}
 	{
 		map $lightmap
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 }
@@ -187,7 +187,7 @@ textures/hell/ironcrosslt1
 
 	{
 		map textures/hell/ironcrosslt1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
@@ -201,7 +201,7 @@ textures/hell/killblock_b
 	}
 	{
 		map textures/hell/killblock_b
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -219,7 +219,7 @@ textures/hell/killblock_c
 	}
 	{
 		map textures/hell/killblock_c
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -237,7 +237,7 @@ textures/hell/bluepad
 	}
 	{
 		map textures/hell/bluepad
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -257,7 +257,7 @@ textures/hell/light1dark
 	}
 	{
 		map textures/hell/light1dark
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -276,7 +276,7 @@ textures/hell/light1red
 	}
 	{
 		map textures/hell/light1red
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -295,7 +295,7 @@ textures/hell/light1blue
 	}
 	{
 		map textures/hell/light1blue
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{

@@ -28,7 +28,7 @@ textures/skies/xmkc_ctf5sky
 	}
 	{
 		map textures/skies/nightsky_nocloud
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		tcMod scale 3 5
 		tcMod scroll 0.3 0.1
 	}
@@ -891,7 +891,7 @@ textures/skies/hellskybright
 	}
 	{
 		map textures/skies/redclouds
-		//blendFunc GL_DST_COLOR GL_ZERO
+		//blendFunc filter
 		blendFunc add
 		tcMod scroll 0.05 0.06
 		tcMod scale 1 1
@@ -1779,7 +1779,7 @@ textures/skies/mkc_dm4sky
 	}
 	{
 		map textures/skies/redclouds
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		tcMod scale 3 5
 		tcMod scroll 0.3 0.1
 	}
@@ -1807,7 +1807,7 @@ textures/skies/mkc_ctf5sky
 	}
 	{
 		map textures/skies/nightsky_nocloud
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		tcMod scale 3 5
 		tcMod scroll 0.3 0.1
 	}
@@ -1837,7 +1837,7 @@ textures/skies/raster_test_sun
 	}
 	{
 		map textures/skies/nightsky_nocloud
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		tcMod scale 3 5
 		tcMod scroll 0.3 0.1
 	}

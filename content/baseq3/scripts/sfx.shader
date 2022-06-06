@@ -13,7 +13,7 @@ textures/sfx/blocks17g_jumpad
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -91,7 +91,7 @@ textures/sfx/omm
        {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
                 depthFunc equal
        }
 }
@@ -113,7 +113,7 @@ textures/sfx/dust_puppy2
        {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
                 depthFunc equal
        }
 }
@@ -203,7 +203,7 @@ textures/sfx/fan3blade
         {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -235,7 +235,7 @@ textures/sfx/fan3
         {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }
 
@@ -338,7 +338,7 @@ textures/sfx/bouncepad01_xarch
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -398,7 +398,7 @@ textures/sfx/largerblock3b3x128_pentred
 	}
 	{
 		map textures/sfx/largerblock3b3x128_pent
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -421,7 +421,7 @@ textures/sfx/largerblock3b3x128_pent
 
 	{
 		map textures/sfx/largerblock3b3x128_pent
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
@@ -444,7 +444,7 @@ textures/sfx/smallerblock3b3dim_pent
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red_glow
@@ -518,7 +518,7 @@ textures/sfx/hellfog_pj_dm10
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -526,7 +526,7 @@ textures/sfx/hellfog_pj_dm10
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -554,7 +554,7 @@ textures/sfx/hellfog_mini_dm10
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -562,7 +562,7 @@ textures/sfx/hellfog_mini_dm10
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -584,7 +584,7 @@ textures/sfx/metalfloor_wall_14b_glow
 
 	{
 		map textures/sfx/metalfloor_wall_14b
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
@@ -612,7 +612,7 @@ textures/sfx/metalfloor_wall_15b_glow
 
 	{
 		map textures/sfx/metalfloor_wall_15b
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
@@ -1022,7 +1022,7 @@ textures/sfx/glass
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 }
 
@@ -1044,7 +1044,7 @@ textures/sfx/fan
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1068,7 +1068,7 @@ textures/sfx/fan2
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1089,7 +1089,7 @@ textures/sfx/fan_grate
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1110,7 +1110,7 @@ textures/sfx/fan_grate2
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1147,7 +1147,7 @@ textures/sfx/metalfloor_wall_5_glow
 
 	{
 		map textures/base_wall/metalfloor_wall_5
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
@@ -1172,7 +1172,7 @@ textures/sfx/metaltech12darkfinal_blueglow
 
 	{
 		map textures/base_wall/metaltech12darkfinal
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
@@ -1238,7 +1238,7 @@ textures/gothic_block/killblock_i4b
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map  textures/gothic_block/killblock_i4glow
@@ -1286,7 +1286,7 @@ textures/sfx/xian_dm3padwall
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 
@@ -1311,7 +1311,7 @@ textures/sfx/xmetalfloor_wall_5b
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/metalfloor_wall_5bglowblu
@@ -1334,7 +1334,7 @@ textures/sfx/border11c
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -1407,7 +1407,7 @@ textures/sfx/x_conduit
 	}
 	{
 		map textures/sfx/x_conduit
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
@@ -1573,7 +1573,7 @@ textures/sfx/xlargeblockfloor3_pent
 
 	{
 		map textures/sfx/xlargeblockfloor3_pent
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
@@ -1602,7 +1602,7 @@ textures/sfx/xclang_floor2_bouncy
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -1638,7 +1638,7 @@ textures/sfx/clangdark_bounce
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -1675,7 +1675,7 @@ textures/sfx/metalbridge06_bounce
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -1711,7 +1711,7 @@ textures/sfx/metaltechfloor02final_bounce
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -1749,7 +1749,7 @@ textures/sfx/metaltech12final_bounce
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -1787,7 +1787,7 @@ textures/sfx/metaltech12darkfinal_bounce
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -1824,7 +1824,7 @@ textures/sfx/metaltechfloor01final_bounce
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -1858,7 +1858,7 @@ textures/sfx/demonltblackfinal
 
 	{
 		map textures/sfx/demonltblackfinal
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
@@ -1881,7 +1881,7 @@ textures/base_wall/c_met5_2_trans
 	{
 		map textures/base_wall/c_met5_2
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}
@@ -1923,7 +1923,7 @@ textures/sfx/xmetalfloor_wall_14b
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/metalfloor_wall_14bglow2
@@ -1942,7 +1942,7 @@ textures/sfx/xmetalfloor_wall_9b
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/metalfloor_wall_9bglow
@@ -2002,7 +2002,7 @@ textures/sfx/portal_sfx_ring
 
 	{
 		map textures/sfx/portal_sfx1
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcMod rotate 360
 	}
 
@@ -2183,7 +2183,7 @@ textures/sfx/launchpad_diamond
 	{
 		map textures/sfx/launchpad_diamond
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -2225,7 +2225,7 @@ textures/sfx/launchpad_blocks18d
 	{
 		map textures/sfx/launchpad_blocks18d
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -2267,7 +2267,7 @@ textures/sfx/launchpad_blocks17
 	{
 		map textures/sfx/launchpad_blocks17
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -2309,7 +2309,7 @@ textures/sfx/launchpad_metalbridge04d
 	{
 		map textures/sfx/launchpad_metalbridge04d
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -2973,7 +2973,7 @@ textures/sfx/pentagramfloor_red3test
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red3glowtest
@@ -2992,7 +2992,7 @@ textures/sfx/goopq1metal7_98dhuge_pent
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red3_glow
@@ -3012,7 +3012,7 @@ textures/sfx/metaltechfloor02final_pent
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red_glow
@@ -3032,7 +3032,7 @@ textures/sfx/blocks17final_pent
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red_glow
@@ -3052,7 +3052,7 @@ textures/sfx/pentfloor_diamond2c
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red_glow
@@ -3073,7 +3073,7 @@ textures/sfx/metalbridge06c_big_pentagram
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red_glow
@@ -3093,7 +3093,7 @@ textures/sfx/largerblock3_pent
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red_glow
@@ -3113,7 +3113,7 @@ textures/sfx/largerblock3b3_pent
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red_glow
@@ -3139,7 +3139,7 @@ textures/sfx/gothgrate1
 	}
 	{
 		map $lightmap
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 		depthFunc equal
 	}
@@ -3172,7 +3172,7 @@ textures/sfx/blocks18ccomputer_offset
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -3200,7 +3200,7 @@ textures/sfx/computerblocks11b
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -3241,7 +3241,7 @@ textures/sfx/blocks18ccomputer
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -3282,7 +3282,7 @@ textures/sfx/computerblocks15
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -3321,7 +3321,7 @@ textures/sfx/computer_blocks17
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -3356,7 +3356,7 @@ textures/sfx/computerpurptileb
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -3393,7 +3393,7 @@ textures/sfx/diamond2cjumppad
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -3428,7 +3428,7 @@ textures/sfx/blocks11bjumppad
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -3464,7 +3464,7 @@ textures/sfx/bounce_metalbridge04
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -3500,7 +3500,7 @@ textures/sfx/bounce_largeblock3
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -3536,7 +3536,7 @@ textures/sfx/bounce_largeblock3b
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -3645,7 +3645,7 @@ textures/sfx/bouncepad01_metalbridge06b
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -3682,7 +3682,7 @@ textures/sfx/bouncepad01bgoopy7_98d
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -3717,7 +3717,7 @@ textures/sfx/bouncepad01b_metalbridge06c
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -3753,7 +3753,7 @@ textures/sfx/bounce_xq1metalbig
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -3795,7 +3795,7 @@ textures/sfx/bouncepad01block18b
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -3837,7 +3837,7 @@ textures/sfx/bouncepad01_block17
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -3880,7 +3880,7 @@ textures/sfx/bouncepad1q1metal7_99
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -3913,7 +3913,7 @@ textures/sfx/redpadblocks17
 	{
 		map textures/gothic_block/blocks17
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		clampmap textures/sfx/redpad_blend
@@ -4041,7 +4041,7 @@ textures/sfx/goopq1metal7_98d_pent_256
 	}
 	//{
 	//	map $lightmap
-	//	blendfunc gl_dst_color gl_zero
+	//	blendfunc filter
 //		rgbGen identity
 	//}
 	//{
@@ -4071,7 +4071,7 @@ textures/sfx/pentagramfloor_red
 		{
 			map $lightmap
 			rgbGen identity
-			blendfunc GL_DST_COLOR GL_ZERO
+			blendfunc filter
 			depthfunc equal
 		}
 
@@ -4104,7 +4104,7 @@ textures/sfx/gimmickdiamondarrow
 	}
 	{
 		map textures/base_floor/diamond2c
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -4126,7 +4126,7 @@ textures/sfx/goopq1metal7_98darrow
 	}
 	{
 		map textures/gothic_floor/goopq1metal7_98dlarge
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -4146,7 +4146,7 @@ textures/sfx/blocks11b_himom
 	{
 		rgbGen identity
 		map textures/gothic_block/blocks11b
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		map textures/sfx/himom
@@ -4163,7 +4163,7 @@ textures/sfx/pittedrust3stripes
 	}
 	{
 		map textures/gothic_trim/pitted_rust3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -4182,7 +4182,7 @@ textures/sfx/q1metal7_98dstripe
 	}
 	{
 		map textures/gothic_floor/q1metal7_98d
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -4200,7 +4200,7 @@ textures/sfx/goopq1metal7_98dstripe
 	}
 	{
 		map textures/gothic_floor/goopq1metal7_98d
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -4220,7 +4220,7 @@ textures/sfx/pentagramfloor_rotating
 	}
 	{
 		map textures/gothic_floor/xhugefloor2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -4241,7 +4241,7 @@ textures/sfx/pentagramfloor_rotating2
 	}
 	{
 		map textures/gothic_floor/q1metalhuge
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -4261,7 +4261,7 @@ textures/sfx/pentagramfloor_q1metal7_99
 	}
 	{
 		map textures/gothic_floor/q1metalhuge
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -4281,7 +4281,7 @@ textures/sfx/pentagramfloor
 	}
 	{
 		map textures/gothic_floor/xhugefloor2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -4301,7 +4301,7 @@ textures/sfx/q1met_redpad
 	}
 	{
 		map textures/sfx/q1met_redpad
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -4462,7 +4462,7 @@ textures/sfx/surface6jumppad
 	}
 	{
 		map textures/base_stone/surface6
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -4529,7 +4529,7 @@ textures/sfx/xgoopjumpypad
 	}
 	{
 		map textures/sfx/xgoopq1metal
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -4549,7 +4549,7 @@ textures/sfx/xgoopy_pentagram
 	}
 	{
 		map textures/sfx/xgoopq1metal
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -4671,7 +4671,7 @@ textures/sfx/xq1metalbig_jumppad
 	}
 	{
 		map textures/gothic_floor/q1metal7_98d_256x256
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -4692,7 +4692,7 @@ textures/sfx/blocks11b_jumppad
 	}
 	{
 		map textures/gothic_block/blocks11b
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -4827,7 +4827,7 @@ textures/sfx/pentagramfloor
 	}
 	{
 		map textures/sfx/pentagramfloor
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -4848,7 +4848,7 @@ textures/sfx/spawnpad
 	}
 	{
 		map textures/gothic_block/blocks17
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -4868,7 +4868,7 @@ textures/sfx/q1metal7_98d_pent_256
 	{
 		map textures/sfx/q1metal7_98d_pent_256
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_256x256
@@ -4986,7 +4986,7 @@ textures/sfx/diamondredpad
 	}
 	{
 		map textures/base_floor/diamond2c
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -5014,7 +5014,7 @@ textures/sfx/hellfog_tim_dm14
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5022,7 +5022,7 @@ textures/sfx/hellfog_tim_dm14
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5051,7 +5051,7 @@ textures/sfx/kc_hellfog_1k
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5059,7 +5059,7 @@ textures/sfx/kc_hellfog_1k
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5088,7 +5088,7 @@ textures/sfx/hellfog_1k
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5096,7 +5096,7 @@ textures/sfx/hellfog_1k
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 	}
@@ -5124,7 +5124,7 @@ textures/sfx/hellfog
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5132,7 +5132,7 @@ textures/sfx/hellfog
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5185,7 +5185,7 @@ textures/sfx/q3tourney3fog
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5193,7 +5193,7 @@ textures/sfx/q3tourney3fog
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5221,7 +5221,7 @@ textures/sfx/q3dm14fog
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5229,7 +5229,7 @@ textures/sfx/q3dm14fog
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5258,7 +5258,7 @@ textures/sfx/q3dm9fog
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5266,7 +5266,7 @@ textures/sfx/q3dm9fog
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5295,7 +5295,7 @@ textures/sfx/hellfogdense
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5303,7 +5303,7 @@ textures/sfx/hellfogdense
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5347,7 +5347,7 @@ textures/sfx/pitted_rust3arrowbase
 	}
 	{
 		map textures/sfx/pitted_rust3arrow
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -5368,7 +5368,7 @@ textures/sfx/pitted_rust3arrowblocks
 	}
 	{
 		map textures/gothic_block/blocks17
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -5455,7 +5455,7 @@ textures/sfx/mkc_fog_tdm3
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5463,7 +5463,7 @@ textures/sfx/mkc_fog_tdm3
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5483,7 +5483,7 @@ textures/sfx/mkc_fog_ctfred
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5491,7 +5491,7 @@ textures/sfx/mkc_fog_ctfred
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5511,7 +5511,7 @@ textures/sfx/mkc_fog_ctfblue
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5519,7 +5519,7 @@ textures/sfx/mkc_fog_ctfblue
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5541,7 +5541,7 @@ textures/sfx/mkc_fog_ctfblue2
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5549,7 +5549,7 @@ textures/sfx/mkc_fog_ctfblue2
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity

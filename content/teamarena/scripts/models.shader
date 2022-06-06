@@ -1083,7 +1083,7 @@ models/flags/flagtest
 		map textures/sfx/shadow
                 tcGen environment
                 //blendFunc add
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
                 rgbGen identity
 	}
 
@@ -1863,7 +1863,7 @@ models/mapobjects/chain/chain3
         {
 		map models/mapobjects/chain/chain3
 		//blendFunc add
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 
@@ -1914,7 +1914,7 @@ models/flags/r_flag2
 		map textures/sfx/shadow
                 tcGen environment
                 //blendFunc add
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
                rgbGen identity
 	}
 }
@@ -1947,7 +1947,7 @@ models/flags/b_flag2
 		map textures/sfx/shadow
                 tcGen environment
                 //blendFunc add
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
                 rgbGen identity
 	}
 }

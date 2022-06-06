@@ -226,7 +226,7 @@ textures/gothic_floor/xlargeblockfloor5_pent
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentfloor_256_glow
@@ -245,7 +245,7 @@ textures/gothic_floor/xlargeblockfloor5_pent_offset
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentfloor_256_glow
@@ -267,7 +267,7 @@ textures/gothic_floor/glowfloor1
 	}
 	{
 		map textures/gothic_block/blocks17g
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -289,7 +289,7 @@ textures/gothic_floor/pent_metalbridge02
 	}
 	{
 		map textures/gothic_floor/pent_metalbridge02
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -309,7 +309,7 @@ textures/gothic_floor/pent_metalbridge06
 	}
 	{
 		map textures/gothic_floor/pent_metalbridge06
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -330,7 +330,7 @@ textures/gothic_floor/pent_metalbridge06b
 	}
 	{
 		map textures/gothic_floor/pent_metalbridge06b
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{

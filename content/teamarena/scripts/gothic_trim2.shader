@@ -10,7 +10,7 @@ textures/gothic_trim/pr3t
 	{
 		map textures/gothic_trim/pitted_rust3
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}

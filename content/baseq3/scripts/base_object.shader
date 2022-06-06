@@ -9,7 +9,7 @@ textures/base_object/plasmalogo_1
 	}
 	{
 		map textures/base_object/plasmalogo_1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -31,7 +31,7 @@ textures/base_object/quadsign_1
 	}
 	{
 		map textures/base_object/quadsign1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -53,7 +53,7 @@ textures/base_object/hastesign_1
 	}
 	{
 		map textures/base_object/hastesign1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{

@@ -29,7 +29,7 @@ textures/base_floor/techfloor2
         {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 
@@ -63,7 +63,7 @@ textures/base_floor/techfloor
         {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
                 depthFunc equal
        }
 }
@@ -156,7 +156,7 @@ textures/base_floor/proto_rustygrate2
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -376,7 +376,7 @@ textures/base_floor/pool_side2
 	{
 		rgbGen identity
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 
@@ -411,7 +411,7 @@ textures/base_floor/pool_side3
 	{
 		rgbGen identity
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 
@@ -446,7 +446,7 @@ textures/base_floor/pool_floor2
 	{
 		rgbGen identity
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 
@@ -481,7 +481,7 @@ textures/base_floor/pool_floor3
 	{
 		rgbGen identity
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 
@@ -511,7 +511,7 @@ textures/base_floor/hfloor3
         {
 		map textures/base_floor/hfloor3
 		//blendFunc add
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 
@@ -654,7 +654,7 @@ textures/base_floor/tile5_plain
 	}
 	{
 		map textures/base_floor/tilefloor5
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 }
@@ -686,7 +686,7 @@ textures/base_floor/concretefloor1
 
 	{
 		map $lightmap
-        	blendfunc gl_dst_color gl_zero
+        	blendfunc filter
 		rgbgen identity
 	}
 
@@ -716,7 +716,7 @@ textures/base_floor/pjgrate1kc
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -732,7 +732,7 @@ textures/base_floor/clangfloor_noisy
 
 	{
 		map textures/base_floor/clang_floor
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbgen identity
 
 	}
@@ -760,7 +760,7 @@ textures/base_floor/clang_floorshiny2
 	{
 		map $lightmap
 		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 }
@@ -785,7 +785,7 @@ textures/base_floor/clang_floorwet
 	{
 		map $lightmap
 		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 }
@@ -810,7 +810,7 @@ textures/base_floor/clang_floorshiny
 	{
 		map $lightmap
 		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 }
@@ -827,7 +827,7 @@ textures/base_floor/tilefloor7_ow
 	}
         {
 		map textures/base_floor/tilefloor7_ow
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
                 rgbGen identity
 	}
         {
@@ -853,7 +853,7 @@ textures/base_floor/skylight1
 	}
         {
 		map textures/base_floor/skylight1
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
                 rgbGen identity
 	}
         {
@@ -909,7 +909,7 @@ textures/base_floor/diamond_dirty
 	{
 		map textures/base_floor/diamond2
 		tcMod scale 0.5 0.5
-		blendfunc GL_DST_COLOR GL_ZERO
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -925,7 +925,7 @@ textures/base_floor/clangdark
 	}
 	{
 		map textures/base_floor/clangdark
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
@@ -942,7 +942,7 @@ textures/base_floor/clangdark_ow
 	}
 	{
 		map textures/base_floor/clangdark_ow
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
@@ -959,7 +959,7 @@ textures/base_floor/diamond_noisy
 	}
 	{
 		map textures/base_floor/diamond2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 }
@@ -982,7 +982,7 @@ textures/base_floor/proto_grate
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1005,7 +1005,7 @@ textures/base_floor/proto_grate2
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1027,7 +1027,7 @@ textures/base_floor/proto_grate3
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1051,7 +1051,7 @@ textures/base_floor/proto_grate4
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1099,7 +1099,7 @@ textures/base_floor/proto_grate5
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1121,7 +1121,7 @@ textures/base_floor/proto_skullgrate
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1144,7 +1144,7 @@ textures/base_floor/proto_rustygrate
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1168,7 +1168,7 @@ textures/base_floor/rusty_pentagrate
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1190,7 +1190,7 @@ textures/base_floor/rusty_baphograte
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
         {
@@ -1222,7 +1222,7 @@ textures/base_floor/pjgrate1
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1242,7 +1242,7 @@ textures/base_floor/pjgrate2
 	}
 	{
 		map $lightmap
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 		rgbGen identity
 	}
@@ -1260,7 +1260,7 @@ textures/base_floor/glowfloor2
 	}
 	{
 		map textures/base_wall/metalfloor_wall_15
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -1280,7 +1280,7 @@ textures/base_floor/glowfloor3
 	}
 	{
 		map textures/base_floor/diamond2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -1306,7 +1306,7 @@ textures/base_floor/nomarkstone_1
 	{
 		map textures/base_floor/smallstone
 		tcMod scale 2 2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 }

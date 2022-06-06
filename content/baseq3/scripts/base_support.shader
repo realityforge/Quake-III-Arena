@@ -17,7 +17,7 @@ textures/base_support/x_support4
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -39,7 +39,7 @@ textures/base_support/x_support3
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -86,7 +86,7 @@ textures/base_support/support1rust
         {
 		map textures/base_support/support1rust
 		//blendFunc add
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -100,7 +100,7 @@ textures/base_support/support2rust
 	}
 	{
 		map textures/base_support/support1rust
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 }
@@ -140,7 +140,7 @@ textures/base_support/shinysupport2
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
@@ -168,7 +168,7 @@ textures/base_support/shinysupport1
 	{
 		map $lightmap
     		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 
@@ -192,7 +192,7 @@ textures/base_support/x_support
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -215,7 +215,7 @@ textures/base_support/z_support
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -239,7 +239,7 @@ textures/base_support/x_support2
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -261,7 +261,7 @@ textures/base_support/pj_metal14_1
 	{
 		map textures/base_support/metal14_1
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }
 
@@ -277,7 +277,7 @@ textures/base_support/cable_trans
 	{
 		map textures/base_support/cable_trans
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}

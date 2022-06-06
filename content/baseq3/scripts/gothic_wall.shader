@@ -348,7 +348,7 @@ textures/gothic_wall/streetbricks10_shiny
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 

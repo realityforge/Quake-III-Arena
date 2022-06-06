@@ -942,7 +942,7 @@ models/flag2/w_flag2
 		map textures/sfx/shadow
                 tcGen environment
                 //blendFunc add
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
                rgbGen identity
 	}
 }
@@ -976,7 +976,7 @@ models/flag2/r_flag2
 		map textures/sfx/shadow
                 tcGen environment
                 //blendFunc add
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
                rgbGen identity
 	}
 }
@@ -1009,7 +1009,7 @@ models/flag2/b_flag2
 		map textures/sfx/shadow
                 tcGen environment
                 //blendFunc add
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
                 rgbGen identity
 	}
 }
@@ -2556,7 +2556,7 @@ models/flags/n_flag2
         {
 		map textures/sfx/shadow
                 tcGen environment
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
                 rgbGen identity
 	}
 }

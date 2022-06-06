@@ -7,7 +7,7 @@ textures/base/q1met_redpad
 	}
 	{
 		map textures/base/q1met_redpad
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -64,7 +64,7 @@ textures/base/ceil1_8
 	}
 	{
 		map textures/base/ceil1_8
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 }
@@ -79,7 +79,7 @@ textures/base/ceil1_3
 	}
 	{
 		map textures/base/ceil1_3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 }
@@ -94,7 +94,7 @@ textures/base/ceil1_4
 	}
 	{
 		map textures/base/ceil1_4
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 }
@@ -108,7 +108,7 @@ textures/base/border11light
 	}
 	{
 		map textures/base/border11light
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -128,7 +128,7 @@ textures/base/electricwall
 	}
 	{
 		map textures/organics/wire02a_f
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{

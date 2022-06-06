@@ -319,7 +319,7 @@ textures/base_wall/girders1i_yellofin
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -413,7 +413,7 @@ textures/base_wall/medal_impressive
 	{
 		map $lightmap
 	        rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 
@@ -455,7 +455,7 @@ textures/base_wall/q3tourneyscreen
 
 	{
 		map $lightmap
-	        blendfunc gl_dst_color gl_zero
+	        blendfunc filter
 		rgbgen identity
 	}
 
@@ -493,7 +493,7 @@ textures/base_wall/main_q3abanner
 	{
 		map $lightmap
 	        rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -548,7 +548,7 @@ textures/base_wall/shinygrate1_4_glow
 	{
 		map $lightmap
     		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 	{
@@ -578,7 +578,7 @@ textures/base_wall/bluemetal1b_chrome
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -603,7 +603,7 @@ textures/base_wall/bluemetal1c
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -626,7 +626,7 @@ textures/base_wall/bluemetalsupport_shiny
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -650,7 +650,7 @@ textures/base_wall/grill
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -677,7 +677,7 @@ textures/base_wall/grill2
         {
 		map textures/base_wall/grill2
 		//blendFunc add
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -700,7 +700,7 @@ textures/base_wall/bluemetalsupport2
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -770,7 +770,7 @@ textures/base_wall/bluemetalsupport2c
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -826,7 +826,7 @@ textures/base_wall/bluemetalsupport2f
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -1024,7 +1024,7 @@ textures/base_door/shinymetaldoor_outside3a
 	{
 		map $lightmap
 		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 }
@@ -1051,7 +1051,7 @@ textures/base_door/shinymetaldoor_outside3b
 	{
 		map $lightmap
 		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 }
@@ -1085,7 +1085,7 @@ textures/base_door/shinymetaldoor_outside
 	{
 		map $lightmap
 		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 }
@@ -1107,7 +1107,7 @@ textures/base_wall/steedmetal2
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -1146,7 +1146,7 @@ textures/base_wall/steed1gd
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -1239,7 +1239,7 @@ textures/base_wall/train1
 	{
 		map $lightmap
 		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 }
@@ -1289,7 +1289,7 @@ textures/base_door/shinymetaldoor
 	{
 		map $lightmap
 		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 }
@@ -1307,7 +1307,7 @@ textures/base_wall/dooreye
 
 	{
 		map textures/base_wall/dooreye
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
@@ -1333,7 +1333,7 @@ textures/base_wall/dooreye2
 
 	{
 		map textures/base_wall/dooreye2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
@@ -1361,7 +1361,7 @@ textures/base_wall/dooreye3
 
 	{
 		map textures/base_wall/dooreye3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
@@ -1418,7 +1418,7 @@ textures/base_wall/patch10_beat4_drip
 	{
 		map $lightmap
 		rgbgen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 
@@ -1519,7 +1519,7 @@ textures/base_wall/bluecover
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
@@ -1547,7 +1547,7 @@ textures/base_wall/shinybluemetal1b
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
@@ -1577,7 +1577,7 @@ textures/base_wall/pjrock18
 	{
 		map $lightmap
     		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 
@@ -1623,7 +1623,7 @@ textures/base_wall/shinygrate1_4
 	{
 		map $lightmap
     		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 
@@ -1651,7 +1651,7 @@ textures/base_wall/chrome_metal
 	{
 		map $lightmap
                 rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 	}
 
@@ -1677,7 +1677,7 @@ textures/base_wall/blupaintedmetalcomp
 	{
 		map $lightmap
 		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }
 
@@ -1699,7 +1699,7 @@ textures/base_wall/blupaintedmetal
 	{
 		map $lightmap
 		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }
 
@@ -1722,7 +1722,7 @@ textures/base_wall/shinymetal2
 
 	{
 		map textures/base_wall/shinymetal2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
@@ -1924,7 +1924,7 @@ textures/base_wall/basewall01_ow
 	}
 	{
 		map textures/base_wall/basewall01_ow
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -1955,7 +1955,7 @@ textures/base_wall/blumtlspt2b
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -1988,7 +1988,7 @@ textures/base_wall/bluemetalsupport2b
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -2017,7 +2017,7 @@ textures/base_wall/kcgrate1
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -2035,7 +2035,7 @@ textures/base_wall/future9light
 	{
 		map textures/base_wall/future9light
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		map textures/base_wall/future9light_blend
@@ -2056,7 +2056,7 @@ textures/base_wall/bluemetal1light
 	}
 	{
 		map textures//base_wall/bluemetal1light
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -2080,6 +2080,6 @@ textures/base_wall/green_contrim_noisey
 	{
 		map textures/base_wall/green_contrim
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }

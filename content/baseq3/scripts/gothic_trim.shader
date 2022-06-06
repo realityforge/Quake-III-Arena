@@ -129,7 +129,7 @@ textures/gothic_trim/column2c_trans
 	{
 		map textures/gothic_trim/column2c_test
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}
@@ -147,7 +147,7 @@ textures/gothic_trim/metalsupport4b_trans
 	{
 		map textures/gothic_trim/metalsupport4b
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}
@@ -164,7 +164,7 @@ textures/gothic_trim/metalsupport4j_trans
 	{
 		map textures/gothic_trim/metalsupport4j
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }
 
@@ -180,7 +180,7 @@ textures/gothic_trim/border6_trans
 	{
 		map textures/gothic_trim/border6
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 	}
 }
@@ -197,7 +197,7 @@ textures/gothic_trim/pitted_rust2_trans
 	{
 		map textures/gothic_trim/pitted_rust2
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}
@@ -214,7 +214,7 @@ textures/gothic_trim/pitted_rust3_trans
 	{
 		map textures/gothic_trim/pitted_rust3
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}
@@ -232,7 +232,7 @@ textures/gothic_block/killtrim_trans
 	{
 		map textures/gothic_block/killtrim
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}
@@ -259,7 +259,7 @@ textures/gothic_trim/baseboard09_p_shiny
 	}
 	//{
 	//	map $lightmap
-	//	blendfunc gl_dst_color gl_zero
+	//	blendfunc filter
 	//	rgbGen identity
 	//}
 }
@@ -375,7 +375,7 @@ textures/gothic_trim/barbedwire
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -392,7 +392,7 @@ textures/gothic_button/timbutton
 
 		{
 			map $lightmap
-			blendfunc gl_dst_color gl_zero
+			blendfunc filter
 			rgbgen identity
 		}
 
@@ -420,7 +420,7 @@ textures/gothic_wall/window_evil6a
 
 	{
 		map textures/gothic_wall/window_evil6a
-		blendfunc GL_DST_COLOR GL_ZERO
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -446,7 +446,7 @@ textures/gothic_wall/window_evil7
 
 	{
 		map textures/gothic_wall/window_evil7
-		blendfunc GL_DST_COLOR GL_ZERO
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -493,7 +493,7 @@ textures/gothic_trim/gothgrate3
 	}
 	{
 		map $lightmap
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 		depthFunc equal
 	}
@@ -514,7 +514,7 @@ textures/gothic_trim/gothgrate2
 	}
 	{
 		map $lightmap
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 		depthFunc equal
 	}
@@ -527,7 +527,7 @@ textures/gothic_trim/tongue_bone
 	}
 	{
 		map textures/gothic_trim/tongue_bone
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
@@ -561,7 +561,7 @@ qer_editorimage	textures/gothic_trim/metalbase09_d
 		{
 			map $lightmap
 			rgbGen identity
-			blendfunc GL_DST_COLOR GL_ZERO
+			blendfunc filter
 		}
 
 	//	END
@@ -590,7 +590,7 @@ qer_editorimage	textures/gothic_trim/metalbase09_e
 		{
 			map $lightmap
 			rgbGen identity
-			blendfunc GL_DST_COLOR GL_ZERO
+			blendfunc filter
 		}
 
 	//	END
@@ -618,7 +618,7 @@ qer_editorimage	textures/gothic_trim/metalbase02_b
 
 		{
 			map $lightmap
-			blendfunc GL_DST_COLOR GL_ZERO
+			blendfunc filter
 			rgbGen identity
 		}
 
@@ -647,7 +647,7 @@ qer_editorimage	textures/gothic_trim/metalbase03_c
 
 		{
 			map $lightmap
-			blendfunc GL_DST_COLOR GL_ZERO
+			blendfunc filter
 			rgbGen identity
 		}
 
@@ -677,7 +677,7 @@ qer_editorimage	textures/gothic_trim/metalbase02_c
 
 		{
 			map $lightmap
-			blendfunc GL_DST_COLOR GL_ZERO
+			blendfunc filter
 			rgbGen identity
 		}
 
@@ -706,7 +706,7 @@ qer_editorimage	textures/gothic_trim/metalbase03_b
 
 		{
 			map $lightmap
-			blendfunc GL_DST_COLOR GL_ZERO
+			blendfunc filter
 			rgbGen identity
 		}
 
@@ -735,7 +735,7 @@ qer_editorimage	textures/gothic_trim/metalbase09_b
 
 		{
 			map $lightmap
-			blendfunc GL_DST_COLOR GL_ZERO
+			blendfunc filter
 			rgbGen identity
 		}
 
@@ -765,7 +765,7 @@ qer_editorimage	textures/gothic_trim/metalbase03_a
 
 		{
 			map $lightmap
-			blendfunc GL_DST_COLOR GL_ZERO
+			blendfunc filter
 			rgbGen identity
 		}
 
@@ -795,7 +795,7 @@ qer_editorimage	textures/gothic_trim/metalbase03_d
 
 		{
 			map $lightmap
-			blendfunc GL_DST_COLOR GL_ZERO
+			blendfunc filter
 			rgbGen identity
 		}
 
