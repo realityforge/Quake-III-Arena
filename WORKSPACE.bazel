@@ -15,6 +15,7 @@
 workspace(name = "org_realityforge_q3a")
 
 load("//third_party/buildifier:repository.bzl", _load_buildifier_repository = "load_repository")
+load("//third_party/bazel_skylib:repository.bzl", _load_bazel_skylib_repository = "load_repository")
 load("//third_party/content:repository.bzl", _load_content_repository = "load_repository")
 load("//third_party/curl:repository.bzl", _load_curl_repository = "load_repository")
 load("//third_party/gla:repository.bzl", _load_gla_repository = "load_repository")
@@ -35,6 +36,8 @@ load("//third_party/vorbis:repository.bzl", _load_vorbis_repository = "load_repo
 load("//third_party/zlib:repository.bzl", _load_zlib_repository = "load_repository")
 
 _load_buildifier_repository()
+
+_load_bazel_skylib_repository()
 
 _load_content_repository()
 
@@ -72,9 +75,12 @@ _load_vorbis_repository()
 
 _load_zlib_repository()
 
+load("//third_party/bazel_skylib:repository2.bzl", _configure_bazel_skylib_repository = "configure_repository")
 load("//third_party/go:repository2.bzl", _configure_go_repository = "configure_repository")
 load("//third_party/protobuf:repository2.bzl", _configure_protobuf_repository = "configure_repository")
 load("//third_party/rules_apple:repository2.bzl", _configure_rules_apple_repository = "configure_repository")
+
+_configure_bazel_skylib_repository()
 
 _configure_go_repository()
 
