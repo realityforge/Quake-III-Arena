@@ -33,7 +33,6 @@ textures/skies/xproto_sky
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
-	skyparms 512 full -
 
 	q3map_surfacelight 450
 	q3map_sun .473 .243 .314 30 35 78
@@ -65,7 +64,6 @@ textures/skies/xproto_sky2
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
-	skyparms 512 full -
 //	q3map_lightsubdivide 256
 	q3map_surfacelight 200
 	q3map_sun .473 .243 .314 30 35 87
@@ -97,7 +95,6 @@ textures/skies/xproto_sky_tourney2
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
-	skyparms 512 full -
 //	q3map_lightsubdivide 256
 	q3map_surfacelight 200
 	q3map_sun .5 .5 .5 100 180 83
@@ -334,7 +331,6 @@ textures/skies/proto_sky
 	surfaceparm noimpact
 	surfaceparm nolightmap
 	surfaceparm sky
-	skyparms 512 full -
 
 	q3map_surfacelight 30
 	q3map_sun .473 .243 .314 30 35 78
