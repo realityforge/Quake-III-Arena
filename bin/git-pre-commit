@@ -19,7 +19,7 @@
 #   > chmod u+x .git/hooks/pre-commit
 #
 
-for file in `git diff-index --cached --name-only HEAD | grep -E '(code|content|tools)/.*\.(c|cpp|h|hpp|java)'` ; do
+for file in `git diff-index --cached --name-only HEAD | grep -E '(code|content|tools)/.*\.(c|cpp|m|h|hpp|java)'` ; do
   if [ -f $file ]; then
     clang-format -i ${file}
     git add ${file}
