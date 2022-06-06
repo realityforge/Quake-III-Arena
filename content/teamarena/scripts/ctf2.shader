@@ -447,7 +447,7 @@ textures/ctf2/blue_pennant
 
         {
 		map textures/ctf2/blue_pennant
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
 

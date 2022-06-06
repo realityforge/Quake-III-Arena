@@ -904,7 +904,7 @@ models/flag/flagbits
 	      // deformVertexes wave 100 sin 0 5 0 .7
 	 {
                 map models/flags/flagbits
-                //blendfunc gl_src_alpha gl_one_minus_src_alpha
+                //blendfunc blend
                 alphaFunc GE128
                 rgbGen lightingDiffuse
                 depthWrite
@@ -935,7 +935,7 @@ models/flag2/w_flag2
 	}
         {
 		map models/flag2/w_flag2
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -969,7 +969,7 @@ models/flag2/r_flag2
 	}
         {
 		map models/flag2/r_flag2
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -1002,7 +1002,7 @@ models/flag2/b_flag2
 	}
         {
 		map models/flag2/b_flag2
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 	        rgbGen identity
 	}
         {

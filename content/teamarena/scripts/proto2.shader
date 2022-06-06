@@ -1301,7 +1301,7 @@ textures/proto2/c_zinc_shiny
 	}
         {
 		map textures/gothic_trim/zinc_shiny
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {

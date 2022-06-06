@@ -83,7 +83,7 @@ textures/base_trim/pewter_shiney
 	}
         {
 		map textures/base_trim/pewter_shiney
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -107,7 +107,7 @@ textures/base_trim/panel_glo
 	}
         {
 		map textures/base_trim/panel_glo
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -126,7 +126,7 @@ textures/base_trim/spidertrim4
 	}
         {
 		map textures/base_trim/spidertrim4
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -145,7 +145,7 @@ textures/base_trim/panel_shiny
 	}
         {
 		map textures/base_trim/panel_shiny
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -164,7 +164,7 @@ textures/base_trim/spidertrim3
 	}
         {
 		map textures/base_trim/spidertrim3
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -247,21 +247,21 @@ textures/base_trim/spiderbite
 	}
         {
 	        map textures/base_trim/spiderbite
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
                 tcMod stretch sin .8 0.4 0 .2
                 tcmod scroll .3 0
 	        rgbGen identity
 	}
         {
 	        map textures/base_trim/spiderbite
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
                 tcMod stretch sin .8 0.2 0 .1
                 tcmod scroll -.5 0
 	        rgbGen identity
 	}
 	{
 	        map textures/base_trim/spiderbite
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -280,7 +280,7 @@ textures/base_trim/dark_tin2
 	}
         {
 		map textures/base_trim/dark_tin2
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -302,7 +302,7 @@ textures/base_trim/dark_tin2_trans
 	}
         {
 		map textures/base_trim/dark_tin2
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {

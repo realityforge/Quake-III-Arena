@@ -9,7 +9,7 @@ models/weapons2/bfg/bfg
 	}
 	{
 		map models/weapons2/bfg/bfg
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen lightingDiffuse
 	}
 	{

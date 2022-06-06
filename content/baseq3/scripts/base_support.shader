@@ -54,7 +54,7 @@ textures/base_support/support1shiny
 	}
         {
 		map textures/base_support/support1shiny
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {

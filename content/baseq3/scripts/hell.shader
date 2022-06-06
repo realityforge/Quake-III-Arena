@@ -166,7 +166,7 @@ textures/hell/metal2_2
 		rgbGen identity
 		alphaFunc GE128
 		//blendFunc GL_ONE GL_ZERO
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		depthWrite
 	}
 	{

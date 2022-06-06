@@ -338,7 +338,7 @@ models/mapobjects/skull/monkeyhead
 	{
 		//animMap 0.5 models/mapobjects/skull/monkeyhead //models/mapobjects/wallhead/femhead2
                 map models/mapobjects/skull/monkeyheadb
-		blendFunc	GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc	blend
 		alphaGen	wave sin 0 1 1 .1
                 // alphaGen	wave triangle 0 .7 0 .2
                 rgbGen vertex
@@ -762,7 +762,7 @@ models/players/grunt/stripe_h
         }
         {
 		map models/players/grunt/stripe_h
-                blendfunc gl_src_alpha gl_one_minus_src_alpha
+                blendfunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -795,7 +795,7 @@ models/mapobjects/wallhead/lion_m
 	}
         {
 		map models/mapobjects/wallhead/lion_m
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen vertex
 	}
 
@@ -826,7 +826,7 @@ models/mapobjects/grenadel/grenadelx
 //	}
 //        {
 //		map models/mapobjects/baph/bapho_lamp
-//                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+//                blendFunc blend
 //		rgbGen vertex
 //	}
 //
@@ -922,7 +922,7 @@ models/players/xaero/xaero_h
 	}
         {
 		map models/players/xaero/xaero_h
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -987,7 +987,7 @@ models/players/uriel/uriel_h
 	}
         {
 		map models/players/uriel/uriel_h
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -1023,7 +1023,7 @@ models/players/klesk/flisk_h
 	}
         {
 		map models/players/klesk/flisk_h
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -1105,7 +1105,7 @@ models/flags/flagtest
 	}
         {
 		map models/weapons2/grapple/grapple
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -1167,7 +1167,7 @@ models/players/sarge/krusade
 	}
         {
 		map models/players/sarge/krusade
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -1186,7 +1186,7 @@ models/players/sarge/roderic
 	}
         {
 		map models/players/sarge/roderic
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -1220,7 +1220,7 @@ models/players/major/daemia
 	}
         {
 		map models/players/major/daemia
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -1237,7 +1237,7 @@ models/players/major/daemia
 	}
         {
 		map models/weapons2/gauntlet/gauntlet2
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -1264,7 +1264,7 @@ models/mapobjects/podium/podium
 	}
         {
 		map models/mapobjects/podium/podium
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
         {
@@ -1291,7 +1291,7 @@ models/mapobjects/podium/podskull
 	}
         {
 		map models/mapobjects/podium/podskull
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
         {
@@ -1431,7 +1431,7 @@ models/players/visor/gorre
         //}
         {
 		map models/players/visor/gorre
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 }
@@ -1444,7 +1444,7 @@ models/powerups/armor/newred
 	}
         {
 		map models/powerups/armor/newred
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
 
@@ -1460,7 +1460,7 @@ models/powerups/armor/newyellow
 	}
         {
 		map models/powerups/armor/newyellow
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
 
@@ -1477,7 +1477,7 @@ models/players/doom/phobos_f
 	}
         {
 		map models/players/doom/phobos_f
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 }
@@ -1499,7 +1499,7 @@ models/players/doom/phobos
 	//}
         {
 		map models/players/doom/phobos
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		 rgbGen lightingDiffuse
 	}
 }
@@ -1556,7 +1556,7 @@ models/mapobjects/corpse/torso
 	//}
         {
 		map models/mapobjects/corpse/torso
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen vertex
 	}
 }
@@ -1876,7 +1876,7 @@ models/flags/flagbits
 	      // deformVertexes wave 100 sin 0 5 0 .7
 	 {
                 map models/flags/flagbits
-                //blendfunc gl_src_alpha gl_one_minus_src_alpha
+                //blendfunc blend
                 alphaFunc GE128
                 rgbGen lightingDiffuse
                 depthWrite
@@ -1907,7 +1907,7 @@ models/flags/r_flag2
 	}
         {
 		map models/flags/r_flag2
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -1940,7 +1940,7 @@ models/flags/b_flag2
 	}
         {
 		map models/flags/b_flag2
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -1959,7 +1959,7 @@ models/flags/flag_red
                deformVertexes wave 50 sin 1 .5 1 1
 	 {
                 map models/flags/flag_red
-                //blendfunc gl_src_alpha gl_one_minus_src_alpha
+                //blendfunc blend
                 //alphaFunc GE128
                 blendFunc GL_ONE GL_ONE
                 rgbGen lightingDiffuse
@@ -2121,7 +2121,7 @@ models/mapobjects/wallhead/femhead
 	{
 		//animMap 0.5 models/mapobjects/wallhead/femhead4 //models/mapobjects/wallhead/femhead2
                 map models/mapobjects/wallhead/femhead4
-		blendFunc	GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc	blend
 		alphaGen	wave sin 0 1 1 .1
                 // alphaGen	wave triangle 0 .7 0 .2
                 rgbGen vertex
@@ -2195,7 +2195,7 @@ models/players/mynx/mynx_shiny
 	}
         {
 		map models/players/mynx/mynx_shiny
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -2233,7 +2233,7 @@ models/mapobjects/scoreboard/s_name
     deformVertexes text0
 	{
 		map gfx/2d/bigchars
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 }
@@ -2246,7 +2246,7 @@ models/mapobjects/scoreboard/s_score
     deformVertexes text1
 	{
 		map gfx/2d/bigchars
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 }
@@ -2625,7 +2625,7 @@ models/players/orbb/orbb_h2
 	}
         {
 		map models/players/orbb/orbb_h2
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -2733,7 +2733,7 @@ models/players/hunter/hunter_f
      cull disable
         {
                 map models/players/hunter/hunter_f
-                //blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                //blendFunc blend
                 //alphaFunc GT0
                 alphaFunc GE128
 		depthWrite
@@ -2748,7 +2748,7 @@ models/players/hunter/red_f
      cull disable
         {
                 map models/players/hunter/red_f
-                //blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                //blendFunc blend
                 //alphaFunc GT0
                 alphaFunc GE128
 		depthWrite
@@ -2763,7 +2763,7 @@ models/players/uriel/uriel_w
 
         {
                 map models/players/uriel/uriel_w
-                //blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                //blendFunc blend
                 //alphaFunc GT0
                 alphaFunc GE128
 		depthWrite
@@ -2778,7 +2778,7 @@ models/players/uriel/red_w
 
         {
                 map models/players/uriel/red_w
-                //blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                //blendFunc blend
                 //alphaFunc GT0
                 alphaFunc GE128
 		depthWrite
@@ -2793,7 +2793,7 @@ models/players/uriel/blue_w
 
         {
                 map models/players/uriel/blue_w
-                //blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                //blendFunc blend
                 //alphaFunc GT0
                 alphaFunc GE128
 		depthWrite
@@ -2986,7 +2986,7 @@ models/mapobjects/skull/ribcage
         cull disable
         {
                 map models/mapobjects/skull/ribcage
-                // blendfunc gl_src_alpha gl_one_minus_src_alpha
+                // blendfunc blend
                 alphaFunc GE128
                 rgbGen vertex
         }
@@ -3002,7 +3002,7 @@ models/mapobjects/skull/ribcage
 //		   sort banner
 //        {
 //                map models/mapobjects/flag/banner_eg1
-//                // blendfunc gl_src_alpha gl_one_minus_src_alpha
+//                // blendfunc blend
 //                alphaFunc GE128
 //                rgbGen vertex
 //        }
@@ -3020,7 +3020,7 @@ models/mapobjects/flag/banner_strgg
 		sort banner
         {
                 map models/mapobjects/flag/banner_strgg
-                 blendfunc gl_src_alpha gl_one_minus_src_alpha
+                 blendfunc blend
                 alphaFunc GE128
                 rgbGen vertex
 
@@ -3048,7 +3048,7 @@ models/mapobjects/weeds/weed02
 	       deformVertexes wave 100 sin 0 2 0 .7
         {
                 map models/mapobjects/weeds/weed02
-                blendfunc gl_src_alpha gl_one_minus_src_alpha
+                blendfunc blend
         }
 
 
@@ -3061,7 +3061,7 @@ models/mapobjects/weeds/weed01
 	       deformVertexes wave 100 sin 0 2 0 .7
         {
                 map models/mapobjects/weeds/weed01
-                blendfunc gl_src_alpha gl_one_minus_src_alpha
+                blendfunc blend
         }
 
 
@@ -3880,7 +3880,7 @@ models/weapons2/bfg/bfg_e
 	}
         {
 		map models/weapons2/bfg/bfg
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -3899,7 +3899,7 @@ models/weapons2/bfg/bfg_e
 	}
         {
 		map models/weapons2/bfg/bfg_k
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 

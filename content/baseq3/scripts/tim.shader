@@ -202,7 +202,7 @@ textures/tim/rconcrete_ow
 	}
         {
 		map textures/tim/rconcrete_ow
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {

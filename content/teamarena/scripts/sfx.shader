@@ -1131,7 +1131,7 @@ textures/sfx/fan2
 		tcMod rotate 256
 		//blendFunc GL_ONE GL_ZERO
 		//alphaFunc GE128
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
                 alphaFunc GT0
 		depthWrite
 		rgbGen identity
@@ -2088,7 +2088,7 @@ textures/sfx/portal_sfx_ring
 
 	{
 		map textures/sfx/portal_sfx_ring_blue1
-		blendfunc gl_src_alpha gl_one_minus_src_alpha
+		blendfunc blend
 	}
 
 
@@ -2289,7 +2289,7 @@ textures/sfx/grid
 
 	{
 		map textures/sfx/grid
-		blendfunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendfunc blend
 		rgbGen identity
 	}
 
@@ -4204,7 +4204,7 @@ textures/sfx/goopq1metal7_98d_pent_256
 	}
 	{
 		map textures/sfx/pentfloor_256
-		blendfunc gl_src_alpha gl_one_minus_src_alpha
+		blendfunc blend
 	}
 	//{
 	//	map $lightmap

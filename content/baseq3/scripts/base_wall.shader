@@ -44,7 +44,7 @@ textures/base_wall/atechengine_ax
 	}
         {
 		map textures/base_wall/atechengine_ax
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -66,7 +66,7 @@ textures/base_wall/concrete_ow
 	}
         {
 		map textures/base_wall/concrete_ow
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -1749,7 +1749,7 @@ textures/base_wall/comp3c
 
 	{
 		map textures/base_wall/comp3c
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 
@@ -1788,7 +1788,7 @@ textures/base_wall/comp3b
 
 	{
 		map textures/base_wall/comp3b
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 
@@ -1826,7 +1826,7 @@ textures/base_wall/comp3b_dark
 
 	{
 		map textures/base_wall/comp3b
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 
@@ -1865,7 +1865,7 @@ textures/base_wall/comp3
 
 	{
 		map textures/base_wall/comp3
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 
@@ -1902,7 +1902,7 @@ textures/base_wall/basewall01bit
 	}
 	{
 		map textures/base_wall/basewall01bit
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
 

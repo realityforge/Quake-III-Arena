@@ -157,7 +157,7 @@ textures/gothic_block/blocks15cgeomtrn
 	}
         {
 	        map textures/gothic_block/blocks18cgeomtrn2
-		//blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		//blendFunc blend
                 blendFunc blend
                 tcmod rotate 30
                 tcMod stretch sin .8 0.2 0 .2
@@ -195,7 +195,7 @@ textures/gothic_block/killblockgeomtrn
 	}
         {
 	        map textures/gothic_block/blocks18cgeomtrn2
-		//blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		//blendFunc blend
                 blendFunc blend
                 tcmod rotate 30
                 tcMod stretch sin .8 0.2 0 .2
@@ -266,7 +266,7 @@ textures/gothic_block/blocks18cgeomtrn
 	}
         {
 	        map textures/gothic_block/blocks18cgeomtrn2
-		//blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		//blendFunc blend
                 blendFunc blend
                 tcmod rotate 30
                 tcMod stretch sin .8 0.2 0 .2
@@ -337,7 +337,7 @@ textures/gothic_block/demon_block15fx
 	}
 	{
 	        map textures/gothic_block/demon_block15fx
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -365,7 +365,7 @@ textures/gothic_block/blocks15_ow
 	}
 	{
 	        map textures/gothic_block/blocks15_ow
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -432,7 +432,7 @@ textures/gothic_block/wetwall
 	}
 	{
 	        map textures/gothic_block/wetwall
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -611,7 +611,7 @@ textures/gothic_block/blocks11ct
 	surfaceparm trans
 	{
 		map textures/gothic_block/blocks11c
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 	{

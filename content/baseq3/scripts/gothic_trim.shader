@@ -33,7 +33,7 @@ textures/gothic_trim/zinc_shiny
 	}
         {
 		map textures/gothic_trim/zinc_shiny
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -52,7 +52,7 @@ textures/gothic_trim/chrome_rivet
 	}
         {
 		map textures/gothic_trim/chrome_rivet
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -71,7 +71,7 @@ textures/gothic_trim/km_arena1tower4fx
 	}
         {
 		map textures/gothic_trim/km_arena1tower4fx
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -90,7 +90,7 @@ textures/gothic_trim/km_arena1towerblue
 	}
         {
 		map textures/gothic_trim/km_arena1towerblue
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -471,7 +471,7 @@ textures/gothic_wall/glass_stained1
 
 	{
 		map textures/gothic_wall/glass_stained1
-		blendfunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendfunc blend
 		rgbGen identity
 	}
 
@@ -555,7 +555,7 @@ qer_editorimage	textures/gothic_trim/metalbase09_d
 			map textures/gothic_trim/metalbase09_d
 			// Name of border wall
 			rgbGen identity
-			blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+			blendFunc blend
 		}
 
 		{
@@ -584,7 +584,7 @@ qer_editorimage	textures/gothic_trim/metalbase09_e
 			map textures/gothic_trim/metalbase09_e
 			// Name of border wall
 			rgbGen identity
-			blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+			blendFunc blend
 		}
 
 		{
@@ -612,7 +612,7 @@ qer_editorimage	textures/gothic_trim/metalbase02_b
 		{
 			map textures/gothic_trim/metalbase02_b
 			// Name of border wall
-			blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+			blendFunc blend
 			rgbGen identity
 		}
 
@@ -641,7 +641,7 @@ qer_editorimage	textures/gothic_trim/metalbase03_c
 		{
 			map textures/gothic_trim/metalbase03_c
 			// Name of border wall
-			blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+			blendFunc blend
 			rgbGen identity
 		}
 
@@ -671,7 +671,7 @@ qer_editorimage	textures/gothic_trim/metalbase02_c
 		{
 			map textures/gothic_trim/metalbase02_c
 			// Name of border wall
-			blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+			blendFunc blend
 			rgbGen identity
 		}
 
@@ -700,7 +700,7 @@ qer_editorimage	textures/gothic_trim/metalbase03_b
 		{
 			map textures/gothic_trim/metalbase03_b
 			// Name of border wall
-			blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+			blendFunc blend
 			rgbGen identity
 		}
 
@@ -729,7 +729,7 @@ qer_editorimage	textures/gothic_trim/metalbase09_b
 		{
 			map textures/gothic_trim/metalbase09_b
 			// Name of border wall
-			blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+			blendFunc blend
 			rgbGen identity
 		}
 
@@ -759,7 +759,7 @@ qer_editorimage	textures/gothic_trim/metalbase03_a
 		{
 			map textures/gothic_trim/metalbase03_a
 			// Name of border wall
-			blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+			blendFunc blend
 			rgbGen identity
 		}
 
@@ -789,7 +789,7 @@ qer_editorimage	textures/gothic_trim/metalbase03_d
 		{
 			map textures/gothic_trim/metalbase03_d
 			// Name of border wall
-			blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+			blendFunc blend
 			rgbGen identity
 		}
 

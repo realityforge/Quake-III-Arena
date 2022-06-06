@@ -45,7 +45,7 @@ textures/base/comp_panel
 
 	{
 		map textures/base/comp_panel
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 
 	{

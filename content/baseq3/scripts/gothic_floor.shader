@@ -46,7 +46,7 @@ textures/gothic_floor/xq1metalbig_ow
 	}
 	{
 	        map textures/gothic_floor/xq1metalbig_ow
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -71,7 +71,7 @@ textures/gothic_floor/q1metal7_98blueow
 	}
 	{
 	        map textures/gothic_floor/q1metal7_98blueow
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -96,7 +96,7 @@ textures/gothic_floor/q1metal7_97redow
 	}
 	{
 	        map textures/gothic_floor/q1metal7_97redow
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -137,14 +137,14 @@ textures/gothic_floor/center2trn
 	}
         {
 	        map textures/gothic_floor/center2trn
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
                 tcmod rotate 30
                 tcMod stretch sin .8 0.2 0 .2
 	        rgbGen identity
 	}
         {
 	        map textures/gothic_floor/center2trn
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -166,7 +166,7 @@ textures/gothic_floor/largerblock3b_ow
 	}
 	{
 	        map textures/gothic_floor/largerblock3b_ow
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -186,7 +186,7 @@ textures/gothic_floor/metalbridge06brokeb
 	}
         {
 		map textures/gothic_floor/metalbridge06brokeb
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {

@@ -598,7 +598,7 @@ textures/base_wall2/double_line_blue
 
 	{
 		map textures/base_wall2/double_line_blue
-		blendfunc gl_src_alpha gl_one_minus_src_alpha
+		blendfunc blend
 		rgbGen identity
 
 	}
@@ -614,7 +614,7 @@ textures/base_wall2/double_line_red
 
 	{
 		map textures/base_wall2/double_line_red
-		blendfunc gl_src_alpha gl_one_minus_src_alpha
+		blendfunc blend
 		rgbGen identity
 
 	}
@@ -736,7 +736,7 @@ textures/base_wall2/icon_pagans
 
 	{
 		map textures/base_wall2/icon_pagans
-		blendfunc gl_src_alpha gl_one_minus_src_alpha
+		blendfunc blend
 		rgbGen identity
 
 	}
@@ -752,7 +752,7 @@ textures/base_wall2/redrust
 
 	{
 		map textures/base_wall2/redrust
-		blendfunc gl_src_alpha gl_one_minus_src_alpha
+		blendfunc blend
 		rgbGen identity
 
 	}
@@ -807,7 +807,7 @@ textures/base_wall2/yellow_arrow
 
 	{
 		map textures/base_wall2/yellow_arrow
-		blendfunc gl_src_alpha gl_one_minus_src_alpha
+		blendfunc blend
 		rgbGen identity
 
 	}
@@ -826,7 +826,7 @@ textures/base_wall2/yellow_circle
 
 	{
 		map textures/base_wall2/yellow_circle
-		blendfunc gl_src_alpha gl_one_minus_src_alpha
+		blendfunc blend
 		rgbGen identity
 
 	}
@@ -844,7 +844,7 @@ textures/base_wall2/red_circle
 
 	{
 		map textures/base_wall2/red_circle
-		blendfunc gl_src_alpha gl_one_minus_src_alpha
+		blendfunc blend
 		rgbGen identity
 
 	}
@@ -862,7 +862,7 @@ textures/base_wall2/blue_circle
 
 	{
 		map textures/base_wall2/blue_circle
-		blendfunc gl_src_alpha gl_one_minus_src_alpha
+		blendfunc blend
 		rgbGen identity
 
 	}
@@ -933,7 +933,7 @@ textures/base_wall2/cautionstripe
 
 	{
 		map textures/base_wall2/cautionstripe
-		blendfunc gl_src_alpha gl_one_minus_src_alpha
+		blendfunc blend
 		rgbGen identity
 
 	}

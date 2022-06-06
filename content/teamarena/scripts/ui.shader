@@ -74,7 +74,7 @@ textures/base_wall2/icon_stroggs
 
 	{
 		map textures/base_wall2/icon_stroggs
-		blendfunc gl_src_alpha gl_one_minus_src_alpha
+		blendfunc blend
 		rgbGen identity
 
 	}

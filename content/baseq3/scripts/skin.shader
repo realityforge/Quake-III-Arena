@@ -32,7 +32,7 @@ textures/skin/chapthroatooz
 	}
 	{
 		map textures/skin/chapthroatooz
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
         {
@@ -229,7 +229,7 @@ textures/skin/proto_skin2
 	}
 	{
 		map textures/skin/proto_skin2
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
         {
@@ -250,7 +250,7 @@ textures/skin/proto_skin2b
 	}
 	{
 		map textures/skin/proto_skin2b
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
         {

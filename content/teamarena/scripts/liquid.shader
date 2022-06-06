@@ -1790,7 +1790,7 @@ textures/liquids/lavacrust
 
 		{
 			map textures/liquids/lavacrust
-			blendfunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+			blendfunc blend
 			tcmod turb 0 .5 0 .005
 			rgbgen identity
 		}

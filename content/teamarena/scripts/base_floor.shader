@@ -81,7 +81,7 @@ textures/base_floor/metalbridge04dbroke
 	}
         {
 		map textures/base_floor/metalbridge04dbroke
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -105,7 +105,7 @@ textures/base_floor/clang_floor_ow3
 	}
         {
 		map textures/base_floor/clang_floor_ow3
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -222,7 +222,7 @@ textures/base_floor/clang_floor_ow
 	}
         {
 		map textures/base_floor/clang_floor_ow
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -246,7 +246,7 @@ textures/base_floor/clangdark_ow3
 	}
         {
 		map textures/base_floor/clangdark_ow3
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -290,7 +290,7 @@ textures/base_floor/diamond2c_ow
 	}
         {
 		map textures/base_floor/diamond2c_ow
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -319,7 +319,7 @@ textures/base_floor/diamond2cspot
 
         {
 		map textures/base_floor/diamond2cspot
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -548,7 +548,7 @@ textures/base_floor/clangspot
 
         {
 		map textures/base_floor/clangspot
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -583,7 +583,7 @@ textures/base_floor/clangspot2
 
         {
 		map textures/base_floor/clangspot2
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -622,7 +622,7 @@ textures/base_floor/clangdarkspot
 
         {
 		map textures/base_floor/clangdarkspot
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {

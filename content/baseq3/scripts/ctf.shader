@@ -138,7 +138,7 @@ textures/ctf/killblockctf_r
 	}
         {
 	        map textures/gothic_block/blocks18cgeomtrn2
-		//blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		//blendFunc blend
                 blendFunc blend
                 tcmod rotate 30
                 tcMod stretch sin .8 0.2 0 .2
@@ -176,7 +176,7 @@ textures/ctf/killblockctf_b
 	}
         {
 	        map textures/gothic_block/blocks18cgeomtrn2
-		//blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		//blendFunc blend
                 blendFunc blend
                 tcmod rotate 30
                 tcMod stretch sin .8 0.2 0 .2
@@ -217,7 +217,7 @@ textures/ctf/ctf_arch_b_shiny
 	}
         {
 		map textures/ctf/ctf_arch_b
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -245,7 +245,7 @@ textures/ctf/ctf_arch_r_shiny
 	}
         {
 		map textures/ctf/ctf_arch_r
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -565,7 +565,7 @@ textures/ctf/ctf_blueflag
 	}
         {
 		map textures/ctf/ctf_blueflag
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -604,7 +604,7 @@ textures/ctf/ctf_redflag
 	}
         {
 		map textures/ctf/ctf_redflag
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -649,7 +649,7 @@ sprites/friend
 	nopicmip
 	{
 		map sprites/friend1
-		blendfunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendfunc blend
 	}
 }
 
@@ -659,6 +659,6 @@ sprites/foe
 	nopicmip
 	{
 		map sprites/foe2
-		blendfunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendfunc blend
 	}
 }
