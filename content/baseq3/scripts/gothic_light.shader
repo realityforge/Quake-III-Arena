@@ -19,12 +19,12 @@ textures/gothic_light/border7_ceil39b_10k
 	}
 	{
 		map textures/gothic_light/border7_ceil39b
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/border7_ceil39b_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 //****************************************
@@ -43,12 +43,12 @@ textures/gothic_light/border7_ceil39_6k
 	}
 	{
 		map textures/gothic_light/border7_ceil39
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/border_ceil39_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_light/border7_ceil22a
@@ -64,12 +64,12 @@ textures/gothic_light/border7_ceil22a
 	}
 	{
 		map textures/gothic_light/border7_ceil22a
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/border_ceil22a_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -86,12 +86,12 @@ textures/gothic_light/border7_ceil30
 	}
 	{
 		map textures/gothic_light/border7_ceil30
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/border_ceil30_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -107,13 +107,13 @@ textures/gothic_light/gothic_light2_lrg_2k
 	}
 	{
 		map textures/gothic_light/gothic_light2_lrg
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		//tcMod scale 0.5 0.5
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -129,13 +129,13 @@ textures/gothic_light/gothic_light2_lrg_1k
 	}
 	{
 		map textures/gothic_light/gothic_light2_lrg
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		//tcMod scale 0.5 0.5
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_light/gothic_light2_lrg_200
@@ -150,13 +150,13 @@ textures/gothic_light/gothic_light2_lrg_200
 	}
 	{
 		map textures/gothic_light/gothic_light2_lrg
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		//tcMod scale 0.5 0.5
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -172,13 +172,13 @@ textures/gothic_light/gothic_light2_lrg_500
 	}
 	{
 		map textures/gothic_light/gothic_light2_lrg
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		//tcMod scale 0.5 0.5
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -194,13 +194,13 @@ textures/gothic_light/goth_lt2_lrg2k
 	}
 	{
 		map textures/gothic_light/gothic_light2_lrg
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		//tcMod scale 0.5 0.5
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -217,13 +217,13 @@ textures/gothic_light/gothic_light3_15K
 	}
 	{
 		map textures/gothic_light/gothic_light3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		rgbGen wave sin .6 .1 .1 .1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -240,13 +240,13 @@ textures/gothic_light/gothic_light3_20K
 	}
 	{
 		map textures/gothic_light/gothic_light3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		rgbGen wave sin .6 .1 .1 .1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -264,13 +264,13 @@ textures/gothic_light/gothic_light3_10K
 	}
 	{
 		map textures/gothic_light/gothic_light3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		rgbGen wave sin .6 .1 .1 .1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -288,13 +288,13 @@ textures/gothic_light/gothic_light3_6K
 	}
 	{
 		map textures/gothic_light/gothic_light3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		rgbGen wave sin .6 .1 .1 .1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -311,13 +311,13 @@ textures/gothic_light/gothic_light3_7K
 	}
 	{
 		map textures/gothic_light/gothic_light3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		rgbGen wave sin .6 .1 .1 .1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -334,13 +334,13 @@ textures/gothic_light/gothic_light3_8K
 	}
 	{
 		map textures/gothic_light/gothic_light3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		rgbGen wave sin .6 .1 .1 .1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -358,13 +358,13 @@ textures/gothic_light/gothic_light3_5K
 	}
 	{
 		map textures/gothic_light/gothic_light3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		rgbGen wave sin .6 .1 .1 .1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -382,13 +382,13 @@ textures/gothic_light/gothic_light3_4K
 	}
 	{
 		map textures/gothic_light/gothic_light3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		rgbGen wave sin .6 .1 .1 .1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_light/gothic_light3_3k
@@ -404,13 +404,13 @@ textures/gothic_light/gothic_light3_3k
 	}
 	{
 		map textures/gothic_light/gothic_light3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		rgbGen wave sin .6 .1 .1 .1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 
 }
@@ -427,13 +427,13 @@ textures/gothic_light/gothic_light3_2K
 	}
 	{
 		map textures/gothic_light/gothic_light3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		rgbGen wave sin .6 .1 .1 .1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 
 }
@@ -450,13 +450,13 @@ textures/gothic_light/gothic_light3_1K
 	}
 	{
 		map textures/gothic_light/gothic_light3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		rgbGen wave sin .6 .1 .1 .1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 
 }
@@ -473,13 +473,13 @@ textures/gothic_light/gothic_light2_4K
 	}
 	{
 		map textures/gothic_light/gothic_light2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		rgbGen wave sin .6 .1 .1 .1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_light/gothic_light2_1k
@@ -494,13 +494,13 @@ textures/gothic_light/gothic_light2_1k
 	}
 	{
 		map textures/gothic_light/gothic_light2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		rgbGen wave sin .6 .1 .1 .1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_light/gothic_light2_2K
@@ -515,13 +515,13 @@ textures/gothic_light/gothic_light2_2K
 	}
 	{
 		map textures/gothic_light/gothic_light2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
 		rgbGen wave sin .6 .1 .1 .1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_light/pentagram_light1_1K
@@ -536,14 +536,14 @@ textures/gothic_light/pentagram_light1_1K
 	}
 	{
 		map textures/gothic_light/pentagram_light1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
 
 	{
 		map textures/gothic_light/pentagram_light1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen wave sin .8 .2 0 1
 	}
 
@@ -562,14 +562,14 @@ textures/gothic_light/pentagram_light1_2K
 	}
 	{
 		map textures/gothic_light/pentagram_light1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
 
 	{
 		map textures/gothic_light/pentagram_light1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen wave sin .8 .2 0 1
 	}
 }
@@ -586,14 +586,14 @@ textures/gothic_light/pentagram_light1_3K
 	}
 	{
 		map textures/gothic_light/pentagram_light1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
 
 	{
 		map textures/gothic_light/pentagram_light1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen wave sin .8 .2 0 1
 	}
 }
@@ -610,14 +610,14 @@ textures/gothic_light/pentagram_light1_4K
 	}
 	{
 		map textures/gothic_light/pentagram_light1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
 
 	{
 		map textures/gothic_light/pentagram_light1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen wave sin .8 .2 0 1
 	}
 }
@@ -634,14 +634,14 @@ textures/gothic_light/pentagram_light1_5K
 	}
 	{
 		map textures/gothic_light/pentagram_light1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
 
 	{
 		map textures/gothic_light/pentagram_light1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen wave sin .8 .2 0 1
 	}
 
@@ -660,14 +660,14 @@ textures/gothic_light/pentagram_light1_10K
 	}
 	{
 		map textures/gothic_light/pentagram_light1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
 
 	{
 		map textures/gothic_light/pentagram_light1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen wave sin .8 .2 0 1
 	}
 
@@ -686,14 +686,14 @@ textures/gothic_light/pentagram_light1_15K
 	}
 	{
 		map textures/gothic_light/pentagram_light1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
 
 	{
 		map textures/gothic_light/pentagram_light1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen wave sin .8 .2 0 1
 	}
 
@@ -714,12 +714,12 @@ textures/gothic_light/ironcrossltred_2000
 	}
 	{
 		map textures/gothic_light/ironcrossltred
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrossltred_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -736,12 +736,12 @@ textures/gothic_light/ironcrossltred_3000
 	}
 	{
 		map textures/gothic_light/ironcrossltred
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrossltred_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -758,12 +758,12 @@ textures/gothic_light/ironcrossltred_4000
 	}
 	{
 		map textures/gothic_light/ironcrossltred
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrossltred_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -780,12 +780,12 @@ textures/gothic_light/ironcrossltred_5000
 	}
 	{
 		map textures/gothic_light/ironcrossltred
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrossltred_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_light/ironcrossltred_10000
@@ -801,12 +801,12 @@ textures/gothic_light/ironcrossltred_10000
 	}
 	{
 		map textures/gothic_light/ironcrossltred
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrossltred_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -823,12 +823,12 @@ textures/gothic_light/ironcrossltred_20000
 	}
 	{
 		map textures/gothic_light/ironcrossltred
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrossltred_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_light/ironcrossltred_30000
@@ -844,12 +844,12 @@ textures/gothic_light/ironcrossltred_30000
 	}
 	{
 		map textures/gothic_light/ironcrossltred
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrossltred_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -868,11 +868,11 @@ textures/gothic_light/ironcrossltblue_2000
 	{
 		map textures/gothic_light/ironcrossltblue
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		map textures/gothic_light/ironcrossltblue_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -889,12 +889,12 @@ textures/gothic_light/ironcrossltblue_3000
 	}
 	{
 		map textures/gothic_light/ironcrossltblue
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrossltblue_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -911,12 +911,12 @@ textures/gothic_light/ironcrossltblue_4000
 	}
 	{
 		map textures/gothic_light/ironcrossltblue
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrossltblue_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -933,12 +933,12 @@ textures/gothic_light/ironcrossltblue_5000
 	}
 	{
 		map textures/gothic_light/ironcrossltblue
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrossltblue_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -955,12 +955,12 @@ textures/gothic_light/ironcrossltblue_10000
 	}
 	{
 		map textures/gothic_light/ironcrossltblue
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrossltblue_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -977,12 +977,12 @@ textures/gothic_light/ironcrossltblue_20000
 	}
 	{
 		map textures/gothic_light/ironcrossltblue
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrossltblue_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -999,12 +999,12 @@ textures/gothic_light/ironcrossltblue_30000
 	}
 	{
 		map textures/gothic_light/ironcrossltblue
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrossltblue_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -1021,13 +1021,13 @@ textures/gothic_light/crosslt1
 	}
 	{
 		map textures/gothic_light/crosslt1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/crosslt1_blend
 		rgbGen wave sin 0.5 0.5 0 .2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 }
 textures/gothic_light/light1_6Kgothicred
@@ -1044,13 +1044,13 @@ textures/gothic_light/light1_6Kgothicred
 	}
 	{
 		map textures/base_light/light1red
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/base_light/light1red_blend
 		rgbGen wave sin 0.25 0.25 0 .2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 }
 textures/gothic_light/light1_4Kgothic
@@ -1067,13 +1067,13 @@ textures/gothic_light/light1_4Kgothic
 	}
 	{
 		map textures/base_light/light1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/base_light/light1_blend
 		rgbGen wave sin 0.25 0.25 0 .2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 }
 textures/gothic_light/light1_6Kgothic
@@ -1090,13 +1090,13 @@ textures/gothic_light/light1_6Kgothic
 	}
 	{
 		map textures/base_light/light1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/base_light/light1_blend
 		rgbGen wave sin 0.25 0.25 0 .2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 }
 textures/gothic_light/ironcrosslt1_2500
@@ -1112,12 +1112,12 @@ textures/gothic_light/ironcrosslt1_2500
 	}
 	{
 		map textures/gothic_light/ironcrosslt1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_light/ironcrosslt1_1000
@@ -1133,12 +1133,12 @@ textures/gothic_light/ironcrosslt1_1000
 	}
 	{
 		map textures/gothic_light/ironcrosslt1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -1155,12 +1155,12 @@ textures/gothic_light/ironcrosslt1_2000
 	}
 	{
 		map textures/gothic_light/ironcrosslt1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -1177,12 +1177,12 @@ textures/gothic_light/ironcrosslt1_120000
 	}
 	{
 		map textures/gothic_light/ironcrosslt1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -1199,12 +1199,12 @@ textures/gothic_light/ironcrosslt1_500000
 	}
 	{
 		map textures/gothic_light/ironcrosslt1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -1221,12 +1221,12 @@ textures/gothic_light/ironcrosslt1_3000
 	}
 	{
 		map textures/gothic_light/ironcrosslt1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -1244,11 +1244,11 @@ textures/gothic_light/ironcrosslt1_4000
 	{
 		map textures/gothic_light/ironcrosslt1
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		map textures/gothic_light/ironcrosslt1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -1265,12 +1265,12 @@ textures/gothic_light/ironcrosslt1_5000
 	}
 	{
 		map textures/gothic_light/ironcrosslt1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_light/ironcrosslt1_10000
@@ -1286,12 +1286,12 @@ textures/gothic_light/ironcrosslt1_10000
 	}
 	{
 		map textures/gothic_light/ironcrosslt1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_light/ironcrosslt1_20000
@@ -1308,11 +1308,11 @@ textures/gothic_light/ironcrosslt1_20000
 	{
 		map textures/gothic_light/ironcrosslt1
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		map textures/gothic_light/ironcrosslt1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -1329,12 +1329,12 @@ textures/gothic_light/ironcrosslt1_30000
 	}
 	{
 		map textures/gothic_light/ironcrosslt1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -1351,12 +1351,12 @@ textures/gothic_light/ironcrosslt1_40000
 	}
 	{
 		map textures/gothic_light/ironcrosslt1
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt1_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -1373,12 +1373,12 @@ textures/gothic_light/ironcrosslt2_2000
 	}
 	{
 		map textures/gothic_light/ironcrosslt2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt2_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -1396,12 +1396,12 @@ textures/gothic_light/ironcrosslt2_2500
 	}
 	{
 		map textures/gothic_light/ironcrosslt2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt2_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_light/ironcrosslt2_3000
@@ -1417,12 +1417,12 @@ textures/gothic_light/ironcrosslt2_3000
 	}
 	{
 		map textures/gothic_light/ironcrosslt2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt2_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -1439,12 +1439,12 @@ textures/gothic_light/ironcrosslt2_4000
 	}
 	{
 		map textures/gothic_light/ironcrosslt2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt2_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -1461,12 +1461,12 @@ textures/gothic_light/ironcrosslt2_5000
 	}
 	{
 		map textures/gothic_light/ironcrosslt2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt2_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_light/ironcrosslt2_10000
@@ -1482,12 +1482,12 @@ textures/gothic_light/ironcrosslt2_10000
 	}
 	{
 		map textures/gothic_light/ironcrosslt2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt2_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_light/ironcrosslt2_20000
@@ -1503,12 +1503,12 @@ textures/gothic_light/ironcrosslt2_20000
 	}
 	{
 		map textures/gothic_light/ironcrosslt2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt2_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -1525,12 +1525,12 @@ textures/gothic_light/ironcrosslt2_30000
 	}
 	{
 		map textures/gothic_light/ironcrosslt2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt2_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -1547,12 +1547,12 @@ textures/gothic_light/ironcrosslt2_40000
 	}
 	{
 		map textures/gothic_light/ironcrosslt2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt2_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -1570,11 +1570,11 @@ textures/gothic_light/ironcrosslt2_1000
 	}
 	{
 		map textures/gothic_light/ironcrosslt2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/ironcrosslt2_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }

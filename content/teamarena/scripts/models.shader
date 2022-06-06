@@ -648,7 +648,7 @@ models/players/bones/xray
                 map models/mapobjects/bitch/hologirl2
                 tcMod scroll -6 -.2
                 tcgen environment
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen identity
 	}
 
@@ -694,7 +694,7 @@ models/mapobjects/skel/xray
                 map models/mapobjects/bitch/hologirl2
                 tcMod scroll -6 -.2
                 tcgen environment
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen identity
 	}
 
@@ -724,12 +724,12 @@ models/mapobjects/spotlamp/beam
 	{
 		map models/mapobjects/spotlamp/beam
                 tcMod Scroll .3 0
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
         }
         //{
 	//	map models/mapobjects/spotlamp/beam
          //       tcMod Scroll -.3 0
-         //       blendFunc GL_ONE GL_ONE
+         //       blendFunc add
         //}
 
 }
@@ -762,7 +762,7 @@ models/players/grunt/stripe_h
         }
         {
 		map models/players/grunt/stripe_h
-                blendfunc gl_src_alpha gl_one_minus_src_alpha
+                blendfunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -789,13 +789,13 @@ models/mapobjects/wallhead/lion_m
 	}
         {
                 map textures/sfx/firewalla
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcmod scroll 0.1 1
                 //rgbGen wave triangle .5 1 0 .4
 	}
         {
 		map models/mapobjects/wallhead/lion_m
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen vertex
 	}
 
@@ -826,7 +826,7 @@ models/mapobjects/grenadel/grenadelx
 //	}
 //        {
 //		map models/mapobjects/baph/bapho_lamp
-//                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+//                blendFunc blend
 //		rgbGen vertex
 //	}
 //
@@ -841,14 +841,14 @@ models/mapobjects/baph/wrist
 
         {
          map models/mapobjects/baph/wrist
-         blendFunc GL_ONE GL_ONE
+         blendFunc add
          tcmod scale  2 1
          tcmod scroll 3 0
          rgbGen identity
         }
         {
          map models/mapobjects/baph/wrist
-         blendFunc GL_ONE GL_ONE
+         blendFunc add
          tcmod scale  1 1
          tcmod scroll -5 0
          rgbGen identity
@@ -863,14 +863,14 @@ models/mapobjects/baph/bapholamp_fx
      nomipmaps
         {
          clampmap models/mapobjects/baph/bapholamp_fx
-         blendFunc GL_ONE GL_ONE
+         blendFunc add
          tcmod rotate 333
          tcMod stretch sin .9 0.1 0 7
          rgbGen identity
         }
         {
          clampmap models/mapobjects/baph/bapholamp_fx2
-         blendFunc GL_ONE GL_ONE
+         blendFunc add
          tcmod rotate -301
          tcMod stretch sin 1 .1 0 9
          rgbGen identity
@@ -916,13 +916,13 @@ models/players/xaero/xaero_h
 	}
         {
                 map textures/sfx/firewalla
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcmod scroll 0.1 1
                 //rgbGen wave triangle .5 1 0 .4
 	}
         {
 		map models/players/xaero/xaero_h
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -967,7 +967,7 @@ models/players/klesk/klesk_h
 
 	{
 		map models/players/klesk/klesk_g
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen wave triangle .5 1 0 .5
 
 	}
@@ -981,13 +981,13 @@ models/players/uriel/uriel_h
 	}
         {
                 map textures/sfx/proto_zzzt
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcmod scroll -0.2 1
                 rgbGen identity
 	}
         {
 		map models/players/uriel/uriel_h
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -1017,13 +1017,13 @@ models/players/klesk/flisk_h
 	}
         {
                 map textures/sfx/bolts
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcmod scale 2 2
                 tcmod scroll 2 2
 	}
         {
 		map models/players/klesk/flisk_h
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -1036,13 +1036,13 @@ models/weaphits/bfg01
 
         {
                 clampmap models/weaphits/bfg01
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcMod rotate 333
                 rgbGen identity
         }
         {
                 clampmap models/weaphits/bfg01
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcMod rotate -100
                 rgbGen identity
         }
@@ -1054,13 +1054,13 @@ models/weaphits/bfg02
         nomipmaps
         {
                 map models/weaphits/bfg03
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcmod scroll 2 0
                 rgbGen identity
         }
         {
                 map models/weaphits/bfg02
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcmod scroll 3 0
                 tcMod turb 0 .25 0 1.6
                 rgbGen identity
@@ -1082,8 +1082,8 @@ models/flags/flagtest
         {
 		map textures/sfx/shadow
                 tcGen environment
-                //blendFunc GL_ONE GL_ONE
-                blendFunc GL_DST_COLOR GL_ZERO
+                //blendFunc add
+                blendFunc filter
                 rgbGen identity
 	}
 
@@ -1098,14 +1098,14 @@ models/flags/flagtest
 	}
         {
                 map textures/sfx/specular
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcmod scroll .1 .1
                 tcGen environment
                 rgbGen lightingDiffuse
 	}
         {
 		map models/weapons2/grapple/grapple
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -1126,7 +1126,7 @@ models/weapons2/grapple/grapple_j
         }
         {
                 map textures/liquids/jello2
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcmod scale .7 .7
                 tcMod turb 0 .4 0 .3
                 tcMod scroll .7 -.4
@@ -1135,7 +1135,7 @@ models/weapons2/grapple/grapple_j
         {
 		map textures/effects/tinfx2
                 tcGen environment
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen lightingDiffuse
 	}
 
@@ -1167,7 +1167,7 @@ models/players/sarge/krusade
 	}
         {
 		map models/players/sarge/krusade
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -1186,7 +1186,7 @@ models/players/sarge/roderic
 	}
         {
 		map models/players/sarge/roderic
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -1196,7 +1196,7 @@ models/players/sarge/null
 {
     {
 	map models/players/sarge/null
-        blendFunc GL_ONE GL_ONE
+        blendFunc add
     }
 
 }
@@ -1204,7 +1204,7 @@ models/players/uriel/null
 {
     {
 	map models/players/uriel/null
-        blendFunc GL_ONE GL_ONE
+        blendFunc add
     }
 
 }
@@ -1220,7 +1220,7 @@ models/players/major/daemia
 	}
         {
 		map models/players/major/daemia
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -1237,7 +1237,7 @@ models/players/major/daemia
 	}
         {
 		map models/weapons2/gauntlet/gauntlet2
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -1257,19 +1257,19 @@ models/mapobjects/podium/podium
 	}
         {
                 map textures/sfx/specular
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcGen environment
                 tcmod scroll .2 0.01
                 rgbGen identity
 	}
         {
 		map models/mapobjects/podium/podium
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
         {
                 map models/mapobjects/podium/podiumglo
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen wave sin 1 1 0 .2
         }
 
@@ -1284,19 +1284,19 @@ models/mapobjects/podium/podskull
 	}
         {
                 map textures/sfx/specular
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcGen environment
                 tcmod scroll .2 0.03
                 rgbGen identity
 	}
         {
 		map models/mapobjects/podium/podskull
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
         {
                 map models/mapobjects/podium/podskullfx
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen wave sin 1 1 0 .2
         }
 }
@@ -1306,19 +1306,19 @@ models/mapobjects/podium/podiumfx1
       surfaceparm trans
 	{
 		map models/mapobjects/podium/podiumfx1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcmod scroll 2 -.3
 		rgbGen wave inversesawtooth 0 1 .35 .3
 	}
         {
 		map models/mapobjects/podium/podiumfx1b
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcmod scroll -1.7 -.3
                rgbGen wave inversesawtooth 0 1 .35 .3
 	}
         {
 		map models/mapobjects/podium/podiumfx1b
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcmod scroll -1.1 -.3
 		rgbGen wave inversesawtooth 0 1 .35 .3
 	}
@@ -1329,21 +1329,21 @@ models/mapobjects/podium/podiumfx2
       surfaceparm trans
 	{
 		map models/mapobjects/podium/podiumfx1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcmod scale 1 .5
                 tcmod scroll .8 -.3
 		rgbGen wave inversesawtooth 0 1 .7 .6
 	}
         {
 		map models/mapobjects/podium/podiumfx1b
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcmod scale 1 .5
                 tcmod scroll -1.7 -.3
 		rgbGen wave inversesawtooth 0 1 .7 .6
 	}
         {
 		map models/mapobjects/podium/podiumfx1b
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcmod scale 1 .5
                 tcmod scroll -1.1 -.3
 		rgbGen wave inversesawtooth 0 1 .7 .6
@@ -1355,21 +1355,21 @@ models/mapobjects/podium/podiumfx3
       surfaceparm trans
 	{
 		map models/mapobjects/podium/podiumfx1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcmod scale 1 .1
                 tcmod scroll 1 -.3
 		rgbGen wave inversesawtooth 0 1 1.1 .9
 	}
         {
 		map models/mapobjects/podium/podiumfx1b
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcmod scale 1 .1
                 tcmod scroll -1.7 -.3
 		rgbGen wave inversesawtooth 0 1 1.1 .9
 	}
         {
 		map models/mapobjects/podium/podiumfx1b
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcmod scale 1 .1
                 tcmod scroll -1.1 -.3
 		rgbGen wave inversesawtooth 0 1 1.1 .9
@@ -1422,7 +1422,7 @@ models/players/visor/gorre
 	}
         //{
         //        map textures/sfx/firewallb
-        //        blendFunc GL_ONE GL_ONE
+        //        blendFunc add
         //        tcmod scale 3 3
         //        tcMod turb 0 .2 0 .1
         //        tcMod scroll 0 3
@@ -1431,7 +1431,7 @@ models/players/visor/gorre
         //}
         {
 		map models/players/visor/gorre
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 }
@@ -1444,7 +1444,7 @@ models/powerups/armor/newred
 	}
         {
 		map models/powerups/armor/newred
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
 
@@ -1460,7 +1460,7 @@ models/powerups/armor/newyellow
 	}
         {
 		map models/powerups/armor/newyellow
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
 
@@ -1477,7 +1477,7 @@ models/players/doom/phobos_f
 	}
         {
 		map models/players/doom/phobos_f
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 }
@@ -1494,12 +1494,12 @@ models/players/doom/phobos
         //{
 	//	map textures/effects/tinfx2
         //        tcGen environment
-        //        blendFunc GL_ONE GL_ONE
+        //        blendFunc add
         //        rgbGen lightingDiffuse
 	//}
         {
 		map models/players/doom/phobos
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		 rgbGen lightingDiffuse
 	}
 }
@@ -1548,7 +1548,7 @@ models/mapobjects/corpse/torso
         //{
 	//	map textures/liquids/proto_grueldark
         //        //tcGen environment
-        //        blendFunc GL_ONE GL_ONE
+        //        blendFunc add
         //        tcmod scale 2 2
         //        tcMod scroll 0 -.09
        //         tcMod turb 0 0.07 0 .08
@@ -1556,7 +1556,7 @@ models/mapobjects/corpse/torso
 	//}
         {
 		map models/mapobjects/corpse/torso
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen vertex
 	}
 }
@@ -1632,7 +1632,7 @@ models/players/lucy/h_angel
                  tcgen environment
                 tcMod scroll -6 -.2
                 tcMod scale 1 1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		 rgbGen identity
                 // rgbGen vertex
                  rgbGen lightingDiffuse
@@ -1659,7 +1659,7 @@ models/players/lucy/angel
                  tcgen environment
                 tcMod scroll -6 -.2
                 tcMod scale 1 1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		//rgbGen identity
                 //rgbGen vertex
                 rgbGen lightingDiffuse
@@ -1726,12 +1726,12 @@ models/mapobjects/lamps/beam
 	{
 		map models/mapobjects/lamps/beam
                 tcMod Scroll .3 0
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
         }
         {
 		map models/mapobjects/lamps/beam
                 tcMod Scroll -.3 0
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
         }
 
 }
@@ -1752,7 +1752,7 @@ models/mapobjects/lamps/bot_flare
 
         {
                 clampmap models/mapobjects/lamps/bot_flare
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcMod rotate 20
 
 
@@ -1773,7 +1773,7 @@ models/mapobjects/lamps/bot_flare2
 
         {
                 map models/mapobjects/lamps/bot_flare2
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
 
         }
 
@@ -1862,8 +1862,8 @@ models/mapobjects/chain/chain3
 	}
         {
 		map models/mapobjects/chain/chain3
-		//blendFunc GL_ONE GL_ONE
-                blendFunc GL_DST_COLOR GL_ZERO
+		//blendFunc add
+                blendFunc filter
 		rgbGen identity
 	}
 
@@ -1876,7 +1876,7 @@ models/flags/flagbits
 	      // deformVertexes wave 100 sin 0 5 0 .7
 	 {
                 map models/flags/flagbits
-                //blendfunc gl_src_alpha gl_one_minus_src_alpha
+                //blendfunc blend
                 alphaFunc GE128
                 rgbGen lightingDiffuse
                 depthWrite
@@ -1902,19 +1902,19 @@ models/flags/r_flag2
                 //tcmod scale 9 3
                 //tcmod scroll .1 .7
 
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                  rgbGen identity
 	}
         {
 		map models/flags/r_flag2
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 	        rgbGen identity
 	}
         {
 		map textures/sfx/shadow
                 tcGen environment
-                //blendFunc GL_ONE GL_ONE
-                blendFunc GL_DST_COLOR GL_ZERO
+                //blendFunc add
+                blendFunc filter
                rgbGen identity
 	}
 }
@@ -1935,19 +1935,19 @@ models/flags/b_flag2
                 tcGen environment
                 //tcmod scale 9 3
                 //tcmod scroll .1 .7
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen identity
 	}
         {
 		map models/flags/b_flag2
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 	        rgbGen identity
 	}
         {
 		map textures/sfx/shadow
                 tcGen environment
-                //blendFunc GL_ONE GL_ONE
-                blendFunc GL_DST_COLOR GL_ZERO
+                //blendFunc add
+                blendFunc filter
                 rgbGen identity
 	}
 }
@@ -1959,9 +1959,9 @@ models/flags/flag_red
                deformVertexes wave 50 sin 1 .5 1 1
 	 {
                 map models/flags/flag_red
-                //blendfunc gl_src_alpha gl_one_minus_src_alpha
+                //blendfunc blend
                 //alphaFunc GE128
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen lightingDiffuse
                 depthWrite
         }
@@ -1988,7 +1988,7 @@ models/mapobjects/bitch/hologirl
                 tcgen environment
                 tcMod scroll -6 -.2
                 tcMod scale 1 1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		//rgbGen wave sin .5 .5 0 .1
 	}
 
@@ -2000,7 +2000,7 @@ models/mapobjects/bitch/bitch02
 
 	{
 		Map models/mapobjects/bitch/bitch02
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcGen environment
                 tcMod scroll 0 0.3
 	}
@@ -2018,13 +2018,13 @@ models/mapobjects/barrel/barrel2
 	}
         {
 		clampmap models/mapobjects/barrel/barrel2fx
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                // rgbgen wave triangle 1 1.4 0 9.5
                 tcMod rotate 403
 	}
         {
 		clampmap models/mapobjects/barrel/barrel2fx
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                // rgbgen wave triangle 1 1 0 8.7
                 tcMod rotate -100
 	}
@@ -2036,13 +2036,13 @@ models/weaphits/electric
 
 	{
 		clampmap models/weaphits/electric
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave triangle .8 2 0 9
                 tcMod rotate 360
 	}
         {
 		clampmap models/weaphits/electric
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave triangle 1 1.4 0 9.5
                 tcMod rotate -202
 	}
@@ -2061,13 +2061,13 @@ models/mapobjects/flares/electric
 
 	{
 		clampmap models/mapobjects/flares/electric
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave triangle .8 2 0 9
                 tcMod rotate 360
 	}
         {
 		clampmap models/mapobjects/flares/electric
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave triangle 1 1.4 0 9.5
                 tcMod rotate -202
 	}
@@ -2103,7 +2103,7 @@ models/players/anarki/anarki_g
 		map models/players/anarki/anarki_g_fx
 		rgbGen lightingDiffuse
                 rgbGen wave triangle 0 1 0 .5
-		blendfunc gl_ONE gl_ONE
+		blendfunc add
 	}
 }
 
@@ -2121,7 +2121,7 @@ models/mapobjects/wallhead/femhead
 	{
 		//animMap 0.5 models/mapobjects/wallhead/femhead4 //models/mapobjects/wallhead/femhead2
 	        map models/mapobjects/wallhead/femhead4
-		blendFunc	GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc	blend
 		alphaGen	wave sin 0 1 1 .1
                 // alphaGen	wave triangle 0 .7 0 .2
                 rgbGen vertex
@@ -2163,7 +2163,7 @@ models/mapobjects/wallhead/wallhead
 //        }
 //        {
 //                map models/mapobjects/wallhead/femhead
-//                Blendfunc GL_ONE GL_ONE
+//                Blendfunc add
 //                rgbGen vertex
 //                rgbGen wave triangle 0 1 0 .05
 //        }
@@ -2195,7 +2195,7 @@ models/players/mynx/mynx_shiny
 	}
         {
 		map models/players/mynx/mynx_shiny
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -2233,7 +2233,7 @@ models/mapobjects/scoreboard/s_name
     deformVertexes text0
 	{
 		map gfx/2d/bigchars
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 }
@@ -2246,7 +2246,7 @@ models/mapobjects/scoreboard/s_score
     deformVertexes text1
 	{
 		map gfx/2d/bigchars
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 }
@@ -2259,7 +2259,7 @@ models/weapons2/lightning/crackle1
 
 	{
 		animMap 15 models/weapons2/lightning/crackle1 models/weapons2/lightning/crackle2 models/weapons2/lightning/crackle3 models/weapons2/lightning/crackle4 models/weapons2/lightning/crackle5 models/weapons2/lightning/crackle6 models/weapons2/lightning/crackle7 models/weapons2/lightning/crackle8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 
 }
@@ -2268,7 +2268,7 @@ models/weapons2/lightning/button
 {
         {
 		map models/weapons2/lightning/button
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 1 1 0 1
 	}
 
@@ -2282,7 +2282,7 @@ models/weapons2/lightning/glass
 	{
 		map textures/effects/envmapdim
 		tcGen environment
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen lightingDiffuse
 	}
 }
@@ -2292,13 +2292,13 @@ models/weapons2/lightning/trail
 		map models/weapons2/lightning/trail
 		tcMod scroll 3.1 1
                 rgbgen wave triangle 1 2 0 7
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
         {
 		map models/weapons2/lightning/trail
 		tcMod scroll -1.7 1
                 rgbgen wave triangle 1 1.1 0 5.1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 models/weapons2/lightning/trail2
@@ -2307,13 +2307,13 @@ models/weapons2/lightning/trail2
 		map models/weapons2/lightning/trail2
 		tcMod scroll 3.1 1
                 rgbgen wave triangle 1 2 0 7
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
         {
 		map models/weapons2/lightning/trail2
 		tcMod scroll -1.7 1
                 rgbgen wave triangle 1 1.1 0 5.1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -2324,7 +2324,7 @@ models/weapons2/lightning/trail1
 
 	{
 		animMap 15 models/weapons2/lightning/trail1 models/weapons2/lightning/trail2 models/weapons2/lightning/trail3 models/weapons2/lightning/trail4
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
 	}
 
@@ -2337,7 +2337,7 @@ models/weapons2/lightning/ball1
 
 	{
 		animMap 15 models/weapons2/lightning/ball1 models/weapons2/lightning/ball2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
 	}
 
@@ -2354,7 +2354,7 @@ models/mapobjects/slamp/slamp3
 
         {
                 map models/mapobjects/slamp/slamp3
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
 
         }
 
@@ -2369,12 +2369,12 @@ models/mapobjects/slamp/slamp2
 
         {
                 map models/mapobjects/slamp/slamp2
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
         }
         {
 		map textures/effects/envmapdimb
 		tcGen environment
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	        //rgbGen lightingDiffuse
 	}
 
@@ -2393,7 +2393,7 @@ models/mapobjects/lightning/white/white1
 
 	{
 		animMap 15 models/mapobjects/lightning/white/white1 models/mapobjects/lightning/white/white2 models/mapobjects/lightning/white/white3 models/mapobjects/lightning/white/white4 models/mapobjects/lightning/white/white5 models/mapobjects/lightning/white/white6 models/mapobjects/lightning/white/white7 models/mapobjects/lightning/white/white8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
 	}
 
@@ -2411,7 +2411,7 @@ models/mapobjects/lightning/red/red01
 
 	{
 		animMap 15 models/mapobjects/lightning/red/red01 models/mapobjects/lightning/red/red02 models/mapobjects/lightning/red/red03 models/mapobjects/lightning/red/red04 models/mapobjects/lightning/red/red05 models/mapobjects/lightning/red/red06 models/mapobjects/lightning/red/red07 models/mapobjects/lightning/red/red08
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
 	}
 
@@ -2429,7 +2429,7 @@ models/mapobjects/lightning/yel/yel01
 
 	{
 		animMap 15 models/mapobjects/lightning/yel/yel01 models/mapobjects/lightning/yel/yel02 models/mapobjects/lightning/yel/yel03 models/mapobjects/lightning/yel/yel04 models/mapobjects/lightning/yel/yel05 models/mapobjects/lightning/yel/yel06 models/mapobjects/lightning/yel/yel07 models/mapobjects/lightning/yel/yel08
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
 	}
 
@@ -2447,7 +2447,7 @@ models/mapobjects/lightning/blu/blu01
 
 	{
 		animMap 15 models/mapobjects/lightning/blu/blu01 models/mapobjects/lightning/blu/blu02 models/mapobjects/lightning/blu/blu03 models/mapobjects/lightning/blu/blu04 models/mapobjects/lightning/blu/blu05 models/mapobjects/lightning/blu/blu06 models/mapobjects/lightning/blu/blu07 models/mapobjects/lightning/blu/blu08
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
 	}
 
@@ -2502,7 +2502,7 @@ models/mapobjects/gratelamp/gratelamp_flare
 
 	{
 		Map models/mapobjects/gratelamp/gratelamp_flare
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 
 }
@@ -2517,7 +2517,7 @@ models/weapons2/grenadel/ring
         {
                 map textures/effects/envmapdim
 		tcGen environment
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 //rgbGen identity
         }
 }
@@ -2580,7 +2580,7 @@ models/players/orbb/orbb_tail
 
 	{
 		map models/players/orbb/orbb_tail
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcmod scroll 0 .5
 		rgbGen wave sin .5 .25 0 .5
 	}
@@ -2590,7 +2590,7 @@ models/players/orbb/orbb_tail_blue
 
 	{
 		map models/players/orbb/orbb_tail_blue
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcmod scroll 0 .5
 		rgbGen wave sin .5 .25 0 .5
 	}
@@ -2620,13 +2620,13 @@ models/players/orbb/orbb_h2
 	}
         {
                 map textures/effects/tinfx
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcGen environment
                 rgbGen lightingDiffuse
 	}
         {
 		map models/players/orbb/orbb_h2
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -2673,7 +2673,7 @@ models/mapobjects/teleporter/transparency2
 
         {
                 map models/mapobjects/teleporter/transparency2
-                blendfunc GL_ONE GL_ONE
+                blendfunc add
                 tcMod scroll .1 .2
         }
 
@@ -2734,7 +2734,7 @@ models/players/hunter/hunter_f
      cull disable
         {
                 map models/players/hunter/hunter_f
-                //blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                //blendFunc blend
                 //alphaFunc GT0
                 alphaFunc GE128
 		depthWrite
@@ -2749,7 +2749,7 @@ models/players/hunter/red_f
      cull disable
         {
                 map models/players/hunter/red_f
-                //blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                //blendFunc blend
                 //alphaFunc GT0
                 alphaFunc GE128
 		depthWrite
@@ -2764,7 +2764,7 @@ models/players/uriel/uriel_w
 
         {
                 map models/players/uriel/uriel_w
-                //blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                //blendFunc blend
                 //alphaFunc GT0
                 alphaFunc GE128
 		depthWrite
@@ -2779,7 +2779,7 @@ models/players/uriel/red_w
 
         {
                 map models/players/uriel/red_w
-                //blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                //blendFunc blend
                 //alphaFunc GT0
                 alphaFunc GE128
 		depthWrite
@@ -2794,7 +2794,7 @@ models/players/uriel/blue_w
 
         {
                 map models/players/uriel/blue_w
-                //blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                //blendFunc blend
                 //alphaFunc GT0
                 alphaFunc GE128
 		depthWrite
@@ -2816,7 +2816,7 @@ models/mapobjects/bitch/orb
 
 	{
 		clampmap models/mapobjects/bitch/orb
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcMod rotate 30
 	}
 
@@ -2830,13 +2830,13 @@ models/mapobjects/bitch/forearm
         }
 	{
                map models/mapobjects/bitch/forearm01
-               blendfunc GL_ONE GL_ONE
+               blendfunc add
                tcMod scroll 2.2 0
 
         }
         {
                map models/mapobjects/bitch/forearm02
-               blendfunc GL_ONE GL_ONE
+               blendfunc add
                tcMod scroll -1.1 0
 
         }
@@ -2857,7 +2857,7 @@ models/players/parkr/parkr_chest
         }
 	{
 		AnimMap 4 models/players/parkr/parkr_chest_red models/players/parkr/parkr_chest_blu
-	       blendfunc GL_ONE GL_ONE
+	       blendfunc add
 	}
 }
 models/mapobjects/teleporter/energy
@@ -2867,21 +2867,21 @@ models/mapobjects/teleporter/energy
 
        {
                map models/mapobjects/teleporter/energy
-               blendfunc GL_ONE GL_ONE
+               blendfunc add
                tcMod scroll 2.2 1.3
                rgbGen wave inversesawtooth -.3 1.3 0 1.3
 
        }
 	{
 		map models/mapobjects/teleporter/energy2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll -1 .5
 		rgbGen wave inversesawtooth -.2 1.2 0 .5
 
 	}
 	{
                 map models/mapobjects/teleporter/energy3
-                blendfunc GL_ONE GL_ONE
+                blendfunc add
                 tcMod scroll 3 0
 		rgbGen wave triangle 1 1 0 5.3
 
@@ -2895,12 +2895,12 @@ models/mapobjects/teleporter/widget
 
         {
                 map models/mapobjects/teleporter/widget
-                blendfunc GL_ONE GL_ONE
+                blendfunc add
 
         }
         {
                 map models/mapobjects/teleporter/transparency2
-                blendfunc GL_ONE GL_ONE
+                blendfunc add
                 tcMod scroll -.1 -.2
         }
 
@@ -2912,12 +2912,12 @@ models/mapobjects/teleporter/transparency
 
         {
                 map models/mapobjects/teleporter/transparency
-                blendfunc GL_ONE GL_ONE
+                blendfunc add
 
         }
         {
                 map models/mapobjects/teleporter/transparency2
-                blendfunc GL_ONE GL_ONE
+                blendfunc add
                 tcMod scroll .1 .2
         }
 
@@ -2933,7 +2933,7 @@ models/mapobjects/teleporter/teleporter_edge
         }
         {
                 map models/mapobjects/teleporter/teleporter_edge2
-                blendfunc GL_ONE GL_ONE
+                blendfunc add
                 rgbgen wave inversesawtooth 0 1 .2 1.5
         }
 
@@ -2987,7 +2987,7 @@ models/mapobjects/skull/ribcage
         cull disable
         {
                 map models/mapobjects/skull/ribcage
-                // blendfunc gl_src_alpha gl_one_minus_src_alpha
+                // blendfunc blend
                 alphaFunc GE128
                 rgbGen vertex
         }
@@ -3003,7 +3003,7 @@ models/mapobjects/skull/ribcage
 //		   sort banner
 //        {
 //                map models/mapobjects/flag/banner_eg1
-//                // blendfunc gl_src_alpha gl_one_minus_src_alpha
+//                // blendfunc blend
 //                alphaFunc GE128
 //                rgbGen vertex
 //        }
@@ -3021,7 +3021,7 @@ models/mapobjects/flag/banner_strgg
 		sort banner
         {
                 map models/mapobjects/flag/banner_strgg
-                 blendfunc gl_src_alpha gl_one_minus_src_alpha
+                 blendfunc blend
                 alphaFunc GE128
                 rgbGen vertex
 
@@ -3049,7 +3049,7 @@ models/mapobjects/weeds/weed02
 	       deformVertexes wave 100 sin 0 2 0 .7
         {
                 map models/mapobjects/weeds/weed02
-                blendfunc gl_src_alpha gl_one_minus_src_alpha
+                blendfunc blend
         }
 
 
@@ -3062,7 +3062,7 @@ models/mapobjects/weeds/weed01
 	       deformVertexes wave 100 sin 0 2 0 .7
         {
                 map models/mapobjects/weeds/weed01
-                blendfunc gl_src_alpha gl_one_minus_src_alpha
+                blendfunc blend
         }
 
 
@@ -3077,7 +3077,7 @@ models/mapobjects/portal_2/portal_3_edge
 
 	{
 		map models/mapobjects/portal_2/portal_3_edge_glo
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 9.7 .5
 	}
 
@@ -3094,7 +3094,7 @@ models/players/razor/razor_gogs
 
 	{
 		map	models/players/razor/razor_gogs_fx
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll 1.2 9.3
 
 	}
@@ -3107,7 +3107,7 @@ models/players/slash/slashskate
 	cull disable
 	{
 		clampmap models/players/slash/slashskate
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 //tcmod rotate 100
                 tcMod stretch sin .9 0.1 0 1.1
                 rgbgen identity
@@ -3122,7 +3122,7 @@ models/mapobjects/colua0/colua0_lght
 	{
 		map textures/effects/tinfx2b
 		tcGen environment
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 }
 models/mapobjects/colua0/colua0_flare
@@ -3138,7 +3138,7 @@ models/mapobjects/colua0/colua0_flare
 
 	{
 		Map models/mapobjects/colua0/colua0_flare
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 
 }
@@ -3149,7 +3149,7 @@ models/mapobjects/kmlamp_white
 	{
 		map textures/effects/tinfxb
 		tcGen environment
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 }
 
@@ -3166,7 +3166,7 @@ models/mapobjects/lamps/flare03
 
 	{
 		Map models/mapobjects/lamps/flare03
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 
 }
@@ -3193,7 +3193,7 @@ models/players/sarge/cigar
 
 	{
 		map models/players/sarge/cigar_glow
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen wave triangle .5 1 0 .2
 
 	}
@@ -3212,7 +3212,7 @@ models/players/sarge/cigar
 //	}
 //	{
 //		map models/powerups/ammo/ammo_rail1_glow
-//		blendfunc GL_ONE GL_ONE
+//		blendfunc add
 //		rgbGen wave sin 0.75 0.25 0 1
 //	}
 //}
@@ -3224,7 +3224,7 @@ models/players/sarge/cigar
 //	}
 //	{
 //		map models/powerups/ammo/ammo_rail2_glow
-//		blendfunc GL_ONE GL_ONE
+//		blendfunc add
 //	}
 //}
 models/powerups/ammo/bfgammo
@@ -3242,7 +3242,7 @@ models/powerups/ammo/bfgammo
         {
 	        map textures/effects/tinfx2
 		tcGen environment
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
                 rgbGen identity
        }
        {
@@ -3283,7 +3283,7 @@ models/powerups/ammo/bfgammo2
 //	}
 //	{
 //		map models/powerups/ammo/bounammo2_glow
-//		blendfunc GL_ONE GL_ONE
+//		blendfunc add
 //		rgbGen lightingDiffuse
 //	}
 //}
@@ -3302,7 +3302,7 @@ models/powerups/ammo/bfgammo2
 //	}
 //	{
 //		map models/powerups/ammo/flamammo2_glow
-//		blendfunc GL_ONE GL_ONE
+//		blendfunc add
 //	}
 //}
 models/powerups/ammo/grenammo
@@ -3335,7 +3335,7 @@ models/ammo/grenade
         }
 	{
 		AnimMap 7 models/ammo/grenade_r models/ammo/grenade_g
-	       blendfunc GL_ONE GL_ONE
+	       blendfunc add
 	}
 }
 models/powerups/ammo/grenammo2
@@ -3557,7 +3557,7 @@ models/powerups/health/yellow
 	{
 		map textures/effects/envmapyel
                 tcGen environment
-		//blendfunc GL_ONE GL_ONE
+		//blendfunc add
 
 	}
 
@@ -3567,7 +3567,7 @@ models/powerups/health/yellow_sphere
 	{
 		map textures/effects/tinfx2b
 		tcGen environment
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 models/powerups/health/red
@@ -3584,7 +3584,7 @@ models/powerups/health/red
                 tcmod scale 2 2
                 tcmod rotate 333
                 tcmod scroll 9 9
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 
 	}
 }
@@ -3602,7 +3602,7 @@ models/powerups/health/mega2
                 tcmod scale 2 2
                 tcmod rotate 333
                 tcmod scroll 9 9
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 
 	}
 }
@@ -3613,7 +3613,7 @@ models/powerups/health/mega1
                 tcGen environment
                 tcmod rotate 33
                 tcmod scroll 1 1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 models/powerups/health/red_sphere
@@ -3623,7 +3623,7 @@ models/powerups/health/red_sphere
                 tcGen environment
                 tcmod rotate 33
                 tcmod scroll 1 1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 models/powerups/health/green
@@ -3640,7 +3640,7 @@ models/powerups/health/green_sphere
 	{
 		map textures/effects/tinfx2b
 		tcGen environment
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 models/powerups/health/blue
@@ -3656,7 +3656,7 @@ models/powerups/health/blue_sphere
 	{
 		map textures/effects/tinfx2b
 		tcGen environment
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -3669,7 +3669,7 @@ models/powerups/armor/energy_red1
 
 	{
 		map models/powerups/armor/energy_red1
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
 		tcMod scroll 7.4 1.3
 	}
 
@@ -3680,7 +3680,7 @@ models/powerups/armor/energy_yel1
 
 	{
 		map models/powerups/armor/energy_yel3
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 7.4 1.3
 	}
 
@@ -3691,7 +3691,7 @@ models/powerups/armor/energy_grn1
    deformVertexes wave 100 sin 2 0 0 0
 	{
 		map textures/effects/envmaprail
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcGen environment
                 tcmod rotate 30
 		tcMod scroll 1 1
@@ -3704,7 +3704,7 @@ models/mapobjects/lamplight_ys
 {
 	{
 		map models/mapobjects/lamplight_ys
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 
 	}
 }
@@ -3715,12 +3715,12 @@ models/mapobjects/pj_light
         {
 		map textures/effects/tinfx2
                 tcGen environment
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen vertex
 	}
 	{
 		map models/mapobjects/pj_light
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen vertex
 	}
 
@@ -3734,7 +3734,7 @@ models/mapobjects/lamplight_y
 	{
                 map textures/effects/envmapmach
 		//map models/mapobjects/lamplight_y
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcGen environment
                 rgbGen identity
 	}
@@ -3745,7 +3745,7 @@ models/mapobjects/arenalogo
 	deformVertexes wave 100 sin 0.25 0 0 0
 	{
 		map textures/effects/quadmap
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcGen environment
 		tcMod turb 0 1 0 0.2
 	}
@@ -3761,7 +3761,7 @@ models/weapons2/machinegun/f_machinegun
 	cull disable
 	{
 		map	models/weapons2/machinegun/f_machinegun
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -3771,7 +3771,7 @@ models/weapons2/railgun/f_railgun2
 	cull disable
 	{
 		map	models/weapons2/railgun/f_railgun2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbgen entity
 	}
 }
@@ -3782,7 +3782,7 @@ models/weapons2/railgun/railgun2
 	cull disable
 	{
 		map	models/weapons2/railgun/railgun2_glow
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen entity	// identity
 	}
 }
@@ -3796,7 +3796,7 @@ models/weapons2/railgun/railgun3
 
 	{
 		map	models/weapons2/railgun/railgun3_glow
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen entity	// identity
 	}
 }
@@ -3835,12 +3835,12 @@ models/weapons2/bfg/f_bfg
 	cull disable
 	{
 		clampmap models/weapons2/bfg/f_bfg
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
                 tcmod rotate 360
         }
         {
 		clampmap models/weapons2/bfg/f_bfg2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
                 tcmod rotate -129
                 //tcMod stretch sin .8 0.10 0 .7
         }
@@ -3881,7 +3881,7 @@ models/weapons2/bfg/bfg_e
 	}
         {
 		map models/weapons2/bfg/bfg
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -3900,7 +3900,7 @@ models/weapons2/bfg/bfg_e
 	}
         {
 		map models/weapons2/bfg/bfg_k
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen lightingDiffuse
 	}
 
@@ -3912,7 +3912,7 @@ models/weapons2/grenadel/f_grenadel
 	cull disable
 	{
 		map	models/weapons2/grenadel/f_grenadel
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 models/weapons2/lightning/f_lightning
@@ -3921,7 +3921,7 @@ models/weapons2/lightning/f_lightning
 	cull disable
 	{
 		map models/weapons2/lightning/f_lightning
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 sprites/plasma1
@@ -3929,7 +3929,7 @@ sprites/plasma1
 	cull disable
 	{
 		clampmap sprites/plasmaa
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
                 tcMod rotate 931
 	}
 }
@@ -3938,7 +3938,7 @@ models/ammo/rocket/rockfls1
 	cull disable
 	{
 		map models/ammo/rocket/rockfls1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 models/ammo/rocket/rockfls2
@@ -3946,7 +3946,7 @@ models/ammo/rocket/rockfls2
 	cull disable
 	{
 		map models/ammo/rocket/rockfls2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 models/ammo/rocket/rockflar
@@ -3954,7 +3954,7 @@ models/ammo/rocket/rockflar
 	cull disable
 	{
 		map models/ammo/rocket/rockflar
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -3963,7 +3963,7 @@ sprites/plasma2
 	cull disable
 	{
 		map sprites/plasma2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 models/weapons2/plasma/f_plasma
@@ -3972,7 +3972,7 @@ models/weapons2/plasma/f_plasma
 	sort additive
 	{
 		map models/weapons2/plasma/f_plasma
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 models/weapons2/flamethrower/f_flamethrower
@@ -3981,7 +3981,7 @@ models/weapons2/flamethrower/f_flamethrower
 	sort additive
 	{
 		map models/weapons2/flamethrower/f_flamethrower
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 models/weapons2/grapple/f_grapple
@@ -3990,7 +3990,7 @@ models/weapons2/grapple/f_grapple
 	sort additive
 	{
 		map models/weapons2/grapple/f_grapple
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 models/weapons2/rocketl/f_rocketl
@@ -3999,7 +3999,7 @@ models/weapons2/rocketl/f_rocketl
 	sort additive
 	{
 		map models/weapons2/rocketl/f_rocketl
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -4011,7 +4011,7 @@ models/weapons2/gauntlet/gauntlet3
 	{
               // map models/weapons2/gauntlet/gauntlet3
                AnimMap 10 models/weapons2/gauntlet/gauntlet3 models/weapons2/gauntlet/gauntlet4
-	       blendfunc GL_ONE GL_ONE
+	       blendfunc add
 	}
 }
 
@@ -4022,7 +4022,7 @@ models/weapons2/rocketl/rocketl14
 	sort additive
 	{
 		map models/weapons2/rocketl/f_rocketl
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -4032,7 +4032,7 @@ models/weapons/vulcan/f_vulcan
 	cull disable
 	{
 		map	models/weapons/vulcan/f_vulcan
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -4091,7 +4091,7 @@ models/players/doom/f_doom
 		map models/players/doom/fx_doom
 		tcGen environment
 		rgbGen lightingDiffuse
-		blendfunc gl_ONE gl_ONE
+		blendfunc add
 	}
 }
 models/players/doom/doom_f
@@ -4105,7 +4105,7 @@ models/players/doom/doom_f
 		map models/players/doom/doom_fx
 		tcGen environment
 		rgbGen lightingDiffuse
-		blendfunc gl_ONE gl_ONE
+		blendfunc add
 	}
 
 }
@@ -4123,7 +4123,7 @@ models/weapons2/plasma/plasma_glass
 		map textures/effects/tinfxb
 		tcGen environment
                 tcMod scroll .01 .02
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen lightingDiffuse
 	}
 }
@@ -4140,7 +4140,7 @@ models/weapons2/plasma/plasma_glo
 		map textures/effects/tinfxb
 		tcGen environment
                 tcMod scroll .01 .02
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen lightingDiffuse
 	}
 }
@@ -4153,13 +4153,13 @@ models/weapons2/lightning/ball
    deformVertexes autoSprite
         {
 		map models/weapons2/lightning/ball
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
                 rgbgen wave triangle 1 2 0 7
                 tcMod rotate 360
 	}
         {
 		map models/weapons2/lightning/ball
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
                 rgbgen wave triangle 1 5 1 3
                 tcMod rotate -200
 	}
@@ -4178,7 +4178,7 @@ models/powerups/instant/scan
 	}
 	{
 		map textures/effects/envmapdim
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcGen environment
 	}
 }
@@ -4229,7 +4229,7 @@ models/powerups/instant/invis
 	{
 		map textures/effects/tinfx2c
                 //map textures/sfx/specular
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcGen environment
 	}
 }
@@ -4261,7 +4261,7 @@ models/powerups/holdable/medkit_sphere
 	{
 		map textures/effects/envmapdim
 		tcgen environment
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 
 }
@@ -4273,7 +4273,7 @@ models/powerups/holdable/medkit_fluid
 	{
 		map models/powerups/holdable/medkit_fluid
 		tcMod scroll 0 2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 
 }
@@ -4292,7 +4292,7 @@ models/powerups/holdable/teleport_sphere
 	{
 		map textures/effects/envmapdim
 		tcgen environment
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 
 }
@@ -4304,7 +4304,7 @@ models/powerups/holdable/teleport_fluid
 	{
 		map models/powerups/holdable/teleport_fluid
 		tcMod scroll 0 2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 
 }

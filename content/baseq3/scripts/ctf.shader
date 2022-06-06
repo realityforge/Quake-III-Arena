@@ -40,7 +40,7 @@ textures/ctf/blue_telep
         {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 
@@ -84,7 +84,7 @@ textures/ctf/red_telep
         {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 
@@ -103,7 +103,7 @@ textures/ctf/test2_trans
 	{
 		map textures/ctf/test2
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 }
@@ -120,7 +120,7 @@ textures/ctf/test2_r_trans
 	{
 		map textures/ctf/test2_r
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }
 
@@ -138,7 +138,7 @@ textures/ctf/killblockctf_r
 	}
         {
 	        map textures/gothic_block/blocks18cgeomtrn2
-		//blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		//blendFunc blend
                 blendFunc blend
                 tcmod rotate 30
                 tcMod stretch sin .8 0.2 0 .2
@@ -176,7 +176,7 @@ textures/ctf/killblockctf_b
 	}
         {
 	        map textures/gothic_block/blocks18cgeomtrn2
-		//blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		//blendFunc blend
                 blendFunc blend
                 tcmod rotate 30
                 tcMod stretch sin .8 0.2 0 .2
@@ -210,19 +210,19 @@ textures/ctf/ctf_arch_b_shiny
 	}
         {
                 map textures/sfx/specular
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcGen environment
                 tcmod scale 10 10
                 rgbGen identity
 	}
         {
 		map textures/ctf/ctf_arch_b
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -238,19 +238,19 @@ textures/ctf/ctf_arch_r_shiny
 	}
         {
                 map textures/sfx/specular
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcGen environment
                 tcmod scale 10 10
                 rgbGen identity
 	}
         {
 		map textures/ctf/ctf_arch_r
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -560,12 +560,12 @@ textures/ctf/ctf_blueflag
                 tcmod scale 9 3
                 tcmod scroll .1 .7
 
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen identity
 	}
         {
 		map textures/ctf/ctf_blueflag
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -576,8 +576,8 @@ textures/ctf/ctf_blueflag
         {
         	map textures/sfx/shadow
                 tcGen environment
-                //blendFunc GL_ONE GL_ONE
-                blendFunc GL_DST_COLOR GL_ZERO
+                //blendFunc add
+                blendFunc filter
                rgbGen identity
 	}
 }
@@ -599,12 +599,12 @@ textures/ctf/ctf_redflag
                 tcmod scale 9 3
                 tcmod scroll .1 .7
 
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen identity
 	}
         {
 		map textures/ctf/ctf_redflag
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -616,8 +616,8 @@ textures/ctf/ctf_redflag
 
         	map textures/sfx/shadow
                 tcGen environment
-                //blendFunc GL_ONE GL_ONE
-                blendFunc GL_DST_COLOR GL_ZERO
+                //blendFunc add
+                blendFunc filter
                rgbGen identity
 	}
 }
@@ -626,7 +626,7 @@ powerups/redflag
 	deformVertexes wave 100 sin 3 0 0 0
 	{
 		map textures/effects/redflagmap
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcGen environment
 		tcMod turb 0 0.2 0 1
 	}
@@ -637,7 +637,7 @@ powerups/blueflag
 	deformVertexes wave 100 sin 3 0 0 0
 	{
 		map textures/effects/blueflagmap
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcGen environment
 		tcMod turb 0 0.2 0 1
 	}
@@ -649,7 +649,7 @@ sprites/friend
 	nopicmip
 	{
 		map sprites/friend1
-		blendfunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendfunc blend
 	}
 }
 
@@ -659,6 +659,6 @@ sprites/foe
 	nopicmip
 	{
 		map sprites/foe2
-		blendfunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendfunc blend
 	}
 }

@@ -14,7 +14,7 @@ textures/proto2/winframe
         }
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -335,7 +335,7 @@ textures/proto2/xflag01
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 
@@ -359,7 +359,7 @@ textures/proto2/grill03b
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -379,7 +379,7 @@ textures/proto2/screw01
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 
@@ -438,7 +438,7 @@ textures/proto2/x_smallpipe
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -460,7 +460,7 @@ textures/proto2/marbledoor_blue
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -481,7 +481,7 @@ textures/proto2/marbledoor_red
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -535,7 +535,7 @@ textures/proto2/pulsebeam
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
         {
@@ -556,7 +556,7 @@ textures/proto2/concrete_rednfx
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -571,7 +571,7 @@ textures/proto2/concrete_bluenfx
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -595,7 +595,7 @@ textures/proto2/cheapfloor
         }
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 
@@ -735,7 +735,7 @@ textures/proto2/mirrorfloor
         }
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 
@@ -760,7 +760,7 @@ textures/proto2/bluetrim01
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -784,7 +784,7 @@ textures/proto2/redtrim01
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -801,7 +801,7 @@ textures/proto2/torchstone_trans
 	{
 		map textures/proto2/marble02btrim
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }
 
@@ -817,7 +817,7 @@ textures/proto2/torchstone02_trans
 	{
 		map textures/proto2/marbledge01
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }
 textures/proto2/torchstone03_trans
@@ -832,7 +832,7 @@ textures/proto2/torchstone03_trans
 	{
 		map textures/proto2/marble02b
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }
 
@@ -849,7 +849,7 @@ textures/proto2/shiny_black
 
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -1009,7 +1009,7 @@ textures/proto2/door_right
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -1102,7 +1102,7 @@ textures/proto2/concrete_red
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -1123,7 +1123,7 @@ textures/proto2/concrete_blue
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -1187,7 +1187,7 @@ textures/proto2/gothic_light
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1242,7 +1242,7 @@ textures/proto2/grill02
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1264,7 +1264,7 @@ textures/proto2/wirepipe
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1286,7 +1286,7 @@ textures/proto2/wheel01
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1301,7 +1301,7 @@ textures/proto2/c_zinc_shiny
 	}
         {
 		map textures/gothic_trim/zinc_shiny
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -1328,7 +1328,7 @@ textures/proto2/stadlight01
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
         {
@@ -1356,7 +1356,7 @@ textures/proto2/v_support02
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1377,7 +1377,7 @@ textures/proto2/pipes01
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1425,7 +1425,7 @@ textures/proto2/supportctfblu
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -1449,7 +1449,7 @@ textures/proto2/supportctfred
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -1470,7 +1470,7 @@ textures/proto2/marbletrim02
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1492,7 +1492,7 @@ textures/proto2/marbletrim01
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1513,7 +1513,7 @@ textures/proto2/marble02b_s
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -1535,7 +1535,7 @@ textures/proto2/ceiling_pipe01
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1556,7 +1556,7 @@ textures/proto2/duct01
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -1577,7 +1577,7 @@ textures/proto2/grate_trim
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -1598,7 +1598,7 @@ textures/proto2/techtrim02
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -1761,7 +1761,7 @@ textures/proto2/pipewall01
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1784,7 +1784,7 @@ textures/proto2/barbedwire
 	//{
 	//	map $lightmap
 	//	rgbGen identity
-	//	blendFunc GL_DST_COLOR GL_ZERO
+	//	blendFunc filter
 	//	depthFunc equal
 	//}
 }
@@ -1806,7 +1806,7 @@ textures/proto2/rail01
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1826,7 +1826,7 @@ textures/proto2/grill01
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1846,7 +1846,7 @@ textures/proto2/vent01
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1866,7 +1866,7 @@ textures/proto2/girder05
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1886,7 +1886,7 @@ textures/proto2/girder04
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1912,7 +1912,7 @@ textures/proto2/gear02
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1931,7 +1931,7 @@ textures/proto2/dirt01
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -1981,7 +1981,7 @@ textures/proto2/tin_panel
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -2002,7 +2002,7 @@ textures/proto2/yellow
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -2022,7 +2022,7 @@ textures/proto2/girder03
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -2037,7 +2037,7 @@ textures/proto2/wire
 	}
 	{
 		map textures/proto2/wire
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
@@ -2058,7 +2058,7 @@ textures/proto2/chain
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 

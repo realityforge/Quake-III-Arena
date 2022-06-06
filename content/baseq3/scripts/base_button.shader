@@ -8,13 +8,13 @@ textures/base_light/btactmach0
 	}
 	{
 		map textures/base_light/btactmach0
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/base_light/btactmach0_blend
 		rgbGen wave sin 0.5 0.5 0 .2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 }
 textures/base_button/shootme2
@@ -29,12 +29,12 @@ textures/base_button/shootme2
 	}
 	{
 		map textures/base_support/metal3_3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/base_button/shootme_glow
 		rgbGen wave sin 0.5 1.0 0 .3
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 }

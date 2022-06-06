@@ -73,19 +73,19 @@ textures/tim/timborder11c
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/base_trim/border11c_light
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave sin 1 .1 0 5
 	}
 
 
 	{
 		map textures/tim/tim11c_pulse1
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcmod scale .035 1
 		tcmod scroll -0.65 0
 
@@ -202,7 +202,7 @@ textures/tim/rconcrete_ow
 	}
         {
 		map textures/tim/rconcrete_ow
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {

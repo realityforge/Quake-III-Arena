@@ -21,7 +21,7 @@ textures/skies/terrain1
 	}
 	{
 		map textures/skies/topclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -50,7 +50,7 @@ textures/skies/jimsky
 	}
 	{
 		map textures/skies/pjbasesky
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll -0.01 -0.012
 		tcMod scale 5 5
 	}
@@ -62,7 +62,7 @@ textures/skies/jimsky
 	//}
 	//{
 	//	map textures/skies/intelredclouds
-	//	blendFunc GL_ONE GL_ONE
+	//	blendFunc add
 	//	tcMod scale 3 3
 	//	tcMod scroll 0.05 0.05
 	//}
@@ -122,7 +122,7 @@ textures/proto2/jimtest_0to1
 		rgbGen vertex
 		alphaGen vertex
 		tcmod scale 1 1
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -139,7 +139,7 @@ textures/proto2/jimtest_0to2
 		map textures/proto2/jim/image3
 		rgbGen vertex
 		alphaGen vertex
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		tcmod scale 1 1
 	}
 }
@@ -158,7 +158,7 @@ textures/proto2/jimtest_0to3
 		tcmod scale 2 2
 		rgbGen vertex
 		alphaGen vertex
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -176,7 +176,7 @@ textures/proto2/jimtest_1to2
 		tcmod scale 1 1
 		rgbGen vertex
 		alphaGen vertex
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -194,7 +194,7 @@ textures/proto2/jimtest_1to3
 		tcmod scale 2 2
 		rgbGen vertex
 		alphaGen vertex
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -212,7 +212,7 @@ textures/proto2/jimtest_2to3
 		tcmod scale 2 2
 		rgbGen vertex
 		alphaGen vertex
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -276,7 +276,7 @@ textures/proto2/grassy_0to1
 		tcmod scale 0.5 0.5
 		rgbGen vertex
 		alphaGen vertex
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -294,7 +294,7 @@ textures/proto2/grassy_0to2
 		tcmod scale 0.5 0.5
 		rgbGen vertex
 		alphaGen vertex
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -312,6 +312,6 @@ textures/proto2/grassy_1to2
 		tcmod scale 0.5 0.5
 		rgbGen vertex
 		alphaGen vertex
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }

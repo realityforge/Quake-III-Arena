@@ -11,7 +11,7 @@ textures/gothic_floor/q1metal7_99spot
         }
         {
 		map textures/effects/tinfx3
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcGen environment
         }
 
@@ -41,12 +41,12 @@ textures/gothic_floor/xq1metalbig_ow
                 //tcmod rotate 30
                 tcMod turb 0 .25 0 .05
                 //tcmod scroll .1 .2
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen identity
 	}
 	{
 	        map textures/gothic_floor/xq1metalbig_ow
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -66,12 +66,12 @@ textures/gothic_floor/q1metal7_98blueow
                 tcmod scroll 0 1
                 tcMod turb 0 .25 0 1.6
                 tcmod scale 4 4
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen identity
 	}
 	{
 	        map textures/gothic_floor/q1metal7_98blueow
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -91,12 +91,12 @@ textures/gothic_floor/q1metal7_97redow
                 tcmod scroll 0 1
                 tcMod turb 0 .25 0 1.6
                 tcmod scale 4 4
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen identity
 	}
 	{
 	        map textures/gothic_floor/q1metal7_97redow
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -137,14 +137,14 @@ textures/gothic_floor/center2trn
 	}
         {
 	        map textures/gothic_floor/center2trn
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
                 tcmod rotate 30
                 tcMod stretch sin .8 0.2 0 .2
 	        rgbGen identity
 	}
         {
 	        map textures/gothic_floor/center2trn
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -166,7 +166,7 @@ textures/gothic_floor/largerblock3b_ow
 	}
 	{
 	        map textures/gothic_floor/largerblock3b_ow
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -186,7 +186,7 @@ textures/gothic_floor/metalbridge06brokeb
 	}
         {
 		map textures/gothic_floor/metalbridge06brokeb
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -226,11 +226,11 @@ textures/gothic_floor/xlargeblockfloor5_pent
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentfloor_256_glow
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
@@ -245,11 +245,11 @@ textures/gothic_floor/xlargeblockfloor5_pent_offset
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentfloor_256_glow
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
@@ -267,13 +267,13 @@ textures/gothic_floor/glowfloor1
 	}
 	{
 		map textures/gothic_block/blocks17g
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_floor/glowred2_blend
 		// rgbGen wave sin 0.5 0.5 0 0.5
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.1 1 0.5
 	}
 }
@@ -289,12 +289,12 @@ textures/gothic_floor/pent_metalbridge02
 	}
 	{
 		map textures/gothic_floor/pent_metalbridge02
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_floor/pent_glow
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .5 .5 0 0.5
 	}
 }
@@ -309,12 +309,12 @@ textures/gothic_floor/pent_metalbridge06
 	}
 	{
 		map textures/gothic_floor/pent_metalbridge06
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_floor/pent_glow
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .5 .5 0 0.5
 	}
 }
@@ -330,12 +330,12 @@ textures/gothic_floor/pent_metalbridge06b
 	}
 	{
 		map textures/gothic_floor/pent_metalbridge06b
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_floor/pent_glow
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .5 .5 0 0.5
 	}
 }

@@ -13,7 +13,7 @@ models\mapobjects\multiplant\fern
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -33,7 +33,7 @@ models\mapobjects\multiplant\bannanaleaf
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 //		depthFunc equal
 	}
 }
@@ -55,7 +55,7 @@ models\mapobjects\multiplant\batleaf
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -79,7 +79,7 @@ models\mapobjects\multiplant\batleaf2
 	}
        {
                map models\mapobjects\multiplant\batleaf2veins
-//               blendFunc GL_ONE GL_ONE
+//               blendFunc add
                blendFunc blend
                rgbGen wave sin 0 1 0 .33
 //		rgbGen identity
@@ -89,7 +89,7 @@ models\mapobjects\multiplant\batleaf2
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -111,7 +111,7 @@ models\mapobjects\multiplant\leaf1
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -133,7 +133,7 @@ models\mapobjects\multiplant\leaf2
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -155,7 +155,7 @@ models\mapobjects\multiplant\leaf3
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -177,7 +177,7 @@ models\mapobjects\multiplant\pleaf1
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -199,7 +199,7 @@ models\mapobjects\multiplant\pleaf2
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -221,7 +221,7 @@ models\mapobjects\multiplant\pleaf3
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -241,7 +241,7 @@ models\mapobjects\multiplant\palmfrond
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }

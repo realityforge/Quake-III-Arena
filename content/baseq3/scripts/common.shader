@@ -293,7 +293,7 @@ textures/sfx/portal_sfx
 
 	{
 		map textures/sfx/portal_sfx3
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	//	This blend function is not working on RagePro drivers Mac only
 	//	when it is used on top of portals
 		depthWrite
@@ -302,19 +302,19 @@ textures/sfx/portal_sfx
 
 	{
 		map textures/sfx/portal_sfx1
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcMod rotate 360
 	}
 
 	{
 		map textures/sfx/portal_sfx
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave inversesawtooth 0 .5 .2 .5
 	}
 
 	{
 		map textures/sfx/portalfog
-		blendfunc gl_src_alpha gl_one_minus_src_alpha
+		blendfunc blend
 		alphagen portal 256
 		rgbGen identityLighting
 		tcmod turb 0 .5 0 1

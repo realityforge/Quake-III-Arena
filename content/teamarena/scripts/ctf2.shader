@@ -25,8 +25,8 @@ textures/ctf/xctf_redflag_noenv
 
         	map textures/sfx/shadow
                 tcGen environment
-                //blendFunc GL_ONE GL_ONE
-                blendFunc GL_DST_COLOR GL_ZERO
+                //blendFunc add
+                blendFunc filter
                rgbGen identity
 	}
 }
@@ -52,8 +52,8 @@ textures/ctf/xctf_blueflag_noenv
         {
         	map textures/sfx/shadow
                 tcGen environment
-                //blendFunc GL_ONE GL_ONE
-                blendFunc GL_DST_COLOR GL_ZERO
+                //blendFunc add
+                blendFunc filter
                rgbGen identity
 	}
 }
@@ -97,7 +97,7 @@ textures/ctf2/redteam02
         {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 
@@ -118,7 +118,7 @@ textures/ctf2/blueteam02
         {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 
@@ -235,7 +235,7 @@ textures/ctf2/red_banner02
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 
@@ -257,7 +257,7 @@ textures/ctf2/blue_banner02
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 
@@ -280,7 +280,7 @@ textures/ctf2/tin_redpanel
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -302,7 +302,7 @@ textures/ctf2/tin_blupanel
 	}
         {
 		map $lightmap
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -322,7 +322,7 @@ textures/ctf2/blue_banner01
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 
@@ -350,7 +350,7 @@ textures/ctf2/blue_techsign01
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 
@@ -418,7 +418,7 @@ textures/ctf2/jaildr_bluescroll
 	}
 	{
 		map textures/ctf2/jaildr_blue
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		tcMod scroll 0 -.25
 		rgbGen identity
 	}
@@ -426,7 +426,7 @@ textures/ctf2/jaildr_bluescroll
 		map textures/ctf2/jaildr_blue_blend
 		rgbGen wave sin 0.5 0.5 1 1
 		tcMod scroll 0 -.25
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -447,15 +447,15 @@ textures/ctf2/blue_pennant
 
         {
 		map textures/ctf2/blue_pennant
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
 
        // {
         //	map textures/sfx/shadow
        //         tcGen environment
-       //         //blendFunc GL_ONE GL_ONE
-       //         blendFunc GL_DST_COLOR GL_ZERO
+       //         //blendFunc add
+       //         blendFunc filter
       //         rgbGen identity
 	//}
 }

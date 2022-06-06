@@ -25,7 +25,7 @@ textures/base_wall/bluemetalsupport2eye
 	}
         {
 		map textures/base_wall/bluemetalsupport2eyel
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbgen wave triangle .5 .5 0 .5
 	}
 }
@@ -44,7 +44,7 @@ textures/base_wall/atechengine_ax
 	}
         {
 		map textures/base_wall/atechengine_ax
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -66,7 +66,7 @@ textures/base_wall/concrete_ow
 	}
         {
 		map textures/base_wall/concrete_ow
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 		rgbGen identity
 	}
         {
@@ -179,7 +179,7 @@ textures/base_wall/glass_frame
 
         {
 		map textures/effects/tinfx2
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcgen environment
                 rgbGen identity
 	}
@@ -210,7 +210,7 @@ textures/base_wall/metalfloor_wall_15ow
                 tcmod scale 2 .4
                 tcmod scroll 6 .6
                 //tcMod turb 0 .1 0 .01
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen identity
 
 	}
@@ -319,7 +319,7 @@ textures/base_wall/girders1i_yellofin
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -413,7 +413,7 @@ textures/base_wall/medal_impressive
 	{
 		map $lightmap
 	        rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 
@@ -455,7 +455,7 @@ textures/base_wall/q3tourneyscreen
 
 	{
 		map $lightmap
-	        blendfunc gl_dst_color gl_zero
+	        blendfunc filter
 		rgbgen identity
 	}
 
@@ -493,7 +493,7 @@ textures/base_wall/main_q3abanner
 	{
 		map $lightmap
 	        rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
@@ -548,12 +548,12 @@ textures/base_wall/shinygrate1_4_glow
 	{
 		map $lightmap
     		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 	{
 		map textures/base_wall/shinygrate1_4_glow_light2
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave triangle .2 .01 0 10
 	}
 
@@ -578,7 +578,7 @@ textures/base_wall/bluemetal1b_chrome
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -603,7 +603,7 @@ textures/base_wall/bluemetal1c
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -626,7 +626,7 @@ textures/base_wall/bluemetalsupport_shiny
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -650,7 +650,7 @@ textures/base_wall/grill
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -670,14 +670,14 @@ textures/base_wall/grill2
         {
 		map textures/effects/tinfx
                 tcgen environment
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen identity
 	}
 
         {
 		map textures/base_wall/grill2
-		//blendFunc GL_ONE GL_ONE
-                blendFunc GL_DST_COLOR GL_ZERO
+		//blendFunc add
+                blendFunc filter
 		rgbGen identity
 	}
 }
@@ -700,7 +700,7 @@ textures/base_wall/bluemetalsupport2
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -770,7 +770,7 @@ textures/base_wall/bluemetalsupport2c
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -826,7 +826,7 @@ textures/base_wall/bluemetalsupport2f
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -1024,7 +1024,7 @@ textures/base_door/shinymetaldoor_outside3a
 	{
 		map $lightmap
 		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 }
@@ -1051,7 +1051,7 @@ textures/base_door/shinymetaldoor_outside3b
 	{
 		map $lightmap
 		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 }
@@ -1085,7 +1085,7 @@ textures/base_door/shinymetaldoor_outside
 	{
 		map $lightmap
 		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 }
@@ -1107,7 +1107,7 @@ textures/base_wall/steedmetal2
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -1146,7 +1146,7 @@ textures/base_wall/steed1gd
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
@@ -1239,7 +1239,7 @@ textures/base_wall/train1
 	{
 		map $lightmap
 		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 }
@@ -1289,7 +1289,7 @@ textures/base_door/shinymetaldoor
 	{
 		map $lightmap
 		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 }
@@ -1307,13 +1307,13 @@ textures/base_wall/dooreye
 
 	{
 		map textures/base_wall/dooreye
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
 	{
 		map textures/base_wall/dooreyelight
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbgen wave triangle .5 .5 0 .5
 	}
 
@@ -1333,13 +1333,13 @@ textures/base_wall/dooreye2
 
 	{
 		map textures/base_wall/dooreye2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
 	{
 		map textures/base_wall/dooreyelight
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbgen wave triangle .5 .5 0 .5
 	}
 
@@ -1361,13 +1361,13 @@ textures/base_wall/dooreye3
 
 	{
 		map textures/base_wall/dooreye3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
 	{
 		map textures/base_wall/dooreyelight
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbgen wave triangle .5 .5 0 .5
 	}
 
@@ -1384,7 +1384,7 @@ textures/base_wall/glass01
         {
 		map textures/effects/tinfx
                 tcgen environment
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen identity
 	}
         {
@@ -1418,7 +1418,7 @@ textures/base_wall/patch10_beat4_drip
 	{
 		map $lightmap
 		rgbgen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 
@@ -1519,7 +1519,7 @@ textures/base_wall/bluecover
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
@@ -1547,7 +1547,7 @@ textures/base_wall/shinybluemetal1b
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
@@ -1577,7 +1577,7 @@ textures/base_wall/pjrock18
 	{
 		map $lightmap
     		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 
@@ -1623,7 +1623,7 @@ textures/base_wall/shinygrate1_4
 	{
 		map $lightmap
     		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 
@@ -1641,7 +1641,7 @@ textures/base_wall/chrome_metal
 
 	{
 		map textures/base_wall/chrome_metal
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		detail
         	tcMod scale 0.0693 0.0712
 		rgbGen identity
@@ -1651,7 +1651,7 @@ textures/base_wall/chrome_metal
 	{
 		map $lightmap
                 rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 	}
 
@@ -1677,7 +1677,7 @@ textures/base_wall/blupaintedmetalcomp
 	{
 		map $lightmap
 		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }
 
@@ -1699,7 +1699,7 @@ textures/base_wall/blupaintedmetal
 	{
 		map $lightmap
 		rgbgen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }
 
@@ -1722,7 +1722,7 @@ textures/base_wall/shinymetal2
 
 	{
 		map textures/base_wall/shinymetal2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
@@ -1744,12 +1744,12 @@ textures/base_wall/comp3c
         {
 		map $lightmap
                 tcGen environment
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
 	}
 
 	{
 		map textures/base_wall/comp3c
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 
@@ -1775,7 +1775,7 @@ textures/base_wall/comp3b
         {
 		map textures/base_wall/comp3env
                 tcGen environment
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen wave sin .98 .02 0 5
 	}
 
@@ -1788,7 +1788,7 @@ textures/base_wall/comp3b
 
 	{
 		map textures/base_wall/comp3b
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 
@@ -1813,7 +1813,7 @@ textures/base_wall/comp3b_dark
         {
 		map textures/base_wall/comp3env
                 tcGen environment
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen wave sin .98 .02 0 5
 	}
 
@@ -1826,7 +1826,7 @@ textures/base_wall/comp3b_dark
 
 	{
 		map textures/base_wall/comp3b
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 
@@ -1852,7 +1852,7 @@ textures/base_wall/comp3
         {
 		map textures/base_wall/comp3env
                 tcGen environment
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen wave sin .98 .02 0 5
 	}
 
@@ -1865,7 +1865,7 @@ textures/base_wall/comp3
 
 	{
 		map textures/base_wall/comp3
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 
@@ -1889,7 +1889,7 @@ textures/base_wall/basewall01bit
 
 	{
 		map textures/base_wall/basewall01bitfx
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
                 tcmod scroll 3.3 1
                 rgbGen wave sin .5 0.5 0 5
 	}
@@ -1897,12 +1897,12 @@ textures/base_wall/basewall01bit
 		map textures/effects/envmap2
                 tcGen environment
                 tcmod scale 4 4
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                rgbGen identity
 	}
 	{
 		map textures/base_wall/basewall01bit
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
 
@@ -1924,12 +1924,12 @@ textures/base_wall/basewall01_ow
 	}
 	{
 		map textures/base_wall/basewall01_ow
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/base_wall/basewall01_owfx
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
                 rgbGen wave sin .5 0.5 0 .5
 	}
 
@@ -1955,14 +1955,14 @@ textures/base_wall/blumtlspt2b
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
 
 	{
 		map textures/base_wall/bluemetalsupport2bglow
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
 }
@@ -1988,14 +1988,14 @@ textures/base_wall/bluemetalsupport2b
 	}
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
 
 	{
 		map textures/base_wall/bluemetalsupport2bglow
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
 }
@@ -2017,7 +2017,7 @@ textures/base_wall/kcgrate1
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -2035,12 +2035,12 @@ textures/base_wall/future9light
 	{
 		map textures/base_wall/future9light
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		map textures/base_wall/future9light_blend
 		rgbGen wave sin 0.5 0.1 1 0.5
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 }
 textures/base_wall/bluemetal1light
@@ -2056,13 +2056,13 @@ textures/base_wall/bluemetal1light
 	}
 	{
 		map textures//base_wall/bluemetal1light
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/base_wall/bluemetal1light_bl
 		rgbGen wave sin 0.5 0.1 1 0.5
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -2080,6 +2080,6 @@ textures/base_wall/green_contrim_noisey
 	{
 		map textures/base_wall/green_contrim
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }

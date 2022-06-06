@@ -150,7 +150,7 @@ textures/terrain/mpterra2_0to1
 		tcmod scale 0.1 0.1
 		rgbGen vertex
 		alphaGen vertex
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 
 	{
@@ -181,7 +181,7 @@ textures/terrain/mpterra2_0to2
 		rgbGen vertex
 		alphaGen vertex
                 tcmod scale 0.05 0.05
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 
 	{
@@ -215,7 +215,7 @@ textures/terrain/mpterra2_1to2
 		tcmod scale 0.05 0.05
 		rgbGen vertex
 		alphaGen vertex
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 
 	{
@@ -273,7 +273,7 @@ textures/proto2/xproto_0to1
 		rgbGen vertex
 		alphaGen vertex
 		tcmod scale .1 .1
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 
 
@@ -298,7 +298,7 @@ textures/proto2/xproto_1to2
 		rgbGen vertex
 		alphaGen vertex
 		tcmod scale .1 .1
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 
 
@@ -322,7 +322,7 @@ textures/proto2/xproto_0to2
 		rgbGen vertex
 		alphaGen vertex
 		tcmod scale .1 .1
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 
 
@@ -466,7 +466,7 @@ textures/terrain/mpterra1_0to1
 		tcmod scale 0.125 0.125
 		rgbGen vertex
 		alphaGen vertex
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 	{
                 map textures/skies2/clouds2
@@ -495,7 +495,7 @@ textures/terrain/mpterra1_0to2
 		tcmod scale 0.05 0.05
 		rgbGen vertex
 		alphaGen vertex
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 	{
                 map textures/skies2/clouds2
@@ -524,7 +524,7 @@ textures/terrain/mpterra1_1to2
 		tcmod scale 0.05 0.05
 		rgbGen vertex
 		alphaGen vertex
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 	{
                 map textures/skies2/clouds2
@@ -585,7 +585,7 @@ textures/proto2/tproto_0to1
 		alphaGen vertex
 //		alphaGen identity
 		tcmod scale .1 .1
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 
 //        {

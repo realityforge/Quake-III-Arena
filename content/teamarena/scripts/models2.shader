@@ -866,7 +866,7 @@ models/mapobjects/slamp/slamp3x
 
         {
                 map models/mapobjects/slamp/slamp3x
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
 
         }
 
@@ -904,7 +904,7 @@ models/flag/flagbits
 	      // deformVertexes wave 100 sin 0 5 0 .7
 	 {
                 map models/flags/flagbits
-                //blendfunc gl_src_alpha gl_one_minus_src_alpha
+                //blendfunc blend
                 alphaFunc GE128
                 rgbGen lightingDiffuse
                 depthWrite
@@ -930,19 +930,19 @@ models/flag2/w_flag2
                 //tcmod scale 9 3
                 //tcmod scroll .1 .7
 
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                  rgbGen identity
 	}
         {
 		map models/flag2/w_flag2
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 	        rgbGen identity
 	}
         {
 		map textures/sfx/shadow
                 tcGen environment
-                //blendFunc GL_ONE GL_ONE
-                blendFunc GL_DST_COLOR GL_ZERO
+                //blendFunc add
+                blendFunc filter
                rgbGen identity
 	}
 }
@@ -964,19 +964,19 @@ models/flag2/r_flag2
                 //tcmod scale 9 3
                 //tcmod scroll .1 .7
 
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                  rgbGen identity
 	}
         {
 		map models/flag2/r_flag2
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 	        rgbGen identity
 	}
         {
 		map textures/sfx/shadow
                 tcGen environment
-                //blendFunc GL_ONE GL_ONE
-                blendFunc GL_DST_COLOR GL_ZERO
+                //blendFunc add
+                blendFunc filter
                rgbGen identity
 	}
 }
@@ -997,19 +997,19 @@ models/flag2/b_flag2
                 tcGen environment
                 //tcmod scale 9 3
                 //tcmod scroll .1 .7
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen identity
 	}
         {
 		map models/flag2/b_flag2
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
 	        rgbGen identity
 	}
         {
 		map textures/sfx/shadow
                 tcGen environment
-                //blendFunc GL_ONE GL_ONE
-                blendFunc GL_DST_COLOR GL_ZERO
+                //blendFunc add
+                blendFunc filter
                 rgbGen identity
 	}
 }
@@ -2545,7 +2545,7 @@ models/flags/n_flag2
         {
 		map models/flags/neutral_fx
                 tcGen environment
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen identity
 	}
         {
@@ -2556,7 +2556,7 @@ models/flags/n_flag2
         {
 		map textures/sfx/shadow
                 tcGen environment
-                blendFunc GL_DST_COLOR GL_ZERO
+                blendFunc filter
                 rgbGen identity
 	}
 }

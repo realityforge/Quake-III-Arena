@@ -28,7 +28,7 @@ textures/skies/xmkc_ctf5sky
 	}
 	{
 		map textures/skies/nightsky_nocloud
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		tcMod scale 3 5
 		tcMod scroll 0.3 0.1
 	}
@@ -57,7 +57,7 @@ textures/skies/xproto_sky
 	}
 	{
 		map textures/skies/proto_sky2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 0.005 0.005
                 //rgbgen wave triangle 1 2 0 7
 		tcMod scale 3 3
@@ -89,7 +89,7 @@ textures/skies/xproto_sky2
 	}
 	{
 		map textures/skies/proto_sky2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 0.005 0.005
                 //rgbgen wave triangle 1 2 0 7
 		tcMod scale 3 3
@@ -120,7 +120,7 @@ textures/skies/xproto_sky_tourney2
 	}
 	{
 		map textures/skies/proto_sky2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 0.005 0.005
                 //rgbgen wave triangle 1 2 0 7
 		tcMod scale 3 3
@@ -147,7 +147,7 @@ textures/skies/xtoxicsky_q3ctf3
 	}
 	{
 		map textures/skies/topclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -169,7 +169,7 @@ textures/skies/skybox
         skyparms env/space1 - -
        {
 		map textures/skies/killsky_2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll 0.05 0.06
 		tcMod scale 3 2
 	}
@@ -205,7 +205,7 @@ textures/skies/xtoxicskytim_q3dm5
 	}
 	{
 		map textures/skies/topclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -299,7 +299,7 @@ textures/skies/killsky
 	}
 	{
 		map textures/skies/killsky_2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll 0.05 0.06
 		tcMod scale 3 2
 	}
@@ -329,7 +329,7 @@ textures/skies/tim_tourney1
 	}
 	{
 		map textures/skies/killsky_2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll 0.05 0.06
 		tcMod scale 3 2
 	}
@@ -360,7 +360,7 @@ textures/skies/tim_km2
 	}
 	{
 		map textures/skies/killsky_2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll 0.05 0.06
 		tcMod scale 3 2
 	}
@@ -392,7 +392,7 @@ textures/skies/tim_hell
 	}
 	{
 		map textures/skies/killsky_2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll 0.05 0.06
 		tcMod scale 3 2
 	}
@@ -424,7 +424,7 @@ textures/skies/dc_hell
 	}
 	{
 		map textures/skies/killsky_2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll 0.05 0.06
 		tcMod scale 3 2
 	}
@@ -456,7 +456,7 @@ textures/skies/tim_dm3_red
 	}
 	{
 		map textures/skies/killsky_2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll 0.05 0.06
 		tcMod scale 3 2
 	}
@@ -485,7 +485,7 @@ textures/skies/tim_dm14
 	}
 	{
 		map textures/skies/killsky_2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll 0.05 0.06
 		tcMod scale 3 2
 	}
@@ -514,7 +514,7 @@ textures/skies/tim_dm14red
 	}
 	{
 		map textures/skies/killsky_2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll 0.05 0.06
 		tcMod scale 3 2
 	}
@@ -539,7 +539,7 @@ textures/skies/hellsky
 	}
 	//{
 	//	map textures/skies/dimclouds
-	//	blendfunc GL_ONE GL_ONE
+	//	blendfunc add
 	//	tcMod scroll 0.05 0.06
 		//tcMod scale 1 1
 	//}
@@ -566,7 +566,7 @@ textures/skies/toxicsky
 	}
 	{
 		map textures/skies/intelredclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
 	}
@@ -593,7 +593,7 @@ textures/skies/xtoxicsky_dm3
 	}
 	{
 		map textures/skies/intelredclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
 	}
@@ -620,7 +620,7 @@ textures/skies/xtoxicsky_newctf1
 	}
 	{
 		map textures/skies/intelredclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
 	}
@@ -647,7 +647,7 @@ textures/skies/xtoxicsky_dm9
 	}
 	{
 		map textures/skies/intelredclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
 	}
@@ -673,7 +673,7 @@ textures/skies/xtoxicsky_ctf
 	}
 	{
 		map textures/skies/intelredclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
 	}
@@ -700,7 +700,7 @@ textures/skies/xtoxicsky_tourney
 	}
 	{
 		map textures/skies/intelredclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
 	}
@@ -774,7 +774,7 @@ textures/skies/xtoxicsky_dm4
 	}
 	{
 		map textures/skies/intelredclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
 	}
@@ -804,7 +804,7 @@ textures/skies/xtoxicsky_dm14
 	}
 	{
 		map textures/skies/intelredclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
 	}
@@ -833,7 +833,7 @@ textures/skies/xtoxicsky_90_60
 	}
 	{
 		map textures/skies/intelredclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
 	}
@@ -858,13 +858,13 @@ textures/skies/hellredclouds
 	}
 	{
 		map textures/skies/lightningsky8_kc
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scale 10 10
 		tcMod scroll .2 .2
 	}
 	{
 		map textures/skies/redcloudsa
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.02 0.01
 	}
@@ -883,7 +883,7 @@ textures/skies/hellskybright
 	skyparms - 512 -
 	{
 		map textures/skies/dimclouds
-		//blendFunc GL_ONE GL_ONE
+		//blendFunc add
 		tcMod scroll 0.05 0
 		//tcMod scroll 0 0
 		tcMod scale 2 2
@@ -891,8 +891,8 @@ textures/skies/hellskybright
 	}
 	{
 		map textures/skies/redclouds
-		//blendFunc GL_DST_COLOR GL_ZERO
-		blendFunc GL_ONE GL_ONE
+		//blendFunc filter
+		blendFunc add
 		tcMod scroll 0.05 0.06
 		tcMod scale 1 1
 	}
@@ -915,7 +915,7 @@ textures/skies/hellsky2
 	}
 	{
 		map textures/skies/dimclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 0.02 0.01
 		tcMod scale 3 3
 	}
@@ -941,7 +941,7 @@ textures/skies/hellsky2bright
 	}
 	{
 		map textures/skies/intelredclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -967,7 +967,7 @@ textures/skies/hellsky
 	}
 	{
 		map textures/skies/dimclouds
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll 0.05 0.06
 		tcMod scale 1 1
 	}
@@ -1002,7 +1002,7 @@ textures/skies/hellsky
 	//}
 	//{
 		//map textures/skies/pjbasesky
-		//blendfunc GL_ONE GL_ONE
+		//blendfunc add
 		//tcMod scroll -0.01 -0.01
 		//tcMod scale 5 5
 	//}
@@ -1037,7 +1037,7 @@ textures/skies/hellsky
 	//}
 	//{
 		//map textures/skies/pjbasesky
-		//blendfunc GL_ONE GL_ONE
+		//blendfunc add
 		//tcMod scroll -0.01 -0.01
 		//tcMod scale 5 5
 	//}
@@ -1069,7 +1069,7 @@ textures/skies/pj_dm10sky
 	}
 	{
 		map textures/skies/topclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -1101,7 +1101,7 @@ textures/skies/kc_dm10sky
 	}
 	{
 		map textures/skies/topclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -1142,7 +1142,7 @@ textures/skies/kcbasesky_arena1_sky
 	}
 	{
 		map textures/skies/pjbasesky
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll -0.01 -0.01
 		tcMod scale 5 5
 	}
@@ -1171,7 +1171,7 @@ textures/skies/pjbasesky_arena1_sky
 	}
 	{
 		map textures/skies/pjbasesky
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll -0.01 -0.01
 		tcMod scale 5 5
 	}
@@ -1201,7 +1201,7 @@ textures/skies/pj_ctf2_sky
 	}
 	{
 		map textures/skies/topclouds
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll -0.01 -0.012
 		tcMod scale 5 5
 	}
@@ -1231,7 +1231,7 @@ textures/skies/gallery_sky
 	}
 	{
 		map textures/skies/topclouds
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll -0.01 -0.012
 		tcMod scale 5 5
 	}
@@ -1260,7 +1260,7 @@ textures/skies/pj_arena4_sky
 	}
 	{
 		map textures/skies/pjbasesky
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll -0.01 -0.012
 		tcMod scale 5 5
 	}
@@ -1289,7 +1289,7 @@ textures/skies/pj_ctf1sky
 	}
 	{
 		map textures/skies/pjbasesky
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll -0.01 -0.012
 		tcMod scale 5 5
 	}
@@ -1318,7 +1318,7 @@ textures/skies/pj_arena2sky
 	}
 	{
 		map textures/skies/pjbasesky
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll -0.01 -0.012
 		tcMod scale 5 5
 	}
@@ -1348,7 +1348,7 @@ textures/skies/pj_dm9sky
 	}
 	{
 		map textures/skies/topclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -1385,14 +1385,14 @@ textures/skies/hellskyteam
 	}
 	{
 		map textures/skies/redcloudsa
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
 	}
 }
 	//{
 		//map env/redcloudsa
-		//blendfunc GL_ONE GL_ONE
+		//blendfunc add
 		//tcMod scroll 0.05 0
 		//tcMod scale 2 2
 		//
@@ -1430,7 +1430,7 @@ textures/skies/toxicskydim
 	}
 	{
 		map textures/skies/intelredclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 0.05 0.05
 		tcMod scale 3 3
 	}
@@ -1457,7 +1457,7 @@ textures/skies/toxicskytim_dm4
 	}
 	{
 		map textures/skies/intelredclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -1486,7 +1486,7 @@ textures/skies/toxicskytim_ctf1
 	}
 	{
 		map textures/skies/intelredclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -1514,7 +1514,7 @@ textures/skies/toxicskytim_blue
 	}
 	{
 		map textures/skies/topclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -1546,7 +1546,7 @@ textures/skies/toxicskytim_dm5
 	}
 	{
 		map textures/skies/topclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -1575,7 +1575,7 @@ textures/skies/toxicskytim_dm8
 	}
 	{
 		map textures/skies/intelredclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -1604,7 +1604,7 @@ textures/skies/toxicskytim_dm9
 	}
 	{
 		map textures/skies/intelredclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -1635,7 +1635,7 @@ textures/skies/toxicskytim_dm2
 	}
 	{
 		map textures/skies/topclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -1664,7 +1664,7 @@ textures/skies/tim_tourney2
 	}
 	{
 		map textures/skies/topclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -1693,7 +1693,7 @@ textures/skies/q3dm0
 	}
 	{
 		map textures/skies/topclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -1723,7 +1723,7 @@ textures/skies/tim_mpctf1
 	}
 	{
 		map textures/skies/topclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -1752,7 +1752,7 @@ textures/skies/toxicskytim_dm7
 	}
 	{
 		map textures/skies/topclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}
@@ -1779,7 +1779,7 @@ textures/skies/mkc_dm4sky
 	}
 	{
 		map textures/skies/redclouds
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		tcMod scale 3 5
 		tcMod scroll 0.3 0.1
 	}
@@ -1807,7 +1807,7 @@ textures/skies/mkc_ctf5sky
 	}
 	{
 		map textures/skies/nightsky_nocloud
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		tcMod scale 3 5
 		tcMod scroll 0.3 0.1
 	}
@@ -1837,7 +1837,7 @@ textures/skies/raster_test_sun
 	}
 	{
 		map textures/skies/nightsky_nocloud
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		tcMod scale 3 5
 		tcMod scroll 0.3 0.1
 	}
@@ -1866,7 +1866,7 @@ textures/skies/proto_sky
 	}
 	{
 		map textures/skies/proto_sky2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scroll 0.005 0.005
                 //rgbgen wave triangle 1 2 0 7
 		tcMod scale 3 3
@@ -1897,7 +1897,7 @@ textures/skies/mkc_ctf1
 	}
 	{
 		map textures/skies/topclouds
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod scale 3 3
 		tcMod scroll 0.05 0.05
 	}

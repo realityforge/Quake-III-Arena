@@ -23,7 +23,7 @@ textures/gallery/gallery_sky
 	}
 	{
 		map textures/skies/topclouds
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod scroll -0.01 -0.012
 		tcMod scale 5 5
 	}

@@ -34,7 +34,7 @@ white
 {
 	{
 		map *white
-		blendfunc	GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendfunc	blend
 		rgbgen vertex
 	}
 }
@@ -129,7 +129,7 @@ powerups/battleSuit
 		tcMod turb 0 0.15 0 0.3
                 tcmod rotate 333
                 tcmod scroll .3 .3
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 powerups/battleWeapon
@@ -142,7 +142,7 @@ powerups/battleWeapon
 		tcMod turb 0 0.15 0 0.3
                 tcmod rotate 333
                 tcmod scroll .3 .3
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -151,7 +151,7 @@ powerups/invisibility
 	{
 		map textures/effects/invismap
                 //map textures/sfx/specular
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod turb 0 0.15 0 0.25
 		tcGen environment
 	}
@@ -161,7 +161,7 @@ powerups/quad
 	deformVertexes wave 100 sin 3 0 0 0
 	{
 		map textures/effects/quadmap2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcGen environment
                 tcmod rotate 30
 		//tcMod turb 0 0.2 0 .2
@@ -173,7 +173,7 @@ powerups/quadWeapon
 	deformVertexes wave 100 sin 0.5 0 0 0
 	{
 		map textures/effects/quadmap2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcGen environment
                 tcmod rotate 30
 		//tcMod turb 0 0.2 0 .2
@@ -185,7 +185,7 @@ powerups/regen
 	deformVertexes wave 100 sin 3 0 0 0
 	{
 		map textures/effects/regenmap2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcGen environment
                 tcmod rotate 30
 		//tcMod turb 0 0.2 0 .2
@@ -204,7 +204,7 @@ icons/teleporter
 	nopicmip
 	{
 		map icons/teleporter
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 icons/medkit
@@ -212,7 +212,7 @@ icons/medkit
 	nopicmip
 	{
 		map icons/medkit
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 icons/kamikaze
@@ -220,7 +220,7 @@ icons/kamikaze
 	nopicmip
 	{
 		map icons/kamikaze
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 icons/portal
@@ -228,7 +228,7 @@ icons/portal
 	nopicmip
 	{
 		map icons/portal
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -240,7 +240,7 @@ icons/envirosuit
 	nopicmip
 	{
 		map icons/envirosuit
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 icons/quad
@@ -248,7 +248,7 @@ icons/quad
 	nopicmip
 	{
 		map icons/quad
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 icons/haste
@@ -256,7 +256,7 @@ icons/haste
 	nopicmip
 	{
 		map icons/haste
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 icons/invis
@@ -264,7 +264,7 @@ icons/invis
 	nopicmip
 	{
 		map icons/invis
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 icons/regen
@@ -272,7 +272,7 @@ icons/regen
 	nopicmip
 	{
 		map icons/regen
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 icons/flight
@@ -280,7 +280,7 @@ icons/flight
 	nopicmip
 	{
 		map icons/flight
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -292,7 +292,7 @@ icons/scout
 	nopicmip
 	{
 		map icons/scout
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 icons/guard
@@ -300,7 +300,7 @@ icons/guard
 	nopicmip
 	{
 		map icons/guard
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 icons/doubler
@@ -308,7 +308,7 @@ icons/doubler
 	nopicmip
 	{
 		map icons/doubler
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 icons/radar
@@ -316,7 +316,7 @@ icons/radar
 	nopicmip
 	{
 		map icons/radar
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 icons/ammo_regen
@@ -324,7 +324,7 @@ icons/ammo_regen
 	nopicmip
 	{
 		map icons/ammo_regen
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 icons/invulnerability
@@ -332,7 +332,7 @@ icons/invulnerability
 	nopicmip
 	{
 		map icons/invulnerability
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -401,7 +401,7 @@ icons/iconw_gauntlet
 	nopicmip
 	{
 		map icons/iconw_gauntlet
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 icons/iconw_machinegun
@@ -409,7 +409,7 @@ icons/iconw_machinegun
 	nopicmip
 	{
 		map icons/iconw_machinegun
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 icons/iconw_rocket
@@ -417,7 +417,7 @@ icons/iconw_rocket
 	nopicmip
 	{
 		map icons/iconw_rocket
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -426,7 +426,7 @@ icons/iconw_shotgun
 	nopicmip
 	{
 		map icons/iconw_shotgun
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbgen identitylighting
 	}
 }
@@ -436,7 +436,7 @@ icons/iconw_grenade
 	nopicmip
 	{
 		map icons/iconw_grenade
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -445,7 +445,7 @@ icons/iconw_lightning
 	nopicmip
 	{
 		map icons/iconw_lightning
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -454,7 +454,7 @@ icons/iconw_plasma
 	nopicmip
 	{
 		map icons/iconw_plasma
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -463,7 +463,7 @@ icons/iconw_railgun
 	nopicmip
 	{
 		map icons/iconw_railgun
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -472,7 +472,7 @@ icons/iconw_bfg
 	nopicmip
 	{
 		map icons/iconw_bfg
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -481,7 +481,7 @@ icons/iconw_grapple
 	nopicmip
 	{
 		map icons/iconw_grapple
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -490,7 +490,7 @@ icons/iconw_nailgun
 	nopicmip
 	{
 		map icons/nailgun128
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -499,7 +499,7 @@ icons/iconw_chaingun
 	nopicmip
 	{
 		map icons/chaingun128
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -508,7 +508,7 @@ icons/iconw_proxlauncher
 	nopicmip
 	{
 		map icons/proxmine
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -520,7 +520,7 @@ icons/icona_machinegun
 	nopicmip
 	{
 		map icons/icona_machinegun
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 icons/icona_rocket
@@ -528,7 +528,7 @@ icons/icona_rocket
 	nopicmip
 	{
 		map icons/icona_rocket
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -537,7 +537,7 @@ icons/icona_shotgun
 	nopicmip
 	{
 		map icons/icona_shotgun
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbgen identitylighting
 	}
 }
@@ -547,7 +547,7 @@ icons/icona_grenade
 	nopicmip
 	{
 		map icons/icona_grenade
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -556,7 +556,7 @@ icons/icona_lightning
 	nopicmip
 	{
 		map icons/icona_lightning
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -565,7 +565,7 @@ icons/icona_plasma
 	nopicmip
 	{
 		map icons/icona_plasma
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -574,7 +574,7 @@ icons/icona_railgun
 	nopicmip
 	{
 		map icons/icona_railgun
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -583,7 +583,7 @@ icons/icona_bfg
 	nopicmip
 	{
 		map icons/icona_bfg
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -592,7 +592,7 @@ icons/icona_nailgun
 	nopicmip
 	{
 		map icons/ammo_nailgun
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -601,7 +601,7 @@ icons/icona_chaingun
 	nopicmip
 	{
 		map icons/ammo_chaingun
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -610,7 +610,7 @@ icons/icona_proxlauncher
 	nopicmip
 	{
 		map icons/ammo_proxmine
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -623,7 +623,7 @@ icons/iconr_shard
 	nopicmip
 	{
 		map icons/iconr_shard
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -632,7 +632,7 @@ icons/iconr_yellow
 	nopicmip
 	{
 		map icons/iconr_yellow
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -641,7 +641,7 @@ icons/iconr_red
 	nopicmip
 	{
 		map icons/iconr_red
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -653,7 +653,7 @@ icons/iconh_green
 	nopicmip
 	{
 		map icons/iconh_green
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -662,7 +662,7 @@ icons/iconh_yellow
 	nopicmip
 	{
 		map icons/iconh_yellow
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -671,7 +671,7 @@ icons/iconh_red
 	nopicmip
 	{
 		map icons/iconh_red
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
         //{
 	//	clampmap icons/iconh_red2
@@ -685,7 +685,7 @@ icons/iconh_mega
 	nopicmip
 	{
 		map icons/iconh_mega
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -697,7 +697,7 @@ icons/iconf_red
 	nopicmip
 	{
 		map icons/iconf_red
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -706,7 +706,7 @@ icons/iconf_blu
 	nopicmip
 	{
 		map icons/iconf_blu
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -754,7 +754,7 @@ sprites/balloon3
 {
 	{
 		map sprites/balloon4
-		blendfunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendfunc blend
 	}
 }
 
@@ -767,12 +767,12 @@ textures/animationTest
 	}
 	{
 		animMap 0.5 textures/liquids/pool textures/liquids/slime7 textures/liquids/bloodwater1
-		blendFunc	GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc	blend
 		alphaGen	wave sawtooth 0 1 0 0.5
 	}
 	{
 		map $lightmap
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }
 
@@ -781,7 +781,7 @@ teleportEffect
 	cull none
 	{
 		map gfx/misc/teleportEffect2
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
 		rgbGen entity
 		tcMod scale 1 4
 		tcMod scroll 0 2
@@ -817,7 +817,7 @@ wake
 {
 	{
 		clampmap sprites/splash
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
                 tcmod rotate 250
                 tcMod stretch sin .9 0.1 0 0.7
@@ -825,7 +825,7 @@ wake
 	}
         {
 		clampmap sprites/splash
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
                 tcmod rotate -230
                 tcMod stretch sin .9 0.05 0 0.9
@@ -841,7 +841,7 @@ viewBloodBlend
 	{
 		//map models/weaphits/blood201
                 map gfx/damage/blood_screen
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identityLighting
 		alphaGen vertex
 	}
@@ -854,7 +854,7 @@ waterBubble
 	entityMergable		// allow all the sprites to be merged together
 	{
 		map sprites/bubble
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen		vertex
 		alphaGen	vertex
 	}
@@ -866,7 +866,7 @@ smokePuff
 	entityMergable		// allow all the sprites to be merged together
 	{
 		map gfx/misc/smokepuff3
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen		vertex
 		alphaGen	vertex
 	}
@@ -878,8 +878,8 @@ hasteSmokePuff			// drops behind player's feet when speeded
 	entityMergable		// allow all the sprites to be merged together
 	{
 		map gfx/misc/smokepuff3
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
-                //blendfunc GL_ONE GL_ONE
+		blendFunc blend
+                //blendfunc add
 		rgbGen		vertex
 		alphaGen	vertex
 	}
@@ -891,7 +891,7 @@ smokePuffRagePro
 	entityMergable		// allow all the sprites to be merged together
 	{
 		map gfx/misc/smokepuffragepro
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 
@@ -900,7 +900,7 @@ shotgunSmokePuff
 	cull none
 	{
 		map gfx/misc/smokepuff2b
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		alphaGen entity
 		rgbGen entity
 	}
@@ -911,7 +911,7 @@ flareShader
 	cull none
 	{
 		map gfx/misc/flare
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
 	}
 }
@@ -920,7 +920,7 @@ sun
 	cull none
 	{
 		map gfx/misc/sun
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
 	}
 }
@@ -931,7 +931,7 @@ railDisc
         deformVertexes wave 100 sin 0 .5 0 2.4
 	{
 		clampmap gfx/misc/raildisc_mono2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
                  tcMod rotate -30
 	}
@@ -943,7 +943,7 @@ railCore
 	cull none
 	{
 		map gfx/misc/railcorethin_mono
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen vertex
 		tcMod scroll -1 0
 	}
@@ -955,7 +955,7 @@ lightningBolt
 	cull none
 	{
 		map gfx/misc/lightning3
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 //                rgbgen wave sin 1 5.1 0 7.1
                 rgbgen wave sin 1 0.5 0 7.1
                  tcmod scale  2 1
@@ -963,7 +963,7 @@ lightningBolt
 	}
     {
 		map gfx/misc/lightning3
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 //                rgbgen wave sin 1 8.3 0 8.1
                 rgbgen wave sin 1 0.8 0 8.1
                 tcmod scale  -1.3 -1
@@ -977,7 +977,7 @@ gfx/misc/tracer
 	cull none
 	{
 		map	gfx/misc/tracer2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 }
 
@@ -992,7 +992,7 @@ bloodMark
 	polygonOffset
 	{
 		clampmap gfx/damage/blood_stain
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identityLighting
 		alphaGen vertex
 	}
@@ -1006,7 +1006,7 @@ bloodTrail
 	{
 		//clampmap gfx/misc/blood
                 clampmap gfx/damage/blood_spurt
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen		vertex
 		alphaGen	vertex
 	}
@@ -1044,7 +1044,7 @@ gfx/damage/plasma_mrk
 	polygonOffset
 	{
 		map gfx/damage/plasma_mrk
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen vertex
 		alphaGen vertex
 	}
@@ -1102,7 +1102,7 @@ gfx/2d/crosshair
 	nopicmip
 	{
 		map gfx/2d/crosshair
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
         rgbGen identity
 	}
 }
@@ -1112,7 +1112,7 @@ gfx/2d/crosshairb
 	nopicmip
 	{
 		map gfx/2d/crosshairb
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 }
@@ -1122,7 +1122,7 @@ gfx/2d/crosshairc
 	nopicmip
 	{
 		map gfx/2d/crosshairc
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 }
@@ -1132,7 +1132,7 @@ gfx/2d/crosshaird
 	nopicmip
 	{
 		map gfx/2d/crosshaird
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 }
@@ -1142,7 +1142,7 @@ gfx/2d/crosshaire
 	nopicmip
 	{
 		map gfx/2d/crosshaire
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 }
@@ -1152,7 +1152,7 @@ gfx/2d/crosshairf
 	nopicmip
 	{
 		map gfx/2d/crosshairf
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 }
@@ -1162,7 +1162,7 @@ gfx/2d/crosshairg
 	nopicmip
 	{
 		map gfx/2d/crosshairg
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 }
@@ -1172,7 +1172,7 @@ gfx/2d/crosshairh
 	nopicmip
 	{
 		map gfx/2d/crosshairh
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 }
@@ -1182,7 +1182,7 @@ gfx/2d/crosshairi
 	nopicmip
 	{
 		map gfx/2d/crosshairi
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 
@@ -1192,7 +1192,7 @@ gfx/2d/crosshairj
 	nopicmip
 	{
 		map gfx/2d/crosshairj
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 }
@@ -1201,7 +1201,7 @@ gfx/2d/crosshairk
 	nopicmip
 	{
 		map gfx/2d/crosshairk
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 }
@@ -1215,7 +1215,7 @@ gfx/2d/bigchars
 	nomipmaps
 	{
 		map gfx/2d/bigchars
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbgen vertex
 	}
 }
@@ -1224,7 +1224,7 @@ gfx/2d/select
 	nopicmip
 	{
 		map gfx/2d/select
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 		rgbgen vertex
 	}
@@ -1236,7 +1236,7 @@ gfx/2d/assault1d
 	nopicmip
 	{
 		map gfx/2d/assault1d
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 gfx/2d/armor1h
@@ -1244,7 +1244,7 @@ gfx/2d/armor1h
 	nopicmip
 	{
 		map gfx/2d/armor1h
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 gfx/2d/health
@@ -1252,7 +1252,7 @@ gfx/2d/health
 	nopicmip
 	{
 		map gfx/2d/health
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 gfx/2d/blank
@@ -1260,7 +1260,7 @@ gfx/2d/blank
 	nopicmip
 	{
 		map gfx/2d/blank
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	}
 }
 gfx/2d/numbers/zero_32b
@@ -1268,7 +1268,7 @@ gfx/2d/numbers/zero_32b
 	nopicmip
 	{
 		map gfx/2d/numbers/zero_32b
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbgen vertex
 	}
 }
@@ -1277,7 +1277,7 @@ gfx/2d/numbers/one_32b
 	nopicmip
 	{
 		map gfx/2d/numbers/one_32b
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbgen vertex
 	}
 }
@@ -1286,7 +1286,7 @@ gfx/2d/numbers/two_32b
 	nopicmip
 	{
 		map gfx/2d/numbers/two_32b
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbgen vertex
 	}
 }
@@ -1295,7 +1295,7 @@ gfx/2d/numbers/three_32b
 	nopicmip
 	{
 		map gfx/2d/numbers/three_32b
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbgen vertex
 	}
 }
@@ -1304,7 +1304,7 @@ gfx/2d/numbers/four_32b
 	nopicmip
 	{
 		map gfx/2d/numbers/four_32b
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbgen vertex
 	}
 }
@@ -1313,7 +1313,7 @@ gfx/2d/numbers/five_32b
 	nopicmip
 	{
 		map gfx/2d/numbers/five_32b
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbgen vertex
 	}
 }
@@ -1322,7 +1322,7 @@ gfx/2d/numbers/six_32b
 	nopicmip
 	{
 		map gfx/2d/numbers/six_32b
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbgen vertex
 	}
 }
@@ -1331,7 +1331,7 @@ gfx/2d/numbers/seven_32b
 	nopicmip
 	{
 		map gfx/2d/numbers/seven_32b
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbgen vertex
 	}
 }
@@ -1340,7 +1340,7 @@ gfx/2d/numbers/eight_32b
 	nopicmip
 	{
 		map gfx/2d/numbers/eight_32b
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbgen vertex
 	}
 }
@@ -1349,7 +1349,7 @@ gfx/2d/numbers/nine_32b
 	nopicmip
 	{
 		map gfx/2d/numbers/nine_32b
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbgen vertex
 	}
 }
@@ -1358,7 +1358,7 @@ gfx/2d/numbers/minus_32b
 	nopicmip
 	{
 		map gfx/2d/numbers/minus_32b
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbgen vertex
 	}
 }

@@ -9,7 +9,7 @@ models/weapons2/bfg/bfg
 	}
 	{
 		map models/weapons2/bfg/bfg
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen lightingDiffuse
 	}
 	{
@@ -37,7 +37,7 @@ models/weapons2/lightning/button
 {
 	{
 		map models/weapons2/lightning/button
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 1 .2 0 1
 	}
 }

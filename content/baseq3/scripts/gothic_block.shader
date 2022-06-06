@@ -10,7 +10,7 @@ textures/gothic_block/largerblock3blood
         }
         {
 		map textures/effects/tinfx3
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcGen environment
         }
 
@@ -37,7 +37,7 @@ textures/gothic_block/blocks17bloody
         }
         {
 		map textures/effects/tinfx3
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 tcGen environment
         }
 
@@ -157,7 +157,7 @@ textures/gothic_block/blocks15cgeomtrn
 	}
         {
 	        map textures/gothic_block/blocks18cgeomtrn2
-		//blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		//blendFunc blend
                 blendFunc blend
                 tcmod rotate 30
                 tcMod stretch sin .8 0.2 0 .2
@@ -195,7 +195,7 @@ textures/gothic_block/killblockgeomtrn
 	}
         {
 	        map textures/gothic_block/blocks18cgeomtrn2
-		//blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		//blendFunc blend
                 blendFunc blend
                 tcmod rotate 30
                 tcMod stretch sin .8 0.2 0 .2
@@ -249,7 +249,7 @@ textures/gothic_block/blocks18cgeomtrn2
         {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -266,7 +266,7 @@ textures/gothic_block/blocks18cgeomtrn
 	}
         {
 	        map textures/gothic_block/blocks18cgeomtrn2
-		//blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		//blendFunc blend
                 blendFunc blend
                 tcmod rotate 30
                 tcMod stretch sin .8 0.2 0 .2
@@ -337,7 +337,7 @@ textures/gothic_block/demon_block15fx
 	}
 	{
 	        map textures/gothic_block/demon_block15fx
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -360,12 +360,12 @@ textures/gothic_block/blocks15_ow
 		map textures/liquids/proto_grueldark
                 tcmod scroll 0.01 -.02
                 tcmod scale 4 4
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen identity
 	}
 	{
 	        map textures/gothic_block/blocks15_ow
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -412,7 +412,7 @@ textures/gothic_block/blocks17_sandy
 	{
 		map textures/gothic_block/blocks17
 		tcMod scale 0.25 0.25
-		blendfunc GL_DST_COLOR GL_ZERO
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -427,12 +427,12 @@ textures/gothic_block/wetwall
 		map textures/gothic_block/wetwallfx
                 tcmod scroll 0 -.1
                 tcmod scale 2 .6
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbGen identity
 	}
 	{
 	        map textures/gothic_block/wetwall
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 	        rgbGen identity
 	}
         {
@@ -463,7 +463,7 @@ textures/gothic_block/blocks15_sandy
 	{
 		map textures/gothic_block/blocks15
 		tcMod scale 0.25 0.25
-		blendfunc GL_DST_COLOR GL_ZERO
+		blendfunc filter
 		rgbGen identity
 	}
 }
@@ -481,12 +481,12 @@ textures/gothic_block/evil_e3bwindow
 	}
 	{
 		map textures/gothic_block/windowevil2c_killblock
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_block/evil2ckillblockglow
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -504,12 +504,12 @@ textures/gothic_block/evil_e3window
 	}
 	{
 		map textures/gothic_block/windowevil2c_block18c
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_block/evil2cglow
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_block/evil_e3window_dark
@@ -525,12 +525,12 @@ textures/gothic_block/evil_e3window_dark
 	}
 	{
 		map textures/gothic_block/windowevil2c_block18c
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_block/evil2cglow
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -568,12 +568,12 @@ textures/gothic_light/flicker_light15k
 	}
 	{
 		map textures/gothic_light/gothic_light3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_light/gothic_light2_blend
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen wave noise 0.75 0.25 0 10
 	}
 }
@@ -586,7 +586,7 @@ textures/gothic_block/flicker_blocks10
 	}
 	{
 		map textures/gothic_block/blocks10
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen wave noise 0.75 0.25 0 10
 	}
 }
@@ -611,13 +611,13 @@ textures/gothic_block/blocks11ct
 	surfaceparm trans
 	{
 		map textures/gothic_block/blocks11c
-		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendFunc blend
 		rgbGen identity
 	}
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }
 //textures/gothic_block/blocks11ct
@@ -634,7 +634,7 @@ textures/gothic_block/blocks11ct
 //
 //	{
 //		map textures/hell/blocks11ct
-//		blendFunc GL_DST_COLOR GL_ZERO
+//		blendFunc filter
 //	}
 //}
 
@@ -669,12 +669,12 @@ textures/gothic_block/electrohell
 	{
 		map textures/gothic_block/gkc14c
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 
 	{
 		map textures/gothic_block/gkc14c
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 		{
 		map textures/sfx/electro2
@@ -684,7 +684,7 @@ textures/gothic_block/electrohell
 		tcMod stretch sin 1 .5 0 .1
 		tcMod scroll .2 .2
 
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_block/mkc_evil_e3window
@@ -700,12 +700,12 @@ textures/gothic_block/mkc_evil_e3window
 	}
 	{
 		map textures/gothic_block/windowevil2c_block18c
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_block/evil2cglow
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/gothic_block/blocks18d_trans
@@ -720,6 +720,6 @@ textures/gothic_block/blocks18d_trans
 	{
 		map textures/gothic_block/blocks18d
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }

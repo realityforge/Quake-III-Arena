@@ -13,18 +13,18 @@ textures/sfx/blocks17g_jumpad
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -91,7 +91,7 @@ textures/sfx/omm
        {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
                 depthFunc equal
        }
 }
@@ -113,7 +113,7 @@ textures/sfx/dust_puppy2
        {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
                 depthFunc equal
        }
 }
@@ -203,7 +203,7 @@ textures/sfx/fan3blade
         {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -235,7 +235,7 @@ textures/sfx/fan3
         {
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 }
 
@@ -300,7 +300,7 @@ textures/sfx/proto_zzztblu3
 		tcGen environment
                 tcMod turb 0 0.25 0 0.5
                 tcmod scroll 1 1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -315,7 +315,7 @@ textures/sfx/flametest
 
 	{
 	        map textures/sfx/flametest
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
                 rgbgen identity
 	}
 
@@ -338,18 +338,18 @@ textures/sfx/bouncepad01_xarch
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -375,13 +375,13 @@ textures/sfx/rain
 		map textures/sfx/rain
                 tcMod Scroll .5 -8
                 tcMod turb .1 .25 0 -.1
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
         }
         {
 		map textures/sfx/rain
                 tcMod Scroll .01 -6.3
 
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
         }
 
 
@@ -398,12 +398,12 @@ textures/sfx/largerblock3b3x128_pentred
 	}
 	{
 		map textures/sfx/largerblock3b3x128_pent
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/gothic_floor/pent_glow
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .5 .5 0 0.5
 	}
 }
@@ -421,13 +421,13 @@ textures/sfx/largerblock3b3x128_pent
 
 	{
 		map textures/sfx/largerblock3b3x128_pent
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
 	{
 		map textures/sfx/pentagramfloor_blue3glowtest
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave sin .9 .1 0 5
 	}
 
@@ -444,11 +444,11 @@ textures/sfx/smallerblock3b3dim_pent
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red_glow
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
@@ -518,7 +518,7 @@ textures/sfx/hellfog_pj_dm10
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -526,7 +526,7 @@ textures/sfx/hellfog_pj_dm10
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -554,7 +554,7 @@ textures/sfx/hellfog_mini_dm10
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -562,7 +562,7 @@ textures/sfx/hellfog_mini_dm10
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -584,13 +584,13 @@ textures/sfx/metalfloor_wall_14b_glow
 
 	{
 		map textures/sfx/metalfloor_wall_14b
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
 	{
 		map textures/sfx/metalfloor_wall_14bglow
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave sin .5 .5 1 0.1
 	}
 
@@ -612,14 +612,14 @@ textures/sfx/metalfloor_wall_15b_glow
 
 	{
 		map textures/sfx/metalfloor_wall_15b
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
 	{
 		map textures/sfx/metalfloor_wall_15bglow
 		rgbgen wave sin .1 .05 1 1
-		blendfunc gl_one gl_one
+		blendfunc add
 	}
 
 }
@@ -728,7 +728,7 @@ textures/sfx/beam
         // {
 	//	map textures/sfx/beam
         //        tcMod Scroll -.3 0
-        //        blendFunc GL_ONE GL_ONE
+        //        blendFunc add
         // }
 
 }
@@ -753,7 +753,7 @@ textures/sfx/beam_dusty2
 //		tcmod scale 2 2
 //		tcMod turb 0 0.015 0.025 0.05
  //               tcMod Scroll -0.15 0
-   //             blendFunc GL_ONE GL_ONE
+   //             blendFunc add
    //      }
      	//{
 	//	map textures/sfx/beam_mask
@@ -918,7 +918,7 @@ textures/sfx/beam_water
 		map textures/sfx/beam_cyan4
 		tcMod turb 0 0.025 0.5 0.03
 		tcMod Scroll .15 0
-                blendFunc GL_ONE GL_ONE
+                blendFunc add
         }
      	{
 		map textures/sfx/beam_cyan5
@@ -963,13 +963,13 @@ textures/sfx/console01
 		clampmap textures/sfx/console01
 
 		tcMod rotate 20
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
         {
 		clampmap textures/sfx/console02
 
 		tcMod rotate -200
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 
 }
@@ -986,19 +986,19 @@ textures/sfx/console03
 		clampmap textures/sfx/console01
 
 		tcMod rotate 20
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
         {
 		clampmap textures/sfx/console02
 
 		tcMod rotate -400
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
           {
 		clampmap textures/sfx/console03
 
 		tcMod rotate 40
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 	}
 }
 textures/sfx/glass
@@ -1011,7 +1011,7 @@ textures/sfx/glass
 		map $lightmap
 		tcgen environment
 		tcmod scale .25 .25
-		blendfunc gl_one gl_one
+		blendfunc add
 	}
 
 	{
@@ -1022,7 +1022,7 @@ textures/sfx/glass
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 }
 
@@ -1044,7 +1044,7 @@ textures/sfx/fan
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1060,7 +1060,7 @@ textures/sfx/fan2
 		tcMod rotate 256
 		//blendFunc GL_ONE GL_ZERO
 		//alphaFunc GE128
-                blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+                blendFunc blend
                 alphaFunc GT0
 		depthWrite
 		rgbGen identity
@@ -1068,7 +1068,7 @@ textures/sfx/fan2
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1089,7 +1089,7 @@ textures/sfx/fan_grate
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1110,7 +1110,7 @@ textures/sfx/fan_grate2
 	{
 		map $lightmap
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		depthFunc equal
 	}
 }
@@ -1147,13 +1147,13 @@ textures/sfx/metalfloor_wall_5_glow
 
 	{
 		map textures/base_wall/metalfloor_wall_5
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
 	{
 		map textures/sfx/metalfloor_wall_5_glow
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave sin .1 .4 1 0.3
 	}
 
@@ -1172,13 +1172,13 @@ textures/sfx/metaltech12darkfinal_blueglow
 
 	{
 		map textures/base_wall/metaltech12darkfinal
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
 	{
 		map textures/sfx/metaltech01blueglow
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave sin .1 .1 1 0.1
 	}
 
@@ -1196,27 +1196,27 @@ textures/sfx/zap_scroll1000
 
 	{
 		map textures/sfx/zap_scroll
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave triangle .8 2 0 7
                 tcMod scroll 0 1
 	}
         {
 		map textures/sfx/zap_scroll
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave triangle 1 1.4 0 5
                 tcMod scale  -1 1
                 tcMod scroll 0 1
 	}
         {
 		map textures/sfx/zap_scroll2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave triangle 1 1.4 0 6.3
                 tcMod scale  -1 1
                 tcMod scroll 2 1
 	}
         {
 		map textures/sfx/zap_scroll2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave triangle 1 1.4 0 7.7
                 tcMod scroll -1.3 1
 	}
@@ -1238,11 +1238,11 @@ textures/gothic_block/killblock_i4b
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map  textures/gothic_block/killblock_i4glow
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave sin .9 .1 0 .1
 	}
 
@@ -1261,12 +1261,12 @@ textures/sfx/donna
 
 	{
 		Map textures/sfx/donna
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave triangle 1 2 0 7
 	}
 {
 		Map textures/sfx/donna
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave sin 1 2 0 8
 	}
 
@@ -1286,13 +1286,13 @@ textures/sfx/xian_dm3padwall
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 
 	{
 		map textures/sfx/xian_dm3padwallglow
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave sin 0 1 0 .5
 		tcmod scale 1 .05
 		tcmod scroll 0 1
@@ -1311,11 +1311,11 @@ textures/sfx/xmetalfloor_wall_5b
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/metalfloor_wall_5bglowblu
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave sin .5 .2 0 .1
 	}
 }
@@ -1334,19 +1334,19 @@ textures/sfx/border11c
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/base_trim/border11c_light
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave sin 1 .1 0 5
 	}
 
 
 	{
 		map textures/base_trim/border11c_pulse1b
-		blendfunc gl_one gl_one
+		blendfunc add
 //		tcmod scale .01 1
 		tcmod scale .035 1
 //		tcmod scroll -0.5 0
@@ -1370,27 +1370,27 @@ textures/sfx/zap_scroll
 
 	{
 		Map textures/sfx/zap_scroll
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave triangle .8 2 0 7
                 tcMod scroll 0 1
 	}
         {
 		Map textures/sfx/zap_scroll
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave triangle 1 1.4 0 5
                 tcMod scale  -1 1
                 tcMod scroll 0 1
 	}
         {
 		Map textures/sfx/zap_scroll2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave triangle 1 1.4 0 6.3
                 tcMod scale  -1 1
                 tcMod scroll 2 1
 	}
         {
 		Map textures/sfx/zap_scroll2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave triangle 1 1.4 0 7.7
                 tcMod scroll -1.3 1
 	}
@@ -1407,35 +1407,35 @@ textures/sfx/x_conduit
 	}
 	{
 		map textures/sfx/x_conduit
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 
 	{	animMap 10 textures/sfx/x_conduit2 textures/sfx/x_conduit3
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 	}
 
 	//{
 	//	map textures/sfx/x_conduit2
-	//	blendfunc GL_ONE GL_ONE
+	//	blendfunc add
        //         rgbGen wave sin .5 0.5 0 5
 	//}
         {
 		map textures/sfx/x_conduit2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
                  tcmod scale -1 1
                 rgbGen wave sin .5 0.5 0 7
 	}
         {
 		map textures/sfx/x_conduit3
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
                 tcmod scale -1 1
                  rgbgen wave triangle .2 1 0 9
 	}
         //{
 	//	map textures/sfx/x_conduit3
-	//	blendfunc GL_ONE GL_ONE
+	//	blendfunc add
        //         rgbGen wave sin .5 1 0 3
 	//}
 }
@@ -1454,17 +1454,17 @@ textures/sfx/swirl_r1
 
 	{
 		clampmap textures/sfx/swirl_r1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcMod rotate -188
 	}
         {
 		clampmap textures/sfx/swirl_r2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcMod rotate 333
 	}
        // {
 	//	clampmap textures/sfx/swirl_r2
-	//	blendFunc GL_ONE GL_ONE
+	//	blendFunc add
       //          tcMod rotate 20
 	//}
 
@@ -1482,17 +1482,17 @@ textures/sfx/swirl_b1
 
 	{
 		clampmap textures/sfx/swirl_b1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcMod rotate -188
 	}
         {
 		clampmap textures/sfx/swirl_b2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcMod rotate 333
 	}
         //{
 	//	clampmap textures/sfx/swirl_b2
-	//	blendFunc GL_ONE GL_ONE
+	//	blendFunc add
         //        tcMod rotate 20
 	//}
 
@@ -1507,13 +1507,13 @@ textures/sfx/steam_01
 
 	{
 		Map textures/sfx/steam_01
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcMod scale 1 .4
 	        tcMod scroll 0 .3
 	}
 {
                 Map textures/sfx/steam_01
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 tcMod scale -1 .2
 	        tcMod scroll 0 .3
 	}
@@ -1531,13 +1531,13 @@ textures/sfx/zap_ball
 
 	{
 		clampmap textures/sfx/zap_ball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave triangle 1 2 0 7
                 tcMod rotate 103
 	}
 {
 		clampmap textures/sfx/zap_ball2
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave sin 1 2 0 8
                 tcMod rotate -180
 	}
@@ -1555,7 +1555,7 @@ textures/sfx/jacobs_x
 
 	{
 		Map textures/sfx/jacobs_x
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
                 rgbgen wave triangle 1 2 0 7
                 //tcMod rotate 103
 	}
@@ -1573,13 +1573,13 @@ textures/sfx/xlargeblockfloor3_pent
 
 	{
 		map textures/sfx/xlargeblockfloor3_pent
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
 	{
 		map textures/sfx/pentagramfloor_blue3glowtest
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave sin .9 .1 0 5
 	}
 
@@ -1602,18 +1602,18 @@ textures/sfx/xclang_floor2_bouncy
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -1638,18 +1638,18 @@ textures/sfx/clangdark_bounce
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -1675,18 +1675,18 @@ textures/sfx/metalbridge06_bounce
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -1711,18 +1711,18 @@ textures/sfx/metaltechfloor02final_bounce
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -1749,18 +1749,18 @@ textures/sfx/metaltech12final_bounce
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -1787,18 +1787,18 @@ textures/sfx/metaltech12darkfinal_bounce
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -1824,18 +1824,18 @@ textures/sfx/metaltechfloor01final_bounce
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -1858,13 +1858,13 @@ textures/sfx/demonltblackfinal
 
 	{
 		map textures/sfx/demonltblackfinal
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbgen identity
 	}
 
 	{
 		map textures/sfx/demonltblackfinal_glow2
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave sin .9 .1 0 5
 	}
 
@@ -1881,7 +1881,7 @@ textures/base_wall/c_met5_2_trans
 	{
 		map textures/base_wall/c_met5_2
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 
 
 	}
@@ -1923,11 +1923,11 @@ textures/sfx/xmetalfloor_wall_14b
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/metalfloor_wall_14bglow2
-		blendfunc gl_one gl_one
+		blendfunc add
 	}
 }
 
@@ -1942,11 +1942,11 @@ textures/sfx/xmetalfloor_wall_9b
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/metalfloor_wall_9bglow
-		blendfunc gl_one gl_one
+		blendfunc add
 	}
 }
 
@@ -1967,7 +1967,7 @@ models/mapobjects/portal_2/portal_3
 
 	{
 		map models/mapobjects/portal_2/portal_3_glo
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave inversesawtooth 0 1 .2 .5
 	}
 
@@ -1988,13 +1988,13 @@ textures/sfx/portal_sfx_ring
 
 	{
 		map textures/sfx/portal_sfx_ring_blue1
-		blendfunc gl_src_alpha gl_one_minus_src_alpha
+		blendfunc blend
 	}
 
 
 	{
 		map textures/sfx/portal_sfx_ring_electric
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave inversesawtooth 0 1 .2 .5
 		tcmod scroll 0 .5
 
@@ -2002,13 +2002,13 @@ textures/sfx/portal_sfx_ring
 
 	{
 		map textures/sfx/portal_sfx1
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcMod rotate 360
 	}
 
 	{
 		map textures/sfx/portal_sfx_ring
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave inversesawtooth 0 .5 .2 .5
 	}
 
@@ -2035,13 +2035,13 @@ textures/sfx/small_smoke1_1
 
 	{
 		animMap 10 textures/sfx/small_smoke1_1 textures/sfx/small_smoke1_2 textures/sfx/small_smoke1_3 textures/sfx/small_smoke1_4 textures/sfx/small_smoke1_5 textures/sfx/small_smoke1_6
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 	}
 
 	{
 		animMap 10 textures/sfx/small_smoke1_2 textures/sfx/small_smoke1_3 textures/sfx/small_smoke1_4 textures/sfx/small_smoke1_5 textures/sfx/small_smoke1_6 textures/sfx/small_smoke1_1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
@@ -2067,20 +2067,20 @@ textures/sfx/xflame2
 
 	{
 		animMap 10 textures/sfx/flame1 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8 textures/sfx/flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2097,20 +2097,20 @@ textures/sfx/xflame2_2250
 
 	{
 		animMap 10 textures/sfx/flame1 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8 textures/sfx/flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2127,20 +2127,20 @@ textures/sfx/xflame2_1800
 
 	{
 		animMap 10 textures/sfx/flame1 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8 textures/sfx/flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2160,7 +2160,7 @@ textures/sfx/grid
 
 	{
 		map textures/sfx/grid
-		blendfunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
+		blendfunc blend
 		rgbGen identity
 	}
 
@@ -2183,12 +2183,12 @@ textures/sfx/launchpad_diamond
 	{
 		map textures/sfx/launchpad_diamond
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/launchpad_dot
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave inversesawtooth 0 1 0 1
 	}
 
@@ -2204,7 +2204,7 @@ textures/sfx/launchpad_diamond
 	// 	TEMPORARY FIX TO GET AROUND ALPHA BLEND IN RAGE PRO
 	{
 		animmap 4 textures/sfx/launchpad_arrow textures/sfx/launchpad_arrow2 textures/sfx/launchpad_arrow2 textures/sfx/launchpad_arrow2
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcmod scroll 0 2
 	}
 
@@ -2225,12 +2225,12 @@ textures/sfx/launchpad_blocks18d
 	{
 		map textures/sfx/launchpad_blocks18d
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/launchpad_dot
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave inversesawtooth 0 1 0 1
 	}
 
@@ -2246,7 +2246,7 @@ textures/sfx/launchpad_blocks18d
 	// 	TEMPORARY FIX TO GET AROUND ALPHA BLEND IN RAGE PRO
 	{
 		animmap 4 textures/sfx/launchpad_arrow textures/sfx/launchpad_arrow2 textures/sfx/launchpad_arrow2 textures/sfx/launchpad_arrow2
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcmod scroll 0 2
 	}
 
@@ -2267,12 +2267,12 @@ textures/sfx/launchpad_blocks17
 	{
 		map textures/sfx/launchpad_blocks17
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/launchpad_dot
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave inversesawtooth 0 1 0 1
 	}
 
@@ -2288,7 +2288,7 @@ textures/sfx/launchpad_blocks17
 	// 	TEMPORARY FIX TO GET AROUND ALPHA BLEND IN RAGE PRO
 	{
 		animmap 4 textures/sfx/launchpad_arrow textures/sfx/launchpad_arrow2 textures/sfx/launchpad_arrow2 textures/sfx/launchpad_arrow2
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcmod scroll 0 2
 	}
 
@@ -2309,12 +2309,12 @@ textures/sfx/launchpad_metalbridge04d
 	{
 		map textures/sfx/launchpad_metalbridge04d
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/launchpad_dot
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbgen wave inversesawtooth 0 1 0 1
 	}
 
@@ -2330,7 +2330,7 @@ textures/sfx/launchpad_metalbridge04d
 	// 	TEMPORARY FIX TO GET AROUND ALPHA BLEND IN RAGE PRO
 	{
 		animmap 4 textures/sfx/launchpad_arrow textures/sfx/launchpad_arrow2 textures/sfx/launchpad_arrow2 textures/sfx/launchpad_arrow2
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcmod scroll 0 2
 	}
 
@@ -2354,20 +2354,20 @@ textures/sfx/flame1km
 
 	{
 		animMap 10 textures/sfx/flame1 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8 textures/sfx/flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2390,20 +2390,20 @@ textures/sfx/flame1
 
 	{
 		animMap 10 textures/sfx/flame1 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8 textures/sfx/flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2428,20 +2428,20 @@ textures/sfx/flameanim_dimmer
 
 	{
 		animMap 10 textures/sfx/flame1 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8 textures/sfx/flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2466,20 +2466,20 @@ textures/sfx/flameanim_blue
 
 	{
 		animMap 10 textures/sfx/b_flame1 textures/sfx/b_flame2 textures/sfx/b_flame3 textures/sfx/b_flame4 textures/sfx/b_flame5 textures/sfx/b_flame6 textures/sfx/b_flame7 textures/sfx/b_flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/b_flame2 textures/sfx/b_flame3 textures/sfx/b_flame4 textures/sfx/b_flame5 textures/sfx/b_flame6 textures/sfx/b_flame7 textures/sfx/b_flame8 textures/sfx/b_flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/b_flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2504,20 +2504,20 @@ textures/sfx/flameanim_blue_pj
 
 	{
 		animMap 10 textures/sfx/b_flame1 textures/sfx/b_flame2 textures/sfx/b_flame3 textures/sfx/b_flame4 textures/sfx/b_flame5 textures/sfx/b_flame6 textures/sfx/b_flame7 textures/sfx/b_flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/b_flame2 textures/sfx/b_flame3 textures/sfx/b_flame4 textures/sfx/b_flame5 textures/sfx/b_flame6 textures/sfx/b_flame7 textures/sfx/b_flame8 textures/sfx/b_flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/b_flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2542,20 +2542,20 @@ textures/sfx/flameanim_blue_nolight
 
 	{
 		animMap 10 textures/sfx/b_flame1 textures/sfx/b_flame2 textures/sfx/b_flame3 textures/sfx/b_flame4 textures/sfx/b_flame5 textures/sfx/b_flame6 textures/sfx/b_flame7 textures/sfx/b_flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/b_flame2 textures/sfx/b_flame3 textures/sfx/b_flame4 textures/sfx/b_flame5 textures/sfx/b_flame6 textures/sfx/b_flame7 textures/sfx/b_flame8 textures/sfx/b_flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/b_flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2581,20 +2581,20 @@ textures/sfx/flameanim_red
 
 	{
 		animMap 10 textures/sfx/r_flame1 textures/sfx/r_flame2 textures/sfx/r_flame3 textures/sfx/r_flame4 textures/sfx/r_flame5 textures/sfx/r_flame6 textures/sfx/r_flame7 textures/sfx/r_flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/r_flame2 textures/sfx/r_flame3 textures/sfx/r_flame4 textures/sfx/r_flame5 textures/sfx/r_flame6 textures/sfx/r_flame7 textures/sfx/r_flame8 textures/sfx/r_flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/r_flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2619,20 +2619,20 @@ textures/sfx/flameanim_red_pj
 
 	{
 		animMap 10 textures/sfx/r_flame1 textures/sfx/r_flame2 textures/sfx/r_flame3 textures/sfx/r_flame4 textures/sfx/r_flame5 textures/sfx/r_flame6 textures/sfx/r_flame7 textures/sfx/r_flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/r_flame2 textures/sfx/r_flame3 textures/sfx/r_flame4 textures/sfx/r_flame5 textures/sfx/r_flame6 textures/sfx/r_flame7 textures/sfx/r_flame8 textures/sfx/r_flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/r_flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2657,20 +2657,20 @@ textures/sfx/flameanim_red_nolight
 
 	{
 		animMap 10 textures/sfx/r_flame1 textures/sfx/r_flame2 textures/sfx/r_flame3 textures/sfx/r_flame4 textures/sfx/r_flame5 textures/sfx/r_flame6 textures/sfx/r_flame7 textures/sfx/r_flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/r_flame2 textures/sfx/r_flame3 textures/sfx/r_flame4 textures/sfx/r_flame5 textures/sfx/r_flame6 textures/sfx/r_flame7 textures/sfx/r_flame8 textures/sfx/r_flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/r_flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2693,17 +2693,17 @@ textures/sfx/flameanim_green_pj
 	// texture changed to green flame.... PAJ
 	{
 		animMap 10 textures/sfx/g_flame1 textures/sfx/g_flame2 textures/sfx/g_flame3 textures/sfx/g_flame4 textures/sfx/g_flame5 textures/sfx/g_flame6 textures/sfx/g_flame7 textures/sfx/g_flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 	}
 	{
 		animMap 10 textures/sfx/g_flame2 textures/sfx/g_flame3 textures/sfx/g_flame4 textures/sfx/g_flame5 textures/sfx/g_flame6 textures/sfx/g_flame7 textures/sfx/g_flame8 textures/sfx/g_flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 	{
 		map textures/sfx/g_flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 }
@@ -2728,20 +2728,20 @@ textures/sfx/xflame1side
 
 	{
 		animMap 10 textures/sfx/flame1 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8 textures/sfx/flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2766,20 +2766,20 @@ textures/sfx/flame1side
 
 	{
 		animMap 10 textures/sfx/flame1 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8 textures/sfx/flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2804,19 +2804,19 @@ textures/sfx/flame2
 
 	{
 		animMap 10 textures/sfx/flame1 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8 textures/sfx/flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 	{
 		map textures/sfx/flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2841,20 +2841,20 @@ textures/sfx/xflame1
 
 	{
 		animMap 10 textures/sfx/flame1 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8 textures/sfx/flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2872,17 +2872,17 @@ textures/sfx/xflamebright
 	qer_editorimage textures/sfx/flame1
 	{
 		animMap 10 textures/sfx/flame1 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 	}
 	{
 		animMap 10 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8 textures/sfx/flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 	{
 		map textures/sfx/flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 }
@@ -2907,20 +2907,20 @@ textures/sfx/flame1dark
 
 	{
 		animMap 10 textures/sfx/flame1 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8 textures/sfx/flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2945,20 +2945,20 @@ textures/sfx/flame1_hell
 
 	{
 		animMap 10 textures/sfx/flame1 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8 textures/sfx/flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -2973,11 +2973,11 @@ textures/sfx/pentagramfloor_red3test
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red3glowtest
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
@@ -2992,11 +2992,11 @@ textures/sfx/goopq1metal7_98dhuge_pent
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red3_glow
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
@@ -3012,11 +3012,11 @@ textures/sfx/metaltechfloor02final_pent
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red_glow
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
@@ -3032,11 +3032,11 @@ textures/sfx/blocks17final_pent
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red_glow
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
@@ -3052,11 +3052,11 @@ textures/sfx/pentfloor_diamond2c
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red_glow
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
@@ -3073,11 +3073,11 @@ textures/sfx/metalbridge06c_big_pentagram
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red_glow
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
@@ -3093,11 +3093,11 @@ textures/sfx/largerblock3_pent
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red_glow
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
@@ -3113,11 +3113,11 @@ textures/sfx/largerblock3b3_pent
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_red_glow
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .5 .5 0 .5
 		depthfunc equal
 	}
@@ -3139,7 +3139,7 @@ textures/sfx/gothgrate1
 	}
 	{
 		map $lightmap
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 		depthFunc equal
 	}
@@ -3172,12 +3172,12 @@ textures/sfx/blocks18ccomputer_offset
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/computer8
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .3 0 3
 	}
 
@@ -3200,19 +3200,19 @@ textures/sfx/computerblocks11b
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
 	{
 		animMap 2 textures/sfx/compscreen/letters1 textures/sfx/compscreen/letters2 textures/sfx/compscreen/letters3 textures/sfx/compscreen/letters5  textures/sfx/compscreen/letters4 textures/sfx/compscreen/letters5 textures/sfx/compscreen/letters5
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 2
 	}
 
 	//{
 	//	animMap 9 textures/sfx/compscreen/rotate0002 textures/sfx/compscreen/rotate0003 textures/sfx/compscreen/rotate0004 textures/sfx/compscreen/rotate0005 textures/sfx/compscreen/rotate0006 textures/sfx/compscreen/rotate0007 textures/sfx/compscreen/rotate0008 textures/sfx/compscreen/rotate0001
-	//	blendFunc GL_ONE GL_ONE
+	//	blendFunc add
 	//	rgbGen wave Sawtooth 0 1 0 9
 	//}
 
@@ -3241,19 +3241,19 @@ textures/sfx/blocks18ccomputer
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
 	{
 		animMap 2 textures/sfx/compscreen/letters1 textures/sfx/compscreen/letters2 textures/sfx/compscreen/letters3 textures/sfx/compscreen/letters5  textures/sfx/compscreen/letters4 textures/sfx/compscreen/letters5 textures/sfx/compscreen/letters5
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 2
 	}
 
 	//{
 	//	animMap 9 textures/sfx/compscreen/rotate0002 textures/sfx/compscreen/rotate0003 textures/sfx/compscreen/rotate0004 textures/sfx/compscreen/rotate0005 textures/sfx/compscreen/rotate0006 textures/sfx/compscreen/rotate0007 textures/sfx/compscreen/rotate0008 textures/sfx/compscreen/rotate0001
-	//	blendFunc GL_ONE GL_ONE
+	//	blendFunc add
 	//	rgbGen wave Sawtooth 0 1 0 9
 	//}
 
@@ -3282,19 +3282,19 @@ textures/sfx/computerblocks15
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
 	{
 		animMap 2 textures/sfx/compscreen/letters1 textures/sfx/compscreen/letters2 textures/sfx/compscreen/letters3 textures/sfx/compscreen/letters5  textures/sfx/compscreen/letters4 textures/sfx/compscreen/letters5 textures/sfx/compscreen/letters5
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 2
 	}
 
 	//{
 	//	animMap 9 textures/sfx/compscreen/rotate0002 textures/sfx/compscreen/rotate0003 textures/sfx/compscreen/rotate0004 textures/sfx/compscreen/rotate0005 textures/sfx/compscreen/rotate0006 textures/sfx/compscreen/rotate0007 textures/sfx/compscreen/rotate0008 textures/sfx/compscreen/rotate0001
-	//	blendFunc GL_ONE GL_ONE
+	//	blendFunc add
 	//	rgbGen wave Sawtooth 0 1 0 9
 	//}
 }
@@ -3321,13 +3321,13 @@ textures/sfx/computer_blocks17
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
 	{
 		animMap 2 textures/sfx/compscreen/letters1 textures/sfx/compscreen/letters2 textures/sfx/compscreen/letters3 textures/sfx/compscreen/letters5  textures/sfx/compscreen/letters4 textures/sfx/compscreen/letters5 textures/sfx/compscreen/letters5
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 2
 	}
 
@@ -3356,20 +3356,20 @@ textures/sfx/computerpurptileb
 
 	{
 		map $lightmap
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		rgbGen identity
 	}
 
 
 	{
 		animMap 2 textures/sfx/compscreen/letters1 textures/sfx/compscreen/letters2 textures/sfx/compscreen/letters3 textures/sfx/compscreen/letters5  textures/sfx/compscreen/letters4 textures/sfx/compscreen/letters5 textures/sfx/compscreen/letters5
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 2
 	}
 
 	//{
 	//	animMap 9 textures/sfx/compscreen/rotate0002 textures/sfx/compscreen/rotate0003 textures/sfx/compscreen/rotate0004 textures/sfx/compscreen/rotate0005 textures/sfx/compscreen/rotate0006 textures/sfx/compscreen/rotate0007 textures/sfx/compscreen/rotate0008 textures/sfx/compscreen/rotate0001
-	//	blendFunc GL_ONE GL_ONE
+	//	blendFunc add
 	//	rgbGen wave Sawtooth 0 1 0 9
 	//}
 
@@ -3393,18 +3393,18 @@ textures/sfx/diamond2cjumppad
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -3428,18 +3428,18 @@ textures/sfx/blocks11bjumppad
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -3464,18 +3464,18 @@ textures/sfx/bounce_metalbridge04
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -3500,18 +3500,18 @@ textures/sfx/bounce_largeblock3
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -3536,18 +3536,18 @@ textures/sfx/bounce_largeblock3b
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -3645,18 +3645,18 @@ textures/sfx/bouncepad01_metalbridge06b
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -3682,18 +3682,18 @@ textures/sfx/bouncepad01bgoopy7_98d
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -3717,18 +3717,18 @@ textures/sfx/bouncepad01b_metalbridge06c
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -3753,18 +3753,18 @@ textures/sfx/bounce_xq1metalbig
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -3795,18 +3795,18 @@ textures/sfx/bouncepad01block18b
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -3837,18 +3837,18 @@ textures/sfx/bouncepad01_block17
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -3880,18 +3880,18 @@ textures/sfx/bouncepad1q1metal7_99
 	{
 		map $lightmap
 		rgbGen identity
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 	}
 
 	{
 		map textures/sfx/bouncepad01b_layer1
-		blendfunc gl_one gl_one
+		blendfunc add
 		rgbGen wave sin .5 .5 0 1.5
 	}
 
 	{
 		clampmap textures/sfx/jumppadsmall
-		blendfunc gl_one gl_one
+		blendfunc add
 		tcMod stretch sin 1.2 .8 0 1.5
 		rgbGen wave square .5 .5 .25 1.5
 	}
@@ -3913,11 +3913,11 @@ textures/sfx/redpadblocks17
 	{
 		map textures/gothic_block/blocks17
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		clampmap textures/sfx/redpad_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.75 0.25 0 1
 		tcMod stretch sin 0.80 0.20 0 1
 	}
@@ -3930,7 +3930,7 @@ textures/sfx/0
 	cull twosided
 	{
 		map textures/sfx/0
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/sfx/1
@@ -3940,7 +3940,7 @@ textures/sfx/1
 	cull twosided
 	{
 		map textures/sfx/1
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/sfx/2
@@ -3950,7 +3950,7 @@ textures/sfx/2
 	cull twosided
 	{
 		map textures/sfx/2
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/sfx/3
@@ -3960,7 +3960,7 @@ textures/sfx/3
 	cull twosided
 	{
 		map textures/sfx/3
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/sfx/4
@@ -3970,7 +3970,7 @@ textures/sfx/4
 	cull twosided
 	{
 		map textures/sfx/4
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/sfx/5
@@ -3980,7 +3980,7 @@ textures/sfx/5
 	cull twosided
 	{
 		map textures/sfx/5
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/sfx/6
@@ -3990,7 +3990,7 @@ textures/sfx/6
 	cull twosided
 	{
 		map textures/sfx/6
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/sfx/7
@@ -4000,7 +4000,7 @@ textures/sfx/7
 	cull twosided
 	{
 		map textures/sfx/7
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/sfx/8
@@ -4010,7 +4010,7 @@ textures/sfx/8
 	cull twosided
 	{
 		map textures/sfx/8
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 textures/sfx/9
@@ -4020,7 +4020,7 @@ textures/sfx/9
 	cull twosided
 	{
 		map textures/sfx/9
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 	}
 }
 
@@ -4037,16 +4037,16 @@ textures/sfx/goopq1metal7_98d_pent_256
 	}
 	{
 		map textures/sfx/pentfloor_256
-		blendfunc gl_src_alpha gl_one_minus_src_alpha
+		blendfunc blend
 	}
 	//{
 	//	map $lightmap
-	//	blendfunc gl_dst_color gl_zero
+	//	blendfunc filter
 //		rgbGen identity
 	//}
 	//{
 	//	map textures/sfx/pentfloor_glow
-	//	blendfunc gl_one gl_one
+	//	blendfunc add
 	//	rgbGen wave sin .5 .5 0 .5
 	//}
 }
@@ -4071,13 +4071,13 @@ textures/sfx/pentagramfloor_red
 		{
 			map $lightmap
 			rgbGen identity
-			blendfunc GL_DST_COLOR GL_ZERO
+			blendfunc filter
 			depthfunc equal
 		}
 
 		{
 			map textures/sfx/pentagramfloor_red_glow
-			blendFunc GL_ONE GL_ONE
+			blendFunc add
 			rgbGen wave sin .5 .5 0 .5
 //			tcMod rotate 40
 			depthfunc equal
@@ -4104,12 +4104,12 @@ textures/sfx/gimmickdiamondarrow
 	}
 	{
 		map textures/base_floor/diamond2c
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/sfx/pitted_rust3arrow_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.75 0.25 0 0.5
 		tcmod scroll 0 1
 	}
@@ -4126,12 +4126,12 @@ textures/sfx/goopq1metal7_98darrow
 	}
 	{
 		map textures/gothic_floor/goopq1metal7_98dlarge
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/sfx/pitted_rust3arrow_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.75 0.25 0 0.5
 		tcmod scroll 0 1
 	}
@@ -4146,11 +4146,11 @@ textures/sfx/blocks11b_himom
 	{
 		rgbGen identity
 		map textures/gothic_block/blocks11b
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		map textures/sfx/himom
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.75 0.25 0 0.5
 	}
 }
@@ -4163,12 +4163,12 @@ textures/sfx/pittedrust3stripes
 	}
 	{
 		map textures/gothic_trim/pitted_rust3
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/sfx/orangestripes
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.75 0.25 0 0.5
 	}
 }
@@ -4182,12 +4182,12 @@ textures/sfx/q1metal7_98dstripe
 	}
 	{
 		map textures/gothic_floor/q1metal7_98d
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/sfx/orangestripes
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.75 0.25 0 0.5
 	}
 }
@@ -4200,12 +4200,12 @@ textures/sfx/goopq1metal7_98dstripe
 	}
 	{
 		map textures/gothic_floor/goopq1metal7_98d
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/sfx/orangestripes
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.75 0.25 0 0.5
 	}
 }
@@ -4220,13 +4220,13 @@ textures/sfx/pentagramfloor_rotating
 	}
 	{
 		map textures/gothic_floor/xhugefloor2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 //		map textures/sfx/pentagramfloor_red_blend
 		clampmap textures/sfx/pentagramfloor_red
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.75 0.25 0 0.5
 		tcMod rotate -60
 	}
@@ -4241,12 +4241,12 @@ textures/sfx/pentagramfloor_rotating2
 	}
 	{
 		map textures/gothic_floor/q1metalhuge
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		clampmap textures/sfx/pentagramfloor_red_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.75 0.25 0 0.5
 		tcMod rotate -60
 	}
@@ -4261,12 +4261,12 @@ textures/sfx/pentagramfloor_q1metal7_99
 	}
 	{
 		map textures/gothic_floor/q1metalhuge
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		clampmap textures/sfx/pentagramfloor_red_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.75 0.25 0 0.5
 		tcMod rotate -60
 	}
@@ -4281,12 +4281,12 @@ textures/sfx/pentagramfloor
 	}
 	{
 		map textures/gothic_floor/xhugefloor2
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		clampmap textures/sfx/pentagramfloor_red_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.75 0.25 0 0.5
 		tcMod rotate -60
 	}
@@ -4301,12 +4301,12 @@ textures/sfx/q1met_redpad
 	}
 	{
 		map textures/sfx/q1met_redpad
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/sfx/q1met_redpad_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
 }
@@ -4319,7 +4319,7 @@ textures/sfx/redgoal
 	{
 		map textures/sfx/redgoal
 		tcGen environment
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod turb 0 0.25 0 0.5
 	}
 }
@@ -4334,7 +4334,7 @@ textures/sfx/bluegoal
 	{
 		map textures/sfx/powerupshit
 		tcGen environment
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod turb 0 0.25 0 0.5
 	}
 }
@@ -4462,14 +4462,14 @@ textures/sfx/surface6jumppad
 	}
 	{
 		map textures/base_stone/surface6
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/sfx/surface6jumppad_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.5 0 .2
-//		blendFunc GL_ONE GL_ONE
+//		blendFunc add
 //		rgbGen wave sin 0.75 0.25 0 .2
 //		tcMod stretch sin 0.80 0.20 0 1
 	}
@@ -4483,7 +4483,7 @@ textures/sfx/powerupshit
 	{
 		map textures/sfx/powerupshit
 		tcGen environment
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		tcMod turb 0 0.25 0 0.5
 	}
 }
@@ -4529,12 +4529,12 @@ textures/sfx/xgoopjumpypad
 	}
 	{
 		map textures/sfx/xgoopq1metal
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		clampmap textures/sfx/surface6jumppad_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.75 0.25 0 .2
 		tcMod stretch sin 0.80 0.20 0 1
 	}
@@ -4549,12 +4549,12 @@ textures/sfx/xgoopy_pentagram
 	}
 	{
 		map textures/sfx/xgoopq1metal
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		clampmap textures/sfx/pentagramfloor_red_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		tcMod rotate -60
 	}
 }
@@ -4671,12 +4671,12 @@ textures/sfx/xq1metalbig_jumppad
 	}
 	{
 		map textures/gothic_floor/q1metal7_98d_256x256
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		clampmap textures/sfx/surface6jumppad_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.75 0.25 0 .2
 		tcMod stretch sin 0.80 0.20 0 1
 	}
@@ -4692,12 +4692,12 @@ textures/sfx/blocks11b_jumppad
 	}
 	{
 		map textures/gothic_block/blocks11b
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		clampmap textures/sfx/jumppad
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.75 0.25 0 .2
 		tcMod stretch sin 0.80 0.20 0 1
 	}
@@ -4753,7 +4753,7 @@ textures/sfx/teslacoil2
 
 	{
 		map textures/sfx/lightningcoil
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen wave sin .5 0 0 0
 		tcMod scroll 5 5
 
@@ -4810,7 +4810,7 @@ textures/sfx/teslacoiltrans
 
 	{
 		map textures/sfx/lightningcoil
-		blendfunc GL_ONE GL_ONE
+		blendfunc add
 		rgbGen wave sin .5 0 0 0
 		tcMod scroll 5 5
 
@@ -4827,12 +4827,12 @@ textures/sfx/pentagramfloor
 	}
 	{
 		map textures/sfx/pentagramfloor
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/sfx/pentagramfloor_red_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.5 0 .5
 	}
 }
@@ -4848,12 +4848,12 @@ textures/sfx/spawnpad
 	}
 	{
 		map textures/gothic_block/blocks17
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/sfx/spawnpad_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.75 0.25 0 .2
 //		tcMod stretch sin 0.80 0.20 0 1
 	}
@@ -4868,11 +4868,11 @@ textures/sfx/q1metal7_98d_pent_256
 	{
 		map textures/sfx/q1metal7_98d_pent_256
 		rgbGen identity
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 	}
 	{
 		map textures/sfx/pentagramfloor_256x256
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.5 0 .5
 	}
 }
@@ -4986,12 +4986,12 @@ textures/sfx/diamondredpad
 	}
 	{
 		map textures/base_floor/diamond2c
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		clampmap textures/sfx/redpad_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.75 0.25 0 1
 		tcMod stretch sin 0.80 0.20 0 1
 	}
@@ -5014,7 +5014,7 @@ textures/sfx/hellfog_tim_dm14
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5022,7 +5022,7 @@ textures/sfx/hellfog_tim_dm14
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5051,7 +5051,7 @@ textures/sfx/kc_hellfog_1k
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5059,7 +5059,7 @@ textures/sfx/kc_hellfog_1k
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5088,7 +5088,7 @@ textures/sfx/hellfog_1k
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5096,7 +5096,7 @@ textures/sfx/hellfog_1k
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 	}
@@ -5124,7 +5124,7 @@ textures/sfx/hellfog
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5132,7 +5132,7 @@ textures/sfx/hellfog
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5185,7 +5185,7 @@ textures/sfx/q3tourney3fog
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5193,7 +5193,7 @@ textures/sfx/q3tourney3fog
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5221,7 +5221,7 @@ textures/sfx/q3dm14fog
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5229,7 +5229,7 @@ textures/sfx/q3dm14fog
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5258,7 +5258,7 @@ textures/sfx/q3dm9fog
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5266,7 +5266,7 @@ textures/sfx/q3dm9fog
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5295,7 +5295,7 @@ textures/sfx/hellfogdense
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5303,7 +5303,7 @@ textures/sfx/hellfogdense
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5347,12 +5347,12 @@ textures/sfx/pitted_rust3arrowbase
 	}
 	{
 		map textures/sfx/pitted_rust3arrow
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/sfx/pitted_rust3arrow_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.5 0.5 0 .2
 	}
 }
@@ -5368,12 +5368,12 @@ textures/sfx/pitted_rust3arrowblocks
 	}
 	{
 		map textures/gothic_block/blocks17
-		blendFunc GL_DST_COLOR GL_ZERO
+		blendFunc filter
 		rgbGen identity
 	}
 	{
 		map textures/sfx/pitted_rust3arrow_blend
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin 0.75 0.25 0 1
 	}
 }
@@ -5422,20 +5422,20 @@ textures/sfx/mkc_bigflame
 
 	{
 		animMap 10 textures/sfx/flame1 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave inverseSawtooth 0 1 0 10
 
 	}
 	{
 		animMap 10 textures/sfx/flame2 textures/sfx/flame3 textures/sfx/flame4 textures/sfx/flame5 textures/sfx/flame6 textures/sfx/flame7 textures/sfx/flame8 textures/sfx/flame1
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sawtooth 0 1 0 10
 	}
 
 
 	{
 		map textures/sfx/flameball
-		blendFunc GL_ONE GL_ONE
+		blendFunc add
 		rgbGen wave sin .6 .2 0 .6
 	}
 
@@ -5455,7 +5455,7 @@ textures/sfx/mkc_fog_tdm3
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5463,7 +5463,7 @@ textures/sfx/mkc_fog_tdm3
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5483,7 +5483,7 @@ textures/sfx/mkc_fog_ctfred
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5491,7 +5491,7 @@ textures/sfx/mkc_fog_ctfred
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5511,7 +5511,7 @@ textures/sfx/mkc_fog_ctfblue
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5519,7 +5519,7 @@ textures/sfx/mkc_fog_ctfblue
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5541,7 +5541,7 @@ textures/sfx/mkc_fog_ctfblue2
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale -.05 -.05
 		tcmod scroll .01 -.01
 		rgbgen identity
@@ -5549,7 +5549,7 @@ textures/sfx/mkc_fog_ctfblue2
 
 	{
 		map textures/liquids/kc_fogcloud3
-		blendfunc gl_dst_color gl_zero
+		blendfunc filter
 		tcmod scale .05 .05
 		tcmod scroll .01 -.01
 		rgbgen identity
