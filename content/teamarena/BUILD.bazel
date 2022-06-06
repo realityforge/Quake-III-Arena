@@ -110,7 +110,6 @@ filegroup(
         "scripts/q3ta.shader",
         "scripts/sfx.shader",
         "scripts/sfx2.shader",
-        "scripts/sky.shader",
         "scripts/sky2.shader",
         "scripts/stone2.shader",
         "scripts/team.shader",
