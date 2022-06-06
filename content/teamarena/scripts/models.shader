@@ -2120,7 +2120,7 @@ models/mapobjects/wallhead/femhead
         }
 	{
 		//animMap 0.5 models/mapobjects/wallhead/femhead4 //models/mapobjects/wallhead/femhead2
-	        map models/mapobjects/wallhead/femhead4
+                map models/mapobjects/wallhead/femhead4
 		blendFunc	blend
 		alphaGen	wave sin 0 1 1 .1
                 // alphaGen	wave triangle 0 .7 0 .2
