@@ -718,7 +718,7 @@ textures/sfx/beam
         surfaceparm nonsolid
 	surfaceparm nolightmap
 	cull none
-	surfaceparm nomipmaps
+	 //surfaceparm nomipmaps
         //nopicmip
 	{
 		map textures/sfx/beam
@@ -741,7 +741,7 @@ textures/sfx/beam_dusty2
         surfaceparm nonsolid
 	surfaceparm nolightmap
 	cull none
-	surfaceparm nomipmaps
+	 //surfaceparm nomipmaps
         //nopicmip
 	{
 		map textures/sfx/beam_1
@@ -770,7 +770,7 @@ textures/sfx/beam_red
 	surfaceparm nolightmap
         qer_trans .5
 	cull none
-	surfaceparm nomipmaps
+	 //surfaceparm nomipmaps
         //nopicmip
 	{
 		map textures/sfx/beam_red
@@ -790,7 +790,7 @@ textures/sfx/beam_blue
 	surfaceparm nolightmap
         qer_trans .6
 	cull none
-	surfaceparm nomipmaps
+	 //surfaceparm nomipmaps
         //nopicmip
 	{
 		map textures/sfx/beam_blue4
@@ -813,7 +813,7 @@ textures/sfx/beam_waterlight1
 	q3map_surfacelight 50
         //qer_trans .3
 	cull none
-	surfaceparm nomipmaps
+	 //surfaceparm nomipmaps
         //nopicmip
 	{
 		map textures/sfx/beam_waterlight
@@ -840,7 +840,7 @@ textures/sfx/beam_waterlight1
         surfaceparm nonsolid
 	surfaceparm nolightmap
 	q3map_surfacelight 50
-	surfaceparm nomipmaps
+	 //surfaceparm nomipmaps
         qer_trans .3
 	cull none
         //nopicmip
@@ -871,7 +871,7 @@ textures/sfx/beam_waterlight2
 	q3map_surfacelight 50
         qer_trans 0.6
 	cull none
-	surfaceparm nomipmaps
+	 //surfaceparm nomipmaps
         //nopicmip
 	{
 		map textures/sfx/beam_waterlight
@@ -891,7 +891,7 @@ textures/sfx/beam_dusty
 	surfaceparm nolightmap
         qer_trans .3
 	cull none
-	surfaceparm nomipmaps
+	 //surfaceparm nomipmaps
         //nopicmip
 	{
 		map textures/sfx/beam_3
@@ -912,7 +912,7 @@ textures/sfx/beam_water
 	surfaceparm nolightmap
         qer_trans .3
 	cull none
-	surfaceparm nomipmaps
+	 //surfaceparm nomipmaps
         //nopicmip
 	{
 		map textures/sfx/beam_cyan4
@@ -939,7 +939,7 @@ textures/sfx/beam_water2
 	surfaceparm nolightmap
         qer_trans .3
 	cull none
-	surfaceparm nomipmaps
+	 //surfaceparm nomipmaps
         //nopicmip
 	{
 		map textures/sfx/beam_cyan5
