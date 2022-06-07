@@ -21,6 +21,7 @@ java_library(
         "DeformStageDirective.java",
         "EmitUtil.java",
         "FogDirective.java",
+        "MapStageDirective.java",
         "Material.java",
         "MoveDeformStageDirective.java",
         "NormalDeformStageDirective.java",

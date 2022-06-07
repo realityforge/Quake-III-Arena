@@ -19,6 +19,7 @@ load(":model_test.bzl", _model_test = "model_test")
         "BulgeDeformStageDirective",
         "Emit",
         "FogDirective",
+        "MapStageDirective",
         "Material",
         "MoveDeformStageDirective",
         "NormalDeformStageDirective",
