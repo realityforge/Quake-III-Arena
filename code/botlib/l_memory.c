@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_interface.h"
 
 //#define MEMDEBUG
-//#define MEMORYMANEGER
+//#define MEMORYMANAGER
 
 #define MEM_ID 0x12345678l
 #define HUNK_ID 0x87654321l
@@ -40,7 +40,7 @@ int allocatedmemory;
 int totalmemorysize;
 int numblocks;
 
-#ifdef MEMORYMANEGER
+#ifdef MEMORYMANAGER
 
 typedef struct memoryblock_s {
     unsigned long int id;
