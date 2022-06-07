@@ -1095,7 +1095,7 @@ R_TryStitchPatch
 
 This function will try to stitch patches in the same LoD group together for the highest LoD.
 
-Only single missing vertice cracks will be fixed.
+Only single missing vertex cracks will be fixed.
 
 Vertices will be joined at the patch side a crack is first found, at the other side
 of the patch (on the same row or column) the vertices will not be joined and cracks
@@ -1457,7 +1457,7 @@ static void R_LoadFogs(lump_t* l, lump_t* brushesLump, lump_t* sidesLump)
     }
     count = l->filelen / sizeof(*fogs);
 
-    // create fog strucutres for them
+    // create fog structures for them
     s_worldData.numfogs = count + 1;
     s_worldData.fogs = ri.Hunk_Alloc(s_worldData.numfogs * sizeof(*out), h_low);
     out = s_worldData.fogs + 1;

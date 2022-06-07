@@ -81,7 +81,7 @@ static void Sys_ReenableMouseMovement()
 
     err = CGAssociateMouseAndMouseCursorPosition(true);
     if (err != CGEventNoErr) {
-        Sys_Error("Could not reenable mouse movement, CGAssociateMouseAndMouseCursorPosition returned %d\n", err);
+        Sys_Error("Could not re-enable mouse movement, CGAssociateMouseAndMouseCursorPosition returned %d\n", err);
     }
 
     // Leave the mouse where it was -- don't warp here.

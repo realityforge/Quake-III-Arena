@@ -262,14 +262,14 @@ bool Netchan_Process(netchan_t* chan, msg_t* msg)
         }
     }
 
-    // if this is the final framgent of a reliable message,
+    // if this is the final fragment of a reliable message,
     // bump incoming_reliable_sequence
     if (fragmented) {
         // TTimo
         // make sure we add the fragments in correct order
         // either a packet was dropped, or we received this one too soon
         // we don't reconstruct the fragments. we will wait till this fragment gets to us again
-        // (NOTE: we could probably try to rebuild by out of order chunks if needed)
+        // (NOTE: we could probably try to rebuild by out-of-order chunks if needed)
         if (sequence != chan->fragmentSequence) {
             chan->fragmentSequence = sequence;
             chan->fragmentLength = 0;

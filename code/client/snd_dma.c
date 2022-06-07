@@ -192,7 +192,7 @@ void S_ChannelSetup()
 {
     channel_t *p, *q;
 
-    // clear all the sounds so they don't
+    // clear all the sounds
     memset(s_channels, 0, sizeof(s_channels));
 
     p = s_channels;
@@ -864,7 +864,7 @@ void S_AddLoopSounds(void)
 =================
 S_ByteSwapRawSamples
 
-If raw data has been loaded in little endien binary form, this must be done.
+If raw data has been loaded in little endian binary form, this must be done.
 If raw data was calculated, as with ADPCM, this should not be called.
 =================
 */
@@ -1363,7 +1363,7 @@ void S_StartBackgroundTrack(const char* intro, const char* loop)
     Q_strncpyz(s_backgroundLoop, loop, sizeof(s_backgroundLoop));
 
     // close the background track, but DON'T reset s_rawend
-    // if restarting the same back ground track
+    // if restarting the same background track
     if (s_backgroundFile) {
         FS_FCloseFile(s_backgroundFile);
         s_backgroundFile = 0;

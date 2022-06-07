@@ -331,7 +331,7 @@ gotnewcl:
 SV_DropClient
 
 Called when the player is totally leaving the server, either willingly
-or unwillingly.  This is NOT called if the entire server is quiting
+or unwillingly.  This is NOT called if the entire server is quitting
 or crashing -- SV_FinalMessage() will handle that
 =====================
 */
@@ -1221,7 +1221,7 @@ static void SV_UserMove(client_t* cl, msg_t* msg, bool delta)
     // this gamestate, put the client into the world
     if (cl->state == CS_PRIMED) {
         SV_ClientEnterWorld(cl, &cmds[0]);
-        // the moves can be processed normaly
+        // the moves can be processed normally
     }
 
     // a bad cp command was sent, drop the client

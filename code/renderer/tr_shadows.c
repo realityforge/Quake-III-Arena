@@ -215,7 +215,7 @@ void RB_ShadowTessEnd(void)
         R_RenderShadowEdges();
     }
 
-    // reenable writing to the color buffer
+    // re-enable writing to the color buffer
     qglColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 }
 
