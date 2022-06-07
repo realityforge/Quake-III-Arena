@@ -31,6 +31,7 @@ java_library(
         "SkyDirective.java",
         "SortDirective.java",
         "SortKey.java",
+        "Stage.java",
         "SunDirective.java",
         "SurfaceParameter.java",
         "TextDeformStageDirective.java",
