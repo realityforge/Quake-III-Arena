@@ -66,6 +66,15 @@ material_magic_golden_test(
 )
 
 material_magic_golden_test(
+    name = "stage_map",
+    inputs = ["input.shader"],
+    materials = [
+        "textures/white",
+        "textures/image",
+    ],
+)
+
+material_magic_golden_test(
     name = "surfaceparm",
     inputs = ["input.shader"],
     materials = ["textures/surfaceparm"],
@@ -79,6 +88,7 @@ multirun(
         ":t2_update_goldens",
         ":material_name_update_goldens",
         ":skyparms_update_goldens",
+        ":stage_map_update_goldens",
         ":surfaceparm_update_goldens",
     ],
     jobs = 0,

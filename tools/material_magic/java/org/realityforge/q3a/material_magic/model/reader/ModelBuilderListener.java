@@ -14,6 +14,7 @@ import org.realityforge.q3a.material_magic.model.ProjectionShadowDeformStageDire
 import org.realityforge.q3a.material_magic.model.SkyDirective;
 import org.realityforge.q3a.material_magic.model.SortDirective;
 import org.realityforge.q3a.material_magic.model.SortKey;
+import org.realityforge.q3a.material_magic.model.Stage;
 import org.realityforge.q3a.material_magic.model.SunDirective;
 import org.realityforge.q3a.material_magic.model.SurfaceParameter;
 import org.realityforge.q3a.material_magic.model.TextDeformStageDirective;
@@ -26,6 +27,7 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   @Nonnull
   private final Unit _unit = new Unit();
   private Material _material;
+  private Stage _stage;
 
   @Nonnull
   Unit getUnit()
@@ -330,6 +332,27 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
       directive.setLevel( 7 );
     }
     _material.addDeformStage( directive );
+  }
+
+  @Override
+  public void enterStage( final MaterialsParser.StageContext ctx )
+  {
+    assert null == _stage;
+    _stage = new Stage();
+  }
+
+  @Override
+  public void exitStage( @Nonnull final MaterialsParser.StageContext ctx )
+  {
+    assert null != _stage;
+    _material.addStage( _stage );
+    _stage = null;
+  }
+
+  @Override
+  public void exitMapStageDirective( @Nonnull final MaterialsParser.MapStageDirectiveContext ctx )
+  {
+    _stage.map().setTexture( ctx.texture.getText() );
   }
 
   @Override
