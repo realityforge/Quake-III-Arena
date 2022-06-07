@@ -52,6 +52,9 @@ public final class MaterialTest
     material.addSurfaceParameter( SurfaceParameter.botclip );
     material.addSurfaceParameter( SurfaceParameter.slime );
     material.addSurfaceParameter( SurfaceParameter.dust );
+    final Stage stage = new Stage();
+    stage.map().setTexture( "textures/base_x/x" );
+    material.addStage( stage );
 
     assertTrue( material.hasQ3map() );
     assertTrue( material.hasFog() );
@@ -77,6 +80,9 @@ public final class MaterialTest
                     + "  surfaceparm botclip\n"
                     + "  surfaceparm dust\n"
                     + "  surfaceparm slime\n"
+                    + "  {\n"
+                    + "    map textures/base_x/x\n"
+                    + "  }\n"
                     + "}\n",
                   material.toString() );
     assertEquals( "materials/my/Material2\n"
@@ -93,6 +99,9 @@ public final class MaterialTest
                     + "surfaceparm botclip\n"
                     + "surfaceparm dust\n"
                     + "surfaceparm slime\n"
+                    + "{\n"
+                    + "map textures/base_x/x\n"
+                    + "}\n"
                     + "}\n",
                   MaterialOutput.outputAsString( material::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
   }

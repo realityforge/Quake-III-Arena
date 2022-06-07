@@ -36,6 +36,8 @@ public final class Material
   private final Set<SurfaceParameter> _surfaceParameters = new HashSet<>();
   @Nonnull
   private final List<DeformStageDirective<?>> _deformStages = new ArrayList<>();
+  @Nonnull
+  private final List<Stage> _stages = new ArrayList<>();
 
   public Material( @Nonnull final String name ) { _name = Objects.requireNonNull( name ); }
 
@@ -144,6 +146,14 @@ public final class Material
     return _deformStages;
   }
 
+  public void addStage( @Nonnull final Stage stage ) { _stages.add( stage ); }
+
+  @Nonnull
+  public List<Stage> getStages()
+  {
+    return _stages;
+  }
+
   public void addSurfaceParameter( @Nonnull final SurfaceParameter parameter ) { _surfaceParameters.add( parameter ); }
 
   @Nonnull
@@ -201,6 +211,9 @@ public final class Material
       for ( final DeformStageDirective<?> stage : getDeformStages() ) {
         stage.write( o );
       }
+      for ( final Stage stage : getStages() ) {
+        stage.write( o );
+      }
     } );
   }
 
@@ -221,7 +234,8 @@ public final class Material
         Objects.equals( null == _sort || _sort.isDefault() ? null : _sort,
                         null == that._sort || that._sort.isDefault() ? null : that._sort ) &&
         Objects.equals( getSurfaceParameters(), that.getSurfaceParameters() ) &&
-        Objects.equals( getDeformStages(), that.getDeformStages() ) && Objects.equals( q3map(), that.q3map() ) &&
+        Objects.equals( getDeformStages(), that.getDeformStages() ) &&
+        Objects.equals( getStages(), that.getStages() ) && Objects.equals( q3map(), that.q3map() ) &&
         Objects.equals( qer(), that.qer() );
     }
   }
@@ -241,6 +255,7 @@ public final class Material
                          null == _sort || _sort.isDefault() ? null : _sort,
                          getSurfaceParameters(),
                          getDeformStages(),
+                         getStages(),
                          q3map(),
                          qer() );
   }
