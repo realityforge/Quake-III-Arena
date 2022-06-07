@@ -121,3 +121,7 @@ The design of the solution will likely evolve over time, but it is expected that
 ### Evaluation
 
 ...
+
+### References
+
+* [GitBOM: Enabling Universal Artifact Traceability In Software Supply Chains](https://gitbom.dev/resources/whitepaper/): This article describes an architecture that is largely consistent with the proposed solution. It proposes representing build artifact dependency graphs using a merkle tree with a flat-file storage format and the generation of such graphs at build time. This would enable the creation of verifiable and complete artifact dependency graphs with the goal of tracing artifacts to support vulnerability databases and similar tooling.
