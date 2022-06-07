@@ -223,8 +223,7 @@ void SV_MasterHeartbeat(void)
         }
 
         Com_Printf("Sending heartbeat to %s\n", sv_master[i]->string);
-        // this command should be changed if the server info / status format
-        // ever incompatably changes
+        // this command should be changed if the server info / status format ever changes incompatible
         NET_OutOfBandPrint(NS_SERVER, adr[i], "heartbeat %s\n", HEARTBEAT_GAME);
     }
 }
@@ -599,7 +598,7 @@ void SV_CalcPings(void)
 SV_CheckTimeouts
 
 If a packet has not been received from a client for timeout->integer
-seconds, drop the conneciton.  Server time is used instead of
+seconds, drop the connection.  Server time is used instead of
 realtime to avoid dropping the local client while debugging.
 
 When a client is normally dropped, the client_t goes into a zombie state

@@ -952,7 +952,7 @@ void ClientSpawn(gentity_t* ent)
             if ((spawnPoint->flags & FL_NO_BOTS) && (ent->r.svFlags & SVF_BOT)) {
                 continue; // try again
             }
-            // just to be symetric, we have a nohumans option...
+            // just to be symmetric, we have a nohumans option...
             if ((spawnPoint->flags & FL_NO_HUMANS) && !(ent->r.svFlags & SVF_BOT)) {
                 continue; // try again
             }

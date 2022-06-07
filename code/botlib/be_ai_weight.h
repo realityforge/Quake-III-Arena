@@ -27,22 +27,22 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define WT_BALANCE 1
 #define MAX_WEIGHTS 128
 
-// fuzzy seperator
-typedef struct fuzzyseperator_s {
+// fuzzy separator
+typedef struct fuzzyseparator_s {
     int index;
     int value;
     int type;
     float weight;
     float minweight;
     float maxweight;
-    struct fuzzyseperator_s* child;
-    struct fuzzyseperator_s* next;
-} fuzzyseperator_t;
+    struct fuzzyseparator_s* child;
+    struct fuzzyseparator_s* next;
+} fuzzyseparator_t;
 
 // fuzzy weight
 typedef struct weight_s {
     char* name;
-    struct fuzzyseperator_s* firstseperator;
+    struct fuzzyseparator_s* firstseparator;
 } weight_t;
 
 // weight configuration

@@ -600,7 +600,7 @@ void PC_ConvertPath(char* path)
 {
     char* ptr;
 
-    // remove double path seperators
+    // remove double path separators
     for (ptr = path; *ptr;) {
         if ((*ptr == '\\' || *ptr == '/') && (*(ptr + 1) == '\\' || *(ptr + 1) == '/')) {
             strcpy(ptr, ptr + 1);
@@ -608,10 +608,10 @@ void PC_ConvertPath(char* path)
             ptr++;
         }
     }
-    // set OS dependent path seperators
+    // set OS dependent path separators
     for (ptr = path; *ptr;) {
         if (*ptr == '/' || *ptr == '\\')
-            *ptr = PATHSEPERATOR_CHAR;
+            *ptr = PATHSEPARATOR_CHAR;
         ptr++;
     }
 }
@@ -883,10 +883,10 @@ define_t* PC_DefineFromString(char* string)
     }
     FreeMemory(src.definehash);
     FreeScript(script);
-    // if the define was created successfully
+    // return if the define was created successfully
     if (res > 0)
         return def;
-    // free the define is created
+    // free the define if it is created
     if (src.defines)
         PC_FreeDefine(def);
     return NULL;

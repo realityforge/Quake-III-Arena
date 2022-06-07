@@ -43,7 +43,7 @@ extern botlib_import_t botimport;
 
 //#define REACH_DEBUG
 
-// NOTE: all travel times are in hundreth of a second
+// NOTE: all travel times are in hundredths of a second
 // maximum number of reachability links
 #define AAS_MAX_REACHABILITYSIZE 65536
 // number of units reachability points are placed inside the areas
@@ -2945,7 +2945,7 @@ int AAS_Reachability_Grapple(int area1num, int area2num)
         if (aasworld.areasettings[areanum].contents & (AREACONTENTS_SLIME | AREACONTENTS_LAVA)) {
             continue;
         }
-        // do not go the the source area
+        // do not go to the source area
         if (areanum == area1num)
             continue;
         // don't create reachabilities if they already exist

@@ -48,7 +48,7 @@ etc) will be created relative to the base path, so base path should usually be w
 The "cd path" is the path to an alternate hierarchy that will be searched if a file
 is not located in the base path.  A user can do a partial install that copies some
 data to a base path created on their hard drive and leave the rest on the cd.  Files
-are never writen to the cd path.  It defaults to a value set by the installer, like
+are never written to the cd path.  It defaults to a value set by the installer, like
 "e:\quake3", but it can be overridden with "+set ds_cdpath g:\quake3".
 
 If a user runs the game directly from a CD, the base path would be on the CD.  This
@@ -159,7 +159,7 @@ Casing
 
 Read / write config to floppy option.
 
-Different version coexistance?
+Different version coexistence?
 
 When building a pak file, make sure a q3config.cfg isn't present in it,
 or configs will never get loaded from disk!
@@ -1389,7 +1389,7 @@ int FS_ReadFile(const char* qpath, void** buffer)
         if (buffer) {
             *buffer = NULL;
         }
-        // if we are journalling and it is a config file, write a zero to the journal file
+        // if we are journaling and it is a config file, write a zero to the journal file
         if (isConfig && com_journal && com_journal->integer == 1) {
             Com_DPrintf("Writing zero for %s to journal file.\n", qpath);
             len = 0;
@@ -1421,7 +1421,7 @@ int FS_ReadFile(const char* qpath, void** buffer)
     buf[len] = 0;
     FS_FCloseFile(h);
 
-    // if we are journalling and it is a config file, write it to the journal file
+    // if we are journaling and it is a config file, write it to the journal file
     if (isConfig && com_journal && com_journal->integer == 1) {
         Com_DPrintf("Writing %s to journal file.\n", qpath);
         FS_Write(&len, sizeof(len), com_journalDataFile);
@@ -1640,7 +1640,7 @@ static int FS_AddFileToList(char* name, char* list[MAX_FOUND_FILES], int nfiles)
 ===============
 FS_ListFilteredFiles
 
-Returns a uniqued list of files that match the given criteria
+Returns a unique list of files that match the given criteria
 from all search paths
 ===============
 */
@@ -2860,7 +2860,7 @@ void FS_PureServerSetReferencedPaks(const char* pakSums, const char* pakNames)
 ================
 FS_InitFilesystem
 
-Called only at inital startup, not when the filesystem
+Called only at initial startup, not when the filesystem
 is resetting due to a game change
 ================
 */

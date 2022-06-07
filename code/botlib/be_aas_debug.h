@@ -28,7 +28,7 @@ void AAS_DebugLine(vec3_t start, vec3_t end, int color);
 void AAS_PermanentLine(vec3_t start, vec3_t end, int color);
 //
 void AAS_ShowAreaPolygons(int areanum, int color, int groundfacesonly);
-// draw a cros
+// draw a cross
 void AAS_DrawCross(vec3_t origin, float size, int color);
 // print the travel type
 void AAS_PrintTravelType(int traveltype);

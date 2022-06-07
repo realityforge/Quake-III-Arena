@@ -445,7 +445,7 @@ void CG_DrawOldTourneyScoreboard(void)
     color[3] = 1;
     CG_FillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, color);
 
-    // print the mesage of the day
+    // print the message of the day
     s = CG_ConfigString(CS_MOTD);
     if (!s[0]) {
         s = "Scoreboard";
