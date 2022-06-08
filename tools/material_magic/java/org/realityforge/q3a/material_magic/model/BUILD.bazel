@@ -38,6 +38,7 @@ java_library(
         "SurfaceParameter.java",
         "TextDeformStageDirective.java",
         "Unit.java",
+        "VideoMapStageDirective.java",
         "WaveDeformStageDirective.java",
         "WaveForm.java",
     ],

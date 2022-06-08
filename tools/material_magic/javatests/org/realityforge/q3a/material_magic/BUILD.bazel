@@ -96,6 +96,12 @@ material_magic_golden_test(
 )
 
 material_magic_golden_test(
+    name = "stage_videomap",
+    inputs = ["input.shader"],
+    materials = ["textures/video"],
+)
+
+material_magic_golden_test(
     name = "surfaceparm",
     inputs = ["input.shader"],
     materials = ["textures/surfaceparm"],
@@ -112,6 +118,7 @@ multirun(
         ":stage_animmap_update_goldens",
         ":stage_clampmap_update_goldens",
         ":stage_map_update_goldens",
+        ":stage_videomap_update_goldens",
         ":surfaceparm_update_goldens",
     ],
     jobs = 0,

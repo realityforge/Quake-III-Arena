@@ -44,6 +44,27 @@ public final class StageDirectiveTest
                   MaterialOutput.outputAsString( stage::write ) );
     assertEquals( "{\nmap *white\nclampmap textures/foo\nanimMap .25 textures/foo1 textures/foo2\n}\n",
                   MaterialOutput.outputAsString( stage::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
+
+    assertFalse( stage.hasVideoMap() );
+
+    stage.videoMap().setVideo( "myvideo.roq" );
+
+    assertTrue( stage.hasVideoMap() );
+
+    assertEquals( "{\n"
+                    + "  map *white\n"
+                    + "  clampmap textures/foo\n"
+                    + "  animMap .25 textures/foo1 textures/foo2\n"
+                    + "  videoMap myvideo.roq\n"
+                    + "}\n",
+                  MaterialOutput.outputAsString( stage::write ) );
+    assertEquals( "{\n"
+                    + "map *white\n"
+                    + "clampmap textures/foo\n"
+                    + "animMap .25 textures/foo1 textures/foo2\n"
+                    + "videoMap myvideo.roq\n"
+                    + "}\n",
+                  MaterialOutput.outputAsString( stage::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
   }
 
   @Test
@@ -101,6 +122,16 @@ public final class StageDirectiveTest
 
     stage2.animMap().setFrequency( 0.25F );
     stage2.animMap().setTexture1( "textures/foo/other_foo" );
+
+    assertEquals( stage1, stage2 );
+    assertEquals( stage1.hashCode(), stage2.hashCode() );
+
+    stage1.videoMap().setVideo( "movie.roq" );
+
+    assertNotEquals( stage1, stage2 );
+    assertNotEquals( stage1.hashCode(), stage2.hashCode() );
+
+    stage2.videoMap().setVideo( "movie.roq" );
 
     assertEquals( stage1, stage2 );
     assertEquals( stage1.hashCode(), stage2.hashCode() );

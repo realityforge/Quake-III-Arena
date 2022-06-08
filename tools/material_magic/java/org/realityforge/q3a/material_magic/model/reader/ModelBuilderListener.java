@@ -336,7 +336,7 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   }
 
   @Override
-  public void enterStage( final MaterialsParser.StageContext ctx )
+  public void enterStage( @Nonnull final MaterialsParser.StageContext ctx )
   {
     assert null == _stage;
     _stage = new Stage();
@@ -351,13 +351,13 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   }
 
   @Override
-  public void exitClampMapStageDirective( final MaterialsParser.ClampMapStageDirectiveContext ctx )
+  public void exitClampMapStageDirective( @Nonnull final MaterialsParser.ClampMapStageDirectiveContext ctx )
   {
     _stage.clampMap().setTexture( ctx.texture.getText() );
   }
 
   @Override
-  public void exitAnimMapStageDirective( final MaterialsParser.AnimMapStageDirectiveContext ctx )
+  public void exitAnimMapStageDirective( @Nonnull final MaterialsParser.AnimMapStageDirectiveContext ctx )
   {
     final AnimMapStageDirective animMap = _stage.animMap();
     animMap.setFrequency( parseNumber( ctx.frequency ) );
@@ -389,6 +389,12 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   public void exitMapStageDirective( @Nonnull final MaterialsParser.MapStageDirectiveContext ctx )
   {
     _stage.map().setTexture( ctx.texture.getText() );
+  }
+
+  @Override
+  public void exitVideoMapStageDirective( @Nonnull final MaterialsParser.VideoMapStageDirectiveContext ctx )
+  {
+    _stage.videoMap().setVideo( ctx.video.getText() );
   }
 
   @Override

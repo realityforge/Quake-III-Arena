@@ -14,6 +14,8 @@ public final class Stage
   private ClampMapStageDirective _clampMap;
   @Nullable
   private AnimMapStageDirective _animMap;
+  @Nullable
+  private VideoMapStageDirective _videoMap;
 
   public boolean hasMap() { return null != _map && !_map.isDefault(); }
 
@@ -54,6 +56,19 @@ public final class Stage
 
   public void setAnimMap( @Nullable final AnimMapStageDirective animMap ) { _animMap = animMap; }
 
+  public boolean hasVideoMap() { return null != _videoMap && !_videoMap.isDefault(); }
+
+  @Nonnull
+  public VideoMapStageDirective videoMap()
+  {
+    if ( null == _videoMap ) {
+      _videoMap = new VideoMapStageDirective();
+    }
+    return _videoMap;
+  }
+
+  public void setVideoMap( @Nullable final VideoMapStageDirective videoMap ) { _videoMap = videoMap; }
+
   /**
    * Write the material using the standard text serialization mechanisms to the specified output
    * object.
@@ -73,6 +88,9 @@ public final class Stage
       if ( hasAnimMap() ) {
         animMap().write( o );
       }
+      if ( hasVideoMap() ) {
+        videoMap().write( o );
+      }
     } );
   }
 
@@ -87,14 +105,18 @@ public final class Stage
       final Stage that = (Stage)o;
       return Objects.equals( hasMap() ? _map : null, that.hasMap() ? that._map : null ) &&
         Objects.equals( hasClampMap() ? _clampMap : null, that.hasClampMap() ? that._clampMap : null ) &&
-        Objects.equals( hasAnimMap() ? _animMap : null, that.hasAnimMap() ? that._animMap : null );
+        Objects.equals( hasAnimMap() ? _animMap : null, that.hasAnimMap() ? that._animMap : null ) &&
+        Objects.equals( hasVideoMap() ? _videoMap : null, that.hasVideoMap() ? that._videoMap : null );
     }
   }
 
   @Override
   public int hashCode()
   {
-    return Objects.hash( hasMap() ? _map : null, hasClampMap() ? _clampMap : null, hasAnimMap() ? _animMap : null );
+    return Objects.hash( hasMap() ? _map : null,
+                         hasClampMap() ? _clampMap : null,
+                         hasAnimMap() ? _animMap : null,
+                         hasVideoMap() ? _videoMap : null );
   }
 
   @Nonnull
