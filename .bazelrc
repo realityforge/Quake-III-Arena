@@ -106,6 +106,10 @@ test --build_tests_only
 # Make Bazel print out all options from rc files.
 build --announce_rc
 
+# Try to use the operating system's file watch service for local changes instead of scanning every file for a change
+build --watchfs
+build --experimental_windows_watchfs
+
 # Use an environment with a static value for PATH and does not inherit LD_LIBRARY_PATH or TMPDIR
 # The goal is to enable cross-user caching when a shared cache is used
 build --incompatible_strict_action_env
