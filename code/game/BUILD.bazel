@@ -10,6 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@rules_cc//cc:defs.bzl", "cc_library")
 load("//build_defs:rules.bzl", "CLIENT_GAME_DEFINES", "SERVER_GAME_COPTS", "SERVER_GAME_DEFINES", "TEAM_ARENA_DEFINES")
 
 cc_library(

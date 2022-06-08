@@ -1,3 +1,5 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -32,14 +34,14 @@ _copy_to_directory(
     allow_symlink = True,
     prefix_mapped_src = {
         # Base game
-        "//game/baseq3:pak0": "pak0:baseq3/pak0",
         "//game/baseq3:cgame.so": "cgame:baseq3/cgamearm64",
+        "//game/baseq3:pak0": "pak0:baseq3/pak0",
         "//game/baseq3:qagame.so": "qagame:baseq3/qagamearm64",
         "//game/baseq3:ui.so": "ui:baseq3/uiarm64",
 
         # TeamArena game
-        "//game/teamarena:pak0": "pak0:missionpack/pak0",
         "//game/teamarena:cgame.so": "cgame:missionpack/cgamearm64",
+        "//game/teamarena:pak0": "pak0:missionpack/pak0",
         "//game/teamarena:qagame.so": "qagame:missionpack/qagamearm64",
         "//game/teamarena:ui.so": "ui:missionpack/uiarm64",
     },

@@ -10,6 +10,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
 # TODO: Should we turn this into a library that ends up as dependency?
 _SDL_LINK_OPTS = [
     "-F/Library/Frameworks",

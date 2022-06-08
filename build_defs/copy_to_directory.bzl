@@ -17,6 +17,8 @@ load("@bazel_skylib//lib:paths.bzl", _paths = "paths")
 
 # Hints for Bazel spawn strategy
 _COPY_EXECUTION_REQUIREMENTS = {
+    "local": "1",
+    "no-cache": "1",
     # ----------------+-----------------------------------------------------------------------------
     # no-remote       | Prevents the action or test from being executed remotely or cached remotely.
     #                 | This is equivalent to using both `no-remote-cache` and `no-remote-exec`.
@@ -68,9 +70,7 @@ _COPY_EXECUTION_REQUIREMENTS = {
     "no-remote": "1",
     "no-remote-cache": "1",
     "no-remote-exec": "1",
-    "no-cache": "1",
     "no-sandbox": "1",
-    "local": "1",
 }
 
 def _longest_match(subject, tests):
@@ -269,12 +269,12 @@ def _copy_to_directory_impl(ctx):
 
 _copy_to_directory = rule(
     attrs = {
-        "srcs": attr.label_list(allow_files = True),
-        "replace_prefixes": attr.string_dict(default = {}),
-        "is_windows": attr.bool(mandatory = True),
-        "downcase": attr.bool(default = False),
         "allow_symlink": attr.bool(default = False),
+        "downcase": attr.bool(default = False),
+        "is_windows": attr.bool(mandatory = True),
         "prefix_mapped_src": attr.label_keyed_string_dict(allow_files = True),
+        "replace_prefixes": attr.string_dict(default = {}),
+        "srcs": attr.label_list(allow_files = True),
     },
     implementation = _copy_to_directory_impl,
     provides = [DefaultInfo],

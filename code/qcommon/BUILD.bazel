@@ -10,6 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@rules_cc//cc:defs.bzl", "cc_library")
 load("//build_defs:rules.bzl", "ENGINE_DEFINES", "FULL_WARNINGS", "SERVER_ONLY_ENGINE_DEFINES")
 
 # TODO: Separate out headers for cvars to here? Actually lets create a much better console var library that is probably inspired by the work in q2java modernized

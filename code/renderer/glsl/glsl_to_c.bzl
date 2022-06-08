@@ -1,3 +1,5 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
 def glsl_to_c(name):
     native.genrule(
         name = name + "_generator",
@@ -6,8 +8,7 @@ def glsl_to_c(name):
         cmd = "$(execpath :stringify) $< $@",
         tools = [":stringify"],
     )
-
-    native.cc_library(
+    cc_library(
         name = name,
         copts = ["-Wno-overlength-strings"],
         srcs = [

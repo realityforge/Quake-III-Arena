@@ -10,8 +10,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("//build_defs:rules.bzl", "CLIENT_GAME_LINKOPTS", "DIST_VISIBILITY", "SERVER_GAME_LINKOPTS", "UI_LINKOPTS")
+load("@rules_cc//cc:defs.bzl", "cc_binary")
 load("//build_defs:copy_to_directory.bzl", _copy_to_directory = "copy_to_directory")
+load("//build_defs:rules.bzl", "CLIENT_GAME_LINKOPTS", "DIST_VISIBILITY", "SERVER_GAME_LINKOPTS", "UI_LINKOPTS")
 load("//third_party/content:metadata.bzl", "REPLACE_RULES")
 
 cc_binary(

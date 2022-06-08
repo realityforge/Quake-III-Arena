@@ -39,8 +39,8 @@ apple_bundle_version(
     build_label_pattern = "Quake3Arena_{version}_build_{build}",
     build_version = "{version}.{build}",
     capture_groups = {
-        "version": "\\d+\\.\\d+",
         "build": "\\d+",
+        "version": "\\d+\\.\\d+",
     },
     fallback_build_label = "Quake3Arena_99.99_build_99",
     short_version_string = "{version}",
@@ -84,12 +84,6 @@ _copy_to_directory(
 macos_application(
     name = "Quake3Arena",
     additional_contents = {
-        "//game:Quake3ArenaServer": "MacOS",
-        ":baseq3_code": "MacOS",
-        ":teamarena_code": "MacOS",
-
-        # Application Icons
-        ":Quake3Arena.icns": "Resources",
 
         # Data files can not be below MacOS directory as the code signing process will expect it to be
         # code and thus must have a signature. Which it obviously does not. This places it at a different
@@ -97,6 +91,12 @@ macos_application(
         # See https://developer.apple.com/library/archive/technotes/tn2206/_index.html for further details.
         "//game/baseq3:pak0.pk3": "Resources/baseq3",
         "//game/teamarena:pak0.pk3": "Resources/missionpack",
+        "//game:Quake3ArenaServer": "MacOS",
+
+        # Application Icons
+        ":Quake3Arena.icns": "Resources",
+        ":baseq3_code": "MacOS",
+        ":teamarena_code": "MacOS",
     },
     # TODO: Name this bundle id according to final product name
     bundle_id = "org.realityforge.Quake3Arena",

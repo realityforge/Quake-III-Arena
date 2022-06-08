@@ -10,6 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 load(":glsl_to_c.bzl", "glsl_to_c")
 
 glsl_to_c(name = "bokeh_fp")
