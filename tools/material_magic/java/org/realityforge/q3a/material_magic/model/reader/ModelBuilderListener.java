@@ -350,6 +350,12 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   }
 
   @Override
+  public void exitClampMapStageDirective( final MaterialsParser.ClampMapStageDirectiveContext ctx )
+  {
+    _stage.clampMap().setTexture( ctx.texture.getText() );
+  }
+
+  @Override
   public void exitMapStageDirective( @Nonnull final MaterialsParser.MapStageDirectiveContext ctx )
   {
     _stage.map().setTexture( ctx.texture.getText() );

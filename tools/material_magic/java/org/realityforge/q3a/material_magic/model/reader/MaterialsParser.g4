@@ -87,8 +87,8 @@ stageDirectives
 
 stageDirective
     : mapStageDirective
-// TODO: None of the following directives have model representations or are tested.
     | clampMapStageDirective
+// TODO: None of the following directives have model representations or are tested.
     | animMapStageDirective
     | videoMapStageDirective
     | depthFuncStageDirective

@@ -10,6 +10,8 @@ public final class Stage
 {
   @Nullable
   private MapStageDirective _map;
+  @Nullable
+  private ClampMapStageDirective _clampMap;
 
   public boolean hasMap() { return null != _map && !_map.isDefault(); }
 
@@ -24,6 +26,19 @@ public final class Stage
 
   public void setMap( @Nullable final MapStageDirective map ) { _map = map; }
 
+  public boolean hasClampMap() { return null != _clampMap && !_clampMap.isDefault(); }
+
+  @Nonnull
+  public ClampMapStageDirective clampMap()
+  {
+    if ( null == _clampMap ) {
+      _clampMap = new ClampMapStageDirective();
+    }
+    return _clampMap;
+  }
+
+  public void setClampMap( @Nullable final ClampMapStageDirective clampMap ) { _clampMap = clampMap; }
+
   /**
    * Write the material using the standard text serialization mechanisms to the specified output
    * object.
@@ -37,6 +52,9 @@ public final class Stage
       if ( hasMap() ) {
         map().write( o );
       }
+      if ( hasClampMap() ) {
+        clampMap().write( o );
+      }
     } );
   }
 
@@ -49,14 +67,15 @@ public final class Stage
       return false;
     } else {
       final Stage that = (Stage)o;
-      return Objects.equals( hasMap() ? _map : null, that.hasMap() ? that._map : null );
+      return Objects.equals( hasMap() ? _map : null, that.hasMap() ? that._map : null ) &&
+        Objects.equals( hasClampMap() ? _clampMap : null, that.hasClampMap() ? that._clampMap : null );
     }
   }
 
   @Override
   public int hashCode()
   {
-    return Objects.hash( hasMap() ? _map : null );
+    return Objects.hash( hasMap() ? _map : null, hasClampMap() ? _clampMap : null );
   }
 
   @Nonnull
