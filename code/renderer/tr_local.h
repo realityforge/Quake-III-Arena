@@ -381,8 +381,6 @@ typedef struct {
 
 } shaderStage_t;
 
-struct shaderCommands_s;
-
 typedef enum {
     CT_FRONT_SIDED,
     CT_BACK_SIDED,
