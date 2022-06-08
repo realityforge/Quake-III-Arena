@@ -12,8 +12,8 @@
 
 """Bazel repository rules for loading content from original games."""
 
-load(":metadata.bzl", _PAK_DATA = "PAK_DATA")
 load("//build_defs:http_repository_from_env.bzl", _http_repository_from_env = "http_repository_from_env")
+load(":metadata.bzl", _PAK_DATA = "PAK_DATA")
 
 def _create_repository_data_from_metadata(name):
     data = _PAK_DATA[name]
