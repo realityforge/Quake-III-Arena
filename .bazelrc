@@ -124,6 +124,9 @@ test --java_language_version=11
 build --tool_java_language_version=11
 test --tool_java_language_version=11
 
+# Enable the experimental persistent Java compiler.
+build --experimental_persistent_javac
+
 # Checks that a Java target explicitly declares all directly used targets as dependencies.
 test --experimental_strict_java_deps error
 build --experimental_strict_java_deps error
