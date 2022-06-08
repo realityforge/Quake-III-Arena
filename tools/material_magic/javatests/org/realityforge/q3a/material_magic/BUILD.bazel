@@ -66,6 +66,21 @@ material_magic_golden_test(
 )
 
 material_magic_golden_test(
+    name = "stage_animmap",
+    inputs = ["input.shader"],
+    materials = [
+        "textures/anim1",
+        "textures/anim2",
+        "textures/anim3",
+        "textures/anim4",
+        "textures/anim5",
+        "textures/anim6",
+        "textures/anim7",
+        "textures/anim8",
+    ],
+)
+
+material_magic_golden_test(
     name = "stage_clampmap",
     inputs = ["input.shader"],
     materials = ["textures/image"],
@@ -94,6 +109,7 @@ multirun(
         ":t2_update_goldens",
         ":material_name_update_goldens",
         ":skyparms_update_goldens",
+        ":stage_animmap_update_goldens",
         ":stage_clampmap_update_goldens",
         ":stage_map_update_goldens",
         ":surfaceparm_update_goldens",

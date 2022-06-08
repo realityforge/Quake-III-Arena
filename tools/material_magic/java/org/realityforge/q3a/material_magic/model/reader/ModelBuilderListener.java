@@ -2,6 +2,7 @@ package org.realityforge.q3a.material_magic.model.reader;
 
 import javax.annotation.Nonnull;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import org.realityforge.q3a.material_magic.model.AnimMapStageDirective;
 import org.realityforge.q3a.material_magic.model.AutoSprite2DeformStageDirective;
 import org.realityforge.q3a.material_magic.model.AutoSpriteDeformStageDirective;
 import org.realityforge.q3a.material_magic.model.BulgeDeformStageDirective;
@@ -353,6 +354,35 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   public void exitClampMapStageDirective( final MaterialsParser.ClampMapStageDirectiveContext ctx )
   {
     _stage.clampMap().setTexture( ctx.texture.getText() );
+  }
+
+  @Override
+  public void exitAnimMapStageDirective( final MaterialsParser.AnimMapStageDirectiveContext ctx )
+  {
+    final AnimMapStageDirective animMap = _stage.animMap();
+    animMap.setFrequency( parseNumber( ctx.frequency ) );
+    animMap.setTexture1( ctx.texture1.getText() );
+    if ( null != ctx.texture2 ) {
+      animMap.setTexture2( ctx.texture2.getText() );
+    }
+    if ( null != ctx.texture3 ) {
+      animMap.setTexture3( ctx.texture3.getText() );
+    }
+    if ( null != ctx.texture4 ) {
+      animMap.setTexture4( ctx.texture4.getText() );
+    }
+    if ( null != ctx.texture5 ) {
+      animMap.setTexture5( ctx.texture5.getText() );
+    }
+    if ( null != ctx.texture6 ) {
+      animMap.setTexture6( ctx.texture6.getText() );
+    }
+    if ( null != ctx.texture7 ) {
+      animMap.setTexture7( ctx.texture7.getText() );
+    }
+    if ( null != ctx.texture8 ) {
+      animMap.setTexture8( ctx.texture8.getText() );
+    }
   }
 
   @Override
