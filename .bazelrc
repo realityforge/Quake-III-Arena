@@ -33,6 +33,10 @@ fetch --repository_cache=~/.cache/bazel-repo
 query --repository_cache=~/.cache/bazel-repo
 build --disk_cache=~/.cache/bazel-disk
 
+# force redownloading when repository URLs are changed. Otherwise, it's possible broken URLs can be masked
+# by the presence of a repository cache entry with the same hash.
+common --experimental_repository_cache_urls_as_default_canonical_id
+
 # To ensure Bazel builds consistently on windows.
 # See https://docs.bazel.build/versions/main/windows.html#enable-symlink-support
 startup --windows_enable_symlinks
