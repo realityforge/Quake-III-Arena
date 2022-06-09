@@ -9,11 +9,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 cc_library(
     name = "vorbis",
+    deps = [":vorbis_interface"],
+    implementation_deps = [":vorbis_impl"],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "vorbis_interface",
+    srcs = ["include/vorbis/codec.h"],
+    hdrs = ["include/vorbis/vorbisfile.h"],
+    includes = ["include"],
+    deps = ["@ogg"],
+)
+
+cc_library(
+    name = "vorbis_impl",
     srcs = [
-        "include/vorbis/codec.h",
         "include/vorbis/vorbisenc.h",
         "lib/analysis.c",
         "lib/backends.h",
@@ -80,7 +93,6 @@ cc_library(
         "lib/window.c",
         "lib/window.h",
     ],
-    hdrs = ["include/vorbis/vorbisfile.h"],
     copts = [
         "-Wno-unused-but-set-variable",
         "-Wno-unused-function",
@@ -90,6 +102,5 @@ cc_library(
         "include",
         "lib",
     ],
-    deps = ["@ogg"],
-    visibility = ["//visibility:public"],
+    deps = [":vorbis_interface"],
 )
