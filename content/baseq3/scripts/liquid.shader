@@ -1516,7 +1516,7 @@ textures/liquids/slime1
 
 		{
 			map textures/liquids/bubbles
-			blendfunc filter
+			blendfunc GL_ZERO GL_SRC_COLOR
 			tcMod turb .2 .1 .1 .2
 			tcMod scale .05 .05
 			tcMod scroll .001 .001
@@ -1565,7 +1565,7 @@ textures/liquids/slime1_2000
 
 		{
 			map textures/liquids/bubbles
-			blendfunc filter
+			blendfunc GL_ZERO GL_SRC_COLOR
 			tcMod turb .2 .1 .1 .2
 			tcMod scale .05 .05
 			tcMod scroll .001 .001
