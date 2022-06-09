@@ -151,6 +151,7 @@ cc_library(
         "jquant2.c",
         "jutils.c",
         "jversion.h",
+        "jpegint.h",
     ],
     hdrs = [
         "jccolext.c",  # should have been named .inc
@@ -158,7 +159,6 @@ cc_library(
         "jdcolext.c",  # should have been named .inc
         "jdmrg565.c",  # should have been named .inc
         "jdmrgext.c",  # should have been named .inc
-        "jpegint.h",
         "jstdhuff.c",  # should have been named .inc
     ],
     copts = libjpegturbo_copts,
