@@ -106,5 +106,5 @@ cc_library(
     name = "unzip_interface",
     hdrs = ["contrib/minizip/ioapi.h", "contrib/minizip/unzip.h"],
     includes = ["contrib/minizip"],
-    deps = [":zlib_interface"],
+    deps = [":zlib"],
 )
