@@ -21,6 +21,7 @@ java_library(
         "ClampMapStageDirective.java",
         "CullType.java",
         "DeformStageDirective.java",
+        "DepthFuncStageDirective.java",
         "EmitUtil.java",
         "FogDirective.java",
         "MapStageDirective.java",

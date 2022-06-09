@@ -65,6 +65,29 @@ public final class StageDirectiveTest
                     + "videoMap myvideo.roq\n"
                     + "}\n",
                   MaterialOutput.outputAsString( stage::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
+
+    assertFalse( stage.hasDepthFunc() );
+
+    stage.depthFunc().setEqual( true );
+
+    assertTrue( stage.hasDepthFunc() );
+
+    assertEquals( "{\n"
+                    + "  map *white\n"
+                    + "  clampmap textures/foo\n"
+                    + "  animMap .25 textures/foo1 textures/foo2\n"
+                    + "  videoMap myvideo.roq\n"
+                    + "  depthFunc equal\n"
+                    + "}\n",
+                  MaterialOutput.outputAsString( stage::write ) );
+    assertEquals( "{\n"
+                    + "map *white\n"
+                    + "clampmap textures/foo\n"
+                    + "animMap .25 textures/foo1 textures/foo2\n"
+                    + "videoMap myvideo.roq\n"
+                    + "depthFunc equal\n"
+                    + "}\n",
+                  MaterialOutput.outputAsString( stage::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
   }
 
   @Test
@@ -132,6 +155,16 @@ public final class StageDirectiveTest
     assertNotEquals( stage1.hashCode(), stage2.hashCode() );
 
     stage2.videoMap().setVideo( "movie.roq" );
+
+    assertEquals( stage1, stage2 );
+    assertEquals( stage1.hashCode(), stage2.hashCode() );
+
+    stage1.depthFunc().setEqual( true );
+
+    assertNotEquals( stage1, stage2 );
+    assertNotEquals( stage1.hashCode(), stage2.hashCode() );
+
+    stage2.depthFunc().setEqual( true );
 
     assertEquals( stage1, stage2 );
     assertEquals( stage1.hashCode(), stage2.hashCode() );

@@ -19,6 +19,7 @@ load(":model_test.bzl", _model_test = "model_test")
         "AutoSpriteDeformStageDirective",
         "BulgeDeformStageDirective",
         "ClampMapStageDirective",
+        "DepthFuncStageDirective",
         "Emit",
         "FogDirective",
         "MapStageDirective",
@@ -34,6 +35,7 @@ load(":model_test.bzl", _model_test = "model_test")
         "SunDirective",
         "TextDeformStageDirective",
         "Unit",
+        "VideoMapStageDirective",
         "WaveDeformStageDirective",
         "WaveForm",
     ]

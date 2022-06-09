@@ -88,6 +88,16 @@ material_magic_golden_test(
 )
 
 material_magic_golden_test(
+    name = "stage_depthfunc",
+    inputs = ["input.shader"],
+    materials = [
+        "textures/all_caps_equal",
+        "textures/equal",
+        "textures/lequal",
+    ],
+)
+
+material_magic_golden_test(
     name = "stage_map",
     inputs = ["input.shader"],
     materials = [
@@ -118,6 +128,7 @@ multirun(
         ":skyparms_update_goldens",
         ":stage_animmap_update_goldens",
         ":stage_clampmap_update_goldens",
+        ":stage_depthfunc_update_goldens",
         ":stage_map_update_goldens",
         ":stage_videomap_update_goldens",
         ":surfaceparm_update_goldens",

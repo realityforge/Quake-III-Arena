@@ -16,6 +16,8 @@ public final class Stage
   private AnimMapStageDirective _animMap;
   @Nullable
   private VideoMapStageDirective _videoMap;
+  @Nullable
+  private DepthFuncStageDirective _depthFunc;
 
   public boolean hasMap() { return null != _map && !_map.isDefault(); }
 
@@ -69,6 +71,19 @@ public final class Stage
 
   public void setVideoMap( @Nullable final VideoMapStageDirective videoMap ) { _videoMap = videoMap; }
 
+  public boolean hasDepthFunc() { return null != _depthFunc && !_depthFunc.isDefault(); }
+
+  @Nonnull
+  public DepthFuncStageDirective depthFunc()
+  {
+    if ( null == _depthFunc ) {
+      _depthFunc = new DepthFuncStageDirective();
+    }
+    return _depthFunc;
+  }
+
+  public void setDepthFunc( @Nullable final DepthFuncStageDirective depthFunc ) { _depthFunc = depthFunc; }
+
   /**
    * Write the material using the standard text serialization mechanisms to the specified output
    * object.
@@ -91,6 +106,9 @@ public final class Stage
       if ( hasVideoMap() ) {
         videoMap().write( o );
       }
+      if ( hasDepthFunc() ) {
+        depthFunc().write( o );
+      }
     } );
   }
 
@@ -106,7 +124,8 @@ public final class Stage
       return Objects.equals( hasMap() ? _map : null, that.hasMap() ? that._map : null ) &&
         Objects.equals( hasClampMap() ? _clampMap : null, that.hasClampMap() ? that._clampMap : null ) &&
         Objects.equals( hasAnimMap() ? _animMap : null, that.hasAnimMap() ? that._animMap : null ) &&
-        Objects.equals( hasVideoMap() ? _videoMap : null, that.hasVideoMap() ? that._videoMap : null );
+        Objects.equals( hasVideoMap() ? _videoMap : null, that.hasVideoMap() ? that._videoMap : null ) &&
+        Objects.equals( hasDepthFunc() ? _depthFunc : null, that.hasDepthFunc() ? that._depthFunc : null );
     }
   }
 
@@ -116,7 +135,8 @@ public final class Stage
     return Objects.hash( hasMap() ? _map : null,
                          hasClampMap() ? _clampMap : null,
                          hasAnimMap() ? _animMap : null,
-                         hasVideoMap() ? _videoMap : null );
+                         hasVideoMap() ? _videoMap : null,
+                         hasDepthFunc() ? _depthFunc : null );
   }
 
   @Nonnull

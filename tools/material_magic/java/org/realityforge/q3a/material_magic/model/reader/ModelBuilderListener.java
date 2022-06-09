@@ -398,6 +398,12 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   }
 
   @Override
+  public void exitDepthFuncStageDirective( @Nonnull final MaterialsParser.DepthFuncStageDirectiveContext ctx )
+  {
+    _stage.depthFunc().setEqual( null != ctx.EQUAL() );
+  }
+
+  @Override
   public void exitMaterial( @Nonnull final MaterialsParser.MaterialContext ctx )
   {
     final String text = ctx.name.getText();

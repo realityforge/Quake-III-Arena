@@ -90,8 +90,8 @@ stageDirective
     | clampMapStageDirective
     | animMapStageDirective
     | videoMapStageDirective
-// TODO: None of the following directives have model representations or are tested.
     | depthFuncStageDirective
+// TODO: None of the following directives have model representations or are tested.
     | detailStageDirective
     | blendFuncStageDirective
     | rgbGenStageDirective
