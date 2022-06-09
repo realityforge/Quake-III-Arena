@@ -37,6 +37,9 @@ build --disk_cache=~/.cache/bazel-disk
 # by the presence of a repository cache entry with the same hash.
 common --experimental_repository_cache_urls_as_default_canonical_id
 
+# Support implementation_deps attribute on cc_library
+common --experimental_cc_implementation_deps
+
 # To ensure Bazel builds consistently on windows.
 # See https://docs.bazel.build/versions/main/windows.html#enable-symlink-support
 startup --windows_enable_symlinks

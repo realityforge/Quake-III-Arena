@@ -218,7 +218,5 @@ cc_library(
         "//third_party/md4:md4_impl",
         "@libspng//:libspng_impl",
         "@opus",
-        "@zlib//:unzip_impl",
-        "@zlib//:zlib_impl",
     ],
 )

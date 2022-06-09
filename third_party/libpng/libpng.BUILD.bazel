@@ -22,11 +22,17 @@ _PNG_DEFINES = select({
 
 cc_library(
     name = "libpng",
+    deps = [":libpng_interface"],
+    implementation_deps = [":libpng_impl"],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "libpng_interface",
     srcs = ["pnglibconf.h"],
     hdrs = ["png.h", "pngconf.h"],
     defines = _PNG_DEFINES,
     includes = ["."],
-    visibility = ["//visibility:public"],
 )
 
 cc_library(
@@ -68,7 +74,7 @@ cc_library(
     copts = ["-Wno-unused-but-set-variable"],
     includes = ["."],
     visibility = ["//visibility:public"],
-    deps = [":libpng", "@zlib"] +
+    deps = [":libpng_interface", "@zlib"] +
            select({
                # Windows does not need math library
                "@org_realityforge_q3a//build_defs:windows": [],

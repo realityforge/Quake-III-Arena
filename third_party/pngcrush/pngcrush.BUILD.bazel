@@ -33,6 +33,6 @@ cc_binary(
         "@org_realityforge_q3a//third_party:math",
         "@libpng",
         "@libpng//:libpng_impl",
-        "@zlib//:zlib_impl",
+        "@zlib//:zlib",
     ],
 )
