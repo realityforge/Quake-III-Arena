@@ -22,6 +22,7 @@ java_library(
         "CullType.java",
         "DeformStageDirective.java",
         "DepthFuncStageDirective.java",
+        "DepthWriteStageDirective.java",
         "DetailStageDirective.java",
         "EmitUtil.java",
         "FogDirective.java",

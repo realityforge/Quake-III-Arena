@@ -7,6 +7,7 @@ import org.realityforge.q3a.material_magic.model.AutoSprite2DeformStageDirective
 import org.realityforge.q3a.material_magic.model.AutoSpriteDeformStageDirective;
 import org.realityforge.q3a.material_magic.model.BulgeDeformStageDirective;
 import org.realityforge.q3a.material_magic.model.CullType;
+import org.realityforge.q3a.material_magic.model.DepthWriteStageDirective;
 import org.realityforge.q3a.material_magic.model.DetailStageDirective;
 import org.realityforge.q3a.material_magic.model.FogDirective;
 import org.realityforge.q3a.material_magic.model.Material;
@@ -405,9 +406,15 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   }
 
   @Override
-  public void exitDetailStageDirective( final MaterialsParser.DetailStageDirectiveContext ctx )
+  public void exitDetailStageDirective( @Nonnull final MaterialsParser.DetailStageDirectiveContext ctx )
   {
     _stage.setDetail( new DetailStageDirective() );
+  }
+
+  @Override
+  public void exitDepthWriteStageDirective( @Nonnull final MaterialsParser.DepthWriteStageDirectiveContext ctx )
+  {
+    _stage.setDepthWrite( new DepthWriteStageDirective() );
   }
 
   @Override

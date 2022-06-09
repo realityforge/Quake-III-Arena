@@ -92,6 +92,7 @@ stageDirective
     | videoMapStageDirective
     | depthFuncStageDirective
     | detailStageDirective
+    | depthWriteStageDirective
 // TODO: None of the following directives have model representations or are tested.
     | blendFuncStageDirective
     | rgbGenStageDirective
@@ -99,7 +100,6 @@ stageDirective
     | alphaFuncStageDirective
     | tcGenStageDirective
     | tcModStageDirective
-    | depthWriteStageDirective
     ;
 
 mapStageDirective : MAP texture=(LABEL|STAR_WHITE);

@@ -90,6 +90,7 @@ public final class StageDirectiveTest
                   MaterialOutput.outputAsString( stage::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
 
     stage.setDetail( new DetailStageDirective() );
+
     assertEquals( "{\n"
                     + "  map *white\n"
                     + "  clampmap textures/foo\n"
@@ -106,6 +107,27 @@ public final class StageDirectiveTest
                     + "videoMap myvideo.roq\n"
                     + "depthFunc equal\n"
                     + "detail\n"
+                    + "}\n",
+                  MaterialOutput.outputAsString( stage::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
+
+    stage.setDepthWrite( new DepthWriteStageDirective() );
+
+    assertEquals( "{\n"
+                    + "  map *white\n"
+                    + "  clampmap textures/foo\n"
+                    + "  animMap .25 textures/foo1 textures/foo2\n"
+                    + "  videoMap myvideo.roq\n"
+                    + "  depthFunc equal\n"
+                    + "  depthWrite\n"
+                    + "}\n",
+                  MaterialOutput.outputAsString( stage::write ) );
+    assertEquals( "{\n"
+                    + "map *white\n"
+                    + "clampmap textures/foo\n"
+                    + "animMap .25 textures/foo1 textures/foo2\n"
+                    + "videoMap myvideo.roq\n"
+                    + "depthFunc equal\n"
+                    + "depthWrite\n"
                     + "}\n",
                   MaterialOutput.outputAsString( stage::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
   }
@@ -195,6 +217,16 @@ public final class StageDirectiveTest
     assertNotEquals( stage1.hashCode(), stage2.hashCode() );
 
     stage2.setDetail( new DetailStageDirective() );
+
+    assertEquals( stage1, stage2 );
+    assertEquals( stage1.hashCode(), stage2.hashCode() );
+
+    stage1.setDepthWrite( new DepthWriteStageDirective() );
+
+    assertNotEquals( stage1, stage2 );
+    assertNotEquals( stage1.hashCode(), stage2.hashCode() );
+
+    stage2.setDepthWrite( new DepthWriteStageDirective() );
 
     assertEquals( stage1, stage2 );
     assertEquals( stage1.hashCode(), stage2.hashCode() );

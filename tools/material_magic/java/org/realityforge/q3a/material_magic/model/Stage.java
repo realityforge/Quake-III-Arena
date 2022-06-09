@@ -20,6 +20,8 @@ public final class Stage
   private DepthFuncStageDirective _depthFunc;
   @Nullable
   private DetailStageDirective _detail;
+  @Nullable
+  private DepthWriteStageDirective _depthWrite;
 
   public boolean hasMap() { return null != _map && !_map.isDefault(); }
 
@@ -94,6 +96,14 @@ public final class Stage
 
   public void setDetail( @Nullable final DetailStageDirective detail ) { _detail = detail; }
 
+  @Nullable
+  public DepthWriteStageDirective getDepthWrite()
+  {
+    return _depthWrite;
+  }
+
+  public void setDepthWrite( @Nullable final DepthWriteStageDirective depthWrite ) { _depthWrite = depthWrite; }
+
   /**
    * Write the material using the standard text serialization mechanisms to the specified output
    * object.
@@ -122,6 +132,9 @@ public final class Stage
       if ( null != _detail ) {
         _detail.write( o );
       }
+      if ( null != _depthWrite ) {
+        _depthWrite.write( o );
+      }
     } );
   }
 
@@ -139,7 +152,7 @@ public final class Stage
         Objects.equals( hasAnimMap() ? _animMap : null, that.hasAnimMap() ? that._animMap : null ) &&
         Objects.equals( hasVideoMap() ? _videoMap : null, that.hasVideoMap() ? that._videoMap : null ) &&
         Objects.equals( hasDepthFunc() ? _depthFunc : null, that.hasDepthFunc() ? that._depthFunc : null ) &&
-        Objects.equals( _detail, that._detail );
+        Objects.equals( _detail, that._detail ) && Objects.equals( _depthWrite, that._depthWrite );
     }
   }
 
@@ -151,7 +164,8 @@ public final class Stage
                          hasAnimMap() ? _animMap : null,
                          hasVideoMap() ? _videoMap : null,
                          hasDepthFunc() ? _depthFunc : null,
-                         _detail );
+                         _detail,
+                         _depthWrite );
   }
 
   @Nonnull
