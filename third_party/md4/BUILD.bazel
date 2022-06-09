@@ -15,19 +15,21 @@ load("//build_defs:rules.bzl", "FULL_WARNINGS")
 
 cc_library(
     name = "md4",
+    implementation_deps = [":md4_impl"],
+    visibility = ["//code/qcommon:__pkg__"],
+    deps = [":md4_interface"],
+)
+
+cc_library(
+    name = "md4_interface",
     hdrs = ["md4.h"],
     copts = FULL_WARNINGS,
     includes = ["."],
-    visibility = ["//code/qcommon:__pkg__"],
 )
 
 cc_library(
     name = "md4_impl",
     srcs = ["md4.c"],
     copts = FULL_WARNINGS,
-    visibility = [
-        "//code/client:__pkg__",
-        "//code/server:__pkg__",
-    ],
-    deps = [":md4"],
+    deps = [":md4_interface"],
 )

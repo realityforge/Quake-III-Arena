@@ -215,7 +215,6 @@ cc_library(
         "//code/sys:sys_local",
         "//code/sys:sys_osx",
         "//code/sys:sys_unix",
-        "//third_party/md4:md4_impl",
         "@libspng//:libspng_impl",
         "@opus",
     ],

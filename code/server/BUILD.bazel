@@ -71,7 +71,6 @@ cc_library(
         "//code/sys:sys_local-dedicated",
         "//code/sys:sys_osx-dedicated",
         "//code/sys:sys_unix-dedicated",
-        "//third_party/md4:md4_impl",
         "@libspng//:libspng_impl",
     ],
 )
