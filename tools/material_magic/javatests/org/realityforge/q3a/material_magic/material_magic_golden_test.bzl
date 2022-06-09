@@ -11,7 +11,7 @@
 # limitations under the License.
 load("@bazel_skylib//rules:diff_test.bzl", "diff_test")
 
-def material_magic_golden_test(name, inputs, materials):
+def material_magic_golden_test(name, materials, inputs = ["input.shader"]):
     actual_inputs = ["scenarios/%s/input/%s" % (name, o) for o in inputs]
     pretty_output_dir = "output/%s/output/pretty" % name
     optimized_output_dir = "output/%s/output/optimized" % name
