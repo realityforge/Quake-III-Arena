@@ -14,6 +14,7 @@ load(":model_test.bzl", _model_test = "model_test")
 [
     _model_test(name = "%sTest" % t)
     for t in [
+        "AlphaFuncStageDirective",
         "AnimMapStageDirective",
         "AutoSprite2DeformStageDirective",
         "AutoSpriteDeformStageDirective",

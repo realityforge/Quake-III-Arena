@@ -2,6 +2,7 @@ package org.realityforge.q3a.material_magic.model.reader;
 
 import javax.annotation.Nonnull;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import org.realityforge.q3a.material_magic.model.AlphaFuncStageDirective;
 import org.realityforge.q3a.material_magic.model.AnimMapStageDirective;
 import org.realityforge.q3a.material_magic.model.AutoSprite2DeformStageDirective;
 import org.realityforge.q3a.material_magic.model.AutoSpriteDeformStageDirective;
@@ -415,6 +416,12 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   public void exitDepthWriteStageDirective( @Nonnull final MaterialsParser.DepthWriteStageDirectiveContext ctx )
   {
     _stage.setDepthWrite( new DepthWriteStageDirective() );
+  }
+
+  @Override
+  public void exitAlphaFuncStageDirective( @Nonnull final MaterialsParser.AlphaFuncStageDirectiveContext ctx )
+  {
+    _stage.alphaFunc().setFunc( AlphaFuncStageDirective.AlphaFunc.findByName( ctx.func.getText().toUpperCase() ) );
   }
 
   @Override

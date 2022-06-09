@@ -22,6 +22,8 @@ public final class Stage
   private DetailStageDirective _detail;
   @Nullable
   private DepthWriteStageDirective _depthWrite;
+  @Nullable
+  private AlphaFuncStageDirective _alphaFunc;
 
   public boolean hasMap() { return null != _map && !_map.isDefault(); }
 
@@ -104,6 +106,18 @@ public final class Stage
 
   public void setDepthWrite( @Nullable final DepthWriteStageDirective depthWrite ) { _depthWrite = depthWrite; }
 
+  public boolean hasAlphaFunc() { return null != _alphaFunc && !_alphaFunc.isDefault(); }
+  @Nonnull
+  public AlphaFuncStageDirective alphaFunc()
+  {
+    if ( null == _alphaFunc ) {
+      _alphaFunc = new AlphaFuncStageDirective();
+    }
+    return _alphaFunc;
+  }
+
+  public void setAlphaFunc( @Nullable final AlphaFuncStageDirective alphaFunc ) { _alphaFunc = alphaFunc; }
+
   /**
    * Write the material using the standard text serialization mechanisms to the specified output
    * object.
@@ -135,6 +149,9 @@ public final class Stage
       if ( null != _depthWrite ) {
         _depthWrite.write( o );
       }
+      if ( hasAlphaFunc() ) {
+        alphaFunc().write( o );
+      }
     } );
   }
 
@@ -152,7 +169,8 @@ public final class Stage
         Objects.equals( hasAnimMap() ? _animMap : null, that.hasAnimMap() ? that._animMap : null ) &&
         Objects.equals( hasVideoMap() ? _videoMap : null, that.hasVideoMap() ? that._videoMap : null ) &&
         Objects.equals( hasDepthFunc() ? _depthFunc : null, that.hasDepthFunc() ? that._depthFunc : null ) &&
-        Objects.equals( _detail, that._detail ) && Objects.equals( _depthWrite, that._depthWrite );
+        Objects.equals( _detail, that._detail ) && Objects.equals( _depthWrite, that._depthWrite ) &&
+        Objects.equals( hasAlphaFunc() ? _alphaFunc : null, that.hasAlphaFunc() ? that._alphaFunc : null );
     }
   }
 
@@ -165,7 +183,8 @@ public final class Stage
                          hasVideoMap() ? _videoMap : null,
                          hasDepthFunc() ? _depthFunc : null,
                          _detail,
-                         _depthWrite );
+                         _depthWrite,
+                         hasAlphaFunc() ? _alphaFunc : null );
   }
 
   @Nonnull

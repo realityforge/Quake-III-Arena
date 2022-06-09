@@ -64,6 +64,15 @@ material_magic_golden_test(
 )
 
 material_magic_golden_test(
+    name = "stage_alphafunc",
+    materials = [
+        "textures/gt0",
+        "textures/lt128",
+        "textures/ge128",
+    ],
+)
+
+material_magic_golden_test(
     name = "stage_animmap",
     materials = [
         "textures/anim1",
@@ -127,6 +136,7 @@ multirun(
         ":t2_update_goldens",
         ":material_name_update_goldens",
         ":skyparms_update_goldens",
+        ":stage_alphafunc_update_goldens",
         ":stage_animmap_update_goldens",
         ":stage_clampmap_update_goldens",
         ":stage_depthfunc_update_goldens",

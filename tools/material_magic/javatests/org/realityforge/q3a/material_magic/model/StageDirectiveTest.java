@@ -118,6 +118,7 @@ public final class StageDirectiveTest
                     + "  animMap .25 textures/foo1 textures/foo2\n"
                     + "  videoMap myvideo.roq\n"
                     + "  depthFunc equal\n"
+                    + "  detail\n"
                     + "  depthWrite\n"
                     + "}\n",
                   MaterialOutput.outputAsString( stage::write ) );
@@ -127,7 +128,36 @@ public final class StageDirectiveTest
                     + "animMap .25 textures/foo1 textures/foo2\n"
                     + "videoMap myvideo.roq\n"
                     + "depthFunc equal\n"
+                    + "detail\n"
                     + "depthWrite\n"
+                    + "}\n",
+                  MaterialOutput.outputAsString( stage::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
+
+    assertFalse( stage.hasAlphaFunc() );
+
+    stage.alphaFunc().setFunc( AlphaFuncStageDirective.AlphaFunc.GE128 );
+
+    assertTrue( stage.hasAlphaFunc() );
+    assertEquals( "{\n"
+                    + "  map *white\n"
+                    + "  clampmap textures/foo\n"
+                    + "  animMap .25 textures/foo1 textures/foo2\n"
+                    + "  videoMap myvideo.roq\n"
+                    + "  depthFunc equal\n"
+                    + "  detail\n"
+                    + "  depthWrite\n"
+                    + "  alphaFunc GE128\n"
+                    + "}\n",
+                  MaterialOutput.outputAsString( stage::write ) );
+    assertEquals( "{\n"
+                    + "map *white\n"
+                    + "clampmap textures/foo\n"
+                    + "animMap .25 textures/foo1 textures/foo2\n"
+                    + "videoMap myvideo.roq\n"
+                    + "depthFunc equal\n"
+                    + "detail\n"
+                    + "depthWrite\n"
+                    + "alphaFunc GE128\n"
                     + "}\n",
                   MaterialOutput.outputAsString( stage::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
   }
@@ -227,6 +257,16 @@ public final class StageDirectiveTest
     assertNotEquals( stage1.hashCode(), stage2.hashCode() );
 
     stage2.setDepthWrite( new DepthWriteStageDirective() );
+
+    assertEquals( stage1, stage2 );
+    assertEquals( stage1.hashCode(), stage2.hashCode() );
+
+    stage1.alphaFunc().setFunc( AlphaFuncStageDirective.AlphaFunc.GT0 );
+
+    assertNotEquals( stage1, stage2 );
+    assertNotEquals( stage1.hashCode(), stage2.hashCode() );
+
+    stage2.alphaFunc().setFunc( AlphaFuncStageDirective.AlphaFunc.GT0 );
 
     assertEquals( stage1, stage2 );
     assertEquals( stage1.hashCode(), stage2.hashCode() );
