@@ -68,6 +68,23 @@ expand_template(
 
 cc_library(
     name = "jpeg",
+    deps = [":jpeg_interface"],
+    implementation_deps = [":jpeg_impl"],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "jpeg_interface",
+    hdrs = [
+        "jconfig.h",
+        "jerror.h",
+        "jmorecfg.h",
+        "jpeglib.h",
+    ],
+)
+
+cc_library(
+    name = "jpeg_impl",
     srcs = [
         "jaricom.c",
         "jcapimin.c",
@@ -83,7 +100,6 @@ cc_library(
         "jcmarker.c",
         "jcmaster.c",
         "jcomapi.c",
-        "jconfig.h",
         "jconfigint.h",
         "jcparam.c",
         "jcphuff.c",
@@ -140,15 +156,11 @@ cc_library(
         "jdcolext.c",  # should have been named .inc
         "jdmrg565.c",  # should have been named .inc
         "jdmrgext.c",  # should have been named .inc
-        "jerror.h",
-        "jmorecfg.h",
         "jpegint.h",
-        "jpeglib.h",
         "jstdhuff.c",  # should have been named .inc
     ],
     copts = libjpegturbo_copts,
-    visibility = ["//visibility:public"],
-    deps = select({
+    deps = [":jpeg_interface"] + select({
         ":k8": [":simd_x86_64"],
         ":armeabi-v7a": [":simd_armv7a"],
         ":arm64-v8a": [":simd_armv8a"],
@@ -396,7 +408,6 @@ cc_library(
         "simd/arm/aarch32/jccolext-neon.c",
     ] + HDRS_SIMD_ARM,
     copts = libjpegturbo_copts,
-    visibility = ["//visibility:private"],
     deps = [":neon-compat_hdr"],
 )
 
@@ -410,7 +421,6 @@ cc_library(
         "simd/arm/aarch64/jccolext-neon.c",
     ] + HDRS_SIMD_ARM,
     copts = libjpegturbo_copts,
-    visibility = ["//visibility:private"],
     deps = [":neon-compat_hdr"],
 )
 
