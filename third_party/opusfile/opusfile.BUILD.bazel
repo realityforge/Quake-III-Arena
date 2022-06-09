@@ -11,6 +11,23 @@
 # limitations under the License.
 cc_library(
     name = "opusfile",
+    visibility = ["//visibility:public"],
+    deps = [":opusfile_interface"],
+    implementation_deps = [":opusfile_impl"],
+)
+
+cc_library(
+    name = "opusfile_interface",
+    hdrs = ["include/opusfile.h"],
+    includes = ["include"],
+    deps = [
+        "@ogg",
+        "@opus",
+    ],
+)
+
+cc_library(
+    name = "opusfile_impl",
     srcs = [
         "src/http.c",
         "src/info.c",
@@ -21,15 +38,9 @@ cc_library(
         "src/wincerts.c",
         "src/winerrno.h",
     ],
-    hdrs = ["include/opusfile.h"],
     copts = select({
         "@org_realityforge_q3a//build_defs:macos": [],
         "//conditions:default": ["-Wno-maybe-uninitialized"],
     }),
-    includes = ["include"],
-    visibility = ["//visibility:public"],
-    deps = [
-        "@ogg",
-        "@opus",
-    ],
+    deps = [":opusfile_interface"],
 )
