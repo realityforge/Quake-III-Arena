@@ -29,14 +29,26 @@ expand_template(
 
 cc_library(
     name = "ogg",
+    hdrs = ["include/ogg/ogg.h"],
+    deps = [":ogg_interface"],
+    implementation_deps = [":ogg_impl"],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "ogg_interface",
+    srcs = ["include/ogg/os_types.h"],
+    hdrs = ["include/ogg/ogg.h"],
+    includes = ["include"],
+)
+
+cc_library(
+    name = "ogg_impl",
     srcs = [
         ":config_types.h_gen",
-        "include/ogg/os_types.h",
         "src/bitwise.c",
         "src/crctable.h",
         "src/framing.c",
     ],
-    hdrs = ["include/ogg/ogg.h"],
-    includes = ["include"],
-    visibility = ["//visibility:public"],
+    deps = [":ogg_interface"],
 )
