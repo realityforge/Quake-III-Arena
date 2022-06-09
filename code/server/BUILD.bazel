@@ -71,6 +71,5 @@ cc_library(
         "//code/sys:sys_local-dedicated",
         "//code/sys:sys_osx-dedicated",
         "//code/sys:sys_unix-dedicated",
-        "@libspng//:libspng_impl",
     ],
 )

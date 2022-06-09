@@ -13,15 +13,20 @@ licenses(["notice"])  # BSD/MIT-like license
 
 cc_library(
     name = "libspng",
+    deps = [":libspng_interface"],
+    implementation_deps = [":libspng_impl"],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "libspng_interface",
     hdrs = ["spng/spng.h"],
     defines = ["SPNG_STATIC"],
     includes = ["spng"],
-    visibility = ["//visibility:public"],
 )
 
 cc_library(
     name = "libspng_impl",
     srcs = ["spng/spng.c"],
-    visibility = ["//visibility:public"],
-    deps = [":libspng", "@zlib"],
+    deps = [":libspng_interface", "@zlib"],
 )
