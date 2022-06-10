@@ -1,0 +1,6 @@
+textures/environment
+{
+  {
+    tcGen environment
+  }
+}

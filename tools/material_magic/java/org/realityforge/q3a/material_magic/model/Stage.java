@@ -26,6 +26,8 @@ public final class Stage
   private AlphaFuncStageDirective _alphaFunc;
   @Nullable
   private BlendFuncStageDirective _blendFunc;
+  @Nullable
+  private TcGenStageDirective _tcGen;
 
   public boolean hasMap() { return null != _map && !_map.isDefault(); }
 
@@ -132,6 +134,18 @@ public final class Stage
 
   public void setBlendFunc( @Nullable final BlendFuncStageDirective blendFunc ) { _blendFunc = blendFunc; }
 
+  public boolean hasTcGen() { return null != _tcGen && !_tcGen.isDefault(); }
+  @Nonnull
+  public TcGenStageDirective tcGen()
+  {
+    if ( null == _tcGen ) {
+      _tcGen = new TcGenStageDirective();
+    }
+    return _tcGen;
+  }
+
+  public void setTcGen( @Nullable final TcGenStageDirective tcGen ) { _tcGen = tcGen; }
+
   /**
    * Write the material using the standard text serialization mechanisms to the specified output
    * object.
@@ -169,6 +183,9 @@ public final class Stage
       if ( hasBlendFunc() ) {
         blendFunc().write( o );
       }
+      if ( hasTcGen() ) {
+        tcGen().write( o );
+      }
     } );
   }
 
@@ -188,7 +205,8 @@ public final class Stage
         Objects.equals( hasDepthFunc() ? _depthFunc : null, that.hasDepthFunc() ? that._depthFunc : null ) &&
         Objects.equals( _detail, that._detail ) && Objects.equals( _depthWrite, that._depthWrite ) &&
         Objects.equals( hasAlphaFunc() ? _alphaFunc : null, that.hasAlphaFunc() ? that._alphaFunc : null ) &&
-        Objects.equals( hasBlendFunc() ? _blendFunc : null, that.hasBlendFunc() ? that._blendFunc : null );
+        Objects.equals( hasBlendFunc() ? _blendFunc : null, that.hasBlendFunc() ? that._blendFunc : null ) &&
+        Objects.equals( hasTcGen() ? _tcGen : null, that.hasTcGen() ? that._tcGen : null );
     }
   }
 
@@ -203,7 +221,8 @@ public final class Stage
                          _detail,
                          _depthWrite,
                          hasAlphaFunc() ? _alphaFunc : null,
-                         hasBlendFunc() ? _blendFunc : null );
+                         hasBlendFunc() ? _blendFunc : null,
+                         hasTcGen() ? _tcGen : null );
   }
 
   @Nonnull

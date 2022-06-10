@@ -1,0 +1,6 @@
+textures/lightmap
+{
+{
+tcGen lightmap
+}
+}

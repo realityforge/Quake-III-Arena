@@ -95,10 +95,10 @@ stageDirective
     | depthWriteStageDirective
     | alphaFuncStageDirective
     | blendFuncStageDirective
+    | tcGenStageDirective
 // TODO: None of the following directives have model representations or are tested.
     | rgbGenStageDirective
     | alphaGenStageDirective
-    | tcGenStageDirective
     | tcModStageDirective
     ;
 
@@ -113,7 +113,7 @@ rgbGenStageDirective : RGBGEN (IDENTITY|IDENTITYLIGHTING|ENTITY|ONEMINUSENTITY|V
 alphaFuncStageDirective : ALPHAFUNC func=(GT0|LT128|GE128);
 alphaGenStageDirective : ALPHAGEN (alphaGenLightingSpecularStageDirective|alphaGenWaveStageDirective|alphaGenVertexStageDirective|alphaGenEntityStageDirective|alphaGenPortalStageDirective);
 // Note: The tcGen "vector" coordinateSource is not currently supported as no media in the game used that capability
-tcGenStageDirective : TCGEN (BASE|LIGHTMAP|ENVIRONMENT);
+tcGenStageDirective : TCGEN coordinateSource=(BASE|LIGHTMAP|ENVIRONMENT);
 tcModStageDirective : TCMOD (tcModRotateStageDirective|tcModScaleStageDirective|tcModScrollStageDirective|tcModStretchStageDirective|tcModTransformStageDirective|tcModTurbStageDirective);
 depthWriteStageDirective : DEPTHWRITE ;
 

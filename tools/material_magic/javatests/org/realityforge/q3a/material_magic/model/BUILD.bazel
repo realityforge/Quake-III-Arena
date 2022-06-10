@@ -37,6 +37,7 @@ load(":model_test.bzl", _model_test = "model_test")
         "SortDirective",
         "StageDirective",
         "SunDirective",
+        "TcGenStageDirective",
         "TextDeformStageDirective",
         "Unit",
         "VideoMapStageDirective",

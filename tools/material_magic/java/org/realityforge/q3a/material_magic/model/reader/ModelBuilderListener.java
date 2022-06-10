@@ -22,6 +22,7 @@ import org.realityforge.q3a.material_magic.model.SortKey;
 import org.realityforge.q3a.material_magic.model.Stage;
 import org.realityforge.q3a.material_magic.model.SunDirective;
 import org.realityforge.q3a.material_magic.model.SurfaceParameter;
+import org.realityforge.q3a.material_magic.model.TcGenStageDirective;
 import org.realityforge.q3a.material_magic.model.TextDeformStageDirective;
 import org.realityforge.q3a.material_magic.model.Unit;
 import org.realityforge.q3a.material_magic.model.WaveDeformStageDirective;
@@ -463,6 +464,15 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
 
         break;
     }
+  }
+
+  @Override
+  public void exitTcGenStageDirective( @Nonnull final MaterialsParser.TcGenStageDirectiveContext ctx )
+  {
+    final TcGenStageDirective.CoordinateSource coordinateSource =
+      TcGenStageDirective.CoordinateSource.findByName( ctx.coordinateSource.getText().toUpperCase() );
+    assert null != coordinateSource;
+    _stage.tcGen().setCoordinateSource( coordinateSource );
   }
 
   @Override
