@@ -6,6 +6,7 @@ import org.realityforge.q3a.material_magic.model.AlphaFuncStageDirective;
 import org.realityforge.q3a.material_magic.model.AnimMapStageDirective;
 import org.realityforge.q3a.material_magic.model.AutoSprite2DeformStageDirective;
 import org.realityforge.q3a.material_magic.model.AutoSpriteDeformStageDirective;
+import org.realityforge.q3a.material_magic.model.BlendFuncStageDirective;
 import org.realityforge.q3a.material_magic.model.BulgeDeformStageDirective;
 import org.realityforge.q3a.material_magic.model.CullType;
 import org.realityforge.q3a.material_magic.model.DepthWriteStageDirective;
@@ -422,6 +423,46 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   public void exitAlphaFuncStageDirective( @Nonnull final MaterialsParser.AlphaFuncStageDirectiveContext ctx )
   {
     _stage.alphaFunc().setFunc( AlphaFuncStageDirective.AlphaFunc.findByName( ctx.func.getText().toUpperCase() ) );
+  }
+
+  @Override
+  public void exitBlendFuncStageDirective( @Nonnull final MaterialsParser.BlendFuncStageDirectiveContext ctx )
+  {
+    final BlendFuncStageDirective directive = _stage.blendFunc();
+    final String srcName = ctx.srcBlend.getText().toUpperCase();
+    switch ( srcName ) {
+      case "ADD":
+        directive.setSrcBlend( BlendFuncStageDirective.SrcBlendMode.ONE );
+        directive.setDstBlend( BlendFuncStageDirective.DstBlendMode.ONE );
+        break;
+      case "BLEND":
+        directive.setSrcBlend( BlendFuncStageDirective.SrcBlendMode.SRC_ALPHA );
+        directive.setDstBlend( BlendFuncStageDirective.DstBlendMode.ONE_MINUS_SRC_ALPHA );
+        break;
+      case "FILTER":
+        directive.setSrcBlend( BlendFuncStageDirective.SrcBlendMode.DST_COLOR );
+        directive.setDstBlend( BlendFuncStageDirective.DstBlendMode.ZERO );
+        break;
+      default:
+
+        final BlendFuncStageDirective.SrcBlendMode srcBlend =
+          srcName.startsWith( "GL_" ) ? BlendFuncStageDirective.SrcBlendMode.findByName( srcName.substring( 3 ) )
+                                      : null;
+        if ( null == srcBlend ) {
+          throw new IllegalStateException( "Unhandled srcBlend value " + srcName );
+        }
+        final String dstName = ctx.dstBlend.getText().toUpperCase();
+        final BlendFuncStageDirective.DstBlendMode dstBlend =
+          dstName.startsWith( "GL_" ) ? BlendFuncStageDirective.DstBlendMode.findByName( dstName.substring( 3 ) )
+                                      : null;
+        if ( null == dstBlend ) {
+          throw new IllegalStateException( "Unhandled dstBlend value " + dstName );
+        }
+        directive.setSrcBlend( srcBlend );
+        directive.setDstBlend( dstBlend );
+
+        break;
+    }
   }
 
   @Override

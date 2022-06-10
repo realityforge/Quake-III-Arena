@@ -1,0 +1,6 @@
+textures/blend
+{
+{
+blendFunc blend
+}
+}

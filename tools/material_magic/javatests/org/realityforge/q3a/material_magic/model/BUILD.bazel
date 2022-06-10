@@ -18,6 +18,7 @@ load(":model_test.bzl", _model_test = "model_test")
         "AnimMapStageDirective",
         "AutoSprite2DeformStageDirective",
         "AutoSpriteDeformStageDirective",
+        "BlendFuncStageDirective",
         "BulgeDeformStageDirective",
         "ClampMapStageDirective",
         "DepthFuncStageDirective",

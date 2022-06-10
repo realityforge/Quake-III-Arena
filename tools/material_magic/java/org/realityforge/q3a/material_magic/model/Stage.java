@@ -24,6 +24,8 @@ public final class Stage
   private DepthWriteStageDirective _depthWrite;
   @Nullable
   private AlphaFuncStageDirective _alphaFunc;
+  @Nullable
+  private BlendFuncStageDirective _blendFunc;
 
   public boolean hasMap() { return null != _map && !_map.isDefault(); }
 
@@ -118,6 +120,18 @@ public final class Stage
 
   public void setAlphaFunc( @Nullable final AlphaFuncStageDirective alphaFunc ) { _alphaFunc = alphaFunc; }
 
+  public boolean hasBlendFunc() { return null != _blendFunc && !_blendFunc.isDefault(); }
+  @Nonnull
+  public BlendFuncStageDirective blendFunc()
+  {
+    if ( null == _blendFunc ) {
+      _blendFunc = new BlendFuncStageDirective();
+    }
+    return _blendFunc;
+  }
+
+  public void setBlendFunc( @Nullable final BlendFuncStageDirective blendFunc ) { _blendFunc = blendFunc; }
+
   /**
    * Write the material using the standard text serialization mechanisms to the specified output
    * object.
@@ -152,6 +166,9 @@ public final class Stage
       if ( hasAlphaFunc() ) {
         alphaFunc().write( o );
       }
+      if ( hasBlendFunc() ) {
+        blendFunc().write( o );
+      }
     } );
   }
 
@@ -170,7 +187,8 @@ public final class Stage
         Objects.equals( hasVideoMap() ? _videoMap : null, that.hasVideoMap() ? that._videoMap : null ) &&
         Objects.equals( hasDepthFunc() ? _depthFunc : null, that.hasDepthFunc() ? that._depthFunc : null ) &&
         Objects.equals( _detail, that._detail ) && Objects.equals( _depthWrite, that._depthWrite ) &&
-        Objects.equals( hasAlphaFunc() ? _alphaFunc : null, that.hasAlphaFunc() ? that._alphaFunc : null );
+        Objects.equals( hasAlphaFunc() ? _alphaFunc : null, that.hasAlphaFunc() ? that._alphaFunc : null ) &&
+        Objects.equals( hasBlendFunc() ? _blendFunc : null, that.hasBlendFunc() ? that._blendFunc : null );
     }
   }
 
@@ -184,7 +202,8 @@ public final class Stage
                          hasDepthFunc() ? _depthFunc : null,
                          _detail,
                          _depthWrite,
-                         hasAlphaFunc() ? _alphaFunc : null );
+                         hasAlphaFunc() ? _alphaFunc : null,
+                         hasBlendFunc() ? _blendFunc : null );
   }
 
   @Nonnull

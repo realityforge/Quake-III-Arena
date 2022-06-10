@@ -18,6 +18,7 @@ java_library(
         "AnimMapStageDirective.java",
         "AutoSprite2DeformStageDirective.java",
         "AutoSpriteDeformStageDirective.java",
+        "BlendFuncStageDirective.java",
         "BulgeDeformStageDirective.java",
         "ClampMapStageDirective.java",
         "CullType.java",

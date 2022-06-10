@@ -160,6 +160,38 @@ public final class StageDirectiveTest
                     + "alphaFunc GE128\n"
                     + "}\n",
                   MaterialOutput.outputAsString( stage::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
+
+    assertFalse( stage.hasBlendFunc() );
+
+    stage.blendFunc().setSrcBlend( BlendFuncStageDirective.SrcBlendMode.ONE );
+    stage.blendFunc().setDstBlend( BlendFuncStageDirective.DstBlendMode.ONE );
+
+    assertTrue( stage.hasBlendFunc() );
+
+    assertEquals( "{\n"
+                    + "  map *white\n"
+                    + "  clampmap textures/foo\n"
+                    + "  animMap .25 textures/foo1 textures/foo2\n"
+                    + "  videoMap myvideo.roq\n"
+                    + "  depthFunc equal\n"
+                    + "  detail\n"
+                    + "  depthWrite\n"
+                    + "  alphaFunc GE128\n"
+                    + "  blendFunc add\n"
+                    + "}\n",
+                  MaterialOutput.outputAsString( stage::write ) );
+    assertEquals( "{\n"
+                    + "map *white\n"
+                    + "clampmap textures/foo\n"
+                    + "animMap .25 textures/foo1 textures/foo2\n"
+                    + "videoMap myvideo.roq\n"
+                    + "depthFunc equal\n"
+                    + "detail\n"
+                    + "depthWrite\n"
+                    + "alphaFunc GE128\n"
+                    + "blendFunc add\n"
+                    + "}\n",
+                  MaterialOutput.outputAsString( stage::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
   }
 
   @Test
@@ -267,6 +299,18 @@ public final class StageDirectiveTest
     assertNotEquals( stage1.hashCode(), stage2.hashCode() );
 
     stage2.alphaFunc().setFunc( AlphaFuncStageDirective.AlphaFunc.GT0 );
+
+    assertEquals( stage1, stage2 );
+    assertEquals( stage1.hashCode(), stage2.hashCode() );
+
+    stage1.blendFunc().setSrcBlend( BlendFuncStageDirective.SrcBlendMode.ONE );
+    stage1.blendFunc().setDstBlend( BlendFuncStageDirective.DstBlendMode.ONE );
+
+    assertNotEquals( stage1, stage2 );
+    assertNotEquals( stage1.hashCode(), stage2.hashCode() );
+
+    stage2.blendFunc().setSrcBlend( BlendFuncStageDirective.SrcBlendMode.ONE );
+    stage2.blendFunc().setDstBlend( BlendFuncStageDirective.DstBlendMode.ONE );
 
     assertEquals( stage1, stage2 );
     assertEquals( stage1.hashCode(), stage2.hashCode() );

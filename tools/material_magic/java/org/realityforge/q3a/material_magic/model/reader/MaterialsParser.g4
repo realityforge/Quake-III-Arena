@@ -94,8 +94,8 @@ stageDirective
     | detailStageDirective
     | depthWriteStageDirective
     | alphaFuncStageDirective
-// TODO: None of the following directives have model representations or are tested.
     | blendFuncStageDirective
+// TODO: None of the following directives have model representations or are tested.
     | rgbGenStageDirective
     | alphaGenStageDirective
     | tcGenStageDirective

@@ -87,6 +87,35 @@ material_magic_golden_test(
 )
 
 material_magic_golden_test(
+    name = "stage_blendfunc",
+    materials = [
+        "textures/add",
+        "textures/add2",
+        "textures/filter",
+        "textures/filter2",
+        "textures/blend",
+        "textures/blend2",
+        "textures/one__one",
+        "textures/zero__one",
+        "textures/dst_zero__one",
+        "textures/dst_color__one",
+        "textures/one_minus_dst_color__one",
+        "textures/src_alpha__one",
+        "textures/one_minus_src_alpha__one",
+        "textures/dst_alpha__one",
+        "textures/one_minus_dst_alpha__one",
+        "textures/src_alpha_saturate__one",
+        "textures/one__zero",
+        "textures/one__src_alpha",
+        "textures/one__one_minus_src_alpha",
+        "textures/one__dst_alpha",
+        "textures/one__src_color",
+        "textures/one__one_minus_src_color",
+        "textures/one__one_minus_dst_alpha",
+    ],
+)
+
+material_magic_golden_test(
     name = "stage_clampmap",
     materials = ["textures/image"],
 )
@@ -138,6 +167,7 @@ multirun(
         ":skyparms_update_goldens",
         ":stage_alphafunc_update_goldens",
         ":stage_animmap_update_goldens",
+        ":stage_blendfunc_update_goldens",
         ":stage_clampmap_update_goldens",
         ":stage_depthfunc_update_goldens",
         ":stage_depthwrite_update_goldens",
