@@ -38,6 +38,6 @@ public final class WaveDeformStageDirective extends DeformStageDirective<WaveDef
   @Override
   public int hashCode()
   {
-    return Objects.hash( "move", _spread, _wave );
+    return Objects.hash( "wave", _spread, _wave );
   }
 }
