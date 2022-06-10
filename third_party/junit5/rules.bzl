@@ -22,7 +22,7 @@ def junit5_test(name, srcs, test_package, deps = [], runtime_deps = [], **kwargs
         if arg in kwargs.keys():
             kwargs.pop(arg)
 
-    junit_console_args = []
+    junit_console_args = ["--disable-ansi-colors", "--disable-banner", "--fail-if-no-tests"]
     if test_package:
         junit_console_args += ["--select-package", test_package]
     else:
