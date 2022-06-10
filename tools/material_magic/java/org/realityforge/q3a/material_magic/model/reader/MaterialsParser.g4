@@ -109,13 +109,22 @@ videoMapStageDirective : VIDEOMAP video=LABEL;
 depthFuncStageDirective : DEPTHFUNC (EQUAL|LEQUAL);
 detailStageDirective : DETAIL;
 blendFuncStageDirective : BLENDFUNC srcBlend=LABEL dstBlend=LABEL?;
-rgbGenStageDirective : RGBGEN (IDENTITY|IDENTITYLIGHTING|ENTITY|ONEMINUSENTITY|VERTEX|EXACTVERTEX|LIGHTINGDIFFUSE|WAVE waveForm);
+rgbGenStageDirective : RGBGEN (rgbGenIdentityStageDirective|rgbGenIdentityLightingStageDirective|rgbGenEntityStageDirective|rgbGenOneMinusEntityStageDirective|rgbGenVertexStageDirective|rgbGenExactVertexStageDirective|rgbGenLightingDiffuseStageDirective|rgbGenWaveStageDirective);
 alphaFuncStageDirective : ALPHAFUNC func=(GT0|LT128|GE128);
 alphaGenStageDirective : ALPHAGEN (alphaGenLightingSpecularStageDirective|alphaGenWaveStageDirective|alphaGenVertexStageDirective|alphaGenEntityStageDirective|alphaGenPortalStageDirective);
 // Note: The tcGen "vector" coordinateSource is not currently supported as no media in the game used that capability
 tcGenStageDirective : TCGEN coordinateSource=(BASE|LIGHTMAP|ENVIRONMENT);
 tcModStageDirective : TCMOD (tcModRotateStageDirective|tcModScaleStageDirective|tcModScrollStageDirective|tcModStretchStageDirective|tcModTransformStageDirective|tcModTurbStageDirective);
 depthWriteStageDirective : DEPTHWRITE ;
+
+rgbGenIdentityStageDirective : IDENTITY;
+rgbGenIdentityLightingStageDirective : IDENTITYLIGHTING;
+rgbGenEntityStageDirective : ENTITY;
+rgbGenOneMinusEntityStageDirective : ONEMINUSENTITY;
+rgbGenVertexStageDirective : VERTEX;
+rgbGenExactVertexStageDirective : EXACTVERTEX;
+rgbGenLightingDiffuseStageDirective : LIGHTINGDIFFUSE;
+rgbGenWaveStageDirective : WAVE waveForm;
 
 alphaGenLightingSpecularStageDirective : LIGHTINGSPECULAR;
 alphaGenWaveStageDirective : WAVE waveForm;
