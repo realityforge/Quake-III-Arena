@@ -96,8 +96,8 @@ stageDirective
     | alphaFuncStageDirective
     | blendFuncStageDirective
     | tcGenStageDirective
-// TODO: None of the following directives have model representations or are tested.
     | rgbGenStageDirective
+// TODO: None of the following directives have model representations or are tested.
     | alphaGenStageDirective
     | tcModStageDirective
     ;

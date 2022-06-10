@@ -27,6 +27,8 @@ public final class Stage
   @Nullable
   private BlendFuncStageDirective _blendFunc;
   @Nullable
+  private RgbGenStageDirective _rgbGen;
+  @Nullable
   private TcGenStageDirective _tcGen;
 
   public boolean hasMap() { return null != _map && !_map.isDefault(); }
@@ -134,6 +136,18 @@ public final class Stage
 
   public void setBlendFunc( @Nullable final BlendFuncStageDirective blendFunc ) { _blendFunc = blendFunc; }
 
+  public boolean hasRgbGen() { return null != _rgbGen && !_rgbGen.isDefault(); }
+  @Nonnull
+  public RgbGenStageDirective rgbGen()
+  {
+    if ( null == _rgbGen ) {
+      _rgbGen = new RgbGenStageDirective();
+    }
+    return _rgbGen;
+  }
+
+  public void setRgbGen( @Nullable final RgbGenStageDirective rgbGen ) { _rgbGen = rgbGen; }
+
   public boolean hasTcGen() { return null != _tcGen && !_tcGen.isDefault(); }
   @Nonnull
   public TcGenStageDirective tcGen()
@@ -186,6 +200,9 @@ public final class Stage
       if ( hasTcGen() ) {
         tcGen().write( o );
       }
+      if ( hasRgbGen() ) {
+        rgbGen().write( o );
+      }
     } );
   }
 
@@ -206,6 +223,7 @@ public final class Stage
         Objects.equals( _detail, that._detail ) && Objects.equals( _depthWrite, that._depthWrite ) &&
         Objects.equals( hasAlphaFunc() ? _alphaFunc : null, that.hasAlphaFunc() ? that._alphaFunc : null ) &&
         Objects.equals( hasBlendFunc() ? _blendFunc : null, that.hasBlendFunc() ? that._blendFunc : null ) &&
+        Objects.equals( hasRgbGen() ? _rgbGen : null, that.hasRgbGen() ? that._rgbGen : null ) &&
         Objects.equals( hasTcGen() ? _tcGen : null, that.hasTcGen() ? that._tcGen : null );
     }
   }
@@ -222,6 +240,7 @@ public final class Stage
                          _depthWrite,
                          hasAlphaFunc() ? _alphaFunc : null,
                          hasBlendFunc() ? _blendFunc : null,
+                         hasRgbGen() ? _rgbGen : null,
                          hasTcGen() ? _tcGen : null );
   }
 

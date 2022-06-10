@@ -148,6 +148,20 @@ material_magic_golden_test(
 )
 
 material_magic_golden_test(
+    name = "stage_rgbgen",
+    materials = [
+        "textures/identity",
+        "textures/identity_lighting",
+        "textures/vertex",
+        "textures/exact_vertex",
+        "textures/entity",
+        "textures/one_minus_entity",
+        "textures/lighting_diffuse",
+        "textures/wave",
+    ],
+)
+
+material_magic_golden_test(
     name = "stage_tcgen",
     materials = [
         "textures/base",
@@ -182,6 +196,7 @@ multirun(
         ":stage_depthwrite_update_goldens",
         ":stage_detail_update_goldens",
         ":stage_map_update_goldens",
+        ":stage_rgbgen_update_goldens",
         ":stage_tcgen_update_goldens",
         ":stage_videomap_update_goldens",
         ":surfaceparm_update_goldens",

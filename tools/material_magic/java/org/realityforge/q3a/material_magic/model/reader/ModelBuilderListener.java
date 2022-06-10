@@ -16,6 +16,7 @@ import org.realityforge.q3a.material_magic.model.Material;
 import org.realityforge.q3a.material_magic.model.MoveDeformStageDirective;
 import org.realityforge.q3a.material_magic.model.NormalDeformStageDirective;
 import org.realityforge.q3a.material_magic.model.ProjectionShadowDeformStageDirective;
+import org.realityforge.q3a.material_magic.model.RgbGenStageDirective;
 import org.realityforge.q3a.material_magic.model.SkyDirective;
 import org.realityforge.q3a.material_magic.model.SortDirective;
 import org.realityforge.q3a.material_magic.model.SortKey;
@@ -473,6 +474,61 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
       TcGenStageDirective.CoordinateSource.findByName( ctx.coordinateSource.getText().toUpperCase() );
     assert null != coordinateSource;
     _stage.tcGen().setCoordinateSource( coordinateSource );
+  }
+
+  @Override
+  public void exitRgbGenIdentityStageDirective( @Nonnull final MaterialsParser.RgbGenIdentityStageDirectiveContext ctx )
+  {
+    _stage.rgbGen().setFunc( RgbGenStageDirective.Func.identity );
+  }
+
+  @Override
+  public void exitRgbGenIdentityLightingStageDirective(
+    @Nonnull final MaterialsParser.RgbGenIdentityLightingStageDirectiveContext ctx )
+  {
+    _stage.rgbGen().setFunc( RgbGenStageDirective.Func.identityLighting );
+  }
+
+  @Override
+  public void exitRgbGenEntityStageDirective( @Nonnull final MaterialsParser.RgbGenEntityStageDirectiveContext ctx )
+  {
+    _stage.rgbGen().setFunc( RgbGenStageDirective.Func.entity );
+  }
+
+  @Override
+  public void exitRgbGenOneMinusEntityStageDirective(
+    @Nonnull final MaterialsParser.RgbGenOneMinusEntityStageDirectiveContext ctx )
+  {
+    _stage.rgbGen().setFunc( RgbGenStageDirective.Func.oneMinusEntity );
+  }
+
+  @Override
+  public void exitRgbGenVertexStageDirective( @Nonnull final MaterialsParser.RgbGenVertexStageDirectiveContext ctx )
+  {
+    _stage.rgbGen().setFunc( RgbGenStageDirective.Func.vertex );
+  }
+
+  @Override
+  public void exitRgbGenExactVertexStageDirective(
+    @Nonnull final MaterialsParser.RgbGenExactVertexStageDirectiveContext ctx )
+  {
+    _stage.rgbGen().setFunc( RgbGenStageDirective.Func.exactVertex );
+  }
+
+  @Override
+  public void exitRgbGenLightingDiffuseStageDirective(
+    @Nonnull final MaterialsParser.RgbGenLightingDiffuseStageDirectiveContext ctx )
+  {
+    _stage.rgbGen().setFunc( RgbGenStageDirective.Func.lightingDiffuse );
+  }
+
+  @Override
+  public void exitRgbGenWaveStageDirective( @Nonnull final MaterialsParser.RgbGenWaveStageDirectiveContext ctx )
+  {
+    _stage.rgbGen().setFunc( RgbGenStageDirective.Func.wave );
+    final WaveForm wave = new WaveForm();
+    _stage.rgbGen().setWave( wave );
+    extractWaveForm( ctx.waveForm(), wave );
   }
 
   @Override

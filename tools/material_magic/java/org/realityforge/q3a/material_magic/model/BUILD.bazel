@@ -35,6 +35,7 @@ java_library(
         "ProjectionShadowDeformStageDirective.java",
         "Q3mapDirectives.java",
         "QerDirectives.java",
+        "RgbGenStageDirective.java",
         "SkyDirective.java",
         "SortDirective.java",
         "SortKey.java",
