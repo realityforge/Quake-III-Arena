@@ -98,7 +98,6 @@ stageDirective
     | tcGenStageDirective
     | rgbGenStageDirective
     | alphaGenStageDirective
-// TODO: None of the following directives have model representations or are tested.
     | tcModStageDirective
     ;
 
@@ -132,6 +131,7 @@ alphaGenVertexStageDirective : VERTEX;
 alphaGenEntityStageDirective : ENTITY;
 alphaGenPortalStageDirective : PORTAL portalRange=number;
 
+// TODO: None of the following directives have model representations or are tested.
 tcModRotateStageDirective : ROTATE degreesPerSecond=number;
 tcModScaleStageDirective : SCALE sScale=number tScale=number;
 tcModScrollStageDirective : SCROLL sSpeed=number tSpeed=number;
