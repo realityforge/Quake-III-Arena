@@ -10,7 +10,7 @@ For example, the "shader files" **MUST** be contained within the `scripts/` dire
 
 "Pure" servers are those who set the cvar `sv_pure` to `1`. In a pure server, the clients and the server must load assets from `*.pk3` files and the set of `*.pk3` files must "match". The "matching" is done using a content hash and thus if a `*.pk3` is modified on a client (by changing a file within it), then the `*.pk3` will no longer match the server file.
 
-Q3A does not explicitly track dependencies between assets. It is up to the developer to track the relationships between assets and ensure that no unused assets are present and that all required assets are present. This has proved problematic and as a result there are numerous "broken" assets and/or unused assets that are shipped with the game.
+Q3A does not explicitly track dependencies between assets. It is up to the developer to track the relationships between assets and ensure that unused assets are omitted and that all required assets are present. This has proved problematic and as a result there are numerous "broken" assets and/or unused assets that are shipped with the game.
 
 Examples of inter-asset dependencies:
 * A "shader file" may reference one or more textures.
