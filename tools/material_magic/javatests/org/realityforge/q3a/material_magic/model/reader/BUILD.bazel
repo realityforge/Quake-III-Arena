@@ -15,7 +15,7 @@ junit5_test(
     name = "MaterialsParserTest",
     size = "small",
     srcs = ["MaterialsParserTest.java"],
-    test_package = "org.realityforge.q3a.material_magic.model.reader",
+    test_class = "org.realityforge.q3a.material_magic.model.reader.MaterialsParserTest",
     deps = [
         "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader:parser",
         "@antlr4_runtime//jar",
@@ -23,10 +23,10 @@ junit5_test(
 )
 
 junit5_test(
-    name = "MaterialsUnitReaderTest",
+    name = "UnitReaderTest",
     size = "small",
     srcs = ["UnitReaderTest.java"],
-    test_package = "org.realityforge.q3a.material_magic.model.reader",
+    test_class = "org.realityforge.q3a.material_magic.model.reader.UnitReaderTest",
     deps = [
         "//tools/material_magic/java/org/realityforge/q3a/material_magic/model",
         "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader",

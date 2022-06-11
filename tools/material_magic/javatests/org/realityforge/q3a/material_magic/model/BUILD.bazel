@@ -9,10 +9,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-load(":model_test.bzl", _model_test = "model_test")
+load("//third_party/junit5:rules.bzl", "junit5_test")
 
 [
-    _model_test(name = "%sTest" % t)
+    junit5_test(
+        name = "%sTest" % t,
+        size = "small",
+        srcs = ["%sTest.java" % t],
+        test_class = "org.realityforge.q3a.material_magic.model.%sTest" % t,
+        deps = [
+            "//third_party/java:javax_annotation",
+            "//tools/material_magic/java/org/realityforge/q3a/material_magic/model",
+            "//tools/material_magic/java/org/realityforge/q3a/material_magic/util:MaterialOutput",
+        ],
+    )
     for t in [
         "AlphaFuncStageDirective",
         "AlphaGenStageDirective",

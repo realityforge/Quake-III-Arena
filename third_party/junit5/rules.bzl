@@ -11,7 +11,7 @@
 # limitations under the License.
 load("@rules_java//java:defs.bzl", _java_test = "java_test")
 
-def junit5_test(name, srcs, test_package, deps = [], runtime_deps = [], **kwargs):
+def junit5_test(name, srcs, test_class, deps = [], runtime_deps = [], **kwargs):
     FILTER_KWARGS = [
         "main_class",
         "use_testrunner",
@@ -23,10 +23,10 @@ def junit5_test(name, srcs, test_package, deps = [], runtime_deps = [], **kwargs
             kwargs.pop(arg)
 
     junit_console_args = ["--disable-ansi-colors", "--disable-banner", "--fail-if-no-tests", "--details=none"]
-    if test_package:
-        junit_console_args += ["--select-package", test_package]
+    if test_class:
+        junit_console_args += ["--select-class", test_class]
     else:
-        fail("must specify 'test_package'")
+        fail("must specify 'test_class'")
 
     _java_test(
         name = name,

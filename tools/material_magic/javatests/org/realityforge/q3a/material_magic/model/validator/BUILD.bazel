@@ -9,13 +9,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-load("//third_party/junit5:rules.bzl", _junit5_test = "junit5_test")
+load("//third_party/junit5:rules.bzl", "junit5_test")
 
-_junit5_test(
+junit5_test(
     name = "ValidatorTest",
     size = "small",
     srcs = ["ValidatorTest.java"],
-    test_package = "org.realityforge.q3a.material_magic.model.validator",
+    test_class = "org.realityforge.q3a.material_magic.model.validator.ValidatorTest",
     deps = [
         "//third_party/java:javax_annotation",
         "//tools/material_magic/java/org/realityforge/q3a/material_magic/model",
