@@ -6,7 +6,7 @@ One of the big innovations of this engine compared to other engines at the time 
 
 The shaders could also indicate surface parameters and volume properties that modified game logic when entities were interacting with the brushes and meshes. Further capabilities and directives were added to support tools such as the area awareness compiler used to support bot navigation etc.
 
-The technology was ahead of it's time but is now somewhat outdated. The "shaders" would more properly be termed material definitions in modern engines (and in later id Tech engines they were renamed to reflect this role). The rendering part of the old "shaders" were also designed to support a fixed function OpenGL style pipeline rather than modern hardware or APIs.
+The technology was ahead of it's time but is now outdated. The "shaders" would more properly be termed material definitions in modern engines (and in later id Tech engines they were renamed to reflect this role). The rendering part of the old "shaders" were also designed to support a fixed function OpenGL style pipeline rather than modern hardware or APIs.
 
 A single shader file could contain multiple different shaders. And a shader with the same name could appear multiple times with the "last" shader definition overriding earlier shader definitions. There existed some ad-hoc organisation and grouping of shaders into shader definition files, but it was not systematic or very easy to replace individual shader definitions. The "Team Arena" game mode chose to duplicate every shader present in the "BaseQ3" game mode rather than attempting to just specify the new shaders as a result of this complexity. (i.e. `textures/common/nolightmap` appears in both game modes). Even within a single game mode, the same shader definition can appear multiple times, and you have to know the order in which files will be included to determine which definition will win. (i.e. `textures/base_floor/concfloor_rain` appears three times in the `BaseQ3` game mode).
 
@@ -43,6 +43,7 @@ There is also some more technology specific challenges that are associated with 
 The final solution was developed in the Java language, using the Antlr parser generator. This toolkit was selected as the author was familiar with these tools but was unfamiliar with how to integrate it with Bazel. The solution also opted to use Junit version 5 rather than Junit version 3 or 4 as Junit 5 is not supported in Bazel by default and thus using Junit version 5 forced a deeper understanding of the Bazel test infrastructure.
 
 ...
+
 
 ### Evaluation
 
