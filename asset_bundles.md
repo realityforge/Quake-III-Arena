@@ -24,7 +24,9 @@ Q3A has the capability to download `*.pk3` files when the client is connecting t
 
 #### The "Ideal" Asset Bundle
 
-In an ideal system an asset bundle would be able to declare that all asset references are resolvable statically at build time rather than deferring detection of missing references until runtime. This would reduce the amount of QA processes that would need to be dedicated to ensuring that assets are valid. Other component systems have solved this problem through a number of mechanisms. Strategies that would translate a game engine include:
+In an ideal system an asset bundle would be able to declare that all asset references are resolvable statically at build time rather than deferring detection of missing references until runtime. This would reduce the amount of QA processes that would need to be dedicated to ensuring that assets are valid.
+
+This is a problem that is present in other component oriented architectures. Such systems have solved this problem using a number of strategies. Strategies that would be effective within the context of a game engine include:
 
 * Each asset bundle consists of an identifier that may incorporate a name and/or a version specifier.
 * Each asset bundle declares the set of assets that are "provided" by the asset bundle and are thus available to reference from other asset bundles.
