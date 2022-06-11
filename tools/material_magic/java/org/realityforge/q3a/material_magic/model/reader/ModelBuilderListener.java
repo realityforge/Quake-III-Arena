@@ -3,6 +3,7 @@ package org.realityforge.q3a.material_magic.model.reader;
 import javax.annotation.Nonnull;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.realityforge.q3a.material_magic.model.AlphaFuncStageDirective;
+import org.realityforge.q3a.material_magic.model.AlphaGenStageDirective;
 import org.realityforge.q3a.material_magic.model.AnimMapStageDirective;
 import org.realityforge.q3a.material_magic.model.AutoSprite2DeformStageDirective;
 import org.realityforge.q3a.material_magic.model.AutoSpriteDeformStageDirective;
@@ -529,6 +530,41 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
     final WaveForm wave = new WaveForm();
     _stage.rgbGen().setWave( wave );
     extractWaveForm( ctx.waveForm(), wave );
+  }
+
+  @Override
+  public void exitAlphaGenLightingSpecularStageDirective(
+    @Nonnull final MaterialsParser.AlphaGenLightingSpecularStageDirectiveContext ctx )
+  {
+    _stage.alphaGen().setFunc( AlphaGenStageDirective.Func.lightingSpecular );
+  }
+
+  @Override
+  public void exitAlphaGenWaveStageDirective( @Nonnull final MaterialsParser.AlphaGenWaveStageDirectiveContext ctx )
+  {
+    _stage.alphaGen().setFunc( AlphaGenStageDirective.Func.wave );
+    final WaveForm wave = new WaveForm();
+    _stage.alphaGen().setWave( wave );
+    extractWaveForm( ctx.waveForm(), wave );
+  }
+
+  @Override
+  public void exitAlphaGenVertexStageDirective( @Nonnull final MaterialsParser.AlphaGenVertexStageDirectiveContext ctx )
+  {
+    _stage.alphaGen().setFunc( AlphaGenStageDirective.Func.vertex );
+  }
+
+  @Override
+  public void exitAlphaGenEntityStageDirective( @Nonnull final MaterialsParser.AlphaGenEntityStageDirectiveContext ctx )
+  {
+    _stage.alphaGen().setFunc( AlphaGenStageDirective.Func.entity );
+  }
+
+  @Override
+  public void exitAlphaGenPortalStageDirective( @Nonnull final MaterialsParser.AlphaGenPortalStageDirectiveContext ctx )
+  {
+    _stage.alphaGen().setFunc( AlphaGenStageDirective.Func.portal );
+    _stage.alphaGen().setPortalRange( parseNumber( ctx.portalRange ) );
   }
 
   @Override

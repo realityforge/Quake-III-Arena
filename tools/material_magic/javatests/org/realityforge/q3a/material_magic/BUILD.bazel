@@ -73,6 +73,17 @@ material_magic_golden_test(
 )
 
 material_magic_golden_test(
+    name = "stage_alphagen",
+    materials = [
+        "textures/vertex",
+        "textures/lighting_specular",
+        "textures/entity",
+        "textures/wave",
+        "textures/portal",
+    ],
+)
+
+material_magic_golden_test(
     name = "stage_animmap",
     materials = [
         "textures/anim1",
@@ -189,6 +200,7 @@ multirun(
         ":material_name_update_goldens",
         ":skyparms_update_goldens",
         ":stage_alphafunc_update_goldens",
+        ":stage_alphagen_update_goldens",
         ":stage_animmap_update_goldens",
         ":stage_blendfunc_update_goldens",
         ":stage_clampmap_update_goldens",

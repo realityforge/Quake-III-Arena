@@ -29,6 +29,8 @@ public final class Stage
   @Nullable
   private RgbGenStageDirective _rgbGen;
   @Nullable
+  private AlphaGenStageDirective _alphaGen;
+  @Nullable
   private TcGenStageDirective _tcGen;
 
   public boolean hasMap() { return null != _map && !_map.isDefault(); }
@@ -148,6 +150,18 @@ public final class Stage
 
   public void setRgbGen( @Nullable final RgbGenStageDirective rgbGen ) { _rgbGen = rgbGen; }
 
+  public boolean hasAlphaGen() { return null != _alphaGen && !_alphaGen.isDefault(); }
+  @Nonnull
+  public AlphaGenStageDirective alphaGen()
+  {
+    if ( null == _alphaGen ) {
+      _alphaGen = new AlphaGenStageDirective();
+    }
+    return _alphaGen;
+  }
+
+  public void setAlphaGen( @Nullable final AlphaGenStageDirective alphaGen ) { _alphaGen = alphaGen; }
+
   public boolean hasTcGen() { return null != _tcGen && !_tcGen.isDefault(); }
   @Nonnull
   public TcGenStageDirective tcGen()
@@ -203,6 +217,9 @@ public final class Stage
       if ( hasRgbGen() ) {
         rgbGen().write( o );
       }
+      if ( hasAlphaGen() ) {
+        alphaGen().write( o );
+      }
     } );
   }
 
@@ -224,6 +241,7 @@ public final class Stage
         Objects.equals( hasAlphaFunc() ? _alphaFunc : null, that.hasAlphaFunc() ? that._alphaFunc : null ) &&
         Objects.equals( hasBlendFunc() ? _blendFunc : null, that.hasBlendFunc() ? that._blendFunc : null ) &&
         Objects.equals( hasRgbGen() ? _rgbGen : null, that.hasRgbGen() ? that._rgbGen : null ) &&
+        Objects.equals( hasAlphaGen() ? _alphaGen : null, that.hasAlphaGen() ? that._alphaGen : null ) &&
         Objects.equals( hasTcGen() ? _tcGen : null, that.hasTcGen() ? that._tcGen : null );
     }
   }
@@ -241,6 +259,7 @@ public final class Stage
                          hasAlphaFunc() ? _alphaFunc : null,
                          hasBlendFunc() ? _blendFunc : null,
                          hasRgbGen() ? _rgbGen : null,
+                         hasAlphaGen() ? _alphaGen : null,
                          hasTcGen() ? _tcGen : null );
   }
 
