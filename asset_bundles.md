@@ -33,7 +33,7 @@ This is a problem that is present in other component oriented architectures. Suc
 * Each asset bundle declares the set of assets that are "consumed" by the asset bundle and are expected to be provided by other asset bundles.
 * Each asset bundle may declare the identifier of another asset bundle that the asset bundle depends upon.
 
-Tooling could then be developed that analyzed each asset and ensured that every asset within the bundle as all references either present in the bundle, declared as "consumed" by the asset bundle. The tooling could also analyze the dependencies between assets so that they can be packaged into asset bundles that group assets in a way that is fast to download on demand (or optimised for the developer requirements).
+Tooling could then be developed that analyzed each asset and ensured that every asset within the bundle as all references either present in the bundle, declared as "consumed" by the asset bundle. The tooling could also analyze the dependencies between assets so that they can be packaged into asset bundles that group assets in a way that meets the developer requirements. The developer may prioritize small, self-contained asset bundles that are fast to download on demand or may prioritize a large asset bundle that is part of the initial installation with small asset bundles for optional content that may retrieved at a later stage by a small number of users.
 
 Bundles could be signed by the distributing party to make it possible to determine the providence of the asset bundle and to verify it has not been modified by third parties. This would make it possible for clients to trust bundles signed by certain parties and not trust bundles signed by other parties.
 
