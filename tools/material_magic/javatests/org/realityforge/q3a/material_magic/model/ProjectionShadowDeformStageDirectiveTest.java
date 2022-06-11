@@ -18,7 +18,7 @@ public final class ProjectionShadowDeformStageDirectiveTest
   }
 
   @Test
-  public void testEqualsAndHash()
+  public void verifyEqualsAndHash()
   {
     final ProjectionShadowDeformStageDirective directive1 = new ProjectionShadowDeformStageDirective();
     final ProjectionShadowDeformStageDirective directive2 = new ProjectionShadowDeformStageDirective();

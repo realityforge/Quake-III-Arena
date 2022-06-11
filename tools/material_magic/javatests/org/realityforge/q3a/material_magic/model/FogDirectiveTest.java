@@ -23,7 +23,7 @@ public final class FogDirectiveTest
   }
 
   @Test
-  public void testEqualsAndHash()
+  public void verifyEqualsAndHash()
   {
     final FogDirective directive1 = new FogDirective();
     final FogDirective directive2 = new FogDirective();

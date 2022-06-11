@@ -30,7 +30,7 @@ public final class BulgeDeformStageDirectiveTest
   }
 
   @Test
-  public void testEqualsAndHash()
+  public void verifyEqualsAndHash()
   {
     final BulgeDeformStageDirective directive1 = new BulgeDeformStageDirective();
     final BulgeDeformStageDirective directive2 = new BulgeDeformStageDirective();

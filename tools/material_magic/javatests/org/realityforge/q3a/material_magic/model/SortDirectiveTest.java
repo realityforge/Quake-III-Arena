@@ -53,7 +53,7 @@ public final class SortDirectiveTest
   }
 
   @Test
-  public void testEqualsAndHash()
+  public void verifyEqualsAndHash()
   {
     final SortDirective directive1 = new SortDirective();
     final SortDirective directive2 = new SortDirective();

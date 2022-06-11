@@ -18,7 +18,7 @@ public final class AutoSpriteDeformStageDirectiveTest
   }
 
   @Test
-  public void testEqualsAndHash()
+  public void verifyEqualsAndHash()
   {
     final AutoSpriteDeformStageDirective directive1 = new AutoSpriteDeformStageDirective();
     final AutoSpriteDeformStageDirective directive2 = new AutoSpriteDeformStageDirective();

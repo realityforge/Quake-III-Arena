@@ -28,7 +28,7 @@ public final class NormalDeformStageDirectiveTest
   }
 
   @Test
-  public void testEqualsAndHash()
+  public void verifyEqualsAndHash()
   {
     final NormalDeformStageDirective directive1 = new NormalDeformStageDirective();
     final NormalDeformStageDirective directive2 = new NormalDeformStageDirective();

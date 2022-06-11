@@ -73,7 +73,7 @@ public final class Q3mapDirectivesTest
   }
 
   @Test
-  public void testEqualsAndHash()
+  public void verifyEqualsAndHash()
   {
     final Q3mapDirectives directives1 = new Q3mapDirectives();
     final Q3mapDirectives directives2 = new Q3mapDirectives();

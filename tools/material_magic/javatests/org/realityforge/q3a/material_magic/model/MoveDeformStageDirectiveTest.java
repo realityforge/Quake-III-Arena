@@ -34,7 +34,7 @@ public final class MoveDeformStageDirectiveTest
   }
 
   @Test
-  public void testEqualsAndHash()
+  public void verifyEqualsAndHash()
   {
     final MoveDeformStageDirective directive1 = new MoveDeformStageDirective();
     final MoveDeformStageDirective directive2 = new MoveDeformStageDirective();

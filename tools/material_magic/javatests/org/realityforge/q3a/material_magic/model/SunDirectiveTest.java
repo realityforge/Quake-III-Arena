@@ -25,7 +25,7 @@ public final class SunDirectiveTest
   }
 
   @Test
-  public void testEqualsAndHash()
+  public void verifyEqualsAndHash()
   {
     final SunDirective directive1 = new SunDirective();
     final SunDirective directive2 = new SunDirective();

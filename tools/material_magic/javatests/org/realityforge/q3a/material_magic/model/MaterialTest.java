@@ -107,7 +107,7 @@ public final class MaterialTest
   }
 
   @Test
-  public void testEqualsAndHash()
+  public void verifyEqualsAndHash()
   {
     final Material material1 = new Material( "materials/my/Material1" );
     final Material material2 = new Material( "materials/my/Material1" );

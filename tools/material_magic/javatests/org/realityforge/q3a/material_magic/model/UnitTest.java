@@ -85,7 +85,7 @@ public final class UnitTest
   }
 
   @Test
-  public void testEqualsAndHash()
+  public void verifyEqualsAndHash()
   {
     final Unit unit1 = new Unit();
     final Unit unit2 = new Unit();

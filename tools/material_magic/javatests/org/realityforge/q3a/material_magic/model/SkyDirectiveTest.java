@@ -54,7 +54,7 @@ public final class SkyDirectiveTest
   }
 
   @Test
-  public void testEqualsAndHash()
+  public void verifyEqualsAndHash()
   {
     final SkyDirective directive1 = new SkyDirective();
     final SkyDirective directive2 = new SkyDirective();

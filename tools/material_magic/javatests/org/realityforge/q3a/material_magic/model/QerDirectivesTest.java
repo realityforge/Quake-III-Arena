@@ -40,7 +40,7 @@ public final class QerDirectivesTest
   }
 
   @Test
-  public void testEqualsAndHash()
+  public void verifyEqualsAndHash()
   {
     final QerDirectives directives1 = new QerDirectives();
     final QerDirectives directives2 = new QerDirectives();

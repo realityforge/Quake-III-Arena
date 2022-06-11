@@ -31,7 +31,7 @@ public final class WaveDeformStageDirectiveTest
   }
 
   @Test
-  public void testEqualsAndHash()
+  public void verifyEqualsAndHash()
   {
     final WaveDeformStageDirective directive1 = new WaveDeformStageDirective();
     final WaveDeformStageDirective directive2 = new WaveDeformStageDirective();

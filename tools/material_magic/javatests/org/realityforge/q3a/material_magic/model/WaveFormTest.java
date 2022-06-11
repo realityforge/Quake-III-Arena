@@ -29,7 +29,7 @@ public final class WaveFormTest
   }
 
   @Test
-  public void testEqualsAndHash()
+  public void verifyEqualsAndHash()
   {
     final WaveForm directive1 = new WaveForm();
     final WaveForm directive2 = new WaveForm();

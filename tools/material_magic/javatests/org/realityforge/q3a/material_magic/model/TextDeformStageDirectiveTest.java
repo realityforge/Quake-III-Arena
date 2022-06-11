@@ -32,7 +32,7 @@ public final class TextDeformStageDirectiveTest
   }
 
   @Test
-  public void testEqualsAndHash()
+  public void verifyEqualsAndHash()
   {
     final TextDeformStageDirective directive1 = new TextDeformStageDirective();
     final TextDeformStageDirective directive2 = new TextDeformStageDirective();
