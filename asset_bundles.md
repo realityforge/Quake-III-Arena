@@ -4,7 +4,9 @@
 
 Within Q3A, the assets are files that are contained within the `*.pk3` files or on the file system in specific "game" directories. The `*.pk3` files are simply zip files with a different extension.
 
-The layout of assets within the directories and the `*.pk3` files is partially done via convention and sometimes these conventions are enforced by application code. For example, the "shader files" **MUST** be contained within the `scripts/` directory in either the `*.pk3` or in the "game" directory. The "shader files" **MUST** be named with an extension `.shader` If the "shader files" do not follow these conventions then they will not be loaded by the runtime. Sometimes these constraints are enforced in game logic code and sometimes by engine code.
+The layout of assets within the directories and the `*.pk3` files is primarily done by convention and sometimes these conventions are enforced by code. Sometimes these constraints are enforced in game logic code and sometimes by engine code.
+
+For example, the "shader files" **MUST** be contained within the `scripts/` directory in either the `*.pk3` or in the "game" directory. The "shader files" **MUST** be named with an extension `.shader` If the "shader files" do not follow these conventions then they will not be loaded by the runtime.
 
 "Pure" servers are those who set the cvar `sv_pure` to `1`. In a pure server, the clients and the server must load assets from `*.pk3` files and the set of `*.pk3` files must "match". The "matching" is done using a content hash and thus if a `*.pk3` is modified on a client (by changing a file within it), then the `*.pk3` will no longer match the server file.
 
