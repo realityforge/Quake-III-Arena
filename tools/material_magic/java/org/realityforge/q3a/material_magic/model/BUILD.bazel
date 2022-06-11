@@ -44,6 +44,8 @@ java_library(
         "SunDirective.java",
         "SurfaceParameter.java",
         "TcGenStageDirective.java",
+        "TcModRotateStageDirective.java",
+        "TcModStageDirective.java",
         "TextDeformStageDirective.java",
         "Unit.java",
         "VideoMapStageDirective.java",

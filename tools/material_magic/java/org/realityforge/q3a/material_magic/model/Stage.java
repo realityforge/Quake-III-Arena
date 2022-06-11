@@ -1,6 +1,8 @@
 package org.realityforge.q3a.material_magic.model;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -32,6 +34,8 @@ public final class Stage
   private AlphaGenStageDirective _alphaGen;
   @Nullable
   private TcGenStageDirective _tcGen;
+  @Nonnull
+  private final List<TcModStageDirective<?>> _tcModStages = new ArrayList<>();
 
   public boolean hasMap() { return null != _map && !_map.isDefault(); }
 
@@ -174,6 +178,14 @@ public final class Stage
 
   public void setTcGen( @Nullable final TcGenStageDirective tcGen ) { _tcGen = tcGen; }
 
+  public void addTcModStage( @Nonnull final TcModStageDirective<?> tcModStage ) { _tcModStages.add( tcModStage ); }
+
+  @Nonnull
+  public List<TcModStageDirective<?>> getTcModStages()
+  {
+    return _tcModStages;
+  }
+
   /**
    * Write the material using the standard text serialization mechanisms to the specified output
    * object.
@@ -220,6 +232,9 @@ public final class Stage
       if ( hasAlphaGen() ) {
         alphaGen().write( o );
       }
+      for ( final TcModStageDirective<?> stage : _tcModStages ) {
+        stage.write( o );
+      }
     } );
   }
 
@@ -242,7 +257,8 @@ public final class Stage
         Objects.equals( hasBlendFunc() ? _blendFunc : null, that.hasBlendFunc() ? that._blendFunc : null ) &&
         Objects.equals( hasRgbGen() ? _rgbGen : null, that.hasRgbGen() ? that._rgbGen : null ) &&
         Objects.equals( hasAlphaGen() ? _alphaGen : null, that.hasAlphaGen() ? that._alphaGen : null ) &&
-        Objects.equals( hasTcGen() ? _tcGen : null, that.hasTcGen() ? that._tcGen : null );
+        Objects.equals( hasTcGen() ? _tcGen : null, that.hasTcGen() ? that._tcGen : null ) &&
+        Objects.equals( _tcModStages, that._tcModStages );
     }
   }
 
@@ -260,7 +276,8 @@ public final class Stage
                          hasBlendFunc() ? _blendFunc : null,
                          hasRgbGen() ? _rgbGen : null,
                          hasAlphaGen() ? _alphaGen : null,
-                         hasTcGen() ? _tcGen : null );
+                         hasTcGen() ? _tcGen : null,
+                         _tcModStages );
   }
 
   @Nonnull

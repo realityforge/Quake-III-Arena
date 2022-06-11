@@ -297,6 +297,48 @@ public final class StageDirectiveTest
                     + "alphaGen vertex\n"
                     + "}\n",
                   MaterialOutput.outputAsString( stage::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
+
+    final TcModRotateStageDirective tcModStage1 = new TcModRotateStageDirective();
+    tcModStage1.setDegreesPerSecond( 2 );
+    stage.addTcModStage( tcModStage1 );
+    final TcModRotateStageDirective tcModStage4 = new TcModRotateStageDirective();
+    tcModStage4.setDegreesPerSecond( 33 );
+    stage.addTcModStage( tcModStage4 );
+
+    assertEquals( "{\n"
+                    + "  map *white\n"
+                    + "  clampmap textures/foo\n"
+                    + "  animMap .25 textures/foo1 textures/foo2\n"
+                    + "  videoMap myvideo.roq\n"
+                    + "  depthFunc equal\n"
+                    + "  detail\n"
+                    + "  depthWrite\n"
+                    + "  alphaFunc GE128\n"
+                    + "  blendFunc add\n"
+                    + "  tcGen environment\n"
+                    + "  rgbGen vertex\n"
+                    + "  alphaGen vertex\n"
+                    + "  tcmod rotate 2\n"
+                    + "  tcmod rotate 33\n"
+                    + "}\n",
+                  MaterialOutput.outputAsString( stage::write ) );
+    assertEquals( "{\n"
+                    + "map *white\n"
+                    + "clampmap textures/foo\n"
+                    + "animMap .25 textures/foo1 textures/foo2\n"
+                    + "videoMap myvideo.roq\n"
+                    + "depthFunc equal\n"
+                    + "detail\n"
+                    + "depthWrite\n"
+                    + "alphaFunc GE128\n"
+                    + "blendFunc add\n"
+                    + "tcGen environment\n"
+                    + "rgbGen vertex\n"
+                    + "alphaGen vertex\n"
+                    + "tcmod rotate 2\n"
+                    + "tcmod rotate 33\n"
+                    + "}\n",
+                  MaterialOutput.outputAsString( stage::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
   }
 
   @Test
@@ -449,6 +491,20 @@ public final class StageDirectiveTest
     assertNotEquals( stage1.hashCode(), stage2.hashCode() );
 
     stage2.alphaGen().setFunc( AlphaGenStageDirective.Func.vertex );
+
+    assertEquals( stage1, stage2 );
+    assertEquals( stage1.hashCode(), stage2.hashCode() );
+
+    final TcModRotateStageDirective tcModStage1 = new TcModRotateStageDirective();
+    tcModStage1.setDegreesPerSecond( 22 );
+    stage1.addTcModStage( tcModStage1 );
+
+    assertNotEquals( stage1, stage2 );
+    assertNotEquals( stage1.hashCode(), stage2.hashCode() );
+
+    final TcModRotateStageDirective tcModStage2 = new TcModRotateStageDirective();
+    tcModStage2.setDegreesPerSecond( 22 );
+    stage2.addTcModStage( tcModStage2 );
 
     assertEquals( stage1, stage2 );
     assertEquals( stage1.hashCode(), stage2.hashCode() );

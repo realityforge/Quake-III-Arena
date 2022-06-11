@@ -50,6 +50,7 @@ load("//third_party/junit5:rules.bzl", "junit5_test")
         "StageDirective",
         "SunDirective",
         "TcGenStageDirective",
+        "TcModRotateStageDirective",
         "TextDeformStageDirective",
         "Unit",
         "VideoMapStageDirective",
