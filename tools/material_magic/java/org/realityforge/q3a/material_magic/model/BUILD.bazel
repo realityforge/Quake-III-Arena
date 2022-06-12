@@ -46,6 +46,7 @@ java_library(
         "TcGenStageDirective.java",
         "TcModRotateStageDirective.java",
         "TcModScaleStageDirective.java",
+        "TcModScrollStageDirective.java",
         "TcModStageDirective.java",
         "TextDeformStageDirective.java",
         "Unit.java",

@@ -133,8 +133,8 @@ alphaGenPortalStageDirective : PORTAL portalRange=number;
 
 tcModRotateStageDirective : ROTATE degreesPerSecond=number;
 tcModScaleStageDirective : SCALE sScale=number tScale=number;
-// TODO: None of the following directives have model representations or are tested.
 tcModScrollStageDirective : SCROLL sSpeed=number tSpeed=number;
+// TODO: None of the following directives have model representations or are tested.
 tcModStretchStageDirective : STRETCH waveForm;
 tcModTransformStageDirective : TRANSFORM m00=number m01=number m10=number m11=number t0=number t1=number;
 tcModTurbStageDirective : TURB base=number amplitude=number phase=number frequency=number;

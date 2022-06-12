@@ -202,6 +202,17 @@ material_magic_golden_test(
 )
 
 material_magic_golden_test(
+    name = "stage_tcmod_scroll",
+    materials = [
+        "textures/scroll1",
+        "textures/scroll2",
+        "textures/scroll3",
+        "textures/scroll4",
+        "textures/scroll5",
+    ],
+)
+
+material_magic_golden_test(
     name = "stage_videomap",
     materials = ["textures/video"],
 )
@@ -232,6 +243,7 @@ multirun(
         ":stage_tcgen_update_goldens",
         ":stage_tcmod_rotate_update_goldens",
         ":stage_tcmod_scale_update_goldens",
+        ":stage_tcmod_scroll_update_goldens",
         ":stage_videomap_update_goldens",
         ":surfaceparm_update_goldens",
     ],
