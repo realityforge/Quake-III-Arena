@@ -135,8 +135,8 @@ tcModRotateStageDirective : ROTATE degreesPerSecond=number;
 tcModScaleStageDirective : SCALE sScale=number tScale=number;
 tcModScrollStageDirective : SCROLL sSpeed=number tSpeed=number;
 tcModStretchStageDirective : STRETCH waveForm;
-// TODO: None of the following directives have model representations or are tested.
 tcModTransformStageDirective : TRANSFORM m00=number m01=number m10=number m11=number t0=number t1=number;
+// TODO: None of the following directives have model representations or are tested.
 tcModTurbStageDirective : TURB base=number amplitude=number phase=number frequency=number;
 
 q3mapDirective
