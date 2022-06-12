@@ -26,6 +26,16 @@ public final class WaveFormTest
     form.setFrequency( 0.75F );
 
     assertEquals( "inversesawtooth 1 .2 0 .75", form.toString() );
+
+    assertFalse( form.isDefault() );
+
+    form.setBase( 0 );
+
+    assertFalse( form.isDefault() );
+
+    form.setAmplitude( 0 );
+
+    assertTrue( form.isDefault() );
   }
 
   @Test

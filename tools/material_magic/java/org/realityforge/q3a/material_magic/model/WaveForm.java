@@ -33,6 +33,8 @@ public final class WaveForm
   private float _phase;
   private float _frequency;
 
+  public boolean isDefault() { return 0 == _base && 0 == _amplitude; }
+
   @Nonnull
   public Generator getGenerator()
   {
