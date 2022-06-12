@@ -50,6 +50,7 @@ java_library(
         "TcModStageDirective.java",
         "TcModStretchStageDirective.java",
         "TcModTransformStageDirective.java",
+        "TcModTurbStageDirective.java",
         "TextDeformStageDirective.java",
         "Unit.java",
         "VideoMapStageDirective.java",

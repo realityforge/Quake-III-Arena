@@ -30,6 +30,7 @@ import org.realityforge.q3a.material_magic.model.TcModScaleStageDirective;
 import org.realityforge.q3a.material_magic.model.TcModScrollStageDirective;
 import org.realityforge.q3a.material_magic.model.TcModStretchStageDirective;
 import org.realityforge.q3a.material_magic.model.TcModTransformStageDirective;
+import org.realityforge.q3a.material_magic.model.TcModTurbStageDirective;
 import org.realityforge.q3a.material_magic.model.TextDeformStageDirective;
 import org.realityforge.q3a.material_magic.model.Unit;
 import org.realityforge.q3a.material_magic.model.WaveDeformStageDirective;
@@ -616,6 +617,17 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
     directive.setM11( parseNumber( ctx.m11 ) );
     directive.setT0( parseNumber( ctx.t0 ) );
     directive.setT1( parseNumber( ctx.t1 ) );
+    _stage.addTcModStage( directive );
+  }
+
+  @Override
+  public void exitTcModTurbStageDirective( @Nonnull final MaterialsParser.TcModTurbStageDirectiveContext ctx )
+  {
+    final TcModTurbStageDirective directive = new TcModTurbStageDirective();
+    directive.setBase( parseNumber( ctx.base ) );
+    directive.setAmplitude( parseNumber( ctx.amplitude ) );
+    directive.setPhase( parseNumber( ctx.phase ) );
+    directive.setFrequency( parseNumber( ctx.frequency ) );
     _stage.addTcModStage( directive );
   }
 

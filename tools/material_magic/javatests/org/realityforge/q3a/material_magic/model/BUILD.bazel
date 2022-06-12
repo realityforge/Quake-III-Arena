@@ -55,6 +55,7 @@ load("//third_party/junit5:rules.bzl", "junit5_test")
         "TcModScrollStageDirectiveTest.java",
         "TcModStretchStageDirectiveTest.java",
         "TcModTransformStageDirectiveTest.java",
+        "TcModTurbStageDirectiveTest.java",
         "TextDeformStageDirectiveTest.java",
         "UnitTest.java",
         "VideoMapStageDirectiveTest.java",
