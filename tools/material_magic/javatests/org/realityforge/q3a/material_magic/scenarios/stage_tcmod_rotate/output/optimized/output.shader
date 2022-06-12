@@ -16,3 +16,8 @@ textures/rotate3
 tcmod rotate .1
 }
 }
+textures/rotate4
+{
+{
+}
+}

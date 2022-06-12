@@ -12,11 +12,22 @@ public final class TcModRotateStageDirectiveTest
   {
     final TcModRotateStageDirective directive = new TcModRotateStageDirective();
 
+    assertTrue( directive.isDefault() );
+
     directive.setDegreesPerSecond( .1F );
+
+    assertFalse( directive.isDefault() );
 
     assertEquals( "tcmod rotate .1\n", MaterialOutput.outputAsString( directive::write ) );
     assertEquals( "tcmod rotate .1\n",
                   MaterialOutput.outputAsString( directive::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
+
+    directive.setDegreesPerSecond( 0 );
+
+    assertTrue( directive.isDefault() );
+
+    assertEquals( "", MaterialOutput.outputAsString( directive::write ) );
+    assertEquals( "", MaterialOutput.outputAsString( directive::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
   }
 
   @Test

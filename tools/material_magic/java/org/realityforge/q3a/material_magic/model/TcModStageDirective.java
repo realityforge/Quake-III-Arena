@@ -7,7 +7,16 @@ import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
 public abstract class TcModStageDirective<T extends TcModStageDirective<T>>
 {
-  abstract void write( @Nonnull MaterialOutput output ) throws IOException;
+  abstract void performWrite( @Nonnull MaterialOutput output ) throws IOException;
+
+  public boolean isDefault() { return false; }
+
+  void write( @Nonnull final MaterialOutput output ) throws IOException
+  {
+    if ( !isDefault() ) {
+      performWrite( output );
+    }
+  }
 
   @SuppressWarnings( "unchecked" )
   @Override

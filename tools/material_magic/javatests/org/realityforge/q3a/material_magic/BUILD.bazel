@@ -187,6 +187,7 @@ material_magic_golden_test(
         "textures/rotate1",
         "textures/rotate2",
         "textures/rotate3",
+        "textures/rotate4",
     ],
 )
 

@@ -8,12 +8,19 @@ import org.realityforge.q3a.material_magic.util.MaterialOutput;
 public final class TcModRotateStageDirective extends TcModStageDirective<TcModRotateStageDirective>
 {
   private float _degreesPerSecond;
+
   public float getDegreesPerSecond() { return _degreesPerSecond; }
 
   public void setDegreesPerSecond( final float degreesPerSecond ) { _degreesPerSecond = degreesPerSecond; }
 
   @Override
-  void write( @Nonnull final MaterialOutput output ) throws IOException
+  public boolean isDefault()
+  {
+    return 0 == _degreesPerSecond;
+  }
+
+  @Override
+  void performWrite( @Nonnull final MaterialOutput output ) throws IOException
   {
     output.writeDirective( "tcmod", "rotate", EmitUtil.floatToString( _degreesPerSecond ) );
   }

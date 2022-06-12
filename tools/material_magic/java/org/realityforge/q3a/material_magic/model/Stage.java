@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
@@ -119,6 +120,7 @@ public final class Stage
   public void setDepthWrite( @Nullable final DepthWriteStageDirective depthWrite ) { _depthWrite = depthWrite; }
 
   public boolean hasAlphaFunc() { return null != _alphaFunc && !_alphaFunc.isDefault(); }
+
   @Nonnull
   public AlphaFuncStageDirective alphaFunc()
   {
@@ -131,6 +133,7 @@ public final class Stage
   public void setAlphaFunc( @Nullable final AlphaFuncStageDirective alphaFunc ) { _alphaFunc = alphaFunc; }
 
   public boolean hasBlendFunc() { return null != _blendFunc && !_blendFunc.isDefault(); }
+
   @Nonnull
   public BlendFuncStageDirective blendFunc()
   {
@@ -143,6 +146,7 @@ public final class Stage
   public void setBlendFunc( @Nullable final BlendFuncStageDirective blendFunc ) { _blendFunc = blendFunc; }
 
   public boolean hasRgbGen() { return null != _rgbGen && !_rgbGen.isDefault(); }
+
   @Nonnull
   public RgbGenStageDirective rgbGen()
   {
@@ -155,6 +159,7 @@ public final class Stage
   public void setRgbGen( @Nullable final RgbGenStageDirective rgbGen ) { _rgbGen = rgbGen; }
 
   public boolean hasAlphaGen() { return null != _alphaGen && !_alphaGen.isDefault(); }
+
   @Nonnull
   public AlphaGenStageDirective alphaGen()
   {
@@ -167,6 +172,7 @@ public final class Stage
   public void setAlphaGen( @Nullable final AlphaGenStageDirective alphaGen ) { _alphaGen = alphaGen; }
 
   public boolean hasTcGen() { return null != _tcGen && !_tcGen.isDefault(); }
+
   @Nonnull
   public TcGenStageDirective tcGen()
   {
@@ -258,7 +264,8 @@ public final class Stage
         Objects.equals( hasRgbGen() ? _rgbGen : null, that.hasRgbGen() ? that._rgbGen : null ) &&
         Objects.equals( hasAlphaGen() ? _alphaGen : null, that.hasAlphaGen() ? that._alphaGen : null ) &&
         Objects.equals( hasTcGen() ? _tcGen : null, that.hasTcGen() ? that._tcGen : null ) &&
-        Objects.equals( _tcModStages, that._tcModStages );
+        Objects.equals( _tcModStages.stream().filter( s -> !s.isDefault() ).collect( Collectors.toList() ),
+                        that._tcModStages.stream().filter( s -> !s.isDefault() ).collect( Collectors.toList() ) );
     }
   }
 
