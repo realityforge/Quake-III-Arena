@@ -213,6 +213,15 @@ material_magic_golden_test(
 )
 
 material_magic_golden_test(
+    name = "stage_tcmod_stretch",
+    materials = [
+        "textures/stretch1",
+        "textures/stretch2",
+        "textures/stretch3",
+    ],
+)
+
+material_magic_golden_test(
     name = "stage_videomap",
     materials = ["textures/video"],
 )
@@ -244,6 +253,7 @@ multirun(
         ":stage_tcmod_rotate_update_goldens",
         ":stage_tcmod_scale_update_goldens",
         ":stage_tcmod_scroll_update_goldens",
+        ":stage_tcmod_stretch_update_goldens",
         ":stage_videomap_update_goldens",
         ":surfaceparm_update_goldens",
     ],

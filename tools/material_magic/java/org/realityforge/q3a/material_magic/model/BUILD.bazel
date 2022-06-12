@@ -48,6 +48,7 @@ java_library(
         "TcModScaleStageDirective.java",
         "TcModScrollStageDirective.java",
         "TcModStageDirective.java",
+        "TcModStretchStageDirective.java",
         "TextDeformStageDirective.java",
         "Unit.java",
         "VideoMapStageDirective.java",

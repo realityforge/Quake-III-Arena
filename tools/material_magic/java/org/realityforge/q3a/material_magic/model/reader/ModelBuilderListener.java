@@ -28,6 +28,7 @@ import org.realityforge.q3a.material_magic.model.TcGenStageDirective;
 import org.realityforge.q3a.material_magic.model.TcModRotateStageDirective;
 import org.realityforge.q3a.material_magic.model.TcModScaleStageDirective;
 import org.realityforge.q3a.material_magic.model.TcModScrollStageDirective;
+import org.realityforge.q3a.material_magic.model.TcModStretchStageDirective;
 import org.realityforge.q3a.material_magic.model.TextDeformStageDirective;
 import org.realityforge.q3a.material_magic.model.Unit;
 import org.realityforge.q3a.material_magic.model.WaveDeformStageDirective;
@@ -593,6 +594,14 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
     final TcModScrollStageDirective directive = new TcModScrollStageDirective();
     directive.setSSpeed( parseNumber( ctx.sSpeed ) );
     directive.setTSpeed( parseNumber( ctx.tSpeed ) );
+    _stage.addTcModStage( directive );
+  }
+
+  @Override
+  public void exitTcModStretchStageDirective( @Nonnull final MaterialsParser.TcModStretchStageDirectiveContext ctx )
+  {
+    final TcModStretchStageDirective directive = new TcModStretchStageDirective();
+    extractWaveForm( ctx.waveForm(), directive.getWave() );
     _stage.addTcModStage( directive );
   }
 
