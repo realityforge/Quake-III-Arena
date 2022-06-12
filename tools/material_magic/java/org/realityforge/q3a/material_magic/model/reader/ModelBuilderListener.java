@@ -26,6 +26,7 @@ import org.realityforge.q3a.material_magic.model.SunDirective;
 import org.realityforge.q3a.material_magic.model.SurfaceParameter;
 import org.realityforge.q3a.material_magic.model.TcGenStageDirective;
 import org.realityforge.q3a.material_magic.model.TcModRotateStageDirective;
+import org.realityforge.q3a.material_magic.model.TcModScaleStageDirective;
 import org.realityforge.q3a.material_magic.model.TextDeformStageDirective;
 import org.realityforge.q3a.material_magic.model.Unit;
 import org.realityforge.q3a.material_magic.model.WaveDeformStageDirective;
@@ -573,6 +574,15 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   {
     final TcModRotateStageDirective stage = new TcModRotateStageDirective();
     stage.setDegreesPerSecond( parseNumber( ctx.degreesPerSecond ) );
+    _stage.addTcModStage( stage );
+  }
+
+  @Override
+  public void exitTcModScaleStageDirective( @Nonnull final MaterialsParser.TcModScaleStageDirectiveContext ctx )
+  {
+    final TcModScaleStageDirective stage = new TcModScaleStageDirective();
+    stage.setSScale( parseNumber( ctx.sScale ) );
+    stage.setTScale( parseNumber( ctx.tScale ) );
     _stage.addTcModStage( stage );
   }
 

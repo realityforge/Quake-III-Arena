@@ -45,6 +45,7 @@ java_library(
         "SurfaceParameter.java",
         "TcGenStageDirective.java",
         "TcModRotateStageDirective.java",
+        "TcModScaleStageDirective.java",
         "TcModStageDirective.java",
         "TextDeformStageDirective.java",
         "Unit.java",

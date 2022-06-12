@@ -191,6 +191,17 @@ material_magic_golden_test(
 )
 
 material_magic_golden_test(
+    name = "stage_tcmod_scale",
+    materials = [
+        "textures/scale1",
+        "textures/scale2",
+        "textures/scale3",
+        "textures/scale4",
+        "textures/scale5",
+    ],
+)
+
+material_magic_golden_test(
     name = "stage_videomap",
     materials = ["textures/video"],
 )
@@ -220,6 +231,7 @@ multirun(
         ":stage_rgbgen_update_goldens",
         ":stage_tcgen_update_goldens",
         ":stage_tcmod_rotate_update_goldens",
+        ":stage_tcmod_scale_update_goldens",
         ":stage_videomap_update_goldens",
         ":surfaceparm_update_goldens",
     ],
