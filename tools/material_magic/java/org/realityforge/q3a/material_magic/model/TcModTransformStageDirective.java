@@ -38,7 +38,6 @@ public final class TcModTransformStageDirective extends TcModStageDirective<TcMo
 
   public void setT1( final float t1 ) { _t1 = t1; }
 
-  // tcModTransformStageDirective : TRANSFORM m00=number m01=number m10=number m11=number t0=number t1=number;
   @Override
   void performWrite( @Nonnull final MaterialOutput output ) throws IOException
   {
