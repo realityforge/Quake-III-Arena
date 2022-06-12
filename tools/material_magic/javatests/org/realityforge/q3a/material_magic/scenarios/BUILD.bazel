@@ -1,0 +1,228 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+load("@com_github_ash2k_bazel_tools//multirun:def.bzl", "multirun")
+load(":material_magic_golden_test.bzl", "material_magic_golden_test")
+
+material_magic_golden_test(
+    name = "t1",
+    materials = [
+        "textures/base/myBase",
+        "textures/base/myBase2",
+        "textures/base/myBase_3",
+        "textures/base/myBase_4",
+        "textures/base/myBase_5",
+        "textures/base/myBase6",
+        "textures/base/myBase7",
+        "textures/base/myBase8",
+        "textures/base/projectionShadow",
+        "textures/base/moveypipe",
+        "textures/base/waveywater",
+        "models/mapobjects/bat/bat",
+    ],
+)
+
+material_magic_golden_test(
+    name = "t2",
+    inputs = [
+        "textures/base/myBase.shader",
+        "textures/base/myBase2.shader",
+    ],
+    materials = [
+        "textures/base/myBase",
+        "textures/base/myBase2",
+    ],
+)
+
+material_magic_golden_test(
+    name = "material_name",
+    materials = [
+        "textures/simple",
+        "textures/quoted_name",
+        "projectionShadow",
+    ],
+)
+
+material_magic_golden_test(
+    name = "skyparms",
+    materials = [
+        "textures/sky1",
+        "textures/sky2",
+        "textures/sky3",
+        "textures/sky4",
+        "textures/sky5",
+    ],
+)
+
+material_magic_golden_test(
+    name = "stage_alphafunc",
+    materials = [
+        "textures/gt0",
+        "textures/lt128",
+        "textures/ge128",
+    ],
+)
+
+material_magic_golden_test(
+    name = "stage_alphagen",
+    materials = [
+        "textures/vertex",
+        "textures/lighting_specular",
+        "textures/entity",
+        "textures/wave",
+        "textures/portal",
+    ],
+)
+
+material_magic_golden_test(
+    name = "stage_animmap",
+    materials = [
+        "textures/anim1",
+        "textures/anim2",
+        "textures/anim3",
+        "textures/anim4",
+        "textures/anim5",
+        "textures/anim6",
+        "textures/anim7",
+        "textures/anim8",
+    ],
+)
+
+material_magic_golden_test(
+    name = "stage_blendfunc",
+    materials = [
+        "textures/add",
+        "textures/add2",
+        "textures/filter",
+        "textures/filter2",
+        "textures/blend",
+        "textures/blend2",
+        "textures/one__one",
+        "textures/zero__one",
+        "textures/dst_zero__one",
+        "textures/dst_color__one",
+        "textures/one_minus_dst_color__one",
+        "textures/src_alpha__one",
+        "textures/one_minus_src_alpha__one",
+        "textures/dst_alpha__one",
+        "textures/one_minus_dst_alpha__one",
+        "textures/src_alpha_saturate__one",
+        "textures/one__zero",
+        "textures/one__src_alpha",
+        "textures/one__one_minus_src_alpha",
+        "textures/one__dst_alpha",
+        "textures/one__src_color",
+        "textures/one__one_minus_src_color",
+        "textures/one__one_minus_dst_alpha",
+    ],
+)
+
+material_magic_golden_test(
+    name = "stage_clampmap",
+    materials = ["textures/image"],
+)
+
+material_magic_golden_test(
+    name = "stage_depthfunc",
+    materials = [
+        "textures/all_caps_equal",
+        "textures/equal",
+        "textures/lequal",
+    ],
+)
+
+material_magic_golden_test(
+    name = "stage_depthwrite",
+    materials = ["textures/mydepthwrite"],
+)
+
+material_magic_golden_test(
+    name = "stage_detail",
+    materials = ["textures/mydetail"],
+)
+
+material_magic_golden_test(
+    name = "stage_map",
+    materials = [
+        "textures/white",
+        "textures/image",
+    ],
+)
+
+material_magic_golden_test(
+    name = "stage_rgbgen",
+    materials = [
+        "textures/identity",
+        "textures/identity_lighting",
+        "textures/vertex",
+        "textures/exact_vertex",
+        "textures/entity",
+        "textures/one_minus_entity",
+        "textures/lighting_diffuse",
+        "textures/wave",
+    ],
+)
+
+material_magic_golden_test(
+    name = "stage_tcgen",
+    materials = [
+        "textures/base",
+        "textures/lightmap",
+        "textures/environment",
+    ],
+)
+
+material_magic_golden_test(
+    name = "stage_tcmod_rotate",
+    materials = [
+        "textures/rotate1",
+        "textures/rotate2",
+        "textures/rotate3",
+        "textures/rotate4",
+    ],
+)
+
+material_magic_golden_test(
+    name = "stage_videomap",
+    materials = ["textures/video"],
+)
+
+material_magic_golden_test(
+    name = "surfaceparm",
+    materials = ["textures/surfaceparm"],
+)
+
+# Runs all the update_goldens targets
+multirun(
+    name = "update_goldens",
+    commands = [
+        ":t1_update_goldens",
+        ":t2_update_goldens",
+        ":material_name_update_goldens",
+        ":skyparms_update_goldens",
+        ":stage_alphafunc_update_goldens",
+        ":stage_alphagen_update_goldens",
+        ":stage_animmap_update_goldens",
+        ":stage_blendfunc_update_goldens",
+        ":stage_clampmap_update_goldens",
+        ":stage_depthfunc_update_goldens",
+        ":stage_depthwrite_update_goldens",
+        ":stage_detail_update_goldens",
+        ":stage_map_update_goldens",
+        ":stage_rgbgen_update_goldens",
+        ":stage_tcgen_update_goldens",
+        ":stage_tcmod_rotate_update_goldens",
+        ":stage_videomap_update_goldens",
+        ":surfaceparm_update_goldens",
+    ],
+    jobs = 0,
+    stop_on_error = False,
+)

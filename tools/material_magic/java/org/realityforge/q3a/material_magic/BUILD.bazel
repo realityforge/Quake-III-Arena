@@ -18,7 +18,7 @@ java_binary(
     srcs = [
         "Main.java",
     ],
-    visibility = ["//tools/material_magic/javatests/org/realityforge/q3a/material_magic:__pkg__"],
+    visibility = ["//tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios:__pkg__"],
     deps = [
         "//third_party/java:javax_annotation",
         "//third_party/java:picocli",

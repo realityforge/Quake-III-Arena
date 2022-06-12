@@ -12,7 +12,7 @@
 load("@bazel_skylib//rules:diff_test.bzl", "diff_test")
 
 def material_magic_golden_test(name, materials, inputs = ["input.shader"]):
-    actual_inputs = ["scenarios/%s/input/%s" % (name, o) for o in inputs]
+    actual_inputs = ["%s/input/%s" % (name, o) for o in inputs]
     pretty_output_dir = "output/%s/output/pretty" % name
     optimized_output_dir = "output/%s/output/optimized" % name
     actual_single_file_pretty_outputs = ["%s/output.shader" % pretty_output_dir]
@@ -54,7 +54,7 @@ def material_magic_golden_test(name, materials, inputs = ["input.shader"]):
         tools = ["//tools/material_magic/java/org/realityforge/q3a/material_magic:Main"],
     )
 
-    _runfiles_path = "tools/material_magic/javatests/org/realityforge/q3a/material_magic/output/%s/output" % name
+    _runfiles_path = "tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/output/%s/output" % name
     _workspace_path = "$${BUILD_WORKSPACE_DIRECTORY}/tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios/%s/output" % name
     native.genrule(
         name = "%s_update_goldens_script" % name,
@@ -89,13 +89,13 @@ def material_magic_golden_test(name, materials, inputs = ["input.shader"]):
         name = "%s_pretty_output_test" % name,
         size = "small",
         file1 = "output/%s/output/pretty/output.shader" % name,
-        file2 = "scenarios/%s/output/pretty/output.shader" % name,
+        file2 = "%s/output/pretty/output.shader" % name,
     )
     diff_test(
         name = "%s_optimized_output_test" % name,
         size = "small",
         file1 = "output/%s/output/optimized/output.shader" % name,
-        file2 = "scenarios/%s/output/optimized/output.shader" % name,
+        file2 = "%s/output/optimized/output.shader" % name,
     )
 
     for m in materials:
@@ -103,11 +103,11 @@ def material_magic_golden_test(name, materials, inputs = ["input.shader"]):
             name = "%s_pretty_output_%s_test" % (name, m.replace("/", "_")),
             size = "small",
             file1 = "output/%s/output/pretty/%s.shader" % (name, m),
-            file2 = "scenarios/%s/output/pretty/%s.shader" % (name, m),
+            file2 = "%s/output/pretty/%s.shader" % (name, m),
         )
         diff_test(
             name = "%s_optimized_output_%s_test" % (name, m.replace("/", "_")),
             size = "small",
             file1 = "output/%s/output/optimized/%s.shader" % (name, m),
-            file2 = "scenarios/%s/output/optimized/%s.shader" % (name, m),
+            file2 = "%s/output/optimized/%s.shader" % (name, m),
         )
