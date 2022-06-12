@@ -573,28 +573,29 @@ final class ModelBuilderListener extends MaterialsParserBaseListener
   @Override
   public void exitTcModRotateStageDirective( @Nonnull final MaterialsParser.TcModRotateStageDirectiveContext ctx )
   {
-    final TcModRotateStageDirective stage = new TcModRotateStageDirective();
-    stage.setDegreesPerSecond( parseNumber( ctx.degreesPerSecond ) );
-    _stage.addTcModStage( stage );
+    final TcModRotateStageDirective directive = new TcModRotateStageDirective();
+    directive.setDegreesPerSecond( parseNumber( ctx.degreesPerSecond ) );
+    _stage.addTcModStage( directive );
   }
 
   @Override
   public void exitTcModScaleStageDirective( @Nonnull final MaterialsParser.TcModScaleStageDirectiveContext ctx )
   {
-    final TcModScaleStageDirective stage = new TcModScaleStageDirective();
-    stage.setSScale( parseNumber( ctx.sScale ) );
-    stage.setTScale( parseNumber( ctx.tScale ) );
-    _stage.addTcModStage( stage );
+    final TcModScaleStageDirective directive = new TcModScaleStageDirective();
+    directive.setSScale( parseNumber( ctx.sScale ) );
+    directive.setTScale( parseNumber( ctx.tScale ) );
+    _stage.addTcModStage( directive );
   }
 
   @Override
   public void exitTcModScrollStageDirective( @Nonnull final MaterialsParser.TcModScrollStageDirectiveContext ctx )
   {
-    final TcModScrollStageDirective stage = new TcModScrollStageDirective();
-    stage.setSSpeed( parseNumber( ctx.sSpeed ) );
-    stage.setTSpeed( parseNumber( ctx.tSpeed ) );
-    _stage.addTcModStage( stage );
+    final TcModScrollStageDirective directive = new TcModScrollStageDirective();
+    directive.setSSpeed( parseNumber( ctx.sSpeed ) );
+    directive.setTSpeed( parseNumber( ctx.tSpeed ) );
+    _stage.addTcModStage( directive );
   }
+
   @Override
   public void exitMaterial( @Nonnull final MaterialsParser.MaterialContext ctx )
   {
