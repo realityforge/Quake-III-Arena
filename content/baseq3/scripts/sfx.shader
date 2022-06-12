@@ -790,35 +790,6 @@ textures/sfx/beam_blue
 
 }
 
-textures/sfx/beam_waterlight1
-	{
-        qer_editorimage textures/sfx/beam_waterlight
-	q3map_globaltexture
-	surfaceparm trans
-        surfaceparm nomarks
-        surfaceparm nonsolid
-	surfaceparm nolightmap
-	q3map_surfacelight 50
-	 //surfaceparm nomipmaps
-        qer_trans .3
-	cull none
-        //nopicmip
-	{
-		map textures/sfx/beam_waterlight
-		tcMod scale 0.35 0.35
-		tcMod turb 0 0.015 0.5 0.07
-		tcMod Scroll .15 0
-                blendFunc GL_add
-        }
-     	{
-		map textures/sfx/beam_cyan5
-		tcMod scale 0.5 0.5
-		tcMod turb 0 0.025 0.5 0.03
-		tcMod Scroll .15 .15
-                blendFunc add
-        }
-
-}
 textures/sfx/beam_waterlight2
 	{
         qer_editorimage textures/sfx/beam_waterlight
