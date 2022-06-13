@@ -17,7 +17,8 @@ public final class ValidatorTest
   @Test
   public void validateEmptyUnit()
   {
-    assertEquals( validate( new Unit() ), messages( error( "Unit contains zero materials" ) ) );
+    assertEquals( new Validator().validate( new Unit(), new Unit(), new HashSet<>() ).getMessages(),
+                  messages( warning( "Unit contains zero materials" ) ) );
   }
 
   @Test
@@ -25,26 +26,27 @@ public final class ValidatorTest
   {
     // Add a single material ... it has no stages but it is one of the magic
     // ones that need no stages
-    final Material material = new Material( "MyMaterial" );
+    final Material material = new Material( "my_material" );
     material.addSurfaceParameter( SurfaceParameter.nolightmap );
 
     final Unit unit = new Unit();
     unit.addMaterial( material );
-    assertEquals( validate( unit ), Collections.emptyList() );
+    assertEquals( new Validator().validate( unit, new Unit(), new HashSet<>() ).getMessages(),
+                  Collections.emptyList() );
   }
 
   @Test
   public void duplicateMaterials()
   {
-    final Material material1 = new Material( "MyMaterial1" );
+    final Material material1 = new Material( "my_material1" );
     material1.addSurfaceParameter( SurfaceParameter.nolightmap );
-    final Material material2 = new Material( "MyMaterial1" );
+    final Material material2 = new Material( "my_material1" );
     material2.addSurfaceParameter( SurfaceParameter.nolightmap );
-    final Material material3 = new Material( "MyMaterial2" );
+    final Material material3 = new Material( "my_material2" );
     material3.addSurfaceParameter( SurfaceParameter.nolightmap );
-    final Material material4 = new Material( "MyMaterial2" );
+    final Material material4 = new Material( "my_material2" );
     material4.addSurfaceParameter( SurfaceParameter.nolightmap );
-    final Material material5 = new Material( "MyMaterial3" );
+    final Material material5 = new Material( "my_material3" );
     material5.addSurfaceParameter( SurfaceParameter.nolightmap );
 
     final Unit unit = new Unit();
@@ -54,9 +56,9 @@ public final class ValidatorTest
     unit.addMaterial( material4 );
     unit.addMaterial( material5 );
 
-    assertEquals( validate( unit ),
-                  messages( error( "Multiple materials exist with the name 'MyMaterial1'." ),
-                            error( "Multiple materials exist with the name 'MyMaterial2'." ) ) );
+    assertEquals( new Validator().validate( unit, new Unit(), new HashSet<>() ).getErrorMessages(),
+                  messages( error( "Multiple materials exist with the name 'my_material1'." ),
+                            error( "Multiple materials exist with the name 'my_material2'." ) ) );
   }
 
   @Nonnull
@@ -72,8 +74,8 @@ public final class ValidatorTest
   }
 
   @Nonnull
-  private Collection<ValidationMessage> validate( @Nonnull final Unit unit )
+  private ValidationMessage warning( @Nonnull final String message )
   {
-    return new Validator().validate( unit, new Unit(), new HashSet<>() ).getMessages();
+    return new ValidationMessage( ValidationMessage.Type.WARNING, message );
   }
 }
