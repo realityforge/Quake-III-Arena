@@ -128,6 +128,9 @@ test --java_language_version=11
 build --tool_java_language_version=11
 test --tool_java_language_version=11
 
+# Enable the experimental persistent Java compiler.
+build --experimental_persistent_javac
+
 # Picks up host-OS-specific config lines from bazelrc files. Supported OS identifiers are linux, macos, windows, freebsd, and openbsd.
 # Enabling this flag is equivalent to using --config=linux on Linux, --config=windows on Windows, etc.
 build --enable_platform_specific_config
