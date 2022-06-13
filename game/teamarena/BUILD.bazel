@@ -16,7 +16,7 @@ load("//build_defs:rules.bzl", "DIST_VISIBILITY")
 _copy_to_directory(
     name = "teamarena",
     srcs = [
-        "//content/teamarena:material_assets",
+        "//content/teamarena:materials",
         "//content/teamarena:skin_assets",
         "//content/teamarena:ui_assets",
         "@QuakeArenaArcade_teamarena//:files",
