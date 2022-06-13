@@ -1,0 +1,6 @@
+textures/identity
+{
+  {
+    rgbGen identity
+  }
+}

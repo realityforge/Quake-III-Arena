@@ -10,13 +10,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("//build_defs:rules.bzl", "DIST_VISIBILITY")
 load("//build_defs:copy_to_directory.bzl", _copy_to_directory = "copy_to_directory")
+load("//build_defs:rules.bzl", "DIST_VISIBILITY")
 
 _copy_to_directory(
     name = "baseq3",
     srcs = [
-        "//content/baseq3:material_assets",
+        "//content/baseq3:materials",
         "//content/baseq3:skin_assets",
         "@QuakeArenaArcade_baseq3//:files",
         "@QuakeArenaArcade_baseq3//:png_files",

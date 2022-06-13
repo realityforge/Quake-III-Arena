@@ -19,12 +19,12 @@ load(
 )
 
 _attrs = {
-    "base_url_env": attr.string(mandatory = True),
-    "local_path": attr.string(mandatory = True),
-    "sha256": attr.string(),
-    "build_file_content": attr.string(mandatory = True),
-    "netrc": attr.string(doc = "Location of the .netrc file to use for authentication"),
     "auth_patterns": attr.string_dict(doc = "See http_archive repository rule docs for explanation"),
+    "base_url_env": attr.string(mandatory = True),
+    "build_file_content": attr.string(mandatory = True),
+    "local_path": attr.string(mandatory = True),
+    "netrc": attr.string(doc = "Location of the .netrc file to use for authentication"),
+    "sha256": attr.string(),
 }
 
 def _impl(repository_ctx):

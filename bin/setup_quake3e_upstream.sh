@@ -46,7 +46,7 @@ git checkout -B upstream/quake3e_formatted
 git show ${BRANCH_WITH_CLANG_FORMAT}:.clang-format >.clang-format
 # shellcheck disable=SC2038
 find code \
-    \( -name '*.h' -or -name '*.c' -or -name '*.m' \) \
+    \( -name '*.h' -or -name '*.c' -or -name '*.m' -or -name '*.hpp' -or -name '*.cpp' -or -name '*.H' -or -name '*.HPP' -or -name '*.CPP' -or -name '*.java' \) \
     ! -path 'code/libcurl/*' -and \
     ! -path 'code/libjpeg/*' -and \
     ! -path 'code/libsdl/*' -and \

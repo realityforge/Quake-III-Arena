@@ -1,0 +1,6 @@
+textures/entity
+{
+  {
+    rgbGen entity
+  }
+}

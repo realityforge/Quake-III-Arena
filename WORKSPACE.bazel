@@ -14,12 +14,15 @@
 # namespace with a fixed name.
 workspace(name = "org_realityforge_q3a")
 
+load("//third_party/bazel_skylib:repository.bzl", _load_bazel_skylib_repository = "load_repository")
 load("//third_party/buildifier:repository.bzl", _load_buildifier_repository = "load_repository")
+load("//third_party/com_github_ash2k_bazel_tools:repository.bzl", _load_com_github_ash2k_bazel_tools_repository = "load_repository")
 load("//third_party/content:repository.bzl", _load_content_repository = "load_repository")
 load("//third_party/curl:repository.bzl", _load_curl_repository = "load_repository")
 load("//third_party/gla:repository.bzl", _load_gla_repository = "load_repository")
 load("//third_party/go:repository.bzl", _load_go_repository = "load_repository")
 load("//third_party/imagemagick:repository.bzl", _load_imagemagick_repository = "load_repository")
+load("//third_party/java:repository.bzl", _load_java_repository = "load_repository")
 load("//third_party/libjpeg_turbo:repository.bzl", _load_libjpeg_turbo_repository = "load_repository")
 load("//third_party/libpng:repository.bzl", _load_libpng_repository = "load_repository")
 load("//third_party/libspng:repository.bzl", _load_libspng_repository = "load_repository")
@@ -30,11 +33,17 @@ load("//third_party/opus:repository.bzl", _load_opus_repository = "load_reposito
 load("//third_party/opusfile:repository.bzl", _load_opusfile_repository = "load_repository")
 load("//third_party/pngcrush:repository.bzl", _load_pngcrush_repository = "load_repository")
 load("//third_party/protobuf:repository.bzl", _load_protobuf_repository = "load_repository")
+load("//third_party/rules_antlr:repository.bzl", _load_rules_antlr_repository = "load_repository")
 load("//third_party/rules_apple:repository.bzl", _load_rules_apple_repository = "load_repository")
+load("//third_party/rules_graal:repository.bzl", _load_rules_graal_repository = "load_repository")
 load("//third_party/vorbis:repository.bzl", _load_vorbis_repository = "load_repository")
 load("//third_party/zlib:repository.bzl", _load_zlib_repository = "load_repository")
 
 _load_buildifier_repository()
+
+_load_bazel_skylib_repository()
+
+_load_com_github_ash2k_bazel_tools_repository()
 
 _load_content_repository()
 
@@ -45,6 +54,8 @@ _load_gla_repository()
 _load_go_repository()
 
 _load_imagemagick_repository()
+
+_load_java_repository()
 
 _load_libjpeg_turbo_repository()
 
@@ -66,21 +77,45 @@ _load_pngcrush_repository()
 
 _load_protobuf_repository()
 
+_load_rules_antlr_repository()
+
 _load_rules_apple_repository()
+
+_load_rules_graal_repository()
 
 _load_vorbis_repository()
 
 _load_zlib_repository()
 
+load("//third_party/bazel_skylib:repository2.bzl", _configure_bazel_skylib_repository = "configure_repository")
 load("//third_party/go:repository2.bzl", _configure_go_repository = "configure_repository")
+load("//third_party/java:repository2.bzl", _configure_java_repository = "configure_repository")
+load("//third_party/junit5:repository.bzl", _load_junit5_repository = "load_repository")
 load("//third_party/protobuf:repository2.bzl", _configure_protobuf_repository = "configure_repository")
+load("//third_party/rules_antlr:repository2.bzl", _configure_rules_antlr_repository = "configure_repository")
 load("//third_party/rules_apple:repository2.bzl", _configure_rules_apple_repository = "configure_repository")
+load("//third_party/rules_graal:repository2.bzl", _configure_rules_graal_repository = "configure_repository")
+
+_configure_bazel_skylib_repository()
 
 _configure_go_repository()
 
+_configure_java_repository()
+
+# Must appear after _configure_java_repository()
+_load_junit5_repository()
+
 _configure_protobuf_repository()
 
+_configure_rules_antlr_repository()
+
 _configure_rules_apple_repository()
+
+_configure_rules_graal_repository()
+
+load("//third_party/com_github_ash2k_bazel_tools:repository2.bzl", _setup_com_github_ash2k_bazel_tools_repository = "configure_repository")
+
+_setup_com_github_ash2k_bazel_tools_repository()
 
 load("//third_party/com_github_mvdan_sh:repository.bzl", _setup_com_github_mvdan_sh_repository = "configure_repository")
 

@@ -1,0 +1,6 @@
+textures/white
+{
+{
+map *white
+}
+}

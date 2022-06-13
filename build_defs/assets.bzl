@@ -20,7 +20,7 @@ def convert_tga_to_png(name):
     files = _PAK_DATA[name]["tga_files"]
     output_files = []
     for file in files:
-        _file_sans_extension = file.removesuffix(".tga").removesuffix(".TGA").lower()
+        _file_sans_extension = file.removesuffix(".tga").removesuffix(".TGA").lower().replace(".", "_")
         _input_label = "%s:%s" % (package_label, file)
         _output_file = "%s.png" % _file_sans_extension
         _target_name = "%s.png_gen" % _file_sans_extension
@@ -30,8 +30,11 @@ def convert_tga_to_png(name):
             srcs = [_input_label],
             outs = [_output_file],
             cmd = """
-export INPUT=$(location %s)
-$(location @imagemagick//:magick) convert -auto-orient "$${INPUT}" "$@" && $(location @pngcrush) -brute -ow -warn "$@" && $(location @imagemagick//:magick) compare -auto-orient -metric RMSE "$${INPUT}" "png32:$@" null: 2>/dev/null
+set -euo pipefail
+export INPUT=$(execpath %s)
+$(execpath @imagemagick//:magick) convert -auto-orient "$${INPUT}" "$@"
+$(execpath @pngcrush) -brute -ow -warn "$@"
+$(execpath @imagemagick//:magick) compare -auto-orient -metric RMSE "$${INPUT}" "png32:$@" null: 2>/dev/null
 """ % (_input_label),
             tools = ["@imagemagick//:magick", "@pngcrush"],
         )
