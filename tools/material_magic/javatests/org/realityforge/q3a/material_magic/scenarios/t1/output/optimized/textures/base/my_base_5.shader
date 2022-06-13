@@ -1,4 +1,4 @@
-textures/base/myBase_5
+textures/base/my_base_5
 {
 cull back
 polygonOffset

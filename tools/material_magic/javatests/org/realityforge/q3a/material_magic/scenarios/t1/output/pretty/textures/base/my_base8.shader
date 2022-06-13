@@ -1,4 +1,4 @@
-textures/base/myBase8
+textures/base/my_base8
 {
   q3map_surfacelight 500
   cull disable

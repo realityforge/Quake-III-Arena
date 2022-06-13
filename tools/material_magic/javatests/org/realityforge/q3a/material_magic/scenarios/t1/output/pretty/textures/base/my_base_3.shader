@@ -1,4 +1,4 @@
-textures/base/myBase_3
+textures/base/my_base_3
 {
   cull disable
   fogparms .7 .7 .7 128

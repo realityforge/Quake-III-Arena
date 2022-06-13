@@ -15,14 +15,14 @@ load(":material_magic_golden_test.bzl", "material_magic_golden_test")
 material_magic_golden_test(
     name = "t1",
     materials = [
-        "textures/base/myBase",
-        "textures/base/myBase2",
-        "textures/base/myBase_3",
-        "textures/base/myBase_4",
-        "textures/base/myBase_5",
-        "textures/base/myBase6",
-        "textures/base/myBase7",
-        "textures/base/myBase8",
+        "textures/base/my_base",
+        "textures/base/my_base2",
+        "textures/base/my_base_3",
+        "textures/base/my_base_4",
+        "textures/base/my_base_5",
+        "textures/base/my_base6",
+        "textures/base/my_base7",
+        "textures/base/my_base8",
         "textures/base/projectionShadow",
         "textures/base/moveypipe",
         "textures/base/waveywater",
@@ -33,12 +33,12 @@ material_magic_golden_test(
 material_magic_golden_test(
     name = "t2",
     inputs = [
-        "textures/base/myBase.shader",
-        "textures/base/myBase2.shader",
+        "textures/base/my_base.shader",
+        "textures/base/my_base2.shader",
     ],
     materials = [
-        "textures/base/myBase",
-        "textures/base/myBase2",
+        "textures/base/my_base",
+        "textures/base/my_base2",
     ],
 )
 

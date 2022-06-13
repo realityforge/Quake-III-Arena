@@ -1,4 +1,4 @@
-textures/base/myBase7
+textures/base/my_base7
 {
   cull disable
   surfaceparm nolightmap

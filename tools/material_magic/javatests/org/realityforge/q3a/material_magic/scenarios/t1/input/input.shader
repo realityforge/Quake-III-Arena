@@ -1,5 +1,5 @@
 // some random comment
-textures/base/myBase
+textures/base/my_base
 {
 qer_editorimage textures/sfx/xyz
 qer_nocarve
@@ -38,7 +38,7 @@ fogParms ( .85 .10 .01 ) 980
 
 
 
-  textures/base/myBase2
+  textures/base/my_base2
 {
 // This contains the natural form sans vector
 fogparms .85 .10 .01 980
@@ -61,9 +61,9 @@ skyParms env/wildspace1 - -
 Sort sky
 }
 
-textures/base/myBase_4 { /* This is a non-normalized form of "cull back" */ cull backsided }
+textures/base/my_base_4 { /* This is a non-normalized form of "cull back" */ cull backsided }
 
-textures/base/myBase_5 {
+textures/base/my_base_5 {
 /* This is a non-normalized form of "cull back" with mixed case */
 cull backSided
 // The provides just default so it weill be omitted
@@ -75,7 +75,7 @@ sort 2.0
 }
 
 
-textures/base/myBase_3
+textures/base/my_base_3
 {
 // This is a non-normalized form of "cull disable"
 cull none
@@ -87,13 +87,13 @@ skyparms - 512 -
 sort 2.3
 }
 
-textures/base/myBase6
+textures/base/my_base6
 {
 deformVertexes wave 100 sin 3 2 .1 3
 deformVertexes normal .5 .1
 }
 
-textures/base/myBase7
+textures/base/my_base7
 {
 deformVertexes autoSprite2
 surfaceparm	trans
@@ -102,7 +102,7 @@ surfaceparm nolightmap
 cull none
 }
 
-textures/base/myBase8
+textures/base/my_base8
 {
 deformVertexes autoSprite
 q3map_surfacelight	500

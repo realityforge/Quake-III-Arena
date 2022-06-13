@@ -12,7 +12,7 @@ textures/base/moveypipe
   deformVertexes bulge 3 10 1
 }
 
-textures/base/myBase
+textures/base/my_base
 {
   q3map_sun 1 1 1 100 -58 58
   q3map_surfacelight 1500
@@ -37,7 +37,7 @@ textures/base/myBase
   surfaceparm trans
 }
 
-textures/base/myBase2
+textures/base/my_base2
 {
   q3map_sun .5 .37 .19 80 315 70
   q3map_forcesunlight
@@ -56,13 +56,13 @@ textures/base/myBase2
   surfaceparm sky
 }
 
-textures/base/myBase6
+textures/base/my_base6
 {
   deformVertexes wave 100 sin 3 2 .1 3
   deformVertexes normal .5 .1
 }
 
-textures/base/myBase7
+textures/base/my_base7
 {
   cull disable
   surfaceparm nolightmap
@@ -71,7 +71,7 @@ textures/base/myBase7
   deformVertexes autoSprite2
 }
 
-textures/base/myBase8
+textures/base/my_base8
 {
   q3map_surfacelight 500
   cull disable
@@ -81,7 +81,7 @@ textures/base/myBase8
   deformVertexes autoSprite
 }
 
-textures/base/myBase_3
+textures/base/my_base_3
 {
   cull disable
   fogparms .7 .7 .7 128
@@ -89,12 +89,12 @@ textures/base/myBase_3
   sort 2.3
 }
 
-textures/base/myBase_4
+textures/base/my_base_4
 {
   cull back
 }
 
-textures/base/myBase_5
+textures/base/my_base_5
 {
   cull back
   polygonOffset
