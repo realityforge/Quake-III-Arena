@@ -6,7 +6,6 @@ nopicmip
 nomipmaps
 portal
 entityMergable
-fogparms ( .85 .1 .01 ) 980
 skyparms env/wildspace1 - -
 sort sky
 surfaceparm noimpact

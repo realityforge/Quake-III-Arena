@@ -31,8 +31,6 @@ nopicmip
 
         polygonOffset
 nomipmaps
-// This contains the "vertex" form
-fogParms ( .85 .10 .01 ) 980
 }
 
 
@@ -40,8 +38,6 @@ fogParms ( .85 .10 .01 ) 980
 
   textures/base/my_base2
 {
-// This contains the natural form sans vector
-fogparms .85 .10 .01 980
 surfaceparm noimpact
 EntityMergAble
 surfaceparm nolightmap
@@ -79,8 +75,6 @@ textures/base/my_base_3
 {
 // This is a non-normalized form of "cull disable"
 cull none
-// This contains the natural form with the numbers that were historically supported buyt now ignored
-fogparms 0.7 0.7 0.7 128 64
 // Increases separation between layers but no near/far box
 skyparms - 512 -
 // Numeric value that is float-like

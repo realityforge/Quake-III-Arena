@@ -32,7 +32,6 @@ textures/base/my_base
   portal
   entityMergable
   polygonOffset
-  fogparms ( .85 .1 .01 ) 980
   surfaceparm nomarks
   surfaceparm trans
 }
@@ -48,7 +47,6 @@ textures/base/my_base2
   nomipmaps
   portal
   entityMergable
-  fogparms ( .85 .1 .01 ) 980
   skyparms env/wildspace1 - -
   sort sky
   surfaceparm noimpact
@@ -84,7 +82,6 @@ textures/base/my_base8
 textures/base/my_base_3
 {
   cull disable
-  fogparms ( .7 .7 .7 ) 128
   skyparms - 512 -
   sort 2.3
 }

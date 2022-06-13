@@ -43,6 +43,14 @@ material_magic_golden_test(
 )
 
 material_magic_golden_test(
+    name = "fogparms",
+    materials = [
+        "textures/fogparms1",
+        "textures/fogparms2",
+    ],
+)
+
+material_magic_golden_test(
     name = "material_name",
     materials = [
         "textures/simple",
@@ -250,6 +258,7 @@ multirun(
     commands = [
         ":t1_update_goldens",
         ":t2_update_goldens",
+        ":fogparms_update_goldens",
         ":material_name_update_goldens",
         ":skyparms_update_goldens",
         ":stage_alphafunc_update_goldens",
