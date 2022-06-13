@@ -17,8 +17,8 @@ public final class FogDirectiveTest
     directive.setBlue( .76F );
     directive.setDepthForOpaque( 70 );
 
-    assertEquals( "fogparms 1 .77 .76 70\n", MaterialOutput.outputAsString( directive::write ) );
-    assertEquals( "fogparms 1 .77 .76 70\n",
+    assertEquals( "fogparms ( 1 .77 .76 ) 70\n", MaterialOutput.outputAsString( directive::write ) );
+    assertEquals( "fogparms ( 1 .77 .76 ) 70\n",
                   MaterialOutput.outputAsString( directive::write, MaterialOutput.Strategy.RUNTIME_OPTIMIZED ) );
   }
 

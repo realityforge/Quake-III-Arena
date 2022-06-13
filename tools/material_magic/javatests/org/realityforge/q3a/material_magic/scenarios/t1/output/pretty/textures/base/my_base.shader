@@ -18,7 +18,7 @@ textures/base/my_base
   portal
   entityMergable
   polygonOffset
-  fogparms .85 .1 .01 980
+  fogparms ( .85 .1 .01 ) 980
   surfaceparm nomarks
   surfaceparm trans
 }

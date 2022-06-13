@@ -5,7 +5,7 @@ import java.util.Objects;
 import javax.annotation.Nonnull;
 import org.realityforge.q3a.material_magic.util.MaterialOutput;
 
-public class FogDirective
+public final class FogDirective
 {
   private float _red;
   private float _green;
@@ -31,9 +31,11 @@ public class FogDirective
   void write( @Nonnull final MaterialOutput output ) throws IOException
   {
     output.writeDirective( "fogparms",
+                           "(",
                            EmitUtil.floatToString( _red ),
                            EmitUtil.floatToString( _green ),
                            EmitUtil.floatToString( _blue ),
+                           ")",
                            Integer.toString( _depthForOpaque ) );
   }
 
