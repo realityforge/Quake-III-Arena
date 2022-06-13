@@ -139,6 +139,13 @@ build --experimental_persistent_javac
 test --experimental_strict_java_deps error
 build --experimental_strict_java_deps error
 
+# Explicitly specify a dependency to JUnit or Hamcrest in a java_test instead of accidentally obtaining from the TestRunner's deps
+test --explicit_java_test_deps
+build --explicit_java_test_deps
+
+# Check whether the dependencies of an aar_import are complete
+build --experimental_import_deps_checking error
+
 # filesets crossing package boundaries are reported as errors
 build --strict_filesets
 
