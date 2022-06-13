@@ -1,0 +1,6 @@
+textures/equal
+{
+{
+depthFunc equal
+}
+}

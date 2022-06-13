@@ -1,0 +1,6 @@
+textures/vertex
+{
+  {
+    rgbGen vertex
+  }
+}

@@ -1,0 +1,6 @@
+textures/filter
+{
+  {
+    blendFunc filter
+  }
+}

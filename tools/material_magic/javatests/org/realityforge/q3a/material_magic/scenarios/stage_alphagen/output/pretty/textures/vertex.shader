@@ -1,0 +1,6 @@
+textures/vertex
+{
+  {
+    alphaGen vertex
+  }
+}

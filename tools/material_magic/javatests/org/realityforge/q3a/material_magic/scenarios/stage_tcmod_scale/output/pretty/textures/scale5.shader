@@ -1,0 +1,5 @@
+textures/scale5
+{
+  {
+  }
+}

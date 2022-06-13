@@ -1,0 +1,6 @@
+textures/entity
+{
+{
+alphaGen entity
+}
+}

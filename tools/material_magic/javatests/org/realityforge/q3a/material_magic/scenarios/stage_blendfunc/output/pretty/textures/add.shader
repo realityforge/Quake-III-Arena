@@ -1,0 +1,6 @@
+textures/add
+{
+  {
+    blendFunc add
+  }
+}

@@ -1,0 +1,71 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+load("@rules_java//java:defs.bzl", "java_library")
+
+java_library(
+    name = "model",
+    srcs = [
+        "AlphaFuncStageDirective.java",
+        "AlphaGenStageDirective.java",
+        "AnimMapStageDirective.java",
+        "AutoSprite2DeformStageDirective.java",
+        "AutoSpriteDeformStageDirective.java",
+        "BlendFuncStageDirective.java",
+        "BulgeDeformStageDirective.java",
+        "ClampMapStageDirective.java",
+        "CullType.java",
+        "DeformStageDirective.java",
+        "DepthFuncStageDirective.java",
+        "DepthWriteStageDirective.java",
+        "DetailStageDirective.java",
+        "EmitUtil.java",
+        "FogDirective.java",
+        "MapStageDirective.java",
+        "Material.java",
+        "MoveDeformStageDirective.java",
+        "NormalDeformStageDirective.java",
+        "ProjectionShadowDeformStageDirective.java",
+        "Q3mapDirectives.java",
+        "QerDirectives.java",
+        "RgbGenStageDirective.java",
+        "SkyDirective.java",
+        "SortDirective.java",
+        "SortKey.java",
+        "Stage.java",
+        "SunDirective.java",
+        "SurfaceParameter.java",
+        "TcGenStageDirective.java",
+        "TcModRotateStageDirective.java",
+        "TcModScaleStageDirective.java",
+        "TcModScrollStageDirective.java",
+        "TcModStageDirective.java",
+        "TcModStretchStageDirective.java",
+        "TcModTransformStageDirective.java",
+        "TcModTurbStageDirective.java",
+        "TextDeformStageDirective.java",
+        "Unit.java",
+        "VideoMapStageDirective.java",
+        "WaveDeformStageDirective.java",
+        "WaveForm.java",
+    ],
+    visibility = [
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic:__pkg__",
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader:__pkg__",
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/validator:__pkg__",
+        "//tools/material_magic/javatests/org/realityforge/q3a/material_magic:__subpackages__",
+        "//tools/material_magic/javatests/org/realityforge/q3a/material_magic/model/validator:__pkg__",
+    ],
+    deps = [
+        "//third_party/java:javax_annotation",
+        "//tools/material_magic/java/org/realityforge/q3a/material_magic/util:MaterialOutput",
+    ],
+)
