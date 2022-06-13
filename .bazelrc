@@ -135,6 +135,9 @@ build --experimental_persistent_javac
 test --experimental_strict_java_deps error
 build --experimental_strict_java_deps error
 
+# filesets crossing package boundaries are reported as errors
+build --strict_filesets
+
 # Picks up host-OS-specific config lines from bazelrc files. Supported OS identifiers are linux, macos, windows, freebsd, and openbsd.
 # Enabling this flag is equivalent to using --config=linux on Linux, --config=windows on Windows, etc.
 build --enable_platform_specific_config
