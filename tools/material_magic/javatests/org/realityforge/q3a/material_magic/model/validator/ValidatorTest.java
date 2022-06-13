@@ -3,6 +3,7 @@ package org.realityforge.q3a.material_magic.model.validator;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import javax.annotation.Nonnull;
 import org.junit.jupiter.api.Test;
 import org.realityforge.q3a.material_magic.model.Material;
@@ -16,7 +17,7 @@ public final class ValidatorTest
   @Test
   public void validateEmptyUnit()
   {
-    assertEquals( validate( new Unit() ), Collections.singletonList( "Unit contains zero materials" ) );
+    assertEquals( validate( new Unit() ), messages( error( "Unit contains zero materials" ) ) );
   }
 
   @Test
@@ -54,13 +55,25 @@ public final class ValidatorTest
     unit.addMaterial( material5 );
 
     assertEquals( validate( unit ),
-                  Arrays.asList( "Multiple materials exist with the name 'MyMaterial1'.",
-                                 "Multiple materials exist with the name 'MyMaterial2'." ) );
+                  messages( error( "Multiple materials exist with the name 'MyMaterial1'." ),
+                            error( "Multiple materials exist with the name 'MyMaterial2'." ) ) );
   }
 
   @Nonnull
-  private Collection<String> validate( @Nonnull final Unit unit )
+  private Collection<ValidationMessage> messages( @Nonnull final ValidationMessage... messages )
   {
-    return new Validator().validate( unit );
+    return Arrays.asList( messages );
+  }
+
+  @Nonnull
+  private ValidationMessage error( @Nonnull final String message )
+  {
+    return new ValidationMessage( ValidationMessage.Type.ERROR, message );
+  }
+
+  @Nonnull
+  private Collection<ValidationMessage> validate( @Nonnull final Unit unit )
+  {
+    return new Validator().validate( unit, new Unit(), new HashSet<>() ).getMessages();
   }
 }

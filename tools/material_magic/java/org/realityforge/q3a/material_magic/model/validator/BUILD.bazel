@@ -14,7 +14,11 @@ load("@rules_java//java:defs.bzl", "java_library")
 
 java_library(
     name = "validator",
-    srcs = ["Validator.java"],
+    srcs = [
+        "ValidationMessage.java",
+        "ValidationResult.java",
+        "Validator.java",
+    ],
     visibility = [
         "//tools/material_magic/java/org/realityforge/q3a/material_magic:__pkg__",
         "//tools/material_magic/javatests/org/realityforge/q3a/material_magic/model/validator:__pkg__",
