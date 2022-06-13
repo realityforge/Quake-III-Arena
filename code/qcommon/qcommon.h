@@ -688,8 +688,8 @@ void Com_GameRestart(int checksumFeed, bool disconnect);
 
 int Com_Milliseconds(void); // will be journaled properly
 uint32_t Com_BlockChecksum(const void* buffer, size_t length);
-int Com_Filter(char* filter, char* name, int casesensitive);
-int Com_FilterPath(char* filter, char* name, int casesensitive);
+int Com_Filter(const char* filter, const char* name, int casesensitive);
+int Com_FilterPath(const char* filter, const char* name, int casesensitive);
 int Com_RealTime(qtime_t* qtime);
 bool Com_SafeMode(void);
 void Com_RunAndTimeServerPacket(netadr_t* evFrom, msg_t* buf);

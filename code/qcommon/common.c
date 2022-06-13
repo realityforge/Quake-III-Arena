@@ -549,12 +549,11 @@ void Info_Print(const char* s)
     }
 }
 
-char* Com_StringContains(char* str1, char* str2, int casesensitive)
+const char* Com_StringContains(const char* str1, const char* str2, int casesensitive)
 {
-    int len, i, j;
-
-    len = strlen(str1) - strlen(str2);
-    for (i = 0; i <= len; i++, str1++) {
+    const size_t len = strlen(str1) - strlen(str2);
+    for (int i = 0; i <= len; i++, str1++) {
+        int j;
         for (j = 0; str2[j]; j++) {
             if (casesensitive) {
                 if (str1[j] != str2[j]) {
@@ -573,7 +572,7 @@ char* Com_StringContains(char* str1, char* str2, int casesensitive)
     return NULL;
 }
 
-int Com_Filter(char* filter, char* name, int casesensitive)
+int Com_Filter(const char* filter, const char* name, int casesensitive)
 {
     char buf[MAX_TOKEN_CHARS];
     char* ptr;
@@ -650,7 +649,7 @@ int Com_Filter(char* filter, char* name, int casesensitive)
     return true;
 }
 
-int Com_FilterPath(char* filter, char* name, int casesensitive)
+int Com_FilterPath(const char* filter, const char* name, int casesensitive)
 {
     int i;
     char new_filter[MAX_QPATH];
