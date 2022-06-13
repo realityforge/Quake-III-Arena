@@ -6,7 +6,7 @@ textures/liquids/lavahell2
   qer_editorimage textures/liquids/lavahell2
   qer_nocarve
   cull disable
-  fogparms .8519142 .309723 0 128
+  fogparms ( .8519142 .309723 0 ) 128
   surfaceparm lava
   surfaceparm noimpact
   surfaceparm nolightmap

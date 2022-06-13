@@ -2,7 +2,7 @@ textures/sfx/mkc_fog_tdm3
 {
   q3map_globaltexture
   qer_editorimage textures/sfx/hellfog
-  fogparms .3 .2 .2 320
+  fogparms ( .3 .2 .2 ) 320
   surfaceparm fog
   surfaceparm nodrop
   surfaceparm nolightmap

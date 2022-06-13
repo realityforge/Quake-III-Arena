@@ -5,7 +5,7 @@ textures/liquids/xripplewater2
   tesssize 64
   qer_editorimage textures/liquids/ripplewater2
   qer_trans .5
-  fogparms .3 .3 1 512
+  fogparms ( .3 .3 1 ) 512
   surfaceparm fog
   surfaceparm nolightmap
   surfaceparm nonsolid

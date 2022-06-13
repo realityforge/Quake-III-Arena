@@ -2,7 +2,7 @@ textures/sfx/mkc_fog_ctfblue
 {
   q3map_globaltexture
   qer_editorimage textures/sfx/fog_timdm1
-  fogparms .2 .2 .25 320
+  fogparms ( .2 .2 .25 ) 320
   surfaceparm fog
   surfaceparm nodrop
   surfaceparm nolightmap

@@ -5,7 +5,7 @@ textures/eerie/lavahell
   qer_editorimage textures/eerie/lavahell
   qer_nocarve
   cull disable
-  fogparms .8519142 .309723 0 128
+  fogparms ( .8519142 .309723 0 ) 128
   surfaceparm lava
   surfaceparm noimpact
   surfaceparm nolightmap

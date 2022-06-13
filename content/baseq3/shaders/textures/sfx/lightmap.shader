@@ -1,6 +1,6 @@
 textures/sfx/lightmap
 {
-  fogparms .7 .1 .1 64
+  fogparms ( .7 .1 .1 ) 64
   surfaceparm fog
   surfaceparm nodrop
   surfaceparm nonsolid

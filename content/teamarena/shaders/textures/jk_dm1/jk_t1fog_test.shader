@@ -1,7 +1,7 @@
 textures/jk_dm1/jk_t1fog_test
 {
   qer_editorimage textures/jk_dm1/jk_t1fog_test
-  fogparms .85 .1 .01 980
+  fogparms ( .85 .1 .01 ) 980
   surfaceparm fog
   surfaceparm nodrop
   surfaceparm nolightmap

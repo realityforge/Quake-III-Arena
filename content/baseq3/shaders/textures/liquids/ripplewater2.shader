@@ -3,7 +3,7 @@ textures/liquids/ripplewater2
   q3map_globaltexture
   tesssize 64
   qer_trans .5
-  fogparms .5 .12 1 200
+  fogparms ( .5 .12 1 ) 200
   surfaceparm fog
   surfaceparm nolightmap
   surfaceparm nonsolid

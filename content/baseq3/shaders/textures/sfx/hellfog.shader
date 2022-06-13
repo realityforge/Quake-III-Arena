@@ -3,7 +3,7 @@ textures/sfx/hellfog
   q3map_surfacelight 100
   q3map_globaltexture
   qer_editorimage textures/sfx/hellfog
-  fogparms .55 .11 .1 300
+  fogparms ( .55 .11 .1 ) 300
   surfaceparm fog
   surfaceparm nodrop
   surfaceparm nolightmap
