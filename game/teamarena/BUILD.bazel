@@ -33,9 +33,9 @@ genrule(
     srcs = [":teamarena"],
     outs = ["pak0.pk3"],
     cmd = """
-export ZIPPER=`pwd`/$(location @bazel_tools//tools/zip:zipper)
+export ZIPPER=`pwd`/$(execpath @bazel_tools//tools/zip:zipper)
 export TARGET=`pwd`/$@
-cd $(location :teamarena)
+cd $(execpath :teamarena)
 find .  ! -type d |  sed -e "s/^\\.\\///" | awk '{print "\\"" $$0 "\\"" }' | sort | xargs $${ZIPPER} c $${TARGET}
     """,
     tools = ["@bazel_tools//tools/zip:zipper"],
