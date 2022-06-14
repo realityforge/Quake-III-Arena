@@ -33,6 +33,10 @@ fetch --repository_cache=~/.cache/bazel-repo
 query --repository_cache=~/.cache/bazel-repo
 build --disk_cache=~/.cache/bazel-disk
 
+# force redownloading when repository URLs are changed. Otherwise, it's possible broken URLs can be masked
+# by the presence of a repository cache entry with the same hash.
+common --experimental_repository_cache_urls_as_default_canonical_id
+
 # Support implementation_deps attribute on cc_library
 build --experimental_cc_implementation_deps
 test --experimental_cc_implementation_deps
