@@ -9,7 +9,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-load("//build_defs:copy_to_directory.bzl", _copy_to_directory = "copy_to_directory")
+load("//build_defs:copy_to_directory.bzl", "copy_to_directory")
 load("@rules_cc//cc:defs.bzl", "cc_binary")
 
 # TODO: Extract product name into var somewhere ... also use that product name to generate product.h somewhere
@@ -24,7 +24,7 @@ cc_binary(
     deps = ["//code/server:ded"],
 )
 
-_copy_to_directory(
+copy_to_directory(
     name = "package_dir",
     srcs = [
         ":Quake3Arena",
