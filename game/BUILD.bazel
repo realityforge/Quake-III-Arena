@@ -9,8 +9,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-load("//build_defs:copy_to_directory.bzl", "copy_to_directory")
 load("@rules_cc//cc:defs.bzl", "cc_binary")
+load("//build_defs:copy_to_directory.bzl", "copy_to_directory")
 
 # TODO: Extract product name into var somewhere ... also use that product name to generate product.h somewhere
 cc_binary(
