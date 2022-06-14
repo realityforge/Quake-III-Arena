@@ -42,8 +42,11 @@ There is also some more technology specific challenges that are associated with 
 
 The final solution was developed in the Java language, using the Antlr parser generator. This toolkit was selected as the author was familiar with these tools but was unfamiliar with how to integrate it with Bazel. The solution also opted to use Junit version 5 rather than Junit version 3 or 4 as Junit 5 is not supported in Bazel by default and thus using Junit version 5 forced a deeper understanding of the Bazel test infrastructure.
 
-...
+Shaders that contained invalid directives and were not referenced by the game logic code, maps, models or menu files were removed from the shader files. This was done in an adhoc fashion and there still exists shaders that are seemingly unreferenced.
 
+The solution involved developing a tool capable of reading and writing the contents of the existing shader files. The input shader files were split so that each shader was placed in a separate shader file that was named to match the underlying shader name. This made it easier to locate, inspect and modify the shaders over time.
+
+To optimise the loading of the shader at runtime, the shaders were combined into a single file per game type and non-runtime directives were stripped from the shaders. This reduced startup time spent parsing shader files by ~60%. This is probably directly related to the size of the input files. In the baseq3 game type, the shader files were combined at runtime and came to ~542550 bytes while the single shader file after this change was completed was 319232 bytes. In a similar fashion the TeamArena shader files went from ~641680 bytes to 147749 bytes. While this speed improvement is nice, it is insignificant relative to other costs during initialisation.
 
 ### Evaluation
 
