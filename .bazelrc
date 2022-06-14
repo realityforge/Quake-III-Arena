@@ -33,6 +33,10 @@ fetch --repository_cache=~/.cache/bazel-repo
 query --repository_cache=~/.cache/bazel-repo
 build --disk_cache=~/.cache/bazel-disk
 
+# Support implementation_deps attribute on cc_library
+build --experimental_cc_implementation_deps
+test --experimental_cc_implementation_deps
+
 # To ensure Bazel builds consistently on windows.
 # See https://docs.bazel.build/versions/main/windows.html#enable-symlink-support
 startup --windows_enable_symlinks
