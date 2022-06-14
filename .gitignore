@@ -9,7 +9,7 @@
 .Trashes/
 ._*
 .DS_Store
-Icon?
+Icon\?
 
 # Bazel Build dirs
 ############################
