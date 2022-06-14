@@ -10,10 +10,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("//build_defs:copy_to_directory.bzl", _copy_to_directory = "copy_to_directory")
+load("//build_defs:copy_to_directory.bzl", "copy_to_directory")
 load("//build_defs:rules.bzl", "DIST_VISIBILITY")
 
-_copy_to_directory(
+copy_to_directory(
     name = "teamarena",
     srcs = [
         "//content/teamarena:materials",
