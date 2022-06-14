@@ -12,6 +12,7 @@
 
 load("//build_defs:copy_to_directory.bzl", "copy_to_directory")
 load("//build_defs:rules.bzl", "DIST_VISIBILITY")
+load("//third_party/content:metadata.bzl", "REPLACE_RULES")
 
 copy_to_directory(
     name = "teamarena",
@@ -26,6 +27,7 @@ copy_to_directory(
         "@q3a_missionpack_pak1//:files",
     ],
     downcase = True,
+    replace_prefixes = REPLACE_RULES,
 )
 
 genrule(
