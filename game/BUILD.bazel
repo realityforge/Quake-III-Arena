@@ -1,5 +1,3 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary")
-
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -12,6 +10,7 @@ load("@rules_cc//cc:defs.bzl", "cc_binary")
 # See the License for the specific language governing permissions and
 # limitations under the License.
 load("//build_defs:copy_to_directory.bzl", _copy_to_directory = "copy_to_directory")
+load("@rules_cc//cc:defs.bzl", "cc_binary")
 
 # TODO: Extract product name into var somewhere ... also use that product name to generate product.h somewhere
 cc_binary(
