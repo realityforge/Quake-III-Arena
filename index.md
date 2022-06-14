@@ -82,7 +82,7 @@ The major changes of the project are tracked in this table.
       <td>0</td>
       <td>10%</td>
       <td>2022-05-20</td>
-      <td>&nbsp;</td>
+      <td>2022-06-14</td>
     </tr>
   </tbody>
 </table>
