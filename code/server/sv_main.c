@@ -759,8 +759,7 @@ static void SV_ConnectionlessPacket(netadr_t from, msg_t* msg)
         // server disconnect messages when their new server sees our final
         // sequenced messages to the old client
     } else {
-        Com_DPrintf("bad connectionless packet from %s:\n%s\n",
-                    NET_AdrToString(from), s);
+        Com_DPrintf("bad connectionless packet from %s:\n%s\n", NET_AdrToString(from), s);
     }
 }
 
