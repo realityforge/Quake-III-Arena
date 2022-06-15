@@ -461,7 +461,7 @@ void CM_TraceThroughBrush(traceWork_t* tw, cbrush_t* brush)
                 return;
             }
 
-            // if it doesn't cross the plane, the plane isn't relevent
+            // if it doesn't cross the plane, the plane isn't relevant
             if (d1 <= 0 && d2 <= 0) {
                 continue;
             }
@@ -513,7 +513,7 @@ void CM_TraceThroughBrush(traceWork_t* tw, cbrush_t* brush)
                 return;
             }
 
-            // if it doesn't cross the plane, the plane isn't relevent
+            // if it doesn't cross the plane, the plane isn't relevant
             if (d1 <= 0 && d2 <= 0) {
                 continue;
             }
