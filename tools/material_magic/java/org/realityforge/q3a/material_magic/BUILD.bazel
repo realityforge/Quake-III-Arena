@@ -13,6 +13,15 @@
 load("@rules_graal//graal:graal.bzl", "graal_binary")
 load("@rules_java//java:defs.bzl", "java_binary")
 
+_DEPS = [
+    "//third_party/java:javax_annotation",
+    "//third_party/java:picocli",
+    "//tools/material_magic/java/org/realityforge/q3a/material_magic/model",
+    "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader",
+    "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/validator",
+    "//tools/material_magic/java/org/realityforge/q3a/material_magic/util:MaterialOutput",
+]
+
 java_binary(
     name = "Main",
     srcs = ["Main.java"],
@@ -21,14 +30,7 @@ java_binary(
         "//content/teamarena:__pkg__",
         "//tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios:__pkg__",
     ],
-    deps = [
-        "//third_party/java:javax_annotation",
-        "//third_party/java:picocli",
-        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model",
-        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/reader",
-        "//tools/material_magic/java/org/realityforge/q3a/material_magic/model/validator",
-        "//tools/material_magic/java/org/realityforge/q3a/material_magic/util:MaterialOutput",
-    ],
+    deps = _DEPS,
 )
 
 graal_binary(
