@@ -147,7 +147,6 @@ static cvarTable_t gameCvarTable[] = {
     { &g_debugDamage, "g_debugDamage", "0", 0, 0, false },
     { &g_debugAlloc, "g_debugAlloc", "0", 0, 0, false },
     { &g_motd, "g_motd", "", 0, 0, false },
-    { &g_blood, "com_blood", "1", 0, 0, false },
 
     { &g_podiumDist, "g_podiumDist", "80", 0, 0, false },
     { &g_podiumDrop, "g_podiumDrop", "70", 0, 0, false },
