@@ -52,9 +52,6 @@ extern cvar_t* sv_packetdelay;
 
 extern cvar_t* com_gamename;
 extern cvar_t* com_protocol;
-#ifdef LEGACY_PROTOCOL
-extern cvar_t* com_legacyprotocol;
-#endif
 #ifndef DEDICATED
 extern cvar_t* com_maxfpsUnfocused;
 extern cvar_t* com_maxfpsMinimized;

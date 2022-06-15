@@ -105,7 +105,7 @@ static void Demos_MenuInit(void)
     int i, j;
     int len;
     char *demoname, extension[32];
-    int protocol, protocolLegacy;
+    int protocol;
 
     memset(&s_demos, 0, sizeof(demos_t));
 
@@ -198,13 +198,10 @@ static void Demos_MenuInit(void)
     s_demos.list.itemnames = (const char**)s_demos.demolist;
     s_demos.list.columns = 3;
 
-    protocolLegacy = trap_Cvar_VariableValue("com_legacyprotocol");
     protocol = trap_Cvar_VariableValue("com_protocol");
 
     if (!protocol)
         protocol = trap_Cvar_VariableValue("protocol");
-    if (protocolLegacy == protocol)
-        protocolLegacy = 0;
 
     Com_sprintf(extension, sizeof(extension), ".%s%d", DEMOEXT, protocol);
     s_demos.numDemos = trap_FS_GetFileList("demos", extension, s_demos.names, ARRAY_LEN(s_demos.names));
@@ -212,26 +209,15 @@ static void Demos_MenuInit(void)
     demoname = s_demos.names;
     i = 0;
 
-    for (j = 0; j < 2; j++) {
-        if (s_demos.numDemos > MAX_DEMOS)
-            s_demos.numDemos = MAX_DEMOS;
+    if (s_demos.numDemos > MAX_DEMOS)
+        s_demos.numDemos = MAX_DEMOS;
 
-        for (; i < s_demos.numDemos; i++) {
-            s_demos.list.itemnames[i] = demoname;
+    for (; i < s_demos.numDemos; i++) {
+        s_demos.list.itemnames[i] = demoname;
 
-            len = strlen(demoname);
+        len = strlen(demoname);
 
-            demoname += len + 1;
-        }
-
-        if (!j) {
-            if (protocolLegacy > 0 && s_demos.numDemos < MAX_DEMOS) {
-                Com_sprintf(extension, sizeof(extension), ".%s%d", DEMOEXT, protocolLegacy);
-                s_demos.numDemos += trap_FS_GetFileList("demos", extension, demoname,
-                                                        ARRAY_LEN(s_demos.names) - (demoname - s_demos.names));
-            } else
-                break;
-        }
+        demoname += len + 1;
     }
 
     s_demos.list.numitems = s_demos.numDemos;

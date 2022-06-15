@@ -336,15 +336,8 @@ void CL_SystemInfoChanged(void)
     cl.serverId = atoi(Info_ValueForKey(systemInfo, "sv_serverid"));
 
 #ifdef USE_VOIP
-#ifdef LEGACY_PROTOCOL
-    if (clc.compat)
-        clc.voipEnabled = false;
-    else
-#endif
-    {
-        s = Info_ValueForKey(systemInfo, "sv_voipProtocol");
-        clc.voipEnabled = !Q_stricmp(s, "opus");
-    }
+    s = Info_ValueForKey(systemInfo, "sv_voipProtocol");
+    clc.voipEnabled = !Q_stricmp(s, "opus");
 #endif
 
     // don't set any vars when playing a demo

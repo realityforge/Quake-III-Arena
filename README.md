@@ -218,10 +218,6 @@ The defaults for these variables differ depending on the target platform.
                                       standalone mode
   com_homepath                      - Specify name that is to be appended to the
                                       home path
-  com_legacyprotocol                - Specify protocol version number for
-                                      legacy Quake3 1.32c protocol, see
-                                      "Network protocols" section below
-                                      (startup only)
   com_maxfpsUnfocused               - Maximum frames per second when unfocused
   com_maxfpsMinimized               - Maximum frames per second when minimized
   com_busyWait                      - Will use a busy loop to wait for rendering

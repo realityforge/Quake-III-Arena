@@ -2773,41 +2773,26 @@ static void UI_LoadDemos(void)
     char demolist[NAMEBUFSIZE];
     char demoExt[32];
     char* demoname;
-    int i, j, len;
-    int protocol, protocolLegacy;
+    int len;
+    int protocol;
 
-    protocolLegacy = trap_Cvar_VariableValue("com_legacyprotocol");
     protocol = trap_Cvar_VariableValue("com_protocol");
 
     if (!protocol)
         protocol = trap_Cvar_VariableValue("protocol");
-    if (protocolLegacy == protocol)
-        protocolLegacy = 0;
 
     Com_sprintf(demoExt, sizeof(demoExt), ".%s%d", DEMOEXT, protocol);
     uiInfo.demoCount = trap_FS_GetFileList("demos", demoExt, demolist, ARRAY_LEN(demolist));
 
     demoname = demolist;
-    i = 0;
 
-    for (j = 0; j < 2; j++) {
-        if (uiInfo.demoCount > MAX_DEMOS)
-            uiInfo.demoCount = MAX_DEMOS;
+    if (uiInfo.demoCount > MAX_DEMOS)
+        uiInfo.demoCount = MAX_DEMOS;
 
-        for (; i < uiInfo.demoCount; i++) {
-            len = strlen(demoname);
-            uiInfo.demoList[i] = String_Alloc(demoname);
-            demoname += len + 1;
-        }
-
-        if (!j) {
-            if (protocolLegacy > 0 && uiInfo.demoCount < MAX_DEMOS) {
-                Com_sprintf(demoExt, sizeof(demoExt), ".%s%d", DEMOEXT, protocolLegacy);
-                uiInfo.demoCount += trap_FS_GetFileList("demos", demoExt, demolist, ARRAY_LEN(demolist));
-                demoname = demolist;
-            } else
-                break;
-        }
+    for (int i = 0; i < uiInfo.demoCount; i++) {
+        len = strlen(demoname);
+        uiInfo.demoList[i] = String_Alloc(demoname);
+        demoname += len + 1;
     }
 }
 
