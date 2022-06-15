@@ -31,7 +31,6 @@ PLUGIN_COPTS = BASE_COPTS + [
 PLUGIN_LINKOPTS = select({
     "@platforms//os:macos": [
         "-dynamiclib",
-        "-mmacosx-version-min=11.0",
         "-exported_symbols_list $(rootpath //build_defs:exported_symbols.lds)",
     ],
 })
