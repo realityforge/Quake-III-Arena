@@ -276,7 +276,6 @@ void SV_ClientThink(client_t* cl, usercmd_t* cmd);
 void SV_WriteDownloadToClient(client_t* cl, msg_t* msg);
 
 #ifdef DEDICATED
-
 //
 // sv_ccmds.c
 //
