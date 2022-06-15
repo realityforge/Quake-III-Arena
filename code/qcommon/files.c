@@ -2882,13 +2882,10 @@ void FS_InitFilesystem(void)
     // graphics screen when the font fails to load
     if (FS_ReadFile("default.cfg", NULL) <= 0) {
         Com_Error(ERR_FATAL, "Couldn't load default.cfg");
-        // bk001208 - SafeMode see below, FIXME?
     }
 
     Q_strncpyz(lastValidBase, fs_basepath->string, sizeof(lastValidBase));
     Q_strncpyz(lastValidGame, fs_gamedirvar->string, sizeof(lastValidGame));
-
-    // bk001208 - SafeMode see below, FIXME?
 }
 
 void FS_Restart(int checksumFeed)
@@ -2925,7 +2922,6 @@ void FS_Restart(int checksumFeed)
         Com_Error(ERR_FATAL, "Couldn't load default.cfg");
     }
 
-    // bk010116 - new check before safeMode
     if (Q_stricmp(fs_gamedirvar->string, lastValidGame)) {
         // skip the q3config.cfg if "safe" is on the command line
         if (!Com_SafeMode()) {

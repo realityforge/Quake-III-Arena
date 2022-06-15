@@ -43,7 +43,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <dlfcn.h>
 
 #ifdef __linux__
-#include <fpu_control.h> // bk001213 - force dumps on divide by zero
+#include <fpu_control.h>
 #endif
 
 // FIXME TTimo should we gard this? most *nix system should comply?
@@ -53,7 +53,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../qcommon/qcommon.h"
 #include "../renderer/tr_public.h"
 
-#include "linux_local.h" // bk001204
+#include "linux_local.h"
 
 // Structure containing functions exported from refresh DLL
 refexport_t re;
@@ -146,14 +146,13 @@ NORETURN void Sys_Error(const char* error, ...)
     va_end(argptr);
     fprintf(stderr, "Sys_Error: %s\n", string);
 
-    Sys_Exit(1); // bk010104 - use single exit point.
+    Sys_Exit(1);
 }
 
 /*****************************************************************************/
 
 void Sys_UnloadDll(void* dllHandle)
 {
-    // bk001206 - verbose error reporting
     const char* err;
     if (!dllHandle) {
         Com_Printf("Sys_UnloadDll(NULL)\n");
@@ -196,7 +195,6 @@ void* Sys_LoadDll(const char* name, char* fqpath,
 
     *fqpath = 0;
 
-    // bk001206 - let's have some paranoia
     assert(name);
 
     getcwd(curpath, sizeof(curpath));
@@ -208,7 +206,6 @@ void* Sys_LoadDll(const char* name, char* fqpath,
 #error Unknown arch
 #endif
 
-// bk001129 - was RTLD_LAZY
 #define Q_RTLD RTLD_NOW
 
     pwdpath = Sys_Cwd();
@@ -236,7 +233,7 @@ void* Sys_LoadDll(const char* name, char* fqpath,
             libHandle = dlopen(fn, Q_RTLD);
 
             if (!libHandle) {
-#ifndef NDEBUG // bk001206 - in debug abort on failure
+#ifndef NDEBUG
                 Com_Error(ERR_FATAL, "Sys_LoadDll(%s) failed dlopen() completely!\n", name);
 #else
                 Com_Printf("Sys_LoadDll(%s) failed dlopen() completely!\n", name);
@@ -253,7 +250,7 @@ void* Sys_LoadDll(const char* name, char* fqpath,
     *entryPoint = dlsym(libHandle, "vmMain");
     if (!*entryPoint || !dllEntry) {
         err = dlerror();
-#ifndef NDEBUG // bk001206 - in debug abort on failure
+#ifndef NDEBUG
         Com_Error(ERR_FATAL, "Sys_LoadDll(%s) failed dlsym(vmMain):\n\"%s\" !\n", name, err);
 #else
         Com_Printf("Sys_LoadDll(%s) failed dlsym(vmMain):\n\"%s\" !\n", name, err);
@@ -264,11 +261,11 @@ void* Sys_LoadDll(const char* name, char* fqpath,
             Com_Printf("Sys_LoadDll(%s) failed dlcose:\n\"%s\"\n", name, err);
         return NULL;
     }
-    Com_Printf("Sys_LoadDll(%s) found **vmMain** at  %p  \n", name, *entryPoint); // bk001212
+    Com_Printf("Sys_LoadDll(%s) found **vmMain** at  %p  \n", name, *entryPoint);
     dllEntry(systemcalls);
     Com_Printf("Sys_LoadDll(%s) succeeded!\n", name);
     if (libHandle)
-        Q_strncpyz(fqpath, fn, MAX_QPATH); // added 7/20/02 by T.Ray
+        Q_strncpyz(fqpath, fn, MAX_QPATH);
     return libHandle;
 }
 
@@ -280,12 +277,10 @@ EVENT LOOP
 ========================================================================
 */
 
-// bk000306: upped this from 64
 #define MAX_QUED_EVENTS 256
 #define MASK_QUED_EVENTS (MAX_QUED_EVENTS - 1)
 
 sysEvent_t eventQue[MAX_QUED_EVENTS];
-// bk000306: initialize
 int eventHead = 0;
 int eventTail = 0;
 uint8_t sys_packetReceived[MAX_MSGLEN];
@@ -305,7 +300,6 @@ void Sys_QueEvent(int time, sysEventType_t type, int value, int value2, int ptrL
 
     ev = &eventQue[eventHead & MASK_QUED_EVENTS];
 
-    // bk000305 - was missing
     if (eventHead - eventTail >= MAX_QUED_EVENTS) {
         Com_Printf("Sys_QueEvent: overflow\n");
         // we are discarding an event, but don't leak memory
@@ -390,12 +384,11 @@ void Sys_Print(const char* msg)
 }
 
 void Sys_ConfigureFPU()
-{ // bk001213 - divide by zero
+{
 #ifdef __linux__
 #ifdef __i386
 #ifndef NDEBUG
 
-    // bk0101022 - enable FPE's in debug mode
     static int fpu_word = _FPU_DEFAULT & ~(_FPU_MASK_ZM | _FPU_MASK_IM);
     int current = 0;
     _FPU_GETCW(current);
@@ -437,7 +430,6 @@ extern clientStatic_t cls;
 
 int main(int argc, char* argv[])
 {
-    // int 	oldtime, newtime; // bk001204 - unused
     int len, i;
     char* cmdline;
     void Sys_SetDefaultCDPath(const char* path);
@@ -446,7 +438,7 @@ int main(int argc, char* argv[])
     saved_euid = geteuid();
     seteuid(getuid());
 
-    Sys_ParseArgs(argc, argv); // bk010104 - added this for support
+    Sys_ParseArgs(argc, argv);
 
     Sys_SetDefaultCDPath(argv[0]);
 
@@ -461,7 +453,7 @@ int main(int argc, char* argv[])
         strcat(cmdline, argv[i]);
     }
 
-    // bk000306 - clear queues
+    // clear queues
     memset(&eventQue[0], 0, MAX_QUED_EVENTS * sizeof(sysEvent_t));
     memset(&sys_packetReceived[0], 0, MAX_MSGLEN * sizeof(uint8_t));
 

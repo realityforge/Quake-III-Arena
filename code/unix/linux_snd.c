@@ -53,7 +53,6 @@ bool SNDDMA_Init(void)
     int fmt;
     int tmp;
     int i;
-    // char *s; // bk001204 - unused
     struct audio_buf_info info;
     int caps;
     extern uid_t saved_euid;

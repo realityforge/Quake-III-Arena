@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <sys/time.h>
 #include <netinet/in.h>
 #include <netdb.h>
-#include <arpa/inet.h> // bk001204
+#include <arpa/inet.h>
 
 #include <sys/param.h>
 #include <sys/ioctl.h>
@@ -105,7 +105,6 @@ idnewt
 bool Sys_StringToSockaddr(const char* s, struct sockaddr* sadr)
 {
     struct hostent* h;
-    // char	*colon; // bk001204 - unused
 
     memset(sadr, 0, sizeof(*sadr));
     ((struct sockaddr_in*)sadr)->sin_family = AF_INET;
@@ -170,7 +169,6 @@ bool Sys_GetPacket(netadr_t* net_from, msg_t* net_message)
         ret = recvfrom(net_socket, net_message->data, net_message->maxsize, 0, (struct sockaddr*)&from, &fromlen);
 
         SockadrToNetadr(&from, net_from);
-        // bk000305: was missing
         net_message->readcount = 0;
 
         if (ret == -1) {
@@ -398,7 +396,6 @@ void NET_GetLocalAddress(void)
 {
     char hostname[256];
     struct hostent* hostInfo;
-    // int					error; // bk001204 - unused
     char* p;
     int ip;
     int n;
@@ -434,7 +431,6 @@ void NET_GetLocalAddress(void)
 }
 #endif
 
-// bk001204 - prototype needed
 int NET_IPSocket(char* net_interface, int port);
 void NET_OpenIP(void)
 {

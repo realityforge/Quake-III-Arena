@@ -36,7 +36,7 @@ void UpdateTournamentInfo(void)
     int playerClientNum;
     int n, accuracy, perfect, msglen;
     int buflen;
-#ifdef MISSIONPACK // bk001205
+#ifdef MISSIONPACK
     int score1, score2;
     bool won;
 #endif

@@ -616,7 +616,7 @@ int CL_CgameSystemCalls(int* args)
         return re.inPVS(VMA(1), VMA(2));
 
     default:
-        assert(0); // bk010102
+        assert(0);
         Com_Error(ERR_DROP, "Bad cgame system trap: %i", args[0]);
     }
     return 0;

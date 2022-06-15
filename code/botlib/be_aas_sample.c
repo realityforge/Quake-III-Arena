@@ -479,7 +479,6 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
             break;
         }
         }
-        // bk010221 - old location of FPE hack and divide by zero expression
         // if the whole to be traced line is totally at the front of this node
         // only go down the tree with the front child
         if ((front >= -ON_EPSILON && back >= -ON_EPSILON)) {
@@ -507,15 +506,14 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
         // go down the tree both at the front and back of the node
         else {
             tmpplanenum = tstack_p->planenum;
-            // bk010221 - new location of divide by zero (see above)
             if (front == back)
-                front -= 0.001f; // bk0101022 - hack/FPE
+                front -= 0.001f;
             // calculate the hitpoint with the node (split point of the line)
             // put the crosspoint TRACEPLANE_EPSILON pixels on the near side
             if (front < 0)
                 frac = (front + TRACEPLANE_EPSILON) / (front - back);
             else
-                frac = (front - TRACEPLANE_EPSILON) / (front - back); // bk010221
+                frac = (front - TRACEPLANE_EPSILON) / (front - back);
             if (frac < 0)
                 frac = 0.001f; // 0
             else if (frac > 1)

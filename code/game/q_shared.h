@@ -242,10 +242,9 @@ static inline float LittleFloat(const float l)
 // just waste space and make big arrays static...
 #ifdef __linux__
 
-// bk001205 - from Makefile
 #define stricmp strcasecmp
 
-#define MAC_STATIC // bk: FIXME
+#define MAC_STATIC
 
 #ifdef __i386__
 #define CPUSTRING "linux-i386"
@@ -257,7 +256,6 @@ static inline float LittleFloat(const float l)
 
 #define PATH_SEP '/'
 
-// bk001205 - try
 #ifdef Q3_STATIC
 #define GAME_HARD_LINKED
 #define CGAME_HARD_LINKED

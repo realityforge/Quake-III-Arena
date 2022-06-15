@@ -1074,7 +1074,7 @@ bool BG_CanItemBeGrabbed(int gametype, const entityState_t* ent, const playerSta
         Com_Error(ERR_DROP, "BG_CanItemBeGrabbed: IT_BAD");
     default:
 #ifndef Q3_VM
-#ifndef NDEBUG // bk0001204
+#ifndef NDEBUG
         Com_Printf("BG_CanItemBeGrabbed: unknown enum %d\n", item->giType);
 #endif
 #endif

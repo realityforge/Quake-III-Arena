@@ -46,10 +46,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <pthread.h>
 #include <semaphore.h>
 
-// bk001204
 #include <dlfcn.h>
 
-// bk001206 - from my Heretic2 by way of Ryan's Fakk2
 // Needed for the new X11_PendingInput() function.
 #include <sys/time.h>
 #include <sys/types.h>
@@ -57,7 +55,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "../renderer/tr_local.h"
 #include "../client/client.h"
-#include "linux_local.h" // bk001130
+#include "linux_local.h"
 
 #include "unix_glw.h"
 
@@ -103,7 +101,6 @@ static cvar_t* in_dgamouse; // user pref for dga mouse
 cvar_t* in_subframe;
 cvar_t* in_nograb; // this is strictly for developers
 
-// bk001130 - from cvs1.17 (mkv), but not static
 cvar_t* in_joystick = NULL;
 cvar_t* in_joystickDebug = NULL;
 cvar_t* joy_threshold = NULL;
@@ -117,7 +114,6 @@ static XF86VidModeGamma vidmode_InitialGamma;
 static int win_x, win_y;
 
 static XF86VidModeModeInfo** vidmodes;
-// static int default_dotclock_vidmode; // bk001204 - unused
 static int num_vidmodes;
 static bool vidmode_active = false;
 
@@ -128,8 +124,6 @@ static int mouse_threshold;
 /*
  * Find the first occurrence of find in s.
  */
-// bk001130 - from cvs1.17 (mkv), const
-// bk001130 - made first argument const
 static const char* Q_stristr(const char* s, const char* find)
 {
     register char c, sc;
@@ -314,8 +308,6 @@ static char* XLateKey(XKeyEvent* ev, int* key)
         *key = K_F12;
         break;
 
-        // bk001206 - from Ryan's Fakk2
-        // case XK_BackSpace: *key = 8; break; // ctrl-h
     case XK_BackSpace:
         *key = K_BACKSPACE;
         break; // ctrl-h
@@ -375,7 +367,6 @@ static char* XLateKey(XKeyEvent* ev, int* key)
         *key = K_KP_SLASH;
         break;
 
-        // bk001130 - from cvs1.17 (mkv)
     case XK_exclam:
         *key = '1';
         break;
@@ -479,7 +470,7 @@ static void install_grabs(void)
 
     XDefineCursor(dpy, win, CreateNullCursor(dpy, win));
 
-    XGrabPointer(dpy, win, // bk010108 - do this earlier?
+    XGrabPointer(dpy, win,
                  False,
                  MOUSE_MASK,
                  GrabModeAsync, GrabModeAsync,
@@ -543,7 +534,6 @@ static void uninstall_grabs(void)
     XUndefineCursor(dpy, win);
 }
 
-// bk001206 - from Ryan's Fakk2
 /**
  * XPending() actually performs a blocking read
  *  if no events available. From Fakk2, by way of
@@ -586,7 +576,6 @@ static bool X11_PendingInput(void)
     return false;
 }
 
-// bk001206 - from Ryan's Fakk2. See above.
 static bool repeated_press(XEvent* event)
 {
     XEvent peekevent;
@@ -638,14 +627,12 @@ static void HandleEvents(void)
 
         case KeyRelease:
             t = Sys_XTimeToSysTime(event.xkey.time);
-            // bk001206 - handle key repeat w/o XAutRepatOn/Off
-            //            also: not done if console/menu is active.
-            // From Ryan's Fakk2.
+            // handle key repeat w/o XAutRepatOn/Off  not done if console/menu is active.
             // see game/q_shared.h, KEYCATCH_* . 0 == in 3d game.
             if (cls.keyCatchers == 0) { // FIXME: KEYCATCH_NONE
                 if (repeated_press(&event) == true)
                     continue;
-            } // if
+            }
             XLateKey(&event.xkey, &key);
 
             Sys_QueEvent(t, SE_KEY, key, false, 0, NULL);
@@ -834,9 +821,6 @@ void GLimp_Shutdown(void)
     if (!ctx || !dpy)
         return;
     IN_DeactivateMouse();
-    // bk001206 - replaced with H2/Fakk2 solution
-    // XAutoRepeatOn(dpy);
-    // autorepeaton = false; // bk001130 - from cvs1.17 (mkv)
     if (dpy) {
         if (ctx)
             qglXDestroyContext(dpy, ctx);
@@ -867,7 +851,6 @@ void GLimp_Shutdown(void)
 /*
 ** GLW_StartDriverAndSetMode
 */
-// bk001204 - prototype needed
 int GLW_SetMode(const char* drivername, int mode, bool fullscreen);
 static bool GLW_StartDriverAndSetMode(const char* drivername,
                                       int mode,
@@ -928,7 +911,7 @@ int GLW_SetMode(const char* drivername, int mode, bool fullscreen)
     int dga_MajorVersion, dga_MinorVersion;
     int actualWidth, actualHeight;
     int i;
-    const char* glstring; // bk001130 - from cvs1.17 (mkv)
+    const char* glstring;
 
     ri.Printf(PRINT_ALL, "Initializing OpenGL display\n");
 
@@ -1147,16 +1130,15 @@ int GLW_SetMode(const char* drivername, int mode, bool fullscreen)
         XMoveWindow(dpy, win, 0, 0);
 
     XFlush(dpy);
-    XSync(dpy, False); // bk001130 - from cvs1.17 (mkv)
+    XSync(dpy, False);
     ctx = qglXCreateContext(dpy, visinfo, NULL, True);
-    XSync(dpy, False); // bk001130 - from cvs1.17 (mkv)
+    XSync(dpy, False);
 
     /* GH: Free the visinfo after we're done with it */
     XFree(visinfo);
 
     qglXMakeCurrent(dpy, win, ctx);
 
-    // bk001130 - from cvs1.17 (mkv)
     glstring = qglGetString(GL_RENDERER);
     ri.Printf(PRINT_ALL, "GL_RENDERER: %s\n", glstring);
 
@@ -1376,9 +1358,7 @@ void IN_Init(void)
     // developer feature, allows to break without loosing mouse pointer
     in_nograb = Cvar_Get("in_nograb", "0", 0);
 
-    // bk001130 - from cvs.17 (mkv), joystick variables
     in_joystick = Cvar_Get("in_joystick", "0", CVAR_ARCHIVE | CVAR_LATCH);
-    // bk001130 - changed this to match win32
     in_joystickDebug = Cvar_Get("in_debugjoystick", "0", CVAR_TEMP);
     joy_threshold = Cvar_Get("joy_threshold", "0.15", CVAR_ARCHIVE); // FIXME: in_joythreshold
 
@@ -1387,7 +1367,7 @@ void IN_Init(void)
     else
         mouse_avail = false;
 
-    IN_StartupJoystick(); // bk001130 - from cvs1.17 (mkv)
+    IN_StartupJoystick();
     Com_Printf("------------------------------------\n");
 }
 
@@ -1398,8 +1378,6 @@ void IN_Shutdown(void)
 
 void IN_Frame(void)
 {
-
-    // bk001130 - from cvs 1.17 (mkv)
     IN_JoyMove(); // FIXME: disable if on desktop?
 
     if (cls.keyCatchers & KEYCATCH_CONSOLE) {
@@ -1419,12 +1397,8 @@ void IN_Activate(void)
 }
 #endif
 
-// bk001130 - cvs1.17 joystick code (mkv) was here, no linux_joystick.c
-
 void Sys_SendKeyEvents(void)
 {
-    // XEvent event; // bk001204 - unused
-
     if (!dpy)
         return;
     HandleEvents();

@@ -386,7 +386,7 @@ void ProjectPointOnPlane(vec3_t dst, const vec3_t p, const vec3_t normal)
 
     inv_denom = DotProduct(normal, normal);
 #ifndef Q3_VM
-    assert(Q_fabs(inv_denom) != 0.0f); // bk010122 - zero vectors get here
+    assert(Q_fabs(inv_denom) != 0.0f);
 #endif
     inv_denom = 1.0f / inv_denom;
 
@@ -453,7 +453,7 @@ float Q_rsqrt(float number)
 
 #ifndef Q3_VM
 #ifdef __linux__
-    assert(!isnan(y)); // bk010122 - FPE?
+    assert(!isnan(y));
 #endif
 #endif
     return y;
@@ -972,7 +972,7 @@ vec_t VectorNormalize2(const vec3_t v, vec3_t out)
     length = sqrt(length);
 
     if (length) {
-#ifndef Q3_VM // bk0101022 - FPE related
+#ifndef Q3_VM
 //	  assert( ((Q_fabs(v[0])!=0.0f) || (Q_fabs(v[1])!=0.0f) || (Q_fabs(v[2])!=0.0f)) );
 #endif
         ilength = 1 / length;
@@ -980,7 +980,7 @@ vec_t VectorNormalize2(const vec3_t v, vec3_t out)
         out[1] = v[1] * ilength;
         out[2] = v[2] * ilength;
     } else {
-#ifndef Q3_VM // bk0101022 - FPE related
+#ifndef Q3_VM
 //	  assert( ((Q_fabs(v[0])==0.0f) && (Q_fabs(v[1])==0.0f) && (Q_fabs(v[2])==0.0f)) );
 #endif
         VectorClear(out);

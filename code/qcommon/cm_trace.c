@@ -37,7 +37,7 @@ BASIC MATH
 */
 
 void RotatePoint(vec3_t point, /*const*/ vec3_t matrix[3])
-{ // bk: FIXME
+{
     vec3_t tvec;
 
     VectorCopy(point, tvec);
@@ -47,7 +47,7 @@ void RotatePoint(vec3_t point, /*const*/ vec3_t matrix[3])
 }
 
 void TransposeMatrix(/*const*/ vec3_t matrix[3], vec3_t transpose[3])
-{ // bk: FIXME
+{
     int i, j;
     for (i = 0; i < 3; i++) {
         for (j = 0; j < 3; j++) {
@@ -1127,7 +1127,7 @@ void CM_Trace(trace_t* results, const vec3_t start, const vec3_t end, vec3_t min
     // check for position test special case
     if (start[0] == end[0] && start[1] == end[1] && start[2] == end[2]) {
         if (model) {
-#ifdef ALWAYS_BBOX_VS_BBOX // bk010201 - FIXME - compile time flag?
+#ifdef ALWAYS_BBOX_VS_BBOX
             if (model == BOX_MODEL_HANDLE || model == CAPSULE_MODEL_HANDLE) {
                 tw.sphere.use = false;
                 CM_TestInLeaf(&tw, &cmod->leaf);

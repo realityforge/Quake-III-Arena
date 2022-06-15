@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 serverStatic_t svs; // persistant server info
 server_t sv; // local server
-vm_t* gvm = NULL; // game virtual machine // bk001212 init
+vm_t* gvm = NULL; // game virtual machine
 
 cvar_t* sv_fps; // time rate for running non-clients
 cvar_t* sv_timeout; // seconds without any message

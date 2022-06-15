@@ -276,7 +276,7 @@ static void UI_TeamOrdersMenu_BuildBotList(void)
     for (n = 0; n < numPlayers && teamOrdersMenuInfo.numBots < 9; n++) {
         trap_GetConfigString(CS_PLAYERS + n, info, MAX_INFO_STRING);
 
-        playerTeam = TEAM_SPECTATOR; // bk001204 = possible uninit use
+        playerTeam = TEAM_SPECTATOR;
 
         if (n == cs.clientNum) {
             playerTeam = *Info_ValueForKey(info, "t");

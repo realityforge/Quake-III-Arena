@@ -35,8 +35,8 @@ and one exported function: Perform
 
 #include "vm_local.h"
 
-vm_t* currentVM = NULL; // bk001212
-vm_t* lastVM = NULL; // bk001212
+vm_t* currentVM = NULL;
+vm_t* lastVM = NULL;
 int vm_debugLevel;
 
 #define MAX_VM 3
@@ -480,7 +480,7 @@ void* VM_ArgPtr(int intValue)
     if (!intValue) {
         return NULL;
     }
-    // bk001220 - currentVM is missing on reconnect
+    // currentVM is missing on reconnect
     if (currentVM == NULL)
         return NULL;
 
@@ -497,7 +497,7 @@ void* VM_ExplicitArgPtr(vm_t* vm, int intValue)
         return NULL;
     }
 
-    // bk010124 - currentVM is missing on reconnect here as well?
+    // currentVM is missing on reconnect here as well?
     if (currentVM == NULL)
         return NULL;
 
@@ -571,7 +571,7 @@ int QDECL VM_Call(vm_t* vm, int callnum, ...)
         r = VM_CallInterpreted(vm, &callnum);
     }
 
-    if (oldVM != NULL) // bk001220 - assert(currentVM!=NULL) for oldVM==NULL
+    if (oldVM != NULL)
         currentVM = oldVM;
     return r;
 }

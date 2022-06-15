@@ -42,7 +42,6 @@
 static const char rcsid[] =
 #endif /* LIBC_SCCS and not lint */
 
-// bk001127 - needed for DLL's
 #if !defined(Q3_VM)
     typedef int cmp_t(const void*, const void*);
 #endif
@@ -188,7 +187,6 @@ loop:
 
 // this file is excluded from release builds because of intrinsics
 
-// bk001211 - gcc errors on compiling strcpy:  parse error before `__extension__'
 #if defined(Q3_VM)
 
 size_t strlen(const char* string)
@@ -266,11 +264,8 @@ char* strstr(const char* string, const char* strCharSet)
     }
     return (char*)0;
 }
-#endif // bk001211
+#endif
 
-// bk001120 - presumably needed for Mac
-//#if !defined(_MSC_VER) && !defined(__linux__)
-// bk001127 - undid undo
 #if defined(Q3_VM)
 int tolower(int c)
 {
@@ -308,7 +303,6 @@ void* memmove(void* dest, const void* src, size_t count)
 }
 
 #ifdef Q3_VM
-// bk001127 - guarded this tan replacement
 // ld: undefined versioned symbol name tan@@GLIBC_2.0
 double tan(double x)
 {
@@ -400,7 +394,7 @@ double _atof(const char** stringPtr)
     const char* string;
     float sign;
     float value;
-    int c = '0'; // bk001211 - uninitialized use possible
+    int c = '0';
 
     string = *stringPtr;
 
@@ -463,10 +457,6 @@ double _atof(const char** stringPtr)
     return value * sign;
 }
 
-// bk001120 - presumably needed for Mac
-//#if !defined ( _MSC_VER ) && ! defined ( __linux__ )
-
-// bk001127 - undid undo
 #if defined(Q3_VM)
 int atoi(const char* string)
 {

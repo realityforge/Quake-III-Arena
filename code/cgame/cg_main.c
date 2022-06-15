@@ -200,7 +200,6 @@ typedef struct {
 } cvarTable_t;
 
 static cvarTable_t cvarTable[] = {
-    // bk001129
     { &cg_ignore, "cg_ignore", "0", 0 }, // used for debugging
     { &cg_autoswitch, "cg_autoswitch", "1", CVAR_ARCHIVE },
     { &cg_drawGun, "cg_drawGun", "1", CVAR_ARCHIVE },
@@ -1330,7 +1329,7 @@ bool CG_Asset_Parse(int handle)
             continue;
         }
     }
-    return false; // bk001204 - why not?
+    return false;
 }
 
 void CG_ParseMenu(const char* menuFile)
@@ -1665,7 +1664,7 @@ static void CG_FeederSelection(float feederID, int index)
 }
 #endif
 
-#ifdef MISSIONPACK // bk001204 - only needed there
+#ifdef MISSIONPACK
 static float CG_Cvar_Get(const char* cvar)
 {
     char buff[128];

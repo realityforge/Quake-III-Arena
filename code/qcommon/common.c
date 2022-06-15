@@ -1012,7 +1012,6 @@ typedef struct memstatic_s {
     uint8_t mem[2];
 } memstatic_t;
 
-// bk001204 - initializer brackets
 memstatic_t emptystring = { { (sizeof(memblock_t) + 2 + 3) & ~3, TAG_STATIC, NULL, NULL, ZONEID }, { '\0', '\0' } };
 memstatic_t numberstring[] = {
     { { (sizeof(memstatic_t) + 3) & ~3, TAG_STATIC, NULL, NULL, ZONEID }, { '0', '\0' } },
@@ -1262,7 +1261,6 @@ void Com_TouchMemory(void)
 void Com_InitSmallZoneMemory(void)
 {
     s_smallZoneTotal = 512 * 1024;
-    // bk001205 - was malloc
     smallzone = calloc(s_smallZoneTotal, 1);
     if (!smallzone) {
         Com_Error(ERR_FATAL, "Small zone data failed to allocate %1.1f megs", (float)s_smallZoneTotal / (1024 * 1024));
@@ -1284,7 +1282,6 @@ void Com_InitZoneMemory(void)
         s_zoneTotal = cv->integer * 1024 * 1024;
     }
 
-    // bk001205 - was malloc
     mainzone = calloc(s_zoneTotal, 1);
     if (!mainzone) {
         Com_Error(ERR_FATAL, "Zone data failed to allocate %i megs", s_zoneTotal / (1024 * 1024));
@@ -1396,7 +1393,6 @@ void Com_InitHunkMemory(void)
         s_hunkTotal = cv->integer * 1024 * 1024;
     }
 
-    // bk001205 - was malloc
     s_hunkData = calloc(s_hunkTotal + 31, 1);
     if (!s_hunkData) {
         Com_Error(ERR_FATAL, "Hunk data failed to allocate %i megs", s_hunkTotal / (1024 * 1024));
@@ -1747,14 +1743,9 @@ journaled file
 ===================================================================
 */
 
-// bk001129 - here we go again: upped from 64
-// FIXME TTimo blunt upping from 256 to 1024
-// https://zerowing.idsoftware.com/bugzilla/show_bug.cgi?id=5
 #define MAX_PUSHED_EVENTS 1024
-// bk001129 - init, also static
 static int com_pushedEventsHead = 0;
 static int com_pushedEventsTail = 0;
-// bk001129 - static
 static sysEvent_t com_pushedEvents[MAX_PUSHED_EVENTS];
 
 void Com_InitJournaling(void)
@@ -1822,7 +1813,6 @@ sysEvent_t Com_GetRealEvent(void)
     return ev;
 }
 
-// bk001129 - added
 void Com_InitPushEvent(void)
 {
     // clear the static buffer array
@@ -1837,7 +1827,7 @@ void Com_InitPushEvent(void)
 void Com_PushEvent(sysEvent_t* event)
 {
     sysEvent_t* ev;
-    static int printedWarning = 0; // bk001129 - init, bk001204 - explicit int
+    static int printedWarning = 0;
 
     ev = &com_pushedEvents[com_pushedEventsHead & (MAX_PUSHED_EVENTS - 1)];
 
@@ -1931,7 +1921,6 @@ int Com_EventLoop(void)
 
         switch (ev.evType) {
         default:
-            // bk001129 - was ev.evTime
             Com_Error(ERR_FATAL, "Com_EventLoop: bad event type %i", ev.evType);
             break;
         case SE_NONE:
@@ -2092,7 +2081,6 @@ void Com_Init(char* commandLine)
         Sys_Error("Error during initialization");
     }
 
-    // bk001129 - do this before anything else decides to push events
     Com_InitPushEvent();
 
     Com_InitSmallZoneMemory();
@@ -2353,8 +2341,6 @@ void Com_Frame(void)
         return; // an ERR_DROP was thrown
     }
 
-    // bk001204 - init to zero.
-    //  also:  might be clobbered by `longjmp' or `vfork'
     timeBeforeFirstEvents = 0;
     timeBeforeServer = 0;
     timeBeforeEvents = 0;
@@ -2529,7 +2515,7 @@ skipClamp:
 }
 #endif
 #endif
-#endif // bk001208 - memset/memcpy assembly, Q_acos needed (RC4)
+#endif
 //------------------------------------------------------------------------
 
 /*

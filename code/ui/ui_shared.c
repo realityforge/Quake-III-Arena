@@ -436,7 +436,7 @@ bool PC_Script_Parse(int handle, const char** out)
         }
         Q_strcat(script, 1024, " ");
     }
-    return false; // bk001105 - LCC   missing return value
+    return false;
 }
 
 // display, window, menu, item code
@@ -1255,13 +1255,12 @@ bool Item_SetFocus(itemDef_t* item, float x, float y)
     itemDef_t* oldFocus;
     sfxHandle_t* sfx = &DC->Assets.itemFocusSound;
     bool playSound = false;
-    menuDef_t* parent; // bk001206: = (menuDef_t*)item->parent;
+    menuDef_t* parent;
     // sanity check, non-null, not a decoration and does not already have the focus
     if (item == NULL || item->window.flags & WINDOW_DECORATION || item->window.flags & WINDOW_HASFOCUS || !(item->window.flags & WINDOW_VISIBLE)) {
         return false;
     }
 
-    // bk001206 - this can be NULL.
     parent = (menuDef_t*)item->parent;
 
     // items can be enabled and disabled based on cvars
@@ -2263,7 +2262,6 @@ bool Item_HandleKey(itemDef_t* item, int key, bool down)
         captureFunc = NULL;
         captureData = NULL;
     } else {
-        // bk001206 - parentheses
         if (down && (key == K_MOUSE1 || key == K_MOUSE2 || key == K_MOUSE3)) {
             Item_StartCapture(item, key);
         }
@@ -2522,7 +2520,6 @@ void Menu_HandleKey(menuDef_t* menu, int key, bool down)
     // see if the mouse is within the window bounds and if so is this a mouse click
     if (down && !(menu->window.flags & WINDOW_POPUP) && !Rect_ContainsPoint(&menu->window.rect, DC->cursorx, DC->cursory)) {
         static bool inHandleKey = false;
-        // bk001206 - parentheses
         if (!inHandleKey && (key == K_MOUSE1 || key == K_MOUSE2 || key == K_MOUSE3)) {
             inHandleKey = true;
             Menus_HandleOOBClick(menu, key, down);
@@ -3070,7 +3067,6 @@ static bind_t g_bindings[] = {
     { "tauntGauntlet", K_F5, -1, -1, -1 },
     { "scoresUp", K_KP_PGUP, -1, -1, -1 },
     { "scoresDown", K_KP_PGDN, -1, -1, -1 },
-    // bk001205 - this one below was:  '-1'
     { "messagemode", -1, -1, -1, -1 },
     { "messagemode2", -1, -1, -1, -1 },
     { "messagemode3", -1, -1, -1, -1 },
@@ -4778,7 +4774,7 @@ bool ItemParse_cvarStrList(itemDef_t* item, int handle)
             }
         }
     }
-    return false; // bk001205 - LCC missing return value
+    return false;
 }
 
 bool ItemParse_cvarFloatList(itemDef_t* item, int handle)
@@ -4823,7 +4819,7 @@ bool ItemParse_cvarFloatList(itemDef_t* item, int handle)
             return false;
         }
     }
-    return false; // bk001205 - LCC missing return value
+    return false;
 }
 
 bool ItemParse_addColorRange(itemDef_t* item, int handle)
@@ -4994,7 +4990,7 @@ bool Item_Parse(int handle, itemDef_t* item)
             return false;
         }
     }
-    return false; // bk001205 - LCC missing return value
+    return false;
 }
 
 // Item_InitControls
@@ -5051,7 +5047,7 @@ bool MenuParse_name(itemDef_t* item, int handle)
 bool MenuParse_fullscreen(itemDef_t* item, int handle)
 {
     menuDef_t* menu = (menuDef_t*)item;
-    if (!PC_Int_Parse(handle, (int*)&menu->fullScreen)) { // bk001206 - cast bool
+    if (!PC_Int_Parse(handle, (int*)&menu->fullScreen)) {
         return false;
     }
     return true;
@@ -5410,7 +5406,7 @@ bool Menu_Parse(int handle, menuDef_t* menu)
             return false;
         }
     }
-    return false; // bk001205 - LCC missing return value
+    return false;
 }
 
 void Menu_New(int handle)

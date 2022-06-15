@@ -49,7 +49,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include <GL/gl.h>
 #include <GL/glx.h>
-// bk001129 - from cvs1.17 (mkv)
 #if defined(__FX__)
 #include <GL/fxmesa.h>
 #endif

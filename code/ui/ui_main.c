@@ -112,7 +112,7 @@ static char* netnames[] = {
     NULL
 };
 
-#ifndef MISSIONPACK // bk001206
+#ifndef MISSIONPACK
 static char quake3worldMessage[] = "Visit www.quake3world.com - News, Community, Events, Files";
 #endif
 
@@ -300,7 +300,7 @@ int Text_Height(const char* text, float scale, int limit)
     float max;
     glyphInfo_t* glyph;
     float useScale;
-    const char* s = text; // bk001206 - unsigned
+    const char* s = text;
     fontInfo_t* font = &uiInfo.uiDC.Assets.textFont;
     if (scale <= ui_smallFont.value) {
         font = &uiInfo.uiDC.Assets.smallFont;
@@ -355,7 +355,7 @@ void Text_Paint(float x, float y, float scale, vec4_t color, const char* text, f
     }
     useScale = scale * font->glyphScale;
     if (text) {
-        const char* s = text; // bk001206 - unsigned
+        const char* s = text;
         trap_R_SetColor(color);
         memcpy(&newColor[0], &color[0], sizeof(vec4_t));
         len = strlen(text);
@@ -425,7 +425,7 @@ void Text_PaintWithCursor(float x, float y, float scale, vec4_t color, const cha
     }
     useScale = scale * font->glyphScale;
     if (text) {
-        const char* s = text; // bk001206 - unsigned
+        const char* s = text;
         trap_R_SetColor(color);
         memcpy(&newColor[0], &color[0], sizeof(vec4_t));
         len = strlen(text);
@@ -433,7 +433,7 @@ void Text_PaintWithCursor(float x, float y, float scale, vec4_t color, const cha
             len = limit;
         }
         count = 0;
-        glyph2 = &font->glyphs[(int)cursor]; // bk001206 - possible signed char
+        glyph2 = &font->glyphs[(int)cursor];
         while (s && *s && count < len) {
             glyph = &font->glyphs[(int)*s]; // TTimo: FIXME: getting nasty warnings without the cast, hopefully this doesn't break the VM build
             // int yadj = Assets.textFont.glyphs[text[i]].bottom + Assets.textFont.glyphs[text[i]].top;
@@ -514,7 +514,7 @@ static void Text_Paint_Limit(float* maxX, float x, float y, float scale, vec4_t 
     vec4_t newColor;
     glyphInfo_t* glyph;
     if (text) {
-        const char* s = text; // bk001206 - unsigned
+        const char* s = text;
         float max = *maxX;
         float useScale;
         fontInfo_t* font = &uiInfo.uiDC.Assets.textFont;
@@ -5392,7 +5392,6 @@ vmCvar_t ui_realCaptureLimit;
 vmCvar_t ui_realWarmUp;
 vmCvar_t ui_serverStatusTimeOut;
 
-// bk001129 - made static to avoid aliasing
 static cvarTable_t cvarTable[] = {
     { &ui_ffa_fraglimit, "ui_ffa_fraglimit", "20", CVAR_ARCHIVE },
     { &ui_ffa_timelimit, "ui_ffa_timelimit", "0", CVAR_ARCHIVE },
@@ -5514,7 +5513,6 @@ static cvarTable_t cvarTable[] = {
 
 };
 
-// bk001129 - made static to avoid aliasing
 static int cvarTableSize = sizeof(cvarTable) / sizeof(cvarTable[0]);
 
 void UI_RegisterCvars(void)

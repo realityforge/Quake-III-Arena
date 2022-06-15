@@ -45,7 +45,7 @@ static const orderTask_t validOrders[] = {
 
 static const int numValidOrders = sizeof(validOrders) / sizeof(orderTask_t);
 
-#ifdef MISSIONPACK // bk001204
+#ifdef MISSIONPACK
 static int CG_ValidOrder(const char* p)
 {
     int i;

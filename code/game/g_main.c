@@ -93,7 +93,6 @@ vmCvar_t g_enableBreath;
 vmCvar_t g_proxMineTimeout;
 #endif
 
-// bk001129 - made static to avoid aliasing
 static cvarTable_t gameCvarTable[] = {
     // don't override the cheat state set by the system
     { &g_cheats, "sv_cheats", "", 0, 0, false },
@@ -177,7 +176,6 @@ static cvarTable_t gameCvarTable[] = {
 
 };
 
-// bk001129 - made static to avoid aliasing
 static int gameCvarTableSize = sizeof(gameCvarTable) / sizeof(gameCvarTable[0]);
 
 void G_InitGame(int levelTime, int randomSeed, int restart);
@@ -1041,7 +1039,7 @@ void LogExit(const char* string)
 {
     int i, numSorted;
     gclient_t* cl;
-#ifdef MISSIONPACK // bk001205
+#ifdef MISSIONPACK
     bool won = true;
 #endif
     G_LogPrintf("Exit: %s\n", string);

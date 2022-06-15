@@ -30,7 +30,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ** QGL_Shutdown() - unloads libraries, NULLs function pointers
 */
 
-// bk001204
 #include <unistd.h>
 #include <sys/types.h>
 
@@ -38,15 +37,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../renderer/tr_local.h"
 #include "unix_glw.h"
 
-// bk001129 - from cvs1.17 (mkv)
-//#if defined(__FX__)
-//#include <GL/fxmesa.h>
-//#endif
-//#include <GL/glx.h> // bk010216 - FIXME: all of the above redundant? renderer/qgl.h
-
 #include <dlfcn.h>
 
-// bk001129 - from cvs1.17 (mkv)
 #if defined(__FX__)
 // FX Mesa Functions
 fxMesaContext (*qfxMesaCreateContext)(GLuint win, GrScreenResolution_t, GrScreenRefresh_t, const GLint attribList[]);
@@ -1104,7 +1096,6 @@ void QGL_Shutdown(void)
     qglVertexPointer = NULL;
     qglViewport = NULL;
 
-// bk001129 - from cvs1.17 (mkv)
 #if defined(__FX__)
     qfxMesaCreateContext = NULL;
     qfxMesaCreateBestContext = NULL;
@@ -1146,7 +1137,6 @@ bool QGL_Init(const char* dllname)
 {
     if ((glw_state.OpenGLLib = dlopen(dllname, RTLD_LAZY | RTLD_GLOBAL)) == 0) {
         char fn[1024];
-        // FILE *fp; // bk001204 - unused
         extern uid_t saved_euid; // unix_main.c
 
         // if we are not setuid, try current directory
@@ -1500,7 +1490,6 @@ bool QGL_Init(const char* dllname)
     qglVertexPointer = dllVertexPointer = GPA("glVertexPointer");
     qglViewport = dllViewport = GPA("glViewport");
 
-// bk001129 - from cvs1.17 (mkv)
 #if defined(__FX__)
     qfxMesaCreateContext = GPA("fxMesaCreateContext");
     qfxMesaCreateBestContext = GPA("fxMesaCreateBestContext");

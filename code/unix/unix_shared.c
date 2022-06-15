@@ -113,17 +113,12 @@ int Sys_XTimeToSysTime(unsigned long xtime)
 
 #if (defined __APPLE__) // rcg010206 - using this for PPC builds...
 long fastftol(float f)
-{ // bk001213 - from win32/win_shared.c
-    // static int tmp;
-    //	__asm fld f
-    //__asm fistp tmp
-    //__asm mov eax, tmp
+{
     return (long)f;
 }
 
 void Sys_SnapVector(float* v)
-{ // bk001213 - see win32/win_shared.c
-    // bk001213 - old linux
+{
     v[0] = rint(v[0]);
     v[1] = rint(v[1]);
     v[2] = rint(v[2]);
@@ -137,7 +132,7 @@ void Sys_Mkdir(const char* path)
 
 char* strlwr(char* s)
 {
-    if (s == NULL) { // bk001204 - paranoia
+    if (s == NULL) {
         assert(0);
         return s;
     }
@@ -145,14 +140,13 @@ char* strlwr(char* s)
         *s = tolower(*s);
         s++;
     }
-    return s; // bk001204 - duh
+    return s;
 }
 
 //============================================
 
 #define MAX_FOUND_FILES 0x1000
 
-// bk001129 - new in 1.26
 void Sys_ListFilteredFiles(const char* basedir, char* subdirs, char* filter, char** list, int* numfiles)
 {
     char search[MAX_OSPATH], newsubdirs[MAX_OSPATH];
@@ -203,12 +197,9 @@ void Sys_ListFilteredFiles(const char* basedir, char* subdirs, char* filter, cha
     closedir(fdir);
 }
 
-// bk001129 - in 1.17 this used to be
-// char **Sys_ListFiles( const char *directory, const char *extension, int *numfiles, bool wantsubs )
 char** Sys_ListFiles(const char* directory, const char* extension, char* filter, int* numfiles, bool wantsubs)
 {
     struct dirent* d;
-    // char *p; // bk001204 - unused
     DIR* fdir;
     bool dironly = wantsubs;
     char search[MAX_OSPATH];

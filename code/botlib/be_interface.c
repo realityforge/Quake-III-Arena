@@ -86,7 +86,7 @@ int Export_BotLibSetup(void)
     int errnum;
 
     bot_developer = LibVarGetValue("bot_developer");
-    memset(&botlibglobals, 0, sizeof(botlibglobals)); // bk001207 - init
+    memset(&botlibglobals, 0, sizeof(botlibglobals));
     Log_Open("botlib.log");
     botimport.Print(PRT_MESSAGE, "------- BotLib Initialization -------\n");
     botlibglobals.maxclients = (int)LibVarValue("maxclients", "128");
@@ -395,9 +395,9 @@ static void Init_AI_Export(ai_export_t* ai)
 
 botlib_export_t* GetBotLibAPI(int apiVersion, botlib_import_t* import)
 {
-    assert(import); // bk001129 - this wasn't set for baseq3/
+    assert(import);
     botimport = *import;
-    assert(botimport.Print); // bk001129 - pars pro toto
+    assert(botimport.Print);
 
     memset(&be_botlib_export, 0, sizeof(be_botlib_export));
 

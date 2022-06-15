@@ -1939,7 +1939,7 @@ shader_t* R_FindShaderByName(const char* name)
     int hash;
     shader_t* sh;
 
-    if ((name == NULL) || (name[0] == 0)) { // bk001205
+    if ((name == NULL) || (name[0] == 0)) {
         return tr.defaultShader;
     }
 
@@ -2308,7 +2308,7 @@ it and returns a valid (possibly default) shader_t to be used internally.
 shader_t* R_GetShaderByHandle(qhandle_t hShader)
 {
     if (hShader < 0) {
-        ri.Printf(PRINT_WARNING, "R_GetShaderByHandle: out of range hShader '%d'\n", hShader); // bk: FIXME name
+        ri.Printf(PRINT_WARNING, "R_GetShaderByHandle: out of range hShader '%d'\n", hShader);
         return tr.defaultShader;
     }
     if (hShader >= tr.numShaders) {
