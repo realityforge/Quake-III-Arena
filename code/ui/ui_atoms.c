@@ -24,6 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
         User interface building blocks and support functions.
 **********************************************************************/
+#include "qcommon.h"
 #include "ui_local.h"
 
 bool m_entersound; // after a frame, so caching won't disrupt the sound
@@ -120,7 +121,6 @@ void UI_LoadBestScores(const char* map, int game)
     char fileName[MAX_QPATH];
     fileHandle_t f;
     postGameInfo_t newInfo;
-    int protocol;
 
     memset(&newInfo, 0, sizeof(postGameInfo_t));
     Com_sprintf(fileName, MAX_QPATH, "games/%s_%i.game", map, game);
@@ -136,12 +136,7 @@ void UI_LoadBestScores(const char* map, int game)
 
     uiInfo.demoAvailable = false;
 
-    protocol = trap_Cvar_VariableValue("com_protocol");
-
-    if (!protocol)
-        protocol = trap_Cvar_VariableValue("protocol");
-
-    Com_sprintf(fileName, MAX_QPATH, "demos/%s_%d.%s%d", map, game, DEMOEXT, protocol);
+    Com_sprintf(fileName, MAX_QPATH, "demos/%s_%d.%s%d", map, game, DEMOEXT, PROTOCOL_VERSION);
     if (trap_FS_FOpenFile(fileName, &f, FS_READ) >= 0) {
         uiInfo.demoAvailable = true;
         trap_FS_FCloseFile(f);

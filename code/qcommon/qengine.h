@@ -51,7 +51,6 @@ extern cvar_t* cl_packetdelay;
 extern cvar_t* sv_packetdelay;
 
 extern cvar_t* com_gamename;
-extern cvar_t* com_protocol;
 #ifndef DEDICATED
 extern cvar_t* com_maxfpsUnfocused;
 extern cvar_t* com_maxfpsMinimized;

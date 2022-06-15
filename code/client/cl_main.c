@@ -615,14 +615,14 @@ void CL_Record_f(void)
     if (Cmd_Argc() == 2) {
         s = Cmd_Argv(1);
         Q_strncpyz(demoName, s, sizeof(demoName));
-        Com_sprintf(name, sizeof(name), "demos/%s.%s%d", demoName, DEMOEXT, com_protocol->integer);
+        Com_sprintf(name, sizeof(name), "demos/%s.%s%d", demoName, DEMOEXT, PROTOCOL_VERSION);
     } else {
         int number;
 
         // scan for a free demo name
         for (number = 0; number <= 9999; number++) {
             CL_DemoFilename(number, demoName, sizeof(demoName));
-            Com_sprintf(name, sizeof(name), "demos/%s.%s%d", demoName, DEMOEXT, com_protocol->integer);
+            Com_sprintf(name, sizeof(name), "demos/%s.%s%d", demoName, DEMOEXT, PROTOCOL_VERSION);
 
             if (!FS_FileExists(name))
                 break; // file doesn't exist
@@ -846,18 +846,18 @@ static int CL_WalkDemoExt(char* arg, char* name, int* demofile)
     int i = 0;
     *demofile = 0;
 
-    Com_sprintf(name, MAX_OSPATH, "demos/%s.%s%d", arg, DEMOEXT, com_protocol->integer);
+    Com_sprintf(name, MAX_OSPATH, "demos/%s.%s%d", arg, DEMOEXT, PROTOCOL_VERSION);
     FS_FOpenFileRead(name, demofile, true);
 
     if (*demofile) {
         Com_Printf("Demo file: %s\n", name);
-        return com_protocol->integer;
+        return PROTOCOL_VERSION;
     }
 
     Com_Printf("Not found: %s\n", name);
 
     while (demo_protocols[i]) {
-        if (demo_protocols[i] == com_protocol->integer)
+        if (demo_protocols[i] == PROTOCOL_VERSION)
             continue;
 
         Com_sprintf(name, MAX_OSPATH, "demos/%s.%s%d", arg, DEMOEXT, demo_protocols[i]);
@@ -879,7 +879,7 @@ static void CL_CompleteDemoName(char* args, int argNum)
     if (argNum == 2) {
         char demoExt[16];
 
-        Com_sprintf(demoExt, sizeof(demoExt), ".%s%d", DEMOEXT, com_protocol->integer);
+        Com_sprintf(demoExt, sizeof(demoExt), ".%s%d", DEMOEXT, PROTOCOL_VERSION);
         Field_CompleteFilename("demos", demoExt, true, true);
     }
 }
@@ -925,7 +925,7 @@ void CL_PlayDemo_f(void)
                 break;
         }
 
-        if (demo_protocols[i] || protocol == com_protocol->integer) {
+        if (demo_protocols[i] || protocol == PROTOCOL_VERSION) {
             Com_sprintf(name, sizeof(name), "demos/%s", arg);
             FS_FOpenFileRead(name, &clc.demofile, true);
         } else {
@@ -1960,7 +1960,7 @@ void CL_CheckForResend(void)
 
         Q_strncpyz(info, Cvar_InfoString(CVAR_USERINFO), sizeof(info));
 
-        Info_SetValueForKey(info, "protocol", va("%i", com_protocol->integer));
+        Info_SetValueForKey(info, "protocol", va("%i", PROTOCOL_VERSION));
         Info_SetValueForKey(info, "qport", va("%i", port));
         Info_SetValueForKey(info, "challenge", va("%i", clc.challenge));
 
@@ -2172,10 +2172,10 @@ void CL_ConnectionlessPacket(netadr_t from, msg_t* msg)
         if (*strver) {
             ver = atoi(strver);
 
-            if (ver != com_protocol->integer) {
+            if (ver != PROTOCOL_VERSION) {
                 Com_Printf(S_COLOR_YELLOW "Warning: Server reports protocol version %d, we have %d. "
                                           "Trying anyways.\n",
-                           ver, com_protocol->integer);
+                           ver, PROTOCOL_VERSION);
             }
         }
 
@@ -3154,7 +3154,7 @@ void CL_ServerInfoPacket(netadr_t from, msg_t* msg)
     // if this isn't the correct protocol version, ignore it
     prot = atoi(Info_ValueForKey(infoString, "protocol"));
 
-    if (prot != com_protocol->integer) {
+    if (prot != PROTOCOL_VERSION) {
         Com_DPrintf("Different protocol info packet: %s\n", infoString);
         return;
     }

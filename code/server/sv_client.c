@@ -131,7 +131,7 @@ void SV_GetChallenge(netadr_t from)
 
     challenge->pingTime = svs.time;
     NET_OutOfBandPrint(NS_SERVER, challenge->adr, "challengeResponse %d %d %d",
-                       challenge->challenge, clientChallenge, com_protocol->integer);
+                       challenge->challenge, clientChallenge, PROTOCOL_VERSION);
 }
 
 /*
@@ -202,10 +202,10 @@ void SV_DirectConnect(netadr_t from)
 
     version = atoi(Info_ValueForKey(userinfo, "protocol"));
 
-    if (version != com_protocol->integer) {
+    if (version != PROTOCOL_VERSION) {
         NET_OutOfBandPrint(NS_SERVER, from, "print\nServer uses protocol version %i "
                                             "(yours is %i).\n",
-                           com_protocol->integer, version);
+                           PROTOCOL_VERSION, version);
         Com_DPrintf("    rejected connect from version %i\n", version);
         return;
     }

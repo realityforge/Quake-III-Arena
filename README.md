@@ -226,11 +226,6 @@ The defaults for these variables differ depending on the target platform.
                                       getservers[Ext] query and infoResponse
                                       "gamename" infostring value. Also used
                                       for filtering local network games.
-  com_protocol                      - Specify protocol version number for
-                                      current ioquake3 protocol, see
-                                      "Network protocols" section below
-                                      (startup only)
-
   in_joystickNo                     - select which joystick to use
   in_availableJoysticks             - list of available Joysticks
   in_keyboardDebug                  - print keyboard debug info

@@ -75,7 +75,6 @@ cvar_t* sv_packetdelay;
 cvar_t* com_cameraMode;
 cvar_t* com_ansiColor;
 cvar_t* com_gamename;
-cvar_t* com_protocol;
 cvar_t* com_basegame;
 cvar_t* com_homepath;
 cvar_t* com_busyWait;
@@ -572,7 +571,7 @@ const char* Com_StringContains(const char* str1, const char* str2, int casesensi
 int Com_Filter(const char* filter, const char* name, int casesensitive)
 {
     char buf[MAX_TOKEN_CHARS];
-    char* ptr;
+    const char* ptr;
     int i, found;
 
     while (*filter) {
@@ -2328,8 +2327,7 @@ void Com_Init(char* commandLine)
     s = va("%s %s", Q3_VERSION, PLATFORM_STRING);
     com_version = Cvar_Get("version", s, CVAR_ROM | CVAR_SERVERINFO);
     com_gamename = Cvar_Get("com_gamename", GAMENAME_FOR_MASTER, CVAR_SERVERINFO | CVAR_INIT);
-    com_protocol = Cvar_Get("com_protocol", va("%i", PROTOCOL_VERSION), CVAR_SERVERINFO | CVAR_INIT);
-    Cvar_Get("protocol", com_protocol->string, CVAR_ROM);
+    Cvar_Get("protocol", va("%i", PROTOCOL_VERSION), CVAR_ROM);
 
 #ifndef DEDICATED
     com_maxfps = Cvar_Get("com_maxfps", "85", CVAR_ARCHIVE);

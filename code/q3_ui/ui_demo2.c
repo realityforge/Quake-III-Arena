@@ -27,6 +27,7 @@ DEMOS MENU
 =======================================================================
 */
 
+#include "qcommon.h"
 #include "ui_local.h"
 
 #define ART_BACK0 "menu/art/back_0"
@@ -102,10 +103,9 @@ static void Demos_MenuEvent(void* ptr, int event)
 
 static void Demos_MenuInit(void)
 {
-    int i, j;
+    int i;
     int len;
     char *demoname, extension[32];
-    int protocol;
 
     memset(&s_demos, 0, sizeof(demos_t));
 
@@ -198,12 +198,7 @@ static void Demos_MenuInit(void)
     s_demos.list.itemnames = (const char**)s_demos.demolist;
     s_demos.list.columns = 3;
 
-    protocol = trap_Cvar_VariableValue("com_protocol");
-
-    if (!protocol)
-        protocol = trap_Cvar_VariableValue("protocol");
-
-    Com_sprintf(extension, sizeof(extension), ".%s%d", DEMOEXT, protocol);
+    Com_sprintf(extension, sizeof(extension), ".%s%d", DEMOEXT, PROTOCOL_VERSION);
     s_demos.numDemos = trap_FS_GetFileList("demos", extension, s_demos.names, ARRAY_LEN(s_demos.names));
 
     demoname = s_demos.names;

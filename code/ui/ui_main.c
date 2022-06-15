@@ -27,6 +27,7 @@ USER INTERFACE MAIN
 =======================================================================
 */
 
+#include "qcommon.h"
 #include "ui_local.h"
 
 uiInfo_t uiInfo;
@@ -2774,14 +2775,8 @@ static void UI_LoadDemos(void)
     char demoExt[32];
     char* demoname;
     int len;
-    int protocol;
 
-    protocol = trap_Cvar_VariableValue("com_protocol");
-
-    if (!protocol)
-        protocol = trap_Cvar_VariableValue("protocol");
-
-    Com_sprintf(demoExt, sizeof(demoExt), ".%s%d", DEMOEXT, protocol);
+    Com_sprintf(demoExt, sizeof(demoExt), ".%s%d", DEMOEXT, PROTOCOL_VERSION);
     uiInfo.demoCount = trap_FS_GetFileList("demos", demoExt, demolist, ARRAY_LEN(demolist));
 
     demoname = demolist;

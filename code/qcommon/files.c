@@ -904,7 +904,7 @@ bool FS_IsDemoExt(const char* filename, int namelen)
     if (ext_test && !Q_stricmpn(ext_test + 1, DEMOEXT, ARRAY_LEN(DEMOEXT) - 1)) {
         protocol = atoi(ext_test + ARRAY_LEN(DEMOEXT));
 
-        if (protocol == com_protocol->integer)
+        if (protocol == PROTOCOL_VERSION)
             return true;
 
         for (index = 0; demo_protocols[index]; index++) {
