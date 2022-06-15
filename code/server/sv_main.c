@@ -957,7 +957,7 @@ static bool SV_CheckPaused(void)
 /*
 ==================
 SV_FrameMsec
-Return time in millseconds until processing of the next server frame.
+Return time in milliseconds until processing of the next server frame.
 ==================
 */
 int SV_FrameMsec()
