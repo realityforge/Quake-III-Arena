@@ -56,8 +56,7 @@ public class Main implements Callable<Integer>
                                      + " prior to saving. This primarily used to verify the integrity of the tool.",
                        arity = "0" )
   private boolean _identityTransform;
-  @CommandLine.
-  Option( names = { "--verify" }, description = "Skip validation of input unit.", arity = "0", negatable = true )
+  @CommandLine.Option( names = { "--verify" }, description = "Verify the input unit.", arity = "0", negatable = true )
   private boolean _verify = true;
   @CommandLine.Option( names = { "--verbose" }, description = "Verbose output.", arity = "0" )
   private boolean _verbose;
