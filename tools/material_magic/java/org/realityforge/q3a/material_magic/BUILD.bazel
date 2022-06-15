@@ -15,9 +15,7 @@ load("@rules_java//java:defs.bzl", "java_binary")
 
 java_binary(
     name = "Main",
-    srcs = [
-        "Main.java",
-    ],
+    srcs = ["Main.java"],
     visibility = [
         "//content/baseq3:__pkg__",
         "//content/teamarena:__pkg__",
