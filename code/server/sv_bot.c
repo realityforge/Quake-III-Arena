@@ -99,7 +99,7 @@ void BotDrawDebugPolygons(void (*drawPoly)(int color, int numPoints, float* poin
     }
 }
 
-void QDECL BotImport_Print(int type, char* fmt, ...)
+static void QDECL BotImport_Print(int type, char* fmt, ...)
 {
     char str[2048];
     va_list ap;
@@ -136,7 +136,7 @@ void QDECL BotImport_Print(int type, char* fmt, ...)
     }
 }
 
-void BotImport_Trace(bsp_trace_t* bsptrace, vec3_t start, vec3_t mins, vec3_t maxs, vec3_t end, int passent, int contentmask)
+static void BotImport_Trace(bsp_trace_t* bsptrace, vec3_t start, vec3_t mins, vec3_t maxs, vec3_t end, int passent, int contentmask)
 {
     trace_t trace;
 
@@ -156,7 +156,7 @@ void BotImport_Trace(bsp_trace_t* bsptrace, vec3_t start, vec3_t mins, vec3_t ma
     bsptrace->contents = 0;
 }
 
-void BotImport_EntityTrace(bsp_trace_t* bsptrace, vec3_t start, vec3_t mins, vec3_t maxs, vec3_t end, int entnum, int contentmask)
+static void BotImport_EntityTrace(bsp_trace_t* bsptrace, vec3_t start, vec3_t mins, vec3_t maxs, vec3_t end, int entnum, int contentmask)
 {
     trace_t trace;
 
@@ -176,22 +176,22 @@ void BotImport_EntityTrace(bsp_trace_t* bsptrace, vec3_t start, vec3_t mins, vec
     bsptrace->contents = 0;
 }
 
-int BotImport_PointContents(vec3_t point)
+static int BotImport_PointContents(vec3_t point)
 {
     return SV_PointContents(point, -1);
 }
 
-int BotImport_inPVS(vec3_t p1, vec3_t p2)
+static int BotImport_inPVS(vec3_t p1, vec3_t p2)
 {
     return SV_inPVS(p1, p2);
 }
 
-char* BotImport_BSPEntityData(void)
+static char* BotImport_BSPEntityData(void)
 {
     return CM_EntityString();
 }
 
-void BotImport_BSPModelMinsMaxsOrigin(int modelnum, vec3_t angles, vec3_t outmins, vec3_t outmaxs, vec3_t origin)
+static void BotImport_BSPModelMinsMaxsOrigin(int modelnum, vec3_t angles, vec3_t outmins, vec3_t outmaxs, vec3_t origin)
 {
     clipHandle_t h;
     vec3_t mins, maxs;
@@ -218,7 +218,7 @@ void BotImport_BSPModelMinsMaxsOrigin(int modelnum, vec3_t angles, vec3_t outmin
         VectorClear(origin);
 }
 
-void* BotImport_GetMemory(const size_t size)
+static void* BotImport_GetMemory(const size_t size)
 {
     void* ptr;
 
@@ -226,12 +226,12 @@ void* BotImport_GetMemory(const size_t size)
     return ptr;
 }
 
-void BotImport_FreeMemory(void* ptr)
+static void BotImport_FreeMemory(void* ptr)
 {
     Z_Free(ptr);
 }
 
-void* BotImport_HunkAlloc(int size)
+static void* BotImport_HunkAlloc(int size)
 {
     if (Hunk_CheckMark()) {
         Com_Error(ERR_DROP, "SV_Bot_HunkAlloc: Alloc with marks already set\n");
@@ -261,7 +261,7 @@ int BotImport_DebugPolygonCreate(int color, int numPoints, vec3_t* points)
     return i;
 }
 
-void BotImport_DebugPolygonShow(int id, int color, int numPoints, vec3_t* points)
+static void BotImport_DebugPolygonShow(int id, int color, int numPoints, vec3_t* points)
 {
     bot_debugpoly_t* poly;
 
@@ -274,25 +274,25 @@ void BotImport_DebugPolygonShow(int id, int color, int numPoints, vec3_t* points
     memcpy(poly->points, points, numPoints * sizeof(vec3_t));
 }
 
-void BotImport_DebugPolygonDelete(int id)
+static void BotImport_DebugPolygonDelete(int id)
 {
     if (!debugpolygons)
         return;
     debugpolygons[id].inuse = false;
 }
 
-int BotImport_DebugLineCreate(void)
+static int BotImport_DebugLineCreate(void)
 {
     vec3_t points[1];
     return BotImport_DebugPolygonCreate(0, 0, points);
 }
 
-void BotImport_DebugLineDelete(int line)
+static void BotImport_DebugLineDelete(int line)
 {
     BotImport_DebugPolygonDelete(line);
 }
 
-void BotImport_DebugLineShow(int line, vec3_t start, vec3_t end, int color)
+static void BotImport_DebugLineShow(int line, vec3_t start, vec3_t end, int color)
 {
     vec3_t points[4], dir, cross, up = { 0, 0, 1 };
     float dot;
@@ -322,7 +322,7 @@ void BotImport_DebugLineShow(int line, vec3_t start, vec3_t end, int color)
     BotImport_DebugPolygonShow(line, color, 4, points);
 }
 
-void BotClientCommand(int client, char* command)
+static void BotClientCommand(int client, char* command)
 {
     SV_ExecuteClientCommand(&svs.clients[client], command, true);
 }
