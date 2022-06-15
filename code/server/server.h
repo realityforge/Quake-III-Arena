@@ -171,7 +171,7 @@ typedef struct client_s {
 typedef struct {
     netadr_t adr;
     int challenge;
-    int time; // time the last packet was sent to the autherize server
+    int time; // time the last packet was sent to the authorization server
     int pingTime; // time the challenge response was sent to client
     int firstTime; // time the adr was first used, for authorize timeout checks
     bool connected;
