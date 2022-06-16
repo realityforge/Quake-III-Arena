@@ -9,7 +9,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-load("@bazel_skylib//rules:diff_test.bzl", "diff_test")
+load("@bazel_skylib//rules:diff_test.bzl", _diff_test = "diff_test")
 
 def material_magic_golden_test(name, materials, inputs = ["input.shader"]):
     actual_inputs = ["%s/input/%s" % (name, o) for o in inputs]
@@ -85,13 +85,13 @@ def material_magic_golden_test(name, materials, inputs = ["input.shader"]):
         tags = ["manual", "local"],
     )
 
-    diff_test(
+    _diff_test(
         name = "%s_pretty_output_test" % name,
         size = "small",
         file1 = "output/%s/output/pretty/output.shader" % name,
         file2 = "%s/output/pretty/output.shader" % name,
     )
-    diff_test(
+    _diff_test(
         name = "%s_optimized_output_test" % name,
         size = "small",
         file1 = "output/%s/output/optimized/output.shader" % name,
@@ -99,13 +99,13 @@ def material_magic_golden_test(name, materials, inputs = ["input.shader"]):
     )
 
     for m in materials:
-        diff_test(
+        _diff_test(
             name = "%s_pretty_output_%s_test" % (name, m.replace("/", "_")),
             size = "small",
             file1 = "output/%s/output/pretty/%s.shader" % (name, m),
             file2 = "%s/output/pretty/%s.shader" % (name, m),
         )
-        diff_test(
+        _diff_test(
             name = "%s_optimized_output_%s_test" % (name, m.replace("/", "_")),
             size = "small",
             file1 = "output/%s/output/optimized/%s.shader" % (name, m),
