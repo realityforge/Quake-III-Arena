@@ -11,7 +11,7 @@
 # limitations under the License.
 
 load("@rules_graal//graal:graal.bzl", "graal_binary")
-load("@rules_java//java:defs.bzl", "java_binary")
+load("@rules_java//java:defs.bzl", "java_binary", "java_library")
 
 _DEPS = [
     "//third_party/java:javax_annotation",
@@ -29,6 +29,16 @@ java_binary(
         "//content/baseq3:__pkg__",
         "//content/teamarena:__pkg__",
         "//tools/material_magic/javatests/org/realityforge/q3a/material_magic/scenarios:__pkg__",
+    ],
+    deps = _DEPS,
+)
+
+java_library(
+    name = "Formatter",
+    srcs = ["Formatter.java"],
+    visibility = [
+        "//content/baseq3:__pkg__",
+        "//content/teamarena:__pkg__",
     ],
     deps = _DEPS,
 )
