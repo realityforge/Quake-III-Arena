@@ -56,8 +56,8 @@ public class Main implements Callable<Integer>
                                      + " prior to saving. This primarily used to verify the integrity of the tool.",
                        arity = "0" )
   private boolean _identityTransform;
-  @CommandLine.Option( names = { "--no-verify" }, description = "Skip validation of input unit.", arity = "0" )
-  private boolean _noVerify;
+  @CommandLine.Option( names = { "--verify" }, description = "Verify the input unit.", arity = "0", negatable = true )
+  private boolean _verify = true;
   @CommandLine.Option( names = { "--verbose" }, description = "Verbose output.", arity = "0" )
   private boolean _verbose;
   @SuppressWarnings( "MismatchedQueryAndUpdateOfCollection" )
@@ -79,7 +79,7 @@ public class Main implements Callable<Integer>
       return 1;
     }
 
-    if ( !_noVerify ) {
+    if ( _verify ) {
       final Validator validator = new Validator();
       final ValidationResult result = validator.validate( unit, libraryUnit, _allowedOverrides );
       final boolean hasError = result.hasErrorMessages();
