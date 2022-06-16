@@ -24,3 +24,6 @@ find . -type f -name '*.sh' -print0 | xargs -0 "$SHFMT" -i=4 -s -w
 
 # Format Bazel files
 ./bazelw run //:buildifier
+
+./bazelw run //content/baseq3:baseq3_material_format
+./bazelw run //content/teamarena:teamarena_material_format
