@@ -1,7 +1,7 @@
 #include "ui/menudef.h"
 
 {
-\\ PLATER SELECTION MENU \\
+// PLATER SELECTION MENU
 
 menuDef {
     	name "player_menu"

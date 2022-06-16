@@ -1,7 +1,7 @@
 #include "ui/menudef.h"
 
 {
-\\ Server Join \\
+// Server Join
 
   menuDef {
     	name "joinserver"

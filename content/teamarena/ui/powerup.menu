@@ -1,7 +1,7 @@
 #include "ui/menudef.h"
 
 {
-\\ powerup \\
+// powerup
 
   menuDef {
     	name "powerup_menu"

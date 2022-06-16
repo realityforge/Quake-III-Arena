@@ -1,7 +1,7 @@
 #include "ui/menudef.h"
 
 {
-\\ CALL VOTE MENU \\
+// CALL VOTE MENU
 
 menuDef {
     	name "ingame_callvote"

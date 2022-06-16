@@ -1,7 +1,7 @@
 #include "ui/menudef.h"
 
 {
-\\ CREATE FAVORITE POPUP MENU \\
+// CREATE FAVORITE POPUP MENU
 
 menuDef {
     	name "createfavorite_popmenu"

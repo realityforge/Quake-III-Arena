@@ -1,7 +1,7 @@
 #include "ui/menudef.h"
 
 {
-\\ Server Creation \\
+// Server Creation
 
   menuDef {
     	name "createserver"

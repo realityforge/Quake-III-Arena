@@ -1,7 +1,7 @@
 #include "ui/menudef.h"
 
 {
-\\ INGAME ABOUT BOX \\
+// INGAME ABOUT BOX
 
 menuDef {
     	name "ingame_about"

@@ -1,7 +1,7 @@
 #include "ui/menudef.h"
 
 {
-\\ Server Information Popup Menu \\
+// Server Information Popup Menu
 
 menuDef {
 	name "findplayer_popmenu"
