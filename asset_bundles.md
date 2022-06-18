@@ -94,17 +94,6 @@ The asset-specific metadata that is likely required by creators:
 
 If the "non-runtime" specific asset data ever grows "too" large then it could be split into a separate asset bundle that depends on the runtime bundle.
 
-### Challenges
-
-...
-* Probably requires a rebuild and/or rethinking of the VFS layer. Possibly the VFS mounts bundles as paths ala `/bundles/cbfb2dae51f384fc4dffe1965966fa562f9a51b0/...` and assets under the content hash ala `/assets/7dc48cd3a038568e100fdad842ee6d40fbee56bc` and then uses the equivalent of symlinks into `/maps/foo.bsp` for "published" resources. Then at least the rest of the game logic would not need to change, just the filesystem layer would need to detect references that use hash format and load assets from appropriate location. Consider adopting an existing filesystem layer or writing our own that takes inspiration from [physfs](https://icculus.org/physfs/) and the existing VFS layer.
-* Requires a substantial rethinking about how assets are processed for packaging into the engine.
-...
-
-### Solution
-
-...
-
 The design of the solution will likely evolve over time, but it is expected that the design will fit the following parameters:
 
 * Assets identified by a content hash.
@@ -119,6 +108,15 @@ The design of the solution will likely evolve over time, but it is expected that
 * Static inter-asset references MUST be statically resolvable within the bundle, or its static dependencies.
 * The asset bundle MUST NOT declare that it "consumes" an asset reference if the referenced asset is present in the asset bundle or the reference is a static reference.
 * An asset bundle should be signed by the distributor to ensure providence of the artifact has been maintained, and it has not been modified by third parties.
+
+### Challenges
+
+...
+* Probably requires a rebuild and/or rethinking of the VFS layer. Possibly the VFS mounts bundles as paths ala `/bundles/cbfb2dae51f384fc4dffe1965966fa562f9a51b0/...` and assets under the content hash ala `/assets/7dc48cd3a038568e100fdad842ee6d40fbee56bc` and then uses the equivalent of symlinks into `/maps/foo.bsp` for "published" resources. Then at least the rest of the game logic would not need to change, just the filesystem layer would need to detect references that use hash format and load assets from appropriate location. Consider adopting an existing filesystem layer or writing our own that takes inspiration from [physfs](https://icculus.org/physfs/) and the existing VFS layer.
+* Requires a substantial rethinking about how assets are processed for packaging into the engine.
+...
+
+### Solution
 
 ...
 
