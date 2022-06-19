@@ -95,6 +95,7 @@ These changes have not been started but are things that the project is consideri
       <th>Proposed Change</th>
       <th>Status</th>
       <th>Description</th>
+      <th>Notes</th>
     </tr>
   </thead>
   <tbody>
@@ -102,6 +103,7 @@ These changes have not been started but are things that the project is consideri
       <td><a href="asset_bundles.html">Asset Bundles</a></td>
       <td>Ideation</td>
       <td>Develop a more robust asset bundle format.</td>
+      <td>Depends upon a custom VFS which has not been specified.</td>
     </tr>
   </tbody>
 </table>
