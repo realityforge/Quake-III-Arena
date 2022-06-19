@@ -105,6 +105,12 @@ These changes have not been started but are things that the project is consideri
       <td>Develop a more robust asset bundle format.</td>
       <td>Depends upon a custom VFS which has not been specified.</td>
     </tr>
+    <tr valign="top">
+      <td><a href="settings.html">Settings</a></td>
+      <td>Ideation</td>
+      <td>Rebuild "cvars" as "settings".</td>
+      <td>Not yet ready for implementation as it impacts a log of code and should only be attempted once the decision has been made to base development of the initial codebase or the ioq3 fork.</td>
+    </tr>
   </tbody>
 </table>
 
