@@ -3545,7 +3545,6 @@ static void UI_BuildServerDisplayList(int force)
 {
     int i, count, clients, maxClients, ping, game, len, visible;
     char info[MAX_STRING_CHARS];
-    static int numinvisible;
     int lanSource;
 
     if (!(force || uiInfo.uiDC.realTime > uiInfo.serverStatus.nextDisplayRefresh)) {
@@ -3571,7 +3570,6 @@ static void UI_BuildServerDisplayList(int force)
     lanSource = UI_SourceForLAN();
 
     if (force) {
-        numinvisible = 0;
         // clear number of displayed servers
         uiInfo.serverStatus.numDisplayServers = 0;
         uiInfo.serverStatus.numPlayersOnServers = 0;
@@ -3655,7 +3653,6 @@ static void UI_BuildServerDisplayList(int force)
             if (ping > 0) {
                 trap_LAN_MarkServerVisible(lanSource, i, false);
                 uiInfo.serverStatus.numPlayersOnServers += clients;
-                numinvisible++;
             }
         }
     }
@@ -3838,7 +3835,7 @@ static char* stristr(char* str, char* charset)
 
 static void UI_BuildFindPlayerList(bool force)
 {
-    static int numFound, numTimeOuts;
+    static int numFound;
     int i, j, resend;
     serverStatusInfo_t info;
     char name[MAX_NAME_LENGTH + 2];
@@ -3873,7 +3870,6 @@ static void UI_BuildFindPlayerList(bool force)
                     sizeof(uiInfo.foundPlayerServerNames[uiInfo.numFoundPlayerServers - 1]),
                     "searching %d...", uiInfo.pendingServerStatus.num);
         numFound = 0;
-        numTimeOuts++;
     }
     for (i = 0; i < MAX_SERVERSTATUSREQUESTS; i++) {
         // if this pending server is valid
@@ -3916,9 +3912,6 @@ static void UI_BuildFindPlayerList(bool force)
         }
         // if empty pending slot or timed out
         if (!uiInfo.pendingServerStatus.server[i].valid || uiInfo.pendingServerStatus.server[i].startTime < uiInfo.uiDC.realTime - ui_serverStatusTimeOut.integer) {
-            if (uiInfo.pendingServerStatus.server[i].valid) {
-                numTimeOuts++;
-            }
             // reset server status request for this address
             UI_GetServerStatusInfo(uiInfo.pendingServerStatus.server[i].adrstr, NULL);
             // reuse pending slot
