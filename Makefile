@@ -439,6 +439,7 @@ else # ifeq Linux
 ifeq ($(PLATFORM),android)
   ARCH = aarch64
   CC = $(ANDROID_CC)
+  CPP = $(ANDROID_CPP)
   RANLIB = $(ANDROID_RANLIB)
   TOOLS_CFLAGS += -DARCH_STRING=\"$(COMPILE_ARCH)\"
   BASE_CFLAGS = $(ANDROID_CFLAGS) -Wall -fno-strict-aliasing -Wimplicit -Wstrict-prototypes -pipe \
@@ -458,7 +459,7 @@ ifeq ($(PLATFORM),android)
   SHLIBLDFLAGS = -shared -lm $(LDFLAGS)
 
   THREAD_LIBS =
-  LIBS = -ldl -lm -Wl,--no-undefined -shared
+  LIBS = -ldl -llog -lm -Wl,--no-undefined -shared
 
   CLIENT_LIBS = -lGLESv3 -lOpenSLES
   RENDERER_LIBS = -lGLESv3 -lEGL
@@ -1257,6 +1258,11 @@ $(echo_cmd) "CC $<"
 $(Q)$(CC) $(NOTSHLIBCFLAGS) $(CFLAGS) $(CLIENT_CFLAGS) $(OPTIMIZE) -o $@ -c $<
 endef
 
+define DO_CPP
+$(echo_cmd) "CPP $<"
+$(Q)$(CPP) $(NOTSHLIBCFLAGS) $(CFLAGS) $(CLIENT_CFLAGS) $(OPTIMIZE) -o $@ -c $<
+endef
+
 define DO_CC_ALTIVEC
 $(echo_cmd) "CC $<"
 $(Q)$(CC) $(NOTSHLIBCFLAGS) $(CFLAGS) $(CLIENT_CFLAGS) $(OPTIMIZE) $(ALTIVEC_CFLAGS) -o $@ -c $<
@@ -1817,6 +1823,8 @@ Q3OBJ = \
   $(B)/client/sdl_input.o \
   $(B)/client/android_snd.o \
   \
+  $(B)/client/OVR_Mrc_Shim.o \
+  $(B)/client/mrc_wrapper.o \
   $(B)/client/vr_base.o \
   $(B)/client/vr_input.o \
   $(B)/client/vr_renderer.o \
@@ -2209,12 +2217,12 @@ endif
 ifneq ($(USE_RENDERER_DLOPEN),0)
 $(B)/$(LIBPREFIX)renderer_opengl2_$(SHLIBNAME): $(Q3R2OBJ) $(Q3R2STRINGOBJ) $(JPGOBJ)
 	$(echo_cmd) "LD $@"
-	$(Q)$(CC) $(CFLAGS) $(SHLIBLDFLAGS) -o $@ $(Q3R2OBJ) $(Q3R2STRINGOBJ) $(JPGOBJ) \
+	$(Q)$(CPP) $(CFLAGS) $(SHLIBLDFLAGS) -o $@ $(Q3R2OBJ) $(Q3R2STRINGOBJ) $(JPGOBJ) \
 		$(THREAD_LIBS) $(LIBSDLMAIN) $(RENDERER_LIBS) $(LIBS)
 else
 $(B)/$(CLIENTBIN)_opengl2$(FULLBINEXT): $(Q3OBJ) $(Q3R2OBJ) $(Q3R2STRINGOBJ) $(JPGOBJ) $(LIBSDLMAIN)
 	$(echo_cmd) "LD $@"
-	$(Q)$(CC) $(CLIENT_CFLAGS) $(CFLAGS) $(CLIENT_LDFLAGS) $(LDFLAGS) $(NOTSHLIBLDFLAGS) \
+	$(Q)$(CPP) $(CLIENT_CFLAGS) $(CFLAGS) $(CLIENT_LDFLAGS) $(LDFLAGS) $(NOTSHLIBLDFLAGS) \
 		-o $@ $(Q3OBJ) $(Q3R2OBJ) $(Q3R2STRINGOBJ) $(JPGOBJ) \
 		$(LIBSDLMAIN) $(CLIENT_LIBS) $(RENDERER_LIBS) $(LIBS)
 endif
@@ -2709,6 +2717,9 @@ $(B)/client/%.o: $(ANDROIDDIR)/%.c
 
 $(B)/client/%.o: $(VRDIR)/%.c
 	$(DO_CC)
+
+$(B)/client/%.o: $(VRDIR)/%.cpp
+	$(DO_CPP)
 
 $(B)/client/%.o: $(SYSDIR)/%.c
 	$(DO_CC)

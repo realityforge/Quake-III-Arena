@@ -5,6 +5,7 @@
 #include "../qcommon/qcommon.h"
 #include "../client/client.h"
 
+#include "mrc_wrapper.h"
 #include "vr_clientinfo.h"
 #include "vr_input.h"
 #include "vr_types.h"
@@ -421,6 +422,14 @@ void VR_DrawFrame( engine_t* engine ) {
     IN_VRUpdateHMD( invViewTransform[0] );
     IN_VRUpdateControllers( invViewTransform[0], frameState.predictedDisplayTime );
     IN_VRSyncActions();
+
+    MRCCameraSet mrc = MRC_GetCamera();
+    Com_Printf("MRC cameraCount=%d", mrc.cameraCount);
+    for (int i = 0; i < mrc.cameraCount; i++) {
+        //TODO: fov = mrc.camera[i].fov;
+        //TODO: MRC should be another render pass
+        IN_VRUpdateHMD( XrPosef_Multiply( invViewTransform[0], mrc.camera[i].pose ) );
+    }
 
     //Projection used for drawing HUD models etc
     float hudScale = M_PI * 15.0f / 180.0f;

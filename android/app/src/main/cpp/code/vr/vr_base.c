@@ -1,6 +1,7 @@
 #include "../qcommon/q_shared.h"
 #include "../qcommon/qcommon.h"
 #include "../client/client.h"
+#include "mrc_wrapper.h"
 #include "vr_base.h"
 #include "vr_clientinfo.h"
 
@@ -133,6 +134,7 @@ engine_t* VR_Init( ovrJava java )
     vr_engine.appState.MainThreadTid = gettid();
     vr_engine.appState.SystemId = systemId;
 
+    MRC_Init(java);
     vr_engine.java = java;
     vr_initialized = qtrue;
     return &vr_engine;
@@ -279,6 +281,7 @@ void VR_Destroy( engine_t* engine )
     if (engine == &vr_engine) {
         xrDestroyInstance(engine->appState.Instance);
         ovrApp_Destroy(&engine->appState);
+        MRC_Destroy();
     }
 }
 
