@@ -11,9 +11,9 @@
 # limitations under the License.
 cc_library(
     name = "opus",
-    deps = [":opus_interface"],
     implementation_deps = [":opus_impl"],
     visibility = ["//visibility:public"],
+    deps = [":opus_interface"],
 )
 
 cc_library(
@@ -34,6 +34,7 @@ cc_library(
         "USE_ALLOCA",
     ],
     includes = ["include"],
+    visibility = ["//visibility:public"],
 )
 
 # TODO: We should use the defines that will enable SIMD instructions where available
@@ -261,9 +262,9 @@ cc_library(
         "src/opus_multistream.c",
         "src/opus_multistream_decoder.c",
         "src/opus_multistream_encoder.c",
+        "src/opus_private.h",
         "src/opus_projection_decoder.c",
         "src/opus_projection_encoder.c",
-        "src/opus_private.h",
         "src/repacketizer.c",
         "src/tansig_table.h",
     ],

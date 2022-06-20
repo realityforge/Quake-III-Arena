@@ -20,15 +20,16 @@ licenses(["notice"])  # BSD/MIT-like license (for zlib)
 
 cc_library(
     name = "zlib",
-    deps = [":zlib_interface"],
     implementation_deps = [":zlib_impl"],
     visibility = ["//visibility:public"],
+    deps = [":zlib_interface"],
 )
+
 cc_library(
     name = "unzip",
-    deps = [":unzip_interface"],
     implementation_deps = [":unzip_impl"],
     visibility = ["//visibility:public"],
+    deps = [":unzip_interface"],
 )
 
 cc_library(
@@ -98,13 +99,22 @@ genrule(
 
 cc_library(
     name = "unzip_impl",
-    srcs = ["contrib/minizip/ioapi.c", ":unzip_c_generator"],
-    deps = ["@org_realityforge_q3a//code/qcommon", ":unzip_interface"],
+    srcs = [
+        "contrib/minizip/ioapi.c",
+        ":unzip_c_generator",
+    ],
+    deps = [
+        ":unzip_interface",
+        "@org_realityforge_q3a//code/qcommon",
+    ],
 )
 
 cc_library(
     name = "unzip_interface",
-    hdrs = ["contrib/minizip/ioapi.h", "contrib/minizip/unzip.h"],
+    hdrs = [
+        "contrib/minizip/ioapi.h",
+        "contrib/minizip/unzip.h",
+    ],
     includes = ["contrib/minizip"],
     deps = [":zlib"],
 )

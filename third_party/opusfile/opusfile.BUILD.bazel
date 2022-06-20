@@ -11,9 +11,9 @@
 # limitations under the License.
 cc_library(
     name = "opusfile",
+    implementation_deps = [":opusfile_impl"],
     visibility = ["//visibility:public"],
     deps = [":opusfile_interface"],
-    implementation_deps = [":opusfile_impl"],
 )
 
 cc_library(

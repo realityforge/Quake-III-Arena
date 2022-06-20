@@ -11,9 +11,9 @@
 # limitations under the License.
 cc_library(
     name = "vorbis",
-    deps = [":vorbis_interface"],
     implementation_deps = [":vorbis_impl"],
     visibility = ["//visibility:public"],
+    deps = [":vorbis_interface"],
 )
 
 cc_library(
