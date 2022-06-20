@@ -170,7 +170,7 @@ char* PunctuationFromNum(script_t* script, int num)
         if (script->punctuations[i].n == num)
             return script->punctuations[i].p;
     }
-    return "unkown punctuation";
+    return "unknown punctuation";
 }
 void QDECL ScriptError(script_t* script, char* str, ...)
 {
