@@ -3229,24 +3229,19 @@ void AAS_Reachability_WalkOffLedge(int areanum)
                         testend[2] -= 1000;
                         trace = AAS_TraceClientBBox(mid, testend, PRESENCE_CROUCH, -1);
                         if (trace.startsolid) {
-                            // Log_Write("area %d: trace.startsolid\r\n", areanum);
                             break;
                         }
                         reachareanum = AAS_PointAreaNum(trace.endpos);
                         if (reachareanum == areanum) {
-                            // Log_Write("area %d: same area\r\n", areanum);
                             break;
                         }
                         if (AAS_ReachabilityExists(areanum, reachareanum)) {
-                            // Log_Write("area %d: reachability already exists\r\n", areanum);
                             break;
                         }
                         if (!AAS_AreaGrounded(reachareanum) && !AAS_AreaSwim(reachareanum)) {
-                            // Log_Write("area %d, reach area %d: not grounded and not swim\r\n", areanum, reachareanum);
                             break;
                         }
                         if (aasworld.areasettings[reachareanum].contents & (AREACONTENTS_SLIME | AREACONTENTS_LAVA)) {
-                            // Log_Write("area %d, reach area %d: lava or slime\r\n", areanum, reachareanum);
                             break;
                         }
                         // if not going through a cluster portal

@@ -676,7 +676,6 @@ void AAS_CreateAllRoutingCache(void)
             if (!AAS_AreaReachability(j))
                 continue;
             t = AAS_AreaTravelTimeToGoalArea(i, aasworld.areas[i].center, j, TFL_DEFAULT);
-            // Log_Write("traveltime from %d to %d is %d", i, j, t);
         }
     }
     aasworld.initialized = false;
