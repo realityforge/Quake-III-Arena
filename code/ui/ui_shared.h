@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef UI_SHARED_H
 #define UI_SHARED_H
 
-#include "../game/q_shared.h"
+#include "../qcommon/q_shared.h"
 #include "../cgame/tr_types.h"
 #include "keycodes.h"
 
