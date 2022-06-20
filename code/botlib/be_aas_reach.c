@@ -3023,7 +3023,6 @@ int AAS_Reachability_WeaponJump(int area1num, int area2num)
 {
     int face2num, i, n, ret, visualize;
     float speed, zvel;
-    // float hordist;
     aas_face_t* face2;
     aas_area_t *area1, *area2;
     aas_lreachability_t* lreach;
