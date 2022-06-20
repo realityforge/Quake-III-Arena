@@ -31,7 +31,7 @@ copy_to_directory(
         ":Quake3ArenaServer",
     ],
     allow_symlink = True,
-    prefix_mapped_src = {
+    prefix_mapped_srcs = {
         # Base game
         "//game/baseq3:cgame.so": "cgame:baseq3/cgamearm64",
         "//game/baseq3:pak0": "pak0:baseq3/pak0",
