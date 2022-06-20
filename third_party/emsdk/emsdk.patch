@@ -40,24 +40,15 @@
 -            package_lock_json = "@emscripten_bin_win//:emscripten/package-lock.json",
 -        )
 
---- bazel/emscripten_toolchain/BUILD.bazel	2022-06-03 11:14:57.000000000 +1000
-+++ bazel/emscripten_toolchain/BUILD2.bazel	2022-06-20 17:13:25.000000000 +1000
-@@ -2,18 +2,12 @@
-
- package(default_visibility = ["//visibility:public"])
-
--# Name depends on rules_nodejs version being used.
--# https://github.com/emscripten-core/emsdk/issues/1020
--# https://github.com/bazelbuild/rules_nodejs/issues/3375
+--- bazel/emscripten_toolchain/BUILD.bazel
++++ bazel/emscripten_toolchain/BUILD2.bazel
+@@ -7,7 +7,7 @@
+ # Name depends on rules_nodejs version being used.
+ # https://github.com/emscripten-core/emsdk/issues/1020
+ # https://github.com/bazelbuild/rules_nodejs/issues/3375
 -node_files = "@nodejs_host//:node_files" if existing_rule("@nodejs_host//:node_files") else "@nodejs//:node_files"
--
++node_files = "@nodejs_darwin_arm64//:node_files"
+
  filegroup(
      name = "common_files",
-     srcs = [
-         "emscripten_config",
-         "env.sh",
-         "env.bat",
--        node_files,
-     ],
- )
 
