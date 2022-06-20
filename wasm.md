@@ -27,6 +27,47 @@ There are several Wasm runtimes that support various capabilities, including som
 
 The memory layout of structures passed into and out of Wasm modules is stable across platforms but the Q3A memory layout will vary across platforms (or so it is assumed). There may be substantial work required to align the two ways of looking at memory that is shared between the modules.
 
+### Plan
+
+The plan is to tackle this task in separate phases:
+
+#### Phase 1
+
+The first step is to get the `cgame`, `game` and `ui` libraries being compiled as wasm modules. This will involve:
+
+* Defining an emscripten CC toolchain in Bazel.
+* Defining one or more macros/rules to compile source to output units and linking them as binaries.
+* Defining one or more macros/rules to optimize and post-process the binaries.
+* Defining a `vm_library` macro that abstracts `cc_library` and `wasm_library` rules so that the build code can declare a library once but have both a wasm and native library declared.
+* Converting the existing builds to use `vm_library`.
+
+#### Phase 2
+
+The next step is to select and integrate a Wasm runtime into the application. This will involve:
+
+* Selecting the runtime.
+* Defining the Bazel repository rules to fetch and build the runtime.
+* Adding code to embed the runtime into the engine.
+* Experiment with dispatching calls into a wasm module and receiving calls from a wasm module.
+* Add code to cache the compiled form of the runtime based on a content hash and the system version.
+
+#### Phase 3
+
+Integration of the `ui` vm as a Wasm module. This will involve:
+
+* Ensuring the calling convention and memory layout between the application and the ui module works as expected.
+* Potentially involves creating a tool to generate glue code on the wasm side and the engine side to provide an API for interaction between the two systems.
+
+#### Phase 4
+
+Integration of the `game` vm and the `cgame` vm as Wasm modules. This will involve:
+
+* Unknown but it is expected that additional support will be required to ensure the communication protocol between modules operates as desired.
+
+#### Phase 5
+
+Remove the historic `qvm` module interpreter and jit compiler.
+
 ### Solution
 
 ...
