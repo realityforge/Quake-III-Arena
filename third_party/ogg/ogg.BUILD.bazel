@@ -13,7 +13,6 @@ load("@org_realityforge_q3a//third_party:common.bzl", "expand_template")
 
 expand_template(
     name = "config_types.h_gen",
-    template = "include/ogg/config_types.h.in",
     out = "include/ogg/config_types.h",
     substitutions = {
         "@INCLUDE_INTTYPES_H@": "1",
@@ -25,16 +24,17 @@ expand_template(
         "@USIZE32@": "uint32_t",
         "@SIZE64@": "int64_t",
     },
+    template = "include/ogg/config_types.h.in",
 )
 
 cc_library(
     name = "ogg",
     srcs = [
-        ":config_types.h_gen",
         "include/ogg/os_types.h",
         "src/bitwise.c",
         "src/crctable.h",
         "src/framing.c",
+        ":config_types.h_gen",
     ],
     hdrs = ["include/ogg/ogg.h"],
     includes = ["include"],

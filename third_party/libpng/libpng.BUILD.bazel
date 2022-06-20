@@ -15,15 +15,33 @@ licenses(["notice"])  # BSD/MIT-like license
 
 _PNG_DEFINES = select({
     # Windows does not need math library
-    "@org_realityforge_q3a//build_defs:x86": ["PNG_INTEL_SSE_OPT=1", "PNG_POWERPC_VSX_OPT=0", "PNG_ARM_NEON_OPT=0", "PNG_MIPS_MSA_OPT=0"],
-    "@org_realityforge_q3a//build_defs:arm": ["PNG_INTEL_SSE_OPT=0", "PNG_POWERPC_VSX_OPT=0", "PNG_ARM_NEON_OPT=2", "PNG_MIPS_MSA_OPT=0"],
-    "//conditions:default": ["PNG_INTEL_SSE_OPT=0", "PNG_POWERPC_VSX_OPT=0", "PNG_ARM_NEON_OPT=0", "PNG_MIPS_MSA_OPT=0"],
+    "@org_realityforge_q3a//build_defs:x86": [
+        "PNG_INTEL_SSE_OPT=1",
+        "PNG_POWERPC_VSX_OPT=0",
+        "PNG_ARM_NEON_OPT=0",
+        "PNG_MIPS_MSA_OPT=0",
+    ],
+    "@org_realityforge_q3a//build_defs:arm": [
+        "PNG_INTEL_SSE_OPT=0",
+        "PNG_POWERPC_VSX_OPT=0",
+        "PNG_ARM_NEON_OPT=2",
+        "PNG_MIPS_MSA_OPT=0",
+    ],
+    "//conditions:default": [
+        "PNG_INTEL_SSE_OPT=0",
+        "PNG_POWERPC_VSX_OPT=0",
+        "PNG_ARM_NEON_OPT=0",
+        "PNG_MIPS_MSA_OPT=0",
+    ],
 })
 
 cc_library(
     name = "libpng",
     srcs = ["pnglibconf.h"],
-    hdrs = ["png.h", "pngconf.h"],
+    hdrs = [
+        "png.h",
+        "pngconf.h",
+    ],
     defines = _PNG_DEFINES,
     includes = ["."],
     visibility = ["//visibility:public"],
@@ -68,17 +86,19 @@ cc_library(
     copts = ["-Wno-unused-but-set-variable"],
     includes = ["."],
     visibility = ["//visibility:public"],
-    deps = [":libpng", "@zlib"] +
-           select({
-               # Windows does not need math library
-               "@org_realityforge_q3a//build_defs:windows": [],
-               "//conditions:default": ["@org_realityforge_q3a//third_party:math"],
-           }),
+    deps = [
+        ":libpng",
+        "@zlib",
+    ] + select({
+        # Windows does not need math library
+        "@org_realityforge_q3a//build_defs:windows": [],
+        "//conditions:default": ["@org_realityforge_q3a//third_party:math"],
+    }),
 )
 
 expand_template(
     name = "pnglibconf.h_gen",
-    template = "scripts/pnglibconf.h.prebuilt",
     out = "pnglibconf.h",
     substitutions = {},
+    template = "scripts/pnglibconf.h.prebuilt",
 )

@@ -88,13 +88,23 @@ genrule(
 
 cc_library(
     name = "unzip_impl",
-    srcs = ["contrib/minizip/ioapi.c", ":unzip_c_generator"],
-    deps = ["@org_realityforge_q3a//code/qcommon", ":unzip", ":zlib"],
+    srcs = [
+        "contrib/minizip/ioapi.c",
+        ":unzip_c_generator",
+    ],
+    deps = [
+        ":unzip",
+        ":zlib",
+        "@org_realityforge_q3a//code/qcommon",
+    ],
 )
 
 cc_library(
     name = "unzip",
-    hdrs = ["contrib/minizip/ioapi.h", "contrib/minizip/unzip.h"],
+    hdrs = [
+        "contrib/minizip/ioapi.h",
+        "contrib/minizip/unzip.h",
+    ],
     includes = ["contrib/minizip"],
     deps = [":zlib"],
 )

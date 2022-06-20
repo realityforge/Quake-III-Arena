@@ -17,9 +17,21 @@ genrule(
 
 cc_binary(
     name = "pngcrush",
-    srcs = ["cexcept.h", ":pngcrush_h_generator", "pngcrush.c"],
-    includes = ["generated"],
-    copts = ["-std=c90", "-O3", "-funroll-loops", "-fomit-frame-pointer", "-Wno-self-assign", "-Wno-format-pedantic", "-Wno-overlength-strings", "-Wno-declaration-after-statement"],
+    srcs = [
+        "cexcept.h",
+        "pngcrush.c",
+        ":pngcrush_h_generator",
+    ],
+    copts = [
+        "-std=c90",
+        "-O3",
+        "-funroll-loops",
+        "-fomit-frame-pointer",
+        "-Wno-self-assign",
+        "-Wno-format-pedantic",
+        "-Wno-overlength-strings",
+        "-Wno-declaration-after-statement",
+    ],
     defines = [
         "PNGCRUSH_TIMERS=11",
         "PNGCRUSH_USE_CLOCK_GETTIME=1",
@@ -28,11 +40,12 @@ cc_binary(
         "PNGCRUSH_USE_INTEL_SSE",
         "PNGCRUSH_USE_POWERPC_VSX",
     ],
+    includes = ["generated"],
     visibility = ["//visibility:public"],
     deps = [
-        "@org_realityforge_q3a//third_party:math",
         "@libpng",
         "@libpng//:libpng_impl",
+        "@org_realityforge_q3a//third_party:math",
         "@zlib//:zlib_impl",
     ],
 )
