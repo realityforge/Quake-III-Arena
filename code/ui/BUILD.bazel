@@ -71,6 +71,7 @@ cc_library(
     copts = UI_COPTS,
     visibility = [
         "//code/q3_ui:__pkg__",
+        "//game/teamarena:__pkg__",
     ],
     deps = [
         ":api",
@@ -96,7 +97,6 @@ cc_library(
         ":api",
         ":local_api",
         ":shared",
-        ":ui_syscalls",
         "//code/client:api",
         "//code/game:bg_api",
         "//code/game:bg_misc-client-teamarena",

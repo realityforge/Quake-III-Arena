@@ -45,6 +45,7 @@ cc_binary(
     deps = [
         "//build_defs:exported_symbols.lds",
         "//code/ui",
+        "//code/ui:ui_syscalls",
     ],
 )
 
