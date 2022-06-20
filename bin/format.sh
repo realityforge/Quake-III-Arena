@@ -20,7 +20,7 @@ SHFMT="$(./bazelw run --run_under=echo @com_github_mvdan_sh//cmd/shfmt)"
 find code content tools -type f -name '*.h' -o -name '*.c' -o -name '*.m' -o -name '*.java' | xargs clang-format -i
 
 # Format Shell Scripts
-find . -type f \( -name '*.sh' -or -name 'git-pre-commit' \) -print0 | xargs -0 "$SHFMT" -i=4 -s -w
+find . ! -path './tmp/*' -type f \( -name '*.sh' -or -name 'git-pre-commit' \) -print0 | xargs -0 "$SHFMT" -i=4 -s -w
 
 # Format Bazel files
 ./bazelw run //:buildifier
