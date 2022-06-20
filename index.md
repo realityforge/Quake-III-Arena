@@ -111,6 +111,12 @@ These changes have not been started but are things that the project is consideri
       <td>Rebuild "cvars" as "settings".</td>
       <td>Not yet ready for implementation as it impacts a log of code and should only be attempted once the decision has been made to base development of the initial codebase or the ioq3 fork.</td>
     </tr>
+    <tr valign="top">
+      <td><a href="wasm.html">Wasm</a></td>
+      <td>Prototyping</td>
+      <td>Convert VM code to use Wasm instruction architecture and runtime.</td>
+      <td>Substantial experimentation required.</td>
+    </tr>
   </tbody>
 </table>
 
