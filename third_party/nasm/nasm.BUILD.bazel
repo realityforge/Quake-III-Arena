@@ -37,10 +37,10 @@ COPTS = select({
 
 expand_template(
     name = "config.h_gen",
-    template = "@org_realityforge_q3a//third_party/nasm:config.h",
     out = "config/config.h",
     # No substitutions so this just ends up being a copy
     substitutions = {},
+    template = "@org_realityforge_q3a//third_party/nasm:config.h",
 )
 
 cc_library(
