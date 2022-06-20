@@ -83,4 +83,5 @@ Future work:
 
 * Envoy is a product that uses Wasm modules as plugins and is built with Bazel. It has invested significant time in a [wasm.bzl](https://github.com/envoyproxy/envoy/blob/main/bazel/wasm/wasm.bzl) bazel extension that could be repurposed for use in this project.
 * [Wasmer](https://docs.wasmer.io/): An open-source runtime for executing WebAssembly on the Server.
+* [Wasmtime](https://wasmtime.dev/): A small and efficient runtime for WebAssembly & WASI.
 * [emsdk hello-world example](https://github.com/emscripten-core/emsdk/blob/master/bazel/hello-world/BUILD): A simple example of compiling a C file to wasm binary and a platform binary at the same time.
