@@ -87,7 +87,7 @@ cc_library(
         "//code/qcommon",
         "//code/renderer:api",
         "//code/ui:api",
-        "@opus",
+        "@opus//:opus_interface",
     ],
 )
 
