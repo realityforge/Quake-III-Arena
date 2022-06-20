@@ -1,0 +1,63 @@
+--- bazel/emscripten_deps.bzl	2022-06-03 11:14:57.000000000 +1000
++++ bazel/emscripten_deps2.bzl	2022-06-20 17:07:49.000000000 +1000
+@@ -1,5 +1,5 @@
+ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+-load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "npm_install")
++load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories")
+ load(":revisions.bzl", "EMSCRIPTEN_TAGS")
+
+ def _parse_version(v):
+@@ -116,31 +116,3 @@
+             build_file_content = BUILD_FILE_CONTENT_TEMPLATE.format(bin_extension = ".exe"),
+             type = "zip",
+         )
+-
+-    if "emscripten_npm_linux" not in excludes:
+-        npm_install(
+-            name = "emscripten_npm_linux",
+-            package_json = "@emscripten_bin_linux//:emscripten/package.json",
+-            package_lock_json = "@emscripten_bin_linux//:emscripten/package-lock.json",
+-        )
+-
+-    if "emscripten_npm_mac" not in excludes:
+-        npm_install(
+-            name = "emscripten_npm_mac",
+-            package_json = "@emscripten_bin_mac//:emscripten/package.json",
+-            package_lock_json = "@emscripten_bin_mac//:emscripten/package-lock.json",
+-        )
+-
+-    if "emscripten_npm_mac_arm64" not in excludes:
+-        npm_install(
+-            name = "emscripten_npm_mac",
+-            package_json = "@emscripten_bin_mac_arm64//:emscripten/package.json",
+-            package_lock_json = "@emscripten_bin_mac_arm64//:emscripten/package-lock.json",
+-        )
+-
+-    if "emscripten_npm_win" not in excludes:
+-        npm_install(
+-            name = "emscripten_npm_win",
+-            package_json = "@emscripten_bin_win//:emscripten/package.json",
+-            package_lock_json = "@emscripten_bin_win//:emscripten/package-lock.json",
+-        )
+
+--- bazel/emscripten_toolchain/BUILD.bazel	2022-06-03 11:14:57.000000000 +1000
++++ bazel/emscripten_toolchain/BUILD2.bazel	2022-06-20 17:13:25.000000000 +1000
+@@ -2,18 +2,12 @@
+
+ package(default_visibility = ["//visibility:public"])
+
+-# Name depends on rules_nodejs version being used.
+-# https://github.com/emscripten-core/emsdk/issues/1020
+-# https://github.com/bazelbuild/rules_nodejs/issues/3375
+-node_files = "@nodejs_host//:node_files" if existing_rule("@nodejs_host//:node_files") else "@nodejs//:node_files"
+-
+ filegroup(
+     name = "common_files",
+     srcs = [
+         "emscripten_config",
+         "env.sh",
+         "env.bat",
+-        node_files,
+     ],
+ )
+
