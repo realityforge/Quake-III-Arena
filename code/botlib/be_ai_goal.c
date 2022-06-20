@@ -215,7 +215,7 @@ itemconfig_t* LoadItemConfig(char* filename)
 {
     int max_iteminfo;
     token_t token;
-    char path[MAX_PATH];
+    char path[MAX_QPATH];
     source_t* source;
     itemconfig_t* ic;
     iteminfo_t* ii;
@@ -227,7 +227,7 @@ itemconfig_t* LoadItemConfig(char* filename)
         LibVarSet("max_iteminfo", "256");
     }
 
-    strncpy(path, filename, MAX_PATH);
+    strncpy(path, filename, MAX_QPATH);
     PC_SetBaseFolder(BOTFILESBASEFOLDER);
     source = LoadSourceFile(path);
     if (!source) {

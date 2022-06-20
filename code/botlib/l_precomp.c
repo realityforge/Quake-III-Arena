@@ -619,7 +619,7 @@ int PC_Directive_include(source_t* source)
 {
     script_t* script;
     token_t token;
-    char path[MAX_PATH];
+    char path[MAX_QPATH];
 
     if (source->skip > 0)
         return true;
@@ -649,7 +649,7 @@ int PC_Directive_include(source_t* source)
             }
             if (token.type == TT_PUNCTUATION && *token.string == '>')
                 break;
-            strncat(path, token.string, MAX_PATH);
+            strncat(path, token.string, MAX_QPATH);
         }
         if (*token.string != '>') {
             SourceWarning(source, "#include missing trailing >");
@@ -864,7 +864,7 @@ define_t* PC_DefineFromString(char* string)
     script = LoadScriptMemory(string, strlen(string), "*extern");
     // create a new source
     memset(&src, 0, sizeof(source_t));
-    strncpy(src.filename, "*extern", MAX_PATH);
+    strncpy(src.filename, "*extern", MAX_QPATH);
     src.scriptstack = script;
     src.definehash = GetClearedMemory(DEFINEHASHSIZE * sizeof(define_t*));
     // create a define from the source
@@ -2129,7 +2129,7 @@ source_t* LoadSourceFile(const char* filename)
     source = (source_t*)GetMemory(sizeof(source_t));
     memset(source, 0, sizeof(source_t));
 
-    strncpy(source->filename, filename, MAX_PATH);
+    strncpy(source->filename, filename, MAX_QPATH);
     source->scriptstack = script;
     source->tokens = NULL;
     source->defines = NULL;
