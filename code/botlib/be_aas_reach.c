@@ -3027,7 +3027,7 @@ int AAS_Reachability_WeaponJump(int area1num, int area2num)
     aas_face_t* face2;
     aas_area_t *area1, *area2;
     aas_lreachability_t* lreach;
-    vec3_t areastart, facecenter, start, end, dir, cmdmove; // teststart;
+    vec3_t areastart, facecenter, start, end, dir, cmdmove;
     vec3_t velocity;
     aas_clientmove_t move;
     aas_trace_t trace;
