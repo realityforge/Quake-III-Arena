@@ -1062,7 +1062,6 @@ int StringsMatch(bot_matchpiece_t* pieces, bot_match_t* match)
     lastvariable = -1;
     // pointer to the string to compare the match string with
     strptr = match->string;
-    // Log_Write("match: %s", strptr);
     // compare the string with the current match string
     for (mp = pieces; mp; mp = mp->next) {
         // if it is a piece of string
@@ -1073,13 +1072,11 @@ int StringsMatch(bot_matchpiece_t* pieces, bot_match_t* match)
                     newstrptr = strptr;
                     break;
                 }
-                // Log_Write("MT_STRING: %s", mp->string);
                 index = StringContains(strptr, ms->string, false);
                 if (index >= 0) {
                     newstrptr = strptr + index;
                     if (lastvariable >= 0) {
                         match->variables[lastvariable].length = (newstrptr - match->string) - match->variables[lastvariable].offset;
-                        // newstrptr - match->variables[lastvariable].ptr;
                         lastvariable = -1;
                         break;
                     } else if (index == 0) {
@@ -1094,7 +1091,6 @@ int StringsMatch(bot_matchpiece_t* pieces, bot_match_t* match)
         }
         // if it is a variable piece of string
         else if (mp->type == MT_VARIABLE) {
-            // Log_Write("MT_VARIABLE");
             match->variables[mp->variable].offset = strptr - match->string;
             lastvariable = mp->variable;
         }
