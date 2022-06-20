@@ -3032,7 +3032,7 @@ void AAS_SetWeaponJumpAreaFlags(void)
 int AAS_Reachability_WeaponJump(int area1num, int area2num)
 {
     int face2num, i, n, ret, visualize;
-    float speed, zvel, hordist;
+    float speed, zvel;
     aas_face_t* face2;
     aas_area_t *area1, *area2;
     aas_lreachability_t* lreach;
@@ -3091,7 +3091,6 @@ int AAS_Reachability_WeaponJump(int area1num, int area2num)
                 // direction towards the face center
                 VectorSubtract(facecenter, areastart, dir);
                 dir[2] = 0;
-                hordist = VectorNormalize(dir);
                 // get command movement
                 VectorScale(dir, speed, cmdmove);
                 VectorSet(velocity, 0, 0, zvel);
