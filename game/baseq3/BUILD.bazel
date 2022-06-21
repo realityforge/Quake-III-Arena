@@ -10,6 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@emsdk//emscripten_toolchain:wasm_rules.bzl", "wasm_cc_binary")
 load("@rules_cc//cc:defs.bzl", "cc_binary")
 load("//build_defs:copy_to_directory.bzl", "copy_to_directory")
 load("//build_defs:rules.bzl", "CLIENT_GAME_LINKOPTS", "DIST_VISIBILITY", "SERVER_GAME_LINKOPTS", "UI_LINKOPTS")
@@ -49,6 +50,19 @@ cc_binary(
     ],
 )
 
+# Tagged as manual as not required other than as a target for wasm_cc_binary
+cc_binary(
+    name = "vmui",
+    tags = ["manual"],
+    deps = ["//code/q3_ui:ui"],
+)
+
+wasm_cc_binary(
+    name = "ui-wasm",
+    cc_target = ":vmui",
+    outputs = ["ui.wasm"],
+)
+
 copy_to_directory(
     name = "baseq3",
     asset_srcs = [
@@ -68,6 +82,7 @@ copy_to_directory(
         "@q3a_baseq3_pak6//:files",
         "@q3a_baseq3_pak6//:png_files",
         "@q3a_baseq3_pak8//:files",
+        ":ui.wasm",
     ],
     downcase = True,
     replace_prefixes = REPLACE_RULES,
