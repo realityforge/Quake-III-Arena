@@ -2892,7 +2892,7 @@ void CG_DrawActive( void ) {
 	}
 
 	//Now draw the HUD shader in the world
-    if (trap_Cvar_VariableValue("vr_hudDrawStatus") != 2.0f)
+	if (!vr->renderMRC && trap_Cvar_VariableValue("vr_hudDrawStatus") != 2.0f)
 	{
 		refEntity_t ent;
 		trace_t trace;
@@ -2944,6 +2944,13 @@ void CG_DrawActive( void ) {
 		ent.customShader = cgs.media.hudShader;
 
 		trap_R_AddRefEntityToScene(&ent);
+	}
+
+	// set the view from external device
+	if ( vr->renderMRC )
+	{
+		AnglesToAxis( vr->hmdorientation, cg.refdef.viewaxis );
+		VectorAdd( cg.refdef.vieworg, vr->hmdposition, cg.refdef.vieworg );
 	}
 
 	// draw 3D view

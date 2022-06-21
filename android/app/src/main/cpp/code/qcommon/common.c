@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "q_shared.h"
 #include "qcommon.h"
+#include "../client/client.h"
 #include <setjmp.h>
 #ifndef _WIN32
 #include <netinet/in.h>
@@ -3061,23 +3062,24 @@ int Com_TimeVal(int minMsec)
 	return timeVal;
 }
 
+int msec, minMsec;
+int timeVal, timeValSV;
+static int lastTime, bias;
+
+int timeBeforeFirstEvents;
+int timeBeforeServer;
+int timeBeforeEvents;
+int timeBeforeClient;
+int timeAfter;
+
 /*
 =================
-Com_Frame
+Com_PreFrame
 =================
 */
-void Com_Frame( void ) {
+void Com_PreFrame( void ) {
 
-	int		msec, minMsec;
-	int		timeVal, timeValSV;
-	static int	lastTime = 0, bias = 0;
- 
-	int		timeBeforeFirstEvents;
-	int		timeBeforeServer;
-	int		timeBeforeEvents;
-	int		timeBeforeClient;
-	int		timeAfter;
-  
+	lastTime = 0, bias = 0;
 
 	if ( setjmp (abortframe) ) {
 		return;			// an ERR_DROP was thrown
@@ -3217,7 +3219,23 @@ void Com_Frame( void ) {
 	}
 
 	CL_Frame( msec );
+}
 
+/*
+=================
+Com_RenderFrame
+=================
+*/
+void Com_RenderFrame( void ) {
+	SCR_UpdateScreen();
+}
+
+/*
+=================
+Com_PostFrame
+=================
+*/
+void Com_PostFrame( void ) {
 	if ( com_speeds->integer ) {
 		timeAfter = Sys_Milliseconds ();
 	}

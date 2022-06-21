@@ -47,11 +47,11 @@ MRCCameraSet MRC_GetCamera( void )
 
         ovrmCameraExtrinsics extrinsics;
         CHECK_MRC(ovrm_GetAPIs()->GetExternalCameraExtrinsics(i, &extrinsics));
-        output.camera[i].pose.position.x = 0;//TODO:extrinsics.RelativePose.Position.x;
-        output.camera[i].pose.position.y = 0;//TODO:extrinsics.RelativePose.Position.y;
-        output.camera[i].pose.position.z = 0;//TODO:extrinsics.RelativePose.Position.z;
-        output.camera[i].pose.orientation.x = 0;//TODO:extrinsics.RelativePose.Orientation.x;
-        output.camera[i].pose.orientation.y = 0;//TODO:extrinsics.RelativePose.Orientation.y;
+        output.camera[i].pose.position.x = extrinsics.RelativePose.Position.x;
+        output.camera[i].pose.position.y = extrinsics.RelativePose.Position.y;
+        output.camera[i].pose.position.z = extrinsics.RelativePose.Position.z;
+        output.camera[i].pose.orientation.x = extrinsics.RelativePose.Orientation.x;
+        output.camera[i].pose.orientation.y = extrinsics.RelativePose.Orientation.y;
         output.camera[i].pose.orientation.z = extrinsics.RelativePose.Orientation.z;
         output.camera[i].pose.orientation.w = extrinsics.RelativePose.Orientation.w;
     }

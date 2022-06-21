@@ -63,6 +63,7 @@ typedef struct {
     int *menuCursorX;
     int *menuCursorY;
     qboolean menuLeftHanded;
+    qboolean renderMRC;
 
     float recenterYaw;
 } vr_clientinfo_t;
