@@ -24,7 +24,22 @@ cc_binary(
     deps = [
         "//build_defs:exported_symbols.lds",
         "//code/cgame:baseq3",
+        "//code/cgame:baseq3_syscalls",
     ],
+)
+
+# Tagged as manual as not required other than as a target for wasm_cc_binary
+# and does not define a main so would fail if attempted to compiled
+cc_binary(
+    name = "vmcgame",
+    tags = ["manual"],
+    deps = ["//code/cgame:baseq3"],
+)
+
+wasm_cc_binary(
+    name = "cgame-wasm",
+    cc_target = ":vmcgame",
+    outputs = ["cl_game.wasm"],
 )
 
 cc_binary(
@@ -82,6 +97,7 @@ copy_to_directory(
         "@q3a_baseq3_pak6//:files",
         "@q3a_baseq3_pak6//:png_files",
         "@q3a_baseq3_pak8//:files",
+        ":cl_game.wasm",
         ":ui.wasm",
     ],
     downcase = True,

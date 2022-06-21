@@ -53,7 +53,7 @@ _NATIVE_LIB_SRC = ["cg_syscalls.c"]
 
 cc_library(
     name = "baseq3",
-    srcs = _BASEQ3_SRC + _NATIVE_LIB_SRC,
+    srcs = _BASEQ3_SRC,
     copts = CLIENT_GAME_COPTS,
     defines = CLIENT_GAME_DEFINES,
     visibility = ["//game/baseq3:__pkg__"],
@@ -70,23 +70,16 @@ cc_library(
 )
 
 cc_library(
-    name = "baseq3-qvm",
-    srcs = _BASEQ3_SRC,
-    defines = CLIENT_GAME_DEFINES + QVM_DEFINES,
-    deps = [
-        ":api",
-        "//code/game:bg_api",
-        "//code/game:bg_lib-qvm",
-        "//code/qcommon:shared",
-        "//code/qcommon:shared_api",
-        "//code/renderer:api",
-        "//code/ui:shared",
-    ],
+    name = "baseq3_syscalls",
+    srcs = _NATIVE_LIB_SRC,
+    copts = CLIENT_GAME_COPTS,
+    visibility = ["//game/baseq3:__pkg__"],
+    deps = [":baseq3"],
 )
 
 cc_library(
     name = "teamarena",
-    srcs = _TEAM_ARENA_SRC + _NATIVE_LIB_SRC,
+    srcs = _TEAM_ARENA_SRC,
     copts = CLIENT_GAME_COPTS,
     defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
     visibility = ["//game/teamarena:__pkg__"],
@@ -106,17 +99,9 @@ cc_library(
 )
 
 cc_library(
-    name = "teamarena-qvm",
-    srcs = _TEAM_ARENA_SRC,
-    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES + QVM_DEFINES,
-    deps = [
-        ":api",
-        "//code/game:bg_api",
-        "//code/game:bg_lib-qvm",
-        "//code/qcommon:shared",
-        "//code/qcommon:shared_api",
-        "//code/qcommon:voicechat",
-        "//code/renderer:api",
-        "//code/ui:shared",
-    ],
+    name = "teamarena_syscalls",
+    srcs = _NATIVE_LIB_SRC,
+    copts = CLIENT_GAME_COPTS,
+    visibility = ["//game/teamarena:__pkg__"],
+    deps = [":teamarena"],
 )

@@ -24,8 +24,23 @@ cc_binary(
     deps = [
         "//build_defs:exported_symbols.lds",
         "//code/cgame:teamarena",
+        "//code/cgame:teamarena_syscalls",
     ],
 )
+# Tagged as manual as not required other than as a target for wasm_cc_binary
+# and does not define a main so would fail if attempted to compiled
+cc_binary(
+    name = "vmcgame",
+    tags = ["manual"],
+    deps = ["//code/cgame:teamarena"],
+)
+
+wasm_cc_binary(
+    name = "cgame-wasm",
+    cc_target = ":vmcgame",
+    outputs = ["cl_game.wasm"],
+)
+
 
 cc_binary(
     name = "qagame.so",
@@ -74,6 +89,7 @@ copy_to_directory(
         "@q3a_missionpack_pak0//:files",
         "@q3a_missionpack_pak0//:png_files",
         "@q3a_missionpack_pak1//:files",
+        ":cl_game.wasm",
         ":ui.wasm",
     ],
     downcase = True,
