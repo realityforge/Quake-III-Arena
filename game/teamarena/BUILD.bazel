@@ -16,7 +16,7 @@ load("//third_party/content:metadata.bzl", "REPLACE_RULES")
 
 copy_to_directory(
     name = "teamarena",
-    srcs = [
+    asset_srcs = [
         "//content/teamarena:materials",
         "//content/teamarena:skin_assets",
         "//content/teamarena:ui_assets",
