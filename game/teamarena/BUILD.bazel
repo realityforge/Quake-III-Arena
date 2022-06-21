@@ -74,6 +74,7 @@ copy_to_directory(
         "@q3a_missionpack_pak0//:files",
         "@q3a_missionpack_pak0//:png_files",
         "@q3a_missionpack_pak1//:files",
+        ":ui.wasm",
     ],
     downcase = True,
     replace_prefixes = REPLACE_RULES,
