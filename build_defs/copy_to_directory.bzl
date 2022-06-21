@@ -235,14 +235,15 @@ if exist "{src}\\*" (
     )
 
 def _copy_to_directory_impl(ctx):
-    if not ctx.attr.srcs and not ctx.attr.prefix_mapped_src:
-        fail("srcs and prefix_mapped_src must not be empty in copy_to_directory %s" % ctx.label)
+    if not ctx.attr.srcs and not ctx.attr.prefix_mapped_srcs and not ctx.attr.asset_srcs and not ctx.attr.prefix_mapped_asset_srcs:
+        fail("srcs, asset_srcs, prefix_mapped_srcs and prefix_mapped_asset_srcs must not be empty in copy_to_directory %s" % ctx.label)
 
     output = ctx.actions.declare_directory(ctx.attr.name)
 
     # Gather a list of src_path, dst_path pairs
     copy_paths = []
-    for target, prefix_map in ctx.attr.prefix_mapped_src.items():
+
+    for target, prefix_map in ctx.attr.prefix_mapped_asset_srcs.items():
         parts = prefix_map.split(":")
         if 2 != len(parts):
             fail("prefix_map %s for label %s is malformed" % (prefix_map, target))
@@ -252,6 +253,23 @@ def _copy_to_directory_impl(ctx):
             if None != src_path:
                 dst_path = _paths.normalize("/".join([output.path, output_path]))
                 copy_paths.append((src_path, dst_path, src_file))
+
+    for target, prefix_map in ctx.attr.prefix_mapped_srcs.items():
+        parts = prefix_map.split(":")
+        if 2 != len(parts):
+            fail("prefix_map %s for label %s is malformed" % (prefix_map, target))
+        files = target[DefaultInfo].files.to_list()
+        for src_file in files:
+            src_path, output_path, src_file = _copy_paths(ctx, src_file, parts[0], parts[1])
+            if None != src_path:
+                dst_path = _paths.normalize("/".join([output.path, output_path]))
+                copy_paths.append((src_path, dst_path, src_file))
+
+    for src_file in ctx.files.asset_srcs:
+        src_path, output_path, src_file = _copy_paths(ctx, src_file)
+        if None != src_path:
+            dst_path = _paths.normalize("/".join([output.path, output_path]))
+            copy_paths.append((src_path, dst_path, src_file))
 
     for src_file in ctx.files.srcs:
         src_path, output_path, src_file = _copy_paths(ctx, src_file)
@@ -270,9 +288,11 @@ def _copy_to_directory_impl(ctx):
 _copy_to_directory = rule(
     attrs = {
         "allow_symlink": attr.bool(default = False),
+        "asset_srcs": attr.label_list(allow_files = True, cfg = "exec"),
         "downcase": attr.bool(default = False),
         "is_windows": attr.bool(mandatory = True),
-        "prefix_mapped_src": attr.label_keyed_string_dict(allow_files = True),
+        "prefix_mapped_asset_srcs": attr.label_keyed_string_dict(allow_files = True, cfg = "exec"),
+        "prefix_mapped_srcs": attr.label_keyed_string_dict(allow_files = True),
         "replace_prefixes": attr.string_dict(default = {}),
         "srcs": attr.label_list(allow_files = True),
     },
@@ -280,7 +300,7 @@ _copy_to_directory = rule(
     provides = [DefaultInfo],
 )
 
-def copy_to_directory(name, srcs, prefix_mapped_src = {}, replace_prefixes = {}, downcase = False, allow_symlink = False, **kwargs):
+def copy_to_directory(name, srcs = [], asset_srcs = [], prefix_mapped_srcs = {}, prefix_mapped_asset_srcs = {}, replace_prefixes = {}, downcase = False, allow_symlink = False, **kwargs):
     """Copies files and directories to an output directory.
 
     Files and directories can be arranged as needed in the output directory using
@@ -288,10 +308,14 @@ def copy_to_directory(name, srcs, prefix_mapped_src = {}, replace_prefixes = {},
     Args:
         name: A unique name for this target.
         srcs: Files to copy into the output directory.
-        prefix_mapped_src: Map of File labels to prefix replacement rules. The prefix replacement rules
+        asset_srcs: Files to copy into the output directory. The Files are assumed to be platform independent
+            and thus built in the "exec" configuration.
+        prefix_mapped_srcs: Map of File labels to prefix replacement rules. The prefix replacement rules
             contain "src_prefix:target_prefix". If an input file or directory starts with the src_prefix
             then the output file has the src_prefix replaced by the target_prefix. Forward slashes (`/`)
             should be used as path separators This rule is applied before the replace_prefixes rule is applied.
+        prefix_mapped_asset_srcs: Like prefix_mapped_srcs but labels are assumed to be platform independent
+            and thus built in the "exec" configuration.
         replace_prefixes: Map of paths prefixes to replace in the output directory path when copying files.
             If the output directory path for a file or directory starts with or is equal to
             a key in the dict then the matching portion of the output directory path is
@@ -316,4 +340,15 @@ def copy_to_directory(name, srcs, prefix_mapped_src = {}, replace_prefixes = {},
         "//conditions:default": False,
     })
 
-    _copy_to_directory(name = name, srcs = srcs, prefix_mapped_src = prefix_mapped_src, replace_prefixes = replace_prefixes, downcase = downcase, allow_symlink = allow_symlink, is_windows = _is_windows, **kwargs)
+    _copy_to_directory(
+        name = name,
+        srcs = srcs,
+        asset_srcs = asset_srcs,
+        prefix_mapped_srcs = prefix_mapped_srcs,
+        prefix_mapped_asset_srcs = prefix_mapped_asset_srcs,
+        replace_prefixes = replace_prefixes,
+        downcase = downcase,
+        allow_symlink = allow_symlink,
+        is_windows = _is_windows,
+        **kwargs
+    )
