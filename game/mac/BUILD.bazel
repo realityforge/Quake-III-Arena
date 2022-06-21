@@ -12,7 +12,7 @@
 
 load("@build_bazel_rules_apple//apple:macos.bzl", "macos_application")
 load("@build_bazel_rules_apple//apple:versioning.bzl", "apple_bundle_version")
-load("//build_defs:copy_to_directory.bzl", _copy_to_directory = "copy_to_directory")
+load("//build_defs:copy_to_directory.bzl", "copy_to_directory")
 
 # A version scheme that parses version information out of the build
 # label and uses a fallback for developers' builds. For example, the
@@ -46,7 +46,7 @@ apple_bundle_version(
     short_version_string = "{version}",
 )
 
-_copy_to_directory(
+copy_to_directory(
     name = "baseq3_code",
     srcs = [
         "//game/baseq3:cgame.so",
@@ -61,7 +61,7 @@ _copy_to_directory(
     },
 )
 
-_copy_to_directory(
+copy_to_directory(
     name = "teamarena_code",
     srcs = [
         "//game/teamarena:cgame.so",
