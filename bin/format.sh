@@ -17,7 +17,7 @@ SHFMT="$(./bazelw run --run_under=echo @com_github_mvdan_sh//cmd/shfmt)"
 
 # Format Source code using clang-format
 # shellcheck disable=SC2038
-git ls-tree -r --name-only HEAD | grep -i -e "\.h$" -e "\.hpp$" -e "\.c$" -e "\.cc$" -e "\.cpp$" -e "\.m$"  -e "\.java$" | grep -v "^third_party/" | xargs clang-format -i
+git ls-tree -r --name-only HEAD | grep -i -e "\.h$" -e "\.hpp$" -e "\.c$" -e "\.cc$" -e "\.cpp$" -e "\.m$" -e "\.java$" | grep -v "^third_party/" | xargs clang-format -i
 
 # Format Shell Scripts
 git ls-tree -r --name-only HEAD | grep -e "\.sh$" -e "git-pre-commit$" | xargs "$SHFMT" -i=4 -s -w

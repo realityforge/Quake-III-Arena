@@ -276,12 +276,12 @@ def _copy_to_directory_impl(ctx):
 _copy_to_directory = rule(
     attrs = {
         "allow_symlink": attr.bool(default = False),
+        "asset_srcs": attr.label_list(allow_files = True, cfg = "exec"),
         "downcase": attr.bool(default = False),
         "is_windows": attr.bool(mandatory = True),
         "prefix_mapped_srcs": attr.label_keyed_string_dict(allow_files = True),
         "replace_prefixes": attr.string_dict(default = {}),
         "srcs": attr.label_list(allow_files = True),
-        "asset_srcs": attr.label_list(allow_files = True, cfg = "exec"),
     },
     implementation = _copy_to_directory_impl,
     provides = [DefaultInfo],
