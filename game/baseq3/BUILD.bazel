@@ -50,7 +50,7 @@ cc_binary(
 
 copy_to_directory(
     name = "baseq3",
-    srcs = [
+    asset_srcs = [
         "//content/baseq3:materials",
         "//content/baseq3:skin_assets",
         "@QuakeArenaArcade_baseq3//:files",
