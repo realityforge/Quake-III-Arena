@@ -343,14 +343,8 @@ static menucommon_s** g_controls[] = {
 
 static void Controls_InitCvars(void)
 {
-    int i;
-    configcvar_t* cvarptr;
-
-    cvarptr = g_configcvars;
-    for (i = 0;; i++, cvarptr++) {
-        if (!cvarptr->name)
-            break;
-
+    configcvar_t* cvarptr = g_configcvars;
+    while (cvarptr->name) {
         // get current value
         cvarptr->value = trap_Cvar_VariableValue(cvarptr->name);
 
@@ -360,41 +354,31 @@ static void Controls_InitCvars(void)
 
         // restore current value
         trap_Cvar_SetValue(cvarptr->name, cvarptr->value);
+        cvarptr++;
     }
 }
 
 static float Controls_GetCvarDefault(char* name)
 {
-    configcvar_t* cvarptr;
-    int i;
-
-    cvarptr = g_configcvars;
-    for (i = 0;; i++, cvarptr++) {
-        if (!cvarptr->name)
-            return (0);
-
+    configcvar_t* cvarptr = g_configcvars;
+    while (cvarptr->name) {
         if (!strcmp(cvarptr->name, name))
-            break;
+            return cvarptr->defaultvalue;
+        cvarptr++;
     }
-
-    return (cvarptr->defaultvalue);
+    return 0;
 }
 
 static float Controls_GetCvarValue(char* name)
 {
-    configcvar_t* cvarptr;
-    int i;
-
-    cvarptr = g_configcvars;
-    for (i = 0;; i++, cvarptr++) {
-        if (!cvarptr->name)
-            return (0);
-
+    configcvar_t* cvarptr = g_configcvars;
+    while (cvarptr->name) {
         if (!strcmp(cvarptr->name, name))
-            break;
+            return (cvarptr->value);
+        cvarptr++;
     }
 
-    return (cvarptr->value);
+    return 0;
 }
 
 static void Controls_UpdateModel(int anim)
@@ -715,22 +699,18 @@ static void Controls_GetKeyAssignment(char* command, int* twokeys)
 
 static void Controls_GetConfig(void)
 {
-    int i;
     int twokeys[2];
-    bind_t* bindptr;
 
     // put the bindings into a local store
-    bindptr = g_bindings;
+    bind_t* bindptr = g_bindings;
 
     // iterate each command, get its numeric binding
-    for (i = 0;; i++, bindptr++) {
-        if (!bindptr->label)
-            break;
-
+    while (bindptr->label) {
         Controls_GetKeyAssignment(bindptr->command, twokeys);
 
         bindptr->bind1 = twokeys[0];
         bindptr->bind2 = twokeys[1];
+        bindptr++;
     }
 
     s_controls.invertmouse.curvalue = Controls_GetCvarValue("m_pitch") < 0;
@@ -745,23 +725,18 @@ static void Controls_GetConfig(void)
 
 static void Controls_SetConfig(void)
 {
-    int i;
-    bind_t* bindptr;
-
     // set the bindings from the local store
-    bindptr = g_bindings;
+    bind_t* bindptr = g_bindings;
 
     // iterate each command, get its numeric binding
-    for (i = 0;; i++, bindptr++) {
-        if (!bindptr->label)
-            break;
-
+    while (bindptr->label) {
         if (bindptr->bind1 != -1) {
             trap_Key_SetBinding(bindptr->bind1, bindptr->command);
 
             if (bindptr->bind2 != -1)
                 trap_Key_SetBinding(bindptr->bind2, bindptr->command);
         }
+        bindptr++;
     }
 
     if (s_controls.invertmouse.curvalue)
@@ -781,19 +756,14 @@ static void Controls_SetConfig(void)
 
 static void Controls_SetDefaults(void)
 {
-    int i;
-    bind_t* bindptr;
-
     // set the bindings from the local store
-    bindptr = g_bindings;
+    bind_t* bindptr = g_bindings;
 
     // iterate each command, set its default binding
-    for (i = 0;; i++, bindptr++) {
-        if (!bindptr->label)
-            break;
-
+    while (bindptr->label) {
         bindptr->bind1 = bindptr->defaultbind1;
         bindptr->bind2 = bindptr->defaultbind2;
+        bindptr++;
     }
 
     s_controls.invertmouse.curvalue = Controls_GetCvarDefault("m_pitch") < 0;
@@ -809,9 +779,7 @@ static void Controls_SetDefaults(void)
 static sfxHandle_t Controls_MenuKey(int key)
 {
     int id;
-    int i;
     bool found;
-    bind_t* bindptr;
     found = false;
 
     if (!s_controls.waitingforkey) {
@@ -850,11 +818,8 @@ static sfxHandle_t Controls_MenuKey(int key)
 
     if (key != -1) {
         // remove from any other bind
-        bindptr = g_bindings;
-        for (i = 0;; i++, bindptr++) {
-            if (!bindptr->label)
-                break;
-
+        bind_t* bindptr = g_bindings;
+        while (bindptr->label) {
             if (bindptr->bind2 == key)
                 bindptr->bind2 = -1;
 
@@ -862,16 +827,14 @@ static sfxHandle_t Controls_MenuKey(int key)
                 bindptr->bind1 = bindptr->bind2;
                 bindptr->bind2 = -1;
             }
+            bindptr++;
         }
     }
 
     // assign key to local store
     id = ((menucommon_s*)(s_controls.menu.items[s_controls.menu.cursor]))->id;
-    bindptr = g_bindings;
-    for (i = 0;; i++, bindptr++) {
-        if (!bindptr->label)
-            break;
-
+    bind_t* bindptr = g_bindings;
+    while (bindptr->label) {
         if (bindptr->id == id) {
             found = true;
             if (key == -1) {
@@ -893,8 +856,8 @@ static sfxHandle_t Controls_MenuKey(int key)
                 bindptr->bind1 = key;
                 bindptr->bind2 = -1;
             }
-            break;
         }
+        bindptr++;
     }
 
     s_controls.waitingforkey = false;
