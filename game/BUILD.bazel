@@ -31,16 +31,21 @@ copy_to_directory(
         ":Quake3ArenaServer",
     ],
     allow_symlink = True,
+    prefix_mapped_asset_srcs = {
+        # Base game
+        "//game/baseq3:pak0": "pak0:baseq3/pak0",
+
+        # TeamArena game
+        "//game/teamarena:pak0": "pak0:missionpack/pak0",
+    },
     prefix_mapped_srcs = {
         # Base game
         "//game/baseq3:cgame.so": "cgame:baseq3/cgamearm64",
-        "//game/baseq3:pak0": "pak0:baseq3/pak0",
         "//game/baseq3:qagame.so": "qagame:baseq3/qagamearm64",
         "//game/baseq3:ui.so": "ui:baseq3/uiarm64",
 
         # TeamArena game
         "//game/teamarena:cgame.so": "cgame:missionpack/cgamearm64",
-        "//game/teamarena:pak0": "pak0:missionpack/pak0",
         "//game/teamarena:qagame.so": "qagame:missionpack/qagamearm64",
         "//game/teamarena:ui.so": "ui:missionpack/uiarm64",
     },
