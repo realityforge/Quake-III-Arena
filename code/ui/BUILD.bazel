@@ -71,6 +71,7 @@ cc_library(
     copts = UI_COPTS,
     visibility = [
         "//code/q3_ui:__pkg__",
+        "//game/baseq3:__pkg__",
         "//game/teamarena:__pkg__",
     ],
     deps = [

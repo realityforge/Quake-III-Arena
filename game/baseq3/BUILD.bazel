@@ -45,6 +45,7 @@ cc_binary(
     deps = [
         "//build_defs:exported_symbols.lds",
         "//code/q3_ui:ui",
+        "//code/ui:ui_syscalls",
     ],
 )
 
