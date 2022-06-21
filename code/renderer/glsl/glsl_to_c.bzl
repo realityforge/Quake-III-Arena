@@ -8,10 +8,5 @@ def glsl_to_c(name):
         cmd = "$(execpath :stringify) $< $@",
         tools = [":stringify"],
     )
-    cc_library(
-        name = name,
-        copts = ["-Wno-overlength-strings"],
-        srcs = [
-            ":" + name + "_generator",
-        ],
-    )
+
+    cc_library(name = name, copts = ["-Wno-overlength-strings"], srcs = [":" + name + "_generator"])
