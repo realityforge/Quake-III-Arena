@@ -81,6 +81,7 @@ Future work:
 
 ### References
 
+* [Compiling C to WebAssembly without Emscripten](https://dassur.ma/things/c-to-webassembly/): A simple walk through on compiling C to WebAssembly.
 * Envoy is a product that uses Wasm modules as plugins and is built with Bazel. It has invested significant time in a [wasm.bzl](https://github.com/envoyproxy/envoy/blob/main/bazel/wasm/wasm.bzl) bazel extension that could be repurposed for use in this project.
 * Sorbet is another product that uses Wasm modules. See the toolchain code and supporting infrastructure [webasm-linux](https://github.com/sorbet/sorbet/tree/master/tools/toolchain/webasm-linux) for inspiration. The author of the wasm support in sorbet also made some interesting comments in a [HackerNews](https://news.ycombinator.com/item?id=26290441) post.
 * [Wasmer](https://docs.wasmer.io/): An open-source runtime for executing WebAssembly on the Server.
