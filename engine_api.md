@@ -32,6 +32,7 @@ The strengths and weaknesses of each toolkit as relevant to our use case:
 * Similar CPU and memory allocation efficiency to `FlatBuffers`.
 * The serialised message format is less efficient than other toolkits if unset fields are present in message. Can also tweak message format (i.e. padding) to increase efficiency compared to `FlatBuffers`
 * It has a vaster smaller ecosystem outside of C++ and even the C++ ecosystem is smaller than `Protobuf`. The ecosystem is larger than `FlatBuffers`
+* Several advanced network features such as `promise pipelining` are available that are not present in other toolkits. See the [rpc](https://capnproto.org/rpc.html) documentation.
 
 ### Challenges
 
