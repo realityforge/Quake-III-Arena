@@ -20,17 +20,18 @@ The strengths and weaknesses of each toolkit as relevant to our use case:
 * Has a built-in rpc library with massive numbers of supporting tools provided by the community such as [grpcui](https://github.com/fullstorydev/grpcui) (An interactive web UI for gRPC, along the lines of postman), [grpcurl](https://github.com/fullstorydev/grpcurl) (Command-line tool for interacting with gRPC servers like cURL).
 * Already built as part of our build infrastructure as it is used by various tools including Bazel.
 
-#### Cap’n Proto
-
-* Like Protobuf but substantially lower CPU usage and fewer allocations as message format is efficiently mapped to an in-memory layout.
-* The serialised message format is less efficient than protobuf but only marginally so unless many versions are supported.
-* It has a vaster smaller ecosystem outside of C++ and even the C++ ecosystem is smaller than Protobuf.
-
 #### FlatBuffers
 
-* Similar CPU and memory allocation efficiency to `Cap'n Proto` but maintained by Google.
+* Like Protobuf but substantially lower CPU usage and fewer allocations as message format is efficiently mapped to an in-memory layout.
+* Larger message formats that `Protobuf`.
 * "Clumsy" to use from within the application and requires much boilerplate.
-* Better than the other toolkits when loading large volume of data (i.e. asset loading)
+* Better than the other toolkits when loading large volume of data (i.e. asset loading).
+
+#### Cap’n Proto
+
+* Similar CPU and memory allocation efficiency to `FlatBuffers`.
+* The serialised message format is less efficient than other toolkits if unset fields are present in message. Can also tweak message format (i.e. padding) to increase efficiency compared to `FlatBuffers`
+* It has a vaster smaller ecosystem outside of C++ and even the C++ ecosystem is smaller than `Protobuf`. The ecosystem is larger than `FlatBuffers`
 
 ### Challenges
 
