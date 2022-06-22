@@ -1461,4 +1461,19 @@ void IN_VRUpdateHMD( XrPosef xfStageFromHead )
     vr.clientview_yaw_last = clientview_yaw;
 }
 
+void IN_VRUpdateMRC( XrPosef xfStageFromHead )
+{
+    const XrQuaternionf quatHmd = xfStageFromHead.orientation;
+    const XrVector3f positionHmd = xfStageFromHead.position;
+    vec3_t rotation = {0, 0, 0};
+    QuatToYawPitchRoll(quatHmd, rotation, vr.mrcorientation);
+    VectorSet(vr.mrcposition, positionHmd.x, positionHmd.y,positionHmd.z);
+
+    //TODO:better
+    vr.mrcposition[2] -= 150;
+    vr.mrcorientation[YAW] -= 90;
+    NormalizeAngles(vr.mrcorientation);
+}
+
+
 //#endif

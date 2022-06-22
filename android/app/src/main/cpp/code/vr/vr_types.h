@@ -98,6 +98,7 @@ typedef struct {
     int LayerCount;
 
     GLboolean TouchPadDownLastFrame;
+    ovrRenderer MRCRenderer;
     ovrRenderer Renderer;
     ovrTrackedController TrackedController[2];
 } ovrApp;
@@ -166,11 +167,7 @@ void ovrFramebuffer_Release(ovrFramebuffer* frameBuffer);
 void ovrFramebuffer_SetCurrent(ovrFramebuffer* frameBuffer);
 void ovrFramebuffer_SetNone();
 
-void ovrRenderer_Create(
-		XrSession session,
-		ovrRenderer* renderer,
-		int suggestedEyeTextureWidth,
-		int suggestedEyeTextureHeight);
+void ovrRenderer_Create(XrSession session, ovrRenderer* renderer, int width, int height, int multiview);
 void ovrRenderer_Destroy(ovrRenderer* renderer);
 
 void ovrTrackedController_Clear(ovrTrackedController* controller);

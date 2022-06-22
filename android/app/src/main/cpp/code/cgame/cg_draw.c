@@ -2949,8 +2949,8 @@ void CG_DrawActive( void ) {
 	// set the view from external device
 	if ( vr->renderMRC )
 	{
-		AnglesToAxis( vr->hmdorientation, cg.refdef.viewaxis );
-		VectorAdd( cg.refdef.vieworg, vr->hmdposition, cg.refdef.vieworg );
+		AnglesToAxis( vr->mrcorientation, cg.refdef.viewaxis );
+		VectorAdd( cg.refdef.vieworg, vr->mrcposition, cg.refdef.vieworg );
 	}
 
 	// draw 3D view

@@ -4,6 +4,7 @@
 #include "../qcommon/q_shared.h"
 #include "../qcommon/qcommon.h"
 #include "../client/client.h"
+#include "../renderercommon/tr_common.h"
 
 #include "mrc_wrapper.h"
 #include "vr_clientinfo.h"
@@ -296,11 +297,21 @@ void VR_InitRenderer( engine_t* engine ) {
             engine->appState.Session,
             &engine->appState.Renderer,
             engine->appState.ViewConfigurationView[0].recommendedImageRectWidth,
-            engine->appState.ViewConfigurationView[0].recommendedImageRectHeight);
+            engine->appState.ViewConfigurationView[0].recommendedImageRectHeight,
+            qtrue);
+
+    MRCResolution resolution = MRC_GetResolution();
+    ovrRenderer_Create(
+            engine->appState.Session,
+            &engine->appState.MRCRenderer,
+            resolution.width,
+            resolution.height,
+            qfalse);
 }
 
 void VR_DestroyRenderer( engine_t* engine )
 {
+    ovrRenderer_Destroy(&engine->appState.MRCRenderer);
     ovrRenderer_Destroy(&engine->appState.Renderer);
     free(projections);
 }
@@ -334,17 +345,17 @@ void VR_ClearFrameBuffer( int width, int height)
     glDisable( GL_SCISSOR_TEST );
 }
 
-void VR_DrawScene(ovrFramebuffer* frameBuffer, XrFovf fov) {
+void VR_DrawScene(ovrFramebuffer* frameBuffer, XrFovf fov, float zoom) {
 
     //Projection used for drawing HUD models etc
     float hudScale = M_PI * 15.0f / 180.0f;
     const ovrMatrix4f monoVRMatrix = ovrMatrix4f_CreateProjectionFov(
             -hudScale, hudScale, hudScale, -hudScale, 1.0f, 0.0f );
     const ovrMatrix4f projectionMatrix = ovrMatrix4f_CreateProjectionFov(
-            fov.angleLeft / vr.weapon_zoomLevel,
-            fov.angleRight / vr.weapon_zoomLevel,
-            fov.angleUp / vr.weapon_zoomLevel,
-            fov.angleDown / vr.weapon_zoomLevel,
+            fov.angleLeft / zoom,
+            fov.angleRight / zoom,
+            fov.angleUp / zoom,
+            fov.angleDown / zoom,
             1.0f, 0.0f );
 
     //Prepare framebuffer
@@ -366,6 +377,38 @@ void VR_DrawScene(ovrFramebuffer* frameBuffer, XrFovf fov) {
     ovrFramebuffer_Resolve(frameBuffer);
     ovrFramebuffer_Release(frameBuffer);
     ovrFramebuffer_SetNone();
+}
+
+void VR_DrawMRC( ovrFramebuffer* frameBuffer, XrFovf fov, XrPosef pose, double mrcTimestamp ) {
+    MRCCameraSet mrc = MRC_GetCamera();
+    for (int i = 0; i < mrc.cameraCount; i++) {
+
+        // set render resolution
+        int width = glConfig.vidWidth;
+        int height = glConfig.vidHeight;
+        MRCResolution res = MRC_GetResolution();
+        glConfig.vidWidth = res.width;
+        glConfig.vidHeight = res.height;
+
+        // render scene from external camera
+        vr.renderMRC = qtrue;
+        IN_VRUpdateMRC( mrc.camera[i].pose );
+        IN_VRUpdateControllers( pose, mrcTimestamp * 1000.0f );
+        VR_DrawScene( frameBuffer, fov, 1 ); //TODO:mrc.camera[i].fov
+        vr.renderMRC = qfalse;
+
+        // restore previous state
+        glConfig.vidWidth = width;
+        glConfig.vidHeight = height;
+
+        // sync rendered frame
+        int swapchainIndex = frameBuffer->TextureSwapChainIndex;
+        int glFramebuffer = frameBuffer->FrameBuffers[swapchainIndex];
+        glBindFramebuffer(GL_FRAMEBUFFER, glFramebuffer);
+        MRC_Update(mrcTimestamp);
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        break;
+    }
 }
 
 void VR_DrawFrame( engine_t* engine ) {
@@ -457,23 +500,12 @@ void VR_DrawFrame( engine_t* engine ) {
     IN_VRUpdateControllers( invViewTransform[0], frameState.predictedDisplayTime );
     IN_VRSyncActions();
 
-    // Main render pass
+    // Render scene
+    qboolean fullscreen = VR_useScreenLayer() || (cl.snap.ps.pm_flags & PMF_FOLLOW && vr.follow_mode == VRFM_FIRSTPERSON);
+    double mrcTimestamp = frameState.predictedDisplayTime * 0.001;
     Com_PreFrame();
-    VR_DrawScene(&engine->appState.Renderer.FrameBuffer, fov);
-
-    // MRC render pass
-    MRCCameraSet mrc = MRC_GetCamera();
-    Com_Printf("MRC cameraCount=%d\n", mrc.cameraCount);
-    for (int i = 0; i < mrc.cameraCount; i++) {
-        //TODO: fov = mrc.camera[i].fov;
-        //TODO: MRC should use another framebuffer
-        vr.renderMRC = qtrue;
-        IN_VRUpdateHMD( XrPosef_Multiply( invViewTransform[0], mrc.camera[i].pose ) );
-        VR_DrawScene(&engine->appState.Renderer.FrameBuffer, fov);
-        IN_VRUpdateHMD( invViewTransform[0] );
-        vr.renderMRC = qfalse;
-    }
-
+    VR_DrawScene(&engine->appState.Renderer.FrameBuffer, fov, vr.weapon_zoomLevel);
+    VR_DrawMRC(&engine->appState.MRCRenderer.FrameBuffer, fov, invViewTransform[0], mrcTimestamp);
     Com_PostFrame();
 
     engine->appState.LayerCount = 0;
@@ -555,6 +587,9 @@ void VR_DrawFrame( engine_t* engine ) {
 
     OXR(xrEndFrame(engine->appState.Session, &endFrameInfo));
     ovrFramebuffer* frameBuffer = &engine->appState.Renderer.FrameBuffer;
+    frameBuffer->TextureSwapChainIndex++;
+    frameBuffer->TextureSwapChainIndex %= frameBuffer->TextureSwapChainLength;
+    frameBuffer = &engine->appState.MRCRenderer.FrameBuffer;
     frameBuffer->TextureSwapChainIndex++;
     frameBuffer->TextureSwapChainIndex %= frameBuffer->TextureSwapChainLength;
 }

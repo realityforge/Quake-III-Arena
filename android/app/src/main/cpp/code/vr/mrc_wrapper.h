@@ -30,7 +30,7 @@ void MRC_Init( ovrJava java );
 void MRC_Destroy( void );
 MRCCameraSet MRC_GetCamera( void );
 MRCResolution MRC_GetResolution();
-void MRC_Update(void* texture, double timestamp);
+void MRC_Update(double timestamp);
 
 #ifdef __cplusplus
 }

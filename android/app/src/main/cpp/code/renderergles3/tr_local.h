@@ -708,25 +708,31 @@ typedef enum
 	UNIFORM_COUNT
 } uniform_t;
 
+
+typedef struct shaderProgramVariant_s
+{
+    char            name[MAX_QPATH];
+
+    GLuint          program;
+    GLuint          vertexShader;
+    GLuint          fragmentShader;
+    uint32_t        attribs;	// vertex array attributes
+
+    //New for multiview - The view and projection matrix uniforms
+    GLuint		projectionMatrixBinding;
+    GLuint		viewMatricesBinding;
+
+    // uniform parameters
+    GLint uniforms[UNIFORM_COUNT];
+    short uniformBufferOffsets[UNIFORM_COUNT]; // max 32767/64=511 uniforms
+    char  *uniformBuffer;
+};
+
 // shaderProgram_t represents a pair of one
 // GLSL vertex and one GLSL fragment shader
 typedef struct shaderProgram_s
 {
-	char            name[MAX_QPATH];
-
-	GLuint          program;
-	GLuint          vertexShader;
-	GLuint          fragmentShader;
-	uint32_t        attribs;	// vertex array attributes
-
-	//New for multiview - The view and projection matrix uniforms
-	GLuint		projectionMatrixBinding;
-	GLuint		viewMatricesBinding;
-
-	// uniform parameters
-	GLint uniforms[UNIFORM_COUNT];
-	short uniformBufferOffsets[UNIFORM_COUNT]; // max 32767/64=511 uniforms
-	char  *uniformBuffer;
+    struct shaderProgramVariant_s variant[2];
 } shaderProgram_t;
 
 // trRefdef_t holds everything that comes in refdef_t,
