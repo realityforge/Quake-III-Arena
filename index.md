@@ -117,6 +117,12 @@ These changes have not been started but are things that the project is consideri
       <td>Convert VM code to use Wasm instruction architecture and runtime.</td>
       <td>Substantial experimentation required.</td>
     </tr>
+    <tr valign="top">
+      <td><a href="engine_api.html">Engine Remote API</a></td>
+      <td>Ideation</td>
+      <td>Expose the engine state for control and observation.</td>
+      <td>Experimentation and prototyping required.</td>
+    </tr>
   </tbody>
 </table>
 
