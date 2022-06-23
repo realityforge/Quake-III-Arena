@@ -14,7 +14,11 @@ What choices did we make when deciding on how to make the change. Did the change
 
 ### Evaluation
 
-Did the change make a positive impact? Was the cost of making the change worth the value that it created? Are there any follow-up actions to schedule?
+Did the change make a positive impact? Was the cost of making the change worth the value that it created?
+
+#### Future Work
+
+Are there any follow-up actions to schedule? What future work is enabled after this feature is complete.
 
 ### References
 
