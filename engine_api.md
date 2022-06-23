@@ -53,3 +53,7 @@ This type of architecture will likely require a fork-join framework, task queues
 ### Evaluation
 
 ...
+
+#### Future Work
+
+It should be noted that there are features that are not planned in this change. Pushing changes to remote services (i.e. invoking rpc endpoints on a "master" server to register server state changing or player stats updating).
