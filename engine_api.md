@@ -36,7 +36,15 @@ The strengths and weaknesses of each toolkit as relevant to our use case:
 
 ### Challenges
 
-...
+The biggest challenge with providing an API is combining the concurrency of the API layer with the single threaded nature of the Q3A engine. It is likely that we will need to develop an architecture such that:
+
+* incoming requests are decoded, converted into tasks and queued in the "rpc" thread(s).
+* the tasks are picked up in the main thread and executed. There is a strict budget so that execution time for tasks can not exceed the budget and if they would then the task is broken up into multiple tasks that are executed over multiple frames. After the task is complete, a response message is sent back to the "rpc" thread(s) task pool.
+* the "rpc" thread(s) pick up response message and sends the response back to the client.
+
+Some tasks may be able to operate on non-main threads (i.e. read-only operations on the VFS after the server is running), in which case we could have a separate queue to execute these tasks but this will require significantly more effort to analyse and detect these scenarios.
+
+This type of architecture will likely require a fork-join framework, task queues and some threading primitives. These types of frameworks are notoriously difficult to get right.
 
 ### Solution
 
