@@ -80,7 +80,7 @@ The major changes of the project are tracked in this table.
       <td>3</td>
       <td>2</td>
       <td>0</td>
-      <td>10%</td>
+      <td>Complete</td>
       <td>2022-05-20</td>
       <td>2022-06-14</td>
     </tr>
