@@ -2949,8 +2949,17 @@ void CG_DrawActive( void ) {
 	// set the view from external device
 	if ( vr->renderMRC )
 	{
-		AnglesToAxis( vr->mrcorientation, cg.refdef.viewaxis );
-		VectorAdd( cg.refdef.vieworg, vr->mrcposition, cg.refdef.vieworg );
+		vec3_t angles;
+		vectoangles( cg.refdef.viewaxis, angles );
+		float yaw = -angles[YAW] - 90.0f;
+		VectorAdd( vr->mrcorientation, angles, angles );
+		AnglesToAxis( angles, cg.refdef.viewaxis );
+
+		vec3_t pos;
+		pos[0] = cosf(DEG2RAD(yaw)) * vr->mrcposition[0]  +  sinf(DEG2RAD(yaw)) * vr->mrcposition[1];
+		pos[1] = cosf(DEG2RAD(yaw)) * vr->mrcposition[1]  -  sinf(DEG2RAD(yaw)) * vr->mrcposition[0];
+		pos[2] = vr->mrcposition[2];
+		VectorAdd( cg.refdef.vieworg, pos, cg.refdef.vieworg );
 	}
 
 	// draw 3D view

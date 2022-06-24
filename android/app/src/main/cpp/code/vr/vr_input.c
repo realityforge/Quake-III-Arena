@@ -1463,16 +1463,23 @@ void IN_VRUpdateHMD( XrPosef xfStageFromHead )
 
 void IN_VRUpdateMRC( XrPosef xfStageFromHead )
 {
-    const XrQuaternionf quatHmd = xfStageFromHead.orientation;
-    const XrVector3f positionHmd = xfStageFromHead.position;
-    vec3_t rotation = {0, 0, 0};
-    QuatToYawPitchRoll(quatHmd, rotation, vr.mrcorientation);
-    VectorSet(vr.mrcposition, positionHmd.x, positionHmd.y,positionHmd.z);
+    //TODO:where to get these numbers from?
+    vec3_t originAdjust;
+    originAdjust[0] = -50;
+    originAdjust[1] = 75;
+    originAdjust[2] = -150;
+    float yawAdjust = 15;
 
-    //TODO:better
-    vr.mrcposition[2] -= 150;
-    vr.mrcorientation[YAW] -= 90;
-    NormalizeAngles(vr.mrcorientation);
+    //TODO:support recenter
+    vec3_t rotation = {0, 0, 0};
+    const XrQuaternionf quatHmd = xfStageFromHead.orientation;
+    QuatToYawPitchRoll(quatHmd, rotation, vr.mrcorientation);
+    vr.mrcorientation[YAW] += yawAdjust;
+
+    const XrVector3f positionHmd = xfStageFromHead.position;
+    vr.mrcposition[0] = positionHmd.x + originAdjust[0];
+    vr.mrcposition[1] = positionHmd.y + originAdjust[1];
+    vr.mrcposition[2] = positionHmd.z + originAdjust[2];
 }
 
 
