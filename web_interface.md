@@ -39,3 +39,5 @@ An advantage of developing this would be exposure to web development within the 
 * [Build Micronaut Applications with Bazel](https://mytechden.com/build-micronaut-applications-with-bazel)
 * [Bazel Micronaut Example](https://sumglobal.com/2020/03/10/bazel-and-micronaut/)
 * [Bazel Micronaut Example (Source Code)](https://github.com/SUMGlobal/bazel-micronaut-example)
+* [quake3-vsp-stats](https://hub.docker.com/r/evilru/quake3-vsp-stats) for inspiration on statistics collection.
+* [dpmaster-2.2.zip](http://icculus.org/twilight/darkplaces/files/dpmaster-2.2.zip) is the master server implementation used by ioq and other q3a clones.
