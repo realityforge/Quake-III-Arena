@@ -4,8 +4,8 @@
 
 In an ideal world there would be one or more companion websites that expose information about the game and the players in the game. Some services that should be available:
 
-* Expose a list of active games including the player count, game mode etc.
 * Player authentication services. Verify the players have an authenticated identity. The service may also verify that the player has an "acceptable" name etc.
+* Master server that tracks servers, and players end exposes a list of active games including the player count, game mode etc. The server and player have to be "authed" but maybe the server just creates a key publishes public key to the master server.
 * Add a lvlworld equivalent where users can upload maps for review etc. The site could provide reviews of maps as well as statistics on the number of plays etc.
 * Expose the set of maps being played and or models chosen etc. It would be good to provide see which maps are being
 * Expose a log of activity on a server.
