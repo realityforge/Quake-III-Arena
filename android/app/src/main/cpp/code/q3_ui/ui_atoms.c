@@ -84,7 +84,9 @@ float UI_GetXOffset()
 
 float UI_GetYOffset()
 {
-    if (vr == NULL || vr->virtual_screen) {
+    if (vr && vr->renderMRC) {
+        return uis.glconfig.vidHeight * 0.6; //TODO:this will unlikely work with different resolutions
+    } else if (vr == NULL || vr->virtual_screen) {
         return 0;
     } else {
         return (uis.glconfig.vidHeight - (480 * UI_GetYScale())) / 2.0f;

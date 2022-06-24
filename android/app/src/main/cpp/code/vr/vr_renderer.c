@@ -392,9 +392,10 @@ void VR_DrawMRC( ovrFramebuffer* frameBuffer, XrFovf fov, XrPosef pose, double m
 
         // render scene from external camera
         vr.renderMRC = qtrue;
+        vr.virtual_screen = qfalse;
         IN_VRUpdateMRC( mrc.camera[i].pose );
-        IN_VRUpdateControllers( pose, mrcTimestamp * 1000.0f );
         VR_DrawScene( frameBuffer, fov, 1 ); //TODO:mrc.camera[i].fov
+        vr.virtual_screen = qtrue;
         vr.renderMRC = qfalse;
 
         // restore previous state
@@ -501,7 +502,6 @@ void VR_DrawFrame( engine_t* engine ) {
     IN_VRSyncActions();
 
     // Render scene
-    qboolean fullscreen = VR_useScreenLayer() || (cl.snap.ps.pm_flags & PMF_FOLLOW && vr.follow_mode == VRFM_FIRSTPERSON);
     double mrcTimestamp = frameState.predictedDisplayTime * 0.001;
     Com_PreFrame();
     VR_DrawScene(&engine->appState.Renderer.FrameBuffer, fov, vr.weapon_zoomLevel);
