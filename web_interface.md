@@ -9,7 +9,7 @@ In an ideal world there would be one or more companion websites that expose info
 * Add a lvlworld equivalent where users can upload maps for review etc. The site could provide reviews of maps as well as statistics on the number of plays etc.
 * Expose the set of maps being played and or models chosen etc. It would be good to provide see which maps are being
 * Expose a log of activity on a server.
-* Track player and game statistics over time. These statistics can be useful for players, potential players or the developers and may be marked as private or public by the player themselves. See they hyperdash player statistics for the type of statistics that may be exposed. i.e. Accuracy with weapons, game modes played, win rates, k/d, time on objectives, MMR etc.
+* Add global rankings and player statistics service. These statistics can be useful for players, potential players or the developers and may be marked as private or public by the player themselves. See they hyperdash player statistics for the type of statistics that may be exposed. i.e. Accuracy with weapons, game modes played, win rates, k/d, time on objectives, MMR etc.
 * Expose mechanisms for setting up competitions and social organisations such as clans, leagues and teams. This would make it possible for various clans/teams to take ownership of tags and "name" tattoos of various kinds. It would also offer simple mechanisms to set up competitions. A player can not wear a clan post-name tag unless they are part of that clan. A player can not wear a team tag unless they are part of that team. A simple model may be
     * Clan contain Players
     * League contains Seasons, Teams play in Seasons, Teams contain Players
