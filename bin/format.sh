@@ -24,6 +24,7 @@ find . ! -path './tmp/*' -type f \( -name '*.sh' -or -name 'git-pre-commit' \) -
 # Format Bazel files
 ./bazelw run //:buildifier
 
+# Format Bazel files for external repositories as if they are build files
 find . -name '*.BUILD.bazel' -print0 | xargs -0 buildifier -type build
 
 ./bazelw run //content/baseq3:baseq3_material_format
