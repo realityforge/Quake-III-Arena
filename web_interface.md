@@ -7,7 +7,7 @@ In an ideal world there would be one or more companion websites that expose info
 * Player authentication services. Verify the players have an authenticated identity. The service may also verify that the player has an "acceptable" name etc.
 * Master server that tracks servers, and players end exposes a list of active games including the player count, game mode etc. The server and player have to be "authed" but maybe the server just creates a key publishes public key to the master server.
 * A Server Browser website that exposes master server details as a web page.
-* Add a lvlworld equivalent where users can upload maps for review etc. The site could provide reviews of maps as well as statistics on the number of plays etc.
+* Add a lvlworld equivalent where users can upload maps for review etc. The site could provide reviews of maps as well as statistics on the number of plays etc. A potential name for this is "mapster" :-)
 * Expose the set of maps being played and or models chosen etc. It would be good to provide see which maps are being
 * Expose a log of activity on a server.
 * Add global rankings and player statistics service. These statistics can be useful for players, potential players or the developers and may be marked as private or public by the player themselves. See they hyperdash player statistics for the type of statistics that may be exposed. i.e. Accuracy with weapons, game modes played, win rates, k/d, time on objectives, MMR etc.
