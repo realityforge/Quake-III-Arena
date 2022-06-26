@@ -16,7 +16,6 @@ set -euo pipefail
 SHFMT="$(./bazelw run --run_under=echo @com_github_mvdan_sh//cmd/shfmt)"
 
 # Format Source code using clang-format
-# shellcheck disable=SC2038
 find code content tools -type f -name '*.h' -o -name '*.c' -o -name '*.m' -o -name '*.java' | xargs clang-format -i
 
 # Format Shell Scripts
