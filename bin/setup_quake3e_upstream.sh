@@ -51,8 +51,8 @@ find code \
     ! -path 'code/renderercommon/vulkan/*' |
     xargs clang-format -i
 git add code/
-rm .clang-format
 git commit -m "Format the source code with clang-format to simplify cross-branch comparisons"
+rm .clang-format
 git push origin :upstream/quake3e_formatted || echo "No upstream/quake3e_formatted branch to delete"
 git push --set-upstream origin upstream/quake3e_formatted
 

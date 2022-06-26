@@ -55,8 +55,8 @@ find code \
     ! -path 'code/zlib/*' |
     xargs clang-format -i
 git add code/
-rm .clang-format
 git commit -m "Format the source code with clang-format to simplify cross-branch comparisons"
+rm .clang-format
 git push origin :upstream/vkQuake3_formatted 2>/dev/null >/dev/null || echo "No upstream/vkQuake3_formatted branch to delete"
 git push --set-upstream origin upstream/vkQuake3_formatted
 
