@@ -16,16 +16,16 @@ set -euo pipefail
 SHFMT="$(./bazelw run --run_under=echo @com_github_mvdan_sh//cmd/shfmt)"
 
 # Format Source code using clang-format
-find code content tools -type f -name '*.h' -o -name '*.c' -o -name '*.m' -o -name '*.java' | xargs clang-format -i
+git ls-tree -r --name-only HEAD | grep -i -e "\.h$" -e "\.hpp$" -e "\.c$" -e "\.cc$" -e "\.cpp$" -e "\.m$" -e "\.java$" | grep -v "^third_party/" | xargs clang-format -i
 
 # Format Shell Scripts
-find . ! -path './tmp/*' -type f \( -name '*.sh' -or -name 'git-pre-commit' \) -print0 | xargs -0 "$SHFMT" -i=4 -s -w
+git ls-tree -r --name-only HEAD | grep -e "\.sh$" -e "git-pre-commit$" | xargs "$SHFMT" -i=4 -s -w
 
 # Format Bazel files
 ./bazelw run //:buildifier
 
 # Format Bazel files for external repositories as if they are build files
-find . -name '*.BUILD.bazel' -print0 | xargs -0 buildifier -type build
+git ls-tree -r --name-only HEAD | grep -e "\.BUILD\.bazel" | xargs buildifier -type build
 
 ./bazelw run //content/baseq3:baseq3_material_format
 ./bazelw run //content/teamarena:teamarena_material_format
