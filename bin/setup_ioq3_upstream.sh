@@ -43,7 +43,6 @@ git push -f
 
 git branch -D upstream/ioq3_formatted 2>/dev/null >/dev/null || echo "No Local branch, creating local branch and formatting"
 git checkout -B upstream/ioq3_formatted
-pwd
 git show ${BRANCH_WITH_CLANG_FORMAT}:.clang-format >.clang-format
 # shellcheck disable=SC2038
 find code \
