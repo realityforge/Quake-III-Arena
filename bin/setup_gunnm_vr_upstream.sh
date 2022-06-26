@@ -52,8 +52,8 @@ find code \
     ! -path 'code/libjpeg/*' | \
     xargs clang-format -i
 git add code/
-rm .clang-format
 git commit -m "Format the source code with clang-format to simplify cross-branch comparisons"
+rm .clang-format
 git push origin :upstream/gunnm_vr_formatted 2>/dev/null >/dev/null || echo "No upstream/gunnm_vr_formatted branch to delete"
 git push -f --set-upstream origin upstream/gunnm_vr_formatted
 
