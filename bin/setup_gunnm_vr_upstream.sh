@@ -48,6 +48,8 @@ find code \
     \( -name '*.h' -or -name '*.c' -or -name '*.m' -or -name '*.hpp' -or -name '*.cpp' -or -name '*.H' -or -name '*.HPP' -or -name '*.CPP' -or -name '*.java' \) \
     ! -path 'code/libsdl/windows/include/SDL2/*' -and \
     ! -path 'code/libcurl/windows/include/curl/*' -and \
+    ! -path 'code/vrmod/OpenXR/xr_linear.h' -and \
+    ! -path 'code/vrmod/OpenXR/openxr/*' -and \
     ! -path 'code/libjpeg/*' | \
     xargs clang-format -i
 git add code/
