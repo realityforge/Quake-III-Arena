@@ -21,8 +21,6 @@
 
 set -e
 
-export BRANCH_WITH_CLANG_FORMAT=origin/master
-
 # Fetch origin to ensure the .clang-format is present and updated
 git fetch origin
 
@@ -43,8 +41,7 @@ git push -f
 
 git branch -D upstream/ioq3_formatted 2>/dev/null >/dev/null || echo "No Local branch, creating local branch and formatting"
 git checkout -B upstream/ioq3_formatted
-pwd
-git show ${BRANCH_WITH_CLANG_FORMAT}:.clang-format >.clang-format
+git show origin/master:.clang-format >.clang-format
 # shellcheck disable=SC2038
 find code \
     \( -name '*.h' -or -name '*.c' -or -name '*.m' -or -name '*.hpp' -or -name '*.cpp' -or -name '*.H' -or -name '*.HPP' -or -name '*.CPP' -or -name '*.java' \) \
@@ -60,8 +57,8 @@ find code \
     ! -path 'code/zlib/*' |
     xargs clang-format -i
 git add code/
-rm .clang-format
 git commit -m "Format the source code with clang-format to simplify cross-branch comparisons"
+rm .clang-format
 git push origin :upstream/ioq3_formatted 2>/dev/null >/dev/null || echo "No upstream/ioq3_formatted branch to delete"
 git push -f --set-upstream origin upstream/ioq3_formatted
 
