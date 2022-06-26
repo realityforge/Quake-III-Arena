@@ -36,8 +36,6 @@ git checkout -B upstream/gunnm_vr
 git config branch.upstream/gunnm_vr.remote gunnm_vr
 git config branch.upstream/gunnm_vr.merge refs/heads/master
 git config branch.upstream/gunnm_vr.pushRemote origin
-git rm --force -r .github/workflows
-git commit -m "Remove workflows from upstream branch to avoid executing actions unnecessarily"
 git gc --prune=now --aggressive
 git push -f
 
