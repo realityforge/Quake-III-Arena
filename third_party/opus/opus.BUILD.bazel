@@ -9,9 +9,37 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-# TODO: We should use the defines that will enable SIMD instructions where available
 cc_library(
     name = "opus",
+    implementation_deps = [":opus_impl"],
+    visibility = ["//visibility:public"],
+    deps = [":opus_interface"],
+)
+
+cc_library(
+    name = "opus_interface",
+    srcs = [
+        "include/opus_defines.h",
+        "include/opus_types.h",
+    ],
+    hdrs = [
+        "include/opus.h",
+        "include/opus_multistream.h",
+    ],
+    defines = [
+        "OPUS_BUILD",
+        "HAVE_LRINTF",
+        "FLOATING_POINT",
+        "FLOAT_APPROX",
+        "USE_ALLOCA",
+    ],
+    includes = ["include"],
+    visibility = ["//visibility:public"],
+)
+
+# TODO: We should use the defines that will enable SIMD instructions where available
+cc_library(
+    name = "opus_impl",
     srcs = [
         "celt/_kiss_fft_guts.h",
         "celt/arch.h",
@@ -63,9 +91,7 @@ cc_library(
         "celt/vq.c",
         "celt/vq.h",
         "include/opus_custom.h",
-        "include/opus_defines.h",
         "include/opus_projection.h",
-        "include/opus_types.h",
         "silk/A2NLSF.c",
         "silk/API.h",
         "silk/CNG.c",
@@ -242,19 +268,8 @@ cc_library(
         "src/repacketizer.c",
         "src/tansig_table.h",
     ],
-    hdrs = [
-        "include/opus.h",
-        "include/opus_multistream.h",
-    ],
     copts = [
         "-Wno-incompatible-pointer-types",
-    ],
-    defines = [
-        "OPUS_BUILD",
-        "HAVE_LRINTF",
-        "FLOATING_POINT",
-        "FLOAT_APPROX",
-        "USE_ALLOCA",
     ],
     includes = [
         "celt",
@@ -262,5 +277,5 @@ cc_library(
         "silk",
         "silk/float",
     ],
-    visibility = ["//visibility:public"],
+    deps = [":opus_interface"],
 )

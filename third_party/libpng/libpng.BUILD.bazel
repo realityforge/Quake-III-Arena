@@ -37,6 +37,13 @@ _PNG_DEFINES = select({
 
 cc_library(
     name = "libpng",
+    implementation_deps = [":libpng_impl"],
+    visibility = ["//visibility:public"],
+    deps = [":libpng_interface"],
+)
+
+cc_library(
+    name = "libpng_interface",
     srcs = ["pnglibconf.h"],
     hdrs = [
         "png.h",
@@ -44,7 +51,6 @@ cc_library(
     ],
     defines = _PNG_DEFINES,
     includes = ["."],
-    visibility = ["//visibility:public"],
 )
 
 cc_library(
@@ -87,7 +93,7 @@ cc_library(
     includes = ["."],
     visibility = ["//visibility:public"],
     deps = [
-        ":libpng",
+        ":libpng_interface",
         "@zlib",
     ] + select({
         # Windows does not need math library

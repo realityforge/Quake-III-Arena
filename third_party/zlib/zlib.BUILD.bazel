@@ -13,8 +13,6 @@
 # NOTE: This Build file was copied from https://github.com/tensorflow/tensorflow/blob/7a99ce11636fb7e0c974d4d9b8b5dbff7f259c87/third_party/zlib.BUILD
 #       and is under the Apache 2 license as specified by https://github.com/tensorflow/tensorflow/blob/7a99ce11636fb7e0c974d4d9b8b5dbff7f259c87/LICENSE
 
-package(default_visibility = ["//visibility:public"])
-
 # TODO: Replace zlib with https://github.com/zlib-ng/zlib-ng (as it is faster and "better" maintained?)
 # TODO: Replace unzip with https://github.com/zlib-ng/minizip-ng (as it is maintained?)
 
@@ -22,6 +20,20 @@ licenses(["notice"])  # BSD/MIT-like license (for zlib)
 
 cc_library(
     name = "zlib",
+    implementation_deps = [":zlib_impl"],
+    visibility = ["//visibility:public"],
+    deps = [":zlib_interface"],
+)
+
+cc_library(
+    name = "unzip",
+    implementation_deps = [":unzip_impl"],
+    visibility = ["//visibility:public"],
+    deps = [":unzip_interface"],
+)
+
+cc_library(
+    name = "zlib_interface",
     hdrs = ["zlib.h"],
     copts = select({
         "@org_realityforge_q3a//build_defs:windows": [],
@@ -70,7 +82,7 @@ cc_library(
         ],
     }),
     includes = ["."],
-    deps = [":zlib"],
+    deps = [":zlib_interface"],
 )
 
 genrule(
@@ -83,7 +95,6 @@ genrule(
     echo \"#define TRYFREE(p) {if (p) Z_Free(p);}\n\" >> $@ &&
     cat $(execpath :contrib/minizip/unzip.c) >> $@
     """,
-    visibility = ["//visibility:private"],
 )
 
 cc_library(
@@ -93,14 +104,13 @@ cc_library(
         ":unzip_c_generator",
     ],
     deps = [
-        ":unzip",
-        ":zlib",
+        ":unzip_interface",
         "@org_realityforge_q3a//code/qcommon",
     ],
 )
 
 cc_library(
-    name = "unzip",
+    name = "unzip_interface",
     hdrs = [
         "contrib/minizip/ioapi.h",
         "contrib/minizip/unzip.h",
