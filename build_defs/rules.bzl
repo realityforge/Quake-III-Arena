@@ -29,6 +29,15 @@ PLUGIN_COPTS = BASE_COPTS + [
 ]
 
 PLUGIN_LINKOPTS = select({
+    "//build_defs:wasm": [
+        "-shared",
+        "-s ALLOW_MEMORY_GROWTH=1",
+        "-s DEFAULT_LIBRARY_FUNCS_TO_INCLUDE=[]",
+        "-s DISABLE_EXCEPTION_CATCHING=1",
+        "-s FILESYSTEM=0",
+        "-s EXIT_RUNTIME=0",
+        "-s EXPORTED_FUNCTIONS='[\"_dllEntry\", \"_vmMain\"]'",
+    ],
     "@platforms//os:macos": [
         "-dynamiclib",
         "-exported_symbols_list $(rootpath //build_defs:exported_symbols.lds)",
