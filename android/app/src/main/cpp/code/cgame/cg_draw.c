@@ -2951,7 +2951,7 @@ void CG_DrawActive( void ) {
 	{
 		vec3_t angles;
 		vectoangles( cg.refdef.viewaxis, angles );
-		float yaw = -angles[YAW] - 90.0f;
+		float yaw = vr->recenterYaw - angles[YAW] - 90.0f;
 		VectorAdd( vr->mrcorientation, angles, angles );
 		AnglesToAxis( angles, cg.refdef.viewaxis );
 

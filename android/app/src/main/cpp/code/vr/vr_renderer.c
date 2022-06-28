@@ -25,7 +25,8 @@ extern vr_clientinfo_t vr;
 extern cvar_t *vr_heightAdjust;
 
 XrView* projections;
-GLboolean stageSupported = GL_FALSE;
+qboolean needRecenter = qtrue;
+qboolean stageSupported = qfalse;
 
 void VR_UpdateStageBounds(ovrApp* pappState) {
     XrExtent2Df stageBounds = {};
@@ -280,7 +281,7 @@ void VR_InitRenderer( engine_t* engine ) {
 
     for (uint32_t i = 0; i < numOutputSpaces; i++) {
         if (referenceSpaces[i] == XR_REFERENCE_SPACE_TYPE_STAGE) {
-            stageSupported = GL_TRUE;
+            stageSupported = qtrue;
             break;
         }
     }
@@ -393,7 +394,7 @@ void VR_DrawMRC( ovrFramebuffer* frameBuffer, XrFovf fov, XrPosef pose, double m
         // render scene from external camera
         vr.renderMRC = qtrue;
         vr.virtual_screen = qfalse;
-        IN_VRUpdateMRC( mrc.camera[i].pose );
+        IN_VRUpdateMRC( mrc.camera[i].pose, pose );
         VR_DrawScene( frameBuffer, fov, 1 ); //TODO:mrc.camera[i].fov
         vr.virtual_screen = qtrue;
         vr.renderMRC = qfalse;
@@ -592,4 +593,9 @@ void VR_DrawFrame( engine_t* engine ) {
     frameBuffer = &engine->appState.MRCRenderer.FrameBuffer;
     frameBuffer->TextureSwapChainIndex++;
     frameBuffer->TextureSwapChainIndex %= frameBuffer->TextureSwapChainLength;
+
+    if (needRecenter) {
+        VR_Recenter(engine);
+        needRecenter = qfalse;
+    }
 }

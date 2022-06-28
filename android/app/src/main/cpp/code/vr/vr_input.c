@@ -1461,25 +1461,20 @@ void IN_VRUpdateHMD( XrPosef xfStageFromHead )
     vr.clientview_yaw_last = clientview_yaw;
 }
 
-void IN_VRUpdateMRC( XrPosef xfStageFromHead )
+void IN_VRUpdateMRC( XrPosef xfStageFromMrc, XrPosef xfStageFromHead )
 {
-    //TODO:where to get these numbers from?
+    //position adjustment
     vec3_t originAdjust;
-    originAdjust[0] = -50;
-    originAdjust[1] = 75;
-    originAdjust[2] = -150;
-    float yawAdjust = 15;
+    originAdjust[0] = 100.0 * xfStageFromHead.position.x;
+    originAdjust[1] =-100.0 * xfStageFromHead.position.z;
+    originAdjust[2] =-100.0 * xfStageFromHead.position.y;
 
-    //TODO:support recenter
+    //provide the pose to the game engine
     vec3_t rotation = {0, 0, 0};
-    const XrQuaternionf quatHmd = xfStageFromHead.orientation;
-    QuatToYawPitchRoll(quatHmd, rotation, vr.mrcorientation);
-    vr.mrcorientation[YAW] += yawAdjust;
-
-    const XrVector3f positionHmd = xfStageFromHead.position;
-    vr.mrcposition[0] = positionHmd.x + originAdjust[0];
-    vr.mrcposition[1] = positionHmd.y + originAdjust[1];
-    vr.mrcposition[2] = positionHmd.z + originAdjust[2];
+    QuatToYawPitchRoll(xfStageFromMrc.orientation, rotation, vr.mrcorientation);
+    vr.mrcposition[0] = xfStageFromMrc.position.x + originAdjust[0];
+    vr.mrcposition[1] = xfStageFromMrc.position.y + originAdjust[1];
+    vr.mrcposition[2] = xfStageFromMrc.position.z + originAdjust[2];
 }
 
 
