@@ -73,7 +73,10 @@ wasm_cc_binary(
 
 copy_to_directory(
     name = "teamarena",
-    asset_srcs = [
+    srcs = [
+        ":cl_game.wasm",
+        ":sv_game.wasm",
+        ":ui.wasm",
         "//content/teamarena:materials",
         "//content/teamarena:skin_assets",
         "//content/teamarena:ui_assets",
@@ -82,9 +85,6 @@ copy_to_directory(
         "@q3a_missionpack_pak0//:files",
         "@q3a_missionpack_pak0//:png_files",
         "@q3a_missionpack_pak1//:files",
-        ":cl_game.wasm",
-        ":sv_game.wasm",
-        ":ui.wasm",
     ],
     downcase = True,
     replace_prefixes = REPLACE_RULES,
