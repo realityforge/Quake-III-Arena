@@ -147,7 +147,6 @@ cc_library(
         "jstdhuff.c",  # should have been named .inc
     ],
     copts = libjpegturbo_copts,
-    visibility = ["//visibility:public"],
     deps = select({
         ":k8": [":simd_x86_64"],
         ":armeabi-v7a": [":simd_armv7a"],
@@ -396,7 +395,6 @@ cc_library(
         "simd/arm/aarch32/jccolext-neon.c",
     ] + HDRS_SIMD_ARM,
     copts = libjpegturbo_copts,
-    visibility = ["//visibility:private"],
     deps = [":neon-compat_hdr"],
 )
 
@@ -410,7 +408,6 @@ cc_library(
         "simd/arm/aarch64/jccolext-neon.c",
     ] + HDRS_SIMD_ARM,
     copts = libjpegturbo_copts,
-    visibility = ["//visibility:private"],
     deps = [":neon-compat_hdr"],
 )
 
