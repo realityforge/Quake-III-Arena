@@ -24,10 +24,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "qcommon.h"
 #include "cg_local.h"
 
-#ifdef Q3_VM
-#error "Do not use in VM build"
-#endif
-
 static vmDllSystemCall syscall = (vmDllSystemCall)-1;
 
 Q_EXPORT void dllEntry(vmDllSystemCall syscallptr)
