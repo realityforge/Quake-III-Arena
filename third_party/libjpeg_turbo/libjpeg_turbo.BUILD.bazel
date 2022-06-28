@@ -68,6 +68,25 @@ expand_template(
 
 cc_library(
     name = "jpeg",
+    implementation_deps = [":jpeg_impl"],
+    visibility = ["//visibility:public"],
+    deps = [":jpeg_interface"],
+)
+
+cc_library(
+    name = "jpeg_interface",
+    srcs = [
+        "jconfig.h",
+        "jmorecfg.h",
+    ],
+    hdrs = [
+        "jerror.h",
+        "jpeglib.h",
+    ],
+)
+
+cc_library(
+    name = "jpeg_impl",
     srcs = [
         "jaricom.c",
         "jcapimin.c",
@@ -83,7 +102,6 @@ cc_library(
         "jcmarker.c",
         "jcmaster.c",
         "jcomapi.c",
-        "jconfig.h",
         "jconfigint.h",
         "jcparam.c",
         "jcphuff.c",
@@ -129,6 +147,7 @@ cc_library(
         "jmemsys.h",
         "jpeg_nbits_table.h",
         "jpegcomp.h",
+        "jpegint.h",
         "jquant1.c",
         "jquant2.c",
         "jutils.c",
@@ -140,14 +159,10 @@ cc_library(
         "jdcolext.c",  # should have been named .inc
         "jdmrg565.c",  # should have been named .inc
         "jdmrgext.c",  # should have been named .inc
-        "jerror.h",
-        "jmorecfg.h",
-        "jpegint.h",
-        "jpeglib.h",
         "jstdhuff.c",  # should have been named .inc
     ],
     copts = libjpegturbo_copts,
-    deps = select({
+    deps = [":jpeg_interface"] + select({
         ":k8": [":simd_x86_64"],
         ":armeabi-v7a": [":simd_armv7a"],
         ":arm64-v8a": [":simd_armv8a"],
