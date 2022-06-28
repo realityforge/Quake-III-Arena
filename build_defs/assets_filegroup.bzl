@@ -40,6 +40,6 @@ def asset_filegroup(name, srcs, **kwargs):
     _platform_transition_filegroup(
         name = name,
         srcs = ["%s_raw" % name],
-        target_platform = "//build_defs:platform_none",
+        target_platform = "@org_realityforge_q3a//build_defs:platform_none",
         **kwargs
     )
