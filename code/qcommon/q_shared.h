@@ -476,7 +476,6 @@ float RadiusFromBounds(const vec3_t mins, const vec3_t maxs);
 void ClearBounds(vec3_t mins, vec3_t maxs);
 void AddPointToBounds(const vec3_t v, vec3_t mins, vec3_t maxs);
 
-#if !defined(Q3_VM) || (defined(Q3_VM) && defined(__Q3_VM_MATH))
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wfloat-equal"
 
@@ -541,25 +540,6 @@ static inline void CrossProduct(const vec3_t v1, const vec3_t v2, vec3_t cross)
     cross[1] = v1[2] * v2[0] - v1[0] * v2[2];
     cross[2] = v1[0] * v2[1] - v1[1] * v2[0];
 }
-
-#else
-int VectorCompare(const vec3_t v1, const vec3_t v2);
-
-vec_t VectorLength(const vec3_t v);
-
-vec_t VectorLengthSquared(const vec3_t v);
-
-vec_t Distance(const vec3_t p1, const vec3_t p2);
-
-vec_t DistanceSquared(const vec3_t p1, const vec3_t p2);
-
-void VectorNormalizeFast(vec3_t v);
-
-void VectorInverse(vec3_t v);
-
-void CrossProduct(const vec3_t v1, const vec3_t v2, vec3_t cross);
-
-#endif
 
 vec_t VectorNormalize(vec3_t v); // returns vector length
 vec_t VectorNormalize2(const vec3_t v, vec3_t out);
