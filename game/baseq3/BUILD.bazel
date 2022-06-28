@@ -25,7 +25,6 @@ cc_binary(
     deps = [
         "//build_defs:exported_symbols.lds",
         "//code/cgame:baseq3",
-        "//code/cgame:baseq3_syscalls",
     ],
 )
 
@@ -44,7 +43,6 @@ cc_binary(
     deps = [
         "//build_defs:exported_symbols.lds",
         "//code/game:baseq3",
-        "//code/game:baseq3_syscalls",
     ],
 )
 
