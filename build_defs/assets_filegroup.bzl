@@ -19,60 +19,19 @@ def asset_filegroup(name, srcs, **kwargs):
 
     Usage:
     ```starlark
-    load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_files")
-    write_source_files(
-        name = "write_foobar",
-        files = {
-            "foobar.json": "//some/generated:file",
-        },
-    )
-    ```
-    To update the source file, run:
-    ```bash
-    bazel run //:write_foobar
-    ```
-    A test will fail if the source file doesn't exist or if it's out of date with instructions on how to create/update it.
-    You can declare a tree of generated source file targets:
-    ```starlark
-    load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_files")
-    write_source_files(
-        name = "write_all",
-        additional_update_targets = [
-            # Other write_source_files targets to run when this target is run
-            "//a/b/c:write_foo",
-            "//a/b:write_bar",
+    load("//build_defs:assets_filegroup.bzl", "asset_filegroup")
+
+    asset_filegroup(
+        name = "some_assets",
+        srcs = [
+            "data/of/one/sort/blah.data",
         ]
     )
     ```
-    And update them with a single run:
-    ```bash
-    bazel run //:write_all
-    ```
-    When a file is out of date, you can leave a suggestion to run a target further up in the tree by specifying `suggested_update_target`. E.g.,
-    ```starlark
-    write_source_files(
-        name = "write_foo",
-        files = {
-            "foo.json": ":generated-foo",
-        },
-        suggested_update_target = "//:write_all"
-    )
-    ```
-    A test failure from foo.json being out of date will yield the following message:
-    ```
-    //a/b:c:foo.json is out of date. To update this and other generated files, run:
-        bazel run //:write_all
-    To update *only* this file, run:
-        bazel run //a/b/c:write_foo
-    ```
-    If you have many sources that you want to update as a group, we recommend wrapping write_source_files in a macro that defaults `suggested_update_target` to the umbrella update target.
+
     Args:
-        name: Name of the executable target that creates or updates the source file
-        files: A dict where the keys are source files or folders to write to and the values are labels pointing to the desired content.
-            Sources must be within the same bazel package as the target.
-        additional_update_targets: (Optional) List of other write_source_file or other executable updater targets to call in the same run
-        suggested_update_target: (Optional) Label of the write_source_file target to suggest running when files are out of date
-        diff_test: (Optional) Generate a test target to check that the source file(s) exist and are up to date with the generated files(s).
+        name: Name of the fileset
+        srcs: Dependencies to define fileset.
         **kwargs: Other common named parameters such as `tags` or `visibility`
     """
 
