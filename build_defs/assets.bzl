@@ -17,7 +17,7 @@ def _convert_tga_to_png_impl(ctx):
     target_file = output_file.path
     command = ";".join([
         '%s convert -auto-orient "%s" "%s"' % (ctx.executable._magick.path, ctx.file.src.path, target_file),
-        '%s -brute -ow -warn "%s"' % (ctx.executable._pngcrush.path, target_file),
+        '%s -brute -ow -warn -noreduce_palette "%s"' % (ctx.executable._pngcrush.path, target_file),
         '%s compare -auto-orient -metric RMSE "%s" "png32:%s" null: 2>/dev/null' % (ctx.executable._magick.path, ctx.file.src.path, target_file),
     ])
 
