@@ -33,9 +33,6 @@ fetch --repository_cache=~/.cache/bazel-repo
 query --repository_cache=~/.cache/bazel-repo
 build --disk_cache=~/.cache/bazel-disk
 
-build --crosstool_top=@local_config_clang//:toolchain
-test --crosstool_top=@local_config_clang//:toolchain
-
 # force redownloading when repository URLs are changed. Otherwise, it's possible broken URLs can be masked
 # by the presence of a repository cache entry with the same hash.
 common --experimental_repository_cache_urls_as_default_canonical_id

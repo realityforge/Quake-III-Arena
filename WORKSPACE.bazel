@@ -14,10 +14,6 @@
 # namespace with a fixed name.
 workspace(name = "org_realityforge_q3a")
 
-load("//third_party/clang_toolchain:cc_configure_clang.bzl", "cc_clang_toolchain")
-
-cc_clang_toolchain(name = "local_config_clang")
-
 load("//third_party/bazel_skylib:repository.bzl", _load_bazel_skylib_repository = "load_repository")
 load("//third_party/buildifier:repository.bzl", _load_buildifier_repository = "load_repository")
 load("//third_party/com_github_ash2k_bazel_tools:repository.bzl", _load_com_github_ash2k_bazel_tools_repository = "load_repository")
