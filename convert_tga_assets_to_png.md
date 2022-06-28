@@ -22,7 +22,7 @@ The project must ensure that the load times are not significantly more in any of
 
 #### Analysis
 
-The first step was to analyze the usage of the TGA format within the game, the missionpack and popular mods. The analysis was done using the identify sub-command of [imagemagick](https://www.imagemagick.org/). The majority of TGA files used a ColorSpace of sRGB with a bit depth per component of 8 and include an alpha component. The analysis determined the following exceptions:
+The first step was to analyze the usage of the TGA format within the game, the missionpack and popular mods. The analysis was done using the `identify` sub-command of [imagemagick](https://www.imagemagick.org/). The majority of TGA files used a ColorSpace of sRGB with a bit depth per component of 8 and include an alpha component. The analysis determined the following exceptions:
 
 * In `missionpack/pak0.pk3` the `textures/skies2/clouds2.tga`, `textures/skies2/clouds.tga` and `models/flag/pole.tga` files used a ColorSpace of `Gray`
 * 8 files in `missionpack/pak0.pk3` and 5 files in `baseq3/pak0.pk3` used a bit depth of 1. These are:
