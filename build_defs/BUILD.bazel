@@ -79,3 +79,14 @@ selects.config_setting_group(
         ":x86_64",
     ],
 )
+
+# A platform that declares no cpu or operating system. The intent is to generate assets in
+# this platform and share between all configurations.
+platform(
+    name = "platform_none",
+    constraint_values = [
+        "@platforms//os:none",
+        "//build_defs:cpu_none",
+    ],
+    visibility = ["//visibility:public"],
+)

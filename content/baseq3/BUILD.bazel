@@ -10,9 +10,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("//build_defs:assets_filegroup.bzl", "asset_filegroup")
 load("//tools/material_magic/java/org/realityforge/q3a/material_magic:material_format_test.bzl", "material_format_test")
 
-filegroup(
+asset_filegroup(
     name = "skin_assets",
     srcs = [
         "models/players/anarki/head_blue.skin",
@@ -1666,7 +1667,7 @@ MATERIALS = [
     "shaders/white.shader",
 ]
 
-filegroup(
+asset_filegroup(
     name = "material_files",
     srcs = MATERIALS,
 )
