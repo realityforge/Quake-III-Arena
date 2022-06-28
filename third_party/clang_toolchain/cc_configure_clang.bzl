@@ -41,7 +41,6 @@ def _cc_clang_toolchain_impl(ctx):
     out_folder = "clang_tools"
     ctx.download_and_extract("https://commondatastorage.googleapis.com/chromium-browser-clang/%s/clang-%s.tgz" % (platform, version), output = out_folder, sha256 = sha256)
 
-    # clang_tools/bin
     _cc_autoconf_impl(ctx, {"gcc": "%s/bin/clang" % out_folder})
 
 cc_clang_toolchain = repository_rule(implementation = _cc_clang_toolchain_impl)
