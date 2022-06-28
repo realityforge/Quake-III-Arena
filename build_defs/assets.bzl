@@ -59,13 +59,13 @@ _convert_tga_to_png = rule(
 def convert_tga_to_png(name):
     output_files = []
     for file in _PAK_DATA[name]["tga_files"]:
-        _file_sans_extension = file.removesuffix(".tga").removesuffix(".TGA").lower().replace(".", "_")
-        _target_name = "%s.png_gen" % _file_sans_extension
-        output_files.append(_target_name)
+        file_sans_extension = file.removesuffix(".tga").removesuffix(".TGA").lower().replace(".", "_")
+        target_name = "%s.png_gen" % file_sans_extension
+        output_files.append(target_name)
         _convert_tga_to_png(
-            name = _target_name,
+            name = target_name,
             src = "@%s//:%s" % (name, file),
-            out = "%s.png" % _file_sans_extension,
+            out = "%s.png" % file_sans_extension,
         )
 
     native.filegroup(name = "png_files", srcs = output_files, visibility = ["//visibility:public"])
