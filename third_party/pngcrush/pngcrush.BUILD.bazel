@@ -44,7 +44,6 @@ cc_binary(
     visibility = ["//visibility:public"],
     deps = [
         "@libpng",
-        "@libpng//:libpng_impl",
         "@org_realityforge_q3a//third_party:math",
         "@zlib",
     ],
