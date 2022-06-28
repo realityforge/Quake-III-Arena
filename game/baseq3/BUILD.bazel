@@ -19,7 +19,8 @@ load("//third_party/content:metadata.bzl", "REPLACE_RULES")
 cc_binary(
     name = "cgame.so",
     linkopts = CLIENT_GAME_LINKOPTS,
-    linkshared = 1,
+    linkshared = True,
+    linkstatic = True,
     visibility = DIST_VISIBILITY,
     deps = [
         "//build_defs:exported_symbols.lds",
@@ -45,7 +46,8 @@ wasm_cc_binary(
 cc_binary(
     name = "qagame.so",
     linkopts = SERVER_GAME_LINKOPTS,
-    linkshared = 1,
+    linkshared = True,
+    linkstatic = True,
     visibility = DIST_VISIBILITY,
     deps = [
         "//build_defs:exported_symbols.lds",
@@ -70,7 +72,8 @@ wasm_cc_binary(
 cc_binary(
     name = "ui.so",
     linkopts = UI_LINKOPTS,
-    linkshared = 1,
+    linkshared = True,
+    linkstatic = True,
     visibility = DIST_VISIBILITY,
     deps = [
         "//build_defs:exported_symbols.lds",
