@@ -35,11 +35,13 @@ uint32_t Com_BlockChecksum(const void* buffer, const size_t length)
     return digest[0] ^ digest[1] ^ digest[2] ^ digest[3];
 }
 
-unsigned Com_BlockChecksumKey(void* buffer, int length, int key)
+uint32_t Com_BlockChecksumKey(const void* buffer, const size_t length, int key)
 {
+    MD4_CTX ctx;
+
     MD4_Init(&ctx);
-    MD4_Update(&ctx, (unsigned char*)&key, 4);
-    MD4_Update(&ctx, (unsigned char*)buffer, length);
+    MD4_Update(&ctx, (const unsigned char*)&key, 4);
+    MD4_Update(&ctx, (const unsigned char*)buffer, length);
 
     uint32_t digest[4];
     MD4_Final((unsigned char*)digest, &ctx);
