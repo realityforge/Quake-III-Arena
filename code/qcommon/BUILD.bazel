@@ -25,6 +25,20 @@ cc_library(
 )
 
 cc_library(
+    name = "vm",
+    srcs = [
+        "vm.c",
+        "vm_interpreted.c",
+    ],
+    hdrs = ["vm_local.h"],
+    defines = ENGINE_DEFINES,
+    deps = [
+        ":qcommon",
+        ":shared_api",
+    ],
+)
+
+cc_library(
     name = "md4",
     srcs = ["md4.c"],
     copts = FULL_WARNINGS,
