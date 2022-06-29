@@ -10,6 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@emsdk//emscripten_toolchain:wasm_rules.bzl", "wasm_cc_binary")
 load("@rules_cc//cc:defs.bzl", "cc_binary")
 load("//build_defs:copy_to_directory.bzl", "copy_to_directory")
 load("//build_defs:rules.bzl", "CLIENT_GAME_LINKOPTS", "DIST_VISIBILITY", "SERVER_GAME_LINKOPTS", "UI_LINKOPTS")
@@ -18,7 +19,8 @@ load("//third_party/content:metadata.bzl", "REPLACE_RULES")
 cc_binary(
     name = "cgame.so",
     linkopts = CLIENT_GAME_LINKOPTS,
-    linkshared = 1,
+    linkshared = True,
+    linkstatic = True,
     visibility = DIST_VISIBILITY,
     deps = [
         "//build_defs:exported_symbols.lds",
@@ -26,10 +28,17 @@ cc_binary(
     ],
 )
 
+wasm_cc_binary(
+    name = "cgame-wasm",
+    cc_target = ":cgame.so",
+    outputs = ["cl_game.wasm"],
+)
+
 cc_binary(
     name = "qagame.so",
     linkopts = SERVER_GAME_LINKOPTS,
-    linkshared = 1,
+    linkshared = True,
+    linkstatic = True,
     visibility = DIST_VISIBILITY,
     deps = [
         "//build_defs:exported_symbols.lds",
@@ -37,20 +46,37 @@ cc_binary(
     ],
 )
 
+wasm_cc_binary(
+    name = "qagame-wasm",
+    cc_target = ":qagame.so",
+    outputs = ["sv_game.wasm"],
+)
+
 cc_binary(
     name = "ui.so",
     linkopts = UI_LINKOPTS,
-    linkshared = 1,
+    linkshared = True,
+    linkstatic = True,
     visibility = DIST_VISIBILITY,
     deps = [
         "//build_defs:exported_symbols.lds",
         "//code/q3_ui:ui",
+        "//code/ui:ui_syscalls",
     ],
+)
+
+wasm_cc_binary(
+    name = "ui-wasm",
+    cc_target = ":ui.so",
+    outputs = ["ui.wasm"],
 )
 
 copy_to_directory(
     name = "baseq3",
-    asset_srcs = [
+    srcs = [
+        ":cl_game.wasm",
+        ":sv_game.wasm",
+        ":ui.wasm",
         "//content/baseq3:materials",
         "//content/baseq3:skin_assets",
         "@QuakeArenaArcade_baseq3//:files",

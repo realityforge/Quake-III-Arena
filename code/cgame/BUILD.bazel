@@ -11,7 +11,7 @@
 # limitations under the License.
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//build_defs:rules.bzl", "CLIENT_GAME_COPTS", "CLIENT_GAME_DEFINES", "QVM_DEFINES", "TEAM_ARENA_DEFINES")
+load("//build_defs:rules.bzl", "CLIENT_GAME_COPTS", "CLIENT_GAME_DEFINES", "TEAM_ARENA_DEFINES")
 
 cc_library(
     name = "api",
@@ -38,6 +38,7 @@ _COMMON_SRC = [
     "cg_scoreboard.c",
     "cg_servercmds.c",
     "cg_snapshot.c",
+    "cg_syscalls.c",
     "cg_view.c",
     "cg_weapons.c",
     "cg_local.h",
@@ -47,13 +48,9 @@ _BASEQ3_SRC = _COMMON_SRC
 
 _TEAM_ARENA_SRC = _COMMON_SRC + ["cg_newdraw.c"]
 
-# cg_syscalls is required when building the shared library but
-# should not be required when building qvm library
-_NATIVE_LIB_SRC = ["cg_syscalls.c"]
-
 cc_library(
     name = "baseq3",
-    srcs = _BASEQ3_SRC + _NATIVE_LIB_SRC,
+    srcs = _BASEQ3_SRC,
     copts = CLIENT_GAME_COPTS,
     defines = CLIENT_GAME_DEFINES,
     visibility = ["//game/baseq3:__pkg__"],
@@ -70,23 +67,8 @@ cc_library(
 )
 
 cc_library(
-    name = "baseq3-qvm",
-    srcs = _BASEQ3_SRC,
-    defines = CLIENT_GAME_DEFINES + QVM_DEFINES,
-    deps = [
-        ":api",
-        "//code/game:bg_api",
-        "//code/game:bg_lib-qvm",
-        "//code/qcommon:shared",
-        "//code/qcommon:shared_api",
-        "//code/renderer:api",
-        "//code/ui:shared",
-    ],
-)
-
-cc_library(
     name = "teamarena",
-    srcs = _TEAM_ARENA_SRC + _NATIVE_LIB_SRC,
+    srcs = _TEAM_ARENA_SRC,
     copts = CLIENT_GAME_COPTS,
     defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
     visibility = ["//game/teamarena:__pkg__"],
@@ -97,22 +79,6 @@ cc_library(
         "//code/game:bg_api",
         "//code/game:bg_misc-client-teamarena",
         "//code/qcommon",
-        "//code/qcommon:shared",
-        "//code/qcommon:shared_api",
-        "//code/qcommon:voicechat",
-        "//code/renderer:api",
-        "//code/ui:shared",
-    ],
-)
-
-cc_library(
-    name = "teamarena-qvm",
-    srcs = _TEAM_ARENA_SRC,
-    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES + QVM_DEFINES,
-    deps = [
-        ":api",
-        "//code/game:bg_api",
-        "//code/game:bg_lib-qvm",
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
         "//code/qcommon:voicechat",

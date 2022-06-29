@@ -42,14 +42,14 @@ git checkout -B upstream/gunnm_vr_formatted
 git show origin/master:.clang-format >.clang-format
 # shellcheck disable=SC2038
 find code \
-    \( -name '*.h' -or -name '*.c' -or -name '*.m' -or -name '*.hpp' -or -name '*.cpp' -or -name '*.H' -or -name '*.HPP' -or -name '*.CPP' -or -name '*.java' \)  -and \
+    \( -name '*.h' -or -name '*.c' -or -name '*.m' -or -name '*.hpp' -or -name '*.cpp' -or -name '*.H' -or -name '*.HPP' -or -name '*.CPP' -or -name '*.java' \) -and \
     ! -path 'code/libsdl/windows/include/SDL2/*' \
     ! -path 'code/libcurl/windows/include/curl/*' \
     ! -path 'code/win32/msvc2017/packages/OpenXR.Headers.1.0.10.2/include/*' \
     ! -path 'code/vrmod/OpenXR/xr_linear.h' \
     ! -path 'code/vrmod/OpenXR/openxr/*' \
     ! -path 'code/renderercommon/vulkan/*' \
-    ! -path 'code/libjpeg/*' | \
+    ! -path 'code/libjpeg/*' |
     xargs clang-format -i
 git add code/
 git commit -m "Format the source code with clang-format to simplify cross-branch comparisons"

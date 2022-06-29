@@ -60,10 +60,33 @@ config_setting(
     visibility = ["//visibility:public"],
 )
 
+config_setting(
+    name = "wasm",
+    values = {"cpu": "wasm"},
+    visibility = ["//visibility:public"],
+)
+
+constraint_value(
+    name = "cpu_none",
+    constraint_setting = "@platforms//cpu:cpu",
+    visibility = ["//visibility:public"],
+)
+
 selects.config_setting_group(
     name = "x86",
     match_any = [
         ":x86_32",
         ":x86_64",
     ],
+)
+
+# A platform that declares no cpu or operating system. The intent is to generate assets in
+# this platform and share between all configurations.
+platform(
+    name = "platform_none",
+    constraint_values = [
+        "@platforms//os:none",
+        "//build_defs:cpu_none",
+    ],
+    visibility = ["//visibility:public"],
 )

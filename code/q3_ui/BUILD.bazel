@@ -65,6 +65,5 @@ cc_library(
         "//code/renderer:api",
         "//code/ui:api",
         "//code/ui:shared",
-        "//code/ui:ui_syscalls",
     ],
 )

@@ -127,10 +127,16 @@ build --host_force_python=PY3
 build --java_runtime_version=remotejdk_11
 build --tool_java_runtime_version=remotejdk_11
 
+# Disable legacy toolchain flags
+build --experimental_disallow_legacy_java_toolchain_flags
+
 build --java_language_version=11
 test --java_language_version=11
 build --tool_java_language_version=11
 test --tool_java_language_version=11
+
+# Remove unused header compilation
+build --java_header_compilation
 
 # Enable the experimental persistent Java compiler.
 build --experimental_persistent_javac
@@ -160,6 +166,9 @@ build --compilation_mode=opt
 build --verbose_failures
 
 build --copt -std=c99
+
+# Remove unused attributes
+build --incompatible_remove_cpu_and_compiler_attributes_from_cc_toolchain
 
 #
 # Enable some warnings.

@@ -26,6 +26,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // this is for determining if we have an asm version of a C function
 #define idx64 0
 
+#ifdef __wasm32__
+#define Q3_VM
+#endif
+
 #ifndef Q3_VM
 #if (defined _M_IX86 || defined __i386__) && !defined(C_ONLY)
 #error "32-bit platforms are not supported"
@@ -140,7 +144,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define ARCH_STRING "bytecode"
 
-#define DLL_EXT ".qvm"
+#define DLL_EXT ".wasm"
 
 #endif
 

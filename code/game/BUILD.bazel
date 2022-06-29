@@ -170,6 +170,7 @@ _COMMON_SRC = [
     "g_mover.c",
     "g_session.c",
     "g_spawn.c",
+    "g_syscalls.c",
     "g_svcmds.c",
     "g_target.c",
     "g_team.c",
@@ -182,15 +183,9 @@ _COMMON_SRC = [
     "syn.h",
 ]
 
-_BASEQ3_SRC = _COMMON_SRC
-
-# cg_syscalls is required when building the shared library but
-# should not be required when building qvm library
-_NATIVE_LIB_SRC = ["g_syscalls.c"]
-
 cc_library(
     name = "baseq3",
-    srcs = _BASEQ3_SRC + _NATIVE_LIB_SRC,
+    srcs = _COMMON_SRC,
     copts = SERVER_GAME_COPTS,
     defines = SERVER_GAME_DEFINES,
     visibility = ["//game/baseq3:__pkg__"],
@@ -205,11 +200,9 @@ cc_library(
     ],
 )
 
-_TEAM_ARENA_SRC = _COMMON_SRC
-
 cc_library(
     name = "teamarena",
-    srcs = _TEAM_ARENA_SRC + _NATIVE_LIB_SRC,
+    srcs = _COMMON_SRC,
     copts = SERVER_GAME_COPTS,
     defines = TEAM_ARENA_DEFINES + SERVER_GAME_DEFINES,
     visibility = ["//game/teamarena:__pkg__"],

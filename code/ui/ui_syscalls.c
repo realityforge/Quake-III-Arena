@@ -22,12 +22,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "qcommon.h"
 #include "ui_local.h"
 
-// this file is only included when building a dll
-// syscalls.asm is included instead when building a qvm
-#ifdef Q3_VM
-#error "Do not use in VM build"
-#endif
-
 #pragma clang diagnostic ignored "-Wvariadic-macros"
 #pragma clang diagnostic ignored "-Wgnu-zero-variadic-macro-arguments"
 #ifdef TRACE_UI_VM
