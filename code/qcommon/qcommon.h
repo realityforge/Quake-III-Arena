@@ -473,7 +473,7 @@ issues.
 
 #define BASEGAME "baseq3"
 
-bool FS_Initialized();
+bool FS_Initialized(void);
 
 void FS_InitFilesystem(void);
 void FS_Shutdown(bool closemfp);
@@ -491,7 +491,7 @@ void FS_FreeFileList(char** list);
 
 bool FS_FileExists(const char* file);
 
-int FS_LoadStack();
+int FS_LoadStack(void);
 
 int FS_GetFileList(const char* path, const char* extension, char* listbuf, int bufsize);
 int FS_GetModList(char* listbuf, int bufsize);
