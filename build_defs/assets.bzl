@@ -10,6 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("//build_defs:assets_filegroup.bzl", _asset_filegroup = "asset_filegroup")
 load("//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
 
 def _convert_tga_to_png_impl(ctx):
@@ -35,7 +36,7 @@ def _convert_tga_to_png_impl(ctx):
 _convert_tga_to_png = rule(
     attrs = {
         "out": attr.string(mandatory = True),
-        "src": attr.label(allow_single_file = True, cfg = "exec"),
+        "src": attr.label(allow_single_file = True),
         "_magick": attr.label(
             cfg = "exec",
             executable = True,
@@ -68,4 +69,4 @@ def convert_tga_to_png(name):
             out = "%s.png" % file_sans_extension,
         )
 
-    native.filegroup(name = "png_files", srcs = output_files, visibility = ["//visibility:public"])
+    _asset_filegroup(name = "png_files", srcs = output_files, visibility = ["//visibility:public"])
