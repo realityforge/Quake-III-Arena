@@ -98,7 +98,7 @@ The major changes of the project are tracked in this table.
       <td>3</td>
       <td>0</td>
       <td>0</td>
-      <td>Complete</td>
+      <td>0%</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
     </tr>
