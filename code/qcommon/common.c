@@ -50,6 +50,7 @@ int demo_protocols[] = { 66, 67, 68, 0 };
 #define DEF_COMHUNKMEGS "56"
 #define DEF_COMZONEMEGS "16"
 #endif
+#include "cvar_engine.h"
 
 jmp_buf abortframe; // an ERR_DROP occured, exit the entire frame
 
