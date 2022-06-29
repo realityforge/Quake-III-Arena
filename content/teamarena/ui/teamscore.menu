@@ -1,7 +1,7 @@
 #include "ui/menudef.h"
 
 {
-\\ score_menu \\
+// score_menu
 
   menuDef {
     	name "teamscore_menu"

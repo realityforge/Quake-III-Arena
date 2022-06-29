@@ -1,7 +1,7 @@
 #include "ui/menudef.h"
 
 {
-\\ QUAKE3 POPUP MENU \\
+// QUAKE3 POPUP MENU
 
 menuDef {
 	name "quake3_popmenu"

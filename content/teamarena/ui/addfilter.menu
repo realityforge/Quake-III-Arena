@@ -1,7 +1,7 @@
 #include "ui/menudef.h"
 
 {
-\\ ADD FILTER POPUP MENU \\
+// ADD FILTER POPUP MENU
 
 menuDef {
     	name "addfilter_popmenu"

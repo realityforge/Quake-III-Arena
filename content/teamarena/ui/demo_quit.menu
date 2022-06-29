@@ -1,7 +1,7 @@
 #include "ui/menudef.h"
 
 {
-\\ DEMO QUIT \\
+// DEMO QUIT
 
   menuDef {
     	name "demo_quit"

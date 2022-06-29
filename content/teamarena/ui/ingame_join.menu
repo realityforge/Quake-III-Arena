@@ -2,7 +2,7 @@
 
 
 {
-\\ INGAME_JOIN MENU \\
+// INGAME_JOIN MENU
 
   menuDef {
     	name "ingame_join"

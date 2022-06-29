@@ -17,7 +17,7 @@
   	}
 							   
 
-\\ INGAME MENU \\
+// INGAME MENU
 
   menuDef {
     	name "ingame"

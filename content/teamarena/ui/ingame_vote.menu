@@ -1,7 +1,7 @@
 #include "ui/menudef.h"
 
 {
-\\ SERVER INFO MENU \\
+// SERVER INFO MENU
 
 menuDef {
  	name "ingame_vote"
