@@ -93,6 +93,15 @@ The major changes of the project are tracked in this table.
       <td>2022-06-20</td>
       <td>2022-06-29</td>
     </tr>
+    <tr valign="top">
+      <td><a href="wasm.html">Wasm - Phase 2</a></td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>Complete</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
   </tbody>
 </table>
 
