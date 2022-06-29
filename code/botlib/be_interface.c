@@ -53,7 +53,7 @@ botlib_globals_t botlibglobals;
 botlib_export_t be_botlib_export;
 botlib_import_t botimport;
 //
-int botDeveloper;
+int bot_developer;
 
 //===========================================================================
 //
@@ -86,10 +86,10 @@ int Export_BotLibSetup(void)
 {
     int errnum;
 
-    botDeveloper = LibVarGetValue("bot_developer");
+    bot_developer = LibVarGetValue("bot_developer");
     memset(&botlibglobals, 0, sizeof(botlibglobals));
 
-    if (botDeveloper) {
+    if (bot_developer) {
         Log_Open("botlib.log");
     }
 

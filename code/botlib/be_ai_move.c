@@ -646,7 +646,7 @@ int BotGetReachabilityToGoal(vec3_t origin, int areanum,
         }
         if (i != MAX_AVOIDREACH && avoidreachtries[i] > AVOIDREACH_TRIES) {
 #ifdef DEBUG
-            if (botDeveloper) {
+            if (bot_developer) {
                 botimport.Print(PRT_MESSAGE, "avoiding reachability %d\n", avoidreach[i]);
             }
 #endif // DEBUG
@@ -2307,7 +2307,7 @@ void BotMoveToGoal(bot_moveresult_t* result, int movestate, bot_goal_t* goal, in
                             ms->lastreachnum = reachnum;
                             ms->reachability_time = AAS_Time() + BotReachabilityTime(&reach);
                         } else {
-                            if (botDeveloper) {
+                            if (bot_developer) {
                                 botimport.Print(PRT_MESSAGE, "client %d: on func_plat without reachability\n", ms->client);
                             }
                             result->blocked = true;
@@ -2330,7 +2330,7 @@ void BotMoveToGoal(bot_moveresult_t* result, int movestate, bot_goal_t* goal, in
                             ms->lastreachnum = reachnum;
                             ms->reachability_time = AAS_Time() + BotReachabilityTime(&reach);
                         } else {
-                            if (botDeveloper) {
+                            if (bot_developer) {
                                 botimport.Print(PRT_MESSAGE, "client %d: on func_bobbing without reachability\n", ms->client);
                             }
                             result->blocked = true;
@@ -2410,7 +2410,7 @@ void BotMoveToGoal(bot_moveresult_t* result, int movestate, bot_goal_t* goal, in
                 }
             } else {
 #ifdef DEBUG
-                if (botDeveloper) {
+                if (bot_developer) {
                     if (ms->reachability_time < AAS_Time()) {
                         botimport.Print(PRT_MESSAGE, "client %d: reachability timeout in ", ms->client);
                         AAS_PrintTravelType(reach.traveltype & TRAVELTYPE_MASK);
@@ -2437,7 +2437,7 @@ void BotMoveToGoal(bot_moveresult_t* result, int movestate, bot_goal_t* goal, in
             // if the area has no reachability links
             if (!AAS_AreaReachability(ms->areanum)) {
 #ifdef DEBUG
-                if (botDeveloper) {
+                if (bot_developer) {
                     botimport.Print(PRT_MESSAGE, "area %d no reachability\n", ms->areanum);
                 }
 #endif // DEBUG
@@ -2465,11 +2465,11 @@ void BotMoveToGoal(bot_moveresult_t* result, int movestate, bot_goal_t* goal, in
             }
 #ifdef DEBUG
 
-            else if (botDeveloper) {
+            else if (bot_developer) {
                 botimport.Print(PRT_MESSAGE, "goal not reachable\n");
                 memset(&reach, 0, sizeof(aas_reachability_t)); // make compiler happy
             }
-            if (botDeveloper) {
+            if (bot_developer) {
                 // if still going for the same goal
                 if (ms->lastgoalareanum == goal->areanum) {
                     if (ms->lastareanum == reach.areanum) {
@@ -2556,7 +2556,7 @@ void BotMoveToGoal(bot_moveresult_t* result, int movestate, bot_goal_t* goal, in
             memset(&reach, 0, sizeof(aas_reachability_t));
         }
 #ifdef DEBUG
-        if (botDeveloper) {
+        if (bot_developer) {
             if (result->failure) {
                 botimport.Print(PRT_MESSAGE, "client %d: movement failure in ", ms->client);
                 AAS_PrintTravelType(reach.traveltype & TRAVELTYPE_MASK);
@@ -2601,7 +2601,7 @@ void BotMoveToGoal(bot_moveresult_t* result, int movestate, bot_goal_t* goal, in
                 }
             }
         }
-        if (botDeveloper) {
+        if (bot_developer) {
             // if a jumppad is found with the trace but no reachability is found
             if (foundjumppad && !ms->lastreachnum) {
                 botimport.Print(PRT_MESSAGE, "client %d didn't find jumppad reachability\n", ms->client);
@@ -2665,7 +2665,7 @@ void BotMoveToGoal(bot_moveresult_t* result, int movestate, bot_goal_t* goal, in
             }
             result->traveltype = reach.traveltype;
 #ifdef DEBUG
-            if (botDeveloper) {
+            if (bot_developer) {
                 if (result->failure) {
                     botimport.Print(PRT_MESSAGE, "client %d: movement failure in finish ", ms->client);
                     AAS_PrintTravelType(reach.traveltype & TRAVELTYPE_MASK);

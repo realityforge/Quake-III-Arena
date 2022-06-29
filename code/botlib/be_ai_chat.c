@@ -1484,7 +1484,7 @@ bot_replychat_t* BotLoadReplyChat(char* filename)
     }
     FreeSource(source);
     botimport.Print(PRT_MESSAGE, "loaded %s\n", filename);
-    if (botDeveloper) {
+    if (bot_developer) {
         BotCheckReplyChatIntegrety(replychatlist);
     }
     if (!replychatlist)
@@ -1625,7 +1625,7 @@ bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
         }
     }
     botimport.Print(PRT_MESSAGE, "loaded %s from %s\n", chatname, chatfile);
-    if (botDeveloper) {
+    if (bot_developer) {
         BotCheckInitialChatIntegrety(chat);
     }
 #ifdef DEBUG

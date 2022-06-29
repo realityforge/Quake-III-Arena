@@ -407,7 +407,7 @@ void BotInitInfoEntities(void)
             numcampspots++;
         }
     }
-    if (botDeveloper) {
+    if (bot_developer) {
         botimport.Print(PRT_MESSAGE, "%d map locations\n", numlocations);
         botimport.Print(PRT_MESSAGE, "%d camp spots\n", numcampspots);
     }
