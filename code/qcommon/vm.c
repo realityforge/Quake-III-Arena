@@ -45,13 +45,6 @@ vm_t vmTable[MAX_VM];
 void VM_VmInfo_f(void);
 void VM_VmProfile_f(void);
 
-// converts a VM pointer to a C pointer and
-// checks to make sure that the range is acceptable
-void* VM_VM2C(vmptr_t p, int length)
-{
-    return (void*)p;
-}
-
 void VM_Debug(int level)
 {
     vm_debugLevel = level;
