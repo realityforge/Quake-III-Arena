@@ -12,6 +12,12 @@
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
 load("//build_defs:rules.bzl", "FULL_WARNINGS")
+cc_library(
+    name = "voicechat",
+    hdrs = ["voicechat.h"],
+    includes = ["."],
+)
+
 
 cc_library(
     name = "base",
