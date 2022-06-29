@@ -218,14 +218,12 @@ winding_t* BaseWindingForPlane(vec3_t normal, vec_t dist)
     return w;
 }
 
-winding_t* CopyWinding(winding_t* w)
+winding_t* CopyWinding(winding_t* winding)
 {
-    int size;
-    winding_t* c;
-
-    c = AllocWinding(w->numpoints);
-    size = (int)((winding_t*)0)->p[w->numpoints];
-    memcpy(c, w, size);
+    winding_t* c = AllocWinding(winding->numpoints);
+    // Calculate the number of bytes from the start of the original structure to end of the structure
+    const size_t size = (intptr_t) & (winding->p[winding->numpoints]) - (intptr_t)winding;
+    memcpy(c, winding, size);
     return c;
 }
 
