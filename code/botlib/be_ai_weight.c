@@ -53,8 +53,9 @@ int ReadValue(source_t* source, float* value)
         return false;
     if (!strcmp(token.string, "-")) {
         SourceWarning(source, "negative value set to zero\n");
-        if (!PC_ExpectTokenType(source, TT_NUMBER, 0, &token))
+        if (!PC_ExpectTokenType(source, TT_NUMBER, 0, &token)) {
             return false;
+        }
     }
     if (token.type != TT_NUMBER) {
         SourceError(source, "invalid return value %s\n", token.string);
