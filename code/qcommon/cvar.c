@@ -672,7 +672,7 @@ void Cvar_Restart_f(void)
             }
             // clear the var completely, since we
             // can't remove the index from the list
-            memset(var, 0, sizeof(var));
+            memset(var, '\0', sizeof(*var));
             continue;
         }
 
