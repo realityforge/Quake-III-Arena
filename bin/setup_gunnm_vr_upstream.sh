@@ -49,7 +49,7 @@ find code \
     ! -path 'code/vrmod/OpenXR/xr_linear.h' \
     ! -path 'code/vrmod/OpenXR/openxr/*' \
     ! -path 'code/renderercommon/vulkan/*' \
-    ! -path 'code/libjpeg/*' | \
+    ! -path 'code/libjpeg/*' |
     xargs clang-format -i
 git add code/
 git commit -m "Format the source code with clang-format to simplify cross-branch comparisons"

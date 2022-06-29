@@ -10,8 +10,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
 load("//build_defs:assets_filegroup.bzl", _asset_filegroup = "asset_filegroup")
+load("//third_party/content:metadata.bzl", _PAK_DATA = "PAK_DATA")
 
 def _convert_tga_to_png_impl(ctx):
     output_file = ctx.actions.declare_file(ctx.attr.out)
