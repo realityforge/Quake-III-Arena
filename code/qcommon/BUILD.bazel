@@ -39,6 +39,28 @@ cc_library(
 )
 
 cc_library(
+    name = "files",
+    srcs = ["files.c"],
+    defines = ENGINE_DEFINES,
+    deps = [
+        ":qcommon",
+        ":shared_api",
+        "@zlib//:unzip",
+    ],
+)
+
+cc_library(
+    name = "files-dedicated",
+    srcs = ["files.c"],
+    defines = SERVER_ONLY_ENGINE_DEFINES,
+    deps = [
+        ":qcommon",
+        ":shared_api",
+        "@zlib//:unzip",
+    ],
+)
+
+cc_library(
     name = "md4",
     srcs = ["md4.c"],
     copts = FULL_WARNINGS,
