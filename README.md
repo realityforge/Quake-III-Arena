@@ -143,7 +143,6 @@ The defaults for these variables differ depending on the target platform.
   cl_autoRecordDemo                 - record a new demo on each map change
   cl_aviFrameRate                   - the framerate to use when capturing video
   cl_aviMotionJpeg                  - use the mjpeg codec when capturing video
-  cl_cURLLib                        - filename of cURL library to load
   cl_consoleKeys                    - space delimited list of key names or
                                       characters that toggle the console
   cl_mouseAccelStyle                - Set to 1 for QuakeLive mouse acceleration
