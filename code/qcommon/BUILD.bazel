@@ -11,7 +11,77 @@
 # limitations under the License.
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//build_defs:rules.bzl", "FULL_WARNINGS")
+load("//build_defs:rules.bzl", "ENGINE_DEFINES", "FULL_WARNINGS", "SERVER_ONLY_ENGINE_DEFINES")
+
+# TODO: Separate out headers for cvars to here? Actually lets create a much better console var library that is probably inspired by the work in q2java modernized
+cc_library(
+    name = "cvar",
+    srcs = ["cvar.c"],
+    defines = ENGINE_DEFINES,
+    deps = [
+        ":qcommon",
+        ":shared_api",
+    ],
+)
+
+cc_library(
+    name = "md4",
+    srcs = ["md4.c"],
+    copts = FULL_WARNINGS,
+    defines = ENGINE_DEFINES,
+    deps = [
+        ":qcommon",
+        "//third_party/md4",
+    ],
+)
+
+cc_library(
+    name = "common",
+    srcs = [
+        "common.c",
+    ],
+    defines = ENGINE_DEFINES,
+    visibility = ["//code/client:__pkg__"],
+    deps = [
+        ":qcommon",
+        ":shared_api",
+    ],
+)
+
+cc_library(
+    name = "common-dedicated",
+    srcs = ["common.c"],
+    defines = SERVER_ONLY_ENGINE_DEFINES,
+    visibility = ["//code/server:__pkg__"],
+    deps = [
+        ":qcommon",
+        ":shared_api",
+    ],
+)
+
+cc_library(
+    name = "shared",
+    srcs = [
+        "q_math.c",
+        "q_shared.c",
+    ],
+    deps = [
+        ":shared_api",
+    ],
+)
+
+cc_library(
+    name = "shared_api",
+    hdrs = [
+        "cvar_common.h",
+        "cvar_engine.h",
+        #        "q_platform.h",
+        "q_shared.h",
+        "qengine.h",
+        "surfaceflags.h",
+    ],
+)
+
 cc_library(
     name = "voicechat",
     hdrs = ["voicechat.h"],
@@ -23,10 +93,69 @@ cc_library(
     hdrs = ["qfiles.h"],
 )
 
+# collision map library
+cc_library(
+    name = "cm",
+    srcs = [
+        "cm_load.c",
+        "cm_local.h",
+        "cm_patch.c",
+        "cm_patch.h",
+        "cm_polylib.c",
+        "cm_polylib.h",
+        "cm_test.c",
+        "cm_trace.c",
+    ],
+    hdrs = ["cm_local.h"],
+    defines = ENGINE_DEFINES,
+    deps = [
+        ":qcommon",
+        ":shared_api",
+    ],
+)
 
 cc_library(
     name = "base",
     hdrs = ["attributes.h"],
     copts = FULL_WARNINGS,
     visibility = ["//code/renderer:__pkg__"],
+)
+
+cc_library(
+    name = "qcommon",
+    hdrs = [
+        "cm_public.h",
+        "qcommon.h",
+    ],
+    includes = ["."],
+    visibility = [
+        "@zlib//:__pkg__",
+    ],
+    deps = [
+        ":base",
+        ":qfiles",
+        ":shared_api",
+    ],
+)
+
+_CMD_SRC = ["cmd.c"]
+
+cc_library(
+    name = "cmd",
+    srcs = _CMD_SRC,
+    defines = ENGINE_DEFINES,
+    deps = [
+        ":qcommon",
+        ":shared_api",
+    ],
+)
+
+cc_library(
+    name = "cmd-dedicated",
+    srcs = _CMD_SRC,
+    defines = SERVER_ONLY_ENGINE_DEFINES,
+    deps = [
+        ":qcommon",
+        ":shared_api",
+    ],
 )
