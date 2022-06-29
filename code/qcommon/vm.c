@@ -333,7 +333,6 @@ vm_t* VM_Create(const char* module, int (*systemCalls)(int*),
 {
     vm_t* vm;
     vmHeader_t* header;
-    int length;
     int dataLength;
     int i, remaining;
     char filename[MAX_QPATH];
@@ -383,7 +382,7 @@ vm_t* VM_Create(const char* module, int (*systemCalls)(int*),
     // load the image
     Com_sprintf(filename, sizeof(filename), "vm/%s.qvm", vm->name);
     Com_Printf("Loading vm file %s.\n", filename);
-    length = FS_ReadFile(filename, (void**)&header);
+    FS_ReadFile(filename, (void**)&header);
     if (!header) {
         Com_Printf("Failed.\n");
         VM_Free(vm);
