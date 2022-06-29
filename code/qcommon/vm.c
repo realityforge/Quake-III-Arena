@@ -646,7 +646,7 @@ void VM_VmInfo_f(void)
         } else {
             Com_Printf("interpreted\n");
             Com_Printf("    code length : %7i\n", vm->codeLength);
-            Com_Printf("    table length: %7i\n", vm->instructionCount * 4);
+            Com_Printf("    table length: %7i\n", vm->instructionPointersLength * 4);
             Com_Printf("    data length : %7i\n", vm->dataMask + 1);
         }
     }
