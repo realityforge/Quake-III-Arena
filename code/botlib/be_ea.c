@@ -217,45 +217,15 @@ void EA_View(int client, vec3_t viewangles)
 }
 void EA_EndRegular(int client, float thinktime)
 {
-    /*
-            bot_input_t *bi;
-            int jumped = false;
-
-            bi = &botinputs[client];
-
-            bi->actionflags &= ~ACTION_JUMPEDLASTFRAME;
-
-            bi->thinktime = thinktime;
-            botimport.BotInput(client, bi);
-
-            bi->thinktime = 0;
-            VectorClear(bi->dir);
-            bi->speed = 0;
-            jumped = bi->actionflags & ACTION_JUMP;
-            bi->actionflags = 0;
-            if (jumped) bi->actionflags |= ACTION_JUMPEDLASTFRAME;
-    */
 }
 void EA_GetInput(int client, float thinktime, bot_input_t* input)
 {
     bot_input_t* bi;
-    //	int jumped = false;
 
     bi = &botinputs[client];
 
-    //	bi->actionflags &= ~ACTION_JUMPEDLASTFRAME;
-
     bi->thinktime = thinktime;
     memcpy(input, bi, sizeof(bot_input_t));
-
-    /*
-    bi->thinktime = 0;
-    VectorClear(bi->dir);
-    bi->speed = 0;
-    jumped = bi->actionflags & ACTION_JUMP;
-    bi->actionflags = 0;
-    if (jumped) bi->actionflags |= ACTION_JUMPEDLASTFRAME;
-    */
 }
 void EA_ResetInput(int client)
 {
