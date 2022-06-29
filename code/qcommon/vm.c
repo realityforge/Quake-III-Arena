@@ -145,7 +145,6 @@ int ParseHex(const char* text)
 
 void VM_LoadSymbols(vm_t* vm)
 {
-    int len;
     char *mapfile, *text_p, *token;
     char name[MAX_QPATH];
     char symbols[MAX_QPATH];
@@ -163,7 +162,7 @@ void VM_LoadSymbols(vm_t* vm)
 
     COM_StripExtension(vm->name, name);
     Com_sprintf(symbols, sizeof(symbols), "vm/%s.map", name);
-    len = FS_ReadFile(symbols, (void**)&mapfile);
+    FS_ReadFile(symbols, (void**)&mapfile);
     if (!mapfile) {
         Com_Printf("Couldn't load symbol file: %s\n", symbols);
         return;
@@ -245,7 +244,6 @@ This allows a server to do a map_restart without changing memory allocation
 vm_t* VM_Restart(vm_t* vm)
 {
     vmHeader_t* header;
-    int length;
     int dataLength;
     int i;
     char filename[MAX_QPATH];
@@ -268,7 +266,7 @@ vm_t* VM_Restart(vm_t* vm)
     Com_Printf("VM_Restart()\n", filename);
     Com_sprintf(filename, sizeof(filename), "vm/%s.qvm", vm->name);
     Com_Printf("Loading vm file %s.\n", filename);
-    length = FS_ReadFile(filename, (void**)&header);
+    FS_ReadFile(filename, (void**)&header);
     if (!header) {
         Com_Error(ERR_DROP, "VM_Restart failed.\n");
     }
