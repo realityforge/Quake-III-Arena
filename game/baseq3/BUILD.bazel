@@ -17,9 +17,6 @@ load("//third_party/content:metadata.bzl", "REPLACE_RULES")
 copy_to_directory(
     name = "baseq3",
     srcs = [
-        ":cl_game.wasm",
-        ":sv_game.wasm",
-        ":ui.wasm",
         "//content/baseq3:materials",
         "//content/baseq3:skin_assets",
         "@QuakeArenaArcade_baseq3//:files",
