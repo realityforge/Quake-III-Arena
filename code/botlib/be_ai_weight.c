@@ -477,10 +477,10 @@ float FuzzyWeightUndecided(int* inventory, weightconfig_t* wc, int weightnum)
     return 0;
 #endif
 }
-void Evolvefuzzyseparator_r(fuzzyseparator_t* fs)
+void EvolveFuzzySeparator_r(fuzzyseparator_t* fs)
 {
     if (fs->child) {
-        Evolvefuzzyseparator_r(fs->child);
+        EvolveFuzzySeparator_r(fs->child);
     } else if (fs->type == WT_BALANCE) {
         // every once in a while an evolution leap occurs, mutation
         if (random() < 0.01)
@@ -494,20 +494,20 @@ void Evolvefuzzyseparator_r(fuzzyseparator_t* fs)
             fs->maxweight = fs->weight;
     }
     if (fs->next)
-        Evolvefuzzyseparator_r(fs->next);
+        EvolveFuzzySeparator_r(fs->next);
 }
 void EvolveWeightConfig(weightconfig_t* config)
 {
     int i;
 
     for (i = 0; i < config->numweights; i++) {
-        Evolvefuzzyseparator_r(config->weights[i].firstseparator);
+        EvolveFuzzySeparator_r(config->weights[i].firstseparator);
     }
 }
-void Scalefuzzyseparator_r(fuzzyseparator_t* fs, float scale)
+void ScaleFuzzySeparator_r(fuzzyseparator_t* fs, float scale)
 {
     if (fs->child) {
-        Scalefuzzyseparator_r(fs->child, scale);
+        ScaleFuzzySeparator_r(fs->child, scale);
     } else if (fs->type == WT_BALANCE) {
         fs->weight = (fs->maxweight + fs->minweight) * scale;
         // get the weight between bounds
@@ -517,7 +517,7 @@ void Scalefuzzyseparator_r(fuzzyseparator_t* fs, float scale)
             fs->weight = fs->maxweight;
     }
     if (fs->next)
-        Scalefuzzyseparator_r(fs->next, scale);
+        ScaleFuzzySeparator_r(fs->next, scale);
 }
 void ScaleFuzzySeparatorBalanceRange_r(fuzzyseparator_t* fs, float scale)
 {
@@ -535,7 +535,7 @@ void ScaleFuzzySeparatorBalanceRange_r(fuzzyseparator_t* fs, float scale)
     if (fs->next)
         ScaleFuzzySeparatorBalanceRange_r(fs->next, scale);
 }
-int Interbreedfuzzyseparator_r(fuzzyseparator_t* fs1, fuzzyseparator_t* fs2,
+int InterbreedFuzzySeparator_r(fuzzyseparator_t* fs1, fuzzyseparator_t* fs2,
                                fuzzyseparator_t* fsout)
 {
     if (fs1->child) {
@@ -543,7 +543,7 @@ int Interbreedfuzzyseparator_r(fuzzyseparator_t* fs1, fuzzyseparator_t* fs2,
             botimport.Print(PRT_ERROR, "cannot interbreed weight configs, unequal child\n");
             return false;
         }
-        if (!Interbreedfuzzyseparator_r(fs2->child, fs2->child, fsout->child)) {
+        if (!InterbreedFuzzySeparator_r(fs2->child, fs2->child, fsout->child)) {
             return false;
         }
     } else if (fs1->type == WT_BALANCE) {
@@ -562,7 +562,7 @@ int Interbreedfuzzyseparator_r(fuzzyseparator_t* fs1, fuzzyseparator_t* fs2,
             botimport.Print(PRT_ERROR, "cannot interbreed weight configs, unequal next\n");
             return false;
         }
-        if (!Interbreedfuzzyseparator_r(fs1->next, fs2->next, fsout->next)) {
+        if (!InterbreedFuzzySeparator_r(fs1->next, fs2->next, fsout->next)) {
             return false;
         }
     }
@@ -581,7 +581,7 @@ void InterbreedWeightConfigs(weightconfig_t* config1, weightconfig_t* config2,
         return;
     }
     for (i = 0; i < config1->numweights; i++) {
-        Interbreedfuzzyseparator_r(config1->weights[i].firstseparator,
+        InterbreedFuzzySeparator_r(config1->weights[i].firstseparator,
                                    config2->weights[i].firstseparator,
                                    configout->weights[i].firstseparator);
     }
