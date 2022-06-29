@@ -206,7 +206,6 @@ copied out.
 bool Netchan_Process(netchan_t* chan, msg_t* msg)
 {
     int sequence;
-    int qport;
     int fragmentStart, fragmentLength;
     bool fragmented;
 
@@ -225,9 +224,9 @@ bool Netchan_Process(netchan_t* chan, msg_t* msg)
         fragmented = false;
     }
 
-    // read the qport if we are a server
     if (chan->sock == NS_SERVER) {
-        qport = MSG_ReadShort(msg);
+        // read the qport if we are a server
+        MSG_ReadShort(msg);
     }
 
     // read the fragment information
