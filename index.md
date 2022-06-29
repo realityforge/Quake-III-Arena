@@ -127,7 +127,7 @@ These changes have not been started but are things that the project is consideri
       <td><a href="settings.html">Settings</a></td>
       <td>Ideation</td>
       <td>Rebuild "cvars" as "settings".</td>
-      <td>Not yet ready for implementation as it impacts a log of code and should only be attempted once the decision has been made to base development of the initial codebase or the ioq3 fork.</td>
+      <td>Not yet ready for implementation as it impacts a lot of code and should only be attempted once the decision has been made to base development of the initial codebase or the ioq3 fork.</td>
     </tr>
     <tr valign="top">
       <td><a href="engine_api.html">Engine Remote API</a></td>
