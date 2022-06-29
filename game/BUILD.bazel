@@ -9,3 +9,30 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+load("//build_defs:copy_to_directory.bzl", "copy_to_directory")
+
+copy_to_directory(
+    name = "package_dir",
+    allow_symlink = True,
+    prefix_mapped_srcs = {
+        # Base game
+        "//game/baseq3:pak0": "pak0:baseq3/pak0",
+
+        # TeamArena game
+        "//game/teamarena:pak0": "pak0:missionpack/pak0",
+    },
+)
+
+genrule(
+    name = "package",
+    srcs = [":package_dir"],
+    outs = ["Quake3Arena.zip"],
+    cmd = """
+export ZIPPER=`pwd`/$(execpath @bazel_tools//tools/zip:zipper)
+export TARGET=`pwd`/$@
+cd $(rootpath :package_dir)
+find .  ! -type d |  sed -e "s/^\\.\\///" | awk '{print "\\"" $$0 "\\"" }' | sort | xargs $${ZIPPER} c $${TARGET}
+    """,
+    tags = ["manual"],
+    tools = ["@bazel_tools//tools/zip:zipper"],
+)
