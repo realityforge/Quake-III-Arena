@@ -84,6 +84,15 @@ The major changes of the project are tracked in this table.
       <td>2022-05-20</td>
       <td>2022-06-14</td>
     </tr>
+    <tr valign="top">
+      <td><a href="wasm.html">Wasm - Phase 1</a></td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>Complete</td>
+      <td>2022-06-20</td>
+      <td>2022-06-29</td>
+    </tr>
   </tbody>
 </table>
 
@@ -110,12 +119,6 @@ These changes have not been started but are things that the project is consideri
       <td>Ideation</td>
       <td>Rebuild "cvars" as "settings".</td>
       <td>Not yet ready for implementation as it impacts a log of code and should only be attempted once the decision has been made to base development of the initial codebase or the ioq3 fork.</td>
-    </tr>
-    <tr valign="top">
-      <td><a href="wasm.html">Wasm</a></td>
-      <td>Prototyping</td>
-      <td>Convert VM code to use Wasm instruction architecture and runtime.</td>
-      <td>Substantial experimentation required.</td>
     </tr>
     <tr valign="top">
       <td><a href="engine_api.html">Engine Remote API</a></td>
