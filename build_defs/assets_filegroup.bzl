@@ -13,7 +13,9 @@
 load("//build_defs:transitions.bzl", _platform_transition_filegroup = "platform_transition_filegroup")
 
 def asset_filegroup(name, srcs, **kwargs):
-    """Define a filegroup in the "none" platform.
+    """
+    Define a filegroup in the "none" platform.
+
     The "none" platform intended to be used to build assets as it declares no operating system or cpu and thus
     compilation can not be done for that platform.
 
