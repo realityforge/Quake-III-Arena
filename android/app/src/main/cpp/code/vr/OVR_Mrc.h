@@ -1,30 +1,30 @@
-/** 
+/**
  * @mainpage OVRMrcLib
  *
  * @section intro_sec Introduction
  *
  * OVRMrcLib is a library which supports Mixed Reality Capture on Oculus Quest.
- * 
+ *
  * The library provides:
  *   1. load an existing camera configuration, so application can obtain the intrinsics and extrinsics information, and construct the virtual camera(s) which matches the physical camera
  *   2. encoding and streaming the output of the virtual camera(s) through WIFI
- * 
+ *
  * Please check https://developer.oculus.com/documentation/mrc/mr-intro/ for detailed information about Mixed Reality Capture
  *
  * @section integration_sec Integration
- * 
- * The interfaces in OVR_Mrc.h is only a development reference and shouldn't be called directly. 
- * 
+ *
+ * The interfaces in OVR_Mrc.h is only a development reference and shouldn't be called directly.
+ *
  * To integrate OVRMrcLib to your project:
  *   1. Including Shim/OVR_Mrc_Shim.h and Shim/OVR_Mrc_Shim.cpp
  *   2. call ovrm_LoadSharedLibrary()
  *   3. Call ovrm_GetAPIs().Func() to access individual functions
  *   4. call ovrm_UnloadSharedLibrary() when quitting application
- * 
+ *
  * Here is a brief summary of the MRC workflow. Please investigate our Unity / UE4 integration code to get futher details.
  *
  * @subsection initialization_subsec Initialization
- * 
+ *
  *   1. (initialize the Oculus Mobile SDK)
  *   2. ovrm_Initialize()
  *   3. // setup graphics APIs
@@ -32,9 +32,9 @@
  *     2. ovrm_ConfigureVulkan(), ovrm_SetAvailableQueueIndexVulkan() // if Vulkan
  *   4. ovrm_SetMrcActivationMode()
  *   5. ovrm_SetMrcInputVideoBufferType(), ovrm_SetMrcAudioSampleRate()
- * 
+ *
  * @subsection gameloop_subsec Game loop
- * 
+ *
  *   1. ovrm_Update()
  *   2. ovrm_GetMrcActivationMode()
  *   3. if MRC is activated ...
@@ -45,9 +45,9 @@
  *     4. for every other frame ...
  *       1. call ovrm_SyncMrcFrame() with the syncId from the last ovrm_EncodeXXX()
  *       1. call ovrm_EncodeMrcFrame() or ovrm_EncodeMrcFrameWithDualTextures() to submit the RenderTexture handle from the virtual camera
- * 
+ *
  * @subsection cleanup Cleanup
- * 
+ *
  *   1. ovrm_Shutdown()
  */
 
@@ -66,7 +66,7 @@
 extern "C" {
 #endif
 
-/** 
+/**
  * Get the verison of Oculus Mrc library
  * @param majorVersion pointer to store the major version
  * @param minorVersion pointer to store the minor version
@@ -74,7 +74,7 @@ extern "C" {
  */
 OVRM_EXPORT ovrmResult ovrm_GetVersions(int* majorVersion, int* minorVersion, int* patchVersion);
 
-/** 
+/**
  * Initialize Oculus Mrc library
  * @param nativeSDKPointer VR session pointer. e.g. ovrMobile*
  * @param javaVM JavaVM. Must be passed through JNI_OnLoad() if nullptr is specified
@@ -82,15 +82,15 @@ OVRM_EXPORT ovrmResult ovrm_GetVersions(int* majorVersion, int* minorVersion, in
  */
 OVRM_EXPORT ovrmResult ovrm_Initialize(void* nativeSDKPointer, void* javaVM, void* activityObject);
 
-/** 
+/**
  * Configure Mrc library in GLES mode
  * @param eglContent The EGLContext which will be used in app rendering. OVRMrcLib will create a shared context based on it
  * @param noErrorContext Ture if the eglContext was created with EGL_CONTEXT_OPENGL_NO_ERROR_KHR
- * @param srgbFrontBuffer True if the texture to be encoded would be in SRGB format 
+ * @param srgbFrontBuffer True if the texture to be encoded would be in SRGB format
  */
 OVRM_EXPORT ovrmResult ovrm_ConfigureGLES(void* eglContext, bool noErrorContext, bool srgbFrontBuffer);
 
-/** 
+/**
  * Configure Mrc library in Vulkan mode
  * @param vkInstance handle to the Vulkan instance object
  * @param vkPhysicalInstance handle to the Vulkan physical instance object
@@ -106,7 +106,7 @@ OVRM_EXPORT ovrmResult ovrm_ConfigureVulkan(void* vkInstance, void* vkPhysicalDe
  */
 OVRM_EXPORT ovrmResult ovrm_SetAvailableQueueIndexVulkan(unsigned int queueIndexVk);
 
-/** 
+/**
  * Shutdown Oculus Mrc library
  */
 OVRM_EXPORT ovrmResult ovrm_Shutdown();
@@ -141,7 +141,7 @@ OVRM_EXPORT ovrmResult ovrm_SetMrcActivationMode(ovrmMediaMrcActivationMode acti
 OVRM_EXPORT ovrmResult ovrm_IsMrcEnabled(ovrmBool* mrcEnabled);
 
 /**
- * Get if MRC is activated, which means the Quest app should construct the 3rd person camera and call 
+ * Get if MRC is activated, which means the Quest app should construct the 3rd person camera and call
  * ovrm_EncodeMrcFrame/ovrm_EncodeMrcFrameWithDualTextures with a frequency around 30Hz
  * @param mrcActivated store the activated status
  */
@@ -153,22 +153,22 @@ OVRM_EXPORT ovrmResult ovrm_IsMrcActivated(ovrmBool* mrcActivated);
  */
 OVRM_EXPORT ovrmResult ovrm_UseMrcDebugCamera(ovrmBool* useMrcDebugCamera);
 
-/** 
+/**
  * Set the input video buffer type for encoding / streaming
  * @param inputVideoBufferType the input buffer type. only ovrmMediaInputVideoBufferType_TextureHandle is supported
  */
 OVRM_EXPORT ovrmResult ovrm_SetMrcInputVideoBufferType(ovrmMediaInputVideoBufferType inputVideoBufferType);
 
-/** 
+/**
  * Get the input video buffer type for encoding / streaming
  * @param inputVideoBufferType store the current input buffer type
  */
 OVRM_EXPORT ovrmResult ovrm_GetMrcInputVideoBufferType(ovrmMediaInputVideoBufferType* inputVideoBufferType);
 
-/** 
- * Set the target frame size for encoding / streaming. 
- * It's the dimension of the texture which the game would submit for encoding. 
- * If app need a different frame size other than default, it need to call this function before connecting to a client. 
+/**
+ * Set the target frame size for encoding / streaming.
+ * It's the dimension of the texture which the game would submit for encoding.
+ * If app need a different frame size other than default, it need to call this function before connecting to a client.
  * @param frameWidth width of the video frame
  * @param frameHeight height of the video frame
  */
@@ -176,7 +176,7 @@ OVRM_EXPORT ovrmResult ovrm_SetMrcFrameSize(int frameWidth, int frameHeight);
 
 /**
  * Get the target frame size for encoding / streaming.
- * Game should allocate the render target matches the size of MRC frame. 
+ * Game should allocate the render target matches the size of MRC frame.
  * @param frameWidth store the width of the video frame
  * @param frameHeight store the height of the video frame
  */

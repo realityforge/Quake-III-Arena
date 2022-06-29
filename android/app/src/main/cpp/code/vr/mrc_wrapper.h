@@ -16,7 +16,6 @@ typedef struct {
     int cameraCount;
 } MRCCameraSet;
 
-
 typedef struct {
     int width;
     int height;
@@ -26,9 +25,9 @@ typedef struct {
 extern "C" {
 #endif
 
-void MRC_Init( ovrJava java );
-void MRC_Destroy( void );
-MRCCameraSet MRC_GetCamera( void );
+void MRC_Init(ovrJava java);
+void MRC_Destroy(void);
+MRCCameraSet MRC_GetCamera(void);
 MRCResolution MRC_GetResolution();
 void MRC_Update(double timestamp);
 

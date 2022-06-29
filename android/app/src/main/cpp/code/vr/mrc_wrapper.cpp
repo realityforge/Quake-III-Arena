@@ -5,11 +5,16 @@
 #include <android/log.h>
 #include <GLES3/gl3.h>
 
-#define CHECK_MRC(func) {ovrmResult res = func; if (res != ovrmSuccess) __android_log_print(ANDROID_LOG_ERROR, "[MRC]", "error[%d]: %s", res, #func);}
+#define CHECK_MRC(func)                                                                   \
+    {                                                                                     \
+        ovrmResult res = func;                                                            \
+        if (res != ovrmSuccess)                                                           \
+            __android_log_print(ANDROID_LOG_ERROR, "[MRC]", "error[%d]: %s", res, #func); \
+    }
 
 unsigned char* MRC_Texture = nullptr;
 
-void MRC_Init( ovrJava java )
+void MRC_Init(ovrJava java)
 {
     ovrm_LoadSharedLibrary(nullptr);
     CHECK_MRC(ovrm_GetAPIs()->Initialize(ovrm_GetAPIs(), java.Vm, java.ActivityObject));
@@ -20,29 +25,28 @@ void MRC_Init( ovrJava java )
     CHECK_MRC(ovrm_GetAPIs()->SetMrcAudioSampleRate(22050));
 }
 
-void MRC_Destroy( void )
+void MRC_Destroy(void)
 {
     CHECK_MRC(ovrm_GetAPIs()->Shutdown());
     ovrm_UnloadSharedLibrary();
-    if (MRC_Texture) delete[] MRC_Texture;
+    if (MRC_Texture)
+        delete[] MRC_Texture;
     MRC_Texture = nullptr;
 }
 
-MRCCameraSet MRC_GetCamera( void )
+MRCCameraSet MRC_GetCamera(void)
 {
     MRCCameraSet output = {};
     ovrmBool activated = ovrmBool_False;
     CHECK_MRC(ovrm_GetAPIs()->Update());
     ovrm_GetAPIs()->IsMrcActivated(&activated);
-    if (activated == ovrmBool_False)
-    {
+    if (activated == ovrmBool_False) {
         output.cameraCount = 0;
         return output;
     }
 
     CHECK_MRC(ovrm_GetAPIs()->GetExternalCameraCount(&output.cameraCount));
-    for (int i = 0; i < output.cameraCount; i++)
-    {
+    for (int i = 0; i < output.cameraCount; i++) {
         ovrmCameraIntrinsics intrinsics;
         CHECK_MRC(ovrm_GetAPIs()->GetExternalCameraIntrinsics(i, &intrinsics));
         output.camera[i].fov.angleLeft = -atanf(intrinsics.FOVPort.LeftTan);
@@ -74,7 +78,8 @@ void MRC_Update(double timestamp)
 {
     int syncId;
     MRCResolution resolution = MRC_GetResolution();
-    if (!MRC_Texture) MRC_Texture = new unsigned char[resolution.width * resolution.height * 4];
+    if (!MRC_Texture)
+        MRC_Texture = new unsigned char[resolution.width * resolution.height * 4];
     glReadPixels(0, 0, resolution.width, resolution.height, GL_RGBA, GL_UNSIGNED_BYTE, MRC_Texture);
 
     CHECK_MRC(ovrm_GetAPIs()->EncodeMrcFrame(MRC_Texture, 0, 0, 0, timestamp, &syncId));
