@@ -135,8 +135,8 @@ test --java_language_version=11
 build --tool_java_language_version=11
 test --tool_java_language_version=11
 
-# Remove unused header compilation
-build --java_header_compilation
+# Remove unused java header compilation
+build --nojava_header_compilation
 
 # Enable the experimental persistent Java compiler.
 build --experimental_persistent_javac
