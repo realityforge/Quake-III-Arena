@@ -2286,7 +2286,7 @@ we are not interested in a download string format, we want something human-reada
 bool FS_ComparePaks(char* neededpaks, int len, bool dlstring)
 {
     searchpath_t* sp;
-    bool havepak, badchecksum;
+    bool havepak;
     int i;
 
     if (!fs_numServerReferencedPaks) {
@@ -2297,7 +2297,6 @@ bool FS_ComparePaks(char* neededpaks, int len, bool dlstring)
 
     for (i = 0; i < fs_numServerReferencedPaks; i++) {
         // Ok, see if we have this pak file
-        badchecksum = false;
         havepak = false;
 
         // never autodownload any of the id paks
