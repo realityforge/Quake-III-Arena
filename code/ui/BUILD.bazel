@@ -70,7 +70,6 @@ cc_library(
     srcs = ["ui_syscalls.c"],
     copts = UI_COPTS,
     visibility = [
-        "//code/q3_ui:__pkg__",
         "//game/baseq3:__pkg__",
         "//game/teamarena:__pkg__",
     ],
