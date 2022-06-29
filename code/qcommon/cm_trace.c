@@ -664,8 +664,6 @@ void CM_TraceThroughSphere(traceWork_t* tw, vec3_t origin, float radius, vec3_t 
     //	b = 2 * (dir[0] * (start[0] - origin[0]) + dir[1] * (start[1] - origin[1]) + dir[2] * (start[2] - origin[2]));
     //	c = (start[0] - origin[0])^2 + (start[1] - origin[1])^2 + (start[2] - origin[2])^2 - radius^2;
     VectorSubtract(start, origin, v1);
-    // dir is normalized so a = 1
-    a = 1.0f; // dir[0] * dir[0] + dir[1] * dir[1] + dir[2] * dir[2];
     b = 2.0f * (dir[0] * v1[0] + dir[1] * v1[1] + dir[2] * v1[2]);
     c = v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2] - (radius + RADIUS_EPSILON) * (radius + RADIUS_EPSILON);
 
@@ -748,8 +746,6 @@ void CM_TraceThroughVerticalCylinder(traceWork_t* tw, vec3_t origin, float radiu
         return;
     }
     VectorSubtract(start, origin, v1);
-    // dir is normalized so we can use a = 1
-    a = 1.0f; // * (dir[0] * dir[0] + dir[1] * dir[1]);
     b = 2.0f * (v1[0] * dir[0] + v1[1] * dir[1]);
     c = v1[0] * v1[0] + v1[1] * v1[1] - (radius + RADIUS_EPSILON) * (radius + RADIUS_EPSILON);
 
