@@ -60,6 +60,12 @@ config_setting(
     visibility = ["//visibility:public"],
 )
 
+config_setting(
+    name = "wasm",
+    values = {"cpu": "wasm"},
+    visibility = ["//visibility:public"],
+)
+
 constraint_value(
     name = "cpu_none",
     constraint_setting = "@platforms//cpu:cpu",
