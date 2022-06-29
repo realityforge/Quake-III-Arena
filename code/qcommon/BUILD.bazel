@@ -75,7 +75,6 @@ cc_library(
     hdrs = [
         "cvar_common.h",
         "cvar_engine.h",
-        #        "q_platform.h",
         "q_shared.h",
         "qengine.h",
         "surfaceflags.h",
