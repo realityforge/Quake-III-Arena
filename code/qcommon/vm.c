@@ -34,6 +34,7 @@ and one exported function: Perform
 */
 
 #include "vm_local.h"
+#include "cvar_engine.h"
 
 vm_t* currentVM = NULL;
 vm_t* lastVM = NULL;
