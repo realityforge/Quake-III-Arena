@@ -2443,7 +2443,6 @@ static void FS_ReorderPurePaks()
 static void FS_Startup(const char* gameName)
 {
     const char* homePath;
-    cvar_t* fs;
 
     Com_Printf("----- FS_Startup -----\n");
 
