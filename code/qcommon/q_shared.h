@@ -517,8 +517,6 @@ typedef struct {
 
 unsigned ColorBytes4(float r, float g, float b, float a);
 
-float NormalizeColor(const vec3_t in, vec3_t out);
-
 float RadiusFromBounds(const vec3_t mins, const vec3_t maxs);
 void ClearBounds(vec3_t mins, vec3_t maxs);
 void AddPointToBounds(const vec3_t v, vec3_t mins, vec3_t maxs);
