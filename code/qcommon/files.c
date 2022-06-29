@@ -307,7 +307,7 @@ FS_LoadStack
 return load stack
 =================
 */
-int FS_LoadStack(void)
+int FS_LoadStack()
 {
     return fs_loadStack;
 }
