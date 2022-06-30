@@ -663,7 +663,7 @@ void AAS_InitRoutingUpdate(void)
 }
 void AAS_CreateAllRoutingCache(void)
 {
-    int i, j, t;
+    int i, j;
 
     aasworld.initialized = true;
     botimport.Print(PRT_MESSAGE, "AAS_CreateAllRoutingCache\n");
@@ -675,7 +675,7 @@ void AAS_CreateAllRoutingCache(void)
                 continue;
             if (!AAS_AreaReachability(j))
                 continue;
-            t = AAS_AreaTravelTimeToGoalArea(i, aasworld.areas[i].center, j, TFL_DEFAULT);
+            AAS_AreaTravelTimeToGoalArea(i, aasworld.areas[i].center, j, TFL_DEFAULT);
         }
     }
     aasworld.initialized = false;
