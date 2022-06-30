@@ -15,9 +15,7 @@ load("//build_defs:rules.bzl", "CLIENT_GAME_DEFINES", "SERVER_GAME_COPTS", "SERV
 
 cc_library(
     name = "bg_api",
-    hdrs = [
-        "bg_public.h",
-    ],
+    hdrs = ["bg_public.h"],
     visibility = [
         "//code/cgame:__pkg__",
         "//code/client:__pkg__",
@@ -25,37 +23,23 @@ cc_library(
         "//code/server:__pkg__",
         "//code/ui:__pkg__",
     ],
-    deps = [
-        "//code/qcommon:shared_api",
-    ],
+    deps = ["//code/qcommon:shared_api"],
 )
 
 cc_library(
     name = "server_api",
-    hdrs = [
-        "g_public.h",
-    ],
-    visibility = [
-        "//code/server:__pkg__",
-    ],
-    deps = [
-        "//code/qcommon:shared_api",
-    ],
+    hdrs = ["g_public.h"],
+    visibility = ["//code/server:__pkg__"],
+    deps = ["//code/qcommon:shared_api"],
 )
 
 # TODO: This should not be a CC library as it is targeting qvm but we can address later
 cc_library(
     name = "bg_lib-qvm",
-    srcs = [
-        "bg_lib.c",
-    ],
-    hdrs = [
-        "bg_lib.h",
-    ],
+    srcs = ["bg_lib.c"],
+    hdrs = ["bg_lib.h"],
     copts = ["-Wno-empty-translation-unit"],
-    visibility = [
-        "//code/cgame:__pkg__",
-    ],
+    visibility = ["//code/cgame:__pkg__"],
 )
 
 cc_library(
