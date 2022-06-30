@@ -417,7 +417,7 @@ int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
     float phys_maxwalkvelocity, phys_maxcrouchvelocity, phys_maxswimvelocity;
     float phys_maxstep, phys_maxsteepness, phys_jumpvel, friction;
     float gravity, delta, maxvel, wishspeed, accelerate;
-    int n, i, j, pc, step, swimming, ax, crouch, event, jump_frame, areanum;
+    int n, i, j, pc, step, swimming, crouch, event, jump_frame, areanum;
     int areas[20], numareas;
     vec3_t points[20];
     vec3_t org, end, feet, start, stepend, lastorg, wishdir;
@@ -468,7 +468,6 @@ int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
         crouch = false;
         // apply command movement
         if (n < cmdframes) {
-            ax = 0;
             maxvel = phys_maxwalkvelocity;
             accelerate = phys_airaccelerate;
             VectorCopy(cmdmove, wishdir);
@@ -487,12 +486,10 @@ int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
                 } else {
                     accelerate = phys_walkaccelerate;
                 }
-                ax = 2;
             }
             if (swimming) {
                 maxvel = phys_maxswimvelocity;
                 accelerate = phys_swimaccelerate;
-                ax = 3;
             } else {
                 wishdir[2] = 0;
             }
