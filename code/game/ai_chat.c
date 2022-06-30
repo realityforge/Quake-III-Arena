@@ -929,7 +929,7 @@ int BotChat_Random(bot_state_t* bs)
 
 float BotChatTime(bot_state_t* bs)
 {
-    return 2.0;
+    return 2.0F;
 }
 
 void BotChatTest(bot_state_t* bs)
