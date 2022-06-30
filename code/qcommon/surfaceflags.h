@@ -30,6 +30,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define CONTENTS_WATER 32
 #define CONTENTS_FOG 64
 
+#define CONTENTS_NOTTEAM1 0x0080
+#define CONTENTS_NOTTEAM2 0x0100
+#define CONTENTS_NOBOTCLIP 0x0200
+
 #define CONTENTS_AREAPORTAL 0x8000
 
 #define CONTENTS_PLAYERCLIP 0x10000
@@ -39,6 +43,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define CONTENTS_JUMPPAD 0x80000
 #define CONTENTS_CLUSTERPORTAL 0x100000
 #define CONTENTS_DONOTENTER 0x200000
+#define CONTENTS_BOTCLIP 0x400000
+#define CONTENTS_MOVER 0x800000
 
 #define CONTENTS_ORIGIN 0x1000000 // removed before bsping an entity
 
@@ -67,4 +73,5 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define SURF_NONSOLID 0x4000 // don't collide against curves with this set
 #define SURF_LIGHTFILTER 0x8000 // act as a light filter during q3map -light
 #define SURF_ALPHASHADOW 0x10000 // do per-pixel light shadow casting in q3map
-#define SURF_NODLIGHT 0x20000 // never add dynamic lights
+#define SURF_NODLIGHT 0x20000 // don't dlight even if solid (solid lava, skies)
+#define SURF_DUST 0x40000 // leave a dust trail when walking on this surface
