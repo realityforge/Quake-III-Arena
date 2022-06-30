@@ -897,7 +897,7 @@ static void G_VoiceTo(gentity_t* ent, gentity_t* other, int mode, const char* id
         return;
     }
     // no chatting to players in tournaments
-    if ((g_gametype.integer == GT_TOURNAMENT)) {
+    if (g_gametype.integer == GT_TOURNAMENT) {
         return;
     }
 
