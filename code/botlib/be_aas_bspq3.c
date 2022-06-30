@@ -223,7 +223,7 @@ int AAS_IntForBSPEpairKey(int ent, char* key, int* value)
     *value = atoi(buf);
     return true;
 }
-void AAS_FreeBSPEntities(void)
+void AAS_FreeBSPEntities()
 {
     int i;
     bsp_entity_t* ent;
@@ -242,7 +242,7 @@ void AAS_FreeBSPEntities(void)
     }
     bspworld.numentities = 0;
 }
-void AAS_ParseBSPEntities(void)
+void AAS_ParseBSPEntities()
 {
     script_t* script;
     token_t token;
@@ -301,7 +301,7 @@ void AAS_ParseBSPEntities(void)
     }
     FreeScript(script);
 }
-void AAS_DumpBSPData(void)
+void AAS_DumpBSPData()
 {
     AAS_FreeBSPEntities();
 
@@ -315,7 +315,7 @@ void AAS_DumpBSPData(void)
 //===========================================================================
 // load a bsp file
 //===========================================================================
-int AAS_LoadBSPFile(void)
+int AAS_LoadBSPFile()
 {
     AAS_DumpBSPData();
     bspworld.entdatasize = strlen(botimport.BSPEntityData()) + 1;

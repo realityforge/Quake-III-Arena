@@ -74,7 +74,7 @@ void LibVarDeAlloc(libvar_t* v)
         FreeMemory(v->string);
     FreeMemory(v);
 }
-void LibVarDeAllocAll(void)
+void LibVarDeAllocAll()
 {
     libvar_t* v;
 

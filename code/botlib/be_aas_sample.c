@@ -76,7 +76,7 @@ void AAS_PresenceTypeBoundingBox(int presencetype, vec3_t mins, vec3_t maxs)
     VectorCopy(boxmins[index], mins);
     VectorCopy(boxmaxs[index], maxs);
 }
-void AAS_InitAASLinkHeap(void)
+void AAS_InitAASLinkHeap()
 {
     int i, max_aaslinks;
 
@@ -106,14 +106,14 @@ void AAS_InitAASLinkHeap(void)
     aasworld.freelinks = &aasworld.linkheap[0];
     numaaslinks = max_aaslinks;
 }
-void AAS_FreeAASLinkHeap(void)
+void AAS_FreeAASLinkHeap()
 {
     if (aasworld.linkheap)
         FreeMemory(aasworld.linkheap);
     aasworld.linkheap = NULL;
     aasworld.linkheapsize = 0;
 }
-aas_link_t* AAS_AllocAASLink(void)
+aas_link_t* AAS_AllocAASLink()
 {
     aas_link_t* link;
 
@@ -145,7 +145,7 @@ void AAS_DeAllocAASLink(aas_link_t* link)
     aasworld.freelinks = link;
     numaaslinks++;
 }
-void AAS_InitAASLinkedEntities(void)
+void AAS_InitAASLinkedEntities()
 {
     if (!aasworld.loaded)
         return;
@@ -154,7 +154,7 @@ void AAS_InitAASLinkedEntities(void)
     aasworld.arealinkedentities = (aas_link_t**)GetClearedHunkMemory(
         aasworld.numareas * sizeof(aas_link_t*));
 }
-void AAS_FreeAASLinkedEntities(void)
+void AAS_FreeAASLinkedEntities()
 {
     if (aasworld.arealinkedentities)
         FreeMemory(aasworld.arealinkedentities);

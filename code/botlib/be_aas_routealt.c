@@ -169,7 +169,7 @@ int AAS_AlternativeRouteGoals(vec3_t start, int startareanum, vec3_t goal, int g
 #endif
     return numaltroutegoals;
 }
-void AAS_InitAlternativeRouting(void)
+void AAS_InitAlternativeRouting()
 {
     if (midrangeareas)
         FreeMemory(midrangeareas);
@@ -178,7 +178,7 @@ void AAS_InitAlternativeRouting(void)
         FreeMemory(clusterareas);
     clusterareas = (int*)GetMemory(aasworld.numareas * sizeof(int));
 }
-void AAS_ShutdownAlternativeRouting(void)
+void AAS_ShutdownAlternativeRouting()
 {
     if (midrangeareas)
         FreeMemory(midrangeareas);

@@ -82,15 +82,15 @@ int AAS_IndexFromString(char* indexname, char* stringindex[], int numindexes, ch
     }
     return 0;
 }
-int AAS_Loaded(void)
+int AAS_Loaded()
 {
     return aasworld.loaded;
 }
-int AAS_Initialized(void)
+int AAS_Initialized()
 {
     return aasworld.initialized;
 }
-void AAS_SetInitialized(void)
+void AAS_SetInitialized()
 {
     aasworld.initialized = true;
     botimport.Print(PRT_MESSAGE, "AAS initialized.\n");
@@ -165,7 +165,7 @@ int AAS_StartFrame(float time)
     aasworld.numframes++;
     return BLERR_NOERROR;
 }
-float AAS_Time(void)
+float AAS_Time()
 {
     return aasworld.time;
 }
@@ -240,7 +240,7 @@ int AAS_LoadMap(const char* mapname)
 //===========================================================================
 // called when the library is first loaded
 //===========================================================================
-int AAS_Setup(void)
+int AAS_Setup()
 {
     aasworld.maxclients = (int)LibVarValue("maxclients", "128");
     aasworld.maxentities = (int)LibVarValue("maxentities", "1024");
@@ -258,7 +258,7 @@ int AAS_Setup(void)
     aasworld.numframes = 0;
     return BLERR_NOERROR;
 }
-void AAS_Shutdown(void)
+void AAS_Shutdown()
 {
     AAS_ShutdownAlternativeRouting();
     AAS_DumpBSPData();

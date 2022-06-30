@@ -291,7 +291,7 @@ int* ItemWeightIndex(weightconfig_t* iwc, itemconfig_t* ic)
     }
     return index;
 }
-void InitLevelItemHeap(void)
+void InitLevelItemHeap()
 {
     int i, max_levelitems;
 
@@ -307,7 +307,7 @@ void InitLevelItemHeap(void)
     levelitemheap[max_levelitems - 1].next = NULL;
     freelevelitems = levelitemheap;
 }
-levelitem_t* AllocLevelItem(void)
+levelitem_t* AllocLevelItem()
 {
     levelitem_t* li;
 
@@ -342,7 +342,7 @@ void RemoveLevelItemFromList(levelitem_t* li)
     if (li->next)
         li->next->prev = li->prev;
 }
-void BotFreeInfoEntities(void)
+void BotFreeInfoEntities()
 {
     maplocation_t *ml, *nextml;
     campspot_t *cs, *nextcs;
@@ -358,7 +358,7 @@ void BotFreeInfoEntities(void)
     }
     campspots = NULL;
 }
-void BotInitInfoEntities(void)
+void BotInitInfoEntities()
 {
     char classname[MAX_EPAIRKEY];
     maplocation_t* ml;
@@ -408,7 +408,7 @@ void BotInitInfoEntities(void)
         botimport.Print(PRT_MESSAGE, "%d camp spots\n", numcampspots);
     }
 }
-void BotInitLevelItems(void)
+void BotInitLevelItems()
 {
     int i, spawnflags, value;
     char classname[MAX_EPAIRKEY];
@@ -738,7 +738,7 @@ int BotGetNextCampSpotGoal(int num, bot_goal_t* goal)
 // NOTE: enum entityType_t in bg_public.h
 #define ET_ITEM 2
 
-void BotUpdateEntityItems(void)
+void BotUpdateEntityItems()
 {
     int ent, i, modelindex;
     vec3_t dir;
@@ -1338,7 +1338,7 @@ void BotFreeGoalState(int handle)
     FreeMemory(botgoalstates[handle]);
     botgoalstates[handle] = NULL;
 }
-int BotSetupGoalAI(void)
+int BotSetupGoalAI()
 {
     char* filename;
 
@@ -1356,7 +1356,7 @@ int BotSetupGoalAI(void)
     // everything went ok
     return BLERR_NOERROR;
 }
-void BotShutdownGoalAI(void)
+void BotShutdownGoalAI()
 {
     int i;
 

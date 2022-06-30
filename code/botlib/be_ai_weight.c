@@ -586,7 +586,7 @@ void InterbreedWeightConfigs(weightconfig_t* config1, weightconfig_t* config2,
                                    configout->weights[i].firstseparator);
     }
 }
-void BotShutdownWeights(void)
+void BotShutdownWeights()
 {
     int i;
 

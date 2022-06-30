@@ -57,7 +57,7 @@ void AAS_ShowPolygon(int color, int numpoints, vec3_t* points)
         }
     }
 }
-void AAS_ClearShownDebugLines(void)
+void AAS_ClearShownDebugLines()
 {
     int i;
 

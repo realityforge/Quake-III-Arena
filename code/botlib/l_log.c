@@ -59,7 +59,7 @@ void Log_Open(char* filename)
     strncpy(logfile.filename, filename, MAX_LOGFILENAMESIZE);
     botimport.Print(PRT_MESSAGE, "Opened log %s\n", logfile.filename);
 }
-void Log_Close(void)
+void Log_Close()
 {
     if (!logfile.fp)
         return;
@@ -70,7 +70,7 @@ void Log_Close(void)
     logfile.fp = NULL;
     botimport.Print(PRT_MESSAGE, "Closed log %s\n", logfile.filename);
 }
-void Log_Shutdown(void)
+void Log_Shutdown()
 {
     if (logfile.fp)
         Log_Close();
@@ -87,11 +87,11 @@ void QDECL Log_Write(char* fmt, ...)
     // fprintf(logfile.fp, "\r\n");
     fflush(logfile.fp);
 }
-FILE* Log_FilePointer(void)
+FILE* Log_FilePointer()
 {
     return logfile.fp;
 }
-void Log_Flush(void)
+void Log_Flush()
 {
     if (logfile.fp)
         fflush(logfile.fp);

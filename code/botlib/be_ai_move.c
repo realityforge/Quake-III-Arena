@@ -108,7 +108,7 @@ int modeltypes[MAX_MODELS];
 
 bot_movestate_t* botmovestates[MAX_CLIENTS + 1];
 
-int BotAllocMoveState(void)
+int BotAllocMoveState()
 {
     int i;
 
@@ -415,7 +415,7 @@ int MoverDown(aas_reachability_t* reach)
         return true;
     return false;
 }
-void BotSetBrushModelTypes(void)
+void BotSetBrushModelTypes()
 {
     int ent, modelnum;
     char classname[MAX_EPAIRKEY], model[MAX_EPAIRKEY];
@@ -2762,7 +2762,7 @@ void BotResetMoveState(int movestate)
         return;
     memset(ms, 0, sizeof(bot_movestate_t));
 }
-int BotSetupMoveAI(void)
+int BotSetupMoveAI()
 {
     BotSetBrushModelTypes();
     sv_maxstep = LibVar("sv_step", "18");
@@ -2777,7 +2777,7 @@ int BotSetupMoveAI(void)
     cmd_grappleoff = LibVar("cmd_grappleoff", "grappleoff");
     return BLERR_NOERROR;
 }
-void BotShutdownMoveAI(void)
+void BotShutdownMoveAI()
 {
     int i;
 

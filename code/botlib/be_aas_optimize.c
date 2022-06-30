@@ -229,7 +229,7 @@ void AAS_OptimizeStore(optimized_t* optimized)
     FreeMemory(optimized->edgeoptimizeindex);
     FreeMemory(optimized->faceoptimizeindex);
 }
-void AAS_Optimize(void)
+void AAS_Optimize()
 {
     int i, sign;
     optimized_t optimized;

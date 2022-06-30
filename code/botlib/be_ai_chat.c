@@ -205,7 +205,7 @@ bot_chatstate_t* BotChatStateFromHandle(int handle)
 //===========================================================================
 // initialize the heap with unused console messages
 //===========================================================================
-void InitConsoleMessageHeap(void)
+void InitConsoleMessageHeap()
 {
     int i, max_messages;
 
@@ -227,7 +227,7 @@ void InitConsoleMessageHeap(void)
 //===========================================================================
 // allocate one console message from the heap
 //===========================================================================
-bot_consolemessage_t* AllocConsoleMessage(void)
+bot_consolemessage_t* AllocConsoleMessage()
 {
     bot_consolemessage_t* message;
     message = freeconsolemessages;
@@ -2157,7 +2157,7 @@ void BotSetChatName(int chatstate, char* name, int client)
     strncpy(cs->name, name, sizeof(cs->name));
     cs->name[sizeof(cs->name) - 1] = '\0';
 }
-int BotAllocChatState(void)
+int BotAllocChatState()
 {
     int i;
 
@@ -2193,7 +2193,7 @@ void BotFreeChatState(int handle)
     FreeMemory(botchatstates[handle]);
     botchatstates[handle] = NULL;
 }
-int BotSetupChatAI(void)
+int BotSetupChatAI()
 {
     char* file;
 
@@ -2219,7 +2219,7 @@ int BotSetupChatAI(void)
 #endif // DEBUG
     return BLERR_NOERROR;
 }
-void BotShutdownChatAI(void)
+void BotShutdownChatAI()
 {
     int i;
 

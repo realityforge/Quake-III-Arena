@@ -363,7 +363,7 @@ void BotResetWeaponState(int weaponstate)
     ws->weaponweightconfig = weaponweightconfig;
     ws->weaponweightindex = weaponweightindex;
 }
-int BotAllocWeaponState(void)
+int BotAllocWeaponState()
 {
     int i;
 
@@ -389,7 +389,7 @@ void BotFreeWeaponState(int handle)
     FreeMemory(botweaponstates[handle]);
     botweaponstates[handle] = NULL;
 }
-int BotSetupWeaponAI(void)
+int BotSetupWeaponAI()
 {
     char* file;
 
@@ -405,7 +405,7 @@ int BotSetupWeaponAI(void)
 #endif // DEBUG_AI_WEAP
     return BLERR_NOERROR;
 }
-void BotShutdownWeaponAI(void)
+void BotShutdownWeaponAI()
 {
     int i;
 

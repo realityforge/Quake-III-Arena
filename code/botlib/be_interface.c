@@ -59,7 +59,7 @@ int bot_developer;
 // several functions used by the exported functions
 //===========================================================================
 
-int Sys_MilliSeconds(void)
+int Sys_MilliSeconds()
 {
     return clock() * 1000 / CLOCKS_PER_SEC;
 }
@@ -81,7 +81,7 @@ bool BotLibSetup(char* str)
     return true;
 }
 
-int Export_BotLibSetup(void)
+int Export_BotLibSetup()
 {
     int errnum;
 
@@ -115,7 +115,7 @@ int Export_BotLibSetup(void)
 
     return BLERR_NOERROR;
 }
-int Export_BotLibShutdown(void)
+int Export_BotLibShutdown()
 {
     if (!BotLibSetup("BotLibShutdown"))
         return BLERR_LIBRARYNOTSETUP;

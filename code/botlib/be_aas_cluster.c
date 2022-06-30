@@ -44,7 +44,7 @@ extern botlib_import_t botimport;
 // do not flood through area faces, only use reachabilities
 int nofaceflood = true;
 
-void AAS_RemoveClusterAreas(void)
+void AAS_RemoveClusterAreas()
 {
     int i;
 
@@ -245,7 +245,7 @@ void AAS_NumberClusterAreas(int clusternum)
         }
     }
 }
-int AAS_FindClusters(void)
+int AAS_FindClusters()
 {
     int i;
     aas_cluster_t* cluster;
@@ -283,7 +283,7 @@ int AAS_FindClusters(void)
     }
     return true;
 }
-void AAS_CreatePortals(void)
+void AAS_CreatePortals()
 {
     int i;
     aas_portal_t* portal;
@@ -518,7 +518,7 @@ int AAS_CheckAreaForPossiblePortals(int areanum)
     }
     return numareas;
 }
-void AAS_FindPossiblePortals(void)
+void AAS_FindPossiblePortals()
 {
     int i, numpossibleportals;
 
@@ -528,7 +528,7 @@ void AAS_FindPossiblePortals(void)
     }
     botimport.Print(PRT_MESSAGE, "\r%6d possible portal areas\n", numpossibleportals);
 }
-int AAS_TestPortals(void)
+int AAS_TestPortals()
 {
     int i;
     aas_portal_t* portal;
@@ -548,7 +548,7 @@ int AAS_TestPortals(void)
     }
     return true;
 }
-void AAS_CountForcedClusterPortals(void)
+void AAS_CountForcedClusterPortals()
 {
     int num, i;
 
@@ -561,7 +561,7 @@ void AAS_CountForcedClusterPortals(void)
     }
     botimport.Print(PRT_MESSAGE, "%6d forced portal areas\n", num);
 }
-void AAS_CreateViewPortals(void)
+void AAS_CreateViewPortals()
 {
     int i;
 
@@ -571,7 +571,7 @@ void AAS_CreateViewPortals(void)
         }
     }
 }
-void AAS_SetViewPortalsAsClusterPortals(void)
+void AAS_SetViewPortalsAsClusterPortals()
 {
     int i;
 
@@ -581,7 +581,7 @@ void AAS_SetViewPortalsAsClusterPortals(void)
         }
     }
 }
-void AAS_InitClustering(void)
+void AAS_InitClustering()
 {
     int i, removedPortalAreas;
     int n, total, numreachabilityareas;

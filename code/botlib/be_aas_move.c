@@ -51,7 +51,7 @@ int AAS_DropToFloor(vec3_t origin, vec3_t mins, vec3_t maxs)
     VectorCopy(trace.endpos, origin);
     return true;
 }
-void AAS_InitSettings(void)
+void AAS_InitSettings()
 {
     aassettings.phys_gravitydirection[0] = 0;
     aassettings.phys_gravitydirection[1] = 0;
