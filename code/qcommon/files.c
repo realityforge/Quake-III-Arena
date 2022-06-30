@@ -1053,6 +1053,7 @@ long FS_FOpenFileReadDir(const char* filename, searchpath_t* search, fileHandle_
                     } else if (strstr(filename, "ui.qvm")) {
                         pak->referenced |= FS_UI_REF;
                     }
+
                     if (uniqueFILE) {
                         // open a new file on the pakfile
                         fsh[*file].handleFiles.file.z = unzOpen(pak->pakFilename);
