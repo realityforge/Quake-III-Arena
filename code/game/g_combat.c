@@ -737,7 +737,6 @@ void G_Damage(gentity_t* targ, gentity_t* inflictor, gentity_t* attacker,
 {
     gclient_t* client;
     int take;
-    int save;
     int asave;
     int knockback;
     int max;
@@ -910,7 +909,6 @@ void G_Damage(gentity_t* targ, gentity_t* inflictor, gentity_t* attacker,
         damage = 1;
     }
     take = damage;
-    save = 0;
 
     // save some from armor
     asave = CheckArmor(targ, take, dflags);

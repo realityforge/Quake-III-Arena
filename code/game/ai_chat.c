@@ -929,10 +929,6 @@ int BotChat_Random(bot_state_t* bs)
 
 float BotChatTime(bot_state_t* bs)
 {
-    int cpm;
-
-    cpm = trap_Characteristic_BInteger(bs->character, CHARACTERISTIC_CHAT_CPM, 1, 4000);
-
     return 2.0;
 }
 
