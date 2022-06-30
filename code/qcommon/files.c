@@ -1077,10 +1077,8 @@ long FS_FOpenFileReadDir(const char* filename, searchpath_t* search, fileHandle_
                         Com_Printf("FS_FOpenFileRead: %s (found in '%s')\n",
                                    filename, pak->pakFilename);
                     }
-
                     return pakFile->len;
                 }
-
                 pakFile = pakFile->next;
             } while (pakFile != NULL);
         }
