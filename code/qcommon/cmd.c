@@ -50,7 +50,7 @@ next frame.  This allows commands like:
 bind g "cmd use rocket ; +attack ; wait ; -attack ; cmd use blaster"
 ============
 */
-void Cmd_Wait_f(void)
+void Cmd_Wait_f()
 {
     if (Cmd_Argc() == 2) {
         cmd_wait = atoi(Cmd_Argv(1));
@@ -61,7 +61,7 @@ void Cmd_Wait_f(void)
     }
 }
 
-void Cbuf_Init(void)
+void Cbuf_Init()
 {
     cmd_text.data = cmd_text_buf;
     cmd_text.maxsize = MAX_CMD_BUFFER;
@@ -145,7 +145,7 @@ void Cbuf_ExecuteText(int exec_when, const char* text)
     }
 }
 
-void Cbuf_Execute(void)
+void Cbuf_Execute()
 {
     int i;
     char* text;
@@ -222,7 +222,7 @@ void Cbuf_Execute(void)
     }
 }
 
-void Cmd_Exec_f(void)
+void Cmd_Exec_f()
 {
     bool quiet;
     union {
@@ -261,7 +261,7 @@ Cmd_Vstr_f
 Inserts the current value of a variable as command text
 ===============
 */
-void Cmd_Vstr_f(void)
+void Cmd_Vstr_f()
 {
     char* v;
 
@@ -281,7 +281,7 @@ Cmd_Echo_f
 Just prints the rest of the line to the console
 ===============
 */
-void Cmd_Echo_f(void)
+void Cmd_Echo_f()
 {
     Com_Printf("%s\n", Cmd_Args());
 }
@@ -300,7 +300,7 @@ static char cmd_cmd[BIG_INFO_STRING]; // the original command we received (no to
 
 static cmd_function_t* cmd_functions; // possible commands to execute
 
-int Cmd_Argc(void)
+int Cmd_Argc()
 {
     return cmd_argc;
 }
@@ -333,7 +333,7 @@ Cmd_Args
 Returns a single string containing argv(1) to argv(argc()-1)
 ============
 */
-char* Cmd_Args(void)
+char* Cmd_Args()
 {
     static char cmd_args[MAX_STRING_CHARS];
     int i;
@@ -396,7 +396,7 @@ For rcon use when you want to transmit without altering quoting
 https://zerowing.idsoftware.com/bugzilla/show_bug.cgi?id=543
 ============
 */
-char* Cmd_Cmd(void)
+char* Cmd_Cmd()
 {
     return cmd_cmd;
 }
@@ -408,7 +408,7 @@ char* Cmd_Cmd(void)
    https://bugzilla.icculus.org/show_bug.cgi?id=4769
 */
 
-void Cmd_Args_Sanitize(void)
+void Cmd_Args_Sanitize()
 {
     int i;
 
@@ -725,7 +725,7 @@ void Cmd_ExecuteString(const char* text)
 #endif
 }
 
-void Cmd_List_f(void)
+void Cmd_List_f()
 {
     cmd_function_t* cmd;
     int i;
@@ -755,7 +755,7 @@ void Cmd_CompleteCfgName(char* args, int argNum)
     }
 }
 
-void Cmd_Init(void)
+void Cmd_Init()
 {
     Cmd_AddCommand("cmdlist", Cmd_List_f);
     Cmd_AddCommand("exec", Cmd_Exec_f);
