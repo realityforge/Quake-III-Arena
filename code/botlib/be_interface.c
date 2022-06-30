@@ -424,7 +424,6 @@ botlib_export_t* GetBotLibAPI(int apiVersion, botlib_import_t* import)
     be_botlib_export.BotLibStartFrame = Export_BotLibStartFrame;
     be_botlib_export.BotLibLoadMap = Export_BotLibLoadMap;
     be_botlib_export.BotLibUpdateEntity = Export_BotLibUpdateEntity;
-    be_botlib_export.Test = BotExportTest;
 
     return &be_botlib_export;
 }
