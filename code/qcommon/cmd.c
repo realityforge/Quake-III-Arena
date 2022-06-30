@@ -286,14 +286,6 @@ void Cmd_Echo_f(void)
     Com_Printf("%s\n", Cmd_Args());
 }
 
-/*
-=============================================================================
-
-                                        COMMAND EXECUTION
-
-=============================================================================
-*/
-
 typedef struct cmd_function_s {
     struct cmd_function_s* next;
     char* name;
