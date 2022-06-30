@@ -559,7 +559,7 @@ void SetTeam(gentity_t* ent, char* s)
         ent->client->ps.stats[STAT_HEALTH] = ent->health = 0;
         player_die(ent, ent, ent, 100000, MOD_SUICIDE);
     }
-    // they go to the end of the line for tournements
+    // they go to the end of the line for tournaments
     if (team == TEAM_SPECTATOR) {
         client->sess.spectatorTime = level.time;
     }
@@ -636,7 +636,7 @@ void Cmd_Team_f(gentity_t* ent)
         return;
     }
 
-    // if they are playing a tournement game, count as a loss
+    // if they are playing a tournament game, count as a loss
     if ((g_gametype.integer == GT_TOURNAMENT)
         && ent->client->sess.sessionTeam == TEAM_FREE) {
         ent->client->sess.losses++;
@@ -677,7 +677,7 @@ void Cmd_Follow_f(gentity_t* ent)
         return;
     }
 
-    // if they are playing a tournement game, count as a loss
+    // if they are playing a tournament game, count as a loss
     if ((g_gametype.integer == GT_TOURNAMENT)
         && ent->client->sess.sessionTeam == TEAM_FREE) {
         ent->client->sess.losses++;
@@ -697,7 +697,7 @@ void Cmd_FollowCycle_f(gentity_t* ent, int dir)
     int clientnum;
     int original;
 
-    // if they are playing a tournement game, count as a loss
+    // if they are playing a tournament game, count as a loss
     if ((g_gametype.integer == GT_TOURNAMENT)
         && ent->client->sess.sessionTeam == TEAM_FREE) {
         ent->client->sess.losses++;
@@ -758,7 +758,7 @@ static void G_SayTo(gentity_t* ent, gentity_t* other, int mode, int color, const
     if (mode == SAY_TEAM && !OnSameTeam(ent, other)) {
         return;
     }
-    // no chatting to players in tournements
+    // no chatting to players in tournaments
     if ((g_gametype.integer == GT_TOURNAMENT)
         && other->client->sess.sessionTeam == TEAM_FREE
         && ent->client->sess.sessionTeam != TEAM_FREE) {
@@ -896,7 +896,7 @@ static void G_VoiceTo(gentity_t* ent, gentity_t* other, int mode, const char* id
     if (mode == SAY_TEAM && !OnSameTeam(ent, other)) {
         return;
     }
-    // no chatting to players in tournements
+    // no chatting to players in tournaments
     if ((g_gametype.integer == GT_TOURNAMENT)) {
         return;
     }
