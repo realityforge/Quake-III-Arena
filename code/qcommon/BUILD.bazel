@@ -134,10 +134,8 @@ cc_library(
         "q_math.c",
         "q_shared.c",
     ],
-    deps = [
-        ":shared_api",
-    ],
     visibility = ["//code/game:__pkg__"],
+    deps = [":shared_api"],
 )
 
 cc_library(
