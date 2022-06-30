@@ -663,14 +663,12 @@ void AAS_InitRoutingUpdate(void)
 }
 void AAS_CreateAllRoutingCache(void)
 {
-    int i, j;
-
     aasworld.initialized = true;
     botimport.Print(PRT_MESSAGE, "AAS_CreateAllRoutingCache\n");
-    for (i = 1; i < aasworld.numareas; i++) {
+    for (int i = 1; i < aasworld.numareas; i++) {
         if (!AAS_AreaReachability(i))
             continue;
-        for (j = 1; j < aasworld.numareas; j++) {
+        for (int j = 1; j < aasworld.numareas; j++) {
             if (i == j)
                 continue;
             if (!AAS_AreaReachability(j))
