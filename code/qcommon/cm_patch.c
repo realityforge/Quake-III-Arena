@@ -1118,7 +1118,7 @@ struct patchCollide_s* CM_GeneratePatchCollide(int width, int height, vec3_t* po
     CM_RemoveDegenerateColumns(&grid);
 
     // we now have a grid of points exactly on the curve
-    // the aproximate surface defined by these points will be
+    // the approximate surface defined by these points will be
     // collided against
     pf = Hunk_Alloc(sizeof(*pf), h_high);
     ClearBounds(pf->bounds[0], pf->bounds[1]);
