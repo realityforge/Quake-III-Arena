@@ -20,9 +20,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-// debugging on
-#define AAS_DEBUG
-
 #define MAX_CLIENTS 64
 #define MAX_MODELS 256 // these are sent over the net as 8 bits
 #define MAX_SOUNDS 256 // so they cannot be blindly increased
@@ -31,11 +28,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define CS_SCORES 32
 #define CS_MODELS (CS_SCORES + MAX_CLIENTS)
 #define CS_SOUNDS (CS_MODELS + MAX_MODELS)
-
-#define DF_AASENTNUMBER(x) (x - aasworld.entities)
-#define DF_NUMBERAASENT(x) (&aasworld.entities[x])
-#define DF_AASENTCLIENT(x) (x - aasworld.entities - 1)
-#define DF_CLIENTAASENT(x) (&aasworld.entities[x + 1])
 
 // string index (for model, sound and image index)
 typedef struct aas_stringindex_s {
