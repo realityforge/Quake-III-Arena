@@ -2644,19 +2644,14 @@ void AAS_Reachability_FuncBobbing(void)
 void AAS_Reachability_JumpPad(void)
 {
     int face2num, i, ret, area2num, visualize, ent, bot_visualizejumppads;
-    // int modelnum, ent2;
-    // float dist, time, height, gravity, forward;
     float speed, zvel, hordist;
     aas_face_t* face2;
     aas_area_t* area2;
     aas_lreachability_t* lreach;
     vec3_t areastart, facecenter, dir, cmdmove;
     vec3_t velocity, absmins, absmaxs;
-    // vec3_t origin, ent2origin, angles, teststart;
     aas_clientmove_t move;
-    // aas_trace_t trace;
     aas_link_t *areas, *link;
-    // char target[MAX_EPAIRKEY], targetname[MAX_EPAIRKEY], model[MAX_EPAIRKEY];
     char classname[MAX_EPAIRKEY];
 
 #ifdef BSPC
@@ -2686,8 +2681,6 @@ void AAS_Reachability_JumpPad(void)
         // if there is a horizontal velocity check for a reachability without air control
         if (velocity[0] || velocity[1]) {
             VectorSet(cmdmove, 0, 0, 0);
-            // VectorCopy(velocity, cmdmove);
-            // cmdmove[2] = 0;
             memset(&move, 0, sizeof(aas_clientmove_t));
             area2num = 0;
             for (i = 0; i < 20; i++) {
@@ -2739,18 +2732,6 @@ void AAS_Reachability_JumpPad(void)
         // check for areas we can reach with air control
         for (area2num = 1; area2num < aasworld.numareas; area2num++) {
             visualize = false;
-            /*
-            if (area2num == 3568)
-            {
-                    for (link = areas; link; link = link->next_area)
-                    {
-                            if (link->areanum == 3380)
-                            {
-                                    visualize = true;
-                                    botimport.Print(PRT_MESSAGE, "bah\n");
-                            }
-                    }
-            }*/
             // never try to go back to one of the original jumppad areas
             // and don't create reachabilities if they already exist
             for (link = areas; link; link = link->next_area) {
@@ -2785,7 +2766,6 @@ void AAS_Reachability_JumpPad(void)
                     VectorSubtract(facecenter, areastart, dir);
                     dir[2] = 0;
                     hordist = VectorNormalize(dir);
-                    // if (hordist < 1.6 * facecenter[2] - areastart[2])
                     {
                         // get command movement
                         VectorScale(dir, speed, cmdmove);
