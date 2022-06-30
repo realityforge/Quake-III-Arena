@@ -96,6 +96,7 @@ cc_library(
     hdrs = ["be_aas.h"],
     defines = ["BOTLIB"],
     includes = ["."],
+    visibility = ["//code/game:__pkg__"],
     deps = [
         ":api",
         "//code/qcommon",

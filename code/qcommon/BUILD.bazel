@@ -107,7 +107,10 @@ cc_library(
         "common.c",
     ],
     defines = ENGINE_DEFINES,
-    visibility = ["//code/client:__pkg__"],
+    visibility = [
+        "//code/client:__pkg__",
+        "//code/game:__pkg__",
+    ],
     deps = [
         ":qcommon",
         ":shared_api",
@@ -134,6 +137,7 @@ cc_library(
     deps = [
         ":shared_api",
     ],
+    visibility = ["//code/game:__pkg__"],
 )
 
 cc_library(
@@ -145,8 +149,10 @@ cc_library(
         "qengine.h",
         "surfaceflags.h",
     ],
+    includes = ["."],
     visibility = [
         "//code/botlib:__pkg__",
+        "//code/game:__pkg__",
     ],
 )
 
@@ -154,6 +160,9 @@ cc_library(
     name = "voicechat",
     hdrs = ["voicechat.h"],
     includes = ["."],
+    visibility = [
+        "//code/game:__pkg__",
+    ],
 )
 
 cc_library(
