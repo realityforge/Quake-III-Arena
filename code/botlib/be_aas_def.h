@@ -22,14 +22,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "../qcommon/q_shared.h"
 
-// debugging on
-#define AAS_DEBUG
-
-#define DF_AASENTNUMBER(x) (x - aasworld.entities)
-#define DF_NUMBERAASENT(x) (&aasworld.entities[x])
-#define DF_AASENTCLIENT(x) (x - aasworld.entities - 1)
-#define DF_CLIENTAASENT(x) (&aasworld.entities[x + 1])
-
 // structure to link entities to areas and areas to entities
 typedef struct aas_link_s {
     int entnum;
