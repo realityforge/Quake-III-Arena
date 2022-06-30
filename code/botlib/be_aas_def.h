@@ -29,12 +29,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define CS_MODELS (CS_SCORES + MAX_CLIENTS)
 #define CS_SOUNDS (CS_MODELS + MAX_MODELS)
 
-// string index (for model, sound and image index)
-typedef struct aas_stringindex_s {
-    int numindexes;
-    char** index;
-} aas_stringindex_t;
-
 // structure to link entities to areas and areas to entities
 typedef struct aas_link_s {
     int entnum;
