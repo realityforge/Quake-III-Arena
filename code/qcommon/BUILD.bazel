@@ -145,6 +145,9 @@ cc_library(
         "qengine.h",
         "surfaceflags.h",
     ],
+    visibility = [
+        "//code/botlib:__pkg__",
+    ],
 )
 
 cc_library(
@@ -194,6 +197,7 @@ cc_library(
     ],
     includes = ["."],
     visibility = [
+        "//code/botlib:__pkg__",
         "@zlib//:__pkg__",
     ],
     deps = [
