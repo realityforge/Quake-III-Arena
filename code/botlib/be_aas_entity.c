@@ -62,9 +62,7 @@ int AAS_UpdateEntity(int entnum, bot_entitystate_t* state)
         // unlink the entity
         AAS_UnlinkFromAreas(ent->areas);
         // unlink the entity from the BSP leaves
-        AAS_UnlinkFromBSPLeaves(ent->leaves);
         ent->areas = NULL;
-        ent->leaves = NULL;
         return BLERR_NOERROR;
     }
 
@@ -129,9 +127,6 @@ int AAS_UpdateEntity(int entnum, bot_entitystate_t* state)
             // relink the entity to the AAS areas (use the larges bbox)
             ent->areas = AAS_LinkEntityClientBBox(absmins, absmaxs, entnum, PRESENCE_NORMAL);
             // unlink the entity from the BSP leaves
-            AAS_UnlinkFromBSPLeaves(ent->leaves);
-            // link the entity to the world BSP tree
-            ent->leaves = AAS_BSPLinkEntity(absmins, absmaxs, entnum, 0);
         }
     }
     return BLERR_NOERROR;
@@ -215,7 +210,6 @@ void AAS_ResetEntityLinks(void)
     int i;
     for (i = 0; i < aasworld.maxentities; i++) {
         aasworld.entities[i].areas = NULL;
-        aasworld.entities[i].leaves = NULL;
     }
 }
 void AAS_InvalidateEntities(void)
@@ -236,8 +230,6 @@ void AAS_UnlinkInvalidEntities(void)
         if (!ent->i.valid) {
             AAS_UnlinkFromAreas(ent->areas);
             ent->areas = NULL;
-            AAS_UnlinkFromBSPLeaves(ent->leaves);
-            ent->leaves = NULL;
         }
     }
 }

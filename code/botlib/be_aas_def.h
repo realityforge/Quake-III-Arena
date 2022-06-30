@@ -60,8 +60,6 @@ typedef struct aas_entity_s {
     aas_entityinfo_t i;
     // links into the AAS areas
     aas_link_t* areas;
-    // links into the BSP leaves
-    bsp_link_t* leaves;
 } aas_entity_t;
 
 typedef struct aas_settings_s {

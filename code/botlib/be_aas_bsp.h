@@ -25,13 +25,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 int AAS_LoadBSPFile(void);
 // dump the loaded BSP data
 void AAS_DumpBSPData(void);
-// unlink the given entity from the bsp tree leaves
-void AAS_UnlinkFromBSPLeaves(bsp_link_t* leaves);
-// link the given entity to the bsp tree leaves of the given model
-bsp_link_t* AAS_BSPLinkEntity(vec3_t absmins,
-                              vec3_t absmaxs,
-                              int entnum,
-                              int modelnum);
 
 // calculates collision with given entity
 bool AAS_EntityCollision(int entnum,
