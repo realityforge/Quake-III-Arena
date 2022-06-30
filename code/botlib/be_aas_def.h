@@ -30,14 +30,6 @@ typedef struct aas_link_s {
     struct aas_link_s *next_area, *prev_area;
 } aas_link_t;
 
-// structure to link entities to leaves and leaves to entities
-typedef struct bsp_link_s {
-    int entnum;
-    int leafnum;
-    struct bsp_link_s *next_ent, *prev_ent;
-    struct bsp_link_s *next_leaf, *prev_leaf;
-} bsp_link_t;
-
 typedef struct bsp_entdata_s {
     vec3_t origin;
     vec3_t angles;
