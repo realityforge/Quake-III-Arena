@@ -723,7 +723,6 @@ the cylinder extends halfheight above and below the origin
 void CM_TraceThroughVerticalCylinder(traceWork_t* tw, vec3_t origin, float radius, float halfheight, vec3_t start, vec3_t end)
 {
     float length, scale, fraction, l1, l2;
-    // float a;
     float b, c, d, sqrtd;
     vec3_t v1, dir, start2d, end2d, org2d, intersection;
 
