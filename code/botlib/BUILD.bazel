@@ -14,9 +14,7 @@ load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
     name = "api",
-    hdrs = [
-        "botlib.h",
-    ],
+    hdrs = ["botlib.h"],
     visibility = [
         "//code/client:__pkg__",
         "//code/game:__pkg__",
