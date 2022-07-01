@@ -53,7 +53,7 @@ void VM_Debug(int level)
     vm_debugLevel = level;
 }
 
-void VM_Init(void)
+void VM_Init()
 {
     Cvar_Get("vm_cgame", "2", CVAR_ARCHIVE);
     Cvar_Get("vm_game", "2", CVAR_ARCHIVE);
@@ -606,7 +606,7 @@ void VM_Free(vm_t* vm)
     lastVM = NULL;
 }
 
-void VM_Clear(void)
+void VM_Clear()
 {
     int i;
     for (i = 0; i < MAX_VM; i++) {
@@ -614,12 +614,12 @@ void VM_Clear(void)
     }
 }
 
-void VM_Forced_Unload_Start(void)
+void VM_Forced_Unload_Start()
 {
     forced_unload = 1;
 }
 
-void VM_Forced_Unload_Done(void)
+void VM_Forced_Unload_Done()
 {
     forced_unload = 0;
 }
@@ -753,7 +753,7 @@ static int QDECL VM_ProfileSort(const void* a, const void* b)
     return 0;
 }
 
-void VM_VmProfile_f(void)
+void VM_VmProfile_f()
 {
     vm_t* vm;
     vmSymbol_t **sorted, *sym;
@@ -795,7 +795,7 @@ void VM_VmProfile_f(void)
     Z_Free(sorted);
 }
 
-void VM_VmInfo_f(void)
+void VM_VmInfo_f()
 {
     vm_t* vm;
     int i;

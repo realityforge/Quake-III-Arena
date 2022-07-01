@@ -89,7 +89,7 @@ static const facet_t* debugFacet;
 static bool debugBlock;
 static vec3_t debugBlockPoints[4];
 
-void CM_ClearLevelPatches(void)
+void CM_ClearLevelPatches()
 {
     debugPatchCollide = NULL;
     debugFacet = NULL;

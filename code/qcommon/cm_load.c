@@ -549,7 +549,7 @@ void CM_LoadMap(const char* name, bool clientload, int* checksum)
     }
 }
 
-void CM_ClearMap(void)
+void CM_ClearMap()
 {
     memset(&cm, 0, sizeof(cm));
     CM_ClearLevelPatches();
@@ -583,12 +583,12 @@ clipHandle_t CM_InlineModel(int index)
     return index;
 }
 
-int CM_NumInlineModels(void)
+int CM_NumInlineModels()
 {
     return cm.numSubModels;
 }
 
-char* CM_EntityString(void)
+char* CM_EntityString()
 {
     return cm.entityString;
 }
@@ -619,7 +619,7 @@ Set up the planes and nodes so that the six floats of a bounding box
 can just be stored out and get a proper clipping hull structure.
 ===================
 */
-void CM_InitBoxHull(void)
+void CM_InitBoxHull()
 {
     int i;
     int side;

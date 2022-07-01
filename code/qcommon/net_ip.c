@@ -136,7 +136,7 @@ static int numIP;
 
 //=============================================================================
 
-char* NET_ErrorString(void)
+char* NET_ErrorString()
 {
 #ifdef _WIN32
     // FIXME: replace with FormatMessage?
@@ -730,7 +730,7 @@ bool Sys_IsLANAddress(netadr_t adr)
     return false;
 }
 
-void Sys_ShowIP(void)
+void Sys_ShowIP()
 {
     int i;
     char addrbuf[NET_ADDRSTRMAXLEN];
@@ -889,7 +889,7 @@ NET_SetMulticast
 Set the current multicast group
 ====================
 */
-void NET_SetMulticast6(void)
+void NET_SetMulticast6()
 {
     struct sockaddr_in6 addr;
 
@@ -921,7 +921,7 @@ NET_JoinMulticast
 Join an ipv6 multicast group
 ====================
 */
-void NET_JoinMulticast6(void)
+void NET_JoinMulticast6()
 {
     int err;
 
@@ -1168,7 +1168,7 @@ static void NET_AddLocalAddress(char* ifname, struct sockaddr* addr, struct sock
 }
 
 #if defined(__linux__) || defined(__APPLE__) || defined(__BSD__)
-static void NET_GetLocalAddress(void)
+static void NET_GetLocalAddress()
 {
     struct ifaddrs *ifap, *search;
 
@@ -1189,7 +1189,7 @@ static void NET_GetLocalAddress(void)
     }
 }
 #else
-static void NET_GetLocalAddress(void)
+static void NET_GetLocalAddress()
 {
     char hostname[256];
     struct addrinfo hint;
@@ -1238,7 +1238,7 @@ static void NET_GetLocalAddress(void)
 }
 #endif
 
-void NET_OpenIP(void)
+void NET_OpenIP()
 {
     int i;
     int err;
@@ -1292,7 +1292,7 @@ void NET_OpenIP(void)
 
 //===================================================================
 
-static bool NET_GetCvars(void)
+static bool NET_GetCvars()
 {
     int modified;
 
@@ -1430,7 +1430,7 @@ void NET_Config(bool enableNetworking)
     }
 }
 
-void NET_Init(void)
+void NET_Init()
 {
 #ifdef _WIN32
     int r;
@@ -1450,7 +1450,7 @@ void NET_Init(void)
     Cmd_AddCommand("net_restart", NET_Restart_f);
 }
 
-void NET_Shutdown(void)
+void NET_Shutdown()
 {
     if (!networkingEnabled) {
         return;
@@ -1549,7 +1549,7 @@ void NET_Sleep(int msec)
         NET_Event(&fdr);
 }
 
-void NET_Restart_f(void)
+void NET_Restart_f()
 {
     NET_Config(true);
 }
