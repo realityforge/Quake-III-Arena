@@ -459,10 +459,7 @@ Loads in the map and all submodels
 */
 void CM_LoadMap(const char* name, bool clientload, int* checksum)
 {
-    union {
-        int* i;
-        void* v;
-    } buf;
+    int* buf;
     int i;
     dheader_t header;
     int length;
@@ -499,19 +496,19 @@ void CM_LoadMap(const char* name, bool clientload, int* checksum)
 
     // load the file
 #ifndef BSPC
-    length = FS_ReadFile(name, &buf.v);
+    length = FS_ReadFile(name, (void**)&buf);
 #else
     length = LoadQuakeFile((quakefile_t*)name, &buf.v);
 #endif
 
-    if (!buf.i) {
+    if (NULL == buf) {
         Com_Error(ERR_DROP, "Couldn't load %s", name);
     }
 
-    last_checksum = LittleLong(Com_BlockChecksum(buf.i, length));
+    last_checksum = LittleLong(Com_BlockChecksum(buf, length));
     *checksum = last_checksum;
 
-    header = *(dheader_t*)buf.i;
+    header = *(dheader_t*)buf;
     for (i = 0; i < sizeof(dheader_t) / 4; i++) {
         ((int*)&header)[i] = LittleLong(((int*)&header)[i]);
     }
@@ -520,7 +517,7 @@ void CM_LoadMap(const char* name, bool clientload, int* checksum)
         Com_Error(ERR_DROP, "CM_LoadMap: %s has wrong version number (%i should be %i)", name, header.version, BSP_VERSION);
     }
 
-    cmod_base = (uint8_t*)buf.i;
+    cmod_base = (uint8_t*)buf;
 
     // load into heap
     CMod_LoadShaders(&header.lumps[LUMP_SHADERS]);
@@ -537,7 +534,7 @@ void CM_LoadMap(const char* name, bool clientload, int* checksum)
     CMod_LoadPatches(&header.lumps[LUMP_SURFACES], &header.lumps[LUMP_DRAWVERTS]);
 
     // we are NOT freeing the file, because it is cached for the ref
-    FS_FreeFile(buf.v);
+    FS_FreeFile(buf);
 
     CM_InitBoxHull();
 
