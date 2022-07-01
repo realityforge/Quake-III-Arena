@@ -114,6 +114,7 @@ The design of the solution will likely evolve over time, but it is expected that
 ...
 * Probably requires a rebuild and/or rethinking of the VFS layer. Possibly the VFS mounts bundles as paths ala `/bundles/cbfb2dae51f384fc4dffe1965966fa562f9a51b0/...` and assets under the content hash ala `/assets/7dc48cd3a038568e100fdad842ee6d40fbee56bc` and then uses the equivalent of symlinks into `/maps/foo.bsp` for "published" resources. Then at least the rest of the game logic would not need to change, just the filesystem layer would need to detect references that use hash format and load assets from appropriate location. Consider adopting an existing filesystem layer or writing our own that takes inspiration from [physfs](https://icculus.org/physfs/) and the existing VFS layer.
 * Requires a substantial rethinking about how assets are processed for packaging into the engine.
+* Some asset bundles may be "cached" on the client but subject to cache clearing or expiry. This expiry can be based on "expire-at" and the client *MAY* clean up after that date. Some bundles may expire when a "license token" expires and the user *MUST* clean up after that date unless the token is renewed. Some bundles may expire after a period of non-use or when space is required for other assets.
 ...
 
 ### Solution
