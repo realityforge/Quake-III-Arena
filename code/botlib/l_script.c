@@ -24,10 +24,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * lexicographical parser
  *****************************************************************************/
 
-//#define BOTLIB
-//#define BSPC
-
-#ifdef BOTLIB
 // include files for usage in the bot library
 #include "../qcommon/q_shared.h"
 #include "botlib.h"
@@ -36,17 +32,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "l_memory.h"
 #include "l_log.h"
 #include "l_libvar.h"
-#endif // BOTLIB
-
-#ifdef BSPC
-// include files for usage in the BSP Converter
-#include "../bspc/qbsp.h"
-#include "../bspc/l_log.h"
-#include "../bspc/l_mem.h"
-
-#define true true
-#define false false
-#endif // BSPC
 
 #define PUNCTABLE
 
@@ -183,12 +168,7 @@ void QDECL ScriptError(script_t* script, char* str, ...)
     va_start(ap, str);
     vsprintf(text, str, ap);
     va_end(ap);
-#ifdef BOTLIB
     botimport.Print(PRT_ERROR, "file %s, line %d: %s\n", script->filename, script->line, text);
-#endif // BOTLIB
-#ifdef BSPC
-    Log_Print("error: file %s, line %d: %s\n", script->filename, script->line, text);
-#endif // BSPC
 }
 void QDECL ScriptWarning(script_t* script, char* str, ...)
 {
@@ -201,12 +181,7 @@ void QDECL ScriptWarning(script_t* script, char* str, ...)
     va_start(ap, str);
     vsprintf(text, str, ap);
     va_end(ap);
-#ifdef BOTLIB
     botimport.Print(PRT_WARNING, "file %s, line %d: %s\n", script->filename, script->line, text);
-#endif // BOTLIB
-#ifdef BSPC
-    Log_Print("warning: file %s, line %d: %s\n", script->filename, script->line, text);
-#endif // BSPC
 }
 void SetScriptPunctuations(script_t* script, punctuation_t* p)
 {
@@ -862,33 +837,14 @@ int EndOfScript(script_t* script)
 {
     return script->script_p >= script->end_p;
 }
-#ifndef BOTLIB
-int FileLength(FILE* fp)
-{
-    int pos;
-    int end;
-
-    pos = ftell(fp);
-    fseek(fp, 0, SEEK_END);
-    end = ftell(fp);
-    fseek(fp, pos, SEEK_SET);
-
-    return end;
-}
-#endif
 script_t* LoadScriptFile(const char* filename)
 {
-#ifdef BOTLIB
     fileHandle_t fp;
     char pathname[MAX_QPATH];
-#else
-    FILE* fp;
-#endif
     int length;
     void* buffer;
     script_t* script;
 
-#ifdef BOTLIB
     if (strlen(basefolder))
         Com_sprintf(pathname, sizeof(pathname), "%s/%s", basefolder, filename);
     else
@@ -896,13 +852,6 @@ script_t* LoadScriptFile(const char* filename)
     length = botimport.FS_FOpenFile(pathname, &fp, FS_READ);
     if (!fp)
         return NULL;
-#else
-    fp = fopen(filename, "rb");
-    if (!fp)
-        return NULL;
-
-    length = FileLength(fp);
-#endif
 
     buffer = GetClearedMemory(sizeof(script_t) + length + 1);
     script = (script_t*)buffer;
@@ -922,16 +871,8 @@ script_t* LoadScriptFile(const char* filename)
     script->line = 1;
     script->lastline = 1;
     SetScriptPunctuations(script, NULL);
-#ifdef BOTLIB
     botimport.FS_Read(script->buffer, length, fp);
     botimport.FS_FCloseFile(fp);
-#else
-    if (fread(script->buffer, length, 1, fp) != 1) {
-        FreeMemory(buffer);
-        script = NULL;
-    }
-    fclose(fp);
-#endif
     script->length = COM_Compress(script->buffer);
 
     return script;
@@ -972,9 +913,5 @@ void FreeScript(script_t* script)
 }
 void PS_SetBaseFolder(char* path)
 {
-#ifdef BSPC
-    sprintf(basefolder, path);
-#else
     Com_sprintf(basefolder, sizeof(basefolder), path);
-#endif
 }

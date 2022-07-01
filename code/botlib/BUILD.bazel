@@ -94,7 +94,6 @@ cc_library(
     name = "botlib",
     srcs = _BOTLIB_SRC,
     hdrs = ["be_aas.h"],
-    defines = ["BOTLIB"],
     includes = ["."],
     visibility = ["//code/game:__pkg__"],
     deps = [

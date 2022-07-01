@@ -34,10 +34,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // maximum token length
 #define MAX_TOKEN 1024
 
-#if defined(BSPC) && !defined(QDECL)
-#define QDECL
-#endif
-
 // script flags
 #define SCFL_NOERRORS 0x0001
 #define SCFL_NOWARNINGS 0x0002
