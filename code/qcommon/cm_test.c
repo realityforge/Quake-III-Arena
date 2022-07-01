@@ -236,7 +236,7 @@ void CM_FloodArea_r(int areaNum, int floodnum)
     }
 }
 
-void CM_FloodAreaConnections(void)
+void CM_FloodAreaConnections()
 {
     int i;
     cArea_t* area;
