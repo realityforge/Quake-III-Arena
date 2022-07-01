@@ -33,8 +33,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "l_log.h"
 #include "l_libvar.h"
 
-#define PUNCTABLE
-
 // longer punctuations first
 punctuation_t default_punctuations[] = {
     // binary operators
@@ -185,12 +183,10 @@ void QDECL ScriptWarning(script_t* script, char* str, ...)
 }
 void SetScriptPunctuations(script_t* script, punctuation_t* p)
 {
-#ifdef PUNCTABLE
     if (p)
         PS_CreatePunctuationTable(script, p);
     else
         PS_CreatePunctuationTable(script, default_punctuations);
-#endif // PUNCTABLE
     if (p)
         script->punctuations = p;
     else
@@ -603,14 +599,7 @@ int PS_ReadPunctuation(script_t* script, token_t* token)
     char* p;
     punctuation_t* punc;
 
-#ifdef PUNCTABLE
     for (punc = script->punctuationtable[(unsigned int)*script->script_p]; punc; punc = punc->next) {
-#else
-    int i;
-
-    for (i = 0; script->punctuations[i].p; i++) {
-        punc = &script->punctuations[i];
-#endif // PUNCTABLE
         p = punc->p;
         len = strlen(p);
         // if the script contains at least as much characters as the punctuation
@@ -905,10 +894,8 @@ script_t* LoadScriptMemory(char* ptr, int length, char* name)
 }
 void FreeScript(script_t* script)
 {
-#ifdef PUNCTABLE
     if (script->punctuationtable)
         FreeMemory(script->punctuationtable);
-#endif // PUNCTABLE
     FreeMemory(script);
 }
 void PS_SetBaseFolder(char* path)
