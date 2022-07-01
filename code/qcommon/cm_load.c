@@ -501,7 +501,7 @@ void CM_LoadMap(const char* name, bool clientload, int* checksum)
     length = LoadQuakeFile((quakefile_t*)name, (void**)&buf);
 #endif
 
-    if (!buf) {
+    if (NULL == buf) {
         Com_Error(ERR_DROP, "Couldn't load %s", name);
     }
 
