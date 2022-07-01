@@ -135,6 +135,12 @@ These changes have not been started but are things that the project is consideri
       <td>Expose the engine state for control and observation.</td>
       <td>Experimentation and prototyping required.</td>
     </tr>
+    <tr valign="top">
+      <td><a href="synchronised_video_textures.html">Synchronised Video Textures</a></td>
+      <td>Eye Twinkle</td>
+      <td>Watch videos within game.</td>
+      <td>Pie in the sky ... but directly useful.</td>
+    </tr>
   </tbody>
 </table>
 
