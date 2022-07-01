@@ -158,9 +158,7 @@ cc_library(
         "//code/q3_ui:__pkg__",
         "//code/ui:__pkg__",
     ],
-    deps = [
-        ":shared_api",
-    ],
+    deps = [":shared_api"],
 )
 
 cc_library(
