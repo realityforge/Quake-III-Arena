@@ -121,8 +121,6 @@ float FloatSwap(const float* f);
 
 #ifdef WIN32
 
-#define MAC_STATIC
-
 #undef QDECL
 #define QDECL __cdecl
 
@@ -165,7 +163,6 @@ static inline float BigFloat(const float* l)
 
 #if defined(__APPLE__) || defined(__APPLE_CC__)
 
-#define MAC_STATIC
 #define __cdecl
 #define __declspec(x)
 #define stricmp strcasecmp
@@ -210,7 +207,6 @@ static inline float LittleFloat(const float l)
 #ifdef __MACOS__
 
 #include <MacTypes.h>
-#define MAC_STATIC
 
 #define CPUSTRING "MacOS-PPC"
 
@@ -243,8 +239,6 @@ static inline float LittleFloat(const float l)
 #ifdef __linux__
 
 #define stricmp strcasecmp
-
-#define MAC_STATIC
 
 #ifdef __i386__
 #define CPUSTRING "linux-i386"
