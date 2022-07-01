@@ -808,7 +808,6 @@ typedef struct {
 // trace->entityNum can also be 0 to (MAX_GENTITIES-1)
 // or ENTITYNUM_NONE, ENTITYNUM_WORLD
 
-// markfragments are returned by CM_MarkFragments()
 typedef struct {
     int firstPoint;
     int numPoints;
