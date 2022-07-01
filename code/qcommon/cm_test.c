@@ -286,11 +286,9 @@ void CM_AdjustAreaPortalState(int area1, int area2, bool open)
 
 bool CM_AreasConnected(int area1, int area2)
 {
-#ifndef BSPC
     if (cm_noAreas->integer) {
         return true;
     }
-#endif
 
     if (area1 < 0 || area2 < 0) {
         return false;
@@ -328,17 +326,12 @@ int CM_WriteAreaBits(uint8_t* buffer, int area)
 
     bytes = (cm.numAreas + 7) >> 3;
 
-#ifndef BSPC
-    if (cm_noAreas->integer || area == -1)
-#else
-    if (area == -1)
-#endif
-    { // for debugging, send everything
+    if (cm_noAreas->integer || area == -1) { // for debugging, send everything
         memset(buffer, 255, bytes);
     } else {
         floodnum = cm.areas[area].floodnum;
         for (i = 0; i < cm.numAreas; i++) {
-            if (cm.areas[i].floodnum == floodnum || area == -1)
+            if (cm.areas[i].floodnum == floodnum)
                 buffer[i >> 3] |= 1 << (i & 7);
         }
     }

@@ -88,7 +88,6 @@ cc_library(
         "l_utils.h",
     ],
     hdrs = ["be_aas.h"],
-    defines = ["BOTLIB"],
     includes = ["."],
     visibility = [
         "//code/client:__pkg__",

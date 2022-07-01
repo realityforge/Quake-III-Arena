@@ -24,7 +24,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * structure reading / writing
  *****************************************************************************/
 
-#ifdef BOTLIB
 #include "../qcommon/q_shared.h"
 #include "botlib.h" //for the include of be_interface.h
 #include "l_script.h"
@@ -32,19 +31,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "l_struct.h"
 #include "l_utils.h"
 #include "be_interface.h"
-#endif // BOTLIB
-
-#ifdef BSPC
-// include files for usage in the BSP Converter
-#include "../bspc/qbsp.h"
-#include "../bspc/l_log.h"
-#include "../bspc/l_mem.h"
-#include "l_precomp.h"
-#include "l_struct.h"
-
-#define true true
-#define false false
-#endif // BSPC
 
 fielddef_t* FindField(fielddef_t* defs, char* name)
 {

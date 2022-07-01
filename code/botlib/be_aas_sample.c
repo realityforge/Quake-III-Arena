@@ -29,17 +29,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "l_script.h"
 #include "l_precomp.h"
 #include "l_struct.h"
-#ifndef BSPC
 #include "l_libvar.h"
-#endif
 #include "aasfile.h"
 #include "botlib.h"
 #include "be_aas.h"
 #include "be_interface.h"
 #include "be_aas_funcs.h"
 #include "be_aas_def.h"
-
-//#define AAS_SAMPLE_DEBUG
 
 #define BBOX_NORMAL_EPSILON 0.001
 
@@ -81,11 +77,7 @@ void AAS_InitAASLinkHeap(void)
     max_aaslinks = aasworld.linkheapsize;
     // if there's no link heap present
     if (!aasworld.linkheap) {
-#ifdef BSPC
-        max_aaslinks = 6144;
-#else
         max_aaslinks = (int)LibVarValue("max_aaslinks", "6144");
-#endif
         if (max_aaslinks < 0)
             max_aaslinks = 0;
         aasworld.linkheapsize = max_aaslinks;
@@ -117,10 +109,7 @@ aas_link_t* AAS_AllocAASLink(void)
 
     link = aasworld.freelinks;
     if (!link) {
-#ifndef BSPC
-        if (bot_developer)
-#endif
-        {
+        if (bot_developer) {
             botimport.Print(PRT_FATAL, "empty aas link heap\n");
         }
         return NULL;

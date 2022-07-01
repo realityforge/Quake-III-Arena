@@ -24,11 +24,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * pre compiler
  *****************************************************************************/
 
-// Notes:			fix: PC_StringizeTokens
-
-//#define BOTLIB
-
-#ifdef BOTLIB
 #include "../qcommon/q_shared.h"
 #include "botlib.h"
 #include "be_interface.h"
@@ -36,20 +31,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "l_script.h"
 #include "l_precomp.h"
 #include "l_log.h"
-#endif // BOTLIB
-
-#ifdef BSPC
-// include files for usage in the BSP Converter
-#include "../bspc/qbsp.h"
-#include "../bspc/l_log.h"
-#include "../bspc/l_mem.h"
-#include "l_precomp.h"
-
-#define true true
-#define false false
-#define Q_stricmp stricmp
-
-#endif // BSPC
 
 #define MAX_DEFINEPARMS 128
 
@@ -74,12 +55,7 @@ void QDECL SourceError(source_t* source, char* str, ...)
     va_start(ap, str);
     Q_vsnprintf(text, sizeof(text), str, ap);
     va_end(ap);
-#ifdef BOTLIB
     botimport.Print(PRT_ERROR, "file %s, line %d: %s\n", source->scriptstack->filename, source->scriptstack->line, text);
-#endif // BOTLIB
-#ifdef BSPC
-    Log_Print("error: file %s, line %d: %s\n", source->scriptstack->filename, source->scriptstack->line, text);
-#endif // BSPC
 }
 void QDECL SourceWarning(source_t* source, char* str, ...)
 {
@@ -89,12 +65,7 @@ void QDECL SourceWarning(source_t* source, char* str, ...)
     va_start(ap, str);
     Q_vsnprintf(text, sizeof(text), str, ap);
     va_end(ap);
-#ifdef BOTLIB
     botimport.Print(PRT_WARNING, "file %s, line %d: %s\n", source->scriptstack->filename, source->scriptstack->line, text);
-#endif // BOTLIB
-#ifdef BSPC
-    Log_Print("warning: file %s, line %d: %s\n", source->scriptstack->filename, source->scriptstack->line, text);
-#endif // BSPC
 }
 void PC_PushIndent(source_t* source, int type, int skip)
 {
@@ -160,20 +131,11 @@ void PC_InitTokenHeap(void)
 }
 token_t* PC_CopyToken(token_t* token)
 {
-    token_t* t;
-
-    //	t = (token_t *) malloc(sizeof(token_t));
-    t = (token_t*)GetMemory(sizeof(token_t));
-    //	t = freetokens;
+    token_t* t = (token_t*)GetMemory(sizeof(token_t));
     if (!t) {
-#ifdef BSPC
-        Error("out of token space");
-#else
         Com_Error(ERR_FATAL, "out of token space");
-#endif
         return NULL;
     }
-    //	freetokens = freetokens->next;
     memcpy(t, token, sizeof(token_t));
     t->next = NULL;
     numtokens++;
@@ -181,10 +143,7 @@ token_t* PC_CopyToken(token_t* token)
 }
 void PC_FreeToken(token_t* token)
 {
-    // free(token);
     FreeMemory(token);
-    //	token->next = freetokens;
-    //	freetokens = token;
     numtokens--;
 }
 int PC_ReadSourceToken(source_t* source, token_t* token)
@@ -2259,9 +2218,7 @@ void PC_CheckOpenSourceHandles(void)
 
     for (i = 1; i < MAX_SOURCEFILES; i++) {
         if (sourceFiles[i]) {
-#ifdef BOTLIB
             botimport.Print(PRT_ERROR, "file %s still open in precompiler\n", sourceFiles[i]->scriptstack->filename);
-#endif // BOTLIB
         }
     }
 }
