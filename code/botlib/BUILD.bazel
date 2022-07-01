@@ -20,9 +20,7 @@ cc_library(
         "//code/game:__pkg__",
         "//code/server:__pkg__",
     ],
-    deps = [
-        "//code/qcommon:shared_api",
-    ],
+    deps = ["//code/qcommon:shared_api"],
 )
 
 _BOTLIB_SRC = [
