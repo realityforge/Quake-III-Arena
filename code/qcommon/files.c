@@ -1626,7 +1626,7 @@ long FS_ReadFileDir(const char* qpath, void* searchPath, bool unpure, void** buf
         if (buffer) {
             *buffer = NULL;
         }
-        // if we are journalling and it is a config file, write a zero to the journal file
+        // if we are journaling and it is a config file, write a zero to the journal file
         if (isConfig && com_journal && com_journal->integer == 1) {
             Com_DPrintf("Writing zero for %s to journal file.\n", qpath);
             len = 0;
@@ -1658,7 +1658,7 @@ long FS_ReadFileDir(const char* qpath, void* searchPath, bool unpure, void** buf
     buf[len] = 0;
     FS_FCloseFile(h);
 
-    // if we are journalling and it is a config file, write it to the journal file
+    // if we are journaling and it is a config file, write it to the journal file
     if (isConfig && com_journal && com_journal->integer == 1) {
         Com_DPrintf("Writing %s to journal file.\n", qpath);
         FS_Write(&len, sizeof(len), com_journalDataFile);
