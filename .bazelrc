@@ -166,6 +166,7 @@ build --compilation_mode=opt
 build --verbose_failures
 
 build --copt -std=c99
+build --cxxopt -std=c++17
 
 # Remove unused attributes
 build --incompatible_remove_cpu_and_compiler_attributes_from_cc_toolchain
