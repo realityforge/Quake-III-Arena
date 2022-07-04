@@ -25,12 +25,87 @@ extern "C" {
 #error "The developer should define BRAINCHECK_PRINTF prior to including braincheck header"
 #endif
 
+#include <stdbool.h>
+
 #if defined(__clang__) || defined(__GNUC__)
 #define BRAINCHECK_FUNCTION_NAME __PRETTY_FUNCTION__
 #elif defined(_MSC_VER)
 #define BRAINCHECK_FUNCTION_NAME __FUNCSIG__
 #else
 #define BRAINCHECK_FUNCTION_NAME __func__
+#endif
+
+#ifndef BRAINCHECK_NO_DEBUG
+
+/**
+ * Print value of expression where the expression is a non-array atomic value.
+ */
+#define braincheck_debug(expr)                      \
+    _Generic((expr),                                \
+             char                                   \
+             : braincheck_debug_char,               \
+               signed char                          \
+             : braincheck_debug_signed_char,        \
+               unsigned char                        \
+             : braincheck_debug_unsigned_char,      \
+               short                                \
+             : braincheck_debug_short,              \
+               unsigned short                       \
+             : braincheck_debug_unsigned_short,     \
+               int                                  \
+             : braincheck_debug_int,                \
+               unsigned int                         \
+             : braincheck_debug_unsigned_int,       \
+               long                                 \
+             : braincheck_debug_long,               \
+               unsigned long                        \
+             : braincheck_debug_unsigned_long,      \
+               long long                            \
+             : braincheck_debug_long_long,          \
+               unsigned long long                   \
+             : braincheck_debug_unsigned_long_long, \
+               float                                \
+             : braincheck_debug_float,              \
+               double                               \
+             : braincheck_debug_double,             \
+               bool                                 \
+             : braincheck_debug_bool,               \
+               default                              \
+             : braincheck_debug_pointer)(__FILE__, __LINE__, BRAINCHECK_FUNCTION_NAME, #expr, expr)
+
+#define BRAINCHECK_INTERNAL_DEBUG_FUNC(name, type, formatter_specifier)                                                                          \
+    static inline void braincheck_debug_##name(const char* file, const int line, const char* function, const char* expression, const type value) \
+    {                                                                                                                                            \
+        BRAINCHECK_PRINTF("%s:%d: %s - '%s' = " formatter_specifier "\n", file, line, function, expression, value);                                \
+    }
+
+BRAINCHECK_INTERNAL_DEBUG_FUNC(char, char, "%c");
+BRAINCHECK_INTERNAL_DEBUG_FUNC(signed_char, signed char, "%c");
+BRAINCHECK_INTERNAL_DEBUG_FUNC(unsigned_char, unsigned char, "%c");
+BRAINCHECK_INTERNAL_DEBUG_FUNC(short, short, "%hd");
+BRAINCHECK_INTERNAL_DEBUG_FUNC(unsigned_short, unsigned short, "%hu");
+// BRAINCHECK_INTERNAL_DEBUG_FUNC(size_t, size_t, "%zu");
+BRAINCHECK_INTERNAL_DEBUG_FUNC(int, int, "%d");
+BRAINCHECK_INTERNAL_DEBUG_FUNC(unsigned_int, unsigned int, "%u");
+BRAINCHECK_INTERNAL_DEBUG_FUNC(long, long, "%ld");
+BRAINCHECK_INTERNAL_DEBUG_FUNC(unsigned_long, unsigned long, "%lu");
+BRAINCHECK_INTERNAL_DEBUG_FUNC(long_long, long long, "%lld");
+BRAINCHECK_INTERNAL_DEBUG_FUNC(unsigned_long_long, unsigned long long, "%llu");
+BRAINCHECK_INTERNAL_DEBUG_FUNC(float, float, "%f");
+BRAINCHECK_INTERNAL_DEBUG_FUNC(double, double, "%f");
+
+static inline void braincheck_debug_bool(const char* file, const int line, const char* function, const char* expression, const bool value)
+{
+    BRAINCHECK_PRINTF("%s:%d: %s - '%s' = %s\n", file, line, function, expression, value ? "true" : "false");
+}
+
+static inline void braincheck_debug_pointer(const char* file, const int line, const char* function, const char* expression, const void* value)
+{
+    BRAINCHECK_PRINTF("%s:%d: %s - '%s' = %p\n", file, line, function, expression, value);
+}
+
+#undef BRAINCHECK_INTERNAL_DEBUG_FUNC
+
 #endif
 
 #ifndef BRAINCHECK_NO_BACKTRACE
