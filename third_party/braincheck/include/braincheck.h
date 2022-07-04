@@ -50,7 +50,7 @@ extern "C" {
                                       backtrace(&callstack[0], (max_frame_count) + 1)); \
     } while (0)
 
-#define braincheck_backtrace() braincheck_backtrace_n(BRAINCHECK_MAX_BACKTRACE_FRAMES - 1)
+#define braincheck_backtrace() braincheck_backtrace_n(BRAINCHECK_MAX_BACKTRACE_FRAMES)
 
 static inline void braincheck_internal_backtrace(const char* file, int line, const char* function, void** callstack_buffer, const int max_callstack_depth)
 {
