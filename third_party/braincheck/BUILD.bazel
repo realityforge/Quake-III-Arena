@@ -16,23 +16,3 @@ cc_library(
     includes = ["include"],
     visibility = ["//visibility:public"],
 )
-
-cc_test(
-    name = "braincheck_backtrace_n_test",
-    size = "small",
-    srcs = ["tests/braincheck_backtrace_n_test.cpp"],
-    deps = [
-        "braincheck",
-        "@catch2//:catch2_main",
-    ],
-)
-
-cc_test(
-    name = "braincheck_backtrace_test",
-    size = "small",
-    srcs = ["tests/braincheck_backtrace_test.cpp"],
-    deps = [
-        "braincheck",
-        "@catch2//:catch2_main",
-    ],
-)
