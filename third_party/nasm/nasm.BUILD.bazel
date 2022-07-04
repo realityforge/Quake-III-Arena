@@ -12,7 +12,7 @@
 # NOTE: This Build file was copied from https://github.com/tensorflow/tensorflow/blob/7a99ce11636fb7e0c974d4d9b8b5dbff7f259c87/third_party/nasm/nasm.BUILD
 #       and is under the Apache 2 license as specified by https://github.com/tensorflow/tensorflow/blob/7a99ce11636fb7e0c974d4d9b8b5dbff7f259c87/LICENSE
 
-load("@org_realityforge_q3a//third_party:common.bzl", "expand_template")
+load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 
 licenses(["notice"])
 
