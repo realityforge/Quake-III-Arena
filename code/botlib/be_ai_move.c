@@ -41,10 +41,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_ai_goal.h"
 #include "be_ai_move.h"
 
-//#define DEBUG_AI_MOVE
-//#define DEBUG_ELEVATOR
-//#define DEBUG_GRAPPLE
-
 // movement state
 // NOTE: the moveflags MFL_ONGROUND, MFL_TELEPORTED, MFL_WATERJUMP and
 //		MFL_GRAPPLEPULL must be set outside the movement code
@@ -1501,15 +1497,9 @@ bot_moveresult_t BotTravel_Elevator(bot_movestate_t* ms, aas_reachability_t* rea
 
     // if standing on the plat
     if (BotOnMover(ms->origin, ms->entitynum, reach)) {
-#ifdef DEBUG_ELEVATOR
-        botimport.Print(PRT_MESSAGE, "bot on elevator\n");
-#endif // DEBUG_ELEVATOR
-       // if vertically not too far from the end point
+        // if vertically not too far from the end point
         if (fabsf(ms->origin[2] - reach->end[2]) < sv_maxbarrier->value) {
-#ifdef DEBUG_ELEVATOR
-            botimport.Print(PRT_MESSAGE, "bot moving to end\n");
-#endif // DEBUG_ELEVATOR
-       // move to the end point
+            // move to the end point
             VectorSubtract(reach->end, ms->origin, hordir);
             hordir[2] = 0;
             VectorNormalize(hordir);
@@ -1525,10 +1515,7 @@ bot_moveresult_t BotTravel_Elevator(bot_movestate_t* ms, aas_reachability_t* rea
             hordir[2] = 0;
             dist = VectorNormalize(hordir);
             if (dist > 10) {
-#ifdef DEBUG_ELEVATOR
-                botimport.Print(PRT_MESSAGE, "bot moving to center\n");
-#endif // DEBUG_ELEVATOR
-       // move to the center of the plat
+                // move to the center of the plat
                 if (dist > 100)
                     dist = 100;
                 speed = 400 - (400 - 4 * dist);
@@ -1537,10 +1524,7 @@ bot_moveresult_t BotTravel_Elevator(bot_movestate_t* ms, aas_reachability_t* rea
             }
         }
     } else {
-#ifdef DEBUG_ELEVATOR
-        botimport.Print(PRT_MESSAGE, "bot not on elevator\n");
-#endif // DEBUG_ELEVATOR
-       // if very near the reachability end
+        // if very near the reachability end
         VectorSubtract(reach->end, ms->origin, dir);
         dist = VectorLength(dir);
         if (dist < 64) {
@@ -1565,9 +1549,6 @@ bot_moveresult_t BotTravel_Elevator(bot_movestate_t* ms, aas_reachability_t* rea
         dist1 = VectorNormalize(dir1);
         // if the elevator isn't down
         if (!MoverDown(reach)) {
-#ifdef DEBUG_ELEVATOR
-            botimport.Print(PRT_MESSAGE, "elevator not down\n");
-#endif // DEBUG_ELEVATOR
             dist = dist1;
             VectorCopy(dir1, dir);
             BotCheckBlocked(ms, dir, false, &result);
@@ -1596,16 +1577,10 @@ bot_moveresult_t BotTravel_Elevator(bot_movestate_t* ms, aas_reachability_t* rea
         // closer to the elevator center or
         // between reachability start and elevator center
         if (dist1 < 20 || dist2 < dist1 || DotProduct(dir1, dir2) < 0) {
-#ifdef DEBUG_ELEVATOR
-            botimport.Print(PRT_MESSAGE, "bot moving to center\n");
-#endif // DEBUG_ELEVATOR
             dist = dist2;
             VectorCopy(dir2, dir);
         } else // closer to the reachability start
         {
-#ifdef DEBUG_ELEVATOR
-            botimport.Print(PRT_MESSAGE, "bot moving to start\n");
-#endif // DEBUG_ELEVATOR
             dist = dist1;
             VectorCopy(dir1, dir);
         }
@@ -1898,9 +1873,6 @@ void BotResetGrapple(bot_movestate_t* ms)
                 EA_Command(ms->client, cmd_grappleoff->string);
             ms->moveflags &= ~MFL_ACTIVEGRAPPLE;
             ms->grapplevisible_time = 0;
-#ifdef DEBUG_GRAPPLE
-            botimport.Print(PRT_MESSAGE, "reset grapple\n");
-#endif // DEBUG_GRAPPLE
         }
     }
 }
@@ -1911,13 +1883,6 @@ bot_moveresult_t BotTravel_Grapple(bot_movestate_t* ms, aas_reachability_t* reac
     vec3_t dir, viewdir, org;
     int state, areanum;
     bsp_trace_t trace;
-
-#ifdef DEBUG_GRAPPLE
-    static int debugline;
-    if (!debugline)
-        debugline = botimport.DebugLineCreate();
-    botimport.DebugLineShow(debugline, reach->start, reach->end, LINECOLOR_BLUE);
-#endif // DEBUG_GRAPPLE
 
     if (ms->moveflags & MFL_GRAPPLERESET) {
         if (offhandgrapple->value)
@@ -1930,9 +1895,6 @@ bot_moveresult_t BotTravel_Grapple(bot_movestate_t* ms, aas_reachability_t* reac
         result.flags |= MOVERESULT_MOVEMENTWEAPON;
     }
     if (ms->moveflags & MFL_ACTIVEGRAPPLE) {
-#ifdef DEBUG_GRAPPLE
-        botimport.Print(PRT_MESSAGE, "BotTravel_Grapple: active grapple\n");
-#endif // DEBUG_GRAPPLE
         state = GrappleState(ms, reach);
         VectorSubtract(reach->end, ms->origin, dir);
         dir[2] = 0;
@@ -1941,9 +1903,6 @@ bot_moveresult_t BotTravel_Grapple(bot_movestate_t* ms, aas_reachability_t* reac
         // the bot doesn't get any closer
         if (state && dist < 48) {
             if (ms->lastgrappledist - dist < 1) {
-#ifdef DEBUG_GRAPPLE
-                botimport.Print(PRT_ERROR, "grapple normal end\n");
-#endif // DEBUG_GRAPPLE
                 if (offhandgrapple->value)
                     EA_Command(ms->client, cmd_grappleoff->string);
                 ms->moveflags &= ~MFL_ACTIVEGRAPPLE;
@@ -1956,9 +1915,6 @@ bot_moveresult_t BotTravel_Grapple(bot_movestate_t* ms, aas_reachability_t* reac
         // isn't moving anymore
         else if (!state || (state == 2 && dist > ms->lastgrappledist - 2)) {
             if (ms->grapplevisible_time < AAS_Time() - 0.4) {
-#ifdef DEBUG_GRAPPLE
-                botimport.Print(PRT_ERROR, "grapple not visible\n");
-#endif // DEBUG_GRAPPLE
                 if (offhandgrapple->value)
                     EA_Command(ms->client, cmd_grappleoff->string);
                 ms->moveflags &= ~MFL_ACTIVEGRAPPLE;
@@ -1975,9 +1931,6 @@ bot_moveresult_t BotTravel_Grapple(bot_movestate_t* ms, aas_reachability_t* reac
         // remember the current grapple distance
         ms->lastgrappledist = dist;
     } else {
-#ifdef DEBUG_GRAPPLE
-        botimport.Print(PRT_MESSAGE, "BotTravel_Grapple: inactive grapple\n");
-#endif // DEBUG_GRAPPLE
         ms->grapplevisible_time = AAS_Time();
         VectorSubtract(reach->start, ms->origin, dir);
         if (!(ms->moveflags & MFL_SWIMMING))
@@ -1988,10 +1941,7 @@ bot_moveresult_t BotTravel_Grapple(bot_movestate_t* ms, aas_reachability_t* reac
         Vector2Angles(viewdir, result.ideal_viewangles);
         result.flags |= MOVERESULT_MOVEMENTVIEW;
         if (dist < 5 && fabs(AngleDiff(result.ideal_viewangles[0], ms->viewangles[0])) < 2 && fabs(AngleDiff(result.ideal_viewangles[1], ms->viewangles[1])) < 2) {
-#ifdef DEBUG_GRAPPLE
-            botimport.Print(PRT_MESSAGE, "BotTravel_Grapple: activating grapple\n");
-#endif // DEBUG_GRAPPLE
-       // check if the grapple missile path is clear
+            // check if the grapple missile path is clear
             VectorAdd(ms->origin, ms->viewoffset, org);
             trace = AAS_Trace(org, NULL, NULL, reach->end, ms->entitynum, CONTENTS_SOLID);
             VectorSubtract(reach->end, trace.endpos, dir);
@@ -2487,16 +2437,6 @@ void BotMoveToGoal(bot_moveresult_t* result, int movestate, bot_goal_t* goal, in
             // get the reachability from the number
             AAS_ReachabilityFromNum(reachnum, &reach);
             result->traveltype = reach.traveltype;
-#ifdef DEBUG_AI_MOVE
-            AAS_ClearShownDebugLines();
-            AAS_PrintTravelType(reach.traveltype & TRAVELTYPE_MASK);
-            AAS_ShowReachability(&reach);
-#endif // DEBUG_AI_MOVE
-#ifdef DEBUG
-            // botimport.Print(PRT_MESSAGE, "client %d: ", ms->client);
-            // AAS_PrintTravelType(reach.traveltype);
-            // botimport.Print(PRT_MESSAGE, "\n");
-#endif // DEBUG
             switch (reach.traveltype & TRAVELTYPE_MASK) {
             case TRAVEL_WALK:
                 *result = BotTravel_Walk(ms, &reach);

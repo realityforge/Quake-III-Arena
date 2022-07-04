@@ -41,7 +41,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_ai_goal.h"
 #include "be_ai_move.h"
 
-//#define DEBUG_AI_GOAL
 #ifdef RANDOMIZE
 #define UNDECIDEDFUZZY
 #endif // RANDOMIZE

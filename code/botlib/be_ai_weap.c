@@ -35,8 +35,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_ai_weight.h" //fuzzy weights
 #include "be_ai_weap.h"
 
-//#define DEBUG_AI_WEAP
-
 // structure field offsets
 #define WEAPON_OFS(x) offsetof(weaponinfo_t, x)
 #define PROJECTILE_OFS(x) offsetof(projectileinfo_t, x)
@@ -132,25 +130,6 @@ bot_weaponstate_t* BotWeaponStateFromHandle(int handle)
     }
     return botweaponstates[handle];
 }
-#ifdef DEBUG_AI_WEAP
-void DumpWeaponConfig(weaponconfig_t* wc)
-{
-    FILE* fp;
-    int i;
-
-    fp = Log_FileStruct();
-    if (!fp)
-        return;
-    for (i = 0; i < wc->numprojectiles; i++) {
-        WriteStructure(fp, &projectileinfo_struct, (char*)&wc->projectileinfo[i]);
-        Log_Flush();
-    }
-    for (i = 0; i < wc->numweapons; i++) {
-        WriteStructure(fp, &weaponinfo_struct, (char*)&wc->weaponinfo[i]);
-        Log_Flush();
-    }
-}
-#endif // DEBUG_AI_WEAP
 weaponconfig_t* LoadWeaponConfig(char* filename)
 {
     int max_weaponinfo, max_projectileinfo;
@@ -386,9 +365,6 @@ int BotSetupWeaponAI(void)
         return BLERR_CANNOTLOADWEAPONCONFIG;
     }
 
-#ifdef DEBUG_AI_WEAP
-    DumpWeaponConfig(weaponconfig);
-#endif // DEBUG_AI_WEAP
     return BLERR_NOERROR;
 }
 void BotShutdownWeaponAI(void)
