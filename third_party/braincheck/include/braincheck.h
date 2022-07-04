@@ -39,14 +39,14 @@ extern "C" {
 #define BRAINCHECK_MAX_BACKTRACE_FRAMES 128
 #endif
 
-#define braincheck_backtrace_n(max_frame_count) \
-    do {                                                                          \
+#define braincheck_backtrace_n(max_frame_count)                                         \
+    do {                                                                                \
         void* callstack[(max_frame_count) + 1];                                         \
-                                                                                  \
-        braincheck_internal_backtrace(__FILE__,                                   \
-                                      __LINE__,                                   \
-                                      __func__,                                   \
-                                      &callstack[0],                              \
+                                                                                        \
+        braincheck_internal_backtrace(__FILE__,                                         \
+                                      __LINE__,                                         \
+                                      __func__,                                         \
+                                      &callstack[0],                                    \
                                       backtrace(&callstack[0], (max_frame_count) + 1)); \
     } while (0)
 
