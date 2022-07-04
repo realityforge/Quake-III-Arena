@@ -25,14 +25,20 @@ extern "C" void func4()
 
 TEST_CASE("Backtrace includes file, line and function as well as stack up to n elements")
 {
-    message[0] = 0;
+    message_init();
     func4();
-    std::string str = message;
+    const std::string message = get_message();
 
-    REQUIRE_THAT(str, StartsWith(__FILE__ ":8: func1"));
+#if defined(__clang__) || defined(__GNUC__)
+#define EXPECTED_FUNC_NAME "void func1()"
+#else
+#define EXPECTED_FUNC_NAME "func1"
+#endif
+
+    REQUIRE_THAT(message, StartsWith(__FILE__ ":8: " EXPECTED_FUNC_NAME));
 #ifdef DEBUG
-    REQUIRE_THAT(str, ContainsSubstring("func2"));
-    REQUIRE_THAT(str, ContainsSubstring("func3"));
-    REQUIRE_THAT(str, !ContainsSubstring("func4"));
+    REQUIRE_THAT(message, ContainsSubstring("func2"));
+    REQUIRE_THAT(message, ContainsSubstring("func3"));
+    REQUIRE_THAT(message, !ContainsSubstring("func4"));
 #endif
 }

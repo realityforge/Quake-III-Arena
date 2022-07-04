@@ -25,6 +25,14 @@ extern "C" {
 #error "The developer should define BRAINCHECK_PRINTF prior to including braincheck header"
 #endif
 
+#if defined(__clang__) || defined(__GNUC__)
+#define BRAINCHECK_FUNCTION_NAME __PRETTY_FUNCTION__
+#elif defined(_MSC_VER)
+#define BRAINCHECK_FUNCTION_NAME __FUNCSIG__
+#else
+#define BRAINCHECK_FUNCTION_NAME __func__
+#endif
+
 #ifndef BRAINCHECK_NO_BACKTRACE
 #include <stdlib.h>
 #include <execinfo.h>
@@ -48,7 +56,7 @@ extern "C" {
                                                                                         \
         braincheck_internal_backtrace(__FILE__,                                         \
                                       __LINE__,                                         \
-                                      __func__,                                         \
+                                      BRAINCHECK_FUNCTION_NAME,                         \
                                       &callstack[0],                                    \
                                       backtrace(&callstack[0], (max_frame_count) + 1)); \
     } while (0)
