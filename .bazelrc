@@ -165,7 +165,7 @@ build --compilation_mode=opt
 # If a command fails, print out the full command line.
 build --verbose_failures
 
-build --copt -std=c99
+build --copt -std=c11
 build --cxxopt -std=c++17
 
 # Remove unused attributes
