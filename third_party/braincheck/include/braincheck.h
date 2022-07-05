@@ -84,7 +84,6 @@ BRAINCHECK_INTERNAL_DEBUG_FUNC(signed_char, signed char, "%c");
 BRAINCHECK_INTERNAL_DEBUG_FUNC(unsigned_char, unsigned char, "%c");
 BRAINCHECK_INTERNAL_DEBUG_FUNC(short, short, "%hd");
 BRAINCHECK_INTERNAL_DEBUG_FUNC(unsigned_short, unsigned short, "%hu");
-// BRAINCHECK_INTERNAL_DEBUG_FUNC(size_t, size_t, "%zu");
 BRAINCHECK_INTERNAL_DEBUG_FUNC(int, int, "%d");
 BRAINCHECK_INTERNAL_DEBUG_FUNC(unsigned_int, unsigned int, "%u");
 BRAINCHECK_INTERNAL_DEBUG_FUNC(long, long, "%ld");
