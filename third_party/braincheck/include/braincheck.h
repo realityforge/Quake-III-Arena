@@ -73,10 +73,80 @@ extern "C" {
                default                              \
              : braincheck_debug_pointer)(__FILE__, __LINE__, BRAINCHECK_FUNCTION_NAME, #expr, expr)
 
-#define BRAINCHECK_INTERNAL_DEBUG_FUNC(name, type, formatter_specifier)                                                                          \
-    static inline void braincheck_debug_##name(const char* file, const int line, const char* function, const char* expression, const type value) \
-    {                                                                                                                                            \
-        BRAINCHECK_PRINTF("%s:%d: %s - '%s' = " formatter_specifier "\n", file, line, function, expression, value);                                \
+#define braincheck_debug_array(expr, length)              \
+    _Generic((expr),                                      \
+             bool*                                        \
+             : braincheck_debug_bool_array,               \
+               const bool*                                \
+             : braincheck_debug_bool_array,               \
+               char*                                      \
+             : braincheck_debug_char_array,               \
+               const char*                                \
+             : braincheck_debug_char_array,               \
+               signed char*                               \
+             : braincheck_debug_signed_char_array,        \
+               const signed char*                         \
+             : braincheck_debug_signed_char_array,        \
+               unsigned char*                             \
+             : braincheck_debug_unsigned_char_array,      \
+               const unsigned char*                       \
+             : braincheck_debug_unsigned_char_array,      \
+               short*                                     \
+             : braincheck_debug_short_array,              \
+               const short*                               \
+             : braincheck_debug_short_array,              \
+               unsigned short*                            \
+             : braincheck_debug_unsigned_short_array,     \
+               const unsigned short*                      \
+             : braincheck_debug_unsigned_short_array,     \
+               int*                                       \
+             : braincheck_debug_int_array,                \
+               const int*                                 \
+             : braincheck_debug_int_array,                \
+               unsigned int*                              \
+             : braincheck_debug_unsigned_int_array,       \
+               const unsigned int*                        \
+             : braincheck_debug_unsigned_int_array,       \
+               long*                                      \
+             : braincheck_debug_long_array,               \
+               const long*                                \
+             : braincheck_debug_long_array,               \
+               unsigned long*                             \
+             : braincheck_debug_unsigned_long_array,      \
+               const unsigned long*                       \
+             : braincheck_debug_unsigned_long_array,      \
+               long long*                                 \
+             : braincheck_debug_long_long_array,          \
+               const long long*                           \
+             : braincheck_debug_long_long_array,          \
+               unsigned long long*                        \
+             : braincheck_debug_unsigned_long_long_array, \
+               const unsigned long long*                  \
+             : braincheck_debug_unsigned_long_long_array, \
+               float*                                     \
+             : braincheck_debug_float_array,              \
+               const float*                               \
+             : braincheck_debug_float_array,              \
+               double*                                    \
+             : braincheck_debug_double_array,             \
+               const double*                              \
+             : braincheck_debug_double_array)(__FILE__, __LINE__, BRAINCHECK_FUNCTION_NAME, #expr, expr, length)
+
+#define BRAINCHECK_INTERNAL_DEBUG_FUNC(name, type, formatter_specifier)                                                                                                              \
+    static inline void braincheck_debug_##name(const char* file, const int line, const char* function, const char* expression, const type value)                                     \
+    {                                                                                                                                                                                \
+        BRAINCHECK_PRINTF("%s:%d: %s - '%s' = " formatter_specifier "\n", file, line, function, expression, value);                                                                  \
+    }                                                                                                                                                                                \
+    static inline void braincheck_debug_##name##_array(const char* file, const int line, const char* function, const char* expression, const type* value, const unsigned int length) \
+    {                                                                                                                                                                                \
+        BRAINCHECK_PRINTF("%s:%d: %s - '%s' = [", file, line, function, expression);                                                                                                 \
+        for (int i = 0; i < length; i++) {                                                                                                                                           \
+            if (0 != i) {                                                                                                                                                            \
+                BRAINCHECK_PRINTF(", ");                                                                                                                                             \
+            }                                                                                                                                                                        \
+            BRAINCHECK_PRINTF(formatter_specifier, value[i]);                                                                                                                        \
+        }                                                                                                                                                                            \
+        BRAINCHECK_PRINTF("]\n");                                                                                                                                                    \
     }
 
 BRAINCHECK_INTERNAL_DEBUG_FUNC(char, char, "%c");
@@ -97,7 +167,17 @@ static inline void braincheck_debug_bool(const char* file, const int line, const
 {
     BRAINCHECK_PRINTF("%s:%d: %s - '%s' = %s\n", file, line, function, expression, value ? "true" : "false");
 }
-
+static inline void braincheck_debug_bool_array(const char* file, const int line, const char* function, const char* expression, const bool* value, const unsigned int length)
+{
+    BRAINCHECK_PRINTF("%s:%d: %s - '%s' = [", file, line, function, expression);
+    for (int i = 0; i < length; i++) {
+        if (0 != i) {
+            BRAINCHECK_PRINTF(", ");
+        }
+        BRAINCHECK_PRINTF("%s", value[i] ? "true" : "false");
+    }
+    BRAINCHECK_PRINTF("]\n");
+}
 static inline void braincheck_debug_pointer(const char* file, const int line, const char* function, const char* expression, const void* value)
 {
     BRAINCHECK_PRINTF("%s:%d: %s - '%s' = %p\n", file, line, function, expression, value);

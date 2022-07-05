@@ -132,7 +132,121 @@ TEST_CASE("braincheck_debug(double)")
 TEST_CASE("braincheck_debug(pointer)")
 {
     message_init();
-    void * myValue = NULL;
+    void* myValue = NULL;
     braincheck_debug(myValue);
     assert_debug_message("myValue", "0x0");
+}
+
+TEST_CASE("braincheck_debug(bool[])")
+{
+    message_init();
+    bool values[] = { true, false, true, false, false, true };
+    braincheck_debug_array(values, 3);
+    assert_debug_message("values", "[true, false, true]");
+}
+
+TEST_CASE("braincheck_debug(char[])")
+{
+    message_init();
+    char values[] = { 'a', 'b', 'c', 'd', 'e', 'f' };
+    braincheck_debug_array(values, 3);
+    assert_debug_message("values", "[a, b, c]");
+}
+
+TEST_CASE("braincheck_debug(signed char[])")
+{
+    message_init();
+    signed char values[] = { 'a', 'b', 'c', 'd', 'e', 'f' };
+    braincheck_debug_array(values, 3);
+    assert_debug_message("values", "[a, b, c]");
+}
+
+TEST_CASE("braincheck_debug(unsigned char[])")
+{
+    message_init();
+    unsigned char values[] = { 'a', 'b', 'c', 'd', 'e', 'f' };
+    braincheck_debug_array(values, 3);
+    assert_debug_message("values", "[a, b, c]");
+}
+
+TEST_CASE("braincheck_debug(short[])")
+{
+    message_init();
+    short values[] = { 1, -42, 73, 11, 13, 7 };
+    braincheck_debug_array(values, 3);
+    assert_debug_message("values", "[1, -42, 73]");
+}
+
+TEST_CASE("braincheck_debug(unsigned short[])")
+{
+    message_init();
+    unsigned short values[] = { 1, 42, 73, 11, 13, 7 };
+    braincheck_debug_array(values, 3);
+    assert_debug_message("values", "[1, 42, 73]");
+}
+
+TEST_CASE("braincheck_debug(int[])")
+{
+    message_init();
+    int values[] = { 1, -42424242, 73, 11, 13, 7 };
+    braincheck_debug_array(values, 3);
+    assert_debug_message("values", "[1, -42424242, 73]");
+    message_init();
+}
+
+TEST_CASE("braincheck_debug(unsigned int[])")
+{
+    message_init();
+    unsigned int values[] = { 1, 42424242, 73, 11, 13, 7 };
+    braincheck_debug_array(values, 3);
+    assert_debug_message("values", "[1, 42424242, 73]");
+    message_init();
+}
+
+TEST_CASE("braincheck_debug(long[])")
+{
+    message_init();
+    long values[] = { 1, -4242424242424242424, 73, 11, 13, 7 };
+    braincheck_debug_array(values, 3);
+    assert_debug_message("values", "[1, -4242424242424242424, 73]");
+}
+
+TEST_CASE("braincheck_debug(unsigned long[])")
+{
+    message_init();
+    unsigned long values[] = { 1, 4242424242424242424, 73, 11, 13, 7 };
+    braincheck_debug_array(values, 3);
+    assert_debug_message("values", "[1, 4242424242424242424, 73]");
+}
+
+TEST_CASE("braincheck_debug(long long[])")
+{
+    message_init();
+    long long values[] = { 1, -4242424242424242424, 73, 11, 13, 7 };
+    braincheck_debug_array(values, 3);
+    assert_debug_message("values", "[1, -4242424242424242424, 73]");
+}
+
+TEST_CASE("braincheck_debug(unsigned long long[])")
+{
+    message_init();
+   unsigned long long values[] = { 1, 4242424242424242424, 73, 11, 13, 7 };
+    braincheck_debug_array(values, 3);
+    assert_debug_message("values", "[1, 4242424242424242424, 73]");
+}
+
+TEST_CASE("braincheck_debug(float[])")
+{
+    message_init();
+    float values[] = { 1.0F, -4.2F, 7.3F, 1.0F, 13.1F, 7.3F };
+    braincheck_debug_array(values, 3);
+    assert_debug_message("values", "[1.000000, -4.200000, 7.300000]");
+}
+
+TEST_CASE("braincheck_debug(double[])")
+{
+    message_init();
+    double values[] = { 1.0, -4.2, 7.3, 1.0, 13.1, 7.3 };
+    braincheck_debug_array(values, 3);
+    assert_debug_message("values", "[1.000000, -4.200000, 7.300000]");
 }
