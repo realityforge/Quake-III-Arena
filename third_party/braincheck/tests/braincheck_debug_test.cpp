@@ -230,7 +230,7 @@ TEST_CASE("braincheck_debug(long long[])")
 TEST_CASE("braincheck_debug(unsigned long long[])")
 {
     message_init();
-   unsigned long long values[] = { 1, 4242424242424242424, 73, 11, 13, 7 };
+    unsigned long long values[] = { 1, 4242424242424242424, 73, 11, 13, 7 };
     braincheck_debug_array(values, 3);
     assert_debug_message("values", "[1, 4242424242424242424, 73]");
 }
