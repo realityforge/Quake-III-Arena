@@ -132,21 +132,143 @@ extern "C" {
                const double*                              \
              : braincheck_debug_double_array)(__FILE__, __LINE__, BRAINCHECK_FUNCTION_NAME, #expr, expr, length)
 
-#define BRAINCHECK_INTERNAL_DEBUG_FUNC(name, type, formatter_specifier)                                                                                                              \
-    static inline void braincheck_debug_##name(const char* file, const int line, const char* function, const char* expression, const type value)                                     \
-    {                                                                                                                                                                                \
-        BRAINCHECK_PRINTF("%s:%d: %s - '%s' = " formatter_specifier "\n", file, line, function, expression, value);                                                                  \
-    }                                                                                                                                                                                \
-    static inline void braincheck_debug_##name##_array(const char* file, const int line, const char* function, const char* expression, const type* value, const unsigned int length) \
-    {                                                                                                                                                                                \
-        BRAINCHECK_PRINTF("%s:%d: %s - '%s' = [", file, line, function, expression);                                                                                                 \
-        for (int i = 0; i < length; i++) {                                                                                                                                           \
-            if (0 != i) {                                                                                                                                                            \
-                BRAINCHECK_PRINTF(", ");                                                                                                                                             \
-            }                                                                                                                                                                        \
-            BRAINCHECK_PRINTF(formatter_specifier, value[i]);                                                                                                                        \
-        }                                                                                                                                                                            \
-        BRAINCHECK_PRINTF("]\n");                                                                                                                                                    \
+/**
+ * Print value of array expression as a hexdump.
+ */
+#define braincheck_debug_hexdump(expr, length)              \
+    _Generic((expr),                                        \
+             bool*                                          \
+             : braincheck_debug_bool_hexdump,               \
+               const bool*                                  \
+             : braincheck_debug_bool_hexdump,               \
+               char*                                        \
+             : braincheck_debug_char_hexdump,               \
+               const char*                                  \
+             : braincheck_debug_char_hexdump,               \
+               signed char*                                 \
+             : braincheck_debug_signed_char_hexdump,        \
+               const signed char*                           \
+             : braincheck_debug_signed_char_hexdump,        \
+               unsigned char*                               \
+             : braincheck_debug_unsigned_char_hexdump,      \
+               const unsigned char*                         \
+             : braincheck_debug_unsigned_char_hexdump,      \
+               short*                                       \
+             : braincheck_debug_short_hexdump,              \
+               const short*                                 \
+             : braincheck_debug_short_hexdump,              \
+               unsigned short*                              \
+             : braincheck_debug_unsigned_short_hexdump,     \
+               const unsigned short*                        \
+             : braincheck_debug_unsigned_short_hexdump,     \
+               int*                                         \
+             : braincheck_debug_int_hexdump,                \
+               const int*                                   \
+             : braincheck_debug_int_hexdump,                \
+               unsigned int*                                \
+             : braincheck_debug_unsigned_int_hexdump,       \
+               const unsigned int*                          \
+             : braincheck_debug_unsigned_int_hexdump,       \
+               long*                                        \
+             : braincheck_debug_long_hexdump,               \
+               const long*                                  \
+             : braincheck_debug_long_hexdump,               \
+               unsigned long*                               \
+             : braincheck_debug_unsigned_long_hexdump,      \
+               const unsigned long*                         \
+             : braincheck_debug_unsigned_long_hexdump,      \
+               long long*                                   \
+             : braincheck_debug_long_long_hexdump,          \
+               const long long*                             \
+             : braincheck_debug_long_long_hexdump,          \
+               unsigned long long*                          \
+             : braincheck_debug_unsigned_long_long_hexdump, \
+               const unsigned long long*                    \
+             : braincheck_debug_unsigned_long_long_hexdump, \
+               float*                                       \
+             : braincheck_debug_float_hexdump,              \
+               const float*                                 \
+             : braincheck_debug_float_hexdump,              \
+               double*                                      \
+             : braincheck_debug_double_hexdump,             \
+               const double*                                \
+             : braincheck_debug_double_hexdump)(__FILE__, __LINE__, BRAINCHECK_FUNCTION_NAME, #expr, expr, length)
+
+static inline void braincheck_hexdump_ascii(const char* data, const unsigned int size)
+{
+    const unsigned row_width = 16;
+    const unsigned column_group_size = 8;
+
+    // Add whitespace to align ascii section
+    for (unsigned int i = 0; i < row_width - size; i++) {
+        BRAINCHECK_PRINTF("   ");
+    }
+    if (size <= column_group_size) {
+        BRAINCHECK_PRINTF(" ");
+    }
+
+    BRAINCHECK_PRINTF("'");
+
+    for (unsigned int i = 0; i < size; i++) {
+        BRAINCHECK_PRINTF("%c", isprint((int)data[i]) ? data[i] : '.');
+    }
+
+    BRAINCHECK_PRINTF("'");
+}
+
+static inline void braincheck_hexdump(const char* file, const int line, const char* function, const char* expression, const void* value, const unsigned int length)
+{
+    BRAINCHECK_PRINTF("%s:%d: %s - '%s' (length = %u)\n", file, line, function, expression, length);
+
+    const unsigned row_width = 16;
+    const unsigned column_group_size = 8;
+    const char* data = (const char*)value;
+    unsigned int i = 0;
+
+    while (i < length) {
+        unsigned int column = i % row_width;
+        if (0 == column) {
+            // Address header
+            BRAINCHECK_PRINTF("    %08x: ", i);
+        } else if (0 == (column % column_group_size)) {
+            BRAINCHECK_PRINTF(" ");
+        }
+        BRAINCHECK_PRINTF("%02x ", data[i] & 0xFF);
+
+        if (column == (row_width - 1)) {
+            braincheck_hexdump_ascii(&data[i - 15], 16);
+            BRAINCHECK_PRINTF("\n");
+        }
+
+        i++;
+    }
+
+    unsigned int last_row = i % row_width;
+    if (0 != last_row) {
+        braincheck_hexdump_ascii(&data[i - last_row], last_row);
+        BRAINCHECK_PRINTF("\n");
+    }
+}
+
+#define BRAINCHECK_INTERNAL_DEBUG_FUNC(name, type, formatter_specifier)                                                                                                                \
+    static inline void braincheck_debug_##name(const char* file, const int line, const char* function, const char* expression, const type value)                                       \
+    {                                                                                                                                                                                  \
+        BRAINCHECK_PRINTF("%s:%d: %s - '%s' = " formatter_specifier "\n", file, line, function, expression, value);                                                                    \
+    }                                                                                                                                                                                  \
+    static inline void braincheck_debug_##name##_array(const char* file, const int line, const char* function, const char* expression, const type* value, const unsigned int length)   \
+    {                                                                                                                                                                                  \
+        BRAINCHECK_PRINTF("%s:%d: %s - '%s' = [", file, line, function, expression);                                                                                                   \
+        for (int i = 0; i < length; i++) {                                                                                                                                             \
+            if (0 != i) {                                                                                                                                                              \
+                BRAINCHECK_PRINTF(", ");                                                                                                                                               \
+            }                                                                                                                                                                          \
+            BRAINCHECK_PRINTF(formatter_specifier, value[i]);                                                                                                                          \
+        }                                                                                                                                                                              \
+        BRAINCHECK_PRINTF("]\n");                                                                                                                                                      \
+    }                                                                                                                                                                                  \
+    static inline void braincheck_debug_##name##_hexdump(const char* file, const int line, const char* function, const char* expression, const type* value, const unsigned int length) \
+    {                                                                                                                                                                                  \
+        braincheck_hexdump(file, line, function, expression, (const char*)value, length);                                                                                              \
     }
 
 BRAINCHECK_INTERNAL_DEBUG_FUNC(char, char, "%c");
@@ -167,6 +289,7 @@ static inline void braincheck_debug_bool(const char* file, const int line, const
 {
     BRAINCHECK_PRINTF("%s:%d: %s - '%s' = %s\n", file, line, function, expression, value ? "true" : "false");
 }
+
 static inline void braincheck_debug_bool_array(const char* file, const int line, const char* function, const char* expression, const bool* value, const unsigned int length)
 {
     BRAINCHECK_PRINTF("%s:%d: %s - '%s' = [", file, line, function, expression);
@@ -178,6 +301,12 @@ static inline void braincheck_debug_bool_array(const char* file, const int line,
     }
     BRAINCHECK_PRINTF("]\n");
 }
+
+static inline void braincheck_debug_bool_hexdump(const char* file, const int line, const char* function, const char* expression, const bool* value, const unsigned int length)
+{
+    braincheck_hexdump(file, line, function, expression, (const char*)value, length);
+}
+
 static inline void braincheck_debug_pointer(const char* file, const int line, const char* function, const char* expression, const void* value)
 {
     BRAINCHECK_PRINTF("%s:%d: %s - '%s' = %p\n", file, line, function, expression, value);
