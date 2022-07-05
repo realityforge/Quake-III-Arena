@@ -191,7 +191,6 @@ TEST_CASE("braincheck_debug_array(int[])")
     int values[] = { 1, -42424242, 73, 11, 13, 7 };
     braincheck_debug_array(values, 3);
     assert_debug_message("values", "[1, -42424242, 73]");
-    message_init();
 }
 
 TEST_CASE("braincheck_debug_array(unsigned int[])")
@@ -200,7 +199,6 @@ TEST_CASE("braincheck_debug_array(unsigned int[])")
     unsigned int values[] = { 1, 42424242, 73, 11, 13, 7 };
     braincheck_debug_array(values, 3);
     assert_debug_message("values", "[1, 42424242, 73]");
-    message_init();
 }
 
 TEST_CASE("braincheck_debug_array(long[])")
