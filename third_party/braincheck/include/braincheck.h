@@ -32,6 +32,10 @@ extern "C" {
 #include <string.h>
 #endif
 
+#ifndef BRAINCHECK_NO_BACKTRACE
+#include <execinfo.h>
+#endif
+
 #if defined(__clang__) || defined(__GNUC__)
 #define BRAINCHECK_FUNCTION_NAME __PRETTY_FUNCTION__
 #elif defined(_MSC_VER)
@@ -331,10 +335,6 @@ static inline void braincheck_error(const char* file, const int line, const char
 {
     BRAINCHECK_PRINTF("%s:%d: %s : %s - %s", file, line, function, label, strerror(error));
 }
-#endif
-
-#ifndef BRAINCHECK_NO_BACKTRACE
-#include <execinfo.h>
 #endif
 
 #ifdef BRAINCHECK_NO_BACKTRACE
