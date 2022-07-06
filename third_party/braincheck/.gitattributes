@@ -3,6 +3,7 @@
 *.bazel text allow_empty
 *.c text
 *.md text
+*.png binary
 .bazelrc text
 .bazelversion text
 .gitattributes text
