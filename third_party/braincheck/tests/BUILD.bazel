@@ -12,10 +12,21 @@
 
 load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
 
+WARNING_COPTS = [
+    "-Wall",
+    "-Wpedantic",
+    "-Wextra",
+]
+
+C_COPTS = ["-std=c11"] + WARNING_COPTS
+
+CPP_COPTS = ["-std=c++17"] + WARNING_COPTS
+
 cc_library(
     name = "test_support",
     testonly = True,
     hdrs = ["test_support.inc"],
+    copts = CPP_COPTS,
     deps = [
         "//:braincheck",
         "@catch2//:catch2_main",
@@ -26,6 +37,7 @@ cc_test(
     name = "c_compile_test",
     size = "small",
     srcs = ["c_compile_test.c"],
+    copts = C_COPTS,
     deps = [
         "//:braincheck",
         "@catch2//:catch2_main",
@@ -37,6 +49,7 @@ cc_test(
         name = t.replace(".cpp", ""),
         size = "small",
         srcs = [t],
+        copts = CPP_COPTS,
         deps = [
             ":test_support",
             "//:braincheck",
