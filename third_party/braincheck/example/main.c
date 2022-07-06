@@ -14,6 +14,7 @@
 
 #define BRAINCHECK_PRINTF(args...) printf(args)
 
+#include <printf.h>
 #include "braincheck.h"
 
 void func1() { braincheck_backtrace_n(2); }
