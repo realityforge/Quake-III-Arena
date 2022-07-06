@@ -150,8 +150,6 @@ TEST_CASE("braincheck_debug_array - DISABLED")
     REQUIRE_THAT(get_message(), Equals(""));
 }
 
-#define COUNTOF(var) (sizeof(var) / (&(var)[1] - &(var)[0]))
-
 TEST_CASE("braincheck_debug_hexdump - DISABLED")
 {
     message_init();

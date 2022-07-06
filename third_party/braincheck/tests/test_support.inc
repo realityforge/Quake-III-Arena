@@ -29,6 +29,8 @@ static size_t recorded_offset = 0;
 #pragma clang diagnostic ignored "-Wc11-extensions"
 #include "braincheck.h"
 
+#define COUNTOF(var) (sizeof(var) / (&(var)[1] - &(var)[0]))
+
 static void message_init()
 {
     recorded_message[0] = 0;

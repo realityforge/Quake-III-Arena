@@ -280,8 +280,6 @@ static void assert_debug_hexdump_message(const char* expression, const char* val
     REQUIRE_THAT(message, EndsWith(expected));
 }
 
-#define COUNTOF(var) (sizeof(var) / (&(var)[1] - &(var)[0]))
-
 TEST_CASE("braincheck_debug_hexdump(bool[])")
 {
     message_init();
