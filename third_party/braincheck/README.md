@@ -1,7 +1,6 @@
 # BrainCheck-C
 
-BrainCheck-C is a library for debugging code and verifying invariants at runtime. In most cases, you will want
-to optimise these checks out in production builds and the library supports that.
+BrainCheck-C is a library for debugging code and verifying invariants at runtime. In most cases, you will want to optimise these checks out in production builds and the library supports that.
 
 ## Bazel Integration
 
