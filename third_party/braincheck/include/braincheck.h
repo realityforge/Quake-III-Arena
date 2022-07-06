@@ -317,25 +317,25 @@ static inline void braincheck_hexdump(const char* file, const int line, const ch
     BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_END_FUNCTION);
 }
 
-#define BRAINCHECK_INTERNAL_DEBUG_FUNC(name, type, formatter_specifier)                                                                                                                \
-    static inline void braincheck_debug_##name(const char* file, const int line, const char* function, const char* expression, const type value)                                       \
-    {                                                                                                                                                                                  \
-        BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_LOCATION " " BRAINCHECK_FORMAT_FUNCTION " " BRAINCHECK_FORMAT_EXPRESSION " = " BRAINCHECK_FORMAT_START_VALUE formatter_specifier BRAINCHECK_FORMAT_END_VALUE "\n", file, line, function, expression, value);                                                                    \
-    }                                                                                                                                                                                  \
-    static inline void braincheck_debug_##name##_array(const char* file, const int line, const char* function, const char* expression, const type* value, const unsigned int length)   \
-    {                                                                                                                                                                                  \
-        BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_LOCATION " " BRAINCHECK_FORMAT_FUNCTION " " BRAINCHECK_FORMAT_EXPRESSION " = " BRAINCHECK_FORMAT_START_VALUE "[", file, line, function, expression);                                                                                                   \
-        for (int i = 0; i < length; i++) {                                                                                                                                             \
-            if (0 != i) {                                                                                                                                                              \
-                BRAINCHECK_PRINTF(", ");                                                                                                                                               \
-            }                                                                                                                                                                          \
-            BRAINCHECK_PRINTF(formatter_specifier, value[i]);                                                                                                                          \
-        }                                                                                                                                                                              \
-        BRAINCHECK_PRINTF("]" BRAINCHECK_FORMAT_END_VALUE "\n");                                                                                                                                                      \
-    }                                                                                                                                                                                  \
-    static inline void braincheck_debug_##name##_hexdump(const char* file, const int line, const char* function, const char* expression, const type* value, const unsigned int length) \
-    {                                                                                                                                                                                  \
-        braincheck_hexdump(file, line, function, expression, (const char*)value, length);                                                                                              \
+#define BRAINCHECK_INTERNAL_DEBUG_FUNC(name, type, formatter_specifier)                                                                                                                                                                                  \
+    static inline void braincheck_debug_##name(const char* file, const int line, const char* function, const char* expression, const type value)                                                                                                         \
+    {                                                                                                                                                                                                                                                    \
+        BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_LOCATION " " BRAINCHECK_FORMAT_FUNCTION " " BRAINCHECK_FORMAT_EXPRESSION " = " BRAINCHECK_FORMAT_START_VALUE formatter_specifier BRAINCHECK_FORMAT_END_VALUE "\n", file, line, function, expression, value); \
+    }                                                                                                                                                                                                                                                    \
+    static inline void braincheck_debug_##name##_array(const char* file, const int line, const char* function, const char* expression, const type* value, const unsigned int length)                                                                     \
+    {                                                                                                                                                                                                                                                    \
+        BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_LOCATION " " BRAINCHECK_FORMAT_FUNCTION " " BRAINCHECK_FORMAT_EXPRESSION " = " BRAINCHECK_FORMAT_START_VALUE "[", file, line, function, expression);                                                         \
+        for (int i = 0; i < length; i++) {                                                                                                                                                                                                               \
+            if (0 != i) {                                                                                                                                                                                                                                \
+                BRAINCHECK_PRINTF(", ");                                                                                                                                                                                                                 \
+            }                                                                                                                                                                                                                                            \
+            BRAINCHECK_PRINTF(formatter_specifier, value[i]);                                                                                                                                                                                            \
+        }                                                                                                                                                                                                                                                \
+        BRAINCHECK_PRINTF("]" BRAINCHECK_FORMAT_END_VALUE "\n");                                                                                                                                                                                         \
+    }                                                                                                                                                                                                                                                    \
+    static inline void braincheck_debug_##name##_hexdump(const char* file, const int line, const char* function, const char* expression, const type* value, const unsigned int length)                                                                   \
+    {                                                                                                                                                                                                                                                    \
+        braincheck_hexdump(file, line, function, expression, (const char*)value, length);                                                                                                                                                                \
     }
 
 BRAINCHECK_INTERNAL_DEBUG_FUNC(char, char, "%c");
