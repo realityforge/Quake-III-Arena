@@ -22,7 +22,14 @@ http_archive(
 
 ## API Reference
 
-..
+The API consists of the following functions:
+
+* `braincheck_debug(expr)`: Emit value of expression `expr`.
+* `braincheck_debug_array(expr, length)`: Emit value of expression `expr` as an array representation assuming the expression is an array of size `length`.
+* `braincheck_debug_hexdump(expr, length)`: Emit value of expression `expr` as a hexdump assuming the expression is an array of size `length`.
+* `braincheck_backtrace()`: Emit a backtrace starting from the line in which this macro is invoked. The macro will make a best effort to create a stack trace but if tail call optimisations, function inlining, internal linkage functions are on the stack or the program was not defined with debug symbols enable then the backtrace may be of limited value.
+* `braincheck_backtrace_n(max_frame_count)`: Like `braincheck_backtrace()` but at most `max_frame_count` frames are emitted.
+* `braincheck_perror(label)`: Outputs a textual description associated with the current value of `errno` in a fashion similar to the stdlib call `perror(label)`
 
 ## Compile time configuration
 
