@@ -1,0 +1,26 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# For documentation on how to edit this file see https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+# and to experiment you can use https://zed0.co.uk/clang-format-configurator/
+#
+# To configure the CLion IDE to use this format see https://www.jetbrains.com/help/clion/clangformat-as-alternative-formatter.html
+#
+# TODO: When clang-format version 15 is available the source code format should be updated with the setting "InsertBraces: true".
+#
+BasedOnStyle:    'WebKit'
+---
+Language:        Cpp
+# SortIncludes is set to never as sorting them leads to compilation errors because of questionably constructed headers
+SortIncludes:    Never
+# A personal preference
+AlignAfterOpenBracket: Align
