@@ -25,6 +25,12 @@ extern "C" {
 #error "The developer should define BRAINCHECK_PRINTF prior to including braincheck header"
 #endif
 
+#ifdef BRAINCHECK_DISABLE
+#define BRAINCHECK_NO_DEBUG
+#define BRAINCHECK_NO_BACKTRACE
+#define BRAINCHECK_NO_PERROR
+#endif
+
 #ifndef BRAINCHECK_NO_DEBUG
 #include <stdbool.h>
 #endif
