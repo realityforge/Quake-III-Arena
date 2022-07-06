@@ -27,6 +27,11 @@ extern "C" {
 
 #include <stdbool.h>
 
+#ifndef BRAINCHECK_NO_PERROR
+#include <errno.h>
+#include <string.h>
+#endif
+
 #if defined(__clang__) || defined(__GNUC__)
 #define BRAINCHECK_FUNCTION_NAME __PRETTY_FUNCTION__
 #elif defined(_MSC_VER)
@@ -314,6 +319,18 @@ static inline void braincheck_debug_pointer(const char* file, const int line, co
 
 #undef BRAINCHECK_INTERNAL_DEBUG_FUNC
 
+#endif
+
+#ifdef BRAINCHECK_NO_PERROR
+#define braincheck_perror()
+#else
+
+#define braincheck_perror(label) braincheck_error(__FILE__, __LINE__, BRAINCHECK_FUNCTION_NAME, label, errno)
+
+static inline void braincheck_error(const char* file, const int line, const char* function, const char* label, const int error)
+{
+    BRAINCHECK_PRINTF("%s:%d: %s : %s - %s", file, line, function, label, strerror(error));
+}
 #endif
 
 #ifndef BRAINCHECK_NO_BACKTRACE
