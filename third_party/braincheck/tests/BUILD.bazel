@@ -57,6 +57,7 @@ cc_test(
         ],
     )
     for t in [
+        "braincheck_ansi_test.cpp",
         "braincheck_backtrace_disabled_test.cpp",
         "braincheck_backtrace_n_disabled_test.cpp",
         "braincheck_backtrace_n_test.cpp",

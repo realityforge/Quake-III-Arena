@@ -26,7 +26,7 @@ TEST_CASE("braincheck_perror")
     const std::string message = get_message();
 
     REQUIRE_THAT(message, StartsWith(__FILE__ ":25: "));
-    REQUIRE_THAT(message, ContainsSubstring("Some maths operation - "));
+    REQUIRE_THAT(message, ContainsSubstring("Some maths operation: "));
     // Unclear if the exact text is consistent across platforms but this is how MacOS emits this message
-    REQUIRE_THAT(message, EndsWith("Numerical argument out of domain"));
+    REQUIRE_THAT(message, EndsWith("Numerical argument out of domain\n"));
 }

@@ -52,6 +52,51 @@ extern "C" {
 #define BRAINCHECK_FUNCTION_NAME __func__
 #endif
 
+#ifndef BRAINCHECK_DISABLE
+
+#ifdef BRAINCHECK_ANSI_FORMAT
+#define BRAINCHECK_FORMAT_START_LOCATION "\x1b[0m\x1b[02m"
+#define BRAINCHECK_FORMAT_END_LOCATION "\x1b[0m"
+#define BRAINCHECK_FORMAT_START_FUNCTION "\x1b[0m\x1b[34m"
+#define BRAINCHECK_FORMAT_END_FUNCTION "\x1b[0m"
+#define BRAINCHECK_FORMAT_START_EXPRESSION "\x1b[36m\x1b[1m"
+#define BRAINCHECK_FORMAT_END_EXPRESSION "\x1b[0m"
+#define BRAINCHECK_FORMAT_START_VALUE "\x1b[39m\x1b[1m"
+#define BRAINCHECK_FORMAT_END_VALUE "\x1b[0m"
+#endif
+
+#ifndef BRAINCHECK_FORMAT_START_LOCATION
+#define BRAINCHECK_FORMAT_START_LOCATION ""
+#endif
+#ifndef BRAINCHECK_FORMAT_END_LOCATION
+#define BRAINCHECK_FORMAT_END_LOCATION ""
+#endif
+#ifndef BRAINCHECK_FORMAT_START_FUNCTION
+#define BRAINCHECK_FORMAT_START_FUNCTION ""
+#endif
+#ifndef BRAINCHECK_FORMAT_END_FUNCTION
+#define BRAINCHECK_FORMAT_END_FUNCTION ""
+#endif
+#ifndef BRAINCHECK_FORMAT_START_EXPRESSION
+#define BRAINCHECK_FORMAT_START_EXPRESSION ""
+#endif
+#ifndef BRAINCHECK_FORMAT_END_EXPRESSION
+#define BRAINCHECK_FORMAT_END_EXPRESSION ""
+#endif
+#ifndef BRAINCHECK_FORMAT_START_VALUE
+#define BRAINCHECK_FORMAT_START_VALUE ""
+#endif
+#ifndef BRAINCHECK_FORMAT_END_VALUE
+#define BRAINCHECK_FORMAT_END_VALUE ""
+#endif
+
+#define BRAINCHECK_FORMAT_LOCATION BRAINCHECK_FORMAT_START_LOCATION "%s:%d:" BRAINCHECK_FORMAT_END_LOCATION
+#define BRAINCHECK_FORMAT_FUNCTION BRAINCHECK_FORMAT_START_FUNCTION "%s:" BRAINCHECK_FORMAT_END_FUNCTION
+#define BRAINCHECK_FORMAT_EXPRESSION BRAINCHECK_FORMAT_START_EXPRESSION "%s" BRAINCHECK_FORMAT_END_EXPRESSION
+#define BRAINCHECK_FORMAT_VALUE BRAINCHECK_FORMAT_START_VALUE "%s" BRAINCHECK_FORMAT_END_VALUE
+
+#endif
+
 #ifdef BRAINCHECK_NO_DEBUG
 #define braincheck_debug(expr)
 #define braincheck_debug_array(expr, length)
@@ -239,7 +284,7 @@ static inline void braincheck_hexdump_ascii(const char* data, const unsigned int
 
 static inline void braincheck_hexdump(const char* file, const int line, const char* function, const char* expression, const void* value, const unsigned int length)
 {
-    BRAINCHECK_PRINTF("%s:%d: %s - '%s' (length = %u)\n", file, line, function, expression, length);
+    BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_LOCATION " " BRAINCHECK_FORMAT_FUNCTION " " BRAINCHECK_FORMAT_EXPRESSION " (length = %u)\n" BRAINCHECK_FORMAT_START_VALUE, file, line, function, expression, length);
 
     const unsigned row_width = 16;
     const unsigned column_group_size = 8;
@@ -269,23 +314,24 @@ static inline void braincheck_hexdump(const char* file, const int line, const ch
         braincheck_hexdump_ascii(&data[i - last_row], last_row);
         BRAINCHECK_PRINTF("\n");
     }
+    BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_END_FUNCTION);
 }
 
 #define BRAINCHECK_INTERNAL_DEBUG_FUNC(name, type, formatter_specifier)                                                                                                                \
     static inline void braincheck_debug_##name(const char* file, const int line, const char* function, const char* expression, const type value)                                       \
     {                                                                                                                                                                                  \
-        BRAINCHECK_PRINTF("%s:%d: %s - '%s' = " formatter_specifier "\n", file, line, function, expression, value);                                                                    \
+        BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_LOCATION " " BRAINCHECK_FORMAT_FUNCTION " " BRAINCHECK_FORMAT_EXPRESSION " = " BRAINCHECK_FORMAT_START_VALUE formatter_specifier BRAINCHECK_FORMAT_END_VALUE "\n", file, line, function, expression, value);                                                                    \
     }                                                                                                                                                                                  \
     static inline void braincheck_debug_##name##_array(const char* file, const int line, const char* function, const char* expression, const type* value, const unsigned int length)   \
     {                                                                                                                                                                                  \
-        BRAINCHECK_PRINTF("%s:%d: %s - '%s' = [", file, line, function, expression);                                                                                                   \
+        BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_LOCATION " " BRAINCHECK_FORMAT_FUNCTION " " BRAINCHECK_FORMAT_EXPRESSION " = " BRAINCHECK_FORMAT_START_VALUE "[", file, line, function, expression);                                                                                                   \
         for (int i = 0; i < length; i++) {                                                                                                                                             \
             if (0 != i) {                                                                                                                                                              \
                 BRAINCHECK_PRINTF(", ");                                                                                                                                               \
             }                                                                                                                                                                          \
             BRAINCHECK_PRINTF(formatter_specifier, value[i]);                                                                                                                          \
         }                                                                                                                                                                              \
-        BRAINCHECK_PRINTF("]\n");                                                                                                                                                      \
+        BRAINCHECK_PRINTF("]" BRAINCHECK_FORMAT_END_VALUE "\n");                                                                                                                                                      \
     }                                                                                                                                                                                  \
     static inline void braincheck_debug_##name##_hexdump(const char* file, const int line, const char* function, const char* expression, const type* value, const unsigned int length) \
     {                                                                                                                                                                                  \
@@ -308,19 +354,19 @@ BRAINCHECK_INTERNAL_DEBUG_FUNC(double, double, "%f");
 
 static inline void braincheck_debug_bool(const char* file, const int line, const char* function, const char* expression, const bool value)
 {
-    BRAINCHECK_PRINTF("%s:%d: %s - '%s' = %s\n", file, line, function, expression, value ? "true" : "false");
+    BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_LOCATION " " BRAINCHECK_FORMAT_FUNCTION " " BRAINCHECK_FORMAT_EXPRESSION " = " BRAINCHECK_FORMAT_VALUE "\n", file, line, function, expression, value ? "true" : "false");
 }
 
 static inline void braincheck_debug_bool_array(const char* file, const int line, const char* function, const char* expression, const bool* value, const unsigned int length)
 {
-    BRAINCHECK_PRINTF("%s:%d: %s - '%s' = [", file, line, function, expression);
+    BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_LOCATION " " BRAINCHECK_FORMAT_FUNCTION " " BRAINCHECK_FORMAT_EXPRESSION " = " BRAINCHECK_FORMAT_START_VALUE "[", file, line, function, expression);
     for (int i = 0; i < length; i++) {
         if (0 != i) {
             BRAINCHECK_PRINTF(", ");
         }
         BRAINCHECK_PRINTF("%s", value[i] ? "true" : "false");
     }
-    BRAINCHECK_PRINTF("]\n");
+    BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_END_VALUE "]\n");
 }
 
 static inline void braincheck_debug_bool_hexdump(const char* file, const int line, const char* function, const char* expression, const bool* value, const unsigned int length)
@@ -330,7 +376,7 @@ static inline void braincheck_debug_bool_hexdump(const char* file, const int lin
 
 static inline void braincheck_debug_pointer(const char* file, const int line, const char* function, const char* expression, const void* value)
 {
-    BRAINCHECK_PRINTF("%s:%d: %s - '%s' = %p\n", file, line, function, expression, value);
+    BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_LOCATION " " BRAINCHECK_FORMAT_FUNCTION " " BRAINCHECK_FORMAT_EXPRESSION " = " BRAINCHECK_FORMAT_VALUE "\n", file, line, function, expression, value);
 }
 
 #undef BRAINCHECK_INTERNAL_DEBUG_FUNC
@@ -345,7 +391,7 @@ static inline void braincheck_debug_pointer(const char* file, const int line, co
 
 static inline void braincheck_error(const char* file, const int line, const char* function, const char* label, const int error)
 {
-    BRAINCHECK_PRINTF("%s:%d: %s : %s - %s", file, line, function, label, strerror(error));
+    BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_LOCATION " " BRAINCHECK_FORMAT_FUNCTION " " BRAINCHECK_FORMAT_EXPRESSION ": " BRAINCHECK_FORMAT_VALUE "\n", file, line, function, label, strerror(error));
 }
 #endif
 
@@ -379,13 +425,15 @@ static inline void braincheck_error(const char* file, const int line, const char
 
 static inline void braincheck_internal_backtrace(const char* file, int line, const char* function, void** callstack_buffer, const int max_callstack_depth)
 {
-    BRAINCHECK_PRINTF("%s:%d: %s\n", file, line, function);
+    BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_LOCATION " " BRAINCHECK_FORMAT_FUNCTION "\n", file, line, function);
     char** callstack = backtrace_symbols(callstack_buffer, max_callstack_depth);
     if (NULL != callstack) {
+        BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_START_VALUE);
         // Starting at 1 skips the current frame which should be ok given the function parameter indicates frame
         for (int i = 1; i < max_callstack_depth; i++) {
             BRAINCHECK_PRINTF("  %s\n", callstack[i]);
         }
+        BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_END_FUNCTION);
 
         free(callstack);
     }

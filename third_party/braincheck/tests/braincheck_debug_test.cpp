@@ -20,11 +20,11 @@ using Catch::Matchers::StartsWith;
 
 static void assert_debug_message(const char* expression, const char* value)
 {
-    char expected[1000] = " - '";
+    char expected[1000] = ": ";
     const std::string message = get_message();
 
     strncat(expected, expression, sizeof(expected) - 1);
-    strncat(expected, "' = ", sizeof(expected) - 1);
+    strncat(expected, " = ", sizeof(expected) - 1);
     strncat(expected, value, sizeof(expected) - 1);
     strncat(expected, "\n", sizeof(expected) - 1);
 
@@ -148,7 +148,7 @@ TEST_CASE("braincheck_debug(pointer)")
     message_init();
     void* myValue = NULL;
     braincheck_debug(myValue);
-    assert_debug_message("myValue", "0x0");
+    assert_debug_message("myValue", "(null)");
 }
 
 TEST_CASE("braincheck_debug_array(bool[])")
@@ -268,9 +268,9 @@ static void assert_debug_hexdump_message(const char* expression, const char* val
     char num[100] = "";
     snprintf(num, sizeof(num), "%u", length);
 
-    char expected[10000] = " - '";
+    char expected[10000] = ": ";
     strncat(expected, expression, sizeof(expected) - 1);
-    strncat(expected, "' (length = ", sizeof(expected) - 1);
+    strncat(expected, " (length = ", sizeof(expected) - 1);
     strncat(expected, num, sizeof(expected) - 1);
     strncat(expected, ")\n", sizeof(expected) - 1);
     strncat(expected, value, sizeof(expected) - 1);

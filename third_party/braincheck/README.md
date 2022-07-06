@@ -48,6 +48,45 @@ The user may also define symbols to cause parts of the BrainCheck library to be 
 * Define `BRAINCHECK_NO_PERROR` to optimise out the `braincheck_perror()` macro.
 * Define `BRAINCHECK_NO_BACKTRACE` to optimise out the `braincheck_backtrace()` and `braincheck_backtrace_n()` macros.
 * Define `BRAINCHECK_NO_DEBUG` to optimise out the `braincheck_debug(...)`, `braincheck_debug_array(...)` and `braincheck_debug_hexdump()` macros.
+* Define `BRAINCHECK_ANSI_FORMAT` to emit messages using ansi escape codes.
+
+## Example
+
+A simple example program that demonstrates some of the features of BrainCheck.
+
+```c
+#define BRAINCHECK_PRINTF(args...) printf(args)
+#define BRAINCHECK_ANSI_FORMAT
+#include "braincheck.h"
+
+void func1() { braincheck_backtrace_n(2); }
+void func2() { func1(); }
+void func3() { func2(); }
+void func4() { func3(); }
+
+int main()
+{
+    const char message[] = "This is a message\1\1\1\1";
+    braincheck_debug_hexdump(message, sizeof(message));
+
+    const int a = 2;
+    braincheck_debug(3 * a);
+
+    int numbers[] = { -1, 13 };
+    braincheck_debug_array(numbers, 2);
+
+    errno = EDOM;
+    braincheck_perror("Some maths operation");
+
+    func4();
+
+    return 0;
+}
+```
+
+When run this will produce output such as:
+
+![](docs/ExampleAnsi.png)
 
 # Contributing
 
