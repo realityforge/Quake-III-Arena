@@ -334,7 +334,6 @@ static inline void braincheck_error(const char* file, const int line, const char
 #endif
 
 #ifndef BRAINCHECK_NO_BACKTRACE
-#include <stdlib.h>
 #include <execinfo.h>
 #endif
 
