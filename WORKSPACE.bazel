@@ -136,3 +136,8 @@ load("//third_party/com_github_mvdan_sh:repository.bzl", _setup_com_github_mvdan
 _setup_com_github_mvdan_sh_repository()
 
 _load_catch2_repository()
+
+local_repository(
+    name = "braincheck",
+    path = "third_party/braincheck",
+)

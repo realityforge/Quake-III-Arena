@@ -17,7 +17,7 @@ cc_library(
     testonly = True,
     hdrs = ["test_support.inc"],
     deps = [
-        "//third_party/braincheck",
+        "//:braincheck",
         "@catch2//:catch2_main",
     ],
 )
@@ -27,7 +27,7 @@ cc_test(
     size = "small",
     srcs = ["c_compile_test.c"],
     deps = [
-        "//third_party/braincheck",
+        "//:braincheck",
         "@catch2//:catch2_main",
     ],
 )
@@ -39,7 +39,7 @@ cc_test(
         srcs = [t],
         deps = [
             ":test_support",
-            "//third_party/braincheck",
+            "//:braincheck",
             "@catch2//:catch2_main",
         ],
     )
