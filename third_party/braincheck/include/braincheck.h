@@ -322,7 +322,7 @@ static inline void braincheck_debug_pointer(const char* file, const int line, co
 #endif
 
 #ifdef BRAINCHECK_NO_PERROR
-#define braincheck_perror()
+#define braincheck_perror(label)
 #else
 
 #define braincheck_perror(label) braincheck_error(__FILE__, __LINE__, BRAINCHECK_FUNCTION_NAME, label, errno)

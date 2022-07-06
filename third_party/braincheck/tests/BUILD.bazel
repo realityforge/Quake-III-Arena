@@ -47,6 +47,7 @@ cc_test(
         "braincheck_backtrace_n_test.cpp",
         "braincheck_backtrace_test.cpp",
         "braincheck_debug_test.cpp",
+        "braincheck_perror_disabled_test.cpp",
         "braincheck_perror_test.cpp",
     ]
 ]
