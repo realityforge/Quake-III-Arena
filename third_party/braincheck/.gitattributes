@@ -1,10 +1,9 @@
 # DO NOT EDIT: File is auto-generated
 * -text
 *.bazel text allow_empty
-*.bzl text
 *.c text
 *.md text
-*.yml text
+.bazelrc text
 .bazelversion text
 .gitattributes text
 .gitignore text
