@@ -148,7 +148,7 @@ TEST_CASE("braincheck_debug(pointer)")
     message_init();
     void* myValue = NULL;
     braincheck_debug(myValue);
-    assert_debug_message("myValue", "(null)");
+    assert_debug_message("myValue", "0x0");
 }
 
 TEST_CASE("braincheck_debug_array(bool[])")

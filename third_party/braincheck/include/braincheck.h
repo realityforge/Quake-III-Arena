@@ -376,7 +376,7 @@ static inline void braincheck_debug_bool_hexdump(const char* file, const int lin
 
 static inline void braincheck_debug_pointer(const char* file, const int line, const char* function, const char* expression, const void* value)
 {
-    BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_LOCATION " " BRAINCHECK_FORMAT_FUNCTION " " BRAINCHECK_FORMAT_EXPRESSION " = " BRAINCHECK_FORMAT_VALUE "\n", file, line, function, expression, value);
+    BRAINCHECK_PRINTF(BRAINCHECK_FORMAT_LOCATION " " BRAINCHECK_FORMAT_FUNCTION " " BRAINCHECK_FORMAT_EXPRESSION " = " BRAINCHECK_FORMAT_START_VALUE "%p" BRAINCHECK_FORMAT_END_VALUE "\n", file, line, function, expression, value);
 }
 
 #undef BRAINCHECK_INTERNAL_DEBUG_FUNC
