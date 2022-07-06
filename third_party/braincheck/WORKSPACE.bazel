@@ -11,3 +11,23 @@
 # limitations under the License.
 
 workspace(name = "braincheck")
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+CATCH2_VERSION = "3.0.1"
+
+CATCH2_SHA256 = "8c4173c68ae7da1b5b505194a0c2d6f1b2aef4ec1e3e7463bde451f26bbaf4e7"
+
+http_archive(
+    name = "bazel_skylib",
+    sha256 = "d847b08d6702d2779e9eb399b54ff8920fa7521dc45e3e53572d1d8907767de7",
+    strip_prefix = "bazel-skylib-2a87d4a62af886fb320883aba102255aba87275e",
+    urls = ["https://github.com/bazelbuild/bazel-skylib/archive/2a87d4a62af886fb320883aba102255aba87275e.tar.gz"],
+)
+
+http_archive(
+    name = "catch2",
+    sha256 = CATCH2_SHA256,
+    strip_prefix = "Catch2-%s" % CATCH2_VERSION,
+    urls = ["https://github.com/catchorg/Catch2/archive/v%s.tar.gz" % CATCH2_VERSION],
+)
