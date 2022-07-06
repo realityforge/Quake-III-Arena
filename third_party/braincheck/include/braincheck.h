@@ -44,7 +44,11 @@ extern "C" {
 #define BRAINCHECK_FUNCTION_NAME __func__
 #endif
 
-#ifndef BRAINCHECK_NO_DEBUG
+#ifdef BRAINCHECK_NO_DEBUG
+#define braincheck_debug(expr)
+#define braincheck_debug_array(expr, length)
+#define braincheck_debug_hexdump(expr, length)
+#else
 
 /**
  * Print value of expression where the expression is a non-array atomic value.
