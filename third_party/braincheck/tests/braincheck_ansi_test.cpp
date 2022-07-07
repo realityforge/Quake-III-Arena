@@ -20,6 +20,8 @@
 #undef BRAINCHECK_FUNCTION_NAME
 #define BRAINCHECK_FUNCTION_NAME "myFunction()"
 
+#define EXPECTED_PREFIX "\u001B[0m\u001B[02m" __FILE__ ":3:\u001B[0m \u001B[0m\u001B[34mmyFunction():\u001B[0m"
+
 using Catch::Matchers::ContainsSubstring;
 using Catch::Matchers::EndsWith;
 using Catch::Matchers::Equals;
@@ -30,7 +32,7 @@ TEST_CASE("braincheck_debug - ansi")
     message_init();
     braincheck_debug(1 == 1 ? true : false);
     const std::string message = get_message();
-    REQUIRE_THAT(message, Equals("\u001B[0m\u001B[02m" __FILE__ ":3:\u001B[0m \u001B[0m\u001B[34mmyFunction():\u001B[0m \u001B[36m\u001B[1m1 == 1 ? true : false\u001B[0m = \u001B[39m\u001B[1mtrue\u001B[0m\n"));
+    REQUIRE_THAT(message, Equals(EXPECTED_PREFIX " \u001B[36m\u001B[1m1 == 1 ? true : false\u001B[0m = \u001B[39m\u001B[1mtrue\u001B[0m\n"));
 }
 
 TEST_CASE("braincheck_debug_array - ansi")
@@ -39,7 +41,7 @@ TEST_CASE("braincheck_debug_array - ansi")
     char values[] = { 'a', 'b', 'c', 'd', 'e', 'f' };
     braincheck_debug_array(values, 3);
     const std::string message = get_message();
-    REQUIRE_THAT(message, Equals("\u001B[0m\u001B[02m" __FILE__ ":3:\u001B[0m \u001B[0m\u001B[34mmyFunction():\u001B[0m \u001B[36m\u001B[1mvalues\u001B[0m = \u001B[39m\u001B[1m[a, b, c]\u001B[0m\n"));
+    REQUIRE_THAT(message, Equals(EXPECTED_PREFIX " \u001B[36m\u001B[1mvalues\u001B[0m = \u001B[39m\u001B[1m[a, b, c]\u001B[0m\n"));
 }
 
 TEST_CASE("braincheck_debug_hexdump - ansi")
@@ -52,7 +54,7 @@ TEST_CASE("braincheck_debug_hexdump - ansi")
     };
     braincheck_debug_hexdump(values, COUNTOF(values));
     const std::string message = get_message();
-    REQUIRE_THAT(message, Equals("\u001B[0m\u001B[02m" __FILE__ ":3:\u001B[0m \u001B[0m\u001B[34mmyFunction():\u001B[0m \u001B[36m\u001B[1mvalues\u001B[0m (length = 152)\n"
+    REQUIRE_THAT(message, Equals(EXPECTED_PREFIX " \u001B[36m\u001B[1mvalues\u001B[0m (length = 152)\n"
                                  "\u001B[39m\u001B[1m"
                                  "    00000000: 01 00 00 00 00 00 00 00  08 1f cc fb a0 e1 1f c5 '................'\n"
                                  "    00000010: 49 00 00 00 00 00 00 00  0b 00 00 00 00 00 00 00 'I...............'\n"
@@ -74,7 +76,7 @@ TEST_CASE("braincheck_perror - ansi")
     braincheck_perror("Some maths operation");
     const std::string message = get_message();
 
-    REQUIRE_THAT(message, Equals("\u001B[0m\u001B[02m" __FILE__ ":3:\u001B[0m \u001B[0m\u001B[34mmyFunction():\u001B[0m \u001B[36m\u001B[1mSome maths operation\u001B[0m: \u001B[39m\u001B[1mNumerical argument out of domain\u001B[0m\n"));
+    REQUIRE_THAT(message, Equals(EXPECTED_PREFIX " \u001B[36m\u001B[1mSome maths operation\u001B[0m: \u001B[39m\u001B[1mNumerical argument out of domain\u001B[0m\n"));
 }
 
 extern "C" void func1()
