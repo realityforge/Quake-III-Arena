@@ -31,6 +31,39 @@ The API consists of the following functions:
 * `braincheck_backtrace_n(max_frame_count)`: Like `braincheck_backtrace()` but at most `max_frame_count` frames are emitted.
 * `braincheck_perror(label)`: Outputs a textual description associated with the current value of `errno` in a fashion similar to the stdlib call `perror(label)`
 
+The toolkit also provides assertions that compare values, may take a message (suffixed with `_m`) and/or may only assert the first time (prefixed with `once_`). The names of the assertion macros are as follows:
+
+* `braincheck_assert_fail(message)`
+* `braincheck_assert(v1)`
+* `braincheck_assert_eq(v1, v2)`
+* `braincheck_assert_neq(v1, v2)`
+* `braincheck_assert_lt(v1, v2)`
+* `braincheck_assert_lte(v1, v2)`
+* `braincheck_assert_gt(v1, v2)`
+* `braincheck_assert_gte(v1, v2)`
+* `braincheck_assert_m(v1, message)`
+* `braincheck_assert_eq_m(v1, v2, message)`
+* `braincheck_assert_neq_m(v1, v2, message)`
+* `braincheck_assert_lt_m(v1, v2, message)`
+* `braincheck_assert_lte_m(v1, v2, message)`
+* `braincheck_assert_gt_m(v1, v2, message)`
+* `braincheck_assert_gte_m(v1, v2, message)`
+* `braincheck_once_assert_fail(message)`
+* `braincheck_once_assert(v1)`
+* `braincheck_once_assert_eq(v1, v2)`
+* `braincheck_once_assert_neq(v1, v2)`
+* `braincheck_once_assert_lt(v1, v2)`
+* `braincheck_once_assert_lte(v1, v2)`
+* `braincheck_once_assert_gt(v1, v2)`
+* `braincheck_once_assert_gte(v1, v2)`
+* `braincheck_once_assert_m(v1, message)`
+* `braincheck_once_assert_eq_m(v1, v2, message)`
+* `braincheck_once_assert_neq_m(v1, v2, message)`
+* `braincheck_once_assert_lt_m(v1, v2, message)`
+* `braincheck_once_assert_lte_m(v1, v2, message)`
+* `braincheck_once_assert_gt_m(v1, v2, message)`
+* `braincheck_once_assert_gte_m(v1, v2, message)`
+
 ## Compile time configuration
 
 The developer MUST define the `BRAINCHECK_PRINTF` such that it takes format string and variable arguments identical to `printf`. This will control where the debug messages are emitted.
@@ -48,6 +81,7 @@ The user may also define symbols to cause parts of the BrainCheck library to be 
 * Define `BRAINCHECK_NO_PERROR` to optimise out the `braincheck_perror()` macro.
 * Define `BRAINCHECK_NO_BACKTRACE` to optimise out the `braincheck_backtrace()` and `braincheck_backtrace_n()` macros.
 * Define `BRAINCHECK_NO_DEBUG` to optimise out the `braincheck_debug(...)`, `braincheck_debug_array(...)` and `braincheck_debug_hexdump()` macros.
+* Define `BRAINCHECK_NO_ASSERT` to optimise out the assertion macros.
 * Define `BRAINCHECK_ANSI_FORMAT` to emit messages using ansi escape codes.
 
 ## Example
@@ -65,6 +99,8 @@ void func2() { func1(); }
 void func3() { func2(); }
 void func4() { func3(); }
 
+void func5() { braincheck_once_assert(0 != 0); }
+
 int main()
 {
     const char message[] = "This is a message\1\1\1\1";
@@ -81,8 +117,17 @@ int main()
 
     func4();
 
+    braincheck_assert_lt(1, 2);
+
+    func5();
+    // The assert in funct 5 will not issue another print as it is a once assert
+    func5();
+
+    // This next assertion will fail
+    braincheck_assert_lt_m(44, 2, "44 is not less than 2 - go figure?");
     return 0;
 }
+
 ```
 
 When run this will produce output such as:
