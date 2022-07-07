@@ -57,6 +57,7 @@ A simple example program that demonstrates some of the features of BrainCheck.
 ```c
 #define BRAINCHECK_PRINTF(args...) printf(args)
 #define BRAINCHECK_ANSI_FORMAT
+#include <printf.h>
 #include "braincheck.h"
 
 void func1() { braincheck_backtrace_n(2); }
