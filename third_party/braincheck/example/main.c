@@ -22,6 +22,8 @@ void func2() { func1(); }
 void func3() { func2(); }
 void func4() { func3(); }
 
+void func5() { braincheck_once_assert(0 != 0); }
+
 int main()
 {
     const char message[] = "This is a message\1\1\1\1";
@@ -39,6 +41,10 @@ int main()
     func4();
 
     braincheck_assert_lt(1, 2);
+
+    func5();
+    // The assert in funct 5 will not issue another print as it is a once assert
+    func5();
 
     // This next assertion will fail
     braincheck_assert_lt_m(44, 2, "44 is not less than 2 - go figure?");

@@ -35,5 +35,19 @@ TEST_CASE("braincheck_assert")
     braincheck_assert_lte_m(1, 0, "Some message");
     braincheck_assert_gt_m(1, 1, "Some message");
     braincheck_assert_gte_m(0, 1, "Some message");
+    braincheck_once_assert(1 == 0);
+    braincheck_once_assert_eq(1, 2);
+    braincheck_once_assert_neq(1, 1);
+    braincheck_once_assert_lt(1, 1);
+    braincheck_once_assert_lte(1, 0);
+    braincheck_once_assert_gt(1, 1);
+    braincheck_once_assert_gte(0, 1);
+    braincheck_once_assert_m(1 == 0, "Some message");
+    braincheck_once_assert_eq_m(1, 2, "Some message");
+    braincheck_once_assert_neq_m(1, 1, "Some message");
+    braincheck_once_assert_lt_m(1, 1, "Some message");
+    braincheck_once_assert_lte_m(1, 0, "Some message");
+    braincheck_once_assert_gt_m(1, 1, "Some message");
+    braincheck_once_assert_gte_m(0, 1, "Some message");
     REQUIRE_THAT(get_message(), Equals(""));
 }
