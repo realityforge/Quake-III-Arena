@@ -583,13 +583,8 @@ static inline void braincheck_internal_backtrace(const char* file, int line, con
                                    v1Str);                                                 \
     }
 
-#define braincheck_assert_fail(message)                  \
-    braincheck_internal_assert(__FILE__,                 \
-                               __LINE__,                 \
-                               BRAINCHECK_FUNCTION_NAME, \
-                               NULL,                     \
-                               "Failed assertion: %s",   \
-                               message)
+// clang-format off
+#define braincheck_assert_fail(message) braincheck_internal_assert(__FILE__, __LINE__, BRAINCHECK_FUNCTION_NAME, NULL, "Failed assertion: %s", message)
 
 #define braincheck_assert_eq(v1, v2) braincheck_assert_comparison(==, v1, v2)
 #define braincheck_assert_neq(v1, v2) braincheck_assert_comparison(!=, v1, v2)
@@ -604,6 +599,8 @@ static inline void braincheck_internal_backtrace(const char* file, int line, con
 #define braincheck_assert_lte_m(v1, v2, message) braincheck_assert_comparison_m(<=, v1, v2, message)
 #define braincheck_assert_gt_m(v1, v2, message) braincheck_assert_comparison_m(>, v1, v2, message)
 #define braincheck_assert_gte_m(v1, v2, message) braincheck_assert_comparison_m(>=, v1, v2, message)
+
+// clang-format on
 
 static BRAINCHECK_PRINTF_FUNCTION(5, 6) inline void braincheck_internal_assert(const char* file, int line, const char* function, const char* user_message, const char* format, ...)
 {
