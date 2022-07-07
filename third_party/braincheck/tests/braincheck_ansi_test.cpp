@@ -116,3 +116,108 @@ TEST_CASE("braincheck_backtrace_n() - ansi")
     REQUIRE_THAT(message, EndsWith("\n\u001B[0m"));
 #endif
 }
+
+TEST_CASE("braincheck_assert_fail - ansi")
+{
+    message_init();
+    braincheck_assert_fail("Some random reason");
+    REQUIRE_THAT(get_message(), Equals(EXPECTED_PREFIX " \u001B[31m\u001B[1mFailed assertion: Some random reason\u001B[0m\n"));
+}
+
+TEST_CASE("braincheck_assert - ansi")
+{
+    message_init();
+    braincheck_assert(1 == 0);
+    REQUIRE_THAT(get_message(), Equals(EXPECTED_PREFIX " \u001B[31m\u001B[1mFailed assertion: 1 == 0 => false\u001B[0m\n"));
+}
+
+TEST_CASE("braincheck_assert_eq - ansi")
+{
+    message_init();
+    braincheck_assert_eq(1, 2);
+    REQUIRE_THAT(get_message(), Equals(EXPECTED_PREFIX " \u001B[31m\u001B[1mFailed assertion: v1 == v2 (v1 = 1, v2 = 2)\u001B[0m\n"));
+}
+
+TEST_CASE("braincheck_assert_neq - ansi")
+{
+    message_init();
+    braincheck_assert_neq(1, 1);
+    REQUIRE_THAT(get_message(), Equals(EXPECTED_PREFIX " \u001B[31m\u001B[1mFailed assertion: v1 != v2 (v1 = 1, v2 = 1)\u001B[0m\n"));
+}
+
+TEST_CASE("braincheck_assert_lt - ansi")
+{
+    message_init();
+    braincheck_assert_lt(1, 1);
+    REQUIRE_THAT(get_message(), Equals(EXPECTED_PREFIX " \u001B[31m\u001B[1mFailed assertion: v1 < v2 (v1 = 1, v2 = 1)\u001B[0m\n"));
+}
+
+TEST_CASE("braincheck_assert_lte - ansi")
+{
+    message_init();
+    braincheck_assert_lte(1, 0);
+    REQUIRE_THAT(get_message(), Equals(EXPECTED_PREFIX " \u001B[31m\u001B[1mFailed assertion: v1 <= v2 (v1 = 1, v2 = 0)\u001B[0m\n"));
+}
+
+TEST_CASE("braincheck_assert_gt - ansi")
+{
+    message_init();
+    braincheck_assert_gt(1, 1);
+    REQUIRE_THAT(get_message(), Equals(EXPECTED_PREFIX " \u001B[31m\u001B[1mFailed assertion: v1 > v2 (v1 = 1, v2 = 1)\u001B[0m\n"));
+}
+
+TEST_CASE("braincheck_assert_gte - ansi")
+{
+    message_init();
+    braincheck_assert_gte(0, 1);
+    REQUIRE_THAT(get_message(), Equals(EXPECTED_PREFIX " \u001B[31m\u001B[1mFailed assertion: v1 >= v2 (v1 = 0, v2 = 1)\u001B[0m\n"));
+}
+
+TEST_CASE("braincheck_assert_m - ansi")
+{
+    message_init();
+    braincheck_assert_m(1 == 0, "Some message");
+    REQUIRE_THAT(get_message(), Equals(EXPECTED_PREFIX " \u001B[31m\u001B[1mFailed assertion: 1 == 0 => false\u001B[0m: Some message\n"));
+}
+
+TEST_CASE("braincheck_assert_eq_m - ansi")
+{
+    message_init();
+    braincheck_assert_eq_m(1, 2, "Some message");
+    REQUIRE_THAT(get_message(), Equals(EXPECTED_PREFIX " \u001B[31m\u001B[1mFailed assertion: v1 == v2 (v1 = 1, v2 = 2)\u001B[0m: Some message\n"));
+}
+
+TEST_CASE("braincheck_assert_neq_m - ansi")
+{
+    message_init();
+    braincheck_assert_neq_m(1, 1, "Some message");
+    REQUIRE_THAT(get_message(), Equals(EXPECTED_PREFIX " \u001B[31m\u001B[1mFailed assertion: v1 != v2 (v1 = 1, v2 = 1)\u001B[0m: Some message\n"));
+}
+
+TEST_CASE("braincheck_assert_lt_m - ansi")
+{
+    message_init();
+    braincheck_assert_lt_m(1, 1, "Some message");
+    REQUIRE_THAT(get_message(), Equals(EXPECTED_PREFIX " \u001B[31m\u001B[1mFailed assertion: v1 < v2 (v1 = 1, v2 = 1)\u001B[0m: Some message\n"));
+}
+
+TEST_CASE("braincheck_assert_lte_m - ansi")
+{
+    message_init();
+    braincheck_assert_lte_m(1, 0, "Some message");
+    REQUIRE_THAT(get_message(), Equals(EXPECTED_PREFIX " \u001B[31m\u001B[1mFailed assertion: v1 <= v2 (v1 = 1, v2 = 0)\u001B[0m: Some message\n"));
+}
+
+TEST_CASE("braincheck_assert_gt_m - ansi")
+{
+    message_init();
+    braincheck_assert_gt_m(1, 1, "Some message");
+    REQUIRE_THAT(get_message(), Equals(EXPECTED_PREFIX " \u001B[31m\u001B[1mFailed assertion: v1 > v2 (v1 = 1, v2 = 1)\u001B[0m: Some message\n"));
+}
+
+TEST_CASE("braincheck_assert_gte_m - ansi")
+{
+    message_init();
+    braincheck_assert_gte_m(0, 1, "Some message");
+    REQUIRE_THAT(get_message(), Equals(EXPECTED_PREFIX " \u001B[31m\u001B[1mFailed assertion: v1 >= v2 (v1 = 0, v2 = 1)\u001B[0m: Some message\n"));
+}

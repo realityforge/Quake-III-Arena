@@ -38,5 +38,9 @@ int main()
 
     func4();
 
+    braincheck_assert_lt(1, 2);
+
+    // This next assertion will fail
+    braincheck_assert_lt_m(44, 2, "44 is not less than 2 - go figure?");
     return 0;
 }
