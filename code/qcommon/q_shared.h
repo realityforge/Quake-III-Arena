@@ -22,8 +22,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef Q_SHARED_H
 #define Q_SHARED_H
 
-#if !(__STDC_VERSION__ >= 199901L)
-#error "C99 compatible compiler required"
+#if !(__STDC_VERSION__ >= 201112L)
+#error "C11 compatible compiler required"
 #endif
 
 #include <stdbool.h>

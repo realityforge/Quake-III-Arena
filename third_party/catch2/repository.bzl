@@ -12,13 +12,17 @@
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_archive = "http_archive")
 
+_VERSION = "3.0.1"
+
+_SHA256 = "8c4173c68ae7da1b5b505194a0c2d6f1b2aef4ec1e3e7463bde451f26bbaf4e7"
+
 def load_repository():
-    if native.existing_rule("bazel_skylib"):
+    if native.existing_rule("catch2"):
         return
 
     _http_archive(
-        name = "bazel_skylib",
-        sha256 = "d847b08d6702d2779e9eb399b54ff8920fa7521dc45e3e53572d1d8907767de7",
-        strip_prefix = "bazel-skylib-2a87d4a62af886fb320883aba102255aba87275e",
-        urls = ["https://github.com/bazelbuild/bazel-skylib/archive/2a87d4a62af886fb320883aba102255aba87275e.tar.gz"],
+        name = "catch2",
+        sha256 = _SHA256,
+        strip_prefix = "Catch2-%s" % _VERSION,
+        urls = ["https://github.com/catchorg/Catch2/archive/v%s.tar.gz" % _VERSION],
     )
