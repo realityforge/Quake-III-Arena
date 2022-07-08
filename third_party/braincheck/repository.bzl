@@ -10,6 +10,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Temp dirs and local notes
-############################
-/tmp
+load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_archive = "http_archive")
+
+_VERSION = "748af04c00d18f4ae2657ebddfdb03ecad853297"
+
+_SHA256 = "43e501255100ffe1950b9f3d650ade1a081069c233c91e56b2cfbc76027f6938"
+
+def load_repository():
+    if native.existing_rule("braincheck"):
+        return
+
+    _http_archive(
+        name = "braincheck",
+        sha256 = _SHA256,
+        strip_prefix = "braincheck-c-%s" % _VERSION,
+        url = "https://github.com/realityforge/braincheck-c/archive/%s.tar.gz" % _VERSION,
+    )

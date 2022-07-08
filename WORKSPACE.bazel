@@ -15,6 +15,7 @@
 workspace(name = "org_realityforge_q3a")
 
 load("//third_party/bazel_skylib:repository.bzl", _load_bazel_skylib_repository = "load_repository")
+load("//third_party/braincheck:repository.bzl", _load_braincheck_repository = "load_repository")
 load("//third_party/buildifier:repository.bzl", _load_buildifier_repository = "load_repository")
 load("//third_party/catch2:repository.bzl", _load_catch2_repository = "load_repository")
 load("//third_party/com_github_ash2k_bazel_tools:repository.bzl", _load_com_github_ash2k_bazel_tools_repository = "load_repository")
@@ -45,6 +46,8 @@ load("//third_party/zlib:repository.bzl", _load_zlib_repository = "load_reposito
 _load_buildifier_repository()
 
 _load_bazel_skylib_repository()
+
+_load_braincheck_repository()
 
 _load_com_github_ash2k_bazel_tools_repository()
 
@@ -136,8 +139,3 @@ load("//third_party/com_github_mvdan_sh:repository.bzl", _setup_com_github_mvdan
 _setup_com_github_mvdan_sh_repository()
 
 _load_catch2_repository()
-
-local_repository(
-    name = "braincheck",
-    path = "third_party/braincheck",
-)
