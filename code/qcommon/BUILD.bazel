@@ -13,6 +13,19 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 load("//build_defs:rules.bzl", "ENGINE_DEFINES", "FULL_WARNINGS", "SERVER_ONLY_ENGINE_DEFINES")
 
+cc_library(
+    name = "qbraincheck",
+    hdrs = ["qbraincheck.h"],
+    includes = ["."],
+    visibility = [
+        "//code/server:__pkg__",
+    ],
+    deps = [
+        ":qcommon",
+        "@braincheck",
+    ],
+)
+
 # TODO: Separate out headers for cvars to here? Actually lets create a much better console var library that is probably inspired by the work in q2java modernized
 cc_library(
     name = "cvar",
