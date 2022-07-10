@@ -23,7 +23,7 @@
 #define BRAINCHECK_FORMAT_START_VALUE S_COLOR_WHITE
 #define BRAINCHECK_FORMAT_START_ASSERT S_COLOR_RED
 
-#define BRAINCHECK_ASSERTS_NOT_FATAL
+#define BRAINCHECK_NON_FATAL_ASSERTS
 #pragma clang diagnostic ignored "-Wvariadic-macros"
 #pragma clang diagnostic ignored "-Wgnu-zero-variadic-macro-arguments"
 #define BRAINCHECK_PRINTF(args...) Com_Printf(args)
