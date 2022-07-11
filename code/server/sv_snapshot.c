@@ -260,8 +260,7 @@ static void SV_AddEntToSnapshot(svEntity_t* svEnt, sharedEntity_t* gEnt, snapsho
     eNums->numSnapshotEntities++;
 }
 
-static void SV_AddEntitiesVisibleFromPoint(vec3_t origin, clientSnapshot_t* frame,
-                                           snapshotEntityNumbers_t* eNums, bool portal)
+static void SV_AddEntitiesVisibleFromPoint(vec3_t origin, clientSnapshot_t* frame, snapshotEntityNumbers_t* eNums)
 {
     int e, i;
     sharedEntity_t* ent;
@@ -389,7 +388,7 @@ static void SV_AddEntitiesVisibleFromPoint(vec3_t origin, clientSnapshot_t* fram
                     continue;
                 }
             }
-            SV_AddEntitiesVisibleFromPoint(ent->s.origin2, frame, eNums, true);
+            SV_AddEntitiesVisibleFromPoint(ent->s.origin2, frame, eNums);
         }
     }
 }
@@ -458,7 +457,7 @@ static void SV_BuildClientSnapshot(client_t* client)
 
     // add all the entities directly visible to the eye, which
     // may include portal entities that merge other viewpoints
-    SV_AddEntitiesVisibleFromPoint(org, frame, &entityNumbers, false);
+    SV_AddEntitiesVisibleFromPoint(org, frame, &entityNumbers);
 
     // if there were portals visible, there may be out of order entities
     // in the list which will need to be resorted for the delta compression
