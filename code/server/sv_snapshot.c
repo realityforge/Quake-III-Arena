@@ -270,7 +270,6 @@ static void SV_AddEntitiesVisibleFromPoint(vec3_t origin, clientSnapshot_t* fram
     int clientarea, clientcluster;
     int leafnum;
     uint8_t* clientpvs;
-    uint8_t* bitvector;
 
     // during an error shutdown message we may need to transmit
     // the shutdown message after the server has shutdown, so
@@ -349,8 +348,6 @@ static void SV_AddEntitiesVisibleFromPoint(vec3_t origin, clientSnapshot_t* fram
             }
         }
 
-        bitvector = clientpvs;
-
         // check individual leafs
         if (!svEnt->numClusters) {
             continue;
@@ -358,7 +355,7 @@ static void SV_AddEntitiesVisibleFromPoint(vec3_t origin, clientSnapshot_t* fram
         l = 0;
         for (i = 0; i < svEnt->numClusters; i++) {
             l = svEnt->clusternums[i];
-            if (bitvector[l >> 3] & (1 << (l & 7))) {
+            if (clientpvs[l >> 3] & (1 << (l & 7))) {
                 break;
             }
         }
@@ -368,7 +365,7 @@ static void SV_AddEntitiesVisibleFromPoint(vec3_t origin, clientSnapshot_t* fram
         if (i == svEnt->numClusters) {
             if (svEnt->lastCluster) {
                 for (; l <= svEnt->lastCluster; l++) {
-                    if (bitvector[l >> 3] & (1 << (l & 7))) {
+                    if (clientpvs[l >> 3] & (1 << (l & 7))) {
                         break;
                     }
                 }
