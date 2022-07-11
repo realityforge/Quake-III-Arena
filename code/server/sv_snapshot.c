@@ -383,7 +383,7 @@ static void SV_AddEntitiesVisibleFromPoint(vec3_t origin, clientSnapshot_t* fram
         // add it
         SV_AddEntToSnapshot(svEnt, ent, eNums);
 
-        // if its a portal entity, add everything visible from its camera position
+        // if it's a portal entity, add everything visible from its camera position
         if (ent->r.svFlags & SVF_PORTAL) {
             if (ent->s.generic1) {
                 vec3_t dir;
