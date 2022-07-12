@@ -95,7 +95,7 @@ query --noexperimental_check_output_files
 build --experimental_remote_merkle_tree_cache
 query --experimental_remote_merkle_tree_cache
 
-# TODO: This next one should be enabled when the Bazel version is later than 5.1.1
+# TODO: This next one should be enabled when the Bazel version is 6.+
 # build --noexperimental_check_external_repository_files
 # fetch --noexperimental_check_external_repository_files
 # query --noexperimental_check_external_repository_files
