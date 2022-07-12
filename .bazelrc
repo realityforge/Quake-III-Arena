@@ -208,6 +208,9 @@ build:macos_arm64 --cpu=darwin_arm64
 # When printing the location part of messages, attempt to use a path relative to the workspace directory
 common:ci --attempt_to_print_relative_paths
 
+# Collects workspace status when building in the CI
+build:ci --workspace_status_command=$(pwd)/bin/workspace_status.sh
+
 # prints extra debugging information on execution
 build:ci --sandbox_debug
 build:ci --spawn_strategy=standalone
