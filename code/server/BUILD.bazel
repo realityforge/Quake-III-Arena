@@ -60,7 +60,7 @@ cc_library(
     visibility = DIST_VISIBILITY,
     deps = [
         ":server-dedicated",
-        "//code/botlib",
+        "//code/botlib:botlib_impl",
         "//code/qcommon:cm",
         "//code/qcommon:cmd-dedicated",
         "//code/qcommon:common-dedicated",

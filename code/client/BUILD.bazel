@@ -197,7 +197,7 @@ cc_library(
         ":openal_support",
         ":snd",
         ":snd_codec",
-        "//code/botlib",
+        "//code/botlib:botlib_impl",
         "//code/qcommon:cm",
         "//code/qcommon:cmd",
         "//code/qcommon:common",
