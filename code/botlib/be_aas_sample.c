@@ -39,8 +39,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 extern botlib_import_t botimport;
 
-//#define AAS_SAMPLE_DEBUG
-
 #define BBOX_NORMAL_EPSILON 0.001
 
 #define ON_EPSILON 0 // 0.0005
