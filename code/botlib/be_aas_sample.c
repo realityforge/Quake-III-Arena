@@ -893,7 +893,7 @@ aas_face_t* AAS_TraceEndFace(aas_trace_t* trace)
     }
     return firstface;
 }
-static int AAS_BoxOnPlaneSide2(vec3_t absmins, vec3_t absmaxs, aas_plane_t* p)
+static int AAS_BoxOnPlaneSide2(const vec3_t absmins, const vec3_t absmaxs, aas_plane_t* p)
 {
     int i, sides;
     float dist1, dist2;
