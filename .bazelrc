@@ -111,9 +111,6 @@ build --incompatible_remote_build_event_upload_respect_no_cache
 # which aren't dependencies of the tests.
 test --build_tests_only
 
-# Make Bazel print out all options from rc files.
-build --announce_rc
-
 # Try to use the operating system's file watch service for local changes instead of scanning every file for a change
 build --watchfs
 build --experimental_windows_watchfs
