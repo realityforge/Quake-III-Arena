@@ -25,13 +25,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 void AAS_InvalidateEntities(void);
 // unlink not updated entities
 void AAS_UnlinkInvalidEntities(void);
-// resets the entity AAS and BSP links (sets areas and leaves pointers to NULL)
-void AAS_ResetEntityLinks(void);
 // updates an entity
 int AAS_UpdateEntity(int ent, bot_entitystate_t* state);
 // gives the entity data used for collision detection
 void AAS_EntityBSPData(int entnum, bsp_entdata_t* entdata);
 #endif // AASINTERN
+// resets the entity AAS and BSP links (sets areas and leaves pointers to NULL)
+void AAS_ResetEntityLinks(void);
 
 // returns the BSP model number of the entity
 int AAS_EntityModelNum(int entnum);
