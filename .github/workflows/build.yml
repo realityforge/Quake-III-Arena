@@ -63,5 +63,5 @@ jobs:
         run: ./bazelw build //code/...
 
       - name: Test Code
-        # Test the
+        # Run the relevant tests
         run: ./bazelw test //... @braincheck//...
