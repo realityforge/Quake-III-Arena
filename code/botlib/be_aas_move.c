@@ -462,7 +462,6 @@ static int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
         crouch = false;
         // apply command movement
         if (n < cmdframes) {
-            // ax = 0;
             maxvel = phys_maxwalkvelocity;
             accelerate = phys_airaccelerate;
             VectorCopy(cmdmove, wishdir);
@@ -481,12 +480,10 @@ static int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
                 } else {
                     accelerate = phys_walkaccelerate;
                 }
-                // ax = 2;
             }
             if (swimming) {
                 maxvel = phys_maxswimvelocity;
                 accelerate = phys_swimaccelerate;
-                // ax = 3;
             } else {
                 wishdir[2] = 0;
             }
