@@ -15,6 +15,8 @@ BASE_WARNINGS = [
     "-Wpedantic",
 ]
 
+EXTRA_WARNINGS = BASE_WARNINGS + ["-Wmissing-prototypes", "-Werror"]
+
 FULL_WARNINGS = BASE_WARNINGS + [
     "-Wextra",
     "-Weverything",
