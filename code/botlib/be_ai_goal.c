@@ -121,7 +121,7 @@ typedef struct iteminfo_s {
     int number; // number of the item info
 } iteminfo_t;
 
-#define ITEMINFO_OFS(x) (size_t) & (((iteminfo_t*)0)->x)
+#define ITEMINFO_OFS(x) ((size_t) & (((iteminfo_t*)0)->x))
 
 fielddef_t iteminfo_fields[] = {
     { "name", ITEMINFO_OFS(name), FT_STRING },
