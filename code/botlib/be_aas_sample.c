@@ -766,7 +766,7 @@ bool AAS_InsideFace(aas_face_t* face, vec3_t pnormal, vec3_t point, float epsilo
         // this is done by checking the sign of the dot product of the
         // vector orthogonal vector from above and the vector from the
         // origin (first vertex of edge) to the point
-        // if the dotproduct is smaller than zero the point is outside the face
+        // if the dot product is smaller than zero the point is outside the face
         if (DotProduct(pointvec, sepnormal) < -epsilon)
             return false;
     }
