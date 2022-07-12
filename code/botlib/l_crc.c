@@ -76,7 +76,7 @@ void CRC_Init(unsigned short* crcvalue)
 {
     *crcvalue = CRC_INIT_VALUE;
 }
-unsigned short CRC_Value(unsigned short crcvalue)
+static unsigned short CRC_Value(const unsigned short crcvalue)
 {
     return crcvalue ^ CRC_XOR_VALUE;
 }

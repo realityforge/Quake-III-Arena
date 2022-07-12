@@ -21,5 +21,4 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 void CRC_Init(unsigned short* crcvalue);
-unsigned short CRC_Value(unsigned short crcvalue);
 unsigned short CRC_ProcessString(const unsigned char* data, int length);
