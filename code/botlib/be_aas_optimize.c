@@ -63,19 +63,12 @@ typedef struct optimized_s {
     int* faceoptimizeindex;
 } optimized_t;
 
-int AAS_KeepEdge(aas_edge_t* edge)
-{
-    return 1;
-}
 static int AAS_OptimizeEdge(optimized_t* optimized, int edgenum)
 {
     int i, optedgenum;
     aas_edge_t *edge, *optedge;
 
     edge = &aasworld.edges[abs(edgenum)];
-    if (!AAS_KeepEdge(edge))
-        return 0;
-
     optedgenum = optimized->edgeoptimizeindex[abs(edgenum)];
     if (optedgenum) {
         // keep the edge reversed sign
