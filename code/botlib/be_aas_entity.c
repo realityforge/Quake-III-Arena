@@ -61,7 +61,6 @@ int AAS_UpdateEntity(int entnum, bot_entitystate_t* state)
     if (!state) {
         // unlink the entity
         AAS_UnlinkFromAreas(ent->areas);
-        // unlink the entity from the BSP leaves
         ent->areas = NULL;
         return BLERR_NOERROR;
     }
@@ -126,7 +125,6 @@ int AAS_UpdateEntity(int entnum, bot_entitystate_t* state)
             AAS_UnlinkFromAreas(ent->areas);
             // relink the entity to the AAS areas (use the larges bbox)
             ent->areas = AAS_LinkEntityClientBBox(absmins, absmaxs, entnum, PRESENCE_NORMAL);
-            // unlink the entity from the BSP leaves
         }
     }
     return BLERR_NOERROR;
