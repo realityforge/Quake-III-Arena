@@ -287,7 +287,7 @@ int BotReachabilityArea(vec3_t origin, int client)
     }
     return BotFuzzyPointReachabilityArea(origin);
 }
-static int BotOnMover(vec3_t origin, int entnum, aas_reachability_t* reach)
+static int BotOnMover(const vec3_t origin, int entnum, aas_reachability_t* reach)
 {
     int i, modelnum;
     vec3_t mins, maxs, modelorigin, org, end;
