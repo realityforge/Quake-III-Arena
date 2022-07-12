@@ -417,7 +417,7 @@ static int AAS_CheckAreaForPossiblePortals(int areanum)
         return 0;
     memset(numareafrontfaces, 0, sizeof(numareafrontfaces));
     memset(numareabackfaces, 0, sizeof(numareabackfaces));
-    numareas = numfrontfaces = numbackfaces = 0;
+    numfrontfaces = numbackfaces = 0;
     numfrontareas = numbackareas = 0;
     frontplanenum = backplanenum = -1;
     // add any adjacent areas with less presence types
