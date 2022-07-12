@@ -145,7 +145,6 @@ static int AAS_LoadFiles(const char* mapname)
 {
     int errnum;
     char aasfile[MAX_QPATH];
-    //	char bspfile[MAX_QPATH];
 
     strcpy(aasworld.mapname, mapname);
     // NOTE: first reset the entity links into the AAS areas and BSP leaves
