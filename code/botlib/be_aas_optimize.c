@@ -68,7 +68,6 @@ static int AAS_OptimizeEdge(optimized_t* optimized, int edgenum)
     aas_edge_t *edge, *optedge;
 
     edge = &aasworld.edges[abs(edgenum)];
-
     optedgenum = optimized->edgeoptimizeindex[abs(edgenum)];
     if (optedgenum) {
         // keep the edge reversed sign
