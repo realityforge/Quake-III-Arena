@@ -24,13 +24,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * CRC calculation
  *****************************************************************************/
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
-#include "../qcommon/q_shared.h"
 #include "botlib.h"
 #include "be_interface.h" //for botimport.Print
+#include "l_crc.h"
 
 // FIXME: byte swap?
 
@@ -80,11 +76,11 @@ void CRC_Init(unsigned short* crcvalue)
 {
     *crcvalue = CRC_INIT_VALUE;
 }
-unsigned short CRC_Value(unsigned short crcvalue)
+static unsigned short CRC_Value(const unsigned short crcvalue)
 {
     return crcvalue ^ CRC_XOR_VALUE;
 }
-unsigned short CRC_ProcessString(unsigned char* data, int length)
+unsigned short CRC_ProcessString(const unsigned char* data, int length)
 {
     unsigned short crcvalue;
     int i, ind;

@@ -163,7 +163,7 @@ int AAS_NextBSPEntity(int ent)
         return ent;
     return 0;
 }
-int AAS_BSPEntityInRange(int ent)
+static int AAS_BSPEntityInRange(int ent)
 {
     if (ent <= 0 || ent >= bspworld.numentities) {
         botimport.Print(PRT_MESSAGE, "bsp entity out of range\n");
@@ -223,7 +223,7 @@ int AAS_IntForBSPEpairKey(int ent, char* key, int* value)
     *value = atoi(buf);
     return true;
 }
-void AAS_FreeBSPEntities()
+static void AAS_FreeBSPEntities()
 {
     int i;
     bsp_entity_t* ent;
@@ -242,7 +242,7 @@ void AAS_FreeBSPEntities()
     }
     bspworld.numentities = 0;
 }
-void AAS_ParseBSPEntities()
+static void AAS_ParseBSPEntities()
 {
     script_t* script;
     token_t token;

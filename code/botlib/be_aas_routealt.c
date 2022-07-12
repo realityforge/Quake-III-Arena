@@ -45,7 +45,7 @@ midrangearea_t* midrangeareas;
 int* clusterareas;
 int numclusterareas;
 
-void AAS_AltRoutingFloodCluster_r(int areanum)
+static void AAS_AltRoutingFloodCluster_r(int areanum)
 {
     int i, otherareanum;
     aas_area_t* area;

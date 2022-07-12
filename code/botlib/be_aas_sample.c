@@ -107,7 +107,7 @@ void AAS_FreeAASLinkHeap()
     aasworld.linkheap = NULL;
     aasworld.linkheapsize = 0;
 }
-aas_link_t* AAS_AllocAASLink()
+static aas_link_t* AAS_AllocAASLink()
 {
     aas_link_t* link;
 
@@ -125,7 +125,7 @@ aas_link_t* AAS_AllocAASLink()
     numaaslinks--;
     return link;
 }
-void AAS_DeAllocAASLink(aas_link_t* link)
+static void AAS_DeAllocAASLink(aas_link_t* link)
 {
     if (aasworld.freelinks)
         aasworld.freelinks->prev_ent = link;
@@ -266,8 +266,7 @@ int AAS_PointPresenceType(vec3_t point)
         return PRESENCE_NONE;
     return aasworld.areasettings[areanum].presencetype;
 }
-bool AAS_AreaEntityCollision(int areanum, vec3_t start, vec3_t end,
-                             int presencetype, int passent, aas_trace_t* trace)
+static bool AAS_AreaEntityCollision(int areanum, vec3_t start, vec3_t end, int presencetype, int passent, aas_trace_t* trace)
 {
     int collision;
     vec3_t boxmins, boxmaxs;
@@ -898,7 +897,7 @@ aas_face_t* AAS_TraceEndFace(aas_trace_t* trace)
     }
     return firstface;
 }
-int AAS_BoxOnPlaneSide2(vec3_t absmins, vec3_t absmaxs, aas_plane_t* p)
+static int AAS_BoxOnPlaneSide2(const vec3_t absmins, const vec3_t absmaxs, aas_plane_t* p)
 {
     int i, sides;
     float dist1, dist2;

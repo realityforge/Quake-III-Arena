@@ -67,7 +67,7 @@ void QDECL SourceWarning(source_t* source, char* str, ...)
     va_end(ap);
     botimport.Print(PRT_WARNING, "file %s, line %d: %s\n", source->scriptstack->filename, source->scriptstack->line, text);
 }
-void PC_PushIndent(source_t* source, int type, int skip)
+static void PC_PushIndent(source_t* source, int type, int skip)
 {
     indent_t* indent;
 
@@ -79,7 +79,7 @@ void PC_PushIndent(source_t* source, int type, int skip)
     indent->next = source->indentstack;
     source->indentstack = indent;
 }
-void PC_PopIndent(source_t* source, int* type, int* skip)
+static void PC_PopIndent(source_t* source, int* type, int* skip)
 {
     indent_t* indent;
 
@@ -100,7 +100,7 @@ void PC_PopIndent(source_t* source, int* type, int* skip)
     source->skip -= indent->skip;
     FreeMemory(indent);
 }
-void PC_PushScript(source_t* source, script_t* script)
+static void PC_PushScript(source_t* source, script_t* script)
 {
     script_t* s;
 
@@ -114,22 +114,7 @@ void PC_PushScript(source_t* source, script_t* script)
     script->next = source->scriptstack;
     source->scriptstack = script;
 }
-void PC_InitTokenHeap()
-{
-    /*
-    int i;
-
-    if (tokenheapinitialized) return;
-    freetokens = NULL;
-    for (i = 0; i < TOKEN_HEAP_SIZE; i++)
-    {
-            token_heap[i].next = freetokens;
-            freetokens = &token_heap[i];
-    }
-    tokenheapinitialized = true;
-    */
-}
-token_t* PC_CopyToken(token_t* token)
+static token_t* PC_CopyToken(token_t* token)
 {
     token_t* t = (token_t*)GetMemory(sizeof(token_t));
     if (!t) {
@@ -141,12 +126,12 @@ token_t* PC_CopyToken(token_t* token)
     numtokens++;
     return t;
 }
-void PC_FreeToken(token_t* token)
+static void PC_FreeToken(token_t* token)
 {
     FreeMemory(token);
     numtokens--;
 }
-int PC_ReadSourceToken(source_t* source, token_t* token)
+static int PC_ReadSourceToken(source_t* source, token_t* token)
 {
     token_t* t;
     script_t* script;
@@ -181,7 +166,7 @@ int PC_ReadSourceToken(source_t* source, token_t* token)
     PC_FreeToken(t);
     return true;
 }
-int PC_UnreadSourceToken(source_t* source, token_t* token)
+static int PC_UnreadSourceToken(source_t* source, token_t* token)
 {
     token_t* t;
 
@@ -190,7 +175,7 @@ int PC_UnreadSourceToken(source_t* source, token_t* token)
     source->tokens = t;
     return true;
 }
-int PC_ReadDefineParms(source_t* source, define_t* define, token_t** parms, int maxparms)
+static int PC_ReadDefineParms(source_t* source, define_t* define, token_t** parms, int maxparms)
 {
     token_t token, *t, *last;
     int i, done, lastcomma, numparms, indent;
@@ -264,7 +249,7 @@ int PC_ReadDefineParms(source_t* source, define_t* define, token_t** parms, int 
     }
     return true;
 }
-int PC_StringizeTokens(token_t* tokens, token_t* token)
+static int PC_StringizeTokens(token_t* tokens, token_t* token)
 {
     token_t* t;
 
@@ -279,7 +264,7 @@ int PC_StringizeTokens(token_t* tokens, token_t* token)
     strncat(token->string, "\"", MAX_TOKEN - strlen(token->string));
     return true;
 }
-int PC_MergeTokens(token_t* t1, token_t* t2)
+static int PC_MergeTokens(token_t* t1, token_t* t2)
 {
     // merging of a name with a name or number
     if (t1->type == TT_NAME && (t2->type == TT_NAME || t2->type == TT_NUMBER)) {
@@ -298,7 +283,7 @@ int PC_MergeTokens(token_t* t1, token_t* t2)
     return false;
 }
 
-int PC_NameHash(char* name)
+static int PC_NameHash(const char* name)
 {
     int register hash, i;
 
@@ -309,7 +294,7 @@ int PC_NameHash(char* name)
     hash = (hash ^ (hash >> 10) ^ (hash >> 20)) & (DEFINEHASHSIZE - 1);
     return hash;
 }
-void PC_AddDefineToHash(define_t* define, define_t** definehash)
+static void PC_AddDefineToHash(define_t* define, define_t** definehash)
 {
     int hash;
 
@@ -317,7 +302,7 @@ void PC_AddDefineToHash(define_t* define, define_t** definehash)
     define->hashnext = definehash[hash];
     definehash[hash] = define;
 }
-define_t* PC_FindHashedDefine(define_t** definehash, char* name)
+static define_t* PC_FindHashedDefine(define_t** definehash, char* name)
 {
     define_t* d;
     int hash;
@@ -332,7 +317,7 @@ define_t* PC_FindHashedDefine(define_t** definehash, char* name)
 //============================================================================
 // Returns the number of the parm if no parm found with the given name -1 is returned
 //============================================================================
-int PC_FindDefineParm(define_t* define, char* name)
+static int PC_FindDefineParm(define_t* define, char* name)
 {
     token_t* p;
     int i;
@@ -345,7 +330,7 @@ int PC_FindDefineParm(define_t* define, char* name)
     }
     return -1;
 }
-void PC_FreeDefine(define_t* define)
+static void PC_FreeDefine(define_t* define)
 {
     token_t *t, *next;
 
@@ -362,8 +347,7 @@ void PC_FreeDefine(define_t* define)
     // free the define
     FreeMemory(define);
 }
-int PC_ExpandBuiltinDefine(source_t* source, token_t* deftoken, define_t* define,
-                           token_t** firsttoken, token_t** lasttoken)
+static int PC_ExpandBuiltinDefine(source_t* source, token_t* deftoken, define_t* define, token_t** firsttoken, token_t** lasttoken)
 {
     token_t* token;
     time_t t;
@@ -427,8 +411,7 @@ int PC_ExpandBuiltinDefine(source_t* source, token_t* deftoken, define_t* define
     }
     return true;
 }
-int PC_ExpandDefine(source_t* source, token_t* deftoken, define_t* define,
-                    token_t** firsttoken, token_t** lasttoken)
+static int PC_ExpandDefine(source_t* source, token_t* deftoken, define_t* define, token_t** firsttoken, token_t** lasttoken)
 {
     token_t *parms[MAX_DEFINEPARMS], *dt, *pt, *t;
     token_t *t1, *t2, *first, *last, *nextpt, token;
@@ -541,7 +524,7 @@ int PC_ExpandDefine(source_t* source, token_t* deftoken, define_t* define,
     }
     return true;
 }
-int PC_ExpandDefineIntoSource(source_t* source, token_t* deftoken, define_t* define)
+static int PC_ExpandDefineIntoSource(source_t* source, token_t* deftoken, define_t* define)
 {
     token_t *firsttoken, *lasttoken;
 
@@ -555,7 +538,7 @@ int PC_ExpandDefineIntoSource(source_t* source, token_t* deftoken, define_t* def
     }
     return false;
 }
-void PC_ConvertPath(char* path)
+static void PC_ConvertPath(char* path)
 {
     char* ptr;
 
@@ -574,7 +557,7 @@ void PC_ConvertPath(char* path)
         ptr++;
     }
 }
-int PC_Directive_include(source_t* source)
+static int PC_Directive_include(source_t* source)
 {
     script_t* script;
     token_t token;
@@ -656,13 +639,13 @@ int PC_WhiteSpaceBeforeToken(token_t* token)
 {
     return token->endwhitespace_p - token->whitespace_p > 0;
 }
-void PC_ClearTokenWhiteSpace(token_t* token)
+static void PC_ClearTokenWhiteSpace(token_t* token)
 {
     token->whitespace_p = NULL;
     token->endwhitespace_p = NULL;
     token->linescrossed = 0;
 }
-int PC_Directive_undef(source_t* source)
+static int PC_Directive_undef(source_t* source)
 {
     token_t token;
     define_t *define, *lastdefine;
@@ -698,7 +681,7 @@ int PC_Directive_undef(source_t* source)
     }
     return true;
 }
-int PC_Directive_define(source_t* source)
+static int PC_Directive_define(source_t* source)
 {
     token_t token, *t, *last;
     define_t* define;
@@ -810,15 +793,13 @@ int PC_Directive_define(source_t* source)
     }
     return true;
 }
-define_t* PC_DefineFromString(char* string)
+static define_t* PC_DefineFromString(char* string)
 {
     script_t* script;
     source_t src;
     token_t* t;
     int res, i;
     define_t* def;
-
-    PC_InitTokenHeap();
 
     script = LoadScriptMemory(string, strlen(string), "*extern");
     // create a new source
@@ -876,7 +857,7 @@ void PC_RemoveAllGlobalDefines()
         PC_FreeDefine(define);
     }
 }
-define_t* PC_CopyDefine(source_t* source, define_t* define)
+static define_t* PC_CopyDefine(source_t* source, define_t* define)
 {
     define_t* newdefine;
     token_t *token, *newtoken, *lasttoken;
@@ -915,7 +896,7 @@ define_t* PC_CopyDefine(source_t* source, define_t* define)
     }
     return newdefine;
 }
-void PC_AddGlobalDefinesToSource(source_t* source)
+static void PC_AddGlobalDefinesToSource(source_t* source)
 {
     define_t *define, *newdefine;
 
@@ -924,7 +905,7 @@ void PC_AddGlobalDefinesToSource(source_t* source)
         PC_AddDefineToHash(newdefine, source->definehash);
     }
 }
-int PC_Directive_if_def(source_t* source, int type)
+static int PC_Directive_if_def(source_t* source, int type)
 {
     token_t token;
     define_t* d;
@@ -944,15 +925,15 @@ int PC_Directive_if_def(source_t* source, int type)
     PC_PushIndent(source, type, skip);
     return true;
 }
-int PC_Directive_ifdef(source_t* source)
+static int PC_Directive_ifdef(source_t* source)
 {
     return PC_Directive_if_def(source, INDENT_IFDEF);
 }
-int PC_Directive_ifndef(source_t* source)
+static int PC_Directive_ifndef(source_t* source)
 {
     return PC_Directive_if_def(source, INDENT_IFNDEF);
 }
-int PC_Directive_else(source_t* source)
+static int PC_Directive_else(source_t* source)
 {
     int type, skip;
 
@@ -968,7 +949,7 @@ int PC_Directive_else(source_t* source)
     PC_PushIndent(source, INDENT_ELSE, !skip);
     return true;
 }
-int PC_Directive_endif(source_t* source)
+static int PC_Directive_endif(source_t* source)
 {
     int type, skip;
 
@@ -993,7 +974,7 @@ typedef struct value_s {
     struct value_s *prev, *next;
 } value_t;
 
-int PC_OperatorPriority(int op)
+static int PC_OperatorPriority(int op)
 {
     switch (op) {
     case P_MUL:
@@ -1068,8 +1049,7 @@ int PC_OperatorPriority(int op)
         op = &operator_heap[numoperators++];
 #define FreeOperator(op)
 
-int PC_EvaluateTokens(source_t* source, token_t* tokens, signed long int* intvalue,
-                      double* floatvalue, int integer)
+static int PC_EvaluateTokens(source_t* source, token_t* tokens, signed long int* intvalue, double* floatvalue, int integer)
 {
     operator_t *o, *firstoperator, *lastoperator;
     value_t *v, *firstvalue, *lastvalue, *v1, *v2;
@@ -1506,8 +1486,7 @@ int PC_EvaluateTokens(source_t* source, token_t* tokens, signed long int* intval
         *floatvalue = 0;
     return false;
 }
-int PC_Evaluate(source_t* source, signed long int* intvalue,
-                double* floatvalue, int integer)
+static int PC_Evaluate(source_t* source, signed long int* intvalue, double* floatvalue, int integer)
 {
     token_t token, *firsttoken, *lasttoken;
     token_t *t, *nexttoken;
@@ -1591,8 +1570,8 @@ int PC_Evaluate(source_t* source, signed long int* intvalue,
 #endif // DEBUG_EVAL
     return true;
 }
-int PC_DollarEvaluate(source_t* source, signed long int* intvalue,
-                      double* floatvalue, int integer)
+static int PC_DollarEvaluate(source_t* source, signed long int* intvalue,
+                             double* floatvalue, int integer)
 {
     int indent, defined = false;
     token_t token, *firsttoken, *lasttoken;
@@ -1687,7 +1666,7 @@ int PC_DollarEvaluate(source_t* source, signed long int* intvalue,
 #endif // DEBUG_EVAL
     return true;
 }
-int PC_Directive_elif(source_t* source)
+static int PC_Directive_elif(source_t* source)
 {
     signed long int value;
     int type, skip;
@@ -1703,7 +1682,7 @@ int PC_Directive_elif(source_t* source)
     PC_PushIndent(source, INDENT_ELIF, skip);
     return true;
 }
-int PC_Directive_if(source_t* source)
+static int PC_Directive_if(source_t* source)
 {
     signed long int value;
     int skip;
@@ -1714,12 +1693,12 @@ int PC_Directive_if(source_t* source)
     PC_PushIndent(source, INDENT_IF, skip);
     return true;
 }
-int PC_Directive_line(source_t* source)
+static int PC_Directive_line(source_t* source)
 {
     SourceError(source, "#line directive not supported");
     return false;
 }
-int PC_Directive_error(source_t* source)
+static int PC_Directive_error(source_t* source)
 {
     token_t token;
 
@@ -1728,7 +1707,7 @@ int PC_Directive_error(source_t* source)
     SourceError(source, "#error directive: %s", token.string);
     return false;
 }
-int PC_Directive_pragma(source_t* source)
+static int PC_Directive_pragma(source_t* source)
 {
     token_t token;
 
@@ -1737,7 +1716,7 @@ int PC_Directive_pragma(source_t* source)
         ;
     return true;
 }
-void UnreadSignToken(source_t* source)
+static void UnreadSignToken(source_t* source)
 {
     token_t token;
 
@@ -1750,7 +1729,7 @@ void UnreadSignToken(source_t* source)
     token.subtype = P_SUB;
     PC_UnreadSourceToken(source, &token);
 }
-int PC_Directive_eval(source_t* source)
+static int PC_Directive_eval(source_t* source)
 {
     signed long int value;
     token_t token;
@@ -1769,7 +1748,7 @@ int PC_Directive_eval(source_t* source)
         UnreadSignToken(source);
     return true;
 }
-int PC_Directive_evalfloat(source_t* source)
+static int PC_Directive_evalfloat(source_t* source)
 {
     double value;
     token_t token;
@@ -1806,7 +1785,7 @@ directive_t directives[20] = {
     { NULL, NULL }
 };
 
-int PC_ReadDirective(source_t* source)
+static int PC_ReadDirective(source_t* source)
 {
     token_t token;
     int i;
@@ -1834,7 +1813,7 @@ int PC_ReadDirective(source_t* source)
     SourceError(source, "unknown precompiler directive %s", token.string);
     return false;
 }
-int PC_DollarDirective_evalint(source_t* source)
+static int PC_DollarDirective_evalint(source_t* source)
 {
     signed long int value;
     token_t token;
@@ -1857,7 +1836,7 @@ int PC_DollarDirective_evalint(source_t* source)
         UnreadSignToken(source);
     return true;
 }
-int PC_DollarDirective_evalfloat(source_t* source)
+static int PC_DollarDirective_evalfloat(source_t* source)
 {
     double value;
     token_t token;
@@ -1886,7 +1865,7 @@ directive_t dollardirectives[20] = {
     { NULL, NULL }
 };
 
-int PC_ReadDollarDirective(source_t* source)
+static int PC_ReadDollarDirective(source_t* source)
 {
     token_t token;
     int i;
@@ -2074,8 +2053,6 @@ source_t* LoadSourceFile(const char* filename)
 {
     source_t* source;
     script_t* script;
-
-    PC_InitTokenHeap();
 
     script = LoadScriptFile(filename);
     if (!script)

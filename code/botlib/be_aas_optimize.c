@@ -62,18 +62,12 @@ typedef struct optimized_s {
     int* faceoptimizeindex;
 } optimized_t;
 
-int AAS_KeepEdge(aas_edge_t* edge)
-{
-    return 1;
-}
-int AAS_OptimizeEdge(optimized_t* optimized, int edgenum)
+static int AAS_OptimizeEdge(optimized_t* optimized, int edgenum)
 {
     int i, optedgenum;
     aas_edge_t *edge, *optedge;
 
     edge = &aasworld.edges[abs(edgenum)];
-    if (!AAS_KeepEdge(edge))
-        return 0;
 
     optedgenum = optimized->edgeoptimizeindex[abs(edgenum)];
     if (optedgenum) {
@@ -105,14 +99,14 @@ int AAS_OptimizeEdge(optimized_t* optimized, int edgenum)
     else
         return -optedgenum;
 }
-int AAS_KeepFace(aas_face_t* face)
+static int AAS_KeepFace(aas_face_t* face)
 {
     if (!(face->faceflags & FACE_LADDER))
         return 0;
     else
         return 1;
 }
-int AAS_OptimizeFace(optimized_t* optimized, int facenum)
+static int AAS_OptimizeFace(optimized_t* optimized, int facenum)
 {
     int i, edgenum, optedgenum, optfacenum;
     aas_face_t *face, *optface;
@@ -153,7 +147,7 @@ int AAS_OptimizeFace(optimized_t* optimized, int facenum)
     else
         return -optfacenum;
 }
-void AAS_OptimizeArea(optimized_t* optimized, int areanum)
+static void AAS_OptimizeArea(optimized_t* optimized, int areanum)
 {
     int i, facenum, optfacenum;
     aas_area_t *area, *optarea;
@@ -174,7 +168,7 @@ void AAS_OptimizeArea(optimized_t* optimized, int areanum)
         }
     }
 }
-void AAS_OptimizeAlloc(optimized_t* optimized)
+static void AAS_OptimizeAlloc(optimized_t* optimized)
 {
     optimized->vertexes = (aas_vertex_t*)GetClearedMemory(aasworld.numvertexes * sizeof(aas_vertex_t));
     optimized->numvertexes = 0;
@@ -192,7 +186,7 @@ void AAS_OptimizeAlloc(optimized_t* optimized)
     optimized->edgeoptimizeindex = (int*)GetClearedMemory(aasworld.numedges * sizeof(int));
     optimized->faceoptimizeindex = (int*)GetClearedMemory(aasworld.numfaces * sizeof(int));
 }
-void AAS_OptimizeStore(optimized_t* optimized)
+static void AAS_OptimizeStore(optimized_t* optimized)
 {
     // store the optimized vertexes
     if (aasworld.vertexes)

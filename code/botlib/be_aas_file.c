@@ -40,7 +40,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 //#define AASFILEDEBUG
 
-void AAS_SwapAASData()
+static void AAS_SwapAASData()
 {
     int i, j;
     // bounding boxes
@@ -250,7 +250,7 @@ void AAS_FileInfo()
 //===========================================================================
 // allocate memory and read a lump of an AAS file
 //===========================================================================
-char* AAS_LoadAASLump(fileHandle_t fp, int offset, int length, int* lastoffset, int size)
+static char* AAS_LoadAASLump(fileHandle_t fp, int offset, int length, int* lastoffset, int size)
 {
     char* buf;
     if (!length) {
@@ -276,7 +276,7 @@ char* AAS_LoadAASLump(fileHandle_t fp, int offset, int length, int* lastoffset, 
     }
     return buf;
 }
-void AAS_DData(unsigned char* data, int size)
+static void AAS_DData(unsigned char* data, int size)
 {
     int i;
 
@@ -440,7 +440,7 @@ int AAS_LoadAASFile(char* filename)
 }
 static int AAS_WriteAASLump_offset;
 
-int AAS_WriteAASLump(fileHandle_t fp, aas_header_t* h, int lumpnum, void* data, int length)
+static int AAS_WriteAASLump(fileHandle_t fp, aas_header_t* h, int lumpnum, void* data, int length)
 {
     aas_lump_t* lump;
 

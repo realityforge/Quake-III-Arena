@@ -20,19 +20,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-// clear the shown debug lines
-void AAS_ClearShownDebugLines(void);
 // show a debug line
 void AAS_DebugLine(vec3_t start, vec3_t end, int color);
 // show a permanent line
 void AAS_PermanentLine(vec3_t start, vec3_t end, int color);
-//
 void AAS_ShowAreaPolygons(int areanum, int color, int groundfacesonly);
-// draw a cross
-void AAS_DrawCross(vec3_t origin, float size, int color);
+#ifdef DEBUG
 // print the travel type
 void AAS_PrintTravelType(int traveltype);
-// draw an arrow
-void AAS_DrawArrow(vec3_t start, vec3_t end, int linecolor, int arrowcolor);
-// visualize the given reachability
-void AAS_ShowReachability(struct aas_reachability_s* reach);
+#endif

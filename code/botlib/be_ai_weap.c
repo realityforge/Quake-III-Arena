@@ -111,7 +111,7 @@ typedef struct bot_weaponstate_s {
 static bot_weaponstate_t* botweaponstates[MAX_CLIENTS + 1];
 static weaponconfig_t* weaponconfig;
 
-int BotValidWeaponNumber(int weaponnum)
+static int BotValidWeaponNumber(int weaponnum)
 {
     if (weaponnum <= 0 || weaponnum > weaponconfig->numweapons) {
         botimport.Print(PRT_ERROR, "weapon number out of range\n");
@@ -119,7 +119,7 @@ int BotValidWeaponNumber(int weaponnum)
     }
     return true;
 }
-bot_weaponstate_t* BotWeaponStateFromHandle(int handle)
+static bot_weaponstate_t* BotWeaponStateFromHandle(int handle)
 {
     if (handle <= 0 || handle > MAX_CLIENTS) {
         botimport.Print(PRT_FATAL, "move state handle %d out of range\n", handle);
@@ -131,7 +131,7 @@ bot_weaponstate_t* BotWeaponStateFromHandle(int handle)
     }
     return botweaponstates[handle];
 }
-weaponconfig_t* LoadWeaponConfig(char* filename)
+static weaponconfig_t* LoadWeaponConfig(char* filename)
 {
     int max_weaponinfo, max_projectileinfo;
     token_t token;
@@ -237,7 +237,7 @@ weaponconfig_t* LoadWeaponConfig(char* filename)
     botimport.Print(PRT_MESSAGE, "loaded %s\n", path);
     return wc;
 }
-int* WeaponWeightIndex(weightconfig_t* wwc, weaponconfig_t* wc)
+static int* WeaponWeightIndex(weightconfig_t* wwc, weaponconfig_t* wc)
 {
     int *index, i;
 
@@ -249,7 +249,7 @@ int* WeaponWeightIndex(weightconfig_t* wwc, weaponconfig_t* wc)
     }
     return index;
 }
-void BotFreeWeaponWeights(int weaponstate)
+static void BotFreeWeaponWeights(int weaponstate)
 {
     bot_weaponstate_t* ws;
 

@@ -67,7 +67,7 @@ typedef struct bot_character_s {
 
 bot_character_t* botcharacters[MAX_CLIENTS + 1];
 
-bot_character_t* BotCharacterFromHandle(int handle)
+static bot_character_t* BotCharacterFromHandle(int handle)
 {
     if (handle <= 0 || handle > MAX_CLIENTS) {
         botimport.Print(PRT_FATAL, "character handle %d out of range\n", handle);
@@ -79,7 +79,7 @@ bot_character_t* BotCharacterFromHandle(int handle)
     }
     return botcharacters[handle];
 }
-void BotDumpCharacter(bot_character_t* ch)
+static void BotDumpCharacter(bot_character_t* ch)
 {
     int i;
 
@@ -101,7 +101,7 @@ void BotDumpCharacter(bot_character_t* ch)
     }
     Log_Write("}\n");
 }
-void BotFreeCharacterStrings(bot_character_t* ch)
+static void BotFreeCharacterStrings(bot_character_t* ch)
 {
     int i;
 
@@ -111,7 +111,7 @@ void BotFreeCharacterStrings(bot_character_t* ch)
         }
     }
 }
-void BotFreeCharacter2(int handle)
+static void BotFreeCharacter2(int handle)
 {
     if (handle <= 0 || handle > MAX_CLIENTS) {
         botimport.Print(PRT_FATAL, "character handle %d out of range\n", handle);
@@ -131,7 +131,7 @@ void BotFreeCharacter(int handle)
         return;
     BotFreeCharacter2(handle);
 }
-void BotDefaultCharacteristics(bot_character_t* ch, bot_character_t* defaultch)
+static void BotDefaultCharacteristics(bot_character_t* ch, bot_character_t* defaultch)
 {
     int i;
 
@@ -151,7 +151,7 @@ void BotDefaultCharacteristics(bot_character_t* ch, bot_character_t* defaultch)
         }
     }
 }
-bot_character_t* BotLoadCharacterFromFile(char* charfile, int skill)
+static bot_character_t* BotLoadCharacterFromFile(char* charfile, int skill)
 {
     int indent, index, foundcharacter;
     bot_character_t* ch;
@@ -270,7 +270,7 @@ bot_character_t* BotLoadCharacterFromFile(char* charfile, int skill)
     }
     return ch;
 }
-int BotFindCachedCharacter(char* charfile, float skill)
+static int BotFindCachedCharacter(char* charfile, float skill)
 {
     int handle;
 
@@ -283,7 +283,7 @@ int BotFindCachedCharacter(char* charfile, float skill)
     }
     return 0;
 }
-int BotLoadCachedCharacter(char* charfile, float skill, int reload)
+static int BotLoadCachedCharacter(char* charfile, float skill, int reload)
 {
     int handle, cachedhandle, intskill;
     bot_character_t* ch = NULL;
@@ -371,7 +371,7 @@ int BotLoadCachedCharacter(char* charfile, float skill, int reload)
     // couldn't load any character
     return 0;
 }
-int BotLoadCharacterSkill(char* charfile, float skill)
+static int BotLoadCharacterSkill(char* charfile, float skill)
 {
     int ch, defaultch;
 
@@ -384,7 +384,7 @@ int BotLoadCharacterSkill(char* charfile, float skill)
 
     return ch;
 }
-int BotInterpolateCharacters(int handle1, int handle2, float desiredskill)
+static int BotInterpolateCharacters(int handle1, int handle2, float desiredskill)
 {
     bot_character_t *ch1, *ch2, *out;
     int i, handle;
@@ -466,7 +466,7 @@ int BotLoadCharacter(char* charfile, float skill)
     BotDumpCharacter(botcharacters[handle]);
     return handle;
 }
-int CheckCharacteristicIndex(int character, int index)
+static int CheckCharacteristicIndex(int character, int index)
 {
     bot_character_t* ch;
 

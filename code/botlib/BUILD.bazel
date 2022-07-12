@@ -11,6 +11,7 @@
 # limitations under the License.
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
+load("//build_defs:rules.bzl", "EXTRA_WARNINGS")
 
 cc_library(
     name = "api",
@@ -92,6 +93,7 @@ cc_library(
         "l_utils.h",
     ],
     hdrs = ["be_aas.h"],
+    copts = EXTRA_WARNINGS,
     includes = ["."],
     visibility = ["//code/game:__pkg__"],
     deps = [

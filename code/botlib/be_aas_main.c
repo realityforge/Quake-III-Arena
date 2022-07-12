@@ -49,39 +49,6 @@ void QDECL AAS_Error(char* fmt, ...)
     va_end(arglist);
     botimport.Print(PRT_FATAL, str);
 }
-char* AAS_StringFromIndex(char* indexname, char* stringindex[], int numindexes, int index)
-{
-    if (!aasworld.indexessetup) {
-        botimport.Print(PRT_ERROR, "%s: index %d not setup\n", indexname, index);
-        return "";
-    }
-    if (index < 0 || index >= numindexes) {
-        botimport.Print(PRT_ERROR, "%s: index %d out of range\n", indexname, index);
-        return "";
-    }
-    if (!stringindex[index]) {
-        if (index) {
-            botimport.Print(PRT_ERROR, "%s: reference to unused index %d\n", indexname, index);
-        }
-        return "";
-    }
-    return stringindex[index];
-}
-int AAS_IndexFromString(char* indexname, char* stringindex[], int numindexes, char* string)
-{
-    int i;
-    if (!aasworld.indexessetup) {
-        botimport.Print(PRT_ERROR, "%s: index not setup \"%s\"\n", indexname, string);
-        return 0;
-    }
-    for (i = 0; i < numindexes; i++) {
-        if (!stringindex[i])
-            continue;
-        if (!Q_stricmp(stringindex[i], string))
-            return i;
-    }
-    return 0;
-}
 int AAS_Loaded()
 {
     return aasworld.loaded;
@@ -100,7 +67,7 @@ void AAS_SetInitialized()
     // AAS_RoutingInfo();
 #endif
 }
-void AAS_ContinueInit(float time)
+static void AAS_ContinueInit(float time)
 {
     // if no AAS file loaded
     if (!aasworld.loaded)
@@ -179,7 +146,7 @@ void AAS_ProjectPointOntoVector(vec3_t point, vec3_t vStart, vec3_t vEnd, vec3_t
     // project onto the directional vector for this segment
     VectorMA(vStart, DotProduct(pVec, vec), vec, vProj);
 }
-int AAS_LoadFiles(const char* mapname)
+static int AAS_LoadFiles(const char* mapname)
 {
     int errnum;
     char aasfile[MAX_QPATH];

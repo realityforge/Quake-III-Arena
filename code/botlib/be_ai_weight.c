@@ -45,7 +45,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define MAX_WEIGHT_FILES 128
 weightconfig_t* weightFileList[MAX_WEIGHT_FILES];
 
-int ReadValue(source_t* source, float* value)
+static int ReadValue(source_t* source, float* value)
 {
     token_t token;
 
@@ -64,7 +64,7 @@ int ReadValue(source_t* source, float* value)
     *value = token.floatvalue;
     return true;
 }
-int ReadFuzzyWeight(source_t* source, fuzzyseparator_t* fs)
+static int ReadFuzzyWeight(source_t* source, fuzzyseparator_t* fs)
 {
     if (PC_CheckTokenString(source, "balance")) {
         fs->type = WT_BALANCE;
@@ -93,7 +93,7 @@ int ReadFuzzyWeight(source_t* source, fuzzyseparator_t* fs)
         return false;
     return true;
 }
-void FreeFuzzySeparators_r(fuzzyseparator_t* fs)
+static void FreeFuzzySeparators_r(fuzzyseparator_t* fs)
 {
     if (!fs)
         return;
@@ -103,7 +103,7 @@ void FreeFuzzySeparators_r(fuzzyseparator_t* fs)
         FreeFuzzySeparators_r(fs->next);
     FreeMemory(fs);
 }
-void FreeWeightConfig2(weightconfig_t* config)
+static void FreeWeightConfig2(weightconfig_t* config)
 {
     int i;
 
@@ -120,7 +120,7 @@ void FreeWeightConfig(weightconfig_t* config)
         return;
     FreeWeightConfig2(config);
 }
-fuzzyseparator_t* ReadFuzzySeparators_r(source_t* source)
+static fuzzyseparator_t* ReadFuzzySeparators_r(source_t* source)
 {
     int newindent, index, def, founddefault;
     token_t token;
@@ -365,7 +365,7 @@ int FindFuzzyWeight(weightconfig_t* wc, char* name)
     }
     return -1;
 }
-float FuzzyWeight_r(int* inventory, fuzzyseparator_t* fs)
+static float FuzzyWeight_r(int* inventory, fuzzyseparator_t* fs)
 {
     float scale, w1, w2;
 
@@ -395,7 +395,7 @@ float FuzzyWeight_r(int* inventory, fuzzyseparator_t* fs)
     }
     return fs->weight;
 }
-float FuzzyWeightUndecided_r(int* inventory, fuzzyseparator_t* fs)
+static float FuzzyWeightUndecided_r(int* inventory, fuzzyseparator_t* fs)
 {
     float scale, w1, w2;
 
@@ -477,7 +477,7 @@ float FuzzyWeightUndecided(int* inventory, weightconfig_t* wc, int weightnum)
     return 0;
 #endif
 }
-void EvolveFuzzySeparator_r(fuzzyseparator_t* fs)
+static void EvolveFuzzySeparator_r(fuzzyseparator_t* fs)
 {
     if (fs->child) {
         EvolveFuzzySeparator_r(fs->child);
@@ -504,39 +504,7 @@ void EvolveWeightConfig(weightconfig_t* config)
         EvolveFuzzySeparator_r(config->weights[i].firstseparator);
     }
 }
-void ScaleFuzzySeparator_r(fuzzyseparator_t* fs, float scale)
-{
-    if (fs->child) {
-        ScaleFuzzySeparator_r(fs->child, scale);
-    } else if (fs->type == WT_BALANCE) {
-        fs->weight = (fs->maxweight + fs->minweight) * scale;
-        // get the weight between bounds
-        if (fs->weight < fs->minweight)
-            fs->weight = fs->minweight;
-        else if (fs->weight > fs->maxweight)
-            fs->weight = fs->maxweight;
-    }
-    if (fs->next)
-        ScaleFuzzySeparator_r(fs->next, scale);
-}
-void ScaleFuzzySeparatorBalanceRange_r(fuzzyseparator_t* fs, float scale)
-{
-    if (fs->child) {
-        ScaleFuzzySeparatorBalanceRange_r(fs->child, scale);
-    } else if (fs->type == WT_BALANCE) {
-        float mid = (fs->minweight + fs->maxweight) * 0.5;
-        // get the weight between bounds
-        fs->maxweight = mid + (fs->maxweight - mid) * scale;
-        fs->minweight = mid + (fs->minweight - mid) * scale;
-        if (fs->maxweight < fs->minweight) {
-            fs->maxweight = fs->minweight;
-        }
-    }
-    if (fs->next)
-        ScaleFuzzySeparatorBalanceRange_r(fs->next, scale);
-}
-int InterbreedFuzzySeparator_r(fuzzyseparator_t* fs1, fuzzyseparator_t* fs2,
-                               fuzzyseparator_t* fsout)
+static int InterbreedFuzzySeparator_r(fuzzyseparator_t* fs1, fuzzyseparator_t* fs2, fuzzyseparator_t* fsout)
 {
     if (fs1->child) {
         if (!fs2->child || !fsout->child) {
