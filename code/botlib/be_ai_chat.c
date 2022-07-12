@@ -441,10 +441,10 @@ static void StringReplaceWords(char* string, char* synonym, char* replacement)
 
     // find the synonym in the string
     str = StringContainsWord(string, synonym, false);
-    // if the synonym occured in the string
+    // if the synonym occurred in the string
     while (str) {
         // if the synonym isn't part of the replacement which is already in the string
-        // useful for abreviations
+        // useful for abbreviations
         str2 = StringContainsWord(string, replacement, false);
         while (str2) {
             if (str2 <= str && str < str2 + strlen(replacement))
