@@ -5,6 +5,7 @@
 *.c text
 *.dll binary
 *.ico binary
+*.java text
 *.md text
 *.sh text
 *.sh text eol=lf
