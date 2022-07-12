@@ -150,6 +150,7 @@ cc_library(
     includes = ["."],
     visibility = [
         "//code/botlib:__pkg__",
+        "//code/cgame:__pkg__",
         "//code/game:__pkg__",
     ],
 )
