@@ -49,3 +49,4 @@ int AAS_AreaLadder(int areanum);
 int AAS_AreaJumpPad(int areanum);
 // returns true if the area is donotenter
 int AAS_AreaDoNotEnter(int areanum);
+int AAS_Reachability_WeaponJump(int area1num, int area2num);

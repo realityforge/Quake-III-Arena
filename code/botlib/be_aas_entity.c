@@ -33,6 +33,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_aas_funcs.h"
 #include "be_interface.h"
 #include "be_aas_def.h"
+#include "be_aas_entity.h"
 
 #define MASK_SOLID CONTENTS_PLAYERCLIP
 
@@ -203,14 +204,14 @@ void AAS_EntityBSPData(int entnum, bsp_entdata_t* entdata)
     entdata->solid = ent->i.solid;
     entdata->modelnum = ent->i.modelindex - 1;
 }
-void AAS_ResetEntityLinks(void)
+void AAS_ResetEntityLinks()
 {
     int i;
     for (i = 0; i < aasworld.maxentities; i++) {
         aasworld.entities[i].areas = NULL;
     }
 }
-void AAS_InvalidateEntities(void)
+void AAS_InvalidateEntities()
 {
     int i;
     for (i = 0; i < aasworld.maxentities; i++) {
@@ -218,7 +219,7 @@ void AAS_InvalidateEntities(void)
         aasworld.entities[i].i.number = i;
     }
 }
-void AAS_UnlinkInvalidEntities(void)
+void AAS_UnlinkInvalidEntities()
 {
     int i;
     aas_entity_t* ent;

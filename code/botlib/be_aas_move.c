@@ -31,6 +31,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_aas.h"
 #include "be_aas_funcs.h"
 #include "be_aas_def.h"
+#include "be_aas_move.h"
 
 extern botlib_import_t botimport;
 
@@ -51,7 +52,7 @@ int AAS_DropToFloor(vec3_t origin, vec3_t mins, vec3_t maxs)
     VectorCopy(trace.endpos, origin);
     return true;
 }
-void AAS_InitSettings(void)
+void AAS_InitSettings()
 {
     aassettings.phys_gravitydirection[0] = 0;
     aassettings.phys_gravitydirection[1] = 0;
@@ -219,7 +220,7 @@ void AAS_JumpReachRunStart(aas_reachability_t* reach, vec3_t runstart)
 //===========================================================================
 // returns the Z velocity when rocket jumping at the origin
 //===========================================================================
-float AAS_WeaponJumpZVelocity(vec3_t origin, float radiusdamage)
+static float AAS_WeaponJumpZVelocity(const vec3_t origin, const float radiusdamage)
 {
     vec3_t kvel, v, start, end, forward, right, viewangles, dir;
     float mass, knockback, points;
@@ -277,7 +278,7 @@ float AAS_BFGJumpZVelocity(vec3_t origin)
 //===========================================================================
 // applies ground friction to the given velocity
 //===========================================================================
-void AAS_Accelerate(vec3_t velocity, float frametime, vec3_t wishdir, float wishspeed, float accel)
+static void AAS_Accelerate(vec3_t velocity, float frametime, const vec3_t wishdir, float wishspeed, float accel)
 {
     // q2 style
     int i;
@@ -300,8 +301,7 @@ void AAS_Accelerate(vec3_t velocity, float frametime, vec3_t wishdir, float wish
 //===========================================================================
 // applies ground friction to the given velocity
 //===========================================================================
-void AAS_ApplyFriction(vec3_t vel, float friction, float stopspeed,
-                       float frametime)
+static void AAS_ApplyFriction(vec3_t vel, float friction, float stopspeed, float frametime)
 {
     float speed, control, newspeed;
 
@@ -317,7 +317,7 @@ void AAS_ApplyFriction(vec3_t vel, float friction, float stopspeed,
         vel[1] *= newspeed;
     }
 }
-int AAS_ClipToBBox(aas_trace_t* trace, vec3_t start, vec3_t end, int presencetype, vec3_t mins, vec3_t maxs)
+static int AAS_ClipToBBox(aas_trace_t* trace, const vec3_t start, const vec3_t end, const int presencetype, const vec3_t mins, const vec3_t maxs)
 {
     int i, j, side;
     float front, back, frac, planedist;
@@ -396,14 +396,14 @@ int AAS_ClipToBBox(aas_trace_t* trace, vec3_t start, vec3_t end, int presencetyp
 //						stopareanum		: stop as soon as entered this area
 // Returns:				aas_clientmove_t
 //===========================================================================
-int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
-                                 int entnum, vec3_t origin,
-                                 int presencetype, int onground,
-                                 vec3_t velocity, vec3_t cmdmove,
-                                 int cmdframes,
-                                 int maxframes, float frametime,
-                                 int stopevent, int stopareanum,
-                                 vec3_t mins, vec3_t maxs, int visualize)
+static int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
+                                        int entnum, const vec3_t origin,
+                                        int presencetype, int onground,
+                                        const vec3_t velocity, const vec3_t cmdmove,
+                                        int cmdframes,
+                                        int maxframes, float frametime,
+                                        int stopevent, int stopareanum,
+                                        vec3_t mins, vec3_t maxs, int visualize)
 {
     float phys_friction, phys_stopspeed, phys_gravity, phys_waterfriction;
     float phys_watergravity;

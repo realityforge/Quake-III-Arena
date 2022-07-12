@@ -20,9 +20,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-#ifdef AASINTERN
 // loads the given BSP file
 int AAS_LoadBSPFile(void);
+#ifdef AASINTERN
 // dump the loaded BSP data
 void AAS_DumpBSPData(void);
 

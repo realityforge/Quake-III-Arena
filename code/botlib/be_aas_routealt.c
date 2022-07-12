@@ -33,6 +33,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_aas_funcs.h"
 #include "be_interface.h"
 #include "be_aas_def.h"
+#include "be_aas_routealt.h"
 
 //#define ALTROUTE_DEBUG
 
@@ -45,7 +46,7 @@ midrangearea_t* midrangeareas;
 int* clusterareas;
 int numclusterareas;
 
-void AAS_AltRoutingFloodCluster_r(int areanum)
+static void AAS_AltRoutingFloodCluster_r(int areanum)
 {
     int i, otherareanum;
     aas_area_t* area;
@@ -169,7 +170,7 @@ int AAS_AlternativeRouteGoals(vec3_t start, int startareanum, vec3_t goal, int g
 #endif
     return numaltroutegoals;
 }
-void AAS_InitAlternativeRouting(void)
+void AAS_InitAlternativeRouting()
 {
     if (midrangeareas)
         FreeMemory(midrangeareas);
@@ -178,7 +179,7 @@ void AAS_InitAlternativeRouting(void)
         FreeMemory(clusterareas);
     clusterareas = (int*)GetMemory(aasworld.numareas * sizeof(int));
 }
-void AAS_ShutdownAlternativeRouting(void)
+void AAS_ShutdownAlternativeRouting()
 {
     if (midrangeareas)
         FreeMemory(midrangeareas);

@@ -37,7 +37,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_interface.h"
 #include "be_ai_gen.h"
 
-int GeneticSelection(const int numranks, const float* rankings)
+static int GeneticSelection(const int numranks, const float* rankings)
 {
     float sum;
     int i, index;

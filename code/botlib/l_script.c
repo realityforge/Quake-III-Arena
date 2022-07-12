@@ -109,7 +109,7 @@ punctuation_t default_punctuations[] = {
 
 char basefolder[MAX_QPATH];
 
-void PS_CreatePunctuationTable(script_t* script, punctuation_t* punctuations)
+static void PS_CreatePunctuationTable(script_t* script, punctuation_t* punctuations)
 {
     int i;
     punctuation_t *p, *lastp, *newp;
@@ -196,7 +196,7 @@ void SetScriptPunctuations(script_t* script, punctuation_t* p)
 // When a newline character is found the scripts line counter is increased.
 //
 //============================================================================
-int PS_ReadWhiteSpace(script_t* script)
+static int PS_ReadWhiteSpace(script_t* script)
 {
     while (1) {
         // skip white space
@@ -252,7 +252,7 @@ int PS_ReadWhiteSpace(script_t* script)
 // Parameter:				script		: script to read from
 //								ch				: place to store the read escape character
 //============================================================================
-int PS_ReadEscapeCharacter(script_t* script, char* ch)
+static int PS_ReadEscapeCharacter(script_t* script, char* ch)
 {
     int c, val;
 
@@ -356,7 +356,7 @@ int PS_ReadEscapeCharacter(script_t* script, char* ch)
 //								token			: buffer to store the string
 // Returns:					true when a string was read successfully
 //============================================================================
-int PS_ReadString(script_t* script, token_t* token, int quote)
+static int PS_ReadString(script_t* script, token_t* token, int quote)
 {
     int len, tmpline;
     char* tmpscript_p;
@@ -429,7 +429,7 @@ int PS_ReadString(script_t* script, token_t* token, int quote)
     token->subtype = len;
     return 1;
 }
-int PS_ReadName(script_t* script, token_t* token)
+static int PS_ReadName(script_t* script, token_t* token)
 {
     int len = 0;
     char c;
@@ -448,8 +448,7 @@ int PS_ReadName(script_t* script, token_t* token)
     token->subtype = len;
     return 1;
 }
-void NumberValue(char* string, int subtype, unsigned long int* intvalue,
-                 float* floatvalue)
+static void NumberValue(char* string, int subtype, unsigned long int* intvalue, float* floatvalue)
 {
     unsigned long int dotfound = 0;
 
@@ -505,7 +504,7 @@ void NumberValue(char* string, int subtype, unsigned long int* intvalue,
         *floatvalue = *intvalue;
     }
 }
-int PS_ReadNumber(script_t* script, token_t* token)
+static int PS_ReadNumber(script_t* script, token_t* token)
 {
     int len = 0, i;
     int octal, dot;
@@ -598,7 +597,7 @@ int PS_ReadNumber(script_t* script, token_t* token)
         token->subtype |= TT_INTEGER;
     return 1;
 }
-int PS_ReadPunctuation(script_t* script, token_t* token)
+static int PS_ReadPunctuation(script_t* script, token_t* token)
 {
     int len;
     char* p;
@@ -622,7 +621,7 @@ int PS_ReadPunctuation(script_t* script, token_t* token)
     }
     return 0;
 }
-int PS_ReadPrimitive(script_t* script, token_t* token)
+static int PS_ReadPrimitive(script_t* script, token_t* token)
 {
     int len;
 

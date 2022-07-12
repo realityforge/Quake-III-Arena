@@ -27,13 +27,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <stdio.h>
 #include <string.h>
 
+#include "l_log.h"
 #include "../qcommon/q_shared.h"
 #include "../qcommon/qcommon.h"
 #include "../qcommon/cvar_engine.h"
 #include "botlib.h"
 #include "be_interface.h" //for botimport.Print
 #include "l_libvar.h"
-#include "l_log.h"
 
 #define MAX_LOGFILENAMESIZE 1024
 
@@ -66,7 +66,7 @@ void Log_Open(char* filename)
     Q_strncpyz(logfile.filename, filename, MAX_LOGFILENAMESIZE);
     botimport.Print(PRT_MESSAGE, "Opened log %s\n", logfile.filename);
 }
-void Log_Close(void)
+void Log_Close()
 {
     if (!logfile.fp)
         return;
@@ -77,7 +77,7 @@ void Log_Close(void)
     logfile.fp = NULL;
     botimport.Print(PRT_MESSAGE, "Closed log %s\n", logfile.filename);
 }
-void Log_Shutdown(void)
+void Log_Shutdown()
 {
     if (logfile.fp)
         Log_Close();
@@ -93,13 +93,4 @@ void QDECL Log_Write(char* fmt, ...)
     va_end(ap);
     // fprintf(logfile.fp, "\r\n");
     fflush(logfile.fp);
-}
-FILE* Log_FilePointer(void)
-{
-    return logfile.fp;
-}
-void Log_Flush(void)
-{
-    if (logfile.fp)
-        fflush(logfile.fp);
 }

@@ -34,6 +34,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_aas_funcs.h"
 #include "be_interface.h"
 #include "be_aas_def.h"
+#include "be_aas_main.h"
 
 aas_t aasworld;
 
@@ -49,15 +50,15 @@ void QDECL AAS_Error(char* fmt, ...)
     va_end(arglist);
     botimport.Print(PRT_FATAL, "%s", str);
 }
-int AAS_Loaded(void)
+int AAS_Loaded()
 {
     return aasworld.loaded;
 }
-int AAS_Initialized(void)
+int AAS_Initialized()
 {
     return aasworld.initialized;
 }
-void AAS_SetInitialized(void)
+void AAS_SetInitialized()
 {
     aasworld.initialized = true;
     botimport.Print(PRT_MESSAGE, "AAS initialized.\n");
@@ -67,7 +68,7 @@ void AAS_SetInitialized(void)
     // AAS_RoutingInfo();
 #endif
 }
-void AAS_ContinueInit(float time)
+static void AAS_ContinueInit(float time)
 {
     // if no AAS file loaded
     if (!aasworld.loaded)
@@ -132,7 +133,7 @@ int AAS_StartFrame(float time)
     aasworld.numframes++;
     return BLERR_NOERROR;
 }
-float AAS_Time(void)
+float AAS_Time()
 {
     return aasworld.time;
 }
@@ -146,7 +147,7 @@ void AAS_ProjectPointOntoVector(vec3_t point, vec3_t vStart, vec3_t vEnd, vec3_t
     // project onto the directional vector for this segment
     VectorMA(vStart, DotProduct(pVec, vec), vec, vProj);
 }
-int AAS_LoadFiles(const char* mapname)
+static int AAS_LoadFiles(const char* mapname)
 {
     int errnum;
     char aasfile[MAX_QPATH];
@@ -206,7 +207,7 @@ int AAS_LoadMap(const char* mapname)
 //===========================================================================
 // called when the library is first loaded
 //===========================================================================
-int AAS_Setup(void)
+int AAS_Setup()
 {
     aasworld.maxclients = (int)LibVarValue("maxclients", "128");
     aasworld.maxentities = (int)LibVarValue("maxentities", "1024");
@@ -224,7 +225,7 @@ int AAS_Setup(void)
     aasworld.numframes = 0;
     return BLERR_NOERROR;
 }
-void AAS_Shutdown(void)
+void AAS_Shutdown()
 {
     AAS_ShutdownAlternativeRouting();
     AAS_DumpBSPData();

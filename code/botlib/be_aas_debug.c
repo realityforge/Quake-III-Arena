@@ -46,7 +46,7 @@ int numdebuglines;
 
 static int debugpolygons[MAX_DEBUGPOLYGONS];
 
-void AAS_ShowPolygon(int color, int numpoints, vec3_t* points)
+static void AAS_ShowPolygon(int color, int numpoints, vec3_t* points)
 {
     int i;
 
@@ -54,19 +54,6 @@ void AAS_ShowPolygon(int color, int numpoints, vec3_t* points)
         if (!debugpolygons[i]) {
             debugpolygons[i] = botimport.DebugPolygonCreate(color, numpoints, points);
             break;
-        }
-    }
-}
-void AAS_ClearShownDebugLines(void)
-{
-    int i;
-
-    // make all lines invisible
-    for (i = 0; i < MAX_DEBUGLINES; i++) {
-        if (debuglines[i]) {
-            botimport.DebugLineDelete(debuglines[i]);
-            debuglines[i] = 0;
-            debuglinevisible[i] = false;
         }
     }
 }
@@ -94,7 +81,7 @@ void AAS_PermanentLine(vec3_t start, vec3_t end, int color)
     line = botimport.DebugLineCreate();
     botimport.DebugLineShow(line, start, end, color);
 }
-void AAS_ShowFacePolygon(int facenum, int color, int flip)
+static void AAS_ShowFacePolygon(int facenum, int color, int flip)
 {
     int i, edgenum, numpoints;
     vec3_t points[128];
@@ -156,22 +143,9 @@ void AAS_ShowAreaPolygons(int areanum, int color, int groundfacesonly)
         AAS_ShowFacePolygon(facenum, color, face->frontarea != areanum);
     }
 }
-void AAS_DrawCross(vec3_t origin, float size, int color)
-{
-    int i;
-    vec3_t start, end;
-
-    for (i = 0; i < 3; i++) {
-        VectorCopy(origin, start);
-        start[i] += size;
-        VectorCopy(origin, end);
-        end[i] -= size;
-        AAS_DebugLine(start, end, color);
-    }
-}
+#ifdef DEBUG
 void AAS_PrintTravelType(int traveltype)
 {
-#ifdef DEBUG
     char* str;
     switch (traveltype & TRAVELTYPE_MASK) {
     case TRAVEL_INVALID:
@@ -227,126 +201,5 @@ void AAS_PrintTravelType(int traveltype)
         break;
     }
     botimport.Print(PRT_MESSAGE, "%s", str);
+}
 #endif
-}
-void AAS_DrawArrow(vec3_t start, vec3_t end, int linecolor, int arrowcolor)
-{
-    vec3_t dir, cross, p1, p2, up = { 0, 0, 1 };
-    float dot;
-
-    VectorSubtract(end, start, dir);
-    VectorNormalize(dir);
-    dot = DotProduct(dir, up);
-    if (dot > 0.99 || dot < -0.99)
-        VectorSet(cross, 1, 0, 0);
-    else
-        CrossProduct(dir, up, cross);
-
-    VectorMA(end, -6, dir, p1);
-    VectorCopy(p1, p2);
-    VectorMA(p1, 6, cross, p1);
-    VectorMA(p2, -6, cross, p2);
-
-    AAS_DebugLine(start, end, linecolor);
-    AAS_DebugLine(p1, end, arrowcolor);
-    AAS_DebugLine(p2, end, arrowcolor);
-}
-void AAS_ShowReachability(aas_reachability_t* reach)
-{
-    vec3_t dir, cmdmove, velocity;
-    float speed, zvel;
-    aas_clientmove_t move;
-
-    AAS_ShowAreaPolygons(reach->areanum, 5, true);
-    AAS_DrawArrow(reach->start, reach->end, LINECOLOR_BLUE, LINECOLOR_YELLOW);
-    if ((reach->traveltype & TRAVELTYPE_MASK) == TRAVEL_JUMP || (reach->traveltype & TRAVELTYPE_MASK) == TRAVEL_WALKOFFLEDGE) {
-        AAS_HorizontalVelocityForJump(aassettings.phys_jumpvel, reach->start, reach->end, &speed);
-        VectorSubtract(reach->end, reach->start, dir);
-        dir[2] = 0;
-        VectorNormalize(dir);
-        // set the velocity
-        VectorScale(dir, speed, velocity);
-        // set the command movement
-        VectorClear(cmdmove);
-        cmdmove[2] = aassettings.phys_jumpvel;
-        AAS_PredictClientMovement(&move, -1, reach->start, PRESENCE_NORMAL, true,
-                                  velocity, cmdmove, 3, 30, 0.1f,
-                                  SE_HITGROUND | SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE, 0, true);
-        if ((reach->traveltype & TRAVELTYPE_MASK) == TRAVEL_JUMP) {
-            AAS_JumpReachRunStart(reach, dir);
-            AAS_DrawCross(dir, 4, LINECOLOR_BLUE);
-        }
-    } else if ((reach->traveltype & TRAVELTYPE_MASK) == TRAVEL_ROCKETJUMP) {
-        zvel = AAS_RocketJumpZVelocity(reach->start);
-        AAS_HorizontalVelocityForJump(zvel, reach->start, reach->end, &speed);
-        VectorSubtract(reach->end, reach->start, dir);
-        dir[2] = 0;
-        VectorNormalize(dir);
-        // get command movement
-        VectorScale(dir, speed, cmdmove);
-        VectorSet(velocity, 0, 0, zvel);
-        AAS_PredictClientMovement(&move, -1, reach->start, PRESENCE_NORMAL, true,
-                                  velocity, cmdmove, 30, 30, 0.1f,
-                                  SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE | SE_TOUCHJUMPPAD | SE_HITGROUNDAREA, reach->areanum, true);
-    } else if ((reach->traveltype & TRAVELTYPE_MASK) == TRAVEL_JUMPPAD) {
-        VectorSet(cmdmove, 0, 0, 0);
-        VectorSubtract(reach->end, reach->start, dir);
-        dir[2] = 0;
-        VectorNormalize(dir);
-        // set the velocity
-        // NOTE: the edgenum is the horizontal velocity
-        VectorScale(dir, reach->edgenum, velocity);
-        // NOTE: the facenum is the Z velocity
-        velocity[2] = reach->facenum;
-        AAS_PredictClientMovement(&move, -1, reach->start, PRESENCE_NORMAL, true,
-                                  velocity, cmdmove, 30, 30, 0.1f,
-                                  SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE | SE_TOUCHJUMPPAD | SE_HITGROUNDAREA, reach->areanum, true);
-    }
-}
-
-void AAS_FloodAreas_r(int areanum, int cluster, int* done)
-{
-    int nextareanum, i, facenum;
-    aas_area_t* area;
-    aas_face_t* face;
-    aas_areasettings_t* settings;
-    aas_reachability_t* reach;
-
-    AAS_ShowAreaPolygons(areanum, 1, true);
-    // pointer to the convex area
-    area = &aasworld.areas[areanum];
-    settings = &aasworld.areasettings[areanum];
-    // walk through the faces of the area
-    for (i = 0; i < area->numfaces; i++) {
-        facenum = abs(aasworld.faceindex[area->firstface + i]);
-        face = &aasworld.faces[facenum];
-        if (face->frontarea == areanum)
-            nextareanum = face->backarea;
-        else
-            nextareanum = face->frontarea;
-        if (!nextareanum)
-            continue;
-        if (done[nextareanum])
-            continue;
-        done[nextareanum] = true;
-        if (aasworld.areasettings[nextareanum].contents & AREACONTENTS_VIEWPORTAL)
-            continue;
-        if (AAS_AreaCluster(nextareanum) != cluster)
-            continue;
-        AAS_FloodAreas_r(nextareanum, cluster, done);
-    }
-    for (i = 0; i < settings->numreachableareas; i++) {
-        reach = &aasworld.reachability[settings->firstreachablearea + i];
-        nextareanum = reach->areanum;
-        if (!nextareanum)
-            continue;
-        if (done[nextareanum])
-            continue;
-        done[nextareanum] = true;
-        if (aasworld.areasettings[nextareanum].contents & AREACONTENTS_VIEWPORTAL)
-            continue;
-        if (AAS_AreaCluster(nextareanum) != cluster)
-            continue;
-        AAS_FloodAreas_r(nextareanum, cluster, done);
-    }
-}

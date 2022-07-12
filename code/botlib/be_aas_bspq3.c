@@ -32,8 +32,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "aasfile.h"
 #include "botlib.h"
 #include "be_aas.h"
-#include "be_aas_funcs.h"
 #include "be_aas_def.h"
+#include "be_aas_bsp.h"
 
 extern botlib_import_t botimport;
 
@@ -163,7 +163,7 @@ int AAS_NextBSPEntity(int ent)
         return ent;
     return 0;
 }
-int AAS_BSPEntityInRange(int ent)
+static int AAS_BSPEntityInRange(int ent)
 {
     if (ent <= 0 || ent >= bspworld.numentities) {
         botimport.Print(PRT_MESSAGE, "bsp entity out of range\n");
@@ -223,7 +223,7 @@ int AAS_IntForBSPEpairKey(int ent, char* key, int* value)
     *value = atoi(buf);
     return true;
 }
-void AAS_FreeBSPEntities(void)
+static void AAS_FreeBSPEntities()
 {
     int i;
     bsp_entity_t* ent;
@@ -242,7 +242,7 @@ void AAS_FreeBSPEntities(void)
     }
     bspworld.numentities = 0;
 }
-void AAS_ParseBSPEntities(void)
+static void AAS_ParseBSPEntities()
 {
     script_t* script;
     token_t token;
@@ -301,7 +301,7 @@ void AAS_ParseBSPEntities(void)
     }
     FreeScript(script);
 }
-void AAS_DumpBSPData(void)
+void AAS_DumpBSPData()
 {
     AAS_FreeBSPEntities();
 
@@ -315,7 +315,7 @@ void AAS_DumpBSPData(void)
 //===========================================================================
 // load a bsp file
 //===========================================================================
-int AAS_LoadBSPFile(void)
+int AAS_LoadBSPFile()
 {
     AAS_DumpBSPData();
     bspworld.entdatasize = strlen(botimport.BSPEntityData()) + 1;

@@ -191,7 +191,7 @@ void FreeMemory(void* ptr)
         botimport.FreeMemory(block);
     }
 }
-int AvailableMemory(void)
+int AvailableMemory()
 {
     return botimport.AvailableMemory();
 }
@@ -204,13 +204,13 @@ int MemoryByteSize(void* ptr)
         return 0;
     return block->size;
 }
-void PrintUsedMemorySize(void)
+void PrintUsedMemorySize()
 {
     botimport.Print(PRT_MESSAGE, "total allocated memory: %d KB\n", allocatedmemory >> 10);
     botimport.Print(PRT_MESSAGE, "total botlib memory: %d KB\n", totalmemorysize >> 10);
     botimport.Print(PRT_MESSAGE, "total memory blocks: %d\n", numblocks);
 }
-void PrintMemoryLabels(void)
+void PrintMemoryLabels()
 {
     memoryblock_t* block;
     int i;
@@ -230,7 +230,7 @@ void PrintMemoryLabels(void)
         i++;
     }
 }
-void DumpMemory(void)
+void DumpMemory()
 {
     memoryblock_t* block;
 
@@ -315,14 +315,14 @@ void FreeMemory(void* ptr)
         botimport.FreeMemory(memid);
     }
 }
-int AvailableMemory(void)
+int AvailableMemory()
 {
     return botimport.AvailableMemory();
 }
-void PrintUsedMemorySize(void)
+void PrintUsedMemorySize()
 {
 }
-void PrintMemoryLabels(void)
+void PrintMemoryLabels()
 {
 }
 

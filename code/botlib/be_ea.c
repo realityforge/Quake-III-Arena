@@ -241,14 +241,14 @@ void EA_ResetInput(int client)
     if (jumped)
         bi->actionflags |= ACTION_JUMPEDLASTFRAME;
 }
-int EA_Setup(void)
+int EA_Setup()
 {
     // initialize the bot inputs
     botinputs = (bot_input_t*)GetClearedHunkMemory(
         botlibglobals.maxclients * sizeof(bot_input_t));
     return BLERR_NOERROR;
 }
-void EA_Shutdown(void)
+void EA_Shutdown()
 {
     FreeMemory(botinputs);
     botinputs = NULL;

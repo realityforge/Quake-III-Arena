@@ -36,6 +36,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_aas.h"
 #include "be_aas_funcs.h"
 #include "be_aas_def.h"
+#include "be_aas_reach.h"
+#include "be_ai_char.h"
 #include "be_interface.h"
 
 #include "be_ea.h"
@@ -60,11 +62,11 @@ int bot_developer;
 // several functions used by the exported functions
 //===========================================================================
 
-int Sys_MilliSeconds(void)
+int Sys_MilliSeconds()
 {
     return clock() * 1000 / CLOCKS_PER_SEC;
 }
-bool ValidEntityNumber(int num, char* str)
+static bool ValidEntityNumber(int num, char* str)
 {
     if (num < 0 || num > botlibglobals.maxentities) {
         botimport.Print(PRT_ERROR, "%s: invalid entity number %d, [0, %d]\n",
@@ -73,7 +75,7 @@ bool ValidEntityNumber(int num, char* str)
     }
     return true;
 }
-bool BotLibSetup(char* str)
+static bool BotLibSetup(char* str)
 {
     if (!botlibglobals.botlibsetup) {
         botimport.Print(PRT_ERROR, "%s: bot library used before being setup\n", str);
@@ -82,7 +84,7 @@ bool BotLibSetup(char* str)
     return true;
 }
 
-int Export_BotLibSetup(void)
+static int Export_BotLibSetup()
 {
     int errnum;
 
@@ -121,7 +123,7 @@ int Export_BotLibSetup(void)
 
     return BLERR_NOERROR;
 }
-int Export_BotLibShutdown(void)
+static int Export_BotLibShutdown()
 {
     if (!BotLibSetup("BotLibShutdown"))
         return BLERR_LIBRARYNOTSETUP;
@@ -155,12 +157,12 @@ int Export_BotLibShutdown(void)
     PC_CheckOpenSourceHandles();
     return BLERR_NOERROR;
 }
-int Export_BotLibVarSet(const char* var_name, const char* value)
+static int Export_BotLibVarSet(const char* var_name, const char* value)
 {
     LibVarSet(var_name, value);
     return BLERR_NOERROR;
 }
-int Export_BotLibVarGet(const char* var_name, char* value, int size)
+static int Export_BotLibVarGet(const char* var_name, char* value, int size)
 {
     char* varvalue;
 
@@ -169,13 +171,13 @@ int Export_BotLibVarGet(const char* var_name, char* value, int size)
     value[size - 1] = '\0';
     return BLERR_NOERROR;
 }
-int Export_BotLibStartFrame(float time)
+static int Export_BotLibStartFrame(float time)
 {
     if (!BotLibSetup("BotStartFrame"))
         return BLERR_LIBRARYNOTSETUP;
     return AAS_StartFrame(time);
 }
-int Export_BotLibLoadMap(const char* mapname)
+static int Export_BotLibLoadMap(const char* mapname)
 {
 #ifdef DEBUG
     int starttime = Sys_MilliSeconds();
@@ -198,7 +200,7 @@ int Export_BotLibLoadMap(const char* mapname)
 #endif
     return BLERR_NOERROR;
 }
-int Export_BotLibUpdateEntity(int ent, bot_entitystate_t* state)
+static int Export_BotLibUpdateEntity(int ent, bot_entitystate_t* state)
 {
     if (!BotLibSetup("BotUpdateEntity"))
         return BLERR_LIBRARYNOTSETUP;
@@ -207,17 +209,6 @@ int Export_BotLibUpdateEntity(int ent, bot_entitystate_t* state)
 
     return AAS_UpdateEntity(ent, state);
 }
-int BotGetReachabilityToGoal(vec3_t origin, int areanum,
-                             int lastgoalareanum, int lastareanum,
-                             int* avoidreach, float* avoidreachtimes, int* avoidreachtries,
-                             bot_goal_t* goal, int travelflags,
-                             struct bot_avoidspot_s* avoidspots, int numavoidspots, int* flags);
-
-int AAS_TraceAreas(vec3_t start, vec3_t end, int* areas, vec3_t* points, int maxareas);
-
-int AAS_Reachability_WeaponJump(int area1num, int area2num);
-
-int BotFuzzyPointReachabilityArea(vec3_t origin);
 
 float BotGapDistance(vec3_t origin, vec3_t hordir, int entnum);
 

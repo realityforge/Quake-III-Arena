@@ -32,7 +32,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "l_utils.h"
 #include "be_interface.h"
 
-fielddef_t* FindField(fielddef_t* defs, char* name)
+static fielddef_t* FindField(fielddef_t* defs, char* name)
 {
     int i;
 
@@ -42,7 +42,7 @@ fielddef_t* FindField(fielddef_t* defs, char* name)
     }
     return NULL;
 }
-bool ReadNumber(source_t* source, fielddef_t* fd, void* p)
+static bool ReadNumber(source_t* source, fielddef_t* fd, void* p)
 {
     token_t token;
     int negative = false;
@@ -146,7 +146,7 @@ bool ReadNumber(source_t* source, fielddef_t* fd, void* p)
     }
     return 1;
 }
-bool ReadChar(source_t* source, fielddef_t* fd, void* p)
+static bool ReadChar(source_t* source, fielddef_t* fd, void* p)
 {
     token_t token;
 
@@ -164,7 +164,7 @@ bool ReadChar(source_t* source, fielddef_t* fd, void* p)
     }
     return 1;
 }
-int ReadString(source_t* source, fielddef_t* fd, void* p)
+static int ReadString(source_t* source, fielddef_t* fd, void* p)
 {
     token_t token;
 
@@ -258,118 +258,4 @@ int ReadStructure(source_t* source, structdef_t* def, char* structure)
         }
     }
     return true;
-}
-int WriteIndent(FILE* fp, int indent)
-{
-    while (indent-- > 0) {
-        if (fprintf(fp, "\t") < 0)
-            return false;
-    }
-    return true;
-}
-int WriteFloat(FILE* fp, float value)
-{
-    char buf[128];
-    int l;
-
-    Com_sprintf(buf, sizeof(buf), "%f", value);
-    l = strlen(buf);
-    // strip any trailing zeros
-    while (l-- > 1) {
-        if (buf[l] != '0' && buf[l] != '.')
-            break;
-        if (buf[l] == '.') {
-            buf[l] = 0;
-            break;
-        }
-        buf[l] = 0;
-    }
-    // write the float to file
-    if (fprintf(fp, "%s", buf) < 0)
-        return 0;
-    return 1;
-}
-int WriteStructWithIndent(FILE* fp, structdef_t* def, char* structure, int indent)
-{
-    int i, num;
-    void* p;
-    fielddef_t* fd;
-
-    if (!WriteIndent(fp, indent))
-        return false;
-    if (fprintf(fp, "{\r\n") < 0)
-        return false;
-
-    indent++;
-    for (i = 0; def->fields[i].name; i++) {
-        fd = &def->fields[i];
-        if (!WriteIndent(fp, indent))
-            return false;
-        if (fprintf(fp, "%s\t", fd->name) < 0)
-            return false;
-        p = (void*)(structure + fd->offset);
-        if (fd->type & FT_ARRAY) {
-            num = fd->maxarray;
-            if (fprintf(fp, "{") < 0)
-                return false;
-        } else {
-            num = 1;
-        }
-        while (num-- > 0) {
-            switch (fd->type & FT_TYPE) {
-            case FT_CHAR: {
-                if (fprintf(fp, "%d", *(char*)p) < 0)
-                    return false;
-                p = (char*)p + sizeof(char);
-                break;
-            }
-            case FT_INT: {
-                if (fprintf(fp, "%d", *(int*)p) < 0)
-                    return false;
-                p = (char*)p + sizeof(int);
-                break;
-            }
-            case FT_FLOAT: {
-                if (!WriteFloat(fp, *(float*)p))
-                    return false;
-                p = (char*)p + sizeof(float);
-                break;
-            }
-            case FT_STRING: {
-                if (fprintf(fp, "\"%s\"", (char*)p) < 0)
-                    return false;
-                p = (char*)p + MAX_STRINGFIELD;
-                break;
-            }
-            case FT_STRUCT: {
-                if (!WriteStructWithIndent(fp, fd->substruct, structure, indent))
-                    return false;
-                p = (char*)p + fd->substruct->size;
-                break;
-            }
-            }
-            if (fd->type & FT_ARRAY) {
-                if (num > 0) {
-                    if (fprintf(fp, ",") < 0)
-                        return false;
-                } else {
-                    if (fprintf(fp, "}") < 0)
-                        return false;
-                }
-            }
-        }
-        if (fprintf(fp, "\r\n") < 0)
-            return false;
-    }
-    indent--;
-
-    if (!WriteIndent(fp, indent))
-        return false;
-    if (fprintf(fp, "}\r\n") < 0)
-        return false;
-    return true;
-}
-int WriteStructure(FILE* fp, structdef_t* def, char* structure)
-{
-    return WriteStructWithIndent(fp, def, structure, 0);
 }
