@@ -316,7 +316,7 @@ static void AAS_ApplyFriction(vec3_t vel, float friction, float stopspeed, float
         vel[1] *= newspeed;
     }
 }
-static int AAS_ClipToBBox(aas_trace_t* trace, const vec3_t start, const vec3_t end, int presencetype, const vec3_t mins, const vec3_t maxs)
+static int AAS_ClipToBBox(aas_trace_t* trace, const vec3_t start, const vec3_t end, const int presencetype, const vec3_t mins, const vec3_t maxs)
 {
     int i, j, side;
     float front, back, frac, planedist;
