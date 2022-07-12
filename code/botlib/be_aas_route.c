@@ -449,78 +449,8 @@ static void AAS_InitPortalMaxTravelTimes()
 
     for (i = 0; i < aasworld.numportals; i++) {
         aasworld.portalmaxtraveltimes[i] = AAS_PortalMaxTravelTime(i);
-        // botimport.Print(PRT_MESSAGE, "portal %d max tt = %d\n", i, aasworld.portalmaxtraveltimes[i]);
     }
 }
-/*
-int AAS_FreeOldestCache(void)
-{
-        int i, j, bestcluster, bestarea, freed;
-        float besttime;
-        aas_routingcache_t *cache, *bestcache;
-
-        freed = false;
-        besttime = 999999999;
-        bestcache = NULL;
-        bestcluster = 0;
-        bestarea = 0;
-        //refresh cluster cache
-        for (i = 0; i < aasworld.numclusters; i++)
-        {
-                for (j = 0; j < aasworld.clusters[i].numareas; j++)
-                {
-                        for (cache = aasworld.clusterareacache[i][j]; cache; cache = cache->next)
-                        {
-                                //never remove cache leading towards a portal
-                                if (aasworld.areasettings[cache->areanum].cluster < 0) continue;
-                                //if this cache is older than the cache we found so far
-                                if (cache->time < besttime)
-                                {
-                                        bestcache = cache;
-                                        bestcluster = i;
-                                        bestarea = j;
-                                        besttime = cache->time;
-                                }
-                        }
-                }
-        }
-        if (bestcache)
-        {
-                cache = bestcache;
-                if (cache->prev) cache->prev->next = cache->next;
-                else aasworld.clusterareacache[bestcluster][bestarea] = cache->next;
-                if (cache->next) cache->next->prev = cache->prev;
-                AAS_FreeRoutingCache(cache);
-                freed = true;
-        }
-        besttime = 999999999;
-        bestcache = NULL;
-        bestarea = 0;
-        for (i = 0; i < aasworld.numareas; i++)
-        {
-                //refresh portal cache
-                for (cache = aasworld.portalcache[i]; cache; cache = cache->next)
-                {
-                        if (cache->time < besttime)
-                        {
-                                bestcache = cache;
-                                bestarea = i;
-                                besttime = cache->time;
-                        }
-                }
-        }
-        if (bestcache)
-        {
-                cache = bestcache;
-                if (cache->prev) cache->prev->next = cache->next;
-                else aasworld.portalcache[bestarea] = cache->next;
-                if (cache->next) cache->next->prev = cache->prev;
-                AAS_FreeRoutingCache(cache);
-                freed = true;
-        }
-        return freed;
-}
-*/
 static int AAS_FreeOldestCache()
 {
     int clusterareanum;
@@ -1268,16 +1198,6 @@ static int AAS_AreaRouteToGoalArea(int areanum, vec3_t origin, int goalareanum, 
     if (AAS_AreaDoNotEnter(areanum) || AAS_AreaDoNotEnter(goalareanum)) {
         travelflags |= TFL_DONOTENTER;
     }
-    // NOTE: the number of routing updates is limited per frame
-    /*
-    if (aasworld.frameroutingupdates > MAX_FRAMEROUTINGUPDATES)
-    {
-#ifdef DEBUG
-            //Log_Write("WARNING: AAS_AreaTravelTimeToGoalArea: frame routing updates overflowed");
-#endif
-            return 0;
-    }
-    */
     clusternum = aasworld.areasettings[areanum].cluster;
     goalclusternum = aasworld.areasettings[goalareanum].cluster;
     // check if the area is a portal of the goal area cluster
