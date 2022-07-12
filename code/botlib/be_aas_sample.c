@@ -916,18 +916,6 @@ static int AAS_BoxOnPlaneSide2(const vec3_t absmins, const vec3_t absmaxs, aas_p
 
     return sides;
 }
-// int AAS_BoxOnPlaneSide(vec3_t absmins, vec3_t absmaxs, aas_plane_t *p)
-#define AAS_BoxOnPlaneSide(absmins, absmaxs, p) (                                            \
-    ((p)->type < 3) ? (                                                                      \
-        ((p)->dist <= (absmins)[(p)->type]) ? (                                              \
-            1)                                                                               \
-                                            : (                                              \
-                                                ((p)->dist >= (absmaxs)[(p)->type]) ? (      \
-                                                    2)                                       \
-                                                                                    : (      \
-                                                                                        3))) \
-                    : (                                                                      \
-                        AAS_BoxOnPlaneSide2((absmins), (absmaxs), (p))))
 //===========================================================================
 // remove the links to this entity from all areas
 //===========================================================================
