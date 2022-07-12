@@ -21,7 +21,6 @@ cc_library(
 )
 
 _COMMON_SRC = [
-    "cg_main.c",
     "cg_consolecmds.c",
     "cg_draw.c",
     "cg_drawtools.c",
@@ -30,6 +29,7 @@ _COMMON_SRC = [
     "cg_event.c",
     "cg_info.c",
     "cg_localents.c",
+    "cg_main.c",
     "cg_marks.c",
     "cg_particles.c",
     "cg_players.c",
