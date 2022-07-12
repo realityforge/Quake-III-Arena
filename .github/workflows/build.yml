@@ -60,3 +60,7 @@ jobs:
         # In the future we should also run "bazel build //game/mac:Quake3Arena.zip" but this requires that either
         # the id assets become optional or we find a way to securely store the assets so as not to violate licenses
         run: ./bazelw build //code/...
+
+      - name: Test Code
+        # Run the relevant tests
+        run: ./bazelw test //... @braincheck//...
