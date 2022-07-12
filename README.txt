@@ -40,26 +40,6 @@ zlib is Copyright (C) 1995-1998 Jean-loup Gailly and Mark Adler
      misrepresented as being the original software.
   3. This notice may not be removed or altered from any source distribution.
 
-MD4 Message-Digest Algorithm
------------------------------------------------------------------------------
-lines	file(s)
-299		code/qcommon/md4.c
-277		common/md4.c
-Copyright (C) 1991-2, RSA Data Security, Inc. Created 1991. All rights reserved.
-
-License to copy and use this software is granted provided that it is identified
-as the <93>RSA Data Security, Inc. MD4 Message-Digest Algorithm<94> in all mater
-ial mentioning or referencing this software or this function.
-License is also granted to make and use derivative works provided that such work
-s are identified as <93>derived from the RSA Data Security, Inc. MD4 Message-Dig
-est Algorithm<94> in all material mentioning or referencing the derived work.
-RSA Data Security, Inc. makes no representations concerning either the merchanta
-bility of this software or the suitability of this software for any particular p
-urpose. It is provided <93>as is<94> without express or implied warranty of any
-kind.
-
-checksums are used to validate pak files
-
 standard C library replacement routines
 -----------------------------------------------------------------------------
 lines	file(s)
