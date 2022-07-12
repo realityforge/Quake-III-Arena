@@ -80,7 +80,7 @@ unsigned short CRC_Value(unsigned short crcvalue)
 {
     return crcvalue ^ CRC_XOR_VALUE;
 }
-unsigned short CRC_ProcessString(unsigned char* data, int length)
+unsigned short CRC_ProcessString(const unsigned char* data, const int length)
 {
     unsigned short crcvalue;
     int i, ind;
