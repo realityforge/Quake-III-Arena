@@ -24,9 +24,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // be a valid snapshot this frame
 
 #include "cg_local.h"
-#include "voicechat.h"
 
 #ifdef MISSIONPACK
+#include "voicechat.h"
+
 typedef struct {
     const char* order;
     int taskNum;
