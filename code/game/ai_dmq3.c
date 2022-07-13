@@ -4621,6 +4621,7 @@ void BotDeathmatchAI(bot_state_t* bs, float thinktime)
     bs->lasthitcount = bs->cur_ps.persistant[PERS_HITS];
 }
 
+#ifdef MISSIONPACK
 static void BotSetEntityNumForGoalWithActivator(bot_goal_t* goal, char* classname)
 {
     gentity_t* ent;
@@ -4642,6 +4643,7 @@ static void BotSetEntityNumForGoalWithActivator(bot_goal_t* goal, char* classnam
         }
     }
 }
+#endif
 
 void BotSetupDeathmatchAI(void)
 {
