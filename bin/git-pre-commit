@@ -33,4 +33,23 @@ for file in $(git diff-index --cached --name-only HEAD | grep -E '(code|content|
     fi
 done
 
+file_type=""
+
+for file in $(git diff-index --cached --name-only HEAD | grep -E '.*\.(bazel|bzl)$'); do
+    if [ -f $file ]; then
+      file_type="default"
+      if [[ $file == *.BUILD.bazel ]]; then
+        file_type="build"
+      elif [[ $file == *.WORKSPACE.bazel ]]; then
+        file_type="workspace"
+      fi
+      buildifier -type "${file_type}" -mode check "${file}"
+      if [ $? -ne 0 ]; then
+          buildifier -type "${file_type}" -mode fix "${file}"
+          echo "Commit aborted due to code format inconsistencies. '${file}' re-formatted, please review and update commit as required."
+          has_error=1
+      fi
+    fi
+done
+
 exit ${has_error}
