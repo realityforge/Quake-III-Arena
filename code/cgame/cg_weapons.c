@@ -432,7 +432,6 @@ static void CG_PlasmaTrail(centity_t* cent, const weaponInfo_t* wi)
     vec3_t velocity, xvelocity, origin;
     vec3_t offset, xoffset;
     vec3_t v[3];
-    int t, startTime, step;
 
     float waterScale = 1.0f;
 
@@ -440,11 +439,7 @@ static void CG_PlasmaTrail(centity_t* cent, const weaponInfo_t* wi)
         return;
     }
 
-    step = 50;
-
     es = &cent->currentState;
-    startTime = cent->trailTime;
-    t = step * ((startTime + step) / step);
 
     BG_EvaluateTrajectory(&es->pos, cg.time, origin);
 
