@@ -105,11 +105,17 @@ static char* netnames[] = {
 static int gamecodetoui[] = { 4, 2, 3, 0, 5, 1, 6 };
 static int uitogamecode[] = { 4, 6, 2, 3, 1, 5, 7 };
 
+typedef enum server_refresh_e {
+    RefreshIfOverdue,
+    RefreshWithClear,
+    RefreshWithoutClear
+} server_refresh_t;
+
 static void UI_StartServerRefresh(bool full, bool force);
 static void UI_StopServerRefresh(void);
 static void UI_DoServerRefresh(void);
 static void UI_FeederSelection(float feederID, int index);
-static void UI_BuildServerDisplayList(int force);
+static void UI_BuildServerDisplayList(server_refresh_t refresh_action);
 static void UI_BuildServerStatus(bool force);
 static void UI_BuildFindPlayerList(bool force);
 static int QDECL UI_ServersQsortCompare(const void* arg1, const void* arg2);
@@ -2315,7 +2321,7 @@ static bool UI_JoinGameType_HandleKey(int flags, float* special, int key)
         }
 
         trap_Cvar_SetValue("ui_joinGameType", ui_joinGameType.integer);
-        UI_BuildServerDisplayList(true);
+        UI_BuildServerDisplayList(RefreshWithClear);
         return true;
     }
     return false;
@@ -2419,7 +2425,7 @@ static bool UI_NetSource_HandleKey(int flags, float* special, int key)
             ui_netSource.integer = numNetSources - 1;
         }
 
-        UI_BuildServerDisplayList(true);
+        UI_BuildServerDisplayList(RefreshWithClear);
         UI_StartServerRefresh(true, false);
         trap_Cvar_SetValue("ui_netSource", ui_netSource.integer);
         return true;
@@ -2438,7 +2444,7 @@ static bool UI_NetFilter_HandleKey(int flags, float* special, int key)
         } else if (ui_serverFilterType.integer < 0) {
             ui_serverFilterType.integer = numServerFilters - 1;
         }
-        UI_BuildServerDisplayList(true);
+        UI_BuildServerDisplayList(RefreshWithClear);
         return true;
     }
     return false;
@@ -3126,10 +3132,10 @@ static void UI_RunMenuScript(char** args)
             UI_ClearScores();
         } else if (Q_stricmp(name, "RefreshServers") == 0) {
             UI_StartServerRefresh(true, true);
-            UI_BuildServerDisplayList(true);
+            UI_BuildServerDisplayList(RefreshWithClear);
         } else if (Q_stricmp(name, "RefreshFilter") == 0) {
             UI_StartServerRefresh(false, true);
-            UI_BuildServerDisplayList(true);
+            UI_BuildServerDisplayList(RefreshWithClear);
         } else if (Q_stricmp(name, "RunSPDemo") == 0) {
             if (uiInfo.demoAvailable) {
                 trap_Cmd_ExecuteText(EXEC_APPEND, va("demo %s_%i\n", uiInfo.mapList[ui_currentMap.integer].mapLoadName, uiInfo.gameTypes[ui_gameType.integer].gtEnum));
@@ -3159,7 +3165,7 @@ static void UI_RunMenuScript(char** args)
                 uiInfo.serverStatus.nextDisplayRefresh = 0;
                 uiInfo.nextServerStatusRefresh = 0;
                 uiInfo.nextFindPlayerRefresh = 0;
-                UI_BuildServerDisplayList(true);
+                UI_BuildServerDisplayList(RefreshWithClear);
             } else {
                 Menus_CloseByName("joinserver");
                 Menus_OpenByName("main");
@@ -3172,7 +3178,7 @@ static void UI_RunMenuScript(char** args)
         } else if (Q_stricmp(name, "UpdateFilter") == 0) {
             // UpdateFilter is called when server broser menu is opened and when a favorite server is deleted.
             UI_StartServerRefresh(true, false);
-            UI_BuildServerDisplayList(true);
+            UI_BuildServerDisplayList(RefreshWithClear);
             UI_FeederSelection(FEEDER_SERVERS, 0);
         } else if (Q_stricmp(name, "ServerStatus") == 0) {
             trap_LAN_GetServerAddressString(UI_SourceForLAN(), uiInfo.serverStatus.displayServers[uiInfo.serverStatus.currentServer], uiInfo.serverStatusAddress, sizeof(uiInfo.serverStatusAddress));
@@ -3542,18 +3548,14 @@ static void UI_BinaryServerInsertion(int num)
     UI_InsertServerIntoDisplayList(num, offset);
 }
 
-static void UI_BuildServerDisplayList(int force)
+static void UI_BuildServerDisplayList(const server_refresh_t refresh_action)
 {
     int i, count, clients, maxClients, ping, game, len, visible;
     char info[MAX_STRING_CHARS];
     int lanSource;
 
-    if (!(force || uiInfo.uiDC.realTime > uiInfo.serverStatus.nextDisplayRefresh)) {
+    if (RefreshIfOverdue == refresh_action && !(uiInfo.uiDC.realTime > uiInfo.serverStatus.nextDisplayRefresh)) {
         return;
-    }
-    // if we shouldn't reset
-    if (force == 2) {
-        force = 0;
     }
 
     // do motd updates here too
@@ -3570,7 +3572,7 @@ static void UI_BuildServerDisplayList(int force)
 
     lanSource = UI_SourceForLAN();
 
-    if (force) {
+    if (RefreshWithClear == refresh_action) {
         // clear number of displayed servers
         uiInfo.serverStatus.numDisplayServers = 0;
         uiInfo.serverStatus.numPlayersOnServers = 0;
@@ -5616,7 +5618,7 @@ static void UI_DoServerRefresh(void)
         uiInfo.serverStatus.refreshtime = uiInfo.uiDC.realTime + 1000;
     } else if (!wait) {
         // get the last servers in the list
-        UI_BuildServerDisplayList(2);
+        UI_BuildServerDisplayList(RefreshWithoutClear);
         // stop the refresh
         UI_StopServerRefresh();
     } else if (ui_netSource.integer == UIAS_LOCAL) {
@@ -5624,7 +5626,7 @@ static void UI_DoServerRefresh(void)
         trap_Cmd_ExecuteText(EXEC_NOW, "localservers\n");
         uiInfo.serverStatus.refreshtime = uiInfo.uiDC.realTime + 5000;
     }
-    UI_BuildServerDisplayList(false);
+    UI_BuildServerDisplayList(RefreshIfOverdue);
 }
 
 static void UI_StartServerRefresh(bool full, bool force)
