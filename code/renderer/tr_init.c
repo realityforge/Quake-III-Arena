@@ -323,11 +323,11 @@ static void R_ModeList_f(void)
 NOTE TTimo
 some thoughts about the screenshots system:
 screenshots get written in fs_homepath + fs_gamedir
-vanilla q3 .. baseq3/screenshots/ *.tga
-team arena .. missionpack/screenshots/ *.tga
+vanilla q3 .. baseq3/screenshots/ *.png
+team arena .. missionpack/screenshots/ *.png
 
 two commands: "screenshot" and "screenshotJPEG"
-we use statics to store a count and start writing the first screenshot/screenshot????.tga (.jpg) available
+we use statics to store a count and start writing the first screenshot/screenshot????.png (.jpg) available
 (with FS_FileExists / FS_FOpenFileWrite calls)
 FIXME: the statics don't get a reinit between fs_game changes
 
@@ -442,7 +442,7 @@ void R_ScreenshotFilename(int lastNumber, char* fileName)
     int a, b, c, d;
 
     if (lastNumber < 0 || lastNumber > 9999) {
-        Com_sprintf(fileName, MAX_OSPATH, "screenshots/shot9999.tga");
+        Com_sprintf(fileName, MAX_OSPATH, "screenshots/shot9999.png");
         return;
     }
 
@@ -454,7 +454,7 @@ void R_ScreenshotFilename(int lastNumber, char* fileName)
     lastNumber -= c * 10;
     d = lastNumber;
 
-    Com_sprintf(fileName, MAX_OSPATH, "screenshots/shot%i%i%i%i.tga", a, b, c, d);
+    Com_sprintf(fileName, MAX_OSPATH, "screenshots/shot%i%i%i%i.png", a, b, c, d);
 }
 
 /*
@@ -508,7 +508,7 @@ void R_ScreenShot_f(void)
 
     if (ri.Cmd_Argc() == 2 && !silent) {
         // explicit filename
-        Com_sprintf(checkname, MAX_OSPATH, "screenshots/%s.tga", ri.Cmd_Argv(1));
+        Com_sprintf(checkname, MAX_OSPATH, "screenshots/%s.png", ri.Cmd_Argv(1));
     } else {
         // scan for a free filename
 

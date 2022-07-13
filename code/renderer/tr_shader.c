@@ -944,7 +944,7 @@ static void ParseSkyParms(char** text)
     }
     if (strcmp(token, "-")) {
         for (i = 0; i < 6; i++) {
-            Com_sprintf(pathname, sizeof(pathname), "%s_%s.tga", token, suf[i]);
+            Com_sprintf(pathname, sizeof(pathname), "%s_%s.png", token, suf[i]);
             shader.sky.outerbox[i] = R_FindImageFile((char*)pathname, true, true, GL_CLAMP);
             if (!shader.sky.outerbox[i]) {
                 shader.sky.outerbox[i] = tr.defaultImage;
@@ -972,7 +972,7 @@ static void ParseSkyParms(char** text)
     }
     if (strcmp(token, "-")) {
         for (i = 0; i < 6; i++) {
-            Com_sprintf(pathname, sizeof(pathname), "%s_%s.tga", token, suf[i]);
+            Com_sprintf(pathname, sizeof(pathname), "%s_%s.png", token, suf[i]);
             shader.sky.innerbox[i] = R_FindImageFile((char*)pathname, true, true, GL_REPEAT);
             if (!shader.sky.innerbox[i]) {
                 shader.sky.innerbox[i] = tr.defaultImage;
@@ -2057,7 +2057,7 @@ shader_t* R_FindShader(const char* name, int lightmapIndex, bool mipRawImage)
     // if not defined in the in-memory shader descriptions,
     // look for a single TGA
     Q_strncpyz(fileName, name, sizeof(fileName));
-    COM_DefaultExtension(fileName, sizeof(fileName), ".tga");
+    COM_DefaultExtension(fileName, sizeof(fileName), ".png");
     image = R_FindImageFile(fileName, mipRawImage, mipRawImage, mipRawImage ? GL_REPEAT : GL_CLAMP);
     if (!image) {
         ri.Printf(PRINT_DEVELOPER, "Couldn't find image for shader %s\n", name);

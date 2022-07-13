@@ -205,7 +205,7 @@ void CL_DemoFilename(int number, char* fileName)
     int a, b, c, d;
 
     if (number < 0 || number > 9999) {
-        Com_sprintf(fileName, MAX_OSPATH, "demo9999.tga");
+        Com_sprintf(fileName, MAX_OSPATH, "demo9999.png");
         return;
     }
 

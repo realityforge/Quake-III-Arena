@@ -91,15 +91,15 @@ void CG_LoadingClient(int clientNum)
             skin = "default";
         }
 
-        Com_sprintf(iconName, MAX_QPATH, "models/players/%s/icon_%s.tga", model, skin);
+        Com_sprintf(iconName, MAX_QPATH, "models/players/%s/icon_%s.png", model, skin);
 
         loadingPlayerIcons[loadingPlayerIconCount] = trap_R_RegisterShaderNoMip(iconName);
         if (!loadingPlayerIcons[loadingPlayerIconCount]) {
-            Com_sprintf(iconName, MAX_QPATH, "models/players/characters/%s/icon_%s.tga", model, skin);
+            Com_sprintf(iconName, MAX_QPATH, "models/players/characters/%s/icon_%s.png", model, skin);
             loadingPlayerIcons[loadingPlayerIconCount] = trap_R_RegisterShaderNoMip(iconName);
         }
         if (!loadingPlayerIcons[loadingPlayerIconCount]) {
-            Com_sprintf(iconName, MAX_QPATH, "models/players/%s/icon_%s.tga", DEFAULT_MODEL, "default");
+            Com_sprintf(iconName, MAX_QPATH, "models/players/%s/icon_%s.png", DEFAULT_MODEL, "default");
             loadingPlayerIcons[loadingPlayerIconCount] = trap_R_RegisterShaderNoMip(iconName);
         }
         if (loadingPlayerIcons[loadingPlayerIconCount]) {
@@ -139,7 +139,7 @@ void CG_DrawInformation(void)
     sysInfo = CG_ConfigString(CS_SYSTEMINFO);
 
     s = Info_ValueForKey(info, "mapname");
-    levelshot = trap_R_RegisterShaderNoMip(va("levelshots/%s.tga", s));
+    levelshot = trap_R_RegisterShaderNoMip(va("levelshots/%s.png", s));
     if (!levelshot) {
         levelshot = trap_R_RegisterShaderNoMip("menu/art/unknownmap");
     }

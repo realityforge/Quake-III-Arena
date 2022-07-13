@@ -1386,7 +1386,7 @@ void R_LoadImage(const char* name, uint8_t** pic, int* width, int* height)
         return;
     }
 
-    if (!Q_stricmp(name + len - 4, ".tga")) {
+    if (!Q_stricmp(name + len - 4, ".png")) {
         LoadTGA(name, pic, width, height); // try tga first
         if (!*pic) { //
             char altname[MAX_QPATH]; // try jpg in place of tga
