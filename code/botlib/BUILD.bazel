@@ -110,7 +110,11 @@ cc_library(
     ],
     copts = EXTRA_WARNINGS,
     includes = ["."],
-    visibility = ["//code/game:__pkg__"],
+    visibility = [
+        "//code/client:__pkg__",
+        "//code/game:__pkg__",
+        "//code/server:__pkg__",
+    ],
     deps = [
         ":api",
         ":botlib",
