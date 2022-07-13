@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // string allocation/managment
 
 #include "ui_shared.h"
+#include "ui/menudef.h"
 
 #define SCROLL_TIME_START 500
 #define SCROLL_TIME_ADJUST 150
