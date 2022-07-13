@@ -20,9 +20,7 @@ cc_library(
         "//code/client:__pkg__",
         "//code/q3_ui:__pkg__",
     ],
-    deps = [
-        "//code/qcommon:shared_api",
-    ],
+    deps = ["//code/qcommon:shared_api"],
 )
 
 cc_library(
