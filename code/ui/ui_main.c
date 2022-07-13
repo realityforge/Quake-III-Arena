@@ -97,11 +97,17 @@ static char quake3worldMessage[] = "Visit www.quake3world.com - News, Community,
 static int gamecodetoui[] = { 4, 2, 3, 0, 5, 1, 6 };
 static int uitogamecode[] = { 4, 6, 2, 3, 1, 5, 7 };
 
+typedef enum server_refresh_e {
+    RefreshIfOverdue,
+    RefreshWithClear,
+    RefreshWithoutClear
+} server_refresh_t;
+
 static void UI_StartServerRefresh(bool full);
 static void UI_StopServerRefresh(void);
 static void UI_DoServerRefresh(void);
 static void UI_FeederSelection(float feederID, int index);
-static void UI_BuildServerDisplayList(bool force);
+static void UI_BuildServerDisplayList(server_refresh_t refresh_action);
 static void UI_BuildServerStatus(bool force);
 static void UI_BuildFindPlayerList(bool force);
 static int QDECL UI_ServersQsortCompare(const void* arg1, const void* arg2);
@@ -2307,7 +2313,7 @@ static bool UI_JoinGameType_HandleKey(int flags, float* special, int key)
         }
 
         trap_Cvar_Set("ui_joinGameType", va("%d", ui_joinGameType.integer));
-        UI_BuildServerDisplayList(true);
+        UI_BuildServerDisplayList(RefreshWithClear);
         return true;
     }
     return false;
@@ -2416,7 +2422,7 @@ static bool UI_NetSource_HandleKey(int flags, float* special, int key)
             ui_netSource.integer = numNetSources - 1;
         }
 
-        UI_BuildServerDisplayList(true);
+        UI_BuildServerDisplayList(RefreshWithClear);
         if (ui_netSource.integer != AS_GLOBAL) {
             UI_StartServerRefresh(true);
         }
@@ -2441,7 +2447,7 @@ static bool UI_NetFilter_HandleKey(int flags, float* special, int key)
         } else if (ui_serverFilterType.integer < 0) {
             ui_serverFilterType.integer = numServerFilters - 1;
         }
-        UI_BuildServerDisplayList(true);
+        UI_BuildServerDisplayList(RefreshWithClear);
         return true;
     }
     return false;
@@ -3126,10 +3132,10 @@ static void UI_RunMenuScript(char** args)
             UI_ClearScores();
         } else if (Q_stricmp(name, "RefreshServers") == 0) {
             UI_StartServerRefresh(true);
-            UI_BuildServerDisplayList(true);
+            UI_BuildServerDisplayList(RefreshWithClear);
         } else if (Q_stricmp(name, "RefreshFilter") == 0) {
             UI_StartServerRefresh(false);
-            UI_BuildServerDisplayList(true);
+            UI_BuildServerDisplayList(RefreshWithClear);
         } else if (Q_stricmp(name, "RunSPDemo") == 0) {
             if (uiInfo.demoAvailable) {
                 trap_Cmd_ExecuteText(EXEC_APPEND, va("demo %s_%i\n", uiInfo.mapList[ui_currentMap.integer].mapLoadName, uiInfo.gameTypes[ui_gameType.integer].gtEnum));
@@ -3159,7 +3165,7 @@ static void UI_RunMenuScript(char** args)
                 uiInfo.serverStatus.nextDisplayRefresh = 0;
                 uiInfo.nextServerStatusRefresh = 0;
                 uiInfo.nextFindPlayerRefresh = 0;
-                UI_BuildServerDisplayList(true);
+                UI_BuildServerDisplayList(RefreshWithClear);
             } else {
                 Menus_CloseByName("joinserver");
                 Menus_OpenByName("main");
@@ -3173,7 +3179,7 @@ static void UI_RunMenuScript(char** args)
             if (ui_netSource.integer == AS_LOCAL) {
                 UI_StartServerRefresh(true);
             }
-            UI_BuildServerDisplayList(true);
+            UI_BuildServerDisplayList(RefreshWithClear);
             UI_FeederSelection(FEEDER_SERVERS, 0);
         } else if (Q_stricmp(name, "ServerStatus") == 0) {
             trap_LAN_GetServerAddressString(ui_netSource.integer, uiInfo.serverStatus.displayServers[uiInfo.serverStatus.currentServer], uiInfo.serverStatusAddress, sizeof(uiInfo.serverStatusAddress));
@@ -3540,18 +3546,14 @@ static void UI_BinaryServerInsertion(int num)
     UI_InsertServerIntoDisplayList(num, offset);
 }
 
-static void UI_BuildServerDisplayList(bool force)
+static void UI_BuildServerDisplayList(const server_refresh_t refresh_action)
 {
     int i, count, clients, maxClients, ping, game, len, visible;
     char info[MAX_STRING_CHARS];
     static int numinvisible;
 
-    if (!(force || uiInfo.uiDC.realTime > uiInfo.serverStatus.nextDisplayRefresh)) {
+    if (RefreshIfOverdue == refresh_action && !(uiInfo.uiDC.realTime > uiInfo.serverStatus.nextDisplayRefresh)) {
         return;
-    }
-    // if we shouldn't reset
-    if (force == 2) {
-        force = 0;
     }
 
     // do motd updates here too
@@ -3566,7 +3568,7 @@ static void UI_BuildServerDisplayList(bool force)
         uiInfo.serverStatus.motdWidth = -1;
     }
 
-    if (force) {
+    if (RefreshWithClear == refresh_action) {
         numinvisible = 0;
         // clear number of displayed servers
         uiInfo.serverStatus.numDisplayServers = 0;
@@ -5554,11 +5556,11 @@ static void UI_DoServerRefresh(void)
         uiInfo.serverStatus.refreshtime = uiInfo.uiDC.realTime + 1000;
     } else if (!wait) {
         // get the last servers in the list
-        UI_BuildServerDisplayList(2);
+        UI_BuildServerDisplayList(RefreshWithoutClear);
         // stop the refresh
         UI_StopServerRefresh();
     }
-    UI_BuildServerDisplayList(false);
+    UI_BuildServerDisplayList(RefreshIfOverdue);
 }
 
 static void UI_StartServerRefresh(bool full)
