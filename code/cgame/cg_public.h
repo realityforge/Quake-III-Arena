@@ -56,8 +56,6 @@ enum {
     CGAME_EVENT_NONE
 };
 
-#define CGAME_IMPORT_API_VERSION 4
-
 typedef enum {
     CG_PRINT,
     CG_ERROR,
