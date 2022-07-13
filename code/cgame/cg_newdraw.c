@@ -47,16 +47,6 @@ void CG_InitTeamChat()
     memset(systemChat, 0, sizeof(systemChat));
 }
 
-void CG_SetPrintString(int type, const char* p)
-{
-    if (type == SYSTEM_PRINT) {
-        strcpy(systemChat, p);
-    } else {
-        strcpy(teamChat2, teamChat1);
-        strcpy(teamChat1, p);
-    }
-}
-
 void CG_CheckOrderPending()
 {
     if (cgs.gametype < GT_CTF) {
