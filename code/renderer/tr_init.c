@@ -342,9 +342,6 @@ bool R_GetModeInfo(int* width, int* height, float* windowAspect, int mode)
     return true;
 }
 
-/*
-** R_ModeList_f
-*/
 static void R_ModeList_f(void)
 {
     int i;
