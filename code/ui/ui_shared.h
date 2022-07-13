@@ -26,8 +26,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../renderer/tr_types.h"
 #include "../client/keycodes.h"
 
-#include "voicechat.h"
-
 #define MAX_MENUNAME 32
 #define MAX_ITEMTEXT 64
 #define MAX_ITEMACTION 64
