@@ -245,10 +245,11 @@ static void pushReward(sfxHandle_t sfx, qhandle_t shader, int rewardCount)
 void CG_CheckLocalSounds(playerState_t* ps, playerState_t* ops)
 {
     int highScore, reward;
-#ifdef MISSIONPACK
-    int health, armor;
-#endif
     sfxHandle_t sfx;
+#ifdef MISSIONPACK
+    int health;
+    int armor;
+#endif
 
     // don't play the sounds if the player just changed teams
     if (ps->persistant[PERS_TEAM] != ops->persistant[PERS_TEAM]) {
