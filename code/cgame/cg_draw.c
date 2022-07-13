@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #ifdef MISSIONPACK
 #include "../ui/ui_shared.h"
+#include "ui/menudef.h"
 
 // used for scoreboard
 extern displayContextDef_t cgDC;

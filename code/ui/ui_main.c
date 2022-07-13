@@ -28,6 +28,7 @@ USER INTERFACE MAIN
 */
 
 #include "ui_local.h"
+#include "ui/menudef.h"
 
 uiInfo_t uiInfo;
 
