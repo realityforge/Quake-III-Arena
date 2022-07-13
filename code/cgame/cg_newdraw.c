@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "cg_local.h"
 #include "../ui/ui_shared.h"
+#include "voicechat.h"
 #include "ui/menudef.h"
 
 extern displayContextDef_t cgDC;
