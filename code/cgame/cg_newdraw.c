@@ -167,17 +167,12 @@ void CG_SelectPrevPlayer()
 
 static void CG_DrawPlayerArmorIcon(rectDef_t* rect, bool draw2D)
 {
-    centity_t* cent;
-    playerState_t* ps;
     vec3_t angles;
     vec3_t origin;
 
     if (cg_drawStatus.integer == 0) {
         return;
     }
-
-    cent = &cg_entities[cg.snap->ps.clientNum];
-    ps = &cg.snap->ps;
 
     if (draw2D || (!cg_draw3dIcons.integer && cg_drawIcons.integer)) {
         CG_DrawPic(rect->x, rect->y + rect->h / 2 + 1, rect->w, rect->h, cgs.media.armorIcon);
