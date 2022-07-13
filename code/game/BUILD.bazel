@@ -27,10 +27,8 @@ cc_library(
 
 cc_library(
     name = "bg_misc-client-baseq3",
-    srcs = [
-        "bg_local.h",
-        "bg_misc.c",
-    ],
+    srcs = ["bg_misc.c"],
+    hdrs = ["bg_local.h"],
     defines = CLIENT_GAME_DEFINES,
     includes = ["."],
     visibility = [
@@ -46,10 +44,8 @@ cc_library(
 
 cc_library(
     name = "bg_misc-client-teamarena",
-    srcs = [
-        "bg_local.h",
-        "bg_misc.c",
-    ],
+    srcs = ["bg_misc.c"],
+    hdrs = ["bg_local.h"],
     defines = CLIENT_GAME_DEFINES + TEAM_ARENA_DEFINES,
     includes = ["."],
     visibility = [
