@@ -4621,7 +4621,7 @@ void BotDeathmatchAI(bot_state_t* bs, float thinktime)
     bs->lasthitcount = bs->cur_ps.persistant[PERS_HITS];
 }
 
-void BotSetEntityNumForGoalWithActivator(bot_goal_t* goal, char* classname)
+static void BotSetEntityNumForGoalWithActivator(bot_goal_t* goal, char* classname)
 {
     gentity_t* ent;
     int i;
