@@ -585,7 +585,6 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
 
     case EV_JUMP_PAD:
         DEBUGNAME("EV_JUMP_PAD");
-        //		CG_Printf( "EV_JUMP_PAD w/effect #%i\n", es->eventParm );
         {
             localEntity_t* smoke;
             vec3_t up = { 0, 0, 1 };
