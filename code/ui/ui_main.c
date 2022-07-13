@@ -3550,7 +3550,7 @@ static void UI_BinaryServerInsertion(int num)
 
 static void UI_BuildServerDisplayList(const server_refresh_t refresh_action)
 {
-    int i, count, clients, maxClients, ping, game, len, visible;
+    int i, count, clients, maxClients, ping, game, len;
     char info[MAX_STRING_CHARS];
     int lanSource;
 
@@ -3592,13 +3592,11 @@ static void UI_BuildServerDisplayList(const server_refresh_t refresh_action)
         return;
     }
 
-    visible = false;
     for (i = 0; i < count; i++) {
         // if we already got info for this server
         if (!trap_LAN_ServerIsVisible(lanSource, i)) {
             continue;
         }
-        visible = true;
         // get the ping for this server
         ping = trap_LAN_GetServerPing(lanSource, i);
         if (ping > 0 || ui_netSource.integer == UIAS_FAVORITES) {
@@ -3661,12 +3659,6 @@ static void UI_BuildServerDisplayList(const server_refresh_t refresh_action)
     }
 
     uiInfo.serverStatus.refreshtime = uiInfo.uiDC.realTime;
-
-    // if there were no servers visible for ping updates
-    if (!visible) {
-        //		UI_StopServerRefresh();
-        //		uiInfo.serverStatus.nextDisplayRefresh = 0;
-    }
 }
 
 typedef struct
