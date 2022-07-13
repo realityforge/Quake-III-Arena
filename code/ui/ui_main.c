@@ -3548,7 +3548,7 @@ static void UI_BinaryServerInsertion(int num)
 
 static void UI_BuildServerDisplayList(const server_refresh_t refresh_action)
 {
-    int i, count, clients, maxClients, ping, game, len, visible;
+    int i, count, clients, maxClients, ping, game, len;
     char info[MAX_STRING_CHARS];
     static int numinvisible;
 
@@ -3589,13 +3589,11 @@ static void UI_BuildServerDisplayList(const server_refresh_t refresh_action)
         return;
     }
 
-    visible = false;
     for (i = 0; i < count; i++) {
         // if we already got info for this server
         if (!trap_LAN_ServerIsVisible(ui_netSource.integer, i)) {
             continue;
         }
-        visible = true;
         // get the ping for this server
         ping = trap_LAN_GetServerPing(ui_netSource.integer, i);
         if (ping > 0 || ui_netSource.integer == AS_FAVORITES) {
