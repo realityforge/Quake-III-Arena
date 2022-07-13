@@ -9,6 +9,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 load("@rules_java//java:defs.bzl", _java_test = "java_test")
 
 def junit5_test(name, srcs, test_class, deps = [], runtime_deps = [], **kwargs):

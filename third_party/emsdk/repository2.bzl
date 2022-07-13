@@ -9,6 +9,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 load("@emsdk//:emscripten_deps.bzl", _emsdk_emscripten_deps = "emscripten_deps")
 
 def configure_repository():

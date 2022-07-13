@@ -9,6 +9,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 load("@bazel_skylib//rules:diff_test.bzl", _diff_test = "diff_test")
 
 def material_magic_golden_test(name, materials, inputs = ["input.shader"]):

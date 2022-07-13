@@ -9,6 +9,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 load("@bazel_tools//tools/build_defs/repo:git.bzl", _git_repository = "git_repository")
 
 def load_repository():
