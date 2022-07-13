@@ -11,11 +11,12 @@
 # limitations under the License.
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//build_defs:rules.bzl", "CLIENT_GAME_DEFINES", "SERVER_GAME_COPTS", "SERVER_GAME_DEFINES", "TEAM_ARENA_DEFINES")
+load("//build_defs:rules.bzl", "CLIENT_GAME_DEFINES", "BASE_WARNINGS_EX", "SERVER_GAME_COPTS", "SERVER_GAME_DEFINES", "TEAM_ARENA_DEFINES")
 
 cc_library(
     name = "bg_api",
     hdrs = ["bg_public.h"],
+    copts = BASE_WARNINGS_EX,
     visibility = [
         "//code/cgame:__pkg__",
         "//code/client:__pkg__",
@@ -29,6 +30,7 @@ cc_library(
 cc_library(
     name = "server_api",
     hdrs = ["g_public.h"],
+    copts = BASE_WARNINGS_EX,
     visibility = ["//code/server:__pkg__"],
     deps = ["//code/qcommon:shared_api"],
 )
@@ -38,7 +40,7 @@ cc_library(
     name = "bg_lib-qvm",
     srcs = ["bg_lib.c"],
     hdrs = ["bg_lib.h"],
-    copts = ["-Wno-empty-translation-unit"],
+    copts = BASE_WARNINGS_EX + ["-Wno-empty-translation-unit"],
     visibility = ["//code/cgame:__pkg__"],
 )
 
@@ -46,6 +48,7 @@ cc_library(
     name = "bg_misc-client-baseq3",
     srcs = ["bg_misc.c"],
     hdrs = ["bg_local.h"],
+    copts = BASE_WARNINGS_EX,
     defines = CLIENT_GAME_DEFINES,
     includes = ["."],
     visibility = [
@@ -63,6 +66,7 @@ cc_library(
     name = "bg_misc-client-teamarena",
     srcs = ["bg_misc.c"],
     hdrs = ["bg_local.h"],
+    copts = BASE_WARNINGS_EX,
     defines = CLIENT_GAME_DEFINES + TEAM_ARENA_DEFINES,
     includes = ["."],
     visibility = [
@@ -86,6 +90,7 @@ cc_library(
         "bg_slidemove.c",
     ],
     hdrs = ["bg_local.h"],
+    copts = BASE_WARNINGS_EX,
     includes = ["."],
     visibility = [
         "//code/cgame:__pkg__",
@@ -106,6 +111,7 @@ cc_library(
         "bg_slidemove.c",
     ],
     hdrs = ["bg_local.h"],
+    copts = BASE_WARNINGS_EX,
     defines = TEAM_ARENA_DEFINES,
     includes = ["."],
     visibility = [
@@ -170,7 +176,7 @@ cc_library(
     name = "baseq3",
     srcs = _COMMON_SRC,
     hdrs = _COMMON_HDRS,
-    copts = SERVER_GAME_COPTS,
+    copts = SERVER_GAME_COPTS + BASE_WARNINGS_EX,
     defines = SERVER_GAME_DEFINES,
     visibility = ["//game/baseq3:__pkg__"],
     deps = [
@@ -188,7 +194,7 @@ cc_library(
     name = "teamarena",
     srcs = _COMMON_SRC,
     hdrs = _COMMON_HDRS,
-    copts = SERVER_GAME_COPTS,
+    copts = SERVER_GAME_COPTS + BASE_WARNINGS_EX,
     defines = TEAM_ARENA_DEFINES + SERVER_GAME_DEFINES,
     visibility = ["//game/teamarena:__pkg__"],
     deps = [
