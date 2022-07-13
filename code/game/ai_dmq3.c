@@ -4622,7 +4622,7 @@ void BotDeathmatchAI(bot_state_t* bs, float thinktime)
 }
 
 #ifdef MISSIONPACK
-static void BotSetEntityNumForGoalWithActivator(bot_goal_t* goal, char* classname)
+static void BotSetEntityNumForGoal(bot_goal_t* goal, char* classname)
 {
     gentity_t* ent;
     int i;
@@ -4677,20 +4677,20 @@ void BotSetupDeathmatchAI(void)
     } else if (gametype == GT_OBELISK) {
         if (trap_BotGetLevelItemGoal(-1, "Red Obelisk", &redobelisk) < 0)
             BotAI_Print(PRT_WARNING, "Overload without Red Obelisk\n");
-        BotSetEntityNumForGoalWithActivator(&redobelisk, "team_redobelisk");
+        BotSetEntityNumForGoal(&redobelisk, "team_redobelisk");
         if (trap_BotGetLevelItemGoal(-1, "Blue Obelisk", &blueobelisk) < 0)
             BotAI_Print(PRT_WARNING, "Overload without Blue Obelisk\n");
-        BotSetEntityNumForGoalWithActivator(&blueobelisk, "team_blueobelisk");
+        BotSetEntityNumForGoal(&blueobelisk, "team_blueobelisk");
     } else if (gametype == GT_HARVESTER) {
         if (trap_BotGetLevelItemGoal(-1, "Red Obelisk", &redobelisk) < 0)
             BotAI_Print(PRT_WARNING, "Harvester without Red Obelisk\n");
-        BotSetEntityNumForGoalWithActivator(&redobelisk, "team_redobelisk");
+        BotSetEntityNumForGoal(&redobelisk, "team_redobelisk");
         if (trap_BotGetLevelItemGoal(-1, "Blue Obelisk", &blueobelisk) < 0)
             BotAI_Print(PRT_WARNING, "Harvester without Blue Obelisk\n");
-        BotSetEntityNumForGoalWithActivator(&blueobelisk, "team_blueobelisk");
+        BotSetEntityNumForGoal(&blueobelisk, "team_blueobelisk");
         if (trap_BotGetLevelItemGoal(-1, "Neutral Obelisk", &neutralobelisk) < 0)
             BotAI_Print(PRT_WARNING, "Harvester without Neutral Obelisk\n");
-        BotSetEntityNumForGoalWithActivator(&neutralobelisk, "team_neutralobelisk");
+        BotSetEntityNumForGoal(&neutralobelisk, "team_neutralobelisk");
     }
 #endif
 
