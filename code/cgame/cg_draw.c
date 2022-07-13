@@ -2129,9 +2129,10 @@ static void CG_DrawWarmup(void)
     int w;
     int sec;
     int i;
-    float scale;
     clientInfo_t *ci1, *ci2;
+#ifndef MISSIONPACK
     int cw;
+#endif
     const char* s;
 
     sec = cg.warmup;
@@ -2232,30 +2233,40 @@ static void CG_DrawWarmup(void)
             break;
         }
     }
-    scale = 0.45f;
+#ifdef MISSIONPACK
+    float scale = 0.45f;
     switch (cg.warmupCount) {
     case 0:
-        cw = 28;
         scale = 0.54f;
         break;
     case 1:
-        cw = 24;
         scale = 0.51f;
         break;
     case 2:
-        cw = 20;
         scale = 0.48f;
         break;
     default:
-        cw = 16;
-        scale = 0.45f;
         break;
     }
 
-#ifdef MISSIONPACK
     w = CG_Text_Width(s, scale, 0);
     CG_Text_Paint(320 - w / 2, 125, scale, colorWhite, s, 0, 0, ITEM_TEXTSTYLE_SHADOWEDMORE);
 #else
+    switch (cg.warmupCount) {
+    case 0:
+        cw = 28;
+        break;
+    case 1:
+        cw = 24;
+        break;
+    case 2:
+        cw = 20;
+        break;
+    default:
+        cw = 16;
+        break;
+    }
+
     w = CG_DrawStrlen(s);
     CG_DrawStringExt(320 - w * cw / 2, 70, s, colorWhite,
                      false, true, cw, (int)(cw * 1.5), 0);
