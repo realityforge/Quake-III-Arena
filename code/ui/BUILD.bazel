@@ -1,0 +1,104 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+load("@rules_cc//cc:defs.bzl", "cc_library")
+load("//build_defs:rules.bzl", "TEAM_ARENA_DEFINES", "UI_COPTS", "UI_DEFINES")
+
+cc_library(
+    name = "api",
+    hdrs = [
+        "ui_public.h",
+    ],
+    visibility = [
+        "//code/client:__pkg__",
+        "//code/q3_ui:__pkg__",
+    ],
+    deps = [
+        "//code/qcommon:shared_api",
+    ],
+)
+
+cc_library(
+    name = "local_api",
+    hdrs = [
+        "ui_local.h",
+    ],
+    deps = [
+        ":api",
+        ":shared",
+        "//code/client:api",
+        "//code/qcommon:shared_api",
+        "//code/renderer:api",
+    ],
+)
+
+cc_library(
+    name = "shared",
+    srcs = ["ui_shared.c"],
+    hdrs = ["ui_shared.h"],
+    copts = UI_COPTS,
+    includes = ["."],
+    visibility = [
+        "//code/cgame:__pkg__",
+        "//code/q3_ui:__pkg__",
+    ],
+    deps = [
+        ":api",
+        "//code/client:api",
+        "//code/qcommon:shared_api",
+        "//code/renderer:api",
+        "//content/teamarena:ui",
+    ],
+)
+
+# syscalls is required when building the shared library but should not be required when building vm library
+cc_library(
+    name = "ui_syscalls",
+    srcs = ["ui_syscalls.c"],
+    copts = UI_COPTS,
+    visibility = [
+        "//game/baseq3:__pkg__",
+        "//game/teamarena:__pkg__",
+    ],
+    deps = [
+        ":api",
+        ":local_api",
+        "//code/client:api",
+        "//code/qcommon:shared_api",
+        "//code/renderer:api",
+    ],
+)
+
+cc_library(
+    name = "ui",
+    srcs = [
+        "ui_atoms.c",
+        "ui_gameinfo.c",
+        "ui_main.c",
+        "ui_players.c",
+    ],
+    copts = UI_COPTS,
+    defines = TEAM_ARENA_DEFINES + UI_DEFINES,
+    visibility = ["//game/teamarena:__pkg__"],
+    deps = [
+        ":api",
+        ":local_api",
+        ":shared",
+        "//code/client:api",
+        "//code/game:bg_api",
+        "//code/game:bg_misc-client-teamarena",
+        "//code/qcommon:shared",
+        "//code/qcommon:shared_api",
+        "//code/renderer:api",
+        "//content/teamarena:ui",
+    ],
+)
