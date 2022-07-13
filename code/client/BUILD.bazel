@@ -11,7 +11,7 @@
 # limitations under the License.
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//build_defs:rules.bzl", "DIST_VISIBILITY", "ENGINE_DEFINES")
+load("//build_defs:rules.bzl", "ENGINE_DEFINES")
 
 cc_library(
     name = "api",
