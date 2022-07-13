@@ -2145,7 +2145,6 @@ static void CG_DrawWarmup(void)
     int sec;
     int i;
 #ifdef MISSIONPACK
-    float scale;
 #else
     int cw;
 #endif
@@ -2252,6 +2251,7 @@ static void CG_DrawWarmup(void)
     }
 
 #ifdef MISSIONPACK
+    float scale = 0.45f;
     switch (cg.warmupCount) {
     case 0:
         scale = 0.54f;
@@ -2263,7 +2263,6 @@ static void CG_DrawWarmup(void)
         scale = 0.48f;
         break;
     default:
-        scale = 0.45f;
         break;
     }
 
