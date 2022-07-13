@@ -2144,11 +2144,10 @@ static void CG_DrawWarmup(void)
     int w;
     int sec;
     int i;
-#ifdef MISSIONPACK
-#else
+    clientInfo_t *ci1, *ci2;
+#ifndef MISSIONPACK
     int cw;
 #endif
-    clientInfo_t *ci1, *ci2;
     const char* s;
 
     sec = cg.warmup;
