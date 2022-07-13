@@ -43,9 +43,9 @@ static const orderTask_t validOrders[] = {
     { VOICECHAT_FOLLOWFLAGCARRIER, TEAMTASK_ESCORT }
 };
 
+#ifdef MISSIONPACK
 static const int numValidOrders = sizeof(validOrders) / sizeof(orderTask_t);
 
-#ifdef MISSIONPACK
 static int CG_ValidOrder(const char* p)
 {
     int i;
