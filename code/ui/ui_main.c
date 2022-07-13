@@ -3647,12 +3647,6 @@ static void UI_BuildServerDisplayList(bool force)
     }
 
     uiInfo.serverStatus.refreshtime = uiInfo.uiDC.realTime;
-
-    // if there were no servers visible for ping updates
-    if (!visible) {
-        //		UI_StopServerRefresh();
-        //		uiInfo.serverStatus.nextDisplayRefresh = 0;
-    }
 }
 
 typedef struct
