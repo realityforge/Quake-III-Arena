@@ -91,20 +91,14 @@ cc_library(
 
 cc_library(
     name = "snd_api",
-    hdrs = [
-        "snd_public.h",
-    ],
+    hdrs = ["snd_public.h"],
     visibility = ["//code/sdl:__pkg__"],
-    deps = [
-        "//code/qcommon:shared_api",
-    ],
+    deps = ["//code/qcommon:shared_api"],
 )
 
 cc_library(
     name = "snd_internal_api",
-    hdrs = [
-        "snd_local.h",
-    ],
+    hdrs = ["snd_local.h"],
     visibility = ["//code/sdl:__pkg__"],
     deps = [
         ":snd_api",
