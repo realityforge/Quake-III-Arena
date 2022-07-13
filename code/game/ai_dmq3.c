@@ -4624,7 +4624,7 @@ void BotDeathmatchAI(bot_state_t* bs, float thinktime)
     bs->lasthitcount = bs->cur_ps.persistant[PERS_HITS];
 }
 
-void BotSetupDeathmatchAI(void)
+void BotSetupDeathmatchAI()
 {
     int ent, modelnum;
     char model[128];
