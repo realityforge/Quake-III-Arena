@@ -586,16 +586,15 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
     case EV_JUMP_PAD:
         DEBUGNAME("EV_JUMP_PAD");
         {
-            localEntity_t* smoke;
             vec3_t up = { 0, 0, 1 };
 
-            smoke = CG_SmokePuff(cent->lerpOrigin, up,
-                                 32,
-                                 1, 1, 1, 0.33f,
-                                 1000,
-                                 cg.time, 0,
-                                 LEF_PUFF_DONT_SCALE,
-                                 cgs.media.smokePuffShader);
+            CG_SmokePuff(cent->lerpOrigin, up,
+                         32,
+                         1, 1, 1, 0.33f,
+                         1000,
+                         cg.time, 0,
+                         LEF_PUFF_DONT_SCALE,
+                         cgs.media.smokePuffShader);
         }
 
         // boing sound at origin, jump sound on player
