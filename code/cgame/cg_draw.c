@@ -1959,7 +1959,6 @@ static bool CG_DrawScoreboard()
 {
 #ifdef MISSIONPACK
     static bool firstTime = true;
-    float fade, *fadeColor;
 
     if (menuScoreboard) {
         menuScoreboard->window.flags &= ~WINDOW_FORCED;
@@ -1983,18 +1982,14 @@ static bool CG_DrawScoreboard()
     }
 
     if (cg.showScores || cg.predictedPlayerState.pm_type == PM_DEAD || cg.predictedPlayerState.pm_type == PM_INTERMISSION) {
-        fade = 1.0;
-        fadeColor = colorWhite;
     } else {
-        fadeColor = CG_FadeColor(cg.scoreFadeTime, FADE_TIME);
-        if (!fadeColor) {
+        if (!CG_FadeColor(cg.scoreFadeTime, FADE_TIME)) {
             // next time scoreboard comes up, don't print killer
             cg.deferredPlayerLoading = 0;
             cg.killerName[0] = 0;
             firstTime = true;
             return false;
         }
-        fade = *fadeColor;
     }
 
     if (menuScoreboard == NULL) {
