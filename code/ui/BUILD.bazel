@@ -15,9 +15,7 @@ load("//build_defs:rules.bzl", "TEAM_ARENA_DEFINES", "UI_COPTS", "UI_DEFINES")
 
 cc_library(
     name = "api",
-    hdrs = [
-        "ui_public.h",
-    ],
+    hdrs = ["ui_public.h"],
     visibility = [
         "//code/client:__pkg__",
         "//code/q3_ui:__pkg__",
@@ -29,9 +27,7 @@ cc_library(
 
 cc_library(
     name = "local_api",
-    hdrs = [
-        "ui_local.h",
-    ],
+    hdrs = ["ui_local.h"],
     deps = [
         ":api",
         ":shared",
