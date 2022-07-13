@@ -53,6 +53,7 @@ cc_library(
     hdrs = ["cg_local.h"],
     copts = CLIENT_GAME_COPTS + BASE_WARNINGS_EX,
     defines = CLIENT_GAME_DEFINES,
+    visibility = ["//game/baseq3:__pkg__"],
     deps = [
         ":api",
         "//code/game:bg-baseq3",
