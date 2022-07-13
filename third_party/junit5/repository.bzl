@@ -9,6 +9,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 load(":dependencies.bzl", _generate_workspace_rules = "generate_workspace_rules")
 
 def load_repository():

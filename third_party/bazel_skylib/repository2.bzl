@@ -9,6 +9,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 load("@bazel_skylib//:workspace.bzl", _bazel_skylib_workspace = "bazel_skylib_workspace")
 
 def configure_repository():

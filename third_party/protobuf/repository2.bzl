@@ -9,6 +9,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 load("@com_google_protobuf//:protobuf_deps.bzl", _protobuf_deps = "protobuf_deps")
 
 def configure_repository():
