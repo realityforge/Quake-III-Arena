@@ -81,30 +81,7 @@ static const char* teamArenaGameTypes[] = {
 
 static int const numTeamArenaGameTypes = sizeof(teamArenaGameTypes) / sizeof(const char*);
 
-static const char* teamArenaGameNames[] = {
-    "Free For All",
-    "Tournament",
-    "Single Player",
-    "Team Deathmatch",
-    "Capture the Flag",
-    "One Flag CTF",
-    "Overload",
-    "Harvester",
-    "Team Tournament",
-};
-
-static int const numTeamArenaGameNames = sizeof(teamArenaGameNames) / sizeof(const char*);
-
 static const int numServerFilters = sizeof(serverFilters) / sizeof(serverFilter_t);
-
-static const char* sortKeys[] = {
-    "Server Name",
-    "Map Name",
-    "Open Player Spots",
-    "Game Type",
-    "Ping Time"
-};
-static const int numSortKeys = sizeof(sortKeys) / sizeof(const char*);
 
 static char* netnames[] = {
     "???",
