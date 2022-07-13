@@ -11,11 +11,12 @@
 # limitations under the License.
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//build_defs:rules.bzl", "CLIENT_GAME_DEFINES", "TEAM_ARENA_DEFINES")
+load("//build_defs:rules.bzl", "BASE_WARNINGS_EX", "CLIENT_GAME_DEFINES", "TEAM_ARENA_DEFINES")
 
 cc_library(
     name = "bg_api",
     hdrs = ["bg_public.h"],
+    copts = BASE_WARNINGS_EX,
     visibility = [
         "//code/cgame:__pkg__",
         "//code/client:__pkg__",
@@ -27,6 +28,7 @@ cc_library(
 cc_library(
     name = "server_api",
     hdrs = ["g_public.h"],
+    copts = BASE_WARNINGS_EX,
     deps = ["//code/qcommon:shared_api"],
 )
 
@@ -34,6 +36,7 @@ cc_library(
     name = "bg_misc-client-baseq3",
     srcs = ["bg_misc.c"],
     hdrs = ["bg_local.h"],
+    copts = BASE_WARNINGS_EX,
     defines = CLIENT_GAME_DEFINES,
     includes = ["."],
     visibility = [
@@ -51,6 +54,7 @@ cc_library(
     name = "bg_misc-client-teamarena",
     srcs = ["bg_misc.c"],
     hdrs = ["bg_local.h"],
+    copts = BASE_WARNINGS_EX,
     defines = CLIENT_GAME_DEFINES + TEAM_ARENA_DEFINES,
     includes = ["."],
     visibility = [
@@ -74,6 +78,7 @@ cc_library(
         "bg_pmove.c",
         "bg_slidemove.c",
     ],
+    copts = BASE_WARNINGS_EX,
     includes = ["."],
     visibility = [
         "//code/cgame:__pkg__",
@@ -94,6 +99,7 @@ cc_library(
         "bg_pmove.c",
         "bg_slidemove.c",
     ],
+    copts = BASE_WARNINGS_EX,
     defines = TEAM_ARENA_DEFINES,
     includes = ["."],
     visibility = [
