@@ -4795,7 +4795,6 @@ static void UI_BuildQ3Model_List(void)
 void _UI_Init()
 {
     const char* menuSet;
-    int start;
 
     UI_RegisterCvars();
     UI_InitMemory();
@@ -4874,8 +4873,6 @@ void _UI_Init()
     uiInfo.uiDC.whiteShader = trap_R_RegisterShaderNoMip("white");
 
     AssetCache();
-
-    start = trap_Milliseconds();
 
     uiInfo.teamCount = 0;
     uiInfo.characterCount = 0;
