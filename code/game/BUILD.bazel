@@ -77,10 +77,10 @@ cc_library(
     # that is a job for another time
     name = "bg-baseq3",
     srcs = [
-        "bg_local.h",
         "bg_pmove.c",
         "bg_slidemove.c",
     ],
+    hdrs = ["bg_local.h"],
     copts = BASE_WARNINGS_EX,
     includes = ["."],
     visibility = [
@@ -98,10 +98,10 @@ cc_library(
     # that is a job for another time
     name = "bg-teamarena",
     srcs = [
-        "bg_local.h",
         "bg_pmove.c",
         "bg_slidemove.c",
     ],
+    hdrs = ["bg_local.h"],
     copts = BASE_WARNINGS_EX,
     defines = TEAM_ARENA_DEFINES,
     includes = ["."],
