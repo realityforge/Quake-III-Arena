@@ -11,10 +11,79 @@
 # limitations under the License.
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
+load("//build_defs:rules.bzl", "BASE_WARNINGS_EX", "CLIENT_GAME_COPTS", "CLIENT_GAME_DEFINES", "TEAM_ARENA_DEFINES")
 
 cc_library(
     name = "api",
     hdrs = ["cg_public.h"],
     visibility = ["//code/client:__pkg__"],
     deps = ["//code/qcommon:shared_api"],
+)
+
+_COMMON_SRC = [
+    "cg_consolecmds.c",
+    "cg_draw.c",
+    "cg_drawtools.c",
+    "cg_effects.c",
+    "cg_ents.c",
+    "cg_event.c",
+    "cg_info.c",
+    "cg_localents.c",
+    "cg_main.c",
+    "cg_marks.c",
+    "cg_particles.c",
+    "cg_players.c",
+    "cg_playerstate.c",
+    "cg_predict.c",
+    "cg_scoreboard.c",
+    "cg_servercmds.c",
+    "cg_snapshot.c",
+    "cg_syscalls.c",
+    "cg_view.c",
+    "cg_weapons.c",
+]
+
+_BASEQ3_SRC = _COMMON_SRC
+
+_TEAM_ARENA_SRC = _COMMON_SRC + ["cg_newdraw.c"]
+
+cc_library(
+    name = "baseq3",
+    srcs = _BASEQ3_SRC,
+    hdrs = ["cg_local.h"],
+    copts = CLIENT_GAME_COPTS + BASE_WARNINGS_EX,
+    defines = CLIENT_GAME_DEFINES,
+    deps = [
+        ":api",
+        "//code/game:bg-baseq3",
+        "//code/game:bg_api",
+        "//code/game:bg_misc-client-baseq3",
+        "//code/qcommon",
+        "//code/qcommon:shared",
+        "//code/qcommon:shared_api",
+        "//code/qcommon:voicechat",
+        "//code/renderer:api",
+    ],
+)
+
+cc_library(
+    name = "teamarena",
+    srcs = _TEAM_ARENA_SRC,
+    hdrs = ["cg_local.h"],
+    copts = CLIENT_GAME_COPTS + BASE_WARNINGS_EX,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    visibility = ["//game/teamarena:__pkg__"],
+    deps = [
+        ":api",
+        "//build_defs:exported_symbols.lds",
+        "//code/game:bg-teamarena",
+        "//code/game:bg_api",
+        "//code/game:bg_misc-client-teamarena",
+        "//code/qcommon",
+        "//code/qcommon:shared",
+        "//code/qcommon:shared_api",
+        "//code/qcommon:voicechat",
+        "//code/renderer:api",
+        "//code/ui:shared",
+    ],
 )
