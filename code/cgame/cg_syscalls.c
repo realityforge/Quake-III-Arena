@@ -46,10 +46,13 @@ void trap_Print(const char* fmt)
     syscall(CG_PRINT, fmt);
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-noreturn"
 NORETURN void trap_Error(const char* fmt)
 {
     syscall(CG_ERROR, fmt);
 }
+#pragma clang diagnostic pop
 
 int trap_Milliseconds(void)
 {
