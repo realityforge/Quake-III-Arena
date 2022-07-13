@@ -23,5 +23,7 @@ cc_library(
     copts = FULL_WARNINGS,
     visibility = [
         "//code/cgame:__pkg__",
+        "//code/client:__pkg__",
+        "//code/ui:__pkg__",
     ],
 )

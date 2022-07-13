@@ -134,7 +134,11 @@ cc_library(
         "q_math.c",
         "q_shared.c",
     ],
-    visibility = ["//code/game:__pkg__"],
+    visibility = [
+        "//code/cgame:__pkg__",
+        "//code/game:__pkg__",
+        "//code/ui:__pkg__",
+    ],
     deps = [":shared_api"],
 )
 
@@ -151,7 +155,9 @@ cc_library(
     visibility = [
         "//code/botlib:__pkg__",
         "//code/cgame:__pkg__",
+        "//code/client:__pkg__",
         "//code/game:__pkg__",
+        "//code/ui:__pkg__",
     ],
 )
 
@@ -160,6 +166,7 @@ cc_library(
     hdrs = ["voicechat.h"],
     includes = ["."],
     visibility = [
+        "//code/cgame:__pkg__",
         "//code/game:__pkg__",
     ],
 )
@@ -206,6 +213,8 @@ cc_library(
     includes = ["."],
     visibility = [
         "//code/botlib:__pkg__",
+        "//code/cgame:__pkg__",
+        "//code/client:__pkg__",
         "@zlib//:__pkg__",
     ],
     deps = [

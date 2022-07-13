@@ -16,6 +16,11 @@ load("//build_defs:rules.bzl", "CLIENT_GAME_DEFINES", "TEAM_ARENA_DEFINES")
 cc_library(
     name = "bg_api",
     hdrs = ["bg_public.h"],
+    visibility = [
+        "//code/cgame:__pkg__",
+        "//code/client:__pkg__",
+        "//code/ui:__pkg__",
+    ],
     deps = ["//code/qcommon:shared_api"],
 )
 
