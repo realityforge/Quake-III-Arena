@@ -4624,6 +4624,30 @@ void BotDeathmatchAI(bot_state_t* bs, float thinktime)
     bs->lasthitcount = bs->cur_ps.persistant[PERS_HITS];
 }
 
+#ifdef MISSIONPACK
+static void BotSetEntityNumForGoal(bot_goal_t* goal, char* classname)
+{
+    gentity_t* ent;
+    int i;
+    vec3_t dir;
+
+    ent = &g_entities[0];
+    for (i = 0; i < level.num_entities; i++, ent++) {
+        if (!ent->inuse || !ent->activator) {
+            continue;
+        }
+        if (Q_stricmp(ent->activator->classname, classname) != 0) {
+            continue;
+        }
+        VectorSubtract(goal->origin, ent->s.origin, dir);
+        if (VectorLengthSquared(dir) < Square(10)) {
+            goal->entitynum = i;
+            return;
+        }
+    }
+}
+#endif
+
 void BotSetupDeathmatchAI()
 {
     int ent, modelnum;
