@@ -2007,8 +2007,7 @@ static bool CG_DrawScoreboard(void)
         return false;
     }
 
-    if (cg.showScores || cg.predictedPlayerState.pm_type == PM_DEAD || cg.predictedPlayerState.pm_type == PM_INTERMISSION) {
-    } else {
+    if (!(cg.showScores || PM_DEAD == cg.predictedPlayerState.pm_type || PM_INTERMISSION == cg.predictedPlayerState.pm_type)) {
         if (!CG_FadeColor(cg.scoreFadeTime, FADE_TIME)) {
             // next time scoreboard comes up, don't print killer
             cg.deferredPlayerLoading = 0;
