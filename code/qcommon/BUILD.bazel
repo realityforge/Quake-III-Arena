@@ -220,6 +220,20 @@ cc_library(
 )
 
 cc_library(
+    name = "plugin",
+    hdrs = ["plugin.h"],
+    copts = FULL_WARNINGS,
+    includes = ["."],
+    visibility = [
+        "//code/cgame:__pkg__",
+        "//code/game:__pkg__",
+        "//code/q3_ui:__pkg__",
+        "//code/ui:__pkg__",
+    ],
+    deps = [":base"],
+)
+
+cc_library(
     name = "qcommon",
     hdrs = ["qcommon.h"],
     includes = ["."],

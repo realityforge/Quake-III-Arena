@@ -27,6 +27,7 @@ USER INTERFACE MAIN
 =======================================================================
 */
 
+#include "plugin.h"
 #include "ui_local.h"
 
 /*
