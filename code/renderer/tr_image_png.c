@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+#include "attributes.h"
 #include "tr_common.h"
 #include "tr_image.h"
 #include <spng.h>
@@ -46,7 +47,7 @@ static void spng_hunk_free(void* ptr)
     }
 }
 
-static void* spng_hunk_realloc(UNUSED_VAR void* ptr, UNUSED_VAR size_t size)
+static void* spng_hunk_realloc(UNUSED void* ptr, UNUSED size_t size)
 {
     // This does not seem to be actually invoked during PNG read operations.
     // This is used during writes and if we were to use this for writes then we would need to implement.
@@ -74,7 +75,7 @@ static void spng_temp_hunk_free(void* ptr)
     }
 }
 
-static void* spng_temp_hunk_realloc(UNUSED_VAR void* ptr, UNUSED_VAR size_t size)
+static void* spng_temp_hunk_realloc(UNUSED void* ptr, UNUSED size_t size)
 {
     // TODO: This will need to be implemented if we start to use temp_hunk space during writes
     //       however this would require that the hunk system be reworked so that we could always
@@ -97,7 +98,7 @@ static struct spng_alloc hunk_alloc = { .malloc_fn = spng_hunk_malloc, .realloc_
 // The alloc structure that is used to allocate/release temporary memory by PNG where the allocation does
 // not escape a boundary function. (i.e. This is used by the write functions as the pixel data will not
 // persist after the image has been written)
-UNUSED_VAR static struct spng_alloc temp_hunk_alloc = { .malloc_fn = spng_temp_hunk_malloc, .realloc_fn = spng_temp_hunk_realloc, .calloc_fn = spng_temp_hunk_calloc, .free_fn = spng_temp_hunk_free };
+UNUSED static struct spng_alloc temp_hunk_alloc = { .malloc_fn = spng_temp_hunk_malloc, .realloc_fn = spng_temp_hunk_realloc, .calloc_fn = spng_temp_hunk_calloc, .free_fn = spng_temp_hunk_free };
 
 static void spng_load_error(const char* name, const int result, const char* functionName)
 {

@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 // q_shared.c -- stateless support routines that are included in each code dll
+#include "attributes.h"
 #include "q_shared.h"
 
 // ^[0-9a-zA-Z]
@@ -592,15 +593,14 @@ int Q_isalpha(int c)
 
 bool Q_isanumber(const char* s)
 {
-    char* p;
-    double UNUSED_VAR d;
-
-    if (*s == '\0')
+    if (*s == '\0') {
         return false;
+    } else {
 
-    d = strtod(s, &p);
-
-    return *p == '\0';
+        char* p;
+        UNUSED double d = strtod(s, &p);
+        return *p == '\0';
+    }
 }
 
 bool Q_isintegral(float f)
