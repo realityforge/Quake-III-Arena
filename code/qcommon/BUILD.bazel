@@ -184,6 +184,7 @@ cc_library(
         "qengine.h",
         "surfaceflags.h",
     ],
+    includes = ["."],
     visibility = [
         "//code/botlib:__pkg__",
         "//code/cgame:__pkg__",
