@@ -46,10 +46,7 @@ cmodel_t box_model;
 cplane_t* box_planes;
 cbrush_t* box_brush;
 
-void CM_InitBoxHull(void);
-void CM_FloodAreaConnections(void);
-
-void CMod_LoadShaders(lump_t* l)
+static void CMod_LoadShaders(lump_t* l)
 {
     dshader_t *in, *out;
     int i, count;
@@ -75,7 +72,7 @@ void CMod_LoadShaders(lump_t* l)
     }
 }
 
-void CMod_LoadSubmodels(lump_t* l)
+static void CMod_LoadSubmodels(lump_t* l)
 {
     dmodel_t* in;
     cmodel_t* out;
@@ -125,7 +122,7 @@ void CMod_LoadSubmodels(lump_t* l)
     }
 }
 
-void CMod_LoadNodes(lump_t* l)
+static void CMod_LoadNodes(lump_t* l)
 {
     dnode_t* in;
     int child;
@@ -153,7 +150,7 @@ void CMod_LoadNodes(lump_t* l)
     }
 }
 
-void CM_BoundBrush(cbrush_t* b)
+static void CM_BoundBrush(cbrush_t* b)
 {
     b->bounds[0][0] = -b->sides[0].plane->dist;
     b->bounds[1][0] = b->sides[1].plane->dist;
@@ -165,7 +162,7 @@ void CM_BoundBrush(cbrush_t* b)
     b->bounds[1][2] = b->sides[5].plane->dist;
 }
 
-void CMod_LoadBrushes(lump_t* l)
+static void CMod_LoadBrushes(lump_t* l)
 {
     dbrush_t* in;
     cbrush_t* out;
@@ -196,7 +193,7 @@ void CMod_LoadBrushes(lump_t* l)
     }
 }
 
-void CMod_LoadLeafs(lump_t* l)
+static void CMod_LoadLeafs(lump_t* l)
 {
     int i;
     cLeaf_t* out;
@@ -233,7 +230,7 @@ void CMod_LoadLeafs(lump_t* l)
     cm.areaPortals = Hunk_Alloc(cm.numAreas * cm.numAreas * sizeof(*cm.areaPortals), h_high);
 }
 
-void CMod_LoadPlanes(lump_t* l)
+static void CMod_LoadPlanes(lump_t* l)
 {
     int i, j;
     cplane_t* out;
@@ -267,7 +264,7 @@ void CMod_LoadPlanes(lump_t* l)
     }
 }
 
-void CMod_LoadLeafBrushes(lump_t* l)
+static void CMod_LoadLeafBrushes(lump_t* l)
 {
     int i;
     int* out;
@@ -289,7 +286,7 @@ void CMod_LoadLeafBrushes(lump_t* l)
     }
 }
 
-void CMod_LoadLeafSurfaces(lump_t* l)
+static void CMod_LoadLeafSurfaces(lump_t* l)
 {
     int i;
     int* out;
@@ -311,7 +308,7 @@ void CMod_LoadLeafSurfaces(lump_t* l)
     }
 }
 
-void CMod_LoadBrushSides(lump_t* l)
+static void CMod_LoadBrushSides(lump_t* l)
 {
     int i;
     cbrushside_t* out;
@@ -341,7 +338,7 @@ void CMod_LoadBrushSides(lump_t* l)
     }
 }
 
-void CMod_LoadEntityString(lump_t* l)
+static void CMod_LoadEntityString(lump_t* l)
 {
     cm.entityString = Hunk_Alloc(l->filelen, h_high);
     cm.numEntityChars = l->filelen;
@@ -349,7 +346,7 @@ void CMod_LoadEntityString(lump_t* l)
 }
 
 #define VIS_HEADER 8
-void CMod_LoadVisibility(lump_t* l)
+static void CMod_LoadVisibility(lump_t* l)
 {
     int len;
     uint8_t* buf;
@@ -373,7 +370,7 @@ void CMod_LoadVisibility(lump_t* l)
 //==================================================================
 
 #define MAX_PATCH_VERTS 1024
-void CMod_LoadPatches(lump_t* surfs, lump_t* verts)
+static void CMod_LoadPatches(lump_t* surfs, lump_t* verts)
 {
     drawVert_t *dv, *dv_p;
     dsurface_t* in;

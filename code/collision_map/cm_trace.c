@@ -36,8 +36,8 @@ BASIC MATH
 ===============================================================================
 */
 
-void RotatePoint(vec3_t point, /*const*/ vec3_t matrix[3])
-{ // FIXME
+static void RotatePoint(vec3_t point, const vec3_t matrix[3])
+{
     vec3_t tvec;
 
     VectorCopy(point, tvec);
@@ -46,7 +46,7 @@ void RotatePoint(vec3_t point, /*const*/ vec3_t matrix[3])
     point[2] = DotProduct(matrix[2], tvec);
 }
 
-void TransposeMatrix(/*const*/ vec3_t matrix[3], vec3_t transpose[3])
+static void TransposeMatrix(const vec3_t matrix[3], vec3_t transpose[3])
 { // FIXME
     int i, j;
     for (i = 0; i < 3; i++) {
@@ -56,13 +56,13 @@ void TransposeMatrix(/*const*/ vec3_t matrix[3], vec3_t transpose[3])
     }
 }
 
-void CreateRotationMatrix(const vec3_t angles, vec3_t matrix[3])
+static void CreateRotationMatrix(const vec3_t angles, vec3_t matrix[3])
 {
     AngleVectors(angles, matrix[0], matrix[1], matrix[2]);
     VectorInverse(matrix[1]);
 }
 
-void CM_ProjectPointOntoVector(vec3_t point, vec3_t vStart, vec3_t vDir, vec3_t vProj)
+static void CM_ProjectPointOntoVector(vec3_t point, vec3_t vStart, vec3_t vDir, vec3_t vProj)
 {
     vec3_t pVec;
 
@@ -71,7 +71,7 @@ void CM_ProjectPointOntoVector(vec3_t point, vec3_t vStart, vec3_t vDir, vec3_t 
     VectorMA(vStart, DotProduct(pVec, vDir), vDir, vProj);
 }
 
-float CM_DistanceFromLineSquared(vec3_t p, vec3_t lp1, vec3_t lp2, vec3_t dir)
+static float CM_DistanceFromLineSquared(vec3_t p, vec3_t lp1, vec3_t lp2, vec3_t dir)
 {
     vec3_t proj, t;
     int j;
@@ -91,7 +91,7 @@ float CM_DistanceFromLineSquared(vec3_t p, vec3_t lp1, vec3_t lp2, vec3_t dir)
     return VectorLengthSquared(t);
 }
 
-float SquareRootFloat(float number)
+static float SquareRootFloat(float number)
 {
     floatint_t t;
     float x, y;
@@ -106,7 +106,7 @@ float SquareRootFloat(float number)
     return number * y;
 }
 
-void CM_TestBoxInBrush(traceWork_t* tw, cbrush_t* brush)
+static void CM_TestBoxInBrush(traceWork_t* tw, cbrush_t* brush)
 {
     int i;
     cplane_t* plane;
@@ -177,7 +177,7 @@ void CM_TestBoxInBrush(traceWork_t* tw, cbrush_t* brush)
     tw->trace.contents = brush->contents;
 }
 
-void CM_TestInLeaf(traceWork_t* tw, cLeaf_t* leaf)
+static void CM_TestInLeaf(traceWork_t* tw, cLeaf_t* leaf)
 {
     int k;
     int brushnum;
@@ -236,7 +236,7 @@ CM_TestCapsuleInCapsule
 capsule inside capsule check
 ==================
 */
-void CM_TestCapsuleInCapsule(traceWork_t* tw, clipHandle_t model)
+static void CM_TestCapsuleInCapsule(traceWork_t* tw, clipHandle_t model)
 {
     int i;
     vec3_t mins, maxs;
@@ -305,7 +305,7 @@ CM_TestBoundingBoxInCapsule
 bounding box inside capsule check
 ==================
 */
-void CM_TestBoundingBoxInCapsule(traceWork_t* tw, clipHandle_t model)
+static void CM_TestBoundingBoxInCapsule(traceWork_t* tw, clipHandle_t model)
 {
     vec3_t mins, maxs, offset, size[2];
     clipHandle_t h;
@@ -338,7 +338,7 @@ void CM_TestBoundingBoxInCapsule(traceWork_t* tw, clipHandle_t model)
 }
 
 #define MAX_POSITION_LEAFS 1024
-void CM_PositionTest(traceWork_t* tw)
+static void CM_PositionTest(traceWork_t* tw)
 {
     int leafs[MAX_POSITION_LEAFS];
     int i;
@@ -375,7 +375,7 @@ void CM_PositionTest(traceWork_t* tw)
     }
 }
 
-void CM_TraceThroughPatch(traceWork_t* tw, cPatch_t* patch)
+static void CM_TraceThroughPatch(traceWork_t* tw, cPatch_t* patch)
 {
     float oldFrac;
 
@@ -391,7 +391,7 @@ void CM_TraceThroughPatch(traceWork_t* tw, cPatch_t* patch)
     }
 }
 
-void CM_TraceThroughBrush(traceWork_t* tw, cbrush_t* brush)
+static void CM_TraceThroughBrush(traceWork_t* tw, cbrush_t* brush)
 {
     int i;
     cplane_t *plane, *clipplane;
@@ -565,7 +565,7 @@ void CM_TraceThroughBrush(traceWork_t* tw, cbrush_t* brush)
     }
 }
 
-void CM_TraceThroughLeaf(traceWork_t* tw, cLeaf_t* leaf)
+static void CM_TraceThroughLeaf(traceWork_t* tw, cLeaf_t* leaf)
 {
     int k;
     int brushnum;
@@ -630,7 +630,7 @@ CM_TraceThroughSphere
 get the first intersection of the ray with the sphere
 ================
 */
-void CM_TraceThroughSphere(traceWork_t* tw, vec3_t origin, float radius, vec3_t start, vec3_t end)
+static void CM_TraceThroughSphere(traceWork_t* tw, vec3_t origin, float radius, vec3_t start, vec3_t end)
 {
     float l1, l2, length, scale, fraction;
     float b, c, d, sqrtd;
@@ -712,7 +712,7 @@ get the first intersection of the ray with the cylinder
 the cylinder extends halfheight above and below the origin
 ================
 */
-void CM_TraceThroughVerticalCylinder(traceWork_t* tw, vec3_t origin, float radius, float halfheight, vec3_t start, vec3_t end)
+static void CM_TraceThroughVerticalCylinder(traceWork_t* tw, vec3_t origin, float radius, float halfheight, vec3_t start, vec3_t end)
 {
     float length, scale, fraction, l1, l2;
     float b, c, d, sqrtd;
@@ -805,7 +805,7 @@ CM_TraceCapsuleThroughCapsule
 capsule vs. capsule collision (not rotated)
 ================
 */
-void CM_TraceCapsuleThroughCapsule(traceWork_t* tw, clipHandle_t model)
+static void CM_TraceCapsuleThroughCapsule(traceWork_t* tw, clipHandle_t model)
 {
     int i;
     vec3_t mins, maxs;
@@ -867,7 +867,7 @@ CM_TraceBoundingBoxThroughCapsule
 bounding box vs. capsule collision
 ================
 */
-void CM_TraceBoundingBoxThroughCapsule(traceWork_t* tw, clipHandle_t model)
+static void CM_TraceBoundingBoxThroughCapsule(traceWork_t* tw, clipHandle_t model)
 {
     vec3_t mins, maxs, offset, size[2];
     clipHandle_t h;
@@ -911,7 +911,7 @@ trace volumes it is possible to hit something in a later leaf with
 a smaller intercept fraction.
 ==================
 */
-void CM_TraceThroughTree(traceWork_t* tw, int num, float p1f, float p2f, vec3_t p1, vec3_t p2)
+static void CM_TraceThroughTree(traceWork_t* tw, int num, float p1f, float p2f, vec3_t p1, vec3_t p2)
 {
     cNode_t* node;
     cplane_t* plane;
@@ -1015,8 +1015,7 @@ void CM_TraceThroughTree(traceWork_t* tw, int num, float p1f, float p2f, vec3_t 
 
 //======================================================================
 
-void CM_Trace(trace_t* results, const vec3_t start, const vec3_t end, vec3_t mins, vec3_t maxs,
-              clipHandle_t model, const vec3_t origin, int brushmask, int capsule, sphere_t* sphere)
+static void CM_Trace(trace_t* results, const vec3_t start, const vec3_t end, vec3_t mins, vec3_t maxs, clipHandle_t model, const vec3_t origin, int brushmask, int capsule, sphere_t* sphere)
 {
     int i;
     traceWork_t tw;

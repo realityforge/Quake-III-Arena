@@ -178,9 +178,10 @@ void CM_StoreLeafs(leafList_t* ll, int nodenum);
 
 void CM_BoxLeafnums_r(leafList_t* ll, int nodenum);
 
+// cm_load.c
+
+void CM_InitBoxHull(void);
 cmodel_t* CM_ClipHandleToModel(clipHandle_t handle);
-bool CM_BoundsIntersect(const vec3_t mins, const vec3_t maxs, const vec3_t mins2, const vec3_t maxs2);
-bool CM_BoundsIntersectPoint(const vec3_t mins, const vec3_t maxs, const vec3_t point);
 
 // cm_patch.c
 
@@ -188,3 +189,9 @@ struct patchCollide_s* CM_GeneratePatchCollide(int width, int height, vec3_t* po
 void CM_TraceThroughPatchCollide(traceWork_t* tw, const struct patchCollide_s* pc);
 bool CM_PositionTestInPatchCollide(traceWork_t* tw, const struct patchCollide_s* pc);
 void CM_ClearLevelPatches(void);
+
+// cm_test.c
+
+void CM_FloodAreaConnections(void);
+bool CM_BoundsIntersect(const vec3_t mins, const vec3_t maxs, const vec3_t mins2, const vec3_t maxs2);
+bool CM_BoundsIntersectPoint(const vec3_t mins, const vec3_t maxs, const vec3_t point);
