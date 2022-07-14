@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // this is only used for visualization tools in cm_ debug functions
 
 #include "cm_local.h"
+#include "qfiles.h"
 
 // counters are only bumped when running single threaded,
 // because they are an awful coherence problem
