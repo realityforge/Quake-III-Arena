@@ -58,7 +58,7 @@ Favorites_Add
 Add current server to favorites
 =================
 */
-void Favorites_Add(void)
+static void Favorites_Add()
 {
     char adrstr[128];
     char serverbuff[128];
@@ -106,7 +106,7 @@ static void ServerInfo_Event(void* ptr, int event)
     }
 }
 
-static void ServerInfo_MenuDraw(void)
+static void ServerInfo_MenuDraw()
 {
     const char* s;
     char key[MAX_INFO_KEY];
@@ -137,7 +137,7 @@ static sfxHandle_t ServerInfo_MenuKey(int key)
     return (Menu_DefaultKey(&s_serverinfo.menu, key));
 }
 
-void ServerInfo_Cache(void)
+void ServerInfo_Cache()
 {
     int i;
 
@@ -149,7 +149,7 @@ void ServerInfo_Cache(void)
     }
 }
 
-void UI_ServerInfoMenu(void)
+void UI_ServerInfoMenu()
 {
     const char* s;
     char key[MAX_INFO_KEY];

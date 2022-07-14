@@ -43,7 +43,7 @@ static int ui_numSpecialSinglePlayerArenas;
 static char memoryPool[POOLSIZE];
 static int allocPoint, outOfMemory;
 
-void* UI_Alloc(int size)
+static void* UI_Alloc(int size)
 {
     char* p;
 
@@ -59,13 +59,13 @@ void* UI_Alloc(int size)
     return p;
 }
 
-void UI_InitMemory(void)
+static void UI_InitMemory()
 {
     allocPoint = 0;
     outOfMemory = false;
 }
 
-int UI_ParseInfos(char* buf, int max, char* infos[])
+static int UI_ParseInfos(char* buf, int max, char* infos[])
 {
     char* token;
     int count;
@@ -141,7 +141,7 @@ static void UI_LoadArenasFromFile(char* filename)
     ui_numArenas += UI_ParseInfos(buf, MAX_ARENAS - ui_numArenas, &ui_arenaInfos[ui_numArenas]);
 }
 
-static void UI_LoadArenas(void)
+static void UI_LoadArenas()
 {
     int numdirs;
     vmCvar_t arenasFile;
@@ -310,7 +310,7 @@ static void UI_LoadBotsFromFile(char* filename)
         trap_Print(S_COLOR_YELLOW "WARNING: not enough memory in pool to load all bots\n");
 }
 
-static void UI_LoadBots(void)
+static void UI_LoadBots()
 {
     vmCvar_t botsFile;
     int numdirs;
@@ -572,7 +572,7 @@ UI_GetCurrentGame
 Returns the next level the player has not won
 ===============
 */
-int UI_GetCurrentGame(void)
+int UI_GetCurrentGame()
 {
     int level;
     int rank;
@@ -609,7 +609,7 @@ UI_NewGame
 Clears the scores and sets the difficutly level
 ===============
 */
-void UI_NewGame(void)
+void UI_NewGame()
 {
     trap_Cvar_Set("g_spScores1", "");
     trap_Cvar_Set("g_spScores2", "");
@@ -620,27 +620,27 @@ void UI_NewGame(void)
     trap_Cvar_Set("g_spVideos", "");
 }
 
-int UI_GetNumArenas(void)
+int UI_GetNumArenas()
 {
     return ui_numArenas;
 }
 
-int UI_GetNumSPArenas(void)
+int UI_GetNumSPArenas()
 {
     return ui_numSinglePlayerArenas;
 }
 
-int UI_GetNumSPTiers(void)
+int UI_GetNumSPTiers()
 {
     return ui_numSinglePlayerArenas / ARENAS_PER_TIER;
 }
 
-int UI_GetNumBots(void)
+int UI_GetNumBots()
 {
     return ui_numBots;
 }
 
-void UI_SPUnlock_f(void)
+void UI_SPUnlock_f()
 {
     char arenaKey[16];
     char scores[MAX_INFO_VALUE];
@@ -667,7 +667,7 @@ void UI_SPUnlock_f(void)
     UI_SPLevelMenu_ReInit();
 }
 
-void UI_SPUnlockMedals_f(void)
+void UI_SPUnlockMedals_f()
 {
     int n;
     char key[16];
@@ -685,7 +685,7 @@ void UI_SPUnlockMedals_f(void)
     trap_Print("All levels unlocked at 100\n");
 }
 
-void UI_InitGameinfo(void)
+void UI_InitGameinfo()
 {
 
     UI_InitMemory();

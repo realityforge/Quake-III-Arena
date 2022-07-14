@@ -257,7 +257,7 @@ static void UI_SPPostgameMenu_MenuDrawScoreLine(int n, int y)
     UI_DrawString(640 - 25 * SMALLCHAR_WIDTH, y, va("#%i: %-16s %2i", rank + 1, name, postgameMenuInfo.scores[n]), UI_LEFT | UI_SMALLFONT, color_white);
 }
 
-static void UI_SPPostgameMenu_MenuDraw(void)
+static void UI_SPPostgameMenu_MenuDraw()
 {
     int timer;
     int serverId;
@@ -349,7 +349,7 @@ static void UI_SPPostgameMenu_MenuDraw(void)
     UI_SPPostgameMenu_MenuDrawScoreLine(n + 2, 0 + 2 * SMALLCHAR_HEIGHT);
 }
 
-void UI_SPPostgameMenu_Cache(void)
+void UI_SPPostgameMenu_Cache()
 {
     int n;
     bool buildscript;
@@ -374,7 +374,7 @@ void UI_SPPostgameMenu_Cache(void)
     }
 }
 
-static void UI_SPPostgameMenu_Init(void)
+static void UI_SPPostgameMenu_Init()
 {
     postgameMenuInfo.menu.wrapAround = true;
     postgameMenuInfo.menu.key = UI_SPPostgameMenu_MenuKey;
@@ -440,7 +440,7 @@ static void Prepname(int index)
     Q_strncpyz(postgameMenuInfo.placeNames[index], name, sizeof(postgameMenuInfo.placeNames[index]));
 }
 
-void UI_SPPostgameMenu_f(void)
+void UI_SPPostgameMenu_f()
 {
     int playerGameRank;
     int playerClientNum;

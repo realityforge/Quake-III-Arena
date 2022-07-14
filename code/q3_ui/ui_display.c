@@ -101,7 +101,7 @@ static void UI_DisplayOptionsMenu_Event(void* ptr, int event)
     }
 }
 
-static void UI_DisplayOptionsMenu_Init(void)
+static void UI_DisplayOptionsMenu_Init()
 {
     int y;
 
@@ -226,7 +226,7 @@ static void UI_DisplayOptionsMenu_Init(void)
     displayOptionsInfo.screensize.curvalue = trap_Cvar_VariableValue("cg_viewsize") / 10;
 }
 
-void UI_DisplayOptionsMenu_Cache(void)
+void UI_DisplayOptionsMenu_Cache()
 {
     trap_R_RegisterShaderNoMip(ART_FRAMEL);
     trap_R_RegisterShaderNoMip(ART_FRAMER);
@@ -234,7 +234,7 @@ void UI_DisplayOptionsMenu_Cache(void)
     trap_R_RegisterShaderNoMip(ART_BACK1);
 }
 
-void UI_DisplayOptionsMenu(void)
+void UI_DisplayOptionsMenu()
 {
     UI_DisplayOptionsMenu_Init();
     UI_PushMenu(&displayOptionsInfo.menu);

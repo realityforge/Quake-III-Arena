@@ -132,7 +132,7 @@ static void UI_TeamOrdersMenu_SetList(int id)
     teamOrdersMenuInfo.list.generic.bottom = teamOrdersMenuInfo.list.generic.top + teamOrdersMenuInfo.list.numitems * PROP_HEIGHT;
 }
 
-sfxHandle_t UI_TeamOrdersMenu_Key(int key)
+static sfxHandle_t UI_TeamOrdersMenu_Key(int key)
 {
     menulist_s* l;
     int x;
@@ -250,7 +250,7 @@ static void UI_TeamOrdersMenu_ListEvent(void* ptr, int event)
     UI_PopMenu();
 }
 
-static void UI_TeamOrdersMenu_BuildBotList(void)
+static void UI_TeamOrdersMenu_BuildBotList()
 {
     uiClientState_t cs;
     int numPlayers;
@@ -299,7 +299,7 @@ static void UI_TeamOrdersMenu_BuildBotList(void)
     }
 }
 
-static void UI_TeamOrdersMenu_Init(void)
+static void UI_TeamOrdersMenu_Init()
 {
     UI_TeamOrdersMenu_Cache();
 
@@ -352,20 +352,20 @@ static void UI_TeamOrdersMenu_Init(void)
     UI_TeamOrdersMenu_SetList(ID_LIST_BOTS);
 }
 
-void UI_TeamOrdersMenu_Cache(void)
+void UI_TeamOrdersMenu_Cache()
 {
     trap_R_RegisterShaderNoMip(ART_FRAME);
     trap_R_RegisterShaderNoMip(ART_BACK0);
     trap_R_RegisterShaderNoMip(ART_BACK1);
 }
 
-void UI_TeamOrdersMenu(void)
+void UI_TeamOrdersMenu()
 {
     UI_TeamOrdersMenu_Init();
     UI_PushMenu(&teamOrdersMenuInfo.menu);
 }
 
-void UI_TeamOrdersMenu_f(void)
+void UI_TeamOrdersMenu_f()
 {
     uiClientState_t cs;
     char info[MAX_INFO_STRING];

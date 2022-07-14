@@ -1055,7 +1055,7 @@ void Menu_AddItem(menuframework_t* menu, void* item)
     menu->nitems++;
 }
 
-void Menu_CursorMoved(menuframework_t* m)
+static void Menu_CursorMoved(menuframework_t* m)
 {
     void (*callback)(void* self, int notification);
 
@@ -1248,7 +1248,7 @@ void* Menu_ItemAtCursor(menuframework_t* m)
     return m->items[m->cursor];
 }
 
-sfxHandle_t Menu_ActivateItem(menuframework_t* s, menucommon_s* item)
+static sfxHandle_t Menu_ActivateItem(menuframework_t* s, menucommon_s* item)
 {
     if (item->callback) {
         item->callback(item, QM_ACTIVATED);
@@ -1382,7 +1382,7 @@ sfxHandle_t Menu_DefaultKey(menuframework_t* m, int key)
     return sound;
 }
 
-void Menu_Cache(void)
+void Menu_Cache()
 {
     uis.charset = trap_R_RegisterShaderNoMip("gfx/2d/bigchars");
     uis.charsetProp = trap_R_RegisterShaderNoMip("menu/art/font1_prop.png");

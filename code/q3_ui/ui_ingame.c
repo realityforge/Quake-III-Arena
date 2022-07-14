@@ -81,7 +81,7 @@ static void InGame_QuitAction(bool result)
     UI_CreditMenu();
 }
 
-void InGame_Event(void* ptr, int notification)
+static void InGame_Event(void* ptr, int notification)
 {
     if (notification != QM_ACTIVATED) {
         return;
@@ -130,7 +130,7 @@ void InGame_Event(void* ptr, int notification)
     }
 }
 
-void InGame_MenuInit(void)
+static void InGame_MenuInit()
 {
     int y;
     uiClientState_t cs;
@@ -295,12 +295,12 @@ void InGame_MenuInit(void)
     Menu_AddItem(&s_ingame.menu, &s_ingame.quit);
 }
 
-void InGame_Cache(void)
+void InGame_Cache()
 {
     trap_R_RegisterShaderNoMip(INGAME_FRAME);
 }
 
-void UI_InGameMenu(void)
+void UI_InGameMenu()
 {
     // force as top level menu
     uis.menusp = 0;

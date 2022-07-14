@@ -102,7 +102,7 @@ typedef struct
 
 static playermodel_t s_playermodel;
 
-static void PlayerModel_UpdateGrid(void)
+static void PlayerModel_UpdateGrid()
 {
     int i;
     int j;
@@ -149,7 +149,7 @@ static void PlayerModel_UpdateGrid(void)
     }
 }
 
-static void PlayerModel_UpdateModel(void)
+static void PlayerModel_UpdateModel()
 {
     vec3_t viewangles;
     vec3_t moveangles;
@@ -165,7 +165,7 @@ static void PlayerModel_UpdateModel(void)
     UI_PlayerInfo_SetInfo(&s_playermodel.playerinfo, LEGS_IDLE, TORSO_STAND, viewangles, moveangles, WP_MACHINEGUN, false);
 }
 
-static void PlayerModel_SaveChanges(void)
+static void PlayerModel_SaveChanges()
 {
     trap_Cvar_Set("model", s_playermodel.modelskin);
     trap_Cvar_Set("headmodel", s_playermodel.modelskin);
@@ -319,7 +319,7 @@ static void PlayerModel_DrawPlayer(void* self)
     UI_DrawPlayer(b->generic.x, b->generic.y, b->width, b->height, &s_playermodel.playerinfo, uis.realtime / 2);
 }
 
-static void PlayerModel_BuildList(void)
+static void PlayerModel_BuildList()
 {
     int numdirs;
     int numfiles;
@@ -381,7 +381,7 @@ static void PlayerModel_BuildList(void)
         s_playermodel.numpages++;
 }
 
-static void PlayerModel_SetMenuItems(void)
+static void PlayerModel_SetMenuItems()
 {
     int i;
     int maxlen;
@@ -430,7 +430,7 @@ static void PlayerModel_SetMenuItems(void)
     }
 }
 
-static void PlayerModel_MenuInit(void)
+static void PlayerModel_MenuInit()
 {
     int i;
     int j;
@@ -615,7 +615,7 @@ static void PlayerModel_MenuInit(void)
     PlayerModel_UpdateModel();
 }
 
-void PlayerModel_Cache(void)
+void PlayerModel_Cache()
 {
     int i;
 
@@ -629,7 +629,7 @@ void PlayerModel_Cache(void)
     }
 }
 
-void UI_PlayerModelMenu(void)
+void UI_PlayerModelMenu()
 {
     PlayerModel_MenuInit();
 

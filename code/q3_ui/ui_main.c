@@ -202,7 +202,7 @@ static cvarTable_t cvarTable[] = {
 
 static int cvarTableSize = sizeof(cvarTable) / sizeof(cvarTable[0]);
 
-void UI_RegisterCvars(void)
+void UI_RegisterCvars()
 {
     int i;
     cvarTable_t* cv;
@@ -212,7 +212,7 @@ void UI_RegisterCvars(void)
     }
 }
 
-void UI_UpdateCvars(void)
+void UI_UpdateCvars()
 {
     int i;
     cvarTable_t* cv;

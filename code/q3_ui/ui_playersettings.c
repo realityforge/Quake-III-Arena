@@ -228,7 +228,7 @@ static void PlayerSettings_DrawPlayer(void* self)
     UI_DrawPlayer(b->generic.x, b->generic.y, b->width, b->height, &s_playersettings.playerinfo, uis.realtime / 2);
 }
 
-static void PlayerSettings_SaveChanges(void)
+static void PlayerSettings_SaveChanges()
 {
     // name
     trap_Cvar_Set("name", s_playersettings.name.field.buffer);
@@ -248,7 +248,7 @@ static sfxHandle_t PlayerSettings_MenuKey(int key)
     return Menu_DefaultKey(&s_playersettings.menu, key);
 }
 
-static void PlayerSettings_SetMenuItems(void)
+static void PlayerSettings_SetMenuItems()
 {
     vec3_t viewangles;
     int c;
@@ -302,7 +302,7 @@ static void PlayerSettings_MenuEvent(void* ptr, int event)
     }
 }
 
-static void PlayerSettings_MenuInit(void)
+static void PlayerSettings_MenuInit()
 {
     int y;
 
@@ -430,7 +430,7 @@ static void PlayerSettings_MenuInit(void)
     PlayerSettings_SetMenuItems();
 }
 
-void PlayerSettings_Cache(void)
+void PlayerSettings_Cache()
 {
     trap_R_RegisterShaderNoMip(ART_FRAMEL);
     trap_R_RegisterShaderNoMip(ART_FRAMER);
@@ -449,7 +449,7 @@ void PlayerSettings_Cache(void)
     s_playersettings.fxPic[6] = trap_R_RegisterShaderNoMip(ART_FX_WHITE);
 }
 
-void UI_PlayerSettingsMenu(void)
+void UI_PlayerSettingsMenu()
 {
     PlayerSettings_MenuInit();
     UI_PushMenu(&s_playersettings.menu);
