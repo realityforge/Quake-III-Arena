@@ -1,0 +1,84 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+load("@rules_cc//cc:defs.bzl", "cc_library")
+load("//build_defs:rules.bzl", "DIST_VISIBILITY", "ENGINE_DEFINES", "EXTRA_WARNINGS", "SERVER_ONLY_ENGINE_DEFINES")
+
+_SERVER_SRC = [
+    "sv_bot.c",
+    "sv_ccmds.c",
+    "sv_client.c",
+    "sv_game.c",
+    "sv_init.c",
+    "sv_main.c",
+    "sv_net_chan.c",
+    "sv_snapshot.c",
+    "sv_world.c",
+]
+
+# TODO: pointer-to-int-cast highlights errors that result from VM<->game communication in non-32-bit platforms. This will be obsolete when wasm is integrated
+SERVER_COPTS = EXTRA_WARNINGS + [
+    "-Wno-pointer-to-int-cast",
+    "-Wno-int-to-pointer-cast",
+]
+
+# TODO: Rename "server.h" to "server_local.h"
+
+cc_library(
+    name = "server",
+    srcs = _SERVER_SRC,
+    hdrs = ["server.h"],
+    copts = SERVER_COPTS,
+    defines = ENGINE_DEFINES,
+    visibility = ["//code/client:__pkg__"],
+    deps = [
+        "//code/botlib:api",
+        "//code/game:bg_api",
+        "//code/game:server_api",
+        "//code/qcommon",
+        "//code/qcommon:qbraincheck",
+        "//code/qcommon:shared_api",
+    ],
+)
+
+cc_library(
+    name = "server-dedicated",
+    srcs = _SERVER_SRC,
+    hdrs = ["server.h"],
+    copts = SERVER_COPTS,
+    defines = SERVER_ONLY_ENGINE_DEFINES,
+    deps = [
+        "//code/botlib:api",
+        "//code/game:bg_api",
+        "//code/game:server_api",
+        "//code/qcommon",
+        "//code/qcommon:qbraincheck",
+        "//code/qcommon:shared_api",
+    ],
+)
+
+cc_library(
+    name = "ded",
+    visibility = DIST_VISIBILITY,
+    deps = [
+        ":server-dedicated",
+        "//code/botlib:botlib_impl",
+        "//code/qcommon:cm",
+        "//code/qcommon:cmd-dedicated",
+        "//code/qcommon:common-dedicated",
+        "//code/qcommon:cvar",
+        "//code/qcommon:files-dedicated",
+        "//code/qcommon:md4",
+        "//code/qcommon:net-dedicated",
+        "//code/qcommon:vm",
+    ],
+)
