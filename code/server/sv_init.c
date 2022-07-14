@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "server.h"
+#include "qengine.h"
 
 // we don't need nearly as many when playing locally
 #ifdef DEDICATED
