@@ -625,7 +625,7 @@ void _UI_Refresh(int realtime)
 #endif
 }
 
-void _UI_Shutdown(void)
+void _UI_Shutdown()
 {
     trap_LAN_SaveCachedServers();
 }
@@ -806,7 +806,7 @@ static bool Asset_Parse(int handle)
     return false;
 }
 
-void UI_Report(void)
+void UI_Report()
 {
     String_Report();
 }
@@ -935,7 +935,7 @@ void UI_LoadMenus(const char* menuFile, bool reset)
     trap_PC_FreeSource(handle);
 }
 
-void UI_Load(void)
+void UI_Load()
 {
     char lastName[1024];
     menuDef_t* menu = Menu_GetFocused();
@@ -1424,7 +1424,7 @@ static void UI_DrawOpponent(rectDef_t* rect)
     UI_DrawPlayer(rect->x, rect->y, rect->w, rect->h, &info2, uiInfo.uiDC.realTime / 2);
 }
 
-static void UI_NextOpponent(void)
+static void UI_NextOpponent()
 {
     int i = UI_TeamIndexFromName(UI_Cvar_VariableString("ui_opponentName"));
     int j = UI_TeamIndexFromName(UI_Cvar_VariableString("ui_teamName"));
@@ -1441,7 +1441,7 @@ static void UI_NextOpponent(void)
     trap_Cvar_Set("ui_opponentName", uiInfo.teamList[i].teamName);
 }
 
-static void UI_PriorOpponent(void)
+static void UI_PriorOpponent()
 {
     int i = UI_TeamIndexFromName(UI_Cvar_VariableString("ui_opponentName"));
     int j = UI_TeamIndexFromName(UI_Cvar_VariableString("ui_teamName"));
@@ -1708,7 +1708,7 @@ static void UI_DrawCrosshair(rectDef_t* rect, float scale, vec4_t color)
     trap_R_SetColor(NULL);
 }
 
-static void UI_BuildPlayerList(void)
+static void UI_BuildPlayerList()
 {
     uiClientState_t cs;
     int n, count, team, team2, playerTeamNumber;
@@ -2708,7 +2708,7 @@ static void UI_StartSinglePlayer(void) {
 }
 */
 
-static void UI_LoadMods(void)
+static void UI_LoadMods()
 {
     int numdirs;
     char dirlist[2048];
@@ -2733,7 +2733,7 @@ static void UI_LoadMods(void)
     }
 }
 
-static void UI_LoadTeams(void)
+static void UI_LoadTeams()
 {
     char teamList[4096];
     char* teamName;
@@ -2751,7 +2751,7 @@ static void UI_LoadTeams(void)
     }
 }
 
-static void UI_LoadMovies(void)
+static void UI_LoadMovies()
 {
     char movielist[4096];
     char* moviename;
@@ -2778,7 +2778,7 @@ static void UI_LoadMovies(void)
 
 #define NAMEBUFSIZE (MAX_DEMOS * 32)
 
-static void UI_LoadDemos(void)
+static void UI_LoadDemos()
 {
     char demolist[NAMEBUFSIZE];
     char demoExt[32];
@@ -3427,7 +3427,7 @@ static bool UI_hasSkinForBase(const char* base, const char* team)
     return false;
 }
 
-static int UI_HeadCountByTeam(void)
+static int UI_HeadCountByTeam()
 {
     static int init = 0;
     int i, j, k, c, tIndex;
@@ -4066,7 +4066,7 @@ static int UI_GetIndexFromSelection(int actual)
     return 0;
 }
 
-static void UI_UpdatePendingPings(void)
+static void UI_UpdatePendingPings()
 {
     trap_LAN_ResetPings(UI_SourceForLAN());
     uiInfo.serverStatus.refreshActive = true;
@@ -4742,7 +4742,7 @@ static void UI_RunCinematicFrame(int handle)
     trap_CIN_RunCinematic(handle);
 }
 
-static void UI_BuildQ3Model_List(void)
+static void UI_BuildQ3Model_List()
 {
     int numdirs;
     int numfiles;
@@ -4802,7 +4802,7 @@ static void UI_BuildQ3Model_List(void)
     }
 }
 
-void _UI_Init(void)
+void _UI_Init()
 {
     const char* menuSet;
 
@@ -5035,7 +5035,7 @@ void _UI_SetActiveMenu(uiMenuCommand_t menu)
     }
 }
 
-bool _UI_IsFullscreen(void)
+bool _UI_IsFullscreen()
 {
     return Menus_AnyFullScreenVisible();
 }
@@ -5538,7 +5538,7 @@ static cvarTable_t cvarTable[] = {
 
 static int cvarTableSize = ARRAY_LEN(cvarTable);
 
-void UI_RegisterCvars(void)
+void UI_RegisterCvars()
 {
     int i;
     cvarTable_t* cv;
@@ -5548,7 +5548,7 @@ void UI_RegisterCvars(void)
     }
 }
 
-void UI_UpdateCvars(void)
+void UI_UpdateCvars()
 {
     int i;
     cvarTable_t* cv;
@@ -5562,7 +5562,7 @@ void UI_UpdateCvars(void)
     }
 }
 
-static void UI_StopServerRefresh(void)
+static void UI_StopServerRefresh()
 {
     int count;
 
@@ -5582,7 +5582,7 @@ static void UI_StopServerRefresh(void)
     }
 }
 
-static void UI_DoServerRefresh(void)
+static void UI_DoServerRefresh()
 {
     bool wait = false;
 

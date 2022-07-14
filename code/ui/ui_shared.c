@@ -99,13 +99,13 @@ void* UI_Alloc(int size)
     return p;
 }
 
-void UI_InitMemory(void)
+void UI_InitMemory()
 {
     allocPoint = 0;
     outOfMemory = false;
 }
 
-bool UI_OutOfMemory(void)
+bool UI_OutOfMemory()
 {
     return outOfMemory;
 }
@@ -197,7 +197,7 @@ const char* String_Alloc(const char* p)
     return NULL;
 }
 
-void String_Report(void)
+void String_Report()
 {
     float f;
     Com_Printf("Memory/String Pool Info\n");
@@ -212,7 +212,7 @@ void String_Report(void)
     Com_Printf("Memory Pool is %.1f%% full, %i bytes out of %i used.\n", f, allocPoint, MEM_POOL_SIZE);
 }
 
-void String_Init(void)
+void String_Init()
 {
     int i;
     for (i = 0; i < HASH_TABLE_SIZE; i++) {
@@ -2484,7 +2484,7 @@ static void Menu_CloseCinematics(menuDef_t* menu)
     }
 }
 
-static void Display_CloseCinematics(void)
+static void Display_CloseCinematics()
 {
     int i;
     for (i = 0; i < menuCount; i++) {
@@ -3188,7 +3188,7 @@ static void Controls_GetKeyAssignment(char* command, int* twokeys)
     }
 }
 
-void Controls_GetConfig(void)
+void Controls_GetConfig()
 {
     int i;
     int twokeys[2];
@@ -3221,7 +3221,7 @@ void Controls_SetConfig(bool restart)
     DC->executeText(EXEC_APPEND, "in_restart\n");
 }
 
-void Controls_SetDefaults(void)
+void Controls_SetDefaults()
 {
     int i;
 
@@ -3348,7 +3348,7 @@ static void Item_Bind_Paint(itemDef_t* item)
     }
 }
 
-bool Display_KeyBindPending(void)
+bool Display_KeyBindPending()
 {
     return g_waitingForKey;
 }
@@ -3943,7 +3943,7 @@ void Menu_Init(menuDef_t* menu)
     Window_Init(&menu->window);
 }
 
-menuDef_t* Menu_GetFocused(void)
+menuDef_t* Menu_GetFocused()
 {
     int i;
     for (i = 0; i < menuCount; i++) {
@@ -3994,7 +3994,7 @@ void Menu_SetFeederSelection(menuDef_t* menu, int feeder, int index, const char*
     }
 }
 
-bool Menus_AnyFullScreenVisible(void)
+bool Menus_AnyFullScreenVisible()
 {
     int i;
     for (i = 0; i < menuCount; i++) {
@@ -5647,7 +5647,7 @@ static keywordHash_t menuParseKeywords[] = {
 
 keywordHash_t* menuParseKeywordHash[KEYWORDHASH_SIZE];
 
-void Menu_SetupKeywordHash(void)
+void Menu_SetupKeywordHash()
 {
     int i;
 
@@ -5706,7 +5706,7 @@ void Menu_New(int handle)
     }
 }
 
-int Menu_Count(void)
+int Menu_Count()
 {
     return menuCount;
 }
@@ -5728,12 +5728,12 @@ void Menu_PaintAll()
     }
 }
 
-void Menu_Reset(void)
+void Menu_Reset()
 {
     menuCount = 0;
 }
 
-displayContextDef_t* Display_GetContext(void)
+displayContextDef_t* Display_GetContext()
 {
     return DC;
 }
@@ -5835,7 +5835,7 @@ static void Menu_CacheContents(menuDef_t* menu)
     }
 }
 
-void Display_CacheAll(void)
+void Display_CacheAll()
 {
     int i;
     for (i = 0; i < menuCount; i++) {

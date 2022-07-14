@@ -111,7 +111,7 @@ static void UI_LoadArenasFromFile(char* filename)
     ui_numArenas += UI_ParseInfos(buf, MAX_ARENAS - ui_numArenas, &ui_arenaInfos[ui_numArenas]);
 }
 
-void UI_LoadArenas(void)
+void UI_LoadArenas()
 {
     int numdirs;
     vmCvar_t arenasFile;
@@ -145,7 +145,7 @@ void UI_LoadArenas(void)
     }
 }
 
-void UI_LoadArenasIntoMapList(void)
+void UI_LoadArenasIntoMapList()
 {
     int n;
     char* type;
@@ -220,7 +220,7 @@ static void UI_LoadBotsFromFile(char* filename)
     ui_numBots += UI_ParseInfos(buf, MAX_BOTS - ui_numBots, &ui_botInfos[ui_numBots]);
 }
 
-void UI_LoadBots(void)
+void UI_LoadBots()
 {
     vmCvar_t botsFile;
     int numdirs;
@@ -275,7 +275,7 @@ char* UI_GetBotInfoByName(const char* name)
     return NULL;
 }
 
-int UI_GetNumBots(void)
+int UI_GetNumBots()
 {
     return ui_numBots;
 }

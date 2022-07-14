@@ -143,7 +143,7 @@ void UI_LoadBestScores(const char* map, int game)
     }
 }
 
-void UI_ClearScores(void)
+void UI_ClearScores()
 {
     char gameList[4096];
     char* gameFile;
@@ -172,12 +172,12 @@ void UI_ClearScores(void)
     UI_SetBestScores(&newInfo, false);
 }
 
-static void UI_Cache_f(void)
+static void UI_Cache_f()
 {
     Display_CacheAll();
 }
 
-static void UI_CalcPostGameStats(void)
+static void UI_CalcPostGameStats()
 {
     char map[MAX_QPATH];
     char fileName[MAX_QPATH];
@@ -331,7 +331,7 @@ bool UI_ConsoleCommand(int realTime)
     return false;
 }
 
-void UI_Shutdown(void)
+void UI_Shutdown()
 {
 }
 
