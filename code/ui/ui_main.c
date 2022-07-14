@@ -617,7 +617,7 @@ void _UI_Refresh(int realtime)
 #endif
 }
 
-void _UI_Shutdown(void)
+void _UI_Shutdown()
 {
     trap_LAN_SaveCachedServers();
 }
@@ -4705,7 +4705,7 @@ static void UI_RunCinematicFrame(int handle)
     trap_CIN_RunCinematic(handle);
 }
 
-static void UI_BuildQ3Model_List(void)
+static void UI_BuildQ3Model_List()
 {
     int numdirs;
     int numfiles;
@@ -4987,7 +4987,7 @@ void _UI_SetActiveMenu(uiMenuCommand_t menu)
     }
 }
 
-bool _UI_IsFullscreen(void)
+bool _UI_IsFullscreen()
 {
     return Menus_AnyFullScreenVisible();
 }
@@ -5486,7 +5486,7 @@ static cvarTable_t cvarTable[] = {
 
 static int cvarTableSize = sizeof(cvarTable) / sizeof(cvarTable[0]);
 
-void UI_RegisterCvars(void)
+void UI_RegisterCvars()
 {
     int i;
     cvarTable_t* cv;
@@ -5496,7 +5496,7 @@ void UI_RegisterCvars(void)
     }
 }
 
-void UI_UpdateCvars(void)
+void UI_UpdateCvars()
 {
     int i;
     cvarTable_t* cv;
@@ -5506,7 +5506,7 @@ void UI_UpdateCvars(void)
     }
 }
 
-static void UI_StopServerRefresh(void)
+static void UI_StopServerRefresh()
 {
     int count;
 
@@ -5526,7 +5526,7 @@ static void UI_StopServerRefresh(void)
     }
 }
 
-static void UI_DoServerRefresh(void)
+static void UI_DoServerRefresh()
 {
     bool wait = false;
 

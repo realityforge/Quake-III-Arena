@@ -328,7 +328,7 @@ bool UI_ConsoleCommand(int realTime)
     return false;
 }
 
-void UI_Shutdown(void)
+void UI_Shutdown()
 {
 }
 

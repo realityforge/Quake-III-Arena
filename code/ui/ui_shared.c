@@ -3093,7 +3093,7 @@ static void Controls_GetKeyAssignment(char* command, int* twokeys)
     }
 }
 
-void Controls_GetConfig(void)
+void Controls_GetConfig()
 {
     int i;
     int twokeys[2];
@@ -3126,7 +3126,7 @@ void Controls_SetConfig(bool restart)
     DC->executeText(EXEC_APPEND, "in_restart\n");
 }
 
-void Controls_SetDefaults(void)
+void Controls_SetDefaults()
 {
     int i;
 
@@ -4931,7 +4931,7 @@ keywordHash_t itemParseKeywords[] = {
 
 keywordHash_t* itemParseKeywordHash[KEYWORDHASH_SIZE];
 
-void Item_SetupKeywordHash(void)
+void Item_SetupKeywordHash()
 {
     int i;
 
