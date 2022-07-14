@@ -15,6 +15,24 @@
 #ifndef ATTRIBUTES_H
 #define ATTRIBUTES_H
 
+#ifndef UNUSED
+#if defined(__GNUC__)
+#define UNUSED __attribute__((unused))
+#else
+#define UNUSED
+#endif
+#endif
+
+#ifndef EXPORT
+#if defined(_MSC_VER)
+#define EXPORT UNUSED __declspec(dllexport)
+#elif defined(__GNUC__)
+#define EXPORT UNUSED __attribute__((visibility("default")))
+#else
+#define EXPORT UNUSED
+#endif
+#endif
+
 #ifndef NORETURN
 #if defined(__GNUC__)
 #define NORETURN __attribute__((noreturn))
