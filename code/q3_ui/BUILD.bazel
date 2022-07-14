@@ -1,0 +1,70 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+load("@rules_cc//cc:defs.bzl", "cc_library")
+load("//build_defs:rules.bzl", "EXTRA_WARNINGS", "UI_COPTS", "UI_DEFINES")
+
+cc_library(
+    name = "ui",
+    srcs = [
+        "ui_addbots.c",
+        "ui_atoms.c",
+        "ui_cinematics.c",
+        "ui_confirm.c",
+        "ui_connect.c",
+        "ui_controls2.c",
+        "ui_credits.c",
+        "ui_demo2.c",
+        "ui_display.c",
+        "ui_gameinfo.c",
+        "ui_ingame.c",
+        "ui_local.h",
+        "ui_main.c",
+        "ui_menu.c",
+        "ui_mfield.c",
+        "ui_mods.c",
+        "ui_network.c",
+        "ui_playermodel.c",
+        "ui_players.c",
+        "ui_playersettings.c",
+        "ui_preferences.c",
+        "ui_qmenu.c",
+        "ui_removebots.c",
+        "ui_serverinfo.c",
+        "ui_servers2.c",
+        "ui_setup.c",
+        "ui_sound.c",
+        "ui_sparena.c",
+        "ui_specifyserver.c",
+        "ui_splevel.c",
+        "ui_sppostgame.c",
+        "ui_spskill.c",
+        "ui_startserver.c",
+        "ui_team.c",
+        "ui_teamorders.c",
+        "ui_video.c",
+    ],
+    copts = UI_COPTS + EXTRA_WARNINGS,
+    defines = UI_DEFINES,
+    visibility = ["//game/baseq3:__pkg__"],
+    deps = [
+        "//code/client:api",
+        "//code/game:bg_api",
+        "//code/game:bg_misc-client-baseq3",
+        "//code/qcommon:plugin",
+        "//code/qcommon:shared",
+        "//code/qcommon:shared_api",
+        "//code/renderer:api",
+        "//code/ui:api",
+        "//code/ui:shared",
+    ],
+)
