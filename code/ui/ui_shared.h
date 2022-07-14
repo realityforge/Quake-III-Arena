@@ -375,13 +375,13 @@ typedef struct {
 } displayContextDef_t;
 
 const char* String_Alloc(const char* p);
-void String_Init();
-void String_Report();
+void String_Init(void);
+void String_Report(void);
 void Init_Display(displayContextDef_t* dc);
 void Menu_Init(menuDef_t* menu);
 void Item_Init(itemDef_t* item);
 void Menu_PostParse(menuDef_t* menu);
-menuDef_t* Menu_GetFocused();
+menuDef_t* Menu_GetFocused(void);
 void Menu_HandleKey(menuDef_t* menu, int key, bool down);
 void Menu_HandleMouseMove(menuDef_t* menu, float x, float y);
 void Menu_ScrollFeeder(menuDef_t* menu, int feeder, bool down);
@@ -401,27 +401,27 @@ void Menu_New(int handle);
 void Menu_PaintAll();
 menuDef_t* Menus_ActivateByName(const char* p);
 void Menu_Reset();
-bool Menus_AnyFullScreenVisible();
+bool Menus_AnyFullScreenVisible(void);
 void Menus_Activate(menuDef_t* menu);
 
 displayContextDef_t* Display_GetContext();
 void* Display_CaptureItem(int x, int y);
 bool Display_MouseMove(void* p, int x, int y);
 int Display_CursorType(int x, int y);
-bool Display_KeyBindPending();
+bool Display_KeyBindPending(void);
 void Menus_OpenByName(const char* p);
 menuDef_t* Menus_FindByName(const char* p);
 void Menus_CloseByName(const char* p);
 void Display_HandleKey(int key, bool down, int x, int y);
 void LerpColor(vec4_t a, vec4_t b, vec4_t c, float t);
-void Menus_CloseAll();
+void Menus_CloseAll(void);
 void Menu_Paint(menuDef_t* menu, bool forcePaint);
 void Menu_SetFeederSelection(menuDef_t* menu, int feeder, int index, const char* name);
 void Display_CacheAll();
 
 void* UI_Alloc(int size);
 void UI_InitMemory(void);
-bool UI_OutOfMemory();
+bool UI_OutOfMemory(void);
 
 void Controls_GetConfig(void);
 void Controls_SetConfig(bool restart);
