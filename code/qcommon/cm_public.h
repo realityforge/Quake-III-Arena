@@ -63,3 +63,7 @@ int CM_WriteAreaBits(uint8_t* buffer, int area);
 
 // cm_patch.c
 void CM_DrawDebugSurface(void (*drawPoly)(int color, int numPoints, float* points));
+
+// sv_bot.c but used by cm_patch.c
+// TODO: Migrate this to somewhere more sensible
+void BotDrawDebugPolygons(void (*drawPoly)(int color, int numPoints, float* points), int value);

@@ -1521,8 +1521,6 @@ CM_DrawDebugSurface
 Called from the renderer
 ==================
 */
-void BotDrawDebugPolygons(void (*drawPoly)(int color, int numPoints, float* points), int value);
-
 void CM_DrawDebugSurface(void (*drawPoly)(int color, int numPoints, float* points))
 {
     static cvar_t* cv;
