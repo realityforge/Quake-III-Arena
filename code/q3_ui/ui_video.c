@@ -268,11 +268,11 @@ static InitialVideoOptions_s s_ivo;
 static graphicsoptions_t s_graphicsoptions;
 
 static InitialVideoOptions_s s_ivo_templates[] = {
-    { 4, true, 2, 0, 2, 2, 1, 1, 0, true }, // JDC: this was tq 3
-    { 3, true, 2, 0, 0, 0, 1, 0, 0, true },
-    { 2, true, 1, 0, 1, 0, 0, 0, 0, true },
-    { 2, true, 1, 1, 1, 0, 0, 0, 0, true },
-    { 3, true, 1, 0, 0, 0, 1, 0, 0, true }
+    { 4, true, 2, 0, 2, 2, 1, 1, true }, // JDC: this was tq 3
+    { 3, true, 2, 0, 0, 0, 1, 0, true },
+    { 2, true, 1, 0, 1, 0, 0, 0, true },
+    { 2, true, 1, 1, 1, 0, 0, 0, true },
+    { 3, true, 1, 0, 0, 0, 1, 0, true }
 };
 
 #define NUM_IVO_TEMPLATES (sizeof(s_ivo_templates) / sizeof(s_ivo_templates[0]))
