@@ -35,7 +35,7 @@ SV_Netchan_Encode
 */
 static void SV_Netchan_Encode(client_t* client, msg_t* msg)
 {
-    long reliableAcknowledge, i, index;
+    long i, index;
     uint8_t key, *string;
     int srdc, sbit, soob;
 
@@ -51,7 +51,9 @@ static void SV_Netchan_Encode(client_t* client, msg_t* msg)
     msg->readcount = 0;
     msg->oob = 0;
 
-    reliableAcknowledge = MSG_ReadLong(msg);
+    // Need to read long but do nothing with data.
+    // TODO: Removed the "reliableAcknowledge" field from the packet
+    MSG_ReadLong(msg);
 
     msg->oob = soob;
     msg->bit = sbit;
