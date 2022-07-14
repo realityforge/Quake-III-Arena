@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "qcommon.h"
 #include "cg_local.h"
+#include "plugin.h"
 
 static vmDllSystemCall syscall = (vmDllSystemCall)-1;
 

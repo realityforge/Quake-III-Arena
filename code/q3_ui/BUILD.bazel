@@ -60,6 +60,7 @@ cc_library(
         "//code/client:api",
         "//code/game:bg_api",
         "//code/game:bg_misc-client-baseq3",
+        "//code/qcommon:plugin",
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
         "//code/renderer:api",
