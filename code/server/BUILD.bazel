@@ -11,7 +11,7 @@
 # limitations under the License.
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//build_defs:rules.bzl", "DIST_VISIBILITY", "ENGINE_DEFINES", "SERVER_ONLY_ENGINE_DEFINES")
+load("//build_defs:rules.bzl", "DIST_VISIBILITY", "ENGINE_DEFINES", "EXTRA_WARNINGS", "SERVER_ONLY_ENGINE_DEFINES")
 
 _SERVER_SRC = [
     "sv_bot.c",
@@ -25,10 +25,13 @@ _SERVER_SRC = [
     "sv_world.c",
 ]
 
+SERVER_COPTS = EXTRA_WARNINGS
+
 cc_library(
     name = "server",
     srcs = _SERVER_SRC,
     hdrs = ["server.h"],
+    copts = SERVER_COPTS,
     defines = ["USE_VOIP"] + ENGINE_DEFINES,
     visibility = ["//code/client:__pkg__"],
     deps = [
@@ -45,6 +48,7 @@ cc_library(
     name = "server-dedicated",
     srcs = _SERVER_SRC,
     hdrs = ["server.h"],
+    copts = SERVER_COPTS,
     defines = SERVER_ONLY_ENGINE_DEFINES,
     deps = [
         "//code/botlib:api",
