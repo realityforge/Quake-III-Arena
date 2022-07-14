@@ -11,11 +11,12 @@
 # limitations under the License.
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//build_defs:rules.bzl", "ENGINE_DEFINES", "FULL_WARNINGS", "SERVER_ONLY_ENGINE_DEFINES")
+load("//build_defs:rules.bzl", "ENGINE_DEFINES", "EXTRA_WARNINGS", "FULL_WARNINGS", "SERVER_ONLY_ENGINE_DEFINES")
 
 cc_library(
     name = "cm",
     hdrs = ["cm_public.h"],
+    copts = EXTRA_WARNINGS,
     includes = ["."],
     visibility = ["//code/qcommon:__pkg__"],
 )
@@ -34,6 +35,7 @@ cc_library(
         "cm_patch.h",
         "cm_polylib.h",
     ],
+    copts = EXTRA_WARNINGS,
     defines = ENGINE_DEFINES,
     visibility = [
         "//code/client:__pkg__",
