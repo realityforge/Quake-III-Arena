@@ -251,8 +251,7 @@ typedef struct {
     menubitmap_s back;
 } graphicsoptions_t;
 
-typedef struct
-{
+typedef struct initial_video_options_s {
     int mode;
     bool fullscreen;
     int tq;
@@ -262,12 +261,12 @@ typedef struct
     int geometry;
     int filter;
     bool extensions;
-} InitialVideoOptions_s;
+} initial_video_options_t;
 
-static InitialVideoOptions_s s_ivo;
+static initial_video_options_t s_ivo;
 static graphicsoptions_t s_graphicsoptions;
 
-static InitialVideoOptions_s s_ivo_templates[] = {
+static initial_video_options_t s_ivo_templates[] = {
     { 4, true, 2, 0, 2, 2, 1, 1, true }, // JDC: this was tq 3
     { 3, true, 2, 0, 0, 0, 1, 0, true },
     { 2, true, 1, 0, 1, 0, 0, 0, true },
@@ -426,7 +425,7 @@ static void GraphicsOptions_ApplyChanges(void* unused, int notification)
 
 static void GraphicsOptions_Event(void* ptr, int event)
 {
-    InitialVideoOptions_s* ivo;
+    initial_video_options_t* ivo;
 
     if (event != QM_ACTIVATED) {
         return;
