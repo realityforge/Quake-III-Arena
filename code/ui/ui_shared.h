@@ -396,15 +396,15 @@ bool PC_Int_Parse(int handle, int* i);
 bool PC_Rect_Parse(int handle, rectDef_t* r);
 bool PC_String_Parse(int handle, const char** out);
 bool PC_Script_Parse(int handle, const char** out);
-int Menu_Count();
+int Menu_Count(void);
 void Menu_New(int handle);
-void Menu_PaintAll();
+void Menu_PaintAll(void);
 menuDef_t* Menus_ActivateByName(const char* p);
-void Menu_Reset();
+void Menu_Reset(void);
 bool Menus_AnyFullScreenVisible(void);
 void Menus_Activate(menuDef_t* menu);
 
-displayContextDef_t* Display_GetContext();
+displayContextDef_t* Display_GetContext(void);
 void* Display_CaptureItem(int x, int y);
 bool Display_MouseMove(void* p, int x, int y);
 int Display_CursorType(int x, int y);
@@ -417,7 +417,7 @@ void LerpColor(vec4_t a, vec4_t b, vec4_t c, float t);
 void Menus_CloseAll(void);
 void Menu_Paint(menuDef_t* menu, bool forcePaint);
 void Menu_SetFeederSelection(menuDef_t* menu, int feeder, int index, const char* name);
-void Display_CacheAll();
+void Display_CacheAll(void);
 
 void* UI_Alloc(int size);
 void UI_InitMemory(void);
