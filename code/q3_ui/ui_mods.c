@@ -93,7 +93,7 @@ static void UI_Mods_ParseInfos(char* modDir, char* modDesc)
     s_mods.list.numitems++;
 }
 
-static void UI_Mods_LoadMods(void)
+static void UI_Mods_LoadMods()
 {
     int numdirs;
     char dirlist[2048];
@@ -126,7 +126,7 @@ static void UI_Mods_LoadMods(void)
     }
 }
 
-static void UI_Mods_MenuInit(void)
+static void UI_Mods_MenuInit()
 {
     UI_ModsMenu_Cache();
 
@@ -199,7 +199,7 @@ static void UI_Mods_MenuInit(void)
     Menu_AddItem(&s_mods.menu, &s_mods.go);
 }
 
-void UI_ModsMenu_Cache(void)
+void UI_ModsMenu_Cache()
 {
     trap_R_RegisterShaderNoMip(ART_BACK0);
     trap_R_RegisterShaderNoMip(ART_BACK1);
@@ -209,7 +209,7 @@ void UI_ModsMenu_Cache(void)
     trap_R_RegisterShaderNoMip(ART_FRAMER);
 }
 
-void UI_ModsMenu(void)
+void UI_ModsMenu()
 {
     UI_Mods_MenuInit();
     UI_PushMenu(&s_mods.menu);

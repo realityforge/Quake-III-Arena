@@ -105,7 +105,7 @@ void UI_PushMenu(menuframework_t* menu)
     uis.firstdraw = true;
 }
 
-void UI_PopMenu(void)
+void UI_PopMenu()
 {
     trap_S_StartLocalSound(menu_out_sound, CHAN_LOCAL_SOUND);
 
@@ -122,7 +122,7 @@ void UI_PopMenu(void)
     }
 }
 
-void UI_ForceMenuOff(void)
+void UI_ForceMenuOff()
 {
     uis.menusp = 0;
     uis.activemenu = NULL;
@@ -716,7 +716,7 @@ void UI_DrawChar(int x, int y, int ch, int style, vec4_t color)
     UI_DrawString(x, y, buff, style, color);
 }
 
-bool UI_IsFullscreen(void)
+bool UI_IsFullscreen()
 {
     if (uis.activemenu && (trap_Key_GetCatcher() & KEYCATCH_UI)) {
         return uis.activemenu->fullscreen;
@@ -849,7 +849,7 @@ char* UI_Cvar_VariableString(const char* var_name)
     return buffer;
 }
 
-void UI_Cache_f(void)
+static void UI_Cache_f()
 {
     MainMenu_Cache();
     InGame_Cache();
@@ -931,11 +931,11 @@ bool UI_ConsoleCommand(int realTime)
     return false;
 }
 
-void UI_Shutdown(void)
+void UI_Shutdown()
 {
 }
 
-void UI_Init(void)
+void UI_Init()
 {
     UI_RegisterCvars();
 

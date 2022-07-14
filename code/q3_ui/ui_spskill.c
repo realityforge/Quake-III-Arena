@@ -145,7 +145,7 @@ static sfxHandle_t UI_SPSkillMenu_Key(int key)
     return Menu_DefaultKey(&skillMenuInfo.menu, key);
 }
 
-void UI_SPSkillMenu_Cache(void)
+void UI_SPSkillMenu_Cache()
 {
     trap_R_RegisterShaderNoMip(ART_FRAME);
     trap_R_RegisterShaderNoMip(ART_BACK);
@@ -162,7 +162,7 @@ void UI_SPSkillMenu_Cache(void)
     skillMenuInfo.silenceSound = trap_S_RegisterSound("sound/misc/silence.wav", false);
 }
 
-static void UI_SPSkillMenu_Init(void)
+static void UI_SPSkillMenu_Init()
 {
     int skill;
 

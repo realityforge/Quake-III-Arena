@@ -170,7 +170,7 @@ static void UI_SoundOptionsMenu_Event(void* ptr, int event)
     }
 }
 
-static void SoundOptions_UpdateMenuItems(void)
+static void SoundOptions_UpdateMenuItems()
 {
     if (soundOptionsInfo.soundSystem.curvalue == UISND_SDL) {
         soundOptionsInfo.quality.generic.flags &= ~QMF_GRAYED;
@@ -194,7 +194,7 @@ static void SoundOptions_UpdateMenuItems(void)
     }
 }
 
-void SoundOptions_MenuDraw(void)
+static void SoundOptions_MenuDraw()
 {
     // APSFIX - rework this
     SoundOptions_UpdateMenuItems();
@@ -202,7 +202,7 @@ void SoundOptions_MenuDraw(void)
     Menu_Draw(&soundOptionsInfo.menu);
 }
 
-static void UI_SoundOptionsMenu_Init(void)
+static void UI_SoundOptionsMenu_Init()
 {
     int y;
     int speed;
@@ -392,7 +392,7 @@ static void UI_SoundOptionsMenu_Init(void)
     //	soundOptionsInfo.a3d.curvalue = (int)trap_Cvar_VariableValue( "s_usingA3D" );
 }
 
-void UI_SoundOptionsMenu_Cache(void)
+void UI_SoundOptionsMenu_Cache()
 {
     trap_R_RegisterShaderNoMip(ART_FRAMEL);
     trap_R_RegisterShaderNoMip(ART_FRAMER);
@@ -402,7 +402,7 @@ void UI_SoundOptionsMenu_Cache(void)
     trap_R_RegisterShaderNoMip(ART_ACCEPT1);
 }
 
-void UI_SoundOptionsMenu(void)
+void UI_SoundOptionsMenu()
 {
     UI_SoundOptionsMenu_Init();
     UI_PushMenu(&soundOptionsInfo.menu);

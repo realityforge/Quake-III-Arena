@@ -235,7 +235,7 @@ static int g_sortkey;
 static int g_emptyservers;
 static int g_fullservers;
 
-static int ArenaServers_MaxPing(void)
+static int ArenaServers_MaxPing()
 {
     int maxPing;
 
@@ -311,7 +311,7 @@ ArenaServers_SourceForLAN
 Convert ui's g_servertype to AS_* used by trap calls.
 =================
 */
-int ArenaServers_SourceForLAN(void)
+static int ArenaServers_SourceForLAN()
 {
     switch (g_servertype) {
     default:
@@ -329,7 +329,7 @@ int ArenaServers_SourceForLAN(void)
     }
 }
 
-static void ArenaServers_Go(void)
+static void ArenaServers_Go()
 {
     servernode_t* servernode;
 
@@ -339,7 +339,7 @@ static void ArenaServers_Go(void)
     }
 }
 
-static void ArenaServers_UpdatePicture(void)
+static void ArenaServers_UpdatePicture()
 {
     static char picname[64];
     servernode_t* servernodeptr;
@@ -356,7 +356,7 @@ static void ArenaServers_UpdatePicture(void)
     g_arenaservers.mappic.shader = 0;
 }
 
-static void ArenaServers_UpdateMenu(void)
+static void ArenaServers_UpdateMenu()
 {
     int i;
     int j;
@@ -512,7 +512,7 @@ static void ArenaServers_UpdateMenu(void)
     ArenaServers_UpdatePicture();
 }
 
-static void ArenaServers_Remove(void)
+static void ArenaServers_Remove()
 {
     int i;
     servernode_t* servernodeptr;
@@ -641,7 +641,7 @@ ArenaServers_LoadFavorites
 Load cvar address book entries into local lists.
 =================
 */
-void ArenaServers_LoadFavorites(void)
+static void ArenaServers_LoadFavorites()
 {
     int i;
     int j;
@@ -698,7 +698,7 @@ void ArenaServers_LoadFavorites(void)
     }
 }
 
-static void ArenaServers_StopRefresh(void)
+static void ArenaServers_StopRefresh()
 {
     if (!g_arenaservers.refreshservers)
         // not currently refreshing
@@ -718,7 +718,7 @@ static void ArenaServers_StopRefresh(void)
     ArenaServers_UpdateMenu();
 }
 
-static void ArenaServers_DoRefresh(void)
+static void ArenaServers_DoRefresh()
 {
     int i;
     int j;
@@ -860,7 +860,7 @@ static void ArenaServers_DoRefresh(void)
     ArenaServers_UpdateMenu();
 }
 
-static void ArenaServers_StartRefresh(void)
+static void ArenaServers_StartRefresh()
 {
     int i;
     char myargs[32], protocol[32];
@@ -931,7 +931,7 @@ static void ArenaServers_StartRefresh(void)
     }
 }
 
-void ArenaServers_SaveChanges(void)
+static void ArenaServers_SaveChanges()
 {
     int i;
 
@@ -942,7 +942,7 @@ void ArenaServers_SaveChanges(void)
         trap_Cvar_Set(va("server%d", i + 1), "");
 }
 
-void ArenaServers_Sort(int type)
+static void ArenaServers_Sort(int type)
 {
     if (g_sortkey == type) {
         return;
@@ -952,7 +952,7 @@ void ArenaServers_Sort(int type)
     qsort(g_arenaservers.serverlist, *g_arenaservers.numservers, sizeof(servernode_t), ArenaServers_Compare);
 }
 
-int ArenaServers_SetType(int type)
+static int ArenaServers_SetType(int type)
 {
     ArenaServers_StopRefresh();
 
@@ -1103,7 +1103,7 @@ static void ArenaServers_Event(void* ptr, int event)
     }
 }
 
-static void ArenaServers_MenuDraw(void)
+static void ArenaServers_MenuDraw()
 {
     if (g_arenaservers.refreshservers)
         ArenaServers_DoRefresh();
@@ -1132,7 +1132,7 @@ static sfxHandle_t ArenaServers_MenuKey(int key)
     return Menu_DefaultKey(&g_arenaservers.menu, key);
 }
 
-static void ArenaServers_MenuInit(void)
+static void ArenaServers_MenuInit()
 {
     int i;
     int y;
@@ -1382,7 +1382,7 @@ static void ArenaServers_MenuInit(void)
     trap_Cvar_Register(NULL, "debug_protocol", "", 0);
 }
 
-void ArenaServers_Cache(void)
+void ArenaServers_Cache()
 {
     trap_R_RegisterShaderNoMip(ART_BACK0);
     trap_R_RegisterShaderNoMip(ART_BACK1);
@@ -1400,7 +1400,7 @@ void ArenaServers_Cache(void)
     trap_R_RegisterShaderNoMip(ART_UNKNOWNMAP);
 }
 
-void UI_ArenaServersMenu(void)
+void UI_ArenaServersMenu()
 {
     ArenaServers_MenuInit();
     UI_PushMenu(&g_arenaservers.menu);

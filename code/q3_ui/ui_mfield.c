@@ -100,7 +100,7 @@ void MField_Draw(mfield_t* edit, int x, int y, int style, vec4_t color)
     UI_DrawChar(x + (edit->cursor - prestep) * charw, y, cursorChar, style & ~(UI_CENTER | UI_RIGHT), color);
 }
 
-void MField_Paste(mfield_t* edit)
+static void MField_Paste(mfield_t* edit)
 {
     char pasteBuffer[64];
     int pasteLen, i;

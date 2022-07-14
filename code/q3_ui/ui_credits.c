@@ -34,7 +34,7 @@ static creditsmenu_t s_credits;
 UI_CreditMenu_Draw_ioq3
 ===============
 */
-static void UI_CreditMenu_Draw_ioq3(void)
+static void UI_CreditMenu_Draw_ioq3()
 {
     int y;
     int i;
@@ -88,7 +88,7 @@ static sfxHandle_t UI_CreditMenu_Key(int key)
     return 0;
 }
 
-static void UI_CreditMenu_Draw(void)
+static void UI_CreditMenu_Draw()
 {
     int y;
 
@@ -143,7 +143,7 @@ static void UI_CreditMenu_Draw(void)
     UI_DrawString(320, y, "Quake III Arena(c) 1999-2000, Id Software, Inc.  All Rights Reserved", UI_CENTER | UI_SMALLFONT, color_red);
 }
 
-void UI_CreditMenu(void)
+void UI_CreditMenu()
 {
     memset(&s_credits, 0, sizeof(s_credits));
 

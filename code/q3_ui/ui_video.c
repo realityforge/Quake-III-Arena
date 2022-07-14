@@ -21,8 +21,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "ui_local.h"
 
-void GraphicsOptions_MenuInit(void);
-
 /*
 =======================================================================
 
@@ -72,7 +70,7 @@ static void DriverInfo_Event(void* ptr, int event)
     }
 }
 
-static void DriverInfo_MenuDraw(void)
+static void DriverInfo_MenuDraw()
 {
     int i;
     int y;
@@ -100,7 +98,7 @@ static void DriverInfo_MenuDraw(void)
         UI_DrawString(320, y, s_driverinfo.strings[s_driverinfo.numstrings - 1], UI_CENTER | UI_SMALLFONT, text_color_normal);
 }
 
-void DriverInfo_Cache(void)
+void DriverInfo_Cache()
 {
     int i;
 
@@ -112,7 +110,7 @@ void DriverInfo_Cache(void)
     }
 }
 
-static void UI_DriverInfo_Menu(void)
+static void UI_DriverInfo_Menu()
 {
     char* eptr;
     int i;
@@ -355,7 +353,7 @@ static int GraphicsOptions_FindDetectedResolution(int mode)
     return -1;
 }
 
-static void GraphicsOptions_GetAspectRatios(void)
+static void GraphicsOptions_GetAspectRatios()
 {
     int i, r;
 
@@ -398,7 +396,7 @@ static void GraphicsOptions_GetAspectRatios(void)
     ratios[r] = NULL;
 }
 
-static void GraphicsOptions_GetInitialVideo(void)
+static void GraphicsOptions_GetInitialVideo()
 {
     s_ivo.colordepth = s_graphicsoptions.colordepth.curvalue;
     s_ivo.mode = s_graphicsoptions.mode.curvalue;
@@ -411,7 +409,7 @@ static void GraphicsOptions_GetInitialVideo(void)
     s_ivo.texturebits = s_graphicsoptions.texturebits.curvalue;
 }
 
-static void GraphicsOptions_GetResolutions(void)
+static void GraphicsOptions_GetResolutions()
 {
     trap_Cvar_VariableStringBuffer("r_availableModes", resbuf, sizeof(resbuf));
     if (*resbuf) {
@@ -445,7 +443,7 @@ static void GraphicsOptions_GetResolutions(void)
     }
 }
 
-static void GraphicsOptions_CheckConfig(void)
+static void GraphicsOptions_CheckConfig()
 {
     int i;
 
@@ -474,7 +472,7 @@ static void GraphicsOptions_CheckConfig(void)
     s_graphicsoptions.list.curvalue = NUM_IVO_TEMPLATES - 1;
 }
 
-static void GraphicsOptions_UpdateMenuItems(void)
+static void GraphicsOptions_UpdateMenuItems()
 {
     s_graphicsoptions.fs.generic.flags &= ~QMF_GRAYED;
 
@@ -672,7 +670,7 @@ static void GraphicsOptions_TQEvent(void* ptr, int event)
     s_graphicsoptions.tq.curvalue = (int)(s_graphicsoptions.tq.curvalue + 0.5);
 }
 
-void GraphicsOptions_MenuDraw(void)
+static void GraphicsOptions_MenuDraw()
 {
     // APSFIX - rework this
     GraphicsOptions_UpdateMenuItems();
@@ -680,7 +678,7 @@ void GraphicsOptions_MenuDraw(void)
     Menu_Draw(&s_graphicsoptions.menu);
 }
 
-static void GraphicsOptions_SetMenuItems(void)
+static void GraphicsOptions_SetMenuItems()
 {
     s_graphicsoptions.mode.curvalue = GraphicsOptions_FindDetectedResolution(trap_Cvar_VariableValue("r_mode"));
 
@@ -763,7 +761,7 @@ static void GraphicsOptions_SetMenuItems(void)
     }
 }
 
-void GraphicsOptions_MenuInit(void)
+static void GraphicsOptions_MenuInit()
 {
     static const char* tq_names[] = {
         "Default",
@@ -1055,7 +1053,7 @@ void GraphicsOptions_MenuInit(void)
     GraphicsOptions_GetInitialVideo();
 }
 
-void GraphicsOptions_Cache(void)
+void GraphicsOptions_Cache()
 {
     trap_R_RegisterShaderNoMip(GRAPHICSOPTIONS_FRAMEL);
     trap_R_RegisterShaderNoMip(GRAPHICSOPTIONS_FRAMER);
@@ -1065,7 +1063,7 @@ void GraphicsOptions_Cache(void)
     trap_R_RegisterShaderNoMip(GRAPHICSOPTIONS_ACCEPT1);
 }
 
-void UI_GraphicsOptionsMenu(void)
+void UI_GraphicsOptionsMenu()
 {
     GraphicsOptions_MenuInit();
     UI_PushMenu(&s_graphicsoptions.menu);

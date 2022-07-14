@@ -141,7 +141,7 @@ static int GametypeBits(char* string)
     return bits;
 }
 
-static void StartServer_Update(void)
+static void StartServer_Update()
 {
     int i;
     int top;
@@ -339,7 +339,7 @@ static void StartServer_LevelshotDraw(void* self)
     }
 }
 
-static void StartServer_MenuInit(void)
+static void StartServer_MenuInit()
 {
     int i;
     int x;
@@ -502,7 +502,7 @@ static void StartServer_MenuInit(void)
     StartServer_GametypeEvent(NULL, QM_ACTIVATED);
 }
 
-void StartServer_Cache(void)
+void StartServer_Cache()
 {
     int i;
     const char* info;
@@ -638,7 +638,7 @@ static bool BotAlreadySelected(const char* checkName)
     return false;
 }
 
-static void ServerOptions_Start(void)
+static void ServerOptions_Start()
 {
     int timelimit;
     int fraglimit;
@@ -740,7 +740,7 @@ static void ServerOptions_Start(void)
     }
 }
 
-static void ServerOptions_InitPlayerItems(void)
+static void ServerOptions_InitPlayerItems()
 {
     int n;
     int v;
@@ -786,7 +786,7 @@ static void ServerOptions_InitPlayerItems(void)
     }
 }
 
-static void ServerOptions_SetPlayerItems(void)
+static void ServerOptions_SetPlayerItems()
 {
     int start;
     int n;
@@ -917,7 +917,7 @@ static void ServerOptions_LevelshotDraw(void* self)
     UI_DrawString(x, y, gametype_items[gametype_remap2[s_serveroptions.gametype]], UI_CENTER | UI_SMALLFONT, color_orange);
 }
 
-static void ServerOptions_InitBotNames(void)
+static void ServerOptions_InitBotNames()
 {
     int count;
     int n;
@@ -1008,7 +1008,7 @@ static void ServerOptions_InitBotNames(void)
     }
 }
 
-static void ServerOptions_SetMenuItems(void)
+static void ServerOptions_SetMenuItems()
 {
     static char picname[64];
     char mapname[MAX_NAMELENGTH];
@@ -1335,7 +1335,7 @@ static void ServerOptions_MenuInit(bool multiplayer)
     ServerOptions_SetMenuItems();
 }
 
-void ServerOptions_Cache(void)
+void ServerOptions_Cache()
 {
     trap_R_RegisterShaderNoMip(GAMESERVER_BACK0);
     trap_R_RegisterShaderNoMip(GAMESERVER_BACK1);
@@ -1410,7 +1410,7 @@ static int QDECL UI_BotSelectMenu_SortCompare(const void* arg1, const void* arg2
     return Q_stricmp(name1, name2);
 }
 
-static void UI_BotSelectMenu_BuildList(void)
+static void UI_BotSelectMenu_BuildList()
 {
     int n;
 
@@ -1450,7 +1450,7 @@ static void ServerPlayerIcon(const char* modelAndSkin, char* iconName, int iconN
     }
 }
 
-static void UI_BotSelectMenu_UpdateGrid(void)
+static void UI_BotSelectMenu_UpdateGrid()
 {
     const char* info;
     int i;
@@ -1601,7 +1601,7 @@ static void UI_BotSelectMenu_SelectEvent(void* ptr, int event)
     Q_strncpyz(s_serveroptions.newBotName, botSelectInfo.botnames[botSelectInfo.selectedmodel % MAX_MODELSPERPAGE], 16);
 }
 
-void UI_BotSelectMenu_Cache(void)
+void UI_BotSelectMenu_Cache()
 {
     trap_R_RegisterShaderNoMip(BOTSELECT_BACK0);
     trap_R_RegisterShaderNoMip(BOTSELECT_BACK1);

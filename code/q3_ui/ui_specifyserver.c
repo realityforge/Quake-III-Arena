@@ -86,7 +86,7 @@ static void SpecifyServer_Event(void* ptr, int event)
     }
 }
 
-void SpecifyServer_MenuInit(void)
+static void SpecifyServer_MenuInit()
 {
     // zero set all our globals
     memset(&s_specifyserver, 0, sizeof(specifyserver_t));
@@ -168,7 +168,7 @@ void SpecifyServer_MenuInit(void)
     Com_sprintf(s_specifyserver.port.field.buffer, 6, "%i", 27960);
 }
 
-void SpecifyServer_Cache(void)
+void SpecifyServer_Cache()
 {
     int i;
 
@@ -180,7 +180,7 @@ void SpecifyServer_Cache(void)
     }
 }
 
-void UI_SpecifyServerMenu(void)
+void UI_SpecifyServerMenu()
 {
     SpecifyServer_MenuInit();
     UI_PushMenu(&s_specifyserver.menu);

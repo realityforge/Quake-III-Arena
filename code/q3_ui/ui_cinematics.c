@@ -93,7 +93,7 @@ static void UI_CinematicsMenu_Event(void* ptr, int event)
     trap_Cmd_ExecuteText(EXEC_APPEND, va("disconnect; cinematic %s.RoQ\n", cinematics[n]));
 }
 
-static void UI_CinematicsMenu_Init(void)
+static void UI_CinematicsMenu_Init()
 {
     int y;
 
@@ -286,7 +286,7 @@ static void UI_CinematicsMenu_Init(void)
     Menu_AddItem(&cinematicsMenuInfo.menu, &cinematicsMenuInfo.back);
 }
 
-void UI_CinematicsMenu_Cache(void)
+void UI_CinematicsMenu_Cache()
 {
     trap_R_RegisterShaderNoMip(ART_BACK0);
     trap_R_RegisterShaderNoMip(ART_BACK1);
@@ -294,13 +294,13 @@ void UI_CinematicsMenu_Cache(void)
     trap_R_RegisterShaderNoMip(ART_FRAMER);
 }
 
-void UI_CinematicsMenu(void)
+void UI_CinematicsMenu()
 {
     UI_CinematicsMenu_Init();
     UI_PushMenu(&cinematicsMenuInfo.menu);
 }
 
-void UI_CinematicsMenu_f(void)
+void UI_CinematicsMenu_f()
 {
     int n;
 

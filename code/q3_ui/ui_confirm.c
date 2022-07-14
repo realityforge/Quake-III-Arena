@@ -96,7 +96,7 @@ static sfxHandle_t ConfirmMenu_Key(int key)
     return Menu_DefaultKey(&s_confirm.menu, key);
 }
 
-static void ConfirmMenu_Draw(void)
+static void ConfirmMenu_Draw()
 {
     UI_DrawNamedPic(142, 118, 359, 256, ART_CONFIRM_FRAME);
     UI_DrawProportionalString(320, 204, s_confirm.question, s_confirm.style, color_red);
@@ -109,7 +109,7 @@ static void ConfirmMenu_Draw(void)
     }
 }
 
-void ConfirmMenu_Cache(void)
+void ConfirmMenu_Cache()
 {
     trap_R_RegisterShaderNoMip(ART_CONFIRM_FRAME);
 }

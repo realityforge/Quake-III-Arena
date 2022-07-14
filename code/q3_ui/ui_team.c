@@ -73,7 +73,7 @@ static void TeamMain_MenuEvent(void* ptr, int event)
     }
 }
 
-void TeamMain_MenuInit(void)
+static void TeamMain_MenuInit()
 {
     int y;
     int gametype;
@@ -165,12 +165,12 @@ void TeamMain_MenuInit(void)
     Menu_AddItem(&s_teammain.menu, (void*)&s_teammain.spectate);
 }
 
-void TeamMain_Cache(void)
+void TeamMain_Cache()
 {
     trap_R_RegisterShaderNoMip(TEAMMAIN_FRAME);
 }
 
-void UI_TeamMainMenu(void)
+void UI_TeamMainMenu()
 {
     TeamMain_MenuInit();
     UI_PushMenu(&s_teammain.menu);

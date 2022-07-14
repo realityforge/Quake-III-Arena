@@ -74,7 +74,7 @@ typedef struct {
 
 static removeBotsMenuInfo_t removeBotsMenuInfo;
 
-static void UI_RemoveBotsMenu_SetBotNames(void)
+static void UI_RemoveBotsMenu_SetBotNames()
 {
     int n;
     char info[MAX_INFO_STRING];
@@ -138,7 +138,7 @@ static void UI_RemoveBotsMenu_DownEvent(void* ptr, int event)
     }
 }
 
-static void UI_RemoveBotsMenu_GetBots(void)
+static void UI_RemoveBotsMenu_GetBots()
 {
     int numPlayers;
     int isBot;
@@ -162,7 +162,7 @@ static void UI_RemoveBotsMenu_GetBots(void)
     }
 }
 
-void UI_RemoveBots_Cache(void)
+void UI_RemoveBots_Cache()
 {
     trap_R_RegisterShaderNoMip(ART_BACKGROUND);
     trap_R_RegisterShaderNoMip(ART_BACK0);
@@ -171,7 +171,7 @@ void UI_RemoveBots_Cache(void)
     trap_R_RegisterShaderNoMip(ART_DELETE1);
 }
 
-static void UI_RemoveBotsMenu_Init(void)
+static void UI_RemoveBotsMenu_Init()
 {
     int n;
     int count;
@@ -280,7 +280,7 @@ static void UI_RemoveBotsMenu_Init(void)
     removeBotsMenuInfo.bots[0].color = color_white;
 }
 
-void UI_RemoveBotsMenu(void)
+void UI_RemoveBotsMenu()
 {
     UI_RemoveBotsMenu_Init();
     UI_PushMenu(&removeBotsMenuInfo.menu);

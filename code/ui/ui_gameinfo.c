@@ -35,7 +35,7 @@ static char* ui_botInfos[MAX_BOTS];
 static int ui_numArenas;
 static char* ui_arenaInfos[MAX_ARENAS];
 
-int UI_ParseInfos(char* buf, int max, char* infos[])
+static int UI_ParseInfos(char* buf, int max, char* infos[])
 {
     char* token;
     int count;

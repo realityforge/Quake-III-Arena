@@ -84,7 +84,7 @@ static const char* teamoverlay_names[] = {
     NULL
 };
 
-static void Preferences_SetMenuItems(void)
+static void Preferences_SetMenuItems()
 {
     s_preferences.crosshair.curvalue = (int)trap_Cvar_VariableValue("cg_drawCrosshair") % NUM_CROSSHAIRS;
     s_preferences.simpleitems.curvalue = trap_Cvar_VariableValue("cg_simpleItems") != 0;
@@ -199,7 +199,7 @@ static void Crosshair_Draw(void* self)
     UI_DrawHandlePic(x + SMALLCHAR_WIDTH, y - 4, 24, 24, s_preferences.crosshairShader[s->curvalue]);
 }
 
-static void Preferences_MenuInit(void)
+static void Preferences_MenuInit()
 {
     int y;
 
@@ -371,7 +371,7 @@ static void Preferences_MenuInit(void)
     Preferences_SetMenuItems();
 }
 
-void Preferences_Cache(void)
+void Preferences_Cache()
 {
     int n;
 
@@ -384,7 +384,7 @@ void Preferences_Cache(void)
     }
 }
 
-void UI_PreferencesMenu(void)
+void UI_PreferencesMenu()
 {
     Preferences_MenuInit();
     UI_PushMenu(&s_preferences.menu);

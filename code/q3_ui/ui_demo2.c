@@ -101,7 +101,7 @@ static void Demos_MenuEvent(void* ptr, int event)
     }
 }
 
-static void Demos_MenuInit(void)
+static void Demos_MenuInit()
 {
     int i;
     int len;
@@ -236,7 +236,7 @@ static void Demos_MenuInit(void)
     Menu_AddItem(&s_demos.menu, &s_demos.go);
 }
 
-void Demos_Cache(void)
+void Demos_Cache()
 {
     trap_R_RegisterShaderNoMip(ART_BACK0);
     trap_R_RegisterShaderNoMip(ART_BACK1);
@@ -249,7 +249,7 @@ void Demos_Cache(void)
     trap_R_RegisterShaderNoMip(ART_ARROWRIGHT);
 }
 
-void UI_DemosMenu(void)
+void UI_DemosMenu()
 {
     Demos_MenuInit();
     UI_PushMenu(&s_demos.menu);

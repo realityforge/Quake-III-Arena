@@ -341,7 +341,7 @@ static menucommon_s** g_controls[] = {
     g_misc_controls,
 };
 
-static void Controls_InitCvars(void)
+static void Controls_InitCvars()
 {
     configcvar_t* cvarptr = g_configcvars;
     while (cvarptr->name) {
@@ -504,7 +504,7 @@ static void Controls_UpdateModel(int anim)
     UI_PlayerInfo_SetInfo(&s_controls.playerinfo, s_controls.playerLegs, s_controls.playerTorso, s_controls.playerViewangles, s_controls.playerMoveangles, s_controls.playerWeapon, s_controls.playerChat);
 }
 
-static void Controls_Update(void)
+static void Controls_Update()
 {
     int i;
     int j;
@@ -697,7 +697,7 @@ static void Controls_GetKeyAssignment(char* command, int* twokeys)
     }
 }
 
-static void Controls_GetConfig(void)
+static void Controls_GetConfig()
 {
     int twokeys[2];
 
@@ -723,7 +723,7 @@ static void Controls_GetConfig(void)
     s_controls.freelook.curvalue = UI_ClampCvar(0, 1, Controls_GetCvarValue("cl_freelook"));
 }
 
-static void Controls_SetConfig(void)
+static void Controls_SetConfig()
 {
     // set the bindings from the local store
     bind_t* bindptr = g_bindings;
@@ -754,7 +754,7 @@ static void Controls_SetConfig(void)
     trap_Cmd_ExecuteText(EXEC_APPEND, "in_restart\n");
 }
 
-static void Controls_SetDefaults(void)
+static void Controls_SetDefaults()
 {
     // set the bindings from the local store
     bind_t* bindptr = g_bindings;
@@ -882,7 +882,7 @@ static void Controls_ResetDefaults_Action(bool result)
     Controls_Update();
 }
 
-static void Controls_ResetDefaults_Draw(void)
+static void Controls_ResetDefaults_Draw()
 {
     UI_DrawProportionalString(SCREEN_WIDTH / 2, 356 + PROP_HEIGHT * 0, "WARNING: This will reset all", UI_CENTER | UI_SMALLFONT, color_yellow);
     UI_DrawProportionalString(SCREEN_WIDTH / 2, 356 + PROP_HEIGHT * 1, "controls to their default values.", UI_CENTER | UI_SMALLFONT, color_yellow);
@@ -973,7 +973,7 @@ static void Controls_ActionEvent(void* ptr, int event)
     }
 }
 
-static void Controls_InitModel(void)
+static void Controls_InitModel()
 {
     memset(&s_controls.playerinfo, 0, sizeof(playerInfo_t));
 
@@ -982,7 +982,7 @@ static void Controls_InitModel(void)
     Controls_UpdateModel(ANIM_IDLE);
 }
 
-static void Controls_InitWeapons(void)
+static void Controls_InitWeapons()
 {
     gitem_t* item;
 
@@ -994,7 +994,7 @@ static void Controls_InitWeapons(void)
     }
 }
 
-static void Controls_MenuInit(void)
+static void Controls_MenuInit()
 {
     static char playername[32];
 
@@ -1458,7 +1458,7 @@ static void Controls_MenuInit(void)
     Controls_Update();
 }
 
-void Controls_Cache(void)
+void Controls_Cache()
 {
     trap_R_RegisterShaderNoMip(ART_BACK0);
     trap_R_RegisterShaderNoMip(ART_BACK1);
@@ -1466,7 +1466,7 @@ void Controls_Cache(void)
     trap_R_RegisterShaderNoMip(ART_FRAMER);
 }
 
-void UI_ControlsMenu(void)
+void UI_ControlsMenu()
 {
     Controls_MenuInit();
     UI_PushMenu(&s_controls.menu);
