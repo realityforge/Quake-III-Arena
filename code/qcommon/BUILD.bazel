@@ -31,6 +31,10 @@ cc_library(
     name = "cvar",
     srcs = ["cvar.c"],
     defines = ENGINE_DEFINES,
+    visibility = [
+        "//code/client:__pkg__",
+        "//code/server:__pkg__",
+    ],
     deps = [
         ":qcommon",
         ":shared_api",
@@ -45,6 +49,10 @@ cc_library(
     ],
     hdrs = ["vm_local.h"],
     defines = ENGINE_DEFINES,
+    visibility = [
+        "//code/client:__pkg__",
+        "//code/server:__pkg__",
+    ],
     deps = [
         ":qcommon",
         ":shared_api",
@@ -55,6 +63,7 @@ cc_library(
     name = "files",
     srcs = ["files.c"],
     defines = ENGINE_DEFINES,
+    visibility = ["//code/client:__pkg__"],
     deps = [
         ":qcommon",
         ":shared_api",
@@ -66,6 +75,7 @@ cc_library(
     name = "files-dedicated",
     srcs = ["files.c"],
     defines = SERVER_ONLY_ENGINE_DEFINES,
+    visibility = ["//code/server:__pkg__"],
     deps = [
         ":qcommon",
         ":shared_api",
@@ -78,6 +88,10 @@ cc_library(
     srcs = ["md4.c"],
     copts = FULL_WARNINGS,
     defines = ENGINE_DEFINES,
+    visibility = [
+        "//code/client:__pkg__",
+        "//code/server:__pkg__",
+    ],
     deps = [
         ":qcommon",
         "//third_party/md4",
@@ -92,6 +106,10 @@ cc_library(
         "net_chan.c",
     ],
     defines = ENGINE_DEFINES,
+    visibility = [
+        "//code/client:__pkg__",
+        "//code/server:__pkg__",
+    ],
     deps = [
         ":qcommon",
         ":shared",
@@ -107,6 +125,7 @@ cc_library(
         "net_chan.c",
     ],
     defines = SERVER_ONLY_ENGINE_DEFINES,
+    visibility = ["//code/server:__pkg__"],
     deps = [
         ":qcommon",
         ":shared",
@@ -120,10 +139,7 @@ cc_library(
         "common.c",
     ],
     defines = ENGINE_DEFINES,
-    visibility = [
-        "//code/client:__pkg__",
-        "//code/game:__pkg__",
-    ],
+    visibility = ["//code/client:__pkg__"],
     deps = [
         ":qcommon",
         ":shared_api",
@@ -150,6 +166,7 @@ cc_library(
     visibility = [
         "//code/cgame:__pkg__",
         "//code/game:__pkg__",
+        "//code/q3_ui:__pkg__",
         "//code/ui:__pkg__",
     ],
     deps = [":shared_api"],
@@ -169,9 +186,14 @@ cc_library(
         "//code/botlib:__pkg__",
         "//code/cgame:__pkg__",
         "//code/client:__pkg__",
+        "//code/collision_map:__pkg__",
         "//code/game:__pkg__",
+        "//code/q3_ui:__pkg__",
+        "//code/renderer:__pkg__",
         "//code/server:__pkg__",
+        "//code/sys:__pkg__",
         "//code/ui:__pkg__",
+        "//third_party/unzip:__pkg__",
     ],
 )
 
@@ -231,7 +253,11 @@ cc_library(
         "//code/botlib:__pkg__",
         "//code/cgame:__pkg__",
         "//code/client:__pkg__",
+        "//code/collision_map:__pkg__",
+        "//code/renderer:__pkg__",
+        "//code/sdl:__pkg__",
         "//code/server:__pkg__",
+        "//code/sys:__pkg__",
         "@zlib//:__pkg__",
     ],
     deps = [
@@ -247,6 +273,7 @@ cc_library(
     name = "cmd",
     srcs = _CMD_SRC,
     defines = ENGINE_DEFINES,
+    visibility = ["//code/client:__pkg__"],
     deps = [
         ":qcommon",
         ":shared_api",
@@ -257,6 +284,7 @@ cc_library(
     name = "cmd-dedicated",
     srcs = _CMD_SRC,
     defines = SERVER_ONLY_ENGINE_DEFINES,
+    visibility = ["//code/server:__pkg__"],
     deps = [
         ":qcommon",
         ":shared_api",
