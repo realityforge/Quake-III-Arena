@@ -174,10 +174,6 @@ typedef struct leafList_s {
     void (*storeLeafs)(struct leafList_s* ll, int nodenum);
 } leafList_t;
 
-void CM_StoreLeafs(leafList_t* ll, int nodenum);
-
-void CM_BoxLeafnums_r(leafList_t* ll, int nodenum);
-
 // cm_load.c
 
 void CM_InitBoxHull(void);
@@ -195,3 +191,5 @@ void CM_ClearLevelPatches(void);
 void CM_FloodAreaConnections(void);
 bool CM_BoundsIntersect(const vec3_t mins, const vec3_t maxs, const vec3_t mins2, const vec3_t maxs2);
 bool CM_BoundsIntersectPoint(const vec3_t mins, const vec3_t maxs, const vec3_t point);
+void CM_BoxLeafnums_r(leafList_t* ll, int nodenum);
+void CM_StoreLeafs(leafList_t* ll, int nodenum);
