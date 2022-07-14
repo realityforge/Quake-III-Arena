@@ -17,7 +17,15 @@ BASE_WARNINGS = [
 
 BASE_WARNINGS_EX = BASE_WARNINGS + ["-Werror"]
 
-EXTRA_WARNINGS = BASE_WARNINGS_EX + ["-Wmissing-prototypes"]
+EXTRA_WARNINGS = BASE_WARNINGS_EX + ["-Wmissing-prototypes"] + select({
+    "//build_defs:wasm": [
+        # For some reason strict-prototypes warning triggers when running emcc toolchain
+        "-Wno-strict-prototypes",
+        # The emcc toolchain expects a main but we don't provide one
+        "-Wno-emcc",
+    ],
+    "@platforms//os:macos": [],
+})
 
 FULL_WARNINGS = BASE_WARNINGS + [
     "-Wextra",
