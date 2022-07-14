@@ -274,7 +274,7 @@ static void BotImport_DebugPolygonShow(int id, int color, int numPoints, vec3_t*
     memcpy(poly->points, points, numPoints * sizeof(vec3_t));
 }
 
-static void BotImport_DebugPolygonDelete(int id)
+void BotImport_DebugPolygonDelete(int id)
 {
     if (!debugpolygons)
         return;
