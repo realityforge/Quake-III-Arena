@@ -37,7 +37,7 @@ void SV_Netchan_FreeQueue(client_t* client)
     client->netchan_end_queue = &client->netchan_start_queue;
 }
 
-void SV_Netchan_TransmitNextInQueue(client_t* client)
+static void SV_Netchan_TransmitNextInQueue(client_t* client)
 {
     netchan_buffer_t* netbuf;
 
