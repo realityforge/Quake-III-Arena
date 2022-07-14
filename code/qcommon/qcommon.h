@@ -275,6 +275,9 @@ typedef enum {
     TRAP_TESTPRINTFLOAT
 } sharedTraps_t;
 
+typedef int(QDECL* vmMainProc)(int, ...);
+typedef int(QDECL* vmDllSystemCall)(int, ...);
+
 void VM_Init(void);
 vm_t* VM_Create(const char* module, int (*systemCalls)(int*),
                 vmInterpret_t interpret);
@@ -762,8 +765,7 @@ void Sys_Init(void);
 
 // general development dll loading for virtual machine testing
 // fqpath param added 7/20/02 by T.Ray - Sys_LoadDll is only called in vm.c at this time
-void* QDECL Sys_LoadDll(const char* name, char* fqpath, int(QDECL** entryPoint)(int, ...),
-                        int(QDECL* systemcalls)(int, ...));
+void* QDECL Sys_LoadDll(const char* name, char* fqpath, vmMainProc* entryPoint, vmDllSystemCall systemCalls);
 void Sys_UnloadDll(void* dllHandle);
 
 void Sys_UnloadGame(void);

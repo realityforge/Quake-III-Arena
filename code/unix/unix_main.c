@@ -178,9 +178,7 @@ changed the load procedure to match VFS logic, and allow developer use
 */
 extern char* FS_BuildOSPath(const char* base, const char* game, const char* qpath);
 
-void* Sys_LoadDll(const char* name, char* fqpath,
-                  int (**entryPoint)(int, ...),
-                  int (*systemcalls)(int, ...))
+void* Sys_LoadDll(const char* name, char* fqpath, vmMainProc* entryPoint, vmDllSystemCall systemCalls)
 {
     void* libHandle;
     void (*dllEntry)(int (*syscallptr)(int, ...));
@@ -262,7 +260,7 @@ void* Sys_LoadDll(const char* name, char* fqpath,
         return NULL;
     }
     Com_Printf("Sys_LoadDll(%s) found **vmMain** at  %p  \n", name, *entryPoint);
-    dllEntry(systemcalls);
+    dllEntry(systemCalls);
     Com_Printf("Sys_LoadDll(%s) succeeded!\n", name);
     if (libHandle)
         Q_strncpyz(fqpath, fn, MAX_QPATH);

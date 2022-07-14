@@ -78,8 +78,7 @@ Used to load a development dll instead of a virtual machine
 */
 extern char* FS_BuildOSPath(const char* base, const char* game, const char* qpath);
 
-void* QDECL Sys_LoadDll(const char* name, char* fqpath, int(QDECL** entryPoint)(int, ...),
-    int(QDECL* systemcalls)(int, ...))
+void* QDECL Sys_LoadDll(const char* name, char* fqpath, vmMainProc* entryPoint, vmDllSystemCall systemCall)
 {
     void* libHandle;
     void (*dllEntry)(int (*syscallptr)(int, ...));
@@ -122,7 +121,7 @@ libraryPath = [NSString stringWithFormat: @"%@/Contents/MacOS/%s", bundlePath, n
         return NULL;
     }
 
-    dllEntry(systemcalls);
+    dllEntry(systemCall);
     return libHandle;
 }
 

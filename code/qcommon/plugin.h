@@ -24,7 +24,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define PLUGIN_H
 
 #include "attributes.h"
+#include "qcommon.h"
 
 extern EXPORT int vmMain(int command, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11);
+
+extern EXPORT void dllEntry(vmDllSystemCall syscallptr);
 
 #endif

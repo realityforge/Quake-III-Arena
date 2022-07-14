@@ -230,7 +230,10 @@ cc_library(
         "//code/q3_ui:__pkg__",
         "//code/ui:__pkg__",
     ],
-    deps = [":base"],
+    deps = [
+        ":base",
+        ":qcommon",
+    ],
 )
 
 cc_library(
