@@ -368,7 +368,7 @@ static void ProjectDlightTexture(void)
     float* texCoords;
     uint8_t* colors;
     uint8_t clipBits[SHADER_MAX_VERTEXES];
-    MAC_STATIC float texCoordsArray[SHADER_MAX_VERTEXES][2];
+    float texCoordsArray[SHADER_MAX_VERTEXES][2];
     uint8_t colorArray[SHADER_MAX_VERTEXES][4];
     unsigned hitIndexes[SHADER_MAX_INDEXES];
     int numIndexes;

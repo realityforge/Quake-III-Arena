@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // sv_client.c -- server code for dealing with clients
 
 #include "server.h"
+#include "qengine.h"
 
 static void SV_CloseDownload(client_t* cl);
 
@@ -98,7 +99,7 @@ void SV_DirectConnect(netadr_t from)
     char userinfo[MAX_INFO_STRING];
     int i;
     client_t *cl, *newcl;
-    MAC_STATIC client_t temp;
+    client_t temp;
     sharedEntity_t* ent;
     int clientNum;
     int version;

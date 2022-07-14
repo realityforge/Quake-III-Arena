@@ -123,7 +123,7 @@ static void R_LoadLightmaps(lump_t* l)
 {
     uint8_t *buf, *buf_p;
     int len;
-    MAC_STATIC uint8_t image[LIGHTMAP_SIZE * LIGHTMAP_SIZE * 4];
+    uint8_t image[LIGHTMAP_SIZE * LIGHTMAP_SIZE * 4];
     int i, j;
     float maxIntensity = 0;
 
@@ -340,7 +340,7 @@ static void ParseMesh(dsurface_t* ds, drawVert_t* verts, msurface_t* surf)
     srfGridMesh_t* grid;
     int i, j;
     int width, height, numPoints;
-    MAC_STATIC drawVert_t points[MAX_PATCH_SIZE * MAX_PATCH_SIZE];
+    drawVert_t points[MAX_PATCH_SIZE * MAX_PATCH_SIZE];
     int lightmapNum;
     vec3_t bounds[2];
     vec3_t tmpVec;
