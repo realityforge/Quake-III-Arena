@@ -49,7 +49,7 @@ cc_library(
     srcs = _SERVER_SRC,
     hdrs = ["server_local.h"],
     copts = SERVER_COPTS,
-    defines = SERVER_ONLY_ENGINE_DEFINES,
+    defines = ["USE_VOIP"] + SERVER_ONLY_ENGINE_DEFINES,
     deps = [
         "//code/botlib:api",
         "//code/game:bg_api",
