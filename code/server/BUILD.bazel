@@ -14,7 +14,6 @@ load("@rules_cc//cc:defs.bzl", "cc_library")
 load("//build_defs:rules.bzl", "DIST_VISIBILITY", "ENGINE_DEFINES", "SERVER_ONLY_ENGINE_DEFINES")
 
 _SERVER_SRC = [
-    "server.h",
     "sv_bot.c",
     "sv_ccmds.c",
     "sv_client.c",
@@ -29,6 +28,7 @@ _SERVER_SRC = [
 cc_library(
     name = "server",
     srcs = _SERVER_SRC,
+    hdrs = ["server.h"],
     defines = ["USE_VOIP"] + ENGINE_DEFINES,
     visibility = ["//code/client:__pkg__"],
     deps = [
@@ -44,6 +44,7 @@ cc_library(
 cc_library(
     name = "server-dedicated",
     srcs = _SERVER_SRC,
+    hdrs = ["server.h"],
     defines = SERVER_ONLY_ENGINE_DEFINES,
     deps = [
         "//code/botlib:api",
