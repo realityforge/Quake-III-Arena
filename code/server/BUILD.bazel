@@ -72,7 +72,7 @@ cc_library(
     deps = [
         ":server-dedicated",
         "//code/botlib:botlib_impl",
-        "//code/qcommon:cm",
+        "//code/collision_map:cm_impl",
         "//code/qcommon:cmd-dedicated",
         "//code/qcommon:common-dedicated",
         "//code/qcommon:cvar",

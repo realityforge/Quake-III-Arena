@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "server.h"
 #include "../botlib/botlib.h"
-#include "../qcommon/cm_public.h"
+#include "../collision_map/cm_public.h"
 
 typedef struct bot_debugpoly_s {
     int inuse;

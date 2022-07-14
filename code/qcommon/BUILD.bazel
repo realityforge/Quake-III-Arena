@@ -212,29 +212,6 @@ cc_library(
     hdrs = ["qfiles.h"],
 )
 
-# collision map library
-cc_library(
-    name = "cm",
-    srcs = [
-        "cm_load.c",
-        "cm_patch.c",
-        "cm_polylib.c",
-        "cm_test.c",
-        "cm_trace.c",
-    ],
-    hdrs = [
-        "cm_local.h",
-        "cm_patch.h",
-        "cm_polylib.h",
-    ],
-    defines = ENGINE_DEFINES,
-    visibility = ["//code/server:__pkg__"],
-    deps = [
-        ":qcommon",
-        ":shared_api",
-    ],
-)
-
 cc_library(
     name = "base",
     hdrs = ["attributes.h"],
@@ -244,10 +221,7 @@ cc_library(
 
 cc_library(
     name = "qcommon",
-    hdrs = [
-        "cm_public.h",
-        "qcommon.h",
-    ],
+    hdrs = ["qcommon.h"],
     includes = ["."],
     visibility = [
         "//code/botlib:__pkg__",
@@ -264,6 +238,7 @@ cc_library(
         ":base",
         ":qfiles",
         ":shared_api",
+        "//code/collision_map:cm",
     ],
 )
 
