@@ -34,6 +34,7 @@ for file in $(git diff-index --cached --name-only HEAD | grep -E '(code|content|
 done
 
 file_type=""
+buildifier_warnings="+native-android,+native-cc,+native-java,+native-proto,+native-py,+out-of-order-load,+unsorted-dict-items,-module-docstring,-function-docstring,-unnamed-macro"
 
 for file in $(git diff-index --cached --name-only HEAD | grep -E '.*\.(bazel|bzl)$'); do
     if [ -f $file ]; then
@@ -43,9 +44,9 @@ for file in $(git diff-index --cached --name-only HEAD | grep -E '.*\.(bazel|bzl
         elif [[ $file == *.WORKSPACE.bazel ]]; then
             file_type="workspace"
         fi
-        buildifier -type "${file_type}" -mode check -lint warn -warnings all "${file}"
+        buildifier -type "${file_type}" -mode check -lint warn -warnings ${buildifier_warnings} "${file}"
         if [ $? -ne 0 ]; then
-            buildifier -type "${file_type}" -mode fix -lint fix -warnings all "${file}"
+            buildifier -type "${file_type}" -mode fix -lint fix -warnings ${buildifier_warnings} "${file}"
             echo "Commit aborted due to code format inconsistencies. '${file}' re-formatted, please review and update commit as required."
             has_error=1
         fi
