@@ -596,34 +596,21 @@ void SV_Trace(trace_t* results, const vec3_t start, vec3_t mins, vec3_t maxs, co
 
 int SV_PointContents(const vec3_t p, int passEntityNum)
 {
-    int touch[MAX_GENTITIES];
-    sharedEntity_t* hit;
-    int i, num;
-    int contents, c2;
-    clipHandle_t clipHandle;
-    float* angles;
-
     // get base contents from world
-    contents = CM_PointContents(p, 0);
+    int contents = CM_PointContents(p, 0);
 
     // or in contents from all the other entities
-    num = SV_AreaEntities(p, p, touch, MAX_GENTITIES);
+    int touch[MAX_GENTITIES];
+    const int num = SV_AreaEntities(p, p, touch, MAX_GENTITIES);
 
-    for (i = 0; i < num; i++) {
-        if (touch[i] == passEntityNum) {
-            continue;
+    for (int i = 0; i < num; i++) {
+        if (touch[i] != passEntityNum) {
+            const sharedEntity_t* hit = SV_GentityNum(touch[i]);
+            // might intersect, so do an exact clip
+            const clipHandle_t clipHandle = SV_ClipHandleForEntity(hit);
+
+            contents |= CM_TransformedPointContents(p, clipHandle, hit->s.origin, hit->s.angles);
         }
-        hit = SV_GentityNum(touch[i]);
-        // might intersect, so do an exact clip
-        clipHandle = SV_ClipHandleForEntity(hit);
-        angles = hit->r.currentAngles;
-        if (!hit->r.bmodel) {
-            angles = vec3_origin; // boxes don't rotate
-        }
-
-        c2 = CM_TransformedPointContents(p, clipHandle, hit->r.currentOrigin, angles);
-
-        contents |= c2;
     }
 
     return contents;
