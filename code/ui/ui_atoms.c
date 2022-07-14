@@ -84,7 +84,7 @@ char* UI_Cvar_VariableString(const char* var_name)
     return buffer;
 }
 
-void UI_SetBestScores(postGameInfo_t* newInfo, bool postGame)
+static void UI_SetBestScores(postGameInfo_t* newInfo, bool postGame)
 {
     trap_Cvar_Set("ui_scoreAccuracy", va("%i%%", newInfo->accuracy));
     trap_Cvar_Set("ui_scoreImpressives", va("%i", newInfo->impressives));

@@ -133,12 +133,12 @@ vmCvar_t ui_debug;
 vmCvar_t ui_initialized;
 vmCvar_t ui_teamArenaFirstRun;
 
-void _UI_Init();
-void _UI_Shutdown(void);
-void _UI_KeyEvent(int key, bool down);
-void _UI_MouseEvent(int dx, int dy);
-void _UI_Refresh(int realtime);
-bool _UI_IsFullscreen(void);
+static void _UI_Init(void);
+static void _UI_Shutdown(void);
+static void _UI_KeyEvent(int key, bool down);
+static void _UI_MouseEvent(int dx, int dy);
+static void _UI_Refresh(int realtime);
+static bool _UI_IsFullscreen(void);
 
 EXPORT int vmMain(int command, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11)
 {
@@ -184,7 +184,7 @@ EXPORT int vmMain(int command, int arg0, int arg1, int arg2, int arg3, int arg4,
     return -1;
 }
 
-void AssetCache()
+static void AssetCache()
 {
     int n;
     uiInfo.uiDC.Assets.gradientBar = trap_R_RegisterShaderNoMip(ASSET_GRADIENTBAR);
@@ -212,7 +212,7 @@ void AssetCache()
     uiInfo.newHighScoreSound = trap_S_RegisterSound("sound/feedback/voc_newhighscore.wav", false);
 }
 
-void _UI_DrawSides(float x, float y, float w, float h, float size)
+static void _UI_DrawSides(float x, float y, float w, float h, float size)
 {
     UI_AdjustFrom640(&x, &y, &w, &h);
     size *= uiInfo.uiDC.xscale;
@@ -220,7 +220,7 @@ void _UI_DrawSides(float x, float y, float w, float h, float size)
     trap_R_DrawStretchPic(x + w - size, y, size, h, 0, 0, 0, 0, uiInfo.uiDC.whiteShader);
 }
 
-void _UI_DrawTopBottom(float x, float y, float w, float h, float size)
+static void _UI_DrawTopBottom(float x, float y, float w, float h, float size)
 {
     UI_AdjustFrom640(&x, &y, &w, &h);
     size *= uiInfo.uiDC.yscale;
@@ -234,7 +234,7 @@ UI_DrawRect
 Coordinates are 640*480 virtual values
 =================
 */
-void _UI_DrawRect(float x, float y, float width, float height, float size, const float* color)
+static void _UI_DrawRect(float x, float y, float width, float height, float size, const float* color)
 {
     trap_R_SetColor(color);
 
@@ -244,7 +244,7 @@ void _UI_DrawRect(float x, float y, float width, float height, float size, const
     trap_R_SetColor(NULL);
 }
 
-int Text_Width(const char* text, float scale, int limit)
+static int Text_Width(const char* text, float scale, int limit)
 {
     int count, len;
     float out;
@@ -280,7 +280,7 @@ int Text_Width(const char* text, float scale, int limit)
     return out * useScale;
 }
 
-int Text_Height(const char* text, float scale, int limit)
+static int Text_Height(const char* text, float scale, int limit)
 {
     int len, count;
     float max;
@@ -318,7 +318,7 @@ int Text_Height(const char* text, float scale, int limit)
     return max * useScale;
 }
 
-void Text_PaintChar(float x, float y, float width, float height, float scale, float s, float t, float s2, float t2, qhandle_t hShader)
+static void Text_PaintChar(float x, float y, float width, float height, float scale, float s, float t, float s2, float t2, qhandle_t hShader)
 {
     float w, h;
     w = width * scale;
@@ -327,7 +327,7 @@ void Text_PaintChar(float x, float y, float width, float height, float scale, fl
     trap_R_DrawStretchPic(x, y, w, h, s, t, s2, t2, hShader);
 }
 
-void Text_Paint(float x, float y, float scale, vec4_t color, const char* text, float adjust, int limit, int style)
+static void Text_Paint(float x, float y, float scale, vec4_t color, const char* text, float adjust, int limit, int style)
 {
     int len, count;
     vec4_t newColor;
@@ -396,7 +396,7 @@ void Text_Paint(float x, float y, float scale, vec4_t color, const char* text, f
     }
 }
 
-void Text_PaintWithCursor(float x, float y, float scale, vec4_t color, const char* text, int cursorPos, char cursor, int limit, int style)
+static void Text_PaintWithCursor(float x, float y, float scale, vec4_t color, const char* text, int cursorPos, char cursor, int limit, int style)
 {
     int len, count;
     vec4_t newColor;
@@ -624,7 +624,7 @@ void _UI_Shutdown(void)
 
 char* defaultMenu = NULL;
 
-char* GetMenuBuffer(const char* filename)
+static char* GetMenuBuffer(const char* filename)
 {
     int len;
     fileHandle_t f;
@@ -648,7 +648,7 @@ char* GetMenuBuffer(const char* filename)
     return buf;
 }
 
-bool Asset_Parse(int handle)
+static bool Asset_Parse(int handle)
 {
     pc_token_t token;
     const char* tempStr;
@@ -803,7 +803,7 @@ void UI_Report()
     String_Report();
 }
 
-void UI_ParseMenu(const char* menuFile)
+static void UI_ParseMenu(const char* menuFile)
 {
     int handle;
     pc_token_t token;
@@ -851,7 +851,7 @@ void UI_ParseMenu(const char* menuFile)
     trap_PC_FreeSource(handle);
 }
 
-bool Load_Menu(int handle)
+static bool Load_Menu(int handle)
 {
     pc_token_t token;
 
@@ -2664,7 +2664,7 @@ static int QDECL UI_ServersQsortCompare(const void* arg1, const void* arg2)
     return trap_LAN_CompareServers(ui_netSource.integer, uiInfo.serverStatus.sortKey, uiInfo.serverStatus.sortDir, *(int*)arg1, *(int*)arg2);
 }
 
-void UI_ServersSort(int column, bool force)
+static void UI_ServersSort(int column, bool force)
 {
 
     if (!force) {
@@ -3413,7 +3413,7 @@ static int UI_MapCountByGameType(bool singlePlayer)
     return c;
 }
 
-bool UI_hasSkinForBase(const char* base, const char* team)
+static bool UI_hasSkinForBase(const char* base, const char* team)
 {
     char test[1024];
 
@@ -5023,13 +5023,13 @@ static void UI_PrintTime(char* buf, int bufsize, int time)
     }
 }
 
-void Text_PaintCenter(float x, float y, float scale, vec4_t color, const char* text, float adjust)
+static void Text_PaintCenter(float x, float y, float scale, vec4_t color, const char* text, float adjust)
 {
     int len = Text_Width(text, scale, 0);
     Text_Paint(x - len / 2, y, scale, color, text, 0, 0, ITEM_TEXTSTYLE_SHADOWEDMORE);
 }
 
-void Text_PaintCenter_AutoWrapped(float x, float y, float xmax, float ystep, float scale, vec4_t color, const char* str, float adjust)
+static void Text_PaintCenter_AutoWrapped(float x, float y, float xmax, float ystep, float scale, vec4_t color, const char* str, float adjust)
 {
     int width;
     char *s1, *s2, *s3;
