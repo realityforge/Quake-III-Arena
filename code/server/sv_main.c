@@ -260,7 +260,7 @@ and all connected players.  Used for getting detailed information after
 the simple info query.
 ================
 */
-void SVC_Status(netadr_t from)
+static void SVC_Status(netadr_t from)
 {
     char player[1024];
     char status[MAX_MSGLEN];
@@ -311,7 +311,7 @@ Responds with a short info message that should be enough to determine
 if a user is interested in a server to do a full status
 ================
 */
-void SVC_Info(netadr_t from)
+static void SVC_Info(netadr_t from)
 {
     int i, count;
     char* gamedir;
@@ -359,7 +359,7 @@ void SVC_Info(netadr_t from)
     NET_OutOfBandPrint(NS_SERVER, from, "infoResponse\n%s", infostring);
 }
 
-void SV_FlushRedirect(char* outputbuf)
+static void SV_FlushRedirect(char* outputbuf)
 {
     NET_OutOfBandPrint(NS_SERVER, svs.redirectAddress, "print\n%s", outputbuf);
 }
@@ -373,7 +373,7 @@ Shift down the remaining args
 Redirect all printfs
 ===============
 */
-void SVC_RemoteCommand(netadr_t from, msg_t* msg)
+static void SVC_RemoteCommand(netadr_t from, msg_t* msg)
 {
     bool valid;
     unsigned int time;
@@ -442,7 +442,7 @@ Clients that are in the game can still send
 connectionless packets.
 =================
 */
-void SV_ConnectionlessPacket(netadr_t from, msg_t* msg)
+static void SV_ConnectionlessPacket(netadr_t from, msg_t* msg)
 {
     char* s;
     char* c;
@@ -546,7 +546,7 @@ SV_CalcPings
 Updates the cl->ping variables
 ===================
 */
-void SV_CalcPings(void)
+static void SV_CalcPings()
 {
     int i, j;
     client_t* cl;
@@ -607,7 +607,7 @@ for a few seconds to make sure any final reliable message gets resent
 if necessary
 ==================
 */
-void SV_CheckTimeouts(void)
+static void SV_CheckTimeouts()
 {
     int i;
     client_t* cl;
@@ -643,7 +643,7 @@ void SV_CheckTimeouts(void)
     }
 }
 
-bool SV_CheckPaused(void)
+static bool SV_CheckPaused()
 {
     int count;
     client_t* cl;

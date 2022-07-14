@@ -69,7 +69,7 @@ SV_GameSendServerCommand
 Sends a command string to a client
 ===============
 */
-void SV_GameSendServerCommand(int clientNum, const char* text)
+static void SV_GameSendServerCommand(int clientNum, const char* text)
 {
     if (clientNum == -1) {
         SV_SendServerCommand(NULL, "%s", text);
@@ -88,7 +88,7 @@ SV_GameDropClient
 Disconnects the client with a message
 ===============
 */
-void SV_GameDropClient(int clientNum, const char* reason)
+static void SV_GameDropClient(int clientNum, const char* reason)
 {
     if (clientNum < 0 || clientNum >= sv_maxclients->integer) {
         return;
@@ -103,7 +103,7 @@ SV_SetBrushModel
 sets mins and maxs for inline bmodels
 =================
 */
-void SV_SetBrushModel(sharedEntity_t* ent, const char* name)
+static void SV_SetBrushModel(sharedEntity_t* ent, const char* name)
 {
     clipHandle_t h;
     vec3_t mins, maxs;
@@ -177,7 +177,7 @@ SV_inPVSIgnorePortals
 Does NOT check portalareas
 =================
 */
-bool SV_inPVSIgnorePortals(const vec3_t p1, const vec3_t p2)
+static bool SV_inPVSIgnorePortals(const vec3_t p1, const vec3_t p2)
 {
     // Get the pvs set for point p1
     const uint8_t* pvs = CM_ClusterPVS(CM_LeafCluster(CM_PointLeafnum(p1)));
@@ -190,7 +190,7 @@ bool SV_inPVSIgnorePortals(const vec3_t p1, const vec3_t p2)
     }
 }
 
-void SV_AdjustAreaPortalState(sharedEntity_t* ent, bool open)
+static void SV_AdjustAreaPortalState(sharedEntity_t* ent, bool open)
 {
     svEntity_t* svEnt;
 
@@ -201,7 +201,7 @@ void SV_AdjustAreaPortalState(sharedEntity_t* ent, bool open)
     CM_AdjustAreaPortalState(svEnt->areanum, svEnt->areanum2, open);
 }
 
-bool SV_EntityContact(vec3_t mins, vec3_t maxs, const sharedEntity_t* gEnt, int capsule)
+static bool SV_EntityContact(vec3_t mins, vec3_t maxs, const sharedEntity_t* gEnt, int capsule)
 {
     const float *origin, *angles;
     clipHandle_t ch;
@@ -218,7 +218,7 @@ bool SV_EntityContact(vec3_t mins, vec3_t maxs, const sharedEntity_t* gEnt, int 
     return trace.startsolid;
 }
 
-void SV_GetServerinfo(char* buffer, int bufferSize)
+static void SV_GetServerinfo(char* buffer, int bufferSize)
 {
     if (bufferSize < 1) {
         Com_Error(ERR_DROP, "SV_GetServerinfo: bufferSize == %i", bufferSize);
@@ -226,8 +226,7 @@ void SV_GetServerinfo(char* buffer, int bufferSize)
     Q_strncpyz(buffer, Cvar_InfoString(CVAR_SERVERINFO), bufferSize);
 }
 
-void SV_LocateGameData(sharedEntity_t* gEnts, int numGEntities, int sizeofGEntity_t,
-                       playerState_t* clients, int sizeofGameClient)
+static void SV_LocateGameData(sharedEntity_t* gEnts, int numGEntities, int sizeofGEntity_t, playerState_t* clients, int sizeofGameClient)
 {
     sv.gentities = gEnts;
     sv.gentitySize = sizeofGEntity_t;
@@ -237,7 +236,7 @@ void SV_LocateGameData(sharedEntity_t* gEnts, int numGEntities, int sizeofGEntit
     sv.gameClientSize = sizeofGameClient;
 }
 
-void SV_GetUsercmd(int clientNum, usercmd_t* cmd)
+static void SV_GetUsercmd(int clientNum, usercmd_t* cmd)
 {
     if (clientNum < 0 || clientNum >= sv_maxclients->integer) {
         Com_Error(ERR_DROP, "SV_GetUsercmd: bad clientNum:%i", clientNum);
@@ -269,7 +268,7 @@ The module is making a system call
 
 #define VMF(x) ((float*)args)[x]
 
-int SV_GameSystemCalls(int* args)
+static int SV_GameSystemCalls(int* args)
 {
     switch (args[0]) {
     case G_PRINT:

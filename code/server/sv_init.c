@@ -147,7 +147,7 @@ to the clients -- only the fields that differ from the
 baseline will be transmitted
 ================
 */
-void SV_CreateBaseline(void)
+static void SV_CreateBaseline()
 {
     sharedEntity_t* svent;
     int entnum;
@@ -164,7 +164,7 @@ void SV_CreateBaseline(void)
     }
 }
 
-void SV_BoundMaxClients(int minimum)
+static void SV_BoundMaxClients(int minimum)
 {
     // get the current maxclients value
     Cvar_Get("sv_maxclients", "8", 0);
@@ -188,7 +188,7 @@ NOT cause this to be called, unless the game is exited to
 the menu system first.
 ===============
 */
-void SV_Startup(void)
+static void SV_Startup()
 {
     if (svs.initialized) {
         Com_Error(ERR_FATAL, "SV_Startup: svs.initialized");
@@ -258,7 +258,7 @@ void SV_ChangeMaxClients(void)
     svs.numSnapshotEntities = sv_maxclients->integer * LOCAL_PACKET_BACKUP * 64;
 }
 
-void SV_ClearServer(void)
+static void SV_ClearServer(void)
 {
     int i;
 
@@ -270,6 +270,7 @@ void SV_ClearServer(void)
     memset(&sv, 0, sizeof(sv));
 }
 
+#ifdef DEDICATED
 /*
 ================
 SV_TouchCGame
@@ -277,7 +278,7 @@ SV_TouchCGame
   touch the cgame.vm so that a pure client can load it if it's in a separate pk3
 ================
 */
-void SV_TouchCGame(void)
+static void SV_TouchCGame()
 {
     fileHandle_t f;
     char filename[MAX_QPATH];
@@ -288,6 +289,7 @@ void SV_TouchCGame(void)
         FS_FCloseFile(f);
     }
 }
+#endif
 
 /*
 ================
@@ -511,8 +513,6 @@ SV_Init
 Only called at main exe startup, not for each game
 ===============
 */
-void SV_BotInitBotLib(void);
-
 void SV_Init(void)
 {
     SV_AddOperatorCommands();

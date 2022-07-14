@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "server.h"
 #include "../botlib/botlib.h"
+#include "../qcommon/cm_public.h"
 
 typedef struct bot_debugpoly_s {
     int inuse;
@@ -403,7 +404,7 @@ void SV_BotInitCvars(void)
     Cvar_Get("bot_interbreedwrite", "", CVAR_CHEAT); // write interbreeded bots to this file
 }
 
-void SV_BotInitBotLib(void)
+void SV_BotInitBotLib()
 {
     botlib_import_t botlib_import;
 
