@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // sv_game.c -- interface to the game dll
 
 #include "server.h"
+#include "qbraincheck.h"
 
 #include "../botlib/botlib.h"
 
@@ -128,6 +129,23 @@ void SV_SetBrushModel(sharedEntity_t* ent, const char* name)
     SV_LinkEntity(ent); // FIXME: remove
 }
 
+/**
+ * Return true if bit cluster is visible according to pvs.
+ * (PVS is a variable length bitset, cluster is the number of the cluster and thus the bit that should be 1 to be visible)
+ *
+ * @param pvs the PVS between encoding visibility of clusters
+ * @param cluster the cluster to check for
+ * @return true if visible, false otherwise.
+ */
+static inline bool SV_isClusterInPVS(const uint8_t* pvs, const int cluster)
+{
+    braincheck_assert_nonnull(pvs);
+
+    // pvs[cluster >> 3] gets the byte in which the cluster exists
+    // 1 << (cluster & 7) gets the bit on the byte in which the cluster is encoded
+    return (pvs[cluster >> 3] & (1 << (cluster & 7))) ? true : false;
+}
+
 /*
 =================
 SV_inPVS
@@ -137,24 +155,19 @@ Also checks portalareas so that doors block sight
 */
 bool SV_inPVS(const vec3_t p1, const vec3_t p2)
 {
-    int leafnum;
-    int cluster;
-    int area1, area2;
-    uint8_t* mask;
-
-    leafnum = CM_PointLeafnum(p1);
-    cluster = CM_LeafCluster(leafnum);
-    area1 = CM_LeafArea(leafnum);
-    mask = CM_ClusterPVS(cluster);
-
-    leafnum = CM_PointLeafnum(p2);
-    cluster = CM_LeafCluster(leafnum);
-    area2 = CM_LeafArea(leafnum);
-    if (mask && (!(mask[cluster >> 3] & (1 << (cluster & 7)))))
-        return false;
-    if (!CM_AreasConnected(area1, area2))
-        return false; // a door blocks sight
-    return true;
+    const int leafnum1 = CM_PointLeafnum(p1);
+    const int area1 = CM_LeafArea(leafnum1);
+    const uint8_t* pvs = CM_ClusterPVS(CM_LeafCluster(leafnum1));
+    if (NULL == pvs) {
+        return true;
+    } else {
+        const int leafnum2 = CM_PointLeafnum(p2);
+        const int cluster = CM_LeafCluster(leafnum2);
+        const int area2 = CM_LeafArea(leafnum2);
+        // if the PVS indicates that the cluster is not visible or the cluster
+        // is in another area that is not connected then return false
+        return !SV_isClusterInPVS(pvs, cluster) || !CM_AreasConnected(area1, area2) ? false : true;
+    }
 }
 
 /*
@@ -166,21 +179,15 @@ Does NOT check portalareas
 */
 bool SV_inPVSIgnorePortals(const vec3_t p1, const vec3_t p2)
 {
-    int leafnum;
-    int cluster;
-    uint8_t* mask;
-
-    leafnum = CM_PointLeafnum(p1);
-    cluster = CM_LeafCluster(leafnum);
-    mask = CM_ClusterPVS(cluster);
-
-    leafnum = CM_PointLeafnum(p2);
-    cluster = CM_LeafCluster(leafnum);
-
-    if (mask && (!(mask[cluster >> 3] & (1 << (cluster & 7)))))
-        return false;
-
-    return true;
+    // Get the pvs set for point p1
+    const uint8_t* pvs = CM_ClusterPVS(CM_LeafCluster(CM_PointLeafnum(p1)));
+    if (NULL == pvs) {
+        return true;
+    } else {
+        // Find the cluster for point p2
+        const int cluster = CM_LeafCluster(CM_PointLeafnum(p2));
+        return SV_isClusterInPVS(pvs, cluster);
+    }
 }
 
 void SV_AdjustAreaPortalState(sharedEntity_t* ent, bool open)
