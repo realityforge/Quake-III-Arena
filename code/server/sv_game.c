@@ -27,16 +27,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 botlib_export_t* botlib_export;
 
-void SV_GameError(const char* string)
-{
-    Com_Error(ERR_DROP, "%s", string);
-}
-
-void SV_GamePrint(const char* string)
-{
-    Com_Printf("%s", string);
-}
-
 sharedEntity_t* SV_GentityNum(int num)
 {
     sharedEntity_t* ent;
