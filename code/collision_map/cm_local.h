@@ -24,6 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "qcommon.h"
 #include "cm_polylib.h"
 #include "cvar_engine.h"
+#include "qfiles.h"
 
 #define MAX_SUBMODELS 256
 #define BOX_MODEL_HANDLE 255
