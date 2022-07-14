@@ -294,7 +294,6 @@ void MenuField_Draw(menufield_s* f)
     int x;
     int y;
     int w;
-    int h;
     int style;
     bool focus;
     float* color;
@@ -304,11 +303,9 @@ void MenuField_Draw(menufield_s* f)
 
     if (f->generic.flags & QMF_SMALLFONT) {
         w = SMALLCHAR_WIDTH;
-        h = SMALLCHAR_HEIGHT;
         style = UI_SMALLFONT;
     } else {
         w = BIGCHAR_WIDTH;
-        h = BIGCHAR_HEIGHT;
         style = UI_BIGFONT;
     }
 
