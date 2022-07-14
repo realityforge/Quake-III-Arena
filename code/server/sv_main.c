@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-#include "server.h"
+#include "server_local.h"
 #include "qengine.h"
 
 serverStatic_t svs; // persistant server info

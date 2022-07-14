@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 // world.c -- world query functions
 
-#include "server.h"
+#include "server_local.h"
 
 /*
 ================

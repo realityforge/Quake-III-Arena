@@ -31,12 +31,10 @@ SERVER_COPTS = EXTRA_WARNINGS + [
     "-Wno-int-to-pointer-cast",
 ]
 
-# TODO: Rename "server.h" to "server_local.h"
-
 cc_library(
     name = "server",
     srcs = _SERVER_SRC,
-    hdrs = ["server.h"],
+    hdrs = ["server_local.h"],
     copts = SERVER_COPTS,
     defines = ENGINE_DEFINES,
     visibility = ["//code/client:__pkg__"],
@@ -53,7 +51,7 @@ cc_library(
 cc_library(
     name = "server-dedicated",
     srcs = _SERVER_SRC,
-    hdrs = ["server.h"],
+    hdrs = ["server_local.h"],
     copts = SERVER_COPTS,
     defines = SERVER_ONLY_ENGINE_DEFINES,
     deps = [

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 // sv_bot.c
 
-#include "server.h"
+#include "server_local.h"
 #include "../botlib/botlib.h"
 #include "../collision_map/cm_public.h"
 
