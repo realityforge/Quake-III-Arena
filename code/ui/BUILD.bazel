@@ -13,6 +13,9 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 load("//build_defs:rules.bzl", "TEAM_ARENA_DEFINES", "UI_COPTS", "UI_DEFINES")
 
+# TODO: Remove this suppression after examining all the scenarios where it is triggered
+WARNING_SUPPRESSIONS = ["-Wno-absolute-value"]
+
 cc_library(
     name = "api",
     hdrs = ["ui_public.h"],
@@ -39,7 +42,7 @@ cc_library(
     name = "shared",
     srcs = ["ui_shared.c"],
     hdrs = ["ui_shared.h"],
-    copts = UI_COPTS,
+    copts = UI_COPTS + WARNING_SUPPRESSIONS,
     includes = ["."],
     visibility = [
         "//code/cgame:__pkg__",
@@ -67,6 +70,7 @@ cc_library(
         ":api",
         ":local_api",
         "//code/client:api",
+        "//code/qcommon:plugin",
         "//code/qcommon:shared_api",
         "//code/renderer:api",
     ],
@@ -80,7 +84,7 @@ cc_library(
         "ui_main.c",
         "ui_players.c",
     ],
-    copts = UI_COPTS,
+    copts = UI_COPTS + WARNING_SUPPRESSIONS,
     defines = TEAM_ARENA_DEFINES + UI_DEFINES,
     visibility = ["//game/teamarena:__pkg__"],
     deps = [

@@ -11,7 +11,7 @@
 # limitations under the License.
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//build_defs:rules.bzl", "EXTRA_WARNINGS", "UI_COPTS", "UI_DEFINES")
+load("//build_defs:rules.bzl", "UI_COPTS", "UI_DEFINES")
 
 cc_library(
     name = "ui",
@@ -53,7 +53,7 @@ cc_library(
         "ui_teamorders.c",
         "ui_video.c",
     ],
-    copts = UI_COPTS + EXTRA_WARNINGS,
+    copts = UI_COPTS,
     defines = UI_DEFINES,
     visibility = ["//game/baseq3:__pkg__"],
     deps = [
