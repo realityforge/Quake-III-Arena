@@ -147,7 +147,7 @@ void _UI_KeyEvent(int key, bool down);
 void _UI_MouseEvent(int dx, int dy);
 void _UI_Refresh(int realtime);
 bool _UI_IsFullscreen(void);
-Q_EXPORT intptr_t vmMain(int command, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11)
+EXPORT intptr_t vmMain(int command, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11)
 {
     switch (command) {
     case UI_GETAPIVERSION:

@@ -34,7 +34,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 static vmDllSystemCall syscall = (vmDllSystemCall)-1;
 
-Q_EXPORT void dllEntry(vmDllSystemCall syscallptr)
+EXPORT void dllEntry(vmDllSystemCall syscallptr)
 {
     syscall = syscallptr;
 }
