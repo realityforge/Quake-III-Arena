@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "cm_local.h"
 
-int CM_PointLeafnum_r(const vec3_t p, int num)
+static int CM_PointLeafnum_r(const vec3_t p, int num)
 {
     float d;
     cNode_t* node;
@@ -212,7 +212,7 @@ uint8_t* CM_ClusterPVS(int cluster)
     return cm.visibility + cluster * cm.clusterBytes;
 }
 
-void CM_FloodArea_r(int areaNum, int floodnum)
+static void CM_FloodArea_r(int areaNum, int floodnum)
 {
     int i;
     cArea_t* area;

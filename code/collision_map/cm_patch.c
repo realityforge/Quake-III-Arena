@@ -405,7 +405,7 @@ static facet_t facets[MAX_PATCH_PLANES]; // maybe MAX_FACETS ??
 #define NORMAL_EPSILON 0.0001
 #define DIST_EPSILON 0.02
 
-int CM_PlaneEqual(patchPlane_t* p, float plane[4], int* flipped)
+static int CM_PlaneEqual(patchPlane_t* p, float plane[4], int* flipped)
 {
     float invplane[4];
 
@@ -433,7 +433,7 @@ int CM_PlaneEqual(patchPlane_t* p, float plane[4], int* flipped)
     return false;
 }
 
-void CM_SnapVector(vec3_t normal)
+static void CM_SnapVector(vec3_t normal)
 {
     int i;
 
@@ -456,7 +456,7 @@ void CM_SnapVector(vec3_t normal)
 CM_FindPlane2
 ==================
 */
-int CM_FindPlane2(float plane[4], int* flipped)
+static int CM_FindPlane2(float plane[4], int* flipped)
 {
     int i;
 
@@ -751,7 +751,7 @@ static bool CM_ValidateFacet(facet_t* facet)
     return true; // winding is fine
 }
 
-void CM_AddFacetBevels(facet_t* facet)
+static void CM_AddFacetBevels(facet_t* facet)
 {
 
     int i, j, k, l;
@@ -1158,7 +1158,7 @@ CM_TracePointThroughPatchCollide
   special case for point traces because the patch collide "brushes" have no volume
 ====================
 */
-void CM_TracePointThroughPatchCollide(traceWork_t* tw, const struct patchCollide_s* pc)
+static void CM_TracePointThroughPatchCollide(traceWork_t* tw, const struct patchCollide_s* pc)
 {
     bool frontFacing[MAX_PATCH_PLANES];
     float intersection[MAX_PATCH_PLANES];
@@ -1247,7 +1247,7 @@ void CM_TracePointThroughPatchCollide(traceWork_t* tw, const struct patchCollide
     }
 }
 
-int CM_CheckFacetPlane(float* plane, vec3_t start, vec3_t end, float* enterFrac, float* leaveFrac, int* hit)
+static int CM_CheckFacetPlane(float* plane, vec3_t start, vec3_t end, float* enterFrac, float* leaveFrac, int* hit)
 {
     float d1, d2, f;
 
