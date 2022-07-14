@@ -981,11 +981,6 @@ void Huff_offsetTransmit(huff_t* huff, int ch, uint8_t* fout, int* offset, int m
 void Huff_putBit(int bit, uint8_t* fout, int* offset);
 int Huff_getBit(uint8_t* fout, int* offset);
 
-#define SV_ENCODE_START 4
-#define SV_DECODE_START 12
-#define CL_ENCODE_START 12
-#define CL_DECODE_START 4
-
 // flags for sv_allowDownload and cl_allowDownload
 #define DLF_ENABLE 1
 #define DLF_NO_REDIRECT 2
