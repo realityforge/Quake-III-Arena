@@ -31,6 +31,7 @@ cc_library(
 cc_library(
     name = "cvar",
     srcs = ["cvar.c"],
+    copts = EXTRA_WARNINGS,
     defines = ENGINE_DEFINES,
     visibility = [
         "//code/client:__pkg__",

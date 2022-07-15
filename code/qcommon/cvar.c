@@ -416,7 +416,7 @@ Cvar_Toggle_f
 Toggles a cvar for easy single key binding
 ============
 */
-void Cvar_Toggle_f()
+static void Cvar_Toggle_f()
 {
     int v;
 
@@ -439,7 +439,7 @@ Allows setting and defining of arbitrary cvars from console, even if they
 weren't declared in C code.
 ============
 */
-void Cvar_Set_f()
+static void Cvar_Set_f()
 {
     int i, c, l, len;
     char combined[MAX_STRING_TOKENS];
@@ -473,7 +473,7 @@ Cvar_SetU_f
 As Cvar_Set, but also flags it as userinfo
 ============
 */
-void Cvar_SetU_f()
+static void Cvar_SetU_f()
 {
     cvar_t* v;
 
@@ -496,7 +496,7 @@ Cvar_SetS_f
 As Cvar_Set, but also flags it as userinfo
 ============
 */
-void Cvar_SetS_f()
+static void Cvar_SetS_f()
 {
     cvar_t* v;
 
@@ -519,7 +519,7 @@ Cvar_SetA_f
 As Cvar_Set, but also flags it as archived
 ============
 */
-void Cvar_SetA_f()
+static void Cvar_SetA_f()
 {
     cvar_t* v;
 
@@ -535,7 +535,7 @@ void Cvar_SetA_f()
     v->flags |= CVAR_ARCHIVE;
 }
 
-void Cvar_Reset_f()
+static void Cvar_Reset_f()
 {
     if (Cmd_Argc() != 2) {
         Com_Printf("usage: reset <variable>\n");
@@ -570,7 +570,7 @@ void Cvar_WriteVariables(fileHandle_t f)
     }
 }
 
-void Cvar_List_f()
+static void Cvar_List_f()
 {
     cvar_t* var;
     int i;
