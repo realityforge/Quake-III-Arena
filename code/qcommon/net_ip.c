@@ -745,8 +745,6 @@ void Sys_ShowIP()
     }
 }
 
-//=============================================================================
-
 static SOCKET NET_IPSocket(char* net_interface, int port, int* err)
 {
     SOCKET newsocket;
