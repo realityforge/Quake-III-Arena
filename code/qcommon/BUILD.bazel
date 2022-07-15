@@ -11,11 +11,12 @@
 # limitations under the License.
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//build_defs:rules.bzl", "ENGINE_DEFINES", "FULL_WARNINGS", "SERVER_ONLY_ENGINE_DEFINES")
+load("//build_defs:rules.bzl", "ENGINE_DEFINES", "EXTRA_WARNINGS", "FULL_WARNINGS", "SERVER_ONLY_ENGINE_DEFINES")
 
 cc_library(
     name = "qbraincheck",
     hdrs = ["qbraincheck.h"],
+    copts = EXTRA_WARNINGS,
     includes = ["."],
     visibility = [
         "//code/server:__pkg__",
@@ -30,6 +31,7 @@ cc_library(
 cc_library(
     name = "cvar",
     srcs = ["cvar.c"],
+    copts = EXTRA_WARNINGS,
     defines = ENGINE_DEFINES,
     visibility = [
         "//code/client:__pkg__",
@@ -48,6 +50,7 @@ cc_library(
         "vm_interpreted.c",
     ],
     hdrs = ["vm_local.h"],
+    copts = EXTRA_WARNINGS,
     defines = ENGINE_DEFINES,
     visibility = [
         "//code/client:__pkg__",
@@ -62,6 +65,7 @@ cc_library(
 cc_library(
     name = "files",
     srcs = ["files.c"],
+    copts = EXTRA_WARNINGS,
     defines = ENGINE_DEFINES,
     visibility = ["//code/client:__pkg__"],
     deps = [
@@ -74,6 +78,7 @@ cc_library(
 cc_library(
     name = "files-dedicated",
     srcs = ["files.c"],
+    copts = EXTRA_WARNINGS,
     defines = SERVER_ONLY_ENGINE_DEFINES,
     visibility = ["//code/server:__pkg__"],
     deps = [
@@ -106,6 +111,7 @@ cc_library(
         "net_chan.c",
         "net_ip.c",
     ],
+    copts = EXTRA_WARNINGS,
     defines = ENGINE_DEFINES,
     visibility = [
         "//code/client:__pkg__",
