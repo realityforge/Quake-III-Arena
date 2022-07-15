@@ -113,7 +113,8 @@ static char* opnames[256] = {
 
 #define loadWord(addr) *((int*)addr)
 
-char* VM_Indent(vm_t* vm)
+#ifdef DEBUG_VM
+static char* VM_Indent(vm_t* vm)
 {
     static char* string = "                                        ";
     if (vm->callLevel > 20) {
@@ -121,6 +122,7 @@ char* VM_Indent(vm_t* vm)
     }
     return string + 2 * (20 - vm->callLevel);
 }
+#endif
 
 void VM_PrepareInterpreter(vm_t* vm, vmHeader_t* header)
 {
