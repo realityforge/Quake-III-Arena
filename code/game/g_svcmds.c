@@ -113,7 +113,7 @@ static bool StringToFilter(char* s, ipFilter_t* f)
     return true;
 }
 
-static void UpdateIPBans(void)
+static void UpdateIPBans()
 {
     uint8_t b[4];
     uint8_t m[4];
@@ -197,7 +197,7 @@ static void AddIP(char* str)
     UpdateIPBans();
 }
 
-void G_ProcessIPBans(void)
+void G_ProcessIPBans()
 {
     char *s, *t;
     char str[MAX_CVAR_VALUE_STRING];
@@ -216,7 +216,7 @@ void G_ProcessIPBans(void)
     }
 }
 
-static void Svcmd_AddIP_f(void)
+static void Svcmd_AddIP_f()
 {
     char str[MAX_TOKEN_CHARS];
 
@@ -230,7 +230,7 @@ static void Svcmd_AddIP_f(void)
     AddIP(str);
 }
 
-static void Svcmd_RemoveIP_f(void)
+static void Svcmd_RemoveIP_f()
 {
     ipFilter_t f;
     int i;
@@ -259,7 +259,7 @@ static void Svcmd_RemoveIP_f(void)
     G_Printf("Didn't find %s.\n", str);
 }
 
-static void Svcmd_EntityList_f(void)
+static void Svcmd_EntityList_f()
 {
     int e;
     gentity_t* check;
@@ -364,7 +364,7 @@ Svcmd_ForceTeam_f
 forceteam <player> <team>
 ===================
 */
-static void Svcmd_ForceTeam_f(void)
+static void Svcmd_ForceTeam_f()
 {
     gclient_t* cl;
     char str[MAX_TOKEN_CHARS];
@@ -383,7 +383,7 @@ static void Svcmd_ForceTeam_f(void)
 
 char* ConcatArgs(int start);
 
-bool ConsoleCommand(void)
+bool ConsoleCommand()
 {
     char cmd[MAX_TOKEN_CHARS];
 

@@ -128,7 +128,7 @@ vec3_t rforward, rright, rup;
 
 float oldtime;
 
-void CG_ClearParticles(void)
+void CG_ClearParticles()
 {
     int i;
 
@@ -746,7 +746,7 @@ void CG_AddParticleToScene(cparticle_t* p, vec3_t org, float alpha)
 // Ridah, made this static so it doesn't interfere with other files
 static float roll = 0.0;
 
-void CG_AddParticles(void)
+void CG_AddParticles()
 {
     cparticle_t *p, *next;
     float alpha;

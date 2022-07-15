@@ -50,7 +50,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 int numnodeswitches;
 char nodeswitch[MAX_NODESWITCHES + 1][144];
 
-void BotResetNodeSwitches(void)
+void BotResetNodeSwitches()
 {
     numnodeswitches = 0;
 }

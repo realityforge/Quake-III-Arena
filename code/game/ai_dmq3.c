@@ -1875,7 +1875,7 @@ static void BotInitWaypoints()
     }
 }
 
-int TeamPlayIsOn(void)
+int TeamPlayIsOn()
 {
     return (gametype >= GT_TEAM);
 }
@@ -4473,7 +4473,7 @@ int BotGetAlternateRouteGoal(bot_state_t* bs, int base)
     return true;
 }
 
-static void BotSetupAlternativeRouteGoals(void)
+static void BotSetupAlternativeRouteGoals()
 {
 
     if (altroutegoals_setup)

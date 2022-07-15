@@ -202,7 +202,7 @@ static void SV_Startup()
     Cvar_Set("sv_running", "1");
 }
 
-void SV_ChangeMaxClients(void)
+void SV_ChangeMaxClients()
 {
     int oldMaxClients;
     int i;
@@ -258,7 +258,7 @@ void SV_ChangeMaxClients(void)
     svs.numSnapshotEntities = sv_maxclients->integer * LOCAL_PACKET_BACKUP * 64;
 }
 
-static void SV_ClearServer(void)
+static void SV_ClearServer()
 {
     int i;
 
@@ -513,7 +513,7 @@ SV_Init
 Only called at main exe startup, not for each game
 ===============
 */
-void SV_Init(void)
+void SV_Init()
 {
     SV_AddOperatorCommands();
 

@@ -694,7 +694,7 @@ void FinishSpawningItem(gentity_t* ent)
 
 bool itemRegistered[MAX_ITEMS];
 
-void G_CheckTeamItems(void)
+void G_CheckTeamItems()
 {
 
     // Set up team stuff
@@ -774,7 +774,7 @@ void G_CheckTeamItems(void)
 #endif
 }
 
-void ClearRegisteredItems(void)
+void ClearRegisteredItems()
 {
     memset(itemRegistered, 0, sizeof(itemRegistered));
 
@@ -812,7 +812,7 @@ Write the needed items to a config string
 so the client will know which ones to precache
 ===============
 */
-void SaveRegisteredItems(void)
+void SaveRegisteredItems()
 {
     char string[MAX_ITEMS + 1];
     int i;

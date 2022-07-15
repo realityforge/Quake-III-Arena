@@ -39,7 +39,7 @@ SV_GetPlayerByName
 Returns the player with name from Cmd_Argv(1)
 ==================
 */
-static client_t* SV_GetPlayerByName(void)
+static client_t* SV_GetPlayerByName()
 {
     client_t* cl;
     int i;
@@ -86,7 +86,7 @@ SV_GetPlayerByNum
 Returns the player with idnum from Cmd_Argv(1)
 ==================
 */
-static client_t* SV_GetPlayerByNum(void)
+static client_t* SV_GetPlayerByNum()
 {
     client_t* cl;
     int i;
@@ -136,7 +136,7 @@ SV_Map_f
 Restart the server on a different map
 ==================
 */
-static void SV_Map_f(void)
+static void SV_Map_f()
 {
     char* cmd;
     char* map;
@@ -208,7 +208,7 @@ Completely restarts a level, but doesn't send a new gamestate to the clients.
 This allows fair starts with variable load times.
 ================
 */
-static void SV_MapRestart_f(void)
+static void SV_MapRestart_f()
 {
     int i;
     client_t* client;
@@ -328,7 +328,7 @@ SV_Kick_f
 Kick a user off of the server  FIXME: move to game
 ==================
 */
-static void SV_Kick_f(void)
+static void SV_Kick_f()
 {
     client_t* cl;
     int i;
@@ -387,7 +387,7 @@ SV_KickNum_f
 Kick a user off of the server  FIXME: move to game
 ==================
 */
-static void SV_KickNum_f(void)
+static void SV_KickNum_f()
 {
     client_t* cl;
 
@@ -415,7 +415,7 @@ static void SV_KickNum_f(void)
     cl->lastPacketTime = svs.time; // in case there is a funny zombie
 }
 
-static void SV_Status_f(void)
+static void SV_Status_f()
 {
     int i, j, l;
     client_t* cl;
@@ -475,7 +475,7 @@ static void SV_Status_f(void)
 }
 #ifdef DEDICATED
 
-static void SV_ConSay_f(void)
+static void SV_ConSay_f()
 {
     char* p;
     char text[1024];
@@ -510,7 +510,7 @@ SV_Heartbeat_f
 Also called by SV_DropClient, SV_DirectConnect, and SV_SpawnServer
 ==================
 */
-void SV_Heartbeat_f(void)
+void SV_Heartbeat_f()
 {
     svs.nextHeartbeatTime = -9999999;
 }
@@ -523,7 +523,7 @@ SV_Serverinfo_f
 Examine the serverinfo string
 ===========
 */
-static void SV_Serverinfo_f(void)
+static void SV_Serverinfo_f()
 {
     Com_Printf("Server info settings:\n");
     Info_Print(Cvar_InfoString(CVAR_SERVERINFO));
@@ -536,7 +536,7 @@ SV_Systeminfo_f
 Examine or change the serverinfo string
 ===========
 */
-static void SV_Systeminfo_f(void)
+static void SV_Systeminfo_f()
 {
     Com_Printf("System info settings:\n");
     Info_Print(Cvar_InfoString(CVAR_SYSTEMINFO));
@@ -549,7 +549,7 @@ SV_DumpUser_f
 Examine all a users info strings FIXME: move to game
 ===========
 */
-static void SV_DumpUser_f(void)
+static void SV_DumpUser_f()
 {
     client_t* cl;
 
@@ -574,14 +574,14 @@ static void SV_DumpUser_f(void)
     Info_Print(cl->userinfo);
 }
 
-static void SV_KillServer_f(void)
+static void SV_KillServer_f()
 {
     SV_Shutdown("killserver");
 }
 
 //===========================================================
 
-void SV_AddOperatorCommands(void)
+void SV_AddOperatorCommands()
 {
     static bool initialized;
 

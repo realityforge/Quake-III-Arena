@@ -147,7 +147,7 @@ void G_InitSessionData(gclient_t* client, char* userinfo)
     G_WriteClientSessionData(client);
 }
 
-void G_InitWorldSession(void)
+void G_InitWorldSession()
 {
     char s[MAX_STRING_CHARS];
     int gt;
@@ -163,7 +163,7 @@ void G_InitWorldSession(void)
     }
 }
 
-void G_WriteSessionData(void)
+void G_WriteSessionData()
 {
     int i;
 

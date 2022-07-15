@@ -33,7 +33,7 @@ CG_CheckAmmo
 If the ammo has gone low enough to generate the warning, play a sound
 ==============
 */
-void CG_CheckAmmo(void)
+void CG_CheckAmmo()
 {
     int i;
     int total;
@@ -181,7 +181,7 @@ CG_Respawn
 A respawn happened this snapshot
 ================
 */
-void CG_Respawn(void)
+void CG_Respawn()
 {
     // no error decay on player movement
     cg.thisFrameTeleport = true;

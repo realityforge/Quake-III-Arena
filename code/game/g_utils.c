@@ -377,7 +377,7 @@ instead of being removed and recreated, which can cause interpolated
 angles and bad trails.
 =================
 */
-gentity_t* G_Spawn(void)
+gentity_t* G_Spawn()
 {
     int i, force;
     gentity_t* e;
@@ -425,7 +425,7 @@ gentity_t* G_Spawn(void)
     return e;
 }
 
-bool G_EntitiesFree(void)
+bool G_EntitiesFree()
 {
     int i;
     gentity_t* e;

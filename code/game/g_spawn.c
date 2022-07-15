@@ -543,7 +543,7 @@ G_SpawnEntitiesFromString
 Parses textual entity definitions out of an entstring and spawns gentities.
 ==============
 */
-void G_SpawnEntitiesFromString(void)
+void G_SpawnEntitiesFromString()
 {
     // allow calls to G_Spawn*()
     level.spawning = true;

@@ -43,7 +43,7 @@ CG_InitMarkPolys
 This is called at startup and for tournament restarts
 ===================
 */
-void CG_InitMarkPolys(void)
+void CG_InitMarkPolys()
 {
     int i;
 
@@ -79,7 +79,7 @@ CG_AllocMark
 Will always succeed, even if it requires freeing an old active mark
 ===================
 */
-markPoly_t* CG_AllocMark(void)
+markPoly_t* CG_AllocMark()
 {
     markPoly_t* le;
     int time;
@@ -218,7 +218,7 @@ void CG_ImpactMark(qhandle_t markShader, const vec3_t origin, const vec3_t dir,
 #define MARK_TOTAL_TIME 10000
 #define MARK_FADE_TIME 1000
 
-void CG_AddMarks(void)
+void CG_AddMarks()
 {
     int j;
     markPoly_t *mp, *next;
@@ -371,7 +371,7 @@ vec3_t rforward, rright, rup;
 
 float oldtime;
 
-void CG_ClearParticles(void)
+void CG_ClearParticles()
 {
     int i;
 
@@ -989,7 +989,7 @@ void CG_AddParticleToScene(cparticle_t* p, vec3_t org, float alpha)
 // Ridah, made this static so it doesn't interfere with other files
 static float roll = 0.0;
 
-void CG_AddParticles(void)
+void CG_AddParticles()
 {
     cparticle_t *p, *next;
     float alpha;

@@ -344,7 +344,7 @@ static void BotUpdateInfoConfigStrings()
     }
 }
 
-static void BotInterbreedBots(void)
+static void BotInterbreedBots()
 {
     float ranks[MAX_CLIENTS];
     int parent1, parent2, child;
@@ -404,7 +404,7 @@ BotInterbreedEndMatch
 add link back into ExitLevel?
 ==============
 */
-void BotInterbreedEndMatch(void)
+void BotInterbreedEndMatch()
 {
 
     if (!bot_interbreed)
@@ -455,7 +455,7 @@ void BotEntityInfo(int entnum, aas_entityinfo_t* info)
     trap_AAS_EntityInfo(entnum, info);
 }
 
-int NumBots(void)
+int NumBots()
 {
     return numbots;
 }
@@ -689,7 +689,7 @@ static void BotUpdateInput(bot_state_t* bs, int time, int elapsed_time)
     }
 }
 
-static void BotAIRegularUpdate(void)
+static void BotAIRegularUpdate()
 {
     if (regularupdate_time < FloatTime()) {
         trap_BotUpdateEntityItems();

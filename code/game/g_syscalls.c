@@ -55,11 +55,11 @@ NORETURN void trap_Error(const char* fmt)
 }
 #pragma clang diagnostic pop
 
-int trap_Milliseconds(void)
+int trap_Milliseconds()
 {
     return syscall(G_MILLISECONDS);
 }
-int trap_Argc(void)
+int trap_Argc()
 {
     return syscall(G_ARGC);
 }
@@ -215,7 +215,7 @@ bool trap_EntityContact(const vec3_t mins, const vec3_t maxs, const gentity_t* e
     return syscall(G_ENTITY_CONTACT, mins, maxs, ent);
 }
 
-int trap_BotAllocateClient(void)
+int trap_BotAllocateClient()
 {
     return syscall(G_BOT_ALLOCATE_CLIENT);
 }
@@ -257,12 +257,12 @@ void trap_SnapVector(float* v)
 }
 
 // BotLib traps start here
-int trap_BotLibSetup(void)
+int trap_BotLibSetup()
 {
     return syscall(BOTLIB_SETUP);
 }
 
-int trap_BotLibShutdown(void)
+int trap_BotLibShutdown()
 {
     return syscall(BOTLIB_SHUTDOWN);
 }
@@ -312,7 +312,7 @@ void trap_AAS_EntityInfo(int entnum, void /* struct aas_entityinfo_s */* info)
     syscall(BOTLIB_AAS_ENTITY_INFO, entnum, info);
 }
 
-int trap_AAS_Initialized(void)
+int trap_AAS_Initialized()
 {
     return syscall(BOTLIB_AAS_INITIALIZED);
 }
@@ -322,7 +322,7 @@ void trap_AAS_PresenceTypeBoundingBox(int presencetype, vec3_t mins, vec3_t maxs
     syscall(BOTLIB_AAS_PRESENCE_TYPE_BOUNDING_BOX, presencetype, mins, maxs);
 }
 
-float trap_AAS_Time(void)
+float trap_AAS_Time()
 {
     int temp;
     temp = syscall(BOTLIB_AAS_TIME);
@@ -510,7 +510,7 @@ void trap_Characteristic_String(int character, int index, char* buf, int size)
     syscall(BOTLIB_AI_CHARACTERISTIC_STRING, character, index, buf, size);
 }
 
-int trap_BotAllocChatState(void)
+int trap_BotAllocChatState()
 {
     return syscall(BOTLIB_AI_ALLOC_CHAT_STATE);
 }
@@ -690,7 +690,7 @@ void trap_BotSetAvoidGoalTime(int goalstate, int number, float avoidtime)
     syscall(BOTLIB_AI_SET_AVOID_GOAL_TIME, goalstate, number, PASSFLOAT(avoidtime));
 }
 
-void trap_BotUpdateEntityItems(void)
+void trap_BotUpdateEntityItems()
 {
     syscall(BOTLIB_AI_UPDATE_ENTITY_ITEMS);
 }
@@ -765,7 +765,7 @@ int trap_BotPredictVisiblePosition(vec3_t origin, int areanum, void /* struct bo
     return syscall(BOTLIB_AI_PREDICT_VISIBLE_POSITION, origin, areanum, goal, travelflags, target);
 }
 
-int trap_BotAllocMoveState(void)
+int trap_BotAllocMoveState()
 {
     return syscall(BOTLIB_AI_ALLOC_MOVE_STATE);
 }
@@ -795,7 +795,7 @@ int trap_BotLoadWeaponWeights(int weaponstate, char* filename)
     return syscall(BOTLIB_AI_LOAD_WEAPON_WEIGHTS, weaponstate, filename);
 }
 
-int trap_BotAllocWeaponState(void)
+int trap_BotAllocWeaponState()
 {
     return syscall(BOTLIB_AI_ALLOC_WEAPON_STATE);
 }

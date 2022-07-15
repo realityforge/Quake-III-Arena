@@ -620,7 +620,7 @@ static void RemoveTournamentLoser()
     SetTeam(&g_entities[clientNum], "s");
 }
 
-static void AdjustTournamentScores(void)
+static void AdjustTournamentScores()
 {
     int clientNum;
 
@@ -698,7 +698,7 @@ This will be called on every client connect, begin, disconnect, death,
 and team change.
 ============
 */
-void CalculateRanks(void)
+void CalculateRanks()
 {
     int i;
     int rank;
@@ -815,7 +815,7 @@ Do this at BeginIntermission time and whenever ranks are recalculated
 due to enters/exits/forced team changes
 ========================
 */
-void SendScoreboardMessageToAllClients(void)
+void SendScoreboardMessageToAllClients()
 {
     int i;
 
@@ -866,7 +866,7 @@ FindIntermissionPoint
 This is also used for spectator spawns
 ==================
 */
-void FindIntermissionPoint(void)
+void FindIntermissionPoint()
 {
     gentity_t *ent, *target;
     vec3_t dir;
@@ -889,7 +889,7 @@ void FindIntermissionPoint(void)
     }
 }
 
-void BeginIntermission(void)
+void BeginIntermission()
 {
     int i;
     gentity_t* client;
@@ -944,7 +944,7 @@ or moved to a new level based on the "nextmap" cvar
 
 =============
 */
-void ExitLevel(void)
+void ExitLevel()
 {
     int i;
     gclient_t* cl;
@@ -1209,7 +1209,7 @@ and the time everyone is moved to the intermission spot, so you
 can see the last frag.
 =================
 */
-void CheckExitRules(void)
+void CheckExitRules()
 {
     int i;
     gclient_t* cl;

@@ -39,7 +39,7 @@ gentity_t* neutralObelisk;
 
 void Team_SetFlagStatus(int team, flagStatus_t status);
 
-void Team_InitGame(void)
+void Team_InitGame()
 {
     memset(&teamgame, 0, sizeof teamgame);
 
@@ -519,7 +519,7 @@ static gentity_t* Team_ResetFlag(int team)
     return rent;
 }
 
-static void Team_ResetFlags(void)
+static void Team_ResetFlags()
 {
     if (g_gametype.integer == GT_CTF) {
         Team_ResetFlag(TEAM_RED);
@@ -1060,7 +1060,7 @@ void TeamplayInfoMessage(gentity_t* ent)
     trap_SendServerCommand(ent - g_entities, va("tinfo %i %s", cnt, string));
 }
 
-void CheckTeamStatus(void)
+void CheckTeamStatus()
 {
     int i;
     gentity_t *loc, *ent;

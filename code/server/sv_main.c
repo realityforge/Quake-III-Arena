@@ -183,7 +183,7 @@ but not on every player enter or exit.
 */
 #define HEARTBEAT_MSEC 300 * 1000
 #define HEARTBEAT_GAME "QuakeArena-1"
-void SV_MasterHeartbeat(void)
+void SV_MasterHeartbeat()
 {
     static netadr_t adr[MAX_MASTER_SERVERS];
     int i;
@@ -236,7 +236,7 @@ SV_MasterShutdown
 Informs all masters that this server is going down
 =================
 */
-void SV_MasterShutdown(void)
+void SV_MasterShutdown()
 {
     // send a heartbeat right now
     svs.nextHeartbeatTime = -9999;

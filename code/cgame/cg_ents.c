@@ -895,7 +895,7 @@ static void CG_AddCEntity(centity_t* cent)
     }
 }
 
-void CG_AddPacketEntities(void)
+void CG_AddPacketEntities()
 {
     int num;
     centity_t* cent;

@@ -29,7 +29,7 @@ gentity_t* podium1;
 gentity_t* podium2;
 gentity_t* podium3;
 
-void UpdateTournamentInfo(void)
+void UpdateTournamentInfo()
 {
     int i;
     gentity_t* player;
@@ -277,7 +277,7 @@ static void PodiumPlacementThink(gentity_t* podium)
     }
 }
 
-static gentity_t* SpawnPodium(void)
+static gentity_t* SpawnPodium()
 {
     gentity_t* podium;
     vec3_t vec;
@@ -309,7 +309,7 @@ static gentity_t* SpawnPodium(void)
     return podium;
 }
 
-void SpawnModelsOnVictoryPads(void)
+void SpawnModelsOnVictoryPads()
 {
     gentity_t* player;
     gentity_t* podium;
@@ -343,7 +343,7 @@ void SpawnModelsOnVictoryPads(void)
     }
 }
 
-void Svcmd_AbortPodium_f(void)
+void Svcmd_AbortPodium_f()
 {
     if (g_gametype.integer != GT_SINGLE_PLAYER) {
         return;

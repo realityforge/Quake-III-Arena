@@ -121,7 +121,7 @@ static int BotIsLastInRankings(bot_state_t* bs)
     return true;
 }
 
-static char* BotFirstClientInRankings(void)
+static char* BotFirstClientInRankings()
 {
     int i, bestscore, bestclient;
     char buf[MAX_INFO_STRING];
@@ -152,7 +152,7 @@ static char* BotFirstClientInRankings(void)
     return name;
 }
 
-static char* BotLastClientInRankings(void)
+static char* BotLastClientInRankings()
 {
     int i, worstscore, bestclient;
     char buf[MAX_INFO_STRING];
@@ -224,7 +224,7 @@ static char* BotRandomOpponentName(bot_state_t* bs)
     return name;
 }
 
-static char* BotMapTitle(void)
+static char* BotMapTitle()
 {
     char info[1024];
     static char mapname[128];
@@ -281,7 +281,7 @@ static char* BotWeaponNameForMeansOfDeath(int mod)
     }
 }
 
-static char* BotRandomWeaponName(void)
+static char* BotRandomWeaponName()
 {
     int rnd;
 
