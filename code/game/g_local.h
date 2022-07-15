@@ -784,6 +784,13 @@ void trap_BotFreeClient(int clientNum);
 void trap_GetUsercmd(int clientNum, usercmd_t* cmd);
 bool trap_GetEntityToken(char* buffer, int bufferSize);
 
+int trap_PC_LoadSource(const char* filename);
+int trap_PC_FreeSource(int handle);
+int trap_PC_ReadToken(int handle, pc_token_t* pc_token);
+int trap_PC_SourceFileAndLine(int handle, char* filename, int* line);
+
+int trap_RealTime(qtime_t* qtime);
+
 int trap_DebugPolygonCreate(int color, int numPoints, vec3_t* points);
 void trap_DebugPolygonDelete(int id);
 
