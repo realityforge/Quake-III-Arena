@@ -43,10 +43,7 @@ static void G_BounceProjectile(vec3_t start, vec3_t impact, vec3_t dir, vec3_t e
     VectorNormalize(newv);
     VectorMA(impact, 8192, newv, endout);
 }
-
-void Weapon_Gauntlet(gentity_t* ent)
-{
-}
+#endif
 
 bool CheckGauntletAttack(gentity_t* ent)
 {
@@ -722,7 +719,6 @@ void FireWeapon(gentity_t* ent)
     // fire the specific weapon
     switch (ent->s.weapon) {
     case WP_GAUNTLET:
-        Weapon_Gauntlet(ent);
         break;
     case WP_LIGHTNING:
         Weapon_LightningFire(ent);
