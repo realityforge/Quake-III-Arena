@@ -97,7 +97,7 @@ void Cmd_Score_f(gentity_t* ent)
     DeathmatchScoreboardMessage(ent);
 }
 
-bool CheatsOk(gentity_t* ent)
+static bool CheatsOk(gentity_t* ent)
 {
     if (!g_cheats.integer) {
         trap_SendServerCommand(ent - g_entities, "print \"Cheats are not enabled on this server.\n\"");
@@ -110,7 +110,7 @@ bool CheatsOk(gentity_t* ent)
     return true;
 }
 
-char* ConcatArgs(int start)
+static char* ConcatArgs(int start)
 {
     int i, c, tlen;
     static char line[MAX_STRING_CHARS];
@@ -138,7 +138,7 @@ char* ConcatArgs(int start)
     return line;
 }
 
-bool StringIsInteger(const char* s)
+static bool StringIsInteger(const char* s)
 {
     int i;
     int len;
@@ -166,7 +166,7 @@ Returns a player number for either a number or name string
 Returns -1 if invalid
 ==================
 */
-int ClientNumberFromString(gentity_t* to, char* s, bool checkNums, bool checkNames)
+static int ClientNumberFromString(gentity_t* to, char* s, bool checkNums, bool checkNames)
 {
     gclient_t* cl;
     int idnum;
@@ -210,7 +210,7 @@ Cmd_Give_f
 Give items to a client
 ==================
 */
-void Cmd_Give_f(gentity_t* ent)
+static void Cmd_Give_f(gentity_t* ent)
 {
     char* name;
     gitem_t* it;
@@ -307,7 +307,7 @@ Sets client to godmode
 argv(0) god
 ==================
 */
-void Cmd_God_f(gentity_t* ent)
+static void Cmd_God_f(gentity_t* ent)
 {
     char* msg;
 
@@ -333,7 +333,7 @@ Sets client to notarget
 argv(0) notarget
 ==================
 */
-void Cmd_Notarget_f(gentity_t* ent)
+static void Cmd_Notarget_f(gentity_t* ent)
 {
     char* msg;
 
@@ -357,7 +357,7 @@ Cmd_Noclip_f
 argv(0) noclip
 ==================
 */
-void Cmd_Noclip_f(gentity_t* ent)
+static void Cmd_Noclip_f(gentity_t* ent)
 {
     char* msg;
 
@@ -385,7 +385,7 @@ and sends over a command to the client to resize the view,
 hide the scoreboard, and take a special screenshot
 ==================
 */
-void Cmd_LevelShot_f(gentity_t* ent)
+static void Cmd_LevelShot_f(gentity_t* ent)
 {
     if (!ent->client->pers.localClient) {
         trap_SendServerCommand(ent - g_entities,
@@ -407,7 +407,7 @@ void Cmd_LevelShot_f(gentity_t* ent)
     trap_SendServerCommand(ent - g_entities, "clientLevelShot");
 }
 
-void Cmd_TeamTask_f(gentity_t* ent)
+static void Cmd_TeamTask_f(gentity_t* ent)
 {
     char userinfo[MAX_INFO_STRING];
     char arg[MAX_TOKEN_CHARS];
@@ -426,7 +426,7 @@ void Cmd_TeamTask_f(gentity_t* ent)
     ClientUserinfoChanged(client);
 }
 
-void Cmd_Kill_f(gentity_t* ent)
+static void Cmd_Kill_f(gentity_t* ent)
 {
     if (ent->client->sess.sessionTeam == TEAM_SPECTATOR) {
         return;
@@ -615,7 +615,7 @@ void StopFollowing(gentity_t* ent)
     }
 }
 
-void Cmd_Team_f(gentity_t* ent)
+static void Cmd_Team_f(gentity_t* ent)
 {
     int oldTeam;
     char s[MAX_TOKEN_CHARS];
@@ -657,7 +657,7 @@ void Cmd_Team_f(gentity_t* ent)
     ent->client->switchTeamTime = level.time + 5000;
 }
 
-void Cmd_Follow_f(gentity_t* ent)
+static void Cmd_Follow_f(gentity_t* ent)
 {
     int i;
     char arg[MAX_TOKEN_CHARS];
@@ -788,7 +788,7 @@ static void G_SayTo(gentity_t* ent, gentity_t* other, int mode, int color, const
 
 #define EC "\x19"
 
-void G_Say(gentity_t* ent, gentity_t* target, int mode, const char* chatText)
+static void G_Say(gentity_t* ent, gentity_t* target, int mode, const char* chatText)
 {
     int j;
     gentity_t* other;
@@ -950,7 +950,7 @@ static void G_VoiceTo(gentity_t* ent, gentity_t* other, int mode, const char* id
     trap_SendServerCommand(other - g_entities, va("%s %d %d %d %s", cmd, voiceonly, ent->s.number, color, id));
 }
 
-void G_Voice(gentity_t* ent, gentity_t* target, int mode, const char* id, bool voiceonly)
+static void G_Voice(gentity_t* ent, gentity_t* target, int mode, const char* id, bool voiceonly)
 {
     int j;
     gentity_t* other;
@@ -1112,7 +1112,7 @@ static char* gc_orders[] = {
 
 static const int numgc_orders = ARRAY_LEN(gc_orders);
 
-void Cmd_GameCommand_f(gentity_t* ent)
+static void Cmd_GameCommand_f(gentity_t* ent)
 {
     int targetNum;
     gentity_t* target;
@@ -1152,7 +1152,7 @@ void Cmd_GameCommand_f(gentity_t* ent)
     }
 }
 
-void Cmd_Where_f(gentity_t* ent)
+static void Cmd_Where_f(gentity_t* ent)
 {
     trap_SendServerCommand(ent - g_entities, va("print \"%s\n\"", vtos(ent->r.currentOrigin)));
 }
@@ -1168,7 +1168,7 @@ static const char* gameNames[] = {
     "Harvester"
 };
 
-void Cmd_CallVote_f(gentity_t* ent)
+static void Cmd_CallVote_f(gentity_t* ent)
 {
     char* c;
     int i;
@@ -1305,7 +1305,7 @@ void Cmd_CallVote_f(gentity_t* ent)
     trap_SetConfigstring(CS_VOTE_NO, va("%i", level.voteNo));
 }
 
-void Cmd_Vote_f(gentity_t* ent)
+static void Cmd_Vote_f(gentity_t* ent)
 {
     char msg[64];
 
@@ -1340,7 +1340,7 @@ void Cmd_Vote_f(gentity_t* ent)
     // for players entering or leaving
 }
 
-void Cmd_CallTeamVote_f(gentity_t* ent)
+static void Cmd_CallTeamVote_f(gentity_t* ent)
 {
     char* c;
     int i, team, cs_offset;
@@ -1469,7 +1469,7 @@ void Cmd_CallTeamVote_f(gentity_t* ent)
     trap_SetConfigstring(CS_TEAMVOTE_NO + cs_offset, va("%i", level.teamVoteNo[cs_offset]));
 }
 
-void Cmd_TeamVote_f(gentity_t* ent)
+static void Cmd_TeamVote_f(gentity_t* ent)
 {
     int team, cs_offset;
     char msg[64];
@@ -1513,7 +1513,7 @@ void Cmd_TeamVote_f(gentity_t* ent)
     // for players entering or leaving
 }
 
-void Cmd_SetViewpos_f(gentity_t* ent)
+static void Cmd_SetViewpos_f(gentity_t* ent)
 {
     vec3_t origin, angles;
     char buffer[MAX_TOKEN_CHARS];

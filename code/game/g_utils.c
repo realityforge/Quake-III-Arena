@@ -54,7 +54,7 @@ void AddRemap(const char* oldShader, const char* newShader, float timeOffset)
     }
 }
 
-const char* BuildShaderStateConfig(void)
+const char* BuildShaderStateConfig()
 {
     static char buff[MAX_STRING_CHARS * 4];
     char out[(MAX_QPATH * 2) + 5];
@@ -76,7 +76,7 @@ model / sound configstring indexes
 =========================================================================
 */
 
-int G_FindConfigstringIndex(char* name, int start, int max, bool create)
+static int G_FindConfigstringIndex(char* name, int start, int max, bool create)
 {
     int i;
     char s[MAX_STRING_CHARS];
@@ -377,7 +377,7 @@ instead of being removed and recreated, which can cause interpolated
 angles and bad trails.
 =================
 */
-gentity_t* G_Spawn(void)
+gentity_t* G_Spawn()
 {
     int i, force;
     gentity_t* e;
@@ -424,7 +424,7 @@ gentity_t* G_Spawn(void)
     return e;
 }
 
-bool G_EntitiesFree(void)
+bool G_EntitiesFree()
 {
     int i;
     gentity_t* e;

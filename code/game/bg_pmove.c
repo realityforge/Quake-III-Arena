@@ -156,7 +156,7 @@ PM_Friction
 Handles both ground friction and water friction
 ==================
 */
-static void PM_Friction(void)
+static void PM_Friction()
 {
     vec3_t vec;
     float* vel;
@@ -286,7 +286,7 @@ Determine the rotation of the legs relative
 to the facing dir
 ================
 */
-static void PM_SetMovementDir(void)
+static void PM_SetMovementDir()
 {
     if (pm->cmd.forwardmove || pm->cmd.rightmove) {
         if (pm->cmd.rightmove == 0 && pm->cmd.forwardmove > 0) {
@@ -318,7 +318,7 @@ static void PM_SetMovementDir(void)
     }
 }
 
-static bool PM_CheckJump(void)
+static bool PM_CheckJump()
 {
     if (pm->ps->pm_flags & PMF_RESPAWNED) {
         return false; // don't allow jump until all buttons are up
@@ -355,7 +355,7 @@ static bool PM_CheckJump(void)
     return true;
 }
 
-static bool PM_CheckWaterJump(void)
+static bool PM_CheckWaterJump()
 {
     vec3_t spot;
     int cont;
@@ -407,7 +407,7 @@ PM_WaterJumpMove
 Flying out of the water
 ===================
 */
-static void PM_WaterJumpMove(void)
+static void PM_WaterJumpMove()
 {
     // waterjump has no control, but falls
 
@@ -421,7 +421,7 @@ static void PM_WaterJumpMove(void)
     }
 }
 
-static void PM_WaterMove(void)
+static void PM_WaterMove()
 {
     int i;
     vec3_t wishvel;
@@ -480,7 +480,7 @@ PM_InvulnerabilityMove
 Only with the invulnerability powerup
 ===================
 */
-static void PM_InvulnerabilityMove(void)
+static void PM_InvulnerabilityMove()
 {
     pm->cmd.forwardmove = 0;
     pm->cmd.rightmove = 0;
@@ -496,7 +496,7 @@ PM_FlyMove
 Only with the flight powerup
 ===================
 */
-static void PM_FlyMove(void)
+static void PM_FlyMove()
 {
     int i;
     vec3_t wishvel;
@@ -529,7 +529,7 @@ static void PM_FlyMove(void)
     PM_StepSlideMove(false);
 }
 
-static void PM_AirMove(void)
+static void PM_AirMove()
 {
     int i;
     vec3_t wishvel;
@@ -579,7 +579,7 @@ static void PM_AirMove(void)
     PM_StepSlideMove(true);
 }
 
-static void PM_GrappleMove(void)
+static void PM_GrappleMove()
 {
     vec3_t vel, v;
     float vlen;
@@ -600,7 +600,7 @@ static void PM_GrappleMove(void)
     pml.groundPlane = false;
 }
 
-static void PM_WalkMove(void)
+static void PM_WalkMove()
 {
     int i;
     vec3_t wishvel;
@@ -717,7 +717,7 @@ static void PM_WalkMove(void)
     // Com_Printf("velocity2 = %1.1f\n", VectorLength(pm->ps->velocity));
 }
 
-static void PM_DeadMove(void)
+static void PM_DeadMove()
 {
     float forward;
 
@@ -737,7 +737,7 @@ static void PM_DeadMove(void)
     }
 }
 
-static void PM_NoclipMove(void)
+static void PM_NoclipMove()
 {
     float speed, drop, friction, control, newspeed;
     int i;
@@ -799,7 +799,7 @@ PM_FootstepForSurface
 Returns an event number appropriate for the groundsurface
 ================
 */
-static int PM_FootstepForSurface(void)
+static int PM_FootstepForSurface()
 {
     if (pml.groundTrace.surfaceFlags & SURF_NOSTEPS) {
         return 0;
@@ -817,7 +817,7 @@ PM_CrashLand
 Check for hard landings that generate sound events
 =================
 */
-static void PM_CrashLand(void)
+static void PM_CrashLand()
 {
     float delta;
     float dist;
@@ -953,7 +953,7 @@ PM_GroundTraceMissed
 The ground trace didn't hit a surface, so we are in freefall
 =============
 */
-static void PM_GroundTraceMissed(void)
+static void PM_GroundTraceMissed()
 {
     trace_t trace;
     vec3_t point;
@@ -986,7 +986,7 @@ static void PM_GroundTraceMissed(void)
     pml.walking = false;
 }
 
-static void PM_GroundTrace(void)
+static void PM_GroundTrace()
 {
     vec3_t point;
     trace_t trace;
@@ -1083,7 +1083,7 @@ static void PM_GroundTrace(void)
 PM_SetWaterLevel	FIXME: avoid this twice?  certainly if not moving
 =============
 */
-static void PM_SetWaterLevel(void)
+static void PM_SetWaterLevel()
 {
     vec3_t point;
     int cont;
@@ -1125,7 +1125,7 @@ PM_CheckDuck
 Sets mins, maxs, and pm->ps->viewheight
 ==============
 */
-static void PM_CheckDuck(void)
+static void PM_CheckDuck()
 {
     trace_t trace;
 
@@ -1181,7 +1181,7 @@ static void PM_CheckDuck(void)
 
 //===================================================================
 
-static void PM_Footsteps(void)
+static void PM_Footsteps()
 {
     float bobmove;
     int old;
@@ -1286,7 +1286,7 @@ PM_WaterEvents
 Generate sound events for entering and leaving water
 ==============
 */
-static void PM_WaterEvents(void)
+static void PM_WaterEvents()
 { // FIXME?
     // if just entered a water volume, play a sound
     if (!pml.previous_waterlevel && pm->waterlevel) {
@@ -1329,7 +1329,7 @@ static void PM_BeginWeaponChange(int weapon)
     PM_StartTorsoAnim(TORSO_DROP);
 }
 
-static void PM_FinishWeaponChange(void)
+static void PM_FinishWeaponChange()
 {
     int weapon;
 
@@ -1348,7 +1348,7 @@ static void PM_FinishWeaponChange(void)
     PM_StartTorsoAnim(TORSO_RAISE);
 }
 
-static void PM_TorsoAnimation(void)
+static void PM_TorsoAnimation()
 {
     if (pm->ps->weaponstate == WEAPON_READY) {
         if (pm->ps->weapon == WP_GAUNTLET) {
@@ -1367,7 +1367,7 @@ PM_Weapon
 Generates weapon events and modifes the weapon counter
 ==============
 */
-static void PM_Weapon(void)
+static void PM_Weapon()
 {
     int addTime;
 
@@ -1534,7 +1534,7 @@ static void PM_Weapon(void)
     pm->ps->weaponTime += addTime;
 }
 
-static void PM_Animate(void)
+static void PM_Animate()
 {
     if (pm->cmd.buttons & BUTTON_GESTURE) {
         if (pm->ps->torsoTimer == 0) {
@@ -1577,7 +1577,7 @@ static void PM_Animate(void)
     }
 }
 
-static void PM_DropTimers(void)
+static void PM_DropTimers()
 {
     // drop misc timing counter
     if (pm->ps->pm_time) {

@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // g_misc.c
 
 #include "g_local.h"
+#include "g_spawn.h"
 
 /*QUAKED func_group (0 0 0) ?
 Used to group brushes together just for editor convenience.  They are turned into normal brushes by the utilities.
@@ -131,9 +132,7 @@ void SP_misc_model(gentity_t* ent)
     G_FreeEntity(ent);
 }
 
-//===========================================================
-
-void locateCamera(gentity_t* ent)
+static void locateCamera(gentity_t* ent)
 {
     vec3_t dir;
     gentity_t* target;
@@ -217,7 +216,7 @@ void SP_misc_portal_camera(gentity_t* ent)
     ent->s.clientNum = roll / 360.0 * 256;
 }
 
-void Use_Shooter(gentity_t* ent, gentity_t* other, gentity_t* activator)
+static void Use_Shooter(gentity_t* ent, UNUSED gentity_t* other, UNUSED gentity_t* activator)
 {
     vec3_t dir;
     float deg;
@@ -265,7 +264,7 @@ static void InitShooter_Finish(gentity_t* ent)
     ent->nextthink = 0;
 }
 
-void InitShooter(gentity_t* ent, int weapon)
+static void InitShooter(gentity_t* ent, int weapon)
 {
     ent->use = Use_Shooter;
     ent->s.weapon = weapon;
@@ -314,7 +313,7 @@ void SP_shooter_grenade(gentity_t* ent)
 }
 
 #ifdef MISSIONPACK
-static void PortalDie(gentity_t* self, gentity_t* inflictor, gentity_t* attacker, int damage, int mod)
+static void PortalDie(gentity_t* self, UNUSED gentity_t* inflictor, UNUSED gentity_t* attacker, UNUSED int damage, UNUSED int mod)
 {
     G_FreeEntity(self);
     // FIXME do something more interesting

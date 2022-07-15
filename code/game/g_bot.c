@@ -55,7 +55,7 @@ float trap_Cvar_VariableValue(const char* var_name)
     return atof(buf);
 }
 
-int G_ParseInfos(char* buf, int max, char* infos[])
+static int G_ParseInfos(char* buf, int max, char* infos[])
 {
     char* token;
     int count;
@@ -131,7 +131,7 @@ static void G_LoadArenasFromFile(char* filename)
     g_numArenas += G_ParseInfos(buf, MAX_ARENAS - g_numArenas, &g_arenaInfos[g_numArenas]);
 }
 
-static void G_LoadArenas(void)
+static void G_LoadArenas()
 {
     int numdirs;
     vmCvar_t arenasFile;
@@ -166,7 +166,7 @@ static void G_LoadArenas(void)
     }
 }
 
-const char* G_GetArenaInfoByMap(const char* map)
+static const char* G_GetArenaInfoByMap(const char* map)
 {
     int n;
 
@@ -208,7 +208,7 @@ Check connected and connecting (delay join) bots.
 Returns number of bots with name on specified team or whole server if team is -1.
 ===============
 */
-int G_CountBotPlayersByName(const char* name, int team)
+static int G_CountBotPlayersByName(const char* name, int team)
 {
     int i, num;
     gclient_t* cl;
@@ -240,7 +240,7 @@ G_SelectRandomBotInfo
 Get random least used bot info on team or whole server if team is -1.
 ===============
 */
-int G_SelectRandomBotInfo(int team)
+static int G_SelectRandomBotInfo(int team)
 {
     int selection[MAX_BOTS];
     int n, num;
@@ -283,7 +283,7 @@ int G_SelectRandomBotInfo(int team)
     return -1;
 }
 
-void G_AddRandomBot(int team)
+static void G_AddRandomBot(int team)
 {
     char* teamstr;
     float skill;
@@ -298,7 +298,7 @@ void G_AddRandomBot(int team)
     trap_SendConsoleCommand(EXEC_INSERT, va("addbot random %f %s %i\n", skill, teamstr, 0));
 }
 
-int G_RemoveRandomBot(int team)
+static int G_RemoveRandomBot(int team)
 {
     int i;
     gclient_t* cl;
@@ -320,7 +320,7 @@ int G_RemoveRandomBot(int team)
     return false;
 }
 
-int G_CountHumanPlayers(int team)
+static int G_CountHumanPlayers(int team)
 {
     int i, num;
     gclient_t* cl;
@@ -349,7 +349,7 @@ G_CountBotPlayers
 Check connected and connecting (delay join) bots.
 ===============
 */
-int G_CountBotPlayers(int team)
+static int G_CountBotPlayers(int team)
 {
     int i, num;
     gclient_t* cl;
@@ -371,7 +371,7 @@ int G_CountBotPlayers(int team)
     return num;
 }
 
-void G_CheckMinimumPlayers(void)
+static void G_CheckMinimumPlayers()
 {
     int minplayers;
     int humanplayers, botplayers;
@@ -437,7 +437,7 @@ void G_CheckMinimumPlayers(void)
     }
 }
 
-void G_CheckBotSpawn(void)
+void G_CheckBotSpawn()
 {
     int n;
     char userinfo[MAX_INFO_VALUE];
@@ -671,7 +671,7 @@ static void G_AddBot(const char* name, float skill, const char* team, int delay,
     AddBotToSpawnQueue(clientNum, delay);
 }
 
-void Svcmd_AddBot_f(void)
+void Svcmd_AddBot_f()
 {
     float skill;
     int delay;
@@ -723,7 +723,7 @@ void Svcmd_AddBot_f(void)
     }
 }
 
-void Svcmd_BotList_f(void)
+void Svcmd_BotList_f()
 {
     int i;
     char name[MAX_TOKEN_CHARS];
@@ -829,7 +829,7 @@ static void G_LoadBotsFromFile(char* filename)
     g_numBots += G_ParseInfos(buf, MAX_BOTS - g_numBots, &g_botInfos[g_numBots]);
 }
 
-static void G_LoadBots(void)
+static void G_LoadBots()
 {
     vmCvar_t botsFile;
     int numdirs;

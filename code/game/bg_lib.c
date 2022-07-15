@@ -358,7 +358,7 @@ void srand(unsigned seed)
     randSeed = seed;
 }
 
-int rand(void)
+int rand()
 {
     randSeed = (69069 * randSeed + 1);
     return randSeed & 0x7fff;

@@ -20,8 +20,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 #include "g_local.h"
+#include "g_spawn.h"
 
-void InitTrigger(gentity_t* self)
+static void InitTrigger(gentity_t* self)
 {
     if (!VectorCompare(self->s.angles, vec3_origin))
         G_SetMovedir(self->s.angles, self->movedir);
@@ -32,7 +33,7 @@ void InitTrigger(gentity_t* self)
 }
 
 // the wait time has passed, so set back up for another activation
-void multi_wait(gentity_t* ent)
+static void multi_wait(gentity_t* ent)
 {
     ent->nextthink = 0;
 }
@@ -40,7 +41,7 @@ void multi_wait(gentity_t* ent)
 // the trigger was just activated
 // ent->activator should be set to the activator so it can be held through a delay
 // so wait for the delay time before firing
-void multi_trigger(gentity_t* ent, gentity_t* activator)
+static void multi_trigger(gentity_t* ent, gentity_t* activator)
 {
     ent->activator = activator;
     if (ent->nextthink) {
@@ -70,12 +71,12 @@ void multi_trigger(gentity_t* ent, gentity_t* activator)
     }
 }
 
-void Use_Multi(gentity_t* ent, gentity_t* other, gentity_t* activator)
+static void Use_Multi(gentity_t* ent, UNUSED gentity_t* other, gentity_t* activator)
 {
     multi_trigger(ent, activator);
 }
 
-void Touch_Multi(gentity_t* self, gentity_t* other, trace_t* trace)
+static void Touch_Multi(gentity_t* self, gentity_t* other, UNUSED trace_t* trace)
 {
     if (!other->client) {
         return;
@@ -107,7 +108,7 @@ void SP_trigger_multiple(gentity_t* ent)
     trap_LinkEntity(ent);
 }
 
-void trigger_always_think(gentity_t* ent)
+static void trigger_always_think(gentity_t* ent)
 {
     G_UseTargets(ent, ent);
     G_FreeEntity(ent);
@@ -123,7 +124,7 @@ void SP_trigger_always(gentity_t* ent)
     ent->think = trigger_always_think;
 }
 
-void trigger_push_touch(gentity_t* self, gentity_t* other, trace_t* trace)
+static void trigger_push_touch(gentity_t* self, gentity_t* other, UNUSED trace_t* trace)
 {
 
     if (!other->client) {
@@ -140,7 +141,7 @@ AimAtTarget
 Calculate origin2 so the target apogee will be hit
 =================
 */
-void AimAtTarget(gentity_t* self)
+static void AimAtTarget(gentity_t* self)
 {
     gentity_t* ent;
     vec3_t origin;
@@ -196,7 +197,7 @@ void SP_trigger_push(gentity_t* self)
     trap_LinkEntity(self);
 }
 
-void Use_target_push(gentity_t* self, gentity_t* other, gentity_t* activator)
+static void Use_target_push(gentity_t* self, UNUSED gentity_t* other, gentity_t* activator)
 {
     if (!activator->client) {
         return;
@@ -310,7 +311,7 @@ NO_PROTECTION	*nothing* stops the damage
 "dmg"			default 5 (whole numbers only)
 
 */
-void hurt_use(gentity_t* self, gentity_t* other, gentity_t* activator)
+static void hurt_use(gentity_t* self, UNUSED gentity_t* other, UNUSED gentity_t* activator)
 {
     if (self->r.linked) {
         trap_UnlinkEntity(self);
@@ -319,7 +320,7 @@ void hurt_use(gentity_t* self, gentity_t* other, gentity_t* activator)
     }
 }
 
-void hurt_touch(gentity_t* self, gentity_t* other, trace_t* trace)
+static void hurt_touch(gentity_t* self, gentity_t* other, UNUSED trace_t* trace)
 {
     int dflags;
 
@@ -381,14 +382,14 @@ so, the basic time between firing is a random time between
 (wait - random) and (wait + random)
 
 */
-void func_timer_think(gentity_t* self)
+static void func_timer_think(gentity_t* self)
 {
     G_UseTargets(self, self->activator);
     // set time before next firing
     self->nextthink = level.time + 1000 * (self->wait + crandom() * self->random);
 }
 
-void func_timer_use(gentity_t* self, gentity_t* other, gentity_t* activator)
+static void func_timer_use(gentity_t* self, UNUSED gentity_t* other, gentity_t* activator)
 {
     self->activator = activator;
 

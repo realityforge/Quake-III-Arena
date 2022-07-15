@@ -43,7 +43,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 //======================================================================
 
-int Pickup_Powerup(gentity_t* ent, gentity_t* other)
+static int Pickup_Powerup(gentity_t* ent, gentity_t* other)
 {
     int quantity;
     int i;
@@ -115,7 +115,7 @@ int Pickup_Powerup(gentity_t* ent, gentity_t* other)
 //======================================================================
 
 #ifdef MISSIONPACK
-int Pickup_PersistantPowerup(gentity_t* ent, gentity_t* other)
+static int Pickup_PersistantPowerup(gentity_t* ent, gentity_t* other)
 {
     int clientNum;
     char userinfo[MAX_INFO_STRING];
@@ -190,7 +190,7 @@ int Pickup_PersistantPowerup(gentity_t* ent, gentity_t* other)
 //======================================================================
 #endif
 
-int Pickup_Holdable(gentity_t* ent, gentity_t* other)
+static int Pickup_Holdable(gentity_t* ent, gentity_t* other)
 {
 
     other->client->ps.stats[STAT_HOLDABLE_ITEM] = ent->item - bg_itemlist;
@@ -212,7 +212,7 @@ void Add_Ammo(gentity_t* ent, int weapon, int count)
     }
 }
 
-int Pickup_Ammo(gentity_t* ent, gentity_t* other)
+static int Pickup_Ammo(gentity_t* ent, gentity_t* other)
 {
     int quantity;
 
@@ -229,7 +229,7 @@ int Pickup_Ammo(gentity_t* ent, gentity_t* other)
 
 //======================================================================
 
-int Pickup_Weapon(gentity_t* ent, gentity_t* other)
+static int Pickup_Weapon(gentity_t* ent, gentity_t* other)
 {
     int quantity;
 
@@ -272,7 +272,7 @@ int Pickup_Weapon(gentity_t* ent, gentity_t* other)
 
 //======================================================================
 
-int Pickup_Health(gentity_t* ent, gentity_t* other)
+static int Pickup_Health(gentity_t* ent, gentity_t* other)
 {
     int max;
     int quantity;
@@ -311,7 +311,7 @@ int Pickup_Health(gentity_t* ent, gentity_t* other)
 
 //======================================================================
 
-int Pickup_Armor(gentity_t* ent, gentity_t* other)
+static int Pickup_Armor(gentity_t* ent, gentity_t* other)
 {
 #ifdef MISSIONPACK
     int upperBound;
@@ -627,7 +627,7 @@ Use_Item
 Respawn the item
 ================
 */
-void Use_Item(gentity_t* ent, gentity_t* other, gentity_t* activator)
+static void Use_Item(gentity_t* ent, UNUSED gentity_t* other, UNUSED gentity_t* activator)
 {
     RespawnItem(ent);
 }
@@ -702,7 +702,7 @@ void FinishSpawningItem(gentity_t* ent)
 
 bool itemRegistered[MAX_ITEMS];
 
-void G_CheckTeamItems(void)
+void G_CheckTeamItems()
 {
 
     // Set up team stuff
@@ -782,7 +782,7 @@ void G_CheckTeamItems(void)
 #endif
 }
 
-void ClearRegisteredItems(void)
+void ClearRegisteredItems()
 {
     memset(itemRegistered, 0, sizeof(itemRegistered));
 
@@ -820,7 +820,7 @@ Write the needed items to a config string
 so the client will know which ones to precache
 ===============
 */
-void SaveRegisteredItems(void)
+void SaveRegisteredItems()
 {
     char string[MAX_ITEMS + 1];
     int i;
@@ -841,7 +841,7 @@ void SaveRegisteredItems(void)
     trap_SetConfigstring(CS_ITEMS, string);
 }
 
-int G_ItemDisabled(gitem_t* item)
+static int G_ItemDisabled(gitem_t* item)
 {
 
     char name[128];
@@ -889,7 +889,7 @@ void G_SpawnItem(gentity_t* ent, gitem_t* item)
 #endif
 }
 
-void G_BounceItem(gentity_t* ent, trace_t* trace)
+static void G_BounceItem(gentity_t* ent, trace_t* trace)
 {
     vec3_t velocity;
     float dot;

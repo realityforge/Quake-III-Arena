@@ -30,7 +30,8 @@ static vec3_t muzzle;
 
 #define NUM_NAILSHOTS 15
 
-void G_BounceProjectile(vec3_t start, vec3_t impact, vec3_t dir, vec3_t endout)
+#ifdef MISSIONPACK
+static void G_BounceProjectile(vec3_t start, vec3_t impact, vec3_t dir, vec3_t endout)
 {
     vec3_t v, newv;
     float dot;
@@ -42,10 +43,7 @@ void G_BounceProjectile(vec3_t start, vec3_t impact, vec3_t dir, vec3_t endout)
     VectorNormalize(newv);
     VectorMA(impact, 8192, newv, endout);
 }
-
-void Weapon_Gauntlet(gentity_t* ent)
-{
-}
+#endif
 
 bool CheckGauntletAttack(gentity_t* ent)
 {
@@ -135,7 +133,7 @@ void SnapVectorTowards(vec3_t v, vec3_t to)
 #define MACHINEGUN_DAMAGE 7
 #define MACHINEGUN_TEAM_DAMAGE 5 // wimpier MG in teamplay
 
-void Bullet_Fire(gentity_t* ent, float spread, int damage, int mod)
+static void Bullet_Fire(gentity_t* ent, float spread, int damage, int mod)
 {
     trace_t tr;
     vec3_t end;
@@ -208,7 +206,7 @@ void Bullet_Fire(gentity_t* ent, float spread, int damage, int mod)
     }
 }
 
-void BFG_Fire(gentity_t* ent)
+static void BFG_Fire(gentity_t* ent)
 {
     gentity_t* m;
 
@@ -223,7 +221,7 @@ void BFG_Fire(gentity_t* ent)
 // client predicts same spreads
 #define DEFAULT_SHOTGUN_DAMAGE 10
 
-bool ShotgunPellet(vec3_t start, vec3_t end, gentity_t* ent)
+static bool ShotgunPellet(vec3_t start, vec3_t end, gentity_t* ent)
 {
     trace_t tr;
     int damage, i, passent;
@@ -274,7 +272,7 @@ bool ShotgunPellet(vec3_t start, vec3_t end, gentity_t* ent)
 }
 
 // this should match CG_ShotgunPattern
-void ShotgunPattern(vec3_t origin, vec3_t origin2, int seed, gentity_t* ent)
+static void ShotgunPattern(vec3_t origin, vec3_t origin2, int seed, gentity_t* ent)
 {
     int i;
     float r, u;
@@ -302,7 +300,7 @@ void ShotgunPattern(vec3_t origin, vec3_t origin2, int seed, gentity_t* ent)
     }
 }
 
-void weapon_supershotgun_fire(gentity_t* ent)
+static void weapon_supershotgun_fire(gentity_t* ent)
 {
     gentity_t* tent;
 
@@ -316,7 +314,7 @@ void weapon_supershotgun_fire(gentity_t* ent)
     ShotgunPattern(tent->s.pos.trBase, tent->s.origin2, tent->s.eventParm, ent);
 }
 
-void weapon_grenadelauncher_fire(gentity_t* ent)
+static void weapon_grenadelauncher_fire(gentity_t* ent)
 {
     gentity_t* m;
 
@@ -331,7 +329,7 @@ void weapon_grenadelauncher_fire(gentity_t* ent)
     //	VectorAdd( m->s.pos.trDelta, ent->client->ps.velocity, m->s.pos.trDelta );	// "real" physics
 }
 
-void Weapon_RocketLauncher_Fire(gentity_t* ent)
+static void Weapon_RocketLauncher_Fire(gentity_t* ent)
 {
     gentity_t* m;
 
@@ -342,7 +340,7 @@ void Weapon_RocketLauncher_Fire(gentity_t* ent)
     //	VectorAdd( m->s.pos.trDelta, ent->client->ps.velocity, m->s.pos.trDelta );	// "real" physics
 }
 
-void Weapon_Plasmagun_Fire(gentity_t* ent)
+static void Weapon_Plasmagun_Fire(gentity_t* ent)
 {
     gentity_t* m;
 
@@ -354,7 +352,7 @@ void Weapon_Plasmagun_Fire(gentity_t* ent)
 }
 
 #define MAX_RAIL_HITS 4
-void weapon_railgun_fire(gentity_t* ent)
+static void weapon_railgun_fire(gentity_t* ent)
 {
     vec3_t end;
 #ifdef MISSIONPACK
@@ -474,7 +472,7 @@ void weapon_railgun_fire(gentity_t* ent)
     }
 }
 
-void Weapon_GrapplingHook_Fire(gentity_t* ent)
+static void Weapon_GrapplingHook_Fire(gentity_t* ent)
 {
     if (!ent->client->fireHeld && !ent->client->hook)
         fire_grapple(ent, muzzle, forward);
@@ -514,7 +512,7 @@ LIGHTNING GUN
 ======================================================================
 */
 
-void Weapon_LightningFire(gentity_t* ent)
+static void Weapon_LightningFire(gentity_t* ent)
 {
     trace_t tr;
     vec3_t end;
@@ -588,7 +586,7 @@ void Weapon_LightningFire(gentity_t* ent)
 
 #ifdef MISSIONPACK
 
-void Weapon_Nailgun_Fire(gentity_t* ent)
+static void Weapon_Nailgun_Fire(gentity_t* ent)
 {
     gentity_t* m;
     int count;
@@ -602,7 +600,7 @@ void Weapon_Nailgun_Fire(gentity_t* ent)
     //	VectorAdd( m->s.pos.trDelta, ent->client->ps.velocity, m->s.pos.trDelta );	// "real" physics
 }
 
-void weapon_proxlauncher_fire(gentity_t* ent)
+static void weapon_proxlauncher_fire(gentity_t* ent)
 {
     gentity_t* m;
 
@@ -673,7 +671,7 @@ CalcMuzzlePointOrigin
 set muzzle location relative to pivoting eye
 ===============
 */
-void CalcMuzzlePointOrigin(gentity_t* ent, vec3_t origin, vec3_t forward, vec3_t right, vec3_t up, vec3_t muzzlePoint)
+static void CalcMuzzlePointOrigin(gentity_t* ent, vec3_t origin, vec3_t forward, vec3_t right, vec3_t up, vec3_t muzzlePoint)
 {
     VectorCopy(ent->s.pos.trBase, muzzlePoint);
     muzzlePoint[2] += ent->client->ps.viewheight;
@@ -716,7 +714,6 @@ void FireWeapon(gentity_t* ent)
     // fire the specific weapon
     switch (ent->s.weapon) {
     case WP_GAUNTLET:
-        Weapon_Gauntlet(ent);
         break;
     case WP_LIGHTNING:
         Weapon_LightningFire(ent);

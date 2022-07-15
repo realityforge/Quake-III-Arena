@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 #include "g_local.h"
+#include "g_spawn.h"
 
 // g_client.c -- client functions that don't happen every frame
 
@@ -94,7 +95,7 @@ SelectRandomFurthestSpawnPoint
 Chooses a player start, deathmatch start, etc
 ============
 */
-gentity_t* SelectRandomFurthestSpawnPoint(vec3_t avoidPoint, vec3_t origin, vec3_t angles, bool isbot)
+static gentity_t* SelectRandomFurthestSpawnPoint(vec3_t avoidPoint, vec3_t origin, vec3_t angles, bool isbot)
 {
     gentity_t* spot;
     vec3_t delta;
@@ -185,7 +186,7 @@ Try to find a spawn point marked 'initial', otherwise
 use normal spawn selection.
 ============
 */
-gentity_t* SelectInitialSpawnPoint(vec3_t origin, vec3_t angles, bool isbot)
+static gentity_t* SelectInitialSpawnPoint(vec3_t origin, vec3_t angles, bool isbot)
 {
     gentity_t* spot;
 
@@ -210,7 +211,7 @@ gentity_t* SelectInitialSpawnPoint(vec3_t origin, vec3_t angles, bool isbot)
     return spot;
 }
 
-gentity_t* SelectSpectatorSpawnPoint(vec3_t origin, vec3_t angles)
+static gentity_t* SelectSpectatorSpawnPoint(vec3_t origin, vec3_t angles)
 {
     FindIntermissionPoint();
 
@@ -220,7 +221,7 @@ gentity_t* SelectSpectatorSpawnPoint(vec3_t origin, vec3_t angles)
     return NULL;
 }
 
-void InitBodyQue(void)
+void InitBodyQue()
 {
     int i;
     gentity_t* ent;
@@ -241,7 +242,7 @@ BodySink
 After sitting around for five seconds, fall into the ground and disappear
 =============
 */
-void BodySink(gentity_t* ent)
+static void BodySink(gentity_t* ent)
 {
     if (level.time - ent->timestamp > 6500) {
         // the body ques are never actually freed, they are just unlinked

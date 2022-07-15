@@ -38,7 +38,7 @@ G_WriteClientSessionData
 Called on game shutdown
 ================
 */
-void G_WriteClientSessionData(gclient_t* client)
+static void G_WriteClientSessionData(gclient_t* client)
 {
     const char* s;
     const char* var;
@@ -157,7 +157,7 @@ void G_InitSessionData(gclient_t* client, char* userinfo)
     G_WriteClientSessionData(client);
 }
 
-void G_InitWorldSession(void)
+void G_InitWorldSession()
 {
     char s[MAX_STRING_CHARS];
     int gt;
@@ -173,7 +173,7 @@ void G_InitWorldSession(void)
     }
 }
 
-void G_WriteSessionData(void)
+void G_WriteSessionData()
 {
     int i;
 

@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "g_local.h"
 
-void ScorePlum(gentity_t* ent, vec3_t origin, int score)
+static void ScorePlum(gentity_t* ent, vec3_t origin, int score)
 {
     gentity_t* plum;
 
@@ -191,7 +191,7 @@ void TossClientPersistantPowerups(gentity_t* ent)
 }
 #endif
 
-void LookAtKiller(gentity_t* self, gentity_t* inflictor, gentity_t* attacker)
+static void LookAtKiller(gentity_t* self, gentity_t* inflictor, gentity_t* attacker)
 {
     vec3_t dir;
 
@@ -207,7 +207,7 @@ void LookAtKiller(gentity_t* self, gentity_t* inflictor, gentity_t* attacker)
     self->client->ps.stats[STAT_DEAD_YAW] = vectoyaw(dir);
 }
 
-void GibEntity(gentity_t* self, int killer)
+static void GibEntity(gentity_t* self, int killer)
 {
     gentity_t* ent;
     int i;
@@ -282,13 +282,13 @@ char* modNames[] = {
 };
 
 #ifdef MISSIONPACK
-void Kamikaze_DeathActivate(gentity_t* ent)
+static void Kamikaze_DeathActivate(gentity_t* ent)
 {
     G_StartKamikaze(ent);
     G_FreeEntity(ent);
 }
 
-void Kamikaze_DeathTimer(gentity_t* self)
+static void Kamikaze_DeathTimer(gentity_t* self)
 {
     gentity_t* ent;
 
@@ -304,7 +304,7 @@ void Kamikaze_DeathTimer(gentity_t* self)
 
 #endif
 
-void CheckAlmostCapture(gentity_t* self, gentity_t* attacker)
+static void CheckAlmostCapture(gentity_t* self, gentity_t* attacker)
 {
     gentity_t* ent;
     vec3_t dir;
@@ -344,7 +344,7 @@ void CheckAlmostCapture(gentity_t* self, gentity_t* attacker)
     }
 }
 
-void CheckAlmostScored(gentity_t* self, gentity_t* attacker)
+static void CheckAlmostScored(gentity_t* self, gentity_t* attacker)
 {
     gentity_t* ent;
     vec3_t dir;
@@ -599,7 +599,7 @@ void player_die(gentity_t* self, gentity_t* inflictor, gentity_t* attacker, int 
     trap_LinkEntity(self);
 }
 
-int CheckArmor(gentity_t* ent, int damage, int dflags)
+static int CheckArmor(gentity_t* ent, int damage, int dflags)
 {
     gclient_t* client;
     int save;
@@ -631,7 +631,7 @@ int CheckArmor(gentity_t* ent, int damage, int dflags)
 }
 
 #ifdef MISSIONPACK
-int RaySphereIntersections(vec3_t origin, float radius, vec3_t point, vec3_t dir, vec3_t intersections[2])
+static int RaySphereIntersections(vec3_t origin, float radius, vec3_t point, vec3_t dir, vec3_t intersections[2])
 {
     float b, c, d, t;
 

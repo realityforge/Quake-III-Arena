@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define MISSILE_PRESTEP_TIME 50
 
-void G_BounceMissile(gentity_t* ent, trace_t* trace)
+static void G_BounceMissile(gentity_t* ent, trace_t* trace)
 {
     vec3_t velocity;
     float dot;
@@ -227,7 +227,7 @@ static void ProximityMine_Player(gentity_t* mine, gentity_t* player)
 }
 #endif
 
-void G_MissileImpact(gentity_t* ent, trace_t* trace)
+static void G_MissileImpact(gentity_t* ent, trace_t* trace)
 {
     gentity_t* other;
     bool hitClient = false;

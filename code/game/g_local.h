@@ -499,6 +499,7 @@ void TossClientCubes(gentity_t* self);
 // g_missile.c
 //
 void G_RunMissile(gentity_t* ent);
+void G_ExplodeMissile(gentity_t* ent);
 
 gentity_t* fire_plasma(gentity_t* self, vec3_t start, vec3_t aimdir);
 gentity_t* fire_grenade(gentity_t* self, vec3_t start, vec3_t aimdir);
@@ -581,6 +582,7 @@ void DeathmatchScoreboardMessage(gentity_t* ent);
 //
 // g_main.c
 //
+void ExitLevel(void);
 void MoveClientToIntermission(gentity_t* ent);
 void FindIntermissionPoint(void);
 void SetLeader(int team, int client);
@@ -667,6 +669,9 @@ bool BotAISetupClient(int client, struct bot_settings_s* settings, bool restart)
 bool BotAIShutdownClient(int client, bool restart);
 int BotAIStartFrame(int time);
 void BotTestAAS(vec3_t origin);
+#ifdef MISSIONPACK
+void ProximityMine_Trigger(gentity_t* trigger, gentity_t* other, trace_t* trace);
+#endif
 
 #include "g_team.h" // teamplay specific stuff
 
@@ -902,3 +907,8 @@ void trap_BotResetWeaponState(int weaponstate);
 int trap_GeneticParentsAndChildSelection(int numranks, float* ranks, int* parent1, int* parent2, int* child);
 
 void trap_SnapVector(float* v);
+
+int trap_PC_LoadSource(const char* filename);
+int trap_PC_FreeSource(int handle);
+int trap_PC_ReadToken(int handle, pc_token_t* pc_token);
+int trap_PC_SourceFileAndLine(int handle, char* filename, int* line);

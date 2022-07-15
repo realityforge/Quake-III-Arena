@@ -49,7 +49,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 int numnodeswitches;
 char nodeswitch[MAX_NODESWITCHES + 1][144];
 
-void BotResetNodeSwitches(void)
+void BotResetNodeSwitches()
 {
     numnodeswitches = 0;
 }
@@ -67,7 +67,7 @@ void BotDumpNodeSwitches(bot_state_t* bs)
     BotAI_Print(PRT_FATAL, "");
 }
 
-void BotRecordNodeSwitch(bot_state_t* bs, char* node, char* str, char* s)
+static void BotRecordNodeSwitch(bot_state_t* bs, char* node, char* str, char* s)
 {
     char netname[MAX_NETNAME];
 
@@ -81,7 +81,7 @@ void BotRecordNodeSwitch(bot_state_t* bs, char* node, char* str, char* s)
     numnodeswitches++;
 }
 
-int BotGetAirGoal(bot_state_t* bs, bot_goal_t* goal)
+static int BotGetAirGoal(bot_state_t* bs, bot_goal_t* goal)
 {
     bsp_trace_t bsptrace;
     vec3_t end, mins = { -15, -15, -2 }, maxs = { 15, 15, 2 };
@@ -117,7 +117,7 @@ int BotGetAirGoal(bot_state_t* bs, bot_goal_t* goal)
     return false;
 }
 
-int BotGoForAir(bot_state_t* bs, int tfl, bot_goal_t* ltg, float range)
+static int BotGoForAir(bot_state_t* bs, int tfl, bot_goal_t* ltg, float range)
 {
     bot_goal_t goal;
 
@@ -146,7 +146,7 @@ int BotGoForAir(bot_state_t* bs, int tfl, bot_goal_t* ltg, float range)
     return false;
 }
 
-int BotNearbyGoal(bot_state_t* bs, int tfl, bot_goal_t* ltg, float range)
+static int BotNearbyGoal(bot_state_t* bs, int tfl, bot_goal_t* ltg, float range)
 {
     int ret;
 
@@ -181,7 +181,7 @@ int BotNearbyGoal(bot_state_t* bs, int tfl, bot_goal_t* ltg, float range)
     return ret;
 }
 
-int BotReachedGoal(bot_state_t* bs, bot_goal_t* goal)
+static int BotReachedGoal(bot_state_t* bs, bot_goal_t* goal)
 {
     if (goal->flags & GFL_ITEM) {
         // if touching the goal
@@ -220,7 +220,7 @@ int BotReachedGoal(bot_state_t* bs, bot_goal_t* goal)
     return false;
 }
 
-int BotGetItemLongTermGoal(bot_state_t* bs, int tfl, bot_goal_t* goal)
+static int BotGetItemLongTermGoal(bot_state_t* bs, int tfl, bot_goal_t* goal)
 {
     // if the bot has no goal
     if (!trap_BotGetTopGoal(bs->gs, goal)) {
@@ -266,7 +266,7 @@ we could also create a separate AI node for every long term goal type
 however this saves us a lot of code
 ==================
 */
-int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t* goal)
+static int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t* goal)
 {
     vec3_t target, dir, dir2;
     char netname[MAX_NETNAME];
@@ -995,7 +995,7 @@ int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t* goal)
     return BotGetItemLongTermGoal(bs, tfl, goal);
 }
 
-int BotLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t* goal)
+static int BotLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t* goal)
 {
     aas_entityinfo_t entinfo;
     char teammate[MAX_MESSAGE_SIZE];
@@ -1199,7 +1199,7 @@ int AINode_Respawn(bot_state_t* bs)
     return true;
 }
 
-int BotSelectActivateWeapon(bot_state_t* bs)
+static int BotSelectActivateWeapon(bot_state_t* bs)
 {
     if (bs->inventory[INVENTORY_MACHINEGUN] > 0 && bs->inventory[INVENTORY_BULLETS] > 0)
         return WEAPONINDEX_MACHINEGUN;
@@ -1237,7 +1237,7 @@ BotClearPath
  try to deactivate obstacles like proximity mines on the bot's path
 ==================
 */
-void BotClearPath(bot_state_t* bs, bot_moveresult_t* moveresult)
+static void BotClearPath(bot_state_t* bs, bot_moveresult_t* moveresult)
 {
     int i, bestmine;
     float dist, bestdist;
@@ -1824,7 +1824,7 @@ void AIEnter_Battle_Fight(bot_state_t* bs, char* s)
     bs->flags &= ~BFL_FIGHTSUICIDAL;
 }
 
-void AIEnter_Battle_SuicidalFight(bot_state_t* bs, char* s)
+static void AIEnter_Battle_SuicidalFight(bot_state_t* bs, char* s)
 {
     BotRecordNodeSwitch(bs, "battle fight", "", s);
     trap_BotResetLastAvoidReach(bs->ms);
