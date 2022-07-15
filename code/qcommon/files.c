@@ -277,7 +277,7 @@ bool FS_Initialized()
     return (fs_searchpaths != NULL);
 }
 
-bool FS_PakIsPure(pack_t* pack)
+static bool FS_PakIsPure(pack_t* pack)
 {
     int i;
 
@@ -549,7 +549,7 @@ FS_SV_FileExists
 Tests if the file exists
 ================
 */
-bool FS_SV_FileExists(const char* file)
+static bool FS_SV_FileExists(const char* file)
 {
     FILE* f;
     char* testpath;
@@ -761,7 +761,7 @@ fileHandle_t FS_FOpenFileWrite(const char* filename)
     return f;
 }
 
-fileHandle_t FS_FOpenFileAppend(const char* filename)
+static fileHandle_t FS_FOpenFileAppend(const char* filename)
 {
     char* ospath;
     fileHandle_t f;
@@ -835,7 +835,7 @@ bool FS_FilenameCompare(const char* s1, const char* s2)
     return 0; // strings are equal
 }
 
-char* FS_ShiftedStrStr(const char* string, const char* substring, int shift)
+static char* FS_ShiftedStrStr(const char* string, const char* substring, int shift)
 {
     char buf[MAX_STRING_TOKENS];
     int i;
@@ -1643,7 +1643,7 @@ Returns a unique list of files that match the given criteria
 from all search paths
 ===============
 */
-char** FS_ListFilteredFiles(const char* path, const char* extension, char* filter, int* numfiles)
+static char** FS_ListFilteredFiles(const char* path, const char* extension, char* filter, int* numfiles)
 {
     int nfiles;
     char** listCopy;
@@ -1993,7 +1993,7 @@ int FS_GetModList(char* listbuf, int bufsize)
 
 //============================================================================
 
-void FS_Dir_f()
+static void FS_Dir_f()
 {
     char* path;
     char* extension;
@@ -2025,7 +2025,7 @@ void FS_Dir_f()
     FS_FreeFileList(dirnames);
 }
 
-void FS_ConvertPath(char* s)
+static void FS_ConvertPath(char* s)
 {
     while (*s) {
         if (*s == '\\' || *s == ':') {
@@ -2042,7 +2042,7 @@ FS_PathCmp
 Ignore case and separator char distinctions
 ===========
 */
-int FS_PathCmp(const char* s1, const char* s2)
+static int FS_PathCmp(const char* s1, const char* s2)
 {
     int c1, c2;
 
@@ -2075,7 +2075,7 @@ int FS_PathCmp(const char* s1, const char* s2)
     return 0; // strings are equal
 }
 
-void FS_SortFileList(char** filelist, int numfiles)
+static void FS_SortFileList(char** filelist, int numfiles)
 {
     int i, j, k, numsortedfiles;
     char** sortedlist;
@@ -2099,7 +2099,7 @@ void FS_SortFileList(char** filelist, int numfiles)
     Z_Free(sortedlist);
 }
 
-void FS_NewDir_f()
+static void FS_NewDir_f()
 {
     char* filter;
     char** dirnames;
@@ -2128,7 +2128,7 @@ void FS_NewDir_f()
     FS_FreeFileList(dirnames);
 }
 
-void FS_Path_f()
+static void FS_Path_f()
 {
     searchpath_t* s;
     int i;
