@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 #include "g_local.h"
+#include "plugin.h"
 
 // this file is only included when building a dll
 // g_syscalls.asm is included instead when building a qvm
@@ -27,9 +28,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #error "Do not use in VM build"
 #endif
 
-static int(QDECL* syscall)(int arg, ...) = (int(QDECL*)(int, ...)) - 1;
+static vmDllSystemCall syscall = (vmDllSystemCall)-1;
 
-void dllEntry(int(QDECL* syscallptr)(int arg, ...))
+EXPORT void dllEntry(vmDllSystemCall syscallptr)
 {
     syscall = syscallptr;
 }
