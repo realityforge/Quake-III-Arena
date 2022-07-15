@@ -630,6 +630,7 @@ int CheckArmor(gentity_t* ent, int damage, int dflags)
     return save;
 }
 
+#ifdef MISSIONPACK
 int RaySphereIntersections(vec3_t origin, float radius, vec3_t point, vec3_t dir, vec3_t intersections[2])
 {
     float b, c, d, t;
@@ -659,7 +660,6 @@ int RaySphereIntersections(vec3_t origin, float radius, vec3_t point, vec3_t dir
     return 0;
 }
 
-#ifdef MISSIONPACK
 int G_InvulnerabilityEffect(gentity_t* targ, vec3_t dir, vec3_t point, vec3_t impactpoint, vec3_t bouncedir)
 {
     gentity_t* impact;
