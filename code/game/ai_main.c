@@ -69,8 +69,6 @@ vmCvar_t bot_interbreedbots;
 vmCvar_t bot_interbreedcycle;
 vmCvar_t bot_interbreedwrite;
 
-void ExitLevel(void);
-
 void QDECL BotAI_Print(int type, char* fmt, ...)
 {
     char str[2048];

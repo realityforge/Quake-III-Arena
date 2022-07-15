@@ -598,6 +598,7 @@ void DeathmatchScoreboardMessage(gentity_t* client);
 //
 // g_main.c
 //
+void ExitLevel(void);
 void FindIntermissionPoint(void);
 void SetLeader(int team, int client);
 void CheckTeamLeader(int team);
