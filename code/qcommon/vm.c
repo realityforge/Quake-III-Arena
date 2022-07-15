@@ -119,7 +119,7 @@ vmSymbol_t* VM_ValueToFunctionSymbol(vm_t* vm, int value)
     return sym;
 }
 
-int ParseHex(const char* text)
+static int ParseHex(const char* text)
 {
     int value;
     int c;
@@ -143,7 +143,7 @@ int ParseHex(const char* text)
     return value;
 }
 
-void VM_LoadSymbols(vm_t* vm)
+static void VM_LoadSymbols(vm_t* vm)
 {
     char *mapfile, *text_p, *token;
     char name[MAX_QPATH];
@@ -228,7 +228,7 @@ VM_DllSyscall
 Dlls will call this directly
 ============
 */
-int QDECL VM_DllSyscall(int arg, ...)
+static int QDECL VM_DllSyscall(int arg, ...)
 {
     return currentVM->systemCall(&arg);
 }
