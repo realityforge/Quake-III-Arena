@@ -176,8 +176,6 @@ changed the load procedure to match VFS logic, and allow developer use
 #3 look in fs_basepath
 =================
 */
-extern char* FS_BuildOSPath(const char* base, const char* game, const char* qpath);
-
 void* Sys_LoadDll(const char* name, char* fqpath, vmMainProc* entryPoint, vmDllSystemCall systemCalls)
 {
     void* libHandle;

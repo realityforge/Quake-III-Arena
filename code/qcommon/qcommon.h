@@ -464,6 +464,8 @@ void FS_WriteFile(const char* qpath, const void* buffer, int size);
 int FS_filelength(fileHandle_t f);
 // doesn't work for files that are opened from a pack file
 
+char* FS_BuildOSPath(const char* base, const char* game, const char* qpath);
+
 int FS_FTell(fileHandle_t f);
 // where are we?
 
