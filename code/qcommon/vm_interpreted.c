@@ -128,18 +128,6 @@ char* VM_Indent(vm_t* vm)
     return string + 2 * (20 - vm->callLevel);
 }
 
-void VM_StackTrace(vm_t* vm, int programCounter, int programStack)
-{
-    int count;
-
-    count = 0;
-    do {
-        Com_Printf("%s\n", VM_ValueToSymbol(vm, programCounter));
-        programStack = *(int*)&vm->dataBase[programStack + 4];
-        programCounter = *(int*)&vm->dataBase[programStack];
-    } while (programCounter != -1 && ++count < 32);
-}
-
 void VM_PrepareInterpreter(vm_t* vm, vmHeader_t* header)
 {
     int op;
@@ -531,8 +519,6 @@ int VM_CallInterpreted(vm_t* vm, int* args)
                 if (vm->breakFunction && programCounter - 5 == vm->breakFunction) {
                     // this is to allow setting breakpoints here in the debugger
                     vm->breakCount++;
-                    //					vm_debugLevel = 2;
-                    //					VM_StackTrace( vm, programCounter, programStack );
                 }
                 //				vm->callLevel++;
             }
