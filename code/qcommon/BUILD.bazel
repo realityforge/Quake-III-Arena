@@ -222,6 +222,7 @@ cc_library(
 cc_library(
     name = "qfiles",
     hdrs = ["qfiles.h"],
+    visibility = ["//code/renderer:__pkg__"],
 )
 
 cc_library(
