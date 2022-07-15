@@ -11,11 +11,12 @@
 # limitations under the License.
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//build_defs:rules.bzl", "ENGINE_DEFINES", "FULL_WARNINGS", "SERVER_ONLY_ENGINE_DEFINES")
+load("//build_defs:rules.bzl", "ENGINE_DEFINES", "EXTRA_WARNINGS", "FULL_WARNINGS", "SERVER_ONLY_ENGINE_DEFINES")
 
 cc_library(
     name = "qbraincheck",
     hdrs = ["qbraincheck.h"],
+    copts = EXTRA_WARNINGS,
     includes = ["."],
     visibility = [
         "//code/server:__pkg__",
