@@ -43,6 +43,12 @@ cc_library(
     ],
 )
 
+# TODO: Remove these suppressions once the warnings have been addressed
+SUPPRESS_WARNINGS_COPTS = [
+    # The next suppresses problems with running 32-bit code in 64-bit environment
+    "-Wno-pointer-to-int-cast",
+]
+
 cc_library(
     name = "vm",
     srcs = [
@@ -50,6 +56,7 @@ cc_library(
         "vm_interpreted.c",
     ],
     hdrs = ["vm_local.h"],
+    copts = EXTRA_WARNINGS + SUPPRESS_WARNINGS_COPTS,
     defines = ENGINE_DEFINES,
     visibility = [
         "//code/client:__pkg__",
