@@ -344,8 +344,6 @@ void SP_target_laser(gentity_t* self)
     self->nextthink = level.time + FRAMETIME;
 }
 
-//==========================================================
-
 static void target_teleporter_use(gentity_t* self, UNUSED gentity_t* other, gentity_t* activator)
 {
     gentity_t* dest;

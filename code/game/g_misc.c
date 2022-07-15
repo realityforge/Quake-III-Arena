@@ -132,8 +132,6 @@ void SP_misc_model(gentity_t* ent)
     G_FreeEntity(ent);
 }
 
-//===========================================================
-
 static void locateCamera(gentity_t* ent)
 {
     vec3_t dir;
