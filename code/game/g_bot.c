@@ -55,7 +55,7 @@ float trap_Cvar_VariableValue(const char* var_name)
     return atof(buf);
 }
 
-int G_ParseInfos(char* buf, int max, char* infos[])
+static int G_ParseInfos(char* buf, int max, char* infos[])
 {
     char* token;
     int count;
@@ -166,7 +166,7 @@ static void G_LoadArenas(void)
     }
 }
 
-const char* G_GetArenaInfoByMap(const char* map)
+static const char* G_GetArenaInfoByMap(const char* map)
 {
     int n;
 
@@ -199,7 +199,7 @@ static void PlayerIntroSound(const char* modelAndSkin)
     trap_SendConsoleCommand(EXEC_APPEND, va("play sound/player/announce/%s.wav\n", skin));
 }
 
-void G_AddRandomBot(int team)
+static void G_AddRandomBot(int team)
 {
     int i, n, num;
     float skill;
@@ -266,7 +266,7 @@ void G_AddRandomBot(int team)
     }
 }
 
-int G_RemoveRandomBot(int team)
+static int G_RemoveRandomBot(int team)
 {
     int i;
     char netname[36];
@@ -291,7 +291,7 @@ int G_RemoveRandomBot(int team)
     return false;
 }
 
-int G_CountHumanPlayers(int team)
+static int G_CountHumanPlayers(int team)
 {
     int i, num;
     gclient_t* cl;
@@ -313,7 +313,7 @@ int G_CountHumanPlayers(int team)
     return num;
 }
 
-int G_CountBotPlayers(int team)
+static int G_CountBotPlayers(int team)
 {
     int i, n, num;
     gclient_t* cl;
@@ -344,7 +344,7 @@ int G_CountBotPlayers(int team)
     return num;
 }
 
-void G_CheckMinimumPlayers(void)
+static void G_CheckMinimumPlayers()
 {
     int minplayers;
     int humanplayers, botplayers;

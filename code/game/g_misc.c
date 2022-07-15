@@ -133,7 +133,7 @@ void SP_misc_model(gentity_t* ent)
 
 //===========================================================
 
-void locateCamera(gentity_t* ent)
+static void locateCamera(gentity_t* ent)
 {
     vec3_t dir;
     gentity_t* target;
@@ -217,7 +217,7 @@ void SP_misc_portal_camera(gentity_t* ent)
     ent->s.clientNum = roll / 360.0 * 256;
 }
 
-void Use_Shooter(gentity_t* ent, gentity_t* other, gentity_t* activator)
+static void Use_Shooter(gentity_t* ent, gentity_t* other, gentity_t* activator)
 {
     vec3_t dir;
     float deg;
@@ -265,7 +265,7 @@ static void InitShooter_Finish(gentity_t* ent)
     ent->nextthink = 0;
 }
 
-void InitShooter(gentity_t* ent, int weapon)
+static void InitShooter(gentity_t* ent, int weapon)
 {
     ent->use = Use_Shooter;
     ent->s.weapon = weapon;

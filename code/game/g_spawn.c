@@ -182,7 +182,7 @@ void SP_team_blueobelisk(gentity_t* ent);
 void SP_team_redobelisk(gentity_t* ent);
 void SP_team_neutralobelisk(gentity_t* ent);
 #endif
-void SP_item_botroam(gentity_t* ent)
+static void SP_item_botroam(UNUSED gentity_t* ent)
 {
 }
 
@@ -270,7 +270,7 @@ Finds the spawn function for the entity and calls it,
 returning false if not found
 ===============
 */
-bool G_CallSpawn(gentity_t* ent)
+static bool G_CallSpawn(gentity_t* ent)
 {
     spawn_t* s;
     gitem_t* item;
@@ -344,7 +344,7 @@ Takes a key/value pair and sets the binary values
 in a gentity
 ===============
 */
-void G_ParseField(const char* key, const char* value, gentity_t* ent)
+static void G_ParseField(const char* key, const char* value, gentity_t* ent)
 {
     field_t* f;
     uint8_t* b;
@@ -395,7 +395,7 @@ Spawn an entity and fill in all of the level fields from
 level.spawnVars[], then call the class specfic spawn function
 ===================
 */
-void G_SpawnGEntityFromSpawnVars(void)
+static void G_SpawnGEntityFromSpawnVars()
 {
     int i;
     gentity_t* ent;
@@ -468,7 +468,7 @@ void G_SpawnGEntityFromSpawnVars(void)
     }
 }
 
-char* G_AddSpawnVarToken(const char* string)
+static char* G_AddSpawnVarToken(const char* string)
 {
     int l;
     char* dest;
@@ -496,7 +496,7 @@ level's entity strings into level.spawnVars[]
 This does not actually spawn an entity.
 ====================
 */
-bool G_ParseSpawnVars(void)
+static bool G_ParseSpawnVars()
 {
     char keyname[MAX_TOKEN_CHARS];
     char com_token[MAX_TOKEN_CHARS];
@@ -550,7 +550,7 @@ Every map should have exactly one worldspawn.
 "gravity"	800 is default gravity
 "message"	Text to print during connection process
 */
-void SP_worldspawn(void)
+static void SP_worldspawn()
 {
     char* s;
 

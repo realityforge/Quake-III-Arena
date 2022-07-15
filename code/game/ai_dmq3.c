@@ -143,7 +143,7 @@ int BotOppositeTeam(bot_state_t* bs)
     }
 }
 
-bot_goal_t* BotEnemyFlag(bot_state_t* bs)
+static bot_goal_t* BotEnemyFlag(bot_state_t* bs)
 {
     if (BotTeam(bs) == TEAM_RED) {
         return &ctf_blueflag;
@@ -152,7 +152,7 @@ bot_goal_t* BotEnemyFlag(bot_state_t* bs)
     }
 }
 
-bot_goal_t* BotTeamFlag(bot_state_t* bs)
+static bot_goal_t* BotTeamFlag(bot_state_t* bs)
 {
     if (BotTeam(bs) == TEAM_RED) {
         return &ctf_redflag;
@@ -174,7 +174,7 @@ bool EntityIsDead(aas_entityinfo_t* entinfo)
     return false;
 }
 
-bool EntityCarriesFlag(aas_entityinfo_t* entinfo)
+static bool EntityCarriesFlag(aas_entityinfo_t* entinfo)
 {
     if (entinfo->powerups & (1 << PW_REDFLAG))
         return true;
@@ -207,7 +207,7 @@ bool EntityIsShooting(aas_entityinfo_t* entinfo)
     return false;
 }
 
-bool EntityIsChatting(aas_entityinfo_t* entinfo)
+static bool EntityIsChatting(aas_entityinfo_t* entinfo)
 {
     if (entinfo->flags & EF_TALK) {
         return true;
@@ -224,7 +224,7 @@ bool EntityHasKamikaze(aas_entityinfo_t* entinfo)
     return false;
 }
 
-bool EntityCarriesCubes(aas_entityinfo_t* entinfo)
+static bool EntityCarriesCubes(aas_entityinfo_t* entinfo)
 {
     entityState_t state;
 
@@ -382,7 +382,7 @@ int BotSetLastOrderedTask(bot_state_t* bs)
     return false;
 }
 
-void BotRefuseOrder(bot_state_t* bs)
+static void BotRefuseOrder(bot_state_t* bs)
 {
     if (!bs->ordered)
         return;
@@ -1365,7 +1365,7 @@ void BotSetupForMovement(bot_state_t* bs)
     trap_BotInitMoveState(bs->ms, &initmove);
 }
 
-void BotCheckItemPickup(bot_state_t* bs, int* oldinventory)
+static void BotCheckItemPickup(bot_state_t* bs, int* oldinventory)
 {
 #ifdef MISSIONPACK
     int offence, leader;
@@ -1535,7 +1535,7 @@ void BotUpdateBattleInventory(bot_state_t* bs, int enemy)
 #ifdef MISSIONPACK
 #define KAMIKAZE_DIST 1024
 
-void BotUseKamikaze(bot_state_t* bs)
+static void BotUseKamikaze(bot_state_t* bs)
 {
     int c, teammates, enemies;
     aas_entityinfo_t entinfo;
@@ -1637,7 +1637,7 @@ void BotUseKamikaze(bot_state_t* bs)
     }
 }
 
-void BotUseInvulnerability(bot_state_t* bs)
+static void BotUseInvulnerability(bot_state_t* bs)
 {
     int c;
     vec3_t dir, target;
@@ -1779,7 +1779,7 @@ void BotBattleUseItems(bot_state_t* bs)
 #endif
 }
 
-void BotSetTeleportTime(bot_state_t* bs)
+static void BotSetTeleportTime(bot_state_t* bs)
 {
     if ((bs->cur_ps.eFlags ^ bs->last_eFlags) & EF_TELEPORT_BIT) {
         bs->teleport_time = FloatTime();
@@ -1864,7 +1864,7 @@ void BotFreeWaypoints(bot_waypoint_t* wp)
     }
 }
 
-void BotInitWaypoints(void)
+static void BotInitWaypoints()
 {
     int i;
 
@@ -2103,7 +2103,7 @@ int BotHasPersistantPowerupAndWeapon(bot_state_t* bs)
     return false;
 }
 
-void BotGoCamp(bot_state_t* bs, bot_goal_t* goal)
+static void BotGoCamp(bot_state_t* bs, bot_goal_t* goal)
 {
     float camper;
 
@@ -2172,7 +2172,7 @@ int BotWantsToCamp(bot_state_t* bs)
     return true;
 }
 
-void BotDontAvoid(bot_state_t* bs, char* itemname)
+static void BotDontAvoid(bot_state_t* bs, char* itemname)
 {
     bot_goal_t goal;
     int num;
@@ -2184,7 +2184,7 @@ void BotDontAvoid(bot_state_t* bs, char* itemname)
     }
 }
 
-void BotGoForPowerups(bot_state_t* bs)
+static void BotGoForPowerups(bot_state_t* bs)
 {
 
     // don't avoid any of the powerups anymore
@@ -3291,7 +3291,7 @@ static vec3_t MOVEDIR_UP = { 0, 0, 1 };
 static vec3_t VEC_DOWN = { 0, -2, 0 };
 static vec3_t MOVEDIR_DOWN = { 0, 0, -1 };
 
-void BotSetMovedir(vec3_t angles, vec3_t movedir)
+static void BotSetMovedir(vec3_t angles, vec3_t movedir)
 {
     if (VectorCompare(angles, VEC_UP)) {
         VectorCopy(MOVEDIR_UP, movedir);
@@ -3309,7 +3309,7 @@ BotModelMinsMaxs
 this is ugly
 ==================
 */
-int BotModelMinsMaxs(int modelindex, int eType, int contents, vec3_t mins, vec3_t maxs)
+static int BotModelMinsMaxs(int modelindex, int eType, int contents, vec3_t mins, vec3_t maxs)
 {
     gentity_t* ent;
     int i;
@@ -3340,7 +3340,7 @@ int BotModelMinsMaxs(int modelindex, int eType, int contents, vec3_t mins, vec3_
     return 0;
 }
 
-int BotFuncButtonActivateGoal(bot_state_t* bs, int bspent, bot_activategoal_t* activategoal)
+static int BotFuncButtonActivateGoal(bot_state_t* bs, int bspent, bot_activategoal_t* activategoal)
 {
     int i, areas[10], numareas, modelindex, entitynum;
     char model[128];
@@ -3479,7 +3479,7 @@ int BotFuncButtonActivateGoal(bot_state_t* bs, int bspent, bot_activategoal_t* a
     return false;
 }
 
-int BotFuncDoorActivateGoal(bot_state_t* bs, int bspent, bot_activategoal_t* activategoal)
+static int BotFuncDoorActivateGoal(bot_state_t* bs, int bspent, bot_activategoal_t* activategoal)
 {
     int modelindex, entitynum;
     char model[MAX_INFO_STRING];
@@ -3509,7 +3509,7 @@ int BotFuncDoorActivateGoal(bot_state_t* bs, int bspent, bot_activategoal_t* act
     return true;
 }
 
-int BotTriggerMultipleActivateGoal(bot_state_t* bs, int bspent, bot_activategoal_t* activategoal)
+static int BotTriggerMultipleActivateGoal(bot_state_t* bs, int bspent, bot_activategoal_t* activategoal)
 {
     int i, areas[10], numareas, modelindex, entitynum;
     char model[128];
@@ -3565,7 +3565,7 @@ int BotPopFromActivateGoalStack(bot_state_t* bs)
     return true;
 }
 
-int BotPushOntoActivateGoalStack(bot_state_t* bs, bot_activategoal_t* activategoal)
+static int BotPushOntoActivateGoalStack(bot_state_t* bs, bot_activategoal_t* activategoal)
 {
     int i, best;
     float besttime;
@@ -3607,7 +3607,7 @@ void BotEnableActivateGoalAreas(bot_activategoal_t* activategoal, int enable)
     activategoal->areasdisabled = !enable;
 }
 
-int BotIsGoingToActivateEntity(bot_state_t* bs, int entitynum)
+static int BotIsGoingToActivateEntity(bot_state_t* bs, int entitynum)
 {
     bot_activategoal_t* a;
     int i;
@@ -3640,7 +3640,7 @@ BotGetActivateGoal
 */
 //#define OBSTACLEDEBUG
 
-int BotGetActivateGoal(bot_state_t* bs, int entitynum, bot_activategoal_t* activategoal)
+static int BotGetActivateGoal(bot_state_t* bs, int entitynum, bot_activategoal_t* activategoal)
 {
     int i, ent, cur_entities[10], spawnflags, modelindex, areas[MAX_ACTIVATEAREAS * 2], numareas, t;
     char model[MAX_INFO_STRING], tmpmodel[128];
@@ -3816,7 +3816,7 @@ int BotGetActivateGoal(bot_state_t* bs, int entitynum, bot_activategoal_t* activ
     return 0;
 }
 
-int BotGoForActivateGoal(bot_state_t* bs, bot_activategoal_t* activategoal)
+static int BotGoForActivateGoal(bot_state_t* bs, bot_activategoal_t* activategoal)
 {
     aas_entityinfo_t activateinfo;
 
@@ -3837,7 +3837,7 @@ int BotGoForActivateGoal(bot_state_t* bs, bot_activategoal_t* activategoal)
     }
 }
 
-void BotRandomMove(bot_state_t* bs, bot_moveresult_t* moveresult)
+static void BotRandomMove(bot_state_t* bs, bot_moveresult_t* moveresult)
 {
     vec3_t dir, angles;
 
@@ -4017,7 +4017,7 @@ int BotAIPredictObstacles(bot_state_t* bs, bot_goal_t* goal)
     return false;
 }
 
-void BotCheckConsoleMessages(bot_state_t* bs)
+static void BotCheckConsoleMessages(bot_state_t* bs)
 {
     char botname[MAX_NETNAME], message[MAX_MESSAGE_SIZE], netname[MAX_NETNAME], *ptr;
     float chat_reply;
@@ -4109,7 +4109,7 @@ void BotCheckConsoleMessages(bot_state_t* bs)
     }
 }
 
-void BotCheckForGrenades(bot_state_t* bs, entityState_t* state)
+static void BotCheckForGrenades(bot_state_t* bs, entityState_t* state)
 {
     // if this is not a grenade
     if (state->eType != ET_MISSILE || state->weapon != WP_GRENADE_LAUNCHER)
@@ -4119,7 +4119,7 @@ void BotCheckForGrenades(bot_state_t* bs, entityState_t* state)
 }
 
 #ifdef MISSIONPACK
-void BotCheckForProxMines(bot_state_t* bs, entityState_t* state)
+static void BotCheckForProxMines(bot_state_t* bs, entityState_t* state)
 {
     // if this is not a prox mine
     if (state->eType != ET_MISSILE || state->weapon != WP_PROX_LAUNCHER)
@@ -4139,7 +4139,7 @@ void BotCheckForProxMines(bot_state_t* bs, entityState_t* state)
     bs->numproxmines++;
 }
 
-void BotCheckForKamikazeBody(bot_state_t* bs, entityState_t* state)
+static void BotCheckForKamikazeBody(bot_state_t* bs, entityState_t* state)
 {
     // if this entity is not wearing the kamikaze
     if (!(state->eFlags & EF_KAMIKAZE))
@@ -4152,7 +4152,7 @@ void BotCheckForKamikazeBody(bot_state_t* bs, entityState_t* state)
 }
 #endif
 
-void BotCheckEvents(bot_state_t* bs, entityState_t* state)
+static void BotCheckEvents(bot_state_t* bs, entityState_t* state)
 {
     int event;
     char buf[128];
@@ -4380,7 +4380,7 @@ void BotCheckEvents(bot_state_t* bs, entityState_t* state)
     }
 }
 
-void BotCheckSnapshot(bot_state_t* bs)
+static void BotCheckSnapshot(bot_state_t* bs)
 {
     int ent;
     entityState_t state;
@@ -4412,7 +4412,7 @@ void BotCheckSnapshot(bot_state_t* bs)
     BotCheckEvents(bs, &state);
 }
 
-void BotCheckAir(bot_state_t* bs)
+static void BotCheckAir(bot_state_t* bs)
 {
     if (bs->inventory[INVENTORY_ENVIRONMENTSUIT] <= 0) {
         if (trap_AAS_PointContents(bs->eye) & (CONTENTS_WATER | CONTENTS_SLIME | CONTENTS_LAVA)) {
@@ -4473,7 +4473,7 @@ int BotGetAlternateRouteGoal(bot_state_t* bs, int base)
     return true;
 }
 
-void BotSetupAlternativeRouteGoals(void)
+static void BotSetupAlternativeRouteGoals(void)
 {
 
     if (altroutegoals_setup)

@@ -32,7 +32,7 @@ typedef struct {
 } pushed_t;
 pushed_t pushed[MAX_GENTITIES], *pushed_p;
 
-gentity_t* G_TestEntityPosition(gentity_t* ent)
+static gentity_t* G_TestEntityPosition(gentity_t* ent)
 {
     trace_t tr;
     int mask;
@@ -54,13 +54,13 @@ gentity_t* G_TestEntityPosition(gentity_t* ent)
     return NULL;
 }
 
-void G_CreateRotationMatrix(vec3_t angles, vec3_t matrix[3])
+static void G_CreateRotationMatrix(vec3_t angles, vec3_t matrix[3])
 {
     AngleVectors(angles, matrix[0], matrix[1], matrix[2]);
     VectorInverse(matrix[1]);
 }
 
-void G_TransposeMatrix(vec3_t matrix[3], vec3_t transpose[3])
+static void G_TransposeMatrix(vec3_t matrix[3], vec3_t transpose[3])
 {
     int i, j;
     for (i = 0; i < 3; i++) {
@@ -70,7 +70,7 @@ void G_TransposeMatrix(vec3_t matrix[3], vec3_t transpose[3])
     }
 }
 
-void G_RotatePoint(vec3_t point, vec3_t matrix[3])
+static void G_RotatePoint(vec3_t point, vec3_t matrix[3])
 {
     vec3_t tvec;
 
@@ -87,7 +87,7 @@ G_TryPushingEntity
 Returns false if the move is blocked
 ==================
 */
-bool G_TryPushingEntity(gentity_t* check, gentity_t* pusher, vec3_t move, vec3_t amove)
+static bool G_TryPushingEntity(gentity_t* check, gentity_t* pusher, vec3_t move, vec3_t amove)
 {
     vec3_t matrix[3], transpose[3];
     vec3_t org, org2, move2;
@@ -169,8 +169,9 @@ bool G_TryPushingEntity(gentity_t* check, gentity_t* pusher, vec3_t move, vec3_t
     // blocked
     return false;
 }
+#ifdef MISSIONPACK
 
-bool G_CheckProxMinePosition(gentity_t* check)
+static bool G_CheckProxMinePosition(gentity_t* check)
 {
     vec3_t start, end;
     trace_t tr;
@@ -185,7 +186,7 @@ bool G_CheckProxMinePosition(gentity_t* check)
     return true;
 }
 
-bool G_TryPushingProxMine(gentity_t* check, gentity_t* pusher, vec3_t move, vec3_t amove)
+static bool G_TryPushingProxMine(gentity_t* check, gentity_t* pusher, vec3_t move, vec3_t amove)
 {
     vec3_t forward, right, up;
     vec3_t org, org2, move2;
@@ -213,6 +214,7 @@ bool G_TryPushingProxMine(gentity_t* check, gentity_t* pusher, vec3_t move, vec3
     }
     return ret;
 }
+#endif
 
 /*
 ============
@@ -223,7 +225,7 @@ otherwise riders would continue to slide.
 If false is returned, *obstacle will be the blocking entity
 ============
 */
-bool G_MoverPush(gentity_t* pusher, vec3_t move, vec3_t amove, gentity_t** obstacle)
+static bool G_MoverPush(gentity_t* pusher, vec3_t move, vec3_t amove, gentity_t** obstacle)
 {
     int i, e;
     gentity_t* check;
@@ -371,7 +373,7 @@ bool G_MoverPush(gentity_t* pusher, vec3_t move, vec3_t amove, gentity_t** obsta
     return true;
 }
 
-void G_MoverTeam(gentity_t* ent)
+static void G_MoverTeam(gentity_t* ent)
 {
     vec3_t move, amove;
     gentity_t *part, *obstacle;
@@ -451,7 +453,7 @@ Pos1 is "at rest", pos2 is "activated"
 ============================================================================
 */
 
-void SetMoverState(gentity_t* ent, moverState_t moverState, int time)
+static void SetMoverState(gentity_t* ent, moverState_t moverState, int time)
 {
     vec3_t delta;
     float f;
@@ -504,7 +506,7 @@ void MatchTeam(gentity_t* teamLeader, int moverState, int time)
     }
 }
 
-void ReturnToPos1(gentity_t* ent)
+static void ReturnToPos1(gentity_t* ent)
 {
     MatchTeam(ent, MOVER_2TO1, level.time);
 
@@ -517,9 +519,8 @@ void ReturnToPos1(gentity_t* ent)
     }
 }
 
-void Reached_BinaryMover(gentity_t* ent)
+static void Reached_BinaryMover(gentity_t* ent)
 {
-
     // stop the looping sound
     ent->s.loopSound = ent->soundLoop;
 
@@ -559,7 +560,7 @@ void Reached_BinaryMover(gentity_t* ent)
     }
 }
 
-void Use_BinaryMover(gentity_t* ent, gentity_t* other, gentity_t* activator)
+static void Use_BinaryMover(gentity_t* ent, gentity_t* other, gentity_t* activator)
 {
     int total;
     int partial;
@@ -639,7 +640,7 @@ InitMover
 so the movement delta can be calculated
 ================
 */
-void InitMover(gentity_t* ent)
+static void InitMover(gentity_t* ent)
 {
     vec3_t move;
     float distance;
@@ -720,7 +721,7 @@ targeted by another entity.
 ===============================================================================
 */
 
-void Blocked_Door(gentity_t* ent, gentity_t* other)
+static void Blocked_Door(gentity_t* ent, gentity_t* other)
 {
     // remove anything other than a client
     if (!other->client) {
@@ -788,7 +789,7 @@ All of the parts of a door have been spawned, so create
 a trigger that encloses all of them
 ======================
 */
-void Think_SpawnNewDoorTrigger(gentity_t* ent)
+static void Think_SpawnNewDoorTrigger(gentity_t* ent)
 {
     gentity_t* other;
     vec3_t mins, maxs;
@@ -833,7 +834,7 @@ void Think_SpawnNewDoorTrigger(gentity_t* ent)
     MatchTeam(ent, ent->moverState, level.time);
 }
 
-void Think_MatchTeam(gentity_t* ent)
+static void Think_MatchTeam(gentity_t* ent)
 {
     MatchTeam(ent, ent->moverState, level.time);
 }
@@ -930,7 +931,7 @@ Touch_Plat
 Don't allow decent if a living player is on it
 ===============
 */
-void Touch_Plat(gentity_t* ent, gentity_t* other, trace_t* trace)
+static void Touch_Plat(gentity_t* ent, gentity_t* other, trace_t* trace)
 {
     if (!other->client || other->client->ps.stats[STAT_HEALTH] <= 0) {
         return;
@@ -949,7 +950,7 @@ Touch_PlatCenterTrigger
 If the plat is at the bottom position, start it going up
 ===============
 */
-void Touch_PlatCenterTrigger(gentity_t* ent, gentity_t* other, trace_t* trace)
+static void Touch_PlatCenterTrigger(gentity_t* ent, gentity_t* other, trace_t* trace)
 {
     if (!other->client) {
         return;
@@ -969,7 +970,7 @@ Elevator cars require that the trigger extend through the entire low position,
 not just sit on top of it.
 ================
 */
-void SpawnPlatTrigger(gentity_t* ent)
+static void SpawnPlatTrigger(gentity_t* ent)
 {
     gentity_t* trigger;
     vec3_t tmin, tmax;
@@ -1060,7 +1061,7 @@ void SP_func_plat(gentity_t* ent)
     }
 }
 
-void Touch_Button(gentity_t* ent, gentity_t* other, trace_t* trace)
+static void Touch_Button(gentity_t* ent, gentity_t* other, trace_t* trace)
 {
     if (!other->client) {
         return;
@@ -1140,13 +1141,13 @@ Think_BeginMoving
 The wait time at a corner has completed, so start moving again
 ===============
 */
-void Think_BeginMoving(gentity_t* ent)
+static void Think_BeginMoving(gentity_t* ent)
 {
     ent->s.pos.trTime = level.time;
     ent->s.pos.trType = TR_LINEAR_STOP;
 }
 
-void Reached_Train(gentity_t* ent)
+static void Reached_Train(gentity_t* ent)
 {
     gentity_t* next;
     float speed;
@@ -1205,7 +1206,7 @@ Think_SetupTrainTargets
 Link all the corners together
 ===============
 */
-void Think_SetupTrainTargets(gentity_t* ent)
+static void Think_SetupTrainTargets(gentity_t* ent)
 {
     gentity_t *path, *next, *start;
 

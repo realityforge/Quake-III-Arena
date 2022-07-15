@@ -91,7 +91,7 @@ const char* OtherTeamName(int team)
 }
 
 // NULL for everyone
-void QDECL PrintMsg(gentity_t* ent, const char* fmt, ...)
+static void QDECL PrintMsg(gentity_t* ent, const char* fmt, ...)
 {
     char msg[1024];
     va_list argptr;
@@ -225,7 +225,7 @@ void Team_CheckDroppedItem(gentity_t* dropped)
     }
 }
 
-void Team_ForceGesture(int team)
+static void Team_ForceGesture(int team)
 {
     int i;
     gentity_t* ent;
@@ -484,7 +484,7 @@ void Team_CheckHurtCarrier(gentity_t* targ, gentity_t* attacker)
         attacker->client->pers.teamState.lasthurtcarrier = level.time;
 }
 
-gentity_t* Team_ResetFlag(int team)
+static gentity_t* Team_ResetFlag(int team)
 {
     char* c;
     gentity_t *ent, *rent = NULL;
@@ -518,7 +518,7 @@ gentity_t* Team_ResetFlag(int team)
     return rent;
 }
 
-void Team_ResetFlags(void)
+static void Team_ResetFlags(void)
 {
     if (g_gametype.integer == GT_CTF) {
         Team_ResetFlag(TEAM_RED);
@@ -531,7 +531,7 @@ void Team_ResetFlags(void)
 #endif
 }
 
-void Team_ReturnFlagSound(gentity_t* ent, int team)
+static void Team_ReturnFlagSound(gentity_t* ent, int team)
 {
     gentity_t* te;
 
@@ -549,7 +549,7 @@ void Team_ReturnFlagSound(gentity_t* ent, int team)
     te->r.svFlags |= SVF_BROADCAST;
 }
 
-void Team_TakeFlagSound(gentity_t* ent, int team)
+static void Team_TakeFlagSound(gentity_t* ent, int team)
 {
     gentity_t* te;
 
@@ -587,7 +587,7 @@ void Team_TakeFlagSound(gentity_t* ent, int team)
     te->r.svFlags |= SVF_BROADCAST;
 }
 
-void Team_CaptureFlagSound(gentity_t* ent, int team)
+static void Team_CaptureFlagSound(gentity_t* ent, int team)
 {
     gentity_t* te;
 
@@ -651,7 +651,7 @@ void Team_DroppedFlagThink(gentity_t* ent)
     // Reset Flag will delete this entity
 }
 
-int Team_TouchOurFlag(gentity_t* ent, gentity_t* other, int team)
+static int Team_TouchOurFlag(gentity_t* ent, gentity_t* other, int team)
 {
     int i;
     gentity_t* player;
@@ -756,7 +756,7 @@ int Team_TouchOurFlag(gentity_t* ent, gentity_t* other, int team)
     return 0; // Do not respawn this automatically
 }
 
-int Team_TouchEnemyFlag(gentity_t* ent, gentity_t* other, int team)
+static int Team_TouchEnemyFlag(gentity_t* ent, gentity_t* other, int team)
 {
     gclient_t* cl = other->client;
 
@@ -923,7 +923,7 @@ go to a random point that doesn't telefrag
 ================
 */
 #define MAX_TEAM_SPAWN_POINTS 32
-gentity_t* SelectRandomTeamSpawnPoint(int teamstate, team_t team)
+static gentity_t* SelectRandomTeamSpawnPoint(int teamstate, team_t team)
 {
     gentity_t* spot;
     int count;
@@ -1242,7 +1242,7 @@ static void ObeliskPain(gentity_t* self, gentity_t* attacker, int damage)
     AddScore(attacker, self->r.currentOrigin, actualDamage);
 }
 
-gentity_t* SpawnObelisk(vec3_t origin, int team, int spawnflags)
+static gentity_t* SpawnObelisk(vec3_t origin, int team, int spawnflags)
 {
     trace_t tr;
     vec3_t dest;

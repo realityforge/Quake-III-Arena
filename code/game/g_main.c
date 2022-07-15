@@ -264,7 +264,7 @@ All but the first will have the FL_TEAMSLAVE flag set and teammaster field set
 All but the last will have the teamchain field set to the next one
 ================
 */
-void G_FindTeams(void)
+static void G_FindTeams()
 {
     gentity_t *e, *e2;
     int i, j;
@@ -308,7 +308,7 @@ void G_FindTeams(void)
     G_Printf("%i teams with %i entities\n", c, c2);
 }
 
-void G_RemapTeamShaders()
+static void G_RemapTeamShaders()
 {
 #ifdef MISSIONPACK
     char string[1024];
@@ -323,7 +323,7 @@ void G_RemapTeamShaders()
 #endif
 }
 
-void G_RegisterCvars(void)
+static void G_RegisterCvars()
 {
     int i;
     cvarTable_t* cv;
@@ -353,7 +353,7 @@ void G_RegisterCvars(void)
     level.warmupModificationCount = g_warmup.modificationCount;
 }
 
-void G_UpdateCvars(void)
+static void G_UpdateCvars()
 {
     int i;
     cvarTable_t* cv;
@@ -549,7 +549,7 @@ If there are less than two tournament players, put a
 spectator in the game and restart
 =============
 */
-void AddTournamentPlayer(void)
+static void AddTournamentPlayer()
 {
     int i;
     gclient_t* client;
@@ -601,7 +601,7 @@ RemoveTournamentLoser
 Make the loser a spectator at the back of the line
 =======================
 */
-void RemoveTournamentLoser(void)
+static void RemoveTournamentLoser()
 {
     int clientNum;
 
@@ -619,7 +619,7 @@ void RemoveTournamentLoser(void)
     SetTeam(&g_entities[clientNum], "s");
 }
 
-void AdjustTournamentScores(void)
+static void AdjustTournamentScores(void)
 {
     int clientNum;
 
@@ -636,7 +636,7 @@ void AdjustTournamentScores(void)
     }
 }
 
-int QDECL SortRanks(const void* a, const void* b)
+static int QDECL SortRanks(const void* a, const void* b)
 {
     gclient_t *ca, *cb;
 
@@ -1035,7 +1035,7 @@ LogExit
 Append information about this game to the log file
 ================
 */
-void LogExit(const char* string)
+static void LogExit(const char* string)
 {
     int i, numSorted;
     gclient_t* cl;
@@ -1105,7 +1105,7 @@ If one or more players have not acknowledged the continue, the game will
 wait 10 seconds before going on.
 =================
 */
-void CheckIntermissionExit(void)
+static void CheckIntermissionExit()
 {
     int ready, notReady;
     int i;
@@ -1181,7 +1181,7 @@ void CheckIntermissionExit(void)
     ExitLevel();
 }
 
-bool ScoreIsTied(void)
+static bool ScoreIsTied()
 {
     int a, b;
 
@@ -1306,7 +1306,7 @@ CheckTournament
 Once a frame, check for changes in tournament player state
 =============
 */
-void CheckTournament(void)
+static void CheckTournament()
 {
     // check because we run 3 game frames before calling Connect and/or ClientBegin
     // for clients on a map_restart
@@ -1412,7 +1412,7 @@ void CheckTournament(void)
     }
 }
 
-void CheckVote(void)
+static void CheckVote()
 {
     if (level.voteExecuteTime && level.voteExecuteTime < level.time) {
         level.voteExecuteTime = 0;
@@ -1441,7 +1441,7 @@ void CheckVote(void)
     trap_SetConfigstring(CS_VOTE_TIME, "");
 }
 
-void PrintTeam(int team, char* message)
+static void PrintTeam(int team, char* message)
 {
     int i;
 
@@ -1505,7 +1505,7 @@ void CheckTeamLeader(int team)
     }
 }
 
-void CheckTeamVote(int team)
+static void CheckTeamVote(int team)
 {
     int cs_offset;
 
@@ -1543,7 +1543,7 @@ void CheckTeamVote(int team)
     trap_SetConfigstring(CS_TEAMVOTE_TIME + cs_offset, "");
 }
 
-void CheckCvars(void)
+static void CheckCvars()
 {
     static int lastMod = -1;
 

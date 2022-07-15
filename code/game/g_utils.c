@@ -76,7 +76,7 @@ model / sound configstring indexes
 =========================================================================
 */
 
-int G_FindConfigstringIndex(char* name, int start, int max, bool create)
+static int G_FindConfigstringIndex(char* name, int start, int max, bool create)
 {
     int i;
     char s[MAX_STRING_CHARS];

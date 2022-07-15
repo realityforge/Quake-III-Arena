@@ -34,7 +34,7 @@ void dllEntry(int(QDECL* syscallptr)(int arg, ...))
     syscall = syscallptr;
 }
 
-int PASSFLOAT(float x)
+static int PASSFLOAT(float x)
 {
     float floatTemp;
     floatTemp = x;

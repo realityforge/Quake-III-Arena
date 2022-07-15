@@ -216,7 +216,7 @@ void G_ProcessIPBans(void)
     }
 }
 
-void Svcmd_AddIP_f(void)
+static void Svcmd_AddIP_f(void)
 {
     char str[MAX_TOKEN_CHARS];
 
@@ -230,7 +230,7 @@ void Svcmd_AddIP_f(void)
     AddIP(str);
 }
 
-void Svcmd_RemoveIP_f(void)
+static void Svcmd_RemoveIP_f(void)
 {
     ipFilter_t f;
     int i;
@@ -259,7 +259,7 @@ void Svcmd_RemoveIP_f(void)
     G_Printf("Didn't find %s.\n", str);
 }
 
-void Svcmd_EntityList_f(void)
+static void Svcmd_EntityList_f(void)
 {
     int e;
     gentity_t* check;
@@ -319,7 +319,7 @@ void Svcmd_EntityList_f(void)
     }
 }
 
-gclient_t* ClientForString(const char* s)
+static gclient_t* ClientForString(const char* s)
 {
     gclient_t* cl;
     int i;
@@ -364,7 +364,7 @@ Svcmd_ForceTeam_f
 forceteam <player> <team>
 ===================
 */
-void Svcmd_ForceTeam_f(void)
+static void Svcmd_ForceTeam_f(void)
 {
     gclient_t* cl;
     char str[MAX_TOKEN_CHARS];

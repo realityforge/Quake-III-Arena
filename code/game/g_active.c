@@ -32,7 +32,7 @@ damage values to that client for pain blends and kicks, and
 global pain sound events for all clients.
 ===============
 */
-void P_DamageFeedback(gentity_t* player)
+static void P_DamageFeedback(gentity_t* player)
 {
     gclient_t* client;
     float count;
@@ -90,7 +90,7 @@ P_WorldEffects
 Check for lava / slime contents and drowning
 =============
 */
-void P_WorldEffects(gentity_t* ent)
+static void P_WorldEffects(gentity_t* ent)
 {
     bool envirosuit;
     int waterlevel;
@@ -164,7 +164,7 @@ void P_WorldEffects(gentity_t* ent)
     }
 }
 
-void G_SetClientSound(gentity_t* ent)
+static void G_SetClientSound(gentity_t* ent)
 {
 #ifdef MISSIONPACK
     if (ent->s.eFlags & EF_TICKING) {
@@ -179,8 +179,7 @@ void G_SetClientSound(gentity_t* ent)
 }
 
 //==============================================================
-
-void ClientImpacts(gentity_t* ent, pmove_t* pm)
+static void ClientImpacts(gentity_t* ent, pmove_t* pm)
 {
     int i, j;
     trace_t trace;
@@ -295,7 +294,7 @@ void G_TouchTriggers(gentity_t* ent)
     }
 }
 
-void SpectatorThink(gentity_t* ent, usercmd_t* ucmd)
+static void SpectatorThink(gentity_t* ent, usercmd_t* ucmd)
 {
     pmove_t pm;
     gclient_t* client;
@@ -339,7 +338,7 @@ ClientInactivityTimer
 Returns false if the client is dropped
 =================
 */
-bool ClientInactivityTimer(gclient_t* client)
+static bool ClientInactivityTimer(gclient_t* client)
 {
     if (!g_inactivity.integer) {
         // give everyone some time, so if the operator sets g_inactivity during
@@ -369,7 +368,7 @@ ClientTimerActions
 Actions that happen once a second
 ==================
 */
-void ClientTimerActions(gentity_t* ent, int msec)
+static void ClientTimerActions(gentity_t* ent, int msec)
 {
     gclient_t* client;
 #ifdef MISSIONPACK
@@ -520,7 +519,7 @@ void ClientTimerActions(gentity_t* ent, int msec)
 #endif
 }
 
-void ClientIntermissionThink(gclient_t* client)
+static void ClientIntermissionThink(gclient_t* client)
 {
     client->ps.eFlags &= ~EF_TALK;
     client->ps.eFlags &= ~EF_FIRING;
@@ -544,7 +543,7 @@ Events will be passed on to the clients for presentation,
 but any server game effects are handled here
 ================
 */
-void ClientEvents(gentity_t* ent, int oldEventSequence)
+static void ClientEvents(gentity_t* ent, int oldEventSequence)
 {
     int i, j;
     int event;
@@ -552,7 +551,6 @@ void ClientEvents(gentity_t* ent, int oldEventSequence)
     int damage;
     vec3_t dir;
     vec3_t origin, angles;
-    //	bool	fired;
     gitem_t* item;
     gentity_t* drop;
 
@@ -709,7 +707,7 @@ static int StuckInOtherClient(gentity_t* ent)
 }
 #endif
 
-void SendPendingPredictableEvents(playerState_t* ps)
+static void SendPendingPredictableEvents(playerState_t* ps)
 {
     gentity_t* t;
     int event, seq;
@@ -751,7 +749,7 @@ If "g_synchronousClients 1" is set, this will be called exactly
 once for each server frame, which makes for smooth demo recording.
 ==============
 */
-void ClientThink_real(gentity_t* ent)
+static void ClientThink_real(gentity_t* ent)
 {
     gclient_t* client;
     pmove_t pm;
@@ -1038,7 +1036,7 @@ void G_RunClient(gentity_t* ent)
     ClientThink_real(ent);
 }
 
-void SpectatorClientEndFrame(gentity_t* ent)
+static void SpectatorClientEndFrame(gentity_t* ent)
 {
     gclient_t* cl;
 

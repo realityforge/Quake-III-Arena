@@ -46,7 +46,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define TIME_BETWEENCHATTING 25
 
-int BotNumActivePlayers(void)
+static int BotNumActivePlayers()
 {
     int i, num;
     char buf[MAX_INFO_STRING];
@@ -69,7 +69,7 @@ int BotNumActivePlayers(void)
     return num;
 }
 
-int BotIsFirstInRankings(bot_state_t* bs)
+static int BotIsFirstInRankings(bot_state_t* bs)
 {
     int i, score;
     char buf[MAX_INFO_STRING];
@@ -95,7 +95,7 @@ int BotIsFirstInRankings(bot_state_t* bs)
     return true;
 }
 
-int BotIsLastInRankings(bot_state_t* bs)
+static int BotIsLastInRankings(bot_state_t* bs)
 {
     int i, score;
     char buf[MAX_INFO_STRING];
@@ -121,7 +121,7 @@ int BotIsLastInRankings(bot_state_t* bs)
     return true;
 }
 
-char* BotFirstClientInRankings(void)
+static char* BotFirstClientInRankings(void)
 {
     int i, bestscore, bestclient;
     char buf[MAX_INFO_STRING];
@@ -152,7 +152,7 @@ char* BotFirstClientInRankings(void)
     return name;
 }
 
-char* BotLastClientInRankings(void)
+static char* BotLastClientInRankings(void)
 {
     int i, worstscore, bestclient;
     char buf[MAX_INFO_STRING];
@@ -183,7 +183,7 @@ char* BotLastClientInRankings(void)
     return name;
 }
 
-char* BotRandomOpponentName(bot_state_t* bs)
+static char* BotRandomOpponentName(bot_state_t* bs)
 {
     int i, count;
     char buf[MAX_INFO_STRING];
@@ -224,7 +224,7 @@ char* BotRandomOpponentName(bot_state_t* bs)
     return name;
 }
 
-char* BotMapTitle(void)
+static char* BotMapTitle(void)
 {
     char info[1024];
     static char mapname[128];
@@ -237,7 +237,7 @@ char* BotMapTitle(void)
     return mapname;
 }
 
-char* BotWeaponNameForMeansOfDeath(int mod)
+static char* BotWeaponNameForMeansOfDeath(int mod)
 {
     switch (mod) {
     case MOD_SHOTGUN:
@@ -281,7 +281,7 @@ char* BotWeaponNameForMeansOfDeath(int mod)
     }
 }
 
-char* BotRandomWeaponName(void)
+static char* BotRandomWeaponName(void)
 {
     int rnd;
 
@@ -320,7 +320,7 @@ char* BotRandomWeaponName(void)
     }
 }
 
-int BotVisibleEnemies(bot_state_t* bs)
+static int BotVisibleEnemies(bot_state_t* bs)
 {
     float vis;
     int i;
