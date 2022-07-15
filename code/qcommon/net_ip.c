@@ -136,7 +136,7 @@ static int numIP;
 
 //=============================================================================
 
-char* NET_ErrorString()
+static char* NET_ErrorString()
 {
 #ifdef _WIN32
     // FIXME: replace with FormatMessage?
@@ -505,7 +505,7 @@ NET_GetPacket
 Receive one packet
 ==================
 */
-bool NET_GetPacket(netadr_t* net_from, msg_t* net_message, fd_set* fdr)
+static bool NET_GetPacket(netadr_t* net_from, msg_t* net_message, fd_set* fdr)
 {
     int ret;
     struct sockaddr_storage from;
@@ -747,7 +747,7 @@ void Sys_ShowIP()
 
 //=============================================================================
 
-SOCKET NET_IPSocket(char* net_interface, int port, int* err)
+static SOCKET NET_IPSocket(char* net_interface, int port, int* err)
 {
     SOCKET newsocket;
     struct sockaddr_in address;
@@ -811,7 +811,7 @@ SOCKET NET_IPSocket(char* net_interface, int port, int* err)
 NET_IP6Socket
 ====================
 */
-SOCKET NET_IP6Socket(char* net_interface, int port, struct sockaddr_in6* bindto, int* err)
+static SOCKET NET_IP6Socket(char* net_interface, int port, struct sockaddr_in6* bindto, int* err)
 {
     SOCKET newsocket;
     struct sockaddr_in6 address;
@@ -889,7 +889,7 @@ NET_SetMulticast
 Set the current multicast group
 ====================
 */
-void NET_SetMulticast6()
+static void NET_SetMulticast6()
 {
     struct sockaddr_in6 addr;
 
@@ -975,7 +975,7 @@ void NET_LeaveMulticast6()
     }
 }
 
-void NET_OpenSocks(int port)
+static void NET_OpenSocks(int port)
 {
     struct sockaddr_in address;
     struct hostent* h;
@@ -1238,7 +1238,7 @@ static void NET_GetLocalAddress()
 }
 #endif
 
-void NET_OpenIP()
+static void NET_OpenIP()
 {
     int i;
     int err;
@@ -1472,7 +1472,7 @@ Called from NET_Sleep which uses select() to determine which sockets have seen a
 ====================
 */
 
-void NET_Event(fd_set* fdr)
+static void NET_Event(fd_set* fdr)
 {
     uint8_t bufData[MAX_MSGLEN + 1];
     netadr_t from = { 0 };

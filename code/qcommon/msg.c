@@ -561,7 +561,7 @@ int kbitmask[32] = {
     0xFFFFFFFF,
 };
 
-void MSG_WriteDeltaKey(msg_t* msg, int key, int oldV, int newV, int bits)
+static void MSG_WriteDeltaKey(msg_t* msg, int key, int oldV, int newV, int bits)
 {
     if (oldV == newV) {
         MSG_WriteBits(msg, 0, 1);
@@ -571,7 +571,7 @@ void MSG_WriteDeltaKey(msg_t* msg, int key, int oldV, int newV, int bits)
     MSG_WriteBits(msg, newV ^ key, bits);
 }
 
-int MSG_ReadDeltaKey(msg_t* msg, int key, int oldV, int bits)
+static int MSG_ReadDeltaKey(msg_t* msg, int key, int oldV, int bits)
 {
     if (MSG_ReadBits(msg, 1)) {
         return MSG_ReadBits(msg, bits) ^ (key & kbitmask[bits - 1]);

@@ -120,7 +120,7 @@ vmSymbol_t* VM_ValueToFunctionSymbol(vm_t* vm, int value)
     return sym;
 }
 
-int ParseHex(const char* text)
+static int ParseHex(const char* text)
 {
     int value;
     int c;
@@ -144,7 +144,7 @@ int ParseHex(const char* text)
     return value;
 }
 
-void VM_LoadSymbols(vm_t* vm)
+static void VM_LoadSymbols(vm_t* vm)
 {
     union {
         char* c;
@@ -264,7 +264,7 @@ Dlls will call this directly
 
 ============
 */
-intptr_t QDECL VM_DllSyscall(intptr_t arg, ...)
+static intptr_t QDECL VM_DllSyscall(intptr_t arg, ...)
 {
     // rcg010206 - see commentary above
     intptr_t args[MAX_VMSYSCALL_ARGS];
@@ -288,7 +288,7 @@ VM_LoadQVM
 Load a .qvm file
 =================
 */
-vmHeader_t* VM_LoadQVM(vm_t* vm, bool alloc, bool unpure)
+static vmHeader_t* VM_LoadQVM(vm_t* vm, bool alloc, bool unpure)
 {
     int dataLength;
     int i;

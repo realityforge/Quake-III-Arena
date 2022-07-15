@@ -283,7 +283,7 @@ bool FS_Initialized()
     return (fs_searchpaths != NULL);
 }
 
-bool FS_PakIsPure(pack_t* pack)
+static bool FS_PakIsPure(pack_t* pack)
 {
     int i;
 
@@ -377,7 +377,7 @@ void FS_ForceFlush(fileHandle_t f)
     setvbuf(file, NULL, _IONBF, 0);
 }
 
-long FS_fplength(FILE* h)
+static long FS_fplength(FILE* h)
 {
     long pos;
     long end;
@@ -541,7 +541,7 @@ FS_FileInPathExists
 Tests if path and file exists
 ================
 */
-bool FS_FileInPathExists(const char* testpath)
+static bool FS_FileInPathExists(const char* testpath)
 {
     FILE* filep;
 
@@ -577,7 +577,7 @@ FS_SV_FileExists
 Tests if the file exists
 ================
 */
-bool FS_SV_FileExists(const char* file)
+static bool FS_SV_FileExists(const char* file)
 {
     char* testpath;
 
@@ -873,7 +873,7 @@ Return true if ext matches file extension filename
 ===========
 */
 
-bool FS_IsExt(const char* filename, const char* ext, int namelen)
+static bool FS_IsExt(const char* filename, const char* ext, int namelen)
 {
     int extlen;
 
@@ -895,7 +895,7 @@ Return true if filename has a demo extension
 ===========
 */
 
-bool FS_IsDemoExt(const char* filename, int namelen)
+static bool FS_IsDemoExt(const char* filename, int namelen)
 {
     char* ext_test;
     int index, protocol;
@@ -926,7 +926,7 @@ Returns filesize and an open FILE pointer.
 */
 extern bool com_fullyInitialized;
 
-long FS_FOpenFileReadDir(const char* filename, searchpath_t* search, fileHandle_t* file, bool uniqueFILE, bool unpure)
+static long FS_FOpenFileReadDir(const char* filename, searchpath_t* search, fileHandle_t* file, bool uniqueFILE, bool unpure)
 {
     long hash;
     pack_t* pak;
@@ -1937,7 +1937,7 @@ Returns a unique list of files that match the given criteria
 from all search paths
 ===============
 */
-char** FS_ListFilteredFiles(const char* path, const char* extension, char* filter, int* numfiles, bool allowNonPureFilesOnDisk)
+static char** FS_ListFilteredFiles(const char* path, const char* extension, char* filter, int* numfiles, bool allowNonPureFilesOnDisk)
 {
     int nfiles;
     char** listCopy;
@@ -2305,7 +2305,7 @@ int FS_GetModList(char* listbuf, int bufsize)
 
 //============================================================================
 
-void FS_Dir_f()
+static void FS_Dir_f()
 {
     char* path;
     char* extension;
@@ -2337,7 +2337,7 @@ void FS_Dir_f()
     FS_FreeFileList(dirnames);
 }
 
-void FS_ConvertPath(char* s)
+static void FS_ConvertPath(char* s)
 {
     while (*s) {
         if (*s == '\\' || *s == ':') {
@@ -2354,7 +2354,7 @@ FS_PathCmp
 Ignore case and separator char distinctions
 ===========
 */
-int FS_PathCmp(const char* s1, const char* s2)
+static int FS_PathCmp(const char* s1, const char* s2)
 {
     int c1, c2;
 
@@ -2387,7 +2387,7 @@ int FS_PathCmp(const char* s1, const char* s2)
     return 0; // strings are equal
 }
 
-void FS_SortFileList(char** filelist, int numfiles)
+static void FS_SortFileList(char** filelist, int numfiles)
 {
     int i, j, k, numsortedfiles;
     char** sortedlist;
@@ -2411,7 +2411,7 @@ void FS_SortFileList(char** filelist, int numfiles)
     Z_Free(sortedlist);
 }
 
-void FS_NewDir_f()
+static void FS_NewDir_f()
 {
     char* filter;
     char** dirnames;
@@ -2440,7 +2440,7 @@ void FS_NewDir_f()
     FS_FreeFileList(dirnames);
 }
 
-void FS_Path_f()
+static void FS_Path_f()
 {
     searchpath_t* s;
     int i;
@@ -2486,7 +2486,7 @@ bool FS_Which(const char* filename, void* searchPath)
     return false;
 }
 
-void FS_Which_f()
+static void FS_Which_f()
 {
     searchpath_t* search;
     char* filename;

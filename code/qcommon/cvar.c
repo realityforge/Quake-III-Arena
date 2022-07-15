@@ -394,7 +394,7 @@ Cvar_Print
 Prints the value, default, and latched string of the given variable
 ============
 */
-void Cvar_Print(cvar_t* v)
+static void Cvar_Print(cvar_t* v)
 {
     Com_Printf("\"%s\" is:\"%s" S_COLOR_WHITE "\"",
                v->name, v->string);
@@ -646,7 +646,7 @@ Prints the contents of a cvar
 (preferred over Cvar_Command where cvar names and commands conflict)
 ============
 */
-void Cvar_Print_f()
+static void Cvar_Print_f()
 {
     char* name;
     cvar_t* cv;
@@ -674,7 +674,7 @@ Toggles a cvar for easy single key binding, optionally through a list of
 given values
 ============
 */
-void Cvar_Toggle_f()
+static void Cvar_Toggle_f()
 {
     int i, c = Cmd_Argc();
     char* curval;
@@ -718,7 +718,7 @@ Allows setting and defining of arbitrary cvars from console, even if they
 weren't declared in C code.
 ============
 */
-void Cvar_Set_f()
+static void Cvar_Set_f()
 {
     int c;
     char* cmd;
@@ -762,7 +762,7 @@ void Cvar_Set_f()
     }
 }
 
-void Cvar_Reset_f()
+static void Cvar_Reset_f()
 {
     if (Cmd_Argc() != 2) {
         Com_Printf("usage: reset <variable>\n");
@@ -812,7 +812,7 @@ void Cvar_WriteVariables(fileHandle_t f)
     }
 }
 
-void Cvar_List_f()
+static void Cvar_List_f()
 {
     cvar_t* var;
     int i;
@@ -882,7 +882,7 @@ void Cvar_List_f()
     Com_Printf("%i cvar indexes\n", cvar_numIndexes);
 }
 
-void Cvar_ListModified_f()
+static void Cvar_ListModified_f()
 {
     cvar_t* var;
     int totalModified;
@@ -969,7 +969,7 @@ Unsets a cvar
 ============
 */
 
-cvar_t* Cvar_Unset(cvar_t* cv)
+static cvar_t* Cvar_Unset(cvar_t* cv)
 {
     cvar_t* next = cv->next;
 
@@ -1014,7 +1014,7 @@ Unsets a userdefined cvar
 ============
 */
 
-void Cvar_Unset_f()
+static void Cvar_Unset_f()
 {
     cvar_t* cv;
 

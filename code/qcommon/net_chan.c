@@ -398,7 +398,7 @@ bool NET_GetLoopPacket(netsrc_t sock, netadr_t* net_from, msg_t* net_message)
     return true;
 }
 
-void NET_SendLoopPacket(netsrc_t sock, int length, const void* data, netadr_t to)
+static void NET_SendLoopPacket(netsrc_t sock, int length, const void* data, netadr_t to)
 {
     int i;
     loopback_t* loop;
