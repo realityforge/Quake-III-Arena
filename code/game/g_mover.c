@@ -214,8 +214,6 @@ bool G_TryPushingProxMine(gentity_t* check, gentity_t* pusher, vec3_t move, vec3
     return ret;
 }
 
-void G_ExplodeMissile(gentity_t* ent);
-
 /*
 ============
 G_MoverPush
