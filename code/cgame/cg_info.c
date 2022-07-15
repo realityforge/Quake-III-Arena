@@ -31,7 +31,7 @@ static int loadingItemIconCount;
 static qhandle_t loadingPlayerIcons[MAX_LOADING_PLAYER_ICONS];
 static qhandle_t loadingItemIcons[MAX_LOADING_ITEM_ICONS];
 
-static void CG_DrawLoadingIcons(void)
+static void CG_DrawLoadingIcons()
 {
     int n;
     int x, y;
@@ -124,7 +124,7 @@ CG_DrawInformation
 Draw all the status / pacifier stuff during level loading
 ====================
 */
-void CG_DrawInformation(void)
+void CG_DrawInformation()
 {
     const char* s;
     const char* info;

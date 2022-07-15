@@ -58,7 +58,7 @@ static int CG_ValidOrder(const char* p)
 }
 #endif
 
-static void CG_ParseScores(void)
+static void CG_ParseScores()
 {
     int i, powerups;
 
@@ -100,7 +100,7 @@ static void CG_ParseScores(void)
 #endif
 }
 
-static void CG_ParseTeamInfo(void)
+static void CG_ParseTeamInfo()
 {
     int i;
     int client;
@@ -137,7 +137,7 @@ This is called explicitly when the gamestate is first received,
 and whenever the server updates any serverinfo flagged cvars
 ================
 */
-void CG_ParseServerinfo(void)
+void CG_ParseServerinfo()
 {
     const char* info;
     char* mapname;
@@ -159,7 +159,7 @@ void CG_ParseServerinfo(void)
     trap_Cvar_Set("g_blueTeam", cgs.blueTeam);
 }
 
-static void CG_ParseWarmup(void)
+static void CG_ParseWarmup()
 {
     const char* info;
     int warmup;
@@ -192,7 +192,7 @@ CG_SetConfigValues
 Called on load to set the initial values from configure strings
 ================
 */
-void CG_SetConfigValues(void)
+void CG_SetConfigValues()
 {
     const char* s;
 
@@ -213,7 +213,7 @@ void CG_SetConfigValues(void)
     cg.warmup = atoi(CG_ConfigString(CS_WARMUP));
 }
 
-void CG_ShaderStateChanged(void)
+void CG_ShaderStateChanged()
 {
     char originalShader[MAX_QPATH];
     char newShader[MAX_QPATH];
@@ -249,7 +249,7 @@ void CG_ShaderStateChanged(void)
     }
 }
 
-static void CG_ConfigStringModified(void)
+static void CG_ConfigStringModified()
 {
     const char* str;
     int num;
@@ -410,7 +410,7 @@ A tournement restart will clear everything, but doesn't
 require a reload of all the media
 ===============
 */
-static void CG_MapRestart(void)
+static void CG_MapRestart()
 {
     if (cg_showmiss.integer) {
         CG_Printf("CG_MapRestart\n");
@@ -579,7 +579,7 @@ int CG_ParseVoiceChats(const char* filename, voiceChatList_t* voiceChatList, int
     return true;
 }
 
-void CG_LoadVoiceChats(void)
+void CG_LoadVoiceChats()
 {
     int size;
 
@@ -777,7 +777,7 @@ void CG_PlayVoiceChat(bufferedVoiceChat_t* vchat)
     voiceChatBuffer[cg.voiceChatBufferOut].snd = 0;
 }
 
-void CG_PlayBufferedVoiceChats(void)
+void CG_PlayBufferedVoiceChats()
 {
     if (cg.voiceChatTime < cg.time) {
         if (cg.voiceChatBufferOut != cg.voiceChatBufferIn && voiceChatBuffer[cg.voiceChatBufferOut].snd) {
@@ -887,7 +887,7 @@ The string has been tokenized and can be retrieved with
 Cmd_Argc() / Cmd_Argv()
 =================
 */
-static void CG_ServerCommand(void)
+static void CG_ServerCommand()
 {
     const char* cmd;
     char text[MAX_SAY_TEXT];

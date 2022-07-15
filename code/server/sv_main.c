@@ -287,7 +287,7 @@ SV_MasterShutdown
 Informs all masters that this server is going down
 =================
 */
-void SV_MasterShutdown(void)
+void SV_MasterShutdown()
 {
     // send a heartbeat right now
     svs.nextHeartbeatTime = -9999;
@@ -826,7 +826,7 @@ SV_CalcPings
 Updates the cl->ping variables
 ===================
 */
-static void SV_CalcPings(void)
+static void SV_CalcPings()
 {
     int i, j;
     client_t* cl;
@@ -887,7 +887,7 @@ for a few seconds to make sure any final reliable message gets resent
 if necessary
 ==================
 */
-static void SV_CheckTimeouts(void)
+static void SV_CheckTimeouts()
 {
     int i;
     client_t* cl;
@@ -923,7 +923,7 @@ static void SV_CheckTimeouts(void)
     }
 }
 
-static bool SV_CheckPaused(void)
+static bool SV_CheckPaused()
 {
     int count;
     client_t* cl;

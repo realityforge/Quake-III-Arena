@@ -1353,7 +1353,7 @@ WEAPON SELECTION
 ==============================================================================
 */
 
-void CG_DrawWeaponSelect(void)
+void CG_DrawWeaponSelect()
 {
     int i;
     int bits;
@@ -1436,7 +1436,7 @@ static bool CG_WeaponSelectable(int i)
     return true;
 }
 
-void CG_NextWeapon_f(void)
+void CG_NextWeapon_f()
 {
     int i;
     int original;
@@ -1468,7 +1468,7 @@ void CG_NextWeapon_f(void)
     }
 }
 
-void CG_PrevWeapon_f(void)
+void CG_PrevWeapon_f()
 {
     int i;
     int original;
@@ -1500,7 +1500,7 @@ void CG_PrevWeapon_f(void)
     }
 }
 
-void CG_Weapon_f(void)
+void CG_Weapon_f()
 {
     int num;
 
@@ -1533,7 +1533,7 @@ CG_OutOfAmmoChange
 The current weapon has just run out of ammo
 ===================
 */
-void CG_OutOfAmmoChange(void)
+void CG_OutOfAmmoChange()
 {
     int i;
 

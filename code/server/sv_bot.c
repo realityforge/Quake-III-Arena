@@ -37,7 +37,7 @@ int bot_maxdebugpolys;
 extern botlib_export_t* botlib_export;
 int bot_enable;
 
-int SV_BotAllocateClient(void)
+int SV_BotAllocateClient()
 {
     int i;
     client_t* cl;
@@ -188,7 +188,7 @@ static int BotImport_inPVS(vec3_t p1, vec3_t p2)
     return SV_inPVS(p1, p2);
 }
 
-static char* BotImport_BSPEntityData(void)
+static char* BotImport_BSPEntityData()
 {
     return CM_EntityString();
 }
@@ -283,7 +283,7 @@ void BotImport_DebugPolygonDelete(int id)
     debugpolygons[id].inuse = false;
 }
 
-static int BotImport_DebugLineCreate(void)
+static int BotImport_DebugLineCreate()
 {
     vec3_t points[1];
     return BotImport_DebugPolygonCreate(0, 0, points);
@@ -339,7 +339,7 @@ void SV_BotFrame(int time)
     VM_Call(gvm, BOTAI_START_FRAME, time);
 }
 
-int SV_BotLibSetup(void)
+int SV_BotLibSetup()
 {
     if (!bot_enable) {
         return 0;
@@ -363,7 +363,7 @@ Called when either the entire server is being killed, or
 it is changing to a different game directory.
 ===============
 */
-int SV_BotLibShutdown(void)
+int SV_BotLibShutdown()
 {
 
     if (!botlib_export) {
@@ -373,7 +373,7 @@ int SV_BotLibShutdown(void)
     return botlib_export->BotLibShutdown();
 }
 
-void SV_BotInitCvars(void)
+void SV_BotInitCvars()
 {
 
     Cvar_Get("bot_enable", "1", 0); // enable the bot
@@ -407,7 +407,7 @@ void SV_BotInitCvars(void)
     Cvar_Get("bot_interbreedwrite", "", CVAR_CHEAT); // write interbreeded bots to this file
 }
 
-void SV_BotInitBotLib(void)
+void SV_BotInitBotLib()
 {
     botlib_import_t botlib_import;
 

@@ -193,7 +193,7 @@ to the clients -- only the fields that differ from the
 baseline will be transmitted
 ================
 */
-static void SV_CreateBaseline(void)
+static void SV_CreateBaseline()
 {
     sharedEntity_t* svent;
     int entnum;
@@ -234,7 +234,7 @@ NOT cause this to be called, unless the game is exited to
 the menu system first.
 ===============
 */
-static void SV_Startup(void)
+static void SV_Startup()
 {
     if (svs.initialized) {
         Com_Error(ERR_FATAL, "SV_Startup: svs.initialized");
@@ -256,7 +256,7 @@ static void SV_Startup(void)
     NET_JoinMulticast6();
 }
 
-void SV_ChangeMaxClients(void)
+void SV_ChangeMaxClients()
 {
     int oldMaxClients;
     int i;
@@ -312,7 +312,7 @@ void SV_ChangeMaxClients(void)
     svs.numSnapshotEntities = sv_maxclients->integer * LOCAL_PACKET_BACKUP * MAX_SNAPSHOT_ENTITIES;
 }
 
-static void SV_ClearServer(void)
+static void SV_ClearServer()
 {
     int i;
 
@@ -564,7 +564,7 @@ SV_Init
 Only called at main exe startup, not for each game
 ===============
 */
-void SV_Init(void)
+void SV_Init()
 {
     int index;
 

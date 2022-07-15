@@ -73,7 +73,7 @@ typedef struct worldSector_s {
 worldSector_t sv_worldSectors[AREA_NODES];
 int sv_numworldSectors;
 
-void SV_SectorList_f(void)
+void SV_SectorList_f()
 {
     int i, c;
     worldSector_t* sec;
@@ -133,7 +133,7 @@ static worldSector_t* SV_CreateworldSector(int depth, vec3_t mins, vec3_t maxs)
     return anode;
 }
 
-void SV_ClearWorld(void)
+void SV_ClearWorld()
 {
     clipHandle_t h;
     vec3_t mins, maxs;

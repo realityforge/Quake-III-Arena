@@ -33,14 +33,14 @@ extern displayContextDef_t cgDC;
 
 int drawTeamOverlayModificationCount = -1;
 
-void CG_InitTeamChat(void)
+void CG_InitTeamChat()
 {
     memset(teamChat1, 0, sizeof(teamChat1));
     memset(teamChat2, 0, sizeof(teamChat2));
     memset(systemChat, 0, sizeof(systemChat));
 }
 
-void CG_CheckOrderPending(void)
+void CG_CheckOrderPending()
 {
     if (cgs.gametype < GT_CTF) {
         return;
@@ -102,7 +102,7 @@ void CG_CheckOrderPending(void)
     }
 }
 
-static void CG_SetSelectedPlayerName(void)
+static void CG_SetSelectedPlayerName()
 {
     if (cg_currentSelectedPlayer.integer >= 0 && cg_currentSelectedPlayer.integer < numSortedTeamPlayers) {
         clientInfo_t* ci = cgs.clientinfo + sortedTeamPlayers[cg_currentSelectedPlayer.integer];
@@ -115,7 +115,7 @@ static void CG_SetSelectedPlayerName(void)
         trap_Cvar_Set("cg_selectedPlayerName", "Everyone");
     }
 }
-int CG_GetSelectedPlayer(void)
+int CG_GetSelectedPlayer()
 {
     if (cg_currentSelectedPlayer.integer < 0 || cg_currentSelectedPlayer.integer >= numSortedTeamPlayers) {
         cg_currentSelectedPlayer.integer = 0;
@@ -123,7 +123,7 @@ int CG_GetSelectedPlayer(void)
     return cg_currentSelectedPlayer.integer;
 }
 
-void CG_SelectNextPlayer(void)
+void CG_SelectNextPlayer()
 {
     CG_CheckOrderPending();
     if (cg_currentSelectedPlayer.integer >= 0 && cg_currentSelectedPlayer.integer < numSortedTeamPlayers) {
@@ -134,7 +134,7 @@ void CG_SelectNextPlayer(void)
     CG_SetSelectedPlayerName();
 }
 
-void CG_SelectPrevPlayer(void)
+void CG_SelectPrevPlayer()
 {
     CG_CheckOrderPending();
     if (cg_currentSelectedPlayer.integer > 0 && cg_currentSelectedPlayer.integer <= numSortedTeamPlayers) {
@@ -930,7 +930,7 @@ float CG_GetValue(int ownerDraw)
     return -1;
 }
 
-bool CG_OtherTeamHasFlag(void)
+bool CG_OtherTeamHasFlag()
 {
     if (cgs.gametype == GT_CTF || cgs.gametype == GT_1FCTF) {
         int team = cg.snap->ps.persistant[PERS_TEAM];
@@ -955,7 +955,7 @@ bool CG_OtherTeamHasFlag(void)
     return false;
 }
 
-bool CG_YourTeamHasFlag(void)
+bool CG_YourTeamHasFlag()
 {
     if (cgs.gametype == GT_CTF || cgs.gametype == GT_1FCTF) {
         int team = cg.snap->ps.persistant[PERS_TEAM];
@@ -1114,7 +1114,7 @@ static void CG_DrawAreaChat(rectDef_t* rect, float scale, vec4_t color, qhandle_
     CG_Text_Paint(rect->x, rect->y + rect->h, scale, color, teamChat2, 0, 0, 0);
 }
 
-const char* CG_GetKillerText(void)
+const char* CG_GetKillerText()
 {
     const char* s = "";
     if (cg.killerName[0]) {
@@ -1152,7 +1152,7 @@ static void CG_Draw2ndPlace(rectDef_t* rect, float scale, vec4_t color, qhandle_
     }
 }
 
-const char* CG_GetGameStatusText(void)
+const char* CG_GetGameStatusText()
 {
     const char* s = "";
     if (cgs.gametype < GT_TEAM) {
@@ -1176,7 +1176,7 @@ static void CG_DrawGameStatus(rectDef_t* rect, float scale, vec4_t color, qhandl
     CG_Text_Paint(rect->x, rect->y + rect->h, scale, color, CG_GetGameStatusText(), 0, 0, textStyle);
 }
 
-const char* CG_GameTypeString(void)
+const char* CG_GameTypeString()
 {
     if (cgs.gametype == GT_FFA) {
         return "Free For All";
@@ -1708,7 +1708,7 @@ void CG_MouseEvent(int x, int y)
     }
 }
 
-void CG_HideTeamMenu(void)
+void CG_HideTeamMenu()
 {
     Menus_CloseByName("teamMenu");
     Menus_CloseByName("getMenu");
@@ -1746,7 +1746,7 @@ void CG_KeyEvent(int key, bool down)
     }
 }
 
-void CG_ShowResponseHead(void)
+void CG_ShowResponseHead()
 {
     float x, y, w, h;
 

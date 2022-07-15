@@ -847,7 +847,7 @@ int PC_AddGlobalDefine(char* string)
 //============================================================================
 // remove all globals defines
 //============================================================================
-void PC_RemoveAllGlobalDefines(void)
+void PC_RemoveAllGlobalDefines()
 {
     define_t* define;
 

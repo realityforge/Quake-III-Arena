@@ -224,7 +224,7 @@ void COM_BeginParseSession(const char* name)
     Com_sprintf(com_parsename, sizeof(com_parsename), "%s", name);
 }
 
-int COM_GetCurrentParseLine(void)
+int COM_GetCurrentParseLine()
 {
     if (com_tokenline) {
         return com_tokenline;

@@ -243,7 +243,7 @@ CG_DrawScoreboard
 Draw the normal in-game scoreboard
 =================
 */
-bool CG_DrawOldScoreboard(void)
+bool CG_DrawOldScoreboard()
 {
     int x, y, w, i, n1, n2;
     float fade;
@@ -420,7 +420,7 @@ CG_DrawTourneyScoreboard
 Draw the oversize scoreboard for tournaments
 =================
 */
-void CG_DrawTourneyScoreboard(void)
+void CG_DrawTourneyScoreboard()
 {
     const char* s;
     vec4_t color;

@@ -945,7 +945,7 @@ Return the shortest time interval for sending next packet to client
 ==================
 */
 
-int SV_SendQueuedMessages(void)
+int SV_SendQueuedMessages()
 {
     int i, retval = -1, nextFragT;
     client_t* cl;
@@ -975,7 +975,7 @@ Send one round of download messages to all clients
 ==================
 */
 
-int SV_SendDownloadMessages(void)
+int SV_SendDownloadMessages()
 {
     int i, numDLs = 0, retval;
     client_t* cl;
