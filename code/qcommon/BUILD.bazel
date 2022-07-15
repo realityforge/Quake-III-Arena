@@ -109,6 +109,7 @@ cc_library(
         "msg.c",
         "net_chan.c",
     ],
+    copts = EXTRA_WARNINGS,
     defines = ENGINE_DEFINES,
     visibility = [
         "//code/client:__pkg__",
