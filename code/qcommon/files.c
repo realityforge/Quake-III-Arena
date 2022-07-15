@@ -924,8 +924,6 @@ Tries opening file "filename" in searchpath "search"
 Returns filesize and an open FILE pointer.
 ===========
 */
-extern bool com_fullyInitialized;
-
 static long FS_FOpenFileReadDir(const char* filename, searchpath_t* search, fileHandle_t* file, bool uniqueFILE, bool unpure)
 {
     long hash;
