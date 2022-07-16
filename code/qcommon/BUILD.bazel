@@ -171,6 +171,7 @@ cc_library(
         "q_math.c",
         "q_shared.c",
     ],
+    copts = EXTRA_WARNINGS,
     visibility = [
         "//code/cgame:__pkg__",
         "//code/game:__pkg__",
