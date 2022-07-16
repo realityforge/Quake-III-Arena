@@ -65,7 +65,7 @@ static int AAS_UpdatePortal(int areanum, int clusternum)
             break;
     }
     if (portalnum == aasworld.numportals) {
-        AAS_Error("no portal of area %d\n", areanum);
+        AAS_Error("no portal of area %d", areanum);
         return true;
     }
     portal = &aasworld.portals[portalnum];
@@ -88,7 +88,7 @@ static int AAS_UpdatePortal(int areanum, int clusternum)
         return false;
     }
     if (aasworld.portalindexsize >= AAS_MAX_PORTALINDEXSIZE) {
-        AAS_Error("AAS_MAX_PORTALINDEXSIZE\n");
+        AAS_Error("AAS_MAX_PORTALINDEXSIZE");
         return true;
     }
     // set the area cluster number to the negative portal number
@@ -107,7 +107,7 @@ static int AAS_FloodClusterAreas_r(int areanum, int clusternum)
     int facenum, i;
 
     if (areanum <= 0 || areanum >= aasworld.numareas) {
-        AAS_Error("AAS_FloodClusterAreas_r: areanum out of range\n");
+        AAS_Error("AAS_FloodClusterAreas_r: areanum out of range");
         return false;
     }
     // if the area is already part of a cluster
@@ -115,7 +115,7 @@ static int AAS_FloodClusterAreas_r(int areanum, int clusternum)
         if (aasworld.areasettings[areanum].cluster == clusternum)
             return true;
         // there's a reachability going from one cluster to another only in one direction
-        AAS_Error("cluster %d touched cluster %d at area %d\n",
+        AAS_Error("cluster %d touched cluster %d at area %d",
                   clusternum, aasworld.areasettings[areanum].cluster, areanum);
         return false;
     }
@@ -265,7 +265,7 @@ static int AAS_FindClusters()
         if (aasworld.areasettings[i].contents & AREACONTENTS_CLUSTERPORTAL)
             continue;
         if (aasworld.numclusters >= AAS_MAX_CLUSTERS) {
-            AAS_Error("AAS_MAX_CLUSTERS\n");
+            AAS_Error("AAS_MAX_CLUSTERS");
             return false;
         }
         cluster = &aasworld.clusters[aasworld.numclusters];
@@ -293,7 +293,7 @@ static void AAS_CreatePortals()
         // if the area is a cluster portal
         if (aasworld.areasettings[i].contents & AREACONTENTS_CLUSTERPORTAL) {
             if (aasworld.numportals >= AAS_MAX_PORTALS) {
-                AAS_Error("AAS_MAX_PORTALS\n");
+                AAS_Error("AAS_MAX_PORTALS");
                 return;
             }
             portal = &aasworld.portals[aasworld.numportals];
@@ -388,7 +388,7 @@ static int AAS_GetAdjacentAreasWithLessPresenceTypes_r(int* areanums, int numare
             // if the other area isn't already in the list
             if (j == numareas) {
                 if (numareas >= MAX_PORTALAREAS) {
-                    AAS_Error("MAX_PORTALAREAS\n");
+                    AAS_Error("MAX_PORTALAREAS");
                     return numareas;
                 }
                 numareas = AAS_GetAdjacentAreasWithLessPresenceTypes_r(areanums, numareas, otherareanum);

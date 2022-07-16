@@ -389,7 +389,7 @@ static aas_lreachability_t* AAS_AllocReachability()
         return NULL;
     // make sure the error message only shows up once
     if (!nextreachability->next)
-        AAS_Error("AAS_MAX_REACHABILITYSIZE\n");
+        AAS_Error("AAS_MAX_REACHABILITYSIZE");
     r = nextreachability;
     nextreachability = nextreachability->next;
     numlreachabilities++;
@@ -412,7 +412,7 @@ static void AAS_FreeReachability(aas_lreachability_t* lreach)
 int AAS_AreaReachability(int areanum)
 {
     if (areanum < 0 || areanum >= aasworld.numareas) {
-        AAS_Error("AAS_AreaReachability: areanum %d out of range\n", areanum);
+        AAS_Error("AAS_AreaReachability: areanum %d out of range", areanum);
         return 0;
     }
     return aasworld.areasettings[areanum].numreachableareas;
