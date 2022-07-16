@@ -1651,9 +1651,7 @@ static float CG_Cvar_Get(const char* cvar)
     trap_Cvar_VariableStringBuffer(cvar, buff, sizeof(buff));
     return atof(buff);
 }
-#endif
 
-#ifdef MISSIONPACK
 static void CG_Text_PaintWithCursor(float x, float y, float scale, vec4_t color, const char* text, int cursorPos, char cursor, int limit, int style)
 {
     CG_Text_Paint(x, y, scale, color, text, 0, limit, style);
