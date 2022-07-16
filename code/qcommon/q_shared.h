@@ -251,13 +251,6 @@ static inline float LittleFloat(const float l)
 
 #define PATH_SEP '/'
 
-#ifdef Q3_STATIC
-#define GAME_HARD_LINKED
-#define CGAME_HARD_LINKED
-#define UI_HARD_LINKED
-#define BOTLIB_HARD_LINKED
-#endif
-
 #define BigShort
 inline static short LittleShort(short l)
 {

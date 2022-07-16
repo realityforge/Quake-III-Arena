@@ -390,7 +390,6 @@ void CG_ColorForHealth(vec4_t hcolor)
                          cg.snap->ps.stats[STAT_ARMOR], hcolor);
 }
 
-#ifndef Q3_STATIC // q_shared defines not visible here
 /*
 =================
 UI_DrawProportionalString2
@@ -654,4 +653,3 @@ void UI_DrawProportionalString(int x, int y, const char* str, int style, vec4_t 
 
     UI_DrawProportionalString2(x, y, str, color, sizeScale, cgs.media.charsetProp);
 }
-#endif // Q3STATIC

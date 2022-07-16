@@ -29,9 +29,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 uiStatic_t uis;
 bool m_entersound; // after a frame, so caching won't disrupt the sound
 
-// these are here so the functions in q_shared.c can link
-#ifndef UI_HARD_LINKED
-
 NORETURN void QDECL Com_Error(int level, const char* error, ...)
 {
     va_list argptr;
@@ -55,8 +52,6 @@ void QDECL Com_Printf(const char* msg, ...)
 
     trap_Print(va("%s", text));
 }
-
-#endif
 
 float UI_ClampCvar(float min, float max, float value)
 {

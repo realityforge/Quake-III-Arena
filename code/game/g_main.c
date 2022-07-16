@@ -505,9 +505,6 @@ void G_ShutdownGame(int restart)
 
 //===================================================================
 
-#ifndef GAME_HARD_LINKED
-// this is only here so the functions in q_shared.c and bg_*.c can link
-
 void QDECL Com_Error(UNUSED int level, const char* error, ...)
 {
     va_list argptr;
@@ -531,8 +528,6 @@ void QDECL Com_Printf(const char* msg, ...)
 
     G_Printf("%s", text);
 }
-
-#endif
 
 /*
 ========================================================================
