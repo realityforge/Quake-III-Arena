@@ -59,8 +59,8 @@ EVENT MESSAGES
 
 =============================================================================
 */
-#ifdef DEDICATED
 
+#ifdef DEDICATED
 /*
 ===============
 SV_ExpandNewlines
