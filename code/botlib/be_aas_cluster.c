@@ -114,7 +114,7 @@ static int AAS_FloodClusterAreas_r(int areanum, int clusternum)
         if (aasworld.areasettings[areanum].cluster == clusternum)
             return true;
         // there's a reachability going from one cluster to another only in one direction
-        AAS_Error("cluster %d touched cluster %d at area %d\r\n",
+        AAS_Error("cluster %d touched cluster %d at area %d",
                   clusternum, aasworld.areasettings[areanum].cluster, areanum);
         return false;
     }

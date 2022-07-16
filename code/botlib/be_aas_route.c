@@ -653,7 +653,7 @@ void AAS_WriteRouteCache()
     Com_sprintf(filename, MAX_QPATH, "maps/%s.rcd", aasworld.mapname);
     botimport.FS_FOpenFile(filename, &fp, FS_WRITE);
     if (!fp) {
-        AAS_Error("Unable to open file: %s\n", filename);
+        AAS_Error("Unable to open file: %s", filename);
         return;
     }
     // create the header
@@ -715,7 +715,7 @@ static int AAS_ReadRouteCache()
     }
     botimport.FS_Read(&routecacheheader, sizeof(routecacheheader_t), fp);
     if (routecacheheader.ident != RCID) {
-        AAS_Error("%s is not a route cache dump\n");
+        AAS_Error("%s is not a route cache dump");
         return false;
     }
     if (routecacheheader.version != RCVERSION) {
