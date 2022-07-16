@@ -70,7 +70,6 @@ cvar_t* com_cl_running;
 cvar_t* com_logfile; // 1 = buffer log, 2 = flush after each print
 cvar_t* com_showtrace;
 cvar_t* com_version;
-cvar_t* com_blood;
 cvar_t* com_buildScript; // for automated data building scripts
 cvar_t* com_introPlayed;
 cvar_t* cl_paused;
@@ -2133,7 +2132,6 @@ void Com_Init(char* commandLine)
     cvar_modifiedFlags &= ~CVAR_ARCHIVE;
 
     // init commands and vars
-    com_blood = Cvar_Get("com_blood", "1", CVAR_ARCHIVE);
 
     com_developer = Cvar_Get("developer", "0", CVAR_TEMP);
     com_logfile = Cvar_Get("logfile", "0", CVAR_TEMP);
