@@ -15,9 +15,7 @@ BASE_WARNINGS = [
     "-Wpedantic",
 ]
 
-BASE_WARNINGS_EX = BASE_WARNINGS + ["-Werror"]
-
-EXTRA_WARNINGS = BASE_WARNINGS_EX + ["-Wmissing-prototypes"] + select({
+EXTRA_WARNINGS = BASE_WARNINGS + ["-Werror", "-Wmissing-prototypes"] + select({
     "//build_defs:wasm": [
         # For some reason strict-prototypes warning triggers when running emcc toolchain
         "-Wno-strict-prototypes",
@@ -27,14 +25,12 @@ EXTRA_WARNINGS = BASE_WARNINGS_EX + ["-Wmissing-prototypes"] + select({
     "@platforms//os:macos": [],
 })
 
-FULL_WARNINGS = BASE_WARNINGS + [
+FULL_WARNINGS = EXTRA_WARNINGS + [
     "-Wextra",
     "-Weverything",
 ]
 
-BASE_COPTS = BASE_WARNINGS
-
-PLUGIN_COPTS = BASE_COPTS + [
+PLUGIN_COPTS = EXTRA_WARNINGS + [
     "-fPIC",
     "-fvisibility=hidden",
     "-fno-common",

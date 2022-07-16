@@ -11,7 +11,7 @@
 # limitations under the License.
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//build_defs:rules.bzl", "BASE_WARNINGS_EX", "CLIENT_GAME_COPTS", "CLIENT_GAME_DEFINES", "TEAM_ARENA_DEFINES")
+load("//build_defs:rules.bzl", "CLIENT_GAME_COPTS", "CLIENT_GAME_DEFINES", "TEAM_ARENA_DEFINES")
 
 cc_library(
     name = "api",
@@ -51,7 +51,7 @@ cc_library(
     name = "baseq3",
     srcs = _BASEQ3_SRC,
     hdrs = ["cg_local.h"],
-    copts = CLIENT_GAME_COPTS + BASE_WARNINGS_EX,
+    copts = CLIENT_GAME_COPTS,
     defines = CLIENT_GAME_DEFINES,
     visibility = ["//game/baseq3:__pkg__"],
     deps = [
@@ -72,7 +72,7 @@ cc_library(
     name = "teamarena",
     srcs = _TEAM_ARENA_SRC,
     hdrs = ["cg_local.h"],
-    copts = CLIENT_GAME_COPTS + BASE_WARNINGS_EX,
+    copts = CLIENT_GAME_COPTS,
     defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
     visibility = ["//game/teamarena:__pkg__"],
     deps = [
