@@ -644,7 +644,7 @@ static void Cmd_Team_f(gentity_t* ent)
         return;
     }
 
-    // if they are playing a tournement game, count as a loss
+    // if they are playing a tournament game, count as a loss
     if ((g_gametype.integer == GT_TOURNAMENT)
         && ent->client->sess.sessionTeam == TEAM_FREE) {
         ent->client->sess.losses++;
@@ -685,7 +685,7 @@ static void Cmd_Follow_f(gentity_t* ent)
         return;
     }
 
-    // if they are playing a tournement game, count as a loss
+    // if they are playing a tournament game, count as a loss
     if ((g_gametype.integer == GT_TOURNAMENT)
         && ent->client->sess.sessionTeam == TEAM_FREE) {
         ent->client->sess.losses++;
@@ -705,7 +705,7 @@ void Cmd_FollowCycle_f(gentity_t* ent, int dir)
     int clientnum;
     int original;
 
-    // if they are playing a tournement game, count as a loss
+    // if they are playing a tournament game, count as a loss
     if ((g_gametype.integer == GT_TOURNAMENT)
         && ent->client->sess.sessionTeam == TEAM_FREE) {
         ent->client->sess.losses++;
