@@ -319,7 +319,7 @@ typedef struct {
     void (*drawRect)(float x, float y, float w, float h, float size, const vec4_t color);
     void (*drawSides)(float x, float y, float w, float h, float size);
     void (*drawTopBottom)(float x, float y, float w, float h, float size);
-    void (*clearScene)(void);
+    void (*clearScene)();
     void (*addRefEntityToScene)(const refEntity_t* re);
     void (*renderScene)(const refdef_t* fd);
     void (*registerFont)(const char* pFontname, int pointSize, fontInfo_t* font);
@@ -333,7 +333,7 @@ typedef struct {
     void (*setCVar)(const char* cvar, const char* value);
     void (*drawTextWithCursor)(float x, float y, float scale, vec4_t color, const char* text, int cursorPos, char cursor, int limit, int style);
     void (*setOverstrikeMode)(bool b);
-    bool (*getOverstrikeMode)(void);
+    bool (*getOverstrikeMode)();
     void (*startLocalSound)(sfxHandle_t sfx, int channelNum);
     bool (*ownerDrawHandleKey)(int ownerDraw, int flags, float* special, int key);
     int (*feederCount)(float feederID);
@@ -350,7 +350,7 @@ typedef struct {
     int (*ownerDrawWidth)(int ownerDraw, float scale);
     sfxHandle_t (*registerSound)(const char* name, bool compressed);
     void (*startBackgroundTrack)(const char* intro, const char* loop);
-    void (*stopBackgroundTrack)(void);
+    void (*stopBackgroundTrack)();
     int (*playCinematic)(const char* name, float x, float y, float w, float h);
     void (*stopCinematic)(int handle);
     void (*drawCinematic)(int handle, float x, float y, float w, float h);

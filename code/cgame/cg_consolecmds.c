@@ -408,7 +408,7 @@ static void CG_StartOrbit_f()
 
 typedef struct {
     char* cmd;
-    void (*function)(void);
+    void (*function)();
 } consoleCommand_t;
 
 static consoleCommand_t commands[] = {
