@@ -140,7 +140,7 @@ extern void(APIENTRY* qglActiveTextureARB)(GLenum texture);
 extern void(APIENTRY* qglClientActiveTextureARB)(GLenum texture);
 
 extern void(APIENTRY* qglLockArraysEXT)(GLint, GLint);
-extern void(APIENTRY* qglUnlockArraysEXT)(void);
+extern void(APIENTRY* qglUnlockArraysEXT)();
 
 //===========================================================================
 
@@ -231,8 +231,8 @@ extern void(APIENTRY* qglEdgeFlagPointer)(GLsizei stride, const GLvoid* pointer)
 extern void(APIENTRY* qglEdgeFlagv)(const GLboolean* flag);
 extern void(APIENTRY* qglEnable)(GLenum cap);
 extern void(APIENTRY* qglEnableClientState)(GLenum array);
-extern void(APIENTRY* qglEnd)(void);
-extern void(APIENTRY* qglEndList)(void);
+extern void(APIENTRY* qglEnd)();
+extern void(APIENTRY* qglEndList)();
 extern void(APIENTRY* qglEvalCoord1d)(GLdouble u);
 extern void(APIENTRY* qglEvalCoord1dv)(const GLdouble* u);
 extern void(APIENTRY* qglEvalCoord1f)(GLfloat u);
@@ -246,8 +246,8 @@ extern void(APIENTRY* qglEvalMesh2)(GLenum mode, GLint i1, GLint i2, GLint j1, G
 extern void(APIENTRY* qglEvalPoint1)(GLint i);
 extern void(APIENTRY* qglEvalPoint2)(GLint i, GLint j);
 extern void(APIENTRY* qglFeedbackBuffer)(GLsizei size, GLenum type, GLfloat* buffer);
-extern void(APIENTRY* qglFinish)(void);
-extern void(APIENTRY* qglFlush)(void);
+extern void(APIENTRY* qglFinish)();
+extern void(APIENTRY* qglFlush)();
 extern void(APIENTRY* qglFogf)(GLenum pname, GLfloat param);
 extern void(APIENTRY* qglFogfv)(GLenum pname, const GLfloat* params);
 extern void(APIENTRY* qglFogi)(GLenum pname, GLint param);
@@ -259,7 +259,7 @@ extern void(APIENTRY* qglGenTextures)(GLsizei n, GLuint* textures);
 extern void(APIENTRY* qglGetBooleanv)(GLenum pname, GLboolean* params);
 extern void(APIENTRY* qglGetClipPlane)(GLenum plane, GLdouble* equation);
 extern void(APIENTRY* qglGetDoublev)(GLenum pname, GLdouble* params);
-extern GLenum(APIENTRY* qglGetError)(void);
+extern GLenum(APIENTRY* qglGetError)();
 extern void(APIENTRY* qglGetFloatv)(GLenum pname, GLfloat* params);
 extern void(APIENTRY* qglGetIntegerv)(GLenum pname, GLint* params);
 extern void(APIENTRY* qglGetLightfv)(GLenum light, GLenum pname, GLfloat* params);
@@ -298,7 +298,7 @@ extern void(APIENTRY* qglIndexs)(GLshort c);
 extern void(APIENTRY* qglIndexsv)(const GLshort* c);
 extern void(APIENTRY* qglIndexub)(GLubyte c);
 extern void(APIENTRY* qglIndexubv)(const GLubyte* c);
-extern void(APIENTRY* qglInitNames)(void);
+extern void(APIENTRY* qglInitNames)();
 extern void(APIENTRY* qglInterleavedArrays)(GLenum format, GLsizei stride, const GLvoid* pointer);
 extern GLboolean(APIENTRY* qglIsEnabled)(GLenum cap);
 extern GLboolean(APIENTRY* qglIsList)(GLuint list);
@@ -314,7 +314,7 @@ extern void(APIENTRY* qglLightiv)(GLenum light, GLenum pname, const GLint* param
 extern void(APIENTRY* qglLineStipple)(GLint factor, GLushort pattern);
 extern void(APIENTRY* qglLineWidth)(GLfloat width);
 extern void(APIENTRY* qglListBase)(GLuint base);
-extern void(APIENTRY* qglLoadIdentity)(void);
+extern void(APIENTRY* qglLoadIdentity)();
 extern void(APIENTRY* qglLoadMatrixd)(const GLdouble* m);
 extern void(APIENTRY* qglLoadMatrixf)(const GLfloat* m);
 extern void(APIENTRY* qglLoadName)(GLuint name);
@@ -360,14 +360,14 @@ extern void(APIENTRY* qglPointSize)(GLfloat size);
 extern void(APIENTRY* qglPolygonMode)(GLenum face, GLenum mode);
 extern void(APIENTRY* qglPolygonOffset)(GLfloat factor, GLfloat units);
 extern void(APIENTRY* qglPolygonStipple)(const GLubyte* mask);
-extern void(APIENTRY* qglPopAttrib)(void);
-extern void(APIENTRY* qglPopClientAttrib)(void);
-extern void(APIENTRY* qglPopMatrix)(void);
-extern void(APIENTRY* qglPopName)(void);
+extern void(APIENTRY* qglPopAttrib)();
+extern void(APIENTRY* qglPopClientAttrib)();
+extern void(APIENTRY* qglPopMatrix)();
+extern void(APIENTRY* qglPopName)();
 extern void(APIENTRY* qglPrioritizeTextures)(GLsizei n, const GLuint* textures, const GLclampf* priorities);
 extern void(APIENTRY* qglPushAttrib)(GLbitfield mask);
 extern void(APIENTRY* qglPushClientAttrib)(GLbitfield mask);
-extern void(APIENTRY* qglPushMatrix)(void);
+extern void(APIENTRY* qglPushMatrix)();
 extern void(APIENTRY* qglPushName)(GLuint name);
 extern void(APIENTRY* qglRasterPos2d)(GLdouble x, GLdouble y);
 extern void(APIENTRY* qglRasterPos2dv)(const GLdouble* v);
@@ -509,8 +509,8 @@ extern BOOL(WINAPI* qwglCopyContext)(HGLRC, HGLRC, UINT);
 extern HGLRC(WINAPI* qwglCreateContext)(HDC);
 extern HGLRC(WINAPI* qwglCreateLayerContext)(HDC, int);
 extern BOOL(WINAPI* qwglDeleteContext)(HGLRC);
-extern HGLRC(WINAPI* qwglGetCurrentContext)(VOID);
-extern HDC(WINAPI* qwglGetCurrentDC)(VOID);
+extern HGLRC(WINAPI* qwglGetCurrentContext)();
+extern HDC(WINAPI* qwglGetCurrentDC)();
 extern PROC(WINAPI* qwglGetProcAddress)(LPCSTR);
 extern BOOL(WINAPI* qwglMakeCurrent)(HDC, HGLRC);
 extern BOOL(WINAPI* qwglShareLists)(HGLRC, HGLRC);
@@ -541,8 +541,8 @@ extern fxMesaContext (*qfxMesaCreateContext)(GLuint win, GrScreenResolution_t, G
 extern fxMesaContext (*qfxMesaCreateBestContext)(GLuint win, GLint width, GLint height, const GLint attribList[]);
 extern void (*qfxMesaDestroyContext)(fxMesaContext ctx);
 extern void (*qfxMesaMakeCurrent)(fxMesaContext ctx);
-extern fxMesaContext (*qfxMesaGetCurrentContext)(void);
-extern void (*qfxMesaSwapBuffers)(void);
+extern fxMesaContext (*qfxMesaGetCurrentContext)();
+extern void (*qfxMesaSwapBuffers)();
 #endif
 
 // GLX Functions

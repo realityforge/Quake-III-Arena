@@ -42,7 +42,7 @@ typedef struct {
 
     int slashX;
     const char* question;
-    void (*draw)(void);
+    void (*draw)();
     void (*action)(bool result);
 
     int style;

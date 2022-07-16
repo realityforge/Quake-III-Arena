@@ -376,7 +376,7 @@ typedef struct shader_s {
     int numUnfoggedPasses;
     shaderStage_t* stages[MAX_SHADER_STAGES];
 
-    void (*optimalStageIteratorFunc)(void);
+    void (*optimalStageIteratorFunc)();
 
     float clampTime; // time this shader is clamped to
     float timeOffset; // current time offset for this shader
@@ -1197,7 +1197,7 @@ typedef struct shaderCommands_s {
 
     // info extracted from current shader
     int numPasses;
-    void (*currentStageIteratorFunc)(void);
+    void (*currentStageIteratorFunc)();
     shaderStage_t** xstages;
 } shaderCommands_t;
 

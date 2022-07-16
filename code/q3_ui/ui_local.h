@@ -34,7 +34,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../game/bg_public.h"
 #include "../qcommon/cvar_common.h"
 
-typedef void (*voidfunc_f)(void);
+typedef void (*voidfunc_f)();
 
 extern vmCvar_t ui_ffa_fraglimit;
 extern vmCvar_t ui_ffa_timelimit;
@@ -145,7 +145,7 @@ typedef struct menuframework_s {
     int nitems;
     void* items[MAX_MENUITEMS];
 
-    void (*draw)(void);
+    void (*draw)();
     sfxHandle_t (*key)(int key);
 
     bool wrapAround;

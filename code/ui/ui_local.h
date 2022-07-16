@@ -183,7 +183,7 @@ typedef struct menuframework_s {
     int nitems;
     void* items[MAX_MENUITEMS];
 
-    void (*draw)(void);
+    void (*draw)();
     sfxHandle_t (*key)(int key);
 
     bool wrapAround;
