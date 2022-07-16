@@ -583,6 +583,7 @@ void CG_LoadVoiceChats()
     CG_Printf("voice chat memory size = %d\n", size - trap_MemoryRemaining());
 }
 
+#ifdef MISSIONPACK
 static int CG_HeadModelVoiceChats(char* filename)
 {
     int len, i;
@@ -724,6 +725,7 @@ static voiceChatList_t* CG_VoiceChatListForClient(int clientNum)
     // just return the first voice chat list
     return &voiceChatLists[0];
 }
+#endif
 
 #define MAX_VOICECHATBUFFER 32
 
@@ -764,12 +766,10 @@ static void CG_PlayVoiceChat(bufferedVoiceChat_t* vchat)
         CG_Printf("%s\n", vchat->message);
     }
     voiceChatBuffer[cg.voiceChatBufferOut].snd = 0;
-#endif
 }
 
 void CG_PlayBufferedVoiceChats()
 {
-#ifdef MISSIONPACK
     if (cg.voiceChatTime < cg.time) {
         if (cg.voiceChatBufferOut != cg.voiceChatBufferIn && voiceChatBuffer[cg.voiceChatBufferOut].snd) {
             CG_PlayVoiceChat(&voiceChatBuffer[cg.voiceChatBufferOut]);
@@ -777,12 +777,10 @@ void CG_PlayBufferedVoiceChats()
             cg.voiceChatTime = cg.time + 1000;
         }
     }
-#endif
 }
 
 static void CG_AddBufferedVoiceChat(bufferedVoiceChat_t* vchat)
 {
-#ifdef MISSIONPACK
     // if we are going into the intermission, don't start any voices
     if (cg.intermissionStarted) {
         return;
@@ -794,12 +792,10 @@ static void CG_AddBufferedVoiceChat(bufferedVoiceChat_t* vchat)
         CG_PlayVoiceChat(&voiceChatBuffer[cg.voiceChatBufferOut]);
         cg.voiceChatBufferOut++;
     }
-#endif
 }
 
 void CG_VoiceChatLocal(int mode, bool voiceOnly, int clientNum, int color, const char* cmd)
 {
-#ifdef MISSIONPACK
     char* chat;
     voiceChatList_t* voiceChatList;
     clientInfo_t* ci;
@@ -836,12 +832,10 @@ void CG_VoiceChatLocal(int mode, bool voiceOnly, int clientNum, int color, const
             CG_AddBufferedVoiceChat(&vchat);
         }
     }
-#endif
 }
 
 static void CG_VoiceChat(int mode)
 {
-#ifdef MISSIONPACK
     const char* cmd;
     int clientNum, color;
     bool voiceOnly;
@@ -858,8 +852,8 @@ static void CG_VoiceChat(int mode)
     }
 
     CG_VoiceChatLocal(mode, voiceOnly, clientNum, color, cmd);
-#endif
 }
+#endif
 
 static void CG_RemoveChatEscapeChar(char* text)
 {
@@ -936,6 +930,7 @@ static void CG_ServerCommand()
         CG_Printf("%s\n", text);
         return;
     }
+#ifdef MISSIONPACK
     if (!strcmp(cmd, "vchat")) {
         CG_VoiceChat(SAY_ALL);
         return;
@@ -950,6 +945,7 @@ static void CG_ServerCommand()
         CG_VoiceChat(SAY_TELL);
         return;
     }
+#endif
 
     if (!strcmp(cmd, "scores")) {
         CG_ParseScores();

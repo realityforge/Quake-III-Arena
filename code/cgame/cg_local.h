@@ -1409,8 +1409,10 @@ void CG_ParseServerinfo(void);
 void CG_SetConfigValues(void);
 void CG_LoadVoiceChats(void);
 void CG_ShaderStateChanged(void);
+#ifdef MISSIONPACK
 void CG_VoiceChatLocal(int mode, bool voiceOnly, int clientNum, int color, const char* cmd);
 void CG_PlayBufferedVoiceChats(void);
+#endif
 
 //
 // cg_playerstate.c

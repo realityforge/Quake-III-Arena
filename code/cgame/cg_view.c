@@ -756,8 +756,10 @@ void CG_DrawActiveFrame(int serverTime, stereoFrame_t stereoView, bool demoPlayb
     // add buffered sounds
     CG_PlayBufferedSounds();
 
+#ifdef MISSIONPACK
     // play buffered voice chats
     CG_PlayBufferedVoiceChats();
+#endif
 
     // finish up the rest of the refdef
     if (cg.testModelEntity.hModel) {
