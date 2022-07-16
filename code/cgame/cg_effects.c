@@ -471,7 +471,7 @@ void CG_Bleed(vec3_t origin, int entityNum)
     }
 }
 
-void CG_LaunchGib(vec3_t origin, vec3_t velocity, qhandle_t hModel)
+static void CG_LaunchGib(vec3_t origin, vec3_t velocity, qhandle_t hModel)
 {
     localEntity_t* le;
     refEntity_t* re;

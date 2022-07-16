@@ -114,7 +114,7 @@ CG_DrawChar
 Coordinates and size in 640*480 virtual screen size
 ===============
 */
-void CG_DrawChar(int x, int y, int width, int height, int ch)
+static void CG_DrawChar(int x, int y, int width, int height, int ch)
 {
     int row, col;
     float frow, fcol;
@@ -640,7 +640,7 @@ void UI_DrawBannerString(int x, int y, const char* str, int style, vec4_t color)
     UI_DrawBannerString2(x, y, str, color);
 }
 
-int UI_ProportionalStringWidth(const char* str)
+static int UI_ProportionalStringWidth(const char* str)
 {
     const char* s;
     int ch;
@@ -706,7 +706,7 @@ static void UI_DrawProportionalString2(int x, int y, const char* str, vec4_t col
     trap_R_SetColor(NULL);
 }
 
-float UI_ProportionalSizeScale(int style)
+static float UI_ProportionalSizeScale(int style)
 {
     if (style & UI_SMALLFONT) {
         return 0.75;

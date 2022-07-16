@@ -318,7 +318,7 @@ static cvarTable_t cvarTable[] = {
 
 static int cvarTableSize = sizeof(cvarTable) / sizeof(cvarTable[0]);
 
-void CG_RegisterCvars()
+static void CG_RegisterCvars()
 {
     int i;
     cvarTable_t* cv;
@@ -1187,7 +1187,7 @@ char* CG_GetMenuBuffer(const char* filename)
 // new hud stuff ( mission pack )
 // ==============================
 //
-bool CG_Asset_Parse(int handle)
+static bool CG_Asset_Parse(int handle)
 {
     pc_token_t token;
     const char* tempStr;
@@ -1335,7 +1335,7 @@ bool CG_Asset_Parse(int handle)
     return false;
 }
 
-void CG_ParseMenu(const char* menuFile)
+static void CG_ParseMenu(const char* menuFile)
 {
     pc_token_t token;
     int handle;
@@ -1381,7 +1381,7 @@ void CG_ParseMenu(const char* menuFile)
     trap_PC_FreeSource(handle);
 }
 
-bool CG_Load_Menu(char** p)
+static bool CG_Load_Menu(char** p)
 {
     char* token;
 
@@ -1678,7 +1678,7 @@ static float CG_Cvar_Get(const char* cvar)
 #endif
 
 #ifdef MISSIONPACK
-void CG_Text_PaintWithCursor(float x, float y, float scale, vec4_t color, const char* text, int cursorPos, char cursor, int limit, int style)
+static void CG_Text_PaintWithCursor(float x, float y, float scale, vec4_t color, const char* text, int cursorPos, char cursor, int limit, int style)
 {
     CG_Text_Paint(x, y, scale, color, text, 0, limit, style);
 }
@@ -1731,7 +1731,7 @@ CG_LoadHudMenu();
 
 =================
 */
-void CG_LoadHudMenu()
+static void CG_LoadHudMenu()
 {
     char buff[1024];
     const char* hudSet;
@@ -1799,7 +1799,7 @@ void CG_LoadHudMenu()
     CG_LoadMenus(hudSet);
 }
 
-void CG_AssetCache()
+static void CG_AssetCache()
 {
     cgDC.Assets.gradientBar = trap_R_RegisterShaderNoMip(ASSET_GRADIENTBAR);
     cgDC.Assets.fxBasePic = trap_R_RegisterShaderNoMip(ART_FX_BASE);

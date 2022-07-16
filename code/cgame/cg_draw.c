@@ -2275,7 +2275,7 @@ static void CG_DrawWarmup()
 CG_DrawTimedMenus
 =================
 */
-void CG_DrawTimedMenus()
+static void CG_DrawTimedMenus()
 {
     if (cg.voiceTime) {
         int t = cg.time - cg.voiceTime;

@@ -35,7 +35,7 @@ EXPORT void dllEntry(vmDllSystemCall syscallptr)
     syscall = syscallptr;
 }
 
-int PASSFLOAT(float x)
+static int PASSFLOAT(float x)
 {
     float floatTemp;
     floatTemp = x;
