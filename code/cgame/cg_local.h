@@ -1601,3 +1601,8 @@ void CG_ClearParticles(void);
 void CG_AddParticles(void);
 void CG_ParticleExplosion(char* animStr, vec3_t origin, vec3_t vel, int duration, int sizeStart, int sizeEnd);
 extern bool initparticles;
+
+int trap_PC_LoadSource(const char* filename);
+int trap_PC_FreeSource(int handle);
+int trap_PC_ReadToken(int handle, pc_token_t* pc_token);
+int trap_PC_SourceFileAndLine(int handle, char* filename, int* line);
