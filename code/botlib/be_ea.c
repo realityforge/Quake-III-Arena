@@ -221,7 +221,6 @@ void EA_EndRegular(int client, float thinktime)
 void EA_GetInput(int client, float thinktime, bot_input_t* input)
 {
     bot_input_t* bi;
-
     bi = &botinputs[client];
     bi->thinktime = thinktime;
     memcpy(input, bi, sizeof(bot_input_t));
