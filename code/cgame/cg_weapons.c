@@ -1932,7 +1932,7 @@ void CG_ShotgunFire(entityState_t* es)
     CG_ShotgunPattern(es->pos.trBase, es->origin2, es->eventParm, es->otherEntityNum);
 }
 
-void CG_Tracer(vec3_t source, vec3_t dest)
+static void CG_Tracer(vec3_t source, vec3_t dest)
 {
     vec3_t forward, right;
     polyVert_t verts[4];

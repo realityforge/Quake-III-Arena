@@ -415,7 +415,7 @@ CG_WaterLevel
 Returns waterlevel for entity origin
 ================
 */
-int CG_WaterLevel(centity_t* cent)
+static int CG_WaterLevel(centity_t* cent)
 {
     vec3_t point;
     int contents, sample1, sample2, anim, waterlevel;

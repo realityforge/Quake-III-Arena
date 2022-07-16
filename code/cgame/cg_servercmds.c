@@ -486,7 +486,7 @@ typedef struct headModelVoiceChat_s {
 voiceChatList_t voiceChatLists[MAX_VOICEFILES];
 headModelVoiceChat_t headModelVoiceChat[MAX_HEADMODELS];
 
-int CG_ParseVoiceChats(const char* filename, voiceChatList_t* voiceChatList, int maxVoiceChats)
+static int CG_ParseVoiceChats(const char* filename, voiceChatList_t* voiceChatList, int maxVoiceChats)
 {
     int len, i;
     fileHandle_t f;
@@ -595,7 +595,7 @@ void CG_LoadVoiceChats()
     CG_Printf("voice chat memory size = %d\n", size - trap_MemoryRemaining());
 }
 
-int CG_HeadModelVoiceChats(char* filename)
+static int CG_HeadModelVoiceChats(char* filename)
 {
     int len, i;
     fileHandle_t f;
@@ -637,7 +637,7 @@ int CG_HeadModelVoiceChats(char* filename)
     return -1;
 }
 
-int CG_GetVoiceChat(voiceChatList_t* voiceChatList, const char* id, sfxHandle_t* snd, char** chat)
+static int CG_GetVoiceChat(voiceChatList_t* voiceChatList, const char* id, sfxHandle_t* snd, char** chat)
 {
     int i, rnd;
 
@@ -652,7 +652,7 @@ int CG_GetVoiceChat(voiceChatList_t* voiceChatList, const char* id, sfxHandle_t*
     return false;
 }
 
-voiceChatList_t* CG_VoiceChatListForClient(int clientNum)
+static voiceChatList_t* CG_VoiceChatListForClient(int clientNum)
 {
     clientInfo_t* ci;
     int voiceChatNum, i, j, k, gender;
@@ -749,7 +749,7 @@ typedef struct bufferedVoiceChat_s {
 
 bufferedVoiceChat_t voiceChatBuffer[MAX_VOICECHATBUFFER];
 
-void CG_PlayVoiceChat(bufferedVoiceChat_t* vchat)
+static void CG_PlayVoiceChat(bufferedVoiceChat_t* vchat)
 {
     // if we are going into the intermission, don't start any voices
     if (cg.intermissionStarted) {
@@ -788,7 +788,7 @@ void CG_PlayBufferedVoiceChats()
     }
 }
 
-void CG_AddBufferedVoiceChat(bufferedVoiceChat_t* vchat)
+static void CG_AddBufferedVoiceChat(bufferedVoiceChat_t* vchat)
 {
     // if we are going into the intermission, don't start any voices
     if (cg.intermissionStarted) {
@@ -845,7 +845,7 @@ void CG_VoiceChatLocal(int mode, bool voiceOnly, int clientNum, int color, const
     }
 }
 
-void CG_VoiceChat(int mode)
+static void CG_VoiceChat(int mode)
 {
     const char* cmd;
     int clientNum, color;

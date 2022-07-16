@@ -73,7 +73,7 @@ This will only happen on the very first snapshot.
 All other times will use CG_TransitionSnapshot instead.
 ==================
 */
-void CG_SetInitialSnapshot(snapshot_t* snap)
+static void CG_SetInitialSnapshot(snapshot_t* snap)
 {
     int i;
     centity_t* cent;

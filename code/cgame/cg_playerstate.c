@@ -33,7 +33,7 @@ CG_CheckAmmo
 If the ammo has gone low enough to generate the warning, play a sound
 ==============
 */
-void CG_CheckAmmo()
+static void CG_CheckAmmo()
 {
     int i;
     int total;
@@ -84,7 +84,7 @@ void CG_CheckAmmo()
     }
 }
 
-void CG_DamageFeedback(int yawByte, int pitchByte, int damage)
+static void CG_DamageFeedback(int yawByte, int pitchByte, int damage)
 {
     float left, front, up;
     float kick;
@@ -198,7 +198,7 @@ void CG_Respawn()
 
 extern char* eventnames[];
 
-void CG_CheckPlayerstateEvents(playerState_t* ps, playerState_t* ops)
+static void CG_CheckPlayerstateEvents(playerState_t* ps, playerState_t* ops)
 {
     int i;
     int event;
@@ -242,7 +242,7 @@ static void pushReward(sfxHandle_t sfx, qhandle_t shader, int rewardCount)
     }
 }
 
-void CG_CheckLocalSounds(playerState_t* ps, playerState_t* ops)
+static void CG_CheckLocalSounds(playerState_t* ps, playerState_t* ops)
 {
     int highScore, reward;
     sfxHandle_t sfx;

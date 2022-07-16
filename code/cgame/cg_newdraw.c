@@ -115,7 +115,7 @@ static void CG_SetSelectedPlayerName()
         trap_Cvar_Set("cg_selectedPlayerName", "Everyone");
     }
 }
-int CG_GetSelectedPlayer()
+static int CG_GetSelectedPlayer()
 {
     if (cg_currentSelectedPlayer.integer < 0 || cg_currentSelectedPlayer.integer >= numSortedTeamPlayers) {
         cg_currentSelectedPlayer.integer = 0;
@@ -1255,7 +1255,7 @@ static void CG_Text_Paint_Limit(float* maxX, float x, float y, float scale, vec4
 
 #define PIC_WIDTH 12
 
-void CG_DrawNewTeamInfo(rectDef_t* rect, float text_x, float text_y, float scale, vec4_t color, qhandle_t shader)
+static void CG_DrawNewTeamInfo(rectDef_t* rect, float text_x, float text_y, float scale, vec4_t color, qhandle_t shader)
 {
     int xx;
     float y;
@@ -1362,7 +1362,7 @@ void CG_DrawNewTeamInfo(rectDef_t* rect, float text_x, float text_y, float scale
     }
 }
 
-void CG_DrawTeamSpectators(rectDef_t* rect, float scale, vec4_t color, qhandle_t shader)
+static void CG_DrawTeamSpectators(rectDef_t* rect, float scale, vec4_t color, qhandle_t shader)
 {
     if (cg.spectatorLen) {
         float maxX;
@@ -1419,7 +1419,7 @@ void CG_DrawTeamSpectators(rectDef_t* rect, float scale, vec4_t color, qhandle_t
     }
 }
 
-void CG_DrawMedal(int ownerDraw, rectDef_t* rect, float scale, vec4_t color, qhandle_t shader)
+static void CG_DrawMedal(int ownerDraw, rectDef_t* rect, float scale, vec4_t color, qhandle_t shader)
 {
     score_t* score = &cg.scores[cg.selectedScore];
     float value = 0;
@@ -1708,7 +1708,7 @@ void CG_MouseEvent(int x, int y)
     }
 }
 
-void CG_HideTeamMenu()
+static void CG_HideTeamMenu()
 {
     Menus_CloseByName("teamMenu");
     Menus_CloseByName("getMenu");

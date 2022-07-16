@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 extern menuDef_t* menuScoreboard;
 #endif
 
-void CG_TargetCommand_f()
+static void CG_TargetCommand_f()
 {
     int targetNum;
     char test[4];

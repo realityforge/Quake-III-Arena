@@ -179,7 +179,7 @@ void CG_ClearParticles()
     initparticles = true;
 }
 
-void CG_AddParticleToScene(cparticle_t* p, vec3_t org, float alpha)
+static void CG_AddParticleToScene(cparticle_t* p, vec3_t org, float alpha)
 {
 
     vec3_t point;

@@ -50,7 +50,7 @@ void CG_InitLocalEntities()
     }
 }
 
-void CG_FreeLocalEntity(localEntity_t* le)
+static void CG_FreeLocalEntity(localEntity_t* le)
 {
     if (!le->prev) {
         CG_Error("CG_FreeLocalEntity: not active");
@@ -113,7 +113,7 @@ CG_BloodTrail
 Leave expanding blood puffs behind gibs
 ================
 */
-void CG_BloodTrail(localEntity_t* le)
+static void CG_BloodTrail(localEntity_t* le)
 {
     int t;
     int t2;
@@ -143,7 +143,7 @@ void CG_BloodTrail(localEntity_t* le)
     }
 }
 
-void CG_FragmentBounceMark(localEntity_t* le, trace_t* trace)
+static void CG_FragmentBounceMark(localEntity_t* le, trace_t* trace)
 {
     int radius;
 
@@ -164,7 +164,7 @@ void CG_FragmentBounceMark(localEntity_t* le, trace_t* trace)
     le->leMarkType = LEMT_NONE;
 }
 
-void CG_FragmentBounceSound(localEntity_t* le, trace_t* trace)
+static void CG_FragmentBounceSound(localEntity_t* le, trace_t* trace)
 {
     if (le->leBounceSoundType == LEBS_BLOOD) {
         // half the gibs will make splat sounds
@@ -189,7 +189,7 @@ void CG_FragmentBounceSound(localEntity_t* le, trace_t* trace)
     le->leBounceSoundType = LEBS_NONE;
 }
 
-void CG_ReflectVelocity(localEntity_t* le, trace_t* trace)
+static void CG_ReflectVelocity(localEntity_t* le, trace_t* trace)
 {
     vec3_t velocity;
     float dot;
@@ -213,7 +213,7 @@ void CG_ReflectVelocity(localEntity_t* le, trace_t* trace)
     }
 }
 
-void CG_AddFragment(localEntity_t* le)
+static void CG_AddFragment(localEntity_t* le)
 {
     vec3_t newOrigin;
     trace_t trace;
@@ -296,7 +296,7 @@ These only do simple scaling or modulation before passing to the renderer
 =====================================================================
 */
 
-void CG_AddFadeRGB(localEntity_t* le)
+static void CG_AddFadeRGB(localEntity_t* le)
 {
     refEntity_t* re;
     float c;
@@ -489,7 +489,7 @@ static void CG_AddSpriteExplosion(localEntity_t* le)
 }
 
 #ifdef MISSIONPACK
-void CG_AddKamikaze(localEntity_t* le)
+static void CG_AddKamikaze(localEntity_t* le)
 {
     refEntity_t* re;
     refEntity_t shockwave;
@@ -605,12 +605,12 @@ void CG_AddKamikaze(localEntity_t* le)
     }
 }
 
-void CG_AddInvulnerabilityImpact(localEntity_t* le)
+static void CG_AddInvulnerabilityImpact(localEntity_t* le)
 {
     trap_R_AddRefEntityToScene(&le->refEntity);
 }
 
-void CG_AddInvulnerabilityJuiced(localEntity_t* le)
+static void CG_AddInvulnerabilityJuiced(localEntity_t* le)
 {
     int t;
 
@@ -628,7 +628,7 @@ void CG_AddInvulnerabilityJuiced(localEntity_t* le)
     }
 }
 
-void CG_AddRefEntity(localEntity_t* le)
+static void CG_AddRefEntity(localEntity_t* le)
 {
     if (le->endTime < cg.time) {
         CG_FreeLocalEntity(le);
@@ -640,7 +640,7 @@ void CG_AddRefEntity(localEntity_t* le)
 #endif
 #define NUMBER_SIZE 8
 
-void CG_AddScorePlum(localEntity_t* le)
+static void CG_AddScorePlum(localEntity_t* le)
 {
     refEntity_t* re;
     vec3_t origin, delta, dir, vec, up = { 0, 0, 1 };
