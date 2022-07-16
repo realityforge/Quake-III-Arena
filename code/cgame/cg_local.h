@@ -1249,7 +1249,6 @@ float CG_GetValue(int ownerDraw);
 bool CG_OwnerDrawVisible(int flags);
 void CG_RunMenuScript(char** args);
 void CG_ShowResponseHead(void);
-void CG_SetPrintString(int type, const char* p);
 void CG_InitTeamChat(void);
 void CG_GetTeamColor(vec4_t* color);
 const char* CG_GetGameStatusText(void);
