@@ -1148,29 +1148,6 @@ void CG_StartMusic()
     trap_S_StartBackgroundTrack(parm1, parm2);
 }
 #ifdef MISSIONPACK
-char* CG_GetMenuBuffer(const char* filename)
-{
-    int len;
-    fileHandle_t f;
-    static char buf[MAX_MENUFILE];
-
-    len = trap_FS_FOpenFile(filename, &f, FS_READ);
-    if (!f) {
-        trap_Print(va(S_COLOR_RED "menu file not found: %s, using default\n", filename));
-        return NULL;
-    }
-    if (len >= MAX_MENUFILE) {
-        trap_Print(va(S_COLOR_RED "menu file too large: %s is %i, max allowed is %i\n", filename, len, MAX_MENUFILE));
-        trap_FS_FCloseFile(f);
-        return NULL;
-    }
-
-    trap_FS_Read(buf, len, f);
-    buf[len] = 0;
-    trap_FS_FCloseFile(f);
-
-    return buf;
-}
 
 //
 // ==============================
