@@ -97,7 +97,7 @@ SV_CreateworldSector
 Builds a uniformly subdivided tree for the given world size
 ===============
 */
-static worldSector_t* SV_CreateworldSector(int depth, vec3_t mins, vec3_t maxs)
+static worldSector_t* SV_CreateworldSector(int depth, const vec3_t mins, const vec3_t maxs)
 {
     worldSector_t* anode;
     vec3_t size;
