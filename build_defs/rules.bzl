@@ -10,12 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-BASE_WARNINGS = [
-    "-Wall",
-    "-Wpedantic",
-]
-
-EXTRA_WARNINGS = BASE_WARNINGS + ["-Werror", "-Wmissing-prototypes"] + select({
+EXTRA_WARNINGS = ["-Wall", "-Wpedantic", "-Werror", "-Wmissing-prototypes"] + select({
     "//build_defs:wasm": [
         # For some reason strict-prototypes warning triggers when running emcc toolchain
         "-Wno-strict-prototypes",
