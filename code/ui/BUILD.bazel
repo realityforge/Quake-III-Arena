@@ -59,6 +59,7 @@ cc_library(
     name = "ui_syscalls",
     srcs = ["ui_syscalls.c"],
     copts = UI_COPTS,
+    defines = UI_DEFINES,
     visibility = [
         "//game/baseq3:__pkg__",
         "//game/teamarena:__pkg__",

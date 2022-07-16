@@ -13,11 +13,12 @@
 load("@emsdk//emscripten_toolchain:wasm_rules.bzl", "wasm_cc_binary")
 load("@rules_cc//cc:defs.bzl", "cc_binary")
 load("//build_defs:copy_to_directory.bzl", "copy_to_directory")
-load("//build_defs:rules.bzl", "CLIENT_GAME_LINKOPTS", "DIST_VISIBILITY", "SERVER_GAME_LINKOPTS", "UI_LINKOPTS")
+load("//build_defs:rules.bzl", "CLIENT_GAME_COPTS", "CLIENT_GAME_LINKOPTS", "DIST_VISIBILITY", "SERVER_GAME_COPTS", "SERVER_GAME_LINKOPTS", "UI_COPTS", "UI_LINKOPTS")
 load("//third_party/content:metadata.bzl", "REPLACE_RULES")
 
 cc_binary(
     name = "cgame.so",
+    copts = CLIENT_GAME_COPTS,
     linkopts = CLIENT_GAME_LINKOPTS,
     linkshared = True,
     linkstatic = True,
@@ -36,6 +37,7 @@ wasm_cc_binary(
 
 cc_binary(
     name = "qagame.so",
+    copts = SERVER_GAME_COPTS,
     linkopts = SERVER_GAME_LINKOPTS,
     linkshared = True,
     linkstatic = True,
@@ -54,6 +56,7 @@ wasm_cc_binary(
 
 cc_binary(
     name = "ui.so",
+    copts = UI_COPTS,
     linkopts = UI_LINKOPTS,
     linkshared = True,
     linkstatic = True,
