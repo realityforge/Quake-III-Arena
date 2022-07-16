@@ -53,8 +53,6 @@ typedef struct {
     menutext_s setupcontrols;
     menutext_s setupsystem;
     menutext_s game;
-    //	menutext_s		load;
-    //	menutext_s		save;
     menutext_s defaults;
     menubitmap_s back;
 } setupMenuInfo_t;
@@ -218,8 +216,6 @@ static void UI_SetupMenu_Init()
     Menu_AddItem(&setupMenuInfo.menu, &setupMenuInfo.setupcontrols);
     Menu_AddItem(&setupMenuInfo.menu, &setupMenuInfo.setupsystem);
     Menu_AddItem(&setupMenuInfo.menu, &setupMenuInfo.game);
-    //	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.load );
-    //	Menu_AddItem( &setupMenuInfo.menu, &setupMenuInfo.save );
     if (!trap_Cvar_VariableValue("cl_paused")) {
         Menu_AddItem(&setupMenuInfo.menu, &setupMenuInfo.defaults);
     }
