@@ -386,8 +386,6 @@ static void Svcmd_ForceTeam_f()
     SetTeam(&g_entities[cl - level.clients], str);
 }
 
-char* ConcatArgs(int start);
-
 bool ConsoleCommand()
 {
     char cmd[MAX_TOKEN_CHARS];

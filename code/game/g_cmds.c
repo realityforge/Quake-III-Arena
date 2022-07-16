@@ -110,7 +110,7 @@ static bool CheatsOk(gentity_t* ent)
     return true;
 }
 
-static char* ConcatArgs(int start)
+char* ConcatArgs(int start)
 {
     int i, c, tlen;
     static char line[MAX_STRING_CHARS];

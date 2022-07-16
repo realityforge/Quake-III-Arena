@@ -565,6 +565,7 @@ bool SpotWouldTelefrag(gentity_t* spot);
 bool ConsoleCommand(void);
 void G_ProcessIPBans(void);
 bool G_FilterPacket(char* from);
+char* ConcatArgs(int start);
 
 //
 // g_weapon.c
