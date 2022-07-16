@@ -256,7 +256,7 @@ static void AAS_ParseBSPEntities()
 
     while (PS_ReadToken(script, &token)) {
         if (strcmp(token.string, "{")) {
-            ScriptError(script, "invalid %s\n", token.string);
+            ScriptError(script, "invalid %s", token.string);
             AAS_FreeBSPEntities();
             FreeScript(script);
             return;
@@ -275,7 +275,7 @@ static void AAS_ParseBSPEntities()
             epair->next = ent->epairs;
             ent->epairs = epair;
             if (token.type != TT_STRING) {
-                ScriptError(script, "invalid %s\n", token.string);
+                ScriptError(script, "invalid %s", token.string);
                 AAS_FreeBSPEntities();
                 FreeScript(script);
                 return;
@@ -293,7 +293,7 @@ static void AAS_ParseBSPEntities()
             strcpy(epair->value, token.string);
         }
         if (strcmp(token.string, "}")) {
-            ScriptError(script, "missing }\n");
+            ScriptError(script, "missing }");
             AAS_FreeBSPEntities();
             FreeScript(script);
             return;
