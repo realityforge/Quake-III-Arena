@@ -28,7 +28,7 @@ cc_library(
         "cl_scrn.c",
         "cl_ui.c",
     ],
-    defines = ["USE_VOIP"],
+    defines = ENGINE_DEFINES,
     deps = [
         ":api",
         ":curl",
@@ -53,6 +53,7 @@ cc_library(
     hdrs = [
         "cl_curl.h",
     ],
+    defines = ENGINE_DEFINES,
     deps = [
         ":api",
         "//code/cgame:api",
@@ -71,7 +72,7 @@ cc_library(
         "keycodes.h",
         "keys.h",
     ],
-    defines = ["USE_VOIP"] + ENGINE_DEFINES,
+    defines = ENGINE_DEFINES,
     visibility = [
         "//code/q3_ui:__pkg__",
         "//code/sdl:__pkg__",
@@ -112,7 +113,7 @@ cc_library(
     hdrs = [
         "snd_codec.h",
     ],
-    defines = [
+    defines = ENGINE_DEFINES + [
         "USE_CODEC_OPUS",
         "USE_CODEC_VORBIS",
     ],
@@ -132,6 +133,7 @@ cc_library(
         "snd_codec_opus.c",
         "snd_codec_wav.c",
     ],
+    defines = ENGINE_DEFINES,
     deps = [
         ":api",
         ":snd_codec_api",
@@ -153,6 +155,7 @@ cc_library(
         "snd_mix.c",
         "snd_wavelet.c",
     ],
+    defines = ENGINE_DEFINES,
     deps = [
         ":api",
         ":snd_codec_api",
@@ -169,7 +172,7 @@ cc_library(
         "qal.h",
         "snd_openal.c",
     ],
-    defines = ["USE_OPENAL"],
+    defines = ENGINE_DEFINES + ["USE_OPENAL"],
     deps = [
         ":api",
         ":snd_api",

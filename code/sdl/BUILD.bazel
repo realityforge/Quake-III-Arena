@@ -11,6 +11,7 @@
 # limitations under the License.
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
+load("//build_defs:rules.bzl", "ENGINE_DEFINES")
 
 # TODO: Should we turn this into a library that ends up as dependency?
 _SDL_LINK_OPTS = [
@@ -21,7 +22,7 @@ _SDL_LINK_OPTS = [
 cc_library(
     name = "sdl_snd",
     srcs = ["sdl_snd.c"],
-    defines = ["USE_VOIP"],
+    defines = ENGINE_DEFINES,
     linkopts = _SDL_LINK_OPTS,
     visibility = ["//code/client:__pkg__"],
     deps = [
