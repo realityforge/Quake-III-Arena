@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 #include "ui_local.h"
+#include "lang_util.h"
 
 void GraphicsOptions_MenuInit(void);
 
@@ -274,8 +275,6 @@ static initial_video_options_t s_ivo_templates[] = {
     { 3, true, 1, 0, 0, 0, 1, 0, true }
 };
 
-#define NUM_IVO_TEMPLATES (sizeof(s_ivo_templates) / sizeof(s_ivo_templates[0]))
-
 static void GraphicsOptions_GetInitialVideo()
 {
     s_ivo.colordepth = s_graphicsoptions.colordepth.curvalue;
@@ -293,7 +292,7 @@ static void GraphicsOptions_CheckConfig()
 {
     int i;
 
-    for (i = 0; i < NUM_IVO_TEMPLATES; i++) {
+    for (i = 0; i < COUNT_OF(s_ivo_templates); i++) {
         if (s_ivo_templates[i].colordepth != s_graphicsoptions.colordepth.curvalue)
             continue;
         if (s_ivo_templates[i].mode != s_graphicsoptions.mode.curvalue)

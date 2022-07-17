@@ -36,6 +36,7 @@ and one exported function: Perform
 #include "vm_local.h"
 #include "cvar_engine.h"
 #include "qengine.h"
+#include "lang_util.h"
 
 vm_t* currentVM = NULL;
 vm_t* lastVM = NULL;
@@ -550,7 +551,7 @@ int QDECL VM_Call(vm_t* vm, int callnum, ...)
     if (vm->entryPoint) {
         // rcg010207 -  see dissertation at top of VM_DllSyscall() in this file.
         va_start(ap, callnum);
-        for (i = 0; i < sizeof(args) / sizeof(args[i]); i++) {
+        for (i = 0; i < COUNT_OF(args); i++) {
             args[i] = va_arg(ap, int);
         }
         va_end(ap);

@@ -29,6 +29,7 @@ USER INTERFACE MAIN
 
 #include "plugin.h"
 #include "ui_local.h"
+#include "lang_util.h"
 
 /*
 ================
@@ -201,24 +202,18 @@ static cvarTable_t cvarTable[] = {
     { &ui_server16, "server16", "", CVAR_ARCHIVE }
 };
 
-static int cvarTableSize = sizeof(cvarTable) / sizeof(cvarTable[0]);
-
 void UI_RegisterCvars()
 {
-    int i;
-    cvarTable_t* cv;
-
-    for (i = 0, cv = cvarTable; i < cvarTableSize; i++, cv++) {
+    cvarTable_t* cv = cvarTable;
+    for (int i = 0; i < COUNT_OF(cvarTable); i++, cv++) {
         trap_Cvar_Register(cv->vmCvar, cv->cvarName, cv->defaultString, cv->cvarFlags);
     }
 }
 
 void UI_UpdateCvars()
 {
-    int i;
-    cvarTable_t* cv;
-
-    for (i = 0, cv = cvarTable; i < cvarTableSize; i++, cv++) {
+    cvarTable_t* cv = cvarTable;
+    for (int i = 0; i < COUNT_OF(cvarTable); i++, cv++) {
         trap_Cvar_Update(cv->vmCvar);
     }
 }

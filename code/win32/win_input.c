@@ -24,6 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "../client/client.h"
 #include "win_local.h"
+#include "lang_util.h"
 
 #ifdef DEDICATED
 #error "DEDICATED define not valid when including this file"
@@ -252,15 +253,13 @@ static DIOBJECTDATAFORMAT rgodf[] = {
     },
 };
 
-#define NUM_OBJECTS (sizeof(rgodf) / sizeof(rgodf[0]))
-
 // NOTE TTimo: would be easier using c_dfDIMouse or c_dfDIMouse2
 static DIDATAFORMAT df = {
     sizeof(DIDATAFORMAT), // this structure
     sizeof(DIOBJECTDATAFORMAT), // size of object data format
     DIDF_RELAXIS, // absolute axis coordinates
     sizeof(MYDATA), // device data size
-    NUM_OBJECTS, // number of objects
+    COUNT_OF(rgodf), // number of objects
     rgodf, // and here they are
 };
 

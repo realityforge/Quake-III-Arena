@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // tr_init.c -- functions that are not called every frame
 
 #include "tr_local.h"
+#include "lang_util.h"
 
 glconfig_t glConfig;
 glstate_t glState;
@@ -272,7 +273,6 @@ vidmode_t r_vidModes[] = {
     { "Mode 10: 2048x1536", 2048, 1536, 1 },
     { "Mode 11: 856x480 (wide)", 856, 480, 1 }
 };
-static int s_numVidModes = (sizeof(r_vidModes) / sizeof(r_vidModes[0]));
 
 bool R_GetModeInfo(int* width, int* height, float* windowAspect, int mode)
 {
@@ -281,7 +281,7 @@ bool R_GetModeInfo(int* width, int* height, float* windowAspect, int mode)
     if (mode < -1) {
         return false;
     }
-    if (mode >= s_numVidModes) {
+    if (mode >= COUNT_OF(r_vidModes)) {
         return false;
     }
 
@@ -301,12 +301,10 @@ bool R_GetModeInfo(int* width, int* height, float* windowAspect, int mode)
     return true;
 }
 
-static void R_ModeList_f(void)
+static void R_ModeList_f()
 {
-    int i;
-
     ri.Printf(PRINT_ALL, "\n");
-    for (i = 0; i < s_numVidModes; i++) {
+    for (int i = 0; i < COUNT_OF(r_vidModes); i++) {
         ri.Printf(PRINT_ALL, "%s\n", r_vidModes[i].description);
     }
     ri.Printf(PRINT_ALL, "\n");

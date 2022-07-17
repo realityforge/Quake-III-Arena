@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "q_shared.h"
 #include "bg_public.h"
+#include "lang_util.h"
 
 /*QUAKED item_***** ( 0 0 0 ) (-16 -16 -16) (16 16 16) suspended
 DO NOT USE THIS CLASS, IT JUST HOLDS GENERAL INFORMATION.
@@ -847,7 +848,7 @@ Only in One Flag CTF games
     { NULL }
 };
 
-int bg_numItems = sizeof(bg_itemlist) / sizeof(bg_itemlist[0]) - 1;
+int bg_numItems = COUNT_OF(bg_itemlist) - 1;
 
 gitem_t* BG_FindItemForPowerup(powerup_t pw)
 {

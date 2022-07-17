@@ -138,7 +138,6 @@ void CL_Netchan_Transmit(netchan_t* chan, msg_t* msg)
     Netchan_Transmit(chan, msg->cursize, msg->data);
 }
 
-extern int oldsize;
 int newsize = 0;
 
 bool CL_Netchan_Process(netchan_t* chan, msg_t* msg)

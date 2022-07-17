@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // executed by a key binding
 
 #include "cg_local.h"
+#include "lang_util.h"
 #ifdef MISSIONPACK
 #include "ui_shared.h"
 #include "voicechat.h"
@@ -474,12 +475,8 @@ Cmd_Argc() / Cmd_Argv()
 */
 bool CG_ConsoleCommand()
 {
-    const char* cmd;
-    int i;
-
-    cmd = CG_Argv(0);
-
-    for (i = 0; i < sizeof(commands) / sizeof(commands[0]); i++) {
+    const char* cmd = CG_Argv(0);
+    for (int i = 0; i < COUNT_OF(commands); i++) {
         if (!Q_stricmp(cmd, commands[i].cmd)) {
             commands[i].function();
             return true;
@@ -499,9 +496,7 @@ so it can perform tab completion
 */
 void CG_InitConsoleCommands()
 {
-    int i;
-
-    for (i = 0; i < sizeof(commands) / sizeof(commands[0]); i++) {
+    for (int i = 0; i < COUNT_OF(commands); i++) {
         trap_AddCommand(commands[i].cmd);
     }
 

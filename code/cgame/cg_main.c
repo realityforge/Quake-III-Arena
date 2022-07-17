@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // cg_main.c -- initialization and primary entry point for cgame
 #include "cg_local.h"
 #include "plugin.h"
+#include "lang_util.h"
 
 #ifdef MISSIONPACK
 #include "../ui/ui_shared.h"
@@ -316,20 +317,16 @@ static cvarTable_t cvarTable[] = {
     //	{ &cg_pmove_fixed, "cg_pmove_fixed", "0", CVAR_USERINFO | CVAR_ARCHIVE }
 };
 
-static int cvarTableSize = sizeof(cvarTable) / sizeof(cvarTable[0]);
-
 static void CG_RegisterCvars()
 {
-    int i;
-    cvarTable_t* cv;
-    char var[MAX_TOKEN_CHARS];
-
-    for (i = 0, cv = cvarTable; i < cvarTableSize; i++, cv++) {
+    cvarTable_t* cv = cvarTable;
+    for (int i = 0; i < COUNT_OF(cvarTable); i++, cv++) {
         trap_Cvar_Register(cv->vmCvar, cv->cvarName,
                            cv->defaultString, cv->cvarFlags);
     }
 
     // see if we are also running the server on this machine
+    char var[MAX_TOKEN_CHARS];
     trap_Cvar_VariableStringBuffer("sv_running", var, sizeof(var));
     cgs.localServer = atoi(var);
 
@@ -366,7 +363,7 @@ void CG_UpdateCvars()
     int i;
     cvarTable_t* cv;
 
-    for (i = 0, cv = cvarTable; i < cvarTableSize; i++, cv++) {
+    for (i = 0, cv = cvarTable; i < COUNT_OF(cvarTable); i++, cv++) {
         trap_Cvar_Update(cv->vmCvar);
     }
 

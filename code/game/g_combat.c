@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // g_combat.c
 
 #include "g_local.h"
+#include "lang_util.h"
 
 static void ScorePlum(gentity_t* ent, vec3_t origin, int score)
 {
@@ -428,7 +429,7 @@ void player_die(gentity_t* self, gentity_t* inflictor, gentity_t* attacker, int 
         killerName = "<world>";
     }
 
-    if (meansOfDeath < 0 || meansOfDeath >= sizeof(modNames) / sizeof(modNames[0])) {
+    if (meansOfDeath < 0 || meansOfDeath >= COUNT_OF(modNames)) {
         obit = "<bad obituary>";
     } else {
         obit = modNames[meansOfDeath];

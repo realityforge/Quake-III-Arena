@@ -36,8 +36,6 @@ cvar_t* vid_xpos; // X coordinate of window position
 cvar_t* vid_ypos; // Y coordinate of window position
 cvar_t* r_fullscreen;
 
-#define VID_NUM_MODES (sizeof(vid_modes) / sizeof(vid_modes[0]))
-
 LONG WINAPI MainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 static bool s_alttab_disabled;

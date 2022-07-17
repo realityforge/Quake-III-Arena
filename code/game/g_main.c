@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "g_local.h"
 #include "plugin.h"
+#include "lang_util.h"
 
 level_locals_t level;
 
@@ -177,8 +178,6 @@ static cvarTable_t gameCvarTable[] = {
 
 };
 
-static int gameCvarTableSize = sizeof(gameCvarTable) / sizeof(gameCvarTable[0]);
-
 void G_InitGame(int levelTime, int randomSeed, int restart);
 void G_RunFrame(int levelTime);
 void G_ShutdownGame(int restart);
@@ -326,11 +325,10 @@ static void G_RemapTeamShaders()
 
 static void G_RegisterCvars()
 {
-    int i;
-    cvarTable_t* cv;
     bool remapped = false;
 
-    for (i = 0, cv = gameCvarTable; i < gameCvarTableSize; i++, cv++) {
+    cvarTable_t* cv = gameCvarTable;
+    for (int i = 0; i < COUNT_OF(gameCvarTable); i++, cv++) {
         trap_Cvar_Register(cv->vmCvar, cv->cvarName,
                            cv->defaultString, cv->cvarFlags);
         if (cv->vmCvar)
@@ -356,11 +354,10 @@ static void G_RegisterCvars()
 
 static void G_UpdateCvars()
 {
-    int i;
-    cvarTable_t* cv;
     bool remapped = false;
 
-    for (i = 0, cv = gameCvarTable; i < gameCvarTableSize; i++, cv++) {
+    cvarTable_t* cv = gameCvarTable;
+    for (int i = 0; i < COUNT_OF(gameCvarTable); i++, cv++) {
         if (cv->vmCvar) {
             trap_Cvar_Update(cv->vmCvar);
 

@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "q_shared.h"
 #include "qcommon.h"
 #include "cvar_engine.h"
+#include "lang_util.h"
 
 static huffman_t msgHuff;
 
@@ -37,8 +38,6 @@ int pcount[256];
 Handles byte ordering and avoids alignment errors
 ==============================================================================
 */
-
-int oldsize = 0;
 
 static void MSG_initHuffman();
 
@@ -106,8 +105,6 @@ int overflows;
 void MSG_WriteBits(msg_t* msg, int value, int bits)
 {
     int i;
-
-    oldsize += bits;
 
     // this isn't an exact overflow check, but close enough
     if (msg->maxsize - msg->cursize < 4) {
@@ -551,7 +548,6 @@ void MSG_WriteDeltaUsercmdKey(msg_t* msg, int key, usercmd_t* from, usercmd_t* t
     }
     if (from->angles[0] == to->angles[0] && from->angles[1] == to->angles[1] && from->angles[2] == to->angles[2] && from->forwardmove == to->forwardmove && from->rightmove == to->rightmove && from->upmove == to->upmove && from->buttons == to->buttons && from->weapon == to->weapon) {
         MSG_WriteBits(msg, 0, 1); // no change
-        oldsize += 7;
         return;
     }
     key ^= to->serverTime;
@@ -709,7 +705,7 @@ void MSG_WriteDeltaEntity(msg_t* msg, struct entityState_s* from, struct entityS
     float fullFloat;
     int *fromF, *toF;
 
-    numFields = sizeof(entityStateFields) / sizeof(entityStateFields[0]);
+    numFields = COUNT_OF(entityStateFields);
 
     // all fields should be 32 bits to avoid any compiler packing issues
     // the "number" field is not part of the field list
@@ -759,8 +755,6 @@ void MSG_WriteDeltaEntity(msg_t* msg, struct entityState_s* from, struct entityS
 
     MSG_WriteByte(msg, lc); // # of changes
 
-    oldsize += numFields;
-
     for (i = 0, field = entityStateFields; i < lc; i++, field++) {
         fromF = (int*)((uint8_t*)from + field->offset);
         toF = (int*)((uint8_t*)to + field->offset);
@@ -779,7 +773,6 @@ void MSG_WriteDeltaEntity(msg_t* msg, struct entityState_s* from, struct entityS
 
             if (fullFloat == 0.0f) {
                 MSG_WriteBits(msg, 0, 1);
-                oldsize += FLOAT_INT_BITS;
             } else {
                 MSG_WriteBits(msg, 1, 1);
                 if (trunc == fullFloat && trunc + FLOAT_INT_BIAS >= 0 && trunc + FLOAT_INT_BIAS < (1 << FLOAT_INT_BITS)) {
@@ -821,7 +814,6 @@ void MSG_ReadDeltaEntity(msg_t* msg, entityState_t* from, entityState_t* to,
                          int number)
 {
     int i, lc;
-    int numFields;
     netField_t* field;
     int *fromF, *toF;
     int print;
@@ -857,7 +849,6 @@ void MSG_ReadDeltaEntity(msg_t* msg, entityState_t* from, entityState_t* to,
         return;
     }
 
-    numFields = sizeof(entityStateFields) / sizeof(entityStateFields[0]);
     lc = MSG_ReadByte(msg);
 
     // shownet 2/3 will interleave with other printed info, -1 will
@@ -919,7 +910,7 @@ void MSG_ReadDeltaEntity(msg_t* msg, entityState_t* from, entityState_t* to,
             //			pcount[i]++;
         }
     }
-    for (i = lc, field = &entityStateFields[lc]; i < numFields; i++, field++) {
+    for (i = lc, field = &entityStateFields[lc]; i < COUNT_OF(entityStateFields); i++, field++) {
         fromF = (int*)((uint8_t*)from + field->offset);
         toF = (int*)((uint8_t*)to + field->offset);
         // no change
@@ -998,7 +989,6 @@ void MSG_WriteDeltaPlayerstate(msg_t* msg, struct playerState_s* from, struct pl
     int persistantbits;
     int ammobits;
     int powerupbits;
-    int numFields;
     int c;
     netField_t* field;
     int *fromF, *toF;
@@ -1012,10 +1002,8 @@ void MSG_WriteDeltaPlayerstate(msg_t* msg, struct playerState_s* from, struct pl
 
     c = msg->cursize;
 
-    numFields = sizeof(playerStateFields) / sizeof(playerStateFields[0]);
-
     lc = 0;
-    for (i = 0, field = playerStateFields; i < numFields; i++, field++) {
+    for (i = 0, field = playerStateFields; i < COUNT_OF(playerStateFields); i++, field++) {
         fromF = (int*)((uint8_t*)from + field->offset);
         toF = (int*)((uint8_t*)to + field->offset);
         if (*fromF != *toF) {
@@ -1024,8 +1012,6 @@ void MSG_WriteDeltaPlayerstate(msg_t* msg, struct playerState_s* from, struct pl
     }
 
     MSG_WriteByte(msg, lc); // # of changes
-
-    oldsize += numFields - lc;
 
     for (i = 0, field = playerStateFields; i < lc; i++, field++) {
         fromF = (int*)((uint8_t*)from + field->offset);
@@ -1088,7 +1074,6 @@ void MSG_WriteDeltaPlayerstate(msg_t* msg, struct playerState_s* from, struct pl
 
     if (!statsbits && !persistantbits && !ammobits && !powerupbits) {
         MSG_WriteBits(msg, 0, 1); // no change
-        oldsize += 4;
         return;
     }
     MSG_WriteBits(msg, 1, 1); // changed
@@ -1139,7 +1124,6 @@ void MSG_ReadDeltaPlayerstate(msg_t* msg, playerState_t* from, playerState_t* to
     int i, lc;
     int bits;
     netField_t* field;
-    int numFields;
     int startBit, endBit;
     int print;
     int *fromF, *toF;
@@ -1171,7 +1155,6 @@ void MSG_ReadDeltaPlayerstate(msg_t* msg, playerState_t* from, playerState_t* to
     }
 #endif
 
-    numFields = sizeof(playerStateFields) / sizeof(playerStateFields[0]);
     lc = MSG_ReadByte(msg);
 
     for (i = 0, field = playerStateFields; i < lc; i++, field++) {
@@ -1209,7 +1192,7 @@ void MSG_ReadDeltaPlayerstate(msg_t* msg, playerState_t* from, playerState_t* to
             }
         }
     }
-    for (i = lc, field = &playerStateFields[lc]; i < numFields; i++, field++) {
+    for (i = lc, field = &playerStateFields[lc]; i < COUNT_OF(playerStateFields); i++, field++) {
         fromF = (int*)((uint8_t*)from + field->offset);
         toF = (int*)((uint8_t*)to + field->offset);
         // no change
