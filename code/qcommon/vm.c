@@ -263,7 +263,7 @@ vm_t* VM_Restart(vm_t* vm)
     }
 
     // load the image
-    Com_Printf("VM_Restart()\n", filename);
+    Com_Printf("VM_Restart()\n");
     Com_sprintf(filename, sizeof(filename), "vm/%s.qvm", vm->name);
     Com_Printf("Loading vm file %s.\n", filename);
     FS_ReadFile(filename, (void**)&header);
