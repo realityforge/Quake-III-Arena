@@ -12,9 +12,9 @@
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_archive = "http_archive")
 
-_VERSION = "59f17f3beea839e48c45bfd4957afb2082d0aa5f"
+_VERSION = "e5ee032225211d4fc5c2a06cbdaef3f839af0dba"
 
-_SHA256 = "ea5424f934e21e12fab1aed1ef2e6341065c407685ac30bce9f90a3fda0917aa"
+_SHA256 = "054d1ebf2bb6f54b8184197739c94a6d8b94fa387ed9b8e6d7221c536c53e56f"
 
 def load_repository():
     if native.existing_rule("braincheck"):
