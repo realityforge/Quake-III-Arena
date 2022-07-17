@@ -87,12 +87,3 @@ void QDECL Log_Write(char* fmt, ...)
     // fprintf(logfile.fp, "\r\n");
     fflush(logfile.fp);
 }
-FILE* Log_FilePointer()
-{
-    return logfile.fp;
-}
-void Log_Flush()
-{
-    if (logfile.fp)
-        fflush(logfile.fp);
-}

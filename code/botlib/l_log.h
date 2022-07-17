@@ -28,7 +28,3 @@ void Log_Close(void);
 void Log_Shutdown(void);
 // write to the current opened log file
 void QDECL Log_Write(char* fmt, ...);
-// returns a pointer to the log file
-FILE* Log_FilePointer(void);
-// flush log file
-void Log_Flush(void);
