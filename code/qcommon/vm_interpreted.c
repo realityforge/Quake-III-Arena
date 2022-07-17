@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 #include "vm_local.h"
+#include "lang_util.h"
 
 //#define	DEBUG_VM
 #ifdef DEBUG_VM
@@ -461,8 +462,7 @@ int VM_CallInterpreted(vm_t* vm, int* args)
                     if (sizeof(intptr_t) != sizeof(int)) {
                         intptr_t argarr[MAX_VMSYSCALL_ARGS];
                         int* imagePtr = (int*)&image[programStack];
-                        int i;
-                        for (i = 0; i < ARRAY_LEN(argarr); ++i) {
+                        for (int i = 0; i < COUNT_OF(argarr); ++i) {
                             argarr[i] = *(++imagePtr);
                         }
                         r = vm->systemCall(argarr);

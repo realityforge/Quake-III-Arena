@@ -29,6 +29,7 @@ USER INTERFACE MAIN
 
 #include "ui_local.h"
 #include "plugin.h"
+#include "lang_util.h"
 
 /*
 ================
@@ -206,24 +207,18 @@ static cvarTable_t cvarTable[] = {
     { NULL, "g_localTeamPref", "", 0 }
 };
 
-static int cvarTableSize = ARRAY_LEN(cvarTable);
-
 void UI_RegisterCvars()
 {
-    int i;
-    cvarTable_t* cv;
-
-    for (i = 0, cv = cvarTable; i < cvarTableSize; i++, cv++) {
+    cvarTable_t* cv = cvarTable;
+    for (int i = 0; i < COUNT_OF(cvarTable); i++, cv++) {
         trap_Cvar_Register(cv->vmCvar, cv->cvarName, cv->defaultString, cv->cvarFlags);
     }
 }
 
 void UI_UpdateCvars()
 {
-    int i;
-    cvarTable_t* cv;
-
-    for (i = 0, cv = cvarTable; i < cvarTableSize; i++, cv++) {
+    cvarTable_t* cv = cvarTable;
+    for (int i = 0; i < COUNT_OF(cvarTable); i++, cv++) {
         if (!cv->vmCvar) {
             continue;
         }

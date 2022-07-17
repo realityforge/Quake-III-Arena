@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "SDL.h"
+#include "lang_util.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -842,8 +843,8 @@ static void IN_JoyMove(void)
     // now query the stick buttons...
     total = SDL_JoystickNumButtons(stick);
     if (total > 0) {
-        if (total > ARRAY_LEN(stick_state.buttons))
-            total = ARRAY_LEN(stick_state.buttons);
+        if (total > COUNT_OF(stick_state.buttons))
+            total = COUNT_OF(stick_state.buttons);
         for (i = 0; i < total; i++) {
             bool pressed = (SDL_JoystickGetButton(stick, i) != 0);
             if (pressed != stick_state.buttons[i]) {

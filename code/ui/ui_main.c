@@ -31,6 +31,7 @@ USER INTERFACE MAIN
 #include "ui_local.h"
 #include "ui/menudef.h"
 #include "plugin.h"
+#include "lang_util.h"
 
 uiInfo_t uiInfo;
 
@@ -48,8 +49,6 @@ static const char* skillLevels[] = {
     "Hardcore",
     "Nightmare"
 };
-
-static const int numSkillLevels = ARRAY_LEN(skillLevels);
 
 #define UIAS_LOCAL 0
 #define UIAS_GLOBAL0 1
@@ -70,7 +69,6 @@ static const char* netSources[] = {
     "Master5",
     "Favorites"
 };
-static const int numNetSources = ARRAY_LEN(netSources);
 
 static const serverFilter_t serverFilters[] = {
     { "All", "" },
@@ -82,8 +80,6 @@ static const serverFilter_t serverFilters[] = {
     { "OSP", "osp" },
 };
 
-static const int numServerFilters = ARRAY_LEN(serverFilters);
-
 static const char* teamArenaGameTypes[] = {
     "FFA",
     "TOURNAMENT",
@@ -94,8 +90,6 @@ static const char* teamArenaGameTypes[] = {
     "OVERLOAD",
     "HARVESTER"
 };
-
-static int const numTeamArenaGameTypes = ARRAY_LEN(teamArenaGameTypes);
 
 static char* netnames[] = {
     "???",
@@ -1108,9 +1102,8 @@ static void UI_DrawPreviewCinematic(rectDef_t* rect, float scale, vec4_t color)
 
 static void UI_DrawSkill(rectDef_t* rect, float scale, vec4_t color, int textStyle)
 {
-    int i;
-    i = trap_Cvar_VariableValue("g_spSkill");
-    if (i < 1 || i > numSkillLevels) {
+    int i = trap_Cvar_VariableValue("g_spSkill");
+    if (i < 1 || i > COUNT_OF(skillLevels)) {
         i = 1;
     }
     Text_Paint(rect->x, rect->y, scale, color, skillLevels[i - 1], 0, 0, textStyle);
@@ -1278,7 +1271,7 @@ static void UI_DrawPlayerModel(rectDef_t* rect)
 
 static void UI_DrawNetSource(rectDef_t* rect, float scale, vec4_t color, int textStyle)
 {
-    if (ui_netSource.integer < 0 || ui_netSource.integer >= numNetSources) {
+    if (ui_netSource.integer < 0 || ui_netSource.integer >= COUNT_OF(netSources)) {
         ui_netSource.integer = 0;
     }
     Text_Paint(rect->x, rect->y, scale, color, va("Source: %s", netSources[ui_netSource.integer]), 0, 0, textStyle);
@@ -1311,7 +1304,7 @@ static void UI_DrawNetMapCinematic(rectDef_t* rect, float scale, vec4_t color)
 
 static void UI_DrawNetFilter(rectDef_t* rect, float scale, vec4_t color, int textStyle)
 {
-    if (ui_serverFilterType.integer < 0 || ui_serverFilterType.integer >= numServerFilters) {
+    if (ui_serverFilterType.integer < 0 || ui_serverFilterType.integer >= COUNT_OF(serverFilters)) {
         ui_serverFilterType.integer = 0;
     }
     Text_Paint(rect->x, rect->y, scale, color, va("Filter: %s", serverFilters[ui_serverFilterType.integer].description), 0, 0, textStyle);
@@ -1576,7 +1569,7 @@ static int UI_OwnerDrawWidth(int ownerDraw, float scale)
         break;
     case UI_SKILL:
         i = trap_Cvar_VariableValue("g_spSkill");
-        if (i < 1 || i > numSkillLevels) {
+        if (i < 1 || i > COUNT_OF(skillLevels)) {
             i = 1;
         }
         s = skillLevels[i - 1];
@@ -1632,13 +1625,13 @@ static int UI_OwnerDrawWidth(int ownerDraw, float scale)
         s = va("%i. %s", ownerDraw - UI_REDTEAM1 + 1, text);
         break;
     case UI_NETSOURCE:
-        if (ui_netSource.integer < 0 || ui_netSource.integer >= numNetSources) {
+        if (ui_netSource.integer < 0 || ui_netSource.integer >= COUNT_OF(netSources)) {
             ui_netSource.integer = 0;
         }
         s = va("Source: %s", netSources[ui_netSource.integer]);
         break;
     case UI_NETFILTER:
-        if (ui_serverFilterType.integer < 0 || ui_serverFilterType.integer >= numServerFilters) {
+        if (ui_serverFilterType.integer < 0 || ui_serverFilterType.integer >= COUNT_OF(serverFilters)) {
             ui_serverFilterType.integer = 0;
         }
         s = va("Filter: %s", serverFilters[ui_serverFilterType.integer].description);
@@ -1688,7 +1681,7 @@ static void UI_DrawBotName(rectDef_t* rect, float scale, vec4_t color, int textS
 
 static void UI_DrawBotSkill(rectDef_t* rect, float scale, vec4_t color, int textStyle)
 {
-    if (uiInfo.skillIndex >= 0 && uiInfo.skillIndex < numSkillLevels) {
+    if (uiInfo.skillIndex >= 0 && uiInfo.skillIndex < COUNT_OF(skillLevels)) {
         Text_Paint(rect->x, rect->y, scale, color, skillLevels[uiInfo.skillIndex], 0, 0, textStyle);
     }
 }
@@ -2338,8 +2331,8 @@ static bool UI_Skill_HandleKey(int flags, float* special, int key)
         i += select;
 
         if (i < 1) {
-            i = numSkillLevels;
-        } else if (i > numSkillLevels) {
+            i = COUNT_OF(skillLevels) - 1;
+        } else if (i > COUNT_OF(skillLevels)) {
             i = 1;
         }
 
@@ -2421,10 +2414,10 @@ static bool UI_NetSource_HandleKey(int flags, float* special, int key)
             }
         }
 
-        if (ui_netSource.integer >= numNetSources) {
+        if (ui_netSource.integer >= COUNT_OF(netSources)) {
             ui_netSource.integer = 0;
         } else if (ui_netSource.integer < 0) {
-            ui_netSource.integer = numNetSources - 1;
+            ui_netSource.integer = COUNT_OF(netSources) - 1;
         }
 
         UI_BuildServerDisplayList(RefreshWithClear);
@@ -2441,10 +2434,10 @@ static bool UI_NetFilter_HandleKey(int flags, float* special, int key)
     if (select != 0) {
         ui_serverFilterType.integer += select;
 
-        if (ui_serverFilterType.integer >= numServerFilters) {
+        if (ui_serverFilterType.integer >= COUNT_OF(serverFilters)) {
             ui_serverFilterType.integer = 0;
         } else if (ui_serverFilterType.integer < 0) {
-            ui_serverFilterType.integer = numServerFilters - 1;
+            ui_serverFilterType.integer = COUNT_OF(serverFilters) - 1;
         }
         UI_BuildServerDisplayList(RefreshWithClear);
         return true;
@@ -2500,10 +2493,10 @@ static bool UI_BotSkill_HandleKey(int flags, float* special, int key)
     if (select != 0) {
         uiInfo.skillIndex += select;
 
-        if (uiInfo.skillIndex >= numSkillLevels) {
+        if (uiInfo.skillIndex >= COUNT_OF(skillLevels)) {
             uiInfo.skillIndex = 0;
         } else if (uiInfo.skillIndex < 0) {
-            uiInfo.skillIndex = numSkillLevels - 1;
+            uiInfo.skillIndex = COUNT_OF(skillLevels) - 1;
         }
         return true;
     }
@@ -2786,7 +2779,7 @@ static void UI_LoadDemos()
     int len;
 
     Com_sprintf(demoExt, sizeof(demoExt), ".%s%d", DEMOEXT, PROTOCOL_VERSION);
-    uiInfo.demoCount = trap_FS_GetFileList("demos", demoExt, demolist, ARRAY_LEN(demolist));
+    uiInfo.demoCount = trap_FS_GetFileList("demos", demoExt, demolist, COUNT_OF(demolist));
 
     demoname = demolist;
 
@@ -4112,7 +4105,7 @@ static const char* UI_FeederItemText(float feederID, int index, int column, qhan
                     if (ui_netSource.integer == UIAS_LOCAL) {
                         int nettype = atoi(Info_ValueForKey(info, "nettype"));
 
-                        if (nettype < 0 || nettype >= ARRAY_LEN(netnames)) {
+                        if (nettype < 0 || nettype >= COUNT_OF(netnames)) {
                             nettype = 0;
                         }
 
@@ -4132,7 +4125,7 @@ static const char* UI_FeederItemText(float feederID, int index, int column, qhan
                 return clientBuff;
             case SORT_GAME:
                 game = atoi(Info_ValueForKey(info, "gametype"));
-                if (game >= 0 && game < numTeamArenaGameTypes) {
+                if (game >= 0 && game < COUNT_OF(teamArenaGameTypes)) {
                     return teamArenaGameTypes[game];
                 } else {
                     return "Unknown";
@@ -5536,24 +5529,18 @@ static cvarTable_t cvarTable[] = {
     { NULL, "g_localTeamPref", "", 0 },
 };
 
-static int cvarTableSize = ARRAY_LEN(cvarTable);
-
 void UI_RegisterCvars()
 {
-    int i;
-    cvarTable_t* cv;
-
-    for (i = 0, cv = cvarTable; i < cvarTableSize; i++, cv++) {
+    cvarTable_t* cv = cvarTable;
+    for (int i = 0; i < COUNT_OF(cvarTable); i++, cv++) {
         trap_Cvar_Register(cv->vmCvar, cv->cvarName, cv->defaultString, cv->cvarFlags);
     }
 }
 
 void UI_UpdateCvars()
 {
-    int i;
-    cvarTable_t* cv;
-
-    for (i = 0, cv = cvarTable; i < cvarTableSize; i++, cv++) {
+    cvarTable_t* cv = cvarTable;
+    for (int i = 0; i < COUNT_OF(cvarTable); i++, cv++) {
         if (!cv->vmCvar) {
             continue;
         }

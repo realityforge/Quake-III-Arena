@@ -28,6 +28,7 @@ MULTIPLAYER MENU (SERVER BROWSER)
 */
 
 #include "ui_local.h"
+#include "lang_util.h"
 
 #define MAX_GLOBALSERVERS 128
 #define MAX_PINGREQUESTS 32
@@ -614,7 +615,7 @@ static void ArenaServers_Insert(char* adrstr, char* info, int pingtime)
     }
     */
     servernodeptr->nettype = atoi(Info_ValueForKey(info, "nettype"));
-    if (servernodeptr->nettype < 0 || servernodeptr->nettype >= ARRAY_LEN(netnames) - 1) {
+    if (servernodeptr->nettype < 0 || servernodeptr->nettype >= COUNT_OF(netnames) - 1) {
         servernodeptr->nettype = 0;
     }
 

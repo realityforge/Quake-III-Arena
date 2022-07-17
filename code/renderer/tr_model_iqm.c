@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "tr_local.h"
+#include "lang_util.h"
 
 #define LL(x) x = LittleLong(x)
 
@@ -263,7 +264,7 @@ bool R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_name)
         return false;
     }
 
-    for (i = 0; i < ARRAY_LEN(vertexArrayFormat); i++) {
+    for (i = 0; i < COUNT_OF(vertexArrayFormat); i++) {
         vertexArrayFormat[i] = -1;
     }
 
@@ -318,7 +319,7 @@ bool R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_name)
                 break;
             }
 
-            if (vertexarray->type < ARRAY_LEN(vertexArrayFormat)) {
+            if (vertexarray->type < COUNT_OF(vertexArrayFormat)) {
                 vertexArrayFormat[vertexarray->type] = vertexarray->format;
             }
 
@@ -717,7 +718,7 @@ bool R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_name)
             int n;
 
             // skip disabled arrays
-            if (vertexarray->type < ARRAY_LEN(vertexArrayFormat)
+            if (vertexarray->type < COUNT_OF(vertexArrayFormat)
                 && vertexArrayFormat[vertexarray->type] == -1)
                 continue;
 

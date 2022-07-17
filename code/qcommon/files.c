@@ -28,6 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "unzip.h"
 #include "cvar_engine.h"
 #include "qengine.h"
+#include "lang_util.h"
 
 /*
 =============================================================================
@@ -901,8 +902,8 @@ static bool FS_IsDemoExt(const char* filename, int namelen)
     int index, protocol;
 
     ext_test = strrchr(filename, '.');
-    if (ext_test && !Q_stricmpn(ext_test + 1, DEMOEXT, ARRAY_LEN(DEMOEXT) - 1)) {
-        protocol = atoi(ext_test + ARRAY_LEN(DEMOEXT));
+    if (ext_test && !Q_stricmpn(ext_test + 1, DEMOEXT, COUNT_OF(DEMOEXT) - 1)) {
+        protocol = atoi(ext_test + COUNT_OF(DEMOEXT));
 
         if (protocol == PROTOCOL_VERSION)
             return true;
@@ -2209,7 +2210,7 @@ A mod directory is a peer to baseq3 with a pk3 or pk3dir in it
 */
 int FS_GetModList(char* listbuf, int bufsize)
 {
-    int nMods, i, j, k, nTotal, nLen, nPaks, nDirs, nPakDirs, nPotential, nDescLen;
+    int nMods, nTotal, nLen, nPaks, nDirs, nPakDirs, nPotential, nDescLen;
     char** pFiles = NULL;
     char** pPaks = NULL;
     char** pDirs = NULL;
@@ -2227,7 +2228,7 @@ int FS_GetModList(char* listbuf, int bufsize)
     nMods = nTotal = 0;
 
     // iterate through paths and get list of potential mods
-    for (i = 0; i < ARRAY_LEN(paths); i++) {
+    for (int i = 0; i < COUNT_OF(paths); i++) {
         pFiles0 = Sys_ListFiles(paths[i], NULL, NULL, &dummy, true);
         // Sys_ConcatenateFileLists frees the lists so Sys_FreeFileList isn't required
         pFiles = Sys_ConcatenateFileLists(pFiles, pFiles0);
@@ -2235,13 +2236,13 @@ int FS_GetModList(char* listbuf, int bufsize)
 
     nPotential = Sys_CountFileList(pFiles);
 
-    for (i = 0; i < nPotential; i++) {
+    for (int i = 0; i < nPotential; i++) {
         name = pFiles[i];
         // NOTE: cleaner would involve more changes
         // ignore duplicate mod directories
         if (i != 0) {
             bDrop = false;
-            for (j = 0; j < i; j++) {
+            for (int j = 0; j < i; j++) {
                 if (Q_stricmp(pFiles[j], name) == 0) {
                     // this one can be dropped
                     bDrop = true;
@@ -2257,12 +2258,12 @@ int FS_GetModList(char* listbuf, int bufsize)
         // in order to be a valid mod the directory must contain at least one .pk3 or .pk3dir
         // we didn't keep the information when we merged the directory names, as to what OS Path it was found under
         // so we will try each of them here
-        for (j = 0; j < ARRAY_LEN(paths); j++) {
+        for (int j = 0; j < COUNT_OF(paths); j++) {
             path = FS_BuildOSPath(paths[j], name, "");
             nPaks = nDirs = nPakDirs = 0;
             pPaks = Sys_ListFiles(path, ".pk3", NULL, &nPaks, false);
             pDirs = Sys_ListFiles(path, "/", NULL, &nDirs, false);
-            for (k = 0; k < nDirs; k++) {
+            for (int k = 0; k < nDirs; k++) {
                 // we only want to count directories ending with ".pk3dir"
                 if (FS_IsExt(pDirs[k], ".pk3dir", strlen(pDirs[k]))) {
                     nPakDirs++;
@@ -3288,7 +3289,7 @@ checksums to see if any pk3 files need to be auto-downloaded.
 */
 void FS_PureServerSetReferencedPaks(const char* pakSums, const char* pakNames)
 {
-    int i, c, d = 0;
+    int c, d = 0;
 
     Cmd_TokenizeString(pakSums);
 
@@ -3297,11 +3298,11 @@ void FS_PureServerSetReferencedPaks(const char* pakSums, const char* pakNames)
         c = MAX_SEARCH_PATHS;
     }
 
-    for (i = 0; i < c; i++) {
+    for (int i = 0; i < c; i++) {
         fs_serverReferencedPaks[i] = atoi(Cmd_Argv(i));
     }
 
-    for (i = 0; i < ARRAY_LEN(fs_serverReferencedPakNames); i++) {
+    for (int i = 0; i < COUNT_OF(fs_serverReferencedPakNames); i++) {
         if (fs_serverReferencedPakNames[i])
             Z_Free(fs_serverReferencedPakNames[i]);
 
@@ -3316,7 +3317,7 @@ void FS_PureServerSetReferencedPaks(const char* pakSums, const char* pakNames)
         if (d > c)
             d = c;
 
-        for (i = 0; i < d; i++) {
+        for (int i = 0; i < d; i++) {
             fs_serverReferencedPakNames[i] = CopyString(Cmd_Argv(i));
         }
     }

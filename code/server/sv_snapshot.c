@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "server_local.h"
+#include "lang_util.h"
 
 /*
 =============================================================================
@@ -514,7 +515,7 @@ static void SV_WriteVoipToClient(client_t* cl, msg_t* msg)
     if (cl->queuedVoipPackets) {
         // Write as many VoIP packets as we reasonably can...
         for (i = 0; i < cl->queuedVoipPackets; i++) {
-            packet = cl->voipPacket[(i + cl->queuedVoipIndex) % ARRAY_LEN(cl->voipPacket)];
+            packet = cl->voipPacket[(i + cl->queuedVoipIndex) % COUNT_OF(cl->voipPacket)];
 
             if (!*cl->downloadName) {
                 totalbytes += packet->len;
@@ -536,7 +537,7 @@ static void SV_WriteVoipToClient(client_t* cl, msg_t* msg)
 
         cl->queuedVoipPackets -= i;
         cl->queuedVoipIndex += i;
-        cl->queuedVoipIndex %= ARRAY_LEN(cl->voipPacket);
+        cl->queuedVoipIndex %= COUNT_OF(cl->voipPacket);
     }
 }
 #endif

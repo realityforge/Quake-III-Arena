@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "../qcommon/q_shared.h"
 #include "bg_public.h"
+#include "lang_util.h"
 
 /*QUAKED item_***** ( 0 0 0 ) (-16 -16 -16) (16 16 16) suspended
 DO NOT USE THIS CLASS, IT JUST HOLDS GENERAL INFORMATION.
@@ -847,13 +848,11 @@ Only in One Flag CTF games
     { NULL }
 };
 
-int bg_numItems = ARRAY_LEN(bg_itemlist) - 1;
+int bg_numItems = COUNT_OF(bg_itemlist) - 1;
 
 gitem_t* BG_FindItemForPowerup(powerup_t pw)
 {
-    int i;
-
-    for (i = 0; i < bg_numItems; i++) {
+    for (int i = 0; i < bg_numItems; i++) {
         if ((bg_itemlist[i].giType == IT_POWERUP || bg_itemlist[i].giType == IT_TEAM || bg_itemlist[i].giType == IT_PERSISTANT_POWERUP) && bg_itemlist[i].giTag == pw) {
             return &bg_itemlist[i];
         }
@@ -864,9 +863,7 @@ gitem_t* BG_FindItemForPowerup(powerup_t pw)
 
 gitem_t* BG_FindItemForHoldable(holdable_t pw)
 {
-    int i;
-
-    for (i = 0; i < bg_numItems; i++) {
+    for (int i = 0; i < bg_numItems; i++) {
         if (bg_itemlist[i].giType == IT_HOLDABLE && bg_itemlist[i].giTag == pw) {
             return &bg_itemlist[i];
         }

@@ -27,6 +27,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../sys/sys_local.h"
 #include "../sys/sys_loadlib.h"
 #include "cl_curl.h"
+#include "lang_util.h"
 
 #ifdef USE_VOIP
 cvar_t* cl_voipUseVAD;
@@ -917,8 +918,8 @@ void CL_PlayDemo_f(void)
     // check for an extension .DEMOEXT_?? (?? is protocol)
     ext_test = strrchr(arg, '.');
 
-    if (ext_test && !Q_stricmpn(ext_test + 1, DEMOEXT, ARRAY_LEN(DEMOEXT) - 1)) {
-        protocol = atoi(ext_test + ARRAY_LEN(DEMOEXT));
+    if (ext_test && !Q_stricmpn(ext_test + 1, DEMOEXT, COUNT_OF(DEMOEXT) - 1)) {
+        protocol = atoi(ext_test + COUNT_OF(DEMOEXT));
 
         for (i = 0; demo_protocols[i]; i++) {
             if (demo_protocols[i] == protocol)
@@ -934,8 +935,8 @@ void CL_PlayDemo_f(void)
             Com_Printf("Protocol %d not supported for demos\n", protocol);
             len = ext_test - arg;
 
-            if (len >= ARRAY_LEN(retry))
-                len = ARRAY_LEN(retry) - 1;
+            if (len >= COUNT_OF(retry))
+                len = COUNT_OF(retry) - 1;
 
             Q_strncpyz(retry, arg, len + 1);
             retry[len] = '\0';

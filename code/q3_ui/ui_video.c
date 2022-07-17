@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 #include "ui_local.h"
+#include "lang_util.h"
 
 /*
 =======================================================================
@@ -274,8 +275,6 @@ static initial_video_options_t s_ivo_templates[] = {
     { 3, true, 1, 0, 0, 0, 1, 0, true }
 };
 
-#define NUM_IVO_TEMPLATES (ARRAY_LEN(s_ivo_templates))
-
 static const char* builtinResolutions[] = {
     "320x240",
     "400x300",
@@ -415,7 +414,7 @@ static void GraphicsOptions_GetResolutions()
     if (*resbuf) {
         char* s = resbuf;
         unsigned int i = 0;
-        while (s && i < ARRAY_LEN(detectedResolutions) - 1) {
+        while (s && i < COUNT_OF(detectedResolutions) - 1) {
             detectedResolutions[i++] = s;
             s = strchr(s, ' ');
             if (s)
@@ -424,7 +423,7 @@ static void GraphicsOptions_GetResolutions()
         detectedResolutions[i] = NULL;
 
         // add custom resolution if not in mode list
-        if (i < ARRAY_LEN(detectedResolutions) - 1) {
+        if (i < COUNT_OF(detectedResolutions) - 1) {
             Com_sprintf(currentResolution, sizeof(currentResolution), "%dx%d", uis.glconfig.vidWidth, uis.glconfig.vidHeight);
 
             for (i = 0; detectedResolutions[i]; i++) {
@@ -445,9 +444,7 @@ static void GraphicsOptions_GetResolutions()
 
 static void GraphicsOptions_CheckConfig()
 {
-    int i;
-
-    for (i = 0; i < NUM_IVO_TEMPLATES - 1; i++) {
+    for (int i = 0; i < COUNT_OF(s_ivo_templates) - 1; i++) {
         if (s_ivo_templates[i].colordepth != s_graphicsoptions.colordepth.curvalue)
             continue;
         if (GraphicsOptions_FindDetectedResolution(s_ivo_templates[i].mode) != s_graphicsoptions.mode.curvalue)
@@ -469,7 +466,7 @@ static void GraphicsOptions_CheckConfig()
     }
 
     // return 'Custom' ivo template
-    s_graphicsoptions.list.curvalue = NUM_IVO_TEMPLATES - 1;
+    s_graphicsoptions.list.curvalue = COUNT_OF(s_ivo_templates) - 1;
 }
 
 static void GraphicsOptions_UpdateMenuItems()
@@ -544,8 +541,7 @@ static void GraphicsOptions_ApplyChanges(void* unused, int notification)
     if (resolutionsDetected) {
         // search for builtin mode that matches the detected mode
         int mode;
-        if (s_graphicsoptions.mode.curvalue == -1
-            || s_graphicsoptions.mode.curvalue >= ARRAY_LEN(detectedResolutions))
+        if (s_graphicsoptions.mode.curvalue == -1 || s_graphicsoptions.mode.curvalue >= COUNT_OF(detectedResolutions))
             s_graphicsoptions.mode.curvalue = 0;
 
         mode = GraphicsOptions_FindBuiltinResolution(s_graphicsoptions.mode.curvalue);

@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "ui_shared.h"
 #include "ui/menudef.h"
+#include "lang_util.h"
 
 #define SCROLL_TIME_START 500
 #define SCROLL_TIME_ADJUST 150
@@ -1184,12 +1185,9 @@ commandDef_t commandList[] = {
     { "orbit", &Script_Orbit } // group/name
 };
 
-int scriptCommandCount = ARRAY_LEN(commandList);
-
 void Item_RunScript(itemDef_t* item, const char* s)
 {
     char script[1024], *p;
-    int i;
     bool bRan;
     memset(script, 0, sizeof(script));
     if (item && s && s[0]) {
@@ -1207,7 +1205,7 @@ void Item_RunScript(itemDef_t* item, const char* s)
             }
 
             bRan = false;
-            for (i = 0; i < scriptCommandCount; i++) {
+            for (int i = 0; i < COUNT_OF(commandList); i++) {
                 if (Q_stricmp(command, commandList[i].name) == 0) {
                     (commandList[i].handler(item, &p));
                     bRan = true;
@@ -3162,8 +3160,6 @@ static bind_t g_bindings[] = {
     { "messagemode4", -1, -1, -1, -1 }
 };
 
-static const int g_bindCount = ARRAY_LEN(g_bindings);
-
 static void Controls_GetKeyAssignment(char* command, int* twokeys)
 {
     int count;
@@ -3190,11 +3186,9 @@ static void Controls_GetKeyAssignment(char* command, int* twokeys)
 
 void Controls_GetConfig()
 {
-    int i;
-    int twokeys[2];
-
     // iterate each command, get its numeric binding
-    for (i = 0; i < g_bindCount; i++) {
+    for (int i = 0; i < COUNT_OF(g_bindings); i++) {
+        int twokeys[2];
 
         Controls_GetKeyAssignment(g_bindings[i].command, twokeys);
 
@@ -3205,10 +3199,8 @@ void Controls_GetConfig()
 
 void Controls_SetConfig(bool restart)
 {
-    int i;
-
     // iterate each command, get its numeric binding
-    for (i = 0; i < g_bindCount; i++) {
+    for (int i = 0; i < COUNT_OF(g_bindings); i++) {
 
         if (g_bindings[i].bind1 != -1) {
             DC->setBinding(g_bindings[i].bind1, g_bindings[i].command);
@@ -3223,28 +3215,16 @@ void Controls_SetConfig(bool restart)
 
 void Controls_SetDefaults()
 {
-    int i;
-
     // iterate each command, set its default binding
-    for (i = 0; i < g_bindCount; i++) {
+    for (int i = 0; i < COUNT_OF(g_bindings); i++) {
         g_bindings[i].bind1 = g_bindings[i].defaultbind1;
         g_bindings[i].bind2 = g_bindings[i].defaultbind2;
     }
-
-    // s_controls.invertmouse.curvalue  = Controls_GetCvarDefault( "m_pitch" ) < 0;
-    // s_controls.smoothmouse.curvalue  = Controls_GetCvarDefault( "m_filter" );
-    // s_controls.alwaysrun.curvalue    = Controls_GetCvarDefault( "cl_run" );
-    // s_controls.autoswitch.curvalue   = Controls_GetCvarDefault( "cg_autoswitch" );
-    // s_controls.sensitivity.curvalue  = Controls_GetCvarDefault( "sensitivity" );
-    // s_controls.joyenable.curvalue    = Controls_GetCvarDefault( "in_joystick" );
-    // s_controls.joythreshold.curvalue = Controls_GetCvarDefault( "joy_threshold" );
-    // s_controls.freelook.curvalue     = Controls_GetCvarDefault( "cl_freelook" );
 }
 
 int BindingIDFromName(const char* name)
 {
-    int i;
-    for (i = 0; i < g_bindCount; i++) {
+    for (int i = 0; i < COUNT_OF(g_bindings); i++) {
         if (Q_stricmp(name, g_bindings[i].command) == 0) {
             return i;
         }
@@ -3257,19 +3237,17 @@ char g_nameBind2[32];
 
 static void BindingFromName(const char* cvar)
 {
-    int i, b1, b2;
-
     // iterate each command, set its default binding
-    for (i = 0; i < g_bindCount; i++) {
+    for (int i = 0; i < COUNT_OF(g_bindings); i++) {
         if (Q_stricmp(cvar, g_bindings[i].command) == 0) {
-            b1 = g_bindings[i].bind1;
+            const int b1 = g_bindings[i].bind1;
             if (b1 == -1) {
                 break;
             }
             DC->keynumToStringBuf(b1, g_nameBind1, 32);
             Q_strupr(g_nameBind1);
 
-            b2 = g_bindings[i].bind2;
+            const int b2 = g_bindings[i].bind2;
             if (b2 != -1) {
                 DC->keynumToStringBuf(b2, g_nameBind2, 32);
                 Q_strupr(g_nameBind2);
@@ -3356,7 +3334,6 @@ bool Display_KeyBindPending()
 bool Item_Bind_HandleKey(itemDef_t* item, int key, bool down)
 {
     int id;
-    int i;
 
     if (!g_waitingForKey) {
         if (down && ((key == K_MOUSE1 && Rect_ContainsPoint(&item->window.rect, DC->cursorx, DC->cursory)) || key == K_ENTER || key == K_KP_ENTER || key == K_JOY1 || key == K_JOY2 || key == K_JOY3 || key == K_JOY4)) {
@@ -3402,7 +3379,7 @@ bool Item_Bind_HandleKey(itemDef_t* item, int key, bool down)
 
     if (key != -1) {
 
-        for (i = 0; i < g_bindCount; i++) {
+        for (int i = 0; i < COUNT_OF(g_bindings); i++) {
 
             if (g_bindings[i].bind2 == key) {
                 g_bindings[i].bind2 = -1;

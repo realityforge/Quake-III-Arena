@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "server_local.h"
+#include "lang_util.h"
 
 /*
 ===============================================================================
@@ -637,7 +638,7 @@ static bool SV_DelBanEntryFromList(int index)
 {
     if (index == serverBansCount - 1)
         serverBansCount--;
-    else if (index < ARRAY_LEN(serverBans) - 1) {
+    else if (index < COUNT_OF(serverBans) - 1) {
         memmove(serverBans + index, serverBans + index + 1, (serverBansCount - index - 1) * sizeof(*serverBans));
         serverBansCount--;
     } else
@@ -714,7 +715,7 @@ static void SV_AddBanToList(bool isexception)
         return;
     }
 
-    if (serverBansCount >= ARRAY_LEN(serverBans)) {
+    if (serverBansCount >= COUNT_OF(serverBans)) {
         Com_Printf("Error: Maximum number of bans/exceptions exceeded.\n");
         return;
     }

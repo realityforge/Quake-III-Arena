@@ -29,6 +29,7 @@ DEMOS MENU
 
 #include "qcommon.h"
 #include "ui_local.h"
+#include "lang_util.h"
 
 #define ART_BACK0 "menu/art/back_0"
 #define ART_BACK1 "menu/art/back_1"
@@ -199,7 +200,7 @@ static void Demos_MenuInit()
     s_demos.list.columns = 3;
 
     Com_sprintf(extension, sizeof(extension), ".%s%d", DEMOEXT, PROTOCOL_VERSION);
-    s_demos.numDemos = trap_FS_GetFileList("demos", extension, s_demos.names, ARRAY_LEN(s_demos.names));
+    s_demos.numDemos = trap_FS_GetFileList("demos", extension, s_demos.names, COUNT_OF(s_demos.names));
 
     demoname = s_demos.names;
     i = 0;

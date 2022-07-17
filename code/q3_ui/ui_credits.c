@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "ui_local.h"
+#include "lang_util.h"
 
 typedef struct {
     menuframework_t menu;
@@ -60,7 +61,7 @@ static void UI_CreditMenu_Draw_ioq3()
     };
 
     // Center text vertically on the screen
-    y = (SCREEN_HEIGHT - ARRAY_LEN(names) * (1.42 * PROP_HEIGHT * PROP_SMALL_SIZE_SCALE)) / 2;
+    y = (SCREEN_HEIGHT - COUNT_OF(names) * (1.42 * PROP_HEIGHT * PROP_SMALL_SIZE_SCALE)) / 2;
 
     UI_DrawProportionalString(320, y, "ioquake3 contributors:", UI_CENTER | UI_SMALLFONT, color_white);
     y += 1.42 * PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;

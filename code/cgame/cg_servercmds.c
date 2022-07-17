@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "cg_local.h"
 #ifdef MISSIONPACK
 #include "voicechat.h"
+#include "lang_util.h"
 
 typedef struct {
     const char* order;
@@ -44,12 +45,9 @@ static const orderTask_t validOrders[] = {
     { VOICECHAT_FOLLOWFLAGCARRIER, TEAMTASK_ESCORT }
 };
 
-static const int numValidOrders = ARRAY_LEN(validOrders);
-
 static int CG_ValidOrder(const char* p)
 {
-    int i;
-    for (i = 0; i < numValidOrders; i++) {
+    for (int i = 0; i < COUNT_OF(validOrders); i++) {
         if (Q_stricmp(p, validOrders[i].order) == 0) {
             return validOrders[i].taskNum;
         }

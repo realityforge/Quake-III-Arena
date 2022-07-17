@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 #include "g_local.h"
+#include "lang_util.h"
 
 #ifdef MISSIONPACK
 #include "voicechat.h"
@@ -1110,8 +1111,6 @@ static char* gc_orders[] = {
     "report"
 };
 
-static const int numgc_orders = ARRAY_LEN(gc_orders);
-
 static void Cmd_GameCommand_f(gentity_t* ent)
 {
     int targetNum;
@@ -1120,14 +1119,14 @@ static void Cmd_GameCommand_f(gentity_t* ent)
     char arg[MAX_TOKEN_CHARS];
 
     if (trap_Argc() != 3) {
-        trap_SendServerCommand(ent - g_entities, va("print \"Usage: gc <player id> <order 0-%d>\n\"", numgc_orders - 1));
+        trap_SendServerCommand(ent - g_entities, va("print \"Usage: gc <player id> <order 0-%lu>\n\"", (COUNT_OF(gc_orders) - 1)));
         return;
     }
 
     trap_Argv(2, arg, sizeof(arg));
     order = atoi(arg);
 
-    if (order < 0 || order >= numgc_orders) {
+    if (order < 0 || order >= COUNT_OF(gc_orders)) {
         trap_SendServerCommand(ent - g_entities, va("print \"Bad order: %i\n\"", order));
         return;
     }

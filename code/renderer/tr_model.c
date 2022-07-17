@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // tr_models.c -- model loading and caching
 
 #include "tr_local.h"
+#include "lang_util.h"
 
 #define LL(x) x = LittleLong(x)
 
@@ -176,10 +177,6 @@ static modelExtToLoaderMap_t modelLoaders[] = {
     { "md3", R_RegisterMD3 }
 };
 
-static int numModelLoaders = ARRAY_LEN(modelLoaders);
-
-//===============================================================================
-
 /*
 ** R_GetModelByHandle
 */
@@ -236,7 +233,6 @@ qhandle_t RE_RegisterModel(const char* name)
     qhandle_t hModel;
     bool orgNameFailed = false;
     int orgLoader = -1;
-    int i;
     char localName[MAX_QPATH];
     const char* ext;
     char altName[MAX_QPATH];
@@ -284,7 +280,8 @@ qhandle_t RE_RegisterModel(const char* name)
 
     if (*ext) {
         // Look for the correct loader and use it
-        for (i = 0; i < numModelLoaders; i++) {
+        int i;
+        for (i = 0; i < COUNT_OF(modelLoaders); i++) {
             if (!Q_stricmp(ext, modelLoaders[i].ext)) {
                 // Load
                 hModel = modelLoaders[i].ModelLoader(localName, mod);
@@ -293,7 +290,7 @@ qhandle_t RE_RegisterModel(const char* name)
         }
 
         // A loader was found
-        if (i < numModelLoaders) {
+        if (i < COUNT_OF(modelLoaders)) {
             if (!hModel) {
                 // Loader failed, most likely because the file isn't there;
                 // try again without the extension
@@ -309,7 +306,7 @@ qhandle_t RE_RegisterModel(const char* name)
 
     // Try and find a suitable match using all
     // the model formats supported
-    for (i = 0; i < numModelLoaders; i++) {
+    for (int i = 0; i < COUNT_OF(modelLoaders); i++) {
         if (i == orgLoader)
             continue;
 

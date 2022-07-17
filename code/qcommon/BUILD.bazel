@@ -229,7 +229,10 @@ cc_library(
 
 cc_library(
     name = "base",
-    hdrs = ["attributes.h"],
+    hdrs = [
+        "attributes.h",
+        "lang_util.h",
+    ],
     copts = FULL_WARNINGS,
     visibility = ["//code/renderer:__pkg__"],
 )

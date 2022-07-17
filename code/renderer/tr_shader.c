@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 #include "tr_local.h"
+#include "lang_util.h"
 
 // tr_shader.c -- this file deals with the parsing and definition of shaders
 
@@ -1359,12 +1360,8 @@ surfaceparm <name>
 */
 static void ParseSurfaceParm(char** text)
 {
-    char* token;
-    int numInfoParms = ARRAY_LEN(infoParms);
-    int i;
-
-    token = COM_ParseExt(text, false);
-    for (i = 0; i < numInfoParms; i++) {
+    const char* token = COM_ParseExt(text, false);
+    for (int i = 0; i < COUNT_OF(infoParms); i++) {
         if (!Q_stricmp(token, infoParms[i].name)) {
             shader.surfaceFlags |= infoParms[i].surfaceFlags;
             shader.contentFlags |= infoParms[i].contents;

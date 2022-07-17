@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // cl_scrn.c -- master for refresh, status bar, console, chat, notify, etc
 
 #include "client.h"
+#include "lang_util.h"
 
 bool scr_initialized; // ready to draw
 
@@ -326,7 +327,7 @@ static float values[1024];
 void SCR_DebugGraph(float value)
 {
     values[current] = value;
-    current = (current + 1) % ARRAY_LEN(values);
+    current = (current + 1) % COUNT_OF(values);
 }
 
 void SCR_DrawDebugGraph(void)
@@ -344,7 +345,7 @@ void SCR_DrawDebugGraph(void)
     re.SetColor(NULL);
 
     for (a = 0; a < w; a++) {
-        i = (ARRAY_LEN(values) + current - 1 - (a % ARRAY_LEN(values))) % ARRAY_LEN(values);
+        i = (COUNT_OF(values) + current - 1 - (a % COUNT_OF(values))) % COUNT_OF(values);
         v = values[i];
         v = v * cl_graphscale->integer + cl_graphshift->integer;
 

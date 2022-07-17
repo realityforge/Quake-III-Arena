@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "tr_local.h"
 
 #include "tr_dsa.h"
+#include "lang_util.h"
 
 glconfig_t glConfig;
 glRefConfig_t glRefConfig;
@@ -311,7 +312,6 @@ vidmode_t r_vidModes[] = {
     { "Mode 10: 2048x1536", 2048, 1536, 1 },
     { "Mode 11: 856x480 (wide)", 856, 480, 1 }
 };
-static int s_numVidModes = ARRAY_LEN(r_vidModes);
 
 bool R_GetModeInfo(int* width, int* height, float* windowAspect, int mode)
 {
@@ -321,7 +321,7 @@ bool R_GetModeInfo(int* width, int* height, float* windowAspect, int mode)
     if (mode < -1) {
         return false;
     }
-    if (mode >= s_numVidModes) {
+    if (mode >= COUNT_OF(r_vidModes)) {
         return false;
     }
 
@@ -344,10 +344,8 @@ bool R_GetModeInfo(int* width, int* height, float* windowAspect, int mode)
 
 static void R_ModeList_f(void)
 {
-    int i;
-
     ri.Printf(PRINT_ALL, "\n");
-    for (i = 0; i < s_numVidModes; i++) {
+    for (int i = 0; i < COUNT_OF(r_vidModes); i++) {
         ri.Printf(PRINT_ALL, "%s\n", r_vidModes[i].description);
     }
     ri.Printf(PRINT_ALL, "\n");
@@ -999,13 +997,13 @@ void R_Register(void)
 void R_InitQueries(void)
 {
     if (r_drawSunRays->integer)
-        glGenQueries(ARRAY_LEN(tr.sunFlareQuery), tr.sunFlareQuery);
+        glGenQueries(COUNT_OF(tr.sunFlareQuery), tr.sunFlareQuery);
 }
 
 void R_ShutDownQueries(void)
 {
     if (r_drawSunRays->integer)
-        glDeleteQueries(ARRAY_LEN(tr.sunFlareQuery), tr.sunFlareQuery);
+        glDeleteQueries(COUNT_OF(tr.sunFlareQuery), tr.sunFlareQuery);
 }
 
 void R_Init(void)

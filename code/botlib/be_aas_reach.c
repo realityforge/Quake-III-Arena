@@ -38,6 +38,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_aas_def.h"
 #include "be_aas_reach.h"
 #include "be_interface.h"
+#include "lang_util.h"
 
 extern int Sys_MilliSeconds(void);
 
@@ -1184,7 +1185,7 @@ static int AAS_Reachability_Step_Barrier_WaterJump_WalkOffLedge(int area1num, in
                     trace.endpos[2] += 1;
                     if (AAS_PointAreaNum(trace.endpos) == area2num) {
                         // if not going through a cluster portal
-                        numareas = AAS_TraceAreas(start, end, areas, NULL, ARRAY_LEN(areas));
+                        numareas = AAS_TraceAreas(start, end, areas, NULL, COUNT_OF(areas));
                         for (i = 0; i < numareas; i++)
                             if (AAS_AreaClusterPortal(areas[i]))
                                 break;
@@ -1658,7 +1659,7 @@ static int AAS_Reachability_Jump(int area1num, int area2num)
             // because the predicted jump could have rushed through the area
             VectorMA(move.endpos, -64, dir, teststart);
             teststart[2] += 1;
-            numareas = AAS_TraceAreas(move.endpos, teststart, areas, NULL, ARRAY_LEN(areas));
+            numareas = AAS_TraceAreas(move.endpos, teststart, areas, NULL, COUNT_OF(areas));
             for (j = 0; j < numareas; j++) {
                 if (areas[j] == area2num)
                     break;
@@ -3211,7 +3212,7 @@ static void AAS_Reachability_WalkOffLedge(int areanum)
                             break;
                         }
                         // if not going through a cluster portal
-                        numareas = AAS_TraceAreas(mid, testend, areas, NULL, ARRAY_LEN(areas));
+                        numareas = AAS_TraceAreas(mid, testend, areas, NULL, COUNT_OF(areas));
                         for (p = 0; p < numareas; p++)
                             if (AAS_AreaClusterPortal(areas[p]))
                                 break;

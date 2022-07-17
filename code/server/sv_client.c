@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // sv_client.c -- server code for dealing with clients
 
 #include "server_local.h"
+#include "lang_util.h"
 
 static void SV_CloseDownload(client_t* cl);
 
@@ -444,7 +445,7 @@ void SV_FreeClient(client_t* client)
     int index;
 
     for (index = client->queuedVoipIndex; index < client->queuedVoipPackets; index++) {
-        index %= ARRAY_LEN(client->voipPacket);
+        index %= COUNT_OF(client->voipPacket);
 
         Z_Free(client->voipPacket[index]);
     }
@@ -1624,7 +1625,7 @@ static void SV_UserVoip(client_t* cl, msg_t* msg, bool ignoreData)
             continue; // not addressed to this player.
 
         // Transmit this packet to the client.
-        if (client->queuedVoipPackets >= ARRAY_LEN(client->voipPacket)) {
+        if (client->queuedVoipPackets >= COUNT_OF(client->voipPacket)) {
             Com_Printf("Too many VoIP packets queued for client #%d\n", i);
             continue; // no room for another packet right now.
         }
@@ -1638,7 +1639,7 @@ static void SV_UserVoip(client_t* cl, msg_t* msg, bool ignoreData)
         packet->flags = flags;
         memcpy(packet->data, encoded, packetsize);
 
-        client->voipPacket[(client->queuedVoipIndex + client->queuedVoipPackets) % ARRAY_LEN(client->voipPacket)] = packet;
+        client->voipPacket[(client->queuedVoipIndex + client->queuedVoipPackets) % COUNT_OF(client->voipPacket)] = packet;
         client->queuedVoipPackets++;
     }
 }

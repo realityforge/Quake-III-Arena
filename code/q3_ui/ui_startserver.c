@@ -28,6 +28,7 @@ START SERVER MENU *****
 */
 
 #include "ui_local.h"
+#include "lang_util.h"
 
 #define GAMESERVER_BACK0 "menu/art/back_0"
 #define GAMESERVER_BACK1 "menu/art/back_1"
@@ -1108,7 +1109,7 @@ static void ServerOptions_MenuInit(bool multiplayer)
 
     memset(&s_serveroptions, 0, sizeof(serveroptions_t));
     s_serveroptions.multiplayer = multiplayer;
-    s_serveroptions.gametype = (int)Com_Clamp(0, ARRAY_LEN(gametype_remap2) - 1,
+    s_serveroptions.gametype = (int)Com_Clamp(0, COUNT_OF(gametype_remap2) - 1,
                                               trap_Cvar_VariableValue("g_gametype"));
 
     ServerOptions_Cache();

@@ -27,6 +27,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "../client/client.h"
 #include "../client/snd_local.h"
+#include "lang_util.h"
 
 bool snd_inited = false;
 
@@ -123,16 +124,12 @@ static struct
     { AUDIO_F32MSB, "AUDIO_F32MSB" }
 };
 
-static int formatToStringTableSize = ARRAY_LEN(formatToStringTable);
-
 static void SNDDMA_PrintAudiospec(const char* str, const SDL_AudioSpec* spec)
 {
-    int i;
-    char* fmt = NULL;
-
     Com_Printf("%s:\n", str);
 
-    for (i = 0; i < formatToStringTableSize; i++) {
+    char* fmt = NULL;
+    for (int i = 0; i < COUNT_OF(formatToStringTable); i++) {
         if (spec->format == formatToStringTable[i].enumFormat) {
             fmt = formatToStringTable[i].stringFormat;
         }

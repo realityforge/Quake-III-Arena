@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "g_local.h"
+#include "lang_util.h"
 
 /*
 ===============
@@ -435,8 +436,7 @@ static void ClientTimerActions(gentity_t* ent, int msec)
     if (bg_itemlist[client->ps.stats[STAT_PERSISTANT_POWERUP]].giTag == PW_AMMOREGEN) {
         int w, max, inc, t, i;
         int weapList[] = { WP_MACHINEGUN, WP_SHOTGUN, WP_GRENADE_LAUNCHER, WP_ROCKET_LAUNCHER, WP_LIGHTNING, WP_RAILGUN, WP_PLASMAGUN, WP_BFG, WP_NAILGUN, WP_PROX_LAUNCHER, WP_CHAINGUN };
-        int weapCount = ARRAY_LEN(weapList);
-        for (i = 0; i < weapCount; i++) {
+        for (i = 0; i < COUNT_OF(weapList); i++) {
             w = weapList[i];
 
             switch (w) {

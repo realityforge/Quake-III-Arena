@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // cl_parse.c  -- parse a message received from the server
 
 #include "client.h"
+#include "lang_util.h"
 
 char* svc_strings[256] = {
     "svc_bad",
@@ -746,7 +747,7 @@ static void CL_ParseVoip(msg_t* msg, bool ignoreData)
         }
     }
 
-    numSamples = opus_decode(clc.opusDecoder[sender], encoded, packetsize, decoded + written, ARRAY_LEN(decoded) - written, 0);
+    numSamples = opus_decode(clc.opusDecoder[sender], encoded, packetsize, decoded + written, COUNT_OF(decoded) - written, 0);
 
     if (numSamples <= 0) {
         Com_DPrintf("VoIP: Error decoding voip data from client #%d\n", sender);

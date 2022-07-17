@@ -36,6 +36,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <fcntl.h>
 #include <fenv.h>
 
+#ifndef MISSIONPACK
+#include "lang_util.h"
+#endif
+
 #ifndef __APPLE__
 #include <sys/wait.h>
 #endif
@@ -422,7 +426,7 @@ static void Sys_AppendToExecBuffer(const char* text)
     size_t size = sizeof(execBuffer) - (execBufferPointer - execBuffer);
     int length = strlen(text) + 1;
 
-    if (length > size || execArgc >= ARRAY_LEN(execArgv))
+    if (length > size || execArgc >= COUNT_OF(execArgv))
         return;
 
     Q_strncpyz(execBufferPointer, text, size);

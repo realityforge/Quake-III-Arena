@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "g_local.h"
 #include "plugin.h"
+#include "lang_util.h"
 
 level_locals_t level;
 
@@ -178,8 +179,6 @@ static cvarTable_t gameCvarTable[] = {
 
 };
 
-static int gameCvarTableSize = ARRAY_LEN(gameCvarTable);
-
 void G_InitGame(int levelTime, int randomSeed, int restart);
 void G_RunFrame(int levelTime);
 void G_ShutdownGame(int restart);
@@ -327,11 +326,10 @@ static void G_RemapTeamShaders()
 
 static void G_RegisterCvars()
 {
-    int i;
-    cvarTable_t* cv;
     bool remapped = false;
 
-    for (i = 0, cv = gameCvarTable; i < gameCvarTableSize; i++, cv++) {
+    cvarTable_t* cv = gameCvarTable;
+    for (int i = 0; i < COUNT_OF(gameCvarTable); i++, cv++) {
         trap_Cvar_Register(cv->vmCvar, cv->cvarName,
                            cv->defaultString, cv->cvarFlags);
         if (cv->vmCvar)
@@ -358,11 +356,10 @@ static void G_RegisterCvars()
 
 static void G_UpdateCvars()
 {
-    int i;
-    cvarTable_t* cv;
     bool remapped = false;
 
-    for (i = 0, cv = gameCvarTable; i < gameCvarTableSize; i++, cv++) {
+    cvarTable_t* cv = gameCvarTable;
+    for (int i = 0; i < COUNT_OF(gameCvarTable); i++, cv++) {
         if (cv->vmCvar) {
             trap_Cvar_Update(cv->vmCvar);
 
@@ -726,7 +723,6 @@ and team change.
 */
 void CalculateRanks()
 {
-    int i;
     int rank;
     int score;
     int newScore;
@@ -739,10 +735,10 @@ void CalculateRanks()
     level.numPlayingClients = 0;
     level.numVotingClients = 0; // don't count bots
 
-    for (i = 0; i < ARRAY_LEN(level.numteamVotingClients); i++)
+    for (int i = 0; i < COUNT_OF(level.numteamVotingClients); i++)
         level.numteamVotingClients[i] = 0;
 
-    for (i = 0; i < level.maxclients; i++) {
+    for (int i = 0; i < level.maxclients; i++) {
         if (level.clients[i].pers.connected != CON_DISCONNECTED) {
             level.sortedClients[level.numConnectedClients] = i;
             level.numConnectedClients++;
@@ -776,7 +772,7 @@ void CalculateRanks()
     // set the rank value for all clients that are connected and not spectators
     if (g_gametype.integer >= GT_TEAM) {
         // in team games, rank is just the order of the teams, 0=red, 1=blue, 2=tied
-        for (i = 0; i < level.numConnectedClients; i++) {
+        for (int i = 0; i < level.numConnectedClients; i++) {
             cl = &level.clients[level.sortedClients[i]];
             if (level.teamScores[TEAM_RED] == level.teamScores[TEAM_BLUE]) {
                 cl->ps.persistant[PERS_RANK] = 2;
@@ -789,7 +785,7 @@ void CalculateRanks()
     } else {
         rank = -1;
         score = 0;
-        for (i = 0; i < level.numPlayingClients; i++) {
+        for (int i = 0; i < level.numPlayingClients; i++) {
             cl = &level.clients[level.sortedClients[i]];
             newScore = cl->ps.persistant[PERS_SCORE];
             if (i == 0 || newScore != score) {

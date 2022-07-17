@@ -34,6 +34,7 @@ and one exported function: Perform
 */
 
 #include "vm_local.h"
+#include "lang_util.h"
 
 vm_t* currentVM = NULL;
 vm_t* lastVM = NULL;
@@ -274,7 +275,7 @@ static intptr_t QDECL VM_DllSyscall(intptr_t arg, ...)
     args[0] = arg;
 
     va_start(ap, arg);
-    for (i = 1; i < ARRAY_LEN(args); i++)
+    for (i = 1; i < COUNT_OF(args); i++)
         args[i] = va_arg(ap, intptr_t);
     va_end(ap);
 
@@ -685,7 +686,6 @@ intptr_t QDECL VM_Call(vm_t* vm, int callnum, ...)
 {
     vm_t* oldVM;
     intptr_t r;
-    int i;
 
     if (!vm || !vm->name[0])
         Com_Error(ERR_FATAL, "VM_Call with NULL vm");
@@ -705,7 +705,7 @@ intptr_t QDECL VM_Call(vm_t* vm, int callnum, ...)
         int args[MAX_VMMAIN_ARGS - 1];
         va_list ap;
         va_start(ap, callnum);
-        for (i = 0; i < ARRAY_LEN(args); i++) {
+        for (int i = 0; i < COUNT_OF(args); i++) {
             args[i] = va_arg(ap, int);
         }
         va_end(ap);
@@ -722,7 +722,7 @@ intptr_t QDECL VM_Call(vm_t* vm, int callnum, ...)
 
         a.callnum = callnum;
         va_start(ap, callnum);
-        for (i = 0; i < ARRAY_LEN(a.args); i++) {
+        for (int i = 0; i < COUNT_OF(a.args); i++) {
             a.args[i] = va_arg(ap, int);
         }
         va_end(ap);
