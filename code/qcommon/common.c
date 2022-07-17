@@ -1216,11 +1216,12 @@ Touch all known used data to make sure it is paged in
 */
 void Com_TouchMemory()
 {
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
     int start, end;
     int i, j;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-but-set-variable"
     int sum;
+#pragma clang diagnostic pop
     memblock_t* block;
 
     Z_CheckHeap();
@@ -1255,7 +1256,6 @@ void Com_TouchMemory()
     end = Sys_Milliseconds();
 
     Com_Printf("Com_TouchMemory: %i msec\n", end - start);
-#pragma GCC diagnostic pop
 }
 
 void Com_InitSmallZoneMemory()
