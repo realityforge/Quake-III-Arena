@@ -5430,11 +5430,6 @@ void Menu_Reset()
     menuCount = 0;
 }
 
-displayContextDef_t* Display_GetContext()
-{
-    return DC;
-}
-
 void* Display_CaptureItem(int x, int y)
 {
     int i;
