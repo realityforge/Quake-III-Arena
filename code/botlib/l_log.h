@@ -33,4 +33,4 @@ void Log_Close(void);
 // close log file if present
 void Log_Shutdown(void);
 // write to the current opened log file
-void QDECL Log_Write(char* fmt, ...) __attribute__((format(printf, 1, 2)));
+void QDECL Log_Write(const char* fmt, ...) PRINTF_FUNCTION(1, 2);

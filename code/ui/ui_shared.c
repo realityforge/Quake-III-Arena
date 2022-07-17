@@ -228,7 +228,7 @@ void String_Init()
     }
 }
 
-static __attribute__((format(printf, 2, 3))) void PC_SourceError(int handle, char* format, ...)
+static PRINTF_FUNCTION(2, 3) void PC_SourceError(const int handle, const char* format, ...)
 {
     int line;
     char filename[128];

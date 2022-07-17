@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef UI_SHARED_H
 #define UI_SHARED_H
 
+#include "attributes.h"
 #include "../qcommon/q_shared.h"
 #include "../renderer/tr_types.h"
 #include "../client/keycodes.h"
@@ -344,8 +345,8 @@ typedef struct {
     void (*getBindingBuf)(int keynum, char* buf, int buflen);
     void (*setBinding)(int keynum, const char* binding);
     void (*executeText)(int exec_when, const char* text);
-    void (*Error)(int level, const char* error, ...) __attribute__((noreturn, format(printf, 2, 3)));
-    void (*Print)(const char* msg, ...) __attribute__((format(printf, 1, 2)));
+    void (*Error)(int level, const char* error, ...) PRINTF_FUNCTION(2, 3);
+    void (*Print)(const char* msg, ...) PRINTF_FUNCTION(1, 2);
     void (*Pause)(bool b);
     int (*ownerDrawWidth)(int ownerDraw, float scale);
     sfxHandle_t (*registerSound)(const char* name, bool compressed);

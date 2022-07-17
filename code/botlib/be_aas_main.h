@@ -20,12 +20,14 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
+#include "attributes.h"
+
 #ifdef AASINTERN
 
 extern aas_t aasworld;
 
 // AAS error message
-void QDECL AAS_Error(char* fmt, ...) __attribute__((format(printf, 1, 2)));
+void QDECL AAS_Error(const char* fmt, ...) PRINTF_FUNCTION(1, 2);
 // set AAS initialized
 void AAS_SetInitialized(void);
 // setup AAS with the given number of entities and clients
