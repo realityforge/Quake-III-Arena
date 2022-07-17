@@ -161,7 +161,7 @@ void Sys_UnloadDll(void* dllHandle)
     dlclose(dllHandle);
     err = dlerror();
     if (err != NULL)
-        Com_Printf("Sys_UnloadGame failed on dlclose: \"%s\"!\n", err);
+        Com_Printf("Sys_UnloadDll failed on dlclose: \"%s\"!\n", err);
 }
 
 /*
