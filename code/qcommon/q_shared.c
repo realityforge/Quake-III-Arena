@@ -490,34 +490,6 @@ void SkipRestOfLine(char** data)
     *data = p;
 }
 
-void Parse1DMatrix(char** buf_p, int x, float* m)
-{
-    char* token;
-    int i;
-
-    COM_MatchToken(buf_p, "(");
-
-    for (i = 0; i < x; i++) {
-        token = COM_Parse(buf_p);
-        m[i] = atof(token);
-    }
-
-    COM_MatchToken(buf_p, ")");
-}
-
-void Parse2DMatrix(char** buf_p, int y, int x, float* m)
-{
-    int i;
-
-    COM_MatchToken(buf_p, "(");
-
-    for (i = 0; i < y; i++) {
-        Parse1DMatrix(buf_p, x, m + i * x);
-    }
-
-    COM_MatchToken(buf_p, ")");
-}
-
 int Com_HexStrToInt(const char* str)
 {
     if (!str)
