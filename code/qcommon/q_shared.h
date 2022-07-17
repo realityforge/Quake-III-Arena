@@ -165,8 +165,6 @@ static inline float BigFloat(const float* l)
 
 #if defined(__APPLE__) || defined(__APPLE_CC__)
 
-#define __cdecl
-#define __declspec(x)
 #define stricmp strcasecmp
 
 #ifdef __ppc__
@@ -178,13 +176,6 @@ static inline float BigFloat(const float* l)
 #endif
 
 #define PATH_SEP '/'
-
-#define __rlwimi(out, in, shift, maskBegin, maskEnd) asm("rlwimi %0,%1,%2,%3,%4" \
-                                                         : "=r"(out)             \
-                                                         : "r"(in), "i"(shift), "i"(maskBegin), "i"(maskEnd))
-#define __dcbt(addr, offset) asm("dcbt %0,%1" \
-                                 :            \
-                                 : "b"(addr), "r"(offset))
 
 #define BigShort
 static inline short LittleShort(short l)
