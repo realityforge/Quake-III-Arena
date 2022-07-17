@@ -112,8 +112,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #endif
 
 // for windows fastcall option
-
+#ifdef WIN32
+#define QDECL __cdecl
+#else
 #define QDECL
+#endif
 
 short ShortSwap(short l);
 int LongSwap(int l);
@@ -122,9 +125,6 @@ float FloatSwap(const float* f);
 //======================= WIN32 DEFINES =================================
 
 #ifdef WIN32
-
-#undef QDECL
-#define QDECL __cdecl
 
 // buildstring will be incorporated into the version string
 #ifdef NDEBUG
