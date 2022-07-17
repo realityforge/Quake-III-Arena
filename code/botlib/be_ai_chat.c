@@ -534,7 +534,7 @@ static bot_synonymlist_t* BotLoadSynonyms(char* filename)
                         }
                         StripDoubleQuotes(token.string);
                         if (strlen(token.string) <= 0) {
-                            SourceError(source, "empty string", token.string);
+                            SourceError(source, "empty string");
                             FreeSource(source);
                             return NULL;
                         }
