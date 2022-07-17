@@ -207,6 +207,7 @@ cc_library(
         "//code/ui:__pkg__",
         "//third_party/unzip:__pkg__",
     ],
+    deps = [":base"],
 )
 
 cc_library(

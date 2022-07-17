@@ -24,6 +24,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 // This file is NOT included on native builds
 
+#include "attribute.h"
+
 typedef int size_t;
 
 typedef char* va_list;
@@ -70,7 +72,7 @@ int atoi(const char* string);
 int _atoi(const char** stringPtr);
 
 int vsprintf(char* buffer, const char* fmt, va_list argptr);
-int sscanf(const char* buffer, const char* fmt, ...);
+int sscanf(const char* buffer, const char* fmt, ...) PRINTF_FUNCTION(2, 3);
 
 // Memory functions
 void* memmove(void* dest, const void* src, size_t count);

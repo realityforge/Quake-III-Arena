@@ -23,6 +23,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define TR_PUBLIC_H
 
 #include "tr_types.h"
+#include "attributes.h"
+#include "../qcommon/cvar_engine.h"
 
 #define REF_API_VERSION 8
 
@@ -103,10 +105,10 @@ typedef struct {
 //
 typedef struct {
     // print message on the local console
-    void(QDECL* Printf)(int printLevel, const char* fmt, ...);
+    void(QDECL* Printf)(int printLevel, const char* fmt, ...) PRINTF_FUNCTION(2, 3);
 
     // abort the game
-    void(QDECL* Error)(int errorLevel, const char* fmt, ...);
+    void(QDECL* Error)(int errorLevel, const char* fmt, ...) NORETURN PRINTF_FUNCTION(2, 3);
 
     // milliseconds should only be used for profiling, never
     // for anything game related.  Get time from the refdef

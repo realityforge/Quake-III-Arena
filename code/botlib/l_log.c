@@ -75,7 +75,7 @@ void Log_Shutdown()
     if (logfile.fp)
         Log_Close();
 }
-void QDECL Log_Write(char* fmt, ...)
+void QDECL Log_Write(const char* fmt, ...)
 {
     va_list ap;
 

@@ -846,7 +846,7 @@ done:
     vm->currentlyInterpreting = false;
 
     if (opStack != &stack[1]) {
-        Com_Error(ERR_DROP, "Interpreter error: opStack = %i", opStack - stack);
+        Com_Error(ERR_DROP, "Interpreter error: opStack = %ld", opStack - stack);
     }
 
     vm->programStack = stackOnEntry;

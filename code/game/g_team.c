@@ -92,7 +92,7 @@ const char* OtherTeamName(int team)
 }
 
 // NULL for everyone
-static void QDECL PrintMsg(gentity_t* ent, const char* fmt, ...)
+static void PRINTF_FUNCTION(2, 3) QDECL PrintMsg(gentity_t* ent, const char* fmt, ...)
 {
     char msg[1024];
     va_list argptr;

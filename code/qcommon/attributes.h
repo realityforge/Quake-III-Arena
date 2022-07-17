@@ -43,4 +43,10 @@
 #endif
 #endif
 
+#if defined(__clang__) || defined(__GNUC__)
+#define PRINTF_FUNCTION(format_position, varargs_start_position) __attribute__((format(printf, format_position, varargs_start_position)))
+#else
+#define PRINTF_FUNCTION(format_position, varargs_start_position)
+#endif
+
 #endif

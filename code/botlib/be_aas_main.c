@@ -39,7 +39,7 @@ aas_t aasworld;
 
 libvar_t* saveroutingcache;
 
-void QDECL AAS_Error(char* fmt, ...)
+void QDECL AAS_Error(const char* fmt, ...)
 {
     char str[1024];
     va_list arglist;

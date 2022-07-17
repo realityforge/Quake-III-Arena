@@ -119,13 +119,13 @@ static bool ReadNumber(source_t* source, fielddef_t* fd, void* p)
             intmax = Minimum(intmax, fd->floatmax);
         }
         if (intval < intmin || intval > intmax) {
-            SourceError(source, "value %d out of range [%d, %d]", intval, intmin, intmax);
+            SourceError(source, "value %ld out of range [%ld, %ld]", intval, intmin, intmax);
             return 0;
         }
     } else if ((fd->type & FT_TYPE) == FT_FLOAT) {
         if (fd->type & FT_BOUNDED) {
             if (intval < fd->floatmin || intval > fd->floatmax) {
-                SourceError(source, "value %d out of range [%f, %f]", intval, fd->floatmin, fd->floatmax);
+                SourceError(source, "value %ld out of range [%f, %f]", intval, fd->floatmin, fd->floatmax);
                 return 0;
             }
         }

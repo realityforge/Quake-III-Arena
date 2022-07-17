@@ -47,7 +47,7 @@ int numtokens;
 // list with global defines added to every source loaded
 define_t* globaldefines;
 
-void QDECL SourceError(source_t* source, char* str, ...)
+void QDECL SourceError(source_t* source, const char* str, ...)
 {
     char text[1024];
     va_list ap;
@@ -57,7 +57,7 @@ void QDECL SourceError(source_t* source, char* str, ...)
     va_end(ap);
     botimport.Print(PRT_ERROR, "file %s, line %d: %s\n", source->scriptstack->filename, source->scriptstack->line, text);
 }
-void QDECL SourceWarning(source_t* source, char* str, ...)
+void QDECL SourceWarning(source_t* source, const char* str, ...)
 {
     char text[1024];
     va_list ap;

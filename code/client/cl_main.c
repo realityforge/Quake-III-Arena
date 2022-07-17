@@ -1805,7 +1805,7 @@ CL_RefPrintf
 DLL glue
 ================
 */
-void QDECL CL_RefPrintf(int print_level, const char* fmt, ...)
+void PRINTF_FUNCTION(2, 3) QDECL CL_RefPrintf(int print_level, const char* fmt, ...) PRINTF_FUNCTION(2, 3)
 {
     va_list argptr;
     char msg[MAXPRINTMSG];

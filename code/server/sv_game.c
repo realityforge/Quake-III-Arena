@@ -272,10 +272,10 @@ static int SV_GameSystemCalls(int* args)
 {
     switch (args[0]) {
     case G_PRINT:
-        Com_Printf("%s", VMA(1));
+        Com_Printf("%s", (const char*)VMA(1));
         return 0;
     case G_ERROR:
-        Com_Error(ERR_DROP, "%s", VMA(1));
+        Com_Error(ERR_DROP, "%s", (const char*)VMA(1));
         return 0;
     case G_MILLISECONDS:
         return Sys_Milliseconds();

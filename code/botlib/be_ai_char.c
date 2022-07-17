@@ -84,7 +84,7 @@ static void BotDumpCharacter(bot_character_t* ch)
     int i;
 
     Log_Write("%s", ch->filename);
-    Log_Write("skill %d\n", ch->skill);
+    Log_Write("skill %f\n", ch->skill);
     Log_Write("{\n");
     for (i = 0; i < MAX_CHARACTERISTICS; i++) {
         switch (ch->c[i].type) {
