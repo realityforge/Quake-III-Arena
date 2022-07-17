@@ -15,6 +15,7 @@
 #ifndef ATTRIBUTES_H
 #define ATTRIBUTES_H
 
+// The symbol marked by this attribute may be unused
 #ifndef UNUSED
 #if defined(__GNUC__)
 #define UNUSED __attribute__((unused))
@@ -23,6 +24,7 @@
 #endif
 #endif
 
+// The function marked by this attribute is exported from a shared library
 #ifndef EXPORT
 #if defined(_MSC_VER)
 #define EXPORT UNUSED __declspec(dllexport)
@@ -33,6 +35,7 @@
 #endif
 #endif
 
+// The function marked this attribute never returns
 #ifndef NORETURN
 #if defined(__GNUC__)
 #define NORETURN __attribute__((noreturn))
@@ -43,6 +46,7 @@
 #endif
 #endif
 
+// The function marked by this attribute has a formatting string similar to printf and a variable number of data arguments
 #if defined(__clang__) || defined(__GNUC__)
 #define PRINTF_FUNCTION(format_position, varargs_start_position) __attribute__((format(printf, format_position, varargs_start_position)))
 #else
