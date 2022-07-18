@@ -324,7 +324,7 @@ Assuming all the triangles for this shader are independent
 quads, rebuild them as forward facing sprites
 =====================
 */
-static void AutospriteDeform(void)
+static void AutospriteDeform()
 {
     int i;
     int oldVerts;
@@ -407,7 +407,7 @@ int edgeVerts[6][2] = {
     { 2, 3 }
 };
 
-static void Autosprite2Deform(void)
+static void Autosprite2Deform()
 {
     int i, j, k;
     int indexes;
@@ -510,7 +510,7 @@ static void Autosprite2Deform(void)
     }
 }
 
-void RB_DeformTessGeometry(void)
+void RB_DeformTessGeometry()
 {
     int i;
     deformStage_t* ds;

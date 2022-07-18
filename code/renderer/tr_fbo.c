@@ -193,7 +193,7 @@ void FBO_Bind(FBO_t* fbo)
     glState.currentFBO = fbo;
 }
 
-void FBO_Init(void)
+void FBO_Init()
 {
     int i;
     int hdrFormat, multisample = 0;
@@ -344,7 +344,7 @@ void FBO_Init(void)
     glState.currentFBO = NULL;
 }
 
-void FBO_Shutdown(void)
+void FBO_Shutdown()
 {
     int i, j;
     FBO_t* fbo;

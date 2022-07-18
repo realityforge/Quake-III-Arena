@@ -300,7 +300,7 @@ static glyphInfo_t* RE_ConstructGlyphInfo(unsigned char* imageOut, int* xOut, in
 static int fdOffset;
 static uint8_t* fdFile;
 
-static int readInt(void)
+static int readInt()
 {
     unsigned int i = ((unsigned int)fdFile[fdOffset] | ((unsigned int)fdFile[fdOffset + 1] << 8) | ((unsigned int)fdFile[fdOffset + 2] << 16) | ((unsigned int)fdFile[fdOffset + 3] << 24));
     fdOffset += 4;
@@ -312,7 +312,7 @@ typedef union {
     float ffred;
 } poor;
 
-static float readFloat(void)
+static float readFloat()
 {
     poor me;
 #if defined Q3_BIG_ENDIAN
@@ -537,7 +537,7 @@ void RE_RegisterFont(const char* fontName, int pointSize, fontInfo_t* font)
 #endif
 }
 
-void R_InitFreeType(void)
+void R_InitFreeType()
 {
 #ifdef BUILD_FREETYPE
     if (FT_Init_FreeType(&ftLibrary)) {
@@ -547,7 +547,7 @@ void R_InitFreeType(void)
     registeredFontCount = 0;
 }
 
-void R_DoneFreeType(void)
+void R_DoneFreeType()
 {
 #ifdef BUILD_FREETYPE
     if (ftLibrary) {

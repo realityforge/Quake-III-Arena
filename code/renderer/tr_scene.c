@@ -35,7 +35,7 @@ int r_firstScenePoly;
 
 int r_numpolyverts;
 
-void R_ResetFrameCounts(void)
+void R_ResetFrameCounts()
 {
     backEndData->commands.used = 0;
 
@@ -53,7 +53,7 @@ void R_ResetFrameCounts(void)
     r_numpolyverts = 0;
 }
 
-void RE_ClearScene(void)
+void RE_ClearScene()
 {
     r_firstSceneDlight = r_numdlights;
     r_firstSceneEntity = r_numentities;
@@ -75,7 +75,7 @@ R_AddPolygonSurfaces
 Adds all the scene's polys into this view's drawsurf list
 =====================
 */
-void R_AddPolygonSurfaces(void)
+void R_AddPolygonSurfaces()
 {
     int i;
     shader_t* sh;
@@ -366,7 +366,7 @@ void RE_BeginScene(const refdef_t* fd)
     tr.sceneCount++;
 }
 
-void RE_EndScene(void)
+void RE_EndScene()
 {
     // the next scene rendered in this frame will tack on after this one
     r_firstSceneDrawSurf = tr.refdef.numDrawSurfs;

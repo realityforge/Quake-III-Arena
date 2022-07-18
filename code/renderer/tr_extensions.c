@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "tr_local.h"
 
-void GLimp_InitExtraExtensions(void)
+void GLimp_InitExtraExtensions()
 {
     const char* result[3] = { "...ignoring %s\n", "...using %s\n", "...%s not found\n" };
 

@@ -179,7 +179,7 @@ void R_BindVao(vao_t* vao)
     }
 }
 
-void R_BindNullVao(void)
+void R_BindNullVao()
 {
     if (glState.currentVao) {
         if (glRefConfig.vertexArrayObject) {
@@ -198,7 +198,7 @@ void R_BindNullVao(void)
     GL_CheckErrors();
 }
 
-void R_InitVaos(void)
+void R_InitVaos()
 {
     int vertexesSize, indexesSize;
     int offset;
@@ -293,7 +293,7 @@ void R_InitVaos(void)
     GL_CheckErrors();
 }
 
-void R_ShutdownVaos(void)
+void R_ShutdownVaos()
 {
     int i;
     vao_t* vao;
@@ -439,7 +439,7 @@ static struct
     int indexOffset;
 } vc;
 
-void VaoCache_Commit(void)
+void VaoCache_Commit()
 {
     buffered_t* indexSet;
     int* batchLength;
@@ -524,7 +524,7 @@ void VaoCache_Commit(void)
     }
 }
 
-void VaoCache_Init(void)
+void VaoCache_Init()
 {
     vc.vao = R_CreateVao("VaoCache", NULL, VAOCACHE_VERTEX_BUFFER_SIZE, NULL, VAOCACHE_INDEX_BUFFER_SIZE, VAO_USAGE_DYNAMIC);
 
@@ -587,7 +587,7 @@ void VaoCache_Init(void)
     vcq.numSurfaces = 0;
 }
 
-void VaoCache_BindVao(void)
+void VaoCache_BindVao()
 {
     R_BindVao(vc.vao);
 }
@@ -638,14 +638,14 @@ void VaoCache_CheckAdd(bool* endSurface, bool* recycleVertexBuffer, bool* recycl
     }
 }
 
-void VaoCache_RecycleVertexBuffer(void)
+void VaoCache_RecycleVertexBuffer()
 {
     glBindBuffer(GL_ARRAY_BUFFER, vc.vao->vertexesVBO);
     glBufferData(GL_ARRAY_BUFFER, vc.vao->vertexesSize, NULL, GL_DYNAMIC_DRAW);
     vc.vertexOffset = 0;
 }
 
-void VaoCache_RecycleIndexBuffer(void)
+void VaoCache_RecycleIndexBuffer()
 {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vc.vao->indexesIBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, vc.vao->indexesSize, NULL, GL_DYNAMIC_DRAW);
@@ -654,7 +654,7 @@ void VaoCache_RecycleIndexBuffer(void)
     vc.numBatches = 0;
 }
 
-void VaoCache_InitQueue(void)
+void VaoCache_InitQueue()
 {
     vcq.vertexCommitSize = 0;
     vcq.indexCommitSize = 0;

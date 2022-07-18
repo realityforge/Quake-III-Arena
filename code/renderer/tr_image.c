@@ -110,7 +110,7 @@ void GL_TextureMode(const char* string)
     }
 }
 
-int R_SumOfUsedImages(void)
+int R_SumOfUsedImages()
 {
     int total;
     int i;
@@ -125,7 +125,7 @@ int R_SumOfUsedImages(void)
     return total;
 }
 
-void R_ImageList_f(void)
+void R_ImageList_f()
 {
     int i;
     int estTotalSize = 0;
@@ -2138,7 +2138,7 @@ image_t* R_FindImageFile(const char* name, imgType_t type, imgFlags_t flags)
 }
 
 #define DLIGHT_SIZE 16
-static void R_CreateDlightImage(void)
+static void R_CreateDlightImage()
 {
     int x, y;
     uint8_t data[DLIGHT_SIZE][DLIGHT_SIZE][4];
@@ -2163,7 +2163,7 @@ static void R_CreateDlightImage(void)
     tr.dlightImage = R_CreateImage("*dlight", (uint8_t*)data, DLIGHT_SIZE, DLIGHT_SIZE, IMGTYPE_COLORALPHA, IMGFLAG_CLAMPTOEDGE, 0);
 }
 
-void R_InitFogTable(void)
+void R_InitFogTable()
 {
     int i;
     float d;
@@ -2216,7 +2216,7 @@ float R_FogFactor(float s, float t)
 
 #define FOG_S 256
 #define FOG_T 32
-static void R_CreateFogImage(void)
+static void R_CreateFogImage()
 {
     int x, y;
     uint8_t* data;
@@ -2238,7 +2238,7 @@ static void R_CreateFogImage(void)
 }
 
 #define DEFAULT_SIZE 16
-static void R_CreateDefaultImage(void)
+static void R_CreateDefaultImage()
 {
     int x;
     uint8_t data[DEFAULT_SIZE][DEFAULT_SIZE][4];
@@ -2366,7 +2366,7 @@ static void R_CreateBuiltinImages()
     }
 }
 
-void R_SetColorMappings(void)
+void R_SetColorMappings()
 {
     int i, j;
     float g;
@@ -2431,7 +2431,7 @@ void R_SetColorMappings(void)
     }
 }
 
-void R_InitImages(void)
+void R_InitImages()
 {
     memset(hashTable, 0, sizeof(hashTable));
     // build brightness translation tables
@@ -2441,7 +2441,7 @@ void R_InitImages(void)
     R_CreateBuiltinImages();
 }
 
-void R_DeleteTextures(void)
+void R_DeleteTextures()
 {
     int i;
 
@@ -2664,7 +2664,7 @@ qhandle_t RE_RegisterSkin(const char* name)
     return hSkin;
 }
 
-void R_InitSkins(void)
+void R_InitSkins()
 {
     skin_t* skin;
 
@@ -2686,7 +2686,7 @@ skin_t* R_GetSkinByHandle(qhandle_t hSkin)
     return tr.skins[hSkin];
 }
 
-void R_SkinList_f(void)
+void R_SkinList_f()
 {
     int i, j;
     skin_t* skin;

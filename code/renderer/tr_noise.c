@@ -35,7 +35,7 @@ static float GetNoiseValue(int x, int y, int z, int t)
     return s_noise_table[INDEX(x, y, z, t)];
 }
 
-void R_NoiseInit(void)
+void R_NoiseInit()
 {
     for (int i = 0; i < NOISE_SIZE; i++) {
         s_noise_table[i] = (float)((((float)(rand()) / (float)RAND_MAX) * 2.0F - 1.0F));

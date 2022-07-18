@@ -34,7 +34,7 @@ static struct
     GLuint renderbuffer;
 } glDsaState;
 
-void GL_BindNullTextures(void)
+void GL_BindNullTextures()
 {
     for (int i = 0; i < NUM_TEXTURE_BUNDLES; i++) {
         glActiveTexture(GL_TEXTURE0 + i);
@@ -125,7 +125,7 @@ GLvoid APIENTRY GLDSA_GenerateTextureMipmapEXT(GLuint texture, GLenum target)
     glGenerateMipmap(target);
 }
 
-void GL_BindNullProgram(void)
+void GL_BindNullProgram()
 {
     glUseProgram(0);
     glDsaState.program = 0;
@@ -189,7 +189,7 @@ GLvoid APIENTRY GLDSA_ProgramUniformMatrix4fvEXT(GLuint program, GLint location,
     glUniformMatrix4fv(location, count, transpose, value);
 }
 
-void GL_BindNullFramebuffers(void)
+void GL_BindNullFramebuffers()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glDsaState.drawFramebuffer = glDsaState.readFramebuffer = 0;

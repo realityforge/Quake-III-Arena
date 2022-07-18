@@ -85,7 +85,7 @@ flare_t *r_activeFlares, *r_inactiveFlares;
 
 int flareCoeff;
 
-static void R_SetFlareCoeff(void)
+static void R_SetFlareCoeff()
 {
 
     if (r_flareCoeff->value == 0.0f)
@@ -94,7 +94,7 @@ static void R_SetFlareCoeff(void)
         flareCoeff = r_flareCoeff->value;
 }
 
-void R_ClearFlares(void)
+void R_ClearFlares()
 {
     int i;
 
@@ -399,7 +399,7 @@ when occluded by something in the main view, and portal flares that should
 extend past the portal edge will be overwritten.
 ==================
 */
-void RB_RenderFlares(void)
+void RB_RenderFlares()
 {
     flare_t* f;
     flare_t** prev;

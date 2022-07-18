@@ -209,7 +209,7 @@ static void ClipSkyPolygon(int nump, vec3_t vecs, int stage)
     ClipSkyPolygon(newc[1], newv[1][0], stage + 1);
 }
 
-static void ClearSkyBox(void)
+static void ClearSkyBox()
 {
     int i;
 
@@ -739,7 +739,7 @@ All of the visible sky triangles are in tess
 Other things could be stuck in here, like birds in the sky, etc
 ================
 */
-void RB_StageIteratorSky(void)
+void RB_StageIteratorSky()
 {
     if (r_fastsky->integer) {
         return;

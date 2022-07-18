@@ -241,7 +241,7 @@ RB_Hyperspace
 A player has predicted a teleport, but hasn't arrived yet
 ================
 */
-static void RB_Hyperspace(void)
+static void RB_Hyperspace()
 {
     float c;
 
@@ -257,7 +257,7 @@ static void RB_Hyperspace(void)
     backEnd.isHyperspace = true;
 }
 
-static void SetViewportAndScissor(void)
+static void SetViewportAndScissor()
 {
     GL_SetProjectionMatrix(backEnd.viewParms.projectionMatrix);
 
@@ -1078,7 +1078,7 @@ was there.  This is used to test for texture thrashing.
 Also called by RE_EndRegistration
 ===============
 */
-void RB_ShowImages(void)
+void RB_ShowImages()
 {
     int i;
     image_t* image;

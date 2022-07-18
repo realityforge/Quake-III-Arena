@@ -239,7 +239,7 @@ static void RB_RadialBlur(FBO_t* srcFbo, FBO_t* dstFbo, int passes, float stretc
     }
 }
 
-static bool RB_UpdateSunFlareVis(void)
+static bool RB_UpdateSunFlareVis()
 {
     GLuint sampleCount = 0;
 

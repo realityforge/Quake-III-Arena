@@ -52,7 +52,7 @@ triangleFromEdge[ v1 ][ v2 ]
   }
 =================
 */
-void RB_ShadowTessEnd(void)
+void RB_ShadowTessEnd()
 {
     // FIXME: implement this
 }
@@ -67,12 +67,12 @@ because otherwise shadows from different body parts would
 overlap and double darken.
 =================
 */
-void RB_ShadowFinish(void)
+void RB_ShadowFinish()
 {
     // FIXME: implement this
 }
 
-void RB_ProjectionShadowDeform(void)
+void RB_ProjectionShadowDeform()
 {
     float* xyz;
     int i;

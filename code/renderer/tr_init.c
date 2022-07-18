@@ -230,7 +230,7 @@ void R_PrintGLError(const char* error_message)
 ** setting variables, checking GL constants, and reporting the gfx system config
 ** to the user.
 */
-static void InitOpenGL(void)
+static void InitOpenGL()
 {
     // initialize OS specific portions of the renderer
     //
@@ -342,7 +342,7 @@ bool R_GetModeInfo(int* width, int* height, float* windowAspect, int mode)
     return true;
 }
 
-static void R_ModeList_f(void)
+static void R_ModeList_f()
 {
     ri.Printf(PRINT_ALL, "\n");
     for (int i = 0; i < COUNT_OF(r_vidModes); i++) {
@@ -496,7 +496,7 @@ screenshot [filename]
 Doesn't print the pacifier message if there is a second arg
 ==================
 */
-void R_ScreenShot_f(void)
+void R_ScreenShot_f()
 {
     char checkname[MAX_OSPATH] = { 0 };
     static int lastNumber = -1;
@@ -634,7 +634,7 @@ const void* RB_TakeVideoFrameCmd(const void* data)
 /*
 ** GL_SetDefaultState
 */
-void GL_SetDefaultState(void)
+void GL_SetDefaultState()
 {
     glClearDepth(1.0f);
 
@@ -704,7 +704,7 @@ static void R_PrintLongString(const char* string)
     }
 }
 
-void GfxInfo_f(void)
+void GfxInfo_f()
 {
     const char* enablestrings[] = {
         "disabled",
@@ -760,7 +760,7 @@ void GfxInfo_f(void)
     }
 }
 
-void GfxMemInfo_f(void)
+void GfxMemInfo_f()
 {
     switch (glRefConfig.memInfo) {
     case MI_NONE: {
@@ -1006,7 +1006,7 @@ static void R_ShutDownQueries()
         glDeleteQueries(COUNT_OF(tr.sunFlareQuery), tr.sunFlareQuery);
 }
 
-void R_Init(void)
+void R_Init()
 {
     int err;
     int i;

@@ -837,7 +837,7 @@ static void GLSL_DeleteGPUShader(shaderProgram_t* program)
     }
 }
 
-void GLSL_InitGPUShaders(void)
+void GLSL_InitGPUShaders()
 {
     int startTime, endTime;
     int i;
@@ -1298,7 +1298,7 @@ void GLSL_InitGPUShaders(void)
               numEtcShaders, (endTime - startTime) / 1000.0);
 }
 
-void GLSL_ShutdownGPUShaders(void)
+void GLSL_ShutdownGPUShaders()
 {
     int i;
 

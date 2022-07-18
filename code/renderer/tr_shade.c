@@ -299,7 +299,7 @@ static void ComputeDeformValues(int* deformGen, vec5_t deformParams)
     }
 }
 
-static void ProjectDlightTexture(void)
+static void ProjectDlightTexture()
 {
     int l;
     vec3_t origin;
@@ -550,7 +550,7 @@ static void ComputeFogColorMask(shaderStage_t* pStage, vec4_t fogColorMask)
     }
 }
 
-static void ForwardDlight(void)
+static void ForwardDlight()
 {
     int l;
     // vec3_t	origin;
@@ -714,7 +714,7 @@ static void ForwardDlight(void)
     }
 }
 
-static void ProjectPshadowVBOGLSL(void)
+static void ProjectPshadowVBOGLSL()
 {
     int l;
     vec3_t origin;
@@ -788,7 +788,7 @@ RB_FogPass
 Blends a fog texture on top of everything else
 ===================
 */
-static void RB_FogPass(void)
+static void RB_FogPass()
 {
     fog_t* fog;
     vec4_t color;
@@ -1256,7 +1256,7 @@ static void RB_RenderShadowmap(shaderCommands_t* input)
 /*
 ** RB_StageIteratorGeneric
 */
-void RB_StageIteratorGeneric(void)
+void RB_StageIteratorGeneric()
 {
     shaderCommands_t* input;
     unsigned int vertexAttribs = 0;
@@ -1364,7 +1364,7 @@ void RB_StageIteratorGeneric(void)
 /*
 ** RB_EndSurface
 */
-void RB_EndSurface(void)
+void RB_EndSurface()
 {
     shaderCommands_t* input;
 
