@@ -215,9 +215,6 @@ void EA_View(int client, vec3_t viewangles)
 
     VectorCopy(viewangles, bi->viewangles);
 }
-void EA_EndRegular(int client, float thinktime)
-{
-}
 void EA_GetInput(int client, float thinktime, bot_input_t* input)
 {
     bot_input_t* bi;

@@ -562,9 +562,6 @@ static intptr_t SV_GameSystemCalls(intptr_t* args)
         botlib_export->ea.EA_View(args[1], VMA(2));
         return 0;
 
-    case BOTLIB_EA_END_REGULAR:
-        botlib_export->ea.EA_EndRegular(args[1], VMF(2));
-        return 0;
     case BOTLIB_EA_GET_INPUT:
         botlib_export->ea.EA_GetInput(args[1], VMF(2), VMA(3));
         return 0;
