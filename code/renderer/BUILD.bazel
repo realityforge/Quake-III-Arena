@@ -86,14 +86,12 @@ cc_library(
 
 cc_library(
     name = "local",
-    srcs = [
+    hdrs = [
         "tr_extramath.h",
         "tr_extratypes.h",
-        "tr_postprocess.h",
-    ],
-    hdrs = [
         "tr_fbo.h",
         "tr_local.h",
+        "tr_postprocess.h",
     ],
     includes = ["."],
 )
