@@ -3283,7 +3283,7 @@ static void AAS_StoreReachability()
 //
 // Returns:				true if NOT finished
 //===========================================================================
-int AAS_ContinueInitReachability(float time)
+int AAS_ContinueInitReachability()
 {
     int i, j, todo, start_time;
     static float framereachability, reachability_delay;
