@@ -340,7 +340,7 @@ typedef struct ai_export_s {
     int (*BotLoadItemWeights)(int goalstate, char* filename);
     void (*BotFreeItemWeights)(int goalstate);
     void (*BotInterbreedGoalFuzzyLogic)(int parent1, int parent2, int child);
-    void (*BotMutateGoalFuzzyLogic)(int goalstate, float range);
+    void (*BotMutateGoalFuzzyLogic)(int goalstate);
     int (*BotAllocGoalState)(int client);
     void (*BotFreeGoalState)(int handle);
     //-----------------------------------
