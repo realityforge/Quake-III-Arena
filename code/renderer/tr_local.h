@@ -33,7 +33,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 typedef unsigned int glIndex_t;
 
 // fast float to int conversion
-#if id386 && !(defined __linux__) && (defined __i386__))
+#if id386 && !(defined __linux__) && (defined __i386__)
 long myftol(float f);
 #else
 #define myftol(x) ((int)(x))
