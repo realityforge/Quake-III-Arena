@@ -5101,7 +5101,6 @@ Hacks to fix issues with Team Arena menu scripts
 */
 static void Item_ApplyHacks(itemDef_t* item)
 {
-
     // Fix length of favorite address in createfavorite.menu
     if (item->type == ITEM_TYPE_EDITFIELD && item->cvar && !Q_stricmp(item->cvar, "ui_favoriteAddress")) {
         editFieldDef_t* editField = (editFieldDef_t*)item->typeData;
