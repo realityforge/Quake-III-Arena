@@ -325,9 +325,6 @@ int BotChooseBestFightWeapon(int weaponstate, int* inventory)
     }
     return bestweapon;
 }
-void BotResetWeaponState(int weaponstate)
-{
-}
 int BotAllocWeaponState()
 {
     int i;

@@ -381,7 +381,6 @@ static void Init_AI_Export(ai_export_t* ai)
     ai->BotLoadWeaponWeights = BotLoadWeaponWeights;
     ai->BotAllocWeaponState = BotAllocWeaponState;
     ai->BotFreeWeaponState = BotFreeWeaponState;
-    ai->BotResetWeaponState = BotResetWeaponState;
     //-----------------------------------
     // be_ai_gen.h
     //-----------------------------------

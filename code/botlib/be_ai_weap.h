@@ -88,5 +88,3 @@ int BotLoadWeaponWeights(int weaponstate, char* filename);
 int BotAllocWeaponState(void);
 // frees the weapon state
 void BotFreeWeaponState(int weaponstate);
-// resets the whole weapon state
-void BotResetWeaponState(int weaponstate);

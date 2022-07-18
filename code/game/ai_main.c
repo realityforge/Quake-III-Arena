@@ -1057,8 +1057,6 @@ void BotResetState(bot_state_t* bs)
         trap_BotResetMoveState(bs->ms);
     if (bs->gs)
         trap_BotResetGoalState(bs->gs);
-    if (bs->ws)
-        trap_BotResetWeaponState(bs->ws);
     if (bs->gs)
         trap_BotResetAvoidGoals(bs->gs);
     if (bs->ms)

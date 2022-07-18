@@ -755,9 +755,6 @@ static intptr_t SV_GameSystemCalls(intptr_t* args)
     case BOTLIB_AI_FREE_WEAPON_STATE:
         botlib_export->ai.BotFreeWeaponState(args[1]);
         return 0;
-    case BOTLIB_AI_RESET_WEAPON_STATE:
-        botlib_export->ai.BotResetWeaponState(args[1]);
-        return 0;
 
     case BOTLIB_AI_GENETIC_PARENTS_AND_CHILD_SELECTION:
         return botlib_export->ai.GeneticParentsAndChildSelection(args[1], VMA(2), VMA(3), VMA(4), VMA(5));
