@@ -459,8 +459,6 @@ static void GraphicsOptions_CheckConfig()
             continue;
         if (s_ivo_templates[i].filter != s_graphicsoptions.filter.curvalue)
             continue;
-        //		if ( s_ivo_templates[i].texturebits != s_graphicsoptions.texturebits.curvalue )
-        //			continue;
         s_graphicsoptions.list.curvalue = i;
         return;
     }
