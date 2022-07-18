@@ -62,7 +62,7 @@ typedef struct {
     int minimize, maximize;
 } textureMode_t;
 
-textureMode_t modes[] = {
+static textureMode_t modes[] = {
     { "GL_NEAREST", GL_NEAREST, GL_NEAREST },
     { "GL_LINEAR", GL_LINEAR, GL_LINEAR },
     { "GL_NEAREST_MIPMAP_NEAREST", GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST },
