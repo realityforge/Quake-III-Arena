@@ -217,8 +217,7 @@ static int GLimp_SetMode(const int mode, const bool fullscreen, const bool nobor
         } else {
             glConfig.vidWidth = 640;
             glConfig.vidHeight = 480;
-            ri.Printf(PRINT_ALL,
-                      "Cannot determine display resolution, assuming 640x480\n");
+            ri.Printf(PRINT_ALL, "Cannot determine display resolution, assuming 640x480\n");
         }
 
         glConfig.windowAspect = (float)glConfig.vidWidth / (float)glConfig.vidHeight;
