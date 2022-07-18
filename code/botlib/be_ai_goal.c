@@ -196,12 +196,9 @@ void BotInterbreedGoalFuzzyLogic(int parent1, int parent2, int child)
     InterbreedWeightConfigs(p1->itemweightconfig, p2->itemweightconfig,
                             c->itemweightconfig);
 }
-void BotMutateGoalFuzzyLogic(int goalstate, float range)
+void BotMutateGoalFuzzyLogic(int goalstate)
 {
-    bot_goalstate_t* gs;
-
-    gs = BotGoalStateFromHandle(goalstate);
-
+    const bot_goalstate_t* gs = BotGoalStateFromHandle(goalstate);
     EvolveWeightConfig(gs->itemweightconfig);
 }
 static itemconfig_t* LoadItemConfig(char* filename)
