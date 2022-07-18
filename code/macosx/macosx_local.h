@@ -106,9 +106,6 @@ extern glwstate_t glw_state;
         glw_state._ctx_is_current = NO;        \
     } while (0)
 
-extern void Sys_PauseGL();
-extern void Sys_ResumeGL();
-
 #import "macosx_timers.h"
 
 #ifdef OMNI_TIMER
