@@ -209,16 +209,16 @@ static cvarTable_t cvarTable[] = {
 
 void UI_RegisterCvars()
 {
-    cvarTable_t* cv = cvarTable;
-    for (int i = 0; i < COUNT_OF(cvarTable); i++, cv++) {
+    for (int i = 0; i < COUNT_OF(cvarTable); i++) {
+        const cvarTable_t* cv = &cvarTable[i];
         trap_Cvar_Register(cv->vmCvar, cv->cvarName, cv->defaultString, cv->cvarFlags);
     }
 }
 
 void UI_UpdateCvars()
 {
-    cvarTable_t* cv = cvarTable;
-    for (int i = 0; i < COUNT_OF(cvarTable); i++, cv++) {
+    for (int i = 0; i < COUNT_OF(cvarTable); i++) {
+        const cvarTable_t* cv = &cvarTable[i];
         if (!cv->vmCvar) {
             continue;
         }

@@ -324,8 +324,8 @@ static cvarTable_t cvarTable[] = {
 
 static void CG_RegisterCvars()
 {
-    cvarTable_t* cv = cvarTable;
-    for (int i = 0; i < COUNT_OF(cvarTable); i++, cv++) {
+    for (int i = 0; i < COUNT_OF(cvarTable); i++) {
+        const cvarTable_t* cv = &cvarTable[i];
         trap_Cvar_Register(cv->vmCvar, cv->cvarName,
                            cv->defaultString, cv->cvarFlags);
     }
@@ -365,8 +365,8 @@ static void CG_ForceModelChange()
 
 void CG_UpdateCvars()
 {
-    cvarTable_t* cv = cvarTable;
-    for (int i = 0; i < COUNT_OF(cvarTable); i++, cv++) {
+    for (int i = 0; i < COUNT_OF(cvarTable); i++) {
+        const cvarTable_t* cv = &cvarTable[i];
         trap_Cvar_Update(cv->vmCvar);
     }
 
