@@ -69,22 +69,6 @@ cc_library(
 )
 
 cc_library(
-    name = "renderer_common",
-    srcs = [
-        "tr_font.c",
-        "tr_noise.c",
-    ],
-    copts = FULL_WARNINGS,
-    visibility = ["//code/sdl:__pkg__"],
-    deps = [
-        ":api",
-        ":imagelib",
-        ":internal_api",
-        "//code/qcommon:shared_api",
-    ],
-)
-
-cc_library(
     name = "local",
     hdrs = [
         "tr_extramath.h",
@@ -94,6 +78,10 @@ cc_library(
         "tr_postprocess.h",
     ],
     includes = ["."],
+    deps = [
+        ":api",
+        ":internal_api",
+    ],
 )
 
 cc_library(
@@ -110,6 +98,7 @@ cc_library(
         "tr_extramath.c",
         "tr_fbo.c",
         "tr_flares.c",
+        "tr_font.c",
         "tr_glsl.c",
         "tr_image.c",
         "tr_image_dds.c",
@@ -120,6 +109,7 @@ cc_library(
         "tr_mesh.c",
         "tr_model.c",
         "tr_model_iqm.c",
+        "tr_noise.c",
         "tr_postprocess.c",
         "tr_scene.c",
         "tr_shade.c",
@@ -134,8 +124,8 @@ cc_library(
     includes = ["."],
     visibility = ["//code/client:__pkg__"],
     deps = [
+        ":imagelib",
         ":local",
-        ":renderer_common",
         "//code/qcommon",
         "//code/qcommon:qfiles",
         "//code/renderer/glsl",
@@ -148,6 +138,7 @@ cc_library(
     srcs = ["tr_subs.c"],
     includes = ["."],
     deps = [
+        ":internal_api",
         ":local",
         ":renderer",
         "//code/qcommon",
