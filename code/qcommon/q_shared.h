@@ -621,7 +621,7 @@ void SkipRestOfLine(char** data);
 
 int Com_HexStrToInt(const char* str);
 
-int QDECL Com_sprintf(char* dest, int size, const char* fmt, ...) PRINTF_FUNCTION(3, 4);
+int QDECL Com_sprintf(char* dest, int size, const char* fmt, ...) PRINTF_LIKE_FUNCTION(3, 4);
 
 char* Com_SkipTokens(char* s, int numTokens, char* sep);
 char* Com_SkipCharset(char* s, char* sep);
@@ -696,7 +696,7 @@ qint64  LittleLong64 (qint64 l);
 float	BigFloat (const float *l);
 float	LittleFloat (const float *l);
 */
-char* QDECL va(const char* format, ...) PRINTF_FUNCTION(1, 2);
+char* QDECL va(const char* format, ...) PRINTF_LIKE_FUNCTION(1, 2);
 
 #define TRUNCATE_LENGTH 64
 void Com_TruncateLongString(char* buffer, const char* s);
@@ -715,8 +715,8 @@ bool Info_Validate(const char* s);
 void Info_NextPair(const char** s, char* key, char* value);
 
 // this is only here so the functions in q_shared.c and bg_*.c can link
-void QDECL Com_Error(int level, const char* error, ...) PRINTF_FUNCTION(2, 3);
-void QDECL Com_Printf(const char* msg, ...) PRINTF_FUNCTION(1, 2);
+void QDECL Com_Error(int level, const char* error, ...) PRINTF_LIKE_FUNCTION(2, 3);
+void QDECL Com_Printf(const char* msg, ...) PRINTF_LIKE_FUNCTION(1, 2);
 
 /*
 ==============================================================

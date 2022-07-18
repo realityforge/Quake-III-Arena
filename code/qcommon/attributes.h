@@ -15,6 +15,7 @@
 #ifndef ATTRIBUTES_H
 #define ATTRIBUTES_H
 
+// The symbol marked by this attribute may be unused
 #ifndef UNUSED
 #if defined(__GNUC__)
 #define UNUSED __attribute__((unused))
@@ -23,6 +24,7 @@
 #endif
 #endif
 
+// The function marked by this attribute is exported from a shared library
 #ifndef EXPORT
 #if defined(_MSC_VER)
 #define EXPORT UNUSED __declspec(dllexport)
@@ -33,6 +35,7 @@
 #endif
 #endif
 
+// The function marked this attribute never returns
 #ifndef NORETURN
 #if defined(__GNUC__)
 #define NORETURN __attribute__((noreturn))
@@ -43,10 +46,53 @@
 #endif
 #endif
 
+// The function marked by this attribute has a formatting string similar to printf and a variable number of data arguments
 #if defined(__clang__) || defined(__GNUC__)
-#define PRINTF_FUNCTION(format_position, varargs_start_position) __attribute__((format(printf, format_position, varargs_start_position)))
+#define PRINTF_LIKE_FUNCTION(format_position, varargs_start_position) __attribute__((format(printf, format_position, varargs_start_position))) NONNULL_ARGS(format_position)
 #else
-#define PRINTF_FUNCTION(format_position, varargs_start_position)
+#define PRINTF_LIKE_FUNCTION(format_position, varargs_start_position)
+#endif
+
+// The compiler should predict that the expression is true. Used when predicting branches.
+#if defined(__clang__) || defined(__GNUC__)
+#define LIKELY(expr) __builtin_expect(!!(expr), 1)
+#else
+#define LIKELY(expr) (!!(expr))
+#endif
+
+// The compiler should predict that the expression is true. Used when predicting branches.
+#if defined(__clang__) || defined(__GNUC__)
+#define UNLIKELY(expr) __builtin_expect(!!(expr), 0)
+#else
+#define UNLIKELY(expr) (!!(expr))
+#endif
+
+// The function marked by this attribute returns a value that the user should make use of.
+#if defined(__clang__) || defined(__GNUC__)
+#define WARN_UNUSED_RESULT __attribute__((warn_unused_result))
+#else
+#define WARN_UNUSED_RESULT
+#endif
+
+// The function marked by this attribute has observable effects on the state of the program other than to return a value.
+#if defined(__clang__) || defined(__GNUC__)
+#define PURE __attribute__((pure))
+#else
+#define PURE
+#endif
+
+// The function marked by this attribute returns a non-null pointer.
+#if defined(__clang__) || defined(__GNUC__)
+#define RETURNS_NONNULL __attribute__((returns_nonnull))
+#else
+#define RETURNS_NONNULL
+#endif
+
+// The function marked by this attribute has nonnull pointer arguments as specified by comma separate arg indexes args
+#if defined(__clang__) || defined(__GNUC__)
+#define NONNULL_ARGS(args) __attribute__((nonnull(args)))
+#else
+#define NONNULL_ARGS(args)
 #endif
 
 #endif

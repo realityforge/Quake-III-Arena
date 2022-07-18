@@ -99,7 +99,7 @@ void BotDrawDebugPolygons(void (*drawPoly)(int color, int numPoints, float* poin
     }
 }
 
-static PRINTF_FUNCTION(2, 3) QDECL void BotImport_Print(const int type, const char* fmt, ...)
+static PRINTF_LIKE_FUNCTION(2, 3) QDECL void BotImport_Print(const int type, const char* fmt, ...)
 {
     char str[2048];
     va_list ap;
