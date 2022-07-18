@@ -881,7 +881,6 @@ void trap_BotSetAvoidGoalTime(int goalstate, int number, float avoidtime);
 void trap_BotUpdateEntityItems(void);
 int trap_BotLoadItemWeights(int goalstate, char* filename);
 void trap_BotInterbreedGoalFuzzyLogic(int parent1, int parent2, int child);
-void trap_BotSaveGoalFuzzyLogic(int goalstate, char* filename);
 void trap_BotMutateGoalFuzzyLogic(int goalstate, float range);
 int trap_BotAllocGoalState(int state);
 void trap_BotFreeGoalState(int handle);

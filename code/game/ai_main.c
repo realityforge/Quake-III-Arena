@@ -389,10 +389,6 @@ static void BotWriteInterbreeded(char* filename)
             bestbot = i;
         }
     }
-    if (bestbot >= 0) {
-        // write out the new goal fuzzy logic
-        trap_BotSaveGoalFuzzyLogic(botstates[bestbot]->gs, filename);
-    }
 }
 
 /*

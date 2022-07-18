@@ -93,8 +93,6 @@ void BotInitLevelItems(void);
 void BotUpdateEntityItems(void);
 // interbreed the goal fuzzy logic
 void BotInterbreedGoalFuzzyLogic(int parent1, int parent2, int child);
-// save the goal fuzzy logic to disk
-void BotSaveGoalFuzzyLogic(int goalstate, char* filename);
 // mutate the goal fuzzy logic
 void BotMutateGoalFuzzyLogic(int goalstate, float range);
 // loads item weights for the bot

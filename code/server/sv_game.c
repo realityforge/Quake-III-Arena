@@ -702,9 +702,6 @@ static intptr_t SV_GameSystemCalls(intptr_t* args)
     case BOTLIB_AI_INTERBREED_GOAL_FUZZY_LOGIC:
         botlib_export->ai.BotInterbreedGoalFuzzyLogic(args[1], args[2], args[3]);
         return 0;
-    case BOTLIB_AI_SAVE_GOAL_FUZZY_LOGIC:
-        botlib_export->ai.BotSaveGoalFuzzyLogic(args[1], VMA(2));
-        return 0;
     case BOTLIB_AI_MUTATE_GOAL_FUZZY_LOGIC:
         botlib_export->ai.BotMutateGoalFuzzyLogic(args[1], VMF(2));
         return 0;
