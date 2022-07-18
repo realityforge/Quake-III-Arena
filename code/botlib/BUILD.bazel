@@ -16,6 +16,7 @@ load("//build_defs:rules.bzl", "EXTRA_WARNINGS")
 cc_library(
     name = "api",
     hdrs = ["botlib.h"],
+    copts = EXTRA_WARNINGS + ["-Wunused-parameter"],
     visibility = [
         "//code/client:__pkg__",
         "//code/game:__pkg__",
@@ -36,6 +37,7 @@ cc_library(
         "be_ai_weap.h",
         "be_ea.h",
     ],
+    copts = EXTRA_WARNINGS + ["-Wunused-parameter"],
     includes = ["."],
     visibility = [
         "//code/client:__pkg__",
@@ -108,7 +110,7 @@ cc_library(
         "l_struct.h",
         "l_utils.h",
     ],
-    copts = EXTRA_WARNINGS,
+    copts = EXTRA_WARNINGS + ["-Wunused-parameter"],
     includes = ["."],
     visibility = [
         "//code/client:__pkg__",
