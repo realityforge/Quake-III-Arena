@@ -190,7 +190,7 @@ static int GLimp_SetMode(const int mode, const bool fullscreen, const bool nobor
     );
 
     // If a window exists, note its display index
-    if (SDL_window != NULL) {
+    if (NULL != SDL_window) {
         display = SDL_GetWindowDisplayIndex(SDL_window);
         if (display < 0) {
             ri.Printf(PRINT_DEVELOPER, "SDL_GetWindowDisplayIndex() failed: %s\n", SDL_GetError());
@@ -209,7 +209,7 @@ static int GLimp_SetMode(const int mode, const bool fullscreen, const bool nobor
 
     ri.Printf(PRINT_ALL, "...setting mode %d:", mode);
 
-    if (mode == -2) {
+    if (-2 == mode) {
         // use desktop video resolution
         if (desktopMode.h > 0) {
             glConfig.vidWidth = desktopMode.w;
@@ -234,13 +234,13 @@ static int GLimp_SetMode(const int mode, const bool fullscreen, const bool nobor
     }
 
     // Destroy existing state if it exists
-    if (SDL_glContext != NULL) {
+    if (NULL != SDL_glContext) {
         glaDispose();
         SDL_GL_DeleteContext(SDL_glContext);
         SDL_glContext = NULL;
     }
 
-    if (SDL_window != NULL) {
+    if (NULL != SDL_window) {
         SDL_GetWindowPosition(SDL_window, &x, &y);
         ri.Printf(PRINT_DEVELOPER, "Existing window at %dx%d before being destroyed\n", x, y);
         SDL_DestroyWindow(SDL_window);
@@ -346,9 +346,7 @@ static int GLimp_SetMode(const int mode, const bool fullscreen, const bool nobor
 
         SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-        if ((SDL_window = SDL_CreateWindow(CLIENT_WINDOW_TITLE, x, y,
-                                           glConfig.vidWidth, glConfig.vidHeight, flags))
-            == NULL) {
+        if (NULL == (SDL_window = SDL_CreateWindow(CLIENT_WINDOW_TITLE, x, y, glConfig.vidWidth, glConfig.vidHeight, flags))) {
             ri.Printf(PRINT_DEVELOPER, "SDL_CreateWindow failed: %s\n", SDL_GetError());
             continue;
         }
@@ -466,7 +464,7 @@ static int GLimp_SetMode(const int mode, const bool fullscreen, const bool nobor
 
     SDL_FreeSurface(icon);
 
-    if (!SDL_window) {
+    if (NULL == SDL_window) {
         ri.Printf(PRINT_ALL, "Couldn't get a visual\n");
         return RSERR_INVALID_MODE;
     }
