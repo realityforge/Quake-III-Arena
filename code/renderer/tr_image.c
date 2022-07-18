@@ -276,7 +276,7 @@ Scale up the pixel values in a texture to increase the
 lighting range
 ================
 */
-void R_LightScaleTexture(unsigned* in, int inwidth, int inheight, bool only_gamma)
+static void R_LightScaleTexture(unsigned* in, int inwidth, int inheight, bool only_gamma)
 {
     if (only_gamma) {
         if (!glConfig.deviceSupportsGamma) {
