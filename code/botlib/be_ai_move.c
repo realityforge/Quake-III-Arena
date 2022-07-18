@@ -383,7 +383,7 @@ static int BotOnTopOfEntity(bot_movestate_t* ms)
     }
     return -1;
 }
-static int BotValidTravel(vec3_t origin, aas_reachability_t* reach, int travelflags)
+static int BotValidTravel(aas_reachability_t* reach, int travelflags)
 {
     // if the reachability uses an unwanted travel type
     if (AAS_TravelFlagForType(reach->traveltype) & ~travelflags)
@@ -586,7 +586,7 @@ static int BotGetReachabilityToGoal(vec3_t origin, int areanum,
             continue;
         // if (AAS_AreaContentsTravelFlags(reach.areanum) & ~travelflags) continue;
         // if the travel isn't valid
-        if (!BotValidTravel(origin, &reach, movetravelflags))
+        if (!BotValidTravel(&reach, movetravelflags))
             continue;
         // get the travel time
         t = AAS_AreaTravelTimeToGoalArea(reach.areanum, reach.end, goal->areanum, travelflags);
