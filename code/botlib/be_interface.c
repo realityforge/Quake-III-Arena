@@ -285,7 +285,6 @@ static void Init_EA_Export(ea_export_t* ea)
     ea->EA_Move = EA_Move;
     ea->EA_View = EA_View;
     ea->EA_GetInput = EA_GetInput;
-    ea->EA_EndRegular = EA_EndRegular;
     ea->EA_ResetInput = EA_ResetInput;
 }
 
