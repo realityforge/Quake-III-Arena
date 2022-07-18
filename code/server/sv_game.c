@@ -679,7 +679,7 @@ static int SV_GameSystemCalls(int* args)
     case BOTLIB_AI_TOUCHING_GOAL:
         return botlib_export->ai.BotTouchingGoal(VMA(1), VMA(2));
     case BOTLIB_AI_ITEM_GOAL_IN_VIS_BUT_NOT_VISIBLE:
-        return botlib_export->ai.BotItemGoalInVisButNotVisible(args[1], VMA(2), VMA(3), VMA(4));
+        return botlib_export->ai.BotItemGoalInVisButNotVisible(args[1], VMA(2), VMA(3));
     case BOTLIB_AI_GET_LEVEL_ITEM_GOAL:
         return botlib_export->ai.BotGetLevelItemGoal(args[1], VMA(2), VMA(3));
     case BOTLIB_AI_GET_NEXT_CAMP_SPOT_GOAL:
