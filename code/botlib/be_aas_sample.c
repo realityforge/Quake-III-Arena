@@ -48,8 +48,6 @@ typedef struct aas_tracestack_s {
     int nodenum; // node found after splitting with planenum
 } aas_tracestack_t;
 
-int numaaslinks;
-
 void AAS_PresenceTypeBoundingBox(int presencetype, vec3_t mins, vec3_t maxs)
 {
     int index;
@@ -92,7 +90,6 @@ void AAS_InitAASLinkHeap()
     aasworld.linkheap[max_aaslinks - 1].next_ent = NULL;
     // pointer to the first free link
     aasworld.freelinks = &aasworld.linkheap[0];
-    numaaslinks = max_aaslinks;
 }
 void AAS_FreeAASLinkHeap()
 {
@@ -116,7 +113,6 @@ static aas_link_t* AAS_AllocAASLink()
         aasworld.freelinks = aasworld.freelinks->next_ent;
     if (aasworld.freelinks)
         aasworld.freelinks->prev_ent = NULL;
-    numaaslinks--;
     return link;
 }
 static void AAS_DeAllocAASLink(aas_link_t* link)
@@ -128,7 +124,6 @@ static void AAS_DeAllocAASLink(aas_link_t* link)
     link->prev_area = NULL;
     link->next_area = NULL;
     aasworld.freelinks = link;
-    numaaslinks++;
 }
 void AAS_InitAASLinkedEntities()
 {
