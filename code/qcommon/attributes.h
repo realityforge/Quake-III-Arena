@@ -95,4 +95,25 @@
 #define NONNULL_ARGS(args)
 #endif
 
+// The element marked by this attribute is deprecated and should not be used
+#if defined(__clang__) || defined(__GNUC__)
+#define DEPRECATED __attribute__((deprecated))
+#else
+#define DEPRECATED
+#endif
+
+// The function marked by this attribute should always be inlined, even when compiling a mode where inlines are disabled
+#if defined(__clang__) || defined(__GNUC__)
+#define FORCEINLINE inline __attribute__((always_inline))
+#else
+#define FORCEINLINE inline
+#endif
+
+// The function marked by this attribute should never be inlined
+#if defined(__clang__) || defined(__GNUC__)
+#define FORCENOINLINE __attribute__((noinline))
+#else
+#define FORCENOINLINE inline
+#endif
+
 #endif
