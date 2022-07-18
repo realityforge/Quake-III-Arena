@@ -65,61 +65,6 @@ void VM_Init()
     memset(vmTable, 0, sizeof(vmTable));
 }
 
-/*
-===============
-VM_ValueToSymbol
-
-Assumes a program counter value
-===============
-*/
-const char* VM_ValueToSymbol(vm_t* vm, int value)
-{
-    vmSymbol_t* sym;
-    static char text[MAX_TOKEN_CHARS];
-
-    sym = vm->symbols;
-    if (!sym) {
-        return "NO SYMBOLS";
-    }
-
-    // find the symbol
-    while (sym->next && sym->next->symValue <= value) {
-        sym = sym->next;
-    }
-
-    if (value == sym->symValue) {
-        return sym->symName;
-    }
-
-    Com_sprintf(text, sizeof(text), "%s+%i", sym->symName, value - sym->symValue);
-
-    return text;
-}
-
-/*
-===============
-VM_ValueToFunctionSymbol
-
-For profiling, find the symbol behind this value
-===============
-*/
-vmSymbol_t* VM_ValueToFunctionSymbol(vm_t* vm, int value)
-{
-    vmSymbol_t* sym;
-    static vmSymbol_t nullSym;
-
-    sym = vm->symbols;
-    if (!sym) {
-        return &nullSym;
-    }
-
-    while (sym->next && sym->next->symValue <= value) {
-        sym = sym->next;
-    }
-
-    return sym;
-}
-
 static int ParseHex(const char* text)
 {
     int value;

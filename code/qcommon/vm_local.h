@@ -166,6 +166,3 @@ extern int vm_debugLevel;
 
 void VM_PrepareInterpreter(vm_t* vm, vmHeader_t* header);
 int VM_CallInterpreted(vm_t* vm, int* args);
-
-vmSymbol_t* VM_ValueToFunctionSymbol(vm_t* vm, int value);
-const char* VM_ValueToSymbol(vm_t* vm, int value);
