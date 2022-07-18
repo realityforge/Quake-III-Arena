@@ -22,7 +22,7 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wpadded"
 #include "jpeglib.h"
-#pragma clang diagnostic push
+#pragma clang diagnostic pop
 #include "jerror.h"
 #include <setjmp.h>
 
