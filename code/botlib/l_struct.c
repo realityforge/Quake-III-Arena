@@ -164,7 +164,7 @@ static bool ReadChar(source_t* source, fielddef_t* fd, void* p)
     }
     return 1;
 }
-static int ReadString(source_t* source, fielddef_t* fd, void* p)
+static int ReadString(source_t* source, void* p)
 {
     token_t token;
 
@@ -230,7 +230,7 @@ int ReadStructure(source_t* source, structdef_t* def, char* structure)
                 break;
             }
             case FT_STRING: {
-                if (!ReadString(source, fd, p))
+                if (!ReadString(source, p))
                     return false;
                 p = (char*)p + MAX_STRINGFIELD;
                 break;
