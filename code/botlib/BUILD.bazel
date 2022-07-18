@@ -11,12 +11,12 @@
 # limitations under the License.
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//build_defs:rules.bzl", "EXTRA_WARNINGS")
+load("//build_defs:rules.bzl", "EXTRA_WARNINGS", "FULL_WARNINGS")
 
 cc_library(
     name = "api",
     hdrs = ["botlib.h"],
-    copts = EXTRA_WARNINGS + ["-Wunused-parameter"],
+    copts = FULL_WARNINGS,
     visibility = [
         "//code/client:__pkg__",
         "//code/game:__pkg__",
@@ -37,7 +37,7 @@ cc_library(
         "be_ai_weap.h",
         "be_ea.h",
     ],
-    copts = EXTRA_WARNINGS + ["-Wunused-parameter"],
+    copts = FULL_WARNINGS,
     includes = ["."],
     visibility = [
         "//code/client:__pkg__",
