@@ -67,11 +67,11 @@
 #define UNLIKELY(expr) (!!(expr))
 #endif
 
-// The function marked by this attribute returns a value that the user should make use of.
+// The user should check the return value of the function marked by this attribute
 #if defined(__clang__) || defined(__GNUC__)
-#define WARN_UNUSED_RESULT __attribute__((warn_unused_result))
+#define CHECK_RETURN_VALUE __attribute__((warn_unused_result))
 #else
-#define WARN_UNUSED_RESULT
+#define CHECK_RETURN_VALUE
 #endif
 
 // The function marked by this attribute has observable effects on the state of the program other than to return a value.
