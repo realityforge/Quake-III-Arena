@@ -151,7 +151,10 @@ cc_library(
         "common.c",
     ],
     defines = ENGINE_DEFINES,
-    visibility = ["//code/client:__pkg__"],
+    visibility = [
+        "//code/client:__pkg__",
+        "//code/renderer:__pkg__",
+    ],
     deps = [
         ":qcommon",
         ":shared_api",
