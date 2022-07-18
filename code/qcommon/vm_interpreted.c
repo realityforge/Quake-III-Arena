@@ -21,108 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "vm_local.h"
 
-#ifdef DEBUG_VM
-static char* opnames[256] = {
-    "OP_UNDEF",
-
-    "OP_IGNORE",
-
-    "OP_BREAK",
-
-    "OP_ENTER",
-    "OP_LEAVE",
-    "OP_CALL",
-    "OP_PUSH",
-    "OP_POP",
-
-    "OP_CONST",
-
-    "OP_LOCAL",
-
-    "OP_JUMP",
-
-    //-------------------
-
-    "OP_EQ",
-    "OP_NE",
-
-    "OP_LTI",
-    "OP_LEI",
-    "OP_GTI",
-    "OP_GEI",
-
-    "OP_LTU",
-    "OP_LEU",
-    "OP_GTU",
-    "OP_GEU",
-
-    "OP_EQF",
-    "OP_NEF",
-
-    "OP_LTF",
-    "OP_LEF",
-    "OP_GTF",
-    "OP_GEF",
-
-    //-------------------
-
-    "OP_LOAD1",
-    "OP_LOAD2",
-    "OP_LOAD4",
-    "OP_STORE1",
-    "OP_STORE2",
-    "OP_STORE4",
-    "OP_ARG",
-
-    "OP_BLOCK_COPY",
-
-    //-------------------
-
-    "OP_SEX8",
-    "OP_SEX16",
-
-    "OP_NEGI",
-    "OP_ADD",
-    "OP_SUB",
-    "OP_DIVI",
-    "OP_DIVU",
-    "OP_MODI",
-    "OP_MODU",
-    "OP_MULI",
-    "OP_MULU",
-
-    "OP_BAND",
-    "OP_BOR",
-    "OP_BXOR",
-    "OP_BCOM",
-
-    "OP_LSH",
-    "OP_RSHI",
-    "OP_RSHU",
-
-    "OP_NEGF",
-    "OP_ADDF",
-    "OP_SUBF",
-    "OP_DIVF",
-    "OP_MULF",
-
-    "OP_CVIF",
-    "OP_CVFI"
-};
-#endif
-
 #define loadWord(addr) *((int*)addr)
-
-#ifdef DEBUG_VM
-static char* VM_Indent(vm_t* vm)
-{
-    static char* string = "                                        ";
-    if (vm->callLevel > 20) {
-        return string;
-    }
-    return string + 2 * (20 - vm->callLevel);
-}
-#endif
 
 void VM_PrepareInterpreter(vm_t* vm, vmHeader_t* header)
 {
@@ -276,9 +175,6 @@ locals from sp
 ==============
 */
 #define MAX_STACK 256
-//#define	DEBUG_VM
-
-#define DEBUGSTR va("%s%i", VM_Indent(vm), opStack - stack)
 
 int VM_CallInterpreted(vm_t* vm, int* args)
 {
@@ -291,9 +187,6 @@ int VM_CallInterpreted(vm_t* vm, int* args)
     int* codeImage;
     int v1;
     int dataMask;
-#ifdef DEBUG_VM
-    vmSymbol_t* profileSymbol;
-#endif
 
     // interpret the code
     vm->currentlyInterpreting = true;
@@ -301,13 +194,7 @@ int VM_CallInterpreted(vm_t* vm, int* args)
     // we might be called recursively, so this might not be the very top
     programStack = stackOnEntry = vm->programStack;
 
-#ifdef DEBUG_VM
-    profileSymbol = VM_ValueToFunctionSymbol(vm, 0);
-    // uncomment this for debugging breakpoints
-    vm->breakFunction = 0;
-#endif
     // set up the stack frame
-
     image = vm->dataBase;
     codeImage = (int*)vm->codeBase;
     dataMask = vm->dataMask;
@@ -352,37 +239,7 @@ int VM_CallInterpreted(vm_t* vm, int* args)
         r1 = ((int*)opStack)[-1];
     nextInstruction2:
         opcode = codeImage[programCounter++];
-#ifdef DEBUG_VM
-        if ((unsigned)programCounter > vm->codeLength) {
-            Com_Error(ERR_DROP, "VM pc out of range");
-        }
-
-        if (opStack < stack) {
-            Com_Error(ERR_DROP, "VM opStack underflow");
-        }
-        if (opStack >= stack + MAX_STACK) {
-            Com_Error(ERR_DROP, "VM opStack overflow");
-        }
-
-        if (programStack <= vm->stackBottom) {
-            Com_Error(ERR_DROP, "VM stack overflow");
-        }
-
-        if (programStack & 3) {
-            Com_Error(ERR_DROP, "VM program stack misaligned");
-        }
-
-        if (vm_debugLevel > 1) {
-            Com_Printf("%s %s\n", DEBUGSTR, opnames[opcode]);
-        }
-        profileSymbol->profileCount++;
-#endif
-
         switch (opcode) {
-#ifdef DEBUG_VM
-        default:
-            Com_Error(ERR_DROP, "Bad VM instruction"); // this should be scanned on load!
-#endif
         case OP_BREAK:
             vm->breakCount++;
             goto nextInstruction2;
@@ -402,11 +259,6 @@ int VM_CallInterpreted(vm_t* vm, int* args)
             goto nextInstruction2;
 
         case OP_LOAD4:
-#ifdef DEBUG_VM
-            if (*opStack & 3) {
-                Com_Error(ERR_DROP, "OP_LOAD4 misaligned");
-            }
-#endif
             r0 = *opStack = *(int*)&image[r0 & dataMask];
             goto nextInstruction2;
         case OP_LOAD2:
@@ -472,39 +324,18 @@ int VM_CallInterpreted(vm_t* vm, int* args)
                 // system call
                 int r;
                 int temp;
-#ifdef DEBUG_VM
-                int stomped;
-
-                if (vm_debugLevel) {
-                    Com_Printf("%s---> systemcall(%i)\n", DEBUGSTR, -1 - programCounter);
-                }
-#endif
                 // save the stack to allow recursive VM entry
                 temp = vm->callLevel;
                 vm->programStack = programStack - 4;
-#ifdef DEBUG_VM
-                stomped = *(int*)&image[programStack + 4];
-#endif
                 *(int*)&image[programStack + 4] = -1 - programCounter;
 
                 r = vm->systemCall((int*)&image[programStack + 4]);
-
-#ifdef DEBUG_VM
-                // this is just our stack frame pointer, only needed
-                // for debugging
-                *(int*)&image[programStack + 4] = stomped;
-#endif
 
                 // save return value
                 opStack++;
                 *opStack = r;
                 programCounter = *(int*)&image[programStack];
                 vm->callLevel = temp;
-#ifdef DEBUG_VM
-                if (vm_debugLevel) {
-                    Com_Printf("%s<--- %s\n", DEBUGSTR, VM_ValueToSymbol(vm, programCounter));
-                }
-#endif
             } else {
                 programCounter = vm->instructionPointers[programCounter];
             }
@@ -519,26 +350,11 @@ int VM_CallInterpreted(vm_t* vm, int* args)
             goto nextInstruction;
 
         case OP_ENTER:
-#ifdef DEBUG_VM
-            profileSymbol = VM_ValueToFunctionSymbol(vm, programCounter);
-#endif
             // get size of stack frame
             v1 = r2;
 
             programCounter += 4;
             programStack -= v1;
-#ifdef DEBUG_VM
-            // save old stack frame for debugging traces
-            *(int*)&image[programStack + 4] = programStack + v1;
-            if (vm_debugLevel) {
-                Com_Printf("%s---> %s\n", DEBUGSTR, VM_ValueToSymbol(vm, programCounter - 5));
-                if (vm->breakFunction && programCounter - 5 == vm->breakFunction) {
-                    // this is to allow setting breakpoints here in the debugger
-                    vm->breakCount++;
-                }
-                vm->callLevel++;
-            }
-#endif
             goto nextInstruction;
         case OP_LEAVE:
             // remove our stack frame
@@ -548,13 +364,6 @@ int VM_CallInterpreted(vm_t* vm, int* args)
 
             // grab the saved program counter
             programCounter = *(int*)&image[programStack];
-#ifdef DEBUG_VM
-            profileSymbol = VM_ValueToFunctionSymbol(vm, programCounter);
-            if (vm_debugLevel) {
-                vm->callLevel--;
-                Com_Printf("%s<--- %s\n", DEBUGSTR, VM_ValueToSymbol(vm, programCounter));
-            }
-#endif
             // check for leaving the VM
             if (programCounter == -1) {
                 goto done;
