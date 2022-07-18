@@ -525,7 +525,6 @@ locals from sp
 ==============
 */
 #define MAX_STACK 256
-#define STACK_MASK (MAX_STACK - 1)
 
 int QDECL VM_Call(vm_t* vm, int callnum, ...)
 {

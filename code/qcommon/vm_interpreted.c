@@ -276,7 +276,6 @@ locals from sp
 ==============
 */
 #define MAX_STACK 256
-#define STACK_MASK (MAX_STACK - 1)
 //#define	DEBUG_VM
 
 #define DEBUGSTR va("%s%i", VM_Indent(vm), opStack - stack)
