@@ -64,7 +64,6 @@ vmCvar_t bot_developer;
 vmCvar_t bot_interbreedchar;
 vmCvar_t bot_interbreedbots;
 vmCvar_t bot_interbreedcycle;
-vmCvar_t bot_interbreedwrite;
 
 void QDECL BotAI_Print(int type, char* fmt, ...)
 {
@@ -370,27 +369,6 @@ static void BotInterbreedBots()
     }
 }
 
-static void BotWriteInterbreeded(char* filename)
-{
-    float rank, bestrank;
-    int i, bestbot;
-
-    bestrank = 0;
-    bestbot = -1;
-    // get the best bot
-    for (i = 0; i < MAX_CLIENTS; i++) {
-        if (botstates[i] && botstates[i]->inuse) {
-            rank = botstates[i]->num_kills * 2 - botstates[i]->num_deaths;
-        } else {
-            rank = -1;
-        }
-        if (rank > bestrank) {
-            bestrank = rank;
-            bestbot = i;
-        }
-    }
-}
-
 /*
 ==============
 BotInterbreedEndMatch
@@ -406,11 +384,6 @@ void BotInterbreedEndMatch()
     bot_interbreedmatchcount++;
     if (bot_interbreedmatchcount >= bot_interbreedcycle.integer) {
         bot_interbreedmatchcount = 0;
-        trap_Cvar_Update(&bot_interbreedwrite);
-        if (strlen(bot_interbreedwrite.string)) {
-            BotWriteInterbreeded(bot_interbreedwrite.string);
-            trap_Cvar_Set("bot_interbreedwrite", "");
-        }
         BotInterbreedBots();
     }
 }
