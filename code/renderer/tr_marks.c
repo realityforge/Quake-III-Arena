@@ -126,7 +126,7 @@ static void R_ChopPolyBehindPlane(int numInPoints, vec3_t inPoints[MAX_VERTS_ON_
     }
 }
 
-void R_BoxSurfaces_r(mnode_t* node, vec3_t mins, vec3_t maxs, surfaceType_t** list, int listsize, int* listlength, vec3_t dir)
+static void R_BoxSurfaces_r(mnode_t* node, vec3_t mins, vec3_t maxs, surfaceType_t** list, int listsize, int* listlength, vec3_t dir)
 {
 
     int s, c;
@@ -183,12 +183,12 @@ void R_BoxSurfaces_r(mnode_t* node, vec3_t mins, vec3_t maxs, surfaceType_t** li
     }
 }
 
-void R_AddMarkFragments(int numClipPoints, vec3_t clipPoints[2][MAX_VERTS_ON_POLY],
-                        int numPlanes, vec3_t* normals, float* dists,
-                        int maxPoints, vec3_t pointBuffer,
-                        int maxFragments, markFragment_t* fragmentBuffer,
-                        int* returnedPoints, int* returnedFragments,
-                        vec3_t mins, vec3_t maxs)
+static void R_AddMarkFragments(int numClipPoints, vec3_t clipPoints[2][MAX_VERTS_ON_POLY],
+                               int numPlanes, vec3_t* normals, float* dists,
+                               int maxPoints, vec3_t pointBuffer,
+                               int maxFragments, markFragment_t* fragmentBuffer,
+                               int* returnedPoints, int* returnedFragments,
+                               vec3_t mins, vec3_t maxs)
 {
     int pingPong, i;
     markFragment_t* mf;

@@ -576,7 +576,7 @@ static int GLSL_InitGPUShader(shaderProgram_t* program, const char* name,
     return result;
 }
 
-void GLSL_InitUniforms(shaderProgram_t* program)
+static void GLSL_InitUniforms(shaderProgram_t* program)
 {
     int i, size;
 
@@ -624,7 +624,7 @@ void GLSL_InitUniforms(shaderProgram_t* program)
     program->uniformBuffer = ri.Malloc(size);
 }
 
-void GLSL_FinishGPUShader(shaderProgram_t* program)
+static void GLSL_FinishGPUShader(shaderProgram_t* program)
 {
     GLSL_ShowProgramUniforms(program->program);
     GL_CheckErrors();
@@ -814,7 +814,7 @@ void GLSL_SetUniformMat4BoneMatrix(shaderProgram_t* program, int uniformNum, /*c
     GLDSA_ProgramUniformMatrix4fvEXT(program->program, uniforms[uniformNum], numMatricies, GL_FALSE, &matrix[0][0]);
 }
 
-void GLSL_DeleteGPUShader(shaderProgram_t* program)
+static void GLSL_DeleteGPUShader(shaderProgram_t* program)
 {
     if (program->program) {
         if (program->vertexShader) {

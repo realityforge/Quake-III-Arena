@@ -1268,7 +1268,7 @@ static void ParseSkyParms(char** text)
     shader.isSky = true;
 }
 
-void ParseSort(char** text)
+static void ParseSort(char** text)
 {
     char* token;
 

@@ -110,7 +110,7 @@ static int R_MDRCullModel(mdrHeader_t* header, trRefEntity_t* ent)
     }
 }
 
-int R_MDRComputeFogNum(mdrHeader_t* header, trRefEntity_t* ent)
+static int R_MDRComputeFogNum(mdrHeader_t* header, trRefEntity_t* ent)
 {
     int i, j;
     fog_t* fog;

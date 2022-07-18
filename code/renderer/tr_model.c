@@ -34,7 +34,7 @@ static bool R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* name
 R_RegisterMD3
 ====================
 */
-qhandle_t R_RegisterMD3(const char* name, model_t* mod)
+static qhandle_t R_RegisterMD3(const char* name, model_t* mod)
 {
     union {
         unsigned* u;
@@ -104,7 +104,7 @@ qhandle_t R_RegisterMD3(const char* name, model_t* mod)
     return 0;
 }
 
-qhandle_t R_RegisterMDR(const char* name, model_t* mod)
+static qhandle_t R_RegisterMDR(const char* name, model_t* mod)
 {
     union {
         unsigned* u;
@@ -135,7 +135,7 @@ qhandle_t R_RegisterMDR(const char* name, model_t* mod)
     return mod->index;
 }
 
-qhandle_t R_RegisterIQM(const char* name, model_t* mod)
+static qhandle_t R_RegisterIQM(const char* name, model_t* mod)
 {
     union {
         unsigned* u;
@@ -1139,7 +1139,7 @@ static mdvTag_t* R_GetTag(mdvModel_t* mod, int frame, const char* _tagName)
     return NULL;
 }
 
-mdvTag_t* R_GetAnimTag(mdrHeader_t* mod, int framenum, const char* tagName, mdvTag_t* dest)
+static mdvTag_t* R_GetAnimTag(mdrHeader_t* mod, int framenum, const char* tagName, mdvTag_t* dest)
 {
     int i, j, k;
     int frameSize;

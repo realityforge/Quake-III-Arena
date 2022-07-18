@@ -1129,7 +1129,7 @@ static int R_CullIQM(iqmData_t* data, trRefEntity_t* ent)
     }
 }
 
-int R_ComputeIQMFogNum(iqmData_t* data, trRefEntity_t* ent)
+static int R_ComputeIQMFogNum(iqmData_t* data, trRefEntity_t* ent)
 {
     int i, j;
     fog_t* fog;

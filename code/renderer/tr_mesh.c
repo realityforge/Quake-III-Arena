@@ -191,7 +191,7 @@ int R_ComputeLOD(trRefEntity_t* ent)
     return lod;
 }
 
-int R_ComputeFogNum(mdvModel_t* model, trRefEntity_t* ent)
+static int R_ComputeFogNum(mdvModel_t* model, trRefEntity_t* ent)
 {
     int i, j;
     fog_t* fog;

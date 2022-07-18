@@ -1187,7 +1187,7 @@ Scale up the pixel values in a texture to increase the
 lighting range
 ================
 */
-void R_LightScaleTexture(uint8_t* in, int inwidth, int inheight, bool only_gamma)
+static void R_LightScaleTexture(uint8_t* in, int inwidth, int inheight, bool only_gamma)
 {
     if (only_gamma) {
         if (!glConfig.deviceSupportsGamma) {
@@ -2257,7 +2257,7 @@ static void R_CreateDefaultImage(void)
     tr.defaultImage = R_CreateImage("*default", (uint8_t*)data, DEFAULT_SIZE, DEFAULT_SIZE, IMGTYPE_COLORALPHA, IMGFLAG_MIPMAP, 0);
 }
 
-void R_CreateBuiltinImages(void)
+static void R_CreateBuiltinImages()
 {
     int x, y;
     uint8_t data[DEFAULT_SIZE][DEFAULT_SIZE][4];

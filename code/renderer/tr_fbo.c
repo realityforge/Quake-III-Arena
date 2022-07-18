@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "tr_dsa.h"
 
-bool R_CheckFBO(const FBO_t* fbo)
+static bool R_CheckFBO(const FBO_t* fbo)
 {
     GLenum code = GLDSA_CheckNamedFramebufferStatusEXT(fbo->frameBuffer, GL_FRAMEBUFFER);
 
@@ -66,7 +66,7 @@ bool R_CheckFBO(const FBO_t* fbo)
     return false;
 }
 
-FBO_t* FBO_Create(const char* name, int width, int height)
+static FBO_t* FBO_Create(const char* name, int width, int height)
 {
     FBO_t* fbo;
 
@@ -97,7 +97,7 @@ FBO_t* FBO_Create(const char* name, int width, int height)
     return fbo;
 }
 
-void FBO_CreateBuffer(FBO_t* fbo, int format, int index, int multisample)
+static void FBO_CreateBuffer(FBO_t* fbo, int format, int index, int multisample)
 {
     uint32_t* pRenderBuffer;
     GLenum attachment;

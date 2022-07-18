@@ -276,7 +276,7 @@ Any mirrored or portaled views have already been drawn, so prepare
 to actually render the visible surfaces for this view
 =================
 */
-void RB_BeginDrawingView(void)
+static void RB_BeginDrawingView()
 {
     int clearBits = 0;
 
@@ -347,7 +347,7 @@ void RB_BeginDrawingView(void)
     }
 }
 
-void RB_RenderDrawSurfList(drawSurf_t* drawSurfs, int numDrawSurfs)
+static void RB_RenderDrawSurfList(drawSurf_t* drawSurfs, int numDrawSurfs)
 {
     shader_t *shader = NULL, *oldShader;
     int fogNum, oldFogNum;
@@ -525,7 +525,7 @@ RB_SetGL2D
 
 ================
 */
-void RB_SetGL2D(void)
+static void RB_SetGL2D()
 {
     mat4_t matrix;
     int width, height;
@@ -666,7 +666,7 @@ void RE_UploadCinematic(int w, int h, int cols, int rows, const uint8_t* data, i
     }
 }
 
-const void* RB_SetColor(const void* data)
+static const void* RB_SetColor(const void* data)
 {
     const setColorCommand_t* cmd;
 
@@ -680,7 +680,7 @@ const void* RB_SetColor(const void* data)
     return (const void*)(cmd + 1);
 }
 
-const void* RB_StretchPic(const void* data)
+static const void* RB_StretchPic(const void* data)
 {
     const stretchPicCommand_t* cmd;
     shader_t* shader;
@@ -759,7 +759,7 @@ const void* RB_StretchPic(const void* data)
     return (const void*)(cmd + 1);
 }
 
-const void* RB_DrawSurfs(const void* data)
+static const void* RB_DrawSurfs(const void* data)
 {
     const drawSurfsCommand_t* cmd;
     bool isShadowView;
@@ -1044,7 +1044,7 @@ const void* RB_DrawSurfs(const void* data)
     return (const void*)(cmd + 1);
 }
 
-const void* RB_DrawBuffer(const void* data)
+static const void* RB_DrawBuffer(const void* data)
 {
     const drawBufferCommand_t* cmd;
 
@@ -1127,7 +1127,7 @@ void RB_ShowImages(void)
     ri.Printf(PRINT_ALL, "%i msec to draw all images\n", end - start);
 }
 
-const void* RB_ColorMask(const void* data)
+static const void* RB_ColorMask(const void* data)
 {
     const colorMaskCommand_t* cmd = data;
 
@@ -1148,7 +1148,7 @@ const void* RB_ColorMask(const void* data)
     return (const void*)(cmd + 1);
 }
 
-const void* RB_ClearDepth(const void* data)
+static const void* RB_ClearDepth(const void* data)
 {
     const clearDepthCommand_t* cmd = data;
 
@@ -1179,7 +1179,7 @@ const void* RB_ClearDepth(const void* data)
     return (const void*)(cmd + 1);
 }
 
-const void* RB_SwapBuffers(const void* data)
+static const void* RB_SwapBuffers(const void* data)
 {
     const swapBuffersCommand_t* cmd;
 
@@ -1237,7 +1237,7 @@ const void* RB_SwapBuffers(const void* data)
     return (const void*)(cmd + 1);
 }
 
-const void* RB_CapShadowMap(const void* data)
+static const void* RB_CapShadowMap(const void* data)
 {
     const capShadowmapCommand_t* cmd = data;
 
@@ -1260,7 +1260,7 @@ const void* RB_CapShadowMap(const void* data)
     return (const void*)(cmd + 1);
 }
 
-const void* RB_PostProcess(const void* data)
+static const void* RB_PostProcess(const void* data)
 {
     const postProcessCommand_t* cmd = data;
     FBO_t* srcFbo;

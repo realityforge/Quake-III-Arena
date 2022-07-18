@@ -387,7 +387,7 @@ Return value must be freed with ri.Hunk_FreeTempMemory()
 ==================
 */
 
-uint8_t* RB_ReadPixels(int x, int y, int width, int height, size_t* offset, int* padlen)
+static uint8_t* RB_ReadPixels(int x, int y, int width, int height, size_t* offset, int* padlen)
 {
     uint8_t *buffer, *bufstart;
     int padwidth, linelen;
@@ -411,7 +411,7 @@ uint8_t* RB_ReadPixels(int x, int y, int width, int height, size_t* offset, int*
     return buffer;
 }
 
-void RB_TakeScreenshot(int x, int y, int width, int height, char* fileName, bool jpeg)
+static void RB_TakeScreenshot(int x, int y, int width, int height, char* fileName, bool jpeg)
 {
     size_t offset = 0;
     int padlen;
@@ -447,7 +447,7 @@ const void* RB_TakeScreenshotCmd(const void* data)
     return (const void*)(cmd + 1);
 }
 
-void R_TakeScreenshot(int x, int y, int width, int height, char* name, bool jpeg)
+static void R_TakeScreenshot(int x, int y, int width, int height, char* name, bool jpeg)
 {
     static char fileName[MAX_OSPATH]; // bad things if two screenshots per frame?
     screenshotCommand_t* cmd;
@@ -689,7 +689,7 @@ R_PrintLongString
 Workaround for ri.Printf's 1024 characters buffer limit.
 ================
 */
-void R_PrintLongString(const char* string)
+static void R_PrintLongString(const char* string)
 {
     char buffer[1024];
     const char* p;
@@ -800,7 +800,7 @@ void GfxMemInfo_f(void)
     }
 }
 
-void R_Register(void)
+static void R_Register()
 {
     // latched and archived variables
     r_ext_compressed_textures = ri.Cvar_Get("r_ext_compressed_textures", "0", CVAR_ARCHIVE | CVAR_LATCH);
@@ -994,13 +994,13 @@ void R_Register(void)
     ri.Cmd_AddCommand("gfxmeminfo", GfxMemInfo_f);
 }
 
-void R_InitQueries(void)
+static void R_InitQueries()
 {
     if (r_drawSunRays->integer)
         glGenQueries(COUNT_OF(tr.sunFlareQuery), tr.sunFlareQuery);
 }
 
-void R_ShutDownQueries(void)
+static void R_ShutDownQueries()
 {
     if (r_drawSunRays->integer)
         glDeleteQueries(COUNT_OF(tr.sunFlareQuery), tr.sunFlareQuery);
@@ -1140,7 +1140,7 @@ RE_EndRegistration
 Touch all images to make sure they are resident
 =============
 */
-void RE_EndRegistration(void)
+static void RE_EndRegistration()
 {
     R_IssuePendingRenderCommands();
     RB_ShowImages();

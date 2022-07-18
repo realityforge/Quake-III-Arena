@@ -332,7 +332,7 @@ void R_TransformClipToWindow(const vec4_t clip, const viewParms_t* view, vec4_t 
     window[1] = (int)(window[1] + 0.5);
 }
 
-void myGlMultMatrix(const float* a, const float* b, float* out)
+static void myGlMultMatrix(const float* a, const float* b, float* out)
 {
     int i, j;
 
@@ -424,7 +424,7 @@ R_RotateForViewer
 Sets up the modelview matrix for a given viewParm
 =================
 */
-void R_RotateForViewer(void)
+static void R_RotateForViewer()
 {
     float viewerMatrix[16];
     vec3_t origin;
@@ -524,7 +524,7 @@ Set up the culling frustum planes for the current view using the results we got 
 the projection matrix.
 =================
 */
-void R_SetupFrustum(viewParms_t* dest, float xmin, float xmax, float ymax, float zProj, float zFar, float stereoSep)
+static void R_SetupFrustum(viewParms_t* dest, float xmin, float xmax, float ymax, float zProj, float zFar, float stereoSep)
 {
     vec3_t ofsorigin;
     float oppleg, adjleg, length;
@@ -643,7 +643,7 @@ R_SetupProjectionZ
 Sets the z-component transformation part in the projection matrix
 ===============
 */
-void R_SetupProjectionZ(viewParms_t* dest)
+static void R_SetupProjectionZ(viewParms_t* dest)
 {
     float zNear, zFar, depth;
 
@@ -689,7 +689,7 @@ void R_SetupProjectionZ(viewParms_t* dest)
     }
 }
 
-void R_SetupProjectionOrtho(viewParms_t* dest, vec3_t viewBounds[2])
+static void R_SetupProjectionOrtho(viewParms_t* dest, vec3_t viewBounds[2])
 {
     float xmin, xmax, ymin, ymax, znear, zfar;
     // viewParms_t *dest = &tr.viewParms;
@@ -758,7 +758,7 @@ void R_SetupProjectionOrtho(viewParms_t* dest, vec3_t viewBounds[2])
     dest->flags |= VPF_FARPLANEFRUSTUM;
 }
 
-void R_MirrorPoint(vec3_t in, orientation_t* surface, orientation_t* camera, vec3_t out)
+static void R_MirrorPoint(vec3_t in, orientation_t* surface, orientation_t* camera, vec3_t out)
 {
     int i;
     vec3_t local;
@@ -776,7 +776,7 @@ void R_MirrorPoint(vec3_t in, orientation_t* surface, orientation_t* camera, vec
     VectorAdd(transformed, camera->origin, out);
 }
 
-void R_MirrorVector(vec3_t in, orientation_t* surface, orientation_t* camera, vec3_t out)
+static void R_MirrorVector(vec3_t in, orientation_t* surface, orientation_t* camera, vec3_t out)
 {
     int i;
     float d;
@@ -788,7 +788,7 @@ void R_MirrorVector(vec3_t in, orientation_t* surface, orientation_t* camera, ve
     }
 }
 
-void R_PlaneForSurface(surfaceType_t* surfType, cplane_t* plane)
+static void R_PlaneForSurface(surfaceType_t* surfType, cplane_t* plane)
 {
     srfBspSurface_t* tri;
     srfPoly_t* poly;
@@ -836,9 +836,9 @@ be moving and rotating.
 Returns true if it should be mirrored
 =================
 */
-bool R_GetPortalOrientations(drawSurf_t* drawSurf, int entityNum,
-                             orientation_t* surface, orientation_t* camera,
-                             vec3_t pvsOrigin, bool* mirror)
+static bool R_GetPortalOrientations(drawSurf_t* drawSurf, int entityNum,
+                                    orientation_t* surface, orientation_t* camera,
+                                    vec3_t pvsOrigin, bool* mirror)
 {
     int i;
     cplane_t originalPlane, plane;
@@ -1100,7 +1100,7 @@ R_MirrorViewBySurface
 Returns true if another view has been rendered
 ========================
 */
-bool R_MirrorViewBySurface(drawSurf_t* drawSurf, int entityNum)
+static bool R_MirrorViewBySurface(drawSurf_t* drawSurf, int entityNum)
 {
     vec4_t clipDest[128];
     viewParms_t newParms;
@@ -1163,7 +1163,7 @@ R_SpriteFogNum
 See if a sprite is inside a fog volume
 =================
 */
-int R_SpriteFogNum(trRefEntity_t* ent)
+static int R_SpriteFogNum(trRefEntity_t* ent)
 {
     int i, j;
     fog_t* fog;
@@ -1278,7 +1278,7 @@ void R_DecomposeSort(unsigned sort, int* entityNum, shader_t** shader,
     *dlightMap = sort & 1;
 }
 
-void R_SortDrawSurfs(drawSurf_t* drawSurfs, int numDrawSurfs)
+static void R_SortDrawSurfs(drawSurf_t* drawSurfs, int numDrawSurfs)
 {
     shader_t* shader;
     int fogNum;
@@ -1410,7 +1410,7 @@ static void R_AddEntitySurface(int entityNum)
     }
 }
 
-void R_AddEntitySurfaces(void)
+static void R_AddEntitySurfaces()
 {
     int i;
 
@@ -1422,7 +1422,7 @@ void R_AddEntitySurfaces(void)
         R_AddEntitySurface(i);
 }
 
-void R_GenerateDrawSurfs(void)
+static void R_GenerateDrawSurfs()
 {
     R_AddWorldSurfaces();
 
@@ -1445,7 +1445,7 @@ void R_GenerateDrawSurfs(void)
     R_AddEntitySurfaces();
 }
 
-void R_DebugPolygon(int color, int numPoints, float* points)
+static void R_DebugPolygon(int color, int numPoints, float* points)
 {
     // FIXME: implement this
 }
@@ -1457,7 +1457,7 @@ R_DebugGraphics
 Visualization aid for movement clipping debugging
 ====================
 */
-void R_DebugGraphics(void)
+static void R_DebugGraphics()
 {
     if (tr.refdef.rdflags & RDF_NOWORLDMODEL) {
         return;

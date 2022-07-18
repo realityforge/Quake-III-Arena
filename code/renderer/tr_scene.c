@@ -202,7 +202,7 @@ void RE_AddRefEntityToScene(const refEntity_t* ent)
     r_numentities++;
 }
 
-void RE_AddDynamicLightToScene(const vec3_t org, float intensity, float r, float g, float b, int additive)
+static void RE_AddDynamicLightToScene(const vec3_t org, float intensity, float r, float g, float b, int additive)
 {
     dlight_t* dl;
 
