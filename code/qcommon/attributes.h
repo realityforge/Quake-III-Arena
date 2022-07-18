@@ -53,6 +53,20 @@
 #define PRINTF_FUNCTION(format_position, varargs_start_position)
 #endif
 
+// The compiler should predict that the expression is true. Used when predicting branches.
+#if defined(__clang__) || defined(__GNUC__)
+#define LIKELY(expr) __builtin_expect(!!(expr), 1)
+#else
+#define LIKELY(expr) (!!(expr))
+#endif
+
+// The compiler should predict that the expression is true. Used when predicting branches.
+#if defined(__clang__) || defined(__GNUC__)
+#define UNLIKELY(expr) __builtin_expect(!!(expr), 0)
+#else
+#define UNLIKELY(expr) (!!(expr))
+#endif
+
 // The function marked by this attribute returns a non-null pointer.
 #if defined(__clang__) || defined(__GNUC__)
 #define RETURNS_NONNULL __attribute__((returns_nonnull))
