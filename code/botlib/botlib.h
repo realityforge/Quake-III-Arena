@@ -166,14 +166,14 @@ typedef struct botlib_import_s {
     // check if the point is in potential visible sight
     int (*inPVS)(vec3_t p1, vec3_t p2);
     // retrieve the BSP entity data lump
-    char* (*BSPEntityData)();
+    char* (*BSPEntityData)(void);
     void (*BSPModelMinsMaxsOrigin)(int modelnum, vec3_t angles, vec3_t mins, vec3_t maxs, vec3_t origin);
     // send a bot client command
     void (*BotClientCommand)(int client, char* command);
     // memory allocation
     void* (*GetMemory)(const size_t size); // allocate from Zone
     void (*FreeMemory)(void* ptr); // free memory from Zone
-    int (*AvailableMemory)(); // available Zone memory
+    int (*AvailableMemory)(void); // available Zone memory
     void* (*HunkAlloc)(int size); // allocate from hunk
     // file system access
     int (*FS_FOpenFile)(const char* qpath, fileHandle_t* file, fsMode_t mode);
@@ -182,7 +182,7 @@ typedef struct botlib_import_s {
     void (*FS_FCloseFile)(fileHandle_t f);
     int (*FS_Seek)(fileHandle_t f, long offset, int origin);
     // debug visualisation stuff
-    int (*DebugLineCreate)();
+    int (*DebugLineCreate)(void);
     void (*DebugLineDelete)(int line);
     void (*DebugLineShow)(int line, vec3_t start, vec3_t end, int color);
     int (*DebugPolygonCreate)(int color, int numPoints, vec3_t* points);
@@ -197,9 +197,9 @@ typedef struct aas_export_s {
     //-----------------------------------
     // be_aas_main.h
     //-----------------------------------
-    int (*AAS_Initialized)();
+    int (*AAS_Initialized)(void);
     void (*AAS_PresenceTypeBoundingBox)(int presencetype, vec3_t mins, vec3_t maxs);
-    float (*AAS_Time)();
+    float (*AAS_Time)(void);
     //--------------------------------------------
     // be_aas_sample.c
     //--------------------------------------------
@@ -289,7 +289,7 @@ typedef struct ai_export_s {
     //-----------------------------------
     // be_ai_chat.h
     //-----------------------------------
-    int (*BotAllocChatState)();
+    int (*BotAllocChatState)(void);
     void (*BotFreeChatState)(int handle);
     void (*BotQueueConsoleMessage)(int chatstate, int type, char* message);
     void (*BotRemoveConsoleMessage)(int chatstate, int handle);
@@ -333,8 +333,8 @@ typedef struct ai_export_s {
     int (*BotGetMapLocationGoal)(char* name, struct bot_goal_s* goal);
     float (*BotAvoidGoalTime)(int goalstate, int number);
     void (*BotSetAvoidGoalTime)(int goalstate, int number, float avoidtime);
-    void (*BotInitLevelItems)();
-    void (*BotUpdateEntityItems)();
+    void (*BotInitLevelItems)(void);
+    void (*BotUpdateEntityItems)(void);
     int (*BotLoadItemWeights)(int goalstate, char* filename);
     void (*BotFreeItemWeights)(int goalstate);
     void (*BotInterbreedGoalFuzzyLogic)(int parent1, int parent2, int child);
@@ -352,7 +352,7 @@ typedef struct ai_export_s {
     int (*BotReachabilityArea)(vec3_t origin, int testground);
     int (*BotMovementViewTarget)(int movestate, struct bot_goal_s* goal, int travelflags, float lookahead, vec3_t target);
     int (*BotPredictVisiblePosition)(vec3_t origin, int areanum, struct bot_goal_s* goal, int travelflags, vec3_t target);
-    int (*BotAllocMoveState)();
+    int (*BotAllocMoveState)(void);
     void (*BotFreeMoveState)(int handle);
     void (*BotInitMoveState)(int handle, struct bot_initmove_s* initmove);
     void (*BotAddAvoidSpot)(int movestate, vec3_t origin, float radius, int type);
@@ -362,7 +362,7 @@ typedef struct ai_export_s {
     int (*BotChooseBestFightWeapon)(int weaponstate, int* inventory);
     void (*BotGetWeaponInfo)(int weaponstate, int weapon, struct weaponinfo_s* weaponinfo);
     int (*BotLoadWeaponWeights)(int weaponstate, char* filename);
-    int (*BotAllocWeaponState)();
+    int (*BotAllocWeaponState)(void);
     void (*BotFreeWeaponState)(int weaponstate);
     //-----------------------------------
     // be_ai_gen.h
@@ -379,9 +379,9 @@ typedef struct botlib_export_s {
     // AI functions
     ai_export_t ai;
     // setup the bot library, returns BLERR_
-    int (*BotLibSetup)();
+    int (*BotLibSetup)(void);
     // shutdown the bot library, returns BLERR_
-    int (*BotLibShutdown)();
+    int (*BotLibShutdown)(void);
     // sets a library variable returns BLERR_
     int (*BotLibVarSet)(const char* var_name, const char* value);
     // gets a library variable returns BLERR_
