@@ -720,7 +720,7 @@ qint64  LittleLong64 (qint64 l);
 float	BigFloat (const float *l);
 float	LittleFloat (const float *l);
 */
-char* QDECL va(const char* format, ...) PRINTF_FUNCTION(1, 2);
+char* QDECL va(const char* format, ...) PRINTF_LIKE_FUNCTION(1, 2);
 
 //=============================================
 
@@ -736,8 +736,8 @@ bool Info_Validate(const char* s);
 void Info_NextPair(const char** s, char* key, char* value);
 
 // this is only here so the functions in q_shared.c and bg_*.c can link
-void QDECL Com_Error(int level, const char* error, ...) PRINTF_FUNCTION(2, 3);
-void QDECL Com_Printf(const char* msg, ...) PRINTF_FUNCTION(1, 2);
+void QDECL Com_Error(int level, const char* error, ...) PRINTF_LIKE_FUNCTION(2, 3);
+void QDECL Com_Printf(const char* msg, ...) PRINTF_LIKE_FUNCTION(1, 2);
 
 /*
 ==========================================================

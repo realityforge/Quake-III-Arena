@@ -155,7 +155,7 @@ typedef struct bot_entitystate_s {
 // bot AI library exported functions
 typedef struct botlib_import_s {
     // print messages from the bot library
-    void(QDECL* Print)(int type, const char* fmt, ...) PRINTF_FUNCTION(2, 3);
+    void(QDECL* Print)(int type, const char* fmt, ...) PRINTF_LIKE_FUNCTION(2, 3);
     // trace a bbox through the world
     void (*Trace)(bsp_trace_t* trace, vec3_t start, vec3_t mins, vec3_t maxs, vec3_t end, int passent, int contentmask);
     // trace a bbox against a specific entity

@@ -48,9 +48,9 @@
 
 // The function marked by this attribute has a formatting string similar to printf and a variable number of data arguments
 #if defined(__clang__) || defined(__GNUC__)
-#define PRINTF_FUNCTION(format_position, varargs_start_position) __attribute__((format(printf, format_position, varargs_start_position))) NONNULL_ARGS(format_position)
+#define PRINTF_LIKE_FUNCTION(format_position, varargs_start_position) __attribute__((format(printf, format_position, varargs_start_position))) NONNULL_ARGS(format_position)
 #else
-#define PRINTF_FUNCTION(format_position, varargs_start_position)
+#define PRINTF_LIKE_FUNCTION(format_position, varargs_start_position)
 #endif
 
 // The compiler should predict that the expression is true. Used when predicting branches.

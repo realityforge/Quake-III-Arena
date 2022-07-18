@@ -135,7 +135,7 @@ void NET_Restart(void);
 void NET_Config(bool enableNetworking);
 
 void NET_SendPacket(netsrc_t sock, int length, const void* data, netadr_t to);
-void QDECL NET_OutOfBandPrint(netsrc_t net_socket, netadr_t adr, const char* format, ...) PRINTF_FUNCTION(3, 4);
+void QDECL NET_OutOfBandPrint(netsrc_t net_socket, netadr_t adr, const char* format, ...) PRINTF_LIKE_FUNCTION(3, 4);
 void QDECL NET_OutOfBandData(netsrc_t sock, netadr_t adr, uint8_t* format, int len);
 
 bool NET_CompareAdr(netadr_t a, netadr_t b);
@@ -471,7 +471,7 @@ int FS_FTell(fileHandle_t f);
 
 void FS_Flush(fileHandle_t f);
 
-void QDECL FS_Printf(fileHandle_t f, const char* fmt, ...) PRINTF_FUNCTION(2, 3);
+void QDECL FS_Printf(fileHandle_t f, const char* fmt, ...) PRINTF_LIKE_FUNCTION(2, 3);
 // like fprintf
 
 int FS_FOpenFileByMode(const char* qpath, fileHandle_t* f, fsMode_t mode);
@@ -561,9 +561,9 @@ void Info_Print(const char* s);
 
 void Com_BeginRedirect(char* buffer, int buffersize, void (*flush)(char*));
 void Com_EndRedirect(void);
-void QDECL Com_Printf(const char* fmt, ...) PRINTF_FUNCTION(1, 2);
-void QDECL Com_DPrintf(const char* fmt, ...) PRINTF_FUNCTION(1, 2);
-void QDECL Com_Error(int code, const char* fmt, ...) NORETURN PRINTF_FUNCTION(2, 3);
+void QDECL Com_Printf(const char* fmt, ...) PRINTF_LIKE_FUNCTION(1, 2);
+void QDECL Com_DPrintf(const char* fmt, ...) PRINTF_LIKE_FUNCTION(1, 2);
+void QDECL Com_Error(int code, const char* fmt, ...) NORETURN PRINTF_LIKE_FUNCTION(2, 3);
 void Com_Quit_f(void) NORETURN;
 int Com_EventLoop(void);
 int Com_Milliseconds(void); // will be journaled properly
@@ -779,7 +779,7 @@ void* Sys_GetCGameAPI(void);
 void Sys_UnloadUI(void);
 void* Sys_GetUIAPI(void);
 
-void QDECL Sys_Error(const char* error, ...) NORETURN PRINTF_FUNCTION(1, 2);
+void QDECL Sys_Error(const char* error, ...) NORETURN PRINTF_LIKE_FUNCTION(1, 2);
 void Sys_Quit(void) NORETURN;
 #ifndef DEDICATED
 char* Sys_GetClipboardData(void); // note that this isn't journaled...

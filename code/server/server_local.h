@@ -236,7 +236,7 @@ extern cvar_t* sv_lanForceRate;
 // sv_main.c
 //
 void SV_FinalMessage(char* message);
-void QDECL SV_SendServerCommand(client_t* cl, const char* fmt, ...) PRINTF_FUNCTION(2, 3);
+void QDECL SV_SendServerCommand(client_t* cl, const char* fmt, ...) PRINTF_LIKE_FUNCTION(2, 3);
 
 void SV_AddOperatorCommands(void);
 

@@ -604,10 +604,10 @@ void FindIntermissionPoint(void);
 void SetLeader(int team, int client);
 void CheckTeamLeader(int team);
 void G_RunThink(gentity_t* ent);
-void QDECL G_LogPrintf(const char* fmt, ...) PRINTF_FUNCTION(1, 2);
+void QDECL G_LogPrintf(const char* fmt, ...) PRINTF_LIKE_FUNCTION(1, 2);
 void SendScoreboardMessageToAllClients(void);
-void QDECL G_Printf(const char* fmt, ...) PRINTF_FUNCTION(1, 2);
-void QDECL G_Error(const char* fmt, ...) NORETURN PRINTF_FUNCTION(1, 2);
+void QDECL G_Printf(const char* fmt, ...) PRINTF_LIKE_FUNCTION(1, 2);
+void QDECL G_Error(const char* fmt, ...) NORETURN PRINTF_LIKE_FUNCTION(1, 2);
 
 //
 // g_client.c

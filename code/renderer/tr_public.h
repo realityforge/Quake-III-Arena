@@ -105,10 +105,10 @@ typedef struct {
 //
 typedef struct {
     // print message on the local console
-    void(QDECL* Printf)(int printLevel, const char* fmt, ...) PRINTF_FUNCTION(2, 3);
+    void(QDECL* Printf)(int printLevel, const char* fmt, ...) PRINTF_LIKE_FUNCTION(2, 3);
 
     // abort the game
-    void(QDECL* Error)(int errorLevel, const char* fmt, ...) NORETURN PRINTF_FUNCTION(2, 3);
+    void(QDECL* Error)(int errorLevel, const char* fmt, ...) NORETURN PRINTF_LIKE_FUNCTION(2, 3);
 
     // milliseconds should only be used for profiling, never
     // for anything game related.  Get time from the refdef

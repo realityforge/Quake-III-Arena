@@ -266,7 +266,7 @@ extern float floattime;
 #define FloatTime() floattime
 
 // from the game source
-void QDECL BotAI_Print(int type, const char* fmt, ...) PRINTF_FUNCTION(2, 3);
+void QDECL BotAI_Print(int type, const char* fmt, ...) PRINTF_LIKE_FUNCTION(2, 3);
 void QDECL BotAI_BotInitialChat(bot_state_t* bs, char* type, ...);
 void BotAI_Trace(bsp_trace_t* bsptrace, vec3_t start, vec3_t mins, vec3_t maxs, vec3_t end, int passent, int contentmask);
 int BotAI_GetClientState(int clientNum, playerState_t* state);

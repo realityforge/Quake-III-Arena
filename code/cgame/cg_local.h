@@ -1165,8 +1165,8 @@ extern vmCvar_t cg_obeliskRespawnDelay;
 const char* CG_ConfigString(int index);
 const char* CG_Argv(int arg);
 
-void QDECL CG_Printf(const char* msg, ...) PRINTF_FUNCTION(1, 2);
-void QDECL CG_Error(const char* msg, ...) NORETURN PRINTF_FUNCTION(1, 2);
+void QDECL CG_Printf(const char* msg, ...) PRINTF_LIKE_FUNCTION(1, 2);
+void QDECL CG_Error(const char* msg, ...) NORETURN PRINTF_LIKE_FUNCTION(1, 2);
 
 void CG_StartMusic(void);
 
