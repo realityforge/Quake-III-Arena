@@ -48,9 +48,23 @@
 
 // The function marked by this attribute has a formatting string similar to printf and a variable number of data arguments
 #if defined(__clang__) || defined(__GNUC__)
-#define PRINTF_FUNCTION(format_position, varargs_start_position) __attribute__((format(printf, format_position, varargs_start_position)))
+#define PRINTF_FUNCTION(format_position, varargs_start_position) __attribute__((format(printf, format_position, varargs_start_position))) NONNULL_ARGS(format_position)
 #else
 #define PRINTF_FUNCTION(format_position, varargs_start_position)
+#endif
+
+// The function marked by this attribute returns a non-null pointer.
+#if defined(__clang__) || defined(__GNUC__)
+#define RETURNS_NONNULL __attribute__((returns_nonnull))
+#else
+#define RETURNS_NONNULL
+#endif
+
+// The function marked by this attribute has nonnull pointer arguments as specified by comma separate arg indexes args
+#if defined(__clang__) || defined(__GNUC__)
+#define NONNULL_ARGS(args) __attribute__((nonnull(args)))
+#else
+#define NONNULL_ARGS(args)
 #endif
 
 #endif
