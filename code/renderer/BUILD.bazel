@@ -37,6 +37,9 @@ cc_library(
         "tr_common.h",
     ],
     copts = FULL_WARNINGS,
+    visibility = [
+        "//code/sdl:__pkg__",
+    ],
     deps = [
         ":api",
         ":gla",
