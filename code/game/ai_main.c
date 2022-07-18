@@ -358,7 +358,7 @@ static void BotInterbreedBots()
 
     if (trap_GeneticParentsAndChildSelection(MAX_CLIENTS, ranks, &parent1, &parent2, &child)) {
         trap_BotInterbreedGoalFuzzyLogic(botstates[parent1]->gs, botstates[parent2]->gs, botstates[child]->gs);
-        trap_BotMutateGoalFuzzyLogic(botstates[child]->gs, 1);
+        trap_BotMutateGoalFuzzyLogic(botstates[child]->gs);
     }
     // reset the kills and deaths
     for (i = 0; i < MAX_CLIENTS; i++) {
@@ -956,7 +956,7 @@ bool BotAISetupClient(int client, struct bot_settings_s* settings, bool restart)
     BotScheduleBotThink();
     // if interbreeding start with a mutation
     if (bot_interbreed) {
-        trap_BotMutateGoalFuzzyLogic(bs->gs, 1);
+        trap_BotMutateGoalFuzzyLogic(bs->gs);
     }
     // if we kept the bot client
     if (restart) {

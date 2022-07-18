@@ -192,7 +192,7 @@ static int BotReachedGoal(bot_state_t* bs, bot_goal_t* goal)
             return true;
         }
         // if the goal isn't there
-        if (trap_BotItemGoalInVisButNotVisible(bs->entitynum, bs->eye, bs->viewangles, goal)) {
+        if (trap_BotItemGoalInVisButNotVisible(bs->entitynum, bs->eye, goal)) {
             return true;
         }
         // if in the goal area and below or above the goal and not swimming
@@ -529,7 +529,7 @@ static int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t*
         if (bs->teamgoal_time < FloatTime()) {
             bs->ltgtype = 0;
         }
-        if (trap_BotItemGoalInVisButNotVisible(bs->entitynum, bs->eye, bs->viewangles, goal)) {
+        if (trap_BotItemGoalInVisButNotVisible(bs->entitynum, bs->eye, goal)) {
             trap_BotGoalName(bs->teamgoal.number, buf, sizeof(buf));
             BotAI_BotInitialChat(bs, "getitem_notthere", buf, NULL);
             trap_BotEnterChat(bs->cs, bs->decisionmaker, CHAT_TELL);
