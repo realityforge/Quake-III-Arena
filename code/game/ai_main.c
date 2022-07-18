@@ -1370,7 +1370,6 @@ int BotAISetup(int restart)
     trap_Cvar_Register(&bot_interbreedchar, "bot_interbreedchar", "", 0);
     trap_Cvar_Register(&bot_interbreedbots, "bot_interbreedbots", "10", 0);
     trap_Cvar_Register(&bot_interbreedcycle, "bot_interbreedcycle", "20", 0);
-    trap_Cvar_Register(&bot_interbreedwrite, "bot_interbreedwrite", "", 0);
 
     // if the game is restarted for a tournament
     if (restart) {
