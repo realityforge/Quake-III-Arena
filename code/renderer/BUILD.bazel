@@ -122,6 +122,7 @@ cc_library(
         "tr_vbo.c",
         "tr_world.c",
     ],
+    copts = EXTRA_WARNINGS,
     includes = ["."],
     visibility = ["//code/client:__pkg__"],
     deps = [
