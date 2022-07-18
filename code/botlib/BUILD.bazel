@@ -110,7 +110,10 @@ cc_library(
         "l_struct.h",
         "l_utils.h",
     ],
-    copts = EXTRA_WARNINGS + ["-Wunused-parameter"],
+    copts = EXTRA_WARNINGS + [
+        "-Wunused-parameter",
+        "-Wstrict-prototypes",
+    ],
     includes = ["."],
     visibility = [
         "//code/client:__pkg__",
