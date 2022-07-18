@@ -52,10 +52,8 @@ int numbots;
 float floattime;
 // time to do a regular update
 float regularupdate_time;
-//
 int bot_interbreed;
 int bot_interbreedmatchcount;
-//
 vmCvar_t bot_thinktime;
 vmCvar_t bot_memorydump;
 vmCvar_t bot_saveroutingcache;
