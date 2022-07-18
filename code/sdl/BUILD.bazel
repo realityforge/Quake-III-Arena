@@ -55,6 +55,8 @@ cc_library(
     srcs = [
         "sdl_gamma.c",
         "sdl_glimp.c",
+    ],
+    hdrs = [
         "sdl_icon.h",
     ],
     linkopts = _SDL_LINK_OPTS,
