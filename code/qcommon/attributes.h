@@ -95,4 +95,11 @@
 #define NONNULL_ARGS(args)
 #endif
 
+// The element marked by this attribute is deprecated and should not be used
+#if defined(__clang__) || defined(__GNUC__)
+#define DEPRECATED __attribute__((deprecated))
+#else
+#define DEPRECATED
+#endif
+
 #endif
