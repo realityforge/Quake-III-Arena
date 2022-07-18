@@ -1768,7 +1768,7 @@ static bot_moveresult_t BotFinishTravel_FuncBobbing(bot_movestate_t* ms, aas_rea
 // 1  the grapple hook is still flying
 // 2  the grapple hooked into a wall
 //===========================================================================
-static int GrappleState(bot_movestate_t* ms, aas_reachability_t* reach)
+static int GrappleState(bot_movestate_t* ms)
 {
     int i;
     aas_entityinfo_t entinfo;
@@ -1823,7 +1823,7 @@ static bot_moveresult_t BotTravel_Grapple(bot_movestate_t* ms, aas_reachability_
         result.flags |= MOVERESULT_MOVEMENTWEAPON;
     }
     if (ms->moveflags & MFL_ACTIVEGRAPPLE) {
-        state = GrappleState(ms, reach);
+        state = GrappleState(ms);
         VectorSubtract(reach->end, ms->origin, dir);
         dir[2] = 0;
         dist = VectorLength(dir);
