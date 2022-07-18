@@ -926,7 +926,7 @@ RB_SurfaceEntity
 Entities that have a single procedurally generated surface
 ====================
 */
-void RB_SurfaceEntity(surfaceType_t* surfType)
+void RB_SurfaceEntity(UNUSED surfaceType_t* surfType)
 {
     switch (backEnd.currentEntity->e.reType) {
     case RT_SPRITE:
@@ -951,12 +951,12 @@ void RB_SurfaceEntity(surfaceType_t* surfType)
     return;
 }
 
-void RB_SurfaceBad(surfaceType_t* surfType)
+void RB_SurfaceBad(UNUSED surfaceType_t* surfType)
 {
     ri.Printf(PRINT_ALL, "Bad surface tesselated.\n");
 }
 
-void RB_SurfaceFlare(srfFlare_t* surf)
+void RB_SurfaceFlare(UNUSED srfFlare_t* surf)
 {
 }
 
@@ -967,7 +967,7 @@ void RB_SurfaceDisplayList(srfDisplayList_t* surf)
     qglCallList(surf->listNum);
 }
 
-void RB_SurfaceSkip(void* surf)
+void RB_SurfaceSkip(UNUSED void* surf)
 {
 }
 
