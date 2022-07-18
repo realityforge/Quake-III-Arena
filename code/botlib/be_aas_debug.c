@@ -41,8 +41,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define MAX_DEBUGLINES 1024
 #define MAX_DEBUGPOLYGONS 8192
 
-int debuglines[MAX_DEBUGLINES];
-int debuglinevisible[MAX_DEBUGLINES];
+static int debuglines[MAX_DEBUGLINES];
+static int debuglinevisible[MAX_DEBUGLINES];
 
 static int debugpolygons[MAX_DEBUGPOLYGONS];
 

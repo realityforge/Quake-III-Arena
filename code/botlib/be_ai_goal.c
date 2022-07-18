@@ -123,7 +123,7 @@ typedef struct iteminfo_s {
 
 #define ITEMINFO_OFS(x) offsetof(iteminfo_t, x)
 
-fielddef_t iteminfo_fields[] = {
+static fielddef_t iteminfo_fields[] = {
     { "name", ITEMINFO_OFS(name), FT_STRING },
     { "model", ITEMINFO_OFS(model), FT_STRING },
     { "modelindex", ITEMINFO_OFS(modelindex), FT_INT },
@@ -135,7 +135,7 @@ fielddef_t iteminfo_fields[] = {
     { NULL, 0, 0 }
 };
 
-structdef_t iteminfo_struct = {
+static structdef_t iteminfo_struct = {
     sizeof(iteminfo_t), iteminfo_fields
 };
 
