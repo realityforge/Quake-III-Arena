@@ -12,7 +12,7 @@
 
 load("@gla//:rules.bzl", "gla_lib")
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//build_defs:rules.bzl", "CLIENT_GAME_DEFINES", "FULL_WARNINGS")
+load("//build_defs:rules.bzl", "CLIENT_GAME_DEFINES", "EXTRA_WARNINGS", "FULL_WARNINGS")
 
 cc_library(
     name = "api",
@@ -77,6 +77,7 @@ cc_library(
         "tr_local.h",
         "tr_postprocess.h",
     ],
+    copts = EXTRA_WARNINGS,
     includes = ["."],
     deps = [
         ":api",
