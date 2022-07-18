@@ -49,14 +49,15 @@ cc_library(
 cc_library(
     name = "imagelib",
     srcs = [
-        "tr_image.h",
         "tr_image_2.c",
         "tr_image_jpg.c",
         "tr_image_jpg2.c",
         "tr_image_png.c",
     ],
+    hdrs = ["tr_image.h"],
     copts = FULL_WARNINGS,
     defines = CLIENT_GAME_DEFINES,
+    includes = ["."],
     deps = [
         ":api",
         ":internal_api",
