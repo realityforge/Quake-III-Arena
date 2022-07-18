@@ -158,7 +158,7 @@ static void GLimp_DetectAvailableModes(void)
     SDL_free(modes);
 }
 
-static int GLimp_SetMode(int mode, bool fullscreen, bool noborder)
+static int GLimp_SetMode(const int mode, const bool fullscreen, const bool noborder)
 {
     const char* glstring;
     int perChannelColorBits;
@@ -480,7 +480,7 @@ static int GLimp_SetMode(int mode, bool fullscreen, bool noborder)
     return RSERR_OK;
 }
 
-static bool GLimp_StartDriverAndSetMode(int mode, bool fullscreen, bool noborder)
+static bool GLimp_StartDriverAndSetMode(const int mode, bool fullscreen, const bool noborder)
 {
     if (!SDL_WasInit(SDL_INIT_VIDEO)) {
         const char* driverName;
