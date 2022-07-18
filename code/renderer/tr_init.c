@@ -321,7 +321,8 @@ bool R_GetModeInfo(int* width, int* height, float* windowAspect, int mode)
     if (mode < -1) {
         return false;
     }
-    if (mode >= COUNT_OF(r_vidModes)) {
+    // COUNT_OF(r_vidModes) is an unsigned value so we need to ensure mode >= 0
+    if (mode >= 0 && mode >= COUNT_OF(r_vidModes)) {
         return false;
     }
 
