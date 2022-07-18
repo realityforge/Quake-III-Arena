@@ -4485,24 +4485,24 @@ static void BotSetupAlternativeRouteGoals()
         if (ctf_neutralflag.areanum) {
             red_numaltroutegoals = trap_AAS_AlternativeRouteGoals(
                 ctf_neutralflag.origin, ctf_neutralflag.areanum,
-                ctf_redflag.origin, ctf_redflag.areanum, TFL_DEFAULT,
+                ctf_redflag.areanum, TFL_DEFAULT,
                 red_altroutegoals, MAX_ALTROUTEGOALS,
                 ALTROUTEGOAL_CLUSTERPORTALS | ALTROUTEGOAL_VIEWPORTALS);
             blue_numaltroutegoals = trap_AAS_AlternativeRouteGoals(
                 ctf_neutralflag.origin, ctf_neutralflag.areanum,
-                ctf_blueflag.origin, ctf_blueflag.areanum, TFL_DEFAULT,
+                ctf_blueflag.areanum, TFL_DEFAULT,
                 blue_altroutegoals, MAX_ALTROUTEGOALS,
                 ALTROUTEGOAL_CLUSTERPORTALS | ALTROUTEGOAL_VIEWPORTALS);
         }
     } else if (gametype == GT_1FCTF) {
         red_numaltroutegoals = trap_AAS_AlternativeRouteGoals(
             ctf_neutralflag.origin, ctf_neutralflag.areanum,
-            ctf_redflag.origin, ctf_redflag.areanum, TFL_DEFAULT,
+            ctf_redflag.areanum, TFL_DEFAULT,
             red_altroutegoals, MAX_ALTROUTEGOALS,
             ALTROUTEGOAL_CLUSTERPORTALS | ALTROUTEGOAL_VIEWPORTALS);
         blue_numaltroutegoals = trap_AAS_AlternativeRouteGoals(
             ctf_neutralflag.origin, ctf_neutralflag.areanum,
-            ctf_blueflag.origin, ctf_blueflag.areanum, TFL_DEFAULT,
+            ctf_blueflag.areanum, TFL_DEFAULT,
             blue_altroutegoals, MAX_ALTROUTEGOALS,
             ALTROUTEGOAL_CLUSTERPORTALS | ALTROUTEGOAL_VIEWPORTALS);
     } else if (gametype == GT_OBELISK) {
@@ -4510,23 +4510,23 @@ static void BotSetupAlternativeRouteGoals()
             BotAI_Print(PRT_WARNING, "Harvester without neutral obelisk\n");
         red_numaltroutegoals = trap_AAS_AlternativeRouteGoals(
             neutralobelisk.origin, neutralobelisk.areanum,
-            redobelisk.origin, redobelisk.areanum, TFL_DEFAULT,
+            redobelisk.areanum, TFL_DEFAULT,
             red_altroutegoals, MAX_ALTROUTEGOALS,
             ALTROUTEGOAL_CLUSTERPORTALS | ALTROUTEGOAL_VIEWPORTALS);
         blue_numaltroutegoals = trap_AAS_AlternativeRouteGoals(
             neutralobelisk.origin, neutralobelisk.areanum,
-            blueobelisk.origin, blueobelisk.areanum, TFL_DEFAULT,
+            blueobelisk.areanum, TFL_DEFAULT,
             blue_altroutegoals, MAX_ALTROUTEGOALS,
             ALTROUTEGOAL_CLUSTERPORTALS | ALTROUTEGOAL_VIEWPORTALS);
     } else if (gametype == GT_HARVESTER) {
         red_numaltroutegoals = trap_AAS_AlternativeRouteGoals(
             neutralobelisk.origin, neutralobelisk.areanum,
-            redobelisk.origin, redobelisk.areanum, TFL_DEFAULT,
+            redobelisk.areanum, TFL_DEFAULT,
             red_altroutegoals, MAX_ALTROUTEGOALS,
             ALTROUTEGOAL_CLUSTERPORTALS | ALTROUTEGOAL_VIEWPORTALS);
         blue_numaltroutegoals = trap_AAS_AlternativeRouteGoals(
             neutralobelisk.origin, neutralobelisk.areanum,
-            blueobelisk.origin, blueobelisk.areanum, TFL_DEFAULT,
+            blueobelisk.areanum, TFL_DEFAULT,
             blue_altroutegoals, MAX_ALTROUTEGOALS,
             ALTROUTEGOAL_CLUSTERPORTALS | ALTROUTEGOAL_VIEWPORTALS);
     }

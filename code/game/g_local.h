@@ -832,9 +832,7 @@ int trap_AAS_PredictRoute(void /*struct aas_predictroute_s*/* route, int areanum
                           int goalareanum, int travelflags, int maxareas, int maxtime,
                           int stopevent, int stopcontents, int stoptfl, int stopareanum);
 
-int trap_AAS_AlternativeRouteGoals(vec3_t start, int startareanum, vec3_t goal, int goalareanum, int travelflags,
-                                   void /*struct aas_altroutegoal_s*/* altroutegoals, int maxaltroutegoals,
-                                   int type);
+int trap_AAS_AlternativeRouteGoals(vec3_t start, int startareanum, int goalareanum, int travelflags, void* altroutegoals, int maxaltroutegoals, int type);
 int trap_AAS_Swimming(vec3_t origin);
 int trap_AAS_PredictClientMovement(void /* aas_clientmove_s */* move, int entnum, vec3_t origin, int presencetype, int onground, vec3_t velocity, vec3_t cmdmove, int cmdframes, int maxframes, float frametime, int stopevent, int stopareanum, int visualize);
 

@@ -401,11 +401,9 @@ int trap_AAS_PredictRoute(void /*struct aas_predictroute_s*/* route, int areanum
     return syscall(BOTLIB_AAS_PREDICT_ROUTE, route, areanum, origin, goalareanum, travelflags, maxareas, maxtime, stopevent, stopcontents, stoptfl, stopareanum);
 }
 
-int trap_AAS_AlternativeRouteGoals(vec3_t start, int startareanum, vec3_t goal, int goalareanum, int travelflags,
-                                   void /*struct aas_altroutegoal_s*/* altroutegoals, int maxaltroutegoals,
-                                   int type)
+int trap_AAS_AlternativeRouteGoals(vec3_t start, int startareanum, int goalareanum, int travelflags, void* altroutegoals, int maxaltroutegoals, int type)
 {
-    return syscall(BOTLIB_AAS_ALTERNATIVE_ROUTE_GOAL, start, startareanum, goal, goalareanum, travelflags, altroutegoals, maxaltroutegoals, type);
+    return syscall(BOTLIB_AAS_ALTERNATIVE_ROUTE_GOAL, start, startareanum, goalareanum, travelflags, altroutegoals, maxaltroutegoals, type);
 }
 
 int trap_AAS_Swimming(vec3_t origin)
