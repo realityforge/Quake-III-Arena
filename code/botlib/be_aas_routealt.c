@@ -35,8 +35,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_aas_def.h"
 #include "be_aas_routealt.h"
 
-//#define ALTROUTE_DEBUG
-
 typedef struct midrangearea_s {
     int valid;
     unsigned short starttime;
@@ -84,11 +82,6 @@ int AAS_AlternativeRouteGoals(vec3_t start, int startareanum, vec3_t goal, int g
     int starttime, goaltime, goaltraveltime;
     float dist, bestdist;
     vec3_t mid, dir;
-#ifdef ALTROUTE_DEBUG
-    int startmillisecs;
-
-    startmillisecs = Sys_MilliSeconds();
-#endif
 
     if (!startareanum || !goalareanum)
         return 0;
@@ -158,16 +151,10 @@ int AAS_AlternativeRouteGoals(vec3_t start, int startareanum, vec3_t goal, int g
         VectorCopy(aasworld.areas[bestareanum].center, altroutegoals[numaltroutegoals].origin);
         altroutegoals[numaltroutegoals].areanum = bestareanum;
         numaltroutegoals++;
-#ifdef ALTROUTE_DEBUG
-        AAS_ShowAreaPolygons(bestareanum, 1, true);
-#endif
         // don't return more than the maximum alternative route goals
         if (numaltroutegoals >= maxaltroutegoals)
             break;
     }
-#ifdef ALTROUTE_DEBUG
-    botimport.Print(PRT_MESSAGE, "alternative route goals in %d msec\n", Sys_MilliSeconds() - startmillisecs);
-#endif
     return numaltroutegoals;
 }
 void AAS_InitAlternativeRouting()
