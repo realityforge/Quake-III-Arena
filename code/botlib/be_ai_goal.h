@@ -75,7 +75,7 @@ int BotChooseNBGItem(int goalstate, vec3_t origin, int* inventory, int travelfla
 // returns true if the bot touches the goal
 int BotTouchingGoal(vec3_t origin, bot_goal_t* goal);
 // returns true if the goal should be visible but isn't
-int BotItemGoalInVisButNotVisible(int viewer, vec3_t eye, vec3_t viewangles, bot_goal_t* goal);
+int BotItemGoalInVisButNotVisible(int viewer, vec3_t eye, bot_goal_t* goal);
 // search for a goal for the given classname, the index can be used
 // as a start point for the search when multiple goals are available with that same classname
 int BotGetLevelItemGoal(int index, char* classname, bot_goal_t* goal);

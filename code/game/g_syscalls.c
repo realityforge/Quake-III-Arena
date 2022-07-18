@@ -659,9 +659,9 @@ int trap_BotTouchingGoal(vec3_t origin, void /* struct bot_goal_s */* goal)
     return syscall(BOTLIB_AI_TOUCHING_GOAL, origin, goal);
 }
 
-int trap_BotItemGoalInVisButNotVisible(int viewer, vec3_t eye, vec3_t viewangles, void /* struct bot_goal_s */* goal)
+int trap_BotItemGoalInVisButNotVisible(int viewer, vec3_t eye, void* goal)
 {
-    return syscall(BOTLIB_AI_ITEM_GOAL_IN_VIS_BUT_NOT_VISIBLE, viewer, eye, viewangles, goal);
+    return syscall(BOTLIB_AI_ITEM_GOAL_IN_VIS_BUT_NOT_VISIBLE, viewer, eye, goal);
 }
 
 int trap_BotGetLevelItemGoal(int index, char* classname, void /* struct bot_goal_s */* goal)

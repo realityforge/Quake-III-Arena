@@ -1245,7 +1245,7 @@ int BotTouchingGoal(vec3_t origin, bot_goal_t* goal)
     }
     return true;
 }
-int BotItemGoalInVisButNotVisible(int viewer, vec3_t eye, vec3_t viewangles, bot_goal_t* goal)
+int BotItemGoalInVisButNotVisible(int viewer, vec3_t eye, bot_goal_t* goal)
 {
     aas_entityinfo_t entinfo;
     bsp_trace_t trace;
