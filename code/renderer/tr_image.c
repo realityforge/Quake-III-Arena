@@ -433,7 +433,7 @@ static void R_BlendOverTexture(uint8_t* data, int pixelCount, uint8_t blend[4])
     }
 }
 
-uint8_t mipBlendColors[16][4] = {
+static uint8_t mipBlendColors[16][4] = {
     { 0, 0, 0, 0 },
     { 255, 0, 0, 128 },
     { 0, 255, 0, 128 },
