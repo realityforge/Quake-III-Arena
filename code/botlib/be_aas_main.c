@@ -63,7 +63,7 @@ void AAS_SetInitialized()
     aasworld.initialized = true;
     botimport.Print(PRT_MESSAGE, "AAS initialized.\n");
 }
-static void AAS_ContinueInit(float time)
+static void AAS_ContinueInit()
 {
     // if no AAS file loaded
     if (!aasworld.loaded)
@@ -72,7 +72,7 @@ static void AAS_ContinueInit(float time)
     if (aasworld.initialized)
         return;
     // calculate reachability, if not finished return
-    if (AAS_ContinueInitReachability(time))
+    if (AAS_ContinueInitReachability())
         return;
     // initialize clustering for the new map
     AAS_InitClustering();
@@ -105,7 +105,7 @@ int AAS_StartFrame(float time)
     // invalidate the entities
     AAS_InvalidateEntities();
     // initialize AAS
-    AAS_ContinueInit(time);
+    AAS_ContinueInit();
     aasworld.frameroutingupdates = 0;
     if (bot_developer) {
         if (LibVarGetValue("showcacheupdates")) {
