@@ -1859,7 +1859,7 @@ static int PC_DollarDirective_evalfloat(source_t* source)
         UnreadSignToken(source);
     return true;
 }
-directive_t dollardirectives[20] = {
+static directive_t dollardirectives[20] = {
     { "evalint", PC_DollarDirective_evalint },
     { "evalfloat", PC_DollarDirective_evalfloat },
     { NULL, NULL }
