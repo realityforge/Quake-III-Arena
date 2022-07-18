@@ -856,7 +856,7 @@ void PC_RemoveAllGlobalDefines()
         PC_FreeDefine(define);
     }
 }
-static define_t* PC_CopyDefine(source_t* source, define_t* define)
+static define_t* PC_CopyDefine(define_t* define)
 {
     define_t* newdefine;
     token_t *token, *newtoken, *lasttoken;
@@ -900,7 +900,7 @@ static void PC_AddGlobalDefinesToSource(source_t* source)
     define_t *define, *newdefine;
 
     for (define = globaldefines; define; define = define->next) {
-        newdefine = PC_CopyDefine(source, define);
+        newdefine = PC_CopyDefine(define);
         PC_AddDefineToHash(newdefine, source->definehash);
     }
 }
