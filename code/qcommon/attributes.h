@@ -67,6 +67,20 @@
 #define UNLIKELY(expr) (!!(expr))
 #endif
 
+// The function marked by this attribute returns a value that the user should make use of.
+#if defined(__clang__) || defined(__GNUC__)
+#define WARN_UNUSED_RESULT __attribute__((warn_unused_result))
+#else
+#define WARN_UNUSED_RESULT
+#endif
+
+// The function marked by this attribute has observable effects on the state of the program other than to return a value.
+#if defined(__clang__) || defined(__GNUC__)
+#define PURE __attribute__((pure))
+#else
+#define PURE
+#endif
+
 // The function marked by this attribute returns a non-null pointer.
 #if defined(__clang__) || defined(__GNUC__)
 #define RETURNS_NONNULL __attribute__((returns_nonnull))
