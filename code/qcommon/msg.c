@@ -753,7 +753,7 @@ void MSG_WriteDeltaEntity(msg_t* msg, struct entityState_s* from, struct entityS
     // the "number" field is not part of the field list
     // if this assert fails, someone added a field to the entityState_t
     // struct without updating the message fields
-    assert(numFields + 1 == sizeof(*from) / 4);
+    assert(COUNT_OF(entityStateFields) + 1 == sizeof(*from) / 4);
 
     // a NULL to is a delta remove message
     if (to == NULL) {
