@@ -740,8 +740,7 @@ If force is not set, then nothing at all will be generated if the entity is
 identical, under the assumption that the in-order delta code will catch it.
 ==================
 */
-void MSG_WriteDeltaEntity(msg_t* msg, struct entityState_s* from, struct entityState_s* to,
-                          bool force)
+void MSG_WriteDeltaEntity(msg_t* msg, struct entityState_s* from, struct entityState_s* to, bool force)
 {
     int lc;
     netField_t* field;

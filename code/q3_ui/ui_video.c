@@ -547,8 +547,7 @@ static void GraphicsOptions_ApplyChanges(void* unused, int notification)
             char w[16], h[16];
             Q_strncpyz(w, detectedResolutions[s_graphicsoptions.mode.curvalue], sizeof(w));
             *strchr(w, 'x') = 0;
-            Q_strncpyz(h,
-                       strchr(detectedResolutions[s_graphicsoptions.mode.curvalue], 'x') + 1, sizeof(h));
+            Q_strncpyz(h, strchr(detectedResolutions[s_graphicsoptions.mode.curvalue], 'x') + 1, sizeof(h));
             trap_Cvar_Set("r_customwidth", w);
             trap_Cvar_Set("r_customheight", h);
         }
