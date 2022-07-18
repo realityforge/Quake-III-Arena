@@ -44,7 +44,6 @@ static NSDate* distantPast;
 static cvar_t* in_nomouse;
 static cvar_t* in_showevents;
 static cvar_t* in_mouseLowEndSlope;
-static cvar_t* in_mouseHighEndCutoff;
 static cvar_t* in_disableOSMouseScaling;
 
 static void Sys_StartMouseInput();
@@ -118,10 +117,6 @@ void Sys_InitInput(void)
     }
 #endif
 
-    in_mouseHighEndCutoff = Cvar_Get("in_mouseHighEndCutoff", "20", CVAR_ARCHIVE);
-    if (in_mouseLowEndSlope->value < 1) {
-        Cvar_Set("in_mouseHighEndCutoff", "1");
-    }
     in_disableOSMouseScaling = Cvar_Get("in_disableOSMouseScaling", "1", CVAR_ARCHIVE);
 
     glw_state.display = Sys_DisplayToUse();
