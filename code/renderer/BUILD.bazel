@@ -133,19 +133,6 @@ cc_library(
     ],
 )
 
-cc_library(
-    name = "tr_subs",
-    srcs = ["tr_subs.c"],
-    includes = ["."],
-    deps = [
-        ":internal_api",
-        ":local",
-        ":renderer",
-        "//code/qcommon",
-        "//code/qcommon:qfiles",
-    ],
-)
-
 gla_lib(
     name = "gla",
     extensions = [
