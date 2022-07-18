@@ -447,7 +447,7 @@ static intptr_t SV_GameSystemCalls(intptr_t* args)
     case BOTLIB_AAS_AREA_INFO:
         return botlib_export->aas.AAS_AreaInfo(args[1], VMA(2));
     case BOTLIB_AAS_ALTERNATIVE_ROUTE_GOAL:
-        return botlib_export->aas.AAS_AlternativeRouteGoals(VMA(1), args[2], VMA(3), args[4], args[5], VMA(6), args[7], args[8]);
+        return botlib_export->aas.AAS_AlternativeRouteGoals(VMA(1), args[2], args[3], args[4], VMA(5), args[6], args[7]);
     case BOTLIB_AAS_ENTITY_INFO:
         botlib_export->aas.AAS_EntityInfo(args[1], VMA(2));
         return 0;

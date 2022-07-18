@@ -232,9 +232,7 @@ typedef struct aas_export_s {
     //--------------------------------------------
     // be_aas_altroute.c
     //--------------------------------------------
-    int (*AAS_AlternativeRouteGoals)(vec3_t start, int startareanum, vec3_t goal, int goalareanum, int travelflags,
-                                     struct aas_altroutegoal_s* altroutegoals, int maxaltroutegoals,
-                                     int type);
+    int (*AAS_AlternativeRouteGoals)(vec3_t start, int startareanum, int goalareanum, int travelflags, struct aas_altroutegoal_s* altroutegoals, int maxaltroutegoals, int type);
     //--------------------------------------------
     // be_aas_move.c
     //--------------------------------------------
