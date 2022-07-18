@@ -352,7 +352,6 @@ static void Init_AI_Export(ai_export_t* ai)
     ai->BotLoadItemWeights = BotLoadItemWeights;
     ai->BotFreeItemWeights = BotFreeItemWeights;
     ai->BotInterbreedGoalFuzzyLogic = BotInterbreedGoalFuzzyLogic;
-    ai->BotSaveGoalFuzzyLogic = BotSaveGoalFuzzyLogic;
     ai->BotMutateGoalFuzzyLogic = BotMutateGoalFuzzyLogic;
     ai->BotAllocGoalState = BotAllocGoalState;
     ai->BotFreeGoalState = BotFreeGoalState;

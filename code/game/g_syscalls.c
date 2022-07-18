@@ -705,11 +705,6 @@ void trap_BotInterbreedGoalFuzzyLogic(int parent1, int parent2, int child)
     syscall(BOTLIB_AI_INTERBREED_GOAL_FUZZY_LOGIC, parent1, parent2, child);
 }
 
-void trap_BotSaveGoalFuzzyLogic(int goalstate, char* filename)
-{
-    syscall(BOTLIB_AI_SAVE_GOAL_FUZZY_LOGIC, goalstate, filename);
-}
-
 void trap_BotMutateGoalFuzzyLogic(int goalstate, float range)
 {
     syscall(BOTLIB_AI_MUTATE_GOAL_FUZZY_LOGIC, goalstate, range);
