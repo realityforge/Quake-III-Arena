@@ -31,7 +31,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "aasfile.h"
 #include "botlib.h"
 #include "be_aas.h"
-#include "be_aas_funcs.h"
 #include "be_interface.h"
 #include "be_ai_weight.h" //fuzzy weights
 #include "be_ai_weap.h"
@@ -325,22 +324,6 @@ int BotChooseBestFightWeapon(int weaponstate, int* inventory)
         }
     }
     return bestweapon;
-}
-void BotResetWeaponState(int weaponstate)
-{
-    struct weightconfig_s* weaponweightconfig;
-    int* weaponweightindex;
-    bot_weaponstate_t* ws;
-
-    ws = BotWeaponStateFromHandle(weaponstate);
-    if (!ws)
-        return;
-    weaponweightconfig = ws->weaponweightconfig;
-    weaponweightindex = ws->weaponweightindex;
-
-    // memset(ws, 0, sizeof(bot_weaponstate_t));
-    ws->weaponweightconfig = weaponweightconfig;
-    ws->weaponweightindex = weaponweightindex;
 }
 int BotAllocWeaponState()
 {

@@ -918,7 +918,6 @@ void trap_BotGetWeaponInfo(int weaponstate, int weapon, void /* struct weaponinf
 int trap_BotLoadWeaponWeights(int weaponstate, char* filename);
 int trap_BotAllocWeaponState(void);
 void trap_BotFreeWeaponState(int weaponstate);
-void trap_BotResetWeaponState(int weaponstate);
 
 int trap_GeneticParentsAndChildSelection(int numranks, float* ranks, int* parent1, int* parent2, int* child);
 

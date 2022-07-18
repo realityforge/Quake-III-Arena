@@ -363,7 +363,6 @@ typedef struct ai_export_s {
     int (*BotLoadWeaponWeights)(int weaponstate, char* filename);
     int (*BotAllocWeaponState)();
     void (*BotFreeWeaponState)(int weaponstate);
-    void (*BotResetWeaponState)(int weaponstate);
     //-----------------------------------
     // be_ai_gen.h
     //-----------------------------------
