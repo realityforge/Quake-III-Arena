@@ -65,7 +65,7 @@ typedef struct bot_character_s {
     bot_characteristic_t c[1]; // variable sized
 } bot_character_t;
 
-bot_character_t* botcharacters[MAX_CLIENTS + 1];
+static bot_character_t* botcharacters[MAX_CLIENTS + 1];
 
 static bot_character_t* BotCharacterFromHandle(int handle)
 {

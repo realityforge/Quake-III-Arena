@@ -38,7 +38,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 aas_t aasworld;
 
-libvar_t* saveroutingcache;
+static libvar_t* saveroutingcache;
 
 void QDECL AAS_Error(const char* fmt, ...)
 {

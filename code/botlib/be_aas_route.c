@@ -68,13 +68,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #ifdef ROUTING_DEBUG
-int numareacacheupdates;
-int numportalcacheupdates;
-#endif // ROUTING_DEBUG
+static int numareacacheupdates;
+static int numportalcacheupdates;
+static int routingcachesize;
 
-int routingcachesize;
-
-#ifdef ROUTING_DEBUG
 void AAS_RoutingInfo()
 {
     botimport.Print(PRT_MESSAGE, "%d area cache updates\n", numareacacheupdates);
@@ -179,7 +176,9 @@ static void AAS_LinkCache(aas_routingcache_t* cache)
 static void AAS_FreeRoutingCache(aas_routingcache_t* cache)
 {
     AAS_UnlinkCache(cache);
+#ifdef ROUTING_DEBUG
     routingcachesize -= cache->size;
+#endif
     FreeMemory(cache);
 }
 static void AAS_RemoveRoutingCacheInCluster(int clusternum)
@@ -497,7 +496,9 @@ static aas_routingcache_t* AAS_AllocRoutingCache(int numtraveltimes)
     size = sizeof(aas_routingcache_t)
         + numtraveltimes * sizeof(unsigned short int)
         + numtraveltimes * sizeof(unsigned char);
+#ifdef ROUTING_DEBUG
     routingcachesize += size;
+#endif
     cache = (aas_routingcache_t*)GetClearedMemory(size);
     cache->reachabilities = (unsigned char*)cache + sizeof(aas_routingcache_t)
         + numtraveltimes * sizeof(unsigned short int);
@@ -860,8 +861,8 @@ void AAS_InitRouting()
 #ifdef ROUTING_DEBUG
     numareacacheupdates = 0;
     numportalcacheupdates = 0;
-#endif // ROUTING_DEBUG
     routingcachesize = 0;
+#endif // ROUTING_DEBUG
     // read any routing cache if available
     AAS_ReadRouteCache();
 }

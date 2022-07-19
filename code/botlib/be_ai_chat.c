@@ -175,20 +175,20 @@ typedef struct {
     char chatname[MAX_QPATH];
 } bot_ichatdata_t;
 
-bot_ichatdata_t* ichatdata[MAX_CLIENTS];
+static bot_ichatdata_t* ichatdata[MAX_CLIENTS];
 
-bot_chatstate_t* botchatstates[MAX_CLIENTS + 1];
+static bot_chatstate_t* botchatstates[MAX_CLIENTS + 1];
 // console message heap
-bot_consolemessage_t* consolemessageheap = NULL;
-bot_consolemessage_t* freeconsolemessages = NULL;
+static bot_consolemessage_t* consolemessageheap = NULL;
+static bot_consolemessage_t* freeconsolemessages = NULL;
 // list with match strings
-bot_matchtemplate_t* matchtemplates = NULL;
+static bot_matchtemplate_t* matchtemplates = NULL;
 // list with synonyms
-bot_synonymlist_t* synonyms = NULL;
+static bot_synonymlist_t* synonyms = NULL;
 // list with random strings
-bot_randomlist_t* randomstrings = NULL;
+static bot_randomlist_t* randomstrings = NULL;
 // reply chats
-bot_replychat_t* replychats = NULL;
+static bot_replychat_t* replychats = NULL;
 
 static bot_chatstate_t* BotChatStateFromHandle(int handle)
 {

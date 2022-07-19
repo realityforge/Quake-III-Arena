@@ -43,7 +43,7 @@ typedef struct directive_s {
 #define DEFINEHASHSIZE 1024
 
 // list with global defines added to every source loaded
-define_t* globaldefines;
+static define_t* globaldefines;
 
 void QDECL SourceError(source_t* source, const char* str, ...)
 {
@@ -1759,7 +1759,7 @@ static int PC_Directive_evalfloat(source_t* source)
         UnreadSignToken(source);
     return true;
 }
-directive_t directives[20] = {
+static directive_t directives[20] = {
     { "if", PC_Directive_if },
     { "ifdef", PC_Directive_ifdef },
     { "ifndef", PC_Directive_ifndef },
@@ -1857,7 +1857,7 @@ static int PC_DollarDirective_evalfloat(source_t* source)
 
     return true;
 }
-directive_t dollardirectives[20] = {
+static directive_t dollardirectives[20] = {
     { "evalint", PC_DollarDirective_evalint },
     { "evalfloat", PC_DollarDirective_evalfloat },
     { NULL, NULL }

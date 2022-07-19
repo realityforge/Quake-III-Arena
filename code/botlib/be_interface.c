@@ -52,7 +52,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // library globals in a structure
 botlib_globals_t botlibglobals;
 
-botlib_export_t be_botlib_export;
+static botlib_export_t be_botlib_export;
 botlib_import_t botimport;
 //
 int bot_developer;
