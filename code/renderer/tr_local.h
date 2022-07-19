@@ -1943,7 +1943,7 @@ typedef struct shaderCommands_s {
 
     // info extracted from current shader
     int numPasses;
-    void (*currentStageIteratorFunc)();
+    void (*currentStageIteratorFunc)(void);
     shaderStage_t** xstages;
 } shaderCommands_t;
 
