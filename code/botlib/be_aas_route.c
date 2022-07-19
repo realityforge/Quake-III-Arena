@@ -44,12 +44,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define DISTANCEFACTOR_SWIM 1 // should be 0.66, swim speed = 150
 #define DISTANCEFACTOR_WALK 0.33f // walk speed = 300
 
-// cache refresh time
-#define CACHE_REFRESHTIME 15.0f // 15 seconds refresh time
-
-// maximum number of routing updates each frame
-#define MAX_FRAMEROUTINGUPDATES 10
-
 /*
 
   area routing cache:
