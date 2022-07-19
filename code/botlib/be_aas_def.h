@@ -200,7 +200,6 @@ typedef struct aas_s {
     aas_entity_t* entities;
     // string indexes
     char* configstrings[MAX_CONFIGSTRINGS];
-    int indexessetup;
     // index to retrieve travel flag for a travel type
     int travelflagfortype[MAX_TRAVELTYPES];
     // travel flags for each area based on contents
