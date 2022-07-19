@@ -165,16 +165,8 @@ typedef struct script_s {
 
 // read a token from the script
 int PS_ReadToken(script_t* script, token_t* token);
-// expect a certain token
-int PS_ExpectTokenString(script_t* script, char* string);
 // expect a certain token type
 int PS_ExpectTokenType(script_t* script, int type, int subtype, token_t* token);
-// expect a token
-int PS_ExpectAnyToken(script_t* script, token_t* token);
-// returns true an reads the token when a token with the given type is available
-int PS_CheckTokenType(script_t* script, int type, int subtype, token_t* token);
-// unread the last token read from the script
-void PS_UnreadLastToken(script_t* script);
 // remove any leading and trailing double quotes from the token
 void StripDoubleQuotes(char* string);
 // remove any leading and trailing single quotes from the token

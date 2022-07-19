@@ -686,21 +686,6 @@ int PS_ReadToken(script_t* script, token_t* token)
     // successfully read a token
     return 1;
 }
-int PS_ExpectTokenString(script_t* script, char* string)
-{
-    token_t token;
-
-    if (!PS_ReadToken(script, &token)) {
-        ScriptError(script, "couldn't find expected %s", string);
-        return 0;
-    }
-
-    if (strcmp(token.string, string)) {
-        ScriptError(script, "expected %s, found %s", string, token.string);
-        return 0;
-    }
-    return 1;
-}
 int PS_ExpectTokenType(script_t* script, int type, int subtype, token_t* token)
 {
     char str[MAX_TOKEN];
@@ -757,34 +742,6 @@ int PS_ExpectTokenType(script_t* script, int type, int subtype, token_t* token)
         }
     }
     return 1;
-}
-int PS_ExpectAnyToken(script_t* script, token_t* token)
-{
-    if (!PS_ReadToken(script, token)) {
-        ScriptError(script, "couldn't read expected token");
-        return 0;
-    } else {
-        return 1;
-    }
-}
-int PS_CheckTokenType(script_t* script, int type, int subtype, token_t* token)
-{
-    token_t tok;
-
-    if (!PS_ReadToken(script, &tok))
-        return 0;
-    // if the type matches
-    if (tok.type == type && (tok.subtype & subtype) == subtype) {
-        memcpy(token, &tok, sizeof(token_t));
-        return 1;
-    }
-    // token is not available
-    script->script_p = script->lastscript_p;
-    return 0;
-}
-void PS_UnreadLastToken(script_t* script)
-{
-    script->tokenavailable = 1;
 }
 void StripDoubleQuotes(char* string)
 {
