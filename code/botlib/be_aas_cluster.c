@@ -41,9 +41,6 @@ extern botlib_import_t botimport;
 #define AAS_MAX_CLUSTERS 65536
 #define MAX_PORTALAREAS 1024
 
-// do not flood through area faces, only use reachabilities
-int nofaceflood = true;
-
 static void AAS_RemoveClusterAreas()
 {
     int i;
@@ -101,10 +98,6 @@ static int AAS_UpdatePortal(int areanum, int clusternum)
 }
 static int AAS_FloodClusterAreas_r(int areanum, int clusternum)
 {
-    aas_area_t* area;
-    aas_face_t* face;
-    int facenum, i;
-
     if (areanum <= 0 || areanum >= aasworld.numareas) {
         AAS_Error("AAS_FloodClusterAreas_r: areanum out of range");
         return false;
@@ -128,25 +121,8 @@ static int AAS_FloodClusterAreas_r(int areanum, int clusternum)
     // the cluster has an extra area
     aasworld.clusters[clusternum].numareas++;
 
-    area = &aasworld.areas[areanum];
-    // use area faces to flood into adjacent areas
-    if (!nofaceflood) {
-        for (i = 0; i < area->numfaces; i++) {
-            facenum = abs(aasworld.faceindex[area->firstface + i]);
-            face = &aasworld.faces[facenum];
-            if (face->frontarea == areanum) {
-                if (face->backarea)
-                    if (!AAS_FloodClusterAreas_r(face->backarea, clusternum))
-                        return false;
-            } else {
-                if (face->frontarea)
-                    if (!AAS_FloodClusterAreas_r(face->frontarea, clusternum))
-                        return false;
-            }
-        }
-    }
     // use the reachabilities to flood into other areas
-    for (i = 0; i < aasworld.areasettings[areanum].numreachableareas; i++) {
+    for (int i = 0; i < aasworld.areasettings[areanum].numreachableareas; i++) {
         if (!aasworld.reachability[aasworld.areasettings[areanum].firstreachablearea + i].areanum) {
             continue;
         }
@@ -255,11 +231,9 @@ static int AAS_FindClusters()
         // if the area is already part of a cluster
         if (aasworld.areasettings[i].cluster)
             continue;
-        // if not flooding through faces only use areas that have reachabilities
-        if (nofaceflood) {
-            if (!aasworld.areasettings[i].numreachableareas)
-                continue;
-        }
+        // use areas that have reachabilities
+        if (!aasworld.areasettings[i].numreachableareas)
+            continue;
         // if the area is a cluster portal
         if (aasworld.areasettings[i].contents & AREACONTENTS_CLUSTERPORTAL)
             continue;
