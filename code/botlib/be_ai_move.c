@@ -758,7 +758,6 @@ static float BotGapDistance(vec3_t origin, vec3_t hordir, int entnum)
     aas_trace_t trace;
 
     // do gap checking
-    // startz = origin[2];
     // this enables walking down stairs more fluidly
     {
         VectorCopy(origin, start);
