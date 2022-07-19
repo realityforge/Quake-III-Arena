@@ -635,8 +635,6 @@ int PS_ReadToken(script_t* script, token_t* token)
         memcpy(token, &script->token, sizeof(token_t));
         return 1;
     }
-    // save script pointer
-    script->lastscript_p = script->script_p;
     // save line counter
     script->lastline = script->line;
     // clear the token stuff
@@ -798,8 +796,6 @@ script_t* LoadScriptFile(const char* filename)
     script->length = length;
     // pointer in script buffer
     script->script_p = script->buffer;
-    // pointer in script buffer before reading token
-    script->lastscript_p = script->buffer;
     // pointer to end of script buffer
     script->end_p = &script->buffer[length];
     // set if there's a token available in script->token
@@ -827,8 +823,6 @@ script_t* LoadScriptMemory(const char* ptr, const int length, const char* name)
     script->length = length;
     // pointer in script buffer
     script->script_p = script->buffer;
-    // pointer in script buffer before reading token
-    script->lastscript_p = script->buffer;
     // pointer to end of script buffer
     script->end_p = &script->buffer[length];
     // set if there's a token available in script->token

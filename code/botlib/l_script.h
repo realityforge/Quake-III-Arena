@@ -151,7 +151,6 @@ typedef struct script_s {
     char* buffer; // buffer containing the script
     char* script_p; // current pointer in the script
     char* end_p; // pointer to the end of the script
-    char* lastscript_p; // script pointer before reading token
     int length; // length of the script in bytes
     int line; // current line in script
     int lastline; // line before reading token
