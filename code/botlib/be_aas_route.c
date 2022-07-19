@@ -67,13 +67,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #ifdef ROUTING_DEBUG
-int numareacacheupdates;
-int numportalcacheupdates;
-#endif // ROUTING_DEBUG
+static int numareacacheupdates;
+static int numportalcacheupdates;
+static int routingcachesize;
 
-int routingcachesize;
-
-#ifdef ROUTING_DEBUG
 void AAS_RoutingInfo()
 {
     botimport.Print(PRT_MESSAGE, "%d area cache updates\n", numareacacheupdates);

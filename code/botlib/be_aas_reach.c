@@ -55,23 +55,23 @@ extern botlib_import_t botimport;
 // area flag used for weapon jumping
 #define AREA_WEAPONJUMP 8192 // valid area to weapon jump to
 // number of reachabilities of each type
-int reach_swim; // swim
-int reach_equalfloor; // walk on floors with equal height
-int reach_step; // step up
-int reach_walk; // walk of step
-int reach_barrier; // jump up to a barrier
-int reach_waterjump; // jump out of water
-int reach_walkoffledge; // walk of a ledge
-int reach_jump; // jump
-int reach_ladder; // climb or descent a ladder
-int reach_teleport; // teleport
-int reach_elevator; // use an elevator
-int reach_funcbob; // use a func bob
-int reach_grapple; // grapple hook
-int reach_rocketjump; // rocket jump
-int reach_jumppad; // jump pads
+static int reach_swim; // swim
+static int reach_equalfloor; // walk on floors with equal height
+static int reach_step; // step up
+static int reach_walk; // walk of step
+static int reach_barrier; // jump up to a barrier
+static int reach_waterjump; // jump out of water
+static int reach_walkoffledge; // walk of a ledge
+static int reach_jump; // jump
+static int reach_ladder; // climb or descent a ladder
+static int reach_teleport; // teleport
+static int reach_elevator; // use an elevator
+static int reach_funcbob; // use a func bob
+static int reach_grapple; // grapple hook
+static int reach_rocketjump; // rocket jump
+static int reach_jumppad; // jump pads
 // if true grapple reachabilities are skipped
-int calcgrapplereach;
+static int calcgrapplereach;
 // linked reachability
 typedef struct aas_lreachability_s {
     int areanum; // number of the reachable area
@@ -84,10 +84,10 @@ typedef struct aas_lreachability_s {
     struct aas_lreachability_s* next;
 } aas_lreachability_t;
 // temporary reachabilities
-aas_lreachability_t* reachabilityheap; // heap with reachabilities
-aas_lreachability_t* nextreachability; // next free reachability from the heap
-aas_lreachability_t** areareachability; // reachability links for every area
-int numlreachabilities;
+static aas_lreachability_t* reachabilityheap; // heap with reachabilities
+static aas_lreachability_t* nextreachability; // next free reachability from the heap
+static aas_lreachability_t** areareachability; // reachability links for every area
+static int numlreachabilities;
 
 //===========================================================================
 // returns the surface area of the given face

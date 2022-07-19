@@ -113,6 +113,7 @@ cc_library(
     copts = EXTRA_WARNINGS + [
         "-Wunused-parameter",
         "-Wstrict-prototypes",
+        "-Wmissing-variable-declarations",
     ],
     includes = ["."],
     visibility = [

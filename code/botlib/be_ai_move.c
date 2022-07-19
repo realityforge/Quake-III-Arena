@@ -89,20 +89,20 @@ typedef struct bot_movestate_s {
 #define MODELTYPE_FUNC_DOOR 3
 #define MODELTYPE_FUNC_STATIC 4
 
-libvar_t* sv_maxstep;
-libvar_t* sv_maxbarrier;
-libvar_t* sv_gravity;
-libvar_t* weapindex_rocketlauncher;
-libvar_t* weapindex_bfg10k;
-libvar_t* weapindex_grapple;
-libvar_t* entitytypemissile;
-libvar_t* offhandgrapple;
-libvar_t* cmd_grappleoff;
-libvar_t* cmd_grappleon;
+static libvar_t* sv_maxstep;
+static libvar_t* sv_maxbarrier;
+static libvar_t* sv_gravity;
+static libvar_t* weapindex_rocketlauncher;
+static libvar_t* weapindex_bfg10k;
+static libvar_t* weapindex_grapple;
+static libvar_t* entitytypemissile;
+static libvar_t* offhandgrapple;
+static libvar_t* cmd_grappleoff;
+static libvar_t* cmd_grappleon;
 // type of model, func_plat or func_bobbing
-int modeltypes[MAX_MODELS];
+static int modeltypes[MAX_MODELS];
 
-bot_movestate_t* botmovestates[MAX_CLIENTS + 1];
+static bot_movestate_t* botmovestates[MAX_CLIENTS + 1];
 
 int BotAllocMoveState()
 {

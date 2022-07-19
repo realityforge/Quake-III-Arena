@@ -36,7 +36,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define MAX_USERMOVE 400
 #define ACTION_JUMPEDLASTFRAME 128
 
-bot_input_t* botinputs;
+static bot_input_t* botinputs;
 
 void EA_Say(int client, char* str)
 {

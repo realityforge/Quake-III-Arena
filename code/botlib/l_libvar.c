@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "l_libvar.h"
 
 // list with library variables
-libvar_t* libvarlist;
+static libvar_t* libvarlist;
 
 static float LibVarStringValue(char* string)
 {

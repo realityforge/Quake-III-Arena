@@ -34,7 +34,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "l_libvar.h"
 
 // longer punctuations first
-punctuation_t default_punctuations[] = {
+static punctuation_t default_punctuations[] = {
     // binary operators
     { ">>=", P_RSHIFT_ASSIGN, NULL },
     { "<<=", P_LSHIFT_ASSIGN, NULL },
@@ -108,7 +108,7 @@ punctuation_t default_punctuations[] = {
     { NULL, 0 }
 };
 
-char basefolder[MAX_QPATH];
+static char basefolder[MAX_QPATH];
 
 static void PS_CreatePunctuationTable(script_t* script, punctuation_t* punctuations)
 {

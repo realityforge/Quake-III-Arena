@@ -39,9 +39,9 @@ typedef struct midrangearea_s {
     unsigned short starttime;
 } midrangearea_t;
 
-midrangearea_t* midrangeareas;
-int* clusterareas;
-int numclusterareas;
+static midrangearea_t* midrangeareas;
+static int* clusterareas;
+static int numclusterareas;
 
 static void AAS_AltRoutingFloodCluster_r(int areanum)
 {
