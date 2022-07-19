@@ -232,6 +232,7 @@ static int AAS_FindClusters()
         // if the area is already part of a cluster
         if (aasworld.areasettings[i].cluster)
             continue;
+        // use areas that have reachabilities
         if (!aasworld.areasettings[i].numreachableareas)
             continue;
         // if the area is a cluster portal
