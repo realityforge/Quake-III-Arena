@@ -1700,10 +1700,10 @@ static void RawImage_UploadToRgtc2Texture(GLuint texture, int miplevel, int x, i
     ri.Hunk_FreeTempMemory(compressedData);
 }
 
-static int CalculateMipSize(int width, int height, GLenum picFormat)
+static int CalculateMipSize(const int width, const int height, const GLenum picFormat)
 {
-    int numBlocks = ((width + 3) / 4) * ((height + 3) / 4);
-    int numPixels = width * height;
+    const int numBlocks = ((width + 3) / 4) * ((height + 3) / 4);
+    const int numPixels = width * height;
 
     switch (picFormat) {
     case GL_COMPRESSED_RGB_S3TC_DXT1_EXT:
@@ -1739,7 +1739,7 @@ static int CalculateMipSize(int width, int height, GLenum picFormat)
     }
 }
 
-static GLenum PixelDataFormatFromInternalFormat(GLenum internalFormat)
+static GLenum PixelDataFormatFromInternalFormat(const GLenum internalFormat)
 {
     switch (internalFormat) {
     case GL_DEPTH_COMPONENT:
