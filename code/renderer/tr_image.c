@@ -1749,7 +1749,6 @@ static GLenum PixelDataFormatFromInternalFormat(const GLenum internalFormat)
         return GL_DEPTH_COMPONENT;
     default:
         return GL_RGBA;
-        break;
     }
 }
 
