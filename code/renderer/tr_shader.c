@@ -1307,7 +1307,7 @@ typedef struct {
     int clearSolid, surfaceFlags, contents;
 } infoParm_t;
 
-infoParm_t infoParms[] = {
+static infoParm_t infoParms[] = {
     // server relevant contents
     { "water", 1, 0, CONTENTS_WATER },
     { "slime", 1, 0, CONTENTS_SLIME }, // mildly damaging
