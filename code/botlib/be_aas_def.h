@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-#define MAX_CONFIGSTRINGS 1024
+#include "../qcommon/q_shared.h"
 
 // structure to link entities to areas and areas to entities
 typedef struct aas_link_s {
