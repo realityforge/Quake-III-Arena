@@ -229,7 +229,6 @@ void EA_ResetInput(int client)
     int jumped = false;
 
     bi = &botinputs[client];
-    bi->actionflags &= ~ACTION_JUMPEDLASTFRAME;
 
     bi->thinktime = 0;
     VectorClear(bi->dir);
