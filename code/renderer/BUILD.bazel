@@ -43,6 +43,13 @@ cc_library(
         "-Wno-cast-align",
         "-Wno-sign-conversion",
         "-Wno-double-promotion",
+        "-Wno-float-equal",
+        "-Wno-shorten-64-to-32",
+        "-Wno-float-conversion",
+        "-Wno-implicit-float-conversion",
+        "-Wno-implicit-int-conversion",
+        "-Wno-sign-compare",
+        "-Wno-pointer-to-int-cast",
     ],
     visibility = [
         "//code/cgame:__pkg__",
