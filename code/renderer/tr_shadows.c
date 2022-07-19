@@ -38,8 +38,6 @@ typedef struct {
     int facing;
 } edgeDef_t;
 
-#define MAX_EDGE_DEFS 32
-
 /*
 =================
 RB_ShadowTessEnd
