@@ -36,8 +36,6 @@ void RE_LoadWorldMap( const char *name );
 static world_t s_worldData;
 static uint8_t* fileBase;
 
-int c_subdivisions;
-
 static void HSVtoRGB(float h, float s, float v, float rgb[3])
 {
     int i;
