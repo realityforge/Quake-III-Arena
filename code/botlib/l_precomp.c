@@ -42,8 +42,6 @@ typedef struct directive_s {
 
 #define DEFINEHASHSIZE 1024
 
-int numtokens;
-
 // list with global defines added to every source loaded
 define_t* globaldefines;
 
@@ -123,13 +121,11 @@ static token_t* PC_CopyToken(token_t* token)
     }
     memcpy(t, token, sizeof(token_t));
     t->next = NULL;
-    numtokens++;
     return t;
 }
 static void PC_FreeToken(token_t* token)
 {
     FreeMemory(token);
-    numtokens--;
 }
 static int PC_ReadSourceToken(source_t* source, token_t* token)
 {
@@ -2119,7 +2115,7 @@ void FreeSource(source_t* source)
 
 #define MAX_SOURCEFILES 64
 
-source_t* sourceFiles[MAX_SOURCEFILES];
+static source_t* sourceFiles[MAX_SOURCEFILES];
 
 int PC_LoadSourceHandle(const char* filename)
 {
