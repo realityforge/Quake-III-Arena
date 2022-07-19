@@ -802,7 +802,7 @@ static void ParseTriSurf(dsurface_t* ds, drawVert_t* verts, float* hdrVertColors
     }
 }
 
-static void ParseFlare(dsurface_t* ds, drawVert_t* verts, msurface_t* surf)
+static void ParseFlare(dsurface_t* ds, msurface_t* surf)
 {
     srfFlare_t* flare;
     int i;
@@ -1658,7 +1658,7 @@ static void R_LoadSurfaces(lump_t* surfs, lump_t* verts, lump_t* indexLump)
             numFaces++;
             break;
         case MST_FLARE:
-            ParseFlare(in, dv, out);
+            ParseFlare(in, out);
             numFlares++;
             break;
         default:
