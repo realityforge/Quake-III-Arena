@@ -1367,21 +1367,18 @@ static bot_moveresult_t BotTravel_Ladder(bot_movestate_t* ms, aas_reachability_t
     bot_moveresult_t result;
 
     BotClearMoveResult(&result);
-    {
-        // botimport.Print(PRT_MESSAGE, "against ladder or not on ground\n");
-        VectorSubtract(reach->end, ms->origin, dir);
-        VectorNormalize(dir);
-        // set the ideal view angles, facing the ladder up or down
-        viewdir[0] = dir[0];
-        viewdir[1] = dir[1];
-        viewdir[2] = 3 * dir[2];
-        Vector2Angles(viewdir, result.ideal_viewangles);
-        // elementary action
-        EA_Move(ms->client, origin, 0);
-        EA_MoveForward(ms->client);
-        // set movement view flag so the AI can see the view is focussed
-        result.flags |= MOVERESULT_MOVEMENTVIEW;
-    }
+    VectorSubtract(reach->end, ms->origin, dir);
+    VectorNormalize(dir);
+    // set the ideal view angles, facing the ladder up or down
+    viewdir[0] = dir[0];
+    viewdir[1] = dir[1];
+    viewdir[2] = 3 * dir[2];
+    Vector2Angles(viewdir, result.ideal_viewangles);
+    // elementary action
+    EA_Move(ms->client, origin, 0);
+    EA_MoveForward(ms->client);
+    // set movement view flag so the AI can see the view is focussed
+    result.flags |= MOVERESULT_MOVEMENTVIEW;
     // save the movement direction
     VectorCopy(dir, result.movedir);
     return result;
