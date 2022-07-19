@@ -12,6 +12,7 @@
 
 # TODO: Add "-Wunused-parameter"
 # TODO: Add "-Wmissing-variable-declarations"
+# TODO: Add "-Wunreachable-code-break"
 EXTRA_WARNINGS = ["-Wall", "-Wpedantic", "-Werror", "-Wmissing-prototypes"] + select({
     "//build_defs:wasm": [
         # For some reason strict-prototypes warning triggers when running emcc toolchain
