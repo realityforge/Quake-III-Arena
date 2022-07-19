@@ -1186,7 +1186,7 @@ static int AAS_AreaRouteToGoalArea(int areanum, vec3_t origin, int goalareanum, 
         return false;
     }
     // make sure the routing cache doesn't grow to large
-    while (AvailableMemory() < 1 * 1024 * 1024) {
+    while (botimport.AvailableMemory() < 1 * 1024 * 1024) {
         if (!AAS_FreeOldestCache())
             break;
     }
