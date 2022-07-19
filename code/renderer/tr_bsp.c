@@ -816,7 +816,6 @@ static void ParseFlare(dsurface_t* ds, msurface_t* surf)
         surf->shader = tr.defaultShader;
     }
 
-    // flare = ri.Hunk_Alloc( sizeof( *flare ), h_low );
     flare = (void*)surf->data;
     flare->surfaceType = SF_FLARE;
 
