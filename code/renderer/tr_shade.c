@@ -227,7 +227,6 @@ static void ComputeTexMods(shaderStage_t* pStage, int bundleNum, float* outMatri
 
         default:
             ri.Error(ERR_DROP, "ERROR: unknown texmod '%d' in shader '%s'", bundle->texMods[tm].type, tess.shader->name);
-            break;
         }
 
         switch (bundle->texMods[tm].type) {
