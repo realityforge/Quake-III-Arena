@@ -129,7 +129,7 @@ static fielddef_t iteminfo_fields[] = {
     { "modelindex", ITEMINFO_OFS(modelindex), FT_INT, 0, 0, 0, NULL },
     { "type", ITEMINFO_OFS(type), FT_INT, 0, 0, 0, NULL },
     { "index", ITEMINFO_OFS(index), FT_INT, 0, 0, 0, NULL },
-    { "respawntime", ITEMINFO_OFS(respawntime), FT_FLOAT },
+    { "respawntime", ITEMINFO_OFS(respawntime), FT_FLOAT, 0, 0, 0, NULL },
     { "mins", ITEMINFO_OFS(mins), FT_FLOAT | FT_ARRAY, 3, 0, 0, NULL },
     { "maxs", ITEMINFO_OFS(maxs), FT_FLOAT | FT_ARRAY, 3, 0, 0, NULL },
     { NULL, 0, 0, 0, 0, 0, NULL }
