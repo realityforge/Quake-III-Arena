@@ -545,7 +545,7 @@ int Characteristic_Integer(int character, int index)
     else if (ch->c[index].type == CT_FLOAT) {
         return (int)ch->c[index].value._float;
     } else {
-        botimport.Print(PRT_ERROR, "characteristic %d is not a integer\n", index);
+        botimport.Print(PRT_ERROR, "characteristic %d is not an integer\n", index);
         return 0;
     }
     //	return 0;
