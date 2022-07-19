@@ -545,7 +545,6 @@ static void BotInputToUserCommand(bot_input_t* bi, usercmd_t* ucmd, int delta_an
 
     // clear the whole structure
     memset(ucmd, 0, sizeof(usercmd_t));
-    // Com_Printf("dir = %f %f %f speed = %f\n", bi->dir[0], bi->dir[1], bi->dir[2], bi->speed);
     // the duration for the user command in milli seconds
     ucmd->serverTime = time;
     if (bi->actionflags & ACTION_DELAYEDJUMP) {
