@@ -2738,47 +2738,45 @@ static void AAS_Reachability_JumpPad()
                     // direction towards the face center
                     VectorSubtract(facecenter, areastart, dir);
                     dir[2] = 0;
-                    {
-                        // get command movement
-                        VectorScale(dir, speed, cmdmove);
-                        AAS_PredictClientMovement(&move, -1, areastart, PRESENCE_NORMAL, false,
-                                                  velocity, cmdmove, 30, 30, 0.1f,
-                                                  SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE | SE_TOUCHJUMPPAD | SE_TOUCHTELEPORTER | SE_HITGROUNDAREA, area2num, visualize);
-                        // if prediction time wasn't enough to fully predict the movement
-                        // don't enter slime or lava and don't fall from too high
-                        if (move.frames < 30 && !(move.stopevent & (SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE))
-                            && (move.stopevent & (SE_HITGROUNDAREA | SE_TOUCHJUMPPAD | SE_TOUCHTELEPORTER))) {
-                            // never go back to the same jumppad
+                    // get command movement
+                    VectorScale(dir, speed, cmdmove);
+                    AAS_PredictClientMovement(&move, -1, areastart, PRESENCE_NORMAL, false,
+                                              velocity, cmdmove, 30, 30, 0.1f,
+                                              SE_ENTERWATER | SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE | SE_TOUCHJUMPPAD | SE_TOUCHTELEPORTER | SE_HITGROUNDAREA, area2num, visualize);
+                    // if prediction time wasn't enough to fully predict the movement
+                    // don't enter slime or lava and don't fall from too high
+                    if (move.frames < 30 && !(move.stopevent & (SE_ENTERSLIME | SE_ENTERLAVA | SE_HITGROUNDDAMAGE))
+                        && (move.stopevent & (SE_HITGROUNDAREA | SE_TOUCHJUMPPAD | SE_TOUCHTELEPORTER))) {
+                        // never go back to the same jumppad
+                        for (link = areas; link; link = link->next_area) {
+                            if (link->areanum == move.endarea)
+                                break;
+                        }
+                        if (!link) {
                             for (link = areas; link; link = link->next_area) {
-                                if (link->areanum == move.endarea)
-                                    break;
-                            }
-                            if (!link) {
-                                for (link = areas; link; link = link->next_area) {
-                                    if (!AAS_AreaJumpPad(link->areanum))
-                                        continue;
-                                    if (AAS_ReachabilityExists(link->areanum, area2num))
-                                        continue;
-                                    // create a jumppad reachability from area1 to area2
-                                    lreach = AAS_AllocReachability();
-                                    if (!lreach) {
-                                        AAS_UnlinkFromAreas(areas);
-                                        return;
-                                    }
-                                    lreach->areanum = move.endarea;
-                                    // NOTE: the facenum is the Z velocity
-                                    lreach->facenum = velocity[2];
-                                    // NOTE: the edgenum is the horizontal velocity
-                                    lreach->edgenum = sqrt(cmdmove[0] * cmdmove[0] + cmdmove[1] * cmdmove[1]);
-                                    VectorCopy(areastart, lreach->start);
-                                    VectorCopy(facecenter, lreach->end);
-                                    lreach->traveltype = TRAVEL_JUMPPAD;
-                                    lreach->traveltype |= AAS_TravelFlagsForTeam(ent);
-                                    lreach->traveltime = aassettings.rs_aircontrolledjumppad;
-                                    lreach->next = areareachability[link->areanum];
-                                    areareachability[link->areanum] = lreach;
-                                    reach_jumppad++;
+                                if (!AAS_AreaJumpPad(link->areanum))
+                                    continue;
+                                if (AAS_ReachabilityExists(link->areanum, area2num))
+                                    continue;
+                                // create a jumppad reachability from area1 to area2
+                                lreach = AAS_AllocReachability();
+                                if (!lreach) {
+                                    AAS_UnlinkFromAreas(areas);
+                                    return;
                                 }
+                                lreach->areanum = move.endarea;
+                                // NOTE: the facenum is the Z velocity
+                                lreach->facenum = velocity[2];
+                                // NOTE: the edgenum is the horizontal velocity
+                                lreach->edgenum = sqrt(cmdmove[0] * cmdmove[0] + cmdmove[1] * cmdmove[1]);
+                                VectorCopy(areastart, lreach->start);
+                                VectorCopy(facecenter, lreach->end);
+                                lreach->traveltype = TRAVEL_JUMPPAD;
+                                lreach->traveltype |= AAS_TravelFlagsForTeam(ent);
+                                lreach->traveltime = aassettings.rs_aircontrolledjumppad;
+                                lreach->next = areareachability[link->areanum];
+                                areareachability[link->areanum] = lreach;
+                                reach_jumppad++;
                             }
                         }
                     }
