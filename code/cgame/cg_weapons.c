@@ -1566,7 +1566,6 @@ void CG_FireWeapon(centity_t* cent)
     }
     if (ent->weapon >= WP_NUM_WEAPONS) {
         CG_Error("CG_FireWeapon: ent->weapon >= WP_NUM_WEAPONS");
-        return;
     }
     weap = &cg_weapons[ent->weapon];
 
