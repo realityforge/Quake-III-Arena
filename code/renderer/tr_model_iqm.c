@@ -316,7 +316,6 @@ bool R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_name)
             default:
                 // not supported
                 return false;
-                break;
             }
 
             if (vertexarray->type < COUNT_OF(vertexArrayFormat)) {
