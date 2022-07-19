@@ -950,17 +950,11 @@ vec_t VectorNormalize2(const vec3_t v, vec3_t out)
     length = sqrt(length);
 
     if (length) {
-#ifndef Q3_VM
-//	  assert( ((Q_fabs(v[0])!=0.0f) || (Q_fabs(v[1])!=0.0f) || (Q_fabs(v[2])!=0.0f)) );
-#endif
         ilength = 1 / length;
         out[0] = v[0] * ilength;
         out[1] = v[1] * ilength;
         out[2] = v[2] * ilength;
     } else {
-#ifndef Q3_VM
-//	  assert( ((Q_fabs(v[0])==0.0f) && (Q_fabs(v[1])==0.0f) && (Q_fabs(v[2])==0.0f)) );
-#endif
         VectorClear(out);
     }
 
