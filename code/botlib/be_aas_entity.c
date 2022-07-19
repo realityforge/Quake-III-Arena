@@ -34,8 +34,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_interface.h"
 #include "be_aas_def.h"
 
-#define MASK_SOLID CONTENTS_PLAYERCLIP
-
 // FIXME: these might change
 enum {
     ET_GENERAL,
