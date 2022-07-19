@@ -92,6 +92,7 @@ struct weaponinfo_s;
 #define ACTION_GUARDBASE 0x1000000
 #define ACTION_PATROL 0x2000000
 #define ACTION_FOLLOWME 0x8000000
+#define ACTION_JUMPEDLASTFRAME 128
 
 // the bot input, will be converted to an usercmd_t
 typedef struct bot_input_s {
