@@ -121,7 +121,6 @@ static void AAS_DeAllocAASLink(aas_link_t* link)
         aasworld.freelinks->prev_ent = link;
     link->prev_ent = NULL;
     link->next_ent = aasworld.freelinks;
-    link->prev_area = NULL;
     link->next_area = NULL;
     aasworld.freelinks = link;
 }
@@ -909,10 +908,7 @@ aas_link_t* AAS_AASLinkEntity(vec3_t absmins, vec3_t absmaxs, int entnum)
             link->entnum = entnum;
             link->areanum = -nodenum;
             // put the link into the double linked area list of the entity
-            link->prev_area = NULL;
             link->next_area = areas;
-            if (areas)
-                areas->prev_area = link;
             areas = link;
             // put the link into the double linked entity list of the area
             link->prev_ent = NULL;
