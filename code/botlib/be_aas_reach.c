@@ -2107,7 +2107,6 @@ static void AAS_Reachability_Teleport()
         if (!areas)
             botimport.Print(PRT_MESSAGE, "trigger_multiple not in any area\n");
         for (link = areas; link; link = link->next_area) {
-            // if (!AAS_AreaGrounded(link->areanum)) continue;
             if (!AAS_AreaTeleporter(link->areanum))
                 continue;
             area1num = link->areanum;
