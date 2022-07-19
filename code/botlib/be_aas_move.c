@@ -37,8 +37,6 @@ extern botlib_import_t botimport;
 
 aas_settings_t aassettings;
 
-//#define AAS_MOVE_DEBUG
-
 int AAS_DropToFloor(vec3_t origin, vec3_t mins, vec3_t maxs)
 {
     vec3_t end;
@@ -510,13 +508,11 @@ static int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
             VectorAdd(org, left_test_vel, end);
             // trace a bounding box
             trace = AAS_TraceClientBBox(org, end, presencetype, entnum);
-            //#ifdef AAS_MOVE_DEBUG
             if (visualize) {
                 if (trace.startsolid)
                     botimport.Print(PRT_MESSAGE, "PredictMovement: start solid\n");
                 AAS_DebugLine(org, trace.endpos, LINECOLOR_RED);
             }
-            //#endif //AAS_MOVE_DEBUG
             if (stopevent & (SE_ENTERAREA | SE_TOUCHJUMPPAD | SE_TOUCHTELEPORTER | SE_TOUCHCLUSTERPORTAL)) {
                 numareas = AAS_TraceAreas(org, trace.endpos, areas, points, 20);
                 for (i = 0; i < numareas; i++) {
@@ -632,7 +628,6 @@ static int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
                             VectorSubtract(end, steptrace.endpos, left_test_vel);
                             left_test_vel[2] = 0;
                             frame_test_vel[2] = 0;
-                            //#ifdef AAS_MOVE_DEBUG
                             if (visualize) {
                                 if (steptrace.endpos[2] - org[2] > 0.125) {
                                     VectorCopy(org, start);
@@ -640,7 +635,6 @@ static int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
                                     AAS_DebugLine(org, start, LINECOLOR_BLUE);
                                 }
                             }
-                            //#endif //AAS_MOVE_DEBUG
                             org[2] = steptrace.endpos[2];
                             step = true;
                         }
