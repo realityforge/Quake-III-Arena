@@ -100,6 +100,8 @@ static int modeltypes[MAX_MODELS];
 
 static bot_movestate_t* botmovestates[MAX_CLIENTS + 1];
 
+#define bot_moveresult_t_cleared(x) bot_moveresult_t x = { 0, 0, 0, 0, 0, 0, 0, { 0, 0, 0 }, { 0, 0, 0 } }
+
 int BotAllocMoveState()
 {
     int i;
