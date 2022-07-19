@@ -758,7 +758,7 @@ static float BotGapDistance(vec3_t origin, vec3_t hordir, int entnum)
 
     // do gap checking
     startz = origin[2];
-    // this enables walking down stairs more fluidly
+    // this enables walking downstairs more fluidly
     {
         VectorCopy(origin, start);
         VectorCopy(origin, end);
