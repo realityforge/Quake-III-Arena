@@ -69,7 +69,7 @@ static fielddef_t weaponinfo_fields[] = {
 // projectile definition
 static fielddef_t projectileinfo_fields[] = {
     { "name", PROJECTILE_OFS(name), FT_STRING, 0, 0, 0, NULL }, // name of the projectile
-    { "model", WEAPON_OFS(model), FT_STRING, 0, 0, 0, NULL }, // model of the projectile
+    { "model", PROJECTILE_OFS(model), FT_STRING, 0, 0, 0, NULL }, // model of the projectile
     { "flags", PROJECTILE_OFS(flags), FT_INT, 0, 0, 0, NULL }, // special flags
     { "gravity", PROJECTILE_OFS(gravity), FT_FLOAT, 0, 0, 0, NULL }, // amount of gravity applied to the projectile [0,1]
     { "damage", PROJECTILE_OFS(damage), FT_INT, 0, 0, 0, NULL }, // damage of the projectile
