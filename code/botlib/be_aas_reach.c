@@ -44,8 +44,6 @@ extern int Sys_MilliSeconds(void);
 
 extern botlib_import_t botimport;
 
-//#define REACH_DEBUG
-
 // NOTE: all travel times are in hundredths of a second
 // maximum number of reachability links
 #define AAS_MAX_REACHABILITYSIZE 65536
@@ -1669,11 +1667,7 @@ static int AAS_Reachability_Jump(int area1num, int area2num)
         }
         if (i >= 3)
             return false;
-#ifdef REACH_DEBUG
-        // create the reachability
-        Log_Write("jump reachability between %d and %d\r\n", area1num, area2num);
-#endif // REACH_DEBUG
-       // create a new reachability link
+        // create a new reachability link
         lreach = AAS_AllocReachability();
         if (!lreach)
             return false;
@@ -1895,11 +1889,6 @@ static int AAS_Reachability_Ladder(int area1num, int area2num)
             end[2] -= 100;
             // trace without entity collision
             trace = AAS_TraceClientBBox(start, end, PRESENCE_NORMAL, -1);
-#ifdef REACH_DEBUG
-            if (trace.startsolid) {
-                Log_Write("trace from area %d started in solid\r\n", area1num);
-            }
-#endif // REACH_DEBUG
             trace.endpos[2] += 1;
             area2num = AAS_PointAreaNum(trace.endpos);
             area2 = &aasworld.areas[area2num];
@@ -1950,14 +1939,7 @@ static int AAS_Reachability_Ladder(int area1num, int area2num)
                     areareachability[area2num] = lreach;
                     reach_jump++;
                     return true;
-#ifdef REACH_DEBUG
-                    Log_Write("jump up to ladder reach between %d and %d\r\n", area2num, area1num);
-#endif // REACH_DEBUG
                 }
-#ifdef REACH_DEBUG
-                else
-                    Log_Write("jump too high between area %d and %d\r\n", area2num, area1num);
-#endif // REACH_DEBUG
             }
         }
     }
@@ -2008,9 +1990,6 @@ static void AAS_Reachability_Teleport()
             continue;
         if (!strcmp(classname, "trigger_multiple")) {
             AAS_ValueForBSPEpairKey(ent, "model", model, MAX_EPAIRKEY);
-            //#ifdef REACH_DEBUG
-            botimport.Print(PRT_MESSAGE, "trigger_multiple model = \"%s\"\n", model);
-            //#endif REACH_DEBUG
             VectorClear(angles);
             AAS_BSPModelMinsMaxsOrigin(atoi(model + 1), angles, mins, maxs, origin);
             if (!AAS_ValueForBSPEpairKey(ent, "target", target, MAX_EPAIRKEY)) {
@@ -2038,9 +2017,6 @@ static void AAS_Reachability_Teleport()
             }
         } else if (!strcmp(classname, "trigger_teleport")) {
             AAS_ValueForBSPEpairKey(ent, "model", model, MAX_EPAIRKEY);
-            //#ifdef REACH_DEBUG
-            botimport.Print(PRT_MESSAGE, "trigger_teleport model = \"%s\"\n", model);
-            //#endif REACH_DEBUG
             VectorClear(angles);
             AAS_BSPModelMinsMaxsOrigin(atoi(model + 1), angles, mins, maxs, origin);
             if (!AAS_ValueForBSPEpairKey(ent, "target", target, MAX_EPAIRKEY)) {
@@ -2147,16 +2123,10 @@ static void AAS_Reachability_Elevator()
     aas_lreachability_t* lreach;
     aas_trace_t trace;
 
-#ifdef REACH_DEBUG
-    Log_Write("AAS_Reachability_Elevator\r\n");
-#endif // REACH_DEBUG
     for (ent = AAS_NextBSPEntity(0); ent; ent = AAS_NextBSPEntity(ent)) {
         if (!AAS_ValueForBSPEpairKey(ent, "classname", classname, MAX_EPAIRKEY))
             continue;
         if (!strcmp(classname, "func_plat")) {
-#ifdef REACH_DEBUG
-            Log_Write("found func plat\r\n");
-#endif // REACH_DEBUG
             if (!AAS_ValueForBSPEpairKey(ent, "model", model, MAX_EPAIRKEY)) {
                 botimport.Print(PRT_ERROR, "func_plat without model\n");
                 continue;
@@ -2336,9 +2306,6 @@ static void AAS_Reachability_Elevator()
                         areareachability[area1num] = lreach;
                         // don't go any further to the outside
                         n = 9999;
-#ifdef REACH_DEBUG
-                        Log_Write("elevator reach from %d to %d\r\n", area1num, area2num);
-#endif // REACH_DEBUG
                         reach_elevator++;
                     }
                 }
