@@ -190,7 +190,7 @@ static bot_character_t* BotLoadCharacterFromFile(char* charfile, int skill)
                     if (!strcmp(token.string, "}"))
                         break;
                     if (token.type != TT_NUMBER || !(token.subtype & TT_INTEGER)) {
-                        SourceError(source, "expected integer index, found %s\n", token.string);
+                        SourceError(source, "expected integer index, found %s", token.string);
                         FreeSource(source);
                         BotFreeCharacterStrings(ch);
                         FreeMemory(ch);
@@ -198,14 +198,14 @@ static bot_character_t* BotLoadCharacterFromFile(char* charfile, int skill)
                     }
                     index = token.intvalue;
                     if (index < 0 || index > MAX_CHARACTERISTICS) {
-                        SourceError(source, "characteristic index out of range [0, %d]\n", MAX_CHARACTERISTICS);
+                        SourceError(source, "characteristic index out of range [0, %d]", MAX_CHARACTERISTICS);
                         FreeSource(source);
                         BotFreeCharacterStrings(ch);
                         FreeMemory(ch);
                         return NULL;
                     }
                     if (ch->c[index].type) {
-                        SourceError(source, "characteristic %d already initialized\n", index);
+                        SourceError(source, "characteristic %d already initialized", index);
                         FreeSource(source);
                         BotFreeCharacterStrings(ch);
                         FreeMemory(ch);
@@ -231,7 +231,7 @@ static bot_character_t* BotLoadCharacterFromFile(char* charfile, int skill)
                         strcpy(ch->c[index].value.string, token.string);
                         ch->c[index].type = CT_STRING;
                     } else {
-                        SourceError(source, "expected integer, float or string, found %s\n", token.string);
+                        SourceError(source, "expected integer, float or string, found %s", token.string);
                         FreeSource(source);
                         BotFreeCharacterStrings(ch);
                         FreeMemory(ch);
@@ -255,7 +255,7 @@ static bot_character_t* BotLoadCharacterFromFile(char* charfile, int skill)
                 }
             }
         } else {
-            SourceError(source, "unknown definition %s\n", token.string);
+            SourceError(source, "unknown definition %s", token.string);
             FreeSource(source);
             BotFreeCharacterStrings(ch);
             FreeMemory(ch);

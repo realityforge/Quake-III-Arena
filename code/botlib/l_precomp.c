@@ -1026,20 +1026,20 @@ static int PC_OperatorPriority(int op)
 
 #define MAX_VALUES 64
 #define MAX_OPERATORS 64
-#define AllocValue(val)                              \
-    if (numvalues >= MAX_VALUES) {                   \
-        SourceError(source, "out of value space\n"); \
-        error = 1;                                   \
-        break;                                       \
-    } else                                           \
+#define AllocValue(val)                            \
+    if (numvalues >= MAX_VALUES) {                 \
+        SourceError(source, "out of value space"); \
+        error = 1;                                 \
+        break;                                     \
+    } else                                         \
         val = &value_heap[numvalues++];
 #define FreeValue(val)
-#define AllocOperator(op)                               \
-    if (numoperators >= MAX_OPERATORS) {                \
-        SourceError(source, "out of operator space\n"); \
-        error = 1;                                      \
-        break;                                          \
-    } else                                              \
+#define AllocOperator(op)                             \
+    if (numoperators >= MAX_OPERATORS) {              \
+        SourceError(source, "out of operator space"); \
+        error = 1;                                    \
+        break;                                        \
+    } else                                            \
         op = &operator_heap[numoperators++];
 #define FreeOperator(op)
 
@@ -1166,7 +1166,7 @@ static int PC_EvaluateTokens(source_t* source, token_t* tokens, signed long int*
             // check for invalid operators on floating point values
             if (!integer) {
                 if (t->subtype == P_BIN_NOT || t->subtype == P_MOD || t->subtype == P_RSHIFT || t->subtype == P_LSHIFT || t->subtype == P_BIN_AND || t->subtype == P_BIN_OR || t->subtype == P_BIN_XOR) {
-                    SourceError(source, "illigal operator %s on floating point operands\n", t->string);
+                    SourceError(source, "illigal operator %s on floating point operands", t->string);
                     error = 1;
                     break;
                 }
@@ -1322,7 +1322,7 @@ static int PC_EvaluateTokens(source_t* source, token_t* tokens, signed long int*
             break;
         case P_DIV:
             if (!v2->intvalue || !v2->floatvalue) {
-                SourceError(source, "divide by zero in #if/#elif\n");
+                SourceError(source, "divide by zero in #if/#elif");
                 error = 1;
                 break;
             }
@@ -1331,7 +1331,7 @@ static int PC_EvaluateTokens(source_t* source, token_t* tokens, signed long int*
             break;
         case P_MOD:
             if (!v2->intvalue) {
-                SourceError(source, "divide by zero in #if/#elif\n");
+                SourceError(source, "divide by zero in #if/#elif");
                 error = 1;
                 break;
             }

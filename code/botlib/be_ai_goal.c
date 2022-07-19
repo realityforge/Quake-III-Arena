@@ -232,7 +232,7 @@ static itemconfig_t* LoadItemConfig(char* filename)
     while (PC_ReadToken(source, &token)) {
         if (!strcmp(token.string, "iteminfo")) {
             if (ic->numiteminfo >= max_iteminfo) {
-                SourceError(source, "more than %d item info defined\n", max_iteminfo);
+                SourceError(source, "more than %d item info defined", max_iteminfo);
                 FreeMemory(ic);
                 FreeSource(source);
                 return NULL;
@@ -254,7 +254,7 @@ static itemconfig_t* LoadItemConfig(char* filename)
             ii->number = ic->numiteminfo;
             ic->numiteminfo++;
         } else {
-            SourceError(source, "unknown definition %s\n", token.string);
+            SourceError(source, "unknown definition %s", token.string);
             FreeMemory(ic);
             FreeSource(source);
             return NULL;
@@ -262,8 +262,8 @@ static itemconfig_t* LoadItemConfig(char* filename)
     }
     FreeSource(source);
     if (!ic->numiteminfo)
-        botimport.Print(PRT_WARNING, "no item info loaded\n");
-    botimport.Print(PRT_MESSAGE, "loaded %s\n", path);
+        botimport.Print(PRT_WARNING, "no item info loaded");
+    botimport.Print(PRT_MESSAGE, "loaded %s", path);
     return ic;
 }
 //===========================================================================

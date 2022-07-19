@@ -58,7 +58,7 @@ static int ReadValue(source_t* source, float* value)
         }
     }
     if (token.type != TT_NUMBER) {
-        SourceError(source, "invalid return value %s\n", token.string);
+        SourceError(source, "invalid return value %s", token.string);
         return false;
     }
     *value = token.floatvalue;
@@ -152,7 +152,7 @@ static fuzzyseparator_t* ReadFuzzySeparators_r(source_t* source)
             lastfs = fs;
             if (def) {
                 if (founddefault) {
-                    SourceError(source, "switch already has a default\n");
+                    SourceError(source, "switch already has a default");
                     FreeFuzzySeparators_r(firstfs);
                     return NULL;
                 }
@@ -189,7 +189,7 @@ static fuzzyseparator_t* ReadFuzzySeparators_r(source_t* source)
                     return NULL;
                 }
             } else {
-                SourceError(source, "invalid name %s\n", token.string);
+                SourceError(source, "invalid name %s", token.string);
                 return NULL;
             }
             if (newindent) {
@@ -200,7 +200,7 @@ static fuzzyseparator_t* ReadFuzzySeparators_r(source_t* source)
             }
         } else {
             FreeFuzzySeparators_r(firstfs);
-            SourceError(source, "invalid name %s\n", token.string);
+            SourceError(source, "invalid name %s", token.string);
             return NULL;
         }
         if (!PC_ExpectAnyToken(source, &token)) {
@@ -319,7 +319,7 @@ weightconfig_t* ReadWeightConfig(char* filename)
                 }
                 config->weights[config->numweights].firstseparator = fs;
             } else {
-                SourceError(source, "invalid name %s\n", token.string);
+                SourceError(source, "invalid name %s", token.string);
                 FreeWeightConfig(config);
                 FreeSource(source);
                 return NULL;
@@ -333,7 +333,7 @@ weightconfig_t* ReadWeightConfig(char* filename)
             }
             config->numweights++;
         } else {
-            SourceError(source, "invalid name %s\n", token.string);
+            SourceError(source, "invalid name %s", token.string);
             FreeWeightConfig(config);
             FreeSource(source);
             return NULL;

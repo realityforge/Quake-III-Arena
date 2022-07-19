@@ -690,7 +690,7 @@ static int BotLoadChatMessage(source_t* source, char* chatmessagestring)
         if (token.type == TT_STRING) {
             StripDoubleQuotes(token.string);
             if (strlen(ptr) + strlen(token.string) + 1 > MAX_MESSAGE_SIZE) {
-                SourceError(source, "chat message too long\n");
+                SourceError(source, "chat message too long");
                 return false;
             }
             strcat(ptr, token.string);
@@ -698,7 +698,7 @@ static int BotLoadChatMessage(source_t* source, char* chatmessagestring)
         // variable string
         else if (token.type == TT_NUMBER && (token.subtype & TT_INTEGER)) {
             if (strlen(ptr) + 7 > MAX_MESSAGE_SIZE) {
-                SourceError(source, "chat message too long\n");
+                SourceError(source, "chat message too long");
                 return false;
             }
             sprintf(&ptr[strlen(ptr)], "%cv%ld%c", ESCAPE_CHAR, token.intvalue, ESCAPE_CHAR);
@@ -711,7 +711,7 @@ static int BotLoadChatMessage(source_t* source, char* chatmessagestring)
             }
             sprintf(&ptr[strlen(ptr)], "%cr%s%c", ESCAPE_CHAR, token.string, ESCAPE_CHAR);
         } else {
-            SourceError(source, "unknown message component %s\n", token.string);
+            SourceError(source, "unknown message component %s", token.string);
             return false;
         }
         if (PC_CheckTokenString(source, ";"))
@@ -850,13 +850,13 @@ static bot_matchpiece_t* BotLoadMatchPieces(source_t* source, char* endtoken)
     while (PC_ReadToken(source, &token)) {
         if (token.type == TT_NUMBER && (token.subtype & TT_INTEGER)) {
             if (token.intvalue >= MAX_MATCHVARIABLES) {
-                SourceError(source, "can't have more than %d match variables\n", MAX_MATCHVARIABLES);
+                SourceError(source, "can't have more than %d match variables", MAX_MATCHVARIABLES);
                 FreeSource(source);
                 BotFreeMatchPieces(firstpiece);
                 return NULL;
             }
             if (lastwasvariable) {
-                SourceError(source, "not allowed to have adjacent variables\n");
+                SourceError(source, "not allowed to have adjacent variables");
                 FreeSource(source);
                 BotFreeMatchPieces(firstpiece);
                 return NULL;
@@ -909,7 +909,7 @@ static bot_matchpiece_t* BotLoadMatchPieces(source_t* source, char* endtoken)
             if (!emptystring)
                 lastwasvariable = false;
         } else {
-            SourceError(source, "invalid token %s\n", token.string);
+            SourceError(source, "invalid token %s", token.string);
             FreeSource(source);
             BotFreeMatchPieces(firstpiece);
             return NULL;
@@ -952,7 +952,7 @@ static bot_matchtemplate_t* BotLoadMatchTemplates(char* matchfile)
 
     while (PC_ReadToken(source, &token)) {
         if (token.type != TT_NUMBER || !(token.subtype & TT_INTEGER)) {
-            SourceError(source, "expected integer, found %s\n", token.string);
+            SourceError(source, "expected integer, found %s", token.string);
             BotFreeMatchTemplates(matches);
             FreeSource(source);
             return NULL;
@@ -1509,7 +1509,7 @@ static bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
                         if (!strcmp(token.string, "}"))
                             break;
                         if (strcmp(token.string, "type")) {
-                            SourceError(source, "expected type found %s\n", token.string);
+                            SourceError(source, "expected type found %s", token.string);
                             FreeSource(source);
                             return NULL;
                         }
@@ -1567,7 +1567,7 @@ static bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
                     }
                 }
             } else {
-                SourceError(source, "unknown definition %s\n", token.string);
+                SourceError(source, "unknown definition %s", token.string);
                 FreeSource(source);
                 return NULL;
             }
@@ -1576,7 +1576,7 @@ static bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
         FreeSource(source);
         // if the requested character is not found
         if (!foundchat) {
-            botimport.Print(PRT_ERROR, "couldn't find chat %s in %s\n", chatname, chatfile);
+            botimport.Print(PRT_ERROR, "couldn't find chat %s in %s", chatname, chatfile);
             return NULL;
         }
     }
