@@ -1912,7 +1912,7 @@ int PC_ReadToken(source_t* source, token_t* token)
                 if (newtoken.type == TT_STRING) {
                     token->string[strlen(token->string) - 1] = '\0';
                     if (strlen(token->string) + strlen(newtoken.string + 1) + 1 >= MAX_TOKEN) {
-                        SourceError(source, "string longer than MAX_TOKEN %d\n", MAX_TOKEN);
+                        SourceError(source, "string longer than MAX_TOKEN %d", MAX_TOKEN);
                         return false;
                     }
                     strcat(token->string, newtoken.string + 1);
