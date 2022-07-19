@@ -76,7 +76,7 @@ void AAS_RoutingInfo()
 // returns the number of the area in the cluster
 // assumes the given area is in the given cluster or a portal of the cluster
 //===========================================================================
-__inline int AAS_ClusterAreaNum(int cluster, int areanum)
+static inline int AAS_ClusterAreaNum(int cluster, int areanum)
 {
     int side, areacluster;
 
@@ -123,7 +123,7 @@ static void AAS_InitTravelFlagFromType()
     aasworld.travelflagfortype[TRAVEL_JUMPPAD] = TFL_JUMPPAD;
     aasworld.travelflagfortype[TRAVEL_FUNCBOB] = TFL_FUNCBOB;
 }
-__inline int AAS_TravelFlagForType_inline(int traveltype)
+static inline int AAS_TravelFlagForType_inline(int traveltype)
 {
     int tfl;
 
@@ -239,7 +239,7 @@ int AAS_EnableRoutingArea(int areanum, int enable)
     }
     return !flags;
 }
-__inline float AAS_RoutingTime()
+static inline float AAS_RoutingTime()
 {
     return AAS_Time();
 }
@@ -267,7 +267,7 @@ static int AAS_GetAreaContentsTravelFlags(int areanum)
         tfl |= TFL_BRIDGE;
     return tfl;
 }
-__inline int AAS_AreaContentsTravelFlags_inline(int areanum)
+static inline int AAS_AreaContentsTravelFlags_inline(int areanum)
 {
     return aasworld.areacontentstravelflags[areanum];
 }
