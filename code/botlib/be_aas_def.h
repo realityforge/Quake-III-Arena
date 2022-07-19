@@ -48,7 +48,6 @@ typedef struct aas_entity_s {
 } aas_entity_t;
 
 typedef struct aas_settings_s {
-    vec3_t phys_gravitydirection;
     float phys_friction;
     float phys_stopspeed;
     float phys_gravity;
