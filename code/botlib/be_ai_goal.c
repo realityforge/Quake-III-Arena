@@ -464,7 +464,6 @@ void BotInitLevelItems()
                     // if the item is not reachable from a jumppad
                     goalareanum = AAS_BestReachableFromJumpPadArea(origin, ic->iteminfo[i].mins, ic->iteminfo[i].maxs);
                     Log_Write("item %s reachable from jumppad area %d\r\n", ic->iteminfo[i].classname, goalareanum);
-                    // botimport.Print(PRT_MESSAGE, "item %s reachable from jumppad area %d\r\n", ic->iteminfo[i].classname, goalareanum);
                     if (!goalareanum)
                         continue;
                 }
@@ -684,7 +683,6 @@ int BotGetLevelItemGoal(int index, char* name, bot_goal_t* goal)
             goal->flags = GFL_ITEM;
             if (li->timeout)
                 goal->flags |= GFL_DROPPED;
-            // botimport.Print(PRT_MESSAGE, "found li %s\n", itemconfig->iteminfo[li->iteminfo].name);
             return li->number;
         }
     }
@@ -870,7 +868,6 @@ void BotUpdateEntityItems()
         li->timeout = AAS_Time() + 30;
         // add the level item to the list
         AddLevelItemToList(li);
-        // botimport.Print(PRT_MESSAGE, "found new level item %s\n", ic->iteminfo[i].classname);
     }
 }
 void BotDumpGoalStack(int goalstate)

@@ -345,7 +345,6 @@ aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
                 return trace;
             }
 #endif // AAS_SAMPLE_DEBUG
-       // botimport.Print(PRT_MESSAGE, "areanum = %d, must be %d\n", -nodenum, AAS_PointAreaNum(start));
        // if can't enter the area because it hasn't got the right presence type
             if (!(aasworld.areasettings[-nodenum].presencetype & presencetype)) {
                 // if the start point is still the initial start point
@@ -577,7 +576,6 @@ int AAS_TraceAreas(vec3_t start, vec3_t end, int* areas, vec3_t* points, int max
                 return numareas;
             }
 #endif // AAS_SAMPLE_DEBUG
-       // botimport.Print(PRT_MESSAGE, "areanum = %d, must be %d\n", -nodenum, AAS_PointAreaNum(start));
             areas[numareas] = -nodenum;
             if (points)
                 VectorCopy(tstack_p->start, points[numareas]);

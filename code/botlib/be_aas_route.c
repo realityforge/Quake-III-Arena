@@ -436,7 +436,6 @@ static void AAS_InitPortalMaxTravelTimes()
 
     for (i = 0; i < aasworld.numportals; i++) {
         aasworld.portalmaxtraveltimes[i] = AAS_PortalMaxTravelTime(i);
-        // botimport.Print(PRT_MESSAGE, "portal %d max tt = %d\n", i, aasworld.portalmaxtraveltimes[i]);
     }
 }
 static int AAS_FreeOldestCache()
