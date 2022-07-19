@@ -1392,10 +1392,6 @@ extern int max_polyverts;
 
 extern backEndData_t* backEndData;
 
-extern volatile renderCommandList_t* renderCommandList;
-
-extern volatile bool renderThreadActive;
-
 void* R_GetCommandBuffer(int bytes);
 void RB_ExecuteRenderCommands(const void* data);
 

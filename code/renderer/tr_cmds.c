@@ -21,10 +21,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "tr_local.h"
 
-volatile renderCommandList_t* renderCommandList;
-
-volatile bool renderThreadActive;
-
 void R_PerformanceCounters(void)
 {
     if (!r_speeds->integer) {
