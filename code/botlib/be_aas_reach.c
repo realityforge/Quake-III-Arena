@@ -2621,10 +2621,7 @@ static void AAS_Reachability_FuncBobbing()
 static void AAS_Reachability_JumpPad()
 {
     int face2num, i, ret, area2num, visualize, ent, bot_visualizejumppads;
-    // int modelnum, ent2;
-    // float dist, time, height, gravity, forward;
     float speed, zvel;
-    // float hordist;
     aas_face_t* face2;
     aas_area_t* area2;
     aas_lreachability_t* lreach;
