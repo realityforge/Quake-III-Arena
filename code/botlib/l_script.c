@@ -642,13 +642,11 @@ int PS_ReadToken(script_t* script, token_t* token)
     // clear the token stuff
     memset(token, 0, sizeof(token_t));
     // start of the white space
-    script->whitespace_p = script->script_p;
     token->whitespace_p = script->script_p;
     // read unuseful stuff
     if (!PS_ReadWhiteSpace(script))
         return 0;
     // end of the white space
-    script->endwhitespace_p = script->script_p;
     token->endwhitespace_p = script->script_p;
     // line the token is on
     token->line = script->line;
