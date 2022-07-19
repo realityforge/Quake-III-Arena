@@ -219,9 +219,7 @@ void EA_View(int client, vec3_t viewangles)
 void EA_GetInput(int client, float thinktime, bot_input_t* input)
 {
     bot_input_t* bi;
-
     bi = &botinputs[client];
-
     bi->thinktime = thinktime;
     memcpy(input, bi, sizeof(bot_input_t));
 }
