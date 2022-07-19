@@ -2320,13 +2320,6 @@ void R_RenderCubemapSide(int cubemapIndex, int cubemapSide, bool subscene)
 
     VectorCopy(refdef.vieworg, parms.pvsOrigin);
 
-    // FIXME: sun shadows aren't rendered correctly in cubemaps
-    // fix involves changing r_FBufScale to fit smaller cubemap image size, or rendering cubemap to framebuffer first
-    if (0) //(r_depthPrepass->value && ((r_forceSun->integer) || tr.sunShadows))
-    {
-        parms.flags = VPF_USESUNLIGHT;
-    }
-
     parms.targetFbo = tr.renderCubeFbo;
     parms.targetFboLayer = cubemapSide;
     parms.targetFboCubemapIndex = cubemapIndex;
