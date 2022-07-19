@@ -24,13 +24,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * lexicographical parser
  *****************************************************************************/
 
-// undef if binary numbers of the form 0b... or 0B... are not allowed
-#define BINARYNUMBERS
-// undef if not using the token.intvalue and token.floatvalue
-#define NUMBERVALUE
-// use dollar sign also as punctuation
-#define DOLLAR
-
 // maximum token length
 #define MAX_TOKEN 1024
 
@@ -59,9 +52,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define TT_DECIMAL 0x0008 // decimal number
 #define TT_HEX 0x0100 // hexadecimal number
 #define TT_OCTAL 0x0200 // octal number
-#ifdef BINARYNUMBERS
 #define TT_BINARY 0x0400 // binary number
-#endif // BINARYNUMBERS
 #define TT_FLOAT 0x0800 // floating point number
 #define TT_INTEGER 0x1000 // integer number
 #define TT_LONG 0x2000 // long number
@@ -145,10 +136,8 @@ typedef struct token_s {
     char string[MAX_TOKEN]; // available token
     int type; // last read token type
     int subtype; // last read token sub type
-#ifdef NUMBERVALUE
     unsigned long int intvalue; // integer value
     long double floatvalue; // floating point value
-#endif // NUMBERVALUE
     char* whitespace_p; // start of white space before token
     char* endwhitespace_p; // start of white space before token
     int line; // line the token was on
