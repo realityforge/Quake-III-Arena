@@ -162,7 +162,7 @@ static int Export_BotLibVarSet(const char* var_name, const char* value)
     LibVarSet(var_name, value);
     return BLERR_NOERROR;
 }
-static int Export_BotLibVarGet(const char* var_name, char* value, int size)
+static int Export_BotLibVarGet(const char* var_name, char* value, const int size)
 {
     char* varvalue;
 
