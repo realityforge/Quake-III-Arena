@@ -2207,7 +2207,6 @@ static void AAS_Reachability_Elevator()
                 mins[i] -= 1;
                 maxs[i] += 1;
             }
-            // botimport.Print(PRT_MESSAGE, "platbottom[2] = %1.1f plattop[2] = %1.1f\n", platbottom[2], plattop[2]);
             VectorAdd(mins, maxs, mids);
             VectorScale(mids, 0.5, mids);
             xvals[0] = mins[0];
