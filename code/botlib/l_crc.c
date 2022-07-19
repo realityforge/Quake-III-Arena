@@ -66,13 +66,15 @@ const static unsigned short crctable[257] = {
 
 unsigned short CRC_ProcessString(const unsigned char* data, const int length)
 {
+    const short int bitsPerByte = 8;
+
     unsigned short crcvalue = CRC_INIT_VALUE;
     for (int i = 0; i < length; i++) {
-        int ind = (crcvalue >> 8) ^ data[i];
+        int ind = (crcvalue >> bitsPerByte) ^ data[i];
         if (ind < 0 || ind > 256) {
             ind = 0;
         }
-        crcvalue = (crcvalue << 8) ^ crctable[ind];
+        crcvalue = (crcvalue << bitsPerByte) ^ crctable[ind];
     }
     return crcvalue ^ CRC_XOR_VALUE;
 }
