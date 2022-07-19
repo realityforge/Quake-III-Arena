@@ -65,9 +65,6 @@ void R_PerformanceCounters(void)
     memset(&backEnd.pc, 0, sizeof(backEnd.pc));
 }
 
-int c_blockedOnRender;
-int c_blockedOnMain;
-
 void R_IssueRenderCommands(bool runPerformanceCounters)
 {
     renderCommandList_t* cmdList;
