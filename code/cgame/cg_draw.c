@@ -50,8 +50,6 @@ int CG_Text_Width(const char* text, float scale, int limit)
     float out;
     glyphInfo_t* glyph;
     float useScale;
-    // FIXME: see ui_main.c, same problem
-    //	const unsigned char *s = text;
     const char* s = text;
     fontInfo_t* font = &cgDC.Assets.textFont;
     if (scale <= cg_smallFont.value) {
@@ -88,8 +86,6 @@ int CG_Text_Height(const char* text, float scale, int limit)
     float max;
     glyphInfo_t* glyph;
     float useScale;
-    // TTimo: FIXME
-    //	const unsigned char *s = text;
     const char* s = text;
     fontInfo_t* font = &cgDC.Assets.textFont;
     if (scale <= cg_smallFont.value) {
