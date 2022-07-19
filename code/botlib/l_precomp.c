@@ -281,7 +281,7 @@ static int PC_MergeTokens(token_t* t1, token_t* t2)
 
 static int PC_NameHash(const char* name)
 {
-    int register hash, i;
+    int hash, i;
 
     hash = 0;
     for (i = 0; name[i] != '\0'; i++) {

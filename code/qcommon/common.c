@@ -637,7 +637,7 @@ int Com_FilterPath(char* filter, char* name, int casesensitive)
 
 int Com_HashKey(char* string, int maxlen)
 {
-    int register hash, i;
+    int hash, i;
 
     hash = 0;
     for (i = 0; i < maxlen && string[i] != '\0'; i++) {
