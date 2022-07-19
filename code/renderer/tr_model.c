@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define LL(x) x = LittleLong(x)
 
-static bool R_LoadMD3(model_t* mod, int lod, void* buffer, int bufferSize, const char* modName);
+static bool R_LoadMD3(model_t* mod, int lod, void* buffer, const char* modName);
 static bool R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* name);
 
 /*
@@ -72,7 +72,7 @@ static qhandle_t R_RegisterMD3(const char* name, model_t* mod)
 
         ident = LittleLong(*(unsigned*)buf.u);
         if (ident == MD3_IDENT)
-            loaded = R_LoadMD3(mod, lod, buf.u, size, name);
+            loaded = R_LoadMD3(mod, lod, buf.u, name);
         else
             ri.Printf(PRINT_WARNING, "R_RegisterMD3: unknown fileid for %s\n", name);
 
@@ -333,7 +333,7 @@ qhandle_t RE_RegisterModel(const char* name)
 R_LoadMD3
 =================
 */
-static bool R_LoadMD3(model_t* mod, int lod, void* buffer, int bufferSize, const char* modName)
+static bool R_LoadMD3(model_t* mod, int lod, void* buffer, const char* modName)
 {
     int f, i, j;
 
