@@ -43,7 +43,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 static int debuglines[MAX_DEBUGLINES];
 static int debuglinevisible[MAX_DEBUGLINES];
-
 static int debugpolygons[MAX_DEBUGPOLYGONS];
 
 static void AAS_ShowPolygon(int color, int numpoints, vec3_t* points)
