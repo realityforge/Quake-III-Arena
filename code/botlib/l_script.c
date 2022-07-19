@@ -24,7 +24,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * lexicographical parser
  *****************************************************************************/
 
-// include files for usage in the bot library
 #include "../qcommon/q_shared.h"
 #include "botlib.h"
 #include "be_interface.h"
