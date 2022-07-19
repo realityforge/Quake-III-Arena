@@ -1238,34 +1238,26 @@ Touch all known used data to make sure it is paged in
 */
 void Com_TouchMemory()
 {
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
-    int start, end;
-    int i, j;
-    unsigned sum;
-    memblock_t* block;
-
     Z_CheckHeap();
 
-    start = Sys_Milliseconds();
+    const int start = Sys_Milliseconds();
 
-    sum = 0;
+    UNUSED int sum = 0;
 
-    j = hunk_low.permanent >> 2;
-    for (i = 0; i < j; i += 64) { // only need to touch each page
+    const int low_mark = hunk_low.permanent >> 2;
+    for (int i = 0; i < low_mark; i += 64) { // only need to touch each page
         sum += ((int*)s_hunkData)[i];
     }
 
-    i = (s_hunkTotal - hunk_high.permanent) >> 2;
-    j = hunk_high.permanent >> 2;
-    for (; i < j; i += 64) { // only need to touch each page
+    const int high_mark = hunk_high.permanent >> 2;
+    for (int i = (s_hunkTotal - hunk_high.permanent) >> 2; i < high_mark; i += 64) { // only need to touch each page
         sum += ((int*)s_hunkData)[i];
     }
 
-    for (block = mainzone->blocklist.next;; block = block->next) {
+    for (memblock_t* block = mainzone->blocklist.next;; block = block->next) {
         if (block->tag) {
-            j = block->size >> 2;
-            for (i = 0; i < j; i += 64) { // only need to touch each page
+            const int block_high_mark = block->size >> 2;
+            for (int i = 0; i < block_high_mark; i += 64) { // only need to touch each page
                 sum += ((int*)block)[i];
             }
         }
@@ -1274,10 +1266,9 @@ void Com_TouchMemory()
         }
     }
 
-    end = Sys_Milliseconds();
+    const int end = Sys_Milliseconds();
 
     Com_Printf("Com_TouchMemory: %i msec\n", end - start);
-#pragma GCC diagnostic pop
 }
 
 void Com_InitSmallZoneMemory()
