@@ -30,16 +30,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "l_memory.h"
 #include "be_interface.h"
 
-//#define MEMDEBUG
-
 #define MEM_ID 0x12345678l
 #define HUNK_ID 0x87654321l
 
-#ifdef MEMDEBUG
-void* GetMemoryDebug(size_t size, char* label, char* file, int line)
-#else
 void* GetMemory(size_t size)
-#endif // MEMDEBUG
 {
     void* ptr;
     unsigned long int* memid;
@@ -51,26 +45,14 @@ void* GetMemory(size_t size)
     *memid = MEM_ID;
     return (unsigned long int*)((char*)ptr + sizeof(unsigned long int));
 }
-#ifdef MEMDEBUG
-void* GetClearedMemoryDebug(size_t size, char* label, char* file, int line)
-#else
 void* GetClearedMemory(size_t size)
-#endif // MEMDEBUG
 {
     void* ptr;
-#ifdef MEMDEBUG
-    ptr = GetMemoryDebug(size, label, file, line);
-#else
     ptr = GetMemory(size);
-#endif // MEMDEBUG
     memset(ptr, 0, size);
     return ptr;
 }
-#ifdef MEMDEBUG
-void* GetHunkMemoryDebug(unsigned long size, char* label, char* file, int line)
-#else
 void* GetHunkMemory(unsigned long size)
-#endif // MEMDEBUG
 {
     void* ptr;
     unsigned long int* memid;
@@ -82,18 +64,10 @@ void* GetHunkMemory(unsigned long size)
     *memid = HUNK_ID;
     return (unsigned long int*)((char*)ptr + sizeof(unsigned long int));
 }
-#ifdef MEMDEBUG
-void* GetClearedHunkMemoryDebug(unsigned long size, char* label, char* file, int line)
-#else
 void* GetClearedHunkMemory(unsigned long size)
-#endif // MEMDEBUG
 {
     void* ptr;
-#ifdef MEMDEBUG
-    ptr = GetHunkMemoryDebug(size, label, file, line);
-#else
     ptr = GetHunkMemory(size);
-#endif // MEMDEBUG
     memset(ptr, 0, size);
     return ptr;
 }
