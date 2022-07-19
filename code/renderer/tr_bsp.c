@@ -38,8 +38,6 @@ static uint8_t* fileBase;
 
 int c_subdivisions;
 
-//===============================================================================
-
 static void HSVtoRGB(float h, float s, float v, float rgb[3])
 {
     int i;
@@ -236,8 +234,6 @@ static void R_LoadVisibility(lump_t* l)
         s_worldData.vis = dest;
     }
 }
-
-//===============================================================================
 
 static shader_t* ShaderForShaderNum(int shaderNum, int lightmapNum)
 {
