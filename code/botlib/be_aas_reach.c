@@ -2705,18 +2705,6 @@ static void AAS_Reachability_JumpPad()
         // check for areas we can reach with air control
         for (area2num = 1; area2num < aasworld.numareas; area2num++) {
             visualize = false;
-            /*
-            if (area2num == 3568)
-            {
-                    for (link = areas; link; link = link->next_area)
-                    {
-                            if (link->areanum == 3380)
-                            {
-                                    visualize = true;
-                                    botimport.Print(PRT_MESSAGE, "bah\n");
-                            }
-                    }
-            }*/
             // never try to go back to one of the original jumppad areas
             // and don't create reachabilities if they already exist
             for (link = areas; link; link = link->next_area) {
