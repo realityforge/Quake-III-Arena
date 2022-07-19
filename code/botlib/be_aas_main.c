@@ -112,14 +112,6 @@ int AAS_StartFrame(float time)
             AAS_RoutingInfo();
             LibVarSet("showcacheupdates", "0");
         }
-        if (LibVarGetValue("showmemoryusage")) {
-            PrintUsedMemorySize();
-            LibVarSet("showmemoryusage", "0");
-        }
-        if (LibVarGetValue("memorydump")) {
-            PrintMemoryLabels();
-            LibVarSet("memorydump", "0");
-        }
     }
     if (saveroutingcache->value) {
         AAS_WriteRouteCache();

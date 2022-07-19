@@ -85,9 +85,3 @@ int AvailableMemory()
 {
     return botimport.AvailableMemory();
 }
-void PrintUsedMemorySize()
-{
-}
-void PrintMemoryLabels()
-{
-}

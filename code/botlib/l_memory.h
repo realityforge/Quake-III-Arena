@@ -37,7 +37,3 @@ void* GetClearedHunkMemory(size_t size);
 void FreeMemory(void* ptr);
 // returns the amount available memory
 int AvailableMemory(void);
-// prints the total used memory size
-void PrintUsedMemorySize(void);
-// print all memory blocks with label
-void PrintMemoryLabels(void);
