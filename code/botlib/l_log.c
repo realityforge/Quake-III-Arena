@@ -87,6 +87,5 @@ void QDECL Log_Write(const char* fmt, ...)
     va_start(ap, fmt);
     vfprintf(logfile.fp, fmt, ap);
     va_end(ap);
-    // fprintf(logfile.fp, "\r\n");
     fflush(logfile.fp);
 }
