@@ -103,18 +103,6 @@ static void DrawTris(shaderCommands_t* input)
 }
 
 /*
-================
-DrawNormals
-
-Draws vertex normals for debugging
-================
-*/
-static void DrawNormals(shaderCommands_t* input)
-{
-    // FIXME: implement this
-}
-
-/*
 ==============
 RB_BeginSurface
 
@@ -1407,9 +1395,6 @@ void RB_EndSurface()
     // draw debugging stuff
     if (r_showtris->integer) {
         DrawTris(input);
-    }
-    if (r_shownormals->integer) {
-        DrawNormals(input);
     }
     // clear shader so we can tell we don't have any unclosed surfaces
     tess.numIndexes = 0;
