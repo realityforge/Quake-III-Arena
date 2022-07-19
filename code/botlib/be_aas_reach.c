@@ -2738,8 +2738,6 @@ static void AAS_Reachability_JumpPad()
                     // direction towards the face center
                     VectorSubtract(facecenter, areastart, dir);
                     dir[2] = 0;
-                    // hordist = VectorNormalize(dir);
-                    // if (hordist < 1.6 * facecenter[2] - areastart[2])
                     {
                         // get command movement
                         VectorScale(dir, speed, cmdmove);
