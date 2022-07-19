@@ -101,9 +101,7 @@ static punctuation_t default_punctuations[] = {
     { "\\", P_BACKSLASH, NULL },
     // precompiler operator
     { "#", P_PRECOMP, NULL },
-#ifdef DOLLAR
     { "$", P_DOLLAR, NULL },
-#endif // DOLLAR
     { NULL, 0, NULL }
 };
 
@@ -529,7 +527,6 @@ static int PS_ReadNumber(script_t* script, token_t* token)
         }
         token->subtype |= TT_HEX;
     }
-#ifdef BINARYNUMBERS
     // check for a binary number
     else if (*script->script_p == '0' && (*(script->script_p + 1) == 'b' || *(script->script_p + 1) == 'B')) {
         token->string[len++] = *script->script_p++;
@@ -545,9 +542,7 @@ static int PS_ReadNumber(script_t* script, token_t* token)
             c = *script->script_p;
         }
         token->subtype |= TT_BINARY;
-    }
-#endif // BINARYNUMBERS
-    else // decimal or octal integer or floating point number
+    } else // decimal or octal integer or floating point number
     {
         octal = false;
         dot = false;
@@ -590,9 +585,7 @@ static int PS_ReadNumber(script_t* script, token_t* token)
         }
     }
     token->string[len] = '\0';
-#ifdef NUMBERVALUE
     NumberValue(token->string, token->subtype, &token->intvalue, &token->floatvalue);
-#endif // NUMBERVALUE
     if (!(token->subtype & TT_FLOAT))
         token->subtype |= TT_INTEGER;
     return 1;
