@@ -38,8 +38,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 extern botlib_import_t botimport;
 
 //#define TRACE_DEBUG
-
-#define ON_EPSILON 0.005
 //#define DEG2RAD( a ) (( a * M_PI ) / 180.0F)
 
 #define MAX_BSPENTITIES 2048
