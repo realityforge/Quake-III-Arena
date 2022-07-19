@@ -42,7 +42,7 @@ typedef struct scrollInfo_s {
 
 static scrollInfo_t scrollInfo;
 
-static void (*captureFunc)(void* p) = 0;
+static void (*captureFunc)(void* p) = NULL;
 static void* captureData = NULL;
 static itemDef_t* itemCapture = NULL; // item that has the mouse captured ( if any )
 
