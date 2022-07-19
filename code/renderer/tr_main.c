@@ -2285,16 +2285,6 @@ void R_RenderCubemapSide(int cubemapIndex, int cubemapSide, bool subscene)
 
     if (!subscene) {
         RE_BeginScene(&refdef);
-
-        // FIXME: sun shadows aren't rendered correctly in cubemaps
-        // fix involves changing r_FBufScale to fit smaller cubemap image size, or rendering cubemap to framebuffer first
-        if (0) //(glRefConfig.framebufferObject && r_sunlightMode->integer && (r_forceSun->integer || tr.sunShadows))
-        {
-            R_RenderSunShadowMaps(&refdef, 0);
-            R_RenderSunShadowMaps(&refdef, 1);
-            R_RenderSunShadowMaps(&refdef, 2);
-            R_RenderSunShadowMaps(&refdef, 3);
-        }
     }
 
     {
