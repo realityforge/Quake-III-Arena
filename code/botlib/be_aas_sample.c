@@ -37,8 +37,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_aas_funcs.h"
 #include "be_aas_def.h"
 
-extern botlib_import_t botimport;
-
 #define ON_EPSILON 0 // 0.0005
 
 #define TRACEPLANE_EPSILON 0.125
