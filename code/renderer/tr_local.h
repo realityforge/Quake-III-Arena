@@ -842,10 +842,6 @@ typedef struct
     int16_t tangent[4];
     int16_t lightdir[4];
     uint16_t color[4];
-
-#if DEBUG_OPTIMIZEVERTICES
-    unsigned int id;
-#endif
 } srfVert_t;
 
 #define srfVert_t_cleared(x) srfVert_t(x) = { { 0, 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }
