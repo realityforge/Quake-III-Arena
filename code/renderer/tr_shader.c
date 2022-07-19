@@ -2841,7 +2841,7 @@ shader_t* R_FindShader(const char* name, int lightmapIndex, bool mipRawImage)
     return FinishShader();
 }
 
-qhandle_t RE_RegisterShaderFromImage(const char* name, int lightmapIndex, image_t* image, bool mipRawImage)
+qhandle_t RE_RegisterShaderFromImage(const char* name, int lightmapIndex, image_t* image)
 {
     int hash;
     shader_t* sh;
