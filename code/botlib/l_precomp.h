@@ -108,11 +108,11 @@ int PC_ReadLine(source_t* source, token_t* token);
 // returns true if there was a white space in front of the token
 int PC_WhiteSpaceBeforeToken(token_t* token);
 // add a globals define that will be added to all opened sources
-int PC_AddGlobalDefine(char* string);
+int PC_AddGlobalDefine(const char* string);
 // remove all globals defines
 void PC_RemoveAllGlobalDefines(void);
 // set the base folder to load files from
-void PC_SetBaseFolder(char* path);
+void PC_SetBaseFolder(const char* path);
 // load a source file
 source_t* LoadSourceFile(const char* filename);
 // free the given source

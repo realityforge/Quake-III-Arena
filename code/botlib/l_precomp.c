@@ -786,7 +786,7 @@ static int PC_Directive_define(source_t* source)
     }
     return true;
 }
-static define_t* PC_DefineFromString(char* string)
+static define_t* PC_DefineFromString(const char* string)
 {
     script_t* script;
     source_t src;
@@ -827,7 +827,7 @@ static define_t* PC_DefineFromString(char* string)
 //============================================================================
 // add a globals define that will be added to all opened sources
 //============================================================================
-int PC_AddGlobalDefine(char* string)
+int PC_AddGlobalDefine(const char* string)
 {
     define_t* define;
 
@@ -2172,7 +2172,7 @@ int PC_SourceFileAndLine(int handle, char* filename, int* line)
         *line = 0;
     return true;
 }
-void PC_SetBaseFolder(char* path)
+void PC_SetBaseFolder(const char* path)
 {
     PS_SetBaseFolder(path);
 }
