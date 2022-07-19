@@ -1737,8 +1737,6 @@ static int CalculateMipSize(int width, int height, GLenum picFormat)
         ri.Printf(PRINT_ALL, "Unsupported texture format %08x\n", picFormat);
         return 0;
     }
-
-    return 0;
 }
 
 static GLenum PixelDataFormatFromInternalFormat(GLenum internalFormat)
