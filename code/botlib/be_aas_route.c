@@ -85,14 +85,6 @@ static inline int AAS_ClusterAreaNum(int cluster, int areanum)
     if (areacluster > 0)
         return aasworld.areasettings[areanum].clusterareanum;
     else {
-        /*#ifdef ROUTING_DEBUG
-                        if (aasworld.portals[-areacluster].frontcluster != cluster &&
-                                        aasworld.portals[-areacluster].backcluster != cluster)
-                        {
-                                botimport.Print(PRT_ERROR, "portal %d: does not belong to cluster %d\n"
-                                                                                                , -areacluster, cluster);
-                        }
-        #endif //ROUTING_DEBUG*/
         side = aasworld.portals[-areacluster].frontcluster != cluster;
         return aasworld.portals[-areacluster].clusterareanum[side];
     }
