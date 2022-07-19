@@ -189,7 +189,7 @@ typedef struct aas_s {
     int numclusters;
     aas_cluster_t* clusters;
     int numreachabilityareas;
-    // enities linked in the areas
+    // entities linked in the areas
     aas_link_t* linkheap; // heap with link structures
     int linkheapsize; // size of the link heap
     aas_link_t* freelinks; // first free link
