@@ -3107,7 +3107,6 @@ void BotCheckAttack(bot_state_t* bs)
     float points, reactiontime, fov, firethrottle;
     int attackentity;
     bsp_trace_t bsptrace;
-    // float selfpreservation;
     vec3_t forward, right, start, end, dir, angles;
     weaponinfo_t wi;
     bsp_trace_t trace;
