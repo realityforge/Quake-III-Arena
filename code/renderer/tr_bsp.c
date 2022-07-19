@@ -2035,13 +2035,10 @@ static void R_LoadLightGrid(lump_t* l)
         int size;
 
         Com_sprintf(filename, sizeof(filename), "maps/%s/lightgrid.raw", s_worldData.baseName);
-        // ri.Printf(PRINT_ALL, "looking for %s\n", filename);
 
         size = ri.FS_ReadFile(filename, (void**)&hdrLightGrid);
 
         if (hdrLightGrid) {
-            // ri.Printf(PRINT_ALL, "found!\n");
-
             if (size != sizeof(float) * 6 * numGridPoints)
                 ri.Error(ERR_DROP, "Bad size for %s (%i, expected %i)!", filename, size, (int)(sizeof(float)) * 6 * numGridPoints);
 
