@@ -27,7 +27,7 @@ typedef struct aas_link_s {
     int entnum;
     int areanum;
     struct aas_link_s *next_ent, *prev_ent;
-    struct aas_link_s *next_area, *prev_area;
+    struct aas_link_s* next_area;
 } aas_link_t;
 
 typedef struct bsp_entdata_s {
