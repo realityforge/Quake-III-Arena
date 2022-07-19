@@ -22,10 +22,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "q_shared.h"
 
-/*****************************************************************************
- * log file
- *****************************************************************************/
-
 // open a log file
 void Log_Open(char* filename);
 // close the current log file
