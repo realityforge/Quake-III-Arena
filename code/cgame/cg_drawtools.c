@@ -518,10 +518,6 @@ static int propMap[128][3] = {
     { 0, 0, -1 } // DEL
 };
 
-#define PROPB_GAP_WIDTH 4
-#define PROPB_SPACE_WIDTH 12
-#define PROPB_HEIGHT 36
-
 static int UI_ProportionalStringWidth(const char* str)
 {
     const char* s;
