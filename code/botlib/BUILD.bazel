@@ -11,7 +11,7 @@
 # limitations under the License.
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//build_defs:rules.bzl", "EXTRA_WARNINGS", "FULL_WARNINGS")
+load("//build_defs:rules.bzl", "FULL_WARNINGS")
 
 cc_library(
     name = "api",
@@ -110,13 +110,18 @@ cc_library(
         "l_struct.h",
         "l_utils.h",
     ],
-    copts = EXTRA_WARNINGS + [
-        "-Wunused-parameter",
-        "-Wstrict-prototypes",
-        "-Wmissing-field-initializers",
-        "-Wredundant-parens",
-        "-Wunused-macros",
-        "-Wmissing-variable-declarations",
+    copts = FULL_WARNINGS + [
+        "-Wno-bad-function-cast",
+        "-Wno-padded",
+        "-Wno-double-promotion",
+        "-Wno-cast-align",
+        "-Wno-shorten-64-to-32",
+        "-Wno-float-equal",
+        "-Wno-sign-conversion",
+        "-Wno-sign-compare",
+        "-Wno-implicit-int-conversion",
+        "-Wno-implicit-float-conversion",
+        "-Wno-float-conversion",
     ],
     includes = ["."],
     visibility = [
