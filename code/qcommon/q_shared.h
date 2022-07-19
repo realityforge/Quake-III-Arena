@@ -1132,13 +1132,13 @@ typedef enum {
     FMV_LOOPED
 } e_status;
 
-typedef enum _flag_status {
+typedef enum flag_status_e {
     FLAG_ATBASE = 0,
     FLAG_TAKEN, // CTF
     FLAG_TAKEN_RED, // One Flag CTF
     FLAG_TAKEN_BLUE, // One Flag CTF
     FLAG_DROPPED
-} flagStatus_t;
+} flag_status_t;
 
 #define MAX_GLOBAL_SERVERS 4096
 #define MAX_OTHER_SERVERS 128

@@ -24,9 +24,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "g_spawn.h"
 
 typedef struct teamgame_s {
-    flagStatus_t redStatus; // CTF
-    flagStatus_t blueStatus; // CTF
-    flagStatus_t flagStatus; // One Flag CTF
+    flag_status_t redStatus; // CTF
+    flag_status_t blueStatus; // CTF
+    flag_status_t flagStatus; // One Flag CTF
     int redTakenTime;
     int blueTakenTime;
     int redObeliskAttackedTime;
@@ -37,7 +37,7 @@ teamgame_t teamgame;
 
 gentity_t* neutralObelisk;
 
-void Team_SetFlagStatus(int team, flagStatus_t status);
+void Team_SetFlagStatus(int team, flag_status_t status);
 
 void Team_InitGame()
 {
@@ -162,7 +162,7 @@ bool OnSameTeam(gentity_t* ent1, gentity_t* ent2)
 static char ctfFlagStatusRemap[] = { '0', '1', '*', '*', '2' };
 static char oneFlagStatusRemap[] = { '0', '1', '2', '3', '4' };
 
-void Team_SetFlagStatus(int team, flagStatus_t status)
+void Team_SetFlagStatus(int team, flag_status_t status)
 {
     bool modified = false;
 
