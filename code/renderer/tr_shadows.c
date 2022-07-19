@@ -33,11 +33,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 */
 
-typedef struct {
-    int i2;
-    int facing;
-} edgeDef_t;
-
 /*
 =================
 RB_ShadowTessEnd
