@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "tr_local.h"
 
-void R_PerformanceCounters(void)
+static void R_PerformanceCounters()
 {
     if (!r_speeds->integer) {
         // clear the counters even if we aren't printing
@@ -61,7 +61,7 @@ void R_PerformanceCounters(void)
     memset(&backEnd.pc, 0, sizeof(backEnd.pc));
 }
 
-void R_IssueRenderCommands(bool runPerformanceCounters)
+static void R_IssueRenderCommands(bool runPerformanceCounters)
 {
     renderCommandList_t* cmdList;
 
