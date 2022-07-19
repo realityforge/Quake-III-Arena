@@ -41,7 +41,3 @@ int AvailableMemory(void);
 void PrintUsedMemorySize(void);
 // print all memory blocks with label
 void PrintMemoryLabels(void);
-// returns the size of the memory block in bytes
-int MemoryByteSize(void* ptr);
-// free all allocated memory
-void DumpMemory(void);
