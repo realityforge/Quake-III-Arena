@@ -115,6 +115,7 @@ cc_library(
         "-Wstrict-prototypes",
         "-Wmissing-field-initializers",
         "-Wredundant-parens",
+        "-Wunused-macros",
         "-Wmissing-variable-declarations",
     ],
     includes = ["."],
