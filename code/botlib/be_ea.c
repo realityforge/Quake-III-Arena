@@ -223,20 +223,14 @@ void EA_GetInput(int client, float thinktime, bot_input_t* input)
     bi->thinktime = thinktime;
     memcpy(input, bi, sizeof(bot_input_t));
 }
-void EA_ResetInput(int client)
+void EA_ResetInput(const int client)
 {
-    bot_input_t* bi;
-    int jumped = false;
-
-    bi = &botinputs[client];
-
+    bot_input_t* bi = &botinputs[client];
     bi->thinktime = 0;
     VectorClear(bi->dir);
     bi->speed = 0;
-    jumped = bi->actionflags & ACTION_JUMP;
-    bi->actionflags = 0;
-    if (jumped)
-        bi->actionflags |= ACTION_JUMPEDLASTFRAME;
+    const bool jumped = bi->actionflags & ACTION_JUMP ? true : false;
+    bi->actionflags = jumped ? ACTION_JUMPEDLASTFRAME : 0;
 }
 int EA_Setup()
 {
