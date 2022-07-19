@@ -214,7 +214,7 @@ vm_t* VM_Restart(vm_t* vm)
     Com_Printf("Loading vm file %s.\n", filename);
     FS_ReadFile(filename, (void**)&header);
     if (!header) {
-        Com_Error(ERR_DROP, "VM_Restart failed.\n");
+        Com_Error(ERR_DROP, "VM_Restart failed.");
     }
 
     // byte swap the header

@@ -658,7 +658,7 @@ void Sys_Init(void)
             Cvar_Set("sys_cpustring", "Alpha AXP");
             break;
         default:
-            Com_Error(ERR_FATAL, "Unknown cpu type %d\n", cpuid);
+            Com_Error(ERR_FATAL, "Unknown cpu type %d", cpuid);
             break;
         }
     } else {

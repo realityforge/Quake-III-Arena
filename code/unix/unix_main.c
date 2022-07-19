@@ -230,9 +230,9 @@ void* Sys_LoadDll(const char* name, char* fqpath, vmMainProc* entryPoint, vmDllS
 
             if (!libHandle) {
 #ifndef NDEBUG
-                Com_Error(ERR_FATAL, "Sys_LoadDll(%s) failed dlopen() completely!\n", name);
+                Com_Error(ERR_FATAL, "Sys_LoadDll(%s) failed dlopen() completely!", name);
 #else
-                Com_Printf("Sys_LoadDll(%s) failed dlopen() completely!\n", name);
+                Com_Printf("Sys_LoadDll(%s) failed dlopen() completely!", name);
 #endif
                 return NULL;
             } else
@@ -247,9 +247,9 @@ void* Sys_LoadDll(const char* name, char* fqpath, vmMainProc* entryPoint, vmDllS
     if (!*entryPoint || !dllEntry) {
         err = dlerror();
 #ifndef NDEBUG
-        Com_Error(ERR_FATAL, "Sys_LoadDll(%s) failed dlsym(vmMain):\n\"%s\" !\n", name, err);
+        Com_Error(ERR_FATAL, "Sys_LoadDll(%s) failed dlsym(vmMain):\n\"%s\" !", name, err);
 #else
-        Com_Printf("Sys_LoadDll(%s) failed dlsym(vmMain):\n\"%s\" !\n", name, err);
+        Com_Printf("Sys_LoadDll(%s) failed dlsym(vmMain):\n\"%s\" !", name, err);
 #endif
         dlclose(libHandle);
         err = dlerror();

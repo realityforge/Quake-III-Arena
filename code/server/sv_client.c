@@ -250,7 +250,7 @@ void SV_DirectConnect(netadr_t from)
                 SV_DropClient(&svs.clients[sv_maxclients->integer - 1], "only bots on server");
                 newcl = &svs.clients[sv_maxclients->integer - 1];
             } else {
-                Com_Error(ERR_FATAL, "server is full on local connect\n");
+                Com_Error(ERR_FATAL, "server is full on local connect");
                 return;
             }
         } else {
