@@ -511,8 +511,7 @@ void EvolveWeightConfig(weightconfig_t* config)
         EvolveFuzzySeparator_r(config->weights[i].firstseparator);
     }
 }
-static int InterbreedFuzzySeparator_r(fuzzyseparator_t* fs1, fuzzyseparator_t* fs2,
-                                      fuzzyseparator_t* fsout)
+static int InterbreedFuzzySeparator_r(fuzzyseparator_t* fs1, fuzzyseparator_t* fs2, fuzzyseparator_t* fsout)
 {
     if (fs1->child) {
         if (!fs2->child || !fsout->child) {
