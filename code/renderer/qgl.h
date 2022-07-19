@@ -140,7 +140,7 @@ extern void(APIENTRY* qglActiveTextureARB)(GLenum texture);
 extern void(APIENTRY* qglClientActiveTextureARB)(GLenum texture);
 
 extern void(APIENTRY* qglLockArraysEXT)(GLint, GLint);
-extern void(APIENTRY* qglUnlockArraysEXT)();
+extern void(APIENTRY* qglUnlockArraysEXT)(void);
 
 //===========================================================================
 
