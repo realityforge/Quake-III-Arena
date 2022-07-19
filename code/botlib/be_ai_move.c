@@ -432,7 +432,7 @@ static float DistanceFromLineSquared(vec3_t p, vec3_t lp1, vec3_t lp2)
     VectorSubtract(p, proj, dir);
     return VectorLengthSquared(dir);
 }
-static float VectorDistanceSquared(vec3_t p1, vec3_t p2)
+static float VectorDistanceSquared(const vec3_t p1, const vec3_t p2)
 {
     vec3_t dir;
     VectorSubtract(p2, p1, dir);
