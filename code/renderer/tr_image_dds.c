@@ -370,7 +370,6 @@ void R_LoadDDS(const char* filename, uint8_t** pic, uint32_t* width, uint32_t* h
             ri.Printf(PRINT_ALL, "DDS File %s has unsupported DXGI format %d.", filename, ddsHeaderDxt10->dxgiFormat);
             ri.FS_FreeFile(buffer.v);
             return;
-            break;
         }
     } else {
         if (ddsHeader->pixelFormatFlags & DDSPF_FOURCC) {
