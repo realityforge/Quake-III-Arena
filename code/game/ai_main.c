@@ -626,8 +626,6 @@ static void BotInputToUserCommand(bot_input_t* bi, usercmd_t* ucmd, int delta_an
     // crouch/movedown
     if (bi->actionflags & ACTION_CROUCH)
         ucmd->upmove -= 127;
-    // Com_Printf("forward = %d right = %d up = %d\n", ucmd.forwardmove, ucmd.rightmove, ucmd.upmove);
-    // Com_Printf("ucmd->serverTime = %d\n", ucmd->serverTime);
 }
 
 static void BotUpdateInput(bot_state_t* bs, int time, int elapsed_time)
