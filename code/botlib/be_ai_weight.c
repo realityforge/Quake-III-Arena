@@ -52,7 +52,7 @@ static int ReadValue(source_t* source, float* value)
     if (!PC_ExpectAnyToken(source, &token))
         return false;
     if (!strcmp(token.string, "-")) {
-        SourceWarning(source, "negative value set to zero\n");
+        SourceWarning(source, "negative value set to zero");
         if (!PC_ExpectTokenType(source, TT_NUMBER, 0, &token)) {
             return false;
         }
@@ -209,7 +209,7 @@ static fuzzyseparator_t* ReadFuzzySeparators_r(source_t* source)
         }
     } while (strcmp(token.string, "}"));
     if (!founddefault) {
-        SourceWarning(source, "switch without default\n");
+        SourceWarning(source, "switch without default");
         fs = (fuzzyseparator_t*)GetClearedMemory(sizeof(fuzzyseparator_t));
         fs->index = index;
         fs->value = MAX_INVENTORYVALUE;
@@ -272,7 +272,7 @@ weightconfig_t* ReadWeightConfig(char* filename)
     while (PC_ReadToken(source, &token)) {
         if (!strcmp(token.string, "weight")) {
             if (config->numweights >= MAX_WEIGHTS) {
-                SourceWarning(source, "too many fuzzy weights\n");
+                SourceWarning(source, "too many fuzzy weights");
                 break;
             }
             if (!PC_ExpectTokenType(source, TT_STRING, 0, &token)) {
