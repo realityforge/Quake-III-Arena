@@ -2252,7 +2252,7 @@ static void AAS_Reachability_Elevator()
                     bottomorg[2] += 24;
                 }
                 // look at adjacent areas around the top of the plat
-                // make larger steps to outside the plat every time
+                // make larger steps to outside the plat everytime
                 for (n = 0; n < 3; n++) {
                     for (k = 0; k < 3; k++) {
                         mins[k] -= 4;
