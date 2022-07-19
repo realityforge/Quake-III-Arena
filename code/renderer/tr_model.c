@@ -40,7 +40,6 @@ static qhandle_t R_RegisterMD3(const char* name, model_t* mod)
         unsigned* u;
         void* v;
     } buf;
-    int size;
     int lod;
     int ident;
     bool loaded = false;
@@ -66,7 +65,7 @@ static qhandle_t R_RegisterMD3(const char* name, model_t* mod)
         else
             Com_sprintf(namebuf, sizeof(namebuf), "%s.%s", filename, fext);
 
-        size = ri.FS_ReadFile(namebuf, &buf.v);
+        ri.FS_ReadFile(namebuf, &buf.v);
         if (!buf.u)
             continue;
 
