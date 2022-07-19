@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // list with library variables
 static libvar_t* libvarlist;
 
-static float LibVarStringValue(char* string)
+static float LibVarStringValue(const char* string)
 {
     int dotfound = 0;
     float value = 0;
@@ -55,7 +55,7 @@ static float LibVarStringValue(char* string)
     }
     return value;
 }
-static libvar_t* LibVarAlloc(char* var_name)
+static libvar_t* LibVarAlloc(const char* var_name)
 {
     libvar_t* v;
 
@@ -84,7 +84,7 @@ void LibVarDeAllocAll()
     }
     libvarlist = NULL;
 }
-libvar_t* LibVarGet(char* var_name)
+libvar_t* LibVarGet(const char* var_name)
 {
     libvar_t* v;
 
@@ -95,7 +95,7 @@ libvar_t* LibVarGet(char* var_name)
     }
     return NULL;
 }
-char* LibVarGetString(char* var_name)
+char* LibVarGetString(const char* var_name)
 {
     libvar_t* v;
 
@@ -106,7 +106,7 @@ char* LibVarGetString(char* var_name)
         return "";
     }
 }
-float LibVarGetValue(char* var_name)
+float LibVarGetValue(const char* var_name)
 {
     libvar_t* v;
 
@@ -117,7 +117,7 @@ float LibVarGetValue(char* var_name)
         return 0;
     }
 }
-libvar_t* LibVar(char* var_name, char* value)
+libvar_t* LibVar(const char* var_name, const char* value)
 {
     libvar_t* v;
     v = LibVarGet(var_name);
@@ -134,21 +134,21 @@ libvar_t* LibVar(char* var_name, char* value)
     v->modified = true;
     return v;
 }
-char* LibVarString(char* var_name, char* value)
+char* LibVarString(const char* var_name, const char* value)
 {
     libvar_t* v;
 
     v = LibVar(var_name, value);
     return v->string;
 }
-float LibVarValue(char* var_name, char* value)
+float LibVarValue(const char* var_name, const char* value)
 {
     libvar_t* v;
 
     v = LibVar(var_name, value);
     return v->value;
 }
-void LibVarSet(char* var_name, char* value)
+void LibVarSet(const char* var_name, const char* value)
 {
     libvar_t* v;
 

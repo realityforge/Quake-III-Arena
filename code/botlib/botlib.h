@@ -382,12 +382,12 @@ typedef struct botlib_export_s {
     // shutdown the bot library, returns BLERR_
     int (*BotLibShutdown)(void);
     // sets a library variable returns BLERR_
-    int (*BotLibVarSet)(char* var_name, char* value);
+    int (*BotLibVarSet)(const char* var_name, const char* value);
     // gets a library variable returns BLERR_
-    int (*BotLibVarGet)(char* var_name, char* value, int size);
+    int (*BotLibVarGet)(const char* var_name, char* value, const int size);
 
     // sets a C-like define returns BLERR_
-    int (*PC_AddGlobalDefine)(char* string);
+    int (*PC_AddGlobalDefine)(const char* string);
     int (*PC_LoadSourceHandle)(const char* filename);
     int (*PC_FreeSourceHandle)(int handle);
     int (*PC_ReadTokenHandle)(int handle, pc_token_t* pc_token);

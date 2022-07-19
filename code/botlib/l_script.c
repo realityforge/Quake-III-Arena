@@ -858,7 +858,7 @@ script_t* LoadScriptFile(const char* filename)
 
     return script;
 }
-script_t* LoadScriptMemory(char* ptr, int length, char* name)
+script_t* LoadScriptMemory(const char* ptr, const int length, const char* name)
 {
     void* buffer;
     script_t* script;
@@ -890,7 +890,7 @@ void FreeScript(script_t* script)
         FreeMemory(script->punctuationtable);
     FreeMemory(script);
 }
-void PS_SetBaseFolder(char* path)
+void PS_SetBaseFolder(const char* path)
 {
     Com_sprintf(basefolder, sizeof(basefolder), path);
 }
