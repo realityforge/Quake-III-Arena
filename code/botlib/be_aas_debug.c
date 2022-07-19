@@ -43,7 +43,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 int debuglines[MAX_DEBUGLINES];
 int debuglinevisible[MAX_DEBUGLINES];
-int numdebuglines;
 
 static int debugpolygons[MAX_DEBUGPOLYGONS];
 
@@ -66,7 +65,6 @@ void AAS_DebugLine(vec3_t start, vec3_t end, int color)
         if (!debuglines[line]) {
             debuglines[line] = botimport.DebugLineCreate();
             debuglinevisible[line] = false;
-            numdebuglines++;
         }
         if (!debuglinevisible[line]) {
             botimport.DebugLineShow(debuglines[line], start, end, color);
