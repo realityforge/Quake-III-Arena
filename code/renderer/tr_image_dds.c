@@ -238,7 +238,7 @@ void R_LoadDDS(const char* filename, uint8_t** pic, uint32_t* width, uint32_t* h
     *pic = NULL;
 
     // load the file
-    len = ri.FS_ReadFile((char*)filename, &buffer.v);
+    len = ri.FS_ReadFile(filename, &buffer.v);
     if (!buffer.b || len < 0) {
         return;
     }
