@@ -215,18 +215,6 @@ static void R_AddMarkFragments(int numClipPoints, vec3_t clipPoints[2][MAX_VERTS
     if (numClipPoints + (*returnedPoints) > maxPoints) {
         return; // not enough space for this polygon
     }
-    /*
-    // all the clip points should be within the bounding box
-    for ( i = 0 ; i < numClipPoints ; i++ ) {
-            int j;
-            for ( j = 0 ; j < 3 ; j++ ) {
-                    if (clipPoints[pingPong][i][j] < mins[j] - 0.5) break;
-                    if (clipPoints[pingPong][i][j] > maxs[j] + 0.5) break;
-            }
-            if (j < 3) break;
-    }
-    if (i < numClipPoints) return;
-    */
 
     mf = fragmentBuffer + (*returnedFragments);
     mf->firstPoint = (*returnedPoints);
