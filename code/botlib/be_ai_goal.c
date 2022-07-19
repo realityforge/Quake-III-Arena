@@ -156,7 +156,7 @@ typedef struct bot_goalstate_s {
     float avoidgoaltimes[MAX_AVOIDGOALS]; // times to avoid the goals
 } bot_goalstate_t;
 
-static bot_goalstate_t* botgoalstates[MAX_CLIENTS + 1]; // FIXME: init?
+static bot_goalstate_t* botgoalstates[MAX_CLIENTS + 1];
 // item configuration
 static itemconfig_t* itemconfig = NULL;
 // level items
