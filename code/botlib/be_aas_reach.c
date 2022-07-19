@@ -2654,8 +2654,6 @@ static void AAS_Reachability_JumpPad()
         // if there is a horizontal velocity check for a reachability without air control
         if (velocity[0] || velocity[1]) {
             VectorSet(cmdmove, 0, 0, 0);
-            // VectorCopy(velocity, cmdmove);
-            // cmdmove[2] = 0;
             memset(&move, 0, sizeof(aas_clientmove_t));
             area2num = 0;
             for (i = 0; i < 20; i++) {
