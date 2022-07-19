@@ -81,7 +81,3 @@ void FreeMemory(void* ptr)
         botimport.FreeMemory(memid);
     }
 }
-int AvailableMemory()
-{
-    return botimport.AvailableMemory();
-}
