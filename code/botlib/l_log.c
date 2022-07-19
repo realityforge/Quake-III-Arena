@@ -34,7 +34,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 typedef struct logfile_s {
     char filename[MAX_LOGFILENAMESIZE];
     FILE* fp;
-    int numwrites;
 } logfile_t;
 
 static logfile_t logfile;
