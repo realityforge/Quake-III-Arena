@@ -1679,7 +1679,6 @@ Called directly from cgame
 */
 void RE_LoadWorldMap(const char* name)
 {
-    int i;
     dheader_t* header;
     uint8_t* buffer;
     uint8_t* startMarker;
@@ -1719,14 +1718,14 @@ void RE_LoadWorldMap(const char* name)
     header = (dheader_t*)buffer;
     fileBase = (uint8_t*)header;
 
-    i = LittleLong(header->version);
-    if (i != BSP_VERSION) {
+    const int version = LittleLong(header->version);
+    if (version != BSP_VERSION) {
         ri.Error(ERR_DROP, "RE_LoadWorldMap: %s has wrong version number (%i should be %i)",
-                 name, i, BSP_VERSION);
+                 name, version, BSP_VERSION);
     }
 
     // swap all the lumps
-    for (i = 0; i < sizeof(dheader_t) / 4; i++) {
+    for (size_t i = 0; i < sizeof(dheader_t) / 4; i++) {
         ((int*)header)[i] = LittleLong(((int*)header)[i]);
     }
 
