@@ -947,7 +947,9 @@ bool R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_name)
         surf = iqmData->surfaces;
         for (i = 0; i < iqmData->num_surfaces; i++, vaoSurf++, surf++) {
             uint32_t offset_xyz, offset_st, offset_normal, offset_tangent;
-            uint32_t offset_blendindexes, offset_blendweights, stride;
+            uint32_t offset_blendindexes = 0;
+            uint32_t offset_blendweights = 0;
+            uint32_t stride = 0;
             uint32_t dataSize, dataOfs;
             uint8_t* data;
             glIndex_t indexes[SHADER_MAX_INDEXES];
