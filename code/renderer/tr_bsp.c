@@ -2066,18 +2066,6 @@ static void R_LoadLightGrid(lump_t* l)
                 R_ColorShiftLightingFloats(c, c);
                 ColorToRGB16(c, &w->lightGrid16[i * 6 + 3]);
             }
-        } else if (0) {
-            // promote 8-bit lightgrid to 16-bit
-            w->lightGrid16 = ri.Hunk_Alloc(sizeof(w->lightGrid16) * 6 * numGridPoints, h_low);
-
-            for (i = 0; i < numGridPoints; i++) {
-                w->lightGrid16[i * 6] = w->lightGridData[i * 8] * 257;
-                w->lightGrid16[i * 6 + 1] = w->lightGridData[i * 8 + 1] * 257;
-                w->lightGrid16[i * 6 + 2] = w->lightGridData[i * 8 + 2] * 257;
-                w->lightGrid16[i * 6 + 3] = w->lightGridData[i * 8 + 3] * 257;
-                w->lightGrid16[i * 6 + 4] = w->lightGridData[i * 8 + 4] * 257;
-                w->lightGrid16[i * 6 + 5] = w->lightGridData[i * 8 + 5] * 257;
-            }
         }
 
         if (hdrLightGrid)
