@@ -548,7 +548,6 @@ int Characteristic_Integer(int character, int index)
         botimport.Print(PRT_ERROR, "characteristic %d is not an integer\n", index);
         return 0;
     }
-    //	return 0;
 }
 int Characteristic_BInteger(int character, int index, int min, int max)
 {
