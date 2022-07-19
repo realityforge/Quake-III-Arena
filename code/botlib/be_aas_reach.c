@@ -1225,7 +1225,7 @@ static int AAS_Reachability_Step_Barrier_WaterJump_WalkOffLedge(int area1num, in
 //===========================================================================
 // returns the distance between the two vectors
 //===========================================================================
-static float VectorDistance(vec3_t v1, vec3_t v2)
+static float VectorDistance(const vec3_t v1, const vec3_t v2)
 {
     vec3_t dir;
 
@@ -1235,7 +1235,7 @@ static float VectorDistance(vec3_t v1, vec3_t v2)
 //===========================================================================
 // returns true if the first vector is between the last two vectors
 //===========================================================================
-static int VectorBetweenVectors(vec3_t v, vec3_t v1, vec3_t v2)
+static int VectorBetweenVectors(const vec3_t v, const vec3_t v1, const vec3_t v2)
 {
     vec3_t dir1, dir2;
 
