@@ -215,11 +215,7 @@ static fuzzyseparator_t* ReadFuzzySeparators_r(source_t* source)
         fs->weight = 0;
         fs->next = NULL;
         fs->child = NULL;
-        if (lastfs)
-            lastfs->next = fs;
-        else
-            firstfs = fs;
-        lastfs = fs;
+        lastfs->next = fs;
     }
     return firstfs;
 }
