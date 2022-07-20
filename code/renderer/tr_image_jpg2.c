@@ -53,7 +53,7 @@ static void jpeg_load_error(const char* name, const char* error_message)
     ri.Printf(PRINT_WARNING, "Failed to load jpg file named %s due to: %s.\n", name, error_message);
 }
 
-NORETURN static void jpeg_load_error_exit(const j_common_ptr info)
+NORETURN static void jpeg_load_error_exit(j_common_ptr info)
 {
     // Get our custom error handler
     error_mgr_t* error_mgr = (error_mgr_t*)info->err;
@@ -68,7 +68,7 @@ NORETURN static void jpeg_load_error_exit(const j_common_ptr info)
     longjmp(error_mgr->setjmp_buffer, 1);
 }
 
-static void jpeg_load_output_message(const j_common_ptr info)
+static void jpeg_load_output_message(j_common_ptr info)
 {
     error_mgr_t* error_mgr = (error_mgr_t*)info->err;
 
