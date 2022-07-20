@@ -80,10 +80,11 @@ typedef struct flare_s {
 
 #define MAX_FLARES 128
 
-flare_t r_flareStructs[MAX_FLARES];
-flare_t *r_activeFlares, *r_inactiveFlares;
+static flare_t r_flareStructs[MAX_FLARES] = { 0 };
+static flare_t* r_activeFlares = NULL;
+static flare_t* r_inactiveFlares = NULL;
 
-int flareCoeff;
+static int flareCoeff = 0;
 
 static void R_SetFlareCoeff()
 {

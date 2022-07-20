@@ -297,7 +297,7 @@ typedef struct vidmode_s {
     float pixelAspect; // pixel width / height
 } vidmode_t;
 
-vidmode_t r_vidModes[] = {
+static vidmode_t r_vidModes[] = {
     { "Mode  0: 320x240", 320, 240, 1 },
     { "Mode  1: 400x300", 400, 300, 1 },
     { "Mode  2: 512x384", 512, 384, 1 },
