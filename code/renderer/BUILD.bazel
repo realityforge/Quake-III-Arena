@@ -35,6 +35,7 @@ cc_library(
         "tr_cmds.c",
         "tr_sky.c",
         "tr_surface.c",
+        "tr_world.c",
     ],
     hdrs = [
         "qgl.h",
