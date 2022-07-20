@@ -12,8 +12,8 @@
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_archive = "http_archive")
 
-_GLA_VERSION = "1.1"
-_GLA_SHA256 = "421cd5fb47f8782a2a05fc7bee98f842a4c11e242b1ceb776b101d7b3096bda1"
+_GLA_VERSION = "1.2"
+_GLA_SHA256 = "29ba607232d5ef270be131541acefac90992a43e239ccc239c080a4790d72bb4"
 
 def load_repository():
     if native.existing_rule("gla"):
