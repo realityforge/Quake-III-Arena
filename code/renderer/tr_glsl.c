@@ -251,17 +251,7 @@ static void GLSL_GetShaderHeader(GLenum shaderType, const GLchar* extra, char* d
         Q_strcat(dest, size, "#define shadow2D(a,b) shadow2D(a,b).r \n");
     }
 
-    // HACK: add some macros to avoid extra uniforms and save speed and code maintenance
-    // Q_strcat(dest, size,
-    //		 va("#ifndef r_SpecularExponent\n#define r_SpecularExponent %f\n#endif\n", r_specularExponent->value));
-    // Q_strcat(dest, size,
-    //		 va("#ifndef r_SpecularScale\n#define r_SpecularScale %f\n#endif\n", r_specularScale->value));
-    // Q_strcat(dest, size,
-    //       va("#ifndef r_NormalScale\n#define r_NormalScale %f\n#endif\n", r_normalScale->value));
-
     Q_strcat(dest, size, "#ifndef M_PI\n#define M_PI 3.14159265358979323846\n#endif\n");
-
-    // Q_strcat(dest, size, va("#ifndef MAX_SHADOWMAPS\n#define MAX_SHADOWMAPS %i\n#endif\n", MAX_SHADOWMAPS));
 
     Q_strcat(dest, size,
              va("#ifndef deformGen_t\n"
