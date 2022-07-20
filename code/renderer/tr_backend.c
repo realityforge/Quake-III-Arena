@@ -604,7 +604,7 @@ void RE_StretchRaw(int x, int y, int w, int h, int cols, int rows, const uint8_t
         ri.Error(ERR_DROP, "Draw_StretchRaw: size not a power of 2: %i by %i", cols, rows);
     }
 
-    RE_UploadCinematic(w, h, cols, rows, data, client, dirty);
+    RE_UploadCinematic(cols, rows, data, client, dirty);
     GL_BindToTMU(tr.scratchImage[client], TB_COLORMAP);
 
     if (r_speeds->integer) {
@@ -637,7 +637,7 @@ void RE_StretchRaw(int x, int y, int w, int h, int cols, int rows, const uint8_t
     RB_InstantQuad2(quadVerts, texCoords);
 }
 
-void RE_UploadCinematic(int w, int h, int cols, int rows, const uint8_t* data, int client, bool dirty)
+void RE_UploadCinematic(int cols, int rows, const uint8_t* data, int client, bool dirty)
 {
     GLuint texture;
 
