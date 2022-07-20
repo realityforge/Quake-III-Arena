@@ -33,6 +33,7 @@ cc_library(
     srcs = [
         "tr_bsp.c",
         "tr_cmds.c",
+        "tr_sky.c",
         "tr_surface.c",
     ],
     hdrs = [
