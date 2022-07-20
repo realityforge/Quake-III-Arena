@@ -1011,7 +1011,7 @@ static bool IsMirror(const drawSurf_t* drawSurf, int entityNum)
 */
 static bool SurfIsOffscreen(const drawSurf_t* drawSurf)
 {
-    float shortest = 100000000;
+    float shortest = 100000000.F;
     int entityNum;
     int numTriangles;
     shader_t* shader;
