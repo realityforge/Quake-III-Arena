@@ -1751,7 +1751,7 @@ static inline bool ShaderRequiresCPUDeforms(const shader_t* shader)
 //====================================================================
 
 void R_RenderView(viewParms_t* parms);
-void R_RenderDlightCubemaps(const refdef_t* fd);
+void R_RenderDlightCubemaps(void);
 void R_RenderPshadowMaps(const refdef_t* fd);
 void R_RenderSunShadowMaps(const refdef_t* fd, int level);
 void R_RenderCubemapSide(int cubemapIndex, int cubemapSide, bool subscene);

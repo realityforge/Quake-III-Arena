@@ -1752,7 +1752,7 @@ static GLenum PixelDataFormatFromInternalFormat(const GLenum internalFormat)
     }
 }
 
-static void RawImage_UploadTexture(GLuint texture, uint8_t* data, int x, int y, int width, int height, GLenum target, GLenum picFormat, int numMips, GLenum internalFormat, imgType_t type, imgFlags_t flags, bool subtexture)
+static void RawImage_UploadTexture(GLuint texture, uint8_t* data, int x, int y, int width, int height, GLenum target, GLenum picFormat, int numMips, GLenum internalFormat, imgType_t type, imgFlags_t flags)
 {
     GLenum dataFormat, dataType;
     bool rgtc = internalFormat == GL_COMPRESSED_RG_RGTC2;
@@ -1859,7 +1859,7 @@ static void Upload32(uint8_t* data, int x, int y, int width, int height, GLenum 
     if (cubemap) {
         for (i = 0; i < 6; i++) {
             int w2 = width, h2 = height;
-            RawImage_UploadTexture(image->texnum, data, x, y, width, height, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, picFormat, numMips, internalFormat, type, flags, false);
+            RawImage_UploadTexture(image->texnum, data, x, y, width, height, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, picFormat, numMips, internalFormat, type, flags);
             for (c = numMips; c; c--) {
                 data += CalculateMipSize(w2, h2, picFormat);
                 w2 = MAX(1, w2 >> 1);
@@ -1867,7 +1867,7 @@ static void Upload32(uint8_t* data, int x, int y, int width, int height, GLenum 
             }
         }
     } else {
-        RawImage_UploadTexture(image->texnum, data, x, y, width, height, GL_TEXTURE_2D, picFormat, numMips, internalFormat, type, flags, false);
+        RawImage_UploadTexture(image->texnum, data, x, y, width, height, GL_TEXTURE_2D, picFormat, numMips, internalFormat, type, flags);
     }
 
     GL_CheckErrors();

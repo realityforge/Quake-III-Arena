@@ -405,7 +405,7 @@ void RE_RenderScene(const refdef_t* fd)
 
     // SmileTheory: playing with shadow mapping
     if (!(fd->rdflags & RDF_NOWORLDMODEL) && tr.refdef.num_dlights && r_dlightMode->integer >= 2) {
-        R_RenderDlightCubemaps(fd);
+        R_RenderDlightCubemaps();
     }
 
     /* playing with more shadows */
