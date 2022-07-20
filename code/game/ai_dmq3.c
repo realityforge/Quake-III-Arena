@@ -1174,20 +1174,6 @@ char* ClientName(int client, char* name, int size)
     return name;
 }
 
-char* ClientSkin(int client, char* skin, int size)
-{
-    char buf[MAX_INFO_STRING];
-
-    if (client < 0 || client >= MAX_CLIENTS) {
-        BotAI_Print(PRT_ERROR, "ClientSkin: client out of range\n");
-        return "[client out of range]";
-    }
-    trap_GetConfigstring(CS_PLAYERS + client, buf, sizeof(buf));
-    strncpy(skin, Info_ValueForKey(buf, "model"), size - 1);
-    skin[size - 1] = '\0';
-    return skin;
-}
-
 int ClientFromName(char* name)
 {
     int i;
