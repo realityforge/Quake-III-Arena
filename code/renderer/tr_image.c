@@ -1555,7 +1555,7 @@ static GLenum RawImage_GetFormat(const uint8_t* data, int numPixels, GLenum picF
         if ((type == IMGTYPE_NORMALHEIGHT) && RawImage_HasAlpha(data, numPixels) && r_parallaxMapping->integer) {
             if (!forceNoCompression && glRefConfig.textureCompression & TCR_BPTC) {
                 internalFormat = GL_COMPRESSED_RGBA_BPTC_UNORM_ARB;
-            } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC_ARB) {
+            } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC) {
                 internalFormat = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
             } else if (r_texturebits->integer == 16) {
                 internalFormat = GL_RGBA4;
@@ -1569,7 +1569,7 @@ static GLenum RawImage_GetFormat(const uint8_t* data, int numPixels, GLenum picF
                 internalFormat = GL_COMPRESSED_RG_RGTC2;
             } else if (!forceNoCompression && glRefConfig.textureCompression & TCR_BPTC) {
                 internalFormat = GL_COMPRESSED_RGBA_BPTC_UNORM_ARB;
-            } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC_ARB) {
+            } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC) {
                 internalFormat = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
             } else if (r_texturebits->integer == 16) {
                 internalFormat = GL_RGB5;
@@ -1590,7 +1590,7 @@ static GLenum RawImage_GetFormat(const uint8_t* data, int numPixels, GLenum picF
         if (samples == 3) {
             if (!forceNoCompression && (glRefConfig.textureCompression & TCR_BPTC)) {
                 internalFormat = GL_COMPRESSED_RGBA_BPTC_UNORM_ARB;
-            } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC_ARB) {
+            } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC) {
                 internalFormat = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
             } else if (r_texturebits->integer == 16) {
                 internalFormat = GL_RGB5;
@@ -1602,7 +1602,7 @@ static GLenum RawImage_GetFormat(const uint8_t* data, int numPixels, GLenum picF
         } else if (samples == 4) {
             if (!forceNoCompression && (glRefConfig.textureCompression & TCR_BPTC)) {
                 internalFormat = GL_COMPRESSED_RGBA_BPTC_UNORM_ARB;
-            } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC_ARB) {
+            } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC) {
                 internalFormat = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
             } else if (r_texturebits->integer == 16) {
                 internalFormat = GL_RGBA4;

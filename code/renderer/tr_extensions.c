@@ -92,7 +92,7 @@ void GLimp_InitExtraExtensions()
     // GL_EXT_texture_compression_s3tc
     if (GLA_EXT_texture_compression_s3tc) {
         if (r_ext_compressed_textures->value) {
-            glConfig.textureCompression = TC_S3TC_ARB;
+            glConfig.textureCompression = TC_S3TC;
             ri.Printf(PRINT_ALL, EXT_USING_MESSAGE, "GL_EXT_texture_compression_s3tc");
         } else {
             ri.Printf(PRINT_ALL, EXT_IGNORE_MESSAGE, "GL_EXT_texture_compression_s3tc");

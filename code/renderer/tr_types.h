@@ -153,7 +153,7 @@ typedef enum {
 */
 typedef enum {
     TC_NONE,
-    TC_S3TC_ARB // this is for the GL_EXT_texture_compression_s3tc extension.
+    TC_S3TC // this is for the GL_EXT_texture_compression_s3tc extension.
 } textureCompression_t;
 
 typedef struct {
