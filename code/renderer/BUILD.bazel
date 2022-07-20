@@ -33,6 +33,7 @@ cc_library(
     srcs = [
         "tr_bsp.c",
         "tr_cmds.c",
+        "tr_surface.c",
     ],
     hdrs = [
         "qgl.h",
@@ -50,6 +51,7 @@ cc_library(
         "-Wno-implicit-int-conversion",
         "-Wno-sign-compare",
         "-Wno-pointer-to-int-cast",
+        "-Wno-switch-enum",
     ],
     visibility = [
         "//code/cgame:__pkg__",
