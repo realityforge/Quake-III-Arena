@@ -36,6 +36,8 @@
 // routine which calls the JPEG library must first execute a setjmp() call to establish the return point.
 // We want the replacement error_exit to do a longjmp(). But we need to make the setjmp buffer accessible
 // to the error_exit routine. To do this, we make a private extension of the standard JPEG error handler object.
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpadded"
 typedef struct error_mgr_s {
     // The standard error handler structure
     struct jpeg_error_mgr error_handler;
@@ -44,6 +46,7 @@ typedef struct error_mgr_s {
     // the setjump target to return to
     jmp_buf setjmp_buffer;
 } error_mgr_t;
+#pragma GCC diagnostic pop
 
 static void jpeg_load_error(const char* name, const char* error_message)
 {
