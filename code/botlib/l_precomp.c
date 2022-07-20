@@ -1564,8 +1564,7 @@ static int PC_Evaluate(source_t* source, signed long int* intvalue, double* floa
 #endif // DEBUG_EVAL
     return true;
 }
-static int PC_DollarEvaluate(source_t* source, signed long int* intvalue,
-                             double* floatvalue, int integer)
+static int PC_DollarEvaluate(source_t* source, signed long int* intvalue, double* floatvalue, int integer)
 {
     int indent, defined = false;
     token_t token, *firsttoken, *lasttoken;
