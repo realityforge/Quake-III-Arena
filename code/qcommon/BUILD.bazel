@@ -277,11 +277,11 @@ cc_library(
     ],
 )
 
-_CMD_SRC = ["cmd.c"]
+CMD_SRC = ["cmd.c"]
 
 cc_library(
     name = "cmd",
-    srcs = _CMD_SRC,
+    srcs = CMD_SRC,
     defines = ENGINE_DEFINES,
     visibility = ["//code/client:__pkg__"],
     deps = [
@@ -292,7 +292,7 @@ cc_library(
 
 cc_library(
     name = "cmd-dedicated",
-    srcs = _CMD_SRC,
+    srcs = CMD_SRC,
     defines = SERVER_ONLY_ENGINE_DEFINES,
     visibility = ["//code/server:__pkg__"],
     deps = [

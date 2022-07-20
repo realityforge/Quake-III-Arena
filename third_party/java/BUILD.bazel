@@ -10,10 +10,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load(":dependencies.bzl", _generate_targets = "generate_targets")
+load(":dependencies.bzl", "generate_targets")
 
 package(default_visibility = ["//visibility:public"])
 
 exports_files(["dependencies.yaml"])
 
-_generate_targets()
+generate_targets()
