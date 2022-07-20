@@ -1607,9 +1607,6 @@ void R_RenderPshadowMaps(const refdef_t* fd)
         if ((ent->e.renderfx & (RF_FIRST_PERSON | RF_NOSHADOW)))
             continue;
 
-        // if((ent->e.renderfx & RF_THIRD_PERSON))
-        // continue;
-
         if (ent->e.reType == RT_MODEL) {
             model_t* model = R_GetModelByHandle(ent->e.hModel);
             pshadow_t shadow;

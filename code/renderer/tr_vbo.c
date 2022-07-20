@@ -146,7 +146,6 @@ vao_t* R_CreateVao(const char* name, uint8_t* vertexes, int vertexesSize, uint8_
 void R_BindVao(vao_t* vao)
 {
     if (!vao) {
-        // R_BindNullVao();
         ri.Error(ERR_DROP, "R_BindVao: NULL vao");
     }
 
