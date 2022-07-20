@@ -41,7 +41,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "inv.h" //indexes into the inventory
 #include "syn.h" //synonyms
 #include "match.h" //string matching types and vars
-
 #include "voicechat.h"
 
 // goal flag, see ../botlib/be_ai_goal.h for the other GFL_*
