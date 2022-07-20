@@ -948,7 +948,6 @@ void RB_SurfaceEntity(UNUSED surfaceType_t* surfType)
         RB_SurfaceAxis();
         break;
     }
-    return;
 }
 
 void RB_SurfaceBad(UNUSED surfaceType_t* surfType)
