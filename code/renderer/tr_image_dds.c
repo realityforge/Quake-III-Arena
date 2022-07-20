@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "tr_image.h"
 
 #pragma clang diagnostic ignored "-Wunused-macros"
+#pragma GCC diagnostic ignored "-Wreserved-id-macro"
 
 typedef unsigned int ui32_t;
 
