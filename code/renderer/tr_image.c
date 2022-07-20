@@ -1282,7 +1282,8 @@ static void R_MipMapsRGB(uint8_t* in, int inWidth, int inHeight)
             }
 
             *out++ = (*(in) + *(in + 4) + *(in2) + *(in2 + 4)) >> 2;
-            in += 5, in2 += 5;
+            in += 5;
+            in2 += 5;
         }
     }
 }
