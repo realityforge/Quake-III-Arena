@@ -24,6 +24,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "tr_common.h"
 #include "tr_image.h"
 
+#pragma clang diagnostic ignored "-Wunused-macros"
+
 typedef unsigned int ui32_t;
 
 typedef struct ddsHeader_s {
@@ -85,6 +87,7 @@ typedef struct ddsHeaderDxt10_s {
 #pragma clang diagnostic push
 // Disable warning about "DXGI_FORMAT_FORCE_UINT" (ISO C restricts enumerator values to range of 'int' (4294967295 is too large))
 #pragma clang diagnostic ignored "-Wpedantic"
+#pragma clang diagnostic ignored "-Wunused-macros"
 // dxgiFormat
 // from http://msdn.microsoft.com/en-us/library/windows/desktop/bb173059%28v=vs.85%29.aspx
 typedef enum DXGI_FORMAT {
