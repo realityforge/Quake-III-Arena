@@ -1715,7 +1715,6 @@ extern cvar_t* r_mapOverBrightBits;
 extern cvar_t* r_ambientScale;
 extern cvar_t* r_directedScale;
 extern cvar_t* r_debugLight;
-extern cvar_t* r_debugSurface;
 
 extern cvar_t* r_showImages;
 extern cvar_t* r_debugSort;

@@ -193,8 +193,6 @@ cvar_t* r_customPixelAspect;
 cvar_t* r_overBrightBits;
 cvar_t* r_mapOverBrightBits;
 
-cvar_t* r_debugSurface;
-
 cvar_t* r_showImages;
 
 cvar_t* r_ambientScale;
@@ -961,7 +959,6 @@ static void R_Register()
     r_nocull = ri.Cvar_Get("r_nocull", "0", CVAR_CHEAT);
     r_showcluster = ri.Cvar_Get("r_showcluster", "0", CVAR_CHEAT);
     r_speeds = ri.Cvar_Get("r_speeds", "0", CVAR_CHEAT);
-    r_debugSurface = ri.Cvar_Get("r_debugSurface", "0", CVAR_CHEAT);
     r_showtris = ri.Cvar_Get("r_showtris", "0", CVAR_CHEAT);
     r_showsky = ri.Cvar_Get("r_showsky", "0", CVAR_CHEAT);
     r_clear = ri.Cvar_Get("r_clear", "0", CVAR_CHEAT);
