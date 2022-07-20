@@ -155,7 +155,7 @@ static void RB_SurfaceSprite(void)
     RB_AddQuadStamp(backEnd.currentEntity->e.origin, left, up, backEnd.currentEntity->e.shaderRGBA);
 }
 
-void RB_SurfacePolychain(srfPoly_t* p)
+static void RB_SurfacePolychain(srfPoly_t* p)
 {
     int i;
     int numv;
@@ -184,7 +184,7 @@ void RB_SurfacePolychain(srfPoly_t* p)
     tess.numVertexes = numv;
 }
 
-void RB_SurfaceTriangles(srfTriangles_t* srf)
+static void RB_SurfaceTriangles(srfTriangles_t* srf)
 {
     int i;
     drawVert_t* dv;
@@ -239,7 +239,7 @@ void RB_SurfaceTriangles(srfTriangles_t* srf)
     tess.numVertexes += srf->numVerts;
 }
 
-void RB_SurfaceBeam(void)
+static void RB_SurfaceBeam()
 {
 #define NUM_BEAM_SEGS 6
     refEntity_t* e;
@@ -404,7 +404,7 @@ static void DoRailDiscs(int numSegs, const vec3_t start, const vec3_t dir, const
 /*
 ** RB_SurfaceRailRinges
 */
-void RB_SurfaceRailRings(void)
+static void RB_SurfaceRailRings()
 {
     refEntity_t* e;
     int numSegs;
@@ -435,7 +435,7 @@ void RB_SurfaceRailRings(void)
 /*
 ** RB_SurfaceRailCore
 */
-void RB_SurfaceRailCore(void)
+static void RB_SurfaceRailCore()
 {
     refEntity_t* e;
     int len;
@@ -466,7 +466,7 @@ void RB_SurfaceRailCore(void)
 /*
 ** RB_SurfaceLightningBolt
 */
-void RB_SurfaceLightningBolt(void)
+static void RB_SurfaceLightningBolt()
 {
     refEntity_t* e;
     int len;
@@ -614,7 +614,7 @@ static void LerpMeshVertexes(md3Surface_t* surf, float backlerp)
     }
 }
 
-void RB_SurfaceMesh(md3Surface_t* surface)
+static void RB_SurfaceMesh(md3Surface_t* surface)
 {
     int j;
     float backlerp;
@@ -655,7 +655,7 @@ void RB_SurfaceMesh(md3Surface_t* surface)
     tess.numVertexes += surface->numVerts;
 }
 
-void RB_SurfaceFace(srfSurfaceFace_t* surf)
+static void RB_SurfaceFace(srfSurfaceFace_t* surf)
 {
     int i;
     unsigned *indices, *tessIndexes;
@@ -742,7 +742,7 @@ RB_SurfaceGrid
 Just copy the grid of points and triangulate
 =============
 */
-void RB_SurfaceGrid(srfGridMesh_t* cv)
+static void RB_SurfaceGrid(srfGridMesh_t* cv)
 {
     int i, j;
     float* xyz;
@@ -899,7 +899,7 @@ RB_SurfaceAxis
 Draws x/y/z lines from the origin for orientation debugging
 ===================
 */
-void RB_SurfaceAxis(void)
+static void RB_SurfaceAxis()
 {
     GL_Bind(tr.whiteImage);
     qglLineWidth(3);
@@ -926,7 +926,7 @@ RB_SurfaceEntity
 Entities that have a single procedurally generated surface
 ====================
 */
-void RB_SurfaceEntity(UNUSED surfaceType_t* surfType)
+static void RB_SurfaceEntity(UNUSED surfaceType_t* surfType)
 {
     switch (backEnd.currentEntity->e.reType) {
     case RT_SPRITE:
@@ -950,23 +950,23 @@ void RB_SurfaceEntity(UNUSED surfaceType_t* surfType)
     }
 }
 
-void RB_SurfaceBad(UNUSED surfaceType_t* surfType)
+static void RB_SurfaceBad(UNUSED surfaceType_t* surfType)
 {
     ri.Printf(PRINT_ALL, "Bad surface tesselated.\n");
 }
 
-void RB_SurfaceFlare(UNUSED srfFlare_t* surf)
+static void RB_SurfaceFlare(UNUSED srfFlare_t* surf)
 {
 }
 
-void RB_SurfaceDisplayList(srfDisplayList_t* surf)
+static void RB_SurfaceDisplayList(srfDisplayList_t* surf)
 {
     // all appropriate state must be set in RB_BeginSurface
     // this isn't implemented yet...
     qglCallList(surf->listNum);
 }
 
-void RB_SurfaceSkip(UNUSED void* surf)
+static void RB_SurfaceSkip(UNUSED void* surf)
 {
 }
 
