@@ -185,9 +185,9 @@ cvar_t* r_lodCurveError;
 cvar_t* r_fullscreen;
 cvar_t* r_noborder;
 
-cvar_t* r_customwidth;
-cvar_t* r_customheight;
-cvar_t* r_customPixelAspect;
+static cvar_t* r_customwidth;
+static cvar_t* r_customheight;
+static cvar_t* r_customPixelAspect;
 
 cvar_t* r_overBrightBits;
 cvar_t* r_mapOverBrightBits;
@@ -203,12 +203,11 @@ cvar_t* r_saveFontData;
 
 cvar_t* r_marksOnTriangleMeshes;
 
-cvar_t* r_aviMotionJpegQuality;
-cvar_t* r_screenshotJpegQuality;
-
-cvar_t* r_maxpolys;
+static cvar_t* r_aviMotionJpegQuality;
+static cvar_t* r_screenshotJpegQuality;
+static cvar_t* r_maxpolys;
 int max_polys;
-cvar_t* r_maxpolyverts;
+static cvar_t* r_maxpolyverts;
 int max_polyverts;
 
 #ifdef DEBUG
