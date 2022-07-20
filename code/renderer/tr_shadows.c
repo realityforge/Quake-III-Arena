@@ -107,7 +107,6 @@ static void R_RenderShadowEdges()
             }
         }
     }
-#endif
 }
 
 /*
