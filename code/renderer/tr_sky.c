@@ -436,7 +436,7 @@ static void FillCloudySkySide(const int mins[2], const int maxs[2], bool addInde
     }
 }
 
-static void FillCloudBox(const shader_t* shader, int stage)
+static void FillCloudBox(int stage)
 {
     for (int i = 0; i < 6; i++) {
         int sky_mins_subd[2], sky_maxs_subd[2];
@@ -517,7 +517,7 @@ void R_BuildCloudData(shaderCommands_t* input)
             if (!tess.xstages[i]) {
                 break;
             }
-            FillCloudBox(input->shader, i);
+            FillCloudBox(i);
         }
     }
 }
