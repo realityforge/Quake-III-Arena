@@ -189,28 +189,23 @@ static void ComputeTexMods(shaderStage_t* pStage, int bundleNum, float* outMatri
             break;
 
         case TMOD_SCROLL:
-            RB_CalcScrollTexMatrix(bundle->texMods[tm].scroll,
-                                   matrix);
+            RB_CalcScrollTexMatrix(bundle->texMods[tm].scroll, matrix);
             break;
 
         case TMOD_SCALE:
-            RB_CalcScaleTexMatrix(bundle->texMods[tm].scale,
-                                  matrix);
+            RB_CalcScaleTexMatrix(bundle->texMods[tm].scale, matrix);
             break;
 
         case TMOD_STRETCH:
-            RB_CalcStretchTexMatrix(&bundle->texMods[tm].wave,
-                                    matrix);
+            RB_CalcStretchTexMatrix(&bundle->texMods[tm].wave, matrix);
             break;
 
         case TMOD_TRANSFORM:
-            RB_CalcTransformTexMatrix(&bundle->texMods[tm],
-                                      matrix);
+            RB_CalcTransformTexMatrix(&bundle->texMods[tm], matrix);
             break;
 
         case TMOD_ROTATE:
-            RB_CalcRotateTexMatrix(bundle->texMods[tm].rotateSpeed,
-                                   matrix);
+            RB_CalcRotateTexMatrix(bundle->texMods[tm].rotateSpeed, matrix);
             break;
 
         default:
