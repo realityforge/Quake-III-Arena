@@ -360,7 +360,6 @@ static int GLSL_CompileGPUShader(GLuint program, GLuint* prevShader, const GLcha
         GLSL_PrintLog(shader, GLSL_PRINTLOG_SHADER_SOURCE, false);
         GLSL_PrintLog(shader, GLSL_PRINTLOG_SHADER_INFO, false);
         ri.Error(ERR_DROP, "Couldn't compile shader");
-        return 0;
     }
 
     if (*prevShader) {

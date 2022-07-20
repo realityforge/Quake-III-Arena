@@ -1401,7 +1401,6 @@ static void R_AddEntitySurface(int entityNum)
                 break;
             default:
                 ri.Error(ERR_DROP, "R_AddEntitySurfaces: Bad modeltype");
-                break;
             }
         }
         break;

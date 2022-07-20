@@ -148,7 +148,6 @@ void R_BindVao(vao_t* vao)
     if (!vao) {
         // R_BindNullVao();
         ri.Error(ERR_DROP, "R_BindVao: NULL vao");
-        return;
     }
 
     if (glState.currentVao != vao) {

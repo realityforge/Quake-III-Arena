@@ -1053,7 +1053,7 @@ RB_SurfaceEntity
 Entities that have a single procedurally generated surface
 ====================
 */
-static void RB_SurfaceEntity(surfaceType_t* surfType)
+static void RB_SurfaceEntity(UNUSED surfaceType_t* surfType)
 {
     switch (backEnd.currentEntity->e.reType) {
     case RT_SPRITE:
@@ -1077,7 +1077,7 @@ static void RB_SurfaceEntity(surfaceType_t* surfType)
     }
 }
 
-static void RB_SurfaceBad(surfaceType_t* surfType)
+static void RB_SurfaceBad(UNUSED surfaceType_t* surfType)
 {
     ri.Printf(PRINT_ALL, "Bad surface tesselated.\n");
 }
@@ -1169,7 +1169,7 @@ static void RB_SurfaceVaoMdvMesh(srfVaoMdvMesh_t* surface)
     glState.vertexAnimation = false;
 }
 
-static void RB_SurfaceSkip(void* surf)
+static void RB_SurfaceSkip(UNUSED void* surf)
 {
 }
 

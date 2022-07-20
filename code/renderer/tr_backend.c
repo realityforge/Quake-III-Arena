@@ -155,7 +155,6 @@ void GL_State(unsigned long stateBits)
                 break;
             default:
                 ri.Error(ERR_DROP, "GL_State: invalid src blend state bits");
-                break;
             }
 
             switch (stateBits & GLS_DSTBLEND_BITS) {
@@ -185,7 +184,6 @@ void GL_State(unsigned long stateBits)
                 break;
             default:
                 ri.Error(ERR_DROP, "GL_State: invalid dst blend state bits");
-                break;
             }
 
             glBlendFunc(srcFactor, dstFactor);
