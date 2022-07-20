@@ -216,14 +216,6 @@ static bool EntityIsChatting(aas_entityinfo_t* entinfo)
 }
 
 #ifdef MISSIONPACK
-bool EntityHasKamikaze(aas_entityinfo_t* entinfo)
-{
-    if (entinfo->flags & EF_KAMIKAZE) {
-        return true;
-    }
-    return false;
-}
-
 static bool EntityCarriesCubes(aas_entityinfo_t* entinfo)
 {
     entityState_t state;
