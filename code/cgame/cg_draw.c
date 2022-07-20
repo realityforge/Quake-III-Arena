@@ -141,8 +141,6 @@ void CG_Text_Paint(float x, float y, float scale, vec4_t color, const char* text
     }
     useScale = scale * font->glyphScale;
     if (text) {
-        // TTimo: FIXME
-        //		const unsigned char *s = text;
         const char* s = text;
         trap_R_SetColor(color);
         memcpy(&newColor[0], &color[0], sizeof(vec4_t));
@@ -153,8 +151,6 @@ void CG_Text_Paint(float x, float y, float scale, vec4_t color, const char* text
         count = 0;
         while (s && *s && count < len) {
             glyph = &font->glyphs[(int)*s]; // TTimo: FIXME: getting nasty warnings without the cast, hopefully this doesn't break the VM build
-            // int yadj = Assets.textFont.glyphs[text[i]].bottom + Assets.textFont.glyphs[text[i]].top;
-            // float yadj = scale * (Assets.textFont.glyphs[text[i]].imageHeight - Assets.textFont.glyphs[text[i]].height);
             if (Q_IsColorString(s)) {
                 memcpy(newColor, g_color_table[ColorIndex(*(s + 1))], sizeof(newColor));
                 newColor[3] = color[3];
@@ -188,7 +184,6 @@ void CG_Text_Paint(float x, float y, float scale, vec4_t color, const char* text
                                   glyph->s2,
                                   glyph->t2,
                                   glyph->glyph);
-                // CG_DrawPic(x, y - yadj, scale * cgDC.Assets.textFont.glyphs[text[i]].imageWidth, scale * cgDC.Assets.textFont.glyphs[text[i]].imageHeight, cgDC.Assets.textFont.glyphs[text[i]].glyph);
                 x += (glyph->xSkip * useScale) + adjust;
                 s++;
                 count++;
