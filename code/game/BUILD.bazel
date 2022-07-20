@@ -114,7 +114,7 @@ cc_library(
     ],
 )
 
-_COMMON_SRC = [
+COMMON_SRC = [
     "ai_chat.c",
     "ai_cmd.c",
     "ai_dmnet.c",
@@ -146,7 +146,7 @@ _COMMON_SRC = [
     "g_weapon.c",
 ]
 
-_COMMON_HDRS = [
+COMMON_HDRS = [
     "ai_chat.h",
     "ai_cmd.h",
     "ai_dmnet.h",
@@ -174,8 +174,8 @@ SUPPRESS_WARNINGS_COPTS = [
 
 cc_library(
     name = "baseq3",
-    srcs = _COMMON_SRC,
-    hdrs = _COMMON_HDRS,
+    srcs = COMMON_SRC,
+    hdrs = COMMON_HDRS,
     copts = SERVER_GAME_COPTS + SUPPRESS_WARNINGS_COPTS,
     defines = SERVER_GAME_DEFINES,
     visibility = ["//game/baseq3:__pkg__"],
@@ -193,8 +193,8 @@ cc_library(
 
 cc_library(
     name = "teamarena",
-    srcs = _COMMON_SRC,
-    hdrs = _COMMON_HDRS,
+    srcs = COMMON_SRC,
+    hdrs = COMMON_HDRS,
     copts = SERVER_GAME_COPTS + SUPPRESS_WARNINGS_COPTS,
     defines = TEAM_ARENA_DEFINES + SERVER_GAME_DEFINES,
     visibility = ["//game/teamarena:__pkg__"],

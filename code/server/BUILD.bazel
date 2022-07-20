@@ -13,7 +13,7 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 load("//build_defs:rules.bzl", "DIST_VISIBILITY", "ENGINE_DEFINES", "EXTRA_WARNINGS", "SERVER_ONLY_ENGINE_DEFINES")
 
-_SERVER_SRC = [
+SERVER_SRC = [
     "sv_bot.c",
     "sv_ccmds.c",
     "sv_client.c",
@@ -33,7 +33,7 @@ SERVER_COPTS = EXTRA_WARNINGS + [
 
 cc_library(
     name = "server",
-    srcs = _SERVER_SRC,
+    srcs = SERVER_SRC,
     hdrs = ["server_local.h"],
     copts = SERVER_COPTS,
     defines = ENGINE_DEFINES,
@@ -50,7 +50,7 @@ cc_library(
 
 cc_library(
     name = "server-dedicated",
-    srcs = _SERVER_SRC,
+    srcs = SERVER_SRC,
     hdrs = ["server_local.h"],
     copts = SERVER_COPTS,
     defines = SERVER_ONLY_ENGINE_DEFINES,

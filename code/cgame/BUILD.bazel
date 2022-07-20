@@ -20,7 +20,7 @@ cc_library(
     deps = ["//code/qcommon:shared_api"],
 )
 
-_COMMON_SRC = [
+COMMON_SRC = [
     "cg_consolecmds.c",
     "cg_draw.c",
     "cg_drawtools.c",
@@ -43,13 +43,13 @@ _COMMON_SRC = [
     "cg_weapons.c",
 ]
 
-_BASEQ3_SRC = _COMMON_SRC
+BASEQ3_SRC = COMMON_SRC
 
-_TEAM_ARENA_SRC = _COMMON_SRC + ["cg_newdraw.c"]
+TEAM_ARENA_SRC = COMMON_SRC + ["cg_newdraw.c"]
 
 cc_library(
     name = "baseq3",
-    srcs = _BASEQ3_SRC,
+    srcs = BASEQ3_SRC,
     hdrs = ["cg_local.h"],
     copts = CLIENT_GAME_COPTS,
     defines = CLIENT_GAME_DEFINES,
@@ -70,7 +70,7 @@ cc_library(
 
 cc_library(
     name = "teamarena",
-    srcs = _TEAM_ARENA_SRC,
+    srcs = TEAM_ARENA_SRC,
     hdrs = ["cg_local.h"],
     copts = CLIENT_GAME_COPTS,
     defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
