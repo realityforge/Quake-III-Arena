@@ -23,12 +23,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "ui_local.h"
 #include "plugin.h"
 
-// this file is only included when building a dll
-// syscalls.asm is included instead when building a qvm
-#ifdef Q3_VM
-#error "Do not use in VM build"
-#endif
-
 static vmDllSystemCall syscall = (vmDllSystemCall)-1;
 
 EXPORT void dllEntry(vmDllSystemCall syscallptr)
