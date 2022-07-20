@@ -844,7 +844,7 @@ typedef struct
     uint16_t color[4];
 } srfVert_t;
 
-#define srfVert_t_cleared(x) srfVert_t(x) = { { 0, 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }
+#define srfVert_t_cleared(x) srfVert_t x = { { 0, 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }
 
 // srfBspSurface_t covers SF_GRID, SF_TRIANGLES, and SF_POLY
 typedef struct srfBspSurface_s {
