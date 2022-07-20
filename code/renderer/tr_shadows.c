@@ -69,8 +69,8 @@ void R_RenderShadowEdges(void)
 
     // an edge is NOT a silhouette edge if its face doesn't face the light,
     // or if it has a reverse paired edge that also faces the light.
-    // A well behaved polyhedron would have exactly two faces for each edge,
-    // but lots of models have dangling edges or overfanned edges
+    // A well-behaved polyhedron would have exactly two faces for each edge,
+    // but lots of models have dangling edges or over-fanned edges
     c_edges = 0;
     c_rejected = 0;
 
