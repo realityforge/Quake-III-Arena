@@ -1090,8 +1090,6 @@ static void RB_SurfaceFlare(srfFlare_t* surf)
 
 static void RB_SurfaceVaoMdvMesh(srfVaoMdvMesh_t* surface)
 {
-    // mdvModel_t     *mdvModel;
-    // mdvSurface_t   *mdvSurface;
     refEntity_t* refEnt;
 
     if (ShaderRequiresCPUDeforms(tess.shader)) {
