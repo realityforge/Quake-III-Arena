@@ -1695,10 +1695,6 @@ static void ComputeVertexAttribs()
                 break;
 
             default:
-            case DEFORM_NONE:
-            case DEFORM_MOVE:
-            case DEFORM_PROJECTION_SHADOW:
-            case DEFORM_AUTOSPRITE2:
                 break;
             }
         }
