@@ -347,7 +347,6 @@ static int PC_ExpandBuiltinDefine(source_t* source, token_t* deftoken, define_t*
 {
     token_t* token;
     time_t t;
-
     char* curtime;
 
     token = PC_CopyToken(deftoken);
