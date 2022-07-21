@@ -53,15 +53,21 @@ jobs:
       - name: Configure Bazel Cache
         run: echo "startup --output_base=$HOME/.cache/bazel" >> user.bazelrc
 
+      - name: Configure BuildBuddy Secrets
+        run: |
+          echo "run --remote_header=x-buildbuddy-api-key=${{ secrets.BUILDBUDDY_ORG_API_KEY }}" >> user.bazelrc
+          echo "build --remote_header=x-buildbuddy-api-key=${{ secrets.BUILDBUDDY_ORG_API_KEY }}" >> user.bazelrc
+          echo "test --remote_header=x-buildbuddy-api-key=${{ secrets.BUILDBUDDY_ORG_API_KEY }}" >> user.bazelrc
+
       - name: Verify Build file format
         # Verify that the build files are correctly formatted
-        run: ./bazelw run //:buildifier_check
+        run: ./bazelw run --config ci //:buildifier_check
 
       - name: Build Code
         # In the future we should also run "bazel build //game/mac:Quake3Arena.zip" but this requires that either
         # the id assets become optional or we find a way to securely store the assets so as not to violate licenses
-        run: ./bazelw build //code/...
+        run: ./bazelw build --config ci //code/...
 
       - name: Test Code
         # Run the relevant tests
-        run: ./bazelw test //... @braincheck//...
+        run: ./bazelw test --config ci //... @braincheck//...
