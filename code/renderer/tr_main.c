@@ -709,7 +709,7 @@ static bool IsMirror(const drawSurf_t* drawSurf, int entityNum)
 **
 ** Determines if a surface is completely offscreen.
 */
-static bool SurfIsOffscreen(const drawSurf_t* drawSurf, vec4_t clipDest[128])
+static bool SurfIsOffscreen(const drawSurf_t* drawSurf)
 {
     float shortest = 100000000;
     int entityNum;
@@ -799,7 +799,6 @@ Returns true if another view has been rendered
 */
 static bool R_MirrorViewBySurface(drawSurf_t* drawSurf, int entityNum)
 {
-    vec4_t clipDest[128];
     viewParms_t newParms;
     viewParms_t oldParms;
     orientation_t surface, camera;
@@ -815,7 +814,7 @@ static bool R_MirrorViewBySurface(drawSurf_t* drawSurf, int entityNum)
     }
 
     // trivially reject portal/mirror
-    if (SurfIsOffscreen(drawSurf, clipDest)) {
+    if (SurfIsOffscreen(drawSurf)) {
         return false;
     }
 
