@@ -127,7 +127,7 @@ static int R_CullModel(md3Header_t* header, trRefEntity_t* ent)
     }
 }
 
-int R_ComputeLOD(trRefEntity_t* ent)
+static int R_ComputeLOD(trRefEntity_t* ent)
 {
     float radius;
     float flod, lodscale;
@@ -178,7 +178,7 @@ int R_ComputeLOD(trRefEntity_t* ent)
     return lod;
 }
 
-int R_ComputeFogNum(md3Header_t* header, trRefEntity_t* ent)
+static int R_ComputeFogNum(md3Header_t* header, trRefEntity_t* ent)
 {
     int i, j;
     fog_t* fog;
