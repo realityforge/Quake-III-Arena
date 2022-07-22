@@ -52,13 +52,13 @@ void R_NoiseInit()
 
 float R_NoiseGet4f(const float x, const float y, const float z, const float t)
 {
-    const int ix = (int)floor(x);
+    const int ix = (int)floorf(x);
     const float fx = x - ix;
-    const int iy = (int)floor(y);
+    const int iy = (int)floorf(y);
     const float fy = y - iy;
-    const int iz = (int)floor(z);
+    const int iz = (int)floorf(z);
     const float fz = z - iz;
-    const int it = (int)floor(t);
+    const int it = (int)floorf(t);
     const float ft = t - it;
 
     float value[2];
