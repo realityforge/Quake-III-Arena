@@ -146,7 +146,7 @@ void(APIENTRY* qglActiveTextureARB)(GLenum texture);
 void(APIENTRY* qglClientActiveTextureARB)(GLenum texture);
 
 void(APIENTRY* qglLockArraysEXT)(GLint, GLint);
-void(APIENTRY* qglUnlockArraysEXT)();
+void(APIENTRY* qglUnlockArraysEXT)(void);
 
 static void AssertCvarRange(cvar_t* cv, float minVal, float maxVal, bool shouldBeIntegral)
 {
