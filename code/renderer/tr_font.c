@@ -333,14 +333,18 @@ void RE_RegisterFont(const char* fontName, int pointSize, fontInfo_t* font)
     void* faceData;
     int i, len;
     char name[1024];
+#ifdef BUILD_FREETYPE
     float dpi = 72; //
     float glyphScale = 72.0f / dpi; // change the scale to be relative to 1 based on 72 dpi ( so dpi of 144 means a scale of .5 )
+#endif
 
     if (pointSize <= 0) {
         pointSize = 12;
     }
+#ifdef BUILD_FREETYPE
     // we also need to adjust the scale based on point size relative to 48 points as the ui scaling is based on a 48 point font
     glyphScale *= 48.0f / pointSize;
+#endif
 
     R_IssuePendingRenderCommands();
 
