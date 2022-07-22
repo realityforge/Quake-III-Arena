@@ -930,10 +930,7 @@ static void shortsort(drawSurf_t* lo, drawSurf_t* hi)
 FIXME: this was lifted and modified from the microsoft lib source...
  */
 
-static void qsortFast(
-    void* base,
-    unsigned num,
-    unsigned width)
+static void qsortFast(void* base, unsigned num, unsigned width)
 {
     char *lo, *hi; /* ends of sub-array currently sorting */
     char* mid; /* points to middle of subarray */
