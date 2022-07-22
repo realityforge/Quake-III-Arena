@@ -33,6 +33,9 @@ cc_library(
     srcs = [
         "tr_bsp.c",
         "tr_cmds.c",
+        "tr_marks.c",
+        "tr_mesh.c",
+        "tr_model.c",
         "tr_noise.c",
         "tr_shadows.c",
         "tr_sky.c",
