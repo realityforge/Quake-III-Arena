@@ -79,8 +79,9 @@ typedef struct flare_s {
 
 #define MAX_FLARES 128
 
-flare_t r_flareStructs[MAX_FLARES];
-flare_t *r_activeFlares, *r_inactiveFlares;
+static flare_t r_flareStructs[MAX_FLARES];
+static flare_t* r_activeFlares;
+static flare_t* r_inactiveFlares;
 
 void R_ClearFlares(void)
 {
@@ -104,7 +105,7 @@ FLARE BACK END
 ===============================================================================
 */
 
-void RB_TestFlare(flare_t* f)
+static void RB_TestFlare(flare_t* f)
 {
     float depth;
     bool visible;
@@ -148,7 +149,7 @@ void RB_TestFlare(flare_t* f)
     f->drawIntensity = fade;
 }
 
-void RB_RenderFlare(flare_t* f)
+static void RB_RenderFlare(flare_t* f)
 {
     float size;
     vec3_t color;
