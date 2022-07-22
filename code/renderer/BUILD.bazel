@@ -33,6 +33,8 @@ cc_library(
     srcs = [
         "tr_bsp.c",
         "tr_cmds.c",
+        "tr_init.c",
+        "tr_light.c",
         "tr_main.c",
         "tr_marks.c",
         "tr_mesh.c",
