@@ -255,8 +255,7 @@ static void PutPointsOnCurve(drawVert_t ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE],
     }
 }
 
-srfGridMesh_t* R_CreateSurfaceGridMesh(int width, int height,
-                                       drawVert_t ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE], float errorTable[2][MAX_GRID_SIZE])
+static srfGridMesh_t* R_CreateSurfaceGridMesh(int width, int height, drawVert_t ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE], float errorTable[2][MAX_GRID_SIZE])
 {
     int i, j, size;
     drawVert_t* vert;
@@ -316,38 +315,36 @@ void R_FreeSurfaceGridMesh(srfGridMesh_t* grid)
     ri.Free(grid);
 }
 
-srfGridMesh_t* R_SubdividePatchToGrid(int width, int height,
-                                      drawVert_t points[MAX_PATCH_SIZE * MAX_PATCH_SIZE])
+srfGridMesh_t* R_SubdividePatchToGrid(int width, int height, drawVert_t points[MAX_PATCH_SIZE * MAX_PATCH_SIZE])
 {
-    int i, j, k, l;
+    int l;
     drawVert_t prev, next, mid;
     float len, maxLen;
-    int dir;
     int t;
     drawVert_t ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE];
     float errorTable[2][MAX_GRID_SIZE];
 
-    for (i = 0; i < width; i++) {
-        for (j = 0; j < height; j++) {
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
             ctrl[j][i] = points[j * width + i];
         }
     }
 
-    for (dir = 0; dir < 2; dir++) {
+    for (int k = 0; k < 2; k++) {
 
-        for (j = 0; j < MAX_GRID_SIZE; j++) {
-            errorTable[dir][j] = 0;
+        for (int j = 0; j < MAX_GRID_SIZE; j++) {
+            errorTable[k][j] = 0;
         }
 
         // horizontal subdivisions
-        for (j = 0; j + 2 < width; j += 2) {
+        for (int j = 0; j + 2 < width; j += 2) {
             // check subdivided midpoints against control points
 
             // FIXME: also check midpoints of adjacent patches against the control points
             // this would basically stitch all patches in the same LOD group together.
 
             maxLen = 0;
-            for (i = 0; i < height; i++) {
+            for (int i = 0; i < height; i++) {
                 vec3_t midxyz;
                 vec3_t midxyz2;
                 vec3_t dir;
@@ -382,26 +379,26 @@ srfGridMesh_t* R_SubdividePatchToGrid(int width, int height,
 
             // if all the points are on the lines, remove the entire columns
             if (maxLen < 0.1f) {
-                errorTable[dir][j + 1] = 999;
+                errorTable[k][j + 1] = 999;
                 continue;
             }
 
             // see if we want to insert subdivided columns
             if (width + 2 > MAX_GRID_SIZE) {
-                errorTable[dir][j + 1] = 1.0f / maxLen;
+                errorTable[k][j + 1] = 1.0f / maxLen;
                 continue; // can't subdivide any more
             }
 
             if (maxLen <= r_subdivisions->value) {
-                errorTable[dir][j + 1] = 1.0f / maxLen;
+                errorTable[k][j + 1] = 1.0f / maxLen;
                 continue; // didn't need subdivision
             }
 
-            errorTable[dir][j + 2] = 1.0f / maxLen;
+            errorTable[k][j + 2] = 1.0f / maxLen;
 
             // insert two columns and replace the peak
             width += 2;
-            for (i = 0; i < height; i++) {
+            for (int i = 0; i < height; i++) {
                 LerpDrawVert(&ctrl[i][j], &ctrl[i][j + 1], &prev);
                 LerpDrawVert(&ctrl[i][j + 1], &ctrl[i][j + 2], &next);
                 LerpDrawVert(&prev, &next, &mid);
@@ -428,12 +425,12 @@ srfGridMesh_t* R_SubdividePatchToGrid(int width, int height,
     PutPointsOnCurve(ctrl, width, height);
 
     // cull out any rows or columns that are colinear
-    for (i = 1; i < width - 1; i++) {
+    for (int i = 1; i < width - 1; i++) {
         if (errorTable[0][i] != 999) {
             continue;
         }
-        for (j = i + 1; j < width; j++) {
-            for (k = 0; k < height; k++) {
+        for (int j = i + 1; j < width; j++) {
+            for (int k = 0; k < height; k++) {
                 ctrl[k][j - 1] = ctrl[k][j];
             }
             errorTable[0][j - 1] = errorTable[0][j];
@@ -441,12 +438,12 @@ srfGridMesh_t* R_SubdividePatchToGrid(int width, int height,
         width--;
     }
 
-    for (i = 1; i < height - 1; i++) {
+    for (int i = 1; i < height - 1; i++) {
         if (errorTable[1][i] != 999) {
             continue;
         }
-        for (j = i + 1; j < height; j++) {
-            for (k = 0; k < width; k++) {
+        for (int j = i + 1; j < height; j++) {
+            for (int k = 0; k < width; k++) {
                 ctrl[j - 1][k] = ctrl[j][k];
             }
             errorTable[1][j - 1] = errorTable[1][j];
