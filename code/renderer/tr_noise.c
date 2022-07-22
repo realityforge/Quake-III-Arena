@@ -33,7 +33,7 @@ static int s_noise_perm[NOISE_SIZE];
 
 #define LERP(a, b, w) ((a) * (1.0f - (w)) + (b) * (w))
 
-static float GetNoiseValue(const int x, const int y, const int z, const int t)
+static inline float GetNoiseValue(const int x, const int y, const int z, const int t)
 {
     return s_noise_table[INDEX(x, y, z, t)];
 }
