@@ -318,7 +318,7 @@ float readFloat()
     return me.ffred;
 }
 
-void RE_RegisterFont(const char* fontName, int pointSize, fontInfo_t* font)
+void RE_RegisterFont(UNUSED const char* fontName, int pointSize, fontInfo_t* font)
 {
 #ifdef BUILD_FREETYPE
     FT_Face face;
