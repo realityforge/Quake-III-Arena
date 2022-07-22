@@ -230,7 +230,6 @@ int R_MarkFragments(int numPoints, const vec3_t* points, const vec3_t projection
     vec3_t normals[MAX_VERTS_ON_POLY + 2];
     float dists[MAX_VERTS_ON_POLY + 2];
     vec3_t clipPoints[2][MAX_VERTS_ON_POLY];
-    int numClipPoints;
     float* v;
     srfSurfaceFace_t* surf;
     srfGridMesh_t* cv;
@@ -311,8 +310,6 @@ int R_MarkFragments(int numPoints, const vec3_t* points, const vec3_t projection
                     // The offset is added in the vertex normal vector direction
                     // so all triangles will still fit together.
                     // The 2 unit offset should avoid pretty much all LOD problems.
-
-                    numClipPoints = 3;
 
                     dv = cv->verts + m * cv->width + n;
 
