@@ -917,6 +917,10 @@ extern glstate_t glState; // outside of TR since it shouldn't be cleared during 
 extern cvar_t* r_flareSize;
 extern cvar_t* r_flareFade;
 
+extern cvar_t* r_ambientScale;
+extern cvar_t* r_directedScale;
+extern cvar_t* r_debugLight;
+
 extern cvar_t* r_railWidth;
 extern cvar_t* r_railCoreWidth;
 extern cvar_t* r_railSegmentLength;

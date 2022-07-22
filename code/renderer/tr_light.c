@@ -105,10 +105,6 @@ void R_DlightBmodel(bmodel_t* bmodel)
     }
 }
 
-extern cvar_t* r_ambientScale;
-extern cvar_t* r_directedScale;
-extern cvar_t* r_debugLight;
-
 static void R_SetupEntityLightingGrid(trRefEntity_t* ent)
 {
     vec3_t lightOrigin;
