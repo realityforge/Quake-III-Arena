@@ -960,7 +960,7 @@ static void qsortFast(
 
     /* this entry point is for pseudo-recursion calling: setting
        lo and hi and jumping to here is like recursion, but stkptr is
-       prserved, locals aren't, so we preserve stuff on the stack */
+       preserved, locals aren't, so we preserve stuff on the stack */
 recurse:
 
     size = (hi - lo) / width + 1; /* number of el's to sort */
@@ -969,12 +969,12 @@ recurse:
     if (size <= CUTOFF) {
         shortsort((drawSurf_t*)lo, (drawSurf_t*)hi);
     } else {
-        /* First we pick a partititioning element.  The efficiency of the
+        /* First we pick a partitioning element.  The efficiency of the
            algorithm demands that we find one that is approximately the
            median of the values, but also that we select one fast.  Using
            the first one produces bad performace if the array is already
            sorted, so we use the middle one, which would require a very
-           wierdly arranged array for worst case performance.  Testing shows
+           weirdly arranged array for worst case performance.  Testing shows
            that a median-of-three algorithm does not, in general, increase
            performance. */
 
