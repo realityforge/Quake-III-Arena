@@ -33,22 +33,15 @@ static int s_noise_perm[NOISE_SIZE];
 
 #define LERP(a, b, w) ((a) * (1.0f - (w)) + (b) * (w))
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "cert-msc51-cpp"
-#pragma clang diagnostic ignored "cppcoreguidelines-narrowing-conversions"
-#pragma ide diagnostic ignored "cert-msc50-cpp"
 void R_NoiseInit()
 {
     srand(1001);
 
     for (int i = 0; i < NOISE_SIZE; i++) {
-        const int rand1 = rand();
-        const int rand2 = rand();
-        s_noise_table[i] = (float)(((rand1 / (float)RAND_MAX) * 2.0 - 1.0));
-        s_noise_perm[i] = (unsigned char)(rand2 / (float)RAND_MAX * 255);
+        s_noise_table[i] = (float)(((rand() / (float)RAND_MAX) * 2.0 - 1.0));
+        s_noise_perm[i] = (unsigned char)(rand() / (float)RAND_MAX * 255);
     }
 }
-#pragma clang diagnostic pop
 
 static inline float GetNoiseValue(const int x, const int y, const int z, const int t)
 {
