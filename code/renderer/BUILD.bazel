@@ -59,6 +59,7 @@ cc_library(
         "-Wno-sign-compare",
         "-Wno-pointer-to-int-cast",
         "-Wno-switch-enum",
+        "-Wno-covered-switch-default",
     ],
     visibility = [
         "//code/cgame:__pkg__",
