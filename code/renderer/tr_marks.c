@@ -180,7 +180,7 @@ void R_BoxSurfaces_r(mnode_t* node, vec3_t mins, vec3_t maxs, surfaceType_t** li
     }
 }
 
-static void R_AddMarkFragments(vec_t clipPoints[2][64][3], int numPlanes, vec3_t(*normals), float* dists, int maxPoints, vec3_t pointBuffer, markFragment_t* fragmentBuffer, int* returnedPoints, int* returnedFragments)
+static void R_AddMarkFragments(vec_t clipPoints[2][64][3], int numPlanes, vec3_t* normals, float* dists, int maxPoints, vec3_t pointBuffer, markFragment_t* fragmentBuffer, int* returnedPoints, int* returnedFragments)
 {
     int pingPong, i;
     markFragment_t* mf;
