@@ -940,9 +940,11 @@ static void qsortFast(void* base, unsigned num, unsigned width)
     int stkptr; /* stack for saving sub-array to be processed */
     int temp;
 
-    if (sizeof(drawSurf_t) != 8) {
-        ri.Error(ERR_DROP, "change SWAP_DRAW_SURF macro");
-    }
+    assert(8 == sizeof(drawSurf_t));
+    // TODO: Reimplement this
+    // if (sizeof(drawSurf_t) != 8) {
+    //  ri.Error(ERR_DROP, "change SWAP_DRAW_SURF macro");
+    // }
 
     /* Note: the number of stack entries required is no more than
        1 + log2(size), so 30 is sufficient for any array */
