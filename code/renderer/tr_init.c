@@ -117,9 +117,9 @@ cvar_t* r_lodCurveError;
 
 cvar_t* r_fullscreen;
 
-cvar_t* r_customwidth;
-cvar_t* r_customheight;
-cvar_t* r_customaspect;
+static cvar_t* r_customwidth;
+static cvar_t* r_customheight;
+static cvar_t* r_customaspect;
 
 cvar_t* r_overBrightBits;
 cvar_t* r_mapOverBrightBits;
@@ -136,9 +136,9 @@ cvar_t* r_debugSort;
 cvar_t* r_printShaders;
 cvar_t* r_saveFontData;
 
-cvar_t* r_maxpolys;
+static cvar_t* r_maxpolys;
 int max_polys;
-cvar_t* r_maxpolyverts;
+static cvar_t* r_maxpolyverts;
 int max_polyverts;
 
 void(APIENTRY* qglMultiTexCoord2fARB)(GLenum texture, GLfloat s, GLfloat t);
@@ -259,7 +259,7 @@ typedef struct vidmode_s {
     float pixelAspect; // pixel width / height
 } vidmode_t;
 
-vidmode_t r_vidModes[] = {
+static vidmode_t r_vidModes[] = {
     { "Mode  0: 320x240", 320, 240, 1 },
     { "Mode  1: 400x300", 400, 300, 1 },
     { "Mode  2: 512x384", 512, 384, 1 },
@@ -334,7 +334,7 @@ FIXME: the statics don't get a reinit between fs_game changes
 RB_TakeScreenshot
 ==================
 */
-void RB_TakeScreenshot(int x, int y, int width, int height, char* fileName)
+static void RB_TakeScreenshot(int x, int y, int width, int height, char* fileName)
 {
     uint8_t* buffer;
     int i, c, temp;
@@ -374,7 +374,7 @@ void RB_TakeScreenshot(int x, int y, int width, int height, char* fileName)
 RB_TakeScreenshotJPEG
 ==================
 */
-void RB_TakeScreenshotJPEG(int x, int y, int width, int height, char* fileName)
+static void RB_TakeScreenshotJPEG(int x, int y, int width, int height, char* fileName)
 {
     uint8_t* buffer;
 
@@ -407,7 +407,7 @@ const void* RB_TakeScreenshotCmd(const void* data)
     return (const void*)(cmd + 1);
 }
 
-void R_TakeScreenshot(int x, int y, int width, int height, char* name, bool jpeg)
+static void R_TakeScreenshot(int x, int y, int width, int height, char* name, bool jpeg)
 {
     static char fileName[MAX_OSPATH]; // bad things if two screenshots per frame?
     screenshotCommand_t* cmd;
@@ -432,7 +432,7 @@ void R_TakeScreenshot(int x, int y, int width, int height, char* name, bool jpeg
 R_ScreenshotFilename
 ==================
 */
-void R_ScreenshotFilename(int lastNumber, char* fileName)
+static void R_ScreenshotFilename(int lastNumber, char* fileName)
 {
     int a, b, c, d;
 
@@ -457,7 +457,7 @@ void R_ScreenshotFilename(int lastNumber, char* fileName)
 R_ScreenshotFilename
 ==================
 */
-void R_ScreenshotFilenameJPEG(int lastNumber, char* fileName)
+static void R_ScreenshotFilenameJPEG(int lastNumber, char* fileName)
 {
     int a, b, c, d;
 
@@ -537,7 +537,7 @@ void R_ScreenShot_f(void)
     }
 }
 
-void R_ScreenShotJPEG_f(void)
+static void R_ScreenShotJPEG_f()
 {
     char checkname[MAX_OSPATH];
     static int lastNumber = -1;
@@ -701,7 +701,7 @@ void GfxInfo_f(void)
     }
 }
 
-void R_Register(void)
+static void R_Register()
 {
     // latched and archived variables
     r_allowExtensions = ri.Cvar_Get("r_allowExtensions", "1", CVAR_ARCHIVE | CVAR_LATCH);
@@ -941,7 +941,7 @@ RE_EndRegistration
 Touch all images to make sure they are resident
 =============
 */
-void RE_EndRegistration(void)
+static void RE_EndRegistration()
 {
     R_IssuePendingRenderCommands();
     RB_ShowImages();
