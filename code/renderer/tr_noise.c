@@ -19,6 +19,7 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
+// tr_noise.c
 #include "tr_common.h"
 
 #define NOISE_SIZE 256
@@ -30,33 +31,35 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 static float s_noise_table[NOISE_SIZE];
 static int s_noise_perm[NOISE_SIZE];
 
-static float GetNoiseValue(int x, int y, int z, int t)
-{
-    return s_noise_table[INDEX(x, y, z, t)];
-}
-
 void R_NoiseInit()
 {
+    srand(1001);
+
     for (int i = 0; i < NOISE_SIZE; i++) {
         s_noise_table[i] = (float)((((float)(rand()) / (float)RAND_MAX) * 2.0F - 1.0F));
         s_noise_perm[i] = (unsigned char)((float)(rand()) / (float)RAND_MAX * 255.0F);
     }
 }
 
-float R_NoiseGet4f(float x, float y, float z, double t)
+static inline float GetNoiseValue(const int x, const int y, const int z, const int t)
+{
+    return s_noise_table[INDEX(x, y, z, t)];
+}
+
+float R_NoiseGet4f(const float x, const float y, const float z, const double t)
 {
     const float ixf = floorf(x);
     const int ix = (int)ixf;
-    const float fx = x - (float)ix;
+    const float xRemainder = x - ixf;
     const float iyf = floorf(y);
     const int iy = (int)iyf;
-    const float fy = y - (float)iy;
+    const float yRemainder = y - iyf;
     const float izf = floorf(z);
     const int iz = (int)izf;
-    const float fz = z - (float)iz;
+    const float zRemainder = z - (float)iz;
     const double itd = floor(t);
     const int it = (int)itd;
-    const float ft = (float)(t - (double)it);
+    const float tRemainder = (float)(t - (double)it);
 
     float value[2];
     for (int i = 0; i < 2; i++) {
@@ -73,10 +76,11 @@ float R_NoiseGet4f(float x, float y, float z, double t)
         back[2] = GetNoiseValue(ix, iy + 1, iz + 1, it + i);
         back[3] = GetNoiseValue(ix + 1, iy + 1, iz + 1, it + i);
 
-        const float fvalue = LERP(LERP(front[0], front[1], fx), LERP(front[2], front[3], fx), fy);
-        const float bvalue = LERP(LERP(back[0], back[1], fx), LERP(back[2], back[3], fx), fy);
+        const float fvalue = LERP(LERP(front[0], front[1], xRemainder), LERP(front[2], front[3], xRemainder), yRemainder);
+        const float bvalue = LERP(LERP(back[0], back[1], xRemainder), LERP(back[2], back[3], xRemainder), yRemainder);
 
-        value[i] = LERP(fvalue, bvalue, fz);
+        value[i] = LERP(fvalue, bvalue, zRemainder);
     }
-    return LERP(value[0], value[1], ft);
+
+    return LERP(value[0], value[1], tRemainder);
 }
