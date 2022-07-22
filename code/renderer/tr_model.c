@@ -28,8 +28,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 static bool R_LoadMD3(model_t* mod, int lod, void* buffer, const char* name);
 static bool R_LoadMD4(model_t* mod, void* buffer, const char* name);
 
-model_t* loadmodel;
-
 /*
 ** R_GetModelByHandle
 */
@@ -147,8 +145,6 @@ qhandle_t RE_RegisterModel(const char* name)
         if (!buf) {
             continue;
         }
-
-        loadmodel = mod;
 
         ident = LittleLong(*(unsigned*)buf);
         if (ident == MD4_IDENT) {
