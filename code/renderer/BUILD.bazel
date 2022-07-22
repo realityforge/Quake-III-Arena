@@ -33,6 +33,7 @@ cc_library(
     srcs = [
         "tr_bsp.c",
         "tr_cmds.c",
+        "tr_flares.c",
         "tr_font.c",
         "tr_init.c",
         "tr_light.c",
