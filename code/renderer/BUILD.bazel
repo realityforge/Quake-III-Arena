@@ -47,6 +47,7 @@ cc_library(
         "tr_noise.c",
         "tr_scene.c",
         "tr_shade.c",
+        "tr_shade_calc.c",
         "tr_shader.c",
         "tr_shadows.c",
         "tr_sky.c",
