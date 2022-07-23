@@ -19,12 +19,12 @@ Copyright : Copyright (c) Facebook Technologies, LLC and its affiliates. All rig
 #include <assert.h>
 
 typedef void(GL_APIENTRY* PFNGLFRAMEBUFFERTEXTUREMULTIVIEWOVRPROC)(
-        GLenum target,
-        GLenum attachment,
-        GLuint texture,
-        GLint level,
-        GLint baseViewIndex,
-        GLsizei numViews);
+    GLenum target,
+    GLenum attachment,
+    GLuint texture,
+    GLint level,
+    GLint baseViewIndex,
+    GLsizei numViews);
 
 /*
 ================================================================================
@@ -34,8 +34,8 @@ ovrFramebuffer
 ================================================================================
 */
 
-
-void ovrFramebuffer_Clear(ovrFramebuffer* frameBuffer) {
+void ovrFramebuffer_Clear(ovrFramebuffer* frameBuffer)
+{
     frameBuffer->Width = 0;
     frameBuffer->Height = 0;
     frameBuffer->TextureSwapChainLength = 0;
@@ -49,17 +49,17 @@ void ovrFramebuffer_Clear(ovrFramebuffer* frameBuffer) {
 }
 
 bool ovrFramebuffer_Create(
-        XrSession session,
-        ovrFramebuffer* frameBuffer,
-        const int width,
-        const int height) {
+    XrSession session,
+    ovrFramebuffer* frameBuffer,
+    const int width,
+    const int height)
+{
 
     frameBuffer->Width = width;
     frameBuffer->Height = height;
 
-    PFNGLFRAMEBUFFERTEXTUREMULTIVIEWOVRPROC glFramebufferTextureMultiviewOVR =
-            (PFNGLFRAMEBUFFERTEXTUREMULTIVIEWOVRPROC)eglGetProcAddress(
-                    "glFramebufferTextureMultiviewOVR");
+    PFNGLFRAMEBUFFERTEXTUREMULTIVIEWOVRPROC glFramebufferTextureMultiviewOVR = (PFNGLFRAMEBUFFERTEXTUREMULTIVIEWOVRPROC)eglGetProcAddress(
+        "glFramebufferTextureMultiviewOVR");
 
     XrSwapchainCreateInfo swapChainCreateInfo;
     memset(&swapChainCreateInfo, 0, sizeof(swapChainCreateInfo));
@@ -80,10 +80,10 @@ bool ovrFramebuffer_Create(
     OXR(xrCreateSwapchain(session, &swapChainCreateInfo, &frameBuffer->ColorSwapChain.Handle));
     // Get the number of swapchain images.
     OXR(xrEnumerateSwapchainImages(
-            frameBuffer->ColorSwapChain.Handle, 0, &frameBuffer->TextureSwapChainLength, NULL));
+        frameBuffer->ColorSwapChain.Handle, 0, &frameBuffer->TextureSwapChainLength, NULL));
     // Allocate the swapchain images array.
     frameBuffer->ColorSwapChainImage = (XrSwapchainImageOpenGLESKHR*)malloc(
-            frameBuffer->TextureSwapChainLength * sizeof(XrSwapchainImageOpenGLESKHR));
+        frameBuffer->TextureSwapChainLength * sizeof(XrSwapchainImageOpenGLESKHR));
 
     // Populate the swapchain image array.
     for (uint32_t i = 0; i < frameBuffer->TextureSwapChainLength; i++) {
@@ -91,21 +91,19 @@ bool ovrFramebuffer_Create(
         frameBuffer->ColorSwapChainImage[i].next = NULL;
     }
     OXR(xrEnumerateSwapchainImages(
-            frameBuffer->ColorSwapChain.Handle,
-            frameBuffer->TextureSwapChainLength,
-            &frameBuffer->TextureSwapChainLength,
-            (XrSwapchainImageBaseHeader*)frameBuffer->ColorSwapChainImage));
+        frameBuffer->ColorSwapChain.Handle,
+        frameBuffer->TextureSwapChainLength,
+        &frameBuffer->TextureSwapChainLength,
+        (XrSwapchainImageBaseHeader*)frameBuffer->ColorSwapChainImage));
 
-    frameBuffer->DepthBuffers =
-            (GLuint*)malloc(frameBuffer->TextureSwapChainLength * sizeof(GLuint));
-    frameBuffer->FrameBuffers =
-            (GLuint*)malloc(frameBuffer->TextureSwapChainLength * sizeof(GLuint));
+    frameBuffer->DepthBuffers = (GLuint*)malloc(frameBuffer->TextureSwapChainLength * sizeof(GLuint));
+    frameBuffer->FrameBuffers = (GLuint*)malloc(frameBuffer->TextureSwapChainLength * sizeof(GLuint));
 
     for (uint32_t i = 0; i < frameBuffer->TextureSwapChainLength; i++) {
         // Create the color buffer texture.
         const GLuint colorTexture = frameBuffer->ColorSwapChainImage[i].image;
 
-        GLfloat borderColor[] = {0.0f, 0.0f, 0.0f, 0.0f};
+        GLfloat borderColor[] = { 0.0f, 0.0f, 0.0f, 0.0f };
         GLenum textureTarget = GL_TEXTURE_2D_ARRAY;
         GL(glBindTexture(textureTarget, colorTexture));
         GL(glTexParameterfv(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_BORDER_COLOR, borderColor));
@@ -137,7 +135,8 @@ bool ovrFramebuffer_Create(
     return true;
 }
 
-void ovrFramebuffer_Destroy(ovrFramebuffer* frameBuffer) {
+void ovrFramebuffer_Destroy(ovrFramebuffer* frameBuffer)
+{
     GL(glDeleteFramebuffers(frameBuffer->TextureSwapChainLength, frameBuffer->FrameBuffers));
     GL(glDeleteRenderbuffers(frameBuffer->TextureSwapChainLength, frameBuffer->DepthBuffers));
     OXR(xrDestroySwapchain(frameBuffer->ColorSwapChain.Handle));
@@ -149,26 +148,30 @@ void ovrFramebuffer_Destroy(ovrFramebuffer* frameBuffer) {
     ovrFramebuffer_Clear(frameBuffer);
 }
 
-void ovrFramebuffer_SetCurrent(ovrFramebuffer* frameBuffer) {
+void ovrFramebuffer_SetCurrent(ovrFramebuffer* frameBuffer)
+{
     GL(glBindFramebuffer(
-            GL_DRAW_FRAMEBUFFER, frameBuffer->FrameBuffers[frameBuffer->TextureSwapChainIndex]));
+        GL_DRAW_FRAMEBUFFER, frameBuffer->FrameBuffers[frameBuffer->TextureSwapChainIndex]));
 }
 
-void ovrFramebuffer_SetNone() {
+void ovrFramebuffer_SetNone()
+{
     GL(glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0));
 }
 
-void ovrFramebuffer_Resolve(ovrFramebuffer* frameBuffer) {
+void ovrFramebuffer_Resolve(ovrFramebuffer* frameBuffer)
+{
     // Discard the depth buffer, so the tiler won't need to write it back out to memory.
-    const GLenum depthAttachment[1] = {GL_DEPTH_ATTACHMENT};
+    const GLenum depthAttachment[1] = { GL_DEPTH_ATTACHMENT };
     glInvalidateFramebuffer(GL_DRAW_FRAMEBUFFER, 1, depthAttachment);
 }
 
-void ovrFramebuffer_Acquire(ovrFramebuffer* frameBuffer) {
+void ovrFramebuffer_Acquire(ovrFramebuffer* frameBuffer)
+{
     // Acquire the swapchain image
-    XrSwapchainImageAcquireInfo acquireInfo = {XR_TYPE_SWAPCHAIN_IMAGE_ACQUIRE_INFO, NULL};
+    XrSwapchainImageAcquireInfo acquireInfo = { XR_TYPE_SWAPCHAIN_IMAGE_ACQUIRE_INFO, NULL };
     OXR(xrAcquireSwapchainImage(
-            frameBuffer->ColorSwapChain.Handle, &acquireInfo, &frameBuffer->TextureSwapChainIndex));
+        frameBuffer->ColorSwapChain.Handle, &acquireInfo, &frameBuffer->TextureSwapChainIndex));
 
     XrSwapchainImageWaitInfo waitInfo;
     waitInfo.type = XR_TYPE_SWAPCHAIN_IMAGE_WAIT_INFO;
@@ -180,14 +183,15 @@ void ovrFramebuffer_Acquire(ovrFramebuffer* frameBuffer) {
         res = xrWaitSwapchainImage(frameBuffer->ColorSwapChain.Handle, &waitInfo);
         i++;
         ALOGV(
-                " Retry xrWaitSwapchainImage %d times due to XR_TIMEOUT_EXPIRED (duration %f micro seconds)",
-                i,
-                waitInfo.timeout * (1E-9));
+            " Retry xrWaitSwapchainImage %d times due to XR_TIMEOUT_EXPIRED (duration %f micro seconds)",
+            i,
+            waitInfo.timeout * (1E-9));
     }
 }
 
-void ovrFramebuffer_Release(ovrFramebuffer* frameBuffer) {
-    XrSwapchainImageReleaseInfo releaseInfo = {XR_TYPE_SWAPCHAIN_IMAGE_RELEASE_INFO, NULL};
+void ovrFramebuffer_Release(ovrFramebuffer* frameBuffer)
+{
+    XrSwapchainImageReleaseInfo releaseInfo = { XR_TYPE_SWAPCHAIN_IMAGE_RELEASE_INFO, NULL };
     OXR(xrReleaseSwapchainImage(frameBuffer->ColorSwapChain.Handle, &releaseInfo));
 }
 
@@ -199,24 +203,27 @@ ovrRenderer
 ================================================================================
 */
 
-void ovrRenderer_Clear(ovrRenderer* renderer) {
+void ovrRenderer_Clear(ovrRenderer* renderer)
+{
     ovrFramebuffer_Clear(&renderer->FrameBuffer);
 }
 
 void ovrRenderer_Create(
-        XrSession session,
-        ovrRenderer* renderer,
-        int suggestedEyeTextureWidth,
-        int suggestedEyeTextureHeight) {
+    XrSession session,
+    ovrRenderer* renderer,
+    int suggestedEyeTextureWidth,
+    int suggestedEyeTextureHeight)
+{
     // Create the frame buffers.
     ovrFramebuffer_Create(
-            session,
-            &renderer->FrameBuffer,
-            suggestedEyeTextureWidth,
-            suggestedEyeTextureHeight);
+        session,
+        &renderer->FrameBuffer,
+        suggestedEyeTextureWidth,
+        suggestedEyeTextureHeight);
 }
 
-void ovrRenderer_Destroy(ovrRenderer* renderer) {
+void ovrRenderer_Destroy(ovrRenderer* renderer)
+{
     ovrFramebuffer_Destroy(&renderer->FrameBuffer);
 }
 
@@ -228,7 +235,8 @@ ovrApp
 ================================================================================
 */
 
-void ovrApp_Clear(ovrApp* app) {
+void ovrApp_Clear(ovrApp* app)
+{
     app->Focused = false;
     app->Instance = XR_NULL_HANDLE;
     app->Session = XR_NULL_HANDLE;
@@ -255,7 +263,8 @@ void ovrApp_Clear(ovrApp* app) {
     ovrRenderer_Clear(&app->Renderer);
 }
 
-void ovrApp_Destroy(ovrApp* app) {
+void ovrApp_Destroy(ovrApp* app)
+{
     if (app->SupportedDisplayRefreshRates != NULL) {
         free(app->SupportedDisplayRefreshRates);
     }
@@ -263,7 +272,8 @@ void ovrApp_Destroy(ovrApp* app) {
     ovrApp_Clear(app);
 }
 
-void ovrApp_HandleSessionStateChanges(ovrApp* app, XrSessionState state) {
+void ovrApp_HandleSessionStateChanges(ovrApp* app, XrSessionState state)
+{
     if (state == XR_SESSION_STATE_READY) {
         assert(app->SessionActive == false);
 
@@ -285,25 +295,25 @@ void ovrApp_HandleSessionStateChanges(ovrApp* app, XrSessionState state) {
 
             PFN_xrPerfSettingsSetPerformanceLevelEXT pfnPerfSettingsSetPerformanceLevelEXT = NULL;
             OXR(xrGetInstanceProcAddr(
-                    app->Instance,
-                    "xrPerfSettingsSetPerformanceLevelEXT",
-                    (PFN_xrVoidFunction*)(&pfnPerfSettingsSetPerformanceLevelEXT)));
+                app->Instance,
+                "xrPerfSettingsSetPerformanceLevelEXT",
+                (PFN_xrVoidFunction*)(&pfnPerfSettingsSetPerformanceLevelEXT)));
 
             OXR(pfnPerfSettingsSetPerformanceLevelEXT(
-                    app->Session, XR_PERF_SETTINGS_DOMAIN_CPU_EXT, cpuPerfLevel));
+                app->Session, XR_PERF_SETTINGS_DOMAIN_CPU_EXT, cpuPerfLevel));
             OXR(pfnPerfSettingsSetPerformanceLevelEXT(
-                    app->Session, XR_PERF_SETTINGS_DOMAIN_GPU_EXT, gpuPerfLevel));
+                app->Session, XR_PERF_SETTINGS_DOMAIN_GPU_EXT, gpuPerfLevel));
 
             PFN_xrSetAndroidApplicationThreadKHR pfnSetAndroidApplicationThreadKHR = NULL;
             OXR(xrGetInstanceProcAddr(
-                    app->Instance,
-                    "xrSetAndroidApplicationThreadKHR",
-                    (PFN_xrVoidFunction*)(&pfnSetAndroidApplicationThreadKHR)));
+                app->Instance,
+                "xrSetAndroidApplicationThreadKHR",
+                (PFN_xrVoidFunction*)(&pfnSetAndroidApplicationThreadKHR)));
 
             OXR(pfnSetAndroidApplicationThreadKHR(
-                    app->Session, XR_ANDROID_THREAD_TYPE_APPLICATION_MAIN_KHR, app->MainThreadTid));
+                app->Session, XR_ANDROID_THREAD_TYPE_APPLICATION_MAIN_KHR, app->MainThreadTid));
             OXR(pfnSetAndroidApplicationThreadKHR(
-                    app->Session, XR_ANDROID_THREAD_TYPE_RENDERER_MAIN_KHR, app->RenderThreadTid));
+                app->Session, XR_ANDROID_THREAD_TYPE_RENDERER_MAIN_KHR, app->RenderThreadTid));
         }
     } else if (state == XR_SESSION_STATE_STOPPING) {
         assert(app->SessionActive);
@@ -313,7 +323,8 @@ void ovrApp_HandleSessionStateChanges(ovrApp* app, XrSessionState state) {
     }
 }
 
-GLboolean ovrApp_HandleXrEvents(ovrApp* app) {
+GLboolean ovrApp_HandleXrEvents(ovrApp* app)
+{
     XrEventDataBuffer eventDataBuffer = {};
     GLboolean recenter = GL_FALSE;
 
@@ -329,74 +340,69 @@ GLboolean ovrApp_HandleXrEvents(ovrApp* app) {
         }
 
         switch (baseEventHeader->type) {
-            case XR_TYPE_EVENT_DATA_EVENTS_LOST:
-                ALOGV("xrPollEvent: received XR_TYPE_EVENT_DATA_EVENTS_LOST event");
-                break;
-            case XR_TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING: {
-                const XrEventDataInstanceLossPending* instance_loss_pending_event =
-                        (XrEventDataInstanceLossPending*)(baseEventHeader);
-                ALOGV(
-                        "xrPollEvent: received XR_TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING event: time %f",
-                        FromXrTime(instance_loss_pending_event->lossTime));
-            } break;
-            case XR_TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED:
-                ALOGV("xrPollEvent: received XR_TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED event");
-                break;
-            case XR_TYPE_EVENT_DATA_PERF_SETTINGS_EXT: {
-                const XrEventDataPerfSettingsEXT* perf_settings_event =
-                        (XrEventDataPerfSettingsEXT*)(baseEventHeader);
-                ALOGV(
-                        "xrPollEvent: received XR_TYPE_EVENT_DATA_PERF_SETTINGS_EXT event: type %d subdomain %d : level %d -> level %d",
-                        perf_settings_event->type,
-                        perf_settings_event->subDomain,
-                        perf_settings_event->fromLevel,
-                        perf_settings_event->toLevel);
-            } break;
-            case XR_TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB: {
-                const XrEventDataDisplayRefreshRateChangedFB* refresh_rate_changed_event =
-                        (XrEventDataDisplayRefreshRateChangedFB*)(baseEventHeader);
-                ALOGV(
-                        "xrPollEvent: received XR_TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB event: fromRate %f -> toRate %f",
-                        refresh_rate_changed_event->fromDisplayRefreshRate,
-                        refresh_rate_changed_event->toDisplayRefreshRate);
-            } break;
-            case XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING: {
-                XrEventDataReferenceSpaceChangePending* ref_space_change_event =
-                        (XrEventDataReferenceSpaceChangePending*)(baseEventHeader);
-                ALOGV(
-                        "xrPollEvent: received XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING event: changed space: %d for session %p at time %f",
-                        ref_space_change_event->referenceSpaceType,
-                        (void*)ref_space_change_event->session,
-                        FromXrTime(ref_space_change_event->changeTime));
-                recenter = GL_TRUE;
-            } break;
-            case XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED: {
-                const XrEventDataSessionStateChanged* session_state_changed_event =
-                        (XrEventDataSessionStateChanged*)(baseEventHeader);
-                ALOGV(
-                        "xrPollEvent: received XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED: %d for session %p at time %f",
-                        session_state_changed_event->state,
-                        (void*)session_state_changed_event->session,
-                        FromXrTime(session_state_changed_event->time));
+        case XR_TYPE_EVENT_DATA_EVENTS_LOST:
+            ALOGV("xrPollEvent: received XR_TYPE_EVENT_DATA_EVENTS_LOST event");
+            break;
+        case XR_TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING: {
+            const XrEventDataInstanceLossPending* instance_loss_pending_event = (XrEventDataInstanceLossPending*)(baseEventHeader);
+            ALOGV(
+                "xrPollEvent: received XR_TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING event: time %f",
+                FromXrTime(instance_loss_pending_event->lossTime));
+        } break;
+        case XR_TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED:
+            ALOGV("xrPollEvent: received XR_TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED event");
+            break;
+        case XR_TYPE_EVENT_DATA_PERF_SETTINGS_EXT: {
+            const XrEventDataPerfSettingsEXT* perf_settings_event = (XrEventDataPerfSettingsEXT*)(baseEventHeader);
+            ALOGV(
+                "xrPollEvent: received XR_TYPE_EVENT_DATA_PERF_SETTINGS_EXT event: type %d subdomain %d : level %d -> level %d",
+                perf_settings_event->type,
+                perf_settings_event->subDomain,
+                perf_settings_event->fromLevel,
+                perf_settings_event->toLevel);
+        } break;
+        case XR_TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB: {
+            const XrEventDataDisplayRefreshRateChangedFB* refresh_rate_changed_event = (XrEventDataDisplayRefreshRateChangedFB*)(baseEventHeader);
+            ALOGV(
+                "xrPollEvent: received XR_TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB event: fromRate %f -> toRate %f",
+                refresh_rate_changed_event->fromDisplayRefreshRate,
+                refresh_rate_changed_event->toDisplayRefreshRate);
+        } break;
+        case XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING: {
+            XrEventDataReferenceSpaceChangePending* ref_space_change_event = (XrEventDataReferenceSpaceChangePending*)(baseEventHeader);
+            ALOGV(
+                "xrPollEvent: received XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING event: changed space: %d for session %p at time %f",
+                ref_space_change_event->referenceSpaceType,
+                (void*)ref_space_change_event->session,
+                FromXrTime(ref_space_change_event->changeTime));
+            recenter = GL_TRUE;
+        } break;
+        case XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED: {
+            const XrEventDataSessionStateChanged* session_state_changed_event = (XrEventDataSessionStateChanged*)(baseEventHeader);
+            ALOGV(
+                "xrPollEvent: received XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED: %d for session %p at time %f",
+                session_state_changed_event->state,
+                (void*)session_state_changed_event->session,
+                FromXrTime(session_state_changed_event->time));
 
-                switch (session_state_changed_event->state) {
-                    case XR_SESSION_STATE_FOCUSED:
-                        app->Focused = true;
-                        break;
-                    case XR_SESSION_STATE_VISIBLE:
-                        app->Focused = false;
-                        break;
-                    case XR_SESSION_STATE_READY:
-                    case XR_SESSION_STATE_STOPPING:
-                        ovrApp_HandleSessionStateChanges(app, session_state_changed_event->state);
-                        break;
-                    default:
-                        break;
-                }
-            } break;
-            default:
-                ALOGV("xrPollEvent: Unknown event");
+            switch (session_state_changed_event->state) {
+            case XR_SESSION_STATE_FOCUSED:
+                app->Focused = true;
                 break;
+            case XR_SESSION_STATE_VISIBLE:
+                app->Focused = false;
+                break;
+            case XR_SESSION_STATE_READY:
+            case XR_SESSION_STATE_STOPPING:
+                ovrApp_HandleSessionStateChanges(app, session_state_changed_event->state);
+                break;
+            default:
+                break;
+            }
+        } break;
+        default:
+            ALOGV("xrPollEvent: Unknown event");
+            break;
         }
     }
     return recenter;
@@ -411,12 +417,13 @@ ovrMatrix4f
 */
 
 ovrMatrix4f ovrMatrix4f_CreateProjectionFov(
-        const float angleLeft,
-        const float angleRight,
-        const float angleUp,
-        const float angleDown,
-        const float nearZ,
-        const float farZ) {
+    const float angleLeft,
+    const float angleRight,
+    const float angleUp,
+    const float angleDown,
+    const float nearZ,
+    const float farZ)
+{
 
     const float tanAngleLeft = tanf(angleLeft);
     const float tanAngleRight = tanf(angleRight);
@@ -482,7 +489,8 @@ ovrMatrix4f ovrMatrix4f_CreateProjectionFov(
     return result;
 }
 
-ovrMatrix4f ovrMatrix4f_CreateFromQuaternion(const XrQuaternionf* q) {
+ovrMatrix4f ovrMatrix4f_CreateFromQuaternion(const XrQuaternionf* q)
+{
     const float ww = q->w * q->w;
     const float xx = q->x * q->x;
     const float yy = q->y * q->y;
@@ -511,66 +519,55 @@ ovrMatrix4f ovrMatrix4f_CreateFromQuaternion(const XrQuaternionf* q) {
     return out;
 }
 
-
 /// Use left-multiplication to accumulate transformations.
-ovrMatrix4f ovrMatrix4f_Multiply(const ovrMatrix4f* a, const ovrMatrix4f* b) {
+ovrMatrix4f ovrMatrix4f_Multiply(const ovrMatrix4f* a, const ovrMatrix4f* b)
+{
     ovrMatrix4f out;
-    out.M[0][0] = a->M[0][0] * b->M[0][0] + a->M[0][1] * b->M[1][0] + a->M[0][2] * b->M[2][0] +
-                  a->M[0][3] * b->M[3][0];
-    out.M[1][0] = a->M[1][0] * b->M[0][0] + a->M[1][1] * b->M[1][0] + a->M[1][2] * b->M[2][0] +
-                  a->M[1][3] * b->M[3][0];
-    out.M[2][0] = a->M[2][0] * b->M[0][0] + a->M[2][1] * b->M[1][0] + a->M[2][2] * b->M[2][0] +
-                  a->M[2][3] * b->M[3][0];
-    out.M[3][0] = a->M[3][0] * b->M[0][0] + a->M[3][1] * b->M[1][0] + a->M[3][2] * b->M[2][0] +
-                  a->M[3][3] * b->M[3][0];
+    out.M[0][0] = a->M[0][0] * b->M[0][0] + a->M[0][1] * b->M[1][0] + a->M[0][2] * b->M[2][0] + a->M[0][3] * b->M[3][0];
+    out.M[1][0] = a->M[1][0] * b->M[0][0] + a->M[1][1] * b->M[1][0] + a->M[1][2] * b->M[2][0] + a->M[1][3] * b->M[3][0];
+    out.M[2][0] = a->M[2][0] * b->M[0][0] + a->M[2][1] * b->M[1][0] + a->M[2][2] * b->M[2][0] + a->M[2][3] * b->M[3][0];
+    out.M[3][0] = a->M[3][0] * b->M[0][0] + a->M[3][1] * b->M[1][0] + a->M[3][2] * b->M[2][0] + a->M[3][3] * b->M[3][0];
 
-    out.M[0][1] = a->M[0][0] * b->M[0][1] + a->M[0][1] * b->M[1][1] + a->M[0][2] * b->M[2][1] +
-                  a->M[0][3] * b->M[3][1];
-    out.M[1][1] = a->M[1][0] * b->M[0][1] + a->M[1][1] * b->M[1][1] + a->M[1][2] * b->M[2][1] +
-                  a->M[1][3] * b->M[3][1];
-    out.M[2][1] = a->M[2][0] * b->M[0][1] + a->M[2][1] * b->M[1][1] + a->M[2][2] * b->M[2][1] +
-                  a->M[2][3] * b->M[3][1];
-    out.M[3][1] = a->M[3][0] * b->M[0][1] + a->M[3][1] * b->M[1][1] + a->M[3][2] * b->M[2][1] +
-                  a->M[3][3] * b->M[3][1];
+    out.M[0][1] = a->M[0][0] * b->M[0][1] + a->M[0][1] * b->M[1][1] + a->M[0][2] * b->M[2][1] + a->M[0][3] * b->M[3][1];
+    out.M[1][1] = a->M[1][0] * b->M[0][1] + a->M[1][1] * b->M[1][1] + a->M[1][2] * b->M[2][1] + a->M[1][3] * b->M[3][1];
+    out.M[2][1] = a->M[2][0] * b->M[0][1] + a->M[2][1] * b->M[1][1] + a->M[2][2] * b->M[2][1] + a->M[2][3] * b->M[3][1];
+    out.M[3][1] = a->M[3][0] * b->M[0][1] + a->M[3][1] * b->M[1][1] + a->M[3][2] * b->M[2][1] + a->M[3][3] * b->M[3][1];
 
-    out.M[0][2] = a->M[0][0] * b->M[0][2] + a->M[0][1] * b->M[1][2] + a->M[0][2] * b->M[2][2] +
-                  a->M[0][3] * b->M[3][2];
-    out.M[1][2] = a->M[1][0] * b->M[0][2] + a->M[1][1] * b->M[1][2] + a->M[1][2] * b->M[2][2] +
-                  a->M[1][3] * b->M[3][2];
-    out.M[2][2] = a->M[2][0] * b->M[0][2] + a->M[2][1] * b->M[1][2] + a->M[2][2] * b->M[2][2] +
-                  a->M[2][3] * b->M[3][2];
-    out.M[3][2] = a->M[3][0] * b->M[0][2] + a->M[3][1] * b->M[1][2] + a->M[3][2] * b->M[2][2] +
-                  a->M[3][3] * b->M[3][2];
+    out.M[0][2] = a->M[0][0] * b->M[0][2] + a->M[0][1] * b->M[1][2] + a->M[0][2] * b->M[2][2] + a->M[0][3] * b->M[3][2];
+    out.M[1][2] = a->M[1][0] * b->M[0][2] + a->M[1][1] * b->M[1][2] + a->M[1][2] * b->M[2][2] + a->M[1][3] * b->M[3][2];
+    out.M[2][2] = a->M[2][0] * b->M[0][2] + a->M[2][1] * b->M[1][2] + a->M[2][2] * b->M[2][2] + a->M[2][3] * b->M[3][2];
+    out.M[3][2] = a->M[3][0] * b->M[0][2] + a->M[3][1] * b->M[1][2] + a->M[3][2] * b->M[2][2] + a->M[3][3] * b->M[3][2];
 
-    out.M[0][3] = a->M[0][0] * b->M[0][3] + a->M[0][1] * b->M[1][3] + a->M[0][2] * b->M[2][3] +
-                  a->M[0][3] * b->M[3][3];
-    out.M[1][3] = a->M[1][0] * b->M[0][3] + a->M[1][1] * b->M[1][3] + a->M[1][2] * b->M[2][3] +
-                  a->M[1][3] * b->M[3][3];
-    out.M[2][3] = a->M[2][0] * b->M[0][3] + a->M[2][1] * b->M[1][3] + a->M[2][2] * b->M[2][3] +
-                  a->M[2][3] * b->M[3][3];
-    out.M[3][3] = a->M[3][0] * b->M[0][3] + a->M[3][1] * b->M[1][3] + a->M[3][2] * b->M[2][3] +
-                  a->M[3][3] * b->M[3][3];
+    out.M[0][3] = a->M[0][0] * b->M[0][3] + a->M[0][1] * b->M[1][3] + a->M[0][2] * b->M[2][3] + a->M[0][3] * b->M[3][3];
+    out.M[1][3] = a->M[1][0] * b->M[0][3] + a->M[1][1] * b->M[1][3] + a->M[1][2] * b->M[2][3] + a->M[1][3] * b->M[3][3];
+    out.M[2][3] = a->M[2][0] * b->M[0][3] + a->M[2][1] * b->M[1][3] + a->M[2][2] * b->M[2][3] + a->M[2][3] * b->M[3][3];
+    out.M[3][3] = a->M[3][0] * b->M[0][3] + a->M[3][1] * b->M[1][3] + a->M[3][2] * b->M[2][3] + a->M[3][3] * b->M[3][3];
     return out;
 }
 
-ovrMatrix4f ovrMatrix4f_CreateRotation(const float radiansX, const float radiansY, const float radiansZ) {
+ovrMatrix4f ovrMatrix4f_CreateRotation(const float radiansX, const float radiansY, const float radiansZ)
+{
     const float sinX = sinf(radiansX);
     const float cosX = cosf(radiansX);
     const ovrMatrix4f rotationX = {
-            {{1, 0, 0, 0}, {0, cosX, -sinX, 0}, {0, sinX, cosX, 0}, {0, 0, 0, 1}}};
+        { { 1, 0, 0, 0 }, { 0, cosX, -sinX, 0 }, { 0, sinX, cosX, 0 }, { 0, 0, 0, 1 } }
+    };
     const float sinY = sinf(radiansY);
     const float cosY = cosf(radiansY);
     const ovrMatrix4f rotationY = {
-            {{cosY, 0, sinY, 0}, {0, 1, 0, 0}, {-sinY, 0, cosY, 0}, {0, 0, 0, 1}}};
+        { { cosY, 0, sinY, 0 }, { 0, 1, 0, 0 }, { -sinY, 0, cosY, 0 }, { 0, 0, 0, 1 } }
+    };
     const float sinZ = sinf(radiansZ);
     const float cosZ = cosf(radiansZ);
     const ovrMatrix4f rotationZ = {
-            {{cosZ, -sinZ, 0, 0}, {sinZ, cosZ, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
+        { { cosZ, -sinZ, 0, 0 }, { sinZ, cosZ, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } }
+    };
     const ovrMatrix4f rotationXY = ovrMatrix4f_Multiply(&rotationY, &rotationX);
     return ovrMatrix4f_Multiply(&rotationZ, &rotationXY);
 }
 
-XrVector4f XrVector4f_MultiplyMatrix4f(const ovrMatrix4f* a, const XrVector4f* v) {
+XrVector4f XrVector4f_MultiplyMatrix4f(const ovrMatrix4f* a, const XrVector4f* v)
+{
     XrVector4f out;
     out.x = a->M[0][0] * v->x + a->M[0][1] * v->y + a->M[0][2] * v->z + a->M[0][3] * v->w;
     out.y = a->M[1][0] * v->x + a->M[1][1] * v->y + a->M[1][2] * v->z + a->M[1][3] * v->w;
@@ -587,7 +584,8 @@ ovrTrackedController
 ================================================================================
 */
 
-void ovrTrackedController_Clear(ovrTrackedController* controller) {
+void ovrTrackedController_Clear(ovrTrackedController* controller)
+{
     controller->Active = false;
     controller->Pose = XrPosef_Identity();
 }

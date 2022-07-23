@@ -28,19 +28,19 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 qboolean SNDDMA_Init(void)
 {
-	return qfalse;
+    return qfalse;
 }
 
-int	SNDDMA_GetDMAPos(void)
+int SNDDMA_GetDMAPos(void)
 {
-	return 0;
+    return 0;
 }
 
 void SNDDMA_Shutdown(void)
 {
 }
 
-void SNDDMA_BeginPainting (void)
+void SNDDMA_BeginPainting(void)
 {
 }
 
@@ -55,10 +55,10 @@ void SNDDMA_StartCapture(void)
 
 int SNDDMA_AvailableCaptureSamples(void)
 {
-	return 0;
+    return 0;
 }
 
-void SNDDMA_Capture(int samples, byte *data)
+void SNDDMA_Capture(int samples, byte* data)
 {
 }
 
@@ -66,19 +66,20 @@ void SNDDMA_StopCapture(void)
 {
 }
 
-void SNDDMA_MasterGain( float val )
+void SNDDMA_MasterGain(float val)
 {
 }
 #endif
 
-
-sfxHandle_t S_RegisterSound( const char *name, qboolean compressed ) 
+sfxHandle_t S_RegisterSound(const char* name, qboolean compressed)
 {
-	return 0;
+    return 0;
 }
 
-void S_StartLocalSound( sfxHandle_t sfxHandle, int channelNum ) {
+void S_StartLocalSound(sfxHandle_t sfxHandle, int channelNum)
+{
 }
 
-void S_ClearSoundBuffer( void ) {
+void S_ClearSoundBuffer(void)
+{
 }
