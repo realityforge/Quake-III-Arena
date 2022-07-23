@@ -2309,56 +2309,55 @@ A second parameter will cause it to print in sorted order
 */
 void R_ShaderList_f(void)
 {
-    shader_t* shader;
-
     ri.Printf(PRINT_ALL, "-----------------------\n");
 
     int count = 0;
     for (int i = 0; i < tr.numShaders; i++) {
+        shader_t* current_shader;
         if (ri.Cmd_Argc() > 1) {
-            shader = tr.sortedShaders[i];
+            current_shader = tr.sortedShaders[i];
         } else {
-            shader = tr.shaders[i];
+            current_shader = tr.shaders[i];
         }
 
-        ri.Printf(PRINT_ALL, "%i ", shader->numUnfoggedPasses);
+        ri.Printf(PRINT_ALL, "%i ", current_shader->numUnfoggedPasses);
 
-        if (shader->lightmapIndex >= 0) {
+        if (current_shader->lightmapIndex >= 0) {
             ri.Printf(PRINT_ALL, "L ");
         } else {
             ri.Printf(PRINT_ALL, "  ");
         }
-        if (shader->multitextureEnv == GL_ADD) {
+        if (current_shader->multitextureEnv == GL_ADD) {
             ri.Printf(PRINT_ALL, "MT(a) ");
-        } else if (shader->multitextureEnv == GL_MODULATE) {
+        } else if (current_shader->multitextureEnv == GL_MODULATE) {
             ri.Printf(PRINT_ALL, "MT(m) ");
-        } else if (shader->multitextureEnv == GL_DECAL) {
+        } else if (current_shader->multitextureEnv == GL_DECAL) {
             ri.Printf(PRINT_ALL, "MT(d) ");
         } else {
             ri.Printf(PRINT_ALL, "      ");
         }
-        if (shader->explicitlyDefined) {
+        if (current_shader->explicitlyDefined) {
             ri.Printf(PRINT_ALL, "E ");
         } else {
             ri.Printf(PRINT_ALL, "  ");
         }
 
-        if (shader->optimalStageIteratorFunc == RB_StageIteratorGeneric) {
+        if (current_shader->optimalStageIteratorFunc == RB_StageIteratorGeneric) {
             ri.Printf(PRINT_ALL, "gen ");
-        } else if (shader->optimalStageIteratorFunc == RB_StageIteratorSky) {
+        } else if (current_shader->optimalStageIteratorFunc == RB_StageIteratorSky) {
             ri.Printf(PRINT_ALL, "sky ");
-        } else if (shader->optimalStageIteratorFunc == RB_StageIteratorLightmappedMultitexture) {
+        } else if (current_shader->optimalStageIteratorFunc == RB_StageIteratorLightmappedMultitexture) {
             ri.Printf(PRINT_ALL, "lmmt");
-        } else if (shader->optimalStageIteratorFunc == RB_StageIteratorVertexLitTexture) {
+        } else if (current_shader->optimalStageIteratorFunc == RB_StageIteratorVertexLitTexture) {
             ri.Printf(PRINT_ALL, "vlt ");
         } else {
             ri.Printf(PRINT_ALL, "    ");
         }
 
-        if (shader->defaultShader) {
-            ri.Printf(PRINT_ALL, ": %s (DEFAULTED)\n", shader->name);
+        if (current_shader->defaultShader) {
+            ri.Printf(PRINT_ALL, ": %s (DEFAULTED)\n", current_shader->name);
         } else {
-            ri.Printf(PRINT_ALL, ": %s\n", shader->name);
+            ri.Printf(PRINT_ALL, ": %s\n", current_shader->name);
         }
         count++;
     }
