@@ -34,57 +34,56 @@ extern "C" {
 #endif
 
 
-float Com_Clamp( float min, float max, float value )
+float Com_Clamp(float min, float max, float value)
 {
-	if ( value < min ) {
+	if (value < min) {
 		return min;
 	}
-	if ( value > max ) {
+	if (value > max) {
 		return max;
 	}
 	return value;
 }
 
 
-int Com_ClampInt( int min, int max, int value )
+int Com_ClampInt(int min, int max, int value)
 {
-	if ( value < min ) {
+	if (value < min) {
 		return min;
 	}
-	if ( value > max ) {
+	if (value > max) {
 		return max;
 	}
 	return value;
 }
 
 
-const char* COM_SkipPath( const char* pathname )
+const char* COM_SkipPath(const char* pathname)
 {
 	const char* last = pathname;
-	while (*pathname)
-	{
+	while (*pathname) {
 		if (*pathname == '/')
-			last = pathname+1;
+			last = pathname + 1;
 		++pathname;
 	}
 	return last;
 }
 
 
-void COM_StripExtension( const char* in, char* out, int destsize )
+void COM_StripExtension(const char* in, char* out, int destsize)
 {
 	char* p;
 
-	Q_strncpyz( out, in, destsize );
+	Q_strncpyz(out, in, destsize);
 	p = out + strlen(out) - 1;
 
 	while (p-- > out) {
 		if (*p == '.') {
 			*p = 0;
-			return;		// nuke it and bail
+			return; // nuke it and bail
 		}
 		if (*p == '/') {
-			return;		// no extension
+			return; // no extension
 		}
 	}
 }
@@ -92,20 +91,20 @@ void COM_StripExtension( const char* in, char* out, int destsize )
 
 // if path doesn't have a .EXT, append ext (which should include the .)
 
-void COM_DefaultExtension( char* path, int maxSize, const char* ext )
+void COM_DefaultExtension(char* path, int maxSize, const char* ext)
 {
 	char oldPath[MAX_QPATH];
 	const char* src = path + strlen(path) - 1;
 
 	while (*src != '/' && src != path) {
 		if (*src == '.') {
-			return;		// already has an extension
+			return; // already has an extension
 		}
 		--src;
 	}
 
-	Q_strncpyz( oldPath, path, sizeof( oldPath ) );
-	Com_sprintf( path, maxSize, "%s%s", oldPath, ext );
+	Q_strncpyz(oldPath, path, sizeof(oldPath));
+	Com_sprintf(path, maxSize, "%s%s", oldPath, ext);
 }
 
 
@@ -120,34 +119,35 @@ these don't belong in here and should never be used by a VM
 
 #ifndef Q3_VM
 
-short   ShortSwap (short l)
+short ShortSwap(short l)
 {
-	byte    b1,b2;
+	byte b1, b2;
 
-	b1 = l&255;
-	b2 = (l>>8)&255;
+	b1 = l & 255;
+	b2 = (l >> 8) & 255;
 
-	return (b1<<8) + b2;
+	return (b1 << 8) + b2;
 }
 
-int    LongSwap (int l)
+int LongSwap(int l)
 {
-	byte    b1,b2,b3,b4;
+	byte b1, b2, b3, b4;
 
-	b1 = l&255;
-	b2 = (l>>8)&255;
-	b3 = (l>>16)&255;
-	b4 = (l>>24)&255;
+	b1 = l & 255;
+	b2 = (l >> 8) & 255;
+	b3 = (l >> 16) & 255;
+	b4 = (l >> 24) & 255;
 
-	return ((int)b1<<24) + ((int)b2<<16) + ((int)b3<<8) + b4;
+	return ((int)b1 << 24) + ((int)b2 << 16) + ((int)b3 << 8) + b4;
 }
 
 typedef union {
-    float	f;
-    unsigned int i;
+	float f;
+	unsigned int i;
 } _FloatByteUnion;
 
-float FloatSwap (const float *f) {
+float FloatSwap(const float* f)
+{
 	_FloatByteUnion out;
 
 	out.f = *f;
@@ -167,24 +167,24 @@ PARSING
 ============================================================================
 */
 
-static	char	com_token[MAX_TOKEN_CHARS];
+static char com_token[MAX_TOKEN_CHARS];
 
 
-const char* COM_Parse( const char** data_p )
+const char* COM_Parse(const char** data_p)
 {
-	return COM_ParseExt( data_p, qtrue );
+	return COM_ParseExt(data_p, qtrue);
 }
 
 
-static const char* SkipWhitespace( const char* data, qbool* hasNewLines )
+static const char* SkipWhitespace(const char* data, qbool* hasNewLines)
 {
 	int c;
 
-	while( (c = *data) <= ' ') {
-		if( !c ) {
+	while ((c = *data) <= ' ') {
+		if (!c) {
 			return NULL;
 		}
-		if( c == '\n' ) {
+		if (c == '\n') {
 			*hasNewLines = qtrue;
 		}
 		data++;
@@ -194,7 +194,7 @@ static const char* SkipWhitespace( const char* data, qbool* hasNewLines )
 }
 
 
-int COM_Compress( char* p )
+int COM_Compress(char* p)
 {
 	int c;
 	char* in = p;
@@ -207,27 +207,27 @@ int COM_Compress( char* p )
 
 	while (c = *in++) {
 		// skip double slash comments
-		if ( c == '/' && *in == '/' ) {
+		if (c == '/' && *in == '/') {
 			while (*in && *in != '\n')
 				++in;
 
-		// skip /* */ comments (note: id code fails to handle "/*/" properly so we have to get it wrong too)
-		} else if ( c == '/' && *in == '*' ) {
+			// skip /* */ comments (note: id code fails to handle "/*/" properly so we have to get it wrong too)
+		} else if (c == '/' && *in == '*') {
 			while (*in && (*in != '*' || in[1] != '/'))
 				++in;
-			if ( *in )
+			if (*in)
 				in += 2;
 
-		// record when we hit a newline
-		} else if ( c == '\n' || c == '\r' ) {
+			// record when we hit a newline
+		} else if (c == '\n' || c == '\r') {
 			wschar = '\n';
 
-		// record when we hit whitespace
-		} else if ( c == ' ' || c == '\t' ) {
+			// record when we hit whitespace
+		} else if (c == ' ' || c == '\t') {
 			if (!wschar)
 				wschar = ' ';
 
-		// an actual token
+			// an actual token
 		} else {
 			// emit any pending separator
 			if (wschar) {
@@ -254,7 +254,7 @@ int COM_Compress( char* p )
 // parse a token out of a string - will never return NULL, just empty strings
 // if "allowLineBreaks" is true then an empty string will be returned if the next token is a newline
 
-const char* COM_ParseExt( const char** data_p, qbool allowLineBreaks )
+const char* COM_ParseExt(const char** data_p, qbool allowLineBreaks)
 {
 	int c = 0, len = 0;
 	qbool hasNewLines = qfalse;
@@ -263,23 +263,19 @@ const char* COM_ParseExt( const char** data_p, qbool allowLineBreaks )
 	com_token[0] = 0;
 
 	// make sure incoming data is valid
-	if ( !data )
-	{
+	if (!data) {
 		*data_p = NULL;
 		return com_token;
 	}
 
-	while ( 1 )
-	{
+	while (1) {
 		// skip whitespace
-		data = SkipWhitespace( data, &hasNewLines );
-		if ( !data )
-		{
+		data = SkipWhitespace(data, &hasNewLines);
+		if (!data) {
 			*data_p = NULL;
 			return com_token;
 		}
-		if ( hasNewLines && !allowLineBreaks )
-		{
+		if (hasNewLines && !allowLineBreaks) {
 			*data_p = data;
 			return com_token;
 		}
@@ -287,47 +283,37 @@ const char* COM_ParseExt( const char** data_p, qbool allowLineBreaks )
 		c = *data;
 
 		// skip double slash comments
-		if ( c == '/' && data[1] == '/' )
-		{
+		if (c == '/' && data[1] == '/') {
 			data += 2;
 			while (*data && *data != '\n') {
 				data++;
 			}
 		}
 		// skip /* */ comments
-		else if ( c=='/' && data[1] == '*' ) 
-		{
+		else if (c == '/' && data[1] == '*') {
 			data += 2;
-			while ( *data && ( *data != '*' || data[1] != '/' ) ) 
-			{
+			while (*data && (*data != '*' || data[1] != '/')) {
 				data++;
 			}
-			if ( *data ) 
-			{
+			if (*data) {
 				data += 2;
 			}
-		}
-		else
-		{
+		} else {
 			break;
 		}
 	}
 
 	// handle quoted strings
-	if (c == '\"')
-	{
+	if (c == '\"') {
 		data++;
-		while (1)
-		{
+		while (1) {
 			c = *data++;
-			if (c=='\"' || !c)
-			{
+			if (c == '\"' || !c) {
 				com_token[len] = 0;
-				*data_p = ( char * ) data;
+				*data_p = (char*)data;
 				return com_token;
 			}
-			if (len < MAX_TOKEN_CHARS - 1)
-			{
+			if (len < MAX_TOKEN_CHARS - 1) {
 				com_token[len] = c;
 				len++;
 			}
@@ -335,10 +321,8 @@ const char* COM_ParseExt( const char** data_p, qbool allowLineBreaks )
 	}
 
 	// parse a regular word
-	do
-	{
-		if (len < MAX_TOKEN_CHARS - 1)
-		{
+	do {
+		if (len < MAX_TOKEN_CHARS - 1) {
 			com_token[len] = c;
 			len++;
 		}
@@ -358,18 +342,17 @@ The next token should be an open brace.
 Skips until a matching close brace is found.
 Internal brace depths are properly skipped.
 */
-void SkipBracedSection( const char** data )
+void SkipBracedSection(const char** data)
 {
 	int depth = 0;
 	const char* token;
 
 	do {
-		token = COM_ParseExt( data, qtrue );
-		if( token[1] == 0 ) {
-			if( token[0] == '{' ) {
+		token = COM_ParseExt(data, qtrue);
+		if (token[1] == 0) {
+			if (token[0] == '{') {
 				depth++;
-			}
-			else if( token[0] == '}' ) {
+			} else if (token[0] == '}') {
 				depth--;
 			}
 		}
@@ -377,12 +360,12 @@ void SkipBracedSection( const char** data )
 }
 
 
-void SkipRestOfLine( const char** data )
+void SkipRestOfLine(const char** data)
 {
 	int c;
 	const char* p = *data;
 
-	while ( (c = *p++) && (c != '\n') )
+	while ((c = *p++) && (c != '\n'))
 		;
 
 	*data = p;
@@ -397,44 +380,43 @@ void SkipRestOfLine( const char** data )
 ============================================================================
 */
 
-int Q_isprint( int c )
+int Q_isprint(int c)
 {
-	if ( c >= 0x20 && c <= 0x7E )
-		return ( 1 );
-	return ( 0 );
+	if (c >= 0x20 && c <= 0x7E)
+		return (1);
+	return (0);
 }
 
-int Q_islower( int c )
+int Q_islower(int c)
 {
 	if (c >= 'a' && c <= 'z')
-		return ( 1 );
-	return ( 0 );
+		return (1);
+	return (0);
 }
 
-int Q_isupper( int c )
+int Q_isupper(int c)
 {
 	if (c >= 'A' && c <= 'Z')
-		return ( 1 );
-	return ( 0 );
+		return (1);
+	return (0);
 }
 
-int Q_isalpha( int c )
+int Q_isalpha(int c)
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return ( 1 );
-	return ( 0 );
+		return (1);
+	return (0);
 }
 
-char* Q_strrchr( const char* string, int c )
+char* Q_strrchr(const char* string, int c)
 {
 	char cc = c;
-	char *s;
-	char *sp=(char *)0;
+	char* s;
+	char* sp = (char*)0;
 
 	s = (char*)string;
 
-	while (*s)
-	{
+	while (*s) {
 		if (*s == cc)
 			sp = s;
 		s++;
@@ -446,7 +428,7 @@ char* Q_strrchr( const char* string, int c )
 }
 
 
-const char *Q_stristr( const char *s, const char *find )
+const char* Q_stristr(const char* s, const char* find)
 {
 	char c;
 	if ((c = *find++) != 0) {
@@ -473,32 +455,32 @@ const char *Q_stristr( const char *s, const char *find )
 
 // safe strncpy that ensures a trailing zero
 
-void Q_strncpyz( char *dest, const char *src, int destsize )
+void Q_strncpyz(char* dest, const char* src, int destsize)
 {
-	if ( !dest ) {
-		Com_Error( ERR_FATAL, "Q_strncpyz: NULL dest" );
+	if (!dest) {
+		Com_Error(ERR_FATAL, "Q_strncpyz: NULL dest");
 	}
-	if ( !src ) {
-		Com_Error( ERR_FATAL, "Q_strncpyz: NULL src" );
+	if (!src) {
+		Com_Error(ERR_FATAL, "Q_strncpyz: NULL src");
 	}
-	if ( destsize < 1 ) {
-		Com_Error( ERR_FATAL,"Q_strncpyz: destsize < 1" );
+	if (destsize < 1) {
+		Com_Error(ERR_FATAL, "Q_strncpyz: destsize < 1");
 	}
 
-	strncpy( dest, src, destsize-1 );
-	dest[destsize-1] = 0;
+	strncpy(dest, src, destsize - 1);
+	dest[destsize - 1] = 0;
 }
 
-int Q_stricmpn( const char *s1, const char *s2, int n )
+int Q_stricmpn(const char* s1, const char* s2, int n)
 {
-	int		c1, c2;
+	int c1, c2;
 
 	do {
 		c1 = *s1++;
 		c2 = *s2++;
 
 		if (!n--) {
-			return 0;		// strings are equal until end point
+			return 0; // strings are equal until end point
 		}
 
 		if (c1 != c2) {
@@ -514,19 +496,19 @@ int Q_stricmpn( const char *s1, const char *s2, int n )
 		}
 	} while (c1);
 
-	return 0;		// strings are equal
+	return 0; // strings are equal
 }
 
-int Q_strncmp( const char *s1, const char *s2, int n )
+int Q_strncmp(const char* s1, const char* s2, int n)
 {
-	int		c1, c2;
+	int c1, c2;
 
 	do {
 		c1 = *s1++;
 		c2 = *s2++;
 
 		if (!n--) {
-			return 0;		// strings are equal until end point
+			return 0; // strings are equal until end point
 		}
 
 		if (c1 != c2) {
@@ -534,29 +516,29 @@ int Q_strncmp( const char *s1, const char *s2, int n )
 		}
 	} while (c1);
 
-	return 0;		// strings are equal
+	return 0; // strings are equal
 }
 
-int Q_stricmp( const char *s1, const char *s2 )
+int Q_stricmp(const char* s1, const char* s2)
 {
-	return (s1 && s2) ? Q_stricmpn (s1, s2, 99999) : -1;
+	return (s1 && s2) ? Q_stricmpn(s1, s2, 99999) : -1;
 }
 
 
-char *Q_strlwr( char *s1 )
+char* Q_strlwr(char* s1)
 {
 	char* s = s1;
-	while ( *s ) {
+	while (*s) {
 		*s = tolower(*s);
 		s++;
 	}
 	return s1;
 }
 
-char *Q_strupr( char *s1 )
+char* Q_strupr(char* s1)
 {
 	char* s = s1;
-	while ( *s ) {
+	while (*s) {
 		*s = toupper(*s);
 		s++;
 	}
@@ -565,19 +547,19 @@ char *Q_strupr( char *s1 )
 
 
 // never goes past bounds or leaves without a terminating 0
-void Q_strcat( char *dest, int size, const char *src )
+void Q_strcat(char* dest, int size, const char* src)
 {
-	int		l1;
+	int l1;
 
-	l1 = strlen( dest );
-	if ( l1 >= size ) {
-		Com_Error( ERR_FATAL, "Q_strcat: already overflowed" );
+	l1 = strlen(dest);
+	if (l1 >= size) {
+		Com_Error(ERR_FATAL, "Q_strcat: already overflowed");
 	}
-	Q_strncpyz( dest + l1, src, size - l1 );
+	Q_strncpyz(dest + l1, src, size - l1);
 }
 
 
-int Q_PrintStrlen( const char *string )
+int Q_PrintStrlen(const char* string)
 {
 	int len = 0;
 	const char* p = string;
@@ -585,8 +567,8 @@ int Q_PrintStrlen( const char *string )
 	if (!p)
 		return 0;
 
-	while ( *p ) {
-		if( Q_IsColorString( p ) ) {
+	while (*p) {
+		if (Q_IsColorString(p)) {
 			p += 2;
 			continue;
 		}
@@ -598,7 +580,7 @@ int Q_PrintStrlen( const char *string )
 }
 
 
-int Q_PrintStroff( const char *string, int charOffset )
+int Q_PrintStroff(const char* string, int charOffset)
 {
 	int len = 0;
 	const char* p = string;
@@ -606,8 +588,8 @@ int Q_PrintStroff( const char *string, int charOffset )
 	if (!p)
 		return 0;
 
-	while ( *p && len < charOffset ) {
-		if( Q_IsColorString( p ) ) {
+	while (*p && len < charOffset) {
+		if (Q_IsColorString(p)) {
 			p += 2;
 			continue;
 		}
@@ -619,18 +601,18 @@ int Q_PrintStroff( const char *string, int charOffset )
 }
 
 
-char *Q_CleanStr( char *string ) {
-	char*	d;
-	char*	s;
-	int		c;
+char* Q_CleanStr(char* string)
+{
+	char* d;
+	char* s;
+	int c;
 
 	s = string;
 	d = string;
-	while ((c = *s) != 0 ) {
-		if ( Q_IsColorString( s ) ) {
+	while ((c = *s) != 0) {
+		if (Q_IsColorString(s)) {
 			s++;
-		}		
-		else if ( c >= 0x20 && c <= 0x7E ) {
+		} else if (c >= 0x20 && c <= 0x7E) {
 			*d++ = c;
 		}
 		s++;
@@ -641,25 +623,26 @@ char *Q_CleanStr( char *string ) {
 }
 
 
-void QDECL Com_sprintf( char *dest, int size, const char *fmt, ...) {
-	int		len;
-	va_list		argptr;
-	char	bigbuffer[32000];	// big, but small enough to fit in PPC stack
+void QDECL Com_sprintf(char* dest, int size, const char* fmt, ...)
+{
+	int len;
+	va_list argptr;
+	char bigbuffer[32000]; // big, but small enough to fit in PPC stack
 
-	va_start (argptr,fmt);
-	len = vsprintf (bigbuffer,fmt,argptr);
-	va_end (argptr);
-	if ( len >= sizeof( bigbuffer ) ) {
-		Com_Error( ERR_FATAL, "Com_sprintf: overflowed bigbuffer" );
+	va_start(argptr, fmt);
+	len = vsprintf(bigbuffer, fmt, argptr);
+	va_end(argptr);
+	if (len >= sizeof(bigbuffer)) {
+		Com_Error(ERR_FATAL, "Com_sprintf: overflowed bigbuffer");
 	}
 	// don't spam overflow warnings to end-users, especially since it's a perfectly normal
 	// thing to happen with command and cvar auto-completion
 #if defined(_DEBUG) || defined(DEBUG)
 	if (len >= size) {
-		Com_Printf ("Com_sprintf: overflow of %i in %i\n", len, size);
+		Com_Printf("Com_sprintf: overflow of %i in %i\n", len, size);
 	}
 #endif
-	Q_strncpyz (dest, bigbuffer, size );
+	Q_strncpyz(dest, bigbuffer, size);
 }
 
 
@@ -670,16 +653,16 @@ varargs versions of all text functions.
 FIXME: make this buffer size safe someday
 ============
 */
-const char* QDECL va( const char* format, ... )
+const char* QDECL va(const char* format, ...)
 {
-	static char string[2][32000];	// in case va is called by nested functions
+	static char string[2][32000]; // in case va is called by nested functions
 	static int index = 0;
 	char* buf = string[index++ & 1];
 	va_list argptr;
 
-	va_start( argptr, format );
-	vsprintf( buf, format, argptr );
-	va_end( argptr );
+	va_start(argptr, format);
+	vsprintf(buf, format, argptr);
+	va_end(argptr);
 
 	return buf;
 }
@@ -696,11 +679,11 @@ const char* QDECL va( const char* format, ... )
 
 // some characters are illegal in info strings because they can mess up the server's parsing
 
-qbool Info_Validate( const char* s )
+qbool Info_Validate(const char* s)
 {
-	if ( strchr( s, '\"' ) )
+	if (strchr(s, '\"'))
 		return qfalse;
-	if ( strchr( s, ';' ) )
+	if (strchr(s, ';'))
 		return qfalse;
 	return qtrue;
 }
@@ -713,30 +696,28 @@ Searches the string for the given key and returns the associated value, or an em
 FIXME: overflow check?
 ===============
 */
-const char* Info_ValueForKey( const char *s, const char *key )
+const char* Info_ValueForKey(const char* s, const char* key)
 {
-	char	pkey[BIG_INFO_KEY];
-	static	char value[2][BIG_INFO_VALUE];	// use two buffers so compares
-											// work without stomping on each other
-	static	int	valueindex = 0;
-	char	*o;
+	char pkey[BIG_INFO_KEY];
+	static char value[2][BIG_INFO_VALUE]; // use two buffers so compares
+	                                      // work without stomping on each other
+	static int valueindex = 0;
+	char* o;
 
-	if ( !s || !key ) {
+	if (!s || !key) {
 		return "";
 	}
 
-	if ( strlen( s ) >= BIG_INFO_STRING ) {
-		Com_Error( ERR_DROP, "Info_ValueForKey: oversize infostring" );
+	if (strlen(s) >= BIG_INFO_STRING) {
+		Com_Error(ERR_DROP, "Info_ValueForKey: oversize infostring");
 	}
 
 	valueindex ^= 1;
 	if (*s == '\\')
 		s++;
-	while (1)
-	{
+	while (1) {
 		o = pkey;
-		while (*s != '\\')
-		{
+		while (*s != '\\') {
 			if (!*s)
 				return "";
 			*o++ = *s++;
@@ -746,8 +727,7 @@ const char* Info_ValueForKey( const char *s, const char *key )
 
 		o = value[valueindex];
 
-		while (*s != '\\' && *s)
-		{
+		while (*s != '\\' && *s) {
 			*o++ = *s++;
 		}
 		*o = 0;
@@ -771,21 +751,22 @@ Info_NextPair
 Used to iterate through all the key/value pairs in an info string
 ===================
 */
-void Info_NextPair( const char **head, char *key, char *value ) {
-	char	*o;
-	const char	*s;
+void Info_NextPair(const char** head, char* key, char* value)
+{
+	char* o;
+	const char* s;
 
 	s = *head;
 
-	if ( *s == '\\' ) {
+	if (*s == '\\') {
 		s++;
 	}
 	key[0] = 0;
 	value[0] = 0;
 
 	o = key;
-	while ( *s != '\\' ) {
-		if ( !*s ) {
+	while (*s != '\\') {
+		if (!*s) {
 			*o = 0;
 			*head = s;
 			return;
@@ -796,7 +777,7 @@ void Info_NextPair( const char **head, char *key, char *value ) {
 	s++;
 
 	o = value;
-	while ( *s != '\\' && *s ) {
+	while (*s != '\\' && *s) {
 		*o++ = *s++;
 	}
 	*o = 0;
@@ -810,28 +791,27 @@ void Info_NextPair( const char **head, char *key, char *value ) {
 Info_RemoveKey
 ===================
 */
-void Info_RemoveKey( char *s, const char *key ) {
-	char	*start;
-	char	pkey[MAX_INFO_KEY];
-	char	value[MAX_INFO_VALUE];
-	char	*o;
+void Info_RemoveKey(char* s, const char* key)
+{
+	char* start;
+	char pkey[MAX_INFO_KEY];
+	char value[MAX_INFO_VALUE];
+	char* o;
 
-	if ( strlen( s ) >= MAX_INFO_STRING ) {
-		Com_Error( ERR_DROP, "Info_RemoveKey: oversize infostring" );
+	if (strlen(s) >= MAX_INFO_STRING) {
+		Com_Error(ERR_DROP, "Info_RemoveKey: oversize infostring");
 	}
 
-	if (strchr (key, '\\')) {
+	if (strchr(key, '\\')) {
 		return;
 	}
 
-	while (1)
-	{
+	while (1) {
 		start = s;
 		if (*s == '\\')
 			s++;
 		o = pkey;
-		while (*s != '\\')
-		{
+		while (*s != '\\') {
 			if (!*s)
 				return;
 			*o++ = *s++;
@@ -840,24 +820,21 @@ void Info_RemoveKey( char *s, const char *key ) {
 		s++;
 
 		o = value;
-		while (*s != '\\' && *s)
-		{
+		while (*s != '\\' && *s) {
 			if (!*s)
 				return;
 			*o++ = *s++;
 		}
 		*o = 0;
 
-		if (!strcmp (key, pkey) )
-		{
-			strcpy (start, s);	// remove this part
+		if (!strcmp(key, pkey)) {
+			strcpy(start, s); // remove this part
 			return;
 		}
 
 		if (!*s)
 			return;
 	}
-
 }
 
 /*
@@ -865,28 +842,27 @@ void Info_RemoveKey( char *s, const char *key ) {
 Info_RemoveKey_Big
 ===================
 */
-void Info_RemoveKey_Big( char *s, const char *key ) {
-	char	*start;
-	char	pkey[BIG_INFO_KEY];
-	char	value[BIG_INFO_VALUE];
-	char	*o;
+void Info_RemoveKey_Big(char* s, const char* key)
+{
+	char* start;
+	char pkey[BIG_INFO_KEY];
+	char value[BIG_INFO_VALUE];
+	char* o;
 
-	if ( strlen( s ) >= BIG_INFO_STRING ) {
-		Com_Error( ERR_DROP, "Info_RemoveKey_Big: oversize infostring" );
+	if (strlen(s) >= BIG_INFO_STRING) {
+		Com_Error(ERR_DROP, "Info_RemoveKey_Big: oversize infostring");
 	}
 
-	if (strchr (key, '\\')) {
+	if (strchr(key, '\\')) {
 		return;
 	}
 
-	while (1)
-	{
+	while (1) {
 		start = s;
 		if (*s == '\\')
 			s++;
 		o = pkey;
-		while (*s != '\\')
-		{
+		while (*s != '\\') {
 			if (!*s)
 				return;
 			*o++ = *s++;
@@ -895,68 +871,61 @@ void Info_RemoveKey_Big( char *s, const char *key ) {
 		s++;
 
 		o = value;
-		while (*s != '\\' && *s)
-		{
+		while (*s != '\\' && *s) {
 			if (!*s)
 				return;
 			*o++ = *s++;
 		}
 		*o = 0;
 
-		if (!strcmp (key, pkey) )
-		{
-			strcpy (start, s);	// remove this part
+		if (!strcmp(key, pkey)) {
+			strcpy(start, s); // remove this part
 			return;
 		}
 
 		if (!*s)
 			return;
 	}
-
 }
 
 
 // changes or adds a key/value pair
 
-qbool Info_SetValueForKey( char* s, const char* key, const char* value )
+qbool Info_SetValueForKey(char* s, const char* key, const char* value)
 {
 	char newi[MAX_INFO_STRING];
 
-	if ( strlen( s ) >= MAX_INFO_STRING ) {
-		Com_Error( ERR_DROP, "Info_SetValueForKey: oversize infostring" );
+	if (strlen(s) >= MAX_INFO_STRING) {
+		Com_Error(ERR_DROP, "Info_SetValueForKey: oversize infostring");
 	}
 
-	if (strchr(key, '\\') || strchr(value, '\\'))
-	{
-		Com_Printf( "Can't use keys or values with a \\\n" );
+	if (strchr(key, '\\') || strchr(value, '\\')) {
+		Com_Printf("Can't use keys or values with a \\\n");
 		return qfalse;
 	}
 
-	if (strchr(key, ';') || strchr(value, ';'))
-	{
-		Com_Printf( "Can't use keys or values with a semicolon\n" );
+	if (strchr(key, ';') || strchr(value, ';')) {
+		Com_Printf("Can't use keys or values with a semicolon\n");
 		return qfalse;
 	}
 
-	if (strchr(key, '\"') || strchr(value, '\"'))
-	{
-		Com_Printf( "Can't use keys or values with a \"\n" );
+	if (strchr(key, '\"') || strchr(value, '\"')) {
+		Com_Printf("Can't use keys or values with a \"\n");
 		return qfalse;
 	}
 
-	Info_RemoveKey( s, key );
+	Info_RemoveKey(s, key);
 	if (!value || !value[0])
 		return qtrue;
 
-	Com_sprintf( newi, sizeof(newi), "\\%s\\%s", key, value );
+	Com_sprintf(newi, sizeof(newi), "\\%s\\%s", key, value);
 
-	if (strlen(newi) + strlen(s) >= MAX_INFO_STRING)
-	{
-		Com_Printf( "Info string length exceeded\n" );
+	if (strlen(newi) + strlen(s) >= MAX_INFO_STRING) {
+		Com_Printf("Info string length exceeded\n");
 		return qfalse;
 	}
 
-	strcat( s, newi );
+	strcat(s, newi);
 	return qtrue;
 }
 
@@ -968,44 +937,41 @@ Info_SetValueForKey_Big
 Changes or adds a key/value pair
 ==================
 */
-void Info_SetValueForKey_Big( char *s, const char *key, const char *value ) {
-	char	newi[BIG_INFO_STRING];
+void Info_SetValueForKey_Big(char* s, const char* key, const char* value)
+{
+	char newi[BIG_INFO_STRING];
 
-	if ( strlen( s ) >= BIG_INFO_STRING ) {
-		Com_Error( ERR_DROP, "Info_SetValueForKey: oversize infostring" );
+	if (strlen(s) >= BIG_INFO_STRING) {
+		Com_Error(ERR_DROP, "Info_SetValueForKey: oversize infostring");
 	}
 
-	if (strchr (key, '\\') || strchr (value, '\\'))
-	{
-		Com_Printf ("Can't use keys or values with a \\\n");
+	if (strchr(key, '\\') || strchr(value, '\\')) {
+		Com_Printf("Can't use keys or values with a \\\n");
 		return;
 	}
 
-	if (strchr (key, ';') || strchr (value, ';'))
-	{
-		Com_Printf ("Can't use keys or values with a semicolon\n");
+	if (strchr(key, ';') || strchr(value, ';')) {
+		Com_Printf("Can't use keys or values with a semicolon\n");
 		return;
 	}
 
-	if (strchr (key, '\"') || strchr (value, '\"'))
-	{
-		Com_Printf ("Can't use keys or values with a \"\n");
+	if (strchr(key, '\"') || strchr(value, '\"')) {
+		Com_Printf("Can't use keys or values with a \"\n");
 		return;
 	}
 
-	Info_RemoveKey_Big (s, key);
+	Info_RemoveKey_Big(s, key);
 	if (!value || !value[0])
 		return;
 
-	Com_sprintf (newi, sizeof(newi), "\\%s\\%s", key, value);
+	Com_sprintf(newi, sizeof(newi), "\\%s\\%s", key, value);
 
-	if (strlen(newi) + strlen(s) >= BIG_INFO_STRING)
-	{
-		Com_Printf ("BIG Info string length exceeded\n");
+	if (strlen(newi) + strlen(s) >= BIG_INFO_STRING) {
+		Com_Printf("BIG Info string length exceeded\n");
 		return;
 	}
 
-	strcat (s, newi);
+	strcat(s, newi);
 }
 
 

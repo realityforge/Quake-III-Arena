@@ -7,8 +7,8 @@
 #if defined(_WIN32_WINNT)
 #undef _WIN32_WINNT
 #endif
-#define WINVER			_WIN32_WINNT_VISTA  
-#define _WIN32_WINNT	_WIN32_WINNT_VISTA
+#define WINVER       _WIN32_WINNT_VISTA
+#define _WIN32_WINNT _WIN32_WINNT_VISTA
 
 #if defined(UNICODE)
 #undef UNICODE

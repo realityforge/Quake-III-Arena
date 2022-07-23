@@ -29,29 +29,29 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #endif
 
 
-void		Lin_HardRebootHandler( int argc, char** argv );
-void		Lin_TrackParentProcess();
-void		Lin_QueEvent( int time, sysEventType_t type, int value, int value2, int ptrLength, void *ptr );
-void		Lin_ConsoleInputInit();
-void		Lin_ConsoleInputShutdown();
-const char*	Lin_ConsoleInput();
+void Lin_HardRebootHandler(int argc, char** argv);
+void Lin_TrackParentProcess();
+void Lin_QueEvent(int time, sysEventType_t type, int value, int value2, int ptrLength, void* ptr);
+void Lin_ConsoleInputInit();
+void Lin_ConsoleInputShutdown();
+const char* Lin_ConsoleInput();
 
-qbool		tty_Enabled();
-void		tty_Hide();
-history_t*	tty_GetHistory();
+qbool tty_Enabled();
+void tty_Hide();
+history_t* tty_GetHistory();
 
 #ifndef DEDICATED
-qbool	sdl_Init();
-void	sdl_InitCvarsAndCmds();
-void	sdl_PollEvents();
-void	sdl_Frame(); // polling AND dealing with state changes (e.g. input grab)
-void	sdl_UpdateMonitorIndexFromWindow();
-void	sdl_MuteAudio( qbool mute );
+qbool sdl_Init();
+void sdl_InitCvarsAndCmds();
+void sdl_PollEvents();
+void sdl_Frame(); // polling AND dealing with state changes (e.g. input grab)
+void sdl_UpdateMonitorIndexFromWindow();
+void sdl_MuteAudio(qbool mute);
 #endif
 
-void	SIG_InitChild();
-void	SIG_InitParent();
-void	SIG_Frame();
+void SIG_InitChild();
+void SIG_InitParent();
+void SIG_Frame();
 
-extern int		q_argc;
-extern char**	q_argv;
+extern int q_argc;
+extern char** q_argv;

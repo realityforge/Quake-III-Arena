@@ -22,13 +22,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "q_shared.h"
 #include "qcommon.h"
 
-#define	MAX_OPSTACK_SIZE	512
-#define	PROC_OPSTACK_SIZE	30
+#define MAX_OPSTACK_SIZE  512
+#define PROC_OPSTACK_SIZE 30
 
-#define VMMAIN_CALL_ARGS	13
+#define VMMAIN_CALL_ARGS 13
 
 // hardcoded in q3asm and reserved at end of bss
-#define	PROGRAM_STACK_SIZE	0x10000
+#define PROGRAM_STACK_SIZE 0x10000
 
 typedef enum {
 	OP_UNDEF,
@@ -78,7 +78,7 @@ typedef enum {
 	OP_LOAD4,
 	OP_STORE1,
 	OP_STORE2,
-	OP_STORE4,				// *(stack[top-1]) = stack[top]
+	OP_STORE4, // *(stack[top-1]) = stack[top]
 	OP_ARG,
 
 	OP_BLOCK_COPY,
@@ -131,26 +131,26 @@ typedef enum {
 } macro_op_t;
 
 typedef struct {
-	int		value;
-	byte	op;
-	byte	opStack;
-	byte	jused;	// boolean
-	byte	swtch;	// boolean
+	int value;
+	byte op;
+	byte opStack;
+	byte jused; // boolean
+	byte swtch; // boolean
 } instruction_t;
 
-extern const char *opname[OP_MAX]; 
+extern const char* opname[OP_MAX];
 
-typedef int	vmptr_t;
+typedef int vmptr_t;
 
 typedef struct vmSymbol_s {
-	struct vmSymbol_s	*next;
-	int		symValue;
-	int		profileCount;
-	char	symName[1];		// variable sized
+	struct vmSymbol_s* next;
+	int symValue;
+	int profileCount;
+	char symName[1]; // variable sized
 } vmSymbol_t;
 
 typedef union vmFunc_u {
-	byte		*ptr;
+	byte* ptr;
 	void (*func)(void);
 } vmFunc_t;
 
@@ -159,88 +159,88 @@ typedef union vmFunc_u {
 struct vm_s {
 	// DO NOT MOVE OR CHANGE THESE WITHOUT CHANGING THE VM_OFFSET_* DEFINES
 	// USED BY THE ASM CODE
-	int			programStack;		// the vm may be recursively entered
-    syscall_t	systemCall;
-	byte		*dataBase;
-	int			*opStack;			// pointer to local function stack
+	int programStack; // the vm may be recursively entered
+	syscall_t systemCall;
+	byte* dataBase;
+	int* opStack; // pointer to local function stack
 
-	int			instructionCount;
-	intptr_t	*instructionPointers;
+	int instructionCount;
+	intptr_t* instructionPointers;
 
 	//------------------------------------
 
-	const char	*name;
+	const char* name;
 
 	// for dynamic linked modules
-	void		*dllHandle;
+	void* dllHandle;
 	dllSyscall_t entryPoint;
-	void		(*destroy)(vm_t* self);
+	void (*destroy)(vm_t* self);
 
 	// for interpreted modules
-	qboolean	currentlyInterpreting;
+	qboolean currentlyInterpreting;
 
-	qboolean	compiled;
+	qboolean compiled;
 
-	vmFunc_t	codeBase;
-	int			codeLength;
+	vmFunc_t codeBase;
+	int codeLength;
 
-	int			allocSize;			// total allocation size, in bytes
+	int allocSize; // total allocation size, in bytes
 
-	int			dataMask;
-	int			dataLength;			// exact data segment length
+	int dataMask;
+	int dataLength; // exact data segment length
 
-	int			stackBottom;		// if programStack < stackBottom, error
-	int			*opStackTop;		
+	int stackBottom; // if programStack < stackBottom, error
+	int* opStackTop;
 
-	int			numSymbols;
-	vmSymbol_t	*symbols;
+	int numSymbols;
+	vmSymbol_t* symbols;
 
-	int			callLevel;			// counts recursive VM_Call
-	int			breakFunction;		// increment breakCount on function entry to this
-	int			breakCount;
+	int callLevel;     // counts recursive VM_Call
+	int breakFunction; // increment breakCount on function entry to this
+	int breakCount;
 
-	byte		*jumpTableTargets;
-	int			numJumpTableTargets;
+	byte* jumpTableTargets;
+	int numJumpTableTargets;
 
-	vmIndex_t	index;
+	vmIndex_t index;
 
-	int			callStackDepth;
-	int			lastCallStackDepth;
-	int			callStackDepthTemp; // only for vm_x86.cpp
-	int			callStack[MAX_VM_CALL_STACK_DEPTH];
+	int callStackDepth;
+	int lastCallStackDepth;
+	int callStackDepthTemp; // only for vm_x86.cpp
+	int callStack[MAX_VM_CALL_STACK_DEPTH];
 };
 
-extern	vm_t	*currentVM;
+extern vm_t* currentVM;
 
-#define	VM_MAGIC		0x12721444
+#define VM_MAGIC 0x12721444
 typedef struct {
-	int		vmMagic;
+	int vmMagic;
 
-	int		instructionCount;
+	int instructionCount;
 
-	int		codeOffset;
-	int		codeLength;
+	int codeOffset;
+	int codeLength;
 
-	int		dataOffset;
-	int		dataLength;
-	int		litLength;			// ( dataLength - litLength ) should be byteswapped on load
-	int		bssLength;			// zero filled memory appended to datalength
+	int dataOffset;
+	int dataLength;
+	int litLength; // ( dataLength - litLength ) should be byteswapped on load
+	int bssLength; // zero filled memory appended to datalength
 } vmHeader_t;
 
-qboolean VM_Compile( vm_t *vm, vmHeader_t *header );
-int	VM_CallCompiled( vm_t *vm, int *args );
+qboolean VM_Compile(vm_t* vm, vmHeader_t* header);
+int VM_CallCompiled(vm_t* vm, int* args);
 
-qboolean VM_PrepareInterpreter2( vm_t *vm, vmHeader_t *header );
-int	VM_CallInterpreted2( vm_t *vm, int *args );
+qboolean VM_PrepareInterpreter2(vm_t* vm, vmHeader_t* header);
+int VM_CallInterpreted2(vm_t* vm, int* args);
 
-const char *VM_LoadInstructions( const vmHeader_t *header, instruction_t *buf );
-const char *VM_CheckInstructions( instruction_t *buf, int instructionCount, 
-								 const byte *jumpTableTargets, 
-								 int numJumpTableTargets, 
-								 int dataLength );
+const char* VM_LoadInstructions(const vmHeader_t* header, instruction_t* buf);
+const char* VM_CheckInstructions(instruction_t* buf, int instructionCount,
+                                 const byte* jumpTableTargets,
+                                 int numJumpTableTargets,
+                                 int dataLength);
 
-intptr_t VM_ArgPtr( intptr_t intValue );
-intptr_t VM_ExplicitArgPtr( const vm_t* vm, intptr_t intValue );
+intptr_t VM_ArgPtr(intptr_t intValue);
+intptr_t VM_ExplicitArgPtr(const vm_t* vm, intptr_t intValue);
 
 static ID_INLINE float _vmf(intptr_t x)
 {
@@ -253,15 +253,13 @@ static ID_INLINE float _vmf(intptr_t x)
 }
 #define VMF(x) _vmf(args[x])
 
-#define VM_OF_JUMP	(1<<0)
+#define VM_OF_JUMP (1 << 0)
 
-typedef struct opcode_info_s 
-{
-	int   size; 
-	int	  stack;
-	int   nargs;
-	int   flags;
-} opcode_info_t ;
+typedef struct opcode_info_s {
+	int size;
+	int stack;
+	int nargs;
+	int flags;
+} opcode_info_t;
 
-extern opcode_info_t ops[ OP_MAX ];
-
+extern opcode_info_t ops[OP_MAX];

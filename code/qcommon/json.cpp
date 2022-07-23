@@ -24,10 +24,10 @@ along with Challenge Quake 3. If not, see <https://www.gnu.org/licenses/>.
 
 
 #if defined(_MSC_VER)
-typedef unsigned __int8  u8;
+typedef unsigned __int8 u8;
 typedef unsigned __int32 u32;
 #else
-typedef uint8_t  u8;
+typedef uint8_t u8;
 typedef uint32_t u32;
 #endif
 
@@ -60,7 +60,7 @@ static qbool UTF8_NextCodePoint(u32* codePoint, u32* byteCount, const char* inpu
 		*byteCount = 3;
 		return qtrue;
 	}
-	
+
 	// Starts with 11110?
 	if ((byte0 >> 3) == 30) {
 		const u8 byte1 = (u8)input[1];
@@ -70,7 +70,7 @@ static qbool UTF8_NextCodePoint(u32* codePoint, u32* byteCount, const char* inpu
 		*byteCount = 4;
 		return qtrue;
 	}
-	
+
 	return qfalse;
 }
 
@@ -79,7 +79,10 @@ typedef struct {
 	char OutputChar;
 } ShortEscape;
 
-#define ENTRY(HexValue, Char) { 0x##HexValue, Char }
+#define ENTRY(HexValue, Char) \
+	{                         \
+		0x##HexValue, Char    \
+	}
 static const ShortEscape ShortEscapeCodePoints[] = {
 	ENTRY(0022, '"'),
 	ENTRY(005C, '\\'),
@@ -230,7 +233,7 @@ void JSONW_BeginFile(FILE* file)
 {
 	memset(&writer, 0, sizeof(writer));
 	writer.file = file;
-	
+
 	JSONW_Write("{");
 	++writer.level;
 }

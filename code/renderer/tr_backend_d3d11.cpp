@@ -32,23 +32,23 @@ along with Challenge Quake 3. If not, see <https://www.gnu.org/licenses/>.
 
 #pragma region Windows 10 SDK
 
-	#if !defined(__dxgicommon_h__)
-		enum DXGI_COLOR_SPACE_TYPE;
-	#endif
-	#include "dxgi/dxgi1_4.h"
-	#include "dxgi/dxgi1_5.h"
+#if !defined(__dxgicommon_h__)
+enum DXGI_COLOR_SPACE_TYPE;
+#endif
+#include "dxgi/dxgi1_4.h"
+#include "dxgi/dxgi1_5.h"
 
-	#if !defined(DXGI_PRESENT_ALLOW_TEARING)
-		#define DXGI_PRESENT_ALLOW_TEARING 0x00000200UL
-	#endif
+#if !defined(DXGI_PRESENT_ALLOW_TEARING)
+#define DXGI_PRESENT_ALLOW_TEARING 0x00000200UL
+#endif
 
-	#if !defined(DXGI_SWAP_EFFECT_FLIP_DISCARD)
-		#define DXGI_SWAP_EFFECT_FLIP_DISCARD ((DXGI_SWAP_EFFECT)4)
-	#endif
+#if !defined(DXGI_SWAP_EFFECT_FLIP_DISCARD)
+#define DXGI_SWAP_EFFECT_FLIP_DISCARD ((DXGI_SWAP_EFFECT)4)
+#endif
 
-	#if !defined(DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING)
-		#define DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING ((DXGI_SWAP_CHAIN_FLAG)2048)
-	#endif
+#if !defined(DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING)
+#define DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING ((DXGI_SWAP_CHAIN_FLAG)2048)
+#endif
 
 #pragma endregion
 
@@ -69,15 +69,13 @@ along with Challenge Quake 3. If not, see <https://www.gnu.org/licenses/>.
 #include "hlsl/mip_pass_cs.h"
 #include "hlsl/mip_end_cs.h"
 
-struct ShaderDesc
-{
+struct ShaderDesc {
 	const void* code;
 	size_t size;
 	const char* name;
 };
 
-static ShaderDesc genericPixelShaders[4] = 
-{
+static ShaderDesc genericPixelShaders[4] = {
 	{ g_generic_ps, ARRAY_LEN(g_generic_ps), "generic pixel shader" },
 	{ g_generic_a_ps, ARRAY_LEN(g_generic_a_ps), "generic A2C pixel shader" },
 	{ g_generic_d_ps, ARRAY_LEN(g_generic_d_ps), "generic dithered pixel shader" },
@@ -85,15 +83,15 @@ static ShaderDesc genericPixelShaders[4] =
 };
 
 #if defined(near)
-#	undef near
+#undef near
 #endif
 
 #if defined(far)
-#	undef far
+#undef far
 #endif
 
 #if !defined(D3DDDIERR_DEVICEREMOVED)
-#	define D3DDDIERR_DEVICEREMOVED ((HRESULT)0x88760870L)
+#define D3DDDIERR_DEVICEREMOVED ((HRESULT)0x88760870L)
 #endif
 
 #define MAX_GPU_TEXTURE_SIZE 2048 // instead of D3D11_REQ_TEXTURE2D_U_OR_V_DIMENSION
@@ -116,16 +114,14 @@ Known issues:
 */
 
 
-enum AlphaTest
-{
+enum AlphaTest {
 	AT_ALWAYS,
 	AT_GREATER_THAN_0,
 	AT_LESS_THAN_HALF,
 	AT_GREATER_OR_EQUAL_TO_HALF
 };
 
-enum PipelineId
-{
+enum PipelineId {
 	PID_GENERIC,
 	PID_SOFT_SPRITE,
 	PID_DYNAMIC_LIGHT,
@@ -135,14 +131,12 @@ enum PipelineId
 	PID_COUNT
 };
 
-enum ErrorMode
-{
+enum ErrorMode {
 	EM_FATAL,
 	EM_SILENT
 };
 
-enum VertexBufferId
-{
+enum VertexBufferId {
 	VB_POSITION,
 	VB_NORMAL,
 	VB_TEXCOORD,
@@ -151,16 +145,14 @@ enum VertexBufferId
 	VB_COUNT
 };
 
-enum TextureMode
-{
+enum TextureMode {
 	TM_BILINEAR,
 	TM_ANISOTROPIC,
 	TM_NEAREST,
 	TM_COUNT
 };
 
-enum DepthFunc
-{
+enum DepthFunc {
 	DF_LEQUAL,
 	DF_EQUAL,
 	DF_ALWAYS,
@@ -170,17 +162,15 @@ enum DepthFunc
 // @NOTE: MSDN says "you must set the ByteWidth value of D3D11_BUFFER_DESC in multiples of 16"
 #pragma pack(push, 16)
 
-struct GenericVSData
-{
+struct GenericVSData {
 	float modelViewMatrix[16];
 	float projectionMatrix[16];
 	float clipPlane[4];
 };
 
-struct GenericPSData
-{
+struct GenericPSData {
 	uint32_t alphaTest; // AlphaTest enum
-	uint32_t texEnv; // texEnv_t enum
+	uint32_t texEnv;    // texEnv_t enum
 	float seed;
 	float greyscale;
 	float invGamma;
@@ -189,15 +179,13 @@ struct GenericPSData
 	float alphaBoost;
 };
 
-struct DepthFadeVSData
-{
+struct DepthFadeVSData {
 	float modelViewMatrix[16];
 	float projectionMatrix[16];
 	float clipPlane[4];
 };
 
-struct DepthFadePSData
-{
+struct DepthFadePSData {
 	uint32_t alphaTest; // AlphaTest enum
 	float distance;
 	float offset;
@@ -206,8 +194,7 @@ struct DepthFadePSData
 	float bias[4];
 };
 
-struct DynamicLightVSData
-{
+struct DynamicLightVSData {
 	float modelViewMatrix[16];
 	float projectionMatrix[16];
 	float clipPlane[4];
@@ -215,8 +202,7 @@ struct DynamicLightVSData
 	float osEyePos[4];
 };
 
-struct DynamicLightPSData
-{
+struct DynamicLightPSData {
 	float lightColor[3];
 	float lightRadius;
 	float opaque;
@@ -225,28 +211,24 @@ struct DynamicLightPSData
 	float dummy;
 };
 
-struct PostVSData
-{
+struct PostVSData {
 	float scaleX;
 	float scaleY;
 	float dummy[2];
 };
 
-struct PostPSData
-{
+struct PostPSData {
 	float gamma;
 	float brightness;
 	float greyscale;
 	float dummy;
 };
 
-struct ClearPSData
-{
+struct ClearPSData {
 	float color[4];
 };
 
-struct Down4CSData
-{
+struct Down4CSData {
 	float weights[4];
 	uint32_t maxSize[2];
 	uint32_t scale[2];
@@ -255,46 +237,40 @@ struct Down4CSData
 	uint32_t dummy;
 };
 
-struct LinearToGammaCSData
-{
+struct LinearToGammaCSData {
 	float blendColor[4];
 	float intensity;
 	float invGamma;
 	float dummy[2];
 };
 
-struct GammaToLinearCSData
-{
+struct GammaToLinearCSData {
 	float gamma;
 	float dummy[3];
 };
 
 #pragma pack(pop)
 
-struct Texture
-{
+struct Texture {
 	ID3D11Texture2D* texture;
 	ID3D11ShaderResourceView* view;
 };
 
-struct Pipeline
-{
+struct Pipeline {
 	ID3D11VertexShader* vertexShader;
 	ID3D11PixelShader* pixelShader;
 	ID3D11InputLayout* inputLayout; // can be NULL
-	ID3D11Buffer* vertexBuffer; // can be NULL
-	ID3D11Buffer* pixelBuffer; // can be NULL
+	ID3D11Buffer* vertexBuffer;     // can be NULL
+	ID3D11Buffer* pixelBuffer;      // can be NULL
 };
 
-struct MipGenTexture
-{
+struct MipGenTexture {
 	ID3D11Texture2D* texture;
 	ID3D11ShaderResourceView* srv;
 	ID3D11UnorderedAccessView* uav;
 };
 
-struct VertexBuffer
-{
+struct VertexBuffer {
 	ID3D11Buffer* buffer;
 	int itemSize;
 	int capacity;
@@ -303,24 +279,21 @@ struct VertexBuffer
 	qbool discard;
 };
 
-struct AdapterInfo
-{
+struct AdapterInfo {
 	qbool valid;
 	int dedicatedSystemMemoryMB;
 	int dedicatedVideoMemoryMB;
 	int sharedSystemMemoryMB;
 };
 
-struct FrameQueries
-{
+struct FrameQueries {
 	ID3D11Query* disjoint;
 	ID3D11Query* frameStart;
 	ID3D11Query* frameEnd;
 	qbool valid;
 };
 
-struct Direct3D
-{
+struct Direct3D {
 	// constant buffer data
 	PostVSData postVSData;
 	PostPSData postPSData;
@@ -382,8 +355,8 @@ struct Direct3D
 	ID3D11Texture2D* depthStencilTexture;
 	ID3D11DepthStencilView* depthStencilView;
 	ID3D11ShaderResourceView* depthStencilShaderView;
-	ID3D11Texture2D* readbackTexture; // allowed to be NULL!
-	ID3D11Texture2D* screenshotTexture; // allowed to be NULL!
+	ID3D11Texture2D* readbackTexture;                // allowed to be NULL!
+	ID3D11Texture2D* screenshotTexture;              // allowed to be NULL!
 	ID3D11RenderTargetView* screenshotTextureRTView; // allowed to be NULL!
 
 	ID3D11ComputeShader* mipGammaToLinearComputeShader;
@@ -404,8 +377,7 @@ struct Direct3D
 	ErrorMode errorMode;
 };
 
-struct Direct3DStatic
-{
+struct Direct3DStatic {
 	ID3D11Device* device;
 	ID3D11DeviceContext* context;
 	IDXGISwapChain* swapChain;
@@ -420,8 +392,19 @@ __declspec(align(16)) static Direct3D d3d;
 __declspec(align(16)) static Direct3DStatic d3ds;
 
 
-#define COM_RELEASE(p)			do { if(p) { p->Release(); p = NULL; } } while((void)0,0)
-#define COM_RELEASE_ARRAY(a)	do { for(int i = 0; i < ARRAY_LEN(a); ++i) { COM_RELEASE(a[i]); } } while((void)0,0)
+#define COM_RELEASE(p)    \
+	do {                  \
+		if (p) {          \
+			p->Release(); \
+			p = NULL;     \
+		}                 \
+	} while ((void)0, 0)
+#define COM_RELEASE_ARRAY(a)                     \
+	do {                                         \
+		for (int i = 0; i < ARRAY_LEN(a); ++i) { \
+			COM_RELEASE(a[i]);                   \
+		}                                        \
+	} while ((void)0, 0)
 
 
 static void GAL_UpdateTexture(image_t* image, int mip, int x, int y, int w, int h, const void* data);
@@ -433,25 +416,18 @@ static const char* GetSystemErrorString(HRESULT hr)
 	// we always print the original error code anyhow
 	static char systemErrorStr[1024];
 	const DWORD written = FormatMessageA(
-		FORMAT_MESSAGE_FROM_SYSTEM, NULL, (DWORD)hr, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-		systemErrorStr, sizeof(systemErrorStr) - 1, NULL);
-	if(written == 0)
-	{
+	    FORMAT_MESSAGE_FROM_SYSTEM, NULL, (DWORD)hr, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+	    systemErrorStr, sizeof(systemErrorStr) - 1, NULL);
+	if (written == 0) {
 		// we have nothing valid
 		Q_strncpyz(systemErrorStr, "???", sizeof(systemErrorStr));
-	}
-	else
-	{
+	} else {
 		// remove the trailing whitespace
 		char* s = systemErrorStr + strlen(systemErrorStr) - 1;
-		while(s >= systemErrorStr)
-		{
-			if(*s == '\r' || *s == '\n' || *s == '\t' || *s == ' ')
-			{
+		while (s >= systemErrorStr) {
+			if (*s == '\r' || *s == '\n' || *s == '\t' || *s == ' ') {
 				*s-- = '\0';
-			}
-			else
-			{
+			} else {
 				break;
 			}
 		}
@@ -462,13 +438,11 @@ static const char* GetSystemErrorString(HRESULT hr)
 
 static qbool Check(HRESULT hr, const char* function)
 {
-	if(SUCCEEDED(hr))
-	{
+	if (SUCCEEDED(hr)) {
 		return qtrue;
 	}
 
-	if(d3d.errorMode == EM_FATAL)
-	{
+	if (d3d.errorMode == EM_FATAL) {
 		ri.Error(ERR_FATAL, "'%s' failed with code 0x%08X (%s)\n", function, (unsigned int)hr, GetSystemErrorString(hr));
 	}
 	return qfalse;
@@ -476,14 +450,12 @@ static qbool Check(HRESULT hr, const char* function)
 
 static qbool CheckAndName(HRESULT hr, const char* function, ID3D11DeviceChild* resource, const char* resourceName)
 {
-	if(SUCCEEDED(hr))
-	{
+	if (SUCCEEDED(hr)) {
 		resource->SetPrivateData(WKPDID_D3DDebugObjectName, strlen(resourceName), resourceName);
 		return qtrue;
 	}
 
-	if(d3d.errorMode == EM_FATAL)
-	{
+	if (d3d.errorMode == EM_FATAL) {
 		ri.Error(ERR_FATAL, "'%s' failed to create '%s' with code 0x%08X (%s)\n", function, resourceName, (unsigned int)hr, GetSystemErrorString(hr));
 	}
 	return qfalse;
@@ -545,8 +517,7 @@ static qbool D3D11_CreateInputLayout(const D3D11_INPUT_ELEMENT_DESC* pInputEleme
 
 static const char* GetDeviceRemovedReasonString(HRESULT reason)
 {
-	switch(reason)
-	{
+	switch (reason) {
 		case DXGI_ERROR_DEVICE_HUNG: return "device hung";
 		case DXGI_ERROR_DEVICE_REMOVED: return "device removed";
 		case DXGI_ERROR_DEVICE_RESET: return "device reset";
@@ -559,8 +530,7 @@ static const char* GetDeviceRemovedReasonString(HRESULT reason)
 
 static AlphaTest GetAlphaTest(unsigned int stateBits)
 {
-	switch(stateBits & GLS_ATEST_BITS)
-	{
+	switch (stateBits & GLS_ATEST_BITS) {
 		case 0: return AT_ALWAYS;
 		case GLS_ATEST_GT_0: return AT_GREATER_THAN_0;
 		case GLS_ATEST_LT_80: return AT_LESS_THAN_HALF;
@@ -571,13 +541,11 @@ static AlphaTest GetAlphaTest(unsigned int stateBits)
 
 static DepthFunc GetDepthFunc(unsigned int stateBits)
 {
-	if(stateBits & GLS_DEPTHFUNC_ALWAYS)
-	{
+	if (stateBits & GLS_DEPTHFUNC_ALWAYS) {
 		return DF_ALWAYS;
 	}
-	
-	if(stateBits & GLS_DEPTHFUNC_EQUAL)
-	{
+
+	if (stateBits & GLS_DEPTHFUNC_EQUAL) {
 		return DF_EQUAL;
 	}
 
@@ -586,8 +554,7 @@ static DepthFunc GetDepthFunc(unsigned int stateBits)
 
 static D3D11_COMPARISON_FUNC GetDepthComparison(DepthFunc depthFunc)
 {
-	switch(depthFunc)
-	{
+	switch (depthFunc) {
 		case DF_ALWAYS: return D3D11_COMPARISON_ALWAYS;
 		case DF_EQUAL: return D3D11_COMPARISON_EQUAL;
 		default: return D3D11_COMPARISON_LESS_EQUAL;
@@ -596,8 +563,7 @@ static D3D11_COMPARISON_FUNC GetDepthComparison(DepthFunc depthFunc)
 
 static D3D11_TEXTURE_ADDRESS_MODE GetTextureAddressMode(textureWrap_t wrap)
 {
-	switch(wrap)
-	{
+	switch (wrap) {
 		case TW_CLAMP_TO_EDGE: return D3D11_TEXTURE_ADDRESS_CLAMP;
 		case TW_REPEAT: return D3D11_TEXTURE_ADDRESS_WRAP;
 		default: return D3D11_TEXTURE_ADDRESS_CLAMP;
@@ -606,8 +572,7 @@ static D3D11_TEXTURE_ADDRESS_MODE GetTextureAddressMode(textureWrap_t wrap)
 
 static DXGI_FORMAT GetTextureFormat(textureFormat_t f)
 {
-	switch(f)
-	{
+	switch (f) {
 		case TF_RGBA8:
 		default: return DXGI_FORMAT_R8G8B8A8_UNORM;
 	}
@@ -615,8 +580,7 @@ static DXGI_FORMAT GetTextureFormat(textureFormat_t f)
 
 static D3D11_CULL_MODE GetCullMode(cullType_t t)
 {
-	switch(t)
-	{
+	switch (t) {
 		case CT_BACK_SIDED: return D3D11_CULL_BACK;
 		case CT_FRONT_SIDED: return D3D11_CULL_FRONT;
 		case CT_TWO_SIDED: return D3D11_CULL_NONE;
@@ -626,8 +590,7 @@ static D3D11_CULL_MODE GetCullMode(cullType_t t)
 
 static D3D11_BLEND GetSourceBlend(unsigned int stateBits)
 {
-	switch(stateBits & GLS_SRCBLEND_BITS)
-	{
+	switch (stateBits & GLS_SRCBLEND_BITS) {
 		case GLS_SRCBLEND_ZERO: return D3D11_BLEND_ZERO;
 		case GLS_SRCBLEND_ONE: return D3D11_BLEND_ONE;
 		case GLS_SRCBLEND_DST_COLOR: return D3D11_BLEND_DEST_COLOR;
@@ -643,8 +606,7 @@ static D3D11_BLEND GetSourceBlend(unsigned int stateBits)
 
 static D3D11_BLEND GetDestinationBlend(unsigned int stateBits)
 {
-	switch(stateBits & GLS_DSTBLEND_BITS)
-	{
+	switch (stateBits & GLS_DSTBLEND_BITS) {
 		case GLS_DSTBLEND_ZERO: return D3D11_BLEND_ZERO;
 		case GLS_DSTBLEND_ONE: return D3D11_BLEND_ONE;
 		case GLS_DSTBLEND_SRC_COLOR: return D3D11_BLEND_SRC_COLOR;
@@ -659,8 +621,7 @@ static D3D11_BLEND GetDestinationBlend(unsigned int stateBits)
 
 static D3D11_BLEND GetAlphaBlendFromColorBlend(D3D11_BLEND colorBlend)
 {
-	switch(colorBlend)
-	{
+	switch (colorBlend) {
 		case D3D11_BLEND_SRC_COLOR: return D3D11_BLEND_SRC_ALPHA;
 		case D3D11_BLEND_INV_SRC_COLOR: return D3D11_BLEND_INV_SRC_ALPHA;
 		case D3D11_BLEND_DEST_COLOR: return D3D11_BLEND_DEST_ALPHA;
@@ -671,8 +632,7 @@ static D3D11_BLEND GetAlphaBlendFromColorBlend(D3D11_BLEND colorBlend)
 
 static DXGI_FORMAT GetRenderTargetColorFormat(int format)
 {
-	switch(format)
-	{
+	switch (format) {
 		case RTCF_R8G8B8A8: return DXGI_FORMAT_R8G8B8A8_UNORM;
 		case RTCF_R10G10B10A2: return DXGI_FORMAT_R10G10B10A2_UNORM;
 		case RTCF_R16G16B16A16: return DXGI_FORMAT_R16G16B16A16_UNORM;
@@ -692,20 +652,17 @@ static void ResetShaderData(ID3D11Resource* buffer, const void* data, size_t byt
 static void AppendVertexData(VertexBuffer* buffer, const void* data, int itemCount)
 {
 	D3D11_MAP mapType = D3D11_MAP_WRITE_NO_OVERWRITE;
-	if(buffer->discard || buffer->writeIndex + itemCount > buffer->capacity)
-	{
+	if (buffer->discard || buffer->writeIndex + itemCount > buffer->capacity) {
 		buffer->discard = qfalse;
 		buffer->writeIndex = 0;
 		mapType = D3D11_MAP_WRITE_DISCARD;
 	}
 
-	if(data != NULL || mapType == D3D11_MAP_WRITE_DISCARD)
-	{
+	if (data != NULL || mapType == D3D11_MAP_WRITE_DISCARD) {
 		D3D11_MAPPED_SUBRESOURCE ms;
 		const HRESULT hr = d3ds.context->Map(buffer->buffer, 0, mapType, NULL, &ms);
 		Check(hr, "Map on vertex data");
-		if(data != NULL)
-		{
+		if (data != NULL) {
 			memcpy((byte*)ms.pData + buffer->writeIndex * buffer->itemSize, data, itemCount * buffer->itemSize);
 		}
 		d3ds.context->Unmap(buffer->buffer, NULL);
@@ -717,24 +674,21 @@ static void AppendVertexData(VertexBuffer* buffer, const void* data, int itemCou
 
 static void AppendVertexDataGroup(const void* data[VB_COUNT], int vertexCount)
 {
-	for(int i = 0; i < VB_COUNT; ++i)
-	{
+	for (int i = 0; i < VB_COUNT; ++i) {
 		AppendVertexData(&d3d.vertexBuffers[i], data[i], vertexCount);
 	}
 }
 
 static void UploadPendingShaderData()
 {
-	if((unsigned)d3d.pipelineIndex >= PID_COUNT)
-	{
+	if ((unsigned)d3d.pipelineIndex >= PID_COUNT) {
 		return;
 	}
 
 	const PipelineId pid = d3d.pipelineIndex;
 	Pipeline* const pipeline = &d3d.pipelines[pid];
 
-	if(pid == PID_GENERIC)
-	{
+	if (pid == PID_GENERIC) {
 		GenericVSData vsData;
 		GenericPSData psData;
 		memcpy(vsData.modelViewMatrix, d3d.modelViewMatrix, sizeof(vsData.modelViewMatrix));
@@ -750,9 +704,7 @@ static void UploadPendingShaderData()
 		psData.alphaBoost = r_alphaToCoverageMipBoost->value;
 		ResetShaderData(pipeline->vertexBuffer, &vsData, sizeof(vsData));
 		ResetShaderData(pipeline->pixelBuffer, &psData, sizeof(psData));
-	}
-	else if(pid == PID_SOFT_SPRITE)
-	{
+	} else if (pid == PID_SOFT_SPRITE) {
 		DepthFadeVSData vsData;
 		DepthFadePSData psData;
 		memcpy(vsData.modelViewMatrix, d3d.modelViewMatrix, sizeof(vsData.modelViewMatrix));
@@ -766,9 +718,7 @@ static void UploadPendingShaderData()
 		psData.greyscale = tess.greyscale;
 		ResetShaderData(pipeline->vertexBuffer, &vsData, sizeof(vsData));
 		ResetShaderData(pipeline->pixelBuffer, &psData, sizeof(psData));
-	}
-	else if(pid == PID_DYNAMIC_LIGHT)
-	{
+	} else if (pid == PID_DYNAMIC_LIGHT) {
 		DynamicLightVSData vsData;
 		DynamicLightPSData psData;
 		memcpy(vsData.modelViewMatrix, d3d.modelViewMatrix, sizeof(vsData.modelViewMatrix));
@@ -783,14 +733,10 @@ static void UploadPendingShaderData()
 		psData.greyscale = tess.greyscale;
 		ResetShaderData(pipeline->vertexBuffer, &vsData, sizeof(vsData));
 		ResetShaderData(pipeline->pixelBuffer, &psData, sizeof(psData));
-	}
-	else if(pid == PID_POST_PROCESS)
-	{
+	} else if (pid == PID_POST_PROCESS) {
 		ResetShaderData(pipeline->vertexBuffer, &d3d.postVSData, sizeof(d3d.postVSData));
 		ResetShaderData(pipeline->pixelBuffer, &d3d.postPSData, sizeof(d3d.postPSData));
-	}
-	else if(pid == PID_CLEAR)
-	{
+	} else if (pid == PID_CLEAR) {
 		ResetShaderData(pipeline->pixelBuffer, &d3d.clearPSData, sizeof(d3d.clearPSData));
 	}
 }
@@ -803,8 +749,7 @@ static int ComputeSamplerStateIndex(int textureWrap, int textureMode)
 static void ApplySamplerState(UINT slot, textureWrap_t textureWrap, TextureMode textureMode)
 {
 	const int index = ComputeSamplerStateIndex(textureWrap, textureMode);
-	if(index == d3d.samplerStateIndices[slot])
-	{
+	if (index == d3d.samplerStateIndices[slot]) {
 		return;
 	}
 
@@ -814,8 +759,7 @@ static void ApplySamplerState(UINT slot, textureWrap_t textureWrap, TextureMode 
 
 static void ApplyPixelShaderResource(UINT slot, ID3D11ShaderResourceView* srv)
 {
-	if(srv == d3d.pixelShaderResources[slot])
-	{
+	if (srv == d3d.pixelShaderResources[slot]) {
 		return;
 	}
 
@@ -825,20 +769,16 @@ static void ApplyPixelShaderResource(UINT slot, ID3D11ShaderResourceView* srv)
 
 static void DrawIndexed(int indexCount)
 {
-	if(d3d.splitBufferOffsets)
-	{
+	if (d3d.splitBufferOffsets) {
 		UINT offsets[VB_COUNT];
-		for(int i = 0; i < d3d.vbCount; ++i)
-		{
+		for (int i = 0; i < d3d.vbCount; ++i) {
 			VertexBuffer* const vb = &d3d.vertexBuffers[d3d.vbIds[i]];
 			offsets[i] = vb->readIndex * vb->itemSize; // in bytes, not vertices
 		}
 
 		d3ds.context->IASetVertexBuffers(0, d3d.vbCount, d3d.vbBuffers, d3d.vbStrides, offsets);
 		d3ds.context->DrawIndexed(indexCount, d3d.indexBuffer.readIndex, 0);
-	}
-	else
-	{
+	} else {
 		d3ds.context->DrawIndexed(indexCount, d3d.indexBuffer.readIndex, d3d.vertexBuffers[VB_POSITION].readIndex);
 	}
 	backEnd.pc3D[RB_DRAW_CALLS]++;
@@ -846,39 +786,31 @@ static void DrawIndexed(int indexCount)
 
 static void ApplyPipeline(PipelineId index)
 {
-	if(index == d3d.pipelineIndex || (unsigned)index >= PID_COUNT)
-	{
+	if (index == d3d.pipelineIndex || (unsigned)index >= PID_COUNT) {
 		return;
 	}
 
 	const PipelineId unfixedIndex = index;
-	if(index == PID_SCREENSHOT)
-	{
+	if (index == PID_SCREENSHOT) {
 		index = PID_POST_PROCESS;
 	}
 
 	Pipeline* const pipeline = &d3d.pipelines[index];
-	if(pipeline->inputLayout)
-	{
+	if (pipeline->inputLayout) {
 		d3ds.context->IASetInputLayout(pipeline->inputLayout);
 
 		int count = 0;
 		VertexBufferId* const ids = d3d.vbIds;
-		if(index == PID_GENERIC)
-		{
+		if (index == PID_GENERIC) {
 			ids[count++] = VB_POSITION;
 			ids[count++] = VB_COLOR;
 			ids[count++] = VB_TEXCOORD;
 			ids[count++] = VB_TEXCOORD2;
-		}
-		else if(index == PID_SOFT_SPRITE)
-		{
+		} else if (index == PID_SOFT_SPRITE) {
 			ids[count++] = VB_POSITION;
 			ids[count++] = VB_COLOR;
 			ids[count++] = VB_TEXCOORD;
-		}
-		else if(index == PID_DYNAMIC_LIGHT)
-		{
+		} else if (index == PID_DYNAMIC_LIGHT) {
 			ids[count++] = VB_POSITION;
 			ids[count++] = VB_NORMAL;
 			ids[count++] = VB_COLOR;
@@ -886,21 +818,17 @@ static void ApplyPipeline(PipelineId index)
 		}
 		d3d.vbCount = count;
 
-		for(int i = 0; i < count; ++i)
-		{
+		for (int i = 0; i < count; ++i) {
 			VertexBuffer* const vb = &d3d.vertexBuffers[ids[i]];
 			d3d.vbBuffers[i] = vb->buffer;
 			d3d.vbStrides[i] = vb->itemSize;
 		}
 
-		if(!d3d.splitBufferOffsets)
-		{
+		if (!d3d.splitBufferOffsets) {
 			UINT offsets[VB_COUNT] = { 0 };
 			d3ds.context->IASetVertexBuffers(0, count, d3d.vbBuffers, d3d.vbStrides, offsets);
 		}
-	}
-	else
-	{
+	} else {
 		d3ds.context->IASetInputLayout(NULL);
 		d3ds.context->IASetVertexBuffers(0, 0, NULL, NULL, NULL);
 		d3d.vbCount = 0;
@@ -910,31 +838,22 @@ static void ApplyPipeline(PipelineId index)
 	d3ds.context->PSSetShader(pipeline->pixelShader, NULL, 0);
 	backEnd.pc3D[RB_SHADER_CHANGES]++;
 
-	if(pipeline->vertexBuffer)
-	{
+	if (pipeline->vertexBuffer) {
 		d3ds.context->VSSetConstantBuffers(0, 1, &pipeline->vertexBuffer);
 	}
-	if(pipeline->pixelBuffer)
-	{
+	if (pipeline->pixelBuffer) {
 		d3ds.context->PSSetConstantBuffers(0, 1, &pipeline->pixelBuffer);
 	}
 
-	if(unfixedIndex == PID_POST_PROCESS)
-	{
+	if (unfixedIndex == PID_POST_PROCESS) {
 		d3ds.context->OMSetRenderTargets(1, &d3d.backBufferRTView, NULL);
-	}
-	else if(unfixedIndex == PID_SCREENSHOT)
-	{
+	} else if (unfixedIndex == PID_SCREENSHOT) {
 		d3ds.context->OMSetRenderTargets(1, &d3d.screenshotTextureRTView, NULL);
-	}
-	else if(unfixedIndex == PID_SOFT_SPRITE)
-	{
+	} else if (unfixedIndex == PID_SOFT_SPRITE) {
 		d3ds.context->OMSetRenderTargets(1, &d3d.renderTargetViewMS, NULL);
 		ApplyPixelShaderResource(1, d3d.depthStencilShaderView);
 		ApplySamplerState(1, TW_CLAMP_TO_EDGE, TM_BILINEAR);
-	}
-	else
-	{
+	} else {
 		// keep this call order to make sure the depth buffer isn't bound as a SRV anymore
 		// when we set it as a render target
 		ApplyPixelShaderResource(1, d3d.textures[0].view);
@@ -1012,15 +931,12 @@ static void CreateTexture(Texture* texture, image_t* image, int mipCount, int w,
 
 static void UpdateAnimatedImage(image_t* image, int w, int h, const byte* data, qbool dirty)
 {
-	if(w != image->width || h != image->height)
-	{
+	if (w != image->width || h != image->height) {
 		image->width = w;
 		image->height = h;
 		CreateTexture(&d3d.textures[image->texnum], image, 1, w, h);
 		GAL_UpdateTexture(image, 0, 0, 0, w, h, data);
-	}
-	else if(dirty)
-	{
+	} else if (dirty) {
 		GAL_UpdateTexture(image, 0, 0, 0, w, h, data);
 	}
 }
@@ -1038,13 +954,12 @@ static int ComputeBlendStateIndex(int srcBlend, int dstBlend, qbool alphaToCover
 static void ApplyBlendState(D3D11_BLEND srcBlend, D3D11_BLEND dstBlend, qbool aphaToCoverage)
 {
 	const int index = ComputeBlendStateIndex(srcBlend, dstBlend, aphaToCoverage);
-	if((unsigned)index >= ARRAY_LEN(d3d.blendStates))
+	if ((unsigned)index >= ARRAY_LEN(d3d.blendStates))
 		ri.Error(ERR_FATAL, "Tried to set an invalid blend state combo!");
-	if(d3d.blendStates[index] == NULL)
+	if (d3d.blendStates[index] == NULL)
 		ri.Error(ERR_FATAL, "Tried to set an unregistered blend state!");
 
-	if(index == d3d.blendStateIndex)
-	{
+	if (index == d3d.blendStateIndex) {
 		return;
 	}
 
@@ -1060,8 +975,7 @@ static int ComputeDepthStencilStateIndex(int disableDepth, int depthFunc, int ma
 static void ApplyDepthStencilState(qbool disableDepth, DepthFunc depthFunc, qbool maskTrue)
 {
 	const int index = ComputeDepthStencilStateIndex(disableDepth, (int)depthFunc, maskTrue);
-	if(index == d3d.depthStencilStateIndex)
-	{
+	if (index == d3d.depthStencilStateIndex) {
 		return;
 	}
 
@@ -1077,8 +991,7 @@ static int ComputeRasterizerStateIndex(int wireFrame, int cullType, int polygonO
 static void ApplyRasterizerState(qbool wireFrame, cullType_t cullType, qbool polygonOffset)
 {
 	const int index = ComputeRasterizerStateIndex(wireFrame, cullType, polygonOffset);
-	if(index == d3d.rasterStateIndex)
-	{
+	if (index == d3d.rasterStateIndex) {
 		return;
 	}
 
@@ -1095,8 +1008,7 @@ static void ApplyState(unsigned int stateBits, cullType_t cullType, qbool polygo
 
 	d3d.alphaTest = GetAlphaTest(stateBits);
 
-	if(diffBits & (GLS_SRCBLEND_BITS | GLS_DSTBLEND_BITS | GLS_ATEST_BITS))
-	{
+	if (diffBits & (GLS_SRCBLEND_BITS | GLS_DSTBLEND_BITS | GLS_ATEST_BITS)) {
 		const D3D11_BLEND srcBlend = (stateBits & GLS_SRCBLEND_BITS) ? GetSourceBlend(stateBits) : D3D11_BLEND_ONE;
 		const D3D11_BLEND dstBlend = (stateBits & GLS_DSTBLEND_BITS) ? GetDestinationBlend(stateBits) : D3D11_BLEND_ZERO;
 		ApplyBlendState(srcBlend, dstBlend, glInfo.alphaToCoverageSupport && d3d.pipelineIndex == PID_GENERIC && d3d.alphaTest != AT_ALWAYS);
@@ -1108,14 +1020,10 @@ static void ApplyState(unsigned int stateBits, cullType_t cullType, qbool polygo
 	ApplyDepthStencilState(disableDepth, depthFunc, maskTrue);
 
 	// fix up the cull mode for mirrors
-	if(backEnd.viewParms.isMirror)
-	{
-		if(cullType == CT_BACK_SIDED)
-		{
+	if (backEnd.viewParms.isMirror) {
+		if (cullType == CT_BACK_SIDED) {
 			cullType = CT_FRONT_SIDED;
-		}
-		else if(cullType == CT_FRONT_SIDED)
-		{
+		} else if (cullType == CT_FRONT_SIDED) {
 			cullType = CT_BACK_SIDED;
 		}
 	}
@@ -1127,14 +1035,11 @@ static void BindImage(UINT slot, const image_t* image)
 	ID3D11ShaderResourceView* view = d3d.textures[image->texnum].view;
 	ApplyPixelShaderResource(slot, view);
 	TextureMode mode = TM_ANISOTROPIC;
-	if(Q_stricmp(r_textureMode->string, "GL_NEAREST") == 0 &&
-	   !backEnd.projection2D &&
-	   (image->flags & (IMG_LMATLAS | IMG_EXTLMATLAS | IMG_NOPICMIP)) == 0)
-	{
+	if (Q_stricmp(r_textureMode->string, "GL_NEAREST") == 0 &&
+	    !backEnd.projection2D &&
+	    (image->flags & (IMG_LMATLAS | IMG_EXTLMATLAS | IMG_NOPICMIP)) == 0) {
 		mode = TM_NEAREST;
-	}
-	else if((image->flags & IMG_NOAF) != 0)
-	{
+	} else if ((image->flags & IMG_NOAF) != 0) {
 		mode = TM_BILINEAR;
 	}
 	ApplySamplerState(slot, image->wrapClampMode, mode);
@@ -1151,25 +1056,22 @@ static void FindBestAvailableAA(DXGI_SAMPLE_DESC* sampleDesc)
 	sampleDesc->Count = (UINT)min(r_msaa->integer, D3D11_MAX_MULTISAMPLE_SAMPLE_COUNT);
 	sampleDesc->Quality = 0;
 
-	if(r_colorMipLevels->integer)
-	{
+	if (r_colorMipLevels->integer) {
 		sampleDesc->Count = 0;
 	}
 
-	while(sampleDesc->Count > 0)
-	{
+	while (sampleDesc->Count > 0) {
 		UINT levelCount = 0;
-		if(SUCCEEDED(d3ds.device->CheckMultisampleQualityLevels(d3d.formatColorRT, sampleDesc->Count, &levelCount)) &&
-		   levelCount > 0 &&
-		   SUCCEEDED(d3ds.device->CheckMultisampleQualityLevels(d3d.formatDepth, sampleDesc->Count, &levelCount)) &&
-		   levelCount > 0)
-		   break;
+		if (SUCCEEDED(d3ds.device->CheckMultisampleQualityLevels(d3d.formatColorRT, sampleDesc->Count, &levelCount)) &&
+		    levelCount > 0 &&
+		    SUCCEEDED(d3ds.device->CheckMultisampleQualityLevels(d3d.formatDepth, sampleDesc->Count, &levelCount)) &&
+		    levelCount > 0)
+			break;
 
 		--sampleDesc->Count;
 	}
 
-	if(sampleDesc->Count <= 1)
-	{
+	if (sampleDesc->Count <= 1) {
 		sampleDesc->Count = 1;
 		sampleDesc->Quality = 0;
 	}
@@ -1177,22 +1079,19 @@ static void FindBestAvailableAA(DXGI_SAMPLE_DESC* sampleDesc)
 
 static qbool CheckFlipAndTearSupport()
 {
-	if(r_d3d11_presentMode->integer != DXGIPM_FLIPDISCARD)
-	{
+	if (r_d3d11_presentMode->integer != DXGIPM_FLIPDISCARD) {
 		return qfalse;
 	}
 
 	HMODULE library = LoadLibraryA("DXGI.dll");
-	if(library == NULL)
-	{
+	if (library == NULL) {
 		ri.Printf(PRINT_WARNING, "CheckTearingSupport: DXGI.dll couldn't be found or opened\n");
 		return qfalse;
 	}
 
-	typedef HRESULT (WINAPI *PFN_CreateDXGIFactory)(REFIID riid, _Out_ void **ppFactory);
+	typedef HRESULT(WINAPI * PFN_CreateDXGIFactory)(REFIID riid, _Out_ void** ppFactory);
 	PFN_CreateDXGIFactory pCreateDXGIFactory = (PFN_CreateDXGIFactory)GetProcAddress(library, "CreateDXGIFactory");
-	if(pCreateDXGIFactory == NULL)
-	{
+	if (pCreateDXGIFactory == NULL) {
 		FreeLibrary(library);
 		ri.Printf(PRINT_WARNING, "CheckTearingSupport: Failed to locate CreateDXGIFactory in DXGI.dll\n");
 		return qfalse;
@@ -1202,8 +1101,7 @@ static qbool CheckFlipAndTearSupport()
 	BOOL enabled = FALSE;
 	IDXGIFactory5* pFactory;
 	hr = (*pCreateDXGIFactory)(__uuidof(IDXGIFactory5), (void**)&pFactory);
-	if(FAILED(hr))
-	{
+	if (FAILED(hr)) {
 		FreeLibrary(library);
 		ri.Printf(PRINT_WARNING, "CheckTearingSupport: 'CreateDXGIFactory' failed with code 0x%08X (%s)\n", (unsigned int)hr, GetSystemErrorString(hr));
 		return qfalse;
@@ -1212,8 +1110,7 @@ static qbool CheckFlipAndTearSupport()
 	pFactory->Release();
 	FreeLibrary(library);
 
-	if(FAILED(hr))
-	{
+	if (FAILED(hr)) {
 		ri.Printf(PRINT_WARNING, "CheckTearingSupport: 'IDXGIFactory5::CheckFeatureSupport' failed with code 0x%08X (%s)\n", (unsigned int)hr, GetSystemErrorString(hr));
 		return qfalse;
 	}
@@ -1230,17 +1127,16 @@ static qbool GAL_Init()
 	HRESULT hr = S_OK;
 	qbool fullInit = qfalse;
 	DXGI_SWAP_CHAIN_DESC swapChainDesc;
-	if(d3ds.library == NULL)
-	{
+	if (d3ds.library == NULL) {
 		fullInit = qtrue;
 
 		d3ds.library = LoadLibraryA("D3D11.dll");
-		if(d3ds.library == NULL)
+		if (d3ds.library == NULL)
 			ri.Error(ERR_FATAL, "D3D11.dll couldn't be found or opened");
 
 		PFN_D3D11_CREATE_DEVICE_AND_SWAP_CHAIN pD3D11CreateDeviceAndSwapChain =
-			(PFN_D3D11_CREATE_DEVICE_AND_SWAP_CHAIN)GetProcAddress(d3ds.library, "D3D11CreateDeviceAndSwapChain");
-		if(pD3D11CreateDeviceAndSwapChain == NULL)
+		    (PFN_D3D11_CREATE_DEVICE_AND_SWAP_CHAIN)GetProcAddress(d3ds.library, "D3D11CreateDeviceAndSwapChain");
+		if (pD3D11CreateDeviceAndSwapChain == NULL)
 			ri.Error(ERR_FATAL, "Failed to locate D3D11CreateDeviceAndSwapChain in D3D11.dll");
 
 		const D3D_FEATURE_LEVEL featureLevels[2] = { D3D_FEATURE_LEVEL_11_0, D3D_FEATURE_LEVEL_10_1 };
@@ -1264,15 +1160,12 @@ static qbool GAL_Init()
 		swapChainDesc.Windowed = TRUE;
 		swapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
 		swapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-		if(d3ds.flipAndTear)
-		{
+		if (d3ds.flipAndTear) {
 			// flip and tear, until it is done
 			swapChainDesc.BufferCount = 2;
 			swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 			swapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING;
-		}
-		else
-		{
+		} else {
 			swapChainDesc.BufferCount = 1;
 			swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 			swapChainDesc.Flags = 0;
@@ -1280,19 +1173,16 @@ static qbool GAL_Init()
 
 	create_device:
 		hr = (*pD3D11CreateDeviceAndSwapChain)(
-			NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, flags, featureLevels, ARRAY_LEN(featureLevels), D3D11_SDK_VERSION,
-			&swapChainDesc, &d3ds.swapChain, &d3ds.device, NULL, &d3ds.context);
-		if(hr == DXGI_ERROR_SDK_COMPONENT_MISSING)
-		{
+		    NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, flags, featureLevels, ARRAY_LEN(featureLevels), D3D11_SDK_VERSION,
+		    &swapChainDesc, &d3ds.swapChain, &d3ds.device, NULL, &d3ds.context);
+		if (hr == DXGI_ERROR_SDK_COMPONENT_MISSING) {
 			ri.Printf(PRINT_WARNING, "D3D11CreateDeviceAndSwapChain failed because you don't have the SDK installed.\n");
 			ri.Printf(PRINT_WARNING, "Trying to create the device again without the debug layer...\n");
 			flags &= ~D3D11_CREATE_DEVICE_DEBUG;
 			goto create_device;
 		}
 		Check(hr, "D3D11CreateDeviceAndSwapChain");
-	}
-	else
-	{
+	} else {
 		hr = d3ds.swapChain->GetDesc(&swapChainDesc);
 		Check(hr, "IDXGISwapChain::GetDesc");
 	}
@@ -1316,12 +1206,11 @@ static qbool GAL_Init()
 	readbackTexDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
 	readbackTexDesc.MiscFlags = 0;
 	d3d.errorMode = EM_SILENT;
-	if(!D3D11_CreateTexture2D(&readbackTexDesc, 0, &d3d.readbackTexture, "readback texture"))
+	if (!D3D11_CreateTexture2D(&readbackTexDesc, 0, &d3d.readbackTexture, "readback texture"))
 		ri.Printf(PRINT_WARNING, "Screengrab texture creation failed! /" S_COLOR_CMD "screenshot^7* and /" S_COLOR_CMD "video^7 won't work\n");
 	d3d.errorMode = EM_FATAL;
 
-	if(d3d.readbackTexture != NULL && r_mode->integer == VIDEOMODE_UPSCALE)
-	{
+	if (d3d.readbackTexture != NULL && r_mode->integer == VIDEOMODE_UPSCALE) {
 		d3d.errorMode = EM_SILENT;
 
 		D3D11_TEXTURE2D_DESC screenshotTexDesc;
@@ -1337,7 +1226,7 @@ static qbool GAL_Init()
 		screenshotTexDesc.BindFlags = D3D11_BIND_RENDER_TARGET;
 		screenshotTexDesc.CPUAccessFlags = 0;
 		screenshotTexDesc.MiscFlags = 0;
-		if(!D3D11_CreateTexture2D(&screenshotTexDesc, 0, &d3d.screenshotTexture, "screenshot texture"))
+		if (!D3D11_CreateTexture2D(&screenshotTexDesc, 0, &d3d.screenshotTexture, "screenshot texture"))
 			ri.Printf(PRINT_WARNING, "Screenshot texture creation failed! /" S_COLOR_CMD "screenshot^7* and /" S_COLOR_CMD "video^7 may not work\n");
 
 		D3D11_RENDER_TARGET_VIEW_DESC screenshotRTVDesc;
@@ -1345,7 +1234,7 @@ static qbool GAL_Init()
 		screenshotRTVDesc.Format = swapChainDesc.BufferDesc.Format;
 		screenshotRTVDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
 		screenshotRTVDesc.Texture2D.MipSlice = 0;
-		if(!D3D11_CreateRenderTargetView(d3d.screenshotTexture, &screenshotRTVDesc, &d3d.screenshotTextureRTView, "screenshot texture render target view"))
+		if (!D3D11_CreateRenderTargetView(d3d.screenshotTexture, &screenshotRTVDesc, &d3d.screenshotTextureRTView, "screenshot texture render target view"))
 			ri.Printf(PRINT_WARNING, "Screenshot texture RTV creation failed! /" S_COLOR_CMD "screenshot^7* and /" S_COLOR_CMD "video^7 may not work\n");
 
 		d3d.errorMode = EM_FATAL;
@@ -1440,8 +1329,7 @@ static qbool GAL_Init()
 	D3D11_CreateVertexShader(g_generic_vs, ARRAY_LEN(g_generic_vs), NULL, &d3d.pipelines[PID_GENERIC].vertexShader, "generic vertex shader");
 	D3D11_CreatePixelShader(genericPS->code, genericPS->size, NULL, &d3d.pipelines[PID_GENERIC].pixelShader, genericPS->name);
 
-	D3D11_INPUT_ELEMENT_DESC genericInputLayoutDesc[] =
-	{
+	D3D11_INPUT_ELEMENT_DESC genericInputLayoutDesc[] = {
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "COLOR", 0, DXGI_FORMAT_R8G8B8A8_UNORM, 1, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 2, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
@@ -1461,8 +1349,7 @@ static qbool GAL_Init()
 	vb[VB_TEXCOORD2].itemSize = sizeof(vec2_t);
 	vb[VB_COLOR].itemSize = sizeof(color4ub_t);
 	d3d.indexBuffer.itemSize = sizeof(uint32_t);
-	for(int i = 0; i < ARRAY_LEN(d3d.vertexBuffers); ++i)
-	{
+	for (int i = 0; i < ARRAY_LEN(d3d.vertexBuffers); ++i) {
 		vb[i].capacity = maxVertexCount;
 		vb[i].discard = qtrue;
 	}
@@ -1522,10 +1409,8 @@ static qbool GAL_Init()
 	D3D11_CreateBuffer(&pixelShaderBufferDesc, NULL, &d3d.pipelines[PID_GENERIC].pixelBuffer, "generic pixel shader buffer");
 
 	// create all sampler states
-	for(int textureMode = 0; textureMode < TM_COUNT; ++textureMode)
-	{
-		for(int wrapMode = 0; wrapMode < TW_COUNT; ++wrapMode)
-		{
+	for (int textureMode = 0; textureMode < TM_COUNT; ++textureMode) {
+		for (int wrapMode = 0; wrapMode < TW_COUNT; ++wrapMode) {
 			const int index = ComputeSamplerStateIndex(wrapMode, textureMode);
 
 			// @NOTE: D3D10_REQ_MAXANISOTROPY == D3D11_REQ_MAXANISOTROPY
@@ -1535,8 +1420,8 @@ static qbool GAL_Init()
 			D3D11_SAMPLER_DESC samplerDesc;
 			ZeroMemory(&samplerDesc, sizeof(samplerDesc));
 			samplerDesc.Filter = textureMode == TM_NEAREST ?
-				D3D11_FILTER_MIN_MAG_MIP_POINT :
-				((textureMode == TM_BILINEAR || maxAnisotropy == 1) ? D3D11_FILTER_MIN_MAG_MIP_LINEAR : D3D11_FILTER_ANISOTROPIC);
+			                         D3D11_FILTER_MIN_MAG_MIP_POINT :
+			                         ((textureMode == TM_BILINEAR || maxAnisotropy == 1) ? D3D11_FILTER_MIN_MAG_MIP_LINEAR : D3D11_FILTER_ANISOTROPIC);
 			samplerDesc.AddressU = mode;
 			samplerDesc.AddressV = mode;
 			samplerDesc.AddressW = mode;
@@ -1552,20 +1437,16 @@ static qbool GAL_Init()
 	}
 
 	// force set the default sampler states
-	for(int i = 0; i < ARRAY_LEN(d3d.samplerStateIndices); ++i)
-	{
+	for (int i = 0; i < ARRAY_LEN(d3d.samplerStateIndices); ++i) {
 		d3d.samplerStateIndices[i] = -1;
 		ApplySamplerState(i, TW_CLAMP_TO_EDGE, TM_BILINEAR);
 	}
 
 	// create all blend states
 	const int coverageModes = alphaToCoverageOK ? 2 : 1;
-	for(int a = 0; a < coverageModes; ++a)
-	{
-		for(int s = 1; s < BLEND_STATE_COUNT; ++s)
-		{
-			for(int d = 1; d < BLEND_STATE_COUNT; ++d)
-			{
+	for (int a = 0; a < coverageModes; ++a) {
+		for (int s = 1; s < BLEND_STATE_COUNT; ++s) {
+			for (int d = 1; d < BLEND_STATE_COUNT; ++d) {
 				const int index = ComputeBlendStateIndex(s, d, a);
 
 				ID3D11BlendState* blendState;
@@ -1589,12 +1470,9 @@ static qbool GAL_Init()
 	}
 
 	// create all the depth/stencil states
-	for(int disableDepth = 0; disableDepth < 2; ++disableDepth)
-	{
-		for(int depthFunc = 0; depthFunc < DF_COUNT; ++depthFunc)
-		{
-			for(int maskTrue = 0; maskTrue < 2; ++maskTrue)
-			{
+	for (int disableDepth = 0; disableDepth < 2; ++disableDepth) {
+		for (int depthFunc = 0; depthFunc < DF_COUNT; ++depthFunc) {
+			for (int maskTrue = 0; maskTrue < 2; ++maskTrue) {
 				const int index = ComputeDepthStencilStateIndex(disableDepth, depthFunc, maskTrue);
 
 				ID3D11DepthStencilState* depthState;
@@ -1606,19 +1484,16 @@ static qbool GAL_Init()
 				depthDesc.StencilEnable = FALSE;
 				hr = d3ds.device->CreateDepthStencilState(&depthDesc, &depthState);
 				CheckAndName(hr, "CreateDepthStencilState", depthState, va("depth/stencil state %03d", index));
-				
+
 				d3d.depthStencilStates[index] = depthState;
 			}
 		}
 	}
 
 	// create all the raster states
-	for(int polygonOffset = 0; polygonOffset < 2; ++polygonOffset)
-	{
-		for(int wireFrame = 0; wireFrame < 2; ++wireFrame)
-		{
-			for(int cullType = 0; cullType < CT_COUNT; ++cullType)
-			{
+	for (int polygonOffset = 0; polygonOffset < 2; ++polygonOffset) {
+		for (int wireFrame = 0; wireFrame < 2; ++wireFrame) {
+			for (int cullType = 0; cullType < CT_COUNT; ++cullType) {
 				const int index = ComputeRasterizerStateIndex(wireFrame, cullType, polygonOffset);
 
 				ID3D11RasterizerState* rasterState;
@@ -1682,8 +1557,7 @@ static qbool GAL_Init()
 	D3D11_CreateVertexShader(g_dl_vs, ARRAY_LEN(g_dl_vs), NULL, &d3d.pipelines[PID_DYNAMIC_LIGHT].vertexShader, "dynamic light vertex shader");
 	D3D11_CreatePixelShader(g_dl_ps, ARRAY_LEN(g_dl_ps), NULL, &d3d.pipelines[PID_DYNAMIC_LIGHT].pixelShader, "dynamic light pixel shader");
 
-	D3D11_INPUT_ELEMENT_DESC dlInputLayoutDesc[] =
-	{
+	D3D11_INPUT_ELEMENT_DESC dlInputLayoutDesc[] = {
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 1, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "COLOR", 0, DXGI_FORMAT_R8G8B8A8_UNORM, 2, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
@@ -1711,15 +1585,14 @@ static qbool GAL_Init()
 
 	D3D11_CreateVertexShader(g_sprite_vs, ARRAY_LEN(g_sprite_vs), NULL, &d3d.pipelines[PID_SOFT_SPRITE].vertexShader, "soft sprite vertex shader");
 	D3D11_CreatePixelShader(g_sprite_ps, ARRAY_LEN(g_sprite_ps), NULL, &d3d.pipelines[PID_SOFT_SPRITE].pixelShader, "soft sprite pixel shader");
-	
-	D3D11_INPUT_ELEMENT_DESC ssInputLayoutDesc[] =
-	{
+
+	D3D11_INPUT_ELEMENT_DESC ssInputLayoutDesc[] = {
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "COLOR", 0, DXGI_FORMAT_R8G8B8A8_UNORM, 1, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 2, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 	};
 	D3D11_CreateInputLayout(ssInputLayoutDesc, ARRAY_LEN(ssInputLayoutDesc), g_sprite_vs, ARRAY_LEN(g_sprite_vs), &d3d.pipelines[PID_SOFT_SPRITE].inputLayout, "soft sprite input layout");
-	
+
 	ZeroMemory(&vertexShaderBufferDesc, sizeof(vertexShaderBufferDesc));
 	vertexShaderBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
 	vertexShaderBufferDesc.ByteWidth = sizeof(DepthFadeVSData);
@@ -1739,8 +1612,7 @@ static qbool GAL_Init()
 	//
 
 	qbool mipGenOK = qfalse;
-	if(r_gpuMipGen->integer && d3ds.device->GetFeatureLevel() == D3D_FEATURE_LEVEL_11_0)
-	{
+	if (r_gpuMipGen->integer && d3ds.device->GetFeatureLevel() == D3D_FEATURE_LEVEL_11_0) {
 		d3d.errorMode = EM_SILENT;
 
 		mipGenOK = qtrue;
@@ -1760,8 +1632,7 @@ static qbool GAL_Init()
 		bufferDesc.ByteWidth = sizeof(GammaToLinearCSData);
 		mipGenOK &= D3D11_CreateBuffer(&bufferDesc, NULL, &d3d.mipGammaToLinearConstBuffer, "mip-map gamma-to-linear compute shader buffer");
 
-		for(int i = 0; i < ARRAY_LEN(d3d.mipGenTextures); ++i)
-		{
+		for (int i = 0; i < ARRAY_LEN(d3d.mipGenTextures); ++i) {
 			D3D11_TEXTURE2D_DESC textureDesc;
 			ZeroMemory(&textureDesc, sizeof(textureDesc));
 			textureDesc.Width = MAX_GPU_TEXTURE_SIZE;
@@ -1794,7 +1665,7 @@ static qbool GAL_Init()
 
 		d3d.errorMode = EM_FATAL;
 	}
-	
+
 	//
 	// misc.
 	//
@@ -1814,10 +1685,10 @@ static qbool GAL_Init()
 	glConfig.stencilBits = 8;
 	glConfig.unused_maxTextureSize = MAX_GPU_TEXTURE_SIZE;
 	glConfig.unused_maxActiveTextures = 0;
-	glConfig.unused_driverType = 0;		// ICD
-	glConfig.unused_hardwareType = 0;	// generic
+	glConfig.unused_driverType = 0;   // ICD
+	glConfig.unused_hardwareType = 0; // generic
 	glConfig.unused_deviceSupportsGamma = qtrue;
-	glConfig.unused_textureCompression = 0;	// no compression
+	glConfig.unused_textureCompression = 0; // no compression
 	glConfig.unused_textureEnvAddAvailable = qtrue;
 	glConfig.unused_displayFrequency = 0;
 	glConfig.unused_isFullscreen = !!r_fullscreen->integer;
@@ -1828,28 +1699,23 @@ static qbool GAL_Init()
 	glConfig.vendor_string[0] = '\0';
 	glConfig.version_string[0] = '\0';
 	glInfo.displayFrequency = 0;
-	glInfo.maxAnisotropy = D3D11_REQ_MAXANISOTROPY;	// @NOTE: D3D10_REQ_MAXANISOTROPY == D3D11_REQ_MAXANISOTROPY
+	glInfo.maxAnisotropy = D3D11_REQ_MAXANISOTROPY; // @NOTE: D3D10_REQ_MAXANISOTROPY == D3D11_REQ_MAXANISOTROPY
 	glInfo.maxTextureSize = MAX_GPU_TEXTURE_SIZE;
 	glInfo.depthFadeSupport = r_depthFade->integer == 1;
 	glInfo.mipGenSupport = mipGenOK;
 	glInfo.alphaToCoverageSupport = alphaToCoverageOK;
 
-	if(fullInit)
-	{
+	if (fullInit) {
 		d3ds.adapterInfo.valid = qfalse;
 
 		IDXGIDevice* dxgiDevice;
-		if(SUCCEEDED(d3ds.device->QueryInterface(__uuidof(IDXGIDevice), (void**)&dxgiDevice)))
-		{
+		if (SUCCEEDED(d3ds.device->QueryInterface(__uuidof(IDXGIDevice), (void**)&dxgiDevice))) {
 			IDXGIAdapter* dxgiAdapter;
-			if(SUCCEEDED(dxgiDevice->GetAdapter(&dxgiAdapter)))
-			{
+			if (SUCCEEDED(dxgiDevice->GetAdapter(&dxgiAdapter))) {
 				DXGI_ADAPTER_DESC desc;
-				if(SUCCEEDED(dxgiAdapter->GetDesc(&desc)))
-				{
+				if (SUCCEEDED(dxgiAdapter->GetDesc(&desc))) {
 					char name[ARRAY_LEN(desc.Description) + 1];
-					if(WideCharToMultiByte(CP_UTF7, 0, desc.Description, -1, name, sizeof(name) - 1, NULL, NULL) > 0)
-					{
+					if (WideCharToMultiByte(CP_UTF7, 0, desc.Description, -1, name, sizeof(name) - 1, NULL, NULL) > 0) {
 						Q_strncpyz(glConfig.renderer_string, name, sizeof(glConfig.renderer_string));
 					}
 
@@ -1864,8 +1730,7 @@ static qbool GAL_Init()
 		}
 	}
 
-	if(r_d3d11_syncOffsets->integer == D3D11SO_AUTO)
-	{
+	if (r_d3d11_syncOffsets->integer == D3D11SO_AUTO) {
 #if 0
 		// only nVidia's drivers seem to consistently handle the extra IASetVertexBuffers calls well enough
 		d3d.splitBufferOffsets = Q_stristr(glConfig.renderer_string, "NVIDIA") != NULL;
@@ -1873,9 +1738,7 @@ static qbool GAL_Init()
 		// however, we'll just treat all drivers as equally dumb by default for now
 		d3d.splitBufferOffsets = D3D11SO_SYNCEDOFFSETS;
 #endif
-	}
-	else
-	{
+	} else {
 		d3d.splitBufferOffsets = r_d3d11_syncOffsets->integer == D3D11SO_SPLITOFFSETS;
 	}
 
@@ -1886,14 +1749,12 @@ static qbool GAL_Init()
 
 static void GAL_ShutDown(qbool fullShutDown)
 {
-	for(int i = 0; i < d3d.textureCount; ++i)
-	{
+	for (int i = 0; i < d3d.textureCount; ++i) {
 		COM_RELEASE(d3d.textures[i].view);
 		COM_RELEASE(d3d.textures[i].texture);
 	}
 
-	for(int i = 0; i < ARRAY_LEN(d3d.pipelines); ++i)
-	{
+	for (int i = 0; i < ARRAY_LEN(d3d.pipelines); ++i) {
 		COM_RELEASE(d3d.pipelines[i].inputLayout);
 		COM_RELEASE(d3d.pipelines[i].vertexShader);
 		COM_RELEASE(d3d.pipelines[i].pixelShader);
@@ -1901,15 +1762,13 @@ static void GAL_ShutDown(qbool fullShutDown)
 		COM_RELEASE(d3d.pipelines[i].pixelBuffer);
 	}
 
-	for(int i = 0; i < ARRAY_LEN(d3d.mipGenTextures); ++i)
-	{
+	for (int i = 0; i < ARRAY_LEN(d3d.mipGenTextures); ++i) {
 		COM_RELEASE(d3d.mipGenTextures[i].texture);
 		COM_RELEASE(d3d.mipGenTextures[i].srv);
 		COM_RELEASE(d3d.mipGenTextures[i].uav);
 	}
 
-	for(int i = 0; i < ARRAY_LEN(d3d.vertexBuffers); ++i)
-	{
+	for (int i = 0; i < ARRAY_LEN(d3d.vertexBuffers); ++i) {
 		COM_RELEASE(d3d.vertexBuffers[i].buffer);
 	}
 	COM_RELEASE(d3d.indexBuffer.buffer);
@@ -1938,15 +1797,13 @@ static void GAL_ShutDown(qbool fullShutDown)
 	COM_RELEASE(d3d.mipLinearToGammaConstBuffer);
 	COM_RELEASE(d3d.mipGammaToLinearConstBuffer);
 
-	for(int i = 0; i < ARRAY_LEN(d3d.frameQueries); ++i)
-	{
+	for (int i = 0; i < ARRAY_LEN(d3d.frameQueries); ++i) {
 		COM_RELEASE(d3d.frameQueries[i].disjoint);
 		COM_RELEASE(d3d.frameQueries[i].frameStart);
 		COM_RELEASE(d3d.frameQueries[i].frameEnd);
 	}
 
-	if(fullShutDown)
-	{
+	if (fullShutDown) {
 #if defined(_DEBUG)
 		// DXGIGetDebugInterface would be nicer but it requires Windows 8...
 		// It doesn't reference the device, so the device doesn't show up as a false positive.
@@ -1960,24 +1817,21 @@ static void GAL_ShutDown(qbool fullShutDown)
 
 #if defined(_DEBUG)
 		OutputDebugStringA("================================================================\n");
-		if(SUCCEEDED(debugQuery))
-		{
+		if (SUCCEEDED(debugQuery)) {
 			OutputDebugStringA("Summary\n");
 			debug->ReportLiveDeviceObjects(D3D11_RLDO_SUMMARY);
 			OutputDebugStringA("================================================================\n");
 			OutputDebugStringA("Details\n");
 			debug->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
 			debug->Release();
-		}
-		else
-		{
+		} else {
 			OutputDebugStringA("ID3D11Device::QueryInterface of ID3D11Debug failed!\n");
 			OutputDebugStringA(va("%s\n", GetSystemErrorString(debugQuery)));
 		}
 		OutputDebugStringA("================================================================\n");
 #endif
 
-		if(d3ds.library != NULL)
+		if (d3ds.library != NULL)
 			FreeLibrary(d3ds.library);
 
 		memset(&d3ds, 0, sizeof(d3ds));
@@ -2004,16 +1858,13 @@ static void BeginQueries()
 	qd.Query = D3D11_QUERY_TIMESTAMP;
 	d3ds.device->CreateQuery(&qd, &queries->frameStart);
 	d3ds.device->CreateQuery(&qd, &queries->frameEnd);
-	if(queries->disjoint != NULL &&
-	   queries->frameStart != NULL &&
-	   queries->frameEnd != NULL)
-	{
+	if (queries->disjoint != NULL &&
+	    queries->frameStart != NULL &&
+	    queries->frameEnd != NULL) {
 		queries->valid = qtrue;
 		d3ds.context->Begin(queries->disjoint);
 		d3ds.context->End(queries->frameStart);
-	}
-	else
-	{
+	} else {
 		COM_RELEASE(queries->disjoint);
 		COM_RELEASE(queries->frameStart);
 		COM_RELEASE(queries->frameEnd);
@@ -2024,8 +1875,7 @@ static void EndQueries()
 {
 	// finish this frame
 	FrameQueries* queries = &d3d.frameQueries[d3d.frameQueriesWriteIndex];
-	if(queries->valid)
-	{
+	if (queries->valid) {
 		d3ds.context->End(queries->frameEnd);
 		d3ds.context->End(queries->disjoint);
 		d3d.frameQueriesWriteIndex = (d3d.frameQueriesWriteIndex + 1) % ARRAY_LEN(d3d.frameQueries);
@@ -2035,16 +1885,14 @@ static void EndQueries()
 	D3D10_QUERY_DATA_TIMESTAMP_DISJOINT disjoint = { 0 };
 	backEnd.pc3D[RB_USEC_GPU] = 0; // pessimism...
 	queries = &d3d.frameQueries[d3d.frameQueriesReadIndex];
-	if(queries->valid &&
-	   d3ds.context->GetData(queries->disjoint, &disjoint, sizeof(disjoint), D3D11_ASYNC_GETDATA_DONOTFLUSH) == S_OK)
-	{
+	if (queries->valid &&
+	    d3ds.context->GetData(queries->disjoint, &disjoint, sizeof(disjoint), D3D11_ASYNC_GETDATA_DONOTFLUSH) == S_OK) {
 		UINT64 start = 0;
 		UINT64 end = 0;
-		if(!disjoint.Disjoint &&
-		   disjoint.Frequency > 0 &&
-		   d3ds.context->GetData(queries->frameStart, &start, sizeof(UINT64), D3D11_ASYNC_GETDATA_DONOTFLUSH) == S_OK &&
-		   d3ds.context->GetData(queries->frameEnd, &end, sizeof(UINT64), D3D11_ASYNC_GETDATA_DONOTFLUSH) == S_OK)
-		{
+		if (!disjoint.Disjoint &&
+		    disjoint.Frequency > 0 &&
+		    d3ds.context->GetData(queries->frameStart, &start, sizeof(UINT64), D3D11_ASYNC_GETDATA_DONOTFLUSH) == S_OK &&
+		    d3ds.context->GetData(queries->frameEnd, &end, sizeof(UINT64), D3D11_ASYNC_GETDATA_DONOTFLUSH) == S_OK) {
 			backEnd.pc3D[RB_USEC_GPU] = int(((end - start) * UINT64(1000000)) / disjoint.Frequency);
 		}
 		d3d.frameQueriesReadIndex = (d3d.frameQueriesReadIndex + 1) % ARRAY_LEN(d3d.frameQueries);
@@ -2078,21 +1926,15 @@ static void DrawPostProcess(float vsX, float vsY, float srX, float srY, qbool sc
 	BindImage(0, tr.whiteImage);
 	ApplyPixelShaderResource(0, d3d.resolveTextureShaderView);
 	ApplySamplerState(0, TW_CLAMP_TO_EDGE, TM_BILINEAR);
-	if(screenshot)
-	{
+	if (screenshot) {
 		ApplyViewportAndScissor(0, 0, glConfig.vidWidth, glConfig.vidHeight, glConfig.vidHeight);
-	}
-	else
-	{
-		if(vsX < 1.0f || vsY < 1.0f)
-		{
+	} else {
+		if (vsX < 1.0f || vsY < 1.0f) {
 			const int x = (glInfo.winWidth - glInfo.winWidth * vsX) / 2.0f;
 			const int y = (glInfo.winHeight - glInfo.winHeight * vsY) / 2.0f;
 			ApplyViewport(0, 0, glInfo.winWidth, glInfo.winHeight, glInfo.winHeight);
 			ApplyScissor(x, y, glConfig.vidWidth * srX, glConfig.vidHeight * srY, glInfo.winHeight);
-		}
-		else
-		{
+		} else {
 			ApplyViewportAndScissor(0, 0, glInfo.winWidth, glInfo.winHeight, glInfo.winHeight);
 		}
 	}
@@ -2106,26 +1948,19 @@ static void GAL_EndFrame()
 	float vsY = 1.0f;
 	float srX = 1.0f; // scissor rectangle scale factors
 	float srY = 1.0f;
-	if(r_fullscreen->integer == 1 && r_mode->integer == VIDEOMODE_UPSCALE)
-	{
-		if(r_blitMode->integer == BLITMODE_CENTERED)
-		{
+	if (r_fullscreen->integer == 1 && r_mode->integer == VIDEOMODE_UPSCALE) {
+		if (r_blitMode->integer == BLITMODE_CENTERED) {
 			vsX = (float)glConfig.vidWidth / (float)glInfo.winWidth;
 			vsY = (float)glConfig.vidHeight / (float)glInfo.winHeight;
-		}
-		else if(r_blitMode->integer == BLITMODE_ASPECT)
-		{
+		} else if (r_blitMode->integer == BLITMODE_ASPECT) {
 			const float ars = (float)glConfig.vidWidth / (float)glConfig.vidHeight;
 			const float ard = (float)glInfo.winWidth / (float)glInfo.winHeight;
-			if(ard > ars)
-			{
+			if (ard > ars) {
 				vsX = ars / ard;
 				vsY = 1.0f;
 				srX = (float)glInfo.winHeight / (float)glConfig.vidHeight;
 				srY = srX;
-			}
-			else
-			{
+			} else {
 				vsX = 1.0f;
 				vsY = ard / ars;
 				srX = (float)glInfo.winWidth / (float)glConfig.vidWidth;
@@ -2133,8 +1968,7 @@ static void GAL_EndFrame()
 			}
 		}
 
-		if(vsX != 1.0f || vsY != 1.0f)
-		{
+		if (vsX != 1.0f || vsY != 1.0f) {
 			const FLOAT clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
 			d3ds.context->ClearRenderTargetView(d3d.backBufferRTView, clearColor);
 		}
@@ -2148,37 +1982,27 @@ static void GAL_EndFrame()
 	const UINT presentFlags = d3ds.flipAndTear && r_swapInterval->integer == 0 ? DXGI_PRESENT_ALLOW_TEARING : 0;
 	const HRESULT hr = d3ds.swapChain->Present(abs(r_swapInterval->integer), presentFlags);
 
-	enum PresentError
-	{
+	enum PresentError {
 		PE_NONE,
 		PE_DEVICE_REMOVED,
 		PE_DEVICE_RESET
 	};
 	PresentError presentError = PE_NONE;
 	HRESULT deviceRemovedReason = S_OK;
-	if(hr == DXGI_ERROR_DEVICE_REMOVED || hr == D3DDDIERR_DEVICEREMOVED)
-	{
+	if (hr == DXGI_ERROR_DEVICE_REMOVED || hr == D3DDDIERR_DEVICEREMOVED) {
 		deviceRemovedReason = d3ds.device->GetDeviceRemovedReason();
-		if(deviceRemovedReason == DXGI_ERROR_DEVICE_RESET)
-		{
+		if (deviceRemovedReason == DXGI_ERROR_DEVICE_RESET) {
 			presentError = PE_DEVICE_RESET;
-		}
-		else
-		{
+		} else {
 			presentError = PE_DEVICE_REMOVED;
 		}
-	}
-	else if(hr == DXGI_ERROR_DEVICE_RESET)
-	{
+	} else if (hr == DXGI_ERROR_DEVICE_RESET) {
 		presentError = PE_DEVICE_RESET;
 	}
 
-	if(presentError == PE_DEVICE_REMOVED)
-	{
+	if (presentError == PE_DEVICE_REMOVED) {
 		ri.Error(ERR_FATAL, "Direct3D device was removed! Reason: %s", GetDeviceRemovedReasonString(deviceRemovedReason));
-	}
-	else if(presentError == PE_DEVICE_RESET)
-	{
+	} else if (presentError == PE_DEVICE_RESET) {
 		ri.Printf(PRINT_ERROR, "Direct3D device was reset! Restarting the video system...");
 		Cmd_ExecuteString("vid_restart;");
 	}
@@ -2208,29 +2032,24 @@ static void GAL_EndSkyAndClouds()
 
 static void WriteInvalidImage(int w, int h, int alignment, colorSpace_t colorSpace, void* out)
 {
-	if(colorSpace == CS_RGBA)
+	if (colorSpace == CS_RGBA)
 		memset(out, 0x7F, PAD(w * 4, alignment) * h);
-	else if(colorSpace == CS_BGR)
+	else if (colorSpace == CS_BGR)
 		memset(out, 0x7F, PAD(w * 3, alignment) * h);
 }
 
 static void GAL_ReadPixels(int, int, int w, int h, int alignment, colorSpace_t colorSpace, void* out)
 {
-	if(d3d.readbackTexture == NULL)
-	{
+	if (d3d.readbackTexture == NULL) {
 		WriteInvalidImage(w, h, alignment, colorSpace, out);
 		return;
 	}
 
-	if(r_mode->integer != VIDEOMODE_UPSCALE)
-	{
+	if (r_mode->integer != VIDEOMODE_UPSCALE) {
 		// matching dimensions means we can copy the data directly from the back buffer
 		d3ds.context->CopyResource(d3d.readbackTexture, d3d.backBufferTexture);
-	}
-	else
-	{
-		if(d3d.screenshotTexture == NULL || d3d.screenshotTextureRTView == NULL)
-		{
+	} else {
+		if (d3d.screenshotTexture == NULL || d3d.screenshotTextureRTView == NULL) {
 			WriteInvalidImage(w, h, alignment, colorSpace, out);
 			return;
 		}
@@ -2243,22 +2062,18 @@ static void GAL_ReadPixels(int, int, int w, int h, int alignment, colorSpace_t c
 
 	D3D11_MAPPED_SUBRESOURCE ms;
 	HRESULT hr = d3ds.context->Map(d3d.readbackTexture, 0, D3D11_MAP_READ, NULL, &ms);
-	if(FAILED(hr))
-	{
+	if (FAILED(hr)) {
 		WriteInvalidImage(w, h, alignment, colorSpace, out);
 		return;
 	}
 
-	if(colorSpace == CS_RGBA)
-	{
+	if (colorSpace == CS_RGBA) {
 		const byte* srcRow = (const byte*)ms.pData;
 		byte* dstRow = (byte*)out + PAD(w * 4, alignment) * (h - 1);
-		for(int y = 0; y < h; ++y)
-		{
+		for (int y = 0; y < h; ++y) {
 			const byte* s = srcRow;
 			byte* d = dstRow;
-			for(int x = 0; x < w; ++x)
-			{
+			for (int x = 0; x < w; ++x) {
 				d[0] = s[0];
 				d[1] = s[1];
 				d[2] = s[2];
@@ -2270,17 +2085,13 @@ static void GAL_ReadPixels(int, int, int w, int h, int alignment, colorSpace_t c
 			srcRow += ms.RowPitch;
 			dstRow -= PAD(w * 4, alignment);
 		}
-	}
-	else if(colorSpace == CS_BGR)
-	{
+	} else if (colorSpace == CS_BGR) {
 		const byte* srcRow = (const byte*)ms.pData;
 		byte* dstRow = (byte*)out + PAD(w * 3, alignment) * (h - 1);
-		for(int y = 0; y < h; ++y)
-		{
+		for (int y = 0; y < h; ++y) {
 			const byte* s = srcRow;
 			byte* d = dstRow;
-			for(int x = 0; x < w; ++x)
-			{
+			for (int x = 0; x < w; ++x) {
 				d[2] = s[0];
 				d[1] = s[1];
 				d[0] = s[2];
@@ -2298,7 +2109,7 @@ static void GAL_ReadPixels(int, int, int w, int h, int alignment, colorSpace_t c
 
 static void GAL_CreateTexture(image_t* image, int mipCount, int w, int h)
 {
-	if(d3d.textureCount >= ARRAY_LEN(d3d.textures))
+	if (d3d.textureCount >= ARRAY_LEN(d3d.textures))
 		ri.Error(ERR_FATAL, "Too many textures allocated for the Direct3D 11 back-end");
 
 	CreateTexture(&d3d.textures[d3d.textureCount], image, mipCount, w, h);
@@ -2308,8 +2119,7 @@ static void GAL_CreateTexture(image_t* image, int mipCount, int w, int h)
 static void GAL_UpdateTexture(image_t* image, int mip, int x, int y, int w, int h, const void* data)
 {
 	ID3D11Texture2D* texture = d3d.textures[image->texnum].texture;
-	if(texture == NULL)
-	{
+	if (texture == NULL) {
 		return;
 	}
 
@@ -2327,27 +2137,26 @@ static void GAL_UpdateTexture(image_t* image, int mip, int x, int y, int w, int 
 
 static void GAL_UpdateScratch(image_t* image, int w, int h, const void* data, qbool dirty)
 {
-	if(image->texnum <= 0 || image->texnum > ARRAY_LEN(d3d.textures))
-	{
+	if (image->texnum <= 0 || image->texnum > ARRAY_LEN(d3d.textures)) {
 		return;
 	}
 
-	if(w != image->width || h != image->height)
-	{
+	if (w != image->width || h != image->height) {
 		image->width = w;
 		image->height = h;
 		CreateTexture(&d3d.textures[image->texnum], image, 1, w, h);
 		GAL_UpdateTexture(image, 0, 0, 0, w, h, data);
-	}
-	else if(dirty)
-	{
+	} else if (dirty) {
 		GAL_UpdateTexture(image, 0, 0, 0, w, h, data);
 	}
 }
 
 static void GAL_CreateTextureEx(image_t* image, int mipCount, int mipOffset, int w, int h, const void* mip0)
 {
-	enum { GroupSize = 8, GroupMask = GroupSize - 1 };
+	enum {
+		GroupSize = 8,
+		GroupMask = GroupSize - 1
+	};
 
 	// needed so we don't bind a resource that's already bound
 	ID3D11ShaderResourceView* const srvNull = NULL;
@@ -2390,8 +2199,7 @@ static void GAL_CreateTextureEx(image_t* image, int mipCount, int mipOffset, int
 	dataL2G.invGamma = 1.0f / r_mipGenGamma->value;
 
 	// copy to destination mip 0 now if needed
-	if(mipOffset == 0)
-	{
+	if (mipOffset == 0) {
 		readIndex = 0;
 		writeIndex = 2;
 		memcpy(dataL2G.blendColor, r_mipBlendColors[0], sizeof(dataL2G.blendColor));
@@ -2418,13 +2226,12 @@ static void GAL_CreateTextureEx(image_t* image, int mipCount, int mipOffset, int
 	memcpy(dataDown.weights, tr.mipFilter, sizeof(dataDown.weights));
 	dataDown.clampMode = image->wrapClampMode == TW_REPEAT ? 0 : 1;
 
-	for(int i = 1; i < mipCount; ++i)
-	{
+	for (int i = 1; i < mipCount; ++i) {
 		const int w1 = w;
 		const int h1 = h;
 		w = max(w / 2, 1);
 		h = max(h / 2, 1);
-		
+
 		// down-sample on the X-axis
 		readIndex = 0;
 		writeIndex = 1;
@@ -2461,8 +2268,7 @@ static void GAL_CreateTextureEx(image_t* image, int mipCount, int mipOffset, int
 		d3ds.context->Dispatch((w + GroupMask) / GroupSize, (h + GroupMask) / GroupSize, 1);
 
 		const int destMip = i - mipOffset;
-		if(destMip >= 0)
-		{
+		if (destMip >= 0) {
 			// convert to final format
 			readIndex = 0;
 			writeIndex = 2;
@@ -2492,26 +2298,20 @@ static void GAL_CreateTextureEx(image_t* image, int mipCount, int mipOffset, int
 static void DrawGeneric()
 {
 	AppendVertexData(&d3d.indexBuffer, tess.indexes, tess.numIndexes);
-	if(d3d.splitBufferOffsets)
-	{
+	if (d3d.splitBufferOffsets) {
 		AppendVertexData(&d3d.vertexBuffers[VB_POSITION], tess.xyz, tess.numVertexes);
 	}
 
-	for(int i = 0; i < tess.shader->numStages; ++i)
-	{
+	for (int i = 0; i < tess.shader->numStages; ++i) {
 		const shaderStage_t* stage = tess.xstages[i];
 
-		if(d3d.splitBufferOffsets)
-		{
+		if (d3d.splitBufferOffsets) {
 			AppendVertexData(&d3d.vertexBuffers[VB_TEXCOORD], tess.svars[i].texcoordsptr, tess.numVertexes);
 			AppendVertexData(&d3d.vertexBuffers[VB_COLOR], tess.svars[i].colors, tess.numVertexes);
-			if(stage->mtStages == 1)
-			{
+			if (stage->mtStages == 1) {
 				AppendVertexData(&d3d.vertexBuffers[VB_TEXCOORD2], tess.svars[i + 1].texcoordsptr, tess.numVertexes);
 			}
-		}
-		else
-		{
+		} else {
 			const void* pointers[VB_COUNT];
 			pointers[VB_POSITION] = tess.xyz;
 			pointers[VB_NORMAL] = NULL;
@@ -2525,15 +2325,12 @@ static void DrawGeneric()
 
 		BindBundle(0, &stage->bundle);
 
-		if(stage->mtStages == 1)
-		{
+		if (stage->mtStages == 1) {
 			const shaderStage_t* stage2 = tess.xstages[i + 1];
 			d3d.texEnv = stage2->mtEnv;
 			BindBundle(1, &stage2->bundle);
 			i += 1;
-		}
-		else
-		{
+		} else {
 			BindImage(1, tr.whiteImage);
 			d3d.texEnv = TE_DISABLED;
 		}
@@ -2543,15 +2340,11 @@ static void DrawGeneric()
 		DrawIndexed(tess.numIndexes);
 	}
 
-	if(tess.drawFog)
-	{
-		if(d3d.splitBufferOffsets)
-		{
+	if (tess.drawFog) {
+		if (d3d.splitBufferOffsets) {
 			AppendVertexData(&d3d.vertexBuffers[VB_TEXCOORD], tess.svarsFog.texcoordsptr, tess.numVertexes);
 			AppendVertexData(&d3d.vertexBuffers[VB_COLOR], tess.svarsFog.colors, tess.numVertexes);
-		}
-		else
-		{
+		} else {
 			const void* pointers[VB_COUNT];
 			pointers[VB_POSITION] = tess.xyz;
 			pointers[VB_NORMAL] = NULL;
@@ -2579,14 +2372,11 @@ static void DrawDynamicLight()
 	const shaderStage_t* stage = tess.xstages[stageIndex];
 
 	AppendVertexData(&d3d.indexBuffer, tess.dlIndexes, tess.dlNumIndexes);
-	if(d3d.splitBufferOffsets)
-	{
+	if (d3d.splitBufferOffsets) {
 		AppendVertexData(&d3d.vertexBuffers[VB_POSITION], tess.xyz, tess.numVertexes);
 		AppendVertexData(&d3d.vertexBuffers[VB_NORMAL], tess.normal, tess.numVertexes);
 		AppendVertexData(&d3d.vertexBuffers[VB_TEXCOORD], tess.svars[stageIndex].texcoordsptr, tess.numVertexes);
-	}
-	else
-	{
+	} else {
 		const void* pointers[VB_COUNT];
 		pointers[VB_POSITION] = tess.xyz;
 		pointers[VB_NORMAL] = tess.normal;
@@ -2607,22 +2397,17 @@ static void DrawDynamicLight()
 static void DrawDepthFade()
 {
 	AppendVertexData(&d3d.indexBuffer, tess.indexes, tess.numIndexes);
-	if(d3d.splitBufferOffsets)
-	{
+	if (d3d.splitBufferOffsets) {
 		AppendVertexData(&d3d.vertexBuffers[VB_POSITION], tess.xyz, tess.numVertexes);
 	}
 
-	for(int i = 0; i < tess.shader->numStages; ++i)
-	{
+	for (int i = 0; i < tess.shader->numStages; ++i) {
 		const shaderStage_t* stage = tess.xstages[i];
 
-		if(d3d.splitBufferOffsets)
-		{
+		if (d3d.splitBufferOffsets) {
 			AppendVertexData(&d3d.vertexBuffers[VB_TEXCOORD], tess.svars[i].texcoordsptr, tess.numVertexes);
 			AppendVertexData(&d3d.vertexBuffers[VB_COLOR], tess.svars[i].colors, tess.numVertexes);
-		}
-		else
-		{
+		} else {
 			const void* pointers[VB_COUNT];
 			pointers[VB_POSITION] = tess.xyz;
 			pointers[VB_NORMAL] = NULL;
@@ -2644,18 +2429,13 @@ static void DrawDepthFade()
 
 static void GAL_Draw(drawType_t type)
 {
-	if(type == DT_GENERIC)
-	{
+	if (type == DT_GENERIC) {
 		ApplyPipeline(PID_GENERIC);
 		DrawGeneric();
-	}
-	else if(type == DT_DYNAMIC_LIGHT)
-	{
+	} else if (type == DT_DYNAMIC_LIGHT) {
 		ApplyPipeline(PID_DYNAMIC_LIGHT);
 		DrawDynamicLight();
-	}
-	else if(type == DT_SOFT_SPRITE)
-	{
+	} else if (type == DT_SOFT_SPRITE) {
 		ApplyPipeline(PID_SOFT_SPRITE);
 		DrawDepthFade();
 	}
@@ -2676,24 +2456,20 @@ static void ClearViews(qbool shouldClearColor, const FLOAT* clearColor)
 	// Getting rid of the stencil buffer is definitely on the cards.
 
 	const qbool fullClear =
-		backEnd.viewParms.viewportX == 0 &&
-		backEnd.viewParms.viewportY == 0 &&
-		backEnd.viewParms.viewportWidth == glConfig.vidWidth &&
-		backEnd.viewParms.viewportHeight == glConfig.vidHeight;
+	    backEnd.viewParms.viewportX == 0 &&
+	    backEnd.viewParms.viewportY == 0 &&
+	    backEnd.viewParms.viewportWidth == glConfig.vidWidth &&
+	    backEnd.viewParms.viewportHeight == glConfig.vidHeight;
 
-	if(fullClear)
-	{
+	if (fullClear) {
 		d3ds.context->ClearDepthStencilView(d3d.depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-		if(shouldClearColor)
-		{
+		if (shouldClearColor) {
 			d3ds.context->ClearRenderTargetView(d3d.renderTargetViewMS, clearColor);
 		}
-	}
-	else
-	{
+	} else {
 		const unsigned int stateBits =
-			GLS_DEPTHMASK_TRUE | GLS_DEPTHFUNC_ALWAYS |
-			GLS_SRCBLEND_SRC_ALPHA | GLS_DSTBLEND_ONE_MINUS_SRC_ALPHA;
+		    GLS_DEPTHMASK_TRUE | GLS_DEPTHFUNC_ALWAYS |
+		    GLS_SRCBLEND_SRC_ALPHA | GLS_DSTBLEND_ONE_MINUS_SRC_ALPHA;
 		ApplyPipeline(PID_CLEAR);
 		ApplyState(stateBits, CT_TWO_SIDED, qfalse);
 		d3d.clearPSData.color[0] = clearColor[0];
@@ -2715,22 +2491,18 @@ static void GAL_Begin3D()
 
 	qbool shouldClearColor = qfalse;
 	FLOAT clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
-	if(backEnd.refdef.rdflags & RDF_HYPERSPACE)
-	{
+	if (backEnd.refdef.rdflags & RDF_HYPERSPACE) {
 		const FLOAT c = RB_HyperspaceColor();
 		clearColor[0] = c;
 		clearColor[1] = c;
 		clearColor[2] = c;
 		shouldClearColor = qtrue;
-	}
-	else if(r_fastsky->integer && !(backEnd.refdef.rdflags & RDF_NOWORLDMODEL))
-	{
+	} else if (r_fastsky->integer && !(backEnd.refdef.rdflags & RDF_NOWORLDMODEL)) {
 		shouldClearColor = qtrue;
 	}
 	ClearViews(shouldClearColor, clearColor);
 
-	if(backEnd.viewParms.isPortal)
-	{
+	if (backEnd.viewParms.isPortal) {
 		float plane[4];
 		plane[0] = backEnd.viewParms.portalPlane.normal[0];
 		plane[1] = backEnd.viewParms.portalPlane.normal[1];
@@ -2746,15 +2518,13 @@ static void GAL_Begin3D()
 		float* o = plane;
 		const float* m = s_flipMatrix;
 		const float* v = plane2;
-		o[0] = m[0] * v[0] + m[4] * v[1] + m[ 8] * v[2] + m[12] * v[3];
-		o[1] = m[1] * v[0] + m[5] * v[1] + m[ 9] * v[2] + m[13] * v[3];
+		o[0] = m[0] * v[0] + m[4] * v[1] + m[8] * v[2] + m[12] * v[3];
+		o[1] = m[1] * v[0] + m[5] * v[1] + m[9] * v[2] + m[13] * v[3];
 		o[2] = m[2] * v[0] + m[6] * v[1] + m[10] * v[2] + m[14] * v[3];
 		o[3] = m[3] * v[0] + m[7] * v[1] + m[11] * v[2] + m[15] * v[3];
 
 		memcpy(d3d.clipPlane, plane, sizeof(d3d.clipPlane));
-	}
-	else
-	{
+	} else {
 		const float clipPlane[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
 		memcpy(d3d.clipPlane, clipPlane, sizeof(d3d.clipPlane));
 	}
@@ -2801,8 +2571,7 @@ static void GAL_PrintInfo()
 	ri.Printf(PRINT_ALL, "Direct3D device feature level: %s\n", d3ds.device->GetFeatureLevel() == D3D_FEATURE_LEVEL_11_0 ? "11.0" : "10.1");
 	ri.Printf(PRINT_ALL, "Direct3D vertex buffer upload strategy: %s\n", d3d.splitBufferOffsets ? "split offsets" : "sync'd offsets");
 	ri.Printf(PRINT_ALL, "DXGI presentation model: %s\n", d3ds.flipAndTear ? "flip + discard" : "blit + discard");
-	if(d3ds.adapterInfo.valid)
-	{
+	if (d3ds.adapterInfo.valid) {
 		ri.Printf(PRINT_ALL, "%6d MB of dedicated GPU memory\n", d3ds.adapterInfo.dedicatedVideoMemoryMB);
 		ri.Printf(PRINT_ALL, "%6d MB of shared system memory\n", d3ds.adapterInfo.sharedSystemMemoryMB);
 		ri.Printf(PRINT_ALL, "%6d MB of dedicated system memory\n", d3ds.adapterInfo.dedicatedSystemMemoryMB);

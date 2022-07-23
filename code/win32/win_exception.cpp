@@ -33,17 +33,17 @@ along with Challenge Quake 3. If not, see <https://www.gnu.org/licenses/>.
 
 
 #if !id386 && !idx64
-#	error "This architecture is not supported."
+#error "This architecture is not supported."
 #endif
 
 
-typedef void (WINAPI *FptrGeneric)();
-typedef BOOL (WINAPI *FptrSymInitialize)(HANDLE, PCSTR, BOOL);
-typedef PVOID (WINAPI *FptrSymFunctionTableAccess64)(HANDLE, DWORD64);
-typedef DWORD64 (WINAPI *FptrSymGetModuleBase64)(HANDLE, DWORD64);
-typedef BOOL (WINAPI *FptrStackWalk64)(DWORD, HANDLE, HANDLE, LPSTACKFRAME64, PVOID, PREAD_PROCESS_MEMORY_ROUTINE64, PFUNCTION_TABLE_ACCESS_ROUTINE64, PGET_MODULE_BASE_ROUTINE64, PTRANSLATE_ADDRESS_ROUTINE64);
-typedef BOOL (WINAPI *FptrSymGetSymFromAddr64)(HANDLE, DWORD64, PDWORD64, PIMAGEHLP_SYMBOL64);
-typedef BOOL (WINAPI *FptrMiniDumpWriteDump)(HANDLE, DWORD, HANDLE, MINIDUMP_TYPE, CONST PMINIDUMP_EXCEPTION_INFORMATION, CONST PMINIDUMP_USER_STREAM_INFORMATION, CONST PMINIDUMP_CALLBACK_INFORMATION);
+typedef void(WINAPI* FptrGeneric)();
+typedef BOOL(WINAPI* FptrSymInitialize)(HANDLE, PCSTR, BOOL);
+typedef PVOID(WINAPI* FptrSymFunctionTableAccess64)(HANDLE, DWORD64);
+typedef DWORD64(WINAPI* FptrSymGetModuleBase64)(HANDLE, DWORD64);
+typedef BOOL(WINAPI* FptrStackWalk64)(DWORD, HANDLE, HANDLE, LPSTACKFRAME64, PVOID, PREAD_PROCESS_MEMORY_ROUTINE64, PFUNCTION_TABLE_ACCESS_ROUTINE64, PGET_MODULE_BASE_ROUTINE64, PTRANSLATE_ADDRESS_ROUTINE64);
+typedef BOOL(WINAPI* FptrSymGetSymFromAddr64)(HANDLE, DWORD64, PDWORD64, PIMAGEHLP_SYMBOL64);
+typedef BOOL(WINAPI* FptrMiniDumpWriteDump)(HANDLE, DWORD, HANDLE, MINIDUMP_TYPE, CONST PMINIDUMP_EXCEPTION_INFORMATION, CONST PMINIDUMP_USER_STREAM_INFORMATION, CONST PMINIDUMP_CALLBACK_INFORMATION);
 
 
 typedef struct {
@@ -57,7 +57,7 @@ typedef struct {
 } debug_help_t;
 
 
-static void WIN_CloseDebugHelp( debug_help_t* debugHelp )
+static void WIN_CloseDebugHelp(debug_help_t* debugHelp)
 {
 	if (debugHelp->libraryHandle == NULL)
 		return;
@@ -66,17 +66,17 @@ static void WIN_CloseDebugHelp( debug_help_t* debugHelp )
 	debugHelp->libraryHandle = NULL;
 }
 
-static qboolean WIN_OpenDebugHelp( debug_help_t* debugHelp )
+static qboolean WIN_OpenDebugHelp(debug_help_t* debugHelp)
 {
 	debugHelp->libraryHandle = LoadLibraryA("dbghelp.dll");
 	if (debugHelp->libraryHandle == NULL)
 		return qfalse;
 
-#define GET_FUNCTION(func) \
+#define GET_FUNCTION(func)                                                         \
 	debugHelp->func = (Fptr##func)GetProcAddress(debugHelp->libraryHandle, #func); \
-	if (debugHelp->func == NULL) { \
-		WIN_CloseDebugHelp(debugHelp); \
-		return qfalse; \
+	if (debugHelp->func == NULL) {                                                 \
+		WIN_CloseDebugHelp(debugHelp);                                             \
+		return qfalse;                                                             \
 	}
 
 	GET_FUNCTION(SymInitialize)
@@ -91,7 +91,7 @@ static qboolean WIN_OpenDebugHelp( debug_help_t* debugHelp )
 	return qtrue;
 }
 
-static void WIN_DumpStackTrace( debug_help_t* debugHelp )
+static void WIN_DumpStackTrace(debug_help_t* debugHelp)
 {
 	enum {
 		BUFFER_SIZE = 1024,
@@ -141,15 +141,15 @@ static void WIN_DumpStackTrace( debug_help_t* debugHelp )
 	const HANDLE threadHandle = GetCurrentThread();
 
 	JSONW_BeginNamedArray("stack_trace");
-	
+
 	unsigned char buffer[sizeof(IMAGEHLP_SYMBOL64) + BUFFER_SIZE];
 	IMAGEHLP_SYMBOL64* const symbol = (IMAGEHLP_SYMBOL64*)buffer;
 
 	int level = 1;
 	while (level++ < (MAX_LEVELS + 1)) {
 		BOOL result = debugHelp->StackWalk64(
-			machineType, processHandle, threadHandle, &stackFrame, &context,
-			NULL, debugHelp->SymFunctionTableAccess64, debugHelp->SymGetModuleBase64, NULL);
+		    machineType, processHandle, threadHandle, &stackFrame, &context,
+		    NULL, debugHelp->SymFunctionTableAccess64, debugHelp->SymGetModuleBase64, NULL);
 		if (!result || stackFrame.AddrPC.Offset == 0)
 			break;
 
@@ -180,9 +180,9 @@ static void WIN_DumpStackTrace( debug_help_t* debugHelp )
 }
 
 static BOOL WINAPI WIN_MiniDumpCallback(
-	IN PVOID CallbackParam,
-	IN CONST PMINIDUMP_CALLBACK_INPUT CallbackInput,
-	IN OUT PMINIDUMP_CALLBACK_OUTPUT CallbackOutput )
+    IN PVOID CallbackParam,
+    IN CONST PMINIDUMP_CALLBACK_INPUT CallbackInput,
+    IN OUT PMINIDUMP_CALLBACK_OUTPUT CallbackOutput)
 {
 	// Keep everything except...
 	if (CallbackInput->CallbackType != ModuleCallback)
@@ -197,7 +197,7 @@ static BOOL WINAPI WIN_MiniDumpCallback(
 	return TRUE;
 }
 
-static qboolean WIN_CreateDirectoryIfNeeded( const char* path )
+static qboolean WIN_CreateDirectoryIfNeeded(const char* path)
 {
 	const BOOL success = CreateDirectoryA(path, NULL);
 	if (success)
@@ -208,7 +208,7 @@ static qboolean WIN_CreateDirectoryIfNeeded( const char* path )
 
 static char exc_reportFolderPath[MAX_PATH];
 
-static void WIN_CreateDumpFilePath( char* buffer, const char* fileName, SYSTEMTIME* time )
+static void WIN_CreateDumpFilePath(char* buffer, const char* fileName, SYSTEMTIME* time)
 {
 	// First try to create "%temp%/cnq3_crash", then ".cnq3_crash".
 	// If both fail, just use the current directory.
@@ -223,18 +223,20 @@ static void WIN_CreateDumpFilePath( char* buffer, const char* fileName, SYSTEMTI
 
 	Q_strncpyz(exc_reportFolderPath, reportPath, sizeof(exc_reportFolderPath));
 	StringCchPrintfA(
-		buffer, MAX_PATH, "%s\\%s_%04d.%02d.%02d_%02d.%02d.%02d",
-		exc_reportFolderPath, fileName, time->wYear, time->wMonth, time->wDay,
-		time->wHour, time->wMinute, time->wSecond);
+	    buffer, MAX_PATH, "%s\\%s_%04d.%02d.%02d_%02d.%02d.%02d",
+	    exc_reportFolderPath, fileName, time->wYear, time->wMonth, time->wDay,
+	    time->wHour, time->wMinute, time->wSecond);
 }
 
-static qboolean WIN_GetOSVersion( int* major, int* minor, int* revision )
+static qboolean WIN_GetOSVersion(int* major, int* minor, int* revision)
 {
-	enum { FILE_INFO_SIZE = 4096 };
+	enum {
+		FILE_INFO_SIZE = 4096
+	};
 	const DWORD fileInfoSize = min(FILE_INFO_SIZE, GetFileVersionInfoSizeA("kernel32.dll", NULL));
 	if (fileInfoSize == 0)
 		return qfalse;
-		
+
 	char fileInfo[FILE_INFO_SIZE];
 	if (!GetFileVersionInfoA("kernel32.dll", 0, fileInfoSize, fileInfo))
 		return qfalse;
@@ -242,7 +244,7 @@ static qboolean WIN_GetOSVersion( int* major, int* minor, int* revision )
 	LPVOID osInfo = NULL;
 	UINT osInfoSize = 0;
 	if (!VerQueryValueA(&fileInfo[0], "\\", &osInfo, &osInfoSize) ||
-		osInfoSize < sizeof(VS_FIXEDFILEINFO))
+	    osInfoSize < sizeof(VS_FIXEDFILEINFO))
 		return qfalse;
 
 	const VS_FIXEDFILEINFO* const versionInfo = (const VS_FIXEDFILEINFO*)osInfo;
@@ -253,7 +255,7 @@ static qboolean WIN_GetOSVersion( int* major, int* minor, int* revision )
 	return qtrue;
 }
 
-static const char* WIN_GetExceptionCodeString( DWORD exceptionCode )
+static const char* WIN_GetExceptionCodeString(DWORD exceptionCode)
 {
 	switch (exceptionCode) {
 		case EXCEPTION_ACCESS_VIOLATION: return "The thread tried to read from or write to a virtual address for which it does not have the appropriate access.";
@@ -280,7 +282,7 @@ static const char* WIN_GetExceptionCodeString( DWORD exceptionCode )
 	}
 }
 
-static const char* WIN_GetAccessViolationCodeString( DWORD avCode )
+static const char* WIN_GetAccessViolationCodeString(DWORD avCode)
 {
 	switch (avCode) {
 		case 0: return "Read access violation";
@@ -296,24 +298,24 @@ static qbool wasDevModeValid = qfalse;
 static qbool wasMinimized = qfalse;
 #endif
 
-static qbool WIN_WriteTextData( const char* filePath, debug_help_t* debugHelp, EXCEPTION_RECORD* pExceptionRecord )
+static qbool WIN_WriteTextData(const char* filePath, debug_help_t* debugHelp, EXCEPTION_RECORD* pExceptionRecord)
 {
 	FILE* const file = fopen(filePath, "w");
 	if (file == NULL)
 		return qfalse;
 
 	JSONW_BeginFile(file);
-	
+
 	WIN_DumpStackTrace(debugHelp);
 	JSONW_HexValue("exception_code", pExceptionRecord->ExceptionCode);
 	JSONW_HexValue("exception_flags", pExceptionRecord->ExceptionFlags);
 	JSONW_StringValue("exception_description", WIN_GetExceptionCodeString(pExceptionRecord->ExceptionCode));
 
-	if (pExceptionRecord->ExceptionCode == EXCEPTION_ACCESS_VIOLATION && 
-		pExceptionRecord->NumberParameters >= 2) {
+	if (pExceptionRecord->ExceptionCode == EXCEPTION_ACCESS_VIOLATION &&
+	    pExceptionRecord->NumberParameters >= 2) {
 		JSONW_StringValue("exception_details", "%s at address %s",
-			WIN_GetAccessViolationCodeString(pExceptionRecord->ExceptionInformation[0]),
-			Q_itohex(pExceptionRecord->ExceptionInformation[1], qtrue, qtrue));
+		                  WIN_GetAccessViolationCodeString(pExceptionRecord->ExceptionInformation[0]),
+		                  Q_itohex(pExceptionRecord->ExceptionInformation[1], qtrue, qtrue));
 	}
 
 	int osVersion[3];
@@ -335,11 +337,11 @@ static qbool WIN_WriteTextData( const char* filePath, debug_help_t* debugHelp, E
 	return qtrue;
 }
 
-static qbool WIN_WriteMiniDump( const char* filePath, debug_help_t* debugHelp, EXCEPTION_POINTERS* pExceptionPointers )
+static qbool WIN_WriteMiniDump(const char* filePath, debug_help_t* debugHelp, EXCEPTION_POINTERS* pExceptionPointers)
 {
 	const HANDLE dumpFile = CreateFileA(
-		filePath, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_WRITE | FILE_SHARE_READ,
-		0, CREATE_ALWAYS, 0, 0);
+	    filePath, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_WRITE | FILE_SHARE_READ,
+	    0, CREATE_ALWAYS, 0, 0);
 
 	if (dumpFile == INVALID_HANDLE_VALUE)
 		return qfalse;
@@ -356,16 +358,16 @@ static qbool WIN_WriteMiniDump( const char* filePath, debug_help_t* debugHelp, E
 	callbackInfo.CallbackParam = NULL;
 
 	debugHelp->MiniDumpWriteDump(
-		GetCurrentProcess(), GetCurrentProcessId(), dumpFile,
-		(MINIDUMP_TYPE)(MiniDumpWithIndirectlyReferencedMemory | MiniDumpScanMemory),
-		&exceptionInfo, NULL, &callbackInfo);
+	    GetCurrentProcess(), GetCurrentProcessId(), dumpFile,
+	    (MINIDUMP_TYPE)(MiniDumpWithIndirectlyReferencedMemory | MiniDumpScanMemory),
+	    &exceptionInfo, NULL, &callbackInfo);
 
 	CloseHandle(dumpFile);
 
 	return qtrue;
 }
 
-static const char* WIN_GetFileName( const char* path )
+static const char* WIN_GetFileName(const char* path)
 {
 	const char* name = strrchr(path, '\\');
 	if (name != path)
@@ -381,7 +383,7 @@ static const char* WIN_GetFileName( const char* path )
 // We consider the report written if at least 1 file was successfully written to.
 static qbool exc_reportWritten = qfalse;
 
-static void WIN_WriteExceptionFilesImpl( EXCEPTION_POINTERS* pExceptionPointers )
+static void WIN_WriteExceptionFilesImpl(EXCEPTION_POINTERS* pExceptionPointers)
 {
 	debug_help_t debugHelp;
 	if (!WIN_OpenDebugHelp(&debugHelp))
@@ -402,14 +404,15 @@ static void WIN_WriteExceptionFilesImpl( EXCEPTION_POINTERS* pExceptionPointers 
 	WIN_CloseDebugHelp(&debugHelp);
 }
 
-static int WINAPI WIN_WriteExceptionFiles( EXCEPTION_POINTERS* pExceptionPointers )
+static int WINAPI WIN_WriteExceptionFiles(EXCEPTION_POINTERS* pExceptionPointers)
 {
 	// No exception info?
 	if (!pExceptionPointers) {
 		__try {
 			// Generate an exception to get a proper context.
 			RaiseException(EXCEPTION_BREAKPOINT, 0, 0, NULL);
-		} __except (WIN_WriteExceptionFiles(GetExceptionInformation()), EXCEPTION_CONTINUE_EXECUTION) {}
+		} __except (WIN_WriteExceptionFiles(GetExceptionInformation()), EXCEPTION_CONTINUE_EXECUTION) {
+		}
 
 		return EXCEPTION_EXECUTE_HANDLER;
 	}
@@ -422,7 +425,7 @@ static int WINAPI WIN_WriteExceptionFiles( EXCEPTION_POINTERS* pExceptionPointer
 
 // Returns qtrue when execution should stop immediately and a crash report should be written.
 // Obviously, this piece of code must be *very* careful with what exception codes are considered fatal.
-static qbool WIN_IsCrashCode( DWORD exceptionCode )
+static qbool WIN_IsCrashCode(DWORD exceptionCode)
 {
 	switch (exceptionCode) {
 		// The following should always invoke our handler.
@@ -507,16 +510,18 @@ static qbool exc_exitCalled = qfalse;
 static qbool exc_quietMode = qfalse;
 static int exc_quietModeDlgRes = IDYES;
 
-static LONG WIN_HandleCrash( EXCEPTION_POINTERS* ep )
+static LONG WIN_HandleCrash(EXCEPTION_POINTERS* ep)
 {
 	__try {
 		WIN_EndTimePeriod(); // system timer resolution
-	} __except (EXCEPTION_EXECUTE_HANDLER) {}
+	} __except (EXCEPTION_EXECUTE_HANDLER) {
+	}
 
 #ifndef DEDICATED
 	__try {
 		CL_MapDownload_CrashCleanUp();
-	} __except(EXCEPTION_EXECUTE_HANDLER) {}
+	} __except (EXCEPTION_EXECUTE_HANDLER) {
+	}
 #endif
 
 	if (IsDebuggerPresent() && WIN_WouldDebuggingBeOkay())
@@ -527,16 +532,19 @@ static LONG WIN_HandleCrash( EXCEPTION_POINTERS* ep )
 		wasDevModeValid = glw_state.cdsDevModeValid;
 		if (glw_state.cdsDevModeValid)
 			WIN_SetDesktopDisplaySettings();
-	} __except (EXCEPTION_EXECUTE_HANDLER) {}
+	} __except (EXCEPTION_EXECUTE_HANDLER) {
+	}
 
 	if (g_wv.hWnd != NULL) {
 		__try {
-			wasMinimized = (qbool)!!IsIconic(g_wv.hWnd);
-		} __except(EXCEPTION_EXECUTE_HANDLER) {}
+			wasMinimized = (qbool) !!IsIconic(g_wv.hWnd);
+		} __except (EXCEPTION_EXECUTE_HANDLER) {
+		}
 
 		__try {
 			ShowWindow(g_wv.hWnd, SW_MINIMIZE);
-		} __except(EXCEPTION_EXECUTE_HANDLER) {}
+		} __except (EXCEPTION_EXECUTE_HANDLER) {
+		}
 	}
 #endif
 
@@ -553,7 +561,7 @@ static LONG WIN_HandleCrash( EXCEPTION_POINTERS* ep )
 				ShellExecute(NULL, "open", exc_reportFolderPath, NULL, NULL, SW_SHOW);
 			else
 				MessageBoxA(NULL, "CNQ3's crash report generation failed!\nExiting now", mbTitle, MB_OK | MB_ICONERROR);
-		}		
+		}
 	} else if (result == IDNO && IsDebuggerPresent()) {
 		return EXCEPTION_CONTINUE_SEARCH;
 	}
@@ -562,7 +570,7 @@ static LONG WIN_HandleCrash( EXCEPTION_POINTERS* ep )
 }
 
 // Always called.
-static LONG CALLBACK WIN_FirstExceptionHandler( EXCEPTION_POINTERS* ep )
+static LONG CALLBACK WIN_FirstExceptionHandler(EXCEPTION_POINTERS* ep)
 {
 #if defined(CNQ3_DEV)
 	MessageBeep(MB_OK);
@@ -581,7 +589,7 @@ static LONG CALLBACK WIN_FirstExceptionHandler( EXCEPTION_POINTERS* ep )
 // This is never called when a debugger is attached.
 // If a non-fatal exception happens while debugging,
 // we won't get the chance to minimize the window etc. :-(
-static LONG CALLBACK WIN_LastExceptionHandler( EXCEPTION_POINTERS* ep )
+static LONG CALLBACK WIN_LastExceptionHandler(EXCEPTION_POINTERS* ep)
 {
 #if defined(CNQ3_DEV)
 	MessageBeep(MB_ICONERROR);
@@ -591,7 +599,7 @@ static LONG CALLBACK WIN_LastExceptionHandler( EXCEPTION_POINTERS* ep )
 	return WIN_HandleCrash(ep);
 }
 
-static void WIN_ExitHandler( void )
+static void WIN_ExitHandler(void)
 {
 	exc_exitCalled = qtrue;
 	WIN_HandleCrash(NULL);
@@ -629,7 +637,7 @@ void WIN_InstallExceptionHandlers()
 			exc_quietMode = qtrue;
 			exc_quietModeDlgRes = IDCANCEL;
 			break;
-		}	
+		}
 	}
 }
 
@@ -640,7 +648,7 @@ static void WIN_RaiseException_f()
 	const int argc = Cmd_Argc();
 	unsigned int exception;
 	if ((argc != 2 && argc != 3) ||
-		sscanf(Cmd_Argv(1), "%X", &exception) != 1) {
+	    sscanf(Cmd_Argv(1), "%X", &exception) != 1) {
 		Com_Printf("Usage: %s <code_hex> [flags_hex]\n", Cmd_Argv(0));
 		return;
 	}

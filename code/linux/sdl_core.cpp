@@ -36,14 +36,14 @@ along with Challenge Quake 3. If not, see <https://www.gnu.org/licenses/>.
 // In my scenario, clearing key states after reception of the FocusIn event
 // won't prevent the application from receiving the undesired keypresses.
 
-static cvar_t*	in_noGrab;
-static cvar_t*	in_focusDelay;
-static cvar_t*	m_relative;
+static cvar_t* in_noGrab;
+static cvar_t* in_focusDelay;
+static cvar_t* m_relative;
 
-static qbool 	sdl_inputActive	= qfalse;
-static qbool	sdl_forceUnmute	= qfalse;	// overrides s_autoMute
-static int		sdl_focusTime	= INT_MIN;	// timestamp of last X11 FocusIn event
-static qbool	sdl_focused		= qtrue;	// does the X11 window have the focus?
+static qbool sdl_inputActive = qfalse;
+static qbool sdl_forceUnmute = qfalse; // overrides s_autoMute
+static int sdl_focusTime = INT_MIN;    // timestamp of last X11 FocusIn event
+static qbool sdl_focused = qtrue;      // does the X11 window have the focus?
 
 static const cvarTableItem_t in_cvars[] = {
 	{ &in_noGrab, "in_noGrab", "0", 0, CVART_BOOL, NULL, NULL, "disables input grabbing" },
@@ -58,7 +58,7 @@ static const cmdTableItem_t in_cmds[] = {
 };
 
 
-static qbool sdl_Version_AtLeast( int major, int minor, int patch )
+static qbool sdl_Version_AtLeast(int major, int minor, int patch)
 {
 	SDL_version v;
 	SDL_GetVersion(&v);
@@ -83,7 +83,7 @@ static void Minimize_f()
 }
 
 
-static int QuakeKeyFromSDLKey( SDL_Keysym key )
+static int QuakeKeyFromSDLKey(SDL_Keysym key)
 {
 	if (key.scancode == SDL_SCANCODE_GRAVE)
 		return '`';
@@ -92,7 +92,7 @@ static int QuakeKeyFromSDLKey( SDL_Keysym key )
 
 	// these ranges map directly to ASCII chars
 	if ((sym >= SDLK_a && sym <= SDLK_z) ||
-		(sym >= SDLK_0 && sym <= SDLK_9))
+	    (sym >= SDLK_0 && sym <= SDLK_9))
 		return (int)sym;
 
 	// F1 to F24
@@ -206,7 +206,7 @@ static int QuakeKeyFromSDLKey( SDL_Keysym key )
 }
 
 
-static void sdl_Key( const SDL_KeyboardEvent* event, qbool down )
+static void sdl_Key(const SDL_KeyboardEvent* event, qbool down)
 {
 	const int key = QuakeKeyFromSDLKey(event->keysym);
 	if (key >= 0)
@@ -221,7 +221,7 @@ static void sdl_Key( const SDL_KeyboardEvent* event, qbool down )
 }
 
 
-static void sdl_Text( const SDL_TextInputEvent* event )
+static void sdl_Text(const SDL_TextInputEvent* event)
 {
 	// text is UTF-8 encoded but we only care for
 	// chars that are single-byte encoded
@@ -231,7 +231,7 @@ static void sdl_Text( const SDL_TextInputEvent* event )
 }
 
 
-static void sdl_MouseMotion( const SDL_MouseMotionEvent* event )
+static void sdl_MouseMotion(const SDL_MouseMotionEvent* event)
 {
 	if (!sdl_inputActive)
 		return;
@@ -244,7 +244,7 @@ static void sdl_MouseMotion( const SDL_MouseMotionEvent* event )
 }
 
 
-static void sdl_MouseButton( const SDL_MouseButtonEvent* event, qbool down )
+static void sdl_MouseButton(const SDL_MouseButtonEvent* event, qbool down)
 {
 	if (!sdl_inputActive && down)
 		return;
@@ -259,7 +259,7 @@ static void sdl_MouseButton( const SDL_MouseButtonEvent* event, qbool down )
 	};
 
 	int button = -1;
-	for(int i = 0; i < mouseButtonCount; ++i) {
+	for (int i = 0; i < mouseButtonCount; ++i) {
 		if (event->button == mouseButtons[i][0]) {
 			button = i;
 			break;
@@ -273,7 +273,7 @@ static void sdl_MouseButton( const SDL_MouseButtonEvent* event, qbool down )
 }
 
 
-static void sdl_MouseWheel( const SDL_MouseWheelEvent* event )
+static void sdl_MouseWheel(const SDL_MouseWheelEvent* event)
 {
 	if (event->y == 0)
 		return;
@@ -281,19 +281,19 @@ static void sdl_MouseWheel( const SDL_MouseWheelEvent* event )
 #if SDL_VERSION_ATLEAST(2, 0, 4)
 	int delta = event->y;
 	if (sdl_Version_AtLeast(2, 0, 4) &&
-		event->direction == SDL_MOUSEWHEEL_FLIPPED)
+	    event->direction == SDL_MOUSEWHEEL_FLIPPED)
 		delta = -delta;
 #else
 	const int delta = event->y;
 #endif
 
 	const int key = (delta < 0) ? K_MWHEELDOWN : K_MWHEELUP;
-	Lin_QueEvent(Sys_Milliseconds(), SE_KEY, key, qtrue,  0, NULL);
+	Lin_QueEvent(Sys_Milliseconds(), SE_KEY, key, qtrue, 0, NULL);
 	Lin_QueEvent(Sys_Milliseconds(), SE_KEY, key, qfalse, 0, NULL);
 }
 
 
-static void sdl_Window( const SDL_WindowEvent* event )
+static void sdl_Window(const SDL_WindowEvent* event)
 {
 	// events of interest:
 	//SDL_WINDOWEVENT_SHOWN
@@ -341,7 +341,7 @@ static void sdl_Window( const SDL_WindowEvent* event )
 }
 
 
-static void sdl_X11( const XEvent* event )
+static void sdl_X11(const XEvent* event)
 {
 	switch (event->type) {
 		case FocusIn:
@@ -356,8 +356,8 @@ static void sdl_X11( const XEvent* event )
 			// getting focus
 			// e.g. alt gets "stuck", pressing only enter
 			// does a video restart as if pressing alt+enter
-			Lin_QueEvent(0, SE_KEY, K_ALT,   qfalse, 0, NULL);
-			Lin_QueEvent(0, SE_KEY, K_CTRL,  qfalse, 0, NULL);
+			Lin_QueEvent(0, SE_KEY, K_ALT, qfalse, 0, NULL);
+			Lin_QueEvent(0, SE_KEY, K_CTRL, qfalse, 0, NULL);
 			Lin_QueEvent(0, SE_KEY, K_SHIFT, qfalse, 0, NULL);
 			sdl_focused = qfalse;
 			break;
@@ -368,67 +368,65 @@ static void sdl_X11( const XEvent* event )
 }
 
 
-static void sdl_Event( const SDL_Event* event )
+static void sdl_Event(const SDL_Event* event)
 {
 	// Note that CVar checks are necessary here because event polling
 	// can actually start before the main loop does,
 	// i.e. CVars can be uninitialized by the time we get here.
 
 	switch (event->type) {
-	case SDL_QUIT:
-		Com_Quit(0);
-		break;
+		case SDL_QUIT:
+			Com_Quit(0);
+			break;
 
-	case SDL_KEYDOWN:
-		// the CVar check means we'll ignore all keydown events until the main loop starts
-		if (in_focusDelay != NULL && sdl_focused && Sys_Milliseconds() - sdl_focusTime >= in_focusDelay->integer)
-			sdl_Key(&event->key, qtrue);
-		break;
+		case SDL_KEYDOWN:
+			// the CVar check means we'll ignore all keydown events until the main loop starts
+			if (in_focusDelay != NULL && sdl_focused && Sys_Milliseconds() - sdl_focusTime >= in_focusDelay->integer)
+				sdl_Key(&event->key, qtrue);
+			break;
 
-	case SDL_KEYUP:
-		// always forward releases
-		sdl_Key(&event->key, qfalse);
-		break;
+		case SDL_KEYUP:
+			// always forward releases
+			sdl_Key(&event->key, qfalse);
+			break;
 
-	case SDL_TEXTINPUT:
-		if (sdl_focused)
-			sdl_Text(&event->text);
-		break;
+		case SDL_TEXTINPUT:
+			if (sdl_focused)
+				sdl_Text(&event->text);
+			break;
 
-	case SDL_MOUSEMOTION:
-		if (sdl_focused)
-			sdl_MouseMotion(&event->motion);
-		break;
+		case SDL_MOUSEMOTION:
+			if (sdl_focused)
+				sdl_MouseMotion(&event->motion);
+			break;
 
-	case SDL_MOUSEBUTTONDOWN:
-		if (sdl_focused)
-			sdl_MouseButton(&event->button, qtrue);
-		break;
+		case SDL_MOUSEBUTTONDOWN:
+			if (sdl_focused)
+				sdl_MouseButton(&event->button, qtrue);
+			break;
 
-	case SDL_MOUSEBUTTONUP:
-		// always forward releases
-		sdl_MouseButton(&event->button, qfalse);
-		break;
+		case SDL_MOUSEBUTTONUP:
+			// always forward releases
+			sdl_MouseButton(&event->button, qfalse);
+			break;
 
-	case SDL_MOUSEWHEEL:
-		if (sdl_focused)
-			sdl_MouseWheel(&event->wheel);
-		break;
+		case SDL_MOUSEWHEEL:
+			if (sdl_focused)
+				sdl_MouseWheel(&event->wheel);
+			break;
 
-	case SDL_WINDOWEVENT:
-		sdl_Window(&event->window);
-		break;
+		case SDL_WINDOWEVENT:
+			sdl_Window(&event->window);
+			break;
 
-	case SDL_SYSWMEVENT:
-		{
+		case SDL_SYSWMEVENT: {
 			const SDL_SysWMmsg* msg = event->syswm.msg;
 			if (msg->subsystem == SDL_SYSWM_X11)
 				sdl_X11(&msg->msg.x11.event);
-		}
-		break;
+		} break;
 
-	default:
-		break;
+		default:
+			break;
 	}
 }
 
@@ -453,7 +451,7 @@ qbool sdl_Init()
 		SDL_SetHintWithPriority(SDL_HINT_NO_SIGNAL_HANDLERS, "1", SDL_HINT_OVERRIDE);
 #endif
 	SDL_LogSetAllPriority(SDL_LOG_PRIORITY_CRITICAL);
-	SDL_StartTextInput();	// enables SDL_TEXTINPUT events
+	SDL_StartTextInput(); // enables SDL_TEXTINPUT events
 	SDL_EventState(SDL_SYSWMEVENT, SDL_ENABLE);
 
 	return qtrue;
@@ -541,7 +539,7 @@ void Sys_ShutdownInput()
 
 
 // returns the number of bytes to skip
-static int UTF8_ReadNextChar( char* c, const char* input )
+static int UTF8_ReadNextChar(char* c, const char* input)
 {
 	if (*input == '\0')
 		return 0;
@@ -608,7 +606,7 @@ char* Sys_GetClipboardData()
 }
 
 
-void Sys_SetClipboardData( const char* text )
+void Sys_SetClipboardData(const char* text)
 {
 	SDL_SetClipboardText(text);
 }
@@ -621,7 +619,7 @@ void Lin_MatchStartAlert()
 	if (!unmuteBit)
 		return;
 
-	const qbool unfocusedBit = (alerts & MAF_UNFOCUSED) != 0;	
+	const qbool unfocusedBit = (alerts & MAF_UNFOCUSED) != 0;
 	const qbool hasFocus = (SDL_GetWindowFlags(glimp.window) & SDL_WINDOW_INPUT_FOCUS) != 0;
 	const Uint32 hidingFlags = SDL_WINDOW_HIDDEN | SDL_WINDOW_MINIMIZED;
 	const qbool hidden = (SDL_GetWindowFlags(glimp.window) & hidingFlags) != 0;
@@ -636,7 +634,7 @@ void Lin_MatchEndAlert()
 }
 
 
-void Sys_MatchAlert( sysMatchAlertEvent_t event )
+void Sys_MatchAlert(sysMatchAlertEvent_t event)
 {
 	if (event == SMAE_MATCH_START)
 		Lin_MatchStartAlert();

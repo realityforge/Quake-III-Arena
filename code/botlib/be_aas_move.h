@@ -34,27 +34,27 @@ extern aas_settings_t aassettings;
 #endif //AASINTERN
 
 //movement prediction
-int AAS_PredictClientMovement(struct aas_clientmove_s *move,
-							int entnum, vec3_t origin,
-							int presencetype, int onground,
-							const vec3_t velocity, vec3_t cmdmove,
-							int cmdframes,
-							int maxframes, float frametime,
-							int stopevent, int stopareanum, int visualize);
+int AAS_PredictClientMovement(struct aas_clientmove_s* move,
+                              int entnum, vec3_t origin,
+                              int presencetype, int onground,
+                              const vec3_t velocity, vec3_t cmdmove,
+                              int cmdframes,
+                              int maxframes, float frametime,
+                              int stopevent, int stopareanum, int visualize);
 //predict movement until bounding box is hit
-int AAS_ClientMovementHitBBox(struct aas_clientmove_s *move,
-								int entnum, vec3_t origin,
-								int presencetype, int onground,
-								vec3_t velocity, vec3_t cmdmove,
-								int cmdframes,
-								int maxframes, float frametime,
-								vec3_t mins, vec3_t maxs, int visualize);
+int AAS_ClientMovementHitBBox(struct aas_clientmove_s* move,
+                              int entnum, vec3_t origin,
+                              int presencetype, int onground,
+                              vec3_t velocity, vec3_t cmdmove,
+                              int cmdframes,
+                              int maxframes, float frametime,
+                              vec3_t mins, vec3_t maxs, int visualize);
 //returns qtrue if on the ground at the given origin
 int AAS_OnGround(vec3_t origin, int presencetype, int passent);
 //returns qtrue if swimming at the given origin
 int AAS_Swimming(vec3_t origin);
 //returns the jump reachability run start point
-void AAS_JumpReachRunStart(const struct aas_reachability_s&reach, vec3_t runstart);
+void AAS_JumpReachRunStart(const struct aas_reachability_s& reach, vec3_t runstart);
 //returns qtrue if against a ladder at the given origin
 int AAS_AgainstLadder(vec3_t origin);
 //rocket jump Z velocity when rocket-jumping at origin

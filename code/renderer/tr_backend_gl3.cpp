@@ -61,16 +61,15 @@ Known issues:
 
 
 // @NOTE: MAX_VERTEXES and MAX_INDEXES are *per frame*
-#define LARGEBUFFER_MAX_FRAMES      4
-#define LARGEBUFFER_MAX_VERTEXES    131072
-#define LARGEBUFFER_MAX_INDEXES     (LARGEBUFFER_MAX_VERTEXES * 8)
+#define LARGEBUFFER_MAX_FRAMES   4
+#define LARGEBUFFER_MAX_VERTEXES 131072
+#define LARGEBUFFER_MAX_INDEXES  (LARGEBUFFER_MAX_VERTEXES * 8)
 
 // this is the highest maximum we'll ever report
-#define MAX_GPU_TEXTURE_SIZE        2048
+#define MAX_GPU_TEXTURE_SIZE 2048
 
 
-enum PipelineId
-{
+enum PipelineId {
 	PID_GENERIC,
 	PID_DYNAMIC_LIGHT,
 	PID_SOFT_SPRITE,
@@ -78,15 +77,13 @@ enum PipelineId
 	PID_COUNT
 };
 
-enum ErrorMode
-{
+enum ErrorMode {
 	EM_FATAL,
 	EM_PRINT,
 	EM_SILENT
 };
 
-enum VertexBufferId
-{
+enum VertexBufferId {
 	VB_POSITION,
 	VB_NORMAL,
 	VB_TEXCOORD,
@@ -95,24 +92,21 @@ enum VertexBufferId
 	VB_COUNT
 };
 
-enum AlphaTest
-{
+enum AlphaTest {
 	AT_ALWAYS,
 	AT_GREATER_THAN_0,
 	AT_LESS_THAN_HALF,
 	AT_GREATER_OR_EQUAL_TO_HALF
 };
 
-struct Program
-{
+struct Program {
 	GLuint vertexShader;
 	GLuint fragmentShader;
 	GLuint computeShader;
 	GLuint program;
 };
 
-struct ArrayBuffer
-{
+struct ArrayBuffer {
 	GLuint buffer;
 	GLint componentCount;
 	GLenum dataType;
@@ -124,19 +118,17 @@ struct ArrayBuffer
 	qbool indexBuffer;
 	// persistent mapping:
 	byte* mappedData;
-	int pinnedByteCount; // when using AMD_pinned_memory
+	int pinnedByteCount;                   // when using AMD_pinned_memory
 	GLsync fences[LARGEBUFFER_MAX_FRAMES]; // NULL means uninitialized / invalid
 	int writeRangeIndex;
 };
 
-struct PipelineArrayBuffer
-{
+struct PipelineArrayBuffer {
 	const char* attribName;
 	qbool enabled;
 };
 
-struct FrameBuffer
-{
+struct FrameBuffer {
 	GLuint fbo;
 	GLuint color;
 	GLuint depthStencil;
@@ -145,8 +137,7 @@ struct FrameBuffer
 	qbool hasColor;
 };
 
-enum GenericUniform
-{
+enum GenericUniform {
 	GU_MODELVIEW,
 	GU_PROJECTION,
 	GU_CLIP_PLANE,
@@ -157,8 +148,7 @@ enum GenericUniform
 	GU_COUNT
 };
 
-enum DynamicLightUniform
-{
+enum DynamicLightUniform {
 	DU_MODELVIEW,
 	DU_PROJECTION,
 	DU_CLIP_PLANE,
@@ -171,8 +161,7 @@ enum DynamicLightUniform
 	DU_COUNT
 };
 
-enum SoftSpriteUniform
-{
+enum SoftSpriteUniform {
 	SU_MODELVIEW,
 	SU_PROJECTION,
 	SU_CLIP_PLANE,
@@ -184,8 +173,7 @@ enum SoftSpriteUniform
 	SU_COUNT
 };
 
-enum PostUniform
-{
+enum PostUniform {
 	PU_BRIGHT_GAMMA_GREY,
 	PU_COUNT
 };
@@ -197,8 +185,7 @@ static const char UniformCountLargeEnoughD[(int)MAX_UNIFORM_COUNT >= (int)DU_COU
 static const char UniformCountLargeEnoughS[(int)MAX_UNIFORM_COUNT >= (int)SU_COUNT ? 1 : -1] = { '\0' };
 static const char UniformCountLargeEnoughU[(int)MAX_UNIFORM_COUNT >= (int)PU_COUNT ? 1 : -1] = { '\0' };
 
-struct Pipeline
-{
+struct Pipeline {
 	Program program;
 	const char* uniformNames[MAX_UNIFORM_COUNT];
 	GLint uniformLocations[MAX_UNIFORM_COUNT];
@@ -207,30 +194,26 @@ struct Pipeline
 	PipelineArrayBuffer arrayBuffers[VB_COUNT];
 };
 
-enum ComputePipelineId
-{
+enum ComputePipelineId {
 	CPID_GAMMA_TO_LINEAR,
 	CPID_LINEAR_TO_GAMMA,
 	CPID_DOWN_SAMPLE,
 	CPID_COUNT
 };
 
-struct MipMapGenerator
-{
+struct MipMapGenerator {
 	Program programs[CPID_COUNT];
 	GLuint textures[3]; // 0,1=float16 2=uint8
 };
 
-enum MappingType
-{
-	MT_SUBDATA,		// glBufferSubData
-	MT_UNSYNC,		// glMapBufferRange with GL_MAP_UNSYNCHRONIZED_BIT
-	MT_PERSISTENT,	// glMapBufferRange with GL_MAP_PERSISTENT_BIT and GL_MAP_COHERENT_BIT
-	MT_AMDPIN		// glBufferData with GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD
+enum MappingType {
+	MT_SUBDATA,    // glBufferSubData
+	MT_UNSYNC,     // glMapBufferRange with GL_MAP_UNSYNCHRONIZED_BIT
+	MT_PERSISTENT, // glMapBufferRange with GL_MAP_PERSISTENT_BIT and GL_MAP_COHERENT_BIT
+	MT_AMDPIN      // glBufferData with GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD
 };
 
-struct OpenGL3
-{
+struct OpenGL3 {
 	char log[8192];
 
 	int maxTextureSize;
@@ -289,413 +272,412 @@ static OpenGL3 gl;
 
 
 static const char* shared_fs =
-"vec4 MakeGreyscale(vec4 color, float amount)\n"
-"{\n"
-"	float grey = dot(color.rgb, vec3(0.299, 0.587, 0.114));\n"
-"	vec4 result = mix(color, vec4(grey, grey, grey, color.a), amount);\n"
-"	return result;\n"
-"}\n"
-"\n";
+    "vec4 MakeGreyscale(vec4 color, float amount)\n"
+    "{\n"
+    "	float grey = dot(color.rgb, vec3(0.299, 0.587, 0.114));\n"
+    "	vec4 result = mix(color, vec4(grey, grey, grey, color.a), amount);\n"
+    "	return result;\n"
+    "}\n"
+    "\n";
 
 static const char* generic_vs =
-// a good way to test warning reports with r_verbose 1
-//"#extension DOESNTEXISTLOL:warn\n"
-//----------------------------------
-"uniform mat4 modelView;\n"
-"uniform mat4 projection;\n"
-"uniform vec4 clipPlane;\n"
-"\n"
-"in vec4 position;\n"
-"in vec2 texCoords1;\n"
-"in vec2 texCoords2;\n"
-"in vec4 color;\n"
-"\n"
-"centroid out vec2 texCoords1FS;\n"
-"centroid out vec2 texCoords2FS;\n"
-"centroid out vec4 colorFS;\n"
-"\n"
-"void main()\n"
-"{\n"
-"	vec4 positionVS = modelView * vec4(position.xyz, 1);\n"
-"	gl_Position = projection * positionVS;\n"
-"	gl_ClipDistance[0] = dot(positionVS, clipPlane);\n"
-"	texCoords1FS = texCoords1;\n"
-"	texCoords2FS = texCoords2;\n"
-"	colorFS = color;\n"
-"}\n";
+    // a good way to test warning reports with r_verbose 1
+    //"#extension DOESNTEXISTLOL:warn\n"
+    //----------------------------------
+    "uniform mat4 modelView;\n"
+    "uniform mat4 projection;\n"
+    "uniform vec4 clipPlane;\n"
+    "\n"
+    "in vec4 position;\n"
+    "in vec2 texCoords1;\n"
+    "in vec2 texCoords2;\n"
+    "in vec4 color;\n"
+    "\n"
+    "centroid out vec2 texCoords1FS;\n"
+    "centroid out vec2 texCoords2FS;\n"
+    "centroid out vec4 colorFS;\n"
+    "\n"
+    "void main()\n"
+    "{\n"
+    "	vec4 positionVS = modelView * vec4(position.xyz, 1);\n"
+    "	gl_Position = projection * positionVS;\n"
+    "	gl_ClipDistance[0] = dot(positionVS, clipPlane);\n"
+    "	texCoords1FS = texCoords1;\n"
+    "	texCoords2FS = texCoords2;\n"
+    "	colorFS = color;\n"
+    "}\n";
 
 static const char* generic_fs =
-"uniform sampler2D texture1;\n"
-"uniform sampler2D texture2;\n"
-"\n"
-"uniform uvec2 alphaTex;\n"
-"#define alphaTest alphaTex.x\n"
-"#define texEnv alphaTex.y\n"
-"uniform float greyscale;\n"
-"#if CNQ3_DITHER\n"
-"uniform vec4 gammaBrightNoiseSeed;\n"
-"#define invGamma gammaBrightNoiseSeed.x\n"
-"#define invBrightness gammaBrightNoiseSeed.y\n"
-"#define noiseScale gammaBrightNoiseSeed.z\n"
-"#define seed gammaBrightNoiseSeed.w\n"
-"#endif\n"
-"#ifdef CNQ3_A2C\n"
-"uniform float alphaBoost;\n"
-"#endif\n"
-"\n"
-"centroid in vec2 texCoords1FS;\n"
-"centroid in vec2 texCoords2FS;\n"
-"centroid in vec4 colorFS;\n"
-"\n"
-"out vec4 fragColor;\n"
-"\n"
-"#if CNQ3_DITHER\n"
-"float Hash(vec2 v)\n"
-"{\n"
-"	// this is from Morgan McGuire's 'Hashed Alpha Testing' paper\n"
-"	return fract(1.0e4 * sin(17.0 * v.x + 0.1 * v.y) + (0.1 + abs(sin(13.0 * v.y + v.x))));\n"
-"}\n"
-"\n"
-"float Linearize(float color)\n"
-"{\n"
-"	return pow(abs(color * invBrightness), invGamma) * sign(color);\n"
-"}\n"
-"\n"
-"vec4 Dither(vec4 color, vec3 position)\n"
-"{\n"
-"	vec2 newSeed = position.xy + vec2(0.6849, 0.6849) * seed + vec2(position.z, position.z);\n"
-"	float noise = (noiseScale / 255.0) * Linearize(Hash(newSeed) - 0.5);\n"
-"\n"
-"	return color + vec4(noise, noise, noise, 0.0);\n"
-"}\n"
-"#endif\n"
-"\n"
-"#if CNQ3_A2C\n"
-"float CorrectAlpha(float threshold, float alpha, vec2 tc)\n"
-"{\n"
-"	vec2 size = vec2(textureSize(texture1, 0));\n"
-"	if(min(size.x, size.y) <= 8.0)\n"
-"		return alpha >= threshold ? 1.0 : 0.0;\n"
-"	alpha *= 1.0 + alphaBoost * textureQueryLod(texture1, tc).x;"
-"	vec2 dtc = fwidth(tc * size);\n"
-"	float recScale = max(0.25 * (dtc.x + dtc.y), 1.0 / 16384.0);\n"
-"	float scale = max(1.0 / recScale, 1.0);\n"
-"	float ac = threshold + (alpha - threshold) * scale;\n"
-"\n"
-"	return ac;\n"
-"}\n"
-"#endif\n"
-"\n"
-"void main()\n"
-"{\n"
-"	vec4 p = texture(texture1, texCoords1FS);\n"
-"	vec4 s = texture(texture2, texCoords2FS);\n"
-"	vec4 r;\n"
-"	if(texEnv == uint(1))\n"
-"		r = colorFS * s * p;\n"
-"	else if(texEnv == uint(2))\n"
-"		r = s; // use input.color or not?\n"
-"	else if(texEnv == uint(3))\n"
-"		r = colorFS * vec4(p.rgb * (1 - s.a) + s.rgb * s.a, p.a);\n"
-"	else if(texEnv == uint(4))\n"
-"		r = colorFS * vec4(p.rgb + s.rgb, p.a * s.a);\n"
-"	else // texEnv == 0\n"
-"		r = colorFS * p;\n"
-"\n"
-"#if CNQ3_DITHER\n"
-"	r = Dither(r, gl_FragCoord.xyz);\n"
-"#endif\n"
-"\n"
-"#if CNQ3_A2C\n"
-"	if(alphaTest == uint(1))\n"
-"		r.a = r.a > 0.0 ? 1.0 : 0.0;\n"
-"	if(alphaTest == uint(2))\n"
-"		r.a = CorrectAlpha(uintBitsToFloat(0x3F000001), 1.0 - r.a, texCoords1FS);\n"
-"	else if(alphaTest == uint(3))\n"
-"		r.a = CorrectAlpha(0.5, r.a, texCoords1FS);\n"
-"#else\n"
-"	if(	(alphaTest == uint(1) && r.a == 0.0) ||\n"
-"		(alphaTest == uint(2) && r.a >= 0.5) ||\n"
-"		(alphaTest == uint(3) && r.a <  0.5))\n"
-"		discard;\n"
-"#endif\n"
-"\n"
-"	fragColor = MakeGreyscale(r, greyscale);\n"
-"}\n";
+    "uniform sampler2D texture1;\n"
+    "uniform sampler2D texture2;\n"
+    "\n"
+    "uniform uvec2 alphaTex;\n"
+    "#define alphaTest alphaTex.x\n"
+    "#define texEnv alphaTex.y\n"
+    "uniform float greyscale;\n"
+    "#if CNQ3_DITHER\n"
+    "uniform vec4 gammaBrightNoiseSeed;\n"
+    "#define invGamma gammaBrightNoiseSeed.x\n"
+    "#define invBrightness gammaBrightNoiseSeed.y\n"
+    "#define noiseScale gammaBrightNoiseSeed.z\n"
+    "#define seed gammaBrightNoiseSeed.w\n"
+    "#endif\n"
+    "#ifdef CNQ3_A2C\n"
+    "uniform float alphaBoost;\n"
+    "#endif\n"
+    "\n"
+    "centroid in vec2 texCoords1FS;\n"
+    "centroid in vec2 texCoords2FS;\n"
+    "centroid in vec4 colorFS;\n"
+    "\n"
+    "out vec4 fragColor;\n"
+    "\n"
+    "#if CNQ3_DITHER\n"
+    "float Hash(vec2 v)\n"
+    "{\n"
+    "	// this is from Morgan McGuire's 'Hashed Alpha Testing' paper\n"
+    "	return fract(1.0e4 * sin(17.0 * v.x + 0.1 * v.y) + (0.1 + abs(sin(13.0 * v.y + v.x))));\n"
+    "}\n"
+    "\n"
+    "float Linearize(float color)\n"
+    "{\n"
+    "	return pow(abs(color * invBrightness), invGamma) * sign(color);\n"
+    "}\n"
+    "\n"
+    "vec4 Dither(vec4 color, vec3 position)\n"
+    "{\n"
+    "	vec2 newSeed = position.xy + vec2(0.6849, 0.6849) * seed + vec2(position.z, position.z);\n"
+    "	float noise = (noiseScale / 255.0) * Linearize(Hash(newSeed) - 0.5);\n"
+    "\n"
+    "	return color + vec4(noise, noise, noise, 0.0);\n"
+    "}\n"
+    "#endif\n"
+    "\n"
+    "#if CNQ3_A2C\n"
+    "float CorrectAlpha(float threshold, float alpha, vec2 tc)\n"
+    "{\n"
+    "	vec2 size = vec2(textureSize(texture1, 0));\n"
+    "	if(min(size.x, size.y) <= 8.0)\n"
+    "		return alpha >= threshold ? 1.0 : 0.0;\n"
+    "	alpha *= 1.0 + alphaBoost * textureQueryLod(texture1, tc).x;"
+    "	vec2 dtc = fwidth(tc * size);\n"
+    "	float recScale = max(0.25 * (dtc.x + dtc.y), 1.0 / 16384.0);\n"
+    "	float scale = max(1.0 / recScale, 1.0);\n"
+    "	float ac = threshold + (alpha - threshold) * scale;\n"
+    "\n"
+    "	return ac;\n"
+    "}\n"
+    "#endif\n"
+    "\n"
+    "void main()\n"
+    "{\n"
+    "	vec4 p = texture(texture1, texCoords1FS);\n"
+    "	vec4 s = texture(texture2, texCoords2FS);\n"
+    "	vec4 r;\n"
+    "	if(texEnv == uint(1))\n"
+    "		r = colorFS * s * p;\n"
+    "	else if(texEnv == uint(2))\n"
+    "		r = s; // use input.color or not?\n"
+    "	else if(texEnv == uint(3))\n"
+    "		r = colorFS * vec4(p.rgb * (1 - s.a) + s.rgb * s.a, p.a);\n"
+    "	else if(texEnv == uint(4))\n"
+    "		r = colorFS * vec4(p.rgb + s.rgb, p.a * s.a);\n"
+    "	else // texEnv == 0\n"
+    "		r = colorFS * p;\n"
+    "\n"
+    "#if CNQ3_DITHER\n"
+    "	r = Dither(r, gl_FragCoord.xyz);\n"
+    "#endif\n"
+    "\n"
+    "#if CNQ3_A2C\n"
+    "	if(alphaTest == uint(1))\n"
+    "		r.a = r.a > 0.0 ? 1.0 : 0.0;\n"
+    "	if(alphaTest == uint(2))\n"
+    "		r.a = CorrectAlpha(uintBitsToFloat(0x3F000001), 1.0 - r.a, texCoords1FS);\n"
+    "	else if(alphaTest == uint(3))\n"
+    "		r.a = CorrectAlpha(0.5, r.a, texCoords1FS);\n"
+    "#else\n"
+    "	if(	(alphaTest == uint(1) && r.a == 0.0) ||\n"
+    "		(alphaTest == uint(2) && r.a >= 0.5) ||\n"
+    "		(alphaTest == uint(3) && r.a <  0.5))\n"
+    "		discard;\n"
+    "#endif\n"
+    "\n"
+    "	fragColor = MakeGreyscale(r, greyscale);\n"
+    "}\n";
 
 static const char* dl_vs =
-"uniform mat4 modelView;\n"
-"uniform mat4 projection;\n"
-"uniform vec4 clipPlane;\n"
-"uniform vec3 osLightPos;\n"
-"uniform vec3 osEyePos;\n"
-"\n"
-"in vec4 position;\n"
-"in vec4 normal;\n"
-"in vec2 texCoords1;\n"
-"\n"
-"out vec3 normalFS;\n"
-"out vec2 texCoords1FS;\n"
-"out vec3 L;\n"
-"out vec3 V;\n"
-"\n"
-"void main()\n"
-"{\n"
-"	vec4 positionVS = modelView * vec4(position.xyz, 1);\n"
-"	gl_Position = projection * positionVS;\n"
-"	gl_ClipDistance[0] = dot(positionVS, clipPlane);\n"
-"	normalFS = normal.xyz;\n"
-"	texCoords1FS = texCoords1;\n"
-"	L = osLightPos - position.xyz;\n"
-"	V = osEyePos - position.xyz;\n"
-"}\n";
+    "uniform mat4 modelView;\n"
+    "uniform mat4 projection;\n"
+    "uniform vec4 clipPlane;\n"
+    "uniform vec3 osLightPos;\n"
+    "uniform vec3 osEyePos;\n"
+    "\n"
+    "in vec4 position;\n"
+    "in vec4 normal;\n"
+    "in vec2 texCoords1;\n"
+    "\n"
+    "out vec3 normalFS;\n"
+    "out vec2 texCoords1FS;\n"
+    "out vec3 L;\n"
+    "out vec3 V;\n"
+    "\n"
+    "void main()\n"
+    "{\n"
+    "	vec4 positionVS = modelView * vec4(position.xyz, 1);\n"
+    "	gl_Position = projection * positionVS;\n"
+    "	gl_ClipDistance[0] = dot(positionVS, clipPlane);\n"
+    "	normalFS = normal.xyz;\n"
+    "	texCoords1FS = texCoords1;\n"
+    "	L = osLightPos - position.xyz;\n"
+    "	V = osEyePos - position.xyz;\n"
+    "}\n";
 
 static const char* dl_fs =
-"uniform sampler2D texture1;\n"
-"\n"
-"uniform vec4 lightColorRadius;\n"
-"uniform float opaque;\n"
-"uniform float intensity;\n"
-"uniform float greyscale;\n"
-"\n"
-"in vec3 normalFS;\n"
-"in vec2 texCoords1FS;\n"
-"in vec3 L;\n"
-"in vec3 V;\n"
-"\n"
-"out vec4 fragColor;\n"
-"\n"
-"float BezierEase(float t)\n"
-"{\n"
-"	return t * t * (3.0 - 2.0 * t);\n"
-"}\n"
-"\n"
-"void main()\n"
-"{\n"
-"	vec4 base = MakeGreyscale(texture2D(texture1, texCoords1FS), greyscale);\n"
-"	vec3 nL = normalize(L);\n"
-"	vec3 nV = normalize(V);\n"
-"\n"
-"	// light intensity\n"
-"	float intensFactor = min(dot(L, L) * lightColorRadius.w, 1.0);\n"
-"	vec3 intens = lightColorRadius.rgb * BezierEase(1.0 - sqrt(intensFactor));\n"
-"\n"
-"	// specular reflection term (N.H)\n"
-"	float specFactor = min(abs(dot(normalFS, normalize(nL + nV))), 1.0);\n"
-"	float spec = pow(specFactor, 16.0) * 0.25;\n"
-"\n"
-"	// Lambertian diffuse reflection term (N.L)\n"
-"	float diffuse = min(abs(dot(normalFS, nL)), 1.0);\n"
-"	vec3 color = (base.rgb * vec3(diffuse) + vec3(spec)) * intens * intensity;\n"
-"	float alpha = mix(opaque, 1.0, base.a);\n"
-"\n"
-"	vec4 r = vec4(color.rgb * alpha, alpha);\n"
-"	fragColor = r;\n"
-"}\n";
+    "uniform sampler2D texture1;\n"
+    "\n"
+    "uniform vec4 lightColorRadius;\n"
+    "uniform float opaque;\n"
+    "uniform float intensity;\n"
+    "uniform float greyscale;\n"
+    "\n"
+    "in vec3 normalFS;\n"
+    "in vec2 texCoords1FS;\n"
+    "in vec3 L;\n"
+    "in vec3 V;\n"
+    "\n"
+    "out vec4 fragColor;\n"
+    "\n"
+    "float BezierEase(float t)\n"
+    "{\n"
+    "	return t * t * (3.0 - 2.0 * t);\n"
+    "}\n"
+    "\n"
+    "void main()\n"
+    "{\n"
+    "	vec4 base = MakeGreyscale(texture2D(texture1, texCoords1FS), greyscale);\n"
+    "	vec3 nL = normalize(L);\n"
+    "	vec3 nV = normalize(V);\n"
+    "\n"
+    "	// light intensity\n"
+    "	float intensFactor = min(dot(L, L) * lightColorRadius.w, 1.0);\n"
+    "	vec3 intens = lightColorRadius.rgb * BezierEase(1.0 - sqrt(intensFactor));\n"
+    "\n"
+    "	// specular reflection term (N.H)\n"
+    "	float specFactor = min(abs(dot(normalFS, normalize(nL + nV))), 1.0);\n"
+    "	float spec = pow(specFactor, 16.0) * 0.25;\n"
+    "\n"
+    "	// Lambertian diffuse reflection term (N.L)\n"
+    "	float diffuse = min(abs(dot(normalFS, nL)), 1.0);\n"
+    "	vec3 color = (base.rgb * vec3(diffuse) + vec3(spec)) * intens * intensity;\n"
+    "	float alpha = mix(opaque, 1.0, base.a);\n"
+    "\n"
+    "	vec4 r = vec4(color.rgb * alpha, alpha);\n"
+    "	fragColor = r;\n"
+    "}\n";
 
 static const char* sprite_vs =
-"uniform mat4 modelView;\n"
-"uniform mat4 projection;\n"
-"uniform vec4 clipPlane;\n"
-"\n"
-"in vec4 position;\n"
-"in vec2 texCoords1;\n"
-"in vec4 color;\n"
-"\n"
-"out vec2 texCoords1FS;\n"
-"out vec4 colorFS;\n"
-"out float depthVS;\n"
-"out vec2 proj22_32;\n"
-"\n"
-"void main()\n"
-"{\n"
-"	vec4 positionVS = modelView * vec4(position.xyz, 1);\n"
-"	gl_Position = projection * positionVS;\n"
-"	gl_ClipDistance[0] = dot(positionVS, clipPlane);\n"
-"	texCoords1FS = texCoords1;\n"
-"	colorFS = color;\n"
-"	depthVS = -positionVS.z;\n"
-"	proj22_32 = vec2(-projection[2][2], projection[3][2]);\n"
-"}\n";
+    "uniform mat4 modelView;\n"
+    "uniform mat4 projection;\n"
+    "uniform vec4 clipPlane;\n"
+    "\n"
+    "in vec4 position;\n"
+    "in vec2 texCoords1;\n"
+    "in vec4 color;\n"
+    "\n"
+    "out vec2 texCoords1FS;\n"
+    "out vec4 colorFS;\n"
+    "out float depthVS;\n"
+    "out vec2 proj22_32;\n"
+    "\n"
+    "void main()\n"
+    "{\n"
+    "	vec4 positionVS = modelView * vec4(position.xyz, 1);\n"
+    "	gl_Position = projection * positionVS;\n"
+    "	gl_ClipDistance[0] = dot(positionVS, clipPlane);\n"
+    "	texCoords1FS = texCoords1;\n"
+    "	colorFS = color;\n"
+    "	depthVS = -positionVS.z;\n"
+    "	proj22_32 = vec2(-projection[2][2], projection[3][2]);\n"
+    "}\n";
 
 static const char* sprite_fs =
-"uniform sampler2D texture1; // diffuse texture\n"
-"#if CNQ3_MSAA\n"
-"uniform sampler2DMS texture2; // depth texture\n"
-"#else\n"
-"uniform sampler2D texture2; // depth texture\n"
-"#endif\n"
-"\n"
-"uniform uint alphaTest;\n"
-"uniform vec2 distOffset;\n"
-"uniform vec4 colorScale;\n"
-"uniform vec4 colorBias;\n"
-"uniform float greyscale;\n"
-"#define distance distOffset.x\n"
-"#define offset distOffset.y\n"
-"\n"
-"in vec2 texCoords1FS;\n"
-"in vec4 colorFS;\n"
-"in float depthVS;\n"
-"in vec2 proj22_32;\n"
-"#define proj22 proj22_32.x\n"
-"#define proj32 proj22_32.y\n"
-"\n"
-"out vec4 fragColor;\n"
-"\n"
-"float LinearDepth(float zwDepth)\n"
-"{\n"
-"	return proj32 / (zwDepth - proj22);\n"
-"}\n"
-"\n"
-"float Contrast(float d, float power)\n"
-"{\n"
-"	bool aboveHalf = d > 0.5;\n"
-"	float base = clamp(2.0 * (aboveHalf ? (1.0 - d) : d), 0.0, 1.0);\n"
-"	float r = 0.5 * pow(base, power);\n"
-"\n"
-"	return aboveHalf ? (1.0 - r) : r;\n"
-"}\n"
-"\n"
-"void main()\n"
-"{\n"
-"	vec4 r = colorFS * texture(texture1, texCoords1FS);\n"
-"	if(	(alphaTest == uint(1) && r.a == 0.0) ||\n"
-"		(alphaTest == uint(2) && r.a >= 0.5) ||\n"
-"		(alphaTest == uint(3) && r.a <  0.5))\n"
-"		discard;\n"
-"\n"
-"#if CNQ3_MSAA\n"
-"	float depthSRaw = texelFetch(texture2, ivec2(gl_FragCoord.xy), gl_SampleID).r;\n"
-"#else\n"
-"	float depthSRaw = texelFetch(texture2, ivec2(gl_FragCoord.xy), 0).r;\n"
-"#endif\n"
-"	float depthS = LinearDepth(depthSRaw * 2.0 - 1.0);\n"
-"	float depthP = depthVS - offset;\n"
-"	float scale = Contrast((depthS - depthP) * distance, 2.0);\n"
-"	vec4 r2 = mix(r * colorScale + colorBias, r, scale);\n"
-"	fragColor = MakeGreyscale(r2, greyscale);\n"
-"}\n";
+    "uniform sampler2D texture1; // diffuse texture\n"
+    "#if CNQ3_MSAA\n"
+    "uniform sampler2DMS texture2; // depth texture\n"
+    "#else\n"
+    "uniform sampler2D texture2; // depth texture\n"
+    "#endif\n"
+    "\n"
+    "uniform uint alphaTest;\n"
+    "uniform vec2 distOffset;\n"
+    "uniform vec4 colorScale;\n"
+    "uniform vec4 colorBias;\n"
+    "uniform float greyscale;\n"
+    "#define distance distOffset.x\n"
+    "#define offset distOffset.y\n"
+    "\n"
+    "in vec2 texCoords1FS;\n"
+    "in vec4 colorFS;\n"
+    "in float depthVS;\n"
+    "in vec2 proj22_32;\n"
+    "#define proj22 proj22_32.x\n"
+    "#define proj32 proj22_32.y\n"
+    "\n"
+    "out vec4 fragColor;\n"
+    "\n"
+    "float LinearDepth(float zwDepth)\n"
+    "{\n"
+    "	return proj32 / (zwDepth - proj22);\n"
+    "}\n"
+    "\n"
+    "float Contrast(float d, float power)\n"
+    "{\n"
+    "	bool aboveHalf = d > 0.5;\n"
+    "	float base = clamp(2.0 * (aboveHalf ? (1.0 - d) : d), 0.0, 1.0);\n"
+    "	float r = 0.5 * pow(base, power);\n"
+    "\n"
+    "	return aboveHalf ? (1.0 - r) : r;\n"
+    "}\n"
+    "\n"
+    "void main()\n"
+    "{\n"
+    "	vec4 r = colorFS * texture(texture1, texCoords1FS);\n"
+    "	if(	(alphaTest == uint(1) && r.a == 0.0) ||\n"
+    "		(alphaTest == uint(2) && r.a >= 0.5) ||\n"
+    "		(alphaTest == uint(3) && r.a <  0.5))\n"
+    "		discard;\n"
+    "\n"
+    "#if CNQ3_MSAA\n"
+    "	float depthSRaw = texelFetch(texture2, ivec2(gl_FragCoord.xy), gl_SampleID).r;\n"
+    "#else\n"
+    "	float depthSRaw = texelFetch(texture2, ivec2(gl_FragCoord.xy), 0).r;\n"
+    "#endif\n"
+    "	float depthS = LinearDepth(depthSRaw * 2.0 - 1.0);\n"
+    "	float depthP = depthVS - offset;\n"
+    "	float scale = Contrast((depthS - depthP) * distance, 2.0);\n"
+    "	vec4 r2 = mix(r * colorScale + colorBias, r, scale);\n"
+    "	fragColor = MakeGreyscale(r2, greyscale);\n"
+    "}\n";
 
 static const char* post_vs =
-"out vec2 texCoords1FS;\n"
-"\n"
-"void main()\n"
-"{\n"
-"	gl_Position = vec4(\n"
-"		float(gl_VertexID / 2) * 4.0 - 1.0,\n"
-"		float(gl_VertexID % 2) * 4.0 - 1.0,\n"
-"		0.0,\n"
-"		1.0);\n"
-"	texCoords1FS = vec2(\n"
-"		float(gl_VertexID / 2) * 2.0,\n"
-"		float(gl_VertexID % 2) * 2.0);\n"
-"}\n";
+    "out vec2 texCoords1FS;\n"
+    "\n"
+    "void main()\n"
+    "{\n"
+    "	gl_Position = vec4(\n"
+    "		float(gl_VertexID / 2) * 4.0 - 1.0,\n"
+    "		float(gl_VertexID % 2) * 4.0 - 1.0,\n"
+    "		0.0,\n"
+    "		1.0);\n"
+    "	texCoords1FS = vec2(\n"
+    "		float(gl_VertexID / 2) * 2.0,\n"
+    "		float(gl_VertexID % 2) * 2.0);\n"
+    "}\n";
 
 static const char* post_fs =
-"uniform sampler2D texture1;\n"
-"\n"
-"uniform vec3 brightGammaGrey;\n"
-"#define brightness brightGammaGrey.x\n"
-"#define gamma brightGammaGrey.y\n"
-"#define greyscale brightGammaGrey.z\n"
-"\n"
-"in vec2 texCoords1FS;\n"
-"\n"
-"out vec4 fragColor;\n"
-"\n"
-"void main()\n"
-"{\n"
-"	vec3 base = texture(texture1, texCoords1FS).rgb;\n"
-"	vec3 gc = pow(base, vec3(gamma)) * brightness;\n"
-"	fragColor = MakeGreyscale(vec4(gc.rgb, 1.0), greyscale);\n"
-"}\n";
+    "uniform sampler2D texture1;\n"
+    "\n"
+    "uniform vec3 brightGammaGrey;\n"
+    "#define brightness brightGammaGrey.x\n"
+    "#define gamma brightGammaGrey.y\n"
+    "#define greyscale brightGammaGrey.z\n"
+    "\n"
+    "in vec2 texCoords1FS;\n"
+    "\n"
+    "out vec4 fragColor;\n"
+    "\n"
+    "void main()\n"
+    "{\n"
+    "	vec3 base = texture(texture1, texCoords1FS).rgb;\n"
+    "	vec3 gc = pow(base, vec3(gamma)) * brightness;\n"
+    "	fragColor = MakeGreyscale(vec4(gc.rgb, 1.0), greyscale);\n"
+    "}\n";
 
 static const char* gammaToLinear_cs =
-"layout (binding = 0, rgba8)   readonly  uniform image2D srcTex;\n"
-"layout (binding = 1, rgba16f) writeonly uniform image2D dstTex;\n"
-"\n"
-"layout (location = 0) uniform float gamma;\n"
-"\n"
-"layout (local_size_x = 8, local_size_y = 8) in;\n"
-"\n"
-"void main()\n"
-"{\n"
-"	ivec2 coords = ivec2(gl_GlobalInvocationID);\n"
-"	vec4 inV = imageLoad(srcTex, coords);\n"
-"	vec4 outV = vec4(pow(inV.x, gamma), pow(inV.y, gamma), pow(inV.z, gamma), inV.a);\n"
-"	imageStore(dstTex, coords, outV);\n"
-"}\n";
+    "layout (binding = 0, rgba8)   readonly  uniform image2D srcTex;\n"
+    "layout (binding = 1, rgba16f) writeonly uniform image2D dstTex;\n"
+    "\n"
+    "layout (location = 0) uniform float gamma;\n"
+    "\n"
+    "layout (local_size_x = 8, local_size_y = 8) in;\n"
+    "\n"
+    "void main()\n"
+    "{\n"
+    "	ivec2 coords = ivec2(gl_GlobalInvocationID);\n"
+    "	vec4 inV = imageLoad(srcTex, coords);\n"
+    "	vec4 outV = vec4(pow(inV.x, gamma), pow(inV.y, gamma), pow(inV.z, gamma), inV.a);\n"
+    "	imageStore(dstTex, coords, outV);\n"
+    "}\n";
 
 static const char* linearToGamma_cs =
-// yes, intensity *should* be done in light-linear space
-// but we keep the old behavior for consistency...
-"layout (binding = 0, rgba16f) readonly  uniform image2D srcTex;\n"
-"layout (binding = 1, rgba8)   writeonly uniform image2D dstTex;\n"
-"\n"
-"layout (location = 0) uniform float intensity;\n"
-"layout (location = 1) uniform vec4  blendColor;\n"
-"layout (location = 2) uniform float invGamma;\n"
-"\n"
-"layout (local_size_x = 8, local_size_y = 8) in;\n"
-"\n"
-"void main()\n"
-"{\n"
-"	ivec2 coords = ivec2(gl_GlobalInvocationID);\n"
-"	vec4 in0 = imageLoad(srcTex, coords);\n"
-"	vec3 in1 = 0.5 * (in0.rgb + blendColor.rgb);\n"
-"	vec3 inV = mix(in0.rgb, in1.rgb, blendColor.a);\n"
-"	vec3 out0 = vec3(pow(inV.r, invGamma), pow(inV.g, invGamma), pow(inV.b, invGamma));\n"
-"	vec3 out1 = out0 * intensity;\n"
-"	vec4 outV = vec4(out1, in0.a);\n"
-"	imageStore(dstTex, coords, outV);\n"
-"}\n";
+    // yes, intensity *should* be done in light-linear space
+    // but we keep the old behavior for consistency...
+    "layout (binding = 0, rgba16f) readonly  uniform image2D srcTex;\n"
+    "layout (binding = 1, rgba8)   writeonly uniform image2D dstTex;\n"
+    "\n"
+    "layout (location = 0) uniform float intensity;\n"
+    "layout (location = 1) uniform vec4  blendColor;\n"
+    "layout (location = 2) uniform float invGamma;\n"
+    "\n"
+    "layout (local_size_x = 8, local_size_y = 8) in;\n"
+    "\n"
+    "void main()\n"
+    "{\n"
+    "	ivec2 coords = ivec2(gl_GlobalInvocationID);\n"
+    "	vec4 in0 = imageLoad(srcTex, coords);\n"
+    "	vec3 in1 = 0.5 * (in0.rgb + blendColor.rgb);\n"
+    "	vec3 inV = mix(in0.rgb, in1.rgb, blendColor.a);\n"
+    "	vec3 out0 = vec3(pow(inV.r, invGamma), pow(inV.g, invGamma), pow(inV.b, invGamma));\n"
+    "	vec3 out1 = out0 * intensity;\n"
+    "	vec4 outV = vec4(out1, in0.a);\n"
+    "	imageStore(dstTex, coords, outV);\n"
+    "}\n";
 
 static const char* downSample_cs =
-"layout (binding = 0, rgba16f) readonly  uniform image2D srcTex;\n"
-"layout (binding = 1, rgba16f) writeonly uniform image2D dstTex;\n"
-"\n"
-"layout (location = 0) uniform vec4  weights;\n"
-"layout (location = 1) uniform ivec2 maxSize;\n"
-"layout (location = 2) uniform ivec2 scale;\n"
-"layout (location = 3) uniform ivec2 offset;\n"
-"layout (location = 4) uniform uint  clampMode; // 0 = repeat\n"
-"\n"
-"layout (local_size_x = 8, local_size_y = 8) in;\n"
-"\n"
-"ivec2 FixCoords(ivec2 c)\n"
-"{\n"
-	"if(clampMode > 0)\n"
-"	{\n"
-"		// clamp\n"
-"		return clamp(c, ivec2(0, 0), maxSize);\n"
-"	}\n"
-"\n"
-"	// repeat\n"
-"	return c & maxSize;\n"
-"}\n"
-"\n"
-"void main()\n"
-"{\n"
-	"ivec2 dstTC = ivec2(gl_GlobalInvocationID);\n"
-"	ivec2 base  = ivec2(gl_GlobalInvocationID) * scale;\n"
-"	vec4 r = vec4(0, 0, 0, 0);\n"
-"	r += imageLoad(srcTex, FixCoords(base - offset * 3)) * weights.x;\n"
-"	r += imageLoad(srcTex, FixCoords(base - offset * 2)) * weights.y;\n"
-"	r += imageLoad(srcTex, FixCoords(base - offset    )) * weights.z;\n"
-"	r += imageLoad(srcTex,           base              ) * weights.w;\n"
-"	r += imageLoad(srcTex,           base + offset     ) * weights.w;\n"
-"	r += imageLoad(srcTex, FixCoords(base + offset * 2)) * weights.z;\n"
-"	r += imageLoad(srcTex, FixCoords(base + offset * 3)) * weights.y;\n"
-"	r += imageLoad(srcTex, FixCoords(base + offset * 4)) * weights.x;\n"
-"	imageStore(dstTex, dstTC, r);\n"
-"}\n";
+    "layout (binding = 0, rgba16f) readonly  uniform image2D srcTex;\n"
+    "layout (binding = 1, rgba16f) writeonly uniform image2D dstTex;\n"
+    "\n"
+    "layout (location = 0) uniform vec4  weights;\n"
+    "layout (location = 1) uniform ivec2 maxSize;\n"
+    "layout (location = 2) uniform ivec2 scale;\n"
+    "layout (location = 3) uniform ivec2 offset;\n"
+    "layout (location = 4) uniform uint  clampMode; // 0 = repeat\n"
+    "\n"
+    "layout (local_size_x = 8, local_size_y = 8) in;\n"
+    "\n"
+    "ivec2 FixCoords(ivec2 c)\n"
+    "{\n"
+    "if(clampMode > 0)\n"
+    "	{\n"
+    "		// clamp\n"
+    "		return clamp(c, ivec2(0, 0), maxSize);\n"
+    "	}\n"
+    "\n"
+    "	// repeat\n"
+    "	return c & maxSize;\n"
+    "}\n"
+    "\n"
+    "void main()\n"
+    "{\n"
+    "ivec2 dstTC = ivec2(gl_GlobalInvocationID);\n"
+    "	ivec2 base  = ivec2(gl_GlobalInvocationID) * scale;\n"
+    "	vec4 r = vec4(0, 0, 0, 0);\n"
+    "	r += imageLoad(srcTex, FixCoords(base - offset * 3)) * weights.x;\n"
+    "	r += imageLoad(srcTex, FixCoords(base - offset * 2)) * weights.y;\n"
+    "	r += imageLoad(srcTex, FixCoords(base - offset    )) * weights.z;\n"
+    "	r += imageLoad(srcTex,           base              ) * weights.w;\n"
+    "	r += imageLoad(srcTex,           base + offset     ) * weights.w;\n"
+    "	r += imageLoad(srcTex, FixCoords(base + offset * 2)) * weights.z;\n"
+    "	r += imageLoad(srcTex, FixCoords(base + offset * 3)) * weights.y;\n"
+    "	r += imageLoad(srcTex, FixCoords(base + offset * 4)) * weights.x;\n"
+    "	imageStore(dstTex, dstTC, r);\n"
+    "}\n";
 
 
 void GL_GetRenderTargetFormat(GLenum* internalFormat, GLenum* format, GLenum* type, int cnq3Format)
 {
-	switch(cnq3Format)
-	{
+	switch (cnq3Format) {
 		case RTCF_R10G10B10A2:
 			*internalFormat = GL_RGB10_A2;
 			*format = GL_BGRA;
@@ -755,12 +737,9 @@ static void FreePinnedMemory(ArrayBuffer* buffer)
 
 static void HandleError(const char* message)
 {
-	if(gl.errorMode == EM_FATAL)
-	{
+	if (gl.errorMode == EM_FATAL) {
 		ri.Error(ERR_FATAL, message);
-	}
-	else if(gl.errorMode == EM_PRINT)
-	{
+	} else if (gl.errorMode == EM_PRINT) {
 		ri.Printf(PRINT_ERROR, message);
 	}
 }
@@ -770,16 +749,14 @@ static void HandleError(const char* message)
 // GL_RENDERBUFFER, GL_FRAMEBUFFER, GL_PROGRAM_PIPELINE, GL_TRANSFORM_FEEDBACK
 static void SetDebugName(GLenum identifier, GLuint name, const char* string)
 {
-	if(GLEW_VERSION_4_3 || GLEW_KHR_debug)
-	{
+	if (GLEW_VERSION_4_3 || GLEW_KHR_debug) {
 		glObjectLabel(identifier, name, -1, string);
 	}
 }
 
 static const char* GetShaderTypeName(GLenum shaderType)
 {
-	switch(shaderType)
-	{
+	switch (shaderType) {
 		case GL_VERTEX_SHADER: return "vertex";
 		case GL_FRAGMENT_SHADER: return "fragment";
 		case GL_COMPUTE_SHADER: return "compute";
@@ -792,20 +769,19 @@ static qbool CreateShader(GLuint* shaderPtr, PipelineId pipelineId, GLenum shade
 	// alpha to coverage    now requires GLSL 4.00 for textureQueryLod
 	// depth fade with MSAA now requires GLSL 4.00 for gl_SampleID
 	const qbool enableA2C =
-		pipelineId == PID_GENERIC &&
-		shaderType == GL_FRAGMENT_SHADER &&
-		glInfo.alphaToCoverageSupport;
+	    pipelineId == PID_GENERIC &&
+	    shaderType == GL_FRAGMENT_SHADER &&
+	    glInfo.alphaToCoverageSupport;
 	const qbool enableDithering =
-		pipelineId == PID_GENERIC &&
-		shaderType == GL_FRAGMENT_SHADER &&
-		r_dither->integer;
+	    pipelineId == PID_GENERIC &&
+	    shaderType == GL_FRAGMENT_SHADER &&
+	    r_dither->integer;
 	const qbool depthFadeWithMSAA =
-		pipelineId == PID_SOFT_SPRITE &&
-		shaderType == GL_FRAGMENT_SHADER &&
-		glInfo.depthFadeSupport &&
-		gl.fbMSEnabled;
-	const char* const sourceArray[] =
-	{
+	    pipelineId == PID_SOFT_SPRITE &&
+	    shaderType == GL_FRAGMENT_SHADER &&
+	    glInfo.depthFadeSupport &&
+	    gl.fbMSEnabled;
+	const char* const sourceArray[] = {
 		shaderType == GL_COMPUTE_SHADER ? "#version 430\n" : (enableA2C || depthFadeWithMSAA ? "#version 400\n" : "#version 140\n"),
 		"\n",
 		enableA2C ? "#define CNQ3_A2C 1\n" : "#define CNQ3_A2C 0\n",
@@ -822,26 +798,21 @@ static qbool CreateShader(GLuint* shaderPtr, PipelineId pipelineId, GLenum shade
 	GLint result = GL_FALSE;
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &result);
 	const qbool success = result == GL_TRUE;
-	if(success)
-	{
+	if (success) {
 		*shaderPtr = shader;
 		SetDebugName(GL_SHADER, shader, va("%s %s shader", debugName, GetShaderTypeName(shaderType)));
 	}
 
-	if(!success || r_verbose->integer)
-	{
+	if (!success || r_verbose->integer) {
 		GLint logLength = 0;
 		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logLength);
-		if(logLength > 0)
-		{
+		if (logLength > 0) {
 			glGetShaderInfoLog(shader, sizeof(gl.log), NULL, gl.log);
 			const ErrorMode em = gl.errorMode;
 			gl.errorMode = success ? EM_PRINT : EM_FATAL;
 			HandleError(va("'%s' %s shader compilation failed: %s\n", debugName, GetShaderTypeName(shaderType), gl.log));
 			gl.errorMode = em;
-		}
-		else if(!success)
-		{
+		} else if (!success) {
 			HandleError(va("'%s' %s shader compilation failed\n", debugName, GetShaderTypeName(shaderType)));
 		}
 	}
@@ -854,25 +825,20 @@ static qbool FinalizeProgram(Program* prog, const char* debugName)
 	GLint result = GL_FALSE;
 	glGetProgramiv(prog->program, GL_LINK_STATUS, &result);
 	const qbool success = result == GL_TRUE;
-	if(success)
-	{
+	if (success) {
 		SetDebugName(GL_PROGRAM, prog->program, va("%s program", debugName));
 	}
 
-	if(!success || r_verbose->integer)
-	{
+	if (!success || r_verbose->integer) {
 		GLint logLength = 0;
 		glGetProgramiv(prog->program, GL_INFO_LOG_LENGTH, &logLength);
-		if(logLength > 0)
-		{
+		if (logLength > 0) {
 			glGetProgramInfoLog(prog->program, sizeof(gl.log), NULL, gl.log);
 			const ErrorMode em = gl.errorMode;
 			gl.errorMode = success ? EM_PRINT : EM_FATAL;
 			HandleError(va("'%s' program link failed: %s\n", debugName, gl.log));
 			gl.errorMode = em;
-		}
-		else if(!success)
-		{
+		} else if (!success) {
 			HandleError(va("'%s' program link failed\n", debugName));
 		}
 	}
@@ -884,9 +850,8 @@ static qbool CreateGraphicsProgram(PipelineId pipelineId, const char* vs, const 
 {
 	Pipeline* const pipeline = &gl.pipelines[pipelineId];
 	Program* const prog = &pipeline->program;
-	if(!CreateShader(&prog->vertexShader, pipelineId, GL_VERTEX_SHADER, vs, debugName) ||
-	   !CreateShader(&prog->fragmentShader, pipelineId, GL_FRAGMENT_SHADER, fs, debugName))
-	{
+	if (!CreateShader(&prog->vertexShader, pipelineId, GL_VERTEX_SHADER, vs, debugName) ||
+	    !CreateShader(&prog->fragmentShader, pipelineId, GL_FRAGMENT_SHADER, fs, debugName)) {
 		return qfalse;
 	}
 
@@ -895,10 +860,8 @@ static qbool CreateGraphicsProgram(PipelineId pipelineId, const char* vs, const 
 	glAttachShader(prog->program, prog->fragmentShader);
 
 	// glBindAttribLocation must be called before the program gets linked
-	for(int i = 0; i < VB_COUNT; ++i)
-	{
-		if(pipeline->arrayBuffers[i].enabled)
-		{
+	for (int i = 0; i < VB_COUNT; ++i) {
+		if (pipeline->arrayBuffers[i].enabled) {
 			glBindAttribLocation(pipeline->program.program, i, pipeline->arrayBuffers[i].attribName);
 		}
 	}
@@ -910,8 +873,7 @@ static qbool CreateGraphicsProgram(PipelineId pipelineId, const char* vs, const 
 
 static qbool CreateComputeProgram(Program* prog, const char* cs, const char* debugName)
 {
-	if(!CreateShader(&prog->computeShader, PID_COUNT, GL_COMPUTE_SHADER, cs, debugName))
-	{
+	if (!CreateShader(&prog->computeShader, PID_COUNT, GL_COMPUTE_SHADER, cs, debugName)) {
 		return qfalse;
 	}
 
@@ -928,33 +890,29 @@ static void CreateColorTextureStorageMS(int* samples)
 	GL_GetRenderTargetFormat(&internalFormat, &format, &type, r_rtColorFormat->integer);
 
 	int sampleCount = r_msaa->integer;
-	while(glGetError() != GL_NO_ERROR) {} // clear the error queue
+	while (glGetError() != GL_NO_ERROR) {
+	} // clear the error queue
 
-	if(GLEW_VERSION_4_2 || GLEW_ARB_internalformat_query)
-	{
+	if (GLEW_VERSION_4_2 || GLEW_ARB_internalformat_query) {
 		GLint maxSampleCount = 0;
 		glGetInternalformativ(GL_TEXTURE_2D_MULTISAMPLE, internalFormat, GL_SAMPLES, 1, &maxSampleCount);
-		if(glGetError() == GL_NO_ERROR)
-		{
+		if (glGetError() == GL_NO_ERROR) {
 			sampleCount = min(sampleCount, (int)maxSampleCount);
 		}
 	}
 
 	GLenum errorCode = GL_NO_ERROR;
-	for(;;)
-	{
+	for (;;) {
 		glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, sampleCount, internalFormat, glConfig.vidWidth, glConfig.vidHeight, GL_TRUE);
 		errorCode = glGetError();
-		if(errorCode == GL_NO_ERROR || sampleCount == 0)
-		{
+		if (errorCode == GL_NO_ERROR || sampleCount == 0) {
 			break;
 		}
 
 		--sampleCount;
 	}
 
-	if(errorCode != GL_NO_ERROR)
-	{
+	if (errorCode != GL_NO_ERROR) {
 		ri.Error(ERR_FATAL, "Failed to create multi-sampled texture storage (error 0x%X)\n", (unsigned int)errorCode);
 	}
 
@@ -963,8 +921,7 @@ static void CreateColorTextureStorageMS(int* samples)
 
 static void FBO_CreateSS(FrameBuffer* fb, qbool color, qbool depthStencil, const char* name)
 {
-	if(depthStencil)
-	{
+	if (depthStencil) {
 		glGenTextures(1, &fb->depthStencil);
 		glBindTexture(GL_TEXTURE_2D, fb->depthStencil);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -973,8 +930,7 @@ static void FBO_CreateSS(FrameBuffer* fb, qbool color, qbool depthStencil, const
 		SetDebugName(GL_TEXTURE, fb->depthStencil, va("%s depth/stencil attachment", name));
 	}
 
-	if(color)
-	{
+	if (color) {
 		GLenum internalFormat, format, type;
 		GL_GetRenderTargetFormat(&internalFormat, &format, &type, r_rtColorFormat->integer);
 		glGenTextures(1, &fb->color);
@@ -984,21 +940,18 @@ static void FBO_CreateSS(FrameBuffer* fb, qbool color, qbool depthStencil, const
 		glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, glConfig.vidWidth, glConfig.vidHeight, 0, format, type, NULL);
 		SetDebugName(GL_TEXTURE, fb->color, va("%s color attachment 0", name));
 	}
-	
+
 	glGenFramebuffers(1, &fb->fbo);
 	glBindFramebuffer(GL_FRAMEBUFFER, fb->fbo);
-	if(color)
-	{
+	if (color) {
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fb->color, 0);
 	}
-	if(depthStencil)
-	{
+	if (depthStencil) {
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, fb->depthStencil, 0);
-	}	
+	}
 
 	const GLenum fboStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-	if(fboStatus != GL_FRAMEBUFFER_COMPLETE)
-	{
+	if (fboStatus != GL_FRAMEBUFFER_COMPLETE) {
 		ri.Error(ERR_FATAL, "Failed to create FBO (status 0x%X, error 0x%X)\n", (unsigned int)fboStatus, (unsigned int)glGetError());
 	}
 
@@ -1028,8 +981,7 @@ static void FBO_CreateMS(int* sampleCount, FrameBuffer* fb, const char* name)
 	SetDebugName(GL_TEXTURE, fb->depthStencil, va("%s depth/stencil attachment", name));
 
 	const GLenum fboStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-	if(fboStatus != GL_FRAMEBUFFER_COMPLETE)
-	{
+	if (fboStatus != GL_FRAMEBUFFER_COMPLETE) {
 		ri.Error(ERR_FATAL, "Failed to create FBO (status 0x%X, error 0x%X)\n", (unsigned int)fboStatus, (unsigned int)glGetError());
 	}
 
@@ -1046,14 +998,11 @@ static void FBO_Init()
 	gl.fbMSEnabled = r_msaa->integer >= 2 && r_colorMipLevels->integer == 0;
 	int finalSampleCount = 1;
 
-	if(gl.fbMSEnabled)
-	{
+	if (gl.fbMSEnabled) {
 		FBO_CreateMS(&finalSampleCount, &gl.fbMS, "main");
 		FBO_CreateSS(&gl.fbSS[0], qtrue, qfalse, "post-process #1");
 		FBO_CreateSS(&gl.fbSS[1], qtrue, qfalse, "post-process #2");
-	}
-	else
-	{
+	} else {
 		FBO_CreateSS(&gl.fbSS[0], qtrue, qtrue, "post-process #1");
 		FBO_CreateSS(&gl.fbSS[1], qtrue, qtrue, "post-process #2");
 	}
@@ -1070,12 +1019,9 @@ static void FBO_Bind(const FrameBuffer* fb)
 
 static void FBO_Bind()
 {
-	if(gl.fbMSEnabled)
-	{
+	if (gl.fbMSEnabled) {
 		FBO_Bind(&gl.fbMS);
-	}
-	else
-	{
+	} else {
 		FBO_Bind(&gl.fbSS[gl.fbReadIndex]);
 	}
 }
@@ -1084,13 +1030,11 @@ static void FBO_BlitToBackBuffer()
 {
 	// fixing up the blit mode here to avoid unnecessary glClear calls
 	int blitMode = r_blitMode->integer;
-	if(r_mode->integer != VIDEOMODE_UPSCALE)
-	{
+	if (r_mode->integer != VIDEOMODE_UPSCALE) {
 		blitMode = BLITMODE_STRETCHED;
 	}
 
-	if(blitMode != BLITMODE_STRETCHED)
-	{
+	if (blitMode != BLITMODE_STRETCHED) {
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -1106,17 +1050,13 @@ static void FBO_BlitToBackBuffer()
 	const int sh = glConfig.vidHeight;
 	const int dw = glInfo.winWidth;
 	const int dh = glInfo.winHeight;
-	if(blitMode == BLITMODE_STRETCHED)
-	{
+	if (blitMode == BLITMODE_STRETCHED) {
 		glBlitFramebuffer(0, 0, sw, sh, 0, 0, dw, dh, GL_COLOR_BUFFER_BIT, GL_LINEAR);
-	}
-	else if(blitMode == BLITMODE_CENTERED)
-	{
+	} else if (blitMode == BLITMODE_CENTERED) {
 		const int dx = (dw - sw) / 2;
 		const int dy = (dh - sh) / 2;
 		glBlitFramebuffer(0, 0, sw, sh, dx, dy, dx + sw, dy + sh, GL_COLOR_BUFFER_BIT, GL_LINEAR);
-	}
-	else // blitMode == BLITMODE_ASPECT
+	} else // blitMode == BLITMODE_ASPECT
 	{
 		const float rx = (float)dw / (float)sw;
 		const float ry = (float)dh / (float)sh;
@@ -1145,8 +1085,7 @@ static void FBO_ResolveColor()
 
 static void ApplyActiveTexture(int slot)
 {
-	if(slot == gl.activeTextureSlot)
-	{
+	if (slot == gl.activeTextureSlot) {
 		return;
 	}
 
@@ -1156,8 +1095,7 @@ static void ApplyActiveTexture(int slot)
 
 static void ApplyPipeline(PipelineId pipelineId)
 {
-	if(pipelineId == gl.pipelineId)
-	{
+	if (pipelineId == gl.pipelineId) {
 		return;
 	}
 
@@ -1166,9 +1104,8 @@ static void ApplyPipeline(PipelineId pipelineId)
 	// Any change to that pipeline requires a texture barrier with OpenGL 4.5+
 	// to make sure we get valid data when reading the depth texture.
 	// See "Feedback Loops Between Textures and the Framebuffer" in the specs.
-	if((GLEW_VERSION_4_5 || GLEW_ARB_texture_barrier) &&
-	   pipelineId == PID_SOFT_SPRITE)
-	{
+	if ((GLEW_VERSION_4_5 || GLEW_ARB_texture_barrier) &&
+	    pipelineId == PID_SOFT_SPRITE) {
 		glTextureBarrier();
 	}
 
@@ -1178,25 +1115,20 @@ static void ApplyPipeline(PipelineId pipelineId)
 	glUseProgram(pipeline->program.program);
 	backEnd.pc3D[RB_SHADER_CHANGES]++;
 
-	for(int i = 0; i < VB_COUNT; ++i)
-	{
-		if(pipeline->arrayBuffers[i].enabled)
-		{
+	for (int i = 0; i < VB_COUNT; ++i) {
+		if (pipeline->arrayBuffers[i].enabled) {
 			ArrayBuffer* const buffer = &gl.arrayBuffers[i];
 			glEnableVertexAttribArray(i);
 			glBindBuffer(GL_ARRAY_BUFFER, buffer->buffer);
 			glVertexAttribPointer(i, buffer->componentCount, buffer->dataType, buffer->normalized, buffer->itemSize, (const void*)0);
-		}
-		else
-		{
+		} else {
 			glDisableVertexAttribArray(i);
 		}
 	}
 
 	glUniform1i(pipeline->textureLocations[0], 0);
 	ApplyActiveTexture(1);
-	if(pipelineId == PID_SOFT_SPRITE && gl.fbMSEnabled)
-	{
+	if (pipelineId == PID_SOFT_SPRITE && gl.fbMSEnabled) {
 		// we don't have a "BindTextureMS" function for caching/tracking MS texture binds
 		// since this is the only one we read from a fragment shader at the moment
 		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, gl.fbMS.depthStencil);
@@ -1209,8 +1141,7 @@ static void ApplyPipeline(PipelineId pipelineId)
 
 static GLint GetTextureWrapMode(textureWrap_t w)
 {
-	switch(w)
-	{
+	switch (w) {
 		case TW_REPEAT: return GL_REPEAT;
 		case TW_CLAMP_TO_EDGE: return GL_CLAMP_TO_EDGE;
 		default: return GL_REPEAT;
@@ -1219,8 +1150,7 @@ static GLint GetTextureWrapMode(textureWrap_t w)
 
 static GLint GetTextureInternalFormat(textureFormat_t f)
 {
-	switch(f)
-	{
+	switch (f) {
 		case TF_RGBA8:
 		default: return GL_RGBA8;
 	}
@@ -1228,8 +1158,7 @@ static GLint GetTextureInternalFormat(textureFormat_t f)
 
 static GLenum GetTextureFormat(textureFormat_t f)
 {
-	switch(f)
-	{
+	switch (f) {
 		case TF_RGBA8:
 		default: return GL_RGBA;
 	}
@@ -1237,8 +1166,7 @@ static GLenum GetTextureFormat(textureFormat_t f)
 
 static void BindTexture(int slot, GLuint texture)
 {
-	if(texture == gl.boundTextures[slot])
-	{
+	if (texture == gl.boundTextures[slot]) {
 		return;
 	}
 
@@ -1256,8 +1184,7 @@ static void BindImage(int slot, const image_t* image)
 static void UpdateAnimatedImage(image_t* image, int w, int h, const byte* data, qbool dirty)
 {
 	glBindTexture(GL_TEXTURE_2D, (GLuint)image->texnum);
-	if(w != image->width || h != image->height)
-	{
+	if (w != image->width || h != image->height) {
 		// if the scratchImage isn't in the format we want, specify it as a new texture
 		image->width = w;
 		image->height = h;
@@ -1266,9 +1193,7 @@ static void UpdateAnimatedImage(image_t* image, int w, int h, const byte* data, 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-	}
-	else if(dirty)
-	{
+	} else if (dirty) {
 		// otherwise, just update it
 		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	}
@@ -1292,8 +1217,7 @@ static void ApplyViewportAndScissor(int x, int y, int w, int h)
 
 static GLenum GetSourceBlend(unsigned int bits)
 {
-	switch(bits)
-	{
+	switch (bits) {
 		case GLS_SRCBLEND_ZERO: return GL_ZERO;
 		case GLS_SRCBLEND_ONE: return GL_ONE;
 		case GLS_SRCBLEND_DST_COLOR: return GL_DST_COLOR;
@@ -1309,8 +1233,7 @@ static GLenum GetSourceBlend(unsigned int bits)
 
 static GLenum GetDestinationBlend(unsigned int bits)
 {
-	switch(bits)
-	{
+	switch (bits) {
 		case GLS_DSTBLEND_ZERO: return GL_ZERO;
 		case GLS_DSTBLEND_ONE: return GL_ONE;
 		case GLS_DSTBLEND_SRC_COLOR: return GL_SRC_COLOR;
@@ -1325,8 +1248,7 @@ static GLenum GetDestinationBlend(unsigned int bits)
 
 static AlphaTest GetAlphaTest(unsigned int bits)
 {
-	switch(bits)
-	{
+	switch (bits) {
 		case 0: return AT_ALWAYS;
 		case GLS_ATEST_GT_0: return AT_GREATER_THAN_0;
 		case GLS_ATEST_LT_80: return AT_LESS_THAN_HALF;
@@ -1337,18 +1259,14 @@ static AlphaTest GetAlphaTest(unsigned int bits)
 
 static void ApplyCullType(cullType_t cullType)
 {
-	if(cullType == gl.cullType)
-	{
+	if (cullType == gl.cullType) {
 		return;
 	}
 
 	gl.cullType = cullType;
-	if(cullType == CT_TWO_SIDED)
-	{
+	if (cullType == CT_TWO_SIDED) {
 		glDisable(GL_CULL_FACE);
-	}
-	else
-	{
+	} else {
 		glEnable(GL_CULL_FACE);
 		glCullFace(cullType == CT_FRONT_SIDED ? GL_FRONT : GL_BACK);
 	}
@@ -1356,19 +1274,15 @@ static void ApplyCullType(cullType_t cullType)
 
 static void ApplyBlendFunc(unsigned int srcBlendBits, unsigned int dstBlendBits)
 {
-	if(srcBlendBits == gl.srcBlendBits && dstBlendBits == gl.dstBlendBits)
-	{
+	if (srcBlendBits == gl.srcBlendBits && dstBlendBits == gl.dstBlendBits) {
 		return;
 	}
 
 	gl.srcBlendBits = srcBlendBits;
 	gl.dstBlendBits = dstBlendBits;
-	if((srcBlendBits | dstBlendBits) == 0)
-	{
+	if ((srcBlendBits | dstBlendBits) == 0) {
 		glDisable(GL_BLEND);
-	}
-	else
-	{
+	} else {
 		glEnable(GL_BLEND);
 		glBlendFunc(GetSourceBlend(srcBlendBits), GetDestinationBlend(dstBlendBits));
 	}
@@ -1376,26 +1290,21 @@ static void ApplyBlendFunc(unsigned int srcBlendBits, unsigned int dstBlendBits)
 
 static void ApplyDepthTest(qbool enableDepthTest)
 {
-	if(enableDepthTest == gl.enableDepthTest)
-	{
+	if (enableDepthTest == gl.enableDepthTest) {
 		return;
 	}
 
 	gl.enableDepthTest = enableDepthTest;
-	if(enableDepthTest)
-	{
+	if (enableDepthTest) {
 		glEnable(GL_DEPTH_TEST);
-	}
-	else
-	{
+	} else {
 		glDisable(GL_DEPTH_TEST);
 	}
 }
 
 static void ApplyDepthFunc(GLenum depthFunc)
 {
-	if(depthFunc == gl.depthFunc)
-	{
+	if (depthFunc == gl.depthFunc) {
 		return;
 	}
 
@@ -1405,8 +1314,7 @@ static void ApplyDepthFunc(GLenum depthFunc)
 
 static void ApplyDepthMask(GLboolean enableDepthWrite)
 {
-	if(enableDepthWrite == gl.enableDepthWrite)
-	{
+	if (enableDepthWrite == gl.enableDepthWrite) {
 		return;
 	}
 
@@ -1416,8 +1324,7 @@ static void ApplyDepthMask(GLboolean enableDepthWrite)
 
 static void ApplyPolygonMode(GLenum polygonMode)
 {
-	if(polygonMode == gl.polygonMode)
-	{
+	if (polygonMode == gl.polygonMode) {
 		return;
 	}
 
@@ -1427,36 +1334,28 @@ static void ApplyPolygonMode(GLenum polygonMode)
 
 static void ApplyPolygonOffset(qbool enablePolygonOffset)
 {
-	if(enablePolygonOffset == gl.enablePolygonOffset)
-	{
+	if (enablePolygonOffset == gl.enablePolygonOffset) {
 		return;
 	}
 
 	gl.enablePolygonOffset = enablePolygonOffset;
-	if(enablePolygonOffset)
-	{
+	if (enablePolygonOffset) {
 		glEnable(GL_POLYGON_OFFSET_FILL);
-	}
-	else
-	{
+	} else {
 		glDisable(GL_POLYGON_OFFSET_FILL);
 	}
 }
 
 static void ApplyClipPlane(qbool enableClipPlane)
 {
-	if(enableClipPlane == gl.enableClipPlane)
-	{
+	if (enableClipPlane == gl.enableClipPlane) {
 		return;
 	}
 
 	gl.enableClipPlane = enableClipPlane;
-	if(enableClipPlane)
-	{
+	if (enableClipPlane) {
 		glEnable(GL_CLIP_DISTANCE0);
-	}
-	else
-	{
+	} else {
 		glDisable(GL_CLIP_DISTANCE0);
 	}
 }
@@ -1464,31 +1363,23 @@ static void ApplyClipPlane(qbool enableClipPlane)
 static void ApplyAlphaTest(AlphaTest alphaTest)
 {
 	const qbool enableA2C = glInfo.alphaToCoverageSupport && gl.pipelineId == PID_GENERIC && alphaTest != AT_ALWAYS;
-	if(enableA2C != gl.enableAlphaToCoverage)
-	{
+	if (enableA2C != gl.enableAlphaToCoverage) {
 		gl.enableAlphaToCoverage = enableA2C;
-		if(enableA2C)
-		{
+		if (enableA2C) {
 			glEnable(GL_SAMPLE_ALPHA_TO_COVERAGE);
-		}
-		else
-		{
+		} else {
 			glDisable(GL_SAMPLE_ALPHA_TO_COVERAGE);
 		}
 	}
 
-	if(alphaTest == gl.alphaTest)
-	{
+	if (alphaTest == gl.alphaTest) {
 		return;
 	}
 	gl.alphaTest = alphaTest;
 
-	if(gl.pipelineId == PID_GENERIC)
-	{
+	if (gl.pipelineId == PID_GENERIC) {
 		gl.pipelines[PID_GENERIC].uniformsDirty[GU_ALPHA_TEX] = qtrue;
-	}
-	else if(gl.pipelineId == PID_SOFT_SPRITE)
-	{
+	} else if (gl.pipelineId == PID_SOFT_SPRITE) {
 		gl.pipelines[PID_SOFT_SPRITE].uniformsDirty[SU_ALPHA_TEST] = qtrue;
 	}
 }
@@ -1496,14 +1387,10 @@ static void ApplyAlphaTest(AlphaTest alphaTest)
 static void ApplyState(unsigned int stateBits, cullType_t cullType, qbool polygonOffset)
 {
 	// fix up the cull mode for mirrors
-	if(backEnd.viewParms.isMirror)
-	{
-		if(cullType == CT_BACK_SIDED)
-		{
+	if (backEnd.viewParms.isMirror) {
+		if (cullType == CT_BACK_SIDED) {
 			cullType = CT_FRONT_SIDED;
-		}
-		else if(cullType == CT_FRONT_SIDED)
-		{
+		} else if (cullType == CT_FRONT_SIDED) {
 			cullType = CT_BACK_SIDED;
 		}
 	}
@@ -1532,8 +1419,7 @@ static void ApplyState(unsigned int stateBits, cullType_t cullType, qbool polygo
 
 static void ApplyTexEnv(texEnv_t texEnv)
 {
-	if(gl.pipelineId == PID_GENERIC && texEnv != gl.texEnv)
-	{
+	if (gl.pipelineId == PID_GENERIC && texEnv != gl.texEnv) {
 		gl.pipelines[PID_GENERIC].uniformsDirty[GU_ALPHA_TEX] = qtrue;
 	}
 	gl.texEnv = texEnv;
@@ -1548,25 +1434,21 @@ static void Buffer_WaitForRange(ArrayBuffer* buffer)
 	buffer->writeIndex = buffer->writeRangeIndex * (buffer->capacity / LARGEBUFFER_MAX_FRAMES);
 
 	GLsync& fence = buffer->fences[buffer->writeRangeIndex];
-	if(fence == NULL)
-	{
+	if (fence == NULL) {
 		return;
 	}
 
 	GLbitfield waitFlags = 0;
 	GLuint64 waitDurationNS = 0;
-	for(;;)
-	{
+	for (;;) {
 		GLenum waitRet = glClientWaitSync(fence, waitFlags, waitDurationNS);
-		if(waitRet == GL_ALREADY_SIGNALED || waitRet == GL_CONDITION_SATISFIED)
-		{
+		if (waitRet == GL_ALREADY_SIGNALED || waitRet == GL_CONDITION_SATISFIED) {
 			glDeleteSync(fence);
 			fence = NULL;
 			return;
 		}
 
-		if(waitRet == GL_WAIT_FAILED)
-		{
+		if (waitRet == GL_WAIT_FAILED) {
 			ri.Error(ERR_FATAL, "glClientWaitSync failed with GL_WAIT_FAILED\n");
 		}
 
@@ -1580,8 +1462,7 @@ static void Buffer_LockRange(ArrayBuffer* buffer)
 {
 	GLsync& fence = buffer->fences[buffer->writeRangeIndex];
 	assert(fence == NULL);
-	if(fence == NULL)
-	{
+	if (fence == NULL) {
 		fence = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
 		assert(fence != NULL);
 	}
@@ -1592,8 +1473,7 @@ static void Buffer_LockRange(ArrayBuffer* buffer)
 
 static void Buffers_Wait()
 {
-	for(int i = 0; i < VB_COUNT; ++i)
-	{
+	for (int i = 0; i < VB_COUNT; ++i) {
 		Buffer_WaitForRange(&gl.arrayBuffers[i]);
 	}
 
@@ -1602,8 +1482,7 @@ static void Buffers_Wait()
 
 static void Buffers_Lock()
 {
-	for(int i = 0; i < VB_COUNT; ++i)
-	{
+	for (int i = 0; i < VB_COUNT; ++i) {
 		Buffer_LockRange(&gl.arrayBuffers[i]);
 	}
 
@@ -1619,48 +1498,39 @@ static qbool MappingType_UsesLargeBuffers()
 static void UploadGeometry(ArrayBuffer* buffer, const void* data, int itemCount)
 {
 	const GLenum target = buffer->indexBuffer ? GL_ELEMENT_ARRAY_BUFFER : GL_ARRAY_BUFFER;
-	if(MappingType_UsesLargeBuffers())
-	{
+	if (MappingType_UsesLargeBuffers()) {
 		const int rangeLength = buffer->capacity / LARGEBUFFER_MAX_FRAMES;
 		const int endRangeIndex = (buffer->writeIndex + itemCount - 1) / rangeLength;
 #if defined(_DEBUG)
 		assert(endRangeIndex == buffer->writeRangeIndex ||
-			   endRangeIndex == buffer->writeRangeIndex + 1 ||
-			   (endRangeIndex == 0 && buffer->writeRangeIndex == LARGEBUFFER_MAX_FRAMES - 1));
+		       endRangeIndex == buffer->writeRangeIndex + 1 ||
+		       (endRangeIndex == 0 && buffer->writeRangeIndex == LARGEBUFFER_MAX_FRAMES - 1));
 		const int startRangeIndex = buffer->writeIndex == 0 ? 0 : ((buffer->writeIndex - 1) / rangeLength);
 		assert(startRangeIndex == buffer->writeRangeIndex ||
-			   startRangeIndex == (buffer->writeRangeIndex + LARGEBUFFER_MAX_FRAMES - 1) % LARGEBUFFER_MAX_FRAMES);
+		       startRangeIndex == (buffer->writeRangeIndex + LARGEBUFFER_MAX_FRAMES - 1) % LARGEBUFFER_MAX_FRAMES);
 #endif
-		if(endRangeIndex == buffer->writeRangeIndex + 1)
-		{
+		if (endRangeIndex == buffer->writeRangeIndex + 1) {
 			Buffer_LockRange(buffer);
 			Buffer_WaitForRange(buffer);
 		}
 
 		void* mappedData = NULL;
-		if(gl.mappingType == MT_UNSYNC)
-		{
+		if (gl.mappingType == MT_UNSYNC) {
 			mappedData = glMapBufferRange(target, buffer->writeIndex * buffer->itemSize, itemCount * buffer->itemSize, GL_MAP_WRITE_BIT | GL_MAP_UNSYNCHRONIZED_BIT);
-			if(mappedData == NULL)
-			{
+			if (mappedData == NULL) {
 				ri.Error(ERR_FATAL, "Couldn't map buffer\n");
 			}
-		}
-		else
-		{
+		} else {
 			mappedData = buffer->mappedData + buffer->writeIndex * buffer->itemSize;
 		}
 		memcpy(mappedData, data, itemCount * buffer->itemSize);
-		if(gl.mappingType == MT_UNSYNC)
-		{
+		if (gl.mappingType == MT_UNSYNC) {
 			glUnmapBuffer(target);
 		}
 
 		buffer->readIndex = buffer->writeIndex;
 		buffer->writeIndex += itemCount;
-	}
-	else
-	{
+	} else {
 		glBufferSubData(target, (GLintptr)0, itemCount * buffer->itemSize, data);
 		buffer->readIndex = 0;
 	}
@@ -1672,8 +1542,7 @@ static void UploadVertexArray(VertexBufferId vbid, const void* data)
 
 	glBindBuffer(GL_ARRAY_BUFFER, buffer->buffer);
 	UploadGeometry(buffer, data, tess.numVertexes);
-	if(MappingType_UsesLargeBuffers())
-	{
+	if (MappingType_UsesLargeBuffers()) {
 		glVertexAttribPointer(vbid, buffer->componentCount, buffer->dataType, buffer->normalized, buffer->itemSize, (const GLvoid*)(GLintptr)(buffer->readIndex * buffer->itemSize));
 	}
 }
@@ -1690,44 +1559,36 @@ static void UploadIndices(const void* data, int indexCount)
 static void CreateGeometryBufferStorage(ArrayBuffer* buffer)
 {
 	const GLenum target = buffer->indexBuffer ? GL_ELEMENT_ARRAY_BUFFER : GL_ARRAY_BUFFER;
-	if(gl.mappingType == MT_PERSISTENT)
-	{
+	if (gl.mappingType == MT_PERSISTENT) {
 		glGenBuffers(1, &buffer->buffer);
 		glBindBuffer(target, buffer->buffer);
 		const GLbitfield flags = GL_MAP_WRITE_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT;
 		glBufferStorage(target, buffer->capacity * buffer->itemSize, NULL, flags);
 		buffer->mappedData = (byte*)glMapBufferRange(target, 0, buffer->capacity * buffer->itemSize, flags);
-		if(buffer->mappedData == NULL)
-		{
+		if (buffer->mappedData == NULL) {
 			ri.Error(ERR_FATAL, "Couldn't map buffer storage\n");
 		}
-	}
-	else if(gl.mappingType == MT_AMDPIN)
-	{
-		while(glGetError() != GL_NO_ERROR) {} // clear the error queue
+	} else if (gl.mappingType == MT_AMDPIN) {
+		while (glGetError() != GL_NO_ERROR) {
+		} // clear the error queue
 		GLenum errorCode = GL_NO_ERROR;
 
 		AllocatePinnedMemory(buffer);
-		if(buffer->mappedData == NULL)
-		{
+		if (buffer->mappedData == NULL) {
 			ri.Error(ERR_FATAL, "Couldn't allocate buffer storage\n");
 		}
 		glGenBuffers(1, &buffer->buffer);
 		glBindBuffer(GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD, buffer->buffer);
-		if((errorCode = glGetError()) != GL_NO_ERROR)
-		{
+		if ((errorCode = glGetError()) != GL_NO_ERROR) {
 			ri.Error(ERR_FATAL, "glBindBuffer GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD failed with error code: 0x%08X\n", (unsigned int)errorCode);
 		}
 		glBufferData(GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD, buffer->pinnedByteCount, buffer->mappedData, GL_DYNAMIC_DRAW);
-		if((errorCode = glGetError()) != GL_NO_ERROR)
-		{
+		if ((errorCode = glGetError()) != GL_NO_ERROR) {
 			ri.Error(ERR_FATAL, "glBufferData GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD failed with error code: 0x%08X\n", (unsigned int)errorCode);
 		}
 		glBindBuffer(GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD, 0);
 		glBindBuffer(target, buffer->buffer);
-	}
-	else
-	{
+	} else {
 		glGenBuffers(1, &buffer->buffer);
 		glBindBuffer(target, buffer->buffer);
 		glBufferData(target, buffer->capacity * buffer->itemSize, NULL, GL_DYNAMIC_DRAW);
@@ -1781,7 +1642,8 @@ static void SetDefaultState()
 
 static qbool InitCompute()
 {
-	while(glGetError() != GL_NO_ERROR) {} // clear the error queue
+	while (glGetError() != GL_NO_ERROR) {
+	} // clear the error queue
 
 	glGenTextures(ARRAY_LEN(gl.mipGen.textures), gl.mipGen.textures);
 	glBindTexture(GL_TEXTURE_2D, gl.mipGen.textures[0]);
@@ -1794,16 +1656,14 @@ static qbool InitCompute()
 	SetDebugName(GL_TEXTURE, gl.mipGen.textures[2], "mip-gen uint8 texture");
 	glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, gl.maxTextureSize, gl.maxTextureSize);
 
-	if(glGetError() != GL_NO_ERROR)
-	{
+	if (glGetError() != GL_NO_ERROR) {
 		HandleError("Failed to allocate storage for the mip-map generation textures\n");
 		return qfalse;
 	}
 
-	if(!CreateComputeProgram(&gl.mipGen.programs[CPID_GAMMA_TO_LINEAR], gammaToLinear_cs, "gamma to linear") ||
-	   !CreateComputeProgram(&gl.mipGen.programs[CPID_LINEAR_TO_GAMMA], linearToGamma_cs, "linear to gamma") ||
-	   !CreateComputeProgram(&gl.mipGen.programs[CPID_DOWN_SAMPLE], downSample_cs, "down sample"))
-	{
+	if (!CreateComputeProgram(&gl.mipGen.programs[CPID_GAMMA_TO_LINEAR], gammaToLinear_cs, "gamma to linear") ||
+	    !CreateComputeProgram(&gl.mipGen.programs[CPID_LINEAR_TO_GAMMA], linearToGamma_cs, "linear to gamma") ||
+	    !CreateComputeProgram(&gl.mipGen.programs[CPID_DOWN_SAMPLE], downSample_cs, "down sample")) {
 		HandleError("Failed to compile compute shaders for GPU-side mip-map generation\n");
 		return qfalse;
 	}
@@ -1814,33 +1674,27 @@ static qbool InitCompute()
 static MappingType GetMappingTypeFromCvar()
 {
 	const int mode = r_gl3_geoStream->integer;
-	if(mode == GL3MAP_SUBDATA)
-	{
+	if (mode == GL3MAP_SUBDATA) {
 		return MT_SUBDATA;
 	}
 
-	if(mode == GL3MAP_MAPUNSYNC)
-	{
+	if (mode == GL3MAP_MAPUNSYNC) {
 		return MT_UNSYNC;
 	}
 
-	if(mode == GL3MAP_AMDPIN && GLEW_AMD_pinned_memory)
-	{
+	if (mode == GL3MAP_AMDPIN && GLEW_AMD_pinned_memory) {
 		return MT_AMDPIN;
 	}
 
-	if((mode == GL3MAP_AUTO || mode == GL3MAP_MAPPERS) && (GLEW_VERSION_4_4 || GLEW_ARB_buffer_storage))
-	{
+	if ((mode == GL3MAP_AUTO || mode == GL3MAP_MAPPERS) && (GLEW_VERSION_4_4 || GLEW_ARB_buffer_storage)) {
 		return MT_PERSISTENT;
 	}
 
-	if(GLEW_AMD_pinned_memory)
-	{
+	if (GLEW_AMD_pinned_memory) {
 		return MT_AMDPIN;
 	}
 
-	if(strstr((const char*)glGetString(GL_RENDERER), "Intel") != NULL)
-	{
+	if (strstr((const char*)glGetString(GL_RENDERER), "Intel") != NULL) {
 		return MT_UNSYNC;
 	}
 
@@ -1865,18 +1719,15 @@ static void EndQueries()
 	gl.queryWriteIndex = (gl.queryWriteIndex + 1) % ARRAY_LEN(gl.timerQueries);
 
 	// try to grab a previous frame's result
-	if(gl.queryStarted[gl.queryReadIndex])
-	{
+	if (gl.queryStarted[gl.queryReadIndex]) {
 		const GLuint query = gl.timerQueries[gl.queryReadIndex];
 		backEnd.pc3D[RB_USEC_GPU] = 0;
 		GLint done = GL_FALSE;
 		glGetQueryObjectiv(query, GL_QUERY_RESULT_AVAILABLE, &done);
-		if(done != GL_FALSE)
-		{
+		if (done != GL_FALSE) {
 			GLint durationNS = 0;
 			glGetQueryObjectiv(query, GL_QUERY_RESULT, &durationNS);
-			if(durationNS > 0)
-			{
+			if (durationNS > 0) {
 				backEnd.pc3D[RB_USEC_GPU] = durationNS / 1000;
 			}
 			gl.queryReadIndex = (gl.queryReadIndex + 1) % ARRAY_LEN(gl.timerQueries);
@@ -1896,16 +1747,14 @@ static void Init()
 	glInfo.depthFadeSupport = r_depthFade->integer == 1;
 
 	FBO_Init();
-	if(gl.fbMSEnabled && r_alphaToCoverage->integer)
-	{
+	if (gl.fbMSEnabled && r_alphaToCoverage->integer) {
 		glInfo.alphaToCoverageSupport = qtrue;
 	}
 
 	int maxVertexCount = SHADER_MAX_VERTEXES;
 	int maxIndexCount = SHADER_MAX_INDEXES;
 	gl.mappingType = GetMappingTypeFromCvar();
-	if(MappingType_UsesLargeBuffers())
-	{
+	if (MappingType_UsesLargeBuffers()) {
 		maxVertexCount = LARGEBUFFER_MAX_VERTEXES * LARGEBUFFER_MAX_FRAMES;
 		maxIndexCount = LARGEBUFFER_MAX_INDEXES * LARGEBUFFER_MAX_FRAMES;
 	}
@@ -1998,27 +1847,22 @@ static void Init()
 	glBindVertexArray(vertexArray);
 
 	CreateGeometryBufferStorage(&gl.indexBuffer);
-	for(int i = 0; i < VB_COUNT; ++i)
-	{
+	for (int i = 0; i < VB_COUNT; ++i) {
 		CreateGeometryBufferStorage(&gl.arrayBuffers[i]);
 	}
 
-	for(int p = 0; p < PID_COUNT; ++p)
-	{
+	for (int p = 0; p < PID_COUNT; ++p) {
 		Pipeline* pipeline = &gl.pipelines[p];
 
 		pipeline->textureLocations[0] = glGetUniformLocation(pipeline->program.program, "texture1");
 		pipeline->textureLocations[1] = glGetUniformLocation(pipeline->program.program, "texture2");
 
-		for(int i = 0; i < ARRAY_LEN(pipeline->uniformLocations); ++i)
-		{
-			if(pipeline->uniformNames[i] != NULL)
-			{
+		for (int i = 0; i < ARRAY_LEN(pipeline->uniformLocations); ++i) {
+			if (pipeline->uniformNames[i] != NULL) {
 				pipeline->uniformLocations[i] = glGetUniformLocation(pipeline->program.program, pipeline->uniformNames[i]);
 #if defined(_DEBUG)
-				if((p == PID_GENERIC && i == GU_GAMMA_BRIGHT_NOISE_SEED && r_dither->integer == 0) ||
-				   (p == PID_GENERIC && i == GU_A2C_ALPHA_BOOST && !glInfo.alphaToCoverageSupport))
-				{
+				if ((p == PID_GENERIC && i == GU_GAMMA_BRIGHT_NOISE_SEED && r_dither->integer == 0) ||
+				    (p == PID_GENERIC && i == GU_A2C_ALPHA_BOOST && !glInfo.alphaToCoverageSupport)) {
 					continue;
 				}
 				assert(pipeline->uniformLocations[i] != -1);
@@ -2027,8 +1871,7 @@ static void Init()
 		}
 	}
 
-	if(r_gpuMipGen->integer && (GLEW_VERSION_4_3 || (GLEW_ARB_compute_shader && GLEW_ARB_texture_storage && GLEW_ARB_shader_image_load_store && GLEW_ARB_copy_image)))
-	{
+	if (r_gpuMipGen->integer && (GLEW_VERSION_4_3 || (GLEW_ARB_compute_shader && GLEW_ARB_texture_storage && GLEW_ARB_shader_image_load_store && GLEW_ARB_copy_image))) {
 		gl.errorMode = EM_PRINT;
 		glInfo.mipGenSupport = InitCompute();
 		gl.errorMode = EM_FATAL;
@@ -2049,10 +1892,10 @@ static void InitGLConfig()
 	Q_strncpyz(glConfig.extensions_string, "", sizeof(glConfig.extensions_string));
 	glConfig.unused_maxTextureSize = MAX_GPU_TEXTURE_SIZE;
 	glConfig.unused_maxActiveTextures = 0;
-	glConfig.unused_driverType = 0;		// ICD
-	glConfig.unused_hardwareType = 0;	// generic
+	glConfig.unused_driverType = 0;   // ICD
+	glConfig.unused_hardwareType = 0; // generic
 	glConfig.unused_deviceSupportsGamma = qtrue;
-	glConfig.unused_textureCompression = 0;	// no compression
+	glConfig.unused_textureCompression = 0; // no compression
 	glConfig.unused_textureEnvAddAvailable = qtrue;
 	glConfig.unused_displayFrequency = 0;
 	glConfig.unused_isFullscreen = !!r_fullscreen->integer;
@@ -2064,12 +1907,9 @@ static void InitGLInfo()
 {
 	glInfo.maxTextureSize = MAX_GPU_TEXTURE_SIZE;
 
-	if(GLEW_EXT_texture_filter_anisotropic)
-	{
+	if (GLEW_EXT_texture_filter_anisotropic) {
 		glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &glInfo.maxAnisotropy);
-	}
-	else
-	{
+	} else {
 		glInfo.maxAnisotropy = 0;
 	}
 
@@ -2080,12 +1920,10 @@ static void InitGLInfo()
 
 static qbool GAL_Init()
 {
-	if(glConfig.vidWidth == 0)
-	{
+	if (glConfig.vidWidth == 0) {
 		// the order of these calls can not be changed
 		Sys_V_Init(GAL_GL3);
-		if(!GLEW_VERSION_3_2)
-		{
+		if (!GLEW_VERSION_3_2) {
 			ri.Error(ERR_FATAL, "OpenGL 3.2 is required by the selected back-end!\n");
 		}
 		InitGLConfig();
@@ -2099,8 +1937,7 @@ static qbool GAL_Init()
 	SetDefaultState();
 
 	const int err = glGetError();
-	if(err != GL_NO_ERROR)
-	{
+	if (err != GL_NO_ERROR) {
 		ri.Printf(PRINT_ALL, "glGetError() = 0x%x\n", err);
 	}
 
@@ -2109,8 +1946,7 @@ static qbool GAL_Init()
 
 static void GAL_ShutDown(qbool fullShutDown)
 {
-	for(int i = 0; i < tr.numImages; ++i)
-	{
+	for (int i = 0; i < tr.numImages; ++i) {
 		const GLuint texture = (GLuint)tr.images[i]->texnum;
 		glDeleteTextures(1, &texture);
 	}
@@ -2121,8 +1957,7 @@ static void GAL_ShutDown(qbool fullShutDown)
 	gl.boundTextures[0] = GLuint(-1);
 	gl.boundTextures[1] = GLuint(-1);
 
-	if(fullShutDown && gl.mappingType == MT_AMDPIN)
-	{
+	if (fullShutDown && gl.mappingType == MT_AMDPIN) {
 		// We flush the command queue and wait for all commands to be done executing
 		// to make sure the GPU is done accessing our own memory buffers.
 		// We could also have used a fence instead.
@@ -2130,8 +1965,7 @@ static void GAL_ShutDown(qbool fullShutDown)
 		glFinish();
 
 		// Now that it's safe to do so, free our memory buffers.
-		for(int i = 0; i < ARRAY_LEN(gl.arrayBuffers); ++i)
-		{
+		for (int i = 0; i < ARRAY_LEN(gl.arrayBuffers); ++i) {
 			FreePinnedMemory(&gl.arrayBuffers[i]);
 		}
 		FreePinnedMemory(&gl.indexBuffer);
@@ -2146,31 +1980,25 @@ static void GAL_BeginFrame()
 
 	ApplyViewportAndScissor(0, 0, glConfig.vidWidth, glConfig.vidHeight);
 
-	if(r_clear->integer)
-	{
+	if (r_clear->integer) {
 		glClearColor(1.0f, 0.0f, 0.5f, 1.0f);
-	}
-	else
-	{
+	} else {
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	}
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	if(MappingType_UsesLargeBuffers())
-	{
+	if (MappingType_UsesLargeBuffers()) {
 		Buffers_Wait();
 	}
 }
 
 static void GAL_EndFrame()
 {
-	if(MappingType_UsesLargeBuffers())
-	{
+	if (MappingType_UsesLargeBuffers()) {
 		Buffers_Lock();
 	}
 
-	if(gl.fbMSEnabled)
-	{
+	if (gl.fbMSEnabled) {
 		FBO_ResolveColor();
 	}
 
@@ -2195,41 +2023,35 @@ static void DrawGeneric()
 {
 	Pipeline* const pipeline = &gl.pipelines[PID_GENERIC];
 
-	if(pipeline->uniformsDirty[GU_MODELVIEW])
-	{
+	if (pipeline->uniformsDirty[GU_MODELVIEW]) {
 		glUniformMatrix4fv(pipeline->uniformLocations[GU_MODELVIEW], 1, GL_FALSE, gl.modelViewMatrix);
 		pipeline->uniformsDirty[GU_MODELVIEW] = qfalse;
 	}
-	if(pipeline->uniformsDirty[GU_PROJECTION])
-	{
+	if (pipeline->uniformsDirty[GU_PROJECTION]) {
 		glUniformMatrix4fv(pipeline->uniformLocations[GU_PROJECTION], 1, GL_FALSE, gl.projectionMatrix);
 		pipeline->uniformsDirty[GU_PROJECTION] = qfalse;
 	}
-	if(pipeline->uniformsDirty[GU_CLIP_PLANE])
-	{
+	if (pipeline->uniformsDirty[GU_CLIP_PLANE]) {
 		glUniform4fv(pipeline->uniformLocations[GU_CLIP_PLANE], 1, gl.clipPlane);
 		pipeline->uniformsDirty[GU_CLIP_PLANE] = qfalse;
 	}
-	if(pipeline->uniformsDirty[GU_GAMMA_BRIGHT_NOISE_SEED] &&
-	   pipeline->uniformLocations[GU_GAMMA_BRIGHT_NOISE_SEED] != -1)
-	{
+	if (pipeline->uniformsDirty[GU_GAMMA_BRIGHT_NOISE_SEED] &&
+	    pipeline->uniformLocations[GU_GAMMA_BRIGHT_NOISE_SEED] != -1) {
 		glUniform4f(
-			pipeline->uniformLocations[GU_GAMMA_BRIGHT_NOISE_SEED],
-			1.0f / r_gamma->value,
-			1.0f / r_brightness->value,
-			backEnd.projection2D ? 0.0f : r_ditherStrength->value,
-			(float)rand() / (float)RAND_MAX);
+		    pipeline->uniformLocations[GU_GAMMA_BRIGHT_NOISE_SEED],
+		    1.0f / r_gamma->value,
+		    1.0f / r_brightness->value,
+		    backEnd.projection2D ? 0.0f : r_ditherStrength->value,
+		    (float)rand() / (float)RAND_MAX);
 		pipeline->uniformsDirty[GU_GAMMA_BRIGHT_NOISE_SEED] = qfalse;
 	}
-	if(pipeline->uniformsDirty[GU_A2C_ALPHA_BOOST] &&
-	   pipeline->uniformLocations[GU_A2C_ALPHA_BOOST] != -1)
-	{
+	if (pipeline->uniformsDirty[GU_A2C_ALPHA_BOOST] &&
+	    pipeline->uniformLocations[GU_A2C_ALPHA_BOOST] != -1) {
 		glUniform1f(pipeline->uniformLocations[GU_A2C_ALPHA_BOOST], r_alphaToCoverageMipBoost->value);
 		pipeline->uniformsDirty[GU_A2C_ALPHA_BOOST] = qfalse;
 	}
-	if(pipeline->uniformsDirty[GU_GREYSCALE] ||
-	   tess.greyscale != gl.greyscale)
-	{
+	if (pipeline->uniformsDirty[GU_GREYSCALE] ||
+	    tess.greyscale != gl.greyscale) {
 		glUniform1f(pipeline->uniformLocations[GU_GREYSCALE], tess.greyscale);
 		gl.greyscale = tess.greyscale;
 		pipeline->uniformsDirty[GU_GREYSCALE] = qfalse;
@@ -2238,8 +2060,7 @@ static void DrawGeneric()
 	UploadVertexArray(VB_POSITION, tess.xyz);
 	UploadIndices(tess.indexes, tess.numIndexes);
 
-	for(int i = 0; i < tess.shader->numStages; ++i)
-	{
+	for (int i = 0; i < tess.shader->numStages; ++i) {
 		const shaderStage_t* const stage = tess.xstages[i];
 		ApplyState(stage->stateBits, tess.shader->cullType, tess.shader->polygonOffset);
 
@@ -2248,14 +2069,11 @@ static void DrawGeneric()
 
 		BindBundle(0, &stage->bundle);
 
-		if(stage->mtStages == 0)
-		{
+		if (stage->mtStages == 0) {
 			BindImage(1, tr.whiteImage);
 			BindVertexArray(VB_TEXCOORD2);
 			ApplyTexEnv(TE_DISABLED);
-		}
-		else
-		{
+		} else {
 			const shaderStage_t* const stage2 = tess.xstages[i + 1];
 			BindBundle(1, &stage2->bundle);
 			UploadVertexArray(VB_TEXCOORD2, tess.svars[i + 1].texcoordsptr);
@@ -2263,8 +2081,7 @@ static void DrawGeneric()
 			++i;
 		}
 
-		if(pipeline->uniformsDirty[GU_ALPHA_TEX])
-		{
+		if (pipeline->uniformsDirty[GU_ALPHA_TEX]) {
 			glUniform2ui(pipeline->uniformLocations[GU_ALPHA_TEX], gl.alphaTest, gl.texEnv);
 			pipeline->uniformsDirty[GU_ALPHA_TEX] = qfalse;
 		}
@@ -2272,8 +2089,7 @@ static void DrawGeneric()
 		DrawElements(tess.numIndexes);
 	}
 
-	if(tess.drawFog)
-	{
+	if (tess.drawFog) {
 		ApplyState(tess.fogStateBits, tess.shader->cullType, tess.shader->polygonOffset);
 
 		UploadVertexArray(VB_TEXCOORD, tess.svarsFog.texcoordsptr);
@@ -2284,8 +2100,7 @@ static void DrawGeneric()
 		BindImage(1, tr.whiteImage);
 
 		ApplyTexEnv(TE_DISABLED);
-		if(pipeline->uniformsDirty[GU_ALPHA_TEX])
-		{
+		if (pipeline->uniformsDirty[GU_ALPHA_TEX]) {
 			glUniform2ui(pipeline->uniformLocations[GU_ALPHA_TEX], gl.alphaTest, gl.texEnv);
 			pipeline->uniformsDirty[GU_ALPHA_TEX] = qfalse;
 		}
@@ -2309,46 +2124,37 @@ static void DrawDynamicLight()
 	ApplyState(backEnd.dlStateBits, tess.shader->cullType, tess.shader->polygonOffset);
 	BindBundle(0, &stage->bundle);
 
-	if(backEnd.dlOpaque != gl.dlOpaque)
-	{
+	if (backEnd.dlOpaque != gl.dlOpaque) {
 		gl.dlOpaque = backEnd.dlOpaque;
 		pipeline->uniformsDirty[DU_OPAQUE] = qtrue;
 	}
 
-	if(backEnd.dlIntensity != gl.dlIntensity)
-	{
+	if (backEnd.dlIntensity != gl.dlIntensity) {
 		gl.dlIntensity = backEnd.dlIntensity;
 		pipeline->uniformsDirty[DU_INTENSITY] = qtrue;
 	}
 
-	if(tess.greyscale != gl.greyscale)
-	{
+	if (tess.greyscale != gl.greyscale) {
 		gl.greyscale = tess.greyscale;
 		pipeline->uniformsDirty[DU_GREYSCALE] = qtrue;
 	}
 
-	if(pipeline->uniformsDirty[DU_MODELVIEW])
-	{
+	if (pipeline->uniformsDirty[DU_MODELVIEW]) {
 		glUniformMatrix4fv(pipeline->uniformLocations[DU_MODELVIEW], 1, GL_FALSE, gl.modelViewMatrix);
 	}
-	if(pipeline->uniformsDirty[DU_PROJECTION])
-	{
+	if (pipeline->uniformsDirty[DU_PROJECTION]) {
 		glUniformMatrix4fv(pipeline->uniformLocations[DU_PROJECTION], 1, GL_FALSE, gl.projectionMatrix);
 	}
-	if(pipeline->uniformsDirty[DU_CLIP_PLANE])
-	{
+	if (pipeline->uniformsDirty[DU_CLIP_PLANE]) {
 		glUniform4fv(pipeline->uniformLocations[DU_CLIP_PLANE], 1, gl.clipPlane);
 	}
-	if(pipeline->uniformsDirty[DU_OPAQUE])
-	{
+	if (pipeline->uniformsDirty[DU_OPAQUE]) {
 		glUniform1f(pipeline->uniformLocations[DU_OPAQUE], gl.dlOpaque ? 1.0f : 0.0f);
 	}
-	if(pipeline->uniformsDirty[DU_INTENSITY])
-	{
+	if (pipeline->uniformsDirty[DU_INTENSITY]) {
 		glUniform1f(pipeline->uniformLocations[DU_INTENSITY], gl.dlIntensity);
 	}
-	if(pipeline->uniformsDirty[DU_GREYSCALE])
-	{
+	if (pipeline->uniformsDirty[DU_GREYSCALE]) {
 		glUniform1f(pipeline->uniformLocations[DU_GREYSCALE], tess.greyscale);
 	}
 
@@ -2361,47 +2167,40 @@ static void DrawDepthFade()
 {
 	Pipeline* const pipeline = &gl.pipelines[PID_SOFT_SPRITE];
 
-	if(pipeline->uniformsDirty[SU_PROJECTION])
-	{
+	if (pipeline->uniformsDirty[SU_PROJECTION]) {
 		glUniformMatrix4fv(pipeline->uniformLocations[SU_PROJECTION], 1, GL_FALSE, gl.projectionMatrix);
 		pipeline->uniformsDirty[SU_PROJECTION] = qfalse;
 	}
-	if(pipeline->uniformsDirty[SU_MODELVIEW])
-	{
+	if (pipeline->uniformsDirty[SU_MODELVIEW]) {
 		glUniformMatrix4fv(pipeline->uniformLocations[SU_MODELVIEW], 1, GL_FALSE, gl.modelViewMatrix);
 		pipeline->uniformsDirty[SU_MODELVIEW] = qfalse;
 	}
-	if(pipeline->uniformsDirty[SU_CLIP_PLANE])
-	{
+	if (pipeline->uniformsDirty[SU_CLIP_PLANE]) {
 		glUniform4fv(pipeline->uniformLocations[SU_CLIP_PLANE], 1, gl.clipPlane);
 		pipeline->uniformsDirty[SU_CLIP_PLANE] = qfalse;
 	}
-	if(pipeline->uniformsDirty[SU_COLOR_SCALE] ||
-	   memcmp(gl.depthFadeScale, r_depthFadeScale[tess.shader->dfType], sizeof(gl.depthFadeScale)) != 0)
-	{
+	if (pipeline->uniformsDirty[SU_COLOR_SCALE] ||
+	    memcmp(gl.depthFadeScale, r_depthFadeScale[tess.shader->dfType], sizeof(gl.depthFadeScale)) != 0) {
 		glUniform4fv(pipeline->uniformLocations[SU_COLOR_SCALE], 1, r_depthFadeScale[tess.shader->dfType]);
 		memcpy(gl.depthFadeScale, r_depthFadeScale[tess.shader->dfType], sizeof(gl.depthFadeScale));
 		pipeline->uniformsDirty[SU_COLOR_SCALE] = qfalse;
 	}
-	if(pipeline->uniformsDirty[SU_COLOR_BIAS] ||
-	   memcmp(gl.depthFadeBias, r_depthFadeBias[tess.shader->dfType], sizeof(gl.depthFadeBias)) != 0)
-	{
+	if (pipeline->uniformsDirty[SU_COLOR_BIAS] ||
+	    memcmp(gl.depthFadeBias, r_depthFadeBias[tess.shader->dfType], sizeof(gl.depthFadeBias)) != 0) {
 		glUniform4fv(pipeline->uniformLocations[SU_COLOR_BIAS], 1, r_depthFadeBias[tess.shader->dfType]);
 		memcpy(gl.depthFadeBias, r_depthFadeBias[tess.shader->dfType], sizeof(gl.depthFadeBias));
 		pipeline->uniformsDirty[SU_COLOR_BIAS] = qfalse;
 	}
-	if(pipeline->uniformsDirty[SU_DIST_OFFSET] ||
-	   tess.shader->dfInvDist != gl.depthFadeDist ||
-	   tess.shader->dfBias != gl.depthFadeOffset)
-	{
+	if (pipeline->uniformsDirty[SU_DIST_OFFSET] ||
+	    tess.shader->dfInvDist != gl.depthFadeDist ||
+	    tess.shader->dfBias != gl.depthFadeOffset) {
 		glUniform2f(pipeline->uniformLocations[SU_DIST_OFFSET], tess.shader->dfInvDist, tess.shader->dfBias);
 		gl.depthFadeDist = tess.shader->dfInvDist;
 		gl.depthFadeOffset = tess.shader->dfBias;
 		pipeline->uniformsDirty[SU_DIST_OFFSET] = qfalse;
 	}
-	if(pipeline->uniformsDirty[SU_GREYSCALE] ||
-	   tess.greyscale != gl.greyscale)
-	{
+	if (pipeline->uniformsDirty[SU_GREYSCALE] ||
+	    tess.greyscale != gl.greyscale) {
 		glUniform1f(pipeline->uniformLocations[SU_GREYSCALE], tess.greyscale);
 		gl.greyscale = tess.greyscale;
 		pipeline->uniformsDirty[SU_GREYSCALE] = qfalse;
@@ -2409,8 +2208,7 @@ static void DrawDepthFade()
 
 	UploadVertexArray(VB_POSITION, tess.xyz);
 
-	for(int i = 0; i < tess.shader->numStages; ++i)
-	{
+	for (int i = 0; i < tess.shader->numStages; ++i) {
 		const shaderStage_t* stage = tess.xstages[i];
 
 		// We have already made sure (in theory) we won't have depth writes enabled
@@ -2426,15 +2224,13 @@ static void DrawDepthFade()
 		UploadVertexArray(VB_COLOR, tess.svars[i].colors);
 		UploadIndices(tess.indexes, tess.numIndexes);
 
-		if(pipeline->uniformsDirty[SU_ALPHA_TEST])
-		{
+		if (pipeline->uniformsDirty[SU_ALPHA_TEST]) {
 			glUniform1ui(pipeline->uniformLocations[SU_ALPHA_TEST], gl.alphaTest);
 			pipeline->uniformsDirty[SU_ALPHA_TEST] = qfalse;
 		}
 
 		BindBundle(0, &stage->bundle);
-		if(!gl.fbMSEnabled)
-		{
+		if (!gl.fbMSEnabled) {
 			BindTexture(1, gl.fbSS[gl.fbReadIndex].depthStencil);
 		}
 
@@ -2444,18 +2240,13 @@ static void DrawDepthFade()
 
 static void GAL_Draw(drawType_t type)
 {
-	if(type == DT_GENERIC)
-	{
+	if (type == DT_GENERIC) {
 		ApplyPipeline(PID_GENERIC);
 		DrawGeneric();
-	}
-	else if(type == DT_DYNAMIC_LIGHT)
-	{
+	} else if (type == DT_DYNAMIC_LIGHT) {
 		ApplyPipeline(PID_DYNAMIC_LIGHT);
 		DrawDynamicLight();
-	}
-	else if(type == DT_SOFT_SPRITE)
-	{
+	} else if (type == DT_SOFT_SPRITE) {
 		ApplyPipeline(PID_SOFT_SPRITE);
 		DrawDepthFade();
 	}
@@ -2468,8 +2259,7 @@ static void GAL_Begin3D()
 	memcpy(gl.projectionMatrix, backEnd.viewParms.projectionMatrix, sizeof(gl.projectionMatrix));
 	ApplyViewportAndScissor(backEnd.viewParms.viewportX, backEnd.viewParms.viewportY, backEnd.viewParms.viewportWidth, backEnd.viewParms.viewportHeight);
 
-	if(backEnd.viewParms.isPortal)
-	{
+	if (backEnd.viewParms.isPortal) {
 		float plane[4];
 		plane[0] = backEnd.viewParms.portalPlane.normal[0];
 		plane[1] = backEnd.viewParms.portalPlane.normal[1];
@@ -2492,9 +2282,7 @@ static void GAL_Begin3D()
 
 		memcpy(gl.clipPlane, plane, sizeof(gl.clipPlane));
 		ApplyClipPlane(qtrue);
-	}
-	else
-	{
+	} else {
 		memset(gl.clipPlane, 0, sizeof(gl.clipPlane));
 		ApplyClipPlane(qfalse);
 	}
@@ -2502,14 +2290,11 @@ static void GAL_Begin3D()
 	ApplyState(GLS_DEFAULT, CT_TWO_SIDED, qfalse);
 
 	GLbitfield clearBits = GL_DEPTH_BUFFER_BIT;
-	if(backEnd.refdef.rdflags & RDF_HYPERSPACE)
-	{
+	if (backEnd.refdef.rdflags & RDF_HYPERSPACE) {
 		clearBits |= GL_COLOR_BUFFER_BIT;
 		const float c = RB_HyperspaceColor();
 		glClearColor(c, c, c, 1.0f);
-	}
-	else if(r_fastsky->integer && !(backEnd.refdef.rdflags & RDF_NOWORLDMODEL))
-	{
+	} else if (r_fastsky->integer && !(backEnd.refdef.rdflags & RDF_NOWORLDMODEL)) {
 		clearBits |= GL_COLOR_BUFFER_BIT;
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	}
@@ -2536,8 +2321,7 @@ static void GAL_EndSkyAndClouds()
 
 static int GetMaxAnisotropy(image_t* image)
 {
-	if((image->flags & IMG_NOAF) == 0 && glInfo.maxAnisotropy >= 2 && r_ext_max_anisotropy->integer >= 2)
-	{
+	if ((image->flags & IMG_NOAF) == 0 && glInfo.maxAnisotropy >= 2 && r_ext_max_anisotropy->integer >= 2) {
 		return min(r_ext_max_anisotropy->integer, glInfo.maxAnisotropy);
 	}
 
@@ -2554,8 +2338,7 @@ static void GAL_CreateTexture(image_t* image, int mipCount, int w, int h)
 	SetDebugName(GL_TEXTURE, id, image->name);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, GetMaxAnisotropy(image));
 
-	if(image->flags & IMG_LMATLAS)
-	{
+	if (image->flags & IMG_LMATLAS) {
 		glTexImage2D(GL_TEXTURE_2D, 0, GetTextureInternalFormat(image->format), w, h, 0, GetTextureFormat(image->format), GL_UNSIGNED_BYTE, NULL);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -2567,19 +2350,14 @@ static void GAL_CreateTexture(image_t* image, int mipCount, int w, int h)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GetTextureWrapMode(image->wrapClampMode));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GetTextureWrapMode(image->wrapClampMode));
 
-	if(Q_stricmp(r_textureMode->string, "GL_NEAREST") == 0 &&
-	   (image->flags & (IMG_EXTLMATLAS | IMG_NOPICMIP)) == 0)
-	{
+	if (Q_stricmp(r_textureMode->string, "GL_NEAREST") == 0 &&
+	    (image->flags & (IMG_EXTLMATLAS | IMG_NOPICMIP)) == 0) {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	}
-	else if(image->flags & IMG_NOMIPMAP)
-	{
+	} else if (image->flags & IMG_NOMIPMAP) {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	}
-	else
-	{
+	} else {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
@@ -2588,12 +2366,9 @@ static void GAL_CreateTexture(image_t* image, int mipCount, int w, int h)
 static void GAL_UpdateTexture(image_t* image, int mip, int x, int y, int w, int h, const void* data)
 {
 	BindImage(0, image);
-	if(image->flags & IMG_LMATLAS)
-	{
+	if (image->flags & IMG_LMATLAS) {
 		glTexSubImage2D(GL_TEXTURE_2D, (GLint)mip, x, y, w, h, GetTextureFormat(image->format), GL_UNSIGNED_BYTE, data);
-	}
-	else
-	{
+	} else {
 		glTexImage2D(GL_TEXTURE_2D, (GLint)mip, GetTextureInternalFormat(image->format), w, h, 0, GetTextureFormat(image->format), GL_UNSIGNED_BYTE, data);
 	}
 }
@@ -2603,8 +2378,7 @@ static void GAL_UpdateScratch(image_t* image, int w, int h, const void* data, qb
 	BindImage(0, image);
 
 	// if the scratchImage isn't in the format we want, specify it as a new texture
-	if(w != image->width || h != image->height)
-	{
+	if (w != image->width || h != image->height) {
 		image->width = w;
 		image->height = h;
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -2612,9 +2386,7 @@ static void GAL_UpdateScratch(image_t* image, int w, int h, const void* data, qb
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	}
-	else if(dirty)
-	{
+	} else if (dirty) {
 		// otherwise, just subimage upload it so that drivers can tell we are going to be changing
 		// it and don't try and do a texture compression
 		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -2623,7 +2395,10 @@ static void GAL_UpdateScratch(image_t* image, int w, int h, const void* data, qb
 
 static void GAL_CreateTextureEx(image_t* image, int mipCount, int mipOffset, int w, int h, const void* mip0)
 {
-	enum { GroupSize = 8, GroupMask = GroupSize - 1 };
+	enum {
+		GroupSize = 8,
+		GroupMask = GroupSize - 1
+	};
 
 	assert(image->format == TF_RGBA8);
 	assert(GetTextureInternalFormat(image->format) == GL_RGBA8);
@@ -2640,14 +2415,11 @@ static void GAL_CreateTextureEx(image_t* image, int mipCount, int mipOffset, int
 	glTexStorage2D(GL_TEXTURE_2D, mipCount - mipOffset, GL_RGBA8, image->width, image->height);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GetTextureWrapMode(image->wrapClampMode));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GetTextureWrapMode(image->wrapClampMode));
-	if(Q_stricmp(r_textureMode->string, "GL_NEAREST") == 0 &&
-	   (image->flags & (IMG_LMATLAS | IMG_EXTLMATLAS | IMG_NOPICMIP)) == 0)
-	{
+	if (Q_stricmp(r_textureMode->string, "GL_NEAREST") == 0 &&
+	    (image->flags & (IMG_LMATLAS | IMG_EXTLMATLAS | IMG_NOPICMIP)) == 0) {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	}
-	else
-	{
+	} else {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
@@ -2666,8 +2438,7 @@ static void GAL_CreateTextureEx(image_t* image, int mipCount, int mipOffset, int
 	glDispatchCompute((w + GroupMask) / GroupSize, (h + GroupMask) / GroupSize, 1);
 
 	// copy to destination mip 0 now if needed
-	if(mipOffset == 0)
-	{
+	if (mipOffset == 0) {
 		glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
 		glUseProgram(gl.mipGen.programs[CPID_LINEAR_TO_GAMMA].program);
 		glUniform1f(0, r_intensity->value);
@@ -2678,8 +2449,7 @@ static void GAL_CreateTextureEx(image_t* image, int mipCount, int mipOffset, int
 		glDispatchCompute((w + GroupMask) / GroupSize, (h + GroupMask) / GroupSize, 1);
 	}
 
-	for(int i = 1; i < mipCount; ++i)
-	{
+	for (int i = 1; i < mipCount; ++i) {
 		const int w1 = w;
 		const int h1 = h;
 		w = max(w / 2, 1);
@@ -2690,8 +2460,8 @@ static void GAL_CreateTextureEx(image_t* image, int mipCount, int mipOffset, int
 		glUseProgram(gl.mipGen.programs[CPID_DOWN_SAMPLE].program);
 		glUniform4fv(0, 1, tr.mipFilter);
 		glUniform2i(1, w1 - 1, h1 - 1); // maxSize
-		glUniform2i(2, w1 / w, 1); // scale
-		glUniform2i(3, 1, 0); // offset
+		glUniform2i(2, w1 / w, 1);      // scale
+		glUniform2i(3, 1, 0);           // offset
 		glUniform1ui(4, image->wrapClampMode == TW_CLAMP_TO_EDGE ? 1 : 0);
 		glBindImageTexture(0, gl.mipGen.textures[0], 0, GL_FALSE, 0, GL_READ_ONLY, GL_RGBA16F);
 		glBindImageTexture(1, gl.mipGen.textures[1], 0, GL_FALSE, 0, GL_WRITE_ONLY, GL_RGBA16F);
@@ -2702,16 +2472,15 @@ static void GAL_CreateTextureEx(image_t* image, int mipCount, int mipOffset, int
 		glUseProgram(gl.mipGen.programs[CPID_DOWN_SAMPLE].program);
 		glUniform4fv(0, 1, tr.mipFilter);
 		glUniform2i(1, w - 1, h1 - 1); // maxSize
-		glUniform2i(2, 1, h1 / h); // scale
-		glUniform2i(3, 0, 1); // offset
+		glUniform2i(2, 1, h1 / h);     // scale
+		glUniform2i(3, 0, 1);          // offset
 		glUniform1ui(4, image->wrapClampMode == TW_CLAMP_TO_EDGE ? 1 : 0);
 		glBindImageTexture(0, gl.mipGen.textures[1], 0, GL_FALSE, 0, GL_READ_ONLY, GL_RGBA16F);
 		glBindImageTexture(1, gl.mipGen.textures[0], 0, GL_FALSE, 0, GL_WRITE_ONLY, GL_RGBA16F);
 		glDispatchCompute((w + GroupMask) / GroupSize, (h + GroupMask) / GroupSize, 1);
 
 		const int destMip = i - mipOffset;
-		if(destMip >= 0)
-		{
+		if (destMip >= 0) {
 			// copy the gamma-corrected result to the desired mip slice
 			glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
 			glUseProgram(gl.mipGen.programs[CPID_LINEAR_TO_GAMMA].program);
@@ -2766,16 +2535,11 @@ static void GAL_Begin2D()
 static void GAL_SetModelViewMatrix(const float* matrix)
 {
 	memcpy(gl.modelViewMatrix, matrix, sizeof(gl.modelViewMatrix));
-	if(gl.pipelineId == PID_GENERIC)
-	{
+	if (gl.pipelineId == PID_GENERIC) {
 		gl.pipelines[PID_GENERIC].uniformsDirty[GU_MODELVIEW] = qtrue;
-	}
-	else if(gl.pipelineId == PID_DYNAMIC_LIGHT)
-	{
+	} else if (gl.pipelineId == PID_DYNAMIC_LIGHT) {
 		gl.pipelines[PID_DYNAMIC_LIGHT].uniformsDirty[DU_MODELVIEW] = qtrue;
-	}
-	else if(gl.pipelineId == PID_SOFT_SPRITE)
-	{
+	} else if (gl.pipelineId == PID_SOFT_SPRITE) {
 		gl.pipelines[PID_SOFT_SPRITE].uniformsDirty[SU_MODELVIEW] = qtrue;
 	}
 }
@@ -2787,8 +2551,7 @@ static void GAL_SetDepthRange(double zNear, double zFar)
 
 static const char* GetMappingTypeName(MappingType type)
 {
-	switch(type)
-	{
+	switch (type) {
 		case MT_SUBDATA: return "glBufferSubData";
 		case MT_PERSISTENT: return "glMapBufferRange + GL_MAP_PERSISTENT_BIT";
 		case MT_UNSYNC: return "glMapBufferRange + GL_MAP_UNSYNCHRONIZED_BIT";

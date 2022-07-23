@@ -27,57 +27,75 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "snd_local.h"
 #include "snd_public.h"
 
-cvar_t *s_volume;
-cvar_t *s_musicVolume;
-cvar_t *s_initsound;
-cvar_t *s_autoMute;
+cvar_t* s_volume;
+cvar_t* s_musicVolume;
+cvar_t* s_initsound;
+cvar_t* s_autoMute;
 
 static soundInterface_t si;
 
 
 static qbool S_ValidSoundInterface()
 {
-	if ( !si.Shutdown ) return qfalse;
-	if ( !si.StartSound ) return qfalse;
-	if ( !si.StartLocalSound ) return qfalse;
-	if ( !si.StartBackgroundTrack ) return qfalse;
-	if ( !si.StopBackgroundTrack ) return qfalse;
-	if ( !si.RawSamples ) return qfalse;
-	if ( !si.StopAllSounds ) return qfalse;
-	if ( !si.ClearLoopingSounds ) return qfalse;
-	if ( !si.AddLoopingSound ) return qfalse;
-	if ( !si.Respatialize ) return qfalse;
-	if ( !si.UpdateEntityPosition ) return qfalse;
-	if ( !si.Update ) return qfalse;
-	if ( !si.DisableSounds ) return qfalse;
-	if ( !si.BeginRegistration ) return qfalse;
-	if ( !si.RegisterSound ) return qfalse;
-	if ( !si.ClearSoundBuffer ) return qfalse;
-	if ( !si.SoundInfo ) return qfalse;
-	if ( !si.SoundList ) return qfalse;
+	if (!si.Shutdown)
+		return qfalse;
+	if (!si.StartSound)
+		return qfalse;
+	if (!si.StartLocalSound)
+		return qfalse;
+	if (!si.StartBackgroundTrack)
+		return qfalse;
+	if (!si.StopBackgroundTrack)
+		return qfalse;
+	if (!si.RawSamples)
+		return qfalse;
+	if (!si.StopAllSounds)
+		return qfalse;
+	if (!si.ClearLoopingSounds)
+		return qfalse;
+	if (!si.AddLoopingSound)
+		return qfalse;
+	if (!si.Respatialize)
+		return qfalse;
+	if (!si.UpdateEntityPosition)
+		return qfalse;
+	if (!si.Update)
+		return qfalse;
+	if (!si.DisableSounds)
+		return qfalse;
+	if (!si.BeginRegistration)
+		return qfalse;
+	if (!si.RegisterSound)
+		return qfalse;
+	if (!si.ClearSoundBuffer)
+		return qfalse;
+	if (!si.SoundInfo)
+		return qfalse;
+	if (!si.SoundList)
+		return qfalse;
 
 	return qtrue;
 }
 
 
-void S_StartSound( const vec3_t origin, int entnum, int entchannel, sfxHandle_t sfx )
+void S_StartSound(const vec3_t origin, int entnum, int entchannel, sfxHandle_t sfx)
 {
 	if (si.StartSound)
-		si.StartSound( origin, entnum, entchannel, sfx );
+		si.StartSound(origin, entnum, entchannel, sfx);
 }
 
 
-void S_StartLocalSound( sfxHandle_t sfx, int channelNum )
+void S_StartLocalSound(sfxHandle_t sfx, int channelNum)
 {
 	if (si.StartLocalSound)
-		si.StartLocalSound( sfx, channelNum );
+		si.StartLocalSound(sfx, channelNum);
 }
 
 
-void S_StartBackgroundTrack( const char* intro, const char* loop )
+void S_StartBackgroundTrack(const char* intro, const char* loop)
 {
 	if (si.StartBackgroundTrack)
-		si.StartBackgroundTrack( intro, loop );
+		si.StartBackgroundTrack(intro, loop);
 }
 
 
@@ -88,10 +106,10 @@ void S_StopBackgroundTrack()
 }
 
 
-void S_RawSamples( int samples, int rate, int width, int channels, const byte *data, float volume )
+void S_RawSamples(int samples, int rate, int width, int channels, const byte* data, float volume)
 {
 	if (si.RawSamples)
-		si.RawSamples( samples, rate, width, channels, data, volume );
+		si.RawSamples(samples, rate, width, channels, data, volume);
 }
 
 
@@ -109,24 +127,24 @@ void S_ClearLoopingSounds()
 }
 
 
-void S_AddLoopingSound( int entityNum, const vec3_t origin, sfxHandle_t sfx )
+void S_AddLoopingSound(int entityNum, const vec3_t origin, sfxHandle_t sfx)
 {
 	if (si.AddLoopingSound)
-		si.AddLoopingSound( entityNum, origin, sfx );
+		si.AddLoopingSound(entityNum, origin, sfx);
 }
 
 
-void S_Respatialize( int entityNum, const vec3_t origin, const vec3_t axis[3], int inwater )
+void S_Respatialize(int entityNum, const vec3_t origin, const vec3_t axis[3], int inwater)
 {
 	if (si.Respatialize)
-		si.Respatialize( entityNum, origin, axis, inwater );
+		si.Respatialize(entityNum, origin, axis, inwater);
 }
 
 
-void S_UpdateEntityPosition( int entityNum, const vec3_t origin )
+void S_UpdateEntityPosition(int entityNum, const vec3_t origin)
 {
 	if (si.UpdateEntityPosition)
-		si.UpdateEntityPosition( entityNum, origin );
+		si.UpdateEntityPosition(entityNum, origin);
 }
 
 
@@ -151,10 +169,10 @@ void S_BeginRegistration()
 }
 
 
-sfxHandle_t S_RegisterSound( const char* sample )
+sfxHandle_t S_RegisterSound(const char* sample)
 {
 	if (si.RegisterSound)
-		return si.RegisterSound( sample );
+		return si.RegisterSound(sample);
 	return 0;
 }
 
@@ -183,48 +201,48 @@ static void S_SoundList()
 ///////////////////////////////////////////////////////////////
 
 
-static void S_Play_f( void )
+static void S_Play_f(void)
 {
-	int		i;
-	sfxHandle_t	h;
-	char		name[256];
+	int i;
+	sfxHandle_t h;
+	char name[256];
 
-	if( !si.RegisterSound || !si.StartLocalSound ) {
+	if (!si.RegisterSound || !si.StartLocalSound) {
 		return;
 	}
 
 	i = 1;
-	while ( i<Cmd_Argc() ) {
-		if ( !Q_strrchr(Cmd_Argv(i), '.') ) {
-			Com_sprintf( name, sizeof(name), "%s.wav", Cmd_Argv(1) );
+	while (i < Cmd_Argc()) {
+		if (!Q_strrchr(Cmd_Argv(i), '.')) {
+			Com_sprintf(name, sizeof(name), "%s.wav", Cmd_Argv(1));
 		} else {
-			Q_strncpyz( name, Cmd_Argv(i), sizeof(name) );
+			Q_strncpyz(name, Cmd_Argv(i), sizeof(name));
 		}
-		h = si.RegisterSound( name );
-		if( h ) {
-			si.StartLocalSound( h, CHAN_LOCAL_SOUND );
+		h = si.RegisterSound(name);
+		if (h) {
+			si.StartLocalSound(h, CHAN_LOCAL_SOUND);
 		}
 		i++;
 	}
 }
 
 
-static void S_Music_f( void )
+static void S_Music_f(void)
 {
-	int		c;
+	int c;
 
-	if( !si.StartBackgroundTrack ) {
+	if (!si.StartBackgroundTrack) {
 		return;
 	}
 
 	c = Cmd_Argc();
 
-	if ( c == 2 ) {
-		si.StartBackgroundTrack( Cmd_Argv(1), NULL );
-	} else if ( c == 3 ) {
-		si.StartBackgroundTrack( Cmd_Argv(1), Cmd_Argv(2) );
+	if (c == 2) {
+		si.StartBackgroundTrack(Cmd_Argv(1), NULL);
+	} else if (c == 3) {
+		si.StartBackgroundTrack(Cmd_Argv(1), Cmd_Argv(2));
 	} else {
-		Com_Printf ("music <musicfile> [loopfile]\n");
+		Com_Printf("music <musicfile> [loopfile]\n");
 		return;
 	}
 }
@@ -233,8 +251,7 @@ static void S_Music_f( void )
 ///////////////////////////////////////////////////////////////
 
 
-static const cvarTableItem_t cl_cvars[] =
-{
+static const cvarTableItem_t cl_cvars[] = {
 	{ &s_volume, "s_volume", "0.2", CVAR_ARCHIVE, CVART_FLOAT, "0", "1", "global sound volume" },
 	{ &s_musicVolume, "s_musicvolume", "0", CVAR_ARCHIVE, CVART_FLOAT, "0", "16", "music volume" },
 	{ &s_initsound, "s_initsound", "1", 0, CVART_BOOL, NULL, NULL, "enables the audio system" },
@@ -242,8 +259,7 @@ static const cvarTableItem_t cl_cvars[] =
 };
 
 
-static const cmdTableItem_t cl_cmds[] =
-{
+static const cmdTableItem_t cl_cmds[] = {
 	{ "play", S_Play_f, NULL, "starts local sound playback" },
 	{ "music", S_Music_f, NULL, "starts music playback" },
 	{ "s_list", S_SoundList, NULL, "lists loaded sounds" },
@@ -254,31 +270,31 @@ static const cmdTableItem_t cl_cmds[] =
 
 void S_Init()
 {
-	QSUBSYSTEM_INIT_START( "Sound" );
+	QSUBSYSTEM_INIT_START("Sound");
 
-	Cvar_RegisterArray( cl_cvars, MODULE_SOUND );
+	Cvar_RegisterArray(cl_cvars, MODULE_SOUND);
 
-	if ( !s_initsound->integer ) {
-		Com_Memset( &si, 0, sizeof(si) );
-		Com_Printf( "Sound disabled.\n" );
+	if (!s_initsound->integer) {
+		Com_Memset(&si, 0, sizeof(si));
+		Com_Printf("Sound disabled.\n");
 		return;
 	}
 
 	S_CodecInit();
 
-	Cmd_RegisterArray( cl_cmds, MODULE_SOUND );
+	Cmd_RegisterArray(cl_cmds, MODULE_SOUND);
 
-	if (!S_Base_Init( &si )) {
-		Com_Printf( "Sound initialization failed.\n" );
+	if (!S_Base_Init(&si)) {
+		Com_Printf("Sound initialization failed.\n");
 		return;
 	}
 
-	if ( !S_ValidSoundInterface() )
-		Com_Error( ERR_FATAL, "Sound interface invalid." );
+	if (!S_ValidSoundInterface())
+		Com_Error(ERR_FATAL, "Sound interface invalid.");
 
 	S_SoundInfo();
 
-	QSUBSYSTEM_INIT_DONE( "Sound" );
+	QSUBSYSTEM_INIT_DONE("Sound");
 }
 
 
@@ -287,10 +303,9 @@ void S_Shutdown()
 	if (si.Shutdown)
 		si.Shutdown();
 
-	Com_Memset( &si, 0, sizeof(si) );
+	Com_Memset(&si, 0, sizeof(si));
 
-	Cmd_UnregisterModule( MODULE_SOUND );
+	Cmd_UnregisterModule(MODULE_SOUND);
 
 	S_CodecShutdown();
 }
-

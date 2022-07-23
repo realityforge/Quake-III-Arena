@@ -28,7 +28,7 @@ along with Challenge Quake 3. If not, see <https://www.gnu.org/licenses/>.
 #include "GL/glew.h"
 
 
-static const char* GL_DebugSourceString( GLenum source )
+static const char* GL_DebugSourceString(GLenum source)
 {
 	switch (source) {
 		case GL_DEBUG_SOURCE_API: return "API";
@@ -42,7 +42,7 @@ static const char* GL_DebugSourceString( GLenum source )
 }
 
 
-static const char* GL_DebugTypeString( GLenum type )
+static const char* GL_DebugTypeString(GLenum type)
 {
 	switch (type) {
 		case GL_DEBUG_TYPE_ERROR: return "^1error";
@@ -59,7 +59,7 @@ static const char* GL_DebugTypeString( GLenum type )
 }
 
 
-static const char* GL_DebugSeverityString( GLenum severity )
+static const char* GL_DebugSeverityString(GLenum severity)
 {
 	switch (severity) {
 		case GL_DEBUG_SEVERITY_LOW: return "low-severity";
@@ -71,11 +71,11 @@ static const char* GL_DebugSeverityString( GLenum severity )
 }
 
 
-static void GLAPIENTRY GL_DebugCallback( GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam )
+static void GLAPIENTRY GL_DebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
 {
 	const char* msg = va(
-		"^5GL Debug: ^7%s^7/%s^7/%s^7: %s\n",
-		GL_DebugSeverityString(severity), GL_DebugSourceString(source), GL_DebugTypeString(type), message);
+	    "^5GL Debug: ^7%s^7/%s^7/%s^7: %s\n",
+	    GL_DebugSeverityString(severity), GL_DebugSourceString(source), GL_DebugTypeString(type), message);
 	Com_Printf(msg);
 #if defined(_WIN32) && defined(_DEBUG)
 	OutputDebugStringA(msg);

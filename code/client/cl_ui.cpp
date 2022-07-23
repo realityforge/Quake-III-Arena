@@ -24,12 +24,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../qcommon/vm_local.h"
 #include "../qcommon/vm_shim.h"
 
-vm_t *uivm;
+vm_t* uivm;
 
-static const byte*	interopBufferIn;
-static int			interopBufferInSize;
-static byte*		interopBufferOut;
-static int			interopBufferOutSize;
+static const byte* interopBufferIn;
+static int interopBufferInSize;
+static byte* interopBufferOut;
+static int interopBufferOutSize;
 
 
 /*
@@ -37,12 +37,13 @@ static int			interopBufferOutSize;
 GetClientState
 ====================
 */
-static void GetClientState( uiClientState_t *state ) {
+static void GetClientState(uiClientState_t* state)
+{
 	state->connectPacketCount = clc.connectPacketCount;
 	state->connState = cls.state;
-	Q_strncpyz( state->servername, cls.servername, sizeof( state->servername ) );
-	Q_strncpyz( state->updateInfoString, cls.updateInfoString, sizeof( state->updateInfoString ) );
-	Q_strncpyz( state->messageString, clc.serverMessage, sizeof( state->messageString ) );
+	Q_strncpyz(state->servername, cls.servername, sizeof(state->servername));
+	Q_strncpyz(state->updateInfoString, cls.updateInfoString, sizeof(state->updateInfoString));
+	Q_strncpyz(state->messageString, clc.serverMessage, sizeof(state->messageString));
 	state->clientNum = cl.snap.ps.clientNum;
 }
 
@@ -51,7 +52,8 @@ static void GetClientState( uiClientState_t *state ) {
 LAN_LoadCachedServers
 ====================
 */
-void LAN_LoadCachedServers( void ) {
+void LAN_LoadCachedServers(void)
+{
 	int size;
 	fileHandle_t fileIn;
 	cls.numglobalservers = cls.nummplayerservers = cls.numfavoriteservers = 0;
@@ -78,7 +80,8 @@ void LAN_LoadCachedServers( void ) {
 LAN_SaveServersToCache
 ====================
 */
-void LAN_SaveServersToCache( void ) {
+void LAN_SaveServersToCache(void)
+{
 	int size;
 	fileHandle_t fileOut = FS_SV_FOpenFileWrite("servercache.dat");
 	FS_Write(&cls.numglobalservers, sizeof(int), fileOut);
@@ -98,25 +101,26 @@ void LAN_SaveServersToCache( void ) {
 LAN_ResetPings
 ====================
 */
-static void LAN_ResetPings(int source) {
-	int count,i;
-	serverInfo_t *servers = NULL;
+static void LAN_ResetPings(int source)
+{
+	int count, i;
+	serverInfo_t* servers = NULL;
 	count = 0;
 
 	switch (source) {
-		case AS_LOCAL :
+		case AS_LOCAL:
 			servers = &cls.localServers[0];
 			count = MAX_OTHER_SERVERS;
 			break;
-		case AS_MPLAYER :
+		case AS_MPLAYER:
 			servers = &cls.mplayerServers[0];
 			count = MAX_OTHER_SERVERS;
 			break;
-		case AS_GLOBAL :
+		case AS_GLOBAL:
 			servers = &cls.globalServers[0];
 			count = MAX_GLOBAL_SERVERS;
 			break;
-		case AS_FAVORITES :
+		case AS_FAVORITES:
 			servers = &cls.favoriteServers[0];
 			count = MAX_OTHER_SERVERS;
 			break;
@@ -133,35 +137,36 @@ static void LAN_ResetPings(int source) {
 LAN_AddServer
 ====================
 */
-static int LAN_AddServer(int source, const char *name, const char *address) {
+static int LAN_AddServer(int source, const char* name, const char* address)
+{
 	int max, *count, i;
 	netadr_t adr;
-	serverInfo_t *servers = NULL;
+	serverInfo_t* servers = NULL;
 	max = MAX_OTHER_SERVERS;
 	count = NULL;
 
 	switch (source) {
-		case AS_LOCAL :
+		case AS_LOCAL:
 			count = &cls.numlocalservers;
 			servers = &cls.localServers[0];
 			break;
-		case AS_MPLAYER :
+		case AS_MPLAYER:
 			count = &cls.nummplayerservers;
 			servers = &cls.mplayerServers[0];
 			break;
-		case AS_GLOBAL :
+		case AS_GLOBAL:
 			max = MAX_GLOBAL_SERVERS;
 			count = &cls.numglobalservers;
 			servers = &cls.globalServers[0];
 			break;
-		case AS_FAVORITES :
+		case AS_FAVORITES:
 			count = &cls.numfavoriteservers;
 			servers = &cls.favoriteServers[0];
 			break;
 	}
 	if (servers && *count < max) {
-		NET_StringToAdr( address, &adr );
-		for ( i = 0; i < *count; i++ ) {
+		NET_StringToAdr(address, &adr);
+		for (i = 0; i < *count; i++) {
 			if (NET_CompareAdr(servers[i].adr, adr)) {
 				break;
 			}
@@ -183,36 +188,37 @@ static int LAN_AddServer(int source, const char *name, const char *address) {
 LAN_RemoveServer
 ====================
 */
-static void LAN_RemoveServer(int source, const char *addr) {
+static void LAN_RemoveServer(int source, const char* addr)
+{
 	int *count, i;
-	serverInfo_t *servers = NULL;
+	serverInfo_t* servers = NULL;
 	count = NULL;
 	switch (source) {
-		case AS_LOCAL :
+		case AS_LOCAL:
 			count = &cls.numlocalservers;
 			servers = &cls.localServers[0];
 			break;
-		case AS_MPLAYER :
+		case AS_MPLAYER:
 			count = &cls.nummplayerservers;
 			servers = &cls.mplayerServers[0];
 			break;
-		case AS_GLOBAL :
+		case AS_GLOBAL:
 			count = &cls.numglobalservers;
 			servers = &cls.globalServers[0];
 			break;
-		case AS_FAVORITES :
+		case AS_FAVORITES:
 			count = &cls.numfavoriteservers;
 			servers = &cls.favoriteServers[0];
 			break;
 	}
 	if (servers) {
 		netadr_t comp;
-		NET_StringToAdr( addr, &comp );
+		NET_StringToAdr(addr, &comp);
 		for (i = 0; i < *count; i++) {
-			if (NET_CompareAdr( comp, servers[i].adr)) {
+			if (NET_CompareAdr(comp, servers[i].adr)) {
 				int j = i;
 				while (j < *count - 1) {
-					Com_Memcpy(&servers[j], &servers[j+1], sizeof(servers[j]));
+					Com_Memcpy(&servers[j], &servers[j + 1], sizeof(servers[j]));
 					j++;
 				}
 				(*count)--;
@@ -228,18 +234,19 @@ static void LAN_RemoveServer(int source, const char *addr) {
 LAN_GetServerCount
 ====================
 */
-static int LAN_GetServerCount( int source ) {
+static int LAN_GetServerCount(int source)
+{
 	switch (source) {
-		case AS_LOCAL :
+		case AS_LOCAL:
 			return cls.numlocalservers;
 			break;
-		case AS_MPLAYER :
+		case AS_MPLAYER:
 			return cls.nummplayerservers;
 			break;
-		case AS_GLOBAL :
+		case AS_GLOBAL:
 			return cls.numglobalservers;
 			break;
-		case AS_FAVORITES :
+		case AS_FAVORITES:
 			return cls.numfavoriteservers;
 			break;
 	}
@@ -251,29 +258,30 @@ static int LAN_GetServerCount( int source ) {
 LAN_GetLocalServerAddressString
 ====================
 */
-static void LAN_GetServerAddressString( int source, int n, char *buf, int buflen ) {
+static void LAN_GetServerAddressString(int source, int n, char* buf, int buflen)
+{
 	switch (source) {
-		case AS_LOCAL :
+		case AS_LOCAL:
 			if (n >= 0 && n < MAX_OTHER_SERVERS) {
-				Q_strncpyz(buf, NET_AdrToString( cls.localServers[n].adr) , buflen );
+				Q_strncpyz(buf, NET_AdrToString(cls.localServers[n].adr), buflen);
 				return;
 			}
 			break;
-		case AS_MPLAYER :
+		case AS_MPLAYER:
 			if (n >= 0 && n < MAX_OTHER_SERVERS) {
-				Q_strncpyz(buf, NET_AdrToString( cls.mplayerServers[n].adr) , buflen );
+				Q_strncpyz(buf, NET_AdrToString(cls.mplayerServers[n].adr), buflen);
 				return;
 			}
 			break;
-		case AS_GLOBAL :
+		case AS_GLOBAL:
 			if (n >= 0 && n < MAX_GLOBAL_SERVERS) {
-				Q_strncpyz(buf, NET_AdrToString( cls.globalServers[n].adr) , buflen );
+				Q_strncpyz(buf, NET_AdrToString(cls.globalServers[n].adr), buflen);
 				return;
 			}
 			break;
-		case AS_FAVORITES :
+		case AS_FAVORITES:
 			if (n >= 0 && n < MAX_OTHER_SERVERS) {
-				Q_strncpyz(buf, NET_AdrToString( cls.favoriteServers[n].adr) , buflen );
+				Q_strncpyz(buf, NET_AdrToString(cls.favoriteServers[n].adr), buflen);
 				return;
 			}
 			break;
@@ -286,27 +294,28 @@ static void LAN_GetServerAddressString( int source, int n, char *buf, int buflen
 LAN_GetServerInfo
 ====================
 */
-static void LAN_GetServerInfo( int source, int n, char *buf, int buflen ) {
+static void LAN_GetServerInfo(int source, int n, char* buf, int buflen)
+{
 	char info[MAX_STRING_CHARS];
-	serverInfo_t *server = NULL;
+	serverInfo_t* server = NULL;
 	info[0] = '\0';
 	switch (source) {
-		case AS_LOCAL :
+		case AS_LOCAL:
 			if (n >= 0 && n < MAX_OTHER_SERVERS) {
 				server = &cls.localServers[n];
 			}
 			break;
-		case AS_MPLAYER :
+		case AS_MPLAYER:
 			if (n >= 0 && n < MAX_OTHER_SERVERS) {
 				server = &cls.mplayerServers[n];
 			}
 			break;
-		case AS_GLOBAL :
+		case AS_GLOBAL:
 			if (n >= 0 && n < MAX_GLOBAL_SERVERS) {
 				server = &cls.globalServers[n];
 			}
 			break;
-		case AS_FAVORITES :
+		case AS_FAVORITES:
 			if (n >= 0 && n < MAX_OTHER_SERVERS) {
 				server = &cls.favoriteServers[n];
 			}
@@ -314,18 +323,18 @@ static void LAN_GetServerInfo( int source, int n, char *buf, int buflen ) {
 	}
 	if (server && buf) {
 		buf[0] = '\0';
-		Info_SetValueForKey( info, "hostname", server->hostName);
-		Info_SetValueForKey( info, "mapname", server->mapName);
-		Info_SetValueForKey( info, "clients", va("%i",server->clients));
-		Info_SetValueForKey( info, "sv_maxclients", va("%i",server->maxClients));
-		Info_SetValueForKey( info, "ping", va("%i",server->ping));
-		Info_SetValueForKey( info, "minping", va("%i",server->minPing));
-		Info_SetValueForKey( info, "maxping", va("%i",server->maxPing));
-		Info_SetValueForKey( info, "game", server->game);
-		Info_SetValueForKey( info, "gametype", va("%i",server->gameType));
-		Info_SetValueForKey( info, "nettype", va("%i",server->netType));
-		Info_SetValueForKey( info, "addr", NET_AdrToString(server->adr));
-		Info_SetValueForKey( info, "punkbuster", va("%i", server->punkbuster));
+		Info_SetValueForKey(info, "hostname", server->hostName);
+		Info_SetValueForKey(info, "mapname", server->mapName);
+		Info_SetValueForKey(info, "clients", va("%i", server->clients));
+		Info_SetValueForKey(info, "sv_maxclients", va("%i", server->maxClients));
+		Info_SetValueForKey(info, "ping", va("%i", server->ping));
+		Info_SetValueForKey(info, "minping", va("%i", server->minPing));
+		Info_SetValueForKey(info, "maxping", va("%i", server->maxPing));
+		Info_SetValueForKey(info, "game", server->game);
+		Info_SetValueForKey(info, "gametype", va("%i", server->gameType));
+		Info_SetValueForKey(info, "nettype", va("%i", server->netType));
+		Info_SetValueForKey(info, "addr", NET_AdrToString(server->adr));
+		Info_SetValueForKey(info, "punkbuster", va("%i", server->punkbuster));
 		Q_strncpyz(buf, info, buflen);
 	} else {
 		if (buf) {
@@ -339,25 +348,26 @@ static void LAN_GetServerInfo( int source, int n, char *buf, int buflen ) {
 LAN_GetServerPing
 ====================
 */
-static int LAN_GetServerPing( int source, int n ) {
-	serverInfo_t *server = NULL;
+static int LAN_GetServerPing(int source, int n)
+{
+	serverInfo_t* server = NULL;
 	switch (source) {
-		case AS_LOCAL :
+		case AS_LOCAL:
 			if (n >= 0 && n < MAX_OTHER_SERVERS) {
 				server = &cls.localServers[n];
 			}
 			break;
-		case AS_MPLAYER :
+		case AS_MPLAYER:
 			if (n >= 0 && n < MAX_OTHER_SERVERS) {
 				server = &cls.mplayerServers[n];
 			}
 			break;
-		case AS_GLOBAL :
+		case AS_GLOBAL:
 			if (n >= 0 && n < MAX_GLOBAL_SERVERS) {
 				server = &cls.globalServers[n];
 			}
 			break;
-		case AS_FAVORITES :
+		case AS_FAVORITES:
 			if (n >= 0 && n < MAX_OTHER_SERVERS) {
 				server = &cls.favoriteServers[n];
 			}
@@ -374,24 +384,25 @@ static int LAN_GetServerPing( int source, int n ) {
 LAN_GetServerPtr
 ====================
 */
-static serverInfo_t *LAN_GetServerPtr( int source, int n ) {
+static serverInfo_t* LAN_GetServerPtr(int source, int n)
+{
 	switch (source) {
-		case AS_LOCAL :
+		case AS_LOCAL:
 			if (n >= 0 && n < MAX_OTHER_SERVERS) {
 				return &cls.localServers[n];
 			}
 			break;
-		case AS_MPLAYER :
+		case AS_MPLAYER:
 			if (n >= 0 && n < MAX_OTHER_SERVERS) {
 				return &cls.mplayerServers[n];
 			}
 			break;
-		case AS_GLOBAL :
+		case AS_GLOBAL:
 			if (n >= 0 && n < MAX_GLOBAL_SERVERS) {
 				return &cls.globalServers[n];
 			}
 			break;
-		case AS_FAVORITES :
+		case AS_FAVORITES:
 			if (n >= 0 && n < MAX_OTHER_SERVERS) {
 				return &cls.favoriteServers[n];
 			}
@@ -405,7 +416,8 @@ static serverInfo_t *LAN_GetServerPtr( int source, int n ) {
 LAN_CompareServers
 ====================
 */
-static int LAN_CompareServers( int source, int sortKey, int sortDir, int s1, int s2 ) {
+static int LAN_CompareServers(int source, int sortKey, int sortDir, int s1, int s2)
+{
 	int res;
 	serverInfo_t *server1, *server2;
 
@@ -416,44 +428,38 @@ static int LAN_CompareServers( int source, int sortKey, int sortDir, int s1, int
 	}
 
 	res = 0;
-	switch( sortKey ) {
+	switch (sortKey) {
 		case SORT_HOST:
-			res = Q_stricmp( server1->hostName, server2->hostName );
+			res = Q_stricmp(server1->hostName, server2->hostName);
 			break;
 
 		case SORT_MAP:
-			res = Q_stricmp( server1->mapName, server2->mapName );
+			res = Q_stricmp(server1->mapName, server2->mapName);
 			break;
 		case SORT_CLIENTS:
 			if (server1->clients < server2->clients) {
 				res = -1;
-			}
-			else if (server1->clients > server2->clients) {
+			} else if (server1->clients > server2->clients) {
 				res = 1;
-			}
-			else {
+			} else {
 				res = 0;
 			}
 			break;
 		case SORT_GAME:
 			if (server1->gameType < server2->gameType) {
 				res = -1;
-			}
-			else if (server1->gameType > server2->gameType) {
+			} else if (server1->gameType > server2->gameType) {
 				res = 1;
-			}
-			else {
+			} else {
 				res = 0;
 			}
 			break;
 		case SORT_PING:
 			if (server1->ping < server2->ping) {
 				res = -1;
-			}
-			else if (server1->ping > server2->ping) {
+			} else if (server1->ping > server2->ping) {
 				res = 1;
-			}
-			else {
+			} else {
 				res = 0;
 			}
 			break;
@@ -474,7 +480,8 @@ static int LAN_CompareServers( int source, int sortKey, int sortDir, int s1, int
 LAN_GetPingQueueCount
 ====================
 */
-static int LAN_GetPingQueueCount( void ) {
+static int LAN_GetPingQueueCount(void)
+{
 	return (CL_GetPingQueueCount());
 }
 
@@ -483,8 +490,9 @@ static int LAN_GetPingQueueCount( void ) {
 LAN_ClearPing
 ====================
 */
-static void LAN_ClearPing( int n ) {
-	CL_ClearPing( n );
+static void LAN_ClearPing(int n)
+{
+	CL_ClearPing(n);
 }
 
 /*
@@ -492,8 +500,9 @@ static void LAN_ClearPing( int n ) {
 LAN_GetPing
 ====================
 */
-static void LAN_GetPing( int n, char *buf, int buflen, int *pingtime ) {
-	CL_GetPing( n, buf, buflen, pingtime );
+static void LAN_GetPing(int n, char* buf, int buflen, int* pingtime)
+{
+	CL_GetPing(n, buf, buflen, pingtime);
 }
 
 /*
@@ -501,8 +510,9 @@ static void LAN_GetPing( int n, char *buf, int buflen, int *pingtime ) {
 LAN_GetPingInfo
 ====================
 */
-static void LAN_GetPingInfo( int n, char *buf, int buflen ) {
-	CL_GetPingInfo( n, buf, buflen );
+static void LAN_GetPingInfo(int n, char* buf, int buflen)
+{
+	CL_GetPingInfo(n, buf, buflen);
 }
 
 /*
@@ -510,22 +520,23 @@ static void LAN_GetPingInfo( int n, char *buf, int buflen ) {
 LAN_MarkServerVisible
 ====================
 */
-static void LAN_MarkServerVisible(int source, int n, qbool visible ) {
+static void LAN_MarkServerVisible(int source, int n, qbool visible)
+{
 	if (n == -1) {
 		int count = MAX_OTHER_SERVERS;
-		serverInfo_t *server = NULL;
+		serverInfo_t* server = NULL;
 		switch (source) {
-			case AS_LOCAL :
+			case AS_LOCAL:
 				server = &cls.localServers[0];
 				break;
-			case AS_MPLAYER :
+			case AS_MPLAYER:
 				server = &cls.mplayerServers[0];
 				break;
-			case AS_GLOBAL :
+			case AS_GLOBAL:
 				server = &cls.globalServers[0];
 				count = MAX_GLOBAL_SERVERS;
 				break;
-			case AS_FAVORITES :
+			case AS_FAVORITES:
 				server = &cls.favoriteServers[0];
 				break;
 		}
@@ -537,22 +548,22 @@ static void LAN_MarkServerVisible(int source, int n, qbool visible ) {
 
 	} else {
 		switch (source) {
-			case AS_LOCAL :
+			case AS_LOCAL:
 				if (n >= 0 && n < MAX_OTHER_SERVERS) {
 					cls.localServers[n].visible = visible;
 				}
 				break;
-			case AS_MPLAYER :
+			case AS_MPLAYER:
 				if (n >= 0 && n < MAX_OTHER_SERVERS) {
 					cls.mplayerServers[n].visible = visible;
 				}
 				break;
-			case AS_GLOBAL :
+			case AS_GLOBAL:
 				if (n >= 0 && n < MAX_GLOBAL_SERVERS) {
 					cls.globalServers[n].visible = visible;
 				}
 				break;
-			case AS_FAVORITES :
+			case AS_FAVORITES:
 				if (n >= 0 && n < MAX_OTHER_SERVERS) {
 					cls.favoriteServers[n].visible = visible;
 				}
@@ -567,24 +578,25 @@ static void LAN_MarkServerVisible(int source, int n, qbool visible ) {
 LAN_ServerIsVisible
 =======================
 */
-static int LAN_ServerIsVisible(int source, int n ) {
+static int LAN_ServerIsVisible(int source, int n)
+{
 	switch (source) {
-		case AS_LOCAL :
+		case AS_LOCAL:
 			if (n >= 0 && n < MAX_OTHER_SERVERS) {
 				return cls.localServers[n].visible;
 			}
 			break;
-		case AS_MPLAYER :
+		case AS_MPLAYER:
 			if (n >= 0 && n < MAX_OTHER_SERVERS) {
 				return cls.mplayerServers[n].visible;
 			}
 			break;
-		case AS_GLOBAL :
+		case AS_GLOBAL:
 			if (n >= 0 && n < MAX_GLOBAL_SERVERS) {
 				return cls.globalServers[n].visible;
 			}
 			break;
-		case AS_FAVORITES :
+		case AS_FAVORITES:
 			if (n >= 0 && n < MAX_OTHER_SERVERS) {
 				return cls.favoriteServers[n].visible;
 			}
@@ -598,7 +610,8 @@ static int LAN_ServerIsVisible(int source, int n ) {
 LAN_UpdateVisiblePings
 =======================
 */
-qbool LAN_UpdateVisiblePings(int source ) {
+qbool LAN_UpdateVisiblePings(int source)
+{
 	return CL_UpdateVisiblePings_f(source);
 }
 
@@ -607,8 +620,9 @@ qbool LAN_UpdateVisiblePings(int source ) {
 LAN_GetServerStatus
 ====================
 */
-int LAN_GetServerStatus( char *serverAddress, char *serverStatus, int maxLen ) {
-	return CL_ServerStatus( serverAddress, serverStatus, maxLen );
+int LAN_GetServerStatus(char* serverAddress, char* serverStatus, int maxLen)
+{
+	return CL_ServerStatus(serverAddress, serverStatus, maxLen);
 }
 
 /*
@@ -616,7 +630,8 @@ int LAN_GetServerStatus( char *serverAddress, char *serverStatus, int maxLen ) {
 CL_GetGlConfig
 ====================
 */
-static void CL_GetGlconfig( glconfig_t *config ) {
+static void CL_GetGlconfig(glconfig_t* config)
+{
 	*config = cls.glconfig;
 }
 
@@ -625,19 +640,20 @@ static void CL_GetGlconfig( glconfig_t *config ) {
 CL_GetClipboardData
 ====================
 */
-static void CL_GetClipboardData( char *buf, int buflen ) {
-	char	*cbd;
+static void CL_GetClipboardData(char* buf, int buflen)
+{
+	char* cbd;
 
 	cbd = Sys_GetClipboardData();
 
-	if ( !cbd ) {
+	if (!cbd) {
 		*buf = 0;
 		return;
 	}
 
-	Q_strncpyz( buf, cbd, buflen );
+	Q_strncpyz(buf, cbd, buflen);
 
-	Z_Free( cbd );
+	Z_Free(cbd);
 }
 
 /*
@@ -645,19 +661,19 @@ static void CL_GetClipboardData( char *buf, int buflen ) {
 Key_KeynumToStringBuf
 ====================
 */
-static void Key_KeynumToStringBuf( int keynum, char *buf, int buflen ) {
-	Q_strncpyz( buf, Key_KeynumToString( keynum ), buflen );
+static void Key_KeynumToStringBuf(int keynum, char* buf, int buflen)
+{
+	Q_strncpyz(buf, Key_KeynumToString(keynum), buflen);
 }
 
 
-static void Key_GetBindingBuf( int keynum, char *buf, int buflen )
+static void Key_GetBindingBuf(int keynum, char* buf, int buflen)
 {
-	const char* value = Key_GetBinding( keynum );
+	const char* value = Key_GetBinding(keynum);
 
-	if ( value ) {
-		Q_strncpyz( buf, value, buflen );
-	}
-	else {
+	if (value) {
+		Q_strncpyz(buf, value, buflen);
+	} else {
 		*buf = 0;
 	}
 }
@@ -667,7 +683,8 @@ static void Key_GetBindingBuf( int keynum, char *buf, int buflen )
 Key_GetCatcher
 ====================
 */
-int Key_GetCatcher( void ) {
+int Key_GetCatcher(void)
+{
 	return cls.keyCatchers;
 }
 
@@ -676,14 +693,15 @@ int Key_GetCatcher( void ) {
 Ket_SetCatcher
 ====================
 */
-void Key_SetCatcher( int catcher ) {
+void Key_SetCatcher(int catcher)
+{
 	cls.keyCatchers = catcher;
 }
 
 
 static qbool UI_usesUniqueCDKey()
 {
-	return (uivm && VM_Call( uivm, UI_HASUNIQUECDKEY ));
+	return (uivm && VM_Call(uivm, UI_HASUNIQUECDKEY));
 }
 
 
@@ -692,14 +710,15 @@ static qbool UI_usesUniqueCDKey()
 CLUI_GetCDKey
 ====================
 */
-static void CLUI_GetCDKey( char *buf, int buflen ) {
-	cvar_t	*fs;
-	fs = Cvar_Get ("fs_game", "", CVAR_INIT|CVAR_SYSTEMINFO );
+static void CLUI_GetCDKey(char* buf, int buflen)
+{
+	cvar_t* fs;
+	fs = Cvar_Get("fs_game", "", CVAR_INIT | CVAR_SYSTEMINFO);
 	if (UI_usesUniqueCDKey() && fs && fs->string[0] != 0) {
-		Com_Memcpy( buf, &cl_cdkey[16], 16);
+		Com_Memcpy(buf, &cl_cdkey[16], 16);
 		buf[16] = 0;
 	} else {
-		Com_Memcpy( buf, cl_cdkey, 16);
+		Com_Memcpy(buf, cl_cdkey, 16);
 		buf[16] = 0;
 	}
 }
@@ -710,16 +729,17 @@ static void CLUI_GetCDKey( char *buf, int buflen ) {
 CLUI_SetCDKey
 ====================
 */
-static void CLUI_SetCDKey( char *buf ) {
-	cvar_t	*fs;
-	fs = Cvar_Get ("fs_game", "", CVAR_INIT|CVAR_SYSTEMINFO );
+static void CLUI_SetCDKey(char* buf)
+{
+	cvar_t* fs;
+	fs = Cvar_Get("fs_game", "", CVAR_INIT | CVAR_SYSTEMINFO);
 	if (UI_usesUniqueCDKey() && fs && fs->string[0] != 0) {
-		Com_Memcpy( &cl_cdkey[16], buf, 16 );
+		Com_Memcpy(&cl_cdkey[16], buf, 16);
 		cl_cdkey[32] = 0;
 		// set the flag so the fle will be written at the next opportunity
 		cvar_modifiedFlags |= CVAR_ARCHIVE;
 	} else {
-		Com_Memcpy( cl_cdkey, buf, 16 );
+		Com_Memcpy(cl_cdkey, buf, 16);
 		// set the flag so the fle will be written at the next opportunity
 		cvar_modifiedFlags |= CVAR_ARCHIVE;
 	}
@@ -730,30 +750,33 @@ static void CLUI_SetCDKey( char *buf ) {
 GetConfigString
 ====================
 */
-static int GetConfigString(int index, char *buf, int size)
+static int GetConfigString(int index, char* buf, int size)
 {
-	int		offset;
+	int offset;
 
 	if (index < 0 || index >= MAX_CONFIGSTRINGS)
 		return qfalse;
 
 	offset = cl.gameState.stringOffsets[index];
 	if (!offset) {
-		if( size ) {
+		if (size) {
 			buf[0] = 0;
 		}
 		return qfalse;
 	}
 
-	Q_strncpyz( buf, cl.gameState.stringData+offset, size);
+	Q_strncpyz(buf, cl.gameState.stringData + offset, size);
 
 	return qtrue;
 }
 
 
-static qbool CL_UI_GetValue( char* value, int valueSize, const char* key )
+static qbool CL_UI_GetValue(char* value, int valueSize, const char* key)
 {
-	struct syscall_t { const char* name; int number; };
+	struct syscall_t {
+		const char* name;
+		int number;
+	};
 	static const syscall_t syscalls[] = {
 		// syscalls
 		{ "trap_LocateInteropData", UI_EXT_LOCATEINTEROPDATA },
@@ -770,9 +793,9 @@ static qbool CL_UI_GetValue( char* value, int valueSize, const char* key )
 		{ "cap_ExtraColorCodes", 1 }
 	};
 
-	for ( int i = 0; i < ARRAY_LEN( syscalls ); ++i ) {
-		if( Q_stricmp(key, syscalls[i].name) == 0 ) {
-			Com_sprintf( value, valueSize, "%d", syscalls[i].number );
+	for (int i = 0; i < ARRAY_LEN(syscalls); ++i) {
+		if (Q_stricmp(key, syscalls[i].name) == 0) {
+			Com_sprintf(value, valueSize, "%d", syscalls[i].number);
 			return qtrue;
 		}
 	}
@@ -786,369 +809,369 @@ static qbool CL_UI_GetValue( char* value, int valueSize, const char* key )
 
 // the ui module is making a system call
 
-static intptr_t CL_UISystemCalls( intptr_t* args )
+static intptr_t CL_UISystemCalls(intptr_t* args)
 {
-	switch( args[0] ) {
-	case UI_ERROR:
-		Com_ErrorExt( ERR_DROP, EXT_ERRMOD_UI, qtrue, "%s", (const char*)VMA(1) );
-		return 0;
+	switch (args[0]) {
+		case UI_ERROR:
+			Com_ErrorExt(ERR_DROP, EXT_ERRMOD_UI, qtrue, "%s", (const char*)VMA(1));
+			return 0;
 
-	case UI_PRINT:
-		Com_Printf( "%s", (const char*)VMA(1) );
-		return 0;
+		case UI_PRINT:
+			Com_Printf("%s", (const char*)VMA(1));
+			return 0;
 
-	case UI_MILLISECONDS:
-		return Sys_Milliseconds();
+		case UI_MILLISECONDS:
+			return Sys_Milliseconds();
 
-	case UI_CVAR_REGISTER:
-		Cvar_Register( VMA(1), VMA(2), VMA(3), args[4] );
-		Cvar_SetModule( VMA(2), MODULE_UI );
-		return 0;
+		case UI_CVAR_REGISTER:
+			Cvar_Register(VMA(1), VMA(2), VMA(3), args[4]);
+			Cvar_SetModule(VMA(2), MODULE_UI);
+			return 0;
 
-	case UI_CVAR_UPDATE:
-		Cvar_Update( VMA(1) );
-		return 0;
+		case UI_CVAR_UPDATE:
+			Cvar_Update(VMA(1));
+			return 0;
 
-	case UI_CVAR_SET:
-		Cvar_Set( VMA(1), VMA(2) );
-		return 0;
+		case UI_CVAR_SET:
+			Cvar_Set(VMA(1), VMA(2));
+			return 0;
 
-	case UI_CVAR_VARIABLEVALUE:
-		return PASSFLOAT( Cvar_VariableValue( VMA(1) ) );
+		case UI_CVAR_VARIABLEVALUE:
+			return PASSFLOAT(Cvar_VariableValue(VMA(1)));
 
-	case UI_CVAR_VARIABLESTRINGBUFFER:
-		Cvar_VariableStringBuffer( VMA(1), VMA(2), args[3] );
-		return 0;
+		case UI_CVAR_VARIABLESTRINGBUFFER:
+			Cvar_VariableStringBuffer(VMA(1), VMA(2), args[3]);
+			return 0;
 
-	case UI_CVAR_SETVALUE:
-		Cvar_SetValue( VMA(1), VMF(2) );
-		return 0;
+		case UI_CVAR_SETVALUE:
+			Cvar_SetValue(VMA(1), VMF(2));
+			return 0;
 
-	case UI_CVAR_RESET:
-		Cvar_Reset( VMA(1) );
-		return 0;
+		case UI_CVAR_RESET:
+			Cvar_Reset(VMA(1));
+			return 0;
 
-	case UI_CVAR_CREATE:
-		Cvar_Get( VMA(1), VMA(2), args[3] );
-		return 0;
+		case UI_CVAR_CREATE:
+			Cvar_Get(VMA(1), VMA(2), args[3]);
+			return 0;
 
-	case UI_CVAR_INFOSTRINGBUFFER:
-		Cvar_InfoStringBuffer( args[1], VMA(2), args[3] );
-		return 0;
+		case UI_CVAR_INFOSTRINGBUFFER:
+			Cvar_InfoStringBuffer(args[1], VMA(2), args[3]);
+			return 0;
 
-	case UI_ARGC:
-		return Cmd_Argc();
+		case UI_ARGC:
+			return Cmd_Argc();
 
-	case UI_ARGV:
-		Cmd_ArgvBuffer( args[1], VMA(2), args[3] );
-		return 0;
+		case UI_ARGV:
+			Cmd_ArgvBuffer(args[1], VMA(2), args[3]);
+			return 0;
 
-	case UI_CMD_EXECUTETEXT:
-		Cbuf_AddText( VMA(2) );
-		return 0;
+		case UI_CMD_EXECUTETEXT:
+			Cbuf_AddText(VMA(2));
+			return 0;
 
-	case UI_FS_FOPENFILE:
-		return FS_FOpenFileByMode( VMA(1), VMA(2), (fsMode_t)args[3] );
+		case UI_FS_FOPENFILE:
+			return FS_FOpenFileByMode(VMA(1), VMA(2), (fsMode_t)args[3]);
 
-	case UI_FS_READ:
-		FS_Read2( VMA(1), args[2], args[3] );
-		return 0;
+		case UI_FS_READ:
+			FS_Read2(VMA(1), args[2], args[3]);
+			return 0;
 
-	case UI_FS_WRITE:
-		FS_Write( VMA(1), args[2], args[3] );
-		return 0;
+		case UI_FS_WRITE:
+			FS_Write(VMA(1), args[2], args[3]);
+			return 0;
 
-	case UI_FS_FCLOSEFILE:
-		FS_FCloseFile( args[1] );
-		return 0;
+		case UI_FS_FCLOSEFILE:
+			FS_FCloseFile(args[1]);
+			return 0;
 
-	case UI_FS_GETFILELIST:
-		return FS_GetFileList( VMA(1), VMA(2), VMA(3), args[4] );
+		case UI_FS_GETFILELIST:
+			return FS_GetFileList(VMA(1), VMA(2), VMA(3), args[4]);
 
-	case UI_FS_SEEK:
-		return FS_Seek( args[1], args[2], args[3] );
-	
-	case UI_R_REGISTERMODEL:
-		return re.RegisterModel( VMA(1) );
+		case UI_FS_SEEK:
+			return FS_Seek(args[1], args[2], args[3]);
 
-	case UI_R_REGISTERSKIN:
-		return re.RegisterSkin( VMA(1) );
+		case UI_R_REGISTERMODEL:
+			return re.RegisterModel(VMA(1));
 
-	case UI_R_REGISTERSHADERNOMIP:
-		return re.RegisterShaderNoMip( VMA(1) );
+		case UI_R_REGISTERSKIN:
+			return re.RegisterSkin(VMA(1));
 
-	case UI_R_CLEARSCENE:
-		re.ClearScene();
-		return 0;
+		case UI_R_REGISTERSHADERNOMIP:
+			return re.RegisterShaderNoMip(VMA(1));
 
-	case UI_R_ADDREFENTITYTOSCENE:
-		re.AddRefEntityToScene( VMA(1), qfalse );
-		return 0;
+		case UI_R_CLEARSCENE:
+			re.ClearScene();
+			return 0;
 
-	case UI_R_ADDPOLYTOSCENE:
-		re.AddPolyToScene( args[1], args[2], VMA(3), 1 );
-		return 0;
+		case UI_R_ADDREFENTITYTOSCENE:
+			re.AddRefEntityToScene(VMA(1), qfalse);
+			return 0;
 
-	case UI_R_ADDLIGHTTOSCENE:
-		re.AddLightToScene( VMA(1), VMF(2), VMF(3), VMF(4), VMF(5) );
-		return 0;
+		case UI_R_ADDPOLYTOSCENE:
+			re.AddPolyToScene(args[1], args[2], VMA(3), 1);
+			return 0;
 
-	case UI_R_RENDERSCENE:
-		re.RenderScene( VMA(1) );
-		return 0;
+		case UI_R_ADDLIGHTTOSCENE:
+			re.AddLightToScene(VMA(1), VMF(2), VMF(3), VMF(4), VMF(5));
+			return 0;
 
-	case UI_R_SETCOLOR:
-		re.SetColor( VMA(1) );
-		return 0;
+		case UI_R_RENDERSCENE:
+			re.RenderScene(VMA(1));
+			return 0;
 
-	case UI_R_DRAWSTRETCHPIC:
-		re.DrawStretchPic( VMF(1), VMF(2), VMF(3), VMF(4), VMF(5), VMF(6), VMF(7), VMF(8), args[9] );
-		return 0;
+		case UI_R_SETCOLOR:
+			re.SetColor(VMA(1));
+			return 0;
 
-	case UI_R_MODELBOUNDS:
-		re.ModelBounds( args[1], VMA(2), VMA(3) );
-		return 0;
+		case UI_R_DRAWSTRETCHPIC:
+			re.DrawStretchPic(VMF(1), VMF(2), VMF(3), VMF(4), VMF(5), VMF(6), VMF(7), VMF(8), args[9]);
+			return 0;
 
-	case UI_UPDATESCREEN:
-		SCR_UpdateScreen();
-		return 0;
+		case UI_R_MODELBOUNDS:
+			re.ModelBounds(args[1], VMA(2), VMA(3));
+			return 0;
 
-	case UI_CM_LERPTAG:
-		re.LerpTag( VMA(1), args[2], args[3], args[4], VMF(5), VMA(6) );
-		return 0;
+		case UI_UPDATESCREEN:
+			SCR_UpdateScreen();
+			return 0;
 
-	case UI_S_REGISTERSOUND:
-		return S_RegisterSound( VMA(1) );
+		case UI_CM_LERPTAG:
+			re.LerpTag(VMA(1), args[2], args[3], args[4], VMF(5), VMA(6));
+			return 0;
 
-	case UI_S_STARTLOCALSOUND:
-		S_StartLocalSound( args[1], args[2] );
-		return 0;
+		case UI_S_REGISTERSOUND:
+			return S_RegisterSound(VMA(1));
 
-	case UI_KEY_KEYNUMTOSTRINGBUF:
-		Key_KeynumToStringBuf( args[1], VMA(2), args[3] );
-		return 0;
+		case UI_S_STARTLOCALSOUND:
+			S_StartLocalSound(args[1], args[2]);
+			return 0;
 
-	case UI_KEY_GETBINDINGBUF:
-		Key_GetBindingBuf( args[1], VMA(2), args[3] );
-		return 0;
+		case UI_KEY_KEYNUMTOSTRINGBUF:
+			Key_KeynumToStringBuf(args[1], VMA(2), args[3]);
+			return 0;
 
-	case UI_KEY_SETBINDING:
-		Key_SetBinding( args[1], VMA(2) );
-		return 0;
+		case UI_KEY_GETBINDINGBUF:
+			Key_GetBindingBuf(args[1], VMA(2), args[3]);
+			return 0;
 
-	case UI_KEY_ISDOWN:
-		return Key_IsDown( args[1] );
+		case UI_KEY_SETBINDING:
+			Key_SetBinding(args[1], VMA(2));
+			return 0;
 
-	case UI_KEY_GETOVERSTRIKEMODE:
-		return Key_GetOverstrikeMode();
+		case UI_KEY_ISDOWN:
+			return Key_IsDown(args[1]);
 
-	case UI_KEY_SETOVERSTRIKEMODE:
-		Key_SetOverstrikeMode( (args[1] != 0) );
-		return 0;
+		case UI_KEY_GETOVERSTRIKEMODE:
+			return Key_GetOverstrikeMode();
 
-	case UI_KEY_CLEARSTATES:
-		Key_ClearStates();
-		return 0;
+		case UI_KEY_SETOVERSTRIKEMODE:
+			Key_SetOverstrikeMode((args[1] != 0));
+			return 0;
 
-	case UI_KEY_GETCATCHER:
-		return Key_GetCatcher();
+		case UI_KEY_CLEARSTATES:
+			Key_ClearStates();
+			return 0;
 
-	case UI_KEY_SETCATCHER:
-		Key_SetCatcher( args[1] );
-		return 0;
+		case UI_KEY_GETCATCHER:
+			return Key_GetCatcher();
 
-	case UI_GETCLIPBOARDDATA:
-		CL_GetClipboardData( VMA(1), args[2] );
-		return 0;
+		case UI_KEY_SETCATCHER:
+			Key_SetCatcher(args[1]);
+			return 0;
 
-	case UI_GETCLIENTSTATE:
-		GetClientState( VMA(1) );
-		return 0;
+		case UI_GETCLIPBOARDDATA:
+			CL_GetClipboardData(VMA(1), args[2]);
+			return 0;
 
-	case UI_GETGLCONFIG:
-		CL_GetGlconfig( VMA(1) );
-		return 0;
+		case UI_GETCLIENTSTATE:
+			GetClientState(VMA(1));
+			return 0;
 
-	case UI_GETCONFIGSTRING:
-		return GetConfigString( args[1], VMA(2), args[3] );
+		case UI_GETGLCONFIG:
+			CL_GetGlconfig(VMA(1));
+			return 0;
 
-	case UI_LAN_LOADCACHEDSERVERS:
-		LAN_LoadCachedServers();
-		return 0;
+		case UI_GETCONFIGSTRING:
+			return GetConfigString(args[1], VMA(2), args[3]);
 
-	case UI_LAN_SAVECACHEDSERVERS:
-		LAN_SaveServersToCache();
-		return 0;
+		case UI_LAN_LOADCACHEDSERVERS:
+			LAN_LoadCachedServers();
+			return 0;
 
-	case UI_LAN_ADDSERVER:
-		return LAN_AddServer(args[1], VMA(2), VMA(3));
+		case UI_LAN_SAVECACHEDSERVERS:
+			LAN_SaveServersToCache();
+			return 0;
 
-	case UI_LAN_REMOVESERVER:
-		LAN_RemoveServer(args[1], VMA(2));
-		return 0;
+		case UI_LAN_ADDSERVER:
+			return LAN_AddServer(args[1], VMA(2), VMA(3));
 
-	case UI_LAN_GETPINGQUEUECOUNT:
-		return LAN_GetPingQueueCount();
+		case UI_LAN_REMOVESERVER:
+			LAN_RemoveServer(args[1], VMA(2));
+			return 0;
 
-	case UI_LAN_CLEARPING:
-		LAN_ClearPing( args[1] );
-		return 0;
+		case UI_LAN_GETPINGQUEUECOUNT:
+			return LAN_GetPingQueueCount();
 
-	case UI_LAN_GETPING:
-		LAN_GetPing( args[1], VMA(2), args[3], VMA(4) );
-		return 0;
+		case UI_LAN_CLEARPING:
+			LAN_ClearPing(args[1]);
+			return 0;
 
-	case UI_LAN_GETPINGINFO:
-		LAN_GetPingInfo( args[1], VMA(2), args[3] );
-		return 0;
+		case UI_LAN_GETPING:
+			LAN_GetPing(args[1], VMA(2), args[3], VMA(4));
+			return 0;
 
-	case UI_LAN_GETSERVERCOUNT:
-		return LAN_GetServerCount(args[1]);
+		case UI_LAN_GETPINGINFO:
+			LAN_GetPingInfo(args[1], VMA(2), args[3]);
+			return 0;
 
-	case UI_LAN_GETSERVERADDRESSSTRING:
-		LAN_GetServerAddressString( args[1], args[2], VMA(3), args[4] );
-		return 0;
+		case UI_LAN_GETSERVERCOUNT:
+			return LAN_GetServerCount(args[1]);
 
-	case UI_LAN_GETSERVERINFO:
-		LAN_GetServerInfo( args[1], args[2], VMA(3), args[4] );
-		return 0;
+		case UI_LAN_GETSERVERADDRESSSTRING:
+			LAN_GetServerAddressString(args[1], args[2], VMA(3), args[4]);
+			return 0;
 
-	case UI_LAN_GETSERVERPING:
-		return LAN_GetServerPing( args[1], args[2] );
+		case UI_LAN_GETSERVERINFO:
+			LAN_GetServerInfo(args[1], args[2], VMA(3), args[4]);
+			return 0;
 
-	case UI_LAN_MARKSERVERVISIBLE:
-		LAN_MarkServerVisible( args[1], args[2], args[3] );
-		return 0;
+		case UI_LAN_GETSERVERPING:
+			return LAN_GetServerPing(args[1], args[2]);
 
-	case UI_LAN_SERVERISVISIBLE:
-		return LAN_ServerIsVisible( args[1], args[2] );
+		case UI_LAN_MARKSERVERVISIBLE:
+			LAN_MarkServerVisible(args[1], args[2], args[3]);
+			return 0;
 
-	case UI_LAN_UPDATEVISIBLEPINGS:
-		return LAN_UpdateVisiblePings( args[1] );
+		case UI_LAN_SERVERISVISIBLE:
+			return LAN_ServerIsVisible(args[1], args[2]);
 
-	case UI_LAN_RESETPINGS:
-		LAN_ResetPings( args[1] );
-		return 0;
+		case UI_LAN_UPDATEVISIBLEPINGS:
+			return LAN_UpdateVisiblePings(args[1]);
 
-	case UI_LAN_SERVERSTATUS:
-		return LAN_GetServerStatus( VMA(1), VMA(2), args[3] );
+		case UI_LAN_RESETPINGS:
+			LAN_ResetPings(args[1]);
+			return 0;
 
-	case UI_LAN_COMPARESERVERS:
-		return LAN_CompareServers( args[1], args[2], args[3], args[4], args[5] );
+		case UI_LAN_SERVERSTATUS:
+			return LAN_GetServerStatus(VMA(1), VMA(2), args[3]);
 
-	case UI_MEMORY_REMAINING:
-		return Hunk_MemoryRemaining();
+		case UI_LAN_COMPARESERVERS:
+			return LAN_CompareServers(args[1], args[2], args[3], args[4], args[5]);
 
-	case UI_GET_CDKEY:
-		CLUI_GetCDKey( VMA(1), args[2] );
-		return 0;
+		case UI_MEMORY_REMAINING:
+			return Hunk_MemoryRemaining();
 
-	case UI_SET_CDKEY:
-		CLUI_SetCDKey( VMA(1) );
-		return 0;
+		case UI_GET_CDKEY:
+			CLUI_GetCDKey(VMA(1), args[2]);
+			return 0;
 
-	case UI_SET_PBCLSTATUS:
-		return 0;
+		case UI_SET_CDKEY:
+			CLUI_SetCDKey(VMA(1));
+			return 0;
 
-	case UI_MEMSET:
-		Com_Memset( VMA(1), args[2], args[3] );
-		return 0;
+		case UI_SET_PBCLSTATUS:
+			return 0;
 
-	case UI_MEMCPY:
-		Com_Memcpy( VMA(1), VMA(2), args[3] );
-		return 0;
+		case UI_MEMSET:
+			Com_Memset(VMA(1), args[2], args[3]);
+			return 0;
 
-	case UI_STRNCPY:
-		strncpy( VMA(1), VMA(2), args[3] );
-		return args[1];
+		case UI_MEMCPY:
+			Com_Memcpy(VMA(1), VMA(2), args[3]);
+			return 0;
 
-	case UI_SIN:
-		return PASSFLOAT( sin( VMF(1) ) );
+		case UI_STRNCPY:
+			strncpy(VMA(1), VMA(2), args[3]);
+			return args[1];
 
-	case UI_COS:
-		return PASSFLOAT( cos( VMF(1) ) );
+		case UI_SIN:
+			return PASSFLOAT(sin(VMF(1)));
 
-	case UI_ATAN2:
-		return PASSFLOAT( atan2( VMF(1), VMF(2) ) );
+		case UI_COS:
+			return PASSFLOAT(cos(VMF(1)));
 
-	case UI_SQRT:
-		return PASSFLOAT( sqrt( VMF(1) ) );
+		case UI_ATAN2:
+			return PASSFLOAT(atan2(VMF(1), VMF(2)));
 
-	case UI_FLOOR:
-		return PASSFLOAT( floor( VMF(1) ) );
+		case UI_SQRT:
+			return PASSFLOAT(sqrt(VMF(1)));
 
-	case UI_CEIL:
-		return PASSFLOAT( ceil( VMF(1) ) );
+		case UI_FLOOR:
+			return PASSFLOAT(floor(VMF(1)));
 
-	case UI_S_STOPBACKGROUNDTRACK:
-		S_StopBackgroundTrack();
-		return 0;
-	case UI_S_STARTBACKGROUNDTRACK:
-		S_StartBackgroundTrack( VMA(1), VMA(2));
-		return 0;
+		case UI_CEIL:
+			return PASSFLOAT(ceil(VMF(1)));
 
-	case UI_REAL_TIME:
-		return Com_RealTime( VMA(1) );
+		case UI_S_STOPBACKGROUNDTRACK:
+			S_StopBackgroundTrack();
+			return 0;
+		case UI_S_STARTBACKGROUNDTRACK:
+			S_StartBackgroundTrack(VMA(1), VMA(2));
+			return 0;
 
-	case UI_CIN_PLAYCINEMATIC:
-		Com_DPrintf("UI_CIN_PlayCinematic\n");
-		return CIN_PlayCinematic(VMA(1), args[2], args[3], args[4], args[5], args[6]);
+		case UI_REAL_TIME:
+			return Com_RealTime(VMA(1));
 
-	case UI_CIN_STOPCINEMATIC:
-		return CIN_StopCinematic(args[1]);
+		case UI_CIN_PLAYCINEMATIC:
+			Com_DPrintf("UI_CIN_PlayCinematic\n");
+			return CIN_PlayCinematic(VMA(1), args[2], args[3], args[4], args[5], args[6]);
 
-	case UI_CIN_RUNCINEMATIC:
-		return CIN_RunCinematic(args[1]);
+		case UI_CIN_STOPCINEMATIC:
+			return CIN_StopCinematic(args[1]);
 
-	case UI_CIN_DRAWCINEMATIC:
-		CIN_DrawCinematic(args[1]);
-		return 0;
+		case UI_CIN_RUNCINEMATIC:
+			return CIN_RunCinematic(args[1]);
 
-	case UI_CIN_SETEXTENTS:
-		CIN_SetExtents(args[1], args[2], args[3], args[4], args[5]);
-		return 0;
+		case UI_CIN_DRAWCINEMATIC:
+			CIN_DrawCinematic(args[1]);
+			return 0;
 
-	case UI_VERIFY_CDKEY:
-		return CL_CDKeyValidate(VMA(1), VMA(2));
+		case UI_CIN_SETEXTENTS:
+			CIN_SetExtents(args[1], args[2], args[3], args[4], args[5]);
+			return 0;
 
-	// extensions
+		case UI_VERIFY_CDKEY:
+			return CL_CDKeyValidate(VMA(1), VMA(2));
 
-	case UI_EXT_GETVALUE:
-		return CL_UI_GetValue( VMA(1), args[2], VMA(3) );
+			// extensions
 
-	case UI_EXT_LOCATEINTEROPDATA:
-		interopBufferIn = VMA(1);
-		interopBufferInSize = args[2];
-		interopBufferOut = VMA(3);
-		interopBufferOutSize = args[4];
-		return 0;
+		case UI_EXT_GETVALUE:
+			return CL_UI_GetValue(VMA(1), args[2], VMA(3));
 
-	case UI_EXT_R_ADDREFENTITYTOSCENE2:
-		re.AddRefEntityToScene( VMA(1), qtrue );
-		return 0;
+		case UI_EXT_LOCATEINTEROPDATA:
+			interopBufferIn = VMA(1);
+			interopBufferInSize = args[2];
+			interopBufferOut = VMA(3);
+			interopBufferOutSize = args[4];
+			return 0;
 
-	case UI_EXT_CVAR_SETRANGE:
-		Cvar_SetRange( VMA(1), (cvarType_t)args[2], VMA(3), VMA(4) );
-		return 0;
+		case UI_EXT_R_ADDREFENTITYTOSCENE2:
+			re.AddRefEntityToScene(VMA(1), qtrue);
+			return 0;
 
-	case UI_EXT_CVAR_SETHELP:
-		Cvar_SetHelp( VMA(1), VMA(2) );
-		return 0;
+		case UI_EXT_CVAR_SETRANGE:
+			Cvar_SetRange(VMA(1), (cvarType_t)args[2], VMA(3), VMA(4));
+			return 0;
 
-	case UI_EXT_CMD_SETHELP:
-		Cmd_SetHelp( VMA(1), VMA(2) );
-		return 0;
+		case UI_EXT_CVAR_SETHELP:
+			Cvar_SetHelp(VMA(1), VMA(2));
+			return 0;
 
-	case UI_EXT_ERROR2:
-		Com_ErrorExt( ERR_DROP, EXT_ERRMOD_UI, (qbool)args[2], "%s", (const char*)VMA(1) );
-		return 0;
+		case UI_EXT_CMD_SETHELP:
+			Cmd_SetHelp(VMA(1), VMA(2));
+			return 0;
 
-	case UI_EXT_ENABLEERRORCALLBACK:
-		cls.uiErrorCallbackVMCall = (int)args[1];
-		return 0;
+		case UI_EXT_ERROR2:
+			Com_ErrorExt(ERR_DROP, EXT_ERRMOD_UI, (qbool)args[2], "%s", (const char*)VMA(1));
+			return 0;
 
-	default:
-		Com_Error( ERR_DROP, "Bad UI system trap: %i", args[0] );
+		case UI_EXT_ENABLEERRORCALLBACK:
+			cls.uiErrorCallbackVMCall = (int)args[1];
+			return 0;
+
+		default:
+			Com_Error(ERR_DROP, "Bad UI system trap: %i", args[0]);
 	}
 
 	return 0;
@@ -1160,11 +1183,11 @@ void CL_ShutdownUI()
 	cls.uiErrorCallbackVMCall = 0;
 	cls.keyCatchers &= ~KEYCATCH_UI;
 	cls.uiStarted = qfalse;
-	if ( !uivm )
+	if (!uivm)
 		return;
 
-	VM_Call( uivm, UI_SHUTDOWN );
-	VM_Free( uivm );
+	VM_Call(uivm, UI_SHUTDOWN);
+	VM_Free(uivm);
 	uivm = NULL;
 }
 
@@ -1174,31 +1197,31 @@ void CL_InitUI()
 	// if sv_pure is set we only allow qvms to be loaded
 	vmInterpret_t interpret = cl_connectedToPureServer ? VMI_COMPILED : (vmInterpret_t)Cvar_VariableIntegerValue("vm_ui");
 
-	uivm = VM_Create( VM_UI, CL_UISystemCalls, interpret );
-	if ( !uivm )
-		Com_Error( ERR_FATAL, "VM_Create on UI failed" );
+	uivm = VM_Create(VM_UI, CL_UISystemCalls, interpret);
+	if (!uivm)
+		Com_Error(ERR_FATAL, "VM_Create on UI failed");
 
 	// currently-pointless sanity check caused by TA poison, sigh
-	int v = VM_Call( uivm, UI_GETAPIVERSION );
+	int v = VM_Call(uivm, UI_GETAPIVERSION);
 	if (v != UI_API_VERSION) {
-		Com_Error( ERR_DROP, "User Interface is version %d, expected %d", v, UI_API_VERSION );
+		Com_Error(ERR_DROP, "User Interface is version %d, expected %d", v, UI_API_VERSION);
 		cls.uiStarted = qfalse;
 		return;
 	}
 
 	// init for this gamestate
 	cls.uiErrorCallbackVMCall = 0;
-	VM_Call( uivm, UI_INIT, (cls.state >= CA_AUTHORIZING && cls.state < CA_ACTIVE) );
+	VM_Call(uivm, UI_INIT, (cls.state >= CA_AUTHORIZING && cls.state < CA_ACTIVE));
 }
 
 
-void CL_ForwardUIError( int level, int module, const char* error )
+void CL_ForwardUIError(int level, int module, const char* error)
 {
-	if ( uivm == NULL || cls.uiErrorCallbackVMCall == 0 )
+	if (uivm == NULL || cls.uiErrorCallbackVMCall == 0)
 		return;
 
-	Q_strncpyz( (char*)interopBufferOut, error, interopBufferOutSize );
-	VM_Call( uivm, cls.uiErrorCallbackVMCall, level, module );
+	Q_strncpyz((char*)interopBufferOut, error, interopBufferOutSize);
+	VM_Call(uivm, cls.uiErrorCallbackVMCall, level, module);
 }
 
 
@@ -1206,7 +1229,7 @@ void CL_ForwardUIError( int level, int module, const char* error )
 
 qbool UI_GameCommand()
 {
-	return (uivm && VM_Call( uivm, UI_CONSOLE_COMMAND, cls.realtime ));
+	return (uivm && VM_Call(uivm, UI_CONSOLE_COMMAND, cls.realtime));
 }
 
 
@@ -1214,4 +1237,3 @@ qbool CL_DemoPlaying()
 {
 	return clc.demoplaying;
 }
-

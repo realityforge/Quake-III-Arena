@@ -26,53 +26,62 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../qcommon/qcommon.h"
 
 
-void Sys_Error (char *error, ...) {
-	va_list		argptr;
+void Sys_Error(char* error, ...)
+{
+	va_list argptr;
 
-	printf ("Sys_Error: ");
-	va_start (argptr,error);
-	vprintf (error,argptr);
-	va_end (argptr);
-	printf ("\n");
+	printf("Sys_Error: ");
+	va_start(argptr, error);
+	vprintf(error, argptr);
+	va_end(argptr);
+	printf("\n");
 
-	exit (1);
+	exit(1);
 }
 
-void Sys_Quit (void) {
-	exit (0);
+void Sys_Quit(void)
+{
+	exit(0);
 }
 
-char *Sys_GetClipboardData( void ) {
+char* Sys_GetClipboardData(void)
+{
 	return NULL;
 }
 
-int		Sys_Milliseconds (void) {
+int Sys_Milliseconds(void)
+{
 	return 0;
 }
 
-void	Sys_Mkdir (char *path) {
+void Sys_Mkdir(char* path)
+{
 }
 
-char	*Sys_FindFirst (char *path, unsigned musthave, unsigned canthave) {
+char* Sys_FindFirst(char* path, unsigned musthave, unsigned canthave)
+{
 	return NULL;
 }
 
-char	*Sys_FindNext (unsigned musthave, unsigned canthave) {
+char* Sys_FindNext(unsigned musthave, unsigned canthave)
+{
 	return NULL;
 }
 
-void	Sys_FindClose (void) {
+void Sys_FindClose(void)
+{
 }
 
-void	Sys_Init (void) {
+void Sys_Init(void)
+{
 }
 
 
-void main (int argc, char **argv) {
-	Com_Init (argc, argv);
+void main(int argc, char** argv)
+{
+	Com_Init(argc, argv);
 
 	while (1) {
-		Com_Frame( );
+		Com_Frame();
 	}
 }
-

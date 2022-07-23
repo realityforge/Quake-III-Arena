@@ -23,11 +23,11 @@ along with Challenge Quake 3. If not, see <https://www.gnu.org/licenses/>.
 #include "linux_local.h"
 
 
-int    q_argc = 0;
+int q_argc = 0;
 char** q_argv = NULL;
 
 
-int main( int argc, char** argv )
+int main(int argc, char** argv)
 {
 	q_argc = argc;
 	q_argv = argv;
@@ -63,7 +63,7 @@ int main( int argc, char** argv )
 	Lin_ConsoleInputInit();
 	Lin_TrackParentProcess();
 
-#ifndef DEDICATED	
+#ifndef DEDICATED
 	sdl_InitCvarsAndCmds();
 #endif
 

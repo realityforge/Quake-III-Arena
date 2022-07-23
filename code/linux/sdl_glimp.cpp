@@ -52,13 +52,12 @@ static qbool sdl_IsMonitorListValid()
 	const int count = glimp.monitorCount;
 	const int curr = glimp.monitor;
 
-	return
-		count >= 1 && count <= MAX_MONITOR_COUNT &&
-		curr >= 0 && curr < count;
+	return count >= 1 && count <= MAX_MONITOR_COUNT &&
+	       curr >= 0 && curr < count;
 }
 
 
-static int sdl_CompareMonitors( const void* aPtr, const void* bPtr )
+static int sdl_CompareMonitors(const void* aPtr, const void* bPtr)
 {
 	const SDL_Rect* const a = &((const monitor_t*)aPtr)->rect;
 	const SDL_Rect* const b = &((const monitor_t*)bPtr)->rect;
@@ -129,7 +128,7 @@ void sdl_UpdateMonitorIndexFromWindow()
 }
 
 
-static void sdl_GetSafeDesktopRect( SDL_Rect* rect )
+static void sdl_GetSafeDesktopRect(SDL_Rect* rect)
 {
 	if (!sdl_IsMonitorListValid()) {
 		rect->x = 0;
@@ -166,7 +165,7 @@ static void sdl_MonitorList_f()
 }
 
 
-void Sys_V_Init( galId_t type )
+void Sys_V_Init(galId_t type)
 {
 	if (glimp.window != NULL)
 		return;
@@ -207,15 +206,12 @@ void Sys_V_Init( galId_t type )
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 0);
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 0);
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-	if (type == GAL_GL3)
-	{
+	if (type == GAL_GL3) {
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, debugFlags);
-	}
-	else
-	{
+	} else {
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);

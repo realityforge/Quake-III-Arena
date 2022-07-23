@@ -22,35 +22,41 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../renderer/tr_local.h"
 
 
-qboolean ( * qwglSwapIntervalEXT)( int interval );
-void ( * qglMultiTexCoord2fARB )( GLenum texture, float s, float t );
-void ( * qglActiveTextureARB )( GLenum texture );
-void ( * qglClientActiveTextureARB )( GLenum texture );
+qboolean (*qwglSwapIntervalEXT)(int interval);
+void (*qglMultiTexCoord2fARB)(GLenum texture, float s, float t);
+void (*qglActiveTextureARB)(GLenum texture);
+void (*qglClientActiveTextureARB)(GLenum texture);
 
 
-void ( * qglLockArraysEXT)( int, int);
-void ( * qglUnlockArraysEXT) ( void );
+void (*qglLockArraysEXT)(int, int);
+void (*qglUnlockArraysEXT)(void);
 
 
-void		GLimp_EndFrame( void ) {
-}
-
-int 		GLimp_Init( void )
+void GLimp_EndFrame(void)
 {
 }
 
-void		GLimp_Shutdown( void ) {
+int GLimp_Init(void)
+{
 }
 
-void		GLimp_EnableLogging( qboolean enable ) {
+void GLimp_Shutdown(void)
+{
 }
 
-void GLimp_LogComment( const char* comment ) {
+void GLimp_EnableLogging(qboolean enable)
+{
 }
 
-qboolean QGL_Init( const char *dllname ) {
+void GLimp_LogComment(const char* comment)
+{
+}
+
+qboolean QGL_Init(const char* dllname)
+{
 	return qtrue;
 }
 
-void		QGL_Shutdown( void ) {
+void QGL_Shutdown(void)
+{
 }

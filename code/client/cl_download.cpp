@@ -47,78 +47,78 @@ along with Challenge Quake 3. If not, see <https://www.gnu.org/licenses/>.
 #endif
 
 #if defined(_WIN32)
-typedef ADDRINFOA		addrInfo_t;
-#define Q_closesocket	closesocket
-#define Q_unlink		_unlink
+typedef ADDRINFOA addrInfo_t;
+#define Q_closesocket closesocket
+#define Q_unlink      _unlink
 #else
-typedef addrinfo		addrInfo_t;
-typedef int				SOCKET;
-#define INVALID_SOCKET	(-1)
-#define SOCKET_ERROR	(-1)
-#define MAX_PATH		(256)
-#define Q_closesocket	close
-#define Q_unlink		unlink
+typedef addrinfo addrInfo_t;
+typedef int SOCKET;
+#define INVALID_SOCKET (-1)
+#define SOCKET_ERROR   (-1)
+#define MAX_PATH       (256)
+#define Q_closesocket  close
+#define Q_unlink       unlink
 #endif
 
 
-#define MAX_TIMEOUT_MS	2000
+#define MAX_TIMEOUT_MS 2000
 
 
 static const char sockaddr_in_large_enough[sizeof(sockaddr_in) >= sizeof(sockaddr) ? 1 : -1] = { 0 };
 
 
 struct mapDownload_t {
-	char recBuffer[1 << 20];		// for both download data and checksumming
-	char tempMessage[MAXPRINTMSG];	// for PrintError
-	char tempMessage2[MAXPRINTMSG];	// for PrintSocketError
+	char recBuffer[1 << 20];        // for both download data and checksumming
+	char tempMessage[MAXPRINTMSG];  // for PrintError
+	char tempMessage2[MAXPRINTMSG]; // for PrintSocketError
 	char errorMessage[MAXPRINTMSG];
-	char query[512];			// HTTP GET query - e.g. "map?n=akumacpm1a" for the CNQ3 map server
-	char mapName[MAX_PATH];		// only used if the server doesn't give us a .pk3 name
-	char tempPath[MAX_PATH];	// full path of the temp file being written to
-	char finalName[MAX_PATH];	// file name with extension suggested by the server
-	char finalPath[MAX_PATH];	// full path of the new .pk3 file
-	sockaddr_in addresses[16];	// addresses to try to connect to
-	char httpHeaderValue[128];	// only set when BadResponse is qtrue
+	char query[512];           // HTTP GET query - e.g. "map?n=akumacpm1a" for the CNQ3 map server
+	char mapName[MAX_PATH];    // only used if the server doesn't give us a .pk3 name
+	char tempPath[MAX_PATH];   // full path of the temp file being written to
+	char finalName[MAX_PATH];  // file name with extension suggested by the server
+	char finalPath[MAX_PATH];  // full path of the new .pk3 file
+	sockaddr_in addresses[16]; // addresses to try to connect to
+	char httpHeaderValue[128]; // only set when BadResponse is qtrue
 	SOCKET socket;
 	FILE* file;
 	int addressIndex;
 	int addressCount;
 	int startTimeMS;
-	unsigned int bytesHeader;		// header only
-	unsigned int bytesContent;		// file content only
-	unsigned int bytesTotal;		// message header + file content
-	unsigned int bytesDownloaded;	// total downloaded, including the header
+	unsigned int bytesHeader;     // header only
+	unsigned int bytesContent;    // file content only
+	unsigned int bytesTotal;      // message header + file content
+	unsigned int bytesDownloaded; // total downloaded, including the header
 	unsigned int crc32;
-	qbool fromCommand;		// qtrue if started by a console command
-	qbool headerParsed;		// qtrue if we're done parsing the header
-	qbool badResponse;		// qtrue if we need to read more packets for the custom error message
-	int timeOutStartTimeMS;	// when the connect/recv timeout started
-	qbool lastErrorTimeOut;	// qtrue if the last recv error was a timeout
-	int sourceIndex;		// index into the cl_mapDLSources array
-	qbool exactMatch;		// qtrue if an exact match is required
-	qbool cleared;			// qtrue if Download_Clear was called at least once
-	qbool realMapName;		// qtrue if the name of a .bsp - otherwise, might be invalid or auto-generated
-	qbool connecting;		// qtrue if the work started by connect is still in progress
+	qbool fromCommand;      // qtrue if started by a console command
+	qbool headerParsed;     // qtrue if we're done parsing the header
+	qbool badResponse;      // qtrue if we need to read more packets for the custom error message
+	int timeOutStartTimeMS; // when the connect/recv timeout started
+	qbool lastErrorTimeOut; // qtrue if the last recv error was a timeout
+	int sourceIndex;        // index into the cl_mapDLSources array
+	qbool exactMatch;       // qtrue if an exact match is required
+	qbool cleared;          // qtrue if Download_Clear was called at least once
+	qbool realMapName;      // qtrue if the name of a .bsp - otherwise, might be invalid or auto-generated
+	qbool connecting;       // qtrue if the work started by connect is still in progress
 };
 
 
 enum mapDownloadStatus_t {
 	MDLS_NOTHING,
-	MDLS_ERROR,		// just finished unsuccessfully
-	MDLS_SUCCESS,	// just finished successfully
+	MDLS_ERROR,   // just finished unsuccessfully
+	MDLS_SUCCESS, // just finished successfully
 	MDLS_IN_PROGRESS,
 	MDLS_COUNT
 };
 
 
-typedef void (*mapdlQueryFormatter_t)( char* query, int querySize, const char* mapName );
+typedef void (*mapdlQueryFormatter_t)(char* query, int querySize, const char* mapName);
 
 
 // map download source for queries by map name only
 struct mapDownloadSource_t {
 	const char* name;
-	const char* hostName;			// don't put in the scheme (e.g. "http://")
-	const char* numericHostName;	// used as a fallback
+	const char* hostName;        // don't put in the scheme (e.g. "http://")
+	const char* numericHostName; // used as a fallback
 	int port;
 	mapdlQueryFormatter_t formatQuery;
 };
@@ -127,29 +127,29 @@ struct mapDownloadSource_t {
 static mapDownload_t cl_mapDL;
 
 
-static void FormatQueryCNQ3( char* query, int querySize, const char* mapName );
-static void FormatQueryWS( char* query, int querySize, const char* mapName );
+static void FormatQueryCNQ3(char* query, int querySize, const char* mapName);
+static void FormatQueryWS(char* query, int querySize, const char* mapName);
 
 
 static const mapDownloadSource_t cl_mapDLSources[2] = {
-	{ "CNQ3",       "maps.playmorepromode.com", "95.179.180.168", 8000, &FormatQueryCNQ3 },
-	{ "WorldSpawn", "ws.q3df.org",              "176.9.111.74",     80, &FormatQueryWS   }
+	{ "CNQ3", "maps.playmorepromode.com", "95.179.180.168", 8000, &FormatQueryCNQ3 },
+	{ "WorldSpawn", "ws.q3df.org", "176.9.111.74", 80, &FormatQueryWS }
 };
 
 
-static void FormatQueryCNQ3( char* query, int querySize, const char* mapName )
+static void FormatQueryCNQ3(char* query, int querySize, const char* mapName)
 {
 	Com_sprintf(query, querySize, "map?n=%s", mapName);
 }
 
 
-static void FormatQueryWS( char* query, int querySize, const char* mapName )
+static void FormatQueryWS(char* query, int querySize, const char* mapName)
 {
 	Com_sprintf(query, querySize, "getpk3bymapname.php/%s", mapName);
 }
 
 
-static void PrintError( mapDownload_t* dl, const char* format, ... )
+static void PrintError(mapDownload_t* dl, const char* format, ...)
 {
 	va_list ap;
 	va_start(ap, format);
@@ -171,12 +171,12 @@ static void PrintError( mapDownload_t* dl, const char* format, ... )
 
 
 #if defined(_WIN32)
-static void PrintSocketError( mapDownload_t* dl, const char* functionName, int ec )
+static void PrintSocketError(mapDownload_t* dl, const char* functionName, int ec)
 {
 	const int bufferSize = sizeof(dl->tempMessage2);
 	const int bw = FormatMessageA(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-								  NULL, (DWORD)ec, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-								  dl->tempMessage2, (DWORD)bufferSize, NULL);
+	                              NULL, (DWORD)ec, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+	                              dl->tempMessage2, (DWORD)bufferSize, NULL);
 	if (bw <= 0) {
 		*dl->tempMessage2 = '\0';
 		PrintError(dl, "%s failed: %d", functionName, ec);
@@ -191,7 +191,7 @@ static void PrintSocketError( mapDownload_t* dl, const char* functionName, int e
 	PrintError(dl, "%s failed: %d -> %s", functionName, ec, dl->tempMessage2);
 }
 #else
-static void PrintSocketError( mapDownload_t* dl, const char* functionName, int ec )
+static void PrintSocketError(mapDownload_t* dl, const char* functionName, int ec)
 {
 #if defined(__FreeBSD__) || ((_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600) && !_GNU_SOURCE)
 	// XSI strerror_r
@@ -206,7 +206,7 @@ static void PrintSocketError( mapDownload_t* dl, const char* functionName, int e
 		PrintError(dl, "%s failed with error %d", functionName, ec);
 		return;
 	}
-	
+
 	PrintError(dl, "%s failed with error %d (%s)", functionName, ec, errorMsg);
 }
 #endif
@@ -222,7 +222,7 @@ static int GetSocketError()
 }
 
 
-static void PrintSocketError( mapDownload_t* dl, const char* functionName )
+static void PrintSocketError(mapDownload_t* dl, const char* functionName)
 {
 	PrintSocketError(dl, functionName, GetSocketError());
 }
@@ -253,7 +253,7 @@ static qbool IsConnectionInProgressError()
 }
 
 
-static qbool SetSocketBlocking( SOCKET socket, qbool blocking )
+static qbool SetSocketBlocking(SOCKET socket, qbool blocking)
 {
 #if defined(_WIN32)
 	u_long option = blocking ? 0 : 1;
@@ -268,7 +268,7 @@ static qbool SetSocketBlocking( SOCKET socket, qbool blocking )
 }
 
 
-static qbool SetSocketOption( mapDownload_t* dl, int option, const void* data, size_t dataLength )
+static qbool SetSocketOption(mapDownload_t* dl, int option, const void* data, size_t dataLength)
 {
 #if defined _WIN32
 	if (setsockopt(dl->socket, SOL_SOCKET, option, (const char*)data, (int)dataLength) == SOCKET_ERROR) {
@@ -283,7 +283,7 @@ static qbool SetSocketOption( mapDownload_t* dl, int option, const void* data, s
 }
 
 
-static qbool GetSocketOption( mapDownload_t* dl, int option, void* data, size_t* dataLength )
+static qbool GetSocketOption(mapDownload_t* dl, int option, void* data, size_t* dataLength)
 {
 #if defined _WIN32
 	int optionLength = (int)*dataLength;
@@ -301,7 +301,7 @@ static qbool GetSocketOption( mapDownload_t* dl, int option, void* data, size_t*
 }
 
 
-static bool EnsureDirectoryExists( const char* path )
+static bool EnsureDirectoryExists(const char* path)
 {
 #if defined(_WIN32)
 	return CreateDirectoryA(path, NULL) != 0 || GetLastError() == ERROR_ALREADY_EXISTS;
@@ -317,7 +317,7 @@ static bool EnsureDirectoryExists( const char* path )
 }
 
 
-static void Download_Clear( mapDownload_t* dl )
+static void Download_Clear(mapDownload_t* dl)
 {
 	// NOTE: we must not reset mapName, realMapName
 	*dl->tempPath = '\0';
@@ -343,7 +343,7 @@ static void Download_Clear( mapDownload_t* dl )
 }
 
 
-static qbool Download_IsFileValid( mapDownload_t* dl )
+static qbool Download_IsFileValid(mapDownload_t* dl)
 {
 	const unsigned int fileSize = dl->bytesTotal - dl->bytesHeader;
 	if (fileSize == 0)
@@ -387,7 +387,7 @@ static qbool Download_IsFileValid( mapDownload_t* dl )
 
 
 // fails if the dest path already exists
-static qbool RenameFile( const char* source, const char* dest )
+static qbool RenameFile(const char* source, const char* dest)
 {
 	// note: the rename function behaves differently on Windows and Linux
 	// Windows: dest path cannot exist
@@ -395,7 +395,7 @@ static qbool RenameFile( const char* source, const char* dest )
 #if defined(_WIN32)
 	return MoveFileA(source, dest) != 0;
 #else
-	struct stat destInfo;  
+	struct stat destInfo;
 	if (stat(dest, &destInfo) == 0)
 		return qfalse;
 
@@ -404,7 +404,7 @@ static qbool RenameFile( const char* source, const char* dest )
 }
 
 
-static qbool Download_Rename( mapDownload_t* dl )
+static qbool Download_Rename(mapDownload_t* dl)
 {
 	char dir[MAX_PATH];
 #if defined(_WIN32)
@@ -449,7 +449,7 @@ static qbool Download_Rename( mapDownload_t* dl )
 }
 
 
-static qbool Download_CleanUp( mapDownload_t* dl, qbool rename )
+static qbool Download_CleanUp(mapDownload_t* dl, qbool rename)
 {
 	if (!cl_mapDL.cleared)
 		return qfalse;
@@ -483,7 +483,7 @@ static qbool Download_CleanUp( mapDownload_t* dl, qbool rename )
 }
 
 
-static qbool Download_SendFileRequest( mapDownload_t* dl )
+static qbool Download_SendFileRequest(mapDownload_t* dl)
 {
 	const mapDownloadSource_t& source = cl_mapDLSources[dl->sourceIndex];
 	const int port = source.port;
@@ -528,7 +528,7 @@ static qbool Download_SendFileRequest( mapDownload_t* dl )
 }
 
 
-static qbool Download_CreateSocket( mapDownload_t* dl )
+static qbool Download_CreateSocket(mapDownload_t* dl)
 {
 	if (dl->socket != INVALID_SOCKET) {
 		Q_closesocket(dl->socket);
@@ -550,14 +550,14 @@ static qbool Download_CreateSocket( mapDownload_t* dl )
 #if defined(_WIN32)
 	DWORD timeout = 1;
 #else
-	timeval timeout;      
+	timeval timeout;
 	timeout.tv_sec = 0;
 	timeout.tv_usec = 1000;
 #endif
 	if (!SetSocketOption(dl, SO_RCVTIMEO, &timeout, sizeof(timeout)))
-	   return qfalse;
+		return qfalse;
 
-	// We want to block no longer than MAX_TIMEOUT_MS ms once.
+		// We want to block no longer than MAX_TIMEOUT_MS ms once.
 #if defined(_WIN32)
 	timeout = MAX_TIMEOUT_MS;
 #else
@@ -565,7 +565,7 @@ static qbool Download_CreateSocket( mapDownload_t* dl )
 	timeout.tv_usec = MAX_TIMEOUT_MS * 1000 - timeout.tv_sec * 1000000;
 #endif
 	if (!SetSocketOption(dl, SO_SNDTIMEO, &timeout, sizeof(timeout)))
-	   return qfalse;
+		return qfalse;
 
 	return qtrue;
 }
@@ -579,7 +579,7 @@ enum connState_t {
 };
 
 
-static connState_t Download_OpenNextConnection( mapDownload_t* dl )
+static connState_t Download_OpenNextConnection(mapDownload_t* dl)
 {
 	if (dl->addressIndex >= dl->addressCount)
 		return CS_LIST_EXHAUSTED;
@@ -610,7 +610,7 @@ static connState_t Download_OpenNextConnection( mapDownload_t* dl )
 }
 
 
-static connState_t Download_FinishCurrentConnection( mapDownload_t* dl )
+static connState_t Download_FinishCurrentConnection(mapDownload_t* dl)
 {
 	const int now = Sys_Milliseconds();
 	if (now - dl->timeOutStartTimeMS >= MAX_TIMEOUT_MS) {
@@ -643,7 +643,7 @@ static connState_t Download_FinishCurrentConnection( mapDownload_t* dl )
 		// nothing happened yet, so we wait
 		return CS_OPENING;
 	}
-	
+
 	// now we can actually query the connect status
 #if defined(_WIN32)
 	DWORD connectResult = 0;
@@ -675,7 +675,7 @@ static connState_t Download_FinishCurrentConnection( mapDownload_t* dl )
 }
 
 
-static qbool Download_Begin( mapDownload_t* dl, int sourceIndex )
+static qbool Download_Begin(mapDownload_t* dl, int sourceIndex)
 {
 	Download_CleanUp(dl, qfalse);
 	Download_Clear(dl);
@@ -716,7 +716,7 @@ static qbool Download_Begin( mapDownload_t* dl, int sourceIndex )
 		address.sin_port = htons(source.port);
 		inet_pton(AF_INET, source.numericHostName, &address.sin_addr.s_addr);
 	}
-	
+
 	for (;;) {
 		const connState_t result = Download_OpenNextConnection(dl);
 		if (result == CS_OPENING) {
@@ -727,19 +727,19 @@ static qbool Download_Begin( mapDownload_t* dl, int sourceIndex )
 			dl->timeOutStartTimeMS = INT_MIN;
 			return qtrue;
 		}
-		if(result == CS_LIST_EXHAUSTED)
+		if (result == CS_LIST_EXHAUSTED)
 			return qfalse;
 	}
 }
 
 
-static qbool IsWhiteSpace( char c )
+static qbool IsWhiteSpace(char c)
 {
 	return c == '\r' || c == '\n' || c == '\t' || c == ' ';
 }
 
 
-static void RemoveTrailingWhiteSpace( char* s )
+static void RemoveTrailingWhiteSpace(char* s)
 {
 	const int l = strlen(s);
 	int i = l;
@@ -753,7 +753,7 @@ static void RemoveTrailingWhiteSpace( char* s )
 }
 
 
-static qbool ParseHeader( unsigned int* headerLength, mapDownload_t* dl )
+static qbool ParseHeader(unsigned int* headerLength, mapDownload_t* dl)
 {
 	if (dl->badResponse) {
 		RemoveTrailingWhiteSpace(dl->recBuffer);
@@ -765,8 +765,8 @@ static qbool ParseHeader( unsigned int* headerLength, mapDownload_t* dl )
 	}
 
 // note: sscanf %s with the width specifier will null terminate in overflow cases too
-#define		MAXSTRLEN	512
-#define		WSPEC		XSTRING(MAXSTRLEN)
+#define MAXSTRLEN 512
+#define WSPEC     XSTRING(MAXSTRLEN)
 
 	static char httpHeaderValue[MAXSTRLEN];
 	static char header[MAXSTRLEN];
@@ -852,12 +852,12 @@ static qbool ParseHeader( unsigned int* headerLength, mapDownload_t* dl )
 
 	return qtrue;
 
-#undef	WSPEC
-#undef	MAXSTRLEN
+#undef WSPEC
+#undef MAXSTRLEN
 }
 
 
-int Download_Continue( mapDownload_t* dl )
+int Download_Continue(mapDownload_t* dl)
 {
 	if (dl->socket == INVALID_SOCKET)
 		return MDLS_NOTHING;
@@ -942,7 +942,7 @@ int Download_Continue( mapDownload_t* dl )
 			const int error = errno;
 			char* const errorString = strerror(error);
 			PrintError(dl, "Failed to write %d bytes to '%s': %s (%d)",
-					   (int)(ec - offset), dl->tempPath, errorString ? errorString : "?", error);
+			           (int)(ec - offset), dl->tempPath, errorString ? errorString : "?", error);
 			Download_CleanUp(dl, qfalse);
 			return MDLS_ERROR;
 		}
@@ -958,7 +958,7 @@ int Download_Continue( mapDownload_t* dl )
 }
 
 
-static qbool CL_MapDownload_StartImpl( const char* mapName, int sourceIndex, qbool fromCommand, qbool exactMatch, qbool realMapName )
+static qbool CL_MapDownload_StartImpl(const char* mapName, int sourceIndex, qbool fromCommand, qbool exactMatch, qbool realMapName)
 {
 	const mapDownloadSource_t& source = cl_mapDLSources[sourceIndex];
 
@@ -1001,7 +1001,7 @@ static qbool CL_MapDownload_CheckActive()
 }
 
 
-qbool CL_MapDownload_Start( const char* mapName, qbool fromCommand )
+qbool CL_MapDownload_Start(const char* mapName, qbool fromCommand)
 {
 	if (CL_MapDownload_CheckActive())
 		return qfalse;
@@ -1015,7 +1015,7 @@ qbool CL_MapDownload_Start( const char* mapName, qbool fromCommand )
 }
 
 
-qbool CL_MapDownload_Start_MapChecksum( const char* mapName, unsigned int mapCrc32, qbool exactMatch )
+qbool CL_MapDownload_Start_MapChecksum(const char* mapName, unsigned int mapCrc32, qbool exactMatch)
 {
 	if (mapCrc32 == 0 || CL_MapDownload_CheckActive())
 		return qfalse;
@@ -1028,7 +1028,7 @@ qbool CL_MapDownload_Start_MapChecksum( const char* mapName, unsigned int mapCrc
 }
 
 
-qbool CL_MapDownload_Start_PakChecksums( const char* mapName, unsigned int* pakChecksums, int pakCount, qbool exactMatch )
+qbool CL_MapDownload_Start_PakChecksums(const char* mapName, unsigned int* pakChecksums, int pakCount, qbool exactMatch)
 {
 	if (pakCount == 0 || CL_MapDownload_CheckActive())
 		return qfalse;
@@ -1045,7 +1045,7 @@ qbool CL_MapDownload_Start_PakChecksums( const char* mapName, unsigned int* pakC
 }
 
 
-qbool CL_PakDownload_Start( unsigned int checksum, qbool fromCommand, const char* mapName )
+qbool CL_PakDownload_Start(unsigned int checksum, qbool fromCommand, const char* mapName)
 {
 	if (checksum == 0 || CL_MapDownload_CheckActive())
 		return qfalse;
@@ -1134,7 +1134,7 @@ static float CL_MapDownload_Progress()
 	const uint64_t d = (uint64_t)cl_mapDL.bytesDownloaded;
 	const double p = ((double)d * 100.0) / (double)t;
 	const float progress = min((float)p, 100.0f);
-	
+
 	return progress;
 }
 
@@ -1155,7 +1155,7 @@ static int CL_MapDownload_Speed()
 }
 
 
-static void FormatSize( char* buffer, int bufferSize, unsigned int bytes )
+static void FormatSize(char* buffer, int bufferSize, unsigned int bytes)
 {
 	unsigned int m = (unsigned int)(-1);
 	unsigned int x = bytes;
@@ -1175,7 +1175,7 @@ static void FormatSize( char* buffer, int bufferSize, unsigned int bytes )
 }
 
 
-static void FormatTime( char* buffer, int bufferSize, unsigned int seconds )
+static void FormatTime(char* buffer, int bufferSize, unsigned int seconds)
 {
 	const int s = seconds % 60;
 	const int m = seconds / 60;
@@ -1186,7 +1186,7 @@ static void FormatTime( char* buffer, int bufferSize, unsigned int seconds )
 }
 
 
-void CL_MapDownload_DrawConsole( float cw, float ch )
+void CL_MapDownload_DrawConsole(float cw, float ch)
 {
 	const float progress = CL_MapDownload_Progress();
 	if (progress < 0.0f)

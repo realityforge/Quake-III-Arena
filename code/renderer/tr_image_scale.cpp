@@ -30,9 +30,9 @@ along with Challenge Quake 3. If not, see <https://www.gnu.org/licenses/>.
 #endif
 
 
-#define SIMD_ALIGNMENT       32
-#define SIMD_ALIGNMENT_MASK  (SIMD_ALIGNMENT - 1)
-#define IMAGE_SIZE_F32       (MAX_TEXTURE_SIZE * MAX_TEXTURE_SIZE * sizeof(float) * 4)
+#define SIMD_ALIGNMENT      32
+#define SIMD_ALIGNMENT_MASK (SIMD_ALIGNMENT - 1)
+#define IMAGE_SIZE_F32      (MAX_TEXTURE_SIZE * MAX_TEXTURE_SIZE * sizeof(float) * 4)
 
 #define FatalError(Fmt, ...) ri.Error(ERR_FATAL, Fmt "\n", ##__VA_ARGS__)
 
@@ -101,7 +101,7 @@ static void MEM_Init()
 }
 
 
-static void* MEM_Alloc( int byteCount )
+static void* MEM_Alloc(int byteCount)
 {
 	byteCount = (byteCount + SIMD_ALIGNMENT_MASK) & (~SIMD_ALIGNMENT_MASK);
 	const int freeCount = allocator.byteCount - allocator.topBytes - allocator.bottomBytes;
@@ -138,13 +138,13 @@ static void MEM_FlipAndClearSide()
 }
 
 
-static int clamp( int val, int min, int max )
+static int clamp(int val, int min, int max)
 {
 	return val < min ? min : (val > max ? max : val);
 }
 
 
-static float sinc( float x )
+static float sinc(float x)
 {
 	x *= M_PI;
 
@@ -156,7 +156,7 @@ static float sinc( float x )
 }
 
 
-static float clean( float x )
+static float clean(float x)
 {
 	if (fabsf(x) < 0.0000125f) {
 		return 0.0f;
@@ -166,7 +166,7 @@ static float clean( float x )
 }
 
 
-static float Tent1( float x )
+static float Tent1(float x)
 {
 	x = fabs(x);
 	if (x <= 1.0f) {
@@ -178,7 +178,7 @@ static float Tent1( float x )
 
 
 // Mitchell-Netravali with B = 1/3 and C = 1/3
-static float MitchellNetravali2( float x )
+static float MitchellNetravali2(float x)
 {
 	x = fabs(x);
 
@@ -193,7 +193,7 @@ static float MitchellNetravali2( float x )
 
 
 template <int S>
-static float Lanczos( float x )
+static float Lanczos(float x)
 {
 	x = fabs(x);
 
@@ -206,7 +206,7 @@ static float Lanczos( float x )
 
 
 template <int S>
-static float BlackmanHarris( float x )
+static float BlackmanHarris(float x)
 {
 	const float a0 = 0.35875f;
 	const float a1 = 0.48829f;
@@ -220,7 +220,7 @@ static float BlackmanHarris( float x )
 
 
 // matches id's original filter
-static float idTent2( float x )
+static float idTent2(float x)
 {
 	x = fabs(x);
 	if (x <= 1.25f) {
@@ -231,8 +231,7 @@ static float idTent2( float x )
 }
 
 
-static const filter_t filters[] =
-{
+static const filter_t filters[] = {
 	{ "L4", Lanczos<4>, 4.0f },
 	{ "L3", Lanczos<3>, 3.0f },
 	{ "MN2", MitchellNetravali2, 2.0f },
@@ -244,7 +243,7 @@ static const filter_t filters[] =
 };
 
 
-static void IMG_U8_Allocate( imageU8_t* output, int width, int height )
+static void IMG_U8_Allocate(imageU8_t* output, int width, int height)
 {
 	output->data = (byte*)MEM_Alloc(width * height * 4 * sizeof(byte));
 	output->width = width;
@@ -252,7 +251,7 @@ static void IMG_U8_Allocate( imageU8_t* output, int width, int height )
 }
 
 
-static void IMG_F32_Allocate( imageF32_t* output, int width, int height )
+static void IMG_F32_Allocate(imageF32_t* output, int width, int height)
 {
 	output->data = (float*)MEM_Alloc(width * height * 4 * sizeof(float));
 	output->width = width;
@@ -335,7 +334,7 @@ static void IMG_DeMul_Gamma_F32toU8( imageU8_t* output, const imageF32_t* input 
 #endif
 
 
-static void IMG_U8toF32_InvGamma( imageF32_t* output, const imageU8_t* input )
+static void IMG_U8toF32_InvGamma(imageF32_t* output, const imageU8_t* input)
 {
 	assert((size_t)output->data % 16 == 0);
 
@@ -369,7 +368,7 @@ static void IMG_U8toF32_InvGamma( imageF32_t* output, const imageU8_t* input )
 }
 
 
-static void IMG_Gamma_F32toU8( imageU8_t* output, const imageF32_t* input )
+static void IMG_Gamma_F32toU8(imageU8_t* output, const imageF32_t* input)
 {
 	assert((size_t)input->data % 16 == 0);
 	assert((size_t)output->data % 16 == 0);
@@ -401,7 +400,7 @@ static void IMG_Gamma_F32toU8( imageU8_t* output, const imageF32_t* input )
 }
 
 
-static int IMG_WrapPixel( int p, int size, textureWrap_t wrapMode )
+static int IMG_WrapPixel(int p, int size, textureWrap_t wrapMode)
 {
 	if (wrapMode == TW_CLAMP_TO_EDGE) {
 		return clamp(p, 0, size - 1);
@@ -411,7 +410,7 @@ static int IMG_WrapPixel( int p, int size, textureWrap_t wrapMode )
 }
 
 
-static void IMG_CreateContribs( imageContribs_t* contribs, int srcSize, int dstSize, int byteScale, const filter_t* filter )
+static void IMG_CreateContribs(imageContribs_t* contribs, int srcSize, int dstSize, int byteScale, const filter_t* filter)
 {
 	const float scale = (float)srcSize / (float)dstSize;
 	const float recScale = 1.0f / (float)scale;
@@ -466,7 +465,7 @@ static void IMG_CreateContribs( imageContribs_t* contribs, int srcSize, int dstS
 }
 
 
-static void IMG_F32_DownScaleX( imageF32_t* output, const imageF32_t* input, const filter_t* filter )
+static void IMG_F32_DownScaleX(imageF32_t* output, const imageF32_t* input, const filter_t* filter)
 {
 	assert((size_t)input->data % 16 == 0);
 	assert((size_t)output->data % 16 == 0);
@@ -510,7 +509,7 @@ static void IMG_F32_DownScaleX( imageF32_t* output, const imageF32_t* input, con
 }
 
 
-static void IMG_F32_DownScaleY( imageF32_t* output, const imageF32_t* input, const filter_t* filter )
+static void IMG_F32_DownScaleY(imageF32_t* output, const imageF32_t* input, const filter_t* filter)
 {
 	assert((size_t)input->data % 16 == 0);
 	assert((size_t)output->data % 16 == 0);
@@ -555,7 +554,7 @@ static void IMG_F32_DownScaleY( imageF32_t* output, const imageF32_t* input, con
 }
 
 
-void IMG_U8_BilinearDownsample( imageU8_t* output, const imageU8_t* input )
+void IMG_U8_BilinearDownsample(imageU8_t* output, const imageU8_t* input)
 {
 	assert((size_t)output->data % 16 == 0);
 	assert(output->width == input->width / 2);
@@ -598,7 +597,7 @@ void IMG_U8_BilinearDownsample( imageU8_t* output, const imageU8_t* input )
 }
 
 
-static void SelectFilter( filter_t* filter, const char* name )
+static void SelectFilter(filter_t* filter, const char* name)
 {
 	for (int i = 0; i < ARRAY_LEN(filters); ++i) {
 		if (!Q_stricmp(name, filters[i].cvarName)) {
@@ -613,7 +612,7 @@ static void SelectFilter( filter_t* filter, const char* name )
 }
 
 
-static void SelectFilter( filter_t* filter )
+static void SelectFilter(filter_t* filter)
 {
 	return SelectFilter(filter, r_mipGenFilter->string);
 }
@@ -656,7 +655,7 @@ static void PrintWeights()
 #endif
 
 
-void R_ResampleImage( byte** outD, int outW, int outH, const byte* inD, int inW, int inH, textureWrap_t tw )
+void R_ResampleImage(byte** outD, int outW, int outH, const byte* inD, int inW, int inH, textureWrap_t tw)
 {
 	MEM_Init();
 	MEM_ClearAll();
@@ -717,7 +716,7 @@ void R_ResampleImage( byte** outD, int outW, int outH, const byte* inD, int inW,
 }
 
 
-void R_MipMap( byte** outD, const byte* inD, int inW, int inH, textureWrap_t tw )
+void R_MipMap(byte** outD, const byte* inD, int inW, int inH, textureWrap_t tw)
 {
 	const int outW = max(inW >> 1, 1);
 	const int outH = max(inH >> 1, 1);

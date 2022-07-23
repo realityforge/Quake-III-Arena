@@ -158,7 +158,7 @@ typedef enum {
 	K_MOUSE7,
 	K_MOUSE8,
 	K_MOUSE9,
-	
+
 	K_WIN,
 	K_MENU,
 
@@ -174,13 +174,13 @@ typedef enum {
 	K_F23,
 	K_F24,
 
-	K_LAST_KEY		// this had better be <256!
+	K_LAST_KEY // this had better be <256!
 } keyNum_t;
 
 
 // The menu code needs to get both key and char events, but
 // to avoid duplicating the paths, the char events are just
 // distinguished by or'ing in K_CHAR_FLAG (ugly)
-#define	K_CHAR_FLAG		1024
+#define K_CHAR_FLAG 1024
 
 #endif

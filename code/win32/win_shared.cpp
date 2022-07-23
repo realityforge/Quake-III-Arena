@@ -36,13 +36,13 @@ int Sys_Milliseconds()
 }
 
 
-void Sys_Sleep( int ms )
+void Sys_Sleep(int ms)
 {
 	if (ms >= 1)
 		Sleep(ms);
 }
 
-void Sys_MicroSleep( int us )
+void Sys_MicroSleep(int us)
 {
 	if (us <= 0)
 		return;
@@ -98,7 +98,7 @@ qbool Sys_HasCNQ3Parent()
 }
 
 
-int Sys_GetUptimeSeconds( qbool parent )
+int Sys_GetUptimeSeconds(qbool parent)
 {
 	if (parent)
 		return -1;
@@ -127,7 +127,7 @@ int Sys_GetUptimeSeconds( qbool parent )
 }
 
 
-void Sys_DebugPrintf( const char* fmt, ... )
+void Sys_DebugPrintf(const char* fmt, ...)
 {
 	char buffer[1024];
 	va_list argptr;
@@ -142,4 +142,3 @@ void Sys_DebugPrintf( const char* fmt, ... )
 
 	OutputDebugStringA(buffer);
 }
-

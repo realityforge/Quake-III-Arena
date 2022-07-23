@@ -38,7 +38,7 @@ shaderCommands_t tess;
 // we must set some things up before beginning any tesselation
 // because a surface may be forced to perform a RB_End due to overflow
 
-void RB_BeginSurface( const shader_t* shader, int fogNum )
+void RB_BeginSurface(const shader_t* shader, int fogNum)
 {
 	tess.numIndexes = 0;
 	tess.numVertexes = 0;
@@ -69,7 +69,7 @@ static void RB_DrawDynamicLight()
 
 		const float dp = DotProduct(dist, tess.normal[i]);
 		if ((cullType == CT_FRONT_SIDED && dp <= 0.0f) ||
-			(cullType == CT_BACK_SIDED  && dp >= 0.0f)) {
+		    (cullType == CT_BACK_SIDED && dp >= 0.0f)) {
 			clipBits[i] = byte(-1);
 			continue;
 		}
@@ -146,7 +146,7 @@ static void RB_DrawGeneric()
 }
 
 
-static void RB_DrawDebug( const shaderCommands_t* input, qbool drawNormals, int options )
+static void RB_DrawDebug(const shaderCommands_t* input, qbool drawNormals, int options)
 {
 	if (drawNormals) {
 		// we only draw the normals for the first (SHADER_MAX_VERTEXES / 2 - 1) vertices
@@ -200,15 +200,15 @@ void RB_EndSurface()
 	if (!input->numIndexes || !input->numVertexes)
 		return;
 
-	if (input->indexes[SHADER_MAX_INDEXES-1] != 0) {
-		ri.Error( ERR_DROP, "RB_EndSurface() - SHADER_MAX_INDEXES hit" );
+	if (input->indexes[SHADER_MAX_INDEXES - 1] != 0) {
+		ri.Error(ERR_DROP, "RB_EndSurface() - SHADER_MAX_INDEXES hit");
 	}
-	if (input->xyz[SHADER_MAX_VERTEXES-1][0] != 0) {
-		ri.Error( ERR_DROP, "RB_EndSurface() - SHADER_MAX_VERTEXES hit" );
+	if (input->xyz[SHADER_MAX_VERTEXES - 1][0] != 0) {
+		ri.Error(ERR_DROP, "RB_EndSurface() - SHADER_MAX_VERTEXES hit");
 	}
 
 	// for debugging of sort order issues, stop rendering after a given sort value
-	if ( r_debugSort->value > 0.0f && r_debugSort->value < tess.shader->sort ) {
+	if (r_debugSort->value > 0.0f && r_debugSort->value < tess.shader->sort) {
 		return;
 	}
 
@@ -234,10 +234,10 @@ void RB_EndSurface()
 	const qbool showTris = r_showtris->integer & SHOWTRIS_ENABLE_BIT;
 	const qbool showNormals = r_shownormals->integer & SHOWTRIS_ENABLE_BIT;
 	if (!backEnd.projection2D &&
-		(tess.pass == shaderCommands_t::TP_BASE) &&
-		tess.numIndexes > 0 &&
-		tess.numVertexes > 0 &&
-		(showTris || showNormals)) {
+	    (tess.pass == shaderCommands_t::TP_BASE) &&
+	    tess.numIndexes > 0 &&
+	    tess.numVertexes > 0 &&
+	    (showTris || showNormals)) {
 		if (showTris)
 			RB_DrawDebug(input, qfalse, r_showtris->integer);
 		if (showNormals)

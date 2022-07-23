@@ -26,9 +26,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // this is for determining if we have an asm version of a C function
 #ifdef Q3_VM
 
-#define id386 0
-#define idppc 0
-#define idx64 0
+#define id386  0
+#define idppc  0
+#define idx64  0
 #define idSSE2 0
 
 #else
@@ -52,7 +52,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #endif
 
 #if (defined(powerc) || defined(powerpc) || defined(ppc) || \
-	defined(__ppc) || defined(__ppc__)) && !defined(C_ONLY)
+     defined(__ppc) || defined(__ppc__)) &&                 \
+    !defined(C_ONLY)
 #define idppc 1
 #else
 #define idppc 0
@@ -72,18 +73,18 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #undef QDECL
 #define QDECL __cdecl
 
-#if defined( _MSC_VER )
+#if defined(_MSC_VER)
 #define OS_STRING "win_msvc"
 #elif defined __MINGW32__
 #define OS_STRING "win_mingw"
 #endif
 
 #define ID_INLINE __inline
-#define PATH_SEP '\\'
+#define PATH_SEP  '\\'
 
-#if defined( _M_IX86 ) || defined( __i386__ ) || defined( __i386 )
+#if defined(_M_IX86) || defined(__i386__) || defined(__i386)
 #define ARCH_STRING "x86"
-#elif defined( _M_AMD64 ) || defined( _M_X64 ) || defined( __amd64__ ) || defined( __amd64 ) || defined( __x86_64__ ) || defined( __x86_64 )
+#elif defined(_M_AMD64) || defined(_M_X64) || defined(__amd64__) || defined(__amd64) || defined(__x86_64__) || defined(__x86_64)
 #define ARCH_STRING "x64"
 #elif defined _M_ALPHA
 #define ARCH_STRING "AXP"
@@ -106,7 +107,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define OS_STRING "macosx"
 #define ID_INLINE inline
-#define PATH_SEP '/'
+#define PATH_SEP  '/'
 
 #ifdef __ppc__
 #define ARCH_STRING "ppc"
@@ -126,11 +127,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define OS_STRING "linux"
 #define ID_INLINE inline
-#define PATH_SEP '/'
+#define PATH_SEP  '/'
 
-#if defined( __i386__ ) || defined( __i386 )
+#if defined(__i386__) || defined(__i386)
 #define ARCH_STRING "x86"
-#elif defined( __amd64__ ) || defined( __amd64 ) || defined( __x86_64__ ) || defined( __x86_64 )
+#elif defined(__amd64__) || defined(__amd64) || defined(__x86_64__) || defined(__x86_64)
 #define ARCH_STRING "x64"
 #elif defined __powerpc64__
 #define ARCH_STRING "ppc64"
@@ -176,11 +177,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define OS_STRING "freebsd"
 #define ID_INLINE inline
-#define PATH_SEP '/'
+#define PATH_SEP  '/'
 
-#if defined( __i386__ ) || defined( __i386 )
+#if defined(__i386__) || defined(__i386)
 #define ARCH_STRING "x86"
-#elif defined( __amd64__ ) || defined( __amd64 ) || defined( __x86_64__ ) || defined( __x86_64 )
+#elif defined(__amd64__) || defined(__amd64) || defined(__x86_64__) || defined(__x86_64)
 #define ARCH_STRING "x64"
 #endif
 
@@ -202,7 +203,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define OS_STRING "openbsd"
 #define ID_INLINE inline
-#define PATH_SEP '/'
+#define PATH_SEP  '/'
 
 #ifdef __i386__
 #define ARCH_STRING "i386"
@@ -229,7 +230,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define OS_STRING "netbsd"
 #define ID_INLINE inline
-#define PATH_SEP '/'
+#define PATH_SEP  '/'
 
 #ifdef __i386__
 #define ARCH_STRING "i386"
@@ -255,7 +256,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define OS_STRING "solaris"
 #define ID_INLINE inline
-#define PATH_SEP '/'
+#define PATH_SEP  '/'
 
 #ifdef __i386__
 #define ARCH_STRING "i386"
@@ -263,9 +264,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define ARCH_STRING "sparc"
 #endif
 
-#if defined( _BIG_ENDIAN )
+#if defined(_BIG_ENDIAN)
 #define Q3_BIG_ENDIAN
-#elif defined( _LITTLE_ENDIAN )
+#elif defined(_LITTLE_ENDIAN)
 #define Q3_LITTLE_ENDIAN
 #endif
 
@@ -290,11 +291,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //===========================================================================
 
 //catch missing defines in above blocks
-#if !defined( OS_STRING )
+#if !defined(OS_STRING)
 #error "Operating system not supported"
 #endif
 
-#if !defined( ARCH_STRING )
+#if !defined(ARCH_STRING)
 #error "Architecture not supported"
 #endif
 
@@ -312,31 +313,31 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
 //endianness
-short ShortSwap (short l);
-int LongSwap (int l);
-float FloatSwap (const float *f);
+short ShortSwap(short l);
+int LongSwap(int l);
+float FloatSwap(const float* f);
 
-#if defined( Q3_BIG_ENDIAN ) && defined( Q3_LITTLE_ENDIAN )
+#if defined(Q3_BIG_ENDIAN) && defined(Q3_LITTLE_ENDIAN)
 #error "Endianness defined as both big and little"
-#elif defined( Q3_BIG_ENDIAN )
+#elif defined(Q3_BIG_ENDIAN)
 
 #define LittleShort(x) ShortSwap(x)
-#define LittleLong(x) LongSwap(x)
+#define LittleLong(x)  LongSwap(x)
 #define LittleFloat(x) FloatSwap(&x)
 #define BigShort
 #define BigLong
 #define BigFloat
 
-#elif defined( Q3_LITTLE_ENDIAN )
+#elif defined(Q3_LITTLE_ENDIAN)
 
 #define LittleShort
 #define LittleLong
 #define LittleFloat
 #define BigShort(x) ShortSwap(x)
-#define BigLong(x) LongSwap(x)
+#define BigLong(x)  LongSwap(x)
 #define BigFloat(x) FloatSwap(&x)
 
-#elif defined( Q3_VM )
+#elif defined(Q3_VM)
 
 #define LittleShort
 #define LittleLong

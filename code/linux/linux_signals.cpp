@@ -54,39 +54,35 @@ lifting (resolving symbols etc) is completely dead.
 
 // the app crashed
 // columns: Symbol, Desc
-#define CRASH_SIGNAL_LIST(X) \
-	X(SIGILL,	"illegal instruction") \
-	X(SIGIOT,	"IOT trap (a synonym for SIGABRT)") \
-	X(SIGBUS,	"bus error (bad memory access)") \
-	X(SIGFPE,	"fatal arithmetic error") \
-	X(SIGSEGV,	"invalid memory reference")
+#define CRASH_SIGNAL_LIST(X)                      \
+	X(SIGILL, "illegal instruction")              \
+	X(SIGIOT, "IOT trap (a synonym for SIGABRT)") \
+	X(SIGBUS, "bus error (bad memory access)")    \
+	X(SIGFPE, "fatal arithmetic error")           \
+	X(SIGSEGV, "invalid memory reference")
 
 // the app should terminate normally
 // columns: Symbol, Desc
-#define TERM_SIGNAL_LIST(X) \
-	X(SIGHUP,	"hangup detected on controlling terminal or death of controlling process") \
-	X(SIGQUIT,	"quit from keyboard") \
-	X(SIGTRAP,	"trace/breakpoint trap") \
-	X(SIGTERM,	"termination signal") \
-	X(SIGINT,	"interrupt")
+#define TERM_SIGNAL_LIST(X)                                                              \
+	X(SIGHUP, "hangup detected on controlling terminal or death of controlling process") \
+	X(SIGQUIT, "quit from keyboard")                                                     \
+	X(SIGTRAP, "trace/breakpoint trap")                                                  \
+	X(SIGTERM, "termination signal")                                                     \
+	X(SIGINT, "interrupt")
 
 
-#define SIGNAL_ITEM(Symbol, Desc) 1 + 
+#define SIGNAL_ITEM(Symbol, Desc) 1 +
 static const int sig_crashSignalCount = CRASH_SIGNAL_LIST(SIGNAL_ITEM) 0;
 static const int sig_termSignalCount = TERM_SIGNAL_LIST(SIGNAL_ITEM) 0;
 #undef SIGNAL_ITEM
-	
+
 
 #define SIGNAL_ITEM(Symbol, Desc) Symbol,
-static const int sig_crashSignals[sig_crashSignalCount + 1] = 
-{
-	CRASH_SIGNAL_LIST(SIGNAL_ITEM)
-	0
+static const int sig_crashSignals[sig_crashSignalCount + 1] = {
+	CRASH_SIGNAL_LIST(SIGNAL_ITEM) 0
 };
-static const int sig_termSignals[sig_termSignalCount + 1] = 
-{
-	TERM_SIGNAL_LIST(SIGNAL_ITEM)
-	0
+static const int sig_termSignals[sig_termSignalCount + 1] = {
+	TERM_SIGNAL_LIST(SIGNAL_ITEM) 0
 };
 #undef SIGNAL_ITEM
 
@@ -102,12 +98,12 @@ static void Sig_Unwind_PrintASS(int fd); // async-signal-safe
 
 
 // both of these can call Com_Error, which is not safe
-#define Q_strncpyz	Sig_strncpyz
-#define Q_strcat	Sig_strcat
+#define Q_strncpyz Sig_strncpyz
+#define Q_strcat   Sig_strcat
 
 // make sure we don't use these
-#define strcpy		do_not_use_strcpy
-#define strcat		do_not_use_strcat
+#define strcpy do_not_use_strcpy
+#define strcat do_not_use_strcat
 
 
 // async-signal-safe
@@ -137,9 +133,9 @@ static void Sig_strcat(char* dest, int size, const char* src)
 
 static const char* Sig_GetDescription(int sig)
 {
-#define SIGNAL_ITEM(Symbol, Desc) case Symbol: return Desc;
-	switch (sig)
-	{
+#define SIGNAL_ITEM(Symbol, Desc) \
+	case Symbol: return Desc;
+	switch (sig) {
 		CRASH_SIGNAL_LIST(SIGNAL_ITEM)
 		TERM_SIGNAL_LIST(SIGNAL_ITEM)
 		default: return "unhandled signal";
@@ -150,9 +146,9 @@ static const char* Sig_GetDescription(int sig)
 
 static const char* Sig_GetName(int sig)
 {
-#define SIGNAL_ITEM(Symbol, Desc) case Symbol: return #Symbol;
-	switch (sig)
-	{
+#define SIGNAL_ITEM(Symbol, Desc) \
+	case Symbol: return #Symbol;
+	switch (sig) {
 		CRASH_SIGNAL_LIST(SIGNAL_ITEM)
 		TERM_SIGNAL_LIST(SIGNAL_ITEM)
 		default: return "unhandled signal";
@@ -162,7 +158,7 @@ static const char* Sig_GetName(int sig)
 
 
 static void Sig_UpdateFilePaths()
-{	
+{
 	// gmtime and va (sprintf) are not async-signal-safe
 
 	const time_t epochTime = time(NULL);
@@ -175,8 +171,8 @@ static void Sig_UpdateFilePaths()
 	const int s = utcTime->tm_sec;
 
 	const char* const bn = va(
-		"%s-crash-%d.%02d.%02d-%02d.%02d.%02d",
-		q_argv[0], y, m, d, h, mi, s);
+	    "%s-crash-%d.%02d.%02d-%02d.%02d.%02d",
+	    q_argv[0], y, m, d, h, mi, s);
 	char baseName[MAX_OSPATH];
 	Q_strncpyz(baseName, bn, sizeof(baseName));
 	Q_strncpyz(sig_backTraceFilePath, va("%s.bt", baseName), sizeof(sig_backTraceFilePath));
@@ -222,13 +218,10 @@ static void Sig_Backtrace_Print(FILE* file)
 {
 	void* addresses[64];
 	const int addresscount = backtrace(addresses, sizeof(addresses));
-	if (addresscount > 0)
-	{
+	if (addresscount > 0) {
 		fflush(file);
 		backtrace_symbols_fd(addresses, addresscount, fileno(file));
-	}
-	else
-	{
+	} else {
 		fprintf(file, "The call to backtrace failed\r\n");
 	}
 }
@@ -254,7 +247,7 @@ static void Sig_PrintLine(int fd, const char* msg)
 
 
 static void Sig_PrintSignalCaught(int sig)
-{	
+{
 	// fprintf is not async-signal-safe, but write is
 	Sig_Print(STDERR_FILENO, "\nSignal caught: ");
 	Sig_Print(STDERR_FILENO, Sig_GetName(sig));
@@ -303,8 +296,7 @@ static void Sig_HandleCrash(int sig)
 	Sig_Unwind_GetContext();
 
 	const int fd = open(Sig_BackTraceFilePath(), O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	if (fd != -1)
-	{
+	if (fd != -1) {
 		Sig_PrintAttempt("write safe libunwind stack trace");
 		Sig_PrintLine(fd, "safe libunwind stack trace:");
 		Sig_Unwind_PrintASS(fd);
@@ -331,8 +323,7 @@ static void Sig_HandleCrash(int sig)
 	Sig_WriteJSON(sig);
 	Sig_PrintDone();
 
-	if (fd != -1)
-	{
+	if (fd != -1) {
 		FILE* const file = fdopen(fd, "a");
 
 		Sig_PrintAttempt("write backtrace stack trace");
@@ -371,7 +362,7 @@ static void Sig_RegisterSignals(const int* signals, int count, void (*handler)(i
 {
 	sigset_t mask;
 	sigemptyset(&mask);
-	
+
 	struct sigaction action;
 	memset(&action, 0, sizeof(action));
 	action.sa_handler = handler;
@@ -383,7 +374,7 @@ static void Sig_RegisterSignals(const int* signals, int count, void (*handler)(i
 
 
 void SIG_InitChild()
-{	
+{
 	// This is unfortunately needed because some code might
 	// call exit and bypass all the clean-up work without
 	// there ever being a real crash.
@@ -432,14 +423,13 @@ void SIG_Frame()
 #define LIBUNWIND_PATH "libunwind-" XSTRING(UNW_TARGET) ".so.8"
 
 
-struct libUnwind_t
-{
+struct libUnwind_t {
 	unw_context_t context;
-	int (*getcontext)(unw_context_t *);
-	int (*init_local)(unw_cursor_t *, unw_context_t *);
-	int (*step)(unw_cursor_t *);
-	int (*get_reg)(unw_cursor_t *, unw_regnum_t, unw_word_t *);
-	int (*get_proc_name)(unw_cursor_t *, char *, size_t, unw_word_t *);
+	int (*getcontext)(unw_context_t*);
+	int (*init_local)(unw_cursor_t*, unw_context_t*);
+	int (*step)(unw_cursor_t*);
+	int (*get_reg)(unw_cursor_t*, unw_regnum_t, unw_word_t*);
+	int (*get_proc_name)(unw_cursor_t*, char*, size_t, unw_word_t*);
 	void* handle;
 	qbool valid;
 };
@@ -453,8 +443,7 @@ static void Sig_Unwind_GetContext()
 	if (!unw.valid)
 		return;
 
-	if (unw.getcontext(&unw.context) != 0)
-	{
+	if (unw.getcontext(&unw.context) != 0) {
 		Sig_PrintLine(STDERR_FILENO, "The call to libunwind's getcontext failed");
 		unw.valid = qfalse;
 	}
@@ -475,21 +464,19 @@ static void Sig_Unwind_OpenLibrary()
 
 	unw.valid = qfalse;
 	unw.handle = dlopen(LIBUNWIND_PATH, RTLD_NOW);
-	if (unw.handle == NULL)
-	{
+	if (unw.handle == NULL) {
 		const char* errorMsg = dlerror();
 		if (errorMsg != NULL)
 			fprintf(stderr, "\nFailed to load %s: %s\n", LIBUNWIND_PATH, errorMsg);
 		else
 			fprintf(stderr, "\nFailed to find/load %s\n", LIBUNWIND_PATH);
-		return;	
+		return;
 	}
 
-#define GET2(Var, Name) \
-	if (!Sig_Unwind_GetFunction((void**)&unw.Var, Name)) \
-	{ \
+#define GET2(Var, Name)                                                    \
+	if (!Sig_Unwind_GetFunction((void**)&unw.Var, Name)) {                 \
 		fprintf(stderr, "\nFailed to find libunwind function %s\n", Name); \
-		return; \
+		return;                                                            \
 	}
 #define GET(Name) GET2(Name, XSTRING(UNW_OBJ(Name)))
 	GET2(getcontext, "_Ux86_64_getcontext");
@@ -543,31 +530,25 @@ void Sig_Unwind_Print(FILE* fp)
 {
 	static char name[1024];
 	static char file[1024];
-	
+
 	if (!unw.valid)
 		return;
 
 	unw_cursor_t cursor;
-	if (unw.init_local(&cursor, &unw.context) != 0)
-	{
+	if (unw.init_local(&cursor, &unw.context) != 0) {
 		fprintf(fp, "The call to libunwind's init_local failed\r\n");
 		return;
 	}
 
-	while (unw.step(&cursor) > 0)
-	{
+	while (unw.step(&cursor) > 0) {
 		const char* func = name;
 		unw_word_t ip, sp, offp;
-		if (unw.get_proc_name(&cursor, name, sizeof(name), &offp))
-		{
+		if (unw.get_proc_name(&cursor, name, sizeof(name), &offp)) {
 			Q_strncpyz(name, "???", sizeof(name));
-		}
-		else
-		{
+		} else {
 			int status;
 			char* niceName = abi::__cxa_demangle(name, NULL, NULL, &status);
-			if (status == 0)
-			{
+			if (status == 0) {
 				Q_strncpyz(name, niceName, sizeof(name));
 				free(niceName);
 			}
@@ -595,8 +576,7 @@ void Sig_Unwind_PrintASS(int fd)
 	if (unw.init_local(&cursor, &unw.context) != 0)
 		return;
 
-	while (unw.step(&cursor) > 0)
-	{
+	while (unw.step(&cursor) > 0) {
 		unw_word_t offp;
 		if (unw.get_proc_name(&cursor, name, sizeof(name), &offp))
 			Q_strncpyz(name, "???", sizeof(name));

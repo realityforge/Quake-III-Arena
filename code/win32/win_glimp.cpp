@@ -36,7 +36,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #if _MSC_VER
-#pragma warning (disable: 4996) // deprecated ZOMGOVERRUN! nannywhine
+#pragma warning(disable : 4996) // deprecated ZOMGOVERRUN! nannywhine
 #endif
 
 #include "../renderer/tr_local.h"
@@ -48,9 +48,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "glw_win.h"
 
 
-#define TRY_PFD_SUCCESS		0
-#define TRY_PFD_FAIL_SOFT	1
-#define TRY_PFD_FAIL_HARD	2
+#define TRY_PFD_SUCCESS   0
+#define TRY_PFD_FAIL_SOFT 1
+#define TRY_PFD_FAIL_HARD 2
 
 glwstate_t glw_state;
 static galId_t win_galId;
@@ -58,8 +58,7 @@ static galId_t win_galId;
 
 static qbool WIN_UsingOpenGL()
 {
-	switch ( win_galId )
-	{
+	switch (win_galId) {
 		case GAL_GL2:
 		case GAL_GL3:
 			return qtrue;
@@ -76,143 +75,121 @@ static qbool WIN_UsingOpenGL()
 */
 #define MAX_PFDS 256
 
-static int GLW_ChoosePFD( HDC hDC, PIXELFORMATDESCRIPTOR *pPFD )
+static int GLW_ChoosePFD(HDC hDC, PIXELFORMATDESCRIPTOR* pPFD)
 {
-	PIXELFORMATDESCRIPTOR pfds[MAX_PFDS+1];
+	PIXELFORMATDESCRIPTOR pfds[MAX_PFDS + 1];
 	int maxPFD = 0;
 	int i;
 	int bestMatch = 0;
 
-	ri.Printf( PRINT_DEVELOPER, "...GLW_ChoosePFD( %d, %d, %d )\n", ( int ) pPFD->cColorBits, ( int ) pPFD->cDepthBits, ( int ) pPFD->cStencilBits );
+	ri.Printf(PRINT_DEVELOPER, "...GLW_ChoosePFD( %d, %d, %d )\n", (int)pPFD->cColorBits, (int)pPFD->cDepthBits, (int)pPFD->cStencilBits);
 
-	maxPFD = DescribePixelFormat( hDC, 1, sizeof( PIXELFORMATDESCRIPTOR ), &pfds[0] );
-	if ( maxPFD > MAX_PFDS )
-	{
-		ri.Printf( PRINT_WARNING, "...numPFDs > MAX_PFDS (%d > %d)\n", maxPFD, MAX_PFDS );
+	maxPFD = DescribePixelFormat(hDC, 1, sizeof(PIXELFORMATDESCRIPTOR), &pfds[0]);
+	if (maxPFD > MAX_PFDS) {
+		ri.Printf(PRINT_WARNING, "...numPFDs > MAX_PFDS (%d > %d)\n", maxPFD, MAX_PFDS);
 		maxPFD = MAX_PFDS;
 	}
 
-	ri.Printf( PRINT_DEVELOPER, "...%d PFDs found\n", maxPFD - 1 );
+	ri.Printf(PRINT_DEVELOPER, "...%d PFDs found\n", maxPFD - 1);
 
 	// grab information
-	for ( i = 1; i <= maxPFD; i++ )
-	{
-		DescribePixelFormat( hDC, i, sizeof( PIXELFORMATDESCRIPTOR ), &pfds[i] );
+	for (i = 1; i <= maxPFD; i++) {
+		DescribePixelFormat(hDC, i, sizeof(PIXELFORMATDESCRIPTOR), &pfds[i]);
 	}
 
 	// look for a best match
-	for ( i = 1; i <= maxPFD; i++ )
-	{
+	for (i = 1; i <= maxPFD; i++) {
 		//
 		// make sure this has hardware acceleration
 		//
-		if ( ( pfds[i].dwFlags & PFD_GENERIC_FORMAT ) != 0 ) 
-		{
+		if ((pfds[i].dwFlags & PFD_GENERIC_FORMAT) != 0) {
 			continue;
 		}
 
 		// verify pixel type
-		if ( pfds[i].iPixelType != PFD_TYPE_RGBA )
-		{
-			if ( r_verbose->integer )
-			{
-				ri.Printf( PRINT_DEVELOPER, "...PFD %d rejected, not RGBA\n", i );
+		if (pfds[i].iPixelType != PFD_TYPE_RGBA) {
+			if (r_verbose->integer) {
+				ri.Printf(PRINT_DEVELOPER, "...PFD %d rejected, not RGBA\n", i);
 			}
 			continue;
 		}
 
 		// verify proper flags
-		if ( ( ( pfds[i].dwFlags & pPFD->dwFlags ) & pPFD->dwFlags ) != pPFD->dwFlags ) 
-		{
-			if ( r_verbose->integer )
-			{
-				ri.Printf( PRINT_DEVELOPER, "...PFD %d rejected, improper flags (%x instead of %x)\n", i, pfds[i].dwFlags, pPFD->dwFlags );
+		if (((pfds[i].dwFlags & pPFD->dwFlags) & pPFD->dwFlags) != pPFD->dwFlags) {
+			if (r_verbose->integer) {
+				ri.Printf(PRINT_DEVELOPER, "...PFD %d rejected, improper flags (%x instead of %x)\n", i, pfds[i].dwFlags, pPFD->dwFlags);
 			}
 			continue;
 		}
 
 		// verify enough bits
-		if ( pfds[i].cDepthBits < 15 )
-		{
+		if (pfds[i].cDepthBits < 15) {
 			continue;
 		}
-		if ( ( pfds[i].cStencilBits < 4 ) && ( pPFD->cStencilBits > 0 ) )
-		{
+		if ((pfds[i].cStencilBits < 4) && (pPFD->cStencilBits > 0)) {
 			continue;
 		}
 
 		//
 		// selection criteria (in order of priority):
-		// 
+		//
 		//  colorBits
 		//  depthBits
 		//  stencilBits
 		//
-		if ( bestMatch )
-		{
+		if (bestMatch) {
 			// check color
-			if ( pfds[bestMatch].cColorBits != pPFD->cColorBits )
-			{
+			if (pfds[bestMatch].cColorBits != pPFD->cColorBits) {
 				// prefer perfect match
-				if ( pfds[i].cColorBits == pPFD->cColorBits )
-				{
+				if (pfds[i].cColorBits == pPFD->cColorBits) {
 					bestMatch = i;
 					continue;
 				}
 				// otherwise if this PFD has more bits than our best, use it
-				else if ( pfds[i].cColorBits > pfds[bestMatch].cColorBits )
-				{
+				else if (pfds[i].cColorBits > pfds[bestMatch].cColorBits) {
 					bestMatch = i;
 					continue;
 				}
 			}
 
 			// check depth
-			if ( pfds[bestMatch].cDepthBits != pPFD->cDepthBits )
-			{
+			if (pfds[bestMatch].cDepthBits != pPFD->cDepthBits) {
 				// prefer perfect match
-				if ( pfds[i].cDepthBits == pPFD->cDepthBits )
-				{
+				if (pfds[i].cDepthBits == pPFD->cDepthBits) {
 					bestMatch = i;
 					continue;
 				}
 				// otherwise if this PFD has more bits than our best, use it
-				else if ( pfds[i].cDepthBits > pfds[bestMatch].cDepthBits )
-				{
+				else if (pfds[i].cDepthBits > pfds[bestMatch].cDepthBits) {
 					bestMatch = i;
 					continue;
 				}
 			}
 
 			// check stencil
-			if ( pfds[bestMatch].cStencilBits != pPFD->cStencilBits )
-			{
+			if (pfds[bestMatch].cStencilBits != pPFD->cStencilBits) {
 				// prefer perfect match
-				if ( pfds[i].cStencilBits == pPFD->cStencilBits )
-				{
+				if (pfds[i].cStencilBits == pPFD->cStencilBits) {
 					bestMatch = i;
 					continue;
 				}
 				// otherwise if this PFD has more bits than our best, use it
-				else if ( ( pfds[i].cStencilBits > pfds[bestMatch].cStencilBits ) && 
-					 ( pPFD->cStencilBits > 0 ) )
-				{
+				else if ((pfds[i].cStencilBits > pfds[bestMatch].cStencilBits) &&
+				         (pPFD->cStencilBits > 0)) {
 					bestMatch = i;
 					continue;
 				}
 			}
-		}
-		else
-		{
+		} else {
 			bestMatch = i;
 		}
 	}
 
-	if ( !bestMatch )
+	if (!bestMatch)
 		return 0;
 
-	if ( pfds[bestMatch].dwFlags & (PFD_GENERIC_FORMAT | PFD_GENERIC_ACCELERATED) ) {
-		ri.Printf( PRINT_ALL, "...no OpenGL ICD found\n" );
+	if (pfds[bestMatch].dwFlags & (PFD_GENERIC_FORMAT | PFD_GENERIC_ACCELERATED)) {
+		ri.Printf(PRINT_ALL, "...no OpenGL ICD found\n");
 		return 0;
 	}
 
@@ -226,20 +203,20 @@ static int GLW_ChoosePFD( HDC hDC, PIXELFORMATDESCRIPTOR *pPFD )
 **
 ** Helper function zeros out then fills in a PFD
 */
-static void GLW_CreatePFD( PIXELFORMATDESCRIPTOR *pPFD )
+static void GLW_CreatePFD(PIXELFORMATDESCRIPTOR* pPFD)
 {
-	ZeroMemory( pPFD, sizeof( *pPFD ) );
-	pPFD->nSize = sizeof( *pPFD );
-	pPFD->dwFlags		= PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
-	pPFD->iPixelType	= PFD_TYPE_RGBA;
-	pPFD->iLayerType	= PFD_MAIN_PLANE;
-	pPFD->cColorBits	= 32;
-	pPFD->cDepthBits	= 24;
-	pPFD->cStencilBits	= 8;
+	ZeroMemory(pPFD, sizeof(*pPFD));
+	pPFD->nSize = sizeof(*pPFD);
+	pPFD->dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
+	pPFD->iPixelType = PFD_TYPE_RGBA;
+	pPFD->iLayerType = PFD_MAIN_PLANE;
+	pPFD->cColorBits = 32;
+	pPFD->cDepthBits = 24;
+	pPFD->cStencilBits = 8;
 }
 
 
-static int GLW_MakeContext( PIXELFORMATDESCRIPTOR *pPFD )
+static int GLW_MakeContext(PIXELFORMATDESCRIPTOR* pPFD)
 {
 	int pixelformat;
 
@@ -247,8 +224,7 @@ static int GLW_MakeContext( PIXELFORMATDESCRIPTOR *pPFD )
 	// don't putz around with pixelformat if it's already set (e.g. this is a soft
 	// reset of the graphics system)
 	//
-	if ( !glw_state.pixelFormatSet )
-	{
+	if (!glw_state.pixelFormatSet) {
 		//
 		// choose, set, and describe our desired pixel format.  If we're
 		// using a minidriver then we need to bypass the GDI functions,
@@ -256,19 +232,16 @@ static int GLW_MakeContext( PIXELFORMATDESCRIPTOR *pPFD )
 		//
 		if (glw_state.nPendingPF)
 			pixelformat = glw_state.nPendingPF;
-		else
-		if ( ( pixelformat = GLW_ChoosePFD( glw_state.hDC, pPFD ) ) == 0 )
-		{
-			ri.Printf( PRINT_ALL, "...GLW_ChoosePFD failed\n");
+		else if ((pixelformat = GLW_ChoosePFD(glw_state.hDC, pPFD)) == 0) {
+			ri.Printf(PRINT_ALL, "...GLW_ChoosePFD failed\n");
 			return TRY_PFD_FAIL_SOFT;
 		}
-		ri.Printf( PRINT_DEVELOPER, "...PIXELFORMAT %d selected\n", pixelformat );
+		ri.Printf(PRINT_DEVELOPER, "...PIXELFORMAT %d selected\n", pixelformat);
 
-		DescribePixelFormat( glw_state.hDC, pixelformat, sizeof( *pPFD ), pPFD );
+		DescribePixelFormat(glw_state.hDC, pixelformat, sizeof(*pPFD), pPFD);
 
-		if ( SetPixelFormat( glw_state.hDC, pixelformat, pPFD ) == FALSE )
-		{
-			ri.Printf( PRINT_ALL, "...SetPixelFormat failed\n", glw_state.hDC );
+		if (SetPixelFormat(glw_state.hDC, pixelformat, pPFD) == FALSE) {
+			ri.Printf(PRINT_ALL, "...SetPixelFormat failed\n", glw_state.hDC);
 			return TRY_PFD_FAIL_SOFT;
 		}
 
@@ -278,33 +251,28 @@ static int GLW_MakeContext( PIXELFORMATDESCRIPTOR *pPFD )
 	//
 	// startup the OpenGL subsystem by creating a context and making it current
 	//
-	if ( !glw_state.hGLRC )
-	{
-		if ( ( glw_state.hGLRC = wglCreateContext( glw_state.hDC ) ) == 0 )
-		{
-			ri.Printf( PRINT_ALL, "...GL context creation failure\n" );
+	if (!glw_state.hGLRC) {
+		if ((glw_state.hGLRC = wglCreateContext(glw_state.hDC)) == 0) {
+			ri.Printf(PRINT_ALL, "...GL context creation failure\n");
 			return TRY_PFD_FAIL_HARD;
 		}
-		ri.Printf( PRINT_DEVELOPER, "...GL context created\n" );
+		ri.Printf(PRINT_DEVELOPER, "...GL context created\n");
 
-		if ( !wglMakeCurrent( glw_state.hDC, glw_state.hGLRC ) )
-		{
-			wglDeleteContext( glw_state.hGLRC );
+		if (!wglMakeCurrent(glw_state.hDC, glw_state.hGLRC)) {
+			wglDeleteContext(glw_state.hGLRC);
 			glw_state.hGLRC = NULL;
-			ri.Printf( PRINT_ALL, "...GL context creation currency failure\n" );
+			ri.Printf(PRINT_ALL, "...GL context creation currency failure\n");
 			return TRY_PFD_FAIL_HARD;
 		}
-		ri.Printf( PRINT_DEVELOPER, "...GL context creation made current\n" );
+		ri.Printf(PRINT_DEVELOPER, "...GL context creation made current\n");
 
-		if ( win_galId == GAL_GL3 )
-		{
+		if (win_galId == GAL_GL3) {
 			PFNWGLCREATECONTEXTATTRIBSARBPROC const wglCreateContextAttribsARB =
-				(PFNWGLCREATECONTEXTATTRIBSARBPROC)wglGetProcAddress( "wglCreateContextAttribsARB" );
-			if( wglCreateContextAttribsARB == NULL )
-				ri.Error( ERR_FATAL, "wglCreateContextAttribsARB not found: can't ask for core 3.2 context\n" );
+			    (PFNWGLCREATECONTEXTATTRIBSARBPROC)wglGetProcAddress("wglCreateContextAttribsARB");
+			if (wglCreateContextAttribsARB == NULL)
+				ri.Error(ERR_FATAL, "wglCreateContextAttribsARB not found: can't ask for core 3.2 context\n");
 
-			const int attribs[] =
-			{
+			const int attribs[] = {
 				WGL_CONTEXT_MAJOR_VERSION_ARB, 3,
 				WGL_CONTEXT_MINOR_VERSION_ARB, 2,
 				WGL_CONTEXT_PROFILE_MASK_ARB, WGL_CONTEXT_CORE_PROFILE_BIT_ARB,
@@ -312,23 +280,20 @@ static int GLW_MakeContext( PIXELFORMATDESCRIPTOR *pPFD )
 				0
 			};
 
-			const HGLRC hGLRC = (*wglCreateContextAttribsARB)( glw_state.hDC, NULL, attribs );
-			if ( hGLRC )
-			{
-				wglMakeCurrent( NULL, NULL );
-				wglDeleteContext( glw_state.hGLRC );
-				wglMakeCurrent( glw_state.hDC, hGLRC );
+			const HGLRC hGLRC = (*wglCreateContextAttribsARB)(glw_state.hDC, NULL, attribs);
+			if (hGLRC) {
+				wglMakeCurrent(NULL, NULL);
+				wglDeleteContext(glw_state.hGLRC);
+				wglMakeCurrent(glw_state.hDC, hGLRC);
 				glw_state.hGLRC = hGLRC;
-				ri.Printf( PRINT_ALL, "OpenGL version upgraded to: %s\n", (const char*)glGetString( GL_VERSION ) );
-			}
-			else
-			{
-				ri.Printf( PRINT_WARNING, "wglCreateContextAttribsARB failed\n" );
+				ri.Printf(PRINT_ALL, "OpenGL version upgraded to: %s\n", (const char*)glGetString(GL_VERSION));
+			} else {
+				ri.Printf(PRINT_WARNING, "wglCreateContextAttribsARB failed\n");
 			}
 		}
 
-		if ( glewInit() != GLEW_OK )
-			ri.Error( ERR_FATAL, "glewInit failed\n" );
+		if (glewInit() != GLEW_OK)
+			ri.Error(ERR_FATAL, "glewInit failed\n");
 
 		CL_GL_Init();
 	}
@@ -343,50 +308,45 @@ static int GLW_MakeContext( PIXELFORMATDESCRIPTOR *pPFD )
 */
 static qbool GLW_InitDriver()
 {
-	int		tpfd;
-	static PIXELFORMATDESCRIPTOR pfd;		// save between frames since 'tr' gets cleared
+	int tpfd;
+	static PIXELFORMATDESCRIPTOR pfd; // save between frames since 'tr' gets cleared
 
-	ri.Printf( PRINT_DEVELOPER, "Initializing OpenGL driver\n" );
+	ri.Printf(PRINT_DEVELOPER, "Initializing OpenGL driver\n");
 
 	//
 	// get a DC for our window if we don't already have one allocated
 	//
-	if ( glw_state.hDC == NULL )
-	{
-		if ( ( glw_state.hDC = GetDC( g_wv.hWnd ) ) == NULL )
-		{
-			ri.Printf( PRINT_ALL, "...Get DC failed\n" );
+	if (glw_state.hDC == NULL) {
+		if ((glw_state.hDC = GetDC(g_wv.hWnd)) == NULL) {
+			ri.Printf(PRINT_ALL, "...Get DC failed\n");
 			return qfalse;
 		}
-		ri.Printf( PRINT_DEVELOPER, "...Get DC succeeded\n" );
+		ri.Printf(PRINT_DEVELOPER, "...Get DC succeeded\n");
 	}
 
 	//
 	// attempt to set the PIXELFORMAT
 	//
-	if ( !glw_state.pixelFormatSet )
-	{
-		GLW_CreatePFD( &pfd );
-		if ( ( tpfd = GLW_MakeContext( &pfd ) ) != TRY_PFD_SUCCESS )
-		{
-			if ( tpfd == TRY_PFD_FAIL_HARD )
-			{
-				ri.Printf( PRINT_WARNING, "...failed hard\n" );
+	if (!glw_state.pixelFormatSet) {
+		GLW_CreatePFD(&pfd);
+		if ((tpfd = GLW_MakeContext(&pfd)) != TRY_PFD_SUCCESS) {
+			if (tpfd == TRY_PFD_FAIL_HARD) {
+				ri.Printf(PRINT_WARNING, "...failed hard\n");
 				return qfalse;
 			}
 
-			ReleaseDC( g_wv.hWnd, glw_state.hDC );
+			ReleaseDC(g_wv.hWnd, glw_state.hDC);
 			glw_state.hDC = NULL;
-			ri.Printf( PRINT_ALL, "...failed to find an appropriate PIXELFORMAT\n" );
+			ri.Printf(PRINT_ALL, "...failed to find an appropriate PIXELFORMAT\n");
 			return qfalse;
 		}
 	}
 
 	// store PFD specifics
 	//
-	glConfig.colorBits = ( int ) pfd.cColorBits;
-	glConfig.depthBits = ( int ) pfd.cDepthBits;
-	glConfig.stencilBits = ( int ) pfd.cStencilBits;
+	glConfig.colorBits = (int)pfd.cColorBits;
+	glConfig.depthBits = (int)pfd.cDepthBits;
+	glConfig.stencilBits = (int)pfd.cStencilBits;
 
 	return qtrue;
 }
@@ -398,54 +358,49 @@ static qbool GLW_CreateWindow()
 {
 	static qbool s_classRegistered = qfalse;
 
-	if ( !s_classRegistered )
-	{
+	if (!s_classRegistered) {
 		WNDCLASS wc;
-		memset( &wc, 0, sizeof( wc ) );
+		memset(&wc, 0, sizeof(wc));
 
-		wc.style         = CS_OWNDC;
-		wc.lpfnWndProc   = MainWndProc;
-		wc.cbClsExtra    = 0;
-		wc.cbWndExtra    = 0;
-		wc.hInstance     = g_wv.hInstance;
-		wc.hIcon         = LoadIcon( g_wv.hInstance, MAKEINTRESOURCE(IDI_ICON1));
-		wc.hCursor       = LoadCursor (NULL,IDC_ARROW);
+		wc.style = CS_OWNDC;
+		wc.lpfnWndProc = MainWndProc;
+		wc.cbClsExtra = 0;
+		wc.cbWndExtra = 0;
+		wc.hInstance = g_wv.hInstance;
+		wc.hIcon = LoadIcon(g_wv.hInstance, MAKEINTRESOURCE(IDI_ICON1));
+		wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 		wc.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
-		wc.lpszMenuName  = 0;
+		wc.lpszMenuName = 0;
 		wc.lpszClassName = CLIENT_WINDOW_TITLE;
 
-		if ( !RegisterClass( &wc ) )
-			ri.Error( ERR_FATAL, "GLW_CreateWindow: could not register window class" );
+		if (!RegisterClass(&wc))
+			ri.Error(ERR_FATAL, "GLW_CreateWindow: could not register window class");
 
 		s_classRegistered = qtrue;
-		ri.Printf( PRINT_DEVELOPER, "...registered window class\n" );
+		ri.Printf(PRINT_DEVELOPER, "...registered window class\n");
 	}
 
 	//
 	// create the HWND if one does not already exist
 	//
-	if ( !g_wv.hWnd )
-	{
+	if (!g_wv.hWnd) {
 		g_wv.inputInitialized = qfalse;
 
 		RECT r;
 		r.left = 0;
 		r.top = 0;
-		r.right  = glInfo.winWidth;
+		r.right = glInfo.winWidth;
 		r.bottom = glInfo.winHeight;
 
 		int style = WS_VISIBLE | WS_CLIPCHILDREN;
 		int exstyle = 0;
 
-		if ( glInfo.winFullscreen )
-		{
+		if (glInfo.winFullscreen) {
 			style |= WS_POPUP;
 			exstyle |= WS_EX_TOPMOST;
-		}
-		else
-		{
+		} else {
 			style |= WS_OVERLAPPED | WS_BORDER | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX;
-			AdjustWindowRect( &r, style, FALSE );
+			AdjustWindowRect(&r, style, FALSE);
 		}
 
 		const int w = r.right - r.left;
@@ -456,44 +411,40 @@ static qbool GLW_CreateWindow()
 		int dx = 0;
 		int dy = 0;
 
-		if ( !glInfo.winFullscreen )
-		{
-			dx = ri.Cvar_Get( "vid_xpos", "0", 0 )->integer;
-			dy = ri.Cvar_Get( "vid_ypos", "0", 0 )->integer;
-			dx = Com_ClampInt( 0, max( 0, monRect.right - monRect.left - w ), dx );
-			dy = Com_ClampInt( 0, max( 0, monRect.bottom - monRect.top - h ), dy );
+		if (!glInfo.winFullscreen) {
+			dx = ri.Cvar_Get("vid_xpos", "0", 0)->integer;
+			dy = ri.Cvar_Get("vid_ypos", "0", 0)->integer;
+			dx = Com_ClampInt(0, max(0, monRect.right - monRect.left - w), dx);
+			dy = Com_ClampInt(0, max(0, monRect.bottom - monRect.top - h), dy);
 		}
 
 		const int x = monRect.left + dx;
 		const int y = monRect.top + dy;
 
 		g_wv.duringCreateWindow = qtrue;
-		g_wv.hWnd = CreateWindowEx( exstyle, CLIENT_WINDOW_TITLE, " " CLIENT_WINDOW_TITLE, style,
-				x, y, w, h, NULL, NULL, g_wv.hInstance, NULL );
+		g_wv.hWnd = CreateWindowEx(exstyle, CLIENT_WINDOW_TITLE, " " CLIENT_WINDOW_TITLE, style,
+		                           x, y, w, h, NULL, NULL, g_wv.hInstance, NULL);
 		g_wv.duringCreateWindow = qfalse;
 
-		if ( !g_wv.hWnd )
-			ri.Error( ERR_FATAL, "GLW_CreateWindow() - Couldn't create window" );
+		if (!g_wv.hWnd)
+			ri.Error(ERR_FATAL, "GLW_CreateWindow() - Couldn't create window");
 
-		ShowWindow( g_wv.hWnd, SW_SHOW );
-		UpdateWindow( g_wv.hWnd );
-		ri.Printf( PRINT_DEVELOPER, "...created window@%d,%d (%dx%d)\n", x, y, w, h );
-	}
-	else
-	{
-		ri.Printf( PRINT_DEVELOPER, "...window already present, CreateWindowEx skipped\n" );
+		ShowWindow(g_wv.hWnd, SW_SHOW);
+		UpdateWindow(g_wv.hWnd);
+		ri.Printf(PRINT_DEVELOPER, "...created window@%d,%d (%dx%d)\n", x, y, w, h);
+	} else {
+		ri.Printf(PRINT_DEVELOPER, "...window already present, CreateWindowEx skipped\n");
 	}
 
-	if ( WIN_UsingOpenGL() && !GLW_InitDriver() )
-	{
-		ShowWindow( g_wv.hWnd, SW_HIDE );
-		DestroyWindow( g_wv.hWnd );
+	if (WIN_UsingOpenGL() && !GLW_InitDriver()) {
+		ShowWindow(g_wv.hWnd, SW_HIDE);
+		DestroyWindow(g_wv.hWnd);
 		g_wv.hWnd = NULL;
 		return qfalse;
 	}
 
-	SetForegroundWindow( g_wv.hWnd );
-	SetFocus( g_wv.hWnd );
+	SetForegroundWindow(g_wv.hWnd);
+	SetFocus(g_wv.hWnd);
 
 	return qtrue;
 }
@@ -504,33 +455,33 @@ static const char* GLW_GetCurrentDisplayDeviceName()
 	static char deviceName[CCHDEVICENAME + 1];
 
 	const HMONITOR hMonitor = g_wv.hMonitors[g_wv.monitor];
-	if ( hMonitor == NULL )
+	if (hMonitor == NULL)
 		return NULL;
 
 	MONITORINFOEXA info;
-	ZeroMemory( &info, sizeof(info) );
+	ZeroMemory(&info, sizeof(info));
 	info.cbSize = sizeof(info);
-	if ( GetMonitorInfoA(hMonitor, &info) == 0 )
+	if (GetMonitorInfoA(hMonitor, &info) == 0)
 		return NULL;
 
-	Q_strncpyz( deviceName, info.szDevice, sizeof(deviceName) );
-	
+	Q_strncpyz(deviceName, info.szDevice, sizeof(deviceName));
+
 	return deviceName;
 }
 
 
-static void GLW_UpdateMonitorRect( const char* deviceName )
+static void GLW_UpdateMonitorRect(const char* deviceName)
 {
-	if ( deviceName == NULL )
+	if (deviceName == NULL)
 		return;
 
 	DEVMODEA dm;
-	ZeroMemory( &dm, sizeof(dm) );
+	ZeroMemory(&dm, sizeof(dm));
 	dm.dmSize = sizeof(dm);
-	if ( EnumDisplaySettingsExA(deviceName, ENUM_CURRENT_SETTINGS, &dm, 0) == 0 )
+	if (EnumDisplaySettingsExA(deviceName, ENUM_CURRENT_SETTINGS, &dm, 0) == 0)
 		return;
 
-	if ( dm.dmPelsWidth == 0 || dm.dmPelsHeight == 0 )
+	if (dm.dmPelsWidth == 0 || dm.dmPelsHeight == 0)
 		return;
 
 	// Normally, we should check dm.dmFields for the following flags:
@@ -545,33 +496,33 @@ static void GLW_UpdateMonitorRect( const char* deviceName )
 }
 
 
-static qbool GLW_SetDisplaySettings( DEVMODE& dm )
+static qbool GLW_SetDisplaySettings(DEVMODE& dm)
 {
 	const char* deviceName = GLW_GetCurrentDisplayDeviceName();
-	const int ec = ChangeDisplaySettingsExA( deviceName, &dm, NULL, CDS_FULLSCREEN, NULL );
-	if ( ec == DISP_CHANGE_SUCCESSFUL )
-	{
+	const int ec = ChangeDisplaySettingsExA(deviceName, &dm, NULL, CDS_FULLSCREEN, NULL);
+	if (ec == DISP_CHANGE_SUCCESSFUL) {
 		glw_state.cdsDevMode = dm;
 		glw_state.cdsDevModeValid = qtrue;
-		GLW_UpdateMonitorRect( deviceName );
+		GLW_UpdateMonitorRect(deviceName);
 		return qtrue;
 	}
 
 	glw_state.cdsDevModeValid = qfalse;
 
-	ri.Printf( PRINT_ALL, "...CDS: %ix%i (C%i) failed: ", (int)dm.dmPelsWidth, (int)dm.dmPelsHeight, (int)dm.dmBitsPerPel );
+	ri.Printf(PRINT_ALL, "...CDS: %ix%i (C%i) failed: ", (int)dm.dmPelsWidth, (int)dm.dmPelsHeight, (int)dm.dmBitsPerPel);
 
-#define CDS_ERROR(x) case x: ri.Printf( PRINT_ALL, #x##"\n" ); break;
+#define CDS_ERROR(x) \
+	case x: ri.Printf(PRINT_ALL, #x##"\n"); break;
 	switch (ec) {
 		default:
-			ri.Printf( PRINT_ALL, "unknown error %d\n", ec );
+			ri.Printf(PRINT_ALL, "unknown error %d\n", ec);
 			break;
-		CDS_ERROR( DISP_CHANGE_RESTART );
-		CDS_ERROR( DISP_CHANGE_BADPARAM );
-		CDS_ERROR( DISP_CHANGE_BADFLAGS );
-		CDS_ERROR( DISP_CHANGE_FAILED );
-		CDS_ERROR( DISP_CHANGE_BADMODE );
-		CDS_ERROR( DISP_CHANGE_NOTUPDATED );
+			CDS_ERROR(DISP_CHANGE_RESTART);
+			CDS_ERROR(DISP_CHANGE_BADPARAM);
+			CDS_ERROR(DISP_CHANGE_BADFLAGS);
+			CDS_ERROR(DISP_CHANGE_FAILED);
+			CDS_ERROR(DISP_CHANGE_BADMODE);
+			CDS_ERROR(DISP_CHANGE_NOTUPDATED);
 	}
 #undef CDS_ERROR
 
@@ -579,20 +530,20 @@ static qbool GLW_SetDisplaySettings( DEVMODE& dm )
 }
 
 
-static void GLW_ResetDisplaySettings( qbool invalidate )
+static void GLW_ResetDisplaySettings(qbool invalidate)
 {
 	const char* deviceName = GLW_GetCurrentDisplayDeviceName();
-	ChangeDisplaySettingsEx( deviceName, NULL, NULL, 0, NULL );
-	GLW_UpdateMonitorRect( deviceName );
-	if ( invalidate )
+	ChangeDisplaySettingsEx(deviceName, NULL, NULL, 0, NULL);
+	GLW_UpdateMonitorRect(deviceName);
+	if (invalidate)
 		glw_state.cdsDevModeValid = qfalse;
 }
 
 
 void WIN_SetGameDisplaySettings()
 {
-	if ( glw_state.cdsDevModeValid )
-		GLW_SetDisplaySettings( glw_state.cdsDevMode );
+	if (glw_state.cdsDevModeValid)
+		GLW_SetDisplaySettings(glw_state.cdsDevMode);
 }
 
 
@@ -600,7 +551,7 @@ void WIN_SetDesktopDisplaySettings()
 {
 	// We don't invalidate glw_state.cdsDevModeValid so we can
 	// return to the previous mode later.
-	GLW_ResetDisplaySettings( qfalse );
+	GLW_ResetDisplaySettings(qfalse);
 }
 
 
@@ -612,19 +563,19 @@ static qbool GLW_SetMode()
 	const RECT& monRect = g_wv.monitorRects[g_wv.monitor];
 	const int desktopWidth = (int)(monRect.right - monRect.left);
 	const int desktopHeight = (int)(monRect.bottom - monRect.top);
-	R_ConfigureVideoMode( desktopWidth, desktopHeight );
+	R_ConfigureVideoMode(desktopWidth, desktopHeight);
 
 	DEVMODE dm;
-	ZeroMemory( &dm, sizeof( dm ) );
-	dm.dmSize = sizeof( dm );
+	ZeroMemory(&dm, sizeof(dm));
+	dm.dmSize = sizeof(dm);
 
 	if (glInfo.vidFullscreen != glw_state.cdsDevModeValid) {
 		if (glInfo.vidFullscreen) {
-			dm.dmPelsWidth  = glConfig.vidWidth;
+			dm.dmPelsWidth = glConfig.vidWidth;
 			dm.dmPelsHeight = glConfig.vidHeight;
-			dm.dmFields     = DM_PELSWIDTH | DM_PELSHEIGHT;
+			dm.dmFields = DM_PELSWIDTH | DM_PELSHEIGHT;
 
-			if ( r_displayRefresh->integer ) {
+			if (r_displayRefresh->integer) {
 				dm.dmDisplayFrequency = r_displayRefresh->integer;
 				dm.dmFields |= DM_DISPLAYFREQUENCY;
 			}
@@ -636,18 +587,16 @@ static qbool GLW_SetMode()
 			dm.dmPosition.y = monRect.top;
 			dm.dmFields |= DM_POSITION;
 
-			glInfo.vidFullscreen = GLW_SetDisplaySettings( dm );
-		}
-		else
-		{
-			GLW_ResetDisplaySettings( qtrue );
+			glInfo.vidFullscreen = GLW_SetDisplaySettings(dm);
+		} else {
+			GLW_ResetDisplaySettings(qtrue);
 		}
 	}
 
 	if (!GLW_CreateWindow())
 		return qfalse;
 
-	if (EnumDisplaySettingsA( GLW_GetCurrentDisplayDeviceName(), ENUM_CURRENT_SETTINGS, &dm ))
+	if (EnumDisplaySettingsA(GLW_GetCurrentDisplayDeviceName(), ENUM_CURRENT_SETTINGS, &dm))
 		glInfo.displayFrequency = dm.dmDisplayFrequency;
 
 	return qtrue;
@@ -656,8 +605,8 @@ static qbool GLW_SetMode()
 
 static qbool WIN_LoadGL()
 {
-	glw_state.hinstOpenGL = LoadLibraryA( "opengl32.dll" );
-	if ( glw_state.hinstOpenGL == NULL )
+	glw_state.hinstOpenGL = LoadLibraryA("opengl32.dll");
+	if (glw_state.hinstOpenGL == NULL)
 		return qfalse;
 
 	return qtrue;
@@ -666,8 +615,8 @@ static qbool WIN_LoadGL()
 
 static void WIN_UnloadGL()
 {
-	if ( glw_state.hinstOpenGL ) {
-		FreeLibrary( glw_state.hinstOpenGL );
+	if (glw_state.hinstOpenGL) {
+		FreeLibrary(glw_state.hinstOpenGL);
 		glw_state.hinstOpenGL = NULL;
 	}
 }
@@ -677,9 +626,9 @@ static qbool GLW_LoadOpenGL()
 {
 	// only real GL implementations are acceptable
 	// load the driver and bind our function pointers to it
-	if ( WIN_LoadGL() ) {
+	if (WIN_LoadGL()) {
 		// create the window and set up the context
-		if ( GLW_SetMode() ) {
+		if (GLW_SetMode()) {
 			return qtrue;
 		}
 	}
@@ -692,37 +641,37 @@ static qbool GLW_LoadOpenGL()
 
 void Sys_V_EndFrame()
 {
-	if ( !WIN_UsingOpenGL() )
+	if (!WIN_UsingOpenGL())
 		return;
 
-	if ( r_swapInterval->modified ) {
+	if (r_swapInterval->modified) {
 		r_swapInterval->modified = qfalse;
 
-		if ( WGLEW_EXT_swap_control ) {
+		if (WGLEW_EXT_swap_control) {
 			int swapInterval = r_swapInterval->integer;
-			if ( swapInterval < 0 && !WGLEW_EXT_swap_control_tear )
+			if (swapInterval < 0 && !WGLEW_EXT_swap_control_tear)
 				swapInterval = -swapInterval;
-			wglSwapIntervalEXT( swapInterval );
+			wglSwapIntervalEXT(swapInterval);
 		}
 	}
 
-	SwapBuffers( glw_state.hDC );
+	SwapBuffers(glw_state.hDC);
 }
 
 
-void Sys_V_Init( galId_t type )
+void Sys_V_Init(galId_t type)
 {
 	win_galId = type;
 
-	if ( WIN_UsingOpenGL() ) {
-		ri.Printf( PRINT_DEVELOPER, "Initializing OpenGL subsystem\n" );
+	if (WIN_UsingOpenGL()) {
+		ri.Printf(PRINT_DEVELOPER, "Initializing OpenGL subsystem\n");
 
 		// load appropriate DLL and initialize subsystem
-		if ( !GLW_LoadOpenGL() )
-			ri.Error( ERR_FATAL, "Sys_V_Init - could not load OpenGL subsystem\n" );
+		if (!GLW_LoadOpenGL())
+			ri.Error(ERR_FATAL, "Sys_V_Init - could not load OpenGL subsystem\n");
 	} else {
-		if ( !GLW_SetMode() )
-			ri.Error( ERR_FATAL, "Sys_V_Init - could not load Direct3D subsystem\n" );
+		if (!GLW_SetMode())
+			ri.Error(ERR_FATAL, "Sys_V_Init - could not load Direct3D subsystem\n");
 	}
 }
 
@@ -732,25 +681,23 @@ static void Sys_ShutdownOpenGL()
 	const char* success[] = { "failed", "success" };
 	int retVal;
 
-	ri.Printf( PRINT_DEVELOPER, "Shutting down OpenGL subsystem\n" );
+	ri.Printf(PRINT_DEVELOPER, "Shutting down OpenGL subsystem\n");
 
-	retVal = wglMakeCurrent( NULL, NULL ) != 0;
-	ri.Printf( PRINT_DEVELOPER, "...wglMakeCurrent( NULL, NULL ): %s\n", success[retVal] );
+	retVal = wglMakeCurrent(NULL, NULL) != 0;
+	ri.Printf(PRINT_DEVELOPER, "...wglMakeCurrent( NULL, NULL ): %s\n", success[retVal]);
 
 	// delete HGLRC
-	if ( glw_state.hGLRC )
-	{
-		retVal = wglDeleteContext( glw_state.hGLRC ) != 0;
-		ri.Printf( PRINT_DEVELOPER, "...deleting GL context: %s\n", success[retVal] );
+	if (glw_state.hGLRC) {
+		retVal = wglDeleteContext(glw_state.hGLRC) != 0;
+		ri.Printf(PRINT_DEVELOPER, "...deleting GL context: %s\n", success[retVal]);
 		glw_state.hGLRC = NULL;
 	}
 
 	// release DC
-	if ( glw_state.hDC )
-	{
-		retVal = ReleaseDC( g_wv.hWnd, glw_state.hDC ) != 0;
-		ri.Printf( PRINT_DEVELOPER, "...releasing DC: %s\n", success[retVal] );
-		glw_state.hDC   = NULL;
+	if (glw_state.hDC) {
+		retVal = ReleaseDC(g_wv.hWnd, glw_state.hDC) != 0;
+		ri.Printf(PRINT_DEVELOPER, "...releasing DC: %s\n", success[retVal]);
+		glw_state.hDC = NULL;
 	}
 }
 
@@ -759,28 +706,26 @@ void Sys_V_Shutdown()
 {
 	Sys_ShutdownInput();
 
-	if ( WIN_UsingOpenGL() )
+	if (WIN_UsingOpenGL())
 		Sys_ShutdownOpenGL();
 
 	// destroy window
-	if ( g_wv.hWnd )
-	{
-		ri.Printf( PRINT_DEVELOPER, "...destroying window\n" );
-		ShowWindow( g_wv.hWnd, SW_HIDE );
-		DestroyWindow( g_wv.hWnd );
+	if (g_wv.hWnd) {
+		ri.Printf(PRINT_DEVELOPER, "...destroying window\n");
+		ShowWindow(g_wv.hWnd, SW_HIDE);
+		DestroyWindow(g_wv.hWnd);
 		g_wv.hWnd = NULL;
 		glw_state.pixelFormatSet = qfalse;
 	}
 
 	// reset display settings
-	if ( glw_state.cdsDevModeValid )
-	{
-		ri.Printf( PRINT_DEVELOPER, "...resetting display\n" );
-		GLW_ResetDisplaySettings( qtrue );
+	if (glw_state.cdsDevModeValid) {
+		ri.Printf(PRINT_DEVELOPER, "...resetting display\n");
+		GLW_ResetDisplaySettings(qtrue);
 	}
 
 	// shutdown OpenGL subsystem
-	if ( WIN_UsingOpenGL() )
+	if (WIN_UsingOpenGL())
 		WIN_UnloadGL();
 }
 
@@ -788,15 +733,14 @@ void Sys_V_Shutdown()
 qbool Sys_V_IsVSynced()
 {
 	// with Direct3D, our swap interval is (normally) respected
-	if ( !WIN_UsingOpenGL() )
+	if (!WIN_UsingOpenGL())
 		return r_swapInterval->integer != 0;
 
 	// with OpenGL, our request is often ignored (driver control panel overrides)
 	// unfortunately, the value returned here might not be what we want either...
-	if ( WGLEW_EXT_swap_control )
-	{
+	if (WGLEW_EXT_swap_control) {
 		const int interval = wglGetSwapIntervalEXT();
-		if ( WGLEW_EXT_swap_control_tear )
+		if (WGLEW_EXT_swap_control_tear)
 			return interval != 0;
 		else
 			return interval > 0;
@@ -808,18 +752,16 @@ qbool Sys_V_IsVSynced()
 
 qbool Sys_IsMinimized()
 {
-	return ( g_wv.hWnd != NULL ) && !!IsIconic( g_wv.hWnd );
+	return (g_wv.hWnd != NULL) && !!IsIconic(g_wv.hWnd);
 }
 
 
-void WIN_UpdateResolution( int width, int height )
+void WIN_UpdateResolution(int width, int height)
 {
 	glInfo.winWidth = width;
 	glInfo.winHeight = height;
-	if ( r_fullscreen->integer == 0 )
-	{
+	if (r_fullscreen->integer == 0) {
 		glConfig.vidWidth = width;
 		glConfig.vidHeight = height;
 	}
 }
-

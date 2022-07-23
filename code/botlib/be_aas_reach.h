@@ -35,7 +35,7 @@ void AAS_InitReachability(void);
 //continue calculating the reachabilities
 int AAS_ContinueInitReachability(float time);
 //
-int AAS_BestReachableLinkArea(aas_link_t *areas);
+int AAS_BestReachableLinkArea(aas_link_t* areas);
 #endif //AASINTERN
 
 //returns qtrue if the are has reachabilities to other areas

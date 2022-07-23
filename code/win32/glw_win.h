@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 #ifndef _WIN32
-#  error You should not be including this file on this platform
+#error You should not be including this file on this platform
 #endif
 
 #ifndef __GLW_WIN_H__
@@ -34,13 +34,13 @@ typedef struct
 {
 	// The main window's rendering context is the only one we can ever keep around
 	// because the window class has the CS_OWNDC style set (for OpenGL).
-	HDC			hDC;
-	HGLRC		hGLRC;
-	HINSTANCE	hinstOpenGL;
-	qbool		cdsDevModeValid;
-	DEVMODE		cdsDevMode;			// Custom device mode for full-screen with r_mode 1.
-	qbool		pixelFormatSet;
-	int			nPendingPF;
+	HDC hDC;
+	HGLRC hGLRC;
+	HINSTANCE hinstOpenGL;
+	qbool cdsDevModeValid;
+	DEVMODE cdsDevMode; // Custom device mode for full-screen with r_mode 1.
+	qbool pixelFormatSet;
+	int nPendingPF;
 } glwstate_t;
 
 extern glwstate_t glw_state;

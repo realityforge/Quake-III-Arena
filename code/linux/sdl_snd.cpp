@@ -43,7 +43,7 @@ struct audio_t {
 static audio_t audio;
 
 
-static void FillAudioBufferCallback( void* userData, Uint8* sdlBuffer, int sdlBytesToWrite )
+static void FillAudioBufferCallback(void* userData, Uint8* sdlBuffer, int sdlBytesToWrite)
 {
 	if (sdlBuffer == NULL || sdlBytesToWrite == 0)
 		return;
@@ -177,7 +177,7 @@ void Sys_S_BeginPainting()
 }
 
 
-void sdl_MuteAudio( qbool mute )
+void sdl_MuteAudio(qbool mute)
 {
 	if (!audio.valid)
 		return;

@@ -24,8 +24,7 @@ along with Challenge Quake 3. If not, see <https://www.gnu.org/licenses/>.
 #include "qcommon.h"
 
 
-static const uint16_t huff_decodeTable[2048] =
-{
+static const uint16_t huff_decodeTable[2048] = {
 	2512, 2182, 512, 2763, 1859, 2808, 512, 2360, 1918, 1988, 512, 1803, 2158, 2358, 512, 2180,
 	1798, 2053, 512, 1804, 2603, 1288, 512, 2166, 2285, 2167, 512, 1281, 1640, 2767, 512, 1664,
 	1731, 2116, 512, 2788, 1791, 1808, 512, 1840, 2153, 1921, 512, 2708, 2723, 1549, 512, 2046,
@@ -156,8 +155,7 @@ static const uint16_t huff_decodeTable[2048] =
 	2322, 2504, 512, 2581, 2350, 1288, 512, 1568, 2323, 2597, 512, 1281, 1858, 1923, 512, 1543
 };
 
-static const uint16_t huff_encodeTable[256] =
-{
+static const uint16_t huff_encodeTable[256] = {
 	34, 437, 1159, 1735, 2584, 280, 263, 1014, 341, 839, 1687, 183, 311, 726, 920, 2761,
 	599, 1417, 7945, 8073, 7642, 16186, 8890, 12858, 3913, 6362, 2746, 13882, 7866, 1080, 1273, 3400,
 	886, 3386, 1097, 11482, 15450, 16282, 12506, 15578, 2377, 6858, 826, 330, 10010, 12042, 8009, 1928,
@@ -177,13 +175,13 @@ static const uint16_t huff_encodeTable[256] =
 };
 
 
-int	StatHuff_ReadBit( byte* buffer, int bitIndex )
+int StatHuff_ReadBit(byte* buffer, int bitIndex)
 {
 	return (buffer[(bitIndex >> 3)] >> (bitIndex & 7)) & 0x1;
 }
 
 
-void StatHuff_WriteBit( int bit, byte* buffer, int bitIndex )
+void StatHuff_WriteBit(int bit, byte* buffer, int bitIndex)
 {
 	// is this the first bit of a new byte?
 	if ((bitIndex & 7) == 0) {
@@ -193,7 +191,7 @@ void StatHuff_WriteBit( int bit, byte* buffer, int bitIndex )
 }
 
 
-int StatHuff_ReadSymbol( int* symbol, byte* buffer, int bitIndex )
+int StatHuff_ReadSymbol(int* symbol, byte* buffer, int bitIndex)
 {
 	const uint16_t code = ((*(const uint32_t*)(buffer + (bitIndex >> 3))) >> ((uint32_t)bitIndex & 7)) & 0x7FF;
 	const uint16_t entry = huff_decodeTable[code];
@@ -204,7 +202,7 @@ int StatHuff_ReadSymbol( int* symbol, byte* buffer, int bitIndex )
 }
 
 
-int StatHuff_WriteSymbol( int symbol, byte* buffer, int bitIndex )
+int StatHuff_WriteSymbol(int symbol, byte* buffer, int bitIndex)
 {
 	const uint16_t entry = huff_encodeTable[symbol];
 	const int bitCount = (int)(entry & 15);
@@ -219,4 +217,3 @@ int StatHuff_WriteSymbol( int symbol, byte* buffer, int bitIndex )
 
 	return bitCount;
 }
-

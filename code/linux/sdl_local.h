@@ -26,17 +26,17 @@ along with Challenge Quake 3. If not, see <https://www.gnu.org/licenses/>.
 
 
 struct monitor_t {
-	SDL_Rect		rect;
-	int				sdlIndex;
+	SDL_Rect rect;
+	int sdlIndex;
 };
 
 struct glImp_t {
-	SDL_Window*		window;
-	SDL_GLContext	glContext;
+	SDL_Window* window;
+	SDL_GLContext glContext;
 
-	monitor_t		monitors[MAX_MONITOR_COUNT];
-	int				monitorCount;
-	int				monitor; // indexes monitors
+	monitor_t monitors[MAX_MONITOR_COUNT];
+	int monitorCount;
+	int monitor; // indexes monitors
 };
 
 

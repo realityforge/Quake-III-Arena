@@ -30,7 +30,7 @@ qboolean SNDDMA_Init(void)
 	return qfalse;
 }
 
-int	SNDDMA_GetDMAPos(void)
+int SNDDMA_GetDMAPos(void)
 {
 	return 0;
 }
@@ -39,7 +39,7 @@ void SNDDMA_Shutdown(void)
 {
 }
 
-void SNDDMA_BeginPainting (void)
+void SNDDMA_BeginPainting(void)
 {
 }
 
@@ -48,13 +48,15 @@ void SNDDMA_Submit(void)
 }
 
 // bk001119 - added boolean flag, match client/snd_public.h
-sfxHandle_t S_RegisterSound( const char *name, qboolean compressed ) 
+sfxHandle_t S_RegisterSound(const char* name, qboolean compressed)
 {
 	return 0;
 }
 
-void S_StartLocalSound( sfxHandle_t sfxHandle, int channelNum ) {
+void S_StartLocalSound(sfxHandle_t sfxHandle, int channelNum)
+{
 }
 
-void S_ClearSoundBuffer( void ) {
+void S_ClearSoundBuffer(void)
+{
 }

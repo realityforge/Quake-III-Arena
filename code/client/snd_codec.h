@@ -27,8 +27,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../qcommon/q_shared.h"
 #include "../qcommon/qcommon.h"
 
-struct snd_info_t
-{
+struct snd_info_t {
 	int rate;
 	int width;
 	int channels;
@@ -46,18 +45,17 @@ typedef struct
 	fileHandle_t file;
 	int length;
 	int pos;
-	void *ptr;
+	void* ptr;
 } snd_stream_t;
 
 // Codec functions
-typedef byte* (*CODEC_LOAD)(const char *filename, snd_info_t *info);
-typedef snd_stream_t* (*CODEC_OPEN)(const char *filename);
-typedef int (*CODEC_READ)(snd_stream_t *stream, int bytes, void *buffer);
-typedef void (*CODEC_CLOSE)(snd_stream_t *stream);
+typedef byte* (*CODEC_LOAD)(const char* filename, snd_info_t* info);
+typedef snd_stream_t* (*CODEC_OPEN)(const char* filename);
+typedef int (*CODEC_READ)(snd_stream_t* stream, int bytes, void* buffer);
+typedef void (*CODEC_CLOSE)(snd_stream_t* stream);
 
 // Codec data structure
-struct snd_codec_t
-{
+struct snd_codec_t {
 	const char* ext;
 	CODEC_LOAD load;
 	CODEC_OPEN open;
@@ -69,15 +67,15 @@ struct snd_codec_t
 // Codec management
 void S_CodecInit();
 void S_CodecShutdown();
-void S_CodecRegister( snd_codec_t* codec );
-byte* S_CodecLoad( const char* filename, snd_info_t* info );
-snd_stream_t* S_CodecOpenStream( const char* filename );
-void S_CodecCloseStream(snd_stream_t *stream);
-int S_CodecReadStream(snd_stream_t *stream, int bytes, void *buffer);
+void S_CodecRegister(snd_codec_t* codec);
+byte* S_CodecLoad(const char* filename, snd_info_t* info);
+snd_stream_t* S_CodecOpenStream(const char* filename);
+void S_CodecCloseStream(snd_stream_t* stream);
+int S_CodecReadStream(snd_stream_t* stream, int bytes, void* buffer);
 
 // Util functions (used by codecs)
-snd_stream_t* S_CodecUtilOpen( const char* filename, const snd_codec_t* codec );
-void S_CodecUtilClose( snd_stream_t* stream );
+snd_stream_t* S_CodecUtilOpen(const char* filename, const snd_codec_t* codec);
+void S_CodecUtilClose(snd_stream_t* stream);
 
 extern snd_codec_t wav_codec;
 

@@ -27,15 +27,15 @@ along with Challenge Quake 3. If not, see <https://www.gnu.org/licenses/>.
 
 
 typedef struct {
-	char			gitHeadHash[24]; // SHA-1 -> 160 bits -> 20 hex chars
-	vm_t*			vm;
-	unsigned int	crc32;
+	char gitHeadHash[24]; // SHA-1 -> 160 bits -> 20 hex chars
+	vm_t* vm;
+	unsigned int crc32;
 } vmCrash_t;
 
 typedef struct {
-	vmCrash_t	vm[VM_COUNT];
-	char		modName[64];
-	char		modVersion[64];
+	vmCrash_t vm[VM_COUNT];
+	char modName[64];
+	char modVersion[64];
 } crash_t;
 
 
@@ -139,7 +139,7 @@ static void PrintQVMInfo(vmIndex_t vmIndex)
 			callStack[0] = '\0';
 			for (int i = 0; i < d; i++) {
 				Q_strcat(callStack, sizeof(callStack), Q_itohex(vmp->callStack[i], qtrue, qtrue));
-				if (i - 1 < d) 
+				if (i - 1 < d)
 					Q_strcat(callStack, sizeof(callStack), " ");
 			}
 			JSONW_StringValue("call_stack", callStack);
@@ -161,7 +161,9 @@ static qbool IsAnyVMLoaded()
 
 static unsigned int CRC32_HashFile(const char* filePath)
 {
-	enum { BUFFER_SIZE = 16 << 10 }; // 16 KB
+	enum {
+		BUFFER_SIZE = 16 << 10
+	}; // 16 KB
 	static byte buffer[BUFFER_SIZE];
 
 	struct stat st;
@@ -179,7 +181,7 @@ static unsigned int CRC32_HashFile(const char* filePath)
 	unsigned int crc32 = 0;
 	CRC32_Begin(&crc32);
 
-	for(unsigned int i = 0; i < fullBlocks; ++i) {
+	for (unsigned int i = 0; i < fullBlocks; ++i) {
 		if (fread(buffer, BUFFER_SIZE, 1, file) != 1) {
 			fclose(file);
 			return 0;
@@ -187,7 +189,7 @@ static unsigned int CRC32_HashFile(const char* filePath)
 		CRC32_ProcessBlock(&crc32, buffer, BUFFER_SIZE);
 	}
 
-	if(lastBlockSize > 0) {
+	if (lastBlockSize > 0) {
 		if (fread(buffer, lastBlockSize, 1, file) != 1) {
 			fclose(file);
 			return 0;
@@ -279,9 +281,9 @@ static void PrintVMStackTrace(int fd, vmIndex_t vmIndex)
 	if (d > 0) {
 		for (int i = 0; i < d; i++) {
 			Print(fd, Q_itohex(vm->callStack[i], qtrue, qtrue));
-			if (i - 1 < d) 
+			if (i - 1 < d)
 				Print(fd, " ");
-		}		
+		}
 	}
 	Print(fd, "\r\n");
 }
@@ -293,7 +295,7 @@ void Crash_PrintVMStackTracesASS(int fd)
 		Print(fd, crash.modName);
 		Print(fd, " ");
 		Print(fd, crash.modVersion);
-		Print(fd, "\r\n");	
+		Print(fd, "\r\n");
 	}
 
 	for (int i = 0; i < VM_COUNT; i++) {

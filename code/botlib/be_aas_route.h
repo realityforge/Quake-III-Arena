@@ -58,8 +58,6 @@ int AAS_EnableRoutingArea(int areanum, int enable);
 //returns the travel time from the area to the goal area using the given travel flags
 int AAS_AreaTravelTimeToGoalArea(int areanum, const vec3_t origin, int goalareanum, int travelflags);
 //predict a route up to a stop event
-int AAS_PredictRoute(struct aas_predictroute_s *route, int areanum, const vec3_t origin,
-							int goalareanum, int travelflags, int maxareas, int maxtime,
-							int stopevent, int stopcontents, int stoptfl, int stopareanum);
-
-
+int AAS_PredictRoute(struct aas_predictroute_s* route, int areanum, const vec3_t origin,
+                     int goalareanum, int travelflags, int maxareas, int maxtime,
+                     int stopevent, int stopcontents, int stoptfl, int stopareanum);
