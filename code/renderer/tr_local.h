@@ -1266,7 +1266,6 @@ void RE_AddLightToScene(const vec3_t org, float intensity, float r, float g, flo
 void RE_AddAdditiveLightToScene(const vec3_t org, float intensity, float r, float g, float b);
 void RE_RenderScene(const refdef_t* fd);
 
-void R_MakeAnimModel(model_t* model);
 void R_AddAnimSurfaces(void);
 void RB_SurfaceAnim(md4Surface_t* surfType);
 
