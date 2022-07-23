@@ -160,8 +160,6 @@ void RE_AddPolyToScene(qhandle_t hShader, int numVerts, const polyVert_t* verts,
     }
 }
 
-//=================================================================================
-
 void RE_AddRefEntityToScene(const refEntity_t* ent)
 {
     if (!tr.registered) {
