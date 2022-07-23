@@ -409,7 +409,9 @@ void RB_BeginDrawingView(void)
     }
 }
 
+#ifdef __MACOS__
 #define MAC_EVENT_PUMP_MSEC 5
+#endif
 
 void RB_RenderDrawSurfList(drawSurf_t* drawSurfs, int numDrawSurfs)
 {
