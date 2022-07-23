@@ -50,6 +50,15 @@ find code \
     ! -path 'code/tools/*' -and \
     ! -path 'code/renderer/dxgi/*' |
     xargs clang-format -i
+# Run formatter again because otherwise DOS eol has confused formatter
+find code \
+    \( -name '*.h' -or -name '*.c' -or -name '*.m' -or -name '*.hpp' -or -name '*.cpp' -or -name '*.H' -or -name '*.HPP' -or -name '*.CPP' -or -name '*.java' \) \
+    ! -path 'code/glew/*' -and \
+    ! -path 'code/libjpeg-turbo/*' -and \
+    ! -path 'code/libunwind/*' -and \
+    ! -path 'code/tools/*' -and \
+    ! -path 'code/renderer/dxgi/*' |
+    xargs clang-format -i
 git add code/
 git commit -m "Format the source code with clang-format to simplify cross-branch comparisons"
 rm .clang-format
