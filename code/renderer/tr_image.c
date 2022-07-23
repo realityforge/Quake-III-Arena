@@ -45,9 +45,6 @@ int gl_filter_max = GL_LINEAR;
 #define FILE_HASH_SIZE 1024
 static image_t* hashTable[FILE_HASH_SIZE];
 
-/*
-** R_GammaCorrect
-*/
 void R_GammaCorrect(uint8_t* buffer, int bufSize)
 {
     int i;

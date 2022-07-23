@@ -768,9 +768,6 @@ static void ComputeTexCoords(shaderStage_t* pStage)
     }
 }
 
-/*
-** RB_IterateStagesGeneric
-*/
 static void RB_IterateStagesGeneric(shaderCommands_t* input)
 {
     int stage;
@@ -816,9 +813,6 @@ static void RB_IterateStagesGeneric(shaderCommands_t* input)
     }
 }
 
-/*
-** RB_StageIteratorGeneric
-*/
 void RB_StageIteratorGeneric(void)
 {
     shaderCommands_t* input;
@@ -891,9 +885,6 @@ void RB_StageIteratorGeneric(void)
     }
 }
 
-/*
-** RB_StageIteratorVertexLitTexture
-*/
 void RB_StageIteratorVertexLitTexture(void)
 {
     shaderCommands_t* input;
@@ -1006,9 +997,6 @@ void RB_StageIteratorLightmappedMultitexture(void)
     }
 }
 
-/*
-** RB_EndSurface
-*/
 void RB_EndSurface(void)
 {
     shaderCommands_t* input;

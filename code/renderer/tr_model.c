@@ -28,9 +28,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 static bool R_LoadMD3(model_t* mod, int lod, void* buffer, const char* name);
 static bool R_LoadMD4(model_t* mod, void* buffer, const char* name);
 
-/*
-** R_GetModelByHandle
-*/
 model_t* R_GetModelByHandle(qhandle_t index)
 {
     model_t* mod;
@@ -45,11 +42,6 @@ model_t* R_GetModelByHandle(qhandle_t index)
     return mod;
 }
 
-//===============================================================================
-
-/*
-** R_AllocModel
-*/
 model_t* R_AllocModel(void)
 {
     model_t* mod;
@@ -503,11 +495,6 @@ static bool R_LoadMD4(model_t* mod, void* buffer, const char* mod_name)
     return true;
 }
 
-//=============================================================================
-
-/*
-** RE_BeginRegistration
-*/
 void RE_BeginRegistration(glconfig_t* glconfigOut)
 {
 

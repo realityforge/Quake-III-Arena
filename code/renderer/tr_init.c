@@ -250,9 +250,6 @@ void GL_CheckErrors(void)
     ri.Error(ERR_FATAL, "GL_CheckErrors: %s", s);
 }
 
-/*
-** R_GetModeInfo
-*/
 typedef struct vidmode_s {
     const char* description;
     int width, height;
@@ -585,11 +582,6 @@ static void R_ScreenShotJPEG_f()
     }
 }
 
-//============================================================================
-
-/*
-** GL_SetDefaultState
-*/
 void GL_SetDefaultState(void)
 {
     qglClearDepth(1.0f);

@@ -76,9 +76,6 @@ static float EvalWaveFormClamped(const waveForm_t* wf)
     return glow;
 }
 
-/*
-** RB_CalcStretchTexCoords
-*/
 void RB_CalcStretchTexCoords(const waveForm_t* wf, float* st)
 {
     float p;
@@ -544,9 +541,6 @@ void RB_DeformTessGeometry(void)
     }
 }
 
-/*
-** RB_CalcColorFromEntity
-*/
 void RB_CalcColorFromEntity(unsigned char* dstColors)
 {
     int i;
@@ -563,9 +557,6 @@ void RB_CalcColorFromEntity(unsigned char* dstColors)
     }
 }
 
-/*
-** RB_CalcColorFromOneMinusEntity
-*/
 void RB_CalcColorFromOneMinusEntity(unsigned char* dstColors)
 {
     int i;
@@ -588,9 +579,6 @@ void RB_CalcColorFromOneMinusEntity(unsigned char* dstColors)
     }
 }
 
-/*
-** RB_CalcAlphaFromEntity
-*/
 void RB_CalcAlphaFromEntity(unsigned char* dstColors)
 {
     int i;
@@ -605,9 +593,6 @@ void RB_CalcAlphaFromEntity(unsigned char* dstColors)
     }
 }
 
-/*
-** RB_CalcAlphaFromOneMinusEntity
-*/
 void RB_CalcAlphaFromOneMinusEntity(unsigned char* dstColors)
 {
     int i;
@@ -622,9 +607,6 @@ void RB_CalcAlphaFromOneMinusEntity(unsigned char* dstColors)
     }
 }
 
-/*
-** RB_CalcWaveColor
-*/
 void RB_CalcWaveColor(const waveForm_t* wf, unsigned char* dstColors)
 {
     int i;
@@ -655,9 +637,6 @@ void RB_CalcWaveColor(const waveForm_t* wf, unsigned char* dstColors)
     }
 }
 
-/*
-** RB_CalcWaveAlpha
-*/
 void RB_CalcWaveAlpha(const waveForm_t* wf, unsigned char* dstColors)
 {
     int i;
@@ -673,9 +652,6 @@ void RB_CalcWaveAlpha(const waveForm_t* wf, unsigned char* dstColors)
     }
 }
 
-/*
-** RB_CalcModulateColorsByFog
-*/
 void RB_CalcModulateColorsByFog(unsigned char* colors)
 {
     int i;
@@ -694,9 +670,6 @@ void RB_CalcModulateColorsByFog(unsigned char* colors)
     }
 }
 
-/*
-** RB_CalcModulateAlphasByFog
-*/
 void RB_CalcModulateAlphasByFog(unsigned char* colors)
 {
     int i;
@@ -713,9 +686,6 @@ void RB_CalcModulateAlphasByFog(unsigned char* colors)
     }
 }
 
-/*
-** RB_CalcModulateRGBAsByFog
-*/
 void RB_CalcModulateRGBAsByFog(unsigned char* colors)
 {
     int i;
@@ -820,9 +790,6 @@ void RB_CalcFogTexCoords(float* st)
     }
 }
 
-/*
-** RB_CalcEnvironmentTexCoords
-*/
 void RB_CalcEnvironmentTexCoords(float* st)
 {
     int i;
@@ -848,9 +815,6 @@ void RB_CalcEnvironmentTexCoords(float* st)
     }
 }
 
-/*
-** RB_CalcTurbulentTexCoords
-*/
 void RB_CalcTurbulentTexCoords(const waveForm_t* wf, float* st)
 {
     int i;
@@ -867,9 +831,6 @@ void RB_CalcTurbulentTexCoords(const waveForm_t* wf, float* st)
     }
 }
 
-/*
-** RB_CalcScaleTexCoords
-*/
 void RB_CalcScaleTexCoords(const float scale[2], float* st)
 {
     int i;
@@ -880,9 +841,6 @@ void RB_CalcScaleTexCoords(const float scale[2], float* st)
     }
 }
 
-/*
-** RB_CalcScrollTexCoords
-*/
 void RB_CalcScrollTexCoords(const float scrollSpeed[2], float* st)
 {
     int i;
@@ -903,9 +861,6 @@ void RB_CalcScrollTexCoords(const float scrollSpeed[2], float* st)
     }
 }
 
-/*
-** RB_CalcTransformTexCoords
-*/
 void RB_CalcTransformTexCoords(const texModInfo_t* tmi, float* st)
 {
     int i;
@@ -919,9 +874,6 @@ void RB_CalcTransformTexCoords(const texModInfo_t* tmi, float* st)
     }
 }
 
-/*
-** RB_CalcRotateTexCoords
-*/
 void RB_CalcRotateTexCoords(float degsPerSecond, float* st)
 {
     float timeScale = tess.shaderTime;

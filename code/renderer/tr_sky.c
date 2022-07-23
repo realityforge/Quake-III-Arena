@@ -498,9 +498,6 @@ static void FillCloudBox(int stage)
     }
 }
 
-/*
-** R_BuildCloudData
-*/
 void R_BuildCloudData(shaderCommands_t* input)
 {
     assert(shader->isSky);
