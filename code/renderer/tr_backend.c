@@ -336,7 +336,7 @@ Any mirrored or portaled views have already been drawn, so prepare
 to actually render the visible surfaces for this view
 =================
 */
-void RB_BeginDrawingView(void)
+static void RB_BeginDrawingView()
 {
     int clearBits = 0;
 
@@ -413,7 +413,7 @@ void RB_BeginDrawingView(void)
 #define MAC_EVENT_PUMP_MSEC 5
 #endif
 
-void RB_RenderDrawSurfList(drawSurf_t* drawSurfs, int numDrawSurfs)
+static void RB_RenderDrawSurfList(drawSurf_t* drawSurfs, int numDrawSurfs)
 {
     shader_t *shader, *oldShader;
     int fogNum, oldFogNum;
@@ -574,7 +574,7 @@ RB_SetGL2D
 
 ================
 */
-void RB_SetGL2D(void)
+static void RB_SetGL2D(void)
 {
     backEnd.projection2D = true;
 
@@ -696,7 +696,7 @@ void RE_UploadCinematic(int cols, int rows, const uint8_t* data, int client, boo
     }
 }
 
-const void* RB_SetColor(const void* data)
+static const void* RB_SetColor(const void* data)
 {
     const setColorCommand_t* cmd;
 
@@ -710,7 +710,7 @@ const void* RB_SetColor(const void* data)
     return (const void*)(cmd + 1);
 }
 
-const void* RB_StretchPic(const void* data)
+static const void* RB_StretchPic(const void* data)
 {
     const stretchPicCommand_t* cmd;
     shader_t* shader;
@@ -778,7 +778,7 @@ const void* RB_StretchPic(const void* data)
     return (const void*)(cmd + 1);
 }
 
-const void* RB_DrawSurfs(const void* data)
+static const void* RB_DrawSurfs(const void* data)
 {
     const drawSurfsCommand_t* cmd;
 
@@ -797,7 +797,7 @@ const void* RB_DrawSurfs(const void* data)
     return (const void*)(cmd + 1);
 }
 
-const void* RB_DrawBuffer(const void* data)
+static const void* RB_DrawBuffer(const void* data)
 {
     const drawBufferCommand_t* cmd;
 
@@ -874,7 +874,7 @@ void RB_ShowImages(void)
     ri.Printf(PRINT_ALL, "%i msec to draw all images\n", end - start);
 }
 
-const void* RB_SwapBuffers(const void* data)
+static const void* RB_SwapBuffers(const void* data)
 {
     const swapBuffersCommand_t* cmd;
 
