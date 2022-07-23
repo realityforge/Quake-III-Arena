@@ -13,10 +13,10 @@
 # limitations under the License.
 
 #
-# A bash script that sets up a remote to the quake3e repository and a branch
-# named "upstream/quake3e" that pulls from "quake3e/master" and pushes to
-# the origin repository. A branch named "upstream/quake3e_formatted" is also
-# setup that is the code from the quake3e repository formatted by the current
+# A bash script that sets up a remote to the quake3e_pbr repository and a branch
+# named "upstream/quake3e_pbr" that pulls from "quake3e_pbr/master" and pushes to
+# the origin repository. A branch named "upstream/quake3e_pbr_formatted" is also
+# setup that is the code from the quake3e_pbr repository formatted by the current
 # projects code style (to make code comparisons easier)
 #
 
