@@ -887,8 +887,7 @@ void RB_StageIteratorGeneric(void)
 
 void RB_StageIteratorVertexLitTexture(void)
 {
-    shaderCommands_t* input;
-    input = &tess;
+    const shaderCommands_t* input = &tess;
 
     // compute colors
     RB_CalcDiffuseColor((unsigned char*)tess.svars.colors);
