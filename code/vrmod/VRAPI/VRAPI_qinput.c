@@ -10,48 +10,50 @@
 
 static qboolean controllerInit = qfalse;
 
-static void VRAPI_Get_Position_and_delta(position_t *position, const ovrVector3f positionHmd )
+static void VRAPI_Get_Position_and_delta(position_t* position, const ovrVector3f positionHmd)
 {
-    VectorSet(position->actual, positionHmd.x, positionHmd.y , positionHmd.z);
+    VectorSet(position->actual, positionHmd.x, positionHmd.y, positionHmd.z);
     VectorSubtract(position->last, position->actual, position->delta);
     VectorCopy(position->actual, position->last);
 }
 
-static void VRAPI_get_Orientation_and_delta( angles_t *angles, ovrQuatf or )
+static void VRAPI_get_Orientation_and_delta(angles_t* angles, ovrQuatf or)
 {
-    QuatToAngles((float *) &or, angles->actual );
+    QuatToAngles((float*)& or, angles->actual);
     VectorSubtract(angles->last, angles->actual, angles->delta);
     VectorCopy(angles->actual, angles->last);
 }
 
-void VRAPI_Get_HMD_Angles( void )
+void VRAPI_Get_HMD_Angles(void)
 {
     // Set event time for next frame to earliest possible time an event could happen
     in_eventTime = Sys_Milliseconds();
 
     // VRAPI quaternion to Euler orientation
-    QuatToAngles( (float *) &predictedTracking.HeadPose.Pose.Orientation, vr_info.hmdinfo.angles.actual );
+    QuatToAngles((float*)&predictedTracking.HeadPose.Pose.Orientation, vr_info.hmdinfo.angles.actual);
 
     VectorSubtract(vr_info.hmdinfo.angles.last, vr_info.hmdinfo.angles.actual, vr_info.hmdinfo.angles.delta);
     VectorCopy(vr_info.hmdinfo.angles.actual, vr_info.hmdinfo.angles.last);
 }
 
 #ifndef OCULUSGO
-void VRAPI_Get_HMD_Pos( void )
+void VRAPI_Get_HMD_Pos(void)
 {
     const ovrVector3f posHMD = predictedTracking.HeadPose.Pose.Position;
-    VRAPI_Get_Position_and_delta( &vr_info.hmdinfo.position, posHMD);
+    VRAPI_Get_Position_and_delta(&vr_info.hmdinfo.position, posHMD);
 }
 #endif
 
-static inline qboolean isPressed( vrController_t* controller, uint32_t buttons, ovrButton b ) {
-   return (buttons & b) && !(controller->buttons & b);
+static inline qboolean isPressed(vrController_t* controller, uint32_t buttons, ovrButton b)
+{
+    return (buttons & b) && !(controller->buttons & b);
 }
-static inline qboolean isReleased( vrController_t* controller, uint32_t buttons, ovrButton b ) {
+static inline qboolean isReleased(vrController_t* controller, uint32_t buttons, ovrButton b)
+{
     return (!(buttons & b) && (controller->buttons & b));
 }
 
-static void VRAPI_buttonsChanged(vrController_t* ctrl, uint32_t buttons )
+static void VRAPI_buttonsChanged(vrController_t* ctrl, uint32_t buttons)
 {
     static qboolean consoleShow;
 
@@ -68,8 +70,7 @@ static void VRAPI_buttonsChanged(vrController_t* ctrl, uint32_t buttons )
 
     if (isPressed(ctrl, buttons, ovrButton_Enter)) {
         Com_QueueEvent(in_eventTime, SE_KEY, actionButtonEnter, qtrue, 0, NULL);
-    }
-    else if (isReleased(ctrl, buttons, ovrButton_Enter)) {
+    } else if (isReleased(ctrl, buttons, ovrButton_Enter)) {
         Com_QueueEvent(in_eventTime, SE_KEY, actionButtonEnter, qfalse, 0, NULL);
     }
 
@@ -77,18 +78,15 @@ static void VRAPI_buttonsChanged(vrController_t* ctrl, uint32_t buttons )
     if (ctrl->isRight == !vr_righthanded->integer) {
         if (isPressed(ctrl, buttons, ovrButton_GripTrigger)) {
 
-        }
-        else if (isReleased(ctrl, buttons, ovrButton_GripTrigger)) {
-
+        } else if (isReleased(ctrl, buttons, ovrButton_GripTrigger)) {
         }
     }
     // Right Grip
     else {
         if (isPressed(ctrl, buttons, ovrButton_GripTrigger)) {
-            //Cbuf_AddText("weapon_select");
+            // Cbuf_AddText("weapon_select");
             vr_info.weapon_select = qtrue;
-        }
-        else if (isReleased(ctrl, buttons, ovrButton_GripTrigger)) {
+        } else if (isReleased(ctrl, buttons, ovrButton_GripTrigger)) {
             vr_info.weapon_select = qfalse;
             // on release, select the focused weapon
             Cbuf_AddText("weapon_select");
@@ -99,18 +97,14 @@ static void VRAPI_buttonsChanged(vrController_t* ctrl, uint32_t buttons )
     if (ctrl->isRight == !vr_righthanded->integer) {
         if (isPressed(ctrl, buttons, ovrButton_LThumb)) {
 
-        }
-        else if (isReleased(ctrl, buttons, ovrButton_LThumb)) {
-
+        } else if (isReleased(ctrl, buttons, ovrButton_LThumb)) {
         }
     }
     // Right stick button
     else {
         if (isPressed(ctrl, buttons, ovrButton_RThumb)) {
 
-        }
-        else if (isReleased(ctrl, buttons, ovrButton_RThumb)) {
-
+        } else if (isReleased(ctrl, buttons, ovrButton_RThumb)) {
         }
     }
 
@@ -119,36 +113,33 @@ static void VRAPI_buttonsChanged(vrController_t* ctrl, uint32_t buttons )
 #else
     int actionButtonA = (!onPause) ? K_SPACE : K_ESCAPE;
 #endif
-    //Button A -> Jump in game, esc in menu
+    // Button A -> Jump in game, esc in menu
     if (isPressed(ctrl, buttons, ovrButton_A)) {
         Com_QueueEvent(in_eventTime, SE_KEY, actionButtonA, qtrue, 0, NULL);
-    }
-    else if (isReleased(ctrl, buttons, ovrButton_A)) {
+    } else if (isReleased(ctrl, buttons, ovrButton_A)) {
         Com_QueueEvent(in_eventTime, SE_KEY, actionButtonA, qfalse, 0, NULL);
     }
 
-    //Button B -> Crouch
+    // Button B -> Crouch
     if (isPressed(ctrl, buttons, ovrButton_B)) {
         Com_QueueEvent(in_eventTime, SE_KEY, K_C, qtrue, 0, NULL);
-    }
-    else if (isReleased(ctrl, buttons, ovrButton_B)) {
+    } else if (isReleased(ctrl, buttons, ovrButton_B)) {
         Com_QueueEvent(in_eventTime, SE_KEY, K_C, qfalse, 0, NULL);
     }
 
-    //Button X -> "use item"
+    // Button X -> "use item"
     if (isPressed(ctrl, buttons, ovrButton_X)) {
         // In menu: show console
-        if ( onPause ) {
+        if (onPause) {
             // show console on button release
         }
         // In game: "use item"
         else {
             Com_QueueEvent(in_eventTime, SE_KEY, K_ENTER, qtrue, 0, NULL);
         }
-    }
-    else if (isReleased(ctrl, buttons, ovrButton_X)) {
+    } else if (isReleased(ctrl, buttons, ovrButton_X)) {
         // In menu: show console
-        if ( onPause ) {
+        if (onPause) {
             Con_ToggleConsole_f();
         }
         // In game: "use item"
@@ -157,19 +148,17 @@ static void VRAPI_buttonsChanged(vrController_t* ctrl, uint32_t buttons )
         }
     }
 
-    //Button Y -> laserbeam toggle
+    // Button Y -> laserbeam toggle
     if (isPressed(ctrl, buttons, ovrButton_Y)) {
         VRMOD_togglePlayerLaserBeam(qtrue);
-    }
-    else if (isReleased(ctrl, buttons, ovrButton_Y)) {
+    } else if (isReleased(ctrl, buttons, ovrButton_Y)) {
         VRMOD_togglePlayerLaserBeam(qfalse);
     }
 
     // Back button on the OCULUS GO headset or Gear VR Controller
     if (isPressed(ctrl, buttons, ovrButton_Back)) {
         Com_QueueEvent(in_eventTime, SE_KEY, K_ESCAPE, qtrue, 0, NULL);
-    }
-    else if (isReleased(ctrl, buttons, ovrButton_Back)) {
+    } else if (isReleased(ctrl, buttons, ovrButton_Back)) {
         Com_QueueEvent(in_eventTime, SE_KEY, K_ESCAPE, qfalse, 0, NULL);
     }
 
@@ -177,23 +166,23 @@ static void VRAPI_buttonsChanged(vrController_t* ctrl, uint32_t buttons )
 }
 
 #ifdef OCULUSGO
-void VRAPI_IN_Gamepad(ovrInputCapabilityHeader capsHeader ) {
+void VRAPI_IN_Gamepad(ovrInputCapabilityHeader capsHeader)
+{
     static qboolean backButtonDownThisFrame = qfalse;
 
     ovrInputStateGamepad gamepadState;
     gamepadState.Header.ControllerType = ovrControllerType_Gamepad;
-    ovrResult result = vrapi_GetCurrentInputState(AppState.Ovr, capsHeader.DeviceID, &gamepadState.Header );
-    if ( result == ovrSuccess )
-    {
+    ovrResult result = vrapi_GetCurrentInputState(AppState.Ovr, capsHeader.DeviceID, &gamepadState.Header);
+    if (result == ovrSuccess) {
         // Fire
-        //if ((gamepadState.Buttons & ovrButton_A) != 0)
+        // if ((gamepadState.Buttons & ovrButton_A) != 0)
         //    fireEvent 	            = (gamepadState.Buttons & ovrButton_A) != 0;
         // B ?
-        qboolean button_B_State 	= (gamepadState.Buttons & ovrButton_B) != 0;
+        qboolean button_B_State = (gamepadState.Buttons & ovrButton_B) != 0;
         // Back button
-        qboolean button_Back_State 	= (gamepadState.Buttons & ovrButton_Back) != 0;
+        qboolean button_Back_State = (gamepadState.Buttons & ovrButton_Back) != 0;
 
-        backButtonDownThisFrame |= ( button_Back_State ) || ( button_B_State );
+        backButtonDownThisFrame |= (button_Back_State) || (button_B_State);
 
         // Left Joystick
         VRMOD_IN_Joystick(qfalse, gamepadState.LeftJoystick.x, gamepadState.LeftJoystick.y);
@@ -203,7 +192,7 @@ void VRAPI_IN_Gamepad(ovrInputCapabilityHeader capsHeader ) {
 }
 #endif
 
-void VRAPI_handle_controllers( void )
+void VRAPI_handle_controllers(void)
 {
     static int recenterCount = 0;
 
@@ -222,15 +211,14 @@ void VRAPI_handle_controllers( void )
 
     ovrInputCapabilityHeader capsHeader;
 
-    for ( int32_t index = 0; ; index++ ) {
+    for (int32_t index = 0;; index++) {
         ovrResult enumResult = vrapi_EnumerateInputDevices(ovr, index, &capsHeader);
         if (enumResult < 0) {
             break;
         }
 
 #ifdef OCULUSGO
-        if (capsHeader.Type == ovrControllerType_Gamepad )
-        {
+        if (capsHeader.Type == ovrControllerType_Gamepad) {
             VRAPI_IN_Gamepad(capsHeader);
             continue;
         }
@@ -265,8 +253,7 @@ void VRAPI_handle_controllers( void )
             controller = &vr_info.controllers[SideLEFT];
         } else if (caps.ControllerCapabilities & ovrControllerCaps_RightHand) {
             controller = &vr_info.controllers[SideRIGHT];
-        }
-        else {
+        } else {
             continue;
         }
 
@@ -291,7 +278,7 @@ void VRAPI_handle_controllers( void )
         VRMOD_IN_Triggers(controller->isRight, state.IndexTrigger);
 
 #ifdef OCULUSGO
-        qboolean pad_clic  = (state.Buttons & ovrButton_Enter) != 0;
+        qboolean pad_clic = (state.Buttons & ovrButton_Enter) != 0;
         qboolean pad_touch = (state.TrackpadStatus != 0);
         float touchX = pad_touch ? ((state.TrackpadPosition.x / caps.TrackpadMaxX) - 0.5f) * 2.0f : 0.0f;
         float touchY = pad_touch ? ((state.TrackpadPosition.y / caps.TrackpadMaxY) - 0.5f) * 2.0f : 0.0f;

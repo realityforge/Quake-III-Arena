@@ -38,7 +38,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "unix_glw.h"
 #include <dlfcn.h>
 
-
 #define VK_USE_PLATFORM_XLIB_KHR
 //#define VK_USE_PLATFORM_XLIB_XRANDR_EXT
 #include "../renderercommon/vulkan/vulkan.h"
@@ -46,109 +45,98 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 static PFN_vkGetInstanceProcAddr qvkGetInstanceProcAddr;
 static PFN_vkCreateXlibSurfaceKHR qvkCreateXlibSurfaceKHR;
 // Xlib + XRandR
-//static PFN_vkAcquireXlibDisplayEXT vkAcquireXlibDisplayEXT;
-//static PFN_vkGetRandROutputDisplayEXT PFN_vkGetRandROutputDisplayEXT;
+// static PFN_vkAcquireXlibDisplayEXT vkAcquireXlibDisplayEXT;
+// static PFN_vkGetRandROutputDisplayEXT PFN_vkGetRandROutputDisplayEXT;
 
 /*
 ** QVK_Shutdown
 **
 ** Unloads the specified DLL then nulls out all the proc pointers.
 */
-void QVK_Shutdown( qboolean unloadDLL )
+void QVK_Shutdown(qboolean unloadDLL)
 {
-	Com_Printf( "...shutting down QVK\n" );
+    Com_Printf("...shutting down QVK\n");
 
-	if ( glw_state.VulkanLib && unloadDLL )
-	{
-		Com_Printf( "...unloading Vulkan DLL\n" );
-		dlclose( glw_state.VulkanLib );
-		glw_state.VulkanLib = NULL;
+    if (glw_state.VulkanLib && unloadDLL) {
+        Com_Printf("...unloading Vulkan DLL\n");
+        dlclose(glw_state.VulkanLib);
+        glw_state.VulkanLib = NULL;
 
-		qvkGetInstanceProcAddr = NULL;
-	}
+        qvkGetInstanceProcAddr = NULL;
+    }
 
-	qvkCreateXlibSurfaceKHR = NULL;
+    qvkCreateXlibSurfaceKHR = NULL;
 }
 
-
-void *VK_GetInstanceProcAddr( VkInstance instance, const char *name )
+void* VK_GetInstanceProcAddr(VkInstance instance, const char* name)
 {
-	return qvkGetInstanceProcAddr( instance, name );
+    return qvkGetInstanceProcAddr(instance, name);
 }
 
-
-qboolean VK_CreateSurface( VkInstance instance, VkSurfaceKHR *surface )
+qboolean VK_CreateSurface(VkInstance instance, VkSurfaceKHR* surface)
 {
-	VkXlibSurfaceCreateInfoKHR desc;
+    VkXlibSurfaceCreateInfoKHR desc;
 
-	qvkCreateXlibSurfaceKHR = (PFN_vkCreateXlibSurfaceKHR) VK_GetInstanceProcAddr( instance, "vkCreateXlibSurfaceKHR" );
-	if ( !qvkCreateXlibSurfaceKHR )
-		return qfalse;
+    qvkCreateXlibSurfaceKHR = (PFN_vkCreateXlibSurfaceKHR)VK_GetInstanceProcAddr(instance, "vkCreateXlibSurfaceKHR");
+    if (!qvkCreateXlibSurfaceKHR)
+        return qfalse;
 
-	desc.sType = VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR;
-	desc.pNext = NULL;
-	desc.flags = 0;
-	desc.dpy = dpy;
-	desc.window = win;
+    desc.sType = VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR;
+    desc.pNext = NULL;
+    desc.flags = 0;
+    desc.dpy = dpy;
+    desc.window = win;
 
-	if ( qvkCreateXlibSurfaceKHR( instance, &desc, NULL, surface ) == VK_SUCCESS )
-		return qtrue;
-	else
-		return qfalse;
+    if (qvkCreateXlibSurfaceKHR(instance, &desc, NULL, surface) == VK_SUCCESS)
+        return qtrue;
+    else
+        return qfalse;
 }
 
-
-static void *load_vulkan_library( const char *dllname )
+static void* load_vulkan_library(const char* dllname)
 {
-	void *lib;
+    void* lib;
 
-	lib = Sys_LoadLibrary( dllname );
-	if ( lib )
-	{
-		qvkGetInstanceProcAddr = (PFN_vkGetInstanceProcAddr) Sys_LoadFunction( lib, "vkGetInstanceProcAddr" );
-		if ( qvkGetInstanceProcAddr )
-		{
-			return lib;
-		}
-		Sys_UnloadLibrary( lib );
-	}
+    lib = Sys_LoadLibrary(dllname);
+    if (lib) {
+        qvkGetInstanceProcAddr = (PFN_vkGetInstanceProcAddr)Sys_LoadFunction(lib, "vkGetInstanceProcAddr");
+        if (qvkGetInstanceProcAddr) {
+            return lib;
+        }
+        Sys_UnloadLibrary(lib);
+    }
 
-	return NULL;
+    return NULL;
 }
-
 
 /*
 ** QVK_Init
 **
 */
-qboolean QVK_Init( void )
+qboolean QVK_Init(void)
 {
 
-	Com_Printf( "...initializing QVK\n" );
+    Com_Printf("...initializing QVK\n");
 
-	if ( glw_state.VulkanLib == NULL )
-	{
-		const char *dllnames[] = { "libvulkan.so.1", "libvulkan.so" };
-		int i;
+    if (glw_state.VulkanLib == NULL) {
+        const char* dllnames[] = { "libvulkan.so.1", "libvulkan.so" };
+        int i;
 
-		for ( i = 0; i < ARRAY_LEN( dllnames ); i++ )
-		{
-			glw_state.VulkanLib = load_vulkan_library( dllnames[i] );
+        for (i = 0; i < ARRAY_LEN(dllnames); i++) {
+            glw_state.VulkanLib = load_vulkan_library(dllnames[i]);
 
-			Com_Printf( "...loading '%s' : %s\n", dllnames[i], glw_state.VulkanLib ? "succesed" : "failed" );
-			if ( glw_state.VulkanLib )
-			{
-				break;
-			}
-		}
+            Com_Printf("...loading '%s' : %s\n", dllnames[i], glw_state.VulkanLib ? "succesed" : "failed");
+            if (glw_state.VulkanLib) {
+                break;
+            }
+        }
 
-		if ( !glw_state.VulkanLib )
-		{
-			return qfalse;
-		}
-	}
+        if (!glw_state.VulkanLib) {
+            return qfalse;
+        }
+    }
 
-	Sys_LoadFunctionErrors(); // reset error counter
+    Sys_LoadFunctionErrors(); // reset error counter
 
-	return qtrue;
+    return qtrue;
 }

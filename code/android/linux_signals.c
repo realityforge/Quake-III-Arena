@@ -22,9 +22,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <signal.h>
 
 #ifdef _DEBUG
-    #if !defined(__ANDROID__)
-        #include <execinfo.h>
-    #endif
+#if !defined(__ANDROID__)
+#include <execinfo.h>
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -36,68 +36,65 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../renderervk/tr_local.h"
 #endif
 
-#if defined( __ANDROID__ ) && defined(__ANDROID_LOG__)
+#if defined(__ANDROID__) && defined(__ANDROID_LOG__)
 #include "../android/android_local.h"
 #endif
 
 static qboolean signalcaught = qfalse;
 
-extern void Sys_Exit( int code );
+extern void Sys_Exit(int code);
 
-static void signal_handler( int sig )
+static void signal_handler(int sig)
 {
-	char msg[32];
+    char msg[32];
 
-	if ( signalcaught == qtrue )
-	{
+    if (signalcaught == qtrue) {
 #if defined(__ANDROID_LOG__)
-		ALOGE("signal_handler : DOUBLE SIGNAL FAULT: Received signal %d, exiting...", sig);
+        ALOGE("signal_handler : DOUBLE SIGNAL FAULT: Received signal %d, exiting...", sig);
 #endif
-		printf( "DOUBLE SIGNAL FAULT: Received signal %d, exiting...\n", sig );
-		Sys_Exit( 1 ); // abstraction
-	}
-	printf( "Received signal %d, exiting...\n", sig );
+        printf("DOUBLE SIGNAL FAULT: Received signal %d, exiting...\n", sig);
+        Sys_Exit(1); // abstraction
+    }
+    printf("Received signal %d, exiting...\n", sig);
 
 #ifdef _DEBUG
-#if !defined( __ANDROID__ )
-	if ( sig == SIGSEGV || sig == SIGILL || sig == SIGBUS )
-	{
-		void *syms[10];
-		const size_t size = backtrace( syms, ARRAY_LEN( syms ) );
-		backtrace_symbols_fd( syms, size, STDERR_FILENO );
-	}
+#if !defined(__ANDROID__)
+    if (sig == SIGSEGV || sig == SIGILL || sig == SIGBUS) {
+        void* syms[10];
+        const size_t size = backtrace(syms, ARRAY_LEN(syms));
+        backtrace_symbols_fd(syms, size, STDERR_FILENO);
+    }
 #else
 #if defined(__ANDROID_LOG__)
-	// TODO print backtrace symbols with unwind.h #include <unwind.h>
-	ALOGW("============================================");
-	ALOGW("Compiler:     %s", __VERSION__);
-	ALOGW("Signal:       %i", sig);
-	ALOGW("Backtrace not available on this plattform.");
-	ALOGW("============================================");
+    // TODO print backtrace symbols with unwind.h #include <unwind.h>
+    ALOGW("============================================");
+    ALOGW("Compiler:     %s", __VERSION__);
+    ALOGW("Signal:       %i", sig);
+    ALOGW("Backtrace not available on this plattform.");
+    ALOGW("============================================");
 #endif
 #endif
 #endif
 
-	signalcaught = qtrue;
-	sprintf( msg, "Signal caught (%d)", sig );
+    signalcaught = qtrue;
+    sprintf(msg, "Signal caught (%d)", sig);
 #ifndef DEDICATED
-	CL_Shutdown( msg, qtrue );
+    CL_Shutdown(msg, qtrue);
 #endif
-	SV_Shutdown( msg );
-	Sys_Exit( 0 ); // send a 0 to avoid DOUBLE SIGNAL FAULT
+    SV_Shutdown(msg);
+    Sys_Exit(0); // send a 0 to avoid DOUBLE SIGNAL FAULT
 }
 
-
-void InitSig( void )
+void InitSig(void)
 {
-	signal( SIGINT, SIG_IGN );
-	signal( SIGHUP, signal_handler );
-	signal( SIGQUIT, signal_handler );
-	signal( SIGILL, signal_handler );
-	signal( SIGTRAP, signal_handler );
-	signal( SIGIOT, signal_handler );
-	signal( SIGBUS, signal_handler );
-	signal( SIGFPE, signal_handler );
-	signal( SIGSEGV, signal_handler );
-	signal( SIGTERM, signal_handler );
+    signal(SIGINT, SIG_IGN);
+    signal(SIGHUP, signal_handler);
+    signal(SIGQUIT, signal_handler);
+    signal(SIGILL, signal_handler);
+    signal(SIGTRAP, signal_handler);
+    signal(SIGIOT, signal_handler);
+    signal(SIGBUS, signal_handler);
+    signal(SIGFPE, signal_handler);
+    signal(SIGSEGV, signal_handler);
+    signal(SIGTERM, signal_handler);
 }

@@ -15,8 +15,7 @@
 #include "../android/android_local.h" // needed for AppState
 #endif
 
-typedef enum
-{
+typedef enum {
     RSERR_OK,
 
     RSERR_INVALID_FULLSCREEN,
@@ -26,11 +25,10 @@ typedef enum
     RSERR_UNKNOWN
 } rserr_t;
 
-
 #ifdef USE_JOYSTICK
-cvar_t   *in_joystick      = NULL;
-cvar_t   *in_joystickDebug = NULL;
-cvar_t   *joy_threshold    = NULL;
+cvar_t* in_joystick = NULL;
+cvar_t* in_joystickDebug = NULL;
+cvar_t* joy_threshold = NULL;
 #endif
 
 /*
@@ -38,28 +36,24 @@ cvar_t   *joy_threshold    = NULL;
 ** GL mandatory stuffs
 **
 */
-void *GL_GetProcAddress( const char *symbol )
+void* GL_GetProcAddress(const char* symbol)
 {
     return NULL;
 }
 
-
-void GLimp_SetGamma( unsigned char red[256], unsigned char green[256], unsigned char blue[256] )
+void GLimp_SetGamma(unsigned char red[256], unsigned char green[256], unsigned char blue[256])
 {
 }
 
-
-void GLimp_Shutdown( qboolean unloadDLL )
+void GLimp_Shutdown(qboolean unloadDLL)
 {
 }
 
-
-void GLimp_Init( glconfig_t *config )
+void GLimp_Init(glconfig_t* config)
 {
 }
 
-
-void GLimp_InitGamma( glconfig_t *config )
+void GLimp_InitGamma(glconfig_t* config)
 {
 }
 
@@ -70,13 +64,13 @@ void GLimp_InitGamma( glconfig_t *config )
 ** as yet to be determined.  Probably better not to make this a GLimp
 ** function and instead do a call to GLimp_SwapBuffers.
 */
-void GLimp_EndFrame( void )
+void GLimp_EndFrame(void)
 {
     // TODO: implement
     //
     // swapinterval stuff
     //
-    if ( r_swapInterval->modified ) {
+    if (r_swapInterval->modified) {
         r_swapInterval->modified = qfalse;
 
         /*if ( qglXSwapIntervalEXT ) {
@@ -95,21 +89,21 @@ void GLimp_EndFrame( void )
     }*/
 }
 
-void IN_Restart_f( void );
+void IN_Restart_f(void);
 
-void IN_Init( void )
+void IN_Init(void)
 {
-    Com_DPrintf( "\n------- Input Initialization -------\n" );
+    Com_DPrintf("\n------- Input Initialization -------\n");
 
     // mouse variables
-    //in_mouse = Cvar_Get( "in_mouse", "1", CVAR_ARCHIVE );
+    // in_mouse = Cvar_Get( "in_mouse", "1", CVAR_ARCHIVE );
 
 #ifdef USE_JOYSTICK
     // bk001130 - from cvs.17 (mkv), joystick variables
-  in_joystick = Cvar_Get( "in_joystick", "0", CVAR_ARCHIVE_ND | CVAR_LATCH );
-  // bk001130 - changed this to match win32
-  in_joystickDebug = Cvar_Get( "in_debugjoystick", "0", CVAR_TEMP );
-  joy_threshold = Cvar_Get( "joy_threshold", "0.15", CVAR_ARCHIVE_ND ); // FIXME: in_joythreshold
+    in_joystick = Cvar_Get("in_joystick", "0", CVAR_ARCHIVE_ND | CVAR_LATCH);
+    // bk001130 - changed this to match win32
+    in_joystickDebug = Cvar_Get("in_debugjoystick", "0", CVAR_TEMP);
+    joy_threshold = Cvar_Get("joy_threshold", "0.15", CVAR_ARCHIVE_ND); // FIXME: in_joythreshold
 #endif
 
     /*if ( in_mouse->integer )
@@ -125,20 +119,18 @@ void IN_Init( void )
     IN_StartupJoystick(); // bk001130 - from cvs1.17 (mkv)
 #endif
 
-    //Cmd_AddCommand( "minimize", IN_Minimize );
-    Cmd_AddCommand( "in_restart", IN_Restart_f );
+    // Cmd_AddCommand( "minimize", IN_Minimize );
+    Cmd_AddCommand("in_restart", IN_Restart_f);
 
-    Com_DPrintf( "------------------------------------\n" );
+    Com_DPrintf("------------------------------------\n");
 }
 
-
-void IN_Shutdown( void )
+void IN_Shutdown(void)
 {
-    //mouse_avail = qfalse;
-//  Cmd_RemoveCommand( "minimize" );
-    Cmd_RemoveCommand( "in_restart" );
+    // mouse_avail = qfalse;
+    //  Cmd_RemoveCommand( "minimize" );
+    Cmd_RemoveCommand("in_restart");
 }
-
 
 /*
 =================
@@ -147,21 +139,20 @@ IM_Restart
 Restart the input subsystem
 =================
 */
-void IN_Restart_f( void )
+void IN_Restart_f(void)
 {
     IN_Shutdown();
     IN_Init();
 }
 
-
-void IN_Frame( void )
+void IN_Frame(void)
 {
 #ifdef USE_JOYSTICK
     IN_JoyMove();
 #endif
 }
 
-void HandleEvents( void )
+void HandleEvents(void)
 {
     // TODO: implement
 }
@@ -171,29 +162,27 @@ void HandleEvents( void )
 Sys_GetClipboardData
 =================
 */
-char *Sys_GetClipboardData( void )
+char* Sys_GetClipboardData(void)
 {
     // TODO: implement
     return NULL;
 }
-
 
 /*
 =================
 Sys_SetClipboardBitmap
 =================
 */
-void Sys_SetClipboardBitmap( const byte *bitmap, int length )
+void Sys_SetClipboardBitmap(const byte* bitmap, int length)
 {
     // TODO: implement
 }
-
 
 #ifdef USE_VULKAN_API
 /*
 ** VKimp_Shutdown
 */
-void VKimp_Shutdown( qboolean unloadDLL )
+void VKimp_Shutdown(qboolean unloadDLL)
 {
     // TODO if need:
     // deactivate control
@@ -210,34 +199,31 @@ void VKimp_Shutdown( qboolean unloadDLL )
       VidMode_Done();
     }*/
 
-    unsetenv( "vblank_mode" );
+    unsetenv("vblank_mode");
 
-    QVK_Shutdown( unloadDLL );
+    QVK_Shutdown(unloadDLL);
 }
-
 
 /*
 ** LoadVulkan
 */
-static qboolean LoadVulkan( void )
+static qboolean LoadVulkan(void)
 {
-    if ( r_swapInterval->integer )
-        setenv( "vblank_mode", "2", 1 ); // TODO
+    if (r_swapInterval->integer)
+        setenv("vblank_mode", "2", 1); // TODO
     else
-        setenv( "vblank_mode", "1", 1 );
+        setenv("vblank_mode", "1", 1);
 
     return QVK_Init();
 }
 
-
-static qboolean StartVulkan( void )
+static qboolean StartVulkan(void)
 {
     //
     // load and initialize the specific Vulkan driver
     //
-    if ( !LoadVulkan() )
-    {
-        Com_Error( ERR_FATAL, "StartVulkan() - could not load Vulkan subsystem\n" );
+    if (!LoadVulkan()) {
+        Com_Error(ERR_FATAL, "StartVulkan() - could not load Vulkan subsystem\n");
         return qfalse;
     }
 
@@ -250,24 +236,24 @@ static qboolean StartVulkan( void )
 ** This routine is responsible for initializing the OS specific portions
 ** of Vulkan.
 */
-cvar_t *r_stereoEnabled;
-cvar_t *r_multiviewEnabled;
-//cvar_t *r_anaglyphMode;
-void VKimp_Init( glconfig_t *config )
+cvar_t* r_stereoEnabled;
+cvar_t* r_multiviewEnabled;
+// cvar_t *r_anaglyphMode;
+void VKimp_Init(glconfig_t* config)
 {
     int colorbits;
     int depthbits;
     int stencilbits;
 
-    if ( r_colorbits->integer <= 0 )
+    if (r_colorbits->integer <= 0)
         colorbits = 24;
     else
-        colorbits = MIN( r_colorbits->integer, 24);
+        colorbits = MIN(r_colorbits->integer, 24);
 
-    if ( cl_depthbits->integer == 0 )
+    if (cl_depthbits->integer == 0)
         depthbits = 24;
     else
-        depthbits = MIN( cl_depthbits->integer, 32);
+        depthbits = MIN(cl_depthbits->integer, 32);
 
     stencilbits = cl_stencilbits->integer;
 
@@ -279,25 +265,23 @@ void VKimp_Init( glconfig_t *config )
     config->vidWidth = AppState.nativeWindow_Width;
     config->vidHeight = AppState.nativeWindow_Height;
 
-    r_stereoEnabled = Cvar_Get( "r_stereoEnabled", "0", CVAR_ARCHIVE_ND | CVAR_LATCH );
-    if ( r_stereoEnabled->integer )
-    {
+    r_stereoEnabled = Cvar_Get("r_stereoEnabled", "0", CVAR_ARCHIVE_ND | CVAR_LATCH);
+    if (r_stereoEnabled->integer) {
         config->stereoEnabled = qtrue;
     }
 #ifdef USE_MULTIVIEW
-	//int in_anaglyphMode = Cvar_VariableIntegerValue("r_anaglyphMode");
-    r_multiviewEnabled = Cvar_Get( "r_multiviewEnabled", "0", CVAR_ARCHIVE_ND | CVAR_LATCH );
-    if ( r_multiviewEnabled->integer ) {
+    // int in_anaglyphMode = Cvar_VariableIntegerValue("r_anaglyphMode");
+    r_multiviewEnabled = Cvar_Get("r_multiviewEnabled", "0", CVAR_ARCHIVE_ND | CVAR_LATCH);
+    if (r_multiviewEnabled->integer) {
         isMultiview = true;
     }
 #endif
-//---------------------------
+    //---------------------------
 
     InitSig();
 
     // load and initialize the specific Vulkan driver
-    if ( !StartVulkan() )
-    {
+    if (!StartVulkan()) {
         return;
     }
 
