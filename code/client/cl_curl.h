@@ -20,11 +20,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-
 #ifndef __QCURL_H__
 #define __QCURL_H__
 
-extern cvar_t *cl_cURLLib;
+extern cvar_t* cl_cURLLib;
 
 #include "../qcommon/q_shared.h"
 #include "../qcommon/qcommon.h"
@@ -39,39 +38,38 @@ extern cvar_t *cl_cURLLib;
 #endif
 
 #ifdef USE_LOCAL_HEADERS
-  #include "curl/curl.h"
+#include "curl/curl.h"
 #else
-  #include <curl/curl.h>
+#include <curl/curl.h>
 #endif
-
 
 #ifdef USE_CURL_DLOPEN
 extern char* (*qcurl_version)(void);
 
 extern CURL* (*qcurl_easy_init)(void);
-extern CURLcode (*qcurl_easy_setopt)(CURL *curl, CURLoption option, ...);
-extern CURLcode (*qcurl_easy_perform)(CURL *curl);
-extern void (*qcurl_easy_cleanup)(CURL *curl);
-extern CURLcode (*qcurl_easy_getinfo)(CURL *curl, CURLINFO info, ...);
-extern void (*qcurl_easy_reset)(CURL *curl);
-extern const char *(*qcurl_easy_strerror)(CURLcode);
+extern CURLcode (*qcurl_easy_setopt)(CURL* curl, CURLoption option, ...);
+extern CURLcode (*qcurl_easy_perform)(CURL* curl);
+extern void (*qcurl_easy_cleanup)(CURL* curl);
+extern CURLcode (*qcurl_easy_getinfo)(CURL* curl, CURLINFO info, ...);
+extern void (*qcurl_easy_reset)(CURL* curl);
+extern const char* (*qcurl_easy_strerror)(CURLcode);
 
 extern CURLM* (*qcurl_multi_init)(void);
-extern CURLMcode (*qcurl_multi_add_handle)(CURLM *multi_handle,
-						CURL *curl_handle);
-extern CURLMcode (*qcurl_multi_remove_handle)(CURLM *multi_handle,
-						CURL *curl_handle);
-extern CURLMcode (*qcurl_multi_fdset)(CURLM *multi_handle,
-						fd_set *read_fd_set,
-						fd_set *write_fd_set,
-						fd_set *exc_fd_set,
-						int *max_fd);
-extern CURLMcode (*qcurl_multi_perform)(CURLM *multi_handle,
-						int *running_handles);
-extern CURLMcode (*qcurl_multi_cleanup)(CURLM *multi_handle);
-extern CURLMsg *(*qcurl_multi_info_read)(CURLM *multi_handle,
-						int *msgs_in_queue);
-extern const char *(*qcurl_multi_strerror)(CURLMcode);
+extern CURLMcode (*qcurl_multi_add_handle)(CURLM* multi_handle,
+                                           CURL* curl_handle);
+extern CURLMcode (*qcurl_multi_remove_handle)(CURLM* multi_handle,
+                                              CURL* curl_handle);
+extern CURLMcode (*qcurl_multi_fdset)(CURLM* multi_handle,
+                                      fd_set* read_fd_set,
+                                      fd_set* write_fd_set,
+                                      fd_set* exc_fd_set,
+                                      int* max_fd);
+extern CURLMcode (*qcurl_multi_perform)(CURLM* multi_handle,
+                                        int* running_handles);
+extern CURLMcode (*qcurl_multi_cleanup)(CURLM* multi_handle);
+extern CURLMsg* (*qcurl_multi_info_read)(CURLM* multi_handle,
+                                         int* msgs_in_queue);
+extern const char* (*qcurl_multi_strerror)(CURLMcode);
 #else
 #define qcurl_version curl_version
 
@@ -94,48 +92,48 @@ extern const char *(*qcurl_multi_strerror)(CURLMcode);
 #define qcurl_multi_strerror curl_multi_strerror
 #endif
 
-qboolean CL_cURL_Init( void );
-void CL_cURL_Shutdown( void );
-void CL_cURL_BeginDownload( const char *localName, const char *remoteURL );
-void CL_cURL_PerformDownload( void );
-void CL_cURL_Cleanup( void );
+qboolean CL_cURL_Init(void);
+void CL_cURL_Shutdown(void);
+void CL_cURL_BeginDownload(const char* localName, const char* remoteURL);
+void CL_cURL_PerformDownload(void);
+void CL_cURL_Cleanup(void);
 
 typedef struct download_s {
-	char		URL[MAX_OSPATH];
-	char		Name[MAX_OSPATH];
-	char		gameDir[MAX_OSPATH];
-	char		TempName[MAX_OSPATH*2 + 14]; // gameDir + PATH_SEP + Name + ".00000000.tmp"
-	char		progress[MAX_OSPATH+64];
-	CURL		*cURL;
-	CURLM		*cURLM;
-	fileHandle_t fHandle;
-	int			Size;
-	int			Count;
-	qboolean	headerCheck;
-	qboolean	mapAutoDownload;
+    char URL[MAX_OSPATH];
+    char Name[MAX_OSPATH];
+    char gameDir[MAX_OSPATH];
+    char TempName[MAX_OSPATH * 2 + 14]; // gameDir + PATH_SEP + Name + ".00000000.tmp"
+    char progress[MAX_OSPATH + 64];
+    CURL* cURL;
+    CURLM* cURLM;
+    fileHandle_t fHandle;
+    int Size;
+    int Count;
+    qboolean headerCheck;
+    qboolean mapAutoDownload;
 
-	struct func_s {
-		char*		(*version)(void);
-		char *		(*easy_escape)(CURL *curl, const char *string, int length);
-		void		(*free)(char *ptr);
+    struct func_s {
+        char* (*version)(void);
+        char* (*easy_escape)(CURL* curl, const char* string, int length);
+        void (*free)(char* ptr);
 
-		CURL*		(*easy_init)(void);
-		CURLcode	(*easy_setopt)(CURL *curl, CURLoption option, ...);
-		CURLcode	(*easy_perform)(CURL *curl);
-		void		(*easy_cleanup)(CURL *curl);
-		CURLcode	(*easy_getinfo)(CURL *curl, CURLINFO info, ...);
-		const char *(*easy_strerror)(CURLcode);
+        CURL* (*easy_init)(void);
+        CURLcode (*easy_setopt)(CURL* curl, CURLoption option, ...);
+        CURLcode (*easy_perform)(CURL* curl);
+        void (*easy_cleanup)(CURL* curl);
+        CURLcode (*easy_getinfo)(CURL* curl, CURLINFO info, ...);
+        const char* (*easy_strerror)(CURLcode);
 
-		CURLM*		(*multi_init)(void);
-		CURLMcode	(*multi_add_handle)(CURLM *multi_handle, CURL *curl_handle);
-		CURLMcode	(*multi_remove_handle)(CURLM *multi_handle, CURL *curl_handle);
-		CURLMcode	(*multi_perform)(CURLM *multi_handle, int *running_handles);
-		CURLMcode	(*multi_cleanup)(CURLM *multi_handle);
-		CURLMsg		*(*multi_info_read)(CURLM *multi_handle, int *msgs_in_queue);
-		const char	*(*multi_strerror)(CURLMcode);
+        CURLM* (*multi_init)(void);
+        CURLMcode (*multi_add_handle)(CURLM* multi_handle, CURL* curl_handle);
+        CURLMcode (*multi_remove_handle)(CURLM* multi_handle, CURL* curl_handle);
+        CURLMcode (*multi_perform)(CURLM* multi_handle, int* running_handles);
+        CURLMcode (*multi_cleanup)(CURLM* multi_handle);
+        CURLMsg* (*multi_info_read)(CURLM* multi_handle, int* msgs_in_queue);
+        const char* (*multi_strerror)(CURLMcode);
 
-		void		*lib;
-	} func;
+        void* lib;
+    } func;
 } download_t;
 
-#endif	// __QCURL_H__
+#endif // __QCURL_H__

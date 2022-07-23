@@ -40,7 +40,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include <dlfcn.h>
 
-#define GLE( ret, name, ... ) ret ( APIENTRY * q##name )( __VA_ARGS__ );
+#define GLE(ret, name, ...) ret(APIENTRY* q##name)(__VA_ARGS__);
 QGL_LinX11_PROCS;
 QGL_Swp_PROCS;
 #undef GLE
@@ -50,60 +50,57 @@ QGL_Swp_PROCS;
 **
 ** Unloads the specified DLL then nulls out all the proc pointers.
 */
-void QGL_Shutdown( qboolean unloadDLL )
+void QGL_Shutdown(qboolean unloadDLL)
 {
-	Com_Printf( "...shutting down QGL\n" );
+    Com_Printf("...shutting down QGL\n");
 
-	if ( glw_state.OpenGLLib && unloadDLL )
-	{
-		Com_Printf( "...unloading OpenGL DLL\n" );
-		// 25/09/05 Tim Angus <tim@ngus.net>
-		// Certain combinations of hardware and software, specifically
-		// Linux/SMP/Nvidia/agpgart (OK, OK. MY combination of hardware and
-		// software), seem to cause a catastrophic (hard reboot required) crash
-		// when libGL is dynamically unloaded. I'm unsure of the precise cause,
-		// suffice to say I don't see anything in the Q3 code that could cause it.
-		// I suspect it's an Nvidia driver bug, but without the source or means to
-		// debug I obviously can't prove (or disprove) this. Interestingly (though
-		// perhaps not surprisingly), Enemy Territory and Doom 3 both exhibit the
-		// same problem.
-		//
-		// After many, many reboots and prodding here and there, it seems that a
-		// placing a short delay before libGL is unloaded works around the problem.
-		// This delay is changeable via the r_GLlibCoolDownMsec cvar (nice name
-		// huh?), and it defaults to 0. For me, 500 seems to work.
-		//if( r_GLlibCoolDownMsec->integer )
-		//	usleep( r_GLlibCoolDownMsec->integer * 1000 );
-		usleep( 250 * 1000 );
+    if (glw_state.OpenGLLib && unloadDLL) {
+        Com_Printf("...unloading OpenGL DLL\n");
+        // 25/09/05 Tim Angus <tim@ngus.net>
+        // Certain combinations of hardware and software, specifically
+        // Linux/SMP/Nvidia/agpgart (OK, OK. MY combination of hardware and
+        // software), seem to cause a catastrophic (hard reboot required) crash
+        // when libGL is dynamically unloaded. I'm unsure of the precise cause,
+        // suffice to say I don't see anything in the Q3 code that could cause it.
+        // I suspect it's an Nvidia driver bug, but without the source or means to
+        // debug I obviously can't prove (or disprove) this. Interestingly (though
+        // perhaps not surprisingly), Enemy Territory and Doom 3 both exhibit the
+        // same problem.
+        //
+        // After many, many reboots and prodding here and there, it seems that a
+        // placing a short delay before libGL is unloaded works around the problem.
+        // This delay is changeable via the r_GLlibCoolDownMsec cvar (nice name
+        // huh?), and it defaults to 0. For me, 500 seems to work.
+        // if( r_GLlibCoolDownMsec->integer )
+        //	usleep( r_GLlibCoolDownMsec->integer * 1000 );
+        usleep(250 * 1000);
 
-		dlclose( glw_state.OpenGLLib );
+        dlclose(glw_state.OpenGLLib);
 
-		glw_state.OpenGLLib = NULL;
-	}
+        glw_state.OpenGLLib = NULL;
+    }
 
-#define GLE( ret, name, ... ) q##name = NULL;
-	QGL_LinX11_PROCS;
-	QGL_Swp_PROCS;
+#define GLE(ret, name, ...) q##name = NULL;
+    QGL_LinX11_PROCS;
+    QGL_Swp_PROCS;
 #undef GLE
 }
 
 static int glErrorCount = 0;
 
-void *GL_GetProcAddress( const char *symbol )
+void* GL_GetProcAddress(const char* symbol)
 {
-	void *sym;
+    void* sym;
 
-	sym = dlsym( glw_state.OpenGLLib, symbol );
-	if ( !sym )
-	{
-		glErrorCount++;
-	}
+    sym = dlsym(glw_state.OpenGLLib, symbol);
+    if (!sym) {
+        glErrorCount++;
+    }
 
-	return sym;
+    return sym;
 }
 
-//char *do_dlerror( void );
-
+// char *do_dlerror( void );
 
 /*
 ** QGL_Init
@@ -115,18 +112,16 @@ void *GL_GetProcAddress( const char *symbol )
 ** might be.
 **
 */
-qboolean QGL_Init( const char *dllname )
+qboolean QGL_Init(const char* dllname)
 {
-	Com_Printf( "...initializing QGL\n" );
+    Com_Printf("...initializing QGL\n");
 
-	if ( glw_state.OpenGLLib == NULL )
-	{
-		Com_Printf( "...loading '%s' : ", dllname );
+    if (glw_state.OpenGLLib == NULL) {
+        Com_Printf("...loading '%s' : ", dllname);
 
-		glw_state.OpenGLLib = dlopen( dllname, RTLD_NOW | RTLD_GLOBAL );
+        glw_state.OpenGLLib = dlopen(dllname, RTLD_NOW | RTLD_GLOBAL);
 
-		if ( glw_state.OpenGLLib == NULL )
-		{
+        if (glw_state.OpenGLLib == NULL) {
 #if 0
 			char fn[1024];
 
@@ -150,21 +145,26 @@ qboolean QGL_Init( const char *dllname )
 			}
 			else
 #endif
-			{
-				Com_Printf( "failed\n" );
-				//Com_Printf( "QGL_Init: Can't load %s from /etc/ld.so.conf: %s\n", dllname, do_dlerror() );
-				return qfalse;
-			}
-		}
+            {
+                Com_Printf("failed\n");
+                // Com_Printf( "QGL_Init: Can't load %s from /etc/ld.so.conf: %s\n", dllname, do_dlerror() );
+                return qfalse;
+            }
+        }
 
-		Com_Printf( "succeeded\n" );
-	}
+        Com_Printf("succeeded\n");
+    }
 
-	glErrorCount = 0;
+    glErrorCount = 0;
 
-#define GLE( ret, name, ... ) q##name = GL_GetProcAddress( XSTRING( name ) ); if ( !q##name ) { Com_Printf( "Error resolving core X11 functions\n" ); return qfalse; }
-	QGL_LinX11_PROCS;
+#define GLE(ret, name, ...)                                 \
+    q##name = GL_GetProcAddress(XSTRING(name));             \
+    if (!q##name) {                                         \
+        Com_Printf("Error resolving core X11 functions\n"); \
+        return qfalse;                                      \
+    }
+    QGL_LinX11_PROCS;
 #undef GLE
 
-	return qtrue;
+    return qtrue;
 }
