@@ -984,7 +984,7 @@ static void ParseSkyParms(char** text)
     shader.isSky = true;
 }
 
-void ParseSort(char** text)
+static void ParseSort(char** text)
 {
     char* token;
 
@@ -1024,7 +1024,7 @@ typedef struct {
     int clearSolid, surfaceFlags, contents;
 } infoParm_t;
 
-infoParm_t infoParms[] = {
+static infoParm_t infoParms[] = {
     // server relevant contents
     { "water", 1, 0, CONTENTS_WATER },
     { "slime", 1, 0, CONTENTS_SLIME }, // mildly damaging
