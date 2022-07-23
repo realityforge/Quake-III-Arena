@@ -45,6 +45,13 @@ cc_library(
 )
 
 cc_library(
+    name = "qgl",
+    hdrs = ["qgl.h"],
+    copts = LIBRARY_COPTS,
+    deps = ["//code/macosx:qgl"],
+)
+
+cc_library(
     name = "renderer",
     srcs = [
         "tr_animation.c",
@@ -71,7 +78,6 @@ cc_library(
         "tr_world.c",
     ],
     hdrs = [
-        "qgl.h",
         "tr_local.h",
     ],
     copts = LIBRARY_COPTS,
@@ -83,6 +89,7 @@ cc_library(
     ],
     deps = [
         ":api",
+        ":qgl",
         "//code/macosx:qgl",
         "//code/qcommon:files",
         "//code/qcommon:shared_api",
