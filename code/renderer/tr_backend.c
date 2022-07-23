@@ -33,9 +33,6 @@ static float s_flipMatrix[16] = {
     0, 0, 0, 1
 };
 
-/*
-** GL_Bind
-*/
 void GL_Bind(image_t* image)
 {
     int texnum;
@@ -58,9 +55,6 @@ void GL_Bind(image_t* image)
     }
 }
 
-/*
-** GL_SelectTexture
-*/
 void GL_SelectTexture(int unit)
 {
     if (glState.currenttmu == unit) {
@@ -80,9 +74,6 @@ void GL_SelectTexture(int unit)
     glState.currenttmu = unit;
 }
 
-/*
-** GL_Cull
-*/
 void GL_Cull(int cullType)
 {
     if (glState.faceCulling == cullType) {
@@ -112,9 +103,6 @@ void GL_Cull(int cullType)
     }
 }
 
-/*
-** GL_TexEnv
-*/
 void GL_TexEnv(int env)
 {
     if (env == glState.texEnv[glState.currenttmu]) {
@@ -568,12 +556,6 @@ RENDER BACK END THREAD FUNCTIONS
 ============================================================================
 */
 
-/*
-================
-RB_SetGL2D
-
-================
-*/
 static void RB_SetGL2D(void)
 {
     backEnd.projection2D = true;
