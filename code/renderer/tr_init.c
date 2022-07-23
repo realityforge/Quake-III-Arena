@@ -174,7 +174,7 @@ static void AssertCvarRange(cvar_t* cv, float minVal, float maxVal, bool shouldB
 ** setting variables, checking GL constants, and reporting the gfx system config
 ** to the user.
 */
-static void InitOpenGL(void)
+static void InitOpenGL()
 {
     char renderer_buffer[1024];
 
@@ -211,7 +211,7 @@ static void InitOpenGL(void)
     GL_SetDefaultState();
 }
 
-void GL_CheckErrors(void)
+void GL_CheckErrors()
 {
     int err;
     char s[64];
@@ -250,9 +250,6 @@ void GL_CheckErrors(void)
     ri.Error(ERR_FATAL, "GL_CheckErrors: %s", s);
 }
 
-/*
-** R_GetModeInfo
-*/
 typedef struct vidmode_s {
     const char* description;
     int width, height;
@@ -489,7 +486,7 @@ screenshot [filename]
 Doesn't print the pacifier message if there is a second arg
 ==================
 */
-void R_ScreenShot_f(void)
+void R_ScreenShot_f()
 {
     char checkname[MAX_OSPATH];
     static int lastNumber = -1;
@@ -585,12 +582,7 @@ static void R_ScreenShotJPEG_f()
     }
 }
 
-//============================================================================
-
-/*
-** GL_SetDefaultState
-*/
-void GL_SetDefaultState(void)
+void GL_SetDefaultState()
 {
     qglClearDepth(1.0f);
 
@@ -630,7 +622,7 @@ void GL_SetDefaultState(void)
     qglDisable(GL_BLEND);
 }
 
-void GfxInfo_f(void)
+void GfxInfo_f()
 {
     cvar_t* sys_cpustring = ri.Cvar_Get("sys_cpustring", "", 0);
     const char* enablestrings[] = {
@@ -829,7 +821,7 @@ static void R_Register()
     ri.Cmd_AddCommand("gfxinfo", GfxInfo_f);
 }
 
-void R_Init(void)
+void R_Init()
 {
     int err;
     int i;

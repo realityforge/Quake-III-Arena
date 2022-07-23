@@ -22,20 +22,16 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "tr_local.h"
 
-int r_firstSceneDrawSurf;
+static int r_firstSceneDrawSurf;
+static int r_numdlights;
+static int r_firstSceneDlight;
+static int r_numentities;
+static int r_firstSceneEntity;
+static int r_numpolys;
+static int r_firstScenePoly;
+static int r_numpolyverts;
 
-int r_numdlights;
-int r_firstSceneDlight;
-
-int r_numentities;
-int r_firstSceneEntity;
-
-int r_numpolys;
-int r_firstScenePoly;
-
-int r_numpolyverts;
-
-void R_ResetFrameCounts(void)
+void R_ResetFrameCounts()
 {
     backEndData->commands.used = 0;
 
@@ -53,7 +49,7 @@ void R_ResetFrameCounts(void)
     r_numpolyverts = 0;
 }
 
-void RE_ClearScene(void)
+void RE_ClearScene()
 {
     r_firstSceneDlight = r_numdlights;
     r_firstSceneEntity = r_numentities;
@@ -75,7 +71,7 @@ R_AddPolygonSurfaces
 Adds all the scene's polys into this view's drawsurf list
 =====================
 */
-void R_AddPolygonSurfaces(void)
+void R_AddPolygonSurfaces()
 {
     int i;
     shader_t* sh;
@@ -164,18 +160,15 @@ void RE_AddPolyToScene(qhandle_t hShader, int numVerts, const polyVert_t* verts,
     }
 }
 
-//=================================================================================
-
 void RE_AddRefEntityToScene(const refEntity_t* ent)
 {
     if (!tr.registered) {
         return;
     }
-    // https://zerowing.idsoftware.com/bugzilla/show_bug.cgi?id=402
     if (r_numentities >= ENTITYNUM_WORLD) {
         return;
     }
-    if (ent->reType < 0 || ent->reType >= RT_MAX_REF_ENTITY_TYPE) {
+    if (ent->reType >= RT_MAX_REF_ENTITY_TYPE) {
         ri.Error(ERR_DROP, "RE_AddRefEntityToScene: bad reType %i", ent->reType);
     }
 
@@ -185,7 +178,7 @@ void RE_AddRefEntityToScene(const refEntity_t* ent)
     r_numentities++;
 }
 
-void RE_AddDynamicLightToScene(const vec3_t org, float intensity, float r, float g, float b, int additive)
+static void RE_AddDynamicLightToScene(const vec3_t org, float intensity, float r, float g, float b, int additive)
 {
     dlight_t* dl;
 
@@ -274,8 +267,8 @@ void RE_RenderScene(const refdef_t* fd)
         // compare the area bits
         areaDiff = 0;
         for (i = 0; i < MAX_MAP_AREA_BYTES / 4; i++) {
-            areaDiff |= ((int*)tr.refdef.areamask)[i] ^ ((int*)fd->areamask)[i];
-            ((int*)tr.refdef.areamask)[i] = ((int*)fd->areamask)[i];
+            areaDiff |= ((const int*)tr.refdef.areamask)[i] ^ ((const int*)fd->areamask)[i];
+            ((int*)tr.refdef.areamask)[i] = ((const int*)fd->areamask)[i];
         }
 
         if (areaDiff) {

@@ -361,7 +361,7 @@ ProjectDlightTexture
 Perform dynamic lighting with another rendering pass
 ===================
 */
-static void ProjectDlightTexture(void)
+static void ProjectDlightTexture()
 {
     int i, l;
     vec3_t origin;
@@ -490,7 +490,7 @@ RB_FogPass
 Blends a fog texture on top of everything else
 ===================
 */
-static void RB_FogPass(void)
+static void RB_FogPass()
 {
     fog_t* fog;
     int i;
@@ -763,15 +763,11 @@ static void ComputeTexCoords(shaderStage_t* pStage)
 
             default:
                 ri.Error(ERR_DROP, "ERROR: unknown texmod '%d' in shader '%s'\n", pStage->bundle[b].texMods[tm].type, tess.shader->name);
-                break;
             }
         }
     }
 }
 
-/*
-** RB_IterateStagesGeneric
-*/
 static void RB_IterateStagesGeneric(shaderCommands_t* input)
 {
     int stage;
@@ -817,10 +813,7 @@ static void RB_IterateStagesGeneric(shaderCommands_t* input)
     }
 }
 
-/*
-** RB_StageIteratorGeneric
-*/
-void RB_StageIteratorGeneric(void)
+void RB_StageIteratorGeneric()
 {
     shaderCommands_t* input;
 
@@ -892,17 +885,9 @@ void RB_StageIteratorGeneric(void)
     }
 }
 
-/*
-** RB_StageIteratorVertexLitTexture
-*/
-void RB_StageIteratorVertexLitTexture(void)
+void RB_StageIteratorVertexLitTexture()
 {
-    shaderCommands_t* input;
-    shader_t* shader;
-
-    input = &tess;
-
-    shader = input->shader;
+    const shaderCommands_t* input = &tess;
 
     // compute colors
     RB_CalcDiffuseColor((unsigned char*)tess.svars.colors);
@@ -943,7 +928,7 @@ void RB_StageIteratorVertexLitTexture(void)
     }
 }
 
-void RB_StageIteratorLightmappedMultitexture(void)
+void RB_StageIteratorLightmappedMultitexture()
 {
     shaderCommands_t* input;
 
@@ -1007,10 +992,7 @@ void RB_StageIteratorLightmappedMultitexture(void)
     }
 }
 
-/*
-** RB_EndSurface
-*/
-void RB_EndSurface(void)
+void RB_EndSurface()
 {
     shaderCommands_t* input;
 

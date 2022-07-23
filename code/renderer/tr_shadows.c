@@ -228,7 +228,7 @@ because otherwise shadows from different body parts would
 overlap and double darken.
 =================
 */
-void RB_ShadowFinish(void)
+void RB_ShadowFinish()
 {
     if (r_shadows->integer != 2) {
         return;
@@ -263,7 +263,7 @@ void RB_ShadowFinish(void)
     qglDisable(GL_STENCIL_TEST);
 }
 
-void RB_ProjectionShadowDeform(void)
+void RB_ProjectionShadowDeform()
 {
     float* xyz;
     int i;

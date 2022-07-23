@@ -76,9 +76,6 @@ static float EvalWaveFormClamped(const waveForm_t* wf)
     return glow;
 }
 
-/*
-** RB_CalcStretchTexCoords
-*/
 void RB_CalcStretchTexCoords(const waveForm_t* wf, float* st)
 {
     float p;
@@ -97,7 +94,7 @@ void RB_CalcStretchTexCoords(const waveForm_t* wf, float* st)
     RB_CalcTransformTexCoords(&tmi, st);
 }
 
-void RB_CalcDeformVertexes(deformStage_t* ds)
+static void RB_CalcDeformVertexes(deformStage_t* ds)
 {
     int i;
     vec3_t offset;
@@ -143,7 +140,7 @@ RB_CalcDeformNormals
 Wiggle the normals for wavy environment mapping
 =========================
 */
-void RB_CalcDeformNormals(deformStage_t* ds)
+static void RB_CalcDeformNormals(deformStage_t* ds)
 {
     int i;
     float scale;
@@ -170,7 +167,7 @@ void RB_CalcDeformNormals(deformStage_t* ds)
     }
 }
 
-void RB_CalcBulgeVertexes(deformStage_t* ds)
+static void RB_CalcBulgeVertexes(deformStage_t* ds)
 {
     int i;
     const float* st = (const float*)tess.texCoords[0];
@@ -201,7 +198,7 @@ RB_CalcMoveVertexes
 A deformation that can move an entire surface along a wave path
 ======================
 */
-void RB_CalcMoveVertexes(deformStage_t* ds)
+static void RB_CalcMoveVertexes(deformStage_t* ds)
 {
     int i;
     float* xyz;
@@ -231,7 +228,7 @@ DeformText
 Change a polygon into a bunch of text polygons
 =============
 */
-void DeformText(const char* text)
+static void DeformText(const char* text)
 {
     int i;
     vec3_t origin, width, height;
@@ -315,7 +312,7 @@ Assuming all the triangles for this shader are independant
 quads, rebuild them as forward facing sprites
 =====================
 */
-static void AutospriteDeform(void)
+static void AutospriteDeform()
 {
     int i;
     int oldVerts;
@@ -386,7 +383,7 @@ Autosprite2Deform
 Autosprite2 will pivot a rectangular quad along the center of its long axis
 =====================
 */
-int edgeVerts[6][2] = {
+static int edgeVerts[6][2] = {
     { 0, 1 },
     { 0, 2 },
     { 0, 3 },
@@ -395,7 +392,7 @@ int edgeVerts[6][2] = {
     { 2, 3 }
 };
 
-static void Autosprite2Deform(void)
+static void Autosprite2Deform()
 {
     int i, j, k;
     int indexes;
@@ -498,7 +495,7 @@ static void Autosprite2Deform(void)
     }
 }
 
-void RB_DeformTessGeometry(void)
+void RB_DeformTessGeometry()
 {
     int i;
     deformStage_t* ds;
@@ -544,9 +541,6 @@ void RB_DeformTessGeometry(void)
     }
 }
 
-/*
-** RB_CalcColorFromEntity
-*/
 void RB_CalcColorFromEntity(unsigned char* dstColors)
 {
     int i;
@@ -563,15 +557,11 @@ void RB_CalcColorFromEntity(unsigned char* dstColors)
     }
 }
 
-/*
-** RB_CalcColorFromOneMinusEntity
-*/
 void RB_CalcColorFromOneMinusEntity(unsigned char* dstColors)
 {
     int i;
     int* pColors = (int*)dstColors;
-    unsigned char invModulate[3];
-    int c;
+    unsigned char invModulate[4];
 
     if (!backEnd.currentEntity)
         return;
@@ -581,16 +571,11 @@ void RB_CalcColorFromOneMinusEntity(unsigned char* dstColors)
     invModulate[2] = 255 - backEnd.currentEntity->e.shaderRGBA[2];
     invModulate[3] = 255 - backEnd.currentEntity->e.shaderRGBA[3]; // this trashes alpha, but the AGEN block fixes it
 
-    c = *(int*)invModulate;
-
     for (i = 0; i < tess.numVertexes; i++, pColors++) {
         *pColors = *(int*)invModulate;
     }
 }
 
-/*
-** RB_CalcAlphaFromEntity
-*/
 void RB_CalcAlphaFromEntity(unsigned char* dstColors)
 {
     int i;
@@ -605,9 +590,6 @@ void RB_CalcAlphaFromEntity(unsigned char* dstColors)
     }
 }
 
-/*
-** RB_CalcAlphaFromOneMinusEntity
-*/
 void RB_CalcAlphaFromOneMinusEntity(unsigned char* dstColors)
 {
     int i;
@@ -622,9 +604,6 @@ void RB_CalcAlphaFromOneMinusEntity(unsigned char* dstColors)
     }
 }
 
-/*
-** RB_CalcWaveColor
-*/
 void RB_CalcWaveColor(const waveForm_t* wf, unsigned char* dstColors)
 {
     int i;
@@ -655,9 +634,6 @@ void RB_CalcWaveColor(const waveForm_t* wf, unsigned char* dstColors)
     }
 }
 
-/*
-** RB_CalcWaveAlpha
-*/
 void RB_CalcWaveAlpha(const waveForm_t* wf, unsigned char* dstColors)
 {
     int i;
@@ -673,9 +649,6 @@ void RB_CalcWaveAlpha(const waveForm_t* wf, unsigned char* dstColors)
     }
 }
 
-/*
-** RB_CalcModulateColorsByFog
-*/
 void RB_CalcModulateColorsByFog(unsigned char* colors)
 {
     int i;
@@ -694,9 +667,6 @@ void RB_CalcModulateColorsByFog(unsigned char* colors)
     }
 }
 
-/*
-** RB_CalcModulateAlphasByFog
-*/
 void RB_CalcModulateAlphasByFog(unsigned char* colors)
 {
     int i;
@@ -713,9 +683,6 @@ void RB_CalcModulateAlphasByFog(unsigned char* colors)
     }
 }
 
-/*
-** RB_CalcModulateRGBAsByFog
-*/
 void RB_CalcModulateRGBAsByFog(unsigned char* colors)
 {
     int i;
@@ -820,9 +787,6 @@ void RB_CalcFogTexCoords(float* st)
     }
 }
 
-/*
-** RB_CalcEnvironmentTexCoords
-*/
 void RB_CalcEnvironmentTexCoords(float* st)
 {
     int i;
@@ -848,9 +812,6 @@ void RB_CalcEnvironmentTexCoords(float* st)
     }
 }
 
-/*
-** RB_CalcTurbulentTexCoords
-*/
 void RB_CalcTurbulentTexCoords(const waveForm_t* wf, float* st)
 {
     int i;
@@ -867,9 +828,6 @@ void RB_CalcTurbulentTexCoords(const waveForm_t* wf, float* st)
     }
 }
 
-/*
-** RB_CalcScaleTexCoords
-*/
 void RB_CalcScaleTexCoords(const float scale[2], float* st)
 {
     int i;
@@ -880,9 +838,6 @@ void RB_CalcScaleTexCoords(const float scale[2], float* st)
     }
 }
 
-/*
-** RB_CalcScrollTexCoords
-*/
 void RB_CalcScrollTexCoords(const float scrollSpeed[2], float* st)
 {
     int i;
@@ -903,9 +858,6 @@ void RB_CalcScrollTexCoords(const float scrollSpeed[2], float* st)
     }
 }
 
-/*
-** RB_CalcTransformTexCoords
-*/
 void RB_CalcTransformTexCoords(const texModInfo_t* tmi, float* st)
 {
     int i;
@@ -919,9 +871,6 @@ void RB_CalcTransformTexCoords(const texModInfo_t* tmi, float* st)
     }
 }
 
-/*
-** RB_CalcRotateTexCoords
-*/
 void RB_CalcRotateTexCoords(float degsPerSecond, float* st)
 {
     float timeScale = tess.shaderTime;
@@ -947,7 +896,7 @@ void RB_CalcRotateTexCoords(float degsPerSecond, float* st)
     RB_CalcTransformTexCoords(&tmi, st);
 }
 
-#if id386 && !(defined __linux__) && (defined __i386__))
+#if id386 && !(defined __linux__) && (defined __i386__)
 
 long myftol(float f)
 {
@@ -962,7 +911,7 @@ long myftol(float f)
 **
 ** Calculates specular coefficient and places it in the alpha channel
 */
-vec3_t lightOrigin = { -960, 1980, 96 }; // FIXME: track dynamically
+static vec3_t lightOrigin = { -960, 1980, 96 }; // FIXME: track dynamically
 
 void RB_CalcSpecularAlpha(unsigned char* alphas)
 {

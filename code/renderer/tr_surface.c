@@ -124,7 +124,7 @@ void RB_AddQuadStamp(vec3_t origin, vec3_t left, vec3_t up, uint8_t* color)
     RB_AddQuadStampExt(origin, left, up, color, 0, 0, 1, 1);
 }
 
-static void RB_SurfaceSprite(void)
+static void RB_SurfaceSprite()
 {
     vec3_t left, up;
     float radius;
@@ -401,9 +401,6 @@ static void DoRailDiscs(int numSegs, const vec3_t start, const vec3_t dir, const
     }
 }
 
-/*
-** RB_SurfaceRailRinges
-*/
 static void RB_SurfaceRailRings()
 {
     refEntity_t* e;
@@ -432,9 +429,6 @@ static void RB_SurfaceRailRings()
     DoRailDiscs(numSegs, start, vec, right, up);
 }
 
-/*
-** RB_SurfaceRailCore
-*/
 static void RB_SurfaceRailCore()
 {
     refEntity_t* e;
@@ -463,9 +457,6 @@ static void RB_SurfaceRailCore()
     DoRailCore(start, end, right, len, r_railCoreWidth->integer);
 }
 
-/*
-** RB_SurfaceLightningBolt
-*/
 static void RB_SurfaceLightningBolt()
 {
     refEntity_t* e;
@@ -519,9 +510,6 @@ static void VectorArrayNormalize(vec4_t* normals, unsigned int count)
     }
 }
 
-/*
-** LerpMeshVertexes
-*/
 static void LerpMeshVertexes(md3Surface_t* surf, float backlerp)
 {
     short *oldXyz, *newXyz, *oldNormals, *newNormals;

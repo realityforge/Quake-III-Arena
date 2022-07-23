@@ -303,7 +303,7 @@ static void RB_Hyperspace()
     backEnd.isHyperspace = true;
 }
 
-static void SetViewportAndScissor(void)
+static void SetViewportAndScissor()
 {
     qglMatrixMode(GL_PROJECTION);
     qglLoadMatrixf(backEnd.viewParms.projectionMatrix);
@@ -556,7 +556,7 @@ RENDER BACK END THREAD FUNCTIONS
 ============================================================================
 */
 
-static void RB_SetGL2D(void)
+static void RB_SetGL2D()
 {
     backEnd.projection2D = true;
 
@@ -806,7 +806,7 @@ was there.  This is used to test for texture thrashing.
 Also called by RE_EndRegistration
 ===============
 */
-void RB_ShowImages(void)
+void RB_ShowImages()
 {
     int i;
     image_t* image;

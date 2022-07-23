@@ -277,7 +277,6 @@ static void ParseTexMod(char* _text, shaderStage_t* stage)
 
     if (stage->bundle[0].numTexMods == TR_MAX_TEXMODS) {
         ri.Error(ERR_DROP, "ERROR: too many tcMod stages in shader '%s'\n", shader.name);
-        return;
     }
 
     tmi = &stage->bundle[0].texMods[stage->bundle[0].numTexMods];
@@ -984,7 +983,7 @@ static void ParseSkyParms(char** text)
     shader.isSky = true;
 }
 
-void ParseSort(char** text)
+static void ParseSort(char** text)
 {
     char* token;
 
@@ -1024,7 +1023,7 @@ typedef struct {
     int clearSolid, surfaceFlags, contents;
 } infoParm_t;
 
-infoParm_t infoParms[] = {
+static infoParm_t infoParms[] = {
     // server relevant contents
     { "water", 1, 0, CONTENTS_WATER },
     { "slime", 1, 0, CONTENTS_SLIME }, // mildly damaging
@@ -1292,7 +1291,7 @@ See if we can use on of the simple fastpath stage functions,
 otherwise set to the generic stage function
 ===================
 */
-static void ComputeStageIteratorFunc(void)
+static void ComputeStageIteratorFunc()
 {
     shader.optimalStageIteratorFunc = RB_StageIteratorGeneric;
 
@@ -1353,30 +1352,15 @@ typedef struct {
 } collapse_t;
 
 static collapse_t collapse[] = {
-    { 0, GLS_DSTBLEND_SRC_COLOR | GLS_SRCBLEND_ZERO,
-      GL_MODULATE, 0 },
-
-    { 0, GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR,
-      GL_MODULATE, 0 },
-
-    { GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR, GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR,
-      GL_MODULATE, GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR },
-
-    { GLS_DSTBLEND_SRC_COLOR | GLS_SRCBLEND_ZERO, GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR,
-      GL_MODULATE, GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR },
-
-    { GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR, GLS_DSTBLEND_SRC_COLOR | GLS_SRCBLEND_ZERO,
-      GL_MODULATE, GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR },
-
-    { GLS_DSTBLEND_SRC_COLOR | GLS_SRCBLEND_ZERO, GLS_DSTBLEND_SRC_COLOR | GLS_SRCBLEND_ZERO,
-      GL_MODULATE, GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR },
-
-    { 0, GLS_DSTBLEND_ONE | GLS_SRCBLEND_ONE,
-      GL_ADD, 0 },
-
-    { GLS_DSTBLEND_ONE | GLS_SRCBLEND_ONE, GLS_DSTBLEND_ONE | GLS_SRCBLEND_ONE,
-      GL_ADD, GLS_DSTBLEND_ONE | GLS_SRCBLEND_ONE },
-    { -1 }
+    { 0, GLS_DSTBLEND_SRC_COLOR | GLS_SRCBLEND_ZERO, GL_MODULATE, 0 },
+    { 0, GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR, GL_MODULATE, 0 },
+    { GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR, GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR, GL_MODULATE, GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR },
+    { GLS_DSTBLEND_SRC_COLOR | GLS_SRCBLEND_ZERO, GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR, GL_MODULATE, GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR },
+    { GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR, GLS_DSTBLEND_SRC_COLOR | GLS_SRCBLEND_ZERO, GL_MODULATE, GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR },
+    { GLS_DSTBLEND_SRC_COLOR | GLS_SRCBLEND_ZERO, GLS_DSTBLEND_SRC_COLOR | GLS_SRCBLEND_ZERO, GL_MODULATE, GLS_DSTBLEND_ZERO | GLS_SRCBLEND_DST_COLOR },
+    { 0, GLS_DSTBLEND_ONE | GLS_SRCBLEND_ONE, GL_ADD, 0 },
+    { GLS_DSTBLEND_ONE | GLS_SRCBLEND_ONE, GLS_DSTBLEND_ONE | GLS_SRCBLEND_ONE, GL_ADD, GLS_DSTBLEND_ONE | GLS_SRCBLEND_ONE },
+    { -1, 0, 0, 0 }
 };
 
 /*
@@ -1387,7 +1371,7 @@ Attempt to combine two stages into a single multitexture stage
 FIXME: I think modulated add + modulated add collapses incorrectly
 =================
 */
-static bool CollapseMultitexture(void)
+static bool CollapseMultitexture()
 {
     int abits, bbits;
     int i;
@@ -1505,7 +1489,6 @@ static void FixRenderCommandList(int newShader)
             case RC_DRAW_SURFS: {
                 int i;
                 drawSurf_t* drawSurf;
-                shader_t* shader;
                 int fogNum;
                 int entityNum;
                 int dlightMap;
@@ -1513,7 +1496,8 @@ static void FixRenderCommandList(int newShader)
                 const drawSurfsCommand_t* ds_cmd = (const drawSurfsCommand_t*)curCmd;
 
                 for (i = 0, drawSurf = ds_cmd->drawSurfs; i < ds_cmd->numDrawSurfs; i++, drawSurf++) {
-                    R_DecomposeSort(drawSurf->sort, &entityNum, &shader, &fogNum, &dlightMap);
+                    shader_t* ignored;
+                    R_DecomposeSort(drawSurf->sort, &entityNum, &ignored, &fogNum, &dlightMap);
                     sortedIndex = ((drawSurf->sort >> QSORT_SHADERNUM_SHIFT) & (MAX_SHADERS - 1));
                     if (sortedIndex >= newShader) {
                         sortedIndex++;
@@ -1552,7 +1536,7 @@ shaders.
 Sets shader->sortedIndex
 ==============
 */
-static void SortNewShader(void)
+static void SortNewShader()
 {
     int i;
     float sort;
@@ -1577,7 +1561,7 @@ static void SortNewShader(void)
     tr.sortedShaders[i + 1] = newShader;
 }
 
-static shader_t* GeneratePermanentShader(void)
+static shader_t* GeneratePermanentShader()
 {
     shader_t* newShader;
     int i, b;
@@ -1638,7 +1622,7 @@ pass, trying to guess which is the correct one to best approximate
 what it is supposed to look like.
 =================
 */
-static void VertexLightingCollapse(void)
+static void VertexLightingCollapse()
 {
     int stage;
     shaderStage_t* bestStage;
@@ -1727,7 +1711,7 @@ Returns a freshly allocated shader with all the needed info
 from the current global working shader
 =========================
 */
-static shader_t* FinishShader(void)
+static shader_t* FinishShader()
 {
     int stage;
     bool hasLightmapStage;
@@ -2112,7 +2096,7 @@ shader_t* R_FindShader(const char* name, int lightmapIndex, bool mipRawImage)
     return FinishShader();
 }
 
-qhandle_t RE_RegisterShaderFromImage(const char* name, int lightmapIndex, image_t* image, bool mipRawImage)
+qhandle_t RE_RegisterShaderFromImage(const char* name, int lightmapIndex, image_t* image)
 {
     int i, hash;
     shader_t* sh;
@@ -2323,60 +2307,57 @@ Dump information on all valid shaders to the console
 A second parameter will cause it to print in sorted order
 ===============
 */
-void R_ShaderList_f(void)
+void R_ShaderList_f()
 {
-    int i;
-    int count;
-    shader_t* shader;
-
     ri.Printf(PRINT_ALL, "-----------------------\n");
 
-    count = 0;
-    for (i = 0; i < tr.numShaders; i++) {
+    int count = 0;
+    for (int i = 0; i < tr.numShaders; i++) {
+        shader_t* current_shader;
         if (ri.Cmd_Argc() > 1) {
-            shader = tr.sortedShaders[i];
+            current_shader = tr.sortedShaders[i];
         } else {
-            shader = tr.shaders[i];
+            current_shader = tr.shaders[i];
         }
 
-        ri.Printf(PRINT_ALL, "%i ", shader->numUnfoggedPasses);
+        ri.Printf(PRINT_ALL, "%i ", current_shader->numUnfoggedPasses);
 
-        if (shader->lightmapIndex >= 0) {
+        if (current_shader->lightmapIndex >= 0) {
             ri.Printf(PRINT_ALL, "L ");
         } else {
             ri.Printf(PRINT_ALL, "  ");
         }
-        if (shader->multitextureEnv == GL_ADD) {
+        if (current_shader->multitextureEnv == GL_ADD) {
             ri.Printf(PRINT_ALL, "MT(a) ");
-        } else if (shader->multitextureEnv == GL_MODULATE) {
+        } else if (current_shader->multitextureEnv == GL_MODULATE) {
             ri.Printf(PRINT_ALL, "MT(m) ");
-        } else if (shader->multitextureEnv == GL_DECAL) {
+        } else if (current_shader->multitextureEnv == GL_DECAL) {
             ri.Printf(PRINT_ALL, "MT(d) ");
         } else {
             ri.Printf(PRINT_ALL, "      ");
         }
-        if (shader->explicitlyDefined) {
+        if (current_shader->explicitlyDefined) {
             ri.Printf(PRINT_ALL, "E ");
         } else {
             ri.Printf(PRINT_ALL, "  ");
         }
 
-        if (shader->optimalStageIteratorFunc == RB_StageIteratorGeneric) {
+        if (current_shader->optimalStageIteratorFunc == RB_StageIteratorGeneric) {
             ri.Printf(PRINT_ALL, "gen ");
-        } else if (shader->optimalStageIteratorFunc == RB_StageIteratorSky) {
+        } else if (current_shader->optimalStageIteratorFunc == RB_StageIteratorSky) {
             ri.Printf(PRINT_ALL, "sky ");
-        } else if (shader->optimalStageIteratorFunc == RB_StageIteratorLightmappedMultitexture) {
+        } else if (current_shader->optimalStageIteratorFunc == RB_StageIteratorLightmappedMultitexture) {
             ri.Printf(PRINT_ALL, "lmmt");
-        } else if (shader->optimalStageIteratorFunc == RB_StageIteratorVertexLitTexture) {
+        } else if (current_shader->optimalStageIteratorFunc == RB_StageIteratorVertexLitTexture) {
             ri.Printf(PRINT_ALL, "vlt ");
         } else {
             ri.Printf(PRINT_ALL, "    ");
         }
 
-        if (shader->defaultShader) {
-            ri.Printf(PRINT_ALL, ": %s (DEFAULTED)\n", shader->name);
+        if (current_shader->defaultShader) {
+            ri.Printf(PRINT_ALL, ": %s (DEFAULTED)\n", current_shader->name);
         } else {
-            ri.Printf(PRINT_ALL, ": %s\n", shader->name);
+            ri.Printf(PRINT_ALL, ": %s\n", current_shader->name);
         }
         count++;
     }
@@ -2393,7 +2374,7 @@ a single large text block that can be scanned for shader names
 =====================
 */
 #define MAX_SHADER_FILES 4096
-static void ScanAndLoadShaderFiles(void)
+static void ScanAndLoadShaderFiles()
 {
     char** shaderFiles;
     char* buffers[MAX_SHADER_FILES];
@@ -2506,7 +2487,7 @@ static void ScanAndLoadShaderFiles(void)
     return;
 }
 
-static void CreateInternalShaders(void)
+static void CreateInternalShaders()
 {
     tr.numShaders = 0;
 
@@ -2528,14 +2509,14 @@ static void CreateInternalShaders(void)
     tr.shadowShader = FinishShader();
 }
 
-static void CreateExternalShaders(void)
+static void CreateExternalShaders()
 {
     tr.projectionShadowShader = R_FindShader("projectionShadow", LIGHTMAP_NONE, true);
     tr.flareShader = R_FindShader("flareShader", LIGHTMAP_NONE, true);
     tr.sunShader = R_FindShader("sun", LIGHTMAP_NONE, true);
 }
 
-void R_InitShaders(void)
+void R_InitShaders()
 {
     ri.Printf(PRINT_ALL, "Initializing Shaders\n");
 

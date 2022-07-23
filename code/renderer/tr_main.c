@@ -104,9 +104,6 @@ int R_CullLocalBox(vec3_t bounds[2])
     return CULL_CLIP; // partially clipped
 }
 
-/*
-** R_CullLocalPointAndRadius
-*/
 int R_CullLocalPointAndRadius(vec3_t pt, float radius)
 {
     vec3_t transformed;
@@ -116,9 +113,6 @@ int R_CullLocalPointAndRadius(vec3_t pt, float radius)
     return R_CullPointAndRadius(transformed, radius);
 }
 
-/*
-** R_CullPointAndRadius
-*/
 int R_CullPointAndRadius(vec3_t pt, float radius)
 {
     int i;
@@ -309,10 +303,7 @@ static void R_RotateForViewer()
     tr.viewParms.world = tr.or ;
 }
 
-/*
-** SetFarClip
-*/
-static void SetFarClip(void)
+static void SetFarClip()
 {
     float farthestCornerDistance = 0;
     int i;
