@@ -1101,7 +1101,7 @@ void GL_Cull(int cullType);
 #define GLS_DEFAULT GLS_DEPTHMASK_TRUE
 
 void RE_StretchRaw(int x, int y, int w, int h, int cols, int rows, const uint8_t* data, int client, bool dirty);
-void RE_UploadCinematic(int w, int h, int cols, int rows, const uint8_t* data, int client, bool dirty);
+void RE_UploadCinematic(int cols, int rows, const uint8_t* data, int client, bool dirty);
 
 void RE_BeginFrame(stereoFrame_t stereoFrame);
 void RE_BeginRegistration(glconfig_t* glconfig);
