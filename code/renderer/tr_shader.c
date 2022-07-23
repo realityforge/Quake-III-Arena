@@ -1291,7 +1291,7 @@ See if we can use on of the simple fastpath stage functions,
 otherwise set to the generic stage function
 ===================
 */
-static void ComputeStageIteratorFunc(void)
+static void ComputeStageIteratorFunc()
 {
     shader.optimalStageIteratorFunc = RB_StageIteratorGeneric;
 
@@ -1371,7 +1371,7 @@ Attempt to combine two stages into a single multitexture stage
 FIXME: I think modulated add + modulated add collapses incorrectly
 =================
 */
-static bool CollapseMultitexture(void)
+static bool CollapseMultitexture()
 {
     int abits, bbits;
     int i;
@@ -1536,7 +1536,7 @@ shaders.
 Sets shader->sortedIndex
 ==============
 */
-static void SortNewShader(void)
+static void SortNewShader()
 {
     int i;
     float sort;
@@ -1561,7 +1561,7 @@ static void SortNewShader(void)
     tr.sortedShaders[i + 1] = newShader;
 }
 
-static shader_t* GeneratePermanentShader(void)
+static shader_t* GeneratePermanentShader()
 {
     shader_t* newShader;
     int i, b;
@@ -1622,7 +1622,7 @@ pass, trying to guess which is the correct one to best approximate
 what it is supposed to look like.
 =================
 */
-static void VertexLightingCollapse(void)
+static void VertexLightingCollapse()
 {
     int stage;
     shaderStage_t* bestStage;
@@ -1711,7 +1711,7 @@ Returns a freshly allocated shader with all the needed info
 from the current global working shader
 =========================
 */
-static shader_t* FinishShader(void)
+static shader_t* FinishShader()
 {
     int stage;
     bool hasLightmapStage;
@@ -2307,7 +2307,7 @@ Dump information on all valid shaders to the console
 A second parameter will cause it to print in sorted order
 ===============
 */
-void R_ShaderList_f(void)
+void R_ShaderList_f()
 {
     ri.Printf(PRINT_ALL, "-----------------------\n");
 
@@ -2374,7 +2374,7 @@ a single large text block that can be scanned for shader names
 =====================
 */
 #define MAX_SHADER_FILES 4096
-static void ScanAndLoadShaderFiles(void)
+static void ScanAndLoadShaderFiles()
 {
     char** shaderFiles;
     char* buffers[MAX_SHADER_FILES];
@@ -2487,7 +2487,7 @@ static void ScanAndLoadShaderFiles(void)
     return;
 }
 
-static void CreateInternalShaders(void)
+static void CreateInternalShaders()
 {
     tr.numShaders = 0;
 
@@ -2509,14 +2509,14 @@ static void CreateInternalShaders(void)
     tr.shadowShader = FinishShader();
 }
 
-static void CreateExternalShaders(void)
+static void CreateExternalShaders()
 {
     tr.projectionShadowShader = R_FindShader("projectionShadow", LIGHTMAP_NONE, true);
     tr.flareShader = R_FindShader("flareShader", LIGHTMAP_NONE, true);
     tr.sunShader = R_FindShader("sun", LIGHTMAP_NONE, true);
 }
 
-void R_InitShaders(void)
+void R_InitShaders()
 {
     ri.Printf(PRINT_ALL, "Initializing Shaders\n");
 

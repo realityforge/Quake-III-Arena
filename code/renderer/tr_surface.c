@@ -124,7 +124,7 @@ void RB_AddQuadStamp(vec3_t origin, vec3_t left, vec3_t up, uint8_t* color)
     RB_AddQuadStampExt(origin, left, up, color, 0, 0, 1, 1);
 }
 
-static void RB_SurfaceSprite(void)
+static void RB_SurfaceSprite()
 {
     vec3_t left, up;
     float radius;

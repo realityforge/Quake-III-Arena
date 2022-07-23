@@ -83,7 +83,7 @@ static flare_t r_flareStructs[MAX_FLARES];
 static flare_t* r_activeFlares;
 static flare_t* r_inactiveFlares;
 
-void R_ClearFlares(void)
+void R_ClearFlares()
 {
     int i;
 
@@ -233,7 +233,7 @@ when occluded by something in the main view, and portal flares that should
 extend past the portal edge will be overwritten.
 ==================
 */
-void RB_RenderFlares(void)
+void RB_RenderFlares()
 {
     flare_t* f;
     flare_t** prev;

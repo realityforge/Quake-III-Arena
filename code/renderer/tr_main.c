@@ -303,7 +303,7 @@ static void R_RotateForViewer()
     tr.viewParms.world = tr.or ;
 }
 
-static void SetFarClip(void)
+static void SetFarClip()
 {
     float farthestCornerDistance = 0;
     int i;
