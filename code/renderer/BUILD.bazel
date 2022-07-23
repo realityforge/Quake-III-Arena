@@ -45,6 +45,7 @@ cc_library(
         "tr_mesh.c",
         "tr_model.c",
         "tr_noise.c",
+        "tr_scene.c",
         "tr_shadows.c",
         "tr_sky.c",
         "tr_surface.c",
