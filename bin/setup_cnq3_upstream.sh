@@ -35,8 +35,6 @@ git checkout -B upstream/cnq3
 git config branch.upstream/cnq3.remote cnq3
 git config branch.upstream/cnq3.merge refs/heads/master
 git config branch.upstream/cnq3.pushRemote origin
-git rm --force -r .github/workflows
-git commit -m "Remove workflows from upstream branch to avoid executing actions unnecessarily"
 git gc --prune=now --aggressive
 git push -f
 
