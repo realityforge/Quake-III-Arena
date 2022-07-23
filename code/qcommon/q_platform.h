@@ -38,7 +38,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define QDECL __cdecl
 #define Q_NEWLINE "\r\n"
 
-#if defined (_WIN32_WINNT)
+#if defined(_WIN32_WINNT)
 #if _WIN32_WINNT < 0x0501
 #undef _WIN32_WINNT
 #define _WIN32_WINNT 0x0501
@@ -47,7 +47,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define _WIN32_WINNT 0x0501
 #endif
 
-#if defined( _MSC_VER ) && _MSC_VER >= 1400 // MSVC++ 8.0 at least
+#if defined(_MSC_VER) && _MSC_VER >= 1400 // MSVC++ 8.0 at least
 #define OS_STRING "win_msvc"
 #elif defined __MINGW32__
 #define OS_STRING "win_mingw"
@@ -62,7 +62,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define PATH_SEP_FOREIGN '/'
 #define DLL_EXT ".dll"
 
-#if defined( _M_IX86 )
+#if defined(_M_IX86)
 #define ARCH_STRING "x86"
 #define Q3_LITTLE_ENDIAN
 #undef id386
@@ -72,7 +72,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #endif
 #endif
 
-#if defined( _M_AMD64 )
+#if defined(_M_AMD64)
 #define ARCH_STRING "x86_64"
 #define Q3_LITTLE_ENDIAN
 #undef idx64
@@ -83,7 +83,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #endif
 #endif
 
-#if defined( _M_ARM64 )
+#if defined(_M_ARM64)
 #define ARCH_STRING "arm64"
 #define Q3_LITTLE_ENDIAN
 #undef arm64
@@ -102,28 +102,28 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define PATH_SEP_FOREIGN '\\'
 #define DLL_EXT ".so"
 
-#if defined (__i386__)
+#if defined(__i386__)
 #define ARCH_STRING "i386"
 #define Q3_LITTLE_ENDIAN
 #undef id386
 #define id386 1
 #endif // __i386__
 
-#if defined (__x86_64__) || defined (__amd64__)
+#if defined(__x86_64__) || defined(__amd64__)
 #define ARCH_STRING "x86_64"
 #define Q3_LITTLE_ENDIAN
 #undef idx64
 #define idx64 1
 #endif // __x86_64__ || __amd64__
 
-#if defined (__arm__)
+#if defined(__arm__)
 #define ARCH_STRING "arm"
 #define Q3_LITTLE_ENDIAN
 #undef arm32
 #define arm32 1
 #endif // __arm__
 
-#if defined (__aarch64__)
+#if defined(__aarch64__)
 #define ARCH_STRING "aarch64"
 #define Q3_LITTLE_ENDIAN
 #undef arm64
@@ -145,17 +145,16 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 // =============================== BSD =====================================
 
-#if defined (__FreeBSD__) || defined (__NetBSD__) || defined (__OpenBSD__)
+#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__)
 
 #include <sys/types.h>
 #include <machine/endian.h>
 
-
-#if defined (__FreeBSD__)
+#if defined(__FreeBSD__)
 #define OS_STRING "freebsd"
-#elif defined (__NetBSD__)
+#elif defined(__NetBSD__)
 #define OS_STRING "netbsd"
-#elif defined (__OpenBSD__)
+#elif defined(__OpenBSD__)
 #define OS_STRING "openbsd"
 #endif
 
@@ -196,12 +195,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 // =========================================================================
 
-//catch missing defines in above blocks
-#if !defined( OS_STRING )
+// catch missing defines in above blocks
+#if !defined(OS_STRING)
 #error "Operating system not supported"
 #endif
 
-#if !defined( ARCH_STRING )
+#if !defined(ARCH_STRING)
 #error "Architecture not supported"
 #endif
 
@@ -223,11 +222,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 // Endianess
 
-#if defined( Q3_BIG_ENDIAN ) && defined( Q3_LITTLE_ENDIAN )
+#if defined(Q3_BIG_ENDIAN) && defined(Q3_LITTLE_ENDIAN)
 
 #error "Endianness defined as both big and little"
 
-#elif defined( Q3_BIG_ENDIAN )
+#elif defined(Q3_BIG_ENDIAN)
 
 #define CopyLittleShort(dest, src) CopyShortSwap(dest, src)
 #define CopyLittleLong(dest, src) CopyLongSwap(dest, src)
@@ -238,7 +237,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define BigLong
 #define BigFloat
 
-#elif defined( Q3_LITTLE_ENDIAN )
+#elif defined(Q3_LITTLE_ENDIAN)
 
 #define CopyLittleShort(dest, src) Com_Memcpy(dest, src, 2)
 #define CopyLittleLong(dest, src) Com_Memcpy(dest, src, 4)
@@ -262,6 +261,5 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #else
 #define PLATFORM_STRING OS_STRING "-" ARCH_STRING "-debug"
 #endif
-
 
 #endif

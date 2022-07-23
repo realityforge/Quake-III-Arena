@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 typedef unsigned short crc_t;
-unsigned short CRC_ProcessString(unsigned char *data, int length);
+unsigned short CRC_ProcessString(unsigned char* data, int length);
 #if 0
 void CRC_ProcessByte(unsigned short *crcvalue, byte data);
 void CRC_ContinueProcessString(unsigned short *crc, char *data, int length);

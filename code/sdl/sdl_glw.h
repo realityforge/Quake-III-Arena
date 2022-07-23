@@ -24,42 +24,42 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define __GLW_LINUX_H__
 
 #ifdef USE_LOCAL_HEADERS
-#	include "SDL.h"
+#include "SDL.h"
 #else
-#	include <SDL.h>
+#include <SDL.h>
 #endif
 
-void HandleEvents( void );
+void HandleEvents(void);
 
 //#define USE_JOYSTICK
 
 typedef struct
 {
-	FILE *log_fp;
+    FILE* log_fp;
 
-	qboolean isFullscreen;
+    qboolean isFullscreen;
 
-	glconfig_t *config; // feedback to renderer module
+    glconfig_t* config; // feedback to renderer module
 
-	int desktop_width;
-	int desktop_height;
+    int desktop_width;
+    int desktop_height;
 
-	int window_width;
-	int window_height;
+    int window_width;
+    int window_height;
 
-	int monitorCount;
+    int monitorCount;
 
 } glwstate_t;
 
-extern SDL_Window *SDL_window;
+extern SDL_Window* SDL_window;
 extern glwstate_t glw_state;
 
-extern cvar_t *in_nograb;
+extern cvar_t* in_nograb;
 
-void IN_Init( void );
-void IN_Shutdown( void );
+void IN_Init(void);
+void IN_Shutdown(void);
 
 // signals.c
-void InitSig( void );
+void InitSig(void);
 
 #endif
