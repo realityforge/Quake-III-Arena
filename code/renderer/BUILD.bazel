@@ -31,6 +31,7 @@ cc_library(
 cc_library(
     name = "renderer",
     srcs = [
+        "tr_backend.c",
         "tr_bsp.c",
         "tr_cmds.c",
         "tr_curve.c",
