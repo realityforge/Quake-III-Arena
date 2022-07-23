@@ -300,7 +300,7 @@ RB_Hyperspace
 A player has predicted a teleport, but hasn't arrived yet
 ================
 */
-static void RB_Hyperspace(void)
+static void RB_Hyperspace()
 {
     float c;
 
