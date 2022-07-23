@@ -899,7 +899,7 @@ void RB_CalcRotateTexCoords(float degsPerSecond, float* st)
     RB_CalcTransformTexCoords(&tmi, st);
 }
 
-#if id386 && !(defined __linux__) && (defined __i386__))
+#if id386 && !(defined __linux__) && (defined __i386__)
 
 long myftol(float f)
 {
