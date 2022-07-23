@@ -33,7 +33,7 @@ frame.
 
 */
 
-void R_AddAnimSurfaces(trRefEntity_t* ent)
+void R_AddAnimSurfaces()
 {
     md4Header_t* header;
     md4Surface_t* surface;

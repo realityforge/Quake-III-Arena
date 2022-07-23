@@ -1268,7 +1268,7 @@ void RE_AddAdditiveLightToScene(const vec3_t org, float intensity, float r, floa
 void RE_RenderScene(const refdef_t* fd);
 
 void R_MakeAnimModel(model_t* model);
-void R_AddAnimSurfaces(trRefEntity_t* ent);
+void R_AddAnimSurfaces(void);
 void RB_SurfaceAnim(md4Surface_t* surfType);
 
 void R_TransformModelToClip(const vec3_t src, const float* modelMatrix, const float* projectionMatrix,

@@ -1217,7 +1217,7 @@ static void R_AddEntitySurfaces()
                     R_AddMD3Surfaces(ent);
                     break;
                 case MOD_MD4:
-                    R_AddAnimSurfaces(ent);
+                    R_AddAnimSurfaces();
                     break;
                 case MOD_BRUSH:
                     R_AddBrushModelSurfaces(ent);
