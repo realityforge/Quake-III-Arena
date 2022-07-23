@@ -13,6 +13,22 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 load("//build_defs:rules.bzl", "FULL_WARNINGS")
 
+LIBRARY_COPTS = FULL_WARNINGS + [
+    "-Wno-padded",
+    "-Wno-cast-align",
+    "-Wno-sign-conversion",
+    "-Wno-double-promotion",
+    "-Wno-float-equal",
+    "-Wno-shorten-64-to-32",
+    "-Wno-float-conversion",
+    "-Wno-implicit-float-conversion",
+    "-Wno-implicit-int-conversion",
+    "-Wno-sign-compare",
+    "-Wno-pointer-to-int-cast",
+    "-Wno-switch-enum",
+    "-Wno-covered-switch-default",
+]
+
 cc_library(
     name = "api",
     hdrs = [
@@ -58,21 +74,7 @@ cc_library(
         "qgl.h",
         "tr_local.h",
     ],
-    copts = FULL_WARNINGS + [
-        "-Wno-padded",
-        "-Wno-cast-align",
-        "-Wno-sign-conversion",
-        "-Wno-double-promotion",
-        "-Wno-float-equal",
-        "-Wno-shorten-64-to-32",
-        "-Wno-float-conversion",
-        "-Wno-implicit-float-conversion",
-        "-Wno-implicit-int-conversion",
-        "-Wno-sign-compare",
-        "-Wno-pointer-to-int-cast",
-        "-Wno-switch-enum",
-        "-Wno-covered-switch-default",
-    ],
+    copts = LIBRARY_COPTS,
     visibility = [
         "//code/cgame:__pkg__",
         "//code/client:__pkg__",
