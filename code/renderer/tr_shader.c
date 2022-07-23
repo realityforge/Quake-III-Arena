@@ -2309,14 +2309,13 @@ A second parameter will cause it to print in sorted order
 */
 void R_ShaderList_f(void)
 {
-    int i;
     int count;
     shader_t* shader;
 
     ri.Printf(PRINT_ALL, "-----------------------\n");
 
     count = 0;
-    for (i = 0; i < tr.numShaders; i++) {
+    for (int i = 0; i < tr.numShaders; i++) {
         if (ri.Cmd_Argc() > 1) {
             shader = tr.sortedShaders[i];
         } else {
