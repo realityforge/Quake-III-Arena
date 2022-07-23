@@ -52,6 +52,18 @@ cc_library(
 )
 
 cc_library(
+    name = "local_api",
+    hdrs = ["tr_local.h"],
+    copts = LIBRARY_COPTS,
+    deps = [
+        ":api",
+        ":qgl",
+        "//code/qcommon:files",
+        "//code/qcommon:shared_api",
+    ],
+)
+
+cc_library(
     name = "renderer",
     srcs = [
         "tr_animation.c",
@@ -77,18 +89,10 @@ cc_library(
         "tr_surface.c",
         "tr_world.c",
     ],
-    hdrs = [
-        "tr_local.h",
-    ],
     copts = LIBRARY_COPTS,
-    visibility = [
-        "//code/cgame:__pkg__",
-        "//code/client:__pkg__",
-        "//code/q3_ui:__pkg__",
-        "//code/ui:__pkg__",
-    ],
     deps = [
         ":api",
+        ":local_api",
         ":qgl",
         "//code/macosx:qgl",
         "//code/qcommon:files",
