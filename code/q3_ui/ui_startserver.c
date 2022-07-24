@@ -50,7 +50,6 @@ START SERVER MENU *****
 
 #define MAX_SERVERMAPS 64
 #define MAX_NAMELENGTH 16
-
 #define ID_GAMETYPE 10
 #define ID_PICTURES 11 // 12, 13, 14
 #define ID_PREVPAGE 15
