@@ -246,7 +246,7 @@ void SP_target_push(gentity_t* self)
     self->use = Use_target_push;
 }
 
-void trigger_teleporter_touch(gentity_t* self, gentity_t* other, trace_t* trace)
+void trigger_teleporter_touch(gentity_t* self, gentity_t* other, UNUSED trace_t* trace)
 {
     gentity_t* dest;
 
