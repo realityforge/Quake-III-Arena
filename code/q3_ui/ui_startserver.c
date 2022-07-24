@@ -92,7 +92,7 @@ static const char* gametype_items[] = {
     "Team Deathmatch",
     "Tournament",
     "Capture the Flag",
-    0
+    NULL
 };
 
 static int gametype_remap[] = { GT_FFA, GT_TEAM, GT_TOURNAMENT, GT_CTF };
