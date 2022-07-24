@@ -208,6 +208,9 @@ build:macos_arm64 --cpu=darwin_arm64
 # When printing the location part of messages, attempt to use a path relative to the workspace directory
 common:ci --attempt_to_print_relative_paths
 
+# Enable "CI test grid" in BuildBuddy
+common:ci --build_metadata=ROLE=CI
+
 # Ship build and test results to BuildBuddy to improve traceability of CI builds
 common:ci --build_metadata=VISIBILITY=PUBLIC
 common:ci --bes_results_url=https://app.buildbuddy.io/invocation/
