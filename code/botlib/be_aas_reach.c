@@ -846,7 +846,6 @@ static int AAS_Reachability_Step_Barrier_WaterJump_WalkOffLedge(int area1num, in
                     // edges if they overlap in the direction orthogonal to
                     // the gravity direction
                     CrossProduct(invgravity, normal, ort);
-                    // invgravitydot = DotProduct(invgravity, invgravity);
                     ortdot = DotProduct(ort, ort);
                     // projection into the step plane
                     // NOTE: since gravity is vertical this is just the z coordinate
