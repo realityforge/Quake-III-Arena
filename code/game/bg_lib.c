@@ -1531,7 +1531,7 @@ static int dopr_outch(char* buffer, size_t* currlen, size_t maxlen, char c)
     return 1;
 }
 
-int Q_vsnprintf(char* str, size_t length, const char* fmt, va_list args)
+int vsnprintf(char* str, size_t length, const char* fmt, va_list args)
 {
     return dopr(str, length, fmt, args);
 }

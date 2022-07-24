@@ -236,7 +236,7 @@ void QDECL G_Printf(const char* fmt, ...)
     char text[1024];
 
     va_start(argptr, fmt);
-    Q_vsnprintf(text, sizeof(text), fmt, argptr);
+    vsnprintf(text, sizeof(text), fmt, argptr);
     va_end(argptr);
 
     trap_Print(text);
@@ -248,7 +248,7 @@ void QDECL G_Error(const char* fmt, ...)
     char text[1024];
 
     va_start(argptr, fmt);
-    Q_vsnprintf(text, sizeof(text), fmt, argptr);
+    vsnprintf(text, sizeof(text), fmt, argptr);
     va_end(argptr);
 
     trap_Error(text);
@@ -515,7 +515,7 @@ void QDECL Com_Error(int level, const char* error, ...)
     char text[1024];
 
     va_start(argptr, error);
-    Q_vsnprintf(text, sizeof(text), error, argptr);
+    vsnprintf(text, sizeof(text), error, argptr);
     va_end(argptr);
 
     trap_Error(text);
@@ -527,7 +527,7 @@ void QDECL Com_Printf(const char* msg, ...)
     char text[1024];
 
     va_start(argptr, msg);
-    Q_vsnprintf(text, sizeof(text), msg, argptr);
+    vsnprintf(text, sizeof(text), msg, argptr);
     va_end(argptr);
 
     trap_Print(text);
@@ -1046,7 +1046,7 @@ void QDECL G_LogPrintf(const char* fmt, ...)
     Com_sprintf(string, sizeof(string), "%3i:%i%i ", min, tens, sec);
 
     va_start(argptr, fmt);
-    Q_vsnprintf(string + 7, sizeof(string) - 7, fmt, argptr);
+    vsnprintf(string + 7, sizeof(string) - 7, fmt, argptr);
     va_end(argptr);
 
     if (g_dedicated.integer) {

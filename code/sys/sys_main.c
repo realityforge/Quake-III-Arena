@@ -210,7 +210,7 @@ NORETURN void Sys_Error(const char* error, ...)
     char string[1024];
 
     va_start(argptr, error);
-    Q_vsnprintf(string, sizeof(string), error, argptr);
+    vsnprintf(string, sizeof(string), error, argptr);
     va_end(argptr);
 
     Sys_ErrorDialog(string);

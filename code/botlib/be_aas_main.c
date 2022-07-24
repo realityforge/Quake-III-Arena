@@ -46,7 +46,7 @@ void QDECL AAS_Error(const char* fmt, ...)
     va_list arglist;
 
     va_start(arglist, fmt);
-    Q_vsnprintf(str, sizeof(str), fmt, arglist);
+    vsnprintf(str, sizeof(str), fmt, arglist);
     va_end(arglist);
     botimport.Print(PRT_FATAL, "%s\n", str);
 }

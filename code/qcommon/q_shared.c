@@ -567,38 +567,6 @@ bool Q_isintegral(float f)
     return (int)f == f;
 }
 
-#ifdef _WIN32
-/*
-=============
-Q_vsnprintf
-
-Special wrapper function for Microsoft's broken _vsnprintf() function.
-MinGW comes with its own vsnprintf() which is not broken. mingw-w64
-however, uses Microsoft's broken _vsnprintf() function.
-=============
-*/
-
-int Q_vsnprintf(char* str, size_t size, const char* format, va_list ap)
-{
-    int retval;
-
-    retval = _vsnprintf(str, size, format, ap);
-
-    if (retval < 0 || retval == size) {
-        // Microsoft doesn't adhere to the C99 standard of vsnprintf,
-        // which states that the return value must be the number of
-        // bytes written if the output string had sufficient length.
-        // Obviously we cannot determine that value from Microsoft's
-        // implementation, so we have no choice but to return size.
-
-        str[size - 1] = '\0';
-        return size;
-    }
-
-    return retval;
-}
-#endif
-
 /*
 =============
 Q_strncpyz
@@ -781,7 +749,7 @@ int QDECL Com_sprintf(char* dest, int size, const char* fmt, ...)
     va_list argptr;
 
     va_start(argptr, fmt);
-    len = Q_vsnprintf(dest, size, fmt, argptr);
+    len = vsnprintf(dest, size, fmt, argptr);
     va_end(argptr);
 
     if (len >= size)
@@ -809,7 +777,7 @@ char* QDECL va(const char* format, ...)
     index++;
 
     va_start(argptr, format);
-    Q_vsnprintf(buf, sizeof(*string), format, argptr);
+    vsnprintf(buf, sizeof(*string), format, argptr);
     va_end(argptr);
 
     return buf;
