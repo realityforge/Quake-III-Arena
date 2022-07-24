@@ -136,12 +136,12 @@ vmCvar_t ui_debug;
 vmCvar_t ui_initialized;
 vmCvar_t ui_teamArenaFirstRun;
 
-void _UI_Init(void);
-void _UI_Shutdown(void);
-void _UI_KeyEvent(int key, bool down);
-void _UI_MouseEvent(int dx, int dy);
-void _UI_Refresh(int realtime);
-bool _UI_IsFullscreen(void);
+static void _UI_Init(void);
+static void _UI_Shutdown(void);
+static void _UI_KeyEvent(int key, bool down);
+static void _UI_MouseEvent(int dx, int dy);
+static void _UI_Refresh(int realtime);
+static bool _UI_IsFullscreen(void);
 
 EXPORT intptr_t vmMain(int command, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11)
 {
