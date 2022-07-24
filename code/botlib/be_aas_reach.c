@@ -90,7 +90,7 @@ static int numlreachabilities;
 //===========================================================================
 // returns the surface area of the given face
 //===========================================================================
-static float AAS_FaceArea(aas_face_t* face)
+static float AAS_FaceArea(const aas_face_t* face)
 {
     int i, edgenum, side;
     float total;
@@ -1704,57 +1704,47 @@ static int AAS_Reachability_Jump(int area1num, int area2num)
 //===========================================================================
 static int AAS_Reachability_Ladder(int area1num, int area2num)
 {
-    int i, j, k, l, edge1num, edge2num, sharededgenum, lowestedgenum;
-    int face1num, face2num, ladderface1num, ladderface2num;
-    int ladderface1vertical, ladderface2vertical, firstv;
-    float face1area, face2area, bestface1area, bestface2area;
-    float phys_jumpvel, maxjumpheight;
     vec3_t area1point, area2point, v1, v2, up = { 0, 0, 1 };
     vec3_t mid, lowestpoint, start, end, sharededgevec, dir;
-    aas_area_t *area1, *area2;
-    aas_face_t *face1, *face2, *ladderface1, *ladderface2;
-    aas_plane_t *plane1, *plane2;
-    aas_edge_t *sharededge, *edge1;
-    aas_lreachability_t* lreach;
-    aas_trace_t trace;
 
     if (!AAS_AreaLadder(area1num) || !AAS_AreaLadder(area2num))
         return false;
-    phys_jumpvel = aassettings.phys_jumpvel;
+    const float phys_jumpvel = aassettings.phys_jumpvel;
     // maximum height a player can jump with the given initial z velocity
-    maxjumpheight = AAS_MaxJumpHeight(phys_jumpvel);
+    const float maxjumpheight = AAS_MaxJumpHeight(phys_jumpvel);
 
-    area1 = &aasworld.areas[area1num];
-    area2 = &aasworld.areas[area2num];
-    ladderface1 = NULL;
-    ladderface2 = NULL;
-    ladderface1num = 0; // make compiler happy
-    ladderface2num = 0; // make compiler happy
-    bestface1area = -9999;
-    bestface2area = -9999;
-    sharededgenum = 0; // make compiler happy
-    lowestedgenum = 0; // make compiler happy
-    for (i = 0; i < area1->numfaces; i++) {
-        face1num = aasworld.faceindex[area1->firstface + i];
-        face1 = &aasworld.faces[abs(face1num)];
+    const aas_area_t* area1 = &aasworld.areas[area1num];
+    const aas_area_t* area2 = &aasworld.areas[area2num];
+    const aas_face_t* ladderface1 = NULL;
+    const aas_face_t* ladderface2 = NULL;
+    int ladderface1num = 0;
+    int ladderface2num = 0;
+    int bestface1area = -9999;
+    int bestface2area = -9999;
+    int sharededgenum = 0;
+    int lowestedgenum = 0;
+    for (int i = 0; i < area1->numfaces; i++) {
+        const int face1num = aasworld.faceindex[area1->firstface + i];
+        const aas_face_t* face1 = &aasworld.faces[abs(face1num)];
         // if not a ladder face
         if (!(face1->faceflags & FACE_LADDER))
             continue;
-        for (j = 0; j < area2->numfaces; j++) {
-            face2num = aasworld.faceindex[area2->firstface + j];
-            face2 = &aasworld.faces[abs(face2num)];
+        for (int j = 0; j < area2->numfaces; j++) {
+            const int face2num = aasworld.faceindex[area2->firstface + j];
+            const aas_face_t* face2 = &aasworld.faces[abs(face2num)];
             // if not a ladder face
             if (!(face2->faceflags & FACE_LADDER))
                 continue;
             // check if the faces share an edge
-            for (k = 0; k < face1->numedges; k++) {
-                edge1num = aasworld.edgeindex[face1->firstedge + k];
+            for (int k = 0; k < face1->numedges; k++) {
+                const int edge1num = aasworld.edgeindex[face1->firstedge + k];
+                int l;
                 for (l = 0; l < face2->numedges; l++) {
-                    edge2num = aasworld.edgeindex[face2->firstedge + l];
+                    const int edge2num = aasworld.edgeindex[face2->firstedge + l];
                     if (abs(edge1num) == abs(edge2num)) {
                         // get the face with the largest area
-                        face1area = AAS_FaceArea(face1);
-                        face2area = AAS_FaceArea(face2);
+                        const float face1area = AAS_FaceArea(face1);
+                        const float face2area = AAS_FaceArea(face2);
                         if (face1area > bestface1area && face2area > bestface2area) {
                             bestface1area = face1area;
                             bestface2area = face2area;
@@ -1774,16 +1764,16 @@ static int AAS_Reachability_Ladder(int area1num, int area2num)
     }
     if (ladderface1 && ladderface2) {
         // get the middle of the shared edge
-        sharededge = &aasworld.edges[abs(sharededgenum)];
-        firstv = sharededgenum < 0;
+        const aas_edge_t* sharededge = &aasworld.edges[abs(sharededgenum)];
+        const int firstv = sharededgenum < 0;
         VectorCopy(aasworld.vertexes[sharededge->v[firstv]], v1);
         VectorCopy(aasworld.vertexes[sharededge->v[!firstv]], v2);
         VectorAdd(v1, v2, area1point);
         VectorScale(area1point, 0.5, area1point);
         VectorCopy(area1point, area2point);
         // if the face plane in area 1 is pretty much vertical
-        plane1 = &aasworld.planes[ladderface1->planenum ^ (ladderface1num < 0)];
-        plane2 = &aasworld.planes[ladderface2->planenum ^ (ladderface2num < 0)];
+        const aas_plane_t* plane1 = &aasworld.planes[ladderface1->planenum ^ (ladderface1num < 0)];
+        const aas_plane_t* plane2 = &aasworld.planes[ladderface2->planenum ^ (ladderface2num < 0)];
         // get the points really into the areas
         VectorSubtract(v2, v1, sharededgevec);
         CrossProduct(plane1->normal, sharededgevec, dir);
@@ -1791,8 +1781,8 @@ static int AAS_Reachability_Ladder(int area1num, int area2num)
         // NOTE: 32 because that's larger than 16 (bot bbox x,y)
         VectorMA(area1point, -32, dir, area1point);
         VectorMA(area2point, 32, dir, area2point);
-        ladderface1vertical = fabsf(DotProduct(plane1->normal, up)) < 0.1;
-        ladderface2vertical = fabsf(DotProduct(plane2->normal, up)) < 0.1;
+        const int ladderface1vertical = fabsf(DotProduct(plane1->normal, up)) < 0.1;
+        const int ladderface2vertical = fabsf(DotProduct(plane2->normal, up)) < 0.1;
         // there's only reachability between vertical ladder faces
         if (!ladderface1vertical && !ladderface2vertical)
             return false;
@@ -1803,7 +1793,7 @@ static int AAS_Reachability_Ladder(int area1num, int area2num)
             // and the shared edge is not too vertical
             && fabsf(DotProduct(sharededgevec, up)) < 0.7) {
             // create a new reachability link
-            lreach = AAS_AllocReachability();
+            aas_lreachability_t* lreach = AAS_AllocReachability();
             if (!lreach)
                 return false;
             lreach->areanum = area2num;
@@ -1839,7 +1829,7 @@ static int AAS_Reachability_Ladder(int area1num, int area2num)
         // walk off a ladder (ledge) reachability
         if (ladderface1vertical && (ladderface2->faceflags & FACE_GROUND)) {
             // create a new reachability link
-            lreach = AAS_AllocReachability();
+            aas_lreachability_t* lreach = AAS_AllocReachability();
             if (!lreach)
                 return false;
             lreach->areanum = area2num;
@@ -1873,9 +1863,9 @@ static int AAS_Reachability_Ladder(int area1num, int area2num)
         if (ladderface1vertical) {
             // find lowest edge of the ladder face
             lowestpoint[2] = 99999;
-            for (i = 0; i < ladderface1->numedges; i++) {
-                edge1num = abs(aasworld.edgeindex[ladderface1->firstedge + i]);
-                edge1 = &aasworld.edges[edge1num];
+            for (int i = 0; i < ladderface1->numedges; i++) {
+                const int edge1num = abs(aasworld.edgeindex[ladderface1->firstedge + i]);
+                const aas_edge_t* edge1 = &aasworld.edges[edge1num];
                 VectorCopy(aasworld.vertexes[edge1->v[0]], v1);
                 VectorCopy(aasworld.vertexes[edge1->v[1]], v2);
                 VectorAdd(v1, v2, mid);
@@ -1892,13 +1882,14 @@ static int AAS_Reachability_Ladder(int area1num, int area2num)
             start[2] += 5;
             end[2] -= 100;
             // trace without entity collision
-            trace = AAS_TraceClientBBox(start, end, PRESENCE_NORMAL, -1);
+            aas_trace_t trace = AAS_TraceClientBBox(start, end, PRESENCE_NORMAL, -1);
             trace.endpos[2] += 1;
             area2num = AAS_PointAreaNum(trace.endpos);
             area2 = &aasworld.areas[area2num];
+            int i;
             for (i = 0; i < area2->numfaces; i++) {
-                face2num = aasworld.faceindex[area2->firstface + i];
-                face2 = &aasworld.faces[abs(face2num)];
+                const int face2num = aasworld.faceindex[area2->firstface + i];
+                const aas_face_t* face2 = &aasworld.faces[abs(face2num)];
                 if (face2->faceflags & FACE_LADDER) {
                     plane2 = &aasworld.planes[face2->planenum];
                     if (fabsf(DotProduct(plane2->normal, up)) < 0.1)
@@ -1912,7 +1903,7 @@ static int AAS_Reachability_Ladder(int area1num, int area2num)
                 // if the height is jumpable
                 if (start[2] - trace.endpos[2] < maxjumpheight) {
                     // create a new reachability link
-                    lreach = AAS_AllocReachability();
+                    aas_lreachability_t* lreach = AAS_AllocReachability();
                     if (!lreach)
                         return false;
                     lreach->areanum = area2num;
