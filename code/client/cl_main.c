@@ -1811,7 +1811,7 @@ void PRINTF_LIKE_FUNCTION(2, 3) QDECL CL_RefPrintf(int print_level, const char* 
     char msg[MAXPRINTMSG];
 
     va_start(argptr, fmt);
-    Q_vsnprintf(msg, sizeof(msg), fmt, argptr);
+    vsnprintf(msg, sizeof(msg), fmt, argptr);
     va_end(argptr);
 
     if (print_level == PRINT_ALL) {

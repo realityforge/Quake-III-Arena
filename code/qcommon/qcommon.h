@@ -530,16 +530,6 @@ typedef struct {
 void Field_Clear(field_t* edit);
 void Field_CompleteCommand(field_t* edit);
 
-// TTimo
-// vsnprintf is ISO/IEC 9899:1999
-// abstracting this to make it portable
-#ifdef WIN32
-#define Q_vsnprintf _vsnprintf
-#else
-// TODO: do we need Mac define?
-#define Q_vsnprintf vsnprintf
-#endif
-
 // returned by Sys_GetProcessorId
 #define CPUID_GENERIC 0 // any unrecognized processor
 
