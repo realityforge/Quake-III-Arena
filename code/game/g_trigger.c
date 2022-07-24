@@ -71,12 +71,12 @@ static void multi_trigger(gentity_t* ent, gentity_t* activator)
     }
 }
 
-static void Use_Multi(gentity_t* ent, gentity_t* other, gentity_t* activator)
+static void Use_Multi(gentity_t* ent, UNUSED gentity_t* other, gentity_t* activator)
 {
     multi_trigger(ent, activator);
 }
 
-static void Touch_Multi(gentity_t* self, gentity_t* other, trace_t* trace)
+static void Touch_Multi(gentity_t* self, gentity_t* other, UNUSED trace_t* trace)
 {
     if (!other->client) {
         return;
@@ -124,7 +124,7 @@ void SP_trigger_always(gentity_t* ent)
     ent->think = trigger_always_think;
 }
 
-static void trigger_push_touch(gentity_t* self, gentity_t* other, trace_t* trace)
+static void trigger_push_touch(gentity_t* self, gentity_t* other, UNUSED trace_t* trace)
 {
 
     if (!other->client) {
@@ -197,7 +197,7 @@ void SP_trigger_push(gentity_t* self)
     trap_LinkEntity(self);
 }
 
-static void Use_target_push(gentity_t* self, gentity_t* other, gentity_t* activator)
+static void Use_target_push(gentity_t* self, UNUSED gentity_t* other, gentity_t* activator)
 {
     if (!activator->client) {
         return;
@@ -246,7 +246,7 @@ void SP_target_push(gentity_t* self)
     self->use = Use_target_push;
 }
 
-void trigger_teleporter_touch(gentity_t* self, gentity_t* other, trace_t* trace)
+void trigger_teleporter_touch(gentity_t* self, gentity_t* other, UNUSED trace_t* trace)
 {
     gentity_t* dest;
 
@@ -311,7 +311,7 @@ NO_PROTECTION	*nothing* stops the damage
 "dmg"			default 5 (whole numbers only)
 
 */
-static void hurt_use(gentity_t* self, gentity_t* other, gentity_t* activator)
+static void hurt_use(gentity_t* self, UNUSED gentity_t* other, UNUSED gentity_t* activator)
 {
     if (self->r.linked) {
         trap_UnlinkEntity(self);
@@ -320,7 +320,7 @@ static void hurt_use(gentity_t* self, gentity_t* other, gentity_t* activator)
     }
 }
 
-static void hurt_touch(gentity_t* self, gentity_t* other, trace_t* trace)
+static void hurt_touch(gentity_t* self, gentity_t* other, UNUSED trace_t* trace)
 {
     int dflags;
 
@@ -391,7 +391,7 @@ static void func_timer_think(gentity_t* self)
     self->nextthink = level.time + 1000 * (self->wait + crandom() * self->random);
 }
 
-static void func_timer_use(gentity_t* self, gentity_t* other, gentity_t* activator)
+static void func_timer_use(gentity_t* self, UNUSED gentity_t* other, gentity_t* activator)
 {
     self->activator = activator;
 
