@@ -82,7 +82,6 @@ typedef struct {
     int page;
     int maxpages;
     char maplist[MAX_SERVERMAPS][MAX_NAMELENGTH];
-    int mapGamebits[MAX_SERVERMAPS];
 } startserver_t;
 
 static startserver_t s_startserver;
@@ -236,7 +235,6 @@ static void StartServer_GametypeEvent(void* ptr, int event)
 
         Q_strncpyz(s_startserver.maplist[s_startserver.nummaps], Info_ValueForKey(info, "map"), MAX_NAMELENGTH);
         Q_strupr(s_startserver.maplist[s_startserver.nummaps]);
-        s_startserver.mapGamebits[s_startserver.nummaps] = gamebits;
         s_startserver.nummaps++;
     }
     s_startserver.maxpages = (s_startserver.nummaps + MAX_MAPSPERPAGE - 1) / MAX_MAPSPERPAGE;
@@ -522,7 +520,6 @@ void StartServer_Cache()
 
         Q_strncpyz(s_startserver.maplist[i], Info_ValueForKey(info, "map"), MAX_NAMELENGTH);
         Q_strupr(s_startserver.maplist[i]);
-        s_startserver.mapGamebits[i] = GametypeBits(Info_ValueForKey(info, "type"));
 
         if (precache) {
             Com_sprintf(picname, sizeof(picname), "levelshots/%s", s_startserver.maplist[i]);
