@@ -540,7 +540,7 @@ void Field_CompleteCommand(field_t* edit);
 #define Q_vsnprintf vsnprintf
 #endif
 
-// returnbed by Sys_GetProcessorId
+// returned by Sys_GetProcessorId
 #define CPUID_GENERIC 0 // any unrecognized processor
 
 #define CPUID_AXP 0x10
