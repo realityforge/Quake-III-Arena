@@ -834,9 +834,6 @@ static void ServerOptions_Event(void* ptr, int event)
 {
     switch (((menucommon_s*)ptr)->id) {
 
-    // if( event != QM_ACTIVATED && event != QM_LOSTFOCUS) {
-    //	return;
-    // }
     case ID_PLAYER_TYPE:
         if (event != QM_ACTIVATED) {
             break;
