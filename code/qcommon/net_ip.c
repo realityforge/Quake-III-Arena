@@ -355,23 +355,9 @@ static void Sys_SockaddrToString(char* dest, int destlen, struct sockaddr* input
 
 bool Sys_StringToAdr(const char* s, netadr_t* a, const netadrtype_t family)
 {
+    const sa_family_t fam = NA_IP == family ? AF_INET : NA_IP6 == family ? AF_INET6
+                                                                         : AF_UNSPEC;
     struct sockaddr_storage sadr;
-    sa_family_t fam;
-
-    switch (family) {
-    case NA_IP:
-        fam = AF_INET;
-        break;
-    case NA_IP6:
-        fam = AF_INET6;
-        break;
-    case NA_BAD:
-    case NA_BOT:
-    case NA_LOOPBACK:
-    default:
-        fam = AF_UNSPEC;
-        break;
-    }
     if (!Sys_StringToSockaddr(s, (struct sockaddr*)&sadr, sizeof(sadr), fam)) {
         return false;
     }
