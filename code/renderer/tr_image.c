@@ -643,14 +643,14 @@ image_t* R_CreateImage(const char* name, const uint8_t* pic, int width, int heig
     long hash;
 
     if (strlen(name) >= MAX_QPATH) {
-        ri.Error(ERR_DROP, "R_CreateImage: \"%s\" is too long\n", name);
+        ri.Error(ERR_DROP, "R_CreateImage: \"%s\" is too long", name);
     }
     if (!strncmp(name, "*lightmap", 9)) {
         isLightmap = true;
     }
 
     if (tr.numImages == MAX_DRAWIMAGES) {
-        ri.Error(ERR_DROP, "R_CreateImage: MAX_DRAWIMAGES hit\n");
+        ri.Error(ERR_DROP, "R_CreateImage: MAX_DRAWIMAGES hit");
     }
 
     image = tr.images[tr.numImages] = ri.Hunk_Alloc(sizeof(image_t), h_low);
@@ -754,15 +754,15 @@ static void LoadTGA(const char* name, uint8_t** pic, int* width, int* height)
     if (targa_header.image_type != 2
         && targa_header.image_type != 10
         && targa_header.image_type != 3) {
-        ri.Error(ERR_DROP, "LoadTGA: Only type 2 (RGB), 3 (gray), and 10 (RGB) TGA images supported\n");
+        ri.Error(ERR_DROP, "LoadTGA: Only type 2 (RGB), 3 (gray), and 10 (RGB) TGA images supported");
     }
 
     if (targa_header.colormap_type != 0) {
-        ri.Error(ERR_DROP, "LoadTGA: colormaps not supported\n");
+        ri.Error(ERR_DROP, "LoadTGA: colormaps not supported");
     }
 
     if ((targa_header.pixel_size != 32 && targa_header.pixel_size != 24) && targa_header.image_type != 3) {
-        ri.Error(ERR_DROP, "LoadTGA: Only 32 or 24 bit images supported (no colormaps)\n");
+        ri.Error(ERR_DROP, "LoadTGA: Only 32 or 24 bit images supported (no colormaps)");
     }
 
     columns = targa_header.width;
