@@ -66,7 +66,7 @@ void MSG_Clear(msg_t* buf)
 {
     buf->cursize = 0;
     buf->overflowed = false;
-    buf->bit = 0; //<- in bits
+    buf->bit = 0; // in bits
 }
 
 void MSG_Bitstream(msg_t* buf)
