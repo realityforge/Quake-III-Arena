@@ -1081,7 +1081,7 @@ typedef my_destination_mgr* my_dest_ptr;
  * before any data is actually written.
  */
 
-void init_destination(j_compress_ptr cinfo)
+static void init_destination(j_compress_ptr cinfo)
 {
     my_dest_ptr dest = (my_dest_ptr)cinfo->dest;
 
@@ -1112,7 +1112,7 @@ void init_destination(j_compress_ptr cinfo)
  * write it out when emptying the buffer externally.
  */
 
-boolean empty_output_buffer(j_compress_ptr cinfo)
+static boolean empty_output_buffer(UNUSED j_compress_ptr cinfo)
 {
     return TRUE;
 }
