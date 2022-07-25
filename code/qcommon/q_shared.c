@@ -90,7 +90,6 @@ static int		(*_BigLong) (int l);
 static int		(*_LittleLong) (int l);
 static qint64	(*_BigLong64) (qint64 l);
 static qint64	(*_LittleLong64) (qint64 l);
-static float	(*_BigFloat) (const float *l);
 static float	(*_LittleFloat) (const float *l);
 
 short	BigShort(short l){return _BigShort(l);}
@@ -99,7 +98,6 @@ int		BigLong (int l) {return _BigLong(l);}
 int		LittleLong (int l) {return _LittleLong(l);}
 qint64 	BigLong64 (qint64 l) {return _BigLong64(l);}
 qint64 	LittleLong64 (qint64 l) {return _LittleLong64(l);}
-float	BigFloat (const float *l) {return _BigFloat(l);}
 float	LittleFloat (const float *l) {return _LittleFloat(l);}
 */
 

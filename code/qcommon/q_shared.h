@@ -151,10 +151,6 @@ static inline int BigLong(int l)
     LongSwap(l);
 }
 #define LittleLong
-static inline float BigFloat(const float* l)
-{
-    FloatSwap(l);
-}
 #define LittleFloat
 
 #define PATH_SEP '\\'
@@ -187,7 +183,6 @@ static inline int LittleLong(int l)
 {
     return LongSwap(l);
 }
-#define BigFloat
 static inline float LittleFloat(const float l)
 {
     return FloatSwap(&l);
@@ -217,7 +212,6 @@ static inline int LittleLong(int l)
 {
     return LongSwap(l);
 }
-#define BigFloat
 static inline float LittleFloat(const float l)
 {
     return FloatSwap(&l);
@@ -253,7 +247,6 @@ inline static int LittleLong(int l)
 {
     return LongSwap(l);
 }
-#define BigFloat
 inline static float LittleFloat(const float* l)
 {
     return FloatSwap(l);
@@ -717,7 +710,6 @@ int		BigLong (int l);
 int		LittleLong (int l);
 qint64  BigLong64 (qint64 l);
 qint64  LittleLong64 (qint64 l);
-float	BigFloat (const float *l);
 float	LittleFloat (const float *l);
 */
 char* QDECL va(const char* format, ...) PRINTF_LIKE_FUNCTION(1, 2);
