@@ -610,8 +610,6 @@ char* COM_SkipPath(char* pathname);
 void COM_StripExtension(const char* in, char* out);
 void COM_DefaultExtension(char* path, int maxSize, const char* extension);
 
-void COM_BeginParseSession(const char* name);
-int COM_GetCurrentParseLine(void);
 char* COM_Parse(char** data_p);
 char* COM_ParseExt(char** data_p, bool allowLineBreak);
 int COM_Compress(char* data_p);
@@ -637,14 +635,8 @@ typedef struct pc_token_s {
 
 // data is an in/out parm, returns a parsed out token
 
-void COM_MatchToken(char** buf_p, char* match);
-
 void SkipBracedSection(char** program);
 void SkipRestOfLine(char** data);
-
-void Parse1DMatrix(char** buf_p, int x, float* m);
-void Parse2DMatrix(char** buf_p, int y, int x, float* m);
-void Parse3DMatrix(char** buf_p, int z, int y, int x, float* m);
 
 void QDECL Com_sprintf(char* dest, int size, const char* fmt, ...);
 

@@ -136,19 +136,7 @@ float FloatSwap(const float* f)
 }
 
 static char com_token[MAX_TOKEN_CHARS];
-static char com_parsename[MAX_TOKEN_CHARS];
 static int com_lines;
-
-void COM_BeginParseSession(const char* name)
-{
-    com_lines = 0;
-    Com_sprintf(com_parsename, sizeof(com_parsename), "%s", name);
-}
-
-int COM_GetCurrentParseLine()
-{
-    return com_lines;
-}
 
 char* COM_Parse(char** data_p)
 {
@@ -345,16 +333,6 @@ char* COM_ParseExt(char** data_p, bool allowLineBreaks)
     return com_token;
 }
 
-void COM_MatchToken(char** buf_p, char* match)
-{
-    char* token;
-
-    token = COM_Parse(buf_p);
-    if (strcmp(token, match)) {
-        Com_Error(ERR_DROP, "MatchToken: %s != %s", token, match);
-    }
-}
-
 /*
 =================
 SkipBracedSection
@@ -396,47 +374,6 @@ void SkipRestOfLine(char** data)
     }
 
     *data = p;
-}
-
-void Parse1DMatrix(char** buf_p, int x, float* m)
-{
-    char* token;
-    int i;
-
-    COM_MatchToken(buf_p, "(");
-
-    for (i = 0; i < x; i++) {
-        token = COM_Parse(buf_p);
-        m[i] = atof(token);
-    }
-
-    COM_MatchToken(buf_p, ")");
-}
-
-void Parse2DMatrix(char** buf_p, int y, int x, float* m)
-{
-    int i;
-
-    COM_MatchToken(buf_p, "(");
-
-    for (i = 0; i < y; i++) {
-        Parse1DMatrix(buf_p, x, m + i * x);
-    }
-
-    COM_MatchToken(buf_p, ")");
-}
-
-void Parse3DMatrix(char** buf_p, int z, int y, int x, float* m)
-{
-    int i;
-
-    COM_MatchToken(buf_p, "(");
-
-    for (i = 0; i < z; i++) {
-        Parse2DMatrix(buf_p, y, x, m + i * x * y);
-    }
-
-    COM_MatchToken(buf_p, ")");
 }
 
 int Q_isprint(int c)
