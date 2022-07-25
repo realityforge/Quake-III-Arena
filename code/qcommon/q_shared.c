@@ -688,7 +688,7 @@ char* QDECL va(const char* format, ...)
     index++;
 
     va_start(argptr, format);
-    vsprintf(buf, format, argptr);
+    vsnprintf(buf, sizeof(*string), format, argptr);
     va_end(argptr);
 
     return buf;

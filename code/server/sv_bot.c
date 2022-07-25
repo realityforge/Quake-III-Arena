@@ -106,7 +106,7 @@ static void PRINTF_LIKE_FUNCTION(2, 3) QDECL BotImport_Print(const int type, con
     va_list ap;
 
     va_start(ap, fmt);
-    vsprintf(str, fmt, ap);
+    vsnprintf(str, sizeof(str), fmt, ap);
     va_end(ap);
 
     switch (type) {

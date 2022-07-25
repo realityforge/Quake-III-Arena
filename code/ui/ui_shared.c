@@ -234,7 +234,7 @@ static PRINTF_LIKE_FUNCTION(2, 3) void PC_SourceError(const int handle, const ch
     static char string[4096];
 
     va_start(argptr, format);
-    vsprintf(string, format, argptr);
+    vsnprintf(string, sizeof(string), format, argptr);
     va_end(argptr);
 
     filename[0] = '\0';
