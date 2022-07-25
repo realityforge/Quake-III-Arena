@@ -708,7 +708,6 @@ short	BigShort(short l);
 short	LittleShort(short l);
 int		BigLong (int l);
 int		LittleLong (int l);
-qint64  BigLong64 (qint64 l);
 float	LittleFloat (const float *l);
 */
 char* QDECL va(const char* format, ...) PRINTF_LIKE_FUNCTION(1, 2);
