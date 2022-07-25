@@ -280,7 +280,7 @@ void MSG_WriteByte(msg_t* sb, int c)
 void MSG_WriteData(msg_t* buf, const void* data, int length)
 {
     for (int i = 0; i < length; i++) {
-        MSG_WriteByte(buf, ((uint8_t*)data)[i]);
+        MSG_WriteByte(buf, ((const uint8_t*)data)[i]);
     }
 }
 
