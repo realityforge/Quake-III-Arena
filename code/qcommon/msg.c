@@ -161,7 +161,6 @@ int MSG_ReadBits(msg_t* msg, int bits)
     int get;
     bool sgn;
     int i, nbits;
-    //	FILE*	fp;
 
     value = 0;
 
