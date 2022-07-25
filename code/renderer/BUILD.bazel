@@ -153,8 +153,18 @@ cc_library(
     ],
 )
 
+config_setting(
+    name = "debug_compilation_mode",
+    values = {"compilation_mode": "dbg"},
+)
+
 gla_lib(
     name = "gla",
+    copts = FULL_WARNINGS + ["-Wno-padded"],
+    defines = select({
+        ":debug_compilation_mode": ["GLA_SUPPORT_AUTO_CHECK_ERROR_HANDLER"],
+        "//conditions:default": [],
+    }),
     extensions = [
         "GL_ARB_framebuffer_object",
         "GL_ARB_depth_clamp",
