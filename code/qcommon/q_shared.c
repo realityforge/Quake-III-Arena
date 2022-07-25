@@ -162,24 +162,6 @@ float	BigFloat (const float *l) {return _BigFloat(l);}
 float	LittleFloat (const float *l) {return _LittleFloat(l);}
 */
 
-void CopyShortSwap(void* dest, void* src)
-{
-    uint8_t *to = dest, *from = src;
-
-    to[0] = from[1];
-    to[1] = from[0];
-}
-
-void CopyLongSwap(void* dest, void* src)
-{
-    uint8_t *to = dest, *from = src;
-
-    to[0] = from[3];
-    to[1] = from[2];
-    to[2] = from[1];
-    to[3] = from[0];
-}
-
 short ShortSwap(short l)
 {
     uint8_t b1, b2;

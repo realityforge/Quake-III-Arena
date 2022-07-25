@@ -99,6 +99,32 @@ bit functions
 =============================================================================
 */
 
+static FORCEINLINE void CopyLittleShort(void* dest, const void* src)
+{
+#if defined(Q3_BIG_ENDIAN)
+    uint8_t* to = dest;
+    const uint8_t* from = src;
+    to[0] = from[1];
+    to[1] = from[0];
+#elif defined(Q3_LITTLE_ENDIAN)
+    memcpy(dest, src, 2);
+#endif
+}
+static FORCEINLINE void CopyLittleLong(void* dest, const void* src)
+{
+#if defined(Q3_BIG_ENDIAN)
+    uint8_t* to = dest;
+    const uint8_t* from = src;
+
+    to[0] = from[3];
+    to[1] = from[2];
+    to[2] = from[1];
+    to[3] = from[0];
+#elif defined(Q3_LITTLE_ENDIAN)
+    memcpy(dest, src, 4);
+#endif
+}
+
 // negative bit values include signs
 void MSG_WriteBits(msg_t* msg, int value, int bits)
 {
