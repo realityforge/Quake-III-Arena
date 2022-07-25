@@ -745,16 +745,14 @@ int Q_CountChar(const char* string, char tocount)
 
 int QDECL Com_sprintf(char* dest, int size, const char* fmt, ...)
 {
-    int len;
     va_list argptr;
-
     va_start(argptr, fmt);
-    len = vsnprintf(dest, size, fmt, argptr);
+    const int len = vsnprintf(dest, size, fmt, argptr);
     va_end(argptr);
 
-    if (len >= size)
+    if (len >= size) {
         Com_Printf("Com_sprintf: Output length %d too short, require %d bytes.\n", size, len + 1);
-
+    }
     return len;
 }
 
