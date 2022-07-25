@@ -353,7 +353,7 @@ static void Sys_SockaddrToString(char* dest, int destlen, struct sockaddr* input
         *dest = '\0';
 }
 
-bool Sys_StringToAdr(const char* s, netadr_t* a, netadrtype_t family)
+bool Sys_StringToAdr(const char* s, netadr_t* a, const netadrtype_t family)
 {
     struct sockaddr_storage sadr;
     sa_family_t fam;
