@@ -285,7 +285,7 @@ static struct addrinfo* SearchAddrInfo(struct addrinfo* hints, sa_family_t famil
     return NULL;
 }
 
-static bool Sys_StringToSockaddr(const char* s, struct sockaddr* sadr, int sadr_len, sa_family_t family)
+static bool Sys_StringToSockaddr(const char* s, struct sockaddr* sadr, socklen_t sadr_len, sa_family_t family)
 {
     struct addrinfo hints;
     struct addrinfo* res = NULL;
