@@ -97,8 +97,6 @@ bit functions
 =============================================================================
 */
 
-int overflows;
-
 // negative bit values include signs
 void MSG_WriteBits(msg_t* msg, int value, int bits)
 {
@@ -114,22 +112,6 @@ void MSG_WriteBits(msg_t* msg, int value, int bits)
         Com_Error(ERR_DROP, "MSG_WriteBits: bad bits %i", bits);
     }
 
-    // check for overflows
-    if (bits != 32) {
-        if (bits > 0) {
-            if (value > ((1 << bits) - 1) || value < 0) {
-                overflows++;
-            }
-        } else {
-            int r;
-
-            r = 1 << (bits - 1);
-
-            if (value > r - 1 || value < -r) {
-                overflows++;
-            }
-        }
-    }
     if (bits < 0) {
         bits = -bits;
     }
