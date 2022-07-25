@@ -398,7 +398,7 @@ bool NET_GetLoopPacket(netsrc_t sock, netadr_t* net_from, msg_t* net_message)
     return true;
 }
 
-static void NET_SendLoopPacket(netsrc_t sock, int length, const void* data, netadr_t to)
+static void NET_SendLoopPacket(netsrc_t sock, int length, const void* data)
 {
     int i;
     loopback_t* loop;
@@ -480,7 +480,7 @@ void NET_SendPacket(netsrc_t sock, int length, const void* data, netadr_t to)
     }
 
     if (to.type == NA_LOOPBACK) {
-        NET_SendLoopPacket(sock, length, data, to);
+        NET_SendLoopPacket(sock, length, data);
         return;
     }
     if (to.type == NA_BOT) {
