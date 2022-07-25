@@ -223,7 +223,7 @@ If a larger shrinking is needed, use the mipmap function
 before or after.
 ================
 */
-static void ResampleTexture(unsigned* in, int inwidth, int inheight, unsigned* out,
+static void ResampleTexture(const unsigned* in, int inwidth, int inheight, unsigned* out,
                             int outwidth, int outheight)
 {
     int i, j;
@@ -450,7 +450,7 @@ static uint8_t mipBlendColors[16][4] = {
 };
 
 extern bool charSet;
-static void Upload32(unsigned* data,
+static void Upload32(const unsigned* data,
                      int width, int height,
                      bool mipmap,
                      bool picmip,
@@ -463,7 +463,7 @@ static void Upload32(unsigned* data,
     unsigned* resampledBuffer = NULL;
     int scaled_width, scaled_height;
     int i, c;
-    uint8_t* scan;
+    const uint8_t* scan;
     GLenum internalFormat = GL_RGB;
     float rMax = 0, gMax = 0, bMax = 0;
 
@@ -513,7 +513,7 @@ static void Upload32(unsigned* data,
     // scan the texture for each channel's max values
     // and verify if the alpha channel is being used or not
     c = width * height;
-    scan = ((uint8_t*)data);
+    scan = ((const uint8_t*)data);
     samples = 3;
     if (!lightMap) {
         for (i = 0; i < c; i++) {
@@ -679,7 +679,7 @@ image_t* R_CreateImage(const char* name, const uint8_t* pic, int width, int heig
 
     GL_Bind(image);
 
-    Upload32((unsigned*)pic, image->width, image->height,
+    Upload32((const unsigned*)pic, image->width, image->height,
              image->mipmap,
              allowPicmip,
              isLightmap,
