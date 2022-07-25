@@ -818,7 +818,7 @@ static void LoadTGA(const char* name, uint8_t** pic, int* width, int* height)
                     *pixbuf++ = alphabyte;
                     break;
                 default:
-                    ri.Error(ERR_DROP, "LoadTGA: illegal pixel_size '%d' in file '%s'\n", targa_header.pixel_size, name);
+                    ri.Error(ERR_DROP, "LoadTGA: illegal pixel_size '%d' in file '%s'", targa_header.pixel_size, name);
                     break;
                 }
             }
@@ -851,7 +851,7 @@ static void LoadTGA(const char* name, uint8_t** pic, int* width, int* height)
                         alphabyte = *buf_p++;
                         break;
                     default:
-                        ri.Error(ERR_DROP, "LoadTGA: illegal pixel_size '%d' in file '%s'\n", targa_header.pixel_size, name);
+                        ri.Error(ERR_DROP, "LoadTGA: illegal pixel_size '%d' in file '%s'", targa_header.pixel_size, name);
                         break;
                     }
 
@@ -893,7 +893,7 @@ static void LoadTGA(const char* name, uint8_t** pic, int* width, int* height)
                             *pixbuf++ = alphabyte;
                             break;
                         default:
-                            ri.Error(ERR_DROP, "LoadTGA: illegal pixel_size '%d' in file '%s'\n", targa_header.pixel_size, name);
+                            ri.Error(ERR_DROP, "LoadTGA: illegal pixel_size '%d' in file '%s'", targa_header.pixel_size, name);
                             break;
                         }
                         column++;

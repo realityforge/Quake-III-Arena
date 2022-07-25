@@ -140,13 +140,13 @@ bool SNDDMA_Init(void)
     Com_Printf("Buffer size = %d\n", bufferSize->integer);
 
     if (!chunkSize->integer)
-        ri.Error(ERR_FATAL, "s_chunksize must be non-zero\n");
+        ri.Error(ERR_FATAL, "s_chunksize must be non-zero");
     if (!bufferSize->integer)
-        ri.Error(ERR_FATAL, "s_buffersize must be non-zero\n");
+        ri.Error(ERR_FATAL, "s_buffersize must be non-zero");
     if (chunkSize->integer >= bufferSize->integer)
-        ri.Error(ERR_FATAL, "s_chunksize must be less than s_buffersize\n");
+        ri.Error(ERR_FATAL, "s_chunksize must be less than s_buffersize");
     if (bufferSize->integer % chunkSize->integer)
-        ri.Error(ERR_FATAL, "s_buffersize must be an even multiple of s_chunksize\n");
+        ri.Error(ERR_FATAL, "s_buffersize must be an even multiple of s_chunksize");
 
     // Get the output device
     propertySize = sizeof(outputDeviceID);

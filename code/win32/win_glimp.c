@@ -917,7 +917,7 @@ void GLimp_EndFrame(void)
     // don't flip if drawing to front buffer
     if (Q_stricmp(r_drawBuffer->string, "GL_FRONT") != 0) {
         if (!qwglSwapBuffers(glw_state.hDC)) {
-            ri.Error(ERR_FATAL, "GLimp_EndFrame() - SwapBuffers() failed!\n");
+            ri.Error(ERR_FATAL, "GLimp_EndFrame() - SwapBuffers() failed!");
         }
     }
 }
@@ -925,7 +925,7 @@ void GLimp_EndFrame(void)
 static void GLW_StartOpenGL(void)
 {
     if (!GLW_LoadOpenGL(OPENGL_DRIVER_NAME)) {
-        ri.Error(ERR_FATAL, "GLW_StartOpenGL() - could not load OpenGL subsystem\n");
+        ri.Error(ERR_FATAL, "GLW_StartOpenGL() - could not load OpenGL subsystem");
     }
 }
 
@@ -949,7 +949,7 @@ void GLimp_Init(void)
 
     // check OS version to see if we can do fullscreen display changes
     if (!GLW_CheckOSVersion()) {
-        ri.Error(ERR_FATAL, "GLimp_Init() - incorrect operating system\n");
+        ri.Error(ERR_FATAL, "GLimp_Init() - incorrect operating system");
     }
 
     // save off hInstance and wndproc

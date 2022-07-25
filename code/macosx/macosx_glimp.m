@@ -65,7 +65,7 @@ void CheckErrors(void)
 
     err = qglGetError();
     if (err != GL_NO_ERROR) {
-        ri.Error(ERR_FATAL, "glGetError: %s\n", qglGetString(err));
+        ri.Error(ERR_FATAL, "glGetError: %s", qglGetString(err));
     }
 }
 
@@ -232,7 +232,7 @@ static bool CreateGameWindow(bool isSecondTry)
 
     glw_state.desktopMode = (NSDictionary*)CGDisplayCurrentMode(glw_state.display);
     if (!glw_state.desktopMode) {
-        ri.Error(ERR_FATAL, "Could not get current graphics mode for display 0x%08x\n", glw_state.display);
+        ri.Error(ERR_FATAL, "Could not get current graphics mode for display 0x%08x", glw_state.display);
     }
 
     ri.Printf(PRINT_ALL, "...setting mode %d:\n", current_mode);
@@ -412,7 +412,7 @@ void GLimp_Init(void)
     r_enablerender = ri.Cvar_Get("r_enablerender", "1", 0);
 
     if (Sys_QueryVideoMemory() == 0) {
-        ri.Error(ERR_FATAL, "Could not initialize OpenGL.  There does not appear to be an OpenGL-supported video card in your system.\n");
+        ri.Error(ERR_FATAL, "Could not initialize OpenGL.  There does not appear to be an OpenGL-supported video card in your system.");
     }
 
     if (!GLimp_SetMode(false)) {
@@ -428,7 +428,7 @@ void GLimp_Init(void)
             return;
         }
 
-        ri.Error(ERR_FATAL, "Could not initialize OpenGL\n");
+        ri.Error(ERR_FATAL, "Could not initialize OpenGL");
         return;
     }
 
@@ -696,7 +696,7 @@ static void GLW_InitExtensions(void)
             qglLockArraysEXT = (void(APIENTRY*)(GLint, GLint))qwglGetProcAddress("glLockArraysEXT");
             qglUnlockArraysEXT = (void(APIENTRY*)(void))qwglGetProcAddress("glUnlockArraysEXT");
             if (!qglLockArraysEXT || !qglUnlockArraysEXT) {
-                ri.Error(ERR_FATAL, "bad getprocaddress\n");
+                ri.Error(ERR_FATAL, "bad getprocaddress");
             }
         } else {
             ri.Printf(PRINT_ALL, "...ignoring GL_EXT_compiled_vertex_array\n");

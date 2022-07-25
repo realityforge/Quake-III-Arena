@@ -409,7 +409,7 @@ static void FillCloudySkySide(const int mins[2], const int maxs[2], bool addInde
             tess.numVertexes++;
 
             if (tess.numVertexes >= SHADER_MAX_VERTEXES) {
-                ri.Error(ERR_DROP, "SHADER_MAX_VERTEXES hit in FillCloudySkySide()\n");
+                ri.Error(ERR_DROP, "SHADER_MAX_VERTEXES hit in FillCloudySkySide()");
             }
         }
     }

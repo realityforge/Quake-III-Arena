@@ -110,19 +110,19 @@ bool SNDDMA_Init(void)
     bufferSize = ri.Cvar_Get("s_buffersize", "65536", CVAR_ARCHIVE);
 
     if (!chunkSize->integer) {
-        ri.Error(ERR_FATAL, "snd_chunkSize must be non-zero\n");
+        ri.Error(ERR_FATAL, "snd_chunkSize must be non-zero");
     }
 
     if (!bufferSize->integer) {
-        ri.Error(ERR_FATAL, "snd_bufferSize must be non-zero\n");
+        ri.Error(ERR_FATAL, "snd_bufferSize must be non-zero");
     }
 
     if (chunkSize->integer >= bufferSize->integer) {
-        ri.Error(ERR_FATAL, "snd_chunkSize must be less than snd_bufferSize\n");
+        ri.Error(ERR_FATAL, "snd_chunkSize must be less than snd_bufferSize");
     }
 
     if (bufferSize->integer % chunkSize->integer) {
-        ri.Error(ERR_FATAL, "snd_bufferSize must be an even multiple of snd_chunkSize\n");
+        ri.Error(ERR_FATAL, "snd_bufferSize must be an even multiple of snd_chunkSize");
     }
 
     // create a sound channel

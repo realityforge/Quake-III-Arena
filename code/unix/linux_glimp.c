@@ -1293,7 +1293,7 @@ void GLimp_Init(void)
     XSetErrorHandler(&qXErrorHandler);
 
     if (!GLW_LoadOpenGL(OPENGL_DRIVER_NAME)) {
-        ri.Error(ERR_FATAL, "GLimp_Init() - could not load OpenGL subsystem\n");
+        ri.Error(ERR_FATAL, "GLimp_Init() - could not load OpenGL subsystem");
     }
 
     // get our config strings
