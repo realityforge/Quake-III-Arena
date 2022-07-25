@@ -724,7 +724,7 @@ static void LoadTGA(const char* name, uint8_t** pic, int* width, int* height)
     *pic = NULL;
 
     // load the file
-    ri.FS_ReadFile((char*)name, (void**)&buffer);
+    ri.FS_ReadFile(name, (void**)&buffer);
     if (!buffer) {
         return;
     }
