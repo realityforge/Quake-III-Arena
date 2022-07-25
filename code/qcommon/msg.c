@@ -1216,7 +1216,7 @@ void MSG_ReadDeltaPlayerstate(msg_t* msg, playerState_t* from, playerState_t* to
     }
 }
 
-int msg_hData[256] = {
+static int msg_hData[256] = {
     250315, // 0
     41193, // 1
     6292, // 2
