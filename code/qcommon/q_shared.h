@@ -729,7 +729,6 @@ char* QDECL va(const char* format, ...) PRINTF_LIKE_FUNCTION(1, 2);
 //
 char* Info_ValueForKey(const char* s, const char* key);
 void Info_RemoveKey(char* s, const char* key);
-void Info_RemoveKey_big(char* s, const char* key);
 void Info_SetValueForKey(char* s, const char* key, const char* value);
 void Info_SetValueForKey_Big(char* s, const char* key, const char* value);
 bool Info_Validate(const char* s);
