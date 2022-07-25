@@ -365,6 +365,9 @@ bool Sys_StringToAdr(const char* s, netadr_t* a, netadrtype_t family)
     case NA_IP6:
         fam = AF_INET6;
         break;
+    case NA_BAD:
+    case NA_BOT:
+    case NA_LOOPBACK:
     default:
         fam = AF_UNSPEC;
         break;
