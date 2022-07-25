@@ -546,7 +546,7 @@ extern cvar_t* cl_shownet;
 #define LOG(x)
 #endif
 
-int kbitmask[32] = {
+static int kbitmask[32] = {
     0x00000001,
     0x00000003,
     0x00000007,
@@ -676,7 +676,7 @@ typedef struct {
 // using the stringizing operator to save typing...
 #define NETF(x) #x, (size_t) & ((entityState_t*)0)->x
 
-netField_t entityStateFields[] = {
+static netField_t entityStateFields[] = {
     { NETF(pos.trTime), 32 },
     { NETF(pos.trBase[0]), 0 },
     { NETF(pos.trBase[1]), 0 },
@@ -983,7 +983,7 @@ void MSG_ReadDeltaEntity(msg_t* msg, entityState_t* from, entityState_t* to,
 // using the stringizing operator to save typing...
 #define PSF(x) #x, offsetof(playerState_t, x)
 
-netField_t playerStateFields[] = {
+static netField_t playerStateFields[] = {
     { PSF(commandTime), 32 },
     { PSF(origin[0]), 0 },
     { PSF(origin[1]), 0 },
@@ -1311,7 +1311,7 @@ void MSG_ReadDeltaPlayerstate(msg_t* msg, playerState_t* from, playerState_t* to
     }
 }
 
-int msg_hData[256] = {
+static int msg_hData[256] = {
     250315, // 0
     41193, // 1
     6292, // 2
