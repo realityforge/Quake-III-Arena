@@ -952,7 +952,7 @@ static void LoadJPG(const char* filename, unsigned char** pic, int* width, int* 
      * requires it in order to read binary files.
      */
 
-    ri.FS_ReadFile((char*)filename, (void**)&fbuffer);
+    ri.FS_ReadFile(filename, (void**)&fbuffer);
     if (!fbuffer) {
         return;
     }
