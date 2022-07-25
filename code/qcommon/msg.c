@@ -28,8 +28,6 @@ static huffman_t msgHuff;
 
 static bool msgInit = false;
 
-int pcount[256];
-
 /*
 ==============================================================================
 
@@ -599,23 +597,6 @@ entityState_t communication
 =============================================================================
 */
 
-/*
-=================
-MSG_ReportChangeVectors_f
-
-Prints out a table from the current statistics for copying to code
-=================
-*/
-void MSG_ReportChangeVectors_f()
-{
-    int i;
-    for (i = 0; i < 256; i++) {
-        if (pcount[i]) {
-            Com_Printf("%d used %d\n", i, pcount[i]);
-        }
-    }
-}
-
 typedef struct {
     char* name;
     int offset;
@@ -907,7 +888,6 @@ void MSG_ReadDeltaEntity(msg_t* msg, entityState_t* from, entityState_t* to,
                     }
                 }
             }
-            //			pcount[i]++;
         }
     }
     for (i = lc, field = &entityStateFields[lc]; i < COUNT_OF(entityStateFields); i++, field++) {
@@ -1023,7 +1003,6 @@ void MSG_WriteDeltaPlayerstate(msg_t* msg, struct playerState_s* from, struct pl
         }
 
         MSG_WriteBits(msg, 1, 1); // changed
-        //		pcount[i]++;
 
         if (field->bits == 0) {
             // float
