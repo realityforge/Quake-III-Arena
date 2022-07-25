@@ -172,35 +172,77 @@ short ShortSwap(short l);
 int LongSwap(int l);
 float FloatSwap(const float* f);
 
+static FORCEINLINE short LittleShort(const short value)
+{
+#if defined(Q3_BIG_ENDIAN)
+    return ShortSwap(value);
+#elif defined(Q3_LITTLE_ENDIAN)
+    return value;
+#elif defined(Q3_VM)
+    return value;
+#endif
+}
+
+static FORCEINLINE int LittleLong(const int value)
+{
+#if defined(Q3_BIG_ENDIAN)
+    return LongSwap(value);
+#elif defined(Q3_LITTLE_ENDIAN)
+    return value;
+#elif defined(Q3_VM)
+    return value;
+#endif
+}
+
+static FORCEINLINE float LittleFloat(const float value)
+{
+#if defined(Q3_BIG_ENDIAN)
+    return FloatSwap(&value);
+#elif defined(Q3_LITTLE_ENDIAN)
+    return value;
+#elif defined(Q3_VM)
+    return value;
+#endif
+}
+
+static FORCEINLINE short BigShort(const short value)
+{
+#if defined(Q3_BIG_ENDIAN)
+    return value;
+#elif defined(Q3_LITTLE_ENDIAN)
+    return ShortSwap(value);
+#elif defined(Q3_VM)
+    return value;
+#endif
+}
+
+static FORCEINLINE int BigLong(const int value)
+{
+#if defined(Q3_BIG_ENDIAN)
+    return value;
+#elif defined(Q3_LITTLE_ENDIAN)
+    return LongSwap(value);
+#elif defined(Q3_VM)
+    return value;
+#endif
+}
+
+static FORCEINLINE float BigFloat(const float value)
+{
+#if defined(Q3_BIG_ENDIAN)
+    return value;
+#elif defined(Q3_LITTLE_ENDIAN)
+    return FloatSwap(&value);
+#elif defined(Q3_VM)
+    return value;
+#endif
+}
+
 #if defined(Q3_BIG_ENDIAN) && defined(Q3_LITTLE_ENDIAN)
 #error "Endianness defined as both big and little"
 #elif defined(Q3_BIG_ENDIAN)
-
-#define LittleShort(x) ShortSwap(x)
-#define LittleLong(x) LongSwap(x)
-#define LittleFloat(x) FloatSwap(&x)
-#define BigShort
-#define BigLong
-#define BigFloat
-
 #elif defined(Q3_LITTLE_ENDIAN)
-
-#define LittleShort
-#define LittleLong
-#define LittleFloat
-#define BigShort(x) ShortSwap(x)
-#define BigLong(x) LongSwap(x)
-#define BigFloat(x) FloatSwap(&x)
-
 #elif defined(Q3_VM)
-
-#define LittleShort
-#define LittleLong
-#define LittleFloat
-#define BigShort
-#define BigLong
-#define BigFloat
-
 #else
 #error "Endianness not defined"
 #endif
