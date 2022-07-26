@@ -463,7 +463,7 @@ delta functions with keys
 =============================================================================
 */
 
-int kbitmask[32] = {
+static int kbitmask[32] = {
     0x00000001,
     0x00000003,
     0x00000007,
@@ -587,7 +587,7 @@ typedef struct {
 // using the stringizing operator to save typing...
 #define NETF(x) #x, (size_t) & ((entityState_t*)0)->x
 
-netField_t entityStateFields[] = {
+static netField_t entityStateFields[] = {
     { NETF(pos.trTime), 32 },
     { NETF(pos.trBase[0]), 0 },
     { NETF(pos.trBase[1]), 0 },
