@@ -891,7 +891,7 @@ void MSG_ReadDeltaEntity(msg_t* msg, entityState_t* from, entityState_t* to,
 // using the stringizing operator to save typing...
 #define PSF(x) #x, offsetof(playerState_t, x)
 
-netField_t playerStateFields[] = {
+static netField_t playerStateFields[] = {
     { PSF(commandTime), 32 },
     { PSF(origin[0]), 0 },
     { PSF(origin[1]), 0 },

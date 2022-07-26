@@ -53,9 +53,9 @@ to the new value before sending out any replies.
 
 #define FRAGMENT_BIT (1 << 31)
 
-cvar_t* showpackets;
-cvar_t* showdrop;
-cvar_t* qport;
+static cvar_t* showpackets;
+static cvar_t* showdrop;
+static cvar_t* qport;
 
 static char* netsrcString[2] = {
     "client",
@@ -433,7 +433,7 @@ typedef struct {
     int get, send;
 } loopback_t;
 
-loopback_t loopbacks[2];
+static loopback_t loopbacks[2];
 
 bool NET_GetLoopPacket(netsrc_t sock, netadr_t* net_from, msg_t* net_message)
 {
