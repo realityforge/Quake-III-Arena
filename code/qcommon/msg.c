@@ -1081,9 +1081,8 @@ void MSG_WriteDeltaPlayerstate(msg_t* msg, struct playerState_s* from, struct pl
 
 void MSG_ReadDeltaPlayerstate(msg_t* msg, playerState_t* from, playerState_t* to)
 {
-    int i, lc;
+    int lc;
     int bits;
-    netField_t* field;
     int startBit, endBit;
     int print;
     int *fromF, *toF;
@@ -1117,7 +1116,9 @@ void MSG_ReadDeltaPlayerstate(msg_t* msg, playerState_t* from, playerState_t* to
 
     lc = MSG_ReadByte(msg);
 
-    for (i = 0, field = playerStateFields; i < lc; i++, field++) {
+    for (int i = 0; i < lc; i++) {
+        const netField_t* field = &playerStateFields[i];
+
         fromF = (int*)((uint8_t*)from + field->offset);
         toF = (int*)((uint8_t*)to + field->offset);
 
@@ -1152,7 +1153,8 @@ void MSG_ReadDeltaPlayerstate(msg_t* msg, playerState_t* from, playerState_t* to
             }
         }
     }
-    for (i = lc, field = &playerStateFields[lc]; i < COUNT_OF(playerStateFields); i++, field++) {
+    for (size_t i = lc; i < COUNT_OF(playerStateFields); i++) {
+        const netField_t* field = &playerStateFields[i];
         fromF = (int*)((uint8_t*)from + field->offset);
         toF = (int*)((uint8_t*)to + field->offset);
         // no change
@@ -1165,7 +1167,7 @@ void MSG_ReadDeltaPlayerstate(msg_t* msg, playerState_t* from, playerState_t* to
         if (MSG_ReadBits(msg, 1)) {
             LOG("PS_STATS");
             bits = MSG_ReadShort(msg);
-            for (i = 0; i < 16; i++) {
+            for (int i = 0; i < 16; i++) {
                 if (bits & (1 << i)) {
                     to->stats[i] = MSG_ReadShort(msg);
                 }
@@ -1176,7 +1178,7 @@ void MSG_ReadDeltaPlayerstate(msg_t* msg, playerState_t* from, playerState_t* to
         if (MSG_ReadBits(msg, 1)) {
             LOG("PS_PERSISTANT");
             bits = MSG_ReadShort(msg);
-            for (i = 0; i < 16; i++) {
+            for (int i = 0; i < 16; i++) {
                 if (bits & (1 << i)) {
                     to->persistant[i] = MSG_ReadShort(msg);
                 }
@@ -1187,7 +1189,7 @@ void MSG_ReadDeltaPlayerstate(msg_t* msg, playerState_t* from, playerState_t* to
         if (MSG_ReadBits(msg, 1)) {
             LOG("PS_AMMO");
             bits = MSG_ReadShort(msg);
-            for (i = 0; i < 16; i++) {
+            for (int i = 0; i < 16; i++) {
                 if (bits & (1 << i)) {
                     to->ammo[i] = MSG_ReadShort(msg);
                 }
@@ -1198,7 +1200,7 @@ void MSG_ReadDeltaPlayerstate(msg_t* msg, playerState_t* from, playerState_t* to
         if (MSG_ReadBits(msg, 1)) {
             LOG("PS_POWERUPS");
             bits = MSG_ReadShort(msg);
-            for (i = 0; i < 16; i++) {
+            for (int i = 0; i < 16; i++) {
                 if (bits & (1 << i)) {
                     to->powerups[i] = MSG_ReadLong(msg);
                 }
