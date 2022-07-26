@@ -379,7 +379,7 @@ void Huff_Decompress(msg_t* mbuf, int offset)
             }
         }
 
-        seq[j] = ch; /* Write symbol */
+        seq[j] = (uint8_t)ch; /* Write symbol */
 
         Huff_addRef(&huff, (uint8_t)ch); /* Increment node */
     }
@@ -410,7 +410,7 @@ void Huff_Compress(msg_t* mbuf, int offset)
     huff.tree->parent = huff.tree->left = huff.tree->right = NULL;
     huff.loc[NYT] = huff.tree;
 
-    seq[0] = (size >> 8);
+    seq[0] = (uint8_t)(size >> 8);
     seq[1] = size & 0xff;
 
     bloc = 16;
