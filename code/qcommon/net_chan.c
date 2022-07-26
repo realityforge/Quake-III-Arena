@@ -51,7 +51,7 @@ to the new value before sending out any replies.
 
 #define FRAGMENT_SIZE (MAX_PACKETLEN - 100)
 
-#define FRAGMENT_BIT (1 << 31)
+#define FRAGMENT_BIT (1U << 31)
 
 static cvar_t* showpackets;
 static cvar_t* showdrop;
