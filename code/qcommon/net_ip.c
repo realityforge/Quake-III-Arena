@@ -408,7 +408,7 @@ bool NET_CompareBaseAdrMask(netadr_t a, netadr_t b, int netmask)
 
     netmask &= 0x07;
     if (netmask) {
-        cmpmask = (1 << netmask) - 1;
+        cmpmask = (uint8_t)((1 << netmask) - 1);
         cmpmask <<= 8 - netmask;
 
         if ((addra[curbyte] & cmpmask) == (addrb[curbyte] & cmpmask))
@@ -1051,11 +1051,11 @@ static void NET_OpenSocks(int port)
         plen = strlen(net_socksPassword->string);
 
         buf[0] = 1; // username/password authentication version
-        buf[1] = ulen;
+        buf[1] = (unsigned char)ulen;
         if (ulen) {
             memcpy(&buf[2], net_socksUsername->string, ulen);
         }
-        buf[2 + ulen] = plen;
+        buf[2 + ulen] = (unsigned char)plen;
         if (plen) {
             memcpy(&buf[3 + ulen], net_socksPassword->string, plen);
         }

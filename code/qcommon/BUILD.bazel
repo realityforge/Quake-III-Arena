@@ -113,7 +113,6 @@ cc_library(
     ],
     copts = FULL_WARNINGS + [
         "-Wno-cast-align",
-        "-Wno-implicit-int-conversion",
         "-Wno-sign-conversion",
         "-Wno-padded",
         "-Wno-shorten-64-to-32",

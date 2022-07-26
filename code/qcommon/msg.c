@@ -147,11 +147,11 @@ void MSG_WriteBits(msg_t* msg, int value, int bits)
         }
 
         if (bits == 8) {
-            msg->data[msg->cursize] = value;
+            msg->data[msg->cursize] = (uint8_t)value;
             msg->cursize += 1;
             msg->bit += 8;
         } else if (bits == 16) {
-            short temp = value;
+            short temp = (short)value;
 
             CopyLittleShort(&msg->data[msg->cursize], &temp);
             msg->cursize += 2;
@@ -419,11 +419,9 @@ int MSG_ReadLong(msg_t* msg)
 char* MSG_ReadString(msg_t* msg)
 {
     static char string[MAX_STRING_CHARS];
-    int l, c;
-
-    l = 0;
+    int l = 0;
     do {
-        c = MSG_ReadByte(msg); // use ReadByte so -1 is out of bounds
+        int c = MSG_ReadByte(msg); // use ReadByte so -1 is out of bounds
         if (c == -1 || c == 0) {
             break;
         }
@@ -439,7 +437,7 @@ char* MSG_ReadString(msg_t* msg)
         if (l >= sizeof(string) - 1) {
             break;
         }
-        string[l++] = c;
+        string[l++] = (char)c;
     } while (1);
 
     string[l] = '\0';
@@ -450,11 +448,9 @@ char* MSG_ReadString(msg_t* msg)
 char* MSG_ReadBigString(msg_t* msg)
 {
     static char string[BIG_INFO_STRING];
-    int l, c;
-
-    l = 0;
+    int l = 0;
     do {
-        c = MSG_ReadByte(msg); // use ReadByte so -1 is out of bounds
+        int c = MSG_ReadByte(msg); // use ReadByte so -1 is out of bounds
         if (c == -1 || c == 0) {
             break;
         }
@@ -470,7 +466,7 @@ char* MSG_ReadBigString(msg_t* msg)
         if (l >= sizeof(string) - 1) {
             break;
         }
-        string[l++] = c;
+        string[l++] = (char)c;
     } while (1);
 
     string[l] = '\0';
@@ -481,11 +477,9 @@ char* MSG_ReadBigString(msg_t* msg)
 char* MSG_ReadStringLine(msg_t* msg)
 {
     static char string[MAX_STRING_CHARS];
-    int l, c;
-
-    l = 0;
+    int l = 0;
     do {
-        c = MSG_ReadByte(msg); // use ReadByte so -1 is out of bounds
+        int c = MSG_ReadByte(msg); // use ReadByte so -1 is out of bounds
         if (c == -1 || c == 0 || c == '\n') {
             break;
         }
@@ -501,7 +495,7 @@ char* MSG_ReadStringLine(msg_t* msg)
         if (l >= sizeof(string) - 1) {
             break;
         }
-        string[l++] = c;
+        string[l++] = (char)c;
     } while (1);
 
     string[l] = '\0';
@@ -514,7 +508,7 @@ void MSG_ReadData(msg_t* msg, void* data, int len)
     int i;
 
     for (i = 0; i < len; i++) {
-        ((uint8_t*)data)[i] = MSG_ReadByte(msg);
+        ((uint8_t*)data)[i] = (uint8_t)MSG_ReadByte(msg);
     }
 }
 
@@ -636,17 +630,17 @@ void MSG_ReadDeltaUsercmdKey(msg_t* msg, int key, usercmd_t* from, usercmd_t* to
         to->angles[0] = MSG_ReadDeltaKey(msg, key, from->angles[0], 16);
         to->angles[1] = MSG_ReadDeltaKey(msg, key, from->angles[1], 16);
         to->angles[2] = MSG_ReadDeltaKey(msg, key, from->angles[2], 16);
-        to->forwardmove = MSG_ReadDeltaKey(msg, key, from->forwardmove, 8);
+        to->forwardmove = (signed char)MSG_ReadDeltaKey(msg, key, from->forwardmove, 8);
         if (to->forwardmove == -128)
             to->forwardmove = -127;
-        to->rightmove = MSG_ReadDeltaKey(msg, key, from->rightmove, 8);
+        to->rightmove = (signed char)MSG_ReadDeltaKey(msg, key, from->rightmove, 8);
         if (to->rightmove == -128)
             to->rightmove = -127;
-        to->upmove = MSG_ReadDeltaKey(msg, key, from->upmove, 8);
+        to->upmove = (signed char)MSG_ReadDeltaKey(msg, key, from->upmove, 8);
         if (to->upmove == -128)
             to->upmove = -127;
         to->buttons = MSG_ReadDeltaKey(msg, key, from->buttons, 16);
-        to->weapon = MSG_ReadDeltaKey(msg, key, from->weapon, 8);
+        to->weapon = (uint8_t)MSG_ReadDeltaKey(msg, key, from->weapon, 8);
     } else {
         to->angles[0] = from->angles[0];
         to->angles[1] = from->angles[1];
