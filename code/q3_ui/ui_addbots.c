@@ -55,16 +55,12 @@ ADD BOTS MENU
 
 typedef struct {
     menuframework_t menu;
-
     menutext_s banner;
     menubitmap_s background;
-
     menubitmap_s arrows;
     menubitmap_s up;
     menubitmap_s down;
-
     menutext_s bots[7];
-
     menulist_s skill;
     menulist_s team;
     menubitmap_s go;
