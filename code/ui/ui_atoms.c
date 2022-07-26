@@ -49,7 +49,7 @@ void QDECL Com_Printf(const char* msg, ...)
     vsnprintf(text, sizeof(text), msg, argptr);
     va_end(argptr);
 
-    trap_Print(va("%s", text));
+    trap_Print(text);
 }
 
 float UI_ClampCvar(float min, float max, float value)
