@@ -120,6 +120,7 @@ void UI_LoadBestScores(const char* map, int game)
     char fileName[MAX_QPATH];
     fileHandle_t f;
     postGameInfo_t newInfo;
+
     memset(&newInfo, 0, sizeof(postGameInfo_t));
     Com_sprintf(fileName, MAX_QPATH, "games/%s_%i.game", map, game);
     if (trap_FS_FOpenFile(fileName, &f, FS_READ) >= 0) {
