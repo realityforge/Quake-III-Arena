@@ -476,7 +476,6 @@ static void NET_SendLoopPacket(netsrc_t sock, int length, const void* data)
 
 void NET_SendPacket(netsrc_t sock, int length, const void* data, netadr_t to)
 {
-
     // sequenced packets are shown in netchan, so just show oob
     if (showpackets->integer && *(int*)data == -1) {
         Com_Printf("send packet %4i\n", length);
