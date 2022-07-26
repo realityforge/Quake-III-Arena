@@ -37,7 +37,7 @@ Handles byte ordering and avoids alignment errors
 ==============================================================================
 */
 
-static void MSG_initHuffman();
+static void MSG_initHuffman(void);
 
 void MSG_Init(msg_t* buf, uint8_t* data, int length)
 {
