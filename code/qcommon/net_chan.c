@@ -56,7 +56,7 @@ to the new value before sending out any replies.
 
 static cvar_t* showpackets;
 static cvar_t* showdrop;
-static cvar_t* qport;
+static cvar_t* net_qport;
 
 static char* netsrcString[2] = {
     "client",
@@ -68,7 +68,7 @@ void Netchan_Init(int port)
     port &= 0xffff;
     showpackets = Cvar_Get("showpackets", "0", CVAR_TEMP);
     showdrop = Cvar_Get("showdrop", "0", CVAR_TEMP);
-    qport = Cvar_Get("net_qport", va("%i", port), CVAR_INIT);
+    net_qport = Cvar_Get("net_qport", va("%i", port), CVAR_INIT);
 }
 
 /*
@@ -113,7 +113,7 @@ void Netchan_TransmitNextFragment(netchan_t* chan)
 #ifndef DEDICATED
     // send the qport if we are a client
     if (chan->sock == NS_CLIENT) {
-        MSG_WriteShort(&send, qport->integer);
+        MSG_WriteShort(&send, net_qport->integer);
     }
 #endif
 
@@ -190,7 +190,7 @@ void Netchan_Transmit(netchan_t* chan, int length, const uint8_t* data)
 #ifndef DEDICATED
     // send the qport if we are a client
     if (chan->sock == NS_CLIENT)
-        MSG_WriteShort(&send, qport->integer);
+        MSG_WriteShort(&send, net_qport->integer);
 #endif
 
     MSG_WriteLong(&send, NETCHAN_GENCHECKSUM(chan->challenge, chan->outgoingSequence));
