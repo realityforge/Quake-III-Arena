@@ -129,7 +129,6 @@ cc_library(
         "-Wno-float-equal",
         "-Wno-sign-compare",
         "-Wno-double-promotion",
-        "-Wno-shadow",
     ],
     defines = ENGINE_DEFINES,
     visibility = [
