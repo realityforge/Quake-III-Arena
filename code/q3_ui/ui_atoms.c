@@ -310,8 +310,6 @@ static int propMapB[26][3] = {
 #define PROPB_SPACE_WIDTH 12
 #define PROPB_HEIGHT 36
 
-// code below duplicated in cgame/cg_drawtools.c
-// FIXME: does this belong in ui_shared.c?
 static void UI_DrawBannerString2(int x, int y, const char* str, vec4_t color)
 {
     const char* s;
