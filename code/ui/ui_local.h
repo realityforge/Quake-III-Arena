@@ -175,7 +175,7 @@ extern vmCvar_t ui_serverStatusTimeOut;
 #define QM_LOSTFOCUS 2
 #define QM_ACTIVATED 3
 
-typedef struct _tag_menuframework {
+typedef struct menuframework_s {
     int cursor;
     int cursor_prev;
 
