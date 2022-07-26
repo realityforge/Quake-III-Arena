@@ -45,7 +45,7 @@ SOUND OPTIONS MENU
 #define ID_BACK 18
 
 static const char* quality_items[] = {
-    "Low", "High", 0
+    "Low", "High", NULL
 };
 
 typedef struct {

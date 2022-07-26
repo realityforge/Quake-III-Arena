@@ -93,7 +93,7 @@ static const char* handicap_items[] = {
     "15",
     "10",
     "5",
-    0
+    NULL
 };
 
 static void PlayerSettings_DrawName(void* self)

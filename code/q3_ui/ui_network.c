@@ -47,7 +47,7 @@ static const char* rate_items[] = {
     "56K",
     "ISDN",
     "LAN/Cable/xDSL",
-    0
+    NULL
 };
 
 typedef struct {
