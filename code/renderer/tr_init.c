@@ -254,7 +254,7 @@ static void InitOpenGL()
         }
 
         glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &temp);
-        glConfig.numTextureUnits = temp;
+        glConfig.maxActiveTextures = temp;
 
         // reserve 160 components for other uniforms
         glGetIntegerv(GL_MAX_VERTEX_UNIFORM_COMPONENTS, &temp);
@@ -729,7 +729,7 @@ void GfxInfo_f()
     }
     ri.Printf(PRINT_ALL, "\n");
     ri.Printf(PRINT_ALL, "GL_MAX_TEXTURE_SIZE: %d\n", glConfig.maxTextureSize);
-    ri.Printf(PRINT_ALL, "GL_MAX_TEXTURE_IMAGE_UNITS: %d\n", glConfig.numTextureUnits);
+    ri.Printf(PRINT_ALL, "GL_MAX_TEXTURE_IMAGE_UNITS: %d\n", glConfig.maxActiveTextures);
     ri.Printf(PRINT_ALL, "\nPIXELFORMAT: color(%d-bits) Z(%d-bit) stencil(%d-bits)\n", glConfig.colorBits, glConfig.depthBits, glConfig.stencilBits);
     ri.Printf(PRINT_ALL, "MODE: %d, %d x %d %s hz:", r_mode->integer, glConfig.vidWidth, glConfig.vidHeight, fsstrings[r_fullscreen->integer == 1]);
     if (glConfig.displayFrequency) {
