@@ -818,7 +818,11 @@ void MSG_WriteDeltaEntity(msg_t* msg, struct entityState_s* from, struct entityS
                 MSG_WriteBits(msg, 0, 1);
             } else {
                 MSG_WriteBits(msg, 1, 1);
+// trunc == fullFloat may not be "safe" in general but the behaviour it has is the behaviour we want here
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wfloat-equal"
                 if (trunc == fullFloat && trunc + FLOAT_INT_BIAS >= 0 && trunc + FLOAT_INT_BIAS < (1 << FLOAT_INT_BITS)) {
+#pragma clang diagnostic pop
                     // send as small integer
                     MSG_WriteBits(msg, 0, 1);
                     MSG_WriteBits(msg, trunc + FLOAT_INT_BIAS, FLOAT_INT_BITS);
@@ -1073,8 +1077,11 @@ void MSG_WriteDeltaPlayerstate(msg_t* msg, struct playerState_s* from, struct pl
             // float
             fullFloat = *(float*)toF;
             trunc = (int)fullFloat;
-
+// trunc == fullFloat may not be "safe" in general but the behaviour it has is the behaviour we want here
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wfloat-equal"
             if (trunc == fullFloat && trunc + FLOAT_INT_BIAS >= 0 && trunc + FLOAT_INT_BIAS < (1 << FLOAT_INT_BITS)) {
+#pragma clang diagnostic pop
                 // send as small integer
                 MSG_WriteBits(msg, 0, 1);
                 MSG_WriteBits(msg, trunc + FLOAT_INT_BIAS, FLOAT_INT_BITS);
