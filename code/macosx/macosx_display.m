@@ -117,7 +117,7 @@ NSDictionary* Sys_GetMatchingDisplayMode(bool allowStretchedModes)
 
         bestModeIndex = modeIndex;
         if (verbose)
-            ri.Printf(PRINT_ALL, " -- OK\n", bestModeIndex);
+            ri.Printf(PRINT_ALL, " -- OK\n");
     }
 
     if (verbose)
