@@ -27,7 +27,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "client.h"
 #include "macosx_local.h"
-//#include "GameRanger SDK/gameranger.h"
 #ifdef OMNI_TIMER
 #import "macosx_timers.h"
 #endif
