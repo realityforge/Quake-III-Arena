@@ -30,7 +30,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #import "Q3Controller.h"
 //#import "CGMouseDeltaFix.h"
 #import "macosx_display.h" // For Sys_SetScreenFade
-#import "macosx_timers.h"
 
 #import <drivers/event_status_driver.h>
 #import <sys/time.h>
@@ -306,16 +305,6 @@ static inline void sendEventForCharacter(NSEvent* event, unichar character, bool
 {
     if (in_showevents->integer)
         Com_Printf("CHARACTER: 0x%02x down=%d\n", character, keyDownFlag);
-
-#ifdef OMNI_TIMER
-    if (character == NSF9FunctionKey && !keyDownFlag) {
-        // Log and reset the root timer.  We should currently only have the root on the stack.
-        OTStackPopRoot();
-        OTStackReportResults(NULL);
-        OTStackReset();
-        OTStackPushRoot(rootNode);
-    }
-#endif
 
     switch (character) {
     case 0x03:

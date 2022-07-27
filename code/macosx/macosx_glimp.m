@@ -44,10 +44,6 @@ static CGDisplayErr Sys_CaptureActiveDisplays(void);
 glwstate_t glw_state;
 bool Sys_IsHidden = false;
 
-#ifdef OMNI_TIMER
-OTStampList glThreadStampList;
-#endif
-
 @interface NSOpenGLContext (CGLContextAccess)
 - (CGLContextObj)cglContext;
 @end
@@ -374,13 +370,6 @@ static void GLImp_Toggle_Renderer_f(void)
     ri.Cvar_Set("r_enablerender", r_enablerender->integer ? "0" : "1");
 }
 
-#ifdef OMNI_TIMER
-static void GLImp_Dump_Stamp_List_f(void)
-{
-    OTStampListDumpToFile(glThreadStampList, "/tmp/gl_stamps");
-}
-#endif
-
 void GLimp_Init(void)
 {
     static BOOL addedCommands = NO;
@@ -390,10 +379,6 @@ void GLimp_Init(void)
     if (!addedCommands) {
         addedCommands = YES;
 
-#ifdef OMNI_TIMER
-        glThreadStampList = OTStampListCreate(64);
-        Cmd_AddCommand("dump_stamp_list", GLImp_Dump_Stamp_List_f);
-#endif
         Cmd_AddCommand("toggle_renderer", GLImp_Toggle_Renderer_f);
     }
 
@@ -465,8 +450,6 @@ void GLimp_Init(void)
 */
 void GLimp_EndFrame(void)
 {
-    GLSTAMP("GLimp_EndFrame start", 0);
-
     // swapinterval stuff
     if (r_swapInterval->modified) {
         r_swapInterval->modified = false;
@@ -496,8 +479,6 @@ void GLimp_EndFrame(void)
             OSX_GLContextClearCurrent();
         }
     }
-
-    GLSTAMP("GLimp_EndFrame end", 0);
 }
 
 /*

@@ -37,10 +37,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #import <sys/types.h>
 #import <unistd.h>
 
-#ifdef OMNI_TIMER
-#import "macosx_timers.h"
-#endif
-
 bool stdin_active = false;
 
 //===========================================================================
@@ -156,11 +152,6 @@ The cvar and file system has been setup, so configurations are loaded
 */
 void Sys_Init(void)
 {
-#ifdef OMNI_TIMER
-    InitializeTimers();
-    OTStackPushRoot(rootNode);
-#endif
-
     NET_Init();
     Sys_InitInput();
 }

@@ -106,15 +106,6 @@ extern glwstate_t glw_state;
         glw_state._ctx_is_current = NO;        \
     } while (0)
 
-#import "macosx_timers.h"
-
-#ifdef OMNI_TIMER
-extern OTStampList glThreadStampList;
-#define GLSTAMP(name, data) OTStampListAddStamp(glThreadStampList, name, data)
-#else
-#define GLSTAMP(name, data)
-#endif
-
 #ifdef __cplusplus
 }
 #endif
