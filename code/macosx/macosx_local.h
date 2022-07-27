@@ -46,7 +46,6 @@ extern CGDirectDisplayID Sys_DisplayToUse(void);
 
 // In macosx_sys.m
 extern void Sys_QueEvent(int time, sysEventType_t type, int value, int value2, int ptrLength, void* ptr);
-extern void Sys_AnnoyingBanner();
 
 // In macosx_glimp.m
 extern bool Sys_IsHidden;
