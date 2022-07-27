@@ -49,8 +49,8 @@ extern void Sys_QueEvent(int time, sysEventType_t type, int value, int value2, i
 
 // In macosx_glimp.m
 extern bool Sys_IsHidden;
-extern bool Sys_Hide();
-extern bool Sys_Unhide();
+extern bool Sys_Hide(void);
+extern bool Sys_Unhide(void);
 
 typedef struct {
     CGDirectDisplayID display;
