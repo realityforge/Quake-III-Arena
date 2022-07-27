@@ -34,4 +34,3 @@ extern void Sys_FadeScreens();
 extern void Sys_FadeScreen(CGDirectDisplayID display);
 extern void Sys_UnfadeScreens();
 extern void Sys_UnfadeScreen(CGDirectDisplayID display, glwgamma_t* table);
-extern void Sys_ReleaseAllDisplays();
