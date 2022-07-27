@@ -28,7 +28,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #import "macosx_local.h"
 
 #import "Q3Controller.h"
-//#import "CGMouseDeltaFix.h"
 #import "macosx_display.h" // For Sys_SetScreenFade
 
 #import <drivers/event_status_driver.h>
