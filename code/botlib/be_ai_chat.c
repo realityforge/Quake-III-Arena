@@ -1175,7 +1175,7 @@ static bot_stringlist_t* BotCheckChatMessageIntegrety(char* message, bot_stringl
                 // find the random keyword
                 if (!RandomString(temp)) {
                     if (!BotFindStringInList(stringlist, temp)) {
-                        Log_Write("%s = {\"%s\"} //MISSING RANDOM\r\n", temp, temp);
+                        Log_Write("%s = {\"%s\"} //MISSING RANDOM\n", temp, temp);
                         s = GetClearedMemory(sizeof(bot_stringlist_t) + strlen(temp) + 1);
                         s->string = (char*)s + sizeof(bot_stringlist_t);
                         strcpy(s->string, temp);

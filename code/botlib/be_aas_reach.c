@@ -2782,7 +2782,7 @@ static int AAS_Reachability_Grapple(int area1num, int area2num)
     // if not a swim area
     if (!AAS_AreaSwim(area1num)) {
         if (!AAS_PointAreaNum(start))
-            Log_Write("area %d center %f %f %f in solid?\r\n", area1num,
+            Log_Write("area %d center %f %f %f in solid?\n", area1num,
                       start[0], start[1], start[2]);
         VectorCopy(start, end);
         end[2] -= 1000;
@@ -2969,7 +2969,7 @@ int AAS_Reachability_WeaponJump(int area1num, int area2num)
     VectorCopy(aasworld.areas[area1num].center, start);
     // if not a swim area
     if (!AAS_PointAreaNum(start))
-        Log_Write("area %d center %f %f %f in solid?\r\n", area1num,
+        Log_Write("area %d center %f %f %f in solid?\n", area1num,
                   start[0], start[1], start[2]);
     VectorCopy(start, end);
     end[2] -= 1000;
