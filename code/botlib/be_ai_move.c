@@ -1933,7 +1933,7 @@ static bot_moveresult_t BotTravel_RocketJump(bot_movestate_t* ms, aas_reachabili
     result.ideal_viewangles[PITCH] = 90;
     // set the view angles directly
     EA_View(ms->client, result.ideal_viewangles);
-    // view is important for the movment
+    // view is important for the movement
     result.flags |= MOVERESULT_MOVEMENTVIEWSET;
     // select the rocket launcher
     EA_SelectWeapon(ms->client, (int)weapindex_rocketlauncher->value);
@@ -1976,7 +1976,7 @@ static bot_moveresult_t BotTravel_BFGJump(bot_movestate_t* ms, aas_reachability_
     result.ideal_viewangles[PITCH] = 90;
     // set the view angles directly
     EA_View(ms->client, result.ideal_viewangles);
-    // view is important for the movment
+    // view is important for the movement
     result.flags |= MOVERESULT_MOVEMENTVIEWSET;
     // select the rocket launcher
     EA_SelectWeapon(ms->client, (int)weapindex_bfg10k->value);
