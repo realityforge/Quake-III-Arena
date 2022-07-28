@@ -2129,9 +2129,6 @@ void BotMoveToGoal(bot_moveresult_t* result, int movestate, bot_goal_t* goal, in
     int reachnum, lastreachnum, foundjumppad, ent, resultflags;
     aas_reachability_t reach, lastreach;
     bot_movestate_t* ms;
-    // vec3_t mins, maxs, up = {0, 0, 1};
-    // bsp_trace_t trace;
-    // static int debugline;
 
     BotClearMoveResult(result);
     ms = BotMoveStateFromHandle(movestate);
