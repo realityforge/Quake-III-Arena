@@ -29,9 +29,7 @@ cc_library(
 
 cc_library(
     name = "sdl_input",
-    srcs = [
-        "sdl_input.c",
-    ],
+    srcs = ["sdl_input.c"],
     visibility = ["//code/client:__pkg__"],
     deps = [
         "//code/client:api",
@@ -48,9 +46,7 @@ cc_library(
         "sdl_gamma.c",
         "sdl_glimp.c",
     ],
-    hdrs = [
-        "sdl_icon.h",
-    ],
+    hdrs = ["sdl_icon.h"],
     visibility = ["//code/client:__pkg__"],
     deps = [
         "//code/qcommon",
