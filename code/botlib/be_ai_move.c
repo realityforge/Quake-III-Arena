@@ -751,28 +751,28 @@ static void MoverBottomCenter(aas_reachability_t* reach, vec3_t bottomcenter)
 }
 static float BotGapDistance(const vec3_t origin, const vec3_t hordir, const int entnum)
 {
-    float dist, startz;
-    vec3_t start, end;
-    aas_trace_t trace;
+    vec3_t start;
+    vec3_t end;
+
+    VectorCopy(origin, start);
+    VectorCopy(origin, end);
+    end[2] -= 60;
 
     // do gap checking
-    startz = origin[2];
     // this enables walking downstairs more fluidly
-    {
-        VectorCopy(origin, start);
-        VectorCopy(origin, end);
-        end[2] -= 60;
-        trace = AAS_TraceClientBBox(start, end, PRESENCE_CROUCH, entnum);
-        if (trace.fraction >= 1)
-            return 1;
-        startz = trace.endpos[2] + 1;
+    const aas_trace_t initial_trace = AAS_TraceClientBBox(start, end, PRESENCE_CROUCH, entnum);
+    if (initial_trace.fraction >= 1) {
+        return 1;
     }
-    for (dist = 8; dist <= 100; dist += 8) {
+    float startz = initial_trace.endpos[2] + 1;
+
+    for (int i = 8; i <= 100; i += 8) {
+        const float dist = (float)i;
         VectorMA(origin, dist, hordir, start);
         start[2] = startz + 24;
         VectorCopy(start, end);
         end[2] -= 48 + sv_maxbarrier->value;
-        trace = AAS_TraceClientBBox(start, end, PRESENCE_CROUCH, entnum);
+        const aas_trace_t trace = AAS_TraceClientBBox(start, end, PRESENCE_CROUCH, entnum);
         // if solid is found the bot can't walk any further and fall into a gap
         if (!trace.startsolid) {
             // if it is a gap
