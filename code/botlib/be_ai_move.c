@@ -541,7 +541,7 @@ void BotAddAvoidSpot(int movestate, vec3_t origin, float radius, int type)
 static int BotGetReachabilityToGoal(vec3_t origin, int areanum,
                                     int lastgoalareanum, int lastareanum,
                                     const int* avoidreach, const float* avoidreachtimes, const int* avoidreachtries,
-                                    bot_goal_t* goal, int travelflags,
+                                    bot_goal_t* goal, int travelflags, int movetravelflags,
                                     struct bot_avoidspot_s* avoidspots, int numavoidspots, int* flags)
 {
     int i, t, besttime, bestreachnum, reachnum;
@@ -552,6 +552,7 @@ static int BotGetReachabilityToGoal(vec3_t origin, int areanum,
         return 0;
     if (AAS_AreaDoNotEnter(areanum) || AAS_AreaDoNotEnter(goal->areanum)) {
         travelflags |= TFL_DONOTENTER;
+        movetravelflags |= TFL_DONOTENTER;
     }
     // use the routing to find the next area to go to
     besttime = 0;
@@ -581,7 +582,7 @@ static int BotGetReachabilityToGoal(vec3_t origin, int areanum,
             continue;
         // if (AAS_AreaContentsTravelFlags(reach.areanum) & ~travelflags) continue;
         // if the travel isn't valid
-        if (!BotValidTravel(&reach, travelflags))
+        if (!BotValidTravel(&reach, movetravelflags))
             continue;
         // get the travel time
         t = AAS_AreaTravelTimeToGoalArea(reach.areanum, reach.end, goal->areanum, travelflags);
@@ -662,7 +663,7 @@ int BotMovementViewTarget(int movestate, bot_goal_t* goal, int travelflags, floa
         reachnum = BotGetReachabilityToGoal(reach.end, reach.areanum,
                                             ms->lastgoalareanum, lastareanum,
                                             ms->avoidreach, ms->avoidreachtimes, ms->avoidreachtries,
-                                            goal, travelflags, NULL, 0, NULL);
+                                            goal, travelflags, travelflags, NULL, 0, NULL);
         VectorCopy(reach.end, end);
         lastareanum = reach.areanum;
         if (lastareanum == goal->areanum) {
@@ -709,7 +710,7 @@ int BotPredictVisiblePosition(vec3_t origin, int areanum, bot_goal_t* goal, int 
         reachnum = BotGetReachabilityToGoal(end, areanum,
                                             lastgoalareanum, lastareanum,
                                             avoidreach, avoidreachtimes, avoidreachtries,
-                                            goal, travelflags, NULL, 0, NULL);
+                                            goal, travelflags, travelflags, NULL, 0, NULL);
         if (!reachnum)
             return false;
         AAS_ReachabilityFromNum(reachnum, &reach);
@@ -2309,7 +2310,7 @@ void BotMoveToGoal(bot_moveresult_t* result, int movestate, bot_goal_t* goal, in
             reachnum = BotGetReachabilityToGoal(ms->origin, ms->areanum,
                                                 ms->lastgoalareanum, ms->lastareanum,
                                                 ms->avoidreach, ms->avoidreachtimes, ms->avoidreachtries,
-                                                goal, travelflags,
+                                                goal, travelflags, travelflags,
                                                 ms->avoidspots, ms->numavoidspots, &resultflags);
             // the area number the reachability starts in
             ms->reachareanum = ms->areanum;
@@ -2431,7 +2432,7 @@ void BotMoveToGoal(bot_moveresult_t* result, int movestate, bot_goal_t* goal, in
                 lastreachnum = BotGetReachabilityToGoal(end, areas[i],
                                                         ms->lastgoalareanum, ms->lastareanum,
                                                         ms->avoidreach, ms->avoidreachtimes, ms->avoidreachtries,
-                                                        goal, TFL_JUMPPAD, ms->avoidspots, ms->numavoidspots, NULL);
+                                                        goal, travelflags, TFL_JUMPPAD, ms->avoidspots, ms->numavoidspots, NULL);
                 if (lastreachnum) {
                     ms->lastreachnum = lastreachnum;
                     ms->lastareanum = areas[i];
