@@ -2009,7 +2009,6 @@ static bot_moveresult_t BotFinishTravel_WeaponJump(bot_movestate_t* ms, aas_reac
 }
 static bot_moveresult_t BotTravel_JumpPad(bot_movestate_t* ms, aas_reachability_t* reach)
 {
-    float speed;
     vec3_t hordir;
     bot_moveresult_t result;
 
@@ -2019,9 +2018,8 @@ static bot_moveresult_t BotTravel_JumpPad(bot_movestate_t* ms, aas_reachability_
     hordir[1] = reach->start[1] - ms->origin[1];
     hordir[2] = 0;
     BotCheckBlocked(ms, hordir, true, &result);
-    speed = 400;
     // elementary action move in direction
-    EA_Move(ms->client, hordir, speed);
+    EA_Move(ms->client, hordir, 400);
     VectorCopy(hordir, result.movedir);
     return result;
 }
