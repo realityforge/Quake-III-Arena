@@ -2050,7 +2050,6 @@ static void AAS_Reachability_Teleport()
                 botimport.Print(PRT_ERROR, "teleporter destination (%s) in solid\n", target);
                 continue;
             }
-            area2num = AAS_PointAreaNum(trace.endpos);
             // predict where you'll end up
             AAS_FloatForBSPEpairKey(dest, "angle", &angle);
             if (angle) {
