@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "../qcommon/q_shared.h"
 #include "attributes.h"
+#include "lang_util.h"
 
 #define BOTLIB_API_VERSION 2
 
@@ -71,29 +72,29 @@ struct weaponinfo_s;
 #define BLERR_CANNOTLOADWEAPONCONFIG 12 // cannot load weapon config
 
 // action flags
-#define ACTION_ATTACK 0x0000001
-#define ACTION_USE 0x0000002
-#define ACTION_RESPAWN 0x0000008
-#define ACTION_JUMP 0x0000010
-#define ACTION_MOVEUP 0x0000020
-#define ACTION_CROUCH 0x0000080
-#define ACTION_MOVEDOWN 0x0000100
-#define ACTION_MOVEFORWARD 0x0000200
-#define ACTION_MOVEBACK 0x0000800
-#define ACTION_MOVELEFT 0x0001000
-#define ACTION_MOVERIGHT 0x0002000
-#define ACTION_DELAYEDJUMP 0x0008000
-#define ACTION_TALK 0x0010000
-#define ACTION_GESTURE 0x0020000
-#define ACTION_WALK 0x0080000
-#define ACTION_AFFIRMATIVE 0x0100000
-#define ACTION_NEGATIVE 0x0200000
-#define ACTION_GETFLAG 0x0800000
-#define ACTION_GUARDBASE 0x1000000
-#define ACTION_PATROL 0x2000000
-#define ACTION_FOLLOWME 0x8000000
+#define ACTION_ATTACK BIT(1)
+#define ACTION_USE BIT(2)
+#define ACTION_RESPAWN BIT(3)
+#define ACTION_JUMP BIT(4)
+#define ACTION_MOVEUP BIT(5)
+#define ACTION_CROUCH BIT(6)
+#define ACTION_MOVEDOWN BIT(7)
+#define ACTION_MOVEFORWARD BIT(8)
+#define ACTION_MOVEBACK BIT(9)
+#define ACTION_MOVELEFT BIT(10)
+#define ACTION_MOVERIGHT BIT(11)
+#define ACTION_DELAYEDJUMP BIT(12)
+#define ACTION_TALK BIT(13)
+#define ACTION_GESTURE BIT(14)
+#define ACTION_WALK BIT(15)
+#define ACTION_AFFIRMATIVE BIT(16)
+#define ACTION_NEGATIVE BIT(17)
+#define ACTION_GETFLAG BIT(18)
+#define ACTION_GUARDBASE BIT(19)
+#define ACTION_PATROL BIT(20)
+#define ACTION_FOLLOWME BIT(21)
 // Note: ACTION_JUMPEDLASTFRAME was set to ACTION_CROUCH in original game which caused ACTION_DELAYEDJUMP to be triggered which seems wrong so it now has a unique bit
-#define ACTION_JUMPEDLASTFRAME 0x10000000
+#define ACTION_JUMPEDLASTFRAME BIT(22)
 
 // the bot input, will be converted to an usercmd_t
 typedef struct bot_input_s {
