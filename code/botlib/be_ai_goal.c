@@ -279,7 +279,7 @@ static int* ItemWeightIndex(weightconfig_t* iwc, itemconfig_t* ic)
     for (i = 0; i < ic->numiteminfo; i++) {
         index[i] = FindFuzzyWeight(iwc, ic->iteminfo[i].classname);
         if (index[i] < 0) {
-            Log_Write("item info %d \"%s\" has no fuzzy weight\r\n", i, ic->iteminfo[i].classname);
+            Log_Write("item info %d \"%s\" has no fuzzy weight\n", i, ic->iteminfo[i].classname);
         }
     }
     return index;
@@ -443,7 +443,7 @@ void BotInitLevelItems()
                 break;
         }
         if (i >= ic->numiteminfo) {
-            Log_Write("entity %s unknown item\r\n", classname);
+            Log_Write("entity %s unknown item\n", classname);
             continue;
         }
         // get the origin of the item
@@ -463,7 +463,7 @@ void BotInitLevelItems()
                 if (trace.fraction >= 1) {
                     // if the item is not reachable from a jumppad
                     goalareanum = AAS_BestReachableFromJumpPadArea(origin, ic->iteminfo[i].mins, ic->iteminfo[i].maxs);
-                    Log_Write("item %s reachable from jumppad area %d\r\n", ic->iteminfo[i].classname, goalareanum);
+                    Log_Write("item %s reachable from jumppad area %d\n", ic->iteminfo[i].classname, goalareanum);
                     if (!goalareanum)
                         continue;
                 }

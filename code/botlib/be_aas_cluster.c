@@ -80,7 +80,7 @@ static int AAS_UpdatePortal(int areanum, int clusternum)
     } else {
         // remove the cluster portal flag contents
         aasworld.areasettings[areanum].contents &= ~AREACONTENTS_CLUSTERPORTAL;
-        Log_Write("portal area %d is separating more than two clusters\r\n", areanum);
+        Log_Write("portal area %d is separating more than two clusters\n", areanum);
         return false;
     }
     if (aasworld.portalindexsize >= AAS_MAX_PORTALINDEXSIZE) {
@@ -488,7 +488,7 @@ static int AAS_CheckAreaForPossiblePortals(int areanum)
         aasworld.areasettings[areanums[i]].contents |= AREACONTENTS_CLUSTERPORTAL;
         // this area can be used as a route portal
         aasworld.areasettings[areanums[i]].contents |= AREACONTENTS_ROUTEPORTAL;
-        Log_Write("possible portal: %d\r\n", areanums[i]);
+        Log_Write("possible portal: %d\n", areanums[i]);
     }
     return numareas;
 }
@@ -511,12 +511,12 @@ static int AAS_TestPortals()
         portal = &aasworld.portals[i];
         if (!portal->frontcluster) {
             aasworld.areasettings[portal->areanum].contents &= ~AREACONTENTS_CLUSTERPORTAL;
-            Log_Write("portal area %d has no front cluster\r\n", portal->areanum);
+            Log_Write("portal area %d has no front cluster\n", portal->areanum);
             return false;
         }
         if (!portal->backcluster) {
             aasworld.areasettings[portal->areanum].contents &= ~AREACONTENTS_CLUSTERPORTAL;
-            Log_Write("portal area %d has no back cluster\r\n", portal->areanum);
+            Log_Write("portal area %d has no back cluster\n", portal->areanum);
             return false;
         }
     }
@@ -529,7 +529,7 @@ static void AAS_CountForcedClusterPortals()
     num = 0;
     for (i = 1; i < aasworld.numareas; i++) {
         if (aasworld.areasettings[i].contents & AREACONTENTS_CLUSTERPORTAL) {
-            Log_Write("area %d is a forced portal area\r\n", i);
+            Log_Write("area %d is a forced portal area\n", i);
             num++;
         }
     }
@@ -616,7 +616,7 @@ void AAS_InitClustering()
     aasworld.savefile = true;
     // write the portal areas to the log file
     for (i = 1; i < aasworld.numportals; i++) {
-        Log_Write("portal %d: area %d\r\n", i, aasworld.portals[i].areanum);
+        Log_Write("portal %d: area %d\n", i, aasworld.portals[i].areanum);
     }
     // report cluster info
     botimport.Print(PRT_MESSAGE, "%6d portals created\n", aasworld.numportals);
