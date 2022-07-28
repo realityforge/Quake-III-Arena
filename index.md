@@ -28,7 +28,7 @@ The major changes of the project are tracked in this table.
       <td>0</td>
       <td>80%</td>
       <td>2022-04-18</td>
-      <td>&nbsp;</td>
+      <td>2022-07-28</td>
     </tr>
     <tr valign="top">
       <td><a href="automate_source_code_formatting.html">Automate Source Code Formatting</a></td>
