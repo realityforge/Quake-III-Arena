@@ -122,8 +122,6 @@ static LONG WINAPI ConWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
         }
         break;
     case WM_CREATE:
-        //		s_wcd.hbmLogo = LoadBitmap( g_wv.hInstance, MAKEINTRESOURCE( IDB_BITMAP1 ) );
-        //		s_wcd.hbmClearBitmap = LoadBitmap( g_wv.hInstance, MAKEINTRESOURCE( IDB_BITMAP2 ) );
         s_wcd.hbrEditBackground = CreateSolidBrush(RGB(0x00, 0x00, 0xB0));
         s_wcd.hbrErrorBackground = CreateSolidBrush(RGB(0x80, 0x80, 0x80));
         SetTimer(hWnd, 1, 1000, NULL);
