@@ -162,7 +162,9 @@ static void AAS_LinkCache(aas_routingcache_t* cache)
 static void AAS_FreeRoutingCache(aas_routingcache_t* cache)
 {
     AAS_UnlinkCache(cache);
+#ifdef ROUTING_DEBUG
     routingcachesize -= cache->size;
+#endif
     FreeMemory(cache);
 }
 static void AAS_RemoveRoutingCacheInCluster(int clusternum)
@@ -476,7 +478,9 @@ static aas_routingcache_t* AAS_AllocRoutingCache(int numtraveltimes)
     size = sizeof(aas_routingcache_t)
         + numtraveltimes * sizeof(unsigned short int)
         + numtraveltimes * sizeof(unsigned char);
+#ifdef ROUTING_DEBUG
     routingcachesize += size;
+#endif
     cache = (aas_routingcache_t*)GetClearedMemory(size);
     cache->reachabilities = (unsigned char*)cache + sizeof(aas_routingcache_t)
         + numtraveltimes * sizeof(unsigned short int);
@@ -836,8 +840,8 @@ void AAS_InitRouting()
 #ifdef ROUTING_DEBUG
     numareacacheupdates = 0;
     numportalcacheupdates = 0;
-#endif // ROUTING_DEBUG
     routingcachesize = 0;
+#endif // ROUTING_DEBUG
     // read any routing cache if available
     AAS_ReadRouteCache();
 }
