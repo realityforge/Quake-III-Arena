@@ -283,7 +283,7 @@ int BotReachabilityArea(vec3_t origin, int client)
     }
     return BotFuzzyPointReachabilityArea(origin);
 }
-static int BotOnMover(const vec3_t origin, int entnum, aas_reachability_t* reach)
+static bool BotOnMover(const vec3_t origin, int entnum, aas_reachability_t* reach)
 {
     int i, modelnum;
     vec3_t mins, maxs, modelorigin, org, end;
@@ -317,7 +317,7 @@ static int BotOnMover(const vec3_t origin, int entnum, aas_reachability_t* reach
     }
     return false;
 }
-static int MoverDown(aas_reachability_t* reach)
+static bool MoverDown(aas_reachability_t* reach)
 {
     int modelnum;
     vec3_t mins, maxs, origin;
@@ -379,7 +379,7 @@ static int BotOnTopOfEntity(bot_movestate_t* ms)
     }
     return -1;
 }
-static int BotValidTravel(aas_reachability_t* reach, int travelflags)
+static bool BotValidTravel(aas_reachability_t* reach, int travelflags)
 {
     // if the reachability uses an unwanted travel type
     if (AAS_TravelFlagForType(reach->traveltype) & ~travelflags)
@@ -605,7 +605,7 @@ static int BotGetReachabilityToGoal(vec3_t origin, int areanum,
     }
     return bestreachnum;
 }
-static int BotAddToTarget(vec3_t start, vec3_t end, float maxdist, float* dist, vec3_t target)
+static bool BotAddToTarget(vec3_t start, vec3_t end, float maxdist, float* dist, vec3_t target)
 {
     vec3_t dir;
     float curdist;
@@ -672,7 +672,7 @@ int BotMovementViewTarget(int movestate, bot_goal_t* goal, int travelflags, floa
     }
     return false;
 }
-static int BotVisible(int ent, vec3_t eye, vec3_t target)
+static bool BotVisible(int ent, vec3_t eye, vec3_t target)
 {
     bsp_trace_t trace;
 
@@ -787,7 +787,7 @@ static float BotGapDistance(const vec3_t origin, const vec3_t hordir, const int 
     }
     return 0;
 }
-static int BotCheckBarrierJump(bot_movestate_t* ms, const vec3_t dir, float speed)
+static bool BotCheckBarrierJump(bot_movestate_t* ms, const vec3_t dir, float speed)
 {
     vec3_t start, hordir, end;
     aas_trace_t trace;
@@ -1210,7 +1210,7 @@ static bot_moveresult_t BotTravel_WalkOffLedge(bot_movestate_t* ms, aas_reachabi
     VectorCopy(hordir, result.movedir);
     return result;
 }
-static int BotAirControl(const vec3_t origin, const vec3_t velocity, const vec3_t goal, vec3_t dir, float* speed)
+static bool BotAirControl(const vec3_t origin, const vec3_t velocity, const vec3_t goal, vec3_t dir, float* speed)
 {
     vec3_t org, vel;
     float dist;
