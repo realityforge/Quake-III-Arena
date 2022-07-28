@@ -1354,10 +1354,8 @@ static bot_moveresult_t BotFinishTravel_Jump(bot_movestate_t* ms, aas_reachabili
 }
 static bot_moveresult_t BotTravel_Ladder(bot_movestate_t* ms, aas_reachability_t* reach)
 {
-    // float dist, speed;
-    vec3_t dir, viewdir; //, hordir;
+    vec3_t dir, viewdir;
     vec3_t origin = { 0, 0, 0 };
-    //	vec3_t up = {0, 0, 1};
     bot_moveresult_t result;
 
     BotClearMoveResult(&result);
