@@ -56,7 +56,7 @@ void BotSetUserInfo(bot_state_t* bs, char* key, char* value);
 void BotSetTeamStatus(bot_state_t* bs);
 // returns the name of the client
 char* ClientName(int client, char* name, int size);
-// returns a simplyfied client name
+// returns a simplified client name
 char* EasyClientName(int client, char* name, int size);
 // returns the appropriate synonym context for the current game type and situation
 int BotSynonymContext(bot_state_t* bs);
