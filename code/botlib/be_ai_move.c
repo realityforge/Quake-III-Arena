@@ -834,14 +834,13 @@ static int BotCheckBarrierJump(bot_movestate_t* ms, const vec3_t dir, float spee
     // there is a barrier
     return true;
 }
-static bool BotSwimInDirection(bot_movestate_t* ms, vec3_t dir, float speed)
+static void BotSwimInDirection(bot_movestate_t* ms, const vec3_t dir, const float speed)
 {
     vec3_t normdir;
 
     VectorCopy(dir, normdir);
     VectorNormalize(normdir);
     EA_Move(ms->client, normdir, speed);
-    return true;
 }
 static bool BotWalkInDirection(bot_movestate_t* ms, vec3_t dir, float speed, int type)
 {
@@ -949,7 +948,8 @@ int BotMoveInDirection(int movestate, vec3_t dir, float speed, int type)
         return false;
     // if swimming
     if (AAS_Swimming(ms->origin)) {
-        return BotSwimInDirection(ms, dir, speed);
+        BotSwimInDirection(ms, dir, speed);
+        return true;
     } else {
         return BotWalkInDirection(ms, dir, speed, type);
     }
