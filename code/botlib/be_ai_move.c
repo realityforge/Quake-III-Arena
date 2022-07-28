@@ -987,12 +987,7 @@ static void BotCheckBlocked(bot_movestate_t* ms, vec3_t dir, int checkbottom, bo
 }
 static inline void BotClearMoveResult(bot_moveresult_t* moveresult)
 {
-    moveresult->failure = false;
-    moveresult->type = 0;
-    moveresult->blocked = false;
-    moveresult->blockentity = 0;
-    moveresult->traveltype = 0;
-    moveresult->flags = 0;
+    memset(moveresult, 0, sizeof(bot_moveresult_t));
 }
 static bot_moveresult_t BotTravel_Walk(bot_movestate_t* ms, aas_reachability_t* reach)
 {
