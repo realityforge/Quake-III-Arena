@@ -635,7 +635,6 @@ int BotMovementViewTarget(int movestate, bot_goal_t* goal, int travelflags, floa
     ms = BotMoveStateFromHandle(movestate);
     if (!ms)
         return false;
-    reachnum = 0;
     // if the bot has no goal or no last reachability
     if (!ms->lastreachnum || !goal)
         return false;
