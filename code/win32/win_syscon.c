@@ -62,7 +62,7 @@ typedef struct
 
     char errorString[80];
 
-    char consoleText[512], returnedText[512];
+    char consoleText[512];
     int visLevel;
     int windowWidth, windowHeight;
 
