@@ -96,7 +96,7 @@ struct weaponinfo_s;
 // Note: ACTION_JUMPEDLASTFRAME was set to ACTION_CROUCH in original game which caused ACTION_DELAYEDJUMP to be triggered which seems wrong so it now has a unique bit
 #define ACTION_JUMPEDLASTFRAME BIT(22)
 
-// the bot input, will be converted to an usercmd_t
+// the bot input, will be converted to a usercmd_t
 typedef struct bot_input_s {
     float thinktime; // time since last output (in seconds)
     vec3_t dir; // movement direction
