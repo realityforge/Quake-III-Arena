@@ -157,3 +157,7 @@ library or library version to upgrade to. The final step is to remove the source
 </table>
 
 ### Evaluation
+
+The change was successful and mostly progressed smoothly until updating the SDL dependency. This project currently builds and runs on the `arm64-apple-darwin` platform and is expected to run on android, linux and windows operating systems with multiple different cpu architectures. There does not exist binary packages for all the target platforms, so it is necessary to build SDL from source. Initial attempts involved adding in `WORKSPACE.bazel` and `BUILD.bazel` files to the repository as it was defined and building the source writing explicit build.
+
+Due to the complexity of this work, the change was put on hold until it was determined that the project would continue to use SDL long term. (See [sdl](sdl.md) for details on why this may have changed.) When it was decided that usage of SDL remain as part of the project, it was decided that we would make use of the [rules_foreign_cc](https://github.com/bazelbuild/rules_foreign_cc) bazel rules to build SDL rather than writing the build scripts by hand. This was dramatically less work and the only disadvantages was that upgrades would take longer and there would be less fine grain control on the options passed when building the library. These were considered acceptable trade-offs.
