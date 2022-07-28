@@ -2512,7 +2512,6 @@ static void AAS_Reachability_FuncBobbing()
         if (!AAS_PointAreaNum(move_end_top))
             continue;
         for (i = 0; i < 2; i++) {
-            firststartreach = firstendreach = NULL;
             if (i == 0) {
                 firststartreach = AAS_FindFaceReachabilities(start_edgeverts, 4, &start_plane, true);
                 firstendreach = AAS_FindFaceReachabilities(end_edgeverts, 4, &end_plane, false);
