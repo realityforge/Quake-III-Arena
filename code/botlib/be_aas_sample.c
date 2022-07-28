@@ -273,8 +273,7 @@ static bool AAS_AreaEntityCollision(int areanum, vec3_t start, vec3_t end, int p
 //===========================================================================
 // recursive subdivision of the line by the BSP tree.
 //===========================================================================
-aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype,
-                                int passent)
+aas_trace_t AAS_TraceClientBBox(vec3_t start, vec3_t end, int presencetype, int passent)
 {
     int side, nodenum, tmpplanenum;
     float front, back, frac;
