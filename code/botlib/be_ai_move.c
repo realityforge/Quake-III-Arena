@@ -750,7 +750,7 @@ static void MoverBottomCenter(aas_reachability_t* reach, vec3_t bottomcenter)
     VectorMA(origin, 0.5, mids, bottomcenter);
     bottomcenter[2] = reach->start[2];
 }
-static float BotGapDistance(vec3_t origin, vec3_t hordir, int entnum)
+static float BotGapDistance(const vec3_t origin, const vec3_t hordir, const int entnum)
 {
     int dist;
     float startz;
