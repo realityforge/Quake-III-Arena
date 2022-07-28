@@ -985,7 +985,7 @@ static void BotCheckBlocked(bot_movestate_t* ms, vec3_t dir, int checkbottom, bo
         }
     }
 }
-static void BotClearMoveResult(bot_moveresult_t* moveresult)
+static inline void BotClearMoveResult(bot_moveresult_t* moveresult)
 {
     moveresult->failure = false;
     moveresult->type = 0;
