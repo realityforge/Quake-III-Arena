@@ -583,7 +583,6 @@ static void AAS_InitRoutingUpdate()
 void AAS_CreateAllRoutingCache()
 {
     int i, j;
-    // int t;
 
     aasworld.initialized = true;
     botimport.Print(PRT_MESSAGE, "AAS_CreateAllRoutingCache\n");
