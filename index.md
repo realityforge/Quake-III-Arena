@@ -94,6 +94,15 @@ The major changes of the project are tracked in this table.
       <td>2022-06-29</td>
     </tr>
     <tr valign="top">
+      <td><a href="rebase.html">Base project on idSoftware code</a></td>
+      <td>5</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0%</td>
+      <td>2022-07-28</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr valign="top">
       <td><a href="wasm.html">Wasm - Phase 2</a></td>
       <td>3</td>
       <td>0</td>
