@@ -13,10 +13,18 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 load("//build_defs:rules.bzl", "ENGINE_DEFINES")
 
-# TODO: Should we turn this into a library that ends up as dependency?
 SDL_LINK_OPTS = [
-    "-F/Library/Frameworks",
-    "-framework SDL2",
+    #    "-liconv",
+    #    "-framework CoreAudio",
+    #    "-framework Carbon",
+    #    "-framework CoreVideo",
+    #    "-framework AudioUnit",
+    #    "-framework AudioToolbox",
+    #    "-framework CoreHaptics",
+    #    "-framework IOKit",
+    #    "-framework ForceFeedback",
+    #    "-framework Metal",
+    #    "-framework GameController",
 ]
 
 cc_library(
@@ -30,7 +38,7 @@ cc_library(
         "//code/client:snd_api",
         "//code/client:snd_internal_api",
         "//code/qcommon",
-        "//third_party/sdl",
+        "//third_party/libsdl",
     ],
 )
 
@@ -46,7 +54,7 @@ cc_library(
         "//code/client:snd_api",
         "//code/qcommon",
         "//code/sys:sys_local",
-        "//third_party/sdl",
+        "//third_party/libsdl",
     ],
 )
 
@@ -65,6 +73,6 @@ cc_library(
         "//code/qcommon",
         "//code/renderer:internal_api",
         "//code/sys:sys_local",
-        "//third_party/sdl",
+        "//third_party/libsdl",
     ],
 )
