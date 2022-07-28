@@ -835,7 +835,7 @@ static int BotCheckBarrierJump(bot_movestate_t* ms, const vec3_t dir, float spee
     // there is a barrier
     return true;
 }
-static void BotSwimInDirection(bot_movestate_t* ms, const vec3_t dir, float speed)
+static void BotSwimInDirection(bot_movestate_t* ms, const vec3_t dir, const float speed)
 {
     vec3_t normdir;
 
