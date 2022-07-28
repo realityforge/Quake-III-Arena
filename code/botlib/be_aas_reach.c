@@ -879,7 +879,6 @@ static int AAS_Reachability_Step_Barrier_WaterJump_WalkOffLedge(int area1num, in
                     }
                     // if the two projected edge lines have no overlap
                     if (x2 <= x3 || x4 <= x1) {
-                        //						Log_Write("lines no overlap: from area %d to %d\r\n", area1num, area2num);
                         continue;
                     }
                     // if the two lines fully overlap
@@ -1556,7 +1555,6 @@ static int AAS_Reachability_Jump(int area1num, int area2num)
     VectorMiddle(beststart, beststart2, beststart);
     VectorMiddle(bestend, bestend2, bestend);
     if (bestdist > 4 && bestdist < maxjumpdistance) {
-        //		Log_Write("shortest distance between %d and %d is %f\r\n", area1num, area2num, bestdist);
         // if very close and almost no height difference then the bot can walk
         if (bestdist <= 48 && fabs(beststart[2] - bestend[2]) < 8) {
             speed = 400;
