@@ -789,7 +789,7 @@ static float BotGapDistance(vec3_t origin, vec3_t hordir, int entnum)
     }
     return 0;
 }
-static int BotCheckBarrierJump(bot_movestate_t* ms, vec3_t dir, float speed)
+static int BotCheckBarrierJump(bot_movestate_t* ms, const vec3_t dir, float speed)
 {
     vec3_t start, hordir, end;
     aas_trace_t trace;
