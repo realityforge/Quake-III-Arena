@@ -26,4 +26,9 @@
  */
 #define COUNT_OF(x) ((sizeof(x) / sizeof(0 [x])) / ((size_t)(!(sizeof(x) % sizeof(0 [x])))))
 
+/**
+ * A macro that defines a single bit in a bit flag.
+ */
+#define BIT(n) (0x1U << (n))
+
 #endif
