@@ -205,8 +205,6 @@ static int Export_BotLibUpdateEntity(int ent, bot_entitystate_t* state)
     return AAS_UpdateEntity(ent, state);
 }
 
-float BotGapDistance(vec3_t origin, vec3_t hordir, int entnum);
-
 static void Init_AAS_Export(aas_export_t* aas)
 {
     //--------------------------------------------
