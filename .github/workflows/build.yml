@@ -40,16 +40,6 @@ jobs:
           path: "${HOME}/.cache/bazel"
           key: ${{ runner.os }}-bazel
 
-      - name: Install Linux Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install libsdl2-dev
-        if: matrix.os == 'ubuntu-latest'
-
-      - name: Install MacOS Dependencies
-        run: brew install SDL2
-        if: matrix.os == 'macos-latest'
-
       - name: Configure Bazel Cache
         run: echo "startup --output_base=$HOME/.cache/bazel" >> user.bazelrc
 
