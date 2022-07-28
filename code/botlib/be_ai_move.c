@@ -916,7 +916,6 @@ static bool BotWalkInDirection(bot_movestate_t* ms, vec3_t dir, float speed, int
         tmpdir[0] = move.endpos[0] - ms->origin[0];
         tmpdir[1] = move.endpos[1] - ms->origin[1];
         tmpdir[2] = 0;
-        // AAS_DrawCross(move.endpos, 4, LINECOLOR_BLUE);
         // the bot is blocked by something
         if (VectorLength(tmpdir) < speed * ms->thinktime * 0.5)
             return false;
