@@ -13,25 +13,10 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 load("//build_defs:rules.bzl", "ENGINE_DEFINES")
 
-SDL_LINK_OPTS = [
-    #    "-liconv",
-    #    "-framework CoreAudio",
-    #    "-framework Carbon",
-    #    "-framework CoreVideo",
-    #    "-framework AudioUnit",
-    #    "-framework AudioToolbox",
-    #    "-framework CoreHaptics",
-    #    "-framework IOKit",
-    #    "-framework ForceFeedback",
-    #    "-framework Metal",
-    #    "-framework GameController",
-]
-
 cc_library(
     name = "sdl_snd",
     srcs = ["sdl_snd.c"],
     defines = ENGINE_DEFINES,
-    linkopts = SDL_LINK_OPTS,
     visibility = ["//code/client:__pkg__"],
     deps = [
         "//code/client:api",
@@ -47,7 +32,6 @@ cc_library(
     srcs = [
         "sdl_input.c",
     ],
-    linkopts = SDL_LINK_OPTS,
     visibility = ["//code/client:__pkg__"],
     deps = [
         "//code/client:api",
@@ -67,7 +51,6 @@ cc_library(
     hdrs = [
         "sdl_icon.h",
     ],
-    linkopts = SDL_LINK_OPTS,
     visibility = ["//code/client:__pkg__"],
     deps = [
         "//code/qcommon",
