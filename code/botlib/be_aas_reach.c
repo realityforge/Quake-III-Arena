@@ -1705,7 +1705,7 @@ static int AAS_Reachability_Jump(int area1num, int area2num)
 static int AAS_Reachability_Ladder(int area1num, int area2num)
 {
     vec3_t area1point, area2point, v1, v2, up = { 0, 0, 1 };
-    vec3_t mid, lowestpoint = { 0, 0 }, start, end, sharededgevec, dir;
+    vec3_t mid, lowestpoint, start, end, sharededgevec, dir;
 
     if (!AAS_AreaLadder(area1num) || !AAS_AreaLadder(area2num))
         return false;
