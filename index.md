@@ -103,6 +103,15 @@ The major changes of the project are tracked in this table.
       <td>&nbsp;</td>
     </tr>
     <tr valign="top">
+      <td><a href="sdl.html">Use SDL as the OS abstraction layer</a></td>
+      <td>4</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0%</td>
+      <td>2022-07-30</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr valign="top">
       <td><a href="wasm.html">Wasm - Phase 2</a></td>
       <td>3</td>
       <td>0</td>
