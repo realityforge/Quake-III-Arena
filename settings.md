@@ -6,7 +6,7 @@ Settings in id Tech are typically stored as a key-value pair in a `cvar` or `"Co
 
 CVars are central to the application but have evolved over time and do not have a comprehensive test suite. CVars within the VMs (i.e. the client game, the client ui and the server game) must have a different design pattern given that the representations are in separate memory spaces.
 
-The goal of this change is to create a ground-up rewrite of cvars, adding tests and incorporating features from the original Q3A release, the ioq3 fork, other Q3A forks and subsequent id Tech releases. The rewrite is intended to initiate the process of learning to write tests for C code as well as provide a solid base for incorporating into other projects.
+The goal of this change is to create a ground-up rewrite of cvars, adding tests and incorporating features from the original Q3A release, the ioquake3 fork, other Q3A forks and subsequent id Tech releases. The rewrite is intended to initiate the process of learning to write tests for C code as well as provide a solid base for incorporating into other projects.
 
 The features that the new settings system must support:
 

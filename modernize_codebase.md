@@ -22,6 +22,6 @@ While there "boy-scout rule" sounds good in theory, it often fails in practice. 
 
 ### Evaluation
 
-Time will tell whether this change has a positive impact. However, it should be noted that at least 3 bugs were detected so far after the IDE highlighted variables that were only written to and never read. (Unfortunately all three bugs had already been detected and fixed in the ioq3 fork of the codebase but the fact that the same bugs were detected as part of a code-cleaning exercise should demonstrate that there is value in the code cleaning exercise.)
+Time will tell whether this change has a positive impact. However, it should be noted that at least 3 bugs were detected so far after the IDE highlighted variables that were only written to and never read. (Unfortunately all three bugs had already been detected and fixed in the ioquake3 fork of the codebase but the fact that the same bugs were detected as part of a code-cleaning exercise should demonstrate that there is value in the code cleaning exercise.)
 
 Removal of large amounts of unused code or commented out code has made exploring the project easier.

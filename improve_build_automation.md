@@ -51,7 +51,7 @@ This may require running Bazel on different host systems to build for different 
 
 ### Phase 1 - Evaluation
 
-The initial build conversion to Bazel is taking longer than initially estimated. Rather than starting from the original idSoftware release, the `Makefile` build system in `ioq3` fork was used as a baseline as it is actively maintained and modernized to a degree and thus offered a fairer comparison.
+The initial build conversion to Bazel is taking longer than initially estimated. Rather than starting from the original idSoftware release, the `Makefile` build system in `ioquake3` fork was used as a baseline as it is actively maintained and modernized to a degree and thus offered a fairer comparison.
 
 The conversion is producing tangible benefits even at this early stage. Some benefits of the conversion come purely as it has forced an understanding of the build system and a re-assessment of decisions. Others are probably attributable to the change in build system.
 
