@@ -11,11 +11,16 @@
 # limitations under the License.
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//build_defs:rules.bzl", "ENGINE_DEFINES")
+load("//build_defs:rules.bzl", "ENGINE_DEFINES", "FULL_WARNINGS")
 
 cc_library(
     name = "sdl_snd",
     srcs = ["sdl_snd.c"],
+    copts = FULL_WARNINGS + [
+        "-Wno-padded",
+        "-Wno-cast-align",
+        "-Wno-sign-conversion",
+    ],
     defines = ENGINE_DEFINES,
     visibility = ["//code/client:__pkg__"],
     deps = [
