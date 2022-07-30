@@ -221,7 +221,7 @@ bool SNDDMA_Init()
     // 32768 is what the OSS driver filled in here on my system. I don't
     //  know if it's a good value overall, but at least we know it's
     //  reasonable...this is why I let the user override.
-    tmp = s_sdlMixSamps->value;
+    tmp = s_sdlMixSamps->integer;
     if (!tmp)
         tmp = (obtained.samples * obtained.channels) * 10;
 
