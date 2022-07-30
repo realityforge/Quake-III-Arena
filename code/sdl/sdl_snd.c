@@ -51,7 +51,7 @@ static cvar_t* s_sdlCapture;
 static float sdlMasterGain = 1.0f;
 #endif
 
-static void SNDDMA_AudioCallback(void* userdata, Uint8* stream, int len)
+static void SNDDMA_AudioCallback(UNUSED void* userdata, Uint8* stream, int len)
 {
     int pos = (dmapos * (dma.samplebits / 8));
     if (pos >= dmasize)
@@ -146,7 +146,7 @@ static void SNDDMA_PrintAudiospec(const char* str, const SDL_AudioSpec* spec)
     Com_Printf("  Channels: %d\n", (int)spec->channels);
 }
 
-bool SNDDMA_Init(void)
+bool SNDDMA_Init()
 {
     SDL_AudioSpec desired;
     SDL_AudioSpec obtained;
@@ -269,12 +269,12 @@ bool SNDDMA_Init(void)
     return true;
 }
 
-int SNDDMA_GetDMAPos(void)
+size_t SNDDMA_GetDMAPos()
 {
     return dmapos;
 }
 
-void SNDDMA_Shutdown(void)
+void SNDDMA_Shutdown()
 {
     if (sdlPlaybackDevice != 0) {
         Com_Printf("Closing SDL audio playback device...\n");
@@ -307,18 +307,18 @@ SNDDMA_Submit
 Send sound to device if buffer isn't really the dma buffer
 ===============
 */
-void SNDDMA_Submit(void)
+void SNDDMA_Submit()
 {
     SDL_UnlockAudioDevice(sdlPlaybackDevice);
 }
 
-void SNDDMA_BeginPainting(void)
+void SNDDMA_BeginPainting()
 {
     SDL_LockAudioDevice(sdlPlaybackDevice);
 }
 
 #ifdef USE_VOIP
-void SNDDMA_StartCapture(void)
+void SNDDMA_StartCapture()
 {
 #ifdef USE_SDL_AUDIO_CAPTURE
     if (sdlCaptureDevice) {
@@ -328,7 +328,7 @@ void SNDDMA_StartCapture(void)
 #endif
 }
 
-int SNDDMA_AvailableCaptureSamples(void)
+int SNDDMA_AvailableCaptureSamples()
 {
 #ifdef USE_SDL_AUDIO_CAPTURE
     // divided by 2 to convert from bytes to (mono16) samples.
@@ -351,7 +351,7 @@ void SNDDMA_Capture(int samples, uint8_t* data)
     }
 }
 
-void SNDDMA_StopCapture(void)
+void SNDDMA_StopCapture()
 {
 #ifdef USE_SDL_AUDIO_CAPTURE
     if (sdlCaptureDevice) {
