@@ -38,8 +38,8 @@ static cvar_t* s_sdlDevSamps;
 static cvar_t* s_sdlMixSamps;
 
 /* The audio callback. All the magic happens here. */
-static int dmapos = 0;
-static int dmasize = 0;
+static size_t dmapos = 0;
+static size_t dmasize = 0;
 
 static SDL_AudioDeviceID sdlPlaybackDevice;
 
@@ -53,7 +53,7 @@ static float sdlMasterGain = 1.0f;
 
 static void SNDDMA_AudioCallback(UNUSED void* userdata, Uint8* stream, int len)
 {
-    int pos = (dmapos * (dma.samplebits / 8));
+    size_t pos = (dmapos * (dma.samplebits / 8));
     if (pos >= dmasize)
         dmapos = pos = 0;
 
@@ -62,9 +62,9 @@ static void SNDDMA_AudioCallback(UNUSED void* userdata, Uint8* stream, int len)
         memset(stream, '\0', len);
         return;
     } else {
-        int tobufend = dmasize - pos; /* bytes to buffer's end. */
-        int len1 = len;
-        int len2 = 0;
+        size_t tobufend = dmasize - pos; /* bytes to buffer's end. */
+        size_t len1 = len;
+        size_t len2 = 0;
 
         if (len1 > tobufend) {
             len1 = tobufend;
@@ -129,7 +129,7 @@ static void SNDDMA_PrintAudiospec(const char* str, const SDL_AudioSpec* spec)
     Com_Printf("%s:\n", str);
 
     char* fmt = NULL;
-    for (int i = 0; i < COUNT_OF(formatToStringTable); i++) {
+    for (size_t i = 0; i < COUNT_OF(formatToStringTable); i++) {
         if (spec->format == formatToStringTable[i].enumFormat) {
             fmt = formatToStringTable[i].stringFormat;
         }
@@ -189,7 +189,7 @@ bool SNDDMA_Init()
     // I dunno if this is the best idea, but I'll give it a try...
     //  should probably check a cvar for this...
     if (s_sdlDevSamps->integer)
-        desired.samples = s_sdlDevSamps->value;
+        desired.samples = (Uint16)s_sdlDevSamps->value;
     else {
         // just pick a sane default.
         if (desired.freq <= 11025)
@@ -202,7 +202,7 @@ bool SNDDMA_Init()
             desired.samples = 2048; // (*shrug*)
     }
 
-    desired.channels = (int)s_sdlChannels->value;
+    desired.channels = (Uint8)s_sdlChannels->value;
     desired.callback = SNDDMA_AudioCallback;
 
     sdlPlaybackDevice = SDL_OpenAudioDevice(NULL, SDL_FALSE, &desired, &obtained, SDL_AUDIO_ALLOW_ANY_CHANGE);
@@ -236,7 +236,7 @@ bool SNDDMA_Init()
     dma.fullsamples = dma.samples / dma.channels;
     dma.submission_chunk = 1;
     dma.speed = obtained.freq;
-    dmasize = (dma.samples * (dma.samplebits / 8));
+    dmasize = (size_t)(dma.samples * (dma.samplebits / 8));
     dma.buffer = calloc(1, dmasize);
 
 #ifdef USE_SDL_AUDIO_CAPTURE
@@ -343,11 +343,11 @@ void SNDDMA_Capture(int samples, uint8_t* data)
 #ifdef USE_SDL_AUDIO_CAPTURE
     // multiplied by 2 to convert from (mono16) samples to bytes.
     if (sdlCaptureDevice) {
-        SDL_DequeueAudio(sdlCaptureDevice, data, samples * 2);
+        SDL_DequeueAudio(sdlCaptureDevice, data, (Uint32)(samples * 2));
     } else
 #endif
     {
-        SDL_memset(data, '\0', samples * 2);
+        SDL_memset(data, '\0', (size_t)(samples * 2));
     }
 }
 
