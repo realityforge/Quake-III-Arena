@@ -1171,7 +1171,7 @@ void S_Base_Update(void)
 
 void S_GetSoundtime(void)
 {
-    int samplepos;
+    size_t samplepos;
     static int buffers;
     static int oldsamplepos;
 
