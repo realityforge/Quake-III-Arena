@@ -188,7 +188,7 @@ bool SNDDMA_Init()
 
     // I dunno if this is the best idea, but I'll give it a try...
     //  should probably check a cvar for this...
-    if (s_sdlDevSamps->value)
+    if (s_sdlDevSamps->integer)
         desired.samples = s_sdlDevSamps->value;
     else {
         // just pick a sane default.
