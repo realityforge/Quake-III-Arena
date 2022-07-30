@@ -115,31 +115,31 @@ typedef struct
 // Interface between Q3 sound "api" and the sound backend
 typedef struct
 {
-    void (*Shutdown)();
+    void (*Shutdown)(void);
     void (*StartSound)(vec3_t origin, int entnum, int entchannel, sfxHandle_t sfx);
     void (*StartLocalSound)(sfxHandle_t sfx, int channelNum);
     void (*StartBackgroundTrack)(const char* intro, const char* loop);
-    void (*StopBackgroundTrack)();
+    void (*StopBackgroundTrack)(void);
     void (*RawSamples)(int stream, int samples, int rate, int width, int channels, const uint8_t* data, float volume, int entityNum);
-    void (*StopAllSounds)();
+    void (*StopAllSounds)(void);
     void (*ClearLoopingSounds)(bool killall);
     void (*AddLoopingSound)(int entityNum, const vec3_t origin, const vec3_t velocity, sfxHandle_t sfx);
     void (*AddRealLoopingSound)(int entityNum, const vec3_t origin, const vec3_t velocity, sfxHandle_t sfx);
     void (*StopLoopingSound)(int entityNum);
     void (*Respatialize)(int entityNum, const vec3_t origin, vec3_t axis[3], int inwater);
     void (*UpdateEntityPosition)(int entityNum, const vec3_t origin);
-    void (*Update)();
-    void (*DisableSounds)();
-    void (*BeginRegistration)();
+    void (*Update)(void);
+    void (*DisableSounds)(void);
+    void (*BeginRegistration)(void);
     sfxHandle_t (*RegisterSound)(const char* sample, bool compressed);
-    void (*ClearSoundBuffer)();
-    void (*SoundInfo)();
-    void (*SoundList)();
+    void (*ClearSoundBuffer)(void);
+    void (*SoundInfo)(void);
+    void (*SoundList)(void);
 #ifdef USE_VOIP
-    void (*StartCapture)();
-    int (*AvailableCaptureSamples)();
+    void (*StartCapture)(void);
+    int (*AvailableCaptureSamples)(void);
     void (*Capture)(int samples, uint8_t* data);
-    void (*StopCapture)();
+    void (*StopCapture)(void);
     void (*MasterGain)(float gain);
 #endif
 } soundInterface_t;
