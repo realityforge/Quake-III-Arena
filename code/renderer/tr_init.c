@@ -1117,7 +1117,6 @@ void RE_Shutdown(bool destroyWindow)
         GLimp_Shutdown();
 
         memset(&glConfig, 0, sizeof(glConfig));
-        memset(&glConfig, 0, sizeof(glConfig));
         displayAspect = 0.0f;
 
         memset(&glState, 0, sizeof(glState));
