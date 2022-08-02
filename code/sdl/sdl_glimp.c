@@ -85,8 +85,8 @@ void GLimp_Minimize(void)
 static int GLimp_CompareModes(const void* a, const void* b)
 {
     const float ASPECT_EPSILON = 0.001f;
-    SDL_Rect* modeA = (SDL_Rect*)a;
-    SDL_Rect* modeB = (SDL_Rect*)b;
+    const SDL_Rect* modeA = (const SDL_Rect*)a;
+    const SDL_Rect* modeB = (const SDL_Rect*)b;
     float aspectA = (float)modeA->w / (float)modeA->h;
     float aspectB = (float)modeB->w / (float)modeB->h;
     int areaA = modeA->w * modeA->h;
