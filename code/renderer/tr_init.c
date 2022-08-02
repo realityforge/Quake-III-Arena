@@ -1115,6 +1115,7 @@ void RE_Shutdown(bool destroyWindow)
     // shut down platform specific OpenGL stuff
     if (destroyWindow) {
         GLimp_Shutdown();
+        // Clear the backend renderer state
 
         memset(&glConfig, 0, sizeof(glConfig));
         displayAspect = 0.0f;
