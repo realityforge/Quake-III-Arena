@@ -49,6 +49,7 @@ cc_library(
     name = "sdl_renderer",
     srcs = ["sdl_glimp.c"],
     hdrs = ["sdl_icon.h"],
+    copts = FULL_WARNINGS + ["-Wno-padded"],
     visibility = ["//code/client:__pkg__"],
     deps = [
         "//code/qcommon",
