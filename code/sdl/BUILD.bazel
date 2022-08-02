@@ -33,18 +33,10 @@ cc_library(
 )
 
 cc_library(
-    name = "sdl_local",
-    hdrs = ["sdl_local.h"],
-    copts = FULL_WARNINGS,
-    deps = ["//third_party/libsdl"],
-)
-
-cc_library(
     name = "sdl_input",
     srcs = ["sdl_input.c"],
     visibility = ["//code/client:__pkg__"],
     deps = [
-        ":sdl_local",
         "//code/client:api",
         "//code/client:snd_api",
         "//code/qcommon",
@@ -59,7 +51,6 @@ cc_library(
     hdrs = ["sdl_icon.h"],
     visibility = ["//code/client:__pkg__"],
     deps = [
-        ":sdl_local",
         "//code/qcommon",
         "//code/renderer:internal_api",
         "//code/sys:sys_local",
