@@ -63,7 +63,7 @@ static void GLimp_DestroyWindowIfExists()
     }
 }
 
-void GLimp_Shutdown(void)
+void GLimp_Shutdown()
 {
     ri.IN_Shutdown();
 
