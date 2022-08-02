@@ -63,36 +63,34 @@ void GLimp_InitExtraExtensions()
     ri.Printf(PRINT_ALL, glConfig.memInfo == MI_NVX ? EXT_USING_MESSAGE : EXT_NOT_FOUND_MESSAGE, "GL_NVX_gpu_memory_info");
     ri.Printf(PRINT_ALL, glConfig.memInfo == MI_ATI ? EXT_USING_MESSAGE : EXT_NOT_FOUND_MESSAGE, "GL_ATI_meminfo");
 
-    glConfig.textureCompressionExtension = TCR_NONE;
+    glConfig.textureCompression = TC_NONE;
 
     if (GLA_ARB_texture_compression_rgtc) {
         const bool useRgtc = r_ext_compressed_textures->integer >= 1;
         if (useRgtc) {
-            glConfig.textureCompressionExtension |= TCR_RGTC;
+            glConfig.textureCompression |= TC_RGTC;
         }
         ri.Printf(PRINT_ALL, useRgtc ? EXT_IGNORE_MESSAGE : EXT_USING_MESSAGE, "GL_ARB_texture_compression_rgtc");
     } else {
         ri.Printf(PRINT_ALL, EXT_NOT_FOUND_MESSAGE, "GL_ARB_texture_compression_rgtc");
     }
 
-    glConfig.swizzleNormalmap = r_ext_compressed_textures->integer && !(glConfig.textureCompressionExtension & TCR_RGTC);
+    glConfig.swizzleNormalmap = r_ext_compressed_textures->integer && !(glConfig.textureCompression & TC_RGTC);
 
     if (GLA_ARB_texture_compression_bptc) {
         const bool useBptc = r_ext_compressed_textures->integer >= 2;
         if (useBptc) {
-            glConfig.textureCompressionExtension |= TCR_BPTC;
+            glConfig.textureCompression |= TC_BPTC;
         }
         ri.Printf(PRINT_ALL, useBptc ? EXT_IGNORE_MESSAGE : EXT_USING_MESSAGE, "GL_ARB_texture_compression_bptc");
     } else {
         ri.Printf(PRINT_ALL, EXT_NOT_FOUND_MESSAGE, "GL_ARB_texture_compression_bptc");
     }
 
-    glConfig.textureCompression = TC_NONE;
-
     // GL_EXT_texture_compression_s3tc
     if (GLA_EXT_texture_compression_s3tc) {
         if (r_ext_compressed_textures->value) {
-            glConfig.textureCompression = TC_S3TC;
+            glConfig.textureCompression |= TC_S3TC;
             ri.Printf(PRINT_ALL, EXT_USING_MESSAGE, "GL_EXT_texture_compression_s3tc");
         } else {
             ri.Printf(PRINT_ALL, EXT_IGNORE_MESSAGE, "GL_EXT_texture_compression_s3tc");

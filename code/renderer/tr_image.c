@@ -1553,9 +1553,9 @@ static GLenum RawImage_GetFormat(const uint8_t* data, int numPixels, GLenum picF
 
     if (normalmap) {
         if ((type == IMGTYPE_NORMALHEIGHT) && RawImage_HasAlpha(data, numPixels) && r_parallaxMapping->integer) {
-            if (!forceNoCompression && glConfig.textureCompressionExtension & TCR_BPTC) {
+            if (!forceNoCompression && glConfig.textureCompression & TC_BPTC) {
                 internalFormat = GL_COMPRESSED_RGBA_BPTC_UNORM_ARB;
-            } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC) {
+            } else if (!forceNoCompression && glConfig.textureCompression & TC_S3TC) {
                 internalFormat = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
             } else if (r_texturebits->integer == 16) {
                 internalFormat = GL_RGBA4;
@@ -1565,11 +1565,11 @@ static GLenum RawImage_GetFormat(const uint8_t* data, int numPixels, GLenum picF
                 internalFormat = GL_RGBA;
             }
         } else {
-            if (!forceNoCompression && glConfig.textureCompressionExtension & TCR_RGTC) {
+            if (!forceNoCompression && glConfig.textureCompression & TC_RGTC) {
                 internalFormat = GL_COMPRESSED_RG_RGTC2;
-            } else if (!forceNoCompression && glConfig.textureCompressionExtension & TCR_BPTC) {
+            } else if (!forceNoCompression && glConfig.textureCompression & TC_BPTC) {
                 internalFormat = GL_COMPRESSED_RGBA_BPTC_UNORM_ARB;
-            } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC) {
+            } else if (!forceNoCompression && glConfig.textureCompression & TC_S3TC) {
                 internalFormat = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
             } else if (r_texturebits->integer == 16) {
                 internalFormat = GL_RGB5;
@@ -1588,9 +1588,9 @@ static GLenum RawImage_GetFormat(const uint8_t* data, int numPixels, GLenum picF
 
         // select proper internal format
         if (samples == 3) {
-            if (!forceNoCompression && (glConfig.textureCompressionExtension & TCR_BPTC)) {
+            if (!forceNoCompression && (glConfig.textureCompression & TC_BPTC)) {
                 internalFormat = GL_COMPRESSED_RGBA_BPTC_UNORM_ARB;
-            } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC) {
+            } else if (!forceNoCompression && glConfig.textureCompression & TC_S3TC) {
                 internalFormat = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
             } else if (r_texturebits->integer == 16) {
                 internalFormat = GL_RGB5;
@@ -1600,9 +1600,9 @@ static GLenum RawImage_GetFormat(const uint8_t* data, int numPixels, GLenum picF
                 internalFormat = GL_RGB;
             }
         } else if (samples == 4) {
-            if (!forceNoCompression && (glConfig.textureCompressionExtension & TCR_BPTC)) {
+            if (!forceNoCompression && (glConfig.textureCompression & TC_BPTC)) {
                 internalFormat = GL_COMPRESSED_RGBA_BPTC_UNORM_ARB;
-            } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC) {
+            } else if (!forceNoCompression && glConfig.textureCompression & TC_S3TC) {
                 internalFormat = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
             } else if (r_texturebits->integer == 16) {
                 internalFormat = GL_RGBA4;

@@ -152,8 +152,10 @@ typedef enum {
 ** subsystem is initialized.
 */
 typedef enum {
-    TC_NONE,
-    TC_S3TC
+    TC_NONE = 0x0000,
+    TC_S3TC = 0x0001,
+    TC_RGTC = 0x0002,
+    TC_BPTC = 0x0004,
 } textureCompression_t;
 
 typedef enum {
@@ -161,12 +163,6 @@ typedef enum {
     MI_NVX,
     MI_ATI
 } memInfo_t;
-
-typedef enum {
-    TCR_NONE = 0x0000,
-    TCR_RGTC = 0x0001,
-    TCR_BPTC = 0x0002,
-} textureCompressionRef_t;
 
 typedef struct {
     char renderer_string[MAX_STRING_CHARS];
@@ -213,8 +209,6 @@ typedef struct {
     int maxColorAttachments;
 
     bool textureFloat;
-    // TODO: Merge this with textureCompression above ...
-    textureCompressionRef_t textureCompressionExtension;
     bool swizzleNormalmap;
 
     bool framebufferMultisample;
