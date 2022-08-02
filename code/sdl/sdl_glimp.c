@@ -415,26 +415,26 @@ static rserr_t GLimp_SetMode(const int mode, const bool fullscreen, const bool n
         }
 
         if (fullscreen) {
-            SDL_DisplayMode mode;
+            SDL_DisplayMode display_mode;
 
             switch (testColorBits) {
             case 16:
-                mode.format = SDL_PIXELFORMAT_RGB565;
+                display_mode.format = SDL_PIXELFORMAT_RGB565;
                 break;
             case 24:
-                mode.format = SDL_PIXELFORMAT_RGB24;
+                display_mode.format = SDL_PIXELFORMAT_RGB24;
                 break;
             default:
                 ri.Printf(PRINT_DEVELOPER, "testColorBits is %d, can't fullscreen\n", testColorBits);
                 continue;
             }
 
-            mode.w = glConfig.vidWidth;
-            mode.h = glConfig.vidHeight;
-            mode.refresh_rate = glConfig.displayFrequency = ri.Cvar_VariableIntegerValue("r_displayRefresh");
-            mode.driverdata = NULL;
+            display_mode.w = glConfig.vidWidth;
+            display_mode.h = glConfig.vidHeight;
+            display_mode.refresh_rate = glConfig.displayFrequency = ri.Cvar_VariableIntegerValue("r_displayRefresh");
+            display_mode.driverdata = NULL;
 
-            if (SDL_SetWindowDisplayMode(SDL_window, &mode) < 0) {
+            if (SDL_SetWindowDisplayMode(SDL_window, &display_mode) < 0) {
                 ri.Printf(PRINT_DEVELOPER, "SDL_SetWindowDisplayMode failed: %s\n", SDL_GetError());
                 continue;
             }
