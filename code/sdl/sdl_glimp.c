@@ -178,7 +178,6 @@ static int GLimp_SetMode(const int mode, const bool fullscreen, const bool nobor
     Uint32 flags = SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL;
     SDL_DisplayMode desktopMode;
     int display = 0;
-    int x = SDL_WINDOWPOS_UNDEFINED, y = SDL_WINDOWPOS_UNDEFINED;
 
     ri.Printf(PRINT_ALL, "Initializing OpenGL display\n");
 
@@ -236,8 +235,12 @@ static int GLimp_SetMode(const int mode, const bool fullscreen, const bool nobor
     }
     ri.Printf(PRINT_ALL, " %d %d\n", glConfig.vidWidth, glConfig.vidHeight);
 
-    // Center window
-    if (r_centerWindow->integer && !fullscreen) {
+    int x = SDL_WINDOWPOS_UNDEFINED;
+    int y = SDL_WINDOWPOS_UNDEFINED;
+    if (NULL != SDL_window) {
+        SDL_GetWindowPosition(SDL_window, &x, &y);
+    } else if (r_centerWindow->integer && !fullscreen) {
+        // Center window
         x = (desktopMode.w / 2) - (glConfig.vidWidth / 2);
         y = (desktopMode.h / 2) - (glConfig.vidHeight / 2);
     }
@@ -245,7 +248,6 @@ static int GLimp_SetMode(const int mode, const bool fullscreen, const bool nobor
     GLimp_DeleteContextIfExists();
 
     if (NULL != SDL_window) {
-        SDL_GetWindowPosition(SDL_window, &x, &y);
         ri.Printf(PRINT_DEVELOPER, "Existing window at %dx%d before being destroyed\n", x, y);
         SDL_DestroyWindow(SDL_window);
         SDL_window = NULL;
