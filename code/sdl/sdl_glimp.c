@@ -179,7 +179,6 @@ static void GLimp_DetectAvailableModes(void)
     SDL_free(modes);
 }
 
-
 void GLimp_SetGamma(unsigned char red[256], unsigned char green[256], unsigned char blue[256])
 {
     if (!glConfig.deviceSupportsGamma || r_ignorehwgamma->integer > 0)
@@ -228,7 +227,6 @@ void GLimp_SetGamma(unsigned char red[256], unsigned char green[256], unsigned c
         ri.Printf(PRINT_DEVELOPER, "SDL_SetWindowGammaRamp() failed: %s\n", SDL_GetError());
     }
 }
-
 
 static rserr_t GLimp_SetMode(const int mode, const bool fullscreen, const bool noborder)
 {
