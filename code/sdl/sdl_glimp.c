@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-#include "SDL2/SDL.h"
+#include "sdl_local.h"
 
 #include <math.h>
 #include <stdio.h>
