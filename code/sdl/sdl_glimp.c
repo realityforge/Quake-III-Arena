@@ -673,7 +673,7 @@ void GLimp_EndFrame(void)
         needToToggle = !!r_fullscreen->integer != fullscreen;
 
         if (needToToggle) {
-            sdlToggled = SDL_SetWindowFullscreen(SDL_window, r_fullscreen->integer) >= 0;
+            sdlToggled = SDL_SetWindowFullscreen(SDL_window, r_fullscreen->integer ? SDL_WINDOW_FULLSCREEN : 0U) >= 0;
 
             // SDL_WM_ToggleFullScreen didn't work, so do it the slow way
             if (!sdlToggled)
