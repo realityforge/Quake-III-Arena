@@ -179,7 +179,7 @@ static void GLimp_DetectAvailableModes(void)
     SDL_free(modes);
 }
 
-static int GLimp_SetMode(const int mode, const bool fullscreen, const bool noborder)
+static rserr_t GLimp_SetMode(const int mode, const bool fullscreen, const bool noborder)
 {
     const char* glstring;
     int perChannelColorBits;
