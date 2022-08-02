@@ -105,11 +105,9 @@ static int GLimp_CompareModes(const void* a, const void* b)
 
 static void GLimp_DetectAvailableModes(void)
 {
-    int i, j;
     char buf[MAX_STRING_CHARS] = { 0 };
-    int numSDLModes;
     SDL_Rect* modes;
-    int numModes = 0;
+    size_t numModes = 0;
 
     SDL_DisplayMode windowMode;
     int display = SDL_GetWindowDisplayIndex(SDL_window);
@@ -117,7 +115,7 @@ static void GLimp_DetectAvailableModes(void)
         ri.Printf(PRINT_WARNING, "Couldn't get window display index, no resolutions detected: %s\n", SDL_GetError());
         return;
     }
-    numSDLModes = SDL_GetNumDisplayModes(display);
+    const int numSDLModes = SDL_GetNumDisplayModes(display);
 
     if (SDL_GetWindowDisplayMode(SDL_window, &windowMode) < 0 || numSDLModes <= 0) {
         ri.Printf(PRINT_WARNING, "Couldn't get window display mode, no resolutions detected: %s\n", SDL_GetError());
@@ -129,7 +127,7 @@ static void GLimp_DetectAvailableModes(void)
         ri.Error(ERR_FATAL, "Out of memory");
     }
 
-    for (i = 0; i < numSDLModes; i++) {
+    for (int i = 0; i < numSDLModes; i++) {
         SDL_DisplayMode mode;
 
         if (SDL_GetDisplayMode(display, i, &mode) < 0)
@@ -146,6 +144,7 @@ static void GLimp_DetectAvailableModes(void)
 
         // SDL can give the same resolution with different refresh rates.
         // Only list resolution once.
+        size_t j = 0;
         for (j = 0; j < numModes; j++) {
             if (mode.w == modes[j].w && mode.h == modes[j].h)
                 break;
@@ -162,7 +161,7 @@ static void GLimp_DetectAvailableModes(void)
     if (numModes > 1)
         qsort(modes, numModes, sizeof(SDL_Rect), GLimp_CompareModes);
 
-    for (i = 0; i < numModes; i++) {
+    for (size_t i = 0; i < numModes; i++) {
         const char* newModeString = va("%ux%u ", modes[i].w, modes[i].h);
 
         if (strlen(newModeString) < (int)sizeof(buf) - strlen(buf))
