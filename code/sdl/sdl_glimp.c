@@ -67,6 +67,8 @@ void GLimp_Shutdown()
 {
     ri.IN_Shutdown();
 
+    GLimp_DestroyWindowIfExists();
+
     SDL_QuitSubSystem(SDL_INIT_VIDEO);
 }
 
