@@ -53,6 +53,9 @@ static void GLimp_DeleteContextIfExists()
 
 static void GLimp_DestroyWindowIfExists()
 {
+    // Make sure we clear up the GL context if present
+    GLimp_DeleteContextIfExists();
+
     // Destroy the window if active
     if (NULL != SDL_window) {
         SDL_DestroyWindow(SDL_window);
@@ -254,7 +257,6 @@ static int GLimp_SetMode(const int mode, const bool fullscreen, const bool nobor
         y = (desktopMode.h / 2) - (glConfig.vidHeight / 2);
     }
 
-    GLimp_DeleteContextIfExists();
     GLimp_DestroyWindowIfExists();
 
     if (fullscreen) {
@@ -440,7 +442,6 @@ static int GLimp_SetMode(const int mode, const bool fullscreen, const bool nobor
             if (GLA_OK != result) {
                 const char* error_message = glaError();
                 ri.Printf(PRINT_ALL, "glaInit() failed with error %d: %s\n", result, NULL == error_message ? "unknown reason" : error_message);
-                GLimp_DeleteContextIfExists();
                 GLimp_DestroyWindowIfExists();
                 continue;
             }
