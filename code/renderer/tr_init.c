@@ -1116,8 +1116,6 @@ void RE_Shutdown(bool destroyWindow)
     if (destroyWindow) {
         GLimp_Shutdown();
         // Clear the backend renderer state
-
-        memset(&glConfig, 0, sizeof(glConfig));
         displayAspect = 0.0f;
 
         memset(&glState, 0, sizeof(glState));
