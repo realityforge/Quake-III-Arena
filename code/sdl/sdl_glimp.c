@@ -608,7 +608,9 @@ success:
 
     // manually create extension list if using OpenGL 3
     if (glaFunctions.function.GetStringi) {
-        int i, numExtensions, extensionLength, listLength;
+        int i, numExtensions;
+        size_t listLength;
+        size_t extensionLength;
         const char* extension;
 
         glGetIntegerv(GL_NUM_EXTENSIONS, &numExtensions);
