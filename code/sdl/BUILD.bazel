@@ -35,6 +35,13 @@ cc_library(
 cc_library(
     name = "sdl_input",
     srcs = ["sdl_input.c"],
+    copts = FULL_WARNINGS + [
+        "-Wno-padded",
+        "-Wno-assign-enum",
+        "-Wno-sign-compare",
+        "-Wno-sign-conversion",
+        "-Wno-bad-function-cast",
+    ],
     visibility = ["//code/client:__pkg__"],
     deps = [
         "//code/client:api",
