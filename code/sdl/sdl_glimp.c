@@ -39,8 +39,8 @@ typedef enum {
 SDL_Window* SDL_window = NULL;
 static SDL_GLContext SDL_glContext = NULL;
 
-cvar_t* r_allowResize; // make window resizable
-cvar_t* r_centerWindow;
+static cvar_t* r_allowResize; // make window resizable
+static cvar_t* r_centerWindow;
 
 static void GLimp_DeleteContextIfExists()
 {
