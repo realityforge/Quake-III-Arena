@@ -29,7 +29,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../renderer/tr_common.h"
 #include "../sys/sys_local.h"
 #include "cvar_engine.h"
-#include "sdl_icon.h"
+#include "window_icon_data.h"
+#include "window_icon_dimensions.h"
 
 typedef enum {
     RSERR_OK,
@@ -236,7 +237,6 @@ static rserr_t GLimp_SetMode(const int mode, const bool fullscreen, const bool n
     int colorBits, depthBits, stencilBits;
     int samples;
     int i;
-    SDL_Surface* icon = NULL;
     Uint32 flags = SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL;
     SDL_DisplayMode desktopMode;
     int display = 0;
@@ -246,18 +246,25 @@ static rserr_t GLimp_SetMode(const int mode, const bool fullscreen, const bool n
     if (r_allowResize->integer)
         flags |= SDL_WINDOW_RESIZABLE;
 
-    icon = SDL_CreateRGBSurfaceFrom(
-        (void*)CLIENT_WINDOW_ICON.pixel_data,
-        CLIENT_WINDOW_ICON.width,
-        CLIENT_WINDOW_ICON.height,
-        CLIENT_WINDOW_ICON.bytes_per_pixel * 8,
-        CLIENT_WINDOW_ICON.bytes_per_pixel * CLIENT_WINDOW_ICON.width,
+    SDL_ClearError();
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wcast-qual"
+    SDL_Surface* icon = SDL_CreateRGBSurfaceFrom(
+        (void*)MagickImage,
+        (int)MagickImageWidth,
+        (int)MagickImageHeight,
+        32 /* 4 components per pixel, 8 bits per component */,
+        4 * (int)MagickImageWidth /* 4 components per pixel * image width */,
 #ifdef Q3_LITTLE_ENDIAN
         0x000000FF, 0x0000FF00, 0x00FF0000, 0xFF000000
 #else
         0xFF000000, 0x00FF0000, 0x0000FF00, 0x000000FF
 #endif
     );
+#pragma clang diagnostic pop
+    if (NULL == icon) {
+        ri.Printf(PRINT_ALL, "Error loading Window Icon: %s\n", SDL_GetError());
+    }
 
     // If a window exists, note its display index
     if (NULL != SDL_window) {
@@ -439,7 +446,9 @@ static rserr_t GLimp_SetMode(const int mode, const bool fullscreen, const bool n
             }
         }
 
-        SDL_SetWindowIcon(SDL_window, icon);
+        if (NULL != icon) {
+            SDL_SetWindowIcon(SDL_window, icon);
+        }
 
         int profileMask, majorVersion, minorVersion;
         SDL_GL_GetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, &profileMask);

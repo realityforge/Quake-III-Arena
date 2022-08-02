@@ -13,6 +13,26 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 load("//build_defs:rules.bzl", "ENGINE_DEFINES", "FULL_WARNINGS")
 
+genrule(
+    name = "icon",
+    srcs = ["//game/windows:quake3.ico"],
+    outs = [
+        "window_icon_data.h",
+        "window_icon_dimensions.h",
+    ],
+    cmd = """
+$(execpath @imagemagick//:magick) convert -channel RGBA -depth 8 $(execpath //game/windows:quake3.ico)[0] $(execpath window_icon_data.h)
+$(execpath @imagemagick//:magick) identify -format "static size_t MagickImageWidth = %w;\nstatic size_t MagickImageHeight = %h;\n" $(execpath //game/windows:quake3.ico)[0] > $(execpath window_icon_dimensions.h)
+    """,
+    tools = ["@imagemagick//:magick"],
+)
+
+cc_library(
+    name = "sdl_icon",
+    hdrs = [":icon"],
+    includes = ["."],
+)
+
 cc_library(
     name = "sdl_snd",
     srcs = ["sdl_snd.c"],
@@ -55,10 +75,10 @@ cc_library(
 cc_library(
     name = "sdl_renderer",
     srcs = ["sdl_glimp.c"],
-    hdrs = ["sdl_icon.h"],
     copts = FULL_WARNINGS + ["-Wno-padded"],
     visibility = ["//code/client:__pkg__"],
     deps = [
+        ":sdl_icon",
         "//code/qcommon",
         "//code/renderer:internal_api",
         "//code/sys:sys_local",
