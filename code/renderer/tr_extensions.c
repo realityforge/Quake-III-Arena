@@ -30,57 +30,57 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 void GLimp_InitExtraExtensions()
 {
     // Check if we need Intel graphics specific fixes.
-    glRefConfig.intelGraphics = false;
+    glConfig.intelGraphics = false;
     if (NULL != strstr((char*)glGetString(GL_RENDERER), "Intel")) {
-        glRefConfig.intelGraphics = true;
+        glConfig.intelGraphics = true;
     }
 
-    glRefConfig.framebufferObject = GLA_VERSION_3_2 && GLA_ARB_framebuffer_object && !!r_ext_framebuffer_object->integer;
+    glConfig.framebufferObject = GLA_VERSION_3_2 && GLA_ARB_framebuffer_object && !!r_ext_framebuffer_object->integer;
 
-    glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE, &glRefConfig.maxRenderbufferSize);
-    glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &glRefConfig.maxColorAttachments);
+    glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE, &glConfig.maxRenderbufferSize);
+    glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &glConfig.maxColorAttachments);
 
-    ri.Printf(PRINT_ALL, glRefConfig.framebufferObject ? EXT_IGNORE_MESSAGE : EXT_USING_MESSAGE, "GL_ARB_framebuffer_object");
+    ri.Printf(PRINT_ALL, glConfig.framebufferObject ? EXT_IGNORE_MESSAGE : EXT_USING_MESSAGE, "GL_ARB_framebuffer_object");
 
-    glRefConfig.vertexArrayObject = true;
-    glRefConfig.textureFloat = !!r_ext_texture_float->integer;
+    glConfig.vertexArrayObject = true;
+    glConfig.textureFloat = !!r_ext_texture_float->integer;
 
-    glRefConfig.depthClamp = GLA_ARB_depth_clamp;
-    ri.Printf(PRINT_ALL, glRefConfig.depthClamp ? EXT_USING_MESSAGE : EXT_NOT_FOUND_MESSAGE, "GL_ARB_depth_clamp");
+    glConfig.depthClamp = GLA_ARB_depth_clamp;
+    ri.Printf(PRINT_ALL, glConfig.depthClamp ? EXT_USING_MESSAGE : EXT_NOT_FOUND_MESSAGE, "GL_ARB_depth_clamp");
 
-    glRefConfig.seamlessCubeMap = GLA_ARB_seamless_cube_map;
-    ri.Printf(PRINT_ALL, glRefConfig.seamlessCubeMap ? EXT_USING_MESSAGE : EXT_NOT_FOUND_MESSAGE, "GL_ARB_seamless_cube_map");
+    glConfig.seamlessCubeMap = GLA_ARB_seamless_cube_map;
+    ri.Printf(PRINT_ALL, glConfig.seamlessCubeMap ? EXT_USING_MESSAGE : EXT_NOT_FOUND_MESSAGE, "GL_ARB_seamless_cube_map");
 
     // Determine GLSL version
     char shading_language_version[256];
     Q_strncpyz(shading_language_version, (char*)glGetString(GL_SHADING_LANGUAGE_VERSION), sizeof(shading_language_version));
-    sscanf(shading_language_version, "%d.%d", &glRefConfig.glslMajorVersion, &glRefConfig.glslMinorVersion);
+    sscanf(shading_language_version, "%d.%d", &glConfig.glslMajorVersion, &glConfig.glslMinorVersion);
     ri.Printf(PRINT_ALL, "...using GLSL shading_language_version %s\n", shading_language_version);
 
-    glRefConfig.memInfo = GLA_NVX_gpu_memory_info ? MI_NVX : GLA_ATI_meminfo ? MI_ATI
-                                                                             : MI_NONE;
+    glConfig.memInfo = GLA_NVX_gpu_memory_info ? MI_NVX : GLA_ATI_meminfo ? MI_ATI
+                                                                          : MI_NONE;
 
-    ri.Printf(PRINT_ALL, glRefConfig.memInfo == MI_NVX ? EXT_USING_MESSAGE : EXT_NOT_FOUND_MESSAGE, "GL_NVX_gpu_memory_info");
-    ri.Printf(PRINT_ALL, glRefConfig.memInfo == MI_ATI ? EXT_USING_MESSAGE : EXT_NOT_FOUND_MESSAGE, "GL_ATI_meminfo");
+    ri.Printf(PRINT_ALL, glConfig.memInfo == MI_NVX ? EXT_USING_MESSAGE : EXT_NOT_FOUND_MESSAGE, "GL_NVX_gpu_memory_info");
+    ri.Printf(PRINT_ALL, glConfig.memInfo == MI_ATI ? EXT_USING_MESSAGE : EXT_NOT_FOUND_MESSAGE, "GL_ATI_meminfo");
 
-    glRefConfig.textureCompression = TCR_NONE;
+    glConfig.textureCompressionExtension = TCR_NONE;
 
     if (GLA_ARB_texture_compression_rgtc) {
         const bool useRgtc = r_ext_compressed_textures->integer >= 1;
         if (useRgtc) {
-            glRefConfig.textureCompression |= TCR_RGTC;
+            glConfig.textureCompressionExtension |= TCR_RGTC;
         }
         ri.Printf(PRINT_ALL, useRgtc ? EXT_IGNORE_MESSAGE : EXT_USING_MESSAGE, "GL_ARB_texture_compression_rgtc");
     } else {
         ri.Printf(PRINT_ALL, EXT_NOT_FOUND_MESSAGE, "GL_ARB_texture_compression_rgtc");
     }
 
-    glRefConfig.swizzleNormalmap = r_ext_compressed_textures->integer && !(glRefConfig.textureCompression & TCR_RGTC);
+    glConfig.swizzleNormalmap = r_ext_compressed_textures->integer && !(glConfig.textureCompressionExtension & TCR_RGTC);
 
     if (GLA_ARB_texture_compression_bptc) {
         const bool useBptc = r_ext_compressed_textures->integer >= 2;
         if (useBptc) {
-            glRefConfig.textureCompression |= TCR_BPTC;
+            glConfig.textureCompressionExtension |= TCR_BPTC;
         }
         ri.Printf(PRINT_ALL, useBptc ? EXT_IGNORE_MESSAGE : EXT_USING_MESSAGE, "GL_ARB_texture_compression_bptc");
     } else {

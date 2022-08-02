@@ -66,7 +66,7 @@ void RB_ToneMap(FBO_t* hdrFbo, ivec4_t hdrBox, FBO_t* ldrFbo, ivec4_t ldrBox, in
         VectorSet4(srcBox, 0, 0, 0, 0);
 
         color[0] = color[1] = color[2] = 1.0f;
-        if (glRefConfig.textureFloat)
+        if (glConfig.textureFloat)
             color[3] = 0.03f;
         else
             color[3] = 0.1f;
@@ -106,7 +106,7 @@ void RB_BokehBlur(FBO_t* src, ivec4_t srcBox, FBO_t* dst, ivec4_t dstBox, float 
     if (blur < 0.004f)
         return;
 
-    if (glRefConfig.framebufferObject) {
+    if (glConfig.framebufferObject) {
         // bokeh blur
         if (blur > 0.0f) {
             ivec4_t quarterBox;

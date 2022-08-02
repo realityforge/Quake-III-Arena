@@ -935,7 +935,7 @@ bool R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_name)
     }
 
     // Create VAO surfaces
-    if (iqmData->num_surfaces && iqmData->num_joints <= glRefConfig.glslMaxAnimatedBones) {
+    if (iqmData->num_surfaces && iqmData->num_joints <= glConfig.glslMaxAnimatedBones) {
         srfVaoIQModel_t* vaoSurf;
         srfIQModel_t* surf;
 

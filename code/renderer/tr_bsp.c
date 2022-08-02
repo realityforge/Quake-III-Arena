@@ -2580,7 +2580,7 @@ void RE_LoadWorldMap(const char* name)
     R_BindNullVao();
 
     // Render or load all cubemaps
-    if (r_cubeMapping->integer && tr.numCubemaps && glRefConfig.framebufferObject) {
+    if (r_cubeMapping->integer && tr.numCubemaps && glConfig.framebufferObject) {
         R_LoadCubemaps();
         R_RenderMissingCubemaps();
     }

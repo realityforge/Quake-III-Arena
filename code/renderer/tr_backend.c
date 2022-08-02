@@ -291,7 +291,7 @@ static void RB_BeginDrawingView()
     // 2D images again
     backEnd.projection2D = false;
 
-    if (glRefConfig.framebufferObject) {
+    if (glConfig.framebufferObject) {
         FBO_t* fbo = backEnd.viewParms.targetFbo;
 
         // FIXME: HUGE HACK: render to the screen fbo if we've already postprocessed the frame and aren't drawing more world
@@ -499,7 +499,7 @@ static void RB_RenderDrawSurfList(drawSurf_t* drawSurfs, int numDrawSurfs)
         RB_EndSurface();
     }
 
-    if (glRefConfig.framebufferObject)
+    if (glConfig.framebufferObject)
         FBO_Bind(fbo);
 
     // go back to the world modelview matrix
@@ -611,7 +611,7 @@ void RE_StretchRaw(int x, int y, int w, int h, int cols, int rows, const uint8_t
     }
 
     // FIXME: HUGE hack
-    if (glRefConfig.framebufferObject) {
+    if (glConfig.framebufferObject) {
         FBO_Bind(backEnd.framePostProcessed ? NULL : tr.renderFbo);
     }
 
@@ -687,7 +687,7 @@ static const void* RB_StretchPic(const void* data)
     cmd = (const stretchPicCommand_t*)data;
 
     // FIXME: HUGE hack
-    if (glRefConfig.framebufferObject)
+    if (glConfig.framebufferObject)
         FBO_Bind(backEnd.framePostProcessed ? NULL : tr.renderFbo);
 
     RB_SetGL2D();
@@ -777,11 +777,11 @@ static const void* RB_DrawSurfs(const void* data)
     // clear the z buffer, set the modelview, etc
     RB_BeginDrawingView();
 
-    if (glRefConfig.framebufferObject && (backEnd.viewParms.flags & VPF_DEPTHCLAMP) && glRefConfig.depthClamp) {
+    if (glConfig.framebufferObject && (backEnd.viewParms.flags & VPF_DEPTHCLAMP) && glConfig.depthClamp) {
         glEnable(GL_DEPTH_CLAMP);
     }
 
-    if (glRefConfig.framebufferObject && !(backEnd.refdef.rdflags & RDF_NOWORLDMODEL) && (r_depthPrepass->integer || isShadowView)) {
+    if (glConfig.framebufferObject && !(backEnd.refdef.rdflags & RDF_NOWORLDMODEL) && (r_depthPrepass->integer || isShadowView)) {
         FBO_t* oldFbo = glState.currentFBO;
         vec4_t viewInfo;
 
@@ -800,7 +800,7 @@ static const void* RB_DrawSurfs(const void* data)
             } else if (tr.renderFbo == NULL && tr.renderDepthImage) {
                 // If we're rendering directly to the screen, copy the depth to a texture
                 // This is incredibly slow on Intel Graphics, so just skip it on there
-                if (!glRefConfig.intelGraphics)
+                if (!glConfig.intelGraphics)
                     GLDSA_CopyTextureSubImage2DEXT(tr.renderDepthImage->texnum, GL_TEXTURE_2D, 0, 0, 0, 0, 0, glConfig.vidWidth, glConfig.vidHeight);
             }
 
@@ -996,7 +996,7 @@ static const void* RB_DrawSurfs(const void* data)
         SetViewportAndScissor();
     }
 
-    if (glRefConfig.framebufferObject && (backEnd.viewParms.flags & VPF_DEPTHCLAMP) && glRefConfig.depthClamp) {
+    if (glConfig.framebufferObject && (backEnd.viewParms.flags & VPF_DEPTHCLAMP) && glConfig.depthClamp) {
         glDisable(GL_DEPTH_CLAMP);
     }
 
@@ -1007,7 +1007,7 @@ static const void* RB_DrawSurfs(const void* data)
             RB_DrawSun(0.1, tr.sunShader);
         }
 
-        if (glRefConfig.framebufferObject && r_drawSunRays->integer) {
+        if (glConfig.framebufferObject && r_drawSunRays->integer) {
             FBO_t* oldFbo = glState.currentFBO;
             FBO_Bind(tr.sunRaysFbo);
 
@@ -1031,7 +1031,7 @@ static const void* RB_DrawSurfs(const void* data)
         RB_RenderFlares();
     }
 
-    if (glRefConfig.framebufferObject && tr.renderCubeFbo && backEnd.viewParms.targetFbo == tr.renderCubeFbo) {
+    if (glConfig.framebufferObject && tr.renderCubeFbo && backEnd.viewParms.targetFbo == tr.renderCubeFbo) {
         cubemap_t* cubemap = &tr.cubemaps[backEnd.viewParms.targetFboCubemapIndex];
 
         FBO_Bind(NULL);
@@ -1052,7 +1052,7 @@ static const void* RB_DrawBuffer(const void* data)
     if (tess.numIndexes)
         RB_EndSurface();
 
-    if (glRefConfig.framebufferObject)
+    if (glConfig.framebufferObject)
         FBO_Bind(NULL);
 
     glDrawBuffer(cmd->buffer);
@@ -1133,7 +1133,7 @@ static const void* RB_ColorMask(const void* data)
     if (tess.numIndexes)
         RB_EndSurface();
 
-    if (glRefConfig.framebufferObject) {
+    if (glConfig.framebufferObject) {
         // reverse color mask, so 0 0 0 0 is the default
         backEnd.colorMask[0] = !cmd->rgba[0];
         backEnd.colorMask[1] = !cmd->rgba[1];
@@ -1158,7 +1158,7 @@ static const void* RB_ClearDepth(const void* data)
     if (r_showImages->integer)
         RB_ShowImages();
 
-    if (glRefConfig.framebufferObject) {
+    if (glConfig.framebufferObject) {
         if (!tr.renderFbo || backEnd.framePostProcessed) {
             FBO_Bind(NULL);
         } else {
@@ -1211,7 +1211,7 @@ static const void* RB_SwapBuffers(const void* data)
         ri.Hunk_FreeTempMemory(stencilReadback);
     }
 
-    if (glRefConfig.framebufferObject) {
+    if (glConfig.framebufferObject) {
         if (!backEnd.framePostProcessed) {
             if (tr.msaaResolveFbo && r_hdr->integer) {
                 // Resolving an RGB16F MSAA FBO to the screen messes with the brightness, so resolve to an RGB16F FBO first
@@ -1269,7 +1269,7 @@ static const void* RB_PostProcess(const void* data)
     if (tess.numIndexes)
         RB_EndSurface();
 
-    if (!glRefConfig.framebufferObject || !r_postProcess->integer) {
+    if (!glConfig.framebufferObject || !r_postProcess->integer) {
         // do nothing
         return (const void*)(cmd + 1);
     }

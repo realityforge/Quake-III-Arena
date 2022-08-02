@@ -1124,7 +1124,7 @@ static void RB_SurfaceVaoMdvMesh(srfVaoMdvMesh_t* surface)
 
         glState.vertexAnimation = true;
 
-        if (glRefConfig.vertexArrayObject) {
+        if (glConfig.vertexArrayObject) {
             glBindBuffer(GL_ARRAY_BUFFER, surface->vao->vertexesVBO);
         }
 
@@ -1156,7 +1156,7 @@ static void RB_SurfaceVaoMdvMesh(srfVaoMdvMesh_t* surface)
         vAtb = &surface->vao->attribs[attribIndex];
         glVertexAttribPointer(attribIndex, vAtb->count, vAtb->type, vAtb->normalized, vAtb->stride, BUFFER_OFFSET(vAtb->offset + frameOffset));
 
-        if (!glRefConfig.vertexArrayObject) {
+        if (!glConfig.vertexArrayObject) {
             attribIndex = ATTR_INDEX_TEXCOORD;
             vAtb = &surface->vao->attribs[attribIndex];
             glVertexAttribPointer(attribIndex, vAtb->count, vAtb->type, vAtb->normalized, vAtb->stride, BUFFER_OFFSET(vAtb->offset));

@@ -409,12 +409,12 @@ void RE_RenderScene(const refdef_t* fd)
     }
 
     /* playing with more shadows */
-    if (glRefConfig.framebufferObject && !(fd->rdflags & RDF_NOWORLDMODEL) && r_shadows->integer == 4) {
+    if (glConfig.framebufferObject && !(fd->rdflags & RDF_NOWORLDMODEL) && r_shadows->integer == 4) {
         R_RenderPshadowMaps(fd);
     }
 
     // playing with even more shadows
-    if (glRefConfig.framebufferObject && r_sunlightMode->integer && !(fd->rdflags & RDF_NOWORLDMODEL) && (r_forceSun->integer || tr.sunShadows)) {
+    if (glConfig.framebufferObject && r_sunlightMode->integer && !(fd->rdflags & RDF_NOWORLDMODEL) && (r_forceSun->integer || tr.sunShadows)) {
         if (r_shadowCascadeZFar->integer != 0) {
             R_RenderSunShadowMaps(fd, 0);
             R_RenderSunShadowMaps(fd, 1);

@@ -378,7 +378,7 @@ void RE_BeginFrame(stereoFrame_t stereoFrame)
                 backEnd.colorMask[2] = GL_FALSE;
                 backEnd.colorMask[3] = GL_FALSE;
 
-                if (glRefConfig.framebufferObject) {
+                if (glConfig.framebufferObject) {
                     // clear all framebuffers
                     if (tr.msaaResolveFbo) {
                         FBO_Bind(tr.msaaResolveFbo);

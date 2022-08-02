@@ -1298,46 +1298,6 @@ typedef struct {
     mat4_t modelviewProjection;
 } glstate_t;
 
-typedef enum {
-    MI_NONE,
-    MI_NVX,
-    MI_ATI
-} memInfo_t;
-
-typedef enum {
-    TCR_NONE = 0x0000,
-    TCR_RGTC = 0x0001,
-    TCR_BPTC = 0x0002,
-} textureCompressionRef_t;
-
-// We can't change glConfig_t without breaking DLL/vms compatibility, so
-// store extensions we have here.
-typedef struct {
-    bool intelGraphics;
-
-    int glslMajorVersion;
-    int glslMinorVersion;
-    int glslMaxAnimatedBones;
-
-    memInfo_t memInfo;
-
-    bool framebufferObject;
-    int maxRenderbufferSize;
-    int maxColorAttachments;
-
-    bool textureFloat;
-    textureCompressionRef_t textureCompression;
-    bool swizzleNormalmap;
-
-    bool framebufferMultisample;
-    bool framebufferBlit;
-
-    bool depthClamp;
-    bool seamlessCubeMap;
-
-    bool vertexArrayObject;
-} glRefConfig_t;
-
 typedef struct {
     int c_surfaces, c_shaders, c_vertexes, c_indexes, c_totalIndexes;
     int c_surfBatches;
@@ -1568,7 +1528,6 @@ typedef struct {
 extern backEndState_t backEnd;
 extern trGlobals_t tr;
 extern glstate_t glState; // outside of TR since it shouldn't be cleared during ref re-init
-extern glRefConfig_t glRefConfig;
 
 //
 // cvars

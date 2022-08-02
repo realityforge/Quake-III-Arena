@@ -1553,7 +1553,7 @@ static GLenum RawImage_GetFormat(const uint8_t* data, int numPixels, GLenum picF
 
     if (normalmap) {
         if ((type == IMGTYPE_NORMALHEIGHT) && RawImage_HasAlpha(data, numPixels) && r_parallaxMapping->integer) {
-            if (!forceNoCompression && glRefConfig.textureCompression & TCR_BPTC) {
+            if (!forceNoCompression && glConfig.textureCompressionExtension & TCR_BPTC) {
                 internalFormat = GL_COMPRESSED_RGBA_BPTC_UNORM_ARB;
             } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC) {
                 internalFormat = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
@@ -1565,9 +1565,9 @@ static GLenum RawImage_GetFormat(const uint8_t* data, int numPixels, GLenum picF
                 internalFormat = GL_RGBA;
             }
         } else {
-            if (!forceNoCompression && glRefConfig.textureCompression & TCR_RGTC) {
+            if (!forceNoCompression && glConfig.textureCompressionExtension & TCR_RGTC) {
                 internalFormat = GL_COMPRESSED_RG_RGTC2;
-            } else if (!forceNoCompression && glRefConfig.textureCompression & TCR_BPTC) {
+            } else if (!forceNoCompression && glConfig.textureCompressionExtension & TCR_BPTC) {
                 internalFormat = GL_COMPRESSED_RGBA_BPTC_UNORM_ARB;
             } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC) {
                 internalFormat = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
@@ -1588,7 +1588,7 @@ static GLenum RawImage_GetFormat(const uint8_t* data, int numPixels, GLenum picF
 
         // select proper internal format
         if (samples == 3) {
-            if (!forceNoCompression && (glRefConfig.textureCompression & TCR_BPTC)) {
+            if (!forceNoCompression && (glConfig.textureCompressionExtension & TCR_BPTC)) {
                 internalFormat = GL_COMPRESSED_RGBA_BPTC_UNORM_ARB;
             } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC) {
                 internalFormat = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
@@ -1600,7 +1600,7 @@ static GLenum RawImage_GetFormat(const uint8_t* data, int numPixels, GLenum picF
                 internalFormat = GL_RGB;
             }
         } else if (samples == 4) {
-            if (!forceNoCompression && (glRefConfig.textureCompression & TCR_BPTC)) {
+            if (!forceNoCompression && (glConfig.textureCompressionExtension & TCR_BPTC)) {
                 internalFormat = GL_COMPRESSED_RGBA_BPTC_UNORM_ARB;
             } else if (!forceNoCompression && glConfig.textureCompression == TC_S3TC) {
                 internalFormat = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
@@ -1784,12 +1784,12 @@ static void RawImage_UploadTexture(GLuint texture, uint8_t* data, int x, int y, 
         }
 
         if (!lastMip && numMips < 2) {
-            if (glRefConfig.framebufferObject) {
+            if (glConfig.framebufferObject) {
                 GLDSA_GenerateTextureMipmapEXT(texture, target);
                 break;
             } else if (rgba8) {
                 if (type == IMGTYPE_NORMAL || type == IMGTYPE_NORMALHEIGHT)
-                    R_MipMapNormalHeight(data, data, width, height, glRefConfig.swizzleNormalmap);
+                    R_MipMapNormalHeight(data, data, width, height, glConfig.swizzleNormalmap);
                 else
                     R_MipMapsRGB(data, width, height);
             }
@@ -1853,7 +1853,7 @@ static void Upload32(uint8_t* data, int x, int y, int width, int height, GLenum 
                 R_LightScaleTexture(data, width, height, !mipmap);
         }
 
-        if (glRefConfig.swizzleNormalmap && (type == IMGTYPE_NORMAL || type == IMGTYPE_NORMALHEIGHT))
+        if (glConfig.swizzleNormalmap && (type == IMGTYPE_NORMAL || type == IMGTYPE_NORMALHEIGHT))
             RawImage_SwizzleRA(data, width, height);
     }
 
@@ -2291,14 +2291,14 @@ static void R_CreateBuiltinImages()
     R_CreateDlightImage();
     R_CreateFogImage();
 
-    if (glRefConfig.framebufferObject) {
+    if (glConfig.framebufferObject) {
         int width, height, hdrFormat, rgbFormat;
 
         width = glConfig.vidWidth;
         height = glConfig.vidHeight;
 
         hdrFormat = GL_RGBA8;
-        if (r_hdr->integer && glRefConfig.textureFloat)
+        if (r_hdr->integer && glConfig.textureFloat)
             hdrFormat = GL_RGBA16F;
 
         rgbFormat = GL_RGBA8;

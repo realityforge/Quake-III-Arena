@@ -1757,7 +1757,7 @@ void R_RenderPshadowMaps(const refdef_t* fd)
 
         memset(&shadowParms, 0, sizeof(shadowParms));
 
-        if (glRefConfig.framebufferObject) {
+        if (glConfig.framebufferObject) {
             shadowParms.viewportX = 0;
             shadowParms.viewportY = 0;
         } else {
@@ -1772,7 +1772,7 @@ void R_RenderPshadowMaps(const refdef_t* fd)
         shadowParms.fovX = 90;
         shadowParms.fovY = 90;
 
-        if (glRefConfig.framebufferObject)
+        if (glConfig.framebufferObject)
             shadowParms.targetFbo = tr.pshadowFbos[i];
 
         shadowParms.flags = VPF_DEPTHSHADOW | VPF_NOVIEWMODEL;
@@ -1862,7 +1862,7 @@ void R_RenderPshadowMaps(const refdef_t* fd)
 
             R_SortDrawSurfs(tr.refdef.drawSurfs + firstDrawSurf, tr.refdef.numDrawSurfs - firstDrawSurf);
 
-            if (!glRefConfig.framebufferObject)
+            if (!glConfig.framebufferObject)
                 R_AddCapShadowmapCmd(i, -1);
         }
     }
@@ -2096,7 +2096,7 @@ void R_RenderSunShadowMaps(const refdef_t* fd, int level)
             AddPointToBounds(lightViewPoint, lightviewBounds[0], lightviewBounds[1]);
         }
 
-        if (!glRefConfig.depthClamp)
+        if (!glConfig.depthClamp)
             lightviewBounds[0][0] = lightviewBounds[1][0] - 8192;
 
         // Moving the Light in Texel-Sized Increments
@@ -2131,7 +2131,7 @@ void R_RenderSunShadowMaps(const refdef_t* fd, int level)
 
         memset(&shadowParms, 0, sizeof(shadowParms));
 
-        if (glRefConfig.framebufferObject) {
+        if (glConfig.framebufferObject) {
             shadowParms.viewportX = 0;
             shadowParms.viewportY = 0;
         } else {
@@ -2146,7 +2146,7 @@ void R_RenderSunShadowMaps(const refdef_t* fd, int level)
         shadowParms.fovX = 90;
         shadowParms.fovY = 90;
 
-        if (glRefConfig.framebufferObject)
+        if (glConfig.framebufferObject)
             shadowParms.targetFbo = tr.sunShadowFbo[level];
 
         shadowParms.flags = VPF_DEPTHSHADOW | VPF_DEPTHCLAMP | VPF_ORTHOGRAPHIC | VPF_NOVIEWMODEL;

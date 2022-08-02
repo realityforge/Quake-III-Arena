@@ -64,18 +64,18 @@ void Vao_SetVertexPointers(vao_t* vao)
 
         if (vAtb->enabled) {
             glVertexAttribPointer(attribIndex, vAtb->count, vAtb->type, vAtb->normalized, vAtb->stride, BUFFER_OFFSET(vAtb->offset));
-            if (glRefConfig.vertexArrayObject || !(glState.vertexAttribsEnabled & attribBit))
+            if (glConfig.vertexArrayObject || !(glState.vertexAttribsEnabled & attribBit))
                 glEnableVertexAttribArray(attribIndex);
 
-            if (!glRefConfig.vertexArrayObject || vao == tess.vao)
+            if (!glConfig.vertexArrayObject || vao == tess.vao)
                 glState.vertexAttribsEnabled |= attribBit;
         } else {
             // don't disable vertex attribs when using vertex array objects
             // Vao_SetVertexPointers is only called during init when using VAOs, and vertex attribs start disabled anyway
-            if (!glRefConfig.vertexArrayObject && (glState.vertexAttribsEnabled & attribBit))
+            if (!glConfig.vertexArrayObject && (glState.vertexAttribsEnabled & attribBit))
                 glDisableVertexAttribArray(attribIndex);
 
-            if (!glRefConfig.vertexArrayObject || vao == tess.vao)
+            if (!glConfig.vertexArrayObject || vao == tess.vao)
                 glState.vertexAttribsEnabled &= ~attribBit;
         }
     }
@@ -117,7 +117,7 @@ vao_t* R_CreateVao(const char* name, uint8_t* vertexes, int vertexesSize, uint8_
 
     Q_strncpyz(vao->name, name, sizeof(vao->name));
 
-    if (glRefConfig.vertexArrayObject) {
+    if (glConfig.vertexArrayObject) {
         glGenVertexArrays(1, &vao->vao);
         glBindVertexArray(vao->vao);
     }
@@ -156,11 +156,11 @@ void R_BindVao(vao_t* vao)
         glState.vertexAnimation = false;
         backEnd.pc.c_vaoBinds++;
 
-        if (glRefConfig.vertexArrayObject) {
+        if (glConfig.vertexArrayObject) {
             glBindVertexArray(vao->vao);
 
             // Intel Graphics doesn't save GL_ELEMENT_ARRAY_BUFFER binding with VAO binding.
-            if (glRefConfig.intelGraphics || vao == tess.vao)
+            if (glConfig.intelGraphics || vao == tess.vao)
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vao->indexesIBO);
 
             // tess VAO always has buffers bound
@@ -180,7 +180,7 @@ void R_BindVao(vao_t* vao)
 void R_BindNullVao()
 {
     if (glState.currentVao) {
-        if (glRefConfig.vertexArrayObject) {
+        if (glConfig.vertexArrayObject) {
             glBindVertexArray(0);
 
             // why you no save GL_ELEMENT_ARRAY_BUFFER binding, Intel?
@@ -357,7 +357,7 @@ void RB_UpdateTessVao(unsigned int attribBits)
             }
 
             if (attribBits & attribBit) {
-                if (!glRefConfig.vertexArrayObject)
+                if (!glConfig.vertexArrayObject)
                     glVertexAttribPointer(attribIndex, vAtb->count, vAtb->type, vAtb->normalized, vAtb->stride, BUFFER_OFFSET(vAtb->offset));
 
                 if (!(glState.vertexAttribsEnabled & attribBit)) {

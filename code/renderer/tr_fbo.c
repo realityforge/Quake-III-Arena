@@ -74,11 +74,11 @@ static FBO_t* FBO_Create(const char* name, int width, int height)
         ri.Error(ERR_DROP, "FBO_Create: \"%s\" is too long", name);
     }
 
-    if (width <= 0 || width > glRefConfig.maxRenderbufferSize) {
+    if (width <= 0 || width > glConfig.maxRenderbufferSize) {
         ri.Error(ERR_DROP, "FBO_Create: bad width %i", width);
     }
 
-    if (height <= 0 || height > glRefConfig.maxRenderbufferSize) {
+    if (height <= 0 || height > glConfig.maxRenderbufferSize) {
         ri.Error(ERR_DROP, "FBO_Create: bad height %i", height);
     }
 
@@ -181,7 +181,7 @@ void FBO_AttachImage(FBO_t* fbo, image_t* image, GLenum attachment, GLuint cubem
 
 void FBO_Bind(FBO_t* fbo)
 {
-    if (!glRefConfig.framebufferObject) {
+    if (!glConfig.framebufferObject) {
         ri.Printf(PRINT_WARNING, "FBO_Bind() called without framebuffers enabled!\n");
         return;
     }
@@ -200,7 +200,7 @@ void FBO_Init()
 
     ri.Printf(PRINT_ALL, "------- FBO_Init -------\n");
 
-    if (!glRefConfig.framebufferObject)
+    if (!glConfig.framebufferObject)
         return;
 
     tr.numFBOs = 0;
@@ -210,7 +210,7 @@ void FBO_Init()
     R_IssuePendingRenderCommands();
 
     hdrFormat = GL_RGBA8;
-    if (r_hdr->integer && glRefConfig.textureFloat)
+    if (r_hdr->integer && glConfig.textureFloat)
         hdrFormat = GL_RGBA16F;
 
     glGetIntegerv(GL_MAX_SAMPLES, &multisample);
@@ -351,7 +351,7 @@ void FBO_Shutdown()
 
     ri.Printf(PRINT_ALL, "------- FBO_Shutdown -------\n");
 
-    if (!glRefConfig.framebufferObject)
+    if (!glConfig.framebufferObject)
         return;
 
     FBO_Bind(NULL);
@@ -359,7 +359,7 @@ void FBO_Shutdown()
     for (i = 0; i < tr.numFBOs; i++) {
         fbo = tr.fbos[i];
 
-        for (j = 0; j < glRefConfig.maxColorAttachments; j++) {
+        for (j = 0; j < glConfig.maxColorAttachments; j++) {
             if (fbo->colorBuffers[j])
                 glDeleteRenderbuffers(1, &fbo->colorBuffers[j]);
         }

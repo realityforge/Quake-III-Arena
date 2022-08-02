@@ -28,7 +28,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "lang_util.h"
 
 glconfig_t glConfig;
-glRefConfig_t glRefConfig;
 float displayAspect = 0.0f;
 
 glstate_t glState;
@@ -258,9 +257,9 @@ static void InitOpenGL()
 
         // reserve 160 components for other uniforms
         glGetIntegerv(GL_MAX_VERTEX_UNIFORM_COMPONENTS, &temp);
-        glRefConfig.glslMaxAnimatedBones = Com_Clamp(0, IQM_MAX_JOINTS, (temp - 160) / 16);
-        if (glRefConfig.glslMaxAnimatedBones < 12) {
-            glRefConfig.glslMaxAnimatedBones = 0;
+        glConfig.glslMaxAnimatedBones = Com_Clamp(0, IQM_MAX_JOINTS, (temp - 160) / 16);
+        if (glConfig.glslMaxAnimatedBones < 12) {
+            glConfig.glslMaxAnimatedBones = 0;
         }
     }
 
@@ -638,7 +637,7 @@ void GL_SetDefaultState()
 
     GL_BindNullTextures();
 
-    if (glRefConfig.framebufferObject)
+    if (glConfig.framebufferObject)
         GL_BindNullFramebuffers();
 
     GL_TextureMode(r_textureMode->string);
@@ -654,7 +653,7 @@ void GL_SetDefaultState()
 
     GL_BindNullProgram();
 
-    if (glRefConfig.vertexArrayObject)
+    if (glConfig.vertexArrayObject)
         glBindVertexArray(0);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -669,7 +668,7 @@ void GL_SetDefaultState()
     glDisable(GL_CULL_FACE);
     glDisable(GL_BLEND);
 
-    if (glRefConfig.seamlessCubeMap)
+    if (glConfig.seamlessCubeMap)
         glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 
     // GL_POLYGON_OFFSET_FILL will be glEnable()d when this is used
@@ -758,7 +757,7 @@ void GfxInfo_f()
 
 void GfxMemInfo_f()
 {
-    switch (glRefConfig.memInfo) {
+    switch (glConfig.memInfo) {
     case MI_NONE: {
         ri.Printf(PRINT_ALL, "No extension found for GPU memory info.\n");
     } break;
@@ -1059,7 +1058,7 @@ void R_Init()
 
     R_InitImages();
 
-    if (glRefConfig.framebufferObject)
+    if (glConfig.framebufferObject)
         FBO_Init();
 
     GLSL_InitGPUShaders();
@@ -1104,7 +1103,7 @@ void RE_Shutdown(bool destroyWindow)
     if (tr.registered) {
         R_IssuePendingRenderCommands();
         R_ShutDownQueries();
-        if (glRefConfig.framebufferObject)
+        if (glConfig.framebufferObject)
             FBO_Shutdown();
         R_DeleteTextures();
         R_ShutdownVaos();
@@ -1118,7 +1117,7 @@ void RE_Shutdown(bool destroyWindow)
         GLimp_Shutdown();
 
         memset(&glConfig, 0, sizeof(glConfig));
-        memset(&glRefConfig, 0, sizeof(glRefConfig));
+        memset(&glConfig, 0, sizeof(glConfig));
         displayAspect = 0.0f;
 
         memset(&glState, 0, sizeof(glState));
