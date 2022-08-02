@@ -74,6 +74,7 @@ void GLimp_Shutdown()
 
     // Clear glConfig it should be re-initialized when we call GLimp_Init() again
     memset(&glConfig, 0, sizeof(glConfig));
+    displayAspect = 0.0f;
 }
 
 /*
