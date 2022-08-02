@@ -527,13 +527,14 @@ static int hat_keys[16] = {
     K_JOY19, K_JOY20
 };
 
-struct
-{
+typedef struct stick_state_s {
     bool buttons[SDL_CONTROLLER_BUTTON_MAX + 1]; // +1 because old max was 16, current SDL_CONTROLLER_BUTTON_MAX is 15
     unsigned int oldaxes;
     int oldaaxes[MAX_JOYSTICK_AXIS];
     unsigned int oldhats;
-} stick_state;
+} stick_state_t;
+
+static stick_state_t stick_state;
 
 static void IN_InitJoystick(void)
 {
