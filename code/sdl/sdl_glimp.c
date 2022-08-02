@@ -324,7 +324,7 @@ static rserr_t GLimp_SetMode(const int mode, const bool fullscreen, const bool n
     if ((!colorBits) || (colorBits >= 32))
         colorBits = 24;
 
-    if (!r_depthbits->value)
+    if (!r_depthbits->integral)
         depthBits = 24;
     else
         depthBits = r_depthbits->integer;
