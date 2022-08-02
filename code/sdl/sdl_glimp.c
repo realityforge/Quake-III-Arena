@@ -72,7 +72,7 @@ void GLimp_Shutdown()
 
     SDL_QuitSubSystem(SDL_INIT_VIDEO);
 
-    // Clear glConfig and it should be re-initialized when we call GLimp_Init() again
+    // Clear glConfig it should be re-initialized when we call GLimp_Init() again
     memset(&glConfig, 0, sizeof(glConfig));
 }
 
