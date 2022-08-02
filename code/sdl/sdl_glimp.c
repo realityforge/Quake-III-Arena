@@ -51,6 +51,15 @@ static void GLimp_DeleteContextIfExists()
     }
 }
 
+static void GLimp_DestroyWindowIfExists()
+{
+    // Destroy the window if active
+    if (NULL != SDL_window) {
+        SDL_DestroyWindow(SDL_window);
+        SDL_window = NULL;
+    }
+}
+
 void GLimp_Shutdown(void)
 {
     ri.IN_Shutdown();
@@ -246,12 +255,7 @@ static int GLimp_SetMode(const int mode, const bool fullscreen, const bool nobor
     }
 
     GLimp_DeleteContextIfExists();
-
-    if (NULL != SDL_window) {
-        ri.Printf(PRINT_DEVELOPER, "Existing window at %dx%d before being destroyed\n", x, y);
-        SDL_DestroyWindow(SDL_window);
-        SDL_window = NULL;
-    }
+    GLimp_DestroyWindowIfExists();
 
     if (fullscreen) {
         flags |= SDL_WINDOW_FULLSCREEN;
@@ -437,8 +441,7 @@ static int GLimp_SetMode(const int mode, const bool fullscreen, const bool nobor
                 const char* error_message = glaError();
                 ri.Printf(PRINT_ALL, "glaInit() failed with error %d: %s\n", result, NULL == error_message ? "unknown reason" : error_message);
                 GLimp_DeleteContextIfExists();
-                SDL_DestroyWindow(SDL_window);
-                SDL_window = NULL;
+                GLimp_DestroyWindowIfExists();
                 continue;
             }
         }
