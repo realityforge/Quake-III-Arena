@@ -42,6 +42,15 @@ static SDL_GLContext SDL_glContext = NULL;
 cvar_t* r_allowResize; // make window resizable
 cvar_t* r_centerWindow;
 
+static void GLimp_DeleteContextIfExists()
+{
+    if (NULL != SDL_glContext) {
+        glaDispose();
+        SDL_GL_DeleteContext(SDL_glContext);
+        SDL_glContext = NULL;
+    }
+}
+
 void GLimp_Shutdown(void)
 {
     ri.IN_Shutdown();
@@ -233,12 +242,7 @@ static int GLimp_SetMode(const int mode, const bool fullscreen, const bool nobor
         y = (desktopMode.h / 2) - (glConfig.vidHeight / 2);
     }
 
-    // Destroy existing state if it exists
-    if (NULL != SDL_glContext) {
-        glaDispose();
-        SDL_GL_DeleteContext(SDL_glContext);
-        SDL_glContext = NULL;
-    }
+    GLimp_DeleteContextIfExists();
 
     if (NULL != SDL_window) {
         SDL_GetWindowPosition(SDL_window, &x, &y);
@@ -410,9 +414,7 @@ static int GLimp_SetMode(const int mode, const bool fullscreen, const bool nobor
             }
 
             if (!renderer) {
-                glaDispose();
-                SDL_GL_DeleteContext(SDL_glContext);
-                SDL_glContext = NULL;
+                GLimp_DeleteContextIfExists();
 
                 SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, profileMask);
                 SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, majorVersion);
@@ -432,9 +434,7 @@ static int GLimp_SetMode(const int mode, const bool fullscreen, const bool nobor
             if (GLA_OK != result) {
                 const char* error_message = glaError();
                 ri.Printf(PRINT_ALL, "glaInit() failed with error %d: %s\n", result, NULL == error_message ? "unknown reason" : error_message);
-                glaDispose();
-                SDL_GL_DeleteContext(SDL_glContext);
-                SDL_glContext = NULL;
+                GLimp_DeleteContextIfExists();
                 SDL_DestroyWindow(SDL_window);
                 SDL_window = NULL;
                 continue;
