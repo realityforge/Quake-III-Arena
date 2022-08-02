@@ -55,10 +55,7 @@ cc_library(
 
 cc_library(
     name = "sdl_renderer",
-    srcs = [
-        "sdl_gamma.c",
-        "sdl_glimp.c",
-    ],
+    srcs = ["sdl_glimp.c"],
     hdrs = ["sdl_icon.h"],
     visibility = ["//code/client:__pkg__"],
     deps = [

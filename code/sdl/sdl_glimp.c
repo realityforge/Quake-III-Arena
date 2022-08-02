@@ -36,7 +36,7 @@ typedef enum {
     RSERR_INVALID_MODE
 } rserr_t;
 
-SDL_Window* SDL_window = NULL;
+static SDL_Window* SDL_window = NULL;
 static SDL_GLContext SDL_glContext = NULL;
 
 static cvar_t* r_allowResize; // make window resizable
@@ -178,6 +178,57 @@ static void GLimp_DetectAvailableModes(void)
     }
     SDL_free(modes);
 }
+
+
+void GLimp_SetGamma(unsigned char red[256], unsigned char green[256], unsigned char blue[256])
+{
+    if (!glConfig.deviceSupportsGamma || r_ignorehwgamma->integer > 0)
+        return;
+
+    Uint16 table[3][256];
+    for (int i = 0; i < 256; i++) {
+        table[0][i] = (Uint16)(((Uint16)red[i]) << (Uint16)8U) | (Uint16)red[i];
+        table[1][i] = (Uint16)(((Uint16)green[i]) << (Uint16)8U) | (Uint16)green[i];
+        table[2][i] = (Uint16)(((Uint16)blue[i]) << (Uint16)8U) | (Uint16)blue[i];
+    }
+
+#ifdef _WIN32
+#include <windows.h>
+
+    // Win2K and newer put this odd restriction on gamma ramps...
+    {
+        OSVERSIONINFO vinfo;
+
+        vinfo.dwOSVersionInfoSize = sizeof(vinfo);
+        GetVersionEx(&vinfo);
+        if (vinfo.dwMajorVersion >= 5 && vinfo.dwPlatformId == VER_PLATFORM_WIN32_NT) {
+            ri.Printf(PRINT_DEVELOPER, "performing gamma clamp.\n");
+            for (j = 0; j < 3; j++) {
+                for (i = 0; i < 128; i++) {
+                    if (table[j][i] > ((128 + i) << 8))
+                        table[j][i] = (128 + i) << 8;
+                }
+
+                if (table[j][127] > 254 << 8)
+                    table[j][127] = 254 << 8;
+            }
+        }
+    }
+#endif
+
+    // enforce constantly increasing
+    for (int j = 0; j < 3; j++) {
+        for (int i = 1; i < 256; i++) {
+            if (table[j][i] < table[j][i - 1])
+                table[j][i] = table[j][i - 1];
+        }
+    }
+
+    if (SDL_SetWindowGammaRamp(SDL_window, table[0], table[1], table[2]) < 0) {
+        ri.Printf(PRINT_DEVELOPER, "SDL_SetWindowGammaRamp() failed: %s\n", SDL_GetError());
+    }
+}
+
 
 static rserr_t GLimp_SetMode(const int mode, const bool fullscreen, const bool noborder)
 {
