@@ -79,7 +79,7 @@ GLimp_Minimize
 Minimize the game so that user is back at the desktop
 ===============
 */
-void GLimp_Minimize(void)
+void GLimp_Minimize()
 {
     SDL_MinimizeWindow(SDL_window);
 }
@@ -105,7 +105,7 @@ static int GLimp_CompareModes(const void* a, const void* b)
         return areaA - areaB;
 }
 
-static void GLimp_DetectAvailableModes(void)
+static void GLimp_DetectAvailableModes()
 {
     char buf[MAX_STRING_CHARS] = { 0 };
     SDL_Rect* modes;
@@ -650,7 +650,7 @@ GLimp_EndFrame
 Responsible for doing a swapbuffers
 ===============
 */
-void GLimp_EndFrame(void)
+void GLimp_EndFrame()
 {
     // don't flip if drawing to front buffer
     if (Q_stricmp(r_drawBuffer->string, "GL_FRONT") != 0) {
