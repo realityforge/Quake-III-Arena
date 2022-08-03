@@ -15,7 +15,7 @@
 #ifndef QBRAINCHECK_H
 #define QBRAINCHECK_H
 
-#include "qcommon.h"
+void QDECL Com_Printf(const char* msg, ...) PRINTF_LIKE_FUNCTION(1, 2);
 
 #define BRAINCHECK_FORMAT_START_LOCATION S_COLOR_CYAN
 #define BRAINCHECK_FORMAT_START_FUNCTION S_COLOR_BLUE
