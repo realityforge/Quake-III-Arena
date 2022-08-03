@@ -1510,9 +1510,6 @@ static void BotMatch_EnterGame(UNUSED bot_state_t* bs, bot_match_t* match)
     if (client >= 0) {
         notleader[client] = false;
     }
-    // NOTE: eliza chats will catch this
-    // Com_sprintf(buf, sizeof(buf), "heya %s", netname);
-    // EA_Say(bs->client, buf);
 }
 
 static void BotMatch_NewLeader(bot_state_t* bs, bot_match_t* match)
