@@ -33,31 +33,31 @@ server_t sv; // local server
 vm_t* gvm = NULL; // game virtual machine
 
 cvar_t* sv_fps = NULL; // time rate for running non-clients
-cvar_t* sv_timeout; // seconds without any message
-cvar_t* sv_zombietime; // seconds to sink messages after disconnect
-cvar_t* sv_rconPassword; // password for remote server commands
-cvar_t* sv_privatePassword; // password for the privateClient slots
-cvar_t* sv_allowDownload;
-cvar_t* sv_maxclients;
+cvar_t* sv_timeout = NULL; // seconds without any message
+cvar_t* sv_zombietime = NULL; // seconds to sink messages after disconnect
+cvar_t* sv_rconPassword = NULL; // password for remote server commands
+cvar_t* sv_privatePassword = NULL; // password for the privateClient slots
+cvar_t* sv_allowDownload = NULL;
+cvar_t* sv_maxclients = NULL;
 
-cvar_t* sv_privateClients; // number of clients reserved for password
-cvar_t* sv_hostname;
-cvar_t* sv_master[MAX_MASTER_SERVERS]; // master server ip address
-cvar_t* sv_reconnectlimit; // minimum seconds between connect messages
-cvar_t* sv_padPackets; // add nop bytes to messages
-cvar_t* sv_killserver; // menu system can set to 1 to shut server down
-cvar_t* sv_mapname;
-cvar_t* sv_mapChecksum;
-cvar_t* sv_serverid;
-cvar_t* sv_minRate;
-cvar_t* sv_maxRate;
-cvar_t* sv_dlRate;
-cvar_t* sv_minPing;
-cvar_t* sv_maxPing;
-cvar_t* sv_gametype;
-cvar_t* sv_pure;
-cvar_t* sv_floodProtect;
-cvar_t* sv_lanForceRate; // dedicated 1 (LAN) server forces local client rates to 99999 (bug #491)
+cvar_t* sv_privateClients = NULL; // number of clients reserved for password
+cvar_t* sv_hostname = NULL;
+cvar_t* sv_master[MAX_MASTER_SERVERS] = { NULL, NULL, NULL, NULL, NULL }; // master server ip address
+cvar_t* sv_reconnectlimit = NULL; // minimum seconds between connect messages
+cvar_t* sv_padPackets = NULL; // add nop bytes to messages
+cvar_t* sv_killserver = NULL; // menu system can set to 1 to shut server down
+cvar_t* sv_mapname = NULL;
+cvar_t* sv_mapChecksum = NULL;
+cvar_t* sv_serverid = NULL;
+cvar_t* sv_minRate = NULL;
+cvar_t* sv_maxRate = NULL;
+cvar_t* sv_dlRate = NULL;
+cvar_t* sv_minPing = NULL;
+cvar_t* sv_maxPing = NULL;
+cvar_t* sv_gametype = NULL;
+cvar_t* sv_pure = NULL;
+cvar_t* sv_floodProtect = NULL;
+cvar_t* sv_lanForceRate = NULL; // dedicated 1 (LAN) server forces local client rates to 99999 (bug #491)
 
 /*
 =============================================================================
