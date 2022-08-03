@@ -10,6 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@io_bazel_rules_docker//cc:image.bzl", "cc_image")
 load("@rules_cc//cc:defs.bzl", "cc_binary")
 load("//build_defs:copy_to_directory.bzl", "copy_to_directory")
 
@@ -23,6 +24,12 @@ cc_binary(
     name = "Quake3ArenaServer",
     visibility = ["//game/mac:__pkg__"],
     deps = ["//code/server:ded"],
+)
+
+cc_image(
+    name = "Quake3ArenaServerImage",
+    binary = ":Quake3ArenaServer",
+    tags = ["manual"],
 )
 
 copy_to_directory(
