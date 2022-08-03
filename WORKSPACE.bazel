@@ -136,10 +136,6 @@ _configure_rules_foreign_cc_repository()
 
 _configure_rules_graal_repository()
 
-load("//third_party/com_github_ash2k_bazel_tools:repository2.bzl", _setup_com_github_ash2k_bazel_tools_repository = "configure_repository")
-
-_setup_com_github_ash2k_bazel_tools_repository()
-
 load("//third_party/com_github_mvdan_sh:repository.bzl", _setup_com_github_mvdan_sh_repository = "configure_repository")
 load("//third_party/libsdl:repository.bzl", _load_libsdl_repository = "load_repository")
 
