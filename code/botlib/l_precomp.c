@@ -790,7 +790,7 @@ static define_t* PC_DefineFromString(const char* string)
     script = LoadScriptMemory(string, strlen(string), "*extern");
     // create a new source
     memset(&src, 0, sizeof(source_t));
-    strncpy(src.filename, "*extern", MAX_QPATH);
+    strncpyz(src.filename, "*extern", MAX_QPATH);
     src.scriptstack = script;
     src.definehash = GetClearedMemory(DEFINEHASHSIZE * sizeof(define_t*));
     // create a define from the source
@@ -2003,7 +2003,7 @@ source_t* LoadSourceFile(const char* filename)
     source = (source_t*)GetMemory(sizeof(source_t));
     memset(source, 0, sizeof(source_t));
 
-    strncpy(source->filename, filename, MAX_QPATH);
+    strncpyz(source->filename, filename, MAX_QPATH);
     source->scriptstack = script;
     source->tokens = NULL;
     source->defines = NULL;

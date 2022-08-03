@@ -104,7 +104,7 @@ void IN_StartupJoystick(void)
             ioctl(joy_fd, JSIOCGBUTTONS, &buttons);
 
             if (ioctl(joy_fd, JSIOCGNAME(sizeof(name)), name) < 0) {
-                strncpy(name, "Unknown", sizeof(name));
+                strncpyz(name, "Unknown", sizeof(name));
             }
 
             Com_Printf("Name:    %s\n", name);

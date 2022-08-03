@@ -553,7 +553,7 @@ int CL_CgameSystemCalls(int* args)
         memcpy(VMA(1), VMA(2), args[3]);
         return 0;
     case CG_STRNCPY:
-        return (int)strncpy(VMA(1), VMA(2), args[3]);
+        return (int)strncpyz(VMA(1), VMA(2), args[3]);
     case CG_SIN:
         return FloatAsInt(sin(VMF(1)));
     case CG_COS:

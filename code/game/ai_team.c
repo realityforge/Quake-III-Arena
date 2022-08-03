@@ -1794,7 +1794,7 @@ void BotTeamAI(bot_state_t* bs)
                 trap_BotEnterChat(bs->cs, 0, CHAT_TEAM);
                 BotSayVoiceTeamOrder(bs, -1, VOICECHAT_STARTLEADER);
                 ClientName(bs->client, netname, sizeof(netname));
-                strncpy(bs->teamleader, netname, sizeof(bs->teamleader));
+                strncpyz(bs->teamleader, netname, sizeof(bs->teamleader));
                 bs->teamleader[sizeof(bs->teamleader) - 1] = '\0';
                 bs->becometeamleader_time = 0;
             }

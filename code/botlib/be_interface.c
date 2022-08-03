@@ -154,7 +154,7 @@ static int Export_BotLibVarGet(const char* var_name, char* value, const int size
     char* varvalue;
 
     varvalue = LibVarGetString(var_name);
-    strncpy(value, varvalue, size - 1);
+    strncpyz(value, varvalue, size - 1);
     value[size - 1] = '\0';
     return BLERR_NOERROR;
 }
