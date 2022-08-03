@@ -129,7 +129,7 @@ void Cvar_VariableStringBuffer(const char* var_name, char* buffer, int bufsize)
     if (!var) {
         *buffer = 0;
     } else {
-        Q_strncpyz(buffer, var->string, bufsize);
+        strncpyz(buffer, var->string, bufsize);
     }
 }
 
@@ -1115,7 +1115,7 @@ char* Cvar_InfoString_Big(int bit)
 
 void Cvar_InfoStringBuffer(int bit, char* buff, int buffsize)
 {
-    Q_strncpyz(buff, Cvar_InfoString(bit), buffsize);
+    strncpyz(buff, Cvar_InfoString(bit), buffsize);
 }
 
 void Cvar_CheckRange(cvar_t* var, float min, float max, bool integral)
@@ -1230,7 +1230,7 @@ void Cvar_Update(vmCvar_t* vmCvar)
         Com_Error(ERR_DROP, "Cvar_Update: src %s length %lu exceeds MAX_CVAR_VALUE_STRING",
                   cv->string,
                   strlen(cv->string));
-    Q_strncpyz(vmCvar->string, cv->string, MAX_CVAR_VALUE_STRING);
+    strncpyz(vmCvar->string, cv->string, MAX_CVAR_VALUE_STRING);
 
     vmCvar->value = cv->value;
     vmCvar->integer = cv->integer;

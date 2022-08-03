@@ -251,7 +251,7 @@ static void UI_SPPostgameMenu_MenuDrawScoreLine(int n, int y)
         rank &= ~RANK_TIED_FLAG;
     }
     trap_GetConfigString(CS_PLAYERS + postgameMenuInfo.clientNums[n], info, MAX_INFO_STRING);
-    Q_strncpyz(name, Info_ValueForKey(info, "n"), sizeof(name));
+    strncpyz(name, Info_ValueForKey(info, "n"), sizeof(name));
     Q_CleanStr(name);
 
     UI_DrawString(640 - 25 * SMALLCHAR_WIDTH, y, va("#%i: %-16s %2i", rank + 1, name, postgameMenuInfo.scores[n]), UI_LEFT | UI_SMALLFONT, color_white);
@@ -428,7 +428,7 @@ static void Prepname(int index)
     char info[MAX_INFO_STRING];
 
     trap_GetConfigString(CS_PLAYERS + postgameMenuInfo.clientNums[index], info, MAX_INFO_STRING);
-    Q_strncpyz(name, Info_ValueForKey(info, "n"), sizeof(name));
+    strncpyz(name, Info_ValueForKey(info, "n"), sizeof(name));
     Q_CleanStr(name);
     len = strlen(name);
 
@@ -437,7 +437,7 @@ static void Prepname(int index)
         name[len] = 0;
     }
 
-    Q_strncpyz(postgameMenuInfo.placeNames[index], name, sizeof(postgameMenuInfo.placeNames[index]));
+    strncpyz(postgameMenuInfo.placeNames[index], name, sizeof(postgameMenuInfo.placeNames[index]));
 }
 
 void UI_SPPostgameMenu_f()
@@ -457,12 +457,12 @@ void UI_SPPostgameMenu_f()
     postgameMenuInfo.serverId = atoi(Info_ValueForKey(info, "sv_serverid"));
 
     trap_GetConfigString(CS_SERVERINFO, info, sizeof(info));
-    Q_strncpyz(map, Info_ValueForKey(info, "mapname"), sizeof(map));
+    strncpyz(map, Info_ValueForKey(info, "mapname"), sizeof(map));
     arena = UI_GetArenaInfoByMap(map);
     if (!arena) {
         return;
     }
-    Q_strncpyz(arenainfo, arena, sizeof(arenainfo));
+    strncpyz(arenainfo, arena, sizeof(arenainfo));
 
     postgameMenuInfo.level = atoi(Info_ValueForKey(arenainfo, "num"));
 

@@ -202,7 +202,7 @@ void G_ProcessIPBans()
     char *s, *t;
     char str[MAX_CVAR_VALUE_STRING];
 
-    Q_strncpyz(str, g_banIPs.string, sizeof(str));
+    strncpyz(str, g_banIPs.string, sizeof(str));
 
     for (t = s = g_banIPs.string; *t; /* */) {
         s = strchr(s, ' ');

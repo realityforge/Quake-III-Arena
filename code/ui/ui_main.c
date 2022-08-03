@@ -935,7 +935,7 @@ void UI_Load()
     menuDef_t* menu = Menu_GetFocused();
     char* menuSet = UI_Cvar_VariableString("ui_menuFiles");
     if (menu && menu->window.name) {
-        Q_strncpyz(lastName, menu->window.name, sizeof(lastName));
+        strncpyz(lastName, menu->window.name, sizeof(lastName));
     }
     if (menuSet == NULL || menuSet[0] == '\0') {
         menuSet = "ui/menus.txt";
@@ -1237,8 +1237,8 @@ static void UI_DrawPlayerModel(rectDef_t* rect)
     vec3_t moveangles;
 
     if (trap_Cvar_VariableValue("ui_Q3Model")) {
-        Q_strncpyz(model, UI_Cvar_VariableString("model"), sizeof(model));
-        Q_strncpyz(head, UI_Cvar_VariableString("headmodel"), sizeof(head));
+        strncpyz(model, UI_Cvar_VariableString("model"), sizeof(model));
+        strncpyz(head, UI_Cvar_VariableString("headmodel"), sizeof(head));
         if (!q3Model) {
             q3Model = true;
             updateModel = true;
@@ -1246,9 +1246,9 @@ static void UI_DrawPlayerModel(rectDef_t* rect)
         team[0] = '\0';
     } else {
 
-        Q_strncpyz(team, UI_Cvar_VariableString("ui_teamName"), sizeof(team));
-        Q_strncpyz(model, UI_Cvar_VariableString("team_model"), sizeof(model));
-        Q_strncpyz(head, UI_Cvar_VariableString("team_headmodel"), sizeof(head));
+        strncpyz(team, UI_Cvar_VariableString("ui_teamName"), sizeof(team));
+        strncpyz(model, UI_Cvar_VariableString("team_model"), sizeof(model));
+        strncpyz(head, UI_Cvar_VariableString("team_headmodel"), sizeof(head));
         if (q3Model) {
             q3Model = false;
             updateModel = true;
@@ -1399,8 +1399,8 @@ static void UI_DrawOpponent(rectDef_t* rect)
 
     if (updateOpponentModel) {
 
-        Q_strncpyz(model, UI_Cvar_VariableString("ui_opponentModel"), sizeof(model));
-        Q_strncpyz(headmodel, UI_Cvar_VariableString("ui_opponentModel"), sizeof(headmodel));
+        strncpyz(model, UI_Cvar_VariableString("ui_opponentModel"), sizeof(model));
+        strncpyz(headmodel, UI_Cvar_VariableString("ui_opponentModel"), sizeof(headmodel));
         team[0] = '\0';
 
         memset(&info2, 0, sizeof(playerInfo_t));
@@ -1721,12 +1721,12 @@ static void UI_BuildPlayerList()
         trap_GetConfigString(CS_PLAYERS + n, info, MAX_INFO_STRING);
 
         if (info[0]) {
-            Q_strncpyz(uiInfo.playerNames[uiInfo.playerCount], Info_ValueForKey(info, "n"), MAX_NAME_LENGTH);
+            strncpyz(uiInfo.playerNames[uiInfo.playerCount], Info_ValueForKey(info, "n"), MAX_NAME_LENGTH);
             Q_CleanStr(uiInfo.playerNames[uiInfo.playerCount]);
             uiInfo.playerCount++;
             team2 = atoi(Info_ValueForKey(info, "t"));
             if (team2 == team) {
-                Q_strncpyz(uiInfo.teamNames[uiInfo.myTeamCount], Info_ValueForKey(info, "n"), MAX_NAME_LENGTH);
+                strncpyz(uiInfo.teamNames[uiInfo.myTeamCount], Info_ValueForKey(info, "n"), MAX_NAME_LENGTH);
                 Q_CleanStr(uiInfo.teamNames[uiInfo.myTeamCount]);
                 uiInfo.teamClientNums[uiInfo.myTeamCount] = n;
                 if (uiInfo.playerNumber == n) {
@@ -1771,7 +1771,7 @@ static void UI_DrawServerRefreshDate(rectDef_t* rect, float scale, vec4_t color,
         Text_Paint(rect->x, rect->y, scale, newColor, va("Getting info for %d servers (ESC to cancel)", trap_LAN_GetServerCount(UI_SourceForLAN())), 0, 0, textStyle);
     } else {
         char buff[64];
-        Q_strncpyz(buff, UI_Cvar_VariableString(va("ui_lastServerRefresh_%i", ui_netSource.integer)), 64);
+        strncpyz(buff, UI_Cvar_VariableString(va("ui_lastServerRefresh_%i", ui_netSource.integer)), 64);
         Text_Paint(rect->x, rect->y, scale, color, va("Refresh Time: %s", buff), 0, 0, textStyle);
     }
 }
@@ -1859,7 +1859,7 @@ static void UI_DrawGLInfo(rectDef_t* rect, float scale, vec4_t color, int textSt
     // TTimo: https://zerowing.idsoftware.com/bugzilla/show_bug.cgi?id=399
     // in TA this was not directly crashing, but displaying a nasty broken shader right in the middle
     // brought down the string size to 1024, there's not much that can be shown on the screen anyway
-    Q_strncpyz(buff, uiInfo.uiDC.glconfig.extensions_string, 1024);
+    strncpyz(buff, uiInfo.uiDC.glconfig.extensions_string, 1024);
     eptr = buff;
     y = rect->y + 45;
     numLines = 0;
@@ -3179,7 +3179,7 @@ static void UI_RunMenuScript(char** args)
             trap_LAN_GetServerAddressString(UI_SourceForLAN(), uiInfo.serverStatus.displayServers[uiInfo.serverStatus.currentServer], uiInfo.serverStatusAddress, sizeof(uiInfo.serverStatusAddress));
             UI_BuildServerStatus(true);
         } else if (Q_stricmp(name, "FoundPlayerServerStatus") == 0) {
-            Q_strncpyz(uiInfo.serverStatusAddress, uiInfo.foundPlayerServerAddresses[uiInfo.currentFoundPlayerServer], sizeof(uiInfo.serverStatusAddress));
+            strncpyz(uiInfo.serverStatusAddress, uiInfo.foundPlayerServerAddresses[uiInfo.currentFoundPlayerServer], sizeof(uiInfo.serverStatusAddress));
             UI_BuildServerStatus(true);
             Menu_SetFeederSelection(NULL, FEEDER_FINDPLAYER, 0, NULL);
         } else if (Q_stricmp(name, "FindPlayer") == 0) {
@@ -3262,8 +3262,8 @@ static void UI_RunMenuScript(char** args)
 
                 trap_LAN_GetServerInfo(UI_SourceForLAN(), uiInfo.serverStatus.displayServers[uiInfo.serverStatus.currentServer], buff, MAX_STRING_CHARS);
                 name[0] = addr[0] = '\0';
-                Q_strncpyz(name, Info_ValueForKey(buff, "hostname"), sizeof(name));
-                Q_strncpyz(addr, Info_ValueForKey(buff, "addr"), sizeof(addr));
+                strncpyz(name, Info_ValueForKey(buff, "hostname"), sizeof(name));
+                strncpyz(addr, Info_ValueForKey(buff, "addr"), sizeof(addr));
                 if (strlen(name) > 0 && strlen(addr) > 0) {
                     res = trap_LAN_AddServer(AS_FAVORITES, name, addr);
                     if (res == 0) {
@@ -3283,7 +3283,7 @@ static void UI_RunMenuScript(char** args)
                 char addr[MAX_ADDRESSLENGTH];
                 trap_LAN_GetServerInfo(AS_FAVORITES, uiInfo.serverStatus.displayServers[uiInfo.serverStatus.currentServer], buff, MAX_STRING_CHARS);
                 addr[0] = '\0';
-                Q_strncpyz(addr, Info_ValueForKey(buff, "addr"), sizeof(addr));
+                strncpyz(addr, Info_ValueForKey(buff, "addr"), sizeof(addr));
                 if (strlen(addr) > 0) {
                     trap_LAN_RemoveServer(AS_FAVORITES, addr);
                 }
@@ -3294,8 +3294,8 @@ static void UI_RunMenuScript(char** args)
             int res;
 
             name[0] = addr[0] = '\0';
-            Q_strncpyz(name, UI_Cvar_VariableString("ui_favoriteName"), sizeof(name));
-            Q_strncpyz(addr, UI_Cvar_VariableString("ui_favoriteAddress"), sizeof(addr));
+            strncpyz(name, UI_Cvar_VariableString("ui_favoriteName"), sizeof(name));
+            strncpyz(addr, UI_Cvar_VariableString("ui_favoriteAddress"), sizeof(addr));
             if (strlen(name) > 0 && strlen(addr) > 0) {
                 res = trap_LAN_AddServer(AS_FAVORITES, name, addr);
                 if (res == 0) {
@@ -3725,7 +3725,7 @@ static int UI_GetServerStatusInfo(const char* serverAddress, serverStatusInfo_t*
     }
 
     if (trap_LAN_ServerStatus(serverAddress, info->text, sizeof(info->text))) {
-        Q_strncpyz(info->address, serverAddress, sizeof(info->address));
+        strncpyz(info->address, serverAddress, sizeof(info->address));
         p = info->text;
         info->numLines = 0;
         info->lines[info->numLines][0] = "Address";
@@ -3874,18 +3874,18 @@ static void UI_BuildFindPlayerList(bool force)
                         continue;
                     }
                     // clean string first
-                    Q_strncpyz(name, info.lines[j][3], sizeof(name));
+                    strncpyz(name, info.lines[j][3], sizeof(name));
                     Q_CleanStr(name);
                     // if the player name is a substring
                     if (stristr(name, uiInfo.findPlayerName)) {
                         // add to found server list if we have space (always leave space for a line with the number found)
                         if (uiInfo.numFoundPlayerServers < MAX_FOUNDPLAYER_SERVERS - 1) {
-                            Q_strncpyz(uiInfo.foundPlayerServerAddresses[uiInfo.numFoundPlayerServers - 1],
-                                       uiInfo.pendingServerStatus.server[i].adrstr,
-                                       sizeof(uiInfo.foundPlayerServerAddresses[0]));
-                            Q_strncpyz(uiInfo.foundPlayerServerNames[uiInfo.numFoundPlayerServers - 1],
-                                       uiInfo.pendingServerStatus.server[i].name,
-                                       sizeof(uiInfo.foundPlayerServerNames[0]));
+                            strncpyz(uiInfo.foundPlayerServerAddresses[uiInfo.numFoundPlayerServers - 1],
+                                     uiInfo.pendingServerStatus.server[i].adrstr,
+                                     sizeof(uiInfo.foundPlayerServerAddresses[0]));
+                            strncpyz(uiInfo.foundPlayerServerNames[uiInfo.numFoundPlayerServers - 1],
+                                     uiInfo.pendingServerStatus.server[i].name,
+                                     sizeof(uiInfo.foundPlayerServerNames[0]));
                             uiInfo.numFoundPlayerServers++;
                         } else {
                             // can't add any more so we're done
@@ -3913,7 +3913,7 @@ static void UI_BuildFindPlayerList(bool force)
                 trap_LAN_GetServerAddressString(lanSource, uiInfo.serverStatus.displayServers[uiInfo.pendingServerStatus.num],
                                                 uiInfo.pendingServerStatus.server[i].adrstr, sizeof(uiInfo.pendingServerStatus.server[i].adrstr));
                 trap_LAN_GetServerInfo(lanSource, uiInfo.serverStatus.displayServers[uiInfo.pendingServerStatus.num], infoString, sizeof(infoString));
-                Q_strncpyz(uiInfo.pendingServerStatus.server[i].name, Info_ValueForKey(infoString, "hostname"), sizeof(uiInfo.pendingServerStatus.server[0].name));
+                strncpyz(uiInfo.pendingServerStatus.server[i].name, Info_ValueForKey(infoString, "hostname"), sizeof(uiInfo.pendingServerStatus.server[0].name));
                 uiInfo.pendingServerStatus.server[i].valid = true;
                 uiInfo.pendingServerStatus.num++;
                 Com_sprintf(uiInfo.foundPlayerServerNames[uiInfo.numFoundPlayerServers - 1],
@@ -4267,7 +4267,7 @@ static void UI_FeederSelection(float feederID, int index)
         uiInfo.currentFoundPlayerServer = index;
         if (index < uiInfo.numFoundPlayerServers - 1) {
             // build a new server status for this server
-            Q_strncpyz(uiInfo.serverStatusAddress, uiInfo.foundPlayerServerAddresses[uiInfo.currentFoundPlayerServer], sizeof(uiInfo.serverStatusAddress));
+            strncpyz(uiInfo.serverStatusAddress, uiInfo.foundPlayerServerAddresses[uiInfo.currentFoundPlayerServer], sizeof(uiInfo.serverStatusAddress));
             Menu_SetFeederSelection(NULL, FEEDER_SERVERSTATUS, 0, NULL);
             UI_BuildServerStatus(true);
         }
@@ -5080,7 +5080,7 @@ static void Text_PaintCenter_AutoWrapped(float x, float y, float xmax, float yst
     if (!str || str[0] == '\0')
         return;
 
-    Q_strncpyz(buf, str, sizeof(buf));
+    strncpyz(buf, str, sizeof(buf));
     s1 = s2 = s3 = buf;
 
     while (1) {

@@ -476,7 +476,7 @@ int SV_BotGetConsoleMessage(int client, char* buf, int size)
         return false;
     }
 
-    Q_strncpyz(buf, cl->reliableCommands[index], size);
+    strncpyz(buf, cl->reliableCommands[index], size);
     return true;
 }
 

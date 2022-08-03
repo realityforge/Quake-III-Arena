@@ -223,7 +223,7 @@ static void SV_GetServerinfo(char* buffer, int bufferSize)
     if (bufferSize < 1) {
         Com_Error(ERR_DROP, "SV_GetServerinfo: bufferSize == %i", bufferSize);
     }
-    Q_strncpyz(buffer, Cvar_InfoString(CVAR_SERVERINFO), bufferSize);
+    strncpyz(buffer, Cvar_InfoString(CVAR_SERVERINFO), bufferSize);
 }
 
 static void SV_LocateGameData(sharedEntity_t* gEnts, int numGEntities, int sizeofGEntity_t, playerState_t* clients, int sizeofGameClient)
@@ -381,7 +381,7 @@ static intptr_t SV_GameSystemCalls(intptr_t* args)
         const char* s;
 
         s = COM_Parse(&sv.entityParsePoint);
-        Q_strncpyz(VMA(1), s, args[2]);
+        strncpyz(VMA(1), s, args[2]);
         if (!sv.entityParsePoint && !s[0]) {
             return false;
         } else {

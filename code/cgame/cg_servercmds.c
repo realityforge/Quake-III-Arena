@@ -151,9 +151,9 @@ void CG_ParseServerinfo()
     cgs.maxclients = atoi(Info_ValueForKey(info, "sv_maxclients"));
     mapname = Info_ValueForKey(info, "mapname");
     Com_sprintf(cgs.mapname, sizeof(cgs.mapname), "maps/%s.bsp", mapname);
-    Q_strncpyz(cgs.redTeam, Info_ValueForKey(info, "g_redTeam"), sizeof(cgs.redTeam));
+    strncpyz(cgs.redTeam, Info_ValueForKey(info, "g_redTeam"), sizeof(cgs.redTeam));
     trap_Cvar_Set("g_redTeam", cgs.redTeam);
-    Q_strncpyz(cgs.blueTeam, Info_ValueForKey(info, "g_blueTeam"), sizeof(cgs.blueTeam));
+    strncpyz(cgs.blueTeam, Info_ValueForKey(info, "g_blueTeam"), sizeof(cgs.blueTeam));
     trap_Cvar_Set("g_blueTeam", cgs.blueTeam);
 }
 
@@ -284,7 +284,7 @@ static void CG_ConfigStringModified()
         cgs.voteNo = atoi(str);
         cgs.voteModified = true;
     } else if (num == CS_VOTE_STRING) {
-        Q_strncpyz(cgs.voteString, str, sizeof(cgs.voteString));
+        strncpyz(cgs.voteString, str, sizeof(cgs.voteString));
 #ifdef MISSIONPACK
         trap_S_StartLocalSound(cgs.media.voteNow, CHAN_ANNOUNCER);
 #endif // MISSIONPACK
@@ -298,7 +298,7 @@ static void CG_ConfigStringModified()
         cgs.teamVoteNo[num - CS_TEAMVOTE_NO] = atoi(str);
         cgs.teamVoteModified[num - CS_TEAMVOTE_NO] = true;
     } else if (num >= CS_TEAMVOTE_STRING && num <= CS_TEAMVOTE_STRING + 1) {
-        Q_strncpyz(cgs.teamVoteString[num - CS_TEAMVOTE_STRING], str, sizeof(cgs.teamVoteString[0]));
+        strncpyz(cgs.teamVoteString[num - CS_TEAMVOTE_STRING], str, sizeof(cgs.teamVoteString[0]));
 #ifdef MISSIONPACK
         trap_S_StartLocalSound(cgs.media.voteNow, CHAN_ANNOUNCER);
 #endif
@@ -760,7 +760,7 @@ static void CG_PlayVoiceChat(bufferedVoiceChat_t* vchat)
             int orderTask = CG_ValidOrder(vchat->cmd);
             if (orderTask > 0) {
                 cgs.acceptOrderTime = cg.time + 5000;
-                Q_strncpyz(cgs.acceptVoice, vchat->cmd, sizeof(cgs.acceptVoice));
+                strncpyz(cgs.acceptVoice, vchat->cmd, sizeof(cgs.acceptVoice));
                 cgs.acceptTask = orderTask;
                 cgs.acceptLeader = vchat->clientNum;
             }
@@ -831,7 +831,7 @@ void CG_VoiceChatLocal(int mode, bool voiceOnly, int clientNum, int color, const
         vchat.clientNum = clientNum;
         vchat.snd = snd;
         vchat.voiceOnly = voiceOnly;
-        Q_strncpyz(vchat.cmd, cmd, sizeof(vchat.cmd));
+        strncpyz(vchat.cmd, cmd, sizeof(vchat.cmd));
         if (mode == SAY_TELL) {
             Com_sprintf(vchat.message, sizeof(vchat.message), "[%s]: %c%c%s", ci->name, Q_COLOR_ESCAPE, color, chat);
         } else if (mode == SAY_TEAM) {
@@ -927,7 +927,7 @@ static void CG_ServerCommand()
         }
 
         trap_S_StartLocalSound(cgs.media.talkSound, CHAN_LOCAL_SOUND);
-        Q_strncpyz(text, CG_Argv(1), MAX_SAY_TEXT);
+        strncpyz(text, CG_Argv(1), MAX_SAY_TEXT);
         CG_RemoveChatEscapeChar(text);
         CG_Printf("%s\n", text);
         return;
@@ -935,7 +935,7 @@ static void CG_ServerCommand()
 
     if (!strcmp(cmd, "tchat")) {
         trap_S_StartLocalSound(cgs.media.talkSound, CHAN_LOCAL_SOUND);
-        Q_strncpyz(text, CG_Argv(1), MAX_SAY_TEXT);
+        strncpyz(text, CG_Argv(1), MAX_SAY_TEXT);
         CG_RemoveChatEscapeChar(text);
         CG_AddToTeamChat(text);
         CG_Printf("%s\n", text);
@@ -980,9 +980,9 @@ static void CG_ServerCommand()
             char shader2[MAX_QPATH];
             char shader3[MAX_QPATH];
 
-            Q_strncpyz(shader1, CG_Argv(1), sizeof(shader1));
-            Q_strncpyz(shader2, CG_Argv(2), sizeof(shader2));
-            Q_strncpyz(shader3, CG_Argv(3), sizeof(shader3));
+            strncpyz(shader1, CG_Argv(1), sizeof(shader1));
+            strncpyz(shader2, CG_Argv(2), sizeof(shader2));
+            strncpyz(shader3, CG_Argv(3), sizeof(shader3));
 
             trap_R_RemapShader(shader1, shader2, shader3);
         }

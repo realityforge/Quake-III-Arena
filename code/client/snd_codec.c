@@ -44,7 +44,7 @@ static void* S_CodecGetSound(const char* filename, snd_info_t* info)
     char altName[MAX_QPATH];
     void* rtn = NULL;
 
-    Q_strncpyz(localName, filename, MAX_QPATH);
+    strncpyz(localName, filename, MAX_QPATH);
 
     ext = COM_GetExtension(localName);
 

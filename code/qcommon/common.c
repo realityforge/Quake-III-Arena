@@ -2433,7 +2433,7 @@ void Com_WriteConfig_f()
         return;
     }
 
-    Q_strncpyz(filename, Cmd_Argv(1), sizeof(filename));
+    strncpyz(filename, Cmd_Argv(1), sizeof(filename));
     COM_DefaultExtension(filename, sizeof(filename), ".cfg");
 
     if (!COM_CompareExtension(filename, ".cfg")) {
@@ -2708,7 +2708,7 @@ static void FindMatches(const char* s)
     }
     matchCount++;
     if (matchCount == 1) {
-        Q_strncpyz(shortestMatch, s, sizeof(shortestMatch));
+        strncpyz(shortestMatch, s, sizeof(shortestMatch));
         return;
     }
 
@@ -2763,8 +2763,8 @@ static bool Field_Complete()
 
     completionOffset = strlen(completionField->buffer) - strlen(completionString);
 
-    Q_strncpyz(&completionField->buffer[completionOffset], shortestMatch,
-               sizeof(completionField->buffer) - completionOffset);
+    strncpyz(&completionField->buffer[completionOffset], shortestMatch,
+             sizeof(completionField->buffer) - completionOffset);
 
     completionField->cursor = strlen(completionField->buffer);
 
@@ -2951,8 +2951,8 @@ static bool Field_CompletePlayerNameFinal(bool whitespace)
 
     completionOffset = strlen(completionField->buffer) - strlen(completionString);
 
-    Q_strncpyz(&completionField->buffer[completionOffset], shortestMatch,
-               sizeof(completionField->buffer) - completionOffset);
+    strncpyz(&completionField->buffer[completionOffset], shortestMatch,
+             sizeof(completionField->buffer) - completionOffset);
 
     completionField->cursor = strlen(completionField->buffer);
 
@@ -2988,7 +2988,7 @@ bool Com_FieldStringToPlayerName(char* name, int length, const char* rawname)
 
     for (i = 0; *rawname && i + 1 <= length; rawname++, i++) {
         if (*rawname == '\\') {
-            Q_strncpyz(hex, rawname + 1, sizeof(hex));
+            strncpyz(hex, rawname + 1, sizeof(hex));
             ch = Com_HexStrToInt(hex);
             if (ch > -1) {
                 name[i] = ch;

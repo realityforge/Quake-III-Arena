@@ -100,7 +100,7 @@ static int UI_ParseInfos(char* buf, int max, char* infos[])
             if (!strcmp(token, "}")) {
                 break;
             }
-            Q_strncpyz(key, token, sizeof(key));
+            strncpyz(key, token, sizeof(key));
 
             token = COM_ParseExt(&buf, false);
             if (!token[0]) {

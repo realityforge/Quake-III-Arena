@@ -192,7 +192,7 @@ static int ClientNumberFromString(gentity_t* to, char* s, bool checkNums, bool c
             if (cl->pers.connected != CON_CONNECTED) {
                 continue;
             }
-            Q_strncpyz(cleanName, cl->pers.netname, sizeof(cleanName));
+            strncpyz(cleanName, cl->pers.netname, sizeof(cleanName));
             Q_CleanStr(cleanName);
             if (!Q_stricmp(cleanName, s)) {
                 return idnum;
@@ -829,7 +829,7 @@ static void G_Say(gentity_t* ent, gentity_t* target, int mode, const char* chatT
         break;
     }
 
-    Q_strncpyz(text, chatText, sizeof(text));
+    strncpyz(text, chatText, sizeof(text));
 
     if (target) {
         G_SayTo(ent, target, mode, color, name, text);
@@ -1416,14 +1416,14 @@ static void Cmd_CallTeamVote_f(gentity_t* ent)
                     return;
                 }
             } else {
-                Q_strncpyz(leader, arg2, sizeof(leader));
+                strncpyz(leader, arg2, sizeof(leader));
                 Q_CleanStr(leader);
                 for (i = 0; i < level.maxclients; i++) {
                     if (level.clients[i].pers.connected == CON_DISCONNECTED)
                         continue;
                     if (level.clients[i].sess.sessionTeam != team)
                         continue;
-                    Q_strncpyz(netname, level.clients[i].pers.netname, sizeof(netname));
+                    strncpyz(netname, level.clients[i].pers.netname, sizeof(netname));
                     Q_CleanStr(netname);
                     if (!Q_stricmp(netname, leader)) {
                         break;

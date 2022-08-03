@@ -296,7 +296,7 @@ bool CL_OpenAVIForWriting(const char* fileName)
         return false;
     }
 
-    Q_strncpyz(afd.fileName, fileName, MAX_QPATH);
+    strncpyz(afd.fileName, fileName, MAX_QPATH);
 
     afd.frameRate = cl_aviFrameRate->integer;
     afd.framePeriod = (int)(1000000.0f / afd.frameRate);

@@ -1142,7 +1142,7 @@ static void NET_AddLocalAddress(char* ifname, struct sockaddr* addr, struct sock
         } else
             return;
 
-        Q_strncpyz(localIP[numIP].ifname, ifname, sizeof(localIP[numIP].ifname));
+        strncpyz(localIP[numIP].ifname, ifname, sizeof(localIP[numIP].ifname));
 
         localIP[numIP].family = family;
 

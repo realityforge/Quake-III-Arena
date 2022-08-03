@@ -239,7 +239,7 @@ void Cmd_Exec_f()
         return;
     }
 
-    Q_strncpyz(filename, Cmd_Argv(1), sizeof(filename));
+    strncpyz(filename, Cmd_Argv(1), sizeof(filename));
     COM_DefaultExtension(filename, sizeof(filename), ".cfg");
     FS_ReadFile(filename, &f.v);
     if (!f.c) {
@@ -323,7 +323,7 @@ they can't have pointers returned to them
 */
 void Cmd_ArgvBuffer(int arg, char* buffer, int bufferLength)
 {
-    Q_strncpyz(buffer, Cmd_Argv(arg), bufferLength);
+    strncpyz(buffer, Cmd_Argv(arg), bufferLength);
 }
 
 /*
@@ -384,7 +384,7 @@ they can't have pointers returned to them
 */
 void Cmd_ArgsBuffer(char* buffer, int bufferLength)
 {
-    Q_strncpyz(buffer, Cmd_Args(), bufferLength);
+    strncpyz(buffer, Cmd_Args(), bufferLength);
 }
 
 /*
@@ -454,7 +454,7 @@ static void Cmd_TokenizeString2(const char* text_in, bool ignoreQuotes)
         return;
     }
 
-    Q_strncpyz(cmd_cmd, text_in, sizeof(cmd_cmd));
+    strncpyz(cmd_cmd, text_in, sizeof(cmd_cmd));
 
     text = text_in;
     textOut = cmd_tokenized;

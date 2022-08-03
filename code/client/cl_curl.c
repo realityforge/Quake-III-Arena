@@ -114,8 +114,8 @@ void CL_cURL_BeginDownload(const char* localName, const char* remoteURL)
                 "****************************\n",
                 localName, remoteURL);
     CL_cURL_Cleanup();
-    Q_strncpyz(clc.downloadURL, remoteURL, sizeof(clc.downloadURL));
-    Q_strncpyz(clc.downloadName, localName, sizeof(clc.downloadName));
+    strncpyz(clc.downloadURL, remoteURL, sizeof(clc.downloadURL));
+    strncpyz(clc.downloadName, localName, sizeof(clc.downloadName));
     Com_sprintf(clc.downloadTempName, sizeof(clc.downloadTempName),
                 "%s.tmp", localName);
 

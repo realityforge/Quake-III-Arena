@@ -257,7 +257,7 @@ qhandle_t RE_RegisterModel(const char* name)
     }
 
     // only set the name after the model has been successfully loaded
-    Q_strncpyz(mod->name, name, sizeof(mod->name));
+    strncpyz(mod->name, name, sizeof(mod->name));
 
     R_IssuePendingRenderCommands();
 
@@ -265,7 +265,7 @@ qhandle_t RE_RegisterModel(const char* name)
     mod->numLods = 0;
 
     // load the files
-    Q_strncpyz(localName, name, MAX_QPATH);
+    strncpyz(localName, name, MAX_QPATH);
 
     ext = COM_GetExtension(localName);
 
@@ -412,7 +412,7 @@ static bool R_LoadMD3(model_t* mod, int lod, void* buffer, const char* modName)
 
     md3Tag = (md3Tag_t*)((uint8_t*)md3Model + md3Model->ofsTags);
     for (i = 0; i < md3Model->numTags; i++, tagName++, md3Tag++) {
-        Q_strncpyz(tagName->name, md3Tag->name, sizeof(tagName->name));
+        strncpyz(tagName->name, md3Tag->name, sizeof(tagName->name));
     }
 
     // swap all the surfaces
@@ -453,7 +453,7 @@ static bool R_LoadMD3(model_t* mod, int lod, void* buffer, const char* modName)
         surf->model = mdvModel;
 
         // copy surface name
-        Q_strncpyz(surf->name, md3Surf->name, sizeof(surf->name));
+        strncpyz(surf->name, md3Surf->name, sizeof(surf->name));
 
         // lowercase the surface name so skin compares are faster
         Q_strlwr(surf->name);
@@ -791,7 +791,7 @@ static bool R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* mod_
 
     mdr->ident = LittleLong(pinmodel->ident);
     mdr->version = pinmodel->version; // Don't need to swap byte order on this one, we already did above.
-    Q_strncpyz(mdr->name, pinmodel->name, sizeof(mdr->name));
+    strncpyz(mdr->name, pinmodel->name, sizeof(mdr->name));
     mdr->numFrames = pinmodel->numFrames;
     mdr->numBones = pinmodel->numBones;
     mdr->numLODs = LittleLong(pinmodel->numLODs);
@@ -858,7 +858,7 @@ static bool R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* mod_
             }
 
             frame->radius = LittleFloat(curframe->radius);
-            Q_strncpyz(frame->name, curframe->name, sizeof(frame->name));
+            strncpyz(frame->name, curframe->name, sizeof(frame->name));
 
             for (j = 0; j < (int)(mdr->numBones * sizeof(mdrBone_t) / 4); j++) {
                 ((float*)frame->bones)[j] = LittleFloat(((float*)curframe->bones)[j]);
@@ -900,8 +900,8 @@ static bool R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* mod_
             // first do some copying stuff
 
             surf->ident = SF_MDR;
-            Q_strncpyz(surf->name, cursurf->name, sizeof(surf->name));
-            Q_strncpyz(surf->shader, cursurf->shader, sizeof(surf->shader));
+            strncpyz(surf->name, cursurf->name, sizeof(surf->name));
+            strncpyz(surf->shader, cursurf->shader, sizeof(surf->shader));
 
             surf->ofsHeader = (uint8_t*)mdr - (uint8_t*)surf;
 
@@ -1024,7 +1024,7 @@ static bool R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* mod_
 
     for (i = 0; i < mdr->numTags; i++) {
         tag->boneIndex = LittleLong(curtag->boneIndex);
-        Q_strncpyz(tag->name, curtag->name, sizeof(tag->name));
+        strncpyz(tag->name, curtag->name, sizeof(tag->name));
 
         tag++;
         curtag++;

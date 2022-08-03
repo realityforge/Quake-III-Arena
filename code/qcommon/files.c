@@ -483,7 +483,7 @@ bool FS_CreatePath(char* OSPath)
         return true;
     }
 
-    Q_strncpyz(path, OSPath, sizeof(path));
+    strncpyz(path, OSPath, sizeof(path));
     FS_ReplaceSeparators(path);
 
     // Skip creation of the root directory as it will always be there
@@ -616,7 +616,7 @@ fileHandle_t FS_SV_FOpenFileWrite(const char* filename)
     Com_DPrintf("writing to: %s\n", ospath);
     fsh[f].handleFiles.file.o = Sys_FOpen(ospath, "wb");
 
-    Q_strncpyz(fsh[f].name, filename, sizeof(fsh[f].name));
+    strncpyz(fsh[f].name, filename, sizeof(fsh[f].name));
 
     fsh[f].handleSync = false;
     if (!fsh[f].handleFiles.file.o) {
@@ -645,7 +645,7 @@ long FS_SV_FOpenFileRead(const char* filename, fileHandle_t* fp)
     f = FS_HandleForFile();
     fsh[f].zipFile = false;
 
-    Q_strncpyz(fsh[f].name, filename, sizeof(fsh[f].name));
+    strncpyz(fsh[f].name, filename, sizeof(fsh[f].name));
 
     // don't let sound stutter
 #ifndef DEDICATED
@@ -781,7 +781,7 @@ fileHandle_t FS_FOpenFileWrite(const char* filename)
     // Com_DPrintf( "writing to: %s\n", ospath );
     fsh[f].handleFiles.file.o = Sys_FOpen(ospath, "wb");
 
-    Q_strncpyz(fsh[f].name, filename, sizeof(fsh[f].name));
+    strncpyz(fsh[f].name, filename, sizeof(fsh[f].name));
 
     fsh[f].handleSync = false;
     if (!fsh[f].handleFiles.file.o) {
@@ -802,7 +802,7 @@ fileHandle_t FS_FOpenFileAppend(const char* filename)
     f = FS_HandleForFile();
     fsh[f].zipFile = false;
 
-    Q_strncpyz(fsh[f].name, filename, sizeof(fsh[f].name));
+    strncpyz(fsh[f].name, filename, sizeof(fsh[f].name));
 
 #ifndef DEDICATED
     // don't let sound stutter
@@ -1063,7 +1063,7 @@ static long FS_FOpenFileReadDir(const char* filename, searchpath_t* search, file
                         fsh[*file].handleFiles.file.z = pak->handle;
                     }
 
-                    Q_strncpyz(fsh[*file].name, filename, sizeof(fsh[*file].name));
+                    strncpyz(fsh[*file].name, filename, sizeof(fsh[*file].name));
                     fsh[*file].zipFile = true;
 
                     // set the file position in the zip file (also sets the current file info)
@@ -1116,7 +1116,7 @@ static long FS_FOpenFileReadDir(const char* filename, searchpath_t* search, file
             return -1;
         }
 
-        Q_strncpyz(fsh[*file].name, filename, sizeof(fsh[*file].name));
+        strncpyz(fsh[*file].name, filename, sizeof(fsh[*file].name));
         fsh[*file].zipFile = false;
 
         if (fs_debug->integer) {
@@ -1231,7 +1231,7 @@ int FS_FindVM(void** startSearch, char* found, int foundlen, const char* name, i
                 netpath = FS_BuildOSPath(dir->path, dir->gamedir, dllName);
 
                 if (FS_FileInPathExists(netpath)) {
-                    Q_strncpyz(found, netpath, foundlen);
+                    strncpyz(found, netpath, foundlen);
                     *startSearch = search;
 
                     return VMI_NATIVE;
@@ -1790,8 +1790,8 @@ static pack_t* FS_LoadZipFile(const char* zipfile, const char* basename)
         pack->hashTable[i] = NULL;
     }
 
-    Q_strncpyz(pack->pakFilename, zipfile, sizeof(pack->pakFilename));
-    Q_strncpyz(pack->pakBasename, basename, sizeof(pack->pakBasename));
+    strncpyz(pack->pakFilename, zipfile, sizeof(pack->pakFilename));
+    strncpyz(pack->pakBasename, basename, sizeof(pack->pakBasename));
 
     // strip .pk3 if needed
     if (strlen(pack->pakBasename) > 4 && !Q_stricmp(pack->pakBasename + strlen(pack->pakBasename) - 4, ".pk3")) {
@@ -2192,7 +2192,7 @@ void FS_GetModDescription(const char* modDir, char* description, int description
             description[nDescLen] = '\0';
         }
     } else {
-        Q_strncpyz(description, modDir, descriptionLen);
+        strncpyz(description, modDir, descriptionLen);
     }
 
     if (descHandle) {
@@ -2554,10 +2554,10 @@ void FS_AddGameDirectory(const char* path, const char* dir)
         }
     }
 
-    Q_strncpyz(fs_gamedir, dir, sizeof(fs_gamedir));
+    strncpyz(fs_gamedir, dir, sizeof(fs_gamedir));
 
     // find all pak files in this directory
-    Q_strncpyz(curpath, FS_BuildOSPath(path, dir, ""), sizeof(curpath));
+    strncpyz(curpath, FS_BuildOSPath(path, dir, ""), sizeof(curpath));
     curpath[strlen(curpath) - 1] = '\0'; // strip the trailing slash
 
     // Get .pk3 files
@@ -2605,9 +2605,9 @@ void FS_AddGameDirectory(const char* path, const char* dir)
                 continue;
             }
 
-            Q_strncpyz(pak->pakPathname, curpath, sizeof(pak->pakPathname));
+            strncpyz(pak->pakPathname, curpath, sizeof(pak->pakPathname));
             // store the game name for downloading
-            Q_strncpyz(pak->pakGamename, dir, sizeof(pak->pakGamename));
+            strncpyz(pak->pakGamename, dir, sizeof(pak->pakGamename));
 
             fs_packFiles += pak->numfiles;
 
@@ -2633,9 +2633,9 @@ void FS_AddGameDirectory(const char* path, const char* dir)
             search = Z_Malloc(sizeof(searchpath_t));
             search->dir = Z_Malloc(sizeof(*search->dir));
 
-            Q_strncpyz(search->dir->path, curpath, sizeof(search->dir->path)); // c:\quake3\baseq3
-            Q_strncpyz(search->dir->fullpath, pakfile, sizeof(search->dir->fullpath)); // c:\quake3\baseq3\mypak.pk3dir
-            Q_strncpyz(search->dir->gamedir, pakdirs[pakdirsi], sizeof(search->dir->gamedir)); // mypak.pk3dir
+            strncpyz(search->dir->path, curpath, sizeof(search->dir->path)); // c:\quake3\baseq3
+            strncpyz(search->dir->fullpath, pakfile, sizeof(search->dir->fullpath)); // c:\quake3\baseq3\mypak.pk3dir
+            strncpyz(search->dir->gamedir, pakdirs[pakdirsi], sizeof(search->dir->gamedir)); // mypak.pk3dir
 
             search->next = fs_searchpaths;
             fs_searchpaths = search;
@@ -2652,9 +2652,9 @@ void FS_AddGameDirectory(const char* path, const char* dir)
     search = Z_Malloc(sizeof(searchpath_t));
     search->dir = Z_Malloc(sizeof(*search->dir));
 
-    Q_strncpyz(search->dir->path, path, sizeof(search->dir->path));
-    Q_strncpyz(search->dir->fullpath, curpath, sizeof(search->dir->fullpath));
-    Q_strncpyz(search->dir->gamedir, dir, sizeof(search->dir->gamedir));
+    strncpyz(search->dir->path, path, sizeof(search->dir->path));
+    strncpyz(search->dir->fullpath, curpath, sizeof(search->dir->fullpath));
+    strncpyz(search->dir->gamedir, dir, sizeof(search->dir->gamedir));
 
     search->next = fs_searchpaths;
     fs_searchpaths = search;
@@ -3360,10 +3360,10 @@ void FS_InitFilesystem()
         Com_Error(ERR_FATAL, "Couldn't load default.cfg");
     }
 
-    Q_strncpyz(lastValidBase, fs_basepath->string, sizeof(lastValidBase));
-    Q_strncpyz(lastValidComBaseGame, com_basegame->string, sizeof(lastValidComBaseGame));
-    Q_strncpyz(lastValidFsBaseGame, fs_basegame->string, sizeof(lastValidFsBaseGame));
-    Q_strncpyz(lastValidGame, fs_gamedirvar->string, sizeof(lastValidGame));
+    strncpyz(lastValidBase, fs_basepath->string, sizeof(lastValidBase));
+    strncpyz(lastValidComBaseGame, com_basegame->string, sizeof(lastValidComBaseGame));
+    strncpyz(lastValidFsBaseGame, fs_basegame->string, sizeof(lastValidFsBaseGame));
+    strncpyz(lastValidGame, fs_gamedirvar->string, sizeof(lastValidGame));
 }
 
 void FS_Restart(int checksumFeed)
@@ -3414,10 +3414,10 @@ void FS_Restart(int checksumFeed)
         }
     }
 
-    Q_strncpyz(lastValidBase, fs_basepath->string, sizeof(lastValidBase));
-    Q_strncpyz(lastValidComBaseGame, com_basegame->string, sizeof(lastValidComBaseGame));
-    Q_strncpyz(lastValidFsBaseGame, fs_basegame->string, sizeof(lastValidFsBaseGame));
-    Q_strncpyz(lastValidGame, fs_gamedirvar->string, sizeof(lastValidGame));
+    strncpyz(lastValidBase, fs_basepath->string, sizeof(lastValidBase));
+    strncpyz(lastValidComBaseGame, com_basegame->string, sizeof(lastValidComBaseGame));
+    strncpyz(lastValidFsBaseGame, fs_basegame->string, sizeof(lastValidFsBaseGame));
+    strncpyz(lastValidGame, fs_gamedirvar->string, sizeof(lastValidGame));
 }
 
 /*
@@ -3528,7 +3528,7 @@ void FS_FilenameCompletion(const char* dir, const char* ext,
 
     for (i = 0; i < nfiles; i++) {
         FS_ConvertPath(filenames[i]);
-        Q_strncpyz(filename, filenames[i], MAX_STRING_CHARS);
+        strncpyz(filename, filenames[i], MAX_STRING_CHARS);
 
         if (stripExt) {
             COM_StripExtension(filename, filename, sizeof(filename));

@@ -41,7 +41,7 @@ static char installPath[MAX_OSPATH] = { 0 };
 
 void Sys_SetBinaryPath(const char* path)
 {
-    Q_strncpyz(binaryPath, path, sizeof(binaryPath));
+    strncpyz(binaryPath, path, sizeof(binaryPath));
 }
 
 char* Sys_BinaryPath(void)
@@ -51,7 +51,7 @@ char* Sys_BinaryPath(void)
 
 void Sys_SetDefaultInstallPath(const char* path)
 {
-    Q_strncpyz(installPath, path, sizeof(installPath));
+    strncpyz(installPath, path, sizeof(installPath));
 }
 
 char* Sys_DefaultInstallPath(void)
@@ -92,7 +92,7 @@ char* Sys_GetClipboardData(void)
             size_t bufsize = strlen(cliptext) + 1;
 
             data = Z_Malloc(bufsize);
-            Q_strncpyz(data, cliptext, bufsize);
+            strncpyz(data, cliptext, bufsize);
 
             // find first listed char and set to '\0'
             strtok(data, "\n\r\b");

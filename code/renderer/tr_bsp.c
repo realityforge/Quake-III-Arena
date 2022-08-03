@@ -2101,7 +2101,7 @@ static void R_LoadEntities(lump_t* l)
         if (!*token || *token == '}') {
             break;
         }
-        Q_strncpyz(keyname, token, sizeof(keyname));
+        strncpyz(keyname, token, sizeof(keyname));
 
         // parse value
         token = COM_ParseExt(&p, true);
@@ -2109,7 +2109,7 @@ static void R_LoadEntities(lump_t* l)
         if (!*token || *token == '}') {
             break;
         }
-        Q_strncpyz(value, token, sizeof(value));
+        strncpyz(value, token, sizeof(value));
 
         // check for remapping of shaders for vertex lighting
         s = "vertexremapshader";
@@ -2156,7 +2156,7 @@ bool R_GetEntityToken(char* buffer, int size)
     const char* s;
 
     s = COM_Parse(&s_worldData.entityParsePoint);
-    Q_strncpyz(buffer, s, size);
+    strncpyz(buffer, s, size);
     if (!s_worldData.entityParsePoint && !s[0]) {
         s_worldData.entityParsePoint = s_worldData.entityString;
         return false;
@@ -2348,7 +2348,7 @@ static void R_LoadCubemapEntities(char* cubemapEntityName)
                 isCubemap = true;
 
             if (!Q_stricmp(spawnVars[i][0], "name"))
-                Q_strncpyz(name, spawnVars[i][1], MAX_QPATH);
+                strncpyz(name, spawnVars[i][1], MAX_QPATH);
 
             if (!Q_stricmp(spawnVars[i][0], "origin")) {
                 sscanf(spawnVars[i][1], "%f %f %f", &origin[0], &origin[1], &origin[2]);
@@ -2360,7 +2360,7 @@ static void R_LoadCubemapEntities(char* cubemapEntityName)
 
         if (isCubemap && originSet) {
             cubemap_t* cubemap = &tr.cubemaps[numCubemaps];
-            Q_strncpyz(cubemap->name, name, MAX_QPATH);
+            strncpyz(cubemap->name, name, MAX_QPATH);
             VectorCopy(origin, cubemap->origin);
             cubemap->parallaxRadius = parallaxRadius;
             numCubemaps++;
@@ -2515,9 +2515,9 @@ void RE_LoadWorldMap(const char* name)
     tr.world = NULL;
 
     memset(&s_worldData, 0, sizeof(s_worldData));
-    Q_strncpyz(s_worldData.name, name, sizeof(s_worldData.name));
+    strncpyz(s_worldData.name, name, sizeof(s_worldData.name));
 
-    Q_strncpyz(s_worldData.baseName, COM_SkipPath(s_worldData.name), sizeof(s_worldData.name));
+    strncpyz(s_worldData.baseName, COM_SkipPath(s_worldData.name), sizeof(s_worldData.name));
     COM_StripExtension(s_worldData.baseName, s_worldData.baseName, sizeof(s_worldData.baseName));
 
     startMarker = ri.Hunk_Alloc(0, h_low);

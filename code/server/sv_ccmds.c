@@ -83,7 +83,7 @@ static client_t* SV_GetPlayerByHandle()
             return cl;
         }
 
-        Q_strncpyz(cleanName, cl->name, sizeof(cleanName));
+        strncpyz(cleanName, cl->name, sizeof(cleanName));
         Q_CleanStr(cleanName);
         if (!Q_stricmp(cleanName, s)) {
             return cl;
@@ -202,7 +202,7 @@ static void SV_Map_f()
 
     // save the map name here cause on a map restart we reload the q3config.cfg
     // and thus nuke the arguments of the map command
-    Q_strncpyz(mapname, map, sizeof(mapname));
+    strncpyz(mapname, map, sizeof(mapname));
 
     // start up the map
     SV_SpawnServer(mapname, killBots);
@@ -267,7 +267,7 @@ static void SV_MapRestart_f()
 
         Com_Printf("variable change -- restarting.\n");
         // restart the map the slow way
-        Q_strncpyz(mapname, Cvar_VariableString("mapname"), sizeof(mapname));
+        strncpyz(mapname, Cvar_VariableString("mapname"), sizeof(mapname));
 
         SV_SpawnServer(mapname, false);
         return;
@@ -693,7 +693,7 @@ static void SV_ConSayto_f()
         if (!cl->state) {
             continue;
         }
-        Q_strncpyz(cleanName, cl->name, sizeof(cleanName));
+        strncpyz(cleanName, cl->name, sizeof(cleanName));
         Q_CleanStr(cleanName);
 
         if (!Q_stricmp(cleanName, name)) {
@@ -839,7 +839,7 @@ static void SV_CompletePlayerName(char* args, int argNum)
             if (i >= MAX_CLIENTS) {
                 break;
             }
-            Q_strncpyz(names[nameCount], cl->name, sizeof(names[nameCount]));
+            strncpyz(names[nameCount], cl->name, sizeof(names[nameCount]));
             Q_CleanStr(names[nameCount]);
 
             namesPtr[nameCount] = names[nameCount];

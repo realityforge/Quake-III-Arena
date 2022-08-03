@@ -89,7 +89,7 @@ static int G_ParseInfos(char* buf, int max, char* infos[])
             if (!strcmp(token, "}")) {
                 break;
             }
-            Q_strncpyz(key, token, sizeof(key));
+            strncpyz(key, token, sizeof(key));
 
             token = COM_ParseExt(&buf, false);
             if (!token[0]) {
@@ -184,7 +184,7 @@ static void PlayerIntroSound(const char* modelAndSkin)
     char model[MAX_QPATH];
     char* skin;
 
-    Q_strncpyz(model, modelAndSkin, sizeof(model));
+    strncpyz(model, modelAndSkin, sizeof(model));
     skin = strrchr(model, '/');
     if (skin) {
         *skin++ = '\0';
@@ -504,7 +504,7 @@ bool G_BotConnect(int clientNum, bool restart)
 
     trap_GetUserinfo(clientNum, userinfo, sizeof(userinfo));
 
-    Q_strncpyz(settings.characterfile, Info_ValueForKey(userinfo, "characterfile"), sizeof(settings.characterfile));
+    strncpyz(settings.characterfile, Info_ValueForKey(userinfo, "characterfile"), sizeof(settings.characterfile));
     settings.skill = atof(Info_ValueForKey(userinfo, "skill"));
 
     if (!BotAISetupClient(clientNum, &settings, restart)) {
@@ -733,19 +733,19 @@ void Svcmd_BotList_f()
 
     trap_Print("^1name             model            aifile              funname\n");
     for (i = 0; i < g_numBots; i++) {
-        Q_strncpyz(name, Info_ValueForKey(g_botInfos[i], "name"), sizeof(name));
+        strncpyz(name, Info_ValueForKey(g_botInfos[i], "name"), sizeof(name));
         if (!*name) {
             strcpy(name, "UnnamedPlayer");
         }
-        Q_strncpyz(funname, Info_ValueForKey(g_botInfos[i], "funname"), sizeof(funname));
+        strncpyz(funname, Info_ValueForKey(g_botInfos[i], "funname"), sizeof(funname));
         if (!*funname) {
             strcpy(funname, "");
         }
-        Q_strncpyz(model, Info_ValueForKey(g_botInfos[i], "model"), sizeof(model));
+        strncpyz(model, Info_ValueForKey(g_botInfos[i], "model"), sizeof(model));
         if (!*model) {
             strcpy(model, "visor/default");
         }
-        Q_strncpyz(aifile, Info_ValueForKey(g_botInfos[i], "aifile"), sizeof(aifile));
+        strncpyz(aifile, Info_ValueForKey(g_botInfos[i], "aifile"), sizeof(aifile));
         if (!*aifile) {
             strcpy(aifile, "bots/default_c.c");
         }
@@ -774,7 +774,7 @@ static void G_SpawnBots(char* botList, int baseDelay)
         skill = 5;
     }
 
-    Q_strncpyz(bots, botList, sizeof(bots));
+    strncpyz(bots, botList, sizeof(bots));
     p = &bots[0];
     delay = baseDelay;
     while (*p) {
@@ -905,7 +905,7 @@ void G_InitBots(bool restart)
 
     if (g_gametype.integer == GT_SINGLE_PLAYER) {
         trap_GetServerinfo(serverinfo, sizeof(serverinfo));
-        Q_strncpyz(map, Info_ValueForKey(serverinfo, "mapname"), sizeof(map));
+        strncpyz(map, Info_ValueForKey(serverinfo, "mapname"), sizeof(map));
         arenainfo = G_GetArenaInfoByMap(map);
         if (!arenainfo) {
             return;

@@ -169,7 +169,7 @@ const char* Sys_Basename(char* path)
     while (length > 0 && path[length - 1] != '\\')
         length--;
 
-    Q_strncpyz(base, &path[length], sizeof(base));
+    strncpyz(base, &path[length], sizeof(base));
 
     length = strlen(base) - 1;
 
@@ -185,7 +185,7 @@ const char* Sys_Dirname(char* path)
     static char dir[MAX_OSPATH] = { 0 };
     int length;
 
-    Q_strncpyz(dir, path, sizeof(dir));
+    strncpyz(dir, path, sizeof(dir));
     length = strlen(dir) - 1;
 
     while (length > 0 && dir[length] != '\\')

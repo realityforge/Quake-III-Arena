@@ -1802,7 +1802,7 @@ bot_waypoint_t* BotCreateWayPoint(char* name, vec3_t origin, int areanum)
     }
     botai_freewaypoints = botai_freewaypoints->next;
 
-    Q_strncpyz(wp->name, name, sizeof(wp->name));
+    strncpyz(wp->name, name, sizeof(wp->name));
     VectorCopy(origin, wp->goal.origin);
     VectorCopy(waypointmins, wp->goal.mins);
     VectorCopy(waypointmaxs, wp->goal.maxs);

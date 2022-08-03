@@ -691,7 +691,7 @@ static void CG_RegisterSounds()
     }
 
     // only register the items that the server says we need
-    Q_strncpyz(items, CG_ConfigString(CS_ITEMS), sizeof(items));
+    strncpyz(items, CG_ConfigString(CS_ITEMS), sizeof(items));
 
     for (i = 1; i < bg_numItems; i++) {
         CG_RegisterItemSounds(i);
@@ -992,7 +992,7 @@ static void CG_RegisterGraphics()
     memset(cg_weapons, 0, sizeof(cg_weapons));
 
     // only register the items that the server says we need
-    Q_strncpyz(items, CG_ConfigString(CS_ITEMS), sizeof(items));
+    strncpyz(items, CG_ConfigString(CS_ITEMS), sizeof(items));
 
     for (i = 1; i < bg_numItems; i++) {
         if (items[i] == '1' || cg_buildScript.integer) {
@@ -1135,8 +1135,8 @@ void CG_StartMusic()
 
     // start the background music
     s = (char*)CG_ConfigString(CS_MUSIC);
-    Q_strncpyz(parm1, COM_Parse(&s), sizeof(parm1));
-    Q_strncpyz(parm2, COM_Parse(&s), sizeof(parm2));
+    strncpyz(parm1, COM_Parse(&s), sizeof(parm1));
+    strncpyz(parm2, COM_Parse(&s), sizeof(parm2));
 
     trap_S_StartBackgroundTrack(parm1, parm2);
 }

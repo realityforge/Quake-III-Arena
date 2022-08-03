@@ -1962,7 +1962,7 @@ static bool Item_Multi_HandleKey(itemDef_t* item, int key)
                         char str[8];
 
                         x = strchr(multiPtr->cvarStr[current], 'x') + 1;
-                        Q_strncpyz(str, multiPtr->cvarStr[current], MIN(x - multiPtr->cvarStr[current], sizeof(str)));
+                        strncpyz(str, multiPtr->cvarStr[current], MIN(x - multiPtr->cvarStr[current], sizeof(str)));
                         w = atoi(str);
                         h = atoi(x);
 
@@ -5078,7 +5078,7 @@ static void UI_ResolutionToAspect(const char* resolution, char* aspect, size_t a
 
     // calculate resolution's aspect ratio
     x = strchr(resolution, 'x') + 1;
-    Q_strncpyz(str, resolution, MIN(x - resolution, sizeof(str)));
+    strncpyz(str, resolution, MIN(x - resolution, sizeof(str)));
     w = atoi(str);
     h = atoi(x);
     Com_sprintf(aspect, aspectLength, "%.2f:1", (float)w / (float)h);
@@ -5086,7 +5086,7 @@ static void UI_ResolutionToAspect(const char* resolution, char* aspect, size_t a
     // rename common ratios ("1.33:1" -> "4:3")
     for (i = 0; knownRatios[i][0]; i++) {
         if (!Q_stricmp(aspect, knownRatios[i][0])) {
-            Q_strncpyz(aspect, knownRatios[i][1], aspectLength);
+            strncpyz(aspect, knownRatios[i][1], aspectLength);
             break;
         }
     }

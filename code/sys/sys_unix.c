@@ -429,7 +429,7 @@ static void Sys_AppendToExecBuffer(const char* text)
     if (length > size || execArgc >= COUNT_OF(execArgv))
         return;
 
-    Q_strncpyz(execBufferPointer, text, size);
+    strncpyz(execBufferPointer, text, size);
     execArgv[execArgc++] = execBufferPointer;
 
     execBufferPointer += length;
@@ -718,11 +718,11 @@ char* Sys_ExtractBasedir(char* dir)
     if (0 != strcmp(Sys_Basename(dir), "MacOS")) {
         return dir;
     } else {
-        Q_strncpyz(cwd, Sys_Dirname(dir), MAX_OSPATH);
+        strncpyz(cwd, Sys_Dirname(dir), MAX_OSPATH);
         if (0 != strcmp(Sys_Basename(cwd), "Contents")) {
             return dir;
         } else {
-            Q_strncpyz(cwd, Sys_Dirname(cwd), MAX_OSPATH);
+            strncpyz(cwd, Sys_Dirname(cwd), MAX_OSPATH);
             if (NULL != strstr(Sys_Basename(cwd), ".app")) {
                 strncat(cwd, PATH_SEPARATOR "Contents" PATH_SEPARATOR "Resources", MAX_OSPATH - 1);
                 return cwd;

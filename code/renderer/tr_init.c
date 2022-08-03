@@ -454,7 +454,7 @@ static void R_TakeScreenshot(int x, int y, int width, int height, char* name, bo
     cmd->y = y;
     cmd->width = width;
     cmd->height = height;
-    Q_strncpyz(fileName, name, sizeof(fileName));
+    strncpyz(fileName, name, sizeof(fileName));
     cmd->fileName = fileName;
     cmd->jpeg = jpeg;
 }
@@ -684,7 +684,7 @@ static void R_PrintLongString(const char* string)
 
     p = string;
     while (size > 0) {
-        Q_strncpyz(buffer, p, sizeof(buffer));
+        strncpyz(buffer, p, sizeof(buffer));
         ri.Printf(PRINT_ALL, "%s", buffer);
         p += 1023;
         size -= 1023;

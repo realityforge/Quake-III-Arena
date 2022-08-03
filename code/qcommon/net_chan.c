@@ -578,7 +578,7 @@ int NET_StringToAdr(const char* s, netadr_t* a, netadrtype_t family)
         return 1;
     }
 
-    Q_strncpyz(base, s, sizeof(base));
+    strncpyz(base, s, sizeof(base));
 
     if (*base == '[' || Q_CountChar(base, ':') > 1) {
         // This is an ipv6 address, handle it specially.

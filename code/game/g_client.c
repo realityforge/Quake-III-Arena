@@ -520,7 +520,7 @@ static void ClientCleanName(const char* in, char* out, int outSize)
 
     // don't allow empty names
     if (*out == '\0' || colorlessLen == 0)
-        Q_strncpyz(out, "UnnamedPlayer", outSize);
+        strncpyz(out, "UnnamedPlayer", outSize);
 }
 
 /*
@@ -570,13 +570,13 @@ void ClientUserinfoChanged(int clientNum)
     }
 
     // set name
-    Q_strncpyz(oldname, client->pers.netname, sizeof(oldname));
+    strncpyz(oldname, client->pers.netname, sizeof(oldname));
     s = Info_ValueForKey(userinfo, "name");
     ClientCleanName(s, client->pers.netname, sizeof(client->pers.netname));
 
     if (client->sess.sessionTeam == TEAM_SPECTATOR) {
         if (client->sess.spectatorState == SPECTATOR_SCOREBOARD) {
-            Q_strncpyz(client->pers.netname, "scoreboard", sizeof(client->pers.netname));
+            strncpyz(client->pers.netname, "scoreboard", sizeof(client->pers.netname));
         }
     }
 
@@ -608,11 +608,11 @@ void ClientUserinfoChanged(int clientNum)
 
     // set model
     if (g_gametype.integer >= GT_TEAM) {
-        Q_strncpyz(model, Info_ValueForKey(userinfo, "team_model"), sizeof(model));
-        Q_strncpyz(headModel, Info_ValueForKey(userinfo, "team_headmodel"), sizeof(headModel));
+        strncpyz(model, Info_ValueForKey(userinfo, "team_model"), sizeof(model));
+        strncpyz(headModel, Info_ValueForKey(userinfo, "team_headmodel"), sizeof(headModel));
     } else {
-        Q_strncpyz(model, Info_ValueForKey(userinfo, "model"), sizeof(model));
-        Q_strncpyz(headModel, Info_ValueForKey(userinfo, "headmodel"), sizeof(headModel));
+        strncpyz(model, Info_ValueForKey(userinfo, "model"), sizeof(model));
+        strncpyz(headModel, Info_ValueForKey(userinfo, "headmodel"), sizeof(headModel));
     }
 
     /*	NOTE: all client side now
@@ -672,11 +672,11 @@ void ClientUserinfoChanged(int clientNum)
     teamLeader = client->sess.teamLeader;
 
     // colors
-    Q_strncpyz(c1, Info_ValueForKey(userinfo, "color1"), sizeof(c1));
-    Q_strncpyz(c2, Info_ValueForKey(userinfo, "color2"), sizeof(c2));
+    strncpyz(c1, Info_ValueForKey(userinfo, "color1"), sizeof(c1));
+    strncpyz(c2, Info_ValueForKey(userinfo, "color2"), sizeof(c2));
 
-    Q_strncpyz(redTeam, Info_ValueForKey(userinfo, "g_redteam"), sizeof(redTeam));
-    Q_strncpyz(blueTeam, Info_ValueForKey(userinfo, "g_blueteam"), sizeof(blueTeam));
+    strncpyz(redTeam, Info_ValueForKey(userinfo, "g_redteam"), sizeof(redTeam));
+    strncpyz(blueTeam, Info_ValueForKey(userinfo, "g_blueteam"), sizeof(blueTeam));
 
     // send over a subset of the userinfo keys so other clients can
     // print scoreboards, display models, and play custom sounds

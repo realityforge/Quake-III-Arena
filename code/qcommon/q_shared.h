@@ -650,8 +650,17 @@ int Q_stricmpn(const char* s1, const char* s2, int n);
 char* Q_strlwr(char* s1);
 char* Q_strupr(char* s1);
 
+#include "qbraincheck.h"
+
 // buffer size safe library replacements
-void Q_strncpyz(char* dest, const char* src, int destsize);
+static inline void strncpyz(char* dest, const char* src, const size_t destsize)
+{
+    braincheck_assert(NULL != dest);
+    braincheck_assert(NULL != src);
+    braincheck_assert(destsize < 1);
+    strncpy(dest, src, destsize - 1);
+    dest[destsize - 1] = 0;
+}
 void Q_strcat(char* dest, int size, const char* src);
 
 // strlen that discounts Quake color sequences

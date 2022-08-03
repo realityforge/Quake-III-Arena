@@ -189,7 +189,7 @@ static void UI_CalcPostGameStats()
     bool newHigh = false;
 
     trap_GetConfigString(CS_SERVERINFO, info, sizeof(info));
-    Q_strncpyz(map, Info_ValueForKey(info, "mapname"), sizeof(map));
+    strncpyz(map, Info_ValueForKey(info, "mapname"), sizeof(map));
     game = atoi(Info_ValueForKey(info, "g_gametype"));
 
     // compose file name
@@ -304,9 +304,9 @@ bool UI_ConsoleCommand(int realTime)
             char shader2[MAX_QPATH];
             char shader3[MAX_QPATH];
 
-            Q_strncpyz(shader1, UI_Argv(1), sizeof(shader1));
-            Q_strncpyz(shader2, UI_Argv(2), sizeof(shader2));
-            Q_strncpyz(shader3, UI_Argv(3), sizeof(shader3));
+            strncpyz(shader1, UI_Argv(1), sizeof(shader1));
+            strncpyz(shader2, UI_Argv(2), sizeof(shader2));
+            strncpyz(shader3, UI_Argv(3), sizeof(shader3));
 
             trap_R_RemapShader(shader1, shader2, shader3);
             return true;

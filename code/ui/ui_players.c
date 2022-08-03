@@ -1073,24 +1073,24 @@ bool UI_RegisterClientModelname(playerInfo_t* pi, const char* modelSkinName, con
         return false;
     }
 
-    Q_strncpyz(modelName, modelSkinName, sizeof(modelName));
+    strncpyz(modelName, modelSkinName, sizeof(modelName));
 
     slash = strchr(modelName, '/');
     if (!slash) {
         // modelName did not include a skin name
-        Q_strncpyz(skinName, "default", sizeof(skinName));
+        strncpyz(skinName, "default", sizeof(skinName));
     } else {
-        Q_strncpyz(skinName, slash + 1, sizeof(skinName));
+        strncpyz(skinName, slash + 1, sizeof(skinName));
         *slash = '\0';
     }
 
-    Q_strncpyz(headModelName, headModelSkinName, sizeof(headModelName));
+    strncpyz(headModelName, headModelSkinName, sizeof(headModelName));
     slash = strchr(headModelName, '/');
     if (!slash) {
         // modelName did not include a skin name
-        Q_strncpyz(headSkinName, "default", sizeof(skinName));
+        strncpyz(headSkinName, "default", sizeof(skinName));
     } else {
-        Q_strncpyz(headSkinName, slash + 1, sizeof(skinName));
+        strncpyz(headSkinName, slash + 1, sizeof(skinName));
         *slash = '\0';
     }
 

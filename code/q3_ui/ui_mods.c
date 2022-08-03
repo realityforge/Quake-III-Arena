@@ -82,10 +82,10 @@ static void UI_Mods_MenuEvent(void* ptr, int event)
 static void UI_Mods_ParseInfos(char* modDir, char* modDesc)
 {
     s_mods.fs_gameList[s_mods.list.numitems] = s_mods.fs_gamePtr;
-    Q_strncpyz(s_mods.fs_gamePtr, modDir, 16);
+    strncpyz(s_mods.fs_gamePtr, modDir, 16);
 
     s_mods.descriptionList[s_mods.list.numitems] = s_mods.descriptionPtr;
-    Q_strncpyz(s_mods.descriptionPtr, modDesc, 48);
+    strncpyz(s_mods.descriptionPtr, modDesc, 48);
 
     s_mods.list.itemnames[s_mods.list.numitems] = s_mods.descriptionPtr;
     s_mods.descriptionPtr += strlen(s_mods.descriptionPtr) + 1;

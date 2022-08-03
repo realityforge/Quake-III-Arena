@@ -53,7 +53,7 @@ void GLimp_InitExtraExtensions()
 
     // Determine GLSL version
     char shading_language_version[256];
-    Q_strncpyz(shading_language_version, (char*)glGetString(GL_SHADING_LANGUAGE_VERSION), sizeof(shading_language_version));
+    strncpyz(shading_language_version, (char*)glGetString(GL_SHADING_LANGUAGE_VERSION), sizeof(shading_language_version));
     sscanf(shading_language_version, "%d.%d", &glConfig.glslMajorVersion, &glConfig.glslMinorVersion);
     ri.Printf(PRINT_ALL, "...using GLSL shading_language_version %s\n", shading_language_version);
 

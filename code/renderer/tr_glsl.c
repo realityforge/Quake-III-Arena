@@ -210,7 +210,7 @@ static void GLSL_PrintLog(GLuint programOrShader, glslPrintLog_t type, bool deve
         ri.Printf(printLevel, "%s\n", msgPart);
     } else {
         for (i = 0; i < maxLength; i += 1023) {
-            Q_strncpyz(msgPart, msg + i, sizeof(msgPart));
+            strncpyz(msgPart, msg + i, sizeof(msgPart));
 
             ri.Printf(printLevel, "%s", msgPart);
         }
@@ -404,7 +404,7 @@ static int GLSL_LoadGPUShaderText(const char* name, const char* fallback,
     if (size > destSize) {
         result = 0;
     } else {
-        Q_strncpyz(dest, shaderText, size + 1);
+        strncpyz(dest, shaderText, size + 1);
         result = 1;
     }
 
@@ -453,7 +453,7 @@ static int GLSL_InitGPUShader2(shaderProgram_t* program, const char* name, int a
         ri.Error(ERR_DROP, "GLSL_InitGPUShader2: \"%s\" is too long", name);
     }
 
-    Q_strncpyz(program->name, name, sizeof(program->name));
+    strncpyz(program->name, name, sizeof(program->name));
 
     program->program = glCreateProgram();
     program->attribs = attribs;

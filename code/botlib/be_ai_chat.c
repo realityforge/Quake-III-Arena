@@ -295,7 +295,7 @@ void BotQueueConsoleMessage(int chatstate, int type, char* message)
     m->handle = cs->handle;
     m->time = AAS_Time();
     m->type = type;
-    Q_strncpyz(m->message, message, MAX_MESSAGE_SIZE);
+    strncpyz(m->message, message, MAX_MESSAGE_SIZE);
     m->next = NULL;
     if (cs->lastmessage) {
         cs->lastmessage->next = m;
@@ -320,8 +320,8 @@ int BotNextConsoleMessage(int chatstate, bot_consolemessage_t* cm)
         cm->handle = firstmsg->handle;
         cm->time = firstmsg->time;
         cm->type = firstmsg->type;
-        Q_strncpyz(cm->message, firstmsg->message,
-                   sizeof(cm->message));
+        strncpyz(cm->message, firstmsg->message,
+                 sizeof(cm->message));
 
         /* We omit setting the two pointers in cm because pointer
          * size in the VM differs between the size in the engine on
@@ -1090,7 +1090,7 @@ int BotFindMatch(char* str, bot_match_t* match, unsigned long int context)
     int i;
     bot_matchtemplate_t* ms;
 
-    Q_strncpyz(match->string, str, MAX_MESSAGE_SIZE);
+    strncpyz(match->string, str, MAX_MESSAGE_SIZE);
     // remove any trailing enters
     while (strlen(match->string) && match->string[strlen(match->string) - 1] == '\n') {
         match->string[strlen(match->string) - 1] = '\0';
@@ -1541,7 +1541,7 @@ static bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
                         StripDoubleQuotes(token.string);
                         if (pass && ptr) {
                             chattype = (bot_chattype_t*)ptr;
-                            Q_strncpyz(chattype->name, token.string, MAX_CHATTYPE_NAME);
+                            strncpyz(chattype->name, token.string, MAX_CHATTYPE_NAME);
                             chattype->firstchatmessage = NULL;
                             // add the chat type to the chat
                             chattype->next = chat->types;
@@ -1668,8 +1668,8 @@ int BotLoadChatFile(int chatstate, char* chatfile, char* chatname)
     if (!LibVarGetValue("bot_reloadcharacters")) {
         ichatdata[avail] = GetClearedMemory(sizeof(bot_ichatdata_t));
         ichatdata[avail]->chat = cs->chat;
-        Q_strncpyz(ichatdata[avail]->chatname, chatname, sizeof(ichatdata[avail]->chatname));
-        Q_strncpyz(ichatdata[avail]->filename, chatfile, sizeof(ichatdata[avail]->filename));
+        strncpyz(ichatdata[avail]->chatname, chatname, sizeof(ichatdata[avail]->chatname));
+        strncpyz(ichatdata[avail]->filename, chatfile, sizeof(ichatdata[avail]->filename));
     }
 
     return BLERR_NOERROR;

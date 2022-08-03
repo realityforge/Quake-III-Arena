@@ -32,9 +32,9 @@ static void GetClientState(uiClientState_t* state)
 {
     state->connectPacketCount = clc.connectPacketCount;
     state->connState = clc.state;
-    Q_strncpyz(state->servername, clc.servername, sizeof(state->servername));
-    Q_strncpyz(state->updateInfoString, cls.updateInfoString, sizeof(state->updateInfoString));
-    Q_strncpyz(state->messageString, clc.serverMessage, sizeof(state->messageString));
+    strncpyz(state->servername, clc.servername, sizeof(state->servername));
+    strncpyz(state->updateInfoString, cls.updateInfoString, sizeof(state->updateInfoString));
+    strncpyz(state->messageString, clc.serverMessage, sizeof(state->messageString));
     state->clientNum = cl.snap.ps.clientNum;
 }
 
@@ -133,7 +133,7 @@ static int LAN_AddServer(int source, const char* name, const char* address)
         }
         if (i >= *count) {
             servers[*count].adr = adr;
-            Q_strncpyz(servers[*count].hostName, name, sizeof(servers[*count].hostName));
+            strncpyz(servers[*count].hostName, name, sizeof(servers[*count].hostName));
             servers[*count].visible = true;
             (*count)++;
             return 1;
@@ -202,20 +202,20 @@ static void LAN_GetServerAddressString(int source, int n, char* buf, int buflen)
     switch (source) {
     case AS_LOCAL:
         if (n >= 0 && n < MAX_OTHER_SERVERS) {
-            Q_strncpyz(buf, NET_AdrToStringwPort(cls.localServers[n].adr), buflen);
+            strncpyz(buf, NET_AdrToStringwPort(cls.localServers[n].adr), buflen);
             return;
         }
         break;
     case AS_MPLAYER:
     case AS_GLOBAL:
         if (n >= 0 && n < MAX_GLOBAL_SERVERS) {
-            Q_strncpyz(buf, NET_AdrToStringwPort(cls.globalServers[n].adr), buflen);
+            strncpyz(buf, NET_AdrToStringwPort(cls.globalServers[n].adr), buflen);
             return;
         }
         break;
     case AS_FAVORITES:
         if (n >= 0 && n < MAX_OTHER_SERVERS) {
-            Q_strncpyz(buf, NET_AdrToStringwPort(cls.favoriteServers[n].adr), buflen);
+            strncpyz(buf, NET_AdrToStringwPort(cls.favoriteServers[n].adr), buflen);
             return;
         }
         break;
@@ -261,7 +261,7 @@ static void LAN_GetServerInfo(int source, int n, char* buf, int buflen)
         Info_SetValueForKey(info, "addr", NET_AdrToStringwPort(server->adr));
         Info_SetValueForKey(info, "g_needpass", va("%i", server->g_needpass));
         Info_SetValueForKey(info, "g_humanplayers", va("%i", server->g_humanplayers));
-        Q_strncpyz(buf, info, buflen);
+        strncpyz(buf, info, buflen);
     } else {
         if (buf) {
             buf[0] = '\0';
@@ -503,14 +503,14 @@ static void CL_GetClipboardData(char* buf, int buflen)
         return;
     }
 
-    Q_strncpyz(buf, cbd, buflen);
+    strncpyz(buf, cbd, buflen);
 
     Z_Free(cbd);
 }
 
 static void Key_KeynumToStringBuf(int keynum, char* buf, int buflen)
 {
-    Q_strncpyz(buf, Key_KeynumToString(keynum), buflen);
+    strncpyz(buf, Key_KeynumToString(keynum), buflen);
 }
 
 static void Key_GetBindingBuf(int keynum, char* buf, int buflen)
@@ -519,7 +519,7 @@ static void Key_GetBindingBuf(int keynum, char* buf, int buflen)
 
     value = Key_GetBinding(keynum);
     if (value) {
-        Q_strncpyz(buf, value, buflen);
+        strncpyz(buf, value, buflen);
     } else {
         *buf = 0;
     }
@@ -540,7 +540,7 @@ static int GetConfigString(int index, char* buf, int size)
         return false;
     }
 
-    Q_strncpyz(buf, cl.gameState.stringData + offset, size);
+    strncpyz(buf, cl.gameState.stringData + offset, size);
 
     return true;
 }

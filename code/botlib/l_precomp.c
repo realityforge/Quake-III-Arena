@@ -564,12 +564,12 @@ static int PC_Directive_include(source_t* source)
         PC_ConvertPath(token.string);
         script = LoadScriptFile(token.string);
         if (!script) {
-            Q_strncpyz(path, source->includepath, sizeof(path));
+            strncpyz(path, source->includepath, sizeof(path));
             Q_strcat(path, sizeof(path), token.string);
             script = LoadScriptFile(path);
         }
     } else if (token.type == TT_PUNCTUATION && *token.string == '<') {
-        Q_strncpyz(path, source->includepath, sizeof(path));
+        strncpyz(path, source->includepath, sizeof(path));
         while (PC_ReadSourceToken(source, &token)) {
             if (token.linescrossed > 0) {
                 PC_UnreadSourceToken(source, &token);
@@ -788,7 +788,7 @@ static define_t* PC_DefineFromString(const char* string)
     script = LoadScriptMemory(string, strlen(string), "*extern");
     // create a new source
     memset(&src, 0, sizeof(source_t));
-    Q_strncpyz(src.filename, "*extern", sizeof(src.filename));
+    strncpyz(src.filename, "*extern", sizeof(src.filename));
     src.scriptstack = script;
     src.definehash = GetClearedMemory(DEFINEHASHSIZE * sizeof(define_t*));
     // create a define from the source
@@ -2004,7 +2004,7 @@ source_t* LoadSourceFile(const char* filename)
     source = (source_t*)GetMemory(sizeof(source_t));
     memset(source, 0, sizeof(source_t));
 
-    Q_strncpyz(source->filename, filename, sizeof(source->filename));
+    strncpyz(source->filename, filename, sizeof(source->filename));
     source->scriptstack = script;
     source->tokens = NULL;
     source->defines = NULL;

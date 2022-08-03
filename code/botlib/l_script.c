@@ -601,7 +601,7 @@ static int PS_ReadPunctuation(script_t* script, token_t* token)
         if (script->script_p + len <= script->end_p) {
             // if the script contains the punctuation
             if (!strncmp(script->script_p, p, len)) {
-                Q_strncpyz(token->string, p, MAX_TOKEN);
+                strncpyz(token->string, p, MAX_TOKEN);
                 script->script_p += len;
                 token->type = TT_PUNCTUATION;
                 // sub type is the number of the punctuation
@@ -795,7 +795,7 @@ script_t* LoadScriptFile(const char* filename)
     buffer = GetClearedMemory(sizeof(script_t) + length + 1);
     script = (script_t*)buffer;
     memset(script, 0, sizeof(script_t));
-    Q_strncpyz(script->filename, filename, sizeof(script->filename));
+    strncpyz(script->filename, filename, sizeof(script->filename));
     script->buffer = (char*)buffer + sizeof(script_t);
     script->buffer[length] = 0;
     script->length = length;
@@ -821,7 +821,7 @@ script_t* LoadScriptMemory(const char* ptr, const int length, const char* name)
     buffer = GetClearedMemory(sizeof(script_t) + length + 1);
     script = (script_t*)buffer;
     memset(script, 0, sizeof(script_t));
-    Q_strncpyz(script->filename, name, sizeof(script->filename));
+    strncpyz(script->filename, name, sizeof(script->filename));
     script->buffer = (char*)buffer + sizeof(script_t);
     script->buffer[length] = 0;
     script->length = length;

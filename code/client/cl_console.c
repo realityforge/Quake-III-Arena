@@ -174,7 +174,7 @@ void Con_Dump_f(void)
         return;
     }
 
-    Q_strncpyz(filename, Cmd_Argv(1), sizeof(filename));
+    strncpyz(filename, Cmd_Argv(1), sizeof(filename));
     COM_DefaultExtension(filename, sizeof(filename), ".txt");
 
     if (!COM_CompareExtension(filename, ".txt")) {

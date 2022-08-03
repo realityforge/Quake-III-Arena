@@ -603,9 +603,9 @@ static void CG_LoadClientInfo(int clientNum, clientInfo_t* ci)
 #ifdef MISSIONPACK
     if (cgs.gametype >= GT_TEAM) {
         if (ci->team == TEAM_BLUE) {
-            Q_strncpyz(teamname, cg_blueTeamName.string, sizeof(teamname));
+            strncpyz(teamname, cg_blueTeamName.string, sizeof(teamname));
         } else {
-            Q_strncpyz(teamname, cg_redTeamName.string, sizeof(teamname));
+            strncpyz(teamname, cg_redTeamName.string, sizeof(teamname));
         }
     }
     if (teamname[0]) {
@@ -622,9 +622,9 @@ static void CG_LoadClientInfo(int clientNum, clientInfo_t* ci)
         if (cgs.gametype >= GT_TEAM) {
             // keep skin name
             if (ci->team == TEAM_BLUE) {
-                Q_strncpyz(teamname, DEFAULT_BLUETEAM_NAME, sizeof(teamname));
+                strncpyz(teamname, DEFAULT_BLUETEAM_NAME, sizeof(teamname));
             } else {
-                Q_strncpyz(teamname, DEFAULT_REDTEAM_NAME, sizeof(teamname));
+                strncpyz(teamname, DEFAULT_REDTEAM_NAME, sizeof(teamname));
             }
             if (!CG_RegisterClientModelname(ci, DEFAULT_TEAM_MODEL, ci->skinName, DEFAULT_TEAM_HEAD, ci->skinName, teamname)) {
                 CG_Error("DEFAULT_TEAM_MODEL / skin (%s/%s) failed to register", DEFAULT_TEAM_MODEL, ci->skinName);
@@ -824,7 +824,7 @@ void CG_NewClientInfo(int clientNum)
 
     // isolate the player's name
     v = Info_ValueForKey(configstring, "n");
-    Q_strncpyz(newInfo.name, v, sizeof(newInfo.name));
+    strncpyz(newInfo.name, v, sizeof(newInfo.name));
 
     // colors
     v = Info_ValueForKey(configstring, "c1");
@@ -872,10 +872,10 @@ void CG_NewClientInfo(int clientNum)
     newInfo.teamLeader = atoi(v);
 
     v = Info_ValueForKey(configstring, "g_redteam");
-    Q_strncpyz(newInfo.redTeam, v, MAX_TEAMNAME);
+    strncpyz(newInfo.redTeam, v, MAX_TEAMNAME);
 
     v = Info_ValueForKey(configstring, "g_blueteam");
-    Q_strncpyz(newInfo.blueTeam, v, MAX_TEAMNAME);
+    strncpyz(newInfo.blueTeam, v, MAX_TEAMNAME);
 
     // model
     v = Info_ValueForKey(configstring, "model");
@@ -886,8 +886,8 @@ void CG_NewClientInfo(int clientNum)
         char* skin;
 
         if (cgs.gametype >= GT_TEAM) {
-            Q_strncpyz(newInfo.modelName, DEFAULT_TEAM_MODEL, sizeof(newInfo.modelName));
-            Q_strncpyz(newInfo.skinName, "default", sizeof(newInfo.skinName));
+            strncpyz(newInfo.modelName, DEFAULT_TEAM_MODEL, sizeof(newInfo.modelName));
+            strncpyz(newInfo.skinName, "default", sizeof(newInfo.skinName));
         } else {
             trap_Cvar_VariableStringBuffer("model", modelStr, sizeof(modelStr));
             if ((skin = strchr(modelStr, '/')) == NULL) {
@@ -896,26 +896,26 @@ void CG_NewClientInfo(int clientNum)
                 *skin++ = 0;
             }
 
-            Q_strncpyz(newInfo.skinName, skin, sizeof(newInfo.skinName));
-            Q_strncpyz(newInfo.modelName, modelStr, sizeof(newInfo.modelName));
+            strncpyz(newInfo.skinName, skin, sizeof(newInfo.skinName));
+            strncpyz(newInfo.modelName, modelStr, sizeof(newInfo.modelName));
         }
 
         if (cgs.gametype >= GT_TEAM) {
             // keep skin name
             slash = strchr(v, '/');
             if (slash) {
-                Q_strncpyz(newInfo.skinName, slash + 1, sizeof(newInfo.skinName));
+                strncpyz(newInfo.skinName, slash + 1, sizeof(newInfo.skinName));
             }
         }
     } else {
-        Q_strncpyz(newInfo.modelName, v, sizeof(newInfo.modelName));
+        strncpyz(newInfo.modelName, v, sizeof(newInfo.modelName));
 
         slash = strchr(newInfo.modelName, '/');
         if (!slash) {
             // modelName didn not include a skin name
-            Q_strncpyz(newInfo.skinName, "default", sizeof(newInfo.skinName));
+            strncpyz(newInfo.skinName, "default", sizeof(newInfo.skinName));
         } else {
-            Q_strncpyz(newInfo.skinName, slash + 1, sizeof(newInfo.skinName));
+            strncpyz(newInfo.skinName, slash + 1, sizeof(newInfo.skinName));
             // truncate modelName
             *slash = 0;
         }
@@ -930,8 +930,8 @@ void CG_NewClientInfo(int clientNum)
         char* skin;
 
         if (cgs.gametype >= GT_TEAM) {
-            Q_strncpyz(newInfo.headModelName, DEFAULT_TEAM_HEAD, sizeof(newInfo.headModelName));
-            Q_strncpyz(newInfo.headSkinName, "default", sizeof(newInfo.headSkinName));
+            strncpyz(newInfo.headModelName, DEFAULT_TEAM_HEAD, sizeof(newInfo.headModelName));
+            strncpyz(newInfo.headSkinName, "default", sizeof(newInfo.headSkinName));
         } else {
             trap_Cvar_VariableStringBuffer("headmodel", modelStr, sizeof(modelStr));
             if ((skin = strchr(modelStr, '/')) == NULL) {
@@ -940,26 +940,26 @@ void CG_NewClientInfo(int clientNum)
                 *skin++ = 0;
             }
 
-            Q_strncpyz(newInfo.headSkinName, skin, sizeof(newInfo.headSkinName));
-            Q_strncpyz(newInfo.headModelName, modelStr, sizeof(newInfo.headModelName));
+            strncpyz(newInfo.headSkinName, skin, sizeof(newInfo.headSkinName));
+            strncpyz(newInfo.headModelName, modelStr, sizeof(newInfo.headModelName));
         }
 
         if (cgs.gametype >= GT_TEAM) {
             // keep skin name
             slash = strchr(v, '/');
             if (slash) {
-                Q_strncpyz(newInfo.headSkinName, slash + 1, sizeof(newInfo.headSkinName));
+                strncpyz(newInfo.headSkinName, slash + 1, sizeof(newInfo.headSkinName));
             }
         }
     } else {
-        Q_strncpyz(newInfo.headModelName, v, sizeof(newInfo.headModelName));
+        strncpyz(newInfo.headModelName, v, sizeof(newInfo.headModelName));
 
         slash = strchr(newInfo.headModelName, '/');
         if (!slash) {
             // modelName didn not include a skin name
-            Q_strncpyz(newInfo.headSkinName, "default", sizeof(newInfo.headSkinName));
+            strncpyz(newInfo.headSkinName, "default", sizeof(newInfo.headSkinName));
         } else {
-            Q_strncpyz(newInfo.headSkinName, slash + 1, sizeof(newInfo.headSkinName));
+            strncpyz(newInfo.headSkinName, slash + 1, sizeof(newInfo.headSkinName));
             // truncate modelName
             *slash = 0;
         }

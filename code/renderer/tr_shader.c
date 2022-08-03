@@ -2403,7 +2403,7 @@ static void InitShader(const char* name, int lightmapIndex)
     memset(&shader, 0, sizeof(shader));
     memset(&stages, 0, sizeof(stages));
 
-    Q_strncpyz(shader.name, name, sizeof(shader.name));
+    strncpyz(shader.name, name, sizeof(shader.name));
     shader.lightmapIndex = lightmapIndex;
 
     for (i = 0; i < MAX_SHADER_STAGES; i++) {
@@ -3158,7 +3158,7 @@ static void ScanAndLoadShaderFiles()
             if (!*token)
                 break;
 
-            Q_strncpyz(shaderName, token, sizeof(shaderName));
+            strncpyz(shaderName, token, sizeof(shaderName));
             shaderLine = COM_GetCurrentParseLine();
 
             token = COM_ParseExt(&p, true);
@@ -3266,7 +3266,7 @@ static void CreateInternalShaders()
     tr.defaultShader = FinishShader();
 
     // shadow shader is just a marker
-    Q_strncpyz(shader.name, "<stencil shadow>", sizeof(shader.name));
+    strncpyz(shader.name, "<stencil shadow>", sizeof(shader.name));
     shader.sort = SS_STENCIL_SHADOW;
     tr.shadowShader = FinishShader();
 }

@@ -157,7 +157,7 @@ static void StartServer_Update()
             break;
 
         info = UI_GetArenaInfoByNumber(s_startserver.maplist[top + i]);
-        Q_strncpyz(mapname, Info_ValueForKey(info, "map"), MAX_NAMELENGTH);
+        strncpyz(mapname, Info_ValueForKey(info, "map"), MAX_NAMELENGTH);
         Q_strupr(mapname);
 
         Com_sprintf(picname[i], sizeof(picname[i]), "levelshots/%s", mapname);
@@ -198,7 +198,7 @@ static void StartServer_Update()
 
         // set the map name
         info = UI_GetArenaInfoByNumber(s_startserver.maplist[s_startserver.currentmap]);
-        Q_strncpyz(s_startserver.mapname.string, Info_ValueForKey(info, "map"), MAX_NAMELENGTH);
+        strncpyz(s_startserver.mapname.string, Info_ValueForKey(info, "map"), MAX_NAMELENGTH);
     }
 
     Q_strupr(s_startserver.mapname.string);
@@ -327,7 +327,7 @@ static void StartServer_LevelshotDraw(void* self)
     n = s_startserver.page * MAX_MAPSPERPAGE + b->generic.id - ID_PICTURES;
 
     info = UI_GetArenaInfoByNumber(s_startserver.maplist[n]);
-    Q_strncpyz(mapname, Info_ValueForKey(info, "map"), MAX_NAMELENGTH);
+    strncpyz(mapname, Info_ValueForKey(info, "map"), MAX_NAMELENGTH);
     Q_strupr(mapname);
     UI_DrawString(x, y, mapname, UI_CENTER | UI_SMALLFONT, color_orange);
 
@@ -529,7 +529,7 @@ void StartServer_Cache()
     if (precache) {
         for (i = 0; i < UI_GetNumArenas(); i++) {
             info = UI_GetArenaInfoByNumber(i);
-            Q_strncpyz(mapname, Info_ValueForKey(info, "map"), MAX_NAMELENGTH);
+            strncpyz(mapname, Info_ValueForKey(info, "map"), MAX_NAMELENGTH);
             Q_strupr(mapname);
 
             Com_sprintf(picname, sizeof(picname), "levelshots/%s", mapname);
@@ -895,7 +895,7 @@ static void ServerOptions_LevelshotDraw(void* self)
 
     // strange place for this, but it works
     if (s_serveroptions.newBot) {
-        Q_strncpyz(s_serveroptions.playerNameBuffers[s_serveroptions.newBotIndex], s_serveroptions.newBotName, 16);
+        strncpyz(s_serveroptions.playerNameBuffers[s_serveroptions.newBotIndex], s_serveroptions.newBotName, 16);
         s_serveroptions.newBot = false;
     }
 
@@ -926,21 +926,21 @@ static void ServerOptions_InitBotNames()
     char bots[MAX_INFO_STRING];
 
     if (s_serveroptions.gametype >= GT_TEAM) {
-        Q_strncpyz(s_serveroptions.playerNameBuffers[1], "grunt", 16);
-        Q_strncpyz(s_serveroptions.playerNameBuffers[2], "major", 16);
+        strncpyz(s_serveroptions.playerNameBuffers[1], "grunt", 16);
+        strncpyz(s_serveroptions.playerNameBuffers[2], "major", 16);
         if (s_serveroptions.gametype == GT_TEAM) {
-            Q_strncpyz(s_serveroptions.playerNameBuffers[3], "visor", 16);
+            strncpyz(s_serveroptions.playerNameBuffers[3], "visor", 16);
         } else {
             s_serveroptions.playerType[3].curvalue = 2;
         }
         s_serveroptions.playerType[4].curvalue = 2;
         s_serveroptions.playerType[5].curvalue = 2;
 
-        Q_strncpyz(s_serveroptions.playerNameBuffers[6], "sarge", 16);
-        Q_strncpyz(s_serveroptions.playerNameBuffers[7], "grunt", 16);
-        Q_strncpyz(s_serveroptions.playerNameBuffers[8], "major", 16);
+        strncpyz(s_serveroptions.playerNameBuffers[6], "sarge", 16);
+        strncpyz(s_serveroptions.playerNameBuffers[7], "grunt", 16);
+        strncpyz(s_serveroptions.playerNameBuffers[8], "major", 16);
         if (s_serveroptions.gametype == GT_TEAM) {
-            Q_strncpyz(s_serveroptions.playerNameBuffers[9], "visor", 16);
+            strncpyz(s_serveroptions.playerNameBuffers[9], "visor", 16);
         } else {
             s_serveroptions.playerType[9].curvalue = 2;
         }
@@ -956,7 +956,7 @@ static void ServerOptions_InitBotNames()
     arenaInfo = UI_GetArenaInfoByMap(s_serveroptions.mapnamebuffer);
 
     // get the bot info - we'll seed with them if any are listed
-    Q_strncpyz(bots, Info_ValueForKey(arenaInfo, "bots"), sizeof(bots));
+    strncpyz(bots, Info_ValueForKey(arenaInfo, "bots"), sizeof(bots));
     p = &bots[0];
     while (*p && count < PLAYER_SLOTS) {
         // skip spaces
@@ -984,7 +984,7 @@ static void ServerOptions_InitBotNames()
         }
         bot = Info_ValueForKey(botInfo, "name");
 
-        Q_strncpyz(s_serveroptions.playerNameBuffers[count], bot, sizeof(s_serveroptions.playerNameBuffers[count]));
+        strncpyz(s_serveroptions.playerNameBuffers[count], bot, sizeof(s_serveroptions.playerNameBuffers[count]));
         count++;
     }
 
@@ -1037,12 +1037,12 @@ static void ServerOptions_SetMenuItems()
         break;
     }
 
-    Q_strncpyz(s_serveroptions.hostname.field.buffer, UI_Cvar_VariableString("sv_hostname"), sizeof(s_serveroptions.hostname.field.buffer));
+    strncpyz(s_serveroptions.hostname.field.buffer, UI_Cvar_VariableString("sv_hostname"), sizeof(s_serveroptions.hostname.field.buffer));
     s_serveroptions.pure.curvalue = Com_Clamp(0, 1, trap_Cvar_VariableValue("sv_pure"));
 
     // set the map pic
     info = UI_GetArenaInfoByNumber(s_startserver.maplist[s_startserver.currentmap]);
-    Q_strncpyz(mapname, Info_ValueForKey(info, "map"), MAX_NAMELENGTH);
+    strncpyz(mapname, Info_ValueForKey(info, "map"), MAX_NAMELENGTH);
     Q_strupr(mapname);
     Com_sprintf(picname, 64, "levelshots/%s", mapname);
     s_serveroptions.mappic.generic.name = picname;
@@ -1433,7 +1433,7 @@ static void ServerPlayerIcon(const char* modelAndSkin, char* iconName, int iconN
     char* skin;
     char model[MAX_QPATH];
 
-    Q_strncpyz(model, modelAndSkin, sizeof(model));
+    strncpyz(model, modelAndSkin, sizeof(model));
     skin = strrchr(model, '/');
     if (skin) {
         *skin++ = '\0';
@@ -1459,7 +1459,7 @@ static void UI_BotSelectMenu_UpdateGrid()
         if (j < botSelectInfo.numBots) {
             info = UI_GetBotInfoByNumber(botSelectInfo.sortedBotNums[j]);
             ServerPlayerIcon(Info_ValueForKey(info, "model"), botSelectInfo.boticons[i], MAX_QPATH);
-            Q_strncpyz(botSelectInfo.botnames[i], Info_ValueForKey(info, "name"), 16);
+            strncpyz(botSelectInfo.botnames[i], Info_ValueForKey(info, "name"), 16);
             Q_CleanStr(botSelectInfo.botnames[i]);
             botSelectInfo.pics[i].generic.name = botSelectInfo.boticons[i];
             if (BotAlreadySelected(botSelectInfo.botnames[i])) {
@@ -1596,7 +1596,7 @@ static void UI_BotSelectMenu_SelectEvent(void* ptr, int event)
     UI_PopMenu();
 
     s_serveroptions.newBot = true;
-    Q_strncpyz(s_serveroptions.newBotName, botSelectInfo.botnames[botSelectInfo.selectedmodel % MAX_MODELSPERPAGE], 16);
+    strncpyz(s_serveroptions.newBotName, botSelectInfo.botnames[botSelectInfo.selectedmodel % MAX_MODELSPERPAGE], 16);
 }
 
 void UI_BotSelectMenu_Cache()

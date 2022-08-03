@@ -600,7 +600,7 @@ void Console_Key(int key)
         if (clc.state != CA_ACTIVE && con_autochat->integer && g_consoleField.buffer[0] && g_consoleField.buffer[0] != '\\' && g_consoleField.buffer[0] != '/') {
             char temp[MAX_EDIT_LINE - 1];
 
-            Q_strncpyz(temp, g_consoleField.buffer, sizeof(temp));
+            strncpyz(temp, g_consoleField.buffer, sizeof(temp));
             Com_sprintf(g_consoleField.buffer, sizeof(g_consoleField.buffer), "\\%s", temp);
             g_consoleField.cursor++;
         }
@@ -1096,7 +1096,7 @@ void CL_ParseBinding(int key, bool down, unsigned time)
         return;
     if (!keys[key].binding || !keys[key].binding[0])
         return;
-    Q_strncpyz(buf, keys[key].binding, sizeof(buf));
+    strncpyz(buf, keys[key].binding, sizeof(buf));
 
     // run all bind commands if console, ui, etc aren't reading keys
     allCommands = (Key_GetCatcher() == 0);

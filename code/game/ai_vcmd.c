@@ -440,7 +440,7 @@ int BotVoiceChatCommand(bot_state_t* bs, int mode, char* voiceChat)
         return false; // don't do anything with voice chats to everyone
     }
 
-    Q_strncpyz(buf, voiceChat, sizeof(buf));
+    strncpyz(buf, voiceChat, sizeof(buf));
     cmd = buf;
     for (; *cmd && *cmd > ' '; cmd++)
         ;

@@ -115,7 +115,7 @@ vao_t* R_CreateVao(const char* name, uint8_t* vertexes, int vertexesSize, uint8_
 
     memset(vao, 0, sizeof(*vao));
 
-    Q_strncpyz(vao->name, name, sizeof(vao->name));
+    strncpyz(vao->name, name, sizeof(vao->name));
 
     if (glConfig.vertexArrayObject) {
         glGenVertexArrays(1, &vao->vao);

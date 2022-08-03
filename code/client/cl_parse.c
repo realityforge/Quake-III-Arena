@@ -415,9 +415,9 @@ static void CL_ParseServerInfo(void)
 
     clc.sv_allowDownload = atoi(Info_ValueForKey(serverInfo,
                                                  "sv_allowDownload"));
-    Q_strncpyz(clc.sv_dlURL,
-               Info_ValueForKey(serverInfo, "sv_dlURL"),
-               sizeof(clc.sv_dlURL));
+    strncpyz(clc.sv_dlURL,
+             Info_ValueForKey(serverInfo, "sv_dlURL"),
+             sizeof(clc.sv_dlURL));
 }
 
 void CL_ParseGamestate(msg_t* msg)
@@ -500,7 +500,7 @@ void CL_ParseGamestate(msg_t* msg)
     // reinitialize the filesystem if the game directory has changed
     if (!cl_oldGameSet && (Cvar_Flags("fs_game") & CVAR_MODIFIED)) {
         cl_oldGameSet = true;
-        Q_strncpyz(cl_oldGame, oldGame, sizeof(cl_oldGame));
+        strncpyz(cl_oldGame, oldGame, sizeof(cl_oldGame));
     }
 
     FS_ConditionalRestart(clc.checksumFeed, false);
@@ -790,7 +790,7 @@ void CL_ParseCommandString(msg_t* msg)
     clc.serverCommandSequence = seq;
 
     index = seq & (MAX_RELIABLE_COMMANDS - 1);
-    Q_strncpyz(clc.serverCommands[index], s, sizeof(clc.serverCommands[index]));
+    strncpyz(clc.serverCommands[index], s, sizeof(clc.serverCommands[index]));
 }
 
 void CL_ParseServerMessage(msg_t* msg)

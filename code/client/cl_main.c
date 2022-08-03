@@ -485,8 +485,8 @@ void CL_AddReliableCommand(const char* cmd, bool isDisconnectCmd)
             Com_Error(ERR_DROP, "Client command overflow");
     }
 
-    Q_strncpyz(clc.reliableCommands[++clc.reliableSequence & (MAX_RELIABLE_COMMANDS - 1)],
-               cmd, sizeof(*clc.reliableCommands));
+    strncpyz(clc.reliableCommands[++clc.reliableSequence & (MAX_RELIABLE_COMMANDS - 1)],
+             cmd, sizeof(*clc.reliableCommands));
 }
 
 /*
@@ -615,7 +615,7 @@ void CL_Record_f(void)
 
     if (Cmd_Argc() == 2) {
         s = Cmd_Argv(1);
-        Q_strncpyz(demoName, s, sizeof(demoName));
+        strncpyz(demoName, s, sizeof(demoName));
         Com_sprintf(name, sizeof(name), "demos/%s.%s%d", demoName, DEMOEXT, PROTOCOL_VERSION);
     } else {
         int number;
@@ -645,7 +645,7 @@ void CL_Record_f(void)
         clc.spDemoRecording = false;
     }
 
-    Q_strncpyz(clc.demoName, demoName, sizeof(clc.demoName));
+    strncpyz(clc.demoName, demoName, sizeof(clc.demoName));
 
     // don't start saving messages until a non-delta compressed message is received
     clc.demowaiting = true;
@@ -911,7 +911,7 @@ void CL_PlayDemo_f(void)
     Cvar_Set("sv_killserver", "2");
 
     // open the demo file
-    Q_strncpyz(arg, Cmd_Argv(1), sizeof(arg));
+    strncpyz(arg, Cmd_Argv(1), sizeof(arg));
 
     CL_Disconnect(true);
 
@@ -938,7 +938,7 @@ void CL_PlayDemo_f(void)
             if (len >= COUNT_OF(retry))
                 len = COUNT_OF(retry) - 1;
 
-            Q_strncpyz(retry, arg, len + 1);
+            strncpyz(retry, arg, len + 1);
             retry[len] = '\0';
             protocol = CL_WalkDemoExt(retry, name, &clc.demofile);
         }
@@ -949,13 +949,13 @@ void CL_PlayDemo_f(void)
         Com_Error(ERR_DROP, "couldn't open %s", name);
         return;
     }
-    Q_strncpyz(clc.demoName, arg, sizeof(clc.demoName));
+    strncpyz(clc.demoName, arg, sizeof(clc.demoName));
 
     Con_Close();
 
     clc.state = CA_CONNECTED;
     clc.demoplaying = true;
-    Q_strncpyz(clc.servername, arg, sizeof(clc.servername));
+    strncpyz(clc.servername, arg, sizeof(clc.servername));
 
     // read demo messages until connected
     while (clc.state >= CA_CONNECTED && clc.state < CA_PRIMED) {
@@ -978,7 +978,7 @@ void CL_NextDemo(void)
 {
     char v[MAX_STRING_CHARS];
 
-    Q_strncpyz(v, Cvar_VariableString("nextdemo"), sizeof(v));
+    strncpyz(v, Cvar_VariableString("nextdemo"), sizeof(v));
     v[MAX_STRING_CHARS - 1] = 0;
     Com_DPrintf("CL_NextDemo: %s\n", v);
     if (!v[0]) {
@@ -1090,7 +1090,7 @@ void CL_MapLoading(void)
         // clear nextmap so the cinematic shutdown doesn't execute it
         Cvar_Set("nextmap", "");
         CL_Disconnect(true);
-        Q_strncpyz(clc.servername, "localhost", sizeof(clc.servername));
+        strncpyz(clc.servername, "localhost", sizeof(clc.servername));
         clc.state = CA_CHALLENGING; // so the connect screen is drawn
         Key_SetCatcher(0);
         SCR_UpdateScreen();
@@ -1344,7 +1344,7 @@ void CL_Connect_f(void)
     }
 
     if (argc == 2)
-        Q_strncpyz(server, Cmd_Argv(1), sizeof(server));
+        strncpyz(server, Cmd_Argv(1), sizeof(server));
     else {
         if (!strcmp(Cmd_Argv(1), "-4"))
             family = NA_IP;
@@ -1353,11 +1353,11 @@ void CL_Connect_f(void)
         else
             Com_Printf("warning: only -4 or -6 as address type understood.\n");
 
-        Q_strncpyz(server, Cmd_Argv(2), sizeof(server));
+        strncpyz(server, Cmd_Argv(2), sizeof(server));
     }
 
     // save arguments for reconnect
-    Q_strncpyz(cl_reconnectArgs, Cmd_Args(), sizeof(cl_reconnectArgs));
+    strncpyz(cl_reconnectArgs, Cmd_Args(), sizeof(cl_reconnectArgs));
 
     Cvar_Set("ui_singlePlayerActive", "0");
 
@@ -1380,7 +1380,7 @@ void CL_Connect_f(void)
     CL_Disconnect(true);
     Con_Close();
 
-    Q_strncpyz(clc.servername, server, sizeof(clc.servername));
+    strncpyz(clc.servername, server, sizeof(clc.servername));
 
     if (!NET_StringToAdr(clc.servername, &clc.serverAddress, family)) {
         Com_Printf("Bad server address\n");
@@ -1453,7 +1453,7 @@ static void CL_CompletePlayerName(char* args, int argNum)
             name = Info_ValueForKey(info, "n");
             if (name[0] == '\0')
                 continue;
-            Q_strncpyz(names[nameCount], name, sizeof(names[nameCount]));
+            strncpyz(names[nameCount], name, sizeof(names[nameCount]));
             Q_CleanStr(names[nameCount]);
 
             namesPtr[nameCount] = names[nameCount];
@@ -1766,7 +1766,7 @@ void CL_BeginDownload(const char* localName, const char* remoteName)
                 "****************************\n",
                 localName, remoteName);
 
-    Q_strncpyz(clc.downloadName, localName, sizeof(clc.downloadName));
+    strncpyz(clc.downloadName, localName, sizeof(clc.downloadName));
     Com_sprintf(clc.downloadTempName, sizeof(clc.downloadTempName), "%s.tmp", localName);
 
     // Set so UI gets access to it
@@ -1959,7 +1959,7 @@ void CL_CheckForResend(void)
         // sending back the challenge
         port = Cvar_VariableValue("net_qport");
 
-        Q_strncpyz(info, Cvar_InfoString(CVAR_USERINFO), sizeof(info));
+        strncpyz(info, Cvar_InfoString(CVAR_USERINFO), sizeof(info));
 
         Info_SetValueForKey(info, "protocol", va("%i", PROTOCOL_VERSION));
         Info_SetValueForKey(info, "qport", va("%i", port));
@@ -1998,7 +1998,7 @@ void CL_MotdPacket(netadr_t from)
 
     challenge = Info_ValueForKey(info, "motd");
 
-    Q_strncpyz(cls.updateInfoString, info, sizeof(cls.updateInfoString));
+    strncpyz(cls.updateInfoString, info, sizeof(cls.updateInfoString));
     Cvar_Set("cl_motdString", challenge);
 #endif
 }
@@ -2273,7 +2273,7 @@ void CL_ConnectionlessPacket(netadr_t from, msg_t* msg)
         if (NET_CompareAdr(from, clc.serverAddress) || NET_CompareAdr(from, cls.rconAddress)) {
             s = MSG_ReadString(msg);
 
-            Q_strncpyz(clc.serverMessage, s, sizeof(clc.serverMessage));
+            strncpyz(clc.serverMessage, s, sizeof(clc.serverMessage));
             Com_Printf("%s", s);
         }
         return;
@@ -2464,7 +2464,7 @@ void CL_Frame(int msec)
                            now.tm_min,
                            now.tm_sec);
 
-            Q_strncpyz(serverName, clc.servername, MAX_OSPATH);
+            strncpyz(serverName, clc.servername, MAX_OSPATH);
             // Replace the ":" in the address as it is not a valid
             // file name character
             p = strstr(serverName, ":");
@@ -2472,7 +2472,7 @@ void CL_Frame(int msec)
                 *p = '.';
             }
 
-            Q_strncpyz(mapName, COM_SkipPath(cl.mapname), sizeof(cl.mapname));
+            strncpyz(mapName, COM_SkipPath(cl.mapname), sizeof(cl.mapname));
             COM_StripExtension(mapName, mapName, sizeof(mapName));
 
             Cbuf_ExecuteText(EXEC_NOW,
@@ -2809,7 +2809,7 @@ void CL_Sayto_f(void)
     for (i = 0; i < count; i++) {
 
         info = cl.gameState.stringData + cl.gameState.stringOffsets[CS_PLAYERS + i];
-        Q_strncpyz(cleanName, Info_ValueForKey(info, "n"), sizeof(cleanName));
+        strncpyz(cleanName, Info_ValueForKey(info, "n"), sizeof(cleanName));
         Q_CleanStr(cleanName);
 
         if (!Q_stricmp(cleanName, name)) {
@@ -3093,10 +3093,10 @@ static void CL_SetServerInfo(serverInfo_t* server, const char* info, int ping)
     if (server) {
         if (info) {
             server->clients = atoi(Info_ValueForKey(info, "clients"));
-            Q_strncpyz(server->hostName, Info_ValueForKey(info, "hostname"), MAX_NAME_LENGTH);
-            Q_strncpyz(server->mapName, Info_ValueForKey(info, "mapname"), MAX_NAME_LENGTH);
+            strncpyz(server->hostName, Info_ValueForKey(info, "hostname"), MAX_NAME_LENGTH);
+            strncpyz(server->mapName, Info_ValueForKey(info, "mapname"), MAX_NAME_LENGTH);
             server->maxClients = atoi(Info_ValueForKey(info, "sv_maxclients"));
-            Q_strncpyz(server->game, Info_ValueForKey(info, "game"), MAX_NAME_LENGTH);
+            strncpyz(server->game, Info_ValueForKey(info, "game"), MAX_NAME_LENGTH);
             server->gameType = atoi(Info_ValueForKey(info, "gametype"));
             server->netType = atoi(Info_ValueForKey(info, "nettype"));
             server->minPing = atoi(Info_ValueForKey(info, "minping"));
@@ -3168,7 +3168,7 @@ void CL_ServerInfoPacket(netadr_t from, msg_t* msg)
             Com_DPrintf("ping time %dms from %s\n", cl_pinglist[i].time, NET_AdrToString(from));
 
             // save of info
-            Q_strncpyz(cl_pinglist[i].info, infoString, sizeof(cl_pinglist[i].info));
+            strncpyz(cl_pinglist[i].info, infoString, sizeof(cl_pinglist[i].info));
 
             // tack on the net type
             // NOTE: make sure these types are in sync with the netnames strings in the UI
@@ -3217,7 +3217,7 @@ void CL_ServerInfoPacket(netadr_t from, msg_t* msg)
     cls.numlocalservers = i + 1;
     CL_InitServerInfo(&cls.localServers[i], &from);
 
-    Q_strncpyz(info, MSG_ReadString(msg), MAX_INFO_STRING);
+    strncpyz(info, MSG_ReadString(msg), MAX_INFO_STRING);
     if (strlen(info)) {
         if (info[strlen(info) - 1] != '\n') {
             Q_strcat(info, sizeof(info), "\n");
@@ -3280,7 +3280,7 @@ int CL_ServerStatus(char* serverAddress, char* serverStatusString, int maxLen)
     if (NET_CompareAdr(to, serverStatus->address)) {
         // if we received a response for this server status request
         if (!serverStatus->pending) {
-            Q_strncpyz(serverStatusString, serverStatus->string, maxLen);
+            strncpyz(serverStatusString, serverStatus->string, maxLen);
             serverStatus->retrieved = true;
             serverStatus->startTime = 0;
             return true;
@@ -3545,7 +3545,7 @@ void CL_GetPing(int n, char* buf, int buflen, int* pingtime)
     }
 
     str = NET_AdrToStringwPort(cl_pinglist[n].adr);
-    Q_strncpyz(buf, str, buflen);
+    strncpyz(buf, str, buflen);
 
     time = cl_pinglist[n].time;
     if (!time) {
@@ -3575,7 +3575,7 @@ void CL_GetPingInfo(int n, char* buf, int buflen)
         return;
     }
 
-    Q_strncpyz(buf, cl_pinglist[n].info, buflen);
+    strncpyz(buf, cl_pinglist[n].info, buflen);
 }
 
 void CL_ClearPing(int n)

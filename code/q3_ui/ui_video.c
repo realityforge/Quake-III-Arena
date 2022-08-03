@@ -163,7 +163,7 @@ static void UI_DriverInfo_Menu()
     // https://zerowing.idsoftware.com/bugzilla/show_bug.cgi?id=399
     // NOTE: could have pushed the size of stringbuff, but the list is already out of the screen
     // (no matter what your resolution)
-    Q_strncpyz(s_driverinfo.stringbuff, uis.glconfig.extensions_string, 1024);
+    strncpyz(s_driverinfo.stringbuff, uis.glconfig.extensions_string, 1024);
 
     // build null terminated extension strings
     eptr = s_driverinfo.stringbuff;
@@ -364,7 +364,7 @@ static void GraphicsOptions_GetAspectRatios()
 
         // calculate resolution's aspect ratio
         x = strchr(resolutions[r], 'x') + 1;
-        Q_strncpyz(str, resolutions[r], x - resolutions[r]);
+        strncpyz(str, resolutions[r], x - resolutions[r]);
         w = atoi(str);
         h = atoi(x);
         Com_sprintf(str, sizeof(str), "%.2f:1", (float)w / (float)h);
@@ -372,7 +372,7 @@ static void GraphicsOptions_GetAspectRatios()
         // rename common ratios ("1.33:1" -> "4:3")
         for (i = 0; knownRatios[i][0]; i++) {
             if (!Q_stricmp(str, knownRatios[i][0])) {
-                Q_strncpyz(str, knownRatios[i][1], sizeof(str));
+                strncpyz(str, knownRatios[i][1], sizeof(str));
                 break;
             }
         }
@@ -384,7 +384,7 @@ static void GraphicsOptions_GetAspectRatios()
                 break;
         }
         if (!ratioBuf[i][0]) {
-            Q_strncpyz(ratioBuf[i], str, sizeof(ratioBuf[i]));
+            strncpyz(ratioBuf[i], str, sizeof(ratioBuf[i]));
             ratioToRes[i] = r;
         }
 
@@ -545,9 +545,9 @@ static void GraphicsOptions_ApplyChanges(void* unused, int notification)
         mode = GraphicsOptions_FindBuiltinResolution(s_graphicsoptions.mode.curvalue);
         if (mode == -1) {
             char w[16], h[16];
-            Q_strncpyz(w, detectedResolutions[s_graphicsoptions.mode.curvalue], sizeof(w));
+            strncpyz(w, detectedResolutions[s_graphicsoptions.mode.curvalue], sizeof(w));
             *strchr(w, 'x') = 0;
-            Q_strncpyz(h, strchr(detectedResolutions[s_graphicsoptions.mode.curvalue], 'x') + 1, sizeof(h));
+            strncpyz(h, strchr(detectedResolutions[s_graphicsoptions.mode.curvalue], 'x') + 1, sizeof(h));
             trap_Cvar_Set("r_customwidth", w);
             trap_Cvar_Set("r_customheight", h);
         }

@@ -417,7 +417,7 @@ bool R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_name)
             LL(mesh->num_triangles);
 
             if (mesh->name < header->num_text) {
-                Q_strncpyz(meshName, (char*)header + header->ofs_text + mesh->name, sizeof(meshName));
+                strncpyz(meshName, (char*)header + header->ofs_text + mesh->name, sizeof(meshName));
             } else {
                 meshName[0] = '\0';
             }
@@ -691,7 +691,7 @@ bool R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* mod_name)
         str = (char*)header + header->ofs_text;
         for (i = 0; i < header->num_meshes; i++, mesh++, surface++) {
             surface->surfaceType = SF_IQM;
-            Q_strncpyz(surface->name, str + mesh->name, sizeof(surface->name));
+            strncpyz(surface->name, str + mesh->name, sizeof(surface->name));
             Q_strlwr(surface->name); // lowercase the surface name so skin compares are faster
             surface->shader = R_FindShader(str + mesh->material, LIGHTMAP_NONE, true);
             if (surface->shader->defaultShader)

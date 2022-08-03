@@ -1714,7 +1714,7 @@ static void S_AL_StartBackgroundTrack(const char* intro, const char* loop)
         issame = false;
 
     // Copy the loop over
-    Q_strncpyz(s_backgroundLoop, loop, sizeof(s_backgroundLoop));
+    strncpyz(s_backgroundLoop, loop, sizeof(s_backgroundLoop));
 
     if (!issame) {
         // Open the intro and don't mind whether it succeeds.
