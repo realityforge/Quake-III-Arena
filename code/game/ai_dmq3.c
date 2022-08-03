@@ -52,7 +52,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define IDEAL_ATTACKDIST 140
 
 #define MAX_WAYPOINTS 128
-//
 bot_waypoint_t botai_waypoints[MAX_WAYPOINTS];
 bot_waypoint_t* botai_freewaypoints;
 
