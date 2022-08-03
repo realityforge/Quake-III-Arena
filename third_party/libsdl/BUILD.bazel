@@ -17,11 +17,6 @@ cmake(
     name = "libsdl_impl",
     cache_entries = {"CMAKE_BUILD_TYPE": "Release"},
     lib_source = "@libsdl//:all_srcs",
-    out_shared_libs = select({
-        "@platforms//os:macos": ["libSDL2-2.0.dylib"],
-        "@platforms//os:windows": ["libSDL2-2.0.dll"],
-        "//conditions:default": [],
-    }),
     out_static_libs = select({
         "@platforms//os:macos": [
             "libSDL2.a",
