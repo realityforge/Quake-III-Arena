@@ -698,8 +698,7 @@ static void CM_TraceThroughSphere(traceWork_t* tw, vec3_t origin, float radius, 
 ================
 CM_TraceThroughVerticalCylinder
 
-get the first intersection of the ray with the cylinder
-the cylinder extends halfheight above and below the origin
+get the first intersection of the ray with the cylinder extends halfheight above and below the origin
 ================
 */
 static void CM_TraceThroughVerticalCylinder(traceWork_t* tw, vec3_t origin, float radius, float halfheight, vec3_t start, vec3_t end)
