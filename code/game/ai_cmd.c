@@ -1223,7 +1223,7 @@ static void BotMatch_WhatAreYouDoing(bot_state_t* bs, bot_match_t* match)
     trap_BotEnterChat(bs->cs, client, CHAT_TELL);
 }
 
-static void BotMatch_WhatIsMyCommand(bot_state_t* bs, UNUSED bot_match_t* match)
+static void BotMatch_WhatIsMyCommand(bot_state_t* bs)
 {
     char netname[MAX_NETNAME];
 
@@ -1665,7 +1665,7 @@ int BotMatchMessage(bot_state_t* bs, char* message)
         break;
     }
     case MSG_WHATISMYCOMMAND: {
-        BotMatch_WhatIsMyCommand(bs, &match);
+        BotMatch_WhatIsMyCommand(bs);
         break;
     }
     case MSG_WHEREAREYOU: {
