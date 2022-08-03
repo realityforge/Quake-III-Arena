@@ -79,7 +79,7 @@ static int BotIsFirstInRankings(bot_state_t* bs)
     if (!maxclients)
         maxclients = trap_Cvar_VariableIntegerValue("sv_maxclients");
 
-    score = bs->cur_ps.persistant[PERS_SCORE];
+    score = bs->cur_ps.persistent[PERS_SCORE];
     for (i = 0; i < maxclients && i < MAX_CLIENTS; i++) {
         trap_GetConfigstring(CS_PLAYERS + i, buf, sizeof(buf));
         // if no config string or no name
@@ -89,7 +89,7 @@ static int BotIsFirstInRankings(bot_state_t* bs)
         if (atoi(Info_ValueForKey(buf, "t")) == TEAM_SPECTATOR)
             continue;
         BotAI_GetClientState(i, &ps);
-        if (score < ps.persistant[PERS_SCORE])
+        if (score < ps.persistent[PERS_SCORE])
             return false;
     }
     return true;
@@ -105,7 +105,7 @@ static int BotIsLastInRankings(bot_state_t* bs)
     if (!maxclients)
         maxclients = trap_Cvar_VariableIntegerValue("sv_maxclients");
 
-    score = bs->cur_ps.persistant[PERS_SCORE];
+    score = bs->cur_ps.persistent[PERS_SCORE];
     for (i = 0; i < maxclients && i < MAX_CLIENTS; i++) {
         trap_GetConfigstring(CS_PLAYERS + i, buf, sizeof(buf));
         // if no config string or no name
@@ -115,7 +115,7 @@ static int BotIsLastInRankings(bot_state_t* bs)
         if (atoi(Info_ValueForKey(buf, "t")) == TEAM_SPECTATOR)
             continue;
         BotAI_GetClientState(i, &ps);
-        if (score > ps.persistant[PERS_SCORE])
+        if (score > ps.persistent[PERS_SCORE])
             return false;
     }
     return true;
@@ -143,8 +143,8 @@ static char* BotFirstClientInRankings()
         if (atoi(Info_ValueForKey(buf, "t")) == TEAM_SPECTATOR)
             continue;
         BotAI_GetClientState(i, &ps);
-        if (ps.persistant[PERS_SCORE] > bestscore) {
-            bestscore = ps.persistant[PERS_SCORE];
+        if (ps.persistent[PERS_SCORE] > bestscore) {
+            bestscore = ps.persistent[PERS_SCORE];
             bestclient = i;
         }
     }
@@ -174,8 +174,8 @@ static char* BotLastClientInRankings()
         if (atoi(Info_ValueForKey(buf, "t")) == TEAM_SPECTATOR)
             continue;
         BotAI_GetClientState(i, &ps);
-        if (ps.persistant[PERS_SCORE] < worstscore) {
-            worstscore = ps.persistant[PERS_SCORE];
+        if (ps.persistent[PERS_SCORE] < worstscore) {
+            worstscore = ps.persistent[PERS_SCORE];
             bestclient = i;
         }
     }

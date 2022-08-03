@@ -943,7 +943,7 @@ void MSG_WriteDeltaPlayerstate(msg_t* msg, struct playerState_s* from, struct pl
     int i;
     playerState_t dummy;
     int statsbits;
-    int persistantbits;
+    int persistentbits;
     int ammobits;
     int powerupbits;
     int c;
@@ -1012,10 +1012,10 @@ void MSG_WriteDeltaPlayerstate(msg_t* msg, struct playerState_s* from, struct pl
             statsbits |= 1 << i;
         }
     }
-    persistantbits = 0;
+    persistentbits = 0;
     for (i = 0; i < 16; i++) {
-        if (to->persistant[i] != from->persistant[i]) {
-            persistantbits |= 1 << i;
+        if (to->persistent[i] != from->persistent[i]) {
+            persistentbits |= 1 << i;
         }
     }
     ammobits = 0;
@@ -1031,7 +1031,7 @@ void MSG_WriteDeltaPlayerstate(msg_t* msg, struct playerState_s* from, struct pl
         }
     }
 
-    if (!statsbits && !persistantbits && !ammobits && !powerupbits) {
+    if (!statsbits && !persistentbits && !ammobits && !powerupbits) {
         MSG_WriteBits(msg, 0, 1); // no change
         return;
     }
@@ -1047,12 +1047,12 @@ void MSG_WriteDeltaPlayerstate(msg_t* msg, struct playerState_s* from, struct pl
         MSG_WriteBits(msg, 0, 1); // no change
     }
 
-    if (persistantbits) {
+    if (persistentbits) {
         MSG_WriteBits(msg, 1, 1); // changed
-        MSG_WriteShort(msg, persistantbits);
+        MSG_WriteShort(msg, persistentbits);
         for (i = 0; i < 16; i++)
-            if (persistantbits & (1 << i))
-                MSG_WriteShort(msg, to->persistant[i]);
+            if (persistentbits & (1 << i))
+                MSG_WriteShort(msg, to->persistent[i]);
     } else {
         MSG_WriteBits(msg, 0, 1); // no change
     }
@@ -1173,13 +1173,13 @@ void MSG_ReadDeltaPlayerstate(msg_t* msg, playerState_t* from, playerState_t* to
             }
         }
 
-        // parse persistant stats
+        // parse persistent stats
         if (MSG_ReadBits(msg, 1)) {
             LOG("PS_PERSISTANT");
             bits = MSG_ReadShort(msg);
             for (int i = 0; i < 16; i++) {
                 if (bits & (1 << i)) {
-                    to->persistant[i] = MSG_ReadShort(msg);
+                    to->persistent[i] = MSG_ReadShort(msg);
                 }
             }
         }

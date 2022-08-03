@@ -271,9 +271,9 @@ static void CG_TouchItem(centity_t* cent)
 #else
     if (cgs.gametype == GT_CTF) {
 #endif
-        if (cg.predictedPlayerState.persistant[PERS_TEAM] == TEAM_RED && item->giTag == PW_REDFLAG)
+        if (cg.predictedPlayerState.persistent[PERS_TEAM] == TEAM_RED && item->giTag == PW_REDFLAG)
             return;
-        if (cg.predictedPlayerState.persistant[PERS_TEAM] == TEAM_BLUE && item->giTag == PW_BLUEFLAG)
+        if (cg.predictedPlayerState.persistent[PERS_TEAM] == TEAM_BLUE && item->giTag == PW_BLUEFLAG)
             return;
     }
 
@@ -426,7 +426,7 @@ void CG_PredictPlayerState()
     } else {
         cg_pmove.tracemask = MASK_PLAYERSOLID;
     }
-    if (cg.snap->ps.persistant[PERS_TEAM] == TEAM_SPECTATOR) {
+    if (cg.snap->ps.persistent[PERS_TEAM] == TEAM_SPECTATOR) {
         cg_pmove.tracemask &= ~CONTENTS_BODY; // spectators can fly through bodies
     }
     cg_pmove.noFootsteps = (cgs.dmflags & DF_NO_FOOTSTEPS) > 0;

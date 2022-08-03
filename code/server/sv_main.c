@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "server_local.h"
 #include "qengine.h"
 
-serverStatic_t svs; // persistant server info
+serverStatic_t svs; // persistent server info
 server_t sv; // local server
 vm_t* gvm = NULL; // game virtual machine
 
@@ -290,7 +290,7 @@ static void SVC_Status(netadr_t from)
         if (cl->state >= CS_CONNECTED) {
             ps = SV_GameClientNum(i);
             Com_sprintf(player, sizeof(player), "%i %i \"%s\"\n",
-                        ps->persistant[PERS_SCORE], cl->ping, cl->name);
+                        ps->persistent[PERS_SCORE], cl->ping, cl->name);
             playerLength = strlen(player);
             if (statusLength + playerLength >= sizeof(status)) {
                 break; // can't hold any more

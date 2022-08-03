@@ -86,7 +86,7 @@ bool CheckGauntletAttack(gentity_t* ent)
         s_quadFactor = 1;
     }
 #ifdef MISSIONPACK
-    if (ent->client->persistantPowerup && ent->client->persistantPowerup->item && ent->client->persistantPowerup->item->giTag == PW_DOUBLER) {
+    if (ent->client->persistentPowerup && ent->client->persistentPowerup->item && ent->client->persistentPowerup->item->giTag == PW_DOUBLER) {
         s_quadFactor *= 2;
     }
 #endif
@@ -462,7 +462,7 @@ static void weapon_railgun_fire(gentity_t* ent)
         ent->client->accurateCount += hits;
         if (ent->client->accurateCount >= 2) {
             ent->client->accurateCount -= 2;
-            ent->client->ps.persistant[PERS_IMPRESSIVE_COUNT]++;
+            ent->client->ps.persistent[PERS_IMPRESSIVE_COUNT]++;
             // add the sprite over the player's head
             ent->client->ps.eFlags &= ~(EF_AWARD_IMPRESSIVE | EF_AWARD_EXCELLENT | EF_AWARD_GAUNTLET | EF_AWARD_ASSIST | EF_AWARD_DEFEND | EF_AWARD_CAP);
             ent->client->ps.eFlags |= EF_AWARD_IMPRESSIVE;
@@ -693,7 +693,7 @@ void FireWeapon(gentity_t* ent)
         s_quadFactor = 1;
     }
 #ifdef MISSIONPACK
-    if (ent->client->persistantPowerup && ent->client->persistantPowerup->item && ent->client->persistantPowerup->item->giTag == PW_DOUBLER) {
+    if (ent->client->persistentPowerup && ent->client->persistentPowerup->item && ent->client->persistentPowerup->item->giTag == PW_DOUBLER) {
         s_quadFactor *= 2;
     }
 #endif

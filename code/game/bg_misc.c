@@ -1016,10 +1016,10 @@ bool BG_CanItemBeGrabbed(int gametype, const entityState_t* ent, const playerSta
         }
 
         // check team only
-        if ((ent->generic1 & 2) && (ps->persistant[PERS_TEAM] != TEAM_RED)) {
+        if ((ent->generic1 & 2) && (ps->persistent[PERS_TEAM] != TEAM_RED)) {
             return false;
         }
-        if ((ent->generic1 & 4) && (ps->persistant[PERS_TEAM] != TEAM_BLUE)) {
+        if ((ent->generic1 & 4) && (ps->persistent[PERS_TEAM] != TEAM_BLUE)) {
             return false;
         }
 
@@ -1033,11 +1033,11 @@ bool BG_CanItemBeGrabbed(int gametype, const entityState_t* ent, const playerSta
             if (item->giTag == PW_NEUTRALFLAG) {
                 return true;
             }
-            if (ps->persistant[PERS_TEAM] == TEAM_RED) {
+            if (ps->persistent[PERS_TEAM] == TEAM_RED) {
                 if (item->giTag == PW_BLUEFLAG && ps->powerups[PW_NEUTRALFLAG]) {
                     return true;
                 }
-            } else if (ps->persistant[PERS_TEAM] == TEAM_BLUE) {
+            } else if (ps->persistent[PERS_TEAM] == TEAM_BLUE) {
                 if (item->giTag == PW_REDFLAG && ps->powerups[PW_NEUTRALFLAG]) {
                     return true;
                 }
@@ -1048,10 +1048,10 @@ bool BG_CanItemBeGrabbed(int gametype, const entityState_t* ent, const playerSta
             // ent->modelindex2 is non-zero on items if they are dropped
             // we need to know this because we can pick up our dropped flag (and return it)
             // but we can't pick up our flag at base
-            if (ps->persistant[PERS_TEAM] == TEAM_RED) {
+            if (ps->persistent[PERS_TEAM] == TEAM_RED) {
                 if (item->giTag == PW_BLUEFLAG || (item->giTag == PW_REDFLAG && ent->modelindex2) || (item->giTag == PW_REDFLAG && ps->powerups[PW_BLUEFLAG]))
                     return true;
-            } else if (ps->persistant[PERS_TEAM] == TEAM_BLUE) {
+            } else if (ps->persistent[PERS_TEAM] == TEAM_BLUE) {
                 if (item->giTag == PW_REDFLAG || (item->giTag == PW_BLUEFLAG && ent->modelindex2) || (item->giTag == PW_BLUEFLAG && ps->powerups[PW_REDFLAG]))
                     return true;
             }

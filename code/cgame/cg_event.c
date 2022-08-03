@@ -211,8 +211,8 @@ static void CG_Obituary(entityState_t* ent)
 
         if (cgs.gametype < GT_TEAM) {
             s = va("You fragged %s\n%s place with %i", targetName,
-                   CG_PlaceString(cg.snap->ps.persistant[PERS_RANK] + 1),
-                   cg.snap->ps.persistant[PERS_SCORE]);
+                   CG_PlaceString(cg.snap->ps.persistent[PERS_RANK] + 1),
+                   cg.snap->ps.persistent[PERS_SCORE]);
         } else {
             s = va("You fragged %s", targetName);
         }

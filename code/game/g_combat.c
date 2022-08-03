@@ -54,9 +54,9 @@ void AddScore(gentity_t* ent, vec3_t origin, int score)
     }
     // show score plum
     ScorePlum(ent, origin, score);
-    ent->client->ps.persistant[PERS_SCORE] += score;
+    ent->client->ps.persistent[PERS_SCORE] += score;
     if (g_gametype.integer == GT_TEAM)
-        level.teamScores[ent->client->ps.persistant[PERS_TEAM]] += score;
+        level.teamScores[ent->client->ps.persistent[PERS_TEAM]] += score;
     CalculateRanks();
 }
 
@@ -176,11 +176,11 @@ void TossClientPersistantPowerups(gentity_t* ent)
         return;
     }
 
-    if (!ent->client->persistantPowerup) {
+    if (!ent->client->persistentPowerup) {
         return;
     }
 
-    powerup = ent->client->persistantPowerup;
+    powerup = ent->client->persistentPowerup;
 
     powerup->r.svFlags &= ~SVF_NOCLIENT;
     powerup->s.eFlags &= ~EF_NODRAW;
@@ -188,7 +188,7 @@ void TossClientPersistantPowerups(gentity_t* ent)
     trap_LinkEntity(powerup);
 
     ent->client->ps.stats[STAT_PERSISTANT_POWERUP] = 0;
-    ent->client->persistantPowerup = NULL;
+    ent->client->persistentPowerup = NULL;
 }
 #endif
 
@@ -341,9 +341,9 @@ static void CheckAlmostCapture(gentity_t* self, gentity_t* attacker)
             // if the player was *very* close
             VectorSubtract(self->client->ps.origin, ent->s.origin, dir);
             if (VectorLength(dir) < 200) {
-                self->client->ps.persistant[PERS_PLAYEREVENTS] ^= PLAYEREVENT_HOLYSHIT;
+                self->client->ps.persistent[PERS_PLAYEREVENTS] ^= PLAYEREVENT_HOLYSHIT;
                 if (attacker->client) {
-                    attacker->client->ps.persistant[PERS_PLAYEREVENTS] ^= PLAYEREVENT_HOLYSHIT;
+                    attacker->client->ps.persistent[PERS_PLAYEREVENTS] ^= PLAYEREVENT_HOLYSHIT;
                 }
             }
         }
@@ -369,9 +369,9 @@ static void CheckAlmostScored(gentity_t* self, gentity_t* attacker)
             // if the player was *very* close
             VectorSubtract(self->client->ps.origin, ent->s.origin, dir);
             if (VectorLength(dir) < 200) {
-                self->client->ps.persistant[PERS_PLAYEREVENTS] ^= PLAYEREVENT_HOLYSHIT;
+                self->client->ps.persistent[PERS_PLAYEREVENTS] ^= PLAYEREVENT_HOLYSHIT;
                 if (attacker->client) {
-                    attacker->client->ps.persistant[PERS_PLAYEREVENTS] ^= PLAYEREVENT_HOLYSHIT;
+                    attacker->client->ps.persistent[PERS_PLAYEREVENTS] ^= PLAYEREVENT_HOLYSHIT;
                 }
             }
         }
@@ -448,7 +448,7 @@ void player_die(gentity_t* self, gentity_t* inflictor, gentity_t* attacker, int 
 
     self->enemy = attacker;
 
-    self->client->ps.persistant[PERS_KILLED]++;
+    self->client->ps.persistent[PERS_KILLED]++;
 
     if (attacker && attacker->client) {
         attacker->client->lastkilled_client = self->s.number;
@@ -461,7 +461,7 @@ void player_die(gentity_t* self, gentity_t* inflictor, gentity_t* attacker, int 
             if (meansOfDeath == MOD_GAUNTLET) {
 
                 // play humiliation on player
-                attacker->client->ps.persistant[PERS_GAUNTLET_FRAG_COUNT]++;
+                attacker->client->ps.persistent[PERS_GAUNTLET_FRAG_COUNT]++;
 
                 // add the sprite over the player's head
                 attacker->client->ps.eFlags &= ~(EF_AWARD_IMPRESSIVE | EF_AWARD_EXCELLENT | EF_AWARD_GAUNTLET | EF_AWARD_ASSIST | EF_AWARD_DEFEND | EF_AWARD_CAP);
@@ -469,14 +469,14 @@ void player_die(gentity_t* self, gentity_t* inflictor, gentity_t* attacker, int 
                 attacker->client->rewardTime = level.time + REWARD_SPRITE_TIME;
 
                 // also play humiliation on target
-                self->client->ps.persistant[PERS_PLAYEREVENTS] ^= PLAYEREVENT_GAUNTLETREWARD;
+                self->client->ps.persistent[PERS_PLAYEREVENTS] ^= PLAYEREVENT_GAUNTLETREWARD;
             }
 
             // check for two kills in a short amount of time
             // if this is close enough to the last kill, give a reward sound
             if (level.time - attacker->client->lastKillTime < CARNAGE_REWARD_TIME) {
                 // play excellent on player
-                attacker->client->ps.persistant[PERS_EXCELLENT_COUNT]++;
+                attacker->client->ps.persistent[PERS_EXCELLENT_COUNT]++;
 
                 // add the sprite over the player's head
                 attacker->client->ps.eFlags &= ~(EF_AWARD_IMPRESSIVE | EF_AWARD_EXCELLENT | EF_AWARD_GAUNTLET | EF_AWARD_ASSIST | EF_AWARD_DEFEND | EF_AWARD_CAP);
@@ -893,11 +893,11 @@ void G_Damage(gentity_t* targ, gentity_t* inflictor, gentity_t* attacker,
         && targ->s.eType != ET_MISSILE
         && targ->s.eType != ET_GENERAL) {
         if (OnSameTeam(targ, attacker)) {
-            attacker->client->ps.persistant[PERS_HITS]--;
+            attacker->client->ps.persistent[PERS_HITS]--;
         } else {
-            attacker->client->ps.persistant[PERS_HITS]++;
+            attacker->client->ps.persistent[PERS_HITS]++;
         }
-        attacker->client->ps.persistant[PERS_ATTACKEE_ARMOR] = (targ->health << 8) | (client->ps.stats[STAT_ARMOR]);
+        attacker->client->ps.persistent[PERS_ATTACKEE_ARMOR] = (targ->health << 8) | (client->ps.stats[STAT_ARMOR]);
     }
 
     // always give half damage if hurting self
@@ -925,9 +925,9 @@ void G_Damage(gentity_t* targ, gentity_t* inflictor, gentity_t* attacker,
     // at the end of the frame
     if (client) {
         if (attacker) {
-            client->ps.persistant[PERS_ATTACKER] = attacker->s.number;
+            client->ps.persistent[PERS_ATTACKER] = attacker->s.number;
         } else {
-            client->ps.persistant[PERS_ATTACKER] = ENTITYNUM_WORLD;
+            client->ps.persistent[PERS_ATTACKER] = ENTITYNUM_WORLD;
         }
         client->damage_armor += asave;
         client->damage_blood += take;

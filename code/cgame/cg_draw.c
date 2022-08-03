@@ -522,7 +522,7 @@ static void CG_DrawStatusBar()
     }
 
     // draw the team background
-    CG_DrawTeamBackground(0, 420, 640, 60, 0.33f, cg.snap->ps.persistant[PERS_TEAM]);
+    CG_DrawTeamBackground(0, 420, 640, 60, 0.33f, cg.snap->ps.persistent[PERS_TEAM]);
 
     cent = &cg_entities[cg.snap->ps.clientNum];
     ps = &cg.snap->ps;
@@ -563,7 +563,7 @@ static void CG_DrawStatusBar()
         origin[1] = 0;
         origin[2] = -10;
         angles[YAW] = (cg.time & 2047) * 360 / 2048.0;
-        if (cg.snap->ps.persistant[PERS_TEAM] == TEAM_BLUE) {
+        if (cg.snap->ps.persistent[PERS_TEAM] == TEAM_BLUE) {
             handle = cgs.media.redCubeModel;
         } else {
             handle = cgs.media.blueCubeModel;
@@ -644,7 +644,7 @@ static void CG_DrawStatusBar()
         trap_R_SetColor(NULL);
         // if we didn't draw a 3D icon, draw a 2D icon for armor
         if (!cg_draw3dIcons.integer && cg_drawIcons.integer) {
-            if (cg.snap->ps.persistant[PERS_TEAM] == TEAM_BLUE) {
+            if (cg.snap->ps.persistent[PERS_TEAM] == TEAM_BLUE) {
                 handle = cgs.media.redCubeIcon;
             } else {
                 handle = cgs.media.blueCubeIcon;
@@ -681,7 +681,7 @@ static float CG_DrawAttacker(float y)
         return y;
     }
 
-    clientNum = cg.predictedPlayerState.persistant[PERS_ATTACKER];
+    clientNum = cg.predictedPlayerState.persistent[PERS_ATTACKER];
     if (clientNum < 0 || clientNum >= MAX_CLIENTS || clientNum == cg.snap->ps.clientNum) {
         return y;
     }
@@ -801,7 +801,7 @@ static float CG_DrawTeamOverlay(float y, bool right, bool upper)
         return y;
     }
 
-    if (cg.snap->ps.persistant[PERS_TEAM] != TEAM_RED && cg.snap->ps.persistant[PERS_TEAM] != TEAM_BLUE) {
+    if (cg.snap->ps.persistent[PERS_TEAM] != TEAM_RED && cg.snap->ps.persistent[PERS_TEAM] != TEAM_BLUE) {
         return y; // Not on any team
     }
 
@@ -812,7 +812,7 @@ static float CG_DrawTeamOverlay(float y, bool right, bool upper)
     count = (numSortedTeamPlayers > 8) ? 8 : numSortedTeamPlayers;
     for (i = 0; i < count; i++) {
         ci = cgs.clientinfo + sortedTeamPlayers[i];
-        if (ci->infoValid && ci->team == cg.snap->ps.persistant[PERS_TEAM]) {
+        if (ci->infoValid && ci->team == cg.snap->ps.persistent[PERS_TEAM]) {
             plyrs++;
             len = CG_DrawStrlen(ci->name);
             if (len > pwidth)
@@ -856,12 +856,12 @@ static float CG_DrawTeamOverlay(float y, bool right, bool upper)
         ret_y = y;
     }
 
-    if (cg.snap->ps.persistant[PERS_TEAM] == TEAM_RED) {
+    if (cg.snap->ps.persistent[PERS_TEAM] == TEAM_RED) {
         hcolor[0] = 1.0f;
         hcolor[1] = 0.0f;
         hcolor[2] = 0.0f;
         hcolor[3] = 0.33f;
-    } else { // if ( cg.snap->ps.persistant[PERS_TEAM] == TEAM_BLUE )
+    } else { // if ( cg.snap->ps.persistent[PERS_TEAM] == TEAM_BLUE )
         hcolor[0] = 0.0f;
         hcolor[1] = 0.0f;
         hcolor[2] = 1.0f;
@@ -873,7 +873,7 @@ static float CG_DrawTeamOverlay(float y, bool right, bool upper)
 
     for (i = 0; i < count; i++) {
         ci = cgs.clientinfo + sortedTeamPlayers[i];
-        if (ci->infoValid && ci->team == cg.snap->ps.persistant[PERS_TEAM]) {
+        if (ci->infoValid && ci->team == cg.snap->ps.persistent[PERS_TEAM]) {
 
             hcolor[0] = hcolor[1] = hcolor[2] = hcolor[3] = 1.0;
 
@@ -1018,7 +1018,7 @@ static float CG_DrawScores(float y)
         w = CG_DrawStrlen(s) * BIGCHAR_WIDTH + 8;
         x -= w;
         CG_FillRect(x, y - 4, w, BIGCHAR_HEIGHT + 8, color);
-        if (cg.snap->ps.persistant[PERS_TEAM] == TEAM_BLUE) {
+        if (cg.snap->ps.persistent[PERS_TEAM] == TEAM_BLUE) {
             CG_DrawPic(x, y - 4, w, BIGCHAR_HEIGHT + 8, cgs.media.selectShader);
         }
         CG_DrawBigString(x + 4, y, s, 1.0F);
@@ -1042,7 +1042,7 @@ static float CG_DrawScores(float y)
         w = CG_DrawStrlen(s) * BIGCHAR_WIDTH + 8;
         x -= w;
         CG_FillRect(x, y - 4, w, BIGCHAR_HEIGHT + 8, color);
-        if (cg.snap->ps.persistant[PERS_TEAM] == TEAM_RED) {
+        if (cg.snap->ps.persistent[PERS_TEAM] == TEAM_RED) {
             CG_DrawPic(x, y - 4, w, BIGCHAR_HEIGHT + 8, cgs.media.selectShader);
         }
         CG_DrawBigString(x + 4, y, s, 1.0F);
@@ -1088,8 +1088,8 @@ static float CG_DrawScores(float y)
         bool spectator;
 
         x = 640;
-        score = cg.snap->ps.persistant[PERS_SCORE];
-        spectator = (cg.snap->ps.persistant[PERS_TEAM] == TEAM_SPECTATOR);
+        score = cg.snap->ps.persistent[PERS_SCORE];
+        spectator = (cg.snap->ps.persistent[PERS_TEAM] == TEAM_SPECTATOR);
 
         // always show your score in the second box if not in first place
         if (s1 != score) {
@@ -1342,12 +1342,12 @@ static void CG_DrawTeamInfo()
         w *= TINYCHAR_WIDTH;
         w += TINYCHAR_WIDTH * 2;
 
-        if (cg.snap->ps.persistant[PERS_TEAM] == TEAM_RED) {
+        if (cg.snap->ps.persistent[PERS_TEAM] == TEAM_RED) {
             hcolor[0] = 1.0f;
             hcolor[1] = 0.0f;
             hcolor[2] = 0.0f;
             hcolor[3] = 0.33f;
-        } else if (cg.snap->ps.persistant[PERS_TEAM] == TEAM_BLUE) {
+        } else if (cg.snap->ps.persistent[PERS_TEAM] == TEAM_BLUE) {
             hcolor[0] = 0.0f;
             hcolor[1] = 0.0f;
             hcolor[2] = 1.0f;
@@ -1761,7 +1761,7 @@ static void CG_DrawCrosshair()
         return;
     }
 
-    if (cg.snap->ps.persistant[PERS_TEAM] == TEAM_SPECTATOR) {
+    if (cg.snap->ps.persistent[PERS_TEAM] == TEAM_SPECTATOR) {
         return;
     }
 
@@ -2309,7 +2309,7 @@ static void CG_Draw2D()
                     return;
             }
     */
-    if (cg.snap->ps.persistant[PERS_TEAM] == TEAM_SPECTATOR) {
+    if (cg.snap->ps.persistent[PERS_TEAM] == TEAM_SPECTATOR) {
         CG_DrawSpectator();
         CG_DrawCrosshair();
         CG_DrawCrosshairNames();
@@ -2404,7 +2404,7 @@ void CG_DrawActive(stereoFrame_t stereoView)
     }
 
     // optionally draw the tournament scoreboard instead
-    if (cg.snap->ps.persistant[PERS_TEAM] == TEAM_SPECTATOR && (cg.snap->ps.pm_flags & PMF_SCOREBOARD)) {
+    if (cg.snap->ps.persistent[PERS_TEAM] == TEAM_SPECTATOR && (cg.snap->ps.pm_flags & PMF_SCOREBOARD)) {
         CG_DrawTourneyScoreboard();
         return;
     }
