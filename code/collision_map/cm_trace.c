@@ -24,8 +24,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // always use capsule vs. capsule collision and never capsule vs. bbox or vice versa
 //#define ALWAYS_CAPSULE_VS_CAPSULE
 
-//#define CAPSULE_DEBUG
-
 /*
 ===============================================================================
 
@@ -682,12 +680,6 @@ static void CM_TraceThroughSphere(traceWork_t* tw, vec3_t origin, float radius, 
             VectorSubtract(end, start, dir);
             VectorMA(start, fraction, dir, intersection);
             VectorSubtract(intersection, origin, dir);
-#ifdef CAPSULE_DEBUG
-            l2 = VectorLength(dir);
-            if (l2 < radius) {
-                int bah = 1;
-            }
-#endif
             scale = 1 / (radius + RADIUS_EPSILON);
             VectorScale(dir, scale, dir);
             VectorCopy(dir, tw->trace.plane.normal);
@@ -775,12 +767,6 @@ static void CM_TraceThroughVerticalCylinder(traceWork_t* tw, vec3_t origin, floa
                 tw->trace.fraction = fraction;
                 VectorSubtract(intersection, origin, dir);
                 dir[2] = 0;
-#ifdef CAPSULE_DEBUG
-                l2 = VectorLength(dir);
-                if (l2 <= radius) {
-                    int bah = 1;
-                }
-#endif
                 scale = 1 / (radius + RADIUS_EPSILON);
                 VectorScale(dir, scale, dir);
                 VectorCopy(dir, tw->trace.plane.normal);
