@@ -1233,7 +1233,7 @@ void S_Play_f(void)
         if (!Q_strrchr(Cmd_Argv(i), '.')) {
             Com_sprintf(name, sizeof(name), "%s.wav", Cmd_Argv(1));
         } else {
-            Q_strncpyz(name, Cmd_Argv(i), sizeof(name));
+            strncpyz(name, Cmd_Argv(i), sizeof(name));
         }
         h = S_RegisterSound(name, false);
         if (h) {
@@ -1353,14 +1353,14 @@ void S_StartBackgroundTrack(const char* intro, const char* loop)
     }
     Com_DPrintf("S_StartBackgroundTrack( %s, %s )\n", intro, loop);
 
-    Q_strncpyz(name, intro, sizeof(name) - 4);
+    strncpyz(name, intro, sizeof(name) - 4);
     COM_DefaultExtension(name, sizeof(name), ".wav");
 
     if (!intro[0]) {
         return;
     }
 
-    Q_strncpyz(s_backgroundLoop, loop, sizeof(s_backgroundLoop));
+    strncpyz(s_backgroundLoop, loop, sizeof(s_backgroundLoop));
 
     // close the background track, but DON'T reset s_rawend
     // if restarting the same background track

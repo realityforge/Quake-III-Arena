@@ -173,7 +173,7 @@ static int ReadString(source_t* source, void* p)
     // remove the double quotes
     StripDoubleQuotes(token.string);
     // copy the string
-    Q_strncpyz((char*)p, token.string, MAX_STRINGFIELD);
+    strncpyz((char*)p, token.string, MAX_STRINGFIELD);
     return 1;
 }
 int ReadStructure(source_t* source, structdef_t* def, char* structure)

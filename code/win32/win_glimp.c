@@ -862,7 +862,7 @@ static bool GLW_LoadOpenGL(const char* drivername)
     char buffer[1024];
     bool cdsFullscreen;
 
-    Q_strncpyz(buffer, drivername, sizeof(buffer));
+    strncpyz(buffer, drivername, sizeof(buffer));
     Q_strlwr(buffer);
 
     // load the driver and bind our function pointers to it
@@ -947,13 +947,13 @@ void GLimp_Init(void)
     GLW_StartOpenGL();
 
     // get our config strings
-    Q_strncpyz(glConfig.vendor_string, qglGetString(GL_VENDOR), sizeof(glConfig.vendor_string));
-    Q_strncpyz(glConfig.renderer_string, qglGetString(GL_RENDERER), sizeof(glConfig.renderer_string));
-    Q_strncpyz(glConfig.version_string, qglGetString(GL_VERSION), sizeof(glConfig.version_string));
-    Q_strncpyz(glConfig.extensions_string, qglGetString(GL_EXTENSIONS), sizeof(glConfig.extensions_string));
+    strncpyz(glConfig.vendor_string, qglGetString(GL_VENDOR), sizeof(glConfig.vendor_string));
+    strncpyz(glConfig.renderer_string, qglGetString(GL_RENDERER), sizeof(glConfig.renderer_string));
+    strncpyz(glConfig.version_string, qglGetString(GL_VERSION), sizeof(glConfig.version_string));
+    strncpyz(glConfig.extensions_string, qglGetString(GL_EXTENSIONS), sizeof(glConfig.extensions_string));
 
     // chipset specific configuration
-    Q_strncpyz(buf, glConfig.renderer_string, sizeof(buf));
+    strncpyz(buf, glConfig.renderer_string, sizeof(buf));
     Q_strlwr(buf);
 
     // NOTE: if changing cvars, do it within this block.  This allows them

@@ -109,7 +109,7 @@ qhandle_t RE_RegisterModel(const char* name)
     }
 
     // only set the name after the model has been successfully loaded
-    Q_strncpyz(mod->name, name, sizeof(mod->name));
+    strncpyz(mod->name, name, sizeof(mod->name));
 
     R_IssuePendingRenderCommands();
 

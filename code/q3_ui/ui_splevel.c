@@ -121,7 +121,7 @@ static void PlayerIcon(const char* modelAndSkin, char* iconName, int iconNameMax
     char* skin;
     char model[MAX_QPATH];
 
-    Q_strncpyz(model, modelAndSkin, sizeof(model));
+    strncpyz(model, modelAndSkin, sizeof(model));
     skin = Q_strrchr(model, '/');
     if (skin) {
         *skin++ = '\0';
@@ -156,7 +156,7 @@ static void UI_SPLevelMenu_SetBots()
         return;
     }
 
-    Q_strncpyz(bots, Info_ValueForKey(levelMenuInfo.selectedArenaInfo, "bots"), sizeof(bots));
+    strncpyz(bots, Info_ValueForKey(levelMenuInfo.selectedArenaInfo, "bots"), sizeof(bots));
 
     p = &bots[0];
     while (*p && levelMenuInfo.numBots < 7) {
@@ -182,10 +182,10 @@ static void UI_SPLevelMenu_SetBots()
         botInfo = UI_GetBotInfoByName(bot);
         if (botInfo) {
             levelMenuInfo.botPics[levelMenuInfo.numBots] = PlayerIconHandle(Info_ValueForKey(botInfo, "model"));
-            Q_strncpyz(levelMenuInfo.botNames[levelMenuInfo.numBots], Info_ValueForKey(botInfo, "name"), 10);
+            strncpyz(levelMenuInfo.botNames[levelMenuInfo.numBots], Info_ValueForKey(botInfo, "name"), 10);
         } else {
             levelMenuInfo.botPics[levelMenuInfo.numBots] = 0;
-            Q_strncpyz(levelMenuInfo.botNames[levelMenuInfo.numBots], bot, 10);
+            strncpyz(levelMenuInfo.botNames[levelMenuInfo.numBots], bot, 10);
         }
         Q_CleanStr(levelMenuInfo.botNames[levelMenuInfo.numBots]);
         levelMenuInfo.numBots++;
@@ -196,9 +196,9 @@ static void UI_SPLevelMenu_SetMenuArena(int n, int level, const char* arenaInfo)
 {
     char map[MAX_QPATH];
 
-    Q_strncpyz(map, Info_ValueForKey(arenaInfo, "map"), sizeof(map));
+    strncpyz(map, Info_ValueForKey(arenaInfo, "map"), sizeof(map));
 
-    Q_strncpyz(levelMenuInfo.levelNames[n], map, sizeof(levelMenuInfo.levelNames[n]));
+    strncpyz(levelMenuInfo.levelNames[n], map, sizeof(levelMenuInfo.levelNames[n]));
     Q_strupr(levelMenuInfo.levelNames[n]);
 
     UI_GetBestScore(level, &levelMenuInfo.levelScores[n], &levelMenuInfo.levelScoresSkill[n]);
@@ -477,7 +477,7 @@ static void UI_SPLevelMenu_MenuDraw()
     // check for model changes
     trap_Cvar_VariableStringBuffer("model", buf, sizeof(buf));
     if (Q_stricmp(buf, levelMenuInfo.playerModel) != 0) {
-        Q_strncpyz(levelMenuInfo.playerModel, buf, sizeof(levelMenuInfo.playerModel));
+        strncpyz(levelMenuInfo.playerModel, buf, sizeof(levelMenuInfo.playerModel));
         PlayerIcon(levelMenuInfo.playerModel, levelMenuInfo.playerPicName, sizeof(levelMenuInfo.playerPicName));
         levelMenuInfo.item_player.shader = 0;
     }
@@ -555,7 +555,7 @@ static void UI_SPLevelMenu_MenuDraw()
 
     // show map name and long name of selected level
     y = 192;
-    Q_strncpyz(buf, Info_ValueForKey(levelMenuInfo.selectedArenaInfo, "map"), 20);
+    strncpyz(buf, Info_ValueForKey(levelMenuInfo.selectedArenaInfo, "map"), 20);
     Q_strupr(buf);
     Com_sprintf(string, sizeof(string), "%s: %s", buf, Info_ValueForKey(levelMenuInfo.selectedArenaInfo, "longname"));
     UI_DrawProportionalString(320, y, string, UI_CENTER | UI_SMALLFONT, color_orange);

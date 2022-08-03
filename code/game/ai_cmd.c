@@ -1521,7 +1521,7 @@ static void BotMatch_NewLeader(bot_state_t* bs, bot_match_t* match)
     client = FindClientByName(netname);
     if (!BotSameTeam(bs, client))
         return;
-    Q_strncpyz(bs->teamleader, netname, sizeof(bs->teamleader));
+    strncpyz(bs->teamleader, netname, sizeof(bs->teamleader));
 }
 
 int BotMatchMessage(bot_state_t* bs, char* message)

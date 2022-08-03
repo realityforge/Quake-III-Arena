@@ -468,7 +468,7 @@ void Console_Key(int key)
             && g_consoleField.buffer[0] != '/') {
             char temp[MAX_STRING_CHARS];
 
-            Q_strncpyz(temp, g_consoleField.buffer, sizeof(temp));
+            strncpyz(temp, g_consoleField.buffer, sizeof(temp));
             Com_sprintf(g_consoleField.buffer, sizeof(g_consoleField.buffer), "\\%s", temp);
             g_consoleField.cursor++;
         }

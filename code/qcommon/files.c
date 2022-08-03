@@ -591,7 +591,7 @@ fileHandle_t FS_SV_FOpenFileWrite(const char* filename)
     Com_DPrintf("writing to: %s\n", ospath);
     fsh[f].handleFiles.file.o = fopen(ospath, "wb");
 
-    Q_strncpyz(fsh[f].name, filename, sizeof(fsh[f].name));
+    strncpyz(fsh[f].name, filename, sizeof(fsh[f].name));
 
     fsh[f].handleSync = false;
     if (!fsh[f].handleFiles.file.o) {
@@ -619,7 +619,7 @@ int FS_SV_FOpenFileRead(const char* filename, fileHandle_t* fp)
     f = FS_HandleForFile();
     fsh[f].zipFile = false;
 
-    Q_strncpyz(fsh[f].name, filename, sizeof(fsh[f].name));
+    strncpyz(fsh[f].name, filename, sizeof(fsh[f].name));
 
 #ifndef DEDICATED
     // don't let sound stutter
@@ -752,7 +752,7 @@ fileHandle_t FS_FOpenFileWrite(const char* filename)
     // Com_DPrintf( "writing to: %s\n", ospath );
     fsh[f].handleFiles.file.o = fopen(ospath, "wb");
 
-    Q_strncpyz(fsh[f].name, filename, sizeof(fsh[f].name));
+    strncpyz(fsh[f].name, filename, sizeof(fsh[f].name));
 
     fsh[f].handleSync = false;
     if (!fsh[f].handleFiles.file.o) {
@@ -773,7 +773,7 @@ static fileHandle_t FS_FOpenFileAppend(const char* filename)
     f = FS_HandleForFile();
     fsh[f].zipFile = false;
 
-    Q_strncpyz(fsh[f].name, filename, sizeof(fsh[f].name));
+    strncpyz(fsh[f].name, filename, sizeof(fsh[f].name));
 
 #ifndef DEDICATED
     // don't let sound stutter
@@ -996,7 +996,7 @@ int FS_FOpenFileRead(const char* filename, fileHandle_t* file, bool uniqueFILE)
                     } else {
                         fsh[*file].handleFiles.file.z = pak->handle;
                     }
-                    Q_strncpyz(fsh[*file].name, filename, sizeof(fsh[*file].name));
+                    strncpyz(fsh[*file].name, filename, sizeof(fsh[*file].name));
                     fsh[*file].zipFile = true;
                     // set the file position in the zip file (also sets the current file info)
                     unzSetOffset(fsh[*file].handleFiles.file.z, pakFile->pos);
@@ -1052,7 +1052,7 @@ int FS_FOpenFileRead(const char* filename, fileHandle_t* file, bool uniqueFILE)
                 fs_fakeChkSum = random();
             }
 
-            Q_strncpyz(fsh[*file].name, filename, sizeof(fsh[*file].name));
+            strncpyz(fsh[*file].name, filename, sizeof(fsh[*file].name));
             fsh[*file].zipFile = false;
             if (fs_debug->integer) {
                 Com_Printf("FS_FOpenFileRead: %s (found in '%s/%s')\n", filename,
@@ -1540,8 +1540,8 @@ static pack_t* FS_LoadZipFile(char* zipfile, const char* basename)
         pack->hashTable[i] = NULL;
     }
 
-    Q_strncpyz(pack->pakFilename, zipfile, sizeof(pack->pakFilename));
-    Q_strncpyz(pack->pakBasename, basename, sizeof(pack->pakBasename));
+    strncpyz(pack->pakFilename, zipfile, sizeof(pack->pakFilename));
+    strncpyz(pack->pakBasename, basename, sizeof(pack->pakBasename));
 
     // strip .pk3 if needed
     if (strlen(pack->pakBasename) > 4 && !Q_stricmp(pack->pakBasename + strlen(pack->pakBasename) - 4, ".pk3")) {
@@ -2196,14 +2196,14 @@ static void FS_AddGameDirectory(const char* path, const char* dir)
         }
     }
 
-    Q_strncpyz(fs_gamedir, dir, sizeof(fs_gamedir));
+    strncpyz(fs_gamedir, dir, sizeof(fs_gamedir));
 
     // add the directory to the search path
     search = Z_Malloc(sizeof(searchpath_t));
     search->dir = Z_Malloc(sizeof(*search->dir));
 
-    Q_strncpyz(search->dir->path, path, sizeof(search->dir->path));
-    Q_strncpyz(search->dir->gamedir, dir, sizeof(search->dir->gamedir));
+    strncpyz(search->dir->path, path, sizeof(search->dir->path));
+    strncpyz(search->dir->gamedir, dir, sizeof(search->dir->gamedir));
     search->next = fs_searchpaths;
     fs_searchpaths = search;
 
@@ -2881,8 +2881,8 @@ void FS_InitFilesystem()
         Com_Error(ERR_FATAL, "Couldn't load default.cfg");
     }
 
-    Q_strncpyz(lastValidBase, fs_basepath->string, sizeof(lastValidBase));
-    Q_strncpyz(lastValidGame, fs_gamedirvar->string, sizeof(lastValidGame));
+    strncpyz(lastValidBase, fs_basepath->string, sizeof(lastValidBase));
+    strncpyz(lastValidGame, fs_gamedirvar->string, sizeof(lastValidGame));
 }
 
 void FS_Restart(int checksumFeed)
@@ -2926,8 +2926,8 @@ void FS_Restart(int checksumFeed)
         }
     }
 
-    Q_strncpyz(lastValidBase, fs_basepath->string, sizeof(lastValidBase));
-    Q_strncpyz(lastValidGame, fs_gamedirvar->string, sizeof(lastValidGame));
+    strncpyz(lastValidBase, fs_basepath->string, sizeof(lastValidBase));
+    strncpyz(lastValidGame, fs_gamedirvar->string, sizeof(lastValidGame));
 }
 
 /*

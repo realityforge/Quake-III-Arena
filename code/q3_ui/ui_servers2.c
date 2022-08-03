@@ -546,13 +546,13 @@ static void ArenaServers_Insert(char* adrstr, char* info, int pingtime)
         (*g_arenaservers.numservers)++;
     }
 
-    Q_strncpyz(servernodeptr->adrstr, adrstr, MAX_ADDRESSLENGTH);
+    strncpyz(servernodeptr->adrstr, adrstr, MAX_ADDRESSLENGTH);
 
-    Q_strncpyz(servernodeptr->hostname, Info_ValueForKey(info, "hostname"), MAX_HOSTNAMELENGTH);
+    strncpyz(servernodeptr->hostname, Info_ValueForKey(info, "hostname"), MAX_HOSTNAMELENGTH);
     Q_CleanStr(servernodeptr->hostname);
     Q_strupr(servernodeptr->hostname);
 
-    Q_strncpyz(servernodeptr->mapname, Info_ValueForKey(info, "mapname"), MAX_MAPNAMELENGTH);
+    strncpyz(servernodeptr->mapname, Info_ValueForKey(info, "mapname"), MAX_MAPNAMELENGTH);
     Q_CleanStr(servernodeptr->mapname);
     Q_strupr(servernodeptr->mapname);
 
@@ -589,10 +589,10 @@ static void ArenaServers_Insert(char* adrstr, char* info, int pingtime)
     }
     if (*s) {
         servernodeptr->gametype = i; //-1;
-        Q_strncpyz(servernodeptr->gamename, s, sizeof(servernodeptr->gamename));
+        strncpyz(servernodeptr->gamename, s, sizeof(servernodeptr->gamename));
     } else {
         servernodeptr->gametype = i;
-        Q_strncpyz(servernodeptr->gamename, gamenames[i], sizeof(servernodeptr->gamename));
+        strncpyz(servernodeptr->gamename, gamenames[i], sizeof(servernodeptr->gamename));
     }
 }
 
@@ -680,7 +680,7 @@ static void ArenaServers_LoadFavorites()
             found = true;
         } else {
             // add new server
-            Q_strncpyz(g_favoriteserverlist[g_numfavoriteservers].adrstr, adrstr, MAX_ADDRESSLENGTH);
+            strncpyz(g_favoriteserverlist[g_numfavoriteservers].adrstr, adrstr, MAX_ADDRESSLENGTH);
             g_favoriteserverlist[g_numfavoriteservers].pingtime = ArenaServers_MaxPing();
         }
 

@@ -1645,8 +1645,8 @@ int BotLoadChatFile(int chatstate, char* chatfile, char* chatname)
     if (!LibVarGetValue("bot_reloadcharacters")) {
         ichatdata[avail] = GetClearedMemory(sizeof(bot_ichatdata_t));
         ichatdata[avail]->chat = cs->chat;
-        Q_strncpyz(ichatdata[avail]->chatname, chatname, sizeof(ichatdata[avail]->chatname));
-        Q_strncpyz(ichatdata[avail]->filename, chatfile, sizeof(ichatdata[avail]->filename));
+        strncpyz(ichatdata[avail]->chatname, chatname, sizeof(ichatdata[avail]->chatname));
+        strncpyz(ichatdata[avail]->filename, chatfile, sizeof(ichatdata[avail]->filename));
     }
 
     return BLERR_NOERROR;

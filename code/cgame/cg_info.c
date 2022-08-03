@@ -54,7 +54,7 @@ static void CG_DrawLoadingIcons()
 
 void CG_LoadingString(const char* s)
 {
-    Q_strncpyz(cg.infoScreenText, s, sizeof(cg.infoScreenText));
+    strncpyz(cg.infoScreenText, s, sizeof(cg.infoScreenText));
 
     trap_UpdateScreen();
 }
@@ -83,7 +83,7 @@ void CG_LoadingClient(int clientNum)
     info = CG_ConfigString(CS_PLAYERS + clientNum);
 
     if (loadingPlayerIconCount < MAX_LOADING_PLAYER_ICONS) {
-        Q_strncpyz(model, Info_ValueForKey(info, "model"), sizeof(model));
+        strncpyz(model, Info_ValueForKey(info, "model"), sizeof(model));
         skin = Q_strrchr(model, '/');
         if (skin) {
             *skin++ = '\0';
@@ -107,7 +107,7 @@ void CG_LoadingClient(int clientNum)
         }
     }
 
-    Q_strncpyz(personality, Info_ValueForKey(info, "n"), sizeof(personality));
+    strncpyz(personality, Info_ValueForKey(info, "n"), sizeof(personality));
     Q_CleanStr(personality);
 
     if (cgs.gametype == GT_SINGLE_PLAYER) {
@@ -171,7 +171,7 @@ void CG_DrawInformation()
     trap_Cvar_VariableStringBuffer("sv_running", buf, sizeof(buf));
     if (!atoi(buf)) {
         // server hostname
-        Q_strncpyz(buf, Info_ValueForKey(info, "sv_hostname"), 1024);
+        strncpyz(buf, Info_ValueForKey(info, "sv_hostname"), 1024);
         Q_CleanStr(buf);
         UI_DrawProportionalString(320, y, buf,
                                   UI_CENTER | UI_SMALLFONT | UI_DROPSHADOW, colorWhite);

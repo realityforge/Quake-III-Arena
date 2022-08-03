@@ -1669,7 +1669,7 @@ void CG_CenterPrint(const char* str, int y, int charWidth)
 {
     char* s;
 
-    Q_strncpyz(cg.centerPrint, str, sizeof(cg.centerPrint));
+    strncpyz(cg.centerPrint, str, sizeof(cg.centerPrint));
 
     cg.centerPrintTime = cg.time;
     cg.centerPrintY = y;

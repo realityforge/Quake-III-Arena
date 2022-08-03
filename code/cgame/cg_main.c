@@ -1144,8 +1144,8 @@ void CG_StartMusic()
 
     // start the background music
     s = (char*)CG_ConfigString(CS_MUSIC);
-    Q_strncpyz(parm1, COM_Parse(&s), sizeof(parm1));
-    Q_strncpyz(parm2, COM_Parse(&s), sizeof(parm2));
+    strncpyz(parm1, COM_Parse(&s), sizeof(parm1));
+    strncpyz(parm2, COM_Parse(&s), sizeof(parm2));
 
     trap_S_StartBackgroundTrack(parm1, parm2);
 }

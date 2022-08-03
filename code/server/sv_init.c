@@ -82,7 +82,7 @@ void SV_SetConfigstring(int index, const char* val)
                     } else {
                         cmd = "bcs1";
                     }
-                    Q_strncpyz(buf, &val[sent], maxChunkSize);
+                    strncpyz(buf, &val[sent], maxChunkSize);
 
                     SV_SendServerCommand(client, "%s %i \"%s\"\n", cmd, index, buf);
 
@@ -110,7 +110,7 @@ void SV_GetConfigstring(int index, char* buffer, int bufferSize)
         return;
     }
 
-    Q_strncpyz(buffer, sv.configstrings[index], bufferSize);
+    strncpyz(buffer, sv.configstrings[index], bufferSize);
 }
 
 void SV_SetUserinfo(int index, const char* val)
@@ -123,8 +123,8 @@ void SV_SetUserinfo(int index, const char* val)
         val = "";
     }
 
-    Q_strncpyz(svs.clients[index].userinfo, val, sizeof(svs.clients[index].userinfo));
-    Q_strncpyz(svs.clients[index].name, Info_ValueForKey(val, "name"), sizeof(svs.clients[index].name));
+    strncpyz(svs.clients[index].userinfo, val, sizeof(svs.clients[index].userinfo));
+    strncpyz(svs.clients[index].name, Info_ValueForKey(val, "name"), sizeof(svs.clients[index].name));
 }
 
 void SV_GetUserinfo(int index, char* buffer, int bufferSize)
@@ -135,7 +135,7 @@ void SV_GetUserinfo(int index, char* buffer, int bufferSize)
     if (index < 0 || index >= sv_maxclients->integer) {
         Com_Error(ERR_DROP, "SV_GetUserinfo: bad index %i", index);
     }
-    Q_strncpyz(buffer, svs.clients[index].userinfo, bufferSize);
+    strncpyz(buffer, svs.clients[index].userinfo, bufferSize);
 }
 
 /*
@@ -484,7 +484,7 @@ void SV_SpawnServer(char* server, bool killBots)
     Cvar_Set("sv_referencedPakNames", p);
 
     // save systeminfo and serverinfo strings
-    Q_strncpyz(systemInfo, Cvar_InfoString_Big(CVAR_SYSTEMINFO), sizeof(systemInfo));
+    strncpyz(systemInfo, Cvar_InfoString_Big(CVAR_SYSTEMINFO), sizeof(systemInfo));
     cvar_modifiedFlags &= ~CVAR_SYSTEMINFO;
     SV_SetConfigstring(CS_SYSTEMINFO, systemInfo);
 

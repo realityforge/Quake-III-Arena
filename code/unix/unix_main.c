@@ -261,7 +261,7 @@ void* Sys_LoadDll(const char* name, char* fqpath, vmMainProc* entryPoint, vmDllS
     dllEntry(systemCalls);
     Com_Printf("Sys_LoadDll(%s) succeeded!\n", name);
     if (libHandle)
-        Q_strncpyz(fqpath, fn, MAX_QPATH);
+        strncpyz(fqpath, fn, MAX_QPATH);
     return libHandle;
 }
 

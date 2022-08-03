@@ -280,21 +280,21 @@ static void PlayerModel_PicEvent(void* ptr, int event)
     pdest = strstr(buffptr, "icon_");
     if (pdest) {
         // track the whole model/skin name
-        Q_strncpyz(s_playermodel.modelskin, buffptr, pdest - buffptr + 1);
+        strncpyz(s_playermodel.modelskin, buffptr, pdest - buffptr + 1);
         strcat(s_playermodel.modelskin, pdest + 5);
 
         // separate the model name
         maxlen = pdest - buffptr;
         if (maxlen > 16)
             maxlen = 16;
-        Q_strncpyz(s_playermodel.modelname.string, buffptr, maxlen);
+        strncpyz(s_playermodel.modelname.string, buffptr, maxlen);
         Q_strupr(s_playermodel.modelname.string);
 
         // separate the skin name
         maxlen = strlen(pdest + 5) + 1;
         if (maxlen > 16)
             maxlen = 16;
-        Q_strncpyz(s_playermodel.skinname.string, pdest + 5, maxlen);
+        strncpyz(s_playermodel.skinname.string, pdest + 5, maxlen);
         Q_strupr(s_playermodel.skinname.string);
 
         s_playermodel.selectedmodel = modelnum;
@@ -402,7 +402,7 @@ static void PlayerModel_SetMenuItems()
         buffptr = s_playermodel.modelnames[i] + strlen("models/players/");
         pdest = strstr(buffptr, "icon_");
         if (pdest) {
-            Q_strncpyz(modelskin, buffptr, pdest - buffptr + 1);
+            strncpyz(modelskin, buffptr, pdest - buffptr + 1);
             strcat(modelskin, pdest + 5);
         } else
             continue;
@@ -416,14 +416,14 @@ static void PlayerModel_SetMenuItems()
             maxlen = pdest - buffptr;
             if (maxlen > 16)
                 maxlen = 16;
-            Q_strncpyz(s_playermodel.modelname.string, buffptr, maxlen);
+            strncpyz(s_playermodel.modelname.string, buffptr, maxlen);
             Q_strupr(s_playermodel.modelname.string);
 
             // separate the skin name
             maxlen = strlen(pdest + 5) + 1;
             if (maxlen > 16)
                 maxlen = 16;
-            Q_strncpyz(s_playermodel.skinname.string, pdest + 5, maxlen);
+            strncpyz(s_playermodel.skinname.string, pdest + 5, maxlen);
             Q_strupr(s_playermodel.skinname.string);
             break;
         }

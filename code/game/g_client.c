@@ -543,7 +543,7 @@ static void ClientCleanName(const char* in, char* out, int outSize)
 
     // don't allow empty names
     if (*p == 0 || colorlessLen == 0) {
-        Q_strncpyz(p, "UnnamedPlayer", outSize);
+        strncpyz(p, "UnnamedPlayer", outSize);
     }
 }
 
@@ -598,13 +598,13 @@ void ClientUserinfoChanged(int clientNum)
     }
 
     // set name
-    Q_strncpyz(oldname, client->pers.netname, sizeof(oldname));
+    strncpyz(oldname, client->pers.netname, sizeof(oldname));
     s = Info_ValueForKey(userinfo, "name");
     ClientCleanName(s, client->pers.netname, sizeof(client->pers.netname));
 
     if (client->sess.sessionTeam == TEAM_SPECTATOR) {
         if (client->sess.spectatorState == SPECTATOR_SCOREBOARD) {
-            Q_strncpyz(client->pers.netname, "scoreboard", sizeof(client->pers.netname));
+            strncpyz(client->pers.netname, "scoreboard", sizeof(client->pers.netname));
         }
     }
 
@@ -636,11 +636,11 @@ void ClientUserinfoChanged(int clientNum)
 
     // set model
     if (g_gametype.integer >= GT_TEAM) {
-        Q_strncpyz(model, Info_ValueForKey(userinfo, "team_model"), sizeof(model));
-        Q_strncpyz(headModel, Info_ValueForKey(userinfo, "team_headmodel"), sizeof(headModel));
+        strncpyz(model, Info_ValueForKey(userinfo, "team_model"), sizeof(model));
+        strncpyz(headModel, Info_ValueForKey(userinfo, "team_headmodel"), sizeof(headModel));
     } else {
-        Q_strncpyz(model, Info_ValueForKey(userinfo, "model"), sizeof(model));
-        Q_strncpyz(headModel, Info_ValueForKey(userinfo, "headmodel"), sizeof(headModel));
+        strncpyz(model, Info_ValueForKey(userinfo, "model"), sizeof(model));
+        strncpyz(headModel, Info_ValueForKey(userinfo, "headmodel"), sizeof(headModel));
     }
 
     // bots set their team a few frames later

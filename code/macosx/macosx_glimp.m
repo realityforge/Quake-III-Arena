@@ -416,10 +416,10 @@ void GLimp_Init(void)
     ri.Printf(PRINT_ALL, "------------------\n");
 
     // get our config strings
-    Q_strncpyz(glConfig.vendor_string, (const char*)qglGetString(GL_VENDOR), sizeof(glConfig.vendor_string));
-    Q_strncpyz(glConfig.renderer_string, (const char*)qglGetString(GL_RENDERER), sizeof(glConfig.renderer_string));
-    Q_strncpyz(glConfig.version_string, (const char*)qglGetString(GL_VERSION), sizeof(glConfig.version_string));
-    Q_strncpyz(glConfig.extensions_string, (const char*)qglGetString(GL_EXTENSIONS), sizeof(glConfig.extensions_string));
+    strncpyz(glConfig.vendor_string, (const char*)qglGetString(GL_VENDOR), sizeof(glConfig.vendor_string));
+    strncpyz(glConfig.renderer_string, (const char*)qglGetString(GL_RENDERER), sizeof(glConfig.renderer_string));
+    strncpyz(glConfig.version_string, (const char*)qglGetString(GL_VERSION), sizeof(glConfig.version_string));
+    strncpyz(glConfig.extensions_string, (const char*)qglGetString(GL_EXTENSIONS), sizeof(glConfig.extensions_string));
 
     // chipset specific configuration
     buf = malloc(strlen(glConfig.renderer_string) + 1);

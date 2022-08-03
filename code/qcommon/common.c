@@ -2223,7 +2223,7 @@ void Com_WriteConfig_f()
         return;
     }
 
-    Q_strncpyz(filename, Cmd_Argv(1), sizeof(filename));
+    strncpyz(filename, Cmd_Argv(1), sizeof(filename));
     COM_DefaultExtension(filename, sizeof(filename), ".cfg");
     Com_Printf("Writing %s.\n", filename);
     Com_WriteConfigToFile(filename);
@@ -2519,7 +2519,7 @@ static void FindMatches(const char* s)
     }
     matchCount++;
     if (matchCount == 1) {
-        Q_strncpyz(shortestMatch, s, sizeof(shortestMatch));
+        strncpyz(shortestMatch, s, sizeof(shortestMatch));
         return;
     }
 

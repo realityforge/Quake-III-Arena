@@ -571,7 +571,7 @@ bool NET_StringToAdr(const char* s, netadr_t* a)
     }
 
     // look for a port number
-    Q_strncpyz(base, s, sizeof(base));
+    strncpyz(base, s, sizeof(base));
     port = strstr(base, ":");
     if (port) {
         *port = 0;

@@ -89,7 +89,7 @@ static int G_ParseInfos(char* buf, int max, char* infos[])
             if (!strcmp(token, "}")) {
                 break;
             }
-            Q_strncpyz(key, token, sizeof(key));
+            strncpyz(key, token, sizeof(key));
 
             token = COM_ParseExt(&buf, false);
             if (!token[0]) {
@@ -184,7 +184,7 @@ static void PlayerIntroSound(const char* modelAndSkin)
     char model[MAX_QPATH];
     char* skin;
 
-    Q_strncpyz(model, modelAndSkin, sizeof(model));
+    strncpyz(model, modelAndSkin, sizeof(model));
     skin = Q_strrchr(model, '/');
     if (skin) {
         *skin++ = '\0';
@@ -477,9 +477,9 @@ bool G_BotConnect(int clientNum, bool restart)
 
     trap_GetUserinfo(clientNum, userinfo, sizeof(userinfo));
 
-    Q_strncpyz(settings.characterfile, Info_ValueForKey(userinfo, "characterfile"), sizeof(settings.characterfile));
+    strncpyz(settings.characterfile, Info_ValueForKey(userinfo, "characterfile"), sizeof(settings.characterfile));
     settings.skill = atof(Info_ValueForKey(userinfo, "skill"));
-    Q_strncpyz(settings.team, Info_ValueForKey(userinfo, "team"), sizeof(settings.team));
+    strncpyz(settings.team, Info_ValueForKey(userinfo, "team"), sizeof(settings.team));
 
     if (!BotAISetupClient(clientNum, &settings, restart)) {
         trap_DropClient(clientNum, "BotAISetupClient failed");
@@ -724,7 +724,7 @@ static void G_SpawnBots(char* botList, int baseDelay)
         skill = 5;
     }
 
-    Q_strncpyz(bots, botList, sizeof(bots));
+    strncpyz(bots, botList, sizeof(bots));
     p = &bots[0];
     delay = baseDelay;
     while (*p) {
@@ -855,7 +855,7 @@ void G_InitBots(bool restart)
 
     if (g_gametype.integer == GT_SINGLE_PLAYER) {
         trap_GetServerinfo(serverinfo, sizeof(serverinfo));
-        Q_strncpyz(map, Info_ValueForKey(serverinfo, "mapname"), sizeof(map));
+        strncpyz(map, Info_ValueForKey(serverinfo, "mapname"), sizeof(map));
         arenainfo = G_GetArenaInfoByMap(map);
         if (!arenainfo) {
             return;

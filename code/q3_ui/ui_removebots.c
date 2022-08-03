@@ -81,7 +81,7 @@ static void UI_RemoveBotsMenu_SetBotNames()
 
     for (n = 0; (n < 7) && (removeBotsMenuInfo.baseBotNum + n < removeBotsMenuInfo.numBots); n++) {
         trap_GetConfigString(CS_PLAYERS + removeBotsMenuInfo.botClientNums[removeBotsMenuInfo.baseBotNum + n], info, MAX_INFO_STRING);
-        Q_strncpyz(removeBotsMenuInfo.botnames[n], Info_ValueForKey(info, "n"), sizeof(removeBotsMenuInfo.botnames[n]));
+        strncpyz(removeBotsMenuInfo.botnames[n], Info_ValueForKey(info, "n"), sizeof(removeBotsMenuInfo.botnames[n]));
         Q_CleanStr(removeBotsMenuInfo.botnames[n]);
     }
 }

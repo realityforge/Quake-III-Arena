@@ -1325,7 +1325,7 @@ bool QGL_Init(const char* dllname)
     if (dllname[0] != '!') {
         Com_sprintf(libName, sizeof(libName), "%s\\%s", systemDir, dllname);
     } else {
-        Q_strncpyz(libName, dllname, sizeof(libName));
+        strncpyz(libName, dllname, sizeof(libName));
     }
 
     ri.Printf(PRINT_ALL, "...calling LoadLibrary( '%s.dll' ): ", libName);

@@ -165,7 +165,7 @@ static void UI_DriverInfo_Menu()
     // https://zerowing.idsoftware.com/bugzilla/show_bug.cgi?id=399
     // NOTE: could have pushed the size of stringbuff, but the list is already out of the screen
     // (no matter what your resolution)
-    Q_strncpyz(s_driverinfo.stringbuff, uis.glconfig.extensions_string, 1024);
+    strncpyz(s_driverinfo.stringbuff, uis.glconfig.extensions_string, 1024);
 
     // build null terminated extension strings
     eptr = s_driverinfo.stringbuff;

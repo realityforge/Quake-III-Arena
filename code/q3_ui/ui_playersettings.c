@@ -158,7 +158,7 @@ static void PlayerSettings_DrawName(void* self)
     }
 
     // draw at bottom also using proportional font
-    Q_strncpyz(name, f->field.buffer, sizeof(name));
+    strncpyz(name, f->field.buffer, sizeof(name));
     Q_CleanStr(name);
     UI_DrawProportionalString(320, 440, name, UI_CENTER | UI_BIGFONT, text_color_normal);
 }
@@ -255,7 +255,7 @@ static void PlayerSettings_SetMenuItems()
     int h;
 
     // name
-    Q_strncpyz(s_playersettings.name.field.buffer, UI_Cvar_VariableString("name"), sizeof(s_playersettings.name.field.buffer));
+    strncpyz(s_playersettings.name.field.buffer, UI_Cvar_VariableString("name"), sizeof(s_playersettings.name.field.buffer));
 
     // effects color
     c = trap_Cvar_VariableValue("color1") - 1;

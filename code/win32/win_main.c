@@ -319,7 +319,7 @@ char* Sys_GetClipboardData(void)
         if ((hClipboardData = GetClipboardData(CF_TEXT)) != 0) {
             if ((cliptext = GlobalLock(hClipboardData)) != 0) {
                 data = Z_Malloc(GlobalSize(hClipboardData) + 1);
-                Q_strncpyz(data, cliptext, GlobalSize(hClipboardData));
+                strncpyz(data, cliptext, GlobalSize(hClipboardData));
                 GlobalUnlock(hClipboardData);
 
                 strtok(data, "\n\r\b");
@@ -435,7 +435,7 @@ void* QDECL Sys_LoadDll(const char* name, char* fqpath, vmMainProc* entryPoint, 
     dllEntry(systemCalls);
 
     if (libHandle)
-        Q_strncpyz(fqpath, filename, MAX_QPATH); // added 7/20/02 by T.Ray
+        strncpyz(fqpath, filename, MAX_QPATH); // added 7/20/02 by T.Ray
     return libHandle;
 }
 
@@ -701,7 +701,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     }
 
     g_wv.hInstance = hInstance;
-    Q_strncpyz(sys_cmdline, lpCmdLine, sizeof(sys_cmdline));
+    strncpyz(sys_cmdline, lpCmdLine, sizeof(sys_cmdline));
 
     // no abort/retry/fail errors
     SetErrorMode(SEM_FAILCRITICALERRORS);
