@@ -117,7 +117,7 @@ int AAS_AlternativeRouteGoals(vec3_t start, int startareanum, int goalareanum, i
         // this is a mid-range area
         midrangeareas[i].valid = true;
         midrangeareas[i].starttime = starttime;
-        Log_Write("%d midrange area %d", nummidrangeareas, i);
+        Log_Write("%d midrange area %d\n", nummidrangeareas, i);
         nummidrangeareas++;
     }
     for (i = 1; i < aasworld.numareas; i++) {
