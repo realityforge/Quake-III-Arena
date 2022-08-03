@@ -1132,7 +1132,7 @@ static void BotMatch_StopTeamLeaderShip(bot_state_t* bs, bot_match_t* match)
     }
 }
 
-static void BotMatch_WhoIsTeamLeader(bot_state_t* bs, UNUSED bot_match_t* match)
+static void BotMatch_WhoIsTeamLeader(bot_state_t* bs)
 {
     char netname[MAX_MESSAGE_SIZE];
 
@@ -1656,7 +1656,7 @@ int BotMatchMessage(bot_state_t* bs, char* message)
         break;
     }
     case MSG_WHOISTEAMLAEDER: {
-        BotMatch_WhoIsTeamLeader(bs, &match);
+        BotMatch_WhoIsTeamLeader(bs);
         break;
     }
     case MSG_WHATAREYOUDOING: // ask a bot what he/she is doing
