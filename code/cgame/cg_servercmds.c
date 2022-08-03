@@ -223,12 +223,12 @@ void CG_ShaderStateChanged()
     while (o && *o) {
         n = strstr(o, "=");
         if (n && *n) {
-            strncpy(originalShader, o, n - o);
+            strncpyz(originalShader, o, n - o);
             originalShader[n - o] = 0;
             n++;
             t = strstr(n, ":");
             if (t && *t) {
-                strncpy(newShader, n, t - n);
+                strncpyz(newShader, n, t - n);
                 newShader[t - n] = 0;
             } else {
                 break;
@@ -236,7 +236,7 @@ void CG_ShaderStateChanged()
             t++;
             o = strstr(t, "@");
             if (o) {
-                strncpy(timeOffset, t, o - t);
+                strncpyz(timeOffset, t, o - t);
                 timeOffset[o - t] = 0;
                 o++;
                 trap_R_RemapShader(originalShader, newShader, timeOffset);

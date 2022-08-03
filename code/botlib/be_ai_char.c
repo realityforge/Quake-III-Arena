@@ -580,7 +580,7 @@ void Characteristic_String(int character, int index, char* buf, int size)
         return;
     // an integer will be converted to a float
     if (ch->c[index].type == CT_STRING) {
-        strncpy(buf, ch->c[index].value.string, size - 1);
+        strncpyz(buf, ch->c[index].value.string, size - 1);
         buf[size - 1] = '\0';
     } else {
         botimport.Print(PRT_ERROR, "characteristic %d is not a string\n", index);
