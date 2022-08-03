@@ -590,9 +590,6 @@ static int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t*
                 }
                 bs->ltgtype = 0;
             }
-            if (bs->camp_range > 0) {
-                // FIXME: move around a bit
-            }
             trap_BotResetAvoidReach(bs->ms);
             return false;
         }
