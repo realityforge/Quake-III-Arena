@@ -139,8 +139,8 @@ typedef enum {
 ** subsystem is initialized.
 */
 typedef enum {
-    TC_NONE,
-    TC_S3TC
+    TC_NONE = 0x0000,
+    TC_S3TC = 0x0001
 } textureCompression_t;
 
 typedef struct {
