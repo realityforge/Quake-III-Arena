@@ -429,7 +429,7 @@ void BotInitLevelItems()
     // update the modelindexes of the item info
     for (i = 0; i < ic->numiteminfo; i++) {
         if (!ic->iteminfo[i].modelindex) {
-            Log_Write("item %s has modelindex 0", ic->iteminfo[i].classname);
+            Log_Write("item %s has modelindex 0\n", ic->iteminfo[i].classname);
         }
     }
 
@@ -559,8 +559,7 @@ void BotDumpAvoidGoals(int goalstate)
     for (i = 0; i < MAX_AVOIDGOALS; i++) {
         if (gs->avoidgoaltimes[i] >= AAS_Time()) {
             BotGoalName(gs->avoidgoals[i], name, 32);
-            Log_Write("avoid goal %s, number %d for %f seconds", name,
-                      gs->avoidgoals[i], gs->avoidgoaltimes[i] - AAS_Time());
+            Log_Write("avoid goal %s, number %d for %f seconds\n", name, gs->avoidgoals[i], gs->avoidgoaltimes[i] - AAS_Time());
         }
     }
 }
@@ -825,7 +824,7 @@ void BotUpdateEntityItems()
                                                                 li->goalorigin);
                     }
 #ifdef DEBUG
-                    Log_Write("linked item %s to an entity", ic->iteminfo[li->iteminfo].classname);
+                    Log_Write("linked item %s to an entity\n", ic->iteminfo[li->iteminfo].classname);
 #endif // DEBUG
                     break;
                 }
@@ -881,7 +880,7 @@ void BotDumpGoalStack(int goalstate)
         return;
     for (i = 1; i <= gs->goalstacktop; i++) {
         BotGoalName(gs->goalstack[i].number, name, 32);
-        Log_Write("%d: %s", i, name);
+        Log_Write("%d: %s\n", i, name);
     }
 }
 void BotPushGoal(int goalstate, bot_goal_t* goal)
