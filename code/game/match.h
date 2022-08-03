@@ -52,7 +52,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define MSG_FORMATIONPOSITION 16 // tell someone his/her position in a formation
 #define MSG_FORMATIONSPACE 17 // set the formation intervening space
 #define MSG_DOFORMATION 18 // form a known formation
-#define MSG_DISMISS 19 // dismiss commanded team mates
+#define MSG_DISMISS 19 // dismiss commanded teammates
 #define MSG_CAMP 20 // camp somewhere
 #define MSG_CHECKPOINT 21 // remember a check point
 #define MSG_PATROL 22 // patrol between certain keypoints

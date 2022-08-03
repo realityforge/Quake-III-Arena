@@ -267,7 +267,7 @@ static void BotCTFOrders_BothFlagsNotAtBase(bot_state_t* bs)
 
     numteammates = BotSortTeamMatesByBaseTravelTime(bs, teammates, sizeof(teammates));
     BotSortTeamMatesByTaskPreference(bs, teammates, numteammates);
-    // different orders based on the number of team mates
+    // different orders based on the number of teammates
     switch (bs->numteammates) {
     case 1:
         break;
@@ -373,7 +373,7 @@ static void BotCTFOrders_FlagNotAtBase(bot_state_t* bs)
     BotSortTeamMatesByTaskPreference(bs, teammates, numteammates);
     // passive strategy
     if (!(bs->ctfstrategy & CTFS_AGGRESSIVE)) {
-        // different orders based on the number of team mates
+        // different orders based on the number of teammates
         switch (bs->numteammates) {
         case 1:
             break;
@@ -430,7 +430,7 @@ static void BotCTFOrders_FlagNotAtBase(bot_state_t* bs)
         }
         }
     } else {
-        // different orders based on the number of team mates
+        // different orders based on the number of teammates
         switch (bs->numteammates) {
         case 1:
             break;
@@ -496,7 +496,7 @@ static void BotCTFOrders_EnemyFlagNotAtBase(bot_state_t* bs)
 
     numteammates = BotSortTeamMatesByBaseTravelTime(bs, teammates, sizeof(teammates));
     BotSortTeamMatesByTaskPreference(bs, teammates, numteammates);
-    // different orders based on the number of team mates
+    // different orders based on the number of teammates
     switch (numteammates) {
     case 1:
         break;
@@ -590,13 +590,13 @@ static void BotCTFOrders_BothFlagsAtBase(bot_state_t* bs)
     int teammates[MAX_CLIENTS];
     char name[MAX_NETNAME];
 
-    // sort team mates by travel time to base
+    // sort teammates by travel time to base
     numteammates = BotSortTeamMatesByBaseTravelTime(bs, teammates, sizeof(teammates));
-    // sort team mates by CTF preference
+    // sort teammates by CTF preference
     BotSortTeamMatesByTaskPreference(bs, teammates, numteammates);
     // passive strategy
     if (!(bs->ctfstrategy & CTFS_AGGRESSIVE)) {
-        // different orders based on the number of team mates
+        // different orders based on the number of teammates
         switch (numteammates) {
         case 1:
             break;
@@ -654,7 +654,7 @@ static void BotCTFOrders_BothFlagsAtBase(bot_state_t* bs)
         }
         }
     } else {
-        // different orders based on the number of team mates
+        // different orders based on the number of teammates
         switch (numteammates) {
         case 1:
             break;
@@ -830,13 +830,13 @@ static void Bot1FCTFOrders_FlagAtCenter(bot_state_t* bs)
     int teammates[MAX_CLIENTS];
     char name[MAX_NETNAME];
 
-    // sort team mates by travel time to base
+    // sort teammates by travel time to base
     numteammates = BotSortTeamMatesByBaseTravelTime(bs, teammates, sizeof(teammates));
-    // sort team mates by CTF preference
+    // sort teammates by CTF preference
     BotSortTeamMatesByTaskPreference(bs, teammates, numteammates);
     // passive strategy
     if (!(bs->ctfstrategy & CTFS_AGGRESSIVE)) {
-        // different orders based on the number of team mates
+        // different orders based on the number of teammates
         switch (numteammates) {
         case 1:
             break;
@@ -896,7 +896,7 @@ static void Bot1FCTFOrders_FlagAtCenter(bot_state_t* bs)
         }
         }
     } else { // aggressive
-        // different orders based on the number of team mates
+        // different orders based on the number of teammates
         switch (numteammates) {
         case 1:
             break;
@@ -970,13 +970,13 @@ static void Bot1FCTFOrders_TeamHasFlag(bot_state_t* bs)
     int teammates[MAX_CLIENTS];
     char name[MAX_NETNAME], carriername[MAX_NETNAME];
 
-    // sort team mates by travel time to base
+    // sort teammates by travel time to base
     numteammates = BotSortTeamMatesByBaseTravelTime(bs, teammates, sizeof(teammates));
-    // sort team mates by CTF preference
+    // sort teammates by CTF preference
     BotSortTeamMatesByTaskPreference(bs, teammates, numteammates);
     // passive strategy
     if (!(bs->ctfstrategy & CTFS_AGGRESSIVE)) {
-        // different orders based on the number of team mates
+        // different orders based on the number of teammates
         switch (numteammates) {
         case 1:
             break;
@@ -1073,7 +1073,7 @@ static void Bot1FCTFOrders_TeamHasFlag(bot_state_t* bs)
         }
         }
     } else { // aggressive
-        // different orders based on the number of team mates
+        // different orders based on the number of teammates
         switch (numteammates) {
         case 1:
             break;
@@ -1168,13 +1168,13 @@ static void Bot1FCTFOrders_EnemyHasFlag(bot_state_t* bs)
     int teammates[MAX_CLIENTS];
     char name[MAX_NETNAME];
 
-    // sort team mates by travel time to base
+    // sort teammates by travel time to base
     numteammates = BotSortTeamMatesByBaseTravelTime(bs, teammates, sizeof(teammates));
-    // sort team mates by CTF preference
+    // sort teammates by CTF preference
     BotSortTeamMatesByTaskPreference(bs, teammates, numteammates);
     // passive strategy
     if (!(bs->ctfstrategy & CTFS_AGGRESSIVE)) {
-        // different orders based on the number of team mates
+        // different orders based on the number of teammates
         switch (numteammates) {
         case 1:
             break;
@@ -1233,7 +1233,7 @@ static void Bot1FCTFOrders_EnemyHasFlag(bot_state_t* bs)
         }
         }
     } else { // aggressive
-        // different orders based on the number of team mates
+        // different orders based on the number of teammates
         switch (numteammates) {
         case 1:
             break;
@@ -1307,13 +1307,13 @@ static void Bot1FCTFOrders_EnemyDroppedFlag(bot_state_t* bs)
     int teammates[MAX_CLIENTS];
     char name[MAX_NETNAME];
 
-    // sort team mates by travel time to base
+    // sort teammates by travel time to base
     numteammates = BotSortTeamMatesByBaseTravelTime(bs, teammates, sizeof(teammates));
-    // sort team mates by CTF preference
+    // sort teammates by CTF preference
     BotSortTeamMatesByTaskPreference(bs, teammates, numteammates);
     // passive strategy
     if (!(bs->ctfstrategy & CTFS_AGGRESSIVE)) {
-        // different orders based on the number of team mates
+        // different orders based on the number of teammates
         switch (numteammates) {
         case 1:
             break;
@@ -1373,7 +1373,7 @@ static void Bot1FCTFOrders_EnemyDroppedFlag(bot_state_t* bs)
         }
         }
     } else { // aggressive
-        // different orders based on the number of team mates
+        // different orders based on the number of teammates
         switch (numteammates) {
         case 1:
             break;
@@ -1470,13 +1470,13 @@ static void BotObeliskOrders(bot_state_t* bs)
     int teammates[MAX_CLIENTS];
     char name[MAX_NETNAME];
 
-    // sort team mates by travel time to base
+    // sort teammates by travel time to base
     numteammates = BotSortTeamMatesByBaseTravelTime(bs, teammates, sizeof(teammates));
-    // sort team mates by CTF preference
+    // sort teammates by CTF preference
     BotSortTeamMatesByTaskPreference(bs, teammates, numteammates);
     // passive strategy
     if (!(bs->ctfstrategy & CTFS_AGGRESSIVE)) {
-        // different orders based on the number of team mates
+        // different orders based on the number of teammates
         switch (numteammates) {
         case 1:
             break;
@@ -1536,7 +1536,7 @@ static void BotObeliskOrders(bot_state_t* bs)
         }
         }
     } else {
-        // different orders based on the number of team mates
+        // different orders based on the number of teammates
         switch (numteammates) {
         case 1:
             break;
@@ -1610,13 +1610,13 @@ static void BotHarvesterOrders(bot_state_t* bs)
     int teammates[MAX_CLIENTS];
     char name[MAX_NETNAME];
 
-    // sort team mates by travel time to base
+    // sort teammates by travel time to base
     numteammates = BotSortTeamMatesByBaseTravelTime(bs, teammates, sizeof(teammates));
-    // sort team mates by CTF preference
+    // sort teammates by CTF preference
     BotSortTeamMatesByTaskPreference(bs, teammates, numteammates);
     // passive strategy
     if (!(bs->ctfstrategy & CTFS_AGGRESSIVE)) {
-        // different orders based on the number of team mates
+        // different orders based on the number of teammates
         switch (numteammates) {
         case 1:
             break;
@@ -1676,7 +1676,7 @@ static void BotHarvesterOrders(bot_state_t* bs)
         }
         }
     } else {
-        // different orders based on the number of team mates
+        // different orders based on the number of teammates
         switch (numteammates) {
         case 1:
             break;
@@ -1826,7 +1826,7 @@ void BotTeamAI(bot_state_t* bs)
         break;
     }
     case GT_CTF: {
-        // if the number of team mates changed or the flag status changed
+        // if the number of teammates changed or the flag status changed
         // or someone wants to know what to do
         if (bs->numteammates != numteammates || bs->flagstatuschanged || bs->forceorders) {
             bs->teamgiveorders_time = FloatTime();

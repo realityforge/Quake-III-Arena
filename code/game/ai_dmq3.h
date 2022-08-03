@@ -84,9 +84,9 @@ bot_moveresult_t BotAttackMove(bot_state_t* bs, int tfl);
 int BotSameTeam(bot_state_t* bs, int entnum);
 // returns true if teamplay is on
 int TeamPlayIsOn(void);
-// returns the client number of the team mate flag carrier (-1 if none)
+// returns the client number of the teammate flag carrier (-1 if none)
 int BotTeamFlagCarrier(bot_state_t* bs);
-// returns visible team mate flag carrier if available
+// returns visible teammate flag carrier if available
 int BotTeamFlagCarrierVisible(bot_state_t* bs);
 // returns visible enemy flag carrier if available
 int BotEnemyFlagCarrierVisible(bot_state_t* bs);

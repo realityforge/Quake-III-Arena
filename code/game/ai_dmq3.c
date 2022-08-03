@@ -436,7 +436,7 @@ void BotCTFSeekGoals(bot_state_t* bs)
     }
     // if the bot decided to follow someone
     if (bs->ltgtype == LTG_TEAMACCOMPANY && !bs->ordered) {
-        // if the team mate being accompanied no longer carries the flag
+        // if the teammate being accompanied no longer carries the flag
         BotEntityInfo(bs->teammate, &entinfo);
         if (!EntityCarriesFlag(&entinfo)) {
             bs->ltgtype = 0;
@@ -451,18 +451,18 @@ void BotCTFSeekGoals(bot_state_t* bs)
         if (bs->owndecision_time < FloatTime()) {
             // if Not defending the base already
             if (!(bs->ltgtype == LTG_DEFENDKEYAREA && (bs->teamgoal.number == ctf_redflag.number || bs->teamgoal.number == ctf_blueflag.number))) {
-                // if there is a visible team mate flag carrier
+                // if there is a visible teammate flag carrier
                 c = BotTeamFlagCarrierVisible(bs);
                 if (c >= 0 &&
-                    // and not already following the team mate flag carrier
+                    // and not already following the teammate flag carrier
                     (bs->ltgtype != LTG_TEAMACCOMPANY || bs->teammate != c)) {
                     BotRefuseOrder(bs);
                     // follow the flag carrier
                     bs->decisionmaker = bs->client;
                     bs->ordered = false;
-                    // the team mate
+                    // the teammate
                     bs->teammate = c;
-                    // last time the team mate was visible
+                    // last time the teammate was visible
                     bs->teammatevisible_time = FloatTime();
                     // no message
                     bs->teammessage_time = 0;
@@ -518,15 +518,15 @@ void BotCTFSeekGoals(bot_state_t* bs)
             // if not trying to return the flag and not following the team flag carrier
             if (bs->ltgtype != LTG_RETURNFLAG && bs->ltgtype != LTG_TEAMACCOMPANY) {
                 c = BotTeamFlagCarrierVisible(bs);
-                // if there is a visible team mate flag carrier
+                // if there is a visible teammate flag carrier
                 if (c >= 0) {
                     BotRefuseOrder(bs);
                     // follow the flag carrier
                     bs->decisionmaker = bs->client;
                     bs->ordered = false;
-                    // the team mate
+                    // the teammate
                     bs->teammate = c;
-                    // last time the team mate was visible
+                    // last time the teammate was visible
                     bs->teammatevisible_time = FloatTime();
                     // no message
                     bs->teammessage_time = 0;
@@ -584,7 +584,7 @@ void BotCTFSeekGoals(bot_state_t* bs)
     // if the bot has enough aggression to decide what to do
     if (BotAggression(bs) < 50)
         return;
-    // set the time to send a message to the team mates
+    // set the time to send a message to the teammates
     bs->teammessage_time = FloatTime() + 2 * random();
     if (bs->teamtaskpreference & (TEAMTP_ATTACKER | TEAMTP_DEFENDER)) {
         if (bs->teamtaskpreference & TEAMTP_ATTACKER) {
@@ -681,7 +681,7 @@ void Bot1FCTFSeekGoals(bot_state_t* bs)
     }
     // if the bot decided to follow someone
     if (bs->ltgtype == LTG_TEAMACCOMPANY && !bs->ordered) {
-        // if the team mate being accompanied no longer carries the flag
+        // if the teammate being accompanied no longer carries the flag
         BotEntityInfo(bs->teammate, &entinfo);
         if (!EntityCarriesFlag(&entinfo)) {
             bs->ltgtype = 0;
@@ -692,16 +692,16 @@ void Bot1FCTFSeekGoals(bot_state_t* bs)
         if (bs->owndecision_time < FloatTime()) {
             // if not already following someone
             if (bs->ltgtype != LTG_TEAMACCOMPANY) {
-                // if there is a visible team mate flag carrier
+                // if there is a visible teammate flag carrier
                 c = BotTeamFlagCarrierVisible(bs);
                 if (c >= 0) {
                     BotRefuseOrder(bs);
                     // follow the flag carrier
                     bs->decisionmaker = bs->client;
                     bs->ordered = false;
-                    // the team mate
+                    // the teammate
                     bs->teammate = c;
-                    // last time the team mate was visible
+                    // last time the teammate was visible
                     bs->teammatevisible_time = FloatTime();
                     // no message
                     bs->teammessage_time = 0;
@@ -797,7 +797,7 @@ void Bot1FCTFSeekGoals(bot_state_t* bs)
     // if the bot has enough aggression to decide what to do
     if (BotAggression(bs) < 50)
         return;
-    // set the time to send a message to the team mates
+    // set the time to send a message to the teammates
     bs->teammessage_time = FloatTime() + 2 * random();
     if (bs->teamtaskpreference & (TEAMTP_ATTACKER | TEAMTP_DEFENDER)) {
         if (bs->teamtaskpreference & TEAMTP_ATTACKER) {
@@ -892,7 +892,7 @@ void BotObeliskSeekGoals(bot_state_t* bs)
     // if the bot has enough aggression to decide what to do
     if (BotAggression(bs) < 50)
         return;
-    // set the time to send a message to the team mates
+    // set the time to send a message to the teammates
     bs->teammessage_time = FloatTime() + 2 * random();
     if (bs->teamtaskpreference & (TEAMTP_ATTACKER | TEAMTP_DEFENDER)) {
         if (bs->teamtaskpreference & TEAMTP_ATTACKER) {
@@ -989,7 +989,7 @@ void BotHarvesterSeekGoals(bot_state_t* bs)
     }
     // if the bot decided to follow someone
     if (bs->ltgtype == LTG_TEAMACCOMPANY && !bs->ordered) {
-        // if the team mate being accompanied no longer carries the flag
+        // if the teammate being accompanied no longer carries the flag
         BotEntityInfo(bs->teammate, &entinfo);
         if (!EntityCarriesCubes(&entinfo)) {
             bs->ltgtype = 0;
@@ -1011,22 +1011,22 @@ void BotHarvesterSeekGoals(bot_state_t* bs)
     // if the bot has enough aggression to decide what to do
     if (BotAggression(bs) < 50)
         return;
-    // set the time to send a message to the team mates
+    // set the time to send a message to the teammates
     bs->teammessage_time = FloatTime() + 2 * random();
     c = BotEnemyCubeCarrierVisible(bs);
     if (c >= 0) {
         // FIXME: attack enemy cube carrier
     }
     if (bs->ltgtype != LTG_TEAMACCOMPANY) {
-        // if there is a visible team mate carrying cubes
+        // if there is a visible teammate carrying cubes
         c = BotTeamCubeCarrierVisible(bs);
         if (c >= 0) {
-            // follow the team mate carrying cubes
+            // follow the teammate carrying cubes
             bs->decisionmaker = bs->client;
             bs->ordered = false;
-            // the team mate
+            // the teammate
             bs->teammate = c;
-            // last time the team mate was visible
+            // last time the teammate was visible
             bs->teammatevisible_time = FloatTime();
             // no message
             bs->teammessage_time = 0;
@@ -1495,7 +1495,7 @@ void BotUpdateBattleInventory(bot_state_t* bs, int enemy)
     bs->inventory[ENEMY_HEIGHT] = (int)dir[2];
     dir[2] = 0;
     bs->inventory[ENEMY_HORIZONTAL_DIST] = (int)VectorLength(dir);
-    // FIXME: add num visible enemies and num visible team mates to the inventory
+    // FIXME: add num visible enemies and num visible teammates to the inventory
 }
 
 #ifdef MISSIONPACK
@@ -1578,7 +1578,7 @@ static void BotUseKamikaze(bot_state_t* bs)
     } else if (gametype == GT_HARVESTER) {
         if (BotHarvesterCarryingCubes(bs))
             return;
-        // never use kamikaze if a team mate carrying cubes is visible
+        // never use kamikaze if a teammate carrying cubes is visible
         c = BotTeamCubeCarrierVisible(bs);
         if (c >= 0) {
             BotEntityInfo(c, &entinfo);
@@ -3219,7 +3219,7 @@ void BotMapScripts(bot_state_t* bs)
             if (entinfo.origin[0] > mins[0] && entinfo.origin[0] < maxs[0]) {
                 if (entinfo.origin[1] > mins[1] && entinfo.origin[1] < maxs[1]) {
                     if (entinfo.origin[2] < mins[2]) {
-                        // if there's a team mate below the crusher
+                        // if there's a teammate below the crusher
                         if (BotSameTeam(bs, i)) {
                             shootbutton = false;
                             break;
