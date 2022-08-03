@@ -29,7 +29,6 @@ void AAS_FreeRoutingCaches(void);
 unsigned short int AAS_AreaTravelTime(int areanum, vec3_t start, vec3_t end);
 void AAS_CreateAllRoutingCache(void);
 void AAS_WriteRouteCache(void);
-void AAS_RoutingInfo(void);
 #endif // AASINTERN
 
 // returns the travel flag for the given travel type

@@ -107,12 +107,6 @@ int AAS_StartFrame(float time)
     // initialize AAS
     AAS_ContinueInit();
     aasworld.frameroutingupdates = 0;
-    if (bot_developer) {
-        if (LibVarGetValue("showcacheupdates")) {
-            AAS_RoutingInfo();
-            LibVarSet("showcacheupdates", "0");
-        }
-    }
     if (saveroutingcache->value) {
         AAS_WriteRouteCache();
         LibVarSet("saveroutingcache", "0");
