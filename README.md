@@ -231,8 +231,6 @@ The defaults for these variables differ depending on the target platform.
 
   sv_dlURL                          - the base of the HTTP or FTP site that
                                       holds custom pk3 files for your server
-  sv_banFile                        - Name of the file that is used for storing
-                                      the server bans
 
   net_ip6                           - IPv6 address to bind to
   net_port6                         - port to bind to using the ipv6 address

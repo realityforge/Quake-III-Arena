@@ -232,19 +232,6 @@ typedef struct {
     int masterResolveTime[MAX_MASTER_SERVERS]; // next svs.time that server should do dns lookup for master server
 } serverStatic_t;
 
-#define SERVER_MAXBANS 1024
-// Structure for managing bans
-typedef struct
-{
-    netadr_t ip;
-    // For a CIDR-Notation type suffix
-    int subnet;
-
-    bool isexception;
-} serverBan_t;
-
-//=============================================================================
-
 extern serverStatic_t svs; // persistant server info across maps
 extern server_t sv; // cleared each map
 extern vm_t* gvm; // game virtual machine
@@ -275,10 +262,6 @@ extern cvar_t* sv_gametype;
 extern cvar_t* sv_pure;
 extern cvar_t* sv_floodProtect;
 extern cvar_t* sv_lanForceRate;
-extern cvar_t* sv_banFile;
-
-extern serverBan_t serverBans[SERVER_MAXBANS];
-extern int serverBansCount;
 
 #ifdef USE_VOIP
 extern cvar_t* sv_voip;
