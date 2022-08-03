@@ -1259,9 +1259,6 @@ the bits are allocated as follows:
 
 extern int gl_filter_min, gl_filter_max;
 
-/*
-** performanceCounters_t
-*/
 typedef struct {
     int c_sphere_cull_patch_in, c_sphere_cull_patch_clip, c_sphere_cull_patch_out;
     int c_box_cull_patch_in, c_box_cull_patch_clip, c_box_cull_patch_out;

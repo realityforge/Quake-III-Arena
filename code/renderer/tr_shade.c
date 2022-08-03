@@ -1235,9 +1235,6 @@ static void RB_RenderShadowmap(shaderCommands_t* input)
     }
 }
 
-/*
-** RB_StageIteratorGeneric
-*/
 void RB_StageIteratorGeneric()
 {
     shaderCommands_t* input;
@@ -1343,9 +1340,6 @@ void RB_StageIteratorGeneric()
     }
 }
 
-/*
-** RB_EndSurface
-*/
 void RB_EndSurface()
 {
     shaderCommands_t* input;

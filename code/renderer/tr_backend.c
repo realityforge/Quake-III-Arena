@@ -35,9 +35,6 @@ static float s_flipMatrix[16] = {
     0, 0, 0, 1
 };
 
-/*
-** GL_BindToTMU
-*/
 void GL_BindToTMU(image_t* image, int tmu)
 {
     GLuint texture = (tmu == TB_COLORMAP) ? tr.defaultImage->texnum : 0;
@@ -56,9 +53,6 @@ void GL_BindToTMU(image_t* image, int tmu)
     GL_BindMultiTexture(GL_TEXTURE0 + tmu, target, texture);
 }
 
-/*
-** GL_Cull
-*/
 void GL_Cull(int cullType)
 {
     if (glState.faceCulling == cullType) {

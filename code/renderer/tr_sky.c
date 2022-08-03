@@ -580,9 +580,6 @@ static void FillCloudBox(int stage)
     }
 }
 
-/*
-** R_BuildCloudData
-*/
 void R_BuildCloudData(shaderCommands_t* input)
 {
     int i;
@@ -660,11 +657,6 @@ void R_InitSkyTexCoords(float heightCloud)
     }
 }
 
-//======================================================================================
-
-/*
-** RB_DrawSun
-*/
 void RB_DrawSun(float scale, shader_t* shader)
 {
     float size;

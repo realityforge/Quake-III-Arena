@@ -76,9 +76,6 @@ static float EvalWaveFormClamped(const waveForm_t* wf)
     return glow;
 }
 
-/*
-** RB_CalcStretchTexMatrix
-*/
 void RB_CalcStretchTexMatrix(const waveForm_t* wf, float* matrix)
 {
     float p;
@@ -561,9 +558,6 @@ void RB_DeformTessGeometry()
     }
 }
 
-/*
-** RB_CalcWaveColorSingle
-*/
 float RB_CalcWaveColorSingle(const waveForm_t* wf)
 {
     float glow;
@@ -583,17 +577,11 @@ float RB_CalcWaveColorSingle(const waveForm_t* wf)
     return glow;
 }
 
-/*
-** RB_CalcWaveAlphaSingle
-*/
 float RB_CalcWaveAlphaSingle(const waveForm_t* wf)
 {
     return EvalWaveFormClamped(wf);
 }
 
-/*
-** RB_CalcModulateColorsByFog
-*/
 void RB_CalcModulateColorsByFog(unsigned char* colors)
 {
     int i;
@@ -697,18 +685,12 @@ void RB_CalcFogTexCoords(float* st)
     }
 }
 
-/*
-** RB_CalcTurbulentFactors
-*/
 void RB_CalcTurbulentFactors(const waveForm_t* wf, float* amplitude, float* now)
 {
     *now = wf->phase + tess.shaderTime * wf->frequency;
     *amplitude = wf->amplitude;
 }
 
-/*
-** RB_CalcScaleTexMatrix
-*/
 void RB_CalcScaleTexMatrix(const float scale[2], float* matrix)
 {
     matrix[0] = scale[0];
@@ -719,9 +701,6 @@ void RB_CalcScaleTexMatrix(const float scale[2], float* matrix)
     matrix[5] = 0.0f;
 }
 
-/*
-** RB_CalcScrollTexMatrix
-*/
 void RB_CalcScrollTexMatrix(const float scrollSpeed[2], float* matrix)
 {
     double timeScale = tess.shaderTime;
@@ -743,9 +722,6 @@ void RB_CalcScrollTexMatrix(const float scrollSpeed[2], float* matrix)
     matrix[5] = adjustedScrollT;
 }
 
-/*
-** RB_CalcTransformTexMatrix
-*/
 void RB_CalcTransformTexMatrix(const texModInfo_t* tmi, float* matrix)
 {
     matrix[0] = tmi->matrix[0][0];
@@ -756,9 +732,6 @@ void RB_CalcTransformTexMatrix(const texModInfo_t* tmi, float* matrix)
     matrix[5] = tmi->translate[1];
 }
 
-/*
-** RB_CalcRotateTexMatrix
-*/
 void RB_CalcRotateTexMatrix(float degsPerSecond, float* matrix)
 {
     double timeScale = tess.shaderTime;

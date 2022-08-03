@@ -176,9 +176,6 @@ static modelExtToLoaderMap_t modelLoaders[] = {
     { "md3", R_RegisterMD3 }
 };
 
-/*
-** R_GetModelByHandle
-*/
 model_t* R_GetModelByHandle(qhandle_t index)
 {
     model_t* mod;
@@ -193,11 +190,6 @@ model_t* R_GetModelByHandle(qhandle_t index)
     return mod;
 }
 
-//===============================================================================
-
-/*
-** R_AllocModel
-*/
 model_t* R_AllocModel()
 {
     model_t* mod;
@@ -1046,11 +1038,6 @@ static bool R_LoadMDR(model_t* mod, void* buffer, int filesize, const char* mod_
     return true;
 }
 
-//=============================================================================
-
-/*
-** RE_BeginRegistration
-*/
 void RE_BeginRegistration(glconfig_t* glconfigOut)
 {
     int i;

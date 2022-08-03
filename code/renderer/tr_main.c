@@ -237,9 +237,6 @@ int R_CullBox(vec3_t worldBounds[2])
     return CULL_CLIP;
 }
 
-/*
-** R_CullLocalPointAndRadius
-*/
 int R_CullLocalPointAndRadius(const vec3_t pt, float radius)
 {
     vec3_t transformed;
@@ -249,9 +246,6 @@ int R_CullLocalPointAndRadius(const vec3_t pt, float radius)
     return R_CullPointAndRadius(transformed, radius);
 }
 
-/*
-** R_CullPointAndRadius
-*/
 int R_CullPointAndRadiusEx(const vec3_t pt, float radius, const cplane_t* frustum, int numPlanes)
 {
     int i;
@@ -282,9 +276,6 @@ int R_CullPointAndRadiusEx(const vec3_t pt, float radius, const cplane_t* frustu
     return CULL_IN; // completely inside frustum
 }
 
-/*
-** R_CullPointAndRadius
-*/
 int R_CullPointAndRadius(const vec3_t pt, float radius)
 {
     return R_CullPointAndRadiusEx(pt, radius, tr.viewParms.frustum, (tr.viewParms.flags & VPF_FARPLANEFRUSTUM) ? 5 : 4);
@@ -465,9 +456,6 @@ static void R_RotateForViewer()
     tr.viewParms.world = tr.or ;
 }
 
-/*
-** SetFarClip
-*/
 static void R_SetFarClip()
 {
     float farthestCornerDistance = 0;

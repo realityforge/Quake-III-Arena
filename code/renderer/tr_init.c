@@ -283,9 +283,6 @@ void GL_CheckErrs(const char* filename, const int line)
     }
 }
 
-/*
-** R_GetModeInfo
-*/
 typedef struct vidmode_s {
     const char* description;
     int width, height;
@@ -624,11 +621,6 @@ const void* RB_TakeVideoFrameCmd(const void* data)
     return (const void*)(cmd + 1);
 }
 
-//============================================================================
-
-/*
-** GL_SetDefaultState
-*/
 void GL_SetDefaultState()
 {
     glClearDepth(1.0f);
