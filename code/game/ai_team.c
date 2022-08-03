@@ -65,7 +65,7 @@ static int BotNumTeamMates(bot_state_t* bs)
     char buf[MAX_INFO_STRING];
 
     numplayers = 0;
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         trap_GetConfigstring(CS_PLAYERS + i, buf, sizeof(buf));
         // if no config string or no name
         if (!strlen(buf) || !strlen(Info_ValueForKey(buf, "n")))
@@ -116,7 +116,7 @@ static int BotSortTeamMatesByBaseTravelTime(bot_state_t* bs, int* teammates, int
 #endif
 
     numteammates = 0;
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         trap_GetConfigstring(CS_PLAYERS + i, buf, sizeof(buf));
         // if no config string or no name
         if (!strlen(buf) || !strlen(Info_ValueForKey(buf, "n")))
@@ -769,7 +769,7 @@ static void BotTeamOrders(bot_state_t* bs)
     char buf[MAX_INFO_STRING];
 
     numteammates = 0;
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         trap_GetConfigstring(CS_PLAYERS + i, buf, sizeof(buf));
         // if no config string or no name
         if (!strlen(buf) || !strlen(Info_ValueForKey(buf, "n")))

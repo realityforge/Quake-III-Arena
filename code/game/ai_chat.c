@@ -52,7 +52,7 @@ static int BotNumActivePlayers()
     char buf[MAX_INFO_STRING];
 
     num = 0;
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         trap_GetConfigstring(CS_PLAYERS + i, buf, sizeof(buf));
         // if no config string or no name
         if (!strlen(buf) || !strlen(Info_ValueForKey(buf, "n")))
@@ -72,7 +72,7 @@ static int BotIsFirstInRankings(bot_state_t* bs)
     playerState_t ps;
 
     score = bs->cur_ps.persistent[PERS_SCORE];
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         trap_GetConfigstring(CS_PLAYERS + i, buf, sizeof(buf));
         // if no config string or no name
         if (!strlen(buf) || !strlen(Info_ValueForKey(buf, "n")))
@@ -94,7 +94,7 @@ static int BotIsLastInRankings(bot_state_t* bs)
     playerState_t ps;
 
     score = bs->cur_ps.persistent[PERS_SCORE];
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         trap_GetConfigstring(CS_PLAYERS + i, buf, sizeof(buf));
         // if no config string or no name
         if (!strlen(buf) || !strlen(Info_ValueForKey(buf, "n")))
@@ -118,7 +118,7 @@ static char* BotFirstClientInRankings()
 
     bestscore = -999999;
     bestclient = 0;
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         trap_GetConfigstring(CS_PLAYERS + i, buf, sizeof(buf));
         // if no config string or no name
         if (!strlen(buf) || !strlen(Info_ValueForKey(buf, "n")))
@@ -145,7 +145,7 @@ static char* BotLastClientInRankings()
 
     worstscore = 999999;
     bestclient = 0;
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         trap_GetConfigstring(CS_PLAYERS + i, buf, sizeof(buf));
         // if no config string or no name
         if (!strlen(buf) || !strlen(Info_ValueForKey(buf, "n")))
@@ -172,7 +172,7 @@ static char* BotRandomOpponentName(bot_state_t* bs)
 
     numopponents = 0;
     opponents[0] = 0;
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         if (i == bs->client)
             continue;
         trap_GetConfigstring(CS_PLAYERS + i, buf, sizeof(buf));

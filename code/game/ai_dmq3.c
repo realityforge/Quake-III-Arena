@@ -1169,7 +1169,7 @@ int ClientFromName(char* name)
     int i;
     char buf[MAX_INFO_STRING];
 
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         trap_GetConfigstring(CS_PLAYERS + i, buf, sizeof(buf));
         Q_CleanStr(buf);
         if (!Q_stricmp(Info_ValueForKey(buf, "n"), name))
@@ -1183,7 +1183,7 @@ int ClientOnSameTeamFromName(bot_state_t* bs, char* name)
     int i;
     char buf[MAX_INFO_STRING];
 
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         if (!BotSameTeam(bs, i))
             continue;
         trap_GetConfigstring(CS_PLAYERS + i, buf, sizeof(buf));
@@ -2555,7 +2555,7 @@ int BotFindEnemy(bot_state_t* bs, int curenemy)
         }
     }
 #endif
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
 
         if (i == bs->client)
             continue;
@@ -2638,7 +2638,7 @@ int BotTeamFlagCarrierVisible(bot_state_t* bs)
     float vis;
     aas_entityinfo_t entinfo;
 
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         if (i == bs->client)
             continue;
         BotEntityInfo(i, &entinfo);
@@ -2665,7 +2665,7 @@ int BotTeamFlagCarrier(bot_state_t* bs)
     int i;
     aas_entityinfo_t entinfo;
 
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         if (i == bs->client)
             continue;
         BotEntityInfo(i, &entinfo);
@@ -2689,7 +2689,7 @@ int BotEnemyFlagCarrierVisible(bot_state_t* bs)
     float vis;
     aas_entityinfo_t entinfo;
 
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         if (i == bs->client)
             continue;
         BotEntityInfo(i, &entinfo);
@@ -2722,7 +2722,7 @@ void BotVisibleTeamMatesAndEnemies(bot_state_t* bs, int* teammates, int* enemies
         *teammates = 0;
     if (enemies)
         *enemies = 0;
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         if (i == bs->client)
             continue;
         BotEntityInfo(i, &entinfo);
@@ -2758,7 +2758,7 @@ int BotTeamCubeCarrierVisible(bot_state_t* bs)
     float vis;
     aas_entityinfo_t entinfo;
 
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         if (i == bs->client)
             continue;
         BotEntityInfo(i, &entinfo);
@@ -2786,7 +2786,7 @@ int BotEnemyCubeCarrierVisible(bot_state_t* bs)
     float vis;
     aas_entityinfo_t entinfo;
 
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         if (i == bs->client)
             continue;
         BotEntityInfo(i, &entinfo);
@@ -3210,7 +3210,7 @@ void BotMapScripts(bot_state_t* bs)
         }
         shootbutton = false;
         // if an enemy is below this bounding box then shoot the button
-        for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+        for (i = 0; i < level.maxclients; i++) {
 
             if (i == bs->client)
                 continue;

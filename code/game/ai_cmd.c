@@ -199,12 +199,12 @@ static int FindClientByName(char* name)
     int i;
     char buf[MAX_INFO_STRING];
 
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         ClientName(i, buf, sizeof(buf));
         if (!Q_stricmp(buf, name))
             return i;
     }
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         ClientName(i, buf, sizeof(buf));
         if (stristr(buf, name))
             return i;
@@ -217,14 +217,14 @@ static int FindEnemyByName(bot_state_t* bs, char* name)
     int i;
     char buf[MAX_INFO_STRING];
 
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         if (BotSameTeam(bs, i))
             continue;
         ClientName(i, buf, sizeof(buf));
         if (!Q_stricmp(buf, name))
             return i;
     }
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         if (BotSameTeam(bs, i))
             continue;
         ClientName(i, buf, sizeof(buf));
@@ -240,7 +240,7 @@ static int NumPlayersOnSameTeam(bot_state_t* bs)
     char buf[MAX_INFO_STRING];
 
     num = 0;
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         trap_GetConfigstring(CS_PLAYERS + i, buf, MAX_INFO_STRING);
         if (strlen(buf)) {
             if (BotSameTeam(bs, i + 1))

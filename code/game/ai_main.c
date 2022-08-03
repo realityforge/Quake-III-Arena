@@ -330,7 +330,7 @@ static void BotUpdateInfoConfigStrings()
     int i;
     char buf[MAX_INFO_STRING];
 
-    for (i = 0; i < level.maxclients && i < MAX_CLIENTS; i++) {
+    for (i = 0; i < level.maxclients; i++) {
         if (!botstates[i] || !botstates[i]->inuse)
             continue;
         trap_GetConfigstring(CS_PLAYERS + i, buf, sizeof(buf));
