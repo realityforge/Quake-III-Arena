@@ -21,8 +21,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "cm_local.h"
 
-// always use bbox vs. bbox collision and never capsule vs. bbox or vice versa
-//#define ALWAYS_BBOX_VS_BBOX
 // always use capsule vs. capsule collision and never capsule vs. bbox or vice versa
 //#define ALWAYS_CAPSULE_VS_CAPSULE
 
@@ -1114,12 +1112,7 @@ static void CM_Trace(trace_t* results, const vec3_t start, const vec3_t end, vec
     // check for position test special case
     if (start[0] == end[0] && start[1] == end[1] && start[2] == end[2]) {
         if (model) {
-#ifdef ALWAYS_BBOX_VS_BBOX
-            if (model == BOX_MODEL_HANDLE || model == CAPSULE_MODEL_HANDLE) {
-                tw.sphere.use = false;
-                CM_TestInLeaf(&tw, &cmod->leaf);
-            } else
-#elif defined(ALWAYS_CAPSULE_VS_CAPSULE)
+#if defined(ALWAYS_CAPSULE_VS_CAPSULE)
             if (model == BOX_MODEL_HANDLE || model == CAPSULE_MODEL_HANDLE) {
                 CM_TestCapsuleInCapsule(&tw, model);
             } else
@@ -1150,12 +1143,7 @@ static void CM_Trace(trace_t* results, const vec3_t start, const vec3_t end, vec
 
         // general sweeping through world
         if (model) {
-#ifdef ALWAYS_BBOX_VS_BBOX
-            if (model == BOX_MODEL_HANDLE || model == CAPSULE_MODEL_HANDLE) {
-                tw.sphere.use = false;
-                CM_TraceThroughLeaf(&tw, &cmod->leaf);
-            } else
-#elif defined(ALWAYS_CAPSULE_VS_CAPSULE)
+#if defined(ALWAYS_CAPSULE_VS_CAPSULE)
             if (model == BOX_MODEL_HANDLE || model == CAPSULE_MODEL_HANDLE) {
                 CM_TraceCapsuleThroughCapsule(&tw, model);
             } else
