@@ -36,8 +36,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_interface.h"
 #include "be_aas_def.h"
 
-#define ROUTING_DEBUG
-
 // travel time in hundredths of a second = distance * 100 / speed
 #define DISTANCEFACTOR_CROUCH 1.3f // crouch speed = 100
 #define DISTANCEFACTOR_SWIM 1 // should be 0.66, swim speed = 150
@@ -60,18 +58,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 */
 
-#ifdef ROUTING_DEBUG
-static int numareacacheupdates;
-static int numportalcacheupdates;
-static int routingcachesize;
-
-void AAS_RoutingInfo()
-{
-    botimport.Print(PRT_MESSAGE, "%d area cache updates\n", numareacacheupdates);
-    botimport.Print(PRT_MESSAGE, "%d portal cache updates\n", numportalcacheupdates);
-    botimport.Print(PRT_MESSAGE, "%d bytes routing cache\n", routingcachesize);
-}
-#endif // ROUTING_DEBUG
 //===========================================================================
 // returns the number of the area in the cluster
 // assumes the given area is in the given cluster or a portal of the cluster
@@ -162,9 +148,6 @@ static void AAS_LinkCache(aas_routingcache_t* cache)
 static void AAS_FreeRoutingCache(aas_routingcache_t* cache)
 {
     AAS_UnlinkCache(cache);
-#ifdef ROUTING_DEBUG
-    routingcachesize -= cache->size;
-#endif
     FreeMemory(cache);
 }
 static void AAS_RemoveRoutingCacheInCluster(int clusternum)
@@ -478,9 +461,6 @@ static aas_routingcache_t* AAS_AllocRoutingCache(int numtraveltimes)
     size = sizeof(aas_routingcache_t)
         + numtraveltimes * sizeof(unsigned short int)
         + numtraveltimes * sizeof(unsigned char);
-#ifdef ROUTING_DEBUG
-    routingcachesize += size;
-#endif
     cache = (aas_routingcache_t*)GetClearedMemory(size);
     cache->reachabilities = (unsigned char*)cache + sizeof(aas_routingcache_t)
         + numtraveltimes * sizeof(unsigned short int);
@@ -837,11 +817,6 @@ void AAS_InitRouting()
     AAS_InitPortalMaxTravelTimes();
     // get the areas reachabilities go through
     AAS_InitReachabilityAreas();
-#ifdef ROUTING_DEBUG
-    numareacacheupdates = 0;
-    numportalcacheupdates = 0;
-    routingcachesize = 0;
-#endif // ROUTING_DEBUG
     // read any routing cache if available
     AAS_ReadRouteCache();
 }
@@ -898,10 +873,7 @@ static void AAS_UpdateAreaRoutingCache(aas_routingcache_t* areacache)
     aas_reversedreachability_t* revreach;
     aas_reversedlink_t* revlink;
 
-#ifdef ROUTING_DEBUG
-    numareacacheupdates++;
-#endif // ROUTING_DEBUG
-       // number of reachability areas within this cluster
+    // number of reachability areas within this cluster
     numreachabilityareas = aasworld.clusters[areacache->cluster].numreachabilityareas;
     aasworld.frameroutingupdates++;
     // clear the routing update fields
@@ -1028,10 +1000,7 @@ static void AAS_UpdatePortalRoutingCache(aas_routingcache_t* portalcache)
     aas_routingcache_t* cache;
     aas_routingupdate_t *updateliststart, *updatelistend, *curupdate, *nextupdate;
 
-#ifdef ROUTING_DEBUG
-    numportalcacheupdates++;
-#endif // ROUTING_DEBUG
-       // clear the routing update fields
+    // clear the routing update fields
     //	memset(aasworld.portalupdate, 0, (aasworld.numportals+1) * sizeof(aas_routingupdate_t));
     curupdate = &aasworld.portalupdate[aasworld.numportals];
     curupdate->cluster = portalcache->cluster;
