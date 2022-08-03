@@ -254,7 +254,7 @@ void Team_FragBonuses(gentity_t* targ, gentity_t* inflictor, gentity_t* attacker
     vec3_t v1, v2;
     int team;
 
-    // no bonus for fragging yourself or team mates
+    // no bonus for fragging yourself or teammates
     if (!targ->client || !attacker->client || targ == attacker || OnSameTeam(targ, attacker))
         return;
 

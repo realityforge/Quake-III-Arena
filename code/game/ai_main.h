@@ -31,8 +31,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define BFL_IDEALVIEWSET 32 // bot has ideal view angles set
 #define BFL_FIGHTSUICIDAL 64 // bot is in a suicidal fight
 // long term goal types
-#define LTG_TEAMHELP 1 // help a team mate
-#define LTG_TEAMACCOMPANY 2 // accompany a team mate
+#define LTG_TEAMHELP 1 // help a teammate
+#define LTG_TEAMACCOMPANY 2 // accompany a teammate
 #define LTG_DEFENDKEYAREA 3 // defend a key area
 #define LTG_GETFLAG 4 // get the enemy flag
 #define LTG_RUSHBASE 5 // rush to the base
@@ -200,7 +200,7 @@ typedef struct bot_state_s {
     vec3_t viewanglespeed;
     int ltgtype; // long term goal type
     // team goals
-    int teammate; // team mate involved in this team goal
+    int teammate; // teammate involved in this team goal
     int decisionmaker; // player who decided to go for this goal
     int ordered; // true if ordered to do something
     float order_time; // time ordered to do something
@@ -208,37 +208,37 @@ typedef struct bot_state_s {
     bot_goal_t teamgoal; // the team goal
     bot_goal_t altroutegoal; // alternative route goal
     float reachedaltroutegoal_time; // time the bot reached the alt route goal
-    float teammessage_time; // time to message team mates what the bot is doing
-    float teamgoal_time; // time to stop helping team mate
-    float teammatevisible_time; // last time the team mate was NOT visible
+    float teammessage_time; // time to message teammates what the bot is doing
+    float teamgoal_time; // time to stop helping teammate
+    float teammatevisible_time; // last time the teammate was NOT visible
     int teamtaskpreference; // team task preference
     // last ordered team goal
     int lastgoal_decisionmaker;
     int lastgoal_ltgtype;
     int lastgoal_teammate;
     bot_goal_t lastgoal_teamgoal;
-    // for leading team mates
-    int lead_teammate; // team mate the bot is leading
+    // for leading teammates
+    int lead_teammate; // teammate the bot is leading
     bot_goal_t lead_teamgoal; // team goal while leading
     float lead_time; // time leading someone
-    float leadvisible_time; // last time the team mate was visible
-    float leadmessage_time; // last time a messaged was sent to the team mate
-    float leadbackup_time; // time backing up towards team mate
+    float leadvisible_time; // last time the teammate was visible
+    float leadmessage_time; // last time a messaged was sent to the teammate
+    float leadbackup_time; // time backing up towards teammate
     char teamleader[MAX_NETNAME]; // netname of the team leader
     float askteamleader_time; // time asked for team leader
     float becometeamleader_time; // time the bot will become the team leader
     float teamgiveorders_time; // time to give team orders
     float lastflagcapture_time; // last time a flag was captured
-    int numteammates; // number of team mates
+    int numteammates; // number of teammates
     int redflagstatus; // 0 = at base, 1 = not at base
     int blueflagstatus; // 0 = at base, 1 = not at base
     int neutralflagstatus; // 0 = at base, 1 = our team has flag, 2 = enemy team has flag, 3 = enemy team dropped the flag
     int flagstatuschanged; // flag status changed
     int forceorders; // true if forced to give orders
-    int flagcarrier; // team mate carrying the enemy flag
+    int flagcarrier; // teammate carrying the enemy flag
     int ctfstrategy; // ctf strategy
     char subteam[32]; // sub team name
-    float formation_dist; // formation team mate intervening space
+    float formation_dist; // formation teammate intervening space
 
     bot_activategoal_t* activatestack; // first activate goal on the stack
     bot_activategoal_t activategoalheap[MAX_ACTIVATESTACK]; // activate goal heap

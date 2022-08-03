@@ -178,7 +178,7 @@ static char* BotRandomOpponentName(bot_state_t* bs)
         // skip spectators
         if (atoi(Info_ValueForKey(buf, "t")) == TEAM_SPECTATOR)
             continue;
-        // skip team mates
+        // skip teammates
         if (BotSameTeam(bs, i))
             continue;
         opponents[numopponents] = i;

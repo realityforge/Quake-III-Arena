@@ -280,15 +280,15 @@ static int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t*
             trap_EA_Action(bs->client, ACTION_AFFIRMATIVE);
             bs->teammessage_time = 0;
         }
-        // if trying to help the team mate for more than a minute
+        // if trying to help the teammate for more than a minute
         if (bs->teamgoal_time < FloatTime())
             bs->ltgtype = 0;
-        // if the team mate IS visible for quite some time
+        // if the teammate IS visible for quite some time
         if (bs->teammatevisible_time < FloatTime() - 10)
             bs->ltgtype = 0;
         // get entity information of the companion
         BotEntityInfo(bs->teammate, &entinfo);
-        // if the team mate is visible
+        // if the teammate is visible
         if (BotEntityVisible(bs->entitynum, bs->eye, bs->viewangles, 360, bs->teammate)) {
             // if close just stand still there
             VectorSubtract(entinfo.origin, bs->origin, dir);
@@ -1025,44 +1025,44 @@ static int BotLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t* go
                 VectorSet(bs->lead_teamgoal.maxs, 8, 8, 8);
             }
         }
-        // if the team mate is visible
+        // if the teammate is visible
         if (BotEntityVisible(bs->entitynum, bs->eye, bs->viewangles, 360, bs->lead_teammate)) {
             bs->leadvisible_time = FloatTime();
         }
-        // if the team mate is not visible for 1 seconds
+        // if the teammate is not visible for 1 seconds
         if (bs->leadvisible_time < FloatTime() - 1) {
             bs->leadbackup_time = FloatTime() + 2;
         }
-        // distance towards the team mate
+        // distance towards the teammate
         VectorSubtract(bs->origin, bs->lead_teamgoal.origin, dir);
         squaredist = VectorLengthSquared(dir);
-        // if backing up towards the team mate
+        // if backing up towards the teammate
         if (bs->leadbackup_time > FloatTime()) {
             if (bs->leadmessage_time < FloatTime() - 20) {
                 BotAI_BotInitialChat(bs, "followme", EasyClientName(bs->lead_teammate, teammate, sizeof(teammate)), NULL);
                 trap_BotEnterChat(bs->cs, bs->teammate, CHAT_TELL);
                 bs->leadmessage_time = FloatTime();
             }
-            // if very close to the team mate
+            // if very close to the teammate
             if (squaredist < Square(100)) {
                 bs->leadbackup_time = 0;
             }
-            // the bot should go back to the team mate
+            // the bot should go back to the teammate
             memcpy(goal, &bs->lead_teamgoal, sizeof(bot_goal_t));
             return true;
         } else {
-            // if quite distant from the team mate
+            // if quite distant from the teammate
             if (squaredist > Square(500)) {
                 if (bs->leadmessage_time < FloatTime() - 20) {
                     BotAI_BotInitialChat(bs, "followme", EasyClientName(bs->lead_teammate, teammate, sizeof(teammate)), NULL);
                     trap_BotEnterChat(bs->cs, bs->teammate, CHAT_TELL);
                     bs->leadmessage_time = FloatTime();
                 }
-                // look at the team mate
+                // look at the teammate
                 VectorSubtract(entinfo.origin, bs->origin, dir);
                 vectoangles(dir, bs->ideal_viewangles);
                 bs->ideal_viewangles[2] *= 0.5;
-                // just wait for the team mate
+                // just wait for the teammate
                 return false;
             }
         }

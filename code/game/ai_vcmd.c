@@ -66,7 +66,7 @@ static void BotVoiceChat_GetFlag(bot_state_t* bs, int client, UNUSED int mode)
     bs->decisionmaker = client;
     bs->ordered = true;
     bs->order_time = FloatTime();
-    // set the time to send a message to the team mates
+    // set the time to send a message to the teammates
     bs->teammessage_time = FloatTime() + 2 * random();
     // set the ltg type
     bs->ltgtype = LTG_GETFLAG;
@@ -100,7 +100,7 @@ static void BotVoiceChat_Offense(bot_state_t* bs, int client, int mode)
         bs->decisionmaker = client;
         bs->ordered = true;
         bs->order_time = FloatTime();
-        // set the time to send a message to the team mates
+        // set the time to send a message to the teammates
         bs->teammessage_time = FloatTime() + 2 * random();
         // set the ltg type
         bs->ltgtype = LTG_HARVEST;
@@ -116,7 +116,7 @@ static void BotVoiceChat_Offense(bot_state_t* bs, int client, int mode)
         bs->decisionmaker = client;
         bs->ordered = true;
         bs->order_time = FloatTime();
-        // set the time to send a message to the team mates
+        // set the time to send a message to the teammates
         bs->teammessage_time = FloatTime() + 2 * random();
         // set the ltg type
         bs->ltgtype = LTG_ATTACKENEMYBASE;
@@ -169,7 +169,7 @@ void BotVoiceChat_Defend(bot_state_t* bs, int client, UNUSED int mode)
     bs->decisionmaker = client;
     bs->ordered = true;
     bs->order_time = FloatTime();
-    // set the time to send a message to the team mates
+    // set the time to send a message to the teammates
     bs->teammessage_time = FloatTime() + 2 * random();
     // set the ltg type
     bs->ltgtype = LTG_DEFENDKEYAREA;
@@ -236,7 +236,7 @@ static void BotVoiceChat_Camp(bot_state_t* bs, int client, UNUSED int mode)
     bs->decisionmaker = client;
     bs->ordered = true;
     bs->order_time = FloatTime();
-    // set the time to send a message to the team mates
+    // set the time to send a message to the teammates
     bs->teammessage_time = FloatTime() + 2 * random();
     // set the ltg type
     bs->ltgtype = LTG_CAMPORDER;
@@ -282,11 +282,11 @@ static void BotVoiceChat_FollowMe(bot_state_t* bs, int client, UNUSED int mode)
     bs->decisionmaker = client;
     bs->ordered = true;
     bs->order_time = FloatTime();
-    // the team mate
+    // the teammate
     bs->teammate = client;
-    // last time the team mate was assumed visible
+    // last time the teammate was assumed visible
     bs->teammatevisible_time = FloatTime();
-    // set the time to send a message to the team mates
+    // set the time to send a message to the teammates
     bs->teammessage_time = FloatTime() + 2 * random();
     // get the team goal time
     bs->teamgoal_time = FloatTime() + TEAM_ACCOMPANY_TIME;
@@ -328,7 +328,7 @@ static void BotVoiceChat_ReturnFlag(bot_state_t* bs, int client, UNUSED int mode
     bs->decisionmaker = client;
     bs->ordered = true;
     bs->order_time = FloatTime();
-    // set the time to send a message to the team mates
+    // set the time to send a message to the teammates
     bs->teammessage_time = FloatTime() + 2 * random();
     // set the ltg type
     bs->ltgtype = LTG_RETURNFLAG;
