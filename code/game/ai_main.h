@@ -173,7 +173,6 @@ typedef struct bot_state_s {
     float lastair_time; // last time the bot had air
     float teleport_time; // last time the bot teleported
     float camp_time; // last time camped
-    float camp_range; // camp range
     float weaponchange_time; // time the bot started changing weapons
     float firethrottlewait_time; // amount of time to wait
     float firethrottleshoot_time; // amount of time to shoot
