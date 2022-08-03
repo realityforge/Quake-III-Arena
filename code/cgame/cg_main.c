@@ -694,9 +694,7 @@ static void CG_RegisterSounds()
     Q_strncpyz(items, CG_ConfigString(CS_ITEMS), sizeof(items));
 
     for (i = 1; i < bg_numItems; i++) {
-        //		if ( items[ i ] == '1' || cg_buildScript.integer ) {
         CG_RegisterItemSounds(i);
-        //		}
     }
 
     for (i = 1; i < MAX_SOUNDS; i++) {
