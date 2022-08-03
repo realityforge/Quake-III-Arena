@@ -404,7 +404,7 @@ int CG_LastAttacker()
     if (!cg.attackerTime) {
         return -1;
     }
-    return cg.snap->ps.persistant[PERS_ATTACKER];
+    return cg.snap->ps.persistent[PERS_ATTACKER];
 }
 
 void QDECL CG_Printf(const char* msg, ...)

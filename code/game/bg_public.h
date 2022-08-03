@@ -211,7 +211,7 @@ typedef enum {
     STAT_MAX_HEALTH // health / armor limit, changeable by handicap
 } statIndex_t;
 
-// player_state->persistant[] indexes
+// player_state->persistent[] indexes
 // these fields are the only part of player_state that isn't
 // cleared on respawn
 // NOTE: may not have more than 16
@@ -317,7 +317,7 @@ typedef enum {
     WP_NUM_WEAPONS
 } weapon_t;
 
-// reward sounds (stored in ps->persistant[PERS_PLAYEREVENTS])
+// reward sounds (stored in ps->persistent[PERS_PLAYEREVENTS])
 #define PLAYEREVENT_DENIEDREWARD 0x0001
 #define PLAYEREVENT_GAUNTLETREWARD 0x0002
 #define PLAYEREVENT_HOLYSHIT 0x0004

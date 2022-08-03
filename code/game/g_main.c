@@ -701,12 +701,12 @@ static int QDECL SortRanks(const void* a, const void* b)
     }
 
     // then sort by score
-    if (ca->ps.persistant[PERS_SCORE]
-        > cb->ps.persistant[PERS_SCORE]) {
+    if (ca->ps.persistent[PERS_SCORE]
+        > cb->ps.persistent[PERS_SCORE]) {
         return -1;
     }
-    if (ca->ps.persistant[PERS_SCORE]
-        < cb->ps.persistant[PERS_SCORE]) {
+    if (ca->ps.persistent[PERS_SCORE]
+        < cb->ps.persistent[PERS_SCORE]) {
         return 1;
     }
     return 0;
@@ -775,11 +775,11 @@ void CalculateRanks()
         for (int i = 0; i < level.numConnectedClients; i++) {
             cl = &level.clients[level.sortedClients[i]];
             if (level.teamScores[TEAM_RED] == level.teamScores[TEAM_BLUE]) {
-                cl->ps.persistant[PERS_RANK] = 2;
+                cl->ps.persistent[PERS_RANK] = 2;
             } else if (level.teamScores[TEAM_RED] > level.teamScores[TEAM_BLUE]) {
-                cl->ps.persistant[PERS_RANK] = 0;
+                cl->ps.persistent[PERS_RANK] = 0;
             } else {
-                cl->ps.persistant[PERS_RANK] = 1;
+                cl->ps.persistent[PERS_RANK] = 1;
             }
         }
     } else {
@@ -787,19 +787,19 @@ void CalculateRanks()
         score = 0;
         for (int i = 0; i < level.numPlayingClients; i++) {
             cl = &level.clients[level.sortedClients[i]];
-            newScore = cl->ps.persistant[PERS_SCORE];
+            newScore = cl->ps.persistent[PERS_SCORE];
             if (i == 0 || newScore != score) {
                 rank = i;
                 // assume we aren't tied until the next client is checked
-                level.clients[level.sortedClients[i]].ps.persistant[PERS_RANK] = rank;
+                level.clients[level.sortedClients[i]].ps.persistent[PERS_RANK] = rank;
             } else {
                 // we are tied with the previous client
-                level.clients[level.sortedClients[i - 1]].ps.persistant[PERS_RANK] = rank | RANK_TIED_FLAG;
-                level.clients[level.sortedClients[i]].ps.persistant[PERS_RANK] = rank | RANK_TIED_FLAG;
+                level.clients[level.sortedClients[i - 1]].ps.persistent[PERS_RANK] = rank | RANK_TIED_FLAG;
+                level.clients[level.sortedClients[i]].ps.persistent[PERS_RANK] = rank | RANK_TIED_FLAG;
             }
             score = newScore;
             if (g_gametype.integer == GT_SINGLE_PLAYER && level.numPlayingClients == 1) {
-                level.clients[level.sortedClients[i]].ps.persistant[PERS_RANK] = rank | RANK_TIED_FLAG;
+                level.clients[level.sortedClients[i]].ps.persistent[PERS_RANK] = rank | RANK_TIED_FLAG;
             }
         }
     }
@@ -813,11 +813,11 @@ void CalculateRanks()
             trap_SetConfigstring(CS_SCORES1, va("%i", SCORE_NOT_PRESENT));
             trap_SetConfigstring(CS_SCORES2, va("%i", SCORE_NOT_PRESENT));
         } else if (level.numConnectedClients == 1) {
-            trap_SetConfigstring(CS_SCORES1, va("%i", level.clients[level.sortedClients[0]].ps.persistant[PERS_SCORE]));
+            trap_SetConfigstring(CS_SCORES1, va("%i", level.clients[level.sortedClients[0]].ps.persistent[PERS_SCORE]));
             trap_SetConfigstring(CS_SCORES2, va("%i", SCORE_NOT_PRESENT));
         } else {
-            trap_SetConfigstring(CS_SCORES1, va("%i", level.clients[level.sortedClients[0]].ps.persistant[PERS_SCORE]));
-            trap_SetConfigstring(CS_SCORES2, va("%i", level.clients[level.sortedClients[1]].ps.persistant[PERS_SCORE]));
+            trap_SetConfigstring(CS_SCORES1, va("%i", level.clients[level.sortedClients[0]].ps.persistent[PERS_SCORE]));
+            trap_SetConfigstring(CS_SCORES2, va("%i", level.clients[level.sortedClients[1]].ps.persistent[PERS_SCORE]));
         }
     }
 
@@ -1008,7 +1008,7 @@ void ExitLevel()
         if (cl->pers.connected != CON_CONNECTED) {
             continue;
         }
-        cl->ps.persistant[PERS_SCORE] = 0;
+        cl->ps.persistent[PERS_SCORE] = 0;
     }
 
     // we need to do this here before changing to CON_CONNECTING
@@ -1108,13 +1108,13 @@ static void LogExit(const char* string)
 
         ping = cl->ps.ping < 999 ? cl->ps.ping : 999;
 
-        G_LogPrintf("score: %i  ping: %i  client: %i %s\n", cl->ps.persistant[PERS_SCORE], ping, level.sortedClients[i], cl->pers.netname);
+        G_LogPrintf("score: %i  ping: %i  client: %i %s\n", cl->ps.persistent[PERS_SCORE], ping, level.sortedClients[i], cl->pers.netname);
 #ifdef MISSIONPACK
         if (g_singlePlayer.integer && !(g_entities[cl - level.clients].r.svFlags & SVF_BOT)) {
             team = cl->sess.sessionTeam;
         }
         if (g_singlePlayer.integer && g_gametype.integer < GT_TEAM) {
-            if (g_entities[cl - level.clients].r.svFlags & SVF_BOT && cl->ps.persistant[PERS_RANK] == 0) {
+            if (g_entities[cl - level.clients].r.svFlags & SVF_BOT && cl->ps.persistent[PERS_RANK] == 0) {
                 won = false;
             }
         }
@@ -1238,8 +1238,8 @@ static bool ScoreIsTied()
         return level.teamScores[TEAM_RED] == level.teamScores[TEAM_BLUE];
     }
 
-    a = level.clients[level.sortedClients[0]].ps.persistant[PERS_SCORE];
-    b = level.clients[level.sortedClients[1]].ps.persistant[PERS_SCORE];
+    a = level.clients[level.sortedClients[0]].ps.persistent[PERS_SCORE];
+    b = level.clients[level.sortedClients[1]].ps.persistent[PERS_SCORE];
 
     return a == b;
 }
@@ -1328,7 +1328,7 @@ void CheckExitRules()
                 continue;
             }
 
-            if (cl->ps.persistant[PERS_SCORE] >= g_fraglimit.integer) {
+            if (cl->ps.persistent[PERS_SCORE] >= g_fraglimit.integer) {
                 LogExit("Fraglimit hit.");
                 trap_SendServerCommand(-1, va("print \"%s" S_COLOR_WHITE " hit the fraglimit.\n\"", cl->pers.netname));
                 return;

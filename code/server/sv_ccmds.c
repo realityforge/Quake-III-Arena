@@ -555,7 +555,7 @@ static void SV_Status_f()
             continue;
         Com_Printf("%2i ", i);
         ps = SV_GameClientNum(i);
-        Com_Printf("%5i ", ps->persistant[PERS_SCORE]);
+        Com_Printf("%5i ", ps->persistent[PERS_SCORE]);
 
         if (cl->state == CS_CONNECTED)
             Com_Printf("CON ");

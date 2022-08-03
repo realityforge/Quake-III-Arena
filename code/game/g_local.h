@@ -231,7 +231,7 @@ typedef struct {
 // on each level change or team change at ClientBegin()
 typedef struct {
     clientConnected_t connected;
-    usercmd_t cmd; // we would lose angles if not persistant
+    usercmd_t cmd; // we would lose angles if not persistent
     bool localClient; // true if "ip" info key is "localhost"
     bool initialSpawn; // the first spawn should be at a cool location
     bool predictItemPickup; // based on cg_predictItems userinfo
@@ -305,7 +305,7 @@ struct gclient_s {
     int timeResidual;
 
 #ifdef MISSIONPACK
-    gentity_t* persistantPowerup;
+    gentity_t* persistentPowerup;
     int portalID;
     int ammoTimes[WP_NUM_WEAPONS];
     int invulnerabilityTime;

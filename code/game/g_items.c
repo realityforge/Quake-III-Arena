@@ -107,7 +107,7 @@ static int Pickup_Powerup(gentity_t* ent, gentity_t* other)
         }
 
         // anti-reward
-        client->ps.persistant[PERS_PLAYEREVENTS] ^= PLAYEREVENT_DENIEDREWARD;
+        client->ps.persistent[PERS_PLAYEREVENTS] ^= PLAYEREVENT_DENIEDREWARD;
     }
     return RESPAWN_POWERUP;
 }
@@ -123,7 +123,7 @@ static int Pickup_PersistantPowerup(gentity_t* ent, gentity_t* other)
     int max;
 
     other->client->ps.stats[STAT_PERSISTANT_POWERUP] = ent->item - bg_itemlist;
-    other->client->persistantPowerup = ent;
+    other->client->persistentPowerup = ent;
 
     switch (ent->item->giTag) {
     case PW_GUARD:
