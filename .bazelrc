@@ -104,6 +104,9 @@ query --experimental_remote_merkle_tree_cache
 # but most tests should instead be short (1 min).
 test --test_verbose_timeout_warnings
 
+# print test logs for failed tests
+test --test_output=errors
+
 # Don't upload artifacts referenced in the BEP if the action can't be cached remotely.
 build --incompatible_remote_build_event_upload_respect_no_cache
 
