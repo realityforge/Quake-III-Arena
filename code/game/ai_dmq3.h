@@ -161,7 +161,6 @@ void BotMapScripts(bot_state_t* bs);
 #define CTF_FLAG_BLUE 2
 
 extern int gametype; // game type
-extern int maxclients; // maximum number of clients
 
 extern vmCvar_t bot_grapple;
 extern vmCvar_t bot_rocketjump;
