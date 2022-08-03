@@ -56,7 +56,7 @@ float R_NoiseGet4f(const float x, const float y, const float z, const double t)
     const float yRemainder = y - iyf;
     const float izf = floorf(z);
     const int iz = (int)izf;
-    const float zRemainder = z - (float)iz;
+    const float zRemainder = z - izf;
     const double itd = floor(t);
     const int it = (int)itd;
     const float tRemainder = (float)(t - (double)it);
