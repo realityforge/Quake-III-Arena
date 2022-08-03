@@ -165,9 +165,6 @@ LONG WINAPI InputLineWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     return CallWindowProc(s_wcd.SysInputLineWndProc, hWnd, uMsg, wParam, lParam);
 }
 
-/*
-** Conbuf_AppendText
-*/
 void Conbuf_AppendText(const char* pMsg)
 {
 #define CONSOLE_BUFFER_SIZE 16384
@@ -226,9 +223,6 @@ void Conbuf_AppendText(const char* pMsg)
     SendMessage(s_wcd.hwndBuffer, EM_REPLACESEL, 0, (LPARAM)buffer);
 }
 
-/*
-** Sys_SetErrorText
-*/
 void Sys_SetErrorText(const char* buf)
 {
     Q_strncpyz(s_wcd.errorString, buf, sizeof(s_wcd.errorString));

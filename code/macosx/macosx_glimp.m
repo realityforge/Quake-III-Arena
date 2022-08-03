@@ -94,10 +94,6 @@ void QGLCheckError(const char* message)
 }
 #endif
 
-/*
-** GLimp_SetMode
-*/
-
 bool GLimp_SetMode(bool isSecondTry)
 {
     if (!CreateGameWindow(isSecondTry)) {
@@ -632,9 +628,6 @@ void* qwglGetProcAddress(const char* name)
     return NSAddressOfSymbol(symbol);
 }
 
-/*
-** GLW_InitExtensions
-*/
 static void GLW_InitExtensions(void)
 {
     if (!r_allowExtensions->integer) {

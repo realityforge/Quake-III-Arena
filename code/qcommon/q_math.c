@@ -410,8 +410,6 @@ void VectorRotate(vec3_t in, vec3_t matrix[3], vec3_t out)
     out[2] = DotProduct(in, matrix[2]);
 }
 
-//============================================================================
-
 /*
 ** float q_rsqrt( float number )
 */

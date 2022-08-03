@@ -77,9 +77,6 @@ glwstate_t glw_state;
 
 cvar_t* r_maskMinidriver; // allow a different dll name to be treated as if it were opengl32.dll
 
-/*
-** GLW_StartDriverAndSetMode
-*/
 static bool GLW_StartDriverAndSetMode(const char* drivername,
                                       int mode,
                                       int colorbits,
@@ -279,9 +276,6 @@ static void GLW_CreatePFD(PIXELFORMATDESCRIPTOR* pPFD, int colorbits, int depthb
     *pPFD = src;
 }
 
-/*
-** GLW_MakeContext
-*/
 static int GLW_MakeContext(PIXELFORMATDESCRIPTOR* pPFD)
 {
     int pixelformat;
@@ -578,9 +572,6 @@ static void PrintCDSError(int value)
     }
 }
 
-/*
-** GLW_SetMode
-*/
 static rserr_t GLW_SetMode(const char* drivername,
                            int mode,
                            int colorbits,
@@ -753,9 +744,6 @@ static rserr_t GLW_SetMode(const char* drivername,
     return RSERR_OK;
 }
 
-/*
-** GLW_InitExtensions
-*/
 static void GLW_InitExtensions(void)
 {
     if (!r_allowExtensions->integer) {
@@ -833,9 +821,6 @@ static void GLW_InitExtensions(void)
     }
 }
 
-/*
-** GLW_CheckOSVersion
-*/
 static bool GLW_CheckOSVersion(void)
 {
 #define OSR2_BUILD_NUMBER 1111
@@ -898,9 +883,6 @@ fail:
     return false;
 }
 
-/*
-** GLimp_EndFrame
-*/
 void GLimp_EndFrame(void)
 {
     // swapinterval stuff

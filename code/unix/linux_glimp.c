@@ -880,9 +880,6 @@ static bool GLW_StartDriverAndSetMode(const char* drivername,
     return true;
 }
 
-/*
-** GLW_SetMode
-*/
 int GLW_SetMode(const char* drivername, int mode, bool fullscreen)
 {
     int attrib[] = {
@@ -1145,9 +1142,6 @@ int GLW_SetMode(const char* drivername, int mode, bool fullscreen)
     return RSERR_OK;
 }
 
-/*
-** GLW_InitExtensions
-*/
 static void GLW_InitExtensions(void)
 {
     if (!r_allowExtensions->integer) {

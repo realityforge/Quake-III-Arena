@@ -19,9 +19,6 @@ along with Quake III Arena source code; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
-/*
-** WIN_GAMMA.C
-*/
 #include <assert.h>
 #include "../renderer/tr_local.h"
 #include "../qcommon/qcommon.h"
@@ -169,9 +166,6 @@ void GLimp_SetGamma(unsigned char red[256], unsigned char green[256], unsigned c
     }
 }
 
-/*
-** WG_RestoreGamma
-*/
 void WG_RestoreGamma(void)
 {
     if (glConfig.deviceSupportsGamma) {
