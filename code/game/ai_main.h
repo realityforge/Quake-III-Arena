@@ -240,11 +240,6 @@ typedef struct bot_state_s {
     int ctfstrategy; // ctf strategy
     char subteam[32]; // sub team name
     float formation_dist; // formation team mate intervening space
-    char formation_teammate[16]; // netname of the team mate the bot uses for relative positioning
-    float formation_angle; // angle relative to the formation team mate
-    vec3_t formation_dir; // the direction the formation is moving in
-    vec3_t formation_origin; // origin the bot uses for relative positioning
-    bot_goal_t formation_goal; // formation goal
 
     bot_activategoal_t* activatestack; // first activate goal on the stack
     bot_activategoal_t activategoalheap[MAX_ACTIVATESTACK]; // activate goal heap
