@@ -1500,7 +1500,7 @@ static void BotMatch_CTF(bot_state_t* bs, bot_match_t* match)
 #endif
 }
 
-static void BotMatch_EnterGame(UNUSED bot_state_t* bs, bot_match_t* match)
+static void BotMatch_EnterGame(bot_match_t* match)
 {
     int client;
     char netname[MAX_NETNAME];
@@ -1679,7 +1679,7 @@ int BotMatchMessage(bot_state_t* bs, char* message)
     }
     case MSG_ENTERGAME: // someone entered the game
     {
-        BotMatch_EnterGame(bs, &match);
+        BotMatch_EnterGame(&match);
         break;
     }
     case MSG_NEWLEADER: {
