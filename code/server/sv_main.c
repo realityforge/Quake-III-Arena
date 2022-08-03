@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "server_local.h"
+#include "qengine.h"
 
 #ifdef USE_VOIP
 cvar_t* sv_voip;

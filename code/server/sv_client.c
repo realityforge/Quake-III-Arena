@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "server_local.h"
 #include "lang_util.h"
+#include "qengine.h"
 
 static void SV_CloseDownload(client_t* cl);
 
