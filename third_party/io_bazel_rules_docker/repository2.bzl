@@ -10,7 +10,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@io_bazel_rules_docker//cc:image.bzl", _cc_image_repos = "repositories")
+load("@io_bazel_rules_docker//repositories:deps.bzl", _container_deps = "deps")
 load("@io_bazel_rules_docker//repositories:repositories.bzl", _container_repositories = "repositories")
 
 def configure_repository():
+    _container_deps(go_repository_default_config = "@//:WORKSPACE.bazel")
     _container_repositories()
+    _cc_image_repos()
