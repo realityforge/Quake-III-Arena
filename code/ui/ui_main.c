@@ -1838,10 +1838,6 @@ static void UI_DrawGLInfo(rectDef_t* rect, float scale, vec4_t color, int textSt
     Text_Paint(rect->x + 2, rect->y + 15, scale, color, va("VERSION: %s: %s", uiInfo.uiDC.glconfig.version_string, uiInfo.uiDC.glconfig.renderer_string), 0, 30, textStyle);
     Text_Paint(rect->x + 2, rect->y + 30, scale, color, va("PIXELFORMAT: color(%d-bits) Z(%d-bits) stencil(%d-bits)", uiInfo.uiDC.glconfig.colorBits, uiInfo.uiDC.glconfig.depthBits, uiInfo.uiDC.glconfig.stencilBits), 0, 30, textStyle);
 
-    // build null terminated extension strings
-    // TTimo: https://zerowing.idsoftware.com/bugzilla/show_bug.cgi?id=399
-    // in TA this was not directly crashing, but displaying a nasty broken shader right in the middle
-    // brought down the string size to 1024, there's not much that can be shown on the screen anyway
     strncpyz(buff, uiInfo.uiDC.glconfig.extensions_string, 1024);
     eptr = buff;
     y = rect->y + 45;
