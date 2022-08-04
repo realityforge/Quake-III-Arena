@@ -247,11 +247,7 @@ Just prints the rest of the line to the console
 */
 void Cmd_Echo_f()
 {
-    int i;
-
-    for (i = 1; i < Cmd_Argc(); i++)
-        Com_Printf("%s ", Cmd_Argv(i));
-    Com_Printf("\n");
+    Com_Printf("%s\n", Cmd_Args());
 }
 
 typedef struct cmd_function_s {
@@ -379,7 +375,7 @@ will point into this temporary buffer.
 ============
 */
 // NOTE TTimo define that to track tokenization issues
-//#define TKN_DBG
+// #define TKN_DBG
 void Cmd_TokenizeString(const char* text_in)
 {
     const char* text;
