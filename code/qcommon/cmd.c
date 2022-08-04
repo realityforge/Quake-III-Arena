@@ -710,8 +710,8 @@ void Cmd_ExecuteString(const char* text)
     if (com_sv_running && com_sv_running->integer && SV_GameCommand()) {
         return;
     }
-#ifndef DEDICATED
 
+#ifndef DEDICATED
     // check ui commands
     if (com_cl_running && com_cl_running->integer && UI_GameCommand()) {
         return;
