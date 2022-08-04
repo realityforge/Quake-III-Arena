@@ -76,9 +76,8 @@ static void LibVarDeAlloc(libvar_t* v)
 }
 void LibVarDeAllocAll()
 {
-    libvar_t* v;
-
-    for (v = libvarlist; v; v = libvarlist) {
+    while (NULL != libvarlist) {
+        libvar_t* v = libvarlist;
         libvarlist = libvarlist->next;
         LibVarDeAlloc(v);
     }
