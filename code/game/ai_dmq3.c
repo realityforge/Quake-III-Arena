@@ -1158,8 +1158,7 @@ char* ClientName(int client, char* name, int size)
         return "[client out of range]";
     }
     trap_GetConfigstring(CS_PLAYERS + client, buf, sizeof(buf));
-    strncpyz(name, Info_ValueForKey(buf, "n"), size - 1);
-    name[size - 1] = '\0';
+    strncpyz(name, Info_ValueForKey(buf, "n"), size);
     Q_CleanStr(name);
     return name;
 }
@@ -1249,8 +1248,7 @@ char* EasyClientName(int client, char* buf, int size)
             memmove(ptr, ptr + 1, strlen(ptr + 1) + 1);
         }
     }
-    strncpyz(buf, name, size - 1);
-    buf[size - 1] = '\0';
+    strncpyz(buf, name, size);
     return buf;
 }
 
@@ -3188,8 +3186,7 @@ void BotMapScripts(bot_state_t* bs)
 
     trap_GetServerinfo(info, sizeof(info));
 
-    strncpyz(mapname, Info_ValueForKey(info, "mapname"), sizeof(mapname) - 1);
-    mapname[sizeof(mapname) - 1] = '\0';
+    strncpyz(mapname, Info_ValueForKey(info, "mapname"), sizeof(mapname));
 
     if (!Q_stricmp(mapname, "q3tourney6")) {
         vec3_t mins = { 700, 204, 672 }, maxs = { 964, 468, 680 };

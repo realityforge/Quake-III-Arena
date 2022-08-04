@@ -123,8 +123,7 @@ int AAS_ValueForBSPEpairKey(int ent, char* key, char* value, int size)
         return false;
     for (epair = bspworld.entities[ent].epairs; epair; epair = epair->next) {
         if (!strcmp(epair->key, key)) {
-            strncpyz(value, epair->value, size - 1);
-            value[size - 1] = '\0';
+            strncpyz(value, epair->value, size);
             return true;
         }
     }

@@ -245,7 +245,7 @@ static itemconfig_t* LoadItemConfig(char* filename)
                 return NULL;
             }
             StripDoubleQuotes(token.string);
-            strncpyz(ii->classname, token.string, sizeof(ii->classname) - 1);
+            strncpyz(ii->classname, token.string, sizeof(ii->classname));
             if (!ReadStructure(source, &iteminfo_struct, (char*)ii)) {
                 FreeMemory(ic);
                 FreeSource(source);
@@ -529,8 +529,7 @@ void BotGoalName(int number, char* name, int size)
         return;
     for (li = levelitems; li; li = li->next) {
         if (li->number == number) {
-            strncpyz(name, itemconfig->iteminfo[li->iteminfo].name, size - 1);
-            name[size - 1] = '\0';
+            strncpyz(name, itemconfig->iteminfo[li->iteminfo].name, size);
             return;
         }
     }
