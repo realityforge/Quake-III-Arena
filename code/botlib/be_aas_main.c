@@ -152,7 +152,7 @@ static int AAS_LoadFiles(const char* mapname)
     return BLERR_NOERROR;
 }
 //===========================================================================
-// called every time a map changes
+// called everytime a map changes
 //===========================================================================
 int AAS_LoadMap(const char* mapname)
 {
