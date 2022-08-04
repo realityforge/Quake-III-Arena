@@ -159,10 +159,6 @@ static void UI_DriverInfo_Menu()
     s_driverinfo.back.height = 64;
     s_driverinfo.back.focuspic = DRIVERINFO_BACK1;
 
-    // TTimo: overflow with particularly long GL extensions (such as the gf3)
-    // https://zerowing.idsoftware.com/bugzilla/show_bug.cgi?id=399
-    // NOTE: could have pushed the size of stringbuff, but the list is already out of the screen
-    // (no matter what your resolution)
     strncpyz(s_driverinfo.stringbuff, uis.glconfig.extensions_string, 1024);
 
     // build null terminated extension strings
