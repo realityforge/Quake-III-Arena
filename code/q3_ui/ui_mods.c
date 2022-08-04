@@ -29,8 +29,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define ART_FRAMER "menu/art/frame1_r"
 
 #define MAX_MODS 64
-#define NAMEBUFSIZE (MAX_MODS * 48)
-#define GAMEBUFSIZE (MAX_MODS * 16)
+#define MOD_DESCRIPTION_SIZE 48
+#define NAMEBUFSIZE (MAX_MODS * MOD_DESCRIPTION_SIZE)
+#define MOD_GAME_SIZE 16
+#define GAMEBUFSIZE (MAX_MODS * MOD_GAME_SIZE)
 
 #define ID_BACK 10
 #define ID_GO 11
@@ -82,10 +84,10 @@ static void UI_Mods_MenuEvent(void* ptr, int event)
 static void UI_Mods_ParseInfos(char* modDir, char* modDesc)
 {
     s_mods.fs_gameList[s_mods.list.numitems] = s_mods.fs_gamePtr;
-    strncpyz(s_mods.fs_gamePtr, modDir, 16);
+    strncpyz(s_mods.fs_gamePtr, modDir, MOD_GAME_SIZE);
 
     s_mods.descriptionList[s_mods.list.numitems] = s_mods.descriptionPtr;
-    strncpyz(s_mods.descriptionPtr, modDesc, 48);
+    strncpyz(s_mods.descriptionPtr, modDesc, MOD_DESCRIPTION_SIZE);
 
     s_mods.list.itemnames[s_mods.list.numitems] = s_mods.descriptionPtr;
     s_mods.descriptionPtr += strlen(s_mods.descriptionPtr) + 1;
