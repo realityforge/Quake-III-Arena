@@ -57,11 +57,9 @@ static float LibVarStringValue(const char* string)
 }
 static libvar_t* LibVarAlloc(const char* var_name)
 {
-    libvar_t* v;
-
-    v = (libvar_t*)GetMemory(sizeof(libvar_t) + strlen(var_name) + 1);
+    libvar_t* v = (libvar_t*)GetMemory(sizeof(libvar_t));
     memset(v, 0, sizeof(libvar_t));
-    v->name = (char*)v + sizeof(libvar_t);
+    v->name = (char*)GetMemory(strlen(var_name) + 1);
     strcpy(v->name, var_name);
     // add the variable in the list
     v->next = libvarlist;
@@ -73,6 +71,7 @@ static void LibVarDeAlloc(libvar_t* v)
     if (v->string) {
         FreeMemory(v->string);
     }
+    FreeMemory(v->name);
     FreeMemory(v);
 }
 void LibVarDeAllocAll()
