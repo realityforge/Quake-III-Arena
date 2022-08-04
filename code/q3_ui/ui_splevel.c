@@ -560,9 +560,6 @@ static void UI_SPLevelMenu_MenuDraw()
     Com_sprintf(string, sizeof(string), "%s: %s", buf, Info_ValueForKey(levelMenuInfo.selectedArenaInfo, "longname"));
     UI_DrawProportionalString(320, y, string, UI_CENTER | UI_SMALLFONT, color_orange);
 
-    //	fraglimit = atoi( Info_ValueForKey( levelMenuInfo.selectedArenaInfo, "fraglimit" ) );
-    //	UI_DrawString( 18, 212, va("Frags %i", fraglimit) , UI_LEFT|UI_SMALLFONT, color_orange );
-
     // draw bot opponents
     y += 24;
     pad = (7 - levelMenuInfo.numBots) * (64 + 26) / 2;
