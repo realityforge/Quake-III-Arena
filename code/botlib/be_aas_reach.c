@@ -2314,7 +2314,7 @@ static aas_lreachability_t* AAS_FindFaceReachabilities(vec3_t* facepoints, int n
     int facenum, edgenum, bestfacenum;
     float *v1, *v2, *v3, *v4;
     float bestdist, speed, hordist, dist;
-    vec3_t beststart = { 0 }, beststart2 = { 0 }, bestend = { 0 }, bestend2 = { 0 }, tmp, hordir, testpoint;
+    vec3_t beststart, beststart2, bestend, bestend2, tmp, hordir, testpoint;
     aas_lreachability_t *lreach, *lreachabilities;
     aas_area_t* area;
     aas_face_t* face;
