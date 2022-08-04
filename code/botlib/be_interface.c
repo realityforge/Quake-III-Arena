@@ -162,8 +162,7 @@ static int Export_BotLibVarGet(const char* var_name, char* value, const int size
     char* varvalue;
 
     varvalue = LibVarGetString(var_name);
-    strncpyz(value, varvalue, size - 1);
-    value[size - 1] = '\0';
+    strncpyz(value, varvalue, size);
     return BLERR_NOERROR;
 }
 static int Export_BotLibStartFrame(float time)

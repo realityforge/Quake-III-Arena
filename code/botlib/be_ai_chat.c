@@ -295,7 +295,7 @@ void BotQueueConsoleMessage(int chatstate, int type, char* message)
     m->handle = cs->handle;
     m->time = AAS_Time();
     m->type = type;
-    strncpyz(m->message, message, MAX_MESSAGE_SIZE);
+    strncpyz(m->message, message, sizeof(m->message));
     m->next = NULL;
     if (cs->lastmessage) {
         cs->lastmessage->next = m;
@@ -1090,7 +1090,7 @@ int BotFindMatch(char* str, bot_match_t* match, unsigned long int context)
     int i;
     bot_matchtemplate_t* ms;
 
-    strncpyz(match->string, str, MAX_MESSAGE_SIZE);
+    strncpyz(match->string, str, sizeof(match->string));
     // remove any trailing enters
     while (strlen(match->string) && match->string[strlen(match->string) - 1] == '\n') {
         match->string[strlen(match->string) - 1] = '\0';
@@ -1122,8 +1122,7 @@ void BotMatchVariable(bot_match_t* match, int variable, char* buf, int size)
         if (match->variables[variable].length < size)
             size = match->variables[variable].length + 1;
         assert(match->variables[variable].offset >= 0);
-        strncpyz(buf, &match->string[(int)match->variables[variable].offset], size - 1);
-        buf[size - 1] = '\0';
+        strncpyz(buf, &match->string[(int)match->variables[variable].offset], size);
     } else {
         strcpy(buf, "");
     }
@@ -1541,7 +1540,7 @@ static bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
                         StripDoubleQuotes(token.string);
                         if (pass && ptr) {
                             chattype = (bot_chattype_t*)ptr;
-                            strncpyz(chattype->name, token.string, MAX_CHATTYPE_NAME);
+                            strncpyz(chattype->name, token.string, sizeof(chattype->name));
                             chattype->firstchatmessage = NULL;
                             // add the chat type to the chat
                             chattype->next = chat->types;
@@ -2118,8 +2117,7 @@ void BotGetChatMessage(int chatstate, char* buf, int size)
         return;
 
     BotRemoveTildes(cs->chatmessage);
-    strncpyz(buf, cs->chatmessage, size - 1);
-    buf[size - 1] = '\0';
+    strncpyz(buf, cs->chatmessage, size);
     // clear the chat message from the state
     strcpy(cs->chatmessage, "");
 }
@@ -2151,8 +2149,7 @@ void BotSetChatName(int chatstate, char* name, int client)
         return;
     cs->client = client;
     memset(cs->name, 0, sizeof(cs->name));
-    strncpyz(cs->name, name, sizeof(cs->name) - 1);
-    cs->name[sizeof(cs->name) - 1] = '\0';
+    strncpyz(cs->name, name, sizeof(cs->name));
 }
 int BotAllocChatState()
 {

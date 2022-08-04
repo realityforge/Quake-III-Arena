@@ -203,8 +203,7 @@ static char* BotMapTitle()
 
     trap_GetServerinfo(info, sizeof(info));
 
-    strncpyz(mapname, Info_ValueForKey(info, "mapname"), sizeof(mapname) - 1);
-    mapname[sizeof(mapname) - 1] = '\0';
+    strncpyz(mapname, Info_ValueForKey(info, "mapname"), sizeof(mapname));
 
     return mapname;
 }
