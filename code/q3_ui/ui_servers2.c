@@ -546,13 +546,13 @@ static void ArenaServers_Insert(char* adrstr, char* info, int pingtime)
         (*g_arenaservers.numservers)++;
     }
 
-    strncpyz(servernodeptr->adrstr, adrstr, MAX_ADDRESSLENGTH);
+    strncpyz(servernodeptr->adrstr, adrstr, sizeof(servernodeptr->adrstr));
 
-    strncpyz(servernodeptr->hostname, Info_ValueForKey(info, "hostname"), MAX_HOSTNAMELENGTH);
+    strncpyz(servernodeptr->hostname, Info_ValueForKey(info, "hostname"), sizeof(servernodeptr->hostname));
     Q_CleanStr(servernodeptr->hostname);
     Q_strupr(servernodeptr->hostname);
 
-    strncpyz(servernodeptr->mapname, Info_ValueForKey(info, "mapname"), MAX_MAPNAMELENGTH);
+    strncpyz(servernodeptr->mapname, Info_ValueForKey(info, "mapname"), sizeof(servernodeptr->mapname));
     Q_CleanStr(servernodeptr->mapname);
     Q_strupr(servernodeptr->mapname);
 
@@ -680,7 +680,7 @@ static void ArenaServers_LoadFavorites()
             found = true;
         } else {
             // add new server
-            strncpyz(g_favoriteserverlist[g_numfavoriteservers].adrstr, adrstr, MAX_ADDRESSLENGTH);
+            strncpyz(g_favoriteserverlist[g_numfavoriteservers].adrstr, adrstr, sizeof(g_favoriteserverlist[g_numfavoriteservers].adrstr));
             g_favoriteserverlist[g_numfavoriteservers].pingtime = ArenaServers_MaxPing();
         }
 

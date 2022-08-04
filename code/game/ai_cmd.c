@@ -926,7 +926,7 @@ static void BotMatch_JoinSubteam(bot_state_t* bs, bot_match_t* match)
     // get the sub team name
     trap_BotMatchVariable(match, TEAMNAME, teammate, sizeof(teammate));
     // set the sub team name
-    strncpyz(bs->subteam, teammate, 32);
+    strncpyz(bs->subteam, teammate, sizeof(bs->subteam));
     bs->subteam[31] = '\0';
     trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
     BotAI_BotInitialChat(bs, "joinedteam", teammate, NULL);

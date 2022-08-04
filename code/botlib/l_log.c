@@ -55,7 +55,7 @@ void Log_Open(char* filename)
         botimport.Print(PRT_ERROR, "can't open the log file %s\n", filename);
         return;
     }
-    strncpyz(logfile.filename, filename, MAX_LOGFILENAMESIZE);
+    strncpyz(logfile.filename, filename, sizeof(logfile.filename));
     botimport.Print(PRT_MESSAGE, "Opened log %s\n", logfile.filename);
 }
 void Log_Close()

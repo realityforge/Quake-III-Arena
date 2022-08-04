@@ -171,7 +171,7 @@ void CG_DrawInformation()
     trap_Cvar_VariableStringBuffer("sv_running", buf, sizeof(buf));
     if (!atoi(buf)) {
         // server hostname
-        strncpyz(buf, Info_ValueForKey(info, "sv_hostname"), 1024);
+        strncpyz(buf, Info_ValueForKey(info, "sv_hostname"), sizeof(buf));
         Q_CleanStr(buf);
         UI_DrawProportionalString(320, y, buf,
                                   UI_CENTER | UI_SMALLFONT | UI_DROPSHADOW, colorWhite);

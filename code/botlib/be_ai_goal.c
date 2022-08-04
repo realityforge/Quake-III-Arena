@@ -217,7 +217,7 @@ static itemconfig_t* LoadItemConfig(char* filename)
         LibVarSet("max_iteminfo", "256");
     }
 
-    strncpyz(path, filename, MAX_QPATH);
+    strncpyz(path, filename, sizeof(path));
     PC_SetBaseFolder(BOTFILESBASEFOLDER);
     source = LoadSourceFile(path);
     if (!source) {

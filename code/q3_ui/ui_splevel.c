@@ -182,10 +182,10 @@ static void UI_SPLevelMenu_SetBots()
         botInfo = UI_GetBotInfoByName(bot);
         if (botInfo) {
             levelMenuInfo.botPics[levelMenuInfo.numBots] = PlayerIconHandle(Info_ValueForKey(botInfo, "model"));
-            strncpyz(levelMenuInfo.botNames[levelMenuInfo.numBots], Info_ValueForKey(botInfo, "name"), 10);
+            strncpyz(levelMenuInfo.botNames[levelMenuInfo.numBots], Info_ValueForKey(botInfo, "name"), sizeof(levelMenuInfo.botNames[levelMenuInfo.numBots]));
         } else {
             levelMenuInfo.botPics[levelMenuInfo.numBots] = 0;
-            strncpyz(levelMenuInfo.botNames[levelMenuInfo.numBots], bot, 10);
+            strncpyz(levelMenuInfo.botNames[levelMenuInfo.numBots], bot, sizeof(levelMenuInfo.botNames[levelMenuInfo.numBots]));
         }
         Q_CleanStr(levelMenuInfo.botNames[levelMenuInfo.numBots]);
         levelMenuInfo.numBots++;
