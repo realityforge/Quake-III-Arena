@@ -724,6 +724,7 @@ int BotGetNextCampSpotGoal(int num, bot_goal_t* goal)
     }
     return 0;
 }
+
 // NOTE: enum entityType_t in bg_public.h
 #define ET_ITEM 2
 
