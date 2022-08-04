@@ -85,9 +85,7 @@ void LibVarDeAllocAll()
 }
 libvar_t* LibVarGet(const char* var_name)
 {
-    libvar_t* v;
-
-    for (v = libvarlist; v; v = v->next) {
+    for (libvar_t* v = libvarlist; v; v = v->next) {
         if (!Q_stricmp(v->name, var_name)) {
             return v;
         }
@@ -96,62 +94,43 @@ libvar_t* LibVarGet(const char* var_name)
 }
 char* LibVarGetString(const char* var_name)
 {
-    libvar_t* v;
-
-    v = LibVarGet(var_name);
-    if (v) {
-        return v->string;
-    } else {
-        return "";
-    }
+    const libvar_t* v = LibVarGet(var_name);
+    return v ? v->string : "";
 }
 float LibVarGetValue(const char* var_name)
 {
-    libvar_t* v;
-
-    v = LibVarGet(var_name);
-    if (v) {
-        return v->value;
-    } else {
-        return 0;
-    }
+    const libvar_t* v = LibVarGet(var_name);
+    return v ? v->value : 0;
 }
 libvar_t* LibVar(const char* var_name, const char* value)
 {
-    libvar_t* v;
-    v = LibVarGet(var_name);
-    if (v)
+    libvar_t* v = LibVarGet(var_name);
+    if (v) {
         return v;
-    // create new variable
-    v = LibVarAlloc(var_name);
-    // variable string
-    v->string = (char*)GetMemory(strlen(value) + 1);
-    strcpy(v->string, value);
-    // the value
-    v->value = LibVarStringValue(v->string);
-    // variable is modified
-    v->modified = true;
-    return v;
+    } else {
+        // create new variable
+        v = LibVarAlloc(var_name);
+        // variable string
+        v->string = (char*)GetMemory(strlen(value) + 1);
+        strcpy(v->string, value);
+        // the value
+        v->value = LibVarStringValue(v->string);
+        // variable is modified
+        v->modified = true;
+        return v;
+    }
 }
 char* LibVarString(const char* var_name, const char* value)
 {
-    libvar_t* v;
-
-    v = LibVar(var_name, value);
-    return v->string;
+    return LibVar(var_name, value)->string;
 }
 float LibVarValue(const char* var_name, const char* value)
 {
-    libvar_t* v;
-
-    v = LibVar(var_name, value);
-    return v->value;
+    return LibVar(var_name, value)->value;
 }
 void LibVarSet(const char* var_name, const char* value)
 {
-    libvar_t* v;
-
-    v = LibVarGet(var_name);
+    libvar_t* v = LibVarGet(var_name);
     if (v) {
         FreeMemory(v->string);
     } else {
