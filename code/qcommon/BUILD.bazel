@@ -208,7 +208,10 @@ cc_library(
         "//code/ui:__pkg__",
         "//third_party/unzip:__pkg__",
     ],
-    deps = [":base", "@braincheck"],
+    deps = [
+        ":base",
+        "@braincheck",
+    ],
 )
 
 cc_library(
