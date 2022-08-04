@@ -127,11 +127,9 @@ void Cbuf_ExecuteText(int exec_when, const char* text)
     switch (exec_when) {
     case EXEC_NOW:
         if (text && strlen(text) > 0) {
-            Com_DPrintf(S_COLOR_YELLOW "EXEC_NOW %s\n", text);
             Cmd_ExecuteString(text);
         } else {
             Cbuf_Execute();
-            Com_DPrintf(S_COLOR_YELLOW "EXEC_NOW %s\n", cmd_text.data);
         }
         break;
     case EXEC_INSERT:
@@ -436,7 +434,7 @@ will point into this temporary buffer.
 ============
 */
 // NOTE TTimo define that to track tokenization issues
-//#define TKN_DBG
+// #define TKN_DBG
 static void Cmd_TokenizeString2(const char* text_in, bool ignoreQuotes)
 {
     const char* text;
