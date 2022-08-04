@@ -1721,12 +1721,12 @@ static void UI_BuildPlayerList()
         trap_GetConfigString(CS_PLAYERS + n, info, MAX_INFO_STRING);
 
         if (info[0]) {
-            strncpyz(uiInfo.playerNames[uiInfo.playerCount], Info_ValueForKey(info, "n"), MAX_NAME_LENGTH);
+            strncpyz(uiInfo.playerNames[uiInfo.playerCount], Info_ValueForKey(info, "n"), sizeof(uiInfo.playerNames[uiInfo.playerCount]));
             Q_CleanStr(uiInfo.playerNames[uiInfo.playerCount]);
             uiInfo.playerCount++;
             team2 = atoi(Info_ValueForKey(info, "t"));
             if (team2 == team) {
-                strncpyz(uiInfo.teamNames[uiInfo.myTeamCount], Info_ValueForKey(info, "n"), MAX_NAME_LENGTH);
+                strncpyz(uiInfo.teamNames[uiInfo.myTeamCount], Info_ValueForKey(info, "n"), sizeof(uiInfo.teamNames[uiInfo.myTeamCount]));
                 Q_CleanStr(uiInfo.teamNames[uiInfo.myTeamCount]);
                 uiInfo.teamClientNums[uiInfo.myTeamCount] = n;
                 if (uiInfo.playerNumber == n) {
@@ -1771,7 +1771,7 @@ static void UI_DrawServerRefreshDate(rectDef_t* rect, float scale, vec4_t color,
         Text_Paint(rect->x, rect->y, scale, newColor, va("Getting info for %d servers (ESC to cancel)", trap_LAN_GetServerCount(UI_SourceForLAN())), 0, 0, textStyle);
     } else {
         char buff[64];
-        strncpyz(buff, UI_Cvar_VariableString(va("ui_lastServerRefresh_%i", ui_netSource.integer)), 64);
+        strncpyz(buff, UI_Cvar_VariableString(va("ui_lastServerRefresh_%i", ui_netSource.integer)), sizeof(buff));
         Text_Paint(rect->x, rect->y, scale, color, va("Refresh Time: %s", buff), 0, 0, textStyle);
     }
 }
@@ -1855,7 +1855,7 @@ static void UI_DrawGLInfo(rectDef_t* rect, float scale, vec4_t color, int textSt
     Text_Paint(rect->x + 2, rect->y + 15, scale, color, va("VERSION: %s: %s", uiInfo.uiDC.glconfig.version_string, uiInfo.uiDC.glconfig.renderer_string), 0, 30, textStyle);
     Text_Paint(rect->x + 2, rect->y + 30, scale, color, va("PIXELFORMAT: color(%d-bits) Z(%d-bits) stencil(%d-bits)", uiInfo.uiDC.glconfig.colorBits, uiInfo.uiDC.glconfig.depthBits, uiInfo.uiDC.glconfig.stencilBits), 0, 30, textStyle);
 
-    strncpyz(buff, uiInfo.uiDC.glconfig.extensions_string, 1024);
+    strncpyz(buff, uiInfo.uiDC.glconfig.extensions_string, sizeof(buff));
     eptr = buff;
     y = rect->y + 45;
     numLines = 0;

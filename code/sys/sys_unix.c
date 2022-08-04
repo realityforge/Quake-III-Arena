@@ -718,11 +718,11 @@ char* Sys_ExtractBasedir(char* dir)
     if (0 != strcmp(Sys_Basename(dir), "MacOS")) {
         return dir;
     } else {
-        strncpyz(cwd, Sys_Dirname(dir), MAX_OSPATH);
+        strncpyz(cwd, Sys_Dirname(dir), sizeof(cwd));
         if (0 != strcmp(Sys_Basename(cwd), "Contents")) {
             return dir;
         } else {
-            strncpyz(cwd, Sys_Dirname(cwd), MAX_OSPATH);
+            strncpyz(cwd, Sys_Dirname(cwd), sizeof(cwd));
             if (NULL != strstr(Sys_Basename(cwd), ".app")) {
                 strncat(cwd, PATH_SEPARATOR "Contents" PATH_SEPARATOR "Resources", MAX_OSPATH - 1);
                 return cwd;

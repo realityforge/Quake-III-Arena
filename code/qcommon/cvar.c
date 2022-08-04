@@ -1230,7 +1230,7 @@ void Cvar_Update(vmCvar_t* vmCvar)
         Com_Error(ERR_DROP, "Cvar_Update: src %s length %lu exceeds MAX_CVAR_VALUE_STRING",
                   cv->string,
                   strlen(cv->string));
-    strncpyz(vmCvar->string, cv->string, MAX_CVAR_VALUE_STRING);
+    strncpyz(vmCvar->string, cv->string, sizeof(vmCvar->string));
 
     vmCvar->value = cv->value;
     vmCvar->integer = cv->integer;

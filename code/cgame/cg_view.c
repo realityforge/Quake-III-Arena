@@ -76,7 +76,7 @@ void CG_TestModel_f()
         return;
     }
 
-    strncpyz(cg.testModelName, CG_Argv(1), MAX_QPATH);
+    strncpyz(cg.testModelName, CG_Argv(1), sizeof(cg.testModelName));
     cg.testModelEntity.hModel = trap_R_RegisterModel(cg.testModelName);
 
     if (trap_Argc() == 3) {

@@ -159,7 +159,7 @@ static void UI_DriverInfo_Menu()
     s_driverinfo.back.height = 64;
     s_driverinfo.back.focuspic = DRIVERINFO_BACK1;
 
-    strncpyz(s_driverinfo.stringbuff, uis.glconfig.extensions_string, 1024);
+    strncpyz(s_driverinfo.stringbuff, uis.glconfig.extensions_string, sizeof(s_driverinfo.stringbuff));
 
     // build null terminated extension strings
     eptr = s_driverinfo.stringbuff;

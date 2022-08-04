@@ -266,7 +266,7 @@ static void UI_TeamOrdersMenu_BuildBotList()
 
     trap_GetClientState(&cs);
 
-    strncpyz(teamOrdersMenuInfo.botNames[0], "Everyone", 16);
+    strncpyz(teamOrdersMenuInfo.botNames[0], "Everyone", sizeof(teamOrdersMenuInfo.botNames[0]));
     teamOrdersMenuInfo.numBots = 1;
 
     trap_GetConfigString(CS_SERVERINFO, info, sizeof(info));
@@ -293,7 +293,7 @@ static void UI_TeamOrdersMenu_BuildBotList()
             continue;
         }
 
-        strncpyz(teamOrdersMenuInfo.botNames[teamOrdersMenuInfo.numBots], Info_ValueForKey(info, "n"), 16);
+        strncpyz(teamOrdersMenuInfo.botNames[teamOrdersMenuInfo.numBots], Info_ValueForKey(info, "n"), sizeof(teamOrdersMenuInfo.botNames[teamOrdersMenuInfo.numBots]));
         Q_CleanStr(teamOrdersMenuInfo.botNames[teamOrdersMenuInfo.numBots]);
         teamOrdersMenuInfo.numBots++;
     }

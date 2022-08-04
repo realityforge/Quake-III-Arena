@@ -2464,7 +2464,7 @@ void CL_Frame(int msec)
                            now.tm_min,
                            now.tm_sec);
 
-            strncpyz(serverName, clc.servername, MAX_OSPATH);
+            strncpyz(serverName, clc.servername, sizeof(serverName));
             // Replace the ":" in the address as it is not a valid
             // file name character
             p = strstr(serverName, ":");
@@ -3093,10 +3093,10 @@ static void CL_SetServerInfo(serverInfo_t* server, const char* info, int ping)
     if (server) {
         if (info) {
             server->clients = atoi(Info_ValueForKey(info, "clients"));
-            strncpyz(server->hostName, Info_ValueForKey(info, "hostname"), MAX_NAME_LENGTH);
-            strncpyz(server->mapName, Info_ValueForKey(info, "mapname"), MAX_NAME_LENGTH);
+            strncpyz(server->hostName, Info_ValueForKey(info, "hostname"), sizeof(server->hostName));
+            strncpyz(server->mapName, Info_ValueForKey(info, "mapname"), sizeof(server->mapName));
             server->maxClients = atoi(Info_ValueForKey(info, "sv_maxclients"));
-            strncpyz(server->game, Info_ValueForKey(info, "game"), MAX_NAME_LENGTH);
+            strncpyz(server->game, Info_ValueForKey(info, "game"), sizeof(server->game));
             server->gameType = atoi(Info_ValueForKey(info, "gametype"));
             server->netType = atoi(Info_ValueForKey(info, "nettype"));
             server->minPing = atoi(Info_ValueForKey(info, "minping"));
@@ -3217,7 +3217,7 @@ void CL_ServerInfoPacket(netadr_t from, msg_t* msg)
     cls.numlocalservers = i + 1;
     CL_InitServerInfo(&cls.localServers[i], &from);
 
-    strncpyz(info, MSG_ReadString(msg), MAX_INFO_STRING);
+    strncpyz(info, MSG_ReadString(msg), sizeof(info));
     if (strlen(info)) {
         if (info[strlen(info) - 1] != '\n') {
             Q_strcat(info, sizeof(info), "\n");

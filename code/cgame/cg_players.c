@@ -872,10 +872,10 @@ void CG_NewClientInfo(int clientNum)
     newInfo.teamLeader = atoi(v);
 
     v = Info_ValueForKey(configstring, "g_redteam");
-    strncpyz(newInfo.redTeam, v, MAX_TEAMNAME);
+    strncpyz(newInfo.redTeam, v, sizeof(newInfo.redTeam));
 
     v = Info_ValueForKey(configstring, "g_blueteam");
-    strncpyz(newInfo.blueTeam, v, MAX_TEAMNAME);
+    strncpyz(newInfo.blueTeam, v, sizeof(newInfo.blueTeam));
 
     // model
     v = Info_ValueForKey(configstring, "model");

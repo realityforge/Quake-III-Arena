@@ -927,7 +927,7 @@ static void CG_ServerCommand()
         }
 
         trap_S_StartLocalSound(cgs.media.talkSound, CHAN_LOCAL_SOUND);
-        strncpyz(text, CG_Argv(1), MAX_SAY_TEXT);
+        strncpyz(text, CG_Argv(1), sizeof(text));
         CG_RemoveChatEscapeChar(text);
         CG_Printf("%s\n", text);
         return;
@@ -935,7 +935,7 @@ static void CG_ServerCommand()
 
     if (!strcmp(cmd, "tchat")) {
         trap_S_StartLocalSound(cgs.media.talkSound, CHAN_LOCAL_SOUND);
-        strncpyz(text, CG_Argv(1), MAX_SAY_TEXT);
+        strncpyz(text, CG_Argv(1), sizeof(text));
         CG_RemoveChatEscapeChar(text);
         CG_AddToTeamChat(text);
         CG_Printf("%s\n", text);

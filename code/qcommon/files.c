@@ -3528,7 +3528,7 @@ void FS_FilenameCompletion(const char* dir, const char* ext,
 
     for (i = 0; i < nfiles; i++) {
         FS_ConvertPath(filenames[i]);
-        strncpyz(filename, filenames[i], MAX_STRING_CHARS);
+        strncpyz(filename, filenames[i], sizeof(filename));
 
         if (stripExt) {
             COM_StripExtension(filename, filename, sizeof(filename));

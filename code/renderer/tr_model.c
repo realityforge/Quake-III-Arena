@@ -265,7 +265,7 @@ qhandle_t RE_RegisterModel(const char* name)
     mod->numLods = 0;
 
     // load the files
-    strncpyz(localName, name, MAX_QPATH);
+    strncpyz(localName, name, sizeof(localName));
 
     ext = COM_GetExtension(localName);
 
