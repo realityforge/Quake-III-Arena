@@ -292,7 +292,6 @@ static void CG_CheckLocalSounds(playerState_t* ps, playerState_t* ops)
     if (ps->persistent[PERS_CAPTURES] != ops->persistent[PERS_CAPTURES]) {
         pushReward(cgs.media.captureAwardSound, cgs.media.medalCapture, ps->persistent[PERS_CAPTURES]);
         reward = true;
-        // Com_Printf("capture\n");
     }
     if (ps->persistent[PERS_IMPRESSIVE_COUNT] != ops->persistent[PERS_IMPRESSIVE_COUNT]) {
 #ifdef MISSIONPACK
@@ -306,7 +305,6 @@ static void CG_CheckLocalSounds(playerState_t* ps, playerState_t* ops)
 #endif
         pushReward(sfx, cgs.media.medalImpressive, ps->persistent[PERS_IMPRESSIVE_COUNT]);
         reward = true;
-        // Com_Printf("impressive\n");
     }
     if (ps->persistent[PERS_EXCELLENT_COUNT] != ops->persistent[PERS_EXCELLENT_COUNT]) {
 #ifdef MISSIONPACK
@@ -320,7 +318,6 @@ static void CG_CheckLocalSounds(playerState_t* ps, playerState_t* ops)
 #endif
         pushReward(sfx, cgs.media.medalExcellent, ps->persistent[PERS_EXCELLENT_COUNT]);
         reward = true;
-        // Com_Printf("excellent\n");
     }
     if (ps->persistent[PERS_GAUNTLET_FRAG_COUNT] != ops->persistent[PERS_GAUNTLET_FRAG_COUNT]) {
 #ifdef MISSIONPACK
@@ -334,17 +331,14 @@ static void CG_CheckLocalSounds(playerState_t* ps, playerState_t* ops)
 #endif
         pushReward(sfx, cgs.media.medalGauntlet, ps->persistent[PERS_GAUNTLET_FRAG_COUNT]);
         reward = true;
-        // Com_Printf("gauntlet frag\n");
     }
     if (ps->persistent[PERS_DEFEND_COUNT] != ops->persistent[PERS_DEFEND_COUNT]) {
         pushReward(cgs.media.defendSound, cgs.media.medalDefend, ps->persistent[PERS_DEFEND_COUNT]);
         reward = true;
-        // Com_Printf("defend\n");
     }
     if (ps->persistent[PERS_ASSIST_COUNT] != ops->persistent[PERS_ASSIST_COUNT]) {
         pushReward(cgs.media.assistSound, cgs.media.medalAssist, ps->persistent[PERS_ASSIST_COUNT]);
         reward = true;
-        // Com_Printf("assist\n");
     }
     // if any of the player event bits changed
     if (ps->persistent[PERS_PLAYEREVENTS] != ops->persistent[PERS_PLAYEREVENTS]) {
