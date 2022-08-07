@@ -1316,9 +1316,6 @@ static void CG_DrawNewTeamInfo(rectDef_t* rect, float text_x, float text_y, floa
             trap_R_SetColor(hcolor);
             CG_DrawPic(xx, y + 1, PIC_WIDTH - 2, PIC_WIDTH - 2, cgs.media.heartShader);
 
-            // Com_sprintf (st, sizeof(st), "%3i %3i", ci->health,	ci->armor);
-            // CG_Text_Paint(xx, y + text_y, scale, hcolor, st, 0, 0);
-
             // draw weapon icon
             xx += PIC_WIDTH + 1;
 
