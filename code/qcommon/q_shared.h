@@ -671,16 +671,6 @@ char* Q_CleanStr(char* string);
 int Q_CountChar(const char* string, char tocount);
 
 //=============================================
-/*
-short	BigShort(short l);
-short	LittleShort(short l);
-int		BigLong (int l);
-int		LittleLong (int l);
-qint64  BigLong64 (qint64 l);
-qint64  LittleLong64 (qint64 l);
-float	BigFloat (const float *l);
-float	LittleFloat (const float *l);
-*/
 char* QDECL va(const char* format, ...) PRINTF_LIKE_FUNCTION(1, 2);
 
 #define TRUNCATE_LENGTH 64
