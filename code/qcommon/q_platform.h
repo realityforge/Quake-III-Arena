@@ -216,17 +216,6 @@ static FORCEINLINE short BigShort(const short value)
 #endif
 }
 
-static FORCEINLINE int BigLong(const int value)
-{
-#if defined(Q3_BIG_ENDIAN)
-    return value;
-#elif defined(Q3_LITTLE_ENDIAN)
-    return LongSwap(value);
-#elif defined(Q3_VM)
-    return value;
-#endif
-}
-
 static FORCEINLINE float BigFloat(const float value)
 {
 #if defined(Q3_BIG_ENDIAN)
