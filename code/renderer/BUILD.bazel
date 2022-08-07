@@ -58,7 +58,6 @@ cc_library(
     deps = [
         ":api",
         ":qgl",
-        "//code/qcommon:files",
         "//code/qcommon:shared_api",
     ],
 )
@@ -68,7 +67,7 @@ DEPS = [
     ":local_api",
     ":qgl",
     "//code/macosx:qgl",
-    "//code/qcommon:files",
+    "//code/qcommon:qcommon",
     "//code/qcommon:shared_api",
 ]
 
