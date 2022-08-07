@@ -210,10 +210,7 @@ static FORCEINLINE short BigShort(const short value)
 
 #if defined(Q3_BIG_ENDIAN) && defined(Q3_LITTLE_ENDIAN)
 #error "Endianness defined as both big and little"
-#elif defined(Q3_BIG_ENDIAN)
-#elif defined(Q3_LITTLE_ENDIAN)
-#elif defined(Q3_VM)
-#else
+#elif !defined(Q3_BIG_ENDIAN) && !defined(Q3_LITTLE_ENDIAN) && !defined(Q3_VM)
 #error "Endianness not defined"
 #endif
 
