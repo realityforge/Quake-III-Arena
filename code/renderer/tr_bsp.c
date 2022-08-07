@@ -2253,7 +2253,7 @@ static void R_LoadEnvironmentJson(const char* baseName)
     const char* cubemapArrayJson;
     int filelen, i;
 
-    Com_sprintf(filename, MAX_QPATH, "cubemaps/%s/env.json", baseName);
+    Com_sprintf(filename, sizeof(filename), "cubemaps/%s/env.json", baseName);
 
     filelen = ri.FS_ReadFile(filename, &buffer.v);
     if (!buffer.c)
@@ -2404,7 +2404,7 @@ static void R_LoadCubemaps()
         char filename[MAX_QPATH];
         cubemap_t* cubemap = &tr.cubemaps[i];
 
-        Com_sprintf(filename, MAX_QPATH, "cubemaps/%s/%03d.dds", tr.world->baseName, i);
+        Com_sprintf(filename, sizeof(filename), "cubemaps/%s/%03d.dds", tr.world->baseName, i);
 
         cubemap->image = R_FindImageFile(filename, IMGTYPE_COLORALPHA, flags);
     }

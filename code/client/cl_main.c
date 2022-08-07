@@ -2745,7 +2745,7 @@ void CL_Video_f(void)
 
     if (Cmd_Argc() == 2) {
         // explicit filename
-        Com_sprintf(filename, MAX_OSPATH, "videos/%s.avi", Cmd_Argv(1));
+        Com_sprintf(filename, sizeof(filename), "videos/%s.avi", Cmd_Argv(1));
     } else {
         // scan for a free filename
         for (i = 0; i <= 9999; i++) {
@@ -2761,8 +2761,7 @@ void CL_Video_f(void)
             last -= c * 10;
             d = last;
 
-            Com_sprintf(filename, MAX_OSPATH, "videos/video%d%d%d%d.avi",
-                        a, b, c, d);
+            Com_sprintf(filename, sizeof(filename), "videos/video%d%d%d%d.avi", a, b, c, d);
 
             if (!FS_FileExists(filename))
                 break; // file doesn't exist

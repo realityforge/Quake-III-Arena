@@ -1044,7 +1044,7 @@ static void ServerOptions_SetMenuItems()
     info = UI_GetArenaInfoByNumber(s_startserver.maplist[s_startserver.currentmap]);
     strncpyz(mapname, Info_ValueForKey(info, "map"), sizeof(mapname));
     Q_strupr(mapname);
-    Com_sprintf(picname, 64, "levelshots/%s", mapname);
+    Com_sprintf(picname, sizeof(picname), "levelshots/%s", mapname);
     s_serveroptions.mappic.generic.name = picname;
 
     // set the map name
