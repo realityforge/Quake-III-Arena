@@ -146,10 +146,6 @@ static inline short BigShort(short l)
     return ShortSwap(l);
 }
 #define LittleShort
-static inline int BigLong(int l)
-{
-    LongSwap(l);
-}
 #define LittleLong
 #define LittleFloat
 
@@ -178,7 +174,6 @@ static inline short LittleShort(short l)
 {
     return ShortSwap(l);
 }
-#define BigLong
 static inline int LittleLong(int l)
 {
     return LongSwap(l);
@@ -207,7 +202,6 @@ static inline short LittleShort(short l)
 {
     return ShortSwap(l);
 }
-#define BigLong
 static inline int LittleLong(int l)
 {
     return LongSwap(l);
@@ -242,7 +236,6 @@ inline static short LittleShort(short l)
 {
     return ShortSwap(l);
 }
-#define BigLong
 inline static int LittleLong(int l)
 {
     return LongSwap(l);

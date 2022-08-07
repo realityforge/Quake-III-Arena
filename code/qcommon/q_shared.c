@@ -86,13 +86,11 @@ void COM_DefaultExtension(char* path, int maxSize, const char* extension)
 // mess up when qcommon is included in multiple places
 static short	(*_BigShort) (short l);
 static short	(*_LittleShort) (short l);
-static int		(*_BigLong) (int l);
 static int		(*_LittleLong) (int l);
 static float	(*_LittleFloat) (const float *l);
 
 short	BigShort(short l){return _BigShort(l);}
 short	LittleShort(short l) {return _LittleShort(l);}
-int		BigLong (int l) {return _BigLong(l);}
 int		LittleLong (int l) {return _LittleLong(l);}
 float	LittleFloat (const float *l) {return _LittleFloat(l);}
 */
