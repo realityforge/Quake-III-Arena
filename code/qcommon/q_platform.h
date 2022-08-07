@@ -176,9 +176,7 @@ static FORCEINLINE short LittleShort(const short value)
 {
 #if defined(Q3_BIG_ENDIAN)
     return ShortSwap(value);
-#elif defined(Q3_LITTLE_ENDIAN)
-    return value;
-#elif defined(Q3_VM)
+#elif defined(Q3_LITTLE_ENDIAN) || defined(Q3_VM)
     return value;
 #endif
 }
@@ -187,9 +185,7 @@ static FORCEINLINE int LittleLong(const int value)
 {
 #if defined(Q3_BIG_ENDIAN)
     return LongSwap(value);
-#elif defined(Q3_LITTLE_ENDIAN)
-    return value;
-#elif defined(Q3_VM)
+#elif defined(Q3_LITTLE_ENDIAN) || defined(Q3_VM)
     return value;
 #endif
 }
@@ -198,21 +194,17 @@ static FORCEINLINE float LittleFloat(const float value)
 {
 #if defined(Q3_BIG_ENDIAN)
     return FloatSwap(&value);
-#elif defined(Q3_LITTLE_ENDIAN)
-    return value;
-#elif defined(Q3_VM)
+#elif defined(Q3_LITTLE_ENDIAN) || defined(Q3_VM)
     return value;
 #endif
 }
 
 static FORCEINLINE short BigShort(const short value)
 {
-#if defined(Q3_BIG_ENDIAN)
+#if defined(Q3_BIG_ENDIAN) || defined(Q3_VM)
     return value;
 #elif defined(Q3_LITTLE_ENDIAN)
     return ShortSwap(value);
-#elif defined(Q3_VM)
-    return value;
 #endif
 }
 
