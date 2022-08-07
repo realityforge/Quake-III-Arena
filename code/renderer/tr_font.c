@@ -497,7 +497,6 @@ void RE_RegisterFont(const char* fontName, int pointSize, fontInfo_t* font)
                 WriteTGA(name, imageBuff, 256, 256);
             }
 
-            // Com_sprintf (name, sizeof(name), "fonts/fontImage_%i_%i", imageNumber++, pointSize);
             image = R_CreateImage(name, imageBuff, 256, 256, IMGTYPE_COLORALPHA, IMGFLAG_CLAMPTOEDGE, 0);
             h = RE_RegisterShaderFromImage(name, LIGHTMAP_2D, image, false);
             for (j = lastStart; j < i; j++) {
