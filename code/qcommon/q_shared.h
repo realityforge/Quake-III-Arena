@@ -671,22 +671,6 @@ char* Q_CleanStr(char* string);
 int Q_CountChar(const char* string, char tocount);
 
 //=============================================
-
-// 64-bit integers for global rankings interface
-// implemented as a struct for qvm compatibility
-typedef struct
-{
-    uint8_t b0;
-    uint8_t b1;
-    uint8_t b2;
-    uint8_t b3;
-    uint8_t b4;
-    uint8_t b5;
-    uint8_t b6;
-    uint8_t b7;
-} qint64;
-
-//=============================================
 /*
 short	BigShort(short l);
 short	LittleShort(short l);
