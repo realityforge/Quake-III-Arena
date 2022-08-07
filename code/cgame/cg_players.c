@@ -419,28 +419,6 @@ static bool CG_RegisterClientSkin(clientInfo_t* ci, const char* teamName, const 
 {
     char filename[MAX_QPATH];
 
-    /*
-    Com_sprintf( filename, sizeof( filename ), "models/players/%s/%slower_%s.skin", modelName, teamName, skinName );
-    ci->legsSkin = trap_R_RegisterSkin( filename );
-    if (!ci->legsSkin) {
-            Com_sprintf( filename, sizeof( filename ), "models/players/characters/%s/%slower_%s.skin", modelName, teamName, skinName );
-            ci->legsSkin = trap_R_RegisterSkin( filename );
-            if (!ci->legsSkin) {
-                    Com_Printf( "Leg skin load failure: %s\n", filename );
-            }
-    }
-
-
-    Com_sprintf( filename, sizeof( filename ), "models/players/%s/%supper_%s.skin", modelName, teamName, skinName );
-    ci->torsoSkin = trap_R_RegisterSkin( filename );
-    if (!ci->torsoSkin) {
-            Com_sprintf( filename, sizeof( filename ), "models/players/characters/%s/%supper_%s.skin", modelName, teamName, skinName );
-            ci->torsoSkin = trap_R_RegisterSkin( filename );
-            if (!ci->torsoSkin) {
-                    Com_Printf( "Torso skin load failure: %s\n", filename );
-            }
-    }
-    */
     if (CG_FindClientModelFile(filename, sizeof(filename), ci, teamName, modelName, skinName, "lower", "skin")) {
         ci->legsSkin = trap_R_RegisterSkin(filename);
     }
