@@ -216,17 +216,6 @@ static FORCEINLINE short BigShort(const short value)
 #endif
 }
 
-static FORCEINLINE float BigFloat(const float value)
-{
-#if defined(Q3_BIG_ENDIAN)
-    return value;
-#elif defined(Q3_LITTLE_ENDIAN)
-    return FloatSwap(&value);
-#elif defined(Q3_VM)
-    return value;
-#endif
-}
-
 #if defined(Q3_BIG_ENDIAN) && defined(Q3_LITTLE_ENDIAN)
 #error "Endianness defined as both big and little"
 #elif defined(Q3_BIG_ENDIAN)

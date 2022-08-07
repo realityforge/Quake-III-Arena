@@ -147,14 +147,12 @@ static short	(*_BigShort) (short l);
 static short	(*_LittleShort) (short l);
 static int		(*_LittleLong) (int l);
 static qint64	(*_LittleLong64) (qint64 l);
-static float	(*_BigFloat) (const float *l);
 static float	(*_LittleFloat) (const float *l);
 
 short	BigShort(short l){return _BigShort(l);}
 short	LittleShort(short l) {return _LittleShort(l);}
 int		LittleLong (int l) {return _LittleLong(l);}
 qint64 	LittleLong64 (qint64 l) {return _LittleLong64(l);}
-float	BigFloat (const float *l) {return _BigFloat(l);}
 float	LittleFloat (const float *l) {return _LittleFloat(l);}
 */
 
