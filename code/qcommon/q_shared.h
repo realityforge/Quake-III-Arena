@@ -657,7 +657,7 @@ static inline void strncpyz(char* dest, const char* src, const size_t destsize)
 {
     braincheck_assert(NULL != dest);
     braincheck_assert(NULL != src);
-    braincheck_assert(destsize < 1);
+    braincheck_assert(destsize >= 1);
     strncpy(dest, src, destsize - 1);
     dest[destsize - 1] = 0;
 }
