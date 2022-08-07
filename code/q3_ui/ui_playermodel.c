@@ -364,8 +364,6 @@ static void PlayerModel_BuildList()
                 Com_sprintf(s_playermodel.modelnames[s_playermodel.nummodels++],
                             sizeof(s_playermodel.modelnames[s_playermodel.nummodels]),
                             "models/players/%s/%s", dirptr, skinname);
-                // if (s_playermodel.nummodels >= MAX_PLAYERMODELS)
-                //	return;
             }
 
             if (precache) {
