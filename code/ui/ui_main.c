@@ -2657,46 +2657,6 @@ static void UI_ServersSort(int column, bool force)
     UI_FeederSelection(FEEDER_SERVERS, uiInfo.serverStatus.currentServer);
 }
 
-/*
-static void UI_StartSinglePlayer(void) {
-        int i,j, k, skill;
-        char buff[1024];
-        i = trap_Cvar_VariableValue( "ui_currentTier" );
-  if (i < 0 || i >= tierCount) {
-    i = 0;
-  }
-        j = trap_Cvar_VariableValue("ui_currentMap");
-        if (j < 0 || j >= MAPS_PER_TIER) {
-                j = 0;
-        }
-
-        trap_Cvar_SetValue( "singleplayer", 1 );
-        trap_Cvar_SetValue( "g_gametype", Com_Clamp( 0, GT_MAX_GAME_TYPE-1, tierList[i].gameTypes[j] ) );
-        trap_Cmd_ExecuteText( EXEC_APPEND, va( "wait ; wait ; map %s\n", tierList[i].maps[j] ) );
-        skill = trap_Cvar_VariableValue( "g_spSkill" );
-
-        if (j == MAPS_PER_TIER-1) {
-                k = UI_TeamIndexFromName(UI_Cvar_VariableString("ui_opponentName"));
-                Com_sprintf( buff, sizeof(buff), "wait ; addbot %s %i %s 250 %s\n", UI_AIFromName(teamList[k].teamMembers[0]), skill, "", teamList[k].teamMembers[0]);
-        } else {
-                k = UI_TeamIndexFromName(UI_Cvar_VariableString("ui_opponentName"));
-                for (i = 0; i < PLAYERS_PER_TEAM; i++) {
-                        Com_sprintf( buff, sizeof(buff), "wait ; addbot %s %i %s 250 %s\n", UI_AIFromName(teamList[k].teamMembers[i]), skill, "Blue", teamList[k].teamMembers[i]);
-                        trap_Cmd_ExecuteText( EXEC_APPEND, buff );
-                }
-
-                k = UI_TeamIndexFromName(UI_Cvar_VariableString("ui_teamName"));
-                for (i = 1; i < PLAYERS_PER_TEAM; i++) {
-                        Com_sprintf( buff, sizeof(buff), "wait ; addbot %s %i %s 250 %s\n", UI_AIFromName(teamList[k].teamMembers[i]), skill, "Red", teamList[k].teamMembers[i]);
-                        trap_Cmd_ExecuteText( EXEC_APPEND, buff );
-                }
-                trap_Cmd_ExecuteText( EXEC_APPEND, "wait 5; team Red\n" );
-        }
-
-
-}
-*/
-
 static void UI_LoadMods()
 {
     int numdirs;
@@ -2862,7 +2822,7 @@ static void UI_StartSkirmish(bool next)
     trap_Cvar_Set("g_blueTeam", UI_Cvar_VariableString("ui_opponentName"));
 
     if (trap_Cvar_VariableValue("ui_recordSPDemo")) {
-        Com_sprintf(buff, MAX_STRING_CHARS, "%s_%i", uiInfo.mapList[ui_currentMap.integer].mapLoadName, g);
+        Com_sprintf(buff, sizeof(buff), "%s_%i", uiInfo.mapList[ui_currentMap.integer].mapLoadName, g);
         trap_Cvar_Set("ui_recordSPDemoName", buff);
     }
 
