@@ -98,12 +98,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #endif
 
-#ifdef _WIN32
-
-//#pragma intrinsic( memset, memcpy )
-
-#endif
-
 // this is the define for determining if we have an asm version of a C function
 #if (defined _M_IX86 || defined __i386__) && !defined __LCC__
 #define id386 1
