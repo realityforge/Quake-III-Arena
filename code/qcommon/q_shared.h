@@ -686,13 +686,6 @@ int Q_PrintStrlen(const char* string);
 // removes color sequences from string
 char* Q_CleanStr(char* string);
 
-/*
-short	BigShort(short l);
-short	LittleShort(short l);
-int		BigLong (int l);
-int		LittleLong (int l);
-float	LittleFloat (const float *l);
-*/
 char* QDECL va(const char* format, ...) PRINTF_LIKE_FUNCTION(1, 2);
 
 //
