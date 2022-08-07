@@ -122,7 +122,7 @@ void UI_LoadBestScores(const char* map, int game)
     postGameInfo_t newInfo;
 
     memset(&newInfo, 0, sizeof(postGameInfo_t));
-    Com_sprintf(fileName, MAX_QPATH, "games/%s_%i.game", map, game);
+    Com_sprintf(fileName, sizeof(fileName), "games/%s_%i.game", map, game);
     if (trap_FS_FOpenFile(fileName, &f, FS_READ) >= 0) {
         int size = 0;
         trap_FS_Read(&size, sizeof(int), f);
@@ -133,7 +133,7 @@ void UI_LoadBestScores(const char* map, int game)
     }
     UI_SetBestScores(&newInfo, false);
 
-    Com_sprintf(fileName, MAX_QPATH, "demos/%s_%d.dm_%d", map, game, (int)trap_Cvar_VariableValue("protocol"));
+    Com_sprintf(fileName, sizeof(fileName), "demos/%s_%d.dm_%d", map, game, (int)trap_Cvar_VariableValue("protocol"));
     uiInfo.demoAvailable = false;
     if (trap_FS_FOpenFile(fileName, &f, FS_READ) >= 0) {
         uiInfo.demoAvailable = true;
@@ -191,7 +191,7 @@ static void UI_CalcPostGameStats()
     game = atoi(Info_ValueForKey(info, "g_gametype"));
 
     // compose file name
-    Com_sprintf(fileName, MAX_QPATH, "games/%s_%i.game", map, game);
+    Com_sprintf(fileName, sizeof(fileName), "games/%s_%i.game", map, game);
     // see if we have one already
     memset(&oldInfo, 0, sizeof(postGameInfo_t));
     if (trap_FS_FOpenFile(fileName, &f, FS_READ) >= 0) {

@@ -71,7 +71,7 @@ static void SpecifyServer_Event(void* ptr, int event)
         if (s_specifyserver.domain.field.buffer[0]) {
             strcpy(buff, s_specifyserver.domain.field.buffer);
             if (s_specifyserver.port.field.buffer[0])
-                Com_sprintf(buff + strlen(buff), 128, ":%s", s_specifyserver.port.field.buffer);
+                Com_sprintf(buff + strlen(buff), sizeof(buff), ":%s", s_specifyserver.port.field.buffer);
 
             trap_Cmd_ExecuteText(EXEC_APPEND, va("connect %s\n", buff));
         }

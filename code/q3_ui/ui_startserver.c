@@ -1022,7 +1022,7 @@ static void ServerOptions_SetMenuItems()
     s_serveroptions.pure.curvalue = Com_Clamp(0, 1, trap_Cvar_VariableValue("sv_pure"));
 
     // set the map pic
-    Com_sprintf(picname, 64, "levelshots/%s", s_startserver.maplist[s_startserver.currentmap]);
+    Com_sprintf(picname, sizeof(picname), "levelshots/%s", s_startserver.maplist[s_startserver.currentmap]);
     s_serveroptions.mappic.generic.name = picname;
 
     // set the map name

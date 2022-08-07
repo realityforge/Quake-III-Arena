@@ -141,7 +141,7 @@ static int AAS_LoadFiles(const char* mapname)
     AAS_LoadBSPFile();
 
     // load the aas file
-    Com_sprintf(aasfile, MAX_QPATH, "maps/%s.aas", mapname);
+    Com_sprintf(aasfile, sizeof(aasfile), "maps/%s.aas", mapname);
     errnum = AAS_LoadAASFile(aasfile);
     if (errnum != BLERR_NOERROR)
         return errnum;

@@ -434,7 +434,7 @@ char* FS_BuildOSPath(const char* base, const char* game, const char* qpath)
 
     Com_sprintf(temp, sizeof(temp), "/%s/%s", game, qpath);
     FS_ReplaceSeparators(temp);
-    Com_sprintf(ospath[toggle], sizeof(ospath[0]), "%s%s", base, temp);
+    Com_sprintf(ospath[toggle], sizeof(ospath[toggle]), "%s%s", base, temp);
 
     return ospath[toggle];
 }
