@@ -48,8 +48,8 @@ static void AAS_SwapAASData()
         aasworld.bboxes[i].presencetype = LittleLong(aasworld.bboxes[i].presencetype);
         aasworld.bboxes[i].flags = LittleLong(aasworld.bboxes[i].flags);
         for (j = 0; j < 3; j++) {
-            aasworld.bboxes[i].mins[j] = LittleLong(aasworld.bboxes[i].mins[j]);
-            aasworld.bboxes[i].maxs[j] = LittleLong(aasworld.bboxes[i].maxs[j]);
+            aasworld.bboxes[i].mins[j] = LittleFloat(aasworld.bboxes[i].mins[j]);
+            aasworld.bboxes[i].maxs[j] = LittleFloat(aasworld.bboxes[i].maxs[j]);
         }
     }
     // vertexes

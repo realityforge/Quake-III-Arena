@@ -112,10 +112,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define QDECL
 #endif
 
-short ShortSwap(short l);
-int LongSwap(int l);
-float FloatSwap(const float* f);
-
 //======================= WIN32 DEFINES =================================
 
 #ifdef WIN32
@@ -135,13 +131,7 @@ float FloatSwap(const float* f);
 #endif
 #endif
 
-static inline short BigShort(short l)
-{
-    return ShortSwap(l);
-}
-#define LittleShort
-#define LittleLong
-#define LittleFloat
+#define Q_LITTLE_ENDIAN
 
 #define PATH_SEP '\\'
 
@@ -163,19 +153,7 @@ static inline short BigShort(short l)
 
 #define PATH_SEP '/'
 
-#define BigShort
-static inline short LittleShort(short l)
-{
-    return ShortSwap(l);
-}
-static inline int LittleLong(int l)
-{
-    return LongSwap(l);
-}
-static inline float LittleFloat(const float l)
-{
-    return FloatSwap(&l);
-}
+#define Q_BIG_ENDIAN
 
 #endif
 
@@ -191,19 +169,7 @@ static inline float LittleFloat(const float l)
 
 void Sys_PumpEvents(void);
 
-#define BigShort
-static inline short LittleShort(short l)
-{
-    return ShortSwap(l);
-}
-static inline int LittleLong(int l)
-{
-    return LongSwap(l);
-}
-static inline float LittleFloat(const float l)
-{
-    return FloatSwap(&l);
-}
+#define Q_BIG_ENDIAN
 
 #endif
 
@@ -225,20 +191,55 @@ static inline float LittleFloat(const float l)
 
 #define PATH_SEP '/'
 
-#define BigShort
-inline static short LittleShort(short l)
+#define Q_BIG_ENDIAN
+
+#endif
+
+// endianness
+short ShortSwap(short l);
+int LongSwap(int l);
+float FloatSwap(const float* f);
+
+static FORCEINLINE short LittleShort(const short value)
 {
-    return ShortSwap(l);
-}
-inline static int LittleLong(int l)
-{
-    return LongSwap(l);
-}
-inline static float LittleFloat(const float* l)
-{
-    return FloatSwap(l);
+#if defined(Q_BIG_ENDIAN)
+    return ShortSwap(value);
+#elif defined(Q_LITTLE_ENDIAN) || defined(Q3_VM)
+    return value;
+#endif
 }
 
+static FORCEINLINE int LittleLong(const int value)
+{
+#if defined(Q_BIG_ENDIAN)
+    return LongSwap(value);
+#elif defined(Q_LITTLE_ENDIAN) || defined(Q3_VM)
+    return value;
+#endif
+}
+
+static FORCEINLINE float LittleFloat(const float value)
+{
+#if defined(Q_BIG_ENDIAN)
+    return FloatSwap(&value);
+#elif defined(Q_LITTLE_ENDIAN) || defined(Q3_VM)
+    return value;
+#endif
+}
+
+static FORCEINLINE short BigShort(const short value)
+{
+#if defined(Q_BIG_ENDIAN) || defined(Q3_VM)
+    return value;
+#elif defined(Q_LITTLE_ENDIAN)
+    return ShortSwap(value);
+#endif
+}
+
+#if defined(Q_BIG_ENDIAN) && defined(Q_LITTLE_ENDIAN)
+#error "Endianness defined as both big and little"
+#elif !defined(Q_BIG_ENDIAN) && !defined(Q_LITTLE_ENDIAN) && !defined(Q3_VM)
+#error "Endianness not defined"
 #endif
 
 //=============================================================
