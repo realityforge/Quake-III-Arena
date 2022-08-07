@@ -698,7 +698,7 @@ void FireWeapon(gentity_t* ent)
     }
 #endif
 
-    // track shots taken for accuracy tracking.  Grapple is not a weapon and gauntet is just not tracked
+    // track shots taken for accuracy tracking.  Grapple is not a weapon and gauntlet is just not tracked
     if (ent->s.weapon != WP_GRAPPLING_HOOK && ent->s.weapon != WP_GAUNTLET) {
 #ifdef MISSIONPACK
         if (ent->s.weapon == WP_NAILGUN) {
