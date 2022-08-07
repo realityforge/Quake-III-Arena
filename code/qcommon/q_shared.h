@@ -634,8 +634,6 @@ typedef enum {
     FS_SEEK_SET
 } fsOrigin_t;
 
-//=============================================
-
 int Q_isprint(int c);
 int Q_islower(int c);
 int Q_isupper(int c);
@@ -670,7 +668,6 @@ char* Q_CleanStr(char* string);
 // Count the number of char tocount encountered in string
 int Q_CountChar(const char* string, char tocount);
 
-//=============================================
 char* QDECL va(const char* format, ...) PRINTF_LIKE_FUNCTION(1, 2);
 
 #define TRUNCATE_LENGTH 64
