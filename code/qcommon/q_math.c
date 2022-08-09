@@ -75,7 +75,7 @@ float Q_crandom(int* seed)
 
 //=======================================================
 
-signed char ClampChar(int i)
+signed char ClampChar(const int i)
 {
     if (i < -128) {
         return -128;
