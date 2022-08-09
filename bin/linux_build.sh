@@ -17,7 +17,7 @@ set -e
 export WORKSPACE_BASE=`pwd`
 
 export IMAGE_PRESENT=`docker images | grep q3a_build`
-if [ "" = "${IMAGE_PRESENT}" || "${FORCE_BUILD}" == "true" ]; then
+if [ "" = "${IMAGE_PRESENT}" ] || [ "${FORCE_BUILD}" == "true" ]; then
   echo "Creating Build Image"
   docker build -t q3a_build:latest ${WORKSPACE_BASE}/bin/docker/linux
   docker rm --force q3a_builder 2> /dev/null > /dev/null
