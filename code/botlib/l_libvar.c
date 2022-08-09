@@ -57,9 +57,7 @@ static float LibVarStringValue(const char* string)
 }
 static libvar_t* LibVarAlloc(const char* var_name)
 {
-    libvar_t* v;
-
-    v = (libvar_t*)GetMemory(sizeof(libvar_t));
+    libvar_t* v = (libvar_t*)GetMemory(sizeof(libvar_t));
     memset(v, 0, sizeof(libvar_t));
     v->name = (char*)GetMemory(strlen(var_name) + 1);
     strcpy(v->name, var_name);
