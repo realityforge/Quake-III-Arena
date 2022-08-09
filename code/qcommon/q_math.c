@@ -79,11 +79,11 @@ signed char ClampChar(const int i)
 {
     if (i < -128) {
         return -128;
-    }
-    if (i > 127) {
+    } else if (i > 127) {
         return 127;
+    } else {
+        return (signed char)i;
     }
-    return (signed char)i;
 }
 
 // this isn't a real cheap function to call!
