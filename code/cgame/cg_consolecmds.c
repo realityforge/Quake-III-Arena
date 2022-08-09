@@ -105,7 +105,7 @@ static void CG_ScoresUp_f()
 
 #ifdef MISSIONPACK
 extern menuDef_t* menuScoreboard;
-void Menu_Reset(); // FIXME: add to right include file
+void Menu_Reset(void); // FIXME: add to right include file
 
 static void CG_LoadHud_f()
 {
