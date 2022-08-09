@@ -20,13 +20,19 @@ EXTRA_WARNINGS = ["-Wall", "-Wpedantic", "-Werror", "-Wmissing-prototypes"] + se
         # The emcc toolchain expects a main but we don't provide one
         "-Wno-emcc",
     ],
+    # GCC complains about the pragmas that are present in the code to suppress clang warnings
+    "@platforms//os:linux": ["-Wno-unknown-pragmas"],
     "@platforms//os:macos": [],
 })
 
 FULL_WARNINGS = EXTRA_WARNINGS + [
     "-Wextra",
-    "-Weverything",
-]
+] + select({
+    "//build_defs:wasm": ["-Weverything"],
+    # Linux or more specifically gcc does not have -Weverything
+    "@platforms//os:linux": [],
+    "@platforms//os:macos": ["-Weverything"],
+})
 
 PLUGIN_COPTS = EXTRA_WARNINGS + [
     "-fPIC",
