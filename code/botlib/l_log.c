@@ -40,26 +40,23 @@ typedef struct logfile_s {
 
 static logfile_t logfile;
 
-void Log_Open(char* filename)
+void Log_Open(const char* filename)
 {
-    if (!LibVarValue("log", "0"))
-        return;
-    if (!filename || !strlen(filename)) {
+    if (!LibVarValue("log", "0")) {
+    } else if (!filename || !strlen(filename)) {
         botimport.Print(PRT_MESSAGE, "openlog <filename>\n");
-        return;
-    }
-    if (logfile.fp) {
+    } else if (logfile.fp) {
         botimport.Print(PRT_ERROR, "log file %s is already opened\n", logfile.filename);
-        return;
+    } else {
+        const char* path = FS_BuildOSPath(Cvar_VariableString("fs_homepath"), Cvar_VariableString("fs_game"), filename);
+        logfile.fp = fopen(path, "wb");
+        if (!logfile.fp) {
+            botimport.Print(PRT_ERROR, "can't open the log file %s\n", filename);
+        } else {
+            strncpyz(logfile.filename, filename, sizeof(logfile.filename));
+            botimport.Print(PRT_MESSAGE, "Opened log %s\n", logfile.filename);
+        }
     }
-    const char* ospath = FS_BuildOSPath(Cvar_VariableString("fs_homepath"), Cvar_VariableString("fs_game"), filename);
-    logfile.fp = fopen(ospath, "wb");
-    if (!logfile.fp) {
-        botimport.Print(PRT_ERROR, "can't open the log file %s\n", filename);
-        return;
-    }
-    strncpyz(logfile.filename, filename, sizeof(logfile.filename));
-    botimport.Print(PRT_MESSAGE, "Opened log %s\n", logfile.filename);
 }
 void Log_Close()
 {
