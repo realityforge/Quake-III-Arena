@@ -30,6 +30,7 @@ void QDECL Com_Printf(const char* msg, ...) PRINTF_LIKE_FUNCTION(1, 2);
 #define BRAINCHECK_NON_FATAL_ASSERTS
 #pragma clang diagnostic ignored "-Wvariadic-macros"
 #pragma clang diagnostic ignored "-Wgnu-zero-variadic-macro-arguments"
+#pragma GCC diagnostic ignored "-Wvariadic-macros"
 #define BRAINCHECK_PRINTF(args...) Com_Printf(args)
 #include "braincheck.h"
 
