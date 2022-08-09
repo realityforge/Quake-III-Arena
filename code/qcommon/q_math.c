@@ -131,7 +131,7 @@ void CrossProduct(const vec3_t v1, const vec3_t v2, vec3_t cross)
 
 //=======================================================
 
-signed char ClampChar(int i)
+signed char ClampChar(const int i)
 {
     if (i < -128) {
         return -128;
