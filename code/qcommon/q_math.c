@@ -57,12 +57,12 @@ int Q_rand(int* seed)
 
 float Q_random(int* seed)
 {
-    return (Q_rand(seed) & 0xffff) / (float)0x10000;
+    return (float)(Q_rand(seed) & 0xffff) / (float)0x10000;
 }
 
 float Q_crandom(int* seed)
 {
-    return 2.0 * (Q_random(seed) - 0.5);
+    return 2.0F * (Q_random(seed) - 0.5F);
 }
 
 #ifdef __LCC__
