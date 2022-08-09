@@ -68,8 +68,9 @@ static libvar_t* LibVarAlloc(const char* var_name)
 }
 static void LibVarDeAlloc(libvar_t* v)
 {
-    if (v->string)
+    if (v->string) {
         FreeMemory(v->string);
+    }
     FreeMemory(v->name);
     FreeMemory(v);
 }
