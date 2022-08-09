@@ -15,31 +15,32 @@
 set -e
 
 export WORKSPACE_BASE=$(pwd)
+export IMAGE_NAME="q3a_builder-`git branch --show-current | tr -d '\n'`"
 
 export IMAGE_PRESENT=$(docker images | grep q3a_build)
 if [ "" = "${IMAGE_PRESENT}" ] || [ "${FORCE_BUILD}" == "true" ]; then
     echo "Creating Build Image"
     docker build -t q3a_build:latest ${WORKSPACE_BASE}/bin/docker/linux
-    docker rm --force q3a_builder 2>/dev/null >/dev/null
+    docker rm --force "${IMAGE_NAME}" 2>/dev/null >/dev/null
 fi
 
-export CONTAINER_PRESENT=$(docker ps -a | grep q3a_builder)
+export CONTAINER_PRESENT=$(docker ps -a | grep "${IMAGE_NAME}")
 if [ "" = "${CONTAINER_PRESENT}" ]; then
-    echo "Creating Build Container"
+    echo "Creating Build Container - ${IMAGE_NAME}"
     docker create --tty \
         --mount type=bind,source="${WORKSPACE_BASE}/",target=/home/q3a_builder/source \
         --mount type=bind,source="${HOME}/.cache/bazel-repo",target=/home/q3a_builder/.cache/bazel-repo \
         --mount type=bind,source="${HOME}/.cache/bazel-linux-disk",target=/home/q3a_builder/.cache/bazel-disk \
-        --name q3a_builder \
+        --name "${IMAGE_NAME}" \
         q3a_build:latest
 fi
 
-export CONTAINER_RUNNING=$(docker ps | grep q3a_builder)
+export CONTAINER_RUNNING=$(docker ps | grep "${IMAGE_NAME}")
 if [ "" = "${CONTAINER_RUNNING}" ]; then
-    echo "Starting Build Container"
-    docker start q3a_builder
+    echo "Starting Build Container - ${IMAGE_NAME}"
+    docker start "${IMAGE_NAME}"
 fi
 
-docker exec --interactive --tty q3a_builder ./bazelw $@
+docker exec --interactive --tty "${IMAGE_NAME}" ./bazelw $@
 
-docker stop q3a_builder
+docker stop "${IMAGE_NAME}"
