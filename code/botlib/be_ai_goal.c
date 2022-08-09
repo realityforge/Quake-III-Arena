@@ -196,7 +196,7 @@ void BotInterbreedGoalFuzzyLogic(int parent1, int parent2, int child)
     InterbreedWeightConfigs(p1->itemweightconfig, p2->itemweightconfig,
                             c->itemweightconfig);
 }
-void BotMutateGoalFuzzyLogic(int goalstate)
+void BotMutateGoalFuzzyLogic(const int goalstate)
 {
     const bot_goalstate_t* gs = BotGoalStateFromHandle(goalstate);
     if (NULL != gs) {
