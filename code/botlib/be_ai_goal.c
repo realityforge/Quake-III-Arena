@@ -199,7 +199,9 @@ void BotInterbreedGoalFuzzyLogic(int parent1, int parent2, int child)
 void BotMutateGoalFuzzyLogic(int goalstate)
 {
     const bot_goalstate_t* gs = BotGoalStateFromHandle(goalstate);
-    EvolveWeightConfig(gs->itemweightconfig);
+    if (NULL != gs) {
+        EvolveWeightConfig(gs->itemweightconfig);
+    }
 }
 static itemconfig_t* LoadItemConfig(char* filename)
 {
