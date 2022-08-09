@@ -116,16 +116,19 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define PATH_SEP '/'
 
+#if defined __x86_64__
+#undef idx64
+#define idx64 1
+#elif defined __aarch64__
+#define ARCH_STRING "arm64"
+#define Q3_LITTLE_ENDIAN
+#endif
+
 #if !defined(ARCH_STRING)
 #error ARCH_STRING should be defined by the Makefile
 #endif
 
-#if defined __x86_64__
-#undef idx64
-#define idx64 1
-#endif
-
-#if __FLOAT_WORD_ORDER == __BIG_ENDIAN
+#if __FLOAT_WORD_ORDER == __BIG_ENDIAN && !defined(Q3_LITTLE_ENDIAN)
 #define Q3_BIG_ENDIAN
 #else
 #define Q3_LITTLE_ENDIAN
