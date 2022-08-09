@@ -2537,27 +2537,26 @@ void BotResetAvoidReach(int movestate)
     memset(ms->avoidreachtimes, 0, MAX_AVOIDREACH * sizeof(float));
     memset(ms->avoidreachtries, 0, MAX_AVOIDREACH * sizeof(int));
 }
-void BotResetLastAvoidReach(int movestate)
+void BotResetLastAvoidReach(const int movestate)
 {
-    int i, latest;
-    float latesttime;
-    bot_movestate_t* ms;
-
-    ms = BotMoveStateFromHandle(movestate);
-    if (!ms)
+    bot_movestate_t* ms = BotMoveStateFromHandle(movestate);
+    if (NULL == ms) {
         return;
-    latesttime = 0;
-    latest = 0;
-    for (i = 0; i < MAX_AVOIDREACH; i++) {
-        if (ms->avoidreachtimes[i] > latesttime) {
-            latesttime = ms->avoidreachtimes[i];
-            latest = i;
+    } else {
+        float latesttime = 0;
+        int latest = 0;
+        int i;
+        for (i = 0; i < MAX_AVOIDREACH; i++) {
+            if (ms->avoidreachtimes[i] > latesttime) {
+                latesttime = ms->avoidreachtimes[i];
+                latest = i;
+            }
         }
-    }
-    if (latesttime) {
-        ms->avoidreachtimes[latest] = 0;
-        if (ms->avoidreachtries[latest] > 0)
-            ms->avoidreachtries[latest]--;
+        if (latesttime) {
+            ms->avoidreachtimes[latest] = 0;
+            if (ms->avoidreachtries[latest] > 0)
+                ms->avoidreachtries[latest]--;
+        }
     }
 }
 void BotResetMoveState(int movestate)
