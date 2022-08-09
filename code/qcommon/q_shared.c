@@ -743,7 +743,7 @@ void Info_RemoveKey(char* s, const char* key)
     }
 }
 
-void Info_RemoveKey_Big(char* s, const char* key)
+static void Info_RemoveKey_Big(char* s, const char* key)
 {
     char* start;
     char pkey[BIG_INFO_KEY];
