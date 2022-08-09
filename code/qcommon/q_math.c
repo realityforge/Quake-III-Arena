@@ -118,14 +118,14 @@ void ByteToDir(int b, vec3_t dir)
     VectorCopy(bytedirs[b], dir);
 }
 
-unsigned ColorBytes4(float r, float g, float b, float a)
+uint32_t ColorBytes4(const float r, const float g, const float b, const float a)
 {
-    unsigned i;
+    uint8_t i;
 
-    ((uint8_t*)&i)[0] = r * 255;
-    ((uint8_t*)&i)[1] = g * 255;
-    ((uint8_t*)&i)[2] = b * 255;
-    ((uint8_t*)&i)[3] = a * 255;
+    ((uint8_t*)&i)[0] = (uint8_t)(r * 255);
+    ((uint8_t*)&i)[1] = (uint8_t)(g * 255);
+    ((uint8_t*)&i)[2] = (uint8_t)(b * 255);
+    ((uint8_t*)&i)[3] = (uint8_t)(a * 255);
 
     return i;
 }

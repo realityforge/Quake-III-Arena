@@ -447,7 +447,7 @@ typedef struct {
         v[2] = ((int)(v[2])); \
     }
 
-unsigned ColorBytes4(float r, float g, float b, float a);
+uint32_t ColorBytes4(float r, float g, float b, float a);
 
 float RadiusFromBounds(const vec3_t mins, const vec3_t maxs);
 void ClearBounds(vec3_t mins, vec3_t maxs);
