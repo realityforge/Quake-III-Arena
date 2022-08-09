@@ -202,6 +202,7 @@ static void CG_TellAttacker_f()
     trap_SendClientCommand(command);
 }
 
+#ifdef MISSIONPACK
 static void CG_VoiceTellTarget_f()
 {
     int clientNum;
@@ -234,7 +235,6 @@ static void CG_VoiceTellAttacker_f()
     trap_SendClientCommand(command);
 }
 
-#ifdef MISSIONPACK
 static void CG_NextTeamMember_f()
 {
     CG_SelectNextPlayer();
@@ -431,10 +431,10 @@ static consoleCommand_t commands[] = {
     { "weapon", CG_Weapon_f },
     { "tell_target", CG_TellTarget_f },
     { "tell_attacker", CG_TellAttacker_f },
-    { "vtell_target", CG_VoiceTellTarget_f },
-    { "vtell_attacker", CG_VoiceTellAttacker_f },
     { "tcmd", CG_TargetCommand_f },
 #ifdef MISSIONPACK
+    { "vtell_target", CG_VoiceTellTarget_f },
+    { "vtell_attacker", CG_VoiceTellAttacker_f },
     { "loadhud", CG_LoadHud_f },
     { "nextTeamMember", CG_NextTeamMember_f },
     { "prevTeamMember", CG_PrevTeamMember_f },
