@@ -27,9 +27,9 @@ export CONTAINER_PRESENT=$(docker ps -a | grep q3a_builder)
 if [ "" = "${CONTAINER_PRESENT}" ]; then
     echo "Creating Build Container"
     docker create --tty \
-        -v ${WORKSPACE_BASE}/:/home/q3a_builder/source \
-        -v ${HOME}/.cache/bazel-repo:/home/q3a_builder/.cache/bazel-repo \
-        -v ${HOME}/.cache/bazel-linux-disk:/home/q3a_builder/.cache/bazel-disk \
+        --mount type=bind,source="${WORKSPACE_BASE}/",target=/home/q3a_builder/source \
+        --mount type=bind,source="${HOME}/.cache/bazel-repo",target=/home/q3a_builder/.cache/bazel-repo \
+        --mount type=bind,source="${HOME}/.cache/bazel-linux-disk",target=/home/q3a_builder/.cache/bazel-disk \
         --name q3a_builder \
         q3a_build:latest
 fi
@@ -41,3 +41,5 @@ if [ "" = "${CONTAINER_RUNNING}" ]; then
 fi
 
 docker exec --interactive --tty q3a_builder ./bazelw $@
+
+docker stop q3a_builder
