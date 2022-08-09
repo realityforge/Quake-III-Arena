@@ -1966,7 +1966,8 @@ static void R_LoadFogs(lump_t* l, lump_t* brushesLump, lump_t* sidesLump)
 
         out->colorInt = ColorBytes4(shader->fogParms.color[0],
                                     shader->fogParms.color[1],
-                                    shader->fogParms.color[2], 1.0);
+                                    shader->fogParms.color[2],
+                                    1.0F);
 
         d = shader->fogParms.depthForOpaque < 1 ? 1 : shader->fogParms.depthForOpaque;
         out->tcScale = 1.0f / (d * 8);
