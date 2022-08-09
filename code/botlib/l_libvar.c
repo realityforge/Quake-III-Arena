@@ -81,7 +81,6 @@ void LibVarDeAllocAll()
         libvarlist = libvarlist->next;
         LibVarDeAlloc(v);
     }
-    libvarlist = NULL;
 }
 libvar_t* LibVarGet(const char* var_name)
 {
