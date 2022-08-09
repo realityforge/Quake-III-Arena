@@ -52,14 +52,17 @@ static int ReadValue(source_t* source, float* value)
         return false;
     if (!strcmp(token.string, "-")) {
         SourceWarning(source, "negative value set to zero");
+
         if (!PC_ExpectTokenType(source, TT_NUMBER, 0, &token)) {
             return false;
         }
     }
+
     if (token.type != TT_NUMBER) {
         SourceError(source, "invalid return value %s", token.string);
         return false;
     }
+
     *value = token.floatvalue;
     return true;
 }
@@ -348,7 +351,6 @@ weightconfig_t* ReadWeightConfig(char* filename)
     }
     return config;
 }
-
 int FindFuzzyWeight(weightconfig_t* wc, char* name)
 {
     int i;
