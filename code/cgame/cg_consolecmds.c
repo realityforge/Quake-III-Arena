@@ -429,9 +429,9 @@ static consoleCommand_t commands[] = {
     { "weapnext", CG_NextWeapon_f },
     { "weapprev", CG_PrevWeapon_f },
     { "weapon", CG_Weapon_f },
-    { "tcmd", CG_TargetCommand_f },
     { "tell_target", CG_TellTarget_f },
     { "tell_attacker", CG_TellAttacker_f },
+    { "tcmd", CG_TargetCommand_f },
 #ifdef MISSIONPACK
     { "vtell_target", CG_VoiceTellTarget_f },
     { "vtell_attacker", CG_VoiceTellAttacker_f },
