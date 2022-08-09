@@ -139,7 +139,7 @@ signed char ClampChar(int i)
     if (i > 127) {
         return 127;
     }
-    return i;
+    return (signed char)i;
 }
 
 // this isn't a real cheap function to call!
