@@ -2536,9 +2536,7 @@ void BotResetAvoidReach(int movestate)
 void BotResetLastAvoidReach(const int movestate)
 {
     bot_movestate_t* ms = BotMoveStateFromHandle(movestate);
-    if (!ms) {
-        return;
-    } else {
+    if (NULL != ms) {
         float latesttime = 0;
         int latest = 0;
         int i;
