@@ -3,7 +3,8 @@ RUN apt update -y &&  \
     apt upgrade -y &&  \
     # curl is required by bazelisk to download bazel
     # perl provides shasum which is required by bazelisk to verify download
-    apt-get install -y curl perl &&  \
+    # build-essential provides a compiler which is required by bazel to perform compile until we add toolchains
+    apt-get install -y curl perl build-essential &&  \
     apt-get clean &&  \
     apt-get autoclean &&  \
     rm -rf /var/lib/apt/lists/*
