@@ -2548,7 +2548,7 @@ void BotResetLastAvoidReach(const int movestate)
         }
         if (latesttime) {
             ms->avoidreachtimes[latest] = 0;
-            if (ms->avoidreachtries[i] > 0)
+            if (ms->avoidreachtries[i] > 0 && i < MAX_AVOIDREACH)
                 ms->avoidreachtries[latest]--;
         }
     }
