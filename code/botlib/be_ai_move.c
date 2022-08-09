@@ -2114,8 +2114,6 @@ static bot_moveresult_t BotMoveInGoalArea(bot_movestate_t* ms, bot_goal_t* goal)
         Vector2Angles(dir, result.ideal_viewangles);
         result.flags |= MOVERESULT_SWIMVIEW;
     }
-    // if (!debugline) debugline = botimport.DebugLineCreate();
-    // botimport.DebugLineShow(debugline, ms->origin, goal->origin, LINECOLOR_BLUE);
     ms->lastreachnum = 0;
     ms->lastareanum = 0;
     ms->lastgoalareanum = goal->areanum;
