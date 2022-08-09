@@ -49,7 +49,7 @@ static float LibVarStringValue(const char* string)
             value = value + (float)(*string - '0') / (float)dotfound;
             dotfound *= 10;
         } else {
-            value = value * 10.0 + (float)(*string - '0');
+            value = value * 10.0F + (float)(*string - '0');
         }
         string++;
     }
