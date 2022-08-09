@@ -1181,6 +1181,7 @@ static int PC_EvaluateTokens(source_t* source, token_t* tokens, signed long int*
                     negativevalue = 1;
                     break;
                 }
+                break;
             }
 
             case P_MUL:
