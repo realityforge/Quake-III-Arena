@@ -86,8 +86,6 @@ static bool BotLibSetup(char* str)
 
 static int Export_BotLibSetup()
 {
-    int errnum;
-
     bot_developer = LibVarGetValue("bot_developer");
     memset(&botlibglobals, 0, sizeof(botlibglobals));
     Log_Open("botlib.log");
@@ -96,7 +94,7 @@ static int Export_BotLibSetup()
     botlibglobals.maxclients = (int)LibVarValue("maxclients", "128");
     botlibglobals.maxentities = (int)LibVarValue("maxentities", "1024");
 
-    errnum = AAS_Setup(); // be_aas_main.c
+    int errnum = AAS_Setup(); // be_aas_main.c
     if (errnum != BLERR_NOERROR)
         return errnum;
     errnum = EA_Setup(); // be_ea.c
