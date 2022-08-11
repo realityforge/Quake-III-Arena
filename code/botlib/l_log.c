@@ -36,7 +36,7 @@ typedef struct logfile_s {
     FILE* fp;
 } logfile_t;
 
-static logfile_t logfile;
+static logfile_t logfile = { 0 };
 
 void Log_Open(const char* filename)
 {
