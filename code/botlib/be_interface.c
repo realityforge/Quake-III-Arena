@@ -90,11 +90,7 @@ static int Export_BotLibSetup()
 
     bot_developer = LibVarGetValue("bot_developer");
     memset(&botlibglobals, 0, sizeof(botlibglobals));
-
-    if (bot_developer) {
-        Log_Open("botlib.log");
-    }
-
+    Log_Open("botlib.log");
     botimport.Print(PRT_MESSAGE, "------- BotLib Initialization -------\n");
 
     botlibglobals.maxclients = (int)LibVarValue("maxclients", "128");
