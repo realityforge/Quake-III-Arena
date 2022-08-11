@@ -95,22 +95,22 @@ static int Export_BotLibSetup()
     botlibglobals.maxentities = (int)LibVarValue("maxentities", "1024");
 
     int errnum = AAS_Setup(); // be_aas_main.c
-    if (errnum != BLERR_NOERROR)
+    if (BLERR_NOERROR != errnum)
         return errnum;
     errnum = EA_Setup(); // be_ea.c
-    if (errnum != BLERR_NOERROR)
+    if (BLERR_NOERROR != errnum)
         return errnum;
     errnum = BotSetupWeaponAI(); // be_ai_weap.c
-    if (errnum != BLERR_NOERROR)
+    if (BLERR_NOERROR != errnum)
         return errnum;
     errnum = BotSetupGoalAI(); // be_ai_goal.c
-    if (errnum != BLERR_NOERROR)
+    if (BLERR_NOERROR != errnum)
         return errnum;
     errnum = BotSetupChatAI(); // be_ai_chat.c
-    if (errnum != BLERR_NOERROR)
+    if (BLERR_NOERROR != errnum)
         return errnum;
     errnum = BotSetupMoveAI(); // be_ai_move.c
-    if (errnum != BLERR_NOERROR)
+    if (BLERR_NOERROR != errnum)
         return errnum;
 
     botlibglobals.botlibsetup = true;
