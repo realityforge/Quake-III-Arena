@@ -513,7 +513,7 @@ static bot_synonymlist_t* BotLoadSynonyms(char* filename)
                     context &= ~contextstack[contextlevel];
                 } else if (!strcmp(token.string, "[")) {
                     size += sizeof(bot_synonymlist_t);
-                    if (pass) {
+                    if (NULL != ptr) {
                         syn = (bot_synonymlist_t*)ptr;
                         ptr += sizeof(bot_synonymlist_t);
                         syn->context = context;
@@ -539,7 +539,7 @@ static bot_synonymlist_t* BotLoadSynonyms(char* filename)
                             return NULL;
                         }
                         size += sizeof(bot_synonym_t) + strlen(token.string) + 1;
-                        if (pass) {
+                        if (NULL != ptr) {
                             synonym = (bot_synonym_t*)ptr;
                             ptr += sizeof(bot_synonym_t);
                             synonym->string = ptr;
@@ -556,7 +556,7 @@ static bot_synonymlist_t* BotLoadSynonyms(char* filename)
                             FreeSource(source);
                             return NULL;
                         }
-                        if (pass) {
+                        if (NULL != ptr) {
                             synonym->weight = token.floatvalue;
                             syn->totalweight += synonym->weight;
                         }
@@ -755,7 +755,7 @@ static bot_randomlist_t* BotLoadRandomStrings(char* filename)
                 return NULL;
             }
             size += sizeof(bot_randomlist_t) + strlen(token.string) + 1;
-            if (pass) {
+            if (NULL != ptr) {
                 random = (bot_randomlist_t*)ptr;
                 ptr += sizeof(bot_randomlist_t);
                 random->string = ptr;
@@ -779,7 +779,7 @@ static bot_randomlist_t* BotLoadRandomStrings(char* filename)
                     return NULL;
                 }
                 size += sizeof(bot_randomstring_t) + strlen(chatmessagestring) + 1;
-                if (pass) {
+                if (NULL != ptr) {
                     randomstring = (bot_randomstring_t*)ptr;
                     ptr += sizeof(bot_randomstring_t);
                     randomstring->string = ptr;
@@ -1517,7 +1517,7 @@ static bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
                             return NULL;
                         }
                         StripDoubleQuotes(token.string);
-                        if (pass) {
+                        if (NULL != ptr) {
                             chattype = (bot_chattype_t*)ptr;
                             strncpyz(chattype->name, token.string, sizeof(chattype->name));
                             chattype->firstchatmessage = NULL;
@@ -1533,7 +1533,7 @@ static bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
                                 FreeSource(source);
                                 return NULL;
                             }
-                            if (pass) {
+                            if (NULL != ptr) {
                                 chatmessage = (bot_chatmessage_t*)ptr;
                                 chatmessage->time = -2 * CHATMESSAGE_RECENTTIME;
                                 // put the chat message in the list
