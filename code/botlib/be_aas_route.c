@@ -103,15 +103,12 @@ static void AAS_InitTravelFlagFromType()
 }
 static inline int AAS_TravelFlagForType_inline(int traveltype)
 {
-    int tfl = 0;
-    if (traveltype & TRAVELFLAG_NOTTEAM1)
-        tfl |= TFL_NOTTEAM1;
-    if (traveltype & TRAVELFLAG_NOTTEAM2)
-        tfl |= TFL_NOTTEAM2;
-    traveltype &= TRAVELTYPE_MASK;
-    if (traveltype < 0 || traveltype >= MAX_TRAVELTYPES)
+    const int travel_types = traveltype & TRAVELTYPE_MASK;
+    if (travel_types < 0 || travel_types >= MAX_TRAVELTYPES) {
         return TFL_INVALID;
-    return tfl | aasworld.travelflagfortype[traveltype];
+    } else {
+        return (traveltype & TRAVELFLAG_NOTTEAM1 ? TFL_NOTTEAM1 : 0) | (traveltype & TRAVELFLAG_NOTTEAM2 ? TFL_NOTTEAM2 : 0) | aasworld.travelflagfortype[traveltype];
+    }
 }
 int AAS_TravelFlagForType(int traveltype)
 {
