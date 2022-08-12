@@ -1612,7 +1612,7 @@ static bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
        // character was read successfully
     return chat;
 }
-static void BotFreeChatFile(int chatstate)
+static void BotFreeChatFile(const int chatstate)
 {
     bot_chatstate_t* cs;
 
