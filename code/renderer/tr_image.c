@@ -251,7 +251,6 @@ static void ResampleTexture(const unsigned* in, int inwidth, int inheight, unsig
     for (i = 0; i < outheight; i++, out += outwidth) {
         inrow = in + inwidth * (int)((i + 0.25) * inheight / outheight);
         inrow2 = in + inwidth * (int)((i + 0.75) * inheight / outheight);
-        frac = fracstep >> 1;
         for (j = 0; j < outwidth; j++) {
             pix1 = (uint8_t*)inrow + p1[j];
             pix2 = (uint8_t*)inrow + p2[j];
@@ -825,11 +824,6 @@ static void LoadTGA(const char* name, uint8_t** pic, int* width, int* height)
     } else if (targa_header.image_type == 10) { // Runlength encoded RGB images
         unsigned char red, green, blue, alphabyte, packetHeader, packetSize, j;
 
-        red = 0;
-        green = 0;
-        blue = 0;
-        alphabyte = 0xff;
-
         for (row = rows - 1; row >= 0; row--) {
             pixbuf = targa_rgba + row * columns * 4;
             for (column = 0; column < columns;) {
@@ -892,7 +886,6 @@ static void LoadTGA(const char* name, uint8_t** pic, int* width, int* height)
                             break;
                         default:
                             ri.Error(ERR_DROP, "LoadTGA: illegal pixel_size '%d' in file '%s'", targa_header.pixel_size, name);
-                            break;
                         }
                         column++;
                         if (column == columns) { // pixel packet run spans across rows
@@ -1746,7 +1739,7 @@ compatable with our normal parsing rules.
 */
 static char* CommaParse(char** data_p)
 {
-    int c = 0, len;
+    int c, len;
     char* data;
     static char com_token[MAX_TOKEN_CHARS];
 

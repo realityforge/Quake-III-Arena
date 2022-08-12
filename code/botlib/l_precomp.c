@@ -214,7 +214,6 @@ static int PC_ReadDefineParms(source_t* source, define_t* define, token_t** parm
                 if (indent <= 0) {
                     if (lastcomma)
                         SourceWarning(source, "too many comma's");
-                    lastcomma = 1;
                     break;
                 }
             }
@@ -695,8 +694,6 @@ static int PC_Directive_define(source_t* source)
         PC_UnreadSourceToken(source, &token);
         if (!PC_Directive_undef(source))
             return false;
-        // if the define was not removed (define->flags & DEFINE_FIXED)
-        define = PC_FindHashedDefine(source->definehash, token.string);
     }
     // allocate define
     define = (define_t*)GetMemory(sizeof(define_t) + strlen(token.string) + 1);

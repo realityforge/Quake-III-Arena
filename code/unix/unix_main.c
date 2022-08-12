@@ -322,7 +322,6 @@ void Sys_QueEvent(int time, sysEventType_t type, int value, int value2, int ptrL
 sysEvent_t Sys_GetEvent(void)
 {
     sysEvent_t ev;
-    char* s;
     msg_t netmsg;
     netadr_t adr;
 
