@@ -511,7 +511,7 @@ static int PS_ReadNumber(script_t* script, token_t* token)
         token->string[len++] = *script->script_p++;
         c = *script->script_p;
         // hexadecimal
-        while ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'A')) {
+        while ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F')) {
             token->string[len++] = *script->script_p++;
             if (len >= MAX_TOKEN) {
                 ScriptError(script, "hexadecimal number longer than MAX_TOKEN = %d", MAX_TOKEN);
