@@ -547,7 +547,7 @@ static void UI_PlayerAngles(playerInfo_t* pi, vec3_t legs[3], vec3_t torso[3], v
     AnglesToAxis(headAngles, head);
 }
 
-static void UI_PlayerFloatSprite(playerInfo_t* pi, vec3_t origin, qhandle_t shader)
+static void UI_PlayerFloatSprite(const vec3_t origin, qhandle_t shader)
 {
     refEntity_t ent;
 
@@ -772,7 +772,7 @@ void UI_DrawPlayer(float x, float y, float w, float h, playerInfo_t* pi, int tim
 
     // add the chat icon
     if (pi->chat) {
-        UI_PlayerFloatSprite(pi, origin, trap_R_RegisterShaderNoMip("sprites/balloon3"));
+        UI_PlayerFloatSprite(origin, trap_R_RegisterShaderNoMip("sprites/balloon3"));
     }
 
     // add an accent light
