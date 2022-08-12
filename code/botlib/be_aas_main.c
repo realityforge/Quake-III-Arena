@@ -132,7 +132,7 @@ static int AAS_LoadFiles(const char* mapname)
     int errnum;
     char aasfile[MAX_QPATH];
 
-    strncpyz(aasworld.mapname, mapname, sizeof(aasfile));
+    strncpyz(aasworld.mapname, mapname, sizeof(aasworld.mapname));
     // NOTE: first reset the entity links into the AAS areas and BSP leaves
     //  the AAS link heap and BSP link heap are reset after respectively the
     //  AAS file and BSP file are loaded
