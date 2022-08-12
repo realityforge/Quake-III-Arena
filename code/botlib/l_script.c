@@ -841,5 +841,5 @@ void FreeScript(script_t* script)
 }
 void PS_SetBaseFolder(const char* path)
 {
-    Com_sprintf(basefolder, sizeof(basefolder), "%s", path);
+    strncpyz(basefolder, path, sizeof(basefolder));
 }
