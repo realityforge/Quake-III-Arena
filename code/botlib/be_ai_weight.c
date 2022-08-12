@@ -53,8 +53,7 @@ static int ReadValue(source_t* source, float* value)
     if (!strcmp(token.string, "-")) {
         SourceWarning(source, "negative value set to zero");
 
-        if (!PC_ExpectAnyToken(source, &token)) {
-            SourceError(source, "Missing return value");
+        if (!PC_ExpectTokenType(source, TT_NUMBER, 0, &token)) {
             return false;
         }
     }
@@ -385,12 +384,9 @@ static float FuzzyWeight_r(int* inventory, fuzzyseparator_t* fs)
             else
                 w2 = fs->next->weight;
             // the scale factor
-            if (fs->next->value == MAX_INVENTORYVALUE) // is fs->next the default case?
-                return w2; // can't interpolate, return default weight
-            else
-                scale = (float)(inventory[fs->index] - fs->value) / (fs->next->value - fs->value);
+            scale = (inventory[fs->index] - fs->value) / (fs->next->value - fs->value);
             // scale between the two weights
-            return (1 - scale) * w1 + scale * w2;
+            return scale * w1 + (1 - scale) * w2;
         }
         return FuzzyWeight_r(inventory, fs->next);
     }
@@ -418,12 +414,9 @@ static float FuzzyWeightUndecided_r(int* inventory, fuzzyseparator_t* fs)
             else
                 w2 = fs->next->minweight + random() * (fs->next->maxweight - fs->next->minweight);
             // the scale factor
-            if (fs->next->value == MAX_INVENTORYVALUE) // is fs->next the default case?
-                return w2; // can't interpolate, return default weight
-            else
-                scale = (float)(inventory[fs->index] - fs->value) / (fs->next->value - fs->value);
+            scale = (inventory[fs->index] - fs->value) / (fs->next->value - fs->value);
             // scale between the two weights
-            return (1 - scale) * w1 + scale * w2;
+            return scale * w1 + (1 - scale) * w2;
         }
         return FuzzyWeightUndecided_r(inventory, fs->next);
     }

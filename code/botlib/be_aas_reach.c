@@ -2385,10 +2385,7 @@ static aas_lreachability_t* AAS_FindFaceReachabilities(vec3_t* facepoints, int n
             VectorCopy(bestend, testpoint);
         else
             VectorCopy(beststart, testpoint);
-        if (bestfaceplane != NULL)
-            testpoint[2] = (bestfaceplane->dist - DotProduct(bestfaceplane->normal, testpoint)) / bestfaceplane->normal[2];
-        else
-            testpoint[2] = 0;
+        testpoint[2] = (bestfaceplane->dist - DotProduct(bestfaceplane->normal, testpoint)) / bestfaceplane->normal[2];
         if (!AAS_PointInsideFace(bestfacenum, testpoint, 0.1f)) {
             // if the faces are not overlapping then only go down
             if (bestend[2] - 16 > beststart[2])

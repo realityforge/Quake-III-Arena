@@ -214,6 +214,7 @@ static int PC_ReadDefineParms(source_t* source, define_t* define, token_t** parm
                 if (indent <= 0) {
                     if (lastcomma)
                         SourceWarning(source, "too many comma's");
+                    lastcomma = 1;
                     break;
                 }
             }
@@ -407,7 +408,7 @@ static int PC_ExpandBuiltinDefine(source_t* source, token_t* deftoken, define_t*
 }
 static int PC_ExpandDefine(source_t* source, token_t* deftoken, define_t* define, token_t** firsttoken, token_t** lasttoken)
 {
-    token_t *parms[MAX_DEFINEPARMS] = { NULL }, *dt, *pt, *t;
+    token_t *parms[MAX_DEFINEPARMS], *dt, *pt, *t;
     token_t *t1, *t2, *first, *last, *nextpt, token;
     int parmnum, i;
 
@@ -531,7 +532,7 @@ static void PC_ConvertPath(char* path)
     // remove double path separators
     for (ptr = path; *ptr;) {
         if ((*ptr == '\\' || *ptr == '/') && (*(ptr + 1) == '\\' || *(ptr + 1) == '/')) {
-            memmove(ptr, ptr + 1, strlen(ptr));
+            strcpy(ptr, ptr + 1);
         } else {
             ptr++;
         }
@@ -565,7 +566,7 @@ static int PC_Directive_include(source_t* source)
         script = LoadScriptFile(token.string);
         if (!script) {
             strncpyz(path, source->includepath, sizeof(path));
-            Q_strcat(path, sizeof(path), token.string);
+            strcat(path, token.string);
             script = LoadScriptFile(path);
         }
     } else if (token.type == TT_PUNCTUATION && *token.string == '<') {
@@ -577,7 +578,7 @@ static int PC_Directive_include(source_t* source)
             }
             if (token.type == TT_PUNCTUATION && *token.string == '>')
                 break;
-            Q_strcat(path, sizeof(path), token.string);
+            strncat(path, token.string, MAX_QPATH);
         }
         if (*token.string != '>') {
             SourceWarning(source, "#include missing trailing >");
@@ -953,7 +954,7 @@ typedef struct operator_s {
 
 typedef struct value_s {
     signed long int intvalue;
-    float floatvalue;
+    double floatvalue;
     int parentheses;
     struct value_s *prev, *next;
 } value_t;
@@ -1033,7 +1034,7 @@ static int PC_OperatorPriority(int op)
         op = &operator_heap[numoperators++];
 #define FreeOperator(op)
 
-static int PC_EvaluateTokens(source_t* source, token_t* tokens, signed long int* intvalue, float* floatvalue, int integer)
+static int PC_EvaluateTokens(source_t* source, token_t* tokens, signed long int* intvalue, double* floatvalue, int integer)
 {
     operator_t *o, *firstoperator, *lastoperator;
     value_t *v, *firstvalue, *lastvalue, *v1, *v2;
@@ -1044,7 +1045,7 @@ static int PC_EvaluateTokens(source_t* source, token_t* tokens, signed long int*
     int lastwasvalue = 0;
     int negativevalue = 0;
     int questmarkintvalue = 0;
-    float questmarkfloatvalue = 0;
+    double questmarkfloatvalue = 0;
     int gotquestmarkvalue = false;
     operator_t operator_heap[MAX_OPERATORS];
     int numoperators = 0;
@@ -1407,14 +1408,14 @@ static int PC_EvaluateTokens(source_t* source, token_t* tokens, signed long int*
             // remove the second value if not question mark operator
             if (o->operator!= P_QUESTIONMARK)
                 v = v->next;
-            if (v) {
-                if (v->prev)
-                    v->prev->next = v->next;
-                else
-                    firstvalue = v->next;
-                if (v->next)
-                    v->next->prev = v->prev;
-            }
+            if (v->prev)
+                v->prev->next = v->next;
+            else
+                firstvalue = v->next;
+            if (v->next)
+                v->next->prev = v->prev;
+            else
+                lastvalue = v->prev;
             // FreeMemory(v);
             FreeValue(v);
         }
@@ -1425,6 +1426,8 @@ static int PC_EvaluateTokens(source_t* source, token_t* tokens, signed long int*
             firstoperator = o->next;
         if (o->next)
             o->next->prev = o->prev;
+        else
+            lastoperator = o->prev;
         // FreeMemory(o);
         FreeOperator(o);
     }
@@ -1452,7 +1455,7 @@ static int PC_EvaluateTokens(source_t* source, token_t* tokens, signed long int*
         *floatvalue = 0;
     return false;
 }
-static int PC_Evaluate(source_t* source, signed long int* intvalue, float* floatvalue, int integer)
+static int PC_Evaluate(source_t* source, signed long int* intvalue, double* floatvalue, int integer)
 {
     token_t token, *firsttoken, *lasttoken;
     token_t *t, *nexttoken;
@@ -1524,7 +1527,7 @@ static int PC_Evaluate(source_t* source, signed long int* intvalue, float* float
     }
     return true;
 }
-static int PC_DollarEvaluate(source_t* source, signed long int* intvalue, float* floatvalue, int integer)
+static int PC_DollarEvaluate(source_t* source, signed long int* intvalue, double* floatvalue, int integer)
 {
     int indent, defined = false;
     token_t token, *firsttoken, *lasttoken;
@@ -1681,7 +1684,7 @@ static int PC_Directive_eval(source_t* source)
     token.whitespace_p = source->scriptstack->script_p;
     token.endwhitespace_p = source->scriptstack->script_p;
     token.linescrossed = 0;
-    sprintf(token.string, "%ld", labs(value));
+    sprintf(token.string, "%d", abs((int)value));
     token.type = TT_NUMBER;
     token.subtype = TT_INTEGER | TT_LONG | TT_DECIMAL;
     PC_UnreadSourceToken(source, &token);
@@ -1691,7 +1694,7 @@ static int PC_Directive_eval(source_t* source)
 }
 static int PC_Directive_evalfloat(source_t* source)
 {
-    float value;
+    double value;
     token_t token;
 
     if (!PC_Evaluate(source, NULL, &value, false))
@@ -1768,18 +1771,16 @@ static int PC_DollarDirective_evalint(source_t* source)
     sprintf(token.string, "%ld", labs(value));
     token.type = TT_NUMBER;
     token.subtype = TT_INTEGER | TT_LONG | TT_DECIMAL;
-    token.intvalue = labs(value);
-    token.floatvalue = token.intvalue;
-
+    token.intvalue = value;
+    token.floatvalue = value;
     PC_UnreadSourceToken(source, &token);
     if (value < 0)
         UnreadSignToken(source);
-
     return true;
 }
 static int PC_DollarDirective_evalfloat(source_t* source)
 {
-    float value;
+    double value;
     token_t token;
 
     if (!PC_DollarEvaluate(source, NULL, &value, false))
@@ -1791,13 +1792,11 @@ static int PC_DollarDirective_evalfloat(source_t* source)
     sprintf(token.string, "%1.2f", fabs(value));
     token.type = TT_NUMBER;
     token.subtype = TT_FLOAT | TT_LONG | TT_DECIMAL;
-    token.floatvalue = fabs(value);
-    token.intvalue = (unsigned long)token.floatvalue;
-
+    token.intvalue = (unsigned long)value;
+    token.floatvalue = value;
     PC_UnreadSourceToken(source, &token);
     if (value < 0)
         UnreadSignToken(source);
-
     return true;
 }
 static directive_t dollardirectives[20] = {

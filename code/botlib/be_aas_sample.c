@@ -165,9 +165,6 @@ int AAS_PointAreaNum(vec3_t point)
         else
             nodenum = node->children[1];
     }
-    if (!nodenum) {
-        return 0;
-    }
     return -nodenum;
 }
 int AAS_PointReachabilityAreaIndex(vec3_t origin)

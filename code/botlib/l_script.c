@@ -252,7 +252,7 @@ static int PS_ReadWhiteSpace(script_t* script)
 //============================================================================
 static int PS_ReadEscapeCharacter(script_t* script, char* ch)
 {
-    int c, val;
+    int c, val, i;
 
     // step over the leading '\\'
     script->script_p++;
@@ -293,8 +293,7 @@ static int PS_ReadEscapeCharacter(script_t* script, char* ch)
         break;
     case 'x': {
         script->script_p++;
-        val = 0;
-        while (1) {
+        for (i = 0, val = 0;; i++, script->script_p++) {
             c = *script->script_p;
             if (c >= '0' && c <= '9')
                 c = c - '0';
@@ -305,7 +304,6 @@ static int PS_ReadEscapeCharacter(script_t* script, char* ch)
             else
                 break;
             val = (val << 4) + c;
-            script->script_p++;
         }
         script->script_p--;
         if (val > 0xFF) {
@@ -319,15 +317,13 @@ static int PS_ReadEscapeCharacter(script_t* script, char* ch)
     {
         if (*script->script_p < '0' || *script->script_p > '9')
             ScriptError(script, "unknown escape char");
-        val = 0;
-        while (1) {
+        for (i = 0, val = 0;; i++, script->script_p++) {
             c = *script->script_p;
             if (c >= '0' && c <= '9')
                 c = c - '0';
             else
                 break;
             val = val * 10 + c;
-            script->script_p++;
         }
         script->script_p--;
         if (val > 0xFF) {
@@ -446,7 +442,7 @@ static int PS_ReadName(script_t* script, token_t* token)
     token->subtype = len;
     return 1;
 }
-static void NumberValue(char* string, int subtype, unsigned long int* intvalue, float* floatvalue)
+static void NumberValue(char* string, int subtype, unsigned long int* intvalue, long double* floatvalue)
 {
     unsigned long int dotfound = 0;
 
@@ -462,10 +458,10 @@ static void NumberValue(char* string, int subtype, unsigned long int* intvalue, 
                 string++;
             }
             if (dotfound) {
-                *floatvalue = *floatvalue + (float)(*string - '0') / (float)dotfound;
+                *floatvalue = *floatvalue + (long double)(*string - '0') / (long double)dotfound;
                 dotfound *= 10;
             } else {
-                *floatvalue = *floatvalue * 10.0 + (float)(*string - '0');
+                *floatvalue = *floatvalue * 10.0 + (long double)(*string - '0');
             }
             string++;
         }
@@ -616,7 +612,7 @@ static int PS_ReadPrimitive(script_t* script, token_t* token)
 
     len = 0;
     while (*script->script_p > ' ' && *script->script_p != ';') {
-        if (len >= MAX_TOKEN - 1) {
+        if (len >= MAX_TOKEN) {
             ScriptError(script, "primitive token longer than MAX_TOKEN = %d", MAX_TOKEN);
             return 0;
         }
@@ -806,6 +802,7 @@ script_t* LoadScriptFile(const char* filename)
     SetScriptPunctuations(script, NULL);
     botimport.FS_Read(script->buffer, length, fp);
     botimport.FS_FCloseFile(fp);
+    script->length = COM_Compress(script->buffer);
 
     return script;
 }

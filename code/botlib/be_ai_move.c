@@ -1259,6 +1259,7 @@ static bot_moveresult_t BotFinishTravel_WalkOffLedge(bot_movestate_t* ms, aas_re
         // go straight to the reachability end
         VectorCopy(dir, hordir);
         hordir[2] = 0;
+        dist = VectorNormalize(hordir);
         speed = 400;
     }
     EA_Move(ms->client, hordir, speed);
@@ -1268,7 +1269,6 @@ static bot_moveresult_t BotFinishTravel_WalkOffLedge(bot_movestate_t* ms, aas_re
 static bot_moveresult_t BotTravel_Jump(bot_movestate_t* ms, aas_reachability_t* reach)
 {
     vec3_t hordir, dir1, dir2, start, end, runstart;
-    int gapdist;
     float dist1, dist2, speed;
     bot_moveresult_t result;
 
@@ -1283,14 +1283,14 @@ static bot_moveresult_t BotTravel_Jump(bot_movestate_t* ms, aas_reachability_t* 
     start[2] += 1;
     VectorMA(reach->start, 80, hordir, runstart);
     // check for a gap
-    for (gapdist = 0; gapdist < 80; gapdist += 10) {
-        VectorMA(start, gapdist + 10, hordir, end);
+    for (dist1 = 0; dist1 < 80; dist1 += 10) {
+        VectorMA(start, dist1 + 10, hordir, end);
         end[2] += 1;
         if (AAS_PointAreaNum(end) != ms->reachareanum)
             break;
     }
-    if (gapdist < 80)
-        VectorMA(reach->start, gapdist, hordir, runstart);
+    if (dist1 < 80)
+        VectorMA(reach->start, dist1, hordir, runstart);
     VectorSubtract(ms->origin, reach->start, dir1);
     dir1[2] = 0;
     dist1 = VectorNormalize(dir1);
@@ -1414,7 +1414,7 @@ static bot_moveresult_t BotTravel_Elevator(bot_movestate_t* ms, aas_reachability
     // if standing on the plat
     if (BotOnMover(ms->origin, ms->entitynum, reach)) {
         // if vertically not too far from the end point
-        if (fabsf(ms->origin[2] - reach->end[2]) < sv_maxbarrier->value) {
+        if (fabs(ms->origin[2] - reach->end[2]) < sv_maxbarrier->value) {
             // move to the end point
             VectorSubtract(reach->end, ms->origin, hordir);
             hordir[2] = 0;
@@ -1804,7 +1804,6 @@ static bot_moveresult_t BotTravel_Grapple(bot_movestate_t* ms, aas_reachability_
     bsp_trace_t trace;
 
     BotClearMoveResult(&result);
-
     if (ms->moveflags & MFL_GRAPPLERESET) {
         if (offhandgrapple->value)
             EA_Command(ms->client, cmd_grappleoff->string);

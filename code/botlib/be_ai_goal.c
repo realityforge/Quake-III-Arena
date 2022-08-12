@@ -193,9 +193,6 @@ void BotInterbreedGoalFuzzyLogic(int parent1, int parent2, int child)
     p2 = BotGoalStateFromHandle(parent2);
     c = BotGoalStateFromHandle(child);
 
-    if (!p1 || !p2 || !c)
-        return;
-
     InterbreedWeightConfigs(p1->itemweightconfig, p2->itemweightconfig,
                             c->itemweightconfig);
 }
@@ -685,7 +682,6 @@ int BotGetLevelItemGoal(int index, char* name, bot_goal_t* goal)
             goal->flags = GFL_ITEM;
             if (li->timeout)
                 goal->flags |= GFL_DROPPED;
-            goal->iteminfo = li->iteminfo;
             return li->number;
         }
     }
@@ -703,9 +699,6 @@ int BotGetMapLocationGoal(char* name, bot_goal_t* goal)
             goal->entitynum = 0;
             VectorCopy(mins, goal->mins);
             VectorCopy(maxs, goal->maxs);
-            goal->number = 0;
-            goal->flags = 0;
-            goal->iteminfo = 0;
             return true;
         }
     }
@@ -727,9 +720,6 @@ int BotGetNextCampSpotGoal(int num, bot_goal_t* goal)
             goal->entitynum = 0;
             VectorCopy(mins, goal->mins);
             VectorCopy(maxs, goal->maxs);
-            goal->number = 0;
-            goal->flags = 0;
-            goal->iteminfo = 0;
             return num + 1;
         }
     }
