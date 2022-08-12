@@ -1902,7 +1902,6 @@ void BotInitialChat(int chatstate, char* type, int mcontext, char* var0, char* v
         strcat(match.string, var7);
         match.variables[7].offset = index;
         match.variables[7].length = strlen(var7);
-        index += strlen(var7);
     }
     BotConstructChatMessage(cs, message, mcontext, &match, 0, false);
 }
@@ -2033,7 +2032,6 @@ int BotReplyChat(int chatstate, char* message, int mcontext, int vcontext, char*
             strcat(bestmatch.string, var7);
             bestmatch.variables[7].offset = index;
             bestmatch.variables[7].length = strlen(var7);
-            index += strlen(var7);
         }
         if (LibVarGetValue("bot_testrchat")) {
             for (m = bestrchat->firstchatmessage; m; m = m->next) {
