@@ -230,30 +230,30 @@ static void GLSL_GetShaderHeader(GLenum shaderType, const GLchar* extra, char* d
     // HACK: abuse the GLSL preprocessor to turn GLSL 1.20 shaders into 1.30 ones
     if (glConfig.glslMajorVersion > 1 || (glConfig.glslMajorVersion == 1 && glConfig.glslMinorVersion >= 30)) {
         if (glConfig.glslMajorVersion > 1 || (glConfig.glslMajorVersion == 1 && glConfig.glslMinorVersion >= 50))
-            Q_strcat(dest, size, "#version 150\n");
+            strncatz(dest, size, "#version 150\n");
         else
-            Q_strcat(dest, size, "#version 130\n");
+            strncatz(dest, size, "#version 130\n");
 
         if (shaderType == GL_VERTEX_SHADER) {
-            Q_strcat(dest, size, "#define attribute in\n");
-            Q_strcat(dest, size, "#define varying out\n");
+            strncatz(dest, size, "#define attribute in\n");
+            strncatz(dest, size, "#define varying out\n");
         } else {
-            Q_strcat(dest, size, "#define varying in\n");
+            strncatz(dest, size, "#define varying in\n");
 
-            Q_strcat(dest, size, "out vec4 out_Color;\n");
-            Q_strcat(dest, size, "#define gl_FragColor out_Color\n");
-            Q_strcat(dest, size, "#define texture2D texture\n");
-            Q_strcat(dest, size, "#define textureCubeLod textureLod\n");
-            Q_strcat(dest, size, "#define shadow2D texture\n");
+            strncatz(dest, size, "out vec4 out_Color;\n");
+            strncatz(dest, size, "#define gl_FragColor out_Color\n");
+            strncatz(dest, size, "#define texture2D texture\n");
+            strncatz(dest, size, "#define textureCubeLod textureLod\n");
+            strncatz(dest, size, "#define shadow2D texture\n");
         }
     } else {
-        Q_strcat(dest, size, "#version 120\n");
-        Q_strcat(dest, size, "#define shadow2D(a,b) shadow2D(a,b).r \n");
+        strncatz(dest, size, "#version 120\n");
+        strncatz(dest, size, "#define shadow2D(a,b) shadow2D(a,b).r \n");
     }
 
-    Q_strcat(dest, size, "#ifndef M_PI\n#define M_PI 3.14159265358979323846\n#endif\n");
+    strncatz(dest, size, "#ifndef M_PI\n#define M_PI 3.14159265358979323846\n#endif\n");
 
-    Q_strcat(dest, size,
+    strncatz(dest, size,
              va("#ifndef deformGen_t\n"
                 "#define deformGen_t\n"
                 "#define DGEN_WAVE_SIN %i\n"
@@ -272,7 +272,7 @@ static void GLSL_GetShaderHeader(GLenum shaderType, const GLchar* extra, char* d
                 DGEN_BULGE,
                 DGEN_MOVE));
 
-    Q_strcat(dest, size,
+    strncatz(dest, size,
              va("#ifndef tcGen_t\n"
                 "#define tcGen_t\n"
                 "#define TCGEN_LIGHTMAP %i\n"
@@ -287,14 +287,14 @@ static void GLSL_GetShaderHeader(GLenum shaderType, const GLchar* extra, char* d
                 TCGEN_FOG,
                 TCGEN_VECTOR));
 
-    Q_strcat(dest, size,
+    strncatz(dest, size,
              va("#ifndef colorGen_t\n"
                 "#define colorGen_t\n"
                 "#define CGEN_LIGHTING_DIFFUSE %i\n"
                 "#endif\n",
                 CGEN_LIGHTING_DIFFUSE));
 
-    Q_strcat(dest, size,
+    strncatz(dest, size,
              va("#ifndef alphaGen_t\n"
                 "#define alphaGen_t\n"
                 "#define AGEN_LIGHTING_SPECULAR %i\n"
@@ -305,11 +305,11 @@ static void GLSL_GetShaderHeader(GLenum shaderType, const GLchar* extra, char* d
 
     fbufWidthScale = 1.0f / ((float)glConfig.vidWidth);
     fbufHeightScale = 1.0f / ((float)glConfig.vidHeight);
-    Q_strcat(dest, size,
+    strncatz(dest, size,
              va("#ifndef r_FBufScale\n#define r_FBufScale vec2(%f, %f)\n#endif\n", fbufWidthScale, fbufHeightScale));
 
     if (r_pbr->integer)
-        Q_strcat(dest, size, "#define USE_PBR\n");
+        strncatz(dest, size, "#define USE_PBR\n");
 
     if (r_cubeMapping->integer) {
         int cubeMipSize = r_cubemapSize->integer;
@@ -320,16 +320,16 @@ static void GLSL_GetShaderHeader(GLenum shaderType, const GLchar* extra, char* d
             numRoughnessMips++;
         }
         numRoughnessMips = MAX(1, numRoughnessMips - 2);
-        Q_strcat(dest, size, va("#define ROUGHNESS_MIPS float(%d)\n", numRoughnessMips));
+        strncatz(dest, size, va("#define ROUGHNESS_MIPS float(%d)\n", numRoughnessMips));
     }
 
     if (extra) {
-        Q_strcat(dest, size, extra);
+        strncatz(dest, size, extra);
     }
 
     // OK we added a lot of stuff but if we do something bad in the GLSL shaders then we want the proper line
     // so we have to reset the line counting
-    Q_strcat(dest, size, "#line 0\n");
+    strncatz(dest, size, "#line 0\n");
 }
 
 static int GLSL_CompileGPUShader(GLuint program, GLuint* prevShader, const GLchar* buffer, int size, GLenum shaderType)
@@ -851,26 +851,26 @@ void GLSL_InitGPUShaders()
         extradefines[0] = '\0';
 
         if (i & GENERICDEF_USE_DEFORM_VERTEXES)
-            Q_strcat(extradefines, 1024, "#define USE_DEFORM_VERTEXES\n");
+            strncatz(extradefines, 1024, "#define USE_DEFORM_VERTEXES\n");
 
         if (i & GENERICDEF_USE_TCGEN_AND_TCMOD) {
-            Q_strcat(extradefines, 1024, "#define USE_TCGEN\n");
-            Q_strcat(extradefines, 1024, "#define USE_TCMOD\n");
+            strncatz(extradefines, 1024, "#define USE_TCGEN\n");
+            strncatz(extradefines, 1024, "#define USE_TCMOD\n");
         }
 
         if (i & GENERICDEF_USE_VERTEX_ANIMATION) {
-            Q_strcat(extradefines, 1024, "#define USE_VERTEX_ANIMATION\n");
+            strncatz(extradefines, 1024, "#define USE_VERTEX_ANIMATION\n");
             attribs |= ATTR_POSITION2 | ATTR_NORMAL2;
         } else if (i & GENERICDEF_USE_BONE_ANIMATION) {
-            Q_strcat(extradefines, 1024, va("#define USE_BONE_ANIMATION\n#define MAX_GLSL_BONES %d\n", glConfig.glslMaxAnimatedBones));
+            strncatz(extradefines, 1024, va("#define USE_BONE_ANIMATION\n#define MAX_GLSL_BONES %d\n", glConfig.glslMaxAnimatedBones));
             attribs |= ATTR_BONE_INDEXES | ATTR_BONE_WEIGHTS;
         }
 
         if (i & GENERICDEF_USE_FOG)
-            Q_strcat(extradefines, 1024, "#define USE_FOG\n");
+            strncatz(extradefines, 1024, "#define USE_FOG\n");
 
         if (i & GENERICDEF_USE_RGBAGEN)
-            Q_strcat(extradefines, 1024, "#define USE_RGBAGEN\n");
+            strncatz(extradefines, 1024, "#define USE_RGBAGEN\n");
 
         if (!GLSL_InitGPUShader(&tr.genericShader[i], "generic", attribs, true, extradefines, true, fallbackShader_generic_vp, fallbackShader_generic_fp)) {
             ri.Error(ERR_FATAL, "Could not load generic shader!");
@@ -911,13 +911,13 @@ void GLSL_InitGPUShaders()
         extradefines[0] = '\0';
 
         if (i & FOGDEF_USE_DEFORM_VERTEXES)
-            Q_strcat(extradefines, 1024, "#define USE_DEFORM_VERTEXES\n");
+            strncatz(extradefines, 1024, "#define USE_DEFORM_VERTEXES\n");
 
         if (i & FOGDEF_USE_VERTEX_ANIMATION) {
-            Q_strcat(extradefines, 1024, "#define USE_VERTEX_ANIMATION\n");
+            strncatz(extradefines, 1024, "#define USE_VERTEX_ANIMATION\n");
             attribs |= ATTR_POSITION2 | ATTR_NORMAL2;
         } else if (i & FOGDEF_USE_BONE_ANIMATION) {
-            Q_strcat(extradefines, 1024, va("#define USE_BONE_ANIMATION\n#define MAX_GLSL_BONES %d\n", glConfig.glslMaxAnimatedBones));
+            strncatz(extradefines, 1024, va("#define USE_BONE_ANIMATION\n#define MAX_GLSL_BONES %d\n", glConfig.glslMaxAnimatedBones));
             attribs |= ATTR_BONE_INDEXES | ATTR_BONE_WEIGHTS;
         }
 
@@ -936,7 +936,7 @@ void GLSL_InitGPUShaders()
         extradefines[0] = '\0';
 
         if (i & DLIGHTDEF_USE_DEFORM_VERTEXES) {
-            Q_strcat(extradefines, 1024, "#define USE_DEFORM_VERTEXES\n");
+            strncatz(extradefines, 1024, "#define USE_DEFORM_VERTEXES\n");
         }
 
         if (!GLSL_InitGPUShader(&tr.dlightShader[i], "dlight", attribs, true, extradefines, true, fallbackShader_dlight_vp, fallbackShader_dlight_fp)) {
@@ -974,29 +974,29 @@ void GLSL_InitGPUShaders()
         extradefines[0] = '\0';
 
         if (r_dlightMode->integer >= 2)
-            Q_strcat(extradefines, 1024, "#define USE_SHADOWMAP\n");
+            strncatz(extradefines, 1024, "#define USE_SHADOWMAP\n");
 
         if (glConfig.swizzleNormalmap)
-            Q_strcat(extradefines, 1024, "#define SWIZZLE_NORMALMAP\n");
+            strncatz(extradefines, 1024, "#define SWIZZLE_NORMALMAP\n");
 
         if (lightType) {
-            Q_strcat(extradefines, 1024, "#define USE_LIGHT\n");
+            strncatz(extradefines, 1024, "#define USE_LIGHT\n");
 
             if (fastLight)
-                Q_strcat(extradefines, 1024, "#define USE_FAST_LIGHT\n");
+                strncatz(extradefines, 1024, "#define USE_FAST_LIGHT\n");
 
             switch (lightType) {
             case LIGHTDEF_USE_LIGHTMAP:
-                Q_strcat(extradefines, 1024, "#define USE_LIGHTMAP\n");
+                strncatz(extradefines, 1024, "#define USE_LIGHTMAP\n");
                 if (r_deluxeMapping->integer && !fastLight)
-                    Q_strcat(extradefines, 1024, "#define USE_DELUXEMAP\n");
+                    strncatz(extradefines, 1024, "#define USE_DELUXEMAP\n");
                 attribs |= ATTR_LIGHTCOORD | ATTR_LIGHTDIRECTION;
                 break;
             case LIGHTDEF_USE_LIGHT_VECTOR:
-                Q_strcat(extradefines, 1024, "#define USE_LIGHT_VECTOR\n");
+                strncatz(extradefines, 1024, "#define USE_LIGHT_VECTOR\n");
                 break;
             case LIGHTDEF_USE_LIGHT_VERTEX:
-                Q_strcat(extradefines, 1024, "#define USE_LIGHT_VERTEX\n");
+                strncatz(extradefines, 1024, "#define USE_LIGHT_VERTEX\n");
                 attribs |= ATTR_LIGHTDIRECTION;
                 break;
             default:
@@ -1004,74 +1004,74 @@ void GLSL_InitGPUShaders()
             }
 
             if (r_normalMapping->integer) {
-                Q_strcat(extradefines, 1024, "#define USE_NORMALMAP\n");
+                strncatz(extradefines, 1024, "#define USE_NORMALMAP\n");
 
                 attribs |= ATTR_TANGENT;
 
                 if ((i & LIGHTDEF_USE_PARALLAXMAP) && !(i & LIGHTDEF_ENTITY_VERTEX_ANIMATION) && !(i & LIGHTDEF_ENTITY_BONE_ANIMATION) && r_parallaxMapping->integer) {
-                    Q_strcat(extradefines, 1024, "#define USE_PARALLAXMAP\n");
+                    strncatz(extradefines, 1024, "#define USE_PARALLAXMAP\n");
                     if (r_parallaxMapping->integer > 1)
-                        Q_strcat(extradefines, 1024, "#define USE_RELIEFMAP\n");
+                        strncatz(extradefines, 1024, "#define USE_RELIEFMAP\n");
 
                     if (r_parallaxMapShadows->integer)
-                        Q_strcat(extradefines, 1024, "#define USE_PARALLAXMAP_SHADOWS\n");
+                        strncatz(extradefines, 1024, "#define USE_PARALLAXMAP_SHADOWS\n");
 
-                    Q_strcat(extradefines, 1024, va("#define r_parallaxMapOffset %f\n", r_parallaxMapOffset->value));
+                    strncatz(extradefines, 1024, va("#define r_parallaxMapOffset %f\n", r_parallaxMapOffset->value));
                 }
             }
 
             if (r_specularMapping->integer)
-                Q_strcat(extradefines, 1024, "#define USE_SPECULARMAP\n");
+                strncatz(extradefines, 1024, "#define USE_SPECULARMAP\n");
 
             if (r_cubeMapping->integer) {
-                Q_strcat(extradefines, 1024, "#define USE_CUBEMAP\n");
+                strncatz(extradefines, 1024, "#define USE_CUBEMAP\n");
                 if (r_cubeMapping->integer == 2)
-                    Q_strcat(extradefines, 1024, "#define USE_BOX_CUBEMAP_PARALLAX\n");
+                    strncatz(extradefines, 1024, "#define USE_BOX_CUBEMAP_PARALLAX\n");
             } else if (r_deluxeSpecular->value > 0.000001f) {
-                Q_strcat(extradefines, 1024, va("#define r_deluxeSpecular %f\n", r_deluxeSpecular->value));
+                strncatz(extradefines, 1024, va("#define r_deluxeSpecular %f\n", r_deluxeSpecular->value));
             }
 
             switch (r_glossType->integer) {
             case 0:
             default:
-                Q_strcat(extradefines, 1024, "#define GLOSS_IS_GLOSS\n");
+                strncatz(extradefines, 1024, "#define GLOSS_IS_GLOSS\n");
                 break;
             case 1:
-                Q_strcat(extradefines, 1024, "#define GLOSS_IS_SMOOTHNESS\n");
+                strncatz(extradefines, 1024, "#define GLOSS_IS_SMOOTHNESS\n");
                 break;
             case 2:
-                Q_strcat(extradefines, 1024, "#define GLOSS_IS_ROUGHNESS\n");
+                strncatz(extradefines, 1024, "#define GLOSS_IS_ROUGHNESS\n");
                 break;
             case 3:
-                Q_strcat(extradefines, 1024, "#define GLOSS_IS_SHININESS\n");
+                strncatz(extradefines, 1024, "#define GLOSS_IS_SHININESS\n");
                 break;
             }
         }
 
         if (i & LIGHTDEF_USE_SHADOWMAP) {
-            Q_strcat(extradefines, 1024, "#define USE_SHADOWMAP\n");
+            strncatz(extradefines, 1024, "#define USE_SHADOWMAP\n");
 
             if (r_sunlightMode->integer == 1)
-                Q_strcat(extradefines, 1024, "#define SHADOWMAP_MODULATE\n");
+                strncatz(extradefines, 1024, "#define SHADOWMAP_MODULATE\n");
             else if (r_sunlightMode->integer == 2)
-                Q_strcat(extradefines, 1024, "#define USE_PRIMARY_LIGHT\n");
+                strncatz(extradefines, 1024, "#define USE_PRIMARY_LIGHT\n");
         }
 
         if (i & LIGHTDEF_USE_TCGEN_AND_TCMOD) {
-            Q_strcat(extradefines, 1024, "#define USE_TCGEN\n");
-            Q_strcat(extradefines, 1024, "#define USE_TCMOD\n");
+            strncatz(extradefines, 1024, "#define USE_TCGEN\n");
+            strncatz(extradefines, 1024, "#define USE_TCMOD\n");
         }
 
         if (i & LIGHTDEF_ENTITY_VERTEX_ANIMATION) {
-            Q_strcat(extradefines, 1024, "#define USE_VERTEX_ANIMATION\n#define USE_MODELMATRIX\n");
+            strncatz(extradefines, 1024, "#define USE_VERTEX_ANIMATION\n#define USE_MODELMATRIX\n");
             attribs |= ATTR_POSITION2 | ATTR_NORMAL2;
 
             if (r_normalMapping->integer) {
                 attribs |= ATTR_TANGENT2;
             }
         } else if (i & LIGHTDEF_ENTITY_BONE_ANIMATION) {
-            Q_strcat(extradefines, 1024, "#define USE_MODELMATRIX\n");
-            Q_strcat(extradefines, 1024, va("#define USE_BONE_ANIMATION\n#define MAX_GLSL_BONES %d\n", glConfig.glslMaxAnimatedBones));
+            strncatz(extradefines, 1024, "#define USE_MODELMATRIX\n");
+            strncatz(extradefines, 1024, va("#define USE_BONE_ANIMATION\n#define MAX_GLSL_BONES %d\n", glConfig.glslMaxAnimatedBones));
             attribs |= ATTR_BONE_INDEXES | ATTR_BONE_WEIGHTS;
         }
 
@@ -1106,12 +1106,12 @@ void GLSL_InitGPUShaders()
         extradefines[0] = '\0';
 
         if (i & SHADOWMAPDEF_USE_VERTEX_ANIMATION) {
-            Q_strcat(extradefines, 1024, "#define USE_VERTEX_ANIMATION\n");
+            strncatz(extradefines, 1024, "#define USE_VERTEX_ANIMATION\n");
             attribs |= ATTR_POSITION2 | ATTR_NORMAL2;
         }
 
         if (i & SHADOWMAPDEF_USE_BONE_ANIMATION) {
-            Q_strcat(extradefines, 1024, va("#define USE_BONE_ANIMATION\n#define MAX_GLSL_BONES %d\n", glConfig.glslMaxAnimatedBones));
+            strncatz(extradefines, 1024, va("#define USE_BONE_ANIMATION\n#define MAX_GLSL_BONES %d\n", glConfig.glslMaxAnimatedBones));
             attribs |= ATTR_BONE_INDEXES | ATTR_BONE_WEIGHTS;
         }
 
@@ -1128,7 +1128,7 @@ void GLSL_InitGPUShaders()
     attribs = ATTR_POSITION | ATTR_NORMAL;
     extradefines[0] = '\0';
 
-    Q_strcat(extradefines, 1024, "#define USE_PCF\n#define USE_DISCARD\n");
+    strncatz(extradefines, 1024, "#define USE_PCF\n#define USE_DISCARD\n");
 
     if (!GLSL_InitGPUShader(&tr.pshadowShader, "pshadow", attribs, true, extradefines, true, fallbackShader_pshadow_vp, fallbackShader_pshadow_fp)) {
         ri.Error(ERR_FATAL, "Could not load pshadow shader!");
@@ -1193,7 +1193,7 @@ void GLSL_InitGPUShaders()
         extradefines[0] = '\0';
 
         if (!i)
-            Q_strcat(extradefines, 1024, "#define FIRST_PASS\n");
+            strncatz(extradefines, 1024, "#define FIRST_PASS\n");
 
         if (!GLSL_InitGPUShader(&tr.calclevels4xShader[i], "calclevels4x", attribs, true, extradefines, true, fallbackShader_calclevels4x_vp, fallbackShader_calclevels4x_fp)) {
             ri.Error(ERR_FATAL, "Could not load calclevels4x shader!");
@@ -1212,16 +1212,16 @@ void GLSL_InitGPUShaders()
     extradefines[0] = '\0';
 
     if (r_shadowFilter->integer >= 1)
-        Q_strcat(extradefines, 1024, "#define USE_SHADOW_FILTER\n");
+        strncatz(extradefines, 1024, "#define USE_SHADOW_FILTER\n");
 
     if (r_shadowFilter->integer >= 2)
-        Q_strcat(extradefines, 1024, "#define USE_SHADOW_FILTER2\n");
+        strncatz(extradefines, 1024, "#define USE_SHADOW_FILTER2\n");
 
     if (r_shadowCascadeZFar->integer != 0)
-        Q_strcat(extradefines, 1024, "#define USE_SHADOW_CASCADE\n");
+        strncatz(extradefines, 1024, "#define USE_SHADOW_CASCADE\n");
 
-    Q_strcat(extradefines, 1024, va("#define r_shadowMapSize %f\n", r_shadowMapSize->value));
-    Q_strcat(extradefines, 1024, va("#define r_shadowCascadeZFar %f\n", r_shadowCascadeZFar->value));
+    strncatz(extradefines, 1024, va("#define r_shadowMapSize %f\n", r_shadowMapSize->value));
+    strncatz(extradefines, 1024, va("#define r_shadowCascadeZFar %f\n", r_shadowCascadeZFar->value));
 
     if (!GLSL_InitGPUShader(&tr.shadowmaskShader, "shadowmask", attribs, true, extradefines, true, fallbackShader_shadowmask_vp, fallbackShader_shadowmask_fp)) {
         ri.Error(ERR_FATAL, "Could not load shadowmask shader!");
@@ -1259,12 +1259,12 @@ void GLSL_InitGPUShaders()
         extradefines[0] = '\0';
 
         if (i & 1)
-            Q_strcat(extradefines, 1024, "#define USE_VERTICAL_BLUR\n");
+            strncatz(extradefines, 1024, "#define USE_VERTICAL_BLUR\n");
         else
-            Q_strcat(extradefines, 1024, "#define USE_HORIZONTAL_BLUR\n");
+            strncatz(extradefines, 1024, "#define USE_HORIZONTAL_BLUR\n");
 
         if (!(i & 2))
-            Q_strcat(extradefines, 1024, "#define USE_DEPTH\n");
+            strncatz(extradefines, 1024, "#define USE_DEPTH\n");
 
         if (!GLSL_InitGPUShader(&tr.depthBlurShader[i], "depthBlur", attribs, true, extradefines, true, fallbackShader_depthblur_vp, fallbackShader_depthblur_fp)) {
             ri.Error(ERR_FATAL, "Could not load depthBlur shader!");

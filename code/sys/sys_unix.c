@@ -61,18 +61,18 @@ char* Sys_DefaultHomePath(void)
         if ((p = getenv("HOME")) != NULL) {
             Com_sprintf(homePath, sizeof(homePath), "%s%c", p, PATH_SEP);
 #ifdef __APPLE__
-            Q_strcat(homePath, sizeof(homePath),
+            strncatz(homePath, sizeof(homePath),
                      "Library/Application Support/");
 
             if (com_homepath->string[0])
-                Q_strcat(homePath, sizeof(homePath), com_homepath->string);
+                strncatz(homePath, sizeof(homePath), com_homepath->string);
             else
-                Q_strcat(homePath, sizeof(homePath), HOMEPATH_NAME_MACOSX);
+                strncatz(homePath, sizeof(homePath), HOMEPATH_NAME_MACOSX);
 #else
             if (com_homepath->string[0])
-                Q_strcat(homePath, sizeof(homePath), com_homepath->string);
+                strncatz(homePath, sizeof(homePath), com_homepath->string);
             else
-                Q_strcat(homePath, sizeof(homePath), HOMEPATH_NAME_UNIX);
+                strncatz(homePath, sizeof(homePath), HOMEPATH_NAME_UNIX);
 #endif
         }
     }

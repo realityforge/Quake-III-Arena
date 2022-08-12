@@ -157,7 +157,7 @@ void QDECL Com_Printf(const char* fmt, ...)
             rd_flush(rd_buffer);
             *rd_buffer = 0;
         }
-        Q_strcat(rd_buffer, rd_buffersize, msg);
+        strncatz(rd_buffer, rd_buffersize, msg);
         // TTimo nooo .. that would defeat the purpose
         // rd_flush(rd_buffer);
         //*rd_buffer = 0;
@@ -2769,7 +2769,7 @@ static bool Field_Complete()
     completionField->cursor = strlen(completionField->buffer);
 
     if (matchCount == 1) {
-        Q_strcat(completionField->buffer, sizeof(completionField->buffer), " ");
+        strncatz(completionField->buffer, sizeof(completionField->buffer), " ");
         completionField->cursor++;
         return true;
     }
@@ -2957,7 +2957,7 @@ static bool Field_CompletePlayerNameFinal(bool whitespace)
     completionField->cursor = strlen(completionField->buffer);
 
     if (matchCount == 1 && whitespace) {
-        Q_strcat(completionField->buffer, sizeof(completionField->buffer), " ");
+        strncatz(completionField->buffer, sizeof(completionField->buffer), " ");
         completionField->cursor++;
         return true;
     }

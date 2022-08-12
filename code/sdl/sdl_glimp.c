@@ -172,7 +172,7 @@ static void GLimp_DetectAvailableModes()
         const char* newModeString = va("%ux%u ", modes[i].w, modes[i].h);
 
         if (strlen(newModeString) < (int)sizeof(buf) - strlen(buf))
-            Q_strcat(buf, sizeof(buf), newModeString);
+            strncatz(buf, sizeof(buf), newModeString);
         else
             ri.Printf(PRINT_WARNING, "Skipping mode %ux%u, buffer too small\n", modes[i].w, modes[i].h);
     }
@@ -639,11 +639,11 @@ success:
                 break;
 
             if (i > 0) {
-                Q_strcat(glConfig.extensions_string, sizeof(glConfig.extensions_string), " ");
+                strncatz(glConfig.extensions_string, sizeof(glConfig.extensions_string), " ");
                 listLength++;
             }
 
-            Q_strcat(glConfig.extensions_string, sizeof(glConfig.extensions_string), extension);
+            strncatz(glConfig.extensions_string, sizeof(glConfig.extensions_string), extension);
             listLength += extensionLength;
         }
     } else {

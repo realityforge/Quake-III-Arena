@@ -1427,7 +1427,7 @@ void CL_SaveConsoleHistory(void)
             additionalLength = lineLength + strlen("999 999 999  ");
 
             if (saveBufferLength + additionalLength < MAX_CONSOLE_SAVE_BUFFER) {
-                Q_strcat(consoleSaveBuffer, MAX_CONSOLE_SAVE_BUFFER,
+                strncatz(consoleSaveBuffer, MAX_CONSOLE_SAVE_BUFFER,
                          va("%d %d %d %s ",
                             historyEditLines[i].cursor,
                             historyEditLines[i].scroll,

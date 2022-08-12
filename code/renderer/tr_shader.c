@@ -1012,8 +1012,8 @@ static bool ParseStage(shaderStage_t* stage, char** text)
                 token = COM_ParseExt(text, false);
                 if (token[0] == 0)
                     break;
-                Q_strcat(buffer, sizeof(buffer), token);
-                Q_strcat(buffer, sizeof(buffer), " ");
+                strncatz(buffer, sizeof(buffer), token);
+                strncatz(buffer, sizeof(buffer), " ");
             }
 
             ParseTexMod(buffer, stage);
@@ -1821,7 +1821,7 @@ static void CollapseStagesToLightall(shaderStage_t* diffuse,
 
             // try a normalheight image first
             COM_StripExtension(diffuseImg->imgName, normalName, MAX_QPATH);
-            Q_strcat(normalName, MAX_QPATH, "_nh");
+            strncatz(normalName, MAX_QPATH, "_nh");
 
             normalImg = R_FindImageFile(normalName, IMGTYPE_NORMALHEIGHT, normalFlags);
 
@@ -1858,7 +1858,7 @@ static void CollapseStagesToLightall(shaderStage_t* diffuse,
             imgFlags_t specularFlags = (diffuseImg->flags & ~IMGFLAG_GENNORMALMAP) | IMGFLAG_NOLIGHTSCALE;
 
             COM_StripExtension(diffuseImg->imgName, specularName, MAX_QPATH);
-            Q_strcat(specularName, MAX_QPATH, "_s");
+            strncatz(specularName, MAX_QPATH, "_s");
 
             specularImg = R_FindImageFile(specularName, IMGTYPE_COLORALPHA, specularFlags);
 

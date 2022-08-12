@@ -1490,13 +1490,13 @@ void CL_Rcon_f(void)
     message[3] = -1;
     message[4] = 0;
 
-    Q_strcat(message, MAX_RCON_MESSAGE, "rcon ");
+    strncatz(message, MAX_RCON_MESSAGE, "rcon ");
 
-    Q_strcat(message, MAX_RCON_MESSAGE, rcon_client_password->string);
-    Q_strcat(message, MAX_RCON_MESSAGE, " ");
+    strncatz(message, MAX_RCON_MESSAGE, rcon_client_password->string);
+    strncatz(message, MAX_RCON_MESSAGE, " ");
 
     // https://zerowing.idsoftware.com/bugzilla/show_bug.cgi?id=543
-    Q_strcat(message, MAX_RCON_MESSAGE, Cmd_Cmd() + 5);
+    strncatz(message, MAX_RCON_MESSAGE, Cmd_Cmd() + 5);
 
     if (clc.state >= CA_CONNECTED) {
         to = clc.netchan.remoteAddress;
@@ -3219,7 +3219,7 @@ void CL_ServerInfoPacket(netadr_t from, msg_t* msg)
     strncpyz(info, MSG_ReadString(msg), sizeof(info));
     if (strlen(info)) {
         if (info[strlen(info) - 1] != '\n') {
-            Q_strcat(info, sizeof(info), "\n");
+            strncatz(info, sizeof(info), "\n");
         }
         Com_Printf("%s: %s", NET_AdrToStringwPort(from), info);
     }
@@ -3523,8 +3523,8 @@ void CL_GlobalServers_f(void)
                     com_gamename->string, Cmd_Argv(2));
 
     for (i = 3; i < count; i++) {
-        Q_strcat(command, sizeof(command), " ");
-        Q_strcat(command, sizeof(command), Cmd_Argv(i));
+        strncatz(command, sizeof(command), " ");
+        strncatz(command, sizeof(command), Cmd_Argv(i));
     }
 
     NET_OutOfBandPrint(NS_SERVER, to, "%s", command);

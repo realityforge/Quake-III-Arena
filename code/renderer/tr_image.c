@@ -2084,7 +2084,7 @@ image_t* R_FindImageFile(const char* name, imgType_t type, imgFlags_t flags)
         normalFlags = (flags & ~IMGFLAG_GENNORMALMAP) | IMGFLAG_NOLIGHTSCALE;
 
         COM_StripExtension(name, normalName, MAX_QPATH);
-        Q_strcat(normalName, MAX_QPATH, "_n");
+        strncatz(normalName, MAX_QPATH, "_n");
 
         // find normalmap in case it's there
         normalImage = R_FindImageFile(normalName, IMGTYPE_NORMAL, normalFlags);

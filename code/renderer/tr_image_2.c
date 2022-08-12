@@ -83,7 +83,7 @@ bool R_LoadImage(const char* name, image_load_result_t* output)
     const char* name_to_request;
     if (0 == Q_stricmpn(original_extension, TGA_EXTENSION, MAX_QPATH)) {
         COM_StripExtension(name, local_name, MAX_QPATH);
-        Q_strcat(local_name, MAX_QPATH, PNG_EXTENSION);
+        strncatz(local_name, MAX_QPATH, PNG_EXTENSION);
         extension = PNG_EXTENSION;
         name_to_request = local_name;
     } else {

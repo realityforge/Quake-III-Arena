@@ -437,11 +437,11 @@ bool PC_Script_Parse(int handle, const char** out)
         }
 
         if (token.string[1] != '\0') {
-            Q_strcat(script, 1024, va("\"%s\"", token.string));
+            strncatz(script, 1024, va("\"%s\"", token.string));
         } else {
-            Q_strcat(script, 1024, token.string);
+            strncatz(script, 1024, token.string);
         }
-        Q_strcat(script, 1024, " ");
+        strncatz(script, 1024, " ");
     }
     return false;
 }
@@ -1191,7 +1191,7 @@ void Item_RunScript(itemDef_t* item, const char* s)
     bool bRan;
     memset(script, 0, sizeof(script));
     if (item && s && s[0]) {
-        Q_strcat(script, 1024, s);
+        strncatz(script, 1024, s);
         p = script;
         while (1) {
             const char* command;
@@ -1228,7 +1228,7 @@ static bool Item_EnableShowViaCvar(itemDef_t* item, int flag)
         char buff[1024];
         DC->getCVarString(item->cvarTest, buff, sizeof(buff));
 
-        Q_strcat(script, 1024, item->enableCvar);
+        strncatz(script, 1024, item->enableCvar);
         p = script;
         while (1) {
             const char* val;

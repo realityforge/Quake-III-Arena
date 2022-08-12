@@ -221,9 +221,9 @@ void Con_Dump_f(void)
                 break;
         }
 #ifdef _WIN32
-        Q_strcat(buffer, bufferlen, "\r\n");
+        strncatz(buffer, bufferlen, "\r\n");
 #else
-        Q_strcat(buffer, bufferlen, "\n");
+        strncatz(buffer, bufferlen, "\n");
 #endif
         FS_Write(buffer, strlen(buffer), f);
     }

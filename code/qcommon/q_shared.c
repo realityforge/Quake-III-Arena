@@ -130,7 +130,7 @@ void COM_DefaultExtension(char* path, int maxSize, const char* extension)
     if (dot && (!(slash = strrchr(path, '/')) || slash < dot))
         return;
     else
-        Q_strcat(path, maxSize, extension);
+        strncatz(path, maxSize, extension);
 }
 
 /*
@@ -614,17 +614,6 @@ char* Q_strupr(char* s1)
 }
 
 // never goes past bounds or leaves without a terminating 0
-void Q_strcat(char* dest, int size, const char* src)
-{
-    int l1;
-
-    l1 = strlen(dest);
-    if (l1 >= size) {
-        Com_Error(ERR_FATAL, "Q_strcat: already overflowed");
-    }
-    strncpyz(dest + l1, src, size - l1);
-}
-
 int Q_PrintStrlen(const char* string)
 {
     int len;
@@ -734,8 +723,8 @@ void Com_TruncateLongString(char* buffer, const char* s)
         strncpyz(buffer, s, TRUNCATE_LENGTH);
     else {
         strncpyz(buffer, s, (TRUNCATE_LENGTH / 2) - 3);
-        Q_strcat(buffer, TRUNCATE_LENGTH, " ... ");
-        Q_strcat(buffer, TRUNCATE_LENGTH, s + length - (TRUNCATE_LENGTH / 2) + 3);
+        strncatz(buffer, TRUNCATE_LENGTH, " ... ");
+        strncatz(buffer, TRUNCATE_LENGTH, s + length - (TRUNCATE_LENGTH / 2) + 3);
     }
 }
 

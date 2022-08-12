@@ -2780,27 +2780,27 @@ bool FS_ComparePaks(char* neededpaks, int len, bool dlstring)
             if (dlstring) {
                 // We need this to make sure we won't hit the end of the buffer or the server could
                 // overwrite non-pk3 files on clients by writing so much crap into neededpaks that
-                // Q_strcat cuts off the .pk3 extension.
+                // strncatz cuts off the .pk3 extension.
 
                 origpos += strlen(origpos);
 
                 // Remote name
-                Q_strcat(neededpaks, len, "@");
-                Q_strcat(neededpaks, len, fs_serverReferencedPakNames[i]);
-                Q_strcat(neededpaks, len, ".pk3");
+                strncatz(neededpaks, len, "@");
+                strncatz(neededpaks, len, fs_serverReferencedPakNames[i]);
+                strncatz(neededpaks, len, ".pk3");
 
                 // Local name
-                Q_strcat(neededpaks, len, "@");
+                strncatz(neededpaks, len, "@");
                 // Do we have one with the same name?
                 if (FS_SV_FileExists(va("%s.pk3", fs_serverReferencedPakNames[i]))) {
                     char st[MAX_ZPATH];
                     // We already have one called this, we need to download it to another name
                     // Make something up with the checksum in it
                     Com_sprintf(st, sizeof(st), "%s.%08x.pk3", fs_serverReferencedPakNames[i], fs_serverReferencedPaks[i]);
-                    Q_strcat(neededpaks, len, st);
+                    strncatz(neededpaks, len, st);
                 } else {
-                    Q_strcat(neededpaks, len, fs_serverReferencedPakNames[i]);
-                    Q_strcat(neededpaks, len, ".pk3");
+                    strncatz(neededpaks, len, fs_serverReferencedPakNames[i]);
+                    strncatz(neededpaks, len, ".pk3");
                 }
 
                 // Find out whether it might have overflowed the buffer and don't add this file to the
@@ -2810,13 +2810,13 @@ bool FS_ComparePaks(char* neededpaks, int len, bool dlstring)
                     break;
                 }
             } else {
-                Q_strcat(neededpaks, len, fs_serverReferencedPakNames[i]);
-                Q_strcat(neededpaks, len, ".pk3");
+                strncatz(neededpaks, len, fs_serverReferencedPakNames[i]);
+                strncatz(neededpaks, len, ".pk3");
                 // Do we have one with the same name?
                 if (FS_SV_FileExists(va("%s.pk3", fs_serverReferencedPakNames[i]))) {
-                    Q_strcat(neededpaks, len, " (local file exists with wrong checksum)");
+                    strncatz(neededpaks, len, " (local file exists with wrong checksum)");
                 }
-                Q_strcat(neededpaks, len, "\n");
+                strncatz(neededpaks, len, "\n");
             }
         }
     }
@@ -3031,7 +3031,7 @@ const char* FS_LoadedPakChecksums()
             continue;
         }
 
-        Q_strcat(info, sizeof(info), va("%i ", search->pack->checksum));
+        strncatz(info, sizeof(info), va("%i ", search->pack->checksum));
     }
 
     return info;
@@ -3059,9 +3059,9 @@ const char* FS_LoadedPakNames()
         }
 
         if (*info) {
-            Q_strcat(info, sizeof(info), " ");
+            strncatz(info, sizeof(info), " ");
         }
-        Q_strcat(info, sizeof(info), search->pack->pakBasename);
+        strncatz(info, sizeof(info), search->pack->pakBasename);
     }
 
     return info;
@@ -3089,7 +3089,7 @@ const char* FS_LoadedPakPureChecksums()
             continue;
         }
 
-        Q_strcat(info, sizeof(info), va("%i ", search->pack->pure_checksum));
+        strncatz(info, sizeof(info), va("%i ", search->pack->pure_checksum));
     }
 
     return info;
@@ -3114,7 +3114,7 @@ const char* FS_ReferencedPakChecksums()
         // is the element a pak file?
         if (search->pack) {
             if (search->pack->referenced || Q_stricmpn(search->pack->pakGamename, com_basegame->string, strlen(com_basegame->string))) {
-                Q_strcat(info, sizeof(info), va("%i ", search->pack->checksum));
+                strncatz(info, sizeof(info), va("%i ", search->pack->checksum));
             }
         }
     }
@@ -3145,7 +3145,7 @@ const char* FS_ReferencedPakPureChecksums()
     for (nFlags = FS_CGAME_REF; nFlags; nFlags = nFlags >> 1) {
         if (nFlags & FS_GENERAL_REF) {
             // add a delimter between must haves and general refs
-            // Q_strcat(info, sizeof(info), "@ ");
+            // strncatz(info, sizeof(info), "@ ");
             info[strlen(info) + 1] = '\0';
             info[strlen(info) + 2] = '\0';
             info[strlen(info)] = '@';
@@ -3154,7 +3154,7 @@ const char* FS_ReferencedPakPureChecksums()
         for (search = fs_searchpaths; search; search = search->next) {
             // is the element a pak file and has it been referenced based on flag?
             if (search->pack && (search->pack->referenced & nFlags)) {
-                Q_strcat(info, sizeof(info), va("%i ", search->pack->pure_checksum));
+                strncatz(info, sizeof(info), va("%i ", search->pack->pure_checksum));
                 if (nFlags & (FS_CGAME_REF | FS_UI_REF)) {
                     break;
                 }
@@ -3165,7 +3165,7 @@ const char* FS_ReferencedPakPureChecksums()
     }
     // last checksum is the encoded number of referenced pk3s
     checksum ^= numPaks;
-    Q_strcat(info, sizeof(info), va("%i ", checksum));
+    strncatz(info, sizeof(info), va("%i ", checksum));
 
     return info;
 }
@@ -3192,11 +3192,11 @@ const char* FS_ReferencedPakNames()
         if (search->pack) {
             if (search->pack->referenced || Q_stricmpn(search->pack->pakGamename, com_basegame->string, strlen(com_basegame->string))) {
                 if (*info) {
-                    Q_strcat(info, sizeof(info), " ");
+                    strncatz(info, sizeof(info), " ");
                 }
-                Q_strcat(info, sizeof(info), search->pack->pakGamename);
-                Q_strcat(info, sizeof(info), "/");
-                Q_strcat(info, sizeof(info), search->pack->pakBasename);
+                strncatz(info, sizeof(info), search->pack->pakGamename);
+                strncatz(info, sizeof(info), "/");
+                strncatz(info, sizeof(info), search->pack->pakBasename);
             }
         }
     }

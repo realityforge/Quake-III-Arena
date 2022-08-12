@@ -398,7 +398,7 @@ static void PlayerModel_SetMenuItems()
 
     // use default skin if none is set
     if (!strchr(s_playermodel.modelskin, '/')) {
-        Q_strcat(s_playermodel.modelskin, 64, "/default");
+        strncatz(s_playermodel.modelskin, 64, "/default");
     }
 
     // find model in our list
