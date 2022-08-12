@@ -54,7 +54,6 @@ botlib_globals_t botlibglobals;
 
 static botlib_export_t be_botlib_export;
 botlib_import_t botimport;
-//
 int bot_developer;
 
 //===========================================================================
