@@ -351,7 +351,7 @@ void BotSetBrushModelTypes()
         else
             modelnum = 0;
 
-        if (modelnum < 0 || modelnum > MAX_MODELS) {
+        if (modelnum < 0 || modelnum >= MAX_MODELS) {
             botimport.Print(PRT_MESSAGE, "entity %s model number out of range\n", classname);
             continue;
         }
