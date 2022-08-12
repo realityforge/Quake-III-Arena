@@ -431,7 +431,7 @@ void BotInitLevelItems()
     if (!AAS_Loaded())
         return;
 
-    // validate the modelindexes of the item info
+    // update the modelindexes of the item info
     for (i = 0; i < ic->numiteminfo; i++) {
         if (!ic->iteminfo[i].modelindex) {
             Log_Write("item %s has modelindex 0\n", ic->iteminfo[i].classname);
