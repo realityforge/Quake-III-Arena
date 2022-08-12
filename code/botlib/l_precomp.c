@@ -214,7 +214,6 @@ static int PC_ReadDefineParms(source_t* source, define_t* define, token_t** parm
                 if (indent <= 0) {
                     if (lastcomma)
                         SourceWarning(source, "too many comma's");
-                    lastcomma = 1;
                     break;
                 }
             }
