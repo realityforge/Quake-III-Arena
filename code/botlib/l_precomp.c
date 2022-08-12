@@ -340,6 +340,7 @@ static void PC_FreeDefine(define_t* define)
         PC_FreeToken(t);
     }
     // free the define
+    FreeMemory(define->name);
     FreeMemory(define);
 }
 static int PC_ExpandBuiltinDefine(source_t* source, token_t* deftoken, define_t* define, token_t** firsttoken, token_t** lasttoken)
@@ -696,10 +697,11 @@ static int PC_Directive_define(source_t* source)
             return false;
     }
     // allocate define
-    define = (define_t*)GetMemory(sizeof(define_t) + strlen(token.string) + 1);
+    define = (define_t*)GetMemory(sizeof(define_t));
     memset(define, 0, sizeof(define_t));
-    define->name = (char*)define + sizeof(define_t);
-    strcpy(define->name, token.string);
+    const size_t size = strlen(token.string) + 1;
+    define->name = (char*)GetMemory(size);
+    strncpyz(define->name, token.string, size);
     // add the define to the source
     PC_AddDefineToHash(define, source->definehash);
     // if nothing is defined, just return
@@ -845,9 +847,9 @@ static define_t* PC_CopyDefine(define_t* define)
     define_t* newdefine;
     token_t *token, *newtoken, *lasttoken;
 
-    newdefine = (define_t*)GetMemory(sizeof(define_t) + strlen(define->name) + 1);
+    newdefine = (define_t*)GetMemory(sizeof(define_t));
     // copy the define name
-    newdefine->name = (char*)newdefine + sizeof(define_t);
+    newdefine->name = (char*)GetMemory(strlen(define->name) + 1);
     strcpy(newdefine->name, define->name);
     newdefine->flags = define->flags;
     newdefine->builtin = define->builtin;
