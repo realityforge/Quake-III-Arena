@@ -1084,7 +1084,7 @@ void CG_BuildSpectatorString()
     cg.spectatorList[0] = 0;
     for (i = 0; i < MAX_CLIENTS; i++) {
         if (cgs.clientinfo[i].infoValid && cgs.clientinfo[i].team == TEAM_SPECTATOR) {
-            Q_strcat(cg.spectatorList, sizeof(cg.spectatorList), va("%s     ", cgs.clientinfo[i].name));
+            strncatz(cg.spectatorList, sizeof(cg.spectatorList), va("%s     ", cgs.clientinfo[i].name));
         }
     }
     i = strlen(cg.spectatorList);

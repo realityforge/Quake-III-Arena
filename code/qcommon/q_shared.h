@@ -667,7 +667,17 @@ static inline void strncpyz(char* dest, const char* src, const size_t destsize)
     dest[destsize - 1] = 0;
 }
 
-void Q_strcat(char* dest, int size, const char* src);
+// never goes past bounds or leaves without a terminating 0
+static inline void strncatz(char* dest, const size_t destsize, const char* src)
+{
+    braincheck_assert(NULL != dest);
+    braincheck_assert(NULL != src);
+    braincheck_assert(destsize >= 1);
+    const size_t offset = strlen(dest);
+    if (destsize > offset) {
+        strncpyz(dest + offset, src, destsize - offset);
+    }
+}
 
 // strlen that discounts Quake color sequences
 int Q_PrintStrlen(const char* string);

@@ -349,9 +349,9 @@ char* Sys_DefaultHomePath(void)
     if ((p = getenv("HOME")) != NULL) {
         strncpyz(homePath, p, sizeof(homePath));
 #ifdef MACOS_X
-        Q_strcat(homePath, sizeof(homePath), "/Library/Application Support/Quake3");
+        strncatz(homePath, sizeof(homePath), "/Library/Application Support/Quake3");
 #else
-        Q_strcat(homePath, sizeof(homePath), "/.q3a");
+        strncatz(homePath, sizeof(homePath), "/.q3a");
 #endif
         if (mkdir(homePath, 0777)) {
             if (errno != EEXIST)

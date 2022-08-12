@@ -506,18 +506,6 @@ char* Q_strupr(char* s1)
     return s1;
 }
 
-// never goes past bounds or leaves without a terminating 0
-void Q_strcat(char* dest, int size, const char* src)
-{
-    int l1;
-
-    l1 = strlen(dest);
-    if (l1 >= size) {
-        Com_Error(ERR_FATAL, "Q_strcat: already overflowed");
-    }
-    strncpyz(dest + l1, src, size - l1);
-}
-
 int Q_PrintStrlen(const char* string)
 {
     int len;

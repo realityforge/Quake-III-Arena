@@ -63,7 +63,7 @@ const char* BuildShaderStateConfig()
     memset(buff, 0, sizeof(buff));
     for (i = 0; i < remapCount; i++) {
         Com_sprintf(out, sizeof(out), "%s=%s:%5.2f@", remappedShaders[i].oldShader, remappedShaders[i].newShader, remappedShaders[i].timeOffset);
-        Q_strcat(buff, sizeof(buff), out);
+        strncatz(buff, sizeof(buff), out);
     }
     return buff;
 }

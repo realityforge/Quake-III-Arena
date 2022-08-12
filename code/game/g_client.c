@@ -465,8 +465,8 @@ static void ForceClientSkin( gclient_t *client, char *model, const char *skin ) 
                 *p = 0;
         }
 
-        Q_strcat(model, MAX_QPATH, "/");
-        Q_strcat(model, MAX_QPATH, skin);
+        strncatz(model, MAX_QPATH, "/");
+        strncatz(model, MAX_QPATH, skin);
 }
 */
 

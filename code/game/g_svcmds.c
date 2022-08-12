@@ -131,13 +131,13 @@ static void UpdateIPBans()
         *ip = 0;
         for (j = 0; j < 4; j++) {
             if (m[j] != 255)
-                Q_strcat(ip, sizeof(ip), "*");
+                strncatz(ip, sizeof(ip), "*");
             else
-                Q_strcat(ip, sizeof(ip), va("%i", b[j]));
-            Q_strcat(ip, sizeof(ip), (j < 3) ? "." : " ");
+                strncatz(ip, sizeof(ip), va("%i", b[j]));
+            strncatz(ip, sizeof(ip), (j < 3) ? "." : " ");
         }
         if (strlen(iplist_final) + strlen(ip) < MAX_CVAR_VALUE_STRING) {
-            Q_strcat(iplist_final, sizeof(iplist_final), ip);
+            strncatz(iplist_final, sizeof(iplist_final), ip);
         } else {
             Com_Printf("g_banIPs overflowed at MAX_CVAR_VALUE_STRING\n");
             break;

@@ -152,7 +152,7 @@ void QDECL Com_Printf(const char* fmt, ...)
             rd_flush(rd_buffer);
             *rd_buffer = 0;
         }
-        Q_strcat(rd_buffer, rd_buffersize, msg);
+        strncatz(rd_buffer, rd_buffersize, msg);
         // TTimo nooo .. that would defeat the purpose
         // rd_flush(rd_buffer);
         //*rd_buffer = 0;
@@ -2545,18 +2545,18 @@ static void keyConcatArgs()
     char* arg;
 
     for (i = 1; i < Cmd_Argc(); i++) {
-        Q_strcat(completionField->buffer, sizeof(completionField->buffer), " ");
+        strncatz(completionField->buffer, sizeof(completionField->buffer), " ");
         arg = Cmd_Argv(i);
         while (*arg) {
             if (*arg == ' ') {
-                Q_strcat(completionField->buffer, sizeof(completionField->buffer), "\"");
+                strncatz(completionField->buffer, sizeof(completionField->buffer), "\"");
                 break;
             }
             arg++;
         }
-        Q_strcat(completionField->buffer, sizeof(completionField->buffer), Cmd_Argv(i));
+        strncatz(completionField->buffer, sizeof(completionField->buffer), Cmd_Argv(i));
         if (*arg == ' ') {
-            Q_strcat(completionField->buffer, sizeof(completionField->buffer), "\"");
+            strncatz(completionField->buffer, sizeof(completionField->buffer), "\"");
         }
     }
 }
@@ -2572,7 +2572,7 @@ static void ConcatRemaining(const char* src, const char* start)
     }
 
     str += strlen(start);
-    Q_strcat(completionField->buffer, sizeof(completionField->buffer), str);
+    strncatz(completionField->buffer, sizeof(completionField->buffer), str);
 }
 
 /*
@@ -2616,7 +2616,7 @@ void Field_CompleteCommand(field_t* field)
     if (matchCount == 1) {
         Com_sprintf(completionField->buffer, sizeof(completionField->buffer), "\\%s", shortestMatch);
         if (Cmd_Argc() == 1) {
-            Q_strcat(completionField->buffer, sizeof(completionField->buffer), " ");
+            strncatz(completionField->buffer, sizeof(completionField->buffer), " ");
         } else {
             ConcatRemaining(temp.buffer, completionString);
         }

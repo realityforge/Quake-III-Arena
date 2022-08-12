@@ -2315,31 +2315,31 @@ bool FS_ComparePaks(char* neededpaks, int len, bool dlstring)
 
             if (dlstring) {
                 // Remote name
-                Q_strcat(neededpaks, len, "@");
-                Q_strcat(neededpaks, len, fs_serverReferencedPakNames[i]);
-                Q_strcat(neededpaks, len, ".pk3");
+                strncatz(neededpaks, len, "@");
+                strncatz(neededpaks, len, fs_serverReferencedPakNames[i]);
+                strncatz(neededpaks, len, ".pk3");
 
                 // Local name
-                Q_strcat(neededpaks, len, "@");
+                strncatz(neededpaks, len, "@");
                 // Do we have one with the same name?
                 if (FS_SV_FileExists(va("%s.pk3", fs_serverReferencedPakNames[i]))) {
                     char st[MAX_ZPATH];
                     // We already have one called this, we need to download it to another name
                     // Make something up with the checksum in it
                     Com_sprintf(st, sizeof(st), "%s.%08x.pk3", fs_serverReferencedPakNames[i], fs_serverReferencedPaks[i]);
-                    Q_strcat(neededpaks, len, st);
+                    strncatz(neededpaks, len, st);
                 } else {
-                    Q_strcat(neededpaks, len, fs_serverReferencedPakNames[i]);
-                    Q_strcat(neededpaks, len, ".pk3");
+                    strncatz(neededpaks, len, fs_serverReferencedPakNames[i]);
+                    strncatz(neededpaks, len, ".pk3");
                 }
             } else {
-                Q_strcat(neededpaks, len, fs_serverReferencedPakNames[i]);
-                Q_strcat(neededpaks, len, ".pk3");
+                strncatz(neededpaks, len, fs_serverReferencedPakNames[i]);
+                strncatz(neededpaks, len, ".pk3");
                 // Do we have one with the same name?
                 if (FS_SV_FileExists(va("%s.pk3", fs_serverReferencedPakNames[i]))) {
-                    Q_strcat(neededpaks, len, " (local file exists with wrong checksum)");
+                    strncatz(neededpaks, len, " (local file exists with wrong checksum)");
                 }
-                Q_strcat(neededpaks, len, "\n");
+                strncatz(neededpaks, len, "\n");
             }
         }
     }
@@ -2556,7 +2556,7 @@ const char* FS_LoadedPakChecksums()
             continue;
         }
 
-        Q_strcat(info, sizeof(info), va("%i ", search->pack->checksum));
+        strncatz(info, sizeof(info), va("%i ", search->pack->checksum));
     }
 
     return info;
@@ -2584,9 +2584,9 @@ const char* FS_LoadedPakNames()
         }
 
         if (*info) {
-            Q_strcat(info, sizeof(info), " ");
+            strncatz(info, sizeof(info), " ");
         }
-        Q_strcat(info, sizeof(info), search->pack->pakBasename);
+        strncatz(info, sizeof(info), search->pack->pakBasename);
     }
 
     return info;
@@ -2614,7 +2614,7 @@ const char* FS_LoadedPakPureChecksums()
             continue;
         }
 
-        Q_strcat(info, sizeof(info), va("%i ", search->pack->pure_checksum));
+        strncatz(info, sizeof(info), va("%i ", search->pack->pure_checksum));
     }
 
     return info;
@@ -2639,7 +2639,7 @@ const char* FS_ReferencedPakChecksums()
         // is the element a pak file?
         if (search->pack) {
             if (search->pack->referenced || Q_stricmpn(search->pack->pakGamename, BASEGAME, strlen(BASEGAME))) {
-                Q_strcat(info, sizeof(info), va("%i ", search->pack->checksum));
+                strncatz(info, sizeof(info), va("%i ", search->pack->checksum));
             }
         }
     }
@@ -2670,7 +2670,7 @@ const char* FS_ReferencedPakPureChecksums()
     for (nFlags = FS_CGAME_REF; nFlags; nFlags = nFlags >> 1) {
         if (nFlags & FS_GENERAL_REF) {
             // add a delimter between must haves and general refs
-            // Q_strcat(info, sizeof(info), "@ ");
+            // strncatz(info, sizeof(info), "@ ");
             info[strlen(info) + 1] = '\0';
             info[strlen(info) + 2] = '\0';
             info[strlen(info)] = '@';
@@ -2679,7 +2679,7 @@ const char* FS_ReferencedPakPureChecksums()
         for (search = fs_searchpaths; search; search = search->next) {
             // is the element a pak file and has it been referenced based on flag?
             if (search->pack && (search->pack->referenced & nFlags)) {
-                Q_strcat(info, sizeof(info), va("%i ", search->pack->pure_checksum));
+                strncatz(info, sizeof(info), va("%i ", search->pack->pure_checksum));
                 if (nFlags & (FS_CGAME_REF | FS_UI_REF)) {
                     break;
                 }
@@ -2689,12 +2689,12 @@ const char* FS_ReferencedPakPureChecksums()
         }
         if (fs_fakeChkSum != 0) {
             // only added if a non-pure file is referenced
-            Q_strcat(info, sizeof(info), va("%i ", fs_fakeChkSum));
+            strncatz(info, sizeof(info), va("%i ", fs_fakeChkSum));
         }
     }
     // last checksum is the encoded number of referenced pk3s
     checksum ^= numPaks;
-    Q_strcat(info, sizeof(info), va("%i ", checksum));
+    strncatz(info, sizeof(info), va("%i ", checksum));
 
     return info;
 }
@@ -2720,12 +2720,12 @@ const char* FS_ReferencedPakNames()
         // is the element a pak file?
         if (search->pack) {
             if (*info) {
-                Q_strcat(info, sizeof(info), " ");
+                strncatz(info, sizeof(info), " ");
             }
             if (search->pack->referenced || Q_stricmpn(search->pack->pakGamename, BASEGAME, strlen(BASEGAME))) {
-                Q_strcat(info, sizeof(info), search->pack->pakGamename);
-                Q_strcat(info, sizeof(info), "/");
-                Q_strcat(info, sizeof(info), search->pack->pakBasename);
+                strncatz(info, sizeof(info), search->pack->pakGamename);
+                strncatz(info, sizeof(info), "/");
+                strncatz(info, sizeof(info), search->pack->pakBasename);
             }
         }
     }
