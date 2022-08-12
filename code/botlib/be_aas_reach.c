@@ -37,6 +37,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_aas_funcs.h"
 #include "be_aas_def.h"
 #include "lang_util.h"
+#include "be_aas_reach.h"
 
 extern int Sys_MilliSeconds(void);
 
