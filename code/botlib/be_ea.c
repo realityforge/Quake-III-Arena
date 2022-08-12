@@ -37,199 +37,117 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 static bot_input_t* botinputs;
 
-void EA_Say(int client, char* str)
+void EA_Say(const int client, char* str)
 {
     botimport.BotClientCommand(client, va("say %s", str));
 }
-void EA_SayTeam(int client, char* str)
+void EA_SayTeam(const int client, char* str)
 {
     botimport.BotClientCommand(client, va("say_team %s", str));
 }
-void EA_Gesture(int client)
+void EA_Gesture(const int client)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    bi->actionflags |= ACTION_GESTURE;
+    botinputs[client].actionflags |= ACTION_GESTURE;
 }
-void EA_Command(int client, char* command)
+void EA_Command(const int client, char* command)
 {
     botimport.BotClientCommand(client, command);
 }
-void EA_SelectWeapon(int client, int weapon)
+void EA_SelectWeapon(const int client, const int weapon)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    bi->weapon = weapon;
+    botinputs[client].weapon = weapon;
 }
-void EA_Attack(int client)
+void EA_Attack(const int client)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    bi->actionflags |= ACTION_ATTACK;
+    botinputs[client].actionflags |= ACTION_ATTACK;
 }
-void EA_Talk(int client)
+void EA_Talk(const int client)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    bi->actionflags |= ACTION_TALK;
+    botinputs[client].actionflags |= ACTION_TALK;
 }
-void EA_Use(int client)
+void EA_Use(const int client)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    bi->actionflags |= ACTION_USE;
+    botinputs[client].actionflags |= ACTION_USE;
 }
-void EA_Respawn(int client)
+void EA_Respawn(const int client)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    bi->actionflags |= ACTION_RESPAWN;
+    botinputs[client].actionflags |= ACTION_RESPAWN;
 }
-void EA_Jump(int client)
+void EA_Jump(const int client)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    if (bi->actionflags & ACTION_JUMPEDLASTFRAME) {
-        bi->actionflags &= ~ACTION_JUMP;
+    if (botinputs[client].actionflags & ACTION_JUMPEDLASTFRAME) {
+        botinputs[client].actionflags &= ~ACTION_JUMP;
     } else {
-        bi->actionflags |= ACTION_JUMP;
+        botinputs[client].actionflags |= ACTION_JUMP;
     }
 }
-void EA_DelayedJump(int client)
+void EA_DelayedJump(const int client)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    if (bi->actionflags & ACTION_JUMPEDLASTFRAME) {
-        bi->actionflags &= ~ACTION_DELAYEDJUMP;
+    if (botinputs[client].actionflags & ACTION_JUMPEDLASTFRAME) {
+        botinputs[client].actionflags &= ~ACTION_DELAYEDJUMP;
     } else {
-        bi->actionflags |= ACTION_DELAYEDJUMP;
+        botinputs[client].actionflags |= ACTION_DELAYEDJUMP;
     }
 }
-void EA_Crouch(int client)
+void EA_Crouch(const int client)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    bi->actionflags |= ACTION_CROUCH;
+    botinputs[client].actionflags |= ACTION_CROUCH;
 }
-void EA_Walk(int client)
+void EA_Walk(const int client)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    bi->actionflags |= ACTION_WALK;
+    botinputs[client].actionflags |= ACTION_WALK;
 }
 void EA_Action(int client, int action)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    bi->actionflags |= action;
+    botinputs[client].actionflags |= action;
 }
-void EA_MoveUp(int client)
+void EA_MoveUp(const int client)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    bi->actionflags |= ACTION_MOVEUP;
+    botinputs[client].actionflags |= ACTION_MOVEUP;
 }
-void EA_MoveDown(int client)
+void EA_MoveDown(const int client)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    bi->actionflags |= ACTION_MOVEDOWN;
+    botinputs[client].actionflags |= ACTION_MOVEDOWN;
 }
-void EA_MoveForward(int client)
+void EA_MoveForward(const int client)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    bi->actionflags |= ACTION_MOVEFORWARD;
+    botinputs[client].actionflags |= ACTION_MOVEFORWARD;
 }
-void EA_MoveBack(int client)
+void EA_MoveBack(const int client)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    bi->actionflags |= ACTION_MOVEBACK;
+    botinputs[client].actionflags |= ACTION_MOVEBACK;
 }
-void EA_MoveLeft(int client)
+void EA_MoveLeft(const int client)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    bi->actionflags |= ACTION_MOVELEFT;
+    botinputs[client].actionflags |= ACTION_MOVELEFT;
 }
-void EA_MoveRight(int client)
+void EA_MoveRight(const int client)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    bi->actionflags |= ACTION_MOVERIGHT;
+    botinputs[client].actionflags |= ACTION_MOVERIGHT;
 }
-void EA_Move(int client, vec3_t dir, float speed)
+void EA_Move(const int client, const vec3_t dir, const float speed)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    VectorCopy(dir, bi->dir);
+    VectorCopy(dir, botinputs[client].dir);
     // cap speed
-    if (speed > MAX_USERMOVE)
-        speed = MAX_USERMOVE;
-    else if (speed < -MAX_USERMOVE)
-        speed = -MAX_USERMOVE;
-    bi->speed = speed;
+    botinputs[client].speed = speed > MAX_USERMOVE ? MAX_USERMOVE : speed < -MAX_USERMOVE ? -MAX_USERMOVE
+                                                                                          : speed;
 }
-void EA_View(int client, vec3_t viewangles)
+void EA_View(const int client, const vec3_t viewangles)
 {
-    bot_input_t* bi;
-
-    bi = &botinputs[client];
-
-    VectorCopy(viewangles, bi->viewangles);
+    VectorCopy(viewangles, botinputs[client].viewangles);
 }
-void EA_GetInput(int client, float thinktime, bot_input_t* input)
+void EA_GetInput(const int client, const float thinktime, bot_input_t* input)
 {
-    bot_input_t* bi;
-    bi = &botinputs[client];
-    bi->thinktime = thinktime;
-    memcpy(input, bi, sizeof(bot_input_t));
+    botinputs[client].thinktime = thinktime;
+    memcpy(input, &botinputs[client], sizeof(bot_input_t));
 }
 void EA_ResetInput(const int client)
 {
-    bot_input_t* bi = &botinputs[client];
-    bi->thinktime = 0;
-    VectorClear(bi->dir);
-    bi->speed = 0;
-    const bool jumped = bi->actionflags & ACTION_JUMP ? true : false;
-    bi->actionflags = jumped ? ACTION_JUMPEDLASTFRAME : 0;
+    botinputs[client].thinktime = 0;
+    VectorClear(botinputs[client].dir);
+    botinputs[client].speed = 0;
+    const bool jumped = botinputs[client].actionflags & ACTION_JUMP ? true : false;
+    botinputs[client].actionflags = jumped ? ACTION_JUMPEDLASTFRAME : 0;
 }
 int EA_Setup()
 {
