@@ -20,8 +20,10 @@ EXTRA_WARNINGS = ["-Wall", "-Wpedantic", "-Werror", "-Wmissing-prototypes"] + se
         # The emcc toolchain expects a main but we don't provide one
         "-Wno-emcc",
     ],
-    # GCC complains about the pragmas that are present in the code to suppress clang warnings
-    "@platforms//os:linux": ["-Wno-unknown-pragmas"],
+    "@platforms//os:linux": [
+        # GCC complains about the pragmas that are present in the code to suppress clang warnings
+        "-Wno-unknown-pragmas",
+    ],
     "@platforms//os:macos": [],
 })
 
