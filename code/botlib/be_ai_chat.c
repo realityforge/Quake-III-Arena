@@ -538,12 +538,13 @@ static bot_synonymlist_t* BotLoadSynonyms(char* filename)
                             FreeSource(source);
                             return NULL;
                         }
-                        size += sizeof(bot_synonym_t) + strlen(token.string) + 1;
+                        const size_t token_size = strlen(token.string) + 1;
+                        size += sizeof(bot_synonym_t) + token_size;
                         if (NULL != ptr) {
                             synonym = (bot_synonym_t*)ptr;
                             ptr += sizeof(bot_synonym_t);
                             synonym->string = ptr;
-                            ptr += strlen(token.string) + 1;
+                            ptr += token_size;
                             strcpy(synonym->string, token.string);
                             if (lastsynonym)
                                 lastsynonym->next = synonym;
@@ -754,12 +755,13 @@ static bot_randomlist_t* BotLoadRandomStrings(char* filename)
                 FreeSource(source);
                 return NULL;
             }
-            size += sizeof(bot_randomlist_t) + strlen(token.string) + 1;
+            const size_t token_size = strlen(token.string) + 1;
+            size += sizeof(bot_randomlist_t) + token_size;
             if (NULL != ptr) {
                 random = (bot_randomlist_t*)ptr;
                 ptr += sizeof(bot_randomlist_t);
                 random->string = ptr;
-                ptr += strlen(token.string) + 1;
+                ptr += token_size;
                 strcpy(random->string, token.string);
                 random->firstrandomstring = NULL;
                 random->numstrings = 0;
@@ -778,12 +780,13 @@ static bot_randomlist_t* BotLoadRandomStrings(char* filename)
                     FreeSource(source);
                     return NULL;
                 }
-                size += sizeof(bot_randomstring_t) + strlen(chatmessagestring) + 1;
+                const size_t chatmessage_size = strlen(chatmessagestring) + 1;
+                size += sizeof(bot_randomstring_t) + chatmessage_size;
                 if (NULL != ptr) {
                     randomstring = (bot_randomstring_t*)ptr;
                     ptr += sizeof(bot_randomstring_t);
                     randomstring->string = ptr;
-                    ptr += strlen(chatmessagestring) + 1;
+                    ptr += chatmessage_size;
                     strcpy(randomstring->string, chatmessagestring);
                     random->numstrings++;
                     randomstring->next = random->firstrandomstring;
@@ -1533,6 +1536,7 @@ static bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
                                 FreeSource(source);
                                 return NULL;
                             }
+                            const size_t chat_message_size = strlen(chatmessagestring) + 1;
                             if (NULL != ptr) {
                                 chatmessage = (bot_chatmessage_t*)ptr;
                                 chatmessage->time = -2 * CHATMESSAGE_RECENTTIME;
@@ -1543,11 +1547,11 @@ static bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
                                 ptr += sizeof(bot_chatmessage_t);
                                 chatmessage->chatmessage = ptr;
                                 strcpy(chatmessage->chatmessage, chatmessagestring);
-                                ptr += strlen(chatmessagestring) + 1;
+                                ptr += chat_message_size;
                                 // the number of chat messages increased
                                 chattype->numchatmessages++;
                             }
-                            size += sizeof(bot_chatmessage_t) + strlen(chatmessagestring) + 1;
+                            size += sizeof(bot_chatmessage_t) + chat_message_size;
                         }
                     }
                 } else // skip the bot chat
