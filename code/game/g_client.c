@@ -450,26 +450,6 @@ team_t PickTeam(int ignoreClientNum)
     return TEAM_BLUE;
 }
 
-/*
-===========
-ForceClientSkin
-
-Forces a client's skin (for teamplay)
-===========
-*/
-/*
-static void ForceClientSkin( gclient_t *client, char *model, const char *skin ) {
-        char *p;
-
-        if ((p = Q_strrchr(model, '/')) != 0) {
-                *p = 0;
-        }
-
-        strncatz(model, MAX_QPATH, "/");
-        strncatz(model, MAX_QPATH, skin);
-}
-*/
-
 static void ClientCleanName(const char* in, char* out, int outSize)
 {
     int len, colorlessLen;
@@ -658,27 +638,6 @@ void ClientUserinfoChanged(int clientNum)
         team = client->sess.sessionTeam;
     }
 
-    /*	NOTE: all client side now
-
-            // team
-            switch( team ) {
-            case TEAM_RED:
-                    ForceClientSkin(client, model, "red");
-    //		ForceClientSkin(client, headModel, "red");
-                    break;
-            case TEAM_BLUE:
-                    ForceClientSkin(client, model, "blue");
-    //		ForceClientSkin(client, headModel, "blue");
-                    break;
-            }
-            // don't ever use a default skin in teamplay, it would just waste memory
-            // however bots will always join a team but they spawn in as spectator
-            if ( g_gametype.integer >= GT_TEAM && team == TEAM_SPECTATOR) {
-                    ForceClientSkin(client, model, "red");
-    //		ForceClientSkin(client, headModel, "red");
-            }
-    */
-
 #ifdef MISSIONPACK
     if (g_gametype.integer >= GT_TEAM) {
         client->pers.teamInfo = true;
@@ -699,15 +658,6 @@ void ClientUserinfoChanged(int clientNum)
         client->pers.teamInfo = false;
     }
 #endif
-    /*
-    s = Info_ValueForKey( userinfo, "cg_pmove_fixed" );
-    if ( !*s || atoi( s ) == 0 ) {
-            client->pers.pmoveFixed = false;
-    }
-    else {
-            client->pers.pmoveFixed = true;
-    }
-    */
 
     // team task (0 = none, 1 = offence, 2 = defence)
     teamTask = atoi(Info_ValueForKey(userinfo, "teamtask"));
