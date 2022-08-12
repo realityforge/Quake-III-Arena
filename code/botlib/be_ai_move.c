@@ -2275,11 +2275,6 @@ void BotMoveToGoal(bot_moveresult_t* result, int movestate, bot_goal_t* goal, in
                         AAS_PrintTravelType(reach.traveltype & TRAVELTYPE_MASK);
                         botimport.Print(PRT_MESSAGE, "\n");
                     }
-                    /*
-                    if (ms->lastareanum != ms->areanum)
-                    {
-                            botimport.Print(PRT_MESSAGE, "changed from area %d to %d\n", ms->lastareanum, ms->areanum);
-                    }*/
                 }
 #endif // DEBUG
        // if the goal area changed or the reachability timed out
