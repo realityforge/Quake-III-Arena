@@ -462,7 +462,8 @@ static void StringReplaceWords(char* string, char* synonym, char* replacement)
 }
 static bot_synonymlist_t* BotLoadSynonyms(char* filename)
 {
-    int pass, size, contextlevel, numsynonyms;
+    int pass, contextlevel, numsynonyms;
+    size_t size;
     unsigned long int context, contextstack[32];
     char* ptr = NULL;
     source_t* source;
@@ -723,7 +724,8 @@ static int BotLoadChatMessage(source_t* source, char* chatmessagestring)
 }
 static bot_randomlist_t* BotLoadRandomStrings(char* filename)
 {
-    int pass, size;
+    int pass;
+    size_t size;
     char *ptr = NULL, chatmessagestring[MAX_MESSAGE_SIZE];
     source_t* source;
     token_t token;
@@ -1453,7 +1455,8 @@ static bot_replychat_t* BotLoadReplyChat(char* filename)
 }
 static bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
 {
-    int pass, foundchat, indent, size;
+    int pass, foundchat, indent;
+    size_t size;
     char* ptr = NULL;
     char chatmessagestring[MAX_MESSAGE_SIZE];
     source_t* source;
