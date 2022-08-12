@@ -40,10 +40,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "lang_util.h"
 #include "be_aas_reach.h"
 
-extern int Sys_MilliSeconds(void);
-
-extern botlib_import_t botimport;
-
 // NOTE: all travel times are in hundredths of a second
 // maximum number of reachability links
 #define AAS_MAX_REACHABILITYSIZE 65536
