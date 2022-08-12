@@ -23,6 +23,8 @@ EXTRA_WARNINGS = ["-Wall", "-Wpedantic", "-Werror", "-Wmissing-prototypes"] + se
     "@platforms//os:linux": [
         # GCC complains about the pragmas that are present in the code to suppress clang warnings
         "-Wno-unknown-pragmas",
+        # GCC seems to get this wrong even when our strncpyz passes correct length?
+        "-Wno-stringop-truncation",
     ],
     "@platforms//os:macos": [],
 })
