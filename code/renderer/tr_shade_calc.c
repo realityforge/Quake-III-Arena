@@ -53,10 +53,7 @@ static float* TableForFunc(genFunc_t func)
 */
 static float EvalWaveForm(const waveForm_t* wf)
 {
-    float* table;
-
-    table = TableForFunc(wf->func);
-
+    const float* table = TableForFunc(wf->func);
     return WAVEVALUE(table, wf->base, wf->amplitude, wf->phase, wf->frequency);
 }
 
