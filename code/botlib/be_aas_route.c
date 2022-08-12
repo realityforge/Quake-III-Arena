@@ -106,9 +106,9 @@ static inline int AAS_TravelFlagForType_inline(int traveltype)
     int tfl;
 
     tfl = 0;
-    if (tfl & TRAVELFLAG_NOTTEAM1)
+    if (traveltype & TRAVELFLAG_NOTTEAM1)
         tfl |= TFL_NOTTEAM1;
-    if (tfl & TRAVELFLAG_NOTTEAM2)
+    if (traveltype & TRAVELFLAG_NOTTEAM2)
         tfl |= TFL_NOTTEAM2;
     traveltype &= TRAVELTYPE_MASK;
     if (traveltype < 0 || traveltype >= MAX_TRAVELTYPES)
