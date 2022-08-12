@@ -649,7 +649,6 @@ static void BotReplaceReplySynonyms(char* string, unsigned long int context)
             if (!(syn->context & context))
                 continue;
             for (synonym = syn->firstsynonym->next; synonym; synonym = synonym->next) {
-                str2 = synonym->string;
                 // if the synonym is not at the front of the string continue
                 str2 = StringContainsWord(str1, synonym->string, false);
                 if (!str2 || str2 != str1)
