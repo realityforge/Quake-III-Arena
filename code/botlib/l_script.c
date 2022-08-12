@@ -621,7 +621,7 @@ static int PS_ReadPrimitive(script_t* script, token_t* token)
     token->string[len] = 0;
     // copy the token into the script structure
     memcpy(&script->token, token, sizeof(token_t));
-    // primitive reading successfull
+    // primitive reading successful
     return 1;
 }
 int PS_ReadToken(script_t* script, token_t* token)
