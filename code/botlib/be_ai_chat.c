@@ -2046,14 +2046,10 @@ int BotReplyChat(int chatstate, char* message, int mcontext, int vcontext, char*
     }
     return false;
 }
-int BotChatLength(int chatstate)
+int BotChatLength(const int chatstate)
 {
-    bot_chatstate_t* cs;
-
-    cs = BotChatStateFromHandle(chatstate);
-    if (!cs)
-        return 0;
-    return strlen(cs->chatmessage);
+    const bot_chatstate_t* cs = BotChatStateFromHandle(chatstate);
+    return NULL == cs ? 0 : strlen(cs->chatmessage);
 }
 void BotEnterChat(int chatstate, int clientto, int sendto)
 {
