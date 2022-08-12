@@ -380,38 +380,35 @@ static void AAS_CalculateAreaTravelTimes()
 }
 static int AAS_PortalMaxTravelTime(int portalnum)
 {
-    int l, n, t, maxt;
-    aas_portal_t* portal;
-    aas_reversedreachability_t* revreach;
-    aas_reversedlink_t* revlink;
-    aas_areasettings_t* settings;
-
-    portal = &aasworld.portals[portalnum];
+    const int areanum = aasworld.portals[portalnum].areanum;
     // reversed reachabilities of this portal area
-    revreach = &aasworld.reversedreachability[portal->areanum];
+    aas_reversedreachability_t* revreach = &aasworld.reversedreachability[areanum];
     // settings of the portal area
-    settings = &aasworld.areasettings[portal->areanum];
-    maxt = 0;
-    for (l = 0; l < settings->numreachableareas; l++) {
-        for (n = 0, revlink = revreach->first; revlink; revlink = revlink->next, n++) {
-            t = aasworld.areatraveltimes[portal->areanum][l][n];
+    aas_areasettings_t* settings = &aasworld.areasettings[areanum];
+    int maxt = 0;
+    for (int l = 0; l < settings->numreachableareas; l++) {
+        int n = 0;
+        aas_reversedlink_t* revlink = revreach->first;
+        while (NULL != revlink) {
+            int t = aasworld.areatraveltimes[areanum][l][n];
             if (t > maxt) {
                 maxt = t;
             }
+            revlink = revlink->next;
+            n++;
         }
     }
     return maxt;
 }
 static void AAS_InitPortalMaxTravelTimes()
 {
-    int i;
-
-    if (aasworld.portalmaxtraveltimes)
+    if (aasworld.portalmaxtraveltimes) {
         FreeMemory(aasworld.portalmaxtraveltimes);
+    }
 
     aasworld.portalmaxtraveltimes = (int*)GetClearedMemory(aasworld.numportals * sizeof(int));
 
-    for (i = 0; i < aasworld.numportals; i++) {
+    for (int i = 0; i < aasworld.numportals; i++) {
         aasworld.portalmaxtraveltimes[i] = AAS_PortalMaxTravelTime(i);
     }
 }

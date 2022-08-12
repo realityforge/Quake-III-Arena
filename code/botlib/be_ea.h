@@ -48,8 +48,8 @@ void EA_Use(int client);
 void EA_SelectWeapon(int client, int weapon);
 void EA_Jump(int client);
 void EA_DelayedJump(int client);
-void EA_Move(int client, vec3_t dir, float speed);
-void EA_View(int client, vec3_t viewangles);
+void EA_Move(int client, const vec3_t dir, float speed);
+void EA_View(int client, const vec3_t viewangles);
 
 // send regular input to the server
 void EA_GetInput(int client, float thinktime, bot_input_t* input);
