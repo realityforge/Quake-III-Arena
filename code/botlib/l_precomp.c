@@ -699,8 +699,9 @@ static int PC_Directive_define(source_t* source)
     // allocate define
     define = (define_t*)GetMemory(sizeof(define_t));
     memset(define, 0, sizeof(define_t));
-    define->name = (char*)GetMemory(strlen(token.string) + 1);
-    strcpy(define->name, token.string);
+    const size_t size = strlen(token.string) + 1;
+    define->name = (char*)GetMemory(size);
+    strncpyz(define->name, token.string, size);
     // add the define to the source
     PC_AddDefineToHash(define, source->definehash);
     // if nothing is defined, just return
