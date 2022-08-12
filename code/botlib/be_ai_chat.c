@@ -1574,7 +1574,7 @@ static bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
         FreeSource(source);
         // if the requested character is not found
         if (!foundchat) {
-            botimport.Print(PRT_ERROR, "couldn't find chat %s in %s", chatname, chatfile);
+            botimport.Print(PRT_ERROR, "couldn't find chat %s in %s\n", chatname, chatfile);
             return NULL;
         }
     }

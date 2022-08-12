@@ -264,8 +264,8 @@ static itemconfig_t* LoadItemConfig(char* filename)
     }
     FreeSource(source);
     if (!ic->numiteminfo)
-        botimport.Print(PRT_WARNING, "no item info loaded");
-    botimport.Print(PRT_MESSAGE, "loaded %s", path);
+        botimport.Print(PRT_WARNING, "no item info loaded\n");
+    botimport.Print(PRT_MESSAGE, "loaded %s\n", path);
     return ic;
 }
 //===========================================================================

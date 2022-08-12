@@ -198,6 +198,6 @@ void AAS_PrintTravelType(int traveltype)
         str = "UNKNOWN TRAVEL TYPE";
         break;
     }
-    botimport.Print(PRT_MESSAGE, "%s", str);
+    botimport.Print(PRT_MESSAGE, "%s\n", str);
 }
 #endif
