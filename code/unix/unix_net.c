@@ -211,7 +211,6 @@ void Sys_SendPacket(int length, const void* data, netadr_t to)
         net_socket = ipx_socket;
     } else {
         Com_Error(ERR_FATAL, "NET_SendPacket: bad address type");
-        return;
     }
 
     if (!net_socket)
