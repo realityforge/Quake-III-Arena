@@ -2129,7 +2129,6 @@ void BotSetChatName(int chatstate, char* name, int client)
     cs->client = client;
     memset(cs->name, 0, sizeof(cs->name));
     strncpyz(cs->name, name, sizeof(cs->name));
-    cs->name[sizeof(cs->name) - 1] = '\0';
 }
 int BotAllocChatState()
 {
