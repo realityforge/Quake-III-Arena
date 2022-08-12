@@ -2433,6 +2433,7 @@ void BotMoveToGoal(bot_moveresult_t* result, int movestate, bot_goal_t* goal, in
                         if ((reach.traveltype & TRAVELTYPE_MASK) == TRAVEL_JUMPPAD) {
                             ms->lastreachnum = lastreachnum;
                             ms->lastareanum = areas[i];
+                            break;
                         }
                     }
                     if (lastreachnum)
