@@ -2127,13 +2127,7 @@ void BotMoveToGoal(bot_moveresult_t* result, int movestate, bot_goal_t* goal, in
     aas_reachability_t reach, lastreach;
     bot_movestate_t* ms;
 
-    result->failure = false;
-    result->type = 0;
-    result->blocked = false;
-    result->blockentity = 0;
-    result->traveltype = 0;
-    result->flags = 0;
-
+    BotClearMoveResult(result);
     ms = BotMoveStateFromHandle(movestate);
     if (!ms)
         return;
