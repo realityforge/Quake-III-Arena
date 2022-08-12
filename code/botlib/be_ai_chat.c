@@ -584,7 +584,7 @@ static bot_synonymlist_t* BotLoadSynonyms(char* filename)
                         }
                     }
                     if (numsynonyms < 2) {
-                        SourceError(source, "synonym must have at least two entries");
+                        SourceError(source, "synonym must have at least two entries\n");
                         FreeSource(source);
                         return NULL;
                     }
@@ -721,7 +721,7 @@ static int BotLoadChatMessage(source_t* source, char* chatmessagestring)
         // random string
         else if (token.type == TT_NAME) {
             if (strlen(ptr) + 7 > MAX_MESSAGE_SIZE) {
-                SourceError(source, "chat message too long");
+                SourceError(source, "chat message too long\n");
                 return false;
             }
             sprintf(&ptr[strlen(ptr)], "%cr%s%c", ESCAPE_CHAR, token.string, ESCAPE_CHAR);
