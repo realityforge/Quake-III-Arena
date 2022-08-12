@@ -155,7 +155,7 @@ static void G_LoadArenas()
     dirptr = dirlist;
     for (i = 0; i < numdirs; i++, dirptr += dirlen + 1) {
         dirlen = strlen(dirptr);
-        strcpy(filename, "scripts/");
+        strncpyz(filename, "scripts/", sizeof(filename));
         strcat(filename, dirptr);
         G_LoadArenasFromFile(filename);
     }
@@ -283,7 +283,7 @@ static int G_RemoveRandomBot(int team)
         if (team >= 0 && cl->sess.sessionTeam != team) {
             continue;
         }
-        strcpy(netname, cl->pers.netname);
+        strncpyz(netname, cl->pers.netname, sizeof(netname));
         Q_CleanStr(netname);
         trap_SendConsoleCommand(EXEC_INSERT, va("kick %s\n", netname));
         return true;
@@ -683,21 +683,21 @@ void Svcmd_BotList_f()
 
     trap_Printf("^1name             model            aifile              funname\n");
     for (i = 0; i < g_numBots; i++) {
-        strcpy(name, Info_ValueForKey(g_botInfos[i], "name"));
+        strncpyz(name, Info_ValueForKey(g_botInfos[i], "name"), sizeof(name));
         if (!*name) {
-            strcpy(name, "UnnamedPlayer");
+            strncpyz(name, "UnnamedPlayer", sizeof(name));
         }
-        strcpy(funname, Info_ValueForKey(g_botInfos[i], "funname"));
+        strncpyz(funname, Info_ValueForKey(g_botInfos[i], "funname"), sizeof(funname));
         if (!*funname) {
-            strcpy(funname, "");
+            strncpyz(funname, "", sizeof(funname));
         }
-        strcpy(model, Info_ValueForKey(g_botInfos[i], "model"));
+        strncpyz(model, Info_ValueForKey(g_botInfos[i], "model"), sizeof(model));
         if (!*model) {
-            strcpy(model, "visor/default");
+            strncpyz(model, "visor/default", sizeof(model));
         }
-        strcpy(aifile, Info_ValueForKey(g_botInfos[i], "aifile"));
+        strncpyz(aifile, Info_ValueForKey(g_botInfos[i], "aifile"), sizeof(aifile));
         if (!*aifile) {
-            strcpy(aifile, "bots/default_c.c");
+            strncpyz(aifile, "bots/default_c.c", sizeof(aifile));
         }
         trap_Printf(va("%-16s %-16s %-20s %-20s\n", name, model, aifile, funname));
     }
@@ -807,7 +807,7 @@ static void G_LoadBots()
     dirptr = dirlist;
     for (i = 0; i < numdirs; i++, dirptr += dirlen + 1) {
         dirlen = strlen(dirptr);
-        strcpy(filename, "scripts/");
+        strncpyz(filename, "scripts/", sizeof(filename));
         strcat(filename, dirptr);
         G_LoadBotsFromFile(filename);
     }

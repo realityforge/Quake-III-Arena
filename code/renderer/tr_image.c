@@ -660,7 +660,7 @@ image_t* R_CreateImage(const char* name, const uint8_t* pic, int width, int heig
     image->mipmap = mipmap;
     image->allowPicmip = allowPicmip;
 
-    strcpy(image->imgName, name);
+    strncpyz(image->imgName, name, sizeof(image->imgName));
 
     image->width = width;
     image->height = height;
@@ -1385,7 +1385,7 @@ void R_LoadImage(const char* name, uint8_t** pic, int* width, int* height)
         LoadTGA(name, pic, width, height); // try tga first
         if (!*pic) { //
             char altname[MAX_QPATH]; // try jpg in place of tga
-            strcpy(altname, name);
+            strncpyz(altname, name, sizeof(altname));
             len = strlen(altname);
             altname[len - 3] = 'j';
             altname[len - 2] = 'p';
@@ -1441,16 +1441,16 @@ image_t* R_FindImageFile(const char* name, bool mipmap, bool allowPicmip, int gl
     R_LoadImage(name, &pic, &width, &height);
     if (pic == NULL) { // if we dont get a successful load
         char altname[MAX_QPATH]; // copy the name
-        int len; //
-        strcpy(altname, name); //
-        len = strlen(altname); //
+        int len;
+        strncpyz(altname, name, sizeof(altname));
+        len = strlen(altname);
         altname[len - 3] = toupper(altname[len - 3]); // and try upper case extension for unix systems
-        altname[len - 2] = toupper(altname[len - 2]); //
-        altname[len - 1] = toupper(altname[len - 1]); //
-        ri.Printf(PRINT_ALL, "trying %s...\n", altname); //
-        R_LoadImage(altname, &pic, &width, &height); //
-        if (pic == NULL) { // if that fails
-            return NULL; // bail
+        altname[len - 2] = toupper(altname[len - 2]);
+        altname[len - 1] = toupper(altname[len - 1]);
+        ri.Printf(PRINT_ALL, "trying %s...\n", altname);
+        R_LoadImage(altname, &pic, &width, &height);
+        if (pic == NULL) {
+            return NULL;
         }
     }
 

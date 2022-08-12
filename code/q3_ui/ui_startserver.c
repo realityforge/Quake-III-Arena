@@ -180,7 +180,7 @@ static void StartServer_Update()
         s_startserver.next.generic.flags |= QMF_INACTIVE;
 
         // set the map name
-        strcpy(s_startserver.mapname.string, "NO MAPS FOUND");
+        strncpyz(s_startserver.mapname.string, "NO MAPS FOUND", sizeof(s_startserver.mapname.string));
     } else {
         // set the highlight
         s_startserver.next.generic.flags &= ~QMF_INACTIVE;
@@ -191,7 +191,7 @@ static void StartServer_Update()
         }
 
         // set the map name
-        strcpy(s_startserver.mapname.string, s_startserver.maplist[s_startserver.currentmap]);
+        strncpyz(s_startserver.mapname.string, s_startserver.maplist[s_startserver.currentmap], sizeof(s_startserver.mapname.string));
     }
 
     Q_strupr(s_startserver.mapname.string);
@@ -973,7 +973,7 @@ static void ServerOptions_InitBotNames()
 
     // set the rest of the bot slots to "---"
     for (n = count; n < PLAYER_SLOTS; n++) {
-        strcpy(s_serveroptions.playerNameBuffers[n], "--------");
+        strncpyz(s_serveroptions.playerNameBuffers[n], "--------", sizeof(s_serveroptions.playerNameBuffers[n]));
     }
 
     // pad up to #8 as open slots
@@ -1026,7 +1026,7 @@ static void ServerOptions_SetMenuItems()
     s_serveroptions.mappic.generic.name = picname;
 
     // set the map name
-    strcpy(s_serveroptions.mapnamebuffer, s_startserver.mapname.string);
+    strncpyz(s_serveroptions.mapnamebuffer, s_startserver.mapname.string, sizeof(s_serveroptions.mapnamebuffer));
     Q_strupr(s_serveroptions.mapnamebuffer);
 
     // get the player selections initialized

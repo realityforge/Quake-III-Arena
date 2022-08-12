@@ -151,7 +151,7 @@ void BotSetTeamMateTaskPreference(bot_state_t* bs, int teammate, int preference)
 
     ctftaskpreferences[teammate].preference = preference;
     ClientName(teammate, teammatename, sizeof(teammatename));
-    strcpy(ctftaskpreferences[teammate].name, teammatename);
+    strncpy(ctftaskpreferences[teammate].name, teammatename, sizeof(ctftaskpreferences[teammate].name));
 }
 
 int BotGetTeamMateTaskPreference(bot_state_t* bs, int teammate)

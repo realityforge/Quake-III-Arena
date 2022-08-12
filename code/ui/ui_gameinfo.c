@@ -137,7 +137,7 @@ void UI_LoadArenas()
     dirptr = dirlist;
     for (i = 0; i < numdirs; i++, dirptr += dirlen + 1) {
         dirlen = strlen(dirptr);
-        strcpy(filename, "scripts/");
+        strncpyz(filename, "scripts/", sizeof(filename));
         strcat(filename, dirptr);
         UI_LoadArenasFromFile(filename);
     }
@@ -238,7 +238,7 @@ void UI_LoadBots()
     dirptr = dirlist;
     for (i = 0; i < numdirs; i++, dirptr += dirlen + 1) {
         dirlen = strlen(dirptr);
-        strcpy(filename, "scripts/");
+        strncpyz(filename, "scripts/", sizeof(filename));
         strcat(filename, dirptr);
         UI_LoadBotsFromFile(filename);
     }

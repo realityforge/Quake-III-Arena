@@ -362,7 +362,7 @@ static int PC_ExpandBuiltinDefine(source_t* source, token_t* deftoken, define_t*
         break;
     }
     case BUILTIN_FILE: {
-        strcpy(token->string, source->scriptstack->filename);
+        strncpyz(token->string, source->scriptstack->filename, sizeof(token->string));
         token->type = TT_NAME;
         token->subtype = strlen(token->string);
         *firsttoken = token;
@@ -372,7 +372,7 @@ static int PC_ExpandBuiltinDefine(source_t* source, token_t* deftoken, define_t*
     case BUILTIN_DATE: {
         t = time(NULL);
         curtime = ctime(&t);
-        strcpy(token->string, "\"");
+        strncpyz(token->string, "\"", sizeof(token->string));
         strncat(token->string, curtime + 4, 7);
         strncat(token->string + 7, curtime + 20, 4);
         strcat(token->string, "\"");
@@ -386,7 +386,7 @@ static int PC_ExpandBuiltinDefine(source_t* source, token_t* deftoken, define_t*
     case BUILTIN_TIME: {
         t = time(NULL);
         curtime = ctime(&t);
-        strcpy(token->string, "\"");
+        strncpyz(token->string, "\"", sizeof(token->string));
         strncat(token->string, curtime + 11, 8);
         strcat(token->string, "\"");
         free(curtime);
@@ -564,12 +564,12 @@ static int PC_Directive_include(source_t* source)
         PC_ConvertPath(token.string);
         script = LoadScriptFile(token.string);
         if (!script) {
-            strcpy(path, source->includepath);
+            strncpyz(path, source->includepath, sizeof(path));
             strcat(path, token.string);
             script = LoadScriptFile(path);
         }
     } else if (token.type == TT_PUNCTUATION && *token.string == '<') {
-        strcpy(path, source->includepath);
+        strncpyz(path, source->includepath, sizeof(path));
         while (PC_ReadSourceToken(source, &token)) {
             if (token.linescrossed > 0) {
                 PC_UnreadSourceToken(source, &token);
@@ -1647,7 +1647,7 @@ static int PC_Directive_error(source_t* source)
 {
     token_t token;
 
-    strcpy(token.string, "");
+    strncpyz(token.string, "", sizeof(token.string));
     PC_ReadSourceToken(source, &token);
     SourceError(source, "#error directive: %s", token.string);
     return false;
@@ -1669,7 +1669,7 @@ static void UnreadSignToken(source_t* source)
     token.whitespace_p = source->scriptstack->script_p;
     token.endwhitespace_p = source->scriptstack->script_p;
     token.linescrossed = 0;
-    strcpy(token.string, "-");
+    strncpyz(token.string, "-", sizeof(token.string));
     token.type = TT_PUNCTUATION;
     token.subtype = P_SUB;
     PC_UnreadSourceToken(source, &token);
@@ -1918,30 +1918,30 @@ int PC_ExpectTokenType(source_t* source, int type, int subtype, token_t* token)
     }
 
     if (token->type != type) {
-        strcpy(str, "");
+        strncpyz(str, "", sizeof(str));
         if (type == TT_STRING)
-            strcpy(str, "string");
+            strncpyz(str, "string", sizeof(str));
         if (type == TT_LITERAL)
-            strcpy(str, "literal");
+            strncpyz(str, "literal", sizeof(str));
         if (type == TT_NUMBER)
-            strcpy(str, "number");
+            strncpyz(str, "number", sizeof(str));
         if (type == TT_NAME)
-            strcpy(str, "name");
+            strncpyz(str, "name", sizeof(str));
         if (type == TT_PUNCTUATION)
-            strcpy(str, "punctuation");
+            strncpyz(str, "punctuation", sizeof(str));
         SourceError(source, "expected a %s, found %s", str, token->string);
         return false;
     }
     if (token->type == TT_NUMBER) {
         if ((token->subtype & subtype) != subtype) {
             if (subtype & TT_DECIMAL)
-                strcpy(str, "decimal");
+                strncpyz(str, "decimal", sizeof(str));
             if (subtype & TT_HEX)
-                strcpy(str, "hex");
+                strncpyz(str, "hex", sizeof(str));
             if (subtype & TT_OCTAL)
-                strcpy(str, "octal");
+                strncpyz(str, "octal", sizeof(str));
             if (subtype & TT_BINARY)
-                strcpy(str, "binary");
+                strncpyz(str, "binary", sizeof(str));
             if (subtype & TT_LONG)
                 strcat(str, " long");
             if (subtype & TT_UNSIGNED)
@@ -2099,7 +2099,7 @@ int PC_ReadTokenHandle(int handle, pc_token_t* pc_token)
         return 0;
 
     ret = PC_ReadToken(sourceFiles[handle], &token);
-    strcpy(pc_token->string, token.string);
+    strncpyz(pc_token->string, token.string, sizeof(pc_token->string));
     pc_token->type = token.type;
     pc_token->subtype = token.subtype;
     pc_token->intvalue = token.intvalue;

@@ -423,7 +423,7 @@ void GLimp_Init(void)
 
     // chipset specific configuration
     buf = malloc(strlen(glConfig.renderer_string) + 1);
-    strcpy(buf, glConfig.renderer_string);
+    strncpyz(buf, glConfig.renderer_string, sizeof(buf));
     Q_strlwr(buf);
 
     ri.Cvar_Set("r_lastValidRenderer", glConfig.renderer_string);

@@ -950,7 +950,7 @@ static void BotMatch_LeaveSubteam(bot_state_t* bs, bot_match_t* match)
         client = ClientFromName(netname);
         trap_BotEnterChat(bs->cs, client, CHAT_TELL);
     }
-    strcpy(bs->subteam, "");
+    strncpyz(bs->subteam, "", sizeof(bs->subteam));
 }
 
 static void BotMatch_WhichTeam(bot_state_t* bs, bot_match_t* match)

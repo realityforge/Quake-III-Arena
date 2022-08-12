@@ -235,16 +235,16 @@ static void BotSetInfoConfigString(bot_state_t* bs)
     else
         leader = " ";
 
-    strcpy(carrying, "  ");
+    strncpyz(carrying, "  ", sizeof(carrying));
     if (gametype == GT_CTF) {
         if (BotCTFCarryingFlag(bs)) {
-            strcpy(carrying, "F ");
+            strncpyz(carrying, "F ", sizeof(carrying));
         }
     }
 #ifdef MISSIONPACK
     else if (gametype == GT_1FCTF) {
         if (Bot1FCTFCarryingFlag(bs)) {
-            strcpy(carrying, "F ");
+            strncpyz(carrying, "F ", sizeof(carrying));
         }
     } else if (gametype == GT_HARVESTER) {
         if (BotHarvesterCarryingCubes(bs)) {
@@ -1253,7 +1253,7 @@ static int BotInitLibrary()
     // set the maxclients and maxentities library variables before calling BotSetupLibrary
     trap_Cvar_VariableStringBuffer("sv_maxclients", buf, sizeof(buf));
     if (!strlen(buf))
-        strcpy(buf, "8");
+        strncpyz(buf, "8", sizeof(buf));
     trap_BotLibVarSet("maxclients", buf);
     Com_sprintf(buf, sizeof(buf), "%d", MAX_GENTITIES);
     trap_BotLibVarSet("maxentities", buf);
@@ -1272,7 +1272,7 @@ static int BotInitLibrary()
     // game type
     trap_Cvar_VariableStringBuffer("g_gametype", buf, sizeof(buf));
     if (!strlen(buf))
-        strcpy(buf, "0");
+        strncpyz(buf, "0", sizeof(buf));
     trap_BotLibVarSet("g_gametype", buf);
     // bot developer mode and log file
     trap_BotLibVarSet("bot_developer", bot_developer.string);
@@ -1307,7 +1307,7 @@ static int BotInitLibrary()
     // reload instead of cache bot character files
     trap_Cvar_VariableStringBuffer("bot_reloadcharacters", buf, sizeof(buf));
     if (!strlen(buf))
-        strcpy(buf, "0");
+        strncpyz(buf, "0", sizeof(buf));
     trap_BotLibVarSet("bot_reloadcharacters", buf);
     // base directory
     trap_Cvar_VariableStringBuffer("fs_basepath", buf, sizeof(buf));

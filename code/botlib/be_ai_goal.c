@@ -535,7 +535,7 @@ void BotGoalName(int number, char* name, int size)
             return;
         }
     }
-    strcpy(name, "");
+    strncpyz(name, "", size);
 }
 void BotResetAvoidGoals(int goalstate)
 {

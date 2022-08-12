@@ -206,9 +206,9 @@ static void UI_SPLevelMenu_SetMenuArena(int n, int level, const char* arenaInfo)
         levelMenuInfo.levelScores[n] = 8;
     }
 
-    strcpy(levelMenuInfo.levelPicNames[n], va("levelshots/%s.png", map));
+    strncpyz(levelMenuInfo.levelPicNames[n], va("levelshots/%s.png", map), sizeof(levelMenuInfo.levelPicNames[n]));
     if (!trap_R_RegisterShaderNoMip(levelMenuInfo.levelPicNames[n])) {
-        strcpy(levelMenuInfo.levelPicNames[n], ART_MAP_UNKNOWN);
+        strncpyz(levelMenuInfo.levelPicNames[n], ART_MAP_UNKNOWN, sizeof(levelMenuInfo.levelPicNames[n]));
     }
     levelMenuInfo.item_maps[n].shader = 0;
     if (selectedArenaSet > currentSet) {

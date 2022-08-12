@@ -205,7 +205,7 @@ static void Demos_MenuInit()
     s_demos.list.columns = 3;
 
     if (!s_demos.list.numitems) {
-        strcpy(s_demos.names, "No Demos Found.");
+        strncpyz(s_demos.names, "No Demos Found.", sizeof(s_demos.names));
         s_demos.list.numitems = 1;
 
         // degenerate case, not selectable

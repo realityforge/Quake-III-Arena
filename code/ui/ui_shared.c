@@ -172,7 +172,7 @@ const char* String_Alloc(const char* p)
     len = strlen(p);
     if (len + strPoolIndex + 1 < STRING_POOL_SIZE) {
         int ph = strPoolIndex;
-        strcpy(&strPool[strPoolIndex], p);
+        strncpyz(&strPool[strPoolIndex], p, sizeof(strPool[strPoolIndex]));
         strPoolIndex += len + 1;
 
         str = strHandle[hash];
@@ -3163,7 +3163,7 @@ static void BindingFromName(const char* cvar)
             return;
         }
     }
-    strcpy(g_nameBind1, "???");
+    strncpyz(g_nameBind1, "???", sizeof(g_nameBind1));
 }
 
 static void Item_Slider_Paint(itemDef_t* item)

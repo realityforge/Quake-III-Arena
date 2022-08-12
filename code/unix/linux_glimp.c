@@ -1299,7 +1299,7 @@ void GLimp_Init(void)
     strncpyz(glConfig.extensions_string, qglGetString(GL_EXTENSIONS), sizeof(glConfig.extensions_string));
 
     // chipset specific configuration
-    strcpy(buf, glConfig.renderer_string);
+    strncpyz(buf, glConfig.renderer_string, sizeof(buf));
     strlwr(buf);
 
     // NOTE: if changing cvars, do it within this block.  This allows them

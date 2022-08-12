@@ -547,7 +547,7 @@ int BotChat_Death(bot_state_t* bs)
     if (bs->lastkilledby >= 0 && bs->lastkilledby < MAX_CLIENTS)
         EasyClientName(bs->lastkilledby, name, 32);
     else
-        strcpy(name, "[world]");
+        strncpyz(name, "[world]", sizeof(name));
     if (TeamPlayIsOn() && BotSameTeam(bs, bs->lastkilledby)) {
         if (bs->lastkilledby == bs->client)
             return false;
@@ -703,7 +703,7 @@ int BotChat_EnemySuicide(bot_state_t* bs)
     if (bs->enemy >= 0)
         EasyClientName(bs->enemy, name, 32);
     else
-        strcpy(name, "");
+        strncpyz(name, "", sizeof(name));
     BotAI_BotInitialChat(bs, "enemy_suicide", name, NULL);
     bs->lastchat_time = FloatTime();
     bs->chatto = CHAT_ALL;
@@ -870,7 +870,7 @@ int BotChat_Random(bot_state_t* bs)
     if (BotVisibleEnemies(bs))
         return false;
     if (bs->lastkilledplayer == bs->client) {
-        strcpy(name, BotRandomOpponentName(bs));
+        strncpyz(name, BotRandomOpponentName(bs), sizeof(name));
     } else {
         EasyClientName(bs->lastkilledplayer, name, sizeof(name));
     }
@@ -1096,7 +1096,7 @@ void BotChatTest(bot_state_t* bs)
         trap_BotEnterChat(bs->cs, 0, CHAT_ALL);
     }
     if (bs->lastkilledplayer == bs->client) {
-        strcpy(name, BotRandomOpponentName(bs));
+        strncpyz(name, BotRandomOpponentName(bs), sizeof(name));
     } else {
         EasyClientName(bs->lastkilledplayer, name, sizeof(name));
     }

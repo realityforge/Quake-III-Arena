@@ -693,7 +693,7 @@ static void CG_RegisterSounds()
     }
 
     // only register the items that the server says we need
-    strcpy(items, CG_ConfigString(CS_ITEMS));
+    strncpyz(items, CG_ConfigString(CS_ITEMS), sizeof(items));
 
     for (i = 1; i < bg_numItems; i++) {
         CG_RegisterItemSounds(i);
@@ -999,7 +999,7 @@ static void CG_RegisterGraphics()
     memset(cg_weapons, 0, sizeof(cg_weapons));
 
     // only register the items that the server says we need
-    strcpy(items, CG_ConfigString(CS_ITEMS));
+    strncpyz(items, CG_ConfigString(CS_ITEMS), sizeof(items));
 
     for (i = 1; i < bg_numItems; i++) {
         if (items[i] == '1' || cg_buildScript.integer) {

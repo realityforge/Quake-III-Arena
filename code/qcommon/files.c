@@ -1956,7 +1956,7 @@ int FS_GetModList(char* listbuf, int bufsize)
                 // nLen is the length of the mod path
                 // we need to see if there is a description available
                 descPath[0] = '\0';
-                strcpy(descPath, name);
+                strncpyz(descPath, name, sizeof(descPath));
                 strcat(descPath, "/description.txt");
                 nDescLen = FS_SV_FOpenFileRead(descPath, &descHandle);
                 if (nDescLen > 0 && descHandle) {
@@ -1969,7 +1969,7 @@ int FS_GetModList(char* listbuf, int bufsize)
                     }
                     FS_FCloseFile(descHandle);
                 } else {
-                    strcpy(descPath, name);
+                    strncpyz(descPath, name, sizeof(descPath));
                 }
                 nDescLen = strlen(descPath) + 1;
 
@@ -2229,7 +2229,7 @@ static void FS_AddGameDirectory(const char* path, const char* dir)
         if ((pak = FS_LoadZipFile(pakfile, sorted[i])) == 0)
             continue;
         // store the game name for downloading
-        strcpy(pak->pakGamename, dir);
+        strncpyz(pak->pakGamename, dir, sizeof(pak->pakGamename));
 
         search = Z_Malloc(sizeof(searchpath_t));
         search->pack = pak;

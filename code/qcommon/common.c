@@ -1045,8 +1045,9 @@ char* CopyString(const char* in)
             return ((char*)&numberstring[in[0] - '0']) + sizeof(memblock_t);
         }
     }
-    out = S_Malloc(strlen(in) + 1);
-    strcpy(out, in);
+    const size_t size = strlen(in) + 1;
+    out = S_Malloc(size);
+    strncpyz(out, in, size);
     return out;
 }
 

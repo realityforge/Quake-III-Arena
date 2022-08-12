@@ -580,7 +580,7 @@ void ClientUserinfoChanged(int clientNum)
 
     // check for malformed or illegal info strings
     if (!Info_Validate(userinfo)) {
-        strcpy(userinfo, "\\name\\badinfo");
+        strncpy(userinfo, "\\name\\badinfo", sizeof(userinfo));
     }
 
     // check for local client
@@ -715,11 +715,11 @@ void ClientUserinfoChanged(int clientNum)
     teamLeader = client->sess.teamLeader;
 
     // colors
-    strcpy(c1, Info_ValueForKey(userinfo, "color1"));
-    strcpy(c2, Info_ValueForKey(userinfo, "color2"));
+    strncpyz(c1, Info_ValueForKey(userinfo, "color1"), sizeof(c1));
+    strncpyz(c2, Info_ValueForKey(userinfo, "color2"), sizeof(c2));
 
-    strcpy(redTeam, Info_ValueForKey(userinfo, "g_redteam"));
-    strcpy(blueTeam, Info_ValueForKey(userinfo, "g_blueteam"));
+    strncpyz(redTeam, Info_ValueForKey(userinfo, "g_redteam"), sizeof(redTeam));
+    strncpyz(blueTeam, Info_ValueForKey(userinfo, "g_blueteam"), sizeof(blueTeam));
 
     // send over a subset of the userinfo keys so other clients can
     // print scoreboards, display models, and play custom sounds

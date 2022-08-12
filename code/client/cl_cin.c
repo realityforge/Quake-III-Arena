@@ -1371,7 +1371,7 @@ int CIN_PlayCinematic(const char* arg, int x, int y, int w, int h, int systemBit
 
     cin.currentHandle = currentHandle;
 
-    strcpy(cinTable[currentHandle].fileName, name);
+    strncpyz(cinTable[currentHandle].fileName, name, sizeof(cinTable[currentHandle].fileName));
 
     cinTable[currentHandle].ROQSize = 0;
     cinTable[currentHandle].ROQSize = FS_FOpenFileRead(cinTable[currentHandle].fileName, &cinTable[currentHandle].iFile, true);

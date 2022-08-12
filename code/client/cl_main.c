@@ -1304,7 +1304,7 @@ void CL_CheckForResend(void)
         Info_SetValueForKey(info, "qport", va("%i", port));
         Info_SetValueForKey(info, "challenge", va("%i", clc.challenge));
 
-        strcpy(data, "connect ");
+        strncpyz(data, "connect ", sizeof(data));
         // TTimo adding " " around the userinfo string to avoid truncated userinfo on the server
         //   (Com_TokenizeString tokenizes around spaces)
         data[8] = '"';

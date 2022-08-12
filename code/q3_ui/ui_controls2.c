@@ -625,7 +625,7 @@ static void Controls_DrawKeyBinding(void* self)
 
     b1 = g_bindings[a->generic.id].bind1;
     if (b1 == -1)
-        strcpy(name, "???");
+        strncpyz(name, "???", sizeof(name));
     else {
         trap_Key_KeynumToStringBuf(b1, name, 32);
         Q_strupr(name);
@@ -678,7 +678,7 @@ static void Controls_DrawPlayer(void* self)
     trap_Cvar_VariableStringBuffer("model", buf, sizeof(buf));
     if (strcmp(buf, s_controls.playerModel) != 0) {
         UI_PlayerInfo_SetModel(&s_controls.playerinfo, buf);
-        strcpy(s_controls.playerModel, buf);
+        strncpyz(s_controls.playerModel, buf, sizeof(s_controls.playerModel));
         Controls_UpdateModel(ANIM_IDLE);
     }
 

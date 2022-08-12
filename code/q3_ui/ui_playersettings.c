@@ -216,7 +216,7 @@ static void PlayerSettings_DrawPlayer(void* self)
     trap_Cvar_VariableStringBuffer("model", buf, sizeof(buf));
     if (strcmp(buf, s_playersettings.playerModel) != 0) {
         UI_PlayerInfo_SetModel(&s_playersettings.playerinfo, buf);
-        strcpy(s_playersettings.playerModel, buf);
+        strncpyz(s_playersettings.playerModel, buf, sizeof(s_playersettings.playerModel));
 
         viewangles[YAW] = 180 - 30;
         viewangles[PITCH] = 0;

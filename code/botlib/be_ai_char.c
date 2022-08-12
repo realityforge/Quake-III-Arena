@@ -167,7 +167,7 @@ static bot_character_t* BotLoadCharacterFromFile(char* charfile, int skill)
         return NULL;
     }
     ch = (bot_character_t*)GetClearedMemory(sizeof(bot_character_t) + MAX_CHARACTERISTICS * sizeof(bot_characteristic_t));
-    strcpy(ch->filename, charfile);
+    strncpyz(ch->filename, charfile, sizeof(ch->filename));
     while (PC_ReadToken(source, &token)) {
         if (!strcmp(token.string, "skill")) {
             if (!PC_ExpectTokenType(source, TT_NUMBER, 0, &token)) {
@@ -403,7 +403,7 @@ static int BotInterpolateCharacters(int handle1, int handle2, float desiredskill
         return 0;
     out = (bot_character_t*)GetClearedMemory(sizeof(bot_character_t) + MAX_CHARACTERISTICS * sizeof(bot_characteristic_t));
     out->skill = desiredskill;
-    strcpy(out->filename, ch1->filename);
+    strncpyz(out->filename, ch1->filename, sizeof(out->filename));
     botcharacters[handle] = out;
 
     scale = (float)(desiredskill - ch1->skill) / (ch2->skill - ch1->skill);

@@ -47,8 +47,8 @@ void AddRemap(const char* oldShader, const char* newShader, float timeOffset)
         }
     }
     if (remapCount < MAX_SHADER_REMAPS) {
-        strcpy(remappedShaders[remapCount].newShader, newShader);
-        strcpy(remappedShaders[remapCount].oldShader, oldShader);
+        strncpyz(remappedShaders[remapCount].newShader, newShader, sizeof(remappedShaders[remapCount].newShader));
+        strncpyz(remappedShaders[remapCount].oldShader, oldShader, sizeof(remappedShaders[remapCount].oldShader));
         remappedShaders[remapCount].timeOffset = timeOffset;
         remapCount++;
     }

@@ -490,7 +490,7 @@ static void SV_ConSay_f()
         return;
     }
 
-    strcpy(text, "console: ");
+    strncpyz(text, "console: ", sizeof(text));
     p = Cmd_Args();
 
     if (*p == '"') {

@@ -667,7 +667,7 @@ static void ArenaServers_LoadFavorites()
         // favorite server addresses must be maintained outside refresh list
         // this mimics local and global netadr's stored in client
         // these can be fetched to fill ping list
-        strcpy(g_arenaservers.favoriteaddresses[g_numfavoriteservers], adrstr);
+        strncpyz(g_arenaservers.favoriteaddresses[g_numfavoriteservers], adrstr, sizeof(g_arenaservers.favoriteaddresses[g_numfavoriteservers]));
 
         // find this server in the old list
         for (j = 0; j < numtempitems; j++)
@@ -826,12 +826,12 @@ static void ArenaServers_DoRefresh()
         // get an address to ping
 
         if (g_servertype == AS_FAVORITES) {
-            strcpy(adrstr, g_arenaservers.favoriteaddresses[g_arenaservers.currentping]);
+            strncpyz(adrstr, g_arenaservers.favoriteaddresses[g_arenaservers.currentping], sizeof(adrstr));
         } else {
             trap_LAN_GetServerAddressString(g_servertype, g_arenaservers.currentping, adrstr, MAX_ADDRESSLENGTH);
         }
 
-        strcpy(g_arenaservers.pinglist[j].adrstr, adrstr);
+        strncpyz(g_arenaservers.pinglist[j].adrstr, adrstr, sizeof(g_arenaservers.pinglist[j].adrstr));
         g_arenaservers.pinglist[j].start = uis.realtime;
 
         trap_Cmd_ExecuteText(EXEC_NOW, va("ping %s\n", adrstr));
@@ -893,19 +893,19 @@ static void ArenaServers_StartRefresh()
             break;
 
         case GAMES_FFA:
-            strcpy(myargs, " ffa");
+            strncpyz(myargs, " ffa", sizeof(myargs));
             break;
 
         case GAMES_TEAMPLAY:
-            strcpy(myargs, " team");
+            strncpyz(myargs, " team", sizeof(myargs));
             break;
 
         case GAMES_TOURNEY:
-            strcpy(myargs, " tourney");
+            strncpyz(myargs, " tourney", sizeof(myargs));
             break;
 
         case GAMES_CTF:
-            strcpy(myargs, " ctf");
+            strncpyz(myargs, " ctf", sizeof(myargs));
             break;
         }
 

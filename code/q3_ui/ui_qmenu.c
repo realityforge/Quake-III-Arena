@@ -107,7 +107,7 @@ static void Text_Draw(menutext_s* t)
 
     // possible label
     if (t->generic.name)
-        strcpy(buff, t->generic.name);
+        strncpyz(buff, t->generic.name, sizeof(buff));
 
     // possible value
     if (t->string)

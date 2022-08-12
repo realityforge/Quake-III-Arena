@@ -692,28 +692,28 @@ int PS_ExpectTokenType(script_t* script, int type, int subtype, token_t* token)
 
     if (token->type != type) {
         if (type == TT_STRING)
-            strcpy(str, "string");
+            strncpyz(str, "string", sizeof(str));
         if (type == TT_LITERAL)
-            strcpy(str, "literal");
+            strncpyz(str, "literal", sizeof(str));
         if (type == TT_NUMBER)
-            strcpy(str, "number");
+            strncpyz(str, "number", sizeof(str));
         if (type == TT_NAME)
-            strcpy(str, "name");
+            strncpyz(str, "name", sizeof(str));
         if (type == TT_PUNCTUATION)
-            strcpy(str, "punctuation");
+            strncpyz(str, "punctuation", sizeof(str));
         ScriptError(script, "expected a %s, found %s", str, token->string);
         return 0;
     }
     if (token->type == TT_NUMBER) {
         if ((token->subtype & subtype) != subtype) {
             if (subtype & TT_DECIMAL)
-                strcpy(str, "decimal");
+                strncpyz(str, "decimal", sizeof(str));
             if (subtype & TT_HEX)
-                strcpy(str, "hex");
+                strncpyz(str, "hex", sizeof(str));
             if (subtype & TT_OCTAL)
-                strcpy(str, "octal");
+                strncpyz(str, "octal", sizeof(str));
             if (subtype & TT_BINARY)
-                strcpy(str, "binary");
+                strncpyz(str, "binary", sizeof(str));
             if (subtype & TT_LONG)
                 strcat(str, " long");
             if (subtype & TT_UNSIGNED)
@@ -787,7 +787,7 @@ script_t* LoadScriptFile(const char* filename)
     buffer = GetClearedMemory(sizeof(script_t) + length + 1);
     script = (script_t*)buffer;
     memset(script, 0, sizeof(script_t));
-    strcpy(script->filename, filename);
+    strncpyz(script->filename, filename, sizeof(script->filename));
     script->buffer = (char*)buffer + sizeof(script_t);
     script->buffer[length] = 0;
     script->length = length;
@@ -814,7 +814,7 @@ script_t* LoadScriptMemory(const char* ptr, const int length, const char* name)
     buffer = GetClearedMemory(sizeof(script_t) + length + 1);
     script = (script_t*)buffer;
     memset(script, 0, sizeof(script_t));
-    strcpy(script->filename, name);
+    strncpyz(script->filename, name, sizeof(script->filename));
     script->buffer = (char*)buffer + sizeof(script_t);
     script->buffer[length] = 0;
     script->length = length;
