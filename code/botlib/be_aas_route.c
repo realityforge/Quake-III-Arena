@@ -103,9 +103,7 @@ static void AAS_InitTravelFlagFromType()
 }
 static inline int AAS_TravelFlagForType_inline(int traveltype)
 {
-    int tfl;
-
-    tfl = 0;
+    int tfl = 0;
     if (traveltype & TRAVELFLAG_NOTTEAM1)
         tfl |= TFL_NOTTEAM1;
     if (traveltype & TRAVELFLAG_NOTTEAM2)
@@ -113,8 +111,7 @@ static inline int AAS_TravelFlagForType_inline(int traveltype)
     traveltype &= TRAVELTYPE_MASK;
     if (traveltype < 0 || traveltype >= MAX_TRAVELTYPES)
         return TFL_INVALID;
-    tfl |= aasworld.travelflagfortype[traveltype];
-    return tfl;
+    return tfl | aasworld.travelflagfortype[traveltype];
 }
 int AAS_TravelFlagForType(int traveltype)
 {
