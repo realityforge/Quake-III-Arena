@@ -1382,7 +1382,7 @@ int AAS_NextAreaReachability(int areanum, int reachnum)
         return settings->firstreachablearea;
     }
     if (reachnum < settings->firstreachablearea) {
-        botimport.Print(PRT_FATAL, "AAS_NextAreaReachability: reachnum < settings->firstreachableara");
+        botimport.Print(PRT_FATAL, "AAS_NextAreaReachability: reachnum < settings->firstreachableara\n");
         return 0;
     }
     reachnum++;
