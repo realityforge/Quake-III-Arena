@@ -276,7 +276,6 @@ static int SV_GameSystemCalls(int* args)
         return 0;
     case G_ERROR:
         Com_Error(ERR_DROP, "%s", (const char*)VMA(1));
-        return 0;
     case G_MILLISECONDS:
         return Sys_Milliseconds();
     case G_CVAR_REGISTER:
