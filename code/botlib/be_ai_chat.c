@@ -475,7 +475,8 @@ static void StringReplaceWords(char* string, char* synonym, char* replacement)
 }
 static bot_synonymlist_t* BotLoadSynonyms(char* filename)
 {
-    int pass, size, contextlevel, numsynonyms;
+    int pass, contextlevel, numsynonyms;
+    size_t size;
     unsigned long int context, contextstack[32];
     char* ptr = NULL;
     source_t* source;
@@ -526,7 +527,7 @@ static bot_synonymlist_t* BotLoadSynonyms(char* filename)
                     context &= ~contextstack[contextlevel];
                 } else if (!strcmp(token.string, "[")) {
                     size += sizeof(bot_synonymlist_t);
-                    if (pass && ptr) {
+                    if (NULL != ptr) {
                         syn = (bot_synonymlist_t*)ptr;
                         ptr += sizeof(bot_synonymlist_t);
                         syn->context = context;
@@ -541,7 +542,6 @@ static bot_synonymlist_t* BotLoadSynonyms(char* filename)
                     numsynonyms = 0;
                     lastsynonym = NULL;
                     while (1) {
-                        size_t len;
                         if (!PC_ExpectTokenString(source, "(") || !PC_ExpectTokenType(source, TT_STRING, 0, &token)) {
                             FreeSource(source);
                             return NULL;
@@ -552,14 +552,13 @@ static bot_synonymlist_t* BotLoadSynonyms(char* filename)
                             FreeSource(source);
                             return NULL;
                         }
-                        len = strlen(token.string) + 1;
-                        len = PAD(len, sizeof(long));
-                        size += sizeof(bot_synonym_t) + len;
-                        if (pass && ptr) {
+                        const size_t token_size = PAD(strlen(token.string) + 1, sizeof(long));
+                        size += sizeof(bot_synonym_t) + token_size;
+                        if (NULL != ptr) {
                             synonym = (bot_synonym_t*)ptr;
                             ptr += sizeof(bot_synonym_t);
                             synonym->string = ptr;
-                            ptr += len;
+                            ptr += token_size;
                             strcpy(synonym->string, token.string);
                             if (lastsynonym)
                                 lastsynonym->next = synonym;
@@ -572,7 +571,7 @@ static bot_synonymlist_t* BotLoadSynonyms(char* filename)
                             FreeSource(source);
                             return NULL;
                         }
-                        if (pass && ptr) {
+                        if (NULL != ptr) {
                             synonym->weight = token.floatvalue;
                             syn->totalweight += synonym->weight;
                         }
@@ -738,7 +737,8 @@ static int BotLoadChatMessage(source_t* source, char* chatmessagestring)
 }
 static bot_randomlist_t* BotLoadRandomStrings(char* filename)
 {
-    int pass, size;
+    int pass;
+    size_t size;
     char *ptr = NULL, chatmessagestring[MAX_MESSAGE_SIZE];
     source_t* source;
     token_t token;
@@ -765,20 +765,18 @@ static bot_randomlist_t* BotLoadRandomStrings(char* filename)
         randomlist = NULL; // list
         lastrandom = NULL; // last
         while (PC_ReadToken(source, &token)) {
-            size_t len;
             if (token.type != TT_NAME) {
                 SourceError(source, "unknown random %s", token.string);
                 FreeSource(source);
                 return NULL;
             }
-            len = strlen(token.string) + 1;
-            len = PAD(len, sizeof(long));
-            size += sizeof(bot_randomlist_t) + len;
-            if (pass && ptr) {
+            const size_t token_size = PAD(strlen(token.string) + 1, sizeof(long));
+            size += sizeof(bot_randomlist_t) + token_size;
+            if (NULL != ptr) {
                 random = (bot_randomlist_t*)ptr;
                 ptr += sizeof(bot_randomlist_t);
                 random->string = ptr;
-                ptr += len;
+                ptr += token_size;
                 strcpy(random->string, token.string);
                 random->firstrandomstring = NULL;
                 random->numstrings = 0;
@@ -797,14 +795,13 @@ static bot_randomlist_t* BotLoadRandomStrings(char* filename)
                     FreeSource(source);
                     return NULL;
                 }
-                len = strlen(chatmessagestring) + 1;
-                len = PAD(len, sizeof(long));
-                size += sizeof(bot_randomstring_t) + len;
-                if (pass && ptr) {
+                const size_t chatmessage_size = PAD(strlen(chatmessagestring) + 1, sizeof(long));
+                size += sizeof(bot_randomstring_t) + chatmessage_size;
+                if (NULL != ptr) {
                     randomstring = (bot_randomstring_t*)ptr;
                     ptr += sizeof(bot_randomstring_t);
                     randomstring->string = ptr;
-                    ptr += len;
+                    ptr += chatmessage_size;
                     strcpy(randomstring->string, chatmessagestring);
                     random->numstrings++;
                     randomstring->next = random->firstrandomstring;
@@ -1471,7 +1468,8 @@ static bot_replychat_t* BotLoadReplyChat(char* filename)
 }
 static bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
 {
-    int pass, foundchat, indent, size;
+    int pass, foundchat, indent;
+    size_t size;
     char* ptr = NULL;
     char chatmessagestring[MAX_MESSAGE_SIZE];
     source_t* source;
@@ -1538,7 +1536,7 @@ static bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
                             return NULL;
                         }
                         StripDoubleQuotes(token.string);
-                        if (pass && ptr) {
+                        if (NULL != ptr) {
                             chattype = (bot_chattype_t*)ptr;
                             strncpyz(chattype->name, token.string, sizeof(chattype->name));
                             chattype->firstchatmessage = NULL;
@@ -1550,14 +1548,12 @@ static bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
                         size += sizeof(bot_chattype_t);
                         // read the chat messages
                         while (!PC_CheckTokenString(source, "}")) {
-                            size_t len;
                             if (!BotLoadChatMessage(source, chatmessagestring)) {
                                 FreeSource(source);
                                 return NULL;
                             }
-                            len = strlen(chatmessagestring) + 1;
-                            len = PAD(len, sizeof(long));
-                            if (pass && ptr) {
+                            const size_t chat_message_size = PAD(strlen(chatmessagestring) + 1, sizeof(long));
+                            if (NULL != ptr) {
                                 chatmessage = (bot_chatmessage_t*)ptr;
                                 chatmessage->time = -2 * CHATMESSAGE_RECENTTIME;
                                 // put the chat message in the list
@@ -1567,11 +1563,11 @@ static bot_chat_t* BotLoadInitialChat(char* chatfile, char* chatname)
                                 ptr += sizeof(bot_chatmessage_t);
                                 chatmessage->chatmessage = ptr;
                                 strcpy(chatmessage->chatmessage, chatmessagestring);
-                                ptr += len;
+                                ptr += chat_message_size;
                                 // the number of chat messages increased
                                 chattype->numchatmessages++;
                             }
-                            size += sizeof(bot_chatmessage_t) + len;
+                            size += sizeof(bot_chatmessage_t) + chat_message_size;
                         }
                     }
                 } else // skip the bot chat
