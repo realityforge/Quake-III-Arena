@@ -373,7 +373,7 @@ Shift down the remaining args
 Redirect all printfs
 ===============
 */
-static void SVC_RemoteCommand(netadr_t from, msg_t* msg)
+static void SVC_RemoteCommand(netadr_t from)
 {
     bool valid;
     unsigned int time;
@@ -469,7 +469,7 @@ static void SV_ConnectionlessPacket(netadr_t from, msg_t* msg)
     } else if (!Q_stricmp(c, "connect")) {
         SV_DirectConnect(from);
     } else if (!Q_stricmp(c, "rcon")) {
-        SVC_RemoteCommand(from, msg);
+        SVC_RemoteCommand(from);
     } else if (!Q_stricmp(c, "disconnect")) {
         // if a client starts up a local server, we may see some spurious
         // server disconnect messages when their new server sees our final
