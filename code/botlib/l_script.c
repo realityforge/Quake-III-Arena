@@ -697,31 +697,29 @@ int PS_ExpectTokenType(script_t* script, int type, int subtype, token_t* token)
     }
 
     if (token->type != type) {
-        strcpy(str, "");
         if (type == TT_STRING)
-            strcpy(str, "string");
+            strncpyz(str, "string", sizeof(str));
         if (type == TT_LITERAL)
-            strcpy(str, "literal");
+            strncpyz(str, "literal", sizeof(str));
         if (type == TT_NUMBER)
-            strcpy(str, "number");
+            strncpyz(str, "number", sizeof(str));
         if (type == TT_NAME)
-            strcpy(str, "name");
+            strncpyz(str, "name", sizeof(str));
         if (type == TT_PUNCTUATION)
-            strcpy(str, "punctuation");
+            strncpyz(str, "punctuation", sizeof(str));
         ScriptError(script, "expected a %s, found %s", str, token->string);
         return 0;
     }
     if (token->type == TT_NUMBER) {
         if ((token->subtype & subtype) != subtype) {
-            strcpy(str, "");
             if (subtype & TT_DECIMAL)
-                strcpy(str, "decimal");
+                strncpyz(str, "decimal", sizeof(str));
             if (subtype & TT_HEX)
-                strcpy(str, "hex");
+                strncpyz(str, "hex", sizeof(str));
             if (subtype & TT_OCTAL)
-                strcpy(str, "octal");
+                strncpyz(str, "octal", sizeof(str));
             if (subtype & TT_BINARY)
-                strcpy(str, "binary");
+                strncpyz(str, "binary", sizeof(str));
             if (subtype & TT_LONG)
                 strcat(str, " long");
             if (subtype & TT_UNSIGNED)
@@ -749,7 +747,7 @@ int PS_ExpectTokenType(script_t* script, int type, int subtype, token_t* token)
 void StripDoubleQuotes(char* string)
 {
     if (*string == '\"') {
-        memmove(string, string + 1, strlen(string));
+        strcpy(string, string + 1);
     }
     if (string[strlen(string) - 1] == '\"') {
         string[strlen(string) - 1] = '\0';
@@ -758,7 +756,7 @@ void StripDoubleQuotes(char* string)
 void StripSingleQuotes(char* string)
 {
     if (*string == '\'') {
-        memmove(string, string + 1, strlen(string));
+        strcpy(string, string + 1);
     }
     if (string[strlen(string) - 1] == '\'') {
         string[strlen(string) - 1] = '\0';

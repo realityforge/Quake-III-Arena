@@ -362,7 +362,7 @@ static int PC_ExpandBuiltinDefine(source_t* source, token_t* deftoken, define_t*
         break;
     }
     case BUILTIN_FILE: {
-        strcpy(token->string, source->scriptstack->filename);
+        strncpyz(token->string, source->scriptstack->filename, sizeof(token->string));
         token->type = TT_NAME;
         token->subtype = strlen(token->string);
         *firsttoken = token;
@@ -372,7 +372,7 @@ static int PC_ExpandBuiltinDefine(source_t* source, token_t* deftoken, define_t*
     case BUILTIN_DATE: {
         t = time(NULL);
         curtime = ctime(&t);
-        strcpy(token->string, "\"");
+        strncpyz(token->string, "\"", sizeof(token->string));
         strncat(token->string, curtime + 4, 7);
         strncat(token->string + 7, curtime + 20, 4);
         strcat(token->string, "\"");
@@ -386,7 +386,7 @@ static int PC_ExpandBuiltinDefine(source_t* source, token_t* deftoken, define_t*
     case BUILTIN_TIME: {
         t = time(NULL);
         curtime = ctime(&t);
-        strcpy(token->string, "\"");
+        strncpyz(token->string, "\"", sizeof(token->string));
         strncat(token->string, curtime + 11, 8);
         strcat(token->string, "\"");
         free(curtime);
@@ -1643,7 +1643,7 @@ static int PC_Directive_error(source_t* source)
 {
     token_t token;
 
-    strcpy(token.string, "");
+    strncpyz(token.string, "", sizeof(token.string));
     PC_ReadSourceToken(source, &token);
     SourceError(source, "#error directive: %s", token.string);
     return false;
@@ -1665,7 +1665,7 @@ static void UnreadSignToken(source_t* source)
     token.whitespace_p = source->scriptstack->script_p;
     token.endwhitespace_p = source->scriptstack->script_p;
     token.linescrossed = 0;
-    strcpy(token.string, "-");
+    strncpyz(token.string, "-", sizeof(token.string));
     token.type = TT_PUNCTUATION;
     token.subtype = P_SUB;
     PC_UnreadSourceToken(source, &token);

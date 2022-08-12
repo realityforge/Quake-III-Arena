@@ -1114,7 +1114,7 @@ void BotMatchVariable(bot_match_t* match, int variable, char* buf, int size)
 {
     if (variable < 0 || variable >= MAX_MATCHVARIABLES) {
         botimport.Print(PRT_FATAL, "BotMatchVariable: variable out of range\n");
-        strcpy(buf, "");
+        strncpyz(buf, "", size);
         return;
     }
 
@@ -1124,7 +1124,7 @@ void BotMatchVariable(bot_match_t* match, int variable, char* buf, int size)
         assert(match->variables[variable].offset >= 0);
         strncpyz(buf, &match->string[(int)match->variables[variable].offset], size);
     } else {
-        strcpy(buf, "");
+        strncpyz(buf, "", size);
     }
 }
 static bot_stringlist_t* BotFindStringInList(bot_stringlist_t* list, char* string)
@@ -1395,7 +1395,7 @@ static bot_replychat_t* BotLoadReplyChat(char* filename)
             } else if (PC_CheckTokenString(source, "<")) // bot names
             {
                 key->flags |= RCKFL_BOTNAMES;
-                strcpy(namebuffer, "");
+                strncpyz(namebuffer, "", sizeof(namebuffer));
                 do {
                     if (!PC_ExpectTokenType(source, TT_STRING, 0, &token)) {
                         BotFreeReplyChat(replychatlist);
@@ -1774,12 +1774,12 @@ static void BotConstructChatMessage(bot_chatstate_t* chatstate, char* message, u
     int i;
     char srcmessage[MAX_MESSAGE_SIZE];
 
-    strcpy(srcmessage, message);
+    strncpyz(srcmessage, message, sizeof(srcmessage));
     for (i = 0; i < 10; i++) {
         if (!BotExpandChatMessage(chatstate->chatmessage, srcmessage, mcontext, match, vcontext, reply)) {
             break;
         }
-        strcpy(srcmessage, chatstate->chatmessage);
+        strncpyz(srcmessage, chatstate->chatmessage, sizeof(srcmessage));
     }
     if (i >= 10) {
         botimport.Print(PRT_WARNING, "too many expansions in chat message\n");
@@ -1941,7 +1941,7 @@ int BotReplyChat(int chatstate, char* message, int mcontext, int vcontext, char*
     if (!cs)
         return false;
     memset(&match, 0, sizeof(bot_match_t));
-    strcpy(match.string, message);
+    strncpyz(match.string, message, sizeof(match.string));
     bestpriority = -1;
     bestchatmessage = NULL;
     bestrchat = NULL;
@@ -2105,7 +2105,7 @@ void BotEnterChat(int chatstate, int clientto, int sendto)
             }
         }
         // clear the chat message from the state
-        strcpy(cs->chatmessage, "");
+        strncpyz(cs->chatmessage, "", sizeof(cs->chatmessage));
     }
 }
 void BotGetChatMessage(int chatstate, char* buf, int size)
@@ -2119,7 +2119,7 @@ void BotGetChatMessage(int chatstate, char* buf, int size)
     BotRemoveTildes(cs->chatmessage);
     strncpyz(buf, cs->chatmessage, size);
     // clear the chat message from the state
-    strcpy(cs->chatmessage, "");
+    strncpyz(cs->chatmessage, "", sizeof(cs->chatmessage));
 }
 void BotSetChatGender(int chatstate, int gender)
 {
