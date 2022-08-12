@@ -35,7 +35,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "be_aas_funcs.h"
 #include "be_interface.h"
 #include "be_aas_def.h"
-#include "be_aas_route.h"
 
 // travel time in hundredths of a second = distance * 100 / speed
 #define DISTANCEFACTOR_CROUCH 1.3f // crouch speed = 100
@@ -338,11 +337,7 @@ static void AAS_CalculateAreaTravelTimes()
     aas_reversedlink_t* revlink;
     aas_reachability_t* reach;
     aas_areasettings_t* settings;
-#ifdef DEBUG
-    int starttime;
 
-    starttime = Sys_MilliSeconds();
-#endif
     // if there are still area travel times, free the memory
     if (aasworld.areatraveltimes)
         FreeMemory(aasworld.areatraveltimes);
