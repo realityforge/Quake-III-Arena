@@ -418,17 +418,12 @@ Toggles a cvar for easy single key binding
 */
 static void Cvar_Toggle_f()
 {
-    int v;
-
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         Com_Printf("usage: toggle <variable>\n");
-        return;
+    } else {
+        const int v = (int)Cvar_VariableValue(Cmd_Argv(1));
+        Cvar_Set2(Cmd_Argv(1), va("%i", !v), false);
     }
-
-    v = Cvar_VariableValue(Cmd_Argv(1));
-    v = !v;
-
-    Cvar_Set2(Cmd_Argv(1), va("%i", v), false);
 }
 
 /*
