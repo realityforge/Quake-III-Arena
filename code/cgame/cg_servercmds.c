@@ -975,7 +975,7 @@ static void CG_ServerCommand()
     }
 
     if (Q_stricmp(cmd, "remapShader") == 0) {
-        if (trap_Argc() == 4) {
+        if (4 == trap_Argc()) {
             char shader1[MAX_QPATH];
             char shader2[MAX_QPATH];
             char shader3[MAX_QPATH];

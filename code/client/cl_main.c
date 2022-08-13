@@ -613,7 +613,7 @@ void CL_Record_f(void)
         Com_Printf(S_COLOR_YELLOW "WARNING: You should set 'g_synchronousClients 1' for smoother demo recording\n");
     }
 
-    if (Cmd_Argc() == 2) {
+    if (2 == Cmd_Argc()) {
         s = Cmd_Argv(1);
         strncpyz(demoName, s, sizeof(demoName));
         Com_sprintf(name, sizeof(name), "demos/%s.%s%d", demoName, DEMOEXT, PROTOCOL_VERSION);
@@ -901,7 +901,7 @@ void CL_PlayDemo_f(void)
     int protocol, i;
     char retry[MAX_OSPATH];
 
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         Com_Printf("demo <demoname>\n");
         return;
     }
@@ -2743,7 +2743,7 @@ void CL_Video_f(void)
         return;
     }
 
-    if (Cmd_Argc() == 2) {
+    if (2 == Cmd_Argc()) {
         // explicit filename
         Com_sprintf(filename, sizeof(filename), "videos/%s.avi", Cmd_Argv(1));
     } else {

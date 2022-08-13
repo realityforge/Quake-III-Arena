@@ -1156,7 +1156,7 @@ void Com_Meminfo_f()
     rendererBytes = 0;
     zoneBlocks = 0;
     for (block = mainzone->blocklist.next;; block = block->next) {
-        if (Cmd_Argc() != 1) {
+        if (1 != Cmd_Argc()) {
             Com_Printf("block:%p    size:%7i    tag:%3i\n",
                        (void*)block, block->size, block->tag);
         }
@@ -2078,7 +2078,7 @@ static void Com_Freeze_f()
     float s;
     int start, now;
 
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         Com_Printf("freeze <seconds>\n");
         return;
     }
@@ -2428,7 +2428,7 @@ void Com_WriteConfig_f()
 {
     char filename[MAX_QPATH];
 
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         Com_Printf("Usage: writeconfig <filename>\n");
         return;
     }

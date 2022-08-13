@@ -626,7 +626,7 @@ bool Cvar_Command()
     }
 
     // perform a variable print or set
-    if (Cmd_Argc() == 1) {
+    if (1 == Cmd_Argc()) {
         Cvar_Print(v);
         return true;
     }
@@ -649,7 +649,7 @@ static void Cvar_Print_f()
     char* name;
     cvar_t* cv;
 
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         Com_Printf("usage: print <variable>\n");
         return;
     }
@@ -735,7 +735,7 @@ static void Cvar_Set_f()
 
 static void Cvar_Reset_f()
 {
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         Com_Printf("usage: reset <variable>\n");
         return;
     }
@@ -989,7 +989,7 @@ static void Cvar_Unset_f()
 {
     cvar_t* cv;
 
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         Com_Printf("Usage: %s <varname>\n", Cmd_Argv(0));
         return;
     }

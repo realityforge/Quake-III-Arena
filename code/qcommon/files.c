@@ -2315,7 +2315,7 @@ static void FS_Dir_f()
         return;
     }
 
-    if (Cmd_Argc() == 2) {
+    if (2 == Cmd_Argc()) {
         path = Cmd_Argv(1);
         extension = "";
     } else {

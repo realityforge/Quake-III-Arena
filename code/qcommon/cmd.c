@@ -52,7 +52,7 @@ bind g "cmd use rocket ; +attack ; wait ; -attack ; cmd use blaster"
 */
 void Cmd_Wait_f()
 {
-    if (Cmd_Argc() == 2) {
+    if (2 == Cmd_Argc()) {
         cmd_wait = atoi(Cmd_Argv(1));
         if (cmd_wait < 0)
             cmd_wait = 1; // ignore the argument
@@ -231,7 +231,7 @@ void Cmd_Exec_f()
 
     quiet = !Q_stricmp(Cmd_Argv(0), "execq");
 
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         Com_Printf("exec%s <filename> : execute a script file%s\n",
                    quiet ? "q" : "", quiet ? " without notification" : "");
         return;
@@ -263,7 +263,7 @@ void Cmd_Vstr_f()
 {
     char* v;
 
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         Com_Printf("vstr <variablename> : execute a variable command\n");
         return;
     }

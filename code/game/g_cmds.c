@@ -415,7 +415,7 @@ static void Cmd_TeamTask_f(gentity_t* ent)
     int task;
     int client = ent->client - level.clients;
 
-    if (trap_Argc() != 2) {
+    if (2 != trap_Argc()) {
         return;
     }
     trap_Argv(1, arg, sizeof(arg));
@@ -621,7 +621,7 @@ static void Cmd_Team_f(gentity_t* ent)
     int oldTeam;
     char s[MAX_TOKEN_CHARS];
 
-    if (trap_Argc() != 2) {
+    if (2 != trap_Argc()) {
         oldTeam = ent->client->sess.sessionTeam;
         switch (oldTeam) {
         case TEAM_BLUE:
@@ -663,7 +663,7 @@ static void Cmd_Follow_f(gentity_t* ent)
     int i;
     char arg[MAX_TOKEN_CHARS];
 
-    if (trap_Argc() != 2) {
+    if (2 != trap_Argc()) {
         if (ent->client->sess.spectatorState == SPECTATOR_FOLLOW) {
             StopFollowing(ent);
         }
@@ -1118,7 +1118,7 @@ static void Cmd_GameCommand_f(gentity_t* ent)
     int order;
     char arg[MAX_TOKEN_CHARS];
 
-    if (trap_Argc() != 3) {
+    if (3 != trap_Argc()) {
         trap_SendServerCommand(ent - g_entities, va("print \"Usage: gc <player id> <order 0-%lu>\n\"", (COUNT_OF(gc_orders) - 1)));
         return;
     }
@@ -1522,7 +1522,7 @@ static void Cmd_SetViewpos_f(gentity_t* ent)
         trap_SendServerCommand(ent - g_entities, "print \"Cheats are not enabled on this server.\n\"");
         return;
     }
-    if (trap_Argc() != 5) {
+    if (5 != trap_Argc()) {
         trap_SendServerCommand(ent - g_entities, "print \"usage: setviewpos x y z yaw\n\"");
         return;
     }

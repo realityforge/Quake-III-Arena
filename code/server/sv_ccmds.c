@@ -373,7 +373,7 @@ static void SV_Kick_f()
         return;
     }
 
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         Com_Printf("Usage: kick <player name>\nkick all = kick everyone\nkick allbots = kick all bots\n");
         return;
     }
@@ -494,7 +494,7 @@ static void SV_KickNum_f()
         return;
     }
 
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         Com_Printf("Usage: %s <client number>\n", Cmd_Argv(0));
         return;
     }
@@ -789,7 +789,7 @@ static void SV_DumpUser_f()
         return;
     }
 
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         Com_Printf("Usage: dumpuser <userid>\n");
         return;
     }
