@@ -334,13 +334,12 @@ Returns a single string containing argv(1) to argv(argc()-1)
 char* Cmd_Args()
 {
     static char cmd_args[MAX_STRING_CHARS];
-    int i;
 
     cmd_args[0] = 0;
-    for (i = 1; i < cmd_argc; i++) {
-        strcat(cmd_args, cmd_argv[i]);
+    for (int i = 1; i < cmd_argc; i++) {
+        strncatz(cmd_args, sizeof(cmd_args), cmd_argv[i]);
         if (i != cmd_argc - 1) {
-            strcat(cmd_args, " ");
+            strncatz(cmd_args, sizeof(cmd_args), " ");
         }
     }
 
@@ -363,9 +362,9 @@ char* Cmd_ArgsFrom(int arg)
     if (arg < 0)
         arg = 0;
     for (i = arg; i < cmd_argc; i++) {
-        strcat(cmd_args, cmd_argv[i]);
+        strncatz(cmd_args, sizeof(cmd_args), cmd_argv[i]);
         if (i != cmd_argc - 1) {
-            strcat(cmd_args, " ");
+            strncatz(cmd_args, sizeof(cmd_args), " ");
         }
     }
 

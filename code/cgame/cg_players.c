@@ -587,7 +587,7 @@ static void CG_LoadClientInfo(int clientNum, clientInfo_t* ci)
         }
     }
     if (teamname[0]) {
-        strcat(teamname, "/");
+        strncatz(teamname, sizeof(teamname), "/");
     }
 #endif
     modelloaded = true;

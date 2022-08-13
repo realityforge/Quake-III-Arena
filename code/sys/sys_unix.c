@@ -724,7 +724,7 @@ char* Sys_ExtractBasedir(char* dir)
         } else {
             strncpyz(cwd, Sys_Dirname(cwd), sizeof(cwd));
             if (NULL != strstr(Sys_Basename(cwd), ".app")) {
-                strncat(cwd, PATH_SEPARATOR "Contents" PATH_SEPARATOR "Resources", MAX_OSPATH - 1);
+                strncatz(cwd, sizeof(cwd), PATH_SEPARATOR "Contents" PATH_SEPARATOR "Resources");
                 return cwd;
             } else {
                 return dir;

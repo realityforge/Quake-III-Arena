@@ -971,7 +971,7 @@ void Info_SetValueForKey(char* s, const char* key, const char* value)
         return;
     }
 
-    strcat(newi, s);
+    strncatz(newi, sizeof(newi), s);
     strcpy(s, newi);
 }
 

@@ -1377,7 +1377,7 @@ static void Cmd_CallTeamVote_f(gentity_t* ent)
     arg2[0] = '\0';
     for (i = 2; i < trap_Argc(); i++) {
         if (i > 2)
-            strcat(arg2, " ");
+            strncatz(arg2, sizeof(arg2), " ");
         trap_Argv(i, &arg2[strlen(arg2)], sizeof(arg2) - strlen(arg2));
     }
 

@@ -915,11 +915,11 @@ static void ArenaServers_StartRefresh()
         }
 
         if (g_emptyservers) {
-            strcat(myargs, " empty");
+            strncatz(myargs, sizeof(myargs), " empty");
         }
 
         if (g_fullservers) {
-            strcat(myargs, " full");
+            strncatz(myargs, sizeof(myargs), " full");
         }
 
         protocol[0] = '\0';

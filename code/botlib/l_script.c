@@ -715,13 +715,13 @@ int PS_ExpectTokenType(script_t* script, int type, int subtype, token_t* token)
             if (subtype & TT_BINARY)
                 strncpyz(str, "binary", sizeof(str));
             if (subtype & TT_LONG)
-                strcat(str, " long");
+                strncatz(str, sizeof(str), " long");
             if (subtype & TT_UNSIGNED)
-                strcat(str, " unsigned");
+                strncatz(str, sizeof(str), " unsigned");
             if (subtype & TT_FLOAT)
-                strcat(str, " float");
+                strncatz(str, sizeof(str), " float");
             if (subtype & TT_INTEGER)
-                strcat(str, " integer");
+                strncatz(str, sizeof(str), " integer");
             ScriptError(script, "expected %s, found %s", str, token->string);
             return 0;
         }

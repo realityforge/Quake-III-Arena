@@ -613,7 +613,7 @@ static void Controls_DrawKeyBinding(void* self)
 
     b1 = g_bindings[a->generic.id].bind1;
     if (b1 == -1)
-        strcpy(name, "???");
+        strncpyz(name, "???", sizeof(name));
     else {
         trap_Key_KeynumToStringBuf(b1, name, 32);
         Q_strupr(name);
@@ -623,8 +623,8 @@ static void Controls_DrawKeyBinding(void* self)
             trap_Key_KeynumToStringBuf(b2, name2, 32);
             Q_strupr(name2);
 
-            strcat(name, " or ");
-            strcat(name, name2);
+            strncatz(name, sizeof(name), " or ");
+            strncatz(name, sizeof(name), name2);
         }
     }
 

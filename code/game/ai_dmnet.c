@@ -615,9 +615,9 @@ static int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t*
         if (bs->teammessage_time && bs->teammessage_time < FloatTime()) {
             strcpy(buf, "");
             for (wp = bs->patrolpoints; wp; wp = wp->next) {
-                strcat(buf, wp->name);
+                strncatz(buf, sizeof(buf), wp->name);
                 if (wp->next)
-                    strcat(buf, " to ");
+                    strncatz(buf, sizeof(buf), " to ");
             }
             BotAI_BotInitialChat(bs, "patrol_start", buf, NULL);
             trap_BotEnterChat(bs->cs, bs->decisionmaker, CHAT_TELL);

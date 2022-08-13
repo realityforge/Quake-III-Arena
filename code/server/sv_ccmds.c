@@ -610,7 +610,7 @@ static void SV_ConSay_f()
         return;
     }
 
-    strcpy(text, "console: ");
+    strncpyz(text, "console: ", sizeof(text));
     p = Cmd_Args();
 
     if (*p == '"') {
@@ -618,7 +618,7 @@ static void SV_ConSay_f()
         p[strlen(p) - 1] = 0;
     }
 
-    strcat(text, p);
+    strncatz(text, sizeof(text), p);
 
     Com_Printf("%s\n", text);
     SV_SendServerCommand(NULL, "chat \"%s\"", text);
@@ -646,7 +646,7 @@ static void SV_ConTell_f()
         return;
     }
 
-    strcpy(text, "console_tell: ");
+    strncpyz(text, "console_tell: ", sizeof(text));
     p = Cmd_ArgsFrom(2);
 
     if (*p == '"') {
@@ -654,7 +654,7 @@ static void SV_ConTell_f()
         p[strlen(p) - 1] = 0;
     }
 
-    strcat(text, p);
+    strncatz(text, sizeof(text), p);
 
     Com_Printf("%s\n", text);
     SV_SendServerCommand(cl, "chat \"%s\"", text);
@@ -706,7 +706,7 @@ static void SV_ConSayto_f()
         return;
     }
 
-    strcpy(text, "console_sayto: ");
+    strncpyz(text, "console_sayto: ", sizeof(text));
     p = Cmd_ArgsFrom(2);
 
     if (*p == '"') {
@@ -714,7 +714,7 @@ static void SV_ConSayto_f()
         p[strlen(p) - 1] = 0;
     }
 
-    strcat(text, p);
+    strncatz(text, sizeof(text), p);
 
     Com_Printf("%s\n", text);
     SV_SendServerCommand(saytocl, "chat \"%s\"", text);

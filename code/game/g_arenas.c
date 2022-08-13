@@ -120,7 +120,7 @@ void UpdateTournamentInfo()
         if (msglen >= sizeof(msg)) {
             break;
         }
-        strcat(msg, buf);
+        strncatz(msg, sizeof(msg), buf);
     }
     trap_SendConsoleCommand(EXEC_APPEND, msg);
 }

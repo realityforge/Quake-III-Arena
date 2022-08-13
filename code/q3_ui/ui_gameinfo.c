@@ -169,8 +169,8 @@ static void UI_LoadArenas()
     dirptr = dirlist;
     for (i = 0; i < numdirs; i++, dirptr += dirlen + 1) {
         dirlen = strlen(dirptr);
-        strcpy(filename, "scripts/");
-        strcat(filename, dirptr);
+        strncpyz(filename, "scripts/", sizeof(filename));
+        strncatz(filename, sizeof(filename), dirptr);
         UI_LoadArenasFromFile(filename);
     }
     trap_Print(va("%i arenas parsed\n", ui_numArenas));
@@ -335,8 +335,9 @@ static void UI_LoadBots()
     dirptr = dirlist;
     for (i = 0; i < numdirs; i++, dirptr += dirlen + 1) {
         dirlen = strlen(dirptr);
-        strcpy(filename, "scripts/");
-        strcat(filename, dirptr);
+
+        strncpyz(filename, "scripts/", sizeof(filename));
+        strncatz(filename, sizeof(filename), dirptr);
         UI_LoadBotsFromFile(filename);
     }
     trap_Print(va("%i bots parsed\n", ui_numBots));
