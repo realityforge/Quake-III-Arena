@@ -668,44 +668,17 @@ static void Cvar_Print_f()
 ============
 Cvar_Toggle_f
 
-Toggles a cvar for easy single key binding, optionally through a list of
-given values
+Toggles a cvar for easy single key binding
 ============
 */
 static void Cvar_Toggle_f()
 {
-    int i, c = Cmd_Argc();
-    char* curval;
-
-    if (c < 2) {
-        Com_Printf("usage: toggle <variable> [value1, value2, ...]\n");
-        return;
+    if (2 != Cmd_Argc()) {
+        Com_Printf("usage: toggle <variable>\n");
+    } else {
+        const int v = (int)Cvar_VariableValue(Cmd_Argv(1));
+        Cvar_Set2(Cmd_Argv(1), va("%i", !v), false);
     }
-
-    if (c == 2) {
-        Cvar_Set2(Cmd_Argv(1), va("%d", !Cvar_VariableValue(Cmd_Argv(1))),
-                  false);
-        return;
-    }
-
-    if (c == 3) {
-        Com_Printf("toggle: nothing to toggle to\n");
-        return;
-    }
-
-    curval = Cvar_VariableString(Cmd_Argv(1));
-
-    // don't bother checking the last arg for a match since the desired
-    // behaviour is the same as no match (set to the first argument)
-    for (i = 2; i + 1 < c; i++) {
-        if (strcmp(curval, Cmd_Argv(i)) == 0) {
-            Cvar_Set2(Cmd_Argv(1), Cmd_Argv(i + 1), false);
-            return;
-        }
-    }
-
-    // fallback
-    Cvar_Set2(Cmd_Argv(1), Cmd_Argv(2), false);
 }
 
 /*
