@@ -123,12 +123,10 @@ char* Cvar_VariableString(const char* var_name)
     return var->string;
 }
 
-void Cvar_VariableStringBuffer(const char* var_name, char* buffer, int bufsize)
+void Cvar_VariableStringBuffer(const char* var_name, char* buffer, const size_t bufsize)
 {
-    cvar_t* var;
-
-    var = Cvar_FindVar(var_name);
-    if (!var) {
+    const cvar_t* var = Cvar_FindVar(var_name);
+    if (NULL == var) {
         *buffer = 0;
     } else {
         strncpyz(buffer, var->string, bufsize);
