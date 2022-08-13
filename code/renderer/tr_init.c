@@ -498,7 +498,7 @@ void R_ScreenShot_f()
         silent = false;
     }
 
-    if (ri.Cmd_Argc() == 2 && !silent) {
+    if (2 == ri.Cmd_Argc() && !silent) {
         // explicit filename
         Com_sprintf(checkname, MAX_OSPATH, "screenshots/%s.png", ri.Cmd_Argv(1));
     } else {
@@ -546,7 +546,7 @@ static void R_ScreenShotJPEG_f()
         silent = false;
     }
 
-    if (ri.Cmd_Argc() == 2 && !silent) {
+    if (2 == ri.Cmd_Argc() && !silent) {
         // explicit filename
         Com_sprintf(checkname, MAX_OSPATH, "screenshots/%s.jpg", ri.Cmd_Argv(1));
     } else {

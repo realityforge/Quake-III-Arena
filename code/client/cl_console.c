@@ -161,7 +161,7 @@ void Con_Dump_f(void)
     fileHandle_t f;
     char buffer[1024];
 
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         Com_Printf("usage: condump <filename>\n");
         return;
     }

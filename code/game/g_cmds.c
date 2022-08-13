@@ -419,7 +419,7 @@ static void Cmd_TeamTask_f(gentity_t* ent)
     int task;
     int client = ent->client - level.clients;
 
-    if (trap_Argc() != 2) {
+    if (2 != trap_Argc()) {
         return;
     }
     trap_Argv(1, arg, sizeof(arg));
@@ -613,7 +613,7 @@ static void Cmd_Team_f(gentity_t* ent)
     int oldTeam;
     char s[MAX_TOKEN_CHARS];
 
-    if (trap_Argc() != 2) {
+    if (2 != trap_Argc()) {
         oldTeam = ent->client->sess.sessionTeam;
         switch (oldTeam) {
         case TEAM_BLUE:
@@ -1426,7 +1426,7 @@ static void Cmd_SetViewpos_f(gentity_t* ent)
         trap_SendServerCommand(ent - g_entities, va("print \"Cheats are not enabled on this server.\n\""));
         return;
     }
-    if (trap_Argc() != 5) {
+    if (5 != trap_Argc()) {
         trap_SendServerCommand(ent - g_entities, va("print \"usage: setviewpos x y z yaw\n\""));
         return;
     }

@@ -794,22 +794,18 @@ int Key_GetKey(const char* binding)
     return -1;
 }
 
-void Key_Unbind_f(void)
+void Key_Unbind_f()
 {
-    int b;
-
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         Com_Printf("unbind <key> : remove commands from a key\n");
-        return;
+    } else {
+        const int b = Key_StringToKeynum(Cmd_Argv(1));
+        if (-1 == b) {
+            Com_Printf("\"%s\" isn't a valid key\n", Cmd_Argv(1));
+        } else {
+            Key_SetBinding(b, "");
+        }
     }
-
-    b = Key_StringToKeynum(Cmd_Argv(1));
-    if (b == -1) {
-        Com_Printf("\"%s\" isn't a valid key\n", Cmd_Argv(1));
-        return;
-    }
-
-    Key_SetBinding(b, "");
 }
 
 void Key_Unbindall_f(void)
@@ -823,10 +819,10 @@ void Key_Unbindall_f(void)
 
 void Key_Bind_f(void)
 {
-    int i, c, b;
+    int i, b;
     char cmd[1024];
 
-    c = Cmd_Argc();
+    const uint8_t c = Cmd_Argc();
 
     if (c < 2) {
         Com_Printf("bind <key> [command] : attach a command to a key\n");

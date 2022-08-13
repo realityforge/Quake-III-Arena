@@ -263,7 +263,7 @@ void CL_Record_f(void)
         Com_Printf(S_COLOR_YELLOW "WARNING: You should set 'g_synchronousClients 1' for smoother demo recording\n");
     }
 
-    if (Cmd_Argc() == 2) {
+    if (2 == Cmd_Argc()) {
         s = Cmd_Argv(1);
         strncpyz(demoName, s, sizeof(demoName));
         Com_sprintf(name, sizeof(name), "demos/%s.dm_%d", demoName, PROTOCOL_VERSION);
@@ -461,7 +461,7 @@ void CL_PlayDemo_f(void)
     int protocol, i;
     char retry[MAX_OSPATH];
 
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         Com_Printf("playdemo <demoname>\n");
         return;
     }
@@ -823,7 +823,7 @@ void CL_Connect_f(void)
 {
     char* server;
 
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         Com_Printf("usage: connect [server]\n");
         return;
     }
@@ -2690,7 +2690,7 @@ void CL_Ping_f(void)
     ping_t* pingptr;
     char* server;
 
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         Com_Printf("usage: ping [server]\n");
         return;
     }
@@ -2824,7 +2824,7 @@ void CL_ServerStatus_f(void)
 
     memset(&to, 0, sizeof(netadr_t));
 
-    if (Cmd_Argc() != 2) {
+    if (2 != Cmd_Argc()) {
         if (cls.state != CA_ACTIVE || clc.demoplaying) {
             Com_Printf("Not connected to a server.\n");
             Com_Printf("Usage: serverstatus [server]\n");
