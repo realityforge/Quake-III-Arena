@@ -730,8 +730,8 @@ static bool ParseStage(shaderStage_t* stage, char** text)
                 token = COM_ParseExt(text, false);
                 if (token[0] == 0)
                     break;
-                strcat(buffer, token);
-                strcat(buffer, " ");
+                strncatz(buffer, sizeof(buffer), token);
+                strncatz(buffer, sizeof(buffer), " ");
             }
 
             ParseTexMod(buffer, stage);
@@ -2414,9 +2414,9 @@ static void ScanAndLoadShaderFiles()
 
     // free in reverse order, so the temp files are all dumped
     for (i = numShaders - 1; i >= 0; i--) {
-        strcat(s_shaderText, "\n");
+        strncatz(s_shaderText, sizeof(s_shaderText), "\n");
         p = &s_shaderText[strlen(s_shaderText)];
-        strcat(s_shaderText, buffers[i]);
+        strncatz(s_shaderText, sizeof(s_shaderText), buffers[i]);
         ri.FS_FreeFile(buffers[i]);
         buffers[i] = p;
         COM_Compress(p);

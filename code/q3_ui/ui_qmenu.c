@@ -111,7 +111,7 @@ static void Text_Draw(menutext_s* t)
 
     // possible value
     if (t->string)
-        strcat(buff, t->string);
+        strncatz(buff, sizeof(buff), t->string);
 
     if (t->generic.flags & QMF_GRAYED)
         color = text_color_disabled;

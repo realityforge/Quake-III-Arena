@@ -130,7 +130,7 @@ qhandle_t RE_RegisterModel(const char* name)
                 *strrchr(filename, '.') = 0;
             }
             sprintf(namebuf, "_%d.md3", lod);
-            strcat(filename, namebuf);
+            strncatz(filename, sizeof(filename), namebuf);
         }
 
         ri.FS_ReadFile(filename, (void**)&buf);

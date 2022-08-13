@@ -196,7 +196,7 @@ void Con_Dump_f(void)
             else
                 break;
         }
-        strcat(buffer, "\n");
+        strncatz(buffer, sizeof(buffer), "\n");
         FS_Write(buffer, strlen(buffer), f);
     }
 

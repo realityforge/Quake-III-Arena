@@ -1388,8 +1388,8 @@ static bot_replychat_t* BotLoadReplyChat(char* filename)
                     }
                     StripDoubleQuotes(token.string);
                     if (strlen(namebuffer))
-                        strcat(namebuffer, "\\");
-                    strcat(namebuffer, token.string);
+                        strncatz(namebuffer, sizeof(namebuffer), "\\");
+                    strncatz(namebuffer, sizeof(namebuffer), token.string);
                 } while (PC_CheckTokenString(source, ","));
                 if (!PC_ExpectTokenString(source, ">")) {
                     BotFreeReplyChat(replychatlist);
@@ -1863,49 +1863,49 @@ void BotInitialChat(int chatstate, char* type, int mcontext, char* var0, char* v
     memset(&match, 0, sizeof(match));
     index = 0;
     if (var0) {
-        strcat(match.string, var0);
+        strncatz(match.string, sizeof(match.string), var0);
         match.variables[0].offset = index;
         match.variables[0].length = strlen(var0);
         index += strlen(var0);
     }
     if (var1) {
-        strcat(match.string, var1);
+        strncatz(match.string, sizeof(match.string), var1);
         match.variables[1].offset = index;
         match.variables[1].length = strlen(var1);
         index += strlen(var1);
     }
     if (var2) {
-        strcat(match.string, var2);
+        strncatz(match.string, sizeof(match.string), var2);
         match.variables[2].offset = index;
         match.variables[2].length = strlen(var2);
         index += strlen(var2);
     }
     if (var3) {
-        strcat(match.string, var3);
+        strncatz(match.string, sizeof(match.string), var3);
         match.variables[3].offset = index;
         match.variables[3].length = strlen(var3);
         index += strlen(var3);
     }
     if (var4) {
-        strcat(match.string, var4);
+        strncatz(match.string, sizeof(match.string), var4);
         match.variables[4].offset = index;
         match.variables[4].length = strlen(var4);
         index += strlen(var4);
     }
     if (var5) {
-        strcat(match.string, var5);
+        strncatz(match.string, sizeof(match.string), var5);
         match.variables[5].offset = index;
         match.variables[5].length = strlen(var5);
         index += strlen(var5);
     }
     if (var6) {
-        strcat(match.string, var6);
+        strncatz(match.string, sizeof(match.string), var6);
         match.variables[6].offset = index;
         match.variables[6].length = strlen(var6);
         index += strlen(var6);
     }
     if (var7) {
-        strcat(match.string, var7);
+        strncatz(match.string, sizeof(match.string), var7);
         match.variables[7].offset = index;
         match.variables[7].length = strlen(var7);
     }
@@ -1993,49 +1993,49 @@ int BotReplyChat(int chatstate, char* message, int mcontext, int vcontext, char*
     if (bestchatmessage) {
         index = strlen(bestmatch.string);
         if (var0) {
-            strcat(bestmatch.string, var0);
+            strncatz(bestmatch.string, sizeof(bestmatch.string), var0);
             bestmatch.variables[0].offset = index;
             bestmatch.variables[0].length = strlen(var0);
             index += strlen(var0);
         }
         if (var1) {
-            strcat(bestmatch.string, var1);
+            strncatz(bestmatch.string, sizeof(bestmatch.string), var1);
             bestmatch.variables[1].offset = index;
             bestmatch.variables[1].length = strlen(var1);
             index += strlen(var1);
         }
         if (var2) {
-            strcat(bestmatch.string, var2);
+            strncatz(bestmatch.string, sizeof(bestmatch.string), var2);
             bestmatch.variables[2].offset = index;
             bestmatch.variables[2].length = strlen(var2);
             index += strlen(var2);
         }
         if (var3) {
-            strcat(bestmatch.string, var3);
+            strncatz(bestmatch.string, sizeof(bestmatch.string), var3);
             bestmatch.variables[3].offset = index;
             bestmatch.variables[3].length = strlen(var3);
             index += strlen(var3);
         }
         if (var4) {
-            strcat(bestmatch.string, var4);
+            strncatz(bestmatch.string, sizeof(bestmatch.string), var4);
             bestmatch.variables[4].offset = index;
             bestmatch.variables[4].length = strlen(var4);
             index += strlen(var4);
         }
         if (var5) {
-            strcat(bestmatch.string, var5);
+            strncatz(bestmatch.string, sizeof(bestmatch.string), var5);
             bestmatch.variables[5].offset = index;
             bestmatch.variables[5].length = strlen(var5);
             index += strlen(var5);
         }
         if (var6) {
-            strcat(bestmatch.string, var6);
+            strncatz(bestmatch.string, sizeof(bestmatch.string), var6);
             bestmatch.variables[6].offset = index;
             bestmatch.variables[6].length = strlen(var6);
             index += strlen(var6);
         }
         if (var7) {
-            strcat(bestmatch.string, var7);
+            strncatz(bestmatch.string, sizeof(bestmatch.string), var7);
             bestmatch.variables[7].offset = index;
             bestmatch.variables[7].length = strlen(var7);
         }

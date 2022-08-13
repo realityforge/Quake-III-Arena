@@ -3157,8 +3157,8 @@ static void BindingFromName(const char* cvar)
             if (b2 != -1) {
                 DC->keynumToStringBuf(b2, g_nameBind2, 32);
                 Q_strupr(g_nameBind2);
-                strcat(g_nameBind1, " or ");
-                strcat(g_nameBind1, g_nameBind2);
+                strncatz(g_nameBind1, sizeof(g_nameBind1), " or ");
+                strncatz(g_nameBind1, sizeof(g_nameBind1), g_nameBind2);
             }
             return;
         }

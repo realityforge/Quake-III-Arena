@@ -82,13 +82,13 @@ tryagain:
     if (weaponNum == WP_MACHINEGUN || weaponNum == WP_GAUNTLET || weaponNum == WP_BFG) {
         strncpyz(path, item->world_model[0], sizeof(path));
         COM_StripExtension(path, path);
-        strcat(path, "_barrel.md3");
+        strncatz(path, sizeof(path), "_barrel.md3");
         pi->barrelModel = trap_R_RegisterModel(path);
     }
 
     strncpyz(path, item->world_model[0], sizeof(path));
     COM_StripExtension(path, path);
-    strcat(path, "_flash.md3");
+    strncatz(path, sizeof(path), "_flash.md3");
     pi->flashModel = trap_R_RegisterModel(path);
 
     switch (weaponNum) {

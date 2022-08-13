@@ -107,7 +107,7 @@ static void CG_Obituary(entityState_t* ent)
         return;
     }
     strncpyz(targetName, Info_ValueForKey(targetInfo, "n"), sizeof(targetName) - 2);
-    strcat(targetName, S_COLOR_WHITE);
+    strncatz(targetName, sizeof(targetName), S_COLOR_WHITE);
 
     message2 = "";
 
@@ -233,7 +233,7 @@ static void CG_Obituary(entityState_t* ent)
         strncpyz(attackerName, "noname", sizeof(attackerName));
     } else {
         strncpyz(attackerName, Info_ValueForKey(attackerInfo, "n"), sizeof(attackerName) - sizeof(S_COLOR_WHITE));
-        strcat(attackerName, S_COLOR_WHITE);
+        strncatz(attackerName, sizeof(attackerName), S_COLOR_WHITE);
         // check for kill messages about the current clientNum
         if (target == cg.snap->ps.clientNum) {
             strncpyz(cg.killerName, attackerName, sizeof(cg.killerName));

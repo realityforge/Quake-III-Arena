@@ -1957,7 +1957,7 @@ int FS_GetModList(char* listbuf, int bufsize)
                 // we need to see if there is a description available
                 descPath[0] = '\0';
                 strncpyz(descPath, name, sizeof(descPath));
-                strcat(descPath, "/description.txt");
+                strncatz(descPath, sizeof(descPath), "/description.txt");
                 nDescLen = FS_SV_FOpenFileRead(descPath, &descHandle);
                 if (nDescLen > 0 && descHandle) {
                     FILE* file;

@@ -457,9 +457,9 @@ static void Cvar_Set_f()
         if (l + len >= MAX_STRING_TOKENS - 2) {
             break;
         }
-        strcat(combined, Cmd_Argv(i));
+        strncatz(combined, sizeof(combined), Cmd_Argv(i));
         if (i != c - 1) {
-            strcat(combined, " ");
+            strncatz(combined, sizeof(combined), " ");
         }
         l += len;
     }

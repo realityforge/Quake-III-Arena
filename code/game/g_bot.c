@@ -156,7 +156,7 @@ static void G_LoadArenas()
     for (i = 0; i < numdirs; i++, dirptr += dirlen + 1) {
         dirlen = strlen(dirptr);
         strncpyz(filename, "scripts/", sizeof(filename));
-        strcat(filename, dirptr);
+        strncatz(filename, sizeof(filename), dirptr);
         G_LoadArenasFromFile(filename);
     }
     trap_Printf(va("%i arenas parsed\n", g_numArenas));
@@ -808,7 +808,7 @@ static void G_LoadBots()
     for (i = 0; i < numdirs; i++, dirptr += dirlen + 1) {
         dirlen = strlen(dirptr);
         strncpyz(filename, "scripts/", sizeof(filename));
-        strcat(filename, dirptr);
+        strncatz(filename, sizeof(filename), dirptr);
         G_LoadBotsFromFile(filename);
     }
     trap_Printf(va("%i bots parsed\n", g_numBots));

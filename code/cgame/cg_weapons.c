@@ -610,17 +610,17 @@ void CG_RegisterWeapon(int weaponNum)
 
     strncpyz(path, item->world_model[0], sizeof(path));
     COM_StripExtension(path, path);
-    strcat(path, "_flash.md3");
+    strncatz(path, sizeof(path), "_flash.md3");
     weaponInfo->flashModel = trap_R_RegisterModel(path);
 
     strncpyz(path, item->world_model[0], sizeof(path));
     COM_StripExtension(path, path);
-    strcat(path, "_barrel.md3");
+    strncatz(path, sizeof(path), "_barrel.md3");
     weaponInfo->barrelModel = trap_R_RegisterModel(path);
 
     strncpyz(path, item->world_model[0], sizeof(path));
     COM_StripExtension(path, path);
-    strcat(path, "_hand.md3");
+    strncatz(path, sizeof(path), "_hand.md3");
     weaponInfo->handsModel = trap_R_RegisterModel(path);
 
     if (!weaponInfo->handsModel) {

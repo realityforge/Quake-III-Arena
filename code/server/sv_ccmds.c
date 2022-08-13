@@ -498,7 +498,7 @@ static void SV_ConSay_f()
         p[strlen(p) - 1] = 0;
     }
 
-    strcat(text, p);
+    strncatz(text, sizeof(text), p);
 
     SV_SendServerCommand(NULL, "chat \"%s\n\"", text);
 }

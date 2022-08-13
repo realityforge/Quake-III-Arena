@@ -635,8 +635,8 @@ static void Controls_DrawKeyBinding(void* self)
             trap_Key_KeynumToStringBuf(b2, name2, 32);
             Q_strupr(name2);
 
-            strcat(name, " or ");
-            strcat(name, name2);
+            strncatz(name, sizeof(name), " or ");
+            strncatz(name, sizeof(name), name2);
         }
     }
 

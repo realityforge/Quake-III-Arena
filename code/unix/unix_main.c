@@ -444,8 +444,8 @@ int main(int argc, char* argv[])
     *cmdline = 0;
     for (i = 1; i < argc; i++) {
         if (i > 1)
-            strcat(cmdline, " ");
-        strcat(cmdline, argv[i]);
+            strncatz(cmdline, sizeof(cmdline), " ");
+        strncatz(cmdline, sizeof(cmdline), argv[i]);
     }
 
     // clear queues

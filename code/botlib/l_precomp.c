@@ -252,7 +252,7 @@ static int PC_StringizeTokens(token_t* tokens, token_t* token)
     token->whitespace_p = NULL;
     token->endwhitespace_p = NULL;
     token->string[0] = '\0';
-    strcat(token->string, "\"");
+    strncatz(token->string, sizeof(token->string), "\"");
     for (t = tokens; t; t = t->next) {
         strncat(token->string, t->string, MAX_TOKEN - strlen(token->string));
     }
@@ -263,7 +263,7 @@ static int PC_MergeTokens(token_t* t1, token_t* t2)
 {
     // merging of a name with a name or number
     if (t1->type == TT_NAME && (t2->type == TT_NAME || t2->type == TT_NUMBER)) {
-        strcat(t1->string, t2->string);
+        strncatz(t1->string, sizeof(t1->string), t2->string);
         return true;
     }
     // merging of two strings
@@ -271,7 +271,7 @@ static int PC_MergeTokens(token_t* t1, token_t* t2)
         // remove trailing double quote
         t1->string[strlen(t1->string) - 1] = '\0';
         // concat without leading double quote
-        strcat(t1->string, &t2->string[1]);
+        strncatz(t1->string, sizeof(t1->string), &t2->string[1]);
         return true;
     }
     // FIXME: merging of two number of the same sub type
@@ -375,7 +375,7 @@ static int PC_ExpandBuiltinDefine(source_t* source, token_t* deftoken, define_t*
         strncpyz(token->string, "\"", sizeof(token->string));
         strncat(token->string, curtime + 4, 7);
         strncat(token->string + 7, curtime + 20, 4);
-        strcat(token->string, "\"");
+        strncatz(token->string, sizeof(token->string), "\"");
         free(curtime);
         token->type = TT_NAME;
         token->subtype = strlen(token->string);
@@ -388,7 +388,7 @@ static int PC_ExpandBuiltinDefine(source_t* source, token_t* deftoken, define_t*
         curtime = ctime(&t);
         strncpyz(token->string, "\"", sizeof(token->string));
         strncat(token->string, curtime + 11, 8);
-        strcat(token->string, "\"");
+        strncatz(token->string, sizeof(token->string), "\"");
         free(curtime);
         token->type = TT_NAME;
         token->subtype = strlen(token->string);
@@ -565,7 +565,7 @@ static int PC_Directive_include(source_t* source)
         script = LoadScriptFile(token.string);
         if (!script) {
             strncpyz(path, source->includepath, sizeof(path));
-            strcat(path, token.string);
+            strncatz(path, sizeof(path), token.string);
             script = LoadScriptFile(path);
         }
     } else if (token.type == TT_PUNCTUATION && *token.string == '<') {
@@ -577,7 +577,7 @@ static int PC_Directive_include(source_t* source)
             }
             if (token.type == TT_PUNCTUATION && *token.string == '>')
                 break;
-            strncat(path, token.string, MAX_QPATH);
+            strncatz(path, sizeof(path), token.string);
         }
         if (*token.string != '>') {
             SourceWarning(source, "#include missing trailing >");
@@ -1865,7 +1865,7 @@ int PC_ReadToken(source_t* source, token_t* token)
                         SourceError(source, "string longer than MAX_TOKEN %d", MAX_TOKEN);
                         return false;
                     }
-                    strcat(token->string, newtoken.string + 1);
+                    strncatz(token->string, sizeof(token->string), newtoken.string + 1);
                 } else {
                     PC_UnreadToken(source, &newtoken);
                 }
@@ -1942,13 +1942,13 @@ int PC_ExpectTokenType(source_t* source, int type, int subtype, token_t* token)
             if (subtype & TT_BINARY)
                 strncpyz(str, "binary", sizeof(str));
             if (subtype & TT_LONG)
-                strcat(str, " long");
+                strncatz(str, sizeof(str), " long");
             if (subtype & TT_UNSIGNED)
-                strcat(str, " unsigned");
+                strncatz(str, sizeof(str), " unsigned");
             if (subtype & TT_FLOAT)
-                strcat(str, " float");
+                strncatz(str, sizeof(str), " float");
             if (subtype & TT_INTEGER)
-                strcat(str, " integer");
+                strncatz(str, sizeof(str), " integer");
             SourceError(source, "expected %s, found %s", str, token->string);
             return false;
         }

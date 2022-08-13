@@ -910,13 +910,13 @@ void CL_Rcon_f(void)
     message[3] = -1;
     message[4] = 0;
 
-    strcat(message, "rcon ");
+    strncatz(message, sizeof(message), "rcon ");
 
-    strcat(message, rcon_client_password->string);
-    strcat(message, " ");
+    strncatz(message, sizeof(message), rcon_client_password->string);
+    strncatz(message, sizeof(message), " ");
 
     // https://zerowing.idsoftware.com/bugzilla/show_bug.cgi?id=543
-    strcat(message, Cmd_Cmd() + 5);
+    strncatz(message, sizeof(message), Cmd_Cmd() + 5);
 
     if (cls.state >= CA_CONNECTED) {
         to = clc.netchan.remoteAddress;
@@ -2290,7 +2290,7 @@ void CL_ServerInfoPacket(netadr_t from, msg_t* msg)
     strncpyz(info, MSG_ReadString(msg), sizeof(info));
     if (strlen(info)) {
         if (info[strlen(info) - 1] != '\n') {
-            strncat(info, "\n", sizeof(info));
+            strncatz(info, sizeof(info), "\n");
         }
         Com_Printf("%s: %s", NET_AdrToString(from), info);
     }
