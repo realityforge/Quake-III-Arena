@@ -18,10 +18,7 @@
 #define TGA_EXTENSION "tga"
 #define PNG_EXTENSION "png"
 #define JPG_EXTENSION "jpg"
-
-#ifdef ENABLE_DDS_TEXTURES
 #define DDS_EXTENSION "dds"
-#endif
 
 /**
  * Attempt to load and decode the image with the specified name from the VFS.
@@ -107,7 +104,6 @@ bool R_LoadImage(const char* name, image_load_result_t* output)
         name_sans_extension = name;
     }
 
-#ifdef ENABLE_DDS_TEXTURES
     // Only attempt to load DDS compressed textures if enabled
     if (r_ext_compressed_textures->integer) {
         name_to_request = va("%s.%s", name_sans_extension, DDS_EXTENSION);
@@ -117,7 +113,6 @@ bool R_LoadImage(const char* name, image_load_result_t* output)
             return true;
         }
     }
-#endif
 
     name_to_request = va("%s.%s", name_sans_extension, PNG_EXTENSION);
     if (true == try_load_image(name_to_request, output)) {
