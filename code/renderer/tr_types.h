@@ -200,7 +200,6 @@ typedef struct {
 
     int glslMajorVersion;
     int glslMinorVersion;
-    int glslMaxAnimatedBones;
 
     memInfo_t memInfo;
 

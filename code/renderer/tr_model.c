@@ -102,34 +102,6 @@ static qhandle_t R_RegisterMD3(const char* name, model_t* mod)
     return 0;
 }
 
-static qhandle_t R_RegisterIQM(const char* name, model_t* mod)
-{
-    union {
-        unsigned* u;
-        void* v;
-    } buf;
-    bool loaded = false;
-    int filesize;
-
-    filesize = ri.FS_ReadFile(name, (void**)&buf.v);
-    if (!buf.u) {
-        mod->type = MOD_BAD;
-        return 0;
-    }
-
-    loaded = R_LoadIQM(mod, buf.u, filesize, name);
-
-    ri.FS_FreeFile(buf.v);
-
-    if (!loaded) {
-        ri.Printf(PRINT_WARNING, "R_RegisterIQM: couldn't load iqm file %s\n", name);
-        mod->type = MOD_BAD;
-        return 0;
-    }
-
-    return mod->index;
-}
-
 typedef struct
 {
     char* ext;
@@ -139,7 +111,6 @@ typedef struct
 // Note that the ordering indicates the order of preference used
 // when there are multiple models of different formats available
 static modelExtToLoaderMap_t modelLoaders[] = {
-    { "iqm", R_RegisterIQM },
     { "md3", R_RegisterMD3 }
 };
 
@@ -798,13 +769,7 @@ int R_LerpTag(orientation_t* tag, qhandle_t handle, int startFrame, int endFrame
 
     model = R_GetModelByHandle(handle);
     if (!model->mdv[0]) {
-        if (model->type == MOD_IQM) {
-            return R_IQMLerpTag(tag, model->modelData,
-                                startFrame, endFrame,
-                                frac, tagName);
-        } else {
-            start = end = NULL;
-        }
+        start = end = NULL;
     } else {
         start = R_GetTag(model->mdv[0], startFrame, tagName);
         end = R_GetTag(model->mdv[0], endFrame, tagName);
@@ -833,16 +798,11 @@ int R_LerpTag(orientation_t* tag, qhandle_t handle, int startFrame, int endFrame
 
 void R_ModelBounds(qhandle_t handle, vec3_t mins, vec3_t maxs)
 {
-    model_t* model;
-
-    model = R_GetModelByHandle(handle);
-
-    if (model->type == MOD_BRUSH) {
+    const model_t* model = R_GetModelByHandle(handle);
+    if (MOD_BRUSH == model->type) {
         VectorCopy(model->bmodel->bounds[0], mins);
         VectorCopy(model->bmodel->bounds[1], maxs);
-
-        return;
-    } else if (model->type == MOD_MESH) {
+    } else if (MOD_MESH == model->type) {
         mdvModel_t* header;
         mdvFrame_t* frame;
 
@@ -851,20 +811,5 @@ void R_ModelBounds(qhandle_t handle, vec3_t mins, vec3_t maxs)
 
         VectorCopy(frame->bounds[0], mins);
         VectorCopy(frame->bounds[1], maxs);
-
-        return;
-    } else if (model->type == MOD_IQM) {
-        iqmData_t* iqmData;
-
-        iqmData = model->modelData;
-
-        if (iqmData->bounds) {
-            VectorCopy(iqmData->bounds, mins);
-            VectorCopy(iqmData->bounds + 3, maxs);
-            return;
-        }
     }
-
-    VectorClear(mins);
-    VectorClear(maxs);
 }

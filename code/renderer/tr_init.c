@@ -257,10 +257,6 @@ static void InitOpenGL()
 
         // reserve 160 components for other uniforms
         glGetIntegerv(GL_MAX_VERTEX_UNIFORM_COMPONENTS, &temp);
-        glConfig.glslMaxAnimatedBones = Com_Clamp(0, IQM_MAX_JOINTS, (temp - 160) / 16);
-        if (glConfig.glslMaxAnimatedBones < 12) {
-            glConfig.glslMaxAnimatedBones = 0;
-        }
     }
 
     // set default state

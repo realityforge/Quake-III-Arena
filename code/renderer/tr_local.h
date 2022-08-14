@@ -32,7 +32,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "tr_extramath.h"
 #include "tr_fbo.h"
 #include "tr_postprocess.h"
-#include "iqm.h"
 
 #define GL_INDEX_TYPE GL_UNSIGNED_INT
 typedef unsigned int glIndex_t;
@@ -466,8 +465,6 @@ enum {
     ATTR_INDEX_COLOR = 5,
     ATTR_INDEX_PAINTCOLOR = 6,
     ATTR_INDEX_LIGHTDIRECTION = 7,
-    ATTR_INDEX_BONE_INDEXES = 8,
-    ATTR_INDEX_BONE_WEIGHTS = 9,
 
     // GPU vertex animations
     ATTR_INDEX_POSITION2 = 10,
@@ -486,16 +483,13 @@ enum {
     ATTR_COLOR = 1 << ATTR_INDEX_COLOR,
     ATTR_PAINTCOLOR = 1 << ATTR_INDEX_PAINTCOLOR,
     ATTR_LIGHTDIRECTION = 1 << ATTR_INDEX_LIGHTDIRECTION,
-    ATTR_BONE_INDEXES = 1 << ATTR_INDEX_BONE_INDEXES,
-    ATTR_BONE_WEIGHTS = 1 << ATTR_INDEX_BONE_WEIGHTS,
 
     // for .md3 interpolation
     ATTR_POSITION2 = 1 << ATTR_INDEX_POSITION2,
     ATTR_TANGENT2 = 1 << ATTR_INDEX_TANGENT2,
     ATTR_NORMAL2 = 1 << ATTR_INDEX_NORMAL2,
 
-    ATTR_DEFAULT = ATTR_POSITION,
-    ATTR_BITS = ATTR_POSITION | ATTR_TEXCOORD | ATTR_LIGHTCOORD | ATTR_TANGENT | ATTR_NORMAL | ATTR_COLOR | ATTR_PAINTCOLOR | ATTR_LIGHTDIRECTION | ATTR_BONE_INDEXES | ATTR_BONE_WEIGHTS | ATTR_POSITION2 | ATTR_TANGENT2 | ATTR_NORMAL2
+    ATTR_BITS = ATTR_POSITION | ATTR_TEXCOORD | ATTR_LIGHTCOORD | ATTR_TANGENT | ATTR_NORMAL | ATTR_COLOR | ATTR_PAINTCOLOR | ATTR_LIGHTDIRECTION | ATTR_POSITION2 | ATTR_TANGENT2 | ATTR_NORMAL2
 };
 
 enum {
@@ -504,16 +498,13 @@ enum {
     GENERICDEF_USE_VERTEX_ANIMATION = 0x0004,
     GENERICDEF_USE_FOG = 0x0008,
     GENERICDEF_USE_RGBAGEN = 0x0010,
-    GENERICDEF_USE_BONE_ANIMATION = 0x0020,
-    GENERICDEF_ALL = 0x003F,
-    GENERICDEF_COUNT = 0x0040,
+    GENERICDEF_COUNT = 0x0020,
 };
 
 enum {
     FOGDEF_USE_DEFORM_VERTEXES = 0x0001,
     FOGDEF_USE_VERTEX_ANIMATION = 0x0002,
-    FOGDEF_USE_BONE_ANIMATION = 0x0004,
-    FOGDEF_COUNT = 0x0008,
+    FOGDEF_COUNT = 0x0004,
 };
 
 enum {
@@ -530,14 +521,12 @@ enum {
     LIGHTDEF_USE_TCGEN_AND_TCMOD = 0x0008,
     LIGHTDEF_USE_PARALLAXMAP = 0x0010,
     LIGHTDEF_USE_SHADOWMAP = 0x0020,
-    LIGHTDEF_ENTITY_BONE_ANIMATION = 0x0040,
-    LIGHTDEF_COUNT = 0x0080
+    LIGHTDEF_COUNT = 0x0040
 };
 
 enum {
     SHADOWMAPDEF_USE_VERTEX_ANIMATION = 0x0001,
-    SHADOWMAPDEF_USE_BONE_ANIMATION = 0x0002,
-    SHADOWMAPDEF_COUNT = 0x0004
+    SHADOWMAPDEF_COUNT = 0x0002
 };
 
 enum {
@@ -548,7 +537,6 @@ enum {
     GLSL_VEC3,
     GLSL_VEC4,
     GLSL_MAT16,
-    GLSL_MAT16_BONEMATRIX
 };
 
 typedef enum {
@@ -637,8 +625,6 @@ typedef enum {
     UNIFORM_CUBEMAPINFO,
 
     UNIFORM_ALPHATEST,
-
-    UNIFORM_BONEMATRIX,
 
     UNIFORM_COUNT
 } uniform_t;
@@ -794,11 +780,9 @@ typedef enum {
     SF_TRIANGLES,
     SF_POLY,
     SF_MDV,
-    SF_IQM,
     SF_FLARE,
     SF_ENTITY, // beams, rails, lightning, etc that can be determined by entity
     SF_VAO_MDVMESH,
-    SF_VAO_IQM,
 
     SF_NUM_SURFACE_TYPES,
     SF_MAX = 0x7fffffff // ensures that sizeof( surfaceType_t ) == sizeof( int )
@@ -882,80 +866,6 @@ typedef struct srfBspSurface_s {
     float* widthLodError;
     float* heightLodError;
 } srfBspSurface_t;
-
-typedef struct {
-    vec3_t translate;
-    quat_t rotate;
-    vec3_t scale;
-} iqmTransform_t;
-
-// inter-quake-model
-typedef struct {
-    int num_vertexes;
-    int num_triangles;
-    int num_frames;
-    int num_surfaces;
-    int num_joints;
-    int num_poses;
-    struct srfIQModel_s* surfaces;
-
-    int* triangles;
-
-    // vertex arrays
-    float* positions;
-    float* texcoords;
-    float* normals;
-    float* tangents;
-    uint8_t* colors;
-    int* influences; // [num_vertexes] indexes into influenceBlendVertexes
-
-    // unique list of vertex blend indexes/weights for faster CPU vertex skinning
-    uint8_t* influenceBlendIndexes; // [num_influences]
-    union {
-        float* f;
-        uint8_t* b;
-    } influenceBlendWeights; // [num_influences]
-
-    // depending upon the exporter, blend indices and weights might be int/float
-    // as opposed to the recommended byte/byte, for example Noesis exports
-    // int/float whereas the official IQM tool exports byte/byte
-    int blendWeightsType; // IQM_UBYTE or IQM_FLOAT
-
-    char* jointNames;
-    int* jointParents;
-    float* bindJoints; // [num_joints * 12]
-    float* invBindJoints; // [num_joints * 12]
-    iqmTransform_t* poses; // [num_frames * num_poses]
-    float* bounds;
-
-    int numVaoSurfaces;
-    struct srfVaoIQModel_s* vaoSurfaces;
-} iqmData_t;
-
-// inter-quake-model surface
-typedef struct srfIQModel_s {
-    surfaceType_t surfaceType;
-    char name[MAX_QPATH];
-    shader_t* shader;
-    iqmData_t* data;
-    int first_vertex, num_vertexes;
-    int first_triangle, num_triangles;
-    int first_influence, num_influences;
-} srfIQModel_t;
-
-typedef struct srfVaoIQModel_s {
-    surfaceType_t surfaceType;
-
-    iqmData_t* iqmData;
-    struct srfIQModel_s* iqmSurface;
-
-    // backEnd stats
-    int numIndexes;
-    int numVerts;
-
-    // static render data
-    vao_t* vao;
-} srfVaoIQModel_t;
 
 typedef struct srfVaoMdvMesh_s {
     surfaceType_t surfaceType;
@@ -1188,7 +1098,6 @@ typedef enum {
     MOD_BRUSH,
     MOD_MESH,
     MOD_MDR,
-    MOD_IQM
 } modtype_t;
 
 typedef struct model_s {
@@ -1199,7 +1108,6 @@ typedef struct model_s {
     int dataSize; // just for listing purposes
     bmodel_t* bmodel; // only if type == MOD_BRUSH
     mdvModel_t* mdv[MD3_MAX_LODS]; // only if type == MOD_MESH
-    void* modelData; // only if type == (MOD_MDR | MOD_IQM)
 
     int numLods;
 } model_t;
@@ -1284,8 +1192,6 @@ typedef struct {
     uint32_t storedGlState;
     float vertexAttribsInterpolation;
     bool vertexAnimation;
-    int boneAnimation; // number of bones
-    mat4_t boneMatrix[IQM_MAX_JOINTS];
     uint32_t vertexAttribsEnabled; // global if no VAOs, tess only otherwise
     FBO_t* currentFBO;
     vao_t* currentVao;
@@ -2064,7 +1970,6 @@ void GLSL_SetUniformVec2(shaderProgram_t* program, int uniformNum, const vec2_t 
 void GLSL_SetUniformVec3(shaderProgram_t* program, int uniformNum, const vec3_t v);
 void GLSL_SetUniformVec4(shaderProgram_t* program, int uniformNum, const vec4_t v);
 void GLSL_SetUniformMat4(shaderProgram_t* program, int uniformNum, const mat4_t matrix);
-void GLSL_SetUniformMat4BoneMatrix(shaderProgram_t* program, int uniformNum, /*const*/ mat4_t* matrix, int numMatricies);
 
 shaderProgram_t* GLSL_GetGenericShaderProgram(int stage);
 
@@ -2086,41 +1991,6 @@ void RE_AddAdditiveLightToScene(const vec3_t org, float intensity, float r, floa
 void RE_BeginScene(const refdef_t* fd);
 void RE_RenderScene(const refdef_t* fd);
 void RE_EndScene(void);
-
-/*
-=============================================================
-
-UNCOMPRESSING BONES
-
-=============================================================
-*/
-
-#define MC_BITS_X (16)
-#define MC_BITS_Y (16)
-#define MC_BITS_Z (16)
-#define MC_BITS_VECT (16)
-
-#define MC_SCALE_X (1.0f / 64)
-#define MC_SCALE_Y (1.0f / 64)
-#define MC_SCALE_Z (1.0f / 64)
-
-void MC_UnCompress(float mat[3][4], const unsigned char* comp);
-
-/*
-=============================================================
-
-ANIMATED MODELS
-
-=============================================================
-*/
-
-bool R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* name);
-void R_AddIQMSurfaces(trRefEntity_t* ent);
-void RB_IQMSurfaceAnim(surfaceType_t* surface);
-void RB_IQMSurfaceAnimVao(srfVaoIQModel_t* surface);
-int R_IQMLerpTag(orientation_t* tag, iqmData_t* data,
-                 int startFrame, int endFrame,
-                 float frac, const char* tagName);
 
 /*
 =============================================================
