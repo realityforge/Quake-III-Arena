@@ -3197,8 +3197,8 @@ static void ScanAndLoadShaderFiles()
         if (!buffers[i])
             continue;
 
-        strncatz(textEnd, sizeof(textEnd), buffers[i]);
-        strncatz(textEnd, sizeof(textEnd), "\n");
+        strcat(textEnd, buffers[i]);
+        strcat(textEnd, "\n");
         textEnd += strlen(textEnd);
         ri.FS_FreeFile(buffers[i]);
     }
