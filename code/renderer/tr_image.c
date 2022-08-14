@@ -1432,7 +1432,7 @@ image_t* R_FindImageFile(const char* name, bool mipmap, bool allowPicmip, int gl
 
     // load the pic from disk
     R_LoadImage(name, &pic, &width, &height);
-    if (pic == NULL) { // if we dont get a successful load
+    if (pic == NULL) { // if we don't get a successful load
         char altname[MAX_QPATH]; // copy the name
         int len;
         strncpyz(altname, name, sizeof(altname));

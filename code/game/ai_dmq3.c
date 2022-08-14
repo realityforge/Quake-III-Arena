@@ -4179,7 +4179,7 @@ static void BotCheckEvents(bot_state_t* bs, entityState_t* state)
         trap_GetConfigstring(CS_SOUNDS + state->eventParm, buf, sizeof(buf));
 #ifdef MISSIONPACK
         if (!strcmp(buf, "sound/items/kamikazerespawn.wav")) {
-            // the kamikaze respawned so dont avoid it
+            // the kamikaze respawned so don't avoid it
             BotDontAvoid(bs, "Kamikaze");
         } else
 #endif

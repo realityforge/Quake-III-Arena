@@ -799,7 +799,7 @@ static void KamikazeRadiusDamage(vec3_t origin, gentity_t* attacker, float damag
             continue;
         }
 
-        // dont hit things we have already hit
+        // don't hit things we have already hit
         if (ent->kamikazeTime > level.time) {
             continue;
         }
@@ -855,7 +855,7 @@ static void KamikazeShockWave(vec3_t origin, gentity_t* attacker, float damage, 
     for (e = 0; e < numListedEntities; e++) {
         ent = &g_entities[entityList[e]];
 
-        // dont hit things we have already hit
+        // don't hit things we have already hit
         if (ent->kamikazeShockTime > level.time) {
             continue;
         }
