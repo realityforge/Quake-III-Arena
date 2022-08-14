@@ -46,31 +46,6 @@ If you've got issues that you aren't sure are worth filing as bugs, or just
 want to chat, please visit our forums:
 https://discourse.ioquake.org
 
-# Thank You:
-
-<p>
-  <a href="https://www.digitalocean.com/">Digital Ocean<br/>
-    <img src="https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/PoweredByDO/DO_Powered_by_Badge_blue.svg" width="201px">
-  </a>
-</p>
----
-<p>
-<a href="https://www.discourse.org/">Discourse<br/>
-<img src=
-"https://user-images.githubusercontent.com/1681963/52239617-e2683480-289c-11e9-922b-5da55472e5b4.png"
- width="300px"></a>
-</p>
----
-<p>
-<a href="https://icculus.org/">icculus dot org<br/>
-<img src="http://icculus.org/icculus-org-now.png" width="300px"></a>
-</p>
----
-<p>
-<a href="https://nuclearmonster.com/">Nuclear Monster<br/>
-<img src="https://user-images.githubusercontent.com/903791/152968830-dd08737b-55c6-4ac6-9610-31121ea0e8c6.png" width="300px"></a>
-</p>
-
 # Console
 
 ## New cvars
