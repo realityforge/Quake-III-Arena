@@ -151,8 +151,6 @@ void CG_Text_Paint(float x, float y, float scale, vec4_t color, const char* text
         count = 0;
         while (s && *s && count < len) {
             glyph = &font->glyphs[*s & 255];
-            // int yadj = Assets.textFont.glyphs[text[i]].bottom + Assets.textFont.glyphs[text[i]].top;
-            // float yadj = scale * (Assets.textFont.glyphs[text[i]].imageHeight - Assets.textFont.glyphs[text[i]].height);
             if (Q_IsColorString(s)) {
                 memcpy(newColor, g_color_table[ColorIndex(*(s + 1))], sizeof(newColor));
                 newColor[3] = color[3];
