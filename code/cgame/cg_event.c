@@ -230,7 +230,7 @@ static void CG_Obituary(entityState_t* ent)
     // check for double client messages
     if (!attackerInfo) {
         attacker = ENTITYNUM_WORLD;
-        strcpy(attackerName, "noname");
+        strncpyz(attackerName, "noname", sizeof(attackerName));
     } else {
         strncpyz(attackerName, Info_ValueForKey(attackerInfo, "n"), sizeof(attackerName) - 2);
         strncatz(attackerName, sizeof(attackerName), S_COLOR_WHITE);
