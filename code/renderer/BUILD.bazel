@@ -72,13 +72,6 @@ DEPS = [
 ]
 
 cc_library(
-    name = "tr_animation",
-    srcs = ["tr_animation.c"],
-    copts = LIBRARY_COPTS,
-    deps = DEPS,
-)
-
-cc_library(
     name = "tr_backend",
     srcs = ["tr_backend.c"],
     copts = LIBRARY_COPTS,
@@ -229,7 +222,6 @@ cc_library(
     name = "renderer",
     copts = LIBRARY_COPTS,
     deps = [
-        ":tr_animation",
         ":tr_backend",
         ":tr_bsp",
         ":tr_cmds",
