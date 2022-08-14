@@ -29,6 +29,15 @@ LIBRARY_COPTS = FULL_WARNINGS + [
     "-Wno-covered-switch-default",
 ]
 
+DEPS = [
+    ":api",
+    ":local_api",
+    ":qgl",
+    "//code/macosx:qgl",
+    "//code/qcommon:qcommon",
+    "//code/qcommon:shared_api",
+]
+
 cc_library(
     name = "api",
     hdrs = [
@@ -61,15 +70,6 @@ cc_library(
         "//code/qcommon:shared_api",
     ],
 )
-
-DEPS = [
-    ":api",
-    ":local_api",
-    ":qgl",
-    "//code/macosx:qgl",
-    "//code/qcommon:qcommon",
-    "//code/qcommon:shared_api",
-]
 
 cc_library(
     name = "tr_backend",
