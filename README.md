@@ -295,16 +295,6 @@ The defaults for these variables differ depending on the target platform.
   print                   - print out the contents of a cvar
   unset                   - unset a user created cvar
 
-  banaddr <range>         - ban an ip address range from joining a game on this
-                            server, valid <range> is either playernum or CIDR
-                            notation address range.
-  exceptaddr <range>      - exempt an ip address range from a ban.
-  bandel <range>          - delete ban (either range or ban number)
-  exceptdel <range>       - delete exception (either range or exception number)
-  listbans                - list all currently active bans and exceptions
-  rehashbans              - reload the banlist from serverbans.dat
-  flushbans               - delete all bans
-
   net_restart             - restart network subsystem to change latched settings
   game_restart <fs_game>  - Switch to another mod
 
