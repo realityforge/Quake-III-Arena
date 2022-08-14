@@ -1371,9 +1371,6 @@ static void R_AddEntitySurface(int entityNum)
             case MOD_MESH:
                 R_AddMD3Surfaces(ent);
                 break;
-            case MOD_MDR:
-                R_MDRAddAnimSurfaces(ent);
-                break;
             case MOD_IQM:
                 R_AddIQMSurfaces(ent);
                 break;
@@ -1585,14 +1582,6 @@ void R_RenderPshadowMaps(const refdef_t* fd)
                 radius = frame->radius * scale;
             } break;
 
-            case MOD_MDR: {
-                // FIXME: never actually tested this
-                mdrHeader_t* header = model->modelData;
-                int frameSize = (size_t)(&((mdrFrame_t*)0)->bones[header->numBones]);
-                mdrFrame_t* frame = (mdrFrame_t*)((uint8_t*)header + header->ofsFrames + frameSize * ent->e.frame);
-
-                radius = frame->radius;
-            } break;
             case MOD_IQM: {
                 // FIXME: never actually tested this
                 iqmData_t* data = model->modelData;

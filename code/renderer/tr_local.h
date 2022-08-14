@@ -794,7 +794,6 @@ typedef enum {
     SF_TRIANGLES,
     SF_POLY,
     SF_MDV,
-    SF_MDR,
     SF_IQM,
     SF_FLARE,
     SF_ENTITY, // beams, rails, lightning, etc that can be determined by entity
@@ -2115,8 +2114,6 @@ ANIMATED MODELS
 =============================================================
 */
 
-void R_MDRAddAnimSurfaces(trRefEntity_t* ent);
-void RB_MDRSurfaceAnim(mdrSurface_t* surface);
 bool R_LoadIQM(model_t* mod, void* buffer, int filesize, const char* name);
 void R_AddIQMSurfaces(trRefEntity_t* ent);
 void RB_IQMSurfaceAnim(surfaceType_t* surface);
