@@ -539,7 +539,6 @@ void Cvar_SetSafe(const char* var_name, const char* value)
             Com_Error(ERR_DROP, "Restricted source tried to "
                                 "modify \"%s\"",
                       var_name);
-        return;
     }
     Cvar_Set(var_name, value);
 }
