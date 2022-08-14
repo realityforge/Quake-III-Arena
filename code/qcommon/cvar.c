@@ -25,13 +25,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "qcommon.h"
 #include "cvar_engine.h"
 
-cvar_t* cvar_vars = NULL;
-cvar_t* cvar_cheats;
+static cvar_t* cvar_vars = NULL;
+static cvar_t* cvar_cheats = NULL;
 int cvar_modifiedFlags;
 
 #define MAX_CVARS 2048
-cvar_t cvar_indexes[MAX_CVARS];
-int cvar_numIndexes;
+static cvar_t cvar_indexes[MAX_CVARS];
+static int cvar_numIndexes;
 
 #define FILE_HASH_SIZE 256
 static cvar_t* hashTable[FILE_HASH_SIZE];
