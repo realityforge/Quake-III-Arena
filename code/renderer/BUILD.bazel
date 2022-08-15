@@ -12,7 +12,7 @@
 
 load("@gla//:rules.bzl", "gla_lib")
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//build_defs:rules.bzl", "EXTRA_WARNINGS", "FULL_WARNINGS")
+load("//build_defs:rules.bzl", "FULL_WARNINGS")
 
 LIBRARY_COPTS = FULL_WARNINGS + [
     "-Wno-padded",
@@ -112,7 +112,7 @@ cc_library(
         "tr_local.h",
         "tr_postprocess.h",
     ],
-    copts = EXTRA_WARNINGS,
+    copts = FULL_WARNINGS,
     includes = ["."],
     deps = [
         ":api",
