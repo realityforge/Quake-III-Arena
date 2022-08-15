@@ -62,9 +62,7 @@ cc_library(
     name = "internal_api",
     hdrs = ["tr_common.h"],
     copts = FULL_WARNINGS,
-    visibility = [
-        "//code/sdl:__pkg__",
-    ],
+    visibility = ["//code/sdl:__pkg__"],
     deps = [
         ":api",
         ":gla",
