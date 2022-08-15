@@ -433,8 +433,7 @@ void CG_PainEvent(centity_t* cent, int health)
     } else {
         snd = "*pain100_1.wav";
     }
-    trap_S_StartSound(NULL, cent->currentState.number, CHAN_VOICE,
-                      CG_CustomSound(cent->currentState.number, snd));
+    trap_S_StartSound(NULL, cent->currentState.number, CHAN_VOICE, CG_CustomSound(cent->currentState.number, snd));
 
     // save pain time for programitic twitch animation
     cent->pe.painTime = cg.time;
