@@ -71,6 +71,36 @@ cc_library(
     ],
 )
 
+config_setting(
+    name = "debug_compilation_mode",
+    values = {"compilation_mode": "dbg"},
+)
+
+gla_lib(
+    name = "gla",
+    copts = FULL_WARNINGS + ["-Wno-padded"],
+    defines = select({
+        ":debug_compilation_mode": ["GLA_SUPPORT_AUTO_CHECK_ERROR_HANDLER"],
+        "//conditions:default": [],
+    }),
+    extensions = [
+        "GL_ARB_framebuffer_object",
+        "GL_ARB_depth_clamp",
+        "GL_ARB_seamless_cube_map",
+        "GL_NVX_gpu_memory_info",
+        "GL_ATI_meminfo",
+        "GL_ARB_texture_compression_rgtc",
+        "GL_ARB_texture_compression_bptc",
+        "GL_EXT_texture_compression_s3tc",
+        "GL_EXT_texture_filter_anisotropic",
+        "GL_EXT_texture_sRGB",
+        "GL_S3_s3tc",
+    ],
+    header_only = False,
+    maximum_profile = "3.2",
+    minimum_profile = "3.0",
+)
+
 cc_library(
     name = "local_api",
     hdrs = [
@@ -368,34 +398,4 @@ cc_library(
         ":tr_vbo",
         ":tr_world",
     ],
-)
-
-config_setting(
-    name = "debug_compilation_mode",
-    values = {"compilation_mode": "dbg"},
-)
-
-gla_lib(
-    name = "gla",
-    copts = FULL_WARNINGS + ["-Wno-padded"],
-    defines = select({
-        ":debug_compilation_mode": ["GLA_SUPPORT_AUTO_CHECK_ERROR_HANDLER"],
-        "//conditions:default": [],
-    }),
-    extensions = [
-        "GL_ARB_framebuffer_object",
-        "GL_ARB_depth_clamp",
-        "GL_ARB_seamless_cube_map",
-        "GL_NVX_gpu_memory_info",
-        "GL_ATI_meminfo",
-        "GL_ARB_texture_compression_rgtc",
-        "GL_ARB_texture_compression_bptc",
-        "GL_EXT_texture_compression_s3tc",
-        "GL_EXT_texture_filter_anisotropic",
-        "GL_EXT_texture_sRGB",
-        "GL_S3_s3tc",
-    ],
-    header_only = False,
-    maximum_profile = "3.2",
-    minimum_profile = "3.0",
 )
