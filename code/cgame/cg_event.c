@@ -435,7 +435,7 @@ void CG_PainEvent(centity_t* cent, int health)
     }
     trap_S_StartSound(NULL, cent->currentState.number, CHAN_VOICE, CG_CustomSound(cent->currentState.number, snd));
 
-    // save pain time for programitic twitch animation
+    // save pain time for programmatic twitch animation
     cent->pe.painTime = cg.time;
     cent->pe.painDirection ^= 1;
 }
