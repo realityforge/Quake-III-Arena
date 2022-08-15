@@ -12,7 +12,35 @@
 
 load("@gla//:rules.bzl", "gla_lib")
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//build_defs:rules.bzl", "CLIENT_GAME_DEFINES", "EXTRA_WARNINGS", "FULL_WARNINGS")
+load("//build_defs:rules.bzl", "EXTRA_WARNINGS", "FULL_WARNINGS")
+
+LIBRARY_COPTS = FULL_WARNINGS + [
+    "-Wno-padded",
+    "-Wno-float-equal",
+    "-Wno-float-conversion",
+    "-Wno-cast-align",
+    "-Wno-implicit-int-conversion",
+    "-Wno-implicit-float-conversion",
+    "-Wno-double-promotion",
+    "-Wno-shorten-64-to-32",
+    "-Wno-sign-compare",
+    "-Wno-sign-conversion",
+    "-Wno-switch-enum",
+    "-Wno-assign-enum",
+    "-Wno-null-pointer-arithmetic",
+    "-Wno-shadow",
+    "-Wno-cast-qual",
+    "-Wno-covered-switch-default",
+    "-Wno-bad-function-cast",
+]
+
+DEPS = [
+    ":api",
+    ":local_api",
+    ":gla",
+    "//code/qcommon:qcommon",
+    "//code/qcommon:shared_api",
+]
 
 cc_library(
     name = "api",
@@ -44,33 +72,13 @@ cc_library(
 )
 
 cc_library(
-    name = "imagelib",
-    srcs = [
-        "tr_image_2.c",
-        "tr_image_jpg.c",
-        "tr_image_jpg2.c",
-        "tr_image_png.c",
-    ],
-    hdrs = ["tr_image.h"],
-    copts = FULL_WARNINGS,
-    defines = CLIENT_GAME_DEFINES,
-    includes = ["."],
-    deps = [
-        ":api",
-        ":internal_api",
-        "//code/qcommon:base",
-        "//code/qcommon:shared_api",
-        "@libjpeg_turbo//:jpeg",
-        "@libspng",
-    ],
-)
-
-cc_library(
-    name = "local",
+    name = "local_api",
     hdrs = [
+        "tr_dsa.h",
         "tr_extramath.h",
         "tr_extratypes.h",
         "tr_fbo.h",
+        "tr_image.h",
         "tr_local.h",
         "tr_postprocess.h",
     ],
@@ -83,68 +91,282 @@ cc_library(
 )
 
 cc_library(
+    name = "tr_backend",
+    srcs = ["tr_backend.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_bsp",
+    srcs = ["tr_bsp.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS + ["//third_party/json"],
+)
+
+cc_library(
+    name = "tr_cmds",
+    srcs = ["tr_cmds.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_curve",
+    srcs = ["tr_curve.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_dsa",
+    srcs = ["tr_dsa.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_extensions",
+    srcs = ["tr_extensions.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_extramath",
+    srcs = ["tr_extramath.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_fbo",
+    srcs = ["tr_fbo.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_flares",
+    srcs = ["tr_flares.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_font",
+    srcs = ["tr_font.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_glsl",
+    srcs = ["tr_glsl.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS + ["//code/renderer/glsl"],
+)
+
+cc_library(
+    name = "tr_image",
+    srcs = ["tr_image.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_image_2",
+    srcs = ["tr_image_2.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_image_dds",
+    srcs = ["tr_image_dds.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_image_jpg",
+    srcs = ["tr_image_jpg.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS + ["@libjpeg_turbo//:jpeg"],
+)
+
+cc_library(
+    name = "tr_image_jpg2",
+    srcs = ["tr_image_jpg2.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS + ["@libjpeg_turbo//:jpeg"],
+)
+
+cc_library(
+    name = "tr_image_png",
+    srcs = ["tr_image_png.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS + ["@libspng"],
+)
+
+cc_library(
+    name = "tr_init",
+    srcs = ["tr_init.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_light",
+    srcs = ["tr_light.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_main",
+    srcs = ["tr_main.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_marks",
+    srcs = ["tr_marks.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_mesh",
+    srcs = ["tr_mesh.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_model",
+    srcs = ["tr_model.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_noise",
+    srcs = ["tr_noise.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_postprocess",
+    srcs = ["tr_postprocess.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_scene",
+    srcs = ["tr_scene.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_shade",
+    srcs = ["tr_shade.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_shade_calc",
+    srcs = ["tr_shade_calc.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_shader",
+    srcs = ["tr_shader.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_shadows",
+    srcs = ["tr_shadows.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_sky",
+    srcs = ["tr_sky.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_surface",
+    srcs = ["tr_surface.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_vbo",
+    srcs = ["tr_vbo.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "tr_world",
+    srcs = ["tr_world.c"],
+    copts = LIBRARY_COPTS,
+    deps = DEPS,
+)
+
+cc_library(
     name = "renderer",
-    srcs = [
-        "tr_backend.c",
-        "tr_bsp.c",
-        "tr_cmds.c",
-        "tr_curve.c",
-        "tr_dsa.c",
-        "tr_dsa.h",
-        "tr_extensions.c",
-        "tr_extramath.c",
-        "tr_fbo.c",
-        "tr_flares.c",
-        "tr_font.c",
-        "tr_glsl.c",
-        "tr_image.c",
-        "tr_image_dds.c",
-        "tr_init.c",
-        "tr_light.c",
-        "tr_main.c",
-        "tr_marks.c",
-        "tr_mesh.c",
-        "tr_model.c",
-        "tr_noise.c",
-        "tr_postprocess.c",
-        "tr_scene.c",
-        "tr_shade.c",
-        "tr_shade_calc.c",
-        "tr_shader.c",
-        "tr_shadows.c",
-        "tr_sky.c",
-        "tr_surface.c",
-        "tr_vbo.c",
-        "tr_world.c",
-    ],
-    copts = FULL_WARNINGS + [
-        "-Wno-padded",
-        "-Wno-float-equal",
-        "-Wno-float-conversion",
-        "-Wno-cast-align",
-        "-Wno-implicit-int-conversion",
-        "-Wno-implicit-float-conversion",
-        "-Wno-double-promotion",
-        "-Wno-shorten-64-to-32",
-        "-Wno-sign-compare",
-        "-Wno-sign-conversion",
-        "-Wno-switch-enum",
-        "-Wno-assign-enum",
-        "-Wno-null-pointer-arithmetic",
-        "-Wno-shadow",
-        "-Wno-cast-qual",
-        "-Wno-covered-switch-default",
-        "-Wno-bad-function-cast",
-    ],
-    includes = ["."],
+    copts = LIBRARY_COPTS,
     visibility = ["//code/client:__pkg__"],
     deps = [
-        ":imagelib",
-        ":local",
-        "//code/qcommon",
-        "//code/qcommon:qfiles",
-        "//code/renderer/glsl",
-        "//third_party/json",
+        ":tr_backend",
+        ":tr_bsp",
+        ":tr_cmds",
+        ":tr_curve",
+        ":tr_dsa",
+        ":tr_extensions",
+        ":tr_extramath",
+        ":tr_fbo",
+        ":tr_flares",
+        ":tr_font",
+        ":tr_glsl",
+        ":tr_image",
+        ":tr_image_2",
+        ":tr_image_dds",
+        ":tr_image_jpg",
+        ":tr_image_jpg2",
+        ":tr_image_png",
+        ":tr_init",
+        ":tr_light",
+        ":tr_main",
+        ":tr_marks",
+        ":tr_mesh",
+        ":tr_model",
+        ":tr_noise",
+        ":tr_postprocess",
+        ":tr_scene",
+        ":tr_shade",
+        ":tr_shade_calc",
+        ":tr_shader",
+        ":tr_shadows",
+        ":tr_sky",
+        ":tr_surface",
+        ":tr_vbo",
+        ":tr_world",
     ],
 )
 
