@@ -232,7 +232,7 @@ static void CG_Obituary(entityState_t* ent)
         attacker = ENTITYNUM_WORLD;
         strncpyz(attackerName, "noname", sizeof(attackerName));
     } else {
-        strncpyz(attackerName, Info_ValueForKey(attackerInfo, "n"), sizeof(attackerName) - 2);
+        strncpyz(attackerName, Info_ValueForKey(attackerInfo, "n"), sizeof(attackerName) - sizeof(S_COLOR_WHITE));
         strncatz(attackerName, sizeof(attackerName), S_COLOR_WHITE);
         // check for kill messages about the current clientNum
         if (target == cg.snap->ps.clientNum) {
