@@ -279,8 +279,6 @@ static int ResampleSfxRaw(short* sfx, int inrate, int inwidth, int samples, uint
     return outcount;
 }
 
-//=============================================================================
-
 /*
 ==============
 S_LoadSound
