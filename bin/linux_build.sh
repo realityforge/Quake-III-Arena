@@ -15,7 +15,7 @@
 set -e
 
 export WORKSPACE_BASE=$(pwd)
-export IMAGE_NAME="q3a_builder-`git branch --show-current | tr -d '\n'`"
+export IMAGE_NAME="q3a_builder-$(git branch --show-current | tr -d '\n')"
 
 export IMAGE_PRESENT=$(docker images | grep q3a_build)
 if [ "" = "${IMAGE_PRESENT}" ] || [ "${FORCE_BUILD}" == "true" ]; then
