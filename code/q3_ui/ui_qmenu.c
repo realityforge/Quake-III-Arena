@@ -1419,9 +1419,9 @@ sfxHandle_t Menu_DefaultKey(menuframework_t* m, int key)
 void Menu_Cache()
 {
     uis.charset = trap_R_RegisterShaderNoMip("gfx/2d/bigchars");
-    uis.charsetProp = trap_R_RegisterShaderNoMip("menu/art/font1_prop.png");
-    uis.charsetPropGlow = trap_R_RegisterShaderNoMip("menu/art/font1_prop_glo.png");
-    uis.charsetPropB = trap_R_RegisterShaderNoMip("menu/art/font2_prop.png");
+    uis.charsetProp = trap_R_RegisterShaderNoMip("menu/art/font1_prop");
+    uis.charsetPropGlow = trap_R_RegisterShaderNoMip("menu/art/font1_prop_glo");
+    uis.charsetPropB = trap_R_RegisterShaderNoMip("menu/art/font2_prop");
     uis.cursor = trap_R_RegisterShaderNoMip("menu/art/3_cursor2");
     uis.rb_on = trap_R_RegisterShaderNoMip("menu/art/switch_on");
     uis.rb_off = trap_R_RegisterShaderNoMip("menu/art/switch_off");
