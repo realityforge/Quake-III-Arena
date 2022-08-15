@@ -20,22 +20,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-/*****************************************************************************
- * sound caching
- *****************************************************************************/
-
 #include "snd_local.h"
 #include "snd_codec.h"
 
 #define DEF_COMSOUNDMEGS "8"
-
-/*
-===============================================================================
-
-memory management
-
-===============================================================================
-*/
 
 static sndBuffer* buffer = NULL;
 static sndBuffer* freelist = NULL;
@@ -197,8 +185,6 @@ static int ResampleSfxRaw(short* sfx, int channels, int inrate, int inwidth, int
     }
     return outcount;
 }
-
-//=============================================================================
 
 /*
 ==============
