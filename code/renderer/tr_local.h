@@ -1412,10 +1412,6 @@ typedef struct {
     int numSkins;
     skin_t* skins[MAX_SKINS];
 
-    GLuint sunFlareQuery[2];
-    int sunFlareQueryIndex;
-    bool sunFlareQueryActive[2];
-
     float sinTable[FUNCTABLE_SIZE];
     float squareTable[FUNCTABLE_SIZE];
     float triangleTable[FUNCTABLE_SIZE];
@@ -1452,7 +1448,6 @@ extern cvar_t* r_lodscale;
 
 extern cvar_t* r_inGameVideo; // controls whether in game video should be draw
 extern cvar_t* r_fastsky; // controls whether sky should be cleared or drawn
-extern cvar_t* r_drawSun; // controls drawing of sun quad
 extern cvar_t* r_dynamiclight; // dynamic lights enabled/disabled
 
 extern cvar_t* r_norefresh; // bypasses the ref rendering
@@ -1552,7 +1547,6 @@ extern cvar_t* r_forceSun;
 extern cvar_t* r_forceSunLightScale;
 extern cvar_t* r_forceSunAmbientScale;
 extern cvar_t* r_sunlightMode;
-extern cvar_t* r_drawSunRays;
 extern cvar_t* r_sunShadows;
 extern cvar_t* r_shadowFilter;
 extern cvar_t* r_shadowBlur;
@@ -1884,7 +1878,6 @@ SKIES
 
 void R_BuildCloudData(shaderCommands_t* shader);
 void R_InitSkyTexCoords(float cloudLayerHeight);
-void RB_DrawSun(float scale, shader_t* shader);
 void RB_ClipSkyPolygons(shaderCommands_t* shader);
 
 /*

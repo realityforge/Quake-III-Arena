@@ -63,7 +63,6 @@ cvar_t* r_measureOverdraw;
 
 cvar_t* r_inGameVideo;
 cvar_t* r_fastsky;
-cvar_t* r_drawSun;
 cvar_t* r_dynamiclight;
 
 cvar_t* r_lodbias;
@@ -134,7 +133,6 @@ cvar_t* r_forceSun;
 cvar_t* r_forceSunLightScale;
 cvar_t* r_forceSunAmbientScale;
 cvar_t* r_sunlightMode;
-cvar_t* r_drawSunRays;
 cvar_t* r_sunShadows;
 cvar_t* r_shadowFilter;
 cvar_t* r_shadowBlur;
@@ -867,7 +865,6 @@ static void R_Register()
     r_forceSun = ri.Cvar_Get("r_forceSun", "0", CVAR_CHEAT);
     r_forceSunLightScale = ri.Cvar_Get("r_forceSunLightScale", "1.0", CVAR_CHEAT);
     r_forceSunAmbientScale = ri.Cvar_Get("r_forceSunAmbientScale", "0.5", CVAR_CHEAT);
-    r_drawSunRays = ri.Cvar_Get("r_drawSunRays", "0", CVAR_ARCHIVE | CVAR_LATCH);
     r_sunlightMode = ri.Cvar_Get("r_sunlightMode", "1", CVAR_ARCHIVE | CVAR_LATCH);
 
     r_sunShadows = ri.Cvar_Get("r_sunShadows", "1", CVAR_ARCHIVE | CVAR_LATCH);
@@ -898,7 +895,6 @@ static void R_Register()
     r_ignoreGLErrors = ri.Cvar_Get("r_ignoreGLErrors", "1", CVAR_ARCHIVE);
     r_fastsky = ri.Cvar_Get("r_fastsky", "0", CVAR_ARCHIVE);
     r_inGameVideo = ri.Cvar_Get("r_inGameVideo", "1", CVAR_ARCHIVE);
-    r_drawSun = ri.Cvar_Get("r_drawSun", "0", CVAR_ARCHIVE);
     r_dynamiclight = ri.Cvar_Get("r_dynamiclight", "1", CVAR_ARCHIVE);
     r_finish = ri.Cvar_Get("r_finish", "0", CVAR_ARCHIVE);
     r_textureMode = ri.Cvar_Get("r_textureMode", "GL_LINEAR_MIPMAP_LINEAR", CVAR_ARCHIVE);
@@ -971,18 +967,6 @@ static void R_Register()
     ri.Cmd_AddCommand("gfxinfo", GfxInfo_f);
     ri.Cmd_AddCommand("minimize", GLimp_Minimize);
     ri.Cmd_AddCommand("gfxmeminfo", GfxMemInfo_f);
-}
-
-static void R_InitQueries()
-{
-    if (r_drawSunRays->integer)
-        glGenQueries(COUNT_OF(tr.sunFlareQuery), tr.sunFlareQuery);
-}
-
-static void R_ShutDownQueries()
-{
-    if (r_drawSunRays->integer)
-        glDeleteQueries(COUNT_OF(tr.sunFlareQuery), tr.sunFlareQuery);
 }
 
 void R_Init()
@@ -1059,8 +1043,6 @@ void R_Init()
 
     R_InitFreeType();
 
-    R_InitQueries();
-
     err = glGetError();
     if (err != GL_NO_ERROR)
         ri.Printf(PRINT_ALL, "glGetError() = 0x%x\n", err);
@@ -1088,7 +1070,6 @@ void RE_Shutdown(bool destroyWindow)
 
     if (tr.registered) {
         R_IssuePendingRenderCommands();
-        R_ShutDownQueries();
         if (glConfig.framebufferObject)
             FBO_Shutdown();
         R_DeleteTextures();

@@ -928,27 +928,6 @@ static const void* RB_DrawSurfs(const void* data)
     if (!isShadowView) {
         RB_RenderDrawSurfList(cmd->drawSurfs, cmd->numDrawSurfs);
 
-        if (r_drawSun->integer) {
-            RB_DrawSun(0.1, tr.sunShader);
-        }
-
-        if (glConfig.framebufferObject && r_drawSunRays->integer) {
-            FBO_t* oldFbo = glState.currentFBO;
-            FBO_Bind(tr.sunRaysFbo);
-
-            glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-            glClear(GL_COLOR_BUFFER_BIT);
-
-            tr.sunFlareQueryActive[tr.sunFlareQueryIndex] = true;
-            glBeginQuery(GL_SAMPLES_PASSED, tr.sunFlareQuery[tr.sunFlareQueryIndex]);
-
-            RB_DrawSun(0.3, tr.sunFlareShader);
-
-            glEndQuery(GL_SAMPLES_PASSED);
-
-            FBO_Bind(oldFbo);
-        }
-
         // darken down any stencil shadows
         RB_ShadowFinish();
 
@@ -1237,9 +1216,6 @@ static const void* RB_PostProcess(const void* data)
             FBO_Blit(srcFbo, srcBox, NULL, NULL, dstBox, NULL, color, 0);
         }
     }
-
-    if (r_drawSunRays->integer)
-        RB_SunRays(NULL, srcBox, NULL, dstBox);
 
     RB_BokehBlur(NULL, srcBox, NULL, dstBox, backEnd.refdef.blurFactor);
 

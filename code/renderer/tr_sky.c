@@ -657,50 +657,6 @@ void R_InitSkyTexCoords(float heightCloud)
     }
 }
 
-void RB_DrawSun(float scale, shader_t* shader)
-{
-    float size;
-    float dist;
-    vec3_t origin, vec1, vec2;
-
-    if (!backEnd.skyRenderedThisView) {
-        return;
-    }
-
-    // glLoadMatrixf( backEnd.viewParms.world.modelMatrix );
-    // glTranslatef (backEnd.viewParms.or.origin[0], backEnd.viewParms.or.origin[1], backEnd.viewParms.or.origin[2]);
-    {
-        // FIXME: this could be a lot cleaner
-        mat4_t translation, modelview;
-
-        Mat4Translation(backEnd.viewParms.or.origin, translation);
-        Mat4Multiply(backEnd.viewParms.world.modelMatrix, translation, modelview);
-        GL_SetModelviewMatrix(modelview);
-    }
-
-    dist = backEnd.viewParms.zFar / 1.75; // div sqrt(3)
-    size = dist * scale;
-
-    VectorScale(tr.sunDirection, dist, origin);
-    PerpendicularVector(vec1, tr.sunDirection);
-    CrossProduct(tr.sunDirection, vec1, vec2);
-
-    VectorScale(vec1, size, vec1);
-    VectorScale(vec2, size, vec2);
-
-    // farthest depth range
-    glDepthRange(1.0, 1.0);
-
-    RB_BeginSurface(shader, 0, 0);
-
-    RB_AddQuadStamp(origin, vec1, vec2, colorWhite);
-
-    RB_EndSurface();
-
-    // back to normal depth range
-    glDepthRange(0.0, 1.0);
-}
-
 /*
 ================
 RB_StageIteratorSky
