@@ -46,8 +46,6 @@ extern const char* fallbackShader_shadowfill_vp;
 extern const char* fallbackShader_shadowfill_fp;
 extern const char* fallbackShader_shadowmask_vp;
 extern const char* fallbackShader_shadowmask_fp;
-extern const char* fallbackShader_ssao_vp;
-extern const char* fallbackShader_ssao_fp;
 extern const char* fallbackShader_texturecolor_vp;
 extern const char* fallbackShader_texturecolor_fp;
 extern const char* fallbackShader_tonemap_vp;
@@ -1163,16 +1161,6 @@ void GLSL_InitGPUShaders()
     attribs = ATTR_POSITION | ATTR_TEXCOORD;
     extradefines[0] = '\0';
 
-    if (!GLSL_InitGPUShader(&tr.ssaoShader, "ssao", attribs, true, extradefines, true, fallbackShader_ssao_vp, fallbackShader_ssao_fp)) {
-        ri.Error(ERR_FATAL, "Could not load ssao shader!");
-    }
-
-    GLSL_InitUniforms(&tr.ssaoShader);
-
-    GLSL_SetUniformInt(&tr.ssaoShader, UNIFORM_SCREENDEPTHMAP, TB_COLORMAP);
-
-    GLSL_FinishGPUShader(&tr.ssaoShader);
-
     numEtcShaders++;
 
     for (i = 0; i < 4; i++) {
@@ -1242,7 +1230,6 @@ void GLSL_ShutdownGPUShaders()
         GLSL_DeleteGPUShader(&tr.calclevels4xShader[i]);
 
     GLSL_DeleteGPUShader(&tr.shadowmaskShader);
-    GLSL_DeleteGPUShader(&tr.ssaoShader);
 
     for (i = 0; i < 4; i++)
         GLSL_DeleteGPUShader(&tr.depthBlurShader[i]);

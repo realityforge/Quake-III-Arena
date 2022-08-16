@@ -325,12 +325,6 @@ void FBO_Init()
         R_CheckFBO(tr.hdrDepthFbo);
     }
 
-    if (tr.screenSsaoImage) {
-        tr.screenSsaoFbo = FBO_Create("_screenssao", tr.screenSsaoImage->width, tr.screenSsaoImage->height);
-        FBO_AttachImage(tr.screenSsaoFbo, tr.screenSsaoImage, GL_COLOR_ATTACHMENT0, 0);
-        R_CheckFBO(tr.screenSsaoFbo);
-    }
-
     if (tr.renderCubeImage) {
         tr.renderCubeFbo = FBO_Create("_renderCubeFbo", tr.renderCubeImage->width, tr.renderCubeImage->height);
         FBO_AttachImage(tr.renderCubeFbo, tr.renderCubeImage, GL_COLOR_ATTACHMENT0, 0);

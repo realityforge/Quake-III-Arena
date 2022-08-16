@@ -914,75 +914,6 @@ static const void* RB_DrawSurfs(const void* data)
                     RB_InstantQuad2(quadVerts, texCoords);
                 }
             }
-
-            if (r_ssao->integer) {
-                vec4_t quadVerts[4];
-                vec2_t texCoords[4];
-
-                viewInfo[2] = 1.0f / ((float)(tr.quarterImage[0]->width) * tan(backEnd.viewParms.fovX * M_PI / 360.0f) * 2.0f);
-                viewInfo[3] = 1.0f / ((float)(tr.quarterImage[0]->height) * tan(backEnd.viewParms.fovY * M_PI / 360.0f) * 2.0f);
-                viewInfo[3] *= (float)backEnd.viewParms.viewportHeight / (float)backEnd.viewParms.viewportWidth;
-
-                FBO_Bind(tr.quarterFbo[0]);
-
-                glViewport(0, 0, tr.quarterFbo[0]->width, tr.quarterFbo[0]->height);
-                glScissor(0, 0, tr.quarterFbo[0]->width, tr.quarterFbo[0]->height);
-
-                VectorSet4(quadVerts[0], -1, 1, 0, 1);
-                VectorSet4(quadVerts[1], 1, 1, 0, 1);
-                VectorSet4(quadVerts[2], 1, -1, 0, 1);
-                VectorSet4(quadVerts[3], -1, -1, 0, 1);
-
-                texCoords[0][0] = 0;
-                texCoords[0][1] = 1;
-                texCoords[1][0] = 1;
-                texCoords[1][1] = 1;
-                texCoords[2][0] = 1;
-                texCoords[2][1] = 0;
-                texCoords[3][0] = 0;
-                texCoords[3][1] = 0;
-
-                GL_State(GLS_DEPTHTEST_DISABLE);
-
-                GLSL_BindProgram(&tr.ssaoShader);
-
-                GL_BindToTMU(tr.hdrDepthImage, TB_COLORMAP);
-
-                GLSL_SetUniformVec4(&tr.ssaoShader, UNIFORM_VIEWINFO, viewInfo);
-
-                RB_InstantQuad2(quadVerts, texCoords); //, color, shaderProgram, invTexRes);
-
-                viewInfo[2] = 1.0f / (float)(tr.quarterImage[0]->width);
-                viewInfo[3] = 1.0f / (float)(tr.quarterImage[0]->height);
-
-                FBO_Bind(tr.quarterFbo[1]);
-
-                glViewport(0, 0, tr.quarterFbo[1]->width, tr.quarterFbo[1]->height);
-                glScissor(0, 0, tr.quarterFbo[1]->width, tr.quarterFbo[1]->height);
-
-                GLSL_BindProgram(&tr.depthBlurShader[0]);
-
-                GL_BindToTMU(tr.quarterImage[0], TB_COLORMAP);
-                GL_BindToTMU(tr.hdrDepthImage, TB_LIGHTMAP);
-
-                GLSL_SetUniformVec4(&tr.depthBlurShader[0], UNIFORM_VIEWINFO, viewInfo);
-
-                RB_InstantQuad2(quadVerts, texCoords); //, color, shaderProgram, invTexRes);
-
-                FBO_Bind(tr.screenSsaoFbo);
-
-                glViewport(0, 0, tr.screenSsaoFbo->width, tr.screenSsaoFbo->height);
-                glScissor(0, 0, tr.screenSsaoFbo->width, tr.screenSsaoFbo->height);
-
-                GLSL_BindProgram(&tr.depthBlurShader[1]);
-
-                GL_BindToTMU(tr.quarterImage[1], TB_COLORMAP);
-                GL_BindToTMU(tr.hdrDepthImage, TB_LIGHTMAP);
-
-                GLSL_SetUniformVec4(&tr.depthBlurShader[1], UNIFORM_VIEWINFO, viewInfo);
-
-                RB_InstantQuad2(quadVerts, texCoords); //, color, shaderProgram, invTexRes);
-            }
         }
 
         // reset viewport and scissor
@@ -1285,15 +1216,6 @@ static const void* RB_PostProcess(const void* data)
     dstBox[1] = backEnd.viewParms.viewportY;
     dstBox[2] = backEnd.viewParms.viewportWidth;
     dstBox[3] = backEnd.viewParms.viewportHeight;
-
-    if (r_ssao->integer) {
-        srcBox[0] = backEnd.viewParms.viewportX * tr.screenSsaoImage->width / (float)glConfig.vidWidth;
-        srcBox[1] = backEnd.viewParms.viewportY * tr.screenSsaoImage->height / (float)glConfig.vidHeight;
-        srcBox[2] = backEnd.viewParms.viewportWidth * tr.screenSsaoImage->width / (float)glConfig.vidWidth;
-        srcBox[3] = backEnd.viewParms.viewportHeight * tr.screenSsaoImage->height / (float)glConfig.vidHeight;
-
-        FBO_Blit(tr.screenSsaoFbo, srcBox, NULL, srcFbo, dstBox, NULL, NULL, GLS_SRCBLEND_DST_COLOR | GLS_DSTBLEND_ZERO);
-    }
 
     srcBox[0] = backEnd.viewParms.viewportX;
     srcBox[1] = backEnd.viewParms.viewportY;

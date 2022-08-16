@@ -76,12 +76,6 @@ Cvars for simple rendering features:
                                      1-16 - Some.
                                      17+  - Too much!
 
-*  `r_ssao`                         - Enable screen-space ambient occlusion.
-                                   Currently eats framerate and has some
-                                   visible artifacts.
-                                     0 - No. (default)
-                                     1 - Yes.
-
 Cvars for HDR and tonemapping:
 
  * `r_hdr`                          - Do scene rendering in a framebuffer with

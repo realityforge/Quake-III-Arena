@@ -57,10 +57,6 @@ glsl_to_c(name = "shadowmask_fp")
 
 glsl_to_c(name = "shadowmask_vp")
 
-glsl_to_c(name = "ssao_fp")
-
-glsl_to_c(name = "ssao_vp")
-
 glsl_to_c(name = "texturecolor_fp")
 
 glsl_to_c(name = "texturecolor_vp")
@@ -95,8 +91,6 @@ cc_library(
         ":shadowfill_vp",
         ":shadowmask_fp",
         ":shadowmask_vp",
-        ":ssao_fp",
-        ":ssao_vp",
         ":texturecolor_fp",
         ":texturecolor_vp",
         ":tonemap_fp",

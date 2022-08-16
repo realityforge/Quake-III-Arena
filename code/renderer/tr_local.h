@@ -1302,7 +1302,6 @@ typedef struct {
     image_t* fixedLevelsImage;
     image_t* sunShadowDepthImage[4];
     image_t* screenShadowImage;
-    image_t* screenSsaoImage;
     image_t* hdrDepthImage;
     image_t* renderCubeImage;
 
@@ -1320,7 +1319,6 @@ typedef struct {
     FBO_t* targetLevelsFbo;
     FBO_t* sunShadowFbo[4];
     FBO_t* screenShadowFbo;
-    FBO_t* screenSsaoFbo;
     FBO_t* hdrDepthFbo;
     FBO_t* renderCubeFbo;
 
@@ -1362,7 +1360,6 @@ typedef struct {
     shaderProgram_t tonemapShader;
     shaderProgram_t calclevels4xShader[2];
     shaderProgram_t shadowmaskShader;
-    shaderProgram_t ssaoShader;
     shaderProgram_t depthBlurShader[4];
     shaderProgram_t testcubeShader;
 
@@ -1527,7 +1524,6 @@ extern cvar_t* r_forceAutoExposureMax;
 extern cvar_t* r_cameraExposure;
 
 extern cvar_t* r_depthPrepass;
-extern cvar_t* r_ssao;
 
 extern cvar_t* r_normalMapping;
 extern cvar_t* r_specularMapping;

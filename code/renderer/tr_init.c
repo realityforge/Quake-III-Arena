@@ -106,7 +106,6 @@ cvar_t* r_forceAutoExposureMin;
 cvar_t* r_forceAutoExposureMax;
 
 cvar_t* r_depthPrepass;
-cvar_t* r_ssao;
 
 cvar_t* r_normalMapping;
 cvar_t* r_specularMapping;
@@ -840,7 +839,6 @@ static void R_Register()
     r_cameraExposure = ri.Cvar_Get("r_cameraExposure", "1", CVAR_CHEAT);
 
     r_depthPrepass = ri.Cvar_Get("r_depthPrepass", "1", CVAR_ARCHIVE);
-    r_ssao = ri.Cvar_Get("r_ssao", "0", CVAR_LATCH | CVAR_ARCHIVE);
 
     r_normalMapping = ri.Cvar_Get("r_normalMapping", "1", CVAR_ARCHIVE | CVAR_LATCH);
     r_specularMapping = ri.Cvar_Get("r_specularMapping", "1", CVAR_ARCHIVE | CVAR_LATCH);
