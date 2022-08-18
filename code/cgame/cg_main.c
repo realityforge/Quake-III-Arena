@@ -403,7 +403,7 @@ int CG_LastAttacker()
     return cg.snap->ps.persistent[PERS_ATTACKER];
 }
 
-void PRINTF_LIKE_FUNCTION(1, 2) QDECL CG_Printf(const char* msg, ...)
+void QDECL CG_Printf(const char* msg, ...)
 {
     va_list argptr;
     char text[1024];
