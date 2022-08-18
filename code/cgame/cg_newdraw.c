@@ -340,7 +340,6 @@ qhandle_t CG_StatusHandle(const int task)
         return cgs.media.defendShader;
     case TEAMTASK_PATROL:
         return cgs.media.patrolShader;
-        break;
     case TEAMTASK_FOLLOW:
         return cgs.media.followShader;
     case TEAMTASK_CAMP:
