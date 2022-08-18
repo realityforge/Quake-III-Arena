@@ -148,9 +148,7 @@ typedef enum {
     K_AUX13,
     K_AUX14,
     K_AUX15,
-    K_AUX16,
-
-    K_LAST_KEY // this had better be <256!
+    K_AUX16
 } keyNum_t;
 
 // The menu code needs to get both key and char events, but
