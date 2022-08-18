@@ -244,7 +244,7 @@ static int PC_ReadDefineParms(source_t* source, define_t* define, token_t** parm
     }
     return true;
 }
-static int PC_StringizeTokens(token_t* tokens, token_t* token)
+static int PC_StringizeTokens(const token_t* tokens, token_t* token)
 {
     token->type = TT_STRING;
     token->whitespace_p = NULL;
