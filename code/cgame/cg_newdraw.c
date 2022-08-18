@@ -240,7 +240,7 @@ static void CG_DrawPlayerAmmoValue(rectDef_t* rect, float scale, vec4_t color, q
     }
 }
 
-static void CG_DrawPlayerHead(rectDef_t* rect, bool draw2D)
+static void CG_DrawPlayerHead(rectDef_t* rect)
 {
     vec3_t angles;
     float size, stretch;
@@ -1548,7 +1548,7 @@ void CG_OwnerDraw(float x, float y, float w, float h, float text_x, float text_y
         CG_DrawSelectedPlayerPowerup(&rect, ownerDrawFlags & CG_SHOW_2DONLY);
         break;
     case CG_PLAYER_HEAD:
-        CG_DrawPlayerHead(&rect, ownerDrawFlags & CG_SHOW_2DONLY);
+        CG_DrawPlayerHead(&rect);
         break;
     case CG_PLAYER_ITEM:
         CG_DrawPlayerItem(&rect, scale, ownerDrawFlags & CG_SHOW_2DONLY);
