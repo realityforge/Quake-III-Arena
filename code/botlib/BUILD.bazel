@@ -47,38 +47,32 @@ cc_library(
     ],
 )
 
+DEPS = [
+    ":api",
+    ":botlib",
+    "//code/qcommon",
+    "//code/qcommon:shared_api",
+    ":botlib_internal_interface",
+]
+
+COPTS = FULL_WARNINGS + [
+    "-Wno-bad-function-cast",
+    "-Wno-padded",
+    "-Wno-double-promotion",
+    "-Wno-cast-align",
+    "-Wno-shorten-64-to-32",
+    "-Wno-float-equal",
+    "-Wno-sign-conversion",
+    "-Wno-sign-compare",
+    "-Wno-implicit-int-conversion",
+    "-Wno-implicit-float-conversion",
+    "-Wno-float-conversion",
+]
+
+# TODO: Split this into one lib per file?
+
 cc_library(
-    name = "botlib_impl",
-    srcs = [
-        "be_aas_bspq3.c",
-        "be_aas_cluster.c",
-        "be_aas_debug.c",
-        "be_aas_entity.c",
-        "be_aas_file.c",
-        "be_aas_main.c",
-        "be_aas_move.c",
-        "be_aas_optimize.c",
-        "be_aas_reach.c",
-        "be_aas_route.c",
-        "be_aas_routealt.c",
-        "be_aas_sample.c",
-        "be_ai_char.c",
-        "be_ai_chat.c",
-        "be_ai_gen.c",
-        "be_ai_goal.c",
-        "be_ai_move.c",
-        "be_ai_weap.c",
-        "be_ai_weight.c",
-        "be_ea.c",
-        "be_interface.c",
-        "l_crc.c",
-        "l_libvar.c",
-        "l_log.c",
-        "l_memory.c",
-        "l_precomp.c",
-        "l_script.c",
-        "l_struct.c",
-    ],
+    name = "botlib_internal_interface",
     hdrs = [
         "aasfile.h",
         "be_aas_bsp.h",
@@ -106,29 +100,242 @@ cc_library(
         "l_struct.h",
         "l_utils.h",
     ],
-    copts = FULL_WARNINGS + [
-        "-Wno-bad-function-cast",
-        "-Wno-padded",
-        "-Wno-double-promotion",
-        "-Wno-cast-align",
-        "-Wno-shorten-64-to-32",
-        "-Wno-float-equal",
-        "-Wno-sign-conversion",
-        "-Wno-sign-compare",
-        "-Wno-implicit-int-conversion",
-        "-Wno-implicit-float-conversion",
-        "-Wno-float-conversion",
-    ],
+    includes = ["."],
+)
+
+cc_library(
+    name = "be_aas_bspq3",
+    srcs = ["be_aas_bspq3.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_aas_cluster",
+    srcs = ["be_aas_cluster.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_aas_debug",
+    srcs = ["be_aas_debug.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_aas_entity",
+    srcs = ["be_aas_entity.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_aas_file",
+    srcs = ["be_aas_file.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_aas_main",
+    srcs = ["be_aas_main.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_aas_move",
+    srcs = ["be_aas_move.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_aas_optimize",
+    srcs = ["be_aas_optimize.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_aas_reach",
+    srcs = ["be_aas_reach.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_aas_route",
+    srcs = ["be_aas_route.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_aas_routealt",
+    srcs = ["be_aas_routealt.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_aas_sample",
+    srcs = ["be_aas_sample.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_ai_char",
+    srcs = ["be_ai_char.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_ai_chat",
+    srcs = ["be_ai_chat.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_ai_gen",
+    srcs = ["be_ai_gen.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_ai_goal",
+    srcs = ["be_ai_goal.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_ai_move",
+    srcs = ["be_ai_move.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_ai_weap",
+    srcs = ["be_ai_weap.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_ai_weight",
+    srcs = ["be_ai_weight.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_ea",
+    srcs = ["be_ea.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "be_interface",
+    srcs = ["be_interface.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "l_crc",
+    srcs = ["l_crc.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "l_libvar",
+    srcs = ["l_libvar.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "l_log",
+    srcs = ["l_log.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "l_memory",
+    srcs = ["l_memory.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "l_precomp",
+    srcs = ["l_precomp.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "l_script",
+    srcs = ["l_script.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "l_struct",
+    srcs = ["l_struct.c"],
+    copts = COPTS,
+    deps = DEPS,
+)
+
+cc_library(
+    name = "botlib_impl",
+    copts = COPTS,
     includes = ["."],
     visibility = [
         "//code/client:__pkg__",
         "//code/game:__pkg__",
         "//code/server:__pkg__",
     ],
-    deps = [
-        ":api",
-        ":botlib",
-        "//code/qcommon",
-        "//code/qcommon:shared_api",
+    deps = DEPS + [
+        ":be_aas_bspq3",
+        ":be_aas_cluster",
+        ":be_aas_debug",
+        ":be_aas_entity",
+        ":be_aas_file",
+        ":be_aas_main",
+        ":be_aas_move",
+        ":be_aas_optimize",
+        ":be_aas_reach",
+        ":be_aas_route",
+        ":be_aas_routealt",
+        ":be_aas_sample",
+        ":be_ai_char",
+        ":be_ai_chat",
+        ":be_ai_gen",
+        ":be_ai_goal",
+        ":be_ai_move",
+        ":be_ai_weap",
+        ":be_ai_weight",
+        ":be_ea",
+        ":be_interface",
+        ":l_crc",
+        ":l_libvar",
+        ":l_log",
+        ":l_memory",
+        ":l_precomp",
+        ":l_script",
+        ":l_struct",
     ],
 )
