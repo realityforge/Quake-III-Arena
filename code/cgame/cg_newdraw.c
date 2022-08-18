@@ -1436,7 +1436,6 @@ static void CG_DrawMedal(int ownerDraw, rectDef_t* rect, float scale, vec4_t col
     trap_R_SetColor(NULL);
 }
 
-//
 void CG_OwnerDraw(float x, float y, float w, float h, float text_x, float text_y, int ownerDraw, int ownerDrawFlags, int align, float special, float scale, vec4_t color, qhandle_t shader, int textStyle)
 {
     rectDef_t rect;
