@@ -474,7 +474,7 @@ static void CG_DrawSelectedPlayerPowerup(const rectDef_t* rect)
     }
 }
 
-static void CG_DrawSelectedPlayerHead(rectDef_t* rect, bool draw2D, bool voice)
+static void CG_DrawSelectedPlayerHead(rectDef_t* rect, bool voice)
 {
     clipHandle_t cm;
     clientInfo_t* ci;
@@ -1481,10 +1481,10 @@ void CG_OwnerDraw(float x, float y, float w, float h, float text_x, float text_y
         CG_DrawPlayerAmmoValue(&rect, scale, color, shader, textStyle);
         break;
     case CG_SELECTEDPLAYER_HEAD:
-        CG_DrawSelectedPlayerHead(&rect, ownerDrawFlags & CG_SHOW_2DONLY, false);
+        CG_DrawSelectedPlayerHead(&rect, false);
         break;
     case CG_VOICE_HEAD:
-        CG_DrawSelectedPlayerHead(&rect, ownerDrawFlags & CG_SHOW_2DONLY, true);
+        CG_DrawSelectedPlayerHead(&rect, true);
         break;
     case CG_VOICE_NAME:
         CG_DrawSelectedPlayerName(&rect, scale, color, true, textStyle);
