@@ -493,7 +493,7 @@ static int CG_ParseVoiceChats(const char* filename, voiceChatList_t* voiceChatLi
         return false;
     }
     if (len >= MAX_VOICEFILESIZE) {
-        CG_Printf(S_COLOR_RED "voice chat file too large: %s is %i, max allowed is %i", filename, len, MAX_VOICEFILESIZE);
+        CG_Printf(S_COLOR_RED "voice chat file too large: %s is %i, max allowed is %i\n", filename, len, MAX_VOICEFILESIZE);
         trap_FS_FCloseFile(f);
         return false;
     }
