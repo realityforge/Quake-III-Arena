@@ -212,11 +212,6 @@ typedef struct {
     float lastfraggedcarrier;
 } playerTeamState_t;
 
-// the auto following clients don't follow a specific client
-// number, but instead follow the first two active players
-#define FOLLOW_ACTIVE1 -1
-#define FOLLOW_ACTIVE2 -2
-
 // client data that stays across multiple levels or tournament restarts
 // this is achieved by writing all the data to cvar strings at game shutdown
 // time and reading them back at connection time.  Anything added here
