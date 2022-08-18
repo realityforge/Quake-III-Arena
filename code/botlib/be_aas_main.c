@@ -200,9 +200,6 @@ int AAS_Setup()
     aasworld.entities = (aas_entity_t*)GetClearedHunkMemory(aasworld.maxentities * sizeof(aas_entity_t));
     // invalidate all the entities
     AAS_InvalidateEntities();
-    // force some recalculations
-    // LibVarSet("forceclustering", "1");			//force clustering calculation
-    // LibVarSet("forcereachability", "1");		//force reachability calculation
     aasworld.numframes = 0;
     return BLERR_NOERROR;
 }
