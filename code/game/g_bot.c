@@ -115,12 +115,12 @@ static void G_LoadArenasFromFile(char* filename)
 
     len = trap_FS_FOpenFile(filename, &f, FS_READ);
     if (!f) {
-        trap_Print(va(S_COLOR_RED "file not found: %s\n", filename));
+        G_Printf(S_COLOR_RED "file not found: %s\n", filename);
         return;
     }
     if (len >= MAX_ARENAS_TEXT) {
         trap_FS_FCloseFile(f);
-        trap_Print(va(S_COLOR_RED "file too large: %s is %i, max allowed is %i\n", filename, len, MAX_ARENAS_TEXT));
+        G_Printf(S_COLOR_RED "file too large: %s is %i, max allowed is %i\n", filename, len, MAX_ARENAS_TEXT);
         return;
     }
 
@@ -159,7 +159,7 @@ static void G_LoadArenas()
         strncatz(filename, sizeof(filename), dirptr);
         G_LoadArenasFromFile(filename);
     }
-    trap_Print(va("%i arenas parsed\n", g_numArenas));
+    G_Printf("%i arenas parsed\n", g_numArenas);
 
     for (n = 0; n < g_numArenas; n++) {
         Info_SetValueForKey(g_arenaInfos[n], "num", va("%i", n));
@@ -749,7 +749,7 @@ void Svcmd_BotList_f()
         if (!*aifile) {
             strcpy(aifile, "bots/default_c.c");
         }
-        trap_Print(va("%-16s %-16s %-20s %-20s\n", name, model, aifile, funname));
+        G_Printf("%-16s %-16s %-20s %-20s\n", name, model, aifile, funname);
     }
 }
 
@@ -813,11 +813,11 @@ static void G_LoadBotsFromFile(char* filename)
 
     len = trap_FS_FOpenFile(filename, &f, FS_READ);
     if (!f) {
-        trap_Print(va(S_COLOR_RED "file not found: %s\n", filename));
+        G_Printf(S_COLOR_RED "file not found: %s\n", filename);
         return;
     }
     if (len >= MAX_BOTS_TEXT) {
-        trap_Print(va(S_COLOR_RED "file too large: %s is %i, max allowed is %i\n", filename, len, MAX_BOTS_TEXT));
+        G_Printf(S_COLOR_RED "file too large: %s is %i, max allowed is %i\n", filename, len, MAX_BOTS_TEXT);
         trap_FS_FCloseFile(f);
         return;
     }
@@ -861,13 +861,13 @@ static void G_LoadBots()
         strncatz(filename, sizeof(filename), dirptr);
         G_LoadBotsFromFile(filename);
     }
-    trap_Print(va("%i bots parsed\n", g_numBots));
+    G_Printf("%i bots parsed\n", g_numBots);
 }
 
 char* G_GetBotInfoByNumber(int num)
 {
     if (num < 0 || num >= g_numBots) {
-        trap_Print(va(S_COLOR_RED "Invalid bot number: %i\n", num));
+        G_Printf(S_COLOR_RED "Invalid bot number: %i\n", num);
         return NULL;
     }
     return g_botInfos[num];
