@@ -298,7 +298,7 @@ static void CG_ConfigStringModified()
         cgs.teamVoteNo[num - CS_TEAMVOTE_NO] = atoi(str);
         cgs.teamVoteModified[num - CS_TEAMVOTE_NO] = true;
     } else if (num >= CS_TEAMVOTE_STRING && num <= CS_TEAMVOTE_STRING + 1) {
-        strncpyz(cgs.teamVoteString[num - CS_TEAMVOTE_STRING], str, sizeof(cgs.teamVoteString[0]));
+        strncpyz(cgs.teamVoteString[num - CS_TEAMVOTE_STRING], str, sizeof(cgs.teamVoteString[num - CS_TEAMVOTE_STRING]));
 #ifdef MISSIONPACK
         trap_S_StartLocalSound(cgs.media.voteNow, CHAN_ANNOUNCER);
 #endif
