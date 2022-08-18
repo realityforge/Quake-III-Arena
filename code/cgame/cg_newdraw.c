@@ -444,26 +444,14 @@ static void CG_DrawPlayerScore(rectDef_t* rect, float scale, vec4_t color, qhand
     }
 }
 
-static void CG_DrawPlayerItem(rectDef_t* rect, float scale, bool draw2D)
+static void CG_DrawPlayerItem(const rectDef_t* rect)
 {
-    int value;
-    vec3_t origin, angles;
-
-    value = cg.snap->ps.stats[STAT_HOLDABLE_ITEM];
+    const int value = cg.snap->ps.stats[STAT_HOLDABLE_ITEM];
     if (value) {
         CG_RegisterItemVisuals(value);
 
-        if (true) {
-            CG_RegisterItemVisuals(value);
-            CG_DrawPic(rect->x, rect->y, rect->w, rect->h, cg_items[value].icon);
-        } else {
-            VectorClear(angles);
-            origin[0] = 90;
-            origin[1] = 0;
-            origin[2] = -10;
-            angles[YAW] = (cg.time & 2047) * 360 / 2048.0;
-            CG_Draw3DModel(rect->x, rect->y, rect->w, rect->h, cg_items[value].models[0], 0, origin, angles);
-        }
+        CG_RegisterItemVisuals(value);
+        CG_DrawPic(rect->x, rect->y, rect->w, rect->h, cg_items[value].icon);
     }
 }
 
@@ -1526,7 +1514,7 @@ void CG_OwnerDraw(float x, float y, float w, float h, float text_x, float text_y
         CG_DrawPlayerHead(&rect);
         break;
     case CG_PLAYER_ITEM:
-        CG_DrawPlayerItem(&rect, scale, ownerDrawFlags & CG_SHOW_2DONLY);
+        CG_DrawPlayerItem(&rect);
         break;
     case CG_PLAYER_SCORE:
         CG_DrawPlayerScore(&rect, scale, color, shader, textStyle);
