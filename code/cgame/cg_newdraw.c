@@ -483,7 +483,7 @@ static void CG_DrawSelectedPlayerHead(rectDef_t* rect, bool voice)
     vec3_t origin;
     vec3_t mins, maxs, angles;
 
-    ci = cgs.clientinfo + ((voice) ? cgs.currentVoiceClient : sortedTeamPlayers[CG_GetSelectedPlayer()]);
+    ci = cgs.clientinfo + (voice ? cgs.currentVoiceClient : sortedTeamPlayers[CG_GetSelectedPlayer()]);
 
     if (ci) {
         if (cg_draw3dIcons.integer) {
