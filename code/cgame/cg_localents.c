@@ -739,7 +739,6 @@ void CG_AddLocalEntities()
         switch (le->leType) {
         default:
             CG_Error("Bad leType: %i", le->leType);
-            break;
 
         case LE_MARK:
             break;
