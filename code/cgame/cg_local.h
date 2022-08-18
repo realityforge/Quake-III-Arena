@@ -402,7 +402,6 @@ typedef struct weaponInfo_s {
 
     sfxHandle_t readySound;
     sfxHandle_t firingSound;
-    bool loopFireSound;
 } weaponInfo_t;
 
 // each IT_* item has an associated itemInfo_t

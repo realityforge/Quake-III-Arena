@@ -627,8 +627,6 @@ void CG_RegisterWeapon(int weaponNum)
         weaponInfo->handsModel = trap_R_RegisterModel("models/weapons2/shotgun/shotgun_hand.md3");
     }
 
-    weaponInfo->loopFireSound = false;
-
     switch (weaponNum) {
     case WP_GAUNTLET:
         MAKERGB(weaponInfo->flashDlightColor, 0.6f, 0.6f, 1.0f);
@@ -665,7 +663,6 @@ void CG_RegisterWeapon(int weaponNum)
 #ifdef MISSIONPACK
     case WP_CHAINGUN:
         weaponInfo->firingSound = trap_S_RegisterSound("sound/weapons/vulcan/wvulfire.wav", false);
-        weaponInfo->loopFireSound = true;
         MAKERGB(weaponInfo->flashDlightColor, 1, 1, 0);
         weaponInfo->flashSound[0] = trap_S_RegisterSound("sound/weapons/vulcan/vulcanf1b.wav", false);
         weaponInfo->flashSound[1] = trap_S_RegisterSound("sound/weapons/vulcan/vulcanf2b.wav", false);
