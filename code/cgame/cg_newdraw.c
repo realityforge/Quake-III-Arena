@@ -887,35 +887,24 @@ float CG_GetValue(int ownerDraw)
     case CG_SELECTEDPLAYER_ARMOR:
         ci = cgs.clientinfo + sortedTeamPlayers[CG_GetSelectedPlayer()];
         return ci->armor;
-        break;
     case CG_SELECTEDPLAYER_HEALTH:
         ci = cgs.clientinfo + sortedTeamPlayers[CG_GetSelectedPlayer()];
         return ci->health;
-        break;
     case CG_PLAYER_ARMOR_VALUE:
         return ps->stats[STAT_ARMOR];
-        break;
     case CG_PLAYER_AMMO_VALUE:
-        if (cent->currentState.weapon) {
-            return ps->ammo[cent->currentState.weapon];
-        }
-        break;
+        return cent->currentState.weapon ? ps->ammo[cent->currentState.weapon] : -1;
     case CG_PLAYER_SCORE:
         return cg.snap->ps.persistent[PERS_SCORE];
-        break;
     case CG_PLAYER_HEALTH:
         return ps->stats[STAT_HEALTH];
-        break;
     case CG_RED_SCORE:
         return cgs.scores1;
-        break;
     case CG_BLUE_SCORE:
         return cgs.scores2;
-        break;
     default:
-        break;
+        return -1;
     }
-    return -1;
 }
 
 bool CG_OtherTeamHasFlag()
