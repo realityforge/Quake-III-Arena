@@ -52,7 +52,7 @@ botlib_globals_t botlibglobals;
 
 static botlib_export_t be_botlib_export;
 botlib_import_t botimport;
-int bot_developer;
+bool bot_developer = false;
 
 //===========================================================================
 //
@@ -83,7 +83,7 @@ static bool BotLibSetup(char* str)
 
 static int Export_BotLibSetup()
 {
-    bot_developer = LibVarGetValue("bot_developer");
+    bot_developer = LibVarGetBoolValue("bot_developer");
     memset(&botlibglobals, 0, sizeof(botlibglobals));
     Log_Open("botlib.log");
     botimport.Print(PRT_MESSAGE, "------- BotLib Initialization -------\n");

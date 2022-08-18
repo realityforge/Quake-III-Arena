@@ -566,7 +566,7 @@ void AAS_InitClustering()
     // if there are clusters
     if (aasworld.numclusters >= 1) {
         // if clustering isn't forced
-        if (!((int)LibVarGetValue("forceclustering")) && !((int)LibVarGetValue("forcereachability")))
+        if (!LibVarGetBoolValue("forceclustering") && !LibVarGetBoolValue("forcereachability"))
             return;
     }
     // set all view portals as cluster portals in case we re-calculate the reachabilities and clusters (with -reach)

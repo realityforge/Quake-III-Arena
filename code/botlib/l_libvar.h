@@ -49,6 +49,11 @@ static FORCEINLINE int LibVarGetIntValue(const char* var_name)
 {
     return (int)(LibVarGetValue(var_name));
 }
+// gets the value of the library variable with the given name
+static FORCEINLINE bool LibVarGetBoolValue(const char* var_name)
+{
+    return 0 != LibVarGetIntValue(var_name) ? true : false;
+}
 // creates the library variable if not existing already and returns it
 libvar_t* LibVar(const char* var_name, const char* value);
 // creates the library variable if not existing already and returns the value
@@ -57,6 +62,11 @@ float LibVarValue(const char* var_name, const char* value);
 static FORCEINLINE int LibVarIntValue(const char* var_name, const char* value)
 {
     return (int)(LibVarValue(var_name, value));
+}
+// creates the library variable if not existing already and returns the value
+static FORCEINLINE bool LibVarBoolValue(const char* var_name, const char* value)
+{
+    return 0 != LibVarIntValue(var_name, value) ? true : false;
 }
 // creates the library variable if not existing already and returns the value string
 char* LibVarString(const char* var_name, const char* value);

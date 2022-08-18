@@ -78,9 +78,9 @@ static void AAS_ContinueInit()
     AAS_InitClustering();
     // if reachability has been calculated and an AAS file should be written
     // or there is a forced data optimization
-    if (aasworld.savefile || ((int)LibVarGetValue("forcewrite"))) {
+    if (aasworld.savefile || LibVarGetBoolValue("forcewrite")) {
         // optimize the AAS data
-        if ((int)LibVarValue("aasoptimize", "0"))
+        if (LibVarBoolValue("aasoptimize", "0"))
             AAS_Optimize();
         // save the AAS file
         if (AAS_WriteAASFile(aasworld.filename)) {

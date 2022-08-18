@@ -3373,7 +3373,7 @@ void AAS_InitReachability()
         return;
 
     if (aasworld.reachabilitysize) {
-        if (!((int)LibVarGetValue("forcereachability"))) {
+        if (!LibVarGetBoolValue("forcereachability")) {
             aasworld.numreachabilityareas = aasworld.numareas + 2;
             return;
         }
