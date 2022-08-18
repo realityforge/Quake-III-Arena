@@ -80,7 +80,6 @@ EXPORT intptr_t vmMain(int command, int arg0, int arg1, int arg2, int arg3, int 
     default:
         CG_Error("vmMain: unknown command %i", command);
     }
-    return -1;
 }
 
 cg_t cg;
