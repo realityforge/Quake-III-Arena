@@ -1427,7 +1427,6 @@ void CM_TraceThroughPatchCollide(traceWork_t* tw, const struct patchCollide_s* p
                     debugPatchCollide = pc;
                     debugFacet = facet;
                 }
-
                 tw->trace.fraction = enterFrac;
                 VectorCopy(bestplane, tw->trace.plane.normal);
                 tw->trace.plane.dist = bestplane[3];
