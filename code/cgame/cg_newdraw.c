@@ -46,7 +46,6 @@ void CG_CheckOrderPending()
         return;
     }
     if (cgs.orderPending) {
-        // clientInfo_t *ci = cgs.clientinfo + sortedTeamPlayers[cg_currentSelectedPlayer.integer];
         const char *p1, *p2, *b;
         p1 = p2 = b = NULL;
         switch (cgs.currentOrder) {
@@ -91,10 +90,8 @@ void CG_CheckOrderPending()
             // for the player self
             if (sortedTeamPlayers[cg_currentSelectedPlayer.integer] == cg.snap->ps.clientNum && p1) {
                 trap_SendConsoleCommand(va("teamtask %i\n", cgs.currentOrder));
-                // trap_SendConsoleCommand(va("cmd say_team %s\n", p2));
                 trap_SendConsoleCommand(va("cmd vsay_team %s\n", p1));
             } else if (p2) {
-                // trap_SendConsoleCommand(va("cmd say_team %s, %s\n", ci->name,p));
                 trap_SendConsoleCommand(va("cmd vtell %d %s\n", sortedTeamPlayers[cg_currentSelectedPlayer.integer], p2));
             }
         }
