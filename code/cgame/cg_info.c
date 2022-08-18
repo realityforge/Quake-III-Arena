@@ -82,7 +82,7 @@ void CG_LoadingClient(int clientNum)
     if (loadingPlayerIconCount < MAX_LOADING_PLAYER_ICONS) {
         strncpyz(model, Info_ValueForKey(info, "model"), sizeof(model));
         skin = strrchr(model, '/');
-        if (skin) {
+        if (NULL != skin) {
             *skin++ = '\0';
         } else {
             skin = "default";
