@@ -496,7 +496,6 @@ static void CG_RegisterItemSounds(int itemNum)
         if (len >= MAX_QPATH || len < 5) {
             CG_Error("CG_RegisterItemSounds: %s has bad precache string",
                      item->classname);
-            return;
         }
         memcpy(data, start, len);
         data[len] = 0;
