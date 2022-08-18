@@ -427,7 +427,7 @@ void QDECL CG_Error(const char* msg, ...)
     trap_Error(text);
 }
 
-void QDECL Com_Error(int level, const char* error, ...)
+void QDECL Com_Error(UNUSED int level, const char* error, ...)
 {
     va_list argptr;
     char text[1024];
