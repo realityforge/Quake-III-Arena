@@ -230,7 +230,7 @@ static bool CG_ParseAnimationFile(const char* filename, clientInfo_t* ci)
     }
 
     if (i != MAX_ANIMATIONS) {
-        CG_Printf("Error parsing animation file: %s", filename);
+        CG_Printf("Error parsing animation file: %s\n", filename);
         return false;
     }
 
