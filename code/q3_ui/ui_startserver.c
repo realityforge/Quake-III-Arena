@@ -1411,7 +1411,7 @@ static void ServerPlayerIcon(const char* modelAndSkin, char* iconName, int iconN
     char model[MAX_QPATH];
 
     strncpyz(model, modelAndSkin, sizeof(model));
-    skin = Q_strrchr(model, '/');
+    skin = strrchr(model, '/');
     if (skin) {
         *skin++ = '\0';
     } else {

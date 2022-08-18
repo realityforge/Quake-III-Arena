@@ -402,25 +402,6 @@ int Q_isalpha(int c)
     return (0);
 }
 
-char* Q_strrchr(const char* string, int c)
-{
-    char cc = c;
-    char* s;
-    char* sp = (char*)0;
-
-    s = (char*)string;
-
-    while (*s) {
-        if (*s == cc)
-            sp = s;
-        s++;
-    }
-    if (cc == 0)
-        sp = s;
-
-    return sp;
-}
-
 int Q_stricmpn(const char* s1, const char* s2, int n)
 {
     int c1, c2;

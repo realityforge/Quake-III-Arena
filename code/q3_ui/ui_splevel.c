@@ -122,7 +122,7 @@ static void PlayerIcon(const char* modelAndSkin, char* iconName, int iconNameMax
     char model[MAX_QPATH];
 
     strncpyz(model, modelAndSkin, sizeof(model));
-    skin = Q_strrchr(model, '/');
+    skin = strrchr(model, '/');
     if (skin) {
         *skin++ = '\0';
     } else {
