@@ -457,8 +457,6 @@ const char* CG_Argv(int arg)
     return buffer;
 }
 
-//========================================================================
-
 /*
 =================
 CG_RegisterItemSounds
