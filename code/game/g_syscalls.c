@@ -44,7 +44,7 @@ void trap_Print(const char* text)
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-noreturn"
-NORETURN void trap_Error(const char* text)
+void trap_Error(const char* text)
 {
     syscall(G_ERROR, text);
 }

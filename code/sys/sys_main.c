@@ -123,7 +123,7 @@ static NORETURN void Sys_Exit(int exitCode)
     exit(exitCode);
 }
 
-NORETURN void Sys_Quit(void)
+void Sys_Quit(void)
 {
     Sys_Exit(0);
 }
@@ -204,7 +204,7 @@ void Sys_Print(const char* msg)
         fputs(msg, stderr);
 }
 
-NORETURN void Sys_Error(const char* error, ...)
+void Sys_Error(const char* error, ...)
 {
     va_list argptr;
     char string[1024];
@@ -360,7 +360,7 @@ void Sys_ParseArgs(int argc, char** argv)
 #endif
 #endif
 
-NORETURN void Sys_SigHandler(int signal)
+void Sys_SigHandler(int signal)
 {
     static bool signalcaught = false;
 

@@ -242,7 +242,7 @@ void QDECL G_Printf(const char* fmt, ...)
     trap_Print(text);
 }
 
-void NORETURN QDECL G_Error(const char* fmt, ...)
+void QDECL G_Error(const char* fmt, ...)
 {
     va_list argptr;
     char text[1024];

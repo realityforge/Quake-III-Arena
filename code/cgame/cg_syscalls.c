@@ -41,7 +41,7 @@ void trap_Print(const char* fmt)
     syscall(CG_PRINT, fmt);
 }
 
-NORETURN void trap_Error(const char* fmt)
+void trap_Error(const char* fmt)
 {
     syscall(CG_ERROR, fmt);
     // The following construct stops compilers such as GCC and clang
