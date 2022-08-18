@@ -940,7 +940,6 @@ bool CG_YourTeamHasFlag()
 //
 bool CG_OwnerDrawVisible(int flags)
 {
-
     if (flags & CG_SHOW_TEAMINFO) {
         return (cg_currentSelectedPlayer.integer == numSortedTeamPlayers);
     }
