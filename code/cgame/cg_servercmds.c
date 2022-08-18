@@ -502,11 +502,11 @@ static int CG_ParseVoiceChats(const char* filename, voiceChatList_t* voiceChatLi
 
     len = trap_FS_FOpenFile(filename, &f, FS_READ);
     if (!f) {
-        trap_Print(va(S_COLOR_RED "voice chat file not found: %s\n", filename));
+        CG_Printf(S_COLOR_RED "voice chat file not found: %s\n", filename);
         return false;
     }
     if (len >= MAX_VOICEFILESIZE) {
-        trap_Print(va(S_COLOR_RED "voice chat file too large: %s is %i, max allowed is %i\n", filename, len, MAX_VOICEFILESIZE));
+        CG_Printf(S_COLOR_RED "voice chat file too large: %s is %i, max allowed is %i\n", filename, len, MAX_VOICEFILESIZE);
         trap_FS_FCloseFile(f);
         return false;
     }
@@ -534,7 +534,7 @@ static int CG_ParseVoiceChats(const char* filename, voiceChatList_t* voiceChatLi
     } else if (!Q_stricmp(token, "neuter")) {
         voiceChatList->gender = GENDER_NEUTER;
     } else {
-        trap_Print(va(S_COLOR_RED "expected gender not found in voice chat file: %s\n", filename));
+        CG_Printf(S_COLOR_RED "expected gender not found in voice chat file: %s\n", filename);
         return false;
     }
 
@@ -547,7 +547,7 @@ static int CG_ParseVoiceChats(const char* filename, voiceChatList_t* voiceChatLi
         Com_sprintf(voiceChats[voiceChatList->numVoiceChats].id, sizeof(voiceChats[voiceChatList->numVoiceChats].id), "%s", token);
         token = COM_ParseExt(p, true);
         if (Q_stricmp(token, "{")) {
-            trap_Print(va(S_COLOR_RED "expected { found %s in voice chat file: %s\n", token, filename));
+            CG_Printf(S_COLOR_RED "expected { found %s in voice chat file: %s\n", token, filename);
             return false;
         }
         voiceChats[voiceChatList->numVoiceChats].numSounds = 0;
@@ -607,7 +607,7 @@ static int CG_HeadModelVoiceChats(char* filename)
         return -1;
     }
     if (len >= MAX_VOICEFILESIZE) {
-        trap_Print(va(S_COLOR_RED "voice chat file too large: %s is %i, max allowed is %i\n", filename, len, MAX_VOICEFILESIZE));
+        CG_Printf(S_COLOR_RED "voice chat file too large: %s is %i, max allowed is %i\n", filename, len, MAX_VOICEFILESIZE);
         trap_FS_FCloseFile(f);
         return -1;
     }
