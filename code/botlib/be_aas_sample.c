@@ -73,7 +73,7 @@ void AAS_InitAASLinkHeap()
     max_aaslinks = aasworld.linkheapsize;
     // if there's no link heap present
     if (!aasworld.linkheap) {
-        max_aaslinks = (int)LibVarValue("max_aaslinks", "6144");
+        max_aaslinks = LibVarIntValue("max_aaslinks", "6144");
         if (max_aaslinks < 0)
             max_aaslinks = 0;
         aasworld.linkheapsize = max_aaslinks;

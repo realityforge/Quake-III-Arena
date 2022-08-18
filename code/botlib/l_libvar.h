@@ -20,6 +20,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
+#include "attributes.h"
+
 /*****************************************************************************
  * botlib vars
  *****************************************************************************/
@@ -42,10 +44,20 @@ libvar_t* LibVarGet(const char* var_name);
 char* LibVarGetString(const char* var_name);
 // gets the value of the library variable with the given name
 float LibVarGetValue(const char* var_name);
+// gets the value of the library variable with the given name
+static FORCEINLINE int LibVarGetIntValue(const char* var_name)
+{
+    return (int)(LibVarGetValue(var_name));
+}
 // creates the library variable if not existing already and returns it
 libvar_t* LibVar(const char* var_name, const char* value);
 // creates the library variable if not existing already and returns the value
 float LibVarValue(const char* var_name, const char* value);
+// creates the library variable if not existing already and returns the value
+static FORCEINLINE int LibVarIntValue(const char* var_name, const char* value)
+{
+    return (int)(LibVarValue(var_name, value));
+}
 // creates the library variable if not existing already and returns the value string
 char* LibVarString(const char* var_name, const char* value);
 // sets the library variable

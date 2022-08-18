@@ -212,7 +212,7 @@ static itemconfig_t* LoadItemConfig(char* filename)
     itemconfig_t* ic;
     iteminfo_t* ii;
 
-    max_iteminfo = (int)LibVarValue("max_iteminfo", "256");
+    max_iteminfo = LibVarIntValue("max_iteminfo", "256");
     if (max_iteminfo < 0) {
         botimport.Print(PRT_ERROR, "max_iteminfo = %d\n", max_iteminfo);
         max_iteminfo = 256;
@@ -293,7 +293,7 @@ static void InitLevelItemHeap()
     if (levelitemheap)
         FreeMemory(levelitemheap);
 
-    max_levelitems = (int)LibVarValue("max_levelitems", "256");
+    max_levelitems = LibVarIntValue("max_levelitems", "256");
     levelitemheap = (levelitem_t*)GetClearedMemory(max_levelitems * sizeof(levelitem_t));
 
     for (i = 0; i < max_levelitems - 1; i++) {

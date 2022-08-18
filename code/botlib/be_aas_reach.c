@@ -3378,7 +3378,7 @@ void AAS_InitReachability()
             return;
         }
     }
-    calcgrapplereach = LibVarGetValue("grapplereach");
+    calcgrapplereach = LibVarGetIntValue("grapplereach");
     aasworld.savefile = true;
     // start with area 1 because area zero is a dummy
     aasworld.numreachabilityareas = 1;
