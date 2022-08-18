@@ -358,7 +358,6 @@ static float shaderAnimSTRatio[MAX_SHADER_ANIMS] = {
 };
 // done.
 
-#define PARTICLE_GRAVITY 40
 #define MAX_PARTICLES 1024
 
 cparticle_t *active_particles, *free_particles;
