@@ -161,7 +161,7 @@ static void CG_DrawPlayerArmorIcon(rectDef_t* rect, bool draw2D)
         origin[0] = 90;
         origin[1] = 0;
         origin[2] = -10;
-        angles[YAW] = (cg.time & 2047) * 360 / 2048.0f;
+        angles[YAW] = (cg.time & 2047) * 360 / 2048.0;
         CG_Draw3DModel(rect->x, rect->y, rect->w, rect->h, cgs.media.armorModel, 0, origin, angles);
     }
 }
