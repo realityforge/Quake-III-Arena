@@ -79,7 +79,6 @@ EXPORT intptr_t vmMain(int command, int arg0, int arg1, int arg2, int arg3, int 
         return 0;
     default:
         CG_Error("vmMain: unknown command %i", command);
-        break;
     }
     return -1;
 }
