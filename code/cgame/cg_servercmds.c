@@ -861,7 +861,7 @@ static void CG_VoiceChat(int mode)
 
     CG_VoiceChatLocal(mode, voiceOnly, clientNum, color, cmd);
 }
-#endif // MISSIONPACK
+#endif
 
 static void CG_RemoveChatEscapeChar(char* text)
 {
