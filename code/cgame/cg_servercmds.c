@@ -908,7 +908,7 @@ static void CG_ServerCommand()
     }
 
     if (!strcmp(cmd, "print")) {
-        CG_Printf("%s", CG_Argv(1));
+        CG_Printf("%s\n", CG_Argv(1));
 #ifdef MISSIONPACK
         cmd = CG_Argv(1); // yes, this is obviously a hack, but so is the way we hear about
                           // votes passing or failing
