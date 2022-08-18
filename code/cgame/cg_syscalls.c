@@ -41,13 +41,14 @@ void trap_Print(const char* fmt)
     syscall(CG_PRINT, fmt);
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-noreturn"
 NORETURN void trap_Error(const char* fmt)
 {
     syscall(CG_ERROR, fmt);
+    // The following construct stops compilers such as GCC and clang
+    // from warning about a "noreturn" function returning
+    while (1)
+        ;
 }
-#pragma clang diagnostic pop
 
 int trap_Milliseconds()
 {
