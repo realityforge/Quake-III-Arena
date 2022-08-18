@@ -436,7 +436,7 @@ void QDECL Com_Error(int level, const char* error, ...)
     vsnprintf(text, sizeof(text), error, argptr);
     va_end(argptr);
 
-    CG_Error("%s", text);
+    trap_Error(text);
 }
 
 void QDECL Com_Printf(const char* msg, ...)
