@@ -442,6 +442,8 @@ static void CG_MapRestart()
     trap_Cvar_Set("cg_thirdPerson", "0");
 }
 
+#ifdef MISSIONPACK
+
 #define MAX_VOICEFILESIZE 16384
 #define MAX_VOICEFILES 8
 #define MAX_VOICECHATS 64
@@ -579,7 +581,6 @@ void CG_LoadVoiceChats()
     CG_Printf("voice chat memory size = %d\n", size - trap_MemoryRemaining());
 }
 
-#ifdef MISSIONPACK
 static int CG_HeadModelVoiceChats(char* filename)
 {
     int len, i;
@@ -721,7 +722,6 @@ static voiceChatList_t* CG_VoiceChatListForClient(int clientNum)
     // just return the first voice chat list
     return &voiceChatLists[0];
 }
-#endif
 
 #define MAX_VOICECHATBUFFER 32
 
@@ -735,7 +735,6 @@ typedef struct bufferedVoiceChat_s {
 
 bufferedVoiceChat_t voiceChatBuffer[MAX_VOICECHATBUFFER];
 
-#ifdef MISSIONPACK
 static void CG_PlayVoiceChat(bufferedVoiceChat_t* vchat)
 {
     // if we are going into the intermission, don't start any voices
