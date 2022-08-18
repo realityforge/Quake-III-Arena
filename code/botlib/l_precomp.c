@@ -246,14 +246,12 @@ static int PC_ReadDefineParms(source_t* source, define_t* define, token_t** parm
 }
 static int PC_StringizeTokens(token_t* tokens, token_t* token)
 {
-    token_t* t;
-
     token->type = TT_STRING;
     token->whitespace_p = NULL;
     token->endwhitespace_p = NULL;
     token->string[0] = '\0';
     strncatz(token->string, sizeof(token->string), "\"");
-    for (t = tokens; t; t = t->next) {
+    for (const token_t* t = tokens; t; t = t->next) {
         strncatz(token->string, sizeof(token->string), t->string);
     }
     strncatz(token->string, sizeof(token->string), "\"");
