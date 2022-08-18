@@ -475,37 +475,34 @@ static void CG_DrawSelectedPlayerPowerup(const rectDef_t* rect)
     }
 }
 
-static void CG_DrawSelectedPlayerHead(rectDef_t* rect, bool voice)
+static void CG_DrawSelectedPlayerHead(const rectDef_t* rect, const bool voice)
 {
-    clipHandle_t cm;
-    clientInfo_t* ci;
-    float len;
-    vec3_t origin;
-    vec3_t mins, maxs, angles;
-
-    ci = cgs.clientinfo + (voice ? cgs.currentVoiceClient : sortedTeamPlayers[CG_GetSelectedPlayer()]);
-
-    if (ci) {
+    const clientInfo_t* ci = cgs.clientinfo + (voice ? cgs.currentVoiceClient : sortedTeamPlayers[CG_GetSelectedPlayer()]);
+    if (NULL != ci) {
         if (cg_draw3dIcons.integer) {
-            cm = ci->headModel;
-            if (!cm) {
+            const clipHandle_t cm = ci->headModel;
+            if (0 == cm) {
                 return;
             }
 
+            vec3_t mins;
+            vec3_t maxs;
             // offset the origin y and z to center the head
             trap_R_ModelBounds(cm, mins, maxs);
 
-            origin[2] = -0.5 * (mins[2] + maxs[2]);
-            origin[1] = 0.5 * (mins[1] + maxs[1]);
+            vec3_t origin;
+            origin[2] = -0.5F * (mins[2] + maxs[2]);
+            origin[1] = 0.5F * (mins[1] + maxs[1]);
 
             // calculate distance so the head nearly fills the box
             // assume heads are taller than wide
-            len = 0.7 * (maxs[2] - mins[2]);
-            origin[0] = len / 0.268; // len / tan( fov/2 )
+            const float len = 0.7F * (maxs[2] - mins[2]);
+            origin[0] = len / 0.268F; // len / tan( fov/2 )
 
             // allow per-model tweaking
             VectorAdd(origin, ci->headOffset, origin);
 
+            vec3_t angles;
             angles[PITCH] = 0;
             angles[YAW] = 180;
             angles[ROLL] = 0;
