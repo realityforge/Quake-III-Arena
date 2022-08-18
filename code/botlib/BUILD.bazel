@@ -39,11 +39,7 @@ cc_library(
     ],
     copts = FULL_WARNINGS,
     includes = ["."],
-    visibility = [
-        "//code/client:__pkg__",
-        "//code/game:__pkg__",
-        "//code/server:__pkg__",
-    ],
+    visibility = ["//code/game:__pkg__"],
     deps = [
         ":api",
         "//code/qcommon",
