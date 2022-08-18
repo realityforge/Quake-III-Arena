@@ -415,7 +415,7 @@ void PRINTF_LIKE_FUNCTION(1, 2) QDECL CG_Printf(const char* msg, ...)
     trap_Print(text);
 }
 
-void NORETURN PRINTF_LIKE_FUNCTION(1, 2) QDECL CG_Error(const char* msg, ...)
+void QDECL CG_Error(const char* msg, ...)
 {
     va_list argptr;
     char text[1024];
@@ -427,7 +427,7 @@ void NORETURN PRINTF_LIKE_FUNCTION(1, 2) QDECL CG_Error(const char* msg, ...)
     trap_Error(text);
 }
 
-NORETURN void QDECL Com_Error(int level, const char* error, ...)
+void QDECL Com_Error(int level, const char* error, ...)
 {
     va_list argptr;
     char text[1024];

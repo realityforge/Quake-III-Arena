@@ -312,7 +312,7 @@ Both client and server can use this, and it will
 do the appropriate things.
 =============
 */
-NORETURN void Com_Quit_f()
+void Com_Quit_f()
 {
     // don't try to shutdown if we are in a recursive error
     if (!com_errorEntered) {

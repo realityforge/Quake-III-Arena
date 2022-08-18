@@ -87,7 +87,7 @@ void Sys_In_Restart_f(void)
 // =============================================================
 
 // single exit point (regular exit or in case of signal fault)
-NORETURN void Sys_Exit(int ex)
+void Sys_Exit(int ex)
 {
 #ifdef NDEBUG // regular behavior
 
@@ -103,7 +103,7 @@ NORETURN void Sys_Exit(int ex)
 #endif
 }
 
-NORETURN void Sys_Quit(void)
+void Sys_Quit(void)
 {
     CL_Shutdown();
     fcntl(0, F_SETFL, fcntl(0, F_GETFL, 0) & ~FNDELAY);

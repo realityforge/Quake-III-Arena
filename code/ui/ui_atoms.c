@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 bool m_entersound; // after a frame, so caching won't disrupt the sound
 
-void NORETURN QDECL Com_Error(int level, const char* error, ...)
+void QDECL Com_Error(int level, const char* error, ...)
 {
     va_list argptr;
     char text[1024];
