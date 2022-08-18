@@ -1412,16 +1412,6 @@ void CG_LoadMenus(const char* menuFile)
             break;
         }
 
-        // if ( Q_stricmp( token, "{" ) ) {
-        //	Com_Printf( "Missing { in menu file\n" );
-        //	break;
-        // }
-
-        // if ( menuCount == MAX_MENUS ) {
-        //	Com_Printf( "Too many menus!\n" );
-        //	break;
-        // }
-
         if (Q_stricmp(token, "}") == 0) {
             break;
         }
