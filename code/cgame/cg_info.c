@@ -55,7 +55,6 @@ static void CG_DrawLoadingIcons()
 void CG_LoadingString(const char* s)
 {
     strncpyz(cg.infoScreenText, s, sizeof(cg.infoScreenText));
-
     trap_UpdateScreen();
 }
 
