@@ -454,18 +454,14 @@ static void CG_DrawPlayerItem(const rectDef_t* rect)
     }
 }
 
-static void CG_DrawSelectedPlayerPowerup(rectDef_t* rect, bool draw2D)
+static void CG_DrawSelectedPlayerPowerup(const rectDef_t* rect)
 {
-    clientInfo_t* ci;
-    int j;
-    float x, y;
-
-    ci = cgs.clientinfo + sortedTeamPlayers[CG_GetSelectedPlayer()];
+    clientInfo_t* ci = cgs.clientinfo + sortedTeamPlayers[CG_GetSelectedPlayer()];
     if (ci) {
-        x = rect->x;
-        y = rect->y;
+        const float x = rect->x;
+        const float y = rect->y;
 
-        for (j = 0; j < PW_NUM_POWERUPS; j++) {
+        for (int j = 0; j < PW_NUM_POWERUPS; j++) {
             if (ci->powerups & (1 << j)) {
                 gitem_t* item;
                 item = BG_FindItemForPowerup(j);
@@ -1512,7 +1508,7 @@ void CG_OwnerDraw(float x, float y, float w, float h, float text_x, float text_y
         CG_DrawSelectedPlayerWeapon(&rect);
         break;
     case CG_SELECTEDPLAYER_POWERUP:
-        CG_DrawSelectedPlayerPowerup(&rect, ownerDrawFlags & CG_SHOW_2DONLY);
+        CG_DrawSelectedPlayerPowerup(&rect);
         break;
     case CG_PLAYER_HEAD:
         CG_DrawPlayerHead(&rect);
