@@ -401,10 +401,7 @@ int CG_CrosshairPlayer()
 
 int CG_LastAttacker()
 {
-    if (!cg.attackerTime) {
-        return -1;
-    }
-    return cg.snap->ps.persistent[PERS_ATTACKER];
+    return 0 != cg.attackerTime ? cg.snap->ps.persistent[PERS_ATTACKER] : -1;
 }
 
 void QDECL CG_Printf(const char* msg, ...)
