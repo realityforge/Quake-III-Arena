@@ -79,9 +79,7 @@ int vmMain(int command, int arg0, int arg1, int arg2, int arg3, int arg4, int ar
         return 0;
     default:
         CG_Error("vmMain: unknown command %i", command);
-        break;
     }
-    return -1;
 }
 
 cg_t cg;
@@ -500,7 +498,6 @@ static void CG_RegisterItemSounds(int itemNum)
         if (len >= MAX_QPATH || len < 5) {
             CG_Error("CG_RegisterItemSounds: %s has bad precache string",
                      item->classname);
-            return;
         }
         memcpy(data, start, len);
         data[len] = 0;
