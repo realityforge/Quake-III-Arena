@@ -448,7 +448,7 @@ void QDECL Com_Printf(const char* msg, ...)
     vsnprintf(text, sizeof(text), msg, argptr);
     va_end(argptr);
 
-    CG_Printf("%s", text);
+    trap_Print(text);
 }
 
 const char* CG_Argv(int arg)
