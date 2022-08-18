@@ -659,7 +659,6 @@ void Svcmd_AbortPodium_f(void);
 // g_bot.c
 //
 void G_InitBots(bool restart);
-char* G_GetBotInfoByNumber(int num);
 char* G_GetBotInfoByName(const char* name);
 void G_CheckBotSpawn(void);
 void G_RemoveQueuedBotBegin(int clientNum);

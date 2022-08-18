@@ -814,15 +814,6 @@ static void G_LoadBots()
     G_Printf("%i bots parsed\n", g_numBots);
 }
 
-char* G_GetBotInfoByNumber(int num)
-{
-    if (num < 0 || num >= g_numBots) {
-        G_Printf(S_COLOR_RED "Invalid bot number: %i\n", num);
-        return NULL;
-    }
-    return g_botInfos[num];
-}
-
 char* G_GetBotInfoByName(const char* name)
 {
     int n;
