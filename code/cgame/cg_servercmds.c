@@ -574,7 +574,6 @@ static int CG_ParseVoiceChats(const char* filename, voiceChatList_t* voiceChatLi
         if (voiceChatList->numVoiceChats >= maxVoiceChats)
             return true;
     }
-    return true;
 }
 
 void CG_LoadVoiceChats()
