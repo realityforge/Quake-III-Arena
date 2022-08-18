@@ -330,36 +330,27 @@ static void CG_DrawSelectedPlayerArmor(rectDef_t* rect, float scale, vec4_t colo
     }
 }
 
-qhandle_t CG_StatusHandle(int task)
+qhandle_t CG_StatusHandle(const int task)
 {
-    qhandle_t h;
     switch (task) {
     case TEAMTASK_OFFENSE:
-        h = cgs.media.assaultShader;
-        break;
+        return cgs.media.assaultShader;
     case TEAMTASK_DEFENSE:
-        h = cgs.media.defendShader;
-        break;
+        return cgs.media.defendShader;
     case TEAMTASK_PATROL:
-        h = cgs.media.patrolShader;
+        return cgs.media.patrolShader;
         break;
     case TEAMTASK_FOLLOW:
-        h = cgs.media.followShader;
-        break;
+        return cgs.media.followShader;
     case TEAMTASK_CAMP:
-        h = cgs.media.campShader;
-        break;
+        return cgs.media.campShader;
     case TEAMTASK_RETRIEVE:
-        h = cgs.media.retrieveShader;
-        break;
+        return cgs.media.retrieveShader;
     case TEAMTASK_ESCORT:
-        h = cgs.media.escortShader;
-        break;
+        return cgs.media.escortShader;
     default:
-        h = cgs.media.assaultShader;
-        break;
+        return cgs.media.assaultShader;
     }
-    return h;
 }
 
 static void CG_DrawSelectedPlayerStatus(rectDef_t* rect)
