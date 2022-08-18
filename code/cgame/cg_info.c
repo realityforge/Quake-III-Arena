@@ -270,7 +270,6 @@ void CG_DrawInformation()
         if (value) {
             UI_DrawProportionalString(320, y, va("capturelimit %i", value),
                                       UI_CENTER | UI_SMALLFONT | UI_DROPSHADOW, colorWhite);
-            y += PROP_HEIGHT;
         }
     }
 }
