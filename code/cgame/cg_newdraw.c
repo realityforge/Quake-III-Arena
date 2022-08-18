@@ -484,8 +484,6 @@ static void CG_DrawSelectedPlayerPowerup(rectDef_t* rect, bool draw2D)
                 item = BG_FindItemForPowerup(j);
                 if (item) {
                     CG_DrawPic(x, y, rect->w, rect->h, trap_R_RegisterShader(item->icon));
-                    x += 3;
-                    y += 3;
                     return;
                 }
             }
