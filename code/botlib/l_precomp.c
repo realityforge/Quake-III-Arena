@@ -254,7 +254,6 @@ static int PC_StringizeTokens(token_t* tokens, token_t* token)
     token->string[0] = '\0';
     strncatz(token->string, sizeof(token->string), "\"");
     for (t = tokens; t; t = t->next) {
-
         strncatz(token->string, sizeof(token->string), t->string);
     }
     strncatz(token->string, sizeof(token->string), "\"");
