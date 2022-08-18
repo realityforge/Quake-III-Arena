@@ -3382,7 +3382,7 @@ void AAS_InitReachability()
     aasworld.savefile = true;
     // start with area 1 because area zero is a dummy
     aasworld.numreachabilityareas = 1;
-    // setup the heap with reachability links
+    // set up the heap with reachability links
     AAS_SetupReachabilityHeap();
     // allocate area reachability link array
     areareachability = (aas_lreachability_t**)GetClearedMemory(
