@@ -58,11 +58,9 @@ void CG_LoadingString(const char* s)
     trap_UpdateScreen();
 }
 
-void CG_LoadingItem(int itemNum)
+void CG_LoadingItem(const int itemNum)
 {
-    gitem_t* item;
-
-    item = &bg_itemlist[itemNum];
+    const gitem_t* item = &bg_itemlist[itemNum];
 
     if (item->icon && loadingItemIconCount < MAX_LOADING_ITEM_ICONS) {
         loadingItemIcons[loadingItemIconCount++] = trap_R_RegisterShaderNoMip(item->icon);
