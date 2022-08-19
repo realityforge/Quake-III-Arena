@@ -241,13 +241,13 @@ static float AAS_WeaponJumpZVelocity(const vec3_t origin, const float radiusdama
     bsptrace = AAS_Trace(start, NULL, NULL, end, 1, CONTENTS_SOLID);
     // calculate the damage the bot will get from the rocket impact
     VectorAdd(botmins, botmaxs, v);
-    VectorMA(origin, 0.5, v, v);
+    VectorMA(origin, 0.5F, v, v);
     VectorSubtract(bsptrace.endpos, v, v);
-    points = radiusdamage - 0.5 * VectorLength(v);
+    points = radiusdamage - 0.5F * VectorLength(v);
     if (points < 0)
         points = 0;
     // the owner of the rocket gets half the damage
-    points *= 0.5;
+    points *= 0.5F;
     // mass of the bot (p_client.c: PutClientInServer)
     mass = 200;
     // knockback is the same as the damage points
@@ -256,7 +256,7 @@ static float AAS_WeaponJumpZVelocity(const vec3_t origin, const float radiusdama
     VectorSubtract(origin, bsptrace.endpos, dir);
     VectorNormalize(dir);
     // damage velocity
-    VectorScale(dir, 1600.0 * (float)knockback / mass, kvel); // the rocket jump hack...
+    VectorScale(dir, 1600.0F * (float)knockback / mass, kvel); // the rocket jump hack...
     // rocket impact velocity + jump velocity
     return kvel[2] + aassettings.phys_jumpvel;
 }
@@ -301,7 +301,7 @@ static void AAS_ApplyFriction(vec3_t vel, float friction, float stopspeed, float
     float speed, control, newspeed;
 
     // horizontal speed
-    speed = sqrt(vel[0] * vel[0] + vel[1] * vel[1]);
+    speed = sqrtf(vel[0] * vel[0] + vel[1] * vel[1]);
     if (speed) {
         control = speed < stopspeed ? stopspeed : speed;
         newspeed = speed - frametime * control * friction;
@@ -435,7 +435,7 @@ static int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
     memset(&trace, 0, sizeof(aas_trace_t));
     // start at the current origin
     VectorCopy(origin, org);
-    org[2] += 0.25;
+    org[2] += 0.25F;
     // velocity to test for the first frame
     VectorScale(velocity, frametime, frame_test_vel);
     jump_frame = -1;
@@ -445,7 +445,7 @@ static int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
         // get gravity depending on swimming or not
         gravity = swimming ? phys_watergravity : phys_gravity;
         // apply gravity at the START of the frame
-        frame_test_vel[2] = frame_test_vel[2] - (gravity * 0.1 * frametime);
+        frame_test_vel[2] = frame_test_vel[2] - (gravity * 0.1F * frametime);
         // if on the ground or swimming
         if (onground || swimming) {
             friction = swimming ? phys_waterfriction : phys_friction;
@@ -468,7 +468,7 @@ static int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
                 // if not swimming and upmove is positive then jump
                 if (!swimming && cmdmove[2] > 1) {
                     // jump velocity minus the gravity for one frame + 5 for safety
-                    frame_test_vel[2] = phys_jumpvel - (gravity * 0.1 * frametime) + 5;
+                    frame_test_vel[2] = phys_jumpvel - (gravity * 0.1F * frametime) + 5;
                     jump_frame = n;
                     // jumping so air accelerate
                     accelerate = phys_airaccelerate;
@@ -595,7 +595,7 @@ static int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
                 if (stopevent & SE_HITGROUNDAREA) {
                     if (DotProduct(plane->normal, up) > phys_maxsteepness) {
                         VectorCopy(org, start);
-                        start[2] += 0.5;
+                        start[2] += 0.5F;
                         if (AAS_PointAreaNum(start) == stopareanum) {
                             VectorCopy(start, move->endpos);
                             move->endarea = stopareanum;
@@ -615,7 +615,7 @@ static int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
                 // if it is a vertical plane and the bot didn't jump recently
                 if (plane->normal[2] == 0 && (jump_frame < 0 || n - jump_frame > 2)) {
                     // check for a step
-                    VectorMA(org, -0.25, plane->normal, start);
+                    VectorMA(org, -0.25F, plane->normal, start);
                     VectorCopy(start, stepend);
                     start[2] += phys_maxstep;
                     steptrace = AAS_TraceClientBBox(start, stepend, presencetype, entnum);
@@ -660,8 +660,8 @@ static int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
                             delta = frame_test_vel[2] - old_frame_test_vel[2];
                         }
                         if (delta) {
-                            delta = delta * 10;
-                            delta = delta * delta * 0.0001;
+                            delta = delta * 10.F;
+                            delta = delta * delta * 0.0001F;
                             if (swimming)
                                 delta = 0;
                             // never take falling damage if completely underwater
@@ -835,7 +835,7 @@ int AAS_HorizontalVelocityForJump(float zvel, vec3_t start, vec3_t end, float* v
     phys_maxvelocity = aassettings.phys_maxvelocity;
 
     // maximum height a player can jump with the given initial z velocity
-    maxjump = 0.5 * phys_gravity * (zvel / phys_gravity) * (zvel / phys_gravity);
+    maxjump = 0.5F * phys_gravity * (zvel / phys_gravity) * (zvel / phys_gravity);
     // top of the parabolic jump
     top = start[2] + maxjump;
     // height the bot will fall from the top
@@ -846,7 +846,7 @@ int AAS_HorizontalVelocityForJump(float zvel, vec3_t start, vec3_t end, float* v
         return 0;
     }
     // time a player takes to fall the height
-    t = sqrt(height2fall / (0.5 * phys_gravity));
+    t = sqrtf(height2fall / (0.5F * phys_gravity));
     // direction from start to end
     VectorSubtract(end, start, dir);
     if ((t + zvel / phys_gravity) == 0.0f) {
@@ -854,7 +854,7 @@ int AAS_HorizontalVelocityForJump(float zvel, vec3_t start, vec3_t end, float* v
         return 0;
     }
     // calculate horizontal speed
-    *velocity = sqrt(dir[0] * dir[0] + dir[1] * dir[1]) / (t + zvel / phys_gravity);
+    *velocity = sqrtf(dir[0] * dir[0] + dir[1] * dir[1]) / (t + zvel / phys_gravity);
     // the horizontal speed must be lower than the max speed
     if (*velocity > phys_maxvelocity) {
         *velocity = phys_maxvelocity;

@@ -702,7 +702,7 @@ static int BotLoadChatMessage(source_t* source, char* chatmessagestring)
                 SourceError(source, "chat message too long");
                 return false;
             }
-            sprintf(&ptr[strlen(ptr)], "%cv%ld%c", ESCAPE_CHAR, token.intvalue, ESCAPE_CHAR);
+            sprintf(&ptr[strlen(ptr)], "%cv%d%c", ESCAPE_CHAR, token.intvalue, ESCAPE_CHAR);
         }
         // random string
         else if (token.type == TT_NAME) {

@@ -45,8 +45,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define AAS_MAX_REACHABILITYSIZE 65536
 // number of units reachability points are placed inside the areas
 #define INSIDEUNITS 2
-#define INSIDEUNITS_WALKEND 5
-#define INSIDEUNITS_WALKSTART 0.1
+#define INSIDEUNITS_WALKEND 5.F
+#define INSIDEUNITS_WALKSTART 0.1F
 #define INSIDEUNITS_WATERJUMP 15
 // area flag used for weapon jumping
 #define AREA_WEAPONJUMP 8192 // valid area to weapon jump to
@@ -109,7 +109,7 @@ static float AAS_FaceArea(const aas_face_t* face)
         VectorSubtract(aasworld.vertexes[edge->v[side]], v, d1);
         VectorSubtract(aasworld.vertexes[edge->v[!side]], v, d2);
         CrossProduct(d1, d2, cross);
-        total += 0.5 * VectorLength(cross);
+        total += 0.5F * VectorLength(cross);
     }
     return total;
 }
@@ -190,7 +190,7 @@ static int AAS_GetJumpPadInfo(int ent, vec3_t areastart, vec3_t absmins, vec3_t 
     VectorAdd(origin, absmins, absmins);
     VectorAdd(origin, absmaxs, absmaxs);
     VectorAdd(absmins, absmaxs, origin);
-    VectorScale(origin, 0.5, origin);
+    VectorScale(origin, 0.5F, origin);
 
     // get the start areas
     VectorCopy(origin, teststart);
@@ -202,7 +202,7 @@ static int AAS_GetJumpPadInfo(int ent, vec3_t areastart, vec3_t absmins, vec3_t 
     } else {
         VectorCopy(trace.endpos, areastart);
     }
-    areastart[2] += 0.125;
+    areastart[2] += 0.125F;
     // get the target entity
     AAS_ValueForBSPEpairKey(ent, "target", target, MAX_EPAIRKEY);
     for (ent2 = AAS_NextBSPEntity(0); ent2; ent2 = AAS_NextBSPEntity(ent2)) {
@@ -218,7 +218,7 @@ static int AAS_GetJumpPadInfo(int ent, vec3_t areastart, vec3_t absmins, vec3_t 
     AAS_VectorForBSPEpairKey(ent2, "origin", ent2origin);
     height = ent2origin[2] - origin[2];
     gravity = aassettings.phys_gravity;
-    time = sqrt(height / (0.5 * gravity));
+    time = sqrtf(height / (0.5F * gravity));
     if (!time) {
         botimport.Print(PRT_MESSAGE, "trigger_push without time\n");
         return false;
@@ -321,7 +321,7 @@ int AAS_BestReachableArea(vec3_t origin, vec3_t mins, vec3_t maxs, vec3_t goalor
     if (areanum) {
         // drop client bbox down and try again
         VectorCopy(start, end);
-        start[2] += 0.25;
+        start[2] += 0.25F;
         end[2] -= 50;
         trace = AAS_TraceClientBBox(start, end, PRESENCE_CROUCH, -1);
         if (!trace.startsolid) {
@@ -430,7 +430,7 @@ static void AAS_FaceCenter(int facenum, vec3_t center)
         VectorAdd(center, aasworld.vertexes[edge->v[0]], center);
         VectorAdd(center, aasworld.vertexes[edge->v[1]], center);
     }
-    scale = 0.5 / face->numedges;
+    scale = 0.5F / face->numedges;
     VectorScale(center, scale, center);
 }
 //===========================================================================
@@ -439,63 +439,54 @@ static void AAS_FaceCenter(int facenum, vec3_t center)
 //===========================================================================
 static int AAS_FallDamageDistance()
 {
-    float maxzvelocity, gravity, t;
-
-    maxzvelocity = sqrt(30 * 10000);
-    gravity = aassettings.phys_gravity;
-    t = maxzvelocity / gravity;
-    return 0.5 * gravity * t * t;
+    const float maxzvelocity = sqrtf(30 * 10000);
+    const float gravity = aassettings.phys_gravity;
+    const float t = maxzvelocity / gravity;
+    return (int)(0.5F * gravity * t * t);
 }
 //===========================================================================
 // distance = 0.5 * gravity * t * t
 // vel = t * gravity
 // damage = vel * vel * 0.0001
 //===========================================================================
-static float AAS_FallDelta(float distance)
+static float AAS_FallDelta(const float distance)
 {
-    float t, delta, gravity;
-
-    gravity = aassettings.phys_gravity;
-    t = sqrt(fabs(distance) * 2 / gravity);
-    delta = t * gravity;
-    return delta * delta * 0.0001;
+    const float gravity = aassettings.phys_gravity;
+    const float t = sqrtf(fabsf(distance) * 2 / gravity);
+    const float delta = t * gravity;
+    return delta * delta * 0.0001F;
 }
-static float AAS_MaxJumpHeight(float phys_jumpvel)
+static float AAS_MaxJumpHeight(const float phys_jumpvel)
 {
-    float phys_gravity;
-
-    phys_gravity = aassettings.phys_gravity;
+    const float phys_gravity = aassettings.phys_gravity;
     // maximum height a player can jump with the given initial z velocity
-    return 0.5 * phys_gravity * (phys_jumpvel / phys_gravity) * (phys_jumpvel / phys_gravity);
+    return 0.5F * phys_gravity * (phys_jumpvel / phys_gravity) * (phys_jumpvel / phys_gravity);
 }
 //===========================================================================
 // returns true if a player can only crouch in the area
 //===========================================================================
-static float AAS_MaxJumpDistance(float phys_jumpvel)
+static float AAS_MaxJumpDistance(const float phys_jumpvel)
 {
     float phys_gravity, phys_maxvelocity, t;
 
     phys_gravity = aassettings.phys_gravity;
     phys_maxvelocity = aassettings.phys_maxvelocity;
     // time a player takes to fall the height
-    t = sqrt(aassettings.rs_maxjumpfallheight / (0.5 * phys_gravity));
+    t = sqrtf(aassettings.rs_maxjumpfallheight / (0.5F * phys_gravity));
     // maximum distance
     return phys_maxvelocity * (t + phys_jumpvel / phys_gravity);
 }
 //===========================================================================
 // returns true if a player can only crouch in the area
 //===========================================================================
-int AAS_AreaCrouch(int areanum)
+int AAS_AreaCrouch(const int areanum)
 {
-    if (!(aasworld.areasettings[areanum].presencetype & PRESENCE_NORMAL))
-        return true;
-    else
-        return false;
+    return !(aasworld.areasettings[areanum].presencetype & PRESENCE_NORMAL) ? true : false;
 }
 //===========================================================================
 // returns true if it is possible to swim in the area
 //===========================================================================
-int AAS_AreaSwim(int areanum)
+int AAS_AreaSwim(const int areanum)
 {
     if (aasworld.areasettings[areanum].areaflags & AREA_LIQUID)
         return true;
@@ -673,7 +664,7 @@ static int AAS_Reachability_EqualFloorHeight(int area1num, int area2num)
                     // get the start point
                     VectorAdd(aasworld.vertexes[edge->v[0]],
                               aasworld.vertexes[edge->v[1]], start);
-                    VectorScale(start, 0.5, start);
+                    VectorScale(start, 0.5F, start);
                     VectorCopy(start, end);
                     // get the end point several units inside area2
                     // and the start point several units inside area1
@@ -687,7 +678,7 @@ static int AAS_Reachability_EqualFloorHeight(int area1num, int area2num)
                     // VectorMA(start, -1, normal, start);
                     VectorMA(end, INSIDEUNITS_WALKEND, normal, end);
                     VectorMA(start, INSIDEUNITS_WALKSTART, normal, start);
-                    end[2] += 0.125;
+                    end[2] += 0.125F;
                     height = DotProduct(invgravity, start);
                     // get the longest lowest edge
                     if (height < bestheight || (height < bestheight + 1 && length > bestlength)) {
@@ -930,9 +921,9 @@ static int AAS_Reachability_Step_Barrier_WaterJump_WalkOffLedge(int area1num, in
                     if (dist1 > dist2 - 1 && dist1 < dist2 + 1) {
                         dist = dist1;
                         VectorAdd(p1area1, p2area1, start);
-                        VectorScale(start, 0.5, start);
+                        VectorScale(start, 0.5F, start);
                         VectorAdd(p1area2, p2area2, end);
-                        VectorScale(end, 0.5, end);
+                        VectorScale(end, 0.5F, end);
                     } else if (dist1 < dist2) {
                         dist = dist1;
                         VectorCopy(p1area1, start);
@@ -1244,7 +1235,7 @@ static int VectorBetweenVectors(const vec3_t v, const vec3_t v1, const vec3_t v2
 static void VectorMiddle(const vec3_t v1, const vec3_t v2, vec3_t middle)
 {
     VectorAdd(v1, v2, middle);
-    VectorScale(middle, 0.5, middle);
+    VectorScale(middle, 0.5F, middle);
 }
 
 static float AAS_ClosestEdgePoints(vec3_t v1, vec3_t v2, vec3_t v3, vec3_t v4, aas_plane_t* plane1, aas_plane_t* plane2, vec3_t beststart1, vec3_t bestend1, vec3_t beststart2, vec3_t bestend2, float bestdist)
@@ -1765,7 +1756,7 @@ static int AAS_Reachability_Ladder(int area1num, int area2num)
         VectorCopy(aasworld.vertexes[sharededge->v[firstv]], v1);
         VectorCopy(aasworld.vertexes[sharededge->v[!firstv]], v2);
         VectorAdd(v1, v2, area1point);
-        VectorScale(area1point, 0.5, area1point);
+        VectorScale(area1point, 0.5F, area1point);
         VectorCopy(area1point, area2point);
         // if the face plane in area 1 is pretty much vertical
         const aas_plane_t* plane1 = &aasworld.planes[ladderface1->planenum ^ (ladderface1num < 0)];
@@ -1865,7 +1856,7 @@ static int AAS_Reachability_Ladder(int area1num, int area2num)
                 VectorCopy(aasworld.vertexes[edge1->v[0]], v1);
                 VectorCopy(aasworld.vertexes[edge1->v[1]], v2);
                 VectorAdd(v1, v2, mid);
-                VectorScale(mid, 0.5, mid);
+                VectorScale(mid, 0.5F, mid);
                 if (mid[2] < lowestpoint[2]) {
                     VectorCopy(mid, lowestpoint);
                     lowestedgenum = edge1num;
@@ -2068,7 +2059,7 @@ static void AAS_Reachability_Teleport()
         VectorAdd(origin, mins, mins);
         VectorAdd(origin, maxs, maxs);
         VectorAdd(mins, maxs, mid);
-        VectorScale(mid, 0.5, mid);
+        VectorScale(mid, 0.5F, mid);
         // link an invalid (-1) entity
         areas = AAS_LinkEntityClientBBox(mins, maxs, -1, PRESENCE_CROUCH);
         if (!areas)
@@ -2152,11 +2143,11 @@ static void AAS_Reachability_Elevator()
             pos2[2] -= height;
             // get a point just above the plat in the bottom position
             VectorAdd(mins, maxs, mids);
-            VectorMA(pos2, 0.5, mids, platbottom);
+            VectorMA(pos2, 0.5F, mids, platbottom);
             platbottom[2] = maxs[2] - (pos1[2] - pos2[2]) + 2;
             // get a point just above the plat in the top position
             VectorAdd(mins, maxs, mids);
-            VectorMA(pos2, 0.5, mids, plattop);
+            VectorMA(pos2, 0.5F, mids, plattop);
             plattop[2] = maxs[2] + 2;
             // get the mins and maxs a little larger
             for (i = 0; i < 3; i++) {
@@ -2164,7 +2155,7 @@ static void AAS_Reachability_Elevator()
                 maxs[i] += 1;
             }
             VectorAdd(mins, maxs, mids);
-            VectorScale(mids, 0.5, mids);
+            VectorScale(mids, 0.5F, mids);
             xvals[0] = mins[0];
             xvals[1] = mids[0];
             xvals[2] = maxs[0];
@@ -2449,7 +2440,7 @@ static void AAS_Reachability_FuncBobbing()
         VectorAdd(mins, origin, mins);
         VectorAdd(maxs, origin, maxs);
         VectorAdd(mins, maxs, mid);
-        VectorScale(mid, 0.5, mid);
+        VectorScale(mid, 0.5F, mid);
         VectorCopy(mid, origin);
         VectorCopy(origin, move_end);
         VectorCopy(origin, move_start);
@@ -3123,7 +3114,7 @@ static void AAS_Reachability_WalkOffLedge(int areanum)
                         CrossProduct(plane->normal, sharededgevec, dir);
                         VectorNormalize(dir);
                         VectorAdd(v1, v2, mid);
-                        VectorScale(mid, 0.5, mid);
+                        VectorScale(mid, 0.5F, mid);
                         VectorMA(mid, 8, dir, mid);
                         VectorCopy(mid, testend);
                         testend[2] -= 1000;

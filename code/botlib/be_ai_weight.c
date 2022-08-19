@@ -481,9 +481,9 @@ static void EvolveFuzzySeparator_r(fuzzyseparator_t* fs)
     } else if (fs->type == WT_BALANCE) {
         // every once in a while an evolution leap occurs, mutation
         if (random() < 0.01)
-            fs->weight += crandom() * (fs->maxweight - fs->minweight);
+            fs->weight += crandomf() * (fs->maxweight - fs->minweight);
         else
-            fs->weight += crandom() * (fs->maxweight - fs->minweight) * 0.5;
+            fs->weight += crandomf() * (fs->maxweight - fs->minweight) * 0.5F;
         // modify bounds if necessary because of mutation
         if (fs->weight < fs->minweight)
             fs->minweight = fs->weight;

@@ -1790,8 +1790,8 @@ static int PC_DollarDirective_evalfloat(source_t* source)
     sprintf(token.string, "%1.2f", fabs(value));
     token.type = TT_NUMBER;
     token.subtype = TT_FLOAT | TT_LONG | TT_DECIMAL;
-    token.intvalue = (unsigned long)value;
-    token.floatvalue = value;
+    token.intvalue = (int)value;
+    token.floatvalue = (float)value;
     PC_UnreadSourceToken(source, &token);
     if (value < 0)
         UnreadSignToken(source);

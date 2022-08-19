@@ -577,7 +577,11 @@ static int PS_ReadNumber(script_t* script, token_t* token)
         }
     }
     token->string[len] = '\0';
-    NumberValue(token->string, token->subtype, &token->intvalue, &token->floatvalue);
+    unsigned long int intvalue;
+    long double floatvalue;
+    NumberValue(token->string, token->subtype, &intvalue, &floatvalue);
+    token->intvalue = (int)intvalue;
+    token->floatvalue = (float)floatvalue;
     if (!(token->subtype & TT_FLOAT))
         token->subtype |= TT_INTEGER;
     return 1;

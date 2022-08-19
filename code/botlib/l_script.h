@@ -136,8 +136,8 @@ typedef struct token_s {
     char string[MAX_TOKEN]; // available token
     int type; // last read token type
     int subtype; // last read token sub type
-    unsigned long int intvalue; // integer value
-    long double floatvalue; // floating point value
+    int32_t intvalue; // integer value
+    float_t floatvalue; // floating point value
     char* whitespace_p; // start of white space before token
     char* endwhitespace_p; // start of white space before token
     int line; // line the token was on

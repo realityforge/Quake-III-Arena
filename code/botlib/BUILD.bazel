@@ -64,7 +64,6 @@ COPTS = FULL_WARNINGS + [
     "-Wno-sign-conversion",
     "-Wno-sign-compare",
     "-Wno-implicit-int-conversion",
-    "-Wno-implicit-float-conversion",
     "-Wno-float-conversion",
 ]
 

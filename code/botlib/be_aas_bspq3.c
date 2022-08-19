@@ -149,7 +149,7 @@ int AAS_FloatForBSPEpairKey(int ent, char* key, float* value)
     *value = 0;
     if (!AAS_ValueForBSPEpairKey(ent, key, buf, MAX_EPAIRKEY))
         return false;
-    *value = atof(buf);
+    *value = (float)(atof(buf));
     return true;
 }
 int AAS_IntForBSPEpairKey(int ent, char* key, int* value)
