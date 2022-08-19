@@ -557,7 +557,7 @@ int Q_rand(int* seed);
 float Q_random(int* seed);
 float Q_crandom(int* seed);
 
-#define random() ((rand() & 0x7fff) / ((float)0x7fff))
+#define random() ((float)(rand() & 0x7fff) / ((float)0x7fff))
 #define crandom() (2.0 * (random() - 0.5))
 
 void vectoangles(const vec3_t value1, vec3_t angles);
