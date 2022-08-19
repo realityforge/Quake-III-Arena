@@ -1239,21 +1239,15 @@ static int AAS_AreaRouteToGoalArea(int areanum, vec3_t origin, int goalareanum, 
 }
 int AAS_AreaTravelTimeToGoalArea(int areanum, vec3_t origin, int goalareanum, int travelflags)
 {
-    int traveltime, reachnum;
-
-    if (AAS_AreaRouteToGoalArea(areanum, origin, goalareanum, travelflags, &traveltime, &reachnum)) {
-        return traveltime;
-    }
-    return 0;
+    int traveltime;
+    int reachnum;
+    return AAS_AreaRouteToGoalArea(areanum, origin, goalareanum, travelflags, &traveltime, &reachnum) ? traveltime : 0;
 }
 static int AAS_AreaReachabilityToGoalArea(int areanum, vec3_t origin, int goalareanum, int travelflags)
 {
-    int traveltime, reachnum;
-
-    if (AAS_AreaRouteToGoalArea(areanum, origin, goalareanum, travelflags, &traveltime, &reachnum)) {
-        return reachnum;
-    }
-    return 0;
+    int traveltime;
+    int reachnum;
+    return AAS_AreaRouteToGoalArea(areanum, origin, goalareanum, travelflags, &traveltime, &reachnum) ? reachnum : 0;
 }
 //===========================================================================
 // predict the route and stop on one of the stop events

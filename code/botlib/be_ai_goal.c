@@ -51,7 +51,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define AVOID_DEFAULT_TIME 30
 // avoid dropped goal time
 #define AVOID_DROPPED_TIME 10
-#define TRAVELTIME_SCALE 0.01
+#define TRAVELTIME_SCALE 0.01F
 // item flags
 #define IFL_NOTFREE 1 // not in free for all
 #define IFL_NOTTEAM 2 // not in team play
@@ -212,7 +212,7 @@ static itemconfig_t* LoadItemConfig(char* filename)
     itemconfig_t* ic;
     iteminfo_t* ii;
 
-    max_iteminfo = (int)LibVarValue("max_iteminfo", "256");
+    max_iteminfo = LibVarIntValue("max_iteminfo", "256");
     if (max_iteminfo < 0) {
         botimport.Print(PRT_ERROR, "max_iteminfo = %d\n", max_iteminfo);
         max_iteminfo = 256;
@@ -293,7 +293,7 @@ static void InitLevelItemHeap()
     if (levelitemheap)
         FreeMemory(levelitemheap);
 
-    max_levelitems = (int)LibVarValue("max_levelitems", "256");
+    max_levelitems = LibVarIntValue("max_levelitems", "256");
     levelitemheap = (levelitem_t*)GetClearedMemory(max_levelitems * sizeof(levelitem_t));
 
     for (i = 0; i < max_levelitems - 1; i++) {
@@ -1238,7 +1238,7 @@ int BotItemGoalInVisButNotVisible(int viewer, vec3_t eye, bot_goal_t* goal)
     if (!(goal->flags & GFL_ITEM))
         return false;
     VectorAdd(goal->mins, goal->mins, middle);
-    VectorScale(middle, 0.5, middle);
+    VectorScale(middle, 0.5F, middle);
     VectorAdd(goal->origin, middle, middle);
     trace = AAS_Trace(eye, NULL, NULL, middle, viewer, CONTENTS_SOLID);
     // if the goal middle point is visible

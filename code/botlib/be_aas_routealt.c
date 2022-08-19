@@ -132,7 +132,7 @@ int AAS_AlternativeRouteGoals(vec3_t start, int startareanum, int goalareanum, i
         for (j = 0; j < numclusterareas; j++) {
             VectorAdd(mid, aasworld.areas[clusterareas[j]].center, mid);
         }
-        VectorScale(mid, 1.0 / numclusterareas, mid);
+        VectorScale(mid, 1.F / numclusterareas, mid);
         // get the area closest to the center of the cluster
         bestdist = 999999;
         bestareanum = 0;

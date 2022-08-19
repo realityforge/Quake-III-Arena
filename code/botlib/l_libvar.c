@@ -99,7 +99,7 @@ char* LibVarGetString(const char* var_name)
 float LibVarGetValue(const char* var_name)
 {
     const libvar_t* v = LibVarGet(var_name);
-    return v ? v->value : 0;
+    return v ? v->value : 0.F;
 }
 libvar_t* LibVar(const char* var_name, const char* value)
 {

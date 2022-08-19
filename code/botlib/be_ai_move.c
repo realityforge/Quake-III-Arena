@@ -175,10 +175,10 @@ static float AngleDiff(float ang1, float ang2)
     diff = ang1 - ang2;
     if (ang1 > ang2) {
         if (diff > 180.0)
-            diff -= 360.0;
+            diff -= 360.0F;
     } else {
         if (diff < -180.0)
-            diff += 360.0;
+            diff += 360.0F;
     }
     return diff;
 }
@@ -746,7 +746,7 @@ static void MoverBottomCenter(aas_reachability_t* reach, vec3_t bottomcenter)
     }
     // get a point just above the plat in the bottom position
     VectorAdd(mins, maxs, mids);
-    VectorMA(origin, 0.5, mids, bottomcenter);
+    VectorMA(origin, 0.5F, mids, bottomcenter);
     bottomcenter[2] = reach->start[2];
 }
 static float BotGapDistance(const vec3_t origin, const vec3_t hordir, const int entnum)
@@ -807,7 +807,7 @@ static bool BotCheckBarrierJump(bot_movestate_t* ms, const vec3_t dir, float spe
     hordir[1] = dir[1];
     hordir[2] = 0;
     VectorNormalize(hordir);
-    VectorMA(ms->origin, ms->thinktime * speed * 0.5, hordir, end);
+    VectorMA(ms->origin, ms->thinktime * speed * 0.5F, hordir, end);
     VectorCopy(trace.endpos, start);
     end[2] = trace.endpos[2];
     // trace from previous trace end pos horizontally in the move direction
@@ -890,7 +890,7 @@ static bool BotWalkInDirection(bot_movestate_t* ms, vec3_t dir, float speed, int
         }
         // AAS_ClearShownDebugLines();
         VectorCopy(ms->origin, origin);
-        origin[2] += 0.5;
+        origin[2] += 0.5F;
         AAS_PredictClientMovement(&move, ms->entitynum, origin, presencetype, true,
                                   velocity, cmdmove, cmdframes, maxframes, 0.1f,
                                   stopevent, 0, false); // true);
@@ -1123,7 +1123,7 @@ static bot_moveresult_t BotTravel_WaterJump(bot_movestate_t* ms, aas_reachabilit
     VectorSubtract(reach->end, ms->origin, dir);
     VectorCopy(dir, hordir);
     hordir[2] = 0;
-    dir[2] += 15 + crandom() * 40;
+    dir[2] += 15.F + crandomf() * 40.F;
     VectorNormalize(dir);
     dist = VectorNormalize(hordir);
     // elementary actions
@@ -1154,9 +1154,9 @@ static bot_moveresult_t BotFinishTravel_WaterJump(bot_movestate_t* ms, aas_reach
         return result;
     // swim straight to reachability end
     VectorSubtract(reach->end, ms->origin, dir);
-    dir[0] += crandom() * 10;
-    dir[1] += crandom() * 10;
-    dir[2] += 70 + crandom() * 10;
+    dir[0] += crandomf() * 10.F;
+    dir[1] += crandomf() * 10.F;
+    dir[2] += 70.F + crandomf() * 10.F;
     // elementary actions
     EA_Move(ms->client, dir, 400);
     // set the ideal view angles
@@ -1218,9 +1218,9 @@ static bool BotAirControl(const vec3_t origin, const vec3_t velocity, const vec3
     int i;
 
     VectorCopy(origin, org);
-    VectorScale(velocity, 0.1, vel);
+    VectorScale(velocity, 0.1F, vel);
     for (i = 0; i < 50; i++) {
-        vel[2] -= sv_gravity->value * 0.01;
+        vel[2] -= sv_gravity->value * 0.01F;
         // if going down and next position would be below the goal
         if (vel[2] < 0 && org[2] + vel[2] < goal[2]) {
             VectorScale(vel, (goal[2] - org[2]) / vel[2], vel);
@@ -1546,7 +1546,7 @@ static void BotFuncBobStartEnd(aas_reachability_t* reach, vec3_t start, vec3_t e
     }
     AAS_BSPModelMinsMaxsOrigin(modelnum, angles, mins, maxs, NULL);
     VectorAdd(mins, maxs, mid);
-    VectorScale(mid, 0.5, mid);
+    VectorScale(mid, 0.5F, mid);
     VectorCopy(mid, start);
     VectorCopy(mid, end);
     spawnflags = reach->facenum >> 16;

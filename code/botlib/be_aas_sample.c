@@ -39,7 +39,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define ON_EPSILON 0 // 0.0005
 
-#define TRACEPLANE_EPSILON 0.125
+#define TRACEPLANE_EPSILON 0.125F
 
 typedef struct aas_tracestack_s {
     vec3_t start; // start point of the piece of line to trace
@@ -73,7 +73,7 @@ void AAS_InitAASLinkHeap()
     max_aaslinks = aasworld.linkheapsize;
     // if there's no link heap present
     if (!aasworld.linkheap) {
-        max_aaslinks = (int)LibVarValue("max_aaslinks", "6144");
+        max_aaslinks = LibVarIntValue("max_aaslinks", "6144");
         if (max_aaslinks < 0)
             max_aaslinks = 0;
         aasworld.linkheapsize = max_aaslinks;
@@ -332,7 +332,7 @@ aas_trace_t AAS_TraceClientBBox(const vec3_t start, const vec3_t end, int presen
                     VectorSubtract(end, start, v1);
                     VectorSubtract(tstack_p->start, start, v2);
                     trace.fraction = VectorLength(v2) / VectorNormalize(v1);
-                    VectorMA(tstack_p->start, -0.125, v1, tstack_p->start);
+                    VectorMA(tstack_p->start, -0.125F, v1, tstack_p->start);
                 }
                 VectorCopy(tstack_p->start, trace.endpos);
                 trace.ent = 0;
@@ -375,7 +375,7 @@ aas_trace_t AAS_TraceClientBBox(const vec3_t start, const vec3_t end, int presen
                 VectorSubtract(end, start, v1);
                 VectorSubtract(tstack_p->start, start, v2);
                 trace.fraction = VectorLength(v2) / VectorNormalize(v1);
-                VectorMA(tstack_p->start, -0.125, v1, tstack_p->start);
+                VectorMA(tstack_p->start, -0.125F, v1, tstack_p->start);
             }
             VectorCopy(tstack_p->start, trace.endpos);
             trace.ent = 0;

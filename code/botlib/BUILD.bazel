@@ -56,7 +56,6 @@ DEPS = [
 ]
 
 COPTS = FULL_WARNINGS + [
-    "-Wno-bad-function-cast",
     "-Wno-padded",
     "-Wno-double-promotion",
     "-Wno-cast-align",
@@ -65,7 +64,6 @@ COPTS = FULL_WARNINGS + [
     "-Wno-sign-conversion",
     "-Wno-sign-compare",
     "-Wno-implicit-int-conversion",
-    "-Wno-implicit-float-conversion",
     "-Wno-float-conversion",
 ]
 

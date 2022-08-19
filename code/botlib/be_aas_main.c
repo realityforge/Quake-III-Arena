@@ -78,9 +78,9 @@ static void AAS_ContinueInit()
     AAS_InitClustering();
     // if reachability has been calculated and an AAS file should be written
     // or there is a forced data optimization
-    if (aasworld.savefile || ((int)LibVarGetValue("forcewrite"))) {
+    if (aasworld.savefile || LibVarGetBoolValue("forcewrite")) {
         // optimize the AAS data
-        if ((int)LibVarValue("aasoptimize", "0"))
+        if (LibVarBoolValue("aasoptimize", "0"))
             AAS_Optimize();
         // save the AAS file
         if (AAS_WriteAASFile(aasworld.filename)) {
@@ -190,8 +190,8 @@ int AAS_LoadMap(const char* mapname)
 //===========================================================================
 int AAS_Setup()
 {
-    aasworld.maxclients = (int)LibVarValue("maxclients", "128");
-    aasworld.maxentities = (int)LibVarValue("maxentities", "1024");
+    aasworld.maxclients = LibVarIntValue("maxclients", "128");
+    aasworld.maxentities = LibVarIntValue("maxentities", "1024");
     // as soon as it's set to 1 the routing cache will be saved
     saveroutingcache = LibVar("saveroutingcache", "0");
     // allocate memory for the entities
@@ -200,9 +200,6 @@ int AAS_Setup()
     aasworld.entities = (aas_entity_t*)GetClearedHunkMemory(aasworld.maxentities * sizeof(aas_entity_t));
     // invalidate all the entities
     AAS_InvalidateEntities();
-    // force some recalculations
-    // LibVarSet("forceclustering", "1");			//force clustering calculation
-    // LibVarSet("forcereachability", "1");		//force reachability calculation
     aasworld.numframes = 0;
     return BLERR_NOERROR;
 }
