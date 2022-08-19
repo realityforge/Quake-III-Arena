@@ -131,19 +131,16 @@ int AAS_ValueForBSPEpairKey(int ent, char* key, char* value, int size)
 }
 int AAS_VectorForBSPEpairKey(int ent, char* key, vec3_t v)
 {
-    char buf[MAX_EPAIRKEY];
-    double v1, v2, v3;
-
     VectorClear(v);
-    if (!AAS_ValueForBSPEpairKey(ent, key, buf, MAX_EPAIRKEY))
+
+    char buf[MAX_EPAIRKEY];
+    if (AAS_ValueForBSPEpairKey(ent, key, buf, MAX_EPAIRKEY) != 0) {
+        v[0] = v[1] = v[2] = 0;
+        sscanf(buf, "%f %f %f", &v[0], &v[1], &v[2]);
+        return true;
+    } else {
         return false;
-    // scanf into doubles, then assign, so it is vec_t size independent
-    v1 = v2 = v3 = 0;
-    sscanf(buf, "%lf %lf %lf", &v1, &v2, &v3);
-    v[0] = v1;
-    v[1] = v2;
-    v[2] = v3;
-    return true;
+    }
 }
 int AAS_FloatForBSPEpairKey(int ent, char* key, float* value)
 {
