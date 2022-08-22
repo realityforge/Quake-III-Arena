@@ -170,8 +170,8 @@ static bool G_TryPushingEntity(gentity_t* check, gentity_t* pusher, vec3_t move,
     // blocked
     return false;
 }
-#ifdef TEAMARENA
 
+#ifdef TEAMARENA
 static bool G_CheckProxMinePosition(gentity_t* check)
 {
     vec3_t start, end;
