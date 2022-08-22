@@ -258,12 +258,6 @@ static void CG_DrawField(int x, int y, int width, int value)
 }
 #endif
 
-/*
-================
-CG_Draw3DModel
-
-================
-*/
 void CG_Draw3DModel(float x, float y, float w, float h, qhandle_t model, qhandle_t skin, vec3_t origin, vec3_t angles)
 {
     refdef_t refdef;
