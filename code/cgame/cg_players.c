@@ -2313,7 +2313,7 @@ void CG_Player(centity_t* cent)
         }
         trap_R_AddRefEntityToScene(&powerup);
     }
-#endif // MISSIONPACK
+#endif
 
     // add the head
     head.hModel = ci->headModel;

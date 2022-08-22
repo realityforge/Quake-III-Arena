@@ -256,7 +256,7 @@ static void CG_DrawField(int x, int y, int width, int value)
         l--;
     }
 }
-#endif // MISSIONPACK
+#endif
 
 /*
 ================
@@ -466,14 +466,14 @@ static void CG_DrawStatusBarHead(float x)
     CG_DrawHead(x, 480 - size, size, size,
                 cg.snap->ps.clientNum, angles);
 }
-#endif // MISSIONPACK
+#endif
 
 #ifndef MISSIONPACK
 static void CG_DrawStatusBarFlag(float x, int team)
 {
     CG_DrawFlagModel(x, 480 - ICON_SIZE, ICON_SIZE, ICON_SIZE, team, false);
 }
-#endif // MISSIONPACK
+#endif
 
 void CG_DrawTeamBackground(int x, int y, int w, int h, float alpha, int team)
 {
@@ -1148,7 +1148,7 @@ static float CG_DrawScores(float y)
 
     return y1 - 8;
 }
-#endif // MISSIONPACK
+#endif
 
 #ifndef MISSIONPACK
 static float CG_DrawPowerups(float y)
@@ -1244,7 +1244,7 @@ static float CG_DrawPowerups(float y)
 
     return y;
 }
-#endif // MISSIONPACK
+#endif
 
 #ifndef MISSIONPACK
 static void CG_DrawLowerRight()
@@ -1260,7 +1260,7 @@ static void CG_DrawLowerRight()
     y = CG_DrawScores(y);
     y = CG_DrawPowerups(y);
 }
-#endif // MISSIONPACK
+#endif
 
 #ifndef MISSIONPACK
 static int CG_DrawPickupItem(int y)
@@ -1288,7 +1288,7 @@ static int CG_DrawPickupItem(int y)
 
     return y;
 }
-#endif // MISSIONPACK
+#endif
 
 #ifndef MISSIONPACK
 static void CG_DrawLowerLeft()
@@ -1303,7 +1303,7 @@ static void CG_DrawLowerLeft()
 
     y = CG_DrawPickupItem(y);
 }
-#endif // MISSIONPACK
+#endif
 
 //===========================================================================================
 
@@ -1374,7 +1374,7 @@ static void CG_DrawTeamInfo()
         }
     }
 }
-#endif // MISSIONPACK
+#endif
 
 #ifndef MISSIONPACK
 static void CG_DrawHoldableItem()
@@ -1387,7 +1387,7 @@ static void CG_DrawHoldableItem()
         CG_DrawPic(640 - ICON_SIZE, (SCREEN_HEIGHT - ICON_SIZE) / 2, ICON_SIZE, ICON_SIZE, cg_items[value].icon);
     }
 }
-#endif // MISSIONPACK
+#endif
 
 static void CG_DrawReward()
 {
