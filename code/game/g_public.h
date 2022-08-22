@@ -50,8 +50,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //===============================================================
 
 typedef struct {
-    entityState_t s; // communicated by server to clients
-
     bool linked; // false if not in any good cluster
     int linkcount;
 
