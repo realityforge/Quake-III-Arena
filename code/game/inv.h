@@ -77,7 +77,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define ENEMY_HEIGHT 201
 
 // if running the mission pack
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 
 //#error "running mission pack"
 

@@ -30,7 +30,7 @@ static vec3_t muzzle;
 
 #define NUM_NAILSHOTS 15
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 static void G_BounceProjectile(vec3_t start, vec3_t impact, vec3_t dir, vec3_t endout)
 {
     vec3_t v, newv;
@@ -85,7 +85,7 @@ bool CheckGauntletAttack(gentity_t* ent)
     } else {
         s_quadFactor = 1;
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (ent->client->persistentPowerup && ent->client->persistentPowerup->item && ent->client->persistentPowerup->item->giTag == PW_DOUBLER) {
         s_quadFactor *= 2;
     }
@@ -121,7 +121,7 @@ void SnapVectorTowards(vec3_t v, vec3_t to)
     }
 }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 #define CHAINGUN_SPREAD 600
 #endif
 #define MACHINEGUN_SPREAD 200
@@ -132,7 +132,7 @@ static void Bullet_Fire(gentity_t* ent, float spread, int damage)
 {
     trace_t tr;
     vec3_t end;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     vec3_t impactpoint, bouncedir;
 #endif
     float r;
@@ -177,7 +177,7 @@ static void Bullet_Fire(gentity_t* ent, float spread, int damage)
         tent->s.otherEntityNum = ent->s.number;
 
         if (traceEnt->takedamage) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
             if (traceEnt->client && traceEnt->client->invulnerabilityTime > level.time) {
                 if (G_InvulnerabilityEffect(traceEnt, forward, tr.endpos, impactpoint, bouncedir)) {
                     G_BounceProjectile(muzzle, impactpoint, bouncedir, end);
@@ -193,7 +193,7 @@ static void Bullet_Fire(gentity_t* ent, float spread, int damage)
 #endif
                 G_Damage(traceEnt, ent, ent, forward, tr.endpos,
                          damage, 0, MOD_MACHINEGUN);
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
             }
 #endif
         }
@@ -221,7 +221,7 @@ static bool ShotgunPellet(vec3_t start, vec3_t end, gentity_t* ent)
     trace_t tr;
     int damage, i, passent;
     gentity_t* traceEnt;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     vec3_t impactpoint, bouncedir;
 #endif
     vec3_t tr_start, tr_end;
@@ -240,7 +240,7 @@ static bool ShotgunPellet(vec3_t start, vec3_t end, gentity_t* ent)
 
         if (traceEnt->takedamage) {
             damage = DEFAULT_SHOTGUN_DAMAGE * s_quadFactor;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
             if (traceEnt->client && traceEnt->client->invulnerabilityTime > level.time) {
                 if (G_InvulnerabilityEffect(traceEnt, forward, tr.endpos, impactpoint, bouncedir)) {
                     G_BounceProjectile(tr_start, impactpoint, bouncedir, tr_end);
@@ -355,7 +355,7 @@ static void Weapon_Plasmagun_Fire(gentity_t* ent)
 static void weapon_railgun_fire(gentity_t* ent)
 {
     vec3_t end;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     vec3_t impactpoint, bouncedir;
 #endif
     trace_t trace;
@@ -383,7 +383,7 @@ static void weapon_railgun_fire(gentity_t* ent)
         }
         traceEnt = &g_entities[trace.entityNum];
         if (traceEnt->takedamage) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
             if (traceEnt->client && traceEnt->client->invulnerabilityTime > level.time) {
                 if (G_InvulnerabilityEffect(traceEnt, forward, trace.endpos, impactpoint, bouncedir)) {
                     G_BounceProjectile(muzzle, impactpoint, bouncedir, end);
@@ -516,7 +516,7 @@ static void Weapon_LightningFire(gentity_t* ent)
 {
     trace_t tr;
     vec3_t end;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     vec3_t impactpoint, bouncedir;
 #endif
     gentity_t *traceEnt, *tent;
@@ -530,7 +530,7 @@ static void Weapon_LightningFire(gentity_t* ent)
 
         trap_Trace(&tr, muzzle, NULL, NULL, end, passent, MASK_SHOT);
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         // if not the first trace (the lightning bounced of an invulnerability sphere)
         if (i) {
             // add bounced off lightning bolt temp entity
@@ -548,7 +548,7 @@ static void Weapon_LightningFire(gentity_t* ent)
         traceEnt = &g_entities[tr.entityNum];
 
         if (traceEnt->takedamage) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
             if (traceEnt->client && traceEnt->client->invulnerabilityTime > level.time) {
                 if (G_InvulnerabilityEffect(traceEnt, forward, tr.endpos, impactpoint, bouncedir)) {
                     G_BounceProjectile(muzzle, impactpoint, bouncedir, end);
@@ -589,7 +589,7 @@ static void Weapon_LightningFire(gentity_t* ent)
     }
 }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 
 static void Weapon_Nailgun_Fire(gentity_t* ent)
 {
@@ -692,7 +692,7 @@ void FireWeapon(gentity_t* ent)
     } else {
         s_quadFactor = 1;
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (ent->client->persistentPowerup && ent->client->persistentPowerup->item && ent->client->persistentPowerup->item->giTag == PW_DOUBLER) {
         s_quadFactor *= 2;
     }
@@ -700,7 +700,7 @@ void FireWeapon(gentity_t* ent)
 
     // track shots taken for accuracy tracking.  Grapple is not a weapon and gauntlet is just not tracked
     if (ent->s.weapon != WP_GRAPPLING_HOOK && ent->s.weapon != WP_GAUNTLET) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (ent->s.weapon == WP_NAILGUN) {
             ent->client->accuracy_shots += NUM_NAILSHOTS;
         } else {
@@ -751,7 +751,7 @@ void FireWeapon(gentity_t* ent)
     case WP_GRAPPLING_HOOK:
         Weapon_GrapplingHook_Fire(ent);
         break;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     case WP_NAILGUN:
         Weapon_Nailgun_Fire(ent);
         break;
@@ -768,7 +768,7 @@ void FireWeapon(gentity_t* ent)
     }
 }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 
 static void KamikazeRadiusDamage(vec3_t origin, gentity_t* attacker, float damage, float radius)
 {

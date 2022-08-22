@@ -126,7 +126,7 @@ void BotRememberLastOrderedTask(bot_state_t* bs);
 void BotCTFSeekGoals(bot_state_t* bs);
 // set ctf goals (defend base, get enemy flag) during retreat
 void BotCTFRetreatGoals(bot_state_t* bs);
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 int Bot1FCTFCarryingFlag(bot_state_t* bs);
 int BotHarvesterCarryingCubes(bot_state_t* bs);
 void Bot1FCTFSeekGoals(bot_state_t* bs);
@@ -171,7 +171,7 @@ extern vmCvar_t bot_challenge;
 
 extern bot_goal_t ctf_redflag;
 extern bot_goal_t ctf_blueflag;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 extern bot_goal_t ctf_neutralflag;
 extern bot_goal_t redobelisk;
 extern bot_goal_t blueobelisk;

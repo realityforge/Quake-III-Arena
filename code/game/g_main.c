@@ -81,7 +81,7 @@ vmCvar_t g_smoothClients;
 vmCvar_t pmove_fixed;
 vmCvar_t pmove_msec;
 vmCvar_t g_listEntity;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 vmCvar_t g_obeliskHealth;
 vmCvar_t g_obeliskRegenPeriod;
 vmCvar_t g_obeliskRegenAmount;
@@ -157,7 +157,7 @@ static cvarTable_t gameCvarTable[] = {
     { &g_allowVote, "g_allowVote", "1", CVAR_ARCHIVE, 0, false },
     { &g_listEntity, "g_listEntity", "0", 0, 0, false },
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     { &g_obeliskHealth, "g_obeliskHealth", "2500", 0, 0, false },
     { &g_obeliskRegenPeriod, "g_obeliskRegenPeriod", "1", 0, 0, false },
     { &g_obeliskRegenAmount, "g_obeliskRegenAmount", "15", 0, 0, false },
@@ -310,7 +310,7 @@ static void G_FindTeams()
 
 static void G_RemapTeamShaders()
 {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     char string[1024];
     float f = level.time * 0.001;
     Com_sprintf(string, sizeof(string), "team_icon/%s_red", g_redteam.string);
@@ -898,7 +898,7 @@ void BeginIntermission()
     level.intermissiontime = level.time;
     FindIntermissionPoint();
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (g_singlePlayer.integer) {
         trap_Cvar_Set("ui_singlePlayerActive", "0");
         UpdateTournamentInfo();
@@ -1032,7 +1032,7 @@ static void LogExit(const char* string)
 {
     int i, numSorted;
     gclient_t* cl;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     bool won = true;
 #endif
     G_LogPrintf("Exit: %s\n", string);
@@ -1069,7 +1069,7 @@ static void LogExit(const char* string)
         ping = cl->ps.ping < 999 ? cl->ps.ping : 999;
 
         G_LogPrintf("score: %i  ping: %i  client: %i %s\n", cl->ps.persistent[PERS_SCORE], ping, level.sortedClients[i], cl->pers.netname);
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (g_singlePlayer.integer && g_gametype.integer == GT_TOURNAMENT) {
             if (g_entities[cl - level.clients].r.svFlags & SVF_BOT && cl->ps.persistent[PERS_RANK] == 0) {
                 won = false;
@@ -1078,7 +1078,7 @@ static void LogExit(const char* string)
 #endif
     }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (g_singlePlayer.integer) {
         if (g_gametype.integer >= GT_CTF) {
             won = level.teamScores[TEAM_RED] > level.teamScores[TEAM_BLUE];
@@ -1213,7 +1213,7 @@ void CheckExitRules()
     }
 
     if (level.intermissionQueued) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         int time = (g_singlePlayer.integer) ? SP_INTERMISSION_DELAY_TIME : INTERMISSION_DELAY_TIME;
         if (level.time - level.intermissionQueued >= time) {
             level.intermissionQueued = 0;

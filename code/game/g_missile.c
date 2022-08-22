@@ -84,7 +84,7 @@ void G_ExplodeMissile(gentity_t* ent)
     trap_LinkEntity(ent);
 }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 static void ProximityMine_Explode(gentity_t* mine)
 {
     G_ExplodeMissile(mine);
@@ -230,7 +230,7 @@ static void G_MissileImpact(gentity_t* ent, trace_t* trace)
 {
     gentity_t* other;
     bool hitClient = false;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     vec3_t forward, impactpoint, bouncedir;
     int eFlags;
 #endif
@@ -243,7 +243,7 @@ static void G_MissileImpact(gentity_t* ent, trace_t* trace)
         return;
     }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (other->takedamage) {
         if (ent->s.weapon != WP_PROX_LAUNCHER) {
             if (other->client && other->client->invulnerabilityTime > level.time) {
@@ -282,7 +282,7 @@ static void G_MissileImpact(gentity_t* ent, trace_t* trace)
         }
     }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (ent->s.weapon == WP_PROX_LAUNCHER) {
         if (ent->s.pos.trType != TR_GRAVITY) {
             return;
@@ -411,7 +411,7 @@ void G_RunMissile(gentity_t* ent)
     if (ent->target_ent) {
         passent = ent->target_ent->s.number;
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     // prox mines that left the owner bbox will attach to anything, even the owner
     else if (ent->s.weapon == WP_PROX_LAUNCHER && ent->count) {
         passent = ENTITYNUM_NONE;
@@ -449,7 +449,7 @@ void G_RunMissile(gentity_t* ent)
             return; // exploded
         }
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     // if the prox mine wasn't yet outside the player body
     if (ent->s.weapon == WP_PROX_LAUNCHER && !ent->count) {
         // check if the prox mine is outside the owner bbox
@@ -638,7 +638,7 @@ gentity_t* fire_grapple(gentity_t* self, vec3_t start, vec3_t dir)
     return hook;
 }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 #define NAILGUN_SPREAD 500
 
 gentity_t* fire_nail(gentity_t* self, vec3_t start, vec3_t forward, vec3_t right, vec3_t up)

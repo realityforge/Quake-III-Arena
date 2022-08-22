@@ -250,7 +250,7 @@ just like the existing corpse to leave behind.
 */
 void CopyToBodyQue(gentity_t* ent)
 {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     gentity_t* e;
     int i;
 #endif
@@ -273,7 +273,7 @@ void CopyToBodyQue(gentity_t* ent)
 
     body->s = ent->s;
     body->s.eFlags = EF_DEAD; // clear EF_TALK, etc
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (ent->s.eFlags & EF_KAMIKAZE) {
         body->s.eFlags |= EF_KAMIKAZE;
 
@@ -595,7 +595,7 @@ void ClientUserinfoChanged(int clientNum)
     }
 
     // set max health
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (client->ps.powerups[PW_GUARD]) {
         client->pers.maxHealth = 200;
     } else {
@@ -638,7 +638,7 @@ void ClientUserinfoChanged(int clientNum)
         team = client->sess.sessionTeam;
     }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (g_gametype.integer >= GT_TEAM) {
         client->pers.teamInfo = true;
     } else {
@@ -1110,7 +1110,7 @@ void ClientDisconnect(int clientNum)
         // They don't get to take powerups with them!
         // Especially important for stuff like CTF flags
         TossClientItems(ent);
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         TossClientPersistantPowerups(ent);
         if (g_gametype.integer == GT_HARVESTER) {
             TossClientCubes(ent);

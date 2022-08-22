@@ -192,7 +192,7 @@ spawn_t spawns[] = {
     { "team_CTF_redspawn", SP_team_CTF_redspawn },
     { "team_CTF_bluespawn", SP_team_CTF_bluespawn },
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     { "team_redobelisk", SP_team_redobelisk },
     { "team_blueobelisk", SP_team_blueobelisk },
     { "team_neutralobelisk", SP_team_neutralobelisk },
@@ -372,7 +372,7 @@ static void G_SpawnGEntityFromSpawnVars()
         }
     }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     G_SpawnInt("notta", "0", &i);
     if (i) {
         G_FreeEntity(ent);

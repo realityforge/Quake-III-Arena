@@ -36,7 +36,7 @@ void UpdateTournamentInfo()
     int playerClientNum;
     int n, accuracy, perfect, msglen;
     int buflen;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     int score1, score2;
     bool won;
 #endif
@@ -63,7 +63,7 @@ void UpdateTournamentInfo()
     CalculateRanks();
 
     if (level.clients[playerClientNum].sess.sessionTeam == TEAM_SPECTATOR) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         Com_sprintf(msg, sizeof(msg), "postgame %i %i 0 0 0 0 0 0 0 0 0 0 0", level.numNonSpectatorClients, playerClientNum);
 #else
         Com_sprintf(msg, sizeof(msg), "postgame %i %i 0 0 0 0 0 0", level.numNonSpectatorClients, playerClientNum);
@@ -74,7 +74,7 @@ void UpdateTournamentInfo()
         } else {
             accuracy = 0;
         }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         won = false;
         if (g_gametype.integer >= GT_CTF) {
             score1 = level.teamScores[TEAM_RED];

@@ -74,7 +74,7 @@ void BotPrintTeamGoal(bot_state_t* bs)
         BotAI_Print(PRT_MESSAGE, "%s: I'm gonna try to return the flag for %1.0f secs\n", netname, t);
         break;
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     case LTG_ATTACKENEMYBASE: {
         BotAI_Print(PRT_MESSAGE, "%s: I'm gonna attack the enemy base for %1.0f secs\n", netname, t);
         break;
@@ -691,7 +691,7 @@ static void BotMatch_GetFlag(bot_state_t* bs, bot_match_t* match)
         if (!ctf_redflag.areanum || !ctf_blueflag.areanum)
             return;
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     else if (gametype == GT_1FCTF) {
         if (!ctf_neutralflag.areanum || !ctf_redflag.areanum || !ctf_blueflag.areanum)
             return;
@@ -727,7 +727,7 @@ static void BotMatch_GetFlag(bot_state_t* bs, bot_match_t* match)
 #endif // DEBUG
 }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 static void BotMatch_AttackEnemyBase(bot_state_t* bs, bot_match_t* match)
 {
     char netname[MAX_MESSAGE_SIZE];
@@ -808,7 +808,7 @@ static void BotMatch_RushBase(bot_state_t* bs, bot_match_t* match)
         if (!ctf_redflag.areanum || !ctf_blueflag.areanum)
             return;
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     else if (gametype == GT_1FCTF || gametype == GT_HARVESTER) {
         if (!redobelisk.areanum || !blueobelisk.areanum)
             return;
@@ -886,7 +886,7 @@ static void BotMatch_ReturnFlag(bot_state_t* bs, bot_match_t* match)
     // if not in CTF mode
     if (
         gametype != GT_CTF
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         && gametype != GT_1FCTF
 #endif
     )
@@ -1202,7 +1202,7 @@ static void BotMatch_WhatAreYouDoing(bot_state_t* bs, bot_match_t* match)
         BotAI_BotInitialChat(bs, "returningflag", NULL);
         break;
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     case LTG_ATTACKENEMYBASE: {
         BotAI_BotInitialChat(bs, "attackingenemybase", NULL);
         break;
@@ -1287,7 +1287,7 @@ static void BotMatch_WhereAreYou(bot_state_t* bs, bot_match_t* match)
         "Heavy Armor",
         "Red Flag",
         "Blue Flag",
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         "Nailgun",
         "Prox Launcher",
         "Chaingun",
@@ -1319,7 +1319,7 @@ static void BotMatch_WhereAreYou(bot_state_t* bs, bot_match_t* match)
     }
     if (bestitem != -1) {
         if (gametype == GT_CTF
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
             || gametype == GT_1FCTF
 #endif
         ) {
@@ -1333,7 +1333,7 @@ static void BotMatch_WhereAreYou(bot_state_t* bs, bot_match_t* match)
                 BotAI_BotInitialChat(bs, "location", nearbyitems[bestitem], NULL);
             }
         }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         else if (gametype == GT_OBELISK || gametype == GT_HARVESTER) {
             redtt = trap_AAS_AreaTravelTimeToGoalArea(bs->areanum, bs->origin, redobelisk.areanum, TFL_DEFAULT);
             bluett = trap_AAS_AreaTravelTimeToGoalArea(bs->areanum, bs->origin, blueobelisk.areanum, TFL_DEFAULT);
@@ -1490,7 +1490,7 @@ static void BotMatch_CTF(bot_state_t* bs, bot_match_t* match)
             bs->flagstatuschanged = 1;
         }
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     else if (gametype == GT_1FCTF) {
         if (match->subtype & ST_1FCTFGOTFLAG) {
             trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
@@ -1562,7 +1562,7 @@ int BotMatchMessage(bot_state_t* bs, char* message)
         BotMatch_GetFlag(bs, &match);
         break;
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     // CTF & 1FCTF & Obelisk & Harvester
     case MSG_ATTACKENEMYBASE: {
         BotMatch_AttackEnemyBase(bs, &match);

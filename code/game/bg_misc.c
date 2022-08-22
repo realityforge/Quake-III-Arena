@@ -602,7 +602,7 @@ gitem_t bg_itemlist[] = {
         /* precache */ "",
         /* sounds */ "" },
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     /*QUAKED holdable_kamikaze (.3 .3 1) (-16 -16 -16) (16 16 16) suspended
      */
     {
@@ -942,7 +942,7 @@ This needs to be the same for client side prediction and server use.
 bool BG_CanItemBeGrabbed(int gametype, const entityState_t* ent, const playerState_t* ps)
 {
     gitem_t* item;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     int upperBound;
 #endif
 
@@ -963,7 +963,7 @@ bool BG_CanItemBeGrabbed(int gametype, const entityState_t* ent, const playerSta
         return true;
 
     case IT_ARMOR:
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (bg_itemlist[ps->stats[STAT_PERSISTANT_POWERUP]].giTag == PW_SCOUT) {
             return false;
         }
@@ -988,7 +988,7 @@ bool BG_CanItemBeGrabbed(int gametype, const entityState_t* ent, const playerSta
     case IT_HEALTH:
         // small and mega healths will go over the max, otherwise
         // don't pick up if already at max
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (bg_itemlist[ps->stats[STAT_PERSISTANT_POWERUP]].giTag == PW_GUARD) {
             upperBound = ps->stats[STAT_MAX_HEALTH];
         } else
@@ -1008,7 +1008,7 @@ bool BG_CanItemBeGrabbed(int gametype, const entityState_t* ent, const playerSta
     case IT_POWERUP:
         return true; // powerups are always picked up
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     case IT_PERSISTANT_POWERUP:
         // can only hold one item at a time
         if (ps->stats[STAT_PERSISTANT_POWERUP]) {
@@ -1027,7 +1027,7 @@ bool BG_CanItemBeGrabbed(int gametype, const entityState_t* ent, const playerSta
 #endif
 
     case IT_TEAM: // team items, such as flags
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (gametype == GT_1FCTF) {
             // neutral flag can always be picked up
             if (item->giTag == PW_NEUTRALFLAG) {
@@ -1057,7 +1057,7 @@ bool BG_CanItemBeGrabbed(int gametype, const entityState_t* ent, const playerSta
             }
         }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (gametype == GT_HARVESTER) {
             return true;
         }
@@ -1254,7 +1254,7 @@ char* eventnames[] = {
     "EV_GIB_PLAYER", // gib a previously living player
     "EV_SCOREPLUM", // score plum
 
-    //#ifdef MISSIONPACK
+    //#ifdef TEAMARENA
     "EV_PROXIMITY_MINE_STICK",
     "EV_PROXIMITY_MINE_TRIGGER",
     "EV_KAMIKAZE", // kamikaze explodes

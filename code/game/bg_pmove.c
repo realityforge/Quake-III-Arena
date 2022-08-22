@@ -473,7 +473,7 @@ static void PM_WaterMove()
     PM_SlideMove(false);
 }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 /*
 ===================
 PM_InvulnerabilityMove
@@ -1508,7 +1508,7 @@ static void PM_Weapon()
     case WP_GRAPPLING_HOOK:
         addTime = 400;
         break;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     case WP_NAILGUN:
         addTime = 1000;
         break;
@@ -1521,7 +1521,7 @@ static void PM_Weapon()
 #endif
     }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (bg_itemlist[pm->ps->stats[STAT_PERSISTANT_POWERUP]].giTag == PW_SCOUT) {
         addTime /= 1.5;
     } else if (bg_itemlist[pm->ps->stats[STAT_PERSISTANT_POWERUP]].giTag == PW_AMMOREGEN) {
@@ -1543,7 +1543,7 @@ static void PM_Animate()
             pm->ps->torsoTimer = TIMER_GESTURE;
             PM_AddEvent(EV_TAUNT);
         }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     } else if (pm->cmd.buttons & BUTTON_GETFLAG) {
         if (pm->ps->torsoTimer == 0) {
             PM_StartTorsoAnim(TORSO_GETFLAG);
@@ -1781,7 +1781,7 @@ static void PmoveSingle(pmove_t* pmove)
 
     PM_DropTimers();
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (pm->ps->powerups[PW_INVULNERABILITY]) {
         PM_InvulnerabilityMove();
     } else

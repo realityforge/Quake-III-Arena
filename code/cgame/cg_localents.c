@@ -488,7 +488,7 @@ static void CG_AddSpriteExplosion(localEntity_t* le)
     }
 }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 static void CG_AddKamikaze(localEntity_t* le)
 {
     refEntity_t* re;
@@ -775,7 +775,7 @@ void CG_AddLocalEntities()
             CG_AddScorePlum(le);
             break;
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         case LE_KAMIKAZE:
             CG_AddKamikaze(le);
             break;

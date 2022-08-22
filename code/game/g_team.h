@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 
 #define CTF_CAPTURE_BONUS 100 // what you get for capture
 #define CTF_TEAM_BONUS 25 // what your team gets for capture

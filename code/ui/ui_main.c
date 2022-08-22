@@ -85,7 +85,7 @@ static char* netnames[] = {
     NULL
 };
 
-#ifndef MISSIONPACK
+#ifndef TEAMARENA
 static char quake3worldMessage[] = "Visit www.quake3world.com - News, Community, Events, Files";
 #endif
 

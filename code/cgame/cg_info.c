@@ -209,7 +209,7 @@ void CG_DrawInformation()
     case GT_CTF:
         game_type = "Capture The Flag";
         break;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     case GT_1FCTF:
         game_type = "One Flag CTF";
         break;

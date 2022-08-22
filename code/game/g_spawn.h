@@ -58,7 +58,7 @@ void SP_team_CTF_blueplayer(gentity_t* ent);
 void SP_team_CTF_redspawn(gentity_t* ent);
 void SP_team_CTF_bluespawn(gentity_t* ent);
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 void SP_team_blueobelisk(gentity_t* ent);
 void SP_team_redobelisk(gentity_t* ent);
 void SP_team_neutralobelisk(gentity_t* ent);
