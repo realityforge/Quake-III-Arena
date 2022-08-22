@@ -169,7 +169,7 @@ static bool G_TryPushingEntity(gentity_t* check, gentity_t* pusher, vec3_t move,
     return false;
 }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 static bool G_CheckProxMinePosition(gentity_t* check)
 {
     vec3_t start, end;
@@ -280,7 +280,7 @@ static bool G_MoverPush(gentity_t* pusher, vec3_t move, vec3_t amove, gentity_t*
     for (e = 0; e < listedEntities; e++) {
         check = &g_entities[entityList[e]];
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (check->s.eType == ET_MISSILE) {
             // if it is a prox mine
             if (!strcmp(check->classname, "prox mine")) {

@@ -36,7 +36,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <fcntl.h>
 #include <fenv.h>
 
-#ifndef MISSIONPACK
+#ifndef TEAMARENA
 #include "lang_util.h"
 #endif
 

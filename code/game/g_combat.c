@@ -120,7 +120,7 @@ void TossClientItems(gentity_t* self)
     }
 }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 
 extern gentity_t* neutralObelisk;
 
@@ -272,7 +272,7 @@ char* modNames[] = {
     "MOD_SUICIDE",
     "MOD_TARGET_LASER",
     "MOD_TRIGGER_HURT",
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     "MOD_NAIL",
     "MOD_CHAINGUN",
     "MOD_PROXIMITY_MINE",
@@ -282,7 +282,7 @@ char* modNames[] = {
     "MOD_GRAPPLE"
 };
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 static void Kamikaze_DeathActivate(gentity_t* ent)
 {
     G_StartKamikaze(ent);
@@ -398,7 +398,7 @@ void player_die(gentity_t* self, gentity_t* inflictor, gentity_t* attacker, int 
     if (self->client && self->client->hook) {
         Weapon_HookFree(self->client->hook);
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if ((self->client->ps.eFlags & EF_TICKING) && self->activator) {
         self->client->ps.eFlags &= ~EF_TICKING;
         self->activator->think = G_FreeEntity;
@@ -502,7 +502,7 @@ void player_die(gentity_t* self, gentity_t* inflictor, gentity_t* attacker, int 
     }
 
     TossClientItems(self);
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     TossClientPersistantPowerups(self);
     if (g_gametype.integer == GT_HARVESTER) {
         TossClientCubes(self);
@@ -590,7 +590,7 @@ void player_die(gentity_t* self, gentity_t* inflictor, gentity_t* attacker, int 
         // globally cycle through the different death animations
         i = (i + 1) % 3;
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (self->s.eFlags & EF_KAMIKAZE) {
             Kamikaze_DeathTimer(self);
         }
@@ -631,7 +631,7 @@ static int CheckArmor(gentity_t* ent, int damage, int dflags)
     return save;
 }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 static int RaySphereIntersections(vec3_t origin, float radius, vec3_t point, vec3_t dir, vec3_t intersections[2])
 {
     float b, c, d, t;
@@ -726,7 +726,7 @@ void G_Damage(gentity_t* targ, gentity_t* inflictor, gentity_t* attacker,
     int asave;
     int knockback;
     int max;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     vec3_t bouncedir, impactpoint;
 #endif
 
@@ -739,7 +739,7 @@ void G_Damage(gentity_t* targ, gentity_t* inflictor, gentity_t* attacker,
     if (level.intermissionQueued) {
         return;
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (targ->client && mod != MOD_JUICED) {
         if (targ->client->invulnerabilityTime > level.time) {
             if (dir && point) {
@@ -763,7 +763,7 @@ void G_Damage(gentity_t* targ, gentity_t* inflictor, gentity_t* attacker,
         }
         return;
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (g_gametype.integer == GT_OBELISK && CheckObeliskAttack(targ, attacker)) {
         return;
     }
@@ -772,7 +772,7 @@ void G_Damage(gentity_t* targ, gentity_t* inflictor, gentity_t* attacker,
     // unless they are rocket jumping
     if (attacker->client && attacker != targ) {
         max = attacker->client->ps.stats[STAT_MAX_HEALTH];
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (bg_itemlist[attacker->client->ps.stats[STAT_PERSISTANT_POWERUP]].giTag == PW_GUARD) {
             max /= 2;
         }
@@ -837,7 +837,7 @@ void G_Damage(gentity_t* targ, gentity_t* inflictor, gentity_t* attacker,
 
         // if TF_NO_FRIENDLY_FIRE is set, don't do damage to the target
         // if the attacker was on the same team
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (mod != MOD_JUICED && targ != attacker && !(dflags & DAMAGE_NO_TEAM_PROTECTION) && OnSameTeam(targ, attacker)) {
 #else
         if (targ != attacker && OnSameTeam(targ, attacker)) {
@@ -846,7 +846,7 @@ void G_Damage(gentity_t* targ, gentity_t* inflictor, gentity_t* attacker,
                 return;
             }
         }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (mod == MOD_PROXIMITY_MINE) {
             if (inflictor && inflictor->parent && OnSameTeam(targ, inflictor->parent)) {
                 return;
@@ -928,7 +928,7 @@ void G_Damage(gentity_t* targ, gentity_t* inflictor, gentity_t* attacker,
     }
 
     // See if it's the player hurting the enemy flag carrier
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (g_gametype.integer == GT_CTF || g_gametype.integer == GT_1FCTF) {
 #else
     if (g_gametype.integer == GT_CTF) {

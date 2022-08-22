@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "plugin.h"
 #include "lang_util.h"
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 #include "../ui/ui_shared.h"
 #include "ui/menudef.h"
 
@@ -68,7 +68,7 @@ EXPORT intptr_t vmMain(int command, int arg0, int arg1, int arg2, int arg3, int 
         CG_KeyEvent(arg0, arg1);
         return 0;
     case CG_MOUSE_EVENT:
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         cgDC.cursorx = cgs.cursorX;
         cgDC.cursory = cgs.cursorY;
 #endif
@@ -157,7 +157,7 @@ vmCvar_t cg_drawTeamOverlay;
 vmCvar_t cg_teamOverlayUserinfo;
 vmCvar_t cg_drawFriend;
 vmCvar_t cg_teamChatsOnly;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 vmCvar_t cg_noVoiceChats;
 vmCvar_t cg_noVoiceText;
 #endif
@@ -172,7 +172,7 @@ vmCvar_t cg_cameraOrbitDelay;
 vmCvar_t cg_timescaleFadeEnd;
 vmCvar_t cg_timescaleFadeSpeed;
 vmCvar_t cg_timescale;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 vmCvar_t cg_smallFont;
 vmCvar_t cg_bigFont;
 vmCvar_t cg_noTaunt;
@@ -183,7 +183,7 @@ vmCvar_t cg_oldRocket;
 vmCvar_t cg_oldPlasma;
 vmCvar_t cg_trueLightning;
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 vmCvar_t cg_redTeamName;
 vmCvar_t cg_blueTeamName;
 vmCvar_t cg_currentSelectedPlayer;
@@ -263,7 +263,7 @@ static cvarTable_t cvarTable[] = {
     { &cg_teamChatHeight, "cg_teamChatHeight", "0", CVAR_ARCHIVE },
     { &cg_forceModel, "cg_forceModel", "0", CVAR_ARCHIVE },
     { &cg_predictItems, "cg_predictItems", "1", CVAR_ARCHIVE },
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     { &cg_deferPlayers, "cg_deferPlayers", "0", CVAR_ARCHIVE },
 #else
     { &cg_deferPlayers, "cg_deferPlayers", "1", CVAR_ARCHIVE },
@@ -273,7 +273,7 @@ static cvarTable_t cvarTable[] = {
     { &cg_stats, "cg_stats", "0", 0 },
     { &cg_drawFriend, "cg_drawFriend", "1", CVAR_ARCHIVE },
     { &cg_teamChatsOnly, "cg_teamChatsOnly", "0", CVAR_ARCHIVE },
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     { &cg_noVoiceChats, "cg_noVoiceChats", "0", CVAR_ARCHIVE },
     { &cg_noVoiceText, "cg_noVoiceText", "0", CVAR_ARCHIVE },
 #endif
@@ -282,7 +282,7 @@ static cvarTable_t cvarTable[] = {
     { &cg_buildScript, "com_buildScript", "0", 0 }, // force loading of all possible data amd error on failures
     { &cg_paused, "cl_paused", "0", CVAR_ROM },
     { &cg_synchronousClients, "g_synchronousClients", "0", CVAR_SYSTEMINFO },
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     { &cg_redTeamName, "g_redteam", DEFAULT_REDTEAM_NAME, CVAR_ARCHIVE | CVAR_SERVERINFO | CVAR_USERINFO },
     { &cg_blueTeamName, "g_blueteam", DEFAULT_BLUETEAM_NAME, CVAR_ARCHIVE | CVAR_SERVERINFO | CVAR_USERINFO },
     { &cg_currentSelectedPlayer, "cg_currentSelectedPlayer", "0", CVAR_ARCHIVE },
@@ -307,7 +307,7 @@ static cvarTable_t cvarTable[] = {
 
     { &pmove_fixed, "pmove_fixed", "0", CVAR_SYSTEMINFO },
     { &pmove_msec, "pmove_msec", "8", CVAR_SYSTEMINFO },
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     { &cg_smallFont, "ui_smallFont", "0.25", CVAR_ARCHIVE },
     { &cg_bigFont, "ui_bigFont", "0.4", CVAR_ARCHIVE },
     { &cg_noTaunt, "cg_noTaunt", "0", CVAR_ARCHIVE },
@@ -521,7 +521,7 @@ static void CG_RegisterSounds()
     const char* soundName;
 
     // voice commands
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     CG_LoadVoiceChats();
 #endif
 
@@ -536,7 +536,7 @@ static void CG_RegisterSounds()
     cgs.media.count1Sound = trap_S_RegisterSound("sound/feedback/one.wav", true);
     cgs.media.countFightSound = trap_S_RegisterSound("sound/feedback/fight.wav", true);
     cgs.media.countPrepareSound = trap_S_RegisterSound("sound/feedback/prepare.wav", true);
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     cgs.media.countPrepareTeamSound = trap_S_RegisterSound("sound/feedback/prepare_team.wav", true);
 #endif
 
@@ -567,7 +567,7 @@ static void CG_RegisterSounds()
             cgs.media.yourTeamTookEnemyFlagSound = trap_S_RegisterSound("sound/teamplay/voc_team_flag.wav", true);
         }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (cgs.gametype == GT_1FCTF || cg_buildScript.integer) {
             // FIXME: get a replacement for this sound ?
             cgs.media.neutralFlagReturnedSound = trap_S_RegisterSound("sound/teamplay/flagreturn_opponent.wav", true);
@@ -598,7 +598,7 @@ static void CG_RegisterSounds()
     cgs.media.gibBounce2Sound = trap_S_RegisterSound("sound/player/gibimp2.wav", false);
     cgs.media.gibBounce3Sound = trap_S_RegisterSound("sound/player/gibimp3.wav", false);
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     cgs.media.useInvulnerabilitySound = trap_S_RegisterSound("sound/items/invul_activate.wav", false);
     cgs.media.invulnerabilityImpactSound1 = trap_S_RegisterSound("sound/items/invul_impact_01.wav", false);
     cgs.media.invulnerabilityImpactSound2 = trap_S_RegisterSound("sound/items/invul_impact_02.wav", false);
@@ -625,7 +625,7 @@ static void CG_RegisterSounds()
     cgs.media.landSound = trap_S_RegisterSound("sound/player/land1.wav", false);
 
     cgs.media.hitSound = trap_S_RegisterSound("sound/feedback/hit.wav", false);
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     cgs.media.hitSoundHighArmor = trap_S_RegisterSound("sound/feedback/hithi.wav", false);
     cgs.media.hitSoundLowArmor = trap_S_RegisterSound("sound/feedback/hitlo.wav", false);
 #endif
@@ -636,7 +636,7 @@ static void CG_RegisterSounds()
     cgs.media.humiliationSound = trap_S_RegisterSound("sound/feedback/humiliation.wav", true);
     cgs.media.assistSound = trap_S_RegisterSound("sound/feedback/assist.wav", true);
     cgs.media.defendSound = trap_S_RegisterSound("sound/feedback/defense.wav", true);
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     cgs.media.firstImpressiveSound = trap_S_RegisterSound("sound/feedback/first_impressive.wav", true);
     cgs.media.firstExcellentSound = trap_S_RegisterSound("sound/feedback/first_excellent.wav", true);
     cgs.media.firstHumiliationSound = trap_S_RegisterSound("sound/feedback/first_gauntlet.wav", true);
@@ -646,7 +646,7 @@ static void CG_RegisterSounds()
     cgs.media.tiedLeadSound = trap_S_RegisterSound("sound/feedback/tiedlead.wav", true);
     cgs.media.lostLeadSound = trap_S_RegisterSound("sound/feedback/lostlead.wav", true);
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     cgs.media.voteNow = trap_S_RegisterSound("sound/feedback/vote_now.wav", true);
     cgs.media.votePassed = trap_S_RegisterSound("sound/feedback/vote_passed.wav", true);
     cgs.media.voteFailed = trap_S_RegisterSound("sound/feedback/vote_failed.wav", true);
@@ -709,7 +709,7 @@ static void CG_RegisterSounds()
     // cgs.media.sfx_railg = trap_S_RegisterSound ("sound/weapons/railgun/railgf1a.wav", false);
     cgs.media.sfx_rockexp = trap_S_RegisterSound("sound/weapons/rocket/rocklx1a.wav", false);
     cgs.media.sfx_plasmaexp = trap_S_RegisterSound("sound/weapons/plasma/plasmx1a.wav", false);
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     cgs.media.sfx_proxexp = trap_S_RegisterSound("sound/weapons/proxmine/wstbexpl.wav", false);
     cgs.media.sfx_nghit = trap_S_RegisterSound("sound/weapons/nailgun/wnalimpd.wav", false);
     cgs.media.sfx_nghitflesh = trap_S_RegisterSound("sound/weapons/nailgun/wnalimpl.wav", false);
@@ -736,7 +736,7 @@ static void CG_RegisterSounds()
     cgs.media.hgrenb1aSound = trap_S_RegisterSound("sound/weapons/grenade/hgrenb1a.wav", false);
     cgs.media.hgrenb2aSound = trap_S_RegisterSound("sound/weapons/grenade/hgrenb2a.wav", false);
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     trap_S_RegisterSound("sound/player/james/death1.wav", false);
     trap_S_RegisterSound("sound/player/james/death2.wav", false);
     trap_S_RegisterSound("sound/player/james/death3.wav", false);
@@ -823,7 +823,7 @@ static void CG_RegisterGraphics()
     cgs.media.smokePuffShader = trap_R_RegisterShader("smokePuff");
     cgs.media.smokePuffRageProShader = trap_R_RegisterShader("smokePuffRagePro");
     cgs.media.shotgunSmokePuffShader = trap_R_RegisterShader("shotgunSmokePuff");
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     cgs.media.nailPuffShader = trap_R_RegisterShader("nailtrail");
     cgs.media.blueProxMine = trap_R_RegisterModel("models/weaphits/proxmineb.md3");
 #endif
@@ -853,7 +853,7 @@ static void CG_RegisterGraphics()
     cgs.media.regenShader = trap_R_RegisterShader("powerups/regen");
     cgs.media.hastePuffShader = trap_R_RegisterShader("hasteSmokePuff");
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (cgs.gametype == GT_HARVESTER || cg_buildScript.integer) {
         cgs.media.redCubeModel = trap_R_RegisterModel("models/powerups/orb/r_orb.md3");
         cgs.media.blueCubeModel = trap_R_RegisterModel("models/powerups/orb/b_orb.md3");
@@ -873,7 +873,7 @@ static void CG_RegisterGraphics()
         cgs.media.blueFlagShader[0] = trap_R_RegisterShaderNoMip("icons/iconf_blu1");
         cgs.media.blueFlagShader[1] = trap_R_RegisterShaderNoMip("icons/iconf_blu2");
         cgs.media.blueFlagShader[2] = trap_R_RegisterShaderNoMip("icons/iconf_blu3");
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         cgs.media.flagPoleModel = trap_R_RegisterModel("models/flag2/flagpole.md3");
         cgs.media.flagFlapModel = trap_R_RegisterModel("models/flag2/flagflap3.md3");
 
@@ -887,7 +887,7 @@ static void CG_RegisterGraphics()
 #endif
     }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (cgs.gametype == GT_1FCTF || cg_buildScript.integer) {
         cgs.media.neutralFlagModel = trap_R_RegisterModel("models/flags/n_flag.md3");
         cgs.media.flagShader[0] = trap_R_RegisterShaderNoMip("icons/iconf_neutral1");
@@ -919,7 +919,7 @@ static void CG_RegisterGraphics()
         cgs.media.friendShader = trap_R_RegisterShader("sprites/foe");
         cgs.media.redQuadShader = trap_R_RegisterShader("powerups/blueflag");
         cgs.media.teamStatusBar = trap_R_RegisterShader("gfx/2d/colorbar");
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         cgs.media.blueKamikazeShader = trap_R_RegisterShader("models/weaphits/kamikblu");
 #endif
     }
@@ -950,13 +950,13 @@ static void CG_RegisterGraphics()
     cgs.media.bulletFlashModel = trap_R_RegisterModel("models/weaphits/bullet.md3");
     cgs.media.ringFlashModel = trap_R_RegisterModel("models/weaphits/ring02.md3");
     cgs.media.dishFlashModel = trap_R_RegisterModel("models/weaphits/boom01.md3");
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     cgs.media.teleportEffectModel = trap_R_RegisterModel("models/powerups/pop.md3");
 #else
     cgs.media.teleportEffectModel = trap_R_RegisterModel("models/misc/telep.md3");
     cgs.media.teleportEffectShader = trap_R_RegisterShader("teleportEffect");
 #endif
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     cgs.media.kamikazeEffectModel = trap_R_RegisterModel("models/weaphits/kamboom2.md3");
     cgs.media.kamikazeShockWave = trap_R_RegisterModel("models/weaphits/kamwave.md3");
     cgs.media.kamikazeHeadModel = trap_R_RegisterModel("models/powerups/kamikazi.md3");
@@ -1027,7 +1027,7 @@ static void CG_RegisterGraphics()
         cgs.gameModels[i] = trap_R_RegisterModel(modelName);
     }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     // new stuff
     cgs.media.patrolShader = trap_R_RegisterShaderNoMip("ui/assets/statusbar/patrol");
     cgs.media.assaultShader = trap_R_RegisterShaderNoMip("ui/assets/statusbar/assault");
@@ -1131,7 +1131,7 @@ void CG_StartMusic()
 
     trap_S_StartBackgroundTrack(parm1, parm2);
 }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 
 //
 // ==============================
@@ -1822,7 +1822,7 @@ void CG_Init(int serverMessageNum, int serverCommandSequence, int clientNum)
 
     trap_CM_LoadMap(cgs.mapname);
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     String_Init();
 #endif
 
@@ -1840,7 +1840,7 @@ void CG_Init(int serverMessageNum, int serverCommandSequence, int clientNum)
 
     CG_RegisterClients(); // if low on memory, some clients will be deferred
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     CG_AssetCache();
     CG_LoadHudMenu(); // load new hud stuff
 #endif
@@ -1861,7 +1861,7 @@ void CG_Init(int serverMessageNum, int serverCommandSequence, int clientNum)
 
     CG_LoadingString("");
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     CG_InitTeamChat();
 #endif
 
@@ -1892,7 +1892,7 @@ CG_EventHandling
       2 - hud editor
 
 */
-#ifndef MISSIONPACK
+#ifndef TEAMARENA
 void CG_EventHandling(int type)
 {
 }

@@ -55,7 +55,7 @@ static void CG_CheckAmmo()
         case WP_GRENADE_LAUNCHER:
         case WP_RAILGUN:
         case WP_SHOTGUN:
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         case WP_PROX_LAUNCHER:
 #endif
             total += cg.snap->ps.ammo[i] * 1000;
@@ -246,7 +246,7 @@ static void CG_CheckLocalSounds(playerState_t* ps, playerState_t* ops)
 {
     int highScore, reward;
     sfxHandle_t sfx;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     int health;
     int armor;
 #endif
@@ -258,7 +258,7 @@ static void CG_CheckLocalSounds(playerState_t* ps, playerState_t* ops)
 
     // hit changes
     if (ps->persistent[PERS_HITS] > ops->persistent[PERS_HITS]) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         armor = ps->persistent[PERS_ATTACKEE_ARMOR] & 0xff;
         health = ps->persistent[PERS_ATTACKEE_ARMOR] >> 8;
         if (armor > 50) {
@@ -294,7 +294,7 @@ static void CG_CheckLocalSounds(playerState_t* ps, playerState_t* ops)
         reward = true;
     }
     if (ps->persistent[PERS_IMPRESSIVE_COUNT] != ops->persistent[PERS_IMPRESSIVE_COUNT]) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (ps->persistent[PERS_IMPRESSIVE_COUNT] == 1) {
             sfx = cgs.media.firstImpressiveSound;
         } else {
@@ -307,7 +307,7 @@ static void CG_CheckLocalSounds(playerState_t* ps, playerState_t* ops)
         reward = true;
     }
     if (ps->persistent[PERS_EXCELLENT_COUNT] != ops->persistent[PERS_EXCELLENT_COUNT]) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (ps->persistent[PERS_EXCELLENT_COUNT] == 1) {
             sfx = cgs.media.firstExcellentSound;
         } else {
@@ -320,7 +320,7 @@ static void CG_CheckLocalSounds(playerState_t* ps, playerState_t* ops)
         reward = true;
     }
     if (ps->persistent[PERS_GAUNTLET_FRAG_COUNT] != ops->persistent[PERS_GAUNTLET_FRAG_COUNT]) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (ps->persistent[PERS_GAUNTLET_FRAG_COUNT] == 1) {
             sfx = cgs.media.firstHumiliationSound;
         } else {

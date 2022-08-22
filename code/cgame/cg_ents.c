@@ -302,12 +302,12 @@ static void CG_Item(centity_t* cent)
         VectorScale(ent.axis[1], 1.5, ent.axis[1]);
         VectorScale(ent.axis[2], 1.5, ent.axis[2]);
         ent.nonNormalizedAxes = true;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         trap_S_AddLoopingSound(cent->currentState.number, cent->lerpOrigin, vec3_origin, cgs.media.weaponHoverSound);
 #endif
     }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (item->giType == IT_HOLDABLE && item->giTag == HI_KAMIKAZE) {
         VectorScale(ent.axis[0], 2, ent.axis[0]);
         VectorScale(ent.axis[1], 2, ent.axis[1]);
@@ -443,7 +443,7 @@ static void CG_Missile(centity_t* cent)
     ent.hModel = weapon->missileModel;
     ent.renderfx = weapon->missileRenderfx | RF_NOSHADOW;
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (cent->currentState.weapon == WP_PROX_LAUNCHER) {
         if (s1->generic1 == TEAM_BLUE) {
             ent.hModel = cgs.media.blueProxMine;
@@ -460,7 +460,7 @@ static void CG_Missile(centity_t* cent)
     if (s1->pos.trType != TR_STATIONARY) {
         RotateAroundDirection(ent.axis, cg.time / 4);
     } else {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (s1->weapon == WP_PROX_LAUNCHER) {
             AnglesToAxis(cent->lerpAngles, ent.axis);
         } else
@@ -753,7 +753,7 @@ static void CG_CalcEntityLerpPositions(centity_t* cent)
 static void CG_TeamBase(centity_t* cent)
 {
     refEntity_t model;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     vec3_t angles;
     int t, h;
     float c;
@@ -777,7 +777,7 @@ static void CG_TeamBase(centity_t* cent)
         }
         trap_R_AddRefEntityToScene(&model);
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     else if (cgs.gametype == GT_OBELISK) {
         // show the obelisk
         memset(&model, 0, sizeof(model));

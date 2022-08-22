@@ -312,7 +312,7 @@ void SP_shooter_grenade(gentity_t* ent)
     InitShooter(ent, WP_GRENADE_LAUNCHER);
 }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 static void PortalDie(gentity_t* self, UNUSED gentity_t* inflictor, UNUSED gentity_t* attacker, UNUSED int damage, UNUSED int mod)
 {
     G_FreeEntity(self);

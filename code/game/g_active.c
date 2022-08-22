@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "g_local.h"
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 #include "lang_util.h"
 #endif
 
@@ -160,7 +160,7 @@ static void P_WorldEffects(gentity_t* ent)
 
 static void G_SetClientSound(gentity_t* ent)
 {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (ent->s.eFlags & EF_TICKING) {
         ent->client->ps.loopSound = G_SoundIndex("sound/weapons/proxmine/wstbtick.wav");
     } else
@@ -373,7 +373,7 @@ Actions that happen once a second
 static void ClientTimerActions(gentity_t* ent, int msec)
 {
     gclient_t* client;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     int maxHealth;
 #endif
 
@@ -384,7 +384,7 @@ static void ClientTimerActions(gentity_t* ent, int msec)
         client->timeResidual -= 1000;
 
         // regenerate
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (bg_itemlist[client->ps.stats[STAT_PERSISTANT_POWERUP]].giTag == PW_GUARD) {
             maxHealth = client->ps.stats[STAT_MAX_HEALTH] / 2;
         } else if (client->ps.powerups[PW_REGEN]) {
@@ -434,7 +434,7 @@ static void ClientTimerActions(gentity_t* ent, int msec)
             client->ps.stats[STAT_ARMOR]--;
         }
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (bg_itemlist[client->ps.stats[STAT_PERSISTANT_POWERUP]].giTag == PW_AMMOREGEN) {
         int w, max, inc, t, i;
         int weapList[] = { WP_MACHINEGUN, WP_SHOTGUN, WP_GRENADE_LAUNCHER, WP_ROCKET_LAUNCHER, WP_LIGHTNING, WP_RAILGUN, WP_PLASMAGUN, WP_BFG, WP_NAILGUN, WP_PROX_LAUNCHER, WP_CHAINGUN };
@@ -612,7 +612,7 @@ static void ClientEvents(gentity_t* ent, int oldEventSequence)
                 ent->client->ps.powerups[j] = 0;
             }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
             if (g_gametype.integer == GT_HARVESTER) {
                 if (ent->client->ps.generic1 > 0) {
                     if (ent->client->sess.sessionTeam == TEAM_RED) {
@@ -643,7 +643,7 @@ static void ClientEvents(gentity_t* ent, int oldEventSequence)
 
             break;
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         case EV_USE_ITEM3: // kamikaze
             // make sure the invulnerability is off
             ent->client->invulnerabilityTime = 0;
@@ -669,7 +669,7 @@ static void ClientEvents(gentity_t* ent, int oldEventSequence)
     }
 }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 static int StuckInOtherClient(gentity_t* ent)
 {
     int i;
@@ -838,7 +838,7 @@ static void ClientThink_real(gentity_t* ent)
     // set speed
     client->ps.speed = g_speed.value;
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (bg_itemlist[client->ps.stats[STAT_PERSISTANT_POWERUP]].giTag == PW_SCOUT) {
         client->ps.speed *= 1.5;
     } else
@@ -868,7 +868,7 @@ static void ClientThink_real(gentity_t* ent)
         ent->client->pers.cmd.buttons |= BUTTON_GESTURE;
     }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     // check for invulnerability expansion before doing the Pmove
     if (client->ps.powerups[PW_INVULNERABILITY]) {
         if (!(client->ps.pm_flags & PMF_INVULEXPAND)) {
@@ -914,7 +914,7 @@ static void ClientThink_real(gentity_t* ent)
 
     VectorCopy(client->ps.origin, client->oldOrigin);
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (level.intermissionQueued != 0 && g_singlePlayer.integer) {
         if (level.time - level.intermissionQueued >= 1000) {
             pm.cmd.buttons = 0;
@@ -1107,7 +1107,7 @@ void ClientEndFrame(gentity_t* ent)
         }
     }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     // set powerup for player animation
     if (bg_itemlist[ent->client->ps.stats[STAT_PERSISTANT_POWERUP]].giTag == PW_GUARD) {
         ent->client->ps.powerups[PW_GUARD] = level.time;

@@ -241,7 +241,7 @@ static void BotSetInfoConfigString(bot_state_t* bs)
             strcpy(carrying, "F ");
         }
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     else if (gametype == GT_1FCTF) {
         if (Bot1FCTFCarryingFlag(bs)) {
             strcpy(carrying, "F ");
@@ -745,7 +745,7 @@ static int BotAI(int client, float thinktime)
             args[strlen(args) - 1] = '\0';
             trap_BotQueueConsoleMessage(bs->cs, CMS_CHAT, args);
         }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         else if (!Q_stricmp(buf, "vchat")) {
             BotVoiceChatCommand(bs, SAY_ALL, args);
         } else if (!Q_stricmp(buf, "vtchat")) {
@@ -1195,7 +1195,7 @@ int BotAIStartFrame(int time)
                 trap_BotLibUpdateEntity(i, NULL);
                 continue;
             }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
             // never link prox mine triggers
             if (ent->r.contents == CONTENTS_TRIGGER) {
                 if (ent->touch == ProximityMine_Trigger) {
@@ -1346,8 +1346,8 @@ static int BotInitLibrary()
     trap_Cvar_VariableStringBuffer("fs_homepath", buf, sizeof(buf));
     if (strlen(buf))
         trap_BotLibVarSet("homedir", buf);
-#ifdef MISSIONPACK
-    trap_BotLibDefine("MISSIONPACK");
+#ifdef TEAMARENA
+    trap_BotLibDefine("TEAMARENA");
 #endif
     // setup the bot library
     return trap_BotLibSetup();

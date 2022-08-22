@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "cg_local.h"
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 #include "voicechat.h"
 #endif
 //==========================================================================
@@ -146,7 +146,7 @@ static void CG_Obituary(entityState_t* ent)
     if (attacker == target) {
         gender = ci->gender;
         switch (mod) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         case MOD_KAMIKAZE:
             message = "goes out with a bang";
             break;
@@ -178,7 +178,7 @@ static void CG_Obituary(entityState_t* ent)
         case MOD_BFG_SPLASH:
             message = "should have used a smaller gun";
             break;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         case MOD_PROXIMITY_MINE:
             if (gender == GENDER_FEMALE) {
                 message = "found her prox mine";
@@ -216,7 +216,7 @@ static void CG_Obituary(entityState_t* ent)
         } else {
             s = va("You fragged %s", targetName);
         }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (!(cg_singlePlayerActive.integer && cg_cameraOrbit.integer)) {
             CG_CenterPrint(s, SCREEN_HEIGHT * 0.30, BIGCHAR_WIDTH);
         }
@@ -289,7 +289,7 @@ static void CG_Obituary(entityState_t* ent)
             message = "was blasted by";
             message2 = "'s BFG";
             break;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         case MOD_NAIL:
             message = "was nailed by";
             break;
@@ -373,7 +373,7 @@ static void CG_UseItem(centity_t* cent)
         trap_S_StartSound(NULL, es->number, CHAN_BODY, cgs.media.medkitSound);
         break;
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     case HI_KAMIKAZE:
         break;
 
@@ -670,7 +670,7 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
         DEBUGNAME("EV_TAUNT");
         trap_S_StartSound(NULL, es->number, CHAN_VOICE, CG_CustomSound(es->number, "*taunt.wav"));
         break;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     case EV_TAUNT_YES:
         DEBUGNAME("EV_TAUNT_YES");
         CG_VoiceChatLocal(SAY_TEAM, false, es->number, COLOR_CYAN, VOICECHAT_YES);
@@ -731,7 +731,7 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
             if (item->giType == IT_POWERUP || item->giType == IT_TEAM) {
                 trap_S_StartSound(NULL, es->number, CHAN_AUTO, cgs.media.n_healthSound);
             } else if (item->giType == IT_PERSISTANT_POWERUP) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
                 switch (item->giTag) {
                 case PW_SCOUT:
                     trap_S_StartSound(NULL, es->number, CHAN_AUTO, cgs.media.scoutSound);
@@ -898,7 +898,7 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
         }
         break;
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     case EV_PROXIMITY_MINE_STICK:
         DEBUGNAME("EV_PROXIMITY_MINE_STICK");
         if (es->eventParm & SURF_FLESH) {
@@ -1055,14 +1055,14 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
             if (cg.snap->ps.powerups[PW_BLUEFLAG] || cg.snap->ps.powerups[PW_NEUTRALFLAG]) {
             } else {
                 if (cg.snap->ps.persistent[PERS_TEAM] == TEAM_BLUE) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
                     if (cgs.gametype == GT_1FCTF)
                         CG_AddBufferedSound(cgs.media.yourTeamTookTheFlagSound);
                     else
 #endif
                         CG_AddBufferedSound(cgs.media.enemyTookYourFlagSound);
                 } else if (cg.snap->ps.persistent[PERS_TEAM] == TEAM_RED) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
                     if (cgs.gametype == GT_1FCTF)
                         CG_AddBufferedSound(cgs.media.enemyTookTheFlagSound);
                     else
@@ -1076,14 +1076,14 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
             if (cg.snap->ps.powerups[PW_REDFLAG] || cg.snap->ps.powerups[PW_NEUTRALFLAG]) {
             } else {
                 if (cg.snap->ps.persistent[PERS_TEAM] == TEAM_RED) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
                     if (cgs.gametype == GT_1FCTF)
                         CG_AddBufferedSound(cgs.media.yourTeamTookTheFlagSound);
                     else
 #endif
                         CG_AddBufferedSound(cgs.media.enemyTookYourFlagSound);
                 } else if (cg.snap->ps.persistent[PERS_TEAM] == TEAM_BLUE) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
                     if (cgs.gametype == GT_1FCTF)
                         CG_AddBufferedSound(cgs.media.enemyTookTheFlagSound);
                     else
@@ -1092,7 +1092,7 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
                 }
             }
             break;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         case GTS_REDOBELISK_ATTACKED: // Overload: red obelisk is being attacked
             if (cg.snap->ps.persistent[PERS_TEAM] == TEAM_RED) {
                 CG_AddBufferedSound(cgs.media.yourBaseIsUnderAttackSound);
@@ -1120,7 +1120,7 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
         case GTS_TEAMS_ARE_TIED:
             CG_AddBufferedSound(cgs.media.teamsTiedSound);
             break;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         case GTS_KAMIKAZE:
             trap_S_StartLocalSound(cgs.media.kamikazeFarSound, CHAN_ANNOUNCER);
             break;

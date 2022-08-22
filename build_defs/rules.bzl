@@ -78,7 +78,7 @@ UI_COPTS = PLUGIN_COPTS + EXTRA_WARNINGS
 UI_LINKOPTS = PLUGIN_LINKOPTS
 UI_DEFINES = ["UI"] + BASE_DEFINES
 
-TEAM_ARENA_DEFINES = ["MISSIONPACK"]
+TEAM_ARENA_DEFINES = ["TEAMARENA"]
 
 # TODO: Should define Q3_VM but can not do that until we get WASM compilation working and/or we stop linking against c library
 QVM_DEFINES = []

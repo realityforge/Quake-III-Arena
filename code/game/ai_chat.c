@@ -40,7 +40,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "syn.h" //synonyms
 #include "match.h" //string matching types and vars
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 #include "voicechat.h"
 #endif
 
@@ -233,7 +233,7 @@ static char* BotWeaponNameForMeansOfDeath(int mod)
     case MOD_BFG:
     case MOD_BFG_SPLASH:
         return "BFG10K";
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     case MOD_NAIL:
         return "Nailgun";
     case MOD_CHAINGUN:
@@ -256,7 +256,7 @@ static char* BotRandomWeaponName()
 {
     int rnd;
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     rnd = random() * 11.9;
 #else
     rnd = random() * 8.9;
@@ -278,7 +278,7 @@ static char* BotRandomWeaponName()
         return "Railgun";
     case 7:
         return "Lightning Gun";
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     case 8:
         return "Nailgun";
     case 9:
@@ -441,7 +441,7 @@ int BotChat_StartLevel(bot_state_t* bs)
         return false;
     // don't chat in teamplay
     if (TeamPlayIsOn()) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         trap_EA_Command(bs->client, "vtaunt");
 #endif
         return false;
@@ -477,7 +477,7 @@ int BotChat_EndLevel(bot_state_t* bs)
         return false;
     // teamplay
     if (TeamPlayIsOn()) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         if (BotIsFirstInRankings(bs)) {
             trap_EA_Command(bs->client, "vtaunt");
         }
@@ -556,7 +556,7 @@ int BotChat_Death(bot_state_t* bs)
     } else {
         // teamplay
         if (TeamPlayIsOn()) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
             trap_EA_Command(bs->client, "vtaunt");
 #endif
             return true;
@@ -574,7 +574,7 @@ int BotChat_Death(bot_state_t* bs)
             BotAI_BotInitialChat(bs, "death_suicide", BotRandomOpponentName(bs), NULL);
         else if (bs->botdeathtype == MOD_TELEFRAG)
             BotAI_BotInitialChat(bs, "death_telefrag", name, NULL);
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         else if (bs->botdeathtype == MOD_KAMIKAZE && trap_BotNumInitialChats(bs->cs, "death_kamikaze"))
             BotAI_BotInitialChat(bs, "death_kamikaze", name, NULL);
 #endif
@@ -650,7 +650,7 @@ int BotChat_Kill(bot_state_t* bs)
     } else {
         // don't chat in teamplay
         if (TeamPlayIsOn()) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
             trap_EA_Command(bs->client, "vtaunt");
 #endif
             return false; // don't wait
@@ -662,7 +662,7 @@ int BotChat_Kill(bot_state_t* bs)
         } else if (bs->enemydeathtype == MOD_TELEFRAG) {
             BotAI_BotInitialChat(bs, "kill_telefrag", name, NULL);
         }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         else if (bs->botdeathtype == MOD_KAMIKAZE && trap_BotNumInitialChats(bs->cs, "kill_kamikaze"))
             BotAI_BotInitialChat(bs, "kill_kamikaze", name, NULL);
 #endif
@@ -879,7 +879,7 @@ int BotChat_Random(bot_state_t* bs)
         EasyClientName(bs->lastkilledplayer, name, sizeof(name));
     }
     if (TeamPlayIsOn()) {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
         trap_EA_Command(bs->client, "vtaunt");
 #endif
         return false; // don't wait

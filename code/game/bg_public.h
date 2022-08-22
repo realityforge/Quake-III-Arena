@@ -201,7 +201,7 @@ void Pmove(pmove_t* pmove);
 typedef enum {
     STAT_HEALTH,
     STAT_HOLDABLE_ITEM,
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     STAT_PERSISTANT_POWERUP,
 #endif
     STAT_WEAPONS, // 16 bit fields
@@ -236,7 +236,7 @@ typedef enum {
 
 // entityState_t->eFlags
 #define EF_DEAD 0x00000001 // don't draw a foe marker over players with EF_DEAD
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 #define EF_TICKING 0x00000002 // used to make players play the prox mine ticking sound
 #endif
 #define EF_TELEPORT_BIT 0x00000004 // toggled every time the origin abruptly changes
@@ -308,7 +308,7 @@ typedef enum {
     WP_PLASMAGUN,
     WP_BFG,
     WP_GRAPPLING_HOOK,
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     WP_NAILGUN,
     WP_PROX_LAUNCHER,
     WP_CHAINGUN,
@@ -420,7 +420,7 @@ typedef enum {
     EV_GIB_PLAYER, // gib a previously living player
     EV_SCOREPLUM, // score plum
 
-    //#ifdef MISSIONPACK
+    //#ifdef TEAMARENA
     EV_PROXIMITY_MINE_STICK,
     EV_PROXIMITY_MINE_TRIGGER,
     EV_KAMIKAZE, // kamikaze explodes
@@ -581,7 +581,7 @@ typedef enum {
     MOD_SUICIDE,
     MOD_TARGET_LASER,
     MOD_TRIGGER_HURT,
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     MOD_NAIL,
     MOD_CHAINGUN,
     MOD_PROXIMITY_MINE,

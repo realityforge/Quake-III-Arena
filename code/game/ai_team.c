@@ -102,7 +102,7 @@ static int BotSortTeamMatesByBaseTravelTime(bot_state_t* bs, int* teammates, int
     int traveltimes[MAX_CLIENTS];
     bot_goal_t* goal = NULL;
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (gametype == GT_CTF || gametype == GT_1FCTF)
 #else
     if (gametype == GT_CTF)
@@ -113,7 +113,7 @@ static int BotSortTeamMatesByBaseTravelTime(bot_state_t* bs, int* teammates, int
         else
             goal = &ctf_blueflag;
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     else {
         if (BotTeam(bs) == TEAM_RED)
             goal = &redobelisk;
@@ -224,7 +224,7 @@ static void BotSayTeamOrderAlways(bot_state_t* bs, int toclient)
 
 static void BotSayTeamOrder(bot_state_t* bs, int toclient)
 {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     // voice chats only
     char buf[MAX_MESSAGE_SIZE];
 
@@ -236,7 +236,7 @@ static void BotSayTeamOrder(bot_state_t* bs, int toclient)
 
 void BotVoiceChat(bot_state_t* bs, int toclient, char* voicechat)
 {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (toclient == -1)
         // voice only say team
         trap_EA_Command(bs->client, va("vsay_team %s", voicechat));
@@ -248,7 +248,7 @@ void BotVoiceChat(bot_state_t* bs, int toclient, char* voicechat)
 
 void BotVoiceChatOnly(bot_state_t* bs, int toclient, char* voicechat)
 {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (toclient == -1)
         // voice only say team
         trap_EA_Command(bs->client, va("vosay_team %s", voicechat));
@@ -260,7 +260,7 @@ void BotVoiceChatOnly(bot_state_t* bs, int toclient, char* voicechat)
 
 static void BotSayVoiceTeamOrder(bot_state_t* bs, int toclient, char* voicechat)
 {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     BotVoiceChat(bs, toclient, voicechat);
 #endif
 }
@@ -821,7 +821,7 @@ static void BotTeamOrders(bot_state_t* bs)
     }
 }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 
 /*
 ==================
@@ -1856,7 +1856,7 @@ void BotTeamAI(bot_state_t* bs)
         }
         break;
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     case GT_1FCTF: {
         if (bs->numteammates != numteammates || bs->flagstatuschanged || bs->forceorders) {
             bs->teamgiveorders_time = FloatTime();

@@ -114,7 +114,7 @@ static int Pickup_Powerup(gentity_t* ent, gentity_t* other)
 
 //======================================================================
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 static int Pickup_PersistantPowerup(gentity_t* ent, gentity_t* other)
 {
     int clientNum;
@@ -278,7 +278,7 @@ static int Pickup_Health(gentity_t* ent, gentity_t* other)
     int quantity;
 
     // small and mega healths will go over the max
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (bg_itemlist[other->client->ps.stats[STAT_PERSISTANT_POWERUP]].giTag == PW_GUARD) {
         max = other->client->ps.stats[STAT_MAX_HEALTH];
     } else
@@ -313,7 +313,7 @@ static int Pickup_Health(gentity_t* ent, gentity_t* other)
 
 static int Pickup_Armor(gentity_t* ent, gentity_t* other)
 {
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     int upperBound;
 
     other->client->ps.stats[STAT_ARMOR] += ent->item->quantity;
@@ -447,7 +447,7 @@ void Touch_Item(gentity_t* ent, gentity_t* other, trace_t* trace)
         respawn = Pickup_Powerup(ent, other);
         predict = false;
         break;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     case IT_PERSISTANT_POWERUP:
         respawn = Pickup_PersistantPowerup(ent, other);
         break;
@@ -577,7 +577,7 @@ gentity_t* LaunchItem(gitem_t* item, vec3_t origin, vec3_t velocity)
     VectorCopy(velocity, dropped->s.pos.trDelta);
 
     dropped->s.eFlags |= EF_BOUNCE_HALF;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if ((g_gametype.integer == GT_CTF || g_gametype.integer == GT_1FCTF) && item->giType == IT_TEAM) { // Special case for CTF flags
 #else
     if (g_gametype.integer == GT_CTF && item->giType == IT_TEAM) { // Special case for CTF flags
@@ -721,7 +721,7 @@ void G_CheckTeamItems()
             G_Printf(S_COLOR_YELLOW "WARNING: No team_CTF_blueflag in map\n");
         }
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (g_gametype.integer == GT_1FCTF) {
         gitem_t* item;
 
@@ -789,7 +789,7 @@ void ClearRegisteredItems()
     // players always start with the base weapon
     RegisterItem(BG_FindItemForWeapon(WP_MACHINEGUN));
     RegisterItem(BG_FindItemForWeapon(WP_GAUNTLET));
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (g_gametype.integer == GT_HARVESTER) {
         RegisterItem(BG_FindItem("Red Cube"));
         RegisterItem(BG_FindItem("Blue Cube"));
@@ -882,7 +882,7 @@ void G_SpawnItem(gentity_t* ent, gitem_t* item)
         G_SpawnFloat("noglobalsound", "0", &ent->speed);
     }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (item->giType == IT_PERSISTANT_POWERUP) {
         ent->s.generic1 = ent->spawnflags;
     }

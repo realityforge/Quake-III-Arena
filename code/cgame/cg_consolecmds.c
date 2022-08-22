@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "cg_local.h"
 #include "lang_util.h"
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 #include "ui_shared.h"
 #include "voicechat.h"
 #include "ui/menudef.h"
@@ -73,7 +73,7 @@ static void CG_Viewpos_f()
 static void CG_ScoresDown_f()
 {
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     CG_BuildSpectatorString();
 #endif
     if (cg.scoresRequestTime + 2000 < cg.time) {
@@ -103,7 +103,7 @@ static void CG_ScoresUp_f()
     }
 }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 extern menuDef_t* menuScoreboard;
 void Menu_Reset(void); // FIXME: add to right include file
 
@@ -202,7 +202,7 @@ static void CG_TellAttacker_f()
     trap_SendClientCommand(command);
 }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 static void CG_VoiceTellTarget_f()
 {
     int clientNum;
@@ -432,7 +432,7 @@ static consoleCommand_t commands[] = {
     { "tell_target", CG_TellTarget_f },
     { "tell_attacker", CG_TellAttacker_f },
     { "tcmd", CG_TargetCommand_f },
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     { "vtell_target", CG_VoiceTellTarget_f },
     { "vtell_attacker", CG_VoiceTellAttacker_f },
     { "loadhud", CG_LoadHud_f },
@@ -505,7 +505,7 @@ void CG_InitConsoleCommands()
     trap_AddCommand("say");
     trap_AddCommand("say_team");
     trap_AddCommand("tell");
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     trap_AddCommand("vsay");
     trap_AddCommand("vsay_team");
     trap_AddCommand("vtell");

@@ -80,7 +80,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define TEAM_OVERLAY_MAXLOCATION_WIDTH 16
 
 #define DEFAULT_MODEL "sarge"
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 #define DEFAULT_TEAM_MODEL "james"
 #define DEFAULT_TEAM_HEAD "*james"
 #else
@@ -211,7 +211,7 @@ typedef enum {
     LE_FADE_RGB,
     LE_SCALE_FADE,
     LE_SCOREPLUM,
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     LE_KAMIKAZE,
     LE_INVULIMPACT,
     LE_INVULJUICED,
@@ -526,7 +526,7 @@ typedef struct {
     int spectatorOffset; // current offset from start
     int spectatorPaintLen; // current offset from start
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     // skull trails
     skulltrail_t skulltrails[MAX_CLIENTS];
 #endif
@@ -566,7 +566,7 @@ typedef struct {
     int soundTime;
     qhandle_t soundBuffer[MAX_SOUNDBUFFER];
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     // for voice chat buffer
     int voiceChatTime;
     int voiceChatBufferIn;
@@ -631,7 +631,7 @@ typedef struct {
     qhandle_t charsetPropB;
     qhandle_t whiteShader;
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     qhandle_t redCubeModel;
     qhandle_t blueCubeModel;
     qhandle_t redCubeIcon;
@@ -655,7 +655,7 @@ typedef struct {
     qhandle_t blueFlagBaseModel;
     qhandle_t neutralFlagBaseModel;
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     qhandle_t overloadBaseModel;
     qhandle_t overloadTargetModel;
     qhandle_t overloadLightsModel;
@@ -715,7 +715,7 @@ typedef struct {
     qhandle_t plasmaBallShader;
     qhandle_t waterBubbleShader;
     qhandle_t bloodTrailShader;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     qhandle_t nailPuffShader;
     qhandle_t blueProxMine;
 #endif
@@ -743,7 +743,7 @@ typedef struct {
     qhandle_t battleSuitShader;
     qhandle_t battleWeaponShader;
     qhandle_t hastePuffShader;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     qhandle_t redKamikazeShader;
     qhandle_t blueKamikazeShader;
 #endif
@@ -766,7 +766,7 @@ typedef struct {
     // special effects models
     qhandle_t teleportEffectModel;
     qhandle_t teleportEffectShader;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     qhandle_t kamikazeEffectModel;
     qhandle_t kamikazeShockWave;
     qhandle_t kamikazeHeadModel;
@@ -813,7 +813,7 @@ typedef struct {
     // sfxHandle_t	sfx_railg;
     sfxHandle_t sfx_rockexp;
     sfxHandle_t sfx_plasmaexp;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     sfxHandle_t sfx_proxexp;
     sfxHandle_t sfx_nghit;
     sfxHandle_t sfx_nghitflesh;
@@ -886,7 +886,7 @@ typedef struct {
     sfxHandle_t flightSound;
     sfxHandle_t medkitSound;
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     sfxHandle_t weaponHoverSound;
 #endif
 
@@ -907,13 +907,13 @@ typedef struct {
 
     sfxHandle_t redFlagReturnedSound;
     sfxHandle_t blueFlagReturnedSound;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     sfxHandle_t neutralFlagReturnedSound;
 #endif
     sfxHandle_t enemyTookYourFlagSound;
     sfxHandle_t yourTeamTookEnemyFlagSound;
     sfxHandle_t youHaveFlagSound;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     sfxHandle_t enemyTookTheFlagSound;
     sfxHandle_t yourTeamTookTheFlagSound;
     sfxHandle_t yourBaseIsUnderAttackSound;
@@ -927,7 +927,7 @@ typedef struct {
     sfxHandle_t countFightSound;
     sfxHandle_t countPrepareSound;
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     // new stuff
     qhandle_t patrolShader;
     qhandle_t assaultShader;
@@ -1127,7 +1127,7 @@ extern vmCvar_t cg_predictItems;
 extern vmCvar_t cg_deferPlayers;
 extern vmCvar_t cg_drawFriend;
 extern vmCvar_t cg_teamChatsOnly;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 extern vmCvar_t cg_noVoiceChats;
 extern vmCvar_t cg_noVoiceText;
 #endif
@@ -1142,7 +1142,7 @@ extern vmCvar_t cg_timescaleFadeEnd;
 extern vmCvar_t cg_timescaleFadeSpeed;
 extern vmCvar_t cg_timescale;
 extern vmCvar_t cg_cameraMode;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 extern vmCvar_t cg_smallFont;
 extern vmCvar_t cg_bigFont;
 extern vmCvar_t cg_noTaunt;
@@ -1152,7 +1152,7 @@ extern vmCvar_t cg_oldRail;
 extern vmCvar_t cg_oldRocket;
 extern vmCvar_t cg_oldPlasma;
 extern vmCvar_t cg_trueLightning;
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 extern vmCvar_t cg_redTeamName;
 extern vmCvar_t cg_blueTeamName;
 extern vmCvar_t cg_currentSelectedPlayer;
@@ -1365,7 +1365,7 @@ localEntity_t* CG_SmokePuff(const vec3_t p,
                             qhandle_t hShader);
 void CG_BubbleTrail(vec3_t start, vec3_t end, float spacing);
 void CG_SpawnEffect(vec3_t org);
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 void CG_KamikazeEffect(vec3_t org);
 void CG_ObeliskExplode(vec3_t org, int entityNum);
 void CG_ObeliskPain(vec3_t org);
@@ -1415,7 +1415,7 @@ void CG_ExecuteNewServerCommands(int latestSequence);
 void CG_ParseServerinfo(void);
 void CG_SetConfigValues(void);
 void CG_ShaderStateChanged(void);
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 void CG_LoadVoiceChats(void);
 void CG_VoiceChatLocal(int mode, bool voiceOnly, int clientNum, int color, const char* cmd);
 void CG_PlayBufferedVoiceChats(void);

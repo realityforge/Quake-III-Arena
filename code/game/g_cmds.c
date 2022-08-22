@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "g_local.h"
 #include "lang_util.h"
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 #include "voicechat.h"
 #endif
 
@@ -914,7 +914,7 @@ static void Cmd_Tell_f(gentity_t* ent)
     }
 }
 
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
 static void G_VoiceTo(gentity_t* ent, gentity_t* other, int mode, const char* id, bool voiceonly)
 {
     int color;
@@ -1571,7 +1571,7 @@ void ClientCommand(int clientNum)
         Cmd_Tell_f(ent);
         return;
     }
-#ifdef MISSIONPACK
+#ifdef TEAMARENA
     if (Q_stricmp(cmd, "vsay") == 0) {
         Cmd_Voice_f(ent, SAY_ALL, false, false);
         return;
