@@ -1055,10 +1055,6 @@ int BotAILoadMap(int restart)
     return true;
 }
 
-#ifdef TEAMARENA
-void ProximityMine_Trigger(gentity_t* trigger, gentity_t* other, trace_t* trace);
-#endif
-
 int BotAIStartFrame(int time)
 {
     int i;

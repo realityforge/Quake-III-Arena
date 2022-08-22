@@ -440,6 +440,13 @@ void RegisterItem(gitem_t* item);
 void SaveRegisteredItems(void);
 
 //
+// g_missle.c
+//
+#ifdef TEAMARENA
+void ProximityMine_Trigger(gentity_t* trigger, gentity_t* other, trace_t* trace);
+#endif
+
+//
 // g_utils.c
 //
 int G_ModelIndex(char* name);
