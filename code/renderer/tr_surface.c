@@ -853,7 +853,7 @@ static void RB_SurfaceGrid(srfGridMesh_t* cv)
                 for (j = 0; j < w; j++) {
                     int v1, v2, v3, v4;
 
-                    // vertex order to be reckognized as tristrips
+                    // vertex order to be recognized as tristrips
                     v1 = numVertexes + i * lodWidth + j + 1;
                     v2 = v1 - 1;
                     v3 = v2 + lodWidth;
