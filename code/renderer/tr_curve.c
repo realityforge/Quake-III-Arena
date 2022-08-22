@@ -193,9 +193,6 @@ static void MakeMeshNormals(int width, int height, srfVert_t ctrl[MAX_GRID_SIZE]
                 VectorAdd(normal, sum, sum);
                 count++;
             }
-            // if ( count == 0 ) {
-            //	printf("bad normal\n");
-            // }
             {
                 vec3_t fNormal;
                 VectorNormalize2(sum, fNormal);
