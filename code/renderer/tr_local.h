@@ -1755,16 +1755,11 @@ typedef struct shaderCommands_s {
     vec2_t lightCoords[SHADER_MAX_VERTEXES] QALIGN(16);
     uint16_t color[SHADER_MAX_VERTEXES][4] QALIGN(16);
     int16_t lightdir[SHADER_MAX_VERTEXES][4] QALIGN(16);
-    // int			vertexDlightBits[SHADER_MAX_VERTEXES] QALIGN(16);
 
     void* attribPointers[ATTR_INDEX_COUNT];
     vao_t* vao;
     bool useInternalVao;
     bool useCacheVao;
-
-    stageVars_t svars QALIGN(16);
-
-    // color4ub_t	constantColor255[SHADER_MAX_VERTEXES] QALIGN(16);
 
     shader_t* shader;
     double shaderTime;
