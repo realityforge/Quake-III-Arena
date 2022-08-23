@@ -15,7 +15,7 @@
 #include "attributes.h"
 #include "tr_common.h"
 #include "tr_image.h"
-#include <spng.h>
+#include "spng.h"
 
 // Some guesses at reasonable PNG limits. As we are potentially decoding untrusted files, we should
 // protect against failures due to excessive memory consumption. If a PNG exceeds these limits then it
