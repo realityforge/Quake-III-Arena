@@ -746,7 +746,7 @@ static void Blocked_Door(gentity_t* ent, gentity_t* other)
     Use_BinaryMover(ent, ent, other);
 }
 
-static void Touch_DoorTriggerSpectator(gentity_t* ent, gentity_t* other, trace_t* trace)
+static void Touch_DoorTriggerSpectator(gentity_t* ent, gentity_t* other)
 {
     int axis;
     float doorMin, doorMax;
@@ -777,7 +777,7 @@ void Touch_DoorTrigger(gentity_t* ent, gentity_t* other, trace_t* trace)
     if (other->client && other->client->sess.sessionTeam == TEAM_SPECTATOR) {
         // if the door is not open and not opening
         if (ent->parent->moverState != MOVER_1TO2 && ent->parent->moverState != MOVER_POS2) {
-            Touch_DoorTriggerSpectator(ent, other, trace);
+            Touch_DoorTriggerSpectator(ent, other);
         }
     } else if (ent->parent->moverState != MOVER_1TO2) {
         Use_BinaryMover(ent->parent, ent, other);
