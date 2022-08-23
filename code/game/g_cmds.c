@@ -464,7 +464,7 @@ void BroadcastTeamChange(gclient_t* client, int oldTeam)
     }
 }
 
-void SetTeam(gentity_t* ent, char* s)
+void SetTeam(gentity_t* ent, const char* s)
 {
     int team, oldTeam;
     gclient_t* client;
