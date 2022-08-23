@@ -35,6 +35,7 @@ void UpdateTournamentInfo()
     gentity_t* player;
     int playerClientNum;
     int n, accuracy, perfect, msglen;
+    int buflen;
 #ifdef TEAMARENA
     int score1, score2;
     bool won;
@@ -116,8 +117,8 @@ void UpdateTournamentInfo()
     for (i = 0; i < level.numNonSpectatorClients; i++) {
         n = level.sortedClients[i];
         Com_sprintf(buf, sizeof(buf), " %i %i %i", n, level.clients[n].ps.persistent[PERS_RANK], level.clients[n].ps.persistent[PERS_SCORE]);
-        msglen += strlen(buf);
-        if (msglen >= sizeof(msg)) {
+        buflen = strlen(buf);
+        if (msglen + buflen + 1 >= sizeof(msg)) {
             break;
         }
         strncatz(msg, sizeof(msg), buf);
