@@ -101,7 +101,7 @@ static void ProximityMine_Die(gentity_t* ent, gentity_t* inflictor, gentity_t* a
     ent->nextthink = level.time + 1;
 }
 
-static void ProximityMine_Trigger(gentity_t* trigger, gentity_t* other, trace_t* trace)
+void ProximityMine_Trigger(gentity_t* trigger, gentity_t* other, trace_t* trace)
 {
     vec3_t v;
     gentity_t* mine;
