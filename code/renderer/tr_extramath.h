@@ -38,7 +38,7 @@ void Mat4Ortho(float left, float right, float bottom, float top, float znear, fl
 void Mat4View(vec3_t axes[3], vec3_t origin, mat4_t out);
 
 #define VectorCopy2(a, b) ((b)[0] = (a)[0], (b)[1] = (a)[1])
-#define VectorSet2(v, x, y) ((v)[0] = (x), (v)[1] = (y));
+#define VectorSet2(v, x, y) ((v)[0] = (x), (v)[1] = (y))
 
 #define VectorCopy4(a, b) ((b)[0] = (a)[0], (b)[1] = (a)[1], (b)[2] = (a)[2], (b)[3] = (a)[3])
 #define VectorSet4(v, x, y, z, w) ((v)[0] = (x), (v)[1] = (y), (v)[2] = (z), (v)[3] = (w))
