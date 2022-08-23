@@ -751,6 +751,7 @@ static void Touch_DoorTriggerSpectator(gentity_t* ent, gentity_t* other, trace_t
     int axis;
     float doorMin, doorMax;
     vec3_t origin;
+    vec3_t angles = { 10000000.0F, 0, 0 };
 
     axis = ent->count;
     // the constants below relate to constants in Think_SpawnNewDoorTrigger()
@@ -768,7 +769,7 @@ static void Touch_DoorTriggerSpectator(gentity_t* ent, gentity_t* other, trace_t
         origin[axis] = doorMax + 10;
     }
 
-    TeleportPlayer(other, origin, tv(10000000.0, 0, 0));
+    TeleportPlayer(other, origin, angles);
 }
 
 void Touch_DoorTrigger(gentity_t* ent, gentity_t* other, trace_t* trace)
