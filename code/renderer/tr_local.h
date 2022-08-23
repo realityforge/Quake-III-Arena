@@ -1206,7 +1206,7 @@ void RB_CheckOverflow(int verts, int indexes);
         if (tess.numVertexes + (v) >= SHADER_MAX_VERTEXES || tess.numIndexes + (i) >= SHADER_MAX_INDEXES) { \
             RB_CheckOverflow(v, i);                                                                         \
         }                                                                                                   \
-    } while (1)
+    } while (0)
 
 void RB_StageIteratorGeneric(void);
 void RB_StageIteratorSky(void);
