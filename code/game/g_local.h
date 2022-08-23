@@ -439,6 +439,13 @@ void RegisterItem(gitem_t* item);
 void SaveRegisteredItems(void);
 
 //
+// g_missle.c
+//
+#ifdef TEAMARENA
+void ProximityMine_Trigger(gentity_t* trigger, gentity_t* other, trace_t* trace);
+#endif
+
+//
 // g_utils.c
 //
 int G_ModelIndex(char* name);
@@ -668,9 +675,6 @@ bool BotAISetupClient(int client, struct bot_settings_s* settings, bool restart)
 bool BotAIShutdownClient(int client, bool restart);
 int BotAIStartFrame(int time);
 void BotTestAAS(vec3_t origin);
-#ifdef TEAMARENA
-void ProximityMine_Trigger(gentity_t* trigger, gentity_t* other, trace_t* trace);
-#endif
 
 #include "g_team.h" // teamplay specific stuff
 
