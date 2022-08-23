@@ -144,7 +144,7 @@ void SP_target_score(gentity_t* ent)
 "message"	text to print
 If "private", only the activator gets the message.  If no checks, all clients get the message.
 */
-static void Use_Target_Print(gentity_t* ent, gentity_t* other, gentity_t* activator)
+static void Use_Target_Print(gentity_t* ent, UNUSED gentity_t* other, gentity_t* activator)
 {
     if (activator->client && (ent->spawnflags & 4)) {
         trap_SendServerCommand(activator - g_entities, va("cp \"%s\"", ent->message));
@@ -183,7 +183,7 @@ Multiple identical looping sounds will just increase volume without any speed co
 "wait" : Seconds between auto triggerings, 0 = don't auto trigger
 "random"	wait variance, default is 0
 */
-static void Use_Target_Speaker(gentity_t* ent, gentity_t* other, gentity_t* activator)
+static void Use_Target_Speaker(gentity_t* ent, UNUSED gentity_t* other, gentity_t* activator)
 {
     if (ent->spawnflags & 3) { // looping sound toggles
         if (ent->s.loopSound)
@@ -299,7 +299,7 @@ static void target_laser_off(gentity_t* self)
     self->nextthink = 0;
 }
 
-static void target_laser_use(gentity_t* self, gentity_t* other, gentity_t* activator)
+static void target_laser_use(gentity_t* self, UNUSED gentity_t* other, gentity_t* activator)
 {
     self->activator = activator;
     if (self->nextthink > 0)
@@ -377,7 +377,7 @@ This doesn't perform any actions except fire its targets.
 The activator can be forced to be from a certain team.
 if RANDOM is checked, only one of the targets will be fired, not all of them
 */
-static void target_relay_use(gentity_t* self, gentity_t* other, gentity_t* activator)
+static void target_relay_use(gentity_t* self, UNUSED gentity_t* other, gentity_t* activator)
 {
     if ((self->spawnflags & 1) && activator->client
         && activator->client->sess.sessionTeam != TEAM_RED) {
