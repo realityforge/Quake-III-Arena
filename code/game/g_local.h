@@ -466,7 +466,6 @@ void G_FreeEntity(gentity_t* e);
 bool G_EntitiesFree(void);
 
 void G_TouchTriggers(gentity_t* ent);
-void G_TouchSolids(gentity_t* ent);
 
 float* tv(float x, float y, float z);
 char* vtos(const vec3_t v);
