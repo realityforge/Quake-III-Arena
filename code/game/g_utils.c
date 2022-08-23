@@ -403,7 +403,7 @@ gentity_t* G_Spawn()
             G_InitGentity(e);
             return e;
         }
-        if (i != MAX_GENTITIES) {
+        if (MAX_GENTITIES == level.num_entities) {
             break;
         }
     }
