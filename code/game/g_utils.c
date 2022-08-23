@@ -426,23 +426,18 @@ gentity_t* G_Spawn()
 
 bool G_EntitiesFree()
 {
-    int i;
-    gentity_t* e;
-
     if (level.num_entities < ENTITYNUM_MAX_NORMAL) {
-        // can open a new slot if needed
+        // A slot is available at the end if not before
         return true;
-    }
-
-    e = &g_entities[MAX_CLIENTS];
-    for (i = MAX_CLIENTS; i < level.num_entities; i++, e++) {
-        if (e->inuse) {
-            continue;
+    } else {
+        for (int i = MAX_CLIENTS; i < level.num_entities; i++) {
+            if (!g_entities[i].inuse) {
+                // slot available
+                return true;
+            }
         }
-        // slot available
-        return true;
+        return false;
     }
-    return false;
 }
 
 /*
