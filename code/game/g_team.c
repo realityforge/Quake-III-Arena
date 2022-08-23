@@ -80,17 +80,6 @@ const char* TeamName(int team)
     return "FREE";
 }
 
-const char* OtherTeamName(int team)
-{
-    if (team == TEAM_RED)
-        return "BLUE";
-    else if (team == TEAM_BLUE)
-        return "RED";
-    else if (team == TEAM_SPECTATOR)
-        return "SPECTATOR";
-    return "FREE";
-}
-
 // NULL for everyone
 static void PRINTF_LIKE_FUNCTION(2, 3) QDECL PrintMsg(gentity_t* ent, const char* fmt, ...)
 {
