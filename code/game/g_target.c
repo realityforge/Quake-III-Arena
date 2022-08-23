@@ -346,17 +346,14 @@ void SP_target_laser(gentity_t* self)
 
 static void target_teleporter_use(gentity_t* self, UNUSED gentity_t* other, gentity_t* activator)
 {
-    gentity_t* dest;
-
-    if (!activator->client)
-        return;
-    dest = G_PickTarget(self->target);
-    if (!dest) {
-        G_Printf("Couldn't find teleporter destination\n");
-        return;
+    if (activator->client) {
+        gentity_t* dest = G_PickTarget(self->target);
+        if (NULL == dest) {
+            G_Printf("Couldn't find teleporter destination\n");
+        } else {
+            TeleportPlayer(activator, dest->s.origin, dest->s.angles);
+        }
     }
-
-    TeleportPlayer(activator, dest->s.origin, dest->s.angles);
 }
 
 /*QUAKED target_teleporter (1 0 0) (-8 -8 -8) (8 8 8)
