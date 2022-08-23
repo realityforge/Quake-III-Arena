@@ -1013,7 +1013,7 @@ static bool SurfIsOffscreen(const drawSurf_t* drawSurf)
     R_RotateForViewer();
 
     R_DecomposeSort(drawSurf->sort, &entityNum, &shader, &fogNum, &dlighted, &pshadowed);
-    RB_BeginSurface(shader, fogNum, drawSurf->cubemapIndex);
+    RB_BeginSurface(shader, fogNum);
     rb_surfaceTable[*drawSurf->surface](drawSurf->surface);
 
     assert(tess.numVertexes < 128);
@@ -1235,10 +1235,7 @@ static void R_RadixSort(drawSurf_t* source, int size)
 #endif // Q3_LITTLE_ENDIAN
 }
 
-//==========================================================================================
-
-void R_AddDrawSurf(surfaceType_t* surface, shader_t* shader,
-                   int fogIndex, int dlightMap, int pshadowMap, int cubemap)
+void R_AddDrawSurf(surfaceType_t* surface, shader_t* shader, int fogIndex, int dlightMap, int pshadowMap)
 {
     int index;
 
@@ -1250,7 +1247,6 @@ void R_AddDrawSurf(surfaceType_t* surface, shader_t* shader,
     tr.refdef.drawSurfs[index].sort = (shader->sortedIndex << QSORT_SHADERNUM_SHIFT)
         | tr.shiftedEntityNum | (fogIndex << QSORT_FOGNUM_SHIFT)
         | ((int)pshadowMap << QSORT_PSHADOW_SHIFT) | (int)dlightMap;
-    tr.refdef.drawSurfs[index].cubemapIndex = cubemap;
     tr.refdef.drawSurfs[index].surface = surface;
     tr.refdef.numDrawSurfs++;
 }
@@ -1356,7 +1352,7 @@ static void R_AddEntitySurface(int entityNum)
             return;
         }
         shader = R_GetShaderByHandle(ent->e.customShader);
-        R_AddDrawSurf(&entitySurface, shader, R_SpriteFogNum(ent), 0, 0, 0 /*cubeMap*/);
+        R_AddDrawSurf(&entitySurface, shader, R_SpriteFogNum(ent), 0, 0);
         break;
 
     case RT_MODEL:
@@ -1365,7 +1361,7 @@ static void R_AddEntitySurface(int entityNum)
 
         tr.currentModel = R_GetModelByHandle(ent->e.hModel);
         if (!tr.currentModel) {
-            R_AddDrawSurf(&entitySurface, tr.defaultShader, 0, 0, 0, 0 /*cubeMap*/);
+            R_AddDrawSurf(&entitySurface, tr.defaultShader, 0, 0, 0);
         } else {
             switch (tr.currentModel->type) {
             case MOD_MESH:
@@ -1378,7 +1374,7 @@ static void R_AddEntitySurface(int entityNum)
                 if ((ent->e.renderfx & RF_THIRD_PERSON) && !tr.viewParms.isPortal) {
                     break;
                 }
-                R_AddDrawSurf(&entitySurface, tr.defaultShader, 0, 0, 0, 0);
+                R_AddDrawSurf(&entitySurface, tr.defaultShader, 0, 0, 0);
                 break;
             default:
                 ri.Error(ERR_DROP, "R_AddEntitySurfaces: Bad modeltype");
@@ -2150,109 +2146,4 @@ void R_RenderSunShadowMaps(const refdef_t* fd, int level)
 
         Mat4Multiply(tr.viewParms.projectionMatrix, tr.viewParms.world.modelMatrix, tr.refdef.sunShadowMvp[level]);
     }
-}
-
-void R_RenderCubemapSide(int cubemapIndex, int cubemapSide, bool subscene)
-{
-    refdef_t refdef;
-    viewParms_t parms;
-
-    memset(&refdef, 0, sizeof(refdef));
-    refdef.rdflags = 0;
-    VectorCopy(tr.cubemaps[cubemapIndex].origin, refdef.vieworg);
-
-    switch (cubemapSide) {
-    case 0:
-        // -X
-        VectorSet(refdef.viewaxis[0], -1, 0, 0);
-        VectorSet(refdef.viewaxis[1], 0, 0, -1);
-        VectorSet(refdef.viewaxis[2], 0, 1, 0);
-        break;
-    case 1:
-        // +X
-        VectorSet(refdef.viewaxis[0], 1, 0, 0);
-        VectorSet(refdef.viewaxis[1], 0, 0, 1);
-        VectorSet(refdef.viewaxis[2], 0, 1, 0);
-        break;
-    case 2:
-        // -Y
-        VectorSet(refdef.viewaxis[0], 0, -1, 0);
-        VectorSet(refdef.viewaxis[1], 1, 0, 0);
-        VectorSet(refdef.viewaxis[2], 0, 0, -1);
-        break;
-    case 3:
-        // +Y
-        VectorSet(refdef.viewaxis[0], 0, 1, 0);
-        VectorSet(refdef.viewaxis[1], 1, 0, 0);
-        VectorSet(refdef.viewaxis[2], 0, 0, 1);
-        break;
-    case 4:
-        // -Z
-        VectorSet(refdef.viewaxis[0], 0, 0, -1);
-        VectorSet(refdef.viewaxis[1], 1, 0, 0);
-        VectorSet(refdef.viewaxis[2], 0, 1, 0);
-        break;
-    case 5:
-        // +Z
-        VectorSet(refdef.viewaxis[0], 0, 0, 1);
-        VectorSet(refdef.viewaxis[1], -1, 0, 0);
-        VectorSet(refdef.viewaxis[2], 0, 1, 0);
-        break;
-    }
-
-    refdef.fov_x = 90;
-    refdef.fov_y = 90;
-
-    refdef.x = 0;
-    refdef.y = 0;
-    refdef.width = tr.renderCubeFbo->width;
-    refdef.height = tr.renderCubeFbo->height;
-
-    refdef.time = 0;
-
-    if (!subscene) {
-        RE_BeginScene(&refdef);
-    }
-
-    {
-        vec3_t ambient, directed, lightDir;
-        float scale;
-
-        R_LightForPoint(tr.refdef.vieworg, ambient, directed, lightDir);
-        scale = directed[0] + directed[1] + directed[2] + ambient[0] + ambient[1] + ambient[2] + 1.0f;
-
-        // only print message for first side
-        if (scale < 1.0001f && cubemapSide == 0) {
-            ri.Printf(PRINT_ALL, "cubemap %d %s (%f, %f, %f) is outside the lightgrid or inside a wall!\n", cubemapIndex, tr.cubemaps[cubemapIndex].name, tr.refdef.vieworg[0], tr.refdef.vieworg[1], tr.refdef.vieworg[2]);
-        }
-    }
-
-    memset(&parms, 0, sizeof(parms));
-
-    parms.viewportX = 0;
-    parms.viewportY = 0;
-    parms.viewportWidth = tr.renderCubeFbo->width;
-    parms.viewportHeight = tr.renderCubeFbo->height;
-    parms.isPortal = false;
-    parms.isMirror = true;
-    parms.flags = VPF_NOVIEWMODEL | VPF_NOCUBEMAPS;
-
-    parms.fovX = 90;
-    parms.fovY = 90;
-
-    VectorCopy(refdef.vieworg, parms.or.origin);
-    VectorCopy(refdef.viewaxis[0], parms.or.axis[0]);
-    VectorCopy(refdef.viewaxis[1], parms.or.axis[1]);
-    VectorCopy(refdef.viewaxis[2], parms.or.axis[2]);
-
-    VectorCopy(refdef.vieworg, parms.pvsOrigin);
-
-    parms.targetFbo = tr.renderCubeFbo;
-    parms.targetFboLayer = cubemapSide;
-    parms.targetFboCubemapIndex = cubemapIndex;
-
-    R_RenderView(&parms);
-
-    if (!subscene)
-        RE_EndScene();
 }

@@ -111,9 +111,8 @@ because a surface may be forced to perform a RB_End due
 to overflow.
 ==============
 */
-void RB_BeginSurface(shader_t* shader, int fogNum, int cubemapIndex)
+void RB_BeginSurface(shader_t* shader, int fogNum)
 {
-
     shader_t* state = (shader->remappedShader) ? shader->remappedShader : shader;
 
     tess.numIndexes = 0;
@@ -121,7 +120,6 @@ void RB_BeginSurface(shader_t* shader, int fogNum, int cubemapIndex)
     tess.numVertexes = 0;
     tess.shader = state;
     tess.fogNum = fogNum;
-    tess.cubemapIndex = cubemapIndex;
     tess.dlightBits = 0; // will be OR'd in by surface functions
     tess.pshadowBits = 0; // will be OR'd in by surface functions
     tess.xstages = state->stages;
@@ -858,8 +856,6 @@ static void RB_IterateStagesGeneric(shaderCommands_t* input)
     int deformGen;
     vec5_t deformParams;
 
-    bool renderToCubemap = tr.renderCubeFbo && glState.currentFBO == tr.renderCubeFbo;
-
     ComputeDeformValues(&deformGen, deformParams);
 
     ComputeFogValues(fogDistanceVector, fogDepthVector, &eyeT);
@@ -1033,12 +1029,6 @@ static void RB_IterateStagesGeneric(shaderCommands_t* input)
             vec4_t specularScale;
             Vector4Copy(pStage->specularScale, specularScale);
 
-            if (renderToCubemap) {
-                // force specular to nonmetal if rendering cubemaps
-                if (r_pbr->integer)
-                    specularScale[1] = 0.0f;
-            }
-
             GLSL_SetUniformVec4(sp, UNIFORM_SPECULARSCALE, specularScale);
         }
 
@@ -1125,7 +1115,8 @@ static void RB_IterateStagesGeneric(shaderCommands_t* input)
                         GL_BindToTMU(tr.whiteImage, TB_SPECULARMAP);
                 }
 
-                enableTextures[3] = (r_cubeMapping->integer && !(tr.viewParms.flags & VPF_NOCUBEMAPS) && input->cubemapIndex) ? 1.0f : 0.0f;
+                // TODO: Was cubemaps  ... remove from GLSL and remove this uniform?
+                enableTextures[3] = 0.0f;
             }
 
             GLSL_SetUniformVec4(sp, UNIFORM_ENABLETEXTURES, enableTextures);
@@ -1135,23 +1126,6 @@ static void RB_IterateStagesGeneric(shaderCommands_t* input)
         } else {
             // set state
             R_BindAnimatedImageToTMU(&pStage->bundle[0], 0);
-        }
-
-        // testing cube map
-        if (!(tr.viewParms.flags & VPF_NOCUBEMAPS) && input->cubemapIndex && r_cubeMapping->integer) {
-            vec4_t vec;
-            cubemap_t* cubemap = &tr.cubemaps[input->cubemapIndex - 1];
-
-            // FIXME: cubemap image could be NULL if cubemap isn't renderer or loaded
-            if (cubemap->image)
-                GL_BindToTMU(cubemap->image, TB_CUBEMAP);
-
-            VectorSubtract(cubemap->origin, backEnd.viewParms.or.origin, vec);
-            vec[3] = 1.0f;
-
-            VectorScale4(vec, 1.0f / cubemap->parallaxRadius, vec);
-
-            GLSL_SetUniformVec4(sp, UNIFORM_CUBEMAPINFO, vec);
         }
 
         // draw

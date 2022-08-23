@@ -129,7 +129,7 @@ cc_library(
     name = "tr_bsp",
     srcs = ["tr_bsp.c"],
     copts = LIBRARY_COPTS,
-    deps = DEPS + ["//third_party/json"],
+    deps = DEPS,
 )
 
 cc_library(

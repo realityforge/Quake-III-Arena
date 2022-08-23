@@ -226,7 +226,6 @@ void R_AddMD3Surfaces(trRefEntity_t* ent)
     int cull;
     int lod;
     int fogNum;
-    int cubemapIndex;
     bool personalModel;
 
     // don't add third_person objects if not in a portal
@@ -272,8 +271,6 @@ void R_AddMD3Surfaces(trRefEntity_t* ent)
     // see if we are in a fog volume
     fogNum = R_ComputeFogNum(model, ent);
 
-    cubemapIndex = R_CubemapForPoint(ent->e.origin);
-
     // draw all surfaces
     surface = model->surfaces;
     for (i = 0; i < model->numSurfaces; i++) {
@@ -314,7 +311,7 @@ void R_AddMD3Surfaces(trRefEntity_t* ent)
             && fogNum == 0
             && !(ent->e.renderfx & (RF_NOSHADOW | RF_DEPTHHACK))
             && shader->sort == SS_OPAQUE) {
-            R_AddDrawSurf((void*)&model->vaoSurfaces[i], tr.shadowShader, 0, false, false, 0);
+            R_AddDrawSurf((void*)&model->vaoSurfaces[i], tr.shadowShader, 0, false, false);
         }
 
         // projection shadows work fine with personal models
@@ -322,12 +319,12 @@ void R_AddMD3Surfaces(trRefEntity_t* ent)
             && fogNum == 0
             && (ent->e.renderfx & RF_SHADOW_PLANE)
             && shader->sort == SS_OPAQUE) {
-            R_AddDrawSurf((void*)&model->vaoSurfaces[i], tr.projectionShadowShader, 0, false, false, 0);
+            R_AddDrawSurf((void*)&model->vaoSurfaces[i], tr.projectionShadowShader, 0, false, false);
         }
 
         // don't add third_person objects if not viewing through a portal
         if (!personalModel) {
-            R_AddDrawSurf((void*)&model->vaoSurfaces[i], shader, fogNum, false, false, cubemapIndex);
+            R_AddDrawSurf((void*)&model->vaoSurfaces[i], shader, fogNum, false, false);
         }
 
         surface++;

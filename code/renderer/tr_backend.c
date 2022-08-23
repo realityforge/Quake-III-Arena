@@ -293,11 +293,6 @@ static void RB_BeginDrawingView()
         if (fbo == NULL && !(backEnd.framePostProcessed && (backEnd.refdef.rdflags & RDF_NOWORLDMODEL)))
             fbo = tr.renderFbo;
 
-        if (tr.renderCubeFbo && fbo == tr.renderCubeFbo) {
-            cubemap_t* cubemap = &tr.cubemaps[backEnd.viewParms.targetFboCubemapIndex];
-            FBO_AttachImage(fbo, cubemap->image, GL_COLOR_ATTACHMENT0, backEnd.viewParms.targetFboLayer);
-        }
-
         FBO_Bind(fbo);
     }
 
@@ -314,11 +309,6 @@ static void RB_BeginDrawingView()
     }
     if (r_fastsky->integer && !(backEnd.refdef.rdflags & RDF_NOWORLDMODEL)) {
         clearBits |= GL_COLOR_BUFFER_BIT; // FIXME: only if sky shaders have been used
-    }
-
-    // clear to black for cube maps
-    if (tr.renderCubeFbo && backEnd.viewParms.targetFbo == tr.renderCubeFbo) {
-        clearBits |= GL_COLOR_BUFFER_BIT;
     }
 
     glClear(clearBits);
@@ -346,7 +336,6 @@ static void RB_RenderDrawSurfList(drawSurf_t* drawSurfs, int numDrawSurfs)
     int entityNum, oldEntityNum;
     int dlighted, oldDlighted;
     int pshadowed, oldPshadowed;
-    int cubemapIndex, oldCubemapIndex;
     bool depthRange, oldDepthRange, isCrosshair, wasCrosshair;
     int i;
     drawSurf_t* drawSurf;
@@ -368,13 +357,12 @@ static void RB_RenderDrawSurfList(drawSurf_t* drawSurfs, int numDrawSurfs)
     wasCrosshair = false;
     oldDlighted = false;
     oldPshadowed = false;
-    oldCubemapIndex = -1;
     oldSort = -1;
 
     backEnd.pc.c_surfaces += numDrawSurfs;
 
     for (i = 0, drawSurf = drawSurfs; i < numDrawSurfs; i++, drawSurf++) {
-        if (drawSurf->sort == oldSort && drawSurf->cubemapIndex == oldCubemapIndex) {
+        if (drawSurf->sort == oldSort) {
             if (backEnd.depthFill && shader && shader->sort != SS_OPAQUE)
                 continue;
 
@@ -384,22 +372,20 @@ static void RB_RenderDrawSurfList(drawSurf_t* drawSurfs, int numDrawSurfs)
         }
         oldSort = drawSurf->sort;
         R_DecomposeSort(drawSurf->sort, &entityNum, &shader, &fogNum, &dlighted, &pshadowed);
-        cubemapIndex = drawSurf->cubemapIndex;
 
         // change the tess parameters if needed
         // a "entityMergable" shader is a shader that can have surfaces from separate
         // entities merged into a single batch, like smoke and blood puff sprites
-        if (shader != NULL && (shader != oldShader || fogNum != oldFogNum || dlighted != oldDlighted || pshadowed != oldPshadowed || cubemapIndex != oldCubemapIndex || (entityNum != oldEntityNum && !shader->entityMergable))) {
+        if (shader != NULL && (shader != oldShader || fogNum != oldFogNum || dlighted != oldDlighted || pshadowed != oldPshadowed || (entityNum != oldEntityNum && !shader->entityMergable))) {
             if (oldShader != NULL) {
                 RB_EndSurface();
             }
-            RB_BeginSurface(shader, fogNum, cubemapIndex);
+            RB_BeginSurface(shader, fogNum);
             backEnd.pc.c_surfBatches++;
             oldShader = shader;
             oldFogNum = fogNum;
             oldDlighted = dlighted;
             oldPshadowed = pshadowed;
-            oldCubemapIndex = cubemapIndex;
         }
 
         if (backEnd.depthFill && shader && shader->sort != SS_OPAQUE)
@@ -692,7 +678,7 @@ static const void* RB_StretchPic(const void* data)
             RB_EndSurface();
         }
         backEnd.currentEntity = &backEnd.entity2D;
-        RB_BeginSurface(shader, 0, 0);
+        RB_BeginSurface(shader, 0);
     }
 
     RB_CHECKOVERFLOW(4, 6);
@@ -933,14 +919,6 @@ static const void* RB_DrawSurfs(const void* data)
 
         // add light flares on lights that aren't obscured
         RB_RenderFlares();
-    }
-
-    if (glConfig.framebufferObject && tr.renderCubeFbo && backEnd.viewParms.targetFbo == tr.renderCubeFbo) {
-        cubemap_t* cubemap = &tr.cubemaps[backEnd.viewParms.targetFboCubemapIndex];
-
-        FBO_Bind(NULL);
-        if (cubemap && cubemap->image)
-            GLDSA_GenerateTextureMipmapEXT(cubemap->image->texnum, GL_TEXTURE_CUBE_MAP);
     }
 
     return (const void*)(cmd + 1);

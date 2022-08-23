@@ -735,8 +735,7 @@ typedef enum {
     VPF_DEPTHCLAMP = 0x08,
     VPF_ORTHOGRAPHIC = 0x10,
     VPF_USESUNLIGHT = 0x20,
-    VPF_FARPLANEFRUSTUM = 0x40,
-    VPF_NOCUBEMAPS = 0x80
+    VPF_FARPLANEFRUSTUM = 0x40
 } viewParmFlags_t;
 
 typedef struct {
@@ -1302,7 +1301,6 @@ typedef struct {
     image_t* sunShadowDepthImage[4];
     image_t* screenShadowImage;
     image_t* hdrDepthImage;
-    image_t* renderCubeImage;
 
     image_t* textureDepthImage;
 
@@ -1319,7 +1317,6 @@ typedef struct {
     FBO_t* sunShadowFbo[4];
     FBO_t* screenShadowFbo;
     FBO_t* hdrDepthFbo;
-    FBO_t* renderCubeFbo;
 
     shader_t* defaultShader;
     shader_t* shadowShader;
@@ -1336,9 +1333,6 @@ typedef struct {
 
     int fatLightmapCols;
     int fatLightmapRows;
-
-    int numCubemaps;
-    cubemap_t* cubemaps;
 
     trRefEntity_t* currentEntity;
     trRefEntity_t worldEntity; // point currentEntity at this when rendering world
@@ -1525,8 +1519,6 @@ extern cvar_t* r_deluxeMapping;
 extern cvar_t* r_parallaxMapping;
 extern cvar_t* r_parallaxMapOffset;
 extern cvar_t* r_parallaxMapShadows;
-extern cvar_t* r_cubeMapping;
-extern cvar_t* r_cubemapSize;
 extern cvar_t* r_deluxeSpecular;
 extern cvar_t* r_pbr;
 extern cvar_t* r_baseNormalX;
@@ -1603,7 +1595,6 @@ void R_RenderView(viewParms_t* parms);
 void R_RenderDlightCubemaps(void);
 void R_RenderPshadowMaps(const refdef_t* fd);
 void R_RenderSunShadowMaps(const refdef_t* fd, int level);
-void R_RenderCubemapSide(int cubemapIndex, int cubemapSide, bool subscene);
 
 void R_AddMD3Surfaces(trRefEntity_t* e);
 
@@ -1612,8 +1603,7 @@ void R_AddPolygonSurfaces(void);
 void R_DecomposeSort(unsigned sort, int* entityNum, shader_t** shader,
                      int* fogNum, int* dlightMap, int* pshadowMap);
 
-void R_AddDrawSurf(surfaceType_t* surface, shader_t* shader,
-                   int fogIndex, int dlightMap, int pshadowMap, int cubemap);
+void R_AddDrawSurf(surfaceType_t* surface, shader_t* shader, int fogIndex, int dlightMap, int pshadowMap);
 
 void R_CalcTexDirs(vec3_t sdir, vec3_t tdir, const vec3_t v1, const vec3_t v2,
                    const vec3_t v3, const vec2_t w1, const vec2_t w2, const vec2_t w3);
@@ -1779,7 +1769,6 @@ typedef struct shaderCommands_s {
     shader_t* shader;
     double shaderTime;
     int fogNum;
-    int cubemapIndex;
 
     int dlightBits; // or together of all vertexDlightBits
     int pshadowBits;
@@ -1796,7 +1785,7 @@ typedef struct shaderCommands_s {
 
 extern shaderCommands_t tess;
 
-void RB_BeginSurface(shader_t* shader, int fogNum, int cubemapIndex);
+void RB_BeginSurface(shader_t* shader, int fogNum);
 void RB_EndSurface(void);
 void RB_CheckOverflow(int verts, int indexes);
 #define RB_CHECKOVERFLOW(v, i)                                                                          \
@@ -1853,7 +1842,6 @@ void R_SetupEntityLighting(const trRefdef_t* refdef, trRefEntity_t* ent);
 void R_TransformDlights(int count, dlight_t* dl, orientationr_t* or);
 int R_LightForPoint(vec3_t point, vec3_t ambientLight, vec3_t directedLight, vec3_t lightDir);
 int R_LightDirForPoint(vec3_t point, vec3_t lightDir, vec3_t normal, world_t* world);
-int R_CubemapForPoint(vec3_t point);
 
 /*
 ============================================================

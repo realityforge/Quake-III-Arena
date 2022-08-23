@@ -307,18 +307,6 @@ static void GLSL_GetShaderHeader(GLenum shaderType, const GLchar* extra, char* d
     if (r_pbr->integer)
         strncatz(dest, size, "#define USE_PBR\n");
 
-    if (r_cubeMapping->integer) {
-        int cubeMipSize = r_cubemapSize->integer;
-        int numRoughnessMips = 0;
-
-        while (cubeMipSize) {
-            cubeMipSize >>= 1;
-            numRoughnessMips++;
-        }
-        numRoughnessMips = MAX(1, numRoughnessMips - 2);
-        strncatz(dest, size, va("#define ROUGHNESS_MIPS float(%d)\n", numRoughnessMips));
-    }
-
     if (extra) {
         strncatz(dest, size, extra);
     }
@@ -957,11 +945,7 @@ void GLSL_InitGPUShaders()
             if (r_specularMapping->integer)
                 strncatz(extradefines, 1024, "#define USE_SPECULARMAP\n");
 
-            if (r_cubeMapping->integer) {
-                strncatz(extradefines, 1024, "#define USE_CUBEMAP\n");
-                if (r_cubeMapping->integer == 2)
-                    strncatz(extradefines, 1024, "#define USE_BOX_CUBEMAP_PARALLAX\n");
-            } else if (r_deluxeSpecular->value > 0.000001f) {
+            if (r_deluxeSpecular->value > 0.000001f) {
                 strncatz(extradefines, 1024, va("#define r_deluxeSpecular %f\n", r_deluxeSpecular->value));
             }
 

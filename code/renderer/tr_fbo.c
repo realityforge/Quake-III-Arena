@@ -325,13 +325,6 @@ void FBO_Init()
         R_CheckFBO(tr.hdrDepthFbo);
     }
 
-    if (tr.renderCubeImage) {
-        tr.renderCubeFbo = FBO_Create("_renderCubeFbo", tr.renderCubeImage->width, tr.renderCubeImage->height);
-        FBO_AttachImage(tr.renderCubeFbo, tr.renderCubeImage, GL_COLOR_ATTACHMENT0, 0);
-        FBO_CreateBuffer(tr.renderCubeFbo, GL_DEPTH_COMPONENT24, 0, 0);
-        R_CheckFBO(tr.renderCubeFbo);
-    }
-
     GL_CheckErrors();
 
     GL_BindFramebuffer(GL_FRAMEBUFFER, 0);

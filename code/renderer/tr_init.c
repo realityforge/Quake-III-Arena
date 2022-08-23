@@ -112,8 +112,6 @@ cvar_t* r_deluxeMapping;
 cvar_t* r_parallaxMapping;
 cvar_t* r_parallaxMapOffset;
 cvar_t* r_parallaxMapShadows;
-cvar_t* r_cubeMapping;
-cvar_t* r_cubemapSize;
 cvar_t* r_deluxeSpecular;
 cvar_t* r_pbr;
 cvar_t* r_baseNormalX;
@@ -844,8 +842,6 @@ static void R_Register()
     r_parallaxMapping = ri.Cvar_Get("r_parallaxMapping", "0", CVAR_ARCHIVE | CVAR_LATCH);
     r_parallaxMapOffset = ri.Cvar_Get("r_parallaxMapOffset", "0", CVAR_ARCHIVE | CVAR_LATCH);
     r_parallaxMapShadows = ri.Cvar_Get("r_parallaxMapShadows", "0", CVAR_ARCHIVE | CVAR_LATCH);
-    r_cubeMapping = ri.Cvar_Get("r_cubeMapping", "0", CVAR_ARCHIVE | CVAR_LATCH);
-    r_cubemapSize = ri.Cvar_Get("r_cubemapSize", "128", CVAR_ARCHIVE | CVAR_LATCH);
     r_deluxeSpecular = ri.Cvar_Get("r_deluxeSpecular", "0.3", CVAR_ARCHIVE | CVAR_LATCH);
     r_pbr = ri.Cvar_Get("r_pbr", "0", CVAR_ARCHIVE | CVAR_LATCH);
     r_baseNormalX = ri.Cvar_Get("r_baseNormalX", "1.0", CVAR_ARCHIVE | CVAR_LATCH);
