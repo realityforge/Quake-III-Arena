@@ -119,7 +119,7 @@ typedef struct {
     void (*spawn)(gentity_t* ent);
 } spawn_t;
 
-static void SP_item_botroam(gentity_t* ent)
+static void SP_item_botroam(UNUSED gentity_t* ent)
 {
 }
 
