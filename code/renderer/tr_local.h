@@ -1783,10 +1783,12 @@ extern shaderCommands_t tess;
 void RB_BeginSurface(shader_t* shader, int fogNum);
 void RB_EndSurface(void);
 void RB_CheckOverflow(int verts, int indexes);
-#define RB_CHECKOVERFLOW(v, i)                                                                          \
-    if (tess.numVertexes + (v) >= SHADER_MAX_VERTEXES || tess.numIndexes + (i) >= SHADER_MAX_INDEXES) { \
-        RB_CheckOverflow(v, i);                                                                         \
-    }
+#define RB_CHECKOVERFLOW(v, i)                                                                              \
+    do {                                                                                                    \
+        if (tess.numVertexes + (v) >= SHADER_MAX_VERTEXES || tess.numIndexes + (i) >= SHADER_MAX_INDEXES) { \
+            RB_CheckOverflow(v, i);                                                                         \
+        }                                                                                                   \
+    } while (1)
 
 void R_DrawElements(int numIndexes, int firstIndex);
 void RB_StageIteratorGeneric(void);
