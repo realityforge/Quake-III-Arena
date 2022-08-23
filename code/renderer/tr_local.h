@@ -938,7 +938,6 @@ typedef struct cullinfo_s {
 } cullinfo_t;
 
 typedef struct msurface_s {
-    // int					viewCount;		// if == tr.viewCount, already added
     struct shader_s* shader;
     int fogIndex;
     int cubemapIndex;
