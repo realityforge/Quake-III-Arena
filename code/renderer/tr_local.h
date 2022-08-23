@@ -43,7 +43,7 @@ long myftol(float f);
 // see QSORT_SHADERNUM_SHIFT
 #define MAX_SHADERS 16384
 
-//#define MAX_SHADER_STATES 2048
+// #define MAX_SHADER_STATES 2048
 #define MAX_STATES_PER_SHADER 32
 #define MAX_STATE_NAME 32
 
@@ -1201,10 +1201,12 @@ extern shaderCommands_t tess;
 void RB_BeginSurface(shader_t* shader, int fogNum);
 void RB_EndSurface(void);
 void RB_CheckOverflow(int verts, int indexes);
-#define RB_CHECKOVERFLOW(v, i)                                                                          \
-    if (tess.numVertexes + (v) >= SHADER_MAX_VERTEXES || tess.numIndexes + (i) >= SHADER_MAX_INDEXES) { \
-        RB_CheckOverflow(v, i);                                                                         \
-    }
+#define RB_CHECKOVERFLOW(v, i)                                                                              \
+    do {                                                                                                    \
+        if (tess.numVertexes + (v) >= SHADER_MAX_VERTEXES || tess.numIndexes + (i) >= SHADER_MAX_INDEXES) { \
+            RB_CheckOverflow(v, i);                                                                         \
+        }                                                                                                   \
+    } while (1)
 
 void RB_StageIteratorGeneric(void);
 void RB_StageIteratorSky(void);
