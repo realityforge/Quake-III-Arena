@@ -406,7 +406,7 @@ gentity_t* G_Spawn()
             break;
         }
     }
-    if (level.num_entities == ENTITYNUM_MAX_NORMAL) {
+    if (ENTITYNUM_MAX_NORMAL == level.num_entities) {
         for (i = 0; i < MAX_GENTITIES; i++) {
             G_Printf("%4i: %s\n", i, g_entities[i].classname);
         }
