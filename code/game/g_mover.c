@@ -770,7 +770,7 @@ static void Touch_DoorTriggerSpectator(gentity_t* ent, gentity_t* other)
     TeleportPlayer(other, origin, angles);
 }
 
-void Touch_DoorTrigger(gentity_t* ent, gentity_t* other, trace_t* trace)
+void Touch_DoorTrigger(gentity_t* ent, gentity_t* other, UNUSED trace_t* trace)
 {
     if (other->client && other->client->sess.sessionTeam == TEAM_SPECTATOR) {
         // if the door is not open and not opening
