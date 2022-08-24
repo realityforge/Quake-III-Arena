@@ -1113,7 +1113,7 @@ image_t* R_CreateImage(const char* name, const uint8_t* pic, int width, int heig
 bool R_GetModeInfo(int* width, int* height, float* windowAspect, int mode);
 
 void R_SetColorMappings(void);
-void R_GammaCorrect(uint8_t* buffer, int bufSize);
+void R_GammaCorrect(uint8_t* buffer, size_t bufSize);
 
 void R_ImageList_f(void);
 void R_SkinList_f(void);
