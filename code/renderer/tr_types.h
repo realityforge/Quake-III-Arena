@@ -58,6 +58,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // refdef flags
 #define RDF_NOWORLDMODEL BIT(1) // used for player configuration screen
 #define RDF_HYPERSPACE BIT(3) // teleportation effect
+#define RDF_NOFOG BIT(4) // don't apply fog to polys added using RE_AddPolyToScene
 
 typedef struct {
     vec3_t xyz;

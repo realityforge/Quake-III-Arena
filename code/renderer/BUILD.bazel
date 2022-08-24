@@ -104,7 +104,6 @@ cc_library(
     hdrs = [
         "tr_dsa.h",
         "tr_extramath.h",
-        "tr_extratypes.h",
         "tr_fbo.h",
         "tr_image.h",
         "tr_local.h",
