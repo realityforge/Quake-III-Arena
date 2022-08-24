@@ -51,13 +51,6 @@ typedef unsigned int glIndex_t;
 #define MAX_DRAWN_PSHADOWS 16 // do not increase past 32, because bit flags are used on surfaces
 #define PSHADOW_MAP_SIZE 512
 
-typedef struct cubemap_s {
-    char name[MAX_QPATH];
-    vec3_t origin;
-    float parallaxRadius;
-    image_t* image;
-} cubemap_t;
-
 typedef struct dlight_s {
     vec3_t origin;
     vec3_t color; // range from 0.0 to 1.0, should be color normalized
