@@ -36,7 +36,7 @@ static image_t* hashTable[FILE_HASH_SIZE];
 
 void R_GammaCorrect(uint8_t* buffer, const size_t bufSize)
 {
-    for (int i = 0; i < bufSize; i++) {
+    for (size_t i = 0; i < bufSize; i++) {
         buffer[i] = s_gammatable[buffer[i]];
     }
 }
