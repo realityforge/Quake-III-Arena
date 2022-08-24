@@ -3,7 +3,6 @@
 *.bazel text allow_empty
 *.bzl text
 *.c text
-*.dll binary
 *.ico binary
 *.java text
 *.md text
