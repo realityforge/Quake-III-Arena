@@ -98,7 +98,6 @@ Framebuffers can be identical.
 */
 void RB_BokehBlur(FBO_t* src, ivec4_t srcBox, FBO_t* dst, ivec4_t dstBox, float blur)
 {
-    //	ivec4_t srcBox, dstBox;
     vec4_t color;
 
     blur *= 10.0f;
