@@ -15,4 +15,5 @@
 .bazelversion text
 .gitattributes text
 .gitignore text
+Dockerfile text
 LICENSE text
