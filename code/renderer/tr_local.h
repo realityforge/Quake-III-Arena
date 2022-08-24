@@ -2127,8 +2127,7 @@ void R_AddCapShadowmapCmd(int dlight, int cubeSide);
 void R_AddPostProcessCmd(void);
 
 void RE_SetColor(const float* rgba);
-void RE_StretchPic(float x, float y, float w, float h,
-                   float s1, float t1, float s2, float t2, qhandle_t hShader);
+void RE_StretchPic(float x, float y, float w, float h, float s1, float t1, float s2, float t2, qhandle_t hShader);
 void RE_EndFrame(int* frontEndMsec, int* backEndMsec);
 
 void RE_TakeVideoFrame(int width, int height, uint8_t* captureBuffer, uint8_t* encodeBuffer, bool motionJpeg);
