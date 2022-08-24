@@ -313,21 +313,6 @@ void RE_BeginScene(const refdef_t* fd)
         tr.refdef.toneMinAvgMaxLinear[2] = pow(2, tr.toneMinAvgMaxLevel[2]);
     }
 
-    // Makro - copy exta info if present
-    if (fd->rdflags & RDF_EXTRA) {
-        const refdefex_t* extra = (const refdefex_t*)(fd + 1);
-
-        tr.refdef.blurFactor = extra->blurFactor;
-
-        if (fd->rdflags & RDF_SUNLIGHT) {
-            VectorCopy(extra->sunDir, tr.refdef.sunDir);
-            VectorCopy(extra->sunCol, tr.refdef.sunCol);
-            VectorCopy(extra->sunAmbCol, tr.refdef.sunAmbCol);
-        }
-    } else {
-        tr.refdef.blurFactor = 0.0f;
-    }
-
     // derived info
 
     tr.refdef.floatTime = tr.refdef.time * 0.001;

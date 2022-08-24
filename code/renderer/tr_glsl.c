@@ -24,8 +24,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "tr_dsa.h"
 
-extern const char* fallbackShader_bokeh_vp;
-extern const char* fallbackShader_bokeh_fp;
 extern const char* fallbackShader_calclevels4x_vp;
 extern const char* fallbackShader_calclevels4x_fp;
 extern const char* fallbackShader_depthblur_vp;
@@ -1063,21 +1061,6 @@ void GLSL_InitGPUShaders()
     attribs = ATTR_POSITION | ATTR_TEXCOORD;
     extradefines[0] = '\0';
 
-    if (!GLSL_InitGPUShader(&tr.bokehShader, "bokeh", attribs, true, extradefines, true, fallbackShader_bokeh_vp, fallbackShader_bokeh_fp)) {
-        ri.Error(ERR_FATAL, "Could not load bokeh shader!");
-    }
-
-    GLSL_InitUniforms(&tr.bokehShader);
-
-    GLSL_SetUniformInt(&tr.bokehShader, UNIFORM_TEXTUREMAP, TB_DIFFUSEMAP);
-
-    GLSL_FinishGPUShader(&tr.bokehShader);
-
-    numEtcShaders++;
-
-    attribs = ATTR_POSITION | ATTR_TEXCOORD;
-    extradefines[0] = '\0';
-
     if (!GLSL_InitGPUShader(&tr.tonemapShader, "tonemap", attribs, true, extradefines, true, fallbackShader_tonemap_vp, fallbackShader_tonemap_fp)) {
         ri.Error(ERR_FATAL, "Could not load tonemap shader!");
     }
@@ -1207,7 +1190,6 @@ void GLSL_ShutdownGPUShaders()
 
     GLSL_DeleteGPUShader(&tr.pshadowShader);
     GLSL_DeleteGPUShader(&tr.down4xShader);
-    GLSL_DeleteGPUShader(&tr.bokehShader);
     GLSL_DeleteGPUShader(&tr.tonemapShader);
 
     for (i = 0; i < 2; i++)

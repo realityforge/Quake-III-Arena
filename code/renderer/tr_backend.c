@@ -1195,8 +1195,6 @@ static const void* RB_PostProcess(const void* data)
         }
     }
 
-    RB_BokehBlur(NULL, srcBox, NULL, dstBox, backEnd.refdef.blurFactor);
-
     backEnd.framePostProcessed = true;
 
     return (const void*)(cmd + 1);

@@ -664,8 +664,6 @@ typedef struct {
 
     double floatTime; // tr.refdef.time / 1000.0
 
-    float blurFactor;
-
     // text messages for deform text shaders
     char text[MAX_RENDER_STRINGS][MAX_RENDER_STRING_LENGTH];
 
@@ -1349,7 +1347,6 @@ typedef struct {
     shaderProgram_t shadowmapShader[SHADOWMAPDEF_COUNT];
     shaderProgram_t pshadowShader;
     shaderProgram_t down4xShader;
-    shaderProgram_t bokehShader;
     shaderProgram_t tonemapShader;
     shaderProgram_t calclevels4xShader[2];
     shaderProgram_t shadowmaskShader;

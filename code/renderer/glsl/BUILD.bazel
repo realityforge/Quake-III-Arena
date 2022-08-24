@@ -13,10 +13,6 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 load(":glsl_to_c.bzl", "glsl_to_c")
 
-glsl_to_c(name = "bokeh_fp")
-
-glsl_to_c(name = "bokeh_vp")
-
 glsl_to_c(name = "calclevels4x_fp")
 
 glsl_to_c(name = "calclevels4x_vp")
@@ -69,8 +65,6 @@ cc_library(
     name = "glsl",
     visibility = ["//code/renderer:__pkg__"],
     deps = [
-        ":bokeh_fp",
-        ":bokeh_vp",
         ":calclevels4x_fp",
         ":calclevels4x_vp",
         ":depthblur_fp",
