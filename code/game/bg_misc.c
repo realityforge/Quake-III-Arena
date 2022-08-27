@@ -1049,7 +1049,7 @@ BG_EvaluateTrajectoryDelta
 For determining velocity at a given time
 ================
 */
-void BG_EvaluateTrajectoryDelta(const trajectory_t* tr, int atTime, vec3_t result)
+void BG_EvaluateTrajectoryDelta(const trajectory_t* tr, const int atTime, vec3_t result)
 {
     float deltaTime;
     float phase;
