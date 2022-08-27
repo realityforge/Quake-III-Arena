@@ -809,9 +809,7 @@ gitem_t* BG_FindItemForHoldable(const holdable_t pw)
 
 gitem_t* BG_FindItemForWeapon(const weapon_t weapon)
 {
-    gitem_t* it;
-
-    for (it = bg_itemlist + 1; it->classname; it++) {
+    for (gitem_t* it = bg_itemlist + 1; it->classname; it++) {
         if (it->giType == IT_WEAPON && it->giTag == weapon) {
             return it;
         }
@@ -822,9 +820,7 @@ gitem_t* BG_FindItemForWeapon(const weapon_t weapon)
 
 gitem_t* BG_FindItem(const char* pickupName)
 {
-    gitem_t* it;
-
-    for (it = bg_itemlist + 1; it->classname; it++) {
+    for (gitem_t* it = bg_itemlist + 1; it->classname; it++) {
         if (!Q_stricmp(it->pickup_name, pickupName))
             return it;
     }
