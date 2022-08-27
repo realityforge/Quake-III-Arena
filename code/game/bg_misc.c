@@ -914,7 +914,6 @@ bool BG_CanItemBeGrabbed(const int gametype, const entityState_t* ent, const pla
         // don't pick up if already at max
 #ifdef TEAMARENA
         if (bg_itemlist[ps->stats[STAT_PERSISTANT_POWERUP]].giTag == PW_GUARD) {
-            upperBound = ps->stats[STAT_MAX_HEALTH];
         } else
 #endif
             if (item->quantity == 5 || item->quantity == 100) {
