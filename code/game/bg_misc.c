@@ -787,9 +787,7 @@ int bg_numItems = COUNT_OF(bg_itemlist) - 1;
 
 gitem_t* BG_FindItemForPowerup(const powerup_t pw)
 {
-    int i;
-
-    for (i = 0; i < bg_numItems; i++) {
+    for (int i = 0; i < bg_numItems; i++) {
         if ((bg_itemlist[i].giType == IT_POWERUP || bg_itemlist[i].giType == IT_TEAM || bg_itemlist[i].giType == IT_PERSISTANT_POWERUP) && bg_itemlist[i].giTag == pw) {
             return &bg_itemlist[i];
         }
@@ -800,9 +798,7 @@ gitem_t* BG_FindItemForPowerup(const powerup_t pw)
 
 gitem_t* BG_FindItemForHoldable(const holdable_t pw)
 {
-    int i;
-
-    for (i = 0; i < bg_numItems; i++) {
+    for (int i = 0; i < bg_numItems; i++) {
         if (bg_itemlist[i].giType == IT_HOLDABLE && bg_itemlist[i].giTag == pw) {
             return &bg_itemlist[i];
         }
@@ -813,9 +809,7 @@ gitem_t* BG_FindItemForHoldable(const holdable_t pw)
 
 gitem_t* BG_FindItemForWeapon(const weapon_t weapon)
 {
-    gitem_t* it;
-
-    for (it = bg_itemlist + 1; it->classname; it++) {
+    for (gitem_t* it = bg_itemlist + 1; it->classname; it++) {
         if (it->giType == IT_WEAPON && it->giTag == weapon) {
             return it;
         }
@@ -826,9 +820,7 @@ gitem_t* BG_FindItemForWeapon(const weapon_t weapon)
 
 gitem_t* BG_FindItem(const char* pickupName)
 {
-    gitem_t* it;
-
-    for (it = bg_itemlist + 1; it->classname; it++) {
+    for (gitem_t* it = bg_itemlist + 1; it->classname; it++) {
         if (!Q_stricmp(it->pickup_name, pickupName))
             return it;
     }
