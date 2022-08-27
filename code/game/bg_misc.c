@@ -1039,7 +1039,6 @@ void BG_EvaluateTrajectory(const trajectory_t* tr, int atTime, vec3_t result)
         break;
     default:
         Com_Error(ERR_DROP, "BG_EvaluateTrajectory: unknown trType: %i", tr->trTime);
-        break;
     }
 }
 
@@ -1083,7 +1082,6 @@ void BG_EvaluateTrajectoryDelta(const trajectory_t* tr, int atTime, vec3_t resul
         break;
     default:
         Com_Error(ERR_DROP, "BG_EvaluateTrajectoryDelta: unknown trType: %i", tr->trTime);
-        break;
     }
 }
 
