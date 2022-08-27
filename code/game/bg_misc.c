@@ -1008,7 +1008,8 @@ void BG_EvaluateTrajectory(const trajectory_t* tr, int atTime, vec3_t result)
     float deltaTime;
     float phase;
 
-    switch (tr->trType) {
+    const trType_t type = tr->trType;
+    switch (type) {
     case TR_STATIONARY:
     case TR_INTERPOLATE:
         VectorCopy(tr->trBase, result);
@@ -1038,7 +1039,7 @@ void BG_EvaluateTrajectory(const trajectory_t* tr, int atTime, vec3_t result)
         result[2] -= 0.5 * DEFAULT_GRAVITY * deltaTime * deltaTime; // FIXME: local gravity...
         break;
     default:
-        Com_Error(ERR_DROP, "BG_EvaluateTrajectory: unknown trType: %i", tr->trTime);
+        Com_Error(ERR_DROP, "BG_EvaluateTrajectory: unknown trType: %i", type);
     }
 }
 
@@ -1054,7 +1055,8 @@ void BG_EvaluateTrajectoryDelta(const trajectory_t* tr, const int atTime, vec3_t
     float deltaTime;
     float phase;
 
-    switch (tr->trType) {
+    const trType_t type = tr->trType;
+    switch (type) {
     case TR_STATIONARY:
     case TR_INTERPOLATE:
         VectorClear(result);
@@ -1081,7 +1083,7 @@ void BG_EvaluateTrajectoryDelta(const trajectory_t* tr, const int atTime, vec3_t
         result[2] -= DEFAULT_GRAVITY * deltaTime; // FIXME: local gravity...
         break;
     default:
-        Com_Error(ERR_DROP, "BG_EvaluateTrajectoryDelta: unknown trType: %i", tr->trTime);
+        Com_Error(ERR_DROP, "BG_EvaluateTrajectoryDelta: unknown trType: %i", type);
     }
 }
 
