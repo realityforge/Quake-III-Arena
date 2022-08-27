@@ -1003,8 +1003,6 @@ bool BG_CanItemBeGrabbed(const int gametype, const entityState_t* ent, const pla
     return false;
 }
 
-//======================================================================
-
 void BG_EvaluateTrajectory(const trajectory_t* tr, int atTime, vec3_t result)
 {
     float deltaTime;
