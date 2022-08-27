@@ -1347,7 +1347,7 @@ void BG_PlayerStateToEntityStateExtraPolate(playerState_t* ps, entityState_t* s,
     VectorCopy(ps->velocity, s->pos.trDelta);
     // set the time for linear prediction
     s->pos.trTime = time;
-    // set maximum extra polation time
+    // set maximum extrapolation time
     s->pos.trDuration = 50; // 1000 / sv_fps (default = 20)
 
     s->apos.trType = TR_INTERPOLATE;
