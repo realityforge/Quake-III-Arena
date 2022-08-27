@@ -984,10 +984,7 @@ bool BG_CanItemBeGrabbed(const int gametype, const entityState_t* ent, const pla
 
     case IT_HOLDABLE:
         // can only hold one item at a time
-        if (ps->stats[STAT_HOLDABLE_ITEM]) {
-            return false;
-        }
-        return true;
+        return ps->stats[STAT_HOLDABLE_ITEM] ? false : true;
 
     case IT_BAD:
         Com_Error(ERR_DROP, "BG_CanItemBeGrabbed: IT_BAD");
