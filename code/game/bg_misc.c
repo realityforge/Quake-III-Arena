@@ -881,10 +881,7 @@ bool BG_CanItemBeGrabbed(const int gametype, const entityState_t* ent, const pla
         return true; // weapons are always picked up
 
     case IT_AMMO:
-        if (ps->ammo[item->giTag] >= 200) {
-            return false; // can't hold any more
-        }
-        return true;
+        return ps->ammo[item->giTag] >= 200 ? false : true;
 
     case IT_ARMOR:
 #ifdef TEAMARENA
@@ -899,15 +896,10 @@ bool BG_CanItemBeGrabbed(const int gametype, const entityState_t* ent, const pla
             upperBound = ps->stats[STAT_MAX_HEALTH] * 2;
         }
 
-        if (ps->stats[STAT_ARMOR] >= upperBound) {
-            return false;
-        }
+        return ps->stats[STAT_ARMOR] >= upperBound ? false : true;
 #else
-        if (ps->stats[STAT_ARMOR] >= ps->stats[STAT_MAX_HEALTH] * 2) {
-            return false;
-        }
+        return ps->stats[STAT_ARMOR] >= ps->stats[STAT_MAX_HEALTH] * 2 ? false : true;
 #endif
-        return true;
 
     case IT_HEALTH:
         // small and mega healths will go over the max, otherwise
@@ -946,7 +938,7 @@ bool BG_CanItemBeGrabbed(const int gametype, const entityState_t* ent, const pla
 
     case IT_TEAM: // team items, such as flags
 #ifdef TEAMARENA
-        if (gametype == GT_1FCTF) {
+        if (GT_1FCTF == gametype) {
             // neutral flag can always be picked up
             if (item->giTag == PW_NEUTRALFLAG) {
                 return true;
@@ -960,27 +952,24 @@ bool BG_CanItemBeGrabbed(const int gametype, const entityState_t* ent, const pla
                     return true;
                 }
             }
-        }
+        } else if (GT_HARVESTER == gametype) {
+            return true;
+        } else
 #endif
-        if (gametype == GT_CTF) {
+            if (GT_CTF == gametype) {
             // ent->modelindex2 is non-zero on items if they are dropped
             // we need to know this because we can pick up our dropped flag (and return it)
             // but we can't pick up our flag at base
-            if (ps->persistent[PERS_TEAM] == TEAM_RED) {
-                if (item->giTag == PW_BLUEFLAG || (item->giTag == PW_REDFLAG && ent->modelindex2) || (item->giTag == PW_REDFLAG && ps->powerups[PW_BLUEFLAG]))
+            if (TEAM_RED == ps->persistent[PERS_TEAM]) {
+                if (PW_BLUEFLAG == item->giTag || (PW_REDFLAG == item->giTag && ent->modelindex2) || (PW_REDFLAG == item->giTag && ps->powerups[PW_BLUEFLAG]))
                     return true;
-            } else if (ps->persistent[PERS_TEAM] == TEAM_BLUE) {
-                if (item->giTag == PW_REDFLAG || (item->giTag == PW_BLUEFLAG && ent->modelindex2) || (item->giTag == PW_BLUEFLAG && ps->powerups[PW_REDFLAG]))
+            } else if (TEAM_BLUE == ps->persistent[PERS_TEAM]) {
+                if (PW_REDFLAG == item->giTag || (PW_BLUEFLAG == item->giTag && ent->modelindex2) || (PW_BLUEFLAG == item->giTag && ps->powerups[PW_REDFLAG]))
                     return true;
             }
+        } else {
+            return false;
         }
-
-#ifdef TEAMARENA
-        if (gametype == GT_HARVESTER) {
-            return true;
-        }
-#endif
-        return false;
 
     case IT_HOLDABLE:
         // can only hold one item at a time
