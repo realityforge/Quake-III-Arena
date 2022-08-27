@@ -809,8 +809,6 @@ gitem_t* BG_FindItemForHoldable(const holdable_t pw)
     }
 
     Com_Error(ERR_DROP, "HoldableItem not found");
-
-    return NULL;
 }
 
 gitem_t* BG_FindItemForWeapon(const weapon_t weapon)
@@ -824,7 +822,6 @@ gitem_t* BG_FindItemForWeapon(const weapon_t weapon)
     }
 
     Com_Error(ERR_DROP, "Couldn't find item for weapon %i", weapon);
-    return NULL;
 }
 
 gitem_t* BG_FindItem(const char* pickupName)
