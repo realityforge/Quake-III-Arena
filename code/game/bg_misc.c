@@ -913,20 +913,15 @@ bool BG_CanItemBeGrabbed(const int gametype, const entityState_t* ent, const pla
         // small and mega healths will go over the max, otherwise
         // don't pick up if already at max
 #ifdef TEAMARENA
-        if (bg_itemlist[ps->stats[STAT_PERSISTANT_POWERUP]].giTag == PW_GUARD) {
-        } else
+        if (PW_GUARD != bg_itemlist[ps->stats[STAT_PERSISTANT_POWERUP]].giTag)
 #endif
-            if (item->quantity == 5 || item->quantity == 100) {
-            if (ps->stats[STAT_HEALTH] >= ps->stats[STAT_MAX_HEALTH] * 2) {
-                return false;
+        {
+            if (5 == item->quantity || 100 == item->quantity) {
+                return ps->stats[STAT_HEALTH] >= ps->stats[STAT_MAX_HEALTH] * 2 ? false : true;
             }
-            return true;
         }
 
-        if (ps->stats[STAT_HEALTH] >= ps->stats[STAT_MAX_HEALTH]) {
-            return false;
-        }
-        return true;
+        return ps->stats[STAT_HEALTH] >= ps->stats[STAT_MAX_HEALTH] ? false : true;
 
     case IT_POWERUP:
         return true; // powerups are always picked up
