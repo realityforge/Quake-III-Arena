@@ -818,7 +818,6 @@ gitem_t* BG_FindItemForWeapon(const weapon_t weapon)
     }
 
     Com_Error(ERR_DROP, "Couldn't find item for weapon %i", weapon);
-    return NULL;
 }
 
 gitem_t* BG_FindItem(const char* pickupName)
