@@ -785,7 +785,7 @@ Only in One Flag CTF games
 
 int bg_numItems = COUNT_OF(bg_itemlist) - 1;
 
-gitem_t* BG_FindItemForPowerup(powerup_t pw)
+gitem_t* BG_FindItemForPowerup(const powerup_t pw)
 {
     for (int i = 0; i < bg_numItems; i++) {
         if ((bg_itemlist[i].giType == IT_POWERUP || bg_itemlist[i].giType == IT_TEAM || bg_itemlist[i].giType == IT_PERSISTANT_POWERUP) && bg_itemlist[i].giTag == pw) {
@@ -796,7 +796,7 @@ gitem_t* BG_FindItemForPowerup(powerup_t pw)
     return NULL;
 }
 
-gitem_t* BG_FindItemForHoldable(holdable_t pw)
+gitem_t* BG_FindItemForHoldable(const holdable_t pw)
 {
     for (int i = 0; i < bg_numItems; i++) {
         if (bg_itemlist[i].giType == IT_HOLDABLE && bg_itemlist[i].giTag == pw) {
@@ -805,11 +805,9 @@ gitem_t* BG_FindItemForHoldable(holdable_t pw)
     }
 
     Com_Error(ERR_DROP, "HoldableItem not found");
-
-    return NULL;
 }
 
-gitem_t* BG_FindItemForWeapon(weapon_t weapon)
+gitem_t* BG_FindItemForWeapon(const weapon_t weapon)
 {
     gitem_t* it;
 
@@ -870,7 +868,7 @@ Returns false if the item should not be picked up.
 This needs to be the same for client side prediction and server use.
 ================
 */
-bool BG_CanItemBeGrabbed(int gametype, const entityState_t* ent, const playerState_t* ps)
+bool BG_CanItemBeGrabbed(const int gametype, const entityState_t* ent, const playerState_t* ps)
 {
     gitem_t* item;
 #ifdef TEAMARENA
