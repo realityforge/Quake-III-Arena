@@ -881,10 +881,7 @@ bool BG_CanItemBeGrabbed(const int gametype, const entityState_t* ent, const pla
         return true; // weapons are always picked up
 
     case IT_AMMO:
-        if (ps->ammo[item->giTag] >= 200) {
-            return false; // can't hold any more
-        }
-        return true;
+        return ps->ammo[item->giTag] >= 200 ? false : true;
 
     case IT_ARMOR:
 #ifdef TEAMARENA
@@ -899,34 +896,24 @@ bool BG_CanItemBeGrabbed(const int gametype, const entityState_t* ent, const pla
             upperBound = ps->stats[STAT_MAX_HEALTH] * 2;
         }
 
-        if (ps->stats[STAT_ARMOR] >= upperBound) {
-            return false;
-        }
+        return ps->stats[STAT_ARMOR] >= upperBound ? false : true;
 #else
-        if (ps->stats[STAT_ARMOR] >= ps->stats[STAT_MAX_HEALTH] * 2) {
-            return false;
-        }
+        return ps->stats[STAT_ARMOR] >= ps->stats[STAT_MAX_HEALTH] * 2 ? false : true;
 #endif
-        return true;
 
     case IT_HEALTH:
         // small and mega healths will go over the max, otherwise
         // don't pick up if already at max
 #ifdef TEAMARENA
-        if (bg_itemlist[ps->stats[STAT_PERSISTANT_POWERUP]].giTag == PW_GUARD) {
-        } else
+        if (PW_GUARD != bg_itemlist[ps->stats[STAT_PERSISTANT_POWERUP]].giTag)
 #endif
-            if (item->quantity == 5 || item->quantity == 100) {
-            if (ps->stats[STAT_HEALTH] >= ps->stats[STAT_MAX_HEALTH] * 2) {
-                return false;
+        {
+            if (5 == item->quantity || 100 == item->quantity) {
+                return ps->stats[STAT_HEALTH] >= ps->stats[STAT_MAX_HEALTH] * 2 ? false : true;
             }
-            return true;
         }
 
-        if (ps->stats[STAT_HEALTH] >= ps->stats[STAT_MAX_HEALTH]) {
-            return false;
-        }
-        return true;
+        return ps->stats[STAT_HEALTH] >= ps->stats[STAT_MAX_HEALTH] ? false : true;
 
     case IT_POWERUP:
         return true; // powerups are always picked up
@@ -951,7 +938,7 @@ bool BG_CanItemBeGrabbed(const int gametype, const entityState_t* ent, const pla
 
     case IT_TEAM: // team items, such as flags
 #ifdef TEAMARENA
-        if (gametype == GT_1FCTF) {
+        if (GT_1FCTF == gametype) {
             // neutral flag can always be picked up
             if (item->giTag == PW_NEUTRALFLAG) {
                 return true;
@@ -965,34 +952,28 @@ bool BG_CanItemBeGrabbed(const int gametype, const entityState_t* ent, const pla
                     return true;
                 }
             }
-        }
+        } else if (GT_HARVESTER == gametype) {
+            return true;
+        } else
 #endif
-        if (gametype == GT_CTF) {
+            if (GT_CTF == gametype) {
             // ent->modelindex2 is non-zero on items if they are dropped
             // we need to know this because we can pick up our dropped flag (and return it)
             // but we can't pick up our flag at base
-            if (ps->persistent[PERS_TEAM] == TEAM_RED) {
-                if (item->giTag == PW_BLUEFLAG || (item->giTag == PW_REDFLAG && ent->modelindex2) || (item->giTag == PW_REDFLAG && ps->powerups[PW_BLUEFLAG]))
+            if (TEAM_RED == ps->persistent[PERS_TEAM]) {
+                if (PW_BLUEFLAG == item->giTag || (PW_REDFLAG == item->giTag && ent->modelindex2) || (PW_REDFLAG == item->giTag && ps->powerups[PW_BLUEFLAG]))
                     return true;
-            } else if (ps->persistent[PERS_TEAM] == TEAM_BLUE) {
-                if (item->giTag == PW_REDFLAG || (item->giTag == PW_BLUEFLAG && ent->modelindex2) || (item->giTag == PW_BLUEFLAG && ps->powerups[PW_REDFLAG]))
+            } else if (TEAM_BLUE == ps->persistent[PERS_TEAM]) {
+                if (PW_REDFLAG == item->giTag || (PW_BLUEFLAG == item->giTag && ent->modelindex2) || (PW_BLUEFLAG == item->giTag && ps->powerups[PW_REDFLAG]))
                     return true;
             }
+        } else {
+            return false;
         }
-
-#ifdef TEAMARENA
-        if (gametype == GT_HARVESTER) {
-            return true;
-        }
-#endif
-        return false;
 
     case IT_HOLDABLE:
         // can only hold one item at a time
-        if (ps->stats[STAT_HOLDABLE_ITEM]) {
-            return false;
-        }
-        return true;
+        return ps->stats[STAT_HOLDABLE_ITEM] ? false : true;
 
     case IT_BAD:
         Com_Error(ERR_DROP, "BG_CanItemBeGrabbed: IT_BAD");
@@ -1008,14 +989,13 @@ bool BG_CanItemBeGrabbed(const int gametype, const entityState_t* ent, const pla
     return false;
 }
 
-//======================================================================
-
 void BG_EvaluateTrajectory(const trajectory_t* tr, int atTime, vec3_t result)
 {
     float deltaTime;
     float phase;
 
-    switch (tr->trType) {
+    const trType_t type = tr->trType;
+    switch (type) {
     case TR_STATIONARY:
     case TR_INTERPOLATE:
         VectorCopy(tr->trBase, result);
@@ -1045,8 +1025,7 @@ void BG_EvaluateTrajectory(const trajectory_t* tr, int atTime, vec3_t result)
         result[2] -= 0.5 * DEFAULT_GRAVITY * deltaTime * deltaTime; // FIXME: local gravity...
         break;
     default:
-        Com_Error(ERR_DROP, "BG_EvaluateTrajectory: unknown trType: %i", tr->trType);
-        break;
+        Com_Error(ERR_DROP, "BG_EvaluateTrajectory: unknown trType: %i", type);
     }
 }
 
@@ -1057,12 +1036,13 @@ BG_EvaluateTrajectoryDelta
 For determining velocity at a given time
 ================
 */
-void BG_EvaluateTrajectoryDelta(const trajectory_t* tr, int atTime, vec3_t result)
+void BG_EvaluateTrajectoryDelta(const trajectory_t* tr, const int atTime, vec3_t result)
 {
     float deltaTime;
     float phase;
 
-    switch (tr->trType) {
+    const trType_t type = tr->trType;
+    switch (type) {
     case TR_STATIONARY:
     case TR_INTERPOLATE:
         VectorClear(result);
@@ -1089,8 +1069,7 @@ void BG_EvaluateTrajectoryDelta(const trajectory_t* tr, int atTime, vec3_t resul
         result[2] -= DEFAULT_GRAVITY * deltaTime; // FIXME: local gravity...
         break;
     default:
-        Com_Error(ERR_DROP, "BG_EvaluateTrajectoryDelta: unknown trType: %i", tr->trType);
-        break;
+        Com_Error(ERR_DROP, "BG_EvaluateTrajectoryDelta: unknown trType: %i", type);
     }
 }
 
@@ -1212,20 +1191,6 @@ void trap_Cvar_VariableStringBuffer(const char* var_name, char* buffer, int bufs
 
 void BG_AddPredictableEventToPlayerstate(int newEvent, int eventParm, playerState_t* ps)
 {
-
-#ifdef _DEBUG
-    {
-        char buf[256];
-        trap_Cvar_VariableStringBuffer("showevents", buf, sizeof(buf));
-        if (atof(buf) != 0) {
-#ifdef QAGAME
-            Com_Printf(" game event svt %5d -> %5d: num = %20s parm %d\n", ps->pmove_framecount /*ps->commandTime*/, ps->eventSequence, eventnames[newEvent], eventParm);
-#else
-            Com_Printf("Cgame event svt %5d -> %5d: num = %20s parm %d\n", ps->pmove_framecount /*ps->commandTime*/, ps->eventSequence, eventnames[newEvent], eventParm);
-#endif
-        }
-    }
-#endif
     ps->events[ps->eventSequence & (MAX_PS_EVENTS - 1)] = newEvent;
     ps->eventParms[ps->eventSequence & (MAX_PS_EVENTS - 1)] = eventParm;
     ps->eventSequence++;
@@ -1375,7 +1340,7 @@ void BG_PlayerStateToEntityStateExtraPolate(playerState_t* ps, entityState_t* s,
     VectorCopy(ps->velocity, s->pos.trDelta);
     // set the time for linear prediction
     s->pos.trTime = time;
-    // set maximum extra polation time
+    // set maximum extrapolation time
     s->pos.trDuration = 50; // 1000 / sv_fps (default = 20)
 
     s->apos.trType = TR_INTERPOLATE;
