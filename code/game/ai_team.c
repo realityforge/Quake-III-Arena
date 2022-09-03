@@ -227,18 +227,17 @@ static void BotSayTeamOrder(bot_state_t* bs, int toclient)
 #endif
 }
 
+#ifdef TEAMARENA
 void BotVoiceChat(bot_state_t* bs, int toclient, char* voicechat)
 {
-#ifdef TEAMARENA
     if (toclient == -1)
         // voice only say team
         trap_EA_Command(bs->client, va("vsay_team %s", voicechat));
     else
         // voice only tell single player
         trap_EA_Command(bs->client, va("vtell %d %s", toclient, voicechat));
-#endif
 }
-
+#endif
 void BotVoiceChatOnly(UNUSED bot_state_t* bs, UNUSED int toclient, UNUSED char* voicechat)
 {
 #ifdef TEAMARENA

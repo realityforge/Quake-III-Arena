@@ -1067,7 +1067,6 @@ static void BotMatch_Dismiss(bot_state_t* bs, bot_match_t* match)
 static void BotMatch_Suicide(bot_state_t* bs, bot_match_t* match)
 {
     char netname[MAX_MESSAGE_SIZE];
-    int client;
 
     if (!TeamPlayIsOn())
         return;
@@ -1076,8 +1075,10 @@ static void BotMatch_Suicide(bot_state_t* bs, bot_match_t* match)
         return;
     trap_EA_Command(bs->client, "kill");
     trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
-    client = ClientFromName(netname);
+#ifdef TEAMARENA
+    const int client = ClientFromName(netname);
     BotVoiceChat(bs, client, VOICECHAT_TAUNT);
+#endif
     trap_EA_Action(bs->client, ACTION_AFFIRMATIVE);
 }
 

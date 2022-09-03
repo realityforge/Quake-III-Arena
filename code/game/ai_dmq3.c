@@ -377,7 +377,9 @@ static void BotRefuseOrder(bot_state_t* bs)
     // if the bot was ordered to do something
     if (bs->order_time && bs->order_time > FloatTime() - 10) {
         trap_EA_Action(bs->client, ACTION_NEGATIVE);
+#ifdef TEAMARENA
         BotVoiceChat(bs, bs->decisionmaker, VOICECHAT_NO);
+#endif
         bs->order_time = 0;
     }
 }
@@ -419,7 +421,9 @@ void BotCTFSeekGoals(bot_state_t* bs)
                 bs->altroutegoal.areanum = 0;
             }
             BotSetUserInfo(bs, "teamtask", va("%d", TEAMTASK_OFFENSE));
+#ifdef TEAMARENA
             BotVoiceChat(bs, -1, VOICECHAT_IHAVEFLAG);
+#endif
         } else if (bs->rushbaseaway_time > FloatTime()) {
             if (BotTeam(bs) == TEAM_RED)
                 flagstatus = bs->redflagstatus;
@@ -466,7 +470,9 @@ void BotCTFSeekGoals(bot_state_t* bs)
                     bs->teammessage_time = 0;
                     // no arrive message
                     bs->arrive_time = 1;
+#ifdef TEAMARENA
                     BotVoiceChat(bs, bs->teammate, VOICECHAT_ONFOLLOW);
+#endif
                     // get the team goal time
                     bs->teamgoal_time = FloatTime() + TEAM_ACCOMPANY_TIME;
                     bs->ltgtype = LTG_TEAMACCOMPANY;
@@ -530,7 +536,9 @@ void BotCTFSeekGoals(bot_state_t* bs)
                     bs->teammessage_time = 0;
                     // no arrive message
                     bs->arrive_time = 1;
+#ifdef TEAMARENA
                     BotVoiceChat(bs, bs->teammate, VOICECHAT_ONFOLLOW);
+#endif
                     // get the team goal time
                     bs->teamgoal_time = FloatTime() + TEAM_ACCOMPANY_TIME;
                     bs->ltgtype = LTG_TEAMACCOMPANY;
