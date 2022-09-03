@@ -159,20 +159,15 @@ static bot_goal_t* BotTeamFlag(bot_state_t* bs)
     }
 }
 
-bool EntityIsDead(aas_entityinfo_t* entinfo)
+bool EntityIsDead(const aas_entityinfo_t* entinfo)
 {
-    playerState_t ps;
-
     if (entinfo->number >= 0 && entinfo->number < MAX_CLIENTS) {
         // retrieve the current client state
-        if (!BotAI_GetClientState(entinfo->number, &ps)) {
-            return false;
-        }
-
-        if (ps.pm_type != PM_NORMAL)
-            return true;
+        playerState_t ps;
+        return BotAI_GetClientState(entinfo->number, &ps) && PM_NORMAL != ps.pm_type;
+    } else {
+        return false;
     }
-    return false;
 }
 
 static bool EntityCarriesFlag(aas_entityinfo_t* entinfo)
