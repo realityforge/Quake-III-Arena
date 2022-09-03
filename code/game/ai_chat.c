@@ -1103,7 +1103,7 @@ void BotChatTest(bot_state_t* bs)
         trap_BotEnterChat(bs->cs, 0, CHAT_ALL);
     }
     if (bs->lastkilledplayer == bs->client) {
-        strcpy(name, BotRandomOpponentName(bs));
+        strncpyz(name, BotRandomOpponentName(bs), sizeof(name));
     } else {
         EasyClientName(bs->lastkilledplayer, name, sizeof(name));
     }
