@@ -874,7 +874,9 @@ static void BotMatch_TaskPreference(bot_state_t* bs, bot_match_t* match)
     EasyClientName(teammate, teammatename, sizeof(teammatename));
     BotAI_BotInitialChat(bs, "keepinmind", teammatename, NULL);
     trap_BotEnterChat(bs->cs, teammate, CHAT_TELL);
+#ifdef TEAMARENA
     BotVoiceChatOnly(bs, teammate, VOICECHAT_YES);
+#endif
     trap_EA_Action(bs->client, ACTION_AFFIRMATIVE);
 }
 

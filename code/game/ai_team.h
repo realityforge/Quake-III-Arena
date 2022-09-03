@@ -25,5 +25,5 @@ int BotGetTeamMateTaskPreference(bot_state_t* bs, int teammate);
 void BotSetTeamMateTaskPreference(bot_state_t* bs, int teammate, int preference);
 #ifdef TEAMARENA
 void BotVoiceChat(bot_state_t* bs, int toclient, char* voicechat);
-#endif
 void BotVoiceChatOnly(bot_state_t* bs, int toclient, char* voicechat);
+#endif
