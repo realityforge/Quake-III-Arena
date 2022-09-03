@@ -505,6 +505,7 @@ void CG_InitConsoleCommands()
     trap_AddCommand("say");
     trap_AddCommand("say_team");
     trap_AddCommand("tell");
+#ifdef TEAMARENA
     trap_AddCommand("vsay");
     trap_AddCommand("vsay_team");
     trap_AddCommand("vtell");
@@ -512,6 +513,7 @@ void CG_InitConsoleCommands()
     trap_AddCommand("vosay");
     trap_AddCommand("vosay_team");
     trap_AddCommand("votell");
+#endif
     trap_AddCommand("give");
     trap_AddCommand("god");
     trap_AddCommand("notarget");
