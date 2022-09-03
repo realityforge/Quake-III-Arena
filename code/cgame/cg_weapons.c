@@ -194,7 +194,7 @@ static void CG_NailgunEjectBrass(centity_t* cent)
 
 void CG_RailTrail(clientInfo_t* ci, vec3_t start, vec3_t end)
 {
-    vec3_t axis[36], move, move2, next_move, vec, temp;
+    vec3_t axis[36], move, move2, vec, temp;
     float len;
     int i, j, skip;
 
@@ -242,7 +242,6 @@ void CG_RailTrail(clientInfo_t* ci, vec3_t start, vec3_t end)
     AxisClear(re->axis);
 
     VectorMA(move, 20, vec, move);
-    VectorCopy(move, next_move);
     VectorScale(vec, SPACING, vec);
 
     if (cg_oldRail.integer != 0) {
