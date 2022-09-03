@@ -518,11 +518,11 @@ void CG_InitConsoleCommands()
     trap_AddCommand("god");
     trap_AddCommand("notarget");
     trap_AddCommand("noclip");
-    trap_AddCommand("where");
     trap_AddCommand("team");
     trap_AddCommand("follow");
     trap_AddCommand("follownext");
     trap_AddCommand("followprev");
+    trap_AddCommand("where");
     trap_AddCommand("levelshot");
     trap_AddCommand("addbot");
     trap_AddCommand("setviewpos");
