@@ -687,7 +687,9 @@ static int BotAI(int client, float thinktime)
     }
 
     // retrieve the current client state
-    BotAI_GetClientState(client, &bs->cur_ps);
+    if (!BotAI_GetClientState(client, &bs->cur_ps)) {
+        return false;
+    }
 
     // retrieve any waiting server commands
     while (trap_BotGetServerCommand(client, buf, sizeof(buf))) {

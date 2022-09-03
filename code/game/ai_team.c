@@ -83,13 +83,12 @@ static int BotNumTeamMates(bot_state_t* bs)
 static int BotClientTravelTimeToGoal(int client, bot_goal_t* goal)
 {
     playerState_t ps;
-    int areanum;
-
-    BotAI_GetClientState(client, &ps);
-    areanum = BotPointAreaNum(ps.origin);
-    if (!areanum)
+    if (BotAI_GetClientState(client, &ps)) {
         return 1;
-    return trap_AAS_AreaTravelTimeToGoalArea(areanum, ps.origin, goal->areanum, TFL_DEFAULT);
+    } else {
+        const int areanum = BotPointAreaNum(ps.origin);
+        return !areanum ? 1 : trap_AAS_AreaTravelTimeToGoalArea(areanum, ps.origin, goal->areanum, TFL_DEFAULT);
+    }
 }
 
 static int BotSortTeamMatesByBaseTravelTime(bot_state_t* bs, int* teammates, int maxteammates)
