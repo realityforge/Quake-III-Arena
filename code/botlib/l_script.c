@@ -189,11 +189,8 @@ void SetScriptPunctuations(script_t* script, punctuation_t* p)
     else
         script->punctuations = default_punctuations;
 }
-//============================================================================
 // Reads spaces, tabs, C-like comments etc.
 // When a newline character is found the scripts line counter is increased.
-//
-//============================================================================
 static int PS_ReadWhiteSpace(script_t* script)
 {
     while (1) {
@@ -244,12 +241,10 @@ static int PS_ReadWhiteSpace(script_t* script)
     }
     return 1;
 }
-//============================================================================
 // Reads an escape character.
 //
-// Parameter:				script		: script to read from
-//								ch				: place to store the read escape character
-//============================================================================
+// Parameter: script : script to read from
+//            ch     : place to store the read escape character
 static int PS_ReadEscapeCharacter(script_t* script, char* ch)
 {
     int c, val, i;
@@ -341,15 +336,13 @@ static int PS_ReadEscapeCharacter(script_t* script, char* ch)
     // successfully read escape character
     return 1;
 }
-//============================================================================
 // Reads C-like string. Escape characters are interpretted.
 // Quotes are included with the string.
 // Reads two strings with a white space between them as one string.
 //
-// Parameter:				script		: script to read from
-//								token			: buffer to store the string
-// Returns:					true when a string was read successfully
-//============================================================================
+// Parameter: script : script to read from
+//            token : buffer to store the string
+// Returns: true when a string was read successfully
 static int PS_ReadString(script_t* script, token_t* token, int quote)
 {
     int len, tmpline;
@@ -764,10 +757,7 @@ void SetScriptFlags(script_t* script, int flags)
 {
     script->flags = flags;
 }
-//============================================================================
 // returns true if at the end of the script
-//
-//============================================================================
 int EndOfScript(script_t* script)
 {
     return script->script_p >= script->end_p;
