@@ -349,12 +349,12 @@ static void CG_TaskOwnFlag_f()
 
 static void CG_TauntKillInsult_f()
 {
-    trap_SendConsoleCommand("cmd vsay kill_insult\n");
+    trap_SendConsoleCommand("cmd vsay " VOICECHAT_KILLINSULT "\n");
 }
 
 static void CG_TauntPraise_f()
 {
-    trap_SendConsoleCommand("cmd vsay praise\n");
+    trap_SendConsoleCommand("cmd vsay " VOICECHAT_PRAISE "\n");
 }
 
 static void CG_TauntTaunt_f()
@@ -364,12 +364,12 @@ static void CG_TauntTaunt_f()
 
 static void CG_TauntDeathInsult_f()
 {
-    trap_SendConsoleCommand("cmd vsay death_insult\n");
+    trap_SendConsoleCommand("cmd vsay " VOICECHAT_DEATHINSULT "\n");
 }
 
 static void CG_TauntGauntlet_f()
 {
-    trap_SendConsoleCommand("cmd vsay kill_gauntlet\n");
+    trap_SendConsoleCommand("cmd vsay " VOICECHAT_KILLGAUNTLET "\n");
 }
 
 static void CG_TaskSuicide_f()
