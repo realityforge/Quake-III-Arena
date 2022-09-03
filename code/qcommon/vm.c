@@ -513,8 +513,6 @@ int QDECL VM_Call(vm_t* vm, int callnum, ...)
     return r;
 }
 
-//=================================================================
-
 static int QDECL VM_ProfileSort(const void* a, const void* b)
 {
     vmSymbol_t *sa, *sb;

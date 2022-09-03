@@ -48,8 +48,6 @@ static SOCKET ipx_socket;
 static int numIP;
 static uint8_t localIP[MAX_IPS][4];
 
-//=============================================================================
-
 char* NET_ErrorString(void)
 {
     int code;
@@ -265,8 +263,6 @@ bool Sys_StringToAdr(const char* s, netadr_t* a)
     return true;
 }
 
-//=============================================================================
-
 /*
 ==================
 Sys_GetPacket
@@ -341,8 +337,6 @@ bool Sys_GetPacket(netadr_t* net_from, msg_t* net_message)
     return false;
 }
 
-//=============================================================================
-
 static char socksBuf[4096];
 
 void Sys_SendPacket(int length, const void* data, netadr_t to)
@@ -398,8 +392,6 @@ void Sys_SendPacket(int length, const void* data, netadr_t to)
         Com_Printf("NET_SendPacket: %s\n", NET_ErrorString());
     }
 }
-
-//=============================================================================
 
 /*
 ==================
@@ -477,8 +469,6 @@ void Sys_ShowIP(void)
         Com_Printf("IP: %i.%i.%i.%i\n", localIP[i][0], localIP[i][1], localIP[i][2], localIP[i][3]);
     }
 }
-
-//=============================================================================
 
 int NET_IPSocket(char* net_interface, int port)
 {
@@ -827,8 +817,6 @@ void NET_OpenIPX(void)
     port = Cvar_Get("net_port", va("%i", PORT_SERVER), CVAR_LATCH)->integer;
     ipx_socket = NET_IPXSocket(port);
 }
-
-//===================================================================
 
 static bool NET_GetCvars(void)
 {

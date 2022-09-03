@@ -146,9 +146,7 @@ static void AAS_SwapAASData()
         aasworld.clusters[i].firstportal = LittleLong(aasworld.clusters[i].firstportal);
     }
 }
-//===========================================================================
 // dump the current loaded aas file
-//===========================================================================
 void AAS_DumpAASData()
 {
     aasworld.numbboxes = 0;
@@ -248,9 +246,7 @@ void AAS_FileInfo()
     botimport.Print(PRT_MESSAGE, "optimized size %d KB\n", optimized >> 10);
 }
 #endif // AASFILEDEBUG
-//===========================================================================
 // allocate memory and read a lump of an AAS file
-//===========================================================================
 static char* AAS_LoadAASLump(fileHandle_t fp, int offset, int length, int* lastoffset, int size)
 {
     char* buf;
@@ -285,9 +281,7 @@ static void AAS_DData(unsigned char* data, int size)
         data[i] ^= (unsigned char)i * 119;
     }
 }
-//===========================================================================
 // load an aas file
-//===========================================================================
 int AAS_LoadAASFile(char* filename)
 {
     fileHandle_t fp;
@@ -458,9 +452,7 @@ static int AAS_WriteAASLump(fileHandle_t fp, aas_header_t* h, int lumpnum, void*
 
     return true;
 }
-//===========================================================================
 // aas data is useless after writing to file because it is byte swapped
-//===========================================================================
 bool AAS_WriteAASFile(char* filename)
 {
     aas_header_t header;

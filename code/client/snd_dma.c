@@ -400,8 +400,6 @@ void S_memoryLoad(sfx_t* sfx)
     sfx->inMemory = true;
 }
 
-//=============================================================================
-
 /*
 =================
 S_SpatializeOrigin
@@ -858,8 +856,6 @@ void S_AddLoopSounds(void)
     }
 }
 
-//=============================================================================
-
 /*
 =================
 S_ByteSwapRawSamples
@@ -979,8 +975,6 @@ void S_RawSamples(int samples, int rate, int width, int s_channels, const uint8_
         Com_DPrintf("S_RawSamples: overflowed %i > %i\n", s_rawend, s_soundtime);
     }
 }
-
-//=============================================================================
 
 /*
 =====================

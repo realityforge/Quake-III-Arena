@@ -244,8 +244,6 @@ static void SV_GetUsercmd(int clientNum, usercmd_t* cmd)
     *cmd = svs.clients[clientNum].lastUsercmd;
 }
 
-//==============================================
-
 static int FloatAsInt(float f)
 {
     union {
@@ -406,8 +404,6 @@ static int SV_GameSystemCalls(int* args)
     case G_SNAPVECTOR:
         Sys_SnapVector(VMA(1));
         return 0;
-
-        //====================================
 
     case BOTLIB_SETUP:
         return SV_BotLibSetup();

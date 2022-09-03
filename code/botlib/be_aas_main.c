@@ -94,9 +94,7 @@ static void AAS_ContinueInit()
     // at this point AAS is initialized
     AAS_SetInitialized();
 }
-//===========================================================================
 // called at the start of every frame
-//===========================================================================
 int AAS_StartFrame(float time)
 {
     aasworld.time = time;
@@ -151,9 +149,7 @@ static int AAS_LoadFiles(const char* mapname)
     strncpyz(aasworld.filename, aasfile, sizeof(aasworld.filename));
     return BLERR_NOERROR;
 }
-//===========================================================================
 // called everytime a map changes
-//===========================================================================
 int AAS_LoadMap(const char* mapname)
 {
     int errnum;
@@ -185,9 +181,7 @@ int AAS_LoadMap(const char* mapname)
     // everything went ok
     return 0;
 }
-//===========================================================================
 // called when the library is first loaded
-//===========================================================================
 int AAS_Setup()
 {
     aasworld.maxclients = LibVarIntValue("maxclients", "128");

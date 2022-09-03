@@ -367,8 +367,6 @@ static void CMod_LoadVisibility(lump_t* l)
     memcpy(cm.visibility, buf + VIS_HEADER, len - VIS_HEADER);
 }
 
-//==================================================================
-
 #define MAX_PATCH_VERTS 1024
 static void CMod_LoadPatches(lump_t* surfs, lump_t* verts)
 {
@@ -575,8 +573,6 @@ int CM_LeafArea(int leafnum)
     }
     return cm.leafs[leafnum].area;
 }
-
-//=======================================================================
 
 /*
 ===================

@@ -39,8 +39,6 @@ int cmd_wait;
 cmd_t cmd_text;
 uint8_t cmd_text_buf[MAX_CMD_BUFFER];
 
-//=============================================================================
-
 /*
 ============
 Cmd_Wait_f

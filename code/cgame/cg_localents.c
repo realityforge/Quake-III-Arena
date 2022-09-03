@@ -718,8 +718,6 @@ static void CG_AddScorePlum(localEntity_t* le)
     }
 }
 
-//==============================================================================
-
 void CG_AddLocalEntities()
 {
     localEntity_t *le, *next;

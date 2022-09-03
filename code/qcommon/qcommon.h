@@ -27,8 +27,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "q_shared.h"
 #include "cm_public.h"
 
-//============================================================================
-
 //
 // msg.c
 //
@@ -88,8 +86,6 @@ void MSG_ReadDeltaEntity(msg_t* msg, entityState_t* from, entityState_t* to,
 
 void MSG_WriteDeltaPlayerstate(msg_t* msg, struct playerState_s* from, struct playerState_s* to);
 void MSG_ReadDeltaPlayerstate(msg_t* msg, struct playerState_s* from, struct playerState_s* to);
-
-//============================================================================
 
 #define PACKET_BACKUP 32 // number of old messages that must be kept on client and
                          // server for delta comrpession and ping estimation
@@ -324,8 +320,6 @@ void Cbuf_Execute(void);
 // them through Cmd_ExecuteString.  Stops when the buffer is empty.
 // Normally called once per frame, but may be explicitly invoked.
 // Do not call inside a command function, or current args will be destroyed.
-
-//===========================================================================
 
 /*
 

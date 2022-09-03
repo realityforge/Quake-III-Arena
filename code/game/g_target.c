@@ -22,8 +22,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "g_local.h"
 #include "g_spawn.h"
 
-//==========================================================
-
 /*QUAKED target_give (1 0 0) (-8 -8 -8) (8 8 8)
 Gives the activator all the items pointed to.
 */
@@ -59,8 +57,6 @@ void SP_target_give(gentity_t* ent)
     ent->use = Use_Target_Give;
 }
 
-//==========================================================
-
 /*QUAKED target_remove_powerups (1 0 0) (-8 -8 -8) (8 8 8)
 takes away all the activators powerups.
 Used to drop flight powerups into death puts.
@@ -86,8 +82,6 @@ void SP_target_remove_powerups(gentity_t* ent)
 {
     ent->use = Use_target_remove_powerups;
 }
-
-//==========================================================
 
 /*QUAKED target_delay (1 0 0) (-8 -8 -8) (8 8 8)
 "wait" seconds to pause before firing targets.
@@ -118,8 +112,6 @@ void SP_target_delay(gentity_t* ent)
     ent->use = Use_Target_Delay;
 }
 
-//==========================================================
-
 /*QUAKED target_score (1 0 0) (-8 -8 -8) (8 8 8)
 "count" number of points to add, default 1
 
@@ -137,8 +129,6 @@ void SP_target_score(gentity_t* ent)
     }
     ent->use = Use_Target_Score;
 }
-
-//==========================================================
 
 /*QUAKED target_print (1 0 0) (-8 -8 -8) (8 8 8) redteam blueteam private
 "message"	text to print
@@ -168,8 +158,6 @@ void SP_target_print(gentity_t* ent)
 {
     ent->use = Use_Target_Print;
 }
-
-//==========================================================
 
 /*QUAKED target_speaker (1 0 0) (-8 -8 -8) (8 8 8) looped-on looped-off global activator
 "noise"		wav file to play
@@ -249,8 +237,6 @@ void SP_target_speaker(gentity_t* ent)
     // the server can determine who to send updates to
     trap_LinkEntity(ent);
 }
-
-//==========================================================
 
 /*QUAKED target_laser (0 .5 .8) (-8 -8 -8) (8 8 8) START_ON
 When triggered, fires a laser.  You can either set a target or a direction.
@@ -367,8 +353,6 @@ void SP_target_teleporter(gentity_t* self)
     self->use = target_teleporter_use;
 }
 
-//==========================================================
-
 /*QUAKED target_relay (.5 .5 .5) (-8 -8 -8) (8 8 8) RED_ONLY BLUE_ONLY RANDOM
 This doesn't perform any actions except fire its targets.
 The activator can be forced to be from a certain team.
@@ -400,8 +384,6 @@ void SP_target_relay(gentity_t* self)
 {
     self->use = target_relay_use;
 }
-
-//==========================================================
 
 /*QUAKED target_kill (.5 .5 .5) (-8 -8 -8) (8 8 8)
 Kills the activator.

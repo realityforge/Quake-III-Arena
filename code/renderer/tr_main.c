@@ -1054,8 +1054,6 @@ recurse:
         return; /* all subarrays done */
 }
 
-//==========================================================================================
-
 void R_AddDrawSurf(surfaceType_t* surface, shader_t* shader,
                    int fogIndex, int dlightMap)
 {

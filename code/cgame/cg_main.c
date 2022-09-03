@@ -1113,8 +1113,6 @@ static void CG_RegisterClients()
     CG_BuildSpectatorString();
 }
 
-//===========================================================================
-
 const char* CG_ConfigString(int index)
 {
     if (index < 0 || index >= MAX_CONFIGSTRINGS) {
@@ -1122,8 +1120,6 @@ const char* CG_ConfigString(int index)
     }
     return cgs.gameState.stringData + cgs.gameState.stringOffsets[index];
 }
-
-//==================================================================
 
 void CG_StartMusic()
 {

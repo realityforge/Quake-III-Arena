@@ -215,8 +215,6 @@ int MSG_ReadBits(msg_t* msg, int bits)
     return value;
 }
 
-//================================================================================
-
 //
 // writing functions
 //

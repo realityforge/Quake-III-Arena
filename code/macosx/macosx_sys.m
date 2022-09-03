@@ -39,8 +39,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 bool stdin_active = false;
 
-//===========================================================================
-
 int main(int argc, const char* argv[])
 {
 #ifdef DEDICATED
@@ -54,8 +52,6 @@ int main(int argc, const char* argv[])
     return NSApplicationMain(argc, argv);
 #endif
 }
-
-//===========================================================================
 
 void Sys_UnloadDll(void* dllHandle)
 {
@@ -121,7 +117,6 @@ libraryPath = [NSString stringWithFormat: @"%@/Contents/MacOS/%s", bundlePath, n
     return libHandle;
 }
 
-//===========================================================================
 #ifndef DEDICATED
 
 char* Sys_GetClipboardData(void) // FIXME

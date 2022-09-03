@@ -85,9 +85,7 @@ static aas_lreachability_t* nextreachability; // next free reachability from the
 static aas_lreachability_t** areareachability; // reachability links for every area
 static int numlreachabilities;
 
-//===========================================================================
 // returns the surface area of the given face
-//===========================================================================
 static float AAS_FaceArea(const aas_face_t* face)
 {
     int i, edgenum, side;
@@ -113,9 +111,7 @@ static float AAS_FaceArea(const aas_face_t* face)
     }
     return total;
 }
-//===========================================================================
 // returns the volume of an area
-//===========================================================================
 static float AAS_AreaVolume(int areanum)
 {
     int i, edgenum, facenum, side;
@@ -373,9 +369,7 @@ static void AAS_ShutDownReachabilityHeap()
     FreeMemory(reachabilityheap);
     numlreachabilities = 0;
 }
-//===========================================================================
 // returns a reachability link
-//===========================================================================
 static aas_lreachability_t* AAS_AllocReachability()
 {
     aas_lreachability_t* r;
@@ -390,9 +384,7 @@ static aas_lreachability_t* AAS_AllocReachability()
     numlreachabilities++;
     return r;
 }
-//===========================================================================
 // frees a reachability link
-//===========================================================================
 static void AAS_FreeReachability(aas_lreachability_t* lreach)
 {
     memset(lreach, 0, sizeof(aas_lreachability_t));
@@ -401,9 +393,7 @@ static void AAS_FreeReachability(aas_lreachability_t* lreach)
     nextreachability = lreach;
     numlreachabilities--;
 }
-//===========================================================================
 // returns true if the area has reachability links
-//===========================================================================
 int AAS_AreaReachability(int areanum)
 {
     if (areanum < 0 || areanum >= aasworld.numareas) {
@@ -412,9 +402,7 @@ int AAS_AreaReachability(int areanum)
     }
     return aasworld.areasettings[areanum].numreachableareas;
 }
-//===========================================================================
 // returns the center of a face
-//===========================================================================
 static void AAS_FaceCenter(int facenum, vec3_t center)
 {
     int i;
@@ -433,10 +421,8 @@ static void AAS_FaceCenter(int facenum, vec3_t center)
     scale = 0.5F / face->numedges;
     VectorScale(center, scale, center);
 }
-//===========================================================================
 // returns the maximum distance a player can fall before being damaged
 // damage = deltavelocity*deltavelocity  * 0.0001
-//===========================================================================
 static int AAS_FallDamageDistance()
 {
     const float maxzvelocity = sqrtf(30 * 10000);
@@ -444,11 +430,9 @@ static int AAS_FallDamageDistance()
     const float t = maxzvelocity / gravity;
     return (int)(0.5F * gravity * t * t);
 }
-//===========================================================================
 // distance = 0.5 * gravity * t * t
 // vel = t * gravity
 // damage = vel * vel * 0.0001
-//===========================================================================
 static float AAS_FallDelta(const float distance)
 {
     const float gravity = aassettings.phys_gravity;
@@ -462,9 +446,7 @@ static float AAS_MaxJumpHeight(const float phys_jumpvel)
     // maximum height a player can jump with the given initial z velocity
     return 0.5F * phys_gravity * (phys_jumpvel / phys_gravity) * (phys_jumpvel / phys_gravity);
 }
-//===========================================================================
 // returns true if a player can only crouch in the area
-//===========================================================================
 static float AAS_MaxJumpDistance(const float phys_jumpvel)
 {
     float phys_gravity, phys_maxvelocity, t;
@@ -476,16 +458,12 @@ static float AAS_MaxJumpDistance(const float phys_jumpvel)
     // maximum distance
     return phys_maxvelocity * (t + phys_jumpvel / phys_gravity);
 }
-//===========================================================================
 // returns true if a player can only crouch in the area
-//===========================================================================
 int AAS_AreaCrouch(const int areanum)
 {
     return !(aasworld.areasettings[areanum].presencetype & PRESENCE_NORMAL) ? true : false;
 }
-//===========================================================================
 // returns true if it is possible to swim in the area
-//===========================================================================
 int AAS_AreaSwim(const int areanum)
 {
     if (aasworld.areasettings[areanum].areaflags & AREA_LIQUID)
@@ -493,16 +471,12 @@ int AAS_AreaSwim(const int areanum)
     else
         return false;
 }
-//===========================================================================
 // returns true if the area contains ground faces
-//===========================================================================
 int AAS_AreaGrounded(int areanum)
 {
     return (aasworld.areasettings[areanum].areaflags & AREA_GROUNDED);
 }
-//===========================================================================
 // returns true if the area contains ladder faces
-//===========================================================================
 int AAS_AreaLadder(int areanum)
 {
     return (aasworld.areasettings[areanum].areaflags & AREA_LADDER);
@@ -523,9 +497,7 @@ int AAS_AreaDoNotEnter(int areanum)
 {
     return (aasworld.areasettings[areanum].contents & AREACONTENTS_DONOTENTER);
 }
-//===========================================================================
 // returns true if there already exists a reachability from area1 to area2
-//===========================================================================
 static bool AAS_ReachabilityExists(int area1num, int area2num)
 {
     aas_lreachability_t* r;
@@ -536,9 +508,7 @@ static bool AAS_ReachabilityExists(int area1num, int area2num)
     }
     return false;
 }
-//===========================================================================
 // searches for swim reachabilities between adjacent areas
-//===========================================================================
 static int AAS_Reachability_Swim(int area1num, int area2num)
 {
     int i, j, face1num, face2num, side1;
@@ -602,10 +572,7 @@ static int AAS_Reachability_Swim(int area1num, int area2num)
     }
     return false;
 }
-//===========================================================================
-// searches for reachabilities between adjacent areas with equal floor
-// heights
-//===========================================================================
+// searches for reachabilities between adjacent areas with equal floor heights
 static int AAS_Reachability_EqualFloorHeight(int area1num, int area2num)
 {
     int i, j, edgenum, edgenum1, edgenum2, foundreach, side;
@@ -721,9 +688,7 @@ static int AAS_Reachability_EqualFloorHeight(int area1num, int area2num)
     }
     return false;
 }
-//===========================================================================
 // searches step, barrier, waterjump and walk off ledge reachabilities
-//===========================================================================
 static int AAS_Reachability_Step_Barrier_WaterJump_WalkOffLedge(int area1num, int area2num)
 {
     int i, j, k, l, edge1num, edge2num, areas[10], numareas;
@@ -1208,9 +1173,7 @@ static int AAS_Reachability_Step_Barrier_WaterJump_WalkOffLedge(int area1num, in
     }
     return false;
 }
-//===========================================================================
 // returns the distance between the two vectors
-//===========================================================================
 static float VectorDistance(const vec3_t v1, const vec3_t v2)
 {
     vec3_t dir;
@@ -1218,9 +1181,7 @@ static float VectorDistance(const vec3_t v1, const vec3_t v2)
     VectorSubtract(v2, v1, dir);
     return VectorLength(dir);
 }
-//===========================================================================
 // returns true if the first vector is between the last two vectors
-//===========================================================================
 static int VectorBetweenVectors(const vec3_t v, const vec3_t v1, const vec3_t v2)
 {
     vec3_t dir1, dir2;
@@ -1229,9 +1190,7 @@ static int VectorBetweenVectors(const vec3_t v, const vec3_t v1, const vec3_t v2
     VectorSubtract(v, v2, dir2);
     return (DotProduct(dir1, dir2) <= 0);
 }
-//===========================================================================
 // returns the mid point between the two vectors
-//===========================================================================
 static void VectorMiddle(const vec3_t v1, const vec3_t v2, vec3_t middle)
 {
     VectorAdd(v1, v2, middle);
@@ -1457,7 +1416,6 @@ static float AAS_ClosestEdgePoints(vec3_t v1, vec3_t v2, vec3_t v3, vec3_t v4, a
     }
     return bestdist;
 }
-//===========================================================================
 // creates possible jump reachabilities between the areas
 //
 // The two closest points on the ground of the areas are calculated
@@ -1467,7 +1425,6 @@ static float AAS_ClosestEdgePoints(vec3_t v1, vec3_t v2, vec3_t v3, vec3_t v4, a
 // is selected.
 // Between these two points there must be one or more gaps.
 // If the gaps exist a potential jump is predicted.
-//===========================================================================
 static int AAS_Reachability_Jump(int area1num, int area2num)
 {
     int i, j, k, l, face1num, face2num, edge1num, edge2num, traveltype;
@@ -1686,9 +1643,7 @@ static int AAS_Reachability_Jump(int area1num, int area2num)
     }
     return false;
 }
-//===========================================================================
 // create a possible ladder reachability from area1 to area2
-//===========================================================================
 static int AAS_Reachability_Ladder(int area1num, int area2num)
 {
     vec3_t area1point, area2point, v1, v2, up = { 0, 0, 1 };
@@ -1939,7 +1894,7 @@ static int AAS_TravelFlagsForTeam(int ent)
         return TRAVELFLAG_NOTTEAM2;
     return 0;
 }
-//===========================================================================
+
 // create possible teleporter reachabilities
 // this is very game dependent.... :(
 //
@@ -1952,7 +1907,6 @@ static int AAS_TravelFlagsForTeam(int ent)
 //
 // classname = misc_teleporter_dest
 // targetname = "t2"
-//===========================================================================
 static void AAS_Reachability_Teleport()
 {
     int area1num, area2num;
@@ -2088,10 +2042,8 @@ static void AAS_Reachability_Teleport()
         AAS_UnlinkFromAreas(areas);
     }
 }
-//===========================================================================
 // create possible elevator (func_plat) reachabilities
 // this is very game dependent.... :(
-//===========================================================================
 static void AAS_Reachability_Elevator()
 {
     int area1num, area2num, modelnum, i, j, k, l, n, p;
@@ -2732,10 +2684,8 @@ static void AAS_Reachability_JumpPad()
         AAS_UnlinkFromAreas(areas);
     }
 }
-//===========================================================================
 // never point at ground faces
 // always a higher and pretty far area
-//===========================================================================
 static int AAS_Reachability_Grapple(int area1num, int area2num)
 {
     int face2num, i, j, areanum, numareas, areas[20];
@@ -2918,13 +2868,11 @@ static void AAS_SetWeaponJumpAreaFlags()
     }
     botimport.Print(PRT_MESSAGE, "%d weapon jump areas\n", weaponjumpareas);
 }
-//===========================================================================
 // create a possible weapon jump reachability from area1 to area2
 //
 // check if there's a cool item in the second area
 // check if area1 is lower than area2
 // check if the bot can rocketjump from area1 to area2
-//===========================================================================
 static int AAS_Reachability_WeaponJump(int area1num, int area2num)
 {
     int face2num, i, n, ret, visualize;
@@ -3023,9 +2971,7 @@ static int AAS_Reachability_WeaponJump(int area1num, int area2num)
     }
     return false;
 }
-//===========================================================================
 // calculates additional walk off ledge reachabilities for the given area
-//===========================================================================
 static void AAS_Reachability_WalkOffLedge(int areanum)
 {
     int i, j, k, l, m, n, p, areas[10], numareas;
@@ -3201,8 +3147,6 @@ static void AAS_StoreReachability()
         aasworld.reachabilitysize += areasettings->numreachableareas;
     }
 }
-//===========================================================================
-//
 // TRAVEL_WALK					100%	equal floor height + steps
 // TRAVEL_CROUCH				100%
 // TRAVEL_BARRIERJUMP			100%
@@ -3223,7 +3167,6 @@ static void AAS_StoreReachability()
 // TRAVEL_FUNCBOB				100%
 //
 // Returns:				true if NOT finished
-//===========================================================================
 int AAS_ContinueInitReachability()
 {
     int i, j, todo, start_time;

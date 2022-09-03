@@ -261,8 +261,6 @@ void SCR_DrawSmallStringExt(int x, int y, const char* string, float* setColor, b
     re.SetColor(NULL);
 }
 
-//===============================================================================
-
 void SCR_DrawDemoRecording(void)
 {
     char string[1024];
@@ -324,8 +322,6 @@ void SCR_DrawDebugGraph(void)
     }
 }
 
-//=============================================================================
-
 void SCR_Init(void)
 {
     cl_timegraph = Cvar_Get("timegraph", "0", CVAR_CHEAT);
@@ -336,8 +332,6 @@ void SCR_Init(void)
 
     scr_initialized = true;
 }
-
-//=======================================================
 
 /*
 ==================

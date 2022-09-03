@@ -89,9 +89,7 @@ void AAS_InitSettings()
     aassettings.rs_maxfallheight = LibVarValue("rs_maxfallheight", "0");
     aassettings.rs_maxjumpfallheight = LibVarValue("rs_maxjumpfallheight", "450");
 }
-//===========================================================================
 // returns true if the bot is against a ladder
-//===========================================================================
 int AAS_AgainstLadder(vec3_t origin)
 {
     int areanum, i, facenum, side;
@@ -145,9 +143,7 @@ int AAS_AgainstLadder(vec3_t origin)
     }
     return false;
 }
-//===========================================================================
 // returns true if the bot is on the ground
-//===========================================================================
 int AAS_OnGround(vec3_t origin, int presencetype, int passent)
 {
     aas_trace_t trace;
@@ -175,9 +171,7 @@ int AAS_OnGround(vec3_t origin, int presencetype, int passent)
     // the bot is on the ground
     return true;
 }
-//===========================================================================
 // returns true if a bot at the given position is swimming
-//===========================================================================
 int AAS_Swimming(vec3_t origin)
 {
     vec3_t testorg;
@@ -212,9 +206,7 @@ void AAS_JumpReachRunStart(aas_reachability_t* reach, vec3_t runstart)
         VectorCopy(start, runstart);
     }
 }
-//===========================================================================
 // returns the Z velocity when rocket jumping at the origin
-//===========================================================================
 static float AAS_WeaponJumpZVelocity(const vec3_t origin, const float radiusdamage)
 {
     vec3_t kvel, v, start, end, forward, right, viewangles, dir;
@@ -270,9 +262,7 @@ float AAS_BFGJumpZVelocity(vec3_t origin)
     // bfg radius damage is 1000 (p_weapon.c: weapon_bfg_fire)
     return AAS_WeaponJumpZVelocity(origin, 120);
 }
-//===========================================================================
 // applies ground friction to the given velocity
-//===========================================================================
 static void AAS_Accelerate(vec3_t velocity, float frametime, const vec3_t wishdir, float wishspeed, float accel)
 {
     // q2 style
@@ -293,9 +283,7 @@ static void AAS_Accelerate(vec3_t velocity, float frametime, const vec3_t wishdi
         velocity[i] += accelspeed * wishdir[i];
     }
 }
-//===========================================================================
 // applies ground friction to the given velocity
-//===========================================================================
 static void AAS_ApplyFriction(vec3_t vel, float friction, float stopspeed, float frametime)
 {
     float speed, control, newspeed;
@@ -374,7 +362,6 @@ static int AAS_ClipToBBox(aas_trace_t* trace, const vec3_t start, const vec3_t e
     }
     return false;
 }
-//===========================================================================
 // predicts the movement
 // assumes regular bounding box sizes
 // NOTE: out of water jumping is not included
@@ -390,7 +377,6 @@ static int AAS_ClipToBBox(aas_trace_t* trace, const vec3_t start, const vec3_t e
 //						stopevent		: events that stop the prediction
 //						stopareanum		: stop as soon as entered this area
 // Returns:				aas_clientmove_t
-//===========================================================================
 static int AAS_ClientMovementPrediction(struct aas_clientmove_s* move,
                                         int entnum, const vec3_t origin,
                                         int presencetype, int onground,
@@ -815,16 +801,13 @@ int AAS_ClientMovementHitBBox(struct aas_clientmove_s* move,
                                         frametime, SE_HITBOUNDINGBOX, 0,
                                         mins, maxs, visualize);
 }
-//===========================================================================
-// calculates the horizontal velocity needed to perform a jump from start
-// to end
+// calculates the horizontal velocity needed to perform a jump from start to end
 //
 // Parameter:			zvel	: z velocity for jump
 //						start	: start position of jump
 //						end		: end position of jump
 //						*speed	: returned speed for jump
 // Returns:				false if too high or too far from start to end
-//===========================================================================
 int AAS_HorizontalVelocityForJump(float zvel, vec3_t start, vec3_t end, float* velocity)
 {
     float phys_gravity, phys_maxvelocity;

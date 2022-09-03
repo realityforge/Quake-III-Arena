@@ -543,8 +543,6 @@ void CL_NextDemo(void)
     Cbuf_Execute();
 }
 
-//======================================================================
-
 void CL_ShutdownAll(void)
 {
 
@@ -1082,8 +1080,6 @@ void CL_Clientinfo_f(void)
     Info_Print(Cvar_InfoString(CVAR_USERINFO));
     Com_Printf("--------------------------------------\n");
 }
-
-//====================================================================
 
 /*
 =================
@@ -1710,8 +1706,6 @@ void CL_CheckTimeout(void)
     }
 }
 
-//============================================================================
-
 void CL_CheckUserinfo(void)
 {
     // don't add reliable commands when not yet connected
@@ -1951,8 +1945,6 @@ void CL_InitRef(void)
     // unpause so the cgame definitely gets a snapshot and renders a frame
     Cvar_Set("cl_paused", "0");
 }
-
-//===========================================================================================
 
 void CL_SetModel_f(void)
 {

@@ -337,8 +337,6 @@ bool Netchan_Process(netchan_t* chan, msg_t* msg)
     return true;
 }
 
-//==============================================================================
-
 /*
 ===================
 NET_CompareBaseAdr
@@ -471,8 +469,6 @@ static void NET_SendLoopPacket(netsrc_t sock, int length, const void* data)
     memcpy(loop->msgs[i].data, data, length);
     loop->msgs[i].datalen = length;
 }
-
-//=============================================================================
 
 void NET_SendPacket(netsrc_t sock, int length, const void* data, netadr_t to)
 {

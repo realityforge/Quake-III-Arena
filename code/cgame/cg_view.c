@@ -171,8 +171,6 @@ static void CG_AddTestModel()
     trap_R_AddRefEntityToScene(&cg.testModelEntity);
 }
 
-//============================================================================
-
 /*
 =================
 CG_CalcVrect
@@ -208,8 +206,6 @@ static void CG_CalcVrect()
     cg.refdef.x = (cgs.glconfig.vidWidth - cg.refdef.width) / 2;
     cg.refdef.y = (cgs.glconfig.vidHeight - cg.refdef.height) / 2;
 }
-
-//==============================================================================
 
 #define FOCUS_DISTANCE 512
 static void CG_OffsetThirdPersonView()
@@ -368,8 +364,6 @@ static void CG_OffsetFirstPersonView()
         delta = -delta;
     angles[ROLL] += delta;
 
-    //===================================
-
     // add view height
     origin[2] += cg.predictedPlayerState.viewheight;
 
@@ -405,8 +399,6 @@ static void CG_OffsetFirstPersonView()
     // add kick offset
     VectorAdd(origin, cg.kick_origin, origin);
 }
-
-//======================================================================
 
 void CG_ZoomDown_f()
 {
@@ -662,8 +654,6 @@ static void CG_PlayBufferedSounds()
         }
     }
 }
-
-//=========================================================================
 
 /*
 =================

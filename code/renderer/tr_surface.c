@@ -36,8 +36,6 @@ It is safe to actually issue drawing commands here if you don't want to
 use the shader system.
 */
 
-//============================================================================
-
 void RB_CheckOverflow(int verts, int indexes)
 {
     if (tess.numVertexes + verts < SHADER_MAX_VERTEXES
@@ -289,8 +287,6 @@ static void RB_SurfaceBeam()
     }
     qglEnd();
 }
-
-//================================================================================
 
 static void DoRailCore(const vec3_t start, const vec3_t end, const vec3_t up, float len, float spanWidth)
 {
@@ -903,8 +899,6 @@ static void RB_SurfaceAxis()
     qglEnd();
     qglLineWidth(1);
 }
-
-//===========================================================================
 
 /*
 ====================

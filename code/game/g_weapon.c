@@ -622,8 +622,6 @@ static void weapon_proxlauncher_fire(gentity_t* ent)
 
 #endif
 
-//======================================================================
-
 bool LogAccuracyHit(gentity_t* target, gentity_t* attacker)
 {
     if (!target->takedamage) {

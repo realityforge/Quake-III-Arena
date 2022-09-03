@@ -293,8 +293,6 @@ void CL_ParseSnapshot(msg_t* msg)
     cl.newSnapshots = true;
 }
 
-//=====================================================================
-
 int cl_connectedToPureServer;
 
 /*
@@ -438,8 +436,6 @@ void CL_ParseGamestate(msg_t* msg)
     // make sure the game starts
     Cvar_Set("cl_paused", "0");
 }
-
-//=====================================================================
 
 /*
 =====================

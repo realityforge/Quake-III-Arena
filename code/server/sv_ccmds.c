@@ -127,8 +127,6 @@ static client_t* SV_GetPlayerByNum()
     return NULL;
 }
 
-//=========================================================
-
 /*
 ==================
 SV_Map_f
@@ -318,8 +316,6 @@ static void SV_MapRestart_f()
     VM_Call(gvm, GAME_RUN_FRAME, svs.time);
     svs.time += 100;
 }
-
-//===============================================================
 
 /*
 ==================
@@ -578,8 +574,6 @@ static void SV_KillServer_f()
 {
     SV_Shutdown("killserver");
 }
-
-//===========================================================
 
 void SV_AddOperatorCommands()
 {

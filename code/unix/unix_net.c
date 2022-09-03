@@ -59,8 +59,6 @@ static uint8_t localIP[MAX_IPS][4];
 int NET_Socket(char* net_interface, int port);
 char* NET_ErrorString(void);
 
-//=============================================================================
-
 void NetadrToSockadr(netadr_t* a, struct sockaddr_in* s)
 {
     memset(s, 0, sizeof(*s));
@@ -145,8 +143,6 @@ bool Sys_StringToAdr(const char* s, netadr_t* a)
     return true;
 }
 
-//=============================================================================
-
 bool Sys_GetPacket(netadr_t* net_from, msg_t* net_message)
 {
     int ret;
@@ -193,8 +189,6 @@ bool Sys_GetPacket(netadr_t* net_from, msg_t* net_message)
     return false;
 }
 
-//=============================================================================
-
 void Sys_SendPacket(int length, const void* data, netadr_t to)
 {
     int ret;
@@ -224,8 +218,6 @@ void Sys_SendPacket(int length, const void* data, netadr_t to)
                    NET_AdrToString(to));
     }
 }
-
-//=============================================================================
 
 /*
 ==================

@@ -206,8 +206,6 @@ void R_ImageList_f()
     ri.Printf(PRINT_ALL, " %i total images\n\n", tr.numImages);
 }
 
-//=======================================================================
-
 /*
 ================
 ResampleTexture
@@ -1348,8 +1346,6 @@ void SaveJPG(char* filename, int quality, int image_width, int image_height, uns
 
     /* And we're done! */
 }
-
-//===================================================================
 
 /*
 =================

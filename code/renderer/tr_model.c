@@ -359,8 +359,6 @@ void RE_BeginRegistration(glconfig_t* glconfigOut)
     RE_StretchPic(0, 0, 0, 0, 0, 0, 1, 1, 0);
 }
 
-//=============================================================================
-
 void R_ModelInit()
 {
     model_t* mod;
@@ -399,8 +397,6 @@ void R_Modellist_f()
 	}
 #endif
 }
-
-//=============================================================================
 
 static md3Tag_t* R_GetTag(md3Header_t* mod, int frame, const char* tagName)
 {

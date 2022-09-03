@@ -307,9 +307,7 @@ static define_t* PC_FindHashedDefine(define_t** definehash, char* name)
     }
     return NULL;
 }
-//============================================================================
 // Returns the number of the parm if no parm found with the given name -1 is returned
-//============================================================================
 static int PC_FindDefineParm(define_t* define, char* name)
 {
     token_t* p;
@@ -597,11 +595,8 @@ static int PC_Directive_include(source_t* source)
     PC_PushScript(source, script);
     return true;
 }
-//============================================================================
 // reads a token from the current line, continues reading on the next
 // line only if a backslash '\' is encountered.
-//
-//============================================================================
 int PC_ReadLine(source_t* source, token_t* token)
 {
     int crossline;
@@ -814,9 +809,7 @@ static define_t* PC_DefineFromString(const char* string)
         PC_FreeDefine(def);
     return NULL;
 }
-//============================================================================
 // add a globals define that will be added to all opened sources
-//============================================================================
 int PC_AddGlobalDefine(const char* string)
 {
     define_t* define;
@@ -828,9 +821,7 @@ int PC_AddGlobalDefine(const char* string)
     globaldefines = define;
     return true;
 }
-//============================================================================
 // remove all globals defines
-//============================================================================
 void PC_RemoveAllGlobalDefines()
 {
     define_t* define;

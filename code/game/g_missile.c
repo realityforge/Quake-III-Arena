@@ -463,8 +463,6 @@ void G_RunMissile(gentity_t* ent)
     G_RunThink(ent);
 }
 
-//=============================================================================
-
 gentity_t* fire_plasma(gentity_t* self, vec3_t start, vec3_t dir)
 {
     gentity_t* bolt;
@@ -498,8 +496,6 @@ gentity_t* fire_plasma(gentity_t* self, vec3_t start, vec3_t dir)
 
     return bolt;
 }
-
-//=============================================================================
 
 gentity_t* fire_grenade(gentity_t* self, vec3_t start, vec3_t dir)
 {
@@ -536,8 +532,6 @@ gentity_t* fire_grenade(gentity_t* self, vec3_t start, vec3_t dir)
     return bolt;
 }
 
-//=============================================================================
-
 gentity_t* fire_bfg(gentity_t* self, vec3_t start, vec3_t dir)
 {
     gentity_t* bolt;
@@ -570,8 +564,6 @@ gentity_t* fire_bfg(gentity_t* self, vec3_t start, vec3_t dir)
 
     return bolt;
 }
-
-//=============================================================================
 
 gentity_t* fire_rocket(gentity_t* self, vec3_t start, vec3_t dir)
 {

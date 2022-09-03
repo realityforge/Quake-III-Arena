@@ -399,8 +399,6 @@ static bool PM_CheckWaterJump()
     return true;
 }
 
-//============================================================================
-
 /*
 ===================
 PM_WaterJumpMove
@@ -791,8 +789,6 @@ static void PM_NoclipMove()
     VectorMA(pm->ps->origin, pml.frametime, pm->ps->velocity, pm->ps->origin);
 }
 
-//============================================================================
-
 /*
 ================
 PM_FootstepForSurface
@@ -1179,8 +1175,6 @@ static void PM_CheckDuck()
         pm->ps->viewheight = DEFAULT_VIEWHEIGHT;
     }
 }
-
-//===================================================================
 
 static void PM_Footsteps()
 {

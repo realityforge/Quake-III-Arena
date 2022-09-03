@@ -133,8 +133,6 @@ extern void(APIENTRY* qglClientActiveTextureARB)(GLenum texture);
 extern void(APIENTRY* qglLockArraysEXT)(GLint, GLint);
 extern void(APIENTRY* qglUnlockArraysEXT)(void);
 
-//===========================================================================
-
 // non-windows systems will just redefine qgl* to gl*
 #if !defined(_WIN32) && !(defined(__APPLE__) || defined(__APPLE_CC__)) && !defined(__linux__)
 

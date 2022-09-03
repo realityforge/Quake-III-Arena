@@ -183,8 +183,6 @@ loop:
     /*		qsort(pn - r, r / es, es, cmp);*/
 }
 
-//==================================================================================
-
 // this file is excluded from release builds because of intrinsics
 
 #if defined(Q3_VM)
@@ -562,8 +560,6 @@ double fabs(double x)
 {
     return x < 0 ? -x : x;
 }
-
-//=========================================================
 
 #define ALT 0x00000001 /* alternate form */
 #define HEXPREFIX 0x00000002 /* add 0x or 0X prefix */

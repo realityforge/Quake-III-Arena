@@ -1299,8 +1299,6 @@ static void CG_DrawLowerLeft()
 }
 #endif
 
-//===========================================================================================
-
 #ifndef TEAMARENA
 static void CG_DrawTeamInfo()
 {
@@ -1412,21 +1410,6 @@ static void CG_DrawReward()
     }
 
     trap_R_SetColor(color);
-
-    /*
-    count = cg.rewardCount[0]/10;				// number of big rewards to draw
-
-    if (count) {
-            y = 4;
-            x = 320 - count * ICON_SIZE;
-            for ( i = 0 ; i < count ; i++ ) {
-                    CG_DrawPic( x, y, (ICON_SIZE*2)-4, (ICON_SIZE*2)-4, cg.rewardShader[0] );
-                    x += (ICON_SIZE*2);
-            }
-    }
-
-    count = cg.rewardCount[0] - count*10;		// number of small rewards to draw
-    */
 
     if (cg.rewardCount[0] >= 10) {
         y = 56;
@@ -1867,8 +1850,6 @@ static void CG_DrawCrosshairNames()
     trap_R_SetColor(NULL);
 }
 
-//==============================================================================
-
 static void CG_DrawSpectator()
 {
     CG_DrawBigString(320 - 9 * 8, 440, "SPECTATOR", 1.0F);
@@ -2253,13 +2234,7 @@ static void CG_DrawWarmup()
 #endif
 }
 
-//==================================================================================
 #ifdef TEAMARENA
-/*
-=================
-CG_DrawTimedMenus
-=================
-*/
 static void CG_DrawTimedMenus()
 {
     if (cg.voiceTime) {
@@ -2272,11 +2247,6 @@ static void CG_DrawTimedMenus()
     }
 }
 #endif
-/*
-=================
-CG_Draw2D
-=================
-*/
 static void CG_Draw2D()
 {
 #ifdef TEAMARENA
@@ -2298,11 +2268,6 @@ static void CG_Draw2D()
         return;
     }
 
-    /*
-            if (cg.cameraMode) {
-                    return;
-            }
-    */
     if (cg.snap->ps.persistent[PERS_TEAM] == TEAM_SPECTATOR) {
         CG_DrawSpectator();
         CG_DrawCrosshair();

@@ -98,8 +98,6 @@ typedef struct image_s {
     struct image_s* next;
 } image_t;
 
-//===============================================================================
-
 typedef enum {
     SS_BAD,
     SS_PORTAL, // mirrors, portals, viewscreens
@@ -436,8 +434,6 @@ typedef struct {
 
 } trRefdef_t;
 
-//=================================================================================
-
 // skins allow models to be retextured without modifying the model file
 typedef struct {
     char name[MAX_QPATH];
@@ -686,8 +682,6 @@ typedef struct {
     char* entityParsePoint;
 } world_t;
 
-//======================================================================
-
 typedef enum {
     MOD_BAD,
     MOD_BRUSH,
@@ -716,7 +710,6 @@ void R_ModelBounds(qhandle_t handle, vec3_t mins, vec3_t maxs);
 
 void R_Modellist_f(void);
 
-//====================================================
 extern refimport_t ri;
 
 #define MAX_DRAWIMAGES 2048
@@ -1019,8 +1012,6 @@ extern cvar_t* r_debugSort;
 
 extern cvar_t* r_printShaders;
 extern cvar_t* r_saveFontData;
-
-//====================================================================
 
 float R_NoiseGet4f(float x, float y, float z, float t);
 void R_NoiseInit(void);

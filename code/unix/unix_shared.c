@@ -30,8 +30,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../qcommon/q_shared.h"
 #include "../qcommon/qcommon.h"
 
-//=============================================================================
-
 // Used to determine CD Path
 static char cdPath[MAX_OSPATH];
 
@@ -142,8 +140,6 @@ char* strlwr(char* s)
     }
     return s;
 }
-
-//============================================
 
 #define MAX_FOUND_FILES 0x1000
 
@@ -361,8 +357,6 @@ char* Sys_DefaultHomePath(void)
     }
     return ""; // assume current dir
 }
-
-//============================================
 
 int Sys_GetProcessorId(void)
 {

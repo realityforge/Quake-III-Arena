@@ -500,8 +500,6 @@ void G_ShutdownGame(int restart)
     }
 }
 
-//===================================================================
-
 void QDECL Com_Error(UNUSED int level, const char* error, ...)
 {
     va_list argptr;

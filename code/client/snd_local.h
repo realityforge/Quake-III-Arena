@@ -125,8 +125,6 @@ void SNDDMA_BeginPainting(void);
 
 void SNDDMA_Submit(void);
 
-//====================================================================
-
 #define MAX_CHANNELS 96
 
 extern channel_t s_channels[MAX_CHANNELS];

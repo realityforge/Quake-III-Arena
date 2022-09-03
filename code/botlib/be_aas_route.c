@@ -58,10 +58,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 */
 
-//===========================================================================
 // returns the number of the area in the cluster
 // assumes the given area is in the given cluster or a portal of the cluster
-//===========================================================================
 static inline int AAS_ClusterAreaNum(int cluster, int areanum)
 {
     int side, areacluster;
@@ -849,11 +847,7 @@ void AAS_FreeRoutingCaches()
         FreeMemory(aasworld.areacontentstravelflags);
     aasworld.areacontentstravelflags = NULL;
 }
-//===========================================================================
 // update the given routing cache
-//
-// Parameter:			areacache		: routing cache to update
-//===========================================================================
 static void AAS_UpdateAreaRoutingCache(aas_routingcache_t* areacache)
 {
     int i, nextareanum, cluster, badtravelflags, clusterareanum, linknum;
@@ -1249,9 +1243,7 @@ static int AAS_AreaReachabilityToGoalArea(int areanum, vec3_t origin, int goalar
     int reachnum;
     return AAS_AreaRouteToGoalArea(areanum, origin, goalareanum, travelflags, &traveltime, &reachnum) ? reachnum : 0;
 }
-//===========================================================================
 // predict the route and stop on one of the stop events
-//===========================================================================
 int AAS_PredictRoute(struct aas_predictroute_s* route, int areanum, vec3_t origin,
                      int goalareanum, int travelflags, int maxareas, int maxtime,
                      int stopevent, int stopcontents, int stoptfl, int stopareanum)

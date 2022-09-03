@@ -305,8 +305,6 @@ void Sys_FreeFileList(char** list)
     Z_Free(list);
 }
 
-//========================================================
-
 #ifndef DEDICATED
 char* Sys_GetClipboardData(void)
 {
@@ -547,8 +545,6 @@ sysEvent_t Sys_GetEvent(void)
     return ev;
 }
 
-//================================================================
-
 #ifndef DEDICATED
 /*
 =================
@@ -685,8 +681,6 @@ void Sys_Init(void)
 
     IN_Init(); // FIXME: not in dedicated?
 }
-
-//=======================================================================
 
 int totalMsec, countMsec;
 

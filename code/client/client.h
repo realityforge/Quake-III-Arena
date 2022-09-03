@@ -295,8 +295,6 @@ typedef struct {
 
 extern clientStatic_t cls;
 
-//=============================================================================
-
 extern vm_t* cgvm; // interface to cgame dll or vm
 extern vm_t* uivm; // interface to ui dll or vm
 extern refexport_t re; // interface to refresh .dll
@@ -340,8 +338,6 @@ extern cvar_t* cl_activeAction;
 extern cvar_t* cl_allowDownload;
 extern cvar_t* cl_conXOffset;
 extern cvar_t* cl_inGameVideo;
-
-//=================================================
 
 //
 // cl_main
@@ -405,8 +401,6 @@ extern int cl_connectedToPureServer;
 
 void CL_SystemInfoChanged(void);
 void CL_ParseServerMessage(msg_t* msg);
-
-//====================================================================
 
 void CL_ServerInfoPacket(netadr_t from, msg_t* msg);
 void CL_LocalServers_f(void);

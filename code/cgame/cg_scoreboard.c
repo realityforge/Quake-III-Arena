@@ -396,8 +396,6 @@ bool CG_DrawOldScoreboard()
     return true;
 }
 
-//================================================================================
-
 static void CG_CenterGiantLine(float y, const char* string)
 {
     float x;

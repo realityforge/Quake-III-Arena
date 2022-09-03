@@ -1979,8 +1979,6 @@ int FS_GetModList(char* listbuf, int bufsize)
     return nMods;
 }
 
-//============================================================================
-
 static void FS_Dir_f()
 {
     char* path;
@@ -2144,8 +2142,6 @@ static void FS_Path_f()
         }
     }
 }
-
-//===========================================================================
 
 static int QDECL paksort(const void* a, const void* b)
 {

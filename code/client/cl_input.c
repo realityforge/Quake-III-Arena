@@ -253,8 +253,6 @@ void IN_CenterView(void)
     cl.viewangles[PITCH] = -SHORT2ANGLE(cl.snap.ps.delta_angles[PITCH]);
 }
 
-//==========================================================================
-
 cvar_t* cl_upspeed;
 cvar_t* cl_forwardspeed;
 cvar_t* cl_sidespeed;

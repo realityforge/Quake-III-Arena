@@ -27,8 +27,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../game/g_public.h"
 #include "../game/bg_public.h"
 
-//=============================================================================
-
 #define PERS_SCORE 0 // !!! MUST NOT CHANGE, SERVER AND
                      // GAME BOTH REFERENCE !!!
 
@@ -162,8 +160,6 @@ typedef struct client_s {
     netchan_buffer_t** netchan_end_queue;
 } client_t;
 
-//=============================================================================
-
 // MAX_CHALLENGES is made large to prevent a denial
 // of service attack that could cycle all of them
 // out before legitimate users connected
@@ -197,8 +193,6 @@ typedef struct {
     netadr_t redirectAddress; // for rcon return messages
 } serverStatic_t;
 
-//=============================================================================
-
 extern serverStatic_t svs; // persistent server info across maps
 extern server_t sv; // cleared each map
 extern vm_t* gvm; // game virtual machine
@@ -229,8 +223,6 @@ extern cvar_t* sv_gametype;
 extern cvar_t* sv_pure;
 extern cvar_t* sv_floodProtect;
 extern cvar_t* sv_lanForceRate;
-
-//===========================================================
 
 //
 // sv_main.c
@@ -320,7 +312,6 @@ int SV_BotGetConsoleMessage(int client, char* buf, int size);
 int BotImport_DebugPolygonCreate(int color, int numPoints, vec3_t* points);
 void BotImport_DebugPolygonDelete(int id);
 
-//============================================================
 //
 // high level object sorting to reduce interaction tests
 //
