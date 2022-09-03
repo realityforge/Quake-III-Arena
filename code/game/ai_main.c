@@ -123,20 +123,15 @@ void BotAI_Trace(bsp_trace_t* bsptrace, vec3_t start, vec3_t mins, vec3_t maxs, 
     bsptrace->contents = 0;
 }
 
-int BotAI_GetClientState(int clientNum, playerState_t* state)
+bool BotAI_GetClientState(const int clientNum, playerState_t* state)
 {
-    gentity_t* ent;
-
-    ent = &g_entities[clientNum];
-    if (!ent->inuse) {
+    const gentity_t* ent = &g_entities[clientNum];
+    if (!ent->inuse || !ent->client) {
         return false;
+    } else {
+        memcpy(state, &ent->client->ps, sizeof(playerState_t));
+        return true;
     }
-    if (!ent->client) {
-        return false;
-    }
-
-    memcpy(state, &ent->client->ps, sizeof(playerState_t));
-    return true;
 }
 
 int BotAI_GetEntityState(int entityNum, entityState_t* state)

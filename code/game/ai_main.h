@@ -263,7 +263,7 @@ extern float floattime;
 void QDECL BotAI_Print(int type, const char* fmt, ...) PRINTF_LIKE_FUNCTION(2, 3);
 void QDECL BotAI_BotInitialChat(bot_state_t* bs, char* type, ...);
 void BotAI_Trace(bsp_trace_t* bsptrace, vec3_t start, vec3_t mins, vec3_t maxs, vec3_t end, int passent, int contentmask);
-int BotAI_GetClientState(int clientNum, playerState_t* state);
+bool BotAI_GetClientState(int clientNum, playerState_t* state);
 int BotAI_GetEntityState(int entityNum, entityState_t* state);
 int BotAI_GetSnapshotEntity(int clientNum, int sequence, entityState_t* state);
 int BotTeamLeader(bot_state_t* bs);
