@@ -229,6 +229,16 @@ cc_library(
 )
 
 cc_library(
+    name = "server_commands",
+    hdrs = ["server_commands.h"],
+    includes = ["."],
+    visibility = [
+        "//code/cgame:__pkg__",
+        "//code/game:__pkg__",
+    ],
+)
+
+cc_library(
     name = "qfiles",
     hdrs = ["qfiles.h"],
     visibility = ["//code/renderer:__pkg__"],
