@@ -632,8 +632,6 @@ void CG_AdjustPositionForMover(const vec3_t in, int moverNum, int fromTime, int 
 
     VectorSubtract(origin, oldOrigin, deltaOrigin);
     VectorAdd(in, deltaOrigin, out);
-
-    // FIXME: origin change when on a rotating object
 }
 
 static void CG_InterpolateEntityPosition(centity_t* cent)
