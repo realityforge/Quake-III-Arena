@@ -80,8 +80,9 @@ static int BotIsFirstInRankings(bot_state_t* bs)
         // skip spectators
         if (atoi(Info_ValueForKey(buf, "t")) == TEAM_SPECTATOR)
             continue;
-        if (BotAI_GetClientState(i, &ps) && score < ps.persistent[PERS_SCORE])
+        if (BotAI_GetClientState(i, &ps) && score < ps.persistent[PERS_SCORE]) {
             return false;
+        }
     }
     return true;
 }
@@ -101,8 +102,9 @@ static int BotIsLastInRankings(bot_state_t* bs)
         // skip spectators
         if (atoi(Info_ValueForKey(buf, "t")) == TEAM_SPECTATOR)
             continue;
-        if (BotAI_GetClientState(i, &ps) && score > ps.persistent[PERS_SCORE])
+        if (BotAI_GetClientState(i, &ps) && score > ps.persistent[PERS_SCORE]) {
             return false;
+        }
     }
     return true;
 }
