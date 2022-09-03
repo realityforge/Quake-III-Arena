@@ -198,7 +198,9 @@ static void BotVoiceChat_Patrol(bot_state_t* bs, int client, UNUSED int mode)
     bs->lastgoal_ltgtype = 0;
     BotAI_BotInitialChat(bs, "dismissed", NULL);
     trap_BotEnterChat(bs->cs, client, CHAT_TELL);
+#ifdef TEAMARENA
     BotVoiceChatOnly(bs, -1, VOICECHAT_ONPATROL);
+#endif
     BotSetTeamStatus(bs);
 #ifdef DEBUG
     BotPrintTeamGoal(bs);
@@ -368,7 +370,9 @@ static void BotVoiceChat_WhoIsLeader(bot_state_t* bs, UNUSED int client, UNUSED 
     if (!Q_stricmp(netname, bs->teamleader)) {
         BotAI_BotInitialChat(bs, "iamteamleader", NULL);
         trap_BotEnterChat(bs->cs, 0, CHAT_TEAM);
+#ifdef TEAMARENA
         BotVoiceChatOnly(bs, -1, VOICECHAT_STARTLEADER);
+#endif
     }
 }
 
@@ -384,7 +388,9 @@ static void BotVoiceChat_WantOnDefense(bot_state_t* bs, int client, UNUSED int m
     EasyClientName(client, netname, sizeof(netname));
     BotAI_BotInitialChat(bs, "keepinmind", netname, NULL);
     trap_BotEnterChat(bs->cs, client, CHAT_TELL);
+#ifdef TEAMARENA
     BotVoiceChatOnly(bs, client, VOICECHAT_YES);
+#endif
     trap_EA_Action(bs->client, ACTION_AFFIRMATIVE);
 }
 
@@ -400,7 +406,9 @@ static void BotVoiceChat_WantOnOffense(bot_state_t* bs, int client, UNUSED int m
     EasyClientName(client, netname, sizeof(netname));
     BotAI_BotInitialChat(bs, "keepinmind", netname, NULL);
     trap_BotEnterChat(bs->cs, client, CHAT_TELL);
+#ifdef TEAMARENA
     BotVoiceChatOnly(bs, client, VOICECHAT_YES);
+#endif
     trap_EA_Action(bs->client, ACTION_AFFIRMATIVE);
 }
 
