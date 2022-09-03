@@ -222,6 +222,7 @@ cc_library(
         ":baseq3_cg_weapons",
 
         # The following dependencies are only required when compiling to wasm
+        # In the future we should only add them to wasm target
         "//code/game:bg-baseq3",
         "//code/game:bg_misc-client-baseq3",
         "//code/qcommon:shared",
@@ -445,6 +446,7 @@ cc_library(
         ":teamarena_cg_weapons",
 
         # The following dependencies are only required when compiling to wasm
+        # In the future we should only add them to wasm target
         "//code/game:bg-teamarena",
         "//code/game:bg_misc-client-teamarena",
         "//code/qcommon:shared",
