@@ -876,7 +876,7 @@ int BotChat_Random(bot_state_t* bs)
     if (BotVisibleEnemies(bs))
         return false;
     if (bs->lastkilledplayer == bs->client) {
-        strcpy(name, BotRandomOpponentName(bs));
+        strncpyz(name, BotRandomOpponentName(bs), sizeof(name));
     } else {
         EasyClientName(bs->lastkilledplayer, name, sizeof(name));
     }
