@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
+// name
 #define CHARACTERISTIC_NAME 0 // string
 // gender of the bot
 #define CHARACTERISTIC_GENDER 1 // string ("male", "female", "it")
