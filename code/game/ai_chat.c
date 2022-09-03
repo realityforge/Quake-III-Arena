@@ -907,7 +907,6 @@ float BotChatTime(bot_state_t* bs)
 
 void BotChatTest(bot_state_t* bs)
 {
-
     char name[32];
     char* weap;
     int num, i;
