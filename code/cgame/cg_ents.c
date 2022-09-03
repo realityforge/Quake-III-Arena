@@ -611,7 +611,7 @@ void CG_AdjustPositionForMover(const vec3_t in, int moverNum, int fromTime, int 
 {
     centity_t* cent;
     vec3_t oldOrigin, origin, deltaOrigin;
-    vec3_t oldAngles, angles, deltaAngles;
+    vec3_t oldAngles, angles;
 
     if (moverNum <= 0 || moverNum >= ENTITYNUM_MAX_NORMAL) {
         VectorCopy(in, out);
@@ -631,8 +631,6 @@ void CG_AdjustPositionForMover(const vec3_t in, int moverNum, int fromTime, int 
     BG_EvaluateTrajectory(&cent->currentState.apos, toTime, angles);
 
     VectorSubtract(origin, oldOrigin, deltaOrigin);
-    VectorSubtract(angles, oldAngles, deltaAngles);
-
     VectorAdd(in, deltaOrigin, out);
 
     // FIXME: origin change when on a rotating object
