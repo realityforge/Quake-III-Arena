@@ -369,7 +369,6 @@ static void CG_Missile(centity_t* cent)
     refEntity_t ent;
     entityState_t* s1;
     const weaponInfo_t* weapon;
-    //	int	col;
 
     s1 = &cent->currentState;
     if (s1->weapon > WP_NUM_WEAPONS) {
