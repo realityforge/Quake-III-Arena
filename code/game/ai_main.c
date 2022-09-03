@@ -1348,15 +1348,12 @@ int BotAISetup(int restart)
     return true;
 }
 
-int BotAIShutdown(int restart)
+void BotAIShutdown(const int restart)
 {
-
-    int i;
-
     // if the game is restarted for a tournament
     if (restart) {
         // shutdown all the bots in the botlib
-        for (i = 0; i < MAX_CLIENTS; i++) {
+        for (int i = 0; i < MAX_CLIENTS; i++) {
             if (botstates[i] && botstates[i]->inuse) {
                 BotAIShutdownClient(botstates[i]->client, restart);
             }
@@ -1365,5 +1362,4 @@ int BotAIShutdown(int restart)
     } else {
         trap_BotLibShutdown();
     }
-    return true;
 }

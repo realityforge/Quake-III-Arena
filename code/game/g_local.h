@@ -672,7 +672,7 @@ typedef struct bot_settings_s {
 } bot_settings_t;
 
 int BotAISetup(int restart);
-int BotAIShutdown(int restart);
+void BotAIShutdown(int restart);
 int BotAILoadMap(int restart);
 bool BotAISetupClient(int client, struct bot_settings_s* settings, bool restart);
 bool BotAIShutdownClient(int client, bool restart);
