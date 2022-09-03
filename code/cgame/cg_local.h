@@ -109,8 +109,6 @@ typedef enum {
     IMPACTSOUND_FLESH
 } impactSound_t;
 
-//=================================================
-
 // player entities need to track more information
 // than any other type of entity.
 
@@ -153,8 +151,6 @@ typedef struct {
     bool barrelSpinning;
 } playerEntity_t;
 
-//=================================================
-
 // centity_t have a direct correspondence with gentity_t in the game, but
 // only the entityState_t is directly communicated to the cgame
 typedef struct centity_s {
@@ -185,8 +181,6 @@ typedef struct centity_s {
     vec3_t lerpOrigin;
     vec3_t lerpAngles;
 } centity_t;
-
-//======================================================================
 
 // local entities are created as a result of events or predicted actions,
 // and live independently from all server transmitted entities
@@ -266,8 +260,6 @@ typedef struct localEntity_s {
 
     refEntity_t refEntity;
 } localEntity_t;
-
-//======================================================================
 
 typedef struct {
     int client;
@@ -419,8 +411,6 @@ typedef struct {
 
 #define MAX_REWARDSTACK 10
 #define MAX_SOUNDBUFFER 20
-
-//======================================================================
 
 // all cg.stepTime, cg.duckTime, cg.landTime, etc are set to cg.time when the action
 // occurs, and they will have visible effects for #define STEP_TIME or whatever msec after
@@ -1049,8 +1039,6 @@ typedef struct {
 
 } cgs_t;
 
-//==============================================================================
-
 extern cgs_t cgs;
 extern cg_t cg;
 extern centity_t cg_entities[MAX_GENTITIES];
@@ -1426,8 +1414,6 @@ void CG_PlayBufferedVoiceChats(void);
 //
 void CG_Respawn(void);
 void CG_TransitionPlayerState(playerState_t* ps, playerState_t* ops);
-
-//===============================================
 
 //
 // system traps

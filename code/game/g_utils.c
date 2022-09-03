@@ -118,8 +118,6 @@ int G_SoundIndex(char* name)
     return G_FindConfigstringIndex(name, CS_SOUNDS, MAX_SOUNDS, true);
 }
 
-//=====================================================================
-
 /*
 ================
 G_TeamCommand
@@ -523,8 +521,6 @@ void G_KillBox(gentity_t* ent)
     }
 }
 
-//==============================================================================
-
 /*
 ===============
 G_AddPredictableEvent
@@ -581,8 +577,6 @@ void G_Sound(gentity_t* ent, int channel, int soundIndex)
     te = G_TempEntity(ent->r.currentOrigin, EV_GENERAL_SOUND);
     te->s.eventParm = soundIndex;
 }
-
-//==============================================================================
 
 /*
 ================

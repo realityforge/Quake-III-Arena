@@ -1013,8 +1013,6 @@ void Info_SetValueForKey_Big(char* s, const char* key, const char* value)
     strcat(s, newi);
 }
 
-//====================================================================
-
 static bool Com_CharIsOneOfCharset(char c, char* set)
 {
     int i;

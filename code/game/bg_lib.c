@@ -175,8 +175,6 @@ loop:
     /*		qsort(pn - r, r / es, es, cmp);*/
 }
 
-//==================================================================================
-
 size_t strlen(const char* string)
 {
     const char* s;
@@ -854,8 +852,6 @@ double fabs(double x)
 {
     return x < 0 ? -x : x;
 }
-
-//=========================================================
 
 /*
  * New implementation by Patrick Powell and others for vsnprintf.

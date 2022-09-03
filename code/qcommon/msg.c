@@ -275,8 +275,6 @@ int MSG_ReadBits(msg_t* msg, int bits)
     return value;
 }
 
-//================================================================================
-
 //
 // writing functions
 //
@@ -1584,40 +1582,3 @@ void MSG_initHuffman()
         }
     }
 }
-
-/*
-void MSG_NUinitHuffman() {
-        uint8_t	*data;
-        int		size, i, ch;
-        int		array[256];
-
-        msgInit = true;
-
-        Huff_Init(&msgHuff);
-        // load it in
-        size = FS_ReadFile( "netchan/netchan.bin", (void **)&data );
-
-        for(i=0;i<256;i++) {
-                array[i] = 0;
-        }
-        for(i=0;i<size;i++) {
-                ch = data[i];
-                Huff_addRef(&msgHuff.compressor,	ch);			// Do update
-                Huff_addRef(&msgHuff.decompressor,	ch);			// Do update
-                array[ch]++;
-        }
-        Com_Printf("msg_hData {\n");
-        for(i=0;i<256;i++) {
-                if (array[i] == 0) {
-                        Huff_addRef(&msgHuff.compressor,	i);			// Do update
-                        Huff_addRef(&msgHuff.decompressor,	i);			// Do update
-                }
-                Com_Printf("%d,			// %d\n", array[i], i);
-        }
-        Com_Printf("};\n");
-        FS_FreeFile( data );
-        Cbuf_AddText( "condump dump.txt\n" );
-}
-*/
-
-//===========================================================================

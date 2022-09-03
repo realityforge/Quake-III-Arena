@@ -104,8 +104,6 @@ char com_errorMessage[MAXPRINTMSG];
 void Com_WriteConfig_f(void);
 void CIN_CloseAllVideos(void);
 
-//============================================================================
-
 static char* rd_buffer;
 static int rd_buffersize;
 static void (*rd_flush)(char* buffer);
@@ -502,8 +500,6 @@ bool Com_AddStartupCommands()
 
     return added;
 }
-
-//============================================================================
 
 void Info_Print(const char* s)
 {
@@ -2046,8 +2042,6 @@ int Com_Milliseconds()
     return ev.evTime;
 }
 
-//============================================================================
-
 /*
 =============
 Com_Error_f
@@ -2373,8 +2367,6 @@ void Com_Init(char* commandLine)
 
     Com_Printf("--- Common Initialization Complete ---\n");
 }
-
-//==================================================================
 
 void Com_WriteConfigToFile(const char* filename)
 {

@@ -1374,8 +1374,6 @@ static void CG_PlayerAngles(centity_t* cent, vec3_t legs[3], vec3_t torso[3], ve
     AnglesToAxis(headAngles, head);
 }
 
-//==========================================================================
-
 static void CG_HasteTrail(centity_t* cent)
 {
     localEntity_t* smoke;
@@ -2368,8 +2366,6 @@ void CG_Player(centity_t* cent)
     // add powerups floating behind the player
     CG_PlayerPowerups(cent, &torso);
 }
-
-//=====================================================================
 
 /*
 ===============

@@ -268,9 +268,7 @@ static itemconfig_t* LoadItemConfig(char* filename)
     botimport.Print(PRT_MESSAGE, "loaded %s\n", path);
     return ic;
 }
-//===========================================================================
 // index to find the weight function of an iteminfo
-//===========================================================================
 static int* ItemWeightIndex(weightconfig_t* iwc, itemconfig_t* ic)
 {
     int *index, i;
@@ -942,9 +940,7 @@ int BotGetSecondGoal(int goalstate, bot_goal_t* goal)
     memcpy(goal, &gs->goalstack[gs->goalstacktop - 1], sizeof(bot_goal_t));
     return true;
 }
-//===========================================================================
 // pops a new long term goal on the goal stack in the goalstate
-//===========================================================================
 int BotChooseLTGItem(int goalstate, vec3_t origin, int* inventory, int travelflags)
 {
     int areanum, t, weightnum;

@@ -544,8 +544,6 @@ int VM_CallInterpreted(vm_t* vm, int* args)
                 goto nextInstruction;
             }
 
-            //===================================================================
-
         case OP_NEGI:
             opStack[opStackOfs] = -r0;
             goto nextInstruction;

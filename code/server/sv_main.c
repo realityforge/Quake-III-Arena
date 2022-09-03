@@ -760,8 +760,6 @@ static void SV_ConnectionlessPacket(netadr_t from, msg_t* msg)
     }
 }
 
-//============================================================================
-
 void SV_PacketEvent(netadr_t from, msg_t* msg)
 {
     int i;

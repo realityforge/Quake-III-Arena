@@ -42,8 +42,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define QDECL
 #define QCALL
 
-//================================================================= WIN64/32 ===
-
 #if defined(_WIN64) || defined(__WIN64__)
 
 #undef idx64
@@ -75,8 +73,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #endif
 
-//============================================================== MAC OS X ===
-
 #if defined(__APPLE__) || defined(__APPLE_CC__)
 
 #define OS_STRING "macosx"
@@ -101,8 +97,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define DLL_EXT ".so"
 
 #endif
-
-//================================================================= LINUX ===
 
 #if defined(__linux__) || defined(__GNU__)
 
@@ -138,8 +132,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #endif
 
-//================================================================== Q3VM ===
-
 #ifdef Q3_VM
 
 #define OS_STRING "q3vm"
@@ -150,8 +142,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define DLL_EXT ".wasm"
 
 #endif
-
-//===========================================================================
 
 // catch missing defines in above blocks
 #if !defined(OS_STRING)

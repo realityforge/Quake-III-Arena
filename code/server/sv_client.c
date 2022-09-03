@@ -1373,8 +1373,6 @@ static bool SV_ClientCommand(client_t* cl, msg_t* msg)
     return true; // continue procesing
 }
 
-//==================================================================================
-
 /*
 ==================
 SV_ClientThink

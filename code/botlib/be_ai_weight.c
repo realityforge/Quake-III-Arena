@@ -533,9 +533,7 @@ static int InterbreedFuzzySeparator_r(fuzzyseparator_t* fs1, fuzzyseparator_t* f
     }
     return true;
 }
-//===========================================================================
 // config1 and config2 are interbreeded and stored in configout
-//===========================================================================
 void InterbreedWeightConfigs(weightconfig_t* config1, weightconfig_t* config2,
                              weightconfig_t* configout)
 {

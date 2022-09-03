@@ -1754,11 +1754,9 @@ static bot_moveresult_t BotFinishTravel_FuncBobbing(bot_movestate_t* ms, aas_rea
     }
     return result;
 }
-//===========================================================================
 // 0  no valid grapple hook visible
 // 1  the grapple hook is still flying
 // 2  the grapple hooked into a wall
-//===========================================================================
 static int GrappleState(bot_movestate_t* ms)
 {
     int i;
@@ -2041,9 +2039,7 @@ static bot_moveresult_t BotFinishTravel_JumpPad(bot_movestate_t* ms, aas_reachab
     VectorCopy(hordir, result.movedir);
     return result;
 }
-//===========================================================================
 // time before the reachability times out
-//===========================================================================
 static int BotReachabilityTime(aas_reachability_t* reach)
 {
     switch (reach->traveltype & TRAVELTYPE_MASK) {

@@ -66,18 +66,14 @@ typedef struct bsp_s {
 // global bsp
 static bsp_t bspworld;
 
-//===========================================================================
 // traces axial boxes of any size through the world
-//===========================================================================
 bsp_trace_t AAS_Trace(vec3_t start, vec3_t mins, vec3_t maxs, vec3_t end, int passent, int contentmask)
 {
     bsp_trace_t bsptrace;
     botimport.Trace(&bsptrace, start, mins, maxs, end, passent, contentmask);
     return bsptrace;
 }
-//===========================================================================
 // returns the contents at the given point
-//===========================================================================
 int AAS_PointContents(vec3_t point)
 {
     return botimport.PointContents(point);
@@ -251,9 +247,7 @@ void AAS_DumpBSPData()
     bspworld.loaded = false;
     memset(&bspworld, 0, sizeof(bspworld));
 }
-//===========================================================================
 // load a bsp file
-//===========================================================================
 int AAS_LoadBSPFile()
 {
     AAS_DumpBSPData();

@@ -879,8 +879,6 @@ static void CM_TraceBoundingBoxThroughCapsule(traceWork_t* tw, clipHandle_t mode
     CM_TraceThroughLeaf(tw, &cmod->leaf);
 }
 
-//=========================================================================================
-
 /*
 ==================
 CM_TraceThroughTree
@@ -992,8 +990,6 @@ static void CM_TraceThroughTree(traceWork_t* tw, int num, float p1f, float p2f, 
 
     CM_TraceThroughTree(tw, node->children[side ^ 1], midf, p2f, mid, p2);
 }
-
-//======================================================================
 
 static void CM_Trace(trace_t* results, const vec3_t start, const vec3_t end, vec3_t mins, vec3_t maxs, clipHandle_t model, const vec3_t origin, int brushmask, int capsule, sphere_t* sphere)
 {

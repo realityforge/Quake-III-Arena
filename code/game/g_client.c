@@ -362,8 +362,6 @@ void CopyToBodyQue(gentity_t* ent)
     trap_LinkEntity(body);
 }
 
-//======================================================================
-
 void SetClientViewAngle(gentity_t* ent, vec3_t angle)
 {
     int i;

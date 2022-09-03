@@ -539,8 +539,6 @@ void R_ScreenShot_f()
     }
 }
 
-//============================================================================
-
 const void* RB_TakeVideoFrameCmd(const void* data)
 {
     const videoFrameCommand_t* cmd;

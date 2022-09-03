@@ -991,8 +991,6 @@ void CL_NextDemo(void)
     Cbuf_Execute();
 }
 
-//======================================================================
-
 void CL_ShutdownAll(bool shutdownRef)
 {
     if (CL_VideoRecording())
@@ -1675,8 +1673,6 @@ void CL_Clientinfo_f(void)
     Info_Print(Cvar_InfoString(CVAR_USERINFO));
     Com_Printf("--------------------------------------\n");
 }
-
-//====================================================================
 
 /*
 =================
@@ -2383,8 +2379,6 @@ bool CL_CheckPaused(void)
     return false;
 }
 
-//============================================================================
-
 void CL_CheckUserinfo(void)
 {
     // don't add reliable commands when not yet connected
@@ -2528,8 +2522,6 @@ void CL_Frame(int msec)
 
     cls.framecount++;
 }
-
-//============================================================================
 
 /*
 ================
@@ -2706,8 +2698,6 @@ void CL_InitRef(void)
     Cvar_Set("cl_paused", "0");
 }
 
-//===========================================================================================
-
 void CL_SetModel_f(void)
 {
     char* arg;
@@ -2722,8 +2712,6 @@ void CL_SetModel_f(void)
         Com_Printf("model is set to %s\n", name);
     }
 }
-
-//===========================================================================================
 
 /*
 ===============

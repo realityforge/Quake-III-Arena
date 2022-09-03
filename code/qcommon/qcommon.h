@@ -34,8 +34,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #endif
 #endif
 
-//============================================================================
-
 //
 // msg.c
 //
@@ -392,8 +390,6 @@ void Cbuf_Execute(void);
 // them through Cmd_ExecuteString.  Stops when the buffer is empty.
 // Normally called once per frame, but may be explicitly invoked.
 // Do not call inside a command function, or current args will be destroyed.
-
-//===========================================================================
 
 /*
 

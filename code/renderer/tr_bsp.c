@@ -487,8 +487,6 @@ static void R_LoadVisibility(lump_t* l)
     }
 }
 
-//===============================================================================
-
 static shader_t* ShaderForShaderNum(int shaderNum, int lightmapNum)
 {
     shader_t* shader;
@@ -1722,8 +1720,6 @@ static void R_LoadSubmodels(lump_t* l)
     }
 }
 
-//==================================================================
-
 static void R_SetParent(mnode_t* node, mnode_t* parent)
 {
     node->parent = parent;
@@ -1797,8 +1793,6 @@ static void R_LoadNodesAndLeafs(lump_t* nodeLump, lump_t* leafLump)
     // chain descendants
     R_SetParent(s_worldData.nodes, NULL);
 }
-
-//=============================================================================
 
 static void R_LoadShaders(lump_t* l)
 {

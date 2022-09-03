@@ -340,8 +340,6 @@ extern clientStatic_t cls;
 extern char cl_oldGame[MAX_QPATH];
 extern bool cl_oldGameSet;
 
-//=============================================================================
-
 extern vm_t* cgvm; // interface to cgame dll or vm
 extern vm_t* uivm; // interface to ui dll or vm
 extern refexport_t re; // interface to refresh .dll
@@ -427,8 +425,6 @@ extern cvar_t* cl_voip;
 #define VOIP_MAX_PACKET_SAMPLES (VOIP_MAX_FRAME_SAMPLES * VOIP_MAX_PACKET_FRAMES)
 #endif
 
-//=================================================
-
 //
 // cl_main
 //
@@ -496,8 +492,6 @@ void CL_Voip_f(void);
 
 void CL_SystemInfoChanged(void);
 void CL_ParseServerMessage(msg_t* msg);
-
-//====================================================================
 
 void CL_ServerInfoPacket(netadr_t from, msg_t* msg);
 void CL_LocalServers_f(void);

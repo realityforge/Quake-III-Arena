@@ -2583,8 +2583,6 @@ static shader_t* FinishShader()
     return GeneratePermanentShader();
 }
 
-//========================================================================================
-
 /*
 ====================
 FindShaderInShaderText

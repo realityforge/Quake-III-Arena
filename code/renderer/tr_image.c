@@ -278,8 +278,6 @@ void R_ImageList_f()
     ri.Printf(PRINT_ALL, " %i total images\n\n", tr.numImages);
 }
 
-//=======================================================================
-
 /*
 ================
 ResampleTexture

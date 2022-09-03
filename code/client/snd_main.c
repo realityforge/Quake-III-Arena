@@ -283,8 +283,6 @@ void S_MasterGain(float gain)
 }
 #endif
 
-//=============================================================================
-
 void S_Play_f(void)
 {
     int i;
@@ -338,8 +336,6 @@ void S_StopMusic_f(void)
 
     si.StopBackgroundTrack();
 }
-
-//=============================================================================
 
 void S_Init(void)
 {

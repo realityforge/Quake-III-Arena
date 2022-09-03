@@ -202,9 +202,7 @@ static bot_chatstate_t* BotChatStateFromHandle(int handle)
     }
     return botchatstates[handle];
 }
-//===========================================================================
 // initialize the heap with unused console messages
-//===========================================================================
 static void InitConsoleMessageHeap()
 {
     int i, max_messages;
@@ -224,9 +222,7 @@ static void InitConsoleMessageHeap()
     // pointer to the free console messages
     freeconsolemessages = consolemessageheap;
 }
-//===========================================================================
 // allocate one console message from the heap
-//===========================================================================
 static bot_consolemessage_t* AllocConsoleMessage()
 {
     bot_consolemessage_t* message;
@@ -237,9 +233,7 @@ static bot_consolemessage_t* AllocConsoleMessage()
         freeconsolemessages->prev = NULL;
     return message;
 }
-//===========================================================================
 // deallocate one console message from the heap
-//===========================================================================
 static void FreeConsoleMessage(bot_consolemessage_t* message)
 {
     if (freeconsolemessages)
@@ -603,9 +597,7 @@ static bot_synonymlist_t* BotLoadSynonyms(char* filename)
     botimport.Print(PRT_MESSAGE, "loaded %s\n", filename);
     return synlist;
 }
-//===========================================================================
 // replace all the synonyms in the string
-//===========================================================================
 void BotReplaceSynonyms(char* string, unsigned long int context)
 {
     bot_synonymlist_t* syn;
@@ -1782,9 +1774,7 @@ static void BotConstructChatMessage(bot_chatstate_t* chatstate, char* message, u
         botimport.Print(PRT_WARNING, "%s\n", chatstate->chatmessage);
     }
 }
-//===========================================================================
 // randomly chooses one of the chat message of the given type
-//===========================================================================
 static char* BotChooseInitialChatMessage(bot_chatstate_t* cs, char* type)
 {
     int n, numchatmessages;

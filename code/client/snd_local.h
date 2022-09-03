@@ -173,8 +173,6 @@ void SNDDMA_StopCapture(void);
 void SNDDMA_MasterGain(float val);
 #endif
 
-//====================================================================
-
 #define MAX_CHANNELS 96
 
 extern channel_t s_channels[MAX_CHANNELS];

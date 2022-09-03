@@ -2509,8 +2509,6 @@ static void FS_Which_f()
     Com_Printf("File not found: \"%s\"\n", filename);
 }
 
-//===========================================================================
-
 static int QDECL paksort(const void* a, const void* b)
 {
     char *aa, *bb;

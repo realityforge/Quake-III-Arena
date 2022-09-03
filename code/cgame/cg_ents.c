@@ -370,8 +370,6 @@ static void CG_Item(centity_t* cent)
     }
 }
 
-//============================================================================
-
 static void CG_Missile(centity_t* cent)
 {
     refEntity_t ent;

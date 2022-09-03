@@ -26,7 +26,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifdef TEAMARENA
 #include "voicechat.h"
 #endif
-//==========================================================================
 
 /*
 ===================
@@ -328,8 +327,6 @@ static void CG_Obituary(entityState_t* ent)
     // we don't know what it was
     CG_Printf("%s died.\n", targetName);
 }
-
-//==========================================================================
 
 static void CG_UseItem(centity_t* cent)
 {
@@ -863,8 +860,6 @@ void CG_EntityEvent(centity_t* cent, vec3_t position)
         DEBUGNAME("EV_USE_ITEM15");
         CG_UseItem(cent);
         break;
-
-    //=================================================================
 
     // other events
     case EV_PLAYER_TELEPORT_IN:

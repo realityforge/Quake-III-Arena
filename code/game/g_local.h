@@ -27,8 +27,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "bg_public.h"
 #include "g_public.h"
 
-//==================================================================
-
 // the "gameversion" client command will print this plus compile date
 #define GAMEVERSION BASEGAME
 
@@ -61,8 +59,6 @@ typedef enum {
 
 #define SP_PODIUM_MODEL "models/mapobjects/podium/podium4.md3"
 
-//============================================================================
-
 typedef struct gentity_s gentity_t;
 typedef struct gclient_s gclient_t;
 
@@ -72,7 +68,6 @@ struct gentity_s {
 
     // DO NOT MODIFY ANYTHING ABOVE THIS, THE SERVER
     // EXPECTS THE FIELDS IN THAT ORDER!
-    //================================
 
     struct gclient_s* client; // NULL if not a client
 

@@ -717,8 +717,6 @@ void Console_Key(int key)
     Field_KeyDownEvent(&g_consoleField, key);
 }
 
-//============================================================================
-
 /*
 ================
 Message_Key
@@ -758,8 +756,6 @@ void Message_Key(int key)
 
     Field_KeyDownEvent(&chatField, key);
 }
-
-//============================================================================
 
 bool Key_GetOverstrikeMode(void)
 {

@@ -404,8 +404,6 @@ int SV_AreaEntities(const vec3_t mins, const vec3_t maxs, int* entityList, int m
     return ap.count;
 }
 
-//===========================================================================
-
 typedef struct {
     vec3_t boxmins, boxmaxs; // enclose the test object along entire move
     const float* mins;

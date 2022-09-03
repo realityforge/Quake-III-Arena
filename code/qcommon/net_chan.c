@@ -412,8 +412,6 @@ static void NET_SendLoopPacket(netsrc_t sock, int length, const void* data)
     loop->msgs[i].datalen = length;
 }
 
-//=============================================================================
-
 typedef struct packetQueue_s {
     struct packetQueue_s* next;
     int length;

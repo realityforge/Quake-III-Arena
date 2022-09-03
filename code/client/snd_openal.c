@@ -103,8 +103,6 @@ static void S_AL_ClearError(bool quiet)
     }
 }
 
-//===========================================================================
-
 typedef struct alSfx_s {
     char filename[MAX_QPATH];
     ALuint buffer; // OpenAL buffer
@@ -451,8 +449,6 @@ static ALuint S_AL_BufferGet(sfxHandle_t sfx)
 {
     return knownSfx[sfx].buffer;
 }
-
-//===========================================================================
 
 typedef struct src_s {
     ALuint alSource; // OpenAL source object
@@ -1340,8 +1336,6 @@ static ALuint S_AL_SrcGet(srcHandle_t src)
     return srcList[src].alSource;
 }
 
-//===========================================================================
-
 // Q3A cinematics use up to 12 buffers at once
 #define MAX_STREAM_BUFFERS 20
 
@@ -1546,8 +1540,6 @@ static void S_AL_StreamDie(int stream)
 
     S_AL_FreeStreamChannel(stream);
 }
-
-//===========================================================================
 
 #define NUM_MUSIC_BUFFERS 4
 #define MUSIC_BUFFER_SIZE 4096
@@ -1779,8 +1771,6 @@ static void S_AL_MusicUpdate(void)
     // Set the gain property
     S_AL_Gain(musicSource, s_alGain->value * s_musicVolume->value);
 }
-
-//===========================================================================
 
 // Local state variables
 static ALCdevice* alDevice;

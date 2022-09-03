@@ -134,8 +134,6 @@ typedef struct
 static nip_localaddr_t localIP[MAX_IPS];
 static int numIP;
 
-//=============================================================================
-
 static char* NET_ErrorString()
 {
 #ifdef _WIN32
@@ -485,8 +483,6 @@ bool NET_IsLocalAddress(netadr_t adr)
     return adr.type == NA_LOOPBACK;
 }
 
-//=============================================================================
-
 /*
 ==================
 NET_GetPacket
@@ -589,8 +585,6 @@ static bool NET_GetPacket(netadr_t* net_from, msg_t* net_message, fd_set* fdr)
     return false;
 }
 
-//=============================================================================
-
 static char socksBuf[4096];
 
 void Sys_SendPacket(int length, const void* data, netadr_t to)
@@ -642,8 +636,6 @@ void Sys_SendPacket(int length, const void* data, netadr_t to)
         Com_Printf("Sys_SendPacket: %s\n", NET_ErrorString());
     }
 }
-
-//=============================================================================
 
 /*
 ==================
@@ -1275,8 +1267,6 @@ static void NET_OpenIP()
             Com_Printf("WARNING: Couldn't bind to a v4 ip address.\n");
     }
 }
-
-//===================================================================
 
 static bool NET_GetCvars()
 {

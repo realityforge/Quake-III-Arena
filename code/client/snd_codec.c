@@ -152,7 +152,6 @@ int S_CodecReadStream(snd_stream_t* stream, int bytes, void* buffer)
     return stream->codec->read(stream, bytes, buffer);
 }
 
-//=======================================================================
 // Util functions (used by codecs)
 
 snd_stream_t* S_CodecUtilOpen(const char* filename, snd_codec_t* codec)

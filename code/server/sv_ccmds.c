@@ -141,8 +141,6 @@ static client_t* SV_GetPlayerByNum()
     return cl;
 }
 
-//=========================================================
-
 /*
 ==================
 SV_Map_f
@@ -352,8 +350,6 @@ static void SV_MapRestart_f()
     sv.time += 100;
     svs.time += 100;
 }
-
-//===============================================================
 
 /*
 ==================
@@ -808,8 +804,6 @@ static void SV_KillServer_f()
 {
     SV_Shutdown("killserver");
 }
-
-//===========================================================
 
 static void SV_CompleteMapName(char* args, int argNum)
 {

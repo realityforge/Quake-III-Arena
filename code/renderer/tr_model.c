@@ -694,8 +694,6 @@ void RE_BeginRegistration(glconfig_t* glconfigOut)
     tr.registered = true;
 }
 
-//=============================================================================
-
 void R_ModelInit()
 {
     model_t* mod;
@@ -734,8 +732,6 @@ void R_Modellist_f()
 	}
 #endif
 }
-
-//=============================================================================
 
 static mdvTag_t* R_GetTag(mdvModel_t* mod, int frame, const char* _tagName)
 {

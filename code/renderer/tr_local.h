@@ -117,8 +117,6 @@ typedef struct vao_s {
     int indexesSize; // amount of memory data allocated for all triangles in bytes
 } vao_t;
 
-//===============================================================================
-
 typedef enum {
     SS_BAD,
     SS_PORTAL, // mirrors, portals, viewscreens
@@ -684,8 +682,6 @@ typedef struct {
     float toneMinAvgMaxLinear[3];
 } trRefdef_t;
 
-//=================================================================================
-
 // max surfaces per-skin
 // This is an arbitry limit. Vanilla Q3 only supported 32 surfaces in skins but failed to
 // enforce the maximum limit when reading skin files. It was possile to use more than 32
@@ -1079,8 +1075,6 @@ typedef struct mdvModel_s {
     int numSkins;
 } mdvModel_t;
 
-//======================================================================
-
 typedef enum {
     MOD_BAD,
     MOD_BRUSH,
@@ -1109,8 +1103,6 @@ int R_LerpTag(orientation_t* tag, qhandle_t handle, int startFrame, int endFrame
 void R_ModelBounds(qhandle_t handle, vec3_t mins, vec3_t maxs);
 
 void R_Modellist_f(void);
-
-//====================================================
 
 #define MAX_DRAWIMAGES 2048
 #define MAX_SKINS 1024
@@ -1554,8 +1546,6 @@ extern cvar_t* r_printShaders;
 
 extern cvar_t* r_marksOnTriangleMeshes;
 
-//====================================================================
-
 static inline bool ShaderRequiresCPUDeforms(const shader_t* shader)
 {
     if (shader->numDeforms) {
@@ -1577,8 +1567,6 @@ static inline bool ShaderRequiresCPUDeforms(const shader_t* shader)
 
     return false;
 }
-
-//====================================================================
 
 void R_RenderView(viewParms_t* parms);
 void R_RenderDlightCubemaps(void);
