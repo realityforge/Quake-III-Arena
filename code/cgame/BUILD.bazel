@@ -20,73 +20,423 @@ cc_library(
     deps = ["//code/qcommon:shared_api"],
 )
 
-COMMON_SRC = [
-    "cg_consolecmds.c",
-    "cg_draw.c",
-    "cg_drawtools.c",
-    "cg_effects.c",
-    "cg_ents.c",
-    "cg_event.c",
-    "cg_info.c",
-    "cg_localents.c",
-    "cg_main.c",
-    "cg_marks.c",
-    "cg_particles.c",
-    "cg_players.c",
-    "cg_playerstate.c",
-    "cg_predict.c",
-    "cg_scoreboard.c",
-    "cg_servercmds.c",
-    "cg_snapshot.c",
-    "cg_syscalls.c",
-    "cg_view.c",
-    "cg_weapons.c",
+BASEQ3_DEPS = [
+    ":api",
+    "//code/game:bg_api",
+    "//code/qcommon",
+    "//code/qcommon:shared_api",
+    "//code/renderer:api",
+    ":baseq3_cg_local",
 ]
 
-BASEQ3_SRC = COMMON_SRC
-
-TEAM_ARENA_SRC = COMMON_SRC + ["cg_newdraw.c"]
-
 cc_library(
-    name = "baseq3",
-    srcs = BASEQ3_SRC,
+    name = "baseq3_cg_local",
     hdrs = ["cg_local.h"],
     copts = CLIENT_GAME_COPTS,
     defines = CLIENT_GAME_DEFINES,
+)
+
+cc_library(
+    name = "baseq3_cg_consolecmds",
+    srcs = ["cg_consolecmds.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3_cg_draw",
+    srcs = ["cg_draw.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3_cg_drawtools",
+    srcs = ["cg_drawtools.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3_cg_effects",
+    srcs = ["cg_effects.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3_cg_ents",
+    srcs = ["cg_ents.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3_cg_event",
+    srcs = ["cg_event.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3_cg_info",
+    srcs = ["cg_info.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3_cg_localents",
+    srcs = ["cg_localents.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3_cg_main",
+    srcs = ["cg_main.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS + ["//code/qcommon:plugin"],
+)
+
+cc_library(
+    name = "baseq3_cg_marks",
+    srcs = ["cg_marks.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3_cg_particles",
+    srcs = ["cg_particles.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3_cg_players",
+    srcs = ["cg_players.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3_cg_playerstate",
+    srcs = ["cg_playerstate.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3_cg_predict",
+    srcs = ["cg_predict.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3_cg_scoreboard",
+    srcs = ["cg_scoreboard.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3_cg_servercmds",
+    srcs = ["cg_servercmds.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3_cg_snapshot",
+    srcs = ["cg_snapshot.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3_cg_syscalls",
+    srcs = ["cg_syscalls.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS + ["//code/qcommon:plugin"],
+)
+
+cc_library(
+    name = "baseq3_cg_view",
+    srcs = ["cg_view.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3_cg_weapons",
+    srcs = ["cg_weapons.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = CLIENT_GAME_DEFINES,
+    deps = BASEQ3_DEPS,
+)
+
+cc_library(
+    name = "baseq3",
     visibility = ["//game/baseq3:__pkg__"],
     deps = [
-        ":api",
-        "//code/game:bg-baseq3",
-        "//code/game:bg_api",
-        "//code/game:bg_misc-client-baseq3",
-        "//code/qcommon",
-        "//code/qcommon:plugin",
-        "//code/qcommon:shared",
-        "//code/qcommon:shared_api",
+        ":baseq3_cg_consolecmds",
+        ":baseq3_cg_draw",
+        ":baseq3_cg_drawtools",
+        ":baseq3_cg_effects",
+        ":baseq3_cg_ents",
+        ":baseq3_cg_event",
+        ":baseq3_cg_info",
+        ":baseq3_cg_localents",
+        ":baseq3_cg_main",
+        ":baseq3_cg_marks",
+        ":baseq3_cg_particles",
+        ":baseq3_cg_players",
+        ":baseq3_cg_playerstate",
+        ":baseq3_cg_predict",
+        ":baseq3_cg_scoreboard",
+        ":baseq3_cg_servercmds",
+        ":baseq3_cg_snapshot",
+        ":baseq3_cg_syscalls",
+        ":baseq3_cg_view",
+        ":baseq3_cg_weapons",
+    ],
+)
+
+TEAMARENA_DEPS = [
+    ":api",
+    "//code/game:bg_api",
+    "//code/qcommon",
+    "//code/qcommon:shared_api",
+    "//code/renderer:api",
+    ":teamarena_cg_local",
+]
+
+cc_library(
+    name = "teamarena_cg_local",
+    hdrs = ["cg_local.h"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+)
+
+cc_library(
+    name = "teamarena_cg_consolecmds",
+    srcs = ["cg_consolecmds.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS + [
+        "//code/ui:shared",
         "//code/qcommon:voicechat",
-        "//code/renderer:api",
     ],
 )
 
 cc_library(
-    name = "teamarena",
-    srcs = TEAM_ARENA_SRC,
-    hdrs = ["cg_local.h"],
+    name = "teamarena_cg_draw",
+    srcs = ["cg_draw.c"],
     copts = CLIENT_GAME_COPTS,
     defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS + ["//code/ui:shared"],
+)
+
+cc_library(
+    name = "teamarena_cg_drawtools",
+    srcs = ["cg_drawtools.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS,
+)
+
+cc_library(
+    name = "teamarena_cg_effects",
+    srcs = ["cg_effects.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS,
+)
+
+cc_library(
+    name = "teamarena_cg_ents",
+    srcs = ["cg_ents.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS,
+)
+
+cc_library(
+    name = "teamarena_cg_event",
+    srcs = ["cg_event.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS + ["//code/qcommon:voicechat"],
+)
+
+cc_library(
+    name = "teamarena_cg_info",
+    srcs = ["cg_info.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS,
+)
+
+cc_library(
+    name = "teamarena_cg_localents",
+    srcs = ["cg_localents.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS,
+)
+
+cc_library(
+    name = "teamarena_cg_main",
+    srcs = ["cg_main.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS + ["//code/qcommon:plugin"] + ["//code/ui:shared"],
+)
+
+cc_library(
+    name = "teamarena_cg_marks",
+    srcs = ["cg_marks.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS,
+)
+
+cc_library(
+    name = "teamarena_cg_newdraw",
+    srcs = ["cg_newdraw.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS + [
+        "//code/ui:shared",
+        "//code/qcommon:voicechat",
+    ],
+)
+
+cc_library(
+    name = "teamarena_cg_particles",
+    srcs = ["cg_particles.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS,
+)
+
+cc_library(
+    name = "teamarena_cg_players",
+    srcs = ["cg_players.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS,
+)
+
+cc_library(
+    name = "teamarena_cg_playerstate",
+    srcs = ["cg_playerstate.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS,
+)
+
+cc_library(
+    name = "teamarena_cg_predict",
+    srcs = ["cg_predict.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS,
+)
+
+cc_library(
+    name = "teamarena_cg_scoreboard",
+    srcs = ["cg_scoreboard.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS,
+)
+
+cc_library(
+    name = "teamarena_cg_servercmds",
+    srcs = ["cg_servercmds.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS + ["//code/qcommon:voicechat"],
+)
+
+cc_library(
+    name = "teamarena_cg_snapshot",
+    srcs = ["cg_snapshot.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS,
+)
+
+cc_library(
+    name = "teamarena_cg_syscalls",
+    srcs = ["cg_syscalls.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS + ["//code/qcommon:plugin"],
+)
+
+cc_library(
+    name = "teamarena_cg_view",
+    srcs = ["cg_view.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS,
+)
+
+cc_library(
+    name = "teamarena_cg_weapons",
+    srcs = ["cg_weapons.c"],
+    copts = CLIENT_GAME_COPTS,
+    defines = TEAM_ARENA_DEFINES + CLIENT_GAME_DEFINES,
+    deps = TEAMARENA_DEPS,
+)
+
+cc_library(
+    name = "teamarena",
     visibility = ["//game/teamarena:__pkg__"],
     deps = [
-        ":api",
-        "//build_defs:exported_symbols.lds",
-        "//code/game:bg-teamarena",
-        "//code/game:bg_api",
-        "//code/game:bg_misc-client-teamarena",
-        "//code/qcommon",
-        "//code/qcommon:plugin",
-        "//code/qcommon:shared",
-        "//code/qcommon:shared_api",
-        "//code/qcommon:voicechat",
-        "//code/renderer:api",
-        "//code/ui:shared",
+        ":teamarena_cg_consolecmds",
+        ":teamarena_cg_draw",
+        ":teamarena_cg_drawtools",
+        ":teamarena_cg_effects",
+        ":teamarena_cg_ents",
+        ":teamarena_cg_event",
+        ":teamarena_cg_info",
+        ":teamarena_cg_localents",
+        ":teamarena_cg_main",
+        ":teamarena_cg_marks",
+        ":teamarena_cg_newdraw",
+        ":teamarena_cg_particles",
+        ":teamarena_cg_players",
+        ":teamarena_cg_playerstate",
+        ":teamarena_cg_predict",
+        ":teamarena_cg_scoreboard",
+        ":teamarena_cg_servercmds",
+        ":teamarena_cg_snapshot",
+        ":teamarena_cg_syscalls",
+        ":teamarena_cg_view",
+        ":teamarena_cg_weapons",
     ],
 )
