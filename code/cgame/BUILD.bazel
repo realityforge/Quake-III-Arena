@@ -41,7 +41,7 @@ cc_library(
     srcs = ["cg_consolecmds.c"],
     copts = CLIENT_GAME_COPTS,
     defines = CLIENT_GAME_DEFINES,
-    deps = BASEQ3_DEPS,
+    deps = BASEQ3_DEPS + ["//code/qcommon:server_commands"],
 )
 
 cc_library(
@@ -253,6 +253,7 @@ cc_library(
     deps = TEAMARENA_DEPS + [
         "//code/ui:shared",
         "//code/qcommon:voicechat",
+        "//code/qcommon:server_commands",
     ],
 )
 
