@@ -882,6 +882,7 @@ static void Cmd_Tell_f(gentity_t* ent)
     }
 }
 
+#ifdef TEAMARENA
 static void G_VoiceTo(gentity_t* ent, gentity_t* other, int mode, const char* id, bool voiceonly)
 {
     int color;
@@ -1061,6 +1062,7 @@ static void Cmd_VoiceTaunt_f(gentity_t* ent)
     // just say something
     G_Voice(ent, NULL, SAY_ALL, VOICECHAT_TAUNT, false);
 }
+#endif
 
 static char* gc_orders[] = {
     "hold your position",
@@ -1469,6 +1471,7 @@ void ClientCommand(int clientNum)
         Cmd_Tell_f(ent);
         return;
     }
+#ifdef TEAMARENA
     if (Q_stricmp(cmd, "vsay") == 0) {
         Cmd_Voice_f(ent, SAY_ALL, false, false);
         return;
@@ -1497,6 +1500,7 @@ void ClientCommand(int clientNum)
         Cmd_VoiceTaunt_f(ent);
         return;
     }
+#endif
     if (Q_stricmp(cmd, "score") == 0) {
         Cmd_Score_f(ent);
         return;
