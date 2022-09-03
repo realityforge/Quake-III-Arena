@@ -24,6 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "cg_local.h"
 #include "lang_util.h"
+#include "server_commands.h"
 #ifdef TEAMARENA
 #include "ui_shared.h"
 #include "voicechat.h"
@@ -501,36 +502,35 @@ void CG_InitConsoleCommands()
 
     // the game server will interpret these commands, which will be automatically
     // forwarded to the server after they are not recognized locally
-    trap_AddCommand("kill");
-    trap_AddCommand("say");
-    trap_AddCommand("say_team");
-    trap_AddCommand("tell");
+    trap_AddCommand(SRVCMD_KILL);
+    trap_AddCommand(SRVCMD_SAY);
+    trap_AddCommand(SRVCMD_SAY_TEAM);
+    trap_AddCommand(SRVCMD_TELL);
+    trap_AddCommand(SRVCMD_GIVE);
+    trap_AddCommand(SRVCMD_GOD);
+    trap_AddCommand(SRVCMD_NOTARGET);
+    trap_AddCommand(SRVCMD_NOCLIP);
+    trap_AddCommand(SRVCMD_TEAM);
+    trap_AddCommand(SRVCMD_FOLLOW);
+    trap_AddCommand(SRVCMD_FOLLOWNEXT);
+    trap_AddCommand(SRVCMD_FOLLOWPREV);
+    trap_AddCommand(SRVCMD_LEVELSHOT);
+    trap_AddCommand(SRVCMD_ADDBOT);
+    trap_AddCommand(SRVCMD_SETVIEWPOS);
+    trap_AddCommand(SRVCMD_CALLVOTE);
+    trap_AddCommand(SRVCMD_VOTE);
+    trap_AddCommand(SRVCMD_CALLTEAMVOTE);
+    trap_AddCommand(SRVCMD_TEAMVOTE);
+    trap_AddCommand(SRVCMD_STATS);
+    trap_AddCommand(SRVCMD_TEAMTASK);
+    trap_AddCommand(SRVCMD_LOAD_DEFERRED);
 #ifdef TEAMARENA
-    trap_AddCommand("vsay");
-    trap_AddCommand("vsay_team");
-    trap_AddCommand("vtell");
-    trap_AddCommand("vtaunt");
-    trap_AddCommand("vosay");
-    trap_AddCommand("vosay_team");
-    trap_AddCommand("votell");
+    trap_AddCommand(SRVCMD_VSAY);
+    trap_AddCommand(SRVCMD_VSAY_TEAM);
+    trap_AddCommand(SRVCMD_VTELL);
+    trap_AddCommand(SRVCMD_VTAUNT);
+    trap_AddCommand(SRVCMD_VOSAY);
+    trap_AddCommand(SRVCMD_VOSAY_TEAM);
+    trap_AddCommand(SRVCMD_VOTELL);
 #endif
-    trap_AddCommand("give");
-    trap_AddCommand("god");
-    trap_AddCommand("notarget");
-    trap_AddCommand("noclip");
-    trap_AddCommand("team");
-    trap_AddCommand("follow");
-    trap_AddCommand("follownext");
-    trap_AddCommand("followprev");
-    trap_AddCommand("where");
-    trap_AddCommand("levelshot");
-    trap_AddCommand("addbot");
-    trap_AddCommand("setviewpos");
-    trap_AddCommand("callvote");
-    trap_AddCommand("vote");
-    trap_AddCommand("callteamvote");
-    trap_AddCommand("teamvote");
-    trap_AddCommand("stats");
-    trap_AddCommand("teamtask");
-    trap_AddCommand("loaddefered"); // spelled wrong, but not changing for demo
 }
