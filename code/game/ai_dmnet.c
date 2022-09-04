@@ -614,7 +614,7 @@ static int BotGetLongTermGoal(bot_state_t* bs, int tfl, int retreat, bot_goal_t*
     if (bs->ltgtype == LTG_PATROL && !retreat) {
         // check for bot typing status message
         if (bs->teammessage_time && bs->teammessage_time < FloatTime()) {
-            strcpy(buf, "");
+            strncpyz(buf, "", sizeof(buf));
             for (wp = bs->patrolpoints; wp; wp = wp->next) {
                 strncatz(buf, sizeof(buf), wp->name);
                 if (wp->next)
