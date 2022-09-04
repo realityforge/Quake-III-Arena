@@ -1222,7 +1222,6 @@ char* EasyClientName(int client, char* buf, int size)
     char name[128];
 
     ClientName(client, name, sizeof(name));
-
     for (i = 0; name[i]; i++)
         name[i] &= 127;
     // remove all spaces
