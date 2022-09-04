@@ -1450,10 +1450,9 @@ static void Cmd_SetViewpos_f(gentity_t* ent)
 
 void ClientCommand(const int clientNum)
 {
-    gentity_t* ent;
     char cmd[MAX_TOKEN_CHARS];
 
-    ent = g_entities + clientNum;
+    gentity_t* ent = g_entities + clientNum;
     if (!ent->client) {
         return; // not fully in game yet
     }
