@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 // cg_scoreboard -- draw the scoreboard on top of the game screen
 #include "cg_local.h"
+#include "server_commands.h"
 
 #define SCOREBOARD_X (0)
 
@@ -430,7 +431,7 @@ void CG_DrawOldTourneyScoreboard()
     // request more scores regularly
     if (cg.scoresRequestTime + 2000 < cg.time) {
         cg.scoresRequestTime = cg.time;
-        trap_SendClientCommand("score");
+        trap_SendClientCommand(SRVCMD_SCORE);
     }
 
     color[0] = 1;

@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "g_local.h"
 #include "lang_util.h"
+#include "server_commands.h"
 
 #ifdef TEAMARENA
 #include "voicechat.h"
@@ -1459,49 +1460,49 @@ void ClientCommand(int clientNum)
 
     trap_Argv(0, cmd, sizeof(cmd));
 
-    if (Q_stricmp(cmd, "say") == 0) {
+    if (Q_stricmp(cmd, SRVCMD_SAY) == 0) {
         Cmd_Say_f(ent, SAY_ALL, false);
         return;
     }
-    if (Q_stricmp(cmd, "say_team") == 0) {
+    if (Q_stricmp(cmd, SRVCMD_SAY_TEAM) == 0) {
         Cmd_Say_f(ent, SAY_TEAM, false);
         return;
     }
-    if (Q_stricmp(cmd, "tell") == 0) {
+    if (Q_stricmp(cmd, SRVCMD_TELL) == 0) {
         Cmd_Tell_f(ent);
         return;
     }
 #ifdef TEAMARENA
-    if (Q_stricmp(cmd, "vsay") == 0) {
+    if (Q_stricmp(cmd, SRVCMD_VSAY) == 0) {
         Cmd_Voice_f(ent, SAY_ALL, false, false);
         return;
     }
-    if (Q_stricmp(cmd, "vsay_team") == 0) {
+    if (Q_stricmp(cmd, SRVCMD_VSAY_TEAM) == 0) {
         Cmd_Voice_f(ent, SAY_TEAM, false, false);
         return;
     }
-    if (Q_stricmp(cmd, "vtell") == 0) {
+    if (Q_stricmp(cmd, SRVCMD_VTELL) == 0) {
         Cmd_VoiceTell_f(ent, false);
         return;
     }
-    if (Q_stricmp(cmd, "vosay") == 0) {
+    if (Q_stricmp(cmd, SRVCMD_VOSAY) == 0) {
         Cmd_Voice_f(ent, SAY_ALL, false, true);
         return;
     }
-    if (Q_stricmp(cmd, "vosay_team") == 0) {
+    if (Q_stricmp(cmd, SRVCMD_VOSAY_TEAM) == 0) {
         Cmd_Voice_f(ent, SAY_TEAM, false, true);
         return;
     }
-    if (Q_stricmp(cmd, "votell") == 0) {
+    if (Q_stricmp(cmd, SRVCMD_VOTELL) == 0) {
         Cmd_VoiceTell_f(ent, true);
         return;
     }
-    if (Q_stricmp(cmd, "vtaunt") == 0) {
+    if (Q_stricmp(cmd, SRVCMD_VTAUNT) == 0) {
         Cmd_VoiceTaunt_f(ent);
         return;
     }
 #endif
-    if (Q_stricmp(cmd, "score") == 0) {
+    if (Q_stricmp(cmd, SRVCMD_SCORE) == 0) {
         Cmd_Score_f(ent);
         return;
     }
@@ -1512,41 +1513,41 @@ void ClientCommand(int clientNum)
         return;
     }
 
-    if (Q_stricmp(cmd, "give") == 0)
+    if (Q_stricmp(cmd, SRVCMD_GIVE) == 0)
         Cmd_Give_f(ent);
-    else if (Q_stricmp(cmd, "god") == 0)
+    else if (Q_stricmp(cmd, SRVCMD_GOD) == 0)
         Cmd_God_f(ent);
-    else if (Q_stricmp(cmd, "notarget") == 0)
+    else if (Q_stricmp(cmd, SRVCMD_NOTARGET) == 0)
         Cmd_Notarget_f(ent);
-    else if (Q_stricmp(cmd, "noclip") == 0)
+    else if (Q_stricmp(cmd, SRVCMD_NOCLIP) == 0)
         Cmd_Noclip_f(ent);
-    else if (Q_stricmp(cmd, "kill") == 0)
+    else if (Q_stricmp(cmd, SRVCMD_KILL) == 0)
         Cmd_Kill_f(ent);
-    else if (Q_stricmp(cmd, "teamtask") == 0)
+    else if (Q_stricmp(cmd, SRVCMD_TEAMTASK) == 0)
         Cmd_TeamTask_f(ent);
-    else if (Q_stricmp(cmd, "levelshot") == 0)
+    else if (Q_stricmp(cmd, SRVCMD_LEVELSHOT) == 0)
         Cmd_LevelShot_f(ent);
-    else if (Q_stricmp(cmd, "follow") == 0)
+    else if (Q_stricmp(cmd, SRVCMD_FOLLOW) == 0)
         Cmd_Follow_f(ent);
-    else if (Q_stricmp(cmd, "follownext") == 0)
+    else if (Q_stricmp(cmd, SRVCMD_FOLLOWNEXT) == 0)
         Cmd_FollowCycle_f(ent, 1);
-    else if (Q_stricmp(cmd, "followprev") == 0)
+    else if (Q_stricmp(cmd, SRVCMD_FOLLOWPREV) == 0)
         Cmd_FollowCycle_f(ent, -1);
-    else if (Q_stricmp(cmd, "team") == 0)
+    else if (Q_stricmp(cmd, SRVCMD_TEAM) == 0)
         Cmd_Team_f(ent);
-    else if (Q_stricmp(cmd, "where") == 0)
+    else if (Q_stricmp(cmd, SRVCMD_WHERE) == 0)
         Cmd_Where_f(ent);
-    else if (Q_stricmp(cmd, "callvote") == 0)
+    else if (Q_stricmp(cmd, SRVCMD_CALLVOTE) == 0)
         Cmd_CallVote_f(ent);
-    else if (Q_stricmp(cmd, "vote") == 0)
+    else if (Q_stricmp(cmd, SRVCMD_VOTE) == 0)
         Cmd_Vote_f(ent);
-    else if (Q_stricmp(cmd, "callteamvote") == 0)
+    else if (Q_stricmp(cmd, SRVCMD_CALLTEAMVOTE) == 0)
         Cmd_CallTeamVote_f(ent);
-    else if (Q_stricmp(cmd, "teamvote") == 0)
+    else if (Q_stricmp(cmd, SRVCMD_TEAMVOTE) == 0)
         Cmd_TeamVote_f(ent);
     else if (Q_stricmp(cmd, "gc") == 0)
         Cmd_GameCommand_f(ent);
-    else if (Q_stricmp(cmd, "setviewpos") == 0)
+    else if (Q_stricmp(cmd, SRVCMD_SETVIEWPOS) == 0)
         Cmd_SetViewpos_f(ent);
     else
         trap_SendServerCommand(clientNum, va("print \"unknown cmd %s\n\"", cmd));

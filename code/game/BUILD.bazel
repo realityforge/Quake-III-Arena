@@ -188,6 +188,9 @@ cc_library(
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
         "//code/qcommon:voicechat",
+
+        # TODO: Move this to g_cmds only when we split into a target per c file
+        "//code/qcommon:server_commands",
     ],
 )
 
@@ -207,5 +210,8 @@ cc_library(
         "//code/qcommon:shared",
         "//code/qcommon:shared_api",
         "//code/qcommon:voicechat",
+
+        # TODO: Move this to g_cmds only when we split into a target per c file
+        "//code/qcommon:server_commands",
     ],
 )

@@ -81,7 +81,7 @@ static void CG_ScoresDown_f()
         // the scores are more than two seconds out of data,
         // so request new ones
         cg.scoresRequestTime = cg.time;
-        trap_SendClientCommand("score");
+        trap_SendClientCommand(SRVCMD_SCORE);
 
         // leave the current scores up if they were already
         // displayed, but if this is the first hit, clear them out

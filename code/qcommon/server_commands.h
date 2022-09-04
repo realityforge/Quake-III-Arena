@@ -37,6 +37,7 @@
 #define SRVCMD_STATS "stats"
 #define SRVCMD_TEAMTASK "teamtask"
 #define SRVCMD_LOAD_DEFERRED "loaddeferred"
+#define SRVCMD_SCORE "score"
 
 #ifdef TEAMARENA
 #define SRVCMD_VSAY "vsay"
