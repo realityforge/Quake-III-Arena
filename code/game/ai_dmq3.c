@@ -164,7 +164,7 @@ bool EntityIsDead(const aas_entityinfo_t* entinfo)
     if (entinfo->number >= 0 && entinfo->number < MAX_CLIENTS) {
         // retrieve the current client state
         playerState_t ps;
-        return BotAI_GetClientState(entinfo->number, &ps) && ps.pm_type != PM_NORMAL;
+        return BotAI_GetClientState(entinfo->number, &ps) && PM_NORMAL != ps.pm_type;
     } else {
         return false;
     }
