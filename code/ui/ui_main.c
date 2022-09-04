@@ -4308,9 +4308,9 @@ static bool Character_Parse(char** p)
             uiInfo.characterList[uiInfo.characterCount].imageName = String_Alloc(va("models/players/heads/%s/icon_default.png", uiInfo.characterList[uiInfo.characterCount].name));
 
             if (tempStr && (!Q_stricmp(tempStr, "female"))) {
-                uiInfo.characterList[uiInfo.characterCount].base = String_Alloc(va("Janet"));
+                uiInfo.characterList[uiInfo.characterCount].base = String_Alloc("Janet");
             } else if (tempStr && (!Q_stricmp(tempStr, "male"))) {
-                uiInfo.characterList[uiInfo.characterCount].base = String_Alloc(va("James"));
+                uiInfo.characterList[uiInfo.characterCount].base = String_Alloc("James");
             } else {
                 uiInfo.characterList[uiInfo.characterCount].base = String_Alloc(va("%s", tempStr));
             }
@@ -5139,7 +5139,7 @@ void UI_DrawConnectScreen(bool overlay)
     }
 
     if (!Q_stricmp(cstate.servername, "localhost")) {
-        Text_PaintCenter(centerPoint, yStart + 48, scale, colorWhite, va("Starting up..."), ITEM_TEXTSTYLE_SHADOWEDMORE);
+        Text_PaintCenter(centerPoint, yStart + 48, scale, colorWhite, "Starting up...", ITEM_TEXTSTYLE_SHADOWEDMORE);
     } else {
         strncpyz(text, va("Connecting to %s", cstate.servername), sizeof(text));
         Text_PaintCenter(centerPoint, yStart + 48, scale, colorWhite, text, ITEM_TEXTSTYLE_SHADOWEDMORE);

@@ -97,11 +97,11 @@ void Cmd_Score_f(gentity_t* ent)
 static bool CheatsOk(gentity_t* ent)
 {
     if (!g_cheats.integer) {
-        trap_SendServerCommand(ent - g_entities, va("print \"Cheats are not enabled on this server.\n\""));
+        trap_SendServerCommand(ent - g_entities, "print \"Cheats are not enabled on this server.\n\"");
         return false;
     }
     if (ent->health <= 0) {
-        trap_SendServerCommand(ent - g_entities, va("print \"You must be alive to use this command.\n\""));
+        trap_SendServerCommand(ent - g_entities, "print \"You must be alive to use this command.\n\"");
         return false;
     }
     return true;
@@ -1428,11 +1428,11 @@ static void Cmd_SetViewpos_f(gentity_t* ent)
     int i;
 
     if (!g_cheats.integer) {
-        trap_SendServerCommand(ent - g_entities, va("print \"Cheats are not enabled on this server.\n\""));
+        trap_SendServerCommand(ent - g_entities, "print \"Cheats are not enabled on this server.\n\"");
         return;
     }
     if (5 != trap_Argc()) {
-        trap_SendServerCommand(ent - g_entities, va("print \"usage: setviewpos x y z yaw\n\""));
+        trap_SendServerCommand(ent - g_entities, "print \"usage: setviewpos x y z yaw\n\"");
         return;
     }
 
