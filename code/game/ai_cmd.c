@@ -42,6 +42,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "match.h" //string matching types and vars
 
 #include "voicechat.h"
+#include "server_commands.h"
 
 int notleader[MAX_CLIENTS];
 
@@ -1075,7 +1076,7 @@ static void BotMatch_Suicide(bot_state_t* bs, bot_match_t* match)
     // if not addressed to this bot
     if (!BotAddressedToBot(bs, match))
         return;
-    trap_EA_Command(bs->client, "kill");
+    trap_EA_Command(bs->client, SRVCMD_KILL);
     trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
 #ifdef TEAMARENA
     const int client = ClientFromName(netname);

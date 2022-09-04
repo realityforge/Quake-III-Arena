@@ -38,7 +38,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "ai_team.h"
 #include "ai_vcmd.h"
 #include "match.h"
+#ifdef TEAMARENA
+#include "server_commands.h"
 #include "voicechat.h"
+#endif
 
 // ctf task preferences for a client
 typedef struct bot_ctftaskpreference_s {
@@ -234,20 +237,20 @@ void BotVoiceChat(bot_state_t* bs, int toclient, char* voicechat)
 {
     if (toclient == -1)
         // voice only say team
-        trap_EA_Command(bs->client, va("vsay_team %s", voicechat));
+        trap_EA_Command(bs->client, va(SRVCMD_VSAY_TEAM " %s", voicechat));
     else
         // voice only tell single player
-        trap_EA_Command(bs->client, va("vtell %d %s", toclient, voicechat));
+        trap_EA_Command(bs->client, va(SRVCMD_VTELL " %d %s", toclient, voicechat));
 }
 
 void BotVoiceChatOnly(bot_state_t* bs, int toclient, char* voicechat)
 {
     if (toclient == -1)
         // voice only say team
-        trap_EA_Command(bs->client, va("vosay_team %s", voicechat));
+        trap_EA_Command(bs->client, va(SRVCMD_VOSAY_TEAM " %s", voicechat));
     else
         // voice only tell single player
-        trap_EA_Command(bs->client, va("votell %d %s", toclient, voicechat));
+        trap_EA_Command(bs->client, va(SRVCMD_VOTELL " %d %s", toclient, voicechat));
 }
 
 static void BotSayVoiceTeamOrder(bot_state_t* bs, int toclient, char* voicechat)

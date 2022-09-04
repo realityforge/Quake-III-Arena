@@ -42,6 +42,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #ifdef TEAMARENA
 #include "voicechat.h"
+#include "server_commands.h"
 #endif
 
 #define TIME_BETWEENCHATTING 25
@@ -444,7 +445,7 @@ int BotChat_StartLevel(bot_state_t* bs)
     // don't chat in teamplay
     if (TeamPlayIsOn()) {
 #ifdef TEAMARENA
-        trap_EA_Command(bs->client, "vtaunt");
+        trap_EA_Command(bs->client, SRVCMD_VTAUNT);
 #endif
         return false;
     }
@@ -481,7 +482,7 @@ int BotChat_EndLevel(bot_state_t* bs)
     if (TeamPlayIsOn()) {
 #ifdef TEAMARENA
         if (BotIsFirstInRankings(bs)) {
-            trap_EA_Command(bs->client, "vtaunt");
+            trap_EA_Command(bs->client, SRVCMD_VTAUNT);
         }
 #endif
         return true;
@@ -559,7 +560,7 @@ int BotChat_Death(bot_state_t* bs)
         // teamplay
         if (TeamPlayIsOn()) {
 #ifdef TEAMARENA
-            trap_EA_Command(bs->client, "vtaunt");
+            trap_EA_Command(bs->client, SRVCMD_VTAUNT);
 #endif
             return true;
         }
@@ -653,7 +654,7 @@ int BotChat_Kill(bot_state_t* bs)
         // don't chat in teamplay
         if (TeamPlayIsOn()) {
 #ifdef TEAMARENA
-            trap_EA_Command(bs->client, "vtaunt");
+            trap_EA_Command(bs->client, SRVCMD_VTAUNT);
 #endif
             return false; // don't wait
         }
@@ -882,7 +883,7 @@ int BotChat_Random(bot_state_t* bs)
     }
     if (TeamPlayIsOn()) {
 #ifdef TEAMARENA
-        trap_EA_Command(bs->client, "vtaunt");
+        trap_EA_Command(bs->client, SRVCMD_VTAUNT);
 #endif
         return false; // don't wait
     }
