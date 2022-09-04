@@ -1542,10 +1542,9 @@ static void Cmd_SetViewpos_f(gentity_t* ent)
 
 void ClientCommand(const int clientNum)
 {
-    gentity_t* ent;
     char cmd[MAX_TOKEN_CHARS];
 
-    ent = g_entities + clientNum;
+    gentity_t* ent = g_entities + clientNum;
     if (!ent->client || ent->client->pers.connected != CON_CONNECTED) {
         if (ent->client && ent->client->pers.localClient) {
             // Handle early team command sent by UI when starting a local
