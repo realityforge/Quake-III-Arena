@@ -480,11 +480,11 @@ int BotChat_EndLevel(bot_state_t* bs)
         return false;
     // teamplay
     if (TeamPlayIsOn()) {
-        if (BotIsFirstInRankings(bs)) {
 #ifdef TEAMARENA
+        if (BotIsFirstInRankings(bs)) {
             trap_EA_Command(bs->client, SRVCMD_VTAUNT);
-#endif
         }
+#endif
         return true;
     }
     // don't chat in tournament mode
