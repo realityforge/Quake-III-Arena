@@ -72,7 +72,7 @@ static void BotRecordNodeSwitch(bot_state_t* bs, char* node, char* str, char* s)
     char netname[MAX_NETNAME];
 
     ClientName(bs->client, netname, sizeof(netname));
-    Com_sprintf(nodeswitch[numnodeswitches], 144, "%s at %2.1f entered %s: %s from %s\n", netname, FloatTime(), node, str, s);
+    Com_sprintf(nodeswitch[numnodeswitches], sizeof(nodeswitch[numnodeswitches]), "%s at %2.1f entered %s: %s from %s\n", netname, FloatTime(), node, str, s);
     numnodeswitches++;
 }
 
