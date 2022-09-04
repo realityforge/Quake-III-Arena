@@ -162,8 +162,7 @@ static int BotNearbyGoal(bot_state_t* bs, int tfl, bot_goal_t* ltg, float range)
             range = 50;
         }
     }
-    ret = trap_BotChooseNBGItem(bs->gs, bs->origin, bs->inventory, tfl, ltg, range);
-    return ret;
+    return trap_BotChooseNBGItem(bs->gs, bs->origin, bs->inventory, tfl, ltg, range);
 }
 
 static int BotReachedGoal(bot_state_t* bs, bot_goal_t* goal)
