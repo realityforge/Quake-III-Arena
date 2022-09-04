@@ -42,6 +42,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #ifdef TEAMARENA
 #include "voicechat.h"
+#include "server_commands.h"
 #endif
 
 #define TIME_BETWEENCHATTING 25
@@ -443,7 +444,9 @@ int BotChat_StartLevel(bot_state_t* bs)
         return false;
     // don't chat in teamplay
     if (TeamPlayIsOn()) {
-        trap_EA_Command(bs->client, "vtaunt");
+#ifdef TEAMARENA
+        trap_EA_Command(bs->client, SRVCMD_VTAUNT);
+#endif
         return false;
     }
     // don't chat in tournament mode
@@ -478,7 +481,9 @@ int BotChat_EndLevel(bot_state_t* bs)
     // teamplay
     if (TeamPlayIsOn()) {
         if (BotIsFirstInRankings(bs)) {
-            trap_EA_Command(bs->client, "vtaunt");
+#ifdef TEAMARENA
+            trap_EA_Command(bs->client, SRVCMD_VTAUNT);
+#endif
         }
         return true;
     }
@@ -554,7 +559,9 @@ int BotChat_Death(bot_state_t* bs)
     } else {
         // teamplay
         if (TeamPlayIsOn()) {
-            trap_EA_Command(bs->client, "vtaunt");
+#ifdef TEAMARENA
+            trap_EA_Command(bs->client, SRVCMD_VTAUNT);
+#endif
             return true;
         }
         if (bs->botdeathtype == MOD_WATER)
@@ -646,7 +653,9 @@ int BotChat_Kill(bot_state_t* bs)
     } else {
         // don't chat in teamplay
         if (TeamPlayIsOn()) {
-            trap_EA_Command(bs->client, "vtaunt");
+#ifdef TEAMARENA
+            trap_EA_Command(bs->client, SRVCMD_VTAUNT);
+#endif
             return false; // don't wait
         }
         if (bs->enemydeathtype == MOD_GAUNTLET) {
@@ -873,7 +882,9 @@ int BotChat_Random(bot_state_t* bs)
         EasyClientName(bs->lastkilledplayer, name, sizeof(name));
     }
     if (TeamPlayIsOn()) {
-        trap_EA_Command(bs->client, "vtaunt");
+#ifdef TEAMARENA
+        trap_EA_Command(bs->client, SRVCMD_VTAUNT);
+#endif
         return false; // don't wait
     }
     if (random() < trap_Characteristic_BFloat(bs->character, CHARACTERISTIC_CHAT_MISC, 0, 1)) {

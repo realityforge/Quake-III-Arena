@@ -28,6 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../ui/ui_shared.h"
 #include "ui/menudef.h"
 #include "voicechat.h"
+#include "server_commands.h"
 
 extern displayContextDef_t cgDC;
 
@@ -85,14 +86,14 @@ void CG_CheckOrderPending()
 
         if (cg_currentSelectedPlayer.integer == numSortedTeamPlayers) {
             // to everyone
-            trap_SendConsoleCommand(va("cmd vsay_team %s\n", p2));
+            trap_SendConsoleCommand(va("cmd " SRVCMD_VSAY_TEAM " %s\n", p2));
         } else {
             // for the player self
             if (sortedTeamPlayers[cg_currentSelectedPlayer.integer] == cg.snap->ps.clientNum && p1) {
                 trap_SendConsoleCommand(va("teamtask %i\n", cgs.currentOrder));
-                trap_SendConsoleCommand(va("cmd vsay_team %s\n", p1));
+                trap_SendConsoleCommand(va("cmd " SRVCMD_VSAY_TEAM " %s\n", p1));
             } else if (p2) {
-                trap_SendConsoleCommand(va("cmd vtell %d %s\n", sortedTeamPlayers[cg_currentSelectedPlayer.integer], p2));
+                trap_SendConsoleCommand(va("cmd " SRVCMD_VTELL " %d %s\n", sortedTeamPlayers[cg_currentSelectedPlayer.integer], p2));
             }
         }
         if (b) {
