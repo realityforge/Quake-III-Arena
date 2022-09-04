@@ -550,7 +550,7 @@ int BotChat_Death(bot_state_t* bs)
     if (bs->lastkilledby >= 0 && bs->lastkilledby < MAX_CLIENTS)
         EasyClientName(bs->lastkilledby, name, 32);
     else
-        strcpy(name, "[world]");
+        strncpyz(name, "[world]", sizeof(name));
     if (TeamPlayIsOn() && BotSameTeam(bs, bs->lastkilledby)) {
         if (bs->lastkilledby == bs->client)
             return false;
