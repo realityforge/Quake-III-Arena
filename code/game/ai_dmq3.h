@@ -45,7 +45,7 @@ bool BotIntermission(bot_state_t* bs);
 // returns true if the bot is in lava or slime
 bool BotInLavaOrSlime(bot_state_t* bs);
 // returns true if the entity is dead
-bool EntityIsDead(aas_entityinfo_t* entinfo);
+bool EntityIsDead(const aas_entityinfo_t* entinfo);
 // returns true if the entity is invisible
 bool EntityIsInvisible(aas_entityinfo_t* entinfo);
 // returns true if the entity is shooting

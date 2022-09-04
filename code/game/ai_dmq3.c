@@ -159,7 +159,7 @@ static bot_goal_t* BotTeamFlag(bot_state_t* bs)
     }
 }
 
-bool EntityIsDead(aas_entityinfo_t* entinfo)
+bool EntityIsDead(const aas_entityinfo_t* entinfo)
 {
     if (entinfo->number >= 0 && entinfo->number < MAX_CLIENTS) {
         // retrieve the current client state
