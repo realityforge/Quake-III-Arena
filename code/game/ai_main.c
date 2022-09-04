@@ -65,7 +65,7 @@ vmCvar_t bot_interbreedchar;
 vmCvar_t bot_interbreedbots;
 vmCvar_t bot_interbreedcycle;
 
-void QDECL BotAI_Print(int type, const char* fmt, ...)
+void QDECL BotAI_Print(const int type, const char* fmt, ...)
 {
     char str[2048];
     va_list ap;
