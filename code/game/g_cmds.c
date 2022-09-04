@@ -1540,7 +1540,7 @@ static void Cmd_SetViewpos_f(gentity_t* ent)
     TeleportPlayer(ent, origin, angles);
 }
 
-void ClientCommand(int clientNum)
+void ClientCommand(const int clientNum)
 {
     gentity_t* ent;
     char cmd[MAX_TOKEN_CHARS];
