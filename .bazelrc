@@ -108,7 +108,7 @@ test --test_verbose_timeout_warnings
 test --test_output=errors
 
 # Don't upload artifacts referenced in the BEP if the action can't be cached remotely.
-build --incompatible_remote_build_event_upload_respect_no_cache
+build --experimental_remote_build_event_upload=minimal
 
 # Change the behavior of bazel test to not bother building targets
 # which aren't dependencies of the tests.
