@@ -98,10 +98,9 @@ query --noexperimental_check_output_files
 build --experimental_remote_merkle_tree_cache
 query --experimental_remote_merkle_tree_cache
 
-# TODO: This next one should be enabled when the Bazel version is 6.+
-# build --noexperimental_check_external_repository_files
-# fetch --noexperimental_check_external_repository_files
-# query --noexperimental_check_external_repository_files
+build --noexperimental_check_external_repository_files
+fetch --noexperimental_check_external_repository_files
+query --noexperimental_check_external_repository_files
 
 # Bazel's default for test_timeout is medium (5 min),
 # but most tests should instead be short (1 min).
