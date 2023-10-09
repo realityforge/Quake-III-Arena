@@ -18,6 +18,6 @@ def load_repository():
 
     _http_archive(
         name = "rules_java",
-        url = "https://github.com/bazelbuild/rules_java/releases/download/5.3.5/rules_java-5.3.5.tar.gz",
-        sha256 = "c73336802d0b4882e40770666ad055212df4ea62cfa6edf9cb0f9d29828a0934",
+        url = "https://github.com/bazelbuild/rules_java/releases/download/6.3.2/rules_java-6.3.2.tar.gz",
+        sha256 = "7c82d4412fb837a40e049deea352cfc019d2a247ab9639aa7df12381fb39de60",
     )
