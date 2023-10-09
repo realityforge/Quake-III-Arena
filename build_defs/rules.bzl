@@ -13,10 +13,8 @@
 # TODO: Add "-Wunused-parameter"
 # TODO: Add "-Wmissing-variable-declarations"
 # TODO: Add "-Wunreachable-code-break"
-EXTRA_WARNINGS = ["-Wall", "-Wpedantic", "-Werror", "-Wmissing-prototypes"] + select({
+EXTRA_WARNINGS = ["-Wall", "-Wpedantic", "-Werror", "-Wmissing-prototypes", "-Wno-strict-prototypes", "-Wno-declaration-after-statement"] + select({
     "//build_defs:wasm": [
-        # For some reason strict-prototypes warning triggers when running emcc toolchain
-        "-Wno-strict-prototypes",
         # The emcc toolchain expects a main but we don't provide one
         "-Wno-emcc",
     ],

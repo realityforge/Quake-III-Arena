@@ -183,6 +183,7 @@ build --incompatible_remove_cpu_and_compiler_attributes_from_cc_toolchain
 #
 build --copt -Wall
 build --copt -Wpedantic
+build --copt -Wno-declaration-after-statement
 
 # The following warnings produce too many positives and will only be enabled after the code has been moved to bazel
 # and we are reasonably sure we have a stable build environment
