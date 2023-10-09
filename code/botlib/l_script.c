@@ -247,7 +247,7 @@ static int PS_ReadWhiteSpace(script_t* script)
 //            ch     : place to store the read escape character
 static int PS_ReadEscapeCharacter(script_t* script, char* ch)
 {
-    int c, val, i;
+    int c, val = 0;
 
     // step over the leading '\\'
     script->script_p++;
@@ -288,7 +288,7 @@ static int PS_ReadEscapeCharacter(script_t* script, char* ch)
         break;
     case 'x': {
         script->script_p++;
-        for (i = 0, val = 0;; i++, script->script_p++) {
+        for (val = 0;; script->script_p++) {
             c = *script->script_p;
             if (c >= '0' && c <= '9')
                 c = c - '0';
@@ -312,7 +312,7 @@ static int PS_ReadEscapeCharacter(script_t* script, char* ch)
     {
         if (*script->script_p < '0' || *script->script_p > '9')
             ScriptError(script, "unknown escape char");
-        for (i = 0, val = 0;; i++, script->script_p++) {
+        for (val = 0;; script->script_p++) {
             c = *script->script_p;
             if (c >= '0' && c <= '9')
                 c = c - '0';
