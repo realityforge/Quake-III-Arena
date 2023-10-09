@@ -16,6 +16,8 @@
 # TODO: Replace zlib with https://github.com/zlib-ng/zlib-ng (as it is faster and "better" maintained?)
 # TODO: Replace unzip with https://github.com/zlib-ng/minizip-ng (as it is maintained?)
 
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
 licenses(["notice"])  # BSD/MIT-like license (for zlib)
 
 cc_library(
@@ -77,6 +79,7 @@ cc_library(
     copts = select({
         "@org_realityforge_q3a//build_defs:windows": [],
         "//conditions:default": [
+            "-Wno-deprecated-non-prototype",
             "-Wno-shift-negative-value",
             "-DZ_HAVE_UNISTD_H",
         ],
@@ -103,6 +106,11 @@ cc_library(
         "contrib/minizip/ioapi.c",
         ":unzip_c_generator",
     ],
+    copts = select({
+        "//conditions:default": [
+            "-Wno-deprecated-non-prototype",
+        ],
+    }),
     deps = [
         ":unzip_interface",
         "@org_realityforge_q3a//code/qcommon",
