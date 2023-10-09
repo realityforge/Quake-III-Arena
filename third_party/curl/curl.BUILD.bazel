@@ -15,6 +15,8 @@
 # NOTE: This Build file was copied from https://github.com/tensorflow/tensorflow/blob/7a99ce11636fb7e0c974d4d9b8b5dbff7f259c87/third_party/curl.BUILD
 #       and is under the Apache 2 license as specified by https://github.com/tensorflow/tensorflow/blob/7a99ce11636fb7e0c974d4d9b8b5dbff7f259c87/LICENSE
 
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
 licenses(["notice"])  # MIT/X derivative license
 
 exports_files(["COPYING"])
@@ -347,10 +349,10 @@ cc_library(
         "lib/vtls/wolfssl.c",
         "lib/vtls/wolfssl.h",
     ] + select({
-        "@org_realityforge_q3a//build_defs:macos": [
+        "@org_realityforge_q3a//build_defs:ios": [
             "lib/vtls/sectransp.c",
         ],
-        "@org_realityforge_q3a//build_defs:ios": [
+        "@org_realityforge_q3a//build_defs:macos": [
             "lib/vtls/sectransp.c",
         ],
         "@org_realityforge_q3a//build_defs:windows": CURL_WIN_SRCS,
@@ -381,6 +383,7 @@ cc_library(
             "-DHAVE_LIBZ",
             "-DHAVE_ZLIB_H",
             "-Wno-string-plus-int",
+            "-Wno-unused-but-set-variable",
         ],
     }) + select({
         "@org_realityforge_q3a//build_defs:macos": [
@@ -402,6 +405,7 @@ cc_library(
         "@org_realityforge_q3a//build_defs:android": [
             "-pie",
         ],
+        "@org_realityforge_q3a//build_defs:ios": [],
         "@org_realityforge_q3a//build_defs:macos": [
             "-framework",
             "Network",
@@ -410,7 +414,6 @@ cc_library(
             "-framework",
             "Security",
         ],
-        "@org_realityforge_q3a//build_defs:ios": [],
         "@org_realityforge_q3a//build_defs:windows": [
             "-DEFAULTLIB:ws2_32.lib",
             "-DEFAULTLIB:advapi32.lib",
@@ -424,8 +427,8 @@ cc_library(
         "@zlib",
     ] + select({
         "@org_realityforge_q3a//build_defs:ios": [],
-        "@org_realityforge_q3a//build_defs:windows": [],
         "@org_realityforge_q3a//build_defs:macos": [],
+        "@org_realityforge_q3a//build_defs:windows": [],
         "//conditions:default": ["@org_realityforge_q3a//third_party:ssl"],
     }),
 )
